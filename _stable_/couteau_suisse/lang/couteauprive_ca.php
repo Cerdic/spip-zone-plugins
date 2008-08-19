@@ -205,6 +205,10 @@ _ • [De tot el plugin->@reset@]
 </p>',
 
 	// I
+	'icone_visiter:description' => 'Substitueix la imatge del bot&oacute; est&agrave;ndard &laquo;&nbsp;Visitar&nbsp;&raquo; (a dalt a la dreta d\'aquesta p&agrave;gina) pel logotip del lloc, si existeix.
+
+Per definir aquest logotip, dirigiu-vos a la p&agrave;gina &laquo;&nbsp;Configuraci&oacute; del lloc&nbsp;&raquo; fent un clic damunt del bot&oacute; &laquo;&nbsp;Configuraci&oacute;&nbsp;&raquo;.',
+	'icone_visiter:nom' => 'Bot&oacute; &laquo;&nbsp;Visitar&nbsp;&raquo;',
 	'insert_head:description' => 'Activa autom&agrave;ticament l\'etiqueta [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] a tots els esquelets, tinguin o no aquesta etiqueta entre &lt;head&gt; i &lt;/head&gt;. Gr&agrave;cies a aquesta opci&oacute;, els plugins podran inserir javascript (.js) o fulls d\'estil (.css).',
 	'insert_head:nom' => 'Etiqueta #INSERT_HEAD',
 	'insertions:description' => 'ATENCI&Oacute;: eina en curs de desenvolupament!! [[%insertions%]]',
@@ -260,15 +264,20 @@ _ • [De tot el plugin->@reset@]
 	'label:radio_suivi_forums3' => '@_CS_CHOIX@',
 	'label:radio_target_blank3' => 'Nova finestra pels enlla&ccedil;os externs:',
 	'label:radio_type_urls3' => 'Format dels URLs:',
+	'label:scrollTo' => 'Instal&middot;lar els plugins {jQuery} seg&uuml;ents:',
 	'label:set_couleurs' => 'Set per utilitzar:',
 	'label:spam_mots' => 'Seq&uuml;&egrave;ncies prohibides:',
 	'label:spip_script' => 'Script de crida:',
 	'label:style_h' => 'El vostre estil:',
 	'label:style_p' => 'El vostre estil:',
 	'label:suite_introduction' => 'Punts de continuaci&oacute;:',
+	'label:terminaison_urls_arbo' => 'Terminacions dels URls (ex: .html):',
 	'label:titre_travaux' => 'T&iacute;tol del missatge:',
 	'label:tri_articles' => 'La vostra elecci&oacute;:',
+	'label:url_arbo_minuscules' => 'Conservar els tipus dels t&iacute;tols en els URLs:',
+	'label:url_arbo_sep_id' => 'Car&agrave;cter de separaci&oacute; \'titre-id\' en cas de doublon :<br/>(no utilitzar \'/\')',
 	'label:url_glossaire_externe2' => 'Enlla&ccedil; al glossari extern:',
+	'label:urls_arbo_sans_type' => 'Mostrar el tipus d\'objecte SPIP als URLs:',
 	'liens_en_clair:description' => 'Posa a la vostra disposici&oacute; el filtre: \'liens_en_clair\'. El vostre text cont&eacute; probablement enlla&ccedil;os que no s&oacute;n visibles durant la impressi&oacute;. Aquest filtre afegeix entre claud&agrave;tors el dest&iacute; de cada enlla&ccedil; clicable (enlla&ccedil;os externs o correus electr&ograve;nics). Atenci&oacute;: en mode impressi&oacute; (par&agrave;metre \'cs=print\' o \'page=print\' al url de la p&agrave;gina), aquesta funcionalitat s\'aplica autom&agrave;ticament.',
 	'liens_en_clair:nom' => 'Enlla&ccedil;os visibles',
 	'liens_orphelins:description' => 'Aquesta eina t&eacute; dues funcions:
@@ -365,6 +374,10 @@ Si torneu a iniciar el plugin fent un clic sobre un pack, el Ganivet Su&iacute;s
 _ Hi ha una etiqueta per mostrar una taula d\'emoticones als vostres esquelets: #SMILEYS.
 _ Dibuixos: [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'Emoticones',
+	'soft_scroller:description' => 'Ofereix al vostre lloc p&uacute;blic un avan&ccedil;ament endolcit de la p&agrave;gina quan el visitant fa un clic damunt d\'un enlla&ccedil; que apunta a una &agrave;ncora: molt &uacute;til per evitar perdre\'s en una p&agrave;gina complexa o en un text molt llarg...
+
+Alerta, aquesta eina necessita per funcionar dos plugins {jQuery}: {ScrollTo} i {LocalScroll}. El Ganivet Su&iacute;s els pot instal&middot;lar directament si marqueu les caselles seg&uuml;ents. [[%scrollTo%]][[->%LocalScroll%]]',
+	'soft_scroller:nom' => '&Agrave;ncores suaus',
 	'sommaire:description' => 'Construeix un sumari pels vostres articles per tal d\'accedir r&agrave;pidament als titulars (balises HTML &lt;h3>Un subt&iacute;tol&lt;/h3> o dreceres SPIP: subt&iacute;tols del tipus:<code>{{{Un gran t&iacute;tol}}}</code>).
 
 @puce@ Podeu definir aqu&iacute; el nombre m&agrave;xim de car&agrave;cters que es retindran dels subt&iacute;tols a l\'hora de construir el sumari:[[%lgr_sommaire% car&agrave;cters]]
@@ -413,36 +426,39 @@ _ No oblideu verificar que \'un_texte\' estigui ben definit als fitxers de lleng
 	'travaux_prochainement' => 'Aquest lloc es restablir&agrave; ben aviat.
 _ Gr&agrave;cies per la vostra comprensi&oacute;.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
-	'tri_articles:description' => '<MODIF>Navegant pel lloc a la part privada ([->./?exec=auteurs]), escolliu aqu&iacute; la tria que es far&agrave; servir per mostrar els vostres articles a dins de les seccions.
+	'tri_articles:description' => 'Navegant pel lloc a la part privada ([->./?exec=auteurs]), escolliu aqu&iacute; la tria que es far&agrave; servir per mostrar els vostres articles a dins de les vostres seccions.
 
-Les propostes que hi han m&eacute;s avall estan basades en la funcionalitat SQL \'ORDER BY\': nom&eacute;s utilitzeu la opci&oacute; personalitzada si sabeu qu&egrave; us feu (camps disponibles: {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
+Les propostes que hi han m&eacute;s avall estan basades en la funcionalitat SQL \'ORDER BY\': nom&eacute;s utilitzeu la opci&oacute; personalitzada si sabeu qu&egrave; feu (camps disponibles: {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
 [[%tri_articles%]][[->%tri_perso%]]',
 	'tri_articles:nom' => 'Opcions dels articles',
 	'tri_modif' => 'Tria sobre la data de modificaci&oacute; (ORDER BY date_modif DESC)',
 	'tri_perso' => 'Tria SQL personalitzada, ORDER BY seguit de:',
 	'tri_publi' => 'Tria sobre la data de publicaci&oacute; (ORDER BY date DESC)',
 	'tri_titre' => 'Tria sobre el t&iacute;tol (ORDER BY 0+titre,titre)',
-	'type_urls:description' => '<MODIF>@puce@ SPIP ofereix la possibilitat d\'escollir entre diversos jocs d\'URLs per fabricar els enlla&ccedil;os d\'acc&eacute;s a les p&agrave;gines del vostre lloc:
+	'type_urls:description' => '@puce@ SPIP ofereix la possibilitat d\'escollir entre diversos jocs d\'URLs per fabricar els enlla&ccedil;os d\'acc&eacute;s a les p&agrave;gines del vostre lloc:
 <div style="font-size:90%; margin:0 2em;">
 - {{page}}: el valor per defecte per SPIP v1.9x: <code>/spip.php?article123</code>.
 - {{html}}: els enlla&ccedil;os tenen la forma de p&agrave;gines html cl&agrave;ssiques: <code>/article123.html</code>.
 - {{propre}}: els enlla&ccedil;os es calculen per mitj&agrave; del t&iacute;tol: <code>/El-meu-titol-d-article</code>.
 - {{propres2}}: l\'extensi&oacute; \'.html\' s\'afegeix a les adreces generades: <code>/El-meu-titol-d-article.html</code>.
+- {{arborescentes}} (a partir d\'SPIP 2.0 nom&eacute;s) els enlla&ccedil;os s&oacute;n del tipus arborescent: <code>/secteur/rubrique1/rubrique2/article</code>.
 - {{standard}} : URLs utilitzades per SPIP v1.8 i precedents: <code>article.php3?id_article=123</code>
 - {{propres-qs}}: aquest sistema funciona en "Query-String", &eacute;s a dir sense usar .htaccess; els enlla&ccedil;os s&oacute;n del tipus: <code>/?El-meu-titol-d-article</code>.</div>
 
 M&eacute;s informacions: [->http://www.spip.net/fr_article765.html]
 [[%radio_type_urls3%]]
-<p style=\'font-size:85%\'>@_CS_ASTER@per utilitzar els formats {html}, {propre} o {propre2}, Torneu a copiar el fitxer "htaccess.txt" del directori de base del lloc SPIP amb el nom ".htaccess" (atenci&oacute; a no esborrar altres regulacions que pogu&eacute;ssiu tenir posades a dins d\'aquest fitxer) ; si el vostre lloc est&agrave; en "sub-directori", haureu d\'editar tamb&eacute; la l&iacute;nia "RewriteBase" d\'aquest fitxer. Els URLs definits es redirigiran llavors cap als fitxer d\'SPIP.</p>
+<p style=\'font-size:85%\'>@_CS_ASTER@per utilitzar els formats {html}, {propre}, {propre2}o {arborescentes}. Torneu a copiar el fitxer "htaccess.txt" del directori de base del lloc SPIP amb el nom ".htaccess" (atenci&oacute; a no esborrar altres ajustaments que pogu&eacute;ssiu tenir posades a dins d\'aquest fitxer) ; si el vostre lloc est&agrave; en un "sub-directori", haureu d\'editar tamb&eacute; la l&iacute;nia "RewriteBase" d\'aquest fitxer. Els URLs definits es redirigiran llavors cap als fitxer d\'SPIP.</p>
 
-@puce@ {{Nom&eacute;s si utilitzeu el format {page} m&eacute;s amunt}}, llavors us &eacute;s possible escollir l\'script de crida a SPIP. Per defecte, SPIP escull {spip.php}, per&ograve; {index.php} (format: <code>/index.php?article123</code>) o un valor buit (format: <code>/?article123</code>) tamb&eacute; funcionen. Per qualsevol altre valor, us fa falta absolutament crear el fitxer corresponent a l\'arrel d\'SPIP, a imatge d\'aquell que ja existeix: {index.php}.
-[[%spip_script%]]',
+@puce@ {{Nom&eacute;s si utilitzeu el format {page} m&eacute;s amunt}}, llavors us &eacute;s possible escollir l\'script de crida a SPIP. Per defecte, SPIP escull {spip.php}, per&ograve; {index.php} (format: <code>/index.php?article123</code>) o un valor buit (format: <code>/?article123</code>) tamb&eacute; funcionen. Per qualsevol altre valor, haureu de crear for&ccedil;osament el fitxer corresponent a l\'arrel d\'SPIP, a imatge d\'aquell que ja existeix: {index.php}.
+[[%spip_script%]]
+',
 	'type_urls:nom' => 'Format dels URLs',
 	'typo_exposants:description' => 'Textos francesos: millora el retorn tipogr&agrave;fic de les abreviacions corrents, exposant els elements necessaris (aix&iacute;, {<acronym>Mme</acronym>} esdev&eacute; {M<sup>me</sup>}) i corregint-ne els errors normals ({<acronym>2&egrave;me</acronym>} o  {<acronym>2me</acronym>}, per exemple, esdevenen {2<sup>e</sup>}, &uacute;nica abreviaci&oacute; correcta).
 _ Les abreviacions obtingudes s&oacute;n conformes a les de la Impremta nacional tal com s\'indiquen al {L&egrave;xic de les regles tipogr&agrave;fiques en &uacute;s a la Impremta nacional} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l\'Imprimerie nationale, Paris, 2002).',
 	'typo_exposants:nom' => 'Super&iacute;ndexs',
 
 	// U
+	'url_arbo' => 'arborescents@_CS_ASTER@',
 	'url_html' => 'html@_CS_ASTER@',
 	'url_page' => 'p&agrave;gina',
 	'url_propres' => 'propres@_CS_ASTER@',

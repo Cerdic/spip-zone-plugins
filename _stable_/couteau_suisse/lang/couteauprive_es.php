@@ -203,6 +203,10 @@ _ • [De todo el plugin->@reset@]
 </p>',
 
 	// I
+	'icone_visiter:description' => 'Reemplaza la imagen del bot&oacute;n est&aacute;ndar &laquo;Visitar&raquo; (en la esquina superior derecha de esta p&aacute;gina)  por el logo del sitio, si existe.
+
+Para definir el logo, entra en la p&aacute;gina de &laquo;Configuraci&oacute;n de sitio&raquo; pulsando el bot&oacute;n &laquo;Configuraci&oacute;n&raquo;.',
+	'icone_visiter:nom' => 'Bot&oacute;n &laquo;Visitar&raquo;',
 	'insert_head:description' => 'Activa autom&aacute;ticamente la baliza [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] en todos los esqueletos, tengan o no esta baliza entre &lt;head&gt; y &lt;/head&gt;. Gracias a esta opci&oacute;n, los plugins podr&aacute;n insertar javascript (.js) u hojas de estilo (.css).',
 	'insert_head:nom' => 'Baliza #INSERT_HEAD',
 	'insertions:description' => 'ATENCI&Oacute;N : &iexcl;&iexcl;herramienta en fase de desarrollo!! [[%insertions%]]',
@@ -258,15 +262,20 @@ _ • [De todo el plugin->@reset@]
 	'label:radio_suivi_forums3' => '@_CS_CHOIX@',
 	'label:radio_target_blank3' => 'Enlaces externos en ventana nueva:',
 	'label:radio_type_urls3' => 'Formato de las URLs:',
+	'label:scrollTo' => 'Instalar los plugins {jQuery} siguientes:',
 	'label:set_couleurs' => 'Esquema a utilizar:',
 	'label:spam_mots' => 'Secuencias prohibidas:',
 	'label:spip_script' => 'Script de llamada:',
 	'label:style_h' => 'Tu estilo:',
 	'label:style_p' => 'Tu estilo:',
 	'label:suite_introduction' => 'Puntos de seguir:',
+	'label:terminaison_urls_arbo' => 'Terminaci&oacute;n de las URls (p. ej.: .html):',
 	'label:titre_travaux' => 'T&iacute;tulo del mensaje:',
 	'label:tri_articles' => 'Tu elecci&oacute;n:',
+	'label:url_arbo_minuscules' => 'Conservar los espacios de los t&iacute;tulos en las URLs:',
+	'label:url_arbo_sep_id' => 'Car&aacute;cter de separaci&oacute;n \'titre-id\' en caso de duplicidad:<br/>(no utilizar \'/\')',
 	'label:url_glossaire_externe2' => 'Enlace al glosario externo:',
+	'label:urls_arbo_sans_type' => 'Mostrar el tipo de objeto SPIP en las URLs:',
 	'liens_en_clair:description' => 'Pone a tu disposici&oacute;n el filtro: \'liens_en_clair\'. Probablemente tu texto contiene enlaces de hipertexto que no son visibles al imprimir. Este filtro a&ntilde;ade entre corchetes el destino de cada enlace pulsable (enlaces externos o de correo). Atenci&oacute;n: en el modo de impresi&oacute;n (par&aacute;metro \'cs=print\' o \'page=print\' en la url de la p&aacute;gina), esta caracter&iacute;stica se aplica autom&aacute;ticamente.',
 	'liens_en_clair:nom' => 'Ver enlaces',
 	'liens_orphelins:description' => 'Esta herramienta tiene dos aplicaciones:
@@ -363,6 +372,10 @@ Si reinicializas el plugin en pulsando en un pack, la Navaja Suiza volver&aacute
 _ Hay una baliza disponible para mostrar una tabla de smileys en tus esqueletos: #SMILEYS.
 _ Dibujos : [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'Smileys',
+	'soft_scroller:description' => 'A&ntilde;ade al sitio p&uacute;blico un desplazamiento suave de la p&aacute;gina cuando el visitante hace clic en un enlace que apunta a un ancla: muy &uacute;til para evitar perderse en una p&aacute;gina compleja u en un texto muy largo...
+
+Atenci&oacute;n, para que funcione esta herramienta se necesitan dos plugins {jQuery}: {ScrollTo} y {LocalScroll}. La Navaja Suiza puede instalarlos directamente si marcas las casillas siguientes. [[%scrollTo%]][[->%LocalScroll%]]',
+	'soft_scroller:nom' => 'Anclas suaves',
 	'sommaire:description' => 'Construye un sumario para tus art&iacute;culos con el fin de acceder r&aacute;pidamente a los intert&iacute;tulos (etiquetas HTML &lt;h3>Un intert&iacute;tulo&lt;/h3> o atajos de SPIP: intert&iacute;tulos de la forma: <code>{{{Un intert&iacute;tulo}}}</code>).
 
 @puce@ Aqui puedes definir el n&uacute;mero m&aacute;ximo de caracteres tomados de los intert&iacute;tulos para construir el sumario: [[%lgr_sommaire% caract&egrave;res]]
@@ -411,7 +424,7 @@ _ No te olvides de verificar que \'un_texte\' est&eacute; bien definido en los f
 	'travaux_prochainement' => 'Este sitio se reactivar&aacute; en breve.
 _ Gracias por la comprensi&oacute;n.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
-	'tri_articles:description' => '<MODIF>Elige aqu&iacute; la ordenaci&oacute;n que se usar&aacute; para mostrar tus art&iacute;culos dentro de las secciones cuando navegues por la parte privada del sitio ([->./?exec=auteurs]).
+	'tri_articles:description' => 'Elige aqu&iacute; la ordenaci&oacute;n que se usar&aacute; para mostrar tus art&iacute;culos dentro de las secciones cuando navegues por la parte privada del sitio ([->./?exec=auteurs]).
 
 Las propuestas siguientes se basan en la funci&oacute;n SQL \'ORDER BY\': utiliza la ordenaci&oacute;n personalizada s&oacute;lo si sabes muy bien lo que haces (campos disponibles: {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
 [[%tri_articles%]][[->%tri_perso%]]',
@@ -420,27 +433,34 @@ Las propuestas siguientes se basan en la funci&oacute;n SQL \'ORDER BY\': utiliz
 	'tri_perso' => 'Ordenaci&oacute;n SQL personalizada, ORDER BY seguido por:',
 	'tri_publi' => 'Ordenar por fecha de publicaci&oacute;n (ORDER BY date DESC)',
 	'tri_titre' => 'Ordenar por t&iacute;tulo (ORDER BY 0+titre,titre)',
-	'type_urls:description' => '<MODIF>@puce@ SPIP te permite elegir entre varios tipos de URLs para crear los enlaces de acceso a las p&aacute;ginas de tu sitio:
+	'type_urls:description' => '@puce@ SPIP te permite elegir entre varios tipos de URLs para crear los enlaces de acceso a las p&aacute;ginas de tu sitio:
 <div style="font-size:90%; margin:0 2em;">
-- {{page}}: el valor por omisi&oacute;n para SPIP v1.9x : <code>/spip.php?article123</code>.
+- {{page}}: el valor por omisi&oacute;n desde SPIP v1.9x : <code>/spip.php?article123</code>.
 - {{html}}: enlaces con forma de p&aacute;ginas html cl&aacute;sicas : <code>/article123.html</code>.
 - {{propre}}: los enlaces se calculan mediante el t&iacute;tulo: <code>/Mi-t&iacute;tulo-de-art&iacute;culo</code>.
 - {{propres2}}: se a&ntilde;ade la extensi&oacute;n \'.html\' a las direcciones generadas : <code>/Mi-t&iacute;tulo-de-art&iacute;culo.html</code>.
+- {{arborescentes}} (a partir de SPIP 2.0 &uacute;nicamente) los enlaces son de tipo arborescente: <code>/sector/seccion1/seccion2/art&iacute;culo</code>.
 - {{standard}}: URLs utilizadas por SPIP v1.8 y anteriores: <code>article.php3?id_article=123</code>
-- {{propres-qs}}: este sistema funciona en "Query-String", es decir, sin utilizar .htaccess; los enlaces tienen la forma: <code>/?Mi-t&iacute;tulo-de-art&iacute;culo</code>.</div>
+- {{propres-qs}}: este sistema funciona en "Query-String", es decir, sin utilizar .htaccess; los enlaces tienen la forma: <code>/?Mi-t&iacute;tulo-de-art&iacute;culo</code>.
 
-M&aacute;s informaci&oacute;n: [->http://www.spip.net/fr_article765.html]
+</div>
+
+M&aacute;s informaci&oacute;n: [->http://www.spip.net/es_article2024.html]
 [[%radio_type_urls3%]]
-<p style=\'font-size:85%\'>@_CS_ASTER@para utilizar los formatos {html}, {propre} o {propre2}, copia el fichero "htaccess.txt" de la carpeta base del sitio SPIP y ponle el nombre ".htaccess" (primero haz una copia de seguridad, y ten cuidado para no borrar otros ajustes que podr&iacute;as haber puesto en ese fichero); si tu sitio est&aacute; como "subcarpeta", tendr&aacute;s que editar tambi&eacute;n la l&iacute;nea "RewriteBase" de ese fichero. Las URLs definidas ser&aacute;n ahora redirigidas hacia los ficheros de SPIP.</p>
+<p style=\'font-size:85%\'>@_CS_ASTER@para utilizar los formatos {html}, {propre}, {propre2} o {arborescentes}, copia el fichero "htaccess.txt" de la carpeta base del sitio SPIP y ponle el nombre ".htaccess" (primero haz una copia de seguridad, y ten cuidado para no borrar otros ajustes que podr&iacute;as haber puesto en ese fichero); si tu sitio est&aacute; como "subcarpeta", tendr&aacute;s que editar tambi&eacute;n la l&iacute;nea "RewriteBase" de ese fichero. Las URLs definidas ahora se redirigir&aacute;n hacia los ficheros de SPIP.</p>
 
-@puce@ {{&Uacute;nicamente si utilizas el formato {page} m&aacute;s abajo}}, te ser&aacute; posible elegir el script de llamada a SPIP. Por omisi&oacute;n, SPIP usa {spip.php}, pero {index.php} (formato: <code>/index.php?article123</code>) o un valor nulo (formato: <code>/?article123</code>) tambi&eacute;n funcionan. Para cualquier otro valor, te ser&aacute; absolutamente necesario crear el fichero correspondiente en la ra&iacute;z de SPIP, a imagen del que ya existe: {index.php}.
-[[%spip_script%]]',
+@puce@ {{&Uacute;nicamente si utilizas el formato {page} de m&aacute;s arriba}}, te ser&aacute; posible elegir el script de llamada a SPIP. Por omisi&oacute;n, SPIP usa {spip.php}, pero {index.php} (formato: <code>/index.php?article123</code>) o un valor nulo (formato: <code>/?article123</code>) tambi&eacute;n funcionan. Para cualquier otro valor, te ser&aacute; absolutamente necesario crear el fichero correspondiente en la ra&iacute;z de SPIP, a imagen del que ya existe: {index.php}.
+[[%spip_script%]]
+
+@puce@ {{&Uacute;nicamente si utilizas las URLS {arborescentes} de m&aacute;s arriba}}, es posible personalizar el resultado:</p>
+[[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]',
 	'type_urls:nom' => 'Formato de las URLs',
 	'typo_exposants:description' => 'Textos en franc&eacute;s: mejora la presentaci&oacute;n tipogr&aacute;fica de las abreviaturas corrientes, poniendo como super&iacute;ndices los elementos necesarios (as&iacute;, {<acronym>Mme</acronym>} se transforma en {M<sup>me</sup>}) y corrigiendo los errores comunes ({<acronym>2&egrave;me</acronym>} o  {<acronym>2me</acronym>}, por ejemplo, se transforman en {2<sup>e</sup>}, &uacute;nica abreviatura correcta).
 _ Las abreviaturas obtenidas son conformes con las de la Imprenta nacional francesa, tal como se indican en el {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (art&iacute;culo &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l\'Imprimerie nationale, Paris, 2002).',
 	'typo_exposants:nom' => 'Abreviaturas tipogr&aacute;ficas',
 
 	// U
+	'url_arbo' => 'arborescentes@_CS_ASTER@',
 	'url_html' => 'html@_CS_ASTER@',
 	'url_page' => 'p&aacute;gina',
 	'url_propres' => 'propres@_CS_ASTER@',

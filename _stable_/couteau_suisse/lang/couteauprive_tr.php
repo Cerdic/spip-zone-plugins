@@ -146,7 +146,7 @@ _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.'
 
 	// E
 	'effaces' => 'Silinmi&#351;',
-	'en_travaux:description' => '<NEW>Permet d\'afficher un message personalisable pendant une phase de maintenance sur tout le site public.
+	'en_travaux:description' => 'T&uuml;m kamusal sitede bak&#305;m yap&#305;l&#305;rken ki&#351;iselle&#351;tirilebilir bir mesaj yay&#305;nlanmas&#305;n&#305; sa&#287;lar.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]]',
 	'en_travaux:nom' => 'Sitede &ccedil;al&#305;&#351;ma var',
 	'erreur:description' => 'Alet tan&#305;m&#305;nda id eksik !',
@@ -155,9 +155,9 @@ _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.'
 	'erreur:nojs' => 'JavaScript bu sayfada deaktive edilmi&#351;.',
 	'erreur:nom' => 'Hata !',
 	'erreur:probleme' => 'Sorun var : @pb@',
-	'erreur:traitements' => '<NEW>Le Couteau Suisse - Erreur de compilation des traitements : m&eacute;lange \'typo\' et \'propre\' interdit !',
+	'erreur:traitements' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305; - Derleme hatas&#305; : \'typo\' ve \'propre\' kar&#305;&#351;&#305;m&#305; yasakt&#305;r !',
 	'erreur:version' => 'Bu gere&ccedil; SPIP\'in bu s&uuml;r&uuml;m&uuml;nde mevcut de&#287;il.',
-	'etendu' => '<NEW>&Eacute;tendu',
+	'etendu' => 'Kapsam',
 
 	// F
 	'f_jQuery:description' => '<NEW>Emp&ecirc;che l\'installation de {jQuery} dans la partie publique afin d\'&eacute;conmiser un peu de &laquo;temps machine&raquo;. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de Javascript et peut &ecirc;tre utilis&eacute;e par certains plugins. SPIP l\'utilise dans sa partie priv&eacute;e.
@@ -202,6 +202,10 @@ _ • [T&uuml;m eklentiyi ba&#351;tan->@reset@]
 </p>',
 
 	// I
+	'icone_visiter:description' => '<NEW>Remplace l\'image du bouton standard &laquo;&nbsp;Visiter&nbsp;&raquo; (en haut &agrave; droite sur cette page)  par le logo du site, s\'il existe.
+
+Pour d&eacute;finir ce logo, rendez-vous sur la page &laquo;&nbsp;Configuration du site&nbsp;&raquo; en cliquant sur le bouton &laquo;&nbsp;Configuration&nbsp;&raquo;.',
+	'icone_visiter:nom' => '<NEW>Bouton &laquo;&nbsp;Visiter&nbsp;&raquo;',
 	'insert_head:description' => '<NEW>Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Gr&acirc;ce &agrave; cette option, les plugins pourront ins&eacute;rer du javascript (.js) ou des feuilles de style (.css).',
 	'insert_head:nom' => '#INSERT_HEAD komutu',
 	'insertions:description' => '<NEW>ATTENTION : outil en cours de d&eacute;veloppement !! [[%insertions%]]',
@@ -257,15 +261,20 @@ _ • [T&uuml;m eklentiyi ba&#351;tan->@reset@]
 	'label:radio_suivi_forums3' => '@_CS_CHOIX@',
 	'label:radio_target_blank3' => 'D&#305;&#351; ba&#287;lar i&ccedil;in yeni pencere:',
 	'label:radio_type_urls3' => 'URL\'lerin format&#305; :',
+	'label:scrollTo' => 'Eklentileri {jQuery} kur :',
 	'label:set_couleurs' => 'Kullan&#305;lacak set :',
 	'label:spam_mots' => 'Yasaklanan diziler :',
 	'label:spip_script' => '&Ccedil;a&#287;r&#305; script\'i :',
 	'label:style_h' => 'Stiliniz :',
 	'label:style_p' => 'Stiliniz :',
 	'label:suite_introduction' => '<NEW>Points de suite :',
+	'label:terminaison_urls_arbo' => 'URl soyadlar&#305; (&ouml;r : .html) :',
 	'label:titre_travaux' => 'Mesaj&#305;n ba&#351;l&#305;&#287;&#305; :',
 	'label:tri_articles' => 'Se&ccedil;iminiz :',
+	'label:url_arbo_minuscules' => 'URL\'lerde k&uuml;&ccedil;&uuml;k b&uuml;y&uuml;k harfleri koru :',
+	'label:url_arbo_sep_id' => 'Tekrarlama durumunda kullan&#305;lacak ayra&ccedil; \'titre-id\' :<br/>(\'/\' kullanmay&#305;n)',
 	'label:url_glossaire_externe2' => 'D&#305;&#351; s&ouml;zl&uuml;&#287;e ba&#287; :',
+	'label:urls_arbo_sans_type' => 'URL\'lerde SPIP nesnesinin tipini g&ouml;ster :',
 	'liens_en_clair:description' => '<NEW>Met &agrave; votre disposition le filtre : \'liens_en_clair\'. Votre texte contient probablement des liens hypertexte qui ne sont pas visibles lors d\'une impression. Ce filtre ajoute entre crochets la destination de chaque lien cliquable (liens externes ou mails). Attention : en mode impression (parametre \'cs=print\' ou \'page=print\' dans l\'url de la page), cette fonctionnalit&eacute; est appliqu&eacute;e automatiquement.',
 	'liens_en_clair:nom' => 'A&ccedil;&#305;kta b&#305;rak&#305;lm&#305;&#351; ba&#287;lar',
 	'liens_orphelins:description' => '<NEW>Cet outil a deux fonctions :
@@ -283,7 +292,7 @@ _ • {Basique} : sont remplac&eacute;s les liens du type {<html>http://spip.net</
 _ • {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} ou {<html>news:mesnews</html>}.
 [[%liens_orphelins%]]',
 	'liens_orphelins:nom' => 'G&uuml;zel URL\'ler',
-	'log_couteau_suisse:description' => '<NEW>Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin \'Le Couteau Suisse\' dans les fichiers spip.log que l\'on peut trouver dans le r&eacute;pertoire : @_CS_DIR_TMP@',
+	'log_couteau_suisse:description' => '<NEW>Spip.log dosyalar&#305;na \'&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;\' eklentisinin &ccedil;al&#305;&#351;mas&#305;yla ilgili bir &ccedil;ok bilgi kaydeder. Bu dosyalar &#351;u dizindedir : @_CS_DIR_TMP@',
 	'log_couteau_suisse:nom' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;\'n&#305;n detayl&#305; taporu',
 
 	// M
@@ -292,12 +301,12 @@ _ • {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi
 	'modifier_vars' => '@nb@ parametreyi de&#287;i&#351;tir',
 
 	// N
-	'no_IP:description' => '<NEW>D&eacute;sactive le m&eacute;canisme d\'enregistrement automatique des adresses IP des visiteurs de votre site par soucis de confidentialit&eacute; : SPIP ne conservera alors plus aucun num&eacute;ro IP, ni temporairement lors des visites (pour g&eacute;rer les statistiques ou alimenter spip.log), ni dans les forums (responsabilit&eacute;).',
+	'no_IP:description' => '&Ouml;zel bilgilerin korunmas&#305; endi&#351;esiyle sitenizi ziyaret edenlerin IP adreslerinin otomatik olarak kaydeilmesi i&#351;lemini durdurur : SPIP art&#305;k istatistikler i&ccedil;in veya spip.log dosyas&#305; i&ccedil;in forumlarda bile ziyaretler esnas&#305;nda ge&ccedil;ici olarak hi&ccedil;bir IP numaras&#305;n&#305; saklamayacakt&#305;r.',
 	'no_IP:nom' => 'IP kayd&#305; yapma',
 	'nouveaux' => 'Yeni',
 
 	// O
-	'orientation:description' => '<NEW>3 nouveaux crit&egrave;res pour vos squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Id&eacute;al pour le classement des photos en fonction de leur forme.',
+	'orientation:description' => '&#304;skeletleriniz i&ccedil;in 3 yeni kriter : <code>{portrait}</code>, <code>{carre}</code> ve <code>{paysage}</code>. Foto&#287;raflar&#305;n &#351;ekilleri bak&#305;m&#305;ndan s&#305;n&#305;fland&#305;r&#305;lmas&#305; i&ccedil;in ideal.',
 	'orientation:nom' => 'Resimlerin y&ouml;n&uuml;',
 	'outil_actif' => 'Aktif alet',
 	'outil_activer' => 'Aktive et',
@@ -329,7 +338,7 @@ _ • {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi
 Ce code PHP peut prendre place dans le fichier /config/mes_options.php et ajoutera un lien de r&eacute;initialisation sur cette page "du pack {Pack Actuel}". Bien s&ucirc;r il vous est possible de changer son nom ci-dessous.
 
 Si vous r&eacute;initialisez le plugin en cliquant sur un pack, le Couteau Suisse se reconfigurera automatiquement en fonction des param&egrave;tres pr&eacute;d&eacute;finis dans le pack.',
-	'pack_du' => '<NEW>• du pack @pack@',
+	'pack_du' => '• @pack@ paketinin',
 	'pack_installe' => 'Bir konfig&uuml;rasyon paketini y&uuml;kle',
 	'pack_titre' => 'Akt&uuml;el Konfig&uuml;rasyon',
 	'par_defaut' => 'Varsay&#305;lan',
@@ -358,10 +367,14 @@ Si vous r&eacute;initialisez le plugin en cliquant sur un pack, le Couteau Suiss
 	'simpl_interface:description' => '<NEW>D&eacute;sactive le menu de changement rapide de statut d\'un article au survol de sa puce color&eacute;e. Cela est utile si vous cherchez &agrave; obtenir une interface priv&eacute;e la plus d&eacute;pouill&eacute;e possible afin d\'optimiser les performances client.',
 	'simpl_interface:nom' => '&Ouml;zel aray&uuml;z&uuml;n hafifletilmesi',
 	'smileys:aide' => 'G&uuml;len y&uuml;zler : @liste@',
-	'smileys:description' => '<NEW>Ins&egrave;re des smileys dans tous les textes o&ugrave; apparait un raccourci du genre <acronym>:-)</acronym>. Id&eacute;al pour les  forums.
+	'smileys:description' => '<acronym>:-)</acronym> tipinde k&#305;sayol i&ccedil;eren t&uuml;m metinlere g&uuml;len y&uuml;z ekler. Forumlar i&ccedil;in ideal. 
 _ Une balise est disponible pour aficher un tableau de smileys dans vos squelettes : #SMILEYS.
 _ Dessins : [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'G&uuml;len y&uuml;zler (smileys)',
+	'soft_scroller:description' => '<NEW>Offre &agrave; votre site public un d&eacute;filement  adouci de la page lorsque le visiteur clique sur un lien pointant vers une ancre : tr&egrave;s utile pour &eacute;viter de se perdre dans une page complexe ou un texte tr&egrave;s long...
+
+Attention, cet outil a besoin pour fonctionner de deux plugins {jQuery} : {ScrollTo} et {LocalScroll}. Le Couteau Suisse peut les installer directement si vous cochez les cases suivantes. [[%scrollTo%]][[->%LocalScroll%]]',
+	'soft_scroller:nom' => '<NEW>Ancres douces',
 	'sommaire:description' => '<NEW>Construit un sommaire pour vos articles afin d’acc&eacute;der rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
 
 @puce@ Vous pouvez d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire :[[%lgr_sommaire% caract&egrave;res]]
@@ -416,7 +429,7 @@ Les propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL 
 [[%tri_articles%]][[->%tri_perso%]]',
 	'tri_articles:nom' => 'Makalelerin s&#305;ralanmas&#305;',
 	'tri_modif' => 'De&#287;i&#351;iklik tarihine g&ouml;re s&#305;ralama (ORDER BY date_modif DESC)',
-	'tri_perso' => '<NEW>Tri SQL personnalis&eacute;, ORDER BY suivi de :',
+	'tri_perso' => 'Ki&#351;iselle&#351;tirilmi&#351; SQL s&#305;ralamas&#305; ORDER BY :',
 	'tri_publi' => 'Yay&#305;n tarihine g&ouml;re s&#305;ralama (ORDER BY date DESC)',
 	'tri_titre' => 'Ba&#351;l&#305;&#287;a g&ouml;re s&#305;ralama (ORDER BY 0+titre,titre)',
 	'type_urls:description' => '<MODIF><NEW>@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'acc&egrave;s aux pages de votre site :
@@ -440,6 +453,7 @@ _ Burada elde edilen k&#305;saltmalar 2002 y&#305;l&#305;nda yay&#305;nlanan Ulu
 	'typo_exposants:nom' => 'Tipografik &uuml;s\'ler',
 
 	// U
+	'url_arbo' => '<NEW>arborescentes@_CS_ASTER@',
 	'url_html' => 'html@_CS_ASTER@',
 	'url_page' => 'sayfa',
 	'url_propres' => 'propres@_CS_ASTER@',

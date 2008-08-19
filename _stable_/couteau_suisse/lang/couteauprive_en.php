@@ -204,10 +204,10 @@ _ • [the whole plugin->@reset@]
 </p>',
 
 	// I
-	'icone_visiter:description' => '<NEW>Remplace l\'image du bouton standard &laquo;&nbsp;Visiter&nbsp;&raquo; (en haut &agrave; droite sur cette page)  par le logo du site, s\'il existe.
+	'icone_visiter:description' => 'Replaces the standard "Visit" button (top right on this page) by the site logo, if it exists.
 
-Pour d&eacute;finir ce logo, rendez-vous sur la page &laquo;&nbsp;Configuration du site&nbsp;&raquo; en cliquant sur le bouton &laquo;&nbsp;Configuration&nbsp;&raquo;.',
-	'icone_visiter:nom' => '<NEW>Bouton &laquo;&nbsp;Visiter&nbsp;&raquo;',
+To set this logo, go to the page "Site configuration" by clicking the "Configuration" button.',
+	'icone_visiter:nom' => '"Visit" button',
 	'insert_head:description' => 'Activate the tag [#INSERT_HEAD->http://www.spip.net/en_article2421.html] in all templates, whether or not this tag is present between &lt;head&gt; et &lt;/head&gt;. This option can be used to allow plugins to insert javascript code (.js) or stylesheets (.css).',
 	'insert_head:nom' => '#INSERT_HEAD tag',
 	'insertions:description' => 'N.B.: tool in development!! [[%insertions%]]',
@@ -264,20 +264,20 @@ Pour d&eacute;finir ce logo, rendez-vous sur la page &laquo;&nbsp;Configuration 
 	'label:radio_suivi_forums3' => '@_CS_CHOIX@',
 	'label:radio_target_blank3' => 'New window for external links:',
 	'label:radio_type_urls3' => 'URL format:',
-	'label:scrollTo' => '<NEW>Installer les plugin {jQuery} suivants :',
+	'label:scrollTo' => 'Instal the following {jQuery} plugins:',
 	'label:set_couleurs' => 'Set to be used ',
 	'label:spam_mots' => 'Prohibited sequences:',
 	'label:spip_script' => 'Calling script',
 	'label:style_h' => 'Your style:',
 	'label:style_p' => 'Your style:',
 	'label:suite_introduction' => 'Follow-on dots',
-	'label:terminaison_urls_arbo' => '<NEW>Terminaison des URls (ex : .html) :',
+	'label:terminaison_urls_arbo' => 'URL endings (e.g.: .html):',
 	'label:titre_travaux' => 'Message title:',
 	'label:tri_articles' => 'Your choice:',
-	'label:url_arbo_minuscules' => '<NEW>Conserver la casse des titres dans les URLs :',
-	'label:url_arbo_sep_id' => '<NEW>Caract&egrave;re de s&eacute;paration \'titre-id\' en cas de doublon :<br/>(ne pas utiliser \'/\')',
+	'label:url_arbo_minuscules' => 'Preserve the case of titles in URLs:',
+	'label:url_arbo_sep_id' => 'Separation character \'title-id\', used in the event of homonyms:<br/>(do not use \'/\')',
 	'label:url_glossaire_externe2' => 'Link to external glossary:',
-	'label:urls_arbo_sans_type' => '<NEW>Afficher le type d\'objet SPIP dans les URLs :',
+	'label:urls_arbo_sans_type' => 'Show the type of SPIP object in URLs:',
 	'liens_en_clair:description' => 'Makes the filter: \'liens_en_clair\' available to you. Your text probably contains hyperlinks which are not visible when the page is printed. This filter adds the link code between square brackets for every clickabel link (external links and email addresses). N.B: in printing mode (when using the parameter \'cs=print\' or \'page=print\' in the URL), this treatment is automatically applied.',
 	'liens_en_clair:nom' => 'Visible hyperlinks',
 	'liens_orphelins:description' => 'This tool has two functions:
@@ -374,10 +374,10 @@ If you reset the plugin by clicking on a pack, the Swiss Knife will reconfigure 
 _ A tag is available for displaying a table of smileys in templates: #SMILEYS.
 _ Images : [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'Smileys',
-	'soft_scroller:description' => '<NEW>Offre &agrave; votre site public un d&eacute;filement  adouci de la page lorsque le visiteur clique sur un lien pointant vers une ancre : tr&egrave;s utile pour &eacute;viter de se perdre dans une page complexe ou un texte tr&egrave;s long...
+	'soft_scroller:description' => 'Gives a slow scroll effect when a visitor clicks on a link with an anchor tag. This helps the visitor to know where they are in a long text.
 
-Attention, cet outil a besoin pour fonctionner de deux plugins {jQuery} : {ScrollTo} et {LocalScroll}. Le Couteau Suisse peut les installer directement si vous cochez les cases suivantes. [[%scrollTo%]][[->%LocalScroll%]]',
-	'soft_scroller:nom' => '<NEW>Ancres douces',
+N.B. In order to work, this tool requires two {jQuery} plugins: {ScrollTo} et {LocalScroll}. The Swiss Knife can install them itself if you check the following two boxes. [[%scrollTo%]][[->%LocalScroll%]]',
+	'soft_scroller:nom' => 'Soft anchors',
 	'sommaire:description' => 'Builds a summary of your articles in order to access the main headings quickly (HTML tags &lt;h3>A Subtitle&lt;/h3> or SPIP subtitle shortcuts in the form: <code>{{{My subtitle}}}</code>).
 
 @puce@ You can define the maximum number of characters of the subtitles used to make the summary:[[%lgr_sommaire% caract&egrave;res]]
@@ -426,7 +426,7 @@ _ Do not forget to check that the variable used (here, "a_text") is defined in t
 	'travaux_prochainement' => 'This site will be back online soon.
 _ Thank you for your understanding.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
-	'tri_articles:description' => '<MODIF>Choose the sort order to be used for displaying articles in the editing interface ([->./?exec=auteurs]), within the sections.
+	'tri_articles:description' => 'Choose the sort order to be used for displaying articles in the editing interface ([->./?exec=auteurs]), within the sections.
 
 The options below use the SQL function \'ORDER BY\'. Only use the customised option if you know what you are doing (the available fields are: {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
 [[%tri_articles%]][[->%tri_perso%]]',
@@ -435,28 +435,32 @@ The options below use the SQL function \'ORDER BY\'. Only use the customised opt
 	'tri_perso' => 'Sort by customised SQL, ORDER BY:',
 	'tri_publi' => 'Sort by publication date (ORDER BY date DESC)',
 	'tri_titre' => 'Sort by title (ORDER BY 0+titre,titre)',
-	'type_urls:description' => '<MODIF>@puce@ SPIP offers a choice between several types of URLs for your site:
+	'type_urls:description' => '@puce@ SPIP offers a choice between several types of URLs for your site:
 <div style="font-size:90%; margin:0 2em;">
-- {{page}} : the default type for SPIP v1.9x : <code>/spip.php?article123</code>.
+- {{page}} : the default type for SPIP since version 1.9: <code>/spip.php?article123</code>.
 - {{html}} : URLs take the form of classic html pages: <code>/article123.html</code>.
 - {{propre}} : URLs are constructed using the title of the object: <code>/Mon-titre-d-article</code>.
 - {{propres2}} : the extension \'.html\' is added to the URLs generated: <code>/Mon-titre-d-article.html</code>.
+- {{arborescentes}} (only from SPIP 2.0 on) URLs are built in a tree structure: <code>/sector/section1/section2/article</code>.
 - {{standard}} : the URLs used by SPIP v1.8 and earlier: <code>article.php3?id_article=123</code>
 - {{propres-qs}} : this system functions using a "Query-String", in other words, without using the .htaccess file. The URLs are of the form: <code>/?Mon-titre-d-article</code>.</div>
 
-Plus d\'infos : [->http://www.spip.net/en_article3588.html]
+More information: [->http://www.spip.net/en_article3588.html]
 [[%radio_type_urls3%]]
-<p style=\'font-size:85%\'>@_CS_ASTER@to use the types {html}, {propre} or {propre2}, copy the file "htaccess.txt" from the root directory of the SPIP site to a file (also at the root) named ".htaccess" (be careful not to overwrite any existing configuration if there already is a file of this name). If your site is in a subdirectory, you may need to edit the line "RewriteBase" in the file in order for the defined URLs to direct requests to the SPIP files.</p>
+<p style=\'font-size:85%\'>@_CS_ASTER@to use the types {html}, {propre}, {propre2} ou {arborescentes}, copy the file "htaccess.txt" from the root directory of the SPIP site to a file (also at the root) named ".htaccess" (be careful not to overwrite any existing configuration if there already is a file of this name). If your site is in a subdirectory, you may need to edit the line "RewriteBase" in the file in order for the defined URLs to direct requests to the SPIP files.</p>
 
 @puce@ {{Only if you are using the type  {page} described above}} can you choose the displayed calling script for SPIP. By default, SPIP shows {spip.php}, but {index.php} (format : <code>/index.php?article123</code>) or an empty value (format : <code>/?article123</code>) are also possible. To use any other value, you need to create the corresponding file at the root of your site with the same contents as are found in the file {index.php}.
-[[%spip_script%]]',
+[[%spip_script%]]
+
+@puce@ {{Only if you are using the type {arborescentes} describes aboves}}, you can customise the format:</p>
+[[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]',
 	'type_urls:nom' => 'Format of URLs',
 	'typo_exposants:description' => 'Text in French: improves the typographical rendering of common abbreviations by adding superscript where necessary (thus, {<acronym>Mme</acronym>} becomes {M<sup>me</sup>}). Common errors corrected:  ({<acronym>2&egrave;me</acronym>} and  {<acronym>2me</acronym>}, for example, become {2<sup>e</sup>}, the only correct abbreviation).
 _ The rendered abbreviations correspond to those of the Imprimerie nationale given in the {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, Presses de l\'Imprimerie nationale, Paris, 2002).',
 	'typo_exposants:nom' => 'Superscript',
 
 	// U
-	'url_arbo' => '<NEW>arborescentes@_CS_ASTER@',
+	'url_arbo' => 'arborescentes@_CS_ASTER@',
 	'url_html' => 'html@_CS_ASTER@',
 	'url_page' => 'page',
 	'url_propres' => 'propres@_CS_ASTER@',
