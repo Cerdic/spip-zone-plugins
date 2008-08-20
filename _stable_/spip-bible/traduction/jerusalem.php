@@ -10,6 +10,18 @@ Module "Bible de Jérusalem"
 function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapitre_fin='',$verset_fin=''){
 	//recuperer le passage dans la bible de Jérusalem
 	
+	$petit_livre=array('Ab','Phm','2jn','3jn','Jude');
+	foreach ($petit_livre as $i){
+		if (strtolower($i)==strtolower($livre));{
+			$petit=true;
+			$verset_debut=$chapitre_debut;
+			$verset_fin=$chapitre_fin;
+			$chapitre_fin=1;
+			$chapitre_debut=1;
+			break;
+			}
+		}
+	
 	
 	$url_base = 'http://www.biblia-cerf.com/BJ/';
 	$texte = '';
@@ -37,8 +49,12 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 		$verset_fin =='' and $i==$chapitre_fin ? $debut=1 : $debut=$debut;
 		
 		
-		$texte .= '<strong>'.$i.'</strong>'. recuperer_passage_dans_chapitre_jerusalem($debut,$fin,$livre,$code,$i).'<br />';
-		
+		if ($petit){
+			$texte .=  recuperer_passage_dans_livre($debut,$fin+1,$livre,$code);
+		}
+		else{
+			$texte .= '<strong>'.$i.'</strong>'. recuperer_passage_dans_chapitre($debut,$fin,$livre,$code,$i).'<br />';
+		}
 		
 		$i++;
 		
@@ -48,7 +64,7 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 	return $texte;
 }
 	
-function recuperer_passage_dans_chapitre_jerusalem($debut='',$fin='',$livre='',$chaine='',$chap=''){
+function recuperer_passage_dans_chapitre($debut='',$fin='',$livre='',$chaine='',$chap=''){
 	$ex = $livre.'&nbsp;'.$chap.':'.$debut.'-';
 	
 	
@@ -78,5 +94,27 @@ function recuperer_passage_dans_chapitre_jerusalem($debut='',$fin='',$livre='',$
 	}
 	
 	return '<sup>'.$debut.' </sup>'.$chaine;
+}
+
+function recuperer_passage_dans_livre($debut,$fin,$livre,$code){
+	
+	$ex1 = $livre.'&nbsp;'.$debut.'-';
+	$ex2 = $livre.'&nbsp;'.$fin.'-';
+	
+	$tableau=explode($ex1,$code);
+	$code = '<sup>'.$debut.' </sup>'.$tableau[1];
+	$tableau=explode($ex2,$code);
+	$code=$tableau[0];
+	$code=str_replace($livre,'<sup>',$code);
+	
+	$i=$debut+1;
+	
+	while ($i<$fin){
+		$code=str_replace($i.'-',$i.' </sup>',$code);
+		$i++;
+	}
+	
+	return $code;
+
 }
 ?>
