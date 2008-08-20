@@ -85,23 +85,27 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	$tableau = explode(',',$debut);
 	if (count($tableau)==2){
 		$verset_debut = $tableau[1];}
+	else{
+		if (count($tableau2)==1){
+			$chapitre_fin=$tableau2[0];
+			$verset_fin='';
+		}
+		
 	
-	$chapitre_debut   = $tableau[0];
+		}
+	$chapitre_debut  = $tableau[0];
 	
+	echo 't'.$chapitre_fin;
 	
 	// si reference courte
 	if ($chapitre_fin==''){$chapitre_fin=$chapitre_debut;};
-	if ($verset_fin==''){$verset_fin=$verset_debut;}
-	if ($verset_debut==''){$verset_debut=1;
+	
+	if ($verset_debut=='' and count($tableau2)==2){$verset_debut=1;
 	$verset_fin=='';
 	$chapitre_fin=$chapitre_debut;};
-	
-	//si petit livre (< 1 chapitre)
-	//$petit_livres=('ab'=>'','phm'=>'','2jn'=>'','3jn'=>'','jude'=>'');
-	//f (array_key_exists($petit_livres)){
-	//	$chapitre_debut;
-	//	$verset_fin=$chapitre_fin
-	
+	if ($verset_fin=='' and (count($tableau)==2)){$verset_fin=$verset_debut;}
+	echo 'x'.$verset_debut;
+	echo 'x'.$verset_fin;
 	
 	
 	//}
@@ -137,6 +141,11 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad){
 	$livre = str_replace('1','1 ',$livre);
 	$livre = str_replace('2','2 ',$livre);
 	$livre = str_replace('3','3 ',$livre);
+	
+	if ($vd=='' and $vf==''){
+		return '<p><accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.'-'.$cf.' (<i>'._T('bible:'.$trad).'</i>)</p>';
+	
+	}
 	
 	$chaine = '<p><accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.', '.$vd;
 	
