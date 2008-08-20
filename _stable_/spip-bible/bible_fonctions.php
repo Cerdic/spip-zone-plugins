@@ -40,8 +40,8 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	'Jb','Pr','Qo','Ct','Rt','Lm','Est','Tb','Jdt','Ba','Sg','Si','Ps',
 	'Mt','Lc','Jn','Mc',
 	'Ac',
-	'Ro','1Co','2Co','Ga','Ep','Ph','Col','1Th','2Th','1Tm','2Tm','Tt','Phm','He',
-	'Jc','1P','2P','1Jn','2Jn','3Jn','Jude','Ap',
+	'Ro','1Co','2Co','Ga','Ep','Col','1Th','2Th','1Tm','2Tm','Tt','Phm','He',
+	'Jc','1P','2P','1Jn','2Jn','3Jn','Jude','Ap','Ph'
 	);
 	
 	// phase d'anaylse
@@ -95,6 +95,16 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	if ($verset_debut==''){$verset_debut=1;
 	$verset_fin=='';
 	$chapitre_fin=$chapitre_debut;};
+	
+	//si petit livre (< 1 chapitre)
+	//$petit_livres=('ab'=>'','phm'=>'','2jn'=>'','3jn'=>'','jude'=>'');
+	//f (array_key_exists($petit_livres)){
+	//	$chapitre_debut;
+	//	$verset_fin=$chapitre_fin
+	
+	
+	
+	//}
 	
 	
 	include_spip('traduction/'.$traduction);
