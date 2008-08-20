@@ -25,14 +25,14 @@
 	
 		{{Documentation compl&#232;te : }}
 		
-		<p>Pour obtenir une documentation compl&#232;te sur le fonctionnement et la configuration de ce plugin, utilisez le lien ["Documentation"->http://www.spip-contrib/PublicationOuverte] ci-dessous.</p>
+		<p>Pour obtenir une documentation compl&#232;te sur le fonctionnement et la configuration de ce plugin, utilisez le lien ["Documentation"->http://www.spip-contrib.net/Plugin-Publication-Ouverte] ci-dessous.</p>
 	
 		{{Interface de configuration : }}
 		
 		<p>Pour configurer le fonctionnement du plugin Publication Ouverte, utilisez le lien ["Configuration"->.?exec=cfg&amp;cfg=op] ci-dessous.</p>
 		
 	</description>
-	<lien>[Documentation->http://www.spip-contrib/PublicationOuverte], [Configuration->.?exec=cfg&amp;cfg=op], [mise &#224; jour->.?exec=op_base]</lien>
+	<lien>[Documentation->http://www.spip-contrib.net/Plugin-Publication-Ouverte], [Configuration->.?exec=cfg&amp;cfg=op], [mise &#224; jour->.?exec=op_base]</lien>
 	<prefix>op</prefix>
 	<options>
 		op_options.php
