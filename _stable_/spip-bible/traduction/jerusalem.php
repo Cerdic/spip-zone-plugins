@@ -10,7 +10,7 @@ Module "Bible de Jérusalem"
 function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapitre_fin='',$verset_fin=''){
 	//recuperer le passage dans la bible de Jérusalem
 	
-	echo 'r'.$verset_debut;
+	
 	$url_base = 'http://www.biblia-cerf.com/BJ/';
 	$texte = '';
 	$i = $chapitre_debut; 

@@ -95,7 +95,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 		}
 	$chapitre_debut  = $tableau[0];
 	
-	echo 't'.$chapitre_fin;
+	
 	
 	// si reference courte
 	if ($chapitre_fin==''){$chapitre_fin=$chapitre_debut;};
@@ -104,8 +104,6 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	$verset_fin=='';
 	$chapitre_fin=$chapitre_debut;};
 	if ($verset_fin=='' and (count($tableau)==2)){$verset_fin=$verset_debut;}
-	echo 'x'.$verset_debut;
-	echo 'x'.$verset_fin;
 	
 	
 	//}
