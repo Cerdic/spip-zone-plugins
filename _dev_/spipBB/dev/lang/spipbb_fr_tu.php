@@ -81,6 +81,7 @@ Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'admin_plugin_requis_erreur_cfg' => 'Installe le plugin CFG et active le ! [Documentation ici->http://www.spip-contrib.net/?article1605], [Archive ZIP l&agrave;->http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => 'Les plugins requis suivants manquent. Active-les !',
 	'admin_plugin_requis_ok' => 'Plugin requis install&eacute;',
+	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://www.spip-contrib.net/?article1224] : fourni les informations sur les visiteurs authentifi&eacute;.',
 	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://www.spip-contrib.net/?article1605] : fourni des fonctions et des balises.',
 	'admin_sous_titre' => 'Acc&egrave;der au panneau d\'administration des forums avec SpipBB',
 	'admin_spip_config_forums' => 'Configuration de SPIP&nbsp;:',
@@ -296,6 +297,7 @@ Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'maintenance' => 'Maintenance',
 	'maintenance_fermer' => 'a ferm&eacute; l\'article/forum :',
 	'maintenance_pour' => 'pour MAINTENANCE.',
+	'membres_en_ligne' => 'membres en ligne',
 	'membres_inscrits' => 'membres inscrits',
 	'membres_les_plus_actifs' => 'Membres les plus actifs',
 	'message' => 'Message',
@@ -336,7 +338,8 @@ _ Une annonce est situ&eacute;e en t&ecirc;te de forum sur toutes les pages.',
 
 	// P
 	'pagine_page_' => ' .. page ',
-	'pagine_post_s' => '<MODIF> posts',
+	'pagine_post_' => ' r&eacute;ponse',
+	'pagine_post_s' => ' r&eacute;ponses',
 	'pagine_sujet_s' => ' sujets',
 	'par_' => 'par ',
 	'plugin_auteur' => 'La SpipBB Team : [voir la liste des contributeurs sur Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
@@ -353,6 +356,7 @@ _ {{Plugin spipbb en cours de d&eacute;veloppement. Tu l\'utilises &agrave; vos 
 _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribu&eacute; sous licence GPL',
 	'plugin_lien' => '[Consulter la documentation du plugin sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
+	'plugin_mauvaise_version' => 'Cette version du plugin n\'est pas compatible avec ta version de SPIP !',
 	'plugin_nom' => 'SpipBB : Gestion des forums de SPIP',
 	'post_aucun_pt' => 'aucun&nbsp;!',
 	'post_efface_lui' => 'Ce sujet comprend @
@@ -360,29 +364,52 @@ nbr_post@ message(s). Effac&eacute;s avec lui&nbsp;!\\n',
 	'post_ip' => 'Messages post&eacute; &agrave; partie de l\'adresse IP',
 	'post_propose' => 'Message propos&eacute;',
 	'post_rejete' => 'Message rejet&eacute;',
-	'post_titre' => '<NEW>&nbsp;:::&nbsp;Titre : ',
+	'post_titre' => '&nbsp;:::&nbsp;Titre : ',
 	'post_verifier_sujet' => 'V&eacute;rifier ce sujet',
 	'poste_valide' => 'Post(s) &agrave; valider ...',
 	'poster_date_' => 'Post&eacute; le : ',
 	'poster_message' => 'Poste ton message',
-	'postit' => '<NEW>Postit',
-	'postit_dpt' => '<NEW>Postit&nbsp;: ',
-	'posts_effaces' => '<NEW>Messages effac&eacute;s&nbsp;!',
-	'posts_refuses' => '<NEW>Messages refus&eacute;s, &agrave; effacer&nbsp;!',
-	'previsualisation' => '<NEW>Pr&eacute;visualisation',
-	'profil' => '<MODIF>Profil de',
+	'postit' => 'Postit',
+	'postit_dpt' => 'Postit&nbsp;: ',
+	'posts_effaces' => 'Messages effac&eacute;s&nbsp;!',
+	'posts_refuses' => 'Messages refus&eacute;s, &agrave; effacer&nbsp;!',
+	'previsualisation' => 'Pr&eacute;visualisation',
+	'profil' => 'Profil de',
 
 	// R
-	'raison_clic' => '<NEW>cliquez ici',
-	'raison_texte' => '<NEW>Pour en connaitre la raison',
-	'recherche' => '<NEW>Recherche',
+	'raison_clic' => 'clique ici',
+	'raison_texte' => 'Pour en connaitre la raison',
+	'recherche' => 'Recherche',
 	'recherche_elargie' => 'Recherche &eacute;largie',
-	'redige_post' => '<NEW>Ecrire message',
-	'reglement' => '<MODIF><p>Les administrateurs et mod&eacute;rateurs de ce forum s\'efforceront de supprimer ou &eacute;diter tous les messages &agrave; caract&egrave;re r&eacute;pr&eacute;hensible aussi rapidement que possible. Toutefois, il leur est impossible de passer en revue tous les messages. Tu admets donc que tous les messages post&eacute;s sur ces forums expriment la vue et opinion de leurs auteurs respectifs, et non pas des administrateurs, ou mod&eacute;rateurs, ou webmestres (except&eacute; les messages post&eacute;s par eux-m&ecirc;me) et par cons&eacute;quent ne peuvent pas &ecirc;tre tenus pour responsables.</p>
+	'redige_post' => 'Ecrire message',
+	'reglement' => '<p>Les administrateurs et mod&eacute;rateurs de ce forum s\'efforceront de supprimer
+    ou &eacute;diter tous les messages &agrave; caract&egrave;re r&eacute;pr&eacute;hensible
+    aussi rapidement que possible. Toutefois, il leur est impossible de passer en revue tous
+    les messages. Tu admets donc que tous les messages post&eacute;s sur ces forums
+    expriment la vue et opinion de leurs auteurs respectifs, et non pas des administrateurs,
+    ou mod&eacute;rateurs, ou webmestres (except&eacute; les messages post&eacute;s par
+    eux-m&ecirc;me) et par cons&eacute;quent ne peuvent pas &ecirc;tre tenus pour responsables.</p>
 
-<p>Tu consens &agrave; ne pas poster de messages injurieux, obsc&egrave;nes, vulgaires, diffamatoires, mena&ccedil;ants, sexuels ou tout autre message qui violerait les lois applicables. Le faire peut te conduire &agrave; &ecirc;tre banni imm&eacute;diatement de fa&ccedil;on permanente (et ton fournisseur d\'acc&egrave;s &agrave; internet en sera inform&eacute;). L\'adresse IP de chaque message est enregistr&eacute;e afin d\'aider &agrave; faire respecter ces conditions. Tu es d\'accord sur le fait que le webmestre, l\'administrateur et les mod&eacute;rateurs de ce forum ont le droit de supprimer, &eacute;diter, d&eacute;placer ou verrouiller n\'importe quel sujet de discussion &agrave; tout moment. En tant qu\'utilisateur, tu es d\'accord sur le fait que toutes les informations que tu donneras ci-apr&egrave;s seront stock&eacute;es dans une base de donn&eacute;es. Cependant, ces informations ne seront divulgu&eacute;es &agrave; aucune tierce personne ou soci&eacute;t&eacute; sans ton accord. Le webmestre, l\'administrateur, et les mod&eacute;rateurs ne peuvent pas &ecirc;tre tenus pour responsables si une tentative de piratage informatique conduit &agrave; l\'acc&egrave;s de ces donn&eacute;es.</p>
-
-<p>Ce forum utilise les cookies pour stocker des informations sur ton ordinateur. Ces cookies ne contiendront aucune information que tu auras entr&eacute; ci-apr&egrave;s, ils servent uniquement &agrave; am&eacute;liorer le confort d\'utilisation. L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;tails de ton enregistrement ainsi que ton mot de passe (et aussi pour t\'envoyer un nouveau mot de passe dans la cas o&ugrave; tu l\'oublierais).</p><p>En t\'enregistrant, tu te portes garant du fait d\'&ecirc;tre en accord avec le r&egrave;glement ci-dessus.</p>',
+    <p>Tu consens &agrave; ne pas poster de messages injurieux, obsc&egrave;nes,
+    vulgaires, diffamatoires, mena&ccedil;ants, sexuels ou tout autre message qui violerait les lois applicables. Le faire peut te conduire &agrave; &ecirc;tre banni
+    imm&eacute;diatement de fa&ccedil;on permanente (et ton fournisseur d\'acc&egrave;s
+    &agrave; internet en sera inform&eacute;). L\'adresse IP de chaque message est enregistr&eacute;e afin d\'aider &agrave; faire respecter ces conditions.
+    Tu es d\'accord sur le fait que le webmestre, l\'administrateur
+    et les mod&eacute;rateurs de ce forum ont le droit de supprimer, &eacute;diter,
+    d&eacute;placer ou verrouiller n\'importe quel sujet de discussion &agrave; tout moment.
+    En tant qu\'utilisateur, tu es d\'accord sur le fait que toutes les informations
+    que tu donneras ci-apr&egrave;s seront stock&eacute;es dans une base de donn&eacute;es.
+    Cependant, ces informations ne seront divulgu&eacute;es &agrave; aucune tierce personne
+    ou soci&eacute;t&eacute; sans ton accord. Le webmestre, l\'administrateur,
+    et les mod&eacute;rateurs ne peuvent pas &ecirc;tre tenus pour responsables si une
+    tentative de piratage informatique conduit &agrave; l\'acc&egrave;s de ces donn&eacute;es.</p>
+    <p>Ce forum utilise les cookies pour stocker des informations sur ton ordinateur.
+    Ces cookies ne contiendront aucune information que tu auras entr&eacute; ci-apr&egrave;s,
+    ils servent uniquement &agrave; am&eacute;liorer le confort d\'utilisation.
+    L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;tails
+    de ton enregistrement ainsi que ton mot de passe (et aussi pour t\'envoyer un nouveau
+    mot de passe dans la cas o&ugrave; tu l\'oublierais).</p>
+    <p>En t\'enregistrant, tu te portes garant du fait d\'&ecirc;tre en accord avec le r&egrave;glement ci-dessus.</p>',
 	'repondre' => 'R&eacute;pondre',
 	'reponse_s_' => '<NEW>R&eacute;ponses',
 	'resultat_s_pour_' => '<NEW> r&eacute;sultats pour ',
