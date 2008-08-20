@@ -19,7 +19,7 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 	
 		include_spip("inc/distant");
 		include_spip("inc/charsets");
-		$code = charset2unicode(recuperer_page($url_base.strtolower($livre).$i.'.html'),'iso-8859-1');
+		$code = importer_charset(recuperer_page($url_base.strtolower($livre).$i.'.html'),'iso-8859-1');
 		//epuration du code
 		$tableau=explode('</head>',$code);
 		$code=$tableau[1];
