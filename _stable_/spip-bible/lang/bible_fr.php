@@ -4,9 +4,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//les livres
-	'Gn'=>'Gen&eagrave;se',
+	'Gn'=>'Gen&egrave;se',
 	'Ex'=>'Exode',
-	'Lv'=>'L&aeacutevitique;',
+	'Lv'=>'L&eacute;vitique',
 	'Nb'=>'Nombres',
 	'Dt'=>'Deut&eacute;ronome',
 	'Jg'=>'Juges',
@@ -17,9 +17,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'1Ch'=>'1 Chroniques',
 	'2Ch'=>'2 Chroniques',
 	'Esd'=>'Esdras',
-	'Ne'=>'Neacute;h&eacute;mie',
-	'1M'=>'1 Maccab&eacutes;es',
-	'2M'=>'2 Maccab&eacutes;es',
+	'Ne'=>'N&eacute;h&eacute;mie',
+	'1M'=>'1 Maccab&eacute;es',
+	'2M'=>'2 Maccab&eacute;es',
 	'Is'=>'Isa&iuml;e',
 	'Es'=>'Esa&iuml;e',
 	'Jr'=>'J&eacute;r&eacute;mie',
@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'1Co'=>'1 Corinthiens',
 	'2Co'=>'2 Corinthiens',
 	'Ga'=>'Galates',
-	'Ep'=>'Eph&eacutesiens',
+	'Ep'=>'Eph&eacute;siens',
 	'Ph'=>'Philippiens',
 	'Col'=>'Colossiens',
 	'1Th'=>'1 Thessaloniciens',
