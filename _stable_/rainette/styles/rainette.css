@@ -107,3 +107,34 @@
 	text-align: center;
 	width: 595px;
 }
+
+/* PREVISIONS: Styles utilises par le modele rainette_previsions, sur x jours presente en 24h simple */
+.rainette_previsions_24h {
+	float: left;
+	border: 1px solid #798F74;
+	width: 120x;
+	margin: 0px 5px 20px 0px;
+}
+.rainette_previsions_24h .jour {
+	height: 19px;
+	font-weight: bold;
+	background: #C9EFC2;
+	width: 118px;
+	border-bottom: 1px solid #798F74;
+	padding: 5px 0px 0px 0px;
+	text-align: center;
+}
+.rainette_previsions_24h .date {
+	height: 19px;
+	font-weight: bold;
+	background: #C9EFC2;
+	width: 118px;
+	border-bottom: 1px solid #798F74;
+	padding: 5px 0px 0px 0px;
+	text-align: center;
+}
+.rainette_previsions_24h .contenu {width: 118px; border: 0px; padding: 10px 0px 10px 0px; text-align: center;}
+.rainette_previsions_24h .icone {margin-bottom: 10px;}
+.rainette_previsions_24h .t_reelle {font-weight: bold; margin-bottom: 10px;}
+.rainette_previsions_24h .details {font-weight: normal;}
+.rainette_previsions_24h .details ul {list-style-type: none; padding: 0px; margin: 0px;}
