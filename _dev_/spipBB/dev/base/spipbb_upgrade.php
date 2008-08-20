@@ -27,6 +27,7 @@ spipbb_log('included',2,__FILE__);
 
 include_spip('inc/spipbb_inc_metas');
 include_spip('inc/spipbb_inc_config');
+//include_spip('inc/presentation');
 
 function spipbb_install($action)
 {
