@@ -1,0 +1,45 @@
+<plugin>
+    <nom>Spip-Bible</nom>
+    <auteur>
+    Ma&iuml;eul Rouquette GPL3
+    </auteur>
+    <version>
+    1.0
+    </version>
+    <etat>
+    stable
+    </etat>
+    <install>bible_fonctions.php</install>
+    <necessite id='CFG' />
+    <icon>
+    bible.jpg
+    </icon>
+    <description>
+Permet de faire rapidment des citation de la bible (de Jérsualem pour le moment seulement).
+		
+Ex : <code><bible|passage=Gn1,2-2,1)</code> citera la Gen&egrave;se du chapitre 1, verset 2 au chapitre 2, verset 1 inclu.
+		
+On peut passer des options au mod&eacute;le. La valeur des options est "non" ou "oui", sauf pour traduction.
+	
+Ces options sont :
+-* ”numeros" 	=> Pour afficher les num&eacute;ros de versets et de chapitre dans le corps de texte.
+-* "bible"		=> Pour faire des retours chariots entre les versets
+-* "ref"		=> Pour afficher les r&eacute;f&eacute;rences &agrave; la suite du passage
+-* "traduction"	=> Pour choisir la traduction. Pour le moment existe seulement :
+-** "jerusalem" (attention au minuscule) => Pour la Bible de J&eacute;rusalem.
+	
+	En l'absence des ces param&eacute;tres, les valeurs seront celle d&eacute;finies [sur la page de configuration->/?exec=cfg&cfg=bible].
+	
+	Attention : le plugin n&eacute;c&eacute;ssite que votre site soit un unicode.
+	
+		 
+	</description>
+    <prefix>
+    bible
+    </prefix>
+    
+
+	<options>bible_fonctions.php</options>
+   
+ 
+</plugin>

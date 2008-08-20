@@ -1,0 +1,44 @@
+<div class="formulaire_spip">
+
+<!-- titre=<:bible:cfg_configurer:> -->
+
+<form action="#SELF" method="post">
+[<div>(#ENV{_cfg_}|form_hidden)</div>]
+	
+	<ul>
+	<div id="explication"><bible:cfg_explication:></div>
+			<li>
+					<label for="traduction"><:bible:cfg_traduction:></label>
+					<select name="traduction"  id="traduction">
+						<option value="jerusalem" [selected="(#ENV{traduction})"]>
+						<:bible:jerusalem:>
+						</option>
+					</select>
+				
+			</li>
+			
+			
+			<li>
+					<label for="numeros"><:bible:cfg_numeros:></label>
+					<input type="checkbox" name="numeros"  id="numeros" [checked="(#ENV{numeros})"]  value="oui" />
+				
+			</li>
+			
+			<li>
+					<label for="retour"><:bible:cfg_retour:></label>
+					<input type="checkbox" name="retour"  id="retour" [checked="(#ENV{retour})"]  value="oui" />
+				
+			</li>
+			
+			<li>
+					<label for="ref"><:bible:cfg_ref:></label>
+					<input type="checkbox" name="ref"  id="ref" [checked="(#ENV{ref})"]  value="oui" />
+				
+			</li>
+		</ul>
+
+	<p class="boutons"><input type="submit" name="_cfg_ok" value="<:OK:>" />
+	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" /></p>
+</fieldset></li>
+</form>
+</div>
