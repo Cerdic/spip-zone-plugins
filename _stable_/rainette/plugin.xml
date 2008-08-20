@@ -1,16 +1,15 @@
 <plugin>
 	<nom>Rainette</nom>
-	<auteur>Cedric Morin d'apr&egrave;s une id&eacute;e originale de Art&eacute;go et touti (plugin Grenouille)</auteur>
-	<version>1.0</version>
+	<auteur>Cedric Morin et SarkASmeL, d'apr&egrave;s une id&eacute;e originale de Art&eacute;go et touti (plugin Grenouille)</auteur>
+	<version>1.1</version>
 	<etat>stable</etat>
 	<description>
 Ce plugin permet d'afficher les conditions et les pr&eacute;visions m&eacute;t&eacute;orologiques d'une ville donn&eacute;e &agrave; partir du flux xml fourni par le site weather.com.
 Il s'inspire dans son principe du plugin Grenouille mais ne stocke aucune information en base de donn&eacute;es ni ne g&egrave;re le choix des villes.
 
 L'affichage des donn&eacute;es m&eacute;t&eacute;orologiques se fait uniquement via l'utilisation de mod&egrave;les dans les squelettes utilisateur. Le plugin propose des 
-{{mod&egrave;les}} par d&eacute;faut comme {rainette_previsions} utilisable comme suit:
-_ dans un squelette <code>[(#MODELE{rainette_previsions,code=FRXX0076,jours=3})]</code>
-_ ou en r&eacute;daction <code>&lt;rainette_previsions|code=FRXX0076|jours=3&gt;</code>.
+mod&egrave;les par d&eacute;faut comme {{rainette_previsions}} et {{rainette_conditions}}. Il est possible aussi d'afficher les informations sur la ville choisie soit via le mod&egrave;le {{rainette_infos}},
+soit via la balise {{RAINETTE_INFOS}}. Consulter le fichier {rainette_demo.html} pour des exemples d'utilisation.
 
 Il est possible de personnaliser les icones du temps en d&eacute;posant vos images {numero.png} dans le sous-dossier rainette/ de votre dossier squelette ou plugin !
 _ Cf le site [->http://liquidweather.net/icons.php] pour des jeux d'icones vari&eacute;s...

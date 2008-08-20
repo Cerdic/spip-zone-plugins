@@ -44,19 +44,21 @@ function xml2tab_previsions($xml){
 	$n = spip_xml_match_nodes(",^dayf,",$xml,$previsions);
 	if ($n==1){
 		$previsions = reset($previsions['dayf']);
-		// recuperer la date de debut des previsions
-		$date = $previsions['lsup'][0];
-		$date = strtotime(preg_replace(',\slocal\s*time\s*,ims','',$date));
+		// recuperer la date de debut des previsions (c'est la date de derniere maj)
+		$date_maj = $previsions['lsup'][0];
+		$date_maj = strtotime(preg_replace(',\slocal\s*time\s*,ims','',$date_maj));
 		$index = 0;
 		foreach($previsions as $day=>$p){
 			if (preg_match(",day\s*d=['\"?]([0-9]+),Uims",$day,$regs)){
-				$jour = date('Y-m-d',$date+$regs[1]*24*3600);
+				$jour = date('Y-m-d',$date_maj+$regs[1]*24*3600);
 				$p = reset($p);
-				// Infos generales
+				// Index, jour et lever/coucher du soleil
 				$tableau[$index]['index'] = $index;
 				$tableau[$index]['date'] = $jour;
-				$tableau[$index]['lever_soleil'] = $p['sunr'][0];
-				$tableau[$index]['coucher_soleil'] = $p['suns'][0];
+				$sun = date_parse($p['sunr'][0]);
+				$tableau[$index]['lever_soleil'] = $sun['hour'].':'.$sun['minute'];
+				$sun = date_parse($p['suns'][0]);
+				$tableau[$index]['coucher_soleil'] = $sun['hour'].':'.$sun['minute'];
 				// Prévisions du jour
 				$tableau[$index]['temperature_jour'] = intval($p['hi'][0]) ? intval($p['hi'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
 				$tableau[$index]['code_icone_jour'] = intval($p['part p="d"'][0]['icon'][0]) ? intval($p['part p="d"'][0]['icon'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
@@ -77,6 +79,8 @@ function xml2tab_previsions($xml){
 				$index += 1;
 			}
 		}
+		// On stocke en fin de tableau la date de derniere mise a jour
+		$tableau[$index]['derniere_maj'] = date('Y-m-d H:i:s',$date_maj);
 		// trier par date
 		ksort($tableau);
 	}
@@ -89,9 +93,9 @@ function xml2tab_conditions($xml){
 	if ($n==1){
 		$conditions = reset($conditions['cc']);
 		// recuperer la date de derniere mise a jour des conditions
-		$date = $conditions['lsup'][0];
-		$date = strtotime(preg_replace(',\slocal\s*time\s*,ims','',$date));
-		$tableau['derniere_maj'] = affdate_heure(date('Y-m-d H:i:s',$date));
+		$date_maj = $conditions['lsup'][0];
+		$date_maj = strtotime(preg_replace(',\slocal\s*time\s*,ims','',$date_maj));
+		$tableau['derniere_maj'] = date('Y-m-d H:i:s',$date_maj);
 		// station d'observation (peut etre differente de la ville)
 		$tableau['station'] = $conditions['obst'][0];
 		// Liste des conditions meteo

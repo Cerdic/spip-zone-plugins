@@ -79,6 +79,8 @@ function rainette_croaaaaa_previsions($code_meteo, $type='x_jours', $jour=0, $mo
 			$tableau[$jour]['risque_precipitation_demain'] = $tableau[$jour+1]['risque_precipitation_jour'];
 			$tableau[$jour]['humidite_demain'] = $tableau[$jour+1]['humidite_jour'];
 		}
+		// On ajoute la date de derniere maj
+		$tableau[$jour]['derniere_maj'] = $tableau[_RAINETTE_JOURS_PREVISION]['derniere_maj'];
 		$page = evaluer_fond("modeles/$modele", $tableau[$jour]);			
 		$texte = $page['texte'];
 	}

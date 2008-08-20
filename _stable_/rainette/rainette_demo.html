@@ -5,32 +5,36 @@
 	<title>Rainette - Demo</title>
 		<link rel="stylesheet" href="#CHEMIN{styles/rainette.css}" type="text/css" />
 </head>
-<body>
+<body style="color: #000000;font-family: Arial,Helvetica,sans-serif;font-size: 11px;margin: auto;width: 640px;">
 	<span style="float: left; margin-right: 20px;">
 		<img height="32" width="32" title="Plugin Rainette" alt="Plugin Rainette" src="plugins/rainette/rainette-64.png"/>
 	</span>
 	<h1 style="margin-bottom: 20px; color: #798F74;">PLUGIN RAINETTE</h1>
-	<div class="rainette" id="FRXX0023">
+	<div id="#ENV{ville, FR00XX76}">
 		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_infos</strong></p>
-		[(#MODELE{rainette_infos,code=FRXX0023,sous_modele=infos_ville})]
+		[(#MODELE{rainette_infos,code=#ENV{ville, FR00XX76},sous_modele=infos_ville})]
 		<br clear="all"/><br /><br />
 		<p style="font-size: 12px;width: 500px">&gt;&gt;&nbsp;Utilisation de la balise <strong>RAINETTE_INFOS</strong></p>
 		<ul>
-			<li>Ville observ&eacute;e:&nbsp;<strong>#RAINETTE_INFOS{frxx0076, VILLE}</strong></li>
- 			<li>Longitude, appel sans filtre unit&eacute;:&nbsp;<strong>#RAINETTE_INFOS{frxx0023, longitude}</strong></li>
-			<li>Latitude, appel avec filtre unit&eacute;:&nbsp;<strong>[(#RAINETTE_INFOS{frxx0023, latitude}|rainette_afficher_unite{angle})]</strong></li>
-			<li>Appel sans type d'info pr&eacute;cis&eacute;e, on renvoie le tableau s&eacute;rialis&eacute;:&nbsp;<strong>[(#RAINETTE_INFOS{FRXX0023})]</strong></li>
+			<li>Ville observ&eacute;e:&nbsp;<strong>#RAINETTE_INFOS{#ENV{ville, FR00XX76}, VILLE}</strong></li>
+ 			<li>Longitude, appel sans filtre unit&eacute;:&nbsp;<strong>#RAINETTE_INFOS{#ENV{ville, FR00XX76}, longitude}</strong></li>
+			<li>Latitude, appel avec filtre unit&eacute;:&nbsp;<strong>[(#RAINETTE_INFOS{#ENV{ville, FR00XX76}, latitude}|rainette_afficher_unite{angle})]</strong></li>
+			<li>Appel sans type d'info pr&eacute;cis&eacute;e, on renvoie le tableau s&eacute;rialis&eacute;:&nbsp;<strong>[(#RAINETTE_INFOS{#ENV{ville, FR00XX76}})]</strong></li>
 			<li>Appel sans argument, on renvoie une chaine vide:&nbsp;<strong>[(#RAINETTE_INFOS)]</strong></li>
 		</ul>
 		<br clear="all"/><br /><br />
 		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_conditions</strong></p>
-		[(#MODELE{rainette_conditions,code=FRXX0023,sous_modele=conditions_tempsreel})]
+		[(#MODELE{rainette_conditions,code=#ENV{ville, FR00XX76},sous_modele=conditions_tempsreel})]
 		<br clear="all"/><br /><br />
-		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions, type=1_jour, sous-modele=previsions_2x12h</strong></p>
-		[(#MODELE{rainette_previsions,code=FRXX0023,type=1_jour,jour=0,sous_modele=previsions_2x12h})]
+		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour le jour courant (jour=0, type=1_jour, sous-modele=previsions_2x12h)<br />
+		Avant 14h00 on affiche jour et nuit, apr&egrave;s 14h00 on affiche nuit et le lendemain matin</p>
+ 		[(#MODELE{rainette_previsions,code=#ENV{ville, FR00XX76},type=1_jour,jour=0,sous_modele=previsions_2x12h})]
+		<br clear="all"/><br /><br />
+		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour le surlendemain (jour=2, type=1_jour, sous-modele=previsions_2x12h)s</p>
+ 		[(#MODELE{rainette_previsions,code=#ENV{ville, FR00XX76},type=1_jour,jour=2,sous_modele=previsions_2x12h})]
 		<br clear="all"/><br /><br />
 		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions x jours</strong></p>
-		[(#MODELE{rainette_previsions,code=FRXX0023,type=x_jours,jour=5,sous_modele=previsions_24h})]
-	</div>
+<!-- 		[(#MODELE{rainette_previsions,code=#ENV{ville, FR00XX76},type=x_jours,jour=5,sous_modele=previsions_24h})]
+ -->	</div>
 </body>
 </html>

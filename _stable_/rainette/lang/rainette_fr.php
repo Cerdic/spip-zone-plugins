@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Libelles inclus dans les modeles
 	'meteo' => 'm&eacute;t&eacute;o',
-	'meteo_previsions' => 'pr&eacute;visions',
+	'meteo_previsions' => 'pr&eacute;visions du',
 	'meteo_conditions' => 'conditions actuelles',
 	'valeur_indeterminee' => 'N/D',
 	'temperature_ressentie' => 'ressentie',
