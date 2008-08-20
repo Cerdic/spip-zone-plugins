@@ -4,7 +4,7 @@ define('_DIR_PLUGIN_OPENPUBLISHING',(_DIR_PLUGINS.end($p)));
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-if (version_compare($GLOBALS['spip_version_code'], '1.9300', '<')
+if (version_compare($GLOBALS['spip_version_code'], '1.9300', '<'))
 	include_spip('inc/compat_op');
 
 // si les extra de la table que l'on veut etendre sont vide faut creer le tableau
