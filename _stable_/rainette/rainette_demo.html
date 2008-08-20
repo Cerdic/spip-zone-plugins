@@ -17,10 +17,10 @@
 		<p style="font-size: 12px;width: 500px">&gt;&gt;&nbsp;Utilisation de la balise <strong>RAINETTE_INFOS</strong></p>
 		<ul>
 			<li>Ville observ&eacute;e:&nbsp;<strong>#RAINETTE_INFOS{#ENV{ville, FR00XX76}, VILLE}</strong></li>
- 			<li>Longitude, appel sans filtre unit&eacute;:&nbsp;<strong>#RAINETTE_INFOS{#ENV{ville, FR00XX76}, longitude}</strong></li>
-			<li>Latitude, appel avec filtre unit&eacute;:&nbsp;<strong>[(#RAINETTE_INFOS{#ENV{ville, FR00XX76}, latitude}|rainette_afficher_unite{angle})]</strong></li>
-			<li>Appel sans type d'info pr&eacute;cis&eacute;e, on renvoie le tableau s&eacute;rialis&eacute;:&nbsp;<strong>[(#RAINETTE_INFOS{#ENV{ville, FR00XX76}})]</strong></li>
-			<li>Appel sans argument, on renvoie une chaine vide:&nbsp;<strong>[(#RAINETTE_INFOS)]</strong></li>
+ 			<li>Longitude, appel sans filtre unit&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#ENV{ville, FR00XX76}, longitude})</strong>]</li>
+			<li>Latitude, appel avec filtre unit&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#ENV{ville, FR00XX76}, latitude}|rainette_afficher_unite{angle})</strong>]</li>
+			<li>Appel sans type d'info pr&eacute;cis&eacute;e, on renvoie le tableau s&eacute;rialis&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#ENV{ville, FR00XX76}})</strong>]</li>
+			<li>Appel sans argument, on renvoie une chaine vide:&nbsp;[<strong>(#RAINETTE_INFOS)</strong>]</li>
 		</ul>
 		<br clear="all"/><br /><br />
 		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_conditions</strong></p>
