@@ -17,7 +17,7 @@
     <description>
 Permet de faire rapidment des citation de la bible (de Jérsualem pour le moment seulement).
 		
-Ex : <code><bible|passage=Gn1,2-2,1)</code> citera la Gen&egrave;se du chapitre 1, verset 2 au chapitre 2, verset 1 inclu.
+Ex : <code><bible|passage=Gn1,2-2,1></code> citera la Gen&egrave;se du chapitre 1, verset 2 au chapitre 2, verset 1 inclu.
 		
 On peut passer des options au mod&eacute;le. La valeur des options est "non" ou "oui", sauf pour traduction.
 	
