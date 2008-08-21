@@ -12,7 +12,7 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 	
 	$petit_livre=array('Ab','Phm','2jn','3jn','Jude');
 	foreach ($petit_livre as $i){
-		if (strtolower($i)==strtolower($livre));{
+		if (strtolower($i)==strtolower($livre)){
 			$petit=true;
 			$verset_debut=$chapitre_debut;
 			$verset_fin=$chapitre_fin;
@@ -110,6 +110,7 @@ function recuperer_passage_dans_livre($debut,$fin,$livre,$code){
 	$i=$debut+1;
 	
 	while ($i<$fin){
+		
 		$code=str_replace($i.'-',$i.' </sup>',$code);
 		$i++;
 	}
