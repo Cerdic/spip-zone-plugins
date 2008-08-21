@@ -17,6 +17,11 @@ function spipmotion_editer_contenu_objet($flux){
 	return $flux['data'];
 }
 
+function spipmotion_taches_generales_cron($taches_generales){
+	$taches_generales['spipmotion_file'] = 60 * 1; // toutes les 30 minutes
+	return $taches_generales;
+}
+
 function spipmotion_post_edition($flux){
 	$id_document = $flux['args']['id_objet'];
 	if($flux['args']['operation'] == 'ajouter_document'){
