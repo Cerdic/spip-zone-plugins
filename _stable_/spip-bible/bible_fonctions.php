@@ -51,7 +51,7 @@ function bible_install($action){
 function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$ref='non'){
 	
 	//liste de slivre sous gateway (à completer)
-	$bible_gateway=array('kg'=>9);
+	$bible_gateway=array('kj'=>9);
 	
 	
 	foreach ($bible_gateway as $i=>$j){
@@ -69,7 +69,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 		global $livres_fr;
 		$livres = $livres_fr;
 		}	
-	if ($traduction=='rsv' or $traduction=='kg'){
+	if ($traduction=='rsv' or $traduction=='kj'){
 		global $livres_en;
 		
 		$livres = $livres_en;
