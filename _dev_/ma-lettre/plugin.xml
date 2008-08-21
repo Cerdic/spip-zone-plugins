@@ -19,8 +19,8 @@ _ &copy; 2006-2008 - Distribu&eacute; sous licence GNU/GPL
 	</multi>
 	</description>
 	<lien>
-	[Documentation (&agrave; venir)->???] 
-  et si vous avez [Configuration->.?exec=cfg&amp;cfg=malettre]
+	[Documentation->http://www.spip-contrib.net/Plugin-Ma-lettre] 
+  et si vous avez [Config (dfg)->.?exec=cfg&amp;cfg=malettre]
 	</lien>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
