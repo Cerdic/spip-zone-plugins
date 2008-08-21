@@ -33,7 +33,7 @@
 	[(#REM) essai h.12/11/07 .. forums du secteur (racine) c:15/4/8 a condition qu'on soit dans le secteur non ? ]
 	[(#REM) c: 12/7/8 ... oui mais pas nécessaire d'avoir des sous rubriques pour qu'ils s'affichent dans ce cas ]
 
-	<BOUCLE_forum_secteur(ARTICLES){id_rubrique}{par num titre}>
+	<BOUCLE_forum_secteur(ARTICLES){id_rubrique=#_primale:RUBRIQUE}{par num titre}>
 		<tr class="ligne_forum">
 [(#MODELE{ligne_voir_forum}{id_article}{id_rub_primale=#_primale:ID_RUBRIQUE})]
 		</tr>
