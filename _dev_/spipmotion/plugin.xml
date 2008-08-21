@@ -40,5 +40,6 @@
 		<action>post_edition</action>
 		<inclure>spipmotion_pipelines.php</inclure>
 	</pipeline>
+	<install>base/spipmotion_upgrade.php</install>
 	<chemin dir='' />
 </plugin>
