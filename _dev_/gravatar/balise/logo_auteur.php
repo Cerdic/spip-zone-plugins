@@ -36,24 +36,33 @@ function gravatar($email) {
 	OR !email_valide($email))
 		return '';
 
+	$tmp = sous_repertoire(_DIR_VAR, 'cache-gravatar');
+
 	$md5_email = md5(strtolower($email));
-	$gravatar_cache = sous_repertoire(_DIR_VAR, 'cache-gravatar')
-		.$md5_email.'.jpg';
+	$gravatar_cache = $tmp.$md5_email.'.jpg';
 
 	if (!file_exists($gravatar_cache)
 	OR time()-3600*24 > filemtime($gravatar_cache)) {
-		if ($gravatar
-		= recuperer_page('http://www.gravatar.com/avatar/'.$md5_email)
-		// ceci est le hash du gravatar bleu moche par defaut : on l'ignore
-		AND md5($gravatar) !== '2bd0ca9726695502d06e2b11bf4ed555') {
-			spip_log('gravatar ok pour '.$email);
-			ecrire_fichier($gravatar_cache, $gravatar);
-		} else
-			ecrire_fichier($gravatar_cache, '');
+		lire_fichier($tmp.'vides.txt', $vides);
+		$vides = @unserialize($vides);
+		if (!isset($vides[$md5_email])
+		OR time()-$vides[$md5_email] > 3600*8) {
+
+			if ($gravatar
+			= recuperer_page('http://www.gravatar.com/avatar/'.$md5_email)
+			// ceci est le hash du gravatar bleu moche par defaut : on l'ignore
+			AND md5($gravatar) !== '2bd0ca9726695502d06e2b11bf4ed555') {
+				spip_log('gravatar ok pour '.$email);
+				ecrire_fichier($gravatar_cache, $gravatar);
+			} else {
+				$vides[$md5_email] = time();
+				ecrire_fichier($tmp.'vides.txt', serialize($vides));
+			}
+		}
 	}
 
 	// On verifie si le gravatar existe en controlant la taille du fichier
-	if (filesize($gravatar_cache))
+	if (@filesize($gravatar_cache))
 		return $gravatar_cache;
 	else
 		return '';
