@@ -51,11 +51,17 @@ function bible_install($action){
 function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$ref='non'){
 	
 	//liste de slivre sous gateway (à completer)
-	$bible_gateway=array(
+	$bible_gateway=array('kg'=>9);
 	
 	
-	);
+	foreach ($bible_gateway as $i=>$j){
+		if ($traduction==$i){
+		$gateway = true;
+		$id_gateway=$j;
+		break;
+		}
 	
+	}
 	
 	
 	//choix des abréviations de livre
@@ -64,8 +70,9 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 		$livres = $livres_fr;
 		}	
 	if ($traduction=='rsv' or $traduction=='kg'){
-		global $livre_en;
-		$livres = $livre_en;
+		global $livres_en;
+		
+		$livres = $livres_en;
 	
 	}
 	
@@ -95,6 +102,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	
 	//on cherche le livre
 	foreach ($livres as $livre){
+		
 		if (eregi($livre,$debut)){
 			
 			$livre = $livre;
@@ -134,12 +142,17 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	
 	//}
 	
+	if ($gateway){
+		include_spip('traduction/gateway');
+		$texte = '<quote>'.recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$id_gateway);
 	
-	include_spip('traduction/'.$traduction);
+	}
 	
+	else{
 	
-	$texte = '<quote>'.recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin);
-	
+		include_spip('traduction/'.$traduction);
+		$texte = '<quote>'.recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin);
+	}
 	//les options du modèles
 	if ($numeros=='non'){
 		$texte = eregi_replace('<sup>[0-9]+ </sup>','',$texte);
