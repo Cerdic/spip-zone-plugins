@@ -8,7 +8,7 @@
 [(#ENV{index}|=={0}|?{'',' '})
 	[(#SET{titre_max, <:rainette:temperature_max:>})]
 	[(#SET{code_icone, #ENV{code_icone_jour}})]
-	[(#SET{temperature_max, #ENV{temperature_jour}})]
+	[(#SET{temperature_max, #ENV{temperature_jour}|rainette_afficher_unite{temperature}})]
 	[(#SET{temperature_min, #ENV{temperature_nuit}})]
 	[(#SET{vitesse_vent, #ENV{vitesse_vent_jour}})]
 	[(#SET{risque_precipitation, #ENV{risque_precipitation_jour}})]
@@ -17,7 +17,7 @@
 	[(#ENV{temperature_jour}|=={N/D}|?{'',' '})
 		[(#SET{titre_max, <:rainette:temperature_max:>})]
 		[(#SET{code_icone, #ENV{code_icone_jour}})]
-		[(#SET{temperature_max, #ENV{temperature_jour}})]
+		[(#SET{temperature_max, #ENV{temperature_jour}|rainette_afficher_unite{temperature}})]
 		[(#SET{temperature_min, #ENV{temperature_nuit}})]
 		[(#SET{vitesse_vent, #ENV{vitesse_vent_jour}})]
 		[(#SET{risque_precipitation, #ENV{risque_precipitation_jour}})]
@@ -41,7 +41,7 @@
 		</div>
 		<div class="t_reelle">
 			[(#GET{titre_max}|ucfirst)]
-			[&nbsp;(#GET{temperature_max}|rainette_afficher_unite{temperature})]<br/>
+			[&nbsp;(#GET{temperature_max})]<br/>
 			<:rainette:temperature_min|ucfirst:>
 			[&nbsp;(#GET{temperature_min}|rainette_afficher_unite{temperature})]<br/>
 		</div>

@@ -14,8 +14,12 @@ soit via la balise {{RAINETTE_INFOS}}. Consulter le fichier {rainette_demo.html}
 Il est possible de personnaliser les icones du temps en d&eacute;posant vos images {numero.png} dans le sous-dossier rainette/ de votre dossier squelette ou plugin !
 _ Cf le site [->http://liquidweather.net/icons.php] pour des jeux d'icones vari&eacute;s...
 	</description>
+	<prefix>rainette</prefix>
 	<icon>rainette-64.png</icon>
 	<fonctions>rainette_fonctions.php</fonctions>
 	<options>rainette_options.php</options>
-	<prefix>rainette</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>rainette_pipelines.php</inclure>
+	</pipeline>
 </plugin>

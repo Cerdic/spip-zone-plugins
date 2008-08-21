@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'coucher_soleil' => 'coucher du soleil',
 
 	// Liste des resumes meteo
+	'meteo_0'	=> 'Pluie',
 	'meteo_1'	=> 'Pluie',
 	'meteo_2'	=> 'Pluie',
 	'meteo_3'	=> 'Orage',
