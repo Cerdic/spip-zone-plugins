@@ -18,7 +18,7 @@ function balise_GRAVATAR_stat($args, $filtres) {
 
 function balise_GRAVATAR_dyn($email, $size, $gravatar_default) {
 	include_spip('inc/distant');
-	$md5_email = md5($email);
+	$md5_email = md5(strtolower($email));
 	$gravatar_cache = sous_repertoire(_DIR_VAR, 'cache-gravatar').$md5_email;
 
 	if(!file_exists($gravatar_cache) OR time()-3600*24 > filemtime($gravatar_cache)) {
