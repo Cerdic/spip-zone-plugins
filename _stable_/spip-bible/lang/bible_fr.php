@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'Lv'=>'L&eacute;vitique',
 	'Nb'=>'Nombres',
 	'Dt'=>'Deut&eacute;ronome',
+	'Jos'=>'Josu&eacute;',
 	'Jg'=>'Juges',
 	'1S'=>'1 Samuel',
 	'2S'=>'2 Samuel',

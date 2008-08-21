@@ -3,6 +3,22 @@
 Maïeul Rouquette Licence GPL 3
 Spip-Bible
 */
+$livres_fr = array ('Gn','Ex','Lv','Nb','Dt',
+	'Jg','1S','2S','1R','2R','1Ch','2Ch','Esd','Ne','1M','2M',
+	'Is','Es','Jr','Ez','Os','Jl','Am','Ab','Jon','Mi','Na','So','Ag','Za','Ml','Dn',
+	'Jb','Pr','Qo','Ct','Rt','Lm','Est','Tb','Jdt','Ba','Sg','Si','Ps',
+	'Mt','Lc','Jn','Mc',
+	'Ac',
+	'Ro','1Co','2Co','Ga','Ep','Col','1Th','2Th','1Tm','2Tm','Tt','Phm','He',
+	'Jc','1P','2P','1Jn','2Jn','3Jn','Jude','Ap','Ph','Jos'
+	);
+
+$livres_en = array (
+	'1Chr','1Cor','1Jn','1Mc','1Pt','1Kgs','1Sm','1Thes','2Tm','1Chr','2Cor','2Jn','2Mac','2Pt','2Kgs','2Sm','2Thes','2Tm','3Jn','Hb','Ob','Hg','Am','Ap','Act','Bar','Sg','Col','Dn','Dt','Heb','Eccl','Eph','Esd','Est','Ex','Ez','Phlm','Phil','Ga','Jer','Jas','Jb','Jl','Jon','Jn','Jude','Jdt','Is','Jgs','Jo','Lam','Lk','Lv','Mal','Mk','Mt','Mi','Na','Neh','Nm','Hos','Prv','Rom','Ru','Ps','Ws','Sir','Zep','Ti','Tb','Zec'
+
+	);
+
+
 
 function bible_install($action){
 	
@@ -33,16 +49,26 @@ function bible_install($action){
 
 
 function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$ref='non'){
-		
-	$livres = array ('Gn','Ex','Lv','Nb','Dt',
-	'Jg','1S','2S','1R','2R','1Ch','2Ch','Esd','Ne','1M','2M',
-	'Is','Es','Jr','Ez','Os','Jl','Am','Ab','Jon','Mi','Na','So','Ag','Za','Ml','Dn',
-	'Jb','Pr','Qo','Ct','Rt','Lm','Est','Tb','Jdt','Ba','Sg','Si','Ps',
-	'Mt','Lc','Jn','Mc',
-	'Ac',
-	'Ro','1Co','2Co','Ga','Ep','Col','1Th','2Th','1Tm','2Tm','Tt','Phm','He',
-	'Jc','1P','2P','1Jn','2Jn','3Jn','Jude','Ap','Ph'
+	
+	//liste de slivre sous gateway (à completer)
+	$bible_gateway=array(
+	
+	
 	);
+	
+	
+	
+	//choix des abréviations de livre
+	if ($traduction=='jerusalem'){
+		global $livre_fr;
+		$livre = $livre_fr;
+		}	
+	if ($traduction=='rsv' or $traduction=='kg'){
+		global $livre_en;
+		$livre = $livre_en;
+	
+	}
+	
 	
 	// phase d'anaylse
 	
