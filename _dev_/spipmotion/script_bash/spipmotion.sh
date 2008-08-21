@@ -139,6 +139,6 @@ fi
 ############# ON UTILISE FFMPEG ################
 
 echo "ah$chemin"
-"$chemin" -i $entree -acodec libmp3lame -f flv -s $size -b $bitrate.kb -ab $audiobitrate -ar $audiofreq -r $fps -y $sortie
+nice "$chemin" -i $entree -acodec libmp3lame -f flv -s $size -b $bitrate.kb -ab $audiobitrate -ar $audiofreq -r $fps -y $sortie
 
 echo "$succes"
