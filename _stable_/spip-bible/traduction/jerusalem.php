@@ -102,10 +102,11 @@ function recuperer_passage_dans_livre($debut,$fin,$livre,$code){
 	$ex2 = $livre.'&nbsp;'.$fin.'-';
 	
 	$tableau=explode($ex1,$code);
+	
 	$code = '<sup>'.$debut.' </sup>'.$tableau[1];
 	$tableau=explode($ex2,$code);
 	$code=$tableau[0];
-	$code=str_replace($livre,'<sup>',$code);
+	$code=str_replace($livre.'&nbsp;','<sup>',$code);
 	
 	$i=$debut+1;
 	
