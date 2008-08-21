@@ -49,6 +49,23 @@ function bible_install($action){
 
 
 function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$ref='non'){
+	$traduction = strtolower($traduction);
+	$erreur = true;
+	$liste_des_traductions= array('jerusalem','kj');
+	foreach ($liste_des_traductions as $i){
+		if ($traduction == $i){
+		
+		$erreur = false;
+		break;
+		}
+	
+	}
+	
+	if ($erreur) { 
+		return _T('bible:traduction_pas_dispo');
+	}
+
+	
 	
 	//liste de slivre sous gateway (à completer)
 	$bible_gateway=array('kj'=>9);
@@ -71,7 +88,6 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 		}	
 	if ($traduction=='rsv' or $traduction=='kj'){
 		global $livres_en;
-		
 		$livres = $livres_en;
 	
 	}
