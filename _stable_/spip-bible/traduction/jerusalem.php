@@ -9,6 +9,7 @@ Module "Bible de Jérusalem"
 
 function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapitre_fin='',$verset_fin=''){
 	//recuperer le passage dans la bible de Jérusalem
+
 	
 	$petit_livre=array('Ab','Phm','2jn','3jn','Jude');
 	foreach ($petit_livre as $i){
@@ -28,10 +29,11 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 	$i = $chapitre_debut; 
 	
 	while ($i<=$chapitre_fin){
-	
+		
 		include_spip("inc/distant");
 		include_spip("inc/charsets");
 		$code = importer_charset(recuperer_page($url_base.strtolower($livre).$i.'.html'),'iso-8859-1');
+		
 		//epuration du code
 		$tableau=explode('</head>',$code);
 		$code=$tableau[1];
@@ -61,6 +63,7 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 		
 	
 	}
+	
 	return $texte;
 }
 	

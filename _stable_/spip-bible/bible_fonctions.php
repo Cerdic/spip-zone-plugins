@@ -3,22 +3,6 @@
 Maïeul Rouquette Licence GPL 3
 Spip-Bible
 */
-$livres_fr = array ('Gn','Ex','Lv','Nb','Dt',
-	'Jg','1S','2S','1R','2R','1Ch','2Ch','Esd','Ne','1M','2M',
-	'Is','Es','Jr','Ez','Os','Jl','Am','Ab','Jon','Mi','Na','So','Ag','Za','Ml','Dn',
-	'Jb','Pr','Qo','Ct','Rt','Lm','Est','Tb','Jdt','Ba','Sg','Si','Ps',
-	'Mt','Lc','Jn','Mc',
-	'Ac',
-	'Ro','1Co','2Co','Ga','Ep','Col','1Th','2Th','1Tm','2Tm','Tt','Phm','He',
-	'Jc','1P','2P','1Jn','2Jn','3Jn','Jude','Ap','Ph','Jos'
-	);
-
-$livres_en = array ('Gn',
-	'1Chr','1Cor','1Jn','1Mc','1Pt','1Kgs','1Sm','1Thes','2Tm','1Chr','2Cor','2Jn','2Mac','2Pt','2Kgs','2Sm','2Thes','2Tm','3Jn','Hb','Ob','Hg','Am','Ap','Act','Bar','Sg','Col','Dn','Dt','Heb','Eccl','Eph','Esd','Est','Ex','Ez','Phlm','Phil','Ga','Jer','Jas','Jb','Jl','Jon','Jn','Jude','Jdt','Is','Jgs','Jo','Lam','Lk','Lv','Mal','Mk','Mt','Mi','Na','Neh','Nm','Hos','Prv','Rom','Ru','Ps','Ws','Sir','Zep','Ti','Tb','Zec'
-
-	);
-
-
 
 function bible_install($action){
 	
@@ -47,50 +31,33 @@ function bible_install($action){
 	}
 }
 
+include_spip('inc/bible_tableau');
+
 
 function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$ref='non'){
+	$verset_debut = '';
+	global $tableau_traduction;
+	global $tableau_separateur;
+	global $tableau_livres;
+	global $spip_lang;
 	$traduction = strtolower($traduction);
+	
 	$erreur = true;
-	$liste_des_traductions= array('jerusalem','kj');
-	foreach ($liste_des_traductions as $i){
-		if ($traduction == $i){
+	
+	if (array_key_exists($traduction,$tableau_traduction)){$erreur = false;};
 		
-		$erreur = false;
-		break;
-		}
-	
-	}
-	
 	if ($erreur) { 
 		return _T('bible:traduction_pas_dispo');
 	}
-
 	
 	
-	//liste de slivre sous gateway (à completer)
-	$bible_gateway=array('kj'=>9);
+	
+	$gateway = $tableau_traduction[$traduction]['gateway'];
+	$lang = $tableau_traduction[$traduction]['lang'];
+	$livres =  $tableau_livres[$lang];
+	$separateur = $tableau_separateur[$lang];
 	
 	
-	foreach ($bible_gateway as $i=>$j){
-		if ($traduction==$i){
-		$gateway = true;
-		$id_gateway=$j;
-		break;
-		}
-	
-	}
-	
-	
-	//choix des abréviations de livre
-	if ($traduction=='jerusalem'){
-		global $livres_fr;
-		$livres = $livres_fr;
-		}	
-	if ($traduction=='rsv' or $traduction=='kj'){
-		global $livres_en;
-		$livres = $livres_en;
-	
-	}
 	
 	
 	// phase d'anaylse
@@ -115,19 +82,16 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 		
 	$debut = $tableau[0];
 	
+	$livre = eregi_replace('[0-9]+','',$debut);
 	
-	//on cherche le livre
-	foreach ($livres as $livre){
-		
-		if (eregi($livre,$debut)){
-			
-			$livre = $livre;
-			$debut = eregi_replace($livre,'',$debut);
-			break;
-		
-		
-		}
+	if (array_key_exists($livre,$livres) == false){
+		return _T('pas_livre');
+	
 	};
+	
+	$debut = eregi_replace($livre,'',$debut);
+	
+	
 	$livre=='Es' and $traduction=='jerusalem' ? $livre = 'Is' : $livre = 'Es'; // gestion Isaïe/Esaïe
 	
 	//chercher chapitre et verset du début
@@ -143,9 +107,8 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 		
 	
 		}
-	$chapitre_debut  = $tableau[0];
-	
-	
+	$chapitre_debut  = $tableau[0];	
+		
 	
 	// si reference courte
 	if ($chapitre_fin==''){$chapitre_fin=$chapitre_debut;};
@@ -159,9 +122,10 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	//}
 	
 	if ($gateway){
+		
 		include_spip('traduction/gateway');
-		$texte = '<quote>'.recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$id_gateway);
-	
+		$texte = '<quote>'.recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$gateway,$lang);
+		
 	}
 	
 	else{
@@ -169,6 +133,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 		include_spip('traduction/'.$traduction);
 		$texte = '<quote>'.recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin);
 	}
+	
 	//les options du modèles
 	if ($numeros=='non'){
 		$texte = eregi_replace('<sup>[0-9]+ </sup>','',$texte);
@@ -182,32 +147,40 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	}
 	
 	if ($ref!='non'){
-		$texte .= afficher_references($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$traduction);
+		$texte .= afficher_references($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$traduction,$separateur);
 		}
-	
-	return ($texte.'</quote>');
-	
+	if ($spip_lang == $lang) {
+		return $texte.'</quote>';
+		}
+	else
+		{return '<div lang="'.$lang.'">'.$texte.'</quote></div>';
+	}
 }
 
-function afficher_references($livre,$cd,$vd,$cf,$vf,$trad){
-	$livre_long = _T('bible:'.$livre);
+function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur){
+	global $tableau_traduction;
+	global $tableau_livres;
+	$trad = $tableau_traduction[$trad]['traduction'];
+	
+	$livre_long = $tableau_livres[$tableau_traduction[$traduction]['lang']] ;
+	
 	$livre = str_replace('1','1 ',$livre);
 	$livre = str_replace('2','2 ',$livre);
 	$livre = str_replace('3','3 ',$livre);
 	
 	if ($cd==$cf and $vd=='' and $vf==''){
-		return '<p><accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd;
+		return '<p><accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.' (<i>'.$trad.'</i>)';
 	
 	}
 	
 	if ($vd=='' and $vf==''){
-		return '<p><accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.'-'.$cf.' (<i>'._T('bible:'.$trad).'</i>)</p>';
+		return '<p><accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.'-'.$cf.' (<i>'.$trad.'</i>)</p>';
 	
 	}
 	
 	
 	
-	$chaine = '<p><accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.', '.$vd;
+	$chaine = '<p><accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.$separateur.$vd;
 	
 	if ($cd!=$cf){
 		$chaine .= '-'.$cf.', '.$vf;
@@ -218,12 +191,15 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad){
 		
 	}
 	
-	$chaine.= ' (<i>'._T('bible:'.$trad).'</i>)';
+	$chaine.= ' (<i>'.$trad.'</i>)';
 	
 	return $chaine.'</p>';
 
 }
-
-
-
+function traduction_longue($fictif,$i){
+	//$fictif ne sert à rien, mais c'est pour ne aps à avoir a faire appel à #VAL (car existe pas <2.0)
+	global  $tableau_traduction;
+	return $tableau_traduction[$i]['traduction'];
+	}
+	
 ?>

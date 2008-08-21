@@ -10,8 +10,11 @@
 			<li>
 					<label for="traduction"><:bible:cfg_traduction:></label>
 					<select name="traduction"  id="traduction">
-						<option value="jerusalem" [selected="(#ENV{traduction})"]>
-						<:bible:jerusalem:>
+						<option value="jerusalem" [selected="(#ENV{traduction}|=={kj})"]>
+						[(#ENV|traduction_longue{jerusalem})]
+						</option>
+						<option value="kj" [selected="(#ENV{traduction}|=={kj})"]>
+						[(#ENV|traduction_longue{kj})]
 						</option>
 					</select>
 				
