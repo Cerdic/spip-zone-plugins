@@ -40,11 +40,11 @@ Choisissez dans quelles rubriques activer le plugin.
 						<BOUCLE_r1(RUBRIQUES){racine}{par num titre}>
 						<option value=''></option>
 						<optgroup label="<:gis:secteur:> [(#TITRE|couper{40})]">
-							<option value="#ID_RUBRIQUE"[(#ENV{rubrique_cible}|=={#ID_RUBRIQUE}|oui) selected='selected']>[(#TITRE|couper{40})] (<:gis:racine:>)</option>
+							<option value="#ID_RUBRIQUE"[(#ENV{rubrique_cible}|=={#ID_RUBRIQUE}|?{' selected="selected"'})]>[(#TITRE|couper{40})] (<:gis:racine:>)</option>
 							<B_r2>
 							<option value="" class='mysteric_hr' disabled='disabled'><:gis:ou_choisir:></option>
 							<BOUCLE_r2(RUBRIQUES){id_parent}{par num titre}>
-								<option value="#ID_RUBRIQUE"[(#ENV{rubrique_cible}|=={#ID_RUBRIQUE}|oui) selected='selected']>[(#TITRE|couper{40})]</option>
+								<option value="#ID_RUBRIQUE"[(#ENV{rubrique_cible}|=={#ID_RUBRIQUE}|?{' selected="selected"'})]>[(#TITRE|couper{40})]</option>
 							</BOUCLE_r2>
 						</optgroup>
 						</BOUCLE_r1>
@@ -54,12 +54,12 @@ Choisissez dans quelles rubriques activer le plugin.
 					<label for="statut"><:gis:info_statut_articles:></label>
 					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{statut})</span>]
 					<select name="statut">
-						<option value='prepa'[(#ENV{statut}|=={prepa}|oui) selected='selected']>En cours de rédaction</option>
-						<option value='prop'[(#ENV{statut}|=={prop}|oui) selected='selected']>Proposé</option>
-						<option value='publie'[(#ENV{statut}|=={publie}|oui) selected='selected']>Publié</option>
+						<option value='prepa'[(#ENV{statut}|=={prepa}|?{' selected="selected"'})]>En cours de rédaction</option>
+						<option value='prop'[(#ENV{statut}|=={prop}|?{' selected="selected"'})]>Proposé</option>
+						<option value='publie'[(#ENV{statut}|=={publie}|?{' selected="selected"'})]>Publié</option>
 					</select>
 				</li>
-				<li class="editer_formats_documents[ (#ENV**{erreurs}|table_valeur{formats_documents}|oui)erreur]">
+				<li class="editer_formats_documents[ (#ENV**{erreurs}|table_valeur{formats_documents}|?{'erreur'})]">
 					<label for="formats_documents"><:gis:info_formats_documents:></label>
 					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{formats_documents})</span>]
 					<p class="explications"><:gis:texte_formats_documents:></p>
