@@ -60,12 +60,12 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	
 	//choix des abréviations de livre
 	if ($traduction=='jerusalem'){
-		global $livre_fr;
-		$livre = $livre_fr;
+		global $livres_fr;
+		$livres = $livres_fr;
 		}	
 	if ($traduction=='rsv' or $traduction=='kg'){
 		global $livre_en;
-		$livre = $livre_en;
+		$livres = $livre_en;
 	
 	}
 	
