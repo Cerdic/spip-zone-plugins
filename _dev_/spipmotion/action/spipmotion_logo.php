@@ -34,21 +34,23 @@ function action_infos_video_post($r){
 	$mode= 'vignette';
 	spip_log("id_document=$id_document");
 	spip_log("type=$type");
-	$document = sql_fetsel("docs.id_document,docs.extension,docs.fichier,docs.taille,docs.mode", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
-	$chemin = $document['fichier'];
-	$movie = get_spip_doc($chemin);
-	spip_log("on travail sur $movie","spipmotion");	
+	$document = sql_fetsel("docs.id_document,docs.fichier", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
+	$chemin_court = $document['fichier'];
+	$chemin = get_spip_doc($chemin_court);
+	spip_log("on travail sur $chemin","spipmotion");	
 	
-	$movie = @new ffmpeg_movie($movie, 0);
-	$string = "$id-$type-$id_document";
-	$query = md5($string);
-	$dossier = _DIR_VAR;
-	$fichier = "$dossier$query.jpg";
+	$movie = new ffmpeg_movie($chemin,0);
 	
-	$frame = $movie->getFrame(100);
-	$img = $frame->toGDImage();
-	imagejpeg($img, $fichier);
-	$img_finale = $fichier;
+	$string_temp = "$id-$type-$id_document";
+	$query = md5($string_temp);
+	$dossier_temp = _DIR_VAR;
+	$fichier_temp = "$dossier_temp$query.jpg";
+	spip_log("fichier temporaire = $fichier_temp","spipmotion");	
+	
+	$frame1 = $movie->getFrame(200);
+	$img_temp = $frame1->toGDImage();
+	imagejpeg($img_temp, $fichier_temp);
+	$img_finale = $fichier_temp;
 	$mode = 'vignette';
 	
 	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
@@ -59,7 +61,7 @@ function action_infos_video_post($r){
 	$x = $ajouter_documents($img_finale, $img_finale, 
 			    $type, $id, $mode, $id_document, $actifs);
 	
-	imagedestroy($img);
+	imagedestroy($img_temp);
 	unlink($img_finale);
 	
 	// un invalideur a la hussarde qui doit marcher au moins pour article, breve, rubrique
