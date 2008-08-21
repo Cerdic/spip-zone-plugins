@@ -15,14 +15,15 @@ include_spip('inc/actions'); // *action_auteur et determine_upload
 
 function inc_infos_videos_dist($id, $id_document,$type) {
 	global $connect_id_auteur, $connect_statut;
-	$script = _request('exec');
 	$texte = _T('spipmotion:recuperer_logo');
 	$texte2 = _T('spipmotion:recuperer_infos');
+	$script = $type.'s';
+	$redirect =  generer_url_ecrire($script,"id_$type=$id&show_docs=$id_document#documenter");
 	
 	// Inspire de inc/legender
 	if (test_espace_prive()){
-		$action = ajax_action_auteur('spipmotion_logo', "$id/$type/$id_document", $script, "id_$type=$id&type=$type", array($texte));
-		$action2 = ajax_action_auteur('spipmotion_infos', "$id/$type/$id_document", $script, "id_$type=$id&type=$type", array($texte2));
+		$action = ajax_action_auteur('spipmotion_logo', "$id/$type/$id_document", $script, "id_$type=$id&type=$type&show_docs=$id_document&spipmotion=$id_document#spipmotion-$id_document", array($texte));
+		$action2 = ajax_action_auteur('spipmotion_infos', "$id/$type/$id_document", $script, "id_$type=$id&type=$type&show_docs=$id_document&spipmotion=$id_document#spipmotion-$id_document", array($texte2));
 	}
 	else{
 		$redirect = str_replace('&amp;','&',$script);
@@ -31,18 +32,9 @@ function inc_infos_videos_dist($id, $id_document,$type) {
 		$action2 = generer_action_auteur('spipmotion_infos', "$id/$type/$id_document", $redirect);
 		$action2 = "<a href='$action2'>$texte2</a>";
 	}
-	$corps = icone_horizontale($texte, $action, $supp, "supprimer.gif", false);
-	$corps .= icone_horizontale($texte2, $action2, $supp, "supprimer.gif", false);
-	$corps = block_parfois_visible("spipmotion_logo-aff-$id_document", sinon($texte,_T('info_sans_titre')), $corps, "text-align:center;", $flag);
+	$corps = icone_horizontale($texte, $action, $supp, "creer.gif", false);
+	$corps .= icone_horizontale($texte2, $action2, $supp, "creer.gif", false);
 
-	return ajax_action_greffe("spipmotion_logo", $id_document, $corps);
-	
-	// Ajouter le formulaire d'encodage de videos
-	$res =  generer_action_auteur('spipmotion_logo',
-		(intval($id).'/'.intval($id_document).'/'.$type),
-		(!test_espace_prive())?$v['script']:generer_url_ecrire('documenter', 'id_article='.$id.'&type='.$type, true),
-		"$iframe$debut$res$dir_ftp$distant$fin",
-		" method='post' enctype='multipart/form-data' class='spipmotion'");
-	return $res;
+	return ajax_action_greffe("spipmotion", $id_document, $corps);
 }
 ?>
