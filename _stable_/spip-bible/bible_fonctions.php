@@ -13,7 +13,7 @@ $livres_fr = array ('Gn','Ex','Lv','Nb','Dt',
 	'Jc','1P','2P','1Jn','2Jn','3Jn','Jude','Ap','Ph','Jos'
 	);
 
-$livres_en = array (
+$livres_en = array ('Gn',
 	'1Chr','1Cor','1Jn','1Mc','1Pt','1Kgs','1Sm','1Thes','2Tm','1Chr','2Cor','2Jn','2Mac','2Pt','2Kgs','2Sm','2Thes','2Tm','3Jn','Hb','Ob','Hg','Am','Ap','Act','Bar','Sg','Col','Dn','Dt','Heb','Eccl','Eph','Esd','Est','Ex','Ez','Phlm','Phil','Ga','Jer','Jas','Jb','Jl','Jon','Jn','Jude','Jdt','Is','Jgs','Jo','Lam','Lk','Lv','Mal','Mk','Mt','Mi','Na','Neh','Nm','Hos','Prv','Rom','Ru','Ps','Ws','Sir','Zep','Ti','Tb','Zec'
 
 	);
