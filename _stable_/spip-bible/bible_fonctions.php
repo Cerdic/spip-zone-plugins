@@ -140,10 +140,17 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad){
 	$livre = str_replace('2','2 ',$livre);
 	$livre = str_replace('3','3 ',$livre);
 	
+	if ($cd==$cf and $vd=='' and $vf==''){
+		return '<p><accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd;
+	
+	}
+	
 	if ($vd=='' and $vf==''){
 		return '<p><accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.'-'.$cf.' (<i>'._T('bible:'.$trad).'</i>)</p>';
 	
 	}
+	
+	
 	
 	$chaine = '<p><accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.', '.$vd;
 	
