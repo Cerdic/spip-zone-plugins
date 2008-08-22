@@ -15,7 +15,7 @@ function bible_install($action){
 				ecrire_config('bible/retour','oui');
 				ecrire_config('bible/ref','oui');
 				ecrire_config('bible/traduction_fr','jerusalem');
-				ecrire_config('bible/traduction_en','jerusalem');
+				ecrire_config('bible/traduction_en','kj');
 				}
 			break;
 			
@@ -26,6 +26,8 @@ function bible_install($action){
 				effacer_config('bible/retour');
 				effacer_config('bible/ref');
 				effacer_config('bible/traduction');
+				effacer_config('bible/traduction_fr');
+				effacer_config('bible/traduction_en');
 			}
 			break;
 			
