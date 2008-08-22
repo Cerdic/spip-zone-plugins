@@ -1,6 +1,6 @@
-<?php
+<?php 
 
-// balise/imageflow_args.php
+// base/ImageFlow_init.php
 
 	/*****************************************************
 	Copyright (C) 2008 Christian PAULUS
@@ -43,38 +43,76 @@
 	59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.
 	
 	*****************************************************/
-
+	
 // $LastChangedRevision$
 // $LastChangedBy$
 // $LastChangedDate$
 
-if(!defined("_ECRIRE_INC_VERSION")) return;	#securite
+///////////////////////////////////////
+// A chaque appel de exec/admin_plugin, si le plugin est active', 
+// spip de'tecte ImageFlow_install() et l'appelle 3 fois :
+// 1/ $action = 'test'
+// 2/ $action = 'install'
+// 3/ $action = 'test'
+// 
 
+include_spip('base/abstract_sql');
+include_spip('inc/utils');
 include_spip('inc/imageflow_api_globales');
 
-// Balise independante du contexte
+function imageflow_install ($action) {
 
-
-// insert les arguments pour reflect.php
-// A placer dans votre squelette, sur l'URL de l'image appelée
-function balise_IMAGEFLOW_ARGS ($p) {
-	
-	$preferences_meta = imageflow_get_all_preferences();
-	$preferences_default = unserialize(_IMAGEFLOW_PREFERENCES_DEFAULT);
-	
-	foreach($preferences_meta as $key => $value) {
-		if($key == 'img') continue;
-		if(empty($value)) {
-			$value = $preferences_default[$key];
-		}
-		//$insert .= "&amp;" . $key . "=" . rawurlencode($value);
-		$insert .= "&" . $key . "=" . rawurlencode($value);
+	switch($action) {
+		case 'test':
+			// si renvoie true, c'est que la base est a` jour, inutile de re-installer
+			// la valise plugin "effacer tout" apparait.
+			// si renvoie false, SPIP revient avec $action = 'install' (une seule fois)
+			$result = isset($GLOBALS['meta'][_IMAGEFLOW_META_PREFERENCES]);
+			imageflow_log("TEST meta:", $result);
+			return($result);
+			break;
+		case 'install':
+			if(!($result = isset($GLOBALS['meta'][_IMAGEFLOW_META_PREFERENCES]))) {
+				// cree les preferences par defaut
+				$result = imageflow_set_all_preferences();
+				imageflow_log("CREATE meta:" . _IMAGEFLOW_META_PREFERENCES);
+			}
+			if(!$result) {
+				// nota: SPIP ne filtre pas le resultat. Si retour en erreur,
+				// la case a cocher du plugin sera quand meme cochee
+				imageflow_log("PLEASE REINSTALL PLUGIN");
+			}
+			else {
+				// invite de configuration si installation OK
+				echo(_T('imageflow:imageflow_aide_install'
+					, array('url_config' => generer_url_ecrire("imageflow_configure"))
+					));
+			}
+			imageflow_log("INSTALL:", $result);
+			return($result);
+			break;
+		case 'uninstall':
+			// est appellé lorsque "Effacer tout" dans exec=admin_plugin
+			$result = imageflow_vider_tables();
+			imageflow_log("UNINSTALL:", $result);
+			return($result);
+			break;
+		default:
+			break;
 	}
-
-	$p->code = "'".$insert."'";
-	$p->interdire_scripts = false;
-	
-	return($p);
 }
+
+
+// effacer les metas (prefs, etc.)
+function imageflow_vider_tables () {
+
+	effacer_meta(_IMAGEFLOW_META_PREFERENCES);
+	imageflow_log("DELETE meta", $result);
+	
+	// recharge les metas en cache 
+	imageflow_ecrire_metas();
+	
+	return(true);
+} //
 
 ?>

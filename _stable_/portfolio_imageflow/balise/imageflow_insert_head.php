@@ -44,9 +44,9 @@
 	
 	*****************************************************/
 	
-// $LastChangedRevision: 20912 $
-// $LastChangedBy: paladin@quesaco.org $
-// $LastChangedDate: 2008-06-09 20:05:56 +0200 (lun., 09 juin 2008) $
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
 
 if(!defined("_ECRIRE_INC_VERSION")) return;	#securite
 

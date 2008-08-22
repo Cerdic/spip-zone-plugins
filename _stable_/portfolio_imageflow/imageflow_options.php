@@ -1,6 +1,6 @@
 <?php
 
-// balise/imageflow_args.php
+// imageflow_options.php
 
 	/*****************************************************
 	Copyright (C) 2008 Christian PAULUS
@@ -48,33 +48,39 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
-if(!defined("_ECRIRE_INC_VERSION")) return;	#securite
+include_spip("inc/plugin_globales_lib");
 
-include_spip('inc/imageflow_api_globales');
+/*
+ * Option debug, à n'activer qu'en dev.
+ * Permet d'avoir le journal "tmp/imageflow_log" 
+ * */
+define("_IMAGEFLOW_DEBUG", false);
 
-// Balise independante du contexte
+define("_IMAGEFLOW_PREFIX", "imageflow");
 
-
-// insert les arguments pour reflect.php
-// A placer dans votre squelette, sur l'URL de l'image appelée
-function balise_IMAGEFLOW_ARGS ($p) {
-	
-	$preferences_meta = imageflow_get_all_preferences();
-	$preferences_default = unserialize(_IMAGEFLOW_PREFERENCES_DEFAULT);
-	
-	foreach($preferences_meta as $key => $value) {
-		if($key == 'img') continue;
-		if(empty($value)) {
-			$value = $preferences_default[$key];
-		}
-		//$insert .= "&amp;" . $key . "=" . rawurlencode($value);
-		$insert .= "&" . $key . "=" . rawurlencode($value);
-	}
-
-	$p->code = "'".$insert."'";
-	$p->interdire_scripts = false;
-	
-	return($p);
+if(!defined('_DIR_PLUGIN_IMAGEFLOW')) {
+	$p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	define('_DIR_PLUGIN_IMAGEFLOW',(_DIR_PLUGINS.end($p)).'/');
 }
+
+define("_DIR_IMAGEFLOW_IMAGES", _DIR_PLUGIN_IMAGEFLOW."images/");
+
+define("_IMAGEFLOW_PREFERENCES_DEFAULT", 
+	serialize(
+		array(
+			'img' => "" // required	The source image (to reflect)
+			, 'height' => "50%" // optional	Height of the reflection (% or pixel value)
+			, 'bgc' => "#000" // optional	Background colour to fade into, default = #000000
+			, 'fade_start' => "80%" // optional    Start the alpha fade from whch value? (% value)
+			, 'fade_end' => "0%" // optional    End the alpha fade from whch value? (% value)
+			// jpeg index obsolète de reflect_2
+			//, 'jpeg' => "90"" // v2 :: optional	Output will be JPEG at 'param' quality (default 90)
+			, 'tint' => "#7F7F7F" // v3 :: optional    Tint the reflection with this colour (hex)
+			//, 'cache' => 1 // optional    Save reflection image to the cache? (boolean)
+		)
+	)
+);
+
+define("_IMAGEFLOW_META_PREFERENCES", 'imageflow_preferences');
 
 ?>

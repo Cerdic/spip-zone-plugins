@@ -1,0 +1,23 @@
+
+// $LastChangedRevision: 20912 $
+// $LastChangedBy: paladin@quesaco.org $
+// $LastChangedDate: 2008-06-09 20:05:56 +0200 (lun., 09 juin 2008) $
+
+
+Ce répertoire contient 
+- la distribution originale des scripts distribués par Stéphane Kus.
+- la version 3 de reflect.php par Richard Davey.
+
+Les divers scripts ont une licence d'utilisation spécifique.
+
+A consulter :
+- Documentation complémentaire sur http://www.quesaco.org/Portfolio-ImageFlow-pour-SPIP
+- Spip-contrib : http://www.spip-contrib.net/ImageFlow-pour-SPIP
+- ImageFlow 0.9 : http://194.95.111.244/~countzero/scripts/_myImageFlow/
+- DragonFly : http://194.95.111.244/~countzero/myCMS/index.php?tag=ImageFlow
+- Easy Reflections : http://reflection.corephp.co.uk/v3.php
+
+Corrections apportées à reflect_v3 :
+- mise en commentaire de la ligne 82 (ne trouvait pas son image, erreur de chemin)
+- insertion en 355 du code permettant d'afficher l'image source (v3 n'affiche que l'ombre)
+
