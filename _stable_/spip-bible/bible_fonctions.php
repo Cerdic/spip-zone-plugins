@@ -14,7 +14,8 @@ function bible_install($action){
 				ecrire_config('bible/numeros','oui');
 				ecrire_config('bible/retour','oui');
 				ecrire_config('bible/ref','oui');
-				ecrire_config('bible/traduction','jerusalem');
+				ecrire_config('bible/traduction_fr','jerusalem');
+				ecrire_config('bible/traduction_en','jerusalem');
 				}
 			break;
 			
@@ -201,5 +202,10 @@ function traduction_longue($fictif,$i){
 	global  $tableau_traduction;
 	return $tableau_traduction[$i]['traduction'];
 	}
-	
+function traduction_defaut($lang){
+	$normal =  lire_config('bible/traduction_'.$lang);
+	//pour compatibilite
+	$normal ='' ? $lire_config =lire_config('bible/traduction') : $normal = $normal;
+	return $normal;
+}	
 ?>

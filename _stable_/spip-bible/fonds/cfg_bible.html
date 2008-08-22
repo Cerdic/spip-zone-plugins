@@ -8,19 +8,24 @@
 	<ul>
 	<div id="explication"><bible:cfg_explication:></div>
 			<li>
-					<label for="traduction"><:bible:cfg_traduction:></label>
-					<select name="traduction"  id="traduction">
-						<option value="jerusalem" [selected="(#ENV{traduction}|=={kj})"]>
+					<label for="traduction_fr"><:bible:cfg_traduction_fr:></label>
+					<select name="traduction_fr"  id="traduction_fr">
+						<option value="jerusalem" [selected="(#ENV{traduction_fr}|=={kj})"]>
 						[(#ENV|traduction_longue{jerusalem})]
 						</option>
-						<option value="kj" [selected="(#ENV{traduction}|=={kj})"]>
-						[(#ENV|traduction_longue{kj})]
-						</option>
+						
 					</select>
 				
 			</li>
-			
-			
+			<li>
+				
+				<label for="traduction_en"><:bible:cfg_traduction_en:></label>
+				<select name="traduction_en"  id="traduction_en">
+					<option value="kj" [selected="(#ENV{traduction_en}|=={kj})"]>
+							[(#ENV|traduction_longue{kj})]
+					</option>
+				</select>
+			</li>
 			<li>
 					<label for="numeros"><:bible:cfg_numeros:></label>
 					<input type="checkbox" name="numeros"  id="numeros" [checked="(#ENV{numeros})"]  value="oui" />
