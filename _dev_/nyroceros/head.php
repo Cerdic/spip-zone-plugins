@@ -41,7 +41,7 @@ $("'.$config['selecteur_galerie'].'", this)
 $("'.$config['selecteur_commun'].'").nyroModal({bgColor: "'.$config['bgcolor'].'"});
 
 '
-. ($config['preload'] == 'non')
+. (($config['preload'] == 'non')
   ? ''
   : '
   // preload images
