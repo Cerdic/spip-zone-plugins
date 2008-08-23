@@ -26,11 +26,17 @@ function encodage($source,$attente){
 	$chemin = get_spip_doc($source['fichier']);
 
 	// Calcul de la hauteur en fonction de la largeur souhaitée et de la taille de la video originale	
-	$width_finale = 480;
 	$width = $source['largeur'];
-	
 	$height = $source['hauteur'];
-	$height_finale = $source['hauteur']/($source['largeur']/$width_finale);
+	$width_finale = lire_config('spipmotion/width') ? lire_config('spipmotion/width') : 480;
+	
+	if($width<$width_finale){
+		$width_finale = $width;
+		$height_finale = $height;
+	}
+	else{
+		$height_finale = $source['hauteur']/($source['largeur']/$width_finale);
+	}
 	
 	spip_log("document original ($chemin) = $width/$height - document final = $width_finale/$height_finale");
 	
