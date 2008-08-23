@@ -9,3 +9,5 @@
 - Ajouter en page de configuration un bouton pour reinitialiser
 - Intégrer la fonction image_degrade() en filtre SPIP pour conformité système de cache
 - Ajouter possibilité d'une boite image finale style imagebox http://interface.eyecon.ro/demos/imagebox.html (proposer le choix, soit image en ligne, dans la page, soit imagebox)
+- 'longdesc' doit être un lien vers la description de l'image. Utilisé ici pour transmettre une variable via javascript. A corriger.
+- Revoir également 'alt' et 'title' (IE affiche title, FF alt, ou l'inverse, à vérifier)
