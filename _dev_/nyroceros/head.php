@@ -5,13 +5,13 @@ function Nyro_insert_head($flux){
 	$config = @unserialize($GLOBALS['meta']['nyroceros']);
 	if (!is_array($config))
 		$config = array();
-	$config = array_merge($config, array(
+	$config = array_merge(array(
 		'traiter_toutes_images' => 'oui',
 		'selecteur_galerie' => '#documents_portfolio .nyroceros',
 		'selecteur_commun' => '.nyroceros',
 		'bgcolor' => '#000000',
 		'preload' => 'oui'
-	));
+	), $config);
 
 	$flux .='
 <script src=\''.url_absolue(find_in_path('js/jquery.nyroModal-1.2.8.js')).'\' type=\'text/javascript\'></script>
