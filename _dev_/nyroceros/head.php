@@ -28,7 +28,7 @@ if ($config['traiter_toutes_images'] == 'oui') {
 $("a[@type=\'image/jpeg\'],a[@type=\'image/png\'],a[@type=\'image/gif\']",this)
 .addClass("nyroceros") // noter qu\'on l\'a vue
 .attr("onclick","") // se debarrasser du onclick de SPIP
-.nyroModal(); // activer le nyro
+.nyroModal({bgColor: "'.$config['bgcolor'].'"}); // activer le nyro
 ';
 }
 
