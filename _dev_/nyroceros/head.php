@@ -2,6 +2,16 @@
 
 function Nyro_insert_head($flux){
 	include_spip("inc/filtres");
+	$config = @unserialize($GLOBALS['meta']['nyroceros']);
+	if (!is_array($config))
+		$config = array();
+	$config = array_merge($config, array(
+		'traiter_toutes_images' => 'oui',
+		'selecteur_galerie' => '#documents_portfolio .nyroceros',
+		'selecteur_commun' => '.nyroceros',
+		'bgcolor' => '#000000',
+		'preload' => 'oui'
+	));
 
 	$flux .='
 <script src=\''.url_absolue(find_in_path('js/jquery.nyroModal-1.2.8.js')).'\' type=\'text/javascript\'></script>
@@ -12,7 +22,7 @@ if (window.jQuery)
 (function($){
 var init_f = function() {';
 
-if (lire_config('nyroceros/traiter_toutes_images','oui')=='oui') {
+if ($config['traiter_toutes_images'] == 'oui') {
 	$flux .='
 // selectionner tous les liens vers des images
 $("a[@type=\'image/jpeg\'],a[@type=\'image/png\'],a[@type=\'image/gif\']",this)
@@ -24,14 +34,14 @@ $("a[@type=\'image/jpeg\'],a[@type=\'image/png\'],a[@type=\'image/gif\']",this)
 
 $flux .= '
 // passer le portfolio en mode galerie de nyro
-$("'.lire_config('nyroceros/selecteur_galerie','#documents_portfolio .nyroceros').'", this)
+$("'.$config['selecteur_galerie'].'", this)
 .attr("rel","galerie-portfolio");
 
 // charger nyro sur autre chose
-$("'.lire_config('nyroceros/selecteur_commun','.nyroceros').'").nyroModal({bgColor: "'.lire_config('nyroceros/bgcolor','#000000').'"});
+$("'.$config['selecteur_commun'].'").nyroModal({bgColor: "'.$config['bgcolor'].'"});
 
 '
-. ((lire_config('nyroceros/preload') == 'non')
+. ($config['preload'] == 'non')
   ? ''
   : '
   // preload images

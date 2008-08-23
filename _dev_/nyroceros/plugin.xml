@@ -8,12 +8,12 @@ _ Mis en plugin par SmeL, b_b et mis en marche par Fil :-)
 	<icon>nyroceros.png</icon>
 	<etat>dev</etat>
 	<description>
-	A lister car &ccedil;a fait pas mal de chose
+Fen&#234;tre de dialogue ou de galerie photo
 _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
 	</description>
 	<lien>http://nyromodal.nyrodev.com/indexFr.php</lien>
 	<prefix>Nyro</prefix>
-	<necessite id="cfg" version="[1.9.4;]" />
+	<utilise id="cfg" version="[1.9.4;]" />
 	<utilise id="palette" version="[1.0;]" />
 	<pipeline>
 		<nom>insert_head</nom>
