@@ -65,9 +65,9 @@ function atelier_explorer($prefixe,$id_projet,$type,$opendir,$nom_page) {
 		array_multisort($lignes,SORT_STRING);
 		arsort($lignes);
 		$titre = $dir;
-		include_spip('inc/atelier_svn');
-		if (atelier_verifier_projet_svn($prefixe))
-			$titre = $dir . ' [COPIE DE TRAVAIL]';
+//		include_spip('inc/atelier_svn');
+//		if (atelier_verifier_projet_svn($prefixe))
+//			$titre = $dir . ' [COPIE DE TRAVAIL]';
 		
 		$id = 'e'.substr(md5(_DIR_PLUGINS.$prefixe.'/'.$dir),0,8);
 		atelier_cadre_depliable($titre,"Explorateur",$lignes,$id);

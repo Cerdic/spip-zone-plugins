@@ -53,7 +53,9 @@ function projets($id_projet,$row,$rapport='',$opendir='') {
 
 	atelier_debut_gauche();
 
-		atelier_cadre_raccourcis();
+		atelier_cadre_raccourcis(array(
+			'<a href="'.generer_url_ecrire('atelier').'">'._T('atelier:retour_atelier').'</a>'
+		));
 
 		$actions = array();
 		$actions[] = '<a href="'.generer_url_ecrire('projets_edit','id_projet='.$id_projet).'">'._T('atelier:modifier_projet').'</a>';

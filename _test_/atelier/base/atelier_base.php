@@ -39,7 +39,8 @@ $projets = array(
   "descriptif"			=> "text NOT NULL",
   "type"			=> "ENUM('plugin', 'squelette') NOT NULL DEFAULT 'plugin'",
   "prefixe"			=> "text NOT NULL",
-  "versions"			=> "LONGTEXT NULL DEFAULT NULL"
+  "versions"			=> "LONGTEXT NULL DEFAULT NULL",
+  "visibilite"			=> "ENUM('prive, 'public') NOT NULL DEFAULT 'public'"
 
 );
                     

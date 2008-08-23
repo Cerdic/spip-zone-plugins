@@ -44,7 +44,7 @@ function bugs($id_bug,$row) {
 	$nom_page = atelier_debut_page(_T('atelier:titre_bugs'),'bugs');
 	if (!atelier_autoriser()) exit;
 
-	atelier_debut_gauche($nom_page);
+	atelier_debut_gauche();
 		atelier_cadre_raccourcis(array(
 			'<a href="'.generer_url_ecrire('projets','id_projet='.$row['id_projet']).'">'._T('atelier:revenir_projet').'</a>'
 		));
@@ -56,7 +56,8 @@ function bugs($id_bug,$row) {
 
 		atelier_cadre_infos();
 
-	atelier_debut_droite($nom_page);
+	atelier_fin_gauche();
+	atelier_debut_droite();
 
 		echo debut_cadre_trait_couleur('',true);
 		echo gros_titre($row['id_bug'].' - '. $row['titre'],'',false);
@@ -70,7 +71,7 @@ function bugs($id_bug,$row) {
 
 		echo fin_cadre_trait_couleur(true);
 
-	atelier_fin_gauche();
+	atelier_fin_droite();
 	atelier_fin_page();
 }
 ?>

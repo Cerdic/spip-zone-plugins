@@ -166,7 +166,7 @@ function cadre_atelier($titre,$lignes) {
 	echo fin_cadre_trait_couleur(true);
 }
 
-function atelier_cadre_infos($documentation) {
+function atelier_cadre_infos($documentation='') {
 	include_spip('inc/plugin');
 	$info = plugin_get_infos('atelier');
 
@@ -193,10 +193,9 @@ function atelier_cadre_fichiers_temp() {
 	));
 }
 
-function atelier_cadre_raccourcis($autres='') {
-	$liens = array();
-	if (is_array($autres)) foreach($autres as $autre) array_push(&$liens,$autre);
-	cadre_atelier(_T('atelier:raccourcis'), $liens);
+function atelier_cadre_raccourcis($liens='') {
+	if (is_array($liens)) cadre_atelier(_T('atelier:raccourcis'), $liens);
+	else return;
 }
 
 function atelier_debut_cadre_form() {

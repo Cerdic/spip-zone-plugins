@@ -48,14 +48,18 @@ function atelier($id_projet,$row,$defaut,$rapport='') {
 	include_spip('inc/atelier_svn');
 
 	$nom_page = atelier_debut_page(_T('atelier:page_principale'),'atelier');
-	if (!atelier_autoriser()) exit;
+//	if (!atelier_autoriser()) echo "vous devez avoir le statut d'administrateur"; exit;
 
 	// verifier si les bases existent
 	include_spip('inc/atelier_installer_base');
 	$verifier_base = atelier_verifier_base();
 
+	include_spip('inc/plugin');
 	include_spip('inc/spipversion');
-	$verifier_subversion = spipversion_verifier_subversion();
+	$spipversion = plugin_get_infos('spipversion');
+	if (isset($spipversion['erreur'][0])){
+		$verifier_subversion = spipversion_verifier_subversion();
+	}
 
 	atelier_debut_gauche();
 

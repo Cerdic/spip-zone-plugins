@@ -44,12 +44,13 @@ function bugs_edit($id_bug,$new,$row) {
 	$nom_page = atelier_debut_page(_T('atelier:titre_bugs_edit'),'bugs_edit');
 	if (!atelier_autoriser()) exit;
 
-	atelier_debut_gauche($nom_page);
+	atelier_debut_gauche();
 
 		atelier_cadre_raccourcis();
 		atelier_cadre_infos();
 
-	atelier_debut_droite($nom_page);
+	atelier_fin_gauche();
+	atelier_debut_droite();
 
 		atelier_debut_cadre_form();
 		echo _T('atelier:modifier_bug') .'&nbsp;:<br />'.gros_titre($row['titre'],'',false);
@@ -57,7 +58,7 @@ function bugs_edit($id_bug,$new,$row) {
 		echo $editer_bug($new, $id_bug, $row);
 		atelier_fin_cadre_form();
 
-	atelier_fin_gauche();
+	atelier_fin_droite();
 	atelier_fin_page();
 }
 ?>
