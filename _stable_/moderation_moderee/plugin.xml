@@ -12,7 +12,7 @@
 		1
 	</version>
 	<etat>
-		dev
+		stable
 	</etat>
 	<description>
 		Ce plugin permet aux utilisateurs des forums publics configur&eacute;s {apriori}, qui sont enregsitr&eacute;s et logu&eacute;s en tant que visiteur r&eacute;dacteur ou admin, de ne pas subir ce type de modération. Leur commentaire est automatiquement valid&eacute; sans qu'il y ait une action de la part d'un mod&eacute;rateur des forums depuis l'espace priv&eacute;e.<br />
