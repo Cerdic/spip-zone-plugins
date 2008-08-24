@@ -1,0 +1,31 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Social tags
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	phil@yaquoi.com
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+	Active les r&eacute;seaux sociaux de partage de liens.
+
+	[Configuration par CFG->./index.php?exec=cfg&amp;cfg=socialtags]
+	</description>
+	<prefix>
+	socialtags
+	</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>socialtags_fonctions.php</inclure>
+	</pipeline>
+
+	<necessite id='cfg' version='[0;]' />
+	<necessite id='spip' version='[1.9.3;]' />
+
+</plugin>
