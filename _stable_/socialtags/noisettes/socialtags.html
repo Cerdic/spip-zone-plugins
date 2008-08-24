@@ -1,0 +1,14 @@
+<B_article>
+<div class="socialtags">
+<ul>
+<BOUCLE_article(ARTICLES){id_article}>
+
+	[(#CONFIG{socialtags/digg}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_digg}|parametre_url{'url',[(#URL_ARTICLE|url_absolue)]}|parametre_url{'title',[(#TITRE|texte_script)]})]" title="Digg"><img src="[(#CHEMIN{images/digg.png})]" title="Digg" alt="Digg" class="socialtags-hovers"></a></li>,''})]
+	
+	[(#CONFIG{socialtags/delicious}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_delicious}|parametre_url{'url',[(#URL_ARTICLE|url_absolue)]}|parametre_url{'title',[(#TITRE|texte_script)]})]" title="Digg"><img src="[(#CHEMIN{images/delicious.png})]" title="Del.icio.us" alt="Del.icio.us" class="socialtags-hovers"></a></li>,''})]
+
+	[(#CONFIG{socialtags/facebook}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_facebook}|parametre_url{'u',[(#URL_ARTICLE|url_absolue)]})]" title="Digg"><img src="[(#CHEMIN{images/facebook.png})]" title="Facebook" alt="Facebook" class="socialtags-hovers"></a></li>,''})]
+</BOUCLE_article>
+</ul>
+</div>
+</B_article>

@@ -8,7 +8,7 @@ if (!defined('_DIR_PLUGIN_SOCIALTAGS')){ // defini automatiquement par SPIP 1.9.
 // ajout feuille de stylle
 //
 function socialtags_insert_head($flux){
-  $flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_SOCIALTAGS.'/socialtags.css" />\n';   
+  $flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_SOCIALTAGS.'/socialtags.css" />';   
   return $flux;
 }
 
