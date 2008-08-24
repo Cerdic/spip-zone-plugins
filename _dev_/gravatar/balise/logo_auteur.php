@@ -31,6 +31,18 @@ function calcule_logo_ou_gravatar($email) {
 	return $c;
 }
 
+function gravatar_verifier_index($tmp) {
+var_dump($tmp);
+	if (!file_exists($tmp.'index.php'))
+		ecrire_fichier ($tmp.'index.php', <<< EOF
+<?php
+	foreach(glob('./*.jpg') as \$i)
+		echo "<img src='\$i' />\n";
+?>
+EOF
+		);
+}
+
 function gravatar($email) {
 	static $nb=10; // ne pas en charger plus de 10 par tour si on peut eviter
 
@@ -65,6 +77,8 @@ function gravatar($email) {
 				$vides[$md5_email] = time();
 				ecrire_fichier($tmp.'vides.txt', serialize($vides));
 			}
+
+			gravatar_verifier_index($tmp);
 		}
 	}
 
