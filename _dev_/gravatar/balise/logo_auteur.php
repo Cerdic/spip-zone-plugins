@@ -32,7 +32,6 @@ function calcule_logo_ou_gravatar($email) {
 }
 
 function gravatar_verifier_index($tmp) {
-var_dump($tmp);
 	if (!file_exists($tmp.'index.php'))
 		ecrire_fichier ($tmp.'index.php', <<< EOF
 <?php
