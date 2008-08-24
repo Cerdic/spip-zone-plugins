@@ -29,6 +29,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'verifier_droits' => 'V&eacute;rifiez les droits du fichier "script_bash/spipmotion.sh". Les droits sur ce fichier doivent &ecirc;tre en 777.',
 	'encodage_en_cours' => 'ENCODAGE EN COURS ...',
 	
+	'video_infos_techniques' => 'Informations techniques...',
+	'video_duree' => 'Dur&eacute;e : ',
+	'video_framecount' => 'Nombre de frames : ',
+	'video_framerate' =>'Framerate : ',
+	'video_pixelformat' =>'Format de pixel : ',
+	'video_bitrate' => 'Bitrate total : ',
+	'video_videobitrate' => 'Bitrate vid&eacute;o : ',
+	'video_audiobitrate' => 'Bitrate audio : ',
+	'video_audiosamplerate' => 'Fr&eacute;quence d\'&eacute;chantillonnage audio : ',
+	'video_videocodec' => 'Codec vid&eacute;o : ',
+	'video_audiocodec' => 'Codec audio : ',
+	'video_audiochannels' => 'Nombres de channels audios : ',
+	
 	'recuperer_logo' => 'R&eacute;cup&eacute;rer un logo depuis la video',
 	'zzzz' => 'zzzz'
 );
