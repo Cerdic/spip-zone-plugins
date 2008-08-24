@@ -32,6 +32,8 @@ function calcule_logo_ou_gravatar($email) {
 }
 
 function gravatar($email) {
+	static $nb=10; // ne pas en charger plus de 10 par tour si on peut eviter
+
 	if (!strlen($email)
 	OR !email_valide($email))
 		return '';
@@ -42,7 +44,12 @@ function gravatar($email) {
 	$gravatar_cache = $tmp.$md5_email.'.jpg';
 
 	if (!file_exists($gravatar_cache)
-	OR time()-3600*24 > filemtime($gravatar_cache)) {
+	OR (
+		(time()-3600*24 > filemtime($gravatar_cache))
+		AND $nb > 0
+	  )
+	) {
+		$nb--;
 		lire_fichier($tmp.'vides.txt', $vides);
 		$vides = @unserialize($vides);
 		if (!isset($vides[$md5_email])
