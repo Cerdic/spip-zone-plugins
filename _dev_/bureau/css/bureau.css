@@ -1,0 +1,304 @@
+body {
+	margin: 0px;
+	background-color: #F8F7F3;
+}
+
+.gauche {
+	float : left;
+}
+
+.droite {
+	float : right;
+}
+
+.centre {
+	float : center;
+}
+
+
+#page {
+	display: block;
+	width:100%;
+	height:100%;
+}
+
+#barre {
+	height : 30px;
+	background-color : #ccc;
+	border-bottom : 1px solid #aaa;
+	z-index: 100;
+	text-align: left;
+}
+
+#barre hr {
+
+	width : 3px;
+	height : 20px;
+}
+
+#barre-menus {
+	float : left;
+	padding: 0px;
+}
+
+#barre-infos {
+	float : right;
+	padding: 5px;
+}
+
+#barre-infos div.infos {
+	float : left;
+	margin-left: 5px;
+}
+
+#barre-taches {
+	float : left;
+	margin-left : 5px;
+}
+
+#barre-taches div {
+	float : left;
+	border : 1px solid #eee;
+	margin-right : 5px;
+	padding-left : 2px;
+	padding-right : 2px;
+	margin-top : 3px;
+	height : 18px;
+	padding-top : 5px;
+	-moz-border-radius : 5px;
+}
+
+#barre-taches div.passive:hover {
+	background-color : #eee;
+}
+
+#barre-taches div.active {
+	background-color : #ddd;
+}
+
+#barre-taches div.active:hover {
+	background-color : #eee;
+}
+
+#barre-taches a {
+	text-decoration:none;
+	color: #000;
+}
+
+#barre-menus div.menu {
+	float : left;
+	color: #000;
+	width : 80px;
+	margin-right :5px;
+	margin-left :0px;
+	padding-right : 5px;
+}
+
+#barre-menus div.toogle img {
+	border:none;
+	padding: 0px;
+}
+
+#barre-menus div.toogle {
+	cursor : pointer;
+	color: #000;
+	font-size:1em;
+	font-weight:bold;
+	width : 80px;
+	height: 21px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	padding-top : 5px;
+	padding-left: 5px;
+	border: 1px solid #ccc;
+	-moz-border-radius : 5px;
+}
+
+#barre-menus div.toogle:hover {
+	background-color:#739ace;
+	border: 1px solid #eee;
+	color: #fff;
+}
+
+#barre-menus div.contenu {
+	position : relative;
+	z-index : 100;
+	float : left;
+	border-bottom : 1px solid #ccc;
+	border-left : 1px solid #ccc;
+	border-right : 1px solid #ccc;
+	background-color: #eee;
+	text-align: left;
+	width: 150px;
+}
+
+#barre-menus div.contenu a {
+	text-decoration:none;
+	color: #000;
+}
+
+#barre-menus div.contenu div {
+	display: block;
+	padding-left: 5px;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+	cursor: pointer;
+}
+
+#barre-menus div.contenu div:hover {
+	background-color : #739ace;
+	color: #fff;
+	border-top: 1px solid #425d7b;
+	border-bottom: 1px solid #425d7b;
+}
+
+#aspirateur {
+	display:none;
+	height : 0px;
+}
+#bureau {
+	display: block;
+	position:absolute;
+	top : 30px;
+	height : 100%;
+	width :100%;
+	z-index: 0;
+	text-align: left;
+}
+
+#bureau div.fenetre {
+	position:absolute;
+	border : 1px solid #000;
+	background-color: #fff;
+	z-index: 10;
+}
+
+#bureau div.fenetre div.resize {
+	height : 15px;
+	width: 30px;
+	background-color : #eee;
+	float: right;
+	cursor: nw-resize;
+}
+
+#bureau div.fenetre-titre {
+	font-size: 1em;
+	border-top: 1px solid #b5d2ef;
+	border-bottom : 1px solid #000;
+	background-color : #739ace;
+	color: #fff;
+	font-weight: bold;
+	padding :5px;
+	text-align: left;
+}
+
+#bureau div.fenetre.passive {
+	-moz-opacity:0.5;
+	opacity: 0.5;
+	filter:alpha(opacity=50);
+}
+
+#bureau div.fenetre div.fenetre-menu {
+	float : left;
+	position : relative;
+	height : 60px;
+	width: 10px;
+	background-color : #eee;
+	border-top: 1px solid #000;
+	border-bottom :1px solid #000;
+	border-left : 1px solid #000;
+	margin-left : -12px;
+	cursor : pointer;
+}
+#bureau div.fenetre div.fenetre-menu div.contenu-menu {
+	display:none;
+	position : relative;
+	width : 100px;
+	margin-left : -88px;
+	margin-top: -2px;
+	padding : 0px;
+	border-top: 1px solid #000;
+	border-bottom :1px solid #000;
+	border-left : 1px solid #000;
+	border-right : none;
+	height : 63px;
+	min-height : 63px;
+	cursor : normal;
+	background-color : inherit;
+}
+
+#bureau div.drag {
+	cursor:move;
+}
+
+#bureau a.ferme {
+	float:right;
+	padding-left:4px;
+	padding-right:4px;
+
+	margin-top:-1.3em;
+	color:#fff;
+	text-decoration:none;
+}
+
+#bureau a.minimise {
+	float:right;
+	padding-left:4px;
+	padding-right:4px;
+
+	margin-top:-1.3em;
+	color:#fff;
+	text-decoration:none;
+}
+
+#bureau a.maximise {
+	float:right;
+	padding-left:4px;
+	padding-right:4px;
+	margin-top:-1.3em;
+	color:#fff;
+	text-decoration:none;
+}
+
+#bureau div.fenetre div.contenu {
+	border: 2px solid #eee;
+	padding: 5px;
+	font-size: 0.8em;
+	text-align: left;
+	max-width : inherit;
+	max-height : inherit;
+	overflow:auto;
+}
+
+/********************/
+/* Explorateur      */
+/********************/
+
+br.spacer {
+	clear : both;
+}
+
+div.explorateur {
+
+	border : 1px solid #000;
+	padding : 10px;
+
+}
+
+div.icone {
+	float : left;
+	width : 64px;
+	height : 64px;
+	margin : 10px;
+	cursor : pointer;
+	text-align :center;
+}
+
+div.icone a{
+	display : block;
+	width :64px;
+	height : 64px;
+	color : #000;
+	text-decoration : none;
+	font-size : 0.8em;
+}

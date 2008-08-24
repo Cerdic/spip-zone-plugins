@@ -1,0 +1,17 @@
+<plugin>
+	<nom>Spip Bureau</nom>
+	<icon></icon>
+	<version>0.1</version>
+	<auteur>k&#233;vin polez - edd@no-log.org</auteur>
+	<etat>dev</etat>
+	<description></description>
+	<lien>http://www.trevise.org</lien>
+	<options>bureau_options.php</options>
+	<fonctions>bureau_fonctions.php</fonctions>
+	<prefix>bureau</prefix>
+	<chemin dir='' />
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>bureau_pipelines.php</inclure>
+	</pipeline>
+</plugin>
