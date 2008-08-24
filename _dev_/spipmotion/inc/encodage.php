@@ -51,12 +51,14 @@ function encodage($source,$attente){
 	spip_log($lancement_encodage);
 	spip_log("l'encodage est terminé");
 	
+	$fichier_final = substr($fichier,0,-4).'.flv';
+	
 	$mode = 'document';
 	$invalider = true;
 	$type_doc = 'article';
 	
 	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
-	$x = $ajouter_documents($fichier_temp, $fichier_temp, $type_doc, $attente['id_article'], $mode, $id_document, $actifs);
+	$x = $ajouter_documents($fichier_temp, $fichier_final, $type_doc, $attente['id_article'], $mode, $id_document, $actifs);
 	spip_log("on ajoute le nouveau fichier qui devient $x");
 	
 	unlink($fichier_temp);
