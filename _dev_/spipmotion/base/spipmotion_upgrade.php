@@ -1,6 +1,6 @@
 <?php
 	
-	$GLOBALS['spipmotion_base_version'] = 0.2;
+	$GLOBALS['spipmotion_base_version'] = 0.3;
 	function spipmotion_verifier_base(){
 		$version_base = $GLOBALS['spipmotion_base_version'];
 		$current_version = 0.0;
@@ -19,6 +19,21 @@
 				sql_alter("TABLE spip_spipmotion_attentes ADD INDEX ( `id_auteur` )");
 				ecrire_meta('spipmotion_base_version',$current_version=0.2);
 				echo 'Mise &agrave; jour de la base de spipmotion en 0.2';
+			}
+			if ($current_version<0.3){
+				sql_alter("TABLE spip_documents ADD `duree` VARCHAR(255) DEFAULT '' NOT NULL AFTER `hauteur`");
+				sql_alter("TABLE spip_documents ADD `framecount` INTEGER AFTER `duree`");
+				sql_alter("TABLE spip_documents ADD `framerate` INTEGER AFTER `framecount`");
+				sql_alter("TABLE spip_documents ADD `pixelformat` VARCHAR(255) DEFAULT '' NOT NULL AFTER `framerate`");
+				sql_alter("TABLE spip_documents ADD `bitrate` INTEGER AFTER `pixelformat`");
+				sql_alter("TABLE spip_documents ADD `videobitrate` INTEGER AFTER `bitrate`");
+				sql_alter("TABLE spip_documents ADD `audiobitrate` INTEGER AFTER `videobitrate`");
+				sql_alter("TABLE spip_documents ADD `audiosamplerate` INTEGER AFTER `audiobitrate`");
+				sql_alter("TABLE spip_documents ADD `videocodec` VARCHAR(255) DEFAULT '' NOT NULL AFTER `audiosamplerate`");
+				sql_alter("TABLE spip_documents ADD `audiocodec` VARCHAR(255) DEFAULT '' NOT NULL AFTER `videocodec`");
+				sql_alter("TABLE spip_documents ADD `audiochannels` INTEGER AFTER `audiocodec`");
+				ecrire_meta('spipmotion_base_version',$current_version=0.3);
+				echo 'Mise &agrave; jour de la base de spipmotion en 0.3';
 			}
 			ecrire_metas();
 		}
