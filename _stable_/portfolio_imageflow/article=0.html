@@ -67,7 +67,9 @@
 				<img 
 					src="#CHEMIN{imageflow/reflect_v3.php}?img=../../../[(#LOGO_DOCUMENT||extraire_attribut{src})]#IMAGEFLOW_ARGS" 
 					alt="[(#TITRE|couper{80}|texte_backend)]" 
-					longdesc="#URL_DOCUMENT" /> 
+					title="[(#TITRE|couper{80}|texte_backend)]"
+					name="#URL_DOCUMENT"
+					longdesc="#DESCRIPTIF" /> 
 				</BOUCLE_documents_portfolio>
 			</div>
 		
@@ -80,7 +82,7 @@
 		</div>
 		
 		<div class="clear"></div>
-			<img id="affichage" src="" alt="" style="max-height: 384px; max-width: 512px;" /> 
+			<img id="affichage" src="" alt="" style="max-height: 384px; max-width: 512px;"  title="" longdesc="" /> 
 	</div> 
 	<!-- fin docs portfolio -->		
 </B_documents_portfolio>

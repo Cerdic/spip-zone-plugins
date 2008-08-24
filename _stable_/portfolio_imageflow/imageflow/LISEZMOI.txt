@@ -21,3 +21,7 @@ Corrections apportées à reflect_v3 :
 - mise en commentaire de la ligne 82 (ne trouvait pas son image, erreur de chemin)
 - insertion en 355 du code permettant d'afficher l'image source (v3 n'affiche que l'ombre)
 
+Corrections apportées à imageflow.js
+- recopie le title de la vignette sur l'image destination
+- recopie longdesc de la vignette sur l'image destination
+- name de la vignette contient maintenant l'URL du document (pas XHTML strict, mais autre solution ?)
