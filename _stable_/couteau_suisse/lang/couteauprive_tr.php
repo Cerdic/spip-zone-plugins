@@ -202,19 +202,19 @@ _ • [T&uuml;m eklentiyi ba&#351;tan->@reset@]
 </p>',
 
 	// I
-	'icone_visiter:description' => '<NEW>Remplace l\'image du bouton standard &laquo;&nbsp;Visiter&nbsp;&raquo; (en haut &agrave; droite sur cette page)  par le logo du site, s\'il existe.
+	'icone_visiter:description' => 'Standart &laquo;&nbsp;Ziyaret Et&nbsp;&raquo; d&uuml;&#287;mesini (bu sayfan&#305;n sa&#287; &uuml;st&uuml;ndeki) e&#287;er varsa site logosu ile de&#287;i&#351;tirir.
 
-Pour d&eacute;finir ce logo, rendez-vous sur la page &laquo;&nbsp;Configuration du site&nbsp;&raquo; en cliquant sur le bouton &laquo;&nbsp;Configuration&nbsp;&raquo;.',
-	'icone_visiter:nom' => '<NEW>Bouton &laquo;&nbsp;Visiter&nbsp;&raquo;',
-	'insert_head:description' => '<NEW>Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Gr&acirc;ce &agrave; cette option, les plugins pourront ins&eacute;rer du javascript (.js) ou des feuilles de style (.css).',
+Bu logoyu tan&#305;mlamak i&ccedil;in &laquo;&nbsp;Konfig&uuml;rasyon&nbsp;&raquo; d&uuml;&#287;mesine t&#305;klayarak &laquo;&nbsp;Site konfig&uuml;rasyonu&nbsp;&raquo; sayfas&#305;na gidiniz.',
+	'icone_visiter:nom' => '&laquo;&nbsp;Ziyaret Et&nbsp;&raquo; d&uuml;&#287;mesi',
+	'insert_head:description' => '[#INSERT_HEAD->http://www.spip.net/fr_article1902.html] komutunu t&uuml;m iskeletlerde aktif hale getirir (bu komutu &lt;head&gt; ve &lt;/head&gt; aras&#305;nda i&ccedil;erseler de i&ccedil;ermeseler de). Bu se&ccedil;enek sayesinde eklentiler javascript (.js) veya stil sayfas&#305; (.css) ekleyebilirler.',
 	'insert_head:nom' => '#INSERT_HEAD komutu',
-	'insertions:description' => '<NEW>ATTENTION : outil en cours de d&eacute;veloppement !! [[%insertions%]]',
+	'insertions:description' => 'DiKKAT : geli&#351;tirilmekte olan gere&ccedil; !! [[%insertions%]]',
 	'insertions:nom' => 'Otomatik d&uuml;zeltmeler',
 	'introduction:description' => '<MODIF><NEW>Cette balise &agrave; placer dans les squelettes sert en g&eacute;n&eacute;ral &agrave; la une ou dans les rubriques afin de produire un r&eacute;sum&eacute; des articles, des br&egrave;ves, etc..</p>
-<p>{{Attention}} : Avant d\'activer cette fonctionnalit&eacute;, v&eacute;rifiez bien qu\'aucune fonction {balise_INTRODUCTION()} n\'existe d&eacute;j&agrave; dans votre squelette ou vos plugins, la surcharge produirait alors une erreur de compilation.</p>
-@puce@ Vous pouvez pr&eacute;ciser (en pourcentage par rapport &agrave; la valeur utilis&eacute;e par d&eacute;faut) la longueur du texte renvoy&eacute; par balise #INTRODUCTION. Une valeur nulle ou &eacute;gale &agrave; 100 ne modifie pas l\'aspect de l\'introduction et utilise donc les valeurs par d&eacute;faut suivantes : 500 caract&egrave;res pour les articles, 300 pour les br&egrave;ves et 600 pour les forums ou les rubriques.
+<p>{{Dikkat}} : Bu i&#351;levi aktive etmeden &ouml;nce iskeletinizde veya eklentilerinizde hi&ccedil;bir {balise_INTRODUCTION()} fonksiyonunun  olmad&#305;&#287;&#305;ndan emin olun, aksi halde derleme hatas&#305; olu&#351;acakt&#305;r.</p>
+@puce@ #INTRODUCTION komutu taraf&#305;ndan g&ouml;nderilen metnin uzunlu&#287;unu (varsay&#305;lan de&#287;ere g&ouml;re y&uuml;zde olarak) belirtebilirsiniz. Bo&#351; bir de&#287;er veya 100 de&#287;eri metni de&#287;i&#351;tirmeyecektir ve &#351;u varsay&#305;lan de&#287;erleri kullanacakt&#305;r : makaleler i&ccedil;in 500 karakter, k&#305;sa haberler i&ccedil;in 300karakter, forumlar veya ba&#351;l&#305;klar i&ccedil;in 600 karakter.
 [[%lgr_introduction%&nbsp;%]]
-@puce@ Par d&eacute;faut, les points de suite ajout&eacute;s au r&eacute;sultat de la balise #INTRODUCTION si le texte est trop long sont : <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Vous pouvez ici pr&eacute;ciser votre propre cha&icirc;ne de carat&egrave;re indiquant au lecteur que le texte tronqu&eacute; a bien une suite.
+@puce@ E&#287;er metin &ccedil;ok uzunsa, #INTRODUCTION komutuna eklenen varsay&#305;lan &uuml;&ccedil; nokta &#351;&ouml;yledir : <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Burada, metnin kesildi&#287;ini ve devam&#305; oldu&#287;unu siz kendi &ouml;zel karakter zincirinizi kullanarak okuyucular&#305;n&#305;za belirtebilirsiniz.
 [[%suite_introduction%]]
 @puce@ Si la balise #INTRODUCTION est utilis&eacute;e pour r&eacute;sumer un article, alors le Couteau Suisse peut fabriquer un lien hypertexte sur les points de suite d&eacute;finis ci-dessus afin de mener le lecteur vers le texte original. Par exemple : &laquo;Lire la suite de l\'article…&raquo;
 [[%lien_introduction%]]
@@ -244,7 +244,7 @@ Pour d&eacute;finir ce logo, rendez-vous sur la page &laquo;&nbsp;Configuration 
 	'label:insertions' => 'Otomatik d&uuml;zeltmeler :',
 	'label:lgr_introduction' => '&Ouml;zet\'in uzunlu&#287;u :',
 	'label:lgr_sommaire' => '&Ouml;zet\'in b&uuml;y&uuml;kl&uuml;&#287;&uuml; (9 &agrave; 99) :',
-	'label:lien_introduction' => '<NEW>Points de suite cliquables :',
+	'label:lien_introduction' => 'T&#305;klanabilir &uuml;&ccedil; nokta :',
 	'label:liens_interrogation' => '&#350;u URL\'leri koru :',
 	'label:liens_orphelins' => 'T&#305;klanabilir ba&#287;lar :',
 	'label:max_auteurs_page' => 'Bir sayfadaki yazar adedi :',
@@ -267,7 +267,7 @@ Pour d&eacute;finir ce logo, rendez-vous sur la page &laquo;&nbsp;Configuration 
 	'label:spip_script' => '&Ccedil;a&#287;r&#305; script\'i :',
 	'label:style_h' => 'Stiliniz :',
 	'label:style_p' => 'Stiliniz :',
-	'label:suite_introduction' => '<NEW>Points de suite :',
+	'label:suite_introduction' => '&Uuml;&ccedil; nokta  :',
 	'label:terminaison_urls_arbo' => 'URl soyadlar&#305; (&ouml;r : .html) :',
 	'label:titre_travaux' => 'Mesaj&#305;n ba&#351;l&#305;&#287;&#305; :',
 	'label:tri_articles' => 'Se&ccedil;iminiz :',
@@ -292,7 +292,7 @@ _ • {Basique} : sont remplac&eacute;s les liens du type {<html>http://spip.net</
 _ • {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} ou {<html>news:mesnews</html>}.
 [[%liens_orphelins%]]',
 	'liens_orphelins:nom' => 'G&uuml;zel URL\'ler',
-	'log_couteau_suisse:description' => '<NEW>Spip.log dosyalar&#305;na \'&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;\' eklentisinin &ccedil;al&#305;&#351;mas&#305;yla ilgili bir &ccedil;ok bilgi kaydeder. Bu dosyalar &#351;u dizindedir : @_CS_DIR_TMP@',
+	'log_couteau_suisse:description' => '<NEW>Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin \'Le Couteau Suisse\' dans les fichiers spip.log que l\'on peut trouver dans le r&eacute;pertoire : @_CS_DIR_TMP@',
 	'log_couteau_suisse:nom' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;\'n&#305;n detayl&#305; taporu',
 
 	// M
@@ -319,14 +319,14 @@ _ • {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi
 	'outil_intro_old' => 'Bu aray&uuml;z eski.<br /><br />E&#287;er <a href=\'./?exec=admin_couteau_suisse\'>yeni aray&uuml;z</a>\'&uuml;n kullan&#305;m&#305;nda sorunla kar&#351;&#305;la&#351;&#305;rsan&#305;z, bizle <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a> forumunda payla&#351;maktan &ccedil;ekinmeyin.',
 	'outil_nb' => '@pipe@ : @nb@ alet',
 	'outil_nbs' => '@pipe@ : @nb@ alet',
-	'outil_permuter' => '<NEW>Permuter l\'outil : &laquo; @text@ &raquo; ?',
+	'outil_permuter' => '&laquo; @text@ &raquo; gereci de&#287;i&#351;tirilsin mi ?',
 	'outils_actifs' => 'Aktif aletler :',
 	'outils_caches' => 'Sakl&#305; aletler :',
 	'outils_cliquez' => 'Yukar&#305;daki gere&ccedil;lerin a&ccedil;&#305;klamalar&#305;n&#305; g&ouml;rmek i&ccedil;in isimlerine t&#305;klay&#305;n&#305;z.',
 	'outils_inactifs' => '&#304;naktif aletler :',
 	'outils_liste' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305; aletleri listesi ',
 	'outils_permuter_gras1' => 'Koyu yaz&#305;l&#305; aletleri &ccedil;aprazla (Permuter)',
-	'outils_permuter_gras2' => '<NEW>Permuter les @nb@ outils en gras ?',
+	'outils_permuter_gras2' => 'Koyu @nb@ gere&ccedil;leri de&#287;i&#351;tirilsin mi?',
 	'outils_resetselection' => 'Se&ccedil;imleri ba&#351;tan al',
 	'outils_selectionactifs' => 'T&uuml;m aktif aletleri se&ccedil;',
 	'outils_selectiontous' => 'HEPS&#304;',
@@ -374,7 +374,7 @@ _ Dessins : [Sylvain Michel->http://www.guaph.net/]',
 	'soft_scroller:description' => '<NEW>Offre &agrave; votre site public un d&eacute;filement  adouci de la page lorsque le visiteur clique sur un lien pointant vers une ancre : tr&egrave;s utile pour &eacute;viter de se perdre dans une page complexe ou un texte tr&egrave;s long...
 
 Attention, cet outil a besoin pour fonctionner de deux plugins {jQuery} : {ScrollTo} et {LocalScroll}. Le Couteau Suisse peut les installer directement si vous cochez les cases suivantes. [[%scrollTo%]][[->%LocalScroll%]]',
-	'soft_scroller:nom' => '<NEW>Ancres douces',
+	'soft_scroller:nom' => 'Yumu&#351;ak &ccedil;apalar',
 	'sommaire:description' => '<NEW>Construit un sommaire pour vos articles afin d’acc&eacute;der rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
 
 @puce@ Vous pouvez d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire :[[%lgr_sommaire% caract&egrave;res]]
