@@ -1,8 +1,15 @@
 <?php
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	// CFG
 	'titre' => 'SPIPmotion',
+	'spipmotion_boite' => 'Configuration de SPIPmotion',
 	'titrepage' => 'SPIPmotion : Publication ais&eacute;e de vid&eacute;os sur internet',
+	'spipmotion_descriptif' => 'Ce plugin permet d"encoder à la vol&eacute;e des vid&eacute;os au format flv depuis les formats MP4/MPG/AVI/MOV... Pour l\'instant on se contente de la vid&eacute;o ... on verra plus tard pour le reste...',
+	'spipmotion_liens'=>'Liens compl&eacute;mentaires : ',
+	'lien_ffmpeg_mac'=>'Installer FFMpeg sur Mac OSX',
+	'lien_ffmpeg_linux'=>'Installer FFMpeg sur Mac OSX',
+	'lien_flvtool'=>'Installer FLVTool2',
 	'gros_titre' => 'SPIPmotion : Publication ais&eacute;e de vid&eacute;os sur internet',
 	'chemin_executable' => 'Chemin de l\'ex&eacute;cutable FFmpeg sur le serveur :',
 	'width_video' => 'Largeur de la sortie en px : ',

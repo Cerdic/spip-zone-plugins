@@ -1,10 +1,15 @@
-[(#REM) titre=Spipmotion]
+<!-- titre=Spipmotion -->
 
-[(#REM) descriptif=
-Ce plugin permet d"encoder à la vol&eacute;e des vid&eacute;os au format flv depuis les formats MP4/MPG/AVI/MOV
-
-Pour l'instant on se contente de la vid&eacute;o ... on verra plus tard pour le reste...
-]
+<!-- boite=<:spipmotion:spipmotion_boite:> -->
+	
+<!-- descriptif= <p><:spipmotion:spipmotion_descriptif:></p>
+<p><:spipmotion:spipmotion_liens:></p>
+<ul>
+<li><a href="http://kent1.sklunk.net/LINUX-Compiler-FFmpeg"><:spipmotion:lien_ffmpeg_linux:></a></li>
+<li><a href="http://kent1.sklunk.net/Compiler-ffmeg-sur-OSX-10-5"><:spipmotion:lien_ffmpeg_mac:></a></li>
+<li><a href="http://kent1.sklunk.net/UBUNTU-Compiler-Flvtool2-sur"><:spipmotion:lien_flvtool:></a></li>
+</ul>
+-->
 
 #CACHE{0}
 <form name="formulario" method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
@@ -129,5 +134,3 @@ if(boxName.checked){
 </div>
 
 </form>
-
-
