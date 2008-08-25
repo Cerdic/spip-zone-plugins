@@ -49,7 +49,13 @@ $GLOBALS['i18n_imageflow_fr'] = array(
 	, 'tint_label' => "Vous pouvez modifer la teinte du reflet en pr&#233;cisant ici un couleur RVB. 
 		Par exemple &#34;#7F0000&#34;.
 		Par d&#233;faut &#58; &#34;@tint@&#34;."
-
+	
+	, 'error_php_old' => "La version de PHP install&#233;e n'est pas pleinement support&#233;e. 
+		Vous devez utiliser PHP 4.3.2 ou sup&#233;rieur."
+	, 'error_gd_missing' => "L'extension GD pour PHP est manquante. D&#233;sol&#233;, impossible de continuer."
+	, 'error_gd_not_png' => "La version de l'extension GD pour PHP install&#233;e ne peut pas produire d'image au format PNG."
+	, 'error_gd_old' => "La librairie GD install&#233;e est trop ancienne. La version 2.0.1 ou sup&#233;rieure est n&#233;cessaire,
+		et 2.0.28 est fortement recommand&#233;e."
 );
 
 ?>

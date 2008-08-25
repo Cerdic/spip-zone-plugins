@@ -59,6 +59,7 @@
 include_spip('base/abstract_sql');
 include_spip('inc/utils');
 include_spip('inc/imageflow_api_globales');
+include_spip('inc/imageflow_api_prive');
 
 function imageflow_install ($action) {
 
@@ -72,23 +73,33 @@ function imageflow_install ($action) {
 			return($result);
 			break;
 		case 'install':
-			if(!($result = isset($GLOBALS['meta'][_IMAGEFLOW_META_PREFERENCES]))) {
-				// cree les preferences par defaut
-				$result = imageflow_set_all_preferences();
-				imageflow_log("CREATE meta:" . _IMAGEFLOW_META_PREFERENCES);
-			}
-			if(!$result) {
-				// nota: SPIP ne filtre pas le resultat. Si retour en erreur,
-				// la case a cocher du plugin sera quand meme cochee
-				imageflow_log("PLEASE REINSTALL PLUGIN");
+			if(($config_error = imageflow_verifier_versions()) === false) {
+				if(!($result = isset($GLOBALS['meta'][_IMAGEFLOW_META_PREFERENCES]))) {
+					// cree les preferences par defaut
+					$result = imageflow_set_all_preferences();
+					imageflow_log("CREATE meta:" . _IMAGEFLOW_META_PREFERENCES);
+				}
+				if(!$result) {
+					// nota: SPIP ne filtre pas le resultat. Si retour en erreur,
+					// la case a cocher du plugin sera quand meme cochee
+					imageflow_log("PLEASE REINSTALL PLUGIN");
+				}
+				else {
+					// invite de configuration si installation OK
+					echo(_T('imageflow:imageflow_aide_install'
+						, array('url_config' => generer_url_ecrire("imageflow_configure"))
+						));
+				}
+				imageflow_log("INSTALL:", $result);
 			}
 			else {
-				// invite de configuration si installation OK
-				echo(_T('imageflow:imageflow_aide_install'
-					, array('url_config' => generer_url_ecrire("imageflow_configure"))
+				echo( imageflow_boite_alerte(
+					_T('imageflow:portfolio_imageflow')
+					, "<strong>\n" . _T('forum_titre_erreur') . "</strong><br />"
+						. _T('imageflow:'.$config_error)
 					));
 			}
-			imageflow_log("INSTALL:", $result);
+			
 			return($result);
 			break;
 		case 'uninstall':

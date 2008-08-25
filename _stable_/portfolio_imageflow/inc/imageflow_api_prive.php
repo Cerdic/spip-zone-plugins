@@ -196,4 +196,19 @@ function imageflow_form_bouton_valider ($nom_bouton) {
 		;
 	return($result);
 }
+
+/***********************************************/
+function imageflow_boite_alerte ($titre, $message) {
+	$result = ""
+		. debut_boite_alerte()
+		. "<h3 style='margin:0;padding:0;color:black'>" . $titre . "</h3>\n"
+		.  http_img_pack("warning.gif", _T('info_avertissement'), 
+				 "style='width:48px;height:48px;float:right;margin:5px;'")
+		. "<span class='verdana2 message-alerte'>$message</span>\n"
+		. fin_boite_alerte()
+		. "\n<br />"
+		;
+	return($result);
+}
+
 ?>

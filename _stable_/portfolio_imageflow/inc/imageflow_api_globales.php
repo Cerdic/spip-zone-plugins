@@ -157,4 +157,37 @@ function imageflow_ecrire_metas () {
 	return(true);
 }
 
+/*
+ * Verifier PHP et GD 
+ * @return FALSE ou index message (lang)
+ * @see http://reflection.corephp.co.uk
+ * */
+ function imageflow_verifier_versions () {
+ 	
+	//	PHP Version sanity check
+	if (version_compare('4.3.2', phpversion()) == 1) 
+	{
+		return('error_php_old');
+	}
+	
+	//	GD check
+	if (extension_loaded('gd') == false && !dl('gd.so')) 
+	{
+		return('error_gd_missing');
+	}
+	
+	//	GD Version check
+	$gd_info = gd_info();
+	
+	if ($gd_info['PNG Support'] == false) {
+		return('error_gd_not_png');
+	}
+	
+	if (ereg_replace('[[:alpha:][:space:]()]+', '', $gd_info['GD Version']) < '2.0.1')
+	{
+		return('error_gd_old');
+	}
+	return(false);
+}
+
 ?>
