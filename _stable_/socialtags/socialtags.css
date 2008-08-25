@@ -1,19 +1,6 @@
-div.socialtags { margin: 16px 0; }
+div.socialtags { margin: 2px 0 0px 0; padding 0;}
 
-span.socialtags_tagline { position: relative; }
-span.socialtags_tagline span { display: none; width: 14em; }
-span.socialtags_tagline:hover span {
-	position: absolute;
-	display: block;
-	top: -5em;
-	background: #ffe;
-	border: 1px solid #ccc;
-	color: black;
-	line-height: 1.25em;
-}
-.socialtags span {
-	display: block;
-}
+
 .socialtags ul {
 	display: inline;
 	margin: 0 !important;
