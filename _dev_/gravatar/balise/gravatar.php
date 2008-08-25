@@ -17,21 +17,8 @@ function balise_GRAVATAR_stat($args, $filtres) {
 }
 
 function balise_GRAVATAR_dyn($email, $size, $gravatar_default) {
-	include_spip('inc/distant');
-	$md5_email = md5(strtolower($email));
-	$gravatar_cache = sous_repertoire(_DIR_VAR, 'cache-gravatar').$md5_email;
-
-	if(!file_exists($gravatar_cache) OR time()-3600*24 > filemtime($gravatar_cache)) {
-		$gravatar = recuperer_page('http://www.gravatar.com/avatar.php?gravatar_id='.$md5_email.'&amp;size='.$size);
-		if($gravatar) {
-			$file = fopen($gravatar_cache, "w+");
-			fputs($file, $gravatar);
-			fclose($file);
-		} else {
-			copy($gravatar_default, $gravatar_cache);
-		}
-	}
-
-	return '<img src="'.$GLOBALS['meta']['adresse_site'].'/'.$gravatar_cache.'" width="'.$size.'" height="'.$size.'" alt="" />';
+	include_spip('inc/filtres_images');
+	include_spip('inc/gravatar');
+	return image_reduire(sinon(gravatar($email),$gravatar_default), $size ? $size : 80);
 }
 ?>

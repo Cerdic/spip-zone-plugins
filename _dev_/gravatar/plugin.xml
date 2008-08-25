@@ -3,16 +3,23 @@
 	<auteur>Thomas Beaumanoir - [Clever Age->http://www.clever-age.com] pour <code>#GRAVATAR</code>
 	<br /> Fil - [SPIP->www.spip.net] pour <code>#LOGO_AUTEUR</code>
 	</auteur>
-	<icon>img_pack/gravatar.gif</icon>
-	<version>0.4</version>
-	<etat>test</etat>
+	<icon>gravatar.jpg</icon>
+	<version>0.5</version>
+	<etat>stable</etat>
 	<description>
 Permet d'utiliser un cache pour stocker les gravatars
-_ A utiliser dans une boucle de cette manière : <code>#GRAVATAR{email, taille, url image par défaut}</code>
+_ A utiliser dans une boucle de cette mani&egrave;re : <code>#GRAVATAR{email, taille, url image par
+d�eacute;faut}</code>
 _ Exemple : <code>#GRAVATAR{#EMAIL,80,#URL_SITE_SPIP/defaut-gravatar.gif}</code>
 
-Etend la balise #LOGO_AUTEUR de maniere a prendre en compte le gravatar d'un auteur s'il existe, y compris dans les forums et p&#233;titions.
+&Eacute;tend la balise #LOGO_AUTEUR de mani&egrave;re &agrave; prendre en compte le gravatar d'un auteur s'il existe, y compris dans les forums et p&#233;titions.
+
+Fournit le filtre <code>|gravatar</code>, &agrave; utiliser par exemple comme 
+<code>[(#EMAIL|gravatar|image_reduire{80})]</code>.
 	</description>
+	
+	<fonctions>inc/gravatar.php</fonctions>
+
 	<lien>[Gravatar->http://www.gravatar.com]</lien>
 	<prefix>gravatar</prefix>
 </plugin>
