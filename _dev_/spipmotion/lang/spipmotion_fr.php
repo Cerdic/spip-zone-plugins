@@ -30,6 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'encodage_en_cours' => 'ENCODAGE EN COURS ...',
 	
 	'video_infos_techniques' => 'Informations techniques...',
+	'video_nom_fichier' => 'Nom du fichier : ',
+	'video_format' => 'Format : ',
 	'video_duree' => 'Dur&eacute;e : ',
 	'video_framecount' => 'Nombre de frames : ',
 	'video_framerate' =>'Framerate : ',
