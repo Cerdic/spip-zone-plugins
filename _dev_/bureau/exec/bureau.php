@@ -91,18 +91,25 @@ function bureau() {
 	$infos = array();
 	$fenetres = array();
 
+	$extra = unserialize($GLOBALS['visiteur_session']['extra']);
+	$transparence = $extra['BUREAU_transparence'];
+
 	$bureau = charger_fonction('bureau_charge','inc');
-	echo $bureau();
+	echo $bureau($transparence);
 
 	// construction des menus
 	echo bureau_debut_menu();
 
 	$menus[] = bureau_barre_menu('<img src="'.find_in_path('images/spip.png').'" />', 
-				array('Se déconnecter/normal' => generer_url_action("logout","logout=prive"),
+				array(	'Interface classique/normal' => generer_url_ecrire(),
+					'Se déconnecter/normal' => generer_url_action("logout","logout=prive"),
+					'Recharger le bureau/normal'=> generer_url_ecrire("bureau"),
 					'Visiter/normal' => url_de_base()));
 
 	$menus[] = bureau_barre_menu('Actions',
-				array('Explorer/fenetre' => generer_url_ecrire("bureau_explorer")));
+				array(	'Explorer/fenetre' => generer_url_ecrire("bureau_explorer"),
+					'Préférences/fenetre' => generer_url_ecrire("bureau_preferences",'id_auteur='.$GLOBALS['visiteur_session']['id_auteur'])
+					));
 
 	$menus = pipeline('BUREAU_menus', array(
 			'args'=>array('bureau'=>'bureau'),

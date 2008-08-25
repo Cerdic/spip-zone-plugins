@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-function inc_bureau_charge_dist() {
+function inc_bureau_charge_dist($transparence="oui") {
 	global $connect_id_auteur;
 
 	include_spip('inc/headers');
@@ -41,8 +41,18 @@ function inc_bureau_charge_dist() {
 //		.'<link rel="stylesheet" type="text/css" href="../prive/spip_style_invisible.css" />'
 
 
-		.'<link  type="text/css" rel="stylesheet" href="'._DIR_PLUGIN_BUREAU.'css/bureau.css"/>'
-		.envoi_link($nom_site_spip,$minipres)
+		.'<link  type="text/css" rel="stylesheet" href="'._DIR_PLUGIN_BUREAU.'css/bureau.css"/>';
+	if ($transparence=="non") {
+		$head .= '<style type="text/css">'
+			.'#bureau div.fenetre.passive {
+				-moz-opacity:1;
+				opacity: 1;
+				filter:alpha(opacity=100);
+			}'
+			.'</style>';
+	}
+
+	$head .=envoi_link($nom_site_spip,$minipres)
 		. '</head>';
 	$body = '<body><div id="page">';
 

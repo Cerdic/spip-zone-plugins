@@ -64,18 +64,20 @@ function bureau_article($id_article,$row) {
 	changer_typo($row['lang']);
 
 	include_spip('exec/articles');
-	$contenu = typo($surtitre)
+	$contenu = "<b>Avertissement : fenêtre en cours de réalisation</b><br /> "
+		. "<div class='fiche_objet'>"
+		.typo($surtitre)
 		."<span $dir_lang class='arial1 spip_medium'><b>". typo($surtitre) . "</b></span>"
 		. gros_titre($titre,'',false)
 		."<span $dir_lang class='arial1 spip_medium'><b>". typo($soustitre) . "</b></span>"
 		.debut_cadre_couleur('',true)
-		.$date.'<br />'
-		.$date_redac.'<br />'
+		.'<p style="text-align:left;">'.$dater($id_article,'','',"article",'',$date,$date_redac).'</p>'
 		.fin_cadre_couleur(true)
 		.'<b>'.typo($descriptif).'</b><br /><br />'
 		.'<b>'.typo($chapo).'</b><br /><br />'
-		.typo($texte)
-		.typo($ps);
+		.propre($texte)
+		.typo($ps)
+		.'</div>';
 
 
 

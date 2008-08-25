@@ -35,6 +35,7 @@ jQuery(document).ready(function() {
 	*/
 
 	var currentElement = null;
+	var minWidth = 120;
 	var isDragMouseDown = false;
 	var isResizeMouseDown = false;
 
@@ -96,7 +97,7 @@ jQuery(document).ready(function() {
 		var _width = (pos.x - lastMouseX + lastElemWidth);
 		var _height = (pos.y - lastMouseY + lastElemHeight);
 
-		if(_width<120) _width=120;
+		if(_width<minWidth) _width=minWidth;
 		if(_height<100) _height=100;
 
 		// gestion des bords
@@ -166,16 +167,22 @@ jQuery(document).ready(function() {
 					updatePosition(e, opts);
 				}
 				if (jQuery(e.target).hasClass('resize')) {
-					var el = jQuery(e.target).parents('.fenetre')[0];
-					currentElement = el;
+					currentElement = jQuery(e.target).parents('.fenetre')[0];
 					isResizeMouseDown = true;
-					
+					var titre = jQuery(currentElement).find('.fenetre-titre');
+					// la largeur minimum est la largeur du texte du titre + boutons
+					minWidth = jQuery(titre).children('span').width()
+						+ jQuery(titre).children('a.ferme').width()
+						+ jQuery(titre).children('a.minimise').width()
+						+ jQuery(titre).children('a.maximise').width()
+						+ 30; // padding & margin
+
 					var pos = getMousePosition(e);
 					lastMouseX = pos.x;
 					lastMouseY = pos.y;
 
-					lastElemLeft = el.offsetLeft;
-					lastElemTop  = el.offsetTop;
+					lastElemLeft = currentElement.offsetLeft;
+					lastElemTop  = currentElement.offsetTop;
 
 					lastElemWidth = jQuery(currentElement).width();
 					lastElemHeight = jQuery(currentElement).height();
