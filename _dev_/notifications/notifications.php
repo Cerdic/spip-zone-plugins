@@ -129,7 +129,9 @@ function Notifications_creer_auteur($email) {
 				$nom = $email;
 			}
 		}
-		include_spip('balise/formulaire_inscription');
+		// charger message_inscription()
+		include_spip('balise/formulaire_inscription'); # pour SPIP 1.9.2
+		include_spip('formulaires/inscription'); # pour SPIP 2.0
 		$a = message_inscription($email, $nom, '6forum');
 		if (!is_array($a)) {
 			spip_log("erreur sur la creation d'auteur: $a");
