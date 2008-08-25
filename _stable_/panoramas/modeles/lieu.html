@@ -205,6 +205,10 @@ $(document).ready(function(){
 							return false;
 						});
 		</BOUCLE_objetactivationjeu>
+
+		
+
+		
 		
 	</BOUCLE_interactionsobjetetpersonnage>
 
@@ -222,7 +226,49 @@ $(document).ready(function(){
 </div>
 </B_documentsassocies>
 
-</BOUCLE_lieux>
 <script type="text/javascript" src="#CHEMIN{js/thickbox.js}"></script>
+
+<BOUCLE_interactionstransitions(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
+#SET{transition, #IMAGES_TRANSITION}
+<B_imagestransition>
+<div class="images-transition-interaction#ID_INTERACTION" style="display: none; position: absolute; top: 0; left: 0;">
+<ul class="innerfade">
+<BOUCLE_imagestransition(DOCUMENTS)>[(#ID_DOCUMENT|inclusdans{#GET**{transition}}|?{' ',''})
+		<li>[(#FICHIER|image_reduire{0,375})]</li>
+	]</BOUCLE_imagestransition>
+</ul>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+//faire jouer la transition avant d'activer l'interaction
+	$('.interaction#ID_INTERACTION').bind('click', function(){
+		if ($('.images-transition-interaction#ID_INTERACTION')[0]){
+		
+			var nb_li = ($('.images-transition-interaction#ID_INTERACTION ul li').length);
+			setTimeout(function(){
+				$('.fond-noir-slideshow').remove();
+				$('.images-transition-interaction#ID_INTERACTION').remove();
+				document.location.href=$('.interaction#ID_INTERACTION').attr('href');
+			}, nb_li*#IMAGES_TRANSITION_DELAI );
+			$('.panorama-viewport').append("<div class='fond-noir-slideshow' style='background: black; width: 100%; height: 100%; position: absolute; left: 0; top: 0; opacity: .8;'></div>");
+			$('.images-transition-interaction#ID_INTERACTION').appendTo(".panorama-viewport").show();
+			$('.images-transition-interaction#ID_INTERACTION ul').innerfade({
+							speed: 'slow', 
+							timeout: #IMAGES_TRANSITION_DELAI, 
+							type: 'sequence'
+						});
+			return false;
+		} else {
+			
+			return true;
+		}
+	});
+			
+});
+</script>
+</B_imagestransition>
+</BOUCLE_interactionstransitions>
+
+</BOUCLE_lieux>
 
 </B_lieux>
