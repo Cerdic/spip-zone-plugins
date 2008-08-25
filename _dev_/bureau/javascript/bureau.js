@@ -1,23 +1,27 @@
 jQuery(document).ready(function() {
-	var bureau = jQuery("#bureau");
+
+	/**
+	* Variables globales
+	*/
+
+	var bureau = jQuery("#bureau");	// les éléments composant le bureau
 	var barre = jQuery("#barre");
+	var barre_taches = jQuery("#barre-taches");
 	var aspirateur = jQuery("#aspirateur");
 
-	//placement des fenetres
-	var X =0;
+	var X =0; //placement des fenetres
 	var Y =0;
 
-	// taille du bureau
-	var WIDTH = 0;
+	var WIDTH = 0; // taille du bureau
 	var HEIGHT = 0;
 
-	// conteneurs
-	var fenetreActive = null;
+	var fenetreActive = null; // conteneurs
 	var tacheActive = null;
 
-	// le zIndex de la fenetre en haut de la pile
-	var zIndexTop = 80;
+	var zIndexTop = 80; // le zIndex de la fenetre en haut de la pile
 	var zIndexMin = 10;
+
+	var navigateur = null; // le navigateur de l'utilisateur
 
 	/**
 	* la gestion du Drag&Drop est une adaptation du travail de Batiste Bieler
@@ -133,6 +137,9 @@ jQuery(document).ready(function() {
 			// when the mouse button is released
 			$(this).mouseup(function(e) {
 				isDragMouseDown = false;
+				// retablissement de l'effet slideUp sur la fenetre
+				// si height est spécifié, seul le contenu de l'element est affecté ...
+				if (isResizeMouseDown) currentElement.style['height'] = null;
 				isResizeMouseDown = false;
 			});
 
@@ -280,7 +287,7 @@ jQuery(document).ready(function() {
 			var id =  generateGuid();
 			var fenetre = 
 			'<div class="fenetre" id="fenetre-'+id+'" style="width:400px;">'
-			+'<div class="fenetre-titre ferme drag"><span>Erreur !</span></div>'
+			+'<div class="fenetre-titre ferme drag"><span>Erreur !</span><a class="ferme" href="#">X</a></div>'
 			+'<div class="contenu">'+data+'</div>'
 			+'<div class="resize"></div>'
 			+'</div>';
@@ -300,7 +307,6 @@ jQuery(document).ready(function() {
 				// on passe par l'aspirateur pour éviter de flinguer le bureau ...
 				AjaxSqueeze(jQuery(this).attr('href'),"aspirateur",function() {
 					var fenetre = jQuery("#aspirateur .fenetre:last");
-//					var aspirateur = jQuery("#aspirateur");
 
 					if (jQuery(fenetre).length != 0) {
 						bureau.prepend(fenetre);
@@ -308,8 +314,9 @@ jQuery(document).ready(function() {
 						fenetreActive = fenetre;
 						fenetreActive.active();
 					}
-					else {
-
+					
+					// si y'a encore quelque chose, on le met dans une fenetre d'erreur
+					if (aspirateur.children().length != 0) {
 						bureau.creerFenetreErreur(jQuery(aspirateur).html());
 						aspirateur.html("");
 					}
@@ -357,14 +364,30 @@ jQuery(document).ready(function() {
 	jQuery.fn.initFenetre = function() {
 		return this.each(function() {
 
-			// barre des taches
 			var titre = jQuery(this).children(".fenetre-titre");
+			var contenu = jQuery(this).children('div.contenu');
+
+			// barre des taches
 			var id = jQuery(this).attr("id");
 			var id_tache = "tache-"  + id;
 			var lien = "<div id='"+id_tache+"'><a class='montre' href='"
 				+id
 				+"'>"+jQuery(titre).children('span').html()+"</a></div>";
-			jQuery("#barre-taches").append(lien);
+			barre_taches.append(lien);
+
+
+			var w = jQuery(this).width();
+			var h = jQuery(this).height();
+
+			// cas des fenetres ou la taille n'est pas donné par l'utilisateur :
+			// correction de l'effet slideUp/slideDown: 
+			// le titre ne doit pas être redimensionné lorsque le contenu est caché
+			// & le contenu ne doit pas être trop aggrandi.
+			// ==> appliquer la largeur de la fenetre à son style css
+			// pas pour height, sinon l'effet slideUp est bloqué
+			jQuery(this).css('width', w);
+
+
 
 			// placement des fenetres
 			// 2 et 3 correspondent aux bordures ...
@@ -391,10 +414,12 @@ jQuery(document).ready(function() {
 			});
 
 			// un double click sur le titre provoque un enroulement/deroulement
-			jQuery(this).children("div.fenetre-titre").dblclick(function() {
-				jQuery(this).next().slideToggle("slow");
+			jQuery(this).children(".fenetre-titre").dblclick(function() {
+				jQuery(this).siblings('div.contenu').slideToggle("slow");
+				jQuery(this).siblings('div.fenetre-menu').slideToggle("slow");
 			});
 
+			// le menu lateral de la fenetre
 			jQuery(this).find("div.fenetre-menu").each(function() {
 				jQuery(this).click(function() {
 					jQuery(this).children('.contenu-menu').slideDown('fast');
@@ -408,6 +433,7 @@ jQuery(document).ready(function() {
 				});
 			});
 
+			// les boutons
 			jQuery(this).find("a.minimise").each(function() {
 				jQuery(this).minimiseFenetre();
 			});
@@ -466,6 +492,7 @@ jQuery(document).ready(function() {
 
 	// au demarage
 	jQuery(function() {
+		navigateur = jQuery.browser;
 		bureau.initBureau();
 		barre.initBarre();
 	});
@@ -473,8 +500,6 @@ jQuery(document).ready(function() {
 
 	// a chaque fois que le dom change
 	onAjaxLoad(function() {
-
-
 
 		// une fenetre ne doit pas être plus grande que le bureau
 		// on doit redimenssioner le contenu
