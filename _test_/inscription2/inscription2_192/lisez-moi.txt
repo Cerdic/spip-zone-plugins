@@ -1,6 +1,6 @@
 Pour editer la fiche profil avec les crayons en 192
 
-dans le fichier ecire/inc/utils.php
+dans le fichier ecrire/inc/utils.php
 
 rechercher :
 
