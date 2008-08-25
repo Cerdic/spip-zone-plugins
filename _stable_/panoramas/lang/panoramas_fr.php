@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'contenu_panier' => 'Contenu du panier',
 'manque_objet' => 'Il vous manque l\'objet :',
 'merci' => 'Merci',
-'documents_associes' => 'Documents associ&eacute;s'
+'documents_associes' => 'Documents associ&eacute;s',
+'images_transition' => 'Images &agrave; afficher pendant la transition (id des images s&eacute;par&eacute;es par des virgules)'
 );
 ?>

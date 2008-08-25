@@ -93,6 +93,9 @@ function exec_interactions_edit(){
 			$texte_apres_activation = $row['texte_apres_activation'];
 			$id_audio_avant_activation = $row['id_audio_avant_activation'];
 			$id_audio_apres_activation = $row['id_audio_apres_activation'];
+			$images_transition = $row['images_transition'];
+			$images_transition_delai = $row['images_transition_delai'];
+			$id_film_transition = $row['id_film_transition'];
 	
 		}
 		$focus = "";
@@ -138,6 +141,9 @@ function exec_interactions_edit(){
 		$row['texte_apres_activation'] = $texte_apres_activation;
 		$row['id_audio_avant_activation'] = $id_audio_avant_activation;
 		$row['id_audio_apres_activation'] = $id_audio_apres_activation;
+		$row['images_transition'] = $images_transition;
+		$row['images_transition_delai'] = $images_transition_delai;
+		$row['id_film_transition'] = $id_film_transition;
 		
 		$action_link = generer_action_auteur("interactions_edit","new",urlencode($redirect));
 	}
@@ -230,6 +236,9 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$texte_apres_activation = $row['texte_apres_activation'];
 	$id_audio_avant_activation = intval($row['id_audio_avant_activation']);
 	$id_audio_apres_activation = intval($row['id_audio_apres_activation']);
+	$images_transition = $row['images_transition'];
+	$images_transition_delai = intval($row['images_transition_delai']);
+	$id_film_transition = intval($row['id_film_transition']);
 	
 	$out = "";
 	$out .= "<p>";
@@ -424,6 +433,23 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$out .= "<strong><label for='id_audio_apres_activation_interaction' id='id_audio_apres_activation_interaction_label'>"._T("panoramas:id_audio_apres_activation")."</label></strong> ";
 	$out .= "<input type='text' name='id_audio_apres_activation' id='id_audio_apres_activation_interaction' class='formo $focus' ".
 		"value=\"".$id_audio_apres_activation."\" size='5' />\n";
+
+	$out .= "</fieldset>";
+	
+	//sélection du mode transition
+	$out .= "<fieldset id='infos-transition'><legend>"._T("panoramas:informations_transition")."</legend>";
+	
+	$out .= "<strong><label for='images_transition_interaction' id='images_transition_interaction_label'>"._T("panoramas:images_transition")."</label></strong> ";
+	$out .= "<input type='text' name='images_transition' id='images_transition_interaction' class='formo $focus' ".
+		"value=\"".$images_transition."\" size='5' />\n";
+	
+	$out .= "<strong><label for='images_transition_delai_interaction' id='images_transition_delai_interaction_label'>"._T("panoramas:images_transition_delai")."</label></strong> ";
+	$out .= "<input type='text' name='images_transition_delai' id='images_transition_delai_interaction' class='formo $focus' ".
+		"value=\"".$images_transition_delai."\" size='5' />\n";
+
+	$out .= "<strong><label for='id_film_transition_interaction' id='id_film_transition_interaction_label'>"._T("panoramas:id_film_transition")."</label></strong> ";
+	$out .= "<input type='text' name='id_film_transition' id='id_film_transition_interaction' class='formo $focus' ".
+		"value=\"".$id_film_transition."\" size='5' />\n";
 
 	$out .= "</fieldset>";
 

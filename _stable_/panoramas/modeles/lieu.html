@@ -20,7 +20,7 @@
 			<area shape="rect" coords="#X1,#Y1,#X2,#Y2"
 				[(#TYPE|=={'article'}|?{' ',''}) href="#URL_PAGE{article,id_article=#ID_ARTICLE_CIBLE}" class="interaction#ID_INTERACTION type-article"]
 				[(#TYPE|=={'rubrique'}|?{' ',''}) href="#URL_PAGE{rubrique,id_rubrique=#ID_RUBRIQUE_CIBLE}" class="interaction#ID_INTERACTION type-rubrique"]
-				[(#TYPE|=={'lieu'}|?{' ',''}) href="#URL_PAGE{lieu,id_lieu=#ID_LIEU_CIBLE}" class="interaction#ID_INTERACTION type-lieu"]
+				[(#TYPE|=={'lieu'}|?{' ',''}) href="#URL_PAGE{lieu,id_lieu=#ID_LIEU_CIBLE}#[(#REM)]lieu#ID_LIEU_CIBLE" class="interaction#ID_INTERACTION type-lieu"]
 				[(#TYPE|=={'visite'}|?{' ',''}) href="#URL_PAGE{visite,id_visite=#ID_VISITE_CIBLE}" class="interaction#ID_INTERACTION type-visite"]
 				[(#TYPE|=={'url'}|?{' ',''}) href="#URL_CIBLE" class="interaction#ID_INTERACTION type-url"]
 				[(#TYPE|=={'descriptif'}|?{' ',''}) href="#URL_PAGE{descriptif_interaction_ajax,id_interaction=#ID_INTERACTION}" class="interaction#ID_INTERACTION type-descriptif thickbox"]

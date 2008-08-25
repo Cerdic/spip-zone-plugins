@@ -111,6 +111,9 @@ $visites_virtuelles_interactions = array(
 		"texte_apres_activation"	=> "text NOT NULL", /* texte affiché lorsque l'interaction vient d'être activée */
 		"id_audio_avant_activation"	=> "bigint(21)", /* son joué lorsque l'interaction n'est pas active */
 		"id_audio_apres_activation"	=> "bigint(21)", /* son joué lorsque l'interaction vient d'être activée */
+		"images_transition"	=> "text NOT NULL", /* liste des images à afficher séquentiellement pendant la transition (id des images séparés par des virgules) */
+		"images_transition_delai"	=> "bigint(21) NOT NULL", /* durée d'affichage d'une image avant de passer à la suivante */
+		"id_film_transition"	=> "bigint(21) NOT NULL", /* jouer un film pendant la transition */
 		"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
 		"maj"	=> "TIMESTAMP"
 		);
