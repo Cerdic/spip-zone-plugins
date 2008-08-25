@@ -12,6 +12,13 @@
 	[(#CONFIG{socialtags/google}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_google}|parametre_url{'bkmk',[(#URL_ARTICLE|url_absolue)]}|parametre_url{'title',[(#TITRE|texte_script)]})]" title="Google"><img src="[(#CHEMIN{images/googlebookmark.png})]" title="Google" alt="Google" class="socialtags-hovers"></a></li>,''})]
 
 	[(#CONFIG{socialtags/technorati}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_technorati}|parametre_url{'add',[(#URL_ARTICLE|url_absolue)]})]" title="Technorati"><img src="[(#CHEMIN{images/technorati.png})]" title="Technorati" alt="Technorati" class="socialtags-hovers"></a></li>,''})]
+
+	[(#CONFIG{socialtags/live}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_live}|parametre_url{'add',[(#URL_ARTICLE|url_absolue)]}|parametre_url{'title',[(#TITRE|texte_script)]})]" title="Live"><img src="[(#CHEMIN{images/live.png})]" title="Live" alt="Live" class="socialtags-hovers"></a></li>,''})]
+
+	[(#CONFIG{socialtags/scoopeo}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_scoopeo}|parametre_url{'newurl',[(#URL_ARTICLE|url_absolue)]}|parametre_url{'title',[(#TITRE|texte_script)]})]" title="Scoopeo"><img src="[(#CHEMIN{images/scoopeo.png})]" title="Scoopeo" alt="Scoopeo" class="socialtags-hovers"></a></li>,''})]
+
+	[(#CONFIG{socialtags/wikio}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_wikio}|parametre_url{'newurl',[(#URL_ARTICLE|url_absolue)]})]" title="Wikio"><img src="[(#CHEMIN{images/wikio.gif})]" title="Wikio" alt="Wikio" class="socialtags-hovers"></a></li>,''})]
+
 </BOUCLE_article>
 </ul>
 </div>

@@ -40,6 +40,23 @@ Ici vous pouvez choisir les sites de partages de vos articles.<br/><br/>
 <strong>Technorati</strong>
 </p>
 
+<p>
+<label><input type="checkbox" name="live" [checked="(#ENV{live}?{checked})"] id="live" /></label>
+<input type="hidden" name="url_live" value="https://favorites.live.com/quickadd.aspx?marklet=1"/>
+<strong>Live</strong>
+</p>
+
+<p>
+<label><input type="checkbox" name="scoopeo" [checked="(#ENV{scoopeo}?{checked})"] id="scoopeo" /></label>
+<input type="hidden" name="url_scoopeo" value="http://www.scoopeo.com/scoop/new"/>
+<strong>Soopeo</strong>
+</p>
+
+<p>
+<label><input type="checkbox" name="wikio" [checked="(#ENV{wikio}?{checked})"] id="wikio" /></label>
+<input type="hidden" name="url_wikio" value="http://www.wikio.com/vote"/>
+<strong>Wikio</strong>
+</p>
 </ul>
 </div>
 </fieldset>
