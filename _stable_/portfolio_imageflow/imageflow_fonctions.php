@@ -50,8 +50,6 @@
 
 include_spip('inc/filtres_images');
 
-define("_CACHE_REFLETS", "cache-reflets");
-
 /*
  * image_avec_reflet ()
  * Effet de reflet sur une image
@@ -263,7 +261,6 @@ if(!function_exists('image_avec_reflet')) {
 		/*
 		 * place l'image en cache ou lire en cache si existante
 		 */
-		$cache = _CACHE_REFLETS;
 		$effet = "reflet-".$width."-".$dest_height."-".$alpha_start."-".$alpha_end."-".$red."-".$green."-".$blue;
 		$image = image_valeurs_trans($img, $effet, "png");
 		if (!$image) return("");
