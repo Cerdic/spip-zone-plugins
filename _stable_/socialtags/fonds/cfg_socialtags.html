@@ -10,53 +10,65 @@ Ici vous pouvez choisir les sites de partages de vos articles.<br/><br/>
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 <fieldset><legend>Social tags</legend>
 
-<p>
 <label><input type="checkbox" name="digg" [checked="(#ENV{digg}?{checked})"] id="digg" /></label>
 <input type="hidden" name="url_digg" value="http://digg.com/submit?phase=2"/>
 <strong>Digg</strong>
-</p>
 
-<p>
+<br/>
 <label><input type="checkbox" name="delicious" [checked="(#ENV{delicious}?{checked})"] id="delicious" /></label>
 <input type="hidden" name="url_delicious" value="http://del.icio.us/post"/>
 <strong>Delicious</strong>
-</p>
 
-<p>
+<br/>
 <label><input type="checkbox" name="facebook" [checked="(#ENV{facebook}?{checked})"] id="facebook" /></label>
 <input type="hidden" name="url_facebook" value="http://www.facebook.com/sharer.php"/>
 <strong>Facebook</strong>
-</p>
 
-<p>
+<br/>
 <label><input type="checkbox" name="google" [checked="(#ENV{google}?{checked})"] id="google" /></label>
 <input type="hidden" name="url_google" value="http://www.google.com/bookmarks/mark?op=edit"/>
 <strong>Google</strong>
-</p>
 
-<p>
+<br/>
 <label><input type="checkbox" name="technorati" [checked="(#ENV{technorati}?{checked})"] id="technorati" /></label>
 <input type="hidden" name="url_technorati" value="http://technorati.com/faves"/>
 <strong>Technorati</strong>
-</p>
 
-<p>
+<br/>
 <label><input type="checkbox" name="live" [checked="(#ENV{live}?{checked})"] id="live" /></label>
 <input type="hidden" name="url_live" value="https://favorites.live.com/quickadd.aspx?marklet=1"/>
 <strong>Live</strong>
-</p>
 
-<p>
+<br/>
 <label><input type="checkbox" name="scoopeo" [checked="(#ENV{scoopeo}?{checked})"] id="scoopeo" /></label>
 <input type="hidden" name="url_scoopeo" value="http://www.scoopeo.com/scoop/new"/>
 <strong>Scoopeo</strong>
-</p>
 
-<p>
+<br/>
 <label><input type="checkbox" name="wikio" [checked="(#ENV{wikio}?{checked})"] id="wikio" /></label>
 <input type="hidden" name="url_wikio" value="http://www.wikio.com/vote"/>
 <strong>Wikio</strong>
-</p>
+
+<br/>
+<label><input type="checkbox" name="furl" [checked="(#ENV{furl}?{checked})"] id="furl" /></label>
+<input type="hidden" name="url_furl" value="http://www.furl.net/storeIt.jsp"/>
+<strong>Furl</strong>
+
+<br/>
+<label><input type="checkbox" name="blogmarks" [checked="(#ENV{blogmarks}?{checked})"] id="blogmarks" /></label>
+<input type="hidden" name="url_blogmarks" value="http://blogmarks.net/my/new.php?mini=1"/>
+<strong>Blogmarks</strong>
+
+<br/>
+<label><input type="checkbox" name="reddit" [checked="(#ENV{reddit}?{checked})"] id="reddit" /></label>
+<input type="hidden" name="url_reddit" value="http://reddit.com/submit"/>
+<strong>Reddit</strong>
+
+<br/>
+<label><input type="checkbox" name="misterwong" [checked="(#ENV{misterwong}?{checked})"] id="misterwong" /></label>
+<input type="hidden" name="url_misterwong" value="http://www.mister-wong.com/addurl/"/>
+<strong>Mister wong</strong>
+
 </ul>
 </div>
 </fieldset>

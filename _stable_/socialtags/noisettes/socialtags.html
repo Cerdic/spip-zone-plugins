@@ -19,6 +19,14 @@
 
 	[(#CONFIG{socialtags/wikio}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_wikio}|parametre_url{'newurl',[(#URL_ARTICLE|url_absolue)]})]" title="Wikio"><img src="[(#CHEMIN{images/wikio.gif})]" title="Wikio" alt="Wikio" class="socialtags-hovers"></a></li>,''})]
 
+	[(#CONFIG{socialtags/furl}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_furl}|parametre_url{'u',[(#URL_ARTICLE|url_absolue)]}|parametre_url{'t',[(#TITRE|texte_script)]})]" title="Furl"><img src="[(#CHEMIN{images/furl.png})]" title="Furl" alt="Furl" class="socialtags-hovers"></a></li>,''})]
+
+	[(#CONFIG{socialtags/blogmarks}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_blogmarks}|parametre_url{'url',[(#URL_ARTICLE|url_absolue)]}|parametre_url{'title',[(#TITRE|texte_script)]})]" title="Blogmarks"><img src="[(#CHEMIN{images/blogmarks.png})]" title="Blogmarks" alt="Blogmarks" class="socialtags-hovers"></a></li>,''})]
+
+	[(#CONFIG{socialtags/reddit}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_reddit}|parametre_url{'url',[(#URL_ARTICLE|url_absolue)]}|parametre_url{'title',[(#TITRE|texte_script)]})]" title="Reddit"><img src="[(#CHEMIN{images/reddit.png})]" title="Reddit" alt="Reddit" class="socialtags-hovers"></a></li>,''})]
+
+	[(#CONFIG{socialtags/misterwong}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_misterwong}|parametre_url{'bm_url',[(#URL_ARTICLE|url_absolue)]}|parametre_url{'bm_description',[(#TITRE|texte_script)]})]" title="Mister wong"><img src="[(#CHEMIN{images/misterwong.gif})]" title="Mister wong" alt="Mister wong" class="socialtags-hovers"></a></li>,''})]
+
 </BOUCLE_article>
 </ul>
 </div>
