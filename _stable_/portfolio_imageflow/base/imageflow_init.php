@@ -73,7 +73,7 @@ function imageflow_install ($action) {
 			return($result);
 			break;
 		case 'install':
-			if(($config_error = imageflow_verifier_versions()) === false) {
+			if(($config_error = imageflow_php_gd_versions_ok()) === true) {
 				if(!($result = isset($GLOBALS['meta'][_IMAGEFLOW_META_PREFERENCES]))) {
 					// cree les preferences par defaut
 					$result = imageflow_set_all_preferences();

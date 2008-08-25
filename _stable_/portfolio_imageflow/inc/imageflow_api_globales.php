@@ -65,7 +65,7 @@ function imageflow_log ($message, $flag = null) {
 		? ""
 		: " " . (!$flag ? "ERROR" : "OK")
 		;
-	if(!empty($message) && _IMAGEFLOW_DEBUG) {
+	if(!empty($message) && defined('_IMAGEFLOW_DEBUG') && _IMAGEFLOW_DEBUG) {
 		spip_log($message.$flag, _IMAGEFLOW_PREFIX);
 	}
 }
@@ -159,10 +159,10 @@ function imageflow_ecrire_metas () {
 
 /*
  * Verifier PHP et GD 
- * @return FALSE ou index message (lang)
+ * @return TRUE ou index message (lang)
  * @see http://reflection.corephp.co.uk
  * */
- function imageflow_verifier_versions () {
+ function imageflow_php_gd_versions_ok () {
  	
 	//	PHP Version sanity check
 	if (version_compare('4.3.2', phpversion()) == 1) 
@@ -187,7 +187,7 @@ function imageflow_ecrire_metas () {
 	{
 		return('error_gd_old');
 	}
-	return(false);
+	return(true);
 }
 
 ?>

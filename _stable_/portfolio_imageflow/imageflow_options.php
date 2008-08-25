@@ -54,7 +54,7 @@ include_spip("inc/plugin_globales_lib");
  * Option debug, à n'activer qu'en dev.
  * Permet d'avoir le journal "tmp/imageflow_log" 
  * */
-define("_IMAGEFLOW_DEBUG", false);
+//define("_IMAGEFLOW_DEBUG", true);
 
 define("_IMAGEFLOW_PREFIX", "imageflow");
 

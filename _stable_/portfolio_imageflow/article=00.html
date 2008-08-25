@@ -1,0 +1,162 @@
+#CACHE{86400}
+[(#REM)
+
+	// $LastChangedRevision: 22163 $
+	// $LastChangedBy: paladin@quesaco.org $
+	// $LastChangedDate: 2008-08-22 11:57:28 +0200 (ven., 22 août 2008) $
+
+	Exemple avec utilisation du filtre image_avec_reflet()
+	
+	En cours de dev
+
+]<BOUCLE_article_principal(ARTICLES) {id_article}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+
+#IMAGEFLOW_INSERT_HEAD
+
+</head>
+
+<body class="page_article">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
+
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de l'article ]
+		<div id="contenu">
+
+			<div class="cartouche">
+				#DEBUT_SURLIGNE
+				[(#LOGO_ARTICLE||image_reduire{200,200})]
+				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+				<h1 class="#EDIT{titre} titre">#TITRE</h1>
+				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+				#FIN_SURLIGNE
+
+				<p><small>[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
+
+				[(#REM) Inclure le modele des liens de traductions ]
+				#MODELE{article_traductions}
+
+			</div>
+
+			#DEBUT_SURLIGNE
+			[<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
+			<br class="nettoyeur" />
+			[<p class="#EDIT{hyperlien} lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+			[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{520,0})</div>]
+			#FIN_SURLIGNE
+
+[(#REM) 
+	***************************************
+	Portfolio : album d'images 
+	Code d'origine de Stéphane Kus
+	http://www.spip-contrib.net/ImageFlow-pour-SPIP
+]<!-- portfolio imageflow -->
+<B_documents_portfolio>
+	<div id="documents_portfolio">
+		<h2><:info_portfolio:></h2>     
+		<div id="imageflow"> 
+			<div id="loading">
+				<strong><:ical_methode_http:></strong><br/>
+				<img src="[(#CHEMIN{imageflow/loading.gif})]" width="208" height="13" alt="loading" />
+			</div>
+			<div id="images"> 
+				<BOUCLE_documents_portfolio(DOCUMENTS){id_article}{mode=document}{extension IN png,jpg,gif} {par num titre, date} {doublons}>
+				[(#LOGO_DOCUMENT||image_avec_reflet{})]
+				</BOUCLE_documents_portfolio>
+			</div>
+		
+			<div id="captions"></div>
+			<div id="scrollbar-box">
+				<div id="scrollbar"> 
+					<div id="slider"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="clear"></div>
+			<img id="affichage" src="" alt="" style="max-height: 384px; max-width: 512px;"  title="" longdesc="" /> 
+	</div> 
+	<!-- fin docs portfolio -->		
+</B_documents_portfolio>
+[(#REM)
+	***************************************
+]<!-- fin portfolio imageflow -->		
+
+			[<div class="ps"><h2><:info_ps:></h2>#DEBUT_SURLIGNE<div class="#EDIT{ps}">(#PS)</div>#FIN_SURLIGNE</div>]
+
+			[(#REM) Autres documents joints a l'article ]
+			<B_documents_joints>
+			<div id="documents_joints">
+				<h2><:titre_documents_joints:></h2>
+				<ul>
+					<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {par num titre, date} {doublons}>
+					<li>
+						<div class="spip_doc_titre"><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a> <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
+						[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
+					</li>
+					</BOUCLE_documents_joints>
+				</ul>
+			</div>
+			</B_documents_joints>
+			
+			[(#REM) Petition :
+			La petition ayant une PAGINATION il faut absolument lui passer SELF]
+			[(#PETITION|?{' '})
+				<INCLURE{fond=inc-petition}{id_article}{self=#SELF}>
+			]
+
+			[<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
+
+			[(#REM) Forum de l'article ]
+			<a href="#forum" name="forum" id="forum"></a>
+			[<h2 class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></h2>]
+			<INCLURE{fond=inc-forum}{id_article}>
+
+		</div><!-- fin contenu -->
+
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{id_rubrique}>
+
+			[(#REM) Articles dans la meme rubrique ]
+			<B_articles_rubrique>
+			<div class="breves">
+				<h2 class="menu-titre"><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
+				<ul>
+					<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date}{inverse} {0,10}>
+					<li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>#TITRE</a></li>
+					</BOUCLE_articles_rubrique>
+				</ul>
+			</div>
+			</B_articles_rubrique>
+
+			[(#REM) Menu de navigation mots-cles ]
+			#MODELE{article_mots}
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_article_principal>
