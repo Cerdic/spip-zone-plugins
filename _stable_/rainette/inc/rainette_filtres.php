@@ -59,7 +59,7 @@ function rainette_afficher_unite($valeur, $type_valeur=''){
  * @return string
  * @author Cedric Morin
  */
-function rainette_croaaaaa_previsions($code_meteo, $type='x_jours', $jour=0, $modele='previsions_x_jour'){
+function rainette_croaaaaa_previsions($code_meteo, $type='x_jours', $jour=0, $modele='previsions_24h'){
 	include_spip('inc/rainette_utils');
 
 	if ($type == '1_jour') {
