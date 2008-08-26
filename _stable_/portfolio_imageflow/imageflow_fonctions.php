@@ -60,7 +60,7 @@ include_spip('inc/filtres_images');
  * @param $title Titre de l'image
  * @param $longdesc Description de l'image ou URL sur description
  * @param $tint Teinte du reflet, en hexadécimal
- * @param $output_height Hauteur en pourcentage du reflet. Par défaut 50%
+ * @param $height Hauteur en pourcentage du reflet. Par défaut 50%
  * @param $style CSS style
  * @param $width Largeur finale. Par défaut, prend celui des vignettes défini dans /ecrire/?exec=config_fonctions
  * @return Chemin de l'image résultat, ou false si erreur, ou "" si rien
@@ -376,15 +376,7 @@ if(!function_exists('image_avec_reflet')) {
 		$name = $image['fichier'];
 		$alt = "'".$image["alt"]."'";
 		// $title // en paramètre
-		$longdesc = 
-			(!empty($longdesc))
-			? (
-				(preg_match(';^(\w{3,7}://);', $longdesc))
-				? $longdesc
-				: "text/plain;charset=".$GLOBALS['meta']['charset'].",".rawurlencode($longdesc)
-			)
-			: ""
-			;
+		$longdesc = longdesc_propre($longdesc);
 		$style = $image['style'].$style;
 			
 		foreach(array('src', 'class', 'width', 'height', 'name', 'alt', 'title', 'longdesc', 'style') as $key) {
@@ -395,4 +387,42 @@ if(!function_exists('image_avec_reflet')) {
 		return("<img ".$tags."/>\n");
 	}
 }
+
+/*
+ * longdesc_propre ()
+ * Complète l'attribut longdesc, brut si URL ou ancre, schéma data:text si texte
+ * @author Christian Paulus (paladin@quesaco.org)
+ * @param $longdesc URL absolue ou texte description
+ * @return Longdesc complété ou ""
+ * @see http://www.quesaco.org/Portfolio-ImageFlow-pour-SPIP#longdesc
+ */
+if(!function_exists('longdesc_propre')) {
+	function longdesc_propre ($longdesc) {
+		$longdesc = trim($longdesc);
+		if(empty($longdesc)) {
+			return("");
+		}
+		$is_uri = (
+			preg_match(';^(\w{3,7}://);', $longdesc) 
+			|| preg_match(';^(#);', $longdesc)
+			);
+		if(!$is_uri) {
+			// un peu basique comme filtre. 
+			// A voir + tard (vérifier la présence du fichier ?)
+			// ne prend pas en compte $type_urls = "propres"
+			if(($u = parse_url($longdesc)) && ($u = $u['path'])
+				&& preg_match(';\.(php|html)$;', $u)
+			) {
+				$is_uri = true;
+			}
+		}
+		$longdesc = 
+			($is_uri)
+			? $longdesc
+			: "text/plain;charset=".$GLOBALS['meta']['charset'].",".rawurlencode($longdesc)
+			;
+		return ($longdesc);
+	}
+}
+
 ?>

@@ -68,8 +68,7 @@
 					src="#CHEMIN{imageflow/reflect_v3.php}?img=../../../[(#LOGO_DOCUMENT||extraire_attribut{src})]#IMAGEFLOW_ARGS" 
 					alt="[(#TITRE|couper{80}|texte_backend)]" 
 					title="[(#TITRE|couper{80}|texte_backend)]"
-					name="#URL_DOCUMENT"
-					longdesc="#DESCRIPTIF" /> 
+					name="#URL_DOCUMENT" [longdesc="(#DESCRIPTIF|longdesc_propre)"] /> 
 				</BOUCLE_documents_portfolio>
 			</div>
 		
