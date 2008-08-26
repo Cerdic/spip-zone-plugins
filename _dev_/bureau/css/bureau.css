@@ -51,6 +51,10 @@ body {
 	margin-left: 5px;
 }
 
+#barre-infos div.infos div.bureau-demon a.demon {
+	display:none;
+}
+
 #barre-taches {
 	float : left;
 	margin-left : 5px;
@@ -155,6 +159,11 @@ body {
 #aspirateur {
 	display:none;
 	height : 0px;
+}
+#aspirateur-demon {
+	display:none;
+	height: 0px;
+	width: 0px;
 }
 #bureau {
 	display: block;

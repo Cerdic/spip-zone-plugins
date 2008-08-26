@@ -93,6 +93,7 @@ function bureau() {
 
 	$extra = unserialize($GLOBALS['visiteur_session']['extra']);
 	$transparence = $extra['BUREAU_transparence'];
+	$demons = $extra['BUREAU_demons'];
 
 	$bureau = charger_fonction('bureau_charge','inc');
 	echo $bureau($transparence);
@@ -125,8 +126,20 @@ function bureau() {
 	// la zone infos de la barre
 	echo bureau_debut_infos();
 
+	if ($demons =="oui") {
+		$infos[] = '<div class="infos">'
+				.bureau_demon("Utilisateurs",
+					generer_url_ecrire("bureau_connecte","script=cron"),
+					generer_url_ecrire("bureau_connecte","script=fenetre"),
+					60*2)
+				.'</div>';
+	}
+
 	$infos[] = '<div class="infos">'.typo($GLOBALS['visiteur_session']['nom']).'</div>';
 	$infos[] = '<div class="infos jclock"></div>';
+
+
+
 
 	$infos = pipeline('BUREAU_infos', array(
 			'args'=>array('bureau'=>'bureau'),
@@ -144,8 +157,13 @@ function bureau() {
 	$contenu = '<h2>Bienvenue sur le Bureau</h2>'
 		.'<p><b>Avertissement</b> :<br />Ceci est une version expérimentale.</p>'
 		.'<p><b>Fonctions</b> :<br />'
-		.'<ul><li>Barre des tâches</li><li>Drag&drop</li><li>Redimensionnement des fenetres</li><li>Fermer/ouvrir/minimiser/maximiser une fenêtre</li>'
-		.'<li>Le menu "Action" donne accés à l\'explorateur</li></ul></p>';
+		.'<ul>'
+		.'<li>Barre des tâches</li>'
+		.'<li>Drag&drop</li>'
+		.'<li>Redimensionnement des fenetres</li>'
+		.'<li>Fermer/ouvrir/minimiser/maximiser une fenêtre</li>'
+		.'<li>Gestion des tâches de fond</li>'
+		.'<li>Le menu "Action" donne accés à l\'explorateur et à une fenêtre de gestion des préférences.</li></ul></p>';
 	$fenetres[] =  bureau_fenetre('Bonjour', $contenu);
 
 	$fenetres = pipeline('BUREAU_fenetres', array(

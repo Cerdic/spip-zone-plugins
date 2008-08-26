@@ -75,7 +75,7 @@ function bureau_debut_infos() {
 }
 
 function bureau_fin_infos() {
-	return '</div>'
+	return '</div><div id="aspirateur-demon"></div>'
 		.'<hr class="droite" />'
 		.'</div>';
 }
@@ -118,6 +118,7 @@ function bureau_barre_menu($toogle,$contenu) {
 		.'</div>';
 }
 
+// retourne une fenetre
 function bureau_fenetre($titre, $contenu, $menu='',$style='') {
 
 	$uid = id_unique();
@@ -139,4 +140,22 @@ function bureau_fenetre($titre, $contenu, $menu='',$style='') {
 	return $fenetre;
 }
 
+// retourne un démon. Un démon est une tache répétitive, dont un lien permet d'ouvrir une fenetre.
+// les démons sont rangés dans la barre-infos
+// $lien : le label du lien
+// $action : le script répétitif. du type generer_url_ecrire();
+// $fenetre :  la fenetre qui s'affiche (configuration, affichage de donnée) du type generer_url_ecrire();
+// $t : la répétition, en seconde.
+
+/* Exemple :
+	$infos[] = bureau_demon("Utilisateurs",
+			generer_url_ecrire("bureau_connecte","script=cron"),
+			generer_url_ecrire("bureau_connecte","script=fenetre"),
+			60);
+*/
+function bureau_demon($lien,$action,$fenetre=null,$t=60) {
+
+	$demon = '<div class="bureau-demon"><a class="ouvre" href="'.$fenetre.'">'.$lien.'</a><a class="demon" href="'.$action.'">'.$t.'</a></div>';
+	return $demon;
+}
 ?>

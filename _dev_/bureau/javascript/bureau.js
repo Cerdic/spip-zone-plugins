@@ -8,6 +8,7 @@ jQuery(document).ready(function() {
 	var barre = jQuery("#barre");
 	var barre_taches = jQuery("#barre-taches");
 	var aspirateur = jQuery("#aspirateur");
+	var aspirateur_demon = jQuery("#aspirateur-demon");
 
 	var X =0; //placement des fenetres
 	var Y =0;
@@ -467,6 +468,49 @@ jQuery(document).ready(function() {
 		});
 	};
 
+	jQuery.fn.demon = function(script,temps) {
+		return this.each(function()  {
+			$this = jQuery(this);
+			$this.script = script;
+			$this.temps = parseInt(temps*1000);
+			$this.enroute = false;
+
+			jQuery.fn.demon.lanceDemon($this);
+		});
+	};
+
+	jQuery.fn.demon.lanceDemon = function(el) {
+		jQuery.fn.demon.stopDemon(el);
+		jQuery.fn.demon.executeDemon(el);
+	};
+
+	jQuery.fn.demon.stopDemon = function(el) {
+		if (el.enroute) clearTimeout(el.demonID);
+		el.enroute = false;
+	};
+
+	jQuery.fn.demon.executeDemon = function(el) {
+
+		AjaxSqueeze(el.script,"aspirateur-demon",function() {
+
+			var fenetre = jQuery("#aspirateur-demon .fenetre:last");
+
+			if (jQuery(fenetre).length != 0) {
+				bureau.prepend(fenetre);
+				jQuery(fenetre).initFenetre();
+				fenetreActive = fenetre;
+				fenetreActive.active();
+			}
+					
+			// si y'a encore quelque chose, on le met dans une fenetre d'erreur
+			if (aspirateur.children().length != 0) {
+				bureau.creerFenetreErreur(jQuery(aspirateur_demon).html());
+				aspirateur_demon.html("");
+			}
+		});
+		el.demonID = setTimeout(function(){jQuery.fn.demon.executeDemon(el)},el.temps);
+	};
+
 	jQuery.fn.initBarre = function() {
 		return this.each(function() {
 			jQuery(this).find("div.toogle").each(function() {
@@ -484,6 +528,17 @@ jQuery(document).ready(function() {
 					jQuery(this).parents('.contenu').slideUp('slow');
 				});
 			});
+
+			// on recupere les demons
+			jQuery('.bureau-demon').each(function() {
+				jQuery(this).children('a.demon').each(function() {
+					jQuery(this).click(function() { return false;});
+					var script = jQuery(this).attr('href');
+					var temps = jQuery(this).html();
+					jQuery(this).siblings('a.ouvre').demon(script,temps); // et on le lance
+				});
+			});
+
 		 	jQuery('.jclock').jclock();
 		});
 	};

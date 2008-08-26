@@ -25,4 +25,5 @@ function bureau_ajouter_boutons($flux) {
 	$flux['bureau']= new Bouton(find_in_path('images/spip.png'), _T('bureau:titre'), generer_url_ecrire('bureau'));
 	return $flux;
 }
+
 ?>
