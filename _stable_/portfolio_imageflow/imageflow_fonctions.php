@@ -81,7 +81,8 @@ if(!function_exists('image_avec_reflet')) {
 		, $style = "margin:0;padding:0;border:0;"
 		, $width = false
 	) {
-		
+		$alt = trim($alt);
+		imageflow_log("alt: ".$alt);
 		if(($s = imageflow_php_gd_versions_ok()) !== true) {
 			imageflow_log("Err: "._T('imageflow:'.$s));
 			return(false);
@@ -374,12 +375,13 @@ if(!function_exists('image_avec_reflet')) {
 		// $width // déjà calculé plus haut
 		$height = $dest_height;
 		$name = $image['fichier'];
-		$alt = "'".$image["alt"]."'";
+		$alt = (!empty($alt) ? $alt : "'".$image["alt"]."'");
 		// $title // en paramètre
 		$longdesc = longdesc_propre($longdesc);
-		$style = $image['style'].$style;
+		//$style = $image['style'].$style;
+		$style = $style;
 			
-		foreach(array('src', 'class', 'width', 'height', 'name', 'alt', 'title', 'longdesc', 'style') as $key) {
+		foreach(array('src', 'class', 'width', 'height', 'alt', 'title', 'longdesc', 'style', 'name') as $key) {
 			if(!empty($$key)) {
 				$tags .= $key."=\"".$$key."\" ";
 			}
