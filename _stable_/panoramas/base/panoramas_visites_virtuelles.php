@@ -114,6 +114,7 @@ $visites_virtuelles_interactions = array(
 		"images_transition"	=> "text NOT NULL", /* liste des images à afficher séquentiellement pendant la transition (id des images séparés par des virgules) */
 		"images_transition_delai"	=> "bigint(21) NOT NULL", /* durée d'affichage d'une image avant de passer à la suivante */
 		"id_film_transition"	=> "bigint(21) NOT NULL", /* jouer un film pendant la transition */
+		"film_transition_duree"	=> "bigint(21) NOT NULL", /* durée du film pendant la transition */
 		"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
 		"maj"	=> "TIMESTAMP"
 		);

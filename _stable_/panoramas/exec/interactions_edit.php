@@ -96,6 +96,7 @@ function exec_interactions_edit(){
 			$images_transition = $row['images_transition'];
 			$images_transition_delai = $row['images_transition_delai'];
 			$id_film_transition = $row['id_film_transition'];
+			$film_transition_duree = $row['film_transition_duree'];
 	
 		}
 		$focus = "";
@@ -144,6 +145,7 @@ function exec_interactions_edit(){
 		$row['images_transition'] = $images_transition;
 		$row['images_transition_delai'] = $images_transition_delai;
 		$row['id_film_transition'] = $id_film_transition;
+		$row['film_transition_duree'] = $film_transition_duree;
 		
 		$action_link = generer_action_auteur("interactions_edit","new",urlencode($redirect));
 	}
@@ -239,6 +241,7 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$images_transition = $row['images_transition'];
 	$images_transition_delai = intval($row['images_transition_delai']);
 	$id_film_transition = intval($row['id_film_transition']);
+	$film_transition_duree = intval($row['film_transition_duree']);
 	
 	$out = "";
 	$out .= "<p>";
@@ -450,6 +453,10 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$out .= "<strong><label for='id_film_transition_interaction' id='id_film_transition_interaction_label'>"._T("panoramas:id_film_transition")."</label></strong> ";
 	$out .= "<input type='text' name='id_film_transition' id='id_film_transition_interaction' class='formo $focus' ".
 		"value=\"".$id_film_transition."\" size='5' />\n";
+
+	$out .= "<strong><label for='film_transition_duree' id='film_transition_duree_interaction_label'>"._T("panoramas:film_transition_duree")."</label></strong> ";
+	$out .= "<input type='text' name='film_transition_duree' id='film_transition_duree_interaction' class='formo $focus' ".
+		"value=\"".$film_transition_duree."\" size='5' />\n";
 
 	$out .= "</fieldset>";
 

@@ -85,7 +85,7 @@ $(document).ready(function(){
 	$(document).ready(function(){
 		
 	
-	<BOUCLE_interactionsobjetetpersonnage(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
+	<BOUCLE_toutesinteractions(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
 		
 		[ (#REM) interactions qui ont précisé une image de fond : ajouter l'image dans le cadre ]
 		<BOUCLE_imagedefondcourante(DOCUMENTS){id_document=#ID_IMAGE_FOND}>
@@ -208,12 +208,31 @@ $(document).ready(function(){
 
 		
 
+		[(#REM) Transistion de type film avant d'activer l'interaction ]
+		<BOUCLE_filmtransition(DOCUMENTS){id_document=#ID_FILM_TRANSITION}>
+			$('.interaction#ID_INTERACTION').bind('click', function(){
+				setTimeout(function(){
+					document.location.href=$('.interaction#ID_INTERACTION').attr('href');
+				}, #FILM_TRANSITION_DUREE );
+				$('.panorama-viewport').append("<div class='fond-noir-slideshow' style='background: black; width: 100%; height: 100%; position: absolute; left: 0; top: 0; opacity: .8;'></div><div style='position: absolute; top: 0; left: 0;'><a class='media' href='#URL_DOCUMENT'>#TITRE</a></div>");
+				$('.media').media({
+						<BOUCLE_visiteparent1(VISITES_VIRTUELLES){id_visite=#_lieux:ID_VISITE}>
+						width: #LARGEUR, 
+						height: #HAUTEUR,
+						</BOUCLE_visiteparent1>
+						autoplay: true,
+						flashvars: { flv: '[(#URL_DOCUMENT|url_absolue)]', autoplay: 1, autoload: 1}
+						});
+			return false;
 		
+			});
+		</BOUCLE_filmtransition>
 		
-	</BOUCLE_interactionsobjetetpersonnage>
+	</BOUCLE_toutesinteractions>
 
 	});
 
+	
 </script>
 
 #SET{docs, #DOCUMENTS_ASSOCIES}
@@ -233,6 +252,7 @@ $(document).ready(function(){
 <B_imagestransition>
 <div class="images-transition-interaction#ID_INTERACTION" style="display: none; position: absolute; top: 0; left: 0;">
 <ul class="innerfade">
+	
 <BOUCLE_imagestransition(DOCUMENTS)>[(#ID_DOCUMENT|inclusdans{#GET**{transition}}|?{' ',''})
 		<li>[(#FICHIER|image_reduire{0,375})]</li>
 	]</BOUCLE_imagestransition>
@@ -240,13 +260,12 @@ $(document).ready(function(){
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
-//faire jouer la transition avant d'activer l'interaction
+[(#REM) faire jouer la transition avant d'activer l'interaction : cas d'une séquence d'images ]
 	$('.interaction#ID_INTERACTION').bind('click', function(){
 		if ($('.images-transition-interaction#ID_INTERACTION')[0]){
 		
 			var nb_li = ($('.images-transition-interaction#ID_INTERACTION ul li').length);
 			setTimeout(function(){
-				$('.fond-noir-slideshow').remove();
 				$('.images-transition-interaction#ID_INTERACTION').remove();
 				document.location.href=$('.interaction#ID_INTERACTION').attr('href');
 			}, nb_li*#IMAGES_TRANSITION_DELAI );
