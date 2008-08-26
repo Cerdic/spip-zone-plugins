@@ -393,27 +393,66 @@ if(!empty($variables['actions']['valider'])) {
 		}
 
 		// les images liées le sont maintenant a la breve
-
-		$documents = sql_select (
-			array('id_document'),
-			array('spip_documents_articles'),
-			array('id_article = '.sql_quote($variables['champs_pri']['id_article']))
-			);
+		// dés la sortie de spip 2.0, virer l'horrible compatibilité descendante
+		if (version_compare($GLOBALS['spip_version_code'], '1.9300', '<')) {
+			$documents = sql_select (
+				array('id_document'),
+				array('spip_documents_articles'),
+				array('id_article = '.sql_quote($variables['champs_pri']['id_article']))
+				);
+		}
+		else { // version 2.0
+			$documents = sql_select (
+				array('id_document'),
+				array('spip_documents_liens'),
+				array('id_objet = '.sql_quote($variables['champs_pri']['id_article']).' AND objet = '.sql_quote("article"))
+				);
+		}
 
 		while ($document = sql_fetch($documents)) {
-			sql_insertq(
-				'spip_documents_breves',
-				array(
-					'id_document' => $document['id_document'],
-					'id_breve' => $id_breve
-				)
+
+			if (version_compare($GLOBALS['spip_version_code'], '1.9300', '<')) {
+				sql_insertq(
+					'spip_documents_breves',
+					array(
+						'id_document' => $document['id_document'],
+						'id_breve' => $id_breve
+					)
+				);
+			}
+			else {
+				sql_insertq(
+					'spip_documents_liens',
+					array(
+						'id_document' => $document['id_document'],
+						'id_objet' => $id_breve,
+						'objet' => sql_quote("breve")
+					)
+				);
+			}
+		}
+
+		if (version_compare($GLOBALS['spip_version_code'], '1.9300', '<')) {
+			sql_delete (
+				array('spip_documents_articles'),
+				array('id_article = '.sql_quote($variables['champs_pri']['id_article']))
+			);
+		}
+		else {
+			sql_delete (
+				array('spip_documents_liens'),
+				array('id_objet = '.sql_quote($variables['champs_pri']['id_article']).' AND objet = '.sql_quote("article"))
 			);
 		}
 
-		sql_delete (
-			array('spip_documents_articles'),
-			array('id_article = '.sql_quote($variables['champs_pri']['id_article']))
-		);
+
+		// si il y a un logo attaché à l'article
+		$chercher_logo = charger_fonction('chercher_logo','inc');
+		$a = $chercher_logo($variables['champs_pri']['id_article'],'id_article');
+		if (count($a)) { // on le ratache à la breve
+			@rename ($a[0], _DIR_LOGOS . 'breveon'.$id_breve. '.' . $a[3]);
+		}
+
 
 		sql_delete (
 			array('spip_mots_articles'),
@@ -792,21 +831,8 @@ if(!empty($variables['actions']['media'])) {
 			}
 			else {
 
-				/*
-				 * remplacer par ajouter_un_document a la prochaine version de spip
- 				 * ajouter_un_document();
-				 * inc/ajouter_documents.php
-				 */
 				$ajouter_document = charger_fonction('ajouter_documents','inc');
 				$ajouter_document($tmp,$fichier,"article",$variables['champs_pri']['id_article'],$mode,$id_document,$documents_actifs);
-
-			/*	inc_ajouter_documents_dist ($tmp,
-							 $fichier,
-							 "article",
-							 $variables['champs_pri']['id_article'],
-							 $mode,
-							 $id_document,
-							 $documents_actifs);*/
 
 				// récupération de l'id
 				$ret = sql_fetch(sql_select(
