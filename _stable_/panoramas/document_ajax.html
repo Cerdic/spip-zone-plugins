@@ -1,7 +1,12 @@
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+<html>
+<head>
+<INCLURE{fond=inc-head}>
+</head>
+<body>
 <BOUCLE_video(DOCUMENTS){id_document}>
 	[(#MODELE{doc_player}{id_document=#ID_DOCUMENT})]
 </BOUCLE_video>
-<p>
-<a href="#" onclick="javascript:tb_remove();"><:panoramas:fermer_fenetre:></a>
 
-</p>
+</body>
+</html>

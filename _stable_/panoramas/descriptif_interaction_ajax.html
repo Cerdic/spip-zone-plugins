@@ -1,5 +1,13 @@
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+<html>
+<head>
+<INCLURE{fond=inc-head}>
+</head>
+<body>
 <BOUCLE_interactions(VISITES_VIRTUELLES_INTERACTIONS){id_interaction}>
 	<p class="descriptif-interaction">#DESCRIPTIF</p>
 </BOUCLE_interactions>
 
-<a href="#" onclick="javascript:tb_remove();"><:panoramas:fermer_fenetre:></a>
+</body>
+</html>
+

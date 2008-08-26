@@ -1,4 +1,9 @@
 [(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+<html>
+<head>
+<INCLURE{fond=inc-head}>
+</head>
+<body>
 <p class="jeu-interaction">
 <BOUCLE_interactions(VISITES_VIRTUELLES_INTERACTIONS){id_interaction}>
 	<BOUCLE_jeux(JEUX){id_jeu=#ID_JEU_CIBLE}>
@@ -9,6 +14,5 @@
 	</BOUCLE_jeux>
 </BOUCLE_interactions>
 </p>
-
-
-
+</body>
+</html>
