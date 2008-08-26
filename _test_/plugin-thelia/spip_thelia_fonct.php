@@ -80,6 +80,8 @@ function spip_thelia_appeler_moteur_thelia($texte)
 
 	include_once("classes/Navigation.class.php");
 	
+	ini_set('arg_separator.output', '&amp;');
+	ini_set("url_rewriter.tags","a=href,area=href,frame=src,iframe=src,input=src");
 	session_start();
 
 	//conflit entre spip et thélia sur la langue en session.
