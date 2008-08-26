@@ -203,6 +203,10 @@ _ • [De todo o m&oacute;dulo->@reset@]
 </p>',
 
 	// I
+	'icone_visiter:description' => 'Substit&uacute;a a imaxe do bot&oacute;n est&aacute;ndar &laquo;&nbsp;Visitar&nbsp;&raquo; (arriba &aacute; dereita desta p&aacute;xina) polo logo do web, se existe.
+
+Para definir o logo, vaia &aacute; p&aacute;xina &laquo;&nbsp;Configuraci&oacute;n do web&nbsp;&raquo; premendo sobre o bot&oacute;n &laquo;&nbsp;Configuraci&oacute;n&nbsp;&raquo;.',
+	'icone_visiter:nom' => 'Bot&oacute;n &laquo;&nbsp;Visitar&nbsp;&raquo;',
 	'insert_head:description' => 'Activa automaticamente a baliza [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] en todos os esqueletos, que te&ntilde;an ou non esta baliza entre &lt;head&gt; e &lt;/head&gt;. Merc&eacute; a esta opci&oacute;n, os plugins poder&aacute;n inserir javascript (.js) ou follas de estilo (.css).',
 	'insert_head:nom' => 'Baliza #INSERT_HEAD',
 	'insertions:description' => 'AVISO : ferramenta en proceso de desenvolvemento !! [[%insertions%]]',
@@ -258,15 +262,20 @@ _ • [De todo o m&oacute;dulo->@reset@]
 	'label:radio_suivi_forums3' => '@_CS_CHOIX@',
 	'label:radio_target_blank3' => 'Nova xanela para as ligaz&oacute;ns externas :',
 	'label:radio_type_urls3' => 'Formato dos URL :',
+	'label:scrollTo' => 'Instalar os m&oacute;dulos {jQuery} seguintes :',
 	'label:set_couleurs' => 'Conxunto para usar :',
 	'label:spam_mots' => 'Secuencias prohibidas :',
 	'label:spip_script' => 'Script de chamada :',
 	'label:style_h' => 'O seu estilo :',
 	'label:style_p' => 'O seu estilo :',
 	'label:suite_introduction' => 'Puntos de continuidade :',
+	'label:terminaison_urls_arbo' => 'Terminaci&oacute;n dos URL (ex : .html) :',
 	'label:titre_travaux' => 'T&iacute;tulo da mensaxe :',
 	'label:tri_articles' => 'A s&uacute;a elecci&oacute;n :',
+	'label:url_arbo_minuscules' => 'Conservar a altura tipogr&aacute;fica dos t&iacute;tulos nos URL :',
+	'label:url_arbo_sep_id' => 'Car&aacute;cter de separaci&oacute;n \'titulo-id\' para o caso de repetici&oacute;n (doublon) :<br/>(non empregue \'/\')',
 	'label:url_glossaire_externe2' => 'Ligaz&oacute;n sobre o glosario externo :',
+	'label:urls_arbo_sans_type' => 'Mostrar o tipo de obxecto SPIP nos URL :',
 	'liens_en_clair:description' => 'Pon &aacute; s&uacute;a disposici&oacute;n o filtro : \'liens_en_clair\'. O seu texto cont&eacute;n probablemente ligaz&oacute;ns de hipertexto que non son visibles tras unha impresi&oacute;n. Este filtro engade entre corchetes o destino de cada ligaz&oacute;n activa (ligaz&oacute;ns externas ou correos). Atenci&oacute;n : en modo de impresi&oacute;n (par&aacute;metro \'cs=print\' ou \'page=print\' no url da p&aacute;xina), esta funcionalidade apl&iacute;case automaticamente.',
 	'liens_en_clair:nom' => 'Ligaz&oacute;ns en claro',
 	'liens_orphelins:description' => 'Esta ferramenta ten d&uacute;as funci&oacute;ns :
@@ -363,6 +372,10 @@ De reinicializar o m&oacute;dulo premendo sobre un paquete, a Navalla Su&iacute;
 _ Est&aacute; dispo&ntilde;ible unha baliza para mostrar unha t&aacute;boa de riso&ntilde;os nos seus esqueletos : #SMILEYS.
 _ Dese&ntilde;os : [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'Riso&ntilde;os',
+	'soft_scroller:description' => 'Ofrece na parte p&uacute;blica do seu web un esvaramento suavizado da p&aacute;xina logo de que o visitante prema sobre unha ligaz&oacute;n que apunte sobre unha &aacute;ncora: resulta moi &uacute;til para evitar perderse nunha p&aacute;xina complexa ou un texto moi longo...
+
+Aviso, esta utilidade precisa que haxa dous m&oacute;dulos instalados {jQuery} : {ScrollTo} e {LocalScroll}. A Navalla Su&iacute;za p&oacute;deos instalar directamente se vostede selecciona as opci&oacute;ns seguintes. [[%scrollTo%]][[->%LocalScroll%]]',
+	'soft_scroller:nom' => '&Aacute;ncoras suaves',
 	'sommaire:description' => 'Constr&uacute;e un sumario para os seus artigos co fin de acceder rapidamente  a t&iacute;tulos de alto tama&ntilde;o (balizas HTML &lt;h3>Un intert&iacute;tulo&lt;/h3> ou a atallos de SPIP : intert&iacute;tulos do estilo :<code>{{{Un t&iacute;tulo grande}}}</code>).
 
 @puce@ Pode definir aqu&iacute; o n&uacute;mero m&aacute;ximo de caracteres retidos dos intert&iacute;tulos para constru&iacute;r o sumario :[[%lgr_sommaire% caract&egrave;res]]
@@ -411,7 +424,7 @@ _ Non esqueza verificar \'un_texte\' est&aacute; ben definido nos ficheiros de l
 	'travaux_prochainement' => 'Este web ser&aacute; restablecido axi&ntilde;a.
 _ Grazas pola s&uacute;a comprensi&oacute;n.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
-	'tri_articles:description' => '<MODIF>En navegando o web na zona privada([->./?exec=auteurs]), escolla aqu&iacute; a ordenaci&oacute;n que usar&aacute; para mostrar os artigos no interior das secci&oacute;ns.
+	'tri_articles:description' => 'En navegando o web na zona privada([->./?exec=auteurs]), escolla aqu&iacute; a ordenaci&oacute;n que usar&aacute; para mostrar os artigos no interior das secci&oacute;ns.
 
 As propostas que seguen est&aacute;n baseadas na funcionalidade SQL \'ORDER BY\' : non empregue unha ordenaci&oacute;n personalizada se non est&aacute; seguro do que est&aacute; a facer (campos dispo&ntilde;&iacute;beis : {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
 [[%tri_articles%]][[->%tri_perso%]]',
@@ -420,27 +433,31 @@ As propostas que seguen est&aacute;n baseadas na funcionalidade SQL \'ORDER BY\'
 	'tri_perso' => 'Ordenaci&oacute;n SQL personalizada, ORDER BY segundo a estrutura :',
 	'tri_publi' => 'Ordenaci&oacute;n sobre a data de publicaci&oacute;n (ORDER BY date DESC)',
 	'tri_titre' => 'Ordenaci&oacute;n sobre o t&iacute;tulo (ORDER BY 0+titre,titre)',
-	'type_urls:description' => '<MODIF>@puce@ SPIP ofrece unha elecci&oacute;n entre varios xogos de URL para facer as ligaz&oacute;ns de acceso &aacute;s p&aacute;xinas do seu web :
+	'type_urls:description' => '@puce@ SPIP ofrece unha elecci&oacute;n entre varios xogos de URL para facer as ligaz&oacute;ns de acceso &aacute;s p&aacute;xinas do seu web :
 <div style="font-size:90%; margin:0 2em;">
-- {{paxina}} : o valor predeterminado de SPIP v1.9x : <code>/spip.php?article123</code>.
+- {{p&aacute;xina}} : o valor predeterminado de SPIP v1.9x : <code>/spip.php?article123</code>.
 - {{html}} : as ligaz&oacute;ns te&ntilde;en a forma de p&aacute;xinas html cl&aacute;sicas : <code>/article123.html</code>.
 - {{propias}} : as ligaz&oacute;ns calc&uacute;lanse grazas ao t&iacute;tulo: <code>/Mon-titre-d-article</code>.
 - {{propias2}} : a extensi&oacute;n \'.html\' eng&aacute;dese aos enderezos xerados : <code>/Mon-titre-d-article.html</code>.
-- {{estandar}} : URL usadas por v1.8 e precedentes : <code>article.php3?id_article=123</code>
-- {{propias-qs}} : este sistema funciona en "Query-String", &eacute; dicir necesidade de .htaccess ; as ligaz&oacute;ns ser&aacute;n desta forma : <code>/?Mon-titre-d-article</code>.</div>
+- {{arborescentes}} (a partir de SPIP 2.0 unicamente) as ligaz&oacute;ns son de tipo arborescente : <code>/sector/seccion/seccion/artigo</code>.
+- {{est&aacute;ndar}} : URL usadas por v1.8 e precedentes : <code>article.php3?id_article=123</code>
+- {{propias-qs}} : este sistema funciona en "Query-String", &eacute; dicir, sen necesidade de .htaccess ; as ligaz&oacute;ns ser&aacute;n desta forma : <code>/?Meu-titulo-de-artigo</code>.</div>
 
 M&aacute;is info : [->http://www.spip.net/fr_article765.html]
 [[%radio_type_urls3%]]
-<p style=\'font-size:85%\'>@_CS_ASTER@para usar os formatos {html}, {propria} ou {propria2}, copie o ficheiro "htaccess.txt" do cartafol de base do web SPIP co nome ".htaccess" (atenci&oacute;n a non borrar outras regraxes que vostede te&ntilde;a posto nese ficheiro) ; se o seu web est&aacute; nun subcartafol, deber&aacute; tam&eacute;n editar a li&ntilde;a "RewriteBase" neste ficheiro. Os URL definidos ser&aacute;n logo redirixidos cara aos ficheiros de SPIP.</p>
+<p style=\'font-size:85%\'>@_CS_ASTER@para usar os formatos {html}, {proprias} ou {proprias2}, copie o ficheiro "htaccess.txt" do cartafol ra&iacute;z de SPIP co nome ".htaccess" (preste atenci&oacute;n a non borrar outras regraxes que vostede te&ntilde;a posto nese ficheiro) ; se o seu web est&aacute; nun subcartafol, deber&aacute; tam&eacute;n editar a li&ntilde;a "RewriteBase" neste ficheiro. Os URL definidos ser&aacute;n logo redirixidos cara aos ficheiros de SPIP.</p>
 
-@puce@ {{Unicamente de usar o formato p&aacute;xina {paxina} que segue}}, ent&oacute;n &eacute; pos&iacute;bel escoller o  script de chamada a SPIP. De modo predeterminado, SPIP escolle {spip.php}, sen&oacute;n {index.php} (formato : <code>/index.php?article123</code>) ou un valor baleiro (formato : <code>/?article123</code>) funcionan tam&eacute;n. Para calquera outro valor, &eacute; completamente necesario crear o ficheiro correspondente na ra&iacute;za de SPIP, &aacute; imaxe daquel que xa existe : {index.php}.
-[[%spip_script%]]',
+@puce@ {{Unicamente se vostede usa o formato {p&aacute;xina} que segue}}, ent&oacute;n &eacute; pos&iacute;bel escoller o  script de chamada a SPIP. De modo predeterminado, SPIP escolle {spip.php}, sen&oacute;n {index.php} (formato : <code>/index.php?article123</code>) ou un valor baleiro (formato : <code>/?article123</code>) funcionan tam&eacute;n. Para calquera outro valor, &eacute; completamente necesario crear o ficheiro correspondente na ra&iacute;z de SPIP, &aacute; imaxe daquel que xa existe : {index.php}.
+[[%spip_script%]]
+@puce@ {{Unicamente se vostede emprega os URL {arborescentes} tal e como segue}}, ent&oacute;n &eacute; posible personalizar o resultado :</p>
+[[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]',
 	'type_urls:nom' => 'Formato das URL',
 	'typo_exposants:description' => 'Textos franceses : mellora o rendementos tipogr&aacute;fico das abreviaturas correntes, metendo en super&iacute;ndice os elementos necesarios (as&iacute;, {<acronym>Mme</acronym>} produce {M<sup>me</sup>}) e corrixindo os erros correntes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, por exemplo, produce {2<sup>e</sup>}, s&oacute; abreviatura correcta).
 _ As abreviaturas obtidas est&aacute;n conformes con aquelas da Imprenta nacional como constan en {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (artigo &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, imprentas da Imprimerie nationale, Paris, 2002).',
 	'typo_exposants:nom' => 'Super&iacute;ndices tipogr&aacute;ficos',
 
 	// U
+	'url_arbo' => 'arborescentes@_CS_ASTER@',
 	'url_html' => 'html@_CS_ASTER@',
 	'url_page' => 'p&aacute;xina',
 	'url_propres' => 'propias@_CS_ASTER@',
