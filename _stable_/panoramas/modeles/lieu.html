@@ -52,7 +52,7 @@
 <script type="text/javascript" src="#CHEMIN{js/jquery.advanced-panorama.js}"></script>
 <script type="text/javascript" src="#CHEMIN{js/jquery.flipv.js}"></script>
 <script type="text/javascript">
-	tb_pathToImage = "#CHEMIN{css/loadingAnimation.gif}";
+	tb_pathToImage = "#CHEMIN{img_pack/ajax-loader.gif}";
 
 <BOUCLE_visites(VISITES_VIRTUELLES){id_visite=#ID_VISITE}>
 <BOUCLE_carte(DOCUMENTS){id_document=#ID_CARTE}>
@@ -230,10 +230,27 @@ $(document).ready(function(){
 		
 	</BOUCLE_toutesinteractions>
 
+
+	[(#REM) gif animée sur fond noir avant le chargement de la page suivante ]
+	<BOUCLE_interactionsversautrepage(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}{type IN lieu,visite,article,rubrique,url}>
+		$('.interaction#ID_INTERACTION').bind('click', function(){
+			$('.panorama-viewport').append("<div class='fond-noir-slideshow' style='background: black; width: 100%; height: 100%; position: absolute; left: 0; top: 0; opacity: .8;'></div><img src='#CHEMIN{img_pack/ajax-loader.gif}' style='position: absolute; top: 50%; left: 50%; margin-left: -33px; margin-top: -33px;' />");
+			return true;	
+		});
+	</BOUCLE_interactionsversautrepage>
+	$('div.panorama-carte .lien-plan a').bind('click', function(){
+			$('.panorama-viewport').append("<div class='fond-noir-slideshow' style='background: black; width: 100%; height: 100%; position: absolute; left: 0; top: 0; opacity: .8;'></div><img src='#CHEMIN{img_pack/ajax-loader.gif}' style='position: absolute; top: 50%; left: 50%; margin-left: -33px; margin-top: -33px;' />");
+			return true;
+		});
+		
 	});
 
-	
 </script>
+
+[(#REM) gif animée sur fond noir avant le chargement de la page suivante (préchargement) ]
+<img src="#CHEMIN{img_pack/ajax-loader.gif}" width="0" height="0" alt="" />
+
+
 
 #SET{docs, #DOCUMENTS_ASSOCIES}
 <B_documentsassocies>
