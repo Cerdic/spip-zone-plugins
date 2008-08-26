@@ -81,6 +81,7 @@ Consulte a [documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/Sp
 	'admin_plugin_requis_erreur_cfg' => 'Instale o m&oacute;dulos CFG e act&iacute;veo ! [Documentaci&oacute;n aqu&iacute;->http://www.spip-contrib.net/?article1605], [Arquivo ZIP aqu&iacute;->http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => 'Os m&oacute;dulos requiridos faltan. Act&iacute;veos !',
 	'admin_plugin_requis_ok' => 'Modulo(s)  instalado(s) e activo(s) :',
+	'admin_plugin_requis_ok_balisesession' => '[M&oacute;dulo BALISE_SESSION->http://www.spip-contrib.net/?article1224] : fornece os datos sobe visitantes autenticados.',
 	'admin_plugin_requis_ok_cfg' => '[M&oacute;dulo CFG->http://www.spip-contrib.net/?article1605] : fornece funci&oacute;ns e balizas.',
 	'admin_sous_titre' => 'Acceder ao panel de control de foros con  SpipBB',
 	'admin_spip_config_forums' => 'Configuraci&oacute;n de SPIP&nbsp;:',
@@ -337,8 +338,8 @@ _ Un destacado sit&uacute;ase por baixo dos anuncios, antes das mensaxes ordinar
 
 	// P
 	'pagine_page_' => ' .. p&aacute;xina ',
-	'pagine_post_' => '<MODIF> resposta',
-	'pagine_post_s' => '<MODIF> respostas',
+	'pagine_post_' => 'resposta',
+	'pagine_post_s' => 'respostas',
 	'pagine_sujet_s' => ' asuntos',
 	'par_' => 'por',
 	'plugin_auteur' => 'O equipo SpipBB : [ver a lista de contribuidores en Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
@@ -355,6 +356,7 @@ _ {{M&oacute;dulo spipbb en curso de desenvolvemento. &Uacute;seo ao seu risco e
 _ [Acceso ao panel de administraci&oacute;n-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribu&iacute;do baixo licenza GPL',
 	'plugin_lien' => '[Consulte a documentaci&oacute;n do m&oacute;dulo en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
+	'plugin_mauvaise_version' => 'Esta versi&oacute;n do m&oacute;dulo non &eacute; compatible coa s&uacute;a versi&oacute;n de SPIP !',
 	'plugin_nom' => 'SpipBB : xesti&oacute;n de foros de SPIP',
 	'post_aucun_pt' => 'ning&uacute;n&nbsp;!',
 	'post_efface_lui' => 'este asunto afecta a @
