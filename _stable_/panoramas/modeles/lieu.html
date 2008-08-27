@@ -300,13 +300,39 @@ $(document).ready(function(){
 			
 			return true;
 		}
-	});
-			
+	});		
 });
+
 </script>
 </B_imagestransition>
 </BOUCLE_interactionstransitions>
 
 </BOUCLE_lieux>
 
+[(#REM) Gestion de la molette de la souris pour aller à gauche à droite ]
+<script type="text/javascript">
+$(document).ready(function(){
+
+	var intOverallDelta = 0;
+	$(".panorama-viewport").mousewheel(function(objEvent, intDelta){
+		if (intDelta > 0) { 
+		      	intOverallDelta++;
+			if (intOverallDelta>0) {
+				intOverallDelta = 1;
+				$('.panorama-control-right').trigger('click');
+			} else {
+				$('.panorama-control-pause').trigger('click');
+			}
+		} else if (intDelta < 0) {
+			intOverallDelta--;
+			if (intOverallDelta<0) {
+				intOverallDelta = -1;
+				$('.panorama-control-left').trigger('click');
+			} else {
+				$('.panorama-control-pause').trigger('click');
+			}
+		}
+	});
+});
+</script>
 </B_lieux>

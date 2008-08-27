@@ -9,6 +9,7 @@ function panoramas_insertion_in_head($flux)
 	<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery.cookie.js\"></script>
 	<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery.innerfade.js\"></script>
 	<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery.media.js\"></script>
+	<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jQuery_mousewheel_plugin.js\"></script>
 	<script type=\"text/javascript\">
 		$.fn.media.defaults.flvPlayer = '"._DIR_PLUGIN_PANORAMAS."player_flv_mini.swf';
 	</script>
@@ -26,6 +27,7 @@ function panoramas_insertion_in_header_prive($flux)
 	<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery.cookie.js\"></script>
 	<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery.innerfade.js\"></script>
 	<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jquery.media.js\"></script>
+	<script type=\"text/javascript\" src=\""._DIR_PLUGIN_PANORAMAS."js/jQuery_mousewheel_plugin.js\"></script>
 	<script type=\"text/javascript\">
 		$.fn.media.defaults.flvPlayer = '"._DIR_PLUGIN_PANORAMAS."player_flv_mini.swf';
 	</script>
