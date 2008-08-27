@@ -76,7 +76,9 @@
 				<BOUCLE_documents_portfolio(DOCUMENTS){id_article}{mode=document}{extension IN png,jpg,gif} {par num titre, date} {doublons}>
 				[(#LOGO_DOCUMENT||image_avec_reflet{
 					[(#TITRE|couper{80}|texte_backend)]
+					, [(#URL_DOCUMENT)]
 					, [(#TITRE|couper{80}|texte_backend)]
+					, [(#DESCRIPTIF)]
 					})]				
 				</BOUCLE_documents_portfolio>
 			</div>
