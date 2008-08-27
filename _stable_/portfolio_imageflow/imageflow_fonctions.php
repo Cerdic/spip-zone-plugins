@@ -427,7 +427,7 @@ if(!function_exists('image_avec_reflet')) {
 		$class = (!empty($class) ? $class." " : "")."spip_reflets";
 		// $width // déjà calculé plus haut
 		$height = $dest_height;
-		$name = $image['fichier'];
+		// $name // donné en paramètre
 		$alt = (!empty($alt) ? $alt : "'".$image["alt"]."'");
 		// $title // en paramètre
 		$longdesc = longdesc_propre($longdesc);
