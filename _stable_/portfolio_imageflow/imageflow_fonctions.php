@@ -66,6 +66,7 @@ include_spip('inc/imageflow_api_globales');
  * @param $height Hauteur en pourcentage du reflet. Par de'faut 50%
  * @param $width Largeur finale. Par de'faut, prend celui des vignettes de'fini dans /ecrire/?exec=config_fonctions
  * @return Chemin de l'image re'sultat, ou false si erreur, ou "" si rien
+ * @see http://www.quesaco.org/Portfolio-ImageFlow-pour-SPIP#image_avec_reflet
  * @see http://www.spip.net/fr_article3327.html
  * @see http://reflection.corephp.co.uk
  */

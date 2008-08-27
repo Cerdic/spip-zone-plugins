@@ -211,4 +211,20 @@ function imageflow_boite_alerte ($titre, $message) {
 	return($result);
 }
 
+/***********************************************/
+function imageflow_sliders_lister ($dir = _DIR_IMAGEFLOW_IMAGES) {
+	$result = array();
+	$dir = rtrim(_DIR_IMAGEFLOW_IMAGES, "/")."/";
+	if (is_dir($dir) && ($dh = opendir($dir))) {
+		while (($file = readdir($dh)) !== false) {
+			if (preg_match(';^(slider_).*(\.gif)$;', $file)) {
+				$result[] = $dir . $file;					
+			}
+		}
+		closedir($dh);
+		return ($result);
+	}
+	return (false);
+}
+
 ?>

@@ -1,0 +1,38 @@
+#sliders, #sliders .slider, #sliders img, #sliders label, #sliders input {
+	display:block;margin:0;padding:0;border:0;
+}
+#sliders {
+	margin:1ex;
+}
+#sliders .slider {
+	width:34px;
+	height:34px;
+	border:2px solid gray;
+	float:left;
+	margin:4px;
+	text-align:center;
+}
+#sliders img {
+	width:14px;
+	height:14px;
+	margin:10px;
+}
+#sliders label { 
+	display:none; 
+}
+#sliders input {
+	width:46px;
+	height:46px;
+	display:block;
+	color:white;
+	border:3px solid red;
+	display:none;
+}
+#sliders .hover {
+	background-color:gray;
+	border:2px solid red;
+	cursor:pointer;
+}
+#sliders .checked {
+	border:2px solid black;
+}

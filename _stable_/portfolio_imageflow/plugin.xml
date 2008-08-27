@@ -23,7 +23,7 @@
 		[Documentation sur www.quesaco.org->http://www.quesaco.org/Portfolio-ImageFlow-pour-SPIP]
 	</lien>
 	
-	<version>1.08</version>
+	<version>1.09</version>
 	<etat>stable</etat>
 	<icon>images/imageflow.png</icon>
 	
@@ -39,6 +39,11 @@
 	<pipeline>
 		<nom>ajouter_onglets</nom>
 		<inclure>inc/imageflow_pipeline_ajouter_onglets.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>inc/imageflow_pipeline_header_prive.php</inclure>
 	</pipeline>
 	
 </plugin>

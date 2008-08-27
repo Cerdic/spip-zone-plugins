@@ -62,7 +62,7 @@ function exec_imageflow_configure () {
 
 	// la configuration est réservée aux admins tt rubriques
 	$autoriser = ($connect_statut == "0minirezo") && $connect_toutes_rubriques;
-	
+
 	if($autoriser) {
 			
 		$preferences_default = unserialize(_IMAGEFLOW_PREFERENCES_DEFAULT);
@@ -86,8 +86,14 @@ function exec_imageflow_configure () {
 				continue;
 			}
 			$value = trim(_request($key));
-			if(!empty($value)) {
-				$preferences_current[$key] = substr(trim($value), 0, 7);
+			
+			if(!empty($value)) 
+			{
+				$preferences_current[$key] = 
+					($key == 'slider')
+					? trim($value)
+					: substr(trim($value), 0, 7)
+					;
 			}
 		}
 		if(_request('btn_valider_imageflow')) {
@@ -97,6 +103,34 @@ function exec_imageflow_configure () {
 				imageflow_set_all_preferences($preferences_current);
 			}
 		}
+	}
+	
+	// lister les sliders
+	$sliders_result = "";
+	$sliders = imageflow_sliders_lister();
+	if(is_array($sliders) && count($sliders)) 
+	{imageflow_log("###############:".$preferences_current['slider']);
+		$ii = 0;
+		foreach($sliders as $img)
+		{
+			$slider = basename($img);
+			$checked = ($slider == $preferences_current['slider']) ? " checked='checked'" : "";
+			$id = "slider-".$ii++;
+			$sliders_result .= ""
+				. "<li class='slider" . ($checked ? " checked" : "") . "'>"
+				. "<img src='$img' width='14' height='14' border='0' alt='$slider' />"
+				. "<label for='$id'>$slider</label>"
+				. "<input type='radio' name='slider' id='$id' value='$slider' $checked />"
+				. "</li>\n"
+				;
+		}
+		$sliders_result = ""
+			. debut_cadre_relief(_DIR_IMAGEFLOW_IMAGES."deg_down-24.png", true, "", _T('imageflow:slider_select'))
+			. "<ul id='sliders'>\n"
+			. $sliders_result
+			. "</ul>\n"
+			. fin_cadre_relief(true)
+			;
 	}
 
 ////////////////////////////////////
@@ -195,6 +229,8 @@ function exec_imageflow_configure () {
 			, 'tint', $value)
 		. fin_cadre_relief(true)		
 		;
+		
+	$page_result .= $sliders_result;
 
 	// fin formulaire
 	$page_result .= ""

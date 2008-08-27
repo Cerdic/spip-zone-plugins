@@ -62,6 +62,16 @@ function balise_IMAGEFLOW_INSERT_HEAD ($p) {
 	$error = array();
 	$css = $js = $insert = "";
 	
+	$preferences_meta = imageflow_get_all_preferences();
+	$preferences_default = unserialize(_IMAGEFLOW_PREFERENCES_DEFAULT);
+	
+	foreach($preferences_meta as $key => $value) {
+		if($key == 'img') continue;
+		if(empty($value)) {
+			$preferences_meta[$key] = $preferences_default[$key];
+		}
+	}
+
 	// récupère le contenu du css et mise en cache
 	if($path = find_in_path($f = "imageflow/screen.css")) {
 		$path = direction_css($path);
@@ -98,7 +108,8 @@ function balise_IMAGEFLOW_INSERT_HEAD ($p) {
 		. "\n"
 		;
 
-	$slider = "imageflow/slider.png";
+	//$slider = "imageflow/slider.png";
+	$slider = find_in_path(_DIR_IMAGEFLOW_IMAGES . $preferences_meta['slider']);
 
 	// correction du path pour le slider
 	// + position du slider pour IE

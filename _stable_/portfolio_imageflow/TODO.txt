@@ -4,9 +4,7 @@
 // $LastChangedDate$
 
 - Le chargement de l'image est parfois bien long. Ajouter un loading.gif dans la boite image finale
-- Pouvoir choisir un slider différent via la page de configuration
 - Mettre un minimum de vérification au retour du formulaire de configuration
 - Ajouter en page de configuration un bouton pour reinitialiser
-- Intégrer la fonction image_degrade() en filtre SPIP pour conformité système de cache
 - Ajouter possibilité d'une boite image finale style imagebox http://interface.eyecon.ro/demos/imagebox.html (proposer le choix, soit image en ligne, dans la page, soit imagebox)
 - créer un modele pour pouvoir ajouter le portfolio en milieu de document

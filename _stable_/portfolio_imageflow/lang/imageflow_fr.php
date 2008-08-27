@@ -51,6 +51,7 @@ $GLOBALS['i18n_imageflow_fr'] = array(
 	, 'tint_label' => "Vous pouvez modifer la teinte du reflet en pr&#233;cisant ici un couleur RVB. 
 		Par exemple &#34;#7F0000&#34;.
 		Par d&#233;faut &#58; &#34;@tint@&#34;."
+	, 'slider_select' => "S&#233;lection du bouton ascenseur (slider)"
 	
 	, 'error_php_old' => "La version de PHP install&#233;e n'est pas pleinement support&#233;e. 
 		Vous devez utiliser PHP 4.3.2 ou sup&#233;rieur."
