@@ -70,7 +70,7 @@ define("_IMAGEFLOW_PREFERENCES_DEFAULT",
 		array(
 			'img' => "" // required	The source image (to reflect)
 			, 'height' => "50%" // optional	Height of the reflection (% or pixel value)
-			, 'bgc' => "#000" // optional	Background colour to fade into, default = #000000
+			, 'bgc' => "none" // optional	Background colour to fade into (hex), 'none' for transparent, default = 'none'
 			, 'fade_start' => "80%" // optional    Start the alpha fade from whch value? (% value)
 			, 'fade_end' => "0%" // optional    End the alpha fade from whch value? (% value)
 			// jpeg index obsolète de reflect_2

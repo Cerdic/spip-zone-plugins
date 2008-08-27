@@ -31,8 +31,10 @@ $GLOBALS['i18n_imageflow_fr'] = array(
 		par exemple&#58; &#34;50%&#34;, ou &#34;16&#34;. 
 		Par d&#233;faut&#58; &#34;@height@&#34;."
 	, 'bgc' => "Couleur de fond"
-	, 'bgc_label' => "La couleur de fond de l'image et de son reflet
-		est &#224; exprimer en RVB, par exemple : &#34;#FF00FF&#34; ou &#34;#F0F&#34;. 
+	, 'bgc_label' => "Option uniquement disponible via le filtre <strong>image_avec_reflet</strong>.
+		La couleur de fond de l'image et de son reflet
+		est &#224; exprimer en RVB, par exemple : &#34;#FF00FF&#34; ou &#34;#F0F&#34;
+		ou 'none' pour un fond transparent. 
 		Par d&#233;faut&#58; &#34;@bgc@&#34;."
 	, 'fade_start' => "Opacit&#233; de d&#233;but du reflet"
 	, 'fade_start_label' => "Valeur du d&#233;gr&#233; d'opacit&#233; appliqu&#233;e en d&#233;but de reflet. 
