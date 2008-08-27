@@ -1,0 +1,39 @@
+<plugin>
+	<nom>	<!-- Nom du plugin -->
+		Google Translate
+	</nom>
+	<icon>
+		img_pack/icone.png
+	</icon>
+	<auteur>	<!-- Auteur du plugin -->
+		Yohann
+	</auteur>
+	<version>
+		beta
+	</version>
+	<etat>
+		dev
+	</etat>
+	<description>
+		Traduction des articles
+	</description>
+	<lien>
+		[Site de l'éditeur->http://www.chambredesecrets.net]
+	</lien>
+	<prefix>
+		gtr
+	</prefix>
+	
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+    <pipeline>
+       	<nom>
+			ajouter_boutons
+		</nom>
+       	<action>
+			ajouterBoutons
+		</action>
+		<inclure>
+			inc_gtr.php
+		</inclure>
+    </pipeline>
+</plugin>
