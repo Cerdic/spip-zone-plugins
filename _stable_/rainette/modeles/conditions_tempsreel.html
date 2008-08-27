@@ -22,12 +22,12 @@
 	<div class="details">
 		<span><:rainette:vent|ucfirst:></span><br/>
 		[(#ENV{vitesse_vent}|rainette_afficher_unite{vitesse})]
-		[ - (#ENV{direction_vent}|rainette_texte_direction)]<br/><br/>
+		[ - (#ENV{direction_vent}|rainette_afficher_direction)]<br/><br/>
 		<span><:rainette:humidite|ucfirst:></span><br/>
 		[(#ENV{humidite}|rainette_afficher_unite{pourcentage})]<br/><br/>
 		<span><:rainette:pression|ucfirst:></span><br/>
 		[(#ENV{pression}|rainette_afficher_unite{pression})]
-		[ - (#ENV{tendance_pression})]<br/><br/>
+		[ (#ENV{tendance_pression}|rainette_afficher_tendance{icone})]<br/><br/>
 		<span><:rainette:point_rosee|ucfirst:></span><br/>
 		[(#ENV{point_rosee}|rainette_afficher_unite{temperature})]<br/><br/>
 		<span><:rainette:visibilite|ucfirst:></span><br/>

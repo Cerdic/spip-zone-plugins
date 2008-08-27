@@ -119,8 +119,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'direction_NNW' => 'nord nord-ouest',
 	
 	// Liste des tendances barometriques
-	'tendance_barometrique_steady' => 'stable',
-	'tendance_barometrique_rising' => 'en hausse',
-	'tendance_barometrique_falling' => 'en baisse',
+	'tendance_texte_steady' => 'stable',
+	'tendance_texte_rising' => 'en hausse',
+	'tendance_texte_falling' => 'en baisse',
+	'tendance_symbole_steady' => '&rarr;',
+	'tendance_symbole_rising' => '&uarr;',
+	'tendance_symbole_falling' => '&darr;',
 );
 ?>

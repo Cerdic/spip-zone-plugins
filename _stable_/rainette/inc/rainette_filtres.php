@@ -34,12 +34,41 @@ function rainette_resume_meteo($code_icon){
 	return $resume;
 }
 
-function rainette_texte_direction($direction){
+function rainette_afficher_direction($direction){
 	static $liste_direction = 'N:NNE:NE:ENE:E:ESE:SE:SSE:S:SSW:SW:WSW:W:WNW:NW:NNW';
-	if (!in_array($direction, explode(':', $liste_direction)))
+	
+	$direction_abregee = (intval($direction)) ? angle2direction($direction) : $direction;
+	if (!in_array($direction_abregee, explode(':', $liste_direction)))
 		return _T('rainette:valeur_indeterminee');
 	else
-		return _T('rainette:direction_'.$direction);
+		return _T('rainette:direction_'.$direction_abregee);
+}
+
+function rainette_afficher_tendance($tendance_en, $methode='texte', $chemin='', $extension="png"){
+	$html = '';
+	include_spip('inc/rainette_utils');
+	
+	if ($methode == 'texte') {
+		$html = _T('rainette:tendance_texte_'.$tendance_en);
+	}
+	else if ($methode == 'symbole') {
+		$html = _T('rainette:tendance_symbole_'.$tendance_en);
+	}
+	else if ($methode == 'icone') {
+		if (!$chemin) $chemin = _RAINETTE_ICONES_PATH;
+	
+		// Le dossier personnalise ou le dossier passe en argument a bien l'icone requise
+		if ($img = find_in_path($chemin.$tendance_en.'.'.$extension)) {
+			list ($l,$h) = @getimagesize($img);
+			$html = '<img src="'.$img.'" alt="'._T('rainette:tendance_texte_'.$tendance_en).'" title="'._T('rainette:tendance_texte_'.$tendance_en).'" width="'.$l.'" height="'.$h.'" />';
+		} 
+		// Le dossier personnalise n'a pas d'image, on prend l'icone par defaut dans le repertoire img_meteo/
+		elseif (($chemin = 'img_meteo/') && ($img = find_in_path($chemin.$tendance_en.'.'.$extension))) {
+			list ($l,$h) = @getimagesize($img);
+			$html = '<img src="'.$img.'" alt="'._T('rainette:tendance_texte_'.$tendance_en).'" title="'._T('rainette:tendance_texte_'.$tendance_en).'" width="'.$l.'" height="'.$h.'" />';
+		}
+	}
+	return $html;
 }
 
 function rainette_afficher_unite($valeur, $type_valeur=''){

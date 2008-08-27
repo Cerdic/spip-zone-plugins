@@ -56,10 +56,10 @@ function xml2tab_previsions($xml){
 				$tableau[$index]['index'] = $index;
 				$tableau[$index]['date'] = $jour;
 				$sun = date_parse($p['sunr'][0]);
-				$tableau[$index]['lever_soleil'] = $sun['hour'].':'.$sun['minute'];
+ 				$tableau[$index]['lever_soleil'] = $sun['hour'].':'.$sun['minute'];
 				$sun = date_parse($p['suns'][0]);
-				$tableau[$index]['coucher_soleil'] = $sun['hour'].':'.$sun['minute'];
-				// Prévisions du jour
+ 				$tableau[$index]['coucher_soleil'] = $sun['hour'].':'.$sun['minute'];
+				// Previsions du jour
 				$tableau[$index]['temperature_jour'] = intval($p['hi'][0]) ? intval($p['hi'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
 				$tableau[$index]['code_icone_jour'] = intval($p['part p="d"'][0]['icon'][0]) ? intval($p['part p="d"'][0]['icon'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
 				$tableau[$index]['vitesse_vent_jour'] = intval($p['part p="d"'][0]['wind'][0]['s'][0]) ? intval($p['part p="d"'][0]['wind'][0]['s'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
@@ -67,7 +67,7 @@ function xml2tab_previsions($xml){
 				$tableau[$index]['direction_vent_jour'] = $p['part p="d"'][0]['wind'][0]['t'][0];
 				$tableau[$index]['risque_precipitation_jour'] = intval($p['part p="d"'][0]['ppcp'][0]);
 				$tableau[$index]['humidite_jour'] = intval($p['part p="d"'][0]['hmid'][0]) ? intval($p['part p="d"'][0]['hmid'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
-				// Prévisions de la nuit
+				// Previsions de la nuit
 				$tableau[$index]['temperature_nuit'] = intval($p['low'][0]) ? intval($p['low'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
 				$tableau[$index]['code_icone_nuit'] = intval($p['part p="n"'][0]['icon'][0]) ? intval($p['part p="n"'][0]['icon'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
 				$tableau[$index]['vitesse_vent_nuit'] = intval($p['part p="n"'][0]['wind'][0]['s'][0]) ? intval($p['part p="n"'][0]['wind'][0]['s'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
@@ -103,7 +103,7 @@ function xml2tab_conditions($xml){
 		$tableau['temperature_ressentie'] = intval($conditions['flik'][0]);
 		$tableau['code_icone'] = intval($conditions['icon'][0]);
 		$tableau['pression'] = intval($conditions['bar'][0]['r'][0]);
-		$tableau['tendance_pression'] = _T('rainette:tendance_barometrique_'.$conditions['bar'][0]['d'][0]);
+		$tableau['tendance_pression'] = $conditions['bar'][0]['d'][0];
 		$tableau['vitesse_vent'] = intval($conditions['wind'][0]['s'][0]);
 		$tableau['angle_vent'] = intval($conditions['wind'][0]['d'][0]);
 		$tableau['direction_vent'] = $conditions['wind'][0]['t'][0];
