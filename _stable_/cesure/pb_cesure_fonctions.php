@@ -130,9 +130,6 @@
 			// Function: Text hyphenation
 			function cesure($text, $lang="xxx") {
 			
-				// echapper les caracteres speciaux pour qu'il ne soient pas coupes 
-				// (genre: &ccedil;)
-				$text = preg_replace("/(&.*;)/U", "<XXX\\1XXX>", $text);
 			
 
 				if (ereg("<p[^>]*>", $text)) {
@@ -141,8 +138,8 @@
 					$text = pb_effectuer_cesure($text, $lang);
 				}
 				
-				$text = str_replace("<XXX", "", $text);
-				$text = str_replace("XXX>", "", $text);
+				// Corriger quand cesure a l'interieur d'un caractere special, genre &ccedil;
+				$text = preg_replace("/&([a-zA-Z])+".str_replace("#", "\#", preg_quote(_PB_HYPHEN))."([a-z])+;/", "&\\1\\2;", $text);
 				
 				return $text;
 			}
