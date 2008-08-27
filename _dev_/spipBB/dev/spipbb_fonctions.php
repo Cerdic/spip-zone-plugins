@@ -94,14 +94,16 @@ function spipbb_maintenance($id_article)
 function spipbb_nb_messages($id_auteur){
 	if (empty($id_auteur)) return ;
 	$nb_mess = "";
+	if (!isset($GLOBALS['spipbb']))
+		$GLOBALS['spipbb']=@unserialize($GLOBALS['meta']['spipbb']); // lire_config ?
 	if ( is_array($GLOBALS['spipbb'])
 		AND $GLOBALS['spipbb']['configure']=='oui'
 		AND $GLOBALS['spipbb']['id_secteur']>0 )
-		$result_auteurs = sql_select('auteur',
-							array('spip_forum','spip_rubriques'), // FROM
+		$result_auteurs = sql_select('id_auteur',
+							array('spip_forum','spip_articles'), // FROM
 							array("id_auteur=$id_auteur",
-									"spip_forum.id_rubrique=spip_rubriques.id_rubrique",
-									"( spip_rubriques.id_rubrique=".$GLOBALS['spipbb']['id_secteur']." OR spip_rubriques.id_secteur=".$GLOBALS['spipbb']['id_secteur']." )"
+									"spip_forum.id_article=spip_articles.id_article",
+									"( spip_articles.id_rubrique=".$GLOBALS['spipbb']['id_secteur']." OR spip_articles.id_secteur=".$GLOBALS['spipbb']['id_secteur']." )"
 									) //WHERE
 							);
 	else $result_auteurs = sql_select('auteur','spip_forum',"id_auteur=$id_auteur");
