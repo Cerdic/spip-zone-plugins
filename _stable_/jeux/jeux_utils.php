@@ -111,7 +111,7 @@ function jeux_liste_mots_min($texte) {
 function jeux_afficher_score($score, $total, $id_jeu=false) {
 	if ($id_jeu){		
 		include_spip('base/jeux_ajouter_resultat');
-		jeux_ajouter_resulat($id_jeu, $score, $total);
+		jeux_ajouter_resultat($id_jeu, $score, $total);
 	}
 	return '<div class="jeux_score">'._T('jeux:score')
 	  			. "&nbsp;$score&nbsp;/&nbsp;".$total.'<br />'

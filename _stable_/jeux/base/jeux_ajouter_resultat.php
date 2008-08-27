@@ -1,5 +1,5 @@
 <?php
-function jeux_ajouter_resulat($id_jeu, $resultat, $total, $resultat_detaille=''){
+function jeux_ajouter_resultat($id_jeu, $resultat, $total, $resultat_detaille=''){
 	$id_auteur = $GLOBALS["auteur_session"]['id_auteur'];
 	if (!$id_auteur) return;
 	$requete = spip_fetch_array(spip_query("SELECT enregistrer_resultat FROM spip_jeux WHERE id_jeu =".$id_jeu));

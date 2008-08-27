@@ -148,7 +148,7 @@ function calcul_erreurs_grille($solution, $indexJeux) {
 	  if ($_POST['id_jeu']!=''){
 	  	
 	  	include_spip('base/jeux_ajouter_resultat');
-		jeux_ajouter_resulat($_POST['id_jeu'], $total-$nbr_erreurs-$nbr_vides, $total);
+		jeux_ajouter_resultat($_POST['id_jeu'], $total-$nbr_erreurs-$nbr_vides, $total);
 		}
 	  
 	  // on retourne ce qu'on affiche
