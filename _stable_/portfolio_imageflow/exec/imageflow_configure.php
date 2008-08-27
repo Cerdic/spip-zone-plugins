@@ -68,40 +68,40 @@ function exec_imageflow_configure () {
 		$preferences_default = unserialize(_IMAGEFLOW_PREFERENCES_DEFAULT);
 		$preferences_meta = imageflow_get_all_preferences();
 		$preferences_current = array();
+		$retour_formulaire = _request('btn_valider_imageflow');
 		
 		/*
 		 * récupère le résultat du formulaire (si retour de ... formulaire)
 		 * */
 		foreach(array_keys($preferences_default) as $key) {
-			/*
-			 * Prend la meta si enregistrée, sinon celle par défaut
-			 */
-			$preferences_current[$key] = 
-				(isset($preferences_meta[$key]) && !empty($preferences_meta[$key]))
-				? $preferences_meta[$key]
-				: $preferences_default[$key]
-				;
-			if($key == "img") {
+			if ($key == "img") {
 				// inutile de s'occuper de img. Complété par le squelette.
 				continue;
 			}
-			$value = trim(_request($key));
-			
+			// si non transmise par le formulaire, prendre celle par enregistree
+			$value = 
+				($retour_formulaire)
+				? trim(_request($key))
+				: $preferences_meta[$key]
+				;
+			// si pas encore enregistree, prendre celle par defaut
+			$preferences_current[$key] = 
+				($value)
+				? $value
+				: $preferences_default[$key]
+				;
 			if(!empty($value)) 
 			{
 				$preferences_current[$key] = 
-					($key == 'slider')
+					(in_array($key, array('slider', 'preloader')))
 					? trim($value)
 					: substr(trim($value), 0, 7)
 					;
 			}
 		}
-		if(_request('btn_valider_imageflow')) {
+		if ($retour_formulaire) {
 			// enregistre les valeurs validées dans spip_meta
-			foreach($preferences_current as $key => $value) {
-				// imageflow_log($key . ": " . $value);
-				imageflow_set_all_preferences($preferences_current);
-			}
+			imageflow_set_all_preferences($preferences_current);
 		}
 	}
 	
@@ -109,7 +109,7 @@ function exec_imageflow_configure () {
 	$sliders_result = "";
 	$sliders = imageflow_sliders_lister();
 	if(is_array($sliders) && count($sliders)) 
-	{imageflow_log("###############:".$preferences_current['slider']);
+	{
 		$ii = 0;
 		foreach($sliders as $img)
 		{
@@ -230,7 +230,18 @@ function exec_imageflow_configure () {
 		. fin_cadre_relief(true)		
 		;
 		
+	// boite de selection de slider
 	$page_result .= $sliders_result;
+	
+	// precharger les images ?
+	$page_result .= ""
+		. debut_cadre_relief(_DIR_IMAGEFLOW_IMAGES."preloader-24.png", true, "", _T('imageflow:preloader'))
+		. imageflow_input_checkbox (
+			_T('imageflow:preloader_label')
+			, 'preloader', 'oui', ($preferences_current['preloader'] == 'oui'))
+		. fin_cadre_relief(true)		
+		;
+	
 
 	// fin formulaire
 	$page_result .= ""

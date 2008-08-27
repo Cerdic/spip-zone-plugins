@@ -108,6 +108,21 @@ function balise_IMAGEFLOW_INSERT_HEAD ($p) {
 		. "\n"
 		;
 
+	if ($preferences_meta['preloader'] == 'oui') {
+		$insert .= "
+<script type=\"text/javascript\">
+//<![CDATA[ 
+$(document).ready(function(){
+	var tmp_img = new Image();
+	$(\"#imageflow #images img\").each(function(){
+		tmp_img.src = $(this).attr(\"name\");
+	});
+});
+//]]>
+</script>
+		";
+	}
+	
 	//$slider = "imageflow/slider.png";
 	$slider = find_in_path(_DIR_IMAGEFLOW_IMAGES . $preferences_meta['slider']);
 

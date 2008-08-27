@@ -178,12 +178,26 @@ function imageflow_form_fin_form () {
 function imageflow_input_value ($label, $input_name, $value = "") {
 	global $spip_lang_left;
 	$result = ""
-		. "<label title='$key' style='text-align:$spip_lang_left'>\n"
+		. "<label style='text-align:$spip_lang_left'>\n"
 		. "<span class='verdana2' style='display:block;margin-bottom:0.5em'>" . $label . "</span>\n"
 		. "<input type='text' name='$input_name' value='" . $value . "' class='forml' />\n"
 		. "</label>\n"
 		;
 	return($result);
+}
+
+/***********************************************/
+function imageflow_input_checkbox ($label, $input_name, $value, $checked = false) {
+	global $spip_lang_left;
+	$checked = ($checked ? "checked='checked'" : "");
+	$result = ""
+		. "<label class='verdana2' style='text-align:$spip_lang_left'>\n"
+		. "<input type='checkbox' name='$input_name' value='$value' $checked />\n"
+		. $label
+		. "</label>\n"
+		;
+	return($result);
+	
 }
 
 /***********************************************/

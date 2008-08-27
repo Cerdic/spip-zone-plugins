@@ -78,6 +78,7 @@ define("_IMAGEFLOW_PREFERENCES_DEFAULT",
 			, 'tint' => "#7F7F7F" // v3 :: optional    Tint the reflection with this colour (hex)
 			//, 'cache' => 1 // optional    Save reflection image to the cache? (boolean)
 			, 'slider' => "slider_default-14.gif"
+			, 'preloader' => "non"
 		)
 	)
 );
