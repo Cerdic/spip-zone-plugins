@@ -4,7 +4,5 @@
 // $LastChangedDate$
 
 - Le chargement de l'image est parfois bien long. Ajouter un loading.gif dans la boite image finale
-- Mettre un minimum de vérification au retour du formulaire de configuration
 - Ajouter en page de configuration un bouton pour reinitialiser
-- Ajouter possibilité d'une boite image finale style imagebox http://interface.eyecon.ro/demos/imagebox.html (proposer le choix, soit image en ligne, dans la page, soit imagebox)
 - créer un modele pour pouvoir ajouter le portfolio en milieu de document

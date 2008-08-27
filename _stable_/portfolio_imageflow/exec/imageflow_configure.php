@@ -93,7 +93,7 @@ function exec_imageflow_configure () {
 			if(!empty($value)) 
 			{
 				$preferences_current[$key] = 
-					(in_array($key, array('slider', 'preloader')))
+					(in_array($key, array('slider', 'preloader', 'slideshow')))
 					? trim($value)
 					: substr(trim($value), 0, 7)
 					;
@@ -239,6 +239,16 @@ function exec_imageflow_configure () {
 		. imageflow_input_checkbox (
 			_T('imageflow:preloader_label')
 			, 'preloader', 'oui', ($preferences_current['preloader'] == 'oui'))
+		. fin_cadre_relief(true)		
+		;
+	
+
+	// Effet de fnodu enchainé ?
+	$page_result .= ""
+		. debut_cadre_relief(_DIR_IMAGEFLOW_IMAGES."slideshow-24.png", true, "", _T('imageflow:slideshow'))
+		. imageflow_input_checkbox (
+			_T('imageflow:slideshow_label')
+			, 'slideshow', 'oui', ($preferences_current['slideshow'] == 'oui'))
 		. fin_cadre_relief(true)		
 		;
 	

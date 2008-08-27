@@ -55,6 +55,8 @@ $GLOBALS['i18n_imageflow_fr'] = array(
 	, 'preloader' => "Pr&#233;charger les images"
 	, 'preloader_label' => "Pr&#233;charger les images du portfolio 
 		lors de la consultation afin d'acc&#233;lerer l'affichage."
+	, 'slideshow' => "Fondu enchain&#233;"
+	, 'slideshow_label' => "Ajouter un effet de fondu enchain&#233;."
 	
 	, 'error_php_old' => "La version de PHP install&#233;e n'est pas pleinement support&#233;e. 
 		Vous devez utiliser PHP 4.3.2 ou sup&#233;rieur."

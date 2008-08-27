@@ -123,6 +123,8 @@ $(document).ready(function(){
 		";
 	}
 	
+	
+	
 	//$slider = "imageflow/slider.png";
 	$slider = find_in_path(_DIR_IMAGEFLOW_IMAGES . $preferences_meta['slider']);
 
@@ -134,11 +136,25 @@ $(document).ready(function(){
 #imageflow {background-color:transparent;}
 #scrollbar-box {text-align:center}
 #scrollbar{margin:0 auto}
-#slider {background-image:url(".find_in_path($slider).");top:0;left:0}
+#slider {background-image:url(" . $slider . ");top:0;left:0}
 #images {overflow: hidden;}
+#lightbox {text-align:center;width:512px;height:384px;}
+#affichage {max-width:512px;max-height:384px;margin:0 auto}
 </style>
 "
 		; 
+
+	if ($preferences_meta['slideshow'] == 'oui') {
+		$js = find_in_path($f = "javascript/imageflow_slideshow.js");
+		$insert .= "<script type=\"text/javascript\" src=\"".$js."\"></script>\n
+<style type=\"text/css\" media=\"screen\">
+#lightbox {position:relative}
+#affichage {position:absolute;top:0;left:0;z-index:1024}
+#affichage_cache {}
+</style>
+		"
+		;
+	}
 
 	$p->code = "'".$insert."'";
 	$p->interdire_scripts = false;

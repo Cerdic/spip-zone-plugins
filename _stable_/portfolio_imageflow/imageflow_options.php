@@ -79,6 +79,7 @@ define("_IMAGEFLOW_PREFERENCES_DEFAULT",
 			//, 'cache' => 1 // optional    Save reflection image to the cache? (boolean)
 			, 'slider' => "slider_default-14.gif"
 			, 'preloader' => "non"
+			, 'slideshow' => "non"
 		)
 	)
 );
