@@ -94,7 +94,7 @@
 				.trigger('notify.serialScroll',[elem]);//notify serialScroll about this change
 			if( settings.hash )
 				$target.queue(function(){
-					location = link.hash;
+					location = URI+link.hash;
 					// make sure this function is released
 					$(this).dequeue();
 				});
