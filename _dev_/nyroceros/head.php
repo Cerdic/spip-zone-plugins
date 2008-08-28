@@ -70,7 +70,7 @@ if(typeof onAjaxLoad == "function") onAjaxLoad(init_f);
 	$(init_f);
  })(jQuery);
  // --></script>
-<link rel="stylesheet" href="'.url_absolue(find_in_path('styles/nyroModal.full.css')).'" type="text/css" media="projection, screen, tv" />
+<link rel="stylesheet" href="'.url_absolue(find_in_path('styles/nyroModal.full.css')).'" type="text/css" />
 ';
 	return $flux;
 }
