@@ -1,0 +1,45 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Lorem Ipsum
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Martín Gaitán based on a jquery script by
+	[skorvemaker->http://sanderkorvemaker.nl/]
+_ [Feedback->gaitan@gmail.com] will be appreciated
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<icon>loremipsum.png</icon>
+	<etat>
+	test
+	</etat>
+	<description>
+<multi>
+		This plugin will generate Lorem Ipsum text for use as dummy texts on webpages.
+_ It works in templates with tag  <code>#INSERT_HEAD</code> in its html head
+_ Then you can use it as a model <code><loremX></code> where X is the integer amount of units 
+(defined in 'type') to insert.
+_ It accepts these parameters: 
+
+- {{type}}: Allows you to specify what kind of result you want to see. You may use: paragraphs, words or characters. 
+If you don't set this, paragraphs will be use by default. 
+- {{ptags}}:   Allows you to add <code><P></code> around each paragraph. True or false. True by default. 
+		
+	</multi>
+
+	</description>
+	<lien>http://sanderkorvemaker.nl/jquery/jLorem.php</lien>
+	<prefix>
+	LoremIpsum
+	</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
+		<inclure>head.php</inclure>
+	</pipeline>
+</plugin>

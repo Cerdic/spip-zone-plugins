@@ -1,0 +1,7 @@
+#SET{divid, ipsum#EVAL{rand(0,1000)}}  [(#REM) to avoid collision in case of multiples calls to the model]
+<div id="ipsum#GET{divid}"></div>
+<script type='text/javascript'>
+$(document).ready(function() { 
+    $('#ipsum#GET{divid}').lorem({ type: '[(#ENV{type}|?{#ENV{type},paragraphs})]',amount:'[(#ENV{id}|?{#ENV{id},4})]',ptags:[(#ENV{ptags}|?{#ENV{ptags},true})]}); 
+}); 
+</script>
