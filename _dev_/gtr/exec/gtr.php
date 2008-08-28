@@ -14,24 +14,33 @@ $action = generer_url_ecrire('gtr');
     
 	echo "<form action='$action' method='post'>";
 	echo "Rentrez votre texte &agrave; traduire en anglais<br />";
-  echo "<textarea name='texte' cols='50' rows='10'></textarea><br />";
+  echo "<div id='text'><textarea name='texte' cols='50' rows='10'></textarea></div><br />";
   echo "<input type='submit' value='Traduire' />";
   echo "</form>";
 	$bj = $_POST['texte'];
 	echo $bj;
 	?><script type="text/javascript">
 
+
+    
     google.load("language", "1");
 
     function initialize() {
-      google.language.translate("<?php echo $bj; ?>", "fr", "en", function(result) {
-        if (!result.error) {
-          var container = document.getElementById("translation");
-          container.innerHTML = result.translation;
+      var text = document.getElementById("text").innerHTML;
+      google.language.detect(text, function(result) {
+        if (!result.error && result.language) {
+          google.language.translate(text, result.language, "en",
+                                    function(result) {
+            var translated = document.getElementById("translation");
+            if (result.translation) {
+              translated.innerHTML = result.translation;
+            }
+          });
         }
       });
     }
     google.setOnLoadCallback(initialize);
+
 
     </script><?php
 	if ($bj) {
