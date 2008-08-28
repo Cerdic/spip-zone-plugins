@@ -80,7 +80,6 @@ if (GBrowserIsCompatible()) {
 		</li>]
 	    <li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 	    	<label for="titre"><:info_titre:></label>
-	    	<em class="aide">#AIDER{arttitre}</em>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</span>]
 			<input type='text' name='titre' id='titre' class='text' value="[(#ENV**{titre})]"/>
 	    </li>
@@ -88,7 +87,6 @@ if (GBrowserIsCompatible()) {
 	  	[(#ENV**{config}|table_valeur{articles_texte}|=={non}|?{#ENV**{texte,''},' '}|oui)
 	    <li class="editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
 			<label for="texte"><:info_texte:></label>
-			<em class="aide">#AIDER{arttexte}</em>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
 			[(#ENV**{_texte_trop_long,''})]
 			<div class="explication"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
