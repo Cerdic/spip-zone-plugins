@@ -14,11 +14,11 @@ $action = generer_url_ecrire('gtr');
     
 	echo "<form action='$action' method='post'>";
 	echo "Rentrez votre texte &agrave; traduire en anglais<br />";
-  echo "<div id='text'><textarea name='texte' cols='50' rows='10'></textarea></div><br />";
+  echo "<textarea name='texte' cols='50' rows='10'></textarea><br />";
   echo "<input type='submit' value='Traduire' />";
   echo "</form>";
 	$bj = $_POST['texte'];
-	echo $bj;
+	echo "<div id='text'>$bj</div>";
 	?><script type="text/javascript">
 
 
