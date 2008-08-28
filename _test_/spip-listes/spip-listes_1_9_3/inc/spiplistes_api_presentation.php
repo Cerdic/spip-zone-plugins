@@ -13,10 +13,10 @@
 /*                                                                                        */
 /* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but specifique. Reportez-vous à la Licence Publique Generale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Generale GNU                    */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
 /* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
@@ -28,7 +28,7 @@
 include_spip('inc/presentation');
 
 /*
-	Les fonctions affichage et présentation dans l'espace privé
+	Les fonctions affichage et presentation dans l'espace prive
 */
 
 // retourne la puce qui va bien 
@@ -48,7 +48,7 @@ function spiplistes_bullet_titre_liste ($type, $statut, $id=false, $return=false
 	else echo($result);
 }
 
-// renvoie un élément de définition courriers/listes (icone, puce, alternate text, etc.)
+// renvoie un element de definition courriers/listes (icone, puce, alternate text, etc.)
 // voir spsiplites_mes_options, tableau $spiplistes_items
 function spiplistes_items_get_item($item, $statut) {
 	global $spiplistes_items;
@@ -65,7 +65,7 @@ function spiplistes_items_get_item($item, $statut) {
 
 function spiplistes_gros_titre($titre, $ze_logo='', $return = false) {
 	if(!spiplistes_spip_est_inferieur_193()) {
-		$ze_logo = ""; // semble ne plus être utilisé dans exec/*
+		$ze_logo = ""; // semble ne plus etre utilise dans exec/*
 	}
 	$aff = ($return === false);
 	$r = gros_titre($titre, $ze_logo, $aff);
@@ -289,7 +289,7 @@ function spiplistes_boite_raccourcis ($return = false) {
 			)
 		. "</li>\n"
 		;
-	if($connect_id_auteur == 1) {
+	if(autoriser('webmestre','',$connect_id_auteur)) {
 		$result .= ""
 			. "<li>"
 			. icone_horizontale(
@@ -357,7 +357,7 @@ function spiplistes_boite_selection_patrons ($patron="", $return=false, $chemin=
 	$result = "";
 	// va chercher la liste des patrons
 	$liste_patrons = spiplistes_liste_des_patrons ($chemin);
-	// boite de sélection du patron
+	// boite de selection du patron
 	$result  .= "<select style='width:$width;'  name='". $select_nom . "' class='verdana1' size='" . $size_select . "'>\n";
 	// par defaut, selectionne le premier
 	$selected = (empty($title_selected) ? "selected='selected'" : ""); 
@@ -384,7 +384,7 @@ function spiplistes_boite_selection_patrons ($patron="", $return=false, $chemin=
 function spiplistes_boite_patron ($flag_editable, $id_liste
 	, $exec_retour, $nom_bouton_valider, $chemin_patrons, $titre_boite = ""
 	, $msg_patron = false, $patron = "", $return = false) {
-	// bloc sélection patron
+	// bloc selection patron
 	$result = ""
 		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."patron-24.png", true)
 		. "<div class='verdana1' style='text-align: center;'>\n"
@@ -486,8 +486,8 @@ function spiplistes_liste_des_patrons ($chemin) {
 	return($result);
 }
 
-// complète les dates chiffres (jour, heure, etc.)
-// de retour du formulaire pour les dates et renvoie une date formatée correcte
+// complete les dates chiffres (jour, heure, etc.)
+// de retour du formulaire pour les dates et renvoie une date formatee correcte
 function spiplistes_formate_date_form($annee, $mois, $jour, $heure, $minute) {
 	if(!empty($jour) && !empty($mois) && !empty($annee) && (intval($heure) >= 0) && (intval($minute) >= 0)) {
 		foreach(array('mois', 'jour', 'heure', 'minute') as $k) {
@@ -504,8 +504,8 @@ function spiplistes_formate_date_form($annee, $mois, $jour, $heure, $minute) {
 function spiplistes_boite_autocron_form($titre, $option, $value) {
 	global $connect_id_auteur;
 	$result = "";
-	// n'apparaît que si super_admin et pas sur la page de config (doublon de form)
-	if($connect_id_auteur == 1) {
+	// n'apparait que si super_admin et pas sur la page de config (doublon de form)
+	if(autoriser('webmestre','',$connect_id_auteur)) {
 		if(_request('exec')!=_SPIPLISTES_EXEC_CONFIGURE) {
 			$result = ""
 				. "<!-- bouton annulation option -->\n"
@@ -557,10 +557,10 @@ function spiplistes_boite_autocron () {
 
 	$result = "";
 	
-	// Informe sur l'état de la trieuse
+	// Informe sur l'etat de la trieuse
 	if($opt_suspendre_trieuse == 'oui') {
 		if(_request('opt_suspendre_trieuse')=='non') {
-			if($connect_id_auteur == 1) {
+			if(autoriser('webmestre','',$connect_id_auteur)) {
 				__plugin_ecrire_key_in_serialized_meta ('opt_suspendre_trieuse', $opt_suspendre_trieuse = 'non', _SPIPLISTES_META_PREFERENCES);
 				spiplistes_ecrire_metas();
 				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:Trieuse_reactivee')."</p>\n";
@@ -574,10 +574,10 @@ function spiplistes_boite_autocron () {
 		}
 	}
 	
-	// Informe sur l'état de la meleuse
+	// Informe sur l'etat de la meleuse
 	if($opt_suspendre_meleuse == 'oui') {
 		if(_request('opt_suspendre_meleuse')=='non') {
-			if($connect_id_auteur == 1) {
+			if(autoriser('webmestre','',$connect_id_auteur)) {
 				__plugin_ecrire_key_in_serialized_meta ('opt_suspendre_meleuse', $opt_suspendre_meleuse = 'non', _SPIPLISTES_META_PREFERENCES);
 				spiplistes_ecrire_metas();
 				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:Meleuse_reactivee')."</p>\n";
@@ -594,7 +594,7 @@ function spiplistes_boite_autocron () {
 	// Informe si mode simulation en cours
 	if($opt_simuler_envoi == 'oui') {
 		if(_request('opt_simuler_envoi')=='non') {
-			if($connect_id_auteur == 1) {
+			if(autoriser('webmestre','',$connect_id_auteur)) {
 				__plugin_ecrire_key_in_serialized_meta ('opt_simuler_envoi', $opt_simuler_envoi = 'non', _SPIPLISTES_META_PREFERENCES);
 				spiplistes_ecrire_metas();
 				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:simulation_desactive')."</p>\n";
@@ -690,7 +690,7 @@ function spiplistes_boite_autocron () {
 	return($result);
 }
 
-// adapté de abomailman ()
+// adapte de abomailman ()
 // MaZiaR - NetAktiv
 // tech@netaktiv.com
 
@@ -699,7 +699,7 @@ function spiplistes_boite_autocron () {
 // Renvoie l'arborescence des rubriques
 function spiplistes_arbo_rubriques ($id_rubrique = 0, $ran = 0) {
 	
-	// une seule rqt pour récupérer toutes les rubriques
+	// une seule rqt pour recuperer toutes les rubriques
 	$sql_result = sql_select("id_rubrique,id_parent,titre", "spip_rubriques");
 	$rubriques_array = array();
 	// empile les rubriques
@@ -718,7 +718,7 @@ function spiplistes_arbo_rubriques ($id_rubrique = 0, $ran = 0) {
 }
 
 // sous-fonction de spiplistes_arbo_rubriques()
-// récursive
+// recursive
 function spiplistes_arbo_rubriques_sub ($rubriques_array, $id_parent = 0, $ran = 0) {
 	$result = "";
 	$marge =
@@ -791,7 +791,7 @@ function spiplistes_titre_boite_info ($titre = "") {
 	return($result);
 }
 
-// termine page si la donnée n'existe pas dans la base
+// termine page si la donnee n'existe pas dans la base
 function spiplistes_terminer_page_donnee_manquante ($return = true) {
 	spiplistes_terminer_page_message (_T('spiplistes:Pas_de_donnees'), $return);
 }
@@ -804,7 +804,7 @@ function spiplistes_terminer_page_message ($message) {
 	else echo($result);
 }
 
-// termine la page (à employer qd droits insuffisants)
+// termine la page (a employer qd droits insuffisants)
 function spiplistes_terminer_page_non_autorisee ($return = true) {
 	spiplistes_terminer_page_message (_T('spiplistes:acces_a_la_page'), $return);
 }
