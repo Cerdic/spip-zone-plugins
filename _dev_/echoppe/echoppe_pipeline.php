@@ -22,4 +22,10 @@ function echoppe_insert_head($flux){
 	return $flux;	
 }
 
+function echoppe_I2_cfg_form($flux){
+    $flux .= recuperer_fond('fonds/inscription2_echopppe');
+	
+	return $flux;	
+}
+
 ?>

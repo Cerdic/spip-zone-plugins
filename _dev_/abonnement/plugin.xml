@@ -24,6 +24,11 @@
 		<nom>taches_generales_cron</nom>
 		<inclure></inclure>
 	</pipeline>
+	<pipeline>
+		<nom>I2_cfg_form</nom>
+		<action>I2_cfg_form</action>
+		<inclure>abonnemment_pipeline.php</inclure>
+	</pipeline>
 	<chemin dir='' />
 	<necessite id="inscription2" version="[0.2;]" />
 	<necessite id="spiplistes" version="[1.9;]" /> 

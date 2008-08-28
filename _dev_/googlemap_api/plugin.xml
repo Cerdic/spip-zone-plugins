@@ -23,4 +23,10 @@ _ Help to use the API in several plugins (Gis, Geoforms...).
  <prefix>geomap</prefix>
  <chemin dir='' />
  
+ <pipeline>
+	<nom>I2_cfg_form</nom>
+	<action>I2_cfg_form</nom>
+	<inclure>geomap_pipeline.php</inclure>
+ </pipeline>
+ 
 </plugin>

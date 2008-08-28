@@ -43,6 +43,11 @@
 		<nom>header_prive</nom>
 		<inclure>inc/spiplistes_pipeline_header_prive.php</inclure>
 	</pipeline>
+
+	<pipeline>
+		<nom>I2_cfg_form</nom>
+		<inclure>inc/spiplistes_pipeline_I2_cfg_form.php</inclure>
+	</pipeline>
 	
 	<pipeline>
 		<nom>taches_generales_cron</nom>

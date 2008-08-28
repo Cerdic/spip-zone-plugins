@@ -134,17 +134,18 @@ function legend_it(a,b,c){
 
 </div>
 
-[(#REM) ------------------------ GEOLOCALISATION? ------------------------ ]
+[(#REM) ------------------------ GREFFONS 
+    geomap
+    echoppe
+    spiplistes
+    association
+    accesrestreint
+    abonnement
+    ...
+------------------------ ]
 
 <div id="fragment-3">
-
-[(#CONFIG{plugin/GEOMAP/version}|?{' '}) <INCLURE{fond=fonds/inscription2_geoloc}>]
-
-</div>
-
-<div id="fragment-4">
-
-[(#CONFIG{plugin/ECHOPPE/version}|?{' '}) <INCLURE{fond=fonds/inscription2_echoppe}>]
+    [(#PIPELINE{I2_cfg_form})]
 </div>
 
 [(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
@@ -153,16 +154,7 @@ function legend_it(a,b,c){
 <legend>
 	<:inscription2:info_gener:>
 </legend>
-
 <:inscription2:info_gener_desc:>
-[<div style="margin:5px 0px">(#CONFIG{plugin/SPIPLISTES}|?{' ', ''})
- <INCLURE{fond=fonds/inscription2_spip_listes}>
-</div> 
-]
-[<div style="margin:5px 0px">(#CONFIG{plugin/ASSOCIATION}|?{' ', ''})
- <INCLURE{fond=fonds/inscription2_association}>
-</div>
-]
 <br />
 <label>
 	<input type="checkbox" name="publication" [checked="(#ENV{publication}?{checked})"] id="publication" />
@@ -217,16 +209,8 @@ function legend_it(a,b,c){
 </span>
 </div>
 
-[<div style="margin:5px 0px">(#CONFIG{plugin/ACCESRESTREINT}|?{' ', ''})
-<INCLURE{fond=fonds/inscription2_acces_restreint}>
-</div>
-]
 </fieldset>
 
-[<div style="margin:5px 0px">(#CONFIG{plugin/ABONNEMENT}|?{' ', ''})
- <INCLURE{fond=fonds/inscription2_abonnement}>
- </div>
-]
 </div>
 
 <div>

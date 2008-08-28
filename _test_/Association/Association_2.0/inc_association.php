@@ -44,4 +44,9 @@
 		return $flux;
 	}
 	
+    function association_I2_cfg_form($flux) {
+        $flux .= recuperer_fond('fonds/inscription2_association');
+	    return ($flux);
+    }	
+	
 ?>

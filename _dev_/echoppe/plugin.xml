@@ -53,6 +53,11 @@ _
 		<action>insert_head</action>
 		<inclure>echoppe_pipeline.php</inclure>
 	</pipeline>
+	<pipeline>
+	    <nom>I2_cfg_form</nom>
+	    <action>I2_cfg_form</action>
+	    <inclure>echoppe_pipeline.php</inclure>
+	</pipeline>
 	<bouton id='echoppe' parent='naviguer'>
 		<icone>images/logo.png</icone>
 		<titre>Echoppe</titre>
