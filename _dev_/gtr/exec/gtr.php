@@ -6,7 +6,7 @@
 	//fonction principal de la page
 	function exec_gtr () {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-echo $commencer_page("gtr", "", "");
+echo $commencer_page("Google Translate", "", "");
 echo gros_titre('Google Translate','',false);
 echo '<script type="text/javascript" src="http://www.google.com/jsapi"></script>';
 $action = generer_url_ecrire('gtr');

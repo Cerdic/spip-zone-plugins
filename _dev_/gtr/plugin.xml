@@ -9,13 +9,13 @@
 		Yohann
 	</auteur>
 	<version>
-		beta
+		beta2
 	</version>
 	<etat>
 		dev
 	</etat>
 	<description>
-		Traduction des articles
+		Ce plugin permettera de traduire des articles depuis l'espace public, et d'avoir un traducteur disponible pour les rédacteurs depuis l'espace privé.
 	</description>
 	<lien>
 		[Site de l'éditeur->http://www.chambredesecrets.net]
