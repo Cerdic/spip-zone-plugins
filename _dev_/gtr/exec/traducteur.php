@@ -9,7 +9,7 @@
 echo $commencer_page("Google Translate", "", "");
 echo gros_titre('Google Translate','',false);
 echo '<script type="text/javascript" src="http://www.google.com/jsapi"></script>';
-$action = generer_url_ecrire('gtr');
+$action = generer_url_ecrire('traducteur');
 	
     
 	echo "<form action='$action' method='post'>";
@@ -17,8 +17,8 @@ $action = generer_url_ecrire('gtr');
   echo "<textarea name='texte' cols='50' rows='10'></textarea><br />";
   echo "<input type='submit' value='Traduire' />";
   echo "</form>";
-	$bj = $_POST['texte'];
-	echo "<div id='text'>$bj</div>";
+	$for_trad = $_POST['texte'];
+	echo "<div id='text'>$for_trad</div>";
 	?><script type="text/javascript">
 
 
@@ -43,7 +43,7 @@ $action = generer_url_ecrire('gtr');
 
 
     </script><?php
-	if ($bj) {
+	if ($for_trad) {
     echo "<div id='translation' style='border: 2px solid #000000'></div>";
 	}
 }
