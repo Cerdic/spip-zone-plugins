@@ -61,8 +61,10 @@ include_spip('inc/imageflow_api_globales');
  * @param $title Titre de l'image
  * @param $longdesc Description de l'image ou URL sur description
  * @param $style CSS style
- * @param $tint Teinte du reflet, en hexadécimal
  * @param $bgc Couleur de fond. 'none' pour fond transparent. De'faut 'none'
+ * @param $tint Teinte du reflet, en hexadécimal
+ * @param $fade_start Opacite' de debut de degrade. Par defaut 80%
+ * @param $fade_end Opacite' de fin de degrade. Par defaut 0%
  * @param $height Hauteur en pourcentage du reflet. Par de'faut 50%
  * @param $width Largeur finale. Par de'faut, prend celui des vignettes de'fini dans /ecrire/?exec=config_fonctions
  * @return Chemin de l'image re'sultat, ou false si erreur, ou "" si rien
@@ -78,36 +80,41 @@ if(!function_exists('image_avec_reflet')) {
 		, $title = ""
 		, $longdesc = ""
 		, $style = "margin:0;padding:0;border:0;"
-		, $bgc = false
-		, $tint = false
-		, $fade_start = false
-		, $fade_end = false
-		, $height = false
-		, $width = false
+		, $bgc = ""
+		, $tint = ""
+		, $fade_start = ""
+		, $fade_end = ""
+		, $height = ""
+		, $width = ""
 	) {
 		
 		$attributs = array('alt', 'name', 'title', 'longdesc', 'style');
-		$parametres = array('bgc', 'tint', 'fade_start', 'fade_end', 'height');
+		$preferences_default = array(
+			'bgc' => "none"
+			,'tint' => "#7F7F7F"
+			, 'fade_start' => "80%"
+			, 'fade_end' => "0%"
+			, 'height' => "50%"
+		);
+		$parametres = array_keys($preferences_default);
 		
 		// Si utilise' avec le plugin, prendre les reglages definis si non transmis par le filtre
-		if(function_exists('imageflow_get_all_preferences') && $preferences_meta = imageflow_get_all_preferences())
+		if(function_exists('imageflow_get_all_preferences')) 
 		{
-			foreach($parametres as $key)
+			$preferences_meta = imageflow_get_all_preferences();
+		} 
+		// Si filtre utilisé sans le plugin, appliquer les prefs par défaut
+		foreach($preferences_default as $key => $default) 
+		{
+			// l'appel via un modele renvoie 0x0d0a0909090909 meme si vide (?)
+			$$key = trim($$key);
+			if(empty($$key)) 
 			{
-				if($$key === false) 
-				{
-					$$key = $preferences_meta[$key];
-				}
+				$$key = isset($preferences_meta[$key]) ? $preferences_meta[$key] : $default;
 			}
 		}
-		else // les reglages par defaut (filtre utilise' sans le plugin ?)
-		{
-			if ($bgc === false) $bgc = "none";
-			if ($tint === false) $tint = "#7F7F7F";
-			if ($fade_start === false) $fade_start = "80%";
-			if ($fade_end === false) $fade_end = "0%";
-			if ($height === false) $height = "50%";
-		}
+		// cas à part. Pas dans les prefs.
+		$width = trim($width);
 
 		foreach(array_merge($attributs, $parametres) as $key) 
 		{
@@ -118,7 +125,7 @@ if(!function_exists('image_avec_reflet')) {
 			imageflow_log("Err: "._T('imageflow:'.$s));
 			return(false);
 		}	
-		
+
 		if(!$img) {
 			imageflow_log("Err: Balise img manquante en parametre");
 			return(false);
@@ -146,21 +153,30 @@ if(!function_exists('image_avec_reflet')) {
 		 * - celle transmise en argument
 		 * - celle précisée dans la balise, attribut 'width'
 		 * - celle originale
-		 * Si $width > à l'originale, réduire l'image
+		 * Si $width < à l'original, réduire l'image
+		 * Si $width >, confier l'agrandissement au navigateur via css
 		 */
+		$width = intval($width);
 		$img_width = extraire_attribut($img, 'width');
-		if ($width === false) {
+		if ($width <= 0) {
 			$width = $img_width ? $img_width : $src_width;
 		}
-		if($width > $src_width) {
+		$dest_width = $width;
+		if($width < $src_width) {
 			$img = image_reduire($img, $width, 0);
 			$src_img = extraire_attribut($img, 'src');
+			$src_img = parse_url($src_img);
+			$src_img = $src_img['path'];
 			list($src_width, $src_height, $type) = getimagesize($src_img);
+		}
+		elseif ($width > $src_width)
+		{
+			$width = $src_width;
 		}
 		
 		/*
 		 * calcul de la hauteur
-		 */
+		 */ 
 		//	height (how tall should the reflection be?)
 		if ($height) {
 			$output_height = $height;
@@ -216,24 +232,22 @@ if(!function_exists('image_avec_reflet')) {
 				$result = array();
 				
 				//	Does it start with a hash? If so then strip it
-				$hex_bgc = str_replace('#', '', $color);
-				
-				switch (strlen($hex_bgc))
+				$hex_color = str_replace('#', '', $color);
+				switch (strlen($hex_color))
 				{
 					case 6:
-						$result['red'] = hexdec(substr($hex_bgc, 0, 2));
-						$result['green'] = hexdec(substr($hex_bgc, 2, 2));
-						$result['blue'] = hexdec(substr($hex_bgc, 4, 2));
+						$result['red'] = hexdec(substr($hex_color, 0, 2));
+						$result['green'] = hexdec(substr($hex_color, 2, 2));
+						$result['blue'] = hexdec(substr($hex_color, 4, 2));
 						break;
 					case 3:
-						$result['red'] = substr($hex_bgc, 0, 1);
-						$result['green'] = substr($hex_bgc, 1, 1);
-						$result['blue'] = substr($hex_bgc, 2, 1);
-						$result['red'] = hexdec($tintcolor['red'] . $result['red']);
-						$result['green'] = hexdec($tintcolor['green'] . $result['green']);
-						$result['blue'] = hexdec($tintcolor['blue'] . $result['blue']);
+						$result['red'] = substr($hex_color, 0, 1);
+						$result['green'] = substr($hex_color, 1, 1);
+						$result['blue'] = substr($hex_color, 2, 1);
+						$result['red'] = hexdec($result['red'] . $result['red']);
+						$result['green'] = hexdec($result['green'] . $result['green']);
+						$result['blue'] = hexdec($result['blue'] . $result['blue']);
 						break;
-						
 					default:
 						//	Wrong values passed, default to white
 						$result['red'] = $result['green'] = $result['blue'] = $default;
@@ -250,7 +264,7 @@ if(!function_exists('image_avec_reflet')) {
 		else $bgcolor = false;
 		
 		//	tint (the colour used for the tint, defaults to white if not given)
-		if ($tint == false)
+		if (empty($tint))
 		{
 			$tintcolor['red'] = $tintcolor['green'] = $tintcolor['blue'] = 127;
 		}
@@ -310,11 +324,16 @@ if(!function_exists('image_avec_reflet')) {
 		 */
 		$effet = "reflet-".$width."-".$dest_height."-".$alpha_start."-".$alpha_end."-"
 			. $tintcolor['red']."-".$tintcolor['green']."-".$tintcolor['blue'] . "-"
-			. $bgcolor['red']."-".$bgcolor['green']."-".$bgcolor['blue']
+			. ($bgcolor ? $bgcolor['red']."-".$bgcolor['green']."-".$bgcolor['blue'] : "nobgc")
 			;
 		$image = image_valeurs_trans($img, $effet, "png");
-		if (!$image) return("");
+		if (!$image)
+		{
+			imageflow_log("Err: image image_valeurs_trans");
+			return("");	
+		}
 
+		// L'image n'est pas en cache ? La créer.
 		if($image["creer"]) {
 			
 			$im = $image["fichier"];
@@ -432,8 +451,14 @@ if(!function_exists('image_avec_reflet')) {
 		// $title // en paramètre
 		$longdesc = longdesc_propre($longdesc);
 		//$style = $image['style'].$style;
-		$style = $style;
-
+		if($dest_width > $width) 
+		{
+			$height = ceil($height * ($dest_width / $width));
+			$style = trim($style, ";");
+			$style .= ";width:".$dest_width.";height:".$dest_height.";";
+			$width = $dest_width;
+		}
+		
 		foreach(array_merge($attributs, array('src', 'class', 'width', 'height')) as $key) 
 		{
 			if(!empty($$key)) {

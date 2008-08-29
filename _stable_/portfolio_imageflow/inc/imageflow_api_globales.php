@@ -47,6 +47,8 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+include_spip('inc/utils');
+
 function imageflow_spip_est_inferieur_193 () {
 	static $is_inf;
 	if($is_inf===NULL) {
