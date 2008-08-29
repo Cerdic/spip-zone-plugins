@@ -38,7 +38,7 @@ function exec_spiplistes_maintenance () {
 	}
 	
 	// la maintenance spiplistes est réservée à l'admin principal 
-	$flag_autorise = ($connect_statut == "0minirezo") && (autoriser('webmestre','',$connect_id_auteur));
+	$flag_autorise = autoriser('webmestre','',$connect_id_auteur);
 	
 	$tous_les_statuts_courriers = array(_SPIPLISTES_COURRIER_STATUT_REDAC, _SPIPLISTES_COURRIER_STATUT_READY
 			, _SPIPLISTES_COURRIER_STATUT_ENCOURS

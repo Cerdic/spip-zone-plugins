@@ -289,7 +289,7 @@ function spiplistes_boite_raccourcis ($return = false) {
 			)
 		. "</li>\n"
 		;
-	if(autoriser('webmestre','',$connect_id_auteur)) {
+	if(autoriser('webmestre','','',$connect_id_auteur)) {
 		$result .= ""
 			. "<li>"
 			. icone_horizontale(
@@ -505,7 +505,7 @@ function spiplistes_boite_autocron_form($titre, $option, $value) {
 	global $connect_id_auteur;
 	$result = "";
 	// n'apparait que si super_admin et pas sur la page de config (doublon de form)
-	if(autoriser('webmestre','',$connect_id_auteur)) {
+	if(autoriser('webmestre','','',$connect_id_auteur)) {
 		if(_request('exec')!=_SPIPLISTES_EXEC_CONFIGURE) {
 			$result = ""
 				. "<!-- bouton annulation option -->\n"
@@ -560,7 +560,7 @@ function spiplistes_boite_autocron () {
 	// Informe sur l'etat de la trieuse
 	if($opt_suspendre_trieuse == 'oui') {
 		if(_request('opt_suspendre_trieuse')=='non') {
-			if(autoriser('webmestre','',$connect_id_auteur)) {
+			if(autoriser('webmestre','','',$connect_id_auteur)) {
 				__plugin_ecrire_key_in_serialized_meta ('opt_suspendre_trieuse', $opt_suspendre_trieuse = 'non', _SPIPLISTES_META_PREFERENCES);
 				spiplistes_ecrire_metas();
 				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:Trieuse_reactivee')."</p>\n";
@@ -577,7 +577,7 @@ function spiplistes_boite_autocron () {
 	// Informe sur l'etat de la meleuse
 	if($opt_suspendre_meleuse == 'oui') {
 		if(_request('opt_suspendre_meleuse')=='non') {
-			if(autoriser('webmestre','',$connect_id_auteur)) {
+			if(autoriser('webmestre','','',$connect_id_auteur)) {
 				__plugin_ecrire_key_in_serialized_meta ('opt_suspendre_meleuse', $opt_suspendre_meleuse = 'non', _SPIPLISTES_META_PREFERENCES);
 				spiplistes_ecrire_metas();
 				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:Meleuse_reactivee')."</p>\n";
@@ -594,7 +594,7 @@ function spiplistes_boite_autocron () {
 	// Informe si mode simulation en cours
 	if($opt_simuler_envoi == 'oui') {
 		if(_request('opt_simuler_envoi')=='non') {
-			if(autoriser('webmestre','',$connect_id_auteur)) {
+			if(autoriser('webmestre','','',$connect_id_auteur)) {
 				__plugin_ecrire_key_in_serialized_meta ('opt_simuler_envoi', $opt_simuler_envoi = 'non', _SPIPLISTES_META_PREFERENCES);
 				spiplistes_ecrire_metas();
 				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:simulation_desactive')."</p>\n";
