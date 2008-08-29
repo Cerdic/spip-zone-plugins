@@ -3,12 +3,13 @@
 }
 #sliders {
 	margin:1ex;
+	list-style:none;
 }
 #sliders .slider {
+	display: inline-block;
 	width:34px;
 	height:34px;
 	border:2px solid gray;
-	float:left;
 	margin:4px;
 	text-align:center;
 }
@@ -36,4 +37,6 @@
 #sliders .checked {
 	border:2px solid black;
 }
-
+#sliders .end {
+	clear:left;
+}
