@@ -57,6 +57,11 @@ _ From SPIP 1.9.2, restricted areas can be found in the private area and/or in t
 		<inclure>acces_restreint_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>I2_cfg_form</nom>
+		<action>I2_cfg_form</action>
+		<inclure>acces_restreint_pipelines.php</inclure>
+	</pipeline>	
+	<pipeline>
 		<nom>AccesRestreint_liste_zones_autorisees</nom>
 		<action>liste_zones_autorisees</action>
 		<inclure>inc/acces_restreint.php</inclure>

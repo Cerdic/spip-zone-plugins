@@ -47,5 +47,9 @@ if (!defined('_DIR_PLUGIN_ACCESRESTREINT')){ // definie automatiquement en 1.9.2
 		return $flux;
 	}
 
+    function AccesRestreint_I2_cfg_form($flux){
+        $flux .= recuperer_fond('fond/inscription2_acces_restreint');
+        return $flux;
+    }
 
 ?>
