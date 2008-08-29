@@ -1,0 +1,22 @@
+<BOUCLE_reflet (DOCUMENTS) {id_document}>
+[(#REM)
+
+	Modele pour <reflet>
+		
+	Documentation : http://www.quesaco.org/Portfolio-ImageFlow-pour-SPIP#modelereflet
+
+]
+<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[ width:(#LARGEUR)px;]']>
+[(#LOGO_DOCUMENT||image_avec_reflet{
+					[(#TITRE|couper{80}|texte_backend)]
+					, ''
+					, [(#TITRE|couper{80}|texte_backend)]
+					, [(#DESCRIPTIF)]
+					, [(#ENV{style})]
+					, [(#ENV{bgc})]
+					, [(#ENV{tint})]
+					, [(#ENV{fade_start})]
+					, [(#ENV{fade_end})]
+					, [(#ENV{height})]
+					, [(#ENV{width})]
+					})]	</span></BOUCLE_reflet>
