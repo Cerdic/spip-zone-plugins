@@ -51,7 +51,7 @@
 <BOUCLE_visites(VISITES_VIRTUELLES){id_visite=#ID_VISITE}>
 <BOUCLE_carte(DOCUMENTS){id_document=#ID_CARTE}>
 $(document).ready(function(){
-	$('.panorama-viewport').append("<div class='panorama-onglets'><div class='panorama-carte'><img src='#URL_DOCUMENT' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><BOUCLE_position(VISITES_VIRTUELLES_LIEUX){id_visite=#ID_VISITE}><span class='lien-plan' style='[left: (#POSITION_X_CARTE)px;][ top: (#POSITION_Y_CARTE|moins{40})px;]'><a href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]})]'[(#ACCES_CARTE|=={si_visite}|?{' ',''})class='verifier-lien-plan verifier-lien-plan#ID_LIEU']>#TITRE</a></span></BOUCLE_position></div><div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:><ul><?php echo(str_replace('"', '\'', $_COOKIE['objets_ramasses'])); ?></ul></div><div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2><h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2></div></div>");
+	$('.panorama-viewport').append("<div class='panorama-onglets'><div class='panorama-carte'><img src='#URL_DOCUMENT' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><BOUCLE_position(VISITES_VIRTUELLES_LIEUX){id_visite=#ID_VISITE}><span class='lien-plan' style='[left: (#POSITION_X_CARTE)px;][ top: (#POSITION_Y_CARTE|moins{40})px;]'><a href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]})]'[(#ACCES_CARTE|=={si_visite}|?{' ',''})class='verifier-lien-plan verifier-lien-plan#ID_LIEU']>#TITRE</a></span></BOUCLE_position></div><div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:><ul>"+$.cookie('objets_ramasses')+"</ul></div><div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2><h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2></div></div>");
 	
 	$('.panorama-viewport .lien-plan').css('z-index', 50).bind('mouseover', function(){
 								$('.panorama-viewport .lien-plan').css('z-index', 50);
@@ -73,6 +73,7 @@ $(document).ready(function(){
 					$('h2.panorama-carte').show();
 				return false;
 	});
+	
 });
 </BOUCLE_carte>
 </BOUCLE_visites>
