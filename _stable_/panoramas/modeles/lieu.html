@@ -1,15 +1,8 @@
-#CACHE{0}
 <B_lieux>
 
 <BOUCLE_lieux(VISITES_VIRTUELLES_LIEUX){id_lieu}>
 	
-	<?php
-		//mise à jour de la liste des lieux visités
-		$tab_lieux_visites = split(",", $_COOKIE['lieux_visites']);
-		if (!in_array("#ID_LIEU", $tab_lieux_visites)) {
-			setcookie("lieux_visites",implode(",", $tab_lieux_visites).",#ID_LIEU");
-		}
-	?>
+	
 	<a id="[lieu(#ID_LIEU)]" name="[lieu(#ID_LIEU)]"></a>
 	<BOUCLE_photo(DOCUMENTS){id_document=#ID_PHOTO}>
 		<img src="#URL_DOCUMENT" class="panorama#ID_LIEU" width="#LARGEUR" height="#HAUTEUR" 
@@ -85,7 +78,25 @@ $(document).ready(function(){
 </BOUCLE_visites>
 	$(document).ready(function(){
 		
+	//maj des lieux visites
+	var tableau_lieux_visites = new Array();
+	if ($.cookie('lieux_visites')) {
+		tableau_lieux_visites = $.cookie('lieux_visites').split(','); 
+		if (tableau_lieux_visites.indexOf('#ID_LIEU')>=0) {
+			//le lieu est déja dans la liste
+		} else {
+			tableau_lieux_visites.push('#ID_LIEU');
+		}
+	} else {
+		tableau_lieux_visites.push('#ID_LIEU');
+	}
+	var nouveau_cookie_lieux = '';
+	for (var i=0;i<tableau_lieux_visites.length;i++) {
+		nouveau_cookie_lieux += ',' + tableau_lieux_visites[i];
+	}
+	$.cookie('lieux_visites', nouveau_cookie_lieux);
 	
+
 	<BOUCLE_toutesinteractions(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
 		
 		[ (#REM) interactions qui ont précisé une image de fond : ajouter l'image dans le cadre ]
