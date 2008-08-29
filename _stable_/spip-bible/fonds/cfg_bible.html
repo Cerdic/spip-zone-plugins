@@ -13,6 +13,12 @@
 						<option value="jerusalem" [selected="(#ENV{traduction_fr}|=={kj})"]>
 						[(#ENV|traduction_longue{jerusalem})]
 						</option>
+						<option value="lsg" [selected="(#ENV{traduction_fr}|=={kj})"]>
+						[(#ENV|traduction_longue{lsg})]
+						</option>
+						<option value="bds" [selected="(#ENV{traduction_fr}|=={kj})"]>
+						[(#ENV|traduction_longue{bds})]
+						</option>
 						
 					</select>
 				
@@ -23,6 +29,12 @@
 				<select name="traduction_en"  id="traduction_en">
 					<option value="kj" [selected="(#ENV{traduction_en}|=={kj})"]>
 							[(#ENV|traduction_longue{kj})]
+					</option>
+					<option value="kj21" [selected="(#ENV{traduction_en}|=={kj})"]>
+							[(#ENV|traduction_longue{kj21})]
+					</option>
+					<option value="darb_en" [selected="(#ENV{traduction_en}|=={kj})"]>
+							[(#ENV|traduction_longue{darb_en})]
 					</option>
 				</select>
 			</li>
