@@ -38,6 +38,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'manque_objet' => 'Il vous manque l\'objet :',
 'merci' => 'Merci',
 'documents_associes' => 'Documents associ&eacute;s',
-'images_transition' => 'Images &agrave; afficher pendant la transition (id des images s&eacute;par&eacute;es par des virgules)'
+'images_transition' => 'Images &agrave; afficher pendant la transition (id des images s&eacute;par&eacute;es par des virgules)',
+'liste_lieux_visites' => 'Liste des lieux visit&eacute;s',
+'objets_ramasses' => 'Liste des objets ramass&eacute;s',
+'jeux_reussis' => 'Liste des jeux r&eacute;ussis',
+'votre_profil' => 'Votre profil'
 );
 ?>
