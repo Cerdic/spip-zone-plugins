@@ -11,13 +11,9 @@ function SelecteurGenerique_inserer_auteur() {
 var appliquer_selecteur_cherche_auteur = function() {
 
 	// chercher l'input de saisie
-	var inp = jQuery('input[@name=cherche_auteur]', this);
-
-	// ne pas reappliquer si on vient seulement de charger les suggestions
-	if (!inp[0] || inp[0].autoCFG) return;
-
-	// attacher l'autocompleter
-	inp.Autocomplete({
+	jQuery('input[@name=cherche_auteur]')
+	.not('[@autoCFG]')
+	.Autocomplete({
 		'source': '$ac',
 		'delay': 300,
 		'autofill': false,
@@ -42,14 +38,9 @@ var appliquer_selecteur_cherche_auteur = function() {
 	});
 }
 
-// Premier chargement
-jQuery(document).ready(appliquer_selecteur_cherche_auteur);
-
-// Chargements ajax suivants
-// onAjaxLoad(appliquer_selecteur_cherche_auteur); // OK avec SPIP [8957]
-// mais pour < 8957, setTimeout obligatoire sinon on s'applique au vieux DOM 
-// pre-update quand on clique sur une suppression d'auteur !!
-onAjaxLoad(function(){setTimeout(appliquer_selecteur_cherche_auteur, 200);});
+jQuery(document).ready(function(){
+	setInterval(appliquer_selecteur_cherche_auteur,2000);
+});
 
 EOS;
 
@@ -77,13 +68,9 @@ function SelecteurGenerique_inserer_mot() {
 var appliquer_selecteur_cherche_mot = function() {
 
 	// chercher l'input de saisie
-	var inp = jQuery('input[@name=cherche_mot]', this);
-
-	// ne pas reappliquer si on vient seulement de charger les suggestions
-	if (!inp[0] || inp[0].autoCFG) return;
-
-	// attacher l'autocompleter
-	inp.each(function() {
+	jQuery('input[@name=cherche_mot]')
+	.not('[@autoCFG]')
+	.Autocomplete({
 		var me = this;
 		var id_groupe = jQuery(me).parents('form').find('input[@name=select_groupe]').val();
 		
@@ -117,11 +104,9 @@ var appliquer_selecteur_cherche_mot = function() {
 	});
 }
 
-// Premier chargement
-jQuery(document).ready(appliquer_selecteur_cherche_mot);
-
-// Chargements ajax suivants
-onAjaxLoad(function(){setTimeout(appliquer_selecteur_cherche_mot, 200);});
+jQuery(document).ready(function(){
+	setInterval(appliquer_selecteur_cherche_mot,2000);
+});
 
 
 EOS;
@@ -140,13 +125,8 @@ function SelecteurGenerique_inserer_rubrique() {
 var appliquer_selecteur_cherche_rubrique = function() {
 
 	// chercher l'input de saisie
-	var inp = jQuery('input#titreparent', this);
-
-	// ne pas reappliquer si on vient seulement de charger les suggestions
-	if (!inp[0] || inp[0].autoCFG) return;
-
-	// attacher l'autocompleter
-	inp
+	jQuery('input#titreparent')
+	.not('[@autoCFG]')
 	.Autocomplete({
 		'source': '$ac',
 		'delay': 300,
@@ -177,11 +157,9 @@ var appliquer_selecteur_cherche_rubrique = function() {
 	});
 }
 
-// Premier chargement
-jQuery(document).ready(appliquer_selecteur_cherche_rubrique);
-
-// Chargements ajax suivants (pas pertinent pour le selecteur de rubriques dans articles_edit ou auteur_infos)
-//onAjaxLoad(function(){setTimeout(appliquer_selecteur_cherche_rubrique, 200);});
+jQuery(document).ready(function(){
+	setInterval(appliquer_selecteur_cherche_rubrique,2000);
+});
 
 
 EOS;
