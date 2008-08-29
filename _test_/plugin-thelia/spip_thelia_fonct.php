@@ -227,7 +227,7 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script){
 	$out .= debut_block_invisible('produitsarticle');
 	
 	$link = generer_action_auteur('produits_article',"$id_article",_DIR_RESTREINT_ABS.($retour?(str_replace('&amp;','&',$retour)):generer_url_ecrire('articles&id_article='.$id_article,"",false,true)));
-	$out .= "<form method='POST' action='$link' style='float:$spip_lang_right'>\n";
+	$out .= "<form method='POST' action='$link'>\n";
 	$out .= form_hidden($link);
 	
 	//
@@ -284,7 +284,7 @@ function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script){
 	$out .= debut_block_invisible('produitsrubrique');
 	
 	$link = generer_action_auteur('produits_rubrique',"$id_rubrique",_DIR_RESTREINT_ABS.($retour?(str_replace('&amp;','&',$retour)):generer_url_ecrire('naviguer&id_rubrique='.$id_rubrique,"",false,true)));
-	$out .= "<form method='POST' action='$link' style='float:$spip_lang_right'>\n";
+	$out .= "<form method='POST' action='$link'>\n";
 	$out .= form_hidden($link);
 	
 	//

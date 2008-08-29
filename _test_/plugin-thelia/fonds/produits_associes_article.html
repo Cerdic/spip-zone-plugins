@@ -4,7 +4,7 @@
 	<input type="submit" value="<:spipthelia:mettre_a_jour:>" />
 </div>
 
-<ul>
+<ul class="produits-articles">
 <THELIA_produitsniveau0 type="PRODUIT" rubrique="0" profondeur="1">
 		<li>[(#CONFIG{spip_thelia/produits_articles_spip_thelia}|=={"oui"}|?{' ',''})
 			<input type="checkbox" id="produit-THELIA-ID" name="produit-THELIA-ID" /><label for="produit-THELIA-ID">THELIA-TITRE</label>
@@ -113,6 +113,20 @@
 		<BOUCLE_associationsarticles(PRODUITS_ARTICLES){id_article}>
 			$('#produit-#ID_PRODUIT').attr('checked', 'checked');
 		</BOUCLE_associationsarticles>
+		$('.produits-articles li ul').before("<span class='deplier-liste' style='cursor:pointer; color: #F60; font-size: .9em;'>[+]</span>");
+		
+		$('.produits-articles li ul').hide();
+		$('.produits-articles li span').toggle(function(){
+			$(this).next().show();
+			$(this).html('[-]');
+			return false;
+		},
+		function(){
+			$(this).next().hide();
+			$(this).html('[+]');
+			return false;
+		});
+		
 	});
 </script>
 <div class="spip_boutons" style="float: right;">
