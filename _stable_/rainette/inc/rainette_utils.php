@@ -52,13 +52,17 @@ function xml2tab_previsions($xml){
 			if (preg_match(",day\s*d=['\"?]([0-9]+),Uims",$day,$regs)){
 				$jour = date('Y-m-d',$date_maj+$regs[1]*24*3600);
 				$p = reset($p);
-				// Index, jour et lever/coucher du soleil
+				// Index du jour et date du jour
 				$tableau[$index]['index'] = $index;
 				$tableau[$index]['date'] = $jour;
-				$sun = date_parse($p['sunr'][0]);
- 				$tableau[$index]['lever_soleil'] = $sun['hour'].':'.$sun['minute'];
-				$sun = date_parse($p['suns'][0]);
- 				$tableau[$index]['coucher_soleil'] = $sun['hour'].':'.$sun['minute'];
+				// Date complete des lever/coucher du soleil
+				$date = date_parse($jour);
+				$heure = date_parse($p['sunr'][0]);
+				$sun = mktime($heure['hour'],$heure['minute'],0,$date['month'],$date['day'],$date['year']);
+				$tableau[$index]['lever_soleil'] = date('Y-m-d H:i:s',$sun);
+				$heure = date_parse($p['suns'][0]);
+				$sun = mktime($heure['hour'],$heure['minute'],0,$date['month'],$date['day'],$date['year']);
+				$tableau[$index]['coucher_soleil'] = date('Y-m-d H:i:s',$sun);
 				// Previsions du jour
 				$tableau[$index]['temperature_jour'] = intval($p['hi'][0]) ? intval($p['hi'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
 				$tableau[$index]['code_icone_jour'] = intval($p['part p="d"'][0]['icon'][0]) ? intval($p['part p="d"'][0]['icon'][0]) : _RAINETTE_VALEUR_INDETERMINEE;
