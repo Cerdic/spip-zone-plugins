@@ -53,6 +53,7 @@ $visites_virtuelles_lieux = array(
 		"boucler"	=> "ENUM('oui', 'non') DEFAULT 'oui' NOT NULL", /* le panorama correspond-t'il à une vue à 360 degrès ? */
 		"position_x_carte"	=> "int(21) NOT NULL", /* emplacement du lieu sur la carte 2D */
 		"position_y_carte"	=> "int(21) NOT NULL", 
+		"acces_carte"	=> "ENUM('toujours', 'si_visite') DEFAULT 'toujours' NOT NULL", /* permettre l'accès au lieu depuis la carte : toujours, ou uniquement si le lieu a déjà été visité */
 		"url_carte"	=> "text NOT NULL", /* pour pointer sur la carte vers une url marticulière et non la page lieu */
 		"decalage_x"	=> "int(21) NOT NULL", /* décalage par défaut du panorama (start_position) */
 		"documents_associes"	=> "text NOT NULL", /* id des documents associés au lieu, séparés par des virgules */

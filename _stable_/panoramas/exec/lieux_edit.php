@@ -84,6 +84,7 @@ function exec_lieux_edit(){
 			$audio_repeter = $row['audio_repeter'];
 			$position_x_carte = $row['position_x_carte'];
 			$position_y_carte = $row['position_y_carte'];
+			$acces_carte = $row['acces_carte'];
 			$url_carte = $row['url_carte'];
 			$decalage_x = $row['decalage_x'];
 			$documents_associes = $row['documents_associes'];
@@ -178,6 +179,7 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 	$id_audio =  intval($row['id_audio']);
 	$position_x_carte =  intval($row['position_x_carte']);
 	$position_y_carte =  intval($row['position_y_carte']);
+	$acces_carte =  $row['acces_carte'];
 	$url_carte =  $row['url_carte'];
 	$decalage_x =  intval($row['decalage_x']);
 	$documents_associes =  $row['documents_associes'];
@@ -256,6 +258,22 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 	$out .= "<strong><label for='position_y_carte_lieu'>"._T("panoramas:position_y_carte")."</label></strong> ";
 	$out .= "<input type='text' name='position_y_carte' id='position_y_carte_lieu' class='formo $focus' ".
 		"value=\"".$position_y_carte."\" size='5' /><br />\n";
+
+	$out .= "<strong><label for='acces_carte_lieu'>"._T("panoramas:acces_carte")."</label></strong> ";
+	$out .= "<select name='acces_carte' id='acces_carte_lieu' class='formo $focus' ".
+		"value=\"".$acces_carte."\" >
+			<option value=\"toujours\"";
+	if ($acces_carte=="toujours") $out .= "selected=\"selected\"";
+	
+
+	$out .= " >"._T("panoramas:toujours")."</option>
+			<option value=\"si_visite\"";
+
+	if (!($acces_carte=="toujours")) $out .= "selected=\"selected\"";
+
+	$out .= " >"._T("panoramas:si_visite")."</option>
+		</select><br />\n";
+
 
 	$out .= "<strong><label for='url_carte_lieu'>"._T("panoramas:url_carte")."</label></strong> ";
 	$out .= "<input type='text' name='url_carte' id='url_carte_lieu' class='formo $focus' ".

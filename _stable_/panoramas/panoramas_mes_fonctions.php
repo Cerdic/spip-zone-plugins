@@ -24,4 +24,5 @@ function memoriser_resultat_jeu($texte, $id_jeu) {
 		}
 	return "Resultat m&eacute;moris&eacute;";
 }
+
 ?>
