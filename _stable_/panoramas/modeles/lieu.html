@@ -101,8 +101,8 @@ $(document).ready(function(){
 		
 		[ (#REM) interactions qui ont précisé une image de fond : ajouter l'image dans le cadre ]
 		<BOUCLE_imagedefondcourante(DOCUMENTS){id_document=#ID_IMAGE_FOND}>
-			$('.interaction#_interactionsobjetetpersonnage:ID_INTERACTION').append("<img src='#URL_DOCUMENT' width='100%' height='100%' />").css('opacity',1).css('border','none').css('background','none');
-			$('.interaction#_interactionsobjetetpersonnage:ID_INTERACTION').bind('click', function() {
+			$('.interaction#_toutesinteractions:ID_INTERACTION').append("<img src='#URL_DOCUMENT' width='100%' height='100%' />").css('opacity',1).css('border','none').css('background','none');
+			$('.interaction#_toutesinteractions:ID_INTERACTION').bind('click', function() {
 							return false;
 						});
 				
