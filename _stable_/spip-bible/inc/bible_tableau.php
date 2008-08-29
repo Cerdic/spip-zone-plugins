@@ -1,6 +1,6 @@
 <?php
 
-//ce fichier doit contenir plusieur tableaux 
+//ce fichier doit contenir plusieurs tableaux 
 global $tableau_traduction;
 global $tableau_separateur;
 global $tableau_livres;
@@ -186,7 +186,7 @@ $tableau_traduction = array(
 		'lang'		=> 'fr'),
 	'bds' => array(
 		'traduction'=> 'Bible du Semeur',
-		'gateway'	=> 3Jn2,
+		'gateway'	=> 32,
 		'lang'		=> 'fr'),
 	'kj21' => array(
 		'traduction'=> 'The 21st Century King James',
