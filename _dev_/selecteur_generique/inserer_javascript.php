@@ -70,7 +70,7 @@ var appliquer_selecteur_cherche_mot = function() {
 	// chercher l'input de saisie
 	jQuery('input[@name=cherche_mot]')
 	.not('[@autoCFG]')
-	.Autocomplete({
+	.each({
 		var me = this;
 		var id_groupe = jQuery(me).parents('form').find('input[@name=select_groupe]').val();
 		
