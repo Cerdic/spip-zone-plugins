@@ -28,7 +28,7 @@ Ces options sont :
 -* "traduction"	=> Pour choisir la traduction. Pour le moment existe seulement :
 -** "jerusalem" (attention au minuscule) => Pour la Bible de J&eacute;rusalem.
 	
-	En l'absence des ces param&eacute;tres, les valeurs seront celle d&eacute;finies [sur la page de configuration->/?exec=cfg&amp;cfg=bible].
+	En l'absence des ces param&eacute;tres, les valeurs seront celle d&eacute;finies [sur la page de configuration->?exec=cfg&amp;cfg=bible].
 	
 	
 	
