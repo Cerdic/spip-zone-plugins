@@ -362,7 +362,14 @@ $(document).ready(function(){
 				$('.panorama-control-pause').trigger('click');
 			}
 		}
+								
+		objEvent.stopPropagation();
+		objEvent.preventDefault();
+
+		return false;
+
 	});
+
 });
 </script>
 </B_lieux>
