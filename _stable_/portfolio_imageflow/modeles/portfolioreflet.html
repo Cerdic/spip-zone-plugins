@@ -1,0 +1,59 @@
+<!-- portfolio_imageflow spip plugin -->
+[(#REM) 
+
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+
+	***************************************
+	Portfolio : album d'images 
+	Code d'origine de Stéphane Kus
+	http://www.spip-contrib.net/ImageFlow-pour-SPIP
+	
+	Version modele pour insertion dans l'article
+	20080830 - Christian Paulus
+	Documentation : http://www.quesaco.org/Portfolio-ImageFlow-pour-SPIP
+	
+][(#REM)
+
+	ID_ARTICLE disparait du contexte pour un modele insere' dans l'article
+	Si c'est le cas, prend la valeur globale disponible
+
+]#SET{id_article,#ID_ARTICLE|sinon{#EVAL{$GLOBALS[id_article]}}}
+
+<B_documents_portfolio>
+	<div id="documents_portfolio"[ style='background-color:(#ENV{bgcolor});']>
+		[<h2 style="margin:0.5em 1ex 0;padding:0"><:info_portfolio:> (#ENV{titre})</h2>]
+		<div id="imageflow"> 
+			<div id="loading">
+				<strong><:ical_methode_http:></strong><br/>
+				<img src="[(#CHEMIN{imageflow/loading.gif})]" width="208" height="13" alt="loading" />
+			</div>
+			<div id="images"> 
+				<BOUCLE_documents_portfolio(DOCUMENTS){id_article=#GET{id_article}}{mode=document}{extension IN png,jpg,gif} {par num titre, date} {doublons}>
+				[(#LOGO_DOCUMENT||image_avec_reflet{
+					[(#TITRE|couper{80}|texte_backend)]
+					, [(#URL_DOCUMENT)]
+					, [(#TITRE|couper{80}|texte_backend)]
+					, [(#DESCRIPTIF)]
+					})]				
+				</BOUCLE_documents_portfolio>
+			</div>
+		
+			<div id="captions"></div>
+			<div id="scrollbar-box">
+				<div id="scrollbar"> 
+					<div id="slider"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="lightbox">
+			<img id="affichage" src="" alt="" title="" longdesc="" /> 
+		</div>
+	</div> 
+	<!-- fin docs portfolio -->		
+</B_documents_portfolio>
+[(#REM)
+	***************************************
+]<!-- fin portfolio imageflow -->		
