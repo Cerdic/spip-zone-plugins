@@ -129,15 +129,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_articles_lies_donnee' => 'Los art&iacute;culos enllaz&aacute;os',
 	'info_champs_formulaire' => 'Equ&iacute; pues crear y cambear los campos que les visites van poder enllenar.',
 	'info_obligatoire_02' => '[Obligatorio]',
-	'info_rubriques_liees_donnee' => '<NEW>Les rubriques li&eacute;es',
-	'info_sondage' => '<NEW>Si votre formulaire est un sondage, les r&eacute;sultats des champs de type &laquo; s&eacute;lection &raquo; seront additionn&eacute;s et affich&eacute;s.',
-	'info_supprimer_formulaire' => '<NEW>Voulez-vous vraiment supprimer ce formulaire ?',
-	'info_supprimer_formulaire_reponses' => '<NEW>Des donn&eacute;es sont associ&eacute;es &agrave; ce formulaire. Voulez-vous vraiment le supprimer ?',
+	'info_rubriques_liees_donnee' => 'Les estayes enllaz&aacute;es',
+	'info_sondage' => 'Si el formulariu ye una encuesta, los resultaos de los campos de tipu &laquo;seleici&oacute;n&raquo; s&uacute;mense y amu&eacute;sense.',
+	'info_supprimer_formulaire' => '&iquest;De verd&aacute; qui&eacute;s desaniciar esti formulariu?',
+	'info_supprimer_formulaire_reponses' => 'Hai datos asociaos con esti formulariu. &iquest;De verd&aacute; qui&eacute;s desanicialu?',
 
 	// L
-	'lien_apercu' => '<NEW>Aper&ccedil;u',
-	'lien_champ' => '<NEW>Champs',
-	'lien_propriete' => '<NEW>Propri&eacute;t&eacute;s',
+	'lien_apercu' => 'G&uuml;eyada',
+	'lien_champ' => 'Campos',
+	'lien_propriete' => 'Propied&aacute;es',
 	'lien_retirer_donnee_liante' => '<NEW>Retirer le lien',
 	'lien_retirer_donnee_liee' => '<NEW>Retirer le lien',
 	'lier_articles' => '<NEW>Permettre d\'associer les donn&eacute;es aux articles',
@@ -215,7 +215,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'valider' => '<NEW>Valider',
 	'verif_web' => '<NEW>v&eacute;rifier l\'existence du site Web',
 	'vider' => 'Vaciar',
-	'voir_article' => '<NEW>Voir l\'article',
+	'voir_article' => 'Ver l\'art&iacute;culu',
 	'voir_resultats' => 'Ver los resultaos'
 );
 
