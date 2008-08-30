@@ -100,7 +100,7 @@ $language_data = array (
 			GESHI_AFTER => ''
 			),
 		1 => array(
-			GESHI_SEARCH => '(&lt;/?/?B(OUCLE)?[a-z0-9_]*)',
+			GESHI_SEARCH => '(&lt;\/?\/?B(OUCLE)?[a-z0-9_]*)',
 			GESHI_REPLACE => '\\1',
 			GESHI_MODIFIERS => 'i',
 			GESHI_BEFORE => '',
