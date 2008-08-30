@@ -27,7 +27,7 @@ function css_contruire($css, $niveau, $chemin, $classe, $enfants, $definition) {
 		
 		$def = css_inserer_tab($def);
 	
-		$ret = "\n".$chemin." {\n".$def."\n}";
+		if ( strlen(trim($chemin)) > 0 ) $ret = "\n".$chemin." {\n".$def."\n}";
 //		echo "<pre>$css</pre>";
 	}
 	
