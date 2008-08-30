@@ -100,7 +100,7 @@ function AccesRestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL)
 
 		// Si le visiteur est autorise sur certaines zones publiques,
 		// on selectionne les rubriques correspondant aux autres zones,
-		// sinon on selectionne toutes celles correspondant à une zone.
+		// sinon on selectionne toutes celles correspondant ï¿½ une zone.
 		if (is_null($id_auteur) AND $GLOBALS['AccesRestreint_zones_autorisees'])
 			$cond .= " AND zr.id_zone NOT IN (".$GLOBALS['AccesRestreint_zones_autorisees'].")";
 		elseif (!is_null($id_auteur))
@@ -232,22 +232,22 @@ function AccesRestreint_rubriques_accessibles_where($primary){
 			$liste_documents_exclus[$publique] = array();
 			// rattaches aux articles
 			$liste_art = AccesRestreint_liste_articles_exclus($publique, $id_auteur);
-			$where = calcul_mysql_in('id_article', join(",",$liste_art));
-			$s = spip_query("SELECT id_document FROM spip_documents_articles WHERE $where");
+			$where = calcul_mysql_in('id_objet', join(",",$liste_art));
+			$s = spip_query("SELECT id_document FROM spip_documents_liens WHERE $where AND objet='article'");
 			while ($row = spip_fetch_array($s)){
 				$liste_documents_exclus[$publique][$row['id_document']]=1;
 			}
 			// rattaches aux rubriques
 			$liste_rub = AccesRestreint_liste_rubriques_exclues($publique, $id_auteur);
-			$where = calcul_mysql_in('id_rubrique', join(",",$liste_rub));
-			$s = spip_query("SELECT id_document FROM spip_documents_rubriques WHERE $where");
+			$where = calcul_mysql_in('id_objet', join(",",$liste_rub));
+			$s = spip_query("SELECT id_document FROM spip_documents_liens WHERE $where AND objet='rubrique'");
 			while ($row = spip_fetch_array($s)){
 				$liste_documents_exclus[$publique][$row['id_document']]=1;
 			}
 			// rattaches aux breves
 			$liste_breves = AccesRestreint_liste_breves_exclues($publique, $id_auteur);
-			$where = calcul_mysql_in('id_breve', join(",",$liste_breves));
-			$s = spip_query("SELECT id_document FROM spip_documents_breves WHERE $where");
+			$where = calcul_mysql_in('id_objet', join(",",$liste_breves));
+			$s = spip_query("SELECT id_document FROM spip_documents_liens WHERE $where AND objet='breve'");
 			while ($row = spip_fetch_array($s)){
 				$liste_documents_exclus[$publique][$row['id_document']]=1;
 			}
