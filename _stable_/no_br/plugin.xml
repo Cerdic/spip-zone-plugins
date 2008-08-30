@@ -1,0 +1,13 @@
+<plugin>
+	<nom>Interdire les retours-chariot</nom>
+	<version>1.0</version>
+	<prefix>no_br</prefix>
+	<etat>stable</etat>
+	<auteur>ARNO*</auteur>
+	<description>Les retours-chariot c'est mal, les retours-chariot sont une plaie, les retours-chariot nuisent &agrave; votre sant&eacute;. Ce plugin interdit l'insertion de retours-chariot dans le texte en les rempla&ccedil;ant par des changements de paragraphe (ce qu'ils devraient toujours &ecirc;tre).</description>
+	<pipeline>
+		<nom>pre_propre</nom>
+		<action>interdire_br</action>
+		<inclure>no_br.php</inclure>
+	</pipeline>
+</plugin>
