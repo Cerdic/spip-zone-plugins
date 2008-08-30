@@ -3,6 +3,4 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
-- Le chargement de l'image est parfois bien long. Ajouter un loading.gif dans la boite image finale
 - Ajouter en page de configuration un bouton pour reinitialiser
-- créer un modele pour pouvoir ajouter le portfolio en milieu de document

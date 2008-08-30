@@ -5,8 +5,16 @@
 	// $LastChangedBy$
 	// $LastChangedDate$
 
-	Exemple avec utilisation du filtre image_avec_reflet()
+	Exemple avec utilisation du modele imagereflet
+	pour insertion du portfolio *dans* l'article, 
+	via la boite edition en espace prive'
 
+	Identique a html/article.html
+	sauf 
+	- insertion de la balise IMAGEFLOW_INSERT_HEAD avant le head
+	- retrait du portfolio dist de bas de page
+	- retrait de la liste des documents joints
+	
 	Documentation : http://www.quesaco.org/Portfolio-ImageFlow-pour-SPIP	
 
 ]<BOUCLE_article_principal(ARTICLES) {id_article}>
@@ -58,67 +66,9 @@
 			[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{520,0})</div>]
 			#FIN_SURLIGNE
 
-[(#REM) 
-	***************************************
-	Portfolio : album d'images 
-	Code d'origine de Stéphane Kus
-	http://www.spip-contrib.net/ImageFlow-pour-SPIP
-]<!-- portfolio imageflow -->
-<B_documents_portfolio>
-	<div id="documents_portfolio">
-		<h2><:info_portfolio:></h2>     
-		<div id="imageflow"> 
-			<div id="loading">
-				<strong><:ical_methode_http:></strong><br/>
-				<img src="[(#CHEMIN{imageflow/loading.gif})]" width="208" height="13" alt="loading" />
-			</div>
-			<div id="images"> 
-				<BOUCLE_documents_portfolio(DOCUMENTS){id_article}{mode=document}{extension IN png,jpg,gif} {par num titre, date} {doublons}>
-				[(#LOGO_DOCUMENT||image_avec_reflet{
-					[(#TITRE|couper{80}|texte_backend)]
-					, [(#URL_DOCUMENT)]
-					, [(#TITRE|couper{80}|texte_backend)]
-					, [(#DESCRIPTIF)]
-					})]				
-				</BOUCLE_documents_portfolio>
-			</div>
-		
-			<div id="captions"></div>
-			<div id="scrollbar-box">
-				<div id="scrollbar"> 
-					<div id="slider"></div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="clear"></div>
-		<div id="lightbox">
-			<img id="affichage" src="" alt="" title="" longdesc="" /> 
-		</div>
-	</div> 
-	<!-- fin docs portfolio -->		
-</B_documents_portfolio>
-[(#REM)
-	***************************************
-]<!-- fin portfolio imageflow -->		
-
 			[<div class="ps"><h2><:info_ps:></h2>#DEBUT_SURLIGNE<div class="#EDIT{ps}">(#PS)</div>#FIN_SURLIGNE</div>]
 
-			[(#REM) Autres documents joints a l'article ]
-			<B_documents_joints>
-			<div id="documents_joints">
-				<h2><:titre_documents_joints:></h2>
-				<ul>
-					<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {par num titre, date} {doublons}>
-					<li>
-						<div class="spip_doc_titre"><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a> <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
-						[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
-					</li>
-					</BOUCLE_documents_joints>
-				</ul>
-			</div>
-			</B_documents_joints>
-			
+					
 			[(#REM) Petition :
 			La petition ayant une PAGINATION il faut absolument lui passer SELF]
 			[(#PETITION|?{' '})

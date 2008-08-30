@@ -50,8 +50,6 @@
 
 if(!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-include_spip('inc/imageflow_api_globales');
-
 // Balise independante du contexte
 
 
@@ -59,104 +57,13 @@ include_spip('inc/imageflow_api_globales');
 // A placer dans votre squelette, après la balise INSERT_HEAD
 function balise_IMAGEFLOW_INSERT_HEAD ($p) {
 	
-	$error = array();
-	$css = $js = $insert = "";
-	
-	$preferences_meta = imageflow_get_all_preferences();
-	$preferences_default = unserialize(_IMAGEFLOW_PREFERENCES_DEFAULT);
-	
-	foreach($preferences_meta as $key => $value) {
-		if($key == 'img') continue;
-		if(empty($value)) {
-			$preferences_meta[$key] = $preferences_default[$key];
-		}
-	}
-
-	// récupère le contenu du css et mise en cache
-	if($path = find_in_path($f = "imageflow/screen.css")) {
-		$path = direction_css($path);
-		$css = compacte($path);
-		
-	}
-	else {
-		$error[] = $f;
-	}
-	
-	// idem pour javascript
-	if($path = find_in_path($f = "imageflow/imageflow.js")) {
-		$js = compacte($path);
-	}	
-	else {
-		$error[] = $f;
-	}
-
-	if(!empty($css) && !empty($js)) {
-		$insert .= ""
-			. "<link rel=\"stylesheet\" title=\"Standard\" href=\"".$css."\" type=\"text/css\" media=\"screen\" />\n"
-			. "<script type=\"text/javascript\" src=\"".$js."\"></script>\n"
-			;
-	}
-	foreach($error as $f) {
-		$e = "ERROR: image flow ".$f." file not found!";
-		$insert .= "<!-- ".$e." -->\n";
-		imageflow_log($e);
-	}
-
-	$insert = "\n"
-		. "<!-- imageflow_insert_head -->\n"
-		. $insert
-		. "\n"
+	$result = 
+		($f = charger_fonction('imageflow_header', 'inc'))
+		? $f()
+		: ""
 		;
 
-	if ($preferences_meta['preloader'] == 'oui') {
-		$insert .= "
-<script type=\"text/javascript\">
-//<![CDATA[ 
-$(document).ready(function(){
-	var tmp_img = new Image();
-	$(\"#imageflow #images img\").each(function(){
-		tmp_img.src = $(this).attr(\"name\");
-	});
-});
-//]]>
-</script>
-		";
-	}
-	
-	
-	
-	//$slider = "imageflow/slider.png";
-	$slider = find_in_path(_DIR_IMAGEFLOW_IMAGES . $preferences_meta['slider']);
-
-	// correction du path pour le slider
-	// + position du slider pour IE
-	// + centrer le scrollbar pour IE
-	$insert .= "
-<style type=\"text/css\" media=\"screen\">
-#imageflow {background-color:transparent;}
-#scrollbar-box {text-align:center}
-#scrollbar{margin:0 auto}
-#slider {background-image:url(" . $slider . ");top:0;left:0}
-#images {overflow: hidden;}
-#lightbox {text-align:center;width:512px;height:384px;}
-#affichage {max-width:512px;max-height:384px;margin:0 auto}
-</style>
-"
-		; 
-
-	if ($preferences_meta['slideshow'] == 'oui') {
-		$js = find_in_path($f = "javascript/imageflow_slideshow.js");
-		$insert .= "<script type=\"text/javascript\" src=\"".$js."\"></script>\n
-<style type=\"text/css\" media=\"screen\">
-#lightbox {position:relative}
-#affichage {position:absolute;top:0;left:0;z-index:1024}
-#affichage_cache {}
-</style>
-		"
-		;
-	}
-
-	$p->code = "'".$insert."'";
+	$p->code = "'".$result."'";
 	$p->interdire_scripts = false;
 	
 	return($p);

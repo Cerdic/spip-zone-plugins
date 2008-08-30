@@ -22,16 +22,28 @@ function imageflow_header_prive ($flux) {
 
 	$exec = _request('exec');
 
-	if($exec && ($exec == "imageflow_configure")) {
-		$flux .= ""
-			. "\n\n<!-- PLUGIN PORTFOLIO IMAGEFLOW -->\n"
-			. "<link rel='stylesheet' type='text/css' href='".url_absolue(find_in_path('css/imageflow_prive.css'))."' />\n"
-			. "<!--[if IE]>\n"
-			. "<link rel='stylesheet' type='text/css' href='".url_absolue(find_in_path('css/imageflow_prive_ie.css'))."' />\n"
-			. "<![endif]-->\n"
-			. "<script src='".url_absolue(find_in_path('javascript/imageflow_prive.js'))."' type='text/javascript'></script>\n"
-			;
+	if($exec)
+	{
+		if ($exec == "imageflow_configure")
+		{
+			$flux .= ""
+				. "\n\n<!-- PLUGIN PORTFOLIO IMAGEFLOW -->\n"
+				. "<link rel='stylesheet' type='text/css' href='".url_absolue(find_in_path('css/imageflow_prive.css'))."' />\n"
+				. "<!--[if IE]>\n"
+				. "<link rel='stylesheet' type='text/css' href='".url_absolue(find_in_path('css/imageflow_prive_ie.css'))."' />\n"
+				. "<![endif]-->\n"
+				. "<script src='".url_absolue(find_in_path('javascript/imageflow_prive.js'))."' type='text/javascript'></script>\n"
+				;
+		}
+		elseif ($exec == "articles")
+		{
+			if($f = charger_fonction('imageflow_header', 'inc'))
+			{
+				$flux .= $f();
+			}
+		}
 	}
+	
 	
 	return ($flux);
 }

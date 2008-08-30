@@ -131,7 +131,7 @@ if(!function_exists('image_avec_reflet')) {
 			return(false);
 		}	
 
-		if(!$src_img = extraire_attribut($img, 'src')) {
+		if(!$src_img = imageflow_get_src ($img)) {
 			imageflow_log("Err: Balise img src vide");
 			return(false);
 		}
@@ -164,9 +164,7 @@ if(!function_exists('image_avec_reflet')) {
 		$dest_width = $width;
 		if($width < $src_width) {
 			$img = image_reduire($img, $width, 0);
-			$src_img = extraire_attribut($img, 'src');
-			$src_img = parse_url($src_img);
-			$src_img = $src_img['path'];
+			$src_img = imageflow_get_src ($img);
 			list($src_width, $src_height, $type) = getimagesize($src_img);
 		}
 		elseif ($width > $src_width)
@@ -504,6 +502,20 @@ if(!function_exists('longdesc_propre')) {
 			;
 		return ($longdesc);
 	}
+}
+
+/*
+ * imageflow_get_src ()
+ * Retourne le path propre de la balise image
+ * @author Christian Paulus (paladin@quesaco.org)
+ * @param $img Balise image calculée par SPIP
+ * @return Chemin de l'image
+ */
+function imageflow_get_src ($img) {
+	$src_img = extraire_attribut($img, 'src');
+	$src_img = parse_url($src_img);
+	$src_img = $src_img['path'];
+	return ($src_img);		
 }
 
 ?>
