@@ -139,7 +139,7 @@
 				}
 				
 				// Corriger quand cesure a l'interieur d'un caractere special, genre &ccedil;
-				$text = preg_replace("/&([a-zA-Z])+".str_replace("#", "\#", preg_quote(_PB_HYPHEN))."([a-z])+;/", "&\\1\\2;", $text);
+				$text = preg_replace("/&([a-zA-Z]+)".str_replace("#", "\#", preg_quote(_PB_HYPHEN))."([a-z]+);/", "&\\1\\2;", $text);
 				
 				return $text;
 			}
