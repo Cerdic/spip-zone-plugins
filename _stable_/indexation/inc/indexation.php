@@ -186,7 +186,7 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 					$result_syndic = spip_query("SELECT titre FROM spip_syndic_articles WHERE id_syndic=$id_objet AND statut='publie' ORDER BY date DESC LIMIT 100");
 
 					while ($row_syndic = sql_fetch($result_syndic)) {
-		    		indexer_les_champs($row,$INDEX_elements_objet['syndic_articles'],1,$min_long);
+						indexer_les_champs($row,$INDEX_elements_objet['syndic_articles'],1,$min_long);
 					}
 				}
 			}
@@ -199,8 +199,9 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 		spip_log("je ne sais pas indexer '$table'");
 
 #	sql_replace('spip_indexation', SET idx=3, titre='xxx', texte='xx' WHERE id=$id_objet AND type=$id_table");
+	$titre = sinon($row['titre'],$row['nom']);
 	spip_query($q = 'REPLACE spip_indexation (id, type, titre, texte, meta, date, idx) VALUES '
-		. '('._q($id_objet).', '._q($id_table).', "titre", '._q(trim($mots)).', "meta", "2001-01-01", 3)');
+		. '('._q($id_objet).', '._q($id_table).', '._q($titre).', '._q(trim($mots)).', "meta", "2001-01-01", 3)');
 	#spip_log($q);
 
 }
