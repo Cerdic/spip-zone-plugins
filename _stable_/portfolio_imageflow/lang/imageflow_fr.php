@@ -58,6 +58,9 @@ $GLOBALS['i18n_imageflow_fr'] = array(
 	, 'slideshow' => "Fondu enchain&#233;"
 	, 'slideshow_label' => "Ajouter un effet de fondu enchain&#233;."
 	
+	, 'reset' => "Reset"
+	, 'reset_title' => "R&#233;tablir les r&#233;glages par d&#233;faut"
+	
 	, 'error_php_old' => "La version de PHP install&#233;e n'est pas pleinement support&#233;e. 
 		Vous devez utiliser PHP 4.3.2 ou sup&#233;rieur."
 	, 'error_gd_missing' => "L'extension GD pour PHP est manquante. D&#233;sol&#233;, impossible de continuer."

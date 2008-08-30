@@ -26,6 +26,15 @@ function imageflow_header_prive ($flux) {
 	{
 		if ($exec == "imageflow_configure")
 		{
+			$default = "";
+			$preferences_default = unserialize(_IMAGEFLOW_PREFERENCES_DEFAULT);
+			foreach($preferences_default as $key => $value)
+			{
+				if($key == "img") continue;
+				$default .= $key.":\"".$value."\",";
+			}
+			$default = "var imageflow_default={".rtrim($default, ",")."};";
+			
 			$flux .= ""
 				. "\n\n<!-- PLUGIN PORTFOLIO IMAGEFLOW -->\n"
 				. "<link rel='stylesheet' type='text/css' href='".url_absolue(find_in_path('css/imageflow_prive.css'))."' />\n"
@@ -33,6 +42,7 @@ function imageflow_header_prive ($flux) {
 				. "<link rel='stylesheet' type='text/css' href='".url_absolue(find_in_path('css/imageflow_prive_ie.css'))."' />\n"
 				. "<![endif]-->\n"
 				. "<script src='".url_absolue(find_in_path('javascript/imageflow_prive.js'))."' type='text/javascript'></script>\n"
+				. "<script type='text/javascript'>".$default."</script>\n"
 				;
 		}
 		elseif ($exec == "articles")

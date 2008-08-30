@@ -132,6 +132,25 @@ function exec_imageflow_configure () {
 			. fin_cadre_relief(true)
 			;
 	}
+	
+	// le bouton reset
+	$bouton_reset = false;
+	foreach($preferences_default as $key => $value)
+	{
+		if($preferences_default[$key] != $preferences_current[$key])
+		{
+			$bouton_reset = true;
+			break;
+		}
+		
+	}
+	$bouton_reset = 
+		($bouton_reset)
+		? "<span class='reset-btn' title='"._T('imageflow:reset_title')."'>" 
+			. http_img_pack("spip-pack-24.png", "", " width='24' height='24' ")
+			. _T('imageflow:reset')."</span>&nbsp;"
+		: ""
+		;
 
 ////////////////////////////////////
 // PAGE CONTENU
@@ -243,7 +262,7 @@ function exec_imageflow_configure () {
 		;
 	
 
-	// Effet de fnodu enchainé ?
+	// Effet de fondu enchaine' ?
 	$page_result .= ""
 		. debut_cadre_relief(_DIR_IMAGEFLOW_IMAGES."slideshow-24.png", true, "", _T('imageflow:slideshow'))
 		. imageflow_input_checkbox (
@@ -255,7 +274,7 @@ function exec_imageflow_configure () {
 
 	// fin formulaire
 	$page_result .= ""
-
+		. $bouton_reset
 		. imageflow_form_bouton_valider('btn_valider_imageflow')
 		. fin_cadre_trait_couleur(true)
 		. imageflow_form_fin_form()

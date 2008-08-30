@@ -40,3 +40,7 @@
 #sliders .end {
 	clear:left;
 }
+.reset-btn {
+	color:gray;
+	font-weight:700;
+}

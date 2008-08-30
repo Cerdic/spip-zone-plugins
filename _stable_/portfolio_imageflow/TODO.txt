@@ -3,4 +3,3 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
-- Ajouter en page de configuration un bouton pour reinitialiser
