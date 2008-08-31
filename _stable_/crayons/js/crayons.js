@@ -240,7 +240,7 @@ $.fn.activatecrayon = function(percent) {
 				$(me)
 				.cancelcrayon();
 				// Insere les donnees dans *tous* les elements ayant le meme code
-				$(
+				var tous = $(
 					'.crayon.crayon-autorise.' +
 						me[0].className.match(/crayon ([^ ]+)/)[1]
 				)
@@ -248,6 +248,9 @@ $.fn.activatecrayon = function(percent) {
 					d[$('input.crayon-id', crayon).val()]
 				)
 				.iconecrayon();
+				// Declencher le onAjaxLoad normal de SPIP
+				if (typeof triggerAjaxLoad == 'function')
+					triggerAjaxLoad(tous);
 			}})
 			.one('submit', function(){
 				crayon
