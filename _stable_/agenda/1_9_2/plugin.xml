@@ -58,5 +58,5 @@ _ {{Ce plugin n&#233;cessite le plugin Widget Calendar version 0.11 ou plus}}
 		<nom>taches_generales_cron</nom>
 	</pipeline>
 	<necessite id="WCalendar" version="[0.11;]" />
-	<chemin dir='' />
+	<necessite id="SPIP" version="[;1.925)" />
 </plugin>
