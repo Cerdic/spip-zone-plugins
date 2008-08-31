@@ -4,6 +4,7 @@
 	<prefix>no_br</prefix>
 	<etat>stable</etat>
 	<auteur>ARNO*</auteur>
+	<icon>logo.png</icon>
 	<description>Les retours-chariot c'est mal, les retours-chariot sont une plaie, les retours-chariot nuisent &agrave; votre sant&eacute;. Ce plugin interdit l'insertion de retours-chariot dans le texte en les rempla&ccedil;ant par des changements de paragraphe (ce qu'ils devraient toujours &ecirc;tre).</description>
 	<pipeline>
 		<nom>pre_propre</nom>
