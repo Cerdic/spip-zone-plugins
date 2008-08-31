@@ -25,7 +25,7 @@ _ Help to use the API in several plugins (Gis, Geoforms...).
  
  <pipeline>
 	<nom>I2_cfg_form</nom>
-	<action>I2_cfg_form</nom>
+	<action>I2_cfg_form</action>
 	<inclure>geomap_pipeline.php</inclure>
  </pipeline>
  
