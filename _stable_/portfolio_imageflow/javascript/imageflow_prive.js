@@ -33,7 +33,7 @@ $(document).ready(function(){
 			else if (key != 'slider') {
 				$("#imageflow_configure [@name="+key+"]").val(imageflow_default[key]);
 			}
-			if (key == 'slider') {
+			else if (key == 'slider') {
 				$("#imageflow_configure [@value=" + imageflow_default[key] + "]").attr('checked', 'checked');
 				$("#imageflow_configure [@value=" + imageflow_default[key] + "]").parent().addClass('checked');
 			}
