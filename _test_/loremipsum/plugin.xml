@@ -17,14 +17,14 @@ _ [Feedback->gaitan@gmail.com] will be appreciated
 	<description>
 <multi>
 		This plugin will generate Lorem Ipsum text for use as dummy texts on webpages.
-_ It works in templates with tag  <code>#INSERT_HEAD</code> in its html head
-_ Then you can use it as a model <code><loremX></code> where X is the integer amount of units 
+_ It works in templates with tag  &lt;code&gt;#INSERT_HEAD&lt;/code&gt; in its html head
+_ Then you can use it as a model &lt;cod&lt;&gt;loremX&lt;&gt;/code&gt; where X is the integer amount of units 
 (defined in 'type') to insert.
 _ It accepts these parameters: 
 
 - {{type}}: Allows you to specify what kind of result you want to see. You may use: paragraphs, words or characters. 
 If you don't set this, paragraphs will be use by default. 
-- {{ptags}}:   Allows you to add <code><P></code> around each paragraph. True or false. True by default. 
+- {{ptags}}:   Allows you to add &lt;code&lt;&gt;P&lt;&gt;/code&gt; around each paragraph. True or false. True by default. 
 		
 	</multi>
 
