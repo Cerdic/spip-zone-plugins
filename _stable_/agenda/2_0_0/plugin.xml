@@ -1,15 +1,15 @@
 <plugin>
-	<nom>Agenda pour SPIP 2.0</nom>
+	<nom>Agenda 2.0</nom>
 	<icon>img_pack/agenda-48.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
 	Cedric MORIN 	[notre-ville.net->http://www.notre-ville.net]
 _ patrice.vanneufville@laposte.net pour la saisie rapide
-_ &#169; 2006 - Licence GPL
+_ &#169; 2006 - Licence GPL 3
 	</auteur>
 	<version>
 	0.18
 	</version>
-	<etat>test</etat>
+	<etat>dev</etat>
 	<description>Agenda Ev&#233;nementiel</description>
 	<lien>http://www.spip-contrib.net/article1396.html</lien> <!-- URI de documentation -->
 	<options>agenda_mes_options.php</options>
@@ -49,4 +49,5 @@ _ &#169; 2006 - Licence GPL
 	<pipeline>
 		<nom>taches_generales_cron</nom>
 	</pipeline>
+	<necessite id='SPIP' version='[2.0.0beta;]' />
 </plugin>
