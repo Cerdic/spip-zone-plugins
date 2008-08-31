@@ -1,4 +1,10 @@
 <?php
+/**
+ * Plugin Agenda pour Spip 2.0
+ * Licence GPL
+ * 
+ *
+ */
 
 include_spip('inc/presentation');
 include_spip('inc/voir_agenda');

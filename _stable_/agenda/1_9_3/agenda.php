@@ -12,7 +12,7 @@ function Agenda_ajouter_onglets($flux) {
 	return $flux;
 }
 function Agenda_header_prive($flux) {
-	$exec = _request('exec');
+/*	$exec = _request('exec');
 	// les CSS
 	if ($exec == 'calendrier'){
 		$flux .= '<link rel="stylesheet" href="' ._DIR_PLUGIN_AGENDA . '/img_pack/calendrier.css" type="text/css" />'. "\n";
@@ -20,22 +20,7 @@ function Agenda_header_prive($flux) {
 	}
 	if ($exec == 'articles'){
 		$flux .= '<link rel="stylesheet" href="' ._DIR_PLUGIN_AGENDA . '/img_pack/agenda_articles.css" type="text/css" />'. "\n";
-	}
-	return $flux;
-}
-
-function Agenda_exec_init($flux) {
-	$exec =  $flux['args']['exec'];
-	if (($exec == 'calendrier')||($exec=='articles')){
-		include_spip('inc/calendar');
-		if (!function_exists('WCalendar_ajoute_lies')){
-			echo ('Erreur Wcalendar manquant');
-			return $flux;
-		}
-		// Reserver les widgets agenda
-		WCalendar_ajoute_lies(_T('agenda:evenement_date_debut'),'_evenement_debut',_T('agenda:evenement_date_fin'),'_evenement_fin');
-		WCalendar_ajoute_statique(_T('agenda:evenement_repetitions'),'_repetitions');
-	}
+	}*/
 	return $flux;
 }
 
@@ -44,33 +29,28 @@ function Agenda_affiche_milieu($flux) {
 	$id_article = $flux['args']['id_article'];
 	
 	if ($exec=='articles'){
-//on teste si cfg est actif
-	if ((function_exists(lire_config)) && (count(lire_config("agenda/rubriques_agenda",' '))>1)) {
-	$arracfgrubriques=lire_config("agenda/rubriques_agenda",' ');
-		if ($id_article!=''){
-		//on cherche la rubrique de l'article
-		$row = sql_fetsel("id_rubrique", "spip_articles", "id_article=$id_article");
-		$id_rubrique = $row['id_rubrique'];
-		//et si la rubrique est dans l'arrayrub
-			if (in_array($id_rubrique, $arracfgrubriques)) {
-			include_spip('inc/calendar');
-			include_spip('inc/agenda_gestion');
-			$flux['data'] .= Agenda_formulaire_article($id_article, article_editable($id_article),'articles');
+		//on teste si cfg est actif
+		$afficher = true;
+		if (defined('_DIR_PLUGIN_CFG') && (count(lire_config("agenda/rubriques_agenda",' '))>1)) {
+			$arracfgrubriques=lire_config("agenda/rubriques_agenda",' ');
+			if ($id_article!=''){
+				//on cherche la rubrique de l'article
+				$id_rubrique = sql_getfetsel("id_rubrique", "spip_articles", "id_article=$id_article");
+				//et si la rubrique est dans l'arrayrub
+				if ($id_rubrique  AND !in_array($id_rubrique, $arracfgrubriques))
+					$afficher = false;
 			}
 		}
-	} 
-//cfg n'est pas actif
-	else {
-		include_spip('inc/calendar');
-		include_spip('inc/agenda_gestion');
-		$flux['data'] .= Agenda_formulaire_article($id_article, article_editable($id_article),'articles');
+		if ($afficher) {
+			$contexte = array('id_article'=>$id_article,
+			'id_evenement'=>_request('id_evenement'),
+			'id_evenement_edit'=>_request('id_evenement_edit'));
+			$page = evaluer_fond('prive/contenu/evenements_article',$contexte);
+			$flux .= $page['texte'];
 		}
 	}
 	return $flux;
 }
-
-
-
 
 function Agenda_rendu_boite($titre,$descriptif,$lieu,$type='ics'){
 	$texte = "<span class='calendrier-verdana10'><span  style='font-weight: bold;'>";
@@ -88,6 +68,7 @@ function Agenda_rendu_boite($titre,$descriptif,$lieu,$type='ics'){
 
 	return $texte;
 }
+
 function Agenda_rendu_evenement($flux) {
 	global $couleur_claire;
 	$evenement = $flux['args']['evenement'];

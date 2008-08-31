@@ -1,0 +1,63 @@
+<div class="formulaire_spip formulaire_editer formulaire_editer_evenement formulaire_editer_evenemnt-#ENV{id_evenement,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <ul>
+	    <li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+	    	<label for="titre"><:agenda:evenement_titre:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+				<input type='text' class='text' name='titre' id='titre' value="#ENV{titre}" />
+	    </li>
+	    <li class="editer_lieu[ (#ENV**{erreurs}|table_valeur{lieu}|oui)erreur]">
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lieu})</span>]
+			<label for="lieu"><:agenda:evenement_lieu:></label>
+			<input type='text' class='text' name='lieu' id='lieu' value="[(#ENV{lieu})]" />
+	    </li>
+	    <li class="editer_horaire[ (#ENV**{erreurs}|table_valeur{horaire}|oui)erreur]">
+			<label for="horaire"><:agenda:evenement_descriptif:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{horaire})</span>]
+			<input type='checkbox' name='horaire' id='horaire' value='oui' [(#ENV{horaire}|=={oui}|oui)checked='checked']
+				onclick="if ($('#horaire')[0].checked==true) { $('#afficher_horaire_debut_evenement').show();
+			$('#afficher_horaire_fin_evenement').show();} else{$('#afficher_horaire_debut_evenement').hide();$('#afficher_horaire_fin_evenement').hide();}" />
+	    </li>
+	    <li><fieldset><legend><:agenda:evenement_date:></legend>
+	    <ul>
+	    <li class="editer_date_debut[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur]">
+			<label for="date_debut"><:agenda:evenement_date_de:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span>]
+			<input type='text' class='text date' name='date_debut' id='date_debut' value="[(#ENV{date_debut})]" />
+			<span id='afficher_horaire_debut_evenement'>
+			<label for='heure_debut'><:agenda:evenement_date_a_immediat:></label>
+			<input type='text' class='text heure' name='heure_debut' id='heure_debut' value="[(#ENV{heure_debut})]" />
+			</span>
+	    </li>
+	    <li class="editer_date_fin[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur]">
+			<label for="date_fin"><:agenda:evenement_date_au:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>]
+			<input type='text' class='text date' name='date_fin' id='date_fin' value="[(#ENV{date_fin})]" />
+			<span id='afficher_horaire_fin_evenement'>
+			<label for='heure_fin'><:agenda:evenement_date_a_immediat:></label>
+			<input type='text' class='text heure' name='heure_fin' id='heure_fin' value="[(#ENV{heure_fin})]" />
+			</span>
+	    </li>
+	    </ul>
+	    </fieldset></li>
+	    <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+			<label for="descriptif"><:agenda:evenement_descriptif:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{desctiptif})</span>]
+			<textarea name='descriptif' id='descriptif' rows='2' cols='40'>[(#ENV{descriptif})]</textarea>
+	    </li>
+	    [<li class='editer_mots'>
+	    (#INCLURE{fond=formulaires/inc-mots_evenements}{mots=#ENV{mots}})
+	    </li>]    
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><input type='submit' class='submit' value='[(#ENV{id_evenement}|{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>
+	</div></form>
+	]
+</div>

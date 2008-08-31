@@ -1,4 +1,10 @@
 <?php
+/**
+ * Plugin Agenda pour Spip 2.0
+ * Licence GPL
+ * 
+ *
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Plugin Agenda pour Spip 2.0
+ * Licence GPL
+ * 
+ *
+ */
 
 if ($GLOBALS['spip_version_code']<1.92){
  function set_request($var, $val = NULL) {

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Plugin Agenda pour Spip 2.0
+ * Licence GPL
+ * 
+ *
+ */
 include_spip("inc/agenda_gestion");
 
 function inc_voir_evenement_dist($id_evenement, $flag_editable){

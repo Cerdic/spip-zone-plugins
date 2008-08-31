@@ -1,4 +1,10 @@
 <?php
+/**
+ * Plugin Agenda pour Spip 2.0
+ * Licence GPL
+ * 
+ *
+ */
 
 include_spip('inc/texte');
 include_spip('inc/date');
@@ -7,7 +13,6 @@ include_spip('inc/presentation');
 include_spip('inc/minipres');
 include_spip('inc/calendar');
 include_spip('agenda_mes_fonctions');
-include_spip('inc/vieilles_defs');
 
 function article_editable($id_article){
 	return autoriser('modifier','article',$id_article);
@@ -242,7 +247,7 @@ function Agenda_formulaire_article($id_article, $flag_editable, $script){
 }
 
 function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="", $titre_defaut=""){
-	global $spip_lang_right;
+	/*global $spip_lang_right;
 	$out = "";
 
 	// inits
@@ -420,5 +425,6 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
   $out .=  "</div>";
 	$out .=  "</div>\n";
 	return $out;
+	*/
 }
 ?>
