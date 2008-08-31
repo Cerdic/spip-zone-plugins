@@ -233,21 +233,21 @@ function AccesRestreint_rubriques_accessibles_where($primary){
 			// rattaches aux articles
 			$liste_art = AccesRestreint_liste_articles_exclus($publique, $id_auteur);
 			$where = calcul_mysql_in('id_objet', join(",",$liste_art));
-			$s = spip_query("SELECT id_document FROM spip_documents_liens WHERE $where AND objet='article'");
+			$s = spip_query("SELECT id_document FROM spip_documents_articles WHERE $where");
 			while ($row = spip_fetch_array($s)){
 				$liste_documents_exclus[$publique][$row['id_document']]=1;
 			}
 			// rattaches aux rubriques
 			$liste_rub = AccesRestreint_liste_rubriques_exclues($publique, $id_auteur);
 			$where = calcul_mysql_in('id_objet', join(",",$liste_rub));
-			$s = spip_query("SELECT id_document FROM spip_documents_liens WHERE $where AND objet='rubrique'");
+			$s = spip_query("SELECT id_document FROM spip_documents_rubriques WHERE $where");
 			while ($row = spip_fetch_array($s)){
 				$liste_documents_exclus[$publique][$row['id_document']]=1;
 			}
 			// rattaches aux breves
 			$liste_breves = AccesRestreint_liste_breves_exclues($publique, $id_auteur);
 			$where = calcul_mysql_in('id_objet', join(",",$liste_breves));
-			$s = spip_query("SELECT id_document FROM spip_documents_liens WHERE $where AND objet='breve'");
+			$s = spip_query("SELECT id_document FROM spip_documents_breves WHERE $where");
 			while ($row = spip_fetch_array($s)){
 				$liste_documents_exclus[$publique][$row['id_document']]=1;
 			}
