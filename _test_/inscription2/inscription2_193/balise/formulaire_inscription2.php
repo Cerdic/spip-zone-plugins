@@ -152,7 +152,8 @@ function message_inscription2($var_user, $mode) {
 		return _T('form_forum_access_refuse');
 	
 	if ($row['statut'] == 'aconfirmer'){	// deja inscrit
-		envoyer_inscription2($row['id_auteur']);/**RENVOYER MAIL D'INSCRIPTION **/
+		$envoyer_inscription = charger_fonction('envoyer_inscription2','inc');
+		$envoyer_inscription($row['id_auteur']);/**RENVOYER MAIL D'INSCRIPTION **/
 		return _T('inscription2:mail_renvoye');
 	}
 

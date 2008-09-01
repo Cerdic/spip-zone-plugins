@@ -8,7 +8,8 @@
 <div>
 [(#ENV*{commentaires}|=={1}|?{' ',''})
 <?php
-$commentaire = envoyer_inscription2('#ENV{id_auteur}');
+$envoyer_inscription2 = charger_fonction('envoyer_inscription2','inc');
+$commentaire = $envoyer_inscription2('#ENV{id_auteur}');
 $message = ($commentaire != "ok") ? $commentaire : _T('inscription2:lisez_mail');
 echo $message ;
 ?>

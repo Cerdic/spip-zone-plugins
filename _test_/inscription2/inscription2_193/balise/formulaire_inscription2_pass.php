@@ -73,7 +73,7 @@ function balise_FORMULAIRE_INSCRIPTION2_PASS_dyn($mode) {
 	}
 	if($var_user['email'] and $aux){
 		$commentaire = message_inscription2_pass($var_user, $mode);
-		if (is_array($commentaire)) 
+		if (is_array($commentaire)){}
 			$commentaire = envoyer_inscription2_pass($commentaire);
 		$message = $commentaire ? '' : _T('inscription2:lisez_mail');
 	}
@@ -96,7 +96,8 @@ function message_inscription2_pass($var_user, $mode) {
 		return _T('form_forum_access_refuse');
 	
 	if ($row['statut'] == 'aconfirmer'){	// deja inscrit
-		envoyer_inscription2($row);/**RENVOYER MAIL D'INSCRIPTION **/
+		$envoyer_inscription = charger_fonction('envoyer_inscription2','inc');
+		$envoyer_inscription($row);/**RENVOYER MAIL D'INSCRIPTION **/
 		return _T('inscription2:mail_renvoye');
 	}
 	return _T('form_forum_email_deja_enregistre');}
