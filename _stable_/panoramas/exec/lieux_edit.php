@@ -86,6 +86,7 @@ function exec_lieux_edit(){
 			$position_y_carte = $row['position_y_carte'];
 			$acces_carte = $row['acces_carte'];
 			$url_carte = $row['url_carte'];
+			$icone_carte = $row['icone_carte'];
 			$decalage_x = $row['decalage_x'];
 			$documents_associes = $row['documents_associes'];
 		}
@@ -181,6 +182,7 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 	$position_y_carte =  intval($row['position_y_carte']);
 	$acces_carte =  $row['acces_carte'];
 	$url_carte =  $row['url_carte'];
+	$icone_carte =  intval($row['icone_carte']);
 	$decalage_x =  intval($row['decalage_x']);
 	$documents_associes =  $row['documents_associes'];
 	
@@ -278,6 +280,10 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 	$out .= "<strong><label for='url_carte_lieu'>"._T("panoramas:url_carte")."</label></strong> ";
 	$out .= "<input type='text' name='url_carte' id='url_carte_lieu' class='formo $focus' ".
 		"value=\"".$url_carte."\" size='5' /><br />\n";
+
+	$out .= "<strong><label for='icone_carte_lieu'>"._T("panoramas:icone_carte")."</label></strong> ";
+	$out .= "<input type='text' name='icone_carte' id='icone_carte_lieu' class='formo $focus' ".
+		"value=\"".$icone_carte."\" size='5' /><br />\n";
 
 	$out .= "<strong><label for='documents_associes_lieu'>"._T("panoramas:documents_associes")."</label></strong> ";
 	$out .= "<input type='text' name='documents_associes' id='documents_associes_lieu' class='formo $focus' ".

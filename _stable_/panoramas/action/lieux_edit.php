@@ -18,6 +18,7 @@ function Lieux_update($id_lieu){
 	$position_y_carte = intval(_request('position_y_carte'));
 	$acces_carte = _request('acces_carte');
 	$url_carte = _request('url_carte');
+	$icone_carte = intval(_request('icone_carte'));
 	$decalage_x = intval(_request('decalage_x'));
 	$documents_associes = _request('documents_associes');
 	
@@ -42,6 +43,7 @@ function Lieux_update($id_lieu){
 			"position_x_carte="._q($position_x_carte).", ".
 			"position_y_carte="._q($position_y_carte).", ".
 			"url_carte="._q($url_carte).", ".
+			"icone_carte="._q($icone_carte).", ".
 			"acces_carte="._q($acces_carte).", ".
 			"decalage_x="._q($decalage_x).", ".
 			"documents_associes="._q($documents_associes).", ".
