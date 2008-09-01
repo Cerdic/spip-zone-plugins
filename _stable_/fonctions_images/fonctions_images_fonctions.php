@@ -1189,4 +1189,113 @@ function couleur_eclaircirluminosite($coul,$pourcentage=20) {
 }
 
 
+// Filtre |image_superpose
+// http://www.spip-contrib.net/Filtre-image-superpose
+
+function image_superpose($im, $masque, $pos="") {
+	include_spip('inc/filtres_images');
+
+	$numargs = func_num_args();
+	$arg_list = func_get_args();
+	$texte = $arg_list[0];
+	for ($i = 1; $i < $numargs; $i++) {
+		if ( ($p = strpos($arg_list[$i],"=")) !==false) {
+			$nom_variable = substr($arg_list[$i], 0, $p);
+			$val_variable = substr($arg_list[$i], $p+1);
+			$variable["$nom_variable"] = $val_variable;
+			$defini["$nom_variable"] = 1;
+		}
+	}
+	
+	$pos = md5(serialize($variable));
+
+	$fonction = array('image_superpose', func_get_args());
+	$image = image_valeurs_trans($im, "superpose-$masque-$pos", "png",$fonction);
+	if (!$image) return("");
+	
+	$x_i = $image["largeur"];
+	$y_i = $image["hauteur"];
+
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	
+	$creer = $image["creer"];
+
+	if ($defini["right"] OR $defini["left"] OR $defini["bottom"] OR $defini["top"] OR $defini["text-align"] OR $defini["vertical-align"]) {
+		$placer = true;
+	}
+	else $placer = false;		
+
+	if ($creer) {
+			$im = $image["fonction_imagecreatefrom"]($im);
+	
+			$masque = find_in_path($masque);
+			$mask = image_valeurs_trans($masque,"");
+		
+			if (!is_array($mask)) return("");
+			$im_m = $mask["fichier"];
+			$x_m = $mask["largeur"];
+			$y_m = $mask["hauteur"];
+
+			// LES VALEURS PAR DEFAUT DES OPTIONS
+			
+			// opacite
+			// Opacite de l'image (Valeurs: entre 0 et 100).
+			if (!$defini["opacite"]) {
+				$variable["opacite"] = 100;
+			}
+	
+			// align_h
+			// Alignment horizontal (Valeurs: 'left' | 'right' | 'center').
+			if (!$defini["align_h"]) {
+				$variable["align_h"] = "left";
+			}
+			// align_v
+			// Alignment vertical (Valeurs: 'top' | 'bottom' | 'center').
+			if (!$defini["align_v"]) { 
+				$variable["align_v"] = "bottom";
+			}
+	
+			// margin
+			// Excentrage a partir du bord (Valeurs: en pixels).
+			if (!$defini["margin"]) {
+				$variable["margin"] = 10;
+			}
+	
+			$im1 = $mask["fonction_imagecreatefrom"]($masque);
+			
+			if ($im1) {
+				$superpose_y = $variable["margin"];
+				if ($variable["align_v"] == 'top') {
+						$superpose_y = $variable["margin"];
+				}
+				elseif ($variable["align_v"] == 'bottom') {
+					$superpose_y = $y_i - $y_m - $variable["margin"];
+				}
+				elseif ($variable["align_v"] == 'center') {
+					$superpose_y = (int)($y_i / 2 - $y_m / 2);
+				}
+	
+				$superpose_x = $variable["margin"];
+				if ($variable["align_h"] == 'left') {
+					$superpose_x = $variable["margin"];
+				}
+				elseif ($variable["align_h"] == 'right') {
+					$superpose_x = $x_i - $x_m - $variable["margin"];
+				}
+				elseif ($variable["align_h"] == 'center') {
+					$superpose_x = (int)($x_i / 2 - $x_m / 2);
+				}
+			imagecopymerge($im,$im1, $superpose_x, $superpose_y, 0, 0, $x_m, $y_m, $variable["opacite"]);
+			imagedestroy($im1);
+		}
+		$image["fonction_image"]($im, "$dest");
+			imagedestroy($im);
+		}
+	$x_dest = largeur($dest);
+	$y_dest = hauteur($dest);
+	
+	return image_ecrire_tag($image,array('src'=>$dest,'width'=>$x_dest,'height'=>$y_dest));
+}
+
 ?>
