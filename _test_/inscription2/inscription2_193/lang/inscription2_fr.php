@@ -191,8 +191,10 @@ L\'&eacute;quipe de @nom_site@',
 'non_renseigne' => 'non renseign&eacute;.',
 'non_renseignee' => 'non renseign&eacute;e.',
 'modif_pass_titre' => 'Modifier votre mot de passe',
+'profil_modifie_ok' => 'Les modifications de votre profil ont bien &eacute;t&eacute; prises en compte.',
+'profil_droits_insuffisants' => 'Desol&eacute; vous n\'avez pas le droit de modifier cet auteur<br/>',
 
-//validation des champs
+// Validation des champs
 'champ_obligatoire' => 'Ce champ est obligatoire',
 'chaine_valide' => 'Veuillez ins&eacute;rer une chaine de caract&egrave;re',
 'cp_valide' => 'Veuillez ins&eacute;rer un code postal valide',
@@ -217,10 +219,12 @@ L\'&eacute;quipe de @nom_site@',
 'page_confirmation' => 'Page de confirmation de votre inscription',
 
 //Confirmation Inscription
-'rien_a_faire' => 'Rien &agrave; faire'
+'rien_a_faire' => 'Rien &agrave; faire',
 
+// Formulaire CVT inscription
+'formulaire_login_deja_utilise' => 'Le login est d&eacute;ja utilis&eacute;, veuillez en choisir un autre.',
+'formulaire_remplir_obligatoires' => 'Veuillez remplir les champs obligatoires',
+'formulaire_inscription_ok' => 'Votre inscription a bien &eacute;t&eacute; pris en compte. Vous allez recevoir par courrier &eacute;lectronique vos identifiants de connexion.',
 
 );
-
-
 ?>
