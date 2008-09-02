@@ -5,15 +5,18 @@
 
 
 TO-DO:
-- revoir liste auteurs, l'ajax n'a pas le bon retour (ex.: flèche droite perd la page d'appel, du coup le clic suivant sur th de tri se perd)
-- revoir spiplistes_abonne_edit (désabonné, abonné, format ..., pas très clair). Voire supprimer cette page et renvoyer son formulaire corrigé sur auteur_infos.
+- a voir, date dans patron, suite remarque kent1. fichiers joints (20080902)
+- a voir: typo(), suite remarque Michel Possoz (20080829)
+- verifier compat 192 de autoriser('webmestre')
+- revoir liste auteurs, l'ajax n'a pas le bon retour (ex.: fleche droite perd la page d'appel, du coup le clic suivant sur th de tri se perd)
+- revoir spiplistes_abonne_edit (desabonne, abonne, format ..., pas tres clair). Voire supprimer cette page et renvoyer son formulaire corrige sur auteur_infos.
 - revoir squelette format texte d'envoi (manque retour chariot, titre supprimer_numero, etc...)
-- vérifier envoi du test. Il doit être au format HTML suivi d'un autre au format Texte. Test au 24/06/2008, seule la version texte est envoyée.
+- verifier envoi du test. Il doit etre au format HTML suivi d'un autre au format Texte. Test au 24/06/2008, seule la version texte est envoyee.
 - terminer la compat svn (fouiller!) CP20080609
 - corriger les CSS pour espace public des formulaires (le cache, toujours le cache)
 - revoir la doc docs/__installation_*.txt
-- permettre l'import direct d'une image dans le courrier (sans lien). Un poil compliqué, mais faisable.
+- permettre l'import direct d'une image dans le courrier (sans lien). Un poil complique, mais faisable.
 - corriger documentation contextuelle (to-do perpetuel ;-))
 - maintenance: mettre en place l'auth. par FTP.
-- icone 'casier à courrier' à revoir. Idem 'listes de diffusion'
+- icone 'casier a courrier' a revoir. Idem 'listes de diffusion'
 
