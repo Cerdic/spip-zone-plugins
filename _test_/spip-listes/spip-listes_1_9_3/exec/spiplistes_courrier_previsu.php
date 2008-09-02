@@ -1,27 +1,27 @@
 <?php
 
 // exec/spiplistes_courrier_previsu.php
-// _SPIPLISTES_EXEC_COURRIER_PREVUE
+// _SPIPLISTES_EXEC_COURRIER_PREVISUE
 
-// utilisé par _SPIPLISTES_EXEC_COURRIER_EDIT
+// utilise par _SPIPLISTES_EXEC_COURRIER_EDIT
 
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
+/* SPIP-listes est un systeme de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
+/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 // $LastChangedRevision$
 // $LastChangedBy$
@@ -31,21 +31,21 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spiplistes_api_globales');
 
-// adapté de abomailman ()
+// adapte de abomailman ()
 // MaZiaR - NetAktiv
 // tech@netaktiv.com
 
 /*
-	Affiche prévisu d'un courrier
-	- en plein écran si demandé
+	Affiche previsu d'un courrier
+	- en plein ecran si demande
 	- sinon pour import iframe
-	- format html ou texte seul, si demandé
+	- format html ou texte seul, si demande
 	
-	Utilisé par courrier_gerer et courrier_edit
+	Utilise par courrier_gerer et courrier_edit
 	
 	CP-20080322 : 
 	- ce script devrait plutot etre en action/ au lieur d'exec/ ?
-	- charset en previsu plein écran texte seul : Mozilla affiche parfois en iso ? parfois respecte UTF-8 !
+	- charset en previsu plein ecran texte seul : Mozilla affiche parfois en iso ? parfois respecte UTF-8 !
 	CP-20071011
 */
 
@@ -54,7 +54,6 @@ function exec_spiplistes_courrier_previsu () {
 	global $meta;
 
 	include_spip('base/abstract_sql');
-	include_spip('inc/presentation');
 	include_spip('inc/presentation');
 	include_spip('inc/distant');
 	include_spip('inc/date');
@@ -88,7 +87,9 @@ function exec_spiplistes_courrier_previsu () {
 	foreach($int_values as $key) {
 		$$key = intval($$key);
 	}
-
+	
+	$date = format_mysql_date($annee,$mois,$jour,$heure,$minute);
+	
 	$charset = $meta['charset'];
 	
 	$texte_lien_courrier =
@@ -111,7 +112,7 @@ function exec_spiplistes_courrier_previsu () {
 	$texte_intro = $texte_patron = $texte_sommaire = "";
 	
 	if($lire_base) {
-		// prendre le courrier enregistré dans la base
+		// prendre le courrier enregistre dans la base
 		$sql_select = 'texte,titre' . (($format=='texte') ? ',message_texte' : '');
 		
 		if(
@@ -135,7 +136,7 @@ function exec_spiplistes_courrier_previsu () {
 				
 					header("Content-Type: text/plain ; charset=$charset");
 					
-					// forcer IE à afficher en ligne. 
+					// forcer IE a afficher en ligne. 
 					header("Content-Disposition: inline; filename=spiplistes-previsu.txt");
 
 					$message_texte = 
@@ -179,9 +180,8 @@ function exec_spiplistes_courrier_previsu () {
 		} // end if($avec_intro == 'oui')
 
 		if($avec_patron == 'oui') {
-		
-			// générer le contenu (éditeur)
-			include_spip('public/assembler');
+			// generer le contenu (editeur)
+			include_spip('public/assembler');	
 			$contexte_template = array(
 				'date' => trim ($date)
 				, 'id_rubrique' => $id_rubrique
@@ -209,8 +209,6 @@ function exec_spiplistes_courrier_previsu () {
 		} // end if($avec_patron == 'oui')
 		
 		if($avec_sommaire == 'oui') {
-		
-			$sql_date = format_mysql_date($annee, $mois, $jour, $heure, $minute);
 
 			if($id_rubrique > 0) {
 				if($sql_result = sql_select("titre,id_article"
@@ -293,21 +291,21 @@ function exec_spiplistes_courrier_previsu () {
 }	
 
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
+/* SPIP-listes est un systeme de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
+/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 ?>

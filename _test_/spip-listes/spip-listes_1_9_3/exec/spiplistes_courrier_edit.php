@@ -193,6 +193,14 @@ function exec_spiplistes_courrier_edit(){
 		. liste_options_langues('changer_lang')
 		. "</select></label>\n"
 		. "</div>\n"
+		// Prendre en compte à partir de quelle date ?
+		. spiplistes_dater_envoi(
+			'courrier', $id_courrier, $statut
+			, $flag_editable
+			, _T('spiplistes:Contenu_a_partir_de_date_')
+			, normaliser_date(time()), 'btn_changer_date'
+			, false
+			)
 		;
 		
 	$page_result .= ""
@@ -239,16 +247,7 @@ function exec_spiplistes_courrier_edit(){
 		. "<input type='checkbox' id='avec_sommaire' name='avec_sommaire' value='non' />"
 		. _T('spiplistes:generer_un_sommaire')
 		. "</label>\n"
-		. "<div id='choisir_sommaire' class='option'>"
-		// Prendre en compte à partir de quelle date ?
-		. spiplistes_dater_envoi(
-			'courrier', $id_courrier, $statut
-			, $flag_editable
-			, _T('spiplistes:Contenu_a_partir_de_date_')
-			, normaliser_date(time()), 'btn_changer_date'
-			, false
-			)
-		;		
+		. "<div id='choisir_sommaire' class='option'>";		
 	$page_result .= ""
 		//
 		// sélecteur de rubriques
