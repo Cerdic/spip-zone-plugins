@@ -10,6 +10,17 @@ v1.10.2 (02 09 2008)
     d'une fonction ajouter_erreur($champ,$message) dans la classe cfg_formulaire
     pour faciliter cela.
     
+  * permettre des fonctions d'extension pour toutes les actions pour
+    un formulaire particulier, et pas uniquement verifier et post_traiter.
+    function cfg_{nom_fichier/vue}_{action}(&$cfg){... actions ...}
+    
+    Au passage, changement d'api pour le test de verifier, qui comme
+    les autres maintenant recoit l'instance de la classe cfg_formulaire :
+    function cfg_{nom_fichier/vue}_{action}(&$cfg), mais son retour
+    doit sauvegarder les valeurs d'erreurs dans cfg (et non les retourner)
+    en utilisant la fonction $cfg->ajouter_erreurs($erreurs); 
+    (compatibilité ascendente assurée cependant quelques temps)
+    
   * CFG/CVT : transmission de l'instance de classe cfg_formulaire entre la
     fonction verifier() et traiter() du CVT pour eviter les recalculs des 
     parametres et une reverification dans traiter().

@@ -103,6 +103,19 @@ class cfg_formulaire{
 			: $message;
 	}
 	
+	// ajoute des erreurs sur les champs indiques dans le tableau
+	// (comme verifier de cvt)
+	function ajouter_erreurs($err) {
+		if (!is_array($err)) return false;
+		if (isset($err['message_erreur']) && $err['message_erreur']) 
+			$this->messages['message_erreur'][] = $err['message_erreur'];
+		if (isset($err['message_ok']) && $err['message_ok']) 	
+			$this->messages['message_ok'][] = $err['message_ok'];
+		unset($err['message_erreur'], $err['message_ok']);
+		if ($err) $this->messages['erreurs'] = $err;		// ou un merge ?? //
+		return true;
+	}
+	
 	
 	// pre-analyser le formulaire
 	// c'est a dire recuperer les parametres CFG 
@@ -207,17 +220,6 @@ class cfg_formulaire{
 			return false;
 		}
 		
-		// charger une eventuelle fonction cfg_{vue}_verifier()
-		// vue etant le nom du fichier : fonds/cfg_{vue}.html ou en cvt formulaires/{vue}.html
-		// la fonction (qui peut etre mise dans fonds/cfg_{vue}_fonctions.php)
-		// retourne un array() sur le meme modele que /formulaires/x/verifier.php() de spip
-		if (function_exists($f = 'cfg_'.$this->vue.'_verifier') && ($err = $f())){
-			if ($err['message_erreur']) $this->messages['message_erreur'][] = $err['message_erreur'];
-			if ($err['message_ok']) 	$this->messages['message_ok'][] = $err['message_ok'];
-			unset($err['message_erreur'], $err['message_ok']);
-			if ($err) $this->messages['erreurs'] = $err;
-		}
-		
 		// verifier la validite des champs speciaux (cfg_xx, type_xx)
 		$this->actionner_extensions('verifier');
 		
@@ -249,7 +251,6 @@ class cfg_formulaire{
 			$securiser_action();
 		}
 		
-		// traiter les champs speciaux
 		$this->actionner_extensions('pre_traiter');	
 		
 		if ($this->erreurs()) return false;		
@@ -263,18 +264,10 @@ class cfg_formulaire{
 			$this->ecrire();
 		}
 
-		// pipeline 'cfg_post_edition'
+		// pipeline 'cfg_post_edition' ? (quelqu'un utilise ??)
 		$this->messages = pipeline('cfg_post_edition',array('args'=>array('nom_config'=>$this->nom_config()),'data'=>$this->messages));
-		
-		// traiter les champs speciaux
-		$this->actionner_extensions('post_traiter');
 
-		// charger une eventuelle fonction cfg_{vue}_post_traiter()
-		// vue etant le nom du fichier : fonds/cfg_{vue}.html ou en cvt formulaires/{vue}.html
-		// on lui passe la classe cfg.
-		if (function_exists($f = 'cfg_'.$this->vue.'_post_traiter')){
-			$f($this);
-		}	
+		$this->actionner_extensions('post_traiter');
 	}
 
 
@@ -608,25 +601,31 @@ class cfg_formulaire{
 	
 	
 	//
-	// charge des actions sur les champs particuliers
-	// notifies par 'type_XX' ou 'cfg_YY' sur les classes css
-	// s'ils existent dans /cfg/classes/
-	//
-	// charge ensuite des actions sur les parametres particuliers presents
-	// s'ils existent dans /cfg/params/
+	// teste et charge les points d'entrees de CFG a travers certaines actions
+	// 1 : fonctions generales cfg_{nom}_{action}
+	// 2 : actions sur les types de champs particuliers
+	//     notifies par 'type_XX' ou 'cfg_YY' sur les classes css
+	//     s'ils existent dans /cfg/classes/ par des fonctions
+	//     cfg_{action}_{classe}
+	// 3 : actions en fonctions des parametres du formulaire
+	//     s'ils existent dans /cfg/params/ par des fonctions
+	//     cfg_{action}_{parametre}
 	//
 	// les actions possibles sont :
 	// - pre_charger, charger, 
 	// - pre_verifier, verifier, 
 	// - pre_traiter, post_traiter
 	//
-	// Apres avoir inclu le fichier,
-	// CFG recherche une eventuelle fonction :
-	// cfg_{action}_{objet}() et l'execute.
-	// Objet pouvant etre : 'type_XX', 'cfg_XX' ou 'param_XX'
-	//
 	function actionner_extensions($action){
-
+		// 1 - general : on transmet l'instance de cfg_formulaire
+		if (function_exists($f = 'cfg_' . $this->vue . '_' . $action)) {
+			$res = $f($this);
+			// compat ascendante (1.7 a 1.10.2) : verifier retournait un array comme cvt
+			// il faut envoyer le resultat dans la fonction d'ajout des erreurs
+			if ($action == 'verifier' AND is_array($res))
+				$this->ajouter_erreurs($res);
+		} 
+		// 2 - type de champ : on transmet le nom du champ et l'instance de cfg_formulaire
 		if ($this->extensions) {
 			foreach ($this->extensions as $type => $champs){
 				// si un fichier de ce type existe, on lance la fonction 
@@ -640,6 +639,7 @@ class cfg_formulaire{
 				}	
 			}
 		}
+		// 3 - parametre : on transmet la valeur du parametre et l'instance de cfg_formulaire
 		if ($this->extensions_parametres){
 			foreach ($this->extensions_parametres as $param){
 				if (include_spip('cfg/params/'.$param)) {
