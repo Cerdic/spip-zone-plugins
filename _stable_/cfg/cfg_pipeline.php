@@ -128,34 +128,40 @@ function cfg_formulaire_verifier($flux){
 			}		
 		}
 
-		// si c'est vide, modifier sera appele, sinon le formulaire sera resoumis
 		$flux['data'] = $err;
+		
+		// si c'est vide, modifier sera appele, sinon le formulaire sera resoumis
+		// a ce moment la, on transmet $config pour eviter de le recreer 
+		// juste ensuite (et de refaire les analyse et la validation)
+		if (!$err) cfg_instancier($config);
 	}
 	return $flux;
 }
 
+// sauve ou redonne une instance de la classe cfg.
+// sert a transmettre $config entre verifier() et traiter()
+// car $flux le perd en cours de route si on lui donne...
+function cfg_instancier($config=false){
+	static $cfg=false; 
+	if (!$config) return $cfg;
+	return $cfg = $config;
+}
 
+// traitement du formulaire
 function cfg_formulaire_traiter($flux){
 	$form = $flux['args']['form'];
-	if (cfg_from_cvt($form) && cfg_from_cvt($form,'traiter')){	
-		include_spip('inc/cfg_formulaire');
-		#$config = &new cfg_formulaire($cfg, $cfg_id);
-		$cfg_id = isset($flux['args']['args'][0]) ? $flux['args']['args'][0] : '';
-		$config = &new cfg_formulaire($form, $cfg_id);
-		
-		if ($config->verifier())
-			$config->traiter();
-			
-		$message = join('<br />',$config->messages['message_ok']);	
+	$config = cfg_instancier();
 
-		//return $message; // retourner simplement un message, le formulaire ne sera pas resoumis
-		$flux['data'] = array(true,$message); // forcer l'etat editable du formulaire et retourner le message
-	}
+	$config->traiter();	
+	$message = join('<br />',$config->messages['message_ok']);	
+
+	$flux['data'] = array(true,$message); // forcer l'etat editable du formulaire et retourner le message
 	return $flux;
 }
 
+// pipeline sur l'affichage du contenu 
+// pour supprimer les parametres CFG du formulaire
 function cfg_editer_contenu_formulaire_cfg($flux){
-	// supprimer les parametres CFG du formulaire
 	$flux['data'] = preg_replace('/(<!-- ([a-z0-9_]\w+)(\*)?=)(.*?)-->/sim', '', $flux['data']);
 	$flux['data'] .= $flux['args']['ajouter'];
 	return $flux;

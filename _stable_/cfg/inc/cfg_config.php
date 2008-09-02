@@ -63,8 +63,8 @@ class cfg_depot{
 	
 	//
 	// Constructeur de la classe
-	// 'depot' est le nom du fichier php stocke dans /inc/depot/{depot}.php
-	// qui contient une classe 'cfg_depot_{depot}' ou 'cfg_depot_{depot}_dist'
+	// 'depot' est le nom du fichier php stocke dans /depots/{depot}.php
+	// qui contient une classe 'cfg_depot_{depot}'
 	//
 	// $params est un tableau de parametres passes a la classe cfg_depot_{depot} qui peut contenir :
 	// 'champs' => array(
@@ -186,11 +186,6 @@ class cfg_depot{
 
 // $unserialize est mis par l'histoire, et affecte le depot 'meta' 
 function lire_config($cfg='', $def=null, $unserialize=true) {
-	$lire = charger_fonction("lire_config","inc");
-	return $lire($cfg, $def, $unserialize);
-}
-
-function inc_lire_config_dist($cfg='', $def=null, $unserialize=true){ 
 	$depot = cfg_charger_depot($cfg);
 	$r = $depot->lire_config($unserialize);
 	if (is_null($r)) return $def;
@@ -206,11 +201,6 @@ function inc_lire_config_dist($cfg='', $def=null, $unserialize=true){
 // 
 //
 function ecrire_config($cfg='', $valeur=null){
-	$ecrire = charger_fonction("ecrire_config","inc");
-	return $ecrire($cfg, $valeur);	
-}
-
-function inc_ecrire_config_dist($cfg='', $valeur=null){ 
 	$depot = cfg_charger_depot($cfg);
 	return $depot->ecrire_config($valeur);
 }
@@ -221,11 +211,6 @@ function inc_ecrire_config_dist($cfg='', $valeur=null){
 // permet de supprimer une config 
 //
 function effacer_config($cfg=''){
-	$effacer = charger_fonction("effacer_config","inc");
-	return $effacer($cfg);	
-}
-
-function inc_effacer_config_dist($cfg=''){
 	$depot = cfg_charger_depot($cfg);
 	return $depot->effacer_config();	
 }

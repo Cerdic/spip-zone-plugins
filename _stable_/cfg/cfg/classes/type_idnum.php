@@ -7,14 +7,16 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function cfg_verifier_type_idnum($nom, $val){
-	if (!is_numeric($val)){
-		return _T('cfg:erreur_type_idnum', array('champ'=>$nom));
+function cfg_verifier_type_idnum($champ, &$cfg){
+	if (!is_numeric($cfg->val[$champ])){
+		$cfg->ajouter_erreur(_T('cfg:erreur_type_idnum', array('champ'=>$champ)));
 	}
+	return true;
 }
 
-function cfg_pre_traiter_type_idnum($nom, $val){
-	return array(1, intval($val));
+function cfg_pre_traiter_type_idnum($champ, &$cfg){
+	$cfg->val[$champ] = intval($cfg->val[$champ]);
+	return true;
 }
 
 ?>

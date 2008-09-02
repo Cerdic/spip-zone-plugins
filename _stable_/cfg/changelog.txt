@@ -1,5 +1,18 @@
-Todo :
-- rupture de compatibilité pour simplifier l'API de CFG et réduire son domaine d'action (essayer en même temps de faire un plugin 'cfg_etendu' afin de limiter la casse)
+v1.10.2 (02 09 2008)
+- petites simplifications :
+
+  * lire,ecrire,effacer_config() ne peuvent plus etre surchargees 
+    (suppression de inc_lire_config_dist et consoeurs)
+    
+  * les types de validation des champs de formulaires passes par css
+    recoivent le même argument que les autres classes css 
+    (nom du champ + instance de la classe cfg_formulaire) et introduction
+    d'une fonction ajouter_erreur($champ,$message) dans la classe cfg_formulaire
+    pour faciliter cela.
+    
+  * CFG/CVT : transmission de l'instance de classe cfg_formulaire entre la
+    fonction verifier() et traiter() du CVT pour eviter les recalculs des 
+    parametres et une reverification dans traiter().
 
 v1.10.1
 - un echo de debug trainait

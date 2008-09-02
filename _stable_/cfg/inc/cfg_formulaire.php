@@ -96,6 +96,13 @@ class cfg_formulaire{
 		return $this->messages['erreurs'] || $this->messages['message_erreur'];
 	}
 	
+	// ajoute une erreur sur un champ donne
+	function ajouter_erreur($champ, $message) {
+		$this->messages['erreurs'][$champs] = isset($this->messages['erreurs'][$champs]) 
+			? $this->messages['erreurs'][$champs] .= '<br />' . $message
+			: $message;
+	}
+	
 	
 	// pre-analyser le formulaire
 	// c'est a dire recuperer les parametres CFG 
@@ -625,26 +632,9 @@ class cfg_formulaire{
 				// si un fichier de ce type existe, on lance la fonction 
 				// demandee pour chaque champs possedant la classe css en question
 				if (include_spip('cfg/classes/'.$type)) {
-					$cfg = (strpos($type,'cfg')!==false);
 					foreach ($champs as $champ){
 						if (function_exists($f = 'cfg_' . $action . '_' . $type)){ // absence possible normale
-							if ($cfg){
-								// de type 'cfg_' : artillerie lourde
-								// on passe le nom du champ et la classe
-								$f($champ, $this);
-							} else {
-								// de type : 'type_' : nom et valeur suffisent
-								// retour : 
-								// - chaine = erreur...
-								// - tableau(ok, valeur);
-								if ($res = $f($champ, $this->val[$champ])){
-									if (is_array($res)){
-										list($ok, $this->val[$champ]) = $res;
-									} else {
-										$this->messages['erreurs'][$champ] = $res;	
-									}
-								}
-							}
+							$f($champ, $this);
 						}
 					}
 				}	

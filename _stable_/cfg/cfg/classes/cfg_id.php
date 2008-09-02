@@ -26,16 +26,8 @@ function cfg_pre_charger_cfg_id($nom, &$cfg){
 		$cfg->param['cfg_id'] = implode('/', array_map('_request', $cfg->champs_id));
 	} 
 	    
-	return $cfg;
+	return true;
 }
-
-
-
-function cfg_verifier_cfg_id($nom, &$cfg){
-	
-	return $cfg;
-}
-
 
 
 function cfg_pre_traiter_cfg_id($nom, &$cfg){
@@ -67,7 +59,7 @@ function cfg_pre_traiter_cfg_id($nom, &$cfg){
 		}
 	}	
 	
-	return $cfg;
+	return true;
 }
 
 ?>
