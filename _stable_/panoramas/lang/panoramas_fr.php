@@ -42,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'liste_lieux_visites' => 'Liste des lieux visit&eacute;s',
 'objets_ramasses' => 'Liste des objets ramass&eacute;s',
 'jeux_reussis' => 'Liste des jeux r&eacute;ussis',
-'votre_profil' => 'Votre profil'
+'votre_profil' => 'Votre profil',
+'pas_d_objets' => 'Votre panier est vide'
 );
 ?>

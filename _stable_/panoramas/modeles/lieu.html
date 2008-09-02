@@ -51,11 +51,13 @@
 <BOUCLE_visites(VISITES_VIRTUELLES){id_visite=#ID_VISITE}>
 <BOUCLE_carte(DOCUMENTS){id_document=#ID_CARTE}>
 $(document).ready(function(){
-	$('.panorama-viewport').append("<div class='panorama-onglets'><div class='panorama-carte'><img src='#URL_DOCUMENT' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><BOUCLE_position(VISITES_VIRTUELLES_LIEUX){id_visite=#ID_VISITE}{position_x_carte>0}><img class='icone-carte' src='<B_iconecarte><BOUCLE_iconecarte(DOCUMENTS){id_document=#ICONE_CARTE}>#URL_DOCUMENT</BOUCLE_iconecarte></B_iconecarte>#CHEMIN{img_pack/icone_carte.png}<//B_iconecarte>'  style='cursor: pointer; position: absolute; [left: (#POSITION_X_CARTE)px;][ top: (#POSITION_Y_CARTE)px;]' /><span class='lien-plan' style='display: none; [left: (#POSITION_X_CARTE|plus{13})px;][ top: (#POSITION_Y_CARTE|moins{33})px;]'><a href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]})]'[(#ACCES_CARTE|=={si_visite}|?{' ',''})class='verifier-lien-plan verifier-lien-plan#ID_LIEU']>[(#TITRE|replace{' ','&nbsp;'})]</a></span></BOUCLE_position></div><div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:><ul>"+$.cookie('objets_ramasses')+"</ul></div><div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2><h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2></div></div>");
+	if (!$.cookie('objets_ramasses')) 
+		$.cookie('objets_ramasses',' ');
+	$('.panorama-viewport').append("<div class='panorama-onglets'><div class='panorama-carte'><img src='#URL_DOCUMENT' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><BOUCLE_position(VISITES_VIRTUELLES_LIEUX){id_visite=#ID_VISITE}{position_x_carte>0}><a class='icone-carte' href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'><img src='<B_iconecarte><BOUCLE_iconecarte(DOCUMENTS){id_document=#ICONE_CARTE}>#URL_DOCUMENT</BOUCLE_iconecarte></B_iconecarte>#CHEMIN{img_pack/icone_carte.png}<//B_iconecarte>'  style='cursor: pointer; position: absolute; [left: (#POSITION_X_CARTE)px;][ top: (#POSITION_Y_CARTE)px;]' /></a><span class='lien-plan' style='display: none; [left: (#POSITION_X_CARTE|plus{13})px;][ top: (#POSITION_Y_CARTE|moins{33})px;]'><a href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'[(#ACCES_CARTE|=={si_visite}|?{' ',''})class='verifier-lien-plan verifier-lien-plan#ID_LIEU']>[(#TITRE|replace{' ','&nbsp;'})]</a></span></BOUCLE_position></div><div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:><ul>"+ $.cookie('objets_ramasses') +"</ul></div><div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2><h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2></div></div>");
 	
-	$('.panorama-viewport .icone-carte').bind('mouseover', function(){
+	$('.panorama-viewport a.icone-carte').bind('mouseover', function(){
 		if ($(this).next().css('display') == 'none') {
-			$('.panorama-viewport .icone-carte').next().hide();
+			$('.panorama-viewport a.icone-carte').next().hide();
 			$(this).next().show();
 		}
 	});
@@ -260,10 +262,11 @@ $(document).ready(function(){
 
 
 	
-	$('div.panorama-carte .lien-plan a').bind('click', function(){
+	$('div.panorama-carte .lien-plan a, div.panorama-carte a.icone-carte').bind('click', function(){
 			$('.panorama-viewport').append("<div class='fond-noir-slideshow' style='background: black; width: 100%; height: 100%; position: absolute; left: 0; top: 0; opacity: .8;'></div><img src='#CHEMIN{img_pack/ajax-loader.gif}' style='position: absolute; top: 50%; left: 50%; margin-left: -33px; margin-top: -33px;' />");
 			return true;
 		});
+	
 		
 	//vérifier si les lieux doivent être affichés sur le plan
 	//certains doivent avoir été visités pour apparaître
