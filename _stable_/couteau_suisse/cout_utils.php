@@ -85,10 +85,16 @@ function add_outil($tableau) {
 function add_variable($tableau) {
 	global $cs_variables;
 	$nom = $tableau['nom'];
+	// code '%s' par defaut si aucun code n'est defini
+	$test=false; 
+	foreach(array_keys($tableau) as $key) if($test=preg_match(',^code(:(.*))?$,', $key)) break;
+	if(!$test) $tableau['code'] = '%s';
+	// enregistrement
 	$cs_variables[$nom] = $tableau;
 	// on fabrique ici une liste des chaines et une liste des nombres
 	if($tableau['format']=='nombre') $cs_variables['_nombres'][] = $nom;
 		elseif($tableau['format']=='chaine') $cs_variables['_chaines'][] = $nom;
+
 }
 
 // retourne la valeur 'defaut' (format php) de la variable apres compilation du code
@@ -285,7 +291,7 @@ function cs_initialise_includes($count_metas_outils) {
 					if (!in_array($pipe2, $pipelines_utilises)) $pipelines_utilises[] = $pipe2;
 				} elseif (is_pipeline_outil_inline($pipe, $pipe2)) {
 					// code inline
-					$infos_pipelines[$pipe2]['inline'][] = $fonc;
+					$infos_pipelines[$pipe2]['inline'][] = cs_optimise_if(cs_parse_code_js($fonc));
 					if (!in_array($pipe2, $pipelines_utilises)) $pipelines_utilises[] = $pipe2;
 				} elseif (is_traitements_outil($pipe, $fonc, $traitements_utilises)) {
 					// rien a faire : $traitements_utilises est rempli par is_traitements_outil()
@@ -305,10 +311,10 @@ function cs_initialise_includes($count_metas_outils) {
 			// recherche d'un code inline eventuellement propose
 			if (isset($outil['code:options'])) $infos_pipelines['code_options'][] = $outil['code:options'];
 			if (isset($outil['code:fonctions'])) $infos_pipelines['code_fonctions'][] = $outil['code:fonctions'];
-			if (isset($outil['code:css'])) $temp_css[] = cs_parse_code_js($outil['code:css']);
-			if (isset($outil['code:js'])) $temp_js[] = cs_parse_code_js($outil['code:js']);
-			if (isset($outil['code:jq_init'])) $temp_jq_init[] = cs_parse_code_js($outil['code:jq_init']);
-			if (isset($outil['code:jq'])) $temp_jq[] = cs_parse_code_js($outil['code:jq']);
+			if (isset($outil['code:css'])) $temp_css[] = cs_optimise_if(cs_parse_code_js($outil['code:css']));
+			if (isset($outil['code:js'])) $temp_js[] = cs_optimise_if(cs_parse_code_js($outil['code:js']));
+			if (isset($outil['code:jq_init'])) $temp_jq_init[] = cs_optimise_if(cs_parse_code_js($outil['code:jq_init']));
+			if (isset($outil['code:jq'])) $temp_jq[] = cs_optimise_if(cs_parse_code_js($outil['code:jq']));
 			// recherche d'un fichier monoutil_options.php ou monoutil_fonctions.php pour l'inserer dans le code
 			if ($temp=cs_lire_fichier_php("outils/{$inc}_options.php")) 
 				$infos_pipelines['code_options'][] = $temp;
@@ -433,7 +439,6 @@ function cs_parse_code_php($code) {
 }
 
 // remplace les valeurs marquees comme %%toto%% par la valeur reelle de $metas_vars['toto']
-// + quelques optimisations du code
 // si cette valeur n'existe pas encore, la valeur utilisee sera $cs_variables['toto']['defaut']
 // attention de bien declarer les variables a l'aide de add_variable()
 function cs_parse_code_js($code) {
@@ -447,17 +452,17 @@ function cs_parse_code_js($code) {
 			$rempl = cs_get_defaut($matches[1]);
 		}
 		$code = str_replace($matches[0], $rempl, $code);
-	}
-	return cs_optimise_js($code);
+	} 
+	return $code;
 }
 
 // attention : optimisation tres sommaire, pour codes simples !
 // -> optimise les if(0), if(1), if(false), if(true)
-function cs_optimise_js($code) {
+function cs_optimise_if($code) {
 	$code = preg_replace(',if\s*\(\s*([^)]*\s*)\)\s*{\s*,imsS', 'if(\\1){', $code);
 	$code = str_replace('if(false){', 'if(0){', $code);
 	$code = str_replace('if(true){', 'if(1){', $code);
-	if (preg_match(',if\(([0-9])\){(.*)$,msS', $code, $regs)) {
+	while (preg_match(',if\(([0-9])+\){(.*)$,msS', $code, $regs)) {
 		$temp = $regs[2]; $ouvre = $ferme = -1; $nbouvre = 1;
 		do {
 			if ($ouvre===false) $min = $ferme + 1; else $min = min($ouvre, $ferme) + 1;
@@ -468,8 +473,8 @@ function cs_optimise_js($code) {
 		if($ferme===false) return "/* Erreur sur les accolades : \{$regs[2] */";
 		$temp = substr($temp, 0, $ferme);
 		$rempl = "if($regs[1])\{$temp}";
-		if(intval($regs[1])) $code = str_replace($rempl, "/* optimisation : 'if($regs[1])' */ $temp", $code);
-			else $code = str_replace($rempl, "/* optimisation : 'if($regs[1]) {$temp}' */", $code);
+		if(intval($regs[1])) $code = str_replace($rempl, "/* optimisation : 'IF($regs[1])' */ $temp", $code);
+			else $code = str_replace($rempl, "/* optimisation : 'IF($regs[1]) \{$temp\}' */", $code);
 	}
 	return $code;
 }

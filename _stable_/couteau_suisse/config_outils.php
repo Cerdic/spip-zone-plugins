@@ -556,6 +556,8 @@ if (isset(\$_GET['var_recherche'])) {
 }",
 	'code:css' => "div.pagination {display:block; text-align:center; }
 div.pagination img { border:0pt none; margin:0pt; padding:0pt; }",
+	// construction des onglets
+	'code:jq_init' => "onglets_init.apply(this);",
 	// inserer : $table_des_traitements['TEXTE'][]= 'cs_decoupe(propre(%s))';
 	'traitement:TEXTE:post_propre' => 'cs_decoupe',
 	'traitement:TEXTE:pre_propre' => 'cs_onglets',
@@ -868,28 +870,26 @@ add_outil( array(
 	'pipeline:BT_toolbox' => 'blocs_BarreTypo',
 ));
 
-add_variable( array(
+add_variable( array(	// variable utilisee par 'pipelinecode:insert_head'
 	'nom' => 'scrollTo',
 	'check' => 'couteauprive:scrollTo',
 	'defaut' => 1,
-	'code:%s' => "define('CS_jQuery_scrollTo', %s);",
+	'format' => 'nombre',
 ));
-add_variable( array(
+add_variable( array(	// variable utilisee par 'pipelinecode:insert_head'
 	'nom' => 'LocalScroll',
 	'check' => 'couteauprive:LocalScroll',
 	'defaut' => 1,
-	'code:%s' => "define('CS_jQuery_localscroll', %s);",
+	'format' => 'nombre',
 ));
 add_outil( array(
 	'id' => 'soft_scroller',
 	'categorie'	=> 'public',
-	'code:options' => "%%scrollTo%%%%LocalScroll%%",
 	'jquery'	=> 'oui',
-	'pipelinecode:insert_head' => 'if(defined(\'CS_jQuery_scrollTo\')) $flux.=\'<script src="'.url_absolue(find_in_path("outils/jquery.scrollto.js")).'" type="text/javascript"></script>\';
-if(defined(\'CS_jQuery_localscroll\')) $flux.=\'<script src="'.url_absolue(find_in_path("outils/jquery.localscroll.js")).'" type="text/javascript"></script>\';',
-//	'code:js' => 'function soft_scroller_init() { if(typeof jQuery.localScroll=='function') jQuery.localScroll({hash: true}); }',
-//	'code:jq_init' => 'soft_scroller_init.apply(this);',
-	'code:jq' => "if(typeof jQuery.localScroll=='function') jQuery.localScroll({hash: true});",
+	'pipelinecode:insert_head' => 'if(%%scrollTo%%) {$flux.=\'<script src="'.url_absolue(find_in_path("outils/jquery.scrollto.js")).'" type="text/javascript"></script>\';}
+if(%%LocalScroll%%) {$flux.=\'<script src="'.url_absolue(find_in_path("outils/jquery.localscroll.js")).'" type="text/javascript"></script>\';}',
+	'code:js' => 'function soft_scroller_init() { if(typeof jQuery.localScroll=="function") jQuery.localScroll({hash: true}); }',
+	'code:jq_init' => 'soft_scroller_init.apply(this);',
 ));
 
 add_variable( array(

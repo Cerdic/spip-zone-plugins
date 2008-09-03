@@ -1,8 +1,9 @@
 var onglet_actif = 0;
 
-if (window.jQuery) jQuery(document).ready(function() {
-  if(jQuery('div.onglets_bloc_initial').length) {
-	bloc = jQuery('div.onglets_bloc_initial');
+// compatibilite Ajax : ajouter "this" a "jQuery" pour mieux localiser les actions 
+function onglets_init() {
+  if(jQuery('div.onglets_bloc_initial', this).length) {
+	bloc = jQuery('div.onglets_bloc_initial', this);
 	bloc.prepend('<div class="onglets_liste"></div>');
 	bloc.children('.onglets_contenu').each(function(i) {
 			this.id = 'onglets_contenu_' + i;
@@ -11,11 +12,11 @@ if (window.jQuery) jQuery(document).ready(function() {
 			);
 		})
 		.children('h2').remove();
-	jQuery('div.onglets_liste').each(function() {
+	jQuery('div.onglets_liste', this).each(function() {
 		this.firstChild.className += ' selected';
 		this.nextSibling.className += ' selected';
 	});
-	jQuery('h2.onglets_titre').hover(
+	jQuery('h2.onglets_titre', this).hover(
 		function(){
 			jQuery(this).addClass('hover')
 		},function(){
@@ -24,7 +25,7 @@ if (window.jQuery) jQuery(document).ready(function() {
 	);
 	bloc.attr('class','onglets_bloc').each(function(i) {this.id = 'ongl_'+i;});
 	// clic du titre...
-	jQuery('h2.onglets_titre').click(function(e) {
+	jQuery('h2.onglets_titre', this).click(function(e) {
 		var contenu = '#' + this.id;
 		contenu = contenu.replace(/titre/,'contenu');
 		var bloc = jQuery(this).parent().parent();
@@ -35,19 +36,19 @@ if (window.jQuery) jQuery(document).ready(function() {
 		return false;
 	});
 	// clic des <a>, au cas ou...
-	jQuery('h2.onglets_titre a').click(function(e){
+	jQuery('h2.onglets_titre a', this).click(function(e){
 		jQuery(this).parent().click();
 		if (e.stopPropagation) e.stopPropagation();
 		e.cancelBubble = true;
 		return false;
 	});
-	// activer un onglet grace a l'url
-	if(onglet_get) {
+	// activation d'un onglet grace a l'url
+	if(onglet_get && (this==document)) {
 		sel=jQuery('#onglets_titre_'+onglet_get);
 		sel.click();
 	}
   }
-});
+}
 
 function get_onglet(url) {
  tab=url.match(/[?&]onglet=([0-9]*)/);
