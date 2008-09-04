@@ -39,13 +39,13 @@
 			
 				[(#REM) Liste des produits de la rubrique ]
 
-				<div class = "ListeProduitsPetits">
- 				<THELIA_PROD type="PRODUIT" rubrique="THELIA-RUBRIQUE_ID" classement="inverse" num="12">
+				<ul class = "ListeProduitsPetits">
+				<THELIA_PROD type="PRODUIT" rubrique="THELIA-RUBRIQUE_ID" classement="inverse" num="12">
+					<li class="produitPetit">
 					<form action="#URL_PAGE{panier,lang=#LANG}" method="post" id="formAjouterTHELIA-ID">
 						<input type="hidden" name="thelia_action" value="ajouter" />
                 				<input type="hidden" name="ref" value="THELIA-REF" />
-                			<div class="produitPetit">
-					<a href="#URL_PAGE{produit,ref=THELIA-REF&amp;id_rubrique=THELIA-RUBRIQUE_ID}">
+                			<a href="#URL_PAGE{produit,ref=THELIA-REF&amp;id_rubrique=THELIA-RUBRIQUE_ID}">
 					<THELIA_IMAGE type="IMAGE" num="1" produit="THELIA-ID" largeur="159">
  						<img src="THELIA-IMAGE"  alt="THELIA-PRODTITRE  " title="THELIA-PRODTITRE" class="contourImage" />
 					</THELIA_IMAGE>
@@ -103,10 +103,11 @@
 						</T_produitreappro>
 							<input type="submit" class="LIEN_commander" value="<:spipthelia:ajouter_panier:>" />
 						<//T_produitreappro>
-					</div> 
+					 
 					</form>
+					</li>
 				</THELIA_PROD>
-				</div>
+				</ul>
 				
 				
 				[(#REM) Page suivante / Nombre de page / Page précdédente ]
