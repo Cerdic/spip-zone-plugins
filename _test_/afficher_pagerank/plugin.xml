@@ -3,7 +3,7 @@
 	<auteur>ARNO*</auteur>
 	<version>0.2</version>
 	<etat>test</etat>
-	<description>Ce plugin affiche le PageRank Google de votre site sur la page «A suivre».</description>
+	<description>Ce plugin affiche le PageRank Google de votre site sur la page &laquo;A suivre&raquo;.</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix>pb_pagerank</prefix>
 	<options>pb_pagerank_options.php</options>
