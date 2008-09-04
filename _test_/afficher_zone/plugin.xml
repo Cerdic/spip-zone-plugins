@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
 	<nom>
 	    Afficher les plugins de la Zone
@@ -12,7 +13,7 @@
 	    test
 	</etat>
 	<description>
-	    trier/classer/afficher les plugins de la Zone à partir du flux RSS. 
+	    trier/classer/afficher les plugins de la Zone &agrave; partir du flux RSS. 
       Trois formats de sortie: RSS, page spip et carte freemind.
 	</description>
 	<lien>http://spip-contrib.net/spip.php?article2733</lien>
