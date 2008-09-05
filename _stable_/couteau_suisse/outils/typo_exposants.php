@@ -6,7 +6,8 @@
 include_spip('inc/charsets');
 // en principe, pas besoin de : caractere_utf_8(232)
 define('_TYPO_EGRAVE', unicode2charset('&#232;').'|&#232;|&egrave;');
-define('_TYPO_Msup', 'M<sup class="typo_exposants">\\1</sup>');
+define('_TYPO_sup', '<sup class="typo_exposants">\\1</sup>');
+define('_TYPO_Msup', 'M'._TYPO_sup);
 define('_TYPO_Psup', '\\1<sup class="typo_exposants">\\2</sup>');
 define('_TYPO_Dsup', _TYPO_Psup.'\\3');
 
@@ -26,8 +27,9 @@ function typo_exposants_fr($texte){
 		'/\bm²\b/',
 
 		'/(\\b[1I])i?(ers?)\\b/',	// Erreurs ier, iers
-		'/(\\b[1I])i?(?:'._TYPO_EGRAVE.')(res?)\\b/',	// Erreurs ère, ière, ères, ières
+		'/(\\b[1I])i?(?:'._TYPO_EGRAVE.')(res?)\\b/',	// Erreurs ère(s), ière(s)
 		'/(\\b1)(r?es?)\\b/', // 1e(s), 1re(s)
+		'/\\b2(nde?s?)\\b/',	// 2nd(e)(s)
 
 		'/(\\b[0-9IVX]+)i?(?:e|'._TYPO_EGRAVE.')?me(s?)\\b/', // Erreurs me, eme, ème, ième + pluriels
 		'/\b([0-9IVX]+)(es?)\b/', // 2e(s), IIIe(s)... (les 1(e?r?s?) ont deja ete remplaces)
@@ -37,10 +39,11 @@ function typo_exposants_fr($texte){
 
 		_TYPO_Dsup, _TYPO_Dsup, _TYPO_Dsup,	// Dr(s), Pr(s), St(e)(s), Bx, Bse(s)
 
-		'm<sup class="typo_exposants">\\1</sup>',	// m2, m3, m²
+		'm'._TYPO_sup,	// m2, m3, m²
 		'm<sup class="typo_exposants">2</sup>',
 
 		_TYPO_Psup, _TYPO_Psup, _TYPO_Psup, // 1er et Cie
+		'2'._TYPO_sup,	// 2nd(e)(s)
 
 		'\\1<sup class="typo_exposants">e\\2</sup>', // Erreurs me, eme, ème, ième + pluriels
 		_TYPO_Psup, // 2e(s), IIIe(s)...
