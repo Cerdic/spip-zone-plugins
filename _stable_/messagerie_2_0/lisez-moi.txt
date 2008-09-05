@@ -1,0 +1,19 @@
+Installer le plugin.
+
+Creer un article, et ajouter dedans :
+{{{Envoyer un message}}}
+<formulaire|ecrire_message>
+
+Creer un second article, et ajouter dedans :
+{{{Messages recus}}}
+<formulaire|messages_recus>
+
+Creer un troisieme article, et ajouter dedans :
+{{{Messages envoyes}}}
+<formulaire|messages_envoyes>
+
+
+Options :
+- les autorisations peuvent etres personalisees avec votre fichier mes_options, cf mssagerie_options.php
+- vous pouvez definir la page de redirection apres envoi d'un message (pour aller directement sur la liste des messages envoyes par exemple) avec define('_REDIRECT_POST_ENVOI_MESSAGE','artXX');
+- definissez l'id de l'article pour envoyer un message qui sera utilisee pour les bulles repondre : define('_ID_ARTICLE_ENVOYER_MESSAGE',XX);
