@@ -20,10 +20,10 @@
 		<tr>
 			<td>
 				<input type="checkbox" name="nom_famille" [checked="(#CONFIG{inscription2/nom_famille}?{checked})"] onclick="showoblig(this)" id="nom_famille" />
-			<span style="[(#CONFIG{inscription2/nom_famille}|=={on}|?{display: block;, display:none;})]">
+			<div style="[(#CONFIG{inscription2/nom_famille}|=={on}|?{display: block;, display:none;})]">
 				<input type="checkbox" name="nom_famille_obligatoire" [checked="(#CONFIG{inscription2/nom_famille_obligatoire}?{checked})"] id="nom_famille_obligatoire" />
 				<span style="color:red">*</span>
-			</span>
+			</div>
 		</td><td>
 				<input type="checkbox" name="nom_famille_fiche_mod" onclick = "enadis(this,nom_famille_fiche)" [checked="(#CONFIG{inscription2/nom_famille_fiche_mod}?{checked})"] id="nom_famille_fiche_mod" />
 		</td><td>
