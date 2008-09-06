@@ -4,12 +4,13 @@ define('_DIR_BTE_IMG', _DIR_PLUGIN_TYPOENLUMINEE.'/img_pack/icones_barre/');
 // toolbox pour les paragraphes
 function afficher_boutonsavances($champ, $champhelp, $num_barre) {
 	$reta = '';
+	$reta .= bouton_barre_racc("barre_raccourci('\n\n{{{','}}}\n\n',$champ, $num_barre)", _DIR_IMG_ICONES_BARRE."intertitre.png", _T('barre_intertitre'), $champhelp);
 	$reta .= bouton_barre_racc("barre_raccourci('\n\n{2{','}2}\n\n',$champ, $num_barre)", _DIR_BTE_IMG.'intertitre2.png', _T('enlumtypo:barre_intertitre2'), $champhelp);
 	$reta .= bouton_barre_racc("barre_raccourci('\n\n{3{','}3}\n\n',$champ, $num_barre)", _DIR_BTE_IMG.'intertitre3.png', _T('enlumtypo:barre_intertitre3'), $champhelp);
-	$reta .= bouton_barre_racc("barre_raccourci('[|','|]',$champ, $num_barre)", _DIR_BTE_IMG.'center.png', _T('enlumtypo:barre_centrer'), $champhelp);
+	$reta .= '&nbsp;'.bouton_barre_racc("barre_raccourci('[|','|]',$champ, $num_barre)", _DIR_BTE_IMG.'center.png', _T('enlumtypo:barre_centrer'), $champhelp);
 	$reta .= bouton_barre_racc("barre_raccourci('[/','/]',$champ, $num_barre)", _DIR_BTE_IMG.'right.png', _T('enlumtypo:barre_alignerdroite'), $champhelp);
-	$reta .= bouton_barre_racc("barre_raccourci('[(',')]',$champ, $num_barre)", _DIR_BTE_IMG.'cadretexte.png', _T('enlumtypo:barre_encadrer'), $champhelp);
-	$reta .= bouton_barre_racc("barre_raccourci('<del>','</del>',$champ, $num_barre)", _DIR_BTE_IMG.'text_strikethrough.png', _T('enlumtypo:barre_barre'), $champhelp);
+	$reta .= '&nbsp;'.bouton_barre_racc("barre_raccourci('[(',')]',$champ, $num_barre)", _DIR_BTE_IMG.'cadretexte.png', _T('enlumtypo:barre_encadrer'), $champhelp);
+	$reta .= '&nbsp;'.bouton_barre_racc("barre_raccourci('<del>','</del>',$champ, $num_barre)", _DIR_BTE_IMG.'text_strikethrough.png', _T('enlumtypo:barre_barre'), $champhelp);
 		
 	$tableau_formulaire = '
 <table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
