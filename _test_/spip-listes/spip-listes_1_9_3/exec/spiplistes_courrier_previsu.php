@@ -78,6 +78,7 @@ function exec_spiplistes_courrier_previsu () {
 		, 'titre', 'message'
 		, 'Confirmer', 'date'
 		, 'lire_base', 'format', 'plein_ecran'
+		, 'date_sommaire'
 	);
 
 	foreach(array_merge($str_values, $int_values) as $key) {
@@ -211,9 +212,15 @@ function exec_spiplistes_courrier_previsu () {
 		if($avec_sommaire == 'oui') {
 
 			if($id_rubrique > 0) {
+				
+				$sql_where = array("id_rubrique=".sql_quote($id_rubrique));
+				
+				if($date_sommaire == 'oui') {
+					$sql_where[] = "date >= " . sql_quote($date);
+				}
 				if($sql_result = sql_select("titre,id_article"
 					, "spip_articles"
-					, array("id_rubrique=".sql_quote($id_rubrique), "date >= " . sql_quote($sql_date))
+					, $sql_where
 					)) {
 					while($row = sql_fetch($sql_result)) {
 						$texte_sommaire .= "<li> <a href='"
