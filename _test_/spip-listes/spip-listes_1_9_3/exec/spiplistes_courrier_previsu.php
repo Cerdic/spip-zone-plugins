@@ -226,7 +226,7 @@ function exec_spiplistes_courrier_previsu () {
 						$texte_sommaire .= "<li> <a href='"
 							. generer_url_article($row['id_article'])
 							. "'>"
-							. $row['titre']
+							. typo($row['titre'])
 							. "</a></li>\n";
 					}
 				}
@@ -241,7 +241,7 @@ function exec_spiplistes_courrier_previsu () {
 						$texte_sommaire .= "<li> <a href='"
 							. generer_url_article($row['id_article'])
 							. "'>"
-							. $row['titre']
+							. typo($row['titre'])
 							. "</a></li>\n";
 					}
 				}

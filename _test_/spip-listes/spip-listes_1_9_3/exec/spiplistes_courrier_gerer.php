@@ -14,10 +14,10 @@
 /*                                                                                        */
 /* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but specifique. Reportez-vous à la Licence Publique Generale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Generale GNU                    */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
 /* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
@@ -35,8 +35,8 @@ include_spip('inc/spiplistes_api_globales');
 	Le formulaire permet :
 	- l'envoi sur mail de test
 	- l'envoi sur les destinataires d'une liste
-	- le passage en mode édition
-	- la duplication d'un courrier archivé, le passe en mode redac	
+	- le passage en mode edition
+	- la duplication d'un courrier archive, le passe en mode redac	
 */
 
 function exec_spiplistes_courrier_gerer () {
@@ -104,8 +104,8 @@ function exec_spiplistes_courrier_gerer () {
 
 			if($btn_dupliquer_courrier > 0) {
 				if($row = sql_fetsel('titre,texte', 'spip_courriers', "id_courrier=".sql_quote($id_courrier),'','',1)) {
-					$titre = $row['titre'];
-					$texte = $row['texte'];
+					$titre = typo($row['titre']);
+					$texte = typo($row['texte']);
 					$str_log = "id_courrier #$id_courrier";
 					$statut = _SPIPLISTES_COURRIER_STATUT_REDAC;
 					$type = _SPIPLISTES_COURRIER_TYPE_NEWSLETTER;
@@ -123,7 +123,7 @@ function exec_spiplistes_courrier_gerer () {
 			
 			if($btn_changer_destination) {
 				if($radio_destination == 'email_test') {
-					// demande d'envoi a  mail de test (retour formulaire local)
+					// demande d'envoi au mail de test (retour formulaire local)
 					if(email_valide($email_test)) {
 						if(!($id_auteur_test = spiplistes_idauteur_depuis_email($email_test))) {
 							// verifie si l'adresse est dans la table des auteurs
@@ -150,7 +150,7 @@ function exec_spiplistes_courrier_gerer () {
 				} // end if($radio_destination == 'email_test')
 				
 				else if($radio_destination == 'id_liste') {
-					// demande d'envoi a  une liste (retour formulaire local)
+					// demande d'envoi a une liste (retour formulaire local)
 					if($id_liste > 0) {
 						if(
 							($nb_abos = spiplistes_listes_nb_abonnes_compter($id_liste)) > 0
@@ -248,7 +248,7 @@ function exec_spiplistes_courrier_gerer () {
 
 			if($change_statut == _SPIPLISTES_COURRIER_STATUT_READY) {
 				//$titre = propre($titre); // pas de propre ici, ca fait un <p> </p>
-				// Le statut n'est modifié ici, mais 
+				// Le statut n'est modifie ici, mais 
 				// par courrier_casier en retour de ce formulaire
 				$texte = spiplistes_courrier_propre($texte);
 				spiplistes_courrier_modifier(
@@ -342,8 +342,8 @@ function exec_spiplistes_courrier_gerer () {
 			($statut == _SPIPLISTES_COURRIER_STATUT_PUBLIE)
 			|| ($statut == _SPIPLISTES_COURRIER_STATUT_STOPE)
 		) {
-			// Un courrier publié ou stoppé peut-être dupliqué pour édition
-			// on revient sur cette page avec le contenu récupéré
+			// Un courrier publie ou stoppe peut-etre duplique pour edition
+			// on revient sur cette page avec le contenu recupere
 			$gros_bouton_dupliquer = 
 				"<div style='margin-top:1ex;'>"
 				. icone (
@@ -363,7 +363,7 @@ function exec_spiplistes_courrier_gerer () {
 			$gros_bouton_arreter_envoi = 
 				icone (
 					_T('spiplistes:Arreter_envoi')
-					// si arreter envoi, passe la main a exec/spiplistes_courriers_casier
+					// si arreter envoi, passe la main a exec/spiplistes_courriers_casier
 					, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE, "btn_arreter_envoi=$id_courrier")
 					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_redac-24.png"
 					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."stop-top-right-24.png"
@@ -377,8 +377,8 @@ function exec_spiplistes_courrier_gerer () {
 			if(!$id_liste && !$id_auteur_test) {
 				// normalement, la validation est locale, mais si l'utilisateur
 				// part sur un casier, le retour ici est incomplet...
-				// cas particulier d'un appel d'un courrier ready à partir des casiers
-				// il faut recréer $id_auteur_test si id_liste == 0
+				// cas particulier d'un appel d'un courrier ready a partir des casiers
+				// il faut recreer $id_auteur_test si id_liste == 0
 				if(!($id_auteur_test = spiplistes_idauteur_depuis_email($email_test))) {
 					spiplistes_log("ERR: id_auteur_test #$id_auteur_test (id_auteur missing ?)");
 				}
@@ -416,7 +416,8 @@ function exec_spiplistes_courrier_gerer () {
 				if($row = sql_fetsel('titre', 'spip_listes', "id_liste=".sql_quote($id_liste), '', '', 1)) {
 					$str_destinataire = ""
 						. _T('spiplistes:Liste_de_destination') 
-						. " : <a href='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")."'>".$row['titre']."</a>"
+						. " : <a href='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")."'>"
+							. typo($row['titre']) . "</a>"
 						. " " . spiplistes_nb_abonnes_liste_str_get($id_liste)
 						;
 				}
@@ -482,7 +483,7 @@ function exec_spiplistes_courrier_gerer () {
 ////////////////////////////////////
 
 	$titre_page = _T('spiplistes:spip_listes');
-	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
+	// Permet entre autres d'ajouter les classes a la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = _SPIPLISTES_PREFIX;
 	$sous_rubrique = "courrier_gerer";
 
@@ -605,10 +606,10 @@ function spiplistes_idauteur_depuis_email ($email) {
 /*                                                                                        */
 /* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but specifique. Reportez-vous à la Licence Publique Generale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Generale GNU                    */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
 /* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
