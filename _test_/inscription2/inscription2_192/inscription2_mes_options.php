@@ -117,7 +117,7 @@ function envoyer_inscription2($id_auteur,$mode="inscription") {
 		spip_query("UPDATE spip_auteurs SET alea_actuel='".$var_user['alea_actuel']."' WHERE id_auteur = ".$id_auteur);
 	}
 	
-	if($mode="inscription"){
+	if($mode=="inscription"){
 		$message = _T('inscription2:message_auto')."\n\n"
 			. _T('inscription2:email_bonjour', array('nom'=>sinon($var_user['prenom'],$var_user['nom'])))."\n\n"
 			. _T('inscription2:texte_email_inscription', array(
@@ -129,7 +129,7 @@ function envoyer_inscription2($id_auteur,$mode="inscription") {
 		$sujet = "[$nom_site_spip] "._T('inscription2:activation_compte');
 	}
 	
-	if($mode="rappel_mdp"){
+	if($mode=="rappel_mdp"){
 		$message = _T('inscription2:message_auto')."\n\n"
 			. _T('inscription2:email_bonjour', array('nom'=>sinon($var_user['prenom'],$var_user['nom'])))."\n\n"
 			. _T('inscription2:rappel_password')."\n\n"
