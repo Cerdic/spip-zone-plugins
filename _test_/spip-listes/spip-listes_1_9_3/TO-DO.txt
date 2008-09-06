@@ -5,7 +5,6 @@
 
 
 TO-DO:
-- a voir, date dans patron, suite remarque kent1. fichiers joints (20080902)
 - a voir: typo(), suite remarque Michel Possoz (20080829)
 - verifier compat 192 de autoriser('webmestre')
 - revoir liste auteurs, l'ajax n'a pas le bon retour (ex.: fleche droite perd la page d'appel, du coup le clic suivant sur th de tri se perd)

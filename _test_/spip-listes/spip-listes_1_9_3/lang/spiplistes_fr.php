@@ -158,7 +158,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Contenu_a_partir_de_date_' => "Contenu &agrave; partir de cette date ",
 'Cliquez_Generer_desc' => "Cliquez sur <strong>@titre_bouton@</strong> pour injecter le r&eacute;sultat 
 	dans la bo&icirc;te @titre_champ_texte@.",
-'courrier_realise_avec_spiplistes' => "Courrier réalisé avec SPIP-Listes",
+'courrier_realise_avec_spiplistes' => "Courrier r&eacute;alis&eacute; avec SPIP-Listes",
 'Confirmer_la_suppression_de_la_liste' => "Confirmer la suppression de la liste ",
 'Confirmez_requete' => "Veuillez confirmer la requ&ecirc;te."
 , 'confirmer_supprimer_formats' => "Supprimer les formats de r&eacute;ception des abonn&eacute;s."
@@ -401,7 +401,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'nb_abos' => "qt.",
 
 //P
-'pas_abonne_en_ce_moment' => "n'est pas abonné",
+'pas_abonne_en_ce_moment' => "n'est pas abonnï¿½",
 'par_date' => 'Par date d\'inscription',
 'patron_disponibles' => 'Patrons disponibles',
 'Patrons' => 'Patrons',
@@ -492,6 +492,7 @@ liste."
 'simulation_desactive' => "Mode simulation d&eacute;sactiv&eacute;."
 , 'simuler_les_envois' => "Simuler les envois de courriers"
 , 'sup_mod' => "Supprimer ce mod&eacute;rateur"
+, 'sommaire_date_debut' => "A partir de la date dÃ©finie ci-dessus"
 
  //T
 , 'texte_boite_en_cours' => 'SPIP-Listes envoie un courrier.<p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>',

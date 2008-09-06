@@ -5,29 +5,29 @@
 // _SPIPLISTES_EXEC_COURRIER_EDIT
 
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
+/* SPIP-listes est un systeme de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir reeu une copie de la Licence Publique Generale GNU                    */
+/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, etats-Unis.                   */
 /******************************************************************************************/
 // $LastChangedRevision$
 // $LastChangedBy$
 // $LastChangedDate$
 
 /*
-	Formulaire de création de courrier
+	Formulaire de creation de courrier
 */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -75,14 +75,14 @@ function exec_spiplistes_courrier_edit(){
 		}
 	}
 
-	// l'édition du courrier est réservée aux super-admins 
-	// ou aux admin créateur du courrier
+	// l'edition du courrier est reservee aux super-admins 
+	// ou aux admin createur du courrier
 	$flag_editable = (($connect_statut == "0minirezo") 
 		&& ($connect_toutes_rubriques || ($connect_id_auteur == $id_auteur) || !$id_courrier));
 
 	if($flag_editable) {
 		if(!$id_courrier) {
-		// si pas de ID courrier, c'est une création
+		// si pas de ID courrier, c'est une creation
 			$statut = _SPIPLISTES_COURRIER_STATUT_REDAC; 
 			$type = _SPIPLISTES_COURRIER_TYPE_NEWSLETTER;
 			$new = 'oui';
@@ -112,7 +112,7 @@ function exec_spiplistes_courrier_edit(){
 ////////////////////////////////////
 
 	$titre_page = _T('spiplistes:spip_listes');
-	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
+	// Permet entre autres d'ajouter les classes a la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = _SPIPLISTES_PREFIX;
 	$sous_rubrique = "courrier_edit";
 
@@ -130,13 +130,13 @@ function exec_spiplistes_courrier_edit(){
 		. spiplistes_naviguer_paniers_courriers(_T('spiplistes:aller_au_panier_'), true)
 		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
-		//. spiplistes_boite_autocron() // ne pas géner l'édition
+		//. spiplistes_boite_autocron() // ne pas gener l'edition
 		. spiplistes_boite_info_spiplistes(true)
 		. debut_droite($rubrique, true)
 		;
 
 	$page_result .= ""
-		// le bloc pour aperçu (retour ajax)
+		// le bloc pour apercu (retour ajax)
 		. "<div id='apercu-courrier' style='clear:both;tex-align:center'></div>\n"
 		//
 		. debut_cadre_formulaire('', true)
@@ -157,7 +157,7 @@ function exec_spiplistes_courrier_edit(){
 		. "</tr></table>\n"
 		. "<hr />\n"
 		//
-		// début formulaire
+		// debut formulaire
 		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,"id_courrier=$id_courrier")
 			."' method='post' name='formulaire_courrier_edit' id='formulaire_courrier_edit'>\n"
 		. "<input type='hidden' name='modifier_message' value=\"oui\" />\n"
@@ -172,8 +172,8 @@ function exec_spiplistes_courrier_edit(){
 	$titre_block_depliable = _T('spiplistes:Generer_le_contenu');
 	$page_result .= ""
 		//
-		// générer le contenu
-		// Reprise du Formulaire adapté de abomailman () // MaZiaR - NetAktiv	// tech@netaktiv.com
+		// generer le contenu
+		// Reprise du Formulaire adapte de abomailman () // MaZiaR - NetAktiv	// tech@netaktiv.com
 		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_insert-slide.gif', true)
 		//. bouton_block_invisible(md5(_T('spiplistes:charger_patron')))
 		. spiplistes_bouton_block_depliable($titre_block_depliable, false, md5(_T('spiplistes:charger_patron')))
@@ -186,14 +186,14 @@ function exec_spiplistes_courrier_edit(){
 		;
 		
 	$page_result .= ""
-		// sélecteur de langues
+		// selecteur de langues
 		. "<div class='boite-generer-option'>\n"
 		. "<label class='verdana2'>"._T('spiplistes:Langue_du_courrier_').": "
 		. "<select name='lang' class='fondo'>\n"
 		. liste_options_langues('changer_lang')
 		. "</select></label>\n"
 		. "</div>\n"
-		// Prendre en compte à partir de quelle date ?
+		// Prendre en compte a partir de quelle date ?
 		. spiplistes_dater_envoi(
 			'courrier', $id_courrier, $statut
 			, $flag_editable
@@ -204,7 +204,7 @@ function exec_spiplistes_courrier_edit(){
 		;
 		
 	$page_result .= ""
-		// texte introduction à placer avant le patron et sommaire 
+		// texte introduction a placer avant le patron et sommaire 
 		. "<div class='boite-generer-option'>\n"
 		. "<label class='verdana2'>"
 		. "<input type='checkbox' id='avec_intro' name='avec_intro' value='non' />"
@@ -220,7 +220,7 @@ function exec_spiplistes_courrier_edit(){
 		. "</div>\n"
 		;
 		
-	// sélection du patron
+	// selection du patron
 	$page_result .= ""
 		. "<div class='boite-generer-option'>\n"
 		. "<label class='verdana2'>"
@@ -240,7 +240,7 @@ function exec_spiplistes_courrier_edit(){
 		. "</div>\n"
 		;
 	
-	// Générer un sommaire
+	// Generer un sommaire
 	$page_result .= ""
 		. "<div class='boite-generer-option'>\n"
 		. "<label class='verdana2'>"
@@ -250,7 +250,7 @@ function exec_spiplistes_courrier_edit(){
 		. "<div id='choisir_sommaire' class='option'>";		
 	$page_result .= ""
 		//
-		// sélecteur de rubriques
+		// selecteur de rubriques
 		. "<label class='verdana2' for='ajouter_rubrique'>"._T('spiplistes:Lister_articles_de_rubrique').":</label>\n"
 		. "<select name='id_rubrique' id='ajouter_rubrique' class='formo'>\n"
 		. "<option value=''></option>\n"
@@ -258,7 +258,7 @@ function exec_spiplistes_courrier_edit(){
 		. "</select>\n"
 		. "<br />\n"
 		//
-		// sélecteur des mots-clés
+		// selecteur des mots-cles
 		. "<label class='verdana2' for='ajouter_motcle'>"._T('spiplistes:Lister_articles_mot_cle').":</label>\n"
 		. "<select name='id_mot' id='ajouter_motcle' class='formo'>\n"
 		. "<option value=''></option>\n"
@@ -277,9 +277,14 @@ function exec_spiplistes_courrier_edit(){
 	}
 	$page_result .= ""
 		. "</select><br />\n"
+		//
+		// a partir de la date selectionnee plus haut
+		. spiplistes_form_input_item ('checkbox', 'date_sommaire', 'oui'
+			, _T('spiplistes:sommaire_date_debut'), $sommaire_date == 'oui', true, false)
+		//
 		. "</div>\n"
 		. "</div>\n"
-		; // fin générer le sommaire
+		; // fin generer le sommaire
 		
 	$page_result .= ""
 		. "<p class='verdana2'>\n"
@@ -320,21 +325,21 @@ function exec_spiplistes_courrier_edit(){
 	
 }
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
+/* SPIP-listes est un systeme de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
+/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, etats-Unis.                   */
 /******************************************************************************************/
 ?>
