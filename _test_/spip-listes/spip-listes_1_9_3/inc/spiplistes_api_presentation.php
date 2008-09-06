@@ -255,7 +255,7 @@ function spiplistes_fin_raccourcis ($return = false) {
 
 // From SPIP-Listes-V: CP:20070923
 function spiplistes_boite_raccourcis ($return = false) {
-	global $connect_id_auteur;
+	$connect_id_auteur = intval($GLOBALS['connect_id_auteur']);
 	
 	$result = ""
 		// Les raccourcis
@@ -502,7 +502,8 @@ function spiplistes_formate_date_form($annee, $mois, $jour, $heure, $minute) {
 
 // Petit formulaire dans la boite autocron (CP-20071018)
 function spiplistes_boite_autocron_form($titre, $option, $value) {
-	global $connect_id_auteur;
+	$connect_id_auteur = intval($GLOBALS['connect_id_auteur']);
+	
 	$result = "";
 	// n'apparait que si super_admin et pas sur la page de config (doublon de form)
 	if(autoriser('webmestre','','',$connect_id_auteur)) {
@@ -544,7 +545,7 @@ function spiplistes_boite_autocron_info ($icone = "", $return = false, $titre_bo
 function spiplistes_boite_autocron () { 
 	@define('_SPIP_LISTE_SEND_THREADS',1);
 	
-	global $connect_id_auteur;
+	$connect_id_auteur = intval($GLOBALS['connect_id_auteur']);
 	
 	// initialise les options
 	foreach(array(

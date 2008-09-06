@@ -8,7 +8,7 @@
 // $LastChangedDate$
 
 include_spip('base/abstract_sql');
-// la déclaration des tables en spiplites 192 est dans 'spip-listes.php'. Elle se trouve dans 'spiplistes_tables.php' en 193
+// la declaration des tables en spiplites 192 est dans 'spip-listes.php'. Elle se trouve dans 'spiplistes_tables.php' en 193
 // include_spip ('base/spip-listes');
 include_spip('base/spiplistes_tables');
 include_spip("inc/plugin_globales_lib");
@@ -27,10 +27,10 @@ if (!defined('_DIR_PLUGIN_SPIPLISTES')) {
 @define('_SPIP_LISTE_SEND_THREADS',1);
 
 // virer les echo, a reprendre plus tard correctement
-// avis aux spécialistes !!
+// avis aux specialistes !!
 define('_SIGNALER_ECHOS', false); // horrible 
 
-// mode debug dans le log, peut-être augmenté pour avoir tous
+// mode debug dans le log, peut-etre augmente pour avoir tous
 // les messages dans spip.log (par exemple)
 // voir doc php
 define("_SPIPLISTES_LOG_DEBUG", LOG_DEBUG);
@@ -53,10 +53,10 @@ define("_SPIPLISTES_ZERO_TIME_DATE", "0000-00-00 00:00:00");
 
 // documentation: http://www.quesaco.org/Spiplistes-les-etats-du-courrier
 define("_SPIPLISTES_COURRIER_STATUT_REDAC", "redac"); // en cours de redac
-define("_SPIPLISTES_COURRIER_STATUT_READY", "ready"); // pret à etre envoyé
+define("_SPIPLISTES_COURRIER_STATUT_READY", "ready"); // pret a etre envoye
 define("_SPIPLISTES_COURRIER_STATUT_ENCOURS", "encour"); // en cours par meleuse
-define("_SPIPLISTES_COURRIER_STATUT_AUTO", "auto"); // publié de liste
-define("_SPIPLISTES_COURRIER_STATUT_PUBLIE", "publie"); // publié
+define("_SPIPLISTES_COURRIER_STATUT_AUTO", "auto"); // publie de liste
+define("_SPIPLISTES_COURRIER_STATUT_PUBLIE", "publie"); // publie
 define("_SPIPLISTES_COURRIER_STATUT_VIDE", "vide"); // moins de 10 car.
 define("_SPIPLISTES_COURRIER_STATUT_IGNORE", "ignore"); // pas de destinataire
 define("_SPIPLISTES_COURRIER_STATUT_STOPE", "stope"); // stope par admin
@@ -76,7 +76,7 @@ define("_SPIPLISTES_MONTHLY_LIST", "pub_mois"); // debut de mois
 define("_SPIPLISTES_YEARLY_LIST", "pub_an");
 define("_SPIPLISTES_TRASH_LIST", "poublist");
 
-// les statuts des périodique
+// les statuts des periodique
 define("_SPIPLISTES_LISTES_STATUTS_PERIODIQUES", 
 	_SPIPLISTES_DAILY_LIST
 	. ";" . _SPIPLISTES_HEBDO_LIST
@@ -86,20 +86,20 @@ define("_SPIPLISTES_LISTES_STATUTS_PERIODIQUES",
 	. ";" . _SPIPLISTES_YEARLY_LIST
 	);
 
-// les statuts des listes publiées
+// les statuts des listes publiees
 define("_SPIPLISTES_LISTES_STATUTS_OK", 
 	_SPIPLISTES_PRIVATE_LIST
 	. ";" . _SPIPLISTES_PUBLIC_LIST
 	. ";" . _SPIPLISTES_LISTES_STATUTS_PERIODIQUES
 	);
 
-// statuts des listes tels qu'affichées en liste 
+// statuts des listes tels qu'affichees en liste 
 define("_SPIPLISTES_LISTES_STATUTS_TOUS", 
 	_SPIPLISTES_LISTES_STATUTS_OK
 	. ";" . _SPIPLISTES_TRASH_LIST
 	);
 
-// statuts des courriers tels qu'affichés en liste 
+// statuts des courriers tels qu'affiches en liste 
 define("_SPIPLISTES_COURRIERS_STATUTS"
 	,	_SPIPLISTES_COURRIER_STATUT_REDAC
 	. ";" . _SPIPLISTES_COURRIER_STATUT_READY
@@ -113,7 +113,7 @@ define("_SPIPLISTES_COURRIERS_STATUTS"
 	);
 
 // charsets:
-// charsets autorisés :
+// charsets autorises :
 define("_SPIPLISTES_CHARSETS_ALLOWED", "iso-8859-1;iso-8859-9;iso-8859-6;iso-8859-15;utf-8");
 define("_SPIPLISTES_CHARSET_ENVOI", "iso-8859-1"); // pour historique
 define("_SPIPLISTES_CHARSET_DEFAULT", _SPIPLISTES_CHARSET_ENVOI);
@@ -142,7 +142,7 @@ define("_SPIPLISTES_ACTION_ABONNER_AUTEUR", _SPIPLISTES_ACTION_PREFIX."listes_ab
 define("_SPIPLISTES_ACTION_LISTE_ABONNES", _SPIPLISTES_ACTION_PREFIX."liste_des_abonnes");
 define("_SPIPLISTES_ACTION_MOD_GERER", _SPIPLISTES_ACTION_PREFIX."moderateurs_gerer");
 
-// les formats d'envoi autorisés, ou non pour pseudo-désabonné
+// les formats d'envoi autorises, ou non pour pseudo-desabonne
 define("_SPIPLISTES_FORMATS_ALLOWED", "html;texte;non");
 define("_SPIPLISTES_FORMAT_DEFAULT", "html");
 
@@ -214,7 +214,29 @@ function balise_DATE_MODIF_FORUM($p) {
    return $p;
 }
 
-// autorise les admins et l'utilisateur à modifier son format de réception
+// CP-20080906 : compatibilitÃ© SPIP 192d
+// autoriser_webmestre_dist() considere que _ID_WEBMESTRES est defini
+// mais c'est une option en 192d ?!
+if(spiplistes_spip_est_inferieur_193()) 
+{
+	function autoriser_webmestre($faire, $type, $id, $qui, $opt) 
+	{
+		$def_webmestre =
+			defined('_ID_WEBMESTRES')
+			? in_array($qui['id_auteur'], explode(':', _ID_WEBMESTRES))
+			: true
+			;
+		$r =
+			$def_webmestre
+			&& ($qui['statut'] == '0minirezo')
+			&& !$qui['restreint']
+			;
+		// spiplistes_log("resultat de autoriser_webmestre() ".gettype($r)." ". ($r ? "OK" : "niet"));
+		return($r);
+	} 
+}
+
+// autorise les admins et l'utilisateur a modifier son format de reception
 function autoriser_abonne_modifierformat ($faire = '', $type = '', $id_objet = 0, $qui = NULL, $opt = NULL) {
 	return(
 		$GLOBALS['auteur_session']['id_auteur'] == $id
@@ -259,8 +281,8 @@ function spiplistes_taches_generales_cron($taches_generales) {
 	return $taches_generales;
 }
 
-/* CP: tableau issu de SPIP-Listes-V (à nettoyer en fin d'optimisation)
-	Tableau des objets de navigations dans l'espace privé
+/* CP: tableau issu de SPIP-Listes-V (a nettoyer en fin d'optimisation)
+	Tableau des objets de navigations dans l'espace prive
 */
 $spiplistes_items = array(
 	// les courriers
@@ -310,7 +332,7 @@ $spiplistes_items = array(
 		, 'desc' => null
 		)
 	, _SPIPLISTES_COURRIER_STATUT_STOPE => array(
-		// courrier stopé en cours d'envoi
+		// courrier stope en cours d'envoi
 		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-stop.png"
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_stop-24.png'
 		, 'icon_color' => "f00"
@@ -330,7 +352,7 @@ $spiplistes_items = array(
 		, 'desc' => null
 		)
 	, _SPIPLISTES_COURRIER_STATUT_IGNORE => array(
-		// courrier sans abonné
+		// courrier sans abonne
 		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-inconnu.gif"
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_ignore-24.png'
 		, 'icon_color' => "000"
