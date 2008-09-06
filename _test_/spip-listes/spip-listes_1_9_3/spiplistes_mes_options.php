@@ -217,7 +217,7 @@ function balise_DATE_MODIF_FORUM($p) {
 // CP-20080906 : compatibilité SPIP 192d
 // autoriser_webmestre_dist() considere que _ID_WEBMESTRES est defini
 // mais c'est une option en 192d ?!
-if(spiplistes_spip_est_inferieur_193()) 
+if(spiplistes_spip_est_inferieur_193() && !function_exists('autoriser_webmestre')) 
 {
 	function autoriser_webmestre($faire, $type, $id, $qui, $opt) 
 	{
