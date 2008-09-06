@@ -62,12 +62,12 @@ function imageflow_spip_est_inferieur_193 () {
  * Activé uniquement en dev (voir imageflow_options.php)
  */
 function imageflow_log ($message, $flag = null) {
-	$flag = 
-		($flag === null)
-		? ""
-		: " " . (!$flag ? "ERROR" : "OK")
-		;
 	if(!empty($message) && defined('_IMAGEFLOW_DEBUG') && _IMAGEFLOW_DEBUG) {
+		$flag = 
+			($flag === null)
+			? ""
+			: " " . (!$flag ? "ERROR" : "OK")
+			;
 		spip_log($message.$flag, _IMAGEFLOW_PREFIX);
 	}
 }

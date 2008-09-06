@@ -125,7 +125,7 @@ function exec_imageflow_configure () {
 				;
 		}
 		$sliders_result = ""
-			. debut_cadre_relief(_DIR_IMAGEFLOW_IMAGES."deg_down-24.png", true, "", _T('imageflow:slider_select'))
+			. debut_cadre_relief(_DIR_IMAGEFLOW_IMAGES."slider-24.png", true, "", _T('imageflow:slider_select'))
 			. "<ul id='sliders'>\n"
 			. $sliders_result
 			. "</ul>\n"
@@ -276,9 +276,8 @@ function exec_imageflow_configure () {
 	$page_result .= ""
 		. $bouton_reset
 		. imageflow_form_bouton_valider('btn_valider_imageflow')
-		. fin_cadre_trait_couleur(true)
 		. imageflow_form_fin_form()
-
+		. fin_cadre_trait_couleur(true)
 		;
 		
 	// Fin de la page
