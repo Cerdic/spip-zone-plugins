@@ -39,9 +39,10 @@ include_spip('inc/bible_tableau');
 
 function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$ref='non'){
 	$verset_debut = '';
-	global $tableau_traduction;
-	global $tableau_separateur;
-	global $tableau_livres;
+	
+	$tableau_traduction = bible_tableau('traduction');
+	$tableau_separateur = bible_tableau('separateur');
+	$tableau_livres = bible_tableau('livres');
 	global $spip_lang;
 	$traduction = strtolower($traduction);
 	
@@ -161,8 +162,8 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 }
 
 function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur){
-	global $tableau_traduction;
-	global $tableau_livres;
+	$tableau_traduction = bible_tableau('traduction');;
+	$tableau_livres = bible_tableau('livres');
 	$trad = $tableau_traduction[$trad]['traduction'];
 	
 	$livre_long = $tableau_livres[$tableau_traduction[$traduction]['lang']] ;
@@ -201,7 +202,7 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur){
 }
 function traduction_longue($fictif,$i){
 	//$fictif ne sert à rien, mais c'est pour ne aps à avoir a faire appel à #VAL (car existe pas <2.0)
-	global  $tableau_traduction;
+	$tableau_traduction = bible_tableau('traduction');
 	return $tableau_traduction[$i]['traduction'];
 	}
 function traduction_defaut($lang){

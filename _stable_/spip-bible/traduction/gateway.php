@@ -3,7 +3,7 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 	$verset_debut=='' ? $verset_debut = 1 : $verset_debut = $verset_debut;
 	//reperer le numero de livre
 	include_spip('inc/bible_tableau');
-	global $livre_gateways;
+	$livre_gateways = bible_tableau('gateway');
 	$livre_gateway =$livre_gateways[$lang];	
 	foreach ($livre_gateway as $li=>$id){	
 		if (strtolower($li)==strtolower($livre)){
