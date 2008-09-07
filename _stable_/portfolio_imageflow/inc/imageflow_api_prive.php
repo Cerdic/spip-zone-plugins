@@ -187,11 +187,11 @@ function imageflow_input_value ($label, $input_name, $value = "") {
 }
 
 /***********************************************/
-function imageflow_input_checkbox ($label, $input_name, $value, $checked = false) {
+function imageflow_input_checkbox ($label, $input_name, $value, $checked = false, $style = "") {
 	global $spip_lang_left;
 	$checked = ($checked ? "checked='checked'" : "");
 	$result = ""
-		. "<label class='verdana2' style='text-align:$spip_lang_left'>\n"
+		. "<label id='label_$input_name' class='verdana2' style='".$style."text-align:$spip_lang_left'>\n"
 		. "<input type='checkbox' name='$input_name' value='$value' $checked />\n"
 		. $label
 		. "</label>\n"

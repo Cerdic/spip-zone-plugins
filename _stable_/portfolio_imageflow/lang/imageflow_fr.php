@@ -56,7 +56,13 @@ $GLOBALS['i18n_imageflow_fr'] = array(
 	, 'preloader_label' => "Pr&#233;charger les images du portfolio 
 		lors de la consultation afin d'acc&#233;lerer l'affichage."
 	, 'slideshow' => "Fondu enchain&#233;"
-	, 'slideshow_label' => "Ajouter un effet de fondu enchain&#233;."
+	, 'slideshow_label' => "Ajouter un effet de fondu enchain&#233; entre les images projet&#233;es."
+	
+	, 'active_link' => "Lien sur l'image projet&#233;e (longdesc)"
+	, 'active_link_label' => "Activer l'URL sur l'image projet&#233;e."
+	, 'active_description' => "Si longdesc n'est pas une URL mais une description, 
+		afficher cette description lors du click sur l'image projet&#233;e"
+	, 'active_alert' => "Afficher cette description dans une boite alerte au lieu d'une l&#233;gende."
 	
 	, 'reset' => "Reset"
 	, 'reset_title' => "R&#233;tablir les r&#233;glages par d&#233;faut"

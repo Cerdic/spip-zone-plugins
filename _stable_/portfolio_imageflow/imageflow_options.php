@@ -71,15 +71,18 @@ define("_IMAGEFLOW_PREFERENCES_DEFAULT",
 			'img' => "" // required	The source image (to reflect)
 			, 'height' => "50%" // optional	Height of the reflection (% or pixel value)
 			, 'bgc' => "none" // optional	Background colour to fade into (hex), 'none' for transparent, default = 'none'
-			, 'fade_start' => "80%" // optional    Start the alpha fade from whch value? (% value)
+			, 'fade_start' => "80%" // optional    Start the alpha fade from which value? (% value)
 			, 'fade_end' => "0%" // optional    End the alpha fade from whch value? (% value)
-			// jpeg index obsolète de reflect_2
+			// jpeg index obsolete de reflect_2
 			//, 'jpeg' => "90"" // v2 :: optional	Output will be JPEG at 'param' quality (default 90)
 			, 'tint' => "#7F7F7F" // v3 :: optional    Tint the reflection with this colour (hex)
 			//, 'cache' => 1 // optional    Save reflection image to the cache? (boolean)
 			, 'slider' => "slider_default-14.gif"
-			, 'preloader' => "non"
-			, 'slideshow' => "non"
+			, 'preloader' => "non" // precharger les images ?
+			, 'slideshow' => "non" // Effet de fondu enchaine' ?
+			, 'active_link' => "non" // activer le lien URL sur l'image finale ?
+			, 'active_description' => "non" // activer (afficher) la description sur l'image finale ?
+			, 'active_alert' => "non" // activer (afficher) la description dans une boite alerte (attention au charset)
 		)
 	)
 );

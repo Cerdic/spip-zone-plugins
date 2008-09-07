@@ -498,7 +498,7 @@ if(!function_exists('longdesc_propre')) {
 		$longdesc = 
 			($is_uri)
 			? $longdesc
-			: "text/plain;charset=".$GLOBALS['meta']['charset'].",".rawurlencode($longdesc)
+			: "data:text/plain;charset=".$GLOBALS['meta']['charset'].",".rawurlencode($longdesc)
 			;
 		return ($longdesc);
 	}

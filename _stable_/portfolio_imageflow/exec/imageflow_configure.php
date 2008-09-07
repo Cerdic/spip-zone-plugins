@@ -271,6 +271,22 @@ function exec_imageflow_configure () {
 		. fin_cadre_relief(true)		
 		;
 	
+	// activer le lien URL sur l'image finale
+	$page_result .= ""
+		. debut_cadre_relief(_DIR_IMAGEFLOW_IMAGES."active_link-24.png", true, "", _T('imageflow:active_link'))
+		. imageflow_input_checkbox (
+			_T('imageflow:active_link_label')
+			, 'active_link', 'oui', ($preferences_current['active_link'] == 'oui'), "display:block;")
+		. imageflow_input_checkbox (
+			_T('imageflow:active_description')
+			, 'active_description', 'oui', ($preferences_current['active_description'] == 'oui'), "display:block;")
+		. imageflow_input_checkbox (
+			_T('imageflow:active_alert')
+			, 'active_alert', 'oui', ($preferences_current['active_alert'] == 'oui')
+			, "display:".(($preferences_current['active_description'] == 'oui') ? "block;" : "none;"))
+		. fin_cadre_relief(true)		
+		;
+	
 
 	// fin formulaire
 	$page_result .= ""

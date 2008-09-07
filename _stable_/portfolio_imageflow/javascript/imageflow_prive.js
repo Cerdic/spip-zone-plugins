@@ -39,4 +39,8 @@ $(document).ready(function(){
 			}
 		}
 	});
+	
+	$("input[@name=active_description]").click(function(){
+		$("#label_active_alert").toggle();
+	});
 });
