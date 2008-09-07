@@ -3,3 +3,4 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+- verifier compatibilité longdesc dans lightbox avec Jaws et NVda, ... Ceci dit, pas très important, puisque le longdesc est déjà accessible via Jaws dans les vignettes.
