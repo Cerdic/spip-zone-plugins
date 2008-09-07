@@ -110,8 +110,8 @@ function rainette_croaaaaa_previsions($code_meteo, $type='x_jours', $jour=0, $mo
 		}
 		// On ajoute la date de derniere maj
 		$tableau[$jour]['derniere_maj'] = $tableau[_RAINETTE_JOURS_PREVISION]['derniere_maj'];
-		$page = evaluer_fond("modeles/$modele", $tableau[$jour]);			
-		$texte = $page['texte'];
+		$page = recuperer_fond("modeles/$modele", $tableau[$jour]);			
+		$texte = $page;
 	}
 	else if ($type == 'x_jours') {
 		if ($jour == 0) $jour = _RAINETTE_JOURS_PREVISION;
@@ -122,8 +122,8 @@ function rainette_croaaaaa_previsions($code_meteo, $type='x_jours', $jour=0, $mo
 		$tableau = unserialize($tableau);
 		$texte = "";
 		while (count($tableau) && $jour--){
-			$page = evaluer_fond("modeles/$modele", array_shift($tableau));			
-			$texte .= $page['texte'];
+			$page = recuperer_fond("modeles/$modele", array_shift($tableau));			
+			$texte .= $page;
 		}
 	}
 	return $texte;
@@ -135,8 +135,8 @@ function rainette_croaaaaa_conditions($code_meteo, $modele='conditions_tempsreel
 	$nom_fichier = charger_meteo($code_meteo, 'conditions');
 	lire_fichier($nom_fichier,$tableau);
 	$tableau = unserialize($tableau);
-	$page = evaluer_fond("modeles/$modele", $tableau);			
-	return $page['texte'];
+	$texte = recuperer_fond("modeles/$modele", $tableau);			
+	return $texte;
 }
 
 function rainette_croaaaaa_infos($code_meteo, $modele='infos_ville'){
@@ -145,7 +145,7 @@ function rainette_croaaaaa_infos($code_meteo, $modele='infos_ville'){
 	$nom_fichier = charger_meteo($code_meteo, 'infos');
 	lire_fichier($nom_fichier,$tableau);
 	$tableau = unserialize($tableau);
-	$page = evaluer_fond("modeles/$modele", $tableau);			
-	return $page['texte'];
+	$texte = recuperer_fond("modeles/$modele", $tableau);			
+	return $texte;
 }
 ?>
