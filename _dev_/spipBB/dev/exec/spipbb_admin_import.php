@@ -113,8 +113,8 @@ function spipbb_import_formulaire($id_rubrique=0,$id_secteur=0)
 {
 	global $spipbb_import; // stockage des informations et des etapes
 
-	$assembler = charger_fonction('assembler', 'public'); // recuperer_fond est dedans
-	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
+	// chryjs :  7/9/8 recuperer_fond est maintenant dans inc/utils
+	if (!function_exists('recuperer_fond')) include_spip('inc/utils');
 
 	import_load_metas('');
 	if (!empty($spipbb_import['origine']) and $spipbb_import['etape'] != 0) {

@@ -133,8 +133,8 @@ function exec_spipbb_admin_fromphpbb()
 // ------------------------------------------------------------------------------
 function spipbb_fromphpbb_formulaire($conf=array())
 {
-	$assembler = charger_fonction('assembler', 'public'); // recuperer_fond est dedans
-	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
+	// chryjs :  7/9/8 recuperer_fond est maintenant dans inc/utils
+	if (!function_exists('recuperer_fond')) include_spip('inc/utils');
 
 	// [fr] On va essayer de "deviner" ou on peut trouver un fichier de conf phpbb
 	// [en] We try to "guess" where is the phpbb config file

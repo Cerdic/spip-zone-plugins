@@ -110,8 +110,8 @@ function spipbb_admin_configuration() {
 	# très genant !!!
 	# c: 11/1/8 je ne vois pas ce qui est bloque ? precise ?
 
-	$assembler = charger_fonction('assembler', 'public'); // recuperer_fond est dedans
-	if (!function_exists('recuperer_fond')) include_spip('public/assembler'); // voir un charger fonction
+	// chryjs :  7/9/8 recuperer_fond est maintenant dans inc/utils
+	if (!function_exists('recuperer_fond')) include_spip('inc/utils');
 
 	$prerequis=true;
 

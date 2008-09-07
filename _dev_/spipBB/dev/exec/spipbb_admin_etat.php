@@ -101,8 +101,8 @@ function spipbb_recap_config()
 	$r = sql_fetsel("count(*) AS total",'spip_auteurs', 'en_ligne>= DATE_SUB(NOW(), INTERVAL 5 MINUTE )');
 	$total_online = $r['total'];
 
-	$assembler = charger_fonction('assembler', 'public'); // recuperer_fond est dedans
-	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
+	// chryjs :  7/9/8 recuperer_fond est maintenant dans inc/utils
+	if (!function_exists('recuperer_fond')) include_spip('inc/utils');
 
 	$contexte = array(
 				'couleur_foncee'=>$couleur_foncee,

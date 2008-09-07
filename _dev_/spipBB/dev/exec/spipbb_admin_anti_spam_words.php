@@ -78,8 +78,8 @@ function exec_spipbb_admin_anti_spam_words()
 // [en] Generates the form to fill with migration parameters
 // ------------------------------------------------------------------------------
 function spipbb_anti_spam_words_formulaire() {
-	$assembler = charger_fonction('assembler', 'public'); // recuperer_fond est dedans
-	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
+	// chryjs :  7/9/8 recuperer_fond est maintenant dans inc/utils
+	if (!function_exists('recuperer_fond')) include_spip('inc/utils');
 
 	$contexte = array(
 			'action_script' => 'spipbb_spam_word',
