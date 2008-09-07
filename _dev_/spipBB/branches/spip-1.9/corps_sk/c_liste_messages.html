@@ -4,7 +4,7 @@
 
 	#SET{statmem,#STATUT}
 
-	<INCLURE(session.php){fond=inc_teteforum}{id_rubrique}{id_article}>
+	<INCLURE{fond=inc_teteforum}{id_rubrique}{id_article}>
 
 		<p class="space_20"></p>
 
@@ -24,7 +24,12 @@
 		<tr>
 	  		<th colspan="2"><:spipbb:message_s:></th>
 		</tr>
-		<BOUCLE_liste_mess(FORUMS){id_auteur}{tout}{!par date}{pagination}>
+		[(#REM) un peu lourd mais le critère {plat} déconne avec {id_secteur}]
+		<BOUCLE_s(ARTICLES){id_secteur=#ID_RUBRIQUE}>
+		<BOUCLE_a(FORUMS){doublons messages}{plat}{id_article} /> 
+		</BOUCLE_s>
+
+		<BOUCLE_liste_mess(FORUMS){id_auteur}{!doublons messages}{plat}{!par date}{pagination}>
 
 		<tr class="inter entete_sujet">
 			<td id="forum#ID_FORUM" colspan="2">
@@ -95,6 +100,6 @@
 
 		</table>
 
-	<INCLURE(session.php){fond=inc_piedforum}{id_rubrique}{id_article}>
+	<INCLURE{fond=inc_piedforum}{id_rubrique}{id_article}>
 
 </BOUCLE_aut>

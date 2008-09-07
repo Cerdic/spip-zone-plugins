@@ -1,14 +1,14 @@
 <plugin>
-<version>0.5.0.5</version>
+<version>0.5.1</version>
 <nom>
 	<multi>
-		[en]SpipBB: Management of SPIP forums
-		[fr]SpipBB : Gestion des forums de SPIP
-		[ca]SpipBB: Gesti&oacute; dels f&ograve;rums d'SPIP
-		[pt]SpipBB: Gest&atilde;o dos f&oacute;runs de SPIP
-		[tr]SpipBB : SPIP forumlar&#305;n&#305;n y&ouml;netimi
-		[nl]SpipBB: Beleid van de SPIP forums
-		[gl]SpipBB : xesti&oacute;n de foros de SPIP
+		[en]SpipBB: Management of SPIP SVN forums
+		[fr]SpipBB : Gestion des forums de SPIP SVN
+		[ca]SpipBB: Gesti&oacute; dels f&ograve;rums d'SPIP SVN
+		[pt]SpipBB: Gest&atilde;o dos f&oacute;runs de SPIP SVN
+		[tr]SpipBB : SPIP SVN forumlar&#305;n&#305;n y&ouml;netimi
+		[nl]SpipBB: Beleid van de SPIP SVN forums
+		[gl]SpipBB : xesti&oacute;n de foros de SPIP SVN
 	</multi>
 </nom>
 <auteur>

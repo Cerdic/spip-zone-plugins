@@ -94,14 +94,16 @@ function spipbb_maintenance($id_article)
 function spipbb_nb_messages($id_auteur){
 	if (empty($id_auteur)) return ;
 	$nb_mess = "";
+	if (!isset($GLOBALS['spipbb']))
+		$GLOBALS['spipbb']=@unserialize($GLOBALS['meta']['spipbb']); // lire_config ?
 	if ( is_array($GLOBALS['spipbb'])
 		AND $GLOBALS['spipbb']['configure']=='oui'
 		AND $GLOBALS['spipbb']['id_secteur']>0 )
-		$result_auteurs = sql_select('auteur',
-							array('spip_forum','spip_rubriques'), // FROM
+		$result_auteurs = sql_select('id_auteur',
+							array('spip_forum','spip_articles'), // FROM
 							array("id_auteur=$id_auteur",
-									"spip_forum.id_rubrique=spip_rubriques.id_rubrique",
-									"( spip_rubriques.id_rubrique=".$GLOBALS['spipbb']['id_secteur']." OR spip_rubriques.id_secteur=".$GLOBALS['spipbb']['id_secteur']." )"
+									"spip_forum.id_article=spip_articles.id_article",
+									"( spip_articles.id_rubrique=".$GLOBALS['spipbb']['id_secteur']." OR spip_articles.id_secteur=".$GLOBALS['spipbb']['id_secteur']." )"
 									) //WHERE
 							);
 	else $result_auteurs = sql_select('auteur','spip_forum',"id_auteur=$id_auteur");
@@ -141,16 +143,14 @@ function spipbb_nb_messages_groupe($id_bidon){
 //Filtre :  citation
 //Base : BoOz
 //Modif scoty  29/10/06 .. -> spip 1.9.1/2
+//Modif chryjs 9/7/8 .. -> spip 2.0SVN
 //Affiche le texte à citer
 //+-------------------------------------+
-function barre_forum_citer($texte, $lan, $rows, $cols, $lang='')
+function barre_forum_citer($texte, $lan)
 {
 	if (!$premiere_passe = rawurldecode(_request('retour_forum'))) {
 		if(_request('citer')=='oui'){
 			$id_citation = _request('id_forum') ;
-			//$query = "SELECT auteur, texte FROM spip_forum WHERE id_forum=$id_citation";
-			//$result = sql_query($query);
-			//$row = sql_fetch($result);
 			$row = sql_fetsel('auteur,texte','spip_forum',"id_forum=$id_citation");
 			$aut_cite=$row['auteur'];
 			$text_cite=$row['texte'];
@@ -158,8 +158,7 @@ function barre_forum_citer($texte, $lan, $rows, $cols, $lang='')
 			$texte="{{ $aut_cite $lan }}\n<quote>\n$text_cite</quote>\n";
 		}
 	}
-	if (!function_exists('barre_textarea')) include_spip('inc/vieilles_defs'); // version > _SPIPBB_REV_BARRE_TEXTAREA
-	return barre_textarea($texte, $rows, $cols, $lang);
+	return $texte;
 } // barre_forum_citer
 
 // ------------------------------------------------------------------------------

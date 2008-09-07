@@ -1,5 +1,15 @@
 ﻿2008-07-15  chryjs  <chryjs!@!free!.!fr>
 
+ * 0.5.0.5 Apposition d'un numero de version pour les changements deja apportes
+ * correction des inclusions liees au deplacement de recuperer_fonds
+ * simplification du HTML des pages racine pour eviter la redondance et simplifier l'integration au format utilisateur
+ * correction entete c_inc_teteforum : le parametre avait été mis en commentaire !!! (gloups...)
+ * 0.5.1 ces corrections memes mineures meritent de distinguer la version (surtout en cas de bug) + revision spip SVN
+
+
+
+2008-07-15  chryjs  <chryjs!@!free!.!fr>
+
  * 0.5.0.4 Cette version est dédiée à SPIP SVN pas la 1.9.2 !!...
 
 
