@@ -3,6 +3,9 @@
 //ce fichier doit contenir plusieurs tableaux 
 function bible_tableau($i){
 	
+	$gateway_to_unboud = array
+	(1=>'01O',2=>'02O',3=>'03O',4=>'04O',5=>'05O',6=>'06O',7=>'07O',8=>'08O',9=>'09O',10=>'10O',11=>'11O',12=>'12O',13=>'13O',14=>'14O',15=>'15O',16=>'16O',19=>'17O',22=>'18O',23=>'19O',24=>'20O',25=>'21O',26=>'22O',29=>'23O',30=>'24O',31=>'25O',33=>'26O',34=>'27O',35=>'28O',36=>'29O',37=>'30O',38=>'31O',39=>'32O',40=>'33O',41=>'34O',42=>'35O',43=>'36O',44=>'37O',45=>'38O',46=>'39O',47=>'40N',48=>'41N',49=>'42N',50=>'43N',51=>'44N',52=>'45N',53=>'46N',54=>'47N',55=>'48N',56=>'49N',57=>'50N',58=>'51N',59=>'52N',60=>'53N',61=>'54N',62=>'55N',63=>'56N',64=>'57N',65=>'58N',66=>'59N',67=>'60N',68=>'61N',69=>'62N',70=>'63N',71=>'64N',72=>'65N',73=>'66N',17=>'67A',18=>'68A',27=>'70A',28=>'71A',32=>'72A',20=>'77A',21=>'78A');
+
 	$tableau_langue_original = array(
 		'grc'=>'ltr',
 		'hbo'=>'rtl',
@@ -10,6 +13,18 @@ function bible_tableau($i){
 		);
 	
 	$tableau_traduction = array(
+	'luther1912'		=> array(
+		
+		'unbound'=>'german_luther_1912_ucs2',
+		'traduction'=> 'Bibel von Luther (1912)',
+		'lang'		=>'de'
+			),
+	'luther1545'		=> array(
+		
+		'unbound'=>'german_luther_1545_ucs2',
+		'traduction'=> 'Bibel von Luther (1545)',
+		'lang'		=>'de'
+			),
 	'lxx'		=> array(
 		'wissen' 	=> 'septuaginta-lxx',
 		'gateway'	=> false,
@@ -245,6 +260,8 @@ $tableau_separateur = array(
 			return $tableau_livres;
 		case 'original':
 			return $tableau_langue_original;
+		case 'unbound':
+			return $gateway_to_unboud;
 	}
 };
 

@@ -39,6 +39,20 @@
 				</select>
 			</li>
 			<li>
+				
+				<label for="traduction_de"><:bible:cfg_traduction_de:></label>
+				<select name="traduction_de"  id="traduction_de">
+					<option value="luther1545" [selected="(#ENV{traduction_de}|=={luther1545})"]>
+							[(#ENV|traduction_longue{luther1545})]
+					</option>
+					<option value="luther1912" [selected="(#ENV{traduction_de}|=={luther1912})"]>
+							[(#ENV|traduction_longue{luther1912})]
+					</option>
+				</select>
+			</li>
+
+			
+			<li>
 					<label for="numeros"><:bible:cfg_numeros:></label>
 					<input type="checkbox" name="numeros"  id="numeros" [checked="(#ENV{numeros})"]  value="oui" />
 				

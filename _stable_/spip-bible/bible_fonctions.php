@@ -16,6 +16,7 @@ function bible_install($action){
 				ecrire_config('bible/ref','oui');
 				ecrire_config('bible/traduction_fr','jerusalem');
 				ecrire_config('bible/traduction_en','kj');
+				ecrire_config('bible/traduction_de','luther1545');
 				}
 			break;
 			
@@ -28,6 +29,7 @@ function bible_install($action){
 				effacer_config('bible/traduction');
 				effacer_config('bible/traduction_fr');
 				effacer_config('bible/traduction_en');
+				effacer_config('bible/traduction_de');
 			}
 			break;
 			
@@ -60,6 +62,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	
 	$gateway = $tableau_traduction[$traduction]['gateway'];
 	$wissen  = $tableau_traduction[$traduction]['wissen'];
+	$unbound = $tableau_traduction[$traduction]['unbound'];
 	$lang = $tableau_traduction[$traduction]['lang'];
 	$lang_original = $lang;
 	
@@ -140,8 +143,13 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	
 	
 	//}
-	
-	if ($wissen){
+	if ($unbound){
+		include_spip('traduction/unbound');
+		$texte = '<quote>'.recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$unbound,$lang);
+	}
+		
+		
+	else if ($wissen){
 		
 		include_spip('traduction/wissen');
 		$texte = '<quote>'.recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$wissen,$lang);
