@@ -4,19 +4,19 @@
 <!-- icone=bible_cfg.jpg -->
 <form action="#SELF" method="post">
 [<div>(#ENV{_cfg_}|form_hidden)</div>]
-	
+	#BIBLE_CFG
 	<ul>
 	<div id="explication"><bible:cfg_explication:></div>
 			<li>
 					<label for="traduction_fr"><:bible:cfg_traduction_fr:></label>
 					<select name="traduction_fr"  id="traduction_fr">
-						<option value="jerusalem" [selected="(#ENV{traduction_fr}|=={kj})"]>
+						<option value="jerusalem" [selected="(#ENV{traduction_fr}|=={jerusalem})"]>
 						[(#ENV|traduction_longue{jerusalem})]
 						</option>
-						<option value="lsg" [selected="(#ENV{traduction_fr}|=={kj})"]>
+						<option value="lsg" [selected="(#ENV{traduction_fr}|=={lsg})"]>
 						[(#ENV|traduction_longue{lsg})]
 						</option>
-						<option value="bds" [selected="(#ENV{traduction_fr}|=={kj})"]>
+						<option value="bds" [selected="(#ENV{traduction_fr}|=={bds})"]>
 						[(#ENV|traduction_longue{bds})]
 						</option>
 						
@@ -30,10 +30,10 @@
 					<option value="kj" [selected="(#ENV{traduction_en}|=={kj})"]>
 							[(#ENV|traduction_longue{kj})]
 					</option>
-					<option value="kj21" [selected="(#ENV{traduction_en}|=={kj})"]>
+					<option value="kj21" [selected="(#ENV{traduction_en}|=={kj21})"]>
 							[(#ENV|traduction_longue{kj21})]
 					</option>
-					<option value="darb_en" [selected="(#ENV{traduction_en}|=={kj})"]>
+					<option value="darb_en" [selected="(#ENV{traduction_en}|=={darb_en})"]>
 							[(#ENV|traduction_longue{darb_en})]
 					</option>
 				</select>
