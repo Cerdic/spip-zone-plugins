@@ -49,154 +49,154 @@ function inscription2_upgrade(){
 		//insertion des infos par defaut
 		$lala = $GLOBALS['meta']['inscription2'];
 		
-		if(!$lala){
-		    ecrire_config(
-		        'inscription2',
-		        array(
-		            'nom' => 'on',
-		            'nom_obligatoire' => 'on',
-		            'nom_fiche_mod' => 'on',
-		            'nom_fiche' => 'on',
-		            'nom_table' => 'on',
-		            'email' => 'on',
-		            'email_obligatoire' => 'on',
-		            'email_fiche_mod' => NULL,
-		            'email_fiche' => NULL,
-		            'email_table' => NULL,
-		            'nom_famille' => 'on',
-		            'nom_famille_obligatoire' => NULL,
-		            'nom_famille_fiche_mod' => NULL,
-		            'nom_famille_fiche' => NULL,
-		            'nom_famille_table' => 'on',
-		            'prenom' => 'on',
-		            'prenom_obligatoire' => NULL,
-		            'prenom_fiche_mod' => NULL,
-		            'prenom_fiche' => NULL,
-		            'prenom_table' => 'on',
-		            'login' => 'on',
-		            'login_obligatoire' => NULL,
-		            'login_fiche_mod' => 'on',
-		            'login_fiche' => NULL,
-		            'login_table' => NULL,
-		            'naissance' => NULL,
-		            'naissance_obligatoire' => NULL,
-		            'naissance_fiche_mod' => NULL,
-		            'naissance_fiche' => NULL,
-		            'naissance_table' => NULL,
-		            'sexe' => NULL,
-		            'sexe_obligatoire' => NULL,
-		            'sexe_fiche_mod' => NULL,
-		            'sexe_fiche' => NULL,
-		            'sexe_table' => NULL,
-		            'adresse' => 'on',
-		            'adresse_obligatoire' => NULL,
-		            'adresse_fiche_mod' => 'on',
-		            'adresse_fiche' => NULL,
-		            'adresse_table' => NULL,
-		            'code_postal' => 'on',
-		            'code_postal_obligatoire' => NULL,
-		            'code_postal_fiche_mod' => 'on',
-		            'code_postal_fiche' => NULL,
-		            'code_postal' => NULL,
-		            'ville' => 'on',
-		            'ville_obligatoire'  => NULL,
-		            'ville_fiche_mod' => 'on',
-		            'ville_fiche' => NULL,
-		            'ville_table' => 'on',
-		            'pays' => NULL,
-		            'pays_obligatoire' => NULL,
-		            'pays_fiche_mod' => NULL,
-		            'pays_fiche' => NULL,
-		            'pays_table' => NULL,
-		            'telephone' => 'on',
-		            'telephone_obligatoire' => NULL,
-		            'telephone_fiche_mod' => 'on',
-		            'telephone_fiche' => NULL,
-		            'telephone_table' => NULL,
-		            'fax' => NULL,
-		            'fax_obligatoire' => NULL,
-		            'fax_fiche_mod' => NULL,
-		            'fax_fiche' => NULL,
-		            'fax_table' => NULL,
-		            'mobile' => NULL,
-		            'mobile_obligatoire' => NULL,
-		            'mobile_fiche_mod' => NULL,
-		            'mobile_fiche' => NULL,
-		            'mobile_table' => NULL,
-		            'commentaire' => 'on',
-		            'commentaire_obligatoire' => NULL,
-		            'commentaire_fiche_mod' => NULL,
-		            'commentaire_fiche' => NULL,
-		            'commentaire_table' => NULL,
-		            'profession' => NULL,
-		            'profession_obligatoire' => NULL,
-		            'profession_fiche_mod' => NULL,
-		            'profession_fiche' => NULL,
-		            'profession_table' => NULL,
-		            'societe' => NULL,
-		            'societe_obligatoire' => NULL,
-		            'societe_fiche_mod' => NULL,
-		            'societe_fiche' => NULL,
-		            'societe_table' => NULL,
-		            'url_societe' => NULL,
-		            'url_societe_obligatoire' => NULL,
-		            'url_societe_fiche_mod' => NULL,
-		            'url_societe_fiche' => NULL,
-		            'url_societe_table' => NULL,
-		            'secteur' => NULL,
-		            'secteur_obligatoire' => NULL,
-		            'secteur_fiche_mod' => NULL,
-		            'secteur_fiche' => NULL,
-		            'secteur_table' => NULL,
-		            'fonction' => NULL,
-		            'fonction_obligatoire' => NULL,
-		            'fonction_fiche_mod' => NULL,
-		            'fonction_table' => NULL,
-		            'adresse_pro' => NULL,
-		            'adresse_pro_obligatoire' => NULL,
-		            'adresse_pro_fiche_mod' => NULL,
-		            'adresse_pro_fiche' => NULL,
-		            'adresse_pro_table' => NULL,
-		            'code_postal_pro' => NULL,
-		            'code_postal_pro_obligatoire' => NULL,
-		            'code_postal_pro_fiche_mod' => NULL,
-		            'code_postal_pro_fiche' => NULL,
-		            'code_postal_pro_table' => NULL,
-		            'ville_pro' => NULL,
-		            'ville_pro_obligatoire' => NULL,
-		            'ville_pro_fiche_mod' => NULL,
-		            'ville_pro_fiche' => NULL,
-		            'ville_pro_table' => NULL,
-		            'pays_pro' => NULL,
-		            'pays_pro_obligatoire' => NULL,
-		            'pays_pro_fiche_mod' => NULL,
-		            'pays_pro_fiche' => NULL,
-		            'pays_pro_table' => NULL,
-		            'telephone_pro' => NULL,
-		            'telephone_pro_obligatoire' => NULL,
-		            'telephone_pro_fiche_mod' => NULL,
-		            'telephone_pro_fiche' => NULL,
-		            'telephone_pro_table' => NULL,
-		            'fax_pro' => NULL,
-		            'fax_pro_obligatoire' => NULL,
-		            'fax_pro_fiche_mod' => NULL,
-		            'fax_pro_fiche' => NULL,
-		            'fax_pro_table' => NULL,
-		            'mobile_pro' => NULL,
-		            'mobille_pro_obligatoire' => NULL,
-		            'mobile_pro_fiche_mod' => NULL,
-		            'mobile_pro_fiche' => NULL,
-		            'mobile_pro_table' => NULL,
-		            'publication' => NULL,
-		            'domaines' => NULL,
-		            'divers' => NULL,
-		            'statut_nouveau' => '6forum',
-		            'creation' => NULL,
-		            'statut_int' => NULL,
-		            'statut_interne' => ''		            
-		        )
-	        );
-		}
+	if(!$lala){
+	ecrire_config(
+	'inscription2',
+	array(
+	'nom' => 'on',
+	'nom_obligatoire' => 'on',
+	'nom_fiche_mod' => 'on',
+	'nom_fiche' => 'on',
+	'nom_table' => 'on',
+	'email' => 'on',
+	'email_obligatoire' => 'on',
+	'email_fiche_mod' => NULL,
+	'email_fiche' => NULL,
+	'email_table' => NULL,
+	'nom_famille' => 'on',
+	'nom_famille_obligatoire' => NULL,
+	'nom_famille_fiche_mod' => NULL,
+	'nom_famille_fiche' => NULL,
+	'nom_famille_table' => 'on',
+	'prenom' => 'on',
+	'prenom_obligatoire' => NULL,
+	'prenom_fiche_mod' => NULL,
+	'prenom_fiche' => NULL,
+	'prenom_table' => 'on',
+	'login' => 'on',
+	'login_obligatoire' => NULL,
+	'login_fiche_mod' => 'on',
+	'login_fiche' => NULL,
+	'login_table' => NULL,
+	'naissance' => NULL,
+	'naissance_obligatoire' => NULL,
+	'naissance_fiche_mod' => NULL,
+	'naissance_fiche' => NULL,
+'naissance_table' => NULL,
+	'sexe' => NULL,
+	'sexe_obligatoire' => NULL,
+	'sexe_fiche_mod' => NULL,
+	'sexe_fiche' => NULL,
+	'sexe_table' => NULL,
+	'adresse' => 'on',
+	'adresse_obligatoire' => NULL,
+	'adresse_fiche_mod' => 'on',
+	'adresse_fiche' => NULL,
+	'adresse_table' => NULL,
+	'code_postal' => 'on',
+	'code_postal_obligatoire' => NULL,
+	'code_postal_fiche_mod' => 'on',
+	'code_postal_fiche' => NULL,
+	'code_postal' => NULL,
+	'ville' => 'on',
+	'ville_obligatoire'  => NULL,
+	'ville_fiche_mod' => 'on',
+	'ville_fiche' => NULL,
+	'ville_table' => 'on',
+	'pays' => NULL,
+	'pays_obligatoire' => NULL,
+	'pays_fiche_mod' => NULL,
+	'pays_fiche' => NULL,
+	'pays_table' => NULL,
+	'telephone' => 'on',
+	'telephone_obligatoire' => NULL,
+	'telephone_fiche_mod' => 'on',
+	'telephone_fiche' => NULL,
+	'telephone_table' => NULL,
+	'fax' => NULL,
+	'fax_obligatoire' => NULL,
+	'fax_fiche_mod' => NULL,
+	'fax_fiche' => NULL,
+	'fax_table' => NULL,
+	'mobile' => NULL,
+	'mobile_obligatoire' => NULL,
+	'mobile_fiche_mod' => NULL,
+	'mobile_fiche' => NULL,
+	'mobile_table' => NULL,
+	'commentaire' => 'on',
+	'commentaire_obligatoire' => NULL,
+	'commentaire_fiche_mod' => NULL,
+	'commentaire_fiche' => NULL,
+	'commentaire_table' => NULL,
+	'profession' => NULL,
+	'profession_obligatoire' => NULL,
+	'profession_fiche_mod' => NULL,
+	'profession_fiche' => NULL,
+	'profession_table' => NULL,
+	'societe' => NULL,
+	'societe_obligatoire' => NULL,
+	'societe_fiche_mod' => NULL,
+	'societe_fiche' => NULL,
+	'societe_table' => NULL,
+	'url_societe' => NULL,
+	'url_societe_obligatoire' => NULL,
+	'url_societe_fiche_mod' => NULL,
+	'url_societe_fiche' => NULL,
+	'url_societe_table' => NULL,
+	'secteur' => NULL,
+	'secteur_obligatoire' => NULL,
+	'secteur_fiche_mod' => NULL,
+	'secteur_fiche' => NULL,
+	'secteur_table' => NULL,
+	'fonction' => NULL,
+	'fonction_obligatoire' => NULL,
+	'fonction_fiche_mod' => NULL,
+	'fonction_table' => NULL,
+	'adresse_pro' => NULL,
+	'adresse_pro_obligatoire' => NULL,
+	'adresse_pro_fiche_mod' => NULL,
+	'adresse_pro_fiche' => NULL,
+'adresse_pro_table' => NULL,
+'code_postal_pro' => NULL,
+'code_postal_pro_obligatoire' => NULL,
+'code_postal_pro_fiche_mod' => NULL,
+'code_postal_pro_fiche' => NULL,
+'code_postal_pro_table' => NULL,
+'ville_pro' => NULL,
+'ville_pro_obligatoire' => NULL,
+'ville_pro_fiche_mod' => NULL,
+'ville_pro_fiche' => NULL,
+'ville_pro_table' => NULL,
+'pays_pro' => NULL,
+'pays_pro_obligatoire' => NULL,
+'pays_pro_fiche_mod' => NULL,
+'pays_pro_fiche' => NULL,
+'pays_pro_table' => NULL,
+'telephone_pro' => NULL,
+      'telephone_pro_obligatoire' => NULL,
+      'telephone_pro_fiche_mod' => NULL,
+      'telephone_pro_fiche' => NULL,
+      'telephone_pro_table' => NULL,
+            'fax_pro' => NULL,
+            'fax_pro_obligatoire' => NULL,
+            'fax_pro_fiche_mod' => NULL,
+            'fax_pro_fiche' => NULL,
+            'fax_pro_table' => NULL,
+            'mobile_pro' => NULL,
+            'mobille_pro_obligatoire' => NULL,
+            'mobile_pro_fiche_mod' => NULL,
+            'mobile_pro_fiche' => NULL,
+            'mobile_pro_table' => NULL,
+            'publication' => NULL,
+            'domaines' => NULL,
+            'divers' => NULL,
+            'statut_nouveau' => '6forum',
+            'creation' => NULL,
+	            'statut_int' => NULL,
+	            'statut_interne' => ''		            
+	        )
+        );
+	}
 	
 		//ajouts des differents champs ecris dans les metas
 		if (is_array(lire_config('inscription2'))){
@@ -257,7 +257,7 @@ function inscription2_upgrade(){
 		echo "Inscription2 update @ 0.6<br/>Spip_pays devient spip_geo_pays homogeneite avec spip_geo";
 		ecrire_meta('inscription2_version',$current_version=0.6);
 	}
-		// Si la version installee est inferieur a O.6 on fait l homogeneisation avec spip_geo
+		// Si la version installee est inferieur a 0.6 on fait l homogeneisation avec spip_geo
 	if ($current_version<0.61){
 		include_spip('base/abstract_sql');
 		$table_pays = "spip_geo_pays";
@@ -274,31 +274,30 @@ function inscription2_upgrade(){
 	if ($current_version<0.62){
 		include_spip('base/abstract_sql');
 		
-        ecrire_config(
-        'inscription2',
-        array(
-            'id_societe' => NULL,
-            'id_societe_obligatoire' => NULL,
-            'id_societe_fiche_mod' => NULL,
-            'id_societe_fiche' => NULL,
-            'id_societe_table' => NULL)
-        );
-        
-        
-    	$spip_societes['id_societe'] = "bigint(21) NOT NULL";
-	    $spip_societes['nom'] = "text NOT NULL ";
-	    $spip_societes['secteur'] = "text NOT NULL ";
-	    $spip_societes['adresse'] = "text NOT NULL ";
-	    $spip_societes['code_postal'] = "text NOT NULL ";
-	    $spip_societes['ville'] = "text NOT NULL ";
-	    $spip_societes['id_pays'] = "bigint(21) NOT NULL";
-	    $spip_societes['telephone'] = "text NOT NULL ";
-                
-        $spip_societes_key = array('PRIMARY KEY' => 'id_societe', 'KEY id_pay' => 'id_pays');
-        
-        sql_create('spip_societes', $spip_societes,$spip_societes_key,true);
-    	
-		echo "Inscription2 update @ 0.62<br/>On gére les societes aussi dans une table";
+		ecrire_config(
+			'inscription2',
+			array(
+			'id_societe' => NULL,
+			'id_societe_obligatoire' => NULL,
+			'id_societe_fiche_mod' => NULL,
+			'id_societe_fiche' => NULL,
+			'id_societe_table' => NULL)
+		);
+		
+		$spip_societes['id_societe'] = "bigint(21) NOT NULL";
+		$spip_societes['nom'] = "text NOT NULL ";
+		$spip_societes['secteur'] = "text NOT NULL ";
+		$spip_societes['adresse'] = "text NOT NULL ";
+		$spip_societes['code_postal'] = "text NOT NULL ";
+		$spip_societes['ville'] = "text NOT NULL ";
+		$spip_societes['id_pays'] = "bigint(21) NOT NULL";
+		$spip_societes['telephone'] = "text NOT NULL ";
+		
+		$spip_societes_key = array('PRIMARY KEY' => 'id_societe', 'KEY id_pay' => 'id_pays');
+		
+		sql_create('spip_societes', $spip_societes,$spip_societes_key,true);
+		
+		echo "Inscription2 update @ 0.62<br/>On gere les societes aussi dans une table";
 		ecrire_meta('inscription2_version',$current_version=0.62);
 	}
 		
@@ -306,10 +305,10 @@ function inscription2_upgrade(){
 }
 
 
-	//supprime les données depuis la table spip_auteurs_ajouts
+	//supprime les donnees depuis la table spip_auteurs_elargis
 	function inscription2_vider_tables() {
 		include_spip('base/abstract_sql');
-		//supprime la table spip_auteurs_ajouts
+		//supprime la table spip_auteurs_elargis
 		$desc = sql_showtable('spip_auteurs_elargis', '', true);
 		foreach(lire_config('inscription2') as $cle => $val){
 			if(isset($desc['field'][$cle])	and $cle != 'id' and $cle != 'id_auteur' and $cle != 'spip_listes_format'){

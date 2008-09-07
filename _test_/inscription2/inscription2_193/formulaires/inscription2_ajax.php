@@ -35,9 +35,9 @@ function formulaires_inscription2_ajax_charger_dist($id_auteur = NULL){
 			'id_auteur ='.$id_auteur            
 		);
 
-		$valeurs = $auteur;
+		$champs = $auteur;
 	}
-	return $valeurs;
+	return $champs;
 }
 
 function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
@@ -47,16 +47,41 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 	
 	//initialise le tableau des erreurs
 	$erreurs = array();
-	
+				
 	//messages d'erreur au cas par cas
 	//vérifier les champs obligatoire
 	foreach (lire_config('inscription2/') as $clef => $valeur) {
-		//decoupe la clef sous le forme $resultat[0] = $resultat[1] ."_obligatoire"
-		//?: permet de rechercher la chaine sans etre retournée dans les résultats        
-		preg_match('/^(.*)(?:_obligatoire)/i', $clef, $resultat);        
-		//si clef obligatoire, obligatoire activé et _request() vide alors erreur
-		if ($resultat[1] && $valeur == 'on' && !_request($resultat[1])) {
-			$erreurs[$resultat[1]] = _T('inscription2:champ_obligatoire');   
+		$champs = ereg_replace("_(obligatoire|fiche|table|mod)", "", $clef);
+		
+		if ($champs && $valeur == 'on'){
+			if(preg_match('/^code_postal/', $champs)){
+				$cp = _request($champs);
+				$erreur = inscription2_valide_cp($cp);
+				$erreurs[$champs] = $erreur;
+			}
+			else if((preg_match('/^telephone/', $champs))||(preg_match('/^fax/', $champs))||(preg_match('/^mobile/', $champs))){
+				$numero = _request($champs);
+				$erreur = inscription2_valide_numero($numero);
+				$erreurs[$champs] = $erreur;
+			}
+			
+			//pipeline pour la verifications des donnees de plugins tiers
+			else {
+				$erreurs[$champs] = pipeline('i2_validation_formulaire',
+					array(
+						'args' => array(
+							'champs' => $champs,
+							'valeur' => _request($champs)
+						),
+					'data' => null
+					)
+				);
+			}
+			
+			//si clef obligatoire, obligatoire activé et _request() vide alors erreur
+			if (!$erreurs[$champs] && (lire_config('inscription2/'.$champs.'_obligatoire') == 'on') && !_request($champs)) {
+				$erreurs[$champs] = _T('inscription2:champ_obligatoire');
+			}
 		}
 	}
 
@@ -191,11 +216,12 @@ function inscription2_champs_formulaire() {
 	
 		if ((!empty($resultat[1])) && (lire_config('inscription2/'.$resultat[1]) == 'on')) {
 			$valeurs[] = $resultat[1];
+			$valeur = _request($resultat[1]);
+			$valeurs[$resultat[1]] = $valeur;
 		}
 	}
 	return $valeurs;
 }
-
 /*
 // http://doc.spip.org/@test_inscription_dist
 function test_inscription_dist($mode, $mail, $nom, $id=0) {
@@ -209,4 +235,31 @@ function test_inscription_dist($mode, $mail, $nom, $id=0) {
 }
 */
 
+function inscription2_valide_cp($cp){
+	if(!$cp){
+		return;
+	}
+	else{
+		if(preg_match('/^[A-Z]{1,2}[-|\s][0-9]{3,6}$|^[0-9]{3,6}$|^[0-9|A-Z]{2,5}[-|\s][0-9|A-Z]{2,4}$|^[A-Z]{1,2} [0-9|A-Z]{2,5}[-|\s][0-9|A-Z]{2,4}/i',$cp)){
+			return;
+		}
+		else{
+			return _T('inscription2:cp_valide');
+		}
+	}
+}
+
+function inscription2_valide_numero($numero){
+	if(!$numero){
+		return;
+	}
+	else{
+		if(preg_match('/^[0-9\+\. \-]+$/',$numero)){
+			return;
+		}
+		else{
+			return _T('inscription2:numero_tva_valide');
+		}
+	}
+}
 ?>
