@@ -9,7 +9,7 @@
 
 <BOUCLE_primale(RUBRIQUES){id_rubrique}>
 
-<INCLURE{fond=inc_teteforum}{id_rubrique}>
+<INCLURE(session.php){fond=inc_teteforum}{id_rubrique}>
 
 	<BOUCLE_rubrique_principal(RUBRIQUES){id_secteur}{racine}>
 
@@ -67,7 +67,7 @@
 
 [(#MODELE{bloc_informations}{id_rubrique})]
 
-<INCLURE{fond=inc_piedforum}{id_rubrique=#ENV{id_rubrique}}>
+<INCLURE(session.php){fond=inc_piedforum}{id_rubrique=#ENV{id_rubrique}}>
 
 	[(#REM) si visiteur non identifie : form login ]
 	[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:spipbb:login:></p>]
