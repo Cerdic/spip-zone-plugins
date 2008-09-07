@@ -85,10 +85,10 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 		
 	$debut = $tableau[0];
 	
-	$livre = eregi_replace('[0-9]+','',$debut);
+	$livre = eregi_replace('[0-9|,|-]+','',$debut);
 	
 	if (array_key_exists($livre,$livres) == false){
-		return _T('pas_livre');
+		return _T('bible:pas_livre');
 	
 	};
 	
