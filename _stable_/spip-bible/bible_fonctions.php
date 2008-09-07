@@ -43,7 +43,9 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	$tableau_traduction = bible_tableau('traduction');
 	$tableau_separateur = bible_tableau('separateur');
 	$tableau_livres = bible_tableau('livres');
+	$langues_originales = bible_tableau('original');
 	global $spip_lang;
+	
 	$traduction = strtolower($traduction);
 	
 	$erreur = true;
@@ -57,13 +59,27 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	
 	
 	$gateway = $tableau_traduction[$traduction]['gateway'];
+	$wissen  = $tableau_traduction[$traduction]['wissen'];
 	$lang = $tableau_traduction[$traduction]['lang'];
-	$livres =  $tableau_livres[$lang];
+	$lang_original = $lang;
+	
+	
+	
+	//si langue originel
+	foreach ($langues_originales as $i=>$dir){
+		if ($i ==$lang){
+		$original = true;
+		$lang	  = $spip_lang;
+		$lang_original = $i;
+		$dir = $dir;
+		include_spip('inc/lang');
+		break;
+		}
+	
+	}
+	
 	$separateur = $tableau_separateur[$lang];
-	
-	
-	
-	
+	$livres=$tableau_livres[$lang];
 	// phase d'anaylse
 	
 	$livre = strtolower($livre);
@@ -125,7 +141,14 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	
 	//}
 	
-	if ($gateway){
+	if ($wissen){
+		
+		include_spip('traduction/wissen');
+		$texte = '<quote>'.recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$wissen,$lang);
+		
+		}
+	
+	else if ($gateway){
 		
 		include_spip('traduction/gateway');
 		$texte = '<quote>'.recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$gateway,$lang);
@@ -143,30 +166,37 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 		$texte = eregi_replace('<sup>[0-9]+ </sup>','',$texte);
 		$texte = eregi_replace('<strong>[0-9]+</strong>','',$texte);
 	}
-	//$texte = preg_replace('/[\r\n]/m', '', $texte);
-	//$texte = str_replace('. <sup> ','.</sup>',$texte);
-	//$texte = str_replace(', <sup>',',<sup>',$texte);
+	
+	
 	if ($retour=='non'){
 		$texte = eregi_replace('<br />','',$texte);
 	}
 	
 	if ($ref!='non'){
-		$texte .= afficher_references($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$traduction,$separateur);
+		if ($original){
+			$texte .= '<div lang="'.$lang.'" dir="'.lang_dir($lang).'">'.afficher_references($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$traduction,$separateur,$lang).'</div>';
+
+			}
+		
+		else{
+			$texte .= afficher_references($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$traduction,$separateur,$lang);
+			}
 		}
-	if ($spip_lang == $lang) {
+	
+	if ($spip_lang == $lang_original) {
 		return $texte.'</quote>';
 		}
 	else
-		{return '<div lang="'.$lang.'">'.$texte.'</quote></div>';
+		{return '<div lang="'.$lang_original.'" dir="'.$dir.'">'.$texte.'</quote></div>';
 	}
 }
 
-function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur){
-	$tableau_traduction = bible_tableau('traduction');;
+function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang){
+	$tableau_traduction = bible_tableau('traduction');
 	$tableau_livres = bible_tableau('livres');
 	$trad = $tableau_traduction[$trad]['traduction'];
 	
-	$livre_long = $tableau_livres[$tableau_traduction[$traduction]['lang']] ;
+	$livre_long = $tableau_livres[$lang][$livre] ;
 	
 	$livre = str_replace('1','1 ',$livre);
 	$livre = str_replace('2','2 ',$livre);

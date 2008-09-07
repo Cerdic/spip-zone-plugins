@@ -2,7 +2,33 @@
 
 //ce fichier doit contenir plusieurs tableaux 
 function bible_tableau($i){
+	
+	$tableau_langue_original = array(
+		'grc'=>'ltr',
+		'hbo'=>'rtl',
+		'lat'=>'ltr'
+		);
+	
 	$tableau_traduction = array(
+	'lxx'		=> array(
+		'wissen' 	=> 'septuaginta-lxx',
+		'gateway'	=> false,
+		'traduction'=> 'Septante',
+		'lang'		=>'grc'
+			),
+	'vulg'		=> array(
+		'wissen' 	=> 'biblia-sacra-vulgata',
+		'gateway'	=> false,
+		'traduction'=> 'Biblia Sacra Vulgata',
+		'lang'		=>'lat'
+			),
+		
+	'bhs'		=> array(
+		'wissen' 	=> 'biblia-hebraica-stuttgartensia-bhs',
+		'gateway'	=> false,
+		'traduction'=> 'Biblia Hebra&iuml;ca Stuttgartensia',
+		'lang'		=>'hbo'
+				),
 	'na'		=> array(
 		'traduction'=> 'Nestl&eacute;-Aland',
 		'gateway'	=> false,
@@ -217,6 +243,8 @@ $tableau_separateur = array(
 			return $livre_gateways;
 		case 'livres':
 			return $tableau_livres;
+		case 'original':
+			return $tableau_langue_original;
 	}
 };
 
