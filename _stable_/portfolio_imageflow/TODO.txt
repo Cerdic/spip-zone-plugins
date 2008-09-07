@@ -3,4 +3,5 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+- le "reset" en "configure" ne reset pas le lien sur l'image projetée.
 - verifier compatibilité longdesc dans lightbox avec Jaws et NVda, ... Ceci dit, pas très important, puisque le longdesc est déjà accessible via Jaws dans les vignettes.
