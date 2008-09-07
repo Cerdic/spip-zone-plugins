@@ -429,8 +429,10 @@ function alerte_maintenance() {
 function spipbb_admin_gauche($script,$modules) {
 	spipbb_log("entree:$script:".serialize($modules),1,"spipbb_admin_gauche");
 
-	$assembler = charger_fonction('assembler', 'public'); // recuperer_fond est dedans
-	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
+	// recuperer fond n'est plus dans public/assembler mais dans inc/utils
+	if (!function_exists('recuperer_fond')) include_spip('inc/utils');
+	/*$assembler = charger_fonction('assembler', 'public'); // recuperer_fond est dedans
+	if (!function_exists('recuperer_fond')) include_spip('public/assembler');*/
 	if (!function_exists('recuperer_fond')) {
 		spipbb_log("BUG recuperer_fond",1,"spipbb_admin_gauche");
 		die("BUG");
