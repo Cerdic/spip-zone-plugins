@@ -91,7 +91,7 @@
 				<td class="date_sujet">
 				[(#SET{affboutonadmin,[(#GET{admin}|!={'oui'}|?{'',' '})
 				<div class="bout_admin">
-					<a href="#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-off,#ID_ARTICLE|generer_url_article}" title="<:supprimer:>" class="delete">&nbsp;</a>
+					<a href="#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-off,#ID_ARTICLE|generer_url_entite{article}}" title="<:supprimer:>" class="delete">&nbsp;</a>
 				</div>
 				<div class="bout_admin">
 					<a href="[(#URL_PAGE{post_ip}|parametre_url{ip,#IP}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]" title="#IP" class="ip">&nbsp;</a>
@@ -221,7 +221,7 @@
 				#GET{affboutonciter}
 				[(#SET{affboutonadminp,[(#GET{admin}|!={'oui'}|?{'',' '})
 				<div class="bout_admin">
-					<a href="#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-off,#ID_ARTICLE|generer_url_article}" title="<:supprimer:>" class="delete">&nbsp;</a>
+					<a href="#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-off,#ID_ARTICLE|generer_url_entite{article}}" title="<:supprimer:>" class="delete">&nbsp;</a>
 				</div>
 				<div class="bout_admin">
 					<a href="[(#URL_PAGE{post_ip}|parametre_url{ip,#IP}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]" title="#IP" class="ip">&nbsp;</a>
@@ -314,7 +314,7 @@
 				#GET{affboutonciter}
 				[(#SET{affboutonadminpr,[(#GET{admin}|!={'oui'}|?{'',' '})
 				<div class="bout_admin">
-					<a href="#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-off,#ID_ARTICLE|generer_url_article}" title="<:supprimer:>" class="delete">&nbsp;</a>
+					<a href="#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-off,#ID_ARTICLE|generer_url_entite{article}}" title="<:supprimer:>" class="delete">&nbsp;</a>
 				</div>
 				<div class="bout_admin">
 					<a href="[(#URL_PAGE{post_ip}|parametre_url{ip,#IP}|parametre_url{id_forum,#ID_FORUM}|parametre_url{retour,#SELF})]" title="#IP" class="ip">&nbsp;</a>
@@ -380,9 +380,9 @@
 	</div>
 	<div class="bout_admin"> [(#REM) Ici il faudrait faire un test ferme/ouvert ]
 		<?php if ( "#GET{sujetferme}"=="1" ) { ?>
-		<a href="#URL_ACTION_AUTEUR{spipbb_agir_forum,#ID_FORUM-ouvrir,#ID_ARTICLE|generer_url_article}" title="<:ouvrir:>" class="ouvrir">
+		<a href="#URL_ACTION_AUTEUR{spipbb_agir_forum,#ID_FORUM-ouvrir,#ID_ARTICLE|generer_url_entite{article}}" title="<:ouvrir:>" class="ouvrir">
 		<?php  } else { ?>
-		<a href="#URL_ACTION_AUTEUR{spipbb_agir_forum,#ID_FORUM-fermer,#ID_ARTICLE|generer_url_article}" title="<:fermer:>" class="fermer">
+		<a href="#URL_ACTION_AUTEUR{spipbb_agir_forum,#ID_FORUM-fermer,#ID_ARTICLE|generer_url_entite{article}}" title="<:fermer:>" class="fermer">
 		<?php } ?>
 		</a>
 	</div>

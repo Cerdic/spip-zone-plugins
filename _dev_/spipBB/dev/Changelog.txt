@@ -5,6 +5,7 @@
  * simplification du HTML des pages racine pour eviter la redondance et simplifier l'integration au format utilisateur
  * correction entete c_inc_teteforum : le parametre avait été mis en commentaire !!! (gloups...)
  * 0.5.1 ces corrections memes mineures meritent de distinguer la version (surtout en cas de bug) + revision spip SVN
+ * correction suite a http://zone.spip.org/trac/spip/changeset/12429 pour generer_url_article
 
 
 
