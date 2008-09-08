@@ -476,7 +476,7 @@ if(!function_exists('image_avec_reflet')) {
  * @see http://www.quesaco.org/Portfolio-ImageFlow-pour-SPIP#longdesc
  */
 if(!function_exists('longdesc_propre')) {
-	function longdesc_propre ($longdesc) {
+	function longdesc_propre ($longdesc, $charset = "iso-8859-1") {
 		$longdesc = trim($longdesc);
 		if(empty($longdesc)) {
 			return("");
@@ -495,10 +495,16 @@ if(!function_exists('longdesc_propre')) {
 				$is_uri = true;
 			}
 		}
+		if(!$is_uri && ($charset != $GLOBALS['meta']['charset']))
+		{
+			include_spip('inc/charsets');
+			$longdesc = charset2unicode($longdesc);
+			$longdesc = unicode2charset($longdesc, $charset);
+		}
 		$longdesc = 
 			($is_uri)
 			? $longdesc
-			: "data:text/plain;charset=".$GLOBALS['meta']['charset'].",".rawurlencode($longdesc)
+			: "data:text/plain;charset=".$charset.",".rawurlencode($longdesc)
 			;
 		return ($longdesc);
 	}
