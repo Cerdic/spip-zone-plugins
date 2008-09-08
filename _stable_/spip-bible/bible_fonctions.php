@@ -19,6 +19,7 @@ function bible_install($action){
 				ecrire_config('bible/traduction_fr','jerusalem');
 				ecrire_config('bible/traduction_en','kj');
 				ecrire_config('bible/traduction_de','luther1545');
+				ecrire_config('bible/traduction_es','dhh');
 				}
 			break;
 			
@@ -32,6 +33,8 @@ function bible_install($action){
 				effacer_config('bible/traduction_fr');
 				effacer_config('bible/traduction_en');
 				effacer_config('bible/traduction_de');
+				effacer_config('bible/traduction_es');
+				
 			}
 			break;
 			
