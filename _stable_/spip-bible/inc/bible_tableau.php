@@ -42,6 +42,24 @@ function bible_tableau($i,$lang){
 			'traduction'=> 'Bible de la Colombe',
 			'lang'=>'fr'	
 					),
+	'nachricht'		=> array(
+		
+		'wissen'=>'gute-nachricht-bibel',
+		'traduction'=> 'Gute Nachricht Bibel ',
+		'lang'		=>'de'
+			),
+	'menge'		=> array(
+		
+		'wissen'=>'Menge Bibel',
+		'traduction'=> 'Menge Bibel',
+		'lang'		=>'de'
+			),
+	'luther1984'		=> array(
+		
+		'wissen'=>'luther-bibel-1984',
+		'traduction'=> 'Bibel von Luther (1984)',
+		'lang'		=>'de'
+			),
 	'luther1912'		=> array(
 		
 		'unbound'=>'german_luther_1912_ucs2',
