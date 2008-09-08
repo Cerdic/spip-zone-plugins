@@ -4,6 +4,8 @@ Maïeul Rouquette Licence GPL 3
 Spip-Bible
 */
 
+
+
 function bible_install($action){
 	
 	switch($action){
@@ -242,7 +244,7 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang){
 	return $chaine.'</p>';
 
 }
-function traduction_longue($fictif,$i){
+function traduction_longue($i){
 	//$fictif ne sert à rien, mais c'est pour ne aps à avoir a faire appel à #VAL (car existe pas <2.0)
 	$tableau_traduction = bible_tableau('traduction');
 	return $tableau_traduction[$i]['traduction'];
@@ -252,5 +254,44 @@ function traduction_defaut($lang){
 	//pour compatibilite
 	$normal ='' ? $lire_config =lire_config('bible/traduction') : $normal = $normal;
 	return $normal;
+}
+
+function bible_generer_cfg($i){
+	$tableau_traduction = bible_tableau('traduction');
+	$tableau_separateur = bible_tableau('separateur');
+	$texte = '<form action="#SELF" method="post">
+[<div>(#ENV{_cfg_}|form_hidden)</div>]
+	
+	<ul>
+	<div id="explication"><bible:cfg_explication:></div>';
+	foreach ($tableau_separateur as $lang=>$j){
+		$texte .= '<li>
+					<label for="traduction_'.$lang.'"><:bible:cfg_traduction_'.$lang.':></label>
+					<select name="traduction_'.$lang.'"  id="traduction_'.$lang.'">'
+					;
+		foreach ($tableau_traduction as $traduction=>$tableau){
+			if ($lang==$tableau['lang']){
+				$texte .='<option value="'.$traduction.'" [selected="(#ENV{traduction_'.$lang.'}|=={'.$traduction.'})"]>
+				'.
+				traduction_longue($traduction).
+						'
+						
+						</option>
+						';
+			
+			}
+		
+		
+		} 
+		$texte.= 	'</select>
+				
+			</li>';
+
+		
+	}
+		
+
+
+	return $texte;
 }	
 ?>

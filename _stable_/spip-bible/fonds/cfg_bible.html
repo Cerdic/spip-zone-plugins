@@ -1,93 +1,99 @@
 <div class="formulaire_spip">
 
-<!-- titre=<:bible:cfg_configurer:> -->
+<!-- titre=Configurer le plugin Spip-Bible -->
 <!-- icone=bible_cfg.jpg -->
-<form action="#SELF" method="post">
+
+			<form action="#SELF" method="post">
 [<div>(#ENV{_cfg_}|form_hidden)</div>]
-	#BIBLE_CFG
+	
 	<ul>
-	<div id="explication"><bible:cfg_explication:></div>
-			<li>
+	<div id="explication"><bible:cfg_explication:></div><li>
 					<label for="traduction_fr"><:bible:cfg_traduction_fr:></label>
-					<select name="traduction_fr"  id="traduction_fr">
-						<option value="jerusalem" [selected="(#ENV{traduction_fr}|=={jerusalem})"]>
-						[(#ENV|traduction_longue{jerusalem})]
-						</option>
-						<option value="lsg" [selected="(#ENV{traduction_fr}|=={lsg})"]>
-						[(#ENV|traduction_longue{lsg})]
-						</option>
-						<option value="bds" [selected="(#ENV{traduction_fr}|=={bds})"]>
-						[(#ENV|traduction_longue{bds})]
-						</option>
-						<option value="tob" [selected="(#ENV{traduction_fr}|=={tob})"]>
-						[(#ENV|traduction_longue{tob})]
+					<select name="traduction_fr"  id="traduction_fr"><option value="tob" [selected="(#ENV{traduction_fr}|=={tob})"]>
+				Traduction Œcuménique de la Bible
+						
 						</option>
 						<option value="bfc" [selected="(#ENV{traduction_fr}|=={bfc})"]>
-						[(#ENV|traduction_longue{bfc})]
+				Bible en Français Courant
+						
 						</option>
 						<option value="nbs" [selected="(#ENV{traduction_fr}|=={nbs})"]>
-						[(#ENV|traduction_longue{nbs})]
+				Nouvelle Bible Segond
+						
 						</option>
 						<option value="pdv" [selected="(#ENV{traduction_fr}|=={pdv})"]>
-						[(#ENV|traduction_longue{pdv})]
+				La Bible Parole de Vie
+						
 						</option>
 						<option value="colombe" [selected="(#ENV{traduction_fr}|=={colombe})"]>
-						[(#ENV|traduction_longue{colombe})]
-						</option>
+				Bible de la Colombe
 						
-					</select>
+						</option>
+						<option value="jerusalem" [selected="(#ENV{traduction_fr}|=={jerusalem})"]>
+				Bible de J&eacute;rusalem
+						
+						</option>
+						<option value="lsg" [selected="(#ENV{traduction_fr}|=={lsg})"]>
+				Louis Segond 1910
+						
+						</option>
+						<option value="bds" [selected="(#ENV{traduction_fr}|=={bds})"]>
+				Bible du Semeur
+						
+						</option>
+						</select>
+				
+			</li><li>
+					<label for="traduction_en"><:bible:cfg_traduction_en:></label>
+					<select name="traduction_en"  id="traduction_en"><option value="kj21" [selected="(#ENV{traduction_en}|=={kj21})"]>
+				The 21st Century King James
+						
+						</option>
+						<option value="darb_en" [selected="(#ENV{traduction_en}|=={darb_en})"]>
+				Darby
+						
+						</option>
+						<option value="kj" [selected="(#ENV{traduction_en}|=={kj})"]>
+				King Jame
+						
+						</option>
+						</select>
+				
+			</li><li>
+					<label for="traduction_de"><:bible:cfg_traduction_de:></label>
+					<select name="traduction_de"  id="traduction_de"><option value="luther1912" [selected="(#ENV{traduction_de}|=={luther1912})"]>
+				Bibel von Luther (1912)
+						
+						</option>
+						<option value="luther1545" [selected="(#ENV{traduction_de}|=={luther1545})"]>
+				Bibel von Luther (1545)
+						
+						</option>
+						</select>
 				
 			</li>
-			<li>
-				
-				<label for="traduction_en"><:bible:cfg_traduction_en:></label>
-				<select name="traduction_en"  id="traduction_en">
-					<option value="kj" [selected="(#ENV{traduction_en}|=={kj})"]>
-							[(#ENV|traduction_longue{kj})]
-					</option>
-					<option value="kj21" [selected="(#ENV{traduction_en}|=={kj21})"]>
-							[(#ENV|traduction_longue{kj21})]
-					</option>
-					<option value="darb_en" [selected="(#ENV{traduction_en}|=={darb_en})"]>
-							[(#ENV|traduction_longue{darb_en})]
-					</option>
-				</select>
-			</li>
-			<li>
-				
-				<label for="traduction_de"><:bible:cfg_traduction_de:></label>
-				<select name="traduction_de"  id="traduction_de">
-					<option value="luther1545" [selected="(#ENV{traduction_de}|=={luther1545})"]>
-							[(#ENV|traduction_longue{luther1545})]
-					</option>
-					<option value="luther1912" [selected="(#ENV{traduction_de}|=={luther1912})"]>
-							[(#ENV|traduction_longue{luther1912})]
-					</option>
-				</select>
-			</li>
-
 			
 			<li>
-					<label for="numeros"><:bible:cfg_numeros:></label>
-					<input type="checkbox" name="numeros"  id="numeros" [checked="(#ENV{numeros})"]  value="oui" />
+					<label for="numeros">Afficher les n° de chapitres et de versets dans le corps du texte</label>
+					<input type="checkbox" name="numeros"  id="numeros"   value="oui" />
 				
 			</li>
 			
 			<li>
-					<label for="retour"><:bible:cfg_retour:></label>
-					<input type="checkbox" name="retour"  id="retour" [checked="(#ENV{retour})"]  value="oui" />
+					<label for="retour">Faire des retour à la ligne entre les versets</label>
+					<input type="checkbox" name="retour"  id="retour"   value="oui" />
 				
 			</li>
 			
 			<li>
-					<label for="ref"><:bible:cfg_ref:></label>
-					<input type="checkbox" name="ref"  id="ref" [checked="(#ENV{ref})"]  value="oui" />
+					<label for="ref">Afficher la r&eacute;f&eacute;rences du passage cit&eacute;</label>
+					<input type="checkbox" name="ref"  id="ref"   value="oui" />
 				
 			</li>
 		</ul>
 
-	<p class="boutons"><input type="submit" name="_cfg_ok" value="<:OK:>" />
-	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" /></p>
+	<p class="boutons"><input type="submit" name="_cfg_ok" value="ok" />
+	<input type="submit" name="_cfg_delete" value="supprimer" /></p>
 </fieldset></li>
 </form>
 </div>
