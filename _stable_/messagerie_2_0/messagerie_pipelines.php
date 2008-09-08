@@ -41,7 +41,7 @@ function messagerie_notifications($flux){
 	$quoi = $flux['args']['quoi'];
 	$id = $flux['args']['id'];
 	$options = $flux['args']['options'];
-	var_dump($quoi);
+
 	if ($quoi == 'envoyermessage') {
 		$qui = isset($options['id_auteur'])?intval($options['id_auteur']):intval($GLOBALS['visiteur_session']['id_auteur']);
 		$destinataires = isset($options['destinataires'])?$options['destinataires']:array();
