@@ -10,11 +10,15 @@ Module "Bible de Jérusalem"
 function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapitre_fin='',$verset_fin=''){
 	//recuperer le passage dans la bible de Jérusalem
 
+	include_spip("inc/bible_tableau");
 	
-	$petit_livre=array('Ab','Phm','2jn','3jn','Jude');
+	$petit_livre=bible_tableau('petit_livre','fr');
+	
 	foreach ($petit_livre as $i){
+		
 		if (strtolower($i)==strtolower($livre)){
 			$petit=true;
+			
 			$verset_debut=$chapitre_debut;
 			$verset_fin=$chapitre_fin;
 			$chapitre_fin=1;

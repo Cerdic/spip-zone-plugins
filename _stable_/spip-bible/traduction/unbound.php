@@ -12,6 +12,21 @@ function recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$v
 	
 	$id_livre = $gateway_to_bound[$livre_gateways[$lang][$livre]];
 	
+	//petit livre ?
+	$petit_livre=bible_tableau('petit_livre',$lang);
+
+	if (in_array(strtolower($livre),$petit_livre)) {
+		
+		$verset_debut=$chapitre_debut;
+		
+		$verset_fin = $chapitre_fin;
+		$chapitre_debut = 1;
+		$chapitre_fin = 1;
+	
+	} 
+
+	
+	
 	$url = "http://www.unboundbible.org/index.cfm?method=searchResults.doSearch&parallel_1=".$unbound."&book=".$id_livre."&from_chap=".$chapitre_debut."&from_verse=".$verset_debut."&to_chap=".$chapitre_fin."&to_verse=".$verset_fin;
 	
 	include_spip("inc/distant");

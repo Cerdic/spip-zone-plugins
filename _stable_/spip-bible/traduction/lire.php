@@ -4,24 +4,40 @@ function recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$v
 	
 	$url_base="http://lire.la-bible.net/texte.php?versions[]=".$lire;
 	
-	$i = $chapitre_debut;
+	
+	
+	
+	//petit livre ?
+	$petit_livre=bible_tableau('petit_livre',$lang);
+
+	if (in_array(strtolower($livre),$petit_livre)) {
+		
+		$verset_debut=$chapitre_debut;
+		
+		$verset_fin = $chapitre_fin;
+		$chapitre_debut = 1;
+		$chapitre_fin = 1;
+	
+	} 
+
 	
 	//determination de lu livre
 	include_spip('inc/bible_tableau');
 	$tableau = bible_tableau('lire_la_bible');
 	$livre =  $tableau[$livre];
+
 	
-	
-	//recuperation du passage
+		//recuperation du passage
 	include_spip("inc/distant");
 	include_spip("inc/charsets");
 	
 	
 	$texte = '';
-	
+	$i = $chapitre_debut;
 	while ($i<=$chapitre_fin){
 		$url = $url_base."&reference=".$livre."+".$i;
 		
+	
 		
 		$i == $chapitre_debut ? $debut = $verset_debut : $debut=1;
 		$i == $chapitre_fin ? $fin = $verset_fin : $fin = '';

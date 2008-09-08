@@ -1,7 +1,10 @@
 <?php
 
 //ce fichier doit contenir plusieurs tableaux 
-function bible_tableau($i){
+
+
+function bible_tableau($i,$lang){
+	
 	$lire_la_bible = array(
 		'1Ch' =>'1Chroniques',		'1R' =>'1Rois',		'1S' =>'1Samuel',		'2Ch' =>'2Chroniques',		'2R' =>'2Rois',		'2S' =>'2Samuel',		'Ab' =>'Abdias',		'Ag' =>'Aggee',		'Am' =>'Amos',		'Ct' =>'Cantiquedescantiques',		'Dn' =>'Daniel',		'Dt' =>'Deuteronome',		'Qo' =>'Ecclesiaste',		'Is' =>'Esaie',		'Ez' =>'Ezechiel',		'Esd' =>'Esdras',		'Est' =>'Esther',		'Ex' =>'Exode',		'Ez' =>'Ezechiel',		'Gn' =>'Genese',		'Ha' =>'Habacuc',		'Jr' =>'Jeremie',		'Jl' =>'Joel',		'Jb' =>'Job',		'Jon' =>'Jonas',		'Jos' =>'Josue',		'Jg' =>'Juges',		'Lm' =>'Lamentations',		'So' =>'Sophonie',		'Lv' =>'Levitique',		'Ml' =>'Malachie',		'Mi' =>'Michee',		'Na' =>'Nahoum',		'Ne' =>'Nehemie',		'Nb' =>'Nombres',		'Os' =>'Osee',		'Pr' =>'Proverbes',		'Ps' =>'Psaumes',		'Rt' =>'Ruth',		'1M' =>'1Maccabees',		'2M' =>'2Maccabees',		'Ba' =>'Baruch',		'Sg' =>'Sagesse',		'Si' =>'Siracide',		'Tb' =>'Tobit',		'Jdt' =>'Judith',		'1Co' =>'1Corinthiens',		'1Jn' =>'1Jean',		'1P' =>'1Pierre',		'1Th' =>'1Thessaloniciens',		'1Tm' =>'1Timothee',		'2Co' =>'2Corinthiens',		'2Jn' =>'2Jean',		'2P' =>'2Pierre',		'2Th' =>'2Thessaloniciens',		'2Tm' =>'2Timothee',		'3Jn' =>'3Jean',		'Ac' =>'Actes',		'Ap' =>'Apocalypse',		'Col' =>'Colossiens',		'Ep' =>'Ephesiens',		'Ga' =>'Galates',		'He' =>'Hebreux',		'Jc' =>'Jacques',		'Jn' =>'Jean',		'Jude' =>'Jude',		'Lc' =>'Luc',		'Mc' =>'Marc',		'Mt' =>'Matthieu',		'Ph' =>'Philemon',		'Phm' =>'Philippiens',		'Rm' =>'Romains',		'Tt' =>'Tite');
 	$gateway_to_unboud = array
@@ -290,6 +293,19 @@ $tableau_separateur = array(
 			return $gateway_to_unboud;
 		case 'lire_la_bible':
 			return $lire_la_bible;
+		case 'petit_livre':
+			$petit_livre=array(38,64,70,71,72);
+			$petit_livre_2 = array();
+			$tableau_inverse = array_flip($livre_gateways[$lang]);
+			$j = 0;
+			foreach ($petit_livre as $i){
+					$petit_livre_2[$j] = strtolower($tableau_inverse[$i]);
+					$j++;
+					
+			
+			}
+			
+			return $petit_livre_2;
 	}
 };
 

@@ -7,13 +7,26 @@ function recuperer_passage($livre,$ref,$wissen,$lang){
 	$livre_gateways = bible_tableau('gateway');
 	$livre_lang = $livre_gateways[$lang][$livre];
 	$livre_al	= array_flip($livre_gateways['de']);
+	$livre_or = $livre;
 	$livre		= $livre_al[$livre_lang];
 	
-	$ref = str_replace($livre,'',$ref);
+	//petit livre ?
+	$petit_livre=bible_tableau('petit_livre','de');
+	
+	if (in_array(strtolower($livre),$petit_livre)) {
+		
+		$ref = str_replace($livre_or,$livre.'1,',$ref);
+	} 
+	else {
+		$ref = str_replace($livre_or,$livre,$ref);
+	}
+		
+	
 	//recuperation du passage
 	
 	
 	$url = "http://www.bibelwissenschaft.de/nc/online-bibeln/".$wissen."/lesen-im-bibeltext/bibelstelle/".$ref."/anzeige/single/#iv";
+	
 	include_spip("inc/distant");
 	include_spip("inc/charsets");
 	$code = importer_charset(recuperer_page($url),'utf-8');

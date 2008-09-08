@@ -114,36 +114,36 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 		return _T('bible:pas_livre');
 	
 	};
-	if ($wissen == false){
-		$debut = eregi_replace($livre,'',$debut);
+	
+	$debut = eregi_replace($livre,'',$debut);
+	
+	
+	$livre=='Es' and $traduction=='jerusalem' ? $livre = 'Is' : $livre = 'Es'; // gestion Isaïe/Esaïe
+	
+	//chercher chapitre et verset du début
+	
+	$tableau = explode(',',$debut);
+	if (count($tableau)==2){
+		$verset_debut = $tableau[1];}
+	else{
+		if (count($tableau2)==1){
+			$chapitre_fin=$tableau2[0];
+			$verset_fin='';
+		}
 		
+	
+		}
+	$chapitre_debut  = $tableau[0];	
 		
-		$livre=='Es' and $traduction=='jerusalem' ? $livre = 'Is' : $livre = 'Es'; // gestion Isaïe/Esaïe
-		
-		//chercher chapitre et verset du début
-		
-		$tableau = explode(',',$debut);
-		if (count($tableau)==2){
-			$verset_debut = $tableau[1];}
-		else{
-			if (count($tableau2)==1){
-				$chapitre_fin=$tableau2[0];
-				$verset_fin='';
-			}
-			
-		
-			}
-		$chapitre_debut  = $tableau[0];	
-			
-		
-		// si reference courte
-		if ($chapitre_fin==''){$chapitre_fin=$chapitre_debut;};
-		
-		if ($verset_debut=='' and count($tableau2)==2){$verset_debut=1;
-		$verset_fin=='';
-		$chapitre_fin=$chapitre_debut;};
-		if ($verset_fin=='' and (count($tableau)==2)){$verset_fin=$verset_debut;}
-	}
+	
+	// si reference courte
+	if ($chapitre_fin==''){$chapitre_fin=$chapitre_debut;};
+	
+	if ($verset_debut=='' and count($tableau2)==2){$verset_debut=1;
+	$verset_fin=='';
+	$chapitre_fin=$chapitre_debut;};
+	if ($verset_fin=='' and (count($tableau)==2)){$verset_fin=$verset_debut;}
+	
 	if ($lire){
 		include_spip('traduction/lire');
 		$texte = '<quote>'.recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lire,$lang);
@@ -206,6 +206,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 }
 
 function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang){
+	
 	$tableau_traduction = bible_tableau('traduction');
 	$tableau_livres = bible_tableau('livres');
 	$trad = $tableau_traduction[$trad]['traduction'];
@@ -216,12 +217,15 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang){
 	$livre = str_replace('2','2 ',$livre);
 	$livre = str_replace('3','3 ',$livre);
 	
+	
 	if ($cd==$cf and $vd=='' and $vf==''){
+		
 		return '<p><accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.' (<i>'.$trad.'</i>)';
 	
 	}
 	
 	if ($vd=='' and $vf==''){
+		
 		return '<p><accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.'-'.$cf.' (<i>'.$trad.'</i>)</p>';
 	
 	}
@@ -231,10 +235,12 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang){
 	$chaine = '<p><accronym title=\''.$livre_long."'>".$livre.'</accronym> '.$cd.$separateur.$vd;
 	
 	if ($cd!=$cf){
+			
 		$chaine .= '-'.$cf.', '.$vf;
 	
 	}
 	elseif ($vd!=$vf) {
+		
 		$chaine .= '-'.$vf;
 		
 	}
