@@ -119,29 +119,45 @@
 						</option>
 						</select>
 				
-			</li>
-			
-			<li>
-					<label for="numeros">Afficher les n° de chapitres et de versets dans le corps du texte</label>
-					<input type="checkbox" name="numeros"  id="numeros"   value="oui" />
+			</li><li>
+					<label for="traduction_it"><:bible:cfg_traduction_it:></label>
+					<select name="traduction_it"  id="traduction_it"><option value="pev" [selected="(#ENV{traduction_it}|=={pev})"]>
+				La Parola è Vita
+						
+						</option>
+						<option value="lnd" [selected="(#ENV{traduction_it}|=={lnd})"]>
+				La Nuova Diodati
+						
+						</option>
+						<option value="cei" [selected="(#ENV{traduction_it}|=={cei})"]>
+				Conferenza Episcopale Italiana
+						
+						</option>
+						</select>
+				
+			</li><li>
+					<label for="numeros"><:bible:cfg_numeros:></label>
+					<input type="checkbox" name="numeros"  id="numeros" [checked="(#ENV{numeros})"]  value="oui" />
 				
 			</li>
 			
 			<li>
-					<label for="retour">Faire des retour à la ligne entre les versets</label>
-					<input type="checkbox" name="retour"  id="retour"   value="oui" />
+					<label for="retour"><:bible:cfg_retour:></label>
+					<input type="checkbox" name="retour"  id="retour" [checked="(#ENV{retour})"]  value="oui" />
 				
 			</li>
 			
 			<li>
-					<label for="ref">Afficher la r&eacute;f&eacute;rences du passage cit&eacute;</label>
-					<input type="checkbox" name="ref"  id="ref"   value="oui" />
+					<label for="ref"><:bible:cfg_ref:></label>
+					<input type="checkbox" name="ref"  id="ref" [checked="(#ENV{ref})"]  value="oui" />
 				
 			</li>
 		</ul>
 
-	<p class="boutons"><input type="submit" name="_cfg_ok" value="ok" />
-	<input type="submit" name="_cfg_delete" value="supprimer" /></p>
+	<p class="boutons"><input type="submit" name="_cfg_ok" value="<:OK:>" />
+	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" /></p>
 </fieldset></li>
 </form>
 </div>
+			
+			

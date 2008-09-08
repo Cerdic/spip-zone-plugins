@@ -20,6 +20,7 @@ function bible_install($action){
 				ecrire_config('bible/traduction_en','kj');
 				ecrire_config('bible/traduction_de','luther1545');
 				ecrire_config('bible/traduction_es','dhh');
+				ecrire_config('bible/traduction_it','cei');
 				}
 			break;
 			
@@ -34,6 +35,7 @@ function bible_install($action){
 				effacer_config('bible/traduction_en');
 				effacer_config('bible/traduction_de');
 				effacer_config('bible/traduction_es');
+				effacer_config('bible/traduction_it');
 				
 			}
 			break;
@@ -301,6 +303,29 @@ function bible_generer_cfg($i){
 		
 
 
-	return $texte;
+	return $texte.'<li>
+					<label for="numeros"><:bible:cfg_numeros:></label>
+					<input type="checkbox" name="numeros"  id="numeros" [checked="(#ENV{numeros})"]  value="oui" />
+				
+			</li>
+			
+			<li>
+					<label for="retour"><:bible:cfg_retour:></label>
+					<input type="checkbox" name="retour"  id="retour" [checked="(#ENV{retour})"]  value="oui" />
+				
+			</li>
+			
+			<li>
+					<label for="ref"><:bible:cfg_ref:></label>
+					<input type="checkbox" name="ref"  id="ref" [checked="(#ENV{ref})"]  value="oui" />
+				
+			</li>
+		</ul>
+
+	<p class="boutons"><input type="submit" name="_cfg_ok" value="<:OK:>" />
+	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" /></p>
+</fieldset></li>
+</form>
+</div>';
 }	
 ?>
