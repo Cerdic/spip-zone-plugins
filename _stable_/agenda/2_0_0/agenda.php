@@ -46,7 +46,7 @@ function Agenda_affiche_milieu($flux) {
 			'id_evenement'=>_request('id_evenement'),
 			'id_evenement_edit'=>_request('id_evenement_edit'));
 			$page = evaluer_fond('prive/contenu/evenements_article',$contexte);
-			$flux .= $page['texte'];
+			$flux['data'] .= $page['texte'];
 		}
 	}
 	return $flux;
