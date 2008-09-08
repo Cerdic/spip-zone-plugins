@@ -19,6 +19,26 @@ function bible_tableau($i){
 			'traduction'=> 'Traduction Œcuménique de la Bible',
 			'lang'=>'fr'	
 					),
+	'bfc'		=>array(
+			'lire'=>'BFC',
+			'traduction'=> 'Bible en Français Courant',
+			'lang'=>'fr'	
+					),
+	'nbs'		=>array(
+			'lire'=>'NBS',
+			'traduction'=> 'Nouvelle Bible Segond',
+			'lang'=>'fr'	
+					),
+	'pdv'		=>array(
+			'lire'=>'PDV',
+			'traduction'=> 'La Bible Parole de Vie',
+			'lang'=>'fr'	
+					),
+	'colombe'		=>array(
+			'lire'=>'Colombe',
+			'traduction'=> 'Bible de la Colombe',
+			'lang'=>'fr'	
+					),
 	'luther1912'		=> array(
 		
 		'unbound'=>'german_luther_1912_ucs2',
