@@ -63,6 +63,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	$gateway = $tableau_traduction[$traduction]['gateway'];
 	$wissen  = $tableau_traduction[$traduction]['wissen'];
 	$unbound = $tableau_traduction[$traduction]['unbound'];
+	$lire = $tableau_traduction[$traduction]['lire'];
 	$lang = $tableau_traduction[$traduction]['lang'];
 	$lang_original = $lang;
 	
@@ -111,39 +112,42 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 		return _T('bible:pas_livre');
 	
 	};
-	
-	$debut = eregi_replace($livre,'',$debut);
-	
-	
-	$livre=='Es' and $traduction=='jerusalem' ? $livre = 'Is' : $livre = 'Es'; // gestion Isaïe/Esaïe
-	
-	//chercher chapitre et verset du début
-	
-	$tableau = explode(',',$debut);
-	if (count($tableau)==2){
-		$verset_debut = $tableau[1];}
-	else{
-		if (count($tableau2)==1){
-			$chapitre_fin=$tableau2[0];
-			$verset_fin='';
-		}
+	if ($wissen == false){
+		$debut = eregi_replace($livre,'',$debut);
 		
-	
-		}
-	$chapitre_debut  = $tableau[0];	
 		
+		$livre=='Es' and $traduction=='jerusalem' ? $livre = 'Is' : $livre = 'Es'; // gestion Isaïe/Esaïe
+		
+		//chercher chapitre et verset du début
+		
+		$tableau = explode(',',$debut);
+		if (count($tableau)==2){
+			$verset_debut = $tableau[1];}
+		else{
+			if (count($tableau2)==1){
+				$chapitre_fin=$tableau2[0];
+				$verset_fin='';
+			}
+			
+		
+			}
+		$chapitre_debut  = $tableau[0];	
+			
+		
+		// si reference courte
+		if ($chapitre_fin==''){$chapitre_fin=$chapitre_debut;};
+		
+		if ($verset_debut=='' and count($tableau2)==2){$verset_debut=1;
+		$verset_fin=='';
+		$chapitre_fin=$chapitre_debut;};
+		if ($verset_fin=='' and (count($tableau)==2)){$verset_fin=$verset_debut;}
+	}
+	if ($lire){
+		include_spip('traduction/lire');
+		$texte = '<quote>'.recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lire,$lang);
+	}
 	
-	// si reference courte
-	if ($chapitre_fin==''){$chapitre_fin=$chapitre_debut;};
-	
-	if ($verset_debut=='' and count($tableau2)==2){$verset_debut=1;
-	$verset_fin=='';
-	$chapitre_fin=$chapitre_debut;};
-	if ($verset_fin=='' and (count($tableau)==2)){$verset_fin=$verset_debut;}
-	
-	
-	//}
-	if ($unbound){
+	else if ($unbound){
 		include_spip('traduction/unbound');
 		$texte = '<quote>'.recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$unbound,$lang);
 	}
@@ -152,7 +156,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	else if ($wissen){
 		
 		include_spip('traduction/wissen');
-		$texte = '<quote>'.recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$wissen,$lang);
+		$texte = '<quote>'.recuperer_passage($livre,$passage,$wissen,$lang);
 		
 		}
 	
