@@ -18,6 +18,9 @@ function Agenda_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_evenements'][] = 'mots_evenements';
 
 	$interface['table_des_traitements']['LIEU'][]= 'propre(%s)';
+	
+	// permet d'utiliser les criteres racine, meme_parent, id_parent
+	$interface['exceptions_des_tables']['evenements']['id_parent']='id_evenement_source';
 
 	return $interface;
 }

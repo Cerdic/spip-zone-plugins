@@ -12,8 +12,8 @@ _ &#169; 2006 - Licence GPL 3
 	<etat>dev</etat>
 	<description>Agenda Ev&#233;nementiel</description>
 	<lien>http://www.spip-contrib.net/article1396.html</lien> <!-- URI de documentation -->
-	<options>agenda_mes_options.php</options>
-	<fonctions>agenda_mes_fonctions.php</fonctions>
+	<options>agenda_options.php</options>
+	<fonctions>agenda_fonctions.php</fonctions>
 	<prefix>agenda</prefix>
 	<install>base/agenda_upgrade.php</install>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
@@ -31,18 +31,19 @@ _ &#169; 2006 - Licence GPL 3
 	</pipeline>
 	<pipeline>
 		<nom>ajouter_onglets</nom>
-		<inclure>agenda.php</inclure>
+		<inclure>agenda_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
-		<inclure>agenda.php</inclure>
+		<inclure>agenda_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>affiche_milieu</nom>
-		<inclure>agenda.php</inclure>
+		<inclure>agenda_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>taches_generales_cron</nom>
+		<inclure>agenda_pipelines.php</inclure>
 	</pipeline>
 	<necessite id='SPIP' version='[2.0.0 dev;]' />
 </plugin>

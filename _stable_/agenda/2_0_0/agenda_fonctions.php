@@ -1,4 +1,11 @@
 <?php
+/**
+ * Plugin Agenda pour Spip 2.0
+ * Licence GPL
+ * 
+ *
+ */
+
 include_spip('public/criteres_agenda');
 include_spip('public/agenda_boucles');
 include_spip('inc/agenda_filtres');

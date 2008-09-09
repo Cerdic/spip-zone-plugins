@@ -54,4 +54,8 @@ function agenda_affiche_milieu($flux) {
 	return $flux;
 }
 
+function agenda_taches_generales_cron($taches_generales){
+	$taches_generales['agenda_nettoyer_base'] = 3600*48;
+	return $taches_generales;
+}
 ?>

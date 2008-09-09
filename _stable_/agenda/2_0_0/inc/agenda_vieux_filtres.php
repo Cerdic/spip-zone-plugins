@@ -3,7 +3,7 @@
  * Plugin Agenda pour Spip 2.0
  * Licence GPL
  * 
- * Fichier de filtres communs au plugin Agenda et PIM_agenda
+ * Fichier de filtres communs au plugin agenda et PIM_agenda
  */
 
 function Agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', $lieu='', $url='', $cal=''){
