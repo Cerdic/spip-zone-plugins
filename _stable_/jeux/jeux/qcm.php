@@ -18,6 +18,7 @@ separateurs obligatoires : [qcm], [qrm] ou [quiz]
 separateurs optionnels   : [titre], [texte], [config]
 parametres de configurations par defaut :
 	trou=auto // taille du trou affiche en cas de proposition unique
+	une_par_une=non // affiche les questions une par une
 	solution=non // donne la(les) bonne(s) reponse(s) lors de la correction
 	points=oui // affiche eventuellement les points dans les questions
 	max_radios=5 // nombre maximal de boutons radios affiches avant le choix d'une liste deroulante
@@ -171,7 +172,7 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 	$question = qcm_les_points($question, $pointsQ);
   } else $pointsQ = 1;
 
-  $codeHTML = "<div class=\"jeux_question\">".definir_puce().$question.'</div>';
+  $codeHTML = "<div class=\"qcm_element \"><div class=\"jeux_question\">".definir_puce().$question.'</div>';
   if (!$corriger){
 	// affichage sans correction :
 	$codeHTML.="\n<div class=\"qcm_proposition\">";
@@ -196,7 +197,7 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 				. $valeur.'</label>'
 				. ($i % $nbcol?' &nbsp; ':'<br />');
 	}
-	$codeHTML.="</div> <br />";
+	$codeHTML.="</div><br /></div>";
 
     }	// fin du cas sans correction
 
@@ -334,6 +335,7 @@ function jeux_qcm($texte, $indexJeux) {
   // configuration par defaut
   jeux_config_init("
 	trou=auto	// taille du trou affiche en cas de proposition unique
+	une_par_une=non // affiche les questions une par une
 	solution=non	// donne la(les) bonne(s) reponse(s) lors de la correction
 	points=oui // affiche eventuellement les points dans les questions
 	max_radios=5 // nombre maximal de boutons radios affiches avant le choix d'une liste deroulante
@@ -371,8 +373,14 @@ function jeux_qcm($texte, $indexJeux) {
 			. jeux_bouton_reinitialiser();
   }
   
+  // ajout du javascript si on doit afficher une par une
+  if (jeux_config('une_par_une'))
+  	$js = '<script type="text/javascript">qcm_affichage_une_par_une();</script>';
+  else
+  	$js = '';
+  
   unset($qcms); unset($qcm_score);
-  return $tete.$texte.$pied.'</div>';
+  return $tete.$texte.$pied.'</div>'.$js;
 }
 
 ?>

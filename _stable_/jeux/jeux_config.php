@@ -119,7 +119,7 @@ unset($temp);
 global $jeux_header_prive, $jeux_javascript_prive;
 $jeux_header_prive = array('jeux','qcm', 'mots_croises', 'sudoku', 'pendu');
 // mots_croises.js suffit car sudoku.js est a priori l'exacte copie
-$jeux_javascript_prive = array('layer', 'pendu', 'mots_croises');
+$jeux_javascript_prive = array('qcm', 'layer', 'pendu', 'mots_croises');
 
 // Codes RGB des couleurs predefinies a utiliser pour certains parametres apres la balise [config]
 global $jeux_couleurs;
