@@ -1,6 +1,16 @@
 /* listes */
-.liste_items {list-style:none;margin:1em 0;padding:0;border-top:1px solid #eee;clear:both;}
-.liste_items li.item {border-bottom:1px solid #eee;padding:0.8em 0;}
+.liste_items {list-style:none;margin:1em 0;padding:0;border-top:1px solid #ddd;clear:both;}
+.liste_items li.item {border-bottom:1px solid #ddd;padding:0.4em 0;}
 .liste_items li.item:hover {background-color:#eee;}
-.liste_items li.item.on {background-color:#F4FFBF;}
+.liste_items li.item.on {background-color:#F4FFBF;font-weight:normal;}
 .liste_items li.item.on:hover {background-color:#EEFF9F;}
+
+/* vevent */
+li.item div.vevent h3 {margin:0;font-size:1.1em;}
+li.item div.vevent p {margin-bottom:0;}
+ul.evenements li.item.court p {display:none;}
+
+/* liste des evenements */
+.evenements li.item {padding-left:100px;}
+.evenements li.item .jour {width:100px;margin-left:-100px;float:left;display:inline;position:relative;}
+.evenements p.actions {text-align:right;font-size:0.9em;margin-bottom:0;}

@@ -19,10 +19,7 @@ function agenda_ajouter_onglets($flux) {
  * @return unknown
  */
 function agenda_header_prive($flux) {
-	if (isset($flux['args']['exec'])
-	  AND in_array($flux['args']['exec'],array('calendrier'))){
-		$flux['data'] .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('img_pack/agenda.css').'" media="screen" />'."\n";
-  }
+	$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('img_pack/agenda.css').'" media="screen" />'."\n";
 	return $flux;
 }
 

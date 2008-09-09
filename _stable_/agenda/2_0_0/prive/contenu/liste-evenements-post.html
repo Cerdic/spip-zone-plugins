@@ -1,0 +1,13 @@
+<B_agenda>
+[<p class='pagination'>(#PAGINATION{page})</p>]
+<ul class='liste_items evenements'>
+<BOUCLE_agenda(EVENEMENTS){par date_debut}{pagination 20}{age_relatif_debut<=0}>
+<li class='item[ (#EXPOSE)]'><div class='jour'>[(#DATE_DEBUT|affdate_jourcourt|unique)]</div>
+#MODELE{evenement_vevent}
+<p class='actions'>
+[[<a(#ID_EVENEMENT_SOURCE|non) href=''>Modifier</a>][<a(#ID_EVENEMENT_SOURCE|oui) href='[(#SELF|parametre_url{id_evenement,#ID_EVENEMENT_SOURCE})]'>source</a>]]
+[<a href=''>Supprimer</a>]
+</p></li>
+</BOUCLE_agenda>
+</ul>
+</B_agenda>

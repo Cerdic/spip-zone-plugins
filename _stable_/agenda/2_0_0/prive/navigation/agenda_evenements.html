@@ -1,0 +1,10 @@
+#SET{self,#SELF|parametre_url{id_evenement|date_debut,''}}
+<ul>
+<li><a href='[(#GET{self})]'>Ce mois-ci</a></li>
+<BOUCLE_debut(EVENEMENTS){par date_debut}{0,1}>
+<li><a href='[(#GET{self}|parametre_url{date_debut,#DATE_DEBUT|affdate{Y-m-d}})]'>Depuis le debut</a></li>
+</BOUCLE_debut>
+
+[(#REM) faire ici une navigation par mois, non ?]
+
+</ul>

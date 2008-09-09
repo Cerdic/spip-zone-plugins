@@ -22,14 +22,17 @@ function exec_agenda_evenements_dist(){
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	$out = $commencer_page(_T('agenda:tous_les_evenements'), "agenda", "calendrier");
 	$out .= barre_onglets("calendrier", "evenements");
-
-	$out .= debut_gauche("agenda",true);
 	
-	$out .= debut_droite('agenda',true);
-
 	$contexte = array('couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
 	foreach($_GET as $key=>$val)
 	$contexte[$key] = $val;
+
+	$out .= debut_gauche("agenda",true);
+
+	$out .=  recuperer_fond("prive/navigation/agenda_evenements",$contexte);
+	
+	$out .= debut_droite('agenda',true);
+
 	$out .=  recuperer_fond("prive/contenu/agenda_evenements",$contexte);
 	
 	$out .= fin_gauche('agenda',true);

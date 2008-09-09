@@ -1,0 +1,20 @@
+[(#REM) Se placer au debut du mois en cours par defaut]
+#SET{date_debut,#VAL{Y-m-}|date|concat{01}}
+<BOUCLE_un(EVENEMENTS){id_evenement}>
+[(#REM) Si un evenement passe, on commence par le jour de cet evenement]
+#SET{date_debut,#DATE_DEBUT|affdate{Y-m-d}}
+</BOUCLE_un>
+	[(#REM) on verifie que il y a bien des evenements plus recents
+	sinon on se place en debut de mois du dernier evenement]
+	<BOUCLE_dernier(EVENEMENTS){!par date_debut}{0,1}>
+	[(#DATE_DEBUT|strtotime|<{#GET{date_debut}|strtotime})
+	#SET{date_debut,#DATE_DEBUT|affdate{Y-m-}|concat{01}}]
+	</BOUCLE_dernier>
+<//B_un>
+<INCLURE{fond=prive/contenu/liste-evenements-post}{date_debut=#ENV{date_debut,#GET{date_debut}}}{env}{ajax}>
+<script type='text/javascript'>
+function set_vevent(){
+jQuery('ul.evenements li.item').addClass('court').click(function(){if (jQuery(this).is('.court')) jQuery(this).removeClass('court'); else jQuery(this).addClass('court');});
+}
+jQuery('document').ready(function(){set_vevent();onAjaxLoad(set_vevent);});
+</script>

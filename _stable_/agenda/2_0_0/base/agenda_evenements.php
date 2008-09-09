@@ -21,6 +21,8 @@ function Agenda_declarer_tables_interfaces($interface){
 	
 	// permet d'utiliser les criteres racine, meme_parent, id_parent
 	$interface['exceptions_des_tables']['evenements']['id_parent']='id_evenement_source';
+	
+	$interface['table_date']['evenements'] = 'date_debut';
 
 	return $interface;
 }
