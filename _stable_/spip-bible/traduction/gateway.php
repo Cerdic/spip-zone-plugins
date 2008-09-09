@@ -53,7 +53,8 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 		
 		$tableau=explode('</h4>',$code);
 		$code=$tableau[1];
-		
+		$tableau = explode('<strong>Footnotes:</strong>',$code);
+		$code = $tableau[0];
 		//suppression des intertitres
 		$tableau = explode('<h5>',$code);
 		$d = 0;
@@ -85,7 +86,7 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 			if ($i == $chapitre_fin){
 				$v = $verset_fin+1;
 				$tableau 	= explode('<sup>'.$v.' </sup>',$code);
-				$code  		=$tableau[0];
+				$code  		= trim($tableau[0]);
 				}
 			
 			
@@ -95,8 +96,8 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 			
 		$i++;
 		}
-		
-	 return str_replace('<br /><br /><strong>','<br /><strong>',str_replace('<br />&nbsp;','<br />',str_replace('</strong> <br />&nbsp;','</strong>',$texte)));
+	
+	 return str_replace(' <br />&nbsp;&nbsp;  <br />','<br />',str_replace('<br /><br /><strong>','<br /><strong>',str_replace('<br />&nbsp;','<br />',str_replace('</strong> <br />&nbsp;','</strong>',$texte))));
 	
 }
 

@@ -21,6 +21,7 @@ function bible_install($action){
 				ecrire_config('bible/traduction_de','luther1545');
 				ecrire_config('bible/traduction_es','dhh');
 				ecrire_config('bible/traduction_it','cei');
+				ecrire_config('bible/traduction_pl','bty');
 				}
 			break;
 			
@@ -36,6 +37,7 @@ function bible_install($action){
 				effacer_config('bible/traduction_de');
 				effacer_config('bible/traduction_es');
 				effacer_config('bible/traduction_it');
+				effacer_config('bible/traduction_pl');
 				
 			}
 			break;
