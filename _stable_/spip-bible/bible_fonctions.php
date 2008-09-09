@@ -327,5 +327,74 @@ function bible_generer_cfg($i){
 </fieldset></li>
 </form>
 </div>';
+}
+
+function bible_generer_doc($lang){
+	$tableau_traduction = bible_tableau('traduction');
+	$tableau_separateur = bible_tableau('separateur');
+	$tableau_livres = bible_tableau('livres');
+	
+	$texte = "{{Séparateur chapitre/verset}} : «".$tableau_separateur[$lang]."»";
+	$texte.="<br /><br />{{Abréviations des livres}}<br /><br/>";
+	
+	foreach ($tableau_livres as $lang_livre=>$tableau){
+		if ($lang == $lang_livre){
+			foreach ($tableau as $abrev=>$livre){
+				$texte.='|'.$abrev.'|'.$livre.'|<br/>';
+			
+			}
+		
+		
+		}
+		
+	
+	}
+	$texte .= '<br/>';
+	
+	foreach ($tableau_traduction as $abrev=>$traduction){
+		if ($traduction['lang']==$lang){
+			$texte .= '<br/>';
+			$texte .= '{{'.$traduction['traduction'].'}}<br />-';
+			
+			$gateway = $traduction['gateway'];
+			$wissen  = $traduction['wissen'];
+			$unbound = $traduction['unbound'];
+			$lire = $traduction['lire'];
+			
+			if ($gateway){
+				$url = "http://www.biblegateway.com/versions/index.php?action=getVersionInfo&vid=".$gateway;
+				
+			}
+			else if ($wissen){
+				$url = "http://www.bibelwissenschaft.de/online-bibeln/".$wissen;
+			
+			}
+			
+			else if ($unbound){
+				$url = "http://www.unboundbible.org/";
+			
+			}
+			
+			else if($lire){
+				$url = "http://lire.la-bible.net";
+			
+			}
+			else {
+				$url= "mettre ici l'url";
+			
+			}
+			
+			$texte.= ' {source} : '.$url;
+			$texte.='<br>- {valeur du paramètre traduction} : «'.$abrev.'»<br/>'; 	
+		
+		
+		}
+	
+	
+	}
+	
+
+
+	return $texte;
 }	
 ?>
