@@ -16,7 +16,7 @@ function messagerie_messages_non_lus($id_auteur){
 	static $messages = array();
 	if (!isset($messages[$id_auteur])){
 		include_spip('base/abstract_sql');
-		$messages[$id_auteur] = sql_countsel('spip_auteurs_messages',array('id_auteur='.intval($id_auteur),"vu<>'oui'"));
+		$messages[$id_auteur] = sql_countsel('spip_auteurs_messages',array('id_auteur='.intval($id_auteur),"vu<>'oui' AND vu<>'pou'"));
 		if (!$messages[$id_auteur]) $messages[$id_auteur] = '';
 	}
 	return $messages[$id_auteur];
