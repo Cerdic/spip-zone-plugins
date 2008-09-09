@@ -44,7 +44,7 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 		$i == $chapitre_debut ? $verset_debut = $verset_debut : $verset_debut = 1;
 		
 		$code = importer_charset(recuperer_page($url,'utf-8'));
-		
+	
 		$tableau = explode('<div class="result-text-style-normal">',$code);
 		$code=$tableau[1];
 		$tableau = explode('</div',$code);
@@ -54,6 +54,23 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 		$tableau=explode('</h4>',$code);
 		$code=$tableau[1];
 		
+		//suppression des intertitres
+		$tableau = explode('<h5>',$code);
+		$d = 0;
+		$tableau2 = array();
+		foreach ($tableau as $j){
+			if (eregi('</h5>&nbsp;',$j)){
+				
+				$tableau3 = explode('</h5>&nbsp;',$j);
+				$tableau2[$d]=$tableau3[1];
+				
+			
+			}
+			$d++;
+		
+		}
+		
+		$code = implode('',$tableau2);
 		//supprerssion des balises
 		$code = str_replace('<p />','<br />',$code);
 		$code = str_replace(' class="sup">',"><sup>",$code);
@@ -79,7 +96,7 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 		$i++;
 		}
 		
-	return str_replace('<br /><br /><strong>','<br /><strong>',str_replace('<br />&nbsp;','<br />',str_replace('</strong> <br />&nbsp;','</strong>',$texte)));
+	 return str_replace('<br /><br /><strong>','<br /><strong>',str_replace('<br />&nbsp;','<br />',str_replace('</strong> <br />&nbsp;','</strong>',$texte)));
 	
 }
 
