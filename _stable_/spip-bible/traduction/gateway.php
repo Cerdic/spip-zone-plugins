@@ -3,6 +3,21 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 	$verset_debut=='' ? $verset_debut = 1 : $verset_debut = $verset_debut;
 	//reperer le numero de livre
 	include_spip('inc/bible_tableau');
+	
+	//petit livre ?
+	$petit_livre=bible_tableau('petit_livre',$lang);
+
+	if (in_array(strtolower($livre),$petit_livre)) {
+		
+		$verset_debut=$chapitre_debut;
+		
+		$verset_fin = $chapitre_fin;
+		$chapitre_debut = 1;
+		$chapitre_fin = 1;
+	
+	} 
+
+	
 	$livre_gateways = bible_tableau('gateway');
 	$livre_gateway =$livre_gateways[$lang];	
 	foreach ($livre_gateway as $li=>$id){	
