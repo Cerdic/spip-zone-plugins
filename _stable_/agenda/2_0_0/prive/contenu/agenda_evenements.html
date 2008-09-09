@@ -14,7 +14,12 @@
 <INCLURE{fond=prive/contenu/liste-evenements-post}{date_debut=#ENV{date_debut,#GET{date_debut}}}{env}{ajax}>
 <script type='text/javascript'>
 function set_vevent(){
-jQuery('ul.evenements li.item').addClass('court').click(function(){if (jQuery(this).is('.court')) jQuery(this).removeClass('court'); else jQuery(this).addClass('court');});
-}
+jQuery('ul.evenements li.item')
+.addClass('court')
+.find('h3.summary')
+.click(function(){
+var p=jQuery(this).parent().parent();
+if (p.is('.court')) p.removeClass('court'); else p.addClass('court');
+});}
 jQuery('document').ready(function(){set_vevent();onAjaxLoad(set_vevent);});
 </script>
