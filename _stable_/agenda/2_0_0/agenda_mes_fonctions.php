@@ -2,6 +2,7 @@
 include_spip('public/criteres_agenda');
 include_spip('public/agenda_boucles');
 include_spip('inc/agenda_filtres');
+include_spip('inc/agenda_vieux_filtres');
 
 
 function Agenda_heure_selector($date,$suffixe){

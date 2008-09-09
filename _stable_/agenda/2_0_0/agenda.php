@@ -1,9 +1,9 @@
 <?php
 
-function Agenda_ajouter_onglets($flux) {
+function agenda_ajouter_onglets($flux) {
 	if($flux['args']=='calendrier'){
 		$flux['data']['evenements']= new Bouton(
-														 '../'._DIR_PLUGIN_AGENDA.'/img_pack/agenda-24.png', _T('agenda:evenements'),
+														 _DIR_PLUGIN_AGENDA.'/img_pack/agenda-24.png', _T('agenda:evenements'),
 														generer_url_ecrire("calendrier","type=semaine"));
 		$flux['data']['editorial']= new Bouton(
 													 'cal-rv.png', _T('agenda:activite_editoriale'),
@@ -11,20 +11,22 @@ function Agenda_ajouter_onglets($flux) {
 	}
 	return $flux;
 }
-function Agenda_header_prive($flux) {
-/*	$exec = _request('exec');
-	// les CSS
-	if ($exec == 'calendrier'){
-		$flux .= '<link rel="stylesheet" href="' ._DIR_PLUGIN_AGENDA . '/img_pack/calendrier.css" type="text/css" />'. "\n";
-		$flux .= '<link rel="stylesheet" href="' ._DIR_PLUGIN_AGENDA . '/img_pack/agenda.css" type="text/css" />'. "\n";
-	}
-	if ($exec == 'articles'){
-		$flux .= '<link rel="stylesheet" href="' ._DIR_PLUGIN_AGENDA . '/img_pack/agenda_articles.css" type="text/css" />'. "\n";
-	}*/
+
+/**
+ * Ajouter une css dans l'espace prive
+ *
+ * @param unknown_type $flux
+ * @return unknown
+ */
+function agenda_header_prive($flux) {
+	if (isset($flux['args']['exec'])
+	  AND in_array($flux['args']['exec'],array('calendrier'))){
+		$flux['data'] .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('img_pack/agenda.css').'" media="screen" />'."\n";
+  }
 	return $flux;
 }
 
-function Agenda_affiche_milieu($flux) {
+function agenda_affiche_milieu($flux) {
 	$exec =  $flux['args']['exec'];
 	$id_article = $flux['args']['id_article'];
 	
@@ -49,42 +51,6 @@ function Agenda_affiche_milieu($flux) {
 			$flux['data'] .= $page['texte'];
 		}
 	}
-	return $flux;
-}
-
-function Agenda_rendu_boite($titre,$descriptif,$lieu,$type='ics'){
-	$texte = "<span class='calendrier-verdana10'><span  style='font-weight: bold;'>";
-	$texte .= wordwrap($sum=typo($titre),15)."</span>";
-	$texte .= "<span class='survol'>";
-	$texte .= "<strong>$sum</strong><br />";
-	$texte .= $lieu ? propre($lieu).'<br />':'';
-	$texte .= propre($descriptif);
-	$texte .= "</span>";
-	if ($type=='ics'){	
-		$texte .= (strlen($lieu.$descriptif)?"<hr/>":"").$lieu.(strlen($lieu)?"<br/>":"");
-		$texte .= $descriptif;
-	}
-	$texte .= "</span>";
-
-	return $texte;
-}
-
-function Agenda_rendu_evenement($flux) {
-	global $couleur_claire;
-	$evenement = $flux['args']['evenement'];
-	$url = $evenement['URL']; 
-	$texte = Agenda_rendu_boite($evenement['SUMMARY'],$evenement['DESCRIPTION'],$evenement['LOCATION'],$flux['args']['type']);
-	if (is_string($url))
-		$texte = http_href(quote_amp($url), $texte, '', '', '', '');
-	else if (is_array($url))
-		$texte = ajax_action_auteur(
-			$url['action'], $url['id'], $url['script'], 
-			isset($url['args'])?$url['args']:'', 
-			array($texte,""),
-			isset($url['args_ajax'])?$url['args_ajax']:'', 
-			isset($url['fct_ajax'])?$url['fct_ajax']:'');
-	
-	$flux['data'] = $texte;
 	return $flux;
 }
 

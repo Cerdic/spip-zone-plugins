@@ -6,7 +6,97 @@
  * Fichier de filtres communs au plugin Agenda et PIM_agenda
  */
 
-function Agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', $lieu='', $url='', $cal='')
+/**
+ * Afficher une de facon textuelle les dates de debut et fin en fonction des cas
+ * - Le lundi 20 fevrier à 18h
+ * - Le 20 février de 18h à 20h
+ * - Du 20 au 23 février
+ * - du 20 fevrier au 30 mars
+ * - du 20 fevrier 2007 au 30 mars 2008
+ * $horaire='oui' permet d'afficher l'horaire, toute autre valeur n'indique que le jour
+ * $forme peut contenir abbr (afficher le nom des jours en abbrege) et ou hcal (generer une date au format hcal)
+ * 
+ * @param string $date_debut
+ * @param string $date_fin
+ * @param string $horaire
+ * @param string $forme
+ * @return string
+ */
+function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
+	static $trans_tbl=NULL;
+	if ($trans_tbl==NULL){
+		$trans_tbl = get_html_translation_table (HTML_ENTITIES);
+		$trans_tbl = array_flip ($trans_tbl);
+	}
+	
+	$abbr = '';
+	if (strpos($forme,'abbr')!==false) $abbr = 'abbr';
+	
+	$dtstart = $dtend = $dtabbr = "";
+	if (strpos($forme,'hcal')!==false) {
+		$dtstart = "<abbr class='dtstart' title='".date_iso($date_debut)."'>";
+		$dtend = "<abbr class='dtend' title='".date_iso($date_fin)."'>";
+		$dtabbr = "</abbr>";
+	}
+	
+	$date_debut = strtotime($date_debut);
+	$date_fin = strtotime($date_fin);
+	$d = date("Y-m-d", $date_debut);
+	$f = date("Y-m-d", $date_fin);
+	$h = $horaire=='oui';
+	$hd = date("H:i",$date_debut);
+	$hf = date("H:i",$date_fin);
+	$au = " " . strtolower(_T('agenda:evenement_date_au'));
+	$du = _T('agenda:evenement_date_du') . " ";
+	$s = "";
+	if ($d==$f)
+	{ // meme jour
+		$s = ucfirst(nom_jour($d,$abbr))." ".affdate_jourcourt($d);
+		if ($h)
+			$s .= " $hd";
+		$s = "$dtstart$s$dtabbr";
+		if ($h AND $hd!=$hf) $s .= "-$dtend$hf$dtabbr";
+	}
+	else if ((date("Y-m",$date_debut))==date("Y-m",$date_fin))
+	{ // meme annee et mois, jours differents
+		if ($h){
+			$s = $du . $dtstart . affdate_jourcourt($d) . " $hd" . $dtabbr;
+			$s .= $au . $dtend . affdate_jourcourt($f);
+			if ($hd!=$hf) $s .= " $hf";
+			$s .= $dtabbr;
+		}
+		else {
+			$s = $du . $dtstart . jour($d) . $dtabbr;
+			$s .= $au . $dtend . affdate_jourcourt($f) . $dtabbr;
+		}
+	}
+	else if ((date("Y",$date_debut))==date("Y",$date_fin))
+	{ // meme annee, mois et jours differents
+		$s = $du . $dtstart . affdate_jourcourt($d);
+		if ($h) $s .= " $hd";
+		$s .= $dtabbr . $au . $dtend . affdate_jourcourt($f);
+		if ($h) $s .= " $hf";
+		$s .= $dtabbr;
+	}
+	else
+	{ // tout different
+		$s = $du . $dtstart . affdate($d);
+		if ($h)
+			$s .= " ".date("(H:i)",$date_debut);
+		$s .= $dtabbr . $au . $dtend. affdate($f);
+		if ($h)
+			$s .= " ".date("(H:i)",$date_fin);
+		$s .= $dtabbr;
+	}
+	return unicode2charset(charset2unicode(strtr($s,$trans_tbl),''));	
+}
+
+function agenda_dateplus($date,$secondes,$format){
+	$date = strtotime($date)+eval("return $secondes;"); // permet de passer une expression
+	return date($format,$date);
+}
+
+function agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', $lieu='', $url='', $cal='')
 {
 	static $agenda = array();
 	if (!$date_deb) {
@@ -43,7 +133,7 @@ function Agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', 
 	return "";
 }
 
-function Agenda_memo_evt_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', $lieu='', $url='', $cal='')
+function agenda_memo_evt_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', $lieu='', $url='', $cal='')
 {
 	static $evenements = array();
 	if (!$date_deb) return $evenements;
@@ -77,14 +167,14 @@ function Agenda_memo_evt_full($date_deb=0, $date_fin=0 , $titre='', $descriptif=
 	return "";
 }
 
-function Agenda_affiche_full($i)
+function agenda_affiche_full($i)
 {
 	$args = func_get_args();
 	$nb = array_shift($args); // nombre d'evenements (on pourrait l'afficher)
 	$sinon = array_shift($args);
 	if (!$nb) return $sinon;
 	$type = array_shift($args);
-	$agenda = Agenda_memo_full(0);
+	$agenda = agenda_memo_full(0);
 	$evt_avec = array();
 	foreach (($args ? $args : array_keys($agenda)) as $k) {
 		if (isset($agenda[$k])&&is_array($agenda[$k]))
@@ -93,7 +183,7 @@ function Agenda_affiche_full($i)
 			}
 	}
 
-	$evenements = Agenda_memo_evt_full(0);
+	$evenements = agenda_memo_evt_full(0);
 	$evt_sans = array();
 	foreach (($args ? $args : array_keys($evenements)) as $k) {
 		if (isset($evenements[$k])&&is_array($evenements[$k]))
@@ -122,71 +212,11 @@ function Agenda_affiche_full($i)
 	return $texte;
 }
 
-function Agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
-	static $trans_tbl=NULL;
-	if ($trans_tbl==NULL){
-		$trans_tbl = get_html_translation_table (HTML_ENTITIES);
-		$trans_tbl = array_flip ($trans_tbl);
-	}
-	
-	$date_debut = strtotime($date_debut);
-	$date_fin = strtotime($date_fin);
-	$d = date("Y-m-d", $date_debut);
-	$f = date("Y-m-d", $date_fin);
-	$h = $horaire=='oui';
-	$hd = date("H:i",$date_debut);
-	$hf = date("H:i",$date_fin);
-	$au = " " . strtolower(_T('agenda:evenement_date_au'));
-	$du = _T('agenda:evenement_date_du') . " ";
-	$s = "";
-	if ($d==$f)
-	{ // meme jour
-		$s = ucfirst(nom_jour($d,$forme))." ".affdate_jourcourt($d);
-		if ($h){
-			$s .= " $hd";
-			if ($hd!=$hf) $s .= "-$hf";
-		}
-	}
-	else if ((date("Y-m",$date_debut))==date("Y-m",$date_fin))
-	{ // meme annee et mois, jours differents
-		if ($h){
-			$s = $du . affdate_jourcourt($d) . " $hd";
-			$s .= $au . affdate_jourcourt($f);
-			if ($hd!=$hf) $s .= " $hf";
-		}
-		else {
-			$s = $du . jour($d);
-			$s .= $au . affdate_jourcourt($f);
-		}
-	}
-	else if ((date("Y",$date_debut))==date("Y",$date_fin))
-	{ // meme annee, mois et jours differents
-		$s = $du . affdate_jourcourt($d);
-		if ($h) $s .= " $hd";
-		$s .= $au . affdate_jourcourt($f);
-		if ($h) $s .= " $hf";
-	}
-	else
-	{ // tout different
-		$s = $du . affdate($d);
-		if ($h)
-			$s .= " ".date("(H:i)",$date_debut);
-		$s .= $au . affdate($f);
-		if ($h)
-			$s .= " ".date("(H:i)",$date_fin);
-	}
-	return unicode2charset(charset2unicode(strtr($s,$trans_tbl),''));	
-}
-
-function Agenda_dateplus($date,$secondes,$format){
-	$date = strtotime($date)+eval("return $secondes;"); // permet de passer une expression
-	return date($format,$date);
-}
 
 // decale les mois de la date.
 // cette fonction peut raboter le jour si le nouveau mois ne les contient pas
 // exemple 31/01/2007 + 1 mois => 28/02/2007
-function Agenda_moisdecal($date,$decalage,$format){
+function agenda_moisdecal($date,$decalage,$format){
 	include_spip('inc/filtres');
 	$date_array = recup_date($date);
 	if ($date_array) list($annee, $mois, $jour) = $date_array;

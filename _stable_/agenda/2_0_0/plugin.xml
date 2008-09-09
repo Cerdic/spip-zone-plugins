@@ -14,7 +14,7 @@ _ &#169; 2006 - Licence GPL 3
 	<lien>http://www.spip-contrib.net/article1396.html</lien> <!-- URI de documentation -->
 	<options>agenda_mes_options.php</options>
 	<fonctions>agenda_mes_fonctions.php</fonctions>
-	<prefix>Agenda</prefix>
+	<prefix>agenda</prefix>
 	<install>base/agenda_upgrade.php</install>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
@@ -42,12 +42,7 @@ _ &#169; 2006 - Licence GPL 3
 		<inclure>agenda.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>agenda_rendu_evenement</nom>
-		<action>rendu_evenement</action>
-		<inclure>agenda.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>taches_generales_cron</nom>
 	</pipeline>
-	<necessite id='SPIP' version='[2.0.0beta;]' />
+	<necessite id='SPIP' version='[2.0.0 dev;]' />
 </plugin>
