@@ -4,7 +4,7 @@
  * Photospip
  * Un Photoshop-light dans spip?
  *
- * Auteurs :
+ * Auteur :
  * Quentin Drouet
  *
  * © 2008 - Distribue sous licence GNU/GPL
@@ -14,54 +14,71 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_IMG_GD_QUALITE', lire_config('photospip/compression_rendu') ? lire_config('photospip/compression_rendu') : 85);
-
+	
 function action_photospip_dist() {
 	include_spip('inc/distant'); # pour copie_locale
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-	spip_log($arg,'photospip');
 	if (!preg_match(",^\W*(\d+)$,", $arg, $r)) {
 		spip_log("action_photospip_dist $arg pas compris","photospip");
-		spip_log(print_r($r),"photospip");
 	} else {
-		spip_log(print_r($r),"photospip");
 		action_photospip_post($r);
 	}
 }
 
 function action_photospip_post($r){
-	global $auteur_session;
-	$id_auteur = $auteur_session['id_auteur'];
+	global $visiteur_session;
+	$id_auteur = $visiteur_session['id_auteur'];
 	spip_log($r,'photospip');
 	
 	//on récup l'id_document
 	$arg = $r[1];
 	spip_log("on travail sur l'id_document $arg","photospip");
+	
+	// Fichier destination : on essaie toujours de repartir de l'original
 
-	// On vérifie s'il existe
+	//Quelle redirection finale?
+	if (_SPIP_AJAX === 1 ){
+		$redirect = _request('redirect_ajax');
+	}
+	else{
+		$redirect = _request('redirect');
+	}
+	
+	// Quel filtre lui appplique-t-on?
+	$var_filtre = _request('filtre');
+	
+	if(!$var_filtre){
+		$redirect = parametre_url($redirect,'message','sansfiltre');
+		redirige_par_entete(str_replace("&amp;","&",$redirect));
+		spip_log("on a oublié de choisir le filtre donc  on retourne rien...", "photospip");
+	}
+	
+	// On vérifie si le document existe
 	$result = sql_select("*", "spip_documents", "id_document=$arg");
 
 	if (!$row = sql_fetch($result))
 		return;
-
-	include_spip('inc/charsets');	# pour le nom de fichier
-	include_spip('inc/documents'); 
 	
-	// Fichier destination : on essaie toujours de repartir de l'original
-
-	// Quel filtre lui appplique-t-on?
-	$var_filtre = _request('filtre');
 	spip_log("On lui applique le filtre $var_filtre","photospip");	
 
-	$redirect = _request('redirect');
 	$validation = _request('validation');
 
 	if ($var_filtre == "tourner"){
 		$params = _request('params_tourner');
 		spip_log("params tourner = $params", "photospip");
 	}
-	if ($var_filtre == 'image_sepia'){
+	else if ($var_filtre == "image_recadre"){
+		$param1 = _request('recadre_width');
+		$param2 = _request('recadre_height');
+		$param_left = _request('recadre_x1');
+		$param_top = _request('recadre_y1');
+		$param3 = 'left='.$param_left.' top='.$param_top;
+		$params = array($param1,$param2,$param3);
+		spip_log("params image_recadre = print_r($params)", "photospip");
+	}
+	else if ($var_filtre == 'image_sepia'){
 		$params = _request('params_image_sepia');
 		$params = str_replace('#','',$params);
 		spip_log("params image_sepia = $params", "photospip");
@@ -86,33 +103,36 @@ function action_photospip_post($r){
 		$params = '';
 		spip_log("params image_niveaux_gris_auto = $params", "photospip");
 	}
-	$src = _DIR_RACINE . copie_locale(get_spip_doc($row['fichier']));
-	if (preg_match(',^(.*)-photospip(\d+).([^.]+)$,', $src, $match)) {
-		$version = $match[2];
-		$orig_src = $match[1].'.'.$match[3];
-		spip_log("nouvel src $src","photospip");
-		spip_log("version = $version","photospip");
-		$newversion = ++$version;
-		spip_log("La nouvelle version sera $newversion","photospip");
-	}
 
-	if($version){
-		// $dest = preg_replace(',\.[^.]+$,', '-r'.$var_rot.'$0', $src); //original
-		$dest = preg_replace(",\.[^.]+$,", "-photospip".($newversion)."$0", $orig_src);
-		spip_log("la destination sera $dest","photospip");
-		spip_log("application du filtre $var_filtre $src : $dest","photospip");
-	
-	}
-	else{
-		$dest = preg_replace(',\.[^.]+$,', '-photospip1.png', $src);
-		// on transforme l'image en png non destructif
-		include_spip('inc/filtres_images');
-		spip_log("On transforme l'image source en PNG non destructif","photospip");
-		$src = extraire_attribut(image_alpha($src,0),'src');
-		spip_log("application du filtre $var_filtre $src : $dest","photospip");
-	}
 	
 	if($validation == "appliquer"){
+		include_spip('inc/charsets');	# pour le nom de fichier
+		include_spip('inc/documents'); 
+		$src = _DIR_RACINE . copie_locale(get_spip_doc($row['fichier']));
+		if (preg_match(',^(.*)-photospip(\d+).([^.]+)$,', $src, $match)) {
+			$version = $match[2];
+			$orig_src = $match[1].'.'.$match[3];
+			spip_log("nouvel src $src","photospip");
+			spip_log("version = $version","photospip");
+			$newversion = ++$version;
+			spip_log("La nouvelle version sera $newversion","photospip");
+		}
+	
+		if($version){
+			// $dest = preg_replace(',\.[^.]+$,', '-r'.$var_rot.'$0', $src); //original
+			$dest = preg_replace(",\.[^.]+$,", "-photospip".($newversion)."$0", $orig_src);
+			spip_log("la destination sera $dest","photospip");
+			spip_log("application du filtre $var_filtre $src : $dest","photospip");
+		
+		}
+		else{
+			$dest = preg_replace(',\.[^.]+$,', '-photospip1.png', $src);
+			// on transforme l'image en png non destructif
+			include_spip('inc/filtres_images');
+			spip_log("On transforme l'image source en PNG non destructif","photospip");
+			$src = extraire_attribut(image_alpha($src,0),'src');
+			spip_log("application du filtre $var_filtre $src : $dest","photospip");
+		}
 		$process = $GLOBALS['meta']['image_process'];
 	
 		// imagick (php4-imagemagick)
@@ -159,14 +179,33 @@ function action_photospip_post($r){
 		}
 	}
 	else if($validation == "tester"){
-		if($var_filtre == 'tourner'){
+		// Si on fait simplement un test on se tappe pas tout le traitement sur l'image de base
+		if(($var_filtre == 'tourner') || ($var_filtre == 'image_recadre')){
+			$redirect = parametre_url($redirect,'message','sanstest');
 			redirige_par_entete(str_replace("&amp;","&",$redirect));
 			spip_log("on est dans un filtre tourner que l'on ne peut pas tester donc on retourne rien...", "photospip");
 		}
 		else{
-			// Si on fait simplement un test on se tappe pas tout le traitement sur l'image de base
+			$redirect = parametre_url($redirect,'message','previsu');
 			$redirect = parametre_url($redirect,'filtre',$var_filtre);
-			$redirect = parametre_url($redirect,'param',$params);
+			if($var_filtre == "image_recadre"){
+				if (!$param1){
+					$redirect = parametre_url($redirect,'filtre','');
+					$redirect = parametre_url($redirect,'message','sansconf');
+				}
+				else{
+					$redirect = parametre_url($redirect,'param',$param1);
+				}
+			}
+			else{
+				$redirect = parametre_url($redirect,'param',$params);
+			}
+			if($param2){
+				$redirect = parametre_url($redirect,'param2',$param2);
+			}
+			if($param3){
+				$redirect = parametre_url($redirect,'param3',$param3);
+			}
 			spip_log("on est dans un test, on fait simplement un retour avec des paramètres dans l'ajax : filtre = $var_filtre, param = $params", "photospip");
 			redirige_par_entete(str_replace("&amp;","&",$redirect));
 		}
@@ -178,7 +217,8 @@ function action_photospip_post($r){
 //
 // Appliquer le filtre image
 //
-//
+/////////////////////////////////////////////////////////////////////
+
 function photospipfiltre ($src, $dest, $filtre,$params){
 	spip_log("src = $src","photospip");
 	spip_log("dest = $dest","photospip");
@@ -191,10 +231,18 @@ function photospipfiltre ($src, $dest, $filtre,$params){
 	$src_img = '';
 	
 	if ($filtre){
-		if($params)
-		$dst_img = $filtre($src,$params);
-		else
-		$dst_img = $filtre($src);
+		if($params){
+			if($filtre == 'image_recadre'){
+				$dst_img = $filtre($src,$params[0],$params[1],$params[2]);
+				spip_log("$filtre($src,$params[0],$params[1],$params[2]);","photospip");
+			}
+			else{
+				$dst_img = $filtre($src,$params);		
+			}
+		}
+		else{
+			$dst_img = $filtre($src);
+		}
 		$dst_img = extraire_attribut($dst_img,'src');
 		spip_log("après le filtre $filtre dst_img = $dst_img","photospip");		
 	}

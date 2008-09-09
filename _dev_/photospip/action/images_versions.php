@@ -15,15 +15,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_images_versions_dist() {
 	include_spip('inc/distant'); # pour copie_locale
-
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-	spip_log($arg,'photospip');
 	if (!preg_match(",^\W*(\d+)$,", $arg, $r)) {
 		spip_log("action_images_versions_dist $arg pas compris","photospip");
-		spip_log(print_r($r),"photospip");
 	} else {
-		spip_log(print_r($r),"photospip");
 		action_images_versions_post($r);
 	}
 }
@@ -43,7 +39,7 @@ function action_images_versions_post($r){
 	include_spip('inc/charsets');	# pour le nom de fichier
 	include_spip('inc/documents'); 
 			
-	if(_request('var_ajaxcharset')){
+	if (_SPIP_AJAX === 1 ){
 		$redirect = _request('redirect_ajax');
 	}
 	else{
@@ -73,7 +69,7 @@ function action_images_versions_post($r){
 		while($version_delete = sql_fetch($res2)){
 				sql_delete("spip_documents_inters","id_document =$arg AND version = ".$version_delete['version']);
 				spip_log("Pour le doc $arg on delete la version ".$version_delete['version'],"photospip");
-				if($version_delete['version'] > 1){
+				if(($version_delete['version'] > 1) && ($total_delete > 1)){
 					unlink(_DIR_RACINE . copie_locale(get_spip_doc($version_delete['fichier'])));
 					spip_log("On vire le fichier ".$version_delete['fichier'],"photospip");
 				}
@@ -103,6 +99,7 @@ function action_images_versions_post($r){
 	else{
 		spip_log("script image_version... pas d'action demandée","photospip");
 	}
+	
 	redirige_par_entete(str_replace("&amp;","&",$redirect));
 }
 ?>
