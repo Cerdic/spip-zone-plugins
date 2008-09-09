@@ -5,7 +5,7 @@
  * 
  * Fichier de filtres communs au plugin agenda et PIM_agenda
  */
-
+/*
 function Agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', $lieu='', $url='', $cal=''){
 	return agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', $lieu='', $url='', $cal='');
 }
@@ -24,5 +24,5 @@ function Agenda_dateplus($date,$secondes,$format){
 function Agenda_moisdecal($date,$decalage,$format){
 	return agenda_moisdecal($date,$decalage,$format);
 }
-
+*/
 ?>
