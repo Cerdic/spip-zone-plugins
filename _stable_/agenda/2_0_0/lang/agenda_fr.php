@@ -3,6 +3,7 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+'agenda' => 'Agenda',
 'bouton_annuler' => 'Annuler',
 'activite_editoriale' => 'Activit&eacute; &Eacute;ditoriale',
 'ajouter_un_evenement' => 'ajouter un &eacute;v&eacute;nement &agrave; cet article',

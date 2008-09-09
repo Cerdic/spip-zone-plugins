@@ -2,10 +2,10 @@
 
 function agenda_ajouter_onglets($flux) {
 	if($flux['args']=='calendrier'){
-		$flux['data']['evenements']= new Bouton(
-														 _DIR_PLUGIN_AGENDA.'/img_pack/agenda-24.png', _T('agenda:evenements'),
+		$flux['data']['agenda']= new Bouton(
+														 _DIR_PLUGIN_AGENDA.'/img_pack/agenda-24.png', _T('agenda:agenda'),
 														generer_url_ecrire("calendrier","type=semaine"));
-		$flux['data']['editorial']= new Bouton(
+		$flux['data']['calendrier']= new Bouton(
 													 'cal-rv.png', _T('agenda:activite_editoriale'),
 													 generer_url_ecrire("calendrier","mode=editorial&type=semaine"));
 	}
