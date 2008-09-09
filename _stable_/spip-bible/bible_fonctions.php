@@ -92,7 +92,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	$separateur = $tableau_separateur[$lang];
 	$livres=$tableau_livres[$lang];
 	// phase d'anaylse
-	
+	echo $livre;
 	$livre = strtolower($livre);
 	$tableau = explode('-',$passage);
 	if (count($tableau)==2){
@@ -113,7 +113,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 		
 	$debut = $tableau[0];
 	
-	$livre = eregi_replace('[0-9|,|-]+','',$debut);
+	$livre = eregi_replace('[0-9|,|-]+$','',$debut);
 	
 	if (array_key_exists($livre,$livres) == false){
 		return _T('bible:pas_livre');
