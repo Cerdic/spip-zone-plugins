@@ -27,8 +27,8 @@ function formulaires_editer_evenement_charger_dist($id_evenement,$id_article){
 		$valeurs["date_fin"] = date('Y-m-d H:i:00',$t+3600);
 	}
 	// dispatcher date et heure
-	list($valeurs["heure_debut"],$valeurs["heure_debut"]) = explode(' ',date('Y-m-d H:i',strtotime($valeurs["date_debut"])));
-	list($valeurs["heure_fin"],$valeurs["heure_fin"]) = explode(' ',date('Y-m-d H:i',strtotime($valeurs["date_fin"])));
+	list($valeurs["date_debut"],$valeurs["heure_debut"]) = explode(' ',date('d/m/Y H:i',strtotime($valeurs["date_debut"])));
+	list($valeurs["date_fin"],$valeurs["heure_fin"]) = explode(' ',date('d/m/Y H:i',strtotime($valeurs["date_fin"])));
 	return $valeurs;
 }
 

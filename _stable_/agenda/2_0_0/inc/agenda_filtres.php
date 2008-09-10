@@ -96,6 +96,18 @@ function agenda_dateplus($date,$secondes,$format){
 	return date($format,$date);
 }
 
+/**
+ * Afficher un message "une truc"/"N trucs"
+ *
+ * @param int $nb
+ * @return string
+ */
+function agenda_affiche_un_ou_plusieurs($nb,$chaine_un,$chaine_plusieurs,$var='nb'){
+	if (!$nb=intval($nb)) return "";
+	if ($nb>1) return _T($chaine_plusieurs, array($var => $nb));
+	else return _T($chaine_un);
+}
+
 function agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', $lieu='', $url='', $cal='')
 {
 	static $agenda = array();

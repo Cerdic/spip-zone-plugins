@@ -13,5 +13,5 @@
 </head>
 
 <body class="page_agenda">
-[(#ENV{type, mois}|agenda_connu)<INCLURE {fond=agenda_#ENV{type,mois}} {type} {delais=900} {annee} {mois} {jour} {echelle} {partie_cal} {theme}>]
+[(#ENV{type, mois}|agenda_connu)<INCLURE {fond=noisettes/agenda_#ENV{type,mois}} {type} {delais=900} {annee} {mois} {jour} {echelle} {partie_cal} {theme}>]
 </body></html>

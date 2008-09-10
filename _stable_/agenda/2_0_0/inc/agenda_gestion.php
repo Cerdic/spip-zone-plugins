@@ -14,45 +14,6 @@ include_spip('inc/minipres');
 include_spip('inc/calendar');
 include_spip('agenda_mes_fonctions');
 
-function article_editable($id_article){
-	return autoriser('modifier','article',$id_article);
-}
-
-function Agenda_afficher_date_evenement($date_debut, $date_fin, $horaire){
-	$d = date("Y-m-d", $date_debut);
-	$f = date("Y-m-d", $date_fin);
-	$h = $horaire=='oui';
-	$hd = $h?date("H:i", $date_debut):"";
-	$hf = $h?date("H:i", $date_fin):"";
-	$s = affdate_jourcourt($d) . " $hd";
-	if ($d==$f)
-	{ // meme jour
-			if ($hd!=$hf) $s .= "-$hf";
-	}
-	else if ((date("Y-m",$date_debut))==date("Y-m",$date_fin))
-	{ // meme annee et mois, jours differents
-		$s = ($h?$s."<br/>"._T('agenda:evenement_date_au'):jour($d)." ".strtolower(_T('agenda:evenement_date_au')))
-			. affdate_jourcourt($f)." $hf";
-	}
-	else if ((date("Y",$date_debut))==date("Y",$date_fin))
-	{ // meme annee, mois et jours differents
-		if ($h)
-			$s .= " ".date("H:i",$date_debut);
-		$s .= "<br/>"._T('agenda:evenement_date_au').affdate_jourcourt($f);
-		if ($h)
-			$s .= " ".date("H:i",$date_fin);
-	}
-	else{ // tout different
-		$s = affdate($d);
-		if ($h)
-			$s .= " ".date("(H:i)",$date_debut);
-		$s .= "<br/>"._T('agenda:evenement_date_au').affdate($f);
-		if ($h)
-			$s .= " ".date("(H:i)",$date_fin);
-	}
-	return $s;
-}
-
 function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editable, $script)
 {
 	global $connect_statut, $options,$connect_id_auteur;

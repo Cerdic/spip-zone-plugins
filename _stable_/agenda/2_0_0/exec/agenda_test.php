@@ -72,17 +72,14 @@ Beispiel 3: 01/01/2008 "Auf ein revolutionäres neues Jahr!" REP=01/01/2009,01/01
 	';
 	$test = preg_split(",[\n\r]+,", $test0);
 	echo "<table class='arial11' style='border:1px solid; border-collapse:collapse; margin:1em;' border=0>";
-	echo "<tr class='tr_liste'><th>Chaine de saisie rapide</th><th>Code interpr&eacute;t&eacute;</th><th>Agenda_afficher_date_evenement</th><th>Filtre affdate_debut_fin</th></tr>";
+	echo "<tr class='tr_liste'><th>Chaine de saisie rapide</th><th>Code interpr&eacute;t&eacute;</th><th>Filtre affdate_debut_fin</th></tr>";
 	foreach($test as $s) {
 		$e = Agenda_compile_une_ligne($s);
 		if ($e) $e="<tr class='tr_liste'><td>$s</td><td>" 
 			. sprintf("%s/%s/%s %s:%s - %s/%s/%s %s:%s - %s<br/>'%s' '%s' '%s' '%s' '%s'", 
 						$e[0][1], $e[0][2], $e[0][3], $e[0][4], $e[0][5], $e[0][6], $e[0][7], $e[0][8], $e[0][9], $e[0][10], $e['horaire'], 
 						$e['titre'], $e['lieu'], $e['descrip'], join(', ', $e['selected_rep']), join(', ', $e['mots']) )
-			. '</td><td>' . Agenda_afficher_date_evenement(
-					$a1 = mktime($e[0][4], $e[0][5], 0, $e[0][2], $e[0][1], $e[0][3]),
-					$a2 = mktime($e[0][9], $e[0][10], 0, $e[0][7], $e[0][6], $e[0][8]), $e['horaire'])
-			. '</td><td>' . Agenda_affdate_debut_fin( 
+			. '</td><td>' . agenda_affdate_debut_fin( 
 					$a1 = format_mysql_date($e[0][3], $e[0][2], $e[0][1], $e[0][4], $e[0][5]), 
 					$a2 = format_mysql_date($e[0][8], $e[0][7], $e[0][6], $e[0][9], $e[0][10]), $e['horaire'])
 			. "</td></tr>";

@@ -23,9 +23,9 @@ function exec_agenda_evenements_dist(){
 	$out = $commencer_page(_T('agenda:tous_les_evenements'), "agenda", "calendrier");
 	$out .= barre_onglets("calendrier", "agenda");
 	
-	$contexte = array('couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
+	$contexte = array();
 	foreach($_GET as $key=>$val)
-	$contexte[$key] = $val;
+		$contexte[$key] = $val;
 
 	$out .= debut_gauche("agenda",true);
 

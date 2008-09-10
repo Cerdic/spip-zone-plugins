@@ -30,7 +30,9 @@ function agenda_affiche_milieu($flux) {
 	if ($exec=='articles'){
 		//on teste si cfg est actif
 		$afficher = true;
-		if (defined('_DIR_PLUGIN_CFG') && (count(lire_config("agenda/rubriques_agenda",' '))>1)) {
+		//Cette strategie est erronnee : si un article possede des evenements, il *faut* les montrer
+		// ou qu'on soit
+		/* if (defined('_DIR_PLUGIN_CFG') && (count(lire_config("agenda/rubriques_agenda",' '))>1)) {
 			$arracfgrubriques=lire_config("agenda/rubriques_agenda",' ');
 			if ($id_article!=''){
 				//on cherche la rubrique de l'article
@@ -39,13 +41,13 @@ function agenda_affiche_milieu($flux) {
 				if ($id_rubrique  AND !in_array($id_rubrique, $arracfgrubriques))
 					$afficher = false;
 			}
-		}
+		}*/
 		if ($afficher) {
-			$contexte = array('id_article'=>$id_article,
-			'id_evenement'=>_request('id_evenement'),
-			'id_evenement_edit'=>_request('id_evenement_edit'));
-			$page = evaluer_fond('prive/contenu/evenements_article',$contexte);
-			$flux['data'] .= $page['texte'];
+			$contexte = array();
+			foreach($_GET as $key=>$val)
+				$contexte[$key] = $val;
+			 $evenements = recuperer_fond('prive/contenu/evenements_article',$contexte);
+			 $flux['data'] .= $evenements;
 		}
 	}
 	return $flux;
