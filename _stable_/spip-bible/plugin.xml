@@ -40,8 +40,8 @@ Ces options sont :
     bible
     </prefix>
     
-
-	<options>bible_fonctions.php</options>
+	<options>bibles_options.php</options>
+	<fonctions>bible_fonctions.php</fonctions>
    
  
 </plugin>

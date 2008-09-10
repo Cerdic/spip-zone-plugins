@@ -5,7 +5,6 @@ Spip-Bible
 */
 
 
-
 function bible_install($action){
 	
 	switch($action){
@@ -361,6 +360,9 @@ function bible_generer_doc($lang){
 			$gateway = $traduction['gateway'];
 			$wissen  = $traduction['wissen'];
 			$unbound = $traduction['unbound'];
+			$at = $traduction['at'];
+			$nt = $traduction['nt'];
+			$deutero = $traduction['deutero'];
 			$lire = $traduction['lire'];
 			
 			if ($gateway){
@@ -387,8 +389,10 @@ function bible_generer_doc($lang){
 			}
 			
 			$texte.= ' {source} : '.$url;
-			$texte.='<br>- {valeur du paramètre traduction} : «'.$abrev.'»<br/>'; 	
-		
+			$texte.='<br>- {valeur du paramètre traduction} : «'.$abrev.'»'; 		
+			$at == true ? $texte.='<br>- {Ancien Testament} : oui ' : $texte.='<br>- {Ancien Testament} : non ';
+			$deutero == true ? $texte.='<br>- {Deutérocanoniques} : oui ' : $texte.='<br>- {Deutérocanoniques} : non ';
+			$nt == true ? $texte.='<br>- {Nouveau Testament} : oui <br/>' : $texte.='<br>- {Nouveau Testament} : non <br/>';
 		
 		}
 	

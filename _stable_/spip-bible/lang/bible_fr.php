@@ -5,6 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	//la config
+	'livres_bibles'		=>	'Liste des livres disponibles dans la Bible version  «@trad@ »',
 	'cfg_ref'			=>	'Afficher la r&eacute;f&eacute;rences du passage cit&eacute;',
 	'cfg_retour'		=>	'Faire des retour à la ligne entre les versets',
 	'cfg_traduction_fr'	=>	'Traduction francaise par d&eacute;faut',
