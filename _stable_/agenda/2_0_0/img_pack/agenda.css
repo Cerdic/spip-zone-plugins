@@ -17,6 +17,7 @@ ul.evenements li.item.court p {display:none;}
 .evenements li.item .jour {width:120px;margin-left:-130px;float:left;display:inline;position:relative;}
 
 li.item .repetitions {margin-top:0.5em;font-size:0.9em;}
+li.court .repetitions {display: none;}
 li.item .repetitions ul,
 li.item .repetitions li {display:inline;margin:0;padding:0;}
 
@@ -25,11 +26,15 @@ li.item .repetitions li {display:inline;margin:0;padding:0;}
 .clicable {cursor:hand;cursor:pointer;}
 
 /* sur la fiche article */
-.articles .fiche_objet .plier_deplier {float:right;font-size:0.9em;}
+.articles .fiche_objet #agenda { border: 1px solid #999;}
+.articles .fiche_objet #agenda h2.titre { margin: 0; padding: 4px 4px 8px; background: #c0cad4; font-size: 100%; }
+.articles .fiche_objet .plier_deplier { float: right; margin-right: 4px; font-size: 0.9em;}
+.articles .fiche_objet #agenda .evenements { margin-left: 4px; margin-right: 4px; }
 .articles .fiche_objet .evenements li.item {padding-left:100px;}
 .articles .fiche_objet .evenements li.item .jour {width:95px;margin-left:-100px;}
 .articles .fiche_objet .evenements {font-size:0.9em;}
 .articles .fiche_objet .evenements span.lien_article {display:none;}
+.articles .fiche_objet #agenda .pagination { margin: 1em 0 0; padding: 0 4px 4px; background: #eee; }
 
 /* edition d'un evenement */
 .formulaire_editer_evenement .editer_horaire {padding:0;margin:-2em 0 0 0;float:right;}
