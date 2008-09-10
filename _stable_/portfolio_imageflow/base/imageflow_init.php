@@ -118,7 +118,7 @@ function imageflow_install ($action) {
 function imageflow_vider_tables () {
 
 	effacer_meta(_IMAGEFLOW_META_PREFERENCES);
-	imageflow_log("DELETE meta", $result);
+	imageflow_log("DELETE meta");
 	
 	// recharge les metas en cache 
 	imageflow_ecrire_metas();
