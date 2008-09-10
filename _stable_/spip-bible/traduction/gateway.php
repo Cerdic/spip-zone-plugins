@@ -53,25 +53,30 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 		
 		$tableau=explode('</h4>',$code);
 		$code=$tableau[1];
-		$tableau = explode('<strong>Footnotes:</strong>',$code);
-		$code = $tableau[0];
+		if(eregi('<strong>Footnotes:</strong>',$code)){
+			$tableau = explode('<strong>Footnotes:</strong>',$code);
+			$code = $tableau[0];
+		}
 		//suppression des intertitres
-		$tableau = explode('<h5>',$code);
-		$d = 0;
-		$tableau2 = array();
-		foreach ($tableau as $j){
-			if (eregi('</h5>&nbsp;',$j)){
+		if(eregi('<h5>',$code)){
+			$tableau = explode('<h5>',$code);
+			
+			$d = 0;
+			$tableau2 = array();
+			foreach ($tableau as $j){
+				if (eregi('</h5>&nbsp;',$j)){
+					
+					$tableau3 = explode('</h5>&nbsp;',$j);
+					$tableau2[$d]=$tableau3[1];
+					
 				
-				$tableau3 = explode('</h5>&nbsp;',$j);
-				$tableau2[$d]=$tableau3[1];
-				
+				}
+				$d++;
 			
 			}
-			$d++;
-		
+			
+			$code = implode('',$tableau2);
 		}
-		
-		$code = implode('',$tableau2);
 		//supprerssion des balises
 		$code = str_replace('<p />','<br />',$code);
 		$code = str_replace(' class="sup">',"><sup>",$code);
