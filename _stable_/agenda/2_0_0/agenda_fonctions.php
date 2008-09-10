@@ -21,5 +21,15 @@ function Agenda_heure_selector($date,$suffixe){
   	afficher_minute($minute, "name='minute_evenement$suffixe' size='1' class='fondl'");
 }
 
+function critere_fusion_date_mois($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$type = $boucle->type_requete;
+	$date = $GLOBALS['table_date'][$type];
+	$champ_date = $boucle->id_table.'.'.$date;
+
+	$boucles[$idb]->group[]  = 'DATE_FORMAT('.$champ_date.', \'%Y-%m\')'; 
+	$boucles[$idb]->select[] = 'DATE_FORMAT('.$champ_date.', \'%Y-%m\') AS date';
+}
+
 
 ?>

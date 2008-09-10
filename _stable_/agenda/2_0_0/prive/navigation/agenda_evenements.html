@@ -5,6 +5,9 @@
 <li><a href='[(#GET{self}|parametre_url{date_debut,#DATE_DEBUT|affdate{Y-m-d}})]'>Depuis le debut</a></li>
 </BOUCLE_debut>
 
-[(#REM) faire ici une navigation par mois, non ?]
+[(#REM) navigation par mois]
+<BOUCLE_mois(EVENEMENTS){!par date_debut}{fusion_date_mois}>
+<li><a href='[(#GET{self}|parametre_url{date_debut,#DATE_DEBUT|affdate{Y-m-d}})]'>[(#DATE_DEBUT|affdate_mois_annee)]</a></li>
+</BOUCLE_mois>
 
 </ul>
