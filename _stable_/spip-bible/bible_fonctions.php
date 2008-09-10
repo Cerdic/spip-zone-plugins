@@ -4,6 +4,11 @@ Maïeul Rouquette Licence GPL 3
 Spip-Bible
 */
 
+function bible_test_livre_seul($i){
+	if (eregi('[0-9|,|-]+$',$i)){ return 'non';}
+	else {return 'oui';}
+
+}
 
 function bible_install($action){
 	
@@ -210,6 +215,17 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 		{return '<div lang="'.$lang_original.'" dir="'.$dir.'">'.$texte.'</quote></div>';
 	}
 }
+function livre_long($i,$lang=''){
+	global $spip_lang;
+	$lang =='' ? $lang = $spip_lang : $lang=$lang;
+	
+	$i = eregi_replace('[0-9|,|-]+$','',$i);
+	
+	$tableau_livres = bible_tableau('livres');
+	
+	return $tableau_livres[$lang][$i];
+
+}
 
 function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang){
 	
@@ -257,10 +273,11 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang){
 
 }
 function traduction_longue($i){
-	//$fictif ne sert à rien, mais c'est pour ne aps à avoir a faire appel à #VAL (car existe pas <2.0)
+	
 	$tableau_traduction = bible_tableau('traduction');
 	return $tableau_traduction[$i]['traduction'];
 	}
+	
 function traduction_defaut($lang){
 	$normal =  lire_config('bible/traduction_'.$lang);
 	//pour compatibilite

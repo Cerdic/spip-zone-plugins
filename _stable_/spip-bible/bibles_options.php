@@ -6,6 +6,7 @@ function afficher_livres($trad,$modele='standard'){
 	$tableau_trad  = bible_tableau('traduction');
 	$tableau_livre = bible_tableau('livres');
 	$livres_deutero = bible_tableau('deutero');
+	$trad2=$trad;
 	$trad = $tableau_trad[$trad];
 	
 	if (gettype($trad)!='array'){
@@ -55,7 +56,7 @@ function afficher_livres($trad,$modele='standard'){
 			
 			modulo($j,2) == 0 ? $class='row_even' : $class='row_odd';
 			$livre = $tableau_livre['fr'][$abreviation];
-			$texte.= recuperer_fond($url,array('class'=>$class,'livre'=>$livre,'abreviation'=>$abreviation))."\n";
+			$texte.= recuperer_fond($url,array('class'=>$class,'livre'=>$livre,'abreviation'=>$abreviation,'trad'=>$trad2))."\n";
 			$j++;}
 			
 		
@@ -80,4 +81,44 @@ function balise_LIVRES_BIBLIQUES($p) {
 	return $p;
 	
 }
+
+function balise_LIVRE_LIENS_CHAPITRES($p){
+	global $spip_lang;
+	//les paramètres
+	$livre = interprete_argument_balise(1,$p);
+	$modele = interprete_argument_balise(3,$p);
+	$lang = interprete_argument_balise(4,$p);
+	$trad = interprete_argument_balise(2,$p);
+	
+	gettype($modele) == 'NULL' ?  $modele = 'standard' : $modele = $modele;
+	gettype($lang) == 'NULL' ?  $lang = $spip_lang : $lang = $lang;
+	gettype($trad) == 'NULL' ? $trad = lire_config('bible/traduction_'.$lang) : $trad = $trad;
+	
+	$p->code = "liens_chapitres($livre,$modele,$lang,$trad)";
+	return $p;
+
+}
+
+function liens_chapitres($livre,$modele,$lang,$trad){
+	$tableau_livre_gateway = bible_tableau('gateway');
+	$tableau_chapitre = bible_tableau('nombres_chapitre');
+	$nlivre = $tableau_livre_gateway[$lang][$livre];
+	$nombre = $tableau_chapitre[$nlivre-1];
+	
+	$url = 'fonds/livres_liens_chapitres_'.$modele ;
+	
+	$i = 1;
+	$texte = '';
+	while ($i<$nombre){
+		$texte.= recuperer_fond($url,array('n'=>$i,'livre'=> $livre,'trad'=>$trad))." | ";
+		$i++;
+		
+	
+	}
+	
+	$texte .= recuperer_fond($url,array('n'=>$i,'livre'=> $livre,'trad'=>$trad));
+	return $texte;
+}
+
+
 ?>

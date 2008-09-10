@@ -4,6 +4,8 @@
 
 
 function bible_tableau($i,$lang=''){
+	$nombre_chapitres = array(50,40,27,36,34,24,21,4,31,24,22,25,29,36,10,13,14,16,10,16,15,42,150,31,51,8,1,51,66,52,5,6,48,13,14,3,9,1,4,7,3,3,3,2,14,14,28,16,24,21,28,16,16,13,6,6,4,4,5,3,6,4,3,1,13,5,5,3,5,1,1,1,22);
+	
 	$deutero = array(17,18,19,20,21,28,32);
 	$lire_la_bible = array(
 		'1Ch' =>'1Chroniques',		'1R' =>'1Rois',		'1S' =>'1Samuel',		'2Ch' =>'2Chroniques',		'2R' =>'2Rois',		'2S' =>'2Samuel',		'Ab' =>'Abdias',		'Ag' =>'Aggee',		'Am' =>'Amos',		'Ct' =>'Cantiquedescantiques',		'Dn' =>'Daniel',		'Dt' =>'Deuteronome',		'Qo' =>'Ecclesiaste',		'Is' =>'Esaie',		'Ez' =>'Ezechiel',		'Esd' =>'Esdras',		'Est' =>'Esther',		'Ex' =>'Exode',		'Ez' =>'Ezechiel',		'Gn' =>'Genese',		'Ha' =>'Habacuc',		'Jr' =>'Jeremie',		'Jl' =>'Joel',		'Jb' =>'Job',		'Jon' =>'Jonas',		'Jos' =>'Josue',		'Jg' =>'Juges',		'Lm' =>'Lamentations',		'So' =>'Sophonie',		'Lv' =>'Levitique',		'Ml' =>'Malachie',		'Mi' =>'Michee',		'Na' =>'Nahoum',		'Ne' =>'Nehemie',		'Nb' =>'Nombres',		'Os' =>'Osee',		'Pr' =>'Proverbes',		'Ps' =>'Psaumes',		'Rt' =>'Ruth',		'1M' =>'1Maccabees',		'2M' =>'2Maccabees',		'Ba' =>'Baruch',		'Sg' =>'Sagesse',		'Si' =>'Siracide',		'Tb' =>'Tobit',		'Jdt' =>'Judith',		'1Co' =>'1Corinthiens',		'1Jn' =>'1Jean',		'1P' =>'1Pierre',		'1Th' =>'1Thessaloniciens',		'1Tm' =>'1Timothee',		'2Co' =>'2Corinthiens',		'2Jn' =>'2Jean',		'2P' =>'2Pierre',		'2Th' =>'2Thessaloniciens',		'2Tm' =>'2Timothee',		'3Jn' =>'3Jean',		'Ac' =>'Actes',		'Ap' =>'Apocalypse',		'Col' =>'Colossiens',		'Ep' =>'Ephesiens',		'Ga' =>'Galates',		'He' =>'Hebreux',		'Jc' =>'Jacques',		'Jn' =>'Jean',		'Jude' =>'Jude',		'Lc' =>'Luc',		'Mc' =>'Marc',		'Mt' =>'Matthieu',		'Ph' =>'Philemon',		'Phm' =>'Philippiens',		'Rm' =>'Romains',		'Tt' =>'Tite');
@@ -368,7 +370,7 @@ $tableau_livres = array(
 	'2Jn'=>'2 Jean',
 	'3Jn'=>'3 Jean',
 	'Jude' => 'Jude',
-	'ha'=>'Habacuc',
+	'Ha'=>'Habacuc',
 	'Ap'=>'Apocalypse'
 	 ),
 	'en' =>array(
@@ -473,6 +475,8 @@ $tableau_separateur = array(
 			return $gateway_to_unboud;
 		case 'lire_la_bible':
 			return $lire_la_bible;
+		case 'nombres_chapitre':
+			return $nombre_chapitres;
 		case 'deutero':
 			return $deutero;
 		case 'petit_livre':
