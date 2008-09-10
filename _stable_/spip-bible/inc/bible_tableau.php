@@ -21,169 +21,248 @@ function bible_tableau($i,$lang=''){
 	'bty'		=>array(
 		'gateway'=>12,
 		'traduction'=> 'Biblia Tysiaclecia',
-		'lang'=>'pl'
+		'lang'=>'pl',
+		'nt'=> true,
+		'at'=> true,
+		'deutero'=> true
 	),
 	'pev'		=>array(
 			'gateway'=>34,
 			'traduction'=> 'La Parola è Vita',
-			'lang'=>'it'	
+			'lang'=>'it',
+		'nt'=> true
+		
+			
+				
 					),
 	'lnd'		=>array(
 			'gateway'=>55,
 			'traduction'=> 'La Nuova Diodati',
-			'lang'=>'it'	
+			'lang'=>'it',
+		'nt'=> true,
+		'at'=> true	
 					),
 	'cei'		=>array(
 			'gateway'=>3,
 			'traduction'=> 'Conferenza Episcopale Italiana',
-			'lang'=>'it'	
+			'lang'=>'it',
+		'nt'=> true,
+		'at'=> true,
+		'deutero'=> true	
 					),
 	
 	'rvantigua'		=>array(
 			'gateway'=>61,
 			'traduction'=> 'Reina-Valera Antigua',
-			'lang'=>'es'	
+			'lang'=>'es',
+		'nt'=> true,
+		'at'=> true	
 					),
 	'rv95'		=>array(
 			'gateway'=>61,
 			'traduction'=> 'Reina-Valera 1995',
-			'lang'=>'es'	
+			'lang'=>'es',
+		'nt'=> true,
+		'at'=> true	
 					),
 
 	'rv60'		=>array(
 			'gateway'=>60,
 			'traduction'=> 'Reina-Valera 1960',
-			'lang'=>'es'	
+			'lang'=>'es',
+		'nt'=> true,
+		'at'=> true	
 					),
 	'nvi'		=>array(
 			'gateway'=>42,
 			'traduction'=> 'Nueva Versión Internacional',
-			'lang'=>'es'	
+			'lang'=>'es',
+		'nt'=> true,
+		'at'=> true	
 					),
 	'americas'		=>array(
 			'gateway'=>59,
 			'traduction'=> 'La Biblia De Las Américas',
-			'lang'=>'es'	
+			'lang'=>'es',
+		'nt'=> true,
+		'at'=> true	
 					),
 	'bls'		=>array(
 			'gateway'=>57,
 			'traduction'=> 'Biblia en lenguaje sencillo',
-			'lang'=>'es'	
+			'lang'=>'es',
+		'nt'=> true
+		
 					),
 	'cast'		=>array(
 			'gateway'=>41,
 			'traduction'=> 'Castilian',
-			'lang'=>'es'	
+			'lang'=>'es',
+		'nt'=> true
+		
 					),
 	'dhh'		=>array(
 			'gateway'=>58,
 			'traduction'=> 'Dios Habla Hoy',
-			'lang'=>'es'	
+			'lang'=>'es',
+		'nt'=> true,
+		'at'=> true,
+		'deutero'=> true	
 					),
 	
 	'tob'		=>array(
 			'lire'=>'TOB',
 			'traduction'=> 'Traduction Œcuménique de la Bible',
-			'lang'=>'fr'	
+			'lang'=>'fr',
+		'nt'=> true,
+		'at'=> true,
+		'deutero'=> true	
 					),
 	'bfc'		=>array(
 			'lire'=>'BFC',
 			'traduction'=> 'Bible en Français Courant',
-			'lang'=>'fr'	
+			'lang'=>'fr',
+		'nt'=> true,
+		'at'=> true,
+		'deutero'=> true	
 					),
 	'nbs'		=>array(
 			'lire'=>'NBS',
 			'traduction'=> 'Nouvelle Bible Segond',
-			'lang'=>'fr'	
+			'lang'=>'fr',
+		'nt'=> true,
+		'at'=> true	
 					),
 	'pdv'		=>array(
 			'lire'=>'PDV',
 			'traduction'=> 'La Bible Parole de Vie',
-			'lang'=>'fr'	
+			'lang'=>'fr',
+		'nt'=> true,
+		'at'=> true,
+		'deutero'=> true	
 					),
 	'colombe'		=>array(
 			'lire'=>'Colombe',
 			'traduction'=> 'Bible de la Colombe',
-			'lang'=>'fr'	
+			'lang'=>'fr',
+		'nt'=> true,
+		'at'=> true	
 					),
 	'nachricht'		=> array(
 		
 		'wissen'=>'gute-nachricht-bibel',
 		'traduction'=> 'Gute Nachricht Bibel ',
-		'lang'		=>'de'
+		'lang'		=>'de',
+		'nt'=> true,
+		'at'=> true,
+		'deutero'=> true
 			),
 	'menge'		=> array(
 		
 		'wissen'=>'Menge Bibel',
 		'traduction'=> 'Menge Bibel',
-		'lang'		=>'de'
+		'lang'		=>'de',
+		'nt'=> true,
+		'at'=> true,
+		'deutero'=> true
 			),
 	'luther1984'		=> array(
 		
 		'wissen'=>'luther-bibel-1984',
 		'traduction'=> 'Bibel von Luther (1984)',
-		'lang'		=>'de'
+		'lang'		=>'de',
+		'nt'=> true,
+		'at'=> true,
+		'deutero'=> true
+		
 			),
 	'luther1912'		=> array(
 		
 		'unbound'=>'german_luther_1912_ucs2',
 		'traduction'=> 'Bibel von Luther (1912)',
-		'lang'		=>'de'
+		'lang'		=>'de',
+		'nt'=> true,
+		'at'=> true
 			),
 	'luther1545'		=> array(
 		
 		'unbound'=>'german_luther_1545_ucs2',
 		'traduction'=> 'Bibel von Luther (1545)',
-		'lang'		=>'de'
+		'lang'		=>'de',
+		'nt'=> true,
+		'at'=> true
 			),
 	'lxx'		=> array(
 		'wissen' 	=> 'septuaginta-lxx',
 		'gateway'	=> false,
 		'traduction'=> 'Septante',
-		'lang'		=>'grc'
+		'lang'		=>'grc',
+		
+		'at'=> true,
+		'deutero'=> true
 			),
 	'vulg'		=> array(
 		'wissen' 	=> 'biblia-sacra-vulgata',
 		'gateway'	=> false,
 		'traduction'=> 'Biblia Sacra Vulgata',
-		'lang'		=>'lat'
+		'lang'		=>'lat',
+		'nt'=> true,
+		'at'=> true,
+		'deutero'=> true
 			),
 		
 	'bhs'		=> array(
 		'wissen' 	=> 'biblia-hebraica-stuttgartensia-bhs',
 		'gateway'	=> false,
 		'traduction'=> 'Biblia Hebra&iuml;ca Stuttgartensia',
-		'lang'		=>'hbo'
+		'lang'		=>'hbo',
+		
+		'at'=> true
 				),
 	'na'		=> array(
 		'traduction'=> 'Nestl&eacute;-Aland',
 		'gateway'	=> false,
 		'lang'		=>'grc',
-		'wissen'	=>'novum-testamentum-graece-na-27'),
+		'wissen'	=>'novum-testamentum-graece-na-27',
+		'nt'=> true)
+		,
 	'jerusalem' => array(
 		'traduction'=> 'Bible de J&eacute;rusalem',
 		'gateway'	=> false,
-		'lang'		=> 'fr'),
+		'lang'		=> 'fr',
+		'nt'=> true,
+		'at'=> true,
+		'deutero'=> true),
 	'lsg' => array(
 		'traduction'=> 'Louis Segond 1910',
 		'gateway'	=> 2,
-		'lang'		=> 'fr'),
+		'lang'		=> 'fr',
+		'nt'=> true,
+		'at'=> true),
 	'bds' => array(
 		'traduction'=> 'Bible du Semeur',
 		'gateway'	=> 32,
-		'lang'		=> 'fr'),
+		'lang'		=> 'fr',
+		'nt'=> true,
+		'at'=> true),
 	'kj21' => array(
 		'traduction'=> 'The 21st Century King James',
 		'gateway'	=> 48,
-		'lang'		=> 'en'),
+		'lang'		=> 'en',
+		'nt'=> true,
+		'at'=> true),
 	'darb_en' => array(
 		'traduction'=> 'Darby',
 		'gateway'	=> 16,
-		'lang'		=> 'en'),
+		'lang'		=> 'en',
+		'nt'=> true,
+		'at'=> true),
 	'kj'		=> array(
 		'traduction'=>'King Jame',
 		'gateway'	=>9,
-		'lang'		=>'en'
+		'lang'		=>'en',
+		'nt'=> true,
+		'at'=> true
 	)
 );
 
