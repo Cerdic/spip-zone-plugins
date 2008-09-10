@@ -209,7 +209,7 @@ z-index:20;
 <div id="playliste_video">
 
 
-<object id="myFlash" type="application/x-shockwave-flash" data="#CHEMIN{player_flv_js.swf}" width="#ENV{largeur,480}" height="#ENV{hauteur,385}">
+<object id="myFlash" type="application/x-shockwave-flash" data="#CHEMIN{player_flv_js.swf}" width="#ENV{largeur,480}" height="#ENV{hauteur,360}">
 					<param name="movie" value="#CHEMIN{player_flv_js.swf}" />
 					<param name="AllowScriptAccess" value="always" />
 					<param name="FlashVars" value="listener=myListener&amp;interval=500&amp;useHandCursor=0&amp;bgcolor=000000&amp;buffer=9" />
@@ -237,7 +237,7 @@ z-index:20;
 
 
 <ul class="playliste">
-			<BOUCLE_doc (DOCUMENTS) {id_article ?} {extension==flv} {fichier == (flv$)} {!par date}{0,100}>
+			<BOUCLE_doc (DOCUMENTS) {id_rubrique ?} {id_article ?} {extension==flv} {fichier == (flv$)} {!par date}{0,100}>
 			<li class="play_">
 			<a href="[(#FICHIER|replace{"\?key=(.)*$",""})]" type="#TYPE" rel="video">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{50})]})]</a>
 			</li>
