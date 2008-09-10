@@ -143,21 +143,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lier_articles' => '<NEW>Permettre d\'associer les donn&eacute;es aux articles',
 	'lier_documents' => '<NEW>Permettre de joindre des documents aux donn&eacute;es',
 	'lier_documents_mail' => '<NEW>Joindre les documents &agrave; l\'email',
-	'liste_choix' => '<NEW>Liste des choix propos&eacute;s',
+	'liste_choix' => 'Lista les escoyetes propuestes',
 
 	// M
-	'moderation_donnees' => '<NEW>Valider les donn&eacute;es avant publication :',
-	'modifiable_donnees' => '<NEW>Donn&eacute;s modifiables dans l\'espace public&nbsp;:',
-	'monetaire_invalide' => '<NEW>Champ mon&eacute;taire invalide',
-	'monnaie_euro' => '<NEW>Euro (&euro;)',
-	'multiple_donnees' => '<NEW>Saisie des donn&eacute;es dans l\'espace public&nbsp;:',
+	'moderation_donnees' => 'Validar los datos enantes d\'espublizalos:',
+	'modifiable_donnees' => 'Datos camudables nel espaciu p&uacute;blicu:',
+	'monetaire_invalide' => 'Campu monetariu non v&aacute;lidu',
+	'monnaie_euro' => 'Euro (&euro;)',
+	'multiple_donnees' => 'Iguar los datos nel espaciu p&uacute;blicu:',
 
 	// N
-	'nb_decimales' => '<NEW>Nombre de d&eacute;cimales',
-	'nombre_reponses' => '<NEW>@nombre@ donn&eacute;es',
-	'nouveau_champ' => '<NEW>Nouveau champ',
-	'nouveau_choix' => '<NEW>Nouveau choix',
-	'nouveau_formulaire' => '<NEW>Nouveau formulaire',
+	'nb_decimales' => 'N&uacute;mberu decimales',
+	'nombre_reponses' => '@nombre@ datos',
+	'nouveau_champ' => 'Nuevu campu',
+	'nouveau_choix' => 'Nueva eleici&oacute;n',
+	'nouveau_formulaire' => 'Nuevu formulariu',
 	'numerique_invalide' => '<NEW>Champ num&eacute;rique invalide',
 
 	// P
