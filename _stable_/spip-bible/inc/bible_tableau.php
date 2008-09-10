@@ -193,7 +193,7 @@ function bible_tableau($i,$lang=''){
 		'lang'		=>'de',
 		'nt'=> true,
 		'at'=> true,
-		'historique'=>'La fameuse Biblqie que Luther publia en langue vulgaire en 1545.'
+		'historique'=>'La fameuse Bible que Luther publia en langue vulgaire en 1545.'
 			),
 	'lxx'		=> array(
 		'wissen' 	=> 'septuaginta-lxx',

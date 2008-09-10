@@ -1,6 +1,6 @@
 <?
 include_spip('inc/bible_tableau.php');
-function balise_INFO_BIBLE_VERSION($p){
+function balise_INFO_BIBLE_TRADUCTION($p){
 	$trad = str_replace("'",'',interprete_argument_balise(1,$p));
 	$info = str_replace("'",'',interprete_argument_balise(2,$p));
 	$i = info_bible_version($trad,$info);
@@ -43,6 +43,40 @@ function info_bible_version($trad,$info){
 	
 	
 }
+function balise_BIBLE_TRADUCTIONS($p){
+	$tableau_trad  = bible_tableau('traduction');
+	$tableau_separateur = bible_tableau('separateur');
+	$tableau_original = bible_tableau('original');
+	$tableau_lang = array_merge($tableau_separateur,$tableau_original);
+	
+	$lang = interprete_argument_balise(1,$p);
+	
+	gettype($lang) == 'NULL' ? $lang = 'tous' : $lang = $lang;
+	
+	$lang = eregi_replace("'",'',$lang);
+	foreach ($tableau_lang as $lang1=>$i){
+		
+		foreach ($tableau_trad as $trad=>$inf){
+			
+			if  (($lang == $inf['lang'] or $lang=='tous') and $inf['lang']==$lang1){
+				$_code[] = "$trad";
+			
+			}
+		
+		}
+	}
+	
+	
+	$code = array();
+	
+	
+	$p->code = 'array(' . join(', ',$_code).')';
+	
+	$p->interdire_scripts=false;
+	return $p;
+
+}
+
 function afficher_livres($trad,$modele='standard'){
 	
 	$tableau_trad  = bible_tableau('traduction');

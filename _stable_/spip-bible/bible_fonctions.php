@@ -226,6 +226,19 @@ function livre_long($i,$lang=''){
 	return $tableau_livres[$lang][$i];
 
 }
+function filtre_ref($i){
+	global $spip_lang;
+	$tableau_livres = bible_tableau('livres');
+	
+	$livre = eregi_replace('[0-9|,|-]+$','',$i);
+	$trad = $tableau_livres[$spip_lang][$livre];
+	
+	$c = eregi_replace($livre,'',$i);
+	
+	return $trad.' '.$c; 
+	
+	
+}
 
 function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang){
 	
