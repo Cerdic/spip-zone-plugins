@@ -3,6 +3,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	'at'=>'Ancien Testament',
+	'langue'=>'Langue',
+	'nt'=>'Nouveau Testament',
+	'deutero'=>'Livres Deut&eacute;rocanoniques',
+	'historique'=>'Historique',
+
 
 	//la config
 	'livres_bibles'		=>	'Liste des livres disponibles dans la Bible version  «@trad@ »',

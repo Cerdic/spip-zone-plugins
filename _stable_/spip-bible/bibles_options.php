@@ -1,6 +1,48 @@
 <?
 include_spip('inc/bible_tableau.php');
+function balise_INFO_BIBLE_VERSION($p){
+	$trad = str_replace("'",'',interprete_argument_balise(1,$p));
+	$info = str_replace("'",'',interprete_argument_balise(2,$p));
+	$i = info_bible_version($trad,$info);
+	$p->code = "info_bible_version($trad,$info)";
+	
+	return $p;
+}
 
+function info_bible_version($trad,$info){
+	
+	$tableau_trad  = bible_tableau('traduction');
+	
+	
+	$tableau_trad = $tableau_trad[$trad];
+	
+	
+	switch ($info){
+		case 'lang':
+			return traduire_nom_langue($tableau_trad['lang']);
+		case 'nt':
+			$nt = $tableau_trad['nt'];
+			$nt == true ? $i = _T('item_oui') : $i= _T('item_non');
+			return $i;
+		case 'at':
+			$at = $tableau_trad['at'];
+			$at == true ? $i = _T('item_oui') : $i= _T('item_non');
+			return $i;
+		case 'deutero':
+			$deutero = $tableau_trad['deutero'];
+			$deutero == true ? $i = _T('item_oui') : $i= _T('item_non');
+			return $i;
+		case 'traduction':
+			return $tableau_trad['traduction'];
+		case 'historique':
+			return propre($tableau_trad['historique']);	
+			
+		}
+	
+	
+	
+	
+}
 function afficher_livres($trad,$modele='standard'){
 	
 	$tableau_trad  = bible_tableau('traduction');
