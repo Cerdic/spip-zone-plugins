@@ -47,5 +47,4 @@ _ &#169; 2006 - Licence GPL 3
 	</pipeline>
 	<necessite id='SPIP' version='[2.0.0 dev;]' />
 	<necessite id='spip2' version='[1.0;]' />
-	spip2
 </plugin>
