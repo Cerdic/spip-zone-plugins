@@ -45,3 +45,10 @@ li.item .repetitions li {display:inline;margin:0;padding:0;}
 .formulaire_editer_evenement input.date {width:7em;}
 .formulaire_editer_evenement span.afficher_horaire label {float:none;display:inline;padding:0;margin:0;}
 .formulaire_editer_evenement input.heure {width:5em;}
+
+/* le picker */
+a.dp-choose-date {
+	padding: 0;
+	margin: 2px 0 0;
+	vertical-align:bottom;
+}

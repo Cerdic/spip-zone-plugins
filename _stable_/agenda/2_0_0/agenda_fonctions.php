@@ -21,14 +21,26 @@ function Agenda_heure_selector($date,$suffixe){
   	afficher_minute($minute, "name='minute_evenement$suffixe' size='1' class='fondl'");
 }
 
-function critere_fusion_date_mois($idb, &$boucles, $crit) {
+function agenda_critere_fusion_par_xx($format, $as, $idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
 	$type = $boucle->type_requete;
-	$date = $GLOBALS['table_date'][$type];
-	$champ_date = $boucle->id_table.'.'.$date;
+	$_date = isset($crit->param[0]) ? calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent)
+	  : "'".(isset($GLOBALS['table_date'][$type])?$GLOBALS['table_date'][$type]:"date")."'";
 
-	$boucles[$idb]->group[]  = 'DATE_FORMAT('.$champ_date.', \'%Y-%m\')'; 
-	$boucles[$idb]->select[] = 'DATE_FORMAT('.$champ_date.', \'%Y-%m\') AS date';
+	$date = $boucle->id_table. '.' .substr($_date,1,-1);
+
+	$boucles[$idb]->group[]  = 'DATE_FORMAT('.$boucle->id_table.'.".'.$_date.'.", ' . "'$format')"; 
+	$boucles[$idb]->select[] = 'DATE_FORMAT('.$boucle->id_table.'.".'.$_date.'.", ' . "'$format') AS $as";	
+}
+
+function critere_fusion_par_jour($idb, &$boucles, $crit) {
+	agenda_critere_fusion_par_xx('%Y-%m-%d','jour',$idb, &$boucles, $crit);
+}
+function critere_fusion_par_mois($idb, &$boucles, $crit) {
+	agenda_critere_fusion_par_xx('%Y-%m','mois',$idb, &$boucles, $crit);
+}
+function critere_fusion_par_annee($idb, &$boucles, $crit) {
+	agenda_critere_fusion_par_xx('%Y','annee',$idb, &$boucles, $crit);
 }
 
 
