@@ -37,8 +37,8 @@
    				,#LIVRES_BIBLIQUES{#ENV{traduction},seuls}
    			},
    			#ENV{passage}|?{
-   				#INCLURE{fond=fonds/boucle_traductions}{passage=#ENV{passage}}{lang_trad=#ENV{lang_trad,tout}}					,
-   					#INCLURE{fond=fonds/boucle_traductions}{passage=#ENV{passage}}{lang_trad=#ENV{lang_trad,tout}}
+   				#PLUGIN{SPIP2}|?{#INCLURE{fond=fonds/boucle_traductions}{lang_trad=#ENV{lang_trad,tout}},<:bible:neccessitesvn:>}					,
+   					#PLUGIN{SPIP2}|?{#INCLURE{fond=fonds/boucle_traductions}{lang_trad=#ENV{lang_trad,tout}},<:bible:neccessitesvn:>}
    					
    				
    				
