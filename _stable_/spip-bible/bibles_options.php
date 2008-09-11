@@ -100,15 +100,15 @@ function afficher_livres($trad,$modele='standard'){
 	$nt  = $trad['nt'];
 	$at  = $trad['at'];
 	
-	
+	$tableau_langue_original = bible_tableau('original');
 	global $spip_lang;
-	array_key_exists($lang,$tableau_langue_original) == true ? $lang = $lang: $lang =  $spip_lang;
+	array_key_exists($lang,$tableau_langue_original) == false ? $lang = $lang: $lang =  $spip_lang;
 	
 	
 	
 	$tableau_livre_gateway = bible_tableau('gateway');
 	$tableau_livre_gateway = array_flip($tableau_livre_gateway[$lang]);
-	$tableau_langue_original = bible_tableau('original');
+	
 	
 	
 	
@@ -133,7 +133,7 @@ function afficher_livres($trad,$modele='standard'){
 			$abreviation = $tableau_livre_gateway[$i];
 			
 			modulo($j,2) == 0 ? $class='row_even' : $class='row_odd';
-			$livre = $tableau_livre['fr'][$abreviation];
+			$livre = $tableau_livre[$lang][$abreviation];
 			$texte.= recuperer_fond($url,array('class'=>$class,'livre'=>$livre,'abreviation'=>$abreviation,'trad'=>$trad2))."\n";
 			$j++;}
 			
