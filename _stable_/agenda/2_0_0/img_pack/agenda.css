@@ -36,7 +36,7 @@ li.item .repetitions li {display:inline;margin:0;padding:0;}
 .articles .fiche_objet .evenements li.item { padding-left: 120px; }
 .articles .fiche_objet .evenements li.item .jour { width: 110px; margin-left: -120px; }
 .articles .fiche_objet .evenements span.lien_article {display:none;}
-.articles .fiche_objet #agenda .pagination { margin: 1em 4px 0; padding: 0 4px 4px; background: #eee; }
+.articles .fiche_objet #agenda .pagination { margin: 1em 0 0; padding: 0 4px 4px; background: #eee; }
 
 /* edition d'un evenement */
 .formulaire_editer_evenement .editer_horaire {padding:0;margin:-2em 0 0 0;float:right;}
