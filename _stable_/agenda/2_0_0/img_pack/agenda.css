@@ -1,6 +1,6 @@
 /* listes */
 .liste_items {list-style:none;margin:1em 0;padding:0;border-top:1px solid #ddd;clear:both;}
-.liste_items li.item {border-bottom:1px solid #ddd;padding:0.4em 0;}
+.liste_items li.item {border-bottom:1px solid #ddd;padding:0.4em 0; font-size: 0.9em;}
 .liste_items li.item:hover {background-color:#eee;}
 .liste_items li.item.on {background-color:#F4FFBF;font-weight:normal;}
 .liste_items li.item.on:hover {background-color:#EEFF9F;}
@@ -8,13 +8,14 @@
 /* vevent */
 li.item div.vevent h3 {margin:0;font-size:1.1em;}
 li.item div.vevent p {margin-bottom:0;}
-li.item div.vevent p.date {margin-top:0;}
-ul.evenements li.item.court p {display:none;}
+li.item div.vevent p.date { margin-top: 0; padding-bottom: 5px; border-bottom: 1px solid #ddd; font-size: 98%; }
+ul.evenements li.item.court p { display: none; }
 
 /* liste des evenements */
-.plier_deplier {float:right;font-size:0.9em;}
-.evenements li.item {padding-left:130px;}
-.evenements li.item .jour {width:120px;margin-left:-130px;float:left;display:inline;position:relative;}
+.plier_deplier { float: right; font-size: 0.9em; }
+.evenements li.item { padding-left: 130px; }
+.evenements li.court { border-width: 1px; }
+.evenements li.item .jour { width: 120px; margin-left: -130px; float: left; display: inline; position: relative; overflow: hidden; white-space: nowrap; font-size: 98%; }
 
 li.item .repetitions {margin-top:0.5em;font-size:0.9em;}
 li.court .repetitions {display: none;}
@@ -28,11 +29,11 @@ li.item .repetitions li {display:inline;margin:0;padding:0;}
 /* sur la fiche article */
 .articles .fiche_objet #agenda { border: 1px solid #999;}
 .articles .fiche_objet #agenda h2.titre { margin: 0; padding: 4px 4px 8px; background: #c0cad4; font-size: 100%; }
-.articles .fiche_objet .plier_deplier { float: right; margin-right: 4px; font-size: 0.9em;}
-.articles .fiche_objet #agenda .evenements { margin-left: 4px; margin-right: 4px; }
-.articles .fiche_objet .evenements li.item {padding-left:100px;}
-.articles .fiche_objet .evenements li.item .jour {width:95px;margin-left:-100px;}
-.articles .fiche_objet .evenements {font-size:0.9em;}
+.articles .fiche_objet .plier_deplier a:hover { color:#333;}
+.articles .fiche_objet .plier_deplier { float: right; margin: 8px 4px 0 0; font-size: 0.8em;}
+.articles .fiche_objet .evenements { margin-left: 4px; margin-right: 4px; }
+.articles .fiche_objet .evenements li.item { padding-left: 120px; }
+.articles .fiche_objet .evenements li.item .jour { width: 110px; margin-left: -120px; }
 .articles .fiche_objet .evenements span.lien_article {display:none;}
 .articles .fiche_objet #agenda .pagination { margin: 1em 0 0; padding: 0 4px 4px; background: #eee; }
 
@@ -41,6 +42,7 @@ li.item .repetitions li {display:inline;margin:0;padding:0;}
 .formulaire_editer_evenement .editer_horaire label {margin:0;display:inline;width:auto;float:none;}
 .formulaire_editer_evenement li.editer_date,
 .formulaire_editer_evenement li.editer_date li {clear:left;}
+.formulaire_editer_evenement li.editer_date_debut_fin label { vertical-align: middle; }
 
 .formulaire_editer_evenement input.date {width:7em;padding-right:20px;}
 .formulaire_editer_evenement span.afficher_horaire label {float:none;display:inline;padding:0;margin:0;}
@@ -50,12 +52,7 @@ li.item .repetitions li {display:inline;margin:0;padding:0;}
 .formulaire_editer_evenement li.editer_date label.date_fin {display:inline;float:none;margin:0;}
 
 /* le picker */
-a.dp-choose-date {
-	display:inline-block;
-	padding: 0;
-	margin: 3px 0 0 -19px;
-	vertical-align:bottom;
-}
+a.dp-choose-date { display: inline-block; padding: 0; margin: 3px 0 0 -19px; vertical-align: bottom; }
 
 
 /* autocompletion */
