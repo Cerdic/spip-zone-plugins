@@ -7,6 +7,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_evenement' value='#ID_EVENEMENT' />
+		<input type='hidden' name='id_parent' value='#ID_ARTICLE' />
 	  <ul>
 	    <li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 	    	<label for="titre"><:agenda:evenement_titre:></label>

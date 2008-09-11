@@ -1,0 +1,323 @@
+<?php
+/**
+ * Plugin Agenda pour Spip 2.0
+ * Licence GPL
+ * 
+ *
+ */
+
+function action_editer_evenement_dist(){
+
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
+
+	// si id_article n'est pas un nombre, c'est une creation 
+	// mais on verifie qu'on a toutes les donnees qu'il faut.
+	if (!$id_evenement = intval($arg)) {
+		$id_parent = _request('id_parent');
+		if (!$id_evenement = agenda_action_insert_evenement($id_parent))
+			return array(false,_L('echec'));
+	}
+	
+	$err = action_evenement_set($id_evenement);
+	return array($id_evenement,$err);
+}
+
+function action_evenement_set($id_evenement){
+	$err = '';
+
+	$c = array();
+	foreach (array(
+		'titre', 'descriptif', 'lieu', 'id_parent'
+	) as $champ)
+		$c[$champ] = _request($champ);
+
+	$c['horaire'] = _request('horaire')=='non'?'non':'oui';	
+	include_spip('inc/agenda_gestion');
+	$date_debut = agenda_verifier_corriger_date_saisie('debut',$c['horaire']=='oui',$erreurs);
+	$date_fin = agenda_verifier_corriger_date_saisie('fin',$c['horaire']=='oui',$erreurs);
+	
+	$c['date_debut'] = date('Y-m-d H:i:s',$date_debut);
+	$c['date_fin'] = date('Y-m-d H:i:s',$date_fin);
+
+	include_spip('inc/modifier');
+	agenda_action_revision_evenement($id_evenement, $c);
+	agenda_action_revision_evenement_mots($id_evenement, _request('id_mots'));
+
+	// Modification de statut, changement de rubrique ?
+	$c = array();
+	foreach (array(
+		'id_parent'
+	) as $champ)
+		$c[$champ] = _request($champ);
+	$err .= agenda_action_instituer_evenement($id_evenement, $c);
+
+	return $err;
+}
+
+function agenda_action_revision_evenement_repetitions($id_evenement,$liste_mots=array()){
+	// gestion des repetitions
+		if (($repetitions = _request('selected_date_repetitions',$c))!=NULL){
+			$repetitions = explode(',',$repetitions);
+			$rep = array();
+			foreach($repetitions as $key=>$date){
+				if (preg_match(",[0-9][0-9]?/[0-9][0-9]?/[0-9][0-9][0-9][0-9],",$date)){
+					$date = explode('/',$date);
+					$date = $date[2]."/".$date[0]."/".$date[1];
+					$date = strtotime($date);
+				}
+				else {
+					$date = preg_replace(",[0-2][0-9]:[0-6][0-9]:[0-6][0-9]\s*(UTC|GMT)(\+|\-)[0-9]{4},","",$date);
+					$date = explode(' ',$date);
+					$date = strtotime($date[2]." ".$date[1]." ".$date[3]);
+				}
+				if (!in_array($date,$repetitions))
+					$rep[] = $date;
+			}
+			$repetitions = $rep;
+		}
+		else
+			$repetitions = array();
+		agenda_action_update_repetitions($id_evenement, $repetitions, $liste_mots);
+}
+
+function agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots){
+	// evenement source
+	$res = sql_select("*", "spip_evenements","id_evenement=".intval($id_evenement));
+	if ($row = sql_fetch(($res))){
+		$titre = $row['titre'];
+		$descriptif = $row['descriptif'];
+		$horaire = $row['horaire'];
+		$lieu = $row['lieu'];
+		$date_debut = strtotime($row['date_debut']);
+		$date_fin = strtotime($row['date_fin']);
+		$duree = $date_fin - $date_debut;
+		$id_evenement_source = $row['id_evenement_source'];
+		$id_article = $row['id_article'];
+		if ($id_evenement_source!=0)
+			return; // pas un evenement source donc rien a faire ici
+
+		$repetitions_updated = array();
+		// mettre a jour toutes les repetitions deja existantes ou les supprimer si plus lieu
+		$res = sql_select("id_evenement","spip_evenements","id_evenement_source=".sql_quote($id_evenement));
+		while ($row = sql_fetch($res)){
+			$date = strtotime(date('Y-m-d',$row['date_debut']));
+			if (in_array($date,$repetitions)){
+				// il est maintenu, on l'update
+				$repetitions_updated[] = $date;
+				$update_date_debut = date('Y-m-d',$date)." ".date('H:i:s',$date_debut);
+				$update_date_fin = date('Y-m-d H:i:s',strtotime($update_date_debut)+$duree);
+
+				// TODO : prendre en charge la mise a jour uniquement si conforme a l'original
+				$update_titre = $titre;
+				$update_descriptif = $descriptif;
+				$update_lieu = $lieu;
+
+				// mettre a jour l'evenement					
+				agenda_action_update_evenement(
+					$row['id_evenement'],
+					array(
+						"titre" => $update_titre,
+						"descriptif" => $update_descriptif,
+						"lieu" => $update_lieu,
+						"horaire" => $horaire,
+						"date_debut" => $update_date_debut,
+						"date_fin" => $update_date_fin,
+						"id_article" => $id_article));
+						
+				agenda_action_revision_evenement_mots($row['id_evenement'], $liste_mots);
+			}
+			else {
+				// il est supprime
+				sql_delete("spip_mots_evenements","id_evenement=".$row['id_evenement']);
+				sql_delete("spip_evenements","id_evenement=".$row['id_evenement']);
+			}
+
+		}
+		// regarder les repetitions a ajouter
+		foreach($repetitions as $date){
+			if (!in_array($date,$repetitions_updated)){
+				$update_date_debut = date('Y-m-d',$date)." ".date('H:i:s',$date_debut);
+				$update_date_fin = date('Y-m-d H:i:s',strtotime($update_date_debut)+$duree);
+				$update_titre = $titre;
+				$update_descriptif = $descriptif;
+				$update_lieu = $lieu;
+
+				$id_evenement_new = sql_insert("spip_evenements",
+					"(id_evenement_source,maj)",
+					"(".sql_quote($id_evenement).",NOW())");
+				if ($id_evenement_new==0)
+					spip_log("agenda action formulaire article : impossible d'ajouter un evenement repete");
+				else {
+					// mettre a jour l'evenement
+					agenda_action_update_evenement(
+						$id_evenement_new,
+						array(
+							"titre" => $update_titre,
+							"descriptif" => $update_descriptif,
+							"lieu" => $update_lieu,
+							"horaire" => $horaire,
+							"date_debut" => $update_date_debut,
+							"date_fin" => $update_date_fin,
+							"id_article" => $id_article));
+
+					agenda_action_revision_evenement_mots($id_evenement_new, $liste_mots);
+				}
+			}
+		}
+	}
+}
+
+
+function agenda_action_revision_evenement_mots($id_evenement,$liste_mots){
+	// suppression des mots obsoletes
+	$cond_in  = $cond_not_in = "";
+	if (count($liste_mots)){
+		$cond_not_in = sql_in('id_mot', $liste_mots, 'NOT');
+		$cond_in = sql_in('id_mot', $liste_mots);
+	}
+	sql_delete("spip_mots_evenements", "id_evenement=".intval($id_evenement) . ($cond_in?" AND ".$cond_not_in:""));
+	
+	$liste_deja = array();
+	if ($cond_in)
+		$liste_deja = sql_allfetsel("id_mot", "id_evenement=".intval($id_evenement) . " AND $cond_in");
+	if (count($liste_deja)) {
+		$cond_not_in = sql_in('id_mot', $liste_deja, 'NOT');
+		$liste_mots = sql_allfetsel('id_mot','spip_mots',"$cond_in AND $cond_not_in");
+	}
+	if (count($liste_mots)) {
+		foreach($liste_mots as $k=>$id_mot)
+			$ins = array('id_evenement'=>$id_evenement,'id_mot'=>$id_mot);
+		sql_insertq_multi("spip_mots_evenements", $ins);
+	}
+}
+
+// creer un nouvel evenement
+function agenda_action_insert_evenement($id_article){
+	include_spip('inc/autoriser');
+	if (!autoriser('creerevenementdans','article',$id_article))
+		return false;
+	// nouvel evenement
+	$id_evenement = sql_insertq("spip_evenements", array("id_evenement_source"=>0, "maj"=>"NOW()", 'id_article'=>intval($id_article)));
+
+	if (!$id_evenement){
+		spip_log("agenda action formulaire article : impossible d'ajouter un evenement");
+		return false;
+	} 
+	return $id_evenement;	
+}
+
+// Enregistre une revision d'evenement
+function agenda_action_revision_evenement ($id_evenement, $c=false) {
+
+	if ($c['id_parent']) {
+		// Si l'article est publie, invalider les caches et demander sa reindexation
+		$t = sql_getfetsel("statut", "spip_articles", "id_article=".intval($c['id_parent']));
+		if ($t == 'publie') {
+			$invalideur = "id='id_article/$id_article'";
+			$indexation = true;
+		}
+	}
+
+	modifier_contenu('evenement', $id_evenement,
+		array(
+			'nonvide' => array('titre' => _T('info_sans_titre')),
+			'invalideur' => $invalideur,
+			'indexation' => $indexation
+		),
+		$c);
+
+	return ''; // pas d'erreur
+}
+
+
+// $c est un array ('statut', 'id_parent' = changement de rubrique)
+function agenda_action_instituer_evenement($id_evenement, $c) {
+
+	include_spip('inc/autoriser');
+	include_spip('inc/modifier');
+
+	$row = sql_fetsel("id_article", "spip_evenements", "id_evenement=".intval($id_evenement));
+	$id_parent = $row['id_article'];
+	$champs = array();
+
+	if (!autoriser('modifier', 'article', $id_parent)
+	  OR (!autoriser('modifier', 'article', $c['id_parent']))){
+		spip_log("editer_evenement $id_evenement refus " . join(' ', $c));
+		return false;
+	}
+
+	// Verifier que la rubrique demandee existe et est differente
+	// de la rubrique actuelle
+	if ($c['id_parent']
+	AND $c['id_parent'] != $id_parent
+	AND (sql_fetsel('1', "spip_articles", "id_article=".intval($c['id_parent'])))) {
+		$champs['id_article'] = $c['id_parent'];
+	}
+
+	// Envoyer aux plugins
+	$champs = pipeline('pre_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_evenements',
+				'id_objet' => $id_evenement
+			),
+			'data' => $champs
+		)
+	);
+
+	if (!count($champs)) return;
+
+	// Envoyer les modifs.
+	sql_updateq('spip_evenements',$champs,'id_evenement='.intval($id_evenement));
+
+	// Invalider les caches
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='id_article/$id_parent'");
+	suivre_invalideur("id='id_article/".$champs['id_article']."'");
+
+	// Pipeline
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_evenements',
+				'id_objet' => $id_evenement
+			),
+			'data' => $champs
+		)
+	);
+
+	// Notifications
+	if ($notifications = charger_fonction('notifications', 'inc')) {
+		$notifications('instituerevenement', $id_evenement,
+			array('id_parent' => $champs['id_article'], 'id_parent_ancien' => $id_parent)
+		);
+	}
+
+	return ''; // pas d'erreur
+}
+
+
+function agenda_action_supprime_repetitions($supp_evenement){
+	$res = sql_select("id_evenement", "spip_evenements", "id_evenement_source=".intval($supp_evenement));
+	while ($row = sql_fetch($res)){
+		$id_evenement = $row['id_evenement'];
+		sql_delete("spip_mots_evenements", "id_evenement=".intval($id_evenement));
+		sql_delete("spip_evenements", "id_evenement=".intval($id_evenement));
+	}
+}
+
+function agenda_action_supprime_evenement($id_article,$supp_evenement){
+	$id_evenement = sql_getfetsel("id_evenement", "spip_evenements", array(
+		"id_article=" . intval($id_article),
+		"id_evenement=" . intval($supp_evenement)));
+	if ($id_evenement == $supp_evenement){
+		sql_delete("spip_mots_evenements", "id_evenement=".intval($id_evenement));
+		sql_delete("spip_evenements", "id_evenement=".intval($id_evenement));
+	}
+	agenda_action_supprime_repetitions($id_evenement);
+	$id_evenement = 0;
+	return $id_evenement;
+}
+
+?>
