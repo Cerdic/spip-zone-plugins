@@ -10,7 +10,6 @@ function bible_test_livre_seul($i){
 
 }
 function livre_seul($i){
-	
 	return eregi_replace('[0-9|,|-]+$','',$i);
 
 }

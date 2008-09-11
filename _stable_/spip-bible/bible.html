@@ -29,11 +29,20 @@
         
         <div class="texte">
         
+       [(#ENV{traduction}|?{
+   			#ENV{passage}|?{#LIVRE_LIENS_CHAPITRES{#ENV{passage},#ENV{traduction}}
+   			
+   			}})]
+   				
+   				
+   		
+       
        
    		[(#ENV{traduction}|?{
    			#ENV{passage}|?{
    				#ENV{passage}|bible_test_livre_seul|=={oui}?{
-   					#LIVRE_LIENS_CHAPITRES{#ENV{passage},#ENV{traduction}}, 
+   					 ' ', 
+   					
    					
    					
    					#MODELE{bible,passage=#ENV{passage},traduction=#ENV{traduction}}
@@ -47,12 +56,7 @@
    				
    				
    				
-   				}
-   			
-   		
-   		
-   		
-   		}
+   				}}
    		
    		)]
 				

@@ -159,18 +159,20 @@ function balise_LIVRES_BIBLIQUES($p) {
 }
 
 function balise_LIVRE_LIENS_CHAPITRES($p){
+	
 	global $spip_lang;
 	//les paramètres
 	$livre = interprete_argument_balise(1,$p);
 	$modele = interprete_argument_balise(3,$p);
 	$lang = interprete_argument_balise(4,$p);
 	$trad = interprete_argument_balise(2,$p);
-	
+	gettype($livre) == 'NULL' ?  $livre = 'standard' : $livre = $livre;
 	gettype($modele) == 'NULL' ?  $modele = 'standard' : $modele = $modele;
 	gettype($lang) == 'NULL' ?  $lang = $spip_lang : $lang = $lang;
 	gettype($trad) == 'NULL' ? $trad = lire_config('bible/traduction_'.$lang) : $trad = $trad;
 	
-	$livre = livre_seul($livre);
+	
+	
 	
 	$p->code = "liens_chapitres($livre,$modele,$lang,$trad)";
 	return $p;
@@ -178,6 +180,7 @@ function balise_LIVRE_LIENS_CHAPITRES($p){
 }
 
 function liens_chapitres($livre,$modele,$lang,$trad){
+	$livre = $livre = eregi_replace("[0-9|,|-]+$","",$livre);;
 	$tableau_livre_gateway = bible_tableau('gateway');
 	$tableau_chapitre = bible_tableau('nombres_chapitre');
 	$nlivre = $tableau_livre_gateway[$lang][$livre];
