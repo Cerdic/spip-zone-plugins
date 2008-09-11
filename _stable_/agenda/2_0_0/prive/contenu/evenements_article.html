@@ -1,2 +1,3 @@
 [(#REM) afficher les evenements de cet article]
 <INCLURE{fond=prive/contenu/agenda_evenements}{env}{pagine=5}>
+[(#VAL{agenda:icone_creer_evenement}|_T|icone{#URL_ECRIRE{evenements_edit,new=oui&id_article=#ID_ARTICLE},#CHEMIN{img_pack/agenda-24.png},'creer.gif',right,0})]

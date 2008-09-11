@@ -27,7 +27,7 @@ function exec_evenements_edit_args($id_evenement, $id_article, $new){
 	if ($row = sql_fetsel('*','spip_evenements','id_evenement='.intval($id_evenement)))
 		$id_article = $row['id_article'];
 
-	if (!$row
+	if ((!$new AND !$row)
 	  OR ($new AND !autoriser('creerevenementdans','article',$id_article)) 
 	  OR (!$new AND (!autoriser('voir', 'evenement', $id_evenement,null,array('id_article'=>$id_article))	OR !autoriser('modifier','evenement', $id_evenement,null,array('id_article'=>$id_article)))) 
 	  ) {
@@ -40,7 +40,7 @@ function exec_evenements_edit_args($id_evenement, $id_article, $new){
 function evenements_edit($id_evenement, $id_article, $new, $config_fonc, $row)
 {
 	$id_evenement = $row['id_evenement'];
-	$id_article = $row['id_article'];
+	#$id_article = $row['id_article'];
 	$titre = sinon($row["titre"],sql_getfetsel('titre','spip_articles','id_article='.intval($id_article)));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	pipeline('exec_init',array('args'=>array('exec'=>'evenements_edit','id_evenement'=>$id_evenement,'id_article'=>$id_article),'data'=>''));
@@ -70,7 +70,7 @@ function evenements_edit($id_evenement, $id_article, $new, $config_fonc, $row)
 	'redirect'=>generer_url_ecrire("articles"),
 	'titre'=>$titre,
 	'new'=>$new?$new:$row['id_evenement'],
-	'id_article'=>$row['id_article'],
+	'id_article'=>$id_article,
 	'config_fonc'=>$config_fonc,
 	);
 

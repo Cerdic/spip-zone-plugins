@@ -11,7 +11,9 @@ include_spip('inc/editer');
 function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_article=0, $retour='', $lier_trad = 0, $config_fonc='evenements_edit_config', $row=array(), $hidden=''){
 	
 	$valeurs = formulaires_editer_objet_charger('evenement',$id_evenement,$id_article,0,$retour,$config_fonc,$row,$hidden);
-	
+	if (!$valeurs['id_article'])
+		$valeurs['id_article'] = $id_article;
+
 	// les mots
 	$valeurs['mots'] = sql_allfetsel('id_mot','spip_mots_evenements','id_evenement='.intval($id_evenement));
 
