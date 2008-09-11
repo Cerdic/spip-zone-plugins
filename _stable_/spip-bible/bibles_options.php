@@ -170,6 +170,8 @@ function balise_LIVRE_LIENS_CHAPITRES($p){
 	gettype($lang) == 'NULL' ?  $lang = $spip_lang : $lang = $lang;
 	gettype($trad) == 'NULL' ? $trad = lire_config('bible/traduction_'.$lang) : $trad = $trad;
 	
+	$livre = livre_seul($livre);
+	
 	$p->code = "liens_chapitres($livre,$modele,$lang,$trad)";
 	return $p;
 

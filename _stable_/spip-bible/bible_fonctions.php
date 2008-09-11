@@ -9,6 +9,11 @@ function bible_test_livre_seul($i){
 	else {return 'oui';}
 
 }
+function livre_seul($i){
+	
+	return eregi_replace('[0-9|,|-]+$','',$i);
+
+}
 
 function bible_install($action){
 	
@@ -98,7 +103,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	$separateur = $tableau_separateur[$lang];
 	$livres=$tableau_livres[$lang];
 	// phase d'anaylse
-	echo $livre;
+	
 	$livre = strtolower($livre);
 	$tableau = explode('-',$passage);
 	if (count($tableau)==2){
