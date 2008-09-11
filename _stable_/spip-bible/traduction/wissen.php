@@ -31,6 +31,7 @@ function recuperer_passage($livre,$ref,$wissen,$lang){
 	include_spip("inc/charsets");
 	$code = importer_charset(recuperer_page($url),'utf-8');
 	
+	
 	//selection du passage
 	$tableau = explode('<div class="boxcontent-bible">',$code);
 	$code = $tableau[1];
@@ -39,6 +40,48 @@ function recuperer_passage($livre,$ref,$wissen,$lang){
 	
 	$tableau = explode('<div id="popupcontent">',$code);
 	$code = $tableau[0];
+	//suppression des intertitres
+		if(eregi('<h3>',$code)){
+			$tableau = explode('<h3>',$code);
+			
+			$d = 0;
+			$tableau2 = array();
+			foreach ($tableau as $j){
+				if (eregi('</h3>',$j)){
+					
+					$tableau3 = explode('</h3>',$j);
+					$tableau2[$d]=$tableau3[1];
+					
+				
+				}
+				$d++;
+			
+			}
+			
+			$code = implode('',$tableau2);
+			
+		}
+		
+		if(eregi('<h1>',$code)){
+			$tableau = explode('<h1>',$code);
+			
+			$d = 0;
+			$tableau2 = array();
+			foreach ($tableau as $j){
+				if (eregi('</h1>',$j)){
+					
+					$tableau3 = explode('</h1>',$j);
+					$tableau2[$d]=$tableau3[1];
+					
+				
+				}
+				$d++;
+			
+			}
+			
+			$code = implode('',$tableau2);
+		}
+	
 	$code = strip_tags($code,'<span>');
 	
 	$code = str_replace('<span class="chapter">','<br /><strong>',$code);
