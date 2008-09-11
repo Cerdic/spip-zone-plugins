@@ -373,7 +373,8 @@ $tableau_livres = array(
 	'3Jn'=>'3 Jean',
 	'Jude' => 'Jude',
 	'Ha'=>'Habacuc',
-	'Ap'=>'Apocalypse'
+	'Ap'=>'Apocalypse',
+	'Rm'=>'Romains'
 	 ),
 	'en' =>array(
 		'Gn'=>'Genesis',
