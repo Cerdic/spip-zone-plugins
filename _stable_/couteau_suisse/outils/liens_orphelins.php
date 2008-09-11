@@ -33,7 +33,7 @@ function interro_rempl($texte) {
 	// trouve et protege : protocole://qqchose
 	$texte = preg_replace_callback(_cs_liens_HTTP, 'interro_liens_callback', $texte);
 	// trouve et protege : www.lieu.qqchose ou ftp.lieu.qqchose
-	$texte = preg_replace(_cs_liens_WWW, 'interro_liens_callback', $texte);
+	$texte = preg_replace_callback(_cs_liens_WWW, 'interro_liens_callback', $texte);
 
 	return echappe_retour($texte, 'LIENS');
 }
