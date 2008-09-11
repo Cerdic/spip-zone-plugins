@@ -1,10 +1,9 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
-<title>[(#ENV{passage}|bible_test_livre_seul|=={oui}|?{[(#ENV{passage}|livre_long)],[(#ENV{passage}|filtre_ref)]}|attribut_html
+<title>[(#ENV{passage}|bible_test_livre_seul|=={oui}|?{[(#ENV{passage}|livre_long)],[(#ENV{passage}|filtre_ref)]}
         
-        )][(#ENV{passage}|?{#ENV{traduction}|?{" - "}})]
-        [(#INFO_BIBLE_TRADUCTION{#ENV{traduction},traduction})] - [(#NOM_SITE_SPIP|textebrut)]</title>
+        )][(#ENV{passage}|?{#ENV{traduction}|?{'  - '}}|sinon{<:bible:version_dispo:>})][  (#INFO_BIBLE_TRADUCTION{#ENV{traduction},traduction})] - [(#NOM_SITE_SPIP|textebrut)]</title>
 <INCLURE{fond=inc-head}>
 <meta name="robots" content="none" />
 </head>
@@ -21,7 +20,7 @@
         <div class="cartouche">
         <h1>[(#ENV{passage}|bible_test_livre_seul|=={oui}|?{[(#ENV{passage}|livre_long)],[(#ENV{passage}|filtre_ref)]}
         
-        )][(#ENV{passage}|?{#ENV{traduction}|?{'  - '}})][  (#INFO_BIBLE_TRADUCTION{#ENV{traduction},traduction})]</h1>
+        )][(#ENV{passage}|?{#ENV{traduction}|?{'  - '}}|sinon{<:bible:version_dispo:>})][  (#INFO_BIBLE_TRADUCTION{#ENV{traduction},traduction})]</h1>
         
         </div>
         
@@ -38,8 +37,8 @@
    				,#LIVRES_BIBLIQUES{#ENV{traduction},seuls}
    			},
    			#ENV{passage}|?{
-   				#INCLURE{fond=fonds/boucle_traductions}{passage=#ENV{passage}}					,
-   					#INCLURE{fond=fonds/boucle_traductions}{passage=#ENV{passage}}
+   				#INCLURE{fond=fonds/boucle_traductions}{passage=#ENV{passage}}{lang_trad=#ENV{lang_trad,tout}}					,
+   					#INCLURE{fond=fonds/boucle_traductions}{passage=#ENV{passage}}{lang_trad=#ENV{lang_trad,tout}}
    					
    				
    				
