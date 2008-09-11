@@ -1,5 +1,6 @@
-<script type='text/javascript' src='#CHEMIN{javascript/jquery.datePicker.js}'></script>
 <script type='text/javascript' src='#CHEMIN{javascript/dates.js}'></script>
+<script type='text/javascript' src='#CHEMIN{javascript/jquery.datePicker.js}'></script>
+<script type='text/javascript' src='#CHEMIN{javascript/jquery.autocompleter.js}'></script>
 <script type='text/javascript'>
 
 Date.dayNames = ['<:date_jour_1:>', '<:date_jour_2:>', '<:date_jour_3:>', '<:date_jour_4:>', '<:date_jour_5:>', '<:date_jour_6:>', '<:date_jour_7:>'];
@@ -9,16 +10,16 @@ Date.abbrMonthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', '
 Date.firstDayOfWeek = 1;
 Date.format = 'dd/mm/yyyy';
 $.dpText = {
-	TEXT_PREV_YEAR		:	'Ann&eacute;e pr&eacute;c&eacute;dente',
-	TEXT_PREV_MONTH		:	'Mois pr&eacute;c&eacute;dent',
-	TEXT_NEXT_YEAR		:	'Ann&eacute;e suivante',
-	TEXT_NEXT_MONTH		:	'Mois suivant',
-	TEXT_CLOSE			:	'Fermer',
-	TEXT_CHOOSE_DATE	:	'<img src=\'#CHEMIN{img_pack/picker-16.gif}\' alt=\'Selectionner une date\' />'
+	TEXT_PREV_YEAR		:	'<:agenda:annee_precedente|texte_script:>',
+	TEXT_PREV_MONTH		:	'<:agenda:mois_precedent|texte_script:>',
+	TEXT_NEXT_YEAR		:	'<:agenda:annee_suivante|texte_script:>',
+	TEXT_NEXT_MONTH		:	'<:agenda:mois_suivant|texte_script:>',
+	TEXT_CLOSE			:	'<:agenda:fermer|texte_script:>',
+	TEXT_CHOOSE_DATE	:	'<img src=\'#CHEMIN{img_pack/picker-16.gif}\' alt=\'<:agenda:afficher_calendrier|attribut_html:>\' />'
 }
 $(function()
 {
-	$('input.date').datePicker({startDate:'01/01/1900'});
+	$('input.date').datePicker({startDate:'01/01/1900'}).dpSetPosition($.dpConst.POS_TOP, $.dpConst.POS_RIGHT);
 	$('#date_debut').bind(
 		'dpClosed',
 		function(e, selectedDates)
@@ -41,5 +42,12 @@ $(function()
 			}
 		}
 	);
+	// ajouter les heures en autocomplete sur l'input heure
+	var heures = ['00:00','00:30','01:00','01:30','02:00','02:30','03:00','03:30','04:00','04:30','05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30','23:00','23:30'];
+	$('#heure_debut').autocomplete(null, {delay:0, minChars:0, mustMatchOrEmpty:0,selectFirst:true,matchSubset:0, matchContains:1, cacheLength:10/*, onItemSelect:set_auteur*/ },heures);
+	$('#heure_fin').autocomplete(null, {delay:0, minChars:0, mustMatchOrEmpty:0,selectFirst:true,matchSubset:0, matchContains:1, cacheLength:10/*, onItemSelect:set_auteur*/ },heures);
+});
+$('document').ready(function(){
+if ($('#horaire').get(0).checked==false) { $('span.afficher_horaire').show();} else {$('span.afficher_horaire').hide();}
 });
 </script>

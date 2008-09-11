@@ -29,22 +29,48 @@ function formulaires_editer_evenement_charger_dist($id_evenement,$id_article){
 	// dispatcher date et heure
 	list($valeurs["date_debut"],$valeurs["heure_debut"]) = explode(' ',date('d/m/Y H:i',strtotime($valeurs["date_debut"])));
 	list($valeurs["date_fin"],$valeurs["heure_fin"]) = explode(' ',date('d/m/Y H:i',strtotime($valeurs["date_fin"])));
+	
+	// traiter specifiquement l'horaire qui est une checkbox
+	if (_request('date_debut') AND !_request('horaire'))
+		$valeurs['horaire'] = 'oui';
 	return $valeurs;
 }
 
+function agenda_verifier_corriger_date_saisie($suffixe,$horaire,&$erreurs){
+	include_spip('inc/filtres');
+	$date = _request("date_$suffixe").($horaire?' '.trim(_request("heure_$suffixe")).':00':'');
+	$date = recup_date($date);
+	$ret = null;
+	if (!$ret=mktime(0,0,0,$date[1],$date[2],$date[0]))
+		$erreurs["date_$suffixe"] = _L('date incorrecte');
+	elseif (!$ret=mktime($date[3],$date[4],$date[5],$date[1],$date[2],$date[0]))
+		$erreurs["date_$suffixe"] = _L('heure incorrecte');
+	if ($ret){
+		if (trim(_request("date_$suffixe")!==($d=date('d/m/Y',$ret)))){
+			$erreurs["date_$suffixe"] = _L('saisie corrigee');
+			set_request("date_$suffixe",$d);
+		}
+		if ($horaire AND trim(_request("heure_$suffixe")!==($h=date('H:i',$ret)))){
+			$erreurs["heure_$suffixe"] = _L('saisie corrigee');
+			set_request("heure_$suffixe",$h);
+		}
+	}
+	return $ret;
+}
+
 function formulaires_editer_evenement_verifier_dist($id_evenement,$id_article){
-	$erreurs = formulaires_editer_objet_verifier('evenement',$id_evenement,array('titre'));
+	$erreurs = formulaires_editer_objet_verifier('evenement',$id_evenement,array('titre','date_debut','date_fin'));
 
-	if (!srtotime(_request('date_debut')))
-		$erreurs['date_debut'] = _L('date incorrecte');
-	elseif (!srtotime(_request('date_debut').' '._request('heure_debut')))
-		$erreurs['date_debut'] = _L('heure incorrecte');
+	
+	$horaire = _request('horaire')=='non'?false:true;	
+	$date_debut = agenda_verifier_corriger_date_saisie('debut',$horaire,$erreurs);
+	$date_fin = agenda_verifier_corriger_date_saisie('fin',$horaire,$erreurs);
+	
+	if ($date_debut AND $date_fin AND $date_fin<$date_debut)
+		$erreurs['date_fin'] = _L('la date de fin doit etre posterieure a la date de debut');
 
-	if (!srtotime(_request('date_fin')))
-		$erreurs['date_fin'] = _L('date incorrecte');
-	elseif (!srtotime(_request('date_fin').' '._request('heure_fin')))
-		$erreurs['date_fin'] = _L('heure incorrecte');
-
+	if (!count($erreurs))
+		$erreurs['message_erreur'] = 'ok?';
 	return $erreurs;
 }
 
@@ -54,6 +80,11 @@ function formulaires_editer_evenement_traiter_dist($id_evenement,$id_article){
 
 function Agenda_action_formulaire_article($id_article,$id_evenement=NULL, $c=NULL){
 	include_spip('base/abstract_sql');
+
+	$horaire = _request('horaire')=='non'?false:true;	
+	$date_debut = agenda_verifier_corriger_date_saisie('debut',$horaire,$erreurs);
+	$date_fin = agenda_verifier_corriger_date_saisie('fin',$horaire,$erreurs);
+	
 	// gestion des requetes de mises a jour dans la base
 	$insert = _request('evenement_insert',$c);
 	$modif = _request('evenement_modif',$c);

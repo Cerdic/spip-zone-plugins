@@ -42,13 +42,32 @@ li.item .repetitions li {display:inline;margin:0;padding:0;}
 .formulaire_editer_evenement li.editer_date,
 .formulaire_editer_evenement li.editer_date li {clear:left;}
 
-.formulaire_editer_evenement input.date {width:7em;}
+.formulaire_editer_evenement input.date {width:7em;padding-right:20px;}
 .formulaire_editer_evenement span.afficher_horaire label {float:none;display:inline;padding:0;margin:0;}
-.formulaire_editer_evenement input.heure {width:5em;}
+.formulaire_editer_evenement input.heure {width:4em;}
+
+.formulaire_editer_evenement li.editer_date label.heure {visibility:hidden;}
+.formulaire_editer_evenement li.editer_date label.date_fin {display:inline;float:none;margin:0;}
 
 /* le picker */
 a.dp-choose-date {
+	display:inline-block;
 	padding: 0;
-	margin: 2px 0 0;
+	margin: 3px 0 0 -19px;
 	vertical-align:bottom;
 }
+
+
+/* autocompletion */
+/*.ac_input {	width: 200px; }*/
+.ac_results {	font-size:x-small;padding: 0px;	border: 1px solid WindowFrame;	background-color: Window;	overflow: auto;
+overflow-x:hidden;text-align:left;z-index:1000;height:10em;width:auto !important;}
+.ac_results ul {	width: auto !important;	list-style-position: outside;	list-style: none;	padding: 0;	margin: 0;}
+.ac_results iframe {
+	display:none;/*sorry for IE5*/
+	display/**/:block;/*sorry for IE5*/
+	position:absolute;	top:0;	left:0;	z-index:-1;	filter:mask();	width:3000px;	height:3000px;}
+
+.ac_results li {	margin: 0px;	padding: 2px 5px;	cursor: pointer;	display: block;	width: 100%;	font-size: 1em;	overflow: hidden;}
+.formulaire input.ac_loading {	background-image : url('searching.gif');background-position: right center;background-repeat: no-repeat;}
+.ac_over {	background-color: Highlight;	color: HighlightText;}
