@@ -1,7 +1,8 @@
 /* listes */
 .liste_items {list-style:none;margin:1em 0;padding:0;border-top:1px solid #ddd;clear:both;}
 .liste_items li.item {border-bottom:1px solid #ddd;padding:0.4em 0; font-size: 0.9em;}
-.liste_items li.item:hover {background-color:#eee;}
+.liste_items li.item:hover {background-color:transparent;}
+.liste_items li.court:hover {background-color:#eee;}
 .liste_items li.item.on {background-color:#F4FFBF;font-weight:normal;}
 .liste_items li.item.on:hover {background-color:#EEFF9F;}
 
@@ -35,7 +36,7 @@ li.item .repetitions li {display:inline;margin:0;padding:0;}
 .articles .fiche_objet .evenements li.item { padding-left: 120px; }
 .articles .fiche_objet .evenements li.item .jour { width: 110px; margin-left: -120px; }
 .articles .fiche_objet .evenements span.lien_article {display:none;}
-.articles .fiche_objet #agenda .pagination { margin: 1em 0 0; padding: 0 4px 4px; background: #eee; }
+.articles .fiche_objet #agenda .pagination { margin: 1em 4px 0; padding: 0 4px 4px; background: #eee; }
 
 /* edition d'un evenement */
 .formulaire_editer_evenement .editer_horaire {padding:0;margin:-2em 0 0 0;float:right;}

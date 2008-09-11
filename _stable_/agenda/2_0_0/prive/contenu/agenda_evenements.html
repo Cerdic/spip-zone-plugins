@@ -19,7 +19,7 @@ jQuery('ul.evenements li.item')
 .find('h3.summary')
 .click(function(){
 var p=jQuery(this).parent().parent();
-if (p.is('.court')) p.removeClass('court'); else p.addClass('court');
+p.toggleClass('court');
 })
 .addClass('clicable')
 .parents('li.item')
