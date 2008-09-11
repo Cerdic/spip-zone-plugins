@@ -7,17 +7,16 @@
 
 <a href="?exec=inscription2_adherents"><:inscription2:liste_adherents:></a> 
 
-
 	<ul>
-		<li><a href="#fragment-1"><span>Perso</span></a></li>
-		<li><a href="#fragment-2"><span>Pro</span></a></li>
+		<li><a href="#perso"><span>Perso</span></a></li>
+		<li><a href="#pro"><span>Pro</span></a></li>
 		[(#CONFIG{plugin/GEOMAP/version}|?{' '})
-		<li><a href="#fragment-3"><span>Geo</span></a></li>
+		<li><a href="#geo"><span>Geo</span></a></li>
 		]
 		[(#CONFIG{plugin/ECHOPPE/version}|?{' '})
-		<li><a href="#fragment-4"><span>Echoppe</span></a></li>
+		<li><a href="#echoppe"><span>Echoppe</span></a></li>
 		]
-		<li><a href="#fragment-5"><span>Options</span></a></li>
+		<li><a href="#option"><span>Options</span></a></li>
 	</ul>
 	
 [(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
