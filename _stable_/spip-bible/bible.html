@@ -78,6 +78,7 @@
 
         [(#REM) Menu de navigation par rubriques ]
        [(#ENV{traduction}|?{#MODELE{bible_info_traduction,traduction=#ENV{traduction}}})]
+       <a href="#URL_PAGE{bible,passage=#ENV{passage}}"><:bible:version_dispo:></a>
         <INCLURE{fond=inc-rubriques}>
 
     </div><!--#navigation-->

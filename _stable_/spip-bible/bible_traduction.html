@@ -30,6 +30,8 @@
 
         [(#REM) Menu de navigation par rubriques ]
          [(#ENV{traduction}|?{#MODELE{bible_info_traduction,traduction=#ENV{traduction}}})]
+          <div><a href="#URL_PAGE{bible,passage=#ENV{passage}}"><:bible:version_dispo:></a></div>
+
         <INCLURE{fond=inc-rubriques}>
 		
     </div><!--#navigation-->
