@@ -1,4 +1,5 @@
 [(#ENV{passage}|?{#SET{url,bible},#SET{url,bible_traduction}})]
+[(#ENV{passage}|traduire_abreviation{#LANG,#INFO_BIBLE_TRADUCTION{#ENV{traduction},lang_abrev}})]
 <table class="spip"><caption><a href="#URL_PAGE{#GET{url},traduction=#ENV{traduction}}&passage=#ENV{passage}">#INFO_BIBLE_TRADUCTION{#ENV{traduction},traduction}</a></caption>
 <tr class="row_even"><td><:bible:langue:></td><td>#INFO_BIBLE_TRADUCTION{#ENV{traduction},lang}</td></tr>
 <tr  class="row_odd"><td><:bible:at:></td><td>#INFO_BIBLE_TRADUCTION{#ENV{traduction},at}</td></tr>

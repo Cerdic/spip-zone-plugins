@@ -20,6 +20,8 @@ function info_bible_version($trad,$info){
 	switch ($info){
 		case 'lang':
 			return traduire_nom_langue($tableau_trad['lang']);
+		case 'lang_abrev':
+			return $tableau_trad['lang'];
 		case 'nt':
 			$nt = $tableau_trad['nt'];
 			$nt == true ? $i = _T('item_oui') : $i= _T('item_non');
@@ -180,7 +182,8 @@ function balise_LIVRE_LIENS_CHAPITRES($p){
 }
 
 function liens_chapitres($livre,$modele,$lang,$trad){
-	$livre = $livre = eregi_replace("[0-9|,|-]+$","",$livre);;
+	$livre = $livre = eregi_replace("[0-9|,|-]+$","",$livre);
+	
 	$tableau_livre_gateway = bible_tableau('gateway');
 	$tableau_chapitre = bible_tableau('nombres_chapitre');
 	$nlivre = $tableau_livre_gateway[$lang][$livre];

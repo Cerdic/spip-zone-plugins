@@ -3,6 +3,19 @@
 Maïeul Rouquette Licence GPL 3
 Spip-Bible
 */
+function traduire_abreviation($abrev,$lang_original,$lang_traduction){
+	$tableau_gateway = bible_tableau("gateway");
+	$livre = eregi_replace('[0-9|,|-]+$','',$abrev);
+	
+	$numero = $tableau_gateway[$lang_original][$livre];
+	echo $numero;
+	$tableau_inverse = array_flip($tableau_gateway[$lang_traduction]);
+	$livre_traduit = $tableau_inverse[$numero];
+	
+	return str_replace($livre,$livre_traduit,$abrev);
+
+
+}
 
 function bible_test_livre_seul($i){
 	if (eregi('[0-9|,|-]+$',$i)){ return 'non';}
