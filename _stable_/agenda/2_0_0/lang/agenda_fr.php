@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'agenda' => 'Agenda',
 'annee_precedente' => 'an&eacute;e pr&eacute;c&eacute;dente',
 'annee_suivante' => 'ann&eacute;e suivante',
+'aucun_evenement' => 'aucun &eacute;v&eacute;nement',
 'bouton_annuler' => 'Annuler',
 'bouton_supprimer' => "Supprimer",
 'evenement_autres_occurences' => "Autres occurences :",

@@ -1,4 +1,5 @@
 <B_agenda>
+<p class='plier_deplier'><a href='#' onclick='jQuery("li.item.court").removeClass("court");return false;'>Tout deplier</a> | <a href='#' onclick='set_vevent();return false;'>Tout plier</a></p>
 <h2 class='titre'>[<:agenda:agenda:> : (#GRAND_TOTAL|agenda_affiche_un_ou_plusieurs{agenda:info_un_evenement,agenda:info_nombre_evenements})]</h2>
 <ul class='liste_items evenements'>
 	<BOUCLE_agenda(EVENEMENTS){par date_debut}{pagination #ENV{pagine,20}}{age_relatif_debut<=0}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>
@@ -25,3 +26,5 @@
 </ul>
 [<p class='pagination'>(#PAGINATION{page})</p>]
 </B_agenda>
+<h2 class='titre'><:agenda:agenda:> : <:agenda:aucun_evenement:></h2>
+<//B_agenda>
