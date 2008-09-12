@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_traduction_de' =>	'Traduction allemande par d&eacute;faut',
 	'cfg_traduction_it' =>	'Traduction italienne par d&eacute;faut',
 	'cfg_traduction_pl' =>	'Traduction polonaise par d&eacute;faut',
+	'cfg_traduction_pt' =>	'Traduction portugaise par d&eacute;faut',
 	'cfg_configurer'	=>	'Configurer le plugin Spip-Bible',
 	'cfg_explication'	=>	"Vous pouvez régler la mani&egrave;re dont apparaitra les citation du texte, en l'absence d'argument pass&eacute; au mod&egrave;le",
 	'cfg_numeros'		=>	"Afficher les n° de chapitres et de versets dans le corps du texte",
