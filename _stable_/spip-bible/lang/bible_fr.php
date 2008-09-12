@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_traduction_de' =>	'Traduction allemande par d&eacute;faut',
 	'cfg_traduction_hu' =>	'Traduction magyare par d&eacute;faut',
 	'cfg_traduction_it' =>	'Traduction italienne par d&eacute;faut',
+	'cfg_traduction_nl' =>	'Traduction néerlandaise par d&eacute;faut',
 	'cfg_traduction_pl' =>	'Traduction polonaise par d&eacute;faut',
 	'cfg_traduction_pt' =>	'Traduction portugaise par d&eacute;faut',
 	'cfg_configurer'	=>	'Configurer le plugin Spip-Bible',

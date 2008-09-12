@@ -46,6 +46,7 @@ function bible_install($action){
 				ecrire_config('bible/traduction_pt','ol');
 				ecrire_config('bible/traduction_hu','hk');
 				ecrire_config('bible/traduction_da','dbpd');
+				ecrire_config('bible/traduction_nl','hb');
 				}
 			break;
 			
@@ -65,6 +66,7 @@ function bible_install($action){
 				effacer_config('bible/traduction_pt');
 				effacer_config('bible/traduction_ht');
 				effacer_config('bible/traduction_da');
+				effacer_config('bible/traduction_nl');
 			}
 			break;
 			
