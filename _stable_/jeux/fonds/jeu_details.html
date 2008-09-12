@@ -4,6 +4,7 @@
 		<th>[(#ENV{par}|!=={nom}|?{' '})<a class='ajax' href="[(#SELF|parametre_url{par,nom})]">]<:jeux:auteur:>[(#ENV{par}|!=={nom}|?{' '})</a>]</th>
 		<th>[(#ENV{par}|!=={date}|?{' '})<a class='ajax' href="[(#SELF|parametre_url{par,date})]">]<:date:>[(#ENV{par}|!=={date}|?{' '})</a>]</th>
 		<th style="text-align:center">[(#ENV{par}|?{' '})<a class='ajax' href="[(#SELF|parametre_url{par,''})]">]<:jeux:resultat:>[(#ENV{par}|?{' '})</a>]</th>
+		
 </tr></thead>
 #PAGINATION
 <BOUCLE_resultats(JEUX_RESULTATS spip_auteurs) {id_jeu} {par #ENV{par}, round(resultat_court / total, 3)} {inverse #ENV{par}|=={nom}|?{0,1}}{pagination 30}><!-- {statut==refuse|publie} -->
@@ -11,10 +12,11 @@
 	<td><a href="?exec=jeux_resultats_auteur&id_auteur=#ID_AUTEUR">#NOM</a></td>
 	<td>[(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)]</td>
 	<td style="text-align:center">#RESULTAT_COURT / #TOTAL</td>
-</tr>
+	<td>#RESULTAT_UNIQUE</td></tr>
 [<tr>
 	<td colspan="3">(#RESULTAT_LONG)</td>
 </tr>]
+
 </BOUCLE_resultats>
 </table>
 </B_resultats>

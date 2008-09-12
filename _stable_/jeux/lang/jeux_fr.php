@@ -75,6 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'derniere_modif'	=> 'Derni&egrave;re modification',
 'resultat'			=> 'R&eacute;sultat',
+'resultat_unique'	=> 'R&eacute;sultat unique',
 'resultats'			=> 'R&eacute;sultats',
 'resultats_auteur'	=> 'Les r&eacute;sultats de @nom@',
 'resultats_auteur_'	=> "R&eacute;sultats de l&#8217;auteur",

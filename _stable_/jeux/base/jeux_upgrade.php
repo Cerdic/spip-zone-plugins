@@ -1,6 +1,6 @@
 <?php
 
-$GLOBALS['jeux_base_version'] = 0.14;
+$GLOBALS['jeux_base_version'] = 0.15;
 
 function jeux_install($install){
 	$version_base = $GLOBALS['jeux_base_version'];
@@ -97,6 +97,13 @@ function jeux_verifier_base(){
 			$desc = $showtable("spip_jeux_resultats", true);
 			if (!isset($desc['field']['total']))
 				spip_query('ALTER TABLE `spip_jeux_resultats` ADD `total` int(12) NOT NULL AFTER `resultat_long`');
+			jeux_maj_version($current_version, $test_version);
+		}
+		if ($current_version<($test_version=0.15)){
+			// ajout de 'resultat_unique'
+			$desc = $showtable("spip_jeux", true);
+			if (!isset($desc['field']['resultat_unique']))
+				spip_query('ALTER TABLE `spip_jeux` ADD `resultat_unique` enum ("oui", "non")');
 			jeux_maj_version($current_version, $test_version);
 		}
 

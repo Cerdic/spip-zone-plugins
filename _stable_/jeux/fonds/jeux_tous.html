@@ -7,6 +7,7 @@
 	<th><:jeux:jeu_titre_prive:></th>
 	<th>[(#ENV{par}|!={date}|?{' '})<a href="[(#SELF|parametre_url{par,date})]">]<:jeux:derniere_modif:>[(#ENV{par}|!={date}|?{' '})</a>]</th>
 	<th><:jeux:nb_resultats:></th>
+	<th style="text-align:center"><:jeux:resultat_unique:></th>
 </tr></thead>
 #PAGINATION 
 <BOUCLE_jeux(JEUX){par #ENV{par,date}}{inverse #ENV{par}|!={id_jeu}|?{1,0}}{pagination 30}><!--{statut==refuse|publie}-->
@@ -17,6 +18,7 @@
 	<td style="text-align:center"><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#TITRE_PRIVE</a></td>
 	<td style="text-align:center">[(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)]</td>
 	<td style="text-align:center"><BOUCLE_resultats(JEUX_RESULTATS){id_jeu}></BOUCLE_resultats>[(#TOTAL_BOUCLE|jeux_lien_jeu{jeux_resultats_jeu,#ID_JEU})]<//B_resultats></td>
+	<td style="text-align:center">#RESULTAT_UNIQUE</td>
 </tr>
 </BOUCLE_jeux>
 </table>

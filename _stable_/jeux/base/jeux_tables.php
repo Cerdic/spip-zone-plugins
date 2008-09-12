@@ -21,6 +21,7 @@ $jeux = array_merge($jeux, array(
 	'contenu'	=> 'text NOT NULL',
 	'statut'	=> "varchar(10) DEFAULT '0' NOT NULL",
 	'enregistrer_resultat'=>'enum ("oui", "non")',
+	'resultat_unique'=>'enum ("oui", "non")'
 	)
 );
 
@@ -33,7 +34,8 @@ $jeux_resultats = array(
 	'date'			=>	'timestamp',
 	'resultat_court'	=>	'int(12)',
 	'resultat_long'	=>	'text NOT NULL',
-	'total'			=>	'int(12) NOT NULL');
+	'total'			=>	'int(12) NOT NULL'
+	);
 $jeux_resultats_key=array('PRIMARY KEY' =>'id_resultat',
 	'KEY id_jeu'	=>'id_jeu',
 	'KEY id_auteur'	=>'id_auteur'
