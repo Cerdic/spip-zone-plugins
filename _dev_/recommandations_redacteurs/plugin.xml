@@ -1,0 +1,24 @@
+<plugin>
+	<nom>Recommandations aux r&eacute;dacteurs</nom>
+ 	<version>0.1</version>
+ 	<prefix>recommandations_redacteurs</prefix>
+ 	<auteur>Arnault Pachot</auteur>
+ 	<description>Ce plugin vous permet d'afficher un message de recommandation &agrave; destination des r&eacute;dacteurs. <br/>
+ 
+	[Vous pouvez modifier le message affich&eacute; depuis le panneau de configuration->.?exec=cfg&amp;cfg=recommandations_redacteurs]. <br />
+	Ce message s'affichera dans la colonne de gauche pendant la r&eacute;daction des rubriques et articles.
+
+	<br/>Distribu&eacute; sous licence GNU/GPL   </description>
+	
+	<lien></lien> <!-- URI de documentation -->
+ 	<etat>dev</etat>
+ 	<fonctions></fonctions>
+ 	<pipeline>
+  		<nom>affiche_gauche</nom>
+  		<action>affiche_gauche</action>
+  		<inclure>recommandations_redacteurs_pipelines.php</inclure>
+ 	</pipeline>
+	<icon>img_pack/logo_recommandations_redacteurs.png</icon>
+ 	<necessite id="CFG" version="[1.0;]" />
+	<necessite id='spip' version='[1.92;]' />
+</plugin>

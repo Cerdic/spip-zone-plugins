@@ -1,0 +1,30 @@
+#CACHE{0}
+[(#REM) titre=Configuration des messages]
+[(#REM) icone=img_pack/logo_recommandations_redacteurs_mini.png]
+<!-- descriptif=
+<p>
+Configuration des messages
+</p>
+-->
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+	<fieldset><legend>Message &agrave; afficher pendant la r&eacute;daction des articles :</legend>	
+		<textarea name="message_articles_recommandations_redacteurs" cols="60" rows="20">
+			[(#CONFIG{recommandations_redacteurs/message_articles_recommandations_redacteurs})]
+		
+		</textarea>		
+
+		
+	</fieldset>
+	<fieldset><legend>Message &agrave; afficher pendant la r&eacute;daction des rubriques :</legend>	
+		<textarea name="message_rubriques_recommandations_redacteurs" cols="60" rows="20">
+			[(#CONFIG{recommandations_redacteurs/message_rubriques_recommandations_redacteurs})]
+		</textarea>		
+
+		
+	</fieldset>
+	<div>
+		<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
+		<input type="reset" value="<:reset:>" class="fondo" />
+		<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+	</div>
+</form>
