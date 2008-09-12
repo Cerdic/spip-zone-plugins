@@ -38,7 +38,7 @@ function bible_tableau($i,$lang=''){
 	),
 	'hb'		=>array(
 		'gateway'=>30,
-		'traduction'=> 'Dette Er Biblen Pã¥ Dansk',
+		'traduction'=> 'Het Boek',
 		'lang'=>'nl',
 		'nt'=> true,
 		'at'=> true
