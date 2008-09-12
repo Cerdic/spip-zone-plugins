@@ -1,13 +1,9 @@
-[(#REM) MOTS CLES : chaque groupe de mot cle attribuable a un evenement agenda
-	donne un select ]
-<BOUCLE_groupes(GROUPES_MOTS){tables_liees==(^|,)evenements($|,)}>
-	<select name='evenement_groupe_mot_select_#ID_GROUPE[]' class='agenda_mot_cle_select'[
-	(#UNSEUL|=={'oui'}|?{'',' '}) multiple='multiple' size='4']>
-	[<option value='x' style='font-variant: small-caps;' [
-	(#UNSEUL|=={'oui'}|?{'',' '}) disabled='disabled']>(#TITRE|supprimer_numero)</option>]
-	<BOUCLE_mots(MOTS){id_groupe}>
-		<option value='#ID_MOT'
-		[(#ID_MOT|in_any{[(#ENV**{mots})],''})selected='selected']>#TITRE</option>
-	</BOUCLE_mots>
-	</select>
-</BOUCLE_groupes>
+[(#REM) Afficher les mots selectionnes
+]<B_mots><ul id='mots_sel'><BOUCLE_mots(MOTS){id_evenement}>
+<li><input type="hidden" name='#ENV{name}[]' value="#ID_MOT"
+/>#TITRE <a href='#'
+onclick='mot_sel_remove(this);return false;'><img src='#CHEMIN{images/croix-rouge.gif}' /></a><em>, </em></li>
+</BOUCLE_mots></ul>
+</B_mots>[(#INCLURE{fond=formulaires/inc-navigateur-mots_evenements}{ajax}{name})]
+<script type='text/javascript'>var img_fermer = '#CHEMIN{images/croix-rouge.gif}';</script>
+<script type='text/javascript' src='#CHEMIN{javascript/mots_evenements.js}'></script>

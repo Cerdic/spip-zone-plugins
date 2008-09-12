@@ -34,13 +34,13 @@ function agenda_critere_fusion_par_xx($format, $as, $idb, &$boucles, $crit){
 }
 
 function critere_fusion_par_jour($idb, &$boucles, $crit) {
-	agenda_critere_fusion_par_xx('%Y-%m-%d','jour',$idb, &$boucles, $crit);
+	agenda_critere_fusion_par_xx('%Y-%m-%d','jour',$idb, $boucles, $crit);
 }
 function critere_fusion_par_mois($idb, &$boucles, $crit) {
-	agenda_critere_fusion_par_xx('%Y-%m','mois',$idb, &$boucles, $crit);
+	agenda_critere_fusion_par_xx('%Y-%m','mois',$idb, $boucles, $crit);
 }
 function critere_fusion_par_annee($idb, &$boucles, $crit) {
-	agenda_critere_fusion_par_xx('%Y','annee',$idb, &$boucles, $crit);
+	agenda_critere_fusion_par_xx('%Y','annee',$idb, $boucles, $crit);
 }
 
 

@@ -69,3 +69,14 @@ overflow-x:hidden;text-align:left;z-index:1000;height:10em;width:auto !important
 .ac_results li {	margin: 0px;	padding: 2px 5px;	cursor: pointer;	display: block;	width: 100%;	font-size: 1em;	overflow: hidden;}
 .formulaire input.ac_loading {	background-image : url('searching.gif');background-position: right center;background-repeat: no-repeat;}
 .ac_over {	background-color: Highlight;	color: HighlightText;}
+
+/* selecteur de mots */
+.formulaire_editer_evenement li.editer_mots ul#mots_sel {display:block;padding-left:4px;}
+.formulaire_editer_evenement li.editer_mots ul#mots_sel li {padding:2px;background:#eee;border:1px solid #999;display:block;float:left;margin:0 4px 3px 0;width:auto;clear:none;font-size:0.9em;}
+.formulaire_editer_evenement li.editer_mots ul#mots_sel li em {display:none;}
+.formulaire_editer_evenement li.editer_mots ul#mots_sel li.show {font-weight:bold;}
+.formulaire_editer_evenement li.editer_mots .mots_chemin {clear:left;margin:1em 0 0.5em 4px;border-bottom:1px solid #eee;}
+.formulaire_editer_evenement li.editer_mots ul.groupes_contenus {padding-left:4px;clear:left;}
+.formulaire_editer_evenement li.editer_mots ul.groupes_contenus li {padding:0;margin:0;border:0;clear:none;float:left;width:48%;margin-right:5px;}
+.formulaire_editer_evenement li.editer_mots ul.groupes_contenus li.groupe a {background:url(triangle-droite.gif) no-repeat center right;padding-right:12px;}
+.formulaire_editer_evenement li.editer_mots ul.groupes_contenus li.mot a {color:#89AF02;}

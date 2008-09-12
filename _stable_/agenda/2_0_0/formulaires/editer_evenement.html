@@ -45,14 +45,15 @@
 			<label for="lieu"><:agenda:evenement_lieu:></label>
 			<input type='text' class='text' name='lieu' id='lieu' value="[(#ENV{lieu})]" />
 	    </li>
+	    [<li class="editer_mots[ (#ENV**{erreurs}|table_valeur{mots}|oui)erreur]">[
+	    <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{mots})</span>
+	    ]<label for="mots"><:info_mots_cles:></label>(#INCLURE{fond=formulaires/inc-mots_evenements}{name=mots}{id_evenement})
+	    </li>]
 	    <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 			<label for="descriptif"><:agenda:evenement_descriptif:></label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{desctiptif})</span>]
 			<textarea name='descriptif' rows='5' id='descriptif'>[(#ENV{descriptif})]</textarea>
 	    </li>
-	    [<li class='editer_mots'>
-	    (#INCLURE{fond=formulaires/inc-mots_evenements}{mots=#ENV{mots}})
-	    </li>]    
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->

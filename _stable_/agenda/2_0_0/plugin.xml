@@ -42,6 +42,14 @@ _ &#169; 2006 - Licence GPL 3
 		<inclure>agenda_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>agenda_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>libelle_association_mots</nom>
+		<inclure>agenda_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>taches_generales_cron</nom>
 		<inclure>agenda_pipelines.php</inclure>
 	</pipeline>

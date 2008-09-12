@@ -58,4 +58,21 @@ function agenda_taches_generales_cron($taches_generales){
 	$taches_generales['agenda_nettoyer_base'] = 3600*48;
 	return $taches_generales;
 }
+
+function agenda_editer_contenu_objet($flux){
+	if ($flux['args']['type']=='groupe_mot'){
+		// ajouter l'input sur les evenements
+		$checked = in_array('evenements',$flux['args']['contexte']['tables_liees']);
+		$checked = $checked?" checked='checked'":'';
+		$input = "<div class='choix'><input type='checkbox' class='checkbox' name='tables_liees&#91;&#93;' value='evenements'$checked id='evenements' /><label for='evenements'>"._T('agenda:item_mots_cles_association_evenements')."</label></div>";
+		$flux['data'] = str_replace('<!--choix_tables-->',"$input\n<!--choix_tables-->",$flux['data']);
+	}
+	return $flux;
+}
+
+function agenda_libelle_association_mots($libelles){
+	$libelles['evenements'] = 'agenda:info_evenements';
+	return $libelles;
+}
+
 ?>
