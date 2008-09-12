@@ -15,7 +15,7 @@ function bible_tableau($i,$lang=''){
 	$tableau_langue_original = array(
 		'grc'=>'ltr',
 		'hbo'=>'rtl',
-		'lat'=>'ltr',
+		'la'=>'ltr',
 		
 		);
 	
@@ -207,7 +207,7 @@ function bible_tableau($i,$lang=''){
 		'wissen' 	=> 'biblia-sacra-vulgata',
 		'gateway'	=> false,
 		'traduction'=> 'Biblia Sacra Vulgata',
-		'lang'		=>'lat',
+		'lang'		=>'la',
 		'nt'=> true,
 		'at'=> true,
 		'deutero'=> true
