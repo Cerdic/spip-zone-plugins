@@ -32,7 +32,7 @@ spipbb_log("included",3,__FILE__);
 function public_styliser($fond, $id_rubrique, $lang='', $connect='', $ext='html') {
 	$spipbb_meta = @unserialize($GLOBALS['meta']['spipbb']);
 
-	if (!is_array($spipbb_meta) OR ($spipbb_meta['configure']!='oui')) {
+	if (!is_array($spipbb_meta) OR ($spipbb_meta['configure']!='oui')  OR empty($spipbb_meta['id_secteur'])) {
 		include_once(_DIR_RESTREINT.'public/styliser.php');
 		return public_styliser_dist($fond, $id_rubrique, $lang, $connect, $ext);
 	}
