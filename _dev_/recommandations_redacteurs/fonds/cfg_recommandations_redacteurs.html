@@ -8,19 +8,10 @@ Configuration des messages
 -->
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 	<fieldset><legend>Message &agrave; afficher pendant la r&eacute;daction des articles :</legend>	
-		<textarea name="message_articles_recommandations_redacteurs" cols="60" rows="20">
-			[(#CONFIG{recommandations_redacteurs/message_articles_recommandations_redacteurs})]
-		
-		</textarea>		
-
-		
+		<textarea name="message_articles_recommandations_redacteurs" cols="60" rows="20" class="forml">[(#CONFIG{recommandations_redacteurs/message_articles_recommandations_redacteurs})]</textarea>		
 	</fieldset>
 	<fieldset><legend>Message &agrave; afficher pendant la r&eacute;daction des rubriques :</legend>	
-		<textarea name="message_rubriques_recommandations_redacteurs" cols="60" rows="20">
-			[(#CONFIG{recommandations_redacteurs/message_rubriques_recommandations_redacteurs})]
-		</textarea>		
-
-		
+		<textarea name="message_rubriques_recommandations_redacteurs" cols="60" rows="20" class="forml">[(#CONFIG{recommandations_redacteurs/message_rubriques_recommandations_redacteurs})]</textarea>		
 	</fieldset>
 	<div>
 		<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
