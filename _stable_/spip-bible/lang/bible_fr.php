@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_traduction_no' =>	'Traduction norv&eacute;gienne par d&eacute;faut',
 	'cfg_traduction_pl' =>	'Traduction polonaise par d&eacute;faut',
 	'cfg_traduction_pt' =>	'Traduction portugaise par d&eacute;faut',
+	'cfg_traduction_ru' =>	'Traduction russe par d&eacute;faut',
 	'cfg_traduction_sv' =>	'Traduction su&eacute;doise par d&eacute;faut',
 	'cfg_configurer'	=>	'Configurer le plugin Spip-Bible',
 	'cfg_explication'	=>	"Vous pouvez régler la mani&egrave;re dont apparaitra les citation du texte, en l'absence d'argument pass&eacute; au mod&egrave;le",
