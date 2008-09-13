@@ -9,7 +9,7 @@ _ &#169; 2006 - Licence GPL 3
 	<version>
 	0.18
 	</version>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<description>Agenda Ev&#233;nementiel</description>
 	<lien>http://www.spip-contrib.net/article1396.html</lien> <!-- URI de documentation -->
 	<options>agenda_options.php</options>
