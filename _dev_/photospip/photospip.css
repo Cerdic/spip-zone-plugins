@@ -1,5 +1,7 @@
-#image_container{
+#image-container{
 	position:relative;
+	margin:15px 0;
+	text-align:center;
 }
 
 button.revenir_version{
@@ -31,28 +33,26 @@ button.delete_version{
 	width:60%;
 }
 
-#image-container{
-	margin:0 0 20px 0;
-	text-align:center;
-}
-
 #versions{
-	border:1px solid #ccc;
-	padding :0 5px 7px 5px;
+	padding :0;
 	font-size:11px;
-	width:336px;
+	width:275px;
 	float:right;
 	text-align:left;
 }
 
-#versions h3{
-	padding:5px;
-	background:#86B900 url(../../squelettes/images/menu-bg.gif) repeat-x scroll left top;
-	color:#fff;
+#versions h4{
+	background:#E5E5E5 url(images/titre_top_left) no-repeat scroll right top;
 	font-weight:normal;
-	margin:0 -5px 10px -5px;
+	padding:5px 3px;
 }
 
+#versions .infos{
+	background-color:#F4F4F4;
+	padding:10px;
+	position:relative;
+	margin:0 0 10px 0;
+}
 .version{
 	position:relative;
 	float:left;
@@ -61,6 +61,7 @@ button.delete_version{
 	margin:1px;
 	height:80px;
 	text-align:center;
+	background:#fff;
 }
 
 .version label{
@@ -117,12 +118,15 @@ input{
 	clear:both;
 }
 
-label{
-	color:#86B900;
+#fragment-format label{
+	color:#666;
 	cursor:pointer;
 	border-bottom:1px dotted #86B900;
 }
 
+#image_modifier{
+	float:left;border:2px solid #ccc;
+}
 .nocache{
 	color:#000;
 	border:none;
@@ -133,4 +137,111 @@ label{
 	padding:3px 3px 3px 12px;
 	border:1px solid #86B900;
 	background:#d4f384 url(images/ico-warning.png) left center no-repeat;
+}
+
+/* Caution! Ensure accessibility in print and other media types... */
+@media projection, screen { /* Use class for showing/hiding tab content, so that visibility can be better controlled in different media types... */
+    .ui-tabs-hide {
+        display: none !important;
+    }
+}
+
+/* Hide useless elements in print layouts... */
+@media print {
+    .ui-tabs-nav {
+        display: none;
+    }
+}
+
+/* Skin */
+.ui-tabs-nav, .ui-tabs-panel {
+    font-family: "Trebuchet MS", Trebuchet, Verdana, Helvetica, Arial, sans-serif;
+    font-size: 12px;
+}
+.ui-tabs-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 3px;
+}
+.ui-tabs-nav:after { /* clearing without presentational markup, IE gets extra treatment */
+    display: block;
+    clear: both;
+    content: " ";
+}
+.ui-tabs-nav li {
+    float: left;
+    margin: 0 0 0 2px;
+    font-weight: bold;
+}
+.ui-tabs-nav a, .ui-tabs-nav a span {
+    float: left; /* fixes dir=ltr problem and other quirks IE */
+    padding: 0 12px;
+    background: url(i/tabs.png) no-repeat;
+}
+.ui-tabs-nav a {
+    margin: 5px 0 0; /* position: relative makes opacity fail for disabled tab in IE */
+    padding-left: 0;
+    background-position: 100% 0;
+    text-decoration: none;
+    white-space: nowrap; /* @ IE 6 */
+    outline: 0; /* @ Firefox, prevent dotted border after click */    
+}
+.ui-tabs-nav a:link, .ui-tabs-nav a:visited {
+    color: #ccc;
+	background:#f4f4f4;
+}
+.ui-tabs-nav a:hover {
+	color:#666;
+}
+.ui-tabs-nav .ui-tabs-selected a {
+    position: relative;
+    top: 1px;
+    z-index: 2;
+    margin-top: 0;
+    background:#E5E5E5;
+	color:#666;
+}
+.ui-tabs-nav a span {
+    padding-top: 1px;
+    padding-right: 0;
+    height: 20px;
+    background-position: 0 0;
+    line-height: 20px;
+}
+.ui-tabs-nav .ui-tabs-selected a span {
+    padding-top: 0;
+    height: 27px;
+    line-height: 27px;
+}
+.ui-tabs-nav .ui-tabs-selected a:link, .ui-tabs-nav .ui-tabs-selected a:visited,
+.ui-tabs-nav .ui-tabs-disabled a:link, .ui-tabs-nav .ui-tabs-disabled a:visited { /* @ Opera, use pseudo classes otherwise it confuses cursor... */
+    cursor: text;
+}
+.ui-tabs-nav a:hover, .ui-tabs-nav a:focus, .ui-tabs-nav a:active,
+.ui-tabs-nav .ui-tabs-unselect a:hover, .ui-tabs-nav .ui-tabs-unselect a:focus, .ui-tabs-nav .ui-tabs-unselect a:active { /* @ Opera, we need to be explicit again here now... */
+    cursor: pointer;
+}
+.ui-tabs-disabled {
+    opacity: .4;
+    filter: alpha(opacity=40);
+}
+.ui-tabs-nav .ui-tabs-disabled a:link, .ui-tabs-nav .ui-tabs-disabled a:visited {
+    color: #000;
+}
+.ui-tabs-panel {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background: #fff; /* declare background color for container to avoid distorted fonts in IE while fading */
+}
+/*.ui-tabs-loading em {
+    padding: 0 0 0 20px;
+    background: url(loading.gif) no-repeat 0 50%;
+}*/
+
+/* Additional IE specific bug fixes... */
+* html .ui-tabs-nav { /* auto clear @ IE 6 & IE 7 Quirks Mode */
+    display: inline-block;
+}
+*:first-child+html .ui-tabs-nav  { /* auto clear @ IE 7 Standards Mode - do not group selectors, otherwise IE 6 will ignore complete rule (because of the unknown + combinator)... */
+    display: inline-block;
 }

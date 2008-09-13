@@ -6,37 +6,70 @@
 [<meta name="description" content="(#DESCRIPTIF|couper{150}|texte_backend|textebrut)" />]
 <INCLURE{fond=inc-head}>
 <script type="text/javascript" src="#URL_PAGE{photospip.js}"></script>
-<link rel="stylesheet" href="#CHEMIN{themes/kent1/flora.all.css}" type="text/css" media="print, projection, screen" />
 <link rel="stylesheet" href="#CHEMIN{lib/farbtastic12/farbtastic/farbtastic.css}" type="text/css" media="print, projection, screen" />
 <link rel="stylesheet" href="#CHEMIN{photospip.css}" type="text/css" media="print, projection, screen" />
 	<script type="text/javascript"><!--
+	#SET{largeur_reduit,#FICHIER|image_reduire{500,500}|extraire_attribut{width}}
+	#SET{ratio,#LARGEUR|div{#GET{largeur_reduit}}}
+	
 	// Fonction que l'on réalise lorsque l'on submit un des formulaire de modification
 	var onsubmit_modif = function(id){
 		jQuery('input[@name=valider]').attr({disabled:"disabled"}).css(
-				'opacity',0.2
-			);
+			'opacity',0.2
+		);
+		[(#CONFIG{photospip/image_recadre}|?{' '})
+		image_crop_close();]
 		jQuery('#image-container').append('<div class="waiting"><h2>Modification de votre image...<\/h2><p>Veuillez patienter que cela soit termin&eacute;<\/p><\/div>');
-		jQuery.scrollTo( 90, { duration:500});
+		jQuery.scrollTo(jQuery('#image-container'), { duration:500});
 	}
 
 	// Callback après le submit des formulaire de modification
 	var aftersubmit_modif = function(){
 		jQuery('.validation').load('[(#URL_PAGE{inc-validation}|parametre_url{id_document,#ID_DOCUMENT,"&"})]');
 	}
+
+	var $x1, $y1, $x2, $y2, $w, $h;
+
+	function selectChange(img, selection){
+		var ratio = parseFloat(#GET{ratio});
+		$x1.val(parseFloat(selection.x1*ratio).toFixed(0));
+		$y1.val(parseFloat(selection.y1*ratio).toFixed(0));
+		$x2.val(parseFloat(selection.x2*ratio).toFixed(0));
+		$y2.val(parseFloat(selection.y2*ratio).toFixed(0));
+		$w.val(parseFloat(selection.width*ratio).toFixed(0));
+		$h.val(parseFloat(selection.height*ratio).toFixed(0));
+	}
+
+	[(#CONFIG{photospip/image_recadre}|?{' ',''})
+	
+	jQuery(document).ready(function () {
+		$x1 = jQuery('#recadre_x1');
+		$x1.change(function(){
+			jQuery('#image_modifier img').imgAreaSelect({x1:20,y1:20,x2:70,y2:70,width:50,height:50,onSelectChange: selectChange,show:true});
+		});
+		$y1 = jQuery('#recadre_y1');
+		$x2 = jQuery('#recadre_x2');
+		$y2 = jQuery('#recadre_y2');
+		$w = jQuery('#recadre_width');
+		$h = jQuery('#recadre_height');
+	});
+
+	var image_crop = function(){
+		jQuery('#image_modifier img').imgAreaSelect(
+			{x1:10, y1:10,x2:50,y2:50,width:40,height:40,onSelectChange: selectChange,show:true}
+		);
+	}
+	
+	var image_crop_close = function(){
+		jQuery('#image_modifier img').imgAreaSelect({hide:true});
+	}
+]
 	
 	var activatesliders = function(){
-		jQuery('#sliderrotation').slider({
-			minValue: -180,
-			maxValue: 180,
-			startValue : 45,
-			change: function(e, ui){
-				jQuery(this).parent().find('input').val(ui.value.toFixed(0));
-			}
-		});
-		jQuery('#param_image_rotation').val('45');
+
 		jQuery('#slidergamma').slider({
-			minValue: -254,
-			maxValue: 254,
+			min: -254,
+			max: 254,
 			startValue : 10,
 			change: function(e, ui){
 				jQuery(this).parent().find('input').val(ui.value.toFixed(0));
@@ -44,27 +77,19 @@
 		});
 		jQuery('#param_image_gamma').val('10');
 		jQuery('#sliderflou').slider({
-			minValue: 1,
-			maxValue: 11,
+			min: 1,
+			max: 11,
 			startValue : 3,
 			change: function(e, ui){
 				jQuery(this).parent().find('input').val(ui.value.toFixed(0));
 			}
 		});
-		jQuery('#param_image_gamma').val('10');
-		jQuery('#slidersaturer').slider({
-			minValue: 0,
-			maxValue: 2,
-			startValue : 1,
-			change: function(e, ui){
-				jQuery(this).parent().find('input').val(ui.value.toFixed(1));
-			}
-		});
-		jQuery('#param_image_saturer').val('1');
+		jQuery('#param_image_flou').val('3');
 	}
 	
 	var load = function(){
 	  	jQuery('.picker').css('opacity', 0.25);
+
 	  	var selected;
 	  	jQuery('.colorwell').each(function(){
 	  		var pick = jQuery(this).parent().children('.picker');
@@ -89,13 +114,26 @@
 	  		});
 	  		jQuery(this).find('.revenir_version, .delete_version').show();
 	  	});
-		jQuery('.version').bind("mouseleave", function(){
-	  		jQuery(this).find('button.revenir_version, button.delete_version').hide();
+		jQuery('.version').bind("mouseout", function(){
+	  		jQuery(this).find('.revenir_version, .delete_version').hide();
 	  	});
-		jQuery('form input[@type=radio]').not('.nocache').unbind().change(function(){
-	  		jQuery(".on").slideUp().removeClass('on')
-			jQuery(this).parent().find('.cache').slideDown().addClass('on');
-			activatesliders();
+		[(#CONFIG{photospip/image_recadre}|?{' '})
+		if(jQuery('#image_recadre').is(':checked')){
+			image_crop();
+		}]
+		jQuery('form input[@type=radio]').not('.nocache').unbind().click(function(){
+			if(jQuery(this).next().next('div').is(':hidden')){
+		  		jQuery(".visible").slideUp().removeClass('visible')
+				jQuery(this).parent().find('.cache').slideDown().addClass('visible');
+				activatesliders();
+				[(#CONFIG{photospip/image_recadre}|?{' '})
+				if(jQuery(this).attr('id') == 'image_recadre'){
+					image_crop();
+				}
+				else{	
+					image_crop_close();
+				}]
+			}
 	  	});
 	  	jQuery('#versions input[@type=radio]').css("display", "none");
 	  }
@@ -105,31 +143,38 @@
 		load();
 		jQuery('#container-1 > ul').tabs();
 		jQuery('.cache').hide();
+		jQuery('.image_recadre input[@type=radio]').click(function(){
+			if (jQuery(this).val() != ''){
+				jQuery('#image_modifier img').imgAreaSelect({aspectRatio: jQuery(this).val()});
+			}
+			else{
+				jQuery('#image_modifier img').imgAreaSelect({aspectRatio: ''});
+			}
+		});
 	});
 	onAjaxLoad(load);
 	// -->
 	</script>
 </head>
-<body>
 
-<INCLUDE{fond=login_top}>
-
-<INCLURE{fond=inc-entete}>
+<body class="page_article">
 <div id="page">
-<div class="lbc-w-main">
-	<div class="rtc-w-main">
-		<div class="ltc-w-main">
+
+	<INCLURE{fond=inc-entete}>
+
 		<div id="modifier_image">
 			<div id="image-container">
-				<INCLURE{fond=fragment_photospip}{id_document}{env}>
+				<INCLURE{fond=fragment_photospip}{id_document}>
 			</div>
 	
 				[(#SET{photospip,pasok})]
 				<BOUCLE_interd(DOCUMENTS_INTERS){id_document}> </BOUCLE_interd>
 				[(#TOTAL_BOUCLE|>={#CONFIG{photospip/limite_version}}|?{#SET{photospip,ok},#SET{photospip,pasok}})]
-				</B_interd>
-				
-			<div id="container-1">
+				<//B_interd>
+				<div class="nettoyeur"></div>
+			[(#SESSION{id_auteur}?{' ',''})	
+			[(#AUTORISER{'modifier','document',#ID_DOCUMENT})
+			<div id="container-1" style="position:relative">
 				<ul>
 					<li><a href="#fragment-format"><span><:photospip:filtres_format:></span></a></li>
 					<li><a href="#fragment-couleurs"><span><:photospip:filtres_de_couleur:></span></a></li>
@@ -141,15 +186,15 @@
 					<li><a href="#fragment-sup"><span><:photospip:filtres_supplementaires:></span></a></li>]]
 				</ul>
 				<div id="fragment-format">
+					<div class="help">
+						<:photospip:texte_aide:>
+					</div>
 					<h3><:photospip:filtres_format:></h3>
 					<form id="photospip1" onsubmit="onsubmit_modif();return AjaxSqueeze(this,'image-container',aftersubmit_modif,event)" method="post" action="[(#URL_ACTION_AUTEUR{photospip,#ID_DOCUMENT})]">
-							<div class="help">
-								<:photospip:texte_aide:>
-							</div>
 							[(#CONFIG{photospip/tourner}|?{' '})
 							<div>
 								<input type="radio" name="filtre" id="tourner" value="tourner" />
-								<label for="tourner"><:photospip:tourner:></label>
+								<label for="tourner">[<img src="(#CHEMIN{images/photospip-ico/ico_rotation.png})" alt="<:photospip:tourner:>" />&nbsp;&nbsp;]<:photospip:tourner:></label>
 								<div class="cache params_filtre">
 									<:photospip:tourner_text:><br />
 									<input type="radio" name="params_tourner" class="nocache" value="90" id="param_tourner_90" />
@@ -164,7 +209,7 @@
 							[(#CONFIG{photospip/image_flip_vertical}|?{' '})
 							<div>
 								<input type="radio" name="filtre" id="image_flip_vertical" value="image_flip_vertical" />
-								<label for="image_flip_vertical"><:photospip:image_flip_vertical:></label>
+								<label for="image_flip_vertical">[<img src="(#CHEMIN{images/photospip-ico/ico_flip_vertical.png})" alt="<:photospip:image_flip_vertical:>" />&nbsp;&nbsp;]<:photospip:image_flip_vertical:></label>
 								<div class="cache params_filtre">
 									<:photospip:image_flip_vertical_text:>
 								</div>
@@ -172,7 +217,7 @@
 							[(#CONFIG{photospip/image_flip_horizontal}|?{' '})
 							<div>
 								<input type="radio" name="filtre" id="image_flip_horizontal" value="image_flip_horizontal" />
-								<label for="image_flip_horizontal"><:photospip:image_flip_horizontal:></label>
+								<label for="image_flip_horizontal">[<img src="(#CHEMIN{images/photospip-ico/ico_flip_horizontal.png})" alt="<:photospip:image_flip_horizontal:>" />&nbsp;&nbsp;]<:photospip:image_flip_horizontal:></label>
 								<div class="cache params_filtre">
 									<:photospip:image_flip_horizontal_text:>
 								</div>
@@ -180,7 +225,7 @@
 							[(#CONFIG{photospip/image_rotation}|?{' '})
 							<div>
 								<input type="radio" name="filtre" id="image_rotation" value="image_rotation" />
-								<label for="image_rotation"><:photospip:image_rotation:></label>
+								<label for="image_rotation">[<img src="(#CHEMIN{images/photospip-ico/ico_rotation.png})" alt="<:photospip:image_rotation:>" />&nbsp;&nbsp;]<:photospip:image_rotation:></label>
 								<div class="cache params_filtre">
 									<:photospip:image_rotation_text:>
 									<div id='sliderrotation' class='ui-slider-1' style="margin: 10px 40px;">
@@ -191,28 +236,62 @@
 									<br class="nettoyeur" />
 								</div>
 							</div>]
+							[(#CONFIG{photospip/image_recadre}|?{' '})
+							<div>
+								<input type="radio" name="filtre" id="image_recadre" value="image_recadre" />
+								<label for="image_recadre">[<img src="(#CHEMIN{images/photospip-ico/ico_rotation.png})" alt="<:photospip:image_recadre:>" />&nbsp;&nbsp;]<:photospip:image_recadre:></label>
+								<div class="cache params_filtre image_recadre">
+									<:photospip:image_recadre_text:>
+									<p><:photospip:image_taille_actuelle:> #LARGEUR x #HAUTEUR px</p>
+									<p><strong><:photospip:ratio:></strong></p>
+									<p><label for="ratio"><:photospip:ratio_libre:></label>
+									<input type="radio" class="nocache" id="ratio" name="ratio" value="" /><br />
+									<label for="ratio1">1:1 :</label>
+									<input type="radio" class="nocache" id="ratio1" name="ratio" value="1:1" /><br />
+									<label for="ratio2">4:3 :</label>
+									<input type="radio" class="nocache" id="ratio2" name="ratio" value="4:3" /></p>
+									<label for="recadre_width"><:photospip:recadre_width:></label>
+									<input type="text" id="recadre_width" name="recadre_width" style="width:60px;display:inline" value="" /><br />
+									<label for="recadre_height"><:photospip:recadre_height:></label>
+									<input type="text" id="recadre_height" name="recadre_height" style="width:60px;display:inline" value="" /><br />
+									<p><:photospip:recadre_x1_y1:></p>
+									<label for="recadre_x1">x</label>
+									<input type="text" id="recadre_x1" name="recadre_x1" style="width:60px;display:inline" value="" />
+									<label for="recadre_y1">y</label>
+									<input type="text" id="recadre_y1" name="recadre_y1" style="width:60px;display:inline" value="" /><br />
+									<p><:photospip:recadre_x2_y2:></p>
+									<label for="recadre_x2">x</label>
+									<input type="text" id="recadre_x2" name="recadre_x2" style="width:60px;display:inline" value="" />
+									<label for="recadre_y2">y</label>
+									<input type="text" id="recadre_y2" name="recadre_y2" style="width:60px;display:inline" value="" /><br />
+									<br class="nettoyeur" />
+								</div>
+							</div>]
 							<div class="clear">
-								<input type="hidden" name="redirect" value="[(#URL_PAGE{fragment_photospip}|parametre_url{id_document,#ID_DOCUMENT})]" />
-							<p class="spip_bouton validation" >
-								<input type="radio" name="validation" class="nocache" value="tester" id="tester1" checked="checked" /><label for="tester1" class="nocache"><:photospip:tester:></label><br class="nettoyeur" />
-								[(#GET{photospip}|=={pasok}|?{<input type="radio" name="validation" class="nocache" value="appliquer" id="appliquer1" /><label for="appliquer1" class="nocache"><:photospip:valider:></label>,<span class="warning"><:photospip:nb_versions_depasse:></span><br />})]<br class="nettoyeur" />
-								<input type="submit" name="valider" value="<:photospip:valider:>" /> 
-							</p>
+								<input type="hidden" name="redirect" value="[(#SELF)]" />
+								<input type="hidden" name="redirect_ajax" value="[(#URL_PAGE{fragment_photospip}|parametre_url{id_document,#ID_DOCUMENT})]" />
+							<div class="validation" >
+								<input type="radio" name="validation" class="nocache" value="tester" id="tester1" checked="checked" /><label for="tester1" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_tester.png})" alt="<:photospip:tester:>" /> ]<:photospip:tester:></label><br class="nettoyeur" />
+								[(#GET{photospip}|=={pasok}|?{<input type="radio" name="validation" class="nocache" value="appliquer" id="appliquer1" /><label for="appliquer1" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_appliquer.png})" alt="<:photospip:valider:>" /> ]<:photospip:valider:></label>,<span class="warning"><:photospip:nb_versions_depasse:></span><br />})]<br class="nettoyeur" />
+								<p class="spip_bouton">
+								<input type="submit" name="valider" value="<:photospip:valider:>" />
+								</p>
+							</div>
 							<br class="nettoyeur" />
 						</div>
 					</form>
 				</div>
 				<div id="fragment-couleurs">
+					<div class="help">
+						<:photospip:texte_aide:>
+					</div>
 					<h3><:photospip:filtres_de_couleur:></h3>
 						<form id="photospip2" onsubmit="onsubmit_modif();return AjaxSqueeze(this,'image-container',aftersubmit_modif,event)" method="post" enctype="multipart/form-data" action="[(#URL_ACTION_AUTEUR{photospip,#ID_DOCUMENT})]">
-						<div class="help">
-							<:photospip:texte_aide:>
-						</div>
 						<div>
 							[(#CONFIG{photospip/image_nb}|?{' '})
 							<div>
 								<input type="radio" name="filtre" id="filtre_nb" value="image_nb" />
-								<label for="filtre_nb"><:photospip:image_nb:></label>
+								<label for="filtre_nb">[<img src="(#CHEMIN{images/photospip-ico/ico_nb.png})" alt="<:photospip:image_nb:>" />&nbsp;&nbsp;]<:photospip:image_nb:></label>
 								<div class="cache params_filtre">
 									<:photospip:image_nb_text:>
 								</div>
@@ -248,7 +327,7 @@
 							[(#CONFIG{photospip/image_sepia}|?{' '})
 							<div>
 								<input type="radio" name="filtre" id="filtre_sepia" value="image_sepia" />
-								<label for="filtre_sepia"><:photospip:image_sepia:></label>
+								<label for="filtre_sepia">[<img src="(#CHEMIN{images/photospip-ico/ico_sepia.png})" alt="<:photospip:image_sepia:>" />&nbsp;&nbsp;]<:photospip:image_sepia:></label>
 								<div class="cache params_filtre">
 									<label for="param_image_sepia"><:photospip:couleur_sepia:></label>&nbsp;
 									<input type="text" name="params_image_sepia" class="colorwell" style="width:100px;display:inline" id="param_image_sepia" value="#896f5e" maxlength="7" />
@@ -258,16 +337,18 @@
 							</div>]
 							
 							<div class="clear">
-								<input type="hidden" name="redirect" value="[(#URL_PAGE{fragment_photospip}|parametre_url{id_document,#ID_DOCUMENT})]" />
-								<p class="spip_bouton validation">
-									<input type="radio" name="validation" class="nocache" value="tester" id="tester2" checked="checked" /><label for="tester2" class="nocache"><:photospip:tester:></label><br class="nettoyeur" />
-									[(#GET{photospip}|=={pasok}|?{<input type="radio" name="validation" class="nocache" value="appliquer" id="appliquer2" /><label for="appliquer2" class="nocache"><:photospip:valider:></label>,<span class="warning"><:photospip:nb_versions_depasse:></span>})]<br class="nettoyeur" />
-									<input type="submit" name="valider" value="<:photospip:valider:>" /> 
-								</p>
+								<input type="hidden" name="redirect" value="[(#SELF)]" />
+								<input type="hidden" name="redirect_ajax" value="[(#URL_PAGE{fragment_photospip}|parametre_url{id_document,#ID_DOCUMENT})]" />
+								<div class="validation" >
+									<input type="radio" name="validation" class="nocache" value="tester" id="tester2" checked="checked" /><label for="tester2" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_tester.png})" alt="<:photospip:tester:>" /> ]<:photospip:tester:></label><br class="nettoyeur" />
+									[(#GET{photospip}|=={pasok}|?{<input type="radio" name="validation" class="nocache" value="appliquer" id="appliquer2" /><label for="appliquer2" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_appliquer.png})" alt="<:photospip:valider:>" /> ]<:photospip:valider:></label>,<span class="warning"><:photospip:nb_versions_depasse:></span><br />})]<br class="nettoyeur" />
+									<p class="spip_bouton">
+										<input type="submit" name="valider" value="<:photospip:valider:>" />
+									</p>
+							</div>
 							<br class="nettoyeur" />
 							</div>
 						</div>
-						
 					</form>
 				</div>
 
@@ -309,10 +390,11 @@
 						</div>
 					</div>]
 					<div class="clear">
-						<input type="hidden" name="redirect" value="[(#URL_PAGE{fragment_photospip}|parametre_url{id_document,#ID_DOCUMENT})]" />
+								<input type="hidden" name="redirect" value="[(#SELF)]" />
+								<input type="hidden" name="redirect_ajax" value="[(#URL_PAGE{fragment_photospip}|parametre_url{id_document,#ID_DOCUMENT})]" />
 					<p class="spip_bouton validation" >
-						<input type="radio" name="validation" class="nocache" value="tester" id="tester3" checked="checked" /><label for="tester3" class="nocache"><:photospip:tester:></label><br class="nettoyeur" />
-						[(#GET{photospip}|=={pasok}|?{<input type="radio" name="validation" class="nocache" value="appliquer" id="appliquer3" /><label for="appliquer3" class="nocache"><:photospip:valider:></label>,<span class="warning"><:photospip:nb_versions_depasse:></span>})]<br class="nettoyeur" />
+						<input type="radio" name="validation" class="nocache" value="tester" id="tester3" checked="checked" /><label for="tester3" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_tester.png})" alt="<:photospip:tester:>" /> ]<:photospip:tester:></label><br class="nettoyeur" />
+						[(#GET{photospip}|=={pasok}|?{<input type="radio" name="validation" class="nocache" value="appliquer" id="appliquer3" /><label for="appliquer3" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_appliquer.png})" alt="<:photospip:valider:>" /> ]<:photospip:valider:></label>,<span class="warning"><:photospip:nb_versions_depasse:></span>})]<br class="nettoyeur" />
 						<input type="submit" name="valider" value="<:photospip:valider:>" /> 
 					</p>
 					<br class="nettoyeur" />
@@ -320,14 +402,16 @@
 					</form>
 				</div>]
 			<div class="nettoyeur"></div>
+			</div>]]
+			[(#AUTORISER{'modifier','document',#ID_DOCUMENT}|?{'',' '})
+			<:photospip:modification_pas_autorisee:>]
 		</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
+		<div class="nettoyeur"></div>
+
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!--#page-->
 </body>
 </html>
 </BOUCLE_article_principal>

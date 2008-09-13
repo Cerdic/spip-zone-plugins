@@ -1,14 +1,17 @@
 #CACHE{0}
 #HTTP_HEADER{Content-Type:text/html}
 <BOUCLE_doc(DOCUMENTS){id_document}>
-	<div style="width:590px;float:left;border:2px solid #ccc;">
+	#SET{largeur_max,#CONFIG{photospip/largeur_previsu}}
+	#SET{hauteur_max,#CONFIG{photospip/hauteur_previsu}}
+	<div id="image_modifier" style="[width:(#GET{largeur_max}|sinon{450})px;]">
 	[(#ENV{filtre}|?{' ',''})
-	[(#FICHIER|image_reduire{590,590}|photospip_appliquer_filtre{#ENV{filtre},[(#ENV{param})]}|inserer_attribut{alt,' '})]]
+	[(#FICHIER|image_reduire{[(#GET{largeur_max}|sinon{450})],[(#GET{hauteur_max}|sinon{450})]}|photospip_appliquer_filtre{#ENV{filtre},[(#ENV{param})]}|inserer_attribut{alt,' '})]]
 	[(#ENV{filtre}|?{'',' '})
-	[(#FICHIER|image_reduire{590,590}|inserer_attribut{alt,' '})]]
+	[(#FICHIER|image_reduire{[(#GET{largeur_max}|sinon{450})],[(#GET{hauteur_max}|sinon{450})]}|inserer_attribut{alt,' '})]]
 	</div>
 	<div id="versions">
-	<h3><:photospip:versions_precedentes:></h3>
+	<h4><:photospip:versions_precedentes:></h4>
+		<div class="infos">
 		<B_interd>
 			<p><:photospip:limite_versions_public:>#CONFIG{photospip/limite_version}</p>
 				<BOUCLE_interd(DOCUMENTS_INTERS){id_document}{par maj}{inverse}>
@@ -34,12 +37,14 @@
 				<br style="clear:both" />
 				<div>
 				<br class="nettoyeur" />
-				</div>
+			</div>
 		</B_interd>
 		<:photospip:pas_de_versions:>
 		<//B_interd>
-	<h3><:photospip:informations_images:></h3>
-		<h4 class="#_doc:EDIT{titre}">[(#TITRE|sinon{[(#FICHIER|basename)]})]</h4>
+		</div>
+	<h4><:photospip:informations_images:></h4>
+	<div class="infos">
+		<h5 class="#_doc:EDIT{titre}">[(#TITRE|sinon{[(#FICHIER|basename)]})]</h5>
 		<div id="infos_doc_sup">
 			<p><:photospip:id_document:>#ID_DOCUMENT</p>
 			<p><:photospip:type_original:>[(#MIME_TYPE|sinon{inconnu})]</p>
@@ -50,6 +55,12 @@
 			</p>
 			<p><:photospip:fichier_original:>[(#FICHIER|basename)]</p>
 		</div>
+	</div>
+	<h4><:photospip:donnees_exif:></h4>
+		<INCLURE{fond=inc_exif}{fichier=#FICHIER}>
+	
+		<INCLURE{fond=inc_histogramme}{fichier=#FICHIER}>
+	
 	</div>
 	<br style="clear:both" />
 </BOUCLE_doc>
