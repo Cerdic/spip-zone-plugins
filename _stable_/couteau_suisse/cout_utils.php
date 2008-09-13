@@ -462,7 +462,8 @@ function cs_optimise_if($code) {
 	$code = preg_replace(',if\s*\(\s*([^)]*\s*)\)\s*{\s*,imsS', 'if(\\1){', $code);
 	$code = str_replace('if(false){', 'if(0){', $code);
 	$code = str_replace('if(true){', 'if(1){', $code);
-	while (preg_match(',if\(([0-9])+\){(.*)$,msS', $code, $regs)) {
+	if (preg_match_all(',if\(([0-9])+\){(.*)$,msS', $code, $re, PREG_SET_ORDER))
+	foreach($re as $regs) {
 		$temp = $regs[2]; $ouvre = $ferme = -1; $nbouvre = 1;
 		do {
 			if ($ouvre===false) $min = $ferme + 1; else $min = min($ouvre, $ferme) + 1;
@@ -472,7 +473,7 @@ function cs_optimise_if($code) {
 		} while($ferme!==false && $nbouvre>0);
 		if($ferme===false) return "/* Erreur sur les accolades : \{$regs[2] */";
 		$temp = substr($temp, 0, $ferme);
-		$rempl = "if($regs[1])\{$temp}";
+		$rempl = "if($regs[1]){".$temp."}";
 		if(intval($regs[1])) $code = str_replace($rempl, "/* optimisation : 'IF($regs[1])' */ $temp", $code);
 			else $code = str_replace($rempl, "/* optimisation : 'IF($regs[1]) \{$temp\}' */", $code);
 	}
