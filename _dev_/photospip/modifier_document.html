@@ -9,7 +9,11 @@
 <link rel="stylesheet" href="#CHEMIN{lib/farbtastic12/farbtastic/farbtastic.css}" type="text/css" media="print, projection, screen" />
 <link rel="stylesheet" href="#CHEMIN{photospip.css}" type="text/css" media="print, projection, screen" />
 	<script type="text/javascript"><!--
-	#SET{largeur_reduit,#FICHIER|image_reduire{500,500}|extraire_attribut{width}}
+	// Calcul du ratio entre notre image originale et la prévisualisation
+	// Utile pour les opération de recadrage notamment
+	#SET{largeur_max,#CONFIG{photospip/largeur_previsu}}
+	#SET{hauteur_max,#CONFIG{photospip/hauteur_previsu}}
+	[(#SET{largeur_reduit,[(#FICHIER|image_reduire{[(#GET{largeur_max}|sinon{450})],[(#GET{hauteur_max}|sinon{450})]}|extraire_attribut{width})]})]
 	#SET{ratio,#LARGEUR|div{#GET{largeur_reduit}}}
 	
 	// Fonction que l'on réalise lorsque l'on submit un des formulaire de modification
@@ -29,8 +33,9 @@
 	}
 
 	var $x1, $y1, $x2, $y2, $w, $h;
-
+	
 	function selectChange(img, selection){
+		// Le ratio est la relation entre notre image normale et la prévisualisation
 		var ratio = parseFloat(#GET{ratio});
 		$x1.val(parseFloat(selection.x1*ratio).toFixed(0));
 		$y1.val(parseFloat(selection.y1*ratio).toFixed(0));
@@ -164,7 +169,7 @@
 
 		<div id="modifier_image">
 			<div id="image-container">
-				<INCLURE{fond=fragment_photospip}{id_document}>
+				<INCLURE{fond=fragment_photospip}{id_document}{largeur_max=#GET{largeur_max}}{hauteur_max=#GET{hauteur_max}}>
 			</div>
 	
 				[(#SET{photospip,pasok})]
@@ -251,19 +256,19 @@
 									<label for="ratio2">4:3 :</label>
 									<input type="radio" class="nocache" id="ratio2" name="ratio" value="4:3" /></p>
 									<label for="recadre_width"><:photospip:recadre_width:></label>
-									<input type="text" id="recadre_width" name="recadre_width" style="width:60px;display:inline" value="" /><br />
+									<input type="text" id="recadre_width" name="recadre_width" style="width:60px;display:inline" value="" readonly="readonly" /><br />
 									<label for="recadre_height"><:photospip:recadre_height:></label>
-									<input type="text" id="recadre_height" name="recadre_height" style="width:60px;display:inline" value="" /><br />
+									<input type="text" id="recadre_height" name="recadre_height" style="width:60px;display:inline" value="" readonly="readonly" /><br />
 									<p><:photospip:recadre_x1_y1:></p>
 									<label for="recadre_x1">x</label>
-									<input type="text" id="recadre_x1" name="recadre_x1" style="width:60px;display:inline" value="" />
+									<input type="text" id="recadre_x1" name="recadre_x1" style="width:60px;display:inline" value="" readonly="readonly" />
 									<label for="recadre_y1">y</label>
-									<input type="text" id="recadre_y1" name="recadre_y1" style="width:60px;display:inline" value="" /><br />
+									<input type="text" id="recadre_y1" name="recadre_y1" style="width:60px;display:inline" value="" readonly="readonly" /><br />
 									<p><:photospip:recadre_x2_y2:></p>
 									<label for="recadre_x2">x</label>
-									<input type="text" id="recadre_x2" name="recadre_x2" style="width:60px;display:inline" value="" />
+									<input type="text" id="recadre_x2" name="recadre_x2" style="width:60px;display:inline" value="" readonly="readonly" />
 									<label for="recadre_y2">y</label>
-									<input type="text" id="recadre_y2" name="recadre_y2" style="width:60px;display:inline" value="" /><br />
+									<input type="text" id="recadre_y2" name="recadre_y2" style="width:60px;display:inline" value="" readonly="readonly" /><br />
 									<br class="nettoyeur" />
 								</div>
 							</div>]

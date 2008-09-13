@@ -1,66 +1,65 @@
 #CACHE{0}
 #HTTP_HEADER{Content-Type:text/html}
 <BOUCLE_doc(DOCUMENTS){id_document}>
-	#SET{largeur_max,#CONFIG{photospip/largeur_previsu}}
-	#SET{hauteur_max,#CONFIG{photospip/hauteur_previsu}}
-	<div id="image_modifier" style="[width:(#GET{largeur_max}|sinon{450})px;]">
-	[(#ENV{filtre}|?{' ',''})
-	[(#FICHIER|image_reduire{[(#GET{largeur_max}|sinon{450})],[(#GET{hauteur_max}|sinon{450})]}|photospip_appliquer_filtre{#ENV{filtre},[(#ENV{param})]}|inserer_attribut{alt,' '})]]
-	[(#ENV{filtre}|?{'',' '})
-	[(#FICHIER|image_reduire{[(#GET{largeur_max}|sinon{450})],[(#GET{hauteur_max}|sinon{450})]}|inserer_attribut{alt,' '})]]
+	<div id="image_modifier" style="[width:(#ENV{largeur_max}|sinon{450})px;]">
+		[(#ENV{filtre}|?{' ',''})
+		[(#FICHIER|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|photospip_appliquer_filtre{#ENV{filtre},[(#ENV{param})]}|inserer_attribut{alt,' '})]]
+		[(#ENV{filtre}|?{'',' '})
+		[(#FICHIER|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|inserer_attribut{alt,' '})]]
 	</div>
 	<div id="versions">
-	<h4><:photospip:versions_precedentes:></h4>
-		<div class="infos">
-		<B_interd>
-			<p><:photospip:limite_versions_public:>#CONFIG{photospip/limite_version}</p>
-				<BOUCLE_interd(DOCUMENTS_INTERS){id_document}{par maj}{inverse}>
-					<div class="version">
-						<form action="[(#URL_ACTION_AUTEUR{images_versions,#ENV{id_document}})]" onsubmit="return AjaxSqueeze(this,'image-container',aftersubmit_modif,event)" method="post">
-							<div>
-								<input type="hidden" name="version" value="#VERSION" />
-								<label>
-									[(#FICHIER|get_spip_doc|image_reduire{80,80}|inserer_attribut{alt,' '})]
-								</label>
-								<input type="hidden" name="redirect" value="[(#SELF)]" />
-								<input type="hidden" name="redirect_ajax" value="[(#URL_PAGE{fragment_photospip}|parametre_url{id_document,#ENV{id_document}})]" />
-								[(#VERSION|=={1}|?{'',' '})<button type="submit" name="action_faire" class="delete_version"  value="supprimer" onclick="AjaxNamedSubmit(this)" title="<:photospip:supprimer_version:> #VERSION">
-									<img src="[(#CHEMIN{images/delete_version.png}|image_sepia{86B900}|extraire_attribut{src})]" alt="<:photospip:supprimer_version:> #VERSION" />
-								</button>]
-								<button type="submit" name="action_faire" value="revenir" class="revenir_version" onclick="AjaxNamedSubmit(this)" title="<:photospip:revenir_version:> #VERSION">
-									<img src="[(#CHEMIN{images/revenir_version.png}|image_sepia{86B900}|extraire_attribut{src})]" alt="<:photospip:revenir_version:> #VERSION" />
-								</button>
-							</div>
-						</form>
-					</div>
-				</BOUCLE_interd>
-				<br style="clear:both" />
-				<div>
-				<br class="nettoyeur" />
+		<h4><:photospip:versions_precedentes:></h4>
+			<div class="infos">
+			<B_interd>
+				<p><:photospip:limite_versions_public:>#CONFIG{photospip/limite_version}</p>
+					<BOUCLE_interd(DOCUMENTS_INTERS){id_document}{par maj}{inverse}>
+						<div class="version">
+							<form action="[(#URL_ACTION_AUTEUR{images_versions,#ENV{id_document}})]" onsubmit="return AjaxSqueeze(this,'image-container',aftersubmit_modif,event)" method="post">
+								<div>
+									<input type="hidden" name="version" value="#VERSION" />
+									<label>
+										[(#FICHIER|get_spip_doc|image_reduire{80,80}|inserer_attribut{alt,' '})]
+									</label>
+									<input type="hidden" name="redirect" value="[(#SELF)]" />
+									<input type="hidden" name="redirect_ajax" value="[(#URL_PAGE{fragment_photospip}|parametre_url{id_document,#ENV{id_document}})]" />
+									[(#VERSION|=={1}|?{'',' '})<button type="submit" name="action_faire" class="delete_version"  value="supprimer" onclick="AjaxNamedSubmit(this)" title="<:photospip:supprimer_version:> #VERSION">
+										<img src="[(#CHEMIN{images/delete_version.png}|image_sepia{86B900}|extraire_attribut{src})]" alt="<:photospip:supprimer_version:> #VERSION" />
+									</button>]
+									<button type="submit" name="action_faire" value="revenir" class="revenir_version" onclick="AjaxNamedSubmit(this)" title="<:photospip:revenir_version:> #VERSION">
+										<img src="[(#CHEMIN{images/revenir_version.png}|image_sepia{86B900}|extraire_attribut{src})]" alt="<:photospip:revenir_version:> #VERSION" />
+									</button>
+								</div>
+							</form>
+						</div>
+					</BOUCLE_interd>
+					<br style="clear:both" />
+					<div>
+					<br class="nettoyeur" />
+				</div>
+			</B_interd>
+			<:photospip:pas_de_versions:>
+			<//B_interd>
 			</div>
-		</B_interd>
-		<:photospip:pas_de_versions:>
-		<//B_interd>
+		<h4><:photospip:informations_images:></h4>
+		<div class="infos">
+			<h5 class="#_doc:EDIT{titre}">[(#TITRE|sinon{[(#FICHIER|basename)]})]</h5>
+			<div id="infos_doc_sup">
+				<p><:photospip:id_document:>#ID_DOCUMENT</p>
+				<p><:photospip:type_original:>[(#MIME_TYPE|sinon{inconnu})]</p>
+				<p><:photospip:date_doc:>#DATE</p>
+				<p><:photospip:date_modif_doc:>#MAJ</p>
+				<p><:photospip:taille_fichier:><br />
+				#LARGEUR x #HAUTEUR px[ - (#TAILLE|taille_en_octets)]
+				</p>
+				<p><:photospip:fichier_original:>[(#FICHIER|basename)]</p>
+			</div>
 		</div>
-	<h4><:photospip:informations_images:></h4>
-	<div class="infos">
-		<h5 class="#_doc:EDIT{titre}">[(#TITRE|sinon{[(#FICHIER|basename)]})]</h5>
-		<div id="infos_doc_sup">
-			<p><:photospip:id_document:>#ID_DOCUMENT</p>
-			<p><:photospip:type_original:>[(#MIME_TYPE|sinon{inconnu})]</p>
-			<p><:photospip:date_doc:>#DATE</p>
-			<p><:photospip:date_modif_doc:>#MAJ</p>
-			<p><:photospip:taille_fichier:><br />
-			#LARGEUR x #HAUTEUR px[ - (#TAILLE|taille_en_octets)]
-			</p>
-			<p><:photospip:fichier_original:>[(#FICHIER|basename)]</p>
-		</div>
-	</div>
-	<h4><:photospip:donnees_exif:></h4>
-		<INCLURE{fond=inc_exif}{fichier=#FICHIER}>
-	
-		<INCLURE{fond=inc_histogramme}{fichier=#FICHIER}>
-	
+		[(#CONFIG{plugin/PHOTO_INFOS}|?{' ',''})
+		<h4><:photospip:donnees_exif:></h4>
+		<div class="infos">
+			<INCLURE{fond=inc_exif}{fichier=#FICHIER}>
+			<INCLURE{fond=inc_histogramme}{fichier=#FICHIER}>
+		</div>]
 	</div>
 	<br style="clear:both" />
 </BOUCLE_doc>
