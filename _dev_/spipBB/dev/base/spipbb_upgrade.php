@@ -48,10 +48,13 @@ function spipbb_install($action)
 				return false;
 			}
 			else {
-				echo debut_cadre_enfonce('', true),
-					icone_horizontale(_T('spipbb:titre_spipbb'), generer_url_ecrire('spipbb_configuration'), find_in_path('img_pack/spipbb-24.png'), '', false),
-					fin_cadre_enfonce(true);
-				return isset($GLOBALS['meta']['spipbb']) ;
+				if (_request('exec') == 'admin_plugin') {
+					echo debut_cadre_enfonce('', true),
+						icone_horizontale(_T('spipbb:titre_spipbb'), generer_url_ecrire('spipbb_configuration'), find_in_path('img_pack/spipbb-24.png'), '', false),
+						fin_cadre_enfonce(true);
+				}
+				// a ce stade les metas ne sont pas encore initialisees : return isset($GLOBALS['meta']['spipbb']) ;
+				return true;
 			}
 			break;
 		case 'install' :

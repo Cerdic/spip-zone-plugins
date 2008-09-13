@@ -1,36 +1,36 @@
 <plugin>
-<version>0.6.0</version>
-<nom>
-	<multi>
-		[en]SpipBB: Management of SPIP 1.9 forums
-		[fr]SpipBB : Gestion des forums de SPIP 1.9
-		[ca]SpipBB: Gesti&oacute; dels f&ograve;rums d'SPIP 1.9
-		[pt]SpipBB: Gest&atilde;o dos f&oacute;runs de SPIP 1.9
-		[tr]SpipBB : SPIP 1.9 forumlar&#305;n&#305;n y&ouml;netimi
-		[nl]SpipBB: Beleid van de SPIP 1.9 forums
-		[gl]SpipBB : xesti&oacute;n de foros de SPIP 1.9
+	<version>0.6.0</version>
+	<nom>
+		<multi>
+			[en]SpipBB: Management of SPIP 1.9 forums
+			[fr]SpipBB : Gestion des forums de SPIP 1.9
+			[ca]SpipBB: Gesti&oacute; dels f&ograve;rums d'SPIP 1.9
+			[pt]SpipBB: Gest&atilde;o dos f&oacute;runs de SPIP 1.9
+			[tr]SpipBB : SPIP 1.9 forumlar&#305;n&#305;n y&ouml;netimi
+			[nl]SpipBB: Beleid van de SPIP 1.9 forums
+			[gl]SpipBB : xesti&oacute;n de foros de SPIP 1.9
+		</multi>
+	</nom>
+	<auteur>
+	[<multi>[en]The SpipBB Team: see the contributors' list on Spip-contrib
+	[ca]La SpipBB Team: veure la llista de col&middot;laboradors a Spip-contrib
+	[nl]SpipBB Team: zie de lijst van contributoren op Spip-contrib
+	[gl]O equipo SpipBB : ver a lista de contribuidores en Spip-contrib
+	[pt]O SpipBB Equipa: ver a lista dos contribuintes sobre Spip-contrib
+	[tr]SpipBB Tak&#305;m&#305; : kat&#305;l&#305;mc&#305;lar&#305;n listesini g&ouml;rmek i&ccedil;in
+	[fr]La SpipBB Team : voir la liste des contributeurs sur Spip-contrib</multi>->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]
+	_ &#169; 2006 - 2008<multi>
+	[en]Distributed under the GPL licence
+	[fr]Distribu&eacute; sous licence GPL
+	[ca]Distribu&iuml;t sota llic&egrave;ncia GPL
+	[pt]Distribu&iacute;do sob licen&ccedil;a GPL
+	[tr]GPL lisans&#305; ile da&#287;&#305;t&#305;lan
+	[nl]Verdeeld onder GPL vergunning
+	[gl]Distribu&iacute;do baixo licenza GPL
 	</multi>
-</nom>
-<auteur>
-[<multi>[en]The SpipBB Team: see the contributors' list on Spip-contrib
-[ca]La SpipBB Team: veure la llista de col&middot;laboradors a Spip-contrib
-[nl]SpipBB Team: zie de lijst van contributoren op Spip-contrib
-[gl]O equipo SpipBB : ver a lista de contribuidores en Spip-contrib
-[pt]O SpipBB Equipa: ver a lista dos contribuintes sobre Spip-contrib
-[tr]SpipBB Tak&#305;m&#305; : kat&#305;l&#305;mc&#305;lar&#305;n listesini g&ouml;rmek i&ccedil;in
-[fr]La SpipBB Team : voir la liste des contributeurs sur Spip-contrib</multi>->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]
-_ &#169; 2006 - 2008<multi>
-[en]Distributed under the GPL licence
-[fr]Distribu&eacute; sous licence GPL
-[ca]Distribu&iuml;t sota llic&egrave;ncia GPL
-[pt]Distribu&iacute;do sob licen&ccedil;a GPL
-[tr]GPL lisans&#305; ile da&#287;&#305;t&#305;lan
-[nl]Verdeeld onder GPL vergunning
-[gl]Distribu&iacute;do baixo licenza GPL
-</multi>
-</auteur>
-<etat>dev</etat>
-<description>
+	</auteur>
+	<etat>dev</etat>
+	<description>
 	<multi>
 [en]The SpipBB plugin provides the following features:
 -* centralizes the forum management in SPIP (in the private area),
@@ -116,46 +116,46 @@ _ {{Plugin spipbb en cours de developpement. Vous l\'utilisez &agrave; vos risqu
 
 _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]
 	</multi>
-</description>
-<lien>[<multi>[en]See the documentation of the plugin from Spip-contrib
-[ca]Consultar la documentaci&oacute; del plugin a Spip-contrib
-[pt]Consultar a documenta&ccedil;&atilde;o do plugin sobre Spip-contrib
-[nl]De documentatie van plugin raadplegen op Spip-contrib
-[gl]Consulte a documentaci&oacute;n do m&oacute;dulo en Spip-contrib
-[tr]Spip-contrib\'de eklenti hakk&#305;ndaki belgelere bkz->http://www.spip-contrib.net/SpipBB-le-forum
-[fr]Consulter la documentation du plugin sur Spip-contrib</multi>
-->http://www.spip-contrib.net/SpipBB-le-forum]</lien> <!-- [fr] URI de documentation [en] documentation URI -->
-<icon>img_pack/spipbb-48.png</icon> <!-- [fr] icone du plugin [en] plugin icon -->
-<fonctions>spipbb_fonctions.php</fonctions>
-<options>spipbb_options.php</options>
-<install>base/spipbb_upgrade.php</install>
-<prefix>spipbb</prefix>
-<pipeline>
-	<nom>affiche_droite</nom> <!-- [fr]point d entree [en] entry point -->
-	<action>affiche_droite</action> <!-- [fr] spipbb fonction [en] spipbb function -->
-	<inclure>spipbb_pipelines.php</inclure>
-</pipeline>
-<pipeline>
-	<nom>affiche_milieu</nom>
-	<inclure>spipbb_pipelines.php</inclure>
-</pipeline>
-<pipeline>
-	<nom>ajouter_boutons</nom>
-	<action>ajouter_boutons</action>
-	<inclure>spipbb_pipelines.php</inclure>
-</pipeline>
+	</description>
+	<lien>[<multi>[en]See the documentation of the plugin from Spip-contrib
+	[ca]Consultar la documentaci&oacute; del plugin a Spip-contrib
+	[pt]Consultar a documenta&ccedil;&atilde;o do plugin sobre Spip-contrib
+	[nl]De documentatie van plugin raadplegen op Spip-contrib
+	[gl]Consulte a documentaci&oacute;n do m&oacute;dulo en Spip-contrib
+	[tr]Spip-contrib\'de eklenti hakk&#305;ndaki belgelere bkz->http://www.spip-contrib.net/SpipBB-le-forum
+	[fr]Consulter la documentation du plugin sur Spip-contrib</multi>
+	->http://www.spip-contrib.net/SpipBB-le-forum]</lien> <!-- [fr] URI de documentation [en] documentation URI -->
+	<icon>img_pack/spipbb-48.png</icon> <!-- [fr] icone du plugin [en] plugin icon -->
+	<fonctions>spipbb_fonctions.php</fonctions>
+	<options>spipbb_options.php</options>
+	<install>base/spipbb_upgrade.php</install>
+	<prefix>spipbb</prefix>
 	<pipeline>
-	<nom>header_prive</nom>
-	<inclure>spipbb_pipelines.php</inclure>
-</pipeline>
-<pipeline>
-	<nom>taches_generales_cron</nom>
-	<inclure>spipbb_pipelines.php</inclure>
-</pipeline>
-<pipeline>
-	<nom>ajouter_onglets</nom>
-	<inclure>spipbb_pipelines.php</inclure>
-</pipeline>
-<chemin dir='' />
-<necessite id="cfg" version="[1.0.0;]" />
+		<nom>affiche_droite</nom> <!-- [fr]point d entree [en] entry point -->
+		<action>affiche_droite</action> <!-- [fr] spipbb fonction [en] spipbb function -->
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouter_boutons</action>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+		<pipeline>
+		<nom>header_prive</nom>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<chemin dir='' />
+	<necessite id="cfg" version="[1.0.0;]" />
 </plugin>
