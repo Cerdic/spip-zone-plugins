@@ -41,7 +41,6 @@ $tables_principales['spip_documents_inters'] = array(
 
 global $tables_jointures;
 $tables_jointures['spip_documents_inters'][] = 'documents';
-$tables_jointures['spip_documents_inters'][] = 'documents_articles';
 $tables_jointures['spip_documents_inters'][] = 'auteurs';
 
 global $table_des_tables;
