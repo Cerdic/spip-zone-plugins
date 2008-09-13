@@ -9,7 +9,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'limiter_version' => 'Limiter le nombre de versions possibles à :',
 	'vider_version' => 'Intervale entre les vidages des versions interm&eacute;diaires (en nombre de jours, 0 = jamais) :',
 	'compression_rendu' => 'Qualit&eacute; de compression du rendu (en %, 85 par d&eacute;faut) :',
-	
+	'filtres_a_disposition' => 'Filtres &agrave; disposition',
+	'configuration_publique' => 'Configuration de la partie publique',
+	'hauteur_previsu' => 'Hauteur maximale de la pr&eacute;visualisation en px (450 par d&eacute;faut) : ',
+	'largeur_previsu' => 'Largeur maximale de la pr&eacute;visualisation en px (450 par d&eacute;faut) : ',
+		
 	// PUBLIC
 	
 	// Versions
@@ -45,7 +49,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'image_rotation' => 'Rotation manuelle de l\'image',
 	'image_rotation_text' => '<p>Fait tourner l’image d’un angle &eacute;gal au param&egrave;tre pass&eacute;. Les valeurs positives sont dans le sens des aiguilles d’une montre et inversement.</p><p>Attention : ce filtre modifie les dimensions de l’image.</p>',
 	'angle_rotation' => 'Angle de rotation : ',
-	
+	'image_recadre' => 'Recadrer l\'image',
+	'image_recadre_text' => '<p>Recadre l\'image en fonction de la s&eacute;lection de l\'utilisateur.</p>',
+	'recadre_width' => 'Largeur de la s&eacute;lection (en px) : ',
+	'recadre_height' => 'Hauteur de la s&eacute;lection (en px) : ',	
+	'recadre_x1_y1' => 'Position (coin sup&eacute;rieur gauche)',	
+	'recadre_x2_y2' => 'Position (coin inf&eacute;rieur droit)',
+	'image_taille_actuelle' => 'Taille actuelle de l\'image :',
+	'ratio' => 'Ratio de la s&eacute;lection :',
+	'ratio_libre' => 'Libre : ',
+		
 	// Filtres de coloration
 	'filtres_de_couleur' => 'Filtres de coloration',
 	'image_sepia' => 'Filtre Sepia',
@@ -70,10 +83,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'image_niveau_de_gris_auto_text' => '<p>Correction automatique des niveaux de l\'image.</p><p>(Ne n&eacute;cessite pas de param&egrave;tres)</p>',
 	
 	//aide
-	'texte_en_cours' => '<div class="waiting"><h2>Modification de votre image...</h2><p>Veuillez patienter que cela soit termin&eacute;</p></div>',
+	'texte_en_cours' => '<div class="waiting"><h2>Modification de votre image...</h2><p>Veuillez patienter que l\'op&eacute;ration soit termin&eacute;e</p></div>',
 	'texte_aide' =>'<h3>Aide</h3>
 	<p>Pour appliquer une modification &agrave; votre image, il vous suffit de choisir le type en le cochant &agrave; cot&eacute; de son titre et de proc&eacute;der &agrave; son r&eacute;glage.</p>
 	<p>Ensuite choisissez entre "tester" ou "appliquer", puis validez.</p>
 	<p><strong>NB :</strong> Ces traitements d\'images sont lourds et peuvent prendre quelque temps avant de s\'effectuer. C\'est pourquoi nous vous recommandons de les "tester" avant (cela cr&eacute;era une pr&eacute;visualisation). Chaque test repartira de la derni&egrave;re version. Appliquer cr&eacute;era une nouvelle version disponible.</p>',
 	
+	// Messages
+	'previsu' => 'Si le r&eacute;sultat vous satisfait vous pouvez le valider en bas du formulaire, sinon vous pouvez tester d\'autres filtres',
+	'sanstest' => 'Le filtre que vous avez essay&eacute; ne permet pas d\'&ecirc;tre test&eacute;. Vous ne pouvez que l\'appliquer.',
+	'sansfiltre' => 'Vous n\'avez pas s&eacute;lectionn&eacute; de filtre.',
+	'sansconf' => 'Vous n\'avez pas configur&eacute; votre filtre.',
 );
