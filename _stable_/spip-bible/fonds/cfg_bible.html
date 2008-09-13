@@ -180,6 +180,30 @@
 						</select>
 				
 			</li><li>
+					<label for="traduction_no"><:bible:cfg_traduction_no:></label>
+					<select name="traduction_no"  id="traduction_no"><option value="dnb30" [selected="(#ENV{traduction_no}|=={dnb30})"]>
+				Det Norsk Bibelselskap 1930
+						
+						</option>
+						<option value="lb_no" [selected="(#ENV{traduction_no}|=={lb_no})"]>
+				Levande Bibeln
+						
+						</option>
+						</select>
+				
+			</li><li>
+					<label for="traduction_sv"><:bible:cfg_traduction_sv:></label>
+					<select name="traduction_sv"  id="traduction_sv"><option value="s17" [selected="(#ENV{traduction_sv}|=={s17})"]>
+				Svenska 1917
+						
+						</option>
+						<option value="lb_sv" [selected="(#ENV{traduction_sv}|=={lb_sv})"]>
+				Levande Bibeln
+						
+						</option>
+						</select>
+				
+			</li><li>
 					<label for="numeros"><:bible:cfg_numeros:></label>
 					<input type="checkbox" name="numeros"  id="numeros" [checked="(#ENV{numeros})"]  value="oui" />
 				
