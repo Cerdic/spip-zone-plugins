@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_traduction_en' =>	'Traduction anglaise par d&eacute;faut',
 	'cfg_traduction_es' =>	'Traduction espagnole par d&eacute;faut',
 	'cfg_traduction_de' =>	'Traduction allemande par d&eacute;faut',
+	'cfg_traduction_fi' =>	'Traduction finnoise par d&eacute;faut',
 	'cfg_traduction_hu' =>	'Traduction magyare par d&eacute;faut',
 	'cfg_traduction_it' =>	'Traduction italienne par d&eacute;faut',
 	'cfg_traduction_nl' =>	'Traduction néerlandaise par d&eacute;faut',
