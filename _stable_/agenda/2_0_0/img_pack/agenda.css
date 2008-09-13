@@ -8,9 +8,10 @@
 
 /* vevent */
 li.item div.vevent h3 {margin:0;font-size:1.1em;}
-li.item div.vevent p {margin-bottom:0;}
-li.item div.vevent p.date { margin-top: 0; padding-bottom: 5px; border-bottom: 1px solid #ddd; font-size: 98%; }
+li.item div.vevent p {margin:2px 0 0;}
+li.item div.vevent p.date {font-size: 0.98em; }
 ul.evenements li.item.court p { display: none; }
+li.item div.vevent p.category {font-size:0.9em;color:#999;}
 
 /* liste des evenements */
 .plier_deplier { float: right; font-size: 0.9em; }
@@ -23,7 +24,7 @@ li.court .repetitions {display: none;}
 li.item .repetitions ul,
 li.item .repetitions li {display:inline;margin:0;padding:0;}
 
-.evenements p.actions {text-align:right;font-size:0.9em;margin:0;}
+.evenements p.actions {text-align:right;font-size:0.9em;margin:5px 0 0;}
 
 .clicable {cursor:hand;cursor:pointer;}
 
@@ -80,3 +81,6 @@ overflow-x:hidden;text-align:left;z-index:1000;height:10em;width:auto !important
 .formulaire_editer_evenement li.editer_mots ul.groupes_contenus li {padding:0;margin:0;border:0;clear:none;float:left;width:48%;margin-right:5px;}
 .formulaire_editer_evenement li.editer_mots ul.groupes_contenus li.groupe a {background:url(triangle-droite.gif) no-repeat center right;padding-right:12px;}
 .formulaire_editer_evenement li.editer_mots ul.groupes_contenus li.mot a {color:#89AF02;}
+
+.formulaire_editer_evenement li.editer_repetitions div.ajouter_repetitions.cachee #repetitions_picker {display:none;}
+.formulaire_editer_evenement li.editer_repetitions div.ajouter_repetitions.cachee textarea {height:1px;visibility:hidden;} /* bug ff : si on le met hidden on ne peut plus saisir dedans apres */

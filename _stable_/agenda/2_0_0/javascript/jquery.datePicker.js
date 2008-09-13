@@ -659,6 +659,11 @@
 				}
 				this.displayedMonth = t.getMonth();
 				this.displayedYear = t.getFullYear();
+				/* Patch Cedric Morin 2008-09-13 pour les controleurs inline */
+				if (this.inline){
+					this._clearCalendar();
+					this._renderCalendar();					
+				}
 			},
 			setSelected : function(d, v, moveToMonth)
 			{

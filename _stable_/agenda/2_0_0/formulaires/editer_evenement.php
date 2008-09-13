@@ -18,9 +18,10 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_arti
 	$valeurs['mots'] = sql_allfetsel('id_mot','spip_mots_evenements','id_evenement='.intval($id_evenement));
 
 	// les repetitions
-	$valeurs['repetitions'] = sql_allfetsel("date_debut","spip_evenements","id_evenement_source=".intval($id_evenement));
-	foreach($valeurs['repetitions'] as $k=>$d)
-		$valeurs['repetitions'][$k] = date('m/d/Y',strtotime($d));
+	$valeurs['repetitions'] = '';
+	$repetitons = sql_allfetsel("date_debut","spip_evenements","id_evenement_source=".intval($id_evenement),'','date_debut');
+	foreach($repetitons as $d)
+		$valeurs['repetitions'] .= date('d/m/Y',strtotime($d['date_debut'])).' ';
 
 	// fixer la date par defaut en cas de creation d'evenement
 	if (!intval($id_evenement)){
@@ -71,6 +72,7 @@ function formulaires_editer_evenement_traiter_dist($id_evenement='new', $id_arti
 		include_spip('inc/headers');
 		$id_article = sql_getfetsel('id_article','spip_evenements','id_evenement='.intval($id));
 		$id_table_objet = id_table_objet($type);
+		$retour = parametre_url($retour,'id_evenement',$id);
 		$message .= redirige_formulaire(parametre_url($retour,'id_article',$id_article));
 	}
 	return $message;

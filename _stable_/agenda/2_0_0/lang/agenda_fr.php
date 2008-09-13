@@ -6,6 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activite_editoriale' => 'Activit&eacute; &Eacute;ditoriale',
 'afficher_calendrier' => 'Afficher le calendrier',
 'ajouter_un_evenement' => 'ajouter un &eacute;v&eacute;nement &agrave; cet article',
+'ajouter_repetition' => 'Ajouter des r&eacute;p&eacute;titions',
 'agenda' => 'Agenda',
 'annee_precedente' => 'an&eacute;e pr&eacute;c&eacute;dente',
 'annee_suivante' => 'ann&eacute;e suivante',
