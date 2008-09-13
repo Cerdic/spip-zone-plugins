@@ -10,13 +10,16 @@
 
 */
 
-function photospip_appliquer_filtre($balise, $filtre,$param=NULL) {
+function photospip_appliquer_filtre($balise, $filtre,$param1=NULL,$param2=NULL,$param3=NULL) {
 	if (function_exists($filtre)){
-		if ($param){
-			return $filtre($balise,$param);			
+		spip_log("$filtre($balise,$param1,$param2,$param3);","photospip");
+		if ($param1){
+			return $filtre($balise,$param1,$param2,$param3);
+			spip_log("$filtre($balise,$param1,$param2,$param3);","photospip");
 		}
 		else{
 			return $filtre($balise);
+			spip_log("$filtre($balise,$param1,$param2,$param3);","photospip");
 		}
 	} else {
 		return balise;
