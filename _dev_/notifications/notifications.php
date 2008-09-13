@@ -3,6 +3,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+## generer_url_article disparait avec 
+## http://trac.rezo.net/trac/spip/changeset/12429#file31
+include_spip('inc/vieilles_defs');
+
 // Initialise les reglages sous forme de tableau
 function Notifications_go($x) {
 	if (!is_array($GLOBALS['notifications']
