@@ -62,6 +62,11 @@ function glossaire_echappe_mot_callback($matches) {
  return "$matches[1]@@GLOSS".cs_code_echappement($matches[2], 'GLOSS')."#{$gloss_id}@@$matches[3]";
 }
 
+function glossaire_safe($texte) {
+	// on retire les notes avant propre()
+	return safehtml(propre(preg_replace(', *\[\[(.*?)\]\],msS', '', nl2br(trim($texte)))));
+}
+
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite|a
 function cs_rempl_glossaire($texte) {
 	global $gloss_id;
@@ -69,12 +74,11 @@ function cs_rempl_glossaire($texte) {
 	if(!isset($accents)) $accents = cs_glossaire_accents();
 	$limit = defined('_GLOSSAIRE_LIMITE')?_GLOSSAIRE_LIMITE:-1;
 	$r = spip_query("SELECT id_mot, titre, texte, descriptif FROM spip_mots WHERE " . $GLOBALS['glossaire_groupes_type']);
-	// compatibilite SPIP 1.92
-	$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array';
 	// protection des liens SPIP
 	if (strpos($texte, '[')!==false) 
 		$texte = preg_replace_callback(',\[[^][]*->>?[^]]*\],msS', 'glossaire_echappe_balises_callback', $texte);
-	
+	// compatibilite SPIP 1.92
+	$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array';
 	// parcours de tous les mots, sauf celui qui peut faire partie du contexte (par ex : /spip.php?mot5)
 	while($mot = $fetch($r)) if ($mot['id_mot']<>$GLOBALS['id_mot']) {
 		// prendre en compte les formes du mot : architrave/architraves
@@ -83,10 +87,8 @@ function cs_rempl_glossaire($texte) {
 		$les_mots = array();
 		foreach ($a as $m) $les_mots[] = charset2unicode($m = trim($m));
 		$les_mots = array_unique($les_mots);
-//print_r($les_mots);
 		array_walk($les_mots, 'cs_preg_quote');
 		$les_mots = glossaire_accents(join('|', $les_mots));
-//echo '<hr>==>',htmlentities($les_mots),'<hr>';
 		if(preg_match(",\W(?:$les_mots)\W,i", $texte)) {
 			// prudence 1 : on protege TOUTES les balises HTML comprenant le mot
 			if (strpos($texte, '<')!==false) {
@@ -103,14 +105,14 @@ function cs_rempl_glossaire($texte) {
 			$lien = generer_url_mot($gloss_id);
 			$mem = $GLOBALS['toujours_paragrapher'];
 			$GLOBALS['toujours_paragrapher'] = false;
-			$definition = nl2br(trim(strlen($mot['descriptif'])?$mot['descriptif']:$mot['texte']));
-			// on retire les notes avant propre()
-			$definition = safehtml(propre(preg_replace(', *\[\[(.*?)\]\],msS', '', $definition)));
-			$GLOBALS['toujours_paragrapher'] = $mem;
+			// $definition =strlen($mot['descriptif'])?$mot['descriptif']:$mot['texte'];
 			$table1[$gloss_id] = "name='mot$gloss_id' href='$lien'";
 			$table2[$gloss_id] = recuperer_fond(
 				defined('_GLOSSAIRE_JS')?'fonds/glossaire_js':'fonds/glossaire_css', 
-				array('titre'=>$titre, 'definition'=>$definition));
+				array('id_mot' => $gloss_id, 'titre' => $titre, 
+					'texte' => glossaire_safe($mot['texte']), 
+					'descriptif' => glossaire_safe($mot['descriptif'])));
+			$GLOBALS['toujours_paragrapher'] = $mem;
 			// a chaque mot reconnu, on pose une balise temporaire cryptee
 			$texte = preg_replace_callback(",(\W)($les_mots)(\W),i", "glossaire_echappe_mot_callback", $texte, $limit);
 		}

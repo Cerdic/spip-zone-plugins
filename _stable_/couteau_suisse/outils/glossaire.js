@@ -19,8 +19,8 @@ function glossaire_init() {
 				this.className = "gl_mot spip_surligne";
 				this.innerHTML = this.firstChild.innerHTML;
 			}
-			gloss_dt.innerHTML = this.nextSibling.title; // titre
-			gloss_dd.innerHTML = this.nextSibling.nextSibling.title; // definition
+			gloss_dt.innerHTML = jQuery(this).parent().children('.gl_js')[0].title;  // titre
+			gloss_dd.innerHTML = jQuery(this).parent().children('.gl_jst')[0].title; // definition
 			reg = jQuery(this).css('font-size').match(/^\d\d?(?:\.\d+)?px/);
 			if(reg) gloss_el.style.fontSize = reg[0];
 			jQuery(gloss_el)

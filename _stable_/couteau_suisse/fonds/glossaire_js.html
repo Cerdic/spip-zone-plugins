@@ -1,1 +1,14 @@
-<span class="gl_js" title="[(#ENV*{titre}|htmlspecialchars)]"></span><span title="[(#ENV*{definition}|htmlspecialchars)]"></span>
+[(#REM) 
+	champs disponibles : 
+		id_mot (pour une boucle MOTS eventuellement)
+		titre (multi ready)
+		texte (safehtml)
+		descriptif (safehtml)
+	deux spans indispensables : 
+		.gl_js : titre
+		.gl_jst : definition
+	par defaut : la definition affichee est le texte du mot si le descriptif est vide
+]
+#SET{def,#ENV*{descriptif}|sinon{#ENV*{texte}}}
+<span class="gl_js" title="[(#ENV*{titre}|htmlspecialchars)]"></span>
+<span class="gl_jst" title="[(#GET{def}|htmlspecialchars)]"></span>
