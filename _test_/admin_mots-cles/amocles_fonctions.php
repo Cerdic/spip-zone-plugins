@@ -1,7 +1,7 @@
-<?php 
-	
-	// inc/amocles_pipeline_ajouter_onglets.php
-	
+<?php
+
+	// amocles_fonctions.php
+
 	// $LastChangedRevision$
 	// $LastChangedBy$
 	// $LastChangedDate$
@@ -47,34 +47,11 @@
 	59 Temple Place, Suite 330, Boston, MA 02111-1307, etats-Unis.
 	
 	*****************************************************/
-
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
-// pipeline (plugin.xml)
-// Affiche onglet d'administration dans la page configuration
-function amocles_ajouter_onglets ($flux) {
-
-	include_spip('inc/urls');
-	include_spip('inc/utils');
-
-	global $connect_statut
-		, $connect_toutes_rubriques
-		;
-
-	if(
-		($flux['args'] == 'configuration')
-		&& ($connect_statut == '0minirezo')
-		&& $connect_toutes_rubriques
-		) {
-		$flux['data'][_AMOCLES_PREFIX] = new Bouton( 
-			_DIR_PLUGIN_AMOCLES_IMG_PACK."groupe-mots-24.png"
-			, _T('icone_mots_cles')
-			, generer_url_ecrire("amocles_configuration")
-			)
-			;
-	}
-
-	return ($flux);
-}
-
+	
+/*
+ * Chargé a chaque recalcul. Equivalent du fichier mes_fonctions.php. 
+ * N'est utilisé que pour le site public, appelé pour le calcul du cache. 
+ * Contient les filtres ou les définitions de balises, de critères.
+ */
+ 
 ?>

@@ -7,7 +7,7 @@
 	// $LastChangedDate$
 
 	/*****************************************************
-	Copyright (C) 2007 Christian PAULUS
+	Copyright (C) 2008 Christian PAULUS
 	cpaulus@quesaco.org - http://www.quesaco.org/
 	/*****************************************************
 	
@@ -32,42 +32,49 @@
 	Ce fichier est un des composants de Amocles. 
 	
 	Amocles est un programme libre, vous pouvez le redistribuer et/ou le modifier 
-	selon les termes de la Licence Publique Generale GNU publiée par 
-	la Free Software Foundation (version 2 ou bien toute autre version ultérieure 
+	selon les termes de la Licence Publique Generale GNU publiee par 
+	la Free Software Foundation (version 2 ou bien toute autre version ulterieure 
 	choisie par vous).
 	
-	Amocles est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,
+	Amocles est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,
 	ni explicite ni implicite, y compris les garanties de commercialisation ou
-	d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU 
-	pour plus de détails. 
+	d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU 
+	pour plus de details. 
 	
-	Vous devez avoir reçu une copie de la Licence Publique Generale GNU 
-	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez à la  
+	Vous devez avoir recu une copie de la Licence Publique Generale GNU 
+	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la  
 	Free Software Foundation, Inc., 
-	59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.
-
+	59 Temple Place, Suite 330, Boston, MA 02111-1307, etats-Unis.
+	
 	*****************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/amocles_api');
+include_spip('inc/amocles_api_globales');
+include_spip('inc/amocles_api_prive');
 
 function amocles_install ($action) {
-spip_log("amocles_install() --", _AMOCLES_PREFIX);
 
 	switch($action) {
 		case 'test':
-			// si renvoie true, c'est que la base est à jour, inutile de re-installer
-			// la valise plugin "effacer tout" apparaît.
+			// si renvoie true, c'est que la base est a jour, inutile de re-installer
+			// la valise plugin "effacer tout" apparait.
 			// si renvoie false, SPIP revient avec $action = 'install' (une seule fois)
-			return(isset($GLOBALS['meta'][_AMOCLES_META_PREFERENCES]));
+			$result = isset($GLOBALS['meta'][_AMOCLES_META_PREFERENCES]);
+			amocles_log("TEST meta", $result);
+			return($result);
 			break;
 		case 'install':
-			return(amocles_init());
+			$result = amocles_init();
+			amocles_log("INSTALL meta", $result);
+			return($result);
 			break;
 		case 'uninstall':
-			// est appellé lorsque "Effacer tout" dans exec=admin_plugin
-			return(amocles_vider_tables());
+			// si *_vider_tables() n'existe pas, passe par ici
+			// sinon, appelle directement *_vider_tables()
+			$result = amocles_vider_tables();
+			amocles_log("DELETE meta", $result);
+			return($result);
 			break;
 		default:
 			break;
@@ -76,23 +83,30 @@ spip_log("amocles_install() --", _AMOCLES_PREFIX);
 	return(true);
 }
 
-function amocles_init () {
-	$amocles_init = array(
-		'prefix' => _AMOCLES_PREFIX
-		, 'version' => __plugin_real_tag_get(_AMOCLES_PREFIX, 'version')
-		, 'date' => date('Y-m-d_H:i:s')
-		, 'inserer_milieu' => "non"
-		, 'admins_groupes_mots_ids' => array()
-	);
+/*
+ * Installe les preferences par defaut du plugin dans la table 'spip_meta'
+ */
+function amocles_init () 
+{
+	$amocles_init = unserialize(_AMOCLES_PREFERENCES_DEFAULT);
+	$amocles_init['version'] = amocles_real_version();
+	$amocles_init['date'] = date('Y-m-d_H:i:s');
+	amocles_log("VERSION " . $amocles_init['version']);
 	ecrire_meta(_AMOCLES_META_PREFERENCES, serialize($amocles_init));
-	return(__ecrire_metas());
+	return(amocles_ecrire_metas());
 }
 
-function amocles_vider_tables () {
-spip_log("amocles_vider_tables() --", _AMOCLES_PREFIX);
-
+/*
+ * Desinstalle le plugin en supprimant les metas de preferences
+ * Est directement appelle' lorsque click sur "Effacer tout" dans exec=admin_plugin
+ */
+function amocles_vider_tables () 
+{
 	effacer_meta(_AMOCLES_META_PREFERENCES);
-	return(__ecrire_metas());
+	amocles_log("DELETE meta");
+	
+	// recharge les metas en cache 
+	return(amocles_ecrire_metas());
 }
 
 ?>

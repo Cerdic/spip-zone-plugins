@@ -7,7 +7,7 @@
 	// $LastChangedDate$
 
 	/*****************************************************
-	Copyright (C) 2007 Christian PAULUS
+	Copyright (C) 2007-2008 Christian PAULUS
 	cpaulus@quesaco.org - http://www.quesaco.org/
 	/*****************************************************
 	
@@ -32,24 +32,24 @@
 	Ce fichier est un des composants de Amocles. 
 	
 	Amocles est un programme libre, vous pouvez le redistribuer et/ou le modifier 
-	selon les termes de la Licence Publique Generale GNU publiée par 
-	la Free Software Foundation (version 2 ou bien toute autre version ultérieure 
+	selon les termes de la Licence Publique Generale GNU publiee par 
+	la Free Software Foundation (version 2 ou bien toute autre version ulterieure 
 	choisie par vous).
 	
-	Amocles est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,
+	Amocles est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,
 	ni explicite ni implicite, y compris les garanties de commercialisation ou
-	d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU 
-	pour plus de détails. 
+	d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU 
+	pour plus de details. 
 	
-	Vous devez avoir reçu une copie de la Licence Publique Generale GNU 
-	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez à la  
+	Vous devez avoir recu une copie de la Licence Publique Generale GNU 
+	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la  
 	Free Software Foundation, Inc., 
-	59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.
+	59 Temple Place, Suite 330, Boston, MA 02111-1307, etats-Unis.
 	
 	*****************************************************/
 	
 /***************************************************************************\
- * Certains éléments ici sont directement extraits de SPIP 192c
+ * Certains elements ici sont directement extraits de SPIP 192c
  *                                                                         *
  *  Copyright (c) 2001-2007                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
@@ -63,11 +63,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/actions');
 
+if(!amocles_spip_est_inferieur_193())
+{
+	include_spip('inc/presenter_liste');
+}
+
 // L'ajout d'un auteur se fait par mini-navigateur dans la fourchette:
 define('_SPIP_SELECT_MIN_AUTEURS', 10); // en dessous: balise Select
 define('_SPIP_SELECT_MAX_AUTEURS', 100); // au-dessus: saisie + return
 
-// CP-20071105 - Adapté de inc_editer_auteurs_dist()
+// CP-20071105 - Adapte de inc_editer_auteurs_dist()
 function amocles_liste_admins_groupes_mots($type, $id, $flag, $cherche_auteur, $ids, $titre_boite, $script_edit_objet) {
 	global $options;
 
@@ -84,7 +89,7 @@ function amocles_liste_admins_groupes_mots($type, $id, $flag, $cherche_auteur, $
 	return amocles_editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $aff_les_auteurs, $futurs, $ldap,$titre_boite,$script_edit_objet, $arg_ajax);
 }
 
-// CP-20071105 - Adapté de editer_auteurs_objet()
+// CP-20071105 - Adapte de editer_auteurs_objet()
 function amocles_editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_auteurs, $futurs, $statut, $titre_boite,$script_edit_objet, $arg_ajax)
 {
 	global $spip_lang_left, $spip_lang_right, $options;
@@ -119,7 +124,7 @@ function amocles_editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, 
 		. $res;
 	}
 
-	// petit triangle à déplier
+	// petit triangle a deplier
 	$bouton = ""
 		.	(
 			(!$flag)
@@ -231,7 +236,7 @@ function rechercher_auteurs_objet($cherche_auteur, $ids, $type, $id, $script_edi
 	}
 }
 
-// CP-20071105 - Adapté de afficher_auteurs_objet()
+// CP-20071105 - Adapte de afficher_auteurs_objet()
 function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $script_edit, $arg_ajax)
 {
 	global $connect_statut, $options, $connect_id_auteur, $spip_display;
@@ -300,7 +305,7 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $
 }
 
 
-// CP-20071105 - Adapté de ajouter_auteurs_objet()
+// CP-20071105 - Adapte de ajouter_auteurs_objet()
 function amocles_ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_ajax)
 {
 
@@ -374,7 +379,7 @@ function objet_auteur_select($result)
 	return $res;
 }
 
-// CP-20071105 - Adapté de selecteur_auteur_ajax ()
+// CP-20071105 - Adapte de selecteur_auteur_ajax ()
 function selecteur_auteur_ajax($type, $id, $js, $text)
 {
 	include_spip('inc/chercher_rubrique');

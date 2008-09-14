@@ -9,7 +9,7 @@
 	 -->
 	<nom>Administration des mots-cl&#233;s</nom>
 	<auteur>cpaulus@quesaco.org</auteur>
-	<version>0.3000</version>
+	<version>0.4000</version>
 	<etat>test</etat>
 	<icon>images/amocles.png</icon>
 	<description>Permet de :<ul><li>d&#233;l&#233;guer l'administration des mots-cl&#233;s</li><li>importer et exporter vos mots-cl&#233;s via un fichier texte.</li></ul></description>
@@ -17,7 +17,9 @@
 	
 	<prefix>amocles</prefix>
 
-	<options>amocles_mes_options.php</options>
+	<options>amocles_options.php</options>
+	
+	<fonctions>amocles_fonctions.php</fonctions>
 	
 	<install>base/amocles_install.php</install>
 

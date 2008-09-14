@@ -1,0 +1,45 @@
+/* page configure */
+#page fieldset { margin-top:0.75em;border:1px solid gray }
+
+/* page configure affiche milieu */
+.amocles-lang-menu {
+	margin-bottom:0.5em;
+	text-align:right;
+}
+.lang-sel { 
+	color:black;
+	font-weight:700;
+}
+#amocles-ventre {
+	margin-bottom:1em;
+}
+#amocles-ventre-texte { 
+}
+
+/* boite de réception pour le generateur */
+#amocles_generer_mots {
+	width:auto;
+	height:15em;
+	border:1px solid #ccc;
+	display:none;
+	overflow:scroll;
+}
+.titre_raccourcis {
+	font-variant:small-caps;
+}
+div.titre_raccourcis {
+	font-style: normal;
+	font-size: x-small;
+	font-weight:700;
+}
+.element_raccourci {
+	font-variant:normal;
+}
+.message-gauche { margin-top:1em }
+.image-alerte { width:48px;height:48px;float:right;margin:5px }
+
+/* formulaire des mots vides */
+#form_stopwords textarea {}
+
+.amocles_mots_liste {width:100%}
+.amocles_mots_liste th {color:#333}

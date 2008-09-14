@@ -7,7 +7,7 @@
 	// $LastChangedDate$
 	
 	/*****************************************************
-	Copyright (C) 2008 Christian PAULUS
+	Copyright (C) 2007-2008 Christian PAULUS
 	cpaulus@quesaco.org - http://www.quesaco.org/
 	/*****************************************************
 	
@@ -32,19 +32,19 @@
 	Ce fichier est un des composants de Amocles. 
 	
 	Amocles est un programme libre, vous pouvez le redistribuer et/ou le modifier 
-	selon les termes de la Licence Publique Generale GNU publiée par 
-	la Free Software Foundation (version 2 ou bien toute autre version ultérieure 
+	selon les termes de la Licence Publique Generale GNU publiee par 
+	la Free Software Foundation (version 2 ou bien toute autre version ulterieure 
 	choisie par vous).
 	
-	Amocles est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,
+	Amocles est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,
 	ni explicite ni implicite, y compris les garanties de commercialisation ou
-	d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU 
-	pour plus de détails. 
+	d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU 
+	pour plus de details. 
 	
-	Vous devez avoir reçu une copie de la Licence Publique Generale GNU 
-	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez à la  
+	Vous devez avoir recu une copie de la Licence Publique Generale GNU 
+	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la  
 	Free Software Foundation, Inc., 
-	59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.
+	59 Temple Place, Suite 330, Boston, MA 02111-1307, etats-Unis.
 	
 	*****************************************************/
 	
@@ -56,7 +56,8 @@ function amocles_affiche_milieu ($flux) {
 		isset($flux['args']['exec']) && ($flux['args']['exec'] == "mots_edit")
 	) {
 	
-		include_spip("inc/amocles_api");
+		include_spip("inc/amocles_api_globales");
+		include_spip("inc/amocles_api_prive");
 		
 		if(in_array($GLOBALS['auteur_session']['id_auteur'], amocles_admins_groupes_mots_get_ids())) {
 			
@@ -69,9 +70,9 @@ function amocles_affiche_milieu ($flux) {
 					$traduire = charger_fonction('traduire', 'inc');
 					 
 					$result = "\n"
-						.	"<!-- amocles  bloc-->\n"
+						.	"<!-- amocles bloc -->\n"
 						.	"<div id='amocles-corps'>\n"
-						.	"<div id='amocles-menu' class='verdana2'>\n"
+						.	"<div id='amocles-menu' class='verdana2 amocles-lang-menu'>\n"
 						;
 				
 					foreach($langues_array as $langue) {
@@ -96,7 +97,7 @@ function amocles_affiche_milieu ($flux) {
 						.	"<strong id='amocles-ventre-titre'></strong><br />\n"
 						;
 						
-					// les titres pour la boite d'édition dans les différentes langues utilisées
+					// les titres pour la boite d'edition dans les differentes langues utilisees
 					foreach($langues_array as $langue) {
 						$titre = $traduire('info_texte_explicatif', $langue);
 						$result .= "<input type='hidden' name='$langue' value=\"".$titre."\" />\n";

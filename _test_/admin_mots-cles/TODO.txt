@@ -5,4 +5,8 @@
 	// $LastChangedBy: paladin@quesaco.org $
 	// $LastChangedDate: 2007-10-29 08:33:41 +0100 (lun., 29 oct. 2007) $
 
-- Optimiser l'Interface de saisie pour les titres,descriptifs,textes en <multi> (parfois tr�s lent � l'intialisation)
+- Valider pour SPIP 2
+- En option, mettre la possibilité de placer le multi dans le titre du mot au lieu du texte explicatif
+- Script d'importation pour le fichier stop_[lang].txt 
+- Mettre en place la boite de suggestion des mots pour les forums (si sélectionné dans configure)
+- Ajouter quelques exemples de squelettes pour générer les meta keywords

@@ -7,7 +7,7 @@
 	// $LastChangedDate$
 	
 	/*****************************************************
-	Copyright (C) 2007 Christian PAULUS
+	Copyright (C) 2007-2008 Christian PAULUS
 	cpaulus@quesaco.org - http://www.quesaco.org/
 	/*****************************************************
 	
@@ -32,34 +32,34 @@
 	Ce fichier est un des composants de Amocles. 
 	
 	Amocles est un programme libre, vous pouvez le redistribuer et/ou le modifier 
-	selon les termes de la Licence Publique Generale GNU publiée par 
-	la Free Software Foundation (version 2 ou bien toute autre version ultérieure 
+	selon les termes de la Licence Publique Generale GNU publiee par 
+	la Free Software Foundation (version 2 ou bien toute autre version ulterieure 
 	choisie par vous).
 	
-	Amocles est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,
+	Amocles est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,
 	ni explicite ni implicite, y compris les garanties de commercialisation ou
-	d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU 
-	pour plus de détails. 
+	d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU 
+	pour plus de details. 
 	
-	Vous devez avoir reçu une copie de la Licence Publique Generale GNU 
-	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez à la  
+	Vous devez avoir recu une copie de la Licence Publique Generale GNU 
+	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la  
 	Free Software Foundation, Inc., 
-	59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.
+	59 Temple Place, Suite 330, Boston, MA 02111-1307, etats-Unis.
 	
 	*****************************************************/
 
 /*
-	Ajoute le bouton des mots-clés dans la barre principale en espace privé
-	pour les administrateurs de mots-clés
+	Ajoute le bouton des mots-cles dans la barre principale en espace prive
+	pour les administrateurs de mots-cles
 	
 	Nota: plugin.xml en cache.
-		si modif plugin.xml, il faut réactiver le plugin (config/plugin: désactiver/activer)
+		si modif plugin.xml, il faut reactiver le plugin (config/plugin: desactiver/activer)
 	
 */
 
 function amocles_ajouter_boutons($boutons_admin) {
 
-	include_spip("inc/amocles_api");
+	include_spip("inc/amocles_api_globales");
 	
 	if (
 		in_array($GLOBALS['auteur_session']['id_auteur'], amocles_admins_groupes_mots_get_ids())

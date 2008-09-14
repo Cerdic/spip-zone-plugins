@@ -51,6 +51,18 @@ Les mots-cl&eacute;s en double sont ignor&eacute;s."
 , 'total_export' => "Total export: "
 , 'groupe_vide' => "Groupe de mots-cl&eacute;s vide."
 
+, 'titre_cadre_stopwords' => "Mots vides :"
+, 'editer_stopwords' => "Editer les mots vides"
+, 'vos_mots_vides_' => "Vos mots vides :"
+, 'mots_vides_pour_' => "Mots vides pour @nom_lang@ [@lang@]"
+, 'info_stopwords' => "Les mots vides sont ignor&eacute;s lors de la proposition d'insertion de mots-cl&eacute;s dans l'article."
+, 'selectionnez_langue_stopwords' => "S&eacute;lectionnez une langue dans la liste de gauche pour localiser les mots vides"
+
+, 'mots_detectes' => "Mots d&eacute;tect&eacute;s dans cet article"
+, 'mot' => "Mot"
+, 'occurence' => "Occurence"
+, 'poids' => "Poids"
+
 // page mots_edit
 , 'selectionnez_langue' => "S&eacute;lectionnez une langue dans la liste de gauche pour localiser le mot-cl&eacute;"
 
