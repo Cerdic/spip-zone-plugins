@@ -178,10 +178,10 @@ function inc_imageflow_header_dist () {
 						var div_legend = \"\";
 						if (div_legend == \"\")
 						{
-							div_legend = \"<div id=\'affichage_legend\'></div>\"; /**/
+							div_legend = \"<div id=\"affichage_legend\"></div>\"; /**/
 							$(\"#affichage_cache\").after(div_legend);
 						}
-						$(\"#affichage_legend\").addClass(\'affichage_legend\');
+						$(\"#affichage_legend\").addClass(\"affichage_legend\");
 						$(\"#affichage_legend\").prepend(o).show();
 						";
 				}
