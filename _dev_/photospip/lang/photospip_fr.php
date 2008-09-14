@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_modif_doc' => 'Date de derni&egrave;re modification : ',
 	'taille_fichier' => 'Taille du fichier : ',
 	'fichier_original' => 'Fichier original : ',
+	'donnees_exif' => 'Donn&eacute;es EXIF',
 	
 	'tester' => 'Tester',
 	'valider' => 'Appliquer',

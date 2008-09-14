@@ -81,7 +81,7 @@ button{
 	color:#86B900;
 }
 input{
-	border:1px solid #86B900;
+	border:3px solid #ccc;
 	padding:2px;
 }
 .spip_bouton input{
@@ -138,6 +138,9 @@ input{
 	border:1px solid #86B900;
 	background:#d4f384 url(images/ico-warning.png) left center no-repeat;
 }
+
+
+/* UI.tabs adapté au squelette de test photospip */
 
 /* Caution! Ensure accessibility in print and other media types... */
 @media projection, screen { /* Use class for showing/hiding tab content, so that visibility can be better controlled in different media types... */
@@ -245,3 +248,16 @@ input{
 *:first-child+html .ui-tabs-nav  { /* auto clear @ IE 7 Standards Mode - do not group selectors, otherwise IE 6 will ignore complete rule (because of the unknown + combinator)... */
     display: inline-block;
 }
+
+/* UI.sliders adapté au squelette de test de photospip */
+/* This file skins sliders */
+
+.ui-slider { width: 200px; height: 23px; position: relative; background-repeat: no-repeat; background-position: center center; }
+.ui-slider-handle { position: absolute; z-index: 1; height: 23px; width: 12px; top: 0px; left: 0px; background-image: url(images/slider-handle.gif);  }
+.ui-slider-handle-active { border: 1px dotted black;  }
+.ui-slider-disabled .ui-slider-handle { opacity: 0.5; filter: alpha(opacity=50); }
+.ui-slider-range { position: absolute; background: #50A029; opacity: 0.3; filter: alpha(opacity=30); width: 100%; height: 100%; }
+
+/* Default slider backgrounds */
+.ui-slider, .ui-slider-1 { background-image: url(images/slider-bg-1.png); }
+.ui-slider-2 { background-image: url(images/slider-bg-2.png); }
