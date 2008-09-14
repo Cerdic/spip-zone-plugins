@@ -38,8 +38,6 @@ _ Configuration: [->/ecrire/?exec=cfg&amp;cfg=gis]
 
  <options>gis_options.php</options>
  
- <fonctions>balise/formulaire_gis.php</fonctions>
- 
  <fonctions>base/gis.php</fonctions>
 
  <prefix>gis</prefix>
