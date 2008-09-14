@@ -18,6 +18,7 @@
 	
 	// Fonction que l'on réalise lorsque l'on submit un des formulaire de modification
 	var onsubmit_modif = function(id){
+		jQuery('.previsu_texte').hide();
 		jQuery('input[@name=valider]').attr({disabled:"disabled"}).css(
 			'opacity',0.2
 		);
@@ -196,8 +197,9 @@
 					</div>
 					<h3><:photospip:filtres_format:></h3>
 					<form id="photospip1" onsubmit="onsubmit_modif();return AjaxSqueeze(this,'image-container',aftersubmit_modif,event)" method="post" action="[(#URL_ACTION_AUTEUR{photospip,#ID_DOCUMENT})]">
+						<ul>
 							[(#CONFIG{photospip/tourner}|?{' '})
-							<div>
+							<li>
 								<input type="radio" name="filtre" id="tourner" value="tourner" />
 								<label for="tourner">[<img src="(#CHEMIN{images/photospip-ico/ico_rotation.png})" alt="<:photospip:tourner:>" />&nbsp;&nbsp;]<:photospip:tourner:></label>
 								<div class="cache params_filtre">
@@ -210,25 +212,25 @@
 									<label for="param_tourner_270" class="nocache"><:photospip:tourner_270:></label>
 									<br />
 								</div>
-							</div>]
+							</li>]
 							[(#CONFIG{photospip/image_flip_vertical}|?{' '})
-							<div>
+							<li>
 								<input type="radio" name="filtre" id="image_flip_vertical" value="image_flip_vertical" />
 								<label for="image_flip_vertical">[<img src="(#CHEMIN{images/photospip-ico/ico_flip_vertical.png})" alt="<:photospip:image_flip_vertical:>" />&nbsp;&nbsp;]<:photospip:image_flip_vertical:></label>
 								<div class="cache params_filtre">
 									<:photospip:image_flip_vertical_text:>
 								</div>
-							</div>]
+							</li>]
 							[(#CONFIG{photospip/image_flip_horizontal}|?{' '})
-							<div>
+							<li>
 								<input type="radio" name="filtre" id="image_flip_horizontal" value="image_flip_horizontal" />
 								<label for="image_flip_horizontal">[<img src="(#CHEMIN{images/photospip-ico/ico_flip_horizontal.png})" alt="<:photospip:image_flip_horizontal:>" />&nbsp;&nbsp;]<:photospip:image_flip_horizontal:></label>
 								<div class="cache params_filtre">
 									<:photospip:image_flip_horizontal_text:>
 								</div>
-							</div>]
+							</li>]
 							[(#CONFIG{photospip/image_rotation}|?{' '})
-							<div>
+							<li>
 								<input type="radio" name="filtre" id="image_rotation" value="image_rotation" />
 								<label for="image_rotation">[<img src="(#CHEMIN{images/photospip-ico/ico_rotation.png})" alt="<:photospip:image_rotation:>" />&nbsp;&nbsp;]<:photospip:image_rotation:></label>
 								<div class="cache params_filtre">
@@ -237,12 +239,12 @@
 										<div class='ui-slider-handle'></div>	
 									</div>
 									<label for="param_image_rotation"><:photospip:angle_rotation:></label>&nbsp;
-									<input type="text" name="params_image_rotation" style="width:60px;display:inline" id="param_image_rotation" value="45" maxlength="4" />
+									<input type="text" class="texte" name="params_image_rotation" style="width:60px;display:inline" id="param_image_rotation" value="45" maxlength="4" />
 									<br class="nettoyeur" />
 								</div>
-							</div>]
+							</li>]
 							[(#CONFIG{photospip/image_recadre}|?{' '})
-							<div>
+							<li>
 								<input type="radio" name="filtre" id="image_recadre" value="image_recadre" />
 								<label for="image_recadre">[<img src="(#CHEMIN{images/photospip-ico/ico_rotation.png})" alt="<:photospip:image_recadre:>" />&nbsp;&nbsp;]<:photospip:image_recadre:></label>
 								<div class="cache params_filtre image_recadre">
@@ -256,30 +258,33 @@
 									<label for="ratio2">4:3 :</label>
 									<input type="radio" class="nocache" id="ratio2" name="ratio" value="4:3" /></p>
 									<label for="recadre_width"><:photospip:recadre_width:></label>
-									<input type="text" id="recadre_width" name="recadre_width" style="width:60px;display:inline" value="" readonly="readonly" /><br />
+									<input type="text" class="texte" id="recadre_width" name="recadre_width" style="width:60px;display:inline" value="" readonly="readonly" /><br />
 									<label for="recadre_height"><:photospip:recadre_height:></label>
-									<input type="text" id="recadre_height" name="recadre_height" style="width:60px;display:inline" value="" readonly="readonly" /><br />
+									<input type="text" class="texte" id="recadre_height" name="recadre_height" style="width:60px;display:inline" value="" readonly="readonly" /><br />
 									<p><:photospip:recadre_x1_y1:></p>
 									<label for="recadre_x1">x</label>
-									<input type="text" id="recadre_x1" name="recadre_x1" style="width:60px;display:inline" value="" readonly="readonly" />
+									<input type="text" class="texte" id="recadre_x1" name="recadre_x1" style="width:60px;display:inline" value="" readonly="readonly" />
 									<label for="recadre_y1">y</label>
-									<input type="text" id="recadre_y1" name="recadre_y1" style="width:60px;display:inline" value="" readonly="readonly" /><br />
+									<input type="text" class="texte" id="recadre_y1" name="recadre_y1" style="width:60px;display:inline" value="" readonly="readonly" /><br />
 									<p><:photospip:recadre_x2_y2:></p>
 									<label for="recadre_x2">x</label>
-									<input type="text" id="recadre_x2" name="recadre_x2" style="width:60px;display:inline" value="" readonly="readonly" />
+									<input type="text" class="texte" id="recadre_x2" name="recadre_x2" style="width:60px;display:inline" value="" readonly="readonly" />
 									<label for="recadre_y2">y</label>
-									<input type="text" id="recadre_y2" name="recadre_y2" style="width:60px;display:inline" value="" readonly="readonly" /><br />
+									<input type="text" class="texte" id="recadre_y2" name="recadre_y2" style="width:60px;display:inline" value="" readonly="readonly" /><br />
 									<br class="nettoyeur" />
 								</div>
-							</div>]
-							<div class="clear">
-								<input type="hidden" name="redirect" value="[(#SELF)]" />
-								<input type="hidden" name="redirect_ajax" value="[(#URL_PAGE{fragment_photospip}|parametre_url{id_document,#ID_DOCUMENT})]" />
-							<div class="validation" >
-								<input type="radio" name="validation" class="nocache" value="tester" id="tester1" checked="checked" /><label for="tester1" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_tester.png})" alt="<:photospip:tester:>" /> ]<:photospip:tester:></label><br class="nettoyeur" />
-								[(#GET{photospip}|=={pasok}|?{<input type="radio" name="validation" class="nocache" value="appliquer" id="appliquer1" /><label for="appliquer1" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_appliquer.png})" alt="<:photospip:valider:>" /> ]<:photospip:valider:></label>,<span class="warning"><:photospip:nb_versions_depasse:></span><br />})]<br class="nettoyeur" />
-								<p class="spip_bouton">
-								<input type="submit" name="valider" value="<:photospip:valider:>" />
+							</li>]
+						</ul>
+						<div class="clear">
+							<input type="hidden" name="redirect" value="[(#SELF)]" />
+							<input type="hidden" name="redirect_ajax" value="[(#URL_PAGE{fragment_photospip}|parametre_url{id_document,#ID_DOCUMENT})]" />
+							<div class="boutons validation" >
+								<p>
+									<input type="radio" name="validation" class="nocache" value="tester" id="tester1" checked="checked" /><label for="tester1" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_tester.png})" alt="<:photospip:tester:>" /> ]<:photospip:tester:></label><br />
+									[(#GET{photospip}|=={pasok}|?{<input type="radio" name="validation" class="nocache" value="appliquer" id="appliquer1" /><label for="appliquer1" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_appliquer.png})" alt="<:photospip:valider:>" /> ]<:photospip:valider:></label>,<span class="warning"><:photospip:nb_versions_depasse:></span><br />})]
+								</p>
+								<p class="boutons">
+									<input type="submit" class="submit" name="valider" value="<:photospip:valider:>" />
 								</p>
 							</div>
 							<br class="nettoyeur" />
@@ -292,17 +297,17 @@
 					</div>
 					<h3><:photospip:filtres_de_couleur:></h3>
 						<form id="photospip2" onsubmit="onsubmit_modif();return AjaxSqueeze(this,'image-container',aftersubmit_modif,event)" method="post" enctype="multipart/form-data" action="[(#URL_ACTION_AUTEUR{photospip,#ID_DOCUMENT})]">
-						<div>
+						<ul>
 							[(#CONFIG{photospip/image_nb}|?{' '})
-							<div>
+							<li>
 								<input type="radio" name="filtre" id="filtre_nb" value="image_nb" />
 								<label for="filtre_nb">[<img src="(#CHEMIN{images/photospip-ico/ico_nb.png})" alt="<:photospip:image_nb:>" />&nbsp;&nbsp;]<:photospip:image_nb:></label>
 								<div class="cache params_filtre">
 									<:photospip:image_nb_text:>
 								</div>
-							</div>]
+							</li>]
 							[(#CONFIG{photospip/image_gamma}|?{' '})
-							<div>
+							<li>
 								<input type="radio" name="filtre" id="filtre_gamma" value="image_gamma" />
 								<label for="filtre_gamma"><:photospip:image_gamma:></label>
 								<div class="cache params_filtre">
@@ -311,12 +316,12 @@
 										<div class='ui-slider-handle'></div>	
 									</div>
 									<label for="param_image_gamma"><:photospip:niveau_gamma:></label>&nbsp;
-									<input type="text" name="params_image_gamma" style="width:60px;display:inline" id="param_image_gamma" value="6" maxlength="4" />
+									<input type="text" class="texte" name="params_image_gamma" style="width:60px;display:inline" id="param_image_gamma" value="6" maxlength="4" />
 									<br class="nettoyeur" />
 								</div>
-							</div>]
+							</li>]
 							[(#CONFIG{photospip/image_flou}|?{' '})
-							<div>
+							<li>
 								<input type="radio" name="filtre" id="filtre_flou" value="image_flou" />
 								<label for="filtre_flou"><:photospip:image_flou:></label>
 								<div class="cache params_filtre">
@@ -325,34 +330,35 @@
 										<div class='ui-slider-handle'></div>	
 									</div>
 									<label for="param_image_flou"><:photospip:niveau_flou:></label>&nbsp;
-									<input type="text" name="params_image_flou" style="width:60px;display:inline" id="param_image_flou" value="3" maxlength="2" />
+									<input type="text" class="texte" name="params_image_flou" style="width:60px;display:inline" id="param_image_flou" value="3" maxlength="2" />
 									<br class="nettoyeur" />
 								</div>
-							</div>]
+							</li>]
 							[(#CONFIG{photospip/image_sepia}|?{' '})
-							<div>
+							<li>
 								<input type="radio" name="filtre" id="filtre_sepia" value="image_sepia" />
 								<label for="filtre_sepia">[<img src="(#CHEMIN{images/photospip-ico/ico_sepia.png})" alt="<:photospip:image_sepia:>" />&nbsp;&nbsp;]<:photospip:image_sepia:></label>
 								<div class="cache params_filtre">
 									<label for="param_image_sepia"><:photospip:couleur_sepia:></label>&nbsp;
-									<input type="text" name="params_image_sepia" class="colorwell" style="width:100px;display:inline" id="param_image_sepia" value="#896f5e" maxlength="7" />
+									<input type="text" name="params_image_sepia" class="colorwell texte" style="width:100px;display:inline" id="param_image_sepia" value="#896f5e" maxlength="7" />
 									<span class="picker" style="float:right;padding:3px">&nbsp;</span>
 									<br class="nettoyeur" />
 								</div>
-							</div>]
-							
-							<div class="clear">
-								<input type="hidden" name="redirect" value="[(#SELF)]" />
-								<input type="hidden" name="redirect_ajax" value="[(#URL_PAGE{fragment_photospip}|parametre_url{id_document,#ID_DOCUMENT})]" />
-								<div class="validation" >
-									<input type="radio" name="validation" class="nocache" value="tester" id="tester2" checked="checked" /><label for="tester2" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_tester.png})" alt="<:photospip:tester:>" /> ]<:photospip:tester:></label><br class="nettoyeur" />
-									[(#GET{photospip}|=={pasok}|?{<input type="radio" name="validation" class="nocache" value="appliquer" id="appliquer2" /><label for="appliquer2" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_appliquer.png})" alt="<:photospip:valider:>" /> ]<:photospip:valider:></label>,<span class="warning"><:photospip:nb_versions_depasse:></span><br />})]<br class="nettoyeur" />
-									<p class="spip_bouton">
-										<input type="submit" name="valider" value="<:photospip:valider:>" />
-									</p>
+							</li>]
+						</ul>
+						<div class="clear">
+							<input type="hidden" name="redirect" value="[(#SELF)]" />
+							<input type="hidden" name="redirect_ajax" value="[(#URL_PAGE{fragment_photospip}|parametre_url{id_document,#ID_DOCUMENT})]" />
+							<div class="boutons validation" >
+								<p>
+									<input type="radio" name="validation" class="nocache" value="tester" id="tester2" checked="checked" /><label for="tester2" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_tester.png})" alt="<:photospip:tester:>" /> ]<:photospip:tester:></label><br />
+									[(#GET{photospip}|=={pasok}|?{<input type="radio" name="validation" class="nocache" value="appliquer" id="appliquer2" /><label for="appliquer2" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_appliquer.png})" alt="<:photospip:valider:>" /> ]<:photospip:valider:></label>,<span class="warning"><:photospip:nb_versions_depasse:></span><br />})]
+								</p>
+								<p>
+									<input type="submit" class="submit" name="valider" value="<:photospip:valider:>" />
+								</p>
 							</div>
 							<br class="nettoyeur" />
-							</div>
 						</div>
 					</form>
 				</div>
@@ -364,45 +370,51 @@
 					<div class="help">
 						<:photospip:texte_aide:>
 					</div>
-					[(#CONFIG{photospip/image_niveau_de_gris_auto}|?{' '})
-					<div>
-						<input type="radio" name="filtre" id="filtre_niveaux_auto" value="image_niveaux_gris_auto" />
-						<label for="filtre_niveaux_auto"><:photospip:image_niveau_de_gris_auto:></label>
-						<div class="cache params_filtre">
-							<:photospip:image_niveau_de_gris_auto_text:>
-						</div>
-					</div>]
-					[(#CONFIG{photospip/image_sincity}|?{' '})
-					<div>
-						<input type="radio" name="filtre" id="filtre_sincity" value="image_sincity" />
-						<label for="filtre_sincity"><:photospip:image_sincity:></label>
-						<div class="cache params_filtre">
-							<:photospip:image_sincity_text:>
-						</div>
-					</div>]
-					[(#CONFIG{photospip/image_saturation_desaturation_text}|?{' '})
-					<div>
-						<input type="radio" name="filtre" id="filtre_saturer" value="image_saturer" />
-						<label for="filtre_saturer"><:photospip:image_saturation_desaturation:></label>
-						<div class="cache params_filtre">
-							<:photospip:image_saturation_desaturation_text:>
-							<div id='slidersaturer' class='ui-slider-1' style="margin: 10px 40px;">
-								<div class='ui-slider-handle'></div>	
+					<ul>
+						[(#CONFIG{photospip/image_niveau_de_gris_auto}|?{' '})
+						<li>
+							<input type="radio" name="filtre" id="filtre_niveaux_auto" value="image_niveaux_gris_auto" />
+							<label for="filtre_niveaux_auto"><:photospip:image_niveau_de_gris_auto:></label>
+							<div class="cache params_filtre explications">
+								<:photospip:image_niveau_de_gris_auto_text:>
 							</div>
-							<label for="param_image_saturer"><:photospip:niveau_saturation_desaturation:></label>&nbsp;
-							<input type="text" name="params_image_saturer" style="width:60px;display:inline" id="param_image_saturer" value="1" maxlength="3" />
-							<br class="nettoyeur" />
-						</div>
-					</div>]
+						</li>]
+						[(#CONFIG{photospip/image_sincity}|?{' '})
+						<li>
+							<input type="radio" name="filtre" id="filtre_sincity" value="image_sincity" />
+							<label for="filtre_sincity"><:photospip:image_sincity:></label>
+							<div class="cache params_filtre explications">
+								<:photospip:image_sincity_text:>
+							</div>
+						</li>]
+						[(#CONFIG{photospip/image_saturation_desaturation_text}|?{' '})
+						<li>
+							<input type="radio" name="filtre" id="filtre_saturer" value="image_saturer" />
+							<label for="filtre_saturer"><:photospip:image_saturation_desaturation:></label>
+							<div class="cache params_filtre explications">
+								<:photospip:image_saturation_desaturation_text:>
+								<div id='slidersaturer' class='ui-slider-1' style="margin: 10px 40px;">
+									<div class='ui-slider-handle'></div>	
+								</div>
+								<label for="param_image_saturer"><:photospip:niveau_saturation_desaturation:></label>&nbsp;
+								<input type="text" class="texte" name="params_image_saturer" style="width:60px;display:inline" id="param_image_saturer" value="1" maxlength="3" />
+								<br class="nettoyeur" />
+							</div>
+						</li>]
+					</ul>
 					<div class="clear">
-								<input type="hidden" name="redirect" value="[(#SELF)]" />
-								<input type="hidden" name="redirect_ajax" value="[(#URL_PAGE{fragment_photospip}|parametre_url{id_document,#ID_DOCUMENT})]" />
-					<p class="spip_bouton validation" >
-						<input type="radio" name="validation" class="nocache" value="tester" id="tester3" checked="checked" /><label for="tester3" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_tester.png})" alt="<:photospip:tester:>" /> ]<:photospip:tester:></label><br class="nettoyeur" />
-						[(#GET{photospip}|=={pasok}|?{<input type="radio" name="validation" class="nocache" value="appliquer" id="appliquer3" /><label for="appliquer3" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_appliquer.png})" alt="<:photospip:valider:>" /> ]<:photospip:valider:></label>,<span class="warning"><:photospip:nb_versions_depasse:></span>})]<br class="nettoyeur" />
-						<input type="submit" name="valider" value="<:photospip:valider:>" /> 
-					</p>
-					<br class="nettoyeur" />
+						<input type="hidden" name="redirect" value="[(#SELF)]" />
+						<input type="hidden" name="redirect_ajax" value="[(#URL_PAGE{fragment_photospip}|parametre_url{id_document,#ID_DOCUMENT})]" />
+						<div class="boutons validation">
+							<p>
+								<input type="radio" name="validation" class="nocache" value="tester" id="tester3" checked="checked" /><label for="tester3" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_tester.png})" alt="<:photospip:tester:>" /> ]<:photospip:tester:></label><br />
+								[(#GET{photospip}|=={pasok}|?{<input type="radio" name="validation" class="nocache" value="appliquer" id="appliquer3" /><label for="appliquer3" class="nocache">[<img src="(#CHEMIN{images/photospip-ico/ico_appliquer.png})" alt="<:photospip:valider:>" /> ]<:photospip:valider:></label>,<span class="warning"><:photospip:nb_versions_depasse:></span>})]
+							</p>
+							<p>
+								<input type="submit" class="submit" name="valider" value="<:photospip:valider:>" /> 
+							</p>
+						</div>
+						<br class="nettoyeur" />
 					</div>
 					</form>
 				</div>]

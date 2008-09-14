@@ -2,6 +2,21 @@
 #HTTP_HEADER{Content-Type:text/html}
 <BOUCLE_doc(DOCUMENTS){id_document}>
 	<div id="image_modifier" style="[width:(#ENV{largeur_max}|sinon{450})px;]">
+		[(#ENV{message}|?{' '})
+		<div class="photospip_previsu">
+			<div class="previsu_texte" style="[width:(#ENV{largeur_max}|sinon{450})px;]">
+				[(#ENV{message}|=={previsu}|?{' '})
+				<span style="text-transform: uppercase;"><:previsualisation:></span><br />
+				<:photospip:previsu:>]
+				[(#ENV{message}|=={sanstest}|?{' '})
+				<:photospip:sanstest:>]
+				[(#ENV{message}|=={sansfiltre}|?{' '})
+				<:photospip:sansfiltre:>]
+				[(#ENV{message}|=={sansconf}|?{' '})
+				<:photospip:sansconf:>]
+			</div>
+		</div>
+		]
 		[(#ENV{filtre}|?{' ',''})
 		[(#FICHIER|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|photospip_appliquer_filtre{#ENV{filtre},[(#ENV{param})]}|inserer_attribut{alt,' '})]]
 		[(#ENV{filtre}|?{'',' '})
@@ -18,7 +33,10 @@
 								<div>
 									<input type="hidden" name="version" value="#VERSION" />
 									<label>
-										[(#FICHIER|get_spip_doc|image_reduire{80,80}|inserer_attribut{alt,' '})]
+										[(#HAUTEUR|>{#LARGEUR}|?{'',' '})
+										[(#FICHIER|get_spip_doc|image_reduire{80,80}|inserer_attribut{alt,Version #VERSION})]]
+										[(#HAUTEUR|>{#LARGEUR}|?{' ',''})
+										[(#FICHIER|get_spip_doc|image_reduire{80,80}|inserer_attribut{alt,Version #VERSION}|inserer_attribut{style,'vertical-align:bottom;'})]]
 									</label>
 									<input type="hidden" name="redirect" value="[(#SELF)]" />
 									<input type="hidden" name="redirect_ajax" value="[(#URL_PAGE{fragment_photospip}|parametre_url{id_document,#ENV{id_document}})]" />
