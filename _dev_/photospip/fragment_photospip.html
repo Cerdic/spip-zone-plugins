@@ -18,7 +18,7 @@
 		</div>
 		]
 		[(#ENV{filtre}|?{' ',''})
-		[(#FICHIER|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|photospip_appliquer_filtre{#ENV{filtre},[(#ENV{param})]}|inserer_attribut{alt,' '})]]
+		[(#FICHIER|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|photospip_appliquer_filtre{#ENV{filtre},[(#ENV{param})]}|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|inserer_attribut{alt,' '})]]
 		[(#ENV{filtre}|?{'',' '})
 		[(#FICHIER|image_reduire{[(#ENV{largeur_max}|sinon{450})],[(#ENV{hauteur_max}|sinon{450})]}|inserer_attribut{alt,' '})]]
 	</div>
@@ -73,11 +73,13 @@
 			</div>
 		</div>
 		[(#CONFIG{plugin/PHOTO_INFOS}|?{' ',''})
+		[(#EXTENSION|=={jpg}|?{' '})
 		<h4><:photospip:donnees_exif:></h4>
 		<div class="infos">
 			<INCLURE{fond=inc_exif}{fichier=#FICHIER}>
 			<INCLURE{fond=inc_histogramme}{fichier=#FICHIER}>
 		</div>]
+		]
 	</div>
 	<br style="clear:both" />
 </BOUCLE_doc>
