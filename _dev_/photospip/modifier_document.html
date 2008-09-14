@@ -191,7 +191,7 @@
 			[(#SESSION{id_auteur}?{' ',''})	
 			[(#AUTORISER{'modifier','document',#ID_DOCUMENT})
 			<div>
-			<div id="container-1" style="position:relative">
+			<div id="container-1">
 				<ul>
 					<li><a href="#fragment-format"><span><:photospip:filtres_format:></span></a></li>
 					<li><a href="#fragment-couleurs"><span><:photospip:filtres_de_couleur:></span></a></li>
@@ -204,7 +204,10 @@
 				</ul>
 				<div id="fragment-format">
 					<div class="help">
-						<:photospip:texte_aide:>
+						<h4><:photospip:titre_aide:></h4>
+						<div class="infos">
+							<:photospip:texte_aide:>
+						</div>
 					</div>
 					<h3><:photospip:filtres_format:></h3>
 					<form id="photospip1" onsubmit="onsubmit_modif();return AjaxSqueeze(this,'image-container',aftersubmit_modif,event)" method="post" action="[(#URL_ACTION_AUTEUR{photospip,#ID_DOCUMENT})]">
@@ -304,7 +307,10 @@
 				</div>
 				<div id="fragment-couleurs">
 					<div class="help">
-						<:photospip:texte_aide:>
+						<h4><:photospip:titre_aide:></h4>
+						<div class="infos">
+							<:photospip:texte_aide:>
+						</div>
 					</div>
 					<h3><:photospip:filtres_de_couleur:></h3>
 						<form id="photospip2" onsubmit="onsubmit_modif();return AjaxSqueeze(this,'image-container',aftersubmit_modif,event)" method="post" enctype="multipart/form-data" action="[(#URL_ACTION_AUTEUR{photospip,#ID_DOCUMENT})]">
@@ -377,7 +383,10 @@
 				[(#GET{Fonctions_images}|=={ok}|?{' '})
 				<div id="fragment-sup">
 					<div class="help">
-						<:photospip:texte_aide:>
+						<h4><:photospip:titre_aide:></h4>
+						<div class="infos">
+							<:photospip:texte_aide:>
+						</div>
 					</div>
 					<h3><:photospip:filtres_supplementaires:></h3>
 					<form id="photospip3" onsubmit="onsubmit_modif();return AjaxSqueeze(this,'image-container',aftersubmit_modif,event)" method="post" action="[(#URL_ACTION_AUTEUR{photospip,#ID_DOCUMENT})]">

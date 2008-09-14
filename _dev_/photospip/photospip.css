@@ -53,13 +53,13 @@ button.delete_version{
 	text-align:left;
 }
 
-#versions h4{
+.help h4,#versions h4{
 	background:#E5E5E5 url(images/titre_top_left) no-repeat scroll right top;
 	font-weight:normal;
 	padding:5px 3px;
 }
 
-#versions .infos{
+.help .infos,#versions .infos{
 	background-color:#F4F4F4;
 	padding:10px;
 	position:relative;
@@ -107,11 +107,9 @@ input.texte{
 }
 .help{
 	width:30%;
-	border:1px solid #ccc;
 	padding:5px;
 	margin:0 10px 20px 0;
 	float:right;
-	background : transparent url(images/ico-aide.png) no-repeat right top;
 	font-size:11px;
 }
 .waiting{
