@@ -66,5 +66,6 @@ _ Configuration: [->/ecrire/?exec=cfg&amp;cfg=gis]
 		<action>ajouterBoutons</action>
 		<inclure>gis_pipeline.php</inclure>
 	</pipeline>
+	<necessite id='geomap' version='[0.2;]' />
 	<chemin dir='' />
 </plugin>
