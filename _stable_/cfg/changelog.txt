@@ -1,3 +1,6 @@
+v1.10.3 (14 09 2008)
+  * ne pas prendre le traiter() de CFG si c'est un formulaire CVT normal !
+
 v1.10.2 (02 09 2008)
 - petites simplifications :
 

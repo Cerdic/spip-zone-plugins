@@ -50,19 +50,26 @@ function cfg_header_prive($flux){
 
 
 
-// test s'il existe une fonction (charger par defaut) pour le
-// formulaire dont le nom est donne
-function cfg_from_cvt($form, $action='charger'){
-	return (!function_exists($f = 'formulaires_'.$form.'_'.$action)
-		AND !function_exists($f .= '_dist')
-		AND !function_exists($f = 'formulaires_'.$form.'_stat'));
+// teste si $form n'est pas un formulaire CVT deja existant
+// (et non un formulaire CFG nomme $form en CVT)
+// #FORMULAIRE_TOTO <> #FORMULAIRE_CFG{toto}
+function est_cvt($form){
+	$f = 'formulaires_' . $form;
+	return (function_exists($f . '_stat')
+		OR function_exists($f . '_charger_dist')
+		OR function_exists($f . '_charger')
+		OR function_exists($f . '_verifier_dist')
+		OR function_exists($f . '_verifier')
+		OR function_exists($f . '_traiter_dist')
+		OR function_exists($f . '_traiter')	
+		);
 }
 
 # Formulaires CFG CVT
 function cfg_formulaire_charger($flux){
 	// s'il n'y a pas de fonction charger, on utilise le parseur de CFG
 	$form = $flux['args']['form'];
-	if (cfg_from_cvt($form)){
+	if (!est_cvt($form)){
 
 		// ici, on a le nom du fond cfg... 
 		// on recupere donc les parametres du formulaire.	
@@ -110,7 +117,7 @@ function cfg_formulaire_charger($flux){
 function cfg_formulaire_verifier($flux){
 
 	$form = $flux['args']['form'];
-	if (cfg_from_cvt($form) && cfg_from_cvt($form,'verifier')){
+	if (!est_cvt($form)){
 		include_spip('inc/cfg_formulaire');
 		#$config = &new cfg_formulaire($cfg, $cfg_id);
 		$cfg_id = isset($flux['args']['args'][0]) ? $flux['args']['args'][0] : '';
@@ -150,12 +157,14 @@ function cfg_instancier($config=false){
 // traitement du formulaire
 function cfg_formulaire_traiter($flux){
 	$form = $flux['args']['form'];
-	$config = cfg_instancier();
+	if (!est_cvt($form)){
+		$config = cfg_instancier();
 
-	$config->traiter();	
-	$message = join('<br />',$config->messages['message_ok']);	
+		$config->traiter();	
+		$message = join('<br />',$config->messages['message_ok']);	
 
-	$flux['data'] = array(true,$message); // forcer l'etat editable du formulaire et retourner le message
+		$flux['data'] = array(true,$message); // forcer l'etat editable du formulaire et retourner le message
+	}
 	return $flux;
 }
 
