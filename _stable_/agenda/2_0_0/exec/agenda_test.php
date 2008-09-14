@@ -11,8 +11,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 //include_spip('inc/actions');
 include_spip('inc/agenda_gestion');
+include_spip('inc/agenda_filtres');
 include_spip('inc/agenda_saisie_rapide');
-//include_spip('inc/pim_agenda_gestion');
+include_spip('inc/date');
 
 function exec_agenda_test_dist()
 {
