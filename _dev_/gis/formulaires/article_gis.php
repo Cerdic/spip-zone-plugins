@@ -3,6 +3,7 @@
 
 include_spip('inc/session');
 include_spip('inc/securiser_action');
+include_spip('public/assembler');
 
 function formulaires_article_gis_charger_dist(){
 
