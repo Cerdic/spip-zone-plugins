@@ -85,8 +85,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	//aide
 	'texte_en_cours' => '<div class="waiting"><h2>Modification de votre image...</h2><p>Veuillez patienter que l\'op&eacute;ration soit termin&eacute;e</p></div>',
-	'texte_aide' =>'<h3>Aide</h3>
-	<p>Pour appliquer une modification &agrave; votre image, il vous suffit de choisir le type en le cochant &agrave; cot&eacute; de son titre et de proc&eacute;der &agrave; son r&eacute;glage.</p>
+	'titre_aide' => 'Aide',
+	'texte_aide' =>'<p>Pour appliquer une modification &agrave; votre image, il vous suffit de choisir le type en le cochant &agrave; cot&eacute; de son titre et de proc&eacute;der &agrave; son r&eacute;glage.</p>
 	<p>Ensuite choisissez entre "tester" ou "appliquer", puis validez.</p>
 	<p><strong>NB :</strong> Ces traitements d\'images sont lourds et peuvent prendre quelque temps avant de s\'effectuer. C\'est pourquoi nous vous recommandons de les "tester" avant (cela cr&eacute;era une pr&eacute;visualisation). Chaque test repartira de la derni&egrave;re version. Appliquer cr&eacute;era une nouvelle version disponible.</p>',
 	'modification_pas_autorisee' => 'Vous ne disposez pas des droits n&eacute;cessaires pour pouvoir modifier ce document',
