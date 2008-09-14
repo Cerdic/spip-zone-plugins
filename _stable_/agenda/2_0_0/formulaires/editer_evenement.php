@@ -11,24 +11,30 @@ include_spip('inc/editer');
 function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_article=0, $retour='', $lier_trad = 0, $config_fonc='evenements_edit_config', $row=array(), $hidden=''){
 	
 	$valeurs = formulaires_editer_objet_charger('evenement',$id_evenement,$id_article,0,$retour,$config_fonc,$row,$hidden);
+	
 	if (!$valeurs['id_article'])
 		$valeurs['id_article'] = $id_article;
+	if (!$valeurs['titre'])
+		$valeurs['titre'] = sql_getfetsel('titre','spip_articles','id_article='.intval($valeurs['id_article']));
+	// fixer la date par defaut en cas de creation d'evenement
+	if (!intval($id_evenement)){
+		$t=time();
+		$valeurs["date_debut"] = date('Y-m-d H:i:00',$t);
+		$valeurs["date_fin"] = date('Y-m-d H:i:00',$t+3600);
+		$valeurs['horaire'] = 'oui';
+	}
 
 	// les mots
 	$valeurs['mots'] = sql_allfetsel('id_mot','spip_mots_evenements','id_evenement='.intval($id_evenement));
 
 	// les repetitions
 	$valeurs['repetitions'] = '';
-	$repetitons = sql_allfetsel("date_debut","spip_evenements","id_evenement_source=".intval($id_evenement),'','date_debut');
-	foreach($repetitons as $d)
-		$valeurs['repetitions'] .= date('d/m/Y',strtotime($d['date_debut'])).' ';
-
-	// fixer la date par defaut en cas de creation d'evenement
-	if (!intval($id_evenement)){
-		$t=time();
-		$valeurs["date_debut"] = date('Y-m-d H:i:00',$t);
-		$valeurs["date_fin"] = date('Y-m-d H:i:00',$t+3600);
+	if (intval($id_evenement)){
+		$repetitons = sql_allfetsel("date_debut","spip_evenements","id_evenement_source=".intval($id_evenement),'','date_debut');
+		foreach($repetitons as $d)
+			$valeurs['repetitions'] .= date('d/m/Y',strtotime($d['date_debut'])).' ';
 	}
+
 	// dispatcher date et heure
 	list($valeurs["date_debut"],$valeurs["heure_debut"]) = explode(' ',date('d/m/Y H:i',strtotime($valeurs["date_debut"])));
 	list($valeurs["date_fin"],$valeurs["heure_fin"]) = explode(' ',date('d/m/Y H:i',strtotime($valeurs["date_fin"])));
@@ -36,6 +42,7 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_arti
 	// traiter specifiquement l'horaire qui est une checkbox
 	if (_request('date_debut') AND !_request('horaire'))
 		$valeurs['horaire'] = 'oui';
+
 	return $valeurs;
 }
 
@@ -70,10 +77,12 @@ function formulaires_editer_evenement_traiter_dist($id_evenement='new', $id_arti
 	}
 	elseif ($retour) {
 		include_spip('inc/headers');
-		$id_article = sql_getfetsel('id_article','spip_evenements','id_evenement='.intval($id));
-		$id_table_objet = id_table_objet($type);
 		$retour = parametre_url($retour,'id_evenement',$id);
-		$message .= redirige_formulaire(parametre_url($retour,'id_article',$id_article));
+		if (strpos($retour,'article')!==FALSE){
+			$id_article = sql_getfetsel('id_article','spip_evenements','id_evenement='.intval($id));
+			$retour = parametre_url($retour,'id_article',$id_article);
+		}
+		$message .= redirige_formulaire($retour);
 	}
 	return $message;
 }

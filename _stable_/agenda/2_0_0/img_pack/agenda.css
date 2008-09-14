@@ -28,6 +28,13 @@ li.item .repetitions li {display:inline;margin:0;padding:0;}
 
 .clicable {cursor:hand;cursor:pointer;}
 
+/* navigation gauche */
+ul.agenda_navigation, ul.agenda_navigation li, ul.agenda_navigation ul {list-style:none;margin:0;padding:0;}
+ul.agenda_navigation li {border-bottom:1px solid #eee; padding:2px 0;}
+.pagination {background:#eee;border-top:1px solid #ddd;border-bottom:1px solid #ddd; margin: 0;padding:2px 0; font-size: 0.9em; font-weight: bold; text-align: right; white-space: nowrap; }
+.pagination .on { background:#ccc;padding:2px 3px;color:#fff; }
+
+
 /* sur la fiche article */
 .articles .fiche_objet #agenda { border: 1px solid #999;}
 .articles .fiche_objet #agenda h2.titre { margin: 0; padding: 4px 4px 8px; background: #c0cad4; font-size: 100%; }
@@ -37,25 +44,25 @@ li.item .repetitions li {display:inline;margin:0;padding:0;}
 .articles .fiche_objet .evenements li.item { padding-left: 120px; }
 .articles .fiche_objet .evenements li.item .jour { width: 110px; margin-left: -120px; }
 .articles .fiche_objet .evenements span.lien_article {display:none;}
-.articles .fiche_objet #agenda .pagination { margin: 1em 0 0; padding: 0 4px 4px; background: #eee; }
 
 /* edition d'un evenement */
-.formulaire_editer_evenement .editer_horaire {padding:0;margin:-2em 0 0 0;float:right;}
+.formulaire_editer_evenement .editer_horaire {padding-top:0;margin-top:0;}
 .formulaire_editer_evenement .editer_horaire label {margin:0;display:inline;width:auto;float:none;}
 .formulaire_editer_evenement li.editer_date,
 .formulaire_editer_evenement li.editer_date li {clear:left;}
-.formulaire_editer_evenement li.editer_date_debut_fin label { vertical-align: middle; }
+.formulaire_editer_evenement li.editer_date_debut_fin label { vertical-align: top; }
 
 .formulaire_editer_evenement input.date {width:7em;padding-right:20px;}
 .formulaire_editer_evenement span.afficher_horaire label {float:none;display:inline;padding:0;margin:0;}
 .formulaire_editer_evenement input.heure {width:4em;}
 
 .formulaire_editer_evenement li.editer_date label.heure {visibility:hidden;}
-.formulaire_editer_evenement li.editer_date label.date_fin {display:inline;float:none;margin:0;}
+.formulaire_editer_evenement li.editer_date label {display:inline;float:none;margin:0;}
 
 /* le picker */
 a.dp-choose-date { display: inline-block; padding: 0; margin: 3px 0 0 -19px; vertical-align: bottom; }
-
+#repetitions_picker {float:left;}
+li.editer_repetitions textarea {float:left;width:110px;height:11em;}
 
 /* autocompletion */
 /*.ac_input {	width: 200px; }*/
@@ -72,15 +79,15 @@ overflow-x:hidden;text-align:left;z-index:1000;height:10em;width:auto !important
 .ac_over {	background-color: Highlight;	color: HighlightText;}
 
 /* selecteur de mots */
-.formulaire_editer_evenement li.editer_mots ul#mots_sel {display:block;padding-left:4px;}
+.formulaire_editer_evenement li.editer_mots ul#mots_sel {display:block;}
 .formulaire_editer_evenement li.editer_mots ul#mots_sel li {padding:2px;background:#eee;border:1px solid #999;display:block;float:left;margin:0 4px 3px 0;width:auto;clear:none;font-size:0.9em;}
 .formulaire_editer_evenement li.editer_mots ul#mots_sel li em {display:none;}
 .formulaire_editer_evenement li.editer_mots ul#mots_sel li.show {font-weight:bold;}
-.formulaire_editer_evenement li.editer_mots .mots_chemin {clear:left;margin:1em 0 0.5em 4px;border-bottom:1px solid #eee;}
-.formulaire_editer_evenement li.editer_mots ul.groupes_contenus {padding-left:4px;clear:left;}
+.formulaire_editer_evenement li.editer_mots .mots_chemin {clear:left;margin:1em 0 0.5em 0;border-bottom:1px solid #eee;}
+.formulaire_editer_evenement li.editer_mots ul.groupes_contenus {clear:left;}
 .formulaire_editer_evenement li.editer_mots ul.groupes_contenus li {padding:0;margin:0;border:0;clear:none;float:left;width:48%;margin-right:5px;}
 .formulaire_editer_evenement li.editer_mots ul.groupes_contenus li.groupe a {background:url(triangle-droite.gif) no-repeat center right;padding-right:12px;}
 .formulaire_editer_evenement li.editer_mots ul.groupes_contenus li.mot a {color:#89AF02;}
 
 .formulaire_editer_evenement li.editer_repetitions div.ajouter_repetitions.cachee #repetitions_picker {display:none;}
-.formulaire_editer_evenement li.editer_repetitions div.ajouter_repetitions.cachee textarea {height:1px;visibility:hidden;} /* bug ff : si on le met hidden on ne peut plus saisir dedans apres */
+.formulaire_editer_evenement li.editer_repetitions div.ajouter_repetitions.cachee textarea {margin:0;padding:0;height:1px;visibility:hidden;} /* bug ff : si on le met hidden on ne peut plus saisir dedans apres */

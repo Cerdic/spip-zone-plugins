@@ -22,7 +22,7 @@ var p=jQuery(this).parent().parent();
 p.toggleClass('court');
 })
 .addClass('clicable')
-.parents('li.item')
+.parents('li.item').not('.on')
 .addClass('court')
 ;}
 jQuery('document').ready(function(){set_vevent();onAjaxLoad(set_vevent);});

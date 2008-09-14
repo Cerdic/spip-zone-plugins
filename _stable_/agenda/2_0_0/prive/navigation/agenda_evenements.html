@@ -1,8 +1,8 @@
 #SET{self,#SELF|parametre_url{id_evenement|date_debut,''}|parametre_url{debut_mois,#EVAL{_request('debut_mois')}}}
-<ul>
-<li><a href='[(#GET{self})]'>Ce mois-ci</a></li>
+<ul class='agenda_navigation'>
+<li><a href='[(#GET{self})]'><:agenda:evenements_a_venir:></a></li>
 <BOUCLE_debut(EVENEMENTS){par date_debut}{0,1}{id_article?}{id_rubrique?}{id_evenement_source?}>
-<li><a href='[(#GET{self}|parametre_url{date_debut,#DATE_DEBUT|affdate{Y-m-d}})]'>Depuis le debut</a></li>
+<li><a href='[(#GET{self}|parametre_url{date_debut,#DATE_DEBUT|affdate{Y-m-d}})]'><:agenda:evenements_depuis_debut:></a></li>
 </BOUCLE_debut>
 [<li>
 (#INCLURE{fond=prive/listes/mois-evenements}{ajax}{env}{self=#GET{self}})
