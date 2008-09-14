@@ -16,8 +16,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define('_IMG_GD_QUALITE', lire_config('photospip/compression_rendu') ? lire_config('photospip/compression_rendu') : 85);
 	
 function action_photospip_dist() {
-	include_spip('inc/distant'); # pour copie_locale
-
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	if (!preg_match(",^\W*(\d+)$,", $arg, $r)) {
@@ -108,7 +106,7 @@ function action_photospip_post($r){
 	if($validation == "appliquer"){
 		include_spip('inc/charsets');	# pour le nom de fichier
 		include_spip('inc/documents'); 
-		$src = _DIR_RACINE . copie_locale(get_spip_doc($row['fichier']));
+		$src = _DIR_RACINE . get_spip_doc($row['fichier']);
 		if (preg_match(',^(.*)-photospip(\d+).([^.]+)$,', $src, $match)) {
 			$version = $match[2];
 			$orig_src = $match[1].'.'.$match[3];
