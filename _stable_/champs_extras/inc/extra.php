@@ -95,7 +95,7 @@ function extra_saisie($extra, $table_objet, $ensemble='') {
 			. $affiche
 			. fin_cadre_enfonce(true);
 */
-		return "<ul><li><fieldset>".$affiche."</fielset></li></ul>";
+		return "<ul><li class='editer_type_fieldset'><fieldset>".$affiche."</fielset></li></ul>";
 	}
 }
 
