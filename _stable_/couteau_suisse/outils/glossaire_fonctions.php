@@ -107,16 +107,17 @@ function cs_rempl_glossaire($texte) {
 			// on retire les notes avant propre()
 			$definition = safehtml(propre(preg_replace(', *\[\[(.*?)\]\],msS', '', $definition)));
 			$GLOBALS['toujours_paragrapher'] = $mem;
-			$table1[$gloss_id] = "<a name=\"mot$gloss_id\" href=\"$lien\" class=\"cs_glossaire\"><span class=\"gl_mot\">";
-			$table2[$gloss_id] = defined('_GLOSSAIRE_JS')
-				?'</span><span class="gl_js" title="'.htmlspecialchars($titre).'"></span><span title="'.htmlspecialchars($definition).'"></span></a>'
-				:"</span><span class=\"gl_dl\"><span class=\"gl_dt\">$titre</span><span class=\"gl_dd\">$definition</span></span></a>";
+			$table1[$gloss_id] = "name='mot$gloss_id' href='$lien'";
+			$table2[$gloss_id] = recuperer_fond(
+				defined('_GLOSSAIRE_JS')?'fonds/glossaire_js':'fonds/glossaire_css', 
+				array('titre'=>$titre, 'definition'=>$definition));
 			// a chaque mot reconnu, on pose une balise temporaire cryptee
 			$texte = preg_replace_callback(",(\W)($les_mots)(\W),i", "glossaire_echappe_mot_callback", $texte, $limit);
 		}
 	}
 	// remplacement final des balises posees ci-dessus
-	return preg_replace(",@@GLOSS(.*?)#([0-9]+)@@,e", '"$table1[\\2]\\1$table2[\\2]"', echappe_retour($texte, 'GLOSS'));
+	return preg_replace(",@@GLOSS(.*?)#([0-9]+)@@,e", 
+		'"<a $table1[\\2] class=\'cs_glossaire\'><span class=\'gl_mot\'>\\1</span>$table2[\\2]</a>"', echappe_retour($texte, 'GLOSS'));
 }
 
 function cs_glossaire($texte) {
