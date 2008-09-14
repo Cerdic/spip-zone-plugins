@@ -72,7 +72,14 @@
 ]
 	
 	var activatesliders = function(){
-
+		jQuery('#sliderrotation').slider({
+			min: -180,
+			max: 180,
+			startValue : 45,
+			change: function(e, ui){
+				jQuery(this).parent().find('input').val(ui.value.toFixed(0));
+			}
+		});
 		jQuery('#slidergamma').slider({
 			min: -254,
 			max: 254,
@@ -114,14 +121,17 @@
 	  		pick.css('opacity', 0.25);
 	  		jQuery(selected = this).css('opacity', 0.75).removeClass('colorwell-selected');
 	  	});
-	  	jQuery('.version').bind("mouseover",function(){
-	  		jQuery(this).find('input').attr({
-	  			checked: "checked"
-	  		});
-	  		jQuery(this).find('.revenir_version, .delete_version').show();
-	  	});
-		jQuery('.version').bind("mouseout", function(){
-	  		jQuery(this).find('.revenir_version, .delete_version').hide();
+	  	jQuery('.version').hover(function(){
+			jQuery(this).find('label img').fadeTo('fast',.1,function(){
+				jQuery(this).parent().parent().find('input').attr({
+	  				checked: "checked"
+		  		});
+		  		jQuery(this).parent().parent().find('.revenir_version, .delete_version').show();	
+			});	
+	  	},function(){
+			jQuery(this).find('label img').fadeTo('fast',1,function(){
+				jQuery(this).parent().parent().find('.revenir_version, .delete_version').hide();
+			});	
 	  	});
 		[(#CONFIG{photospip/image_recadre}|?{' '})
 		if(jQuery('#image_recadre').is(':checked')){
@@ -180,6 +190,7 @@
 				<div class="nettoyeur"></div>
 			[(#SESSION{id_auteur}?{' ',''})	
 			[(#AUTORISER{'modifier','document',#ID_DOCUMENT})
+			<div>
 			<div id="container-1" style="position:relative">
 				<ul>
 					<li><a href="#fragment-format"><span><:photospip:filtres_format:></span></a></li>
@@ -232,10 +243,10 @@
 							[(#CONFIG{photospip/image_rotation}|?{' '})
 							<li>
 								<input type="radio" name="filtre" id="image_rotation" value="image_rotation" />
-								<label for="image_rotation">[<img src="(#CHEMIN{images/photospip-ico/ico_rotation.png})" alt="<:photospip:image_rotation:>" />&nbsp;&nbsp;]<:photospip:image_rotation:></label>
+								<label for="image_rotation">[<img src="(#CHEMIN{images/photospip-ico/ico_rotation.png})" alt="<:photospip:image_rotation:>" />&nbsp;&nbsp;]<:photospip:image_rotation:></label>`
 								<div class="cache params_filtre">
 									<:photospip:image_rotation_text:>
-									<div id='sliderrotation' class='ui-slider-1' style="margin: 10px 40px;">
+									<div id='sliderrotation' class='ui-slider-1 ui-slider' style="margin: 10px 40px;">
 										<div class='ui-slider-handle'></div>	
 									</div>
 									<label for="param_image_rotation"><:photospip:angle_rotation:></label>&nbsp;
@@ -365,11 +376,11 @@
 
 				[(#GET{Fonctions_images}|=={ok}|?{' '})
 				<div id="fragment-sup">
-					<h3><:photospip:filtres_supplementaires:></h3>
-					<form id="photospip3" onsubmit="onsubmit_modif();return AjaxSqueeze(this,'image-container',aftersubmit_modif,event)" method="post" action="[(#URL_ACTION_AUTEUR{photospip,#ID_DOCUMENT})]">
 					<div class="help">
 						<:photospip:texte_aide:>
 					</div>
+					<h3><:photospip:filtres_supplementaires:></h3>
+					<form id="photospip3" onsubmit="onsubmit_modif();return AjaxSqueeze(this,'image-container',aftersubmit_modif,event)" method="post" action="[(#URL_ACTION_AUTEUR{photospip,#ID_DOCUMENT})]">
 					<ul>
 						[(#CONFIG{photospip/image_niveau_de_gris_auto}|?{' '})
 						<li>
@@ -418,10 +429,13 @@
 					</div>
 					</form>
 				</div>]
+			</div>
 			<div class="nettoyeur"></div>
 			</div>]]
 			[(#AUTORISER{'modifier','document',#ID_DOCUMENT}|?{'',' '})
-			<:photospip:modification_pas_autorisee:>]
+			<div class="erreur">
+				<:photospip:modification_pas_autorisee:>
+			</div>]
 		</div>
 		<div class="nettoyeur"></div>
 
