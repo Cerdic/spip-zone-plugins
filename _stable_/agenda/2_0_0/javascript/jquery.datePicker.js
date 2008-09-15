@@ -248,7 +248,7 @@
 					
 					if (!alreadyExists && s.createButton) {
 						// create it!
-						controller.button = $('<a href="#" class="dp-choose-date" title="' + $.dpText.TEXT_CHOOSE_DATE + '">' + $.dpText.TEXT_CHOOSE_DATE + '</a>')
+						controller.button = $('<a href="#" class="dp-choose-date" title="' + $.dpText.TITLE_CHOOSE_DATE + '">' + $.dpText.TEXT_CHOOSE_DATE + '</a>')
 								.bind(
 									'click',
 									function()
