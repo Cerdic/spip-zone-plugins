@@ -472,7 +472,10 @@ class cfg_formulaire{
 			
 			$val = $this->val ? array_merge($contexte, $this->val) : $contexte;
 
-			$this->fond_compile = recuperer_fond($this->path_vue, $val);
+			// si on est dans l'espace prive, $this->path_vue est
+			// de la forme ../plugins/mon_plugin/fonds/toto, d'ou le replace
+			$this->fond_compile = recuperer_fond(
+				substr($this->path_vue, strlen(_DIR_RACINE)), $val);
 		}
 		return $this->fond_compile;
 	}
