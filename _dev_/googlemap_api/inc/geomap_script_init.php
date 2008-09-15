@@ -20,8 +20,8 @@ function inc_geomap_script_init_dist(){
 	$gmap_script = compacte_js(recuperer_page('http://maps.google.com/maps?file=api&v='.$version.'&key='.$config.'&hl='.$GLOBALS['spip_lang']));
 	$out = '
 	<script type="text/javascript" src="'.$geomap.'"></script>
-	<script type="text/javascript">'.$gmap_script.'</script>
-	<script type="text/javascript" src="'._DIR_PLUGIN_GEOMAP.'js/customControls.js"></script>';
+	<script type="application/javascript">'.$gmap_script.'</script>
+	<script type="application/javascript" src="'._DIR_PLUGIN_GEOMAP.'js/customControls.js"></script>';
 	return $out;
 }
 
