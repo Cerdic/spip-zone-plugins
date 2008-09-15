@@ -35,5 +35,27 @@ function glossaire_init() {
 			gloss_el.style.visibility = 'hidden';
 		}
 	);
+	jQuery('a.cs_glossaire').focus(
+		function() {
+			legl_mot = this.firstChild;
+			gloss_dt.innerHTML = jQuery(this).children('.gl_js')[0].title;  // titre
+			gloss_dd.innerHTML = jQuery(this).children('.gl_jst')[0].title; // definition
+			reg = jQuery(this.firstChild).css('font-size').match(/^\d\d?(?:\.\d+)?px/);
+			if(reg) gloss_el.style.fontSize = reg[0];
+			var result = jQuery(this).offset({ scroll: false });
+			jQuery(gloss_el)
+				.css('top',result.top+"px")
+				.css('left', result.left+"px")
+				.css('font-family', jQuery(this.firstChild).css('font-family'));
+			gloss_el.style.display    = 'block';
+			gloss_el.style.visibility = 'visible';
+			}
+	);
+	jQuery('a.cs_glossaire').blur(
+		function() {
+			gloss_el.style.display    = 'none';
+			gloss_el.style.visibility = 'hidden';
+			}
+	);
   }
 }
