@@ -21,6 +21,7 @@
 	[(#ENV{type}|=={'satellite'}|?{#SET{type,G_SATELLITE_MAP},''})]
 	[(#ENV{type}|=={'carte'}|?{#SET{type,G_NORMAL_MAP},''})]
 	[(#ENV{type}|=={'hybride'}|?{#SET{type,G_HYBRID_MAP},''})]
+	[(#ENV{type}|=={'physique'}|?{#SET{type,G_PHYSICAL_MAP},''})]
 	[(#ENV{type}|=={''}|?{#SET{type,G_SATELLITE_MAP},''})]
 	
 	function load[(#GET{id_carte_gis})]() {
