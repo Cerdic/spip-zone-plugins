@@ -20,10 +20,10 @@
 	}
 	
 	function geographie_vider_tables($nom_meta_base_version) {
-		spip_query("DROP TABLE spip_geo_pays");
-		spip_query("DROP TABLE spip_geo_regions");
-		spip_query("DROP TABLE spip_geo_departements");
-		spip_query("DROP TABLE spip_geo_communes");
+		sql_drop_table("spip_geo_pays");
+		sql_drop_table("spip_geo_regions");
+		sql_drop_table("spip_geo_departements");
+		sql_drop_table("spip_geo_communes");
 		effacer_meta($nom_meta_base_version);
 		ecrire_metas();
 	}
