@@ -14,7 +14,7 @@ function glossaire_init() {
 	}
 	jQuery('span.gl_mot', this).not('.cs_done').addClass('cs_done').hover(
 		function(e) {
-			// cas du surligneur (SPIP 1.93)
+			// cas du surligneur (SPIP 2)
 			if(this.firstChild.className=="spip_surligne") {
 				this.className = "gl_mot spip_surligne";
 				this.innerHTML = this.firstChild.innerHTML;
@@ -24,7 +24,7 @@ function glossaire_init() {
 			reg = jQuery(this).css('font-size').match(/^\d\d?(?:\.\d+)?px/);
 			if(reg) gloss_el.style.fontSize = reg[0];
 			jQuery(gloss_el)
-				.css('top',e.pageY.toString()+"px")
+				.css('top', e.pageY.toString()+"px")
 				.css('left', e.pageX.toString()+"px")
 				.css('font-family', jQuery(this).css('font-family'));
 			gloss_el.style.display    = 'block';
@@ -35,27 +35,29 @@ function glossaire_init() {
 			gloss_el.style.visibility = 'hidden';
 		}
 	);
-	jQuery('a.cs_glossaire').focus(
-		function() {
-			legl_mot = this.firstChild;
-			gloss_dt.innerHTML = jQuery(this).children('.gl_js')[0].title;  // titre
-			gloss_dd.innerHTML = jQuery(this).children('.gl_jst')[0].title; // definition
-			reg = jQuery(this.firstChild).css('font-size').match(/^\d\d?(?:\.\d+)?px/);
-			if(reg) gloss_el.style.fontSize = reg[0];
-			var result = jQuery(this).offset({ scroll: false });
-			jQuery(gloss_el)
-				.css('top',result.top+"px")
-				.css('left', result.left+"px")
-				.css('font-family', jQuery(this.firstChild).css('font-family'));
-			gloss_el.style.display    = 'block';
-			gloss_el.style.visibility = 'visible';
+	if(typeof jQuery.fn.offset=="function") { // plugin jquery.dimensions disponible a partir de SPIP 2
+		jQuery('a.cs_glossaire').focus(
+			function() {
+				legl_mot = this.firstChild;
+				gloss_dt.innerHTML = jQuery(this).children('.gl_js')[0].title;  // titre
+				gloss_dd.innerHTML = jQuery(this).children('.gl_jst')[0].title; // definition
+				reg = jQuery(this.firstChild).css('font-size').match(/^\d\d?(?:\.\d+)?px/);
+				if(reg) gloss_el.style.fontSize = reg[0];
+				var result = jQuery(this).offset({ scroll: false });
+				jQuery(gloss_el)
+					.css('top',result.top+"px")
+					.css('left', result.left+"px")
+					.css('font-family', jQuery(this.firstChild).css('font-family'));
+				gloss_el.style.display    = 'block';
+				gloss_el.style.visibility = 'visible';
 			}
-	);
-	jQuery('a.cs_glossaire').blur(
-		function() {
-			gloss_el.style.display    = 'none';
-			gloss_el.style.visibility = 'hidden';
+		);
+		jQuery('a.cs_glossaire').blur(
+			function() {
+				gloss_el.style.display    = 'none';
+				gloss_el.style.visibility = 'hidden';
 			}
-	);
+		);
+	} // typeof jQuery.fn.offset=="function"
   }
 }
