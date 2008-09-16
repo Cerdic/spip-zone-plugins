@@ -1,7 +1,7 @@
 <?php
 
 function pucesli_rempl($texte) {
-	return preg_replace('/^-\s*(?!-)/m', '-* ', $texte);
+	return preg_replace('/^-\s*(?![-*#])/m', '-* ', $texte);
 }
 
 function pucesli_pre_typo($texte) {
