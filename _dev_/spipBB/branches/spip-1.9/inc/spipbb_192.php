@@ -429,24 +429,6 @@ function sql_showtable($table, $table_spip = false, $serveur='')
 } } // sql_showtable
 
 #------------------------------------------------------------#
-# calcul_bornes_pagination devient bornes_pagination
-# cf http://article.gmane.org/gmane.comp.web.spip.devel/43020/match=calcul_bornes_pagination
-# voir http://doc.spip.org/@calcul_bornes_pagination
-# de inc/filtres.php spip 192 (sinon on a une inclusion infinie)
-# en fait il devient filtre_bornes_pagination_dist dans inc/filtres en spip 193
-#------------------------------------------------------------#
-if (!function_exists('bornes_pagination')) {
-function bornes_pagination($courante, $nombre, $max = 10) {
-	if($max<=0 OR $max>=$nombre)
-		return array(1, $nombre);
-
-	$premiere = max(1, $courante-floor(($max-1)/2));
-	$derniere = min($nombre, $premiere+$max-2);
-	$premiere = $derniere == $nombre ? $derniere-$max+1 : $premiere;
-	return array($premiere, $derniere);
-} } // bornes_pagination
-
-#------------------------------------------------------------#
 # voir http://doc.spip.org/@sql_in
 #------------------------------------------------------------#
 if (!function_exists('sql_in')) {

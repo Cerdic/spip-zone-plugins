@@ -1,4 +1,9 @@
-﻿2008-07-15  chryjs  <chryjs!@!free!.!fr>
+﻿2008-09-17  chryjs  <chryjs!@!free!.!fr>
+
+ * BUG avec le formulaire de pagination (ancienne compatibilite ascendante mal geree)
+
+ 
+2008-07-15  chryjs  <chryjs!@!free!.!fr>
 
  * 0.5.0.5 Apposition d'un numero de version pour les changements deja apportes
  * correction des inclusions liees au deplacement de recuperer_fonds

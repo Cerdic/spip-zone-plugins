@@ -1,4 +1,8 @@
-﻿2008-07-15  chryjs  <chryjs!@!free!.!fr>
+﻿2008-09-17  chryjs  <chryjs!@!free!.!fr>
+
+ * BUG avec le formulaire de pagination (ancienne compatibilite ascendante mal geree)
+
+2008-07-15  chryjs  <chryjs!@!free!.!fr>
 
  * 0.6.0 Backport des corrections de brunobergot@gmail.com + corrections recentes de la 0.5.1 dev + changement de revision pour version SPIP stable
 
