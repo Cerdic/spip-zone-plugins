@@ -116,8 +116,8 @@ function AccesRestreint_syndic_articles_accessibles_where($primary){
  */
 function AccesRestreint_documents_accessibles_where($primary){
 	return "array('IN','$primary',array('SUBSELECT','id_document','spip_documents_liens',
-	array(array(\"'OR'\",
-		array(\"'OR'\",
+	array(array('OR',
+		array('OR',
 			array('AND','objet=\'rubrique\'',".AccesRestreint_rubriques_accessibles_where('id_objet')."),
 			array('AND','objet=\'article\'',".AccesRestreint_articles_accessibles_where('id_objet').")
 		),
