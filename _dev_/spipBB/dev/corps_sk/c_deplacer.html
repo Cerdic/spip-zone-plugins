@@ -35,7 +35,7 @@
 		<tr class="ligne_sujet">
 			<td>
 		<B_art_secteur>
-			<form method="post" action="#URL_ACTION_AUTEUR{spipbb_agir_forum,#ID_FORUM-deplacer,#ID_ARTICLE|generer_url_article}">
+			<form method="post" action="#URL_ACTION_AUTEUR{spipbb_agir_forum,#ID_FORUM-deplacer,#ID_ARTICLE|generer_url_entite{article}}">
 			<:spipbb:deplacer_dans_dpt:>
 			<select name='nouveau_forum'>
 		<BOUCLE_art_secteur(ARTICLES){id_secteur=#GET{secteur}}{tout}{id_article!=#ID_ARTICLE}>
