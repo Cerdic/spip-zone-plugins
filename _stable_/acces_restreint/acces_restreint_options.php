@@ -1,6 +1,11 @@
 <?php
+/**
+ * Plugin Acces Restreint 3.0 pour Spip 2.0
+ * Licence GPL
+ * 
+ *
+ */
 
-// * Acces restreint, plugin pour SPIP * //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // declarer le pipeline pour le core
@@ -29,12 +34,12 @@ $GLOBALS['marqueur'] .= ":AccesRestreint_zones_autorisees="
 
 if(!function_exists('autoriser_rubrique_voir')) {
 function autoriser_rubrique_voir($faire, $type, $id, $qui, $opt) {
-	include_spip('inc/acces_restreint');
+	include_spip('inc/acces_restreint_autorisations');
 	static $rub_exclues;
 	if (isset($opt['publique']))
 		$publique = $opt['publique'];
 	else
-		$publique = _DIR_RESTREINT!="";
+		$publique = !test_espace_prive();
 	if (!isset($rub_exclues[$publique]) || !is_array($rub_exclues[$publique])) {
 		// Si autoriser est appelee pour un autre auteur que l'auteur connecte  ou si pas d'auteur connecte , on passe $id_auteur en parametre
 		if(isset($GLOBALS['auteur_session']['id_auteur']) && isset($qui['id_auteur']) && $qui['id_auteur']!=$GLOBALS['auteur_session']['id_auteur'])
@@ -55,7 +60,7 @@ function autoriser_article_voir($faire, $type, $id, $qui, $opt) {
 	if (isset($opt['publique']))
 		$publique = $opt['publique'];
 	else
-		$publique = _DIR_RESTREINT!="";
+		$publique = !test_espace_prive();
 	if (!isset($art_exclus[$publique]) || !is_array($art_exclus[$publique])) {
 		// Si autoriser est appelee pour un autre auteur que l'auteur connecte  ou si pas d'auteur connecte , on passe $id_auteur en parametre
 		if(isset($GLOBALS['auteur_session']['id_auteur']) && isset($qui['id_auteur']) && $qui['id_auteur']!=$GLOBALS['auteur_session']['id_auteur'])
@@ -76,7 +81,7 @@ function autoriser_breve_voir($faire, $type, $id, $qui, $opt) {
 	if (isset($opt['publique']))
 		$publique = $opt['publique'];
 	else
-		$publique = _DIR_RESTREINT!="";
+		$publique = !test_espace_prive();
 	if (!isset($breves_exclues[$publique]) || !is_array($breves_exclues[$publique])) {
 		// Si autoriser est appelee pour un autre auteur que l'auteur connecte  ou si pas d'auteur connecte , on passe $id_auteur en parametre
 		if(isset($GLOBALS['auteur_session']['id_auteur']) && isset($qui['id_auteur']) && $qui['id_auteur']!=$GLOBALS['auteur_session']['id_auteur'])
@@ -97,7 +102,7 @@ function autoriser_site_voir($faire, $type, $id, $qui, $opt) {
 	if (isset($opt['publique']))
 		$publique = $opt['publique'];
 	else
-		$publique = _DIR_RESTREINT!="";
+		$publique = !test_espace_prive();
 	if (!isset($sites_exclus[$publique]) || !is_array($sites_exclus[$publique])) {
 		// Si autoriser est appelee pour un autre auteur que l'auteur connecte  ou si pas d'auteur connecte , on passe $id_auteur en parametre
 		if(isset($GLOBALS['auteur_session']['id_auteur']) && isset($qui['id_auteur']) && $qui['id_auteur']!=$GLOBALS['auteur_session']['id_auteur'])
@@ -118,7 +123,7 @@ function autoriser_evenement_voir($faire, $type, $id, $qui, $opt) {
 	if (isset($opt['publique']))
 		$publique = $opt['publique'];
 	else
-		$publique = _DIR_RESTREINT!="";
+		$publique = !test_espace_prive();
 	if (!isset($evenements_exclus[$publique]) || !is_array($evenements_exclus[$publique])) {
 		// Si autoriser est appelee pour un autre auteur que l'auteur connecte  ou si pas d'auteur connecte , on passe $id_auteur en parametre
 		if(isset($GLOBALS['auteur_session']['id_auteur']) && isset($qui['id_auteur']) && $qui['id_auteur']!=$GLOBALS['auteur_session']['id_auteur'])
@@ -139,7 +144,7 @@ function autoriser_document_voir($faire, $type, $id, $qui, $opt) {
 	if (isset($opt['publique']))
 		$publique = $opt['publique'];
 	else
-		$publique = _DIR_RESTREINT!="";
+		$publique = !test_espace_prive();
 	if (!isset($documents_exclus[$publique]) || !is_array($documents_exclus[$publique])) {
 		$documents_exclus[$publique] = AccesRestreint_liste_documents_exclus($publique,$qui['id_auteur']);
 		$documents_exclus[$publique] = array_flip($documents_exclus[$publique]);

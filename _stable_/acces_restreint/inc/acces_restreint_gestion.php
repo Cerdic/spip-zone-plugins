@@ -1,6 +1,11 @@
 <?php
+/**
+ * Plugin Acces Restreint 3.0 pour Spip 2.0
+ * Licence GPL
+ * 
+ *
+ */
 
-// * Acces restreint, plugin pour SPIP * //
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 	include_spip('base/abstract_sql');

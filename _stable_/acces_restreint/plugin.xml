@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	<multi>[fr]Acces Restreint 2.0[es]Acceso restringido 2.0[en]Restricted Access</multi>
+	<multi>[fr]Acces Restreint 3.0[es]Acceso restringido 3.0[en]Restricted Access</multi>
 	</nom>
 	<icon>img_pack/zones-acces-48.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
@@ -11,11 +11,9 @@ _ &#169; 2007 - [fr]Distribu&#233; sous licence GPL
 	[en]Distributed under GPL license
 	</multi>
 	</auteur>
-	<version>0.2</version>
+	<version>0.3</version>
 	<version_base>0.3.0.1</version_base>
-	<etat>
-	stable
-	</etat>
+	<etat>dev</etat>
 	<description>
 	<multi>
 	[fr] Gestion de zones d'acces restreint.
@@ -36,17 +34,34 @@ _ From SPIP 1.9.2, restricted areas can be found in the private area and/or in t
 	</description>
 	<lien>http://www.spip-contrib.net/Acces-restreint-V1</lien> <!-- URI de documentation -->
 	<options>acces_restreint_options.php</options>
-	<fonctions>acces_restreint.php</fonctions>
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
-	<prefix> 
-	AccesRestreint
-	</prefix>
+	<fonctions>acces_restreint_fonctions.php</fonctions>
+	<fonctions>public/acces_restreint.php</fonctions>
 	<install>inc/acces_restreint_install.php</install>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<prefix>AccesRestreint</prefix>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/acces_restreint.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/acces_restreint.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/acces_restreint.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_boucle</nom>
+		<inlcure>public/acces_restreint.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>AccesRestreint_liste_zones_autorisees</nom>
+		<action>liste_zones_autorisees</action>
+		<inclure>inc/acces_restreint.php</inclure>
+	</pipeline>
+	
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
@@ -56,10 +71,6 @@ _ From SPIP 1.9.2, restricted areas can be found in the private area and/or in t
 		<nom>affiche_milieu</nom>
 		<inclure>acces_restreint_pipelines.php</inclure>
 	</pipeline>
-	<pipeline>
-		<nom>AccesRestreint_liste_zones_autorisees</nom>
-		<action>liste_zones_autorisees</action>
-		<inclure>inc/acces_restreint.php</inclure>
-	</pipeline>
-	<necessite id="SPIP" version='[;1.925)' />
+	
+	<necessite id="SPIP" version='[2.0.0 dev;]' />
 </plugin>

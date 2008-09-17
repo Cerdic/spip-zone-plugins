@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2007                                                *
+ *  Copyright (c) 2001-2008                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -27,8 +27,7 @@ function action_autoriser_dist()
 	$arg = intval(_request('arg'));
 
 	if (!autoriser('voir','document',$arg)
-		OR !($res = spip_query("SELECT fichier FROM spip_documents WHERE id_document="._q($arg)))
-		OR !($row = spip_fetch_array($res))
+		OR !($row = sql_fetsel("fichier","spip_documents","id_document=".intval($arg)))
 		OR !($file = $row['fichier'])
 		OR !(file_exists($file))
 		) {
