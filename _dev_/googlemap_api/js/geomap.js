@@ -80,7 +80,7 @@ function agregarMarcador (xmlItem, idmap, minZoom, maxZoom) {
 		icono_categoria.image = (icon != "" ? icon : URLbase + "/gis/img_pack/correxir.png");
 		icono_categoria.shadow = URLbase + "/gis/img_pack/shadow.png";
 		icono_categoria.iconSize = new GSize(20, 34);
-		icono_categoria.shadowSize = new GSize(22, 20);	
+		icono_categoria.shadowSize = new GSize(37, 34);	
 		icono_categoria.iconAnchor = new GPoint(10, 34);
 		icono_categoria.infoWindowAnchor = new GPoint(5, 1);
 			
