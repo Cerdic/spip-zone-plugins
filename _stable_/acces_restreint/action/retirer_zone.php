@@ -6,7 +6,7 @@
  *
  */
 
-function action_retirerzone_dist(){
+function action_retirer_zone_dist(){
 	$securiser_action = charger_fonction('securiser_action','inc');
 	$arg = $securiser_action();
 	
