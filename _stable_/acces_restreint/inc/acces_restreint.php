@@ -50,7 +50,7 @@ function AccesRestreint_liste_contenu_zone_rub_direct($id_zone){
 	// liste des rubriques directement liees a la zone
 	$where = array();
 	if (is_numeric($id_zone))
-		$where[] = "id_zone=".intval($id_zone);
+		$where[] = "z.id_zone=".intval($id_zone);
 	elseif ($id_zone)
 		$where[] = $id_zone;
 	include_spip('base/abstract_sql');
@@ -150,7 +150,7 @@ function AccesRestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL)
 		elseif (!is_null($id_auteur))
 			$where[] = sql_in('zr.id_zone',AccesRestreint_liste_zones_autorisees('',$id_auteur),'NOT');
 
-		$liste_rub_exclues[$publique] = AccesRestreint_liste_contenu_zone_rub($cond);
+		$liste_rub_exclues[$publique] = AccesRestreint_liste_contenu_zone_rub($where);
 		#$liste_rub_exclues[$publique] = array_unique($liste_rub_exclues[$publique]);
 	}
 	return $liste_rub_exclues[$publique];

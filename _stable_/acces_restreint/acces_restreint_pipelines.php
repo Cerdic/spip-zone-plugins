@@ -31,7 +31,6 @@ if (!defined('_DIR_PLUGIN_ACCESRESTREINT')){ // definie automatiquement en 1.9.2
 
 	function AccesRestreint_affiche_milieu($flux){
 		switch($flux['args']['exec']) {
-			case 'auteurs_edit':
 			case 'auteur_infos':
 				$id_auteur = $flux['args']['id_auteur'];
 				

@@ -1,4 +1,4 @@
-[(#INCLURE{fond=fond/liste_zone_auteurs}{id_auteur}{editable}{ajax})]
+[(#INCLURE{fond=prive/listes/zone_auteurs}{id_auteur}{editable}{ajax})]
 <div class="formulaire_spip formulaire_editer formulaire_editer_affecter_zones formulaire_editer_affecter_zones-#ENV{id_auteur}">
 	<!-- <br class='bugajaxie' /> -->
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -14,7 +14,6 @@
 		<label for="zone"><:accesrestreint:titre_ajouter_zone:></label>[
 		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{zone})</span>
 		](#INCLURE{fond=formulaires/inc-select_zones}{name=zone}{id=zone}{id_auteur})
-		<a href=''><:accesrestreint:info_ajouter_zones:></a>
 	    </li>
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
