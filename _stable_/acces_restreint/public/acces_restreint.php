@@ -73,8 +73,8 @@ function AccesRestreint_pre_boucle(&$boucle){
  * @param string $primary
  * @return string
  */
-function AccesRestreint_rubriques_accessibles_where($primary){
-	return "sql_in('$primary', AccesRestreint_liste_rubriques_exclues(test_espace_prive()), 'NOT')";
+function AccesRestreint_rubriques_accessibles_where($primary,$not='NOT'){
+	return "sql_in('$primary', AccesRestreint_liste_rubriques_exclues(test_espace_prive()), '$not')";
 }
 
 /**
@@ -84,7 +84,9 @@ function AccesRestreint_rubriques_accessibles_where($primary){
  * @return string
  */
 function AccesRestreint_articles_accessibles_where($primary){
-	return "array('IN','$primary',array('SUBSELECT','id_article','spip_articles',array(".AccesRestreint_rubriques_accessibles_where('id_rubrique').")))";
+	# hack : on utilise zzz pour eviter que l'optimiseur ne confonde avec un morceau de la requete principale
+	return "array('NOT IN','$primary','('.sql_get_select('zzza.id_article','spip_articles as zzza',".AccesRestreint_rubriques_accessibles_where('zzza.id_rubrique','').",'','','','',\$connect).')')";
+	#return array('SUBSELECT','id_article','spip_articles',array(".AccesRestreint_rubriques_accessibles_where('id_rubrique').")))";
 }
 
 /**
@@ -94,7 +96,9 @@ function AccesRestreint_articles_accessibles_where($primary){
  * @return string
  */
 function AccesRestreint_breves_accessibles_where($primary){
-	return "array('IN','$primary',array('SUBSELECT','id_breve','spip_breves',array(".AccesRestreint_rubriques_accessibles_where('id_rubrique').")))";
+	# hack : on utilise zzz pour eviter que l'optimiseur ne confonde avec un morceau de la requete principale
+	return "array('NOT IN','$primary','('.sql_get_select('zzzb.id_breve','spip_breves as zzzb',".AccesRestreint_rubriques_accessibles_where('zzzb.id_rubrique','').",'','','','',\$connect).')')";
+	#return "array('IN','$primary',array('SUBSELECT','id_breve','spip_breves',array(".AccesRestreint_rubriques_accessibles_where('id_rubrique').")))";
 }
 
 /**
@@ -104,7 +108,9 @@ function AccesRestreint_breves_accessibles_where($primary){
  * @return string
  */
 function AccesRestreint_syndic_articles_accessibles_where($primary){
-	return "array('IN','$primary',array('SUBSELECT','id_syndic','spip_syndic',array(".AccesRestreint_rubriques_accessibles_where('id_rubrique').")))";
+	# hack : on utilise zzz pour eviter que l'optimiseur ne confonde avec un morceau de la requete principale
+	return "array('NOT IN','$primary','('.sql_get_select('zzzs.id_syndic','spip_syndic as zzzs',".AccesRestreint_rubriques_accessibles_where('zzzs.id_rubrique','').",'','','','',\$connect).')')";
+	#return "array('IN','$primary',array('SUBSELECT','id_syndic','spip_syndic',array(".AccesRestreint_rubriques_accessibles_where('id_rubrique').")))";
 }
 
 /**
@@ -115,7 +121,17 @@ function AccesRestreint_syndic_articles_accessibles_where($primary){
  * @return string
  */
 function AccesRestreint_documents_accessibles_where($primary){
-	return "array('IN','$primary',array('SUBSELECT','id_document','spip_documents_liens',
+	# hack : on utilise zzz pour eviter que l'optimiseur ne confonde avec un morceau de la requete principale
+	return "array('IN','$primary','('.sql_get_select('zzz.id_document','spip_documents_liens as zzz',
+	array(array('OR',
+		array('OR',
+			array('AND','zzz.objet=\'rubrique\'',".AccesRestreint_rubriques_accessibles_where('zzz.id_objet')."),
+			array('AND','zzz.objet=\'article\'',".AccesRestreint_articles_accessibles_where('zzz.id_objet').")
+		),
+			array('AND','zzz.objet=\'breve\'',".AccesRestreint_breves_accessibles_where('zzz.id_objet').")
+	))"
+	.",'','','','',\$connect).')')";
+	/*return "array('IN','$primary',array('SUBSELECT','id_document','spip_documents_liens',
 	array(array('OR',
 		array('OR',
 			array('AND','objet=\'rubrique\'',".AccesRestreint_rubriques_accessibles_where('id_objet')."),
@@ -123,7 +139,7 @@ function AccesRestreint_documents_accessibles_where($primary){
 		),
 			array('AND','objet=\'breve\'',".AccesRestreint_breves_accessibles_where('id_objet').")
 	))
-	))";
+	))";*/
 }
 
 ?>
