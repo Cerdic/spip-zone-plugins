@@ -28,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_page' => 'Cette page vous permet de g&eacute;rer les zones d\'acc&egrave;s restreint de votre site',
 	'info_retirer_zone' => 'Enlever de la zone',
 	'info_retirer_zones' => 'Enlever de toutes les zones',
+	'info_aucun_acces' => 'Aucun acc&egrave;s autoris&eacute;',
 
 	// P
 	'page_zones_acces' => 'Acc&egrave;s Restreint',

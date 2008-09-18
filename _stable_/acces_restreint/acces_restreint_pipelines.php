@@ -33,15 +33,10 @@ if (!defined('_DIR_PLUGIN_ACCESRESTREINT')){ // definie automatiquement en 1.9.2
 		switch($flux['args']['exec']) {
 			case 'auteurs_edit':
 			case 'auteur_infos':
-				include_spip('inc/acces_restreint_gestion');
 				$id_auteur = $flux['args']['id_auteur'];
-				$nouv_zone = _request('nouv_zone');
-				$supp_zone = _request('supp_zone');
-				// le formulaire qu'on ajoute
-				global $connect_statut;
-				$flux['data'] .= AccesRestreint_formulaire_zones('auteurs', $id_auteur, $nouv_zone, $supp_zone, $connect_statut == '0minirezo', generer_url_ecrire('auteurs_edit',"id_auteur=$id_auteur"));
-				break;
-			default:
+				
+				$flux['data'] .= 
+				recuperer_fond('prive/editer/affectation_zones',array('id_auteur'=>$id_auteur));
 				break;
 		}
 		return $flux;
