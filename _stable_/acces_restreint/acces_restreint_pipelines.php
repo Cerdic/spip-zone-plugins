@@ -36,7 +36,7 @@ if (!defined('_DIR_PLUGIN_ACCESRESTREINT')){ // definie automatiquement en 1.9.2
 				$id_auteur = $flux['args']['id_auteur'];
 				
 				$flux['data'] .= 
-				recuperer_fond('prive/editer/affectation_zones',array('id_auteur'=>$id_auteur));
+				recuperer_fond('prive/editer/affecter_zones',array('id_auteur'=>$id_auteur));
 				break;
 		}
 		return $flux;
