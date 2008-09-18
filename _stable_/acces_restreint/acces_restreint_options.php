@@ -31,6 +31,29 @@ $GLOBALS['marqueur'] .= ":AccesRestreint_zones_autorisees="
 //
 // Autorisations
 //
+/**
+ * Autorisation a affecter les zones a un auteur
+ * si un id_zone passe dans opts, cela concerne plus particulierement le droit d'affecter cette zone
+ *
+ * @param unknown_type $faire
+ * @param unknown_type $qui
+ * @param unknown_type $id
+ * @param unknown_type $qui
+ * @param unknown_type $opts
+ * @return unknown
+ */
+function autoriser_auteur_affecterzones_dist($faire,$quoi,$id,$qui,$opts){
+	if (!autoriser('modifier','auteur',$id)) return false;
+	if ($qui['statut']=='0minirezo' AND !$qui['restreint'])
+		return true;
+	# les non admin ne peuvent pas s'administrer eux meme pour eviter les erreurs
+	if ($id == $qui['id_auteur']) return false;
+	# les non admin ne peuvent affecter que les zones dont ils font partie
+	if ($opts['id_zone']
+	  AND !AccesRestreint_test_appartenance_zone_auteur($opts['id_zone'], $qui['id_auteur']))
+	  return false;
+ return true;
+}
 
 if(!function_exists('autoriser_rubrique_voir')) {
 function autoriser_rubrique_voir($faire, $type, $id, $qui, $opt) {

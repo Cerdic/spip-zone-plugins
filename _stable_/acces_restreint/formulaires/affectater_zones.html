@@ -3,7 +3,7 @@
 	<!-- <br class='bugajaxie' /> -->
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	[(#ENV{editable})
+	[(#ENV{editable}) [
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
@@ -13,13 +13,13 @@
 	    <li class="editer_zone[ (#ENV**{erreurs}|table_valeur{zone}|oui)erreur]">
 		<label for="zone"><:accesrestreint:titre_ajouter_zone:></label>[
 		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{zone})</span>
-		][(#INCLURE{fond=formulaires/inc-select_zones}{name=zone}{id=zone}{id_auteur})]
+		](#INCLURE{fond=formulaires/inc-select_zones}{name=zone}{id=zone}{id_auteur})
 		<a href=''><:accesrestreint:info_ajouter_zones:></a>
 	    </li>
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_ajouter:>' /></p>
-	</div></form>
+	</div></form>]
 	]
 </div>

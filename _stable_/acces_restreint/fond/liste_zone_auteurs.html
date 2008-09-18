@@ -6,7 +6,9 @@
 <ul class='liste_items liste_zones'>
 	<BOUCLE_zones(ZONES){id_auteur ?}{id_rubrique ?}{pagination 15}>
 	<li class='item'>[(#ENV{editable})
+	[(#AUTORISER{affecterzones,auteur,#ID_AUTEUR}|oui)
 	<span class='actions'><a class='ajax' href='#URL_ACTION_AUTEUR{retirerzone,#ID_ZONE|concat{'-auteur-',#ID_AUTEUR},#SELF}'><img src='#EVAL{_DIR_IMG_PACK}croix-rouge.gif' alt='X' /> <:accesrestreint:info_retirer_zone:></a></span>
+	]
 	]
 	<a href="[(#URL_ECRIRE{zones_edit,id_zone=#ID_ZONE}|parametre_url{retour,#SELF})]"><img
 	 src="#CHEMIN{img_pack/restreint-16.png}" alt="" height="16" width="16" /> #TITRE</a>

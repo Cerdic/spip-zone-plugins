@@ -1,6 +1,8 @@
+<B_zones>
 <select[ name='(#ENV{name})'][ id='(#ENV{id})'] size='1'>
 <option value='x'><:accesrestreint:selectionner_une_zone:></option>
-<BOUCLE_zones(ZONES){!id_auteur=#ID_AUTEUR}>
-<option value='#ID_ZONE'>#TITRE</option>
-</BOUCLE_zones>
+<BOUCLE_zones(ZONES){!id_auteur=#ID_AUTEUR}>[
+(#AUTORISER{affecterzones,auteur,#ID_AUTEUR,'',#ARRAY{id_zone,#ID_ZONE}}|oui)<option value='#ID_ZONE'>#TITRE</option>
+]</BOUCLE_zones>
 </select>
+</B_zones>
