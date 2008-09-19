@@ -11,7 +11,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 ]<BOUCLE_site(SYNDICATION) {id_syndic} {unique}>
 [(#REM) Les sites n'ont pas de "lang" a proprement parler ; on se base donc sur la langue de la rubrique qui les contient. Les articles syndiques, eux, ont une "lang". ]
 <BOUCLE_lang(RUBRIQUES){id_rubrique}>[(#SET{lang,#LANG})]</BOUCLE_lang>
-<INCLURE{fond=composants/entete/entete}{page=site}{title=<:site:>}>
+<INCLURE{fond=composants/fond/entete}{page=site}{title=<:site:>}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
 	<div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
     <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}>
@@ -54,5 +54,5 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 		</div>[(#REM) fin cartouche ]
 	</div>[(#REM) fin onglet ]
 </div>[(#REM) fin colonne2 ]
-<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
+<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
 </BOUCLE_site>

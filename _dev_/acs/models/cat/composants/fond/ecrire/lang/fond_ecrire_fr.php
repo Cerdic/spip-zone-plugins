@@ -5,7 +5,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Fond',
 'description' => 'Fond de page. Image ou couleur de fond pour toutes les pages du site.',
-'info' => 'Définit le style général du site et les valeurs par d&eacute;faut des autres composants.',
+'info' => 'Définit l\'entête, le style général du site, le pied de page, et les valeurs par d&eacute;faut des autres composants.',
+'help' => 'Entete contient le composant Module 1, qui contient par défaut les composants Banniere et Bandeau, et Pied contient le composant Module 3, qui contient par défaut le composant Ours.',
+
+'Favicon' => 'Ic&ocirc;ne de signet',
 
 'Color' => 'Fond',
 'Text' => 'Texte',

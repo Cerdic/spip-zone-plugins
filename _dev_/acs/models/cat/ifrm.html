@@ -39,7 +39,7 @@ la page distante est affichée dans le site, en gardant les menus de navigation
 </head>
 
 <body class="page_plan">
-<INCLURE{fond=composants/entete/entete}{env=#ENV}>
+<INCLURE{fond=composants/fond/entete}{env=#ENV}>
 
 [(#REM) Menu de navigation lateral (colonne 1)]
 <div id="colonne1"><div class="spacer"></div>
@@ -57,4 +57,4 @@ la page distante est affichée dans le site, en gardant les menus de navigation
       <iframe src="#IFRM" name="pc" style="width:99%; min-height: 400px; max-height:718px; margin-bottom: 6px" frameborder="0"></iframe>
   </div>
 </div>
-<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>
+<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>

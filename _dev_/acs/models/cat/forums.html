@@ -1,5 +1,5 @@
 #CACHE{7200}
-<INCLURE{fond=composants/entete/entete}{self=#SELF}{env=#ENV}{page=forum}{title=<:acs:forums_meta_page_forums:>}>
+<INCLURE{fond=composants/fond/entete}{self=#SELF}{env=#ENV}{page=forum}{title=<:acs:forums_meta_page_forums:>}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1) ]
   <div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
     <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}>
@@ -13,4 +13,4 @@
     <INCLURE{fond=composants/articles/boucle-plan}{env=#ENV}{mode=forums}>[(#REM) Si composant democratie inactif]
   </div>
 </div>
-<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
+<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]

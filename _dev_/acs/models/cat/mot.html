@@ -9,7 +9,7 @@ Copyright Daniel FAIVRE, 2007-2008
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 ][(#SET{title,<:acs:entete_meta_page_mot:>[ (#TITRE|textebrut|texte_backend)]})][(#SET{mdescription,[(#DESCRIPTIF|couper{150}|textebrut)]})][(#SET{mkeywords,[(#TITRE|textebrut|texte_backend),]<:acs:entete_meta_keywords:>})][(#SET{mrsstitle,[(#TITRE|textebrut|texte_backend)]})][(#SET{mrssurl,[(#URL_PAGE{backend}|parametre_url{id_mot,#ID_MOT})]})]
-<INCLURE{fond=composants/entete/entete}{self=#SELF}{env=#ENV}{page=mot}{title=#GET{title}}{mrobots=all}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}{rsstitle=#GET{rsstitle}}{rssurl=#GET{rssurl}}{mexpires=86400}>
+<INCLURE{fond=composants/fond/entete}{self=#SELF}{env=#ENV}{page=mot}{title=#GET{title}}{mrobots=all}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}{rsstitle=#GET{rsstitle}}{rssurl=#GET{rssurl}}{mexpires=86400}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
 	<div class="mg">
     [(#REM) Colonne 1 - Menu de navigation par rubriques ]
@@ -131,5 +131,5 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
     [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 	</div><!-- fin onglet -->
 </div><!-- fin colonne2 -->
-<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
+<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
 </BOUCLE_mot_principal>

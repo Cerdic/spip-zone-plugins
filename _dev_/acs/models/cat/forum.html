@@ -1,6 +1,6 @@
 #CACHE{3600}
 #HTTP_HEADER{"Cache-Control: max-age=3600, must-revalidate"}
-<INCLURE{fond=composants/entete/entete}{env=#ENV}{page=forum}{title=<:acs:forums_meta_page_forums:>}{mrobots=none}>
+<INCLURE{fond=composants/fond/entete}{env=#ENV}{page=forum}{title=<:acs:forums_meta_page_forums:>}{mrobots=none}>
 
 [(#REM) Menu de navigation laterale (colonne 1)]
 <div id="colonne1"><div class="spacer"></div>
@@ -112,5 +112,5 @@
 </div> <!-- fin div texte -->
 	</div><!-- fin onglet -->
 </div><!-- fin colonne2 -->
-<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
+<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
 

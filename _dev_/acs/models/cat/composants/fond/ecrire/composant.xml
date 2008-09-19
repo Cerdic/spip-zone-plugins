@@ -11,13 +11,18 @@
 
   <param>
     <nom>preview</nom>
-    <valeur>50</valeur>
+    <valeur>250</valeur>
   </param>
   <param>
     <nom>optionnel</nom>
     <valeur>non</valeur>
   </param>
   
+	<variable>
+    <nom>Favicon</nom>
+    <type>img</type>
+		<chemin>img/favicon</chemin>
+  </variable>
   <variable>
     <nom>Color</nom>
     <type>color</type>

@@ -9,7 +9,7 @@ Copyright Daniel FAIVRE, 2007-2008
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 ]
 [(#SET{mdescription,<:acs:entete_meta_page_resume:>[ (#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]})]
-<INCLURE{fond=composants/entete/entete}{page=resume}{title=<:acs:entete_meta_page_resume:>}{mkeywords=#EVAL{'_T("acs:entete_meta_page_resume").","._T("acs:entete_meta_keywords")'}}{mdescription=#GET{mdescription}}{mabstract=<:acs:entete_meta_page_resume:>}>
+<INCLURE{fond=composants/fond/entete}{page=resume}{title=<:acs:entete_meta_page_resume:>}{mkeywords=#EVAL{'_T("acs:entete_meta_page_resume").","._T("acs:entete_meta_keywords")'}}{mdescription=#GET{mdescription}}{mabstract=<:acs:entete_meta_page_resume:>}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
   <div class="mg">[(#REM) Menu de navigation par rubriques ]
     <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=22}>
@@ -32,5 +32,5 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
     <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=26}>
 </div><!-- fin encart -->
 </div>[(#REM) fin colonne3 ]
-<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
+<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
 

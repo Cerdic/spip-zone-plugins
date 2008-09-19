@@ -11,7 +11,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 Affiche un agenda par périodes choisies
 
 ][(#SET{mkeywords,[(#ANNEE)][,(#MOIS)][,(#JOUR)][,(#EVAL{'_T("acs:entete_meta_page_agenda").","._T("acs:entete_meta_keywords")'})]})]
-<INCLURE{fond=composants/entete/entete}{page=agenda}{self=#SELF}{env=#ENV}{title=<:acs:entete_meta_page_agenda:>}{mdescription=<:acs:entete_meta_page_agenda:>}{mkeywords=#GET{mkeywords}}>[(#REM) Entete de la page + titre du site ]
+<INCLURE{fond=composants/fond/entete}{page=agenda}{self=#SELF}{env=#ENV}{title=<:acs:entete_meta_page_agenda:>}{mdescription=<:acs:entete_meta_page_agenda:>}{mkeywords=#GET{mkeywords}}>[(#REM) Entete de la page + titre du site ]
 
 [(#REM) Menu de navigation laterale (colonne 1)]
 <div id="colonne1"><div class="spacer"></div>
@@ -32,4 +32,4 @@ Affiche un agenda par périodes choisies
 </div><!-- fin colonne2 -->
 
 [(#REM) Pied de page ]
-<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>
+<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>

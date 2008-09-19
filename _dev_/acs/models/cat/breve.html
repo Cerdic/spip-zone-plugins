@@ -10,7 +10,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 Page d'une brève.
 
 ]<BOUCLE_breve_principal(BREVES) {id_breve} {lang ?}>
-<INCLURE{fond=composants/entete/entete}{env=#ENV}{page=breve}{title=<:dernieres_breves:>}{mexpires=7*86400}>
+<INCLURE{fond=composants/fond/entete}{env=#ENV}{page=breve}{title=<:dernieres_breves:>}{mexpires=7*86400}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
   <div class="mg">
     [(#REM) Colonne 1 - Menu de navigation par rubriques ]
@@ -82,5 +82,5 @@ Page d'une brève.
     <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=25}>
   </div>[(#REM) fin encart ]
 </div>[(#REM) fin colonne3]
-<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>
+<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>
 </BOUCLE_breve_principal>

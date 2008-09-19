@@ -12,7 +12,7 @@ Page d'acceuil
 Home page
 
 ][(#SET{mdescription,<:acs:entete_meta_page_sommaire:>[ (#NOM_SITE_SPIP|textebrut)][: (#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]})]
-<INCLURE{fond=composants/entete/entete}{self=#SELF}{page=sommaire}{title=<:acs:entete_meta_page_sommaire:>}{mkeywords=<:acs:entete_meta_keywords:>,<:acs:entete_sommaire:>}{mdescription=#GET{mdescription}}>
+<INCLURE{fond=composants/fond/entete}{self=#SELF}{page=sommaire}{title=<:acs:entete_meta_page_sommaire:>}{mkeywords=<:acs:entete_meta_keywords:>,<:acs:entete_sommaire:>}{mdescription=#GET{mdescription}}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
   <div class="mg">[(#REM) Colonne 1 avec menu de navigation par rubriques ]
     <INCLURE{fond=composants/module/module}{self=#SELF}{env=#ENV}{nic=21}>
@@ -35,4 +35,4 @@ Home page
   </div>[(#REM) fin encart ]
 </div>[(#REM) Fin colonne3]
 [(#REM) Pied de page ]
-<INCLURE{fond=composants/pied/pied}{self=#SELF}>
+<INCLURE{fond=composants/fond/pied}{self=#SELF}>

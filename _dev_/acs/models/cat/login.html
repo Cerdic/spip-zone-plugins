@@ -12,7 +12,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 ]
 #CACHE{24 * 3600}
 #HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
-  <INCLURE{fond=composants/entete/entete}{env=#ENV}{page=login}{title=<:login_access_prive:>}>
+  <INCLURE{fond=composants/fond/entete}{env=#ENV}{page=login}{title=<:login_access_prive:>}>
 
 	[(#REM) Menu de navigation laterale (colonne 1)]
 	<div id="colonne1"><div class="spacer"></div>
@@ -48,5 +48,5 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
     <br />
   </div><!-- fin onglet -->
 </div><!-- fin colonne2 -->
-<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
+<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
 

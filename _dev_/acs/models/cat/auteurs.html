@@ -9,7 +9,7 @@
 Copyright Daniel FAIVRE, 2007-2008
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 ][(#SET{title,<:acs:entete_meta_page_auteurs:>[ (#NOM_SITE_SPIP|textebrut)]})]
-<INCLURE{fond=composants/entete/entete}{env=#ENV}{page=plan}{title=#GET{title}}{mrobots=none}{mexpires=86400}>
+<INCLURE{fond=composants/fond/entete}{env=#ENV}{page=plan}{title=#GET{title}}{mrobots=none}{mexpires=86400}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
 	<div class="mg">
 		[(#REM) Colonne 1 - Menu de navigation par rubriques ]
@@ -34,4 +34,4 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 	</div><!-- fin onglet -->
 </div><!-- fin colonne2 -->
 [(#REM) Pied de page ]
-<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>
+<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>

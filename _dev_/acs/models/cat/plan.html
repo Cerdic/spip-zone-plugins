@@ -9,7 +9,7 @@ Copyright Daniel FAIVRE, 2007-2008
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 ][(#SET{mkeywords,#EVAL{'_T("acs:entete_meta_page_plan").","._T("acs:entete_meta_keywords")'}})]
-<INCLURE{fond=composants/entete/entete}{page=plan}{env=#ENV}{title=<:acs:entete_meta_page_plan:>}{mdescription=<:acs:entete_meta_page_plan:>}{mkeywords=#GET{mkeywords}}{mabstract=<:acs:entete_meta_page_plan:>}{mexpires=7200}{msubject=<:acs:entete_meta_page_plan:>}>
+<INCLURE{fond=composants/fond/entete}{page=plan}{env=#ENV}{title=<:acs:entete_meta_page_plan:>}{mdescription=<:acs:entete_meta_page_plan:>}{mkeywords=#GET{mkeywords}}{mabstract=<:acs:entete_meta_page_plan:>}{mexpires=7200}{msubject=<:acs:entete_meta_page_plan:>}>
 
 [(#REM) Menu de navigation laterale (colonne 1) ]
 <div id="colonne1"><div class="spacer"></div>
@@ -27,5 +27,5 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
     <INCLURE{fond=composants/articles/boucle-plan}{lang ?}{env=#ENV}>
 	</div>
 </div>
-<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
+<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
 
