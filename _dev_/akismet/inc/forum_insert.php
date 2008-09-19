@@ -28,7 +28,7 @@ function inc_forum_insert() {
 		$akismet->setCommentAuthorURL($_POST['url_site']);
 		$akismet->setCommentContent($_POST['texte']);
 		$akismet->setCommentType('comment');
-		$akismet->setCommentPermalink('http://' . $GLOBALS['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+		$akismet->setPermalink('http://' . $GLOBALS['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 		if ($akismet->isCommentSpam()) {
 			// sauvegarde le commentaire mais le garde comme spam
 			// (en cas de faux positif)
