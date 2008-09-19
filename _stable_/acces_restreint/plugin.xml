@@ -61,10 +61,9 @@ _ From SPIP 1.9.2, restricted areas can be found in the private area and/or in t
 		<action>liste_zones_autorisees</action>
 		<inclure>inc/acces_restreint.php</inclure>
 	</pipeline>
-	
+
 	<pipeline>
 		<nom>ajouter_boutons</nom>
-		<action>ajouterBoutons</action>
 		<inclure>acces_restreint_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
@@ -72,5 +71,9 @@ _ From SPIP 1.9.2, restricted areas can be found in the private area and/or in t
 		<inclure>acces_restreint_pipelines.php</inclure>
 	</pipeline>
 	
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/acces_restreint_autoriser.php</inclure>
+	</pipeline>
 	<necessite id="SPIP" version='[2.0.0 dev;]' />
 </plugin>

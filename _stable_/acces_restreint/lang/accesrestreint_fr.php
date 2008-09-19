@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_retirer_zone' => 'Enlever de la zone',
 	'info_retirer_zones' => 'Enlever de toutes les zones',
 	'info_aucun_acces' => 'Aucun acc&egrave;s autoris&eacute;',
+	'info_aucune_zone' => 'Aucune zone',
 
 	// P
 	'page_zones_acces' => 'Acc&egrave;s Restreint',

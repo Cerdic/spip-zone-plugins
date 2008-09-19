@@ -1,6 +1,10 @@
 <?php
-
-// * Acces restreint, plugin pour SPIP * //
+/**
+ * Plugin Acces Restreint 3.0 pour Spip 2.0
+ * Licence GPL
+ * 
+ *
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -45,7 +49,7 @@ function exec_acces_restreint_config(){
 
 	if (!autoriser('webmestre')) {
 		include_spip('inc/minipres');
-		minipres();
+		echo minipres();
 		exit;
 	}
 
@@ -57,12 +61,11 @@ function exec_acces_restreint_config(){
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_config'), "configuration", "configuration");
 
-	echo "<br /><br /><br />";
-	gros_titre(_T('titre_config_fonctions'));
+	echo gros_titre(_T('titre_config_fonctions'),'',false);
 
-	echo debut_gauche();
+	echo debut_gauche('',true);
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'acces_restreint_config'),'data'=>''));
-	creer_colonne_droite();
+	echo creer_colonne_droite('',true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'acces_restreint_config'),'data'=>''));
 
 
@@ -71,12 +74,12 @@ function exec_acces_restreint_config(){
 	echo bloc_des_raccourcis($res);
 
 
-	echo debut_droite();
+	echo debut_droite('',true);
 	lire_metas();
 
 	$action = generer_url_ecrire('acces_restreint_config');
 
-        echo "<form action='$action' method='post'><div>", form_hidden($action);
+	echo "<form action='$action' method='post'><div>", form_hidden($action);
 	echo "<input type='hidden' name='changer_config' value='oui' />";
 
 
@@ -97,7 +100,7 @@ function AccesRestreint_htaccess_config() {
 
 	global $spip_lang_right;
 
-	echo debut_cadre_trait_couleur("cadenas-24.gif", false, "", 
+	echo debut_cadre_trait_couleur("cadenas-24.gif", true, "", 
 			  _L("Acc&egrave;s aux document joints par leur URL"));
 	include_spip('inc/acces');
 	$creer_htaccess = gerer_htaccess();
@@ -114,7 +117,7 @@ function AccesRestreint_htaccess_config() {
 	echo "</div>";
 	echo "<div style='text-align:$spip_lang_right'><input type='submit'  value='"._T('bouton_valider')."' class='fondo' /></div>";
 	
-	echo fin_cadre_trait_couleur();
+	echo fin_cadre_trait_couleur(true);
 
 	echo "<br />";
 }
@@ -125,7 +128,7 @@ function AccesRestreint_htpasswd_config() {
 	include_spip('inc/acces');
 	ecrire_acces();
 
-	echo debut_cadre_trait_couleur("cadenas-24.gif", false, "",
+	echo debut_cadre_trait_couleur("cadenas-24.gif", true, "",
 		_T('info_fichiers_authent'));
 
 	$creer_htpasswd = $GLOBALS['meta']["creer_htpasswd"];
@@ -140,7 +143,7 @@ function AccesRestreint_htpasswd_config() {
 	echo "</div>";
 	echo "<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>";
 	
-	echo fin_cadre_trait_couleur();
+	echo fin_cadre_trait_couleur(true);
 }
 
 ?>
