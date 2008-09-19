@@ -3,10 +3,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-## generer_url_article disparait avec 
-## http://trac.rezo.net/trac/spip/changeset/12429#file31
-include_spip('inc/vieilles_defs');
-
 // Initialise les reglages sous forme de tableau
 function Notifications_go($x) {
 	if (!is_array($GLOBALS['notifications']
@@ -58,20 +54,23 @@ function notifier_publication_auteurs_article($id_article) {
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 	$suivi_edito = $GLOBALS['meta']["suivi_edito"];
 	
-	if ($suivi_edito == "oui" AND $GLOBALS['notifications']['prevenir_auteurs_articles']) {
+	if ($GLOBALS['notifications']['prevenir_auteurs_articles']) {
 		$row = sql_fetsel("*", "spip_articles", "id_article = $id_article");
 		if ($row) {
 
 			$l = lang_select($row['lang']);
 
 			// URL de l'article
-			charger_generer_url(false);
-			$url = url_absolue(_DIR_RACINE.generer_url_article($id_article, '','', 'publie'));
+			if (function_exists('generer_url_entite')) {
+				$url = url_absolue(generer_url_entite($id_article, 'article'));
+			} else {
+				charger_generer_url(false);
+				$url = url_absolue(suivre_lien(_DIR_RACINE,generer_url_article($id_article, '','', 'publie')));
+			}
 
 			$titre = nettoyer_titre_email($row['titre']);
 
 			$sujet = _T('info_publie_1', array('nom_site_spip' => $nom_site_spip, 'titre' => $titre));
-			$sujet = _T('info_publie_1', array('nom_site_spip' => $debut_sujet, 'titre' => $titre));
 			$courr = _T('info_publie_2')."\n\n";
 
 			$nom = $GLOBALS['visiteur_session']['nom'];
@@ -193,7 +192,12 @@ function Notifications_spip_signatures($x) {
 		$a = spip_fetch_array(spip_query("SELECT titre,lang FROM spip_articles WHERE id_article="._q($t['id_article'])));
 		lang_select($a['lang']);
 
-		$url = generer_url_article($t['id_article']);
+		if (function_exists('generer_url_entite')) {
+			$url = url_absolue(generer_url_entite($t['id_article'], 'article'));
+		} else {
+			charger_generer_url(false);
+			$url = url_absolue(suivre_lien(_DIR_RACINE,generer_url_article($t['id_article'], '','', 'publie')));
+		}
 
 
 		// creer la cle de suppression de la signature
