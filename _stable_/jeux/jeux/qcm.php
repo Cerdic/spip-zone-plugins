@@ -293,7 +293,7 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 		}
 	} // jeux_config('solution')
 
-	$codeHTML.='<br />';
+	$codeHTML.='<br /></div>';
      
   } // fin du cas avec correction
   return $codeHTML;
