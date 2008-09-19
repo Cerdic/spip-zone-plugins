@@ -1,6 +1,6 @@
 #CACHE{7200}
 <BOUCLE_rubrique_principal(RUBRIQUES) {id_rubrique}{tout}>
-<INCLURE{fond=composants/entete/entete}{env=#ENV}{page=rubrique}{title=#TITRE|textebrut}>
+<INCLURE{fond=composants/fond/entete}{env=#ENV}{page=rubrique}{title=#TITRE|textebrut}>
 
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation laterale (colonne 1)]
   <div class="mg">[(#REM) Menu de navigation par rubriques ]
@@ -63,5 +63,5 @@
 </div>[(#REM) fin colonne 3]
 
 [(#REM) Pied de page ]
-<INCLURE{fond=composants/pied/pied}{self=#SELF}{env=#ENV}>
+<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>
 </BOUCLE_rubrique_principal>
