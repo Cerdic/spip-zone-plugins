@@ -11,7 +11,8 @@
 </head>
 <body id='filforum'>
 
-<INCLURE{fond=corps_sk/c_article}{id_article}>
+[(#REM) c: 19/9/8 c_article ayant une PAGINATION il faut absolument lui passer SELF]
+<INCLURE{fond=corps_sk/c_article}{id_article}{self=#SELF}>
 
 </body>
 </html>

@@ -11,7 +11,8 @@
 </head>
 <body id='derniers_messages'>
 
-<INCLURE{fond=corps_sk/c_derniers_messages}{id_rubrique}>
+[(#REM) c: 19/9/8 c_derniers_messages ayant une PAGINATION il faut absolument lui passer SELF]
+<INCLURE{fond=corps_sk/c_derniers_messages}{id_rubrique}{self=#SELF}>
 
 </body>
 </html>

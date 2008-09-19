@@ -12,7 +12,8 @@
 </head>
 <body id='voirsujet'>
 
-<INCLURE{fond=corps_sk/c_voirsujet}{id_rubrique}{id_forum}>
+[(#REM) c: 19/9/8 c_voirsujet ayant une PAGINATION il faut absolument lui passer  {env} et pourquoi pas ajax]
+<INCLURE{fond=corps_sk/c_voirsujet}{id_rubrique}{id_forum}{env}{ajax}>
 
 </body>
 </html>

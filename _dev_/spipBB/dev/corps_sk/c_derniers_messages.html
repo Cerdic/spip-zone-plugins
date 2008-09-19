@@ -28,7 +28,7 @@
 			<th colspan="4"><:spipbb:messages_derniers:></th>
 		</tr>
 
-		<BOUCLE_forums_liens(FORUMS){plat}{!par date}{age<15}{doublons}{pagination 20}>
+		<BOUCLE_forums_liens(FORUMS){plat}{!par date}{age<15}{doublons}{pagination #CONFIG{spipbb/fixlimit}}>
 			#SET{clos,0}
 			<BOUCLE_fo(FORUMS){id_thread}>
 				[(#REM) pas utilise par spipbb mais propose ]

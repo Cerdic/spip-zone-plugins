@@ -38,7 +38,7 @@
 			</tr>
 
 		[(#REM) h.17/02/07 {statut IN ... } pour palier a d eventuels nouv. statut auteur --plugins ]
-		<BOUCLE_auteur_principal(AUTEURS){tout}{par #GET{tri}}#GET{inverse}{statut IN 0minirezo,1comite,6forum}{pagination 30}>
+		<BOUCLE_auteur_principal(AUTEURS){tout}{par #GET{tri}}#GET{inverse}{statut IN 0minirezo,1comite,6forum}{pagination #CONFIG{spipbb/fixlimit}}>
 
 			[(#REM) c.25/11/07 On doit explicitement demander a ne pas paraitre dans l'annuaire]
 			[(#REM) h.01/12/07 .. euh ... justement l'inverse ! a cause de plugins comme spip-liste ! ]

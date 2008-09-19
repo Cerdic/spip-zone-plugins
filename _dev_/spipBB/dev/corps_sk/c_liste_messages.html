@@ -29,7 +29,7 @@
 		<BOUCLE_a(FORUMS){doublons messages}{plat}{id_article} /> 
 		</BOUCLE_s>
 
-		<BOUCLE_liste_mess(FORUMS){id_auteur}{!doublons messages}{plat}{!par date}{pagination}>
+		<BOUCLE_liste_mess(FORUMS){id_auteur}{!doublons messages}{plat}{!par date}{pagination #CONFIG{spipbb/fixlimit}}>
 
 		<tr class="inter entete_sujet">
 			<td id="forum#ID_FORUM" colspan="2">

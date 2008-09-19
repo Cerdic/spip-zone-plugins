@@ -1,4 +1,9 @@
-﻿2008-09-17  chryjs  <chryjs!@!free!.!fr>
+﻿2008-09-19  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.5.1.2 Correction des problèmes de pagination (transport des variables dans les squelettes inclus)
+
+ 
+2008-09-17  chryjs  <chryjs!@!free!.!fr>
 
  * BUG avec le formulaire de pagination (ancienne compatibilite ascendante mal geree)
 
