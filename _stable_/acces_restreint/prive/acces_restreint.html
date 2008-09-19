@@ -1,4 +1,10 @@
-#SET{self,#SELF|parametre_url{debut_zones|tri,''}}
+[(#REM)
+/**
+ * Plugin Acces Restreint 3.0 pour Spip 2.0
+ * Licence GPL (c) 2006-2008 Cedric Morin
+ *
+ */
+]#SET{self,#SELF|parametre_url{debut_zones|tri,''}}
 <B_zones><p class='pagination'>[(#PAGINATION) | ]<a href='[(#GET{self}|parametre_url{tri,titre})]'><:par_titre:></a> 
 [(#ENV{publique}|non)| <a href='[(#GET{self}|parametre_url{publique,oui})]'><:accesrestreint:publique:></a>]
 [(#ENV{publique}|ou{#ENV{privee}}|oui)| <a href='[(#GET{self}|parametre_url{publique|privee,''})]'><:accesrestreint:toutes:></a>]

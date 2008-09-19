@@ -3,14 +3,8 @@
 	<multi>[fr]Acces Restreint 3.0[es]Acceso restringido 3.0[en]Restricted Access</multi>
 	</nom>
 	<icon>img_pack/zones-acces-48.png</icon>
-	<auteur>	<!-- Auteur du plugin -->
- 	cedric.morin@yterium.com
-	<multi>
-_ &#169; 2007 - [fr]Distribu&#233; sous licence GPL
-	[es]Distribuido bajo licencia GPL 
-	[en]Distributed under GPL license
-	</multi>
-	</auteur>
+	<auteur>[cedric.morin@yterium.com->http://www.yterium.net]</auteur>
+	<licence>GPL &#169; 2007-2008</licence>
 	<version>0.3</version>
 	<version_base>0.3.0.1</version_base>
 	<etat>dev</etat>
@@ -20,7 +14,6 @@ _ &#169; 2007 - [fr]Distribu&#233; sous licence GPL
 _ Chaque zone contient des rubriques.
 _ Les auteurs peuvent etre associes a des zones pour avoir le droit d'y acceder.
 _ Toutes les boucles natives de SPIP sont surchargees pour en filtrer les resultats en fonction des droits du visiteur.
-_ A partir de SPIP 1.92, les zones peuvent concerner l'espace public et/ou l'espace priv&eacute; de SPIP.
 	[es] Gesti&oacute;n de zonas de acceso restringido.
 _ Cada zona contiene secciones.
 _ Los autores podr&aacute;n ser asociados a ciertas zonas restringidas para tener derechos de acceso a ellas.
@@ -29,7 +22,6 @@ _ Todos los bucles nativos de SPIP quedan modificados para filtrar los resultado
 _ Each area contains sections.
 _ Authors can be associated with these areas to gain access to them.
 _ All SPIP's loops are loaded with the necessary tools to filter the results according to the visitors' access priviliges.
-_ From SPIP 1.9.2, restricted areas can be found in the private area and/or in the public site.
 	</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Acces-restreint-V1</lien> <!-- URI de documentation -->

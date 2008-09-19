@@ -1,11 +1,9 @@
 <?php
 /**
  * Plugin Acces Restreint 3.0 pour Spip 2.0
- * Licence GPL
- * 
+ * Licence GPL (c) 2006-2008 Cedric Morin
  *
  */
-
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 	include_spip('base/abstract_sql');
