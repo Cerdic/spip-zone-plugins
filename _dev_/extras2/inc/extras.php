@@ -40,7 +40,7 @@ function extras_champs_anormaux() {
 	// chercher ce qui est different
 	$ntables = array();
 	$nchamps = array();
-	foreach ($tout['connect'] as $table => $champs) {
+	foreach ($tout[_FILE_CONNECT_INS] as $table => $champs) {
 		if (!isset($tables_spip[$table]['field']))
 			$nchamps[$table] = $champs;
 		else foreach($champs as $champ => $desc)
@@ -48,9 +48,9 @@ function extras_champs_anormaux() {
 				$nchamps[$table][$champ] = $desc;
 	}
 
-	unset($tout['connect']);
+	unset($tout[_FILE_CONNECT_INS]);
 	if($nchamps)
-		$tout['connect'] = $nchamps;
+		$tout[_FILE_CONNECT_INS] = $nchamps;
 
 	return $tout;
 }
