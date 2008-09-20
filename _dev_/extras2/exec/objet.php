@@ -6,7 +6,7 @@ function exec_objet_dist() {
 
 	// la connexion
 	if (!$connect = _request('connect'))
-		$connect = 'connect';
+		$connect = _FILE_CONNECT_INS;
 
 	// l'objet
 	$table = _request('table');
@@ -139,11 +139,11 @@ function exec_objet_dist() {
 	}
 	else {
 		// ici une liste d'objets
-		$s = sql_query("SELECT $id_primary,"
-			.join(', ', $champs)." FROM $table LIMIT 0,50", $connect);
-		if (sql_count($s)) {
+		$c = array_merge(array($id_primary),$champs);
+		$s = sql_allfetsel($c, $table,'','','','0,50','',$connect);
+		if ($s) {
 			echo "<ul>\n";
-			while ($t = sql_fetch($s)) {
+			foreach ($s as $t) {
 				$url = parametre_url(self(), 'id', $t[$id_primary]);
 				echo "<li><a href='".$url."'>".$t[$id_primary]."</a> ";
 				foreach ($champs as $champ)
