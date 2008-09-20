@@ -3,6 +3,7 @@
 Maïeul Rouquette Licence GPL 3
 Spip-Bible
 */
+include_spip('inc/bible_tableau');
 function traduire_abreviation($abrev,$lang_original,$lang_traduction){
 	$tableau_gateway = bible_tableau("gateway");
 	$livre = eregi_replace('[0-9|,|-]+$','',$abrev);
@@ -80,9 +81,6 @@ function bible_install($action){
 			
 	}
 }
-
-include_spip('inc/bible_tableau');
-
 
 function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$ref='non'){
 	$verset_debut = '';
