@@ -328,7 +328,7 @@ function exec_spipbb_sujet() {
 		echo "<div align='right' class='arial2'>\n";
 		// passer post en 'off'
 		if ($connect_toutes_rubriques OR acces_restreint_rubrique($id_rubrique)) {
-			echo boutons_controle_forum($id_post, $statut_post, $id_auteur, "id_article=$id_post", $ip_post);
+			echo boutons_controle_forum($id_post, $statut_post, $id_auteur, "id_article=$id_post", $ip_post,'spipbb_sujet','id_sujet='.$id_sujet);
 		}
 		echo "</div>\n";
 		echo "</td><td valign='bottom'>\n";
