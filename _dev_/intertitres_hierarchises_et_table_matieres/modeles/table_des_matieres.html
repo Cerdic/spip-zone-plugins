@@ -1,7 +1,6 @@
- [
+[
+
 (#REM) Affiche la table des matières de l'article passé en id
 
 
-]<BOUCLE_Article(ARTICLES){id_article=#ENV{id}}>
-	[(#TEXTE|table_des_matieres{tables_seule})]
-</BOUCLE_Article>
+]<BOUCLE_Article(ARTICLES){id_article=#ENV{id}}>[(#TEXTE*|nettoie_des_modeles|propre|table_des_matieres{tables_seule})]</BOUCLE_Article>

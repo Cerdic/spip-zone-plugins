@@ -79,6 +79,10 @@ function extrait_partie ($texte,$ancre,$debut=0,$taille) {
  $extrait = extrait_de_texte ($partie,$debut,$taille);
  return $extrait;
 }
+function nettoie_des_modeles ($texte) {
+$texte=preg_replace("/<(extrait|extrait_partie|renvoi|table_des_matieres)(.*?)>/","",$texte);
+ return $texte;
+}
 
 function table_des_matieres ($texte,$tdm) {
  return IntertitresTdm_table_des_matieres($texte,$tdm);

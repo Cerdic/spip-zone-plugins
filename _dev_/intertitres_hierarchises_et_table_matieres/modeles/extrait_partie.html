@@ -5,11 +5,11 @@
 ]
 <BOUCLE_Article(ARTICLES){id_article=#ENV{id}}>
 	[(#SET{intertitre,
-		[(#TEXTE
+		[(#TEXTE*|nettoie_des_modeles|propre
 			|extrait_un_titre{#ENV{partie}})]
 		})]
 	[(#SET{extrait,
-		[(#TEXTE
+		[(#TEXTE*|nettoie_des_modeles|propre
 			|extrait_partie{#ENV{partie},#ENV{debut,0},#ENV{taille,20}})]
 		})]
 </BOUCLE_Article>
