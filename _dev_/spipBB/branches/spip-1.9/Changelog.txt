@@ -1,4 +1,8 @@
-﻿2008-09-19  chryjs  <chryjs!@!free!.!fr>
+﻿2008-09-21  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.6.1.2 Parametres pour le formulaire de tri
+
+2008-09-19  chryjs  <chryjs!@!free!.!fr>
 
  * 0.6.1.1 Correction des problèmes de pagination (transport des variables dans les squelettes inclus)
 
