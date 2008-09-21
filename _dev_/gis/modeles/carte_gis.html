@@ -1,4 +1,5 @@
 [(#SET{width,#ENV{width,100%}})]
+[(#SET{width,#ENV{width,100%}})]
 [(#SET{height,#ENV{height,400px}})]
 [(#SET{id_article,#ENV{id_article}})]
 <BOUCLE_rub(ARTICLES){id_article=#ENV{id_article}}>
@@ -10,4 +11,5 @@
 [(#INCLURE{fond=inc_public_map}{id_rubrique=#GET{id_rubrique}}{recursive=#ENV{recursive}}{limit=#ENV{limit}}{id_secteur}{id_mot}{id_auteur}
 {recherche}{id_article}{id_groupe}{zoom}{type}{latit}{id_carte_gis}{lonxit}{control}{control_type=#ENV{control_type}})]
 
-<div id="map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],1})]" class="carte_gis" style="[width: (#GET{width});][height:(#GET{height});]"></div>
+<div id="map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],1})]" class="carte_gis"[ (#ENV{style}|?{'',style="[width: (#GET{width});][height:(#GET{height});]"})]></div>
+
