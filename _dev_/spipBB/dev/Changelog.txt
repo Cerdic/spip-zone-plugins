@@ -1,6 +1,8 @@
-﻿2008-09-19  chryjs  <chryjs!@!free!.!fr>
+﻿2008-09-21  chryjs  <chryjs!@!free!.!fr>
 
  * 0.5.1.3 Nouveaux parametres de boutons_controle_forum
+ * 0.5.1.4 Parametres pour le formulaire de tri
+ 
 
 2008-09-19  chryjs  <chryjs!@!free!.!fr>
 

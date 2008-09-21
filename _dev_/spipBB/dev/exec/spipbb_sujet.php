@@ -326,8 +326,18 @@ function exec_spipbb_sujet() {
 
 		echo "</td><td>\n";
 		echo "<div align='right' class='arial2'>\n";
-		// passer post en 'off'
 		if ($connect_toutes_rubriques OR acces_restreint_rubrique($id_rubrique)) {
+			// Déplacer
+			/*
+			echo icone_inline(_T('icone_supprimer_deplacer'), generer_action_auteur('instituer_forum',"$id_post-deplacer", 
+			generer_url_ecrire('spipbb_sujet', 'id_sujet='.$id_sujet, true, true) . "#id$id_forum"),
+			"forum-public-24.gif",
+			"deplacer.gif", 'right', 'non');
+			*/
+			
+			// Diviser
+			
+			// passer post en 'off' == supprimer
 			echo boutons_controle_forum($id_post, $statut_post, $id_auteur, "id_article=$id_post", $ip_post,'spipbb_sujet','id_sujet='.$id_sujet);
 		}
 		echo "</div>\n";

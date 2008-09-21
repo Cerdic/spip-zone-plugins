@@ -54,13 +54,6 @@ function exec_spipbb_admin() {
 	if (!empty($id_salon)) {
 
 		// + prepa info rubrique(salon)
-		/* c: 7/2/8 compatibilite pg_sql
-		$req_srg =	"SELECT id_rubrique, id_parent, titre, descriptif
-					FROM spip_rubriques
-					WHERE id_rubrique=$id_salon";
-		$res_srg = sql_query($req_srg);
-		$row=sql_fetch($res_srg);
-		*/
 		$row = sql_fetsel(array("id_rubrique","id_parent","titre","descriptif"), // rows
 							"spip_rubriques", // from
 							"id_rubrique=$id_salon"); //where
@@ -79,8 +72,6 @@ function exec_spipbb_admin() {
 	else {
 		$titre_salon=_T('spipbb:titre_spipbb');
 	}
-
-
 
 	#
 	# affichage
@@ -158,12 +149,6 @@ function exec_spipbb_admin() {
 		#
 		# les forums de ce salon
 		#
-		/* c: 7/2/8 compatibilite pg_sql
-		$res_af = sql_query("SELECT id_article, titre, descriptif, statut
-							FROM spip_articles
-							WHERE id_rubrique = $id_salon
-							ORDER BY titre");
-							*/
 		$res_af = sql_select(array("id_article","titre","descriptif","statut"), // rows
 							"spip_articles", // from
 							"id_rubrique = $id_salon", // where
@@ -315,12 +300,6 @@ function exec_spipbb_admin() {
 		$wheres = "AND id_article IN ($enum_art)";
 	}
 
-	/* c: 7/2/8 compatibilite pg_sql
-	$req = "SELECT id_forum, id_thread, date_heure, auteur, titre, statut FROM spip_forum
-				WHERE statut IN ('publie', 'off', 'prop') $wheres
-				ORDER BY date_heure DESC LIMIT 0,20";
-	$res = sql_query($req);
-	*/
 	$res = sql_select(array("id_forum","id_thread","date_heure","auteur","titre","statut"), // rows
 						"spip_forum", // from
 						"statut IN ('publie', 'off', 'prop') $wheres", // where

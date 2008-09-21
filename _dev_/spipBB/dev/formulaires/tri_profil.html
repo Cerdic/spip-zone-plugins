@@ -1,6 +1,6 @@
 
 		#SET{tri,#ENV{mode}|=={''}|?{id_auteur,#ENV{mode}}}
-		#SET{inverse,#ENV{ordre}|=={'inverse'}|?{'inverse',''}}
+		#SET{inverse,#ENV{ordre_tri}|=={'inverse'}|?{'inverse',''}}
 
 		#SET{aff_localisation,#CONFIG{'spipbb/affiche_localisation'}}
 		[(#GET{aff_localisation}|=={oui}|?{#SET{colspan,7},#SET{colspan,6}})]
@@ -19,9 +19,9 @@
 						<option value="url_site"[(#ENV{mode}|=={url_site}|?{' selected="selected"',''})]><:spipbb:site_web:></option>
 					</select>
 					&nbsp;&nbsp;<:spipbb:ordre_dpt:>&nbsp;
-					<select name="ordre">
-						<option value="ASC"[(#ENV{ordre}|=={ASC}|?{' selected="selected"',''})]><:spipbb:ordre_croissant:></option>
-						<option value="inverse"[(#ENV{ordre}|=={inverse}|?{' selected="selected"',''})]><:spipbb:ordre_decroissant:></option>
+					<select name="ordre_tri">
+						<option value="ASC"[(#ENV{ordre_tri}|=={ASC}|?{' selected="selected"',''})]><:spipbb:ordre_croissant:></option>
+						<option value="inverse"[(#ENV{ordre_tri}|=={inverse}|?{' selected="selected"',''})]><:spipbb:ordre_decroissant:></option>
 					</select>&nbsp;&nbsp;
 					<input type="submit" name="submit" value="<:spipbb:trier:>" class="spip_bouton" />
 					</form>

@@ -11,7 +11,8 @@
 </head>
 <body id='membres_liste'>
 
-<INCLURE{fond=corps_sk/c_membres_liste}{id_rubrique}>
+[(#REM) c: 21/9/8 c_membres_liste ayant une PAGINATION il faut absolument lui passer {env} et pourquoi pas ajax]
+<INCLURE{fond=corps_sk/c_membres_liste}{id_rubrique}{env}{ajax}>
 
 </body>
 </html>
