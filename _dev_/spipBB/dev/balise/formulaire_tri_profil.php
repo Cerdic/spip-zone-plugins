@@ -34,7 +34,7 @@ function balise_FORMULAIRE_TRI_PROFIL_dyn($id_rubrique) {
 
 	return array("formulaires/tri_profil", 0,
 			array('mode' => _request('mode'),
-				'ordre' => _request('ordre'),
+				'ordre_tri' => _request('ordre_tri'),
 				'id_rubrique' => $id_rubrique,
 				'self' => self()
 			)
