@@ -32,4 +32,10 @@ function AccesRestreint_rubrique_restreinte($id_rubrique){
 		);
 }
 
+function icone_auteur_12($statut){
+	if ($statut=='0minirezo') return _DIR_IMG_PACK . 'admin-12.gif';
+	if ($statut=='1comite') return _DIR_IMG_PACK . 'redac-12.gif';
+	return _DIR_IMG_PACK . 'visit-12.gif';
+}
+
 ?>

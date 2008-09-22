@@ -51,7 +51,7 @@ function AccesRestreint_liste_contenu_zone_rub_direct($id_zone){
 	if (is_numeric($id_zone))
 		$where[] = "z.id_zone=".intval($id_zone);
 	elseif ($id_zone)
-		$where[] = $id_zone;
+		$where = $id_zone;
 	include_spip('base/abstract_sql');
 	$liste_rubriques = sql_allfetsel('id_rubrique','spip_zones_rubriques AS zr INNER JOIN spip_zones AS z ON zr.id_zone=z.id_zone',$where);
 	$liste_rubriques = array_map('reset',$liste_rubriques);
@@ -59,7 +59,6 @@ function AccesRestreint_liste_contenu_zone_rub_direct($id_zone){
 	return $liste_rubriques;
 }
 
-// liste des rubriques contenues dans une zone, directement ou par heritage
 /**
  * liste des rubriques contenues dans une zone, directement ou par heritage.
  *
@@ -69,7 +68,11 @@ function AccesRestreint_liste_contenu_zone_rub_direct($id_zone){
 function AccesRestreint_liste_contenu_zone_rub($id_zone){
 	include_spip('inc/rubriques');
 	$liste_rubriques = AccesRestreint_liste_contenu_zone_rub_direct($id_zone);
+	if (!count($liste_rubriques))
+		return $liste_rubriques;
 	$liste_rubriques = calcul_branche_in(join(',',$liste_rubriques));
+	if (!strlen($liste_rubriques))
+		return array();
 	$liste_rubriques = explode(',',$liste_rubriques);
 	return $liste_rubriques;
 }

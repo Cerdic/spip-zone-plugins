@@ -39,6 +39,7 @@ function zones_edit($id_zone, $new, $config_fonc, $row)
 	echo $commencer_page(intval($id_zone)?_T('accesrestreint:titre_cadre_modifier_zone'):_T('accesrestreint:creer_zone'), "naviguer", "zones", 0);
 
 	echo debut_gauche("",true);
+	echo recuperer_fond("prive/editer/zone_auteurs", $_GET);
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'zones_edit','id_zone'=>$id_zone),'data'=>''));
 	echo creer_colonne_droite("",true);

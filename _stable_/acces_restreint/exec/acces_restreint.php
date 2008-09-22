@@ -19,9 +19,10 @@ function exec_acces_restreint(){
 		exit;
 	}
 
-	echo debut_page(_T('accesrestreint:page_zones_acces'));
+	$commencer_page = charger_fonction('commencer_page','inc');
+	echo $commencer_page(_T('accesrestreint:page_zones_acces'));
 	
-	gros_titre(_T('accesrestreint:titre_zones_acces'));
+	echo gros_titre(_T('accesrestreint:titre_zones_acces'),'',false);
 	echo debut_gauche("acces_restreint",true);
 	
 	echo debut_boite_info(true);

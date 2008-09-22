@@ -74,13 +74,14 @@ function accesrestreint_revision_zone_objets_lies($zones,$ids,$type,$operation =
 		$in = sql_in('id_zone',$zones);
 	}
 	$liste = sql_allfetsel('id_zone','spip_zones',$in);
-	if (!is_array($ids)) $ids = array($ids);
 	foreach($liste as $row){
 		if ($operation=='del'){
 			// on supprime les ids listes
 			sql_delete("spip_zones_{$type}s",array("id_zone=".intval($row['id_zone']),sql_in("id_$type",$ids)));			
 		}
 		else {
+			if (!$ids) $ids = array();
+			elseif (!is_array($ids)) $ids = array($ids);
 			// si c'est une affectation exhaustive, supprimer les existants qui ne sont pas dans ids
 			// si c'est un ajout, ne rien effacer
 			if ($operation=='set')
