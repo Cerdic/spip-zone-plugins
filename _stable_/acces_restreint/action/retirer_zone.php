@@ -13,7 +13,8 @@ function action_retirer_zone_dist(){
 		$id_zone = intval($regs[1]);
 		$type = $regs[2];
 		$id_objet = intval($regs[3]);
-		sql_delete("spip_zones_{$type}s","id_$type=".intval($id_objet).(intval($id_zone)>0?" AND id_zone=".intval($id_zone):""));
+		include_spip('action/editer_zone');
+		accesrestreint_revision_zone_objets_lies($id_zone,$id_objet,$type,'del');
 	}
 }
 

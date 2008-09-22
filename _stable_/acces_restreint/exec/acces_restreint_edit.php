@@ -122,7 +122,7 @@ function exec_acces_restreint_edit(){
 
 
 	// Selecteur d'auteurs sympathique
-	if ($GLOBALS['spip_version_code'] >= 1.9253) {
+	if (version_compare($GLOBALS['spip_version_code'],'2.0.0 dev','>=')) {
 		$editer_auteurs = charger_fonction('editer_auteurs', 'inc');
 		echo $editer_auteurs('zone', $id_zone, $flag_editable=true, _request('cherche_auteur'), _request('ids'));
 	}

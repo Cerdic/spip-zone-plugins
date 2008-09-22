@@ -16,7 +16,7 @@ function formulaires_affecter_zones_charger_dist($id_auteur){
 
 function formulaires_affecter_zones_traiter_dist($id_auteur){
 	/* ajout d'une zone */
-	include_spip('action/affecter_zone');
-	AccesRestreint_affecter_auteur_zones($id_auteur,array(intval(_request('zone'))));
+	include_spip('action/editer_zone');
+	accesrestreint_revision_zone_objets_lies(intval(_request('zone')),$id_auteur,'auteur');
 	return array('editable'=>true,'message'=>'');
 }
