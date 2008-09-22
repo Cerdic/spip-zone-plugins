@@ -2,7 +2,7 @@
 #GEOMAP_INIT
 <script type="text/javascript">
 	//<![CDATA[
-	URLbase = "#URL_SITE_SPIP/";
+	URLbase = "[(#EVAL{_DIR_PLUGIN_GEOMAP}|url_absolue)]";
 	var map;
 	var markerManager;
 	var url_rss = '[(#ENV{georss,''}|parametre_url{zzzzz,'',&})]';

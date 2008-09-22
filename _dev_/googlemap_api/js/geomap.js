@@ -48,7 +48,7 @@ function creaMarcador(point, html, icon, son, idmap) {
 		GEvent.addListener(map,"infowindowopen", function() {
 			if(son){
 				//esta parte del codigo enbebe un obxecto flah na ventana creado con flashobject.js
-				var fo = new FlashObject(URLbase + "/gis/img_pack/musicplayer.swf?autoplay=true&song_url="+son, "player_x", "17", "17", "6", "#FFFFFF");
+				var fo = new FlashObject(URLbaseGis + "/img_pack/musicplayer.swf?autoplay=true&song_url="+son, "player_x", "17", "17", "6", "#FFFFFF");
 				fo.write("player");
 			}
 		});
@@ -77,8 +77,8 @@ function agregarMarcador (xmlItem, idmap, minZoom, maxZoom) {
 		
 		//creamos un icono para o marcador
 		var icono_categoria = new GIcon();
-		icono_categoria.image = (icon != "" ? icon : URLbase + "/gis/img_pack/correxir.png");
-		icono_categoria.shadow = URLbase + "/gis/img_pack/shadow.png";
+		icono_categoria.image = (icon != "" ? icon : URLbase + "/img_pack/correxir.png");
+		icono_categoria.shadow = URLbase + "/img_pack/shadow.png";
 		icono_categoria.iconSize = new GSize(20, 34);
 		icono_categoria.shadowSize = new GSize(37, 34);	
 		icono_categoria.iconAnchor = new GPoint(10, 34);
@@ -108,6 +108,6 @@ function abrirVentana(identificador) {
 	map1.closeInfoWindow();
 	marcadores[identificador].openInfoWindowHtml(contidosHTML[identificador]);
 	//enbebemos o flash player do son
-	var fo = new FlashObject( URLbase + "/img_pack/musicplayer.swf?autoplay=true&song_url=" + URLsons[identificador], "player_x", "17", "17", "6", "#FFFFFF");
+	var fo = new FlashObject( URLbaseGis + "/img_pack/musicplayer.swf?autoplay=true&song_url=" + URLsons[identificador], "player_x", "17", "17", "6", "#FFFFFF");
 	fo.write("player");
 }
