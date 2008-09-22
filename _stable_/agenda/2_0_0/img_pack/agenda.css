@@ -6,6 +6,11 @@
 .liste_items li.item.on {background-color:#F4FFBF;font-weight:normal;}
 .liste_items li.item.on:hover {background-color:#EEFF9F;}
 
+.pagination {background:#eee;border-top:1px solid #ddd;border-bottom:1px solid #ddd; margin: 0;padding:2px 0; font-size: 0.9em; font-weight: bold; text-align: right; white-space: nowrap; }
+.pagination .on { background:#ccc;padding:2px 3px;color:#fff; }
+
+.clicable {cursor:hand;cursor:pointer;}
+
 /* vevent */
 li.item div.vevent h3 {margin:0;font-size:1.1em;}
 li.item div.vevent p {margin:2px 0 0;}
@@ -26,13 +31,10 @@ li.item .repetitions li {display:inline;margin:0;padding:0;}
 
 .evenements p.actions {text-align:right;font-size:0.9em;margin:5px 0 0;}
 
-.clicable {cursor:hand;cursor:pointer;}
 
 /* navigation gauche */
 ul.agenda_navigation, ul.agenda_navigation li, ul.agenda_navigation ul {list-style:none;margin:0;padding:0;}
 ul.agenda_navigation li {border-bottom:1px solid #eee; padding:2px 0;}
-.pagination {background:#eee;border-top:1px solid #ddd;border-bottom:1px solid #ddd; margin: 0;padding:2px 0; font-size: 0.9em; font-weight: bold; text-align: right; white-space: nowrap; }
-.pagination .on { background:#ccc;padding:2px 3px;color:#fff; }
 
 
 /* sur la fiche article */
