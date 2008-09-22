@@ -17,7 +17,7 @@ function AccesRestreint_securise_squelette($letexte){
 
 // filtre de test pour savoir si l'acces a un article est restreint
 function AccesRestreint_article_restreint($id_article){
-	include_spip('inc/acces_restreint_autorisations');
+	include_spip('inc/acces_restreint_autoriser');
 	return
 		@in_array($id_article,
 			AccesRestreint_liste_articles_exclus(_DIR_RESTREINT!="")
@@ -25,7 +25,7 @@ function AccesRestreint_article_restreint($id_article){
 }
 // filtre de test pour savoir si l'acces a une rubrique est restreinte
 function AccesRestreint_rubrique_restreinte($id_rubrique){
-	include_spip('inc/acces_restreint_autorisations');
+	include_spip('inc/acces_restreint_autoriser');
 	return
 		@in_array($id_rubrique,
 			AccesRestreint_liste_rubriques_exclues(_DIR_RESTREINT!="")
