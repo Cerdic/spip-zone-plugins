@@ -46,10 +46,14 @@ function swfupload_SWF_js($flux) {
 $session = session_id();
 
 //$upload_dir = "../".determine_upload();
-$file_size_limit = lire_config('swfupload/file_size_limit');
-$file_types = lire_config('swfupload/file_types');
-$file_upload_limit = lire_config('swfupload/file_upload_limit');
-$debug = lire_config('swfupload/debug');
+
+// si cfg dispo, on charge les valeurs
+if (function_exists(lire_config))  {   
+  $file_size_limit = lire_config('swfupload/file_size_limit');
+  $file_types = lire_config('swfupload/file_types');
+  $file_upload_limit = lire_config('swfupload/file_upload_limit');
+  $debug = lire_config('swfupload/debug');
+}
 
 if (!$file_size_limit || $file_size_limit == '_' || $file_size_limit == '') $file_size_limit = '2048' ;
 if (!$file_types || $file_types == '_' || $file_types == '') $file_types = "*.jpg;*.gif;*.png" ;
