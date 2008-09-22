@@ -24,7 +24,7 @@ function AccesRestreint_upgrade($nom_meta_base_version,$version_cible){
 			include_spip('base/abstract_sql');
 			creer_base();
 			// ajout des champs publique/privee si pas existants
-			$desc = spip_abstract_showtable("spip_zones", '', true);
+			$desc = sql_showtable("spip_zones", true);
 			if (!isset($desc['field']['publique']))
 				sql_alter("TABLE spip_zones ADD publique ENUM('non', 'oui') DEFAULT 'oui' NOT NULL AFTER descriptif");
 			if (!isset($desc['field']['privee']))
@@ -36,7 +36,7 @@ function AccesRestreint_upgrade($nom_meta_base_version,$version_cible){
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			// ajout des champs publique/privee si pas existants
-			$desc = spip_abstract_showtable("spip_zones", '', true);
+			$desc = sql_showtable("spip_zones", true);
 			if (!isset($desc['field']['publique']))
 				sql_alter("TABLE spip_zones ADD publique ENUM('non', 'oui') DEFAULT 'oui' NOT NULL AFTER descriptif");
 			if (!isset($desc['field']['privee']))
