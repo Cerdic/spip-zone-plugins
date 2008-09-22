@@ -50,9 +50,9 @@ jsMath.Easy = {
   //  to add the <DIV> and <SPAN> tags that jsMath needs.  See the
   //  documentation for the tex2math plugin for more information.
   //
-  processSlashParens: 0,       // process \(...\) in text?
-  processSlashBrackets: 0,     // process \[...\] in text?
-  processDoubleDollars: 0,     // process $$...$$ in text?
+  processSlashParens: 1,       // process \(...\) in text?
+  processSlashBrackets: 1,     // process \[...\] in text?
+  processDoubleDollars: 1,     // process $$...$$ in text?
   processSingleDollars: 0,     // process $...$ in text?
   processLaTeXenvironments: 0, // process \begin{xxx}...\end{xxx} outside math mode?
   fixEscapedDollars: 0,        // convert \$ to $ outside of math mode?
@@ -71,6 +71,15 @@ jsMath.Easy = {
   //  '[math]','[/math]',        // to begin and end in-line math
   //  '[display]','[/display]'   // to begin and end display math
   //],
+
+  //
+  //  Disallow the use of the @(...) mechanism for including raw HTML
+  //  in the contents of \hbox{}?  (If used in a content-management system
+  //  where users are allowed to enter mathematics, setting this to 0
+  //  would allow them to enter arbitrary HTML code within their
+  //  math formulas, and that poses a security risk.)
+  //
+  safeHBoxes: 1,
 
   //
   //  Show TeX source when mathematics is double-clicked?
@@ -108,7 +117,7 @@ jsMath.Easy = {
   //  Allow jsMath to enter global mode?
   //  (Uses frames, so may not always work with complex web sites)
   //
-  allowGlobal: 0,
+  allowGlobal: 1,
   
   //
   //  Disable image fonts?  (In case you don't load them on your server.)
