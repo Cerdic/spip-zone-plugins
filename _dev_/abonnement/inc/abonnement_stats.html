@@ -253,13 +253,13 @@ $query = spip_query ( "SELECT COUNT(a.id) as n FROM `spip_auteurs_elargis` a WHE
 	</script>
 	
 	
-	<div style="margin:10px">
+	<div style="margin: 20px 50px;">
 	<?php
-	$result = spip_query("select date, MONTH(date) as mois, YEAR(date) as annee from spip_auteurs_elargis_abonnements where validite <> '0000-00-00 00:00:00' group by MONTHNAME(date) order by date desc");
+	$result = spip_query("select date, MONTH(date) as mois, YEAR(date) as annee from spip_auteurs_elargis_abonnements where validite <> '0000-00-00 00:00:00' and date > DATE_ADD(CURRENT_DATE, INTERVAL -365 DAY) group by MONTHNAME(date) order by date desc");
 	
 	while ($row = spip_fetch_array($result)){
 		//var_dump($row);		
-		echo "<a class='date_liste' href='#' rel='".$row['date'] ."'>".$row['mois'] ."/" .$row['annee'] ."</a> | ";
+		echo "<a style='padding:5px;margin:5px;' class='date_liste' href='#' rel='".$row['date'] ."'>".$row['mois'] ."/" .$row['annee'] ."</a> | ";
 	}
 	?>
 	</div>
