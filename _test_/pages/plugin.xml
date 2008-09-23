@@ -1,0 +1,65 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+		Pages
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 		RastaPopoulos - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version> <!-- Version du plugin -->
+		0.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+		test
+	</etat>
+	<description>
+Ce plugin permet de créer des pages d'articles qui ne sont reliées à aucune hiérarchie particulière. En revanche elles peuvent être associées à un nom de squelette.
+
+Cela permet notamment de créer des pages de notice légale, d'à-propos, de contact, etc.
+	</description>
+	<lien>http://www.spip-contrib.net/Plugin-Pages</lien> <!-- URI de documentation -->
+	<prefix> 
+		pages
+	</prefix>
+	<necessite id='SPIP' version='[2.0.0 dev;]' /> 
+	
+	<options>pages_options.php</options>
+	<install>base/pages_installation.php</install>
+	
+	<bouton id='pages_tous' parent='naviguer'>
+		<icone>images/article-24.gif</icone>
+		<titre>Pages uniques</titre>
+	</bouton>
+	
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<action>affiche_milieu_ajouter_page</action>
+		<inclure>pages_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>pages_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>pages_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>pages_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>pre_edition</nom>
+		<action>pre_edition_ajouter_page</action>
+		<inclure>pages_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>affichage_final</nom>
+		<action>hierarchie_page</action>
+		<inclure>pages_pipelines.php</inclure>
+	</pipeline>
+</plugin>
