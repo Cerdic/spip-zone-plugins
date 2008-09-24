@@ -34,7 +34,7 @@ function formulaires_lier_objets_verifier($objet, $source, $id_source, $identifi
 function formulaires_lier_objets_traiter($objet, $source, $id_source, $identifiant){
 	$id_objet = _request('pid_objet');
 	include_spip('action/lier_objets');
-	lier_objets($source,$id_source,$objet,$id_objet);
+	lier_objets($source,$id_source,objet_type($objet),$id_objet);
 	
 	return array(true,''); // permettre d'editer encore le formulaire
 }

@@ -80,7 +80,9 @@ function exec_grappes_dist()
 		$libelles = array(
 			'articles'=>'grappes:info_lier_articles',
 			'auteurs'=>'grappes:info_lier_auteurs',
+			'mots'=>'grappes:info_lier_mots',
 			'rubriques'=>'grappes:info_lier_rubriques',
+			'syndic'=>'grappes:info_lier_sites',
 		);
 		$libelles = pipeline('libelle_association_grappes',$libelles);
 		foreach($tables_liees as $table)
@@ -113,8 +115,9 @@ function exec_grappes_dist()
 		// afficher les objets lies
 		$source='grappe';
 		foreach($tables_liees as $objet){
+			$objet = table_objet($objet);
 			$contexte = array(
-				'titre_bouton'=>_T('grappes:info_lier_'.$objet.'s'),
+				'titre_bouton'=>_T('grappes:info_lier_'.$objet),
 				'objet' => $objet,
 				'source'=>$source,
 				'id_source'=> $id_grappe,

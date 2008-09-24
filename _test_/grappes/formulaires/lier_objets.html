@@ -1,6 +1,6 @@
 <div class="lier_objets ajax" id="#ENV{identifiant}">
 	[(#REM) Les liens actifs ]
-	[(#INCLURE{fond=prive/listes/inc-lister-[(#OBJET|table_objet)]}
+	[(#INCLURE{fond=prive/listes/inc-lister-#OBJET}
 		{env}{ajax}{action=delier})]
 
 	[(#REM) Recherche pour ajouter de nouvelles liaisons ]

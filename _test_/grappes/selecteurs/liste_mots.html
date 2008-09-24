@@ -1,0 +1,28 @@
+#CACHE{0}
+<?xml version="1.0"?>
+[(#REM)
+
+	Menu de selection de rubriques
+
+	La reponse doit etre en xml, elle sera exploitee par iautocompleter.js
+
+]
+<ajaxresponse>
+[(#REM) Chercher les rubriques correspondant a la requete ]
+<BOUCLE_s(MOTS)
+{titre LIKE %(#ENV{value})%}{0,20}{par multi titre}>
+<item>
+	<text><![CDATA[#TYPE ><b>#TITRE</b>]]></text>
+	<value><![CDATA[[(#TITRE|textebrut)]]]></value>
+	<id>#ID_MOT</id>
+
+</item>
+</BOUCLE_s>
+	[(#REM) Vraiment on n'a rien trouve ]
+	<item>
+	<text><![CDATA[<small class='autocomplete-message'><:selecteurgenerique:pas_suggestion:></small>]]></text>
+	<value><![CDATA[[(#ENV*{value}|textebrut)]]]></value>
+	<id>0</id>
+	</item>
+<//B_s>
+</ajaxresponse>

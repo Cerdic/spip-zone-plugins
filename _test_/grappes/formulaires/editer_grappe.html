@@ -26,7 +26,9 @@
 	      <ul><li class="editer_grappes_associer">
 	    	<div class='choix'><input type='checkbox' class='checkbox' name='liaisons&#91;&#93;' value='articles'[(#VAL{articles}|in_any{#ENV{liaisons}})checked='checked'] id='articles' /><label for='articles'><:grappes:item_groupes_association_articles:></label></div>
 	    	<div class='choix'><input type='checkbox' class='checkbox' name='liaisons&#91;&#93;' value='auteurs'[(#VAL{auteurs}|in_any{#ENV{liaisons}})checked='checked'] id='auteurs' /><label for='auteurs'><:grappes:item_groupes_association_auteurs:></label></div>
+	    	<div class='choix'><input type='checkbox' class='checkbox' name='liaisons&#91;&#93;' value='mots'[(#VAL{mots}|in_any{#ENV{liaisons}})checked='checked'] id='mots' /><label for='mots'><:grappes:item_groupes_association_mots:></label></div>
 	    	<div class='choix'><input type='checkbox' class='checkbox' name='liaisons&#91;&#93;' value='rubriques'[(#VAL{rubriques}|in_any{#ENV{liaisons}})checked='checked'] id='rubriques' /><label for='rubriques'><:grappes:item_groupes_association_rubriques:></label></div>
+	    	<div class='choix'><input type='checkbox' class='checkbox' name='liaisons&#91;&#93;' value='syndic'[(#VAL{syndic}|in_any{#ENV{liaisons}})checked='checked'] id='syndic' /><label for='syndic'><:grappes:item_groupes_association_syndic:></label></div>
 	    	<!--choix_liaisons-->
 	      </li>
 	      </ul>
@@ -34,8 +36,8 @@
 
 		<fieldset><h3 class="legend"><:grappes:info_qui_peut_lier:></h3>
 		<ul><li class="editer_grappes_qui">
-	    	<div class='choix'><input type='checkbox' class='checkbox' name='acces&#91;&#93;' value='0minirezo'[ (#VAL{minirezo}|in_any{#ENV{acces}}|oui)checked='checked'] id='acces_minirezo' /><label for='acces_minirezo'><:grappes:bouton_checkbox_qui_administrateurs:></label></div>
-	    	<div class='choix'><input type='checkbox' class='checkbox' name='acces&#91;&#93;' value='1comite'[ (#VAL{comite}|in_any{#ENV{acces}}|oui)checked='checked'] id='acces_comite' /><label for='acces_comite'><:grappes:bouton_checkbox_qui_redacteurs:></label></div>
+	    	<div class='choix'><input type='checkbox' class='checkbox' name='acces&#91;&#93;' value='0minirezo'[ (#VAL{0minirezo}|in_any{#ENV{acces}}|oui)checked='checked'] id='acces_minirezo' /><label for='acces_minirezo'><:grappes:bouton_checkbox_qui_administrateurs:></label></div>
+	    	<div class='choix'><input type='checkbox' class='checkbox' name='acces&#91;&#93;' value='1comite'[ (#VAL{1comite}|in_any{#ENV{acces}}|oui)checked='checked'] id='acces_comite' /><label for='acces_comite'><:grappes:bouton_checkbox_qui_redacteurs:></label></div>
 			<!--choix_acces-->
     		</li>
     		</ul></fieldset>

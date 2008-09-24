@@ -3,20 +3,21 @@
 <B_liste>
 #ANCRE_PAGINATION
 <ul>
-<BOUCLE_liste(ARTICLES)
+<BOUCLE_liste(MOTS)
 	{id_grappe ?}
 	{id_groupe ?}
 	{id_auteur ?}
 	{id_rubrique ?}
+	{id_zone ?}
 	{id_mot ?}
 	{pagination 10}
 	{recherche ?}
 	{tout}
 	>
 <li>#TITRE
-	<span class='action'><a href="#URL_ARTICLE"><:grappes:voir:></a></span>
+	<span class='action'><a href="#URL_MOT"><:grappes:voir:></a></span>
 	[(#GET{editable})
-	<span class='action'><a class="ajax" href="[(#URL_ACTION_AUTEUR{lier_objets,[(#ENV{action})]/[(#ENV{source})]/[(#ENV{id_source})]/[(#ENV{objet})]/#ID_ARTICLE,#SELF})]">[(#VAL{grappes:}|concat{#ENV{action}}|_T)]</a></span>
+	<span class='action'><a class="ajax" href="[(#URL_ACTION_AUTEUR{lier_objets,[(#ENV{action})]/[(#ENV{source})]/[(#ENV{id_source})]/[(#ENV{objet})]/#ID_MOT,#SELF})]">[(#VAL{grappes:}|concat{#ENV{action}}|_T)]</a></span>
 ]</li>
 </BOUCLE_liste>
 <p class="pagination">#PAGINATION</p>
