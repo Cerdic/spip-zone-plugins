@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * Cedric Morin
- * © 2006 - Distribue sous licence GNU/GPL
+ * ï¿½ 2006 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -39,7 +39,7 @@ function snippets_type_de_table($table){
 function boite_snippets($titre,$icone,$table,$id,$contexte="",$retour = ""){
 	include_spip('inc/autoriser');
 	if (!strlen($retour))
-		$retour = _DIR_RESTREINT_ABS . self();
+		$retour = self();
 	$out = "";
 	
 	// verifier les droits
