@@ -63,6 +63,7 @@ function nuage_tri_hasard($a,$b){
 
 function nuage_affiche($nuage,$max_mots = -1){
 	if (!is_array($nuage)) $nuage = unserialize($nuage);
+	if (!is_array($nuage)) return "";
 	$out .= "";
 	foreach($nuage as $cle=>$vals){
 		$a = "<a rel='tag' href='".$vals['url']."' class='nuage".$vals['class'].($vals['expose']?' on':'')."'>";
@@ -76,6 +77,7 @@ function nuage_affiche($nuage,$max_mots = -1){
 }
 function nuage_tri($nuage,$tri = 'poids'){
 	if (!is_array($nuage)) $nuage = unserialize($nuage);
+	if (!is_array($nuage)) return array();
 	if ($tri == 'hasard') {
 		foreach($nuage as $cle=>$vals){
 			$nuage[$cle]['hasard'] = rand();
