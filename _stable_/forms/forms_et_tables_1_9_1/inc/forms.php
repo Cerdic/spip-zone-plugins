@@ -743,10 +743,8 @@
 			$documents_mail = false;
 			if ($row['documents_mail']=='oui'){
 				$result2 = spip_query("SELECT champ FROM spip_forms_champs WHERE id_form="._q($id_form)." AND type='fichier'");
-				spip_log("SELECT champ FROM spip_forms_champs WHERE id_form="._q($id_form)." AND type='fichier'");
 				while ($row2 = spip_fetch_array($result2)) {
 					$result3 = spip_query("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($row2['champ']));
-					spip_log("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($row2['champ']));
 					if ($row3 = spip_fetch_array($result3)) {
 						$documents[] = $row3['valeur'];
 						$documents_mail = true;
