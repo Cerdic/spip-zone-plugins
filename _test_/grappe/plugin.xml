@@ -1,0 +1,45 @@
+<plugin>
+	<nom>Grappes</nom>
+	<auteur>Matthieu Marcillaud</auteur>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<prefix>grappes</prefix>
+	<description>
+	Permet de regrouper des &eacute;l&eacute;ments de SPIP 
+	comme des auteurs, rubriques, articles (lorsque l'interface existe pour)... 
+	dans un m&ecirc;me univers (une grappe)
+	</description>
+	<fonctions>grappes_autorisations.php</fonctions>
+	<install>base/grappes_install.php</install>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/grappes.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/grappes.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/grappes.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>inserer_javascript</action>
+		<inclure>grappes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>inserer_javascript</action>
+		<inclure>grappes_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0;]" />
+	<necessite id="SelecteurGenerique" version="[0.1;]" />
+	<bouton id='grappes' parent="naviguer">
+		<icone>images/grappe-24.gif</icone>
+		<titre>Grappes</titre>
+		<url>grappes</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
+		<args></args>
+	</bouton>
+</plugin>

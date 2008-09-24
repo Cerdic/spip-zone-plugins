@@ -1,0 +1,46 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}
+<?xml version="1.0"?>
+[(#REM)
+
+	Menu de selection d'auteurs
+
+	La reponse doit etre en xml, elle sera exploitee par iautocompleter.js
+
+]
+<ajaxresponse>
+[(#REM) Chercher les auteurs correspondant a la requete ]
+<BOUCLE_s(AUTEURS){tout}
+{nom LIKE (#ENV{value})%}{0,20}{par nom}>
+<item>
+	<text><![CDATA[<b>#NOM</b>[ - (#LOGIN)]]]></text>
+	<value><![CDATA[[(#NOM|textebrut)]]]></value>
+	<id>#ID_AUTEUR</id>
+
+</item>
+</BOUCLE_s>
+	[(#REM) Si aucun, on recherche dans le login]
+	<BOUCLE_s1(AUTEURS){tout}
+	{!id_grappe=#ID_GRAPPE}
+	{!id_article=#ID_ARTICLE}
+	{!id_mot=#ID_MOT}
+	{!id_document=#ID_DOCUMENT}
+	{login LIKE (#ENV{value})%}{0,20}{par nom}>
+	<item>
+	<text><![CDATA[[(#STATUT|icone_statut_auteur) ]<b>#NOM</b>[ - (#BIO|textebrut|couper{20})][ ((#EMAIL))]]]></text>
+	<value><![CDATA[[(#NOM|textebrut)]]]></value>
+	<id>#ID_AUTEUR</id>
+	</item>
+	</BOUCLE_s1>
+
+	[(#REM) Vraiment on n'a rien trouve ]
+	<item>
+	<text><![CDATA[<small class='autocomplete-message'><:selecteurgenerique:pas_suggestion:></small>]]></text>
+	<value><![CDATA[[(#ENV*{value}|textebrut)]]]></value>
+	<id>0</id>
+	</item>
+
+	<//B_s1>
+
+<//B_s>
+</ajaxresponse>

@@ -1,0 +1,16 @@
+[(#SET{identifiant,[(#VAL{lier_[(#SOURCE)]_[(#OBJET)]}|uniqid)]})]
+
+[(#CHEMIN{images/#OBJET-24.gif}|url_absolue|debut_cadre_enfonce{1,'',#TITRE_BOUTON})]
+	[(#SET{fonction_unique,[rechercher_(#GET{identifiant})]})]
+	<script  type="text/javascript"><!--
+		var [(#GET{fonction_unique})] = function() {
+			rechercher_objet(['#'+'(#GET{identifiant})'],'[(#URL_PAGE{selecteurs}
+				|parametre_url{objet,#OBJET,&}
+				|parametre_url{#ID_TABLE_SOURCE,#ID_SOURCE,&})]');
+		}
+		jQuery(document).ready([(#GET{fonction_unique})]);
+		onAjaxLoad(function(){setTimeout([(#GET{fonction_unique})], 200);});
+	// --></script>
+
+	[(#FORMULAIRE_LIER_OBJETS{#OBJET,#SOURCE,#ID_SOURCE,#GET{identifiant}})]
+[(#VAL{1}|fin_cadre_enfonce)]

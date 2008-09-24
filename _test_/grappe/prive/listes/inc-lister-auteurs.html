@@ -1,0 +1,24 @@
+[(#SET{editable,[(#AUTORISER{associer,#ENV{source},#ENV{id_source}})]})]
+
+<B_liste>
+#ANCRE_PAGINATION
+<ul>
+<BOUCLE_liste(AUTEURS)
+	{id_grappe ?}
+	{id_rubrique ?}
+	{id_article ?}
+	{id_zone ?}
+	{id_mot ?}
+	{pagination 10}
+	{recherche ?}
+	{tout}
+	>
+<li>#NOM[ <small>((#LOGIN))</small>]
+	<span class='action'><a href="#URL_AUTEUR"><:grappes:voir:></a></span>
+	[(#GET{editable})
+	<span class='action'><a class="ajax" href="[(#URL_ACTION_AUTEUR{lier_objets,[(#ENV{action})]/[(#ENV{source})]/[(#ENV{id_source})]/[(#ENV{objet})]/#ID_AUTEUR,#SELF})]">[(#VAL{grappes:}|concat{#ENV{action}}|_T)]</a></span>
+]</li>
+</BOUCLE_liste>
+<p class="pagination">#PAGINATION</p>
+</ul>
+</B_liste>
