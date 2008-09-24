@@ -56,10 +56,4 @@ Cela permet notamment de créer des pages de notice légale, d'à-propos, de con
 		<action>pre_edition_ajouter_page</action>
 		<inclure>pages_pipelines.php</inclure>
 	</pipeline>
-	
-	<pipeline>
-		<nom>affichage_final</nom>
-		<action>hierarchie_page</action>
-		<inclure>pages_pipelines.php</inclure>
-	</pipeline>
 </plugin>

@@ -136,18 +136,4 @@ function pages_pre_edition_ajouter_page($flux){
 
 }
 
-
-// Modifier les liens pourris obtenus à cause de id_rubrique=-1
-function pages_hierarchie_page($flux){
-
-	$exec = _request('exec');
-	
-	if ($exec and ($exec == 'articles' or $exec == 'articles_edit')){
-	
-		return str_replace("exec=naviguer&id_rubrique=-1", "exec=naviguer", $flux);
-	
-	}
-
-}
-
 ?>
