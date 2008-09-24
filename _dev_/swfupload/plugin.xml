@@ -4,7 +4,7 @@
 	<version>0.2</version>
 	<etat>dev</etat>
 	<description>Permet de t&eacute;l&eacute;charger des images dans le dossier upload sans acc&egrave;s FTP (ne fonctionne que sous Internet Explorer)
-_ si vous avez cfg: [configuration->index.php?exec=cfg&cfg=swfupload]
+_ si vous avez cfg: [configuration->index.php?exec=cfg&amp;cfg=swfupload]
   </description>
 	<icon>swfupload-24.png</icon>
 	<lien>[->http://www.spip-contrib.net/Un-plugin-SWFUpload]</lien>
