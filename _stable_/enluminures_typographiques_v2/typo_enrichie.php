@@ -189,70 +189,70 @@ function TypoEnluminee_post_propre($texte) {
 
 
 function TypoEnluminee_pre_typo($texte) {
-	if ($GLOBALS['barre_typo_pas_de_fork_typo'] === true)
-		return $texte;
-		
-	// Compatibilite avec les versions de SPIP < 1.9.3
-	// tester_variable('debut_italique', "<i$class_spip>") ne renvoit rien en 1.9.2 ! 
-	// Il en fixe la valeur s'il n'y en a pas deja une
-	// ==> contournement
-	if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) {
-		tester_variable('class_spip', ' class="spip"');
-		global $class_spip;
-	}
-	tester_variable('debut_italique', "<i$class_spip>");
-	tester_variable('fin_italique', '</i>');
+	static $local_barre_typo_pas_de_fausses_puces = null;
+	static $chercher_raccourcis;
+	static $remplacer_raccourcis;
 	global $debut_italique, $fin_italique;
-	
-	
-	// remplace les fausses listes a puce par de vraies
-	// (recherche en debut de lignes - suivi d'un ou plusieurs caracteres blancs, en mode multiligne)
-	// Mettre $GLOBALS['barre_typo_preserve_puces'] = true; dans mes_options.php pour ne pas avoir ce comportement
-	if (!function_exists('lire_config')) {
-		global $barre_typo_pas_de_fausses_puces;
-	} else {
-		if (lire_config('bte/puces','Non') == 'Oui') {
-			$barre_typo_pas_de_fausses_puces = true;
+	if (!isset($GLOBALS['barre_typo_pas_de_fork_typo']) OR $GLOBALS['barre_typo_pas_de_fork_typo'] === true)
+		return $texte;
+
+	if ($local_barre_typo_pas_de_fausses_puces===NULL){
+		// remplace les fausses listes a puce par de vraies
+		// (recherche en debut de lignes - suivi d'un ou plusieurs caracteres blancs, en mode multiligne)
+		// Mettre $GLOBALS['barre_typo_preserve_puces'] = true; dans mes_options.php pour ne pas avoir ce comportement
+		if (!function_exists('lire_config')) {
+			$local_barre_typo_pas_de_fausses_puces = $GLOBALS['barre_typo_pas_de_fausses_puces'];
 		} else {
-			$barre_typo_pas_de_fausses_puces = false;
+			$local_barre_typo_pas_de_fausses_puces = (lire_config('bte/puces','Non') == 'Oui')?true:false;
 		}
+		tester_variable('debut_italique', "<i$class_spip>");
+		tester_variable('fin_italique', '</i>');
+		
+		// Compatibilite avec les versions de SPIP < 1.9.3
+		// tester_variable('debut_italique', "<i$class_spip>") ne renvoit rien en 1.9.2 ! 
+		// Il en fixe la valeur s'il n'y en a pas deja une
+		// ==> contournement
+		if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) {
+			tester_variable('class_spip', ' class="spip"');
+			global $class_spip;
+		}
+
+		$chercher_raccourcis = array(
+			/* 9 */ 	"/(?<![{\d])[{](?![{\d])/S", // Expressions complexes car on n'a pas encore traite les titres ici
+			/* 10 */	"/(?<![}\d])[}](?![}\d])/S", // puisque italique utilisent les memes caracteres en nombre inferieur
+			/* 13 */ 	"/<-->/S",
+			/* 14 */ 	"/-->/S",
+			/* 15 */ 	"/<--/S",
+			/* 16 */ 	"/<==>/S",
+			/* 17 */ 	"/==>/S",
+			/* 18 */ 	"/<==/S",
+			/* 19 */ 	"/\(c\)/Si",
+			/* 20 */ 	"/\(r\)/Si",
+			/* 21 */ 	"/\(tm\)/Si",
+			/* 22 */ 	"/\.\.\./S",
+			/* 23 */	"/\[([^|?][^][]*)\|((?:[^][](?!->))*)\]/S"
+		);
+	
+		$remplacer_raccourcis = array(
+			/* 9 */ 	$debut_italique,
+			/* 10 */	$fin_italique,
+			/* 13 */ 	"&harr;",
+			/* 14 */ 	"&rarr;",
+			/* 15 */ 	"&larr;",
+			/* 16 */ 	"&hArr;",
+			/* 17 */ 	"&rArr;",
+			/* 18 */ 	"&lArr;",
+			/* 19 */ 	"&copy;",
+			/* 20 */ 	"&reg;",
+			/* 21 */ 	"&trade;",
+			/* 22 */ 	"&hellip;",
+			/* 23 */	"@@acro@@$2@@$1@@acro@@"
+		);
 	}
 
-	if ($barre_typo_pas_de_fausses_puces === true) {
+	if ($local_barre_typo_pas_de_fausses_puces === true) {
 		$texte =  preg_replace('/^-\s+/m','-* ',$texte);
 	}
-	
-	$chercher_raccourcis = array(
-		/* 9 */ 	"/(?<![{\d])[{](?![{\d])/S", // Expressions complexes car on n'a pas encore traite les titres ici
-		/* 10 */	"/(?<![}\d])[}](?![}\d])/S", // puisque italique utilisent les memes caracteres en nombre inferieur
-		/* 13 */ 	"/<-->/S",
-		/* 14 */ 	"/-->/S",
-		/* 15 */ 	"/<--/S",
-		/* 16 */ 	"/<==>/S",
-		/* 17 */ 	"/==>/S",
-		/* 18 */ 	"/<==/S",
-		/* 19 */ 	"/\(c\)/Si",
-		/* 20 */ 	"/\(r\)/Si",
-		/* 21 */ 	"/\(tm\)/Si",
-		/* 22 */ 	"/\.\.\./S",
-		/* 23 */	"/\[([^|?][^][]*)\|((?:[^][](?!->))*)\]/S"
-	);
-
-	$remplacer_raccourcis = array(
-		/* 9 */ 	$debut_italique,
-		/* 10 */	$fin_italique,
-		/* 13 */ 	"&harr;",
-		/* 14 */ 	"&rarr;",
-		/* 15 */ 	"&larr;",
-		/* 16 */ 	"&hArr;",
-		/* 17 */ 	"&rArr;",
-		/* 18 */ 	"&lArr;",
-		/* 19 */ 	"&copy;",
-		/* 20 */ 	"&reg;",
-		/* 21 */ 	"&trade;",
-		/* 22 */ 	"&hellip;",
-		/* 23 */	"@@acro@@$2@@$1@@acro@@"
-	);
 
 	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
 	
@@ -261,39 +261,43 @@ function TypoEnluminee_pre_typo($texte) {
 		Il ne faut pas traiter la mise en gras ici si le texte contient un tableau
 	*/
 	if (!preg_match(',.(\|([[:space:]]*{{[^}]+}}[[:space:]]*|<))+.,sS', $texte)) {
-		$chercher_raccourcis = array(
+		$chercher_raccourcisg = array(
 			/* 7 */ 	"/(?<![{])[{][{](?![{])/S", // Expressions complexes car on n'a pas encore traite les titres ici
 			/* 8 */ 	"/(?<![}])[}][}](?![}])/S" // En gros, verification qu'on n'est pas a l'interieur d'un titre
 		);
-		$remplacer_raccourcis = array(
+		$remplacer_raccourcisg = array(
 			/* 7 */ 	"<strong class=\"spip\">",
 			/* 8 */ 	"</strong>"
 		);
-		$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
+		$texte = preg_replace($chercher_raccourcisg, $remplacer_raccourcisg, $texte);
 	}
 	return $texte;
 }
 
 function TypoEnluminee_post_typo($texte) {
-	if ($GLOBALS['barre_typo_pas_de_fork_typo'] === true)
+	static $cherche1;
+	static $remplace1;
+	if (!isset($GLOBALS['barre_typo_pas_de_fork_typo']) OR $GLOBALS['barre_typo_pas_de_fork_typo'] === true)
 		return $texte;
-	$cherche1 = array(
-		/* 21 */ 	"/\[\*\*/S",
-		/* 21b */ 	"/\[\*/S",
-		/* 22 */	"/\*\]/S",
-		/* 23 */ 	"/\[\^/S",
-		/* 24 */	"/\^\]/S",
-	);
-
-	$remplace1 = array(
-		/* 21 */ 	"<strong class=\"caractencadre2-spip spip\">",
-		/* 21b */ 	"<strong class=\"caractencadre-spip spip\">",
-		/* 22 */	"</strong>",
-		/* 23 */ 	"<sup>",
-		/* 24 */	"</sup>",
-		/* 25 */ 	"<sub>",
-		/* 26 */	"</sub>",
-	);
+	if (!$cherche1) {
+		$cherche1 = array(
+			/* 21 */ 	"/\[\*\*/S",
+			/* 21b */ 	"/\[\*/S",
+			/* 22 */	"/\*\]/S",
+			/* 23 */ 	"/\[\^/S",
+			/* 24 */	"/\^\]/S",
+		);
+	
+		$remplace1 = array(
+			/* 21 */ 	"<strong class=\"caractencadre2-spip spip\">",
+			/* 21b */ 	"<strong class=\"caractencadre-spip spip\">",
+			/* 22 */	"</strong>",
+			/* 23 */ 	"<sup>",
+			/* 24 */	"</sup>",
+			/* 25 */ 	"<sub>",
+			/* 26 */	"</sub>",
+		);
+	}
 	$texte = preg_replace($cherche1, $remplace1, $texte);
 	// Acronymes
 	$texte = preg_replace('/@@acro@@([^@]*)@@([^@]*)@@acro@@/S',"<acronym title='$1' class='spip_acronym spip'>$2</acronym>",$texte);
