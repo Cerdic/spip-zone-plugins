@@ -733,7 +733,7 @@
 			if ($f = find_in_path(($m_confirm = "$modele_confirm-$id_form").".html"))
 				$modele_confirm = $m_confirm;
 			$corps_mail_confirm = recuperer_fond($modele_confirm,array_merge($env,array('id_donnee'=>$id_donnee)));
-			$corps_mail_admin = recuperer_fond($modele_admin,array_merge($env,array('id_donnee'=>$id_donnee,'mail_admin'=>'oui')));
+			$corps_mail_admin = recuperer_fond($modele_admin,array_merge($env,array('id_donnee'=>$id_donnee,'mail_admin'=>'oui','documents_mail'=>$row['documents_mail'])));
 			$champconfirm = $row['champconfirm'];
 			$email = unserialize($row['email']);
 			$email_dest = $email['defaut'];
@@ -744,7 +744,7 @@
 			if ($row['documents_mail']=='oui'){
 				$result2 = spip_query("SELECT champ FROM spip_forms_champs WHERE id_form="._q($id_form)." AND type='fichier'");
 				spip_log("SELECT champ FROM spip_forms_champs WHERE id_form="._q($id_form)." AND type='fichier'");
-				if ($row2 = spip_fetch_array($result2)) {
+				while ($row2 = spip_fetch_array($result2)) {
 					$result3 = spip_query("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($row2['champ']));
 					spip_log("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($row2['champ']));
 					if ($row3 = spip_fetch_array($result3)) {
@@ -814,17 +814,17 @@
 					$headers = "Content-Type: multipart/mixed; boundary=\"PHP-mixed-".$random_hash."\"";
 					$charset = $GLOBALS['meta']['charset'];
 					$corps_mail_admin = 	"This is a multi-part message in MIME format." .
-								"\n--PHP-mixed-".$random_hash .
-								"\nContent-Type: text/plain; charset=\"" . $charset . "\"" .
-								"\nContent-Transfer-Encoding: 8bit\n\n" . $corps_mail_admin;
+								"\r\n--PHP-mixed-".$random_hash .
+								"\r\nContent-Type: text/plain; charset=\"" . $charset . "\"" .
+								"\r\nContent-Transfer-Encoding: 8bit\r\n\r\n" . $corps_mail_admin;
 
 					foreach($documents as $document){
 						$filename = substr(strrchr($document, "/"), 1);
 						$filetype = substr(strrchr($document, "."), 1);
-						$corps_mail_admin .= "\n\n--PHP-mixed-".$random_hash."\nContent-Type: application/".$filetype."; name=\"".$filename."\"\nContent-Transfer-Encoding: base64\nContent-Disposition: attachment; filename=\"".$filename."\"\r\n" .
+						$corps_mail_admin .= "\r\n--PHP-mixed-".$random_hash."\r\nContent-Type: application/".$filetype."; name=\"".$filename."\"\r\nContent-Transfer-Encoding: base64\r\nContent-Disposition: attachment; filename=\"".$filename."\"\r\n\r\n" .
 									chunk_split(base64_encode(file_get_contents($document)), 72)."\r\n";
 					}
-					$corps_mail_admin .= "\n\n--PHP-mixed-".$random_hash."--\r\n";
+					$corps_mail_admin .= "\r\n--PHP-mixed-".$random_hash."--\r\n";
 				}
 				envoyer_mail($dest, $sujet, $corps_mail_admin, $from, $headers);
 		 	}
