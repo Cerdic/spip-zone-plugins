@@ -1,0 +1,7 @@
+
+// $LastChangedRevision: 22435 $
+// $LastChangedBy: paladin@quesaco.org $
+// $LastChangedDate: 2008-09-07 23:27:12 +0200 (dim., 07 sept. 2008) $
+
+- valider sous SPIP 2
+- Traductions 

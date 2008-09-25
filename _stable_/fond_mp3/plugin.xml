@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugin>
+	
+	<!--  
+	// $LastChangedRevision: 22615 $
+	// $LastChangedBy: paladin@quesaco.org $
+	// $LastChangedDate: 2008-09-15 14:02:46 +0200 (lun., 15 sept. 2008) $
+	 -->
+
+	<nom>Fond MP3</nom>
+	<auteur>
+		[Christian Paulus->http://www.quesaco.org/]<br />
+		Avec l'aide du plugin jQuery jmp3 de [Sean O->http://www.sean-o.com/jquery/jmp3/]
+		et du player flash de [Jeroen Wijering->http://jeroenwijering.com/]<br />
+	</auteur>
+
+	<description>
+		Illustration sonore pour un article, une rubrique ou le site entier.
+	</description>
+	
+	<lien>
+		[Documentation sur www.quesaco.org->http://quesaco.org/Illustration-sonore-mp3]
+	</lien>
+	
+	<version>1.00</version>
+	<etat>stable</etat>
+	<icon>images/fmp3-64.png</icon>
+	
+	<!-- espace de nommage -->
+	<prefix>fmp3</prefix>
+	
+	<options>fmp3_options.php</options>
+	
+	<install>base/fmp3_init.php</install>
+	
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<inclure>inc/fmp3_pipeline_ajouter_onglets.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>inc/fmp3_pipeline_header_prive.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<!-- les css et js dans l'espace public -->
+		<nom>insert_head</nom>
+		<inclure>inc/fmp3_pipeline_insert_head.php</inclure>
+	</pipeline>
+	
+</plugin>
