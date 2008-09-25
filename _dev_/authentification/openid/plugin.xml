@@ -43,6 +43,10 @@
 		<inclure>openid_pipelines.php</inclure>
 	</pipeline>
 -->
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/openid.php</inclure>
+	</pipeline>	
  	<pipeline>
 		<nom>editer_contenu_objet</nom>
 		<inclure>openid_pipelines.php</inclure>
