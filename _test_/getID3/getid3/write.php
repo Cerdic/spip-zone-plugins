@@ -83,6 +83,7 @@ class getid3_writetags
 			return false;
 		}
 
+		$TagFormatsToRemove = array();
 		if (filesize($this->filename) == 0) {
 
 			// empty file special case - allow any tag format, don't check existing format
@@ -101,6 +102,7 @@ class getid3_writetags
 				case 'mp3':
 				case 'mp2':
 				case 'mp1':
+				case 'riff': // maybe not officially, but people do it anyway
 					$AllowedTagFormats = array('id3v1', 'id3v2.2', 'id3v2.3', 'id3v2.4', 'ape', 'lyrics3');
 					break;
 
@@ -150,7 +152,6 @@ class getid3_writetags
 			}
 
 			// List of other tag formats, removed if requested
-			$TagFormatsToRemove = array();
 			if ($this->remove_other_tags) {
 				foreach ($AllowedTagFormats as $AllowedTagFormat) {
 					switch ($AllowedTagFormat) {
@@ -300,7 +301,7 @@ class getid3_writetags
 							$this->errors[] = 'WriteVorbisComment() failed with message(s):<PRE><UL><LI>'.trim(implode('</LI><LI>', $vorbiscomment_writer->errors)).'</LI></UL></PRE>';
 						}
 					} else {
-						$this->errors[] = 'WriteVorbisComment() failed';
+						$this->errors[] = 'FormatDataForVorbisComment() failed';
 					}
 					break;
 
@@ -391,6 +392,14 @@ class getid3_writetags
 					$lyrics3_writer->filename = $this->filename;
 					if (($success = $lyrics3_writer->DeleteLyrics3()) === false) {
 						$this->errors[] = 'DeleteLyrics3() failed with message(s):<PRE><UL><LI>'.trim(implode('</LI><LI>', $lyrics3_writer->errors)).'</LI></UL></PRE>';
+					}
+					break;
+
+				case 'real':
+					$real_writer = new getid3_write_real;
+					$real_writer->filename = $this->filename;
+					if (($success = $real_writer->RemoveReal()) === false) {
+						$this->errors[] = 'RemoveReal() failed with message(s):<PRE><UL><LI>'.trim(implode('</LI><LI>', $real_writer->errors)).'</LI></UL></PRE>';
 					}
 					break;
 

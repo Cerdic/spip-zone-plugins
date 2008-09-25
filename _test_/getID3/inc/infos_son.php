@@ -4,13 +4,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions'); // *action_auteur
 
 function inc_infos_son_dist($id, $id_document,$type,$script='',$ignore_flag = false) {
-	global $connect_id_auteur, $connect_statut;
+	global $connect_id_auteur, $connect_statut, $visiteur_session;
 	
 	if(_AJAX){
 		include_spip('public/assembler');
 		include_spip('inc/presentation');
 	}
-	$corps = recuperer_fond('prive_infos_son', $contexte=array('id_document'=>$id_document));
+	$c = (is_array($visiteur_session)
+		AND is_array($visiteur_session['prefs']))
+				? $visiteur_session['prefs']['couleur']: 1;
+	$couleurs = charger_fonction('couleurs', 'inc');
+	$couleur_foncee = parametre_url($couleurs($c),'couleur_foncee');
+	$corps = recuperer_fond('prive/prive_infos_son', $contexte=array('id_document'=>$id_document,'couleur_foncee'=>$couleur_foncee));
 	
 	// Si on a le droit de modifier les documents, on affiche les icones pour récupérer les infos et le logo
 	if(autoriser('joindredocument',$type, $id)){

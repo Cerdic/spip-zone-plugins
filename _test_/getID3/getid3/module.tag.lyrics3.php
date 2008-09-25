@@ -96,6 +96,7 @@ class getid3_lyrics3
 				$GETID3_ERRORARRAY = &$ThisFileInfo['warning'];
 				if (getid3_lib::IncludeDependency(GETID3_INCLUDEPATH.'module.tag.apetag.php', __FILE__, false)) {
 					$tag = new getid3_apetag($fd, $ThisFileInfo, $ThisFileInfo['lyrics3']['tag_offset_start']);
+					unset($tag);
 				}
 			}
 
@@ -163,8 +164,8 @@ class getid3_lyrics3
 						$i = 0;
 						$flagnames = array('lyrics', 'timestamps', 'inhibitrandom');
 						foreach ($flagnames as $flagname) {
-							if (strlen($ParsedLyrics3['raw']['IND']) > ++$i) {
-								$ParsedLyrics3['flags'][$flagname] = $this->IntString2Bool(substr($ParsedLyrics3['raw']['IND'], $i, 1));
+							if (strlen($ParsedLyrics3['raw']['IND']) > $i++) {
+								$ParsedLyrics3['flags'][$flagname] = $this->IntString2Bool(substr($ParsedLyrics3['raw']['IND'], $i, 1 - 1));
 							}
 						}
 					}
@@ -181,9 +182,9 @@ class getid3_lyrics3
 						foreach ($imagestrings as $key => $imagestring) {
 							if (strpos($imagestring, '||') !== false) {
 								$imagearray = explode('||', $imagestring);
-								$ParsedLyrics3['images'][$key]['filename']     = $imagearray[0];
-								$ParsedLyrics3['images'][$key]['description']  = $imagearray[1];
-								$ParsedLyrics3['images'][$key]['timestamp']    = $this->Lyrics3Timestamp2Seconds($imagearray[2]);
+								$ParsedLyrics3['images'][$key]['filename']     = @$imagearray[0];
+								$ParsedLyrics3['images'][$key]['description']  = @$imagearray[1];
+								$ParsedLyrics3['images'][$key]['timestamp']    = $this->Lyrics3Timestamp2Seconds(@$imagearray[2]);
 							}
 						}
 					}

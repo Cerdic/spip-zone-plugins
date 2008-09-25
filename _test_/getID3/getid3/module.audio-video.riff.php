@@ -13,6 +13,7 @@
 //    Wave, AVI, AIFF/AIFC, (MP3,AC3)/RIFF, Wavpack v3, 8SVX   //
 // dependencies: module.audio.mp3.php                          //
 //               module.audio.ac3.php (optional)               //
+//               module.audio.dts.php (optional)               //
 //                                                            ///
 /////////////////////////////////////////////////////////////////
 
@@ -201,7 +202,7 @@ class getid3_riff
 					$thisfile_riff_WAVE_bext_0['reserved']       = getid3_lib::LittleEndian2Int(substr($thisfile_riff_WAVE_bext_0['data'], 347, 254));
 					$thisfile_riff_WAVE_bext_0['coding_history'] =         explode("\r\n", trim(substr($thisfile_riff_WAVE_bext_0['data'], 601)));
 
-					$thisfile_riff_WAVE_bext_0['origin_date_unix'] = mktime(
+					$thisfile_riff_WAVE_bext_0['origin_date_unix'] = gmmktime(
 																				substr($thisfile_riff_WAVE_bext_0['origin_time'], 0, 2),
 																				substr($thisfile_riff_WAVE_bext_0['origin_time'], 3, 2),
 																				substr($thisfile_riff_WAVE_bext_0['origin_time'], 6, 2),
@@ -885,6 +886,7 @@ class getid3_riff
 							$ThisFileInfo['mpeg']    = $dummy['mpeg'];
 							$ThisFileInfo['warning'] = $dummy['warning'];
 						}
+						unset($mpeg_scanner);
 					}
 				}
 				break;
@@ -895,6 +897,20 @@ class getid3_riff
 				unset($ThisFileInfo['fileformat']);
 				break;
 		}
+
+		if (@$thisfile_riff_raw['fmt ']['wFormatTag'] == 1) {
+			// http://www.mega-nerd.com/erikd/Blog/Windiots/dts.html
+			fseek($fd, $ThisFileInfo['avdataoffset'], SEEK_SET);
+			$FirstFourBytes = fread($fd, 4);
+			if (preg_match('/^\xFF\x1F\x00\xE8/s', $FirstFourBytes)) {
+				// DTSWAV
+				$thisfile_audio_dataformat = 'dts';
+			} elseif (preg_match('/^\x7F\xFF\x80\x01/s', $FirstFourBytes)) {
+				// DTS, but this probably shouldn't happen
+				$thisfile_audio_dataformat = 'dts';
+			}
+		}
+
 
 		if (isset($thisfile_riff_WAVE['DISP']) && is_array($thisfile_riff_WAVE['DISP'])) {
 			$thisfile_riff['comments']['title'][] = trim(substr($thisfile_riff_WAVE['DISP'][count($thisfile_riff_WAVE['DISP']) - 1]['data'], 4));
@@ -1064,6 +1080,7 @@ class getid3_riff
 		$maxoffset = min($maxoffset, $ThisFileInfo['avdataend']);
 
 		$RIFFchunk = false;
+		$ParsedAudioStream = false;
 
 		fseek($fd, $startoffset, SEEK_SET);
 
@@ -1076,8 +1093,8 @@ class getid3_riff
 
 			$chunksize = getid3_riff::EitherEndian2Int($ThisFileInfo, fread($fd, 4));
 			if ($chunksize == 0) {
-				$ThisFileInfo['error'][] = 'Chunk size at offset '.(ftell($fd) - 4).' is zero. Aborting RIFF parsing.';
-				break;
+				$ThisFileInfo['warning'][] = 'Chunk size at offset '.(ftell($fd) - 4).' is zero. Aborting RIFF parsing.';
+				continue;
 			}
 			if (($chunksize % 2) != 0) {
 				// all structures are packed on word boundaries
@@ -1093,7 +1110,6 @@ class getid3_riff
 							$RIFFchunk[$listname]['offset'] = ftell($fd) - 4;
 							$RIFFchunk[$listname]['size']   = $chunksize;
 
-							static $ParsedAudioStream = false;
 							if ($ParsedAudioStream) {
 
 								// skip over
@@ -1109,7 +1125,6 @@ class getid3_riff
 								if ($AudioChunkStreamType == 'wb') {
 									$FirstFourBytes = substr($AudioChunkHeader, 8, 4);
 									if (preg_match('/^\xFF[\xE2-\xE7\xF2-\xF7\xFA-\xFF][\x00-\xEB]/s', $FirstFourBytes)) {
-
 										// MP3
 										if (getid3_mp3::MPEGaudioHeaderBytesValid($FirstFourBytes)) {
 											$dummy = $ThisFileInfo;
@@ -1125,6 +1140,7 @@ class getid3_riff
 												$ThisFileInfo['bitrate']               = $ThisFileInfo['audio']['bitrate'];
 												$ThisFileInfo['audio']['bitrate_mode'] = strtolower($ThisFileInfo['mpeg']['audio']['bitrate_mode']);
 											}
+											unset($dummy);
 										}
 
 									} elseif (preg_match('/^\x0B\x77/s', $FirstFourBytes)) {
@@ -1143,6 +1159,7 @@ class getid3_riff
 												$ThisFileInfo['ac3']     = $dummy['ac3'];
 												$ThisFileInfo['warning'] = $dummy['warning'];
 											}
+											unset($ac3_tag);
 
 										}
 
@@ -1188,7 +1205,16 @@ class getid3_riff
 
 								// Probably is MP3 data
 								if (getid3_mp3::MPEGaudioHeaderBytesValid(substr($RIFFdataChunkContentsTest, 0, 4))) {
-									getid3_mp3::getOnlyMPEGaudioInfo($fd, $ThisFileInfo, $RIFFchunk[$chunkname][$thisindex]['offset'], false);
+
+									// copy info array
+									$dummy = $ThisFileInfo;
+
+									getid3_mp3::getOnlyMPEGaudioInfo($fd, $dummy, $RIFFchunk[$chunkname][$thisindex]['offset'], false);
+
+                                    // use dummy array unless error
+									if (empty($dummy['error'])) {
+									    $ThisFileInfo = $dummy;
+									}
 								}
 
 							} elseif ((strlen($RIFFdataChunkContentsTest) > 0) && (substr($RIFFdataChunkContentsTest, 0, 2) == "\x0B\x77")) {
@@ -1208,6 +1234,7 @@ class getid3_riff
 										$ThisFileInfo['ac3']     = $dummy['ac3'];
 										$ThisFileInfo['warning'] = $dummy['warning'];
 									}
+									unset($ac3_tag);
 
 								}
 
@@ -1242,6 +1269,7 @@ class getid3_riff
 										} else {
 											$ThisFileInfo['error'][] = 'Errors parsing DolbyDigital WAV: '.explode(';', $dummy['error']);
 										}
+										unset($ac3_tag);
 
 									} else {
 
@@ -1270,6 +1298,8 @@ class getid3_riff
 						case 'bext':
 						case 'cart':
 						case 'fmt ':
+						case 'strh':
+						case 'strf':
 						case 'MEXT':
 						case 'DISP':
 							// always read data in
@@ -1328,6 +1358,7 @@ class getid3_riff
 			$ThisFileInfo['error']    = $dummy['error'];
 			$ThisFileInfo['tags']     = $dummy['tags'];
 			$ThisFileInfo['comments'] = $dummy['comments'];
+			unset($riff);
 			fclose($fp_temp);
 			unlink($tempfile);
 			return true;
@@ -1953,8 +1984,6 @@ class getid3_riff
 			XMPG	Xing MPEG (I-Frame only)
 			XVID	XviD MPEG-4 (www.xvid.org)
 			XXAN	?XXAN?
-			Y422	ADS Technologies Copy of UYVY used in Pyro WebCam firewire camera
-			Y800	Simple, single Y plane for monochrome images
 			YU92	Intel YUV (YU92)
 			YUNV	Nvidia Uncompressed YUV 4:2:2
 			YUVP	Extended PAL format YUV palette (www.riff.org)
@@ -1965,6 +1994,8 @@ class getid3_riff
 			Y41T	Brooktree PC1 YUV 4:1:1 with transparency
 			Y42B	Weitek YUV 4:2:2 Planar
 			Y42T	Brooktree UYUV 4:2:2 with transparency
+			Y422	ADS Technologies Copy of UYVY used in Pyro WebCam firewire camera
+			Y800	Simple, single Y plane for monochrome images
 			Y8  	Grayscale video
 			YC12	Intel YUV 12 codec
 			YUV8	Winnov Caviar YUV8

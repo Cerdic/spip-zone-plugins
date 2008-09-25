@@ -7,52 +7,8 @@
 //                                                             //
 // getid3.lib.php - part of getID3()                           //
 // See readme.txt for more details                             //
-//                                                             //
-/////////////////////////////////////////////////////////////////
-// getid3_lib::GetURLImageSize( $urlpic ) determines the       //
-// dimensions of local/remote URL pictures.                    //
-// returns array with ($width, $height, $type)                 //
-//                                                             //
-// Thanks to: Oyvind Hallsteinsen aka Gosub / ELq -            //
-// gosubÿelq*org  for the original size determining code       //
-//                                                             //
-// PHP Hack by Filipe Laborde-Basto Oct 21/2000                //
-// FREELY DISTRIBUTABLE -- use at your sole discretion! :)     //
-// Enjoy. (Not to be sold in commercial packages though,       //
-// keep it free!) Feel free to contact me at filÿrezox*com     //
-// (http://www.rezox.com)                                      //
-//                                                             //
-// Modified by James Heinrich <getid3ÿusers*sourceforge*net>   //
-// June 1, 2001 - created GetDataImageSize($imgData) by        //
-// seperating the fopen() stuff to GetURLImageSize($urlpic)    //
-// which then calls GetDataImageSize($imgData). The idea being //
-// you can call GetDataImageSize($imgData) with image data     //
-// from a database etc.                                        //
 //                                                            ///
 /////////////////////////////////////////////////////////////////
-
-
-define('GETID3_GIF_SIG',     "\x47\x49\x46");  // 'GIF'
-define('GETID3_PNG_SIG',     "\x89\x50\x4E\x47\x0D\x0A\x1A\x0A");
-define('GETID3_JPG_SIG',     "\xFF\xD8\xFF");
-define('GETID3_JPG_SOS',     "\xDA"); // Start Of Scan - image data start
-define('GETID3_JPG_SOF0',    "\xC0"); // Start Of Frame N
-define('GETID3_JPG_SOF1',    "\xC1"); // N indicates which compression process
-define('GETID3_JPG_SOF2',    "\xC2"); // Only SOF0-SOF2 are now in common use
-define('GETID3_JPG_SOF3',    "\xC3");
-// NB: codes C4 and CC are *not* SOF markers
-define('GETID3_JPG_SOF5',    "\xC5");
-define('GETID3_JPG_SOF6',    "\xC6");
-define('GETID3_JPG_SOF7',    "\xC7");
-define('GETID3_JPG_SOF9',    "\xC9");
-define('GETID3_JPG_SOF10',   "\xCA");
-define('GETID3_JPG_SOF11',   "\xCB");
-// NB: codes C4 and CC are *not* SOF markers
-define('GETID3_JPG_SOF13',   "\xCD");
-define('GETID3_JPG_SOF14',   "\xCE");
-define('GETID3_JPG_SOF15',   "\xCF");
-define('GETID3_JPG_EOI',     "\xD9"); // End Of Image (end of datastream)
-
 
 
 class getid3_lib
@@ -206,6 +162,9 @@ class getid3_lib
 		// http://www.scri.fsu.edu/~jac/MAD3401/Backgrnd/ieee.html
 
 		$bitword = getid3_lib::BigEndian2Bin($byteword);
+		if (!$bitword) {
+            return 0;
+        }
 		$signbit = $bitword{0};
 
 		switch (strlen($byteword) * 8) {
@@ -450,13 +409,15 @@ class getid3_lib
 
 
 	function PlaytimeString($playtimeseconds) {
+		$sign = (($playtimeseconds < 0) ? '-' : '');
+		$playtimeseconds = abs($playtimeseconds);
 		$contentseconds = round((($playtimeseconds / 60) - floor($playtimeseconds / 60)) * 60);
 		$contentminutes = floor($playtimeseconds / 60);
 		if ($contentseconds >= 60) {
 			$contentseconds -= 60;
 			$contentminutes++;
 		}
-		return intval($contentminutes).':'.str_pad($contentseconds, 2, 0, STR_PAD_LEFT);
+		return $sign.intval($contentminutes).':'.str_pad($contentseconds, 2, 0, STR_PAD_LEFT);
 	}
 
 
@@ -568,7 +529,7 @@ class getid3_lib
 					die(implode(' and ', $RequiredFiles).' are required in '.GETID3_HELPERAPPSDIR.' for getid3_lib::md5_file() to function under Windows in PHP < v4.2.0');
 				}
 			}
-			$commandline = GETID3_HELPERAPPSDIR.'md5sum.exe "'.str_replace('/', GETID3_OS_DIRSLASH, $file).'"';
+			$commandline = GETID3_HELPERAPPSDIR.'md5sum.exe "'.str_replace('/', DIRECTORY_SEPARATOR, $file).'"';
 			if (ereg("^[\\]?([0-9a-f]{32})", strtolower(`$commandline`), $r)) {
 				return $r[1];
 			}
@@ -603,14 +564,14 @@ class getid3_lib
 					die(implode(' and ', $RequiredFiles).' are required in '.GETID3_HELPERAPPSDIR.' for getid3_lib::sha1_file() to function under Windows in PHP < v4.3.0');
 				}
 			}
-			$commandline = GETID3_HELPERAPPSDIR.'sha1sum.exe "'.str_replace('/', GETID3_OS_DIRSLASH, $file).'"';
+			$commandline = GETID3_HELPERAPPSDIR.'sha1sum.exe "'.str_replace('/', DIRECTORY_SEPARATOR, $file).'"';
 			if (ereg("^sha1=([0-9a-f]{40})", strtolower(`$commandline`), $r)) {
 				return $r[1];
 			}
 
 		} else {
 
-			$commandline = 'sha1sum "'.$file.'"';
+			$commandline = 'sha1sum '.escapeshellarg($file).'';
 			if (ereg("^([0-9a-f]{40})[ \t\n\r]", strtolower(`$commandline`), $r)) {
 				return $r[1];
 			}
@@ -661,14 +622,14 @@ class getid3_lib
 						break;
 					}
 				}
-				$commandline  = GETID3_HELPERAPPSDIR.'head.exe -c '.$end.' "'.str_replace('/', GETID3_OS_DIRSLASH, $file).'" | ';
+				$commandline  = GETID3_HELPERAPPSDIR.'head.exe -c '.$end.' "'.escapeshellarg(str_replace('/', DIRECTORY_SEPARATOR, $file)).'" | ';
 				$commandline .= GETID3_HELPERAPPSDIR.'tail.exe -c '.$size.' | ';
 				$commandline .= GETID3_HELPERAPPSDIR.$windows_call;
 
 			} else {
 
-				$commandline  = 'head -c '.$end.' "'.$file.'" | ';
-				$commandline .= 'tail -c '.$size.' | ';
+				$commandline  = 'head -c'.$end.' '.escapeshellarg($file).' | ';
+				$commandline .= 'tail -c'.$size.' | ';
 				$commandline .= $unix_call;
 
 			}
@@ -998,69 +959,47 @@ class getid3_lib
 			return $string;
 		}
 
-		static $iconv_broken_or_unavailable = array();
-		if (is_null(@$iconv_broken_or_unavailable[$in_charset.'_'.$out_charset])) {
-			$GETID3_ICONV_TEST_STRING = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ÄÅÇÉÑÖÜáàâäãåçéèêëíìîïñóòôöõúùûü °¢£§•¶ß®©™´¨≠ÆØ∞±≤≥¥µ∂∑∏π∫ªºΩæø¿¡¬√ƒ≈∆«»… ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ';
+		// iconv() availble
+		if (function_exists('iconv')) {
 
-			// Check iconv()
-			if (function_exists('iconv')) {
-				if (@iconv($in_charset, 'ISO-8859-1', @iconv('ISO-8859-1', $in_charset, $GETID3_ICONV_TEST_STRING)) == $GETID3_ICONV_TEST_STRING) {
-					if (@iconv($out_charset, 'ISO-8859-1', @iconv('ISO-8859-1', $out_charset, $GETID3_ICONV_TEST_STRING)) == $GETID3_ICONV_TEST_STRING) {
-						// everything works, use iconv()
-						$iconv_broken_or_unavailable[$in_charset.'_'.$out_charset] = false;
-					} else {
-						// iconv() available, but broken. Use getID3()'s iconv_fallback() conversions instead
-						// known issue in PHP v4.1.x
-						$iconv_broken_or_unavailable[$in_charset.'_'.$out_charset] = true;
-					}
-				} else {
-					// iconv() available, but broken. Use getID3()'s iconv_fallback() conversions instead
-					// known issue in PHP v4.1.x
-					$iconv_broken_or_unavailable[$in_charset.'_'.$out_charset] = true;
-				}
-			} else {
-				// iconv() unavailable, use getID3()'s iconv_fallback() conversions
-				$iconv_broken_or_unavailable[$in_charset.'_'.$out_charset] = true;
-			}
+		    if ($converted_string = @iconv($in_charset, $out_charset.'//TRANSLIT', $string)) {
+    			switch ($out_charset) {
+    				case 'ISO-8859-1':
+    					$converted_string = rtrim($converted_string, "\x00");
+    					break;
+    			}
+    			return $converted_string;
+    		}
+
+    		// iconv() may sometimes fail with "illegal character in input string" error message
+    		// and return an empty string, but returning the unconverted string is more useful
+    		return $string;
+    	}
+
+
+        // iconv() not available
+		static $ConversionFunctionList = array();
+		if (empty($ConversionFunctionList)) {
+			$ConversionFunctionList['ISO-8859-1']['UTF-8']    = 'iconv_fallback_iso88591_utf8';
+			$ConversionFunctionList['ISO-8859-1']['UTF-16']   = 'iconv_fallback_iso88591_utf16';
+			$ConversionFunctionList['ISO-8859-1']['UTF-16BE'] = 'iconv_fallback_iso88591_utf16be';
+			$ConversionFunctionList['ISO-8859-1']['UTF-16LE'] = 'iconv_fallback_iso88591_utf16le';
+			$ConversionFunctionList['UTF-8']['ISO-8859-1']    = 'iconv_fallback_utf8_iso88591';
+			$ConversionFunctionList['UTF-8']['UTF-16']        = 'iconv_fallback_utf8_utf16';
+			$ConversionFunctionList['UTF-8']['UTF-16BE']      = 'iconv_fallback_utf8_utf16be';
+			$ConversionFunctionList['UTF-8']['UTF-16LE']      = 'iconv_fallback_utf8_utf16le';
+			$ConversionFunctionList['UTF-16']['ISO-8859-1']   = 'iconv_fallback_utf16_iso88591';
+			$ConversionFunctionList['UTF-16']['UTF-8']        = 'iconv_fallback_utf16_utf8';
+			$ConversionFunctionList['UTF-16LE']['ISO-8859-1'] = 'iconv_fallback_utf16le_iso88591';
+			$ConversionFunctionList['UTF-16LE']['UTF-8']      = 'iconv_fallback_utf16le_utf8';
+			$ConversionFunctionList['UTF-16BE']['ISO-8859-1'] = 'iconv_fallback_utf16be_iso88591';
+			$ConversionFunctionList['UTF-16BE']['UTF-8']      = 'iconv_fallback_utf16be_utf8';
 		}
-
-		if ($iconv_broken_or_unavailable[$in_charset.'_'.$out_charset]) {
-			static $ConversionFunctionList = array();
-			if (empty($ConversionFunctionList)) {
-				$ConversionFunctionList['ISO-8859-1']['UTF-8']    = 'iconv_fallback_iso88591_utf8';
-				$ConversionFunctionList['ISO-8859-1']['UTF-16']   = 'iconv_fallback_iso88591_utf16';
-				$ConversionFunctionList['ISO-8859-1']['UTF-16BE'] = 'iconv_fallback_iso88591_utf16be';
-				$ConversionFunctionList['ISO-8859-1']['UTF-16LE'] = 'iconv_fallback_iso88591_utf16le';
-				$ConversionFunctionList['UTF-8']['ISO-8859-1']    = 'iconv_fallback_utf8_iso88591';
-				$ConversionFunctionList['UTF-8']['UTF-16']        = 'iconv_fallback_utf8_utf16';
-				$ConversionFunctionList['UTF-8']['UTF-16BE']      = 'iconv_fallback_utf8_utf16be';
-				$ConversionFunctionList['UTF-8']['UTF-16LE']      = 'iconv_fallback_utf8_utf16le';
-				$ConversionFunctionList['UTF-16']['ISO-8859-1']   = 'iconv_fallback_utf16_iso88591';
-				$ConversionFunctionList['UTF-16']['UTF-8']        = 'iconv_fallback_utf16_utf8';
-				$ConversionFunctionList['UTF-16LE']['ISO-8859-1'] = 'iconv_fallback_utf16le_iso88591';
-				$ConversionFunctionList['UTF-16LE']['UTF-8']      = 'iconv_fallback_utf16le_utf8';
-				$ConversionFunctionList['UTF-16BE']['ISO-8859-1'] = 'iconv_fallback_utf16be_iso88591';
-				$ConversionFunctionList['UTF-16BE']['UTF-8']      = 'iconv_fallback_utf16be_utf8';
-			}
-			if (isset($ConversionFunctionList[strtoupper($in_charset)][strtoupper($out_charset)])) {
-				$ConversionFunction = $ConversionFunctionList[strtoupper($in_charset)][strtoupper($out_charset)];
-				return getid3_lib::$ConversionFunction($string);
-			}
-			die('PHP does not have iconv() support - cannot convert from '.$in_charset.' to '.$out_charset);
+		if (isset($ConversionFunctionList[strtoupper($in_charset)][strtoupper($out_charset)])) {
+			$ConversionFunction = $ConversionFunctionList[strtoupper($in_charset)][strtoupper($out_charset)];
+			return getid3_lib::$ConversionFunction($string);
 		}
-
-		if ($converted_string = @iconv($in_charset, $out_charset.'//TRANSLIT', $string)) {
-			switch ($out_charset) {
-				case 'ISO-8859-1':
-					$converted_string = rtrim($converted_string, "\x00");
-					break;
-			}
-			return $converted_string;
-		}
-
-		// iconv() may sometimes fail with "illegal character in input string" error message
-		// and return an empty string, but returning the unconverted string is more useful
-		return $string;
+		die('PHP does not have iconv() support - cannot convert from '.$in_charset.' to '.$out_charset);
 	}
 
 
@@ -1105,16 +1044,16 @@ class getid3_lib
 					$charval = 0;
 					if ($char_ord_val < 0x80) {
 						$charval = $char_ord_val;
-					} elseif ((($char_ord_val & 0xF0) >> 4) == 0x0F) {
+					} elseif ((($char_ord_val & 0xF0) >> 4) == 0x0F  &&  $i+3 < $strlen) {
 						$charval  = (($char_ord_val & 0x07) << 18);
 						$charval += ((ord($string{++$i}) & 0x3F) << 12);
 						$charval += ((ord($string{++$i}) & 0x3F) << 6);
 						$charval +=  (ord($string{++$i}) & 0x3F);
-					} elseif ((($char_ord_val & 0xE0) >> 5) == 0x07) {
+					} elseif ((($char_ord_val & 0xE0) >> 5) == 0x07  &&  $i+2 < $strlen) {
 						$charval  = (($char_ord_val & 0x0F) << 12);
 						$charval += ((ord($string{++$i}) & 0x3F) << 6);
 						$charval +=  (ord($string{++$i}) & 0x3F);
-					} elseif ((($char_ord_val & 0xC0) >> 6) == 0x03) {
+					} elseif ((($char_ord_val & 0xC0) >> 6) == 0x03  &&  $i+1 < $strlen) {
 						$charval  = (($char_ord_val & 0x1F) << 6);
 						$charval += (ord($string{++$i}) & 0x3F);
 					}
@@ -1211,83 +1150,18 @@ class getid3_lib
 	}
 
 
-	function GetURLImageSize($urlpic) {
-		if ($fd = @fopen($urlpic, 'rb')){
-			$imgData = fread($fd, filesize($urlpic));
-			fclose($fd);
-			return getid3_lib::GetDataImageSize($imgData);
-		}
-		return array('', '', '');
-	}
-
-
 	function GetDataImageSize($imgData) {
-		$height = '';
-		$width  = '';
-		$type   = '';
-		if ((substr($imgData, 0, 3) == GETID3_GIF_SIG) && (strlen($imgData) > 10)) {
-			$dim = unpack('v2dim', substr($imgData, 6, 4));
-			$width  = $dim['dim1'];
-			$height = $dim['dim2'];
-			$type = 1;
-		} elseif ((substr($imgData, 0, 8) == GETID3_PNG_SIG) && (strlen($imgData) > 24)) {
-			$dim = unpack('N2dim', substr($imgData, 16, 8));
-			$width  = $dim['dim1'];
-			$height = $dim['dim2'];
-			$type = 3;
-		} elseif ((substr($imgData, 0, 3) == GETID3_JPG_SIG) && (strlen($imgData) > 4)) {
-			///////////////// JPG CHUNK SCAN ////////////////////
-			$imgPos = 2;
-			$type = 2;
-			$buffer = strlen($imgData) - 2;
-			while ($imgPos < strlen($imgData)) {
-				// synchronize to the marker 0xFF
-				$imgPos = strpos($imgData, 0xFF, $imgPos) + 1;
-				$marker = $imgData[$imgPos];
-				do {
-					$marker = ord($imgData[$imgPos++]);
-				} while ($marker == 255);
-				// find dimensions of block
-				switch (chr($marker)) {
-					// Grab width/height from SOF segment (these are acceptable chunk types)
-					case GETID3_JPG_SOF0:
-					case GETID3_JPG_SOF1:
-					case GETID3_JPG_SOF2:
-					case GETID3_JPG_SOF3:
-					case GETID3_JPG_SOF5:
-					case GETID3_JPG_SOF6:
-					case GETID3_JPG_SOF7:
-					case GETID3_JPG_SOF9:
-					case GETID3_JPG_SOF10:
-					case GETID3_JPG_SOF11:
-					case GETID3_JPG_SOF13:
-					case GETID3_JPG_SOF14:
-					case GETID3_JPG_SOF15:
-						$dim = unpack('n2dim', substr($imgData, $imgPos + 3, 4));
-						$height = $dim['dim1'];
-						$width  = $dim['dim2'];
-						break 2; // found it so exit
-					case GETID3_JPG_EOI:
-					case GETID3_JPG_SOS:
-						return false;       // End loop in case we find one of these markers
-					default:            // We're not interested in other markers
-						$skiplen = (ord($imgData[$imgPos++]) << 8) + ord($imgData[$imgPos++]) - 2;
-						// if the skip is more than what we've read in, read more
-						$buffer -= $skiplen;
-						if ($buffer < 512) { // if the buffer of data is too low, read more file.
-							// $imgData .= fread($fd, $skiplen + 1024);
-							// $buffer += $skiplen + 1024;
-							return false; // End loop in case we find run out of data
-						}
-						$imgPos += $skiplen;
-						break;
-				} // endswitch check marker type
-			} // endif loop through JPG chunks
-		} // endif chk for valid file types
-
-		return array($width, $height, $type);
-	} // end function
-
+		$GetDataImageSize = false;
+		if ($tempfilename = tempnam('*', 'getID3')) {
+			if ($tmp = @fopen($tempfilename, 'wb')) {
+				fwrite($tmp, $imgData);
+				fclose($tmp);
+				$GetDataImageSize = @GetImageSize($tempfilename);
+			}
+			unlink($tempfilename);
+		}
+		return $GetDataImageSize;
+	}
 
 	function ImageTypesLookup($imagetypeid) {
 		static $ImageTypesLookup = array();
@@ -1311,7 +1185,8 @@ class getid3_lib
 	}
 
 	function CopyTagsToComments(&$ThisFileInfo) {
-		// Copy all entries from ['tags'] into common ['comments'] and ['comments_html']
+
+		// Copy all entries from ['tags'] into common ['comments']
 		if (!empty($ThisFileInfo['tags'])) {
 			foreach ($ThisFileInfo['tags'] as $tagtype => $tagarray) {
 				foreach ($tagarray as $tagname => $tagdata) {
@@ -1346,14 +1221,18 @@ class getid3_lib
 							}
 							if (empty($ThisFileInfo['comments'][$tagname]) || !in_array(trim($value), $ThisFileInfo['comments'][$tagname])) {
 								$ThisFileInfo['comments'][$tagname][] = trim($value);
-								if (isset($ThisFileInfo['tags_html'][$tagtype][$tagname][$key])) {
-									$ThisFileInfo['comments_html'][$tagname][] = $ThisFileInfo['tags_html'][$tagtype][$tagname][$key];
-								}
 							}
 						}
 					}
 				}
 			}
+
+			// Copy to ['comments_html']
+    		foreach ($ThisFileInfo['comments'] as $field => $values) {
+    		    foreach ($values as $index => $value) {
+    		        $ThisFileInfo['comments_html'][$field][$index] = str_replace('&#0;', '', getid3_lib::MultiByteCharString2HTML($value, $ThisFileInfo['encoding']));
+    		    }
+            }
 		}
 	}
 

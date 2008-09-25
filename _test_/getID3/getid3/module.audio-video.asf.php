@@ -78,9 +78,7 @@ class getid3_asf
 		$thisfile_asf_headerobject['reserved1']     = getid3_lib::LittleEndian2Int(substr($HeaderObjectData, 28, 1));
 		$thisfile_asf_headerobject['reserved2']     = getid3_lib::LittleEndian2Int(substr($HeaderObjectData, 29, 1));
 
-		//$ASFHeaderData  = $HeaderObjectData;
 		$ASFHeaderData = fread($fd, $thisfile_asf_headerobject['objectsize'] - 30);
-		//$offset = 30;
 		$offset = 0;
 
 		for ($HeaderObjectsCounter = 0; $HeaderObjectsCounter < $thisfile_asf_headerobject['headerobjects']; $HeaderObjectsCounter++) {
@@ -134,7 +132,6 @@ class getid3_asf
 					$offset += 8;
 					$thisfile_asf_filepropertiesobject['preroll']            = getid3_lib::LittleEndian2Int(substr($ASFHeaderData, $offset, 8));
 					$offset += 8;
-					$ThisFileInfo['playtime_seconds'] = ($thisfile_asf_filepropertiesobject['play_duration'] / 10000000) - ($thisfile_asf_filepropertiesobject['preroll'] / 1000);
 					$thisfile_asf_filepropertiesobject['flags_raw']          = getid3_lib::LittleEndian2Int(substr($ASFHeaderData, $offset, 4));
 					$offset += 4;
 					$thisfile_asf_filepropertiesobject['flags']['broadcast'] = (bool) ($thisfile_asf_filepropertiesobject['flags_raw'] & 0x0001);
@@ -146,7 +143,25 @@ class getid3_asf
 					$offset += 4;
 					$thisfile_asf_filepropertiesobject['max_bitrate']        = getid3_lib::LittleEndian2Int(substr($ASFHeaderData, $offset, 4));
 					$offset += 4;
-					$ThisFileInfo['bitrate']                                 = $thisfile_asf_filepropertiesobject['max_bitrate'];
+
+					if ($thisfile_asf_filepropertiesobject['flags']['broadcast']) {
+
+						// broadcast flag is set, some values invalid
+						unset($thisfile_asf_filepropertiesobject['filesize']);
+						unset($thisfile_asf_filepropertiesobject['data_packets']);
+						unset($thisfile_asf_filepropertiesobject['play_duration']);
+						unset($thisfile_asf_filepropertiesobject['send_duration']);
+						unset($thisfile_asf_filepropertiesobject['min_packet_size']);
+						unset($thisfile_asf_filepropertiesobject['max_packet_size']);
+
+					} else {
+
+						// broadcast flag NOT set, perform calculations
+						$ThisFileInfo['playtime_seconds'] = ($thisfile_asf_filepropertiesobject['play_duration'] / 10000000) - ($thisfile_asf_filepropertiesobject['preroll'] / 1000);
+
+						//$ThisFileInfo['bitrate'] = $thisfile_asf_filepropertiesobject['max_bitrate'];
+						$ThisFileInfo['bitrate'] = ((isset($thisfile_asf_filepropertiesobject['filesize']) ? $thisfile_asf_filepropertiesobject['filesize'] : $ThisFileInfo['filesize']) * 8) / $ThisFileInfo['playtime_seconds'];
+					}
 					break;
 
 				case GETID3_ASF_Stream_Properties_Object:
@@ -331,51 +346,61 @@ class getid3_asf
 							if (!isset($thisfile_audio['bitrate']) && strstr($AudioCodecBitrate, 'kbps')) {
 								$thisfile_audio['bitrate'] = (int) (trim(str_replace('kbps', '', $AudioCodecBitrate)) * 1000);
 							}
-							if (!isset($thisfile_video['bitrate']) && isset($thisfile_audio['bitrate']) && isset($thisfile_asf['file_properties_object']['max_bitrate']) && ($thisfile_asf_codeclistobject['codec_entries_count'] > 1)) {
-								$thisfile_video['bitrate'] = $thisfile_asf['file_properties_object']['max_bitrate'] - $thisfile_audio['bitrate'];
+							//if (!isset($thisfile_video['bitrate']) && isset($thisfile_audio['bitrate']) && isset($thisfile_asf['file_properties_object']['max_bitrate']) && ($thisfile_asf_codeclistobject['codec_entries_count'] > 1)) {
+							if (!@$thisfile_video['bitrate'] && @$thisfile_audio['bitrate'] && @$ThisFileInfo['bitrate']) {
+								//$thisfile_video['bitrate'] = $thisfile_asf['file_properties_object']['max_bitrate'] - $thisfile_audio['bitrate'];
+								$thisfile_video['bitrate'] = $ThisFileInfo['bitrate'] - $thisfile_audio['bitrate'];
 							}
 
 							$AudioCodecFrequency = (int) trim(str_replace('kHz', '', $AudioCodecFrequency));
 							switch ($AudioCodecFrequency) {
 								case 8:
+								case 8000:
 									$thisfile_audio['sample_rate'] = 8000;
 									break;
 
 								case 11:
+								case 11025:
 									$thisfile_audio['sample_rate'] = 11025;
 									break;
 
 								case 12:
+								case 12000:
 									$thisfile_audio['sample_rate'] = 12000;
 									break;
 
 								case 16:
+								case 16000:
 									$thisfile_audio['sample_rate'] = 16000;
 									break;
 
 								case 22:
+								case 22050:
 									$thisfile_audio['sample_rate'] = 22050;
 									break;
 
 								case 24:
+								case 24000:
 									$thisfile_audio['sample_rate'] = 24000;
 									break;
 
 								case 32:
+								case 32000:
 									$thisfile_audio['sample_rate'] = 32000;
 									break;
 
 								case 44:
+								case 441000:
 									$thisfile_audio['sample_rate'] = 44100;
 									break;
 
 								case 48:
+								case 48000:
 									$thisfile_audio['sample_rate'] = 48000;
 									break;
 
 								default:
 									$ThisFileInfo['warning'][] = 'unknown frequency: "'.$AudioCodecFrequency.'" ('.$this->TrimConvert($thisfile_asf_codeclistobject_codecentries_current['description']).')';
-	//                                return false;
 									break;
 							}
 
@@ -754,6 +779,11 @@ class getid3_asf
 								$thisfile_asf_comments['year'] = array( $this->TrimTerm($thisfile_asf_extendedcontentdescriptionobject_contentdescriptor_current['value']));
 								break;
 
+							case 'wm/lyrics':
+							case 'lyrics':
+								$thisfile_asf_comments['lyrics'] = array($this->TrimTerm($thisfile_asf_extendedcontentdescriptionobject_contentdescriptor_current['value']));
+								break;
+
 							case 'isvbr':
 								if ($thisfile_asf_extendedcontentdescriptionobject_contentdescriptor_current['value']) {
 									$thisfile_audio['bitrate_mode'] = 'vbr';
@@ -769,13 +799,15 @@ class getid3_asf
 									$tempThisfileInfo = array('encoding'=>$ThisFileInfo['encoding']);
 									fwrite($tempfilehandle, $thisfile_asf_extendedcontentdescriptionobject_contentdescriptor_current['value']);
 									fclose($tempfilehandle);
-									
+
 									$tempfilehandle = fopen($tempfile, "rb");
 									$id3 = new getid3_id3v2($tempfilehandle, $tempThisfileInfo);
+									unset($id3);
 									fclose($tempfilehandle);
 									unlink($tempfile);
-									
+
 									$ThisFileInfo['id3v2'] = $tempThisfileInfo['id3v2'];
+									unset($tempThisfileInfo);
 								}
 								break;
 
@@ -853,16 +885,16 @@ class getid3_asf
 					$thisfile_asf['stream_bitrate_properties_object'] = array();
 					$thisfile_asf_streambitratepropertiesobject       = &$thisfile_asf['stream_bitrate_properties_object'];
 
-					$thisfile_asf_streambitrateproperties['objectid']                  = $NextObjectGUID;
-					$thisfile_asf_streambitrateproperties['objectid_guid']             = $NextObjectGUIDtext;
-					$thisfile_asf_streambitrateproperties['objectsize']                = $NextObjectSize;
-					$thisfile_asf_streambitrateproperties['bitrate_records_count']     = getid3_lib::LittleEndian2Int(substr($ASFHeaderData, $offset, 2));
+					$thisfile_asf_streambitratepropertiesobject['objectid']                  = $NextObjectGUID;
+					$thisfile_asf_streambitratepropertiesobject['objectid_guid']             = $NextObjectGUIDtext;
+					$thisfile_asf_streambitratepropertiesobject['objectsize']                = $NextObjectSize;
+					$thisfile_asf_streambitratepropertiesobject['bitrate_records_count']     = getid3_lib::LittleEndian2Int(substr($ASFHeaderData, $offset, 2));
 					$offset += 2;
-					for ($BitrateRecordsCounter = 0; $BitrateRecordsCounter < $thisfile_asf_streambitrateproperties['bitrate_records_count']; $BitrateRecordsCounter++) {
-						$thisfile_asf_streambitrateproperties['bitrate_records'][$BitrateRecordsCounter]['flags_raw'] = getid3_lib::LittleEndian2Int(substr($ASFHeaderData, $offset, 2));
+					for ($BitrateRecordsCounter = 0; $BitrateRecordsCounter < $thisfile_asf_streambitratepropertiesobject['bitrate_records_count']; $BitrateRecordsCounter++) {
+						$thisfile_asf_streambitratepropertiesobject['bitrate_records'][$BitrateRecordsCounter]['flags_raw'] = getid3_lib::LittleEndian2Int(substr($ASFHeaderData, $offset, 2));
 						$offset += 2;
-						$thisfile_asf_streambitrateproperties['bitrate_records'][$BitrateRecordsCounter]['flags']['stream_number'] = $thisfile_asf_streambitrateproperties['bitrate_records'][$BitrateRecordsCounter]['flags_raw'] & 0x007F;
-						$thisfile_asf_streambitrateproperties['bitrate_records'][$BitrateRecordsCounter]['bitrate'] = getid3_lib::LittleEndian2Int(substr($ASFHeaderData, $offset, 4));
+						$thisfile_asf_streambitratepropertiesobject['bitrate_records'][$BitrateRecordsCounter]['flags']['stream_number'] = $thisfile_asf_streambitratepropertiesobject['bitrate_records'][$BitrateRecordsCounter]['flags_raw'] & 0x007F;
+						$thisfile_asf_streambitratepropertiesobject['bitrate_records'][$BitrateRecordsCounter]['bitrate'] = getid3_lib::LittleEndian2Int(substr($ASFHeaderData, $offset, 4));
 						$offset += 4;
 					}
 					break;
@@ -883,6 +915,7 @@ class getid3_asf
 					$thisfile_asf_paddingobject['objectsize']                = $NextObjectSize;
 					$thisfile_asf_paddingobject['padding_length']            = $thisfile_asf_paddingobject['objectsize'] - 16 - 8;
 					$thisfile_asf_paddingobject['padding']                   = substr($ASFHeaderData, $offset, $thisfile_asf_paddingobject['padding_length']);
+					$offset += ($NextObjectSize - 16 - 8);
 					break;
 
 				case GETID3_ASF_Extended_Content_Encryption_Object:
@@ -923,13 +956,16 @@ class getid3_asf
 				}
 			}
 			if ($ASFbitrateAudio > 0) {
-				$thisfile_audio['bitrate']     = $ASFbitrateAudio;
+				$thisfile_audio['bitrate'] = $ASFbitrateAudio;
 			}
 			if ($ASFbitrateVideo > 0) {
-				$thisfile_video['bitrate']     = $ASFbitrateVideo;
+				$thisfile_video['bitrate'] = $ASFbitrateVideo;
 			}
 		}
 		if (isset($thisfile_asf['stream_properties_object']) && is_array($thisfile_asf['stream_properties_object'])) {
+
+			$thisfile_audio['bitrate'] = 0;
+			$thisfile_video['bitrate'] = 0;
 
 			foreach ($thisfile_asf['stream_properties_object'] as $streamnumber => $streamdata) {
 
@@ -962,13 +998,26 @@ class getid3_asf
 								break;
 						}
 
-						if (!isset($thisfile_audio['bitrate'])) {
-							$thisfile_audio['bitrate'] = $thisfile_asf_audiomedia_currentstream['bytes_sec'] * 8;
+						if (!empty($thisfile_asf['stream_bitrate_properties_object']['bitrate_records'])) {
+							foreach ($thisfile_asf['stream_bitrate_properties_object']['bitrate_records'] as $dummy => $dataarray) {
+								if (@$dataarray['flags']['stream_number'] == $streamnumber) {
+									$thisfile_asf_audiomedia_currentstream['bitrate'] = $dataarray['bitrate'];
+									$thisfile_audio['bitrate'] += $dataarray['bitrate'];
+									break;
+								}
+							}
+						} else {
+							if (@$thisfile_asf_audiomedia_currentstream['bytes_sec']) {
+								$thisfile_audio['bitrate'] += $thisfile_asf_audiomedia_currentstream['bytes_sec'] * 8;
+							} elseif (@$thisfile_asf_audiomedia_currentstream['bitrate']) {
+								$thisfile_audio['bitrate'] += $thisfile_asf_audiomedia_currentstream['bitrate'];
+							}
 						}
 						$thisfile_audio['streams'][$streamnumber]                = $thisfile_asf_audiomedia_currentstream;
 						$thisfile_audio['streams'][$streamnumber]['wformattag']  = $thisfile_asf_audiomedia_currentstream['raw']['wFormatTag'];
 						$thisfile_audio['streams'][$streamnumber]['lossless']    = $thisfile_audio['lossless'];
 						$thisfile_audio['streams'][$streamnumber]['bitrate']     = $thisfile_audio['bitrate'];
+						$thisfile_audio['streams'][$streamnumber]['dataformat']  = 'wma';
 						unset($thisfile_audio['streams'][$streamnumber]['raw']);
 
 						$thisfile_asf_audiomedia_currentstream['codec_data_size'] = getid3_lib::LittleEndian2Int(substr($streamdata['type_specific_data'], $audiomediaoffset, 2));
@@ -1035,14 +1084,24 @@ class getid3_asf
 						$videomediaoffset += 4;
 						$thisfile_asf_videomedia_currentstream['format_data']['codec_data']       = substr($streamdata['type_specific_data'], $videomediaoffset);
 
+						if (!empty($thisfile_asf['stream_bitrate_properties_object']['bitrate_records'])) {
+							foreach ($thisfile_asf['stream_bitrate_properties_object']['bitrate_records'] as $dummy => $dataarray) {
+								if (@$dataarray['flags']['stream_number'] == $streamnumber) {
+									$thisfile_asf_videomedia_currentstream['bitrate'] = $dataarray['bitrate'];
+									$thisfile_video['streams'][$streamnumber]['bitrate'] = $dataarray['bitrate'];
+									$thisfile_video['bitrate'] += $dataarray['bitrate'];
+									break;
+								}
+							}
+						}
 
 						$thisfile_asf_videomedia_currentstream['format_data']['codec'] = getid3_riff::RIFFfourccLookup($thisfile_asf_videomedia_currentstream['format_data']['codec_fourcc']);
 
-						$thisfile_video['fourcc']          = $thisfile_asf_videomedia_currentstream['format_data']['codec_fourcc'];
-						$thisfile_video['codec']           = $thisfile_asf_videomedia_currentstream['format_data']['codec'];
-						$thisfile_video['resolution_x']    = $thisfile_asf_videomedia_currentstream['image_width'];
-						$thisfile_video['resolution_y']    = $thisfile_asf_videomedia_currentstream['image_height'];
-						$thisfile_video['bits_per_sample'] = $thisfile_asf_videomedia_currentstream['format_data']['bits_per_pixel'];
+						$thisfile_video['streams'][$streamnumber]['fourcc']          = $thisfile_asf_videomedia_currentstream['format_data']['codec_fourcc'];
+						$thisfile_video['streams'][$streamnumber]['codec']           = $thisfile_asf_videomedia_currentstream['format_data']['codec'];
+						$thisfile_video['streams'][$streamnumber]['resolution_x']    = $thisfile_asf_videomedia_currentstream['image_width'];
+						$thisfile_video['streams'][$streamnumber]['resolution_y']    = $thisfile_asf_videomedia_currentstream['image_height'];
+						$thisfile_video['streams'][$streamnumber]['bits_per_sample'] = $thisfile_asf_videomedia_currentstream['format_data']['bits_per_pixel'];
 						break;
 
 					default:
@@ -1240,6 +1299,12 @@ class getid3_asf
 					case 'WMV1':
 					case 'WMV2':
 					case 'WMV3':
+                    case 'MSS1':
+                    case 'MSS2':
+                    case 'WMVA':
+                    case 'WVC1':
+                    case 'WMVP':
+                    case 'WVP2':
 						$thisfile_video['dataformat'] = 'wmv';
 						$ThisFileInfo['mime_type']    = 'video/x-ms-wmv';
 						break;
@@ -1278,7 +1343,7 @@ class getid3_asf
 			}
 		}
 
-		switch ($thisfile_audio['codec']) {
+		switch (@$thisfile_audio['codec']) {
 			case 'MPEG Layer-3':
 				$thisfile_audio['dataformat'] = 'mp3';
 				break;
@@ -1320,6 +1385,21 @@ class getid3_asf
 			$thisfile_video['lossless']           = (isset($thisfile_audio['lossless'])           ? $thisfile_audio['lossless']           : false);
 			$thisfile_video['pixel_aspect_ratio'] = (isset($thisfile_audio['pixel_aspect_ratio']) ? $thisfile_audio['pixel_aspect_ratio'] : (float) 1);
 			$thisfile_video['dataformat']         = (!empty($thisfile_video['dataformat'])        ? $thisfile_video['dataformat']         : 'asf');
+		}
+		if (!empty($thisfile_video['streams'])) {
+			$thisfile_video['streams']['resolution_x'] = 0;
+			$thisfile_video['streams']['resolution_y'] = 0;
+			foreach ($thisfile_video['streams'] as $key => $valuearray) {
+				if (($valuearray['resolution_x'] > $thisfile_video['streams']['resolution_x']) || ($valuearray['resolution_y'] > $thisfile_video['streams']['resolution_y'])) {
+					$thisfile_video['resolution_x'] = $valuearray['resolution_x'];
+					$thisfile_video['resolution_y'] = $valuearray['resolution_y'];
+				}
+			}
+		}
+		$ThisFileInfo['bitrate'] = @$thisfile_audio['bitrate'] + @$thisfile_video['bitrate'];
+
+		if ((!isset($ThisFileInfo['playtime_seconds']) || ($ThisFileInfo['playtime_seconds'] <= 0)) && ($ThisFileInfo['bitrate'] > 0)) {
+			$ThisFileInfo['playtime_seconds'] = ($ThisFileInfo['filesize'] - $ThisFileInfo['avdataoffset']) / ($ThisFileInfo['bitrate'] / 8);
 		}
 
 		return true;

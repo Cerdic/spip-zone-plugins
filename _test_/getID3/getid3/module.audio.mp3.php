@@ -320,8 +320,9 @@ class getid3_mp3
 									'fast standard|19000' => 19000,
 									'r3mix|19500'         => 19500,  // 3.90,   3.90.1, 3.92
 									'r3mix|19600'         => 19600,  // 3.90.2, 3.90.3, 3.91
-									'r3mix|18000'         => 18000); // 3.94,   3.95
-							if (!isset($ExpectedLowpass[$ExplodedOptions[1].'|'.$thisfile_mpeg_audio_lame['lowpass_frequency']])) {
+									'r3mix|18000'         => 18000,  // 3.94,   3.95
+								);
+							if (!isset($ExpectedLowpass[$ExplodedOptions[1].'|'.$thisfile_mpeg_audio_lame['lowpass_frequency']]) && ($thisfile_mpeg_audio_lame['lowpass_frequency'] < 22050) && (round($thisfile_mpeg_audio_lame['lowpass_frequency'] / 1000) < round($thisfile_mpeg_audio['sample_rate'] / 2000))) {
 								$encoder_options .= ' --lowpass '.$thisfile_mpeg_audio_lame['lowpass_frequency'];
 							}
 							break;
@@ -717,10 +718,10 @@ class getid3_mp3
 						// byte $A5  Info Tag revision + VBR method
 						$LAMEtagRevisionVBRmethod = getid3_lib::BigEndian2Int(substr($headerstring, $LAMEtagOffsetContant + 0xA5, 1));
 
-						$thisfile_mpeg_audio_lame['tag_revision']      = ($LAMEtagRevisionVBRmethod & 0xF0) >> 4;
+						$thisfile_mpeg_audio_lame['tag_revision']   = ($LAMEtagRevisionVBRmethod & 0xF0) >> 4;
 						$thisfile_mpeg_audio_lame_raw['vbr_method'] =  $LAMEtagRevisionVBRmethod & 0x0F;
-						$thisfile_mpeg_audio_lame['vbr_method']        = getid3_mp3::LAMEvbrMethodLookup($thisfile_mpeg_audio_lame_raw['vbr_method']);
-						$thisfile_mpeg_audio['bitrate_mode']           = substr($thisfile_mpeg_audio_lame['vbr_method'], 0, 3); // usually either 'cbr' or 'vbr', but truncates 'vbr-old / vbr-rh' to 'vbr'
+						$thisfile_mpeg_audio_lame['vbr_method']     = getid3_mp3::LAMEvbrMethodLookup($thisfile_mpeg_audio_lame_raw['vbr_method']);
+						$thisfile_mpeg_audio['bitrate_mode']        = substr($thisfile_mpeg_audio_lame['vbr_method'], 0, 3); // usually either 'cbr' or 'vbr', but truncates 'vbr-old / vbr-rh' to 'vbr'
 
 						// byte $A6  Lowpass filter value
 						$thisfile_mpeg_audio_lame['lowpass_frequency'] = getid3_lib::BigEndian2Int(substr($headerstring, $LAMEtagOffsetContant + 0xA6, 1)) * 100;
@@ -930,16 +931,16 @@ class getid3_mp3
 			}
 		}
 
-		if (!empty($thisfile_mpeg_audio['VBR_frames'])) {
+		if (@$thisfile_mpeg_audio['VBR_frames']) {
 			switch ($thisfile_mpeg_audio['bitrate_mode']) {
 				case 'vbr':
 				case 'abr':
 					if (($thisfile_mpeg_audio['version'] == '1') && ($thisfile_mpeg_audio['layer'] == 1)) {
-						$thisfile_mpeg_audio['VBR_bitrate'] = (($thisfile_mpeg_audio['VBR_bytes'] / $thisfile_mpeg_audio['VBR_frames']) * 8) * ($ThisFileInfo['audio']['sample_rate'] / 384);
+						$thisfile_mpeg_audio['VBR_bitrate'] = ((@$thisfile_mpeg_audio['VBR_bytes'] / $thisfile_mpeg_audio['VBR_frames']) * 8) * ($ThisFileInfo['audio']['sample_rate'] / 384);
 					} elseif ((($thisfile_mpeg_audio['version'] == '2') || ($thisfile_mpeg_audio['version'] == '2.5')) && ($thisfile_mpeg_audio['layer'] == 3)) {
-						$thisfile_mpeg_audio['VBR_bitrate'] = (($thisfile_mpeg_audio['VBR_bytes'] / $thisfile_mpeg_audio['VBR_frames']) * 8) * ($ThisFileInfo['audio']['sample_rate'] / 576);
+						$thisfile_mpeg_audio['VBR_bitrate'] = ((@$thisfile_mpeg_audio['VBR_bytes'] / $thisfile_mpeg_audio['VBR_frames']) * 8) * ($ThisFileInfo['audio']['sample_rate'] / 576);
 					} else {
-						$thisfile_mpeg_audio['VBR_bitrate'] = (($thisfile_mpeg_audio['VBR_bytes'] / $thisfile_mpeg_audio['VBR_frames']) * 8) * ($ThisFileInfo['audio']['sample_rate'] / 1152);
+						$thisfile_mpeg_audio['VBR_bitrate'] = ((@$thisfile_mpeg_audio['VBR_bytes'] / $thisfile_mpeg_audio['VBR_frames']) * 8) * ($ThisFileInfo['audio']['sample_rate'] / 1152);
 					}
 					if ($thisfile_mpeg_audio['VBR_bitrate'] > 0) {
 						$ThisFileInfo['audio']['bitrate']         = $thisfile_mpeg_audio['VBR_bitrate'];
@@ -1315,70 +1316,65 @@ class getid3_mp3
 	}
 
 
-	function getOnlyMPEGaudioInfo($fd, &$ThisFileInfo, $avdataoffset, $BitrateHistogram=false) {
-		// looks for synch, decodes MPEG audio header
+    function getOnlyMPEGaudioInfo($fd, &$ThisFileInfo, $avdataoffset, $BitrateHistogram=false) {
 
-		fseek($fd, $avdataoffset, SEEK_SET);
-		$header = '';
-		$SynchSeekOffset = 0;
+        // looks for synch, decodes MPEG audio header
 
-		static $MPEGaudioVersionLookup;
-		static $MPEGaudioLayerLookup;
-		static $MPEGaudioBitrateLookup;
-		if (empty($MPEGaudioVersionLookup)) {
-			$MPEGaudioVersionLookup = getid3_mp3::MPEGaudioVersionArray();
-			$MPEGaudioLayerLookup   = getid3_mp3::MPEGaudioLayerArray();
-			$MPEGaudioBitrateLookup = getid3_mp3::MPEGaudioBitrateArray();
+        static $MPEGaudioVersionLookup;
+        static $MPEGaudioLayerLookup;
+        static $MPEGaudioBitrateLookup;
+        if (empty($MPEGaudioVersionLookup)) {
+           $MPEGaudioVersionLookup = getid3_mp3::MPEGaudioVersionArray();
+           $MPEGaudioLayerLookup   = getid3_mp3::MPEGaudioLayerArray();
+           $MPEGaudioBitrateLookup = getid3_mp3::MPEGaudioBitrateArray();
 
-		}
+        }
 
-		$header_len = strlen($header) - intval(round(GETID3_FREAD_BUFFER_SIZE / 2));
-		while (true) {
+        fseek($fd, $avdataoffset, SEEK_SET);
+        $sync_seek_buffer_size = min(128 * 1024, $ThisFileInfo['avdataend'] - $avdataoffset);
+        $header = fread($fd, $sync_seek_buffer_size);
+        $sync_seek_buffer_size = strlen($header);
+        $SynchSeekOffset = 0;
+        while ($SynchSeekOffset < $sync_seek_buffer_size) {
 
-			if (($SynchSeekOffset > $header_len) && (($avdataoffset + $SynchSeekOffset)  < $ThisFileInfo['avdataend']) && !feof($fd)) {
+            if ((($avdataoffset + $SynchSeekOffset)  < $ThisFileInfo['avdataend']) && !feof($fd)) {
 
-				if ($SynchSeekOffset > 131072) {
-					// if a synch's not found within the first 128k bytes, then give up
-					$ThisFileInfo['error'][] = 'could not find valid MPEG audio synch within the first 128k bytes';
-					if (isset($ThisFileInfo['audio']['bitrate'])) {
-						unset($ThisFileInfo['audio']['bitrate']);
-					}
-					if (isset($ThisFileInfo['mpeg']['audio'])) {
-						unset($ThisFileInfo['mpeg']['audio']);
-					}
-					if (empty($ThisFileInfo['mpeg'])) {
-						unset($ThisFileInfo['mpeg']);
-					}
-					return false;
+                if ($SynchSeekOffset > $sync_seek_buffer_size) {
+                    // if a synch's not found within the first 128k bytes, then give up
+                    $ThisFileInfo['error'][] = 'Could not find valid MPEG audio synch within the first '.round($sync_seek_buffer_size / 1024).'kB';
+                    if (isset($ThisFileInfo['audio']['bitrate'])) {
+                        unset($ThisFileInfo['audio']['bitrate']);
+                    }
+                    if (isset($ThisFileInfo['mpeg']['audio'])) {
+                        unset($ThisFileInfo['mpeg']['audio']);
+                    }
+                    if (empty($ThisFileInfo['mpeg'])) {
+                        unset($ThisFileInfo['mpeg']);
+                    }
+                    return false;
 
-				} elseif ($header .= fread($fd, GETID3_FREAD_BUFFER_SIZE)) {
+                } elseif (feof($fd)) {
 
-					// great
-					$header_len = strlen($header) - intval(round(GETID3_FREAD_BUFFER_SIZE / 2));
+                    $ThisFileInfo['error'][] = 'Could not find valid MPEG audio synch before end of file';
+                    if (isset($ThisFileInfo['audio']['bitrate'])) {
+                        unset($ThisFileInfo['audio']['bitrate']);
+                    }
+                    if (isset($ThisFileInfo['mpeg']['audio'])) {
+                        unset($ThisFileInfo['mpeg']['audio']);
+                    }
+                    if (isset($ThisFileInfo['mpeg']) && (!is_array($ThisFileInfo['mpeg']) || (count($ThisFileInfo['mpeg']) == 0))) {
+                        unset($ThisFileInfo['mpeg']);
+                    }
+                    return false;
+                }
+            }
 
-				} else {
+            if (($SynchSeekOffset + 1) >= strlen($header)) {
+                $ThisFileInfo['error'][] = 'Could not find valid MPEG synch before end of file';
+                return false;
+            }
 
-					$ThisFileInfo['error'][] = 'could not find valid MPEG audio synch before end of file';
-					if (isset($ThisFileInfo['audio']['bitrate'])) {
-						unset($ThisFileInfo['audio']['bitrate']);
-					}
-					if (isset($ThisFileInfo['mpeg']['audio'])) {
-						unset($ThisFileInfo['mpeg']['audio']);
-					}
-					if (isset($ThisFileInfo['mpeg']) && (!is_array($ThisFileInfo['mpeg']) || (count($ThisFileInfo['mpeg']) == 0))) {
-						unset($ThisFileInfo['mpeg']);
-					}
-					return false;
-
-				}
-			}
-
-			if (($SynchSeekOffset + 1) >= strlen($header)) {
-				$ThisFileInfo['error'][] = 'could not find valid MPEG synch before end of file';
-				return false;
-			}
-
-			if (($header{$SynchSeekOffset} == "\xFF") && ($header{($SynchSeekOffset + 1)} > "\xE0")) { // synch detected
+            if (($header{$SynchSeekOffset} == "\xFF") && ($header{($SynchSeekOffset + 1)} > "\xE0")) { // synch detected
 
 				if (!isset($FirstFrameThisfileInfo) && !isset($ThisFileInfo['mpeg']['audio'])) {
 					$FirstFrameThisfileInfo = $ThisFileInfo;
@@ -1464,9 +1460,9 @@ class getid3_mp3
 							if (empty($dummy['mpeg']['audio']['framelength'])) {
 								$SynchErrorsFound++;
 							} else {
-								$ThisFileInfo['mpeg']['audio']['bitrate_distribution'][$thisframebitrate]++;
-								$ThisFileInfo['mpeg']['audio']['stereo_distribution'][$dummy['mpeg']['audio']['channelmode']]++;
-								$ThisFileInfo['mpeg']['audio']['version_distribution'][$dummy['mpeg']['audio']['version']]++;
+								@$ThisFileInfo['mpeg']['audio']['bitrate_distribution'][$thisframebitrate]++;
+								@$ThisFileInfo['mpeg']['audio']['stereo_distribution'][$dummy['mpeg']['audio']['channelmode']]++;
+								@$ThisFileInfo['mpeg']['audio']['version_distribution'][$dummy['mpeg']['audio']['version']]++;
 
 								$synchstartoffset += $dummy['mpeg']['audio']['framelength'];
 							}
@@ -1636,23 +1632,17 @@ class getid3_mp3
 		if (isset($MPEGaudioVersionLookup[$rawarray['version']])) {
 			$decodedVersion = $MPEGaudioVersionLookup[$rawarray['version']];
 		} else {
-			if ($echoerrors) {
-				echo "\n".'invalid Version ('.$rawarray['version'].')';
-			}
+			echo ($echoerrors ? "\n".'invalid Version ('.$rawarray['version'].')' : '');
 			return false;
 		}
 		if (isset($MPEGaudioLayerLookup[$rawarray['layer']])) {
 			$decodedLayer = $MPEGaudioLayerLookup[$rawarray['layer']];
 		} else {
-			if ($echoerrors) {
-				echo "\n".'invalid Layer ('.$rawarray['layer'].')';
-			}
+			echo ($echoerrors ? "\n".'invalid Layer ('.$rawarray['layer'].')' : '');
 			return false;
 		}
 		if (!isset($MPEGaudioBitrateLookup[$decodedVersion][$decodedLayer][$rawarray['bitrate']])) {
-			if ($echoerrors) {
-				echo "\n".'invalid Bitrate ('.$rawarray['bitrate'].')';
-			}
+			echo ($echoerrors ? "\n".'invalid Bitrate ('.$rawarray['bitrate'].')' : '');
 			if ($rawarray['bitrate'] == 15) {
 				// known issue in LAME 3.90 - 3.93.1 where free-format has bitrate ID of 15 instead of 0
 				// let it go through here otherwise file will not be identified
@@ -1664,27 +1654,19 @@ class getid3_mp3
 			}
 		}
 		if (!isset($MPEGaudioFrequencyLookup[$decodedVersion][$rawarray['sample_rate']])) {
-			if ($echoerrors) {
-				echo "\n".'invalid Frequency ('.$rawarray['sample_rate'].')';
-			}
+			echo ($echoerrors ? "\n".'invalid Frequency ('.$rawarray['sample_rate'].')' : '');
 			return false;
 		}
 		if (!isset($MPEGaudioChannelModeLookup[$rawarray['channelmode']])) {
-			if ($echoerrors) {
-				echo "\n".'invalid ChannelMode ('.$rawarray['channelmode'].')';
-			}
+			echo ($echoerrors ? "\n".'invalid ChannelMode ('.$rawarray['channelmode'].')' : '');
 			return false;
 		}
 		if (!isset($MPEGaudioModeExtensionLookup[$decodedLayer][$rawarray['modeextension']])) {
-			if ($echoerrors) {
-				echo "\n".'invalid Mode Extension ('.$rawarray['modeextension'].')';
-			}
+			echo ($echoerrors ? "\n".'invalid Mode Extension ('.$rawarray['modeextension'].')' : '');
 			return false;
 		}
 		if (!isset($MPEGaudioEmphasisLookup[$rawarray['emphasis']])) {
-			if ($echoerrors) {
-				echo "\n".'invalid Emphasis ('.$rawarray['emphasis'].')';
-			}
+			echo ($echoerrors ? "\n".'invalid Emphasis ('.$rawarray['emphasis'].')' : '');
 			return false;
 		}
 		// These are just either set or not set, you can't mess that up :)
@@ -1850,9 +1832,9 @@ class getid3_mp3
 			0x03 => 'vbr-old / vbr-rh',
 			0x04 => 'vbr-new / vbr-mtrh',
 			0x05 => 'vbr-mt',
-			0x06 => 'Full VBR Method 4',
-			0x08 => 'constant bitrate 2 pass',
-			0x09 => 'abr 2 pass',
+			0x06 => 'vbr (full vbr method 4)',
+			0x08 => 'cbr (constant bitrate 2 pass)',
+			0x09 => 'abr (2 pass)',
 			0x0F => 'reserved'
 		);
 		return (isset($LAMEvbrMethodLookup[$VBRmethodID]) ? $LAMEvbrMethodLookup[$VBRmethodID] : '');
@@ -1893,51 +1875,57 @@ class getid3_mp3
 	}
 
 	function LAMEpresetUsedLookup($LAMEtag) {
-		if ($LAMEtag['preset_used_id'] == 0) {
-			// no preset used (LAME >=3.93)
-			// no preset recorded (LAME <3.93)
-			return '';
-		}
-		static $LAMEpresetUsedLookup = array();
-		if (empty($LAMEpresetUsedLookup)) {
-			for ($i = 8; $i <= 320; $i++) {
-				switch ($LAMEtag['vbr_method']) {
-					case 'cbr':
-						$LAMEpresetUsedLookup[$i] = '--alt-preset '.$LAMEtag['vbr_method'].' '.$i;
-						break;
-					case 'abr':
-					default: // other VBR modes shouldn't be here(?)
-						$LAMEpresetUsedLookup[$i] = '--alt-preset '.$i;
-						break;
-				}
-			}
 
-			// named old-style presets (studio, phone, voice, etc) are handled in GuessEncoderOptions()
+        if ($LAMEtag['preset_used_id'] == 0) {
+            // no preset used (LAME >=3.93)
+            // no preset recorded (LAME <3.93)
+            return '';
+        }
+        $LAMEpresetUsedLookup = array();
 
-			// named alt-presets
-			$LAMEpresetUsedLookup[1000] = '--r3mix';
-			$LAMEpresetUsedLookup[1001] = '--alt-preset standard';
-			$LAMEpresetUsedLookup[1002] = '--alt-preset extreme';
-			$LAMEpresetUsedLookup[1003] = '--alt-preset insane';
-			$LAMEpresetUsedLookup[1004] = '--alt-preset fast standard';
-			$LAMEpresetUsedLookup[1005] = '--alt-preset fast extreme';
-			$LAMEpresetUsedLookup[1006] = '--alt-preset medium';
-			$LAMEpresetUsedLookup[1007] = '--alt-preset fast medium';
+        /////  THIS PART CANNOT BE STATIC .
+        for ($i = 8; $i <= 320; $i++) {
+            switch ($LAMEtag['vbr_method']) {
+                case 'cbr':
+                    $LAMEpresetUsedLookup[$i] = '--alt-preset '.$LAMEtag['vbr_method'].' '.$i;
+                    break;
+                case 'abr':
+                default: // other VBR modes shouldn't be here(?)
+                    $LAMEpresetUsedLookup[$i] = '--alt-preset '.$i;
+                    break;
+            }
+        }
 
-			// LAME 3.94 additions/changes
-			$LAMEpresetUsedLookup[1010] = '--preset portable';                                                           // 3.94a15 Oct 21 2003
-			$LAMEpresetUsedLookup[1015] = '--preset radio';                                                              // 3.94a15 Oct 21 2003
+        // named old-style presets (studio, phone, voice, etc) are handled in GuessEncoderOptions()
 
-			$LAMEpresetUsedLookup[320]  = '--preset insane';                                                             // 3.94a15 Nov 12 2003
-			$LAMEpresetUsedLookup[430]  = '--preset radio';                                                              // 3.94a15 Nov 12 2003
-			$LAMEpresetUsedLookup[450]  = '--preset '.(($LAMEtag['raw']['vbr_method'] == 4) ? 'fast ' : '').'portable';  // 3.94a15 Nov 12 2003
-			$LAMEpresetUsedLookup[460]  = '--preset '.(($LAMEtag['raw']['vbr_method'] == 4) ? 'fast ' : '').'medium';    // 3.94a15 Nov 12 2003
-			$LAMEpresetUsedLookup[470]  = '--r3mix';                                                                     // 3.94b1  Dec 18 2003
-			$LAMEpresetUsedLookup[480]  = '--preset '.(($LAMEtag['raw']['vbr_method'] == 4) ? 'fast ' : '').'standard';  // 3.94a15 Nov 12 2003
-			$LAMEpresetUsedLookup[500]  = '--preset '.(($LAMEtag['raw']['vbr_method'] == 4) ? 'fast ' : '').'extreme';   // 3.94a15 Nov 12 2003
-		}
-		return (isset($LAMEpresetUsedLookup[$LAMEtag['preset_used_id']]) ? $LAMEpresetUsedLookup[$LAMEtag['preset_used_id']] : 'new/unknown preset: '.$LAMEtag['preset_used_id'].' - report to info@getid3.org');
-	}
+        // named alt-presets
+        $LAMEpresetUsedLookup[1000] = '--r3mix';
+        $LAMEpresetUsedLookup[1001] = '--alt-preset standard';
+        $LAMEpresetUsedLookup[1002] = '--alt-preset extreme';
+        $LAMEpresetUsedLookup[1003] = '--alt-preset insane';
+        $LAMEpresetUsedLookup[1004] = '--alt-preset fast standard';
+        $LAMEpresetUsedLookup[1005] = '--alt-preset fast extreme';
+        $LAMEpresetUsedLookup[1006] = '--alt-preset medium';
+        $LAMEpresetUsedLookup[1007] = '--alt-preset fast medium';
+
+        // LAME 3.94 additions/changes
+        $LAMEpresetUsedLookup[1010] = '--preset portable';                                                           // 3.94a15 Oct 21 2003
+        $LAMEpresetUsedLookup[1015] = '--preset radio';                                                              // 3.94a15 Oct 21 2003
+
+        $LAMEpresetUsedLookup[320]  = '--preset insane';                                                             // 3.94a15 Nov 12 2003
+        $LAMEpresetUsedLookup[410]  = '-V9';
+        $LAMEpresetUsedLookup[420]  = '-V8';
+        $LAMEpresetUsedLookup[440]  = '-V6';
+        $LAMEpresetUsedLookup[430]  = '--preset radio';                                                              // 3.94a15 Nov 12 2003
+        $LAMEpresetUsedLookup[450]  = '--preset '.(($LAMEtag['raw']['vbr_method'] == 4) ? 'fast ' : '').'portable';  // 3.94a15 Nov 12 2003
+        $LAMEpresetUsedLookup[460]  = '--preset '.(($LAMEtag['raw']['vbr_method'] == 4) ? 'fast ' : '').'medium';    // 3.94a15 Nov 12 2003
+        $LAMEpresetUsedLookup[470]  = '--r3mix';                                                                     // 3.94b1  Dec 18 2003
+        $LAMEpresetUsedLookup[480]  = '--preset '.(($LAMEtag['raw']['vbr_method'] == 4) ? 'fast ' : '').'standard';  // 3.94a15 Nov 12 2003
+        $LAMEpresetUsedLookup[490]  = '-V1';
+        $LAMEpresetUsedLookup[500]  = '--preset '.(($LAMEtag['raw']['vbr_method'] == 4) ? 'fast ' : '').'extreme';   // 3.94a15 Nov 12 2003
+
+        return (isset($LAMEpresetUsedLookup[$LAMEtag['preset_used_id']]) ? $LAMEpresetUsedLookup[$LAMEtag['preset_used_id']] : 'new/unknown preset: '.$LAMEtag['preset_used_id'].' - report to info@getid3.org');
+    }
 
 }
 
