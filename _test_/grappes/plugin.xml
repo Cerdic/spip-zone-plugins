@@ -3,7 +3,7 @@
 	<auteur>Matthieu Marcillaud</auteur>
 	<version>0.2</version>
 	<version_base>0.1</version_base>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<prefix>grappes</prefix>
 	<description>
 	Permet de regrouper des &eacute;l&eacute;ments de SPIP 
