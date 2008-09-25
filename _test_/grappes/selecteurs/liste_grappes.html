@@ -1,0 +1,28 @@
+#CACHE{0}
+<?xml version="1.0"?>
+[(#REM)
+
+	Menu de selection de grappes
+
+	La reponse doit etre en xml, elle sera exploitee par iautocompleter.js
+
+]
+<ajaxresponse>
+[(#REM) Chercher les grappes correspondant a la requete ]
+<BOUCLE_s(GRAPPES)
+{titre LIKE %(#ENV{value})%}{0,20}{par multi titre}>
+<item>
+	<text><![CDATA[<b>#TITRE</b>]]></text>
+	<value><![CDATA[[(#TITRE|textebrut)]]]></value>
+	<id>#ID_GRAPPE</id>
+
+</item>
+</BOUCLE_s>
+	[(#REM) Vraiment on n'a rien trouve ]
+	<item>
+	<text><![CDATA[<small class='autocomplete-message'><:selecteurgenerique:pas_suggestion:></small>]]></text>
+	<value><![CDATA[[(#ENV*{value}|textebrut)]]]></value>
+	<id>0</id>
+	</item>
+<//B_s>
+</ajaxresponse>

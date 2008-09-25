@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Grappes</nom>
 	<auteur>Matthieu Marcillaud</auteur>
-	<version>0.1</version>
+	<version>0.2</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<prefix>grappes</prefix>
@@ -32,6 +32,10 @@
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>inserer_javascript</action>
+		<inclure>grappes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
 		<inclure>grappes_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0;]" />

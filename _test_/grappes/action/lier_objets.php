@@ -40,10 +40,16 @@ function lier_objets($source,$id_source,$cible,$id_cible){
 				sql_insertq($table,array($ids=>$id_source,$idc=>$id_cible));
 			}
 		}
-		elseif ($type=='lien') {
+		elseif ($type=='lien_source') {
 			$cible = objet_type($cible);
 			if (!sql_countsel($table, array("'$ids'=" . sql_quote($id_source), "'objet'=" . sql_quote($cible), "'id_objet'=" . sql_quote($id_cible)))){
 				sql_insertq($table,array($ids=>$id_source,'objet'=>$cible,'id_objet'=>$id_cible));
+			}		
+		}
+		elseif ($type=='lien_cible') {
+			$source = objet_type($source);
+			if (!sql_countsel($table, array("'$idc'=" . sql_quote($id_cible), "'objet'=" . sql_quote($source), "'id_objet'=" . sql_quote($id_source)))){
+				sql_insertq($table,array($idc=>$id_cible,'objet'=>$source,'id_objet'=>$id_source));
 			}		
 		}
 	}
@@ -55,9 +61,14 @@ function delier_objets($source,$id_source,$cible,$id_cible){
 		if ($type=='id') {
 			sql_delete($table,array("$ids=".sql_quote($id_source), "$idc=".sql_quote($id_cible)));
 		}
-		elseif ($type=='lien') {
+		elseif ($type=='lien_source') {
 			$cible = objet_type($cible);
 			sql_delete($table, array("$ids=" . sql_quote($id_source), "objet=" . sql_quote($cible), "id_objet=" . sql_quote($id_cible)));
+		}		
+		elseif ($type=='lien_cible') {
+			$source = objet_type($source);
+			spip_log($source.' '.$id_source.' '.$cible.' '.$id_cible,'rototo');
+			sql_delete($table, array("$idc=" . sql_quote($id_cible), "objet=" . sql_quote($source), "id_objet=" . sql_quote($id_source)));
 		}
 	}	
 }
@@ -82,7 +93,9 @@ function trouver_table_liaison($source,$cible){
 		return array($d['table'],'id', $ids, $idc);
 	// sinon chercher spip_sources_liens (id_source, cible, id_cible)
 	if ($d = $trouver_table($ts.'_liens')){
-		return array($d['table'],'lien', $ids, $idc);}
-
+		return array($d['table'],'lien_source', $ids, $idc);}
+	// sinon chercher spip_cibles_liens (id_source, cible, id_cible)
+	if ($d = $trouver_table($tc.'_liens')){
+		return array($d['table'],'lien_cible', $ids, $idc);}
 }
 ?>

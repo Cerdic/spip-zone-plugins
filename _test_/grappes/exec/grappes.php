@@ -113,17 +113,9 @@ function exec_grappes_dist()
 		}
 
 		// afficher les objets lies
-		$source='grappe';
+		$lister_objet = charger_fonction('lister_objets','inc');
 		foreach($tables_liees as $objet){
-			$objet = table_objet($objet);
-			$contexte = array(
-				'titre_bouton'=>_T('grappes:info_lier_'.$objet),
-				'objet' => $objet,
-				'source'=>$source,
-				'id_source'=> $id_grappe,
-				'id_table_source'=>id_table_objet($source),
-			);
-			echo recuperer_fond("prive/listes/lister_objets", $contexte);
+			echo $lister_objet($objet,'grappe',$id_grappe);
 		}
 	
 		if ($editable){
