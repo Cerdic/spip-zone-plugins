@@ -1,8 +1,8 @@
 <div class="lier_objets ajax" id="#ENV{identifiant}">
 	[(#REM) Les liens actifs ]
 	[(#INCLURE{fond=prive/listes/inc-lister-#OBJET}
-		{env}{ajax}{action=delier})]
-	
+		{env}{ajax}{action=delier}{editable})]
+
 	[(#REM) Recherche pour ajouter de nouvelles liaisons ]
 	[(#ENV{editable})
 	<div class="formulaire_ajouter_objet">

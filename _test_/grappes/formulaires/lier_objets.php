@@ -9,7 +9,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // chargement des valeurs par defaut des champs du formulaire
 function formulaires_lier_objets_charger($objet, $source, $id_source, $identifiant){
-
 	return 
 		array(
 			'objet' => $objet,
@@ -17,7 +16,7 @@ function formulaires_lier_objets_charger($objet, $source, $id_source, $identifia
 			'id_source' => $id_source,
 			id_table_objet($source) => $id_source,
 			'identifiant' => $identifiant,
-			'editable' => autoriser('associer',$source,$id_source)
+			'editable' => autoriser('associer',objet_type($source),$id_source,null,array('cible'=>$objet))
 		);
 }
 
