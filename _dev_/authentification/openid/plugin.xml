@@ -30,7 +30,7 @@
    </lien> <!-- URI de documentation -->
     <!-- spip en version 193 mini -->
 	<necessite id='spip' version='[1.9.3;]' />   
-	<necessite id="lib:php-openid-2.0.1" src="http://openidenabled.com/files/php-openid/packages/php-openid-2.0.1.zip" />
+	<necessite id="lib:php-openid-2.1.2" src="http://openidenabled.com/files/php-openid/packages/php-openid-2.1.2.zip" />
    <prefix>openid</prefix>
    <install>base/openid_install.php</install>
 <!--

@@ -29,10 +29,10 @@ include_spip('inc/actions');
 include_spip('inc/cookie');
 
 
-// Cette fonction est appelée lors du retour de l'authentification OpenID
-// Elle doit vérifier si l'authent est OK, puis chercher l'utilisateur
+// Cette fonction est appelee lors du retour de l'authentification OpenID
+// Elle doit verifier si l'authent est OK, puis chercher l'utilisateur
 // associé dans spip (champ openid dans la base), et finalement l'authentifier
-// en créant le bon cookie.
+// en creant le bon cookie.
 
 function action_controler_openid() {
 

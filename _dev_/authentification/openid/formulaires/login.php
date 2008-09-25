@@ -13,8 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('base/abstract_sql');
-spip_connect();
-
 
 function is_url_prive($cible){
 	$parse = parse_url($cible);
@@ -86,8 +84,12 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null){
 	
 	// Si on est connecte, envoyer vers la destination
 	// si on en a le droit, et sauf si on y est deja
-	verifier_visiteur();
-	$valeurs['editable']=false;
+	
+	if ($auteur) {
+		verifier_visiteur();
+		$valeurs['editable'] = false;
+	}
+	
 	if (_request('var_erreur')
 	OR !$GLOBALS['visiteur_session']['id_auteur']) 
 		$valeurs['editable'] = true;
@@ -98,7 +100,7 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null){
 	} else {
 		$loge = ($visiteur_session['auth'] != '');
 	}
-	if ($loge) {
+	if ($auteur and $loge) {
 		// on est a destination ?
 		if ($cible == self())
 			$valeurs['editable'] = false;
@@ -191,10 +193,11 @@ if (is_openid($session_login)) {
 			# login ok
 			// on supprime l'eventuelle erreur sur openid inconnu
 			unset($erreurs['openid']);
-			# verifier si on a pas affaire a un visiteur qui essaye de se loge sur ecrire/
+			# verifier si on a pas affaire a un visiteur 
+			# qui essaye de se loge sur ecrire/
+			verifier_visiteur();
 			if (is_null($prive) ? is_url_prive($cible) : $prive) {
 				include_spip('inc/autoriser');
-				verifier_visiteur();
 				if (!autoriser('ecrire')){
 					$erreurs['message_erreur'] = "<h1>"._T('avis_erreur_visiteur')."</h1>"
 						. "<p>"._T('texte_erreur_visiteur')."</p>"
@@ -213,8 +216,8 @@ if (is_openid($session_login)) {
 
 function formulaires_login_traiter_dist($cible="",$login="",$prive=null){
 	$message = '';	
-	$auth = charger_fonction('auth','inc');
-	$auth();
+	#$auth = charger_fonction('auth','inc');
+	#$auth();
 
 	// Si on se connecte dans l'espace prive, 
 	// ajouter "bonjour" (repere a peu pres les cookies desactives)
@@ -224,7 +227,12 @@ function formulaires_login_traiter_dist($cible="",$login="",$prive=null){
 	if ($cible) {
 		$cible = parametre_url($cible, 'var_login', '', '&');
 	} 
-
+	
+	// transformer la cible absolue en cible relative
+	// pour pas echouer quand la meta adresse_site est foireuse
+	if (strncmp($cible,$u = url_de_base(),strlen($u))==0){
+		$cible = "./".substr($cible,strlen($u));
+	}
 
 	// Si on est admin, poser le cookie de correspondance
 	if ($GLOBALS['auteur_session']['statut'] == '0minirezo') {
