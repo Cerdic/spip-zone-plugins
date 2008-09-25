@@ -1,0 +1,82 @@
+#CACHE{0}
+<BOUCLE_document(DOCUMENTS){id_document}{tout}>
+<div id="infosdoc-#ID_DOCUMENT">
+	#ENV{show_infos_docs}
+	<div id="infos_son_haut_#ID_DOCUMENT" style='text-align: #LANG_LEFT; font-size: 90%; background-color: #d0e19f; padding: 5px; -webkit-border-radius: 10px;-moz-border-radius: 10px; margin-bottom: 5px; margin-top: 5px;'>
+		<span style="float: #LANG_RIGHT;"><a href="#" onclick="if(jQuery('#infos_son_bas_#ID_DOCUMENT').is(':visible')){jQuery('#infos_son_bas_#ID_DOCUMENT').slideUp(); return false;}else{jQuery('#infos_son_bas_#ID_DOCUMENT').slideDown(); return false;}">[<img src="(#CHEMIN{images/noeud_plus.gif})" alt="-" />]</a></span>
+		<strong><:getid3:son_infos_techniques:></strong>
+		<br class="nettoyeur" />
+
+			<div id="infos_son_bas_#ID_DOCUMENT" style='display: none; background-color: #b5ca77; padding: 5px; -webkit-border-radius: 10px;-moz-border-radius: 10px; margin-bottom: 5px; margin-top: 5px;'>
+			
+			<table cellspacing='3' cellpadding='0' style='width: 100%;  font-family: verdana; border: 0px;'>
+		
+			[<tr>
+				<td style='width: 40%; font-size: 80%; color: #4d6110; text-align: #LANG_RIGHT; padding-#LANG_RIGHT: 5px;'>
+					<:getid3:son_nom_fichier:>
+				</td>
+				<td >
+				<strong>(#FICHIER|basename)</strong>
+				</td>
+			</tr>]
+			
+			<tr>
+				<td style='width: 40%; font-size: 80%; color: #4d6110; text-align: #LANG_RIGHT; padding-#LANG_RIGHT: 5px;'>
+					<:getid3:son_format:>
+				</td>
+				<td >
+				<strong>#MIME_TYPE</strong>
+				</td>
+			</tr>
+		
+			[<tr>
+				<td style='width: 40%; font-size: 80%; color: #4d6110; text-align: #LANG_RIGHT; padding-#LANG_RIGHT: 5px;'>
+					<:getid3:son_duree:>
+				</td>
+				<td >
+				<strong>(#DUREE)</strong>
+				</td>
+			</tr>]
+		
+			[<tr>
+				<td style='width: 40%; font-size: 80%; color: #4d6110; text-align: #LANG_RIGHT; padding-#LANG_RIGHT: 5px;'>
+					<:getid3:son_bitrate:>
+				</td>
+				<td >
+				<strong>(#BITRATE)</strong>
+				</td>
+			</tr>]
+			
+			[<tr>
+				<td style='width: 40%; font-size: 80%; color: #4d6110; text-align: #LANG_RIGHT; padding-#LANG_RIGHT: 5px;'>
+					<:getid3:son_bitratemode:>
+				</td>
+				<td >
+				<strong>(#BITRATE_MODE)</strong>
+				</td>
+			</tr>]
+		
+			[<tr>
+				<td style='width: 40%; font-size: 80%; color: #4d6110; text-align: #LANG_RIGHT; padding-#LANG_RIGHT: 5px;'>
+					<:getid3:son_audiosamplerate:>
+				</td>
+				<td >
+				<strong>(#AUDIOSAMPLERATE)</strong>
+				</td>
+			</tr>]
+			
+			[<tr>
+				<td style='width: 40%; font-size: 80%; color: #4d6110; text-align: #LANG_RIGHT; padding-#LANG_RIGHT: 5px;'>
+					<:getid3:son_encodeur:>
+				</td>
+				<td >
+				<strong>(#ENCODEUR)</strong>
+				</td>
+			</tr>]
+		
+			</table>
+			
+			</div>
+		</div>
+</div>
+</BOUCLE_document>
