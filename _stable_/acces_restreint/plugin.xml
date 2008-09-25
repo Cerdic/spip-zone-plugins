@@ -45,7 +45,7 @@ _ All SPIP's loops are loaded with the necessary tools to filter the results acc
 	</pipeline>
 	<pipeline>
 		<nom>pre_boucle</nom>
-		<inlcure>public/acces_restreint.php</inclure>
+		<inclure>public/acces_restreint.php</inclure>
 	</pipeline>
 
 	<pipeline>
