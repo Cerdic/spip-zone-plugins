@@ -14,8 +14,8 @@ function etiquettes_insert_head($flux){
 	if(isset($GLOBALS['meta']['plugin']['SelecteurGenerique'])){
 		$iutil = find_in_path('javascript/iutil.js');
 		$iautocompleter = find_in_path('javascript/iautocompleter.js');
-		$selecteur_generique = '<script type="text/javascript" src="$iutil"></script>';
-		$selecteur_generique .= '<script type="text/javascript" src="$iautocompleter"></script>';
+		$selecteur_generique = '<script type="text/javascript" src="'.$iutil.'"></script>';
+		$selecteur_generique .= '<script type="text/javascript" src="'.$iautocompleter.'"></script>';
 	}
 	
 	$flux .= <<<EOS
