@@ -67,7 +67,6 @@ function delier_objets($source,$id_source,$cible,$id_cible){
 		}		
 		elseif ($type=='lien_cible') {
 			$source = objet_type($source);
-			spip_log($source.' '.$id_source.' '.$cible.' '.$id_cible,'rototo');
 			sql_delete($table, array("$idc=" . sql_quote($id_cible), "objet=" . sql_quote($source), "id_objet=" . sql_quote($id_source)));
 		}
 	}	
