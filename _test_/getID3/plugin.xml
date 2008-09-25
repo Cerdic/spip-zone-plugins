@@ -1,20 +1,20 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	GetId3
+	GetId3 pour spip 2.0
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
  	BoOz, booz@rezo.net	
 	</auteur>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
 	test
 	</etat>
 	<description>
 	Lire et ecrire les tag sur les documents audio
-	http://getid3.sourceforge.net/
-	getID3() is a PHP script that extracts useful information (such as ID3 tags, bitrate, playtime, etc.) from MP3s &amp; other multimedia file formats (Ogg, WMA, WMV, ASF, WAV, AVI, AAC, VQF, FLAC, MusePack, Real, QuickTime, Monkey's Audio, MIDI and more).
+	_ http://getid3.sourceforge.net/
+	_ getID3() is a PHP script that extracts useful information (such as ID3 tags, bitrate, playtime, etc.) from MP3s &amp; other multimedia file formats (Ogg, WMA, WMV, ASF, WAV, AVI, AAC, VQF, FLAC, MusePack, Real, QuickTime, Monkey's Audio, MIDI and more).
 	</description>
 	<options>
 	getid3_options.php
@@ -42,5 +42,6 @@
 		<inclure>getid3_pipelines.php</inclure>
 	</pipeline>
 	<install>base/getid3_upgrade.php</install>
+	<necessite id="SPIP" version='[2.0.0;]' />
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>
