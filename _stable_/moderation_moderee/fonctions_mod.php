@@ -1,3 +1,4 @@
+<?php
 function forum_insert_base($c, $id_forum, $id_article, $id_breve, $id_syndic, $id_rubrique, $statut, $retour)
 {
 	$afficher_texte = (_request('afficher_texte') <> 'non');
@@ -88,3 +89,4 @@ global $visiteur_session;
 
 // calcul de l'adresse de retour en cas d'echec du POST
 // mais la veritable adresse de retour sera calculee apres insertion
+?>
