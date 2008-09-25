@@ -38,4 +38,7 @@
 			inc_moderation.php
 		</inclure>
     </pipeline>
+	<fonctions>
+	fonctions_mod.php
+	</fonctions>
 </plugin>
