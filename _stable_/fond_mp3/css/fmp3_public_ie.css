@@ -1,0 +1,13 @@
+/*
+ * css/fmp3_public_ie.css
+ * 
+ * Feuilles de styles pour Internet Explorer
+ * 
+ * Vous pouver copier ce fichier CSS
+ * dans votre dossier squelettes/css/
+ * afin de personnaliser vos feuilles de styles
+ * 
+ */
+#fmp3-sound {
+	position:fixed;
+}

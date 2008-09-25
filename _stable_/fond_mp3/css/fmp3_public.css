@@ -1,0 +1,35 @@
+/*
+ * css/fmp3_public.css
+ * 
+ * Vous pouver copier ce fichier CSS
+ * dans votre dossier squelettes/css/
+ * afin de personnaliser vos feuilles de styles
+ * 
+ */
+#fmp3-sound {
+	position:absolute;
+	top:0;
+	right:0;
+	display:block;
+	width:64px;
+	height:130px;
+	text-align:center;
+	border:0;
+	margin:0;
+	padding:0;
+	background-image:url(/plugins/fond_mp3/images/note-64x128.png);
+	background-repeat:no-repeat;
+	background-position: 10px 10px ;
+}
+#fmp3-content {
+	position:absolute;
+	bottom:17px;
+	right:15px;
+	width:50%;
+	border:0;
+}
+#fmp3-object {
+	display:block;
+	margin:0 auto;
+	/* border:1px solid red; /**/
+}
