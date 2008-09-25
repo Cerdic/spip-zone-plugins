@@ -3,7 +3,7 @@
 // libs
 if (!defined('_DIR_LIB')) define('_DIR_LIB', _DIR_RACINE . 'lib/');
 
-define('_DIR_OPENID_LIB', _DIR_LIB . 'php-openid-2.0.1/');
+define('_DIR_OPENID_LIB', _DIR_LIB . 'php-openid-2.1.2/');
 
 
 $GLOBALS['liste_des_authentifications']['openid'] = 'openid';
