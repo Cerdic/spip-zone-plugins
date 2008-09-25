@@ -1,6 +1,6 @@
 <?php
 
-function recuperer_id3($fichier,$info=null,$mime=null){
+function inc_recuperer_id3_dist($fichier,$info=null,$mime=null){
 	// Copy remote file locally to scan with getID3()
 	include_spip('getid3/getid3');
 	$getID3 = new getID3;	
