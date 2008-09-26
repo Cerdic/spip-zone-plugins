@@ -76,8 +76,13 @@ function fmp3_boite_plugin_info ($prefix) {
 			;
 		$result = "";
 		foreach(array('version', 'etat', 'auteur', 'lien') as $key) {
+			$propre = trim(propre($info[$key]));
+			if(!fmp3_spip_est_inferieur_193()){
+				// supprimer la balise enveloppe de SPIP 2
+				$propre = preg_replace(';(^<p>(.*)<\/p>)$;s', '${2}', $propre);
+			}
 			if(isset($info[$key]) && !empty($info[$key])) {
-				$result .= "<li>" . ucfirst($key) . ": " . propre($info[$key]) . "</li>\n";
+				$result .= "<li>" . ucfirst($key) . ": " . $propre . "</li>\n";
 			}
 		}
 		$result = ""
