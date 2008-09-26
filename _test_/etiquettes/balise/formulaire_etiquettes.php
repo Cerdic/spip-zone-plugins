@@ -38,7 +38,7 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 		$reponse = sql_fetsel(
 			'id_groupe',
 			'spip_groupes_mots',
-			'titre='._q($groupe)
+			'titre='.sql_quote($groupe)
 		);
 	
 		// Si c'est un bon numéro on le garde
@@ -211,7 +211,7 @@ function balise_FORMULAIRE_ETIQUETTES_dyn($groupe, $id_groupe, $aide_nuage, $aid
 					'mots.titre',
 					array('mots' => 'spip_mots', 'liaison' => 'spip_mots_'.$type_objet),
 					array(
-						array('=', 'mots.type', _q($groupe)),
+						array('=', 'mots.type', sql_quote($groupe)),
 						array('=', 'liaison.'.$cle_objet, $id_objet),
 						array('=', 'mots.id_mot', 'liaison.id_mot')
 					),
