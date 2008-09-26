@@ -29,41 +29,48 @@
 	});
 // --></script>
 	<script type="text/javascript" src="#CHEMIN{javascript/layer.js}"></script>
+	<div class="formulaire_spip">
 	<form action="[(#EVAL{spipicious_del_mots}|generer_url_action)]" method="post" id="formulaire_spipicious_mots" onsubmit="return AjaxSqueeze(this,'mesmots',callback,event);" class="formulaire_spip">
 		<fieldset>
 			<legend><:spipicious:vos_tags:></legend>
-			<div id="mesmots">
-			[(#ENV{id_document}|?{' '})<INCLURE{fond=spipicious_del_document}{id_document=#ENV{id_document}}>]
-			[(#ENV{id_document}|?{'',' '})<INCLURE{fond=spipicious_del_article}{id_article=#ENV{id_article}}>]
-			</div>
+			<ul>
+				<li id="mesmots">
+					[(#ENV{id_document}|?{' '})<INCLURE{fond=spipicious_del_document}{id_document=#ENV{id_document}}>]
+					[(#ENV{id_document}|?{'',' '})<INCLURE{fond=spipicious_del_article}{id_article=#ENV{id_article}}>]
+				</li>
+			</ul>
 			
-			<input type="hidden" name="supprimer_mot" id="supprimer_mot" value="" />
-			<input type="hidden" name="objet_spip" id="objet_spip" value="[(#ENV{id_document}|?{document,article})]" />
-			<input type="hidden" name="id_objet_spip" id="id_objet_spip" value="[(#ENV{id_document}|?{#ENV{id_document},#ENV{id_article}})]" />
-			<input type="hidden" name="redirect_del_mots" value="[(#ENV{id_document}|?{[(#URL_PAGE{spipicious_del_document}|parametre_url{id_document,#ENV{id_document}})],[(#URL_PAGE{spipicious_del_article}|parametre_url{id_article,#ENV{id_article}})]})]" />
-			
-			<p class="spip_bouton" style="display:none">
-				<input type="submit" name="add_tags" value="<:bouton_valider:>" class="valider" />
-			</p>
+				<input type="hidden" name="supprimer_mot" id="supprimer_mot" value="" />
+				<input type="hidden" name="objet_spip" id="objet_spip" value="[(#ENV{id_document}|?{document,article})]" />
+				<input type="hidden" name="id_objet_spip" id="id_objet_spip" value="[(#ENV{id_document}|?{#ENV{id_document},#ENV{id_article}})]" />
+				<input type="hidden" name="redirect_del_mots" value="[(#ENV{id_document}|?{[(#URL_PAGE{spipicious_del_document}|parametre_url{id_document,#ENV{id_document}})],[(#URL_PAGE{spipicious_del_article}|parametre_url{id_article,#ENV{id_article}})]})]" />
+
+				<p class="boutons" style="display:none">
+					<input type="submit" name="add_tags" value="<:bouton_valider:>" class="valider" />
+				</p>
 	</fieldset>
 	</form>
-	
+	</div>
+	<div class="formualaire_spip">
 	<form action="#ENV{url}#formulaire_spipicious_ajax" method="post" id="formulaire_spipicious_ajax" class="formulaire_spip">
 		<fieldset>
 		<legend><:spipicious:add_tags:></legend>
-		
+		<ul>
+			<li>
 <BOUCLE_groupes(GROUPES_MOTS){titre == #GET{groupe_mot}}>
 		<input type="hidden" id="select_groupe" name="select_groupe" value="#ID_GROUPE" />
 		<input type="hidden" id="type_groupe" name="type_groupe" value="#TITRE" />
 </BOUCLE_groupes>
 		<label for="tags">Tags:</label>
-		<input type="text" class="forml" id="tags" name="tags" size="25" value="" /><br />
-
+		<input type="text" class="texte" id="tags" name="tags" size="25" value="" /><br />
+			</li>
+		</ul>
 		<input type="hidden" name="spipicious_id" id="spipicious_id" value="#ENV{id}" />
 		<input type="hidden" name="type" value="#ENV{type}" />
+			<p class="boutons">
+				<input type="submit" class="submit valider" name="add_tags" value="<:bouton_valider:>" />
+			</p>
 
-		<p class="spip_bouton">
-		<input type="submit" name="add_tags" value="<:bouton_valider:>" class="valider" />
-		</p>
 		</fieldset>
 	</form>
+	</div>
