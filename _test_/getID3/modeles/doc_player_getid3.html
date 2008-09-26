@@ -17,9 +17,9 @@ Sinon, utiliser le comportement normal.
 [(#REM) Document MP3 ? ]
 [(#TYPE_DOCUMENT|=={MP3}|?{
 [(#GET{player}|=={pixplayer}|?{' ',''})
-<object type='application/x-shockwave-flash' data='#EVAL{_DIR_PLUGIN_PLAYER}pixplayer.swf' id='audioplayer#ID_DOCUMENT' height='24' width='290'>
-<param name="wmode" value="opaque" />
-<param name='movie' value='#EVAL{_DIR_PLUGIN_PLAYER}pixplayer.swf' />
+<object type='application/x-shockwave-flash' data='#EVAL{_DIR_PLUGIN_PLAYER}pixplayer.swf' id='audioplayer#ID_DOCUMENT' height="#ENV{hauteur,24}" width="#ENV{largeur,290}">
+<param name="wmode" value="transparent" />
+<param name='movie' value='#CHEMIN{pixplayer.swf}' />
 <param name='FlashVars' value='playerID=#ID_DOCUMENT&amp;bg=0xf8f8f8&amp;leftbg=0xeeeeee&amp;lefticon=0x666666&amp;rightbg=0xcccccc&amp;rightbghover=0x999999&amp;righticon=0x666666&amp;righticonhover=0xFFFFFF&amp;text=0x666666&amp;slider=0x666666&amp;track=0xFFFFFF&amp;border=0x666666&amp;loader=0x9FFFB8&amp;soundFile=#URL_DOCUMENT' />
 <param name='quality' value='high' />
 <param name='menu' value='false' />
@@ -27,16 +27,16 @@ Sinon, utiliser le comportement normal.
 [<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
 </object>
 ][(#GET{player}|=={neoplayer}|?{' ',''})
-<object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="#EVAL{_DIR_PLUGIN_PLAYER}neoplayer_maxi.swf" width="200" height="20">
+<object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="#EVAL{_DIR_PLUGIN_PLAYER}neoplayer_maxi.swf" height="#ENV{hauteur,24}" width="#ENV{largeur,290}">
 <param name="wmode" value="opaque" />
-<param name="movie" value="#EVAL{_DIR_PLUGIN_PLAYER}neoplayer_maxi.swf" />
+<param name="movie" value="#CHEMIN{neoplayer_maxi.swf}" />
 <param name="FlashVars" value="mp3=#URL_DOCUMENT&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;loadingcolor=ffff00&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;showinfo=0&amp;width=200&amp;height=20[&amp;autoplay=(#ENV{autostart,0})]" />
 [<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
 </object>
 ][(#GET{player}|=={dewplayer}|?{' ',''})
-<object type='application/x-shockwave-flash' data='#EVAL{_DIR_PLUGIN_PLAYER}dewplayer.swf' width='200' height='20'>
+<object type='application/x-shockwave-flash' data='#CHEMIN{dewplayer.swf}' width='200' height='20'>
 <param name="wmode" value="opaque" />
-<param name='movie' value='#EVAL{_DIR_PLUGIN_PLAYER}dewplayer.swf' />
+<param name='movie' value='#CHEMIN{dewplayer.swf}' />
 [<param name="bgcolor" value="(#ENV{bgcolor})" />]
 <param name="FlashVars" value='son=[(#URL_DOCUMENT|url_absolue)]' />
 [<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
