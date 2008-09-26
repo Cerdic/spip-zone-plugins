@@ -54,7 +54,7 @@ include_spip('inc/fmp3_api_globales');
  * Option debug, à n'activer qu'en dev.
  * Permet d'avoir le journal "tmp/fmp3_log" 
  * */
-define("_FMP3_DEBUG", true);
+//define("_FMP3_DEBUG", true);
 
 define("_FMP3_PREFIX", "fmp3");
 
@@ -75,7 +75,7 @@ define("_FMP3_PREFERENCES_DEFAULT",
 			, 'songVolume' => "90" // toggle for the volume of the song > 0 to 100
 			, 'backColor' => "eeeeee" // toggle for the backgroundcolor of the player > hex code
 			, 'frontColor' => "333333" // toggle for the backgroundcolor of the player > hex code
-			, 'inherit' => "true" // hérite le son du parent si absent
+			, 'inherit' => "false" // hérite le son du parent si absent
 		)
 	)
 );

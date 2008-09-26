@@ -82,14 +82,14 @@ function balise_ILLUSTRATION_SONORE_dyn ($opt) {
 			$objet = "site";
 			$id_objet = "0";
 		}
-		
+
 		fmp3_log("balise: cherche son pour $objet $id_objet");
 		
-		$heriter = $preferences_meta['inherit'];
-
 		if(!empty($objet))
 		{
 			$preferences_meta = fmp3_get_all_preferences();
+			
+			$heriter = ($preferences_meta['inherit'] == "true");
 			
 			$son_dest = fmp3_chemin_son($objet, $id_objet);
 
