@@ -81,7 +81,7 @@
 				//xml almacena en un objeto xml los datos recogidos del documento leido
     				jQuery("item", xml[(#GET{id_carte_gis})]).each(function(item[(#GET{id_carte_gis})]){
     					var xmlItem[(#GET{id_carte_gis})] = xml[(#GET{id_carte_gis})].documentElement.getElementsByTagName("item")[item[(#GET{id_carte_gis})]];
-    					agregarMarcador(xmlItem[(#GET{id_carte_gis})],[(#GET{id_carte_gis})],0,17,markerManager[(#GET{id_carte_gis})]);
+    					agregarMarcador(xmlItem[(#GET{id_carte_gis})],'[(#GET{id_carte_gis})]',0,17,markerManager[(#GET{id_carte_gis})]);
 					});
 					markerManager[(#GET{id_carte_gis})].refresh();
    				});
