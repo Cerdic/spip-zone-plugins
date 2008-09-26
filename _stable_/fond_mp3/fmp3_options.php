@@ -75,6 +75,7 @@ define("_FMP3_PREFERENCES_DEFAULT",
 			, 'songVolume' => "90" // toggle for the volume of the song > 0 to 100
 			, 'backColor' => "eeeeee" // toggle for the backgroundcolor of the player > hex code
 			, 'frontColor' => "333333" // toggle for the backgroundcolor of the player > hex code
+			, 'inherit' => "true" // hérite le son du parent si absent
 		)
 	)
 );

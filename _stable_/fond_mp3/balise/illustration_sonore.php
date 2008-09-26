@@ -84,6 +84,8 @@ function balise_ILLUSTRATION_SONORE_dyn ($opt) {
 		}
 		
 		fmp3_log("balise: cherche son pour $objet $id_objet");
+		
+		$heriter = $preferences_meta['inherit'];
 
 		if(!empty($objet))
 		{
@@ -95,9 +97,9 @@ function balise_ILLUSTRATION_SONORE_dyn ($opt) {
 			
 			/*
 			 * Si le son de l'article n'existe pas 
-			 * prendre celui de la rubrique
+			 * prendre celui de la rubrique si héritage souhaité
 			 */
-			if(!$son_exists && ($objet == 'art')) {
+			if($heriter && !$son_exists && ($objet == 'art')) {
 				
 				fmp3_log("balise: pas de son pour $objet $id_objet");
 				
@@ -129,9 +131,9 @@ function balise_ILLUSTRATION_SONORE_dyn ($opt) {
 			
 			/*
 			 * Si le son de la rubrique n'existe pas
-			 * prendre celui du site
+			 * prendre celui du site si héritage souhaité
 			 */
-			if(!$son_exists && ($objet == 'rub')) {
+			if($heriter && !$son_exists && ($objet == 'rub')) {
 				$objet = 'site';
 				$id_objet = 0;
 				$son_dest = fmp3_chemin_son($objet, $id_objet);

@@ -41,6 +41,10 @@ $GLOBALS['i18n_fmp3_fr'] = array(
 	, 'backColor_label' => "Couleur de fond du bouton."
 	, 'frontColor_label' => "Couleur de premier plan du bouton."
 	
+	, 'inherit_label' => "H&#233;ritage. En s&#233;lectionnant cette option, si un article n'a pas d'illustration sonore, 
+		c'est celle de la rubrique qui prend sa place. Si une rubrique n'a pas d'illustration sonore, 
+		c'est celle du site qui prend sa place."
+	
 	, 'par_defaut' => "(Par défaut : @default@)."
 
 	, 'reset' => "Reset"

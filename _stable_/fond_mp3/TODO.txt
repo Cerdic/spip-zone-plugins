@@ -3,5 +3,9 @@
 // $LastChangedBy: paladin@quesaco.org $
 // $LastChangedDate: 2008-09-07 23:27:12 +0200 (dim., 07 sept. 2008) $
 
-- valider sous SPIP 2
+- valider sous SPIP 2 
 - Traductions 
+
+Nota :
+(CP-20080926): problème avec SPIP 2 : jQuery ready n'est pas vu (bug ailleurs, Firebug pas content). 
+	Donc impossibilité de rajouter la boite son en espace privé pour le moment.

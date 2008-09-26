@@ -174,6 +174,13 @@ function exec_fmp3_configure () {
 			, 'frontColor', $preferences_current['frontColor'], $stylefml)
 		;
 
+	// 'heritage' => "true" 
+	$page_result .= ""
+		. fmp3_input_checkbox (_T('fmp3:inherit_label')
+			, 'inherit', "true"
+			, $preferences_current['inherit'] == "true", $stylefml)
+		;
+
 	// fin formulaire
 	$page_result .= ""
 		. fmp3_form_bouton_valider('btn_valider_fmp3', "margin:1em 0;")
