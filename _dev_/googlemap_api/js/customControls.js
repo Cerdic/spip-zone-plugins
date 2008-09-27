@@ -24,7 +24,7 @@ mapTypeControl.prototype.initialize = function(map) {
     		
 	var mapTypeMap = document.createElement("div");
 	GEvent.addDomListener(mapTypeMap, "click", function() {
-		map.setMapType(G_MAP_TYPE);
+		map.setMapType(G_NORMAL_MAP);
 	});
 	var typeMapImg = document.createElement("img");
 	typeMapImg.src = URLbase + "/img_pack/" + images_folder + "/ctlMap." + images_extension;
@@ -35,7 +35,7 @@ mapTypeControl.prototype.initialize = function(map) {
       		
 	var mapTypeSat = document.createElement("div");
 	GEvent.addDomListener(mapTypeSat, "click", function() {
-		map.setMapType(G_SATELLITE_TYPE);
+		map.setMapType(G_SATELLITE_MAP);
 	});
 	var typeSatImg = document.createElement("img");
 	typeSatImg.src = URLbase + "/img_pack/" + images_folder + "/ctlSat." + images_extension;
@@ -46,7 +46,7 @@ mapTypeControl.prototype.initialize = function(map) {
       		
 	var mapTypeHyb = document.createElement("div");
 	GEvent.addDomListener(mapTypeHyb, "click", function() {
-		map.setMapType(G_HYBRID_TYPE);
+		map.setMapType(G_HYBRID_MAP);
 	});
 	var typeHybImg = document.createElement("img");
 	typeHybImg.src = URLbase + "/img_pack/" + images_folder + "/ctlHyb." + images_extension;
@@ -54,10 +54,22 @@ mapTypeControl.prototype.initialize = function(map) {
 	typeHybImg.style.position = "absolute";
 	typeHybImg.style.left= "115px";
 	mapTypeHyb.appendChild(typeHybImg);
+	
+	var mapTypePhy = document.createElement("div");
+	GEvent.addDomListener(mapTypePhy, "click", function() {
+		map.setMapType(G_PHYSICAL_MAP);
+	});
+	var typePhyImg = document.createElement("img");
+	typePhyImg.src = URLbase + "/img_pack/" + images_folder + "/ctlPhy." + images_extension;
+	typePhyImg.style.cursor = "pointer";
+	typePhyImg.style.position = "absolute";
+	typePhyImg.style.left= "172px";
+	mapTypePhy.appendChild(typePhyImg);
       		
 	container.appendChild(mapTypeMap);
 	container.appendChild(mapTypeSat);
 	container.appendChild(mapTypeHyb);
+	container.appendChild(mapTypePhy);
     		
 	map.getContainer().appendChild(container);
 	return container;
