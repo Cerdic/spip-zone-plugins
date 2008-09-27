@@ -44,8 +44,10 @@ function css_contruire($css, $niveau, $chemin, $classe, $enfants, $definition) {
 
 function css_imbriques_decouper ($css) {
 	
+	
 	$css = ereg_replace("\n[\t\ ]*", "\n", trim($css));
 	$css = ereg_replace("\n+", "\n", $css);
+	
 
 	// Virer les commentaires (source d'erreurs, et on ne sait plus ou les placer puisqu'on reorganise la bazar)
 	$css = preg_replace('#(/\*[^*]*\*+([^/*][^*]*\*+)*/)#', '', $css);
@@ -55,9 +57,11 @@ function css_imbriques_decouper ($css) {
 	// placer l'ensemble dans une fausse classe globale pour pouvoir la traiter d'un coup a la fin
 	$css = "   {\n$css\n}";
 	
+	
 	while (preg_match ("/([^\{\n]*)\{([^\{]*)\}/U", $css, $regs)) {
 		
 			$intitule = trim($regs[1]);
+						
 			$def = trim($regs[2]);
 
 			$chaine = $regs[0];
