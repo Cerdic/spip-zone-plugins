@@ -13,7 +13,7 @@
 	1.1
 	</version>
 	<etat>
-	dev
+	stable
 	</etat>
     <description>
     Permet d'ins&eacute;rer des animations Freemind (format mm) gr&acirc;ce &agrave; un mod&egrave;le.
@@ -26,4 +26,5 @@
     eva_freemind
     </prefix>
     <install>eva_freemind_install.php</install>
+    <necessite id="SPIP" version="[1.9.3;)" />
 </plugin>

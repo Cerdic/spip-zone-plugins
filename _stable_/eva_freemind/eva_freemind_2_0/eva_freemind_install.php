@@ -10,11 +10,14 @@ function eva_freemind_install($action){
 	switch ($action){
 	
 	case 'test':
+	if (!$GLOBALS['meta']['eva_freemind_test']) {return false;}
+	else {
 	$test_req=sql_select('inclus','spip_types_documents',"extension = 'mm'");
 	$test_ta=sql_fetch($test_req);
 	$test=$test_ta['inclus'];
 	if ((!@opendir(_DIR_IMG."icones")) OR (!@fopen(_DIR_IMG."icones/mm.png", "r")) OR !$test) {return false;}
 	else {return true;}
+	}
 	break;
 
 	case 'install':
@@ -26,9 +29,11 @@ function eva_freemind_install($action){
 	if (!$test) {
 	sql_insertq('spip_types_documents',array('extension' => 'mm','mime_type' => 'application/x-freemind','titre' => 'Freemind','inclus' => 'embed','upload' => 'oui'));
 	}
+	ecrire_meta('eva_freemind_test','1');
 	break;
        
 	case 'uninstall':
+	effacer_meta('eva_freemind_test');
 	break;
 	}
 }
