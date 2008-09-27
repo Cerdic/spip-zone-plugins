@@ -100,10 +100,10 @@ function spipbb_nb_messages($id_auteur){
 		AND $GLOBALS['spipbb']['configure']=='oui'
 		AND $GLOBALS['spipbb']['id_secteur']>0 )
 		$result_auteurs = sql_select('id_auteur',
-							array('spip_forum','spip_articles'), // FROM
+							"spip_forum AS sf, spip_articles AS sa", // FROM
 							array("id_auteur=$id_auteur",
-									"spip_forum.id_article=spip_articles.id_article",
-									"( spip_articles.id_rubrique=".$GLOBALS['spipbb']['id_secteur']." OR spip_articles.id_secteur=".$GLOBALS['spipbb']['id_secteur']." )"
+									"sf.id_article=sa.id_article",
+									"( sa.id_rubrique=".$GLOBALS['spipbb']['id_secteur']." OR sa.id_secteur=".$GLOBALS['spipbb']['id_secteur']." )"
 									) //WHERE
 							);
 	else $result_auteurs = sql_select('auteur','spip_forum',"id_auteur=$id_auteur");
