@@ -73,7 +73,7 @@ function cs_rempl_glossaire($texte) {
 	static $accents;
 	if(!isset($accents)) $accents = cs_glossaire_accents();
 	$limit = defined('_GLOSSAIRE_LIMITE')?_GLOSSAIRE_LIMITE:-1;
-	$r = spip_query("SELECT id_mot, titre, texte, descriptif FROM spip_mots WHERE " . $GLOBALS['glossaire_groupes_type']);
+	$r = spip_query("SELECT id_mot, titre, texte, descriptif FROM spip_mots WHERE " . $GLOBALS['glossaire_groupes_type'] . " ORDER BY id_mot ASC");
 	// protection des liens SPIP
 	if (strpos($texte, '[')!==false) 
 		$texte = preg_replace_callback(',\[[^][]*->>?[^]]*\],msS', 'glossaire_echappe_balises_callback', $texte);
