@@ -80,7 +80,7 @@ function cs_rempl_glossaire($texte) {
 	// compatibilite SPIP 1.92
 	$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array';
 	// parcours de tous les mots, sauf celui qui peut faire partie du contexte (par ex : /spip.php?mot5)
-	while($mot = $fetch($r)) if ($mot['id_mot']<>$GLOBALS['id_mot']) {
+	while($mot = $fetch($r)) if ($mot['id_mot']<>_request('id_mot')) {
 		// prendre en compte les formes du mot : architrave/architraves
 		$a = explode('/', $titre = extraire_multi($mot['titre']));
 		$gloss_id = $mot['id_mot'];
