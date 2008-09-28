@@ -1,0 +1,20 @@
+<plugin>
+        <nom>Plugin livre-dor</nom>
+        <auteur>Bernard Blazin - Novembre 2006</auteur>
+        <version>0.1</version>
+        <etat>dev</etat>
+        <description>Livre d'or Spip</description>
+		<fonctions>livre.php</fonctions>
+        <prefix>livre</prefix>
+        <pipeline>
+        <nom>ajouter_boutons</nom>
+        <action>ajouterBoutons</action>
+        <inclure>livre.php</inclure>
+</pipeline>
+<pipeline>
+                <nom>header_prive</nom>
+        </pipeline>
+
+
+
+</plugin>
