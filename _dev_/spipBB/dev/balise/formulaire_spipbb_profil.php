@@ -24,6 +24,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 include_spip('inc/spipbb_common');
+include_spip('inc/traiter_imagerie');
+include_spip('inc/filtres');
 spipbb_log('included',2,__FILE__);
 
 function balise_FORMULAIRE_SPIPBB_PROFIL ($p) {
