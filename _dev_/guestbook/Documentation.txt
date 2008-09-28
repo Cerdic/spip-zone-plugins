@@ -39,4 +39,4 @@ Je ne suis pas très familiarisé avec les class objets de SPIP j'ai donc parfois 
 
 J'espère que ce plugin vous apportera satisfaction mais je reste persuadé qu'il faut faire encore mieux et surtout au niveau formulaires.
 
-Bernard Blazin
+Bernard Blazin & Yohann Prigent (potter64)

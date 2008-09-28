@@ -1,13 +1,13 @@
 #CACHE{200} 
 
-<BOUCLE_livre(spip_livre){par maj}{inverse} >
+<BOUCLE_livre(spip_livre){!par maj}>
 
-<p>Nom: #NOM de : #VILLE le [(#MAJ|affdate)]<br>
-  Son message: #TEXTE <br>
+<p>Nom: #NOM de : #VILLE le [(#MAJ|affdate)]<br />
+  Son message: #TEXTE <br />
   Note: #NOTE/10 
  <BOUCLE_reponse(spip_reponses_livre){tout}{id_messages}>
   <br>
-  #NOM répond le :[(#DATE|affdate)]<br>
+  #NOM répond le :[(#DATE|affdate)]<br />
   #REPONSES
  
   </BOUCLE_reponse> </BOUCLE_livre>

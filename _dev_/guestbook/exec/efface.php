@@ -1,9 +1,9 @@
 <?php
-/**
-	 * Livre d'or
+	/**
+	 * GuestBook
 	 *
-	 * Copyright (c) 2006
-	 * Bernard Blazin  http://www.libertyweb.info
+	 * Copyright (c) 2008
+	 * Bernard Blazin  http://www.libertyweb.info & Yohann Prigent (potter64)
 	 * http://www.plugandspip.com 
 	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	 * Pour plus de details voir le fichier COPYING.txt.
@@ -12,19 +12,18 @@
 include_spip('inc/presentation');
 function exec_efface(){
 global $connect_statut, $connect_toutes_rubriques;
-debut_page(_T('Le LIVRE'), "", "");
+debut_page(_T('livre:lelivre'), "", "");
 debut_gauche();
 echo "<br /><br />";
-gros_titre(_T('Destruction  des tables'));
+gros_titre(_T('livre:destroy'));
 
 debut_cadre_relief();
  $date = date("d-m-Y");
 $heure = date("H:i");
-Print("Nous sommes le $date et il est $heure");      
-echo"<br>";
+echo"<br />";
+echo _T('livre:avertdestroy');
+echo _T('livre:confirm');
 icone_horizontale(_T('livre:retour'), generer_url_ecrire("livre"), '../'._DIR_PLUGIN_LIVRE.'/img_pack/livredor.png');
-echo "La suppression des tables supprimera toutes les données du livre d'or<br>";
-echo"Confirmez !";
 echo "<form action='' method='post'>";
 //echo '<input  type="checkbox" value="oui">oui';
 echo ' <input type="radio" name="reponse" value="1" />
@@ -45,7 +44,7 @@ mysql_query("DROP TABLE spip_reponses_livre");
 
 //fin fonction
 echo"Les 2 tables sont détruites";}
-else{echo"Vous n'avez rien coché !";}
+else{echo _T('livre:pascoch');}
 
 	
 //$value=$_POST['0'];
@@ -57,4 +56,3 @@ fin_page();
                         exit;
                 }
 ?>
-

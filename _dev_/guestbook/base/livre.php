@@ -1,4 +1,15 @@
 <?php
+	/**
+	 * GuestBook
+	 *
+	 * Copyright (c) 2008
+	 * Bernard Blazin  http://www.libertyweb.info & Yohann Prigent (potter64)
+	 * http://www.plugandspip.com 
+	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	 * Pour plus de details voir le fichier COPYING.txt.
+	 *  
+	 **/
+	 
 	global $tables_principales;
 	global $tables_auxiliaires;
 

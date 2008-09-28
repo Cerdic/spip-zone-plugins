@@ -1,18 +1,19 @@
 <?php
-/**
-	 * Livre d'or
+	/**
+	 * GuestBook
 	 *
-	 * Copyright (c) 2006
-	 * Bernard Blazin  http://www.libertyweb.info
+	 * Copyright (c) 2008
+	 * Bernard Blazin  http://www.libertyweb.info & Yohann Prigent (potter64)
 	 * http://www.plugandspip.com 
 	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	 * Pour plus de details voir le fichier COPYING.txt.
 	 *  
 	 **/
-include_spip('inc/presentation');
+	 
+	 include_spip('inc/presentation');
 function exec_livre_edition(){
 global $connect_statut, $connect_toutes_rubriques;
-debut_page(_T('Le LIVRE'), "", "");
+debut_page(_T('livre:lelivre'), "", "");
 echo "<br /><br />";
 gros_titre(_T('Livre d&acute;or'));
 
@@ -27,7 +28,7 @@ echo'    <td>id_message</td>';
 echo'    <td>message</td>';
 echo'    <td>mail</td>';
 echo'    <td>date</td>';
-echo'    <td>répondre</td>';
+echo'    <td>r&eacute;pondre</td>';
 echo'  </tr>';
 $query = "SELECT id_messages,texte,nom,email,maj FROM spip_livre order by maj";
 					$res = spip_query($query);
@@ -52,7 +53,7 @@ echo'  </tr>';
 //fin
 echo'</table>';
  echo '<div align="center"><BR />';
- echo' <input type="submit" name="Submit" value="Répondre">';
+ echo' <input type="submit" name="Submit" value="R&eacute;pondre">';
  echo' </div>';
 echo'</form>';
 
@@ -62,4 +63,3 @@ fin_page();
                         exit;
                 }
 ?>
-

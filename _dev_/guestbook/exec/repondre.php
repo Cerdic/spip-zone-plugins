@@ -1,9 +1,9 @@
 <?php
-/**
-	 * Livre d'or
+	/**
+	 * GuestBook
 	 *
-	 * Copyright (c) 2006
-	 * Bernard Blazin  http://www.libertyweb.info
+	 * Copyright (c) 2008
+	 * Bernard Blazin  http://www.libertyweb.info & Yohann Prigent (potter64)
 	 * http://www.plugandspip.com 
 	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	 * Pour plus de details voir le fichier COPYING.txt.
@@ -12,10 +12,10 @@
 include_spip('inc/presentation');
 function exec_repondre(){
 global $connect_statut, $connect_toutes_rubriques;
-debut_page(_T('Le LIVRE'), "", "");
+debut_page(_T('livre:lelivre'), "", "");
 debut_gauche();
 echo "<br /><br />";
-gros_titre(_T('Répondre aux messages du livre d\'or'));
+gros_titre(_T('livre:repondremdl'));
 
 debut_cadre_relief();
  $date1 = date("d-m-Y");
@@ -30,7 +30,7 @@ if (isset($_POST['repond'])) {
 	$rep=$_POST['repond'][$i];
         
 		
-		echo " Vous avez dejà répondu aux messages : ";
+		echo " Vous avez dej&agrave; r&eacute;pondu aux messages : ";
 		$query = "SELECT id_messages FROM spip_reponses_livre order by date";
 					$res = spip_query($query);
 					while ($row =spip_fetch_array($res)){
@@ -42,7 +42,7 @@ if (isset($_POST['repond'])) {
 }
 echo "<form action='' method='post'>";
 		echo 'Id: <input name="id_rep" type="text" value=',$rep,' readonly="true"><br>';
-		echo 'Réponse: <textarea name="reponses" cols="" rows="5" ></textarea><br>';
+		echo 'R&eacute;ponse: <textarea name="reponses" cols="" rows="5" ></textarea><br>';
 		echo 'Votre nom: <input name="nom" type="text"><br>';
 		echo' <input name="submit" type="submit" value="Envoyer"><br>';
 		echo '</form>';
@@ -64,4 +64,3 @@ fin_page();
                         exit;
                 }
 ?>
-

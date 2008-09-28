@@ -1,15 +1,14 @@
 <?php
-/**
-	 * Livre d'or
+	/**
+	 * GuestBook
 	 *
-	 * Copyright (c) 2006
-	 * Bernard Blazin  http://www.libertyweb.info
+	 * Copyright (c) 2008
+	 * Bernard Blazin  http://www.libertyweb.info & Yohann Prigent (potter64)
 	 * http://www.plugandspip.com 
 	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	 * Pour plus de details voir le fichier COPYING.txt.
 	 *  
 	 **/
-
 function livre_ajouterBoutons($boutons_admin) {
 	// si on est admin
 	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
