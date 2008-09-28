@@ -4,7 +4,7 @@
 	<version>1</version>
 	<etat>dev</etat>
 	<description>Un Livre d'or pour votre site Spip. Ce livre d'or fonctionne avec une table différente des tables de SPIP, ce qui en fais un système à part. Par contre il fonctionne avec les tables de SPIP</description>
-	<fonctions>livrefonc.php</fonctions>
+	<fonctions>livre_fonctions.php</fonctions>
 	<prefix>livre</prefix>
 	<pipeline>
 		<nom>header_prive</nom>
