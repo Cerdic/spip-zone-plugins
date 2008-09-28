@@ -1,6 +1,8 @@
-<?php 
-global $CompteurGraphique;
-if ('[(#ENV{CG}|texte_script)]') {
-$CompteurGraphique = '[(#ENV{CG}|texte_script)]'; 
-$CompteurGraphique = '<img src="#EVAL{_DIR_IMG}CompteurGraphique/'.$CompteurGraphique.'" alt="" />';}
- ?>
+#CACHE{0}
+
+[(#ENV**{editable}|?{' '})
+<form action='#SELF' method='post'>
+#ACTION_FORMULAIRE{#SELF}
+</form>
+]
+[<img src="#EVAL{_DIR_IMG}CompteurGraphique/(#ENV*{compteurgraphiquetotal})" alt="" />]

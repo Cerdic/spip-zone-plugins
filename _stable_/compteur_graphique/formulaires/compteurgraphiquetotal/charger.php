@@ -1,20 +1,6 @@
 <?php
+function formulaires_compteurgraphiquetotal_charger_dist(){
 
-$t=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_COMPTEURGRAPHIQUE',(_DIR_PLUGINS.end($t)));
-
-
-function balise_COMPTEURGRAPHIQUETOTAL($p) {
-    $numero_compteur_graphique = valeur_numerique($p->param[0][1][0]->texte);
-    return calculer_balise_dynamique($p,'COMPTEURGRAPHIQUETOTAL',array($numero_compteur_graphique));
-}
-
-function balise_COMPTEURGRAPHIQUETOTAL_stat($args,$filtres) {
-    return array($args[1]);
-}
-
-function balise_COMPTEURGRAPHIQUETOTAL_dyn($num_compt) {
-    $CG_ida = $GLOBALS['id_article'];
     $CG_nom_table = "spip_compteurgraphique";
     include_spip('inc/CompteurGraphique_inclusions');
     
@@ -42,11 +28,11 @@ function balise_COMPTEURGRAPHIQUETOTAL_dyn($num_compt) {
             $CG_fichier = _DIR_IMG."CompteurGraphique/CompteurGraphique".$CG_destruction.".gif";
             if (file_exists($CG_fichier)) {unlink($CG_fichier);}
             $envoi_final = compteur_graphique_calcul_image($CG_longueur,$CG_decompte,$CG_habillage,$CGtechnique);
-            return array('formulaires/compteurgraphiquetotal',0,array('CG'=>$envoi_final));
+            return array('compteurgraphiquetotal'=>$envoi_final);
         }
         //Si suppression : retour d'une chaine vide
         else {
-        return array('formulaires/compteurgraphiquetotal',0,array('CG'=>''));
+        return array('compteurgraphiquetotal'=>'');
         }
 }
 ?>

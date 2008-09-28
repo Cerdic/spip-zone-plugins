@@ -1,20 +1,7 @@
 <?php
+function formulaires_compteurgraphique_charger_dist($id_article){
 
-$t=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_COMPTEURGRAPHIQUE',(_DIR_PLUGINS.end($t)));
-
-
-function balise_COMPTEURGRAPHIQUE($p) {
-    $numero_compteur_graphique = valeur_numerique($p->param[0][1][0]->texte);
-    return calculer_balise_dynamique($p,'COMPTEURGRAPHIQUE',array($numero_compteur_graphique));
-}
-
-function balise_COMPTEURGRAPHIQUE_stat($args,$filtres) {
-    return array($args[1]);
-}
-
-function balise_COMPTEURGRAPHIQUE_dyn($num_compt) {
-    $CG_ida = $GLOBALS['id_article'];
+    $CG_ida = $id_article;
     $CG_nom_table = "spip_compteurgraphique";
     include_spip('inc/CompteurGraphique_inclusions');
     
@@ -51,11 +38,11 @@ function balise_COMPTEURGRAPHIQUE_dyn($num_compt) {
                 sql_updateq($CG_nom_table,array("decompte" => $CG_decompte),"id_compteur = $num_compt");
             }
             $envoi_final = compteur_graphique_calcul_image($CG_longueur,$CG_decompte,$CG_habillage,$CGtechnique);
-            return array('formulaires/compteurgraphique',0,array('CG'=>$envoi_final));
+            return array('compteurgraphique'=>$envoi_final);
         }
         //Si suppression : retour d'une chaine vide
         else {
-        return array('formulaires/compteurgraphique',0,array('CG'=>''));
+        return array('compteurgraphique'=>'');
         }
     }
     else {
@@ -108,7 +95,7 @@ function balise_COMPTEURGRAPHIQUE_dyn($num_compt) {
                     $CG_fichier = _DIR_IMG."CompteurGraphique/CompteurGraphique".$CG_destruction.".gif";
                     if (file_exists($CG_fichier)) {unlink($CG_fichier);}
                     $envoi_final = compteur_graphique_calcul_image($CG_longueur,$CG_vis+$visites_today,$CG_habillage,$CGtechnique);
-                    return array('formulaires/compteurgraphique',0,array('CG'=>$envoi_final));
+                    return array('compteurgraphique'=>$envoi_final);
                     }
                         
                     //Second cas : statut = 2 ; on envoie des statistiques personnalisées gérées par le champ 'decompte' qui est alors incrémenté
@@ -122,12 +109,12 @@ function balise_COMPTEURGRAPHIQUE_dyn($num_compt) {
                     $CG_decompte++;
                     sql_updateq($CG_nom_table,array("decompte" => $CG_decompte),"id_article = $CG_ida");
                     $envoi_final = compteur_graphique_calcul_image($CG_longueur,$CG_decompte,$CG_habillage,$CGtechnique);
-                    return array('formulaires/compteurgraphique',0,array('CG'=>$envoi_final));
+                    return array('compteurgraphique'=>$envoi_final);
                     }                        
                         
                     //Troisième cas : statut = 3 ; l'administrateur a désactivé le compteur de visite pour l'article, on renvoie une chaine vide
                 if ($CG_statut==3) {
-                        return array('formulaires/compteurgraphique',0,array('CG'=>''));
+                        return array('compteurgraphique'=>'');
                 }
             }
             //Sinon, on réalise un traitement pour la rubrique
@@ -149,11 +136,11 @@ function balise_COMPTEURGRAPHIQUE_dyn($num_compt) {
                         $CG_fichier = _DIR_IMG."CompteurGraphique/CompteurGraphique".$CG_destruction.".gif";
                         if (file_exists($CG_fichier)) {unlink($CG_fichier);}
                         $envoi_final = compteur_graphique_calcul_image($CG_longueur,$CG_vis+$visites_today,$CG_habillage,$CGtechnique);
-                        return array('formulaires/compteurgraphique',0,array('CG'=>$envoi_final));
+                        return array('compteurgraphique'=>$envoi_final);
                     }
                     // Second cas : statut = 5 : l'administrateur a désactivé le compteur pour tous les articles de la rubrique : on envoie une chaine vide :
                     if ($CG_statut==5) {
-                        return array('formulaires/compteurgraphique',0,array('CG'=>''));
+                        return array('compteurgraphique'=>'');
                     }
                 }
             
@@ -171,15 +158,16 @@ function balise_COMPTEURGRAPHIQUE_dyn($num_compt) {
                         $CG_fichier = _DIR_IMG."CompteurGraphique/CompteurGraphique".$CG_destruction.".gif";
                         if (file_exists($CG_fichier)) {unlink($CG_fichier);}
                         $envoi_final = compteur_graphique_calcul_image($CG_longueur,$CG_vis+$visites_today,$CG_habillage,$CGtechnique);
-                        return array('formulaires/compteurgraphique',0,array('CG'=>$envoi_final));
+                        return array('compteurgraphique'=>$envoi_final);
                     }
                 }
             }
         }
     //Si on n'est pas dans un article et que le numéro de compteur n'est pas défini dans le paramètre de la balise (erreur du webmestre), alors on renvoie une chaine vide
         else {
-            return array('formulaires/compteurgraphique',0,array('CG'=>''));
+            return array('compteurgraphique'=>'');
         }
     }
+    echo $envoi_final;
 }
 ?>
