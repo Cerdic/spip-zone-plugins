@@ -1,6 +1,4 @@
 <?php
-
-
 	/**
 	 * GuestBook
 	 *
@@ -11,13 +9,9 @@
 	 * Pour plus de details voir le fichier COPYING.txt.
 	 *  
 	 **/
-
-
+	
+	include_spip('inc/livre_fonctions');
 	$p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	define('_DIR_PLUGIN_LIVRE', (_DIR_PLUGINS.end($p)));
 	define('_NOM_PLUGIN_LIVRE', (end($p)));
-
-	include_spip('inc/livre_fonctions');
-
-	
 ?>

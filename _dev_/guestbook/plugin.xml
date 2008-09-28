@@ -3,15 +3,15 @@
 	<auteur>Bernard Blazin - Novembre 2006 &amp; Yohann Prigent - Septembre 2008</auteur>
 	<version>1</version>
 	<etat>dev</etat>
-	<description>Livre d'or Spip</description>
-	<fonctions>livre.php</fonctions>
+	<description>Un Livre d'or pour votre site Spip. Ce livre d'or fonctionne avec une table différente des tables de SPIP, ce qui en fais un système à part. Par contre il fonctionne avec les tables de SPIP</description>
+	<fonctions>livrefonc.php</fonctions>
 	<prefix>livre</prefix>
-	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouterBoutons</action>
-		<inclure>livre.php</inclure>
-	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
 	</pipeline>
+	<bouton id='livredor' parent='forum'>
+		<icone>img_pack/livredor.png</icone>
+		<titre>Livre d'or</titre>
+		<url>livre</url>
+	</bouton>
 </plugin>
