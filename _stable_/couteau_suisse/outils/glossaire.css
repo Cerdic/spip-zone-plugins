@@ -22,6 +22,7 @@ a.cs_glossaire span.gl_dd {
  	display:none;
 	visibility:hidden;
 	z-index:999;
+	font-style:normal;
 }
 
 a.cs_glossaire span.gl_dd {
