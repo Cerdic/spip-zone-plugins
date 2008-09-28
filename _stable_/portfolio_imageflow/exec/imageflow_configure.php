@@ -78,7 +78,7 @@ function exec_imageflow_configure () {
 				// inutile de s'occuper de img. Complété par le squelette.
 				continue;
 			}
-			// si non transmise par le formulaire, prendre celle par enregistree
+			// si non transmise par le formulaire, prendre celle enregistree
 			$value = 
 				($retour_formulaire)
 				? trim(_request($key))
