@@ -14,18 +14,14 @@
 				<span>&nbsp;</span>
 			</td>
 			<td class="titreforum">
-			<?php $total_messages=0 ?>
-			<BOUCLE_rub_main(RUBRIQUES){id_rubrique}>
-				<BOUCLE_sous_rub(RUBRIQUES){id_parent}>
-					<BOUCLE_forum(ARTICLES){id_rubrique}>
-						<BOUCLE_sujets(FORUMS){id_article}>
-							<BOUCLE_posts(FORUMS){id_thread}{plat}></BOUCLE_posts><?php $total_messages+=#TOTAL_BOUCLE ?><//B_posts>
-						</BOUCLE_sujets>
-					</BOUCLE_forum>
-					<BOUCLE_sous_sous_rub(BOUCLE_sous_rub)></BOUCLE_sous_sous_rub>
-				</BOUCLE_sous_rub>
-			</BOUCLE_rub_main>
-			<:spipbb:total_messages_membres:> <?php echo $total_messages ?> <:spipbb:message_s:><br />
+			[(#REM) un peu lourd mais le critère {plat} déconne avec {id_secteur}]
+			<BOUCLE_s(ARTICLES){id_secteur=#ID_RUBRIQUE}>
+			<BOUCLE_a(FORUMS){doublons messages}{plat}{id_article} /> 
+			</BOUCLE_s>
+			<BOUCLE_total_posts(FORUMS){!doublons messages}{plat}{!par date} />
+			<:spipbb:total_messages_membres:>[ (#TOTAL_BOUCLE) ]<:spipbb:message_s:><br />
+			<//B_total_posts>
+			
 			<BOUCLE_auteurs(AUTEURS){tout}{statut IN 0minirezo,1comite,6forum}></BOUCLE_auteurs><:spipbb:total_membres:> #TOTAL_BOUCLE <:spipbb:membres_inscrits:><br /><//B_auteurs>
 			[(#REM) c.23/12/7 on passe par la page profile]
 			<B_dernier_auteur><:spipbb:dernier_membre:> <BOUCLE_dernier_auteur(AUTEURS){tout}{statut IN 0minirezo,1comite,6forum}{par id_auteur}{inverse}{0,1}><a href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ID_RUBRIQUE})]">#NOM</a></BOUCLE_dernier_auteur><br /></B_dernier_auteur>
