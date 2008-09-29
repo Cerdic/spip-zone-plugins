@@ -116,14 +116,18 @@ function spipbb_nb_messages($id_auteur){
 // Calcule le nombre de messages par auteur et les classes par ordre decroissant
 function spipbb_nb_messages_groupe($id_bidon){
 	$aut_nb = array();
-	$result_auteurs = sql_select('sf.id_auteur, sa.nom AS auteur, COUNT(sa.nom) AS total','spip_forum AS sf, spip_auteurs AS sa',
-							"sf.statut='publie' AND sf.id_auteur>0 AND sf.id_auteur=sa.id_auteur AND sa.statut!='5poubelle' " , // WHERE
+	if (!isset($GLOBALS['spipbb']))
+		$GLOBALS['spipbb']=@unserialize($GLOBALS['meta']['spipbb']); // lire_config ?
+	$secteur_spipbb = $GLOBALS['spipbb']['id_secteur'];
+	$result_auteurs = sql_select(
+							'sf.id_auteur, sa.nom AS auteur, COUNT(sa.nom) AS total', //SELECT
+							'spip_forum AS sf, spip_auteurs AS sa, spip_articles AS sar', // FROM
+							"sf.statut='publie' AND sf.id_auteur>0 AND sf.id_auteur=sa.id_auteur AND sa.statut!='5poubelle' AND sar.id_secteur=" . sql_quote($secteur_spipbb) . " AND sar.id_article=sf.id_article AND sf.id_article>0" , // WHERE
 							"sf.id_auteur", // GROUPBY
 							array("total desc"), // ORDERBY
 							"10" // LIMIT
 							);
 	$compte = 0;
-	if (!isset($GLOBALS['spipbb'])) $GLOBALS['spipbb']=@unserialize($GLOBALS['meta']['spipbb']); // lire_config ?
 	while ($row = sql_fetch($result_auteurs) AND $compte++<10) {
 		# 1/12/07 fct spipbb_auteur_infos() change de nom :
 		$infos = spipbb_donnees_auteur($row['id_auteur']);
