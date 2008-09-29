@@ -191,4 +191,24 @@ function is_modo($id_auteur=0,$id_article=0) {
 	else return 'non';
 } //
 
+
+// une balise pour afficher le nombre d'inscrits qui accordent leur affichage dans la liste des membres
+function affiche_total_membres_liste(){
+	$total = 0;
+	$req = sql_select("id_auteur","spip_auteurs");
+
+	while ($row = sql_fetch($req)) {
+		if (afficher_champ_spipbb($row['id_auteur'],'annuaire_forum') == 'oui')
+			$total ++;
+	}
+	return $total ;
+}
+
+function balise_TOTAL_MEMBRES_LISTE($p) {
+
+	$p->code = "affiche_total_membres_liste()";
+	$p->type = 'php';  
+	return $p;
+}
+
 ?>
