@@ -12,7 +12,7 @@ _ &#169; ao&ucirc;t 2008 - Licence GPL
 
 	<version>0.1</version>
 
-	<etat>dev</etat>
+	<etat>test</etat>
 
 	<description>
 	Plugin permettant de visualiser les différences sur les agendas.
