@@ -1,0 +1,41 @@
+#CACHE{0}
+
+[(#REM) squelette pour le calcul de la page mainteannt. ce squelette doit rester identique a celui histo.html sauf XXX qui doit etre ajoute devant div sep (permet de calculer simplement les differences) ]
+
+<style>
+#sep span { 
+margin-right:10px; 
+}
+.hatitre {
+font-weight: bold;
+}
+</style>
+
+<script type="text/javascript" src="dist/jquery.js.html"></script>
+<script type="text/javascript">
+ $(function() {
+   $(".diff").parents().parents().parents().show();
+ });
+</script>
+
+<BOUCLE_event_list(EVENEMENTS)  {id_evenement_source=0} {statut=publie} {par date_debut}>[(#ID_EVENEMENT|ha_testdate{#ENV{datelim}}|?{' ',''})
+XXX<div id="sep" style="border:1px solid #aaaaaa;padding:5px;margin:5px;">
+	<span><a href="#" onclick="ouvrirev([(#ID_EVENEMENT)],[(#ID_ARTICLE)]);return false;"><img src="/dist/images/puce-verte.gif"></a></span>
+	<INCLURE{fond=histo-hierarchie}{id_evenement=#ID_EVENEMENT}{id_article=#ID_ARTICLE}>
+	<br />
+	<span class="hatitre"><:ha:sk_titre:></span> <span id="hatitre">#TITRE</span>
+	<br />
+	<span class="hatitre"><:ha:sk_date_debut:></span> <span id="datedebut">[(#DATE_DEBUT|affdate)]</span>
+	<br />
+	<span class="hatitre"><:ha:sk_date_fin:></span> <span id="datefin">[(#DATE_FIN|affdate)]</span>
+	<br />
+	<span class="hatitre"><:ha:sk_lieu:></span>  <span id="lieu">#LIEU</span>
+	<br />
+	<span class="hatitre"><:ha:sk_descriptif:></span> <span id="descriptif">[(#DESCRIPTIF|textebrut)]</span>
+	<br />
+	<span class="hatitre"><:ha:sk_horaire:></span> <span id="horaire">#HORAIRE</span>
+	<br />
+	<INCLURE{fond=histo-mots-inc}{id_evenement=#ID_EVENEMENT}>
+	<br />
+	<INCLURE{fond=histo-inc}{id_evenement=#ID_EVENEMENT}>
+</div>]</BOUCLE_event_list>
