@@ -55,7 +55,6 @@ function cs_introduction($type, $texte, $chapo, $descriptif, $id, $lgr=0) {
 				// on coupe proprement...
 				$result = PtoBR(propre(supprimer_tags($couper(cs_introduire($chapo."\n\n\n".$texte), $lgr?$lgr:round(500*_INTRODUCTION_LGR/100), _INTRODUCTION_CODE))));
 			}
-			$racc = 'article';
 			break;
 		case 'breves':
 			$result = PtoBR(propre(supprimer_tags($couper(cs_introduire($texte), $lgr?$lgr:round(300*_INTRODUCTION_LGR/100), _INTRODUCTION_CODE))));
