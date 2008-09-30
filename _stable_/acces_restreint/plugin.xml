@@ -28,6 +28,7 @@ _ All SPIP's loops are loaded with the necessary tools to filter the results acc
 	<options>acces_restreint_options.php</options>
 	<fonctions>acces_restreint_fonctions.php</fonctions>
 	<fonctions>public/acces_restreint.php</fonctions>
+	<fonctions>inc/acces_restreint.php</fonctions>
 	<install>base/acces_restreint_install.php</install>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<prefix>AccesRestreint</prefix>
