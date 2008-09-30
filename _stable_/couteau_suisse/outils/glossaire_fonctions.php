@@ -107,7 +107,7 @@ function cs_rempl_glossaire($texte) {
 			$mem = $GLOBALS['toujours_paragrapher'];
 			$GLOBALS['toujours_paragrapher'] = false;
 			// $definition =strlen($mot['descriptif'])?$mot['descriptif']:$mot['texte'];
-			$table1[$gloss_id] = "name='mot$gloss_id' href='$lien'";
+			$table1[$gloss_id] = "href='$lien' name='mot$gloss_id"; // name est complete plus tard pour eviter les doublons
 			$table2[$gloss_id] = recuperer_fond(
 				defined('_GLOSSAIRE_JS')?'fonds/glossaire_js':'fonds/glossaire_css', 
 				array('id_mot' => $gloss_id, 'titre' => $titre, 
@@ -119,8 +119,9 @@ function cs_rempl_glossaire($texte) {
 		}
 	}
 	// remplacement final des balises posees ci-dessus
+	$GLOBALS['i']=0;
 	return preg_replace(",@@GLOSS(.*?)#([0-9]+)@@,e", 
-		'"<a $table1[\\2] class=\'cs_glossaire\'><span class=\'gl_mot\'>\\1</span>$table2[\\2]</a>"', echappe_retour($texte, 'GLOSS'));
+		'"<a $table1[\\2]_".$GLOBALS["i"]++."\' class=\'cs_glossaire\'><span class=\'gl_mot\'>\\1</span>$table2[\\2]</a>"', echappe_retour($texte, 'GLOSS'));
 }
 
 function cs_glossaire($texte) {
