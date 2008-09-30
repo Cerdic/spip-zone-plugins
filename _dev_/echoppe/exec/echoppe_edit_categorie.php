@@ -41,28 +41,25 @@ function exec_echoppe_edit_categorie(){
 		echo inc_commencer_page_dist(_T('echoppe:les_categories'), "redacteurs", "echoppe");
 	}
 
-	echo debut_gauche();
-	
-	/*echo debut_boite_info();
-	echo recuperer_fond('fonds/echoppe_info_edit_categorie',$contexte);
-	echo fin_boite_info();*/
+	echo debut_gauche('',true);
+
 	
 	include_spip('inc/echoppe_raccourcis');
 	$raccourcis = generer_raccourcis_echoppe();
 	echo bloc_des_raccourcis($raccourcis);
 	
-	echo debut_boite_info();
+	echo debut_boite_info(true);
 	echo recuperer_fond('fonds/echoppe_logo_categorie',$contexte);
-	echo fin_boite_info();
+	echo fin_boite_info(true);
 	
-	echo creer_colonne_droite();
-	echo debut_droite(_T('echoppe:edition_de_cetegorie'));
-	echo gros_titre(_T("echoppe:edition_de_cetegorie"));
+	echo creer_colonne_droite(true);
+	echo debut_droite(_T('echoppe:edition_de_cetegorie'),true);
+	echo gros_titre(_T("echoppe:edition_de_cetegorie"),'',false);
 	
 	echo recuperer_fond('fonds/echoppe_edit_categorie',$contexte);
 	
-	echo fin_gauche();
-	echo fin_page();
+	echo fin_gauche(true);
+	echo fin_page(true);
 	
 }
 

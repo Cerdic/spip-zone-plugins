@@ -14,26 +14,25 @@ function exec_echoppe(){
 		echo inc_commencer_page_dist(_T('echoppe:echoppe'), "redacteurs", "echoppe");
 	}
 	
-	echo debut_gauche();
+	echo debut_gauche(_T('echoppe:echoppe'),true);
 	
 	
-	echo debut_boite_info();
+	echo debut_boite_info(true);
 		echo (_T('echoppe:descriptif_echoppe'));
-	echo fin_boite_info();
+	echo fin_boite_info(true);
 	
 	
 	include_spip('inc/echoppe_raccourcis');
 	$raccourcis = generer_raccourcis_echoppe();
 	echo bloc_des_raccourcis($raccourcis);
-		
 	
-	echo creer_colonne_droite();
-	echo debut_droite(_T('echoppe:echoppe'));
+	echo creer_colonne_droite(true);
+	echo debut_droite(_T('echoppe:echoppe'), true);
 	
 	echo recuperer_fond('fonds/echoppe_echoppe');
 	
-	echo fin_gauche();
-	echo fin_page();
+	echo fin_gauche(true);
+	echo fin_page(true);
 }
 
 ?>
