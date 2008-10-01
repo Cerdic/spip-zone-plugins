@@ -10,7 +10,7 @@
 	  0.1
 	</version>
 	<etat>
-	  dev
+	  stable
 	</etat>
 	<description>
 	utilise [BBCode->http://fr.wikipedia.org/wiki/Bbcode] pour faire le rendu des textes dans SPIP.
