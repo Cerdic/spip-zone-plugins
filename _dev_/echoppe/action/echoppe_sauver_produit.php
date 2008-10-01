@@ -55,34 +55,85 @@ function action_echoppe_sauver_produit(){
 	
 	switch ($new){
 		case 'oui':
-			$sql_insert_produit = "INSERT INTO spip_echoppe_produits VALUES ('','".$date_debut."', '".$date_fin."', '".$poids."', '".$hauteur."', '".$largeur."', '".$longeur."', '".$colisage."', '".$ref_produit."', '".$prix_base_htva."', '', 'prepa');";
-			$res_insert_produit = spip_query($sql_insert_produit);
+			/*$sql_insert_produit = "INSERT INTO spip_echoppe_produits VALUES ('','".$date_debut."', '".$date_fin."', '".$poids."', '".$hauteur."', '".$largeur."', '".$longeur."', '".$colisage."', '".$ref_produit."', '".$prix_base_htva."', '', 'prepa');";
+			$res_insert_produit = spip_query($sql_insert_produit);*/
+			$arg_inser_produit = array(
+			'id_produit' => '',
+			'date_debut' => $date_debut,
+			'date_fin' => $date_in,
+			'poids' => $poids,
+			'hauteur' => $hauteur,
+			'largeur' => $largeur,
+			'longueur' => $longueur,
+			'colisage' => $colissage,
+			'ref_produit' => $ref_produit,
+			'prix_base_htva' => $prix_base_htva,
+			'maj' => $maj,
+			'statut' => $statut
+			);
 			//echo $sql_insert_produit.'<hr />';
 			
-			$new_id_produit = spip_insert_id();
-			$id_produit = $new_id_produit;
+			//$new_id_produit = spip_insert_id();
+			$id_produit = sql_insertq('spip_echoppe_produits',$arg_inser_produit);
 			
-			$sql_lien_produit_categorie = "INSERT INTO spip_echoppe_categories_produits VALUES ('".$id_categorie."', '".$id_produit."');";
-			$res_lien_produit_categorie = spip_query($sql_lien_produit_categorie);
+			/*$sql_lien_produit_categorie = "INSERT INTO spip_echoppe_categories_produits VALUES ('".$id_categorie."', '".$id_produit."');";
+			$res_lien_produit_categorie = spip_query($sql_lien_produit_categorie);*/
+			$res_lien_produit_categorie = sql_insertq('spip_echoppe_categories_produits', array('id_categorie'=>$id_categorie,'id_produit'=>$id_produit));
 			
+			/*$sql_insert_produit_descriptif = "INSERT INTO spip_echoppe_produits_descriptions VALUES ('','".$new_id_produit."','".$lang_produit."','".addslashes($titre)."','".addslashes($descriptif)."','".addslashes($texte)."','".addslashes($ps)."','".$tva."','".$quantite_mini."', '', '') ";
+			$res_insert_produit_descriptif = spip_query($sql_insert_produit_descriptif);*/
+			$arg_insert_produit_descriptif = array(
+				'id_descriptif_produit'=>'',
+				'id_produit'=>$new_id_produit,
+				'lang'=>$lang_produit,
+				'titre'=>addslashes($titre),
+				'descriptif'=>addslashes($descriptif),
+				'texte' => addslashes($texte),
+				'ps' => addslashes($ps),
+				'tva' => $tva,
+				'quantite_mini' => $quantite_mini,
+				'logo' => '',
+				'maj' => $maj
+			);
+			$res_insert_produit_descriptif = sql_insertq('spip_echoppe_produits_descriptions',$arg_insert_produit_descriptif);
 			
-			$sql_insert_produit_descriptif = "INSERT INTO spip_echoppe_produits_descriptions VALUES ('','".$new_id_produit."','".$lang_produit."','".addslashes($titre)."','".addslashes($descriptif)."','".addslashes($texte)."','".addslashes($ps)."','".$tva."','".$quantite_mini."', '', '') ";
-			$res_insert_produit_descriptif = spip_query($sql_insert_produit_descriptif);
 			
 			//echo $sql_insert_produit_descriptif.'<hr />';
 			
 			break;
 		
 		case 'ajout_description' :
-			$sql_insert_produit_descriptif = "INSERT INTO spip_echoppe_produits_descriptions VALUES ('','".$id_produit."','".$lang_produit."','".addslashes($titre)."','".addslashes($descriptif)."','".addslashes($texte)."','".addslashes($ps)."','".$tva."','".$quantite_mini."', '', '') ";
-			//echo $sql_insert_produit_descriptif;
-			$res_insert_produit_descriptif = spip_query($sql_insert_produit_descriptif);
+			$arg_insert_produit_descriptif = array(
+				'id_descriptif_produit'=>'',
+				'id_produit'=>$new_id_produit,
+				'lang'=>$lang_produit,
+				'titre'=>addslashes($titre),
+				'descriptif'=>addslashes($descriptif),
+				'texte' => addslashes($texte),
+				'ps' => addslashes($ps),
+				'tva' => $tva,
+				'quantite_mini' => $quantite_mini,
+				'logo' => '',
+				'maj' => $maj
+			);
+			$res_insert_produit_descriptif = sql_insertq('spip_echoppe_produits_descriptions',$arg_insert_produit_descriptif);
 			break;
 		
 		case 'maj_description' :
-			$sql_update_produit_descriptif = "UPDATE spip_echoppe_produits_descriptions SET titre = '".addslashes($titre)."', descriptif = '".addslashes($descriptif)."', texte = '".addslashes($texte)."',ps = '".addslashes($ps)."', tva = '".$tva."', quantite_mini = '".$quantite_mini."' WHERE id_produit = '".$id_produit."' AND lang = '".$lang_produit."' ";
-			//echo $sql_update_produit_descriptif;
-			$res_update_produit_descriptif = spip_query($sql_update_produit_descriptif);
+			$arg_insert_produit_descriptif = array(
+				'id_descriptif_produit'=>'',
+				'id_produit'=>$new_id_produit,
+				'lang'=>$lang_produit,
+				'titre'=>addslashes($titre),
+				'descriptif'=>addslashes($descriptif),
+				'texte' => addslashes($texte),
+				'ps' => addslashes($ps),
+				'tva' => $tva,
+				'quantite_mini' => $quantite_mini,
+				'logo' => '',
+				'maj' => $maj
+			);
+			$res_insert_produit_descriptif = sql_updateq('spip_echoppe_produits_descriptions',$arg_insert_produit_descriptif);
 			break;
 		
 		default :

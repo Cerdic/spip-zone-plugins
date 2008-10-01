@@ -16,24 +16,24 @@ function exec_echoppe_gerer_prestataire_paiement(){
 	}
 	
 	
-	echo debut_gauche();
+	echo debut_gauche('',true);
 	
 	//echo recuperer_fond('fonds/echoppe_prestataires_paiement',$contexte);
 	
-	echo debut_boite_info();
+	echo debut_boite_info(true);
 	echo recuperer_fond('fonds/echoppe_info_prestataire_paiement', $contexte);
-	echo fin_boite_info();
+	echo fin_boite_info(true);
 	
 	include_spip('inc/echoppe_raccourcis');
 	$raccourcis = generer_raccourcis_echoppe();
 	echo bloc_des_raccourcis($raccourcis);
 	
-	echo creer_colonne_droite();
+	echo creer_colonne_droite(true);
 	
-	echo debut_droite(_T('echoppe:gerer_les_prestataire_paiement'));
+	echo debut_droite(true,_T('echoppe:gerer_les_prestataire_paiement'));
 	echo recuperer_fond('fonds/echoppe_gerer_prestataire_paiement', $contexte);
-	echo fin_gauche();
-	echo fin_page();
+	echo fin_gauche(true);
+	echo fin_page(true);
 	
 }
 

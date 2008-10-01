@@ -1,5 +1,5 @@
 #CACHE{0}
-<!-- titre=<:echoppe:confguration_d_echoppe:> -->
+<!-- titre=<:echoppe:echoppe:> -->
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
 	<fieldset><legend><:echoppe:configuration_generale:></legend>
 		<:echoppe:taux_de_tva_par_defaut:>&nbsp;<input type="text" name="taux_de_tva_par_defaut" value="#CONFIG{echoppe/taux_de_tva_par_defaut, 6}" size="1" />&nbsp;%<br />
@@ -33,11 +33,6 @@
 		<:echoppe:duree_de_vie_des_paniers_temporaires:> : <input type="text" size='2' name="duree_de_vie_paniers_temp" value="#CONFIG{echoppe/duree_de_vie_paniers_temp, 2}" />&nbsp;<:echoppe:jours:><br /><:echoppe:0_pour_ne_rien_effacer:><br />
 	</fieldset>
 	<br />
-	<input type="submit" name="_cfg_ok" value="<:OK:>" />
-</form>
-<br />
-<hr />
-<br />
 <strong><:echoppe:donnees_de_facturation:></strong>
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
 	<fieldset><legend><:echoppe:coordonees_du_beneficiaire:></legend>
@@ -53,6 +48,6 @@
 		
 	</fieldset>
 	<br />
-	<input type="submit" name="_cfg_ok" value="<:OK:>" />
+	<input type="submit" name="_cfg_reset" value="<:Reset:>" /><input type="submit" name="_cfg_ok" value="<:OK:>" /><input type="submit" name="_cfg_delete" value="<:suprimer:>" />
 </form>
 

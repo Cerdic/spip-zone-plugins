@@ -13,9 +13,9 @@ div.logo IMG{
 	width: 150px;
 }
 /* par Exibit */
-.cadre-sous_rub, .cadre-r{
+/*.cadre-sous_rub, .cadre-r{
 	padding:8px;
-}
+}*/
 LI.cadre-sous_rub{
 	list-style:none;
 	
@@ -38,7 +38,6 @@ DIV.categorie{
 	position:relative;
 }
 DIV.categorie H1{
-	position:absolute;
 	top:-25px;
 	left:10px;
 	background: transparent url(../images/categorie-24.png) no-repeat scroll 0px 0px;
@@ -84,11 +83,11 @@ tr.tableau_panier td {
 	font-weight: bold;
 }
 
-div.cadre_padding ul li {
+/*div.cadre_padding ul li {
 	list-style: none;
 	margin: 10px 0px 0px 0px;
 	border: 1px #E1E1E1 solid;
-}
+}**/
 div.cadre_padding ul li dl dt{
 	background: #E1E1E1;
 	font-weight:bold;

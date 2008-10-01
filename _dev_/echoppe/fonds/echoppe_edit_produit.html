@@ -1,4 +1,4 @@
-[(#CHEMIN{images/produit-24.png}|debut_cadre_trait_couleur{0,"",<:echoppe:edition_de:> [(#TITRE|sinon{#NEW|=={oui}|?{<:echoppe:nouveau_produit:>,<em><:pas_de_titre:></em>}})],"",produit})]
+[(#CHEMIN{images/produit-24.png}|debut_cadre_trait_couleur{1,"",<:echoppe:edition_de:> [(#TITRE|sinon{#NEW|=={oui}|?{<:echoppe:nouveau_produit:>,<em><:pas_de_titre:></em>}})],"",produit})]
 <form [action="(#ACTION|generer_url_action{id_produit=#ID_PRODUIT&id_categorie=#ID_CATEGORIE&lang_produit=#LANG_PRODUIT&new=#NEW})"] method="post" >
 	<div class="echoppe_edit_produit">
 		[<input type="hidden" name="new" value="(#NEW)" />]

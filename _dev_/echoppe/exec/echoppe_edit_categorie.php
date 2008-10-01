@@ -20,7 +20,7 @@ function exec_echoppe_edit_categorie(){
 		$res_descriptif_categorie = spip_query($sql_descriptif_categorie);
 		$descriptif_categorie = spip_fetch_array($res_descriptif_categorie);
 		
-		(spip_num_rows($res_descriptif_categorie) > 0)?$contexte['new'] = $contexte['new']:$contexte['new'] = 'description';
+		(sql_count($res_descriptif_categorie) > 0)?$contexte['new'] = $contexte['new']:$contexte['new'] = 'description';
 		(is_array($descriptif_categorie))?$contexte = array_merge($contexte, $descriptif_categorie):$contexte = $contexte;
 		
 	}
@@ -43,14 +43,15 @@ function exec_echoppe_edit_categorie(){
 
 	echo debut_gauche('',true);
 
+	echo debut_boite_info(true);
+	echo recuperer_fond('fonds/echoppe_logo_categorie',$contexte);
+	echo fin_boite_info(true);	
 	
 	include_spip('inc/echoppe_raccourcis');
 	$raccourcis = generer_raccourcis_echoppe();
 	echo bloc_des_raccourcis($raccourcis);
 	
-	echo debut_boite_info(true);
-	echo recuperer_fond('fonds/echoppe_logo_categorie',$contexte);
-	echo fin_boite_info(true);
+
 	
 	echo creer_colonne_droite(true);
 	echo debut_droite(_T('echoppe:edition_de_cetegorie'),true);

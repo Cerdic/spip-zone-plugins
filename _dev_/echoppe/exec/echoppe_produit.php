@@ -32,24 +32,21 @@ function exec_echoppe_produit(){
 	
 	$contexte['action'] = 'echoppe_sauve_general_produit';
 	
-	if (spip_num_rows($res_le_produit) != 1 && $contexte['new'] != "oui"){
+	if (sql_count($res_le_produit) != 1 && $contexte['new'] != "oui"){
 		die(inc_commencer_page_dist(_T('echoppe:les_produits'), "redacteurs", "echoppe")._T('echoppe:pas_de_produit_ici').fin_page());
 	}
 	
-	if ($GLOBALS['meta']['version_installee'] <= '1.927'){
-		echo debut_page($contexte['titre'], "redacteurs", "echoppe");	
-	}else{
-		echo inc_commencer_page_dist($contexte['titre'], "redacteurs", "echoppe");
-	}
+
+	echo inc_commencer_page_dist($contexte['titre'], "redacteurs", "echoppe");
 	
 	/*echo debut_grand_cadre();
 	echo recuperer_fond('fonds/echoppe_chemin_categorie',$contexte);
 	echo fin_grand_cadre();*/
 	
-	echo debut_gauche();
+	echo debut_gauche('',true);
 	
 	echo recuperer_fond('fonds/echoppe_chemin_categorie',$contexte);
-	echo debut_boite_info();
+	echo debut_boite_info(true);
 	echo recuperer_fond('fonds/echoppe_info_produit', $contexte);
 	$les_langues = explode(',',$GLOBALS['meta']['langues_multilingue']);
 	//if (count($les_langues) > 1){
@@ -65,22 +62,22 @@ function exec_echoppe_produit(){
 		<input type="submit" value="'._T('echoppe:editer').'" />
 		</select>';
 	//}
-	echo fin_boite_info();
+	echo fin_boite_info(true);
 	
 	
 	include_spip('inc/echoppe_raccourcis');
 	$raccourcis = generer_raccourcis_echoppe();
 	echo bloc_des_raccourcis($raccourcis);
 	
-	echo creer_colonne_droite();
+	echo creer_colonne_droite(true);
 	
-	echo debut_droite(_T('echoppe:visualisation_d_un_produit'));
+	echo debut_droite(false,_T('echoppe:visualisation_d_un_produit'),'');
 	//echo gros_titre($contexte['titre']);
 	
 	echo recuperer_fond('fonds/echoppe_produit', $contexte);
 	echo recuperer_fond('fonds/echoppe_options_produit', $contexte);
-	echo fin_gauche();
-	echo fin_page();
+	echo fin_gauche(true);
+	echo fin_page(true);
 	
 }
 

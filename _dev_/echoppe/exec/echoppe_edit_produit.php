@@ -17,7 +17,7 @@ function exec_echoppe_edit_produit(){
 	
 	$sql_le_produit = "SELECT * FROM spip_echoppe_produits WHERE id_produit = '".$contexte['id_produit']."';";
 	$res_le_produit = spip_query($sql_le_produit);
-	if (spip_num_rows($res_le_produit) != 1 && $contexte['new'] != "oui"){
+	if (sql_count($res_le_produit) != 1 && $contexte['new'] != "oui"){
 		die(inc_commencer_page_dist(_T('echoppe:les_produits'), "redacteurs", "echoppe")._T('echoppe:pas_de_produit_ici').fin_page());
 	}
 	
@@ -27,21 +27,18 @@ function exec_echoppe_edit_produit(){
 	$res_description_produit = spip_query($sql_description_produit);
 	$description_produit = spip_fetch_array($res_description_produit);
 	
-	(spip_num_rows($res_description_produit) == 0 && $contexte['new'] != 'oui')?$contexte['new'] = 'ajout_description':$contexte['new'] = $contexte['new'];
-	(spip_num_rows($res_description_produit) > 0 && $contexte['new'] != 'oui')?$contexte['new'] = 'maj_description':$contexte['new'] = $contexte['new'];
+	(sql_count($res_description_produit) == 0 && $contexte['new'] != 'oui')?$contexte['new'] = 'ajout_description':$contexte['new'] = $contexte['new'];
+	(sql_count($res_description_produit) > 0 && $contexte['new'] != 'oui')?$contexte['new'] = 'maj_description':$contexte['new'] = $contexte['new'];
 	(is_array($le_produit))?$contexte = array_merge($contexte, $le_produit):$contexte = $contexte;
 	(is_array($description_produit))?$contexte = array_merge($contexte,$description_produit):$contexte = $contexte;
 	
 	$contexte['action'] = 'echoppe_sauver_produit';
 	
 	
-	if ($GLOBALS['meta']['version_installee'] <= '1.927'){
-		echo debut_page(_T('echoppe:les_produits'), "redacteurs", "echoppe");	
-	}else{
-		echo inc_commencer_page_dist(_T('echoppe:les_produits'), "redacteurs", "echoppe");
-	}
+
+	echo inc_commencer_page_dist(_T('echoppe:les_produits'), "redacteurs", "echoppe");
 	
-	echo debut_gauche();
+	echo debut_gauche('',true);
 
 	/*echo debut_boite_info();
 		echo recuperer_fond('fonds/echoppe_info_edit_produit',$contexte);
@@ -53,18 +50,18 @@ function exec_echoppe_edit_produit(){
 	echo bloc_des_raccourcis($raccourcis);
 
 	if ($contexte['new'] != 'oui' && $contexte['new'] != 'ajout_description'){
-		echo debut_boite_info();
+		echo debut_boite_info(true);
 		echo recuperer_fond('fonds/echoppe_logo_produit',$contexte);
-		echo fin_boite_info();
+		echo fin_boite_info(true);
 	}
 
-	echo creer_colonne_droite();
-	echo debut_droite(_T('echoppe:edition_de_produit'));
+	echo creer_colonne_droite(true);
+	echo debut_droite(_T('echoppe:edition_de_produit'),true);
 	
 	echo recuperer_fond('fonds/echoppe_edit_produit', $contexte);
 
-	echo fin_gauche();
-	echo fin_page();
+	echo fin_gauche(true);
+	echo fin_page(true);
 }
 
 ?>

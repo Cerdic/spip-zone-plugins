@@ -18,10 +18,10 @@ function action_echoppe_sauver_categorie(){
 	
 	switch ($new){
 		case 'oui':
-			$sql_insert_categorie = "INSERT INTO spip_echoppe_categories VALUES ('','".$id_parent."', '".$id_secteur."')";
-			$res_insert_categorie = spip_query($sql_insert_categorie);
-			//echo $sql_insert_categorie.'<hr />';
-			$new_id_categorie = spip_insert_id();
+			/*$sql_insert_categorie = "INSERT INTO spip_echoppe_categories VALUES ('','".$id_parent."', '".$id_secteur."')";
+			$res_insert_categorie = spip_query($sql_insert_categorie);*/
+			$valeur = array('id_categorie'=>'','id_parent'=>$id_parent,'id_secteur'=>$id_secteur);
+			$new_id_categorie = sql_insertq('spip_echoppe_categories',$valeur);
 			$id_secteur = recuperer_id_secteur($id_parent, $id_categorie, 'categorie');
 			$sql_maj_id_secteur = "UPDATE id_secteur FROM spip_echoppe_categories WHERE id_categorie = '".$new_id_categorie."';";
 			
