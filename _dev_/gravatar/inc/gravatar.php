@@ -56,6 +56,15 @@ function gravatar($email) {
 			AND md5($gravatar) !== '2bd0ca9726695502d06e2b11bf4ed555') {
 				spip_log('gravatar ok pour '.$email);
 				ecrire_fichier($gravatar_cache, $gravatar);
+				// si c'est un png, le convertir en jpg
+				$a = @getimagesize($gravatar_cache);
+				if ($a[2] == 3) // png
+				{
+					rename($gravatar_cache, $gravatar_cache.'.png');
+					include_spip('inc/filtres_images');
+					$img = imagecreatefrompng($gravatar_cache.'.png');
+					image_imagejpg($img, $gravatar_cache);
+				}
 			} else {
 				$vides[$md5_email] = time();
 				ecrire_fichier($tmp.'vides.txt', serialize($vides));
