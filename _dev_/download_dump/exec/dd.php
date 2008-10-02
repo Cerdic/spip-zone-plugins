@@ -10,7 +10,7 @@
 
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
+if ($GLOBALS['spip_version_branche']>"1.9.2") include_spip('inc/vieilles_defs');
 function exec_dd_dist($class = null)
 {
   global $connect_statut, $connect_login, $connect_toutes_rubriques, $couleur_foncee, $flag_gz, $options,$supp;
@@ -27,6 +27,7 @@ function exec_dd_dist($class = null)
  }
 	echo "<br /><br />";
 	gros_titre(_T('dd:titre_admin_dump_download'));
+	
 	if ($connect_toutes_rubriques) {
 		//echo barre_onglets("administration", "sauver");
 		debut_gauche();
