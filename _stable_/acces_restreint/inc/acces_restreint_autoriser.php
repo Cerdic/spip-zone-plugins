@@ -163,8 +163,14 @@ function autoriser_document_voir($faire, $type, $id, $qui, $opt) {
 		$documents_exclus[$publique] = AccesRestreint_liste_documents_exclus($publique,$qui['id_auteur']);
 		$documents_exclus[$publique] = array_flip($documents_exclus[$publique]);
 	}
-	return !isset($documents_exclus[$publique][$id]);
-}
+	if(!isset($documents_exclus[$publique][$id])){
+		if (!isset($GLOBALS['meta']["creer_htaccess"])
+		OR $GLOBALS['meta']["creer_htaccess"] != 'oui')
+			return !isset($documents_exclus[$publique][$id]);
+		else{
+			return autoriser_document_voir_dist($faire, $type, $id, $qui, $opt);
+		}
+	}
 }
 
 // fonctions de filtrage article
@@ -177,8 +183,8 @@ function AccesRestreint_liste_articles_exclus($publique=true, $id_auteur=NULL){
 		$liste_art_exclus[$publique] = array();
 		$liste_rub = AccesRestreint_liste_rubriques_exclues($publique, $id_auteur);
 		$where = calcul_mysql_in('id_rubrique', join(",",$liste_rub));
-		$s = spip_query("SELECT id_article FROM spip_articles WHERE $where");
-		while ($row = spip_fetch_array($s)){
+		$s = sql_select("id_article","spip_articles","$where");
+		while ($row = sql_fetch($s)){
 			$liste_art_exclus[$publique][] = $row['id_article'];
 		}
 	}
@@ -195,8 +201,8 @@ function AccesRestreint_liste_breves_exclues($publique=true, $id_auteur=NULL){
 		$liste_breves_exclues[$publique] = array();
 		$liste_rub = AccesRestreint_liste_rubriques_exclues($publique, $id_auteur);
 		$where = calcul_mysql_in('id_rubrique', join(",",$liste_rub));
-		$s = spip_query("SELECT id_breve FROM spip_breves WHERE $where");
-		while ($row = spip_fetch_array($s)){
+		$s = sql_select("id_breve","spip_breves","$where");
+		while ($row = sql_fetch($s)){
 			$liste_breves_exclues[$publique][] = $row['id_breve'];
 		}
 	}
@@ -221,8 +227,8 @@ function AccesRestreint_liste_forum_exclus($publique=true, $id_auteur=NULL){
 		$liste_breves = AccesRestreint_liste_breves_exclues($publique, $id_auteur);
 		$where .= " OR " . calcul_mysql_in('id_breve', join(",",$liste_art));
 
-		$s = spip_query("SELECT id_forum FROM spip_forum WHERE $where");
-		while ($row = spip_fetch_array($s)){
+		$s = sql_select("id_forum","spip_forum","$where");
+		while ($row = sql_fetch($s)){
 			$liste_forum_exclus[$publique][] = $row['id_forum'];
 		}
 	}
@@ -240,8 +246,8 @@ function AccesRestreint_liste_signatures_exclues($publique=true, $id_auteur=NULL
 		// rattaches aux articles
 		$liste_art = AccesRestreint_liste_articles_exclus($publique, $id_auteur);
 		$where = calcul_mysql_in('id_article', join(",",$liste_art));
-		$s = spip_query("SELECT id_signature FROM spip_signatures WHERE $where");
-		while ($row = spip_fetch_array($s)){
+		$s = sql_select("id_signature","spip_signatures","$where");
+		while ($row = sql_fetch($s)){
 			$liste_signatures_exclues[$publique][] = $row['id_signature'];
 		}
 	}
@@ -299,8 +305,8 @@ function AccesRestreint_liste_syndic_exclus($publique=true, $id_auteur=NULL){
 		$liste_syndic_exclus[$publique] = array();
 		$liste_rub = AccesRestreint_liste_rubriques_exclues($publique, $id_auteur);
 		$where = calcul_mysql_in('id_rubrique', join(",",$liste_rub));
-		$s = spip_query("SELECT id_syndic FROM spip_syndic WHERE $where");
-		while ($row = spip_fetch_array($s)){
+		$s = sql_select("id_syndic","spip_syndic","$where");
+		while ($row = sql_fetch($s)){
 			$liste_syndic_exclus[$publique][] = $row['id_syndic'];
 		}
 	}
@@ -317,8 +323,8 @@ function AccesRestreint_liste_syndic_articles_exclus($publique=true, $id_auteur=
 		$liste_syndic_articles_exclus[$publique] = array();
 		$liste_syn = AccesRestreint_liste_syndic_exclus($publique, $id_auteur);
 		$where = calcul_mysql_in('id_syndic', join(",",$liste_syn));
-		$s = spip_query("SELECT id_syndic_article FROM spip_syndic_articles WHERE $where");
-		while ($row = spip_fetch_array($s)){
+		$s = sql_select("id_syndic_article","spip_syndic_articles","$where");
+		while ($row = sql_fetch($s)){
 			$liste_syndic_articles_exclus[$publique][] = $row['id_syndic_article'];
 		}
 	}
@@ -337,8 +343,8 @@ function AccesRestreint_liste_evenements_exclus($publique=true, $id_auteur=NULL)
 		$liste_art = AccesRestreint_liste_articles_exclus($publique, $id_auteur);
 		$where = calcul_mysql_in('id_article', join(",",$liste_art));
 		
-		$s = spip_query("SELECT id_evenement FROM spip_evenements WHERE $where");
-		while ($row = spip_fetch_array($s)){
+		$s = sql_select("id_evenement","spip_evenements","$where");
+		while ($row = sql_fetch($s)){
 			$liste_evenements_exclus[$publique][] = $row['id_evenement'];
 		}
 	}
