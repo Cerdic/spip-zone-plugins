@@ -172,6 +172,7 @@ function autoriser_document_voir($faire, $type, $id, $qui, $opt) {
 		}
 	}
 }
+}
 
 // fonctions de filtrage article
 // plus performant a priori : liste des rubriques exclues uniquement
