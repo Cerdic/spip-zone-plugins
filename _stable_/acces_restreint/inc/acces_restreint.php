@@ -147,7 +147,8 @@ function AccesRestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL)
 		// on selectionne les rubriques correspondant aux autres zones,
 		// sinon on selectionne toutes celles correspondant a une zone.
 		include_spip('base/abstract_sql');
-		if (is_null($id_auteur) AND $GLOBALS['AccesRestreint_zones_autorisees'])
+		if ($GLOBALS['AccesRestreint_zones_autorisees']
+		  AND (is_null($id_auteur) OR $id_auteur==$GLOBALS['visiteur_session']['id_auteur']))
 			$where[] = sql_in('zr.id_zone',$GLOBALS['AccesRestreint_zones_autorisees'],'NOT');
 		elseif (!is_null($id_auteur))
 			$where[] = sql_in('zr.id_zone',AccesRestreint_liste_zones_autorisees('',$id_auteur),'NOT');
