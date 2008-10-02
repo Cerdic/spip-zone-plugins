@@ -21,8 +21,8 @@ function AccesRestreint_liste_zones_autorisees($zones='', $id_auteur=NULL) {
 	$id = NULL;
 	if (!is_null($id_auteur))
 		$id = $id_auteur;
-	elseif (isset($GLOBALS['auteur_session']['id_auteur']) && $GLOBALS['auteur_session']['id_auteur'])
-		$id = $GLOBALS['auteur_session']['id_auteur'];
+	elseif (isset($GLOBALS['visiteur_session']['id_auteur']) && $GLOBALS['visiteur_session']['id_auteur'])
+		$id = $GLOBALS['visiteur_session']['id_auteur'];
 	if (!is_null($id)) {
 		$new = AccesRestreint_liste_zones_appartenance_auteur($id);
 		if ($zones AND $new) {
