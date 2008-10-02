@@ -52,7 +52,8 @@ function exec_acces_restreint_config(){
 		exit;
 	}
 
-	init_config();
+	include_spip('inc/config');
+	inc_config_dist();
 	if (_request('changer_config') == 'oui')
 		AccesRestreint_appliquer_modifs_config();
 
