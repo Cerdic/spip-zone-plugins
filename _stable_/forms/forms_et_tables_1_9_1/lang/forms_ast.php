@@ -138,11 +138,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_apercu' => 'G&uuml;eyada',
 	'lien_champ' => 'Campos',
 	'lien_propriete' => 'Propied&aacute;es',
-	'lien_retirer_donnee_liante' => '<NEW>Retirer le lien',
-	'lien_retirer_donnee_liee' => '<NEW>Retirer le lien',
-	'lier_articles' => '<NEW>Permettre d\'associer les donn&eacute;es aux articles',
-	'lier_documents' => '<NEW>Permettre de joindre des documents aux donn&eacute;es',
-	'lier_documents_mail' => '<NEW>Joindre les documents &agrave; l\'email',
+	'lien_retirer_donnee_liante' => 'Quitar l\'enllace',
+	'lien_retirer_donnee_liee' => 'Quitar l\'enllace',
+	'lier_articles' => 'Permitir que s\'asocien los datos colos art&iacute;culos',
+	'lier_documents' => 'Permitir amestar documentos a los datos',
+	'lier_documents_mail' => 'Amestar los documentos al email',
 	'liste_choix' => 'Lista les escoyetes propuestes',
 
 	// M
@@ -158,13 +158,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouveau_champ' => 'Nuevu campu',
 	'nouveau_choix' => 'Nueva eleici&oacute;n',
 	'nouveau_formulaire' => 'Nuevu formulariu',
-	'numerique_invalide' => '<NEW>Champ num&eacute;rique invalide',
+	'numerique_invalide' => 'Campu numb&eacute;ricu non v&aacute;lidu',
 
 	// P
 	'page' => 'P&aacute;xina',
-	'pas_mail_confirmation' => '<NEW>Pas de mail confirmation',
-	'probleme_technique' => '<NEW>Probl&egrave;me technique. Votre saisie n\'a pas pu &ecirc;tre prise en compte.',
-	'probleme_technique_upload' => '<NEW>Probl&egrave;me technique. Le transfert du fichier a &eacute;chou&eacute;.',
+	'pas_mail_confirmation' => 'Ensin corr&eacute;u de confirmaci&oacute;n',
+	'probleme_technique' => 'Problema t&eacute;cnicu. Lo que iguaste nun va poder tenese en cuenta.',
+	'probleme_technique_upload' => 'Problema t&eacute;cnicu. Fall&oacute; la tresferencia de l\'archivu.',
 	'publication_donnees' => '<NEW>Publication des donn&eacute;es',
 
 	// R
