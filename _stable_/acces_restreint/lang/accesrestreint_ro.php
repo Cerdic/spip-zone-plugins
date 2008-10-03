@@ -22,7 +22,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif' => 'Descriere',
 
 	// I
-	'icone_creer_zone' => 'Crea&#355;i o nou&#259; zon&#259;',
 	'icone_menu_config' => 'Acces Restr&acirc;ns',
 	'icone_supprimer_zone' => '&#350;terge&#355;i aceast&#259; zon&#259;',
 	'info_ajouter_zones' => 'Ad&#259;uga&#355;i toate zonele',

@@ -22,7 +22,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif' => 'Descrici&oacute;n',
 
 	// I
-	'icone_creer_zone' => 'Crear una estaya nueva',
 	'icone_menu_config' => 'Accesu Torg&aacute;o',
 	'icone_supprimer_zone' => 'Desaniciar esta estaya',
 	'info_ajouter_zones' => 'A&ntilde;adir toes les estayes',

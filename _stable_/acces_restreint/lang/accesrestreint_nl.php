@@ -22,7 +22,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif' => 'Werktekening',
 
 	// I
-	'icone_creer_zone' => 'Een nieuwe zone cre&euml;ren',
 	'icone_menu_config' => 'Beperkte toegang',
 	'icone_supprimer_zone' => 'Deze zone afschaffen',
 	'info_ajouter_zones' => 'Alle zones toevoegen',

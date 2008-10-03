@@ -14,9 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_id' => 'Num',
-	'creer_zone' => 'Cr&eacute;er une nouvelle zone',
-	'confirmer_retirer_auteurs' => '&Ecirc;tes vous s&ucirc;r de vouloir retirer tous les auteurs de cette zone ?',
 	'confirmer_retirer_auteur_zone' => '&Ecirc;tes vous s&ucirc;r de vouloir retirer cet auteur de la zone ?',
+	'confirmer_retirer_auteurs' => '&Ecirc;tes vous s&ucirc;r de vouloir retirer tous les auteurs de cette zone ?',
+	'creer_zone' => 'Cr&eacute;er une nouvelle zone',
 
 	// D
 	'descriptif' => 'Descriptif',
@@ -24,26 +24,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_menu_config' => 'Acc&egrave;s Restreint',
 	'icone_supprimer_zone' => 'Supprimer cette zone',
-	'info_ajouter_zones' => 'Ajouter toutes les zones',
 	'info_ajouter_auteur' => 'Ajouter cet auteur',
 	'info_ajouter_auteurs' => 'Ajouter tous les auteurs',
+	'info_ajouter_zones' => 'Ajouter toutes les zones',
+	'info_aucun_acces' => 'Aucun acc&egrave;s autoris&eacute;',
+	'info_aucun_auteur' => 'Aucun auteur dans la zone',
+	'info_aucune_zone' => 'Aucune zone',
 	'info_auteurs_lies_zone' => 'Les auteurs ayant acc&egrave;s &agrave; cette zone',
 	'info_page' => 'Cette page vous permet de g&eacute;rer les zones d\'acc&egrave;s restreint de votre site',
+	'info_retirer_auteurs' => 'Retirer tous les auteurs',
 	'info_retirer_zone' => 'Enlever de la zone',
 	'info_retirer_zones' => 'Enlever de toutes les zones',
-	'info_aucun_acces' => 'Aucun acc&egrave;s autoris&eacute;',
-	'info_aucune_zone' => 'Aucune zone',
-	'info_aucun_auteur' => 'Aucun auteur dans la zone',
-	'info_retirer_auteurs' => 'Retirer tous les auteurs',
-	
+
 	// M
 	'modifier_zone' => 'Modifier la zone',
 
 	// P
 	'page_zones_acces' => 'Acc&egrave;s Restreint',
+	'par_titre' => 'Par titre',
 	'privee' => 'Priv&eacute;e',
 	'publique' => 'Publique',
-	'par_titre' => 'Par titre',
 
 	// R
 	'rubriques' => 'rubriques',
@@ -55,9 +55,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre' => 'Titre',
 	'titre_ajouter_zone' => 'Rejoindre la zone',
+	'titre_cadre_modifier_zone' => 'Modifier une zone',
 	'titre_table' => 'Toutes les zones d\'acc&egrave;s',
 	'titre_zones_acces' => 'Zones d\'acc&egrave;s restreint',
-	'titre_cadre_modifier_zone' => 'Modifier une zone',
 	'toutes' => 'Toutes',
 
 	// V

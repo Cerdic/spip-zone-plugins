@@ -22,7 +22,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif' => 'Deskrivadur',
 
 	// I
-	'icone_creer_zone' => 'Kroui&ntilde; un dachenn nevez',
 	'icone_menu_config' => 'Done bevennet',
 	'icone_supprimer_zone' => 'Dilemel an dachenn-ma&ntilde;',
 	'info_ajouter_zones' => 'Ouzhpenna&ntilde; an holl dachenno&ugrave;',

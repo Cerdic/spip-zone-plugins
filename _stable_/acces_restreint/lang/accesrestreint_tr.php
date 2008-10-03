@@ -22,7 +22,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif' => 'Tan&#305;mlay&#305;c&#305;',
 
 	// I
-	'icone_creer_zone' => 'Yeni bir b&ouml;lge olu&#351;tur',
 	'icone_menu_config' => 'K&#305;s&#305;tl&#305; Eri&#351;im',
 	'icone_supprimer_zone' => 'Bu b&ouml;lgeyi sil',
 	'info_ajouter_zones' => 'T&uuml;m b&ouml;lgeleri ekle',
