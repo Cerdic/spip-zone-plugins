@@ -141,7 +141,7 @@ _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.'
 	'detail_jquery2' => 'Bu alet {jQuery} k&uuml;t&uuml;phanesini gerektirir.',
 	'detail_pipelines' => 'Boru hatlar&#305; (pipeline) :',
 	'detail_traitements' => '&#304;&#351;lemler :',
-	'dossier_squelettes:description' => '<NEW>Modifie le dossier du squelette utilis&eacute;. Par exemple : "squelettes/monsquelette". Vous pouvez inscrire plusieurs dossiers en les s&eacute;parant par les deux points <html>&laquo;&nbsp;:&nbsp;&raquo;</html>. En laissant vide la case qui suit (ou en tapant "dist"), c\'est le squelette original "dist" fourni par SPIP qui sera utilis&eacute;.[[%dossier_squelettes%]]',
+	'dossier_squelettes:description' => 'Kullan&#305;lan iskelet dizinini de&#287;i&#351;tirir. &Ouml;rne&#287;in : "squelettes/iskeletim". Dizinleri iki nokta ile ay&#305;rarak bir &ccedil;ok dizin belirtebilirsiniz  <html>&laquo;&nbsp;:&nbsp;&raquo;</html>. &#304;zleyen kutuyu bo&#351; b&#305;rakarak (veya "dist" yazarak) SPIP taraf&#305;ndan sunulan orijinal "dist" iskeletini kullanabilirsiniz. [[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => '&#304;skelet dosyas&#305;',
 
 	// E
@@ -160,9 +160,9 @@ _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.'
 	'etendu' => 'Kapsam',
 
 	// F
-	'f_jQuery:description' => '<NEW>Emp&ecirc;che l\'installation de {jQuery} dans la partie publique afin d\'&eacute;conmiser un peu de &laquo;temps machine&raquo;. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de Javascript et peut &ecirc;tre utilis&eacute;e par certains plugins. SPIP l\'utilise dans sa partie priv&eacute;e.
+	'f_jQuery:description' => '{jQuery}\'nin kamusal alana kurulmas&#305;n&#305; engeller, b&ouml;ylece &laquo;makine zaman&#305;&raquo;ndan biraz ekonomi yapar. Bu ([->http://jquery.com/]) kitapl&#305;&#287;&#305; Javascript programlamada bir &ccedil;ok kolayl&#305;k getirir ve baz&#305; eklentilerde kullan&#305;labilir. SPIP, Jquery\'yi &ouml;zel alanda kullan&#305;r.
 
-Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions de {jQuery}. ',
+Dikkat : baz&#305; &#304;svi&ccedil;re &Ccedil;ak&#305;s&#305; gere&ccedil;leri {jQuery} fonksiyonlar&#305;na ihtiya&ccedil; duyar. ',
 	'f_jQuery:nom' => 'jQuery\'yi deaktive eder',
 	'filets_sep:aide' => 'Ay&#305;rma Fileleri (Filet)&nbsp;: <b>__i__</b>  <b>i</b> burada bir say&#305;y&#305; temsil eder.<br />Di&#287;er fileler : @liste@',
 	'filets_sep:description' => '<NEW>Ins&egrave;re des filets de s&eacute;paration, personnalisables par des feuilles de style, dans tous les textes de SPIP.
@@ -277,22 +277,22 @@ Bu logoyu tan&#305;mlamak i&ccedil;in &laquo;&nbsp;Konfig&uuml;rasyon&nbsp;&raqu
 	'label:urls_arbo_sans_type' => 'URL\'lerde SPIP nesnesinin tipini g&ouml;ster :',
 	'liens_en_clair:description' => '<NEW>Met &agrave; votre disposition le filtre : \'liens_en_clair\'. Votre texte contient probablement des liens hypertexte qui ne sont pas visibles lors d\'une impression. Ce filtre ajoute entre crochets la destination de chaque lien cliquable (liens externes ou mails). Attention : en mode impression (parametre \'cs=print\' ou \'page=print\' dans l\'url de la page), cette fonctionnalit&eacute; est appliqu&eacute;e automatiquement.',
 	'liens_en_clair:nom' => 'A&ccedil;&#305;kta b&#305;rak&#305;lm&#305;&#351; ba&#287;lar',
-	'liens_orphelins:description' => '<NEW>Cet outil a deux fonctions :
+	'liens_orphelins:description' => 'Bu gerecin 2 i&#351;levi vard&#305;r:
 
-@puce@ {{Liens corrects}}.
+@puce@ {{Do&#287;ru ba&#287;lar}}.
 
-SPIP a pour habitude d\'ins&eacute;rer un espace avant les points d\'interrogation ou d\'exclamation, typo fran&ccedil;aise oblige. Voici un outil qui prot&egrave;ge le point d\'interrogation dans les URLs de vos textes.[[%liens_interrogation%]]
+SPIP, frans&#305;z gramerine ba&#287;l&#305; olarak soru ve &uuml;nlem i&#351;aretlerinden &ouml;nce bir bo&#351;luk b&#305;rak&#305;r. &#304;&#351;te size metinlerinizde bulunan URL\'lerdeki soru i&#351;aretlerini koruyan bir gere&ccedil;.[[%liens_interrogation%]]
 
-@puce@ {{Liens orphelins}}.
+@puce@ {{Yetim ba&#287;lar}}.
 
-Remplace syst&eacute;matiquement toutes les URLs laiss&eacute;es en texte par les utilisateurs (notamment dans les forums) et qui ne sont donc pas cliquables, par des liens hypertextes au format SPIP. Par exemple : {<html>www.spip.net</html>} est remplac&eacute; par [->www.spip.net].
+Kullan&#305;c&#305;lar taraf&#305;ndan metin olarak b&#305;rak&#305;lm&#305;&#351; \'t&#305;klanamayan\' t&uuml;m URL\'leri sistemli bi&ccedil;imde SPIP format&#305;nda hipermetin ba&#287;lar&#305;yla de&#287;i&#351;tirir (&ouml;zellikle forumlarda). &Ouml;rne&#287;in : {<html>www.spip.net</html>} [->www.spip.net] ile de&#287;i&#351;tirilir.
 
-Vous pouvez choisir le type de remplacement :
-_ • {Basique} : sont remplac&eacute;s les liens du type {<html>http://spip.net</html>} (tout protocole) ou {<html>www.spip.net</html>}.
-_ • {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} ou {<html>news:mesnews</html>}.
+De&#287;i&#351;tirme tipini siz se&ccedil;ebilirsiniz :
+_ • {Temel} : {<html>http://spip.net</html>} (t&uuml;m  protokoller) veya  {<html>www.spip.net</html>} de&#287;i&#351;tirilir.
+_ • {Yayg&#305;n} : &#351;u tipteki ba&#287;lar da de&#287;i&#351;tirilir {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} veya {<html>news:mesnews</html>}.
 [[%liens_orphelins%]]',
 	'liens_orphelins:nom' => 'G&uuml;zel URL\'ler',
-	'log_couteau_suisse:description' => '<NEW>Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin \'Le Couteau Suisse\' dans les fichiers spip.log que l\'on peut trouver dans le r&eacute;pertoire : @_CS_DIR_TMP@',
+	'log_couteau_suisse:description' => '\'&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;\' eklentisinin &ccedil;al&#305;&#351;mas&#305;na dair bir &ccedil;ok bilgiyi spip.log dosyalar&#305;na yazar. Bu dosyalar &#351;u dizindedir : @_CS_DIR_TMP@',
 	'log_couteau_suisse:nom' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;\'n&#305;n detayl&#305; taporu',
 
 	// M
@@ -364,7 +364,7 @@ Si vous r&eacute;initialisez le plugin en cliquant sur un pack, le Couteau Suiss
 	'set_options:nom' => '&Ouml;zel aray&uuml;z tipi',
 	'sf_amont' => '<NEW>En amont',
 	'sf_tous' => 'Hepsi',
-	'simpl_interface:description' => '<NEW>D&eacute;sactive le menu de changement rapide de statut d\'un article au survol de sa puce color&eacute;e. Cela est utile si vous cherchez &agrave; obtenir une interface priv&eacute;e la plus d&eacute;pouill&eacute;e possible afin d\'optimiser les performances client.',
+	'simpl_interface:description' => 'Renkli ikonun &uuml;zerinden ge&ccedil;erken bir makalenin stat&uuml;s&uuml;n&uuml; h&#305;zl&#305; y&uuml;kleme men&uuml;s&uuml;n&uuml; dezaktive eder. E&#287;er \'client\' performas&#305;n&#305; artt&#305;rmak i&ccedil;in &ouml;zel bir aray&uuml;z istiyorsan&#305;z idealdir.',
 	'simpl_interface:nom' => '&Ouml;zel aray&uuml;z&uuml;n hafifletilmesi',
 	'smileys:aide' => 'G&uuml;len y&uuml;zler : @liste@',
 	'smileys:description' => '<acronym>:-)</acronym> tipinde k&#305;sayol i&ccedil;eren t&uuml;m metinlere g&uuml;len y&uuml;z ekler. Forumlar i&ccedil;in ideal. 
@@ -423,7 +423,7 @@ _ Dil dosyalar&#305;nda \'un_texte\' de&#287;i&#351;keninin d&uuml;zg&uuml;n bi&
 	'travaux_prochainement' => 'Bu site &ccedil;ok yak&#305;nda tekrar yay&#305;na ba&#351;layacak.
 _ Anlay&#305;&#351;&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
-	'tri_articles:description' => '<MODIF><NEW>En naviguant sur le site en partie priv&eacute;e ([->./?exec=auteurs]), choisissez ici le tri &agrave; utiliser pour afficher vos articles &agrave; l\'int&eacute;rieur de vos rubriques.
+	'tri_articles:description' => '<NEW>En naviguant sur le site en partie priv&eacute;e ([->./?exec=auteurs]), choisissez ici le tri &agrave; utiliser pour afficher vos articles &agrave; l\'int&eacute;rieur de vos rubriques.
 
 Les propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL \'ORDER BY\' : n\'utilisez le tri personnalis&eacute; que si vous savez ce que vous faites (champs disponibles : {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
 [[%tri_articles%]][[->%tri_perso%]]',
@@ -432,7 +432,7 @@ Les propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL 
 	'tri_perso' => 'Ki&#351;iselle&#351;tirilmi&#351; SQL s&#305;ralamas&#305; ORDER BY :',
 	'tri_publi' => 'Yay&#305;n tarihine g&ouml;re s&#305;ralama (ORDER BY date DESC)',
 	'tri_titre' => 'Ba&#351;l&#305;&#287;a g&ouml;re s&#305;ralama (ORDER BY 0+titre,titre)',
-	'type_urls:description' => '<MODIF><NEW>@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'acc&egrave;s aux pages de votre site :
+	'type_urls:description' => '<NEW>@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'acc&egrave;s aux pages de votre site :
 <div style="font-size:90%; margin:0 2em;">
 - {{page}} : la valeur par d&eacute;faut pour SPIP v1.9x : <code>/spip.php?article123</code>.
 - {{html}} : les liens ont la forme des pages html classiques : <code>/article123.html</code>.
