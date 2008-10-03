@@ -1,0 +1,56 @@
+<!-- cfg_tjpzoom.html -->
+<!-- titre=<:tjpzoom:titre:>--> 
+<!-- descriptif=<:tjpzoom:descriptif:>--> 
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]
+
+<table>
+<thead>
+<tr height="2em"><th width="200px"><:tjpzoom:style:></th><th  width="200px"><:tjpzoom:example:></th></tr>
+</thead>
+<tr>
+<td>
+<input type="radio" name="zoomstyle" value="" id="zoom0" [(#CONFIG{tjpzoom/zoomstyle}|?{'','checked="true"'})]/><label for="zoom0"><:tjpzoom:nostyle:></label>
+</td><td>[<img src="(#CHEMIN{img/raw.png})" />]</td>
+</tr>
+<tr>
+<td>
+<input type="radio" name="zoomstyle" value="default" id="zoom1" [(#CONFIG{tjpzoom/zoomstyle}|=={default}|?{'checked="true"',''})]/><label for="zoom1">Default</label>
+</td><td>[<img src="(#CHEMIN{img/default.png})" />]</td>
+</tr>
+<tr>
+<td>
+<input type="radio" name="zoomstyle" value="smart" id="zoom2" [(#CONFIG{tjpzoom/zoomstyle}|=={smart}|?{'checked="true"',''})]/><label for="zoom2">Smart</label>
+</td><td>[<img src="(#CHEMIN{img/default.png})" />]</td>
+</tr>
+<tr>
+<td>
+<input type="radio" name="zoomstyle" value="natgeo" id="zoom3" [(#CONFIG{tjpzoom/zoomstyle}|=={natgeo}|?{'checked="true"',''})]/><label for="zoom3">NatGeo</label>
+</td><td>[<img src="(#CHEMIN{img/natgeo.png})" />]</td>
+</tr>
+<tr>
+<td>
+<input type="radio" name="zoomstyle" value="roundfun" id="zoom4" [(#CONFIG{tjpzoom/zoomstyle}|=={roundfun}|?{'checked="true"',''})]/><label for="zoom4">RoundFun</label>[
+</td><td><img src="(#CHEMIN{img/roundfun.png})" />]</td>
+</tr>
+<tr>
+<td>
+<input type="radio" name="zoomstyle" value="purity" id="zoom5" [(#CONFIG{tjpzoom/zoomstyle}|=={purity}|?{'checked="true"',''})]/><label for="zoom5">Purity</label>
+</td><td>[<img src="(#CHEMIN{img/purity.png})" />]</td>
+</tr>
+<tr>
+<td><input type="radio" name="zoomstyle" value="relative" id="zoom6" [(#CONFIG{tjpzoom/zoomstyle}|=={relative}|?{'checked="true"',''})]/><label for="zoom6">Relative</label>
+</td><td>[<img src="(#CHEMIN{img/relative.png})" />]</td>
+</tr>
+<tr><td>
+<input type="radio" name="zoomstyle" value="halobevel" id="zoom6" [(#CONFIG{tjpzoom/zoomstyle}|=={halobevel}|?{'checked="true"',''})]/><label for="zoom6">Halobevel</label>
+</td><td>[<img src="(#CHEMIN{img/halobevel.png})" />]</td>
+</tr>
+<tr>
+<td><input type="radio" name="zoomstyle" value="other" id="zoom8" [(#CONFIG{tjpzoom/zoomstyle}|=={other}|?{'checked="true"',''})]/><label for="zoom8"><:tjpzoom:other:>:</label></td><td><input type="text" name="zoomstyle_o" value="#CONFIG{tjpzoom/zoomstyle_o}" id="zoom7"/></td>
+</tr>
+</table>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</div></form>

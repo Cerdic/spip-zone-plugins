@@ -1,0 +1,6 @@
+<BOUCLE_document (DOCUMENTS) {id_document}>
+[<div style="[float:(#ENV{align}|match{left|right});][ width:(#LOGO_DOCUMENT||image_reduire{#ENV{size,520},0}|largeur)px;][ height:(#LOGO_DOCUMENT||image_reduire{#ENV{size,520},0}|hauteur)px;]" class='spip_document_zoom_#ID_DOCUMENT spip_documents_zoom[ spip_documents_zoom_(#ENV{align})][ (#ENV{class})] spip_lien_ok'>
+[<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"] [ title="(#TITRE|texte_backend)"]>]<img class="no_image_filtrer" style="[width:(#LOGO_DOCUMENT||image_reduire{#ENV{size,520},0}|largeur)];[height:(#LOGO_DOCUMENT||image_reduire{#ENV{size,520},0}|hauteur)]" onmouseover="TJPzoom(this, '#FICHIER');" src="(#LOGO_DOCUMENT||image_reduire{#ENV{size,520},0}|extraire_attribut{src})" [alt="(#TITRE|strlen|?{#TITRE {#TYPE_DOCUMENT},#TYPE_DOCUMENT})"] />[(#ENV{lien}|?{</a>})]
+</div>
+[(#ENV{align}|match{left|right}|?{' ',''})<div style="clear:both;"></div>]]
+</BOUCLE_document>
