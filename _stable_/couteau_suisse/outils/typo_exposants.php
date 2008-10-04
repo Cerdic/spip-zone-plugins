@@ -6,6 +6,8 @@
 include_spip('inc/charsets');
 // en principe, pas besoin de : caractere_utf_8(232)
 define('_TYPO_EGRAVE', unicode2charset('&#232;').'|&#232;|&egrave;');
+define('_TYPO_EAIGU1', unicode2charset('&#233;').'|&#233;|&eacute;');
+define('_TYPO_EAIGU2', unicode2charset('&#201;').'|&#201;|&Eacute;');
 define('_TYPO_sup', '<sup class="typo_exposants">\\1</sup>');
 define('_TYPO_sup2', '\\1<sup class="typo_exposants">\\2</sup>');
 
@@ -24,6 +26,7 @@ function typo_exposants_fr($texte){
 		'/\bm²\b/', '/(?<=\bm)([23])\b/',	 // m2, m3, m²
 		'/(?<=\b[Mm])([nd]s?)\b/',	// millions, milliards
 		'/(?<=\bV)(ves?)\b/', '/(?<=\b[Bb])(ds?)\b/', '/(?<=\bC)(ies?)\b/',	// veuves, boulevard(s) et Cie(s)
+		'/(?<=\bS)(t(?:'._TYPO_EAIGU1.')s?)(?=\W)/', '/(?<=\W)(?:E|'._TYPO_EAIGU2.')ts\b/',	 // Societes(s), Etablissements
 
 		'/(?<=\b[1I])i?(ers?)\b/',	// Erreurs ier, iers
 		'/(?<=\b[1I])i?(?:'._TYPO_EGRAVE.')(res?)\b/',	// Erreurs ère(s), ière(s)
@@ -40,6 +43,7 @@ function typo_exposants_fr($texte){
 
 		'm<sup class="typo_exposants">2</sup>',	_TYPO_sup,	// m2, m3, m²
 		_TYPO_sup, _TYPO_sup, _TYPO_sup, _TYPO_sup,	// Vve(s), Mn(s), Md(s), Bd(s), Cie(s)
+		_TYPO_sup, '&#201;<sup class="typo_exposants">ts</sup>',	// Ste(s), Ets
 
 		_TYPO_sup, _TYPO_sup, _TYPO_sup, // 1er et Cie
 		_TYPO_sup,	// 2nd(e)(s)
@@ -48,7 +52,7 @@ function typo_exposants_fr($texte){
 		_TYPO_sup2, // 2e(s), IIIe(s)...
 		'$1<sup class="typo_exposants">o</sup>', // 1o, 2o, etc.
 	));
-
+//print_r($typo); if(strpos($texte,'&E')!==false) echo "'$texte'\n'";
 	return preg_replace($typo[0], $typo[1], $texte);
 }
 

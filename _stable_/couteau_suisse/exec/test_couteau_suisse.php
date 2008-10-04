@@ -52,9 +52,9 @@ function cs_test_fun(&$textes, $fonction) {
 	if (!function_exists($fonction)) return array('erreur' => "$fonction() introuvable : outil non activ&eacute; !");
 	foreach ($textes as $i=>$t) {
 		$b = $fonction($t);
-		$a["\$texte[$i]"] = htmlentities($t, ENT_COMPAT, $GLOBALS['meta']['charset']);
+		$a["$i. test"] = htmlentities($t, ENT_COMPAT, $GLOBALS['meta']['charset']);
 //		$a["\$resultat[$i]"] = htmlentities($b);
-		$a["\$previsu[$i]"] = str_replace("\n",'\n', $b);
+		$a["$i. r&eacute;sultat"] = str_replace("\n",'\n', $b);
 	}
 	return $a;
 }
@@ -149,7 +149,7 @@ function cs_les_tests() {
 		unicode2charset("Erreurs de typo : 2me, 3&#232;me, 4i&#232;me, 5mes, 6&#232;mes, 7i&#232;mes"),
 		unicode2charset("Cas probl&#233;matique du L (50) : XLe XL&#232;me XLi&#232;me L&#232;me LIe"),
 		"1er 1ers, 2e 2es, IIIe IIIes, 2nd 21nd 2ndes. Vve Martin Cie Tartuffe, 3 Bd Voltaire.",
-		"3 ou 4 m², 3 ou 4 m2 et 2 m3. 50 Mds ou 50 Mns !",
+		"3 ou 4 m², 3 ou 4 m2 et 2 m3. 50 Mds ou 50 Mns ! Sté, St&eacute;s, Stés, Ste, Ets, Éts, Éts, &Eacute;ts, &#201;ts ...",
 		"Mlle, Mlles, Mme, Mmes et erreurs Melle, Melles",
 		'avant <a href="www.mon-1er-lien.com" title="Mon 1er titre">Mon 1er lien</a> et <img src="image.jpg" alt="logo 6e" title="Cliquez!">',
 		'avant [Mon 1er lien->www.mon-1er-lien.com] apres le "test"!',
