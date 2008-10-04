@@ -48,14 +48,12 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 	include_spip('inc/autoriser');
 
 	$id_auteur = $auteur['id_auteur'];
-	$id = $id_auteur;
-	
 	$setconnecte = ($connect_id_auteur == $id_auteur);
 
 
 	// Elaborer le formulaire
 	$corps_supp = '';
-	$var_user['b.id'] = '0';
+	$var_user['b.id_auteur'] = '0';
 	$var_user['a.login'] = '0';
 	foreach(lire_config('inscription2') as $cle => $val){
 		if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut_nouveau'){
@@ -86,22 +84,20 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 		}
 	}
 	if($var_user['c.pays'] && $var_user['d.pays'])
-		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_geo_pays c on b.pays=c.id_pays left join spip_geo_pays d on b.pays_pro=d.id_pays where a.id_auteur= $id");
+		$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_geo_pays c on b.pays=c.id_pays left join spip_geo_pays d on b.pays_pro=d.id_pays","a.id_auteur= $id_auteur");
 	elseif($var_user['c.pays'])
-		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_geo_pays c on b.pays=c.id_pays where a.id_auteur= $id");
+		$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_geo_pays c on b.pays=c.id_pays","a.id_auteur= $id_auteur");
 	else
-		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur where a.id_auteur= $id");
+		$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur","a.id_auteur= $id_auteur");
 
-	$query = spip_fetch_array($query);
-	
-	if($query['id'] == NULL){
-		$id_elargi =spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");
-		echo "chiotte 2";
+	$query = sql_fetch($query);
+	if($query['id_auteur'] == NULL){
+		$id_elargi = sql_insertq("spip_auteurs_elargis",array('id_auteur'=> $id_auteur));
 	}
 	
 	foreach ($query as $cle => $val){
 		
-		if(($cle == 'id') || ($cle == 'id_pays') || ($cle == 'id_pays_pro') ||  ($cle == 'login') || ($cle == 'nom') || ($cle == 'email')){
+		if(($cle == 'id_pays') || ($cle == 'id_pays_pro') ||  ($cle == 'login') || ($cle == 'nom') || ($cle == 'email')){
 			$corps_supp .= "<input type='hidden' id='$cle' name='$cle' value='$val'>";
 		}
 		elseif($cle == 'pays'){
@@ -245,7 +241,7 @@ function legender_auteur_supp_voir($auteur, $redirect)
 	$res .= "<div class='nettoyeur'></div>";
 	$res .= "<div id='auteur_infos_voir_supp'>";
 
-	$id = _request('id_auteur');
+	$id_auteur = _request('id_auteur');
 	
 	$var_user['a.id_auteur'] = '0';
 	foreach(lire_config('inscription2') as $cle => $val){
@@ -277,18 +273,18 @@ function legender_auteur_supp_voir($auteur, $redirect)
 		}
 	}
 	if($var_user['c.pays'] && $var_user['d.pays'])
-		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_geo_pays c on b.pays=c.id_pays left join spip_geo_pays d on b.pays_pro=d.id_pays where a.id_auteur= $id");
+		$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_geo_pays c on b.pays=c.id_pays left join spip_geo_pays d on b.pays_pro=d.id_pays","a.id_auteur= $id_auteur");
 
 	elseif($var_user['c.pays'])
-		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_geo_pays c on b.pays=c.id_pays where a.id_auteur= $id");
+		$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_geo_pays c on b.pays=c.id_pays","a.id_auteur= $id_auteur");
 
 	else
-		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur where a.id_auteur= $id");
+		$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur","a.id_auteur= $id_auteur");
 
-	$query = spip_fetch_array($query);
+	$query = sql_fetch($query);
 	
 	if($query['id_auteur'] == NULL){
-		$id_elargi =spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");
+		$id_elargi = sql_insertq("spip_auteurs_elargis",array('id_auteur'=>$id_auteur));
 	}
 	//Debut de l'affichage des données...
 	foreach ($query as $cle => $val){
