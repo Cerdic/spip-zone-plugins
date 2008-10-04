@@ -331,6 +331,8 @@ function traduction_defaut($lang){
 function bible_generer_cfg($i){
 	$tableau_traduction = bible_tableau('traduction');
 	$tableau_separateur = bible_tableau('separateur');
+	$police = bible_tableau('police');
+	
 	$texte = '<form action="#SELF" method="post">
 [<div>(#ENV{_cfg_}|form_hidden)</div>]
 	
@@ -364,7 +366,7 @@ function bible_generer_cfg($i){
 		
 
 
-	return $texte.'<li>
+	$texte.='<li>
 					<label for="numeros"><:bible:cfg_numeros:></label>
 					<input type="checkbox" name="numeros"  id="numeros" [checked="(#ENV{numeros})"]  value="oui" />
 				
@@ -382,12 +384,26 @@ function bible_generer_cfg($i){
 				
 			</li>
 		</ul>
+	';
+	
+	foreach ($police as $i=>$polices){
+	$texte .= '<li>
+				<label for="police_'.$i.'"><:bible:police_'.$i.':></label><select><option value=""><:item_non:></option>';
+		foreach ($polices as $j){
+			$texte .= "<option value='".$j."'>".$j."</option>";
+		
+		
+		}
+	$texte .= "</li>";
+	}
+		
 
-	<p class="boutons"><input type="submit" name="_cfg_ok" value="<:OK:>" />
+	$texte .='<p class="boutons"><input type="submit" name="_cfg_ok" value="<:OK:>" />
 	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" /></p>
 </fieldset></li>
 </form>
 </div>';
+	return $texte;
 }
 
 function bible_generer_doc($lang){

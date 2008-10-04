@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_explication'	=>	"Vous pouvez régler la mani&egrave;re dont apparaitra les citation du texte, en l'absence d'argument pass&eacute; au mod&egrave;le",
 	'cfg_numeros'		=>	"Afficher les n° de chapitres et de versets dans le corps du texte",
 	'pas_livre'			=>"L'abr&eacute;viation du livre demandé n'existe pas dans cette traduction",
+	'police_hbo'		=>"Faut-il imposer une police spécial pour l'hébreu ?",
 	'traduction_pas_dispo'	=> "La traduction de la Bible demand&eacute;e n'existe pas"
 );
 
