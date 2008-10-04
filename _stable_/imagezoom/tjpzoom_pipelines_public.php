@@ -19,7 +19,15 @@
 
 
   //pipeline pour ajouter des scripts dans la page public
-function tjpzoom_insert_head($flux){
+function tjpzoom_insert_head($flux) {
+  return tjpzoom_gen($flux);
+  }
+
+function tjpzoom_header_prive($flux) {
+  return tjpzoom_gen($flux);
+  }
+
+function tjpzoom_gen($flux) {
   //trouver la lib tjpzoom
   $tjp = find_in_path('lib/tjpzoom/tjpzoom.js');
   if(!$tjp) $tjp = find_in_path('tjpzoom/tjpzoom.js'); //cas 1.9.2

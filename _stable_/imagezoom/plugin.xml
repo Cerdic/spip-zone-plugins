@@ -36,6 +36,12 @@ Si vous utilisez SPIP 1.9.2, il faut t&eacute;l&eacute;charger la librairie java
 		<inclure>tjpzoom_pipelines_public.php</inclure>
 	</pipeline>
 
+	<pipeline>
+	  <nom>header_prive</nom>
+	  <inclure>tjpzoom_pipelines_public.php</inclure>
+	</pipeline>
+
+
 	<necessite id='CFG' version='[1.10.3;]' />
 	<necessite id="lib:tjpzoom" src="http://valid.tjp.hu/tjpzoom/tjpzoom.zip" />
 </plugin>
