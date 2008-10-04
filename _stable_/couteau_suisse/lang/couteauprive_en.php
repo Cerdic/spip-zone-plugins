@@ -180,8 +180,7 @@ N.B.: in forums, petitions, RSS feeds, etc., Javascript is <b>always</b> made se
 	'flock:nom' => 'Files are not locked',
 	'fonds' => 'Backgrounds:',
 	'forcer_langue:description' => 'Forces the language context for multiligual templates which have a language menu able to manage the language cookie.',
-	'forcer_langue:nom' => 'Force language (
-forcer_langue)',
+	'forcer_langue:nom' => 'Force language',
 	'format_spip' => 'Articles in SPIP format',
 	'forum_lgrmaxi:description' => 'By default forum messages are not limited in size. If this tool is activated, an error message is shown each time someone tries to post a message larger than the size given, and the message is refused. An empty value (or 0) means that no limit will be imposed.[[%forum_lgrmaxi%]]',
 	'forum_lgrmaxi:nom' => 'Size of forums',
