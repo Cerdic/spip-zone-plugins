@@ -5,7 +5,7 @@
 	Si les champs ne sont pas activés dans le CFG, ils n'apparaissent pas...
 ]
 #CACHE{0}
-<BOUCLE_a(AUTEURS_ELARGIS){id=#ENV{id_auteurs_elargi}}{tout}>
+<BOUCLE_a(AUTEURS_ELARGIS){id_auteur=#ENV{id_auteur_elargi}}{tout}>
 <script type="text/javascript">
 /* http://bassistance.de/jquery-plugins/jquery-plugin-validation/ */
 	
@@ -14,13 +14,15 @@
 	}, "<:inscription2:champ_obligatoire:>, <:inscription2:numero_valide:>");
 	
 	var id = cQuery(".auteurs_elargi-telfax-#ID_AUTEUR").crayon();
-	
+	id = jQuery(id).find('form');
+
 	function validation(){
-			var validator = jQuery(id).validate({
-			event: "keyup",
+			var validator = id.validate({
+			onkeyup:function(){
+				validation();
+			},
 			showErrors: function(errors, errorList) {
-				// Si c est pas ok on cache le bouton ok et on affiche les erreurs normales
-				jQuery(id).find(' .crayon-submit').hide();
+				affiche_submit(id);
 				validator.defaultShowErrors();
 			},
 			errorPlacement: function(error, element) {
@@ -28,65 +30,51 @@
 			},
 			success: function(label) {
 				label.remove();
-				if(jQuery(id).find('label.error:visible').length == 0){
-					jQuery(id).find('.crayon-submit').show();
-				}else{
-					jQuery(id).find('.crayon-submit').hide();
-				}
+				affiche_submit(id);
 			},
 			rules: {
 				#ENV{name_telephone}: {
-					[(#CONFIG{inscription2/telephone_obligatoire}|=={on}|?{' '})required:true,]numero:true, rangeLength:[6,20]},
-				#ENV{name_mobile}: {[(#CONFIG{inscription2/mobile_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,20]},
-				#ENV{name_fax}: {[(#CONFIG{inscription2/fax_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,20]},
+					[(#CONFIG{inscription2/telephone_obligatoire}|=={on}|?{' '})required:true,]numero:true, rangelength:[6,20]},
+				#ENV{name_mobile}: {[(#CONFIG{inscription2/mobile_obligatoire}|=={on}|?{required: true,}),]numero:true, rangelength:[6,20]},
+				#ENV{name_fax}: {[(#CONFIG{inscription2/fax_obligatoire}|=={on}|?{required: true,}),]numero:true, rangelength:[6,20]},
 			},
 			messages: {
 				#ENV{name_telephone}: {
 					required:"<:inscription2:champ_obligatoire:>",
 					numero:"<:inscription2:numero_valide:>",
-					rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"},
+					rangelength:"Min 6 Max 20 <:inscription2:caracteres:>"},
 				#ENV{name_mobile}: {
 					required:"<:inscription2:champ_obligatoire:>",
 					numero:"<:inscription2:numero_valide:>",
-					rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"},
+					rangelength:"Min 6 Max 20 <:inscription2:caracteres:>"},
 				#ENV{name_fax}: {
 					required:"<:inscription2:champ_obligatoire:>",
 					numero:"<:inscription2:numero_valide:>",
-					rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"}
+					rangelength:"Min 6 Max 20 <:inscription2:caracteres:>"}
 			}
 		});
-		jQuery(id).find('.obligatoire label').not('.error').append('*');
 		jQuery(id).find('.obligatoire input').each(function(){
-			if(jQuery(this).val() =="" ){
+			if(jQuery(this).val() == "" ){
 				jQuery(this).addClass('error');
 				var id_label = jQuery(this).attr('name');
 				var label = '<label class="error" generated="true"><:inscription2:champ_obligatoire:></label>';
 				jQuery(this).parent("div").append(label);
 				jQuery(this).parent("div").find("label.error").show();
-				
 				jQuery(id).find('.crayon-submit').hide();
 			}
 		});
 		validator.form();
-		jQuery(id).find('.crayon-submit').click(function(){
-		console.log('submit');
-		if(validator.form()==true){
-			jQuery(id).find('.obligatoire input').each(function(){
-			if(jQuery(this).val() =="" ){
-				console.log('vide');
-				jQuery(this).addClass('error');
-				var id_label = jQuery(this).attr('name');
-				var label = '<label class="error" generated="true"><:inscription2:champ_obligatoire:></label>';
-				jQuery(this).parent("div").append(label);
-				jQuery(this).parent("div").find("label.error").show();
-				
-				jQuery(id).find('.crayon-submit').hide();
-				return false;
-			}
-		});
-		}
-	});
+		affiche_submit(id);
 	}
+	function affiche_submit(id){
+		if(id.find('label.error:visible').length == 0){
+			id.find('.crayon-submit').show();
+		}
+		else{
+			id.find('.crayon-submit').hide();
+		}
+	}
+	jQuery(id).find('.obligatoire label').not('.error').append('*');
 	setTimeout('validation()',500);
 
 </script>

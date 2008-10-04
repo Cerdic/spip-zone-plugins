@@ -6,7 +6,11 @@
 
 ]
 #CACHE{0}
-<BOUCLE_b(AUTEURS_ELARGIS){id=#ENV{id_auteurs_elargi}}{tout}>
+<BOUCLE_b(AUTEURS_ELARGIS){id_auteur}{tout}>
+<script type="text/javascript" src="#CHEMIN{lib/jquery-validate/jquery.validate.js}"></script>
+[(#LANG|=={en}|?{'',' '})
+	<script type="text/javascript" src="#CHEMIN{lib/jquery-validate/localization/messages_#LANG.js}"></script>
+]
 <script type="text/javascript">
 /* http://bassistance.de/jquery-plugins/jquery-plugin-validation/ */
 
@@ -14,18 +18,25 @@
 		return !jQuery.validator.methods.required(value, element) || /^[A-Za-z\-\'\.ÒÁ‡ËÈ‚ÍÓÙ˚ ]+$/.test(value);
 	}, "<:inscription2:champ_obligatoire:>, <:inscription2:chaine_valide:>");
 	
-			var id = cQuery(".auteurs_elargi-nomcomplet-#ID_AUTEUR").crayon();
-			var validator = jQuery(id).validate({
-			event: "keyup",
+	var id = cQuery(".auteurs_elargi-nomcomplet-#ID_AUTEUR").crayon();
+	id = jQuery(id).find('form');
+	
+	function validation(){
+		var validator = id.validate({
+			onkeyup:function(){
+				validation();
+			},
 			showErrors: function(errors, errorList) {
-				// Si c est pas ok on cache le bouton ok et on affiche les erreurs normales
-				jQuery('.crayon-submit').hide();
+				affiche_submit(id);
 				validator.defaultShowErrors();
 			},
 			errorPlacement: function(error, element) {
 				error.appendTo( element.parent("div") );
 			},
-			success: function() {jQuery('.crayon-submit').show();},
+			success: function(label){
+				id.find('label.error').remove();
+				affiche_submit(id);
+			},
 			rules: {
 				#ENV{name_nom_famille}: {[(#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,30]},
 				#ENV{name_prenom}: {[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]}
@@ -34,24 +45,40 @@
 				#ENV{name_nom_famille}: {
 					required:"<:inscription2:champ_obligatoire:>",
 					chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
-					rangeLength:"Min 2 Max 30 <:inscription2:caracteres:>"},
+					rangelength:"Min 2 Max 30 <:inscription2:caracteres:>"},
 				#ENV{name_prenom}: {
 					required:"<:inscription2:champ_obligatoire:>",
 					chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
-					rangeLength:"Min 2 Max 20 <:inscription2:caracteres:>"}
+					rangelength:"Min 2 Max 20 <:inscription2:caracteres:>"}
 			}
 		});
 
-		function testform(){
-			//On lance le validateur une fois pour vérifier si c est ok - si c'est pas ok on cache le bouton ok
-			if(validator.form() == false){ jQuery('.crayon-submit').hide();}
-			else{jQuery('.crayon-submit').show();}
-		}
+		//On ajoute l'asterisque qui signale qu'un champ est obligatoire
+		jQuery(id).find('.obligatoire input').each(function(){
+			if(jQuery(this).val() == "" ){
+				jQuery(this).addClass('error');
+				var id_label = jQuery(this).attr('name');
+				var label = '<label class="error" generated="true"><:inscription2:champ_obligatoire:></label>';
+				jQuery(this).parent("div").append(label);
+				jQuery(this).parent("div").find("label.error").show();
+				jQuery(id).find('.crayon-submit').hide();
+			}
+		});
+		//On test le formulaire pour chercher les potentielles erreurs
+		validator.form();
+		affiche_submit(id);
+	}
 		
-	jQuery(document).ready(function() {
-		testform();
-		jQuery('.obligatoire label').not('.error').append('*');
-	});
+	function affiche_submit(id){
+		if(id.find('label.error:visible').length == 0){
+			id.find('.crayon-submit').show();
+		}
+		else{
+			id.find('.crayon-submit').hide();
+		}
+	}
+	jQuery(id).find('.obligatoire label').not('.error').append('*');
+	setTimeout('validation()',500);
 </script>
 
 <fieldset[ style="(#ENV{style})"]>

@@ -6,7 +6,7 @@
 
 ]
 #CACHE{0}
-<BOUCLE_a(AUTEURS_ELARGIS){id=#ENV{id_auteurs_elargi}}{tout}>
+<BOUCLE_a(AUTEURS_ELARGIS){id_auteur=#ENV{id_auteurs_elargi}}{tout}>
 <script type="text/javascript" src="#CHEMIN{lib/jquery-validate/jquery.validate.js}"></script>
 [(#LANG|=={en}|?{'',' '})
 	<script type="text/javascript" src="#CHEMIN{lib/jquery-validate/localization/messages_#LANG.js}"></script>
@@ -26,90 +26,86 @@
 		return this.optional(element) || /^[A-Z]{1,2}[-|\s][0-9]{3,6}$|^[0-9]{3,6}$|^[0-9|A-Z]{2,5}[-|\s][0-9|A-Z]{2,4}$|^[A-Z]{1,2} [0-9|A-Z]{2,5}[-|\s][0-9|A-Z]{2,4}$/.test(value);
 	});
 	
-	var idform = cQuery(".auteurs_elargi-adressecomplete-#ID_AUTEUR").crayon();
-	idform = jQuery(idform).find('form');
-	var validator = idform.validate({
+	var id = cQuery(".auteurs_elargi-adressecomplete-#ID_AUTEUR").crayon();
+	id = jQuery(id).find('form');
+	function validation(){
+		var validator = id.validate({
+			onkeyup:function(){
+				validation();
+			},
 			showErrors: function(errors, errorList) {
-				// Si c est pas ok on cache le bouton ok et on affiche les erreurs normales
-				jQuery(idform).find('.crayon-submit').hide();
 				validator.defaultShowErrors();
+				affiche_submit(id);
 			},
 			errorPlacement: function(error, element) {
-				error.appendTo( element.parent("div"));
+				error.appendTo(element.parent("div"));
 			},
-			success: function(label) {
+			success: function(label){
 				label.remove();
-				if(jQuery(idform).find('label.error').length == 0){
-					idform.find('.crayon-submit').show();
-				}else{
-					idform.find('.crayon-submit').hide();
-				}
+				affiche_submit(id)
 			},
 			rules: {
 				#ENV{name_adresse}: { 
-					[(#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{required: true,}),]
-					rangeLength:[5,1000]
+					[(#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{required: true}),]
+					rangelength:[5,1000],
 				},
 				#ENV{name_code_postal}:{
-					[(#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{required: true,}),]
+					[(#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{required: true}),]
 					postal:true, 
-					rangeLength:[3,20]
+					rangelength:[3,20],
 				},
 				#ENV{name_ville}: {
-					[(#CONFIG{inscription2/ville_obligatoire}|=={on}|?{required: true,}),]
+					[(#CONFIG{inscription2/ville_obligatoire}|=={on}|?{required: true}),]
 					chaine:true,
-					rangeLength:[2,30]
+					rangelength:[2,30]
 				},
-				#ENV{name_pays}:{[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{required: true,''})]}
+				#ENV{name_pays}:{[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{required: true})]}
 			},
 			messages: {
 				#ENV{name_adresse}: {
 					required:"<:inscription2:champ_obligatoire:>",
-					rangeLength:"Min 10 Max 1000 <:inscription2:caracteres:>"
+					rangelength:"Min 10 Max 1000 <:inscription2:caracteres:>"
 				},
 				#ENV{name_code_postal}: {
 					required:"<:inscription2:champ_obligatoire:>",
 					postal:"<:inscription2:cp_valide:>",
-					rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"
+					rangelength:"Min 3 Max 20 <:inscription2:caracteres:>"
 				},
 				#ENV{name_ville}: {
 					required:"<:inscription2:champ_obligatoire:>",
 					chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
-					rangeLength:"Min 2 Max 30 <:inscription2:caracteres:>"
+					rangelength:"Min 2 Max 30 <:inscription2:caracteres:>"
 				},
 				#ENV{name_pays}: {
 					required:"<:inscription2:champ_obligatoire:>"
 				},
 			}
 		});
-	function validation(){
-		//On ajoute l'asterisque qui signale qu'un champ est obligatoire
-		idform.find('.obligatoire label').not('.error').append('*');
-		idform.find('.obligatoire input').each(function(){
-			if(jQuery(this).val() =="" ){
+		jQuery(id).find('.obligatoire input').each(function(){
+			if(jQuery(this).val() == "" ){
 				jQuery(this).addClass('error');
 				var id_label = jQuery(this).attr('name');
 				var label = '<label class="error" generated="true"><:inscription2:champ_obligatoire:></label>';
 				jQuery(this).parent("div").append(label);
 				jQuery(this).parent("div").find("label.error").show();
-				idform.find('.crayon-submit').hide();
+				jQuery(id).find('.crayon-submit').hide();
 			}
 		});
-		idform.find('.crayon-submit').click(function(){
-			if(validator.form()==false){
-				idform.find('.crayon-submit').hide();
-				console.log('hide + return false');
-				return false;
-			}
-			else{
-				return true;
-			}
-		})
 		//On test le formulaire pour chercher les potentielles erreurs
 		validator.form();
+		affiche_submit(id);
 	}
+	function affiche_submit(id){
+		if(id.find('label.error:visible').length == 0){
+			id.find('.crayon-submit').show();
+		}
+		else{
+			id.find('.crayon-submit').hide();
+		}
+	}
+	//On ajoute l'asterisque qui signale qu'un champ est obligatoire
+	jQuery(id).find('.obligatoire label').not('.error').append('*');
 	setTimeout('validation()',500);
-	
 </script>
 <fieldset[ style="(#ENV{style})"]>
 	<legend><:inscription2:votre_adresse:></legend>
