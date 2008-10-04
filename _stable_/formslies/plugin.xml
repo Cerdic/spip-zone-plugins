@@ -1,0 +1,36 @@
+<plugin>
+  <nom>formslies</nom>
+  <auteur>Stephane <stephane@rezo.net>
+  &#169; 2007-2008 - Distribu&#233; sous licence GPL</auteur>
+  <version>0.1</version>
+  <version_base>0.1</version_base>
+  <etat>test</etat>
+  <description>
+  Ajoute un type de champs &quote;formulaire l#233;&quote; au plugin forms&amp;tables de Cedric Morin [yterium.net->http://www.yterium.net]
+  
+  R#233;alis#233; pour [MDEF58->http://www.mdef58.fr]
+  </description>
+	<lien></lien> <!-- URI de documentation -->
+  <prefix>formslies</prefix>
+  <pipeline>
+		<nom>forms_types_champs</nom>
+		<inclure>inc/formslies_types_champs.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>forms_bloc_edition_champ</nom>
+		<inclure>inc/formslies_types_champs.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>forms_input_champs</nom>
+		<inclure>inc/formslies_types_champs.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>forms_update_edition_champ</nom>
+		<inclure>inc/formslies_types_champs.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>forms_calcule_valeur_en_clair</nom>
+		<inclure>inc/formslies_types_champs.php</inclure>
+	</pipeline>
+	
+</plugin>
