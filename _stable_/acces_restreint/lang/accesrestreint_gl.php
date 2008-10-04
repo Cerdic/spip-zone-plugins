@@ -16,6 +16,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_id' => 'N&uacute;m.',
+	'confirmer_retirer_auteur_zone' => 'Est&aacute; vostede seguro de querer retirar este autor da zona?',
+	'confirmer_retirer_auteurs' => 'Est&aacute; vostede seguro de querer retirar a todos os autores desta zona?',
 	'creer_zone' => 'Crear unha nova zona',
 
 	// D
@@ -24,14 +26,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_menu_config' => 'Acceso restrinxido',
 	'icone_supprimer_zone' => 'Suprimir esta zona',
+	'info_ajouter_auteur' => 'Engadir este autor',
+	'info_ajouter_auteurs' => 'Engadir todos os autores',
 	'info_ajouter_zones' => 'Engadir todas as zonas',
+	'info_aucun_acces' => 'Non est&aacute; autorizado ning&uacute;n acceso',
+	'info_aucun_auteur' => 'Non hai ning&uacute;n autor na zona',
+	'info_aucune_zone' => 'Ningunha zona',
 	'info_auteurs_lies_zone' => 'Os autores que te&ntilde;en acceso a esta zona',
 	'info_page' => 'Esta p&aacute;xina permite xestionar as zonas de acceso restrinxido do seu web',
+	'info_retirer_auteurs' => 'Retirar a todos os autores',
 	'info_retirer_zone' => 'Retirar da zona',
 	'info_retirer_zones' => 'Retirar de todas as zonas',
 
+	// M
+	'modifier_zone' => 'Modificar a zona',
+
 	// P
 	'page_zones_acces' => 'Acceso restrinxido',
+	'par_titre' => 'Por t&iacute;tulo',
 	'privee' => 'Privado',
 	'publique' => 'P&uacute;blico',
 
@@ -45,8 +57,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre' => 'T&iacute;tulo',
 	'titre_ajouter_zone' => 'Reconectar a zona',
+	'titre_cadre_modifier_zone' => 'Modificar unha zona',
 	'titre_table' => 'Todas as zonas de acceso',
 	'titre_zones_acces' => 'Zonas de acceso restrinxido',
+	'toutes' => 'Todas',
 
 	// V
 	'voir_toutes' => 'Ver todas as zonas',
