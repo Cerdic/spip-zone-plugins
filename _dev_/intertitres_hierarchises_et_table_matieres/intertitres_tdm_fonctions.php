@@ -80,7 +80,10 @@ function extrait_partie ($texte,$ancre,$debut=0,$taille) {
  return $extrait;
 }
 function nettoie_des_modeles ($texte) {
+//retire les modeles du plugin pour éviter les plantages circulaires
 $texte=preg_replace("/<(extrait|extrait_partie|renvoi|table_des_matieres)(.*?)>/","",$texte);
+//retire les notes du texte, pour éviter les doublons de notes !
+$texte=preg_replace("/(\[\[)(.*?)(\]\])/","",$texte);
  return $texte;
 }
 
