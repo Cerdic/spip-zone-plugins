@@ -4,18 +4,17 @@
 
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]
 
+<label for="vsize" style="margin-right:1em;font-weight:bold;"><:tjpzoom:size_vignette:>:</label><input type="text" name="vsize" value="#ENV{vsize,520}" id="vsize" size="4"/>px
+
+<hr style="margin-top:1em;margin-bottom:1em;"/>
+
 <table>
 <thead>
 <tr height="2em"><th width="200px"><:tjpzoom:style:></th><th  width="200px"><:tjpzoom:example:></th></tr>
 </thead>
 <tr>
 <td>
-<input type="radio" name="zoomstyle" value="" id="zoom0" [(#CONFIG{tjpzoom/zoomstyle}|?{'','checked="true"'})]/><label for="zoom0"><:tjpzoom:nostyle:></label>
-</td><td>[<img src="(#CHEMIN{img/raw.png})" />]</td>
-</tr>
-<tr>
-<td>
-<input type="radio" name="zoomstyle" value="default" id="zoom1" [(#CONFIG{tjpzoom/zoomstyle}|=={default}|?{'checked="true"',''})]/><label for="zoom1">Default</label>
+<input type="radio" name="zoomstyle" value="default" id="zoom1" [(#CONFIG{tjpzoom/zoomstyle,default}|=={default}|?{'checked="true"',''})]/><label for="zoom1">Default</label>
 </td><td>[<img src="(#CHEMIN{img/default.png})" />]</td>
 </tr>
 <tr>

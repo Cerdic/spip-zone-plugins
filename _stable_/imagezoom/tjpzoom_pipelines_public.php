@@ -26,23 +26,24 @@ function tjpzoom_insert_head($flux){
   $toRet = $flux.'<script type="text/javascript" src="'.$tjp.'"></script>';
 
   //chercher les configs de la loupe
-  if(($style = lire_config('tjpzoom/zoomstyle')) != '') {
-	if($style == 'other') $style = lire_config('tjpzoom/zoomstyle_o'); //si le style est autre
-	$conf = find_in_path("lib/tjpzoom/tjpzoom_config_$style.js"); 
-	if(!$conf) $conf = find_in_path("tjpzoom_config_$style.js"); // cas 1.9.2
-	$toRet .= '<script type="text/javascript" src="'.$conf.'"></script>';
-
-	if($style == 'default' || $style == 'smart' || $style == 'relative'){
-	  $shadow = find_in_path("lib/tjpzoom/dropshadow");
-	  if(!$shadow) $shadow = find_in_path("tjpzoom/dropshadow");
-	} else {
-	  $shadow = find_in_path("lib/tjpzoom/".$style);
-	  if(!$shadow) $shadow = find_in_path("tjpzoom/$style"); //cas 1.9.2
-	  if(!$shadow) $shadow = find_in_path($style); // style perso direct dans squelettes
-	}
-	if($shadow)
-	  $toRet .= '<script type="text/javascript">var TJPshadow="'.$shadow.'/"</script>';
+  $style = lire_config('tjpzoom/zoomstyle');
+  if(!$style) $style = 'default';
+  if($style == 'other') $style = lire_config('tjpzoom/zoomstyle_o'); //si le style est autre
+  $conf = find_in_path("lib/tjpzoom/tjpzoom_config_$style.js"); 
+  if(!$conf) $conf = find_in_path("tjpzoom_config_$style.js"); // cas 1.9.2
+  $toRet .= '<script type="text/javascript" src="'.$conf.'"></script>';
+  
+  if($style == 'default' || $style == 'smart' || $style == 'relative'){
+	$shadow = find_in_path("lib/tjpzoom/dropshadow");
+	if(!$shadow) $shadow = find_in_path("tjpzoom/dropshadow");
+  } else {
+	$shadow = find_in_path("lib/tjpzoom/".$style);
+	if(!$shadow) $shadow = find_in_path("tjpzoom/$style"); //cas 1.9.2
+	if(!$shadow) $shadow = find_in_path($style); // style perso direct dans squelettes
   }
+  if($shadow)
+	$toRet .= '<script type="text/javascript">var TJPshadow="'.$shadow.'/"</script>';
+  
   return $toRet;
 }
 
