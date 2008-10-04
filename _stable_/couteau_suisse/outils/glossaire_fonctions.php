@@ -59,7 +59,7 @@ function glossaire_echappe_balises_callback($matches) {
 }
 function glossaire_echappe_mot_callback($matches) {
  global $gloss_id;
- return "$matches[1]@@GLOSS".cs_code_echappement($matches[2], 'GLOSS')."#{$gloss_id}@@$matches[3]";
+ return "@@GLOSS".cs_code_echappement($matches[0], 'GLOSS')."#{$gloss_id}@@";
 }
 
 function glossaire_safe($texte) {
@@ -115,7 +115,7 @@ function cs_rempl_glossaire($texte) {
 					'descriptif' => glossaire_safe($mot['descriptif'])));
 			$GLOBALS['toujours_paragrapher'] = $mem;
 			// a chaque mot reconnu, on pose une balise temporaire cryptee
-			$texte = preg_replace_callback(",(\W)($les_mots)(\W),i", "glossaire_echappe_mot_callback", $texte, $limit);
+			$texte = preg_replace_callback(",(?<=\W)(?:$les_mots)(?=\W),i", "glossaire_echappe_mot_callback", $texte, $limit);
 		}
 	}
 	// remplacement final des balises posees ci-dessus
