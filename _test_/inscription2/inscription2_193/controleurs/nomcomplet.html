@@ -31,7 +31,7 @@
 				validator.defaultShowErrors();
 			},
 			errorPlacement: function(error, element) {
-				error.appendTo( element.parent("div") );
+				error.appendTo( element.parent("li") );
 			},
 			success: function(label){
 				id.find('label.error').remove();
@@ -44,12 +44,12 @@
 			messages: {
 				#ENV{name_nom_famille}: {
 					required:"<:inscription2:champ_obligatoire:>",
-					chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
-					rangelength:"Min 2 Max 30 <:inscription2:caracteres:>"},
+					chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>"
+				},
 				#ENV{name_prenom}: {
 					required:"<:inscription2:champ_obligatoire:>",
-					chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
-					rangelength:"Min 2 Max 20 <:inscription2:caracteres:>"}
+					chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>"
+				}
 			}
 		});
 
@@ -80,27 +80,27 @@
 	jQuery(id).find('.obligatoire label').not('.error').append('*');
 	setTimeout('validation()',500);
 </script>
-
-<fieldset[ style="(#ENV{style})"]>
-	<legend><:inscription2:votre_nom_complet:></legend>
-
-	[(#CONFIG{inscription2/nom_famille}|?{' ',''})
-	#SET{nom_famille_obligatoire, false}
-	[(#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|?{' ',''})#SET{nom_famille_obligatoire, true}]
-	[(#GET{nom_famille_obligatoire}|=={true}|?{<div class="obligatoire">,<div>})]		
-	<label><:inscription2:nom_famille:></label>
-	<input class="crayon-active" name="#ENV{name_nom_famille}" style="width:#ENV{largeur}px;" value="[(#NOM_FAMILLE**|entites_html)]" />
-	</div>]
-	
-	[(#CONFIG{inscription2/prenom}|?{' ',''})
-	#SET{prenom_obligatoire, false}
-	[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{' ',''})#SET{prenom_obligatoire, true}]
-	[(#GET{prenom_obligatoire}|=={true}|?{<div class="obligatoire">,<div>})]
-	<label><:inscription2:prenom:></label>
-	&nbsp;<input class="crayon-active" name="#ENV{name_prenom}" style="width:#ENV{largeur}px;" value="[(#PRENOM**|entites_html)]" />
-	</div>]
-
-</fieldset>
-
+<div class="formulaire_spip">
+	<fieldset[ style="(#ENV{style})"]>
+		<legend><:inscription2:votre_nom_complet:></legend>
+		<ul>
+			[(#CONFIG{inscription2/nom_famille}|?{' ',''})
+			#SET{nom_famille_obligatoire, false}
+			[(#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|?{' ',''})#SET{nom_famille_obligatoire, true}]
+			[(#GET{nom_famille_obligatoire}|=={true}|?{<li class="obligatoire">,<li>})]
+				<label><:inscription2:nom_famille:></label>
+				<input class="crayon-active" name="#ENV{name_nom_famille}" style="width:#ENV{largeur}px;" value="[(#NOM_FAMILLE**|entites_html)]" />
+			</li>]
+		
+			[(#CONFIG{inscription2/prenom}|?{' ',''})
+			#SET{prenom_obligatoire, false}
+			[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{' ',''})#SET{prenom_obligatoire, true}]
+			[(#GET{prenom_obligatoire}|=={true}|?{<li class="obligatoire">,<li>})]
+				<label><:inscription2:prenom:></label>
+				&nbsp;<input class="crayon-active" name="#ENV{name_prenom}" style="width:#ENV{largeur}px;" value="[(#PRENOM**|entites_html)]" />
+			</li>]
+		</ul>
+	</fieldset>
+</div>
 </BOUCLE_b>
 <//B_b>

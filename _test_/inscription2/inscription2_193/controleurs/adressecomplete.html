@@ -38,7 +38,7 @@
 				affiche_submit(id);
 			},
 			errorPlacement: function(error, element) {
-				error.appendTo(element.parent("div"));
+				error.appendTo(element.parent("li"));
 			},
 			success: function(label){
 				label.remove();
@@ -63,18 +63,15 @@
 			},
 			messages: {
 				#ENV{name_adresse}: {
-					required:"<:inscription2:champ_obligatoire:>",
-					rangelength:"Min 10 Max 1000 <:inscription2:caracteres:>"
+					required:"<:inscription2:champ_obligatoire:>"
 				},
 				#ENV{name_code_postal}: {
 					required:"<:inscription2:champ_obligatoire:>",
-					postal:"<:inscription2:cp_valide:>",
-					rangelength:"Min 3 Max 20 <:inscription2:caracteres:>"
+					postal:"<:inscription2:cp_valide:>"
 				},
 				#ENV{name_ville}: {
 					required:"<:inscription2:champ_obligatoire:>",
-					chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>",
-					rangelength:"Min 2 Max 30 <:inscription2:caracteres:>"
+					chaine:"<:inscription2:chaine_valide:> <:inscription2:chainelettre:>"
 				},
 				#ENV{name_pays}: {
 					required:"<:inscription2:champ_obligatoire:>"
@@ -107,44 +104,46 @@
 	jQuery(id).find('.obligatoire label').not('.error').append('*');
 	setTimeout('validation()',500);
 </script>
+<div class="formulaire_spip">
 <fieldset[ style="(#ENV{style})"]>
 	<legend><:inscription2:votre_adresse:></legend>
+	<ul>
+		[(#CONFIG{inscription2/adresse_fiche_mod}|?{' ',''})
+		#SET{adresse_obl, false}
+		[(#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{' ',''})#SET{adresse_obl, true}]
+		[(#GET{adresse_obl}|=={true}|?{<li class="obligatoire">,<li>})]
+			<label><:inscription2:adresse:></label> 
+			<textarea class="crayon-active" name="#ENV{name_adresse}" style="width:#ENV{largeur}px;">[(#ADRESSE**|entites_html)]</textarea><br />
+		</li>]
+	
+		[(#CONFIG{inscription2/code_postal_fiche_mod}|?{' ',''})
+		#SET{code_postal_obl, false}
+		[(#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{' ',''})#SET{code_postal_obl, true}]
+		[(#GET{code_postal_obl}|=={true}|?{<li class="obligatoire">,<li>})]
+			<label><:inscription2:code_postal:></label>
+			<input class="crayon-active" name="#ENV{name_code_postal}" style="width:#ENV{largeur}px;" value="[(#CODE_POSTAL**|entites_html)]" />
+		</li>]
 
-	[(#CONFIG{inscription2/adresse_fiche_mod}|?{' ',''})
-	#SET{adresse_obl, false}
-	[(#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{' ',''})#SET{adresse_obl, true}]
-	[(#GET{adresse_obl}|=={true}|?{<div class="obligatoire">,<div>})]
-		<label><:inscription2:adresse:></label> 
-		<textarea class="crayon-active" name="#ENV{name_adresse}" style="width:#ENV{largeur}px;">[(#ADRESSE**|entites_html)]</textarea><br />
-	</div>]
+		[(#CONFIG{inscription2/ville_fiche_mod}|?{' ',''})
+		#SET{ville_obligatoire, false}
+		[(#CONFIG{inscription2/ville_obligatoire}|=={on}|?{' ',''}) #SET{ville_obligatoire, true}]
+		[(#GET{ville_obligatoire}|=={true}|?{<li class="obligatoire">,<li>})]
+			<label><:inscription2:ville:></label> 
+			<input class="crayon-active" name="#ENV{name_ville}" style="width:#ENV{largeur}px;" value="[(#VILLE**|entites_html)]" />
+		</li>]
 
-	[(#CONFIG{inscription2/code_postal_fiche_mod}|?{' ',''})
-	#SET{code_postal_obl, false}
-	[(#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{' ',''})#SET{code_postal_obl, true}]
-	[(#GET{code_postal_obl}|=={true}|?{<div class="obligatoire">,<div>})]
-		<label><:inscription2:code_postal:></label>
-		<input class="crayon-active" name="#ENV{name_code_postal}" style="width:#ENV{largeur}px;" value="[(#CODE_POSTAL**|entites_html)]" />
-	</div>]
-
-	[(#CONFIG{inscription2/ville_fiche_mod}|?{' ',''})
-	#SET{ville_obligatoire, false}
-	[(#CONFIG{inscription2/ville_obligatoire}|=={on}|?{' ',''}) #SET{ville_obligatoire, true}]
-	[(#GET{ville_obligatoire}|=={true}|?{<div class="obligatoire">,<div>})]
-		<label><:inscription2:ville:></label> 
-		<input class="crayon-active" name="#ENV{name_ville}" style="width:#ENV{largeur}px;" value="[(#VILLE**|entites_html)]" />
-	</div>]
-
-	[(#CONFIG{inscription2/pays_fiche_mod}|?{' ',''})
-	#SET{pays_obligatoire, false}
-	[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{' ',''}) #SET{pays_obligatoire, true}]
-	[(#GET{pays_obligatoire}|=={true}|?{<div class="obligatoire">,<div>})]
-		<label><:inscription2:pays:></label> 
-		#SET{id,#PAYS}
-		<select class="crayon-active" name="#ENV{name_pays}" style="width:#ENV{largeur}px;" onchange="validation()">
-			<INCLURE{fond=controleurs/pays}{id=#GET{id}}>
-		</select>
-	</div>]
+		[(#CONFIG{inscription2/pays_fiche_mod}|?{' ',''})
+		#SET{pays_obligatoire, false}
+		[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{' ',''}) #SET{pays_obligatoire, true}]
+		[(#GET{pays_obligatoire}|=={true}|?{<li class="obligatoire">,<li>})]
+			<label><:inscription2:pays:></label> 
+			#SET{id,#PAYS}
+			<select class="crayon-active" name="#ENV{name_pays}" style="width:#ENV{largeur}px;" onchange="validation()">
+				<INCLURE{fond=controleurs/pays}{id=#GET{id}}>
+			</select>
+		</li>]
+	</ul>
 </fieldset>
-
+</div>
 </BOUCLE_a>
 <//B_a>
