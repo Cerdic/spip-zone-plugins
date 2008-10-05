@@ -175,7 +175,7 @@ function jeux_trouver_titre_public($texte) {
 
 // pour placer des commentaires
 function jeux_rem($rem, $index=false, $jeu='') {
- return code_echappement("\n<!-- ".$rem.($index!==false?'-#'.$index:'').(strlen($jeu)?" '".$jeu."'":'')." -->\n");
+ return code_echappement("<div class='jeux_rem' title='".$rem.($index!==false?'-#'.$index:'').(strlen($jeu)?" `".$jeu."`":'')."'></div>");
 }
 
 // pour inserer un css

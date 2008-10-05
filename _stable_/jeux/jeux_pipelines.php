@@ -37,7 +37,8 @@ function jeux_pre($chaine, $indexJeux){
 //
 	return $texteAvant . $header
 		.jeux_rem('PLUGIN-DEBUT', $indexJeux, join('/', $liste))
-		."<a name=\"JEU$indexJeux\"></a><div class=\"jeux_global ajax\">$chaine</div>"
+		."<div id=\"JEU$indexJeux\" class=\"jeux_global\">$chaine</div>"
+#		."<div id=\"JEU$indexJeux\" class=\"jeux_global ajax\">$chaine</div>"
 		.jeux_rem('PLUGIN-FIN', $indexJeux).jeux_pre($texteApres, ++$indexJeux);
 }
 
@@ -106,22 +107,21 @@ function jeux_affiche_gauche($flux) {
 // correction d'un bug d'affichage
  if (defined('_SPIP19100')) $flux['data'] .="<script type=\"text/javascript\"><!--
 document.getElementById('haut-page').childNodes[2].align='center';
---></script>";
+//--></script>";
 	return $flux;
 }
 
 // Le pipeline affichage_final, execute a chaque hit sur toute la page
-// Recherche tous les <!-- JEUX-HEAD (...) --> et incorporation a la place de _JEUX_HEAD2
+// Recherche tous les "title=JEUX-HEAD(...)" --> et incorporation a la place de _JEUX_HEAD2
 // dans <head> des fichiers js et css necessaires.
 function jeux_affichage_final($flux) {
-	preg_match_all(",<!-- JEUX-HEAD-#[0-9]+ '([^>]*)' -->,", $flux, $matches, PREG_SET_ORDER);
+	preg_match_all(",'JEUX-HEAD-#[0-9]+ `([^>]*)`',", $flux, $matches, PREG_SET_ORDER);
 	if(!count($matches)) return $flux;
-	$liste = array();
+	$liste = array(_JEUX_HEAD2);
 	foreach ($matches as $val) $liste = array_merge($liste, explode('||', base64_decode($val[1])));
 	$liste = array_unique($liste);
-	$header = _JEUX_HEAD2
-		. html_entity_decode(join("\n",$liste));
-	return str_replace(_JEUX_HEAD2, $header, $flux);
+ 	$header = html_entity_decode(join("\n",$liste));
+	return str_replace(_JEUX_HEAD2, $header."\n\n", $flux);
 }
 
 

@@ -46,11 +46,13 @@ function jeux_lien_jeu($nb='0', $exec='', $id_jeu=0) {
 	return $nb=='0'?'-':"<a href='$lien'>$nb</a>";
 }
 // filtre qui evite d'afficher le resultat obtenu par certains plugins
-// grace aux espions : <!-- PLUGIN-DEBUT --> et <!-- PLUGIN-FIN -->
-// ou : <!-- PLUGIN-DEBUT-#xxxx --> et <!-- PLUGIN-FIN-#xxxx --> ou xxxx est le numero d'identification du plugin.
+// grace aux espions : <div title='PLUGIN-DEBUT'></div> et <div title='PLUGIN-FIN'></div>
+// ou : <div title='PLUGIN-DEBUT-#xxxx'></div> et <div title='PLUGIN-FIN-#xxxx'></div>
+//	 ou xxxx est le numero d'identification du plugin.
 if (!function_exists("pas_de_plugin")) {	
  function pas_de_plugin($texte){
-		return preg_replace(",<!--\s*PLUGIN-DEBUT(-#[0-9]*)?.*<!--\s*PLUGIN-FIN\\1?\s*-->,UimsS", '', $texte);
+ 	$texte = preg_replace(",<div[^<]+['\"]JEUX-HEAD-#[0-9]+[^>]+></div>,", '', $texte);
+	return preg_replace(",<div[^<]+['\"]PLUGIN-DEBUT(-#[0-9]*)?.*<[^<]+['\"]PLUGIN-FIN\\1?[^>]+></div>,UmsS", '', $texte);
  }
 }
 

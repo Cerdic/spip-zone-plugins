@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Des jeux dans vos articles</nom>
 	<etat>test</etat>
-	<version>1.2</version>
+	<version>1.3</version>
 	<icon>img/jeux-48.png</icon>
 	<auteur>
 [Patrice VANNEUFVILLE->mailto:patrice.vanneufville@laposte.net], novembre 2006
@@ -9,9 +9,9 @@ _ Gestion des scores : Ma&#239;eul Rouquette
 _ Icones : Jonathan Roche
 
 Travaux originaux :
-_ QCM : Mathieu GIANNECCHINI
-_ Mots crois&#233;s : Ma&#239;eul ROUQUETTE
-_ Diagrammes d'&#233;checs : Fran&#231;ois SCHREUER
+_ QCM : Mathieu Giannecchini
+_ Mots crois&#233;s : Ma&#239;eul Rouquette
+_ Diagrammes d'&#233;checs : Fran&#231;ois Schreuer
 	</auteur>
 	<description>
 Des jeux avec SPIP !
