@@ -31,7 +31,7 @@ function inscription2_upgrade(){
 		sql_create($table_nom,array("id_auteur"=> "bigint(21) NOT NULL default '0'"), array('PRIMARY KEY' => "id_auteur"));
 	
 		//ajout des index
-		$desc = sql_showtable($table_nom, '', false);
+		$desc = sql_showtable($table_nom,'', false);
 		
 		if(is_array($desc) and $desc['key']['PRIMARY KEY']!='id_auteur'){
 			spip_query("ALTER TABLE ".$table_nom." DROP PRIMARY KEY");
@@ -39,8 +39,8 @@ function inscription2_upgrade(){
 				spip_query("ALTER TABLE ".$table_nom." ADD id_auteur INT NOT NULL PRIMARY KEY");
 		}
 		
-		if($desc['key']['PRIMARY KEY id']){
-			spip_query("ALTER TABLE ".$table_nom." DROP INDEX id_auteur, DROP PRIMARY KEY id, ADD PRIMARY KEY (id_auteur)");
+		if(isset($desc['key']['PRIMARY KEY id'])){
+			spip_query("ALTER TABLE $table_nom DROP INDEX id_auteur, DROP PRIMARY KEY id, ADD PRIMARY KEY (id_auteur)");
 		}
 
 		//insertion des infos par defaut
@@ -208,9 +208,9 @@ function inscription2_upgrade(){
 				}elseif($val!='' and !isset($desc['field'][$cle]) and $cle == 'pays'){
 					spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." int NOT NULL");
 					$desc['field'][$cle] = " int NOT NULL";
-				}elseif($val!='' and !isset($desc['field'][$cle])  and $cle != 'statut_nouveau' and $cle != 'nom' and $cle != 'email' and $cle != 'username' and $cle != 'statut_relances'  and $cle != 'accesrestreint' and !ereg("^(categories|zone|newsletter).*$", $cle)){
-					spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." TEXT NOT NULL");
-					$desc['field'][$cle] = "TEXT NOT NULL";
+				}elseif($val!='' and !isset($desc['field'][$cle])  and $cle != 'statut_nouveau' and $cle != 'nom' and $cle != 'email' and $cle != 'username' and $cle != 'statut_relances'  and $cle != 'accesrestreint'){
+					spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." text NOT NULL");
+					$desc['field'][$cle] = " text NOT NULL ";
 				}
 			}
 		}
@@ -220,7 +220,7 @@ function inscription2_upgrade(){
 			spip_query("ALTER TABLE `".$table_nom."` ADD `spip_listes_format` VARCHAR(8)");
 	
 		//inserer les auteurs qui existent deja dans la table spip_auteurs en non pas dans la table elargis
-		$s = spip_query("SELECT a.id_auteur FROM spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur WHERE b.id_auteur is null");
+		$s = sql_select("a.id_auteur","spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur","b.id_auteur is null");
 		while($q = sql_fetch($s))
 			$a[] = $q['id_auteur'];
 		if($a){
@@ -230,7 +230,7 @@ function inscription2_upgrade(){
 	
 		//les pays
 		include(_DIR_PLUGIN_INSCRIPTION2."/inc/pays.php");
-		spip_query("DROP TABLE spip_pays");
+		sql_drop_table("spip_pays");
 		spip_query("CREATE TABLE spip_geo_pays (id_pays SMALLINT NOT NULL AUTO_INCREMENT PRIMARY KEY, pays varchar(255) NOT NULL );");
 		spip_query("INSERT INTO spip_geo_pays (pays) VALUES (\"".join('"), ("',$liste_pays)."\")");
 		echo "Inscription2 installe @ ".$version_base;
@@ -244,7 +244,7 @@ function inscription2_upgrade(){
 		$table_pays = "spip_geo_pays";
 		$descpays = sql_showtable($table_pays, '', false);
 		
-		spip_query("DROP TABLE spip_pays");
+		sql_drop_table("spip_pays");
 		spip_query("CREATE TABLE spip_geo_pays (id_pays SMALLINT NOT NULL AUTO_INCREMENT PRIMARY KEY, nom varchar(255) NOT NULL );");
 		
 		if(!isset($descpays['field']['pays'])){
@@ -308,24 +308,25 @@ function inscription2_upgrade(){
 	if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) ecrire_metas();
 }
 
-
 	//supprime les donnees depuis la table spip_auteurs_elargis
 	function inscription2_vider_tables() {
 		include_spip('base/abstract_sql');
 		//supprime la table spip_auteurs_elargis
-		$desc = sql_showtable('spip_auteurs_elargis', '', true);
 		foreach(lire_config('inscription2') as $cle => $val){
+			$cle = ereg_replace("_(obligatoire|fiche|table).*", "", $cle);
+			$desc = sql_showtable('spip_auteurs_elargis','', '', true);
 			if(isset($desc['field'][$cle]) and $cle != 'id_auteur' and $cle != 'spip_listes_format'){
+				spip_log("suppression de $cle");
 				$a = spip_query('ALTER TABLE spip_auteurs_elargis DROP COLUMN '.$cle);
 				$desc['field'][$cle]='';
 			}
 		}
 		if (!lire_config('plugin/SPIPLISTES') && !lire_config('plugin/ECHOPPE')){
-			spip_query('DROP TABLE spip_auteurs_elargis');
+			sql_drop_table('spip_auteurs_elargis');
 		}
 		effacer_meta('inscription2');
 		effacer_meta('inscription2_version');
-		if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) ecrire_metas();
+		ecrire_metas();
 	}
 	
 	function inscription2_install($action){
