@@ -148,6 +148,8 @@ function decoupe_notes_orphelines(&$texte) {
 
 // ici on est en pre_propre, tests de compatibilite requis
 function cs_onglets($texte){
+	// protection du texte
+	$texte = cs_echappe_balises('html|code|cadre|frame|script|cite|jeux', false, $texte);
 	// surcharge possible de _decoupe_SEPARATEUR par _decoupe_COMPATIBILITE
 	$rempl = ',\s*('
 		. preg_quote(_decoupe_SEPARATEUR,',')
@@ -157,7 +159,8 @@ function cs_onglets($texte){
 	$texte = preg_replace($rempl, "\n\n"._decoupe_SEPARATEUR."\n\n", $texte);
 	// si pas d'onglets, on sort
 	if (strpos($texte, '<onglet')===false) return $texte;
-	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'decouper_en_onglets_rempl', $texte);
+	// le texte est deja protege
+	return cs_echappe_balises(false, 'decouper_en_onglets_rempl', $texte);
 }
 
 // ici on est en post_propre, tests de compatibilite non requis

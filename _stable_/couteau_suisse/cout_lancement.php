@@ -130,20 +130,27 @@ function cs_block($texte) {
 // evite les transformations typo dans les balises $balises
 // par exemple pour <html>, <cadre>, <code>, <frame>, <script>, <acronym> et <cite>, $balises = 'html|code|cadre|frame|script|acronym|cite'
 // $fonction est la fonction prevue pour transformer $texte
+// si $fonction = false, alors le texte est retourne simplement protege
 // $texte est le texte d'origine
 // si $balises = '' alors la protection par defaut est : html|code|cadre|frame|script
+// si $balises = false alors le texte est utilise tel quel
 function cs_echappe_balises($balises, $fonction, $texte, $arg=NULL){
 	if(!strlen($texte)) return '';
-	if (!function_exists($fonction)) {
+	if (($fonction!==false) && !function_exists($fonction)) {
 		spip_log("Erreur - cs_echappe_balises() : $fonction() non definie !");
 		return $texte;
 	}
-	if(!strlen($balises)) $balises = 'html|code|cadre|frame|script';
-	$balises = ',<('.$balises.')(\s[^>]*)?>(.*)</\1>,UimsS';
-	include_spip('inc/texte');
-	$texte = echappe_html($texte, 'CS', true, $balises);
-	$texte = echappe_retour($arg==NULL?$fonction($texte):$fonction($texte, $arg), 'CS');
-	return $texte;
+	// protection du texte
+	if(balise!==false) {
+		if(!strlen($balises)) $balises = 'html|code|cadre|frame|script';
+		$balises = ',<('.$balises.')(\s[^>]*)?>(.*)</\1>,UimsS';
+		include_spip('inc/texte');
+		$texte = echappe_html($texte, 'CS', true, $balises);
+	}
+	// retour du texte simplement protege
+	if ($fonction===false) return $texte;
+	// retour du texte transforme par $fonction puis deprotege
+	return echappe_retour($arg==NULL?$fonction($texte):$fonction($texte, $arg), 'CS');
 }
 
 // retourne un chemin canonique a partir d'un chemin contenant des ../
