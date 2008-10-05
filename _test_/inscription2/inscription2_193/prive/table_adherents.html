@@ -295,7 +295,7 @@ function confirm(msg,callback) {
 			echo '<td>'.$validite.'</td>';
 		}
 		
-		echo '<td><a href="'.generer_url_ecrire('editer_adherent','id='.$data['id_auteur']).'"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/edit-12.gif" alt="'._T('inscription2:editer_adherent').'" /></a></td>';	
+		echo '<td><a href="'.generer_url_ecrire('auteur_infos','id_auteur='.$data['id_auteur']).'"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/edit-12.gif" alt="'._T('inscription2:editer_adherent').'" /></a></td>';	
 		
 		if($data['statut'] != '0minirezo' and $data['statut'] != '1comite')
 			echo '<td><a href="'.generer_url_ecrire('inscription2_adherents','id='.$data['id_auteur'].'&act=sup').'" class="confirm"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/poubelle-12.gif" alt="'._T('inscription2:supprimer_adherent').'" /></a></td>';
