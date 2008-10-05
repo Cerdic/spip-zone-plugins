@@ -1,0 +1,17 @@
+<plugin>
+	<nom>Plugin de versioning</nom>
+	<version>1.0</version>
+	<prefix>versioning</prefix>
+	<auteur>
+		michael.courcy@netapsys.fr, mamadou.niagate@netapsys.fr
+	</auteur>
+	<options>versioning_options.php</options>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>versioning_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>versioning_pipelines.php</inclure>
+	</pipeline>
+</plugin>

@@ -1,0 +1,18 @@
+
+.plan-articles-bloques .archi
+{	
+	background:#E0E0E0 none no-repeat scroll 1% 50%;
+	border-bottom:1px solid #CCCCCC;
+	display:block;
+	font-family:Verdana,Arial,Sans,sans-serif;
+	font-size:11px;
+	padding:2px 2px 2px 18px;
+	text-decoration:none;
+}
+
+
+.plan-articles .publie,
+.plan-articles-bloques .archi
+{
+	background-image: url(../img_pack/puce-marron.gif);
+}
