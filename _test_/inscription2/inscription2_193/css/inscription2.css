@@ -54,7 +54,7 @@ width:100px
 width:120px
 }
 
-#principal table.cadre-r {clear:right; margin-left:10pt;padding:5px;width:75%}
+#principal table.cadre-r {margin-left:10pt;padding:5px;width:75%}
 #principal tr, #droite tr { background-color : #E0E0E0 ;}
  { background-color : #E0E0E0 ;}
 #principal tr.row { background:#FFF8DC; }
