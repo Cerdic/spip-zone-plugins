@@ -7,39 +7,39 @@
 ]
 #CACHE{0}
 <BOUCLE_b(AUTEURS_ELARGIS){id_auteur}{tout}>
-<script type="text/javascript" src="#CHEMIN{lib/jquery-validate/jquery.validate.js}"></script>
-[(#LANG|=={en}|?{'',' '})
-	<script type="text/javascript" src="#CHEMIN{lib/jquery-validate/localization/messages_#LANG.js}"></script>
-]
+[<script type="text/javascript" src="(#URL_PAGE{crayons_validation.js}|parametre_url{lang,#ENV{lang}})"></script>]
 <script type="text/javascript">
-/* http://bassistance.de/jquery-plugins/jquery-plugin-validation/ */
-
-	jQuery.validator.addMethod("chaine", function(value, element) {
-		return !jQuery.validator.methods.required(value, element) || /^[A-Za-z\-\'\.ÒÁ‡ËÈ‚ÍÓÙ˚ ]+$/.test(value);
-	}, "<:inscription2:champ_obligatoire:>, <:inscription2:chaine_valide:>");
-	
-	var id = cQuery(".auteurs_elargi-nomcomplet-#ID_AUTEUR").crayon();
-	id = jQuery(id).find('form');
+		
+	var me = cQuery(".auteurs_elargi-nomcomplet-#ID_AUTEUR").crayon();
+	var id = me.crayon().find('form');
 	
 	function validation(){
-		var validator = id.validate({
+		var validator = cQuery(id).validate({
 			onkeyup:function(){
 				validation();
 			},
 			showErrors: function(errors, errorList) {
-				affiche_submit(id);
+				crayon_affiche_submit(me,id);
 				validator.defaultShowErrors();
 			},
 			errorPlacement: function(error, element) {
 				error.appendTo( element.parent("li") );
 			},
 			success: function(label){
-				id.find('label.error').remove();
-				affiche_submit(id);
+				label.remove();
+				crayon_affiche_submit(me,id);
 			},
 			rules: {
-				#ENV{name_nom_famille}: {[(#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,30]},
-				#ENV{name_prenom}: {[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]}
+				#ENV{name_nom_famille}: {
+					[(#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|?{required: true,}),]
+					chaine:true,
+					rangeLength:[2,30]
+				},
+				#ENV{name_prenom}: {
+					[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{required: true,}),]
+					chaine:true,
+					rangeLength:[2,20]
+				}
 			},
 			messages: {
 				#ENV{name_nom_famille}: {
@@ -52,32 +52,23 @@
 				}
 			}
 		});
-
 		//On ajoute l'asterisque qui signale qu'un champ est obligatoire
-		jQuery(id).find('.obligatoire input').each(function(){
-			if(jQuery(this).val() == "" ){
-				jQuery(this).addClass('error');
-				var id_label = jQuery(this).attr('name');
+		id.find('.obligatoire input').each(function(){
+			if(cQuery(this).val() == ""){
+				cQuery(this).addClass('error');
+				var id_label = cQuery(this).attr('name');
 				var label = '<label class="error" generated="true"><:inscription2:champ_obligatoire:></label>';
-				jQuery(this).parent("div").append(label);
-				jQuery(this).parent("div").find("label.error").show();
-				jQuery(id).find('.crayon-submit').hide();
+				cQuery(this).parent("div").append(label);
+				cQuery(this).parent("div").find("label.error").show();
+				id.find('.crayon-submit').hide();
 			}
 		});
 		//On test le formulaire pour chercher les potentielles erreurs
 		validator.form();
-		affiche_submit(id);
+		crayon_affiche_submit(me,id);
 	}
-		
-	function affiche_submit(id){
-		if(id.find('label.error:visible').length == 0){
-			id.find('.crayon-submit').show();
-		}
-		else{
-			id.find('.crayon-submit').hide();
-		}
-	}
-	jQuery(id).find('.obligatoire label').not('.error').append('*');
+	//On ajoute l'asterisque qui signale qu'un champ est obligatoire
+	id.find('.obligatoire label').not('.error').append('*');
 	setTimeout('validation()',500);
 </script>
 <div class="formulaire_spip">
