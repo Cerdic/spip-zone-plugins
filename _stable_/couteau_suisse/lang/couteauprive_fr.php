@@ -472,11 +472,13 @@ _ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l\'Imprimer
 	'version_a_jour' => 'Votre version est &agrave; jour.',
 	'version_distante' => 'Version distante...',
 	'version_nouvelle' => 'Nouvelle version : @version@',
+	'version_revision' => 'R&eacute;vision : @revision@',
 	'verstexte:description' => '2 filtres pour vos squelettes, permettant de produire des pages plus l&eacute;g&egrave;res.
 _ version_texte : extrait le contenu texte d\'une page html &agrave; l\'exclusion de quelques balises &eacute;l&eacute;mentaires.
 _ version_plein_texte : extrait le contenu texte d\'une page html pour rendre du texte plein.',
 	'verstexte:nom' => 'Version texte',
 	'votre_choix' => 'Votre choix :',
+	'voir' => 'Voir : @voir@',
 
 	// X
 	'xml:description' => 'Active le validateur xml pour l\'espace public tel qu\'il est d&eacute;crit dans la [documentation->http://www.spip.net/fr_article3541.html]. Un bouton intitul&eacute; &laquo;&nbsp;Analyse XML&nbsp;&raquo; est ajout&eacute; aux autres boutons d\'administration.',

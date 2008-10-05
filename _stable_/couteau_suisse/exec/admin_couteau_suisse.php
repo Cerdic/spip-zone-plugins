@@ -396,7 +396,9 @@ verif_plugin();
 	if(!strlen($bt_dir)) $bt_dir = 'barre_typo_v2';
 	if(!strlen($cs_version)) { $cs_version = plugin_get_infos($dir); $cs_version = $cs_version['version']; }
 	if(!strlen($bt_version)) { $bt_version = plugin_get_infos($bt_dir); $bt_version = $bt_version['version']; }
-
+	
+	$cs_revision = ((lire_fichier(_DIR_PLUGIN_COUTEAU_SUISSE.'svn.revision',$t)) && (preg_match(',<revision>(\d+)</revision>,',$t,$r)))
+		?'<br/>'._T('couteauprive:version_revision', array('revision'=>$r[1])):"";
 	cs_admin_styles_et_js($cs_version);
 	echo "<br /><br /><br />";
 	gros_titre(_T('couteauprive:titre'), '', false);
@@ -424,11 +426,11 @@ echo '</div>';
 	$aide = _T('couteauprive:help', array(
 		'reset' => generer_url_ecrire($exec,'cmd=resetall'),
 		'hide' => generer_url_ecrire($exec,'cmd=showall'),
-		'version' => $cs_version,
+		'version' => $cs_version.$cs_revision,
 		'distant' => '<br/><span class="cs_version">'._T('version_distante').'</span>',
 		'contribs' => join('', $contribs),
 		'install' => $aide,
-		'pack' => '['._T('couteauprive:pack_titre').'|'._T('couteauprive:pack_alt').'->'.generer_url_ecrire($exec,'cmd=pack#cs_infos').']',
+		'pack' =>'&bull;&nbsp;['._T('couteauprive:pack_titre').'|'._T('couteauprive:pack_alt').'->'.generer_url_ecrire($exec,'cmd=pack#cs_infos').']',
 	));
 	echo debut_boite_info(true), propre($aide), fin_boite_info(true);
 	$aide = cs_aide_raccourcis();
