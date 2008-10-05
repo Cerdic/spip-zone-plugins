@@ -192,7 +192,11 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'guillemets:nom' => 'Guillemets typographiques',
 
 	// H
-	'help' => '{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p><p>Version locale : @version@@distant@<br/>@pack@</p><p>Liens de documentation :<br/>&bull; [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
+	'help' => '{{Cette page est uniquement accessible aux responsables du site.}}
+	
+Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.',
+	'help2' => 'Version locale : @version@',
+	'help3' => '<p>Liens de documentation :<br/>&bull; [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
 _ &bull; [Des outils cach&eacute;s|Revenir &agrave; l\'apparence initiale de cette page->@hide@]
 _ &bull; [De tout le plugin|Revenir &agrave; l\'&eacute;tat initial du plugin->@reset@]@install@
 </p>',
@@ -470,6 +474,8 @@ _ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l\'Imprimer
 	'variable_vide' => '(Vide)',
 	'vars_modifiees' => 'Les donn&eacute;es ont bien &eacute;t&eacute; modifi&eacute;es',
 	'version_a_jour' => 'Votre version est &agrave; jour.',
+	'version_update' => 'Mise &agrave; jour automatique',
+	'version_update_title' => "T&eacute;l&eacute;charge la derni&egrave;re version du plugin et lance la proc&eacute;dure d'installation automatique de SPIP",
 	'version_distante' => 'Version distante...',
 	'version_nouvelle' => 'Nouvelle version : @version@',
 	'version_revision' => 'R&eacute;vision : @revision@',

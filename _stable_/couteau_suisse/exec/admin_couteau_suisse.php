@@ -86,6 +86,19 @@ div.categorie span.light {
 	font-weight:normal;
 }
 
+div.cs_sobre, input.cs_sobre {
+	background:transparent none repeat scroll 0%;
+	border:medium none;
+	color:#000099;
+	display:inline;
+	font-weight:normal;
+	margin:0pt;
+	padding:0pt;
+	cursor:pointer;
+	text-align:left;
+	width:180px;
+}
+
 </style>
 EOF;
 	echo "<script type=\"text/javascript\"><!--
@@ -120,6 +133,8 @@ function outils_toggle() {
 }
 
 if (window.jQuery) jQuery(function(){
+	if (jQuery.browser.mozilla) jQuery('input.cs_sobre').css('margin-left','-3px');
+
 	jQuery('div.cs_liste script').remove();
 	// clic sur un titre de categorie
 	jQuery('div.categorie').click( function() {
@@ -423,15 +438,25 @@ echo '</div>';
 	$aide = '';
 	if(isset($GLOBALS['cs_installer'])) foreach(array_keys($GLOBALS['cs_installer']) as $pack)
 		$aide .= "\n_ " . _T('couteauprive:pack_du', array('pack'=>"{[{$pack}|"._T('couteauprive:pack_installe').'->' . generer_url_ecrire($exec,'cmd=install&pack='.urlencode($pack)) . ']}'));
-	$aide = _T('couteauprive:help', array(
-		'reset' => generer_url_ecrire($exec,'cmd=resetall'),
-		'hide' => generer_url_ecrire($exec,'cmd=showall'),
-		'version' => $cs_version.$cs_revision,
-		'distant' => '<br/><span class="cs_version">'._T('version_distante').'</span>',
-		'contribs' => join('', $contribs),
-		'install' => $aide,
-		'pack' =>'&bull;&nbsp;['._T('couteauprive:pack_titre').'|'._T('couteauprive:pack_alt').'->'.generer_url_ecrire($exec,'cmd=pack#cs_infos').']',
-	));
+	// si le plugin est installe par procedure automatique, on permet la mise a jour directe (SPIP > 2.0)
+	$form_update = preg_match(',/auto/couteau_suisse/$,',_DIR_PLUGIN_COUTEAU_SUISSE)?
+		"<input type='hidden' name='url_zip_plugin' value='http://files.spip.org/spip-zone/couteau_suisse.zip' />"
+		. "<br/><div class='cs_sobre'><input type='submit' value='&bull; " . attribut_html(_T('couteauprive:version_update')) . "' class='cs_sobre' title='" . attribut_html(_T('couteauprive:version_update_title')) . "'/></div>"
+		:"";
+	// compilation du bandeau gauche
+	$aide = _T('couteauprive:help')."\n\n"
+		. redirige_action_post('charger_plugin', '', '', '',
+			_T('couteauprive:help2', array(
+				'version' => $cs_version.$cs_revision.'<br/><span class="cs_version">'._T('couteauprive:version_distante').'</span>'))
+			. $form_update
+			. '<br/>&bull;&nbsp;['._T('couteauprive:pack_titre') . '|' . _T('couteauprive:pack_alt') . '->' . generer_url_ecrire($exec,'cmd=pack#cs_infos') . "]\n\n"
+			. _T('couteauprive:help3', array(
+				'reset' => generer_url_ecrire($exec,'cmd=resetall'),
+				'hide' => generer_url_ecrire($exec,'cmd=showall'),
+				'contribs' => join('', $contribs),
+				'install' => $aide,
+			))
+		);
 	echo debut_boite_info(true), propre($aide), fin_boite_info(true);
 	$aide = cs_aide_raccourcis();
 	if(strlen($aide))
