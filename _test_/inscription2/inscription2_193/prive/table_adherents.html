@@ -38,26 +38,18 @@ function confirm(msg,callback) {
 
 <div id="menu">
 		
-	[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+	[(#PLUGIN{ABONNEMENT}|?{' ',''})
 		#INCLURE{fond=inc/menu_abonnement}	
 	]
-	[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{'',' '})
-		#INCLURE{fond=inc/menu_inscription2}	
+	[(#PLUGIN{ABONNEMENT}|?{'',' '})
+		#INCLURE{fond=prive/menu_inscription2}	
 	]
-	<div class="legend">
-		<img src="#CHEMIN{'images/admin-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:admin:><br />
-		<img src="#CHEMIN{'images/redac-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:auteur:><br />
-		<img src="#CHEMIN{'images/adherent-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:adherent:><br />
-		<img src="#CHEMIN{'images/aconf-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:a_confirmer:><br />
-		<img src="#CHEMIN{'images/defaut-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:autre:><br />
-	</div>
-	
-</div>	
+</div>
 
 <div id="principal">
 	<div id="tetiere" >
 		<div style="float:right" >
-		[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+		[(#PLUGIN{ABONNEMENT}|?{' ',''})
 			[(#INCLURE{fond=inc/statuts_forms}{statut_abonnement=[(#ENV{statut_abonnement})]} )]
 		]
 		
@@ -317,7 +309,7 @@ function confirm(msg,callback) {
 	</table>	
 	</form>
 
-	[<div style="margin-left:25%">(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+	[<div style="margin-left:25%">(#PLUGIN{ABONNEMENT}|?{' ',''})
 		#INCLURE{fond=inc/pied_abonnement}</div>
 	]
 	

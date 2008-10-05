@@ -5,22 +5,19 @@ font-size: 8pt;
 width:750px;
 }
 
-#menu  {
-float:left;
-width:150pt;
-text-align: left; 
+#menu{
+	float:left;
+	width:150pt;
+	text-align: left;
+	margin:0 10px 0 0;
 }
 
-.raccourcis {margin-top:5px;padding:5px}
-
-.legend {padding-left : 50px}
-
-.raccourcis ul {
-list-style-type:none;
-padding-left : 40px;
+.raccourcis ul,.legend ul{
+	list-style-type:none;
+	padding-left:30px;
 }
-.raccourcis li {
-margin-top:5px
+.raccourcis li{
+	margin-top:5px
 }
  
 #principal {
