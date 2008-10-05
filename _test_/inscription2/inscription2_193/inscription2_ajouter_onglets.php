@@ -21,11 +21,6 @@ function Inscription2_affiche_milieu($flux){
 				$id_auteur = $flux['args']['id_auteur'];
 				$flux['data'] .= inscription2_ajouts($id_auteur);
 				break;
-			case 'auteurs_edit':
-				include_spip('inc/inscription2_fiche_adherent');
-				$id_auteur = $flux['args']['id_auteur'];
-				$flux['data'] .= inscription2_fiche_adherent($id_auteur);
-				break;
 			default:
 				break;
 		}
@@ -33,7 +28,7 @@ function Inscription2_affiche_milieu($flux){
 }
 
 function Inscription2_header_prive($flux){
-	if (_request('exec')=='ajouter_adherent'){
+	if ((_request('exec')=='ajouter_adherent') || (_request('exec')=='inscription2_adherents')){
 		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_INSCRIPTION2."css/inscription2_forms.css' type='text/css' media='all' />\n";
 		$flux .= "<link rel='stylesheet' href='".direction_css(_DIR_PLUGIN_INSCRIPTION2."css/inscription2.css")."' type='text/css' media='all' />\n";
 		$flux .= "<script type='text/javascript' src='".find_in_path('lib/jquery-validate/jquery.validate.pack.js')."'></script>\n";

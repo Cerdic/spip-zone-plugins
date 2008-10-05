@@ -50,7 +50,6 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 	$id_auteur = $auteur['id_auteur'];
 	$setconnecte = ($connect_id_auteur == $id_auteur);
 
-
 	// Elaborer le formulaire
 	$corps_supp = '';
 	$var_user['b.id_auteur'] = '0';
@@ -96,7 +95,6 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 	}
 	
 	foreach ($query as $cle => $val){
-		
 		if(($cle == 'id_pays') || ($cle == 'id_pays_pro') ||  ($cle == 'login') || ($cle == 'nom') || ($cle == 'email')){
 			$corps_supp .= "<input type='hidden' id='$cle' name='$cle' value='$val'>";
 		}
@@ -158,7 +156,6 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 
 	$corps_supp = $auteur_infos_voir_supp
 		. "<div id='auteur_infos_edit_supp'>\n"
-		. '<div>&nbsp;</div>'
 		. "\n<div class='serif'>"
 		. debut_cadre_relief("fiche-perso-24.gif",
 			true, "", _T("icone_informations_personnelles"))
@@ -217,7 +214,7 @@ function legender_auteur_supp_voir($auteur, $redirect)
 		$res .= icone_inline($clic, $h, "redacteurs-24.gif", "edit.gif", $spip_lang_right);
 
 		$res .= "<script type='text/javascript'><!--
-		var intitule_bouton = "._q($retour).";
+		var intitule_bouton = ".sql_quote($retour).";
 		jQuery('#bouton_modifier_auteur_supp a')
 		.click(function() {
 			jQuery('#auteur_infos_edit_supp')
@@ -236,7 +233,7 @@ function legender_auteur_supp_voir($auteur, $redirect)
 		$res .= "</span>\n";
 	}
 	
-	$res .= gros_titre('Inscription2','',false);
+	$res .= "<h2 class='titrem'>Inscription2</h2>";
 
 	$res .= "<div class='nettoyeur'></div>";
 	$res .= "<div id='auteur_infos_voir_supp'>";
@@ -301,7 +298,6 @@ function legender_auteur_supp_voir($auteur, $redirect)
 		}
 		$res .= "</ul>";
 	}
-	
 	$res .= "</div>\n";
 
 	return $res;

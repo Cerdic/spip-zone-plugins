@@ -11,13 +11,8 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_spip('inc/presentation');
-include_spip('inc/acces');
-include_spip('inc/action');
 
-// http://doc.spip.org/@exec_legender_auteur_dist
-function inscription2_ajouts()
-{
+function inscription2_ajouts(){
 	global $connect_id_auteur, $spip_display;
 
 	$id_auteur = intval(_request('id_auteur'));
@@ -26,13 +21,11 @@ function inscription2_ajouts()
 	$echec = _request('echec');
 	$new = _request('new');
 
-	$s = sql_select("id_auteur","".$nom_table."","id_auteur=$id_auteur");
-	$auteur = sql_fetch($s);
+	$auteur = sql_getfetsel("id_auteur","".$nom_table."","id_auteur=$id_auteur");
 
 	if (!$auteur AND !$new) {
-		sql_insert($nom_table, "(id_auteur)", "($id_auteur)");
-		$s = sql_select("id_auteur","".$nom_table."","id_auteur=$id_auteur");
-		$auteur = sql_fetch($s);
+		sql_insertq($nom_table, array('id_auteur'=>$id_auteur));
+		$auteur = sql_fetsel("id_auteur",$nom_table,"id_auteur=$id_auteur");
 	}
 
 	$legender_auteur_supp = charger_fonction('legender_auteur_supp', 'inc');
