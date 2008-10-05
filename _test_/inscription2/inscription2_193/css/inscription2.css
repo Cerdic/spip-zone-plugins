@@ -1,8 +1,7 @@
 #conteneur {
-margin-top : 15pt; 
-margin-left : 15pt; 
-font-size: 8pt;
-width:750px;
+	margin-top : 15pt; 
+	font-size: 8pt;
+	width:750px;
 }
 
 #menu{
@@ -21,23 +20,25 @@ width:750px;
 }
  
 #principal {
-margin:0%
+	margin:0%;
 }
 
 #tetiere{margin:10px}
 
 input, select, textarea {
-float:none;
-font-family:Verdana,Arial,Sans,sans-serif;
-font-size:11px;
-padding:3px;
+	float:none;
+	font-family:Verdana,Arial,Sans,sans-serif;
+	font-size:11px;
+	padding:3px;
 }
 
 #adherent input, #adherent select, #adherent textarea{
-width:200px;
+	width:200px;
 }
 
-.submit{margin: 10px 0px 10px 300px}
+.submit{
+	margin: 10px 0px 10px 300px
+}
 #adherent div.submit input {width:auto;}
 
 #adherent input.checkbox {width:15px}
@@ -45,22 +46,17 @@ width:200px;
 sup {font-size:60%}
 
 .search_field{
-width:100px
+	width:100px
 }
 #case{
-width:120px
+	width:120px
 }
 
-#principal table.cadre-r {margin-left:10pt;padding:5px;width:75%}
+#principal table.cadre-r {padding:5px;}
 #principal tr, #droite tr { background-color : #E0E0E0 ;}
- { background-color : #E0E0E0 ;}
 #principal tr.row { background:#FFF8DC; }
 #principal tr.even { background:#AFF5DF; }
 
 #principal td, #droite td {padding:3px;text-align:center}
 
-#pagination {margin:10px 10px 10px 30%;font-size:0.7em}
-
-a:hover{font-weight:bold;}
-	
 .cadre-info {margin-bottom:10px}
