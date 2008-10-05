@@ -24,14 +24,13 @@ function action_editer_auteur_supp_dist()
 		$r = "action_editer_auteur_supp_dist $arg pas compris";
 		spip_log($r);
        } else {
-		$url = action_editer_auteur_supp_post($r);
-		redirige_par_entete($url);
+		action_editer_auteur_supp_post($r);
 	}
 }
 
 // http://doc.spip.org/@action_legender_post
 function action_editer_auteur_supp_post($r){
-	global $auteur_session;
+	global $visiteur_session;
 
 	$echec = array();
 	
@@ -41,24 +40,23 @@ function action_editer_auteur_supp_post($r){
 
 		foreach(lire_config('inscription2') as $cle => $val){
 			if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle)){
-				$cle = ereg_replace("^username.*$", "login", $cle);
 				$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
 				if($cle == 'nom' or $cle == 'email' or $cle == 'login')
-					$var_user['a.'.$cle] =  '`'.$cle.'` = '.sql_quote(_request($cle)).'';
+					$var_user['a.'.$cle] = sql_quote(_request($cle));
 				elseif($cle == 'statut_nouveau'){
 				}
 				elseif(ereg("^statut_rel.*$", $cle))
-					$var_user['b.statut_relances'] =  '`statut_relances` = '.sql_quote($_POST['statut_relances']).'';
+					$var_user['b.statut_relances'] =  sql_quote(_request('statut_relances'));
 				else
-					$var_user['b.'.$cle] =  '`'.$cle.'` = '.sql_quote(_request($cle)).'';
+					$var_user['b.'.$cle] = sql_quote(_request($cle));
 			}
 			elseif ($val!='' and $cle == 'accesrestreint'){
-				$aux = spip_query("select id_zone from spip_zones_auteurs where id_auteur = $id_auteur");
-				while($q = spip_fetch_array($aux))
+				$aux = sql_select("id_zone","spip_zones_auteurs","id_auteur = $id_auteur");
+				while($q = sql_fetch($aux))
 					$acces[]=$q['id_zone'];
 				$acces_array = $_POST['acces'];
 				if(!empty($acces) and empty($acces_array))
-					spip_query("delete from spip_zones_auteurs where id_auteur = $id_auteur");
+					sql_delete("spip_zones_auteurs","id_auteur = $id_auteur");
 				elseif(empty($acces) and !empty($acces_array))
 					spip_query("insert into spip_zones_auteurs (id_zone, id_auteur) values (".join(", $id_auteur), (", $acces_array).", $id_auteur)");
 				elseif(!empty($acces) and !empty($acces_array)){
@@ -72,8 +70,8 @@ function action_editer_auteur_supp_post($r){
 				}
 			}
 			elseif ($val!='' and $cle == 'newsletter'){
-				$aux = spip_query("select id_liste from spip_auteurs_listes where id_auteur = $id_auteur");
-				while($q = spip_fetch_array($aux))
+				$aux = sql_select("id_liste","spip_auteurs_listes","id_auteur = $id_auteur");
+				while($q = sql_fetch($aux))
 					$listes[]=$q['id_liste'];
 				$listes_array = _request('news');
 				if(!empty($listes) and empty($listes_array))
@@ -91,8 +89,7 @@ function action_editer_auteur_supp_post($r){
 				}
 			}
 		}
-	
-		spip_query("update spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur set ".join(', ', $var_user)." where a.`id_auteur`='$id_auteur'");
+		sql_update("spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur",$var_user, "a.id_auteur=$id_auteur");
 		// if (!$n) die('UPDATE FAILED '. $id_auteur .'');
 
 	// il faudrait rajouter OR $echec mais il y a conflit avec Ajax
