@@ -47,9 +47,9 @@ function inscription2_upgrade(){
 		$lala = $GLOBALS['meta']['inscription2'];
 		
 		if(!$lala){
-		ecrire_config(
+		ecrire_meta(
 			'inscription2',
-				array(
+				serialize(array(
 					'nom' => 'on',
 					'nom_obligatoire' => 'on',
 					'nom_fiche_mod' => 'on',
@@ -191,7 +191,7 @@ function inscription2_upgrade(){
 					'creation' => NULL,
 					'statut_int' => NULL,
 					'statut_interne' => ''
-		        )
+		        ))
 	        );
 		}
 	
@@ -323,6 +323,10 @@ function inscription2_upgrade(){
 		}
 		if (!lire_config('plugin/SPIPLISTES') && !lire_config('plugin/ECHOPPE')){
 			sql_drop_table('spip_auteurs_elargis');
+		}
+		if(!lire_config('spip_geo_base_version')){
+			sql_drop_table('spip_geo_pays');
+			spip_log("suppression de la table spip_geo");
 		}
 		effacer_meta('inscription2');
 		effacer_meta('inscription2_version');
