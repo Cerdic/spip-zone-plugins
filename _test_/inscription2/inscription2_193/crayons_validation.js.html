@@ -16,5 +16,7 @@
 [(#ENV{lang}|=={en}|?{'',' '})
 	[(#CHEMIN{lib/jquery-validate/localization/messages_[(#ENV{lang})].js}|pack_cQuery)]
 ]
-[(#CHEMIN{javascript/i2_validation_methods.js}|pack_cQuery)]
 [(#CHEMIN{javascript/i2_validation_controleurs.js}|pack_cQuery)]
+
+[(#CHEMIN{javascript/i2_validation_methods.js}|pack_cQuery)]
+[(#PIPELINE{I2_validation_methods,#ARRAY{type,cQuery,data,''}})]
