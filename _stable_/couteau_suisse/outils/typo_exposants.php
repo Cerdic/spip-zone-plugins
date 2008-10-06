@@ -52,7 +52,7 @@ function typo_exposants_fr($texte){
 		_TYPO_sup2, // 2e(s), IIIe(s)...
 		'$1<sup class="typo_exposants">o</sup>', // 1o, 2o, etc.
 	));
-//print_r($typo); if(strpos($texte,'&E')!==false) echo "'$texte'\n'";
+
 	return preg_replace($typo[0], $typo[1], $texte);
 }
 
