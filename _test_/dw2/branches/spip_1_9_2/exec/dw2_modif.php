@@ -39,7 +39,7 @@ include_spip("inc/dw2_inc_pres");
 include_spip('inc/session'); // cas suppression fiche
 include_spip('inc/dw2_inc_hierarchie'); // hierarchie_doc()/dependance_restriction()
 
-
+
 // reconstruire .. var=val des get et post
 // var : 
 // new_iddoctype ; new_doctype ; anc_doctype ; id ; archtout ; modif_ttr ; maj_size

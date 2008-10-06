@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'close' => '',
 
 
-// I
+// I
 'info_erreur_doc_out' => 'The requested document\'s ID has changed,<br />
 							has been temporarily removed<br />
 							or<br />does not exist any more on this site !<br />

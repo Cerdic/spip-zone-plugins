@@ -94,7 +94,7 @@ if (!$origine) {
 
 	// global sur la période (105 j. :$aff_jours)
 	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix, SUM(telech) AS visites FROM spip_dw2_stats ".
-		"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) AND date < NOW() GROUP BY date ORDER BY date";
+		"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) AND TO_DAYS(date) < TO_DAYS(NOW()) GROUP BY date ORDER BY date";
 	$result=spip_query($query);
 
 	while ($row = spip_fetch_array($result)) {
@@ -108,10 +108,10 @@ if (!$origine) {
 
 	// Visites du jour
 	if ($id_document) {
-		$query = "SELECT telech AS visites FROM spip_dw2_stats WHERE date = NOW() AND id_doc = $id_document";
+		$query = "SELECT telech AS visites FROM spip_dw2_stats WHERE to_days(date) = to_days(NOW()) AND id_doc = $id_document";
 		$result = spip_query($query);
 	} else {
-		$query = "SELECT SUM(telech) AS visites FROM spip_dw2_stats WHERE date = NOW()";
+		$query = "SELECT SUM(telech) AS visites FROM spip_dw2_stats WHERE to_days(date) = to_days(NOW())";
 		$result = spip_query($query);
 	}
 	if ($row = @spip_fetch_array($result))

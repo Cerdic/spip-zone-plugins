@@ -111,7 +111,7 @@ foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
 	else { $orderby = 'dd.total DESC'; $odb='tot'; }
 */
 
-
+
 	// recup' nombre de ligne passe en url, fixe debut LIMIT ...		
 	$dl=($vl+0);
 	

@@ -254,7 +254,7 @@ debut_droite();
 			$nom = wordwrap($nom,25,' ',1);
 
 			// telech du jour
-			$res=spip_query("SELECT telech FROM spip_dw2_stats WHERE id_doc=$iddoc AND date=NOW()");
+			$res=spip_query("SELECT telech FROM spip_dw2_stats WHERE id_doc=$iddoc AND TO_DAYS(date)=TO_DAYS(NOW())");
 			$nl_res=spip_num_rows($res);
 			if($nl_res=1) {
 				$r_row=spip_fetch_array($res);

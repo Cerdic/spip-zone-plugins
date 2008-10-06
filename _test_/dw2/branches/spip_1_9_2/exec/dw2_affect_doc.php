@@ -116,7 +116,7 @@ debut_cadre_relief(_DIR_IMG_DW2."import-24.gif");
 	// formulaire
 	//
 	
-	echo "<form name='designedoc' action='".generer_url_action("dw2actions", "arg=docserveurlier-".$id_document)."' method='post'>";
+	echo "<form name='designedoc' action='".generer_url_action("dw2actions", "arg=docserveurlier-".$id_document)."' method='post'>";
 
 	// #TITRE et #DESCRIPTIF du Doc
 	debut_cadre_enfonce(_DIR_IMG_PACK."doc-24.gif", false, "", _T('dw:doc_lie_trt_descrip'));

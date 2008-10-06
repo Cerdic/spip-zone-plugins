@@ -268,13 +268,13 @@ fin_cadre_relief();
 		$dl=($_GET['vl']+0);
 		
 		// Verif. : telech aujourd'hui ?	
-		$rvtel=spip_query("SELECT id_doc, telech FROM spip_dw2_stats WHERE date=NOW()");
+		$rvtel=spip_query("SELECT id_doc, telech FROM spip_dw2_stats WHERE TO_DAYS(date)=TO_DAYS(NOW())");
 		$nligne=spip_num_rows($rvtel);
 		
 	//tableau
 	$query4="SELECT ds.id_doc, ds.date, ds.telech, dd.url, dd.nom, dd.total ".
 			"FROM spip_dw2_stats ds LEFT JOIN spip_dw2_doc dd ON ds.id_doc=dd.id_document ".
-			"WHERE date=NOW() ORDER BY ds.telech DESC LIMIT $dl,$nbr_lignes_tableau";
+			"WHERE TO_DAYS(date)=TO_DAYS(NOW()) ORDER BY ds.telech DESC LIMIT $dl,$nbr_lignes_tableau";
 	$result4=spip_query($query4);
 		
 	if ($nligne==0)

@@ -156,7 +156,7 @@ creer_colonne_droite();
 			
 			echo "<tr bgcolor='$couleur'><td width='20%'>";
 			// bouton "editer" 
-			bloc_minibout_act(_T('dw:editer_serveur'), generer_url_ecrire("dw2_serv_edit", "id_serv=".$numserv), _DIR_IMG_DW2."fich_serv.gif","","");
+			bloc_minibout_act(_T('dw:editer_serveur'), generer_url_ecrire("dw2_serv_edit", "id_serv=".$numserv), _DIR_IMG_DW2."fich_serv.gif","","");
 			echo "</td><td>";
 			echo "<span class='verdana2'>".$designe."</span>";
 			echo "</td><td width='20%'>";

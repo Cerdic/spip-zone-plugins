@@ -175,7 +175,7 @@ function aff_appart_doc($doctype, $iddoctype) {
 		$aff_appart = 
 		"<span class='verdana2'>".$indic.$iddoctype."</span> . <span class='verdana3'>".
 		$puce." <a href='".$url."' title='".$title."'>".$tt_doctype."</a></span>\n";
-	}
+	}
 
 	else {
 		switch ($doctype) {

@@ -21,7 +21,7 @@ define('_DIR_PLUGIN_DW2',(_DIR_PLUGINS.end($p)));
 	function dw2_ajouterBoutons($boutons_admin) {
 		// si on est admin principal
 		if ($GLOBALS['connect_statut'] == "0minirezo" AND $GLOBALS["connect_toutes_rubriques"]) {
-			$boutons_admin['statistiques_visites']->sousmenu["dw2_admin"]= new Bouton(
+			$boutons_admin['statistiques_visites']->sousmenu["dw2_stats"]= new Bouton(
 			"../"._DIR_PLUGIN_DW2."img_pack/telech.gif",  // icone
 			_T('dw:titre_page_admin')	// titre
 			);

@@ -200,7 +200,7 @@ else
 	// affichage liste des fichiers affectés
 	
 		debut_cadre_relief(_DIR_IMG_PACK."doc-24.gif");
-		echo "<div style='margin:2px; padding:3px;' align='center'>";
+		echo "<div style='margin:2px; padding:3px;' align='center'>";
 
 		$r_doc = spip_query("SELECT d.id_document, d.url, d.heberge, d.id_serveur, s.taille ".
 							"FROM spip_dw2_doc AS d ".
