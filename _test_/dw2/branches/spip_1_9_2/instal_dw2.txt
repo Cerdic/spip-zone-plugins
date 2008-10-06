@@ -3,16 +3,20 @@ DW2
 Ca ne veut toujours rien dire, mais c'est pas grave.
 
 ---------------------------------------------------------
-Consignes d'installation de DW2 version 2.13 pour spip 1.9.1
+Consignes d'installation de DW2 version 2.14 pour spip 1.9.2
 ---------------------------------------------------------
-du 24 février 2006
+du 9/03/2007
 
 
 Attention, cette version reste encore EN TEST !!
-ET ... n'est pas intégralement compatible avec SPIP 1.9.2, qu'on se le dise !
 
 -------------------------------------------------------------
-version 2.13 ?
+version 2.14 ?
+Cette version est la 2.13(1.9.1) portée pour spip 1.9.2
+Et ne reçoit aucune nouveauté.
+Hormis : fichier .sql de sauvegarde des tables DW2 passe de ecrire/data/ à tmp/dump/ !
+
+Pour la 2.13 les nouv. étaient :
 1 - Les tables DW2 sont désormais préfixées en : 'spip_' (contrib. de Skedus),
 	permet assujetissement à la global $table_prefix .. (ex. 1 BDD -> 2 SPIPs)
 2 - Suppression du fichier de config (dw2_config.php en racine du plugin),
@@ -28,8 +32,12 @@ et + ...
 -------------------------------------------------------------
 
 
+Passer de DW2 2.13 à 2.14 
+-------------------------------------------------------------
+Ecraser plugins/dw2/ par le contenu de cette archive !
 
-Passer de DW2 2.1x à 2.13
+
+Passer de DW2 2.1x à 2.14
 -------------------------------------------------------------
 1. Dans Spip, sur la page de "Gestion des Plugins", désactiver DW2 (*)
 
@@ -57,7 +65,7 @@ Passer de DW2 2.1x à 2.13
 
 
 
-Passer de DW2 2.0x à 2.13
+Passer de DW2 2.0x à 2.14
 -------------------------------------------------------------
 1. Supprimer tous fichiers DW2 d’une version antérieur, dans ecrire/ (dw2_qqchose.php) 
    + ecrire/lang/dw_en et dw_fr.php ;
@@ -112,7 +120,7 @@ POUR TOUS ..............
 -------------------------------------------------------------
 Nouveautés 2.1x ...
 -------------------------------------------------------------
-2.13 ..............................
+2.13/2.14 ..............................
 voir en tête du fichier.
 
 2.12 ..............................
