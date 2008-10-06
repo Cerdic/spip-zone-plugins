@@ -25,23 +25,9 @@
 
 #tetiere{margin:10px}
 
-input, select, textarea {
-	float:none;
-	font-family:Verdana,Arial,Sans,sans-serif;
-	font-size:11px;
-	padding:3px;
-}
-
 #adherent input, #adherent select, #adherent textarea{
 	width:200px;
 }
-
-.submit{
-	margin: 10px 0px 10px 300px
-}
-#adherent div.submit input {width:auto;}
-
-#adherent input.checkbox {width:15px}
 
 sup {font-size:60%}
 

@@ -2,7 +2,7 @@
 /**
 * Plugin Inscription2
 *
-* Copyright (c) 2007
+* Copyright (c) 2007-2008
 * Sergio and co
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 * Pour plus de details voir le fichier COPYING.txt.
@@ -19,9 +19,10 @@ function exec_ajouter_adherent() {
 		exit;
 	}
 	
-	echo debut_page(_T('inscription2:gestion_adherents'), "", "");
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('inscription2:gestion_adherents'), "", "", "");
 	
-	echo recuperer_fond('inc/nouveau_adherent');
+	echo recuperer_fond('prive/nouveau_adherent');
 	
 	echo fin_page();
 }
