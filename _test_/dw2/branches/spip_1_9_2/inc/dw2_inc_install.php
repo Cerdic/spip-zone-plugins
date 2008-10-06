@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -114,6 +114,7 @@ function maj_tables_dw2($old_vers) {
 //
 function dw2_init_param($old_version) {
 	//
+	#h.09/03/07 passe 'forcer_url_dw2' à "non" .. à suivre!
 	$liste_param = array(
 		'version_installee' => $old_version,
 		'anti_triche' => 'oui',
@@ -128,7 +129,7 @@ function dw2_init_param($old_version) {
 		'mode_restreint' => 'non',
 		'criteres_auto_doc' => '',
 		'message_maj' => '',
-		'forcer_url_dw2' => 'oui'
+		'forcer_url_dw2' => 'non'
 	);
 	// si param pas déjà declare .. on le fait
 	while (list($nom, $valeur) = each($liste_param)) {

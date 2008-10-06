@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -17,6 +17,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 global $connect_statut, $connect_toutes_rubriques;
 
+#h.07/03/ corr 192
+	if (!_DIR_RESTREINT) {
+		include_spip('inc/headers');
+	}
 
 //
 // verifier info plugin DW2 en cours

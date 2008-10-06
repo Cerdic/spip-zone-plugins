@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.12 (12/2006) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -82,8 +82,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cfg_criteres_auto_doc_val_1' => 'jpg',
 'cfg_criteres_auto_doc_val_2' => 'png',
 'cfg_criteres_auto_doc_val_3' => 'gif',
-'cfg_forcer_url_dw2_val_oui' => 'si',
-'cfg_forcer_url_dw2_val_non' => 'no',
+'cfg_forcer_url_dw2_val_oui' => 'si',#n2.13
+'cfg_forcer_url_dw2_val_non' => 'no',#n2.13
 'champs_modif' => 'Modificar ...',
 'changer_assoc_fichier_serveur' => 'Cambiar asociaci&oacute;n Fichero-Servidor',
 'changer_statut_masse' => 'Cambiar el estatuto en masa',
@@ -226,10 +226,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'maj_evolution_dw' => 'Actualizaci&oacute;n DW2',
 'maj_taille_fichier' => 'Verificar tama&ntilde;o del fichero',
 'maj_version' => 'versi&oacute;n',
-'message_config_01' => 'Atenci&oacute;n !  Ha seleccionado :<br />
-                        Modo Restringido = si || Forzar URL DOCUMENT = no<br />
-                        Verifique que sus esqueletos queden conformes a esta elecci&oacute;n.<br />
-                        (Utilizaci&oacute;n de las Balizas #URL_DOC_OUT/#URL_DOCUMENT)',
+'message_config_01' => 'Attention ! Vous avez s&eacute;lectionn&eacute; :<br />
+						Mode Restreint = oui || Forcer URL DOCUMENT = non<br />
+						Assurez-vous que vos squelettes soient conforme &agrave; ce choix.<br />
+						(Utilisation des Balises #URL_DOC_OUT/#URL_DOCUMENT)',#n2.13
 'mess_err_1' => 'Atenci&oacute;n, no se admiten campos vac&iacute;os, salvo el campo opcional!',
 'mess_err_2' => 'Quitar "/" al final de la l&iacute;nea "URL Sitio"',
 'mess_err_3' => 'Quitar "/" al principio de la l&iacute;nea "Carpetas',
@@ -335,7 +335,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'serv_info_chemdist' => '( sub/carpeta/ )',
 'serv_info_hote' => '( ftp.misitio.net )',
 'serv_info_hostdir' => '( Opcional: /web/ )',
-'serv_info_port' => '(Puerto predeterminado: 21)',
+'serv_info_port' => '(Puerto predeterminado: 21)',#
 'serv_info_sitedist' => '( http://www.misitio.net )',
 'serv_sans_fich' => ' no contiene ning&uacute;n fichero',
 'signature' => '<b>DW2 v. @version@</b><br />
@@ -474,10 +474,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'txt_install_31' => 'Forzar DW2 para que registre en su Cat&aacute;logo, los Documentos de im&aacute;genes 
 					(spip, modo: document) de tipo jpg, png, gif.<br />
 					El modo de registro de los documentos debe estar ajustado en "Auto".',
-'txt_install_32' => 'Forzar URL DOCUMENT : ',
-'txt_install_33' => 'Esta opci&oacute;n permite interceptar las balizas #URL_DOCUMENT de sus esqueletos
-                    y forzarlas para producir un enlace de tipo "spip.php?action=dw2_out&id=xxx".
-                    La baliza #URL_DOC_OUT, propia de DW2, permanece igualmente operativa.',
+'txt_install_32' => 'Forcer URL DOCUMENT : ',#n2.13
+'txt_install_33' => 'Cette option permet d\'intercepter les balises #URL_DOCUMENT de vos squelettes 
+					et forcer celles-ci &agrave; produire un lien du type "spip.php?action=dw2_out&id=xxx".
+					La balise #URL_DOC_OUT, propre &agrave; DW2, reste toujours fonctionnelle.',#n2.13
 'txt_modif_01' => 'Para corregir el nombre de la ficha, la categor&iacute;a<br />
 					o el valor del contador: pre-incrementaci&oacute;n',
 'txt_nouv_serveur' => 'Antes de escribir o cambiar estos datos,<br />
@@ -501,7 +501,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'voir_fiche' => 'Ver la Ficha',
 'voir_rubrique' => 'Ver esta secci&oacute;n',
 'vos_doc' => 'Sus documentos',
-
 
 // Z, it's good to be the last
 'z' => 'z'

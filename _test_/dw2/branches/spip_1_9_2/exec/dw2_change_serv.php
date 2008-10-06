@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -190,7 +190,7 @@ creer_colonne_droite();
 debut_droite();
 
 
-debut_cadre_relief("../"._DIR_IMG_DW2."list_serv.gif");
+debut_cadre_relief(_DIR_IMG_DW2."list_serv.gif");
 
 // titre
 debut_band_titre($couleur_foncee, "verdana3", "center");

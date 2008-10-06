@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -199,9 +199,9 @@ creer_colonne_droite();
 
 debut_droite();
 
-	debut_onglet();
-	onglet(_T('dw:stats_generales_titre'), generer_url_ecrire("dw2_stats"), 'aff_gen', '', "cal-mois.gif");
-	onglet(_T('dw:stats_periode_titre'), generer_url_ecrire("dw2_stats_prd"), 'aff_prd', 'aff_prd', "cal-semaine.gif");
+	echo debut_onglet().
+	onglet(_T('dw:stats_generales_titre'), generer_url_ecrire("dw2_stats"), 'aff_gen', '', "cal-mois.gif").
+	onglet(_T('dw:stats_periode_titre'), generer_url_ecrire("dw2_stats_prd"), 'aff_prd', 'aff_prd', "cal-semaine.gif").
 	fin_onglet();
 	
 	
@@ -225,7 +225,7 @@ debut_droite();
 	//
 	// tableau des documents
 	//
-	debut_cadre_relief("../"._DIR_IMG_PACK."statistiques-24.gif");
+	debut_cadre_relief(_DIR_IMG_PACK."statistiques-24.gif");
 
 	if ($nligne==0)
 		{

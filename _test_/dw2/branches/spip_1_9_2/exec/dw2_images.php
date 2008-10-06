@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -88,10 +88,10 @@ debut_droite();
 	//
 	//
 	// onglets page ajouts global/catalogue images		
-	debut_onglet();
-		onglet(_T('dw:ajout_manuel'), generer_url_ecrire("dw2_ajouts"), 'page_gen', '', "../"._DIR_IMG_DW2."ajout_doc.gif");
-		onglet(_T('dw:ajout_images_1_1'), generer_url_ecrire("dw2_images"), 'page_img', 'page_img', "../"._DIR_IMG_DW2."cata_img.gif");
-		onglet(_T('dw:ajout_par_article'), generer_url_ecrire("dw2_ajouts_det"), 'page_det', '', "../"._DIR_IMG_DW2."catalogue.gif");
+	echo debut_onglet().
+		onglet(_T('dw:ajout_manuel'), generer_url_ecrire("dw2_ajouts"), 'page_gen', '', _DIR_IMG_DW2."ajout_doc.gif").
+		onglet(_T('dw:ajout_images_1_1'), generer_url_ecrire("dw2_images"), 'page_img', 'page_img', _DIR_IMG_DW2."cata_img.gif").
+		onglet(_T('dw:ajout_par_article'), generer_url_ecrire("dw2_ajouts_det"), 'page_det', '', _DIR_IMG_DW2."catalogue.gif").
 	fin_onglet();
 	
 	

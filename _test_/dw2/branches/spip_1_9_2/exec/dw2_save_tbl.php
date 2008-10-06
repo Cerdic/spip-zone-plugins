@@ -1,7 +1,7 @@
 <?php 
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -121,7 +121,7 @@ creer_colonne_droite();
 debut_droite();
 
 
-debut_cadre_trait_couleur("../"._DIR_IMG_PACK."base-24.gif", false, "", _T('dw:sauvegarde_tables_dw'));
+debut_cadre_trait_couleur(_DIR_IMG_PACK."base-24.gif", false, "", _T('dw:sauvegarde_tables_dw'));
 
 //
 // Aff. regalges config
@@ -218,7 +218,7 @@ fin_cadre_trait_couleur();
 //
 // Aff. les precedentes sauvegardes
 //
-debut_cadre_trait_couleur("../"._DIR_IMG_DW2."catalogue.gif", false, "", _T('dw:fichiers_save_dans_repert', array('rep_bases' => $rep_bases)));
+debut_cadre_trait_couleur(_DIR_IMG_DW2."catalogue.gif", false, "", _T('dw:fichiers_save_dans_repert', array('rep_bases' => $rep_bases)));
    // Lister fichiers contenus
    $entree = array();
    $myDirectory = opendir($rep_bases);

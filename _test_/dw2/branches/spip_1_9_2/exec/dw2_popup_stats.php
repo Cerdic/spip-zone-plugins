@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -40,9 +40,14 @@ function exec_dw2_popup_stats() {
 
 	$id_document = intval($id_document);
 	
-
-	init_entete('graph document : '.$id_document,'');
-	
+#h.09/03 adaptation 1.9.2
+##
+include_spip('inc/headers');
+http_no_cache();
+include_spip('inc/commencer_page');
+# + echo sur fonction :
+	echo init_entete('graph document : '.$id_document,'');
+##	
 	echo "<body>\n";
 	
 	echo "<div style='padding:10px; text-align:center;'>\n";

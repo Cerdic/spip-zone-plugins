@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -94,7 +94,7 @@ debut_droite();
 
 if ($nbcat==0)
 	{
-	debut_cadre_relief("../"._DIR_IMG_PACK."statistiques-24.gif");
+	debut_cadre_relief(_DIR_IMG_PACK."statistiques-24.gif");
 	echo "<div class='verdana3 bold center'><br><b>"._T('dw:txt_cat_aucun')."<br><br><br>";
 	echo "<a href='".generer_url_ecrire("dw2_ajouts")."'>"._T('dw:ajout_doc')."</a></div><br>";
 	fin_cadre_relief();

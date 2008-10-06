@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -35,7 +35,7 @@ function sous_enfants_rubrique($collection2){
 			$niv_res = $restrict[0];
 
 			$retour.="<div class='arial11' " .
-			  http_style_background("../"._DIR_IMG_PACK."rubrique-12.gif", 
+			  http_style_background(_DIR_IMG_PACK."rubrique-12.gif", 
 			  						"left center no-repeat; padding: 2px; padding-$spip_lang_left: 18px; margin-$spip_lang_left: 3px") . ">
 									<a href='" . generer_url_ecrire("dw2_restreint","id_rub=$id_rubrique2") . "'>
 									<span dir='$lang_dir'>".typo($titre2)."</span></a>&nbsp;".
@@ -123,7 +123,7 @@ function aff_menu_parents($id_rubrique, $id_article, $parents="", $souche="") {
 			$id_article = $row['id_article'];
 			$id_rubrique = $row['id_rubrique'];
 			$titre = $row['titre'];
-			$logo = "../"._DIR_IMG_PACK."rubrique-12.gif";
+			$logo = _DIR_IMG_PACK."rubrique-12.gif";
 			/*
 			$parents = "<div class='verdana3' ". 
 			  http_style_background($logo, "$spip_lang_left top no-repeat; padding-$spip_lang_left: 25px"). 
@@ -147,9 +147,9 @@ function aff_menu_parents($id_rubrique, $id_article, $parents="", $souche="") {
 			/*if (acces_restreint_rubrique($id_rubrique))
 				$logo = "admin-12.gif";*/
 			if (!$id_parent)
-				$logo = "../"._DIR_IMG_PACK."secteur-12.gif";
+				$logo = _DIR_IMG_PACK."secteur-12.gif";
 			else
-				$logo = "../"._DIR_IMG_PACK."rubrique-12.gif";
+				$logo = _DIR_IMG_PACK."rubrique-12.gif";
 
 			if($id_rubrique!=$souche) {
 				$parents = "<div class='verdana3' ". 
@@ -161,7 +161,7 @@ function aff_menu_parents($id_rubrique, $id_article, $parents="", $souche="") {
 	}
 	else {
 		if($souche) {
-		$logo = "../"._DIR_IMG_PACK."racine-site-12.gif";
+		$logo = _DIR_IMG_PACK."racine-site-12.gif";
 		$parents = "<div class='verdana3' " .
 		  http_style_background($logo, "$spip_lang_left top no-repeat; padding-$spip_lang_left: 25px"). 
 		  "><a href='".generer_url_ecrire("dw2_restreint")."'><b>"._T('info_racine_site')."</b></a></div>\n<div style='margin-$spip_lang_left: 3px;'>".$parents."</div>";
@@ -255,7 +255,7 @@ function afficher_entete_restreindre($id_rubrique,$id_article) {
 	if($type == 'article') { $nomobjet = 'id_art'; }
 	else { $nomobjet = 'id_rub';}
 	
-	debut_cadre_enfonce("../"._DIR_IMG_DW2."restreint-24.gif", false, "", _T('dw:rest_titre_formulaire'));
+	debut_cadre_enfonce(_DIR_IMG_DW2."restreint-24.gif", false, "", _T('dw:rest_titre_formulaire'));
 		
 	//commentaire dependance
 	if($flag_racine) {

@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -97,7 +97,7 @@ debut_droite();
 echo "\n<iframe id='action_dw2' name='action_dw2' src='".generer_url_ecrire("dw2_cherchart")."' width='1' height='1' style='position: absolute; visibility:hidden;'></iframe>\n";
 
 
-debut_cadre_relief("../"._DIR_IMG_DW2."import-24.gif");
+debut_cadre_relief(_DIR_IMG_DW2."import-24.gif");
 
 	//titre
 	debut_band_titre($couleur_foncee);
@@ -119,7 +119,7 @@ debut_cadre_relief("../"._DIR_IMG_DW2."import-24.gif");
 	echo "<form name='designedoc' action='".generer_url_action("dw2actions", "arg=docserveurlier-".$id_document)."' method='post'>";
 
 	// #TITRE et #DESCRIPTIF du Doc
-	debut_cadre_enfonce("../"._DIR_IMG_PACK."doc-24.gif", false, "", _T('dw:doc_lie_trt_descrip'));
+	debut_cadre_enfonce(_DIR_IMG_PACK."doc-24.gif", false, "", _T('dw:doc_lie_trt_descrip'));
 	echo "<div align='center'>";
 	echo "<span class='verdana2'><b>"._T('dw:titre')."</b></span><br />\n";
 	echo "<textarea name='trt_doc' rows='1' cols='40' wrap='soft' class='fondl'></textarea><br />\n";
@@ -131,7 +131,7 @@ debut_cadre_relief("../"._DIR_IMG_DW2."import-24.gif");
 	echo "<br />";
 
 	// choix rubrique
-	debut_cadre_relief("../"._DIR_IMG_PACK."rubrique-24.gif");
+	debut_cadre_relief(_DIR_IMG_PACK."rubrique-24.gif");
 	echo "<b>"._T('dw:dans_rub')."</b><br />\n";
 	echo "<br /><SELECT name='id_rub' style='background-color: $couleur_claire; font-size: 90%; width:100%; font-face:verdana,arial,helvetica,sans-serif;' size=1>\n";
 	rub_parent("0");

@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -24,7 +24,7 @@ function archives_g() {
 	//
 	// Forcer : mise en archive de fiche 
 	//
-	debut_cadre_trait_couleur("../"._DIR_IMG_PACK."doc-24.gif", false, "", _T('dw:changer_statut_masse'));
+	debut_cadre_trait_couleur(_DIR_IMG_PACK."doc-24.gif", false, "", _T('dw:changer_statut_masse'));
 
 	echo "<div class='verdana3'>".
 		_T('dw:info_change_statut_masse').

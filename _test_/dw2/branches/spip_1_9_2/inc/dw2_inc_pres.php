@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -362,7 +362,7 @@ function formulaire_periode($periode1,$periode2,$annee_select,$retour) {
 
 // menu fonction principales telech
 function menu_administration_telech() {
-	debut_cadre_enfonce("../"._DIR_IMG_DW2."telech.gif");
+	debut_cadre_enfonce(_DIR_IMG_DW2."telech.gif");
 		echo "<div class='verdana2' style='padding:4px;'><b>"._T('dw:administration')."<br />";
 			pointe_page(array("dw2_admin"), _T('dw:accueil'));
 			pointe_page(array("dw2_catalogue"), _T('dw:catalogue'));
@@ -379,7 +379,7 @@ function menu_administration_telech() {
 
 // atteindre fiche du doc 'n' ..
 function menu_voir_fiche_telech() {
-	debut_cadre_enfonce("../"._DIR_IMG_DW2."fiche_doc.gif");
+	debut_cadre_enfonce(_DIR_IMG_DW2."fiche_doc.gif");
 		echo "<div class='verdana2'>";
 		echo "<form action='".generer_url_ecrire("dw2_modif")."' method='post'>";
 		echo "<b>"._T('dw:voir_fiche')."</b> : ";
@@ -394,7 +394,7 @@ function menu_voir_fiche_telech() {
 
 // configuration & sauvegarde 
 function menu_config_sauve_telech() {
-	debut_cadre_enfonce("../"._DIR_IMG_DW2."configure.gif");
+	debut_cadre_enfonce(_DIR_IMG_DW2."configure.gif");
 		echo "<div class='verdana2' style='padding:4px;'><b>";
 			pointe_page(array("dw2_config"), _T('dw:inst_conf'));
 			pointe_page(array("dw2_save_tbl"), _T('dw:sauvegarde'));
@@ -407,7 +407,7 @@ function menu_config_sauve_telech() {
 
 // fonctions principales dw_deloc.php
 function menu_administration_deloc() {
-	debut_cadre_enfonce("../"._DIR_IMG_DW2."deloc.gif");
+	debut_cadre_enfonce(_DIR_IMG_DW2."deloc.gif");
 		echo "<span class='verdana2'>"._T('dw:doc_delocalises')."</span><br />".
 		"<span class='verdana3'><b>"._T('dw:export')."/"._T('dw:import_virtuel')."</b></span><br />";
 		

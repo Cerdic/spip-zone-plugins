@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -147,9 +147,9 @@ debut_droite();
 
 	//
 	// onglets choix periode + stat auteurs		
-	debut_onglet();
-	onglet(_T('dw:stats_des_visiteurs'), generer_url_ecrire("dw2_stats_res"), 'aff_resaut', '', "auteur-24.gif");
-	onglet(_T('dw:stats_des_docs'), generer_url_ecrire("dw2_stats_resdoc"), 'aff_resdoc', 'aff_resdoc', "../"._DIR_IMG_DW2."fiche_doc.gif");
+	echo debut_onglet().
+	onglet(_T('dw:stats_des_visiteurs'), generer_url_ecrire("dw2_stats_res"), 'aff_resaut', '', "auteur-24.gif").
+	onglet(_T('dw:stats_des_docs'), generer_url_ecrire("dw2_stats_resdoc"), 'aff_resdoc', 'aff_resdoc', _DIR_IMG_DW2."fiche_doc.gif").
 	fin_onglet();
 	
 	debut_band_titre($couleur_foncee);
@@ -170,7 +170,7 @@ debut_droite();
 
 	fin_cadre_relief();
 	
-	debut_cadre_relief("../"._DIR_IMG_PACK."statistiques-24.gif");
+	debut_cadre_relief(_DIR_IMG_PACK."statistiques-24.gif");
 
 	//
 	// aff date selection

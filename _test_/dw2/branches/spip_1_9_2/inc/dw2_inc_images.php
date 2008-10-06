@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -141,7 +141,7 @@ if($hors_dw) {
 	// nombre de ligne du tableau et si aucune on sort
 	$nligne=count($tab_spipimg);
 	if($nligne==0) {
-		debut_cadre_relief("../"._DIR_IMG_DW2."catalogue.gif");
+		debut_cadre_relief(_DIR_IMG_DW2."catalogue.gif");
 		echo "<br><b>"._T('dw:aucun_doc_type_img').".<br>";
 		fin_cadre_relief();
 		break;
@@ -217,9 +217,9 @@ if($hors_dw) {
 		
 		//
 		// onglets choix du mode		
-		debut_onglet();
-		onglet(_T('dw:mode_ligne'), $lien, 'aff_mode_ligne', $onglet, "../"._DIR_IMG_DW2."catalogue.gif");
-		onglet(_T('dw:mode_vignette'), $lien, 'aff_mode_vignette', $onglet, "vignette-24.png");
+		echo debut_onglet().
+		onglet(_T('dw:mode_ligne'), $lien, 'aff_mode_ligne', $onglet, _DIR_IMG_DW2."catalogue.gif").
+		onglet(_T('dw:mode_vignette'), $lien, 'aff_mode_vignette', $onglet, "vignette-24.png").
 		fin_onglet();
 		
 

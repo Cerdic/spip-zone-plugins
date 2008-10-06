@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -17,7 +17,7 @@ function action_dw2_ecrireconfig() {
 	# arg => version plugin en cours
 	
 	// controle action
-	include_spip('inc/actions');
+	include_spip('inc/securiser_action');
 	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
 		include_spip('inc/minipres');
 		minipres(_T('info_acces_interdit'));

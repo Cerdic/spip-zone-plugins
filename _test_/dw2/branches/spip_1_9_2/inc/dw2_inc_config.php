@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -104,7 +104,7 @@ function formulaire_configuration() {
 
 
 	// titre page
-	debut_cadre_gris_clair("../"._DIR_IMG_DW2."configure.gif", false, "",'' );
+	debut_cadre_couleur(_DIR_IMG_DW2."configure.gif", false, "",'' );
 	debut_band_titre($couleur_foncee,'verdana3');
 	echo _T('dw:txt_install_01', array('vers_loc' => _DW2_VERS_PLUGIN));
 	fin_bloc();
@@ -271,6 +271,6 @@ function formulaire_configuration() {
 	echo _T('dw:date_verif_avis_maj_plugin', array('datemaj' => $r['datemaj']));
 	fin_bloc();
 	
-	fin_cadre_gris_clair();
+	fin_cadre_couleur();
 }
 ?>

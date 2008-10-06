@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -91,9 +91,9 @@ debut_droite();
 
 	//
 	// onglets 		
-	debut_onglet();
-		onglet(_T('dw:rest_page_hierarchie'), generer_url_ecrire("dw2_restreint"), 'page_res', 'page_res', "racine-site-24.gif");
-		onglet(_T('dw:rest_page_table'), generer_url_ecrire("dw2_restreint_etat"), 'page_resetat', '', "../"._DIR_IMG_DW2."catalogue.gif");
+	echo debut_onglet().
+		onglet(_T('dw:rest_page_hierarchie'), generer_url_ecrire("dw2_restreint"), 'page_res', 'page_res', "racine-site-24.gif").
+		onglet(_T('dw:rest_page_table'), generer_url_ecrire("dw2_restreint_etat"), 'page_resetat', '', _DIR_IMG_DW2."catalogue.gif").
 	fin_onglet();
 	echo "<br />";
 

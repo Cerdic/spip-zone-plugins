@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -97,7 +97,7 @@ creer_colonne_droite();
 
 debut_droite();
 
-debut_cadre_relief("../"._DIR_IMG_DW2."fich_serv.gif");
+debut_cadre_relief(_DIR_IMG_DW2."fich_serv.gif");
 
 
 if ($nbserv==0)
@@ -199,7 +199,7 @@ else
 	//
 	// affichage liste des fichiers affectés
 	
-		debut_cadre_relief("../"._DIR_IMG_PACK."doc-24.gif");
+		debut_cadre_relief(_DIR_IMG_PACK."doc-24.gif");
 		echo "<div style='margin:2px; padding:3px;' align='center'>";
 
 		$r_doc = spip_query("SELECT d.id_document, d.url, d.heberge, d.id_serveur, s.taille ".

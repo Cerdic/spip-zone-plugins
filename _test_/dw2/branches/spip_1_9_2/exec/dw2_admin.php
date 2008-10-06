@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -77,7 +77,7 @@ creer_colonne_droite();
 	// via action cron 1 /2 jrs
 	if($GLOBALS['dw2_param']['avis_maj']=='oui' && $GLOBALS['dw2_param']['message_maj']!=0) {
 		$maj = unserialize($GLOBALS['dw2_param']['message_maj']);
-		debut_cadre_trait_couleur("../"._DIR_IMG_PACK."warning-24.gif", false, "", _T('dw:maj_evolution_dw'));
+		debut_cadre_trait_couleur(_DIR_IMG_PACK."warning-24.gif", false, "", _T('dw:maj_evolution_dw'));
 			echo "<ul class='avis_maj'>";
 			echo "<li>".typo($maj['nom'])." "._T('dw:maj_version')." <b>".$maj['version']."</b></li>";
 			echo "<li>"._T('dw:maj_etat')." <b>".$maj['etat']."</b></li>";
@@ -111,7 +111,7 @@ debut_droite();
 	$nb_actif=spip_num_rows($result);
 	$nb_archive=$nb_glob-$nb_actif;
 
-debut_cadre_relief("../"._DIR_IMG_DW2."catalogue.gif");
+debut_cadre_relief(_DIR_IMG_DW2."catalogue.gif");
 
 	echo "<br /><div class='center verdana3'>"._T('dw:actuellement');
 		if($nb_actif<=1)
@@ -139,7 +139,7 @@ fin_cadre_relief();
 	$result2=spip_query($query2);
 	
 	if (spip_num_rows($result2)) {
-		debut_cadre_trait_couleur("../"._DIR_IMG_PACK."warning-24.gif", false, "", _T('dw:doc_pas_dans_spip'));
+		debut_cadre_trait_couleur(_DIR_IMG_PACK."warning-24.gif", false, "", _T('dw:doc_pas_dans_spip'));
 		
 		$num_arch = array();
 		while ($row2=spip_fetch_array($result2)) {
@@ -220,7 +220,7 @@ fin_cadre_relief();
 			if ($mode_enregistre_doc=='auto')
 				{ $ttr_bloc = _T('dw:doc_dans_cat_depuis', array('jours_affiche_nouv' => $jours_affiche_nouv)); }	
 
-			debut_cadre_trait_couleur("../"._DIR_IMG_DW2."ajout_doc.gif", false, "", $ttr_bloc);
+			debut_cadre_trait_couleur(_DIR_IMG_DW2."ajout_doc.gif", false, "", $ttr_bloc);
 			
 			$i=0;
 			foreach($prep_dispo as $k => $v) {
@@ -279,7 +279,7 @@ fin_cadre_relief();
 		
 	if ($nligne==0)
 		{
-		debut_cadre_relief("../"._DIR_IMG_PACK."statistiques-24.gif");
+		debut_cadre_relief(_DIR_IMG_PACK."statistiques-24.gif");
 		echo "<br /><b>"._T('dw:aucun_telech_moment')."</b><br /><br />\n";
 		fin_cadre_relief();
 		}
@@ -300,7 +300,7 @@ fin_cadre_relief();
 		// nbre de telechargement
 		$tt_telech_j = array_sum($add_telech);
 
-		debut_cadre_relief("../"._DIR_IMG_PACK."statistiques-24.gif");
+		debut_cadre_relief(_DIR_IMG_PACK."statistiques-24.gif");
 		
 		debut_boite_filet("a", "center");
 			echo "<b>"._T('dw:telech_du_jour_nombre', array('nbr_tt'=>$tt_telech_j))."</b>\n";

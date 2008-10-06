@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -68,7 +68,7 @@ function exec_dw2_redacteur() {
 	debut_droite();
 
 
-	debut_cadre_trait_couleur("../"._DIR_IMG_PACK."doc-24.gif", false, "", _T('dw:vos_doc'));
+	debut_cadre_trait_couleur(_DIR_IMG_PACK."doc-24.gif", false, "", _T('dw:vos_doc'));
 	
 	// entete table
 	echo "<table align='center' cellpadding='2' cellspacing='1' border='0' width='100%'>\n";

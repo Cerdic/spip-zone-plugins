@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -98,7 +98,7 @@ function exec_dw2_install() {
 	debut_droite();
 	
 	
-	debut_cadre_trait_couleur("../"._DIR_IMG_DW2."configure.gif", false, "", _T('dw:txt_install_09',array('vers_loc' => _DW2_VERS_PLUGIN)));
+	debut_cadre_trait_couleur(_DIR_IMG_DW2."configure.gif", false, "", _T('dw:txt_install_09',array('vers_loc' => _DW2_VERS_PLUGIN)));
 		
 		// petite phrase install/maj tables
 		echo "<br /><span class='verdana3'><b>".$info_tbl."</b></span><br />";

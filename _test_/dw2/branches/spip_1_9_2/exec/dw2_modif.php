@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------+
-| DW2 2.13 (02/2007) - SPIP 1.9.1
+| DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | Script certifié KOAK2.0 strict, mais si !
@@ -149,7 +149,7 @@ creer_colonne_droite();
 
 debut_droite();
 	
-	debut_cadre_relief("../"._DIR_IMG_DW2."fiche_doc.gif");
+	debut_cadre_relief(_DIR_IMG_DW2."fiche_doc.gif");
 
 	// bouton stats_graph
 	if($tail_fich) {
@@ -237,7 +237,8 @@ debut_droite();
 	//
 	// formulaire telechargement-restreint #h.01/01
 	//
-	if($GLOBALS['dw2_param']['mode_restreint']=='oui') {
+	#h.09/03 si pas $tail_fich pas besoin de restriction
+	if($GLOBALS['dw2_param']['mode_restreint']=='oui' && $tail_fich) {
 	
 		$hierarchie = hierarchie_doc($iddoc);
 		$type='document';
@@ -255,7 +256,7 @@ debut_droite();
 		
 	
 		// formulaire "restriction"
-		debut_cadre_enfonce("../"._DIR_IMG_DW2."restreint-24.gif", false, "", _T('dw:rest_titre_formulaire'));
+		debut_cadre_enfonce(_DIR_IMG_DW2."restreint-24.gif", false, "", _T('dw:rest_titre_formulaire'));
 		
 			//commentaire dependance
 			debut_cadre_relief("", true, "","");
