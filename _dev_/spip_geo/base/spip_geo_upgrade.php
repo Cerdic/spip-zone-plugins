@@ -6,7 +6,7 @@
  * Auteurs :
  * Quentin Drouet
  *
- * (c) 2007 - Distribue sous licence GNU/GPL
+ * (c) 2007-2008 - Distribue sous licence GNU/GPL
  *
  */
 	
@@ -15,7 +15,7 @@
 	function spip_geo_upgrade(){
 		$version_base = $GLOBALS['spip_geo_base_version'];
 		$current_version = 0.0;
-		if (   (isset($GLOBALS['meta']['spip_geo_base_version']) )
+		if ((isset($GLOBALS['meta']['spip_geo_base_version']) )
 				&& (($current_version = $GLOBALS['meta']['spip_geo_base_version'])==$version_base))
 			return;
 			
@@ -24,7 +24,7 @@
 			$descpays = sql_showtable($table_pays, '', false);
 			if(isset($descpays['field']['pays'])){
 				echo 'virage de la table spip_geo_pays';
-				spip_query("DROP TABLE spip_geo_pays");
+				sql_drop_table("spip_geo_pays");
 			}
 			include_spip('base/spip_geo');
 			include_spip('base/create');
@@ -40,11 +40,11 @@
 	}
 	
 	function spip_geo_vider_tables() {
-		spip_query("DROP TABLE spip_geo_continent");
+		sql_drop_table("spip_geo_continent");
 		if(!$GLOBALS['meta']['inscription2_version']){
-			spip_query("DROP TABLE spip_geo_pays");
+			sql_drop_table("spip_geo_pays");
 		}
-		spip_query("DROP TABLE spip_geo_ville");
+		sql_drop_table("spip_geo_ville");
 		effacer_meta('spip_geo_base_version');
 		ecrire_metas();
 	}
