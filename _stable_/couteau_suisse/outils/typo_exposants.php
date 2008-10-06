@@ -28,12 +28,12 @@ function typo_exposants_fr($texte){
 		'/(?<=\bV)(ves?)\b/', '/(?<=\b[Bb])(ds?)\b/', '/(?<=\bC)(ies?)\b/',	// veuves, boulevard(s) et Cie(s)
 		'/(?<=\bS)(t(?:'._TYPO_EAIGU1.')s?)(?=\W)/', '/(?<=\W)(?:E|'._TYPO_EAIGU2.')ts\b/',	 // Societes(s), Etablissements
 
-		'/(?<=\b[1I])i?(ers?)\b/',	// Erreurs ier, iers
-		'/(?<=\b[1I])i?(?:'._TYPO_EGRAVE.')(res?)\b/',	// Erreurs ère(s), ière(s)
+		'/(?<=\b[1I])i?(ers?)\b/',	// 1er(s), Erreurs 1ier(s), 1ier(s)
+		'/(?<=\b[1I])i?(?:e|'._TYPO_EGRAVE.')(res?)\b/',	// Erreurs 1(i)ere(s) + accents
 		'/(?<=\b1)(r?es?)\b/', // 1e(s), 1re(s)
 		'/(?<=\b2)(nde?s?)\b/',	// 2nd(e)(s)
 
-		'/(\b[0-9IVX]+)i?(?:e|'._TYPO_EGRAVE.')?me(s?)\b/', // Erreurs me, eme, ème, ième + pluriels
+		'/(\b[0-9IVX]+)i?(?:e|'._TYPO_EGRAVE.')?me(s?)\b/', // Erreurs (i)(e)me(s) + accents
 		'/\b([0-9IVX]+)(es?)\b/', // 2e(s), IIIe(s)... (les 1(e?r?s?) ont deja ete remplaces)
 		'/\b(\d+)o\b/', // primo, secondo, etc.
 	), array(
