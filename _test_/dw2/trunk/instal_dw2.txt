@@ -1,0 +1,175 @@
+DW2
+(appelé par les intimes 'Didubyatoo')
+Ca ne veut toujours rien dire, mais c'est pas grave.
+
+---------------------------------------------------------
+Consignes d'installation de DW2 version 2.14 pour spip 1.9.2
+---------------------------------------------------------
+du 9/03/2007
+
+
+Attention, cette version reste encore EN TEST !!
+
+-------------------------------------------------------------
+version 2.14 ?
+Cette version est la 2.13(1.9.1) portée pour spip 1.9.2
+Et ne reçoit aucune nouveauté.
+Hormis : fichier .sql de sauvegarde des tables DW2 passe de ecrire/data/ à tmp/dump/ !
+
+Pour la 2.13 les nouv. étaient :
+1 - Les tables DW2 sont désormais préfixées en : 'spip_' (contrib. de Skedus),
+	permet assujetissement à la global $table_prefix .. (ex. 1 BDD -> 2 SPIPs)
+2 - Suppression du fichier de config (dw2_config.php en racine du plugin),
+	la configuration passe dans une nouvelle table spip_dw2_config.
+	2.13 peut simuler la récupération du fichier de config d'une ancienne version
+	pour ceux qui l'aurait malencontreusement écrasé !
+3 - Mode "Restreint" .. Restrictions du téléchargement des documents :
+	. sur tout le site, sur rubrique, article et/ou document.
+4 - Complément au statistiques : recherche sur période.
+5 - Nouvelle Balise #DW2_ALERTE permet d'afficher 3 messages d'erreurs/alertes :
+	document inexistant, s'enregistrer et accès refusé (mode "restreint").
+et + ...
+-------------------------------------------------------------
+
+
+Passer de DW2 2.13 à 2.14 
+-------------------------------------------------------------
+Ecraser plugins/dw2/ par le contenu de cette archive !
+
+
+Passer de DW2 2.1x à 2.14
+-------------------------------------------------------------
+1. Dans Spip, sur la page de "Gestion des Plugins", désactiver DW2 (*)
+
+2. Supprimer intégralement tous fichiers DW2 d'une précédente version :
+	- repertoire dw2/ du repert. plugins/
+	Si précédente version : 2.1 beta x ... :
+	- "dw2_out.php" ou "dw_out.php" en racine de votre site.
+	- dw2_catalogue.php et dw2_cat_style.css (en racine ou votre dossier squelettes)
+
+	Conserver (pour la dernière fois) le fichier de paramètre : dw2_config.php
+	que vous placerez à nouveau dans plugins/dw2/ à la phase suivante !!!
+
+3. extraire de l'archive le repertoire du plugin ( dw2/ ), à placer dans : ../plugins/ !!!
+	Replacer le fichier dw2_config.php à la racine de DW2.
+
+4. Dans le backoffice, réactiver le plugin, dans la "gestion des plugins".
+
+5. Cliquer sur l’icone de DW2 qui apparait dans le sous-menu "statistiques" de SPIP.
+
+6. DW2 détecte une ancienne version (d'où l'utilité de conserver dw2_config.php, pour la dernière fois)
+   et présente la page "installation". Valider le formulaire.
+
+* .. il est toujours prudent - voir nécessaire - de désactiver un plugin lors d'une mise à jour,
+	afin que SPIP réécrive les fichiers du "pipeline", en prennant compte d'éventuelles nouveautées !
+
+
+
+Passer de DW2 2.0x à 2.14
+-------------------------------------------------------------
+1. Supprimer tous fichiers DW2 d’une version antérieur, dans ecrire/ (dw2_qqchose.php) 
+   + ecrire/lang/dw_en et dw_fr.php ;
+   + (en racine ou dossier squelettes) => dw2_out.php, dw2_catalogue.php et dw2_cat_style.css
+   sauf : ecrire/dw2_config.php,
+   que vous devez conserver (pour la dernière fois) ; voir le point 3.
+
+   ET supprimer tous filtres, fonctions (DW2) qui était dans mes_fonctions.php et mes_otpions.php !!
+
+2. Extraire de l’archive le répertoire "dw2" et placer ce dernier dans plugins/
+
+3. Déplacer ecrire/dw2_config.php vers la racine du plugins (soit : ../plugins/dw2/)
+
+4. Dans le backoffice de SPIP, activer le plugin DW2.
+
+5. Cliquer sur l’icone de DW2 qui apparait dans le sous-menu "statistiques" de SPIP.
+
+6. DW2 détecte une ancienne version (d'où l'utilité de conserver dw2_config.php)
+   et présente la page "installation". Valider le formulaire.
+
+  
+Première installation de DW2
+-------------------------------------------------------------
+1. Extraire de l’archive le répertoire "dw2" et placer ce dernier dans plugins/ : ../plugins/dw2/
+
+2. Dans le backoffice de SPIP, activer le plugin DW2.
+
+3. Cliquer sur l’icone de DW2 qui apparait dans le sous-menu "statistiques" de SPIP.
+
+4. Valider le formulaire de configuration.
+	... avant de poser vos questions, lisez l'Aide en ligne !
+	Le lien est rappelé sur toutes les pages de DW2.
+
+
+
+
+-------------------------------------------------------------
+POUR TOUS ..............
+-------------------------------------------------------------
+
+	Votre fichier HTML de "catalogue public" (pour les anciens utilisateurs versions < 2.1x) est à modifier, 
+	évidement, puisque dw2_catalogue.php n'existe plus !
+	Remplacez l'"<INCLURE>" par l'exemple de Boucle proposé dans le fichier : modele_catalogue_dw2.html.
+	Modifiez, testez à votre guise cette présentation du catalogue.
+	Pour l'usage des Balises disponible, vous pouvez vous reporter à l'Aide en ligne,
+	chapitre Balises.
+	Cet exemple fait appel aux Balises du plugin : DEREBLOC. A télécharger sur KOAKIDI.com.
+
+
+
+
+-------------------------------------------------------------
+Nouveautés 2.1x ...
+-------------------------------------------------------------
+2.13/2.14 ..............................
+voir en tête du fichier.
+
+2.12 ..............................
+C'était juste une mise à jour pour spip1.9.1
+
+2.11 ..............................
+Fini le catalogue public en php ...
+Voir ci-dessus ...
+
+- TOUT est dans le plugin !
+
+- possibilité de "forcer" la mise en archive d'une fiche/document.
+Ainsi le document n'apparait plus dans le catalogue de DW2 (public et privé)
+Et bien-sûr on peut à tout moment inverser le statut et rendre à nouveau "actif" le document.
+Cette action ne "supprime" pas les documents dans leurs articles respectif, mais rend inactif le compteur.
+
+- Nouveau bouton : OUTILS
+Il rassemble dans le même popup :
+	Changer statut de fiche-Document en masse. (nouveau).
+	Lister le répertoire IMG/
+	Page Titre&Documents (pour modifier Titre et Descriptif).
+
+- Avis de mise-à-jour DW2.
+Option paramètrable dans Configuration (oui/non), pour se tenir au courant des évolutions de DW2.
+.... details :
+Le script charge depuis le serveur koakidi.com un fichier xml.
+Ce dernier lui fournis les infos de la dernière version en cours d'élaboration/stabilisée.
+Cette requete est faites uniquement par la page d'accueil de DW2, et y affiche les infos recuillis.
+
+- Mise à jour globale du module "Import/Export". Diverses amélioration/simplification dans le traitement.
+	Mérite certainement plus. A suivre !
+
+
+Et voilà !
+
+D’avance, merci pour vos retour d'usage !
+
+
+SCOTY
+
+
+-------------------------------------------------------------
+Contact
+-------------------------------------------------------------
+Pour toutes question concernant ce plugin
+ou si vous avez des idées, suggestions, traductions ...,
+n'hésitez pas à me contacter.
+
+Forum koakidi.com : http://www.koakidi.com/spip.php?rubrique89
+ou mieux ... 
+mail : scoty@koakidi.com
+

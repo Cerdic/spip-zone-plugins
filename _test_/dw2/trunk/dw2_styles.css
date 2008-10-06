@@ -1,0 +1,94 @@
+/*
+* DW2 2.14 (03/2007) - SPIP 1.9.2
+*/
+
+.boite_filet_a, .boite_filet_b, .boite_doc_enreg, .boite_doc_suppr, .boite_filet_c {
+	margin:3px 0px 3px 0px;
+	padding:3px;
+	-moz-border-radius:5px;
+}
+
+.boite_filet_a {
+	border:1px solid #CCCCCC;
+}
+
+.boite_filet_b {
+	border:1px solid #000000;
+}
+.boite_filet_c {
+	background-color:#FBFBFB;
+	border: 2px solid #CE2F2F;
+}
+
+.boite_doc_enreg {
+	border:1px solid #CCCCCC;
+	background-color:#D0E2D0;
+	color:#19945D;
+}
+.boite_doc_suppr {
+	border:1px solid #CCCCCC;
+	background-color:#E8C8C8;
+	color:#DD4400;
+}
+
+/* ************* */
+.bloc_bouton_r {
+	 padding:5px;
+	 text-align:right; 
+}
+
+.tete_colonne, .bouton_alpha {
+	padding:2px;
+	background-image: url(img_pack/fond_cell.gif);
+	background-repeat: repeat-x;
+	background-position: 0px 0px;
+	background-color:#CED8E2;
+	border:1px solid #9AA2AA;
+	-moz-border-radius:5px; 
+	text-align:center;
+	font-family:Verdana, Sans, Sans Serif;
+	font-size:10px;
+	color:#000000;
+}
+
+
+.bouton_alpha {
+	float:left;
+	margin:3px 1px 3px;
+	min-width:8px;
+	font-size:11px;
+	font-weight:bold;
+}
+
+.bande_titre {
+	margin:3px 0px 3px 0px;
+	padding:5px;
+	border-top:1px solid #9E9E9E;
+	border-bottom:1px solid #9E9E9E;
+	text-align:center;
+}
+
+.bloc_nom_fiche {
+	float:left;
+	margin:10px 10px 5px 5px;
+	font-family:Arial, Sans, Sans Serif;
+	font-size:16px;
+	font-weight:bold;
+}
+
+ul.avis_maj  {
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+
+/* ******** */
+.right { text-align:right; }
+.left { text-align:left; }
+.center { text-align:center; }
+
+/* *************** */
+.bold { font-weight:bold; }
+
+.t_alerte { color:#BA3A3A; }
+

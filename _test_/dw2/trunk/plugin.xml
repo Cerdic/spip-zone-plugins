@@ -1,0 +1,37 @@
+<plugin>
+	<nom>DW2</nom>
+	<auteur>scoty@koakidi.com</auteur>
+	<version>2.15</version>
+	<etat>test</etat>
+	<description>
+		<multi>
+		[fr] Gestion et suivi des documents propos&eacute;s en t&eacute;l&eacute;chargement sur ce site.
+		[en] Keep track of the documents available on this site.
+		[es] Gesti&oacute;n y seguimiento de los documentos propuestos para descarga desde el sitio.
+		</multi>
+	</description>
+	<options>dw2_mesoptions.php</options>
+	<fonctions>dw2_mesfonctions.php</fonctions>
+	<prefix>dw2</prefix>
+	<lien>
+		[Documentation (fr)->http://www.koakidi.com/rub_aide_dw2.php]
+	</lien>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>dw2_pipe.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>dw2_pipe.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>dw2_pipe.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>dw2_pipe.php</inclure>
+	</pipeline>
+</plugin>
