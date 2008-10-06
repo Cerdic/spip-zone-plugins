@@ -11,6 +11,21 @@ define('_TYPO_EAIGU2', unicode2charset('&#201;').'|&#201;|&Eacute;');
 define('_TYPO_sup', '<sup class="typo_exposants">\\1</sup>');
 define('_TYPO_sup2', '\\1<sup class="typo_exposants">\\2</sup>');
 
+// cette fonction ne fonctionne que pour l'anglais
+// elle n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
+function typo_exposants_en($texte){
+	static $typo;
+	if(!$typo) $typo = array( array(
+		',(?<=1)(st)\b,',
+		',(?<=2)(nd)\b,',
+		',(?<=3)(rd)\b,',
+		',(?<=\d)(th)\b,',
+	), array(
+		_TYPO_sup, _TYPO_sup, _TYPO_sup, _TYPO_sup,
+	));
+	return preg_replace($typo[0], $typo[1], $texte);
+}
+
 // cette fonction ne fonctionne que pour le francais
 // elle n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
 function typo_exposants_fr($texte){
@@ -52,7 +67,6 @@ function typo_exposants_fr($texte){
 		_TYPO_sup2, // 2e(s), IIIe(s)...
 		'$1<sup class="typo_exposants">o</sup>', // 1o, 2o, etc.
 	));
-
 	return preg_replace($typo[0], $typo[1], $texte);
 }
 
@@ -62,15 +76,11 @@ function typo_exposants_echappe_balises_callback($matches) {
 
 function typo_exposants($texte){
 	if (!$lang = $GLOBALS['lang_objet']) $lang = $GLOBALS['spip_lang'];
+	if(!function_exists($fonction = 'typo_exposants_'.lang_typo($lang))) return $texte;
 	// prudence : on protege les balises <a> et <img>
 	if (strpos($texte, '<')!==false) 
 		$texte = preg_replace_callback('/(<(a|img) [^>]+>)/Ums', 'typo_exposants_echappe_balises_callback', $texte);
-	switch (lang_typo($lang)) {
-		case 'fr':
-			$texte = cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'typo_exposants_fr', $texte);
-			break;
-		default:
-	}
+	$texte = cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', $fonction, $texte);
 	return echappe_retour($texte, 'EXPO');
 }
 ?>
