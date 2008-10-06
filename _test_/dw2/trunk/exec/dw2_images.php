@@ -45,13 +45,15 @@ include_spip("inc/dw2_inc_ajouts");
 // affichage page
 //
 
-debut_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+
 echo "<a name='haut_page'></a><br />";
 
-gros_titre(_T('dw:titre_page_admin'));
+echo gros_titre(_T('dw:titre_page_admin'),'','',true);
 
 
-debut_gauche();
+echo debut_gauche('',true);
 
 	menu_administration_telech();
 	menu_voir_fiche_telech();
@@ -64,26 +66,26 @@ debut_gauche();
 	bloc_ico_page(_T('dw:acc_dw2_dd'), generer_url_ecrire("dw2_deloc"), _DIR_IMG_DW2."deloc.gif");
 
 
-creer_colonne_droite();
+echo creer_colonne_droite('',true);
 
 	// vers popup aide 
 	bloc_ico_aide_ligne();
 
 	// info
-	echo "<br />";
-	debut_boite_info();
-		echo "<img src='"._DIR_IMG_DW2."vignette-16.png' align='absmiddle'>
-			<span class='arial2'> "._T('dw:txt_info_vignette')."</span>";
-	fin_boite_info();
+	echo "<br />\n";
+	echo debut_boite_info(true);
+		echo "<img src='"._DIR_IMG_DW2."vignette-16.png' align='absmiddle' alt='' />
+			<span class='arial2'> "._T('dw:txt_info_vignette')."</span>\n";
+	echo fin_boite_info(true);
 
 	// signature
-	echo "<br />";
-	debut_boite_info();
+	echo "<br />\n";
+	echo debut_boite_info(true);
 		echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-	fin_boite_info();
-	echo "<br />";
+	echo fin_boite_info(true);
+	echo "<br />\n";
 
-debut_droite();
+echo debut_droite('',true);
 	
 	//
 	//
@@ -102,9 +104,9 @@ debut_droite();
 
 //
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
-	echo "<div style='clear:both;'></div>";
+	echo "<div style='clear:both;'></div>\n";
 
-	fin_page();
+	echo fin_page();
 } // fin exec_
 
 ?>

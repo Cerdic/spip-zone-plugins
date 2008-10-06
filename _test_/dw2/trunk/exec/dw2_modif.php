@@ -53,13 +53,12 @@ foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
 //
 // prepa fiche
 //
-$query="SELECT *, dd.id_document AS id_dw, DATE_FORMAT(dd.date_crea,'%d/%m/%Y') AS datecrea, 
+$result=sql_select("*, dd.id_document AS id_dw, DATE_FORMAT(dd.date_crea,'%d/%m/%Y') AS datecrea, 
 		sd.taille, sd.titre, sd.descriptif, sd.id_type, sd.id_vignette, sd.distant, 
-		TO_DAYS(NOW()) - TO_DAYS(dd.date_crea) AS nbr_jour 
-		FROM spip_dw2_doc dd LEFT JOIN spip_documents sd ON dd.id_document=sd.id_document 
-		WHERE dd.id_document = $id";
-$result=spip_query($query);
-$okres=spip_num_rows($result);
+		TO_DAYS(NOW()) - TO_DAYS(dd.date_crea) AS nbr_jour ",
+		"spip_dw2_doc dd LEFT JOIN spip_documents sd ON dd.id_document=sd.id_document"
+		"dd.id_document = $id");
+$okres=sql_count($result);
 if($okres==0)
 	{
 	// j'ai pas trouve mieux !
@@ -67,7 +66,7 @@ if($okres==0)
 	echo "<script language=javascript>history.back()</script>";
 	}
 	
-while ($row=spip_fetch_array($result))
+while ($row=sql_fetch($result))
 	{
 	$iddoc = $row['id_dw'];
 	$doctype = $row['doctype'];
@@ -99,13 +98,15 @@ while ($row=spip_fetch_array($result))
 	//
 
 
-debut_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+
 echo "<a name='haut_page'></a><br />";
 
-gros_titre(_T('dw:titre_page_admin'));
+echo gros_titre(_T('dw:titre_page_admin'),'','',true);
 
 
-debut_gauche();
+echo debut_gauche('',true);
 
 	menu_administration_telech();
 	menu_voir_fiche_telech();
@@ -118,38 +119,38 @@ debut_gauche();
 	bloc_ico_page(_T('dw:acc_dw2_dd'), generer_url_ecrire("dw2_deloc"), _DIR_IMG_DW2."deloc.gif");
 
 
-creer_colonne_droite();
+echo creer_colonne_droite('',true);
 
 	// colonne des catégories en affichage si case"modif"
 	debut_boite_filet("b");
 		echo "<span class='verdana2 bold'>"._T('dw:categories_exist')." :</span>";
 			$ifond = 0;
 		$qcat="SELECT categorie FROM spip_dw2_doc GROUP BY categorie";
-		$rcat=spip_query($qcat);
-		while ($licat=spip_fetch_array($rcat)) {
+		$rcat=sql_query($qcat);
+		while ($licat=sql_fetch($rcat)) {
 			$cat=$licat['categorie'];
 			$ifond = $ifond ^ 1;
 			$couleur = ($ifond) ? '#FFFFFF' : $couleur_claire;
 			echo "<div class='arial2' style='background:$couleur; padding:3px;'>$cat</div>";
 			}
 	fin_bloc();
-	echo "<br />";
+	echo "<br />\n";
 
 
 	// vers popup aide 
 	bloc_ico_aide_ligne();
 
 	// signature
-	echo "<br />";
-	debut_boite_info();
+	echo "<br />\n";
+	echo debut_boite_info(true);
 		echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-	fin_boite_info();
-	echo "<br />";
+	echo fin_boite_info(true);
+	echo "<br />\n";
 
 
-debut_droite();
+echo debut_droite('',true);
 	
-	debut_cadre_relief(_DIR_IMG_DW2."fiche_doc.gif");
+	echo debut_cadre_relief(_DIR_IMG_DW2."fiche_doc.gif",true);
 
 	// bouton stats_graph
 	if($tail_fich) {
@@ -199,7 +200,7 @@ debut_droite();
 		echo "<input type='hidden' name='hash' value='".calculer_action_auteur("dw2actions-changerstatut-".$chg_statut)."' />\n";
 		echo "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />\n";
 		conten_bloc_bout('right','25');
-			echo "<input type='image' src='"._DIR_IMG_DW2."ok_fich.gif' title='"._T('dw:valider')."' />\n";
+			echo "<input type='image' src='"._DIR_IMG_DW2."ok_fich.gif' title='"._T('bouton_valider')."' />\n";
 		fin_bloc();
 		echo $txt_bloc;		
 		echo "</form>\n";
@@ -211,7 +212,7 @@ debut_droite();
 	//
 	// formulaire de modif : nonm, catégorie, total
 	//
-	debut_cadre_enfonce("", false, "", _T('dw:modif_fich_trt'));
+	echo debut_cadre_enfonce("", true, "", _T('dw:modif_fich_trt'));
 	if($statut=='archive') { echo "<div class='boite_doc_suppr'>"; }
 
 	echo "<form action='".generer_url_action("dw2actions", "arg=modifierfiche-".$iddoc)."' method='post' class='arial2'>\n";
@@ -232,7 +233,7 @@ debut_droite();
 	echo "</form>\n";
 
 	if($statut=='archive') { echo "</div>"; }
-	fin_cadre_enfonce();
+	echo fin_cadre_enfonce(true);
 	
 	//
 	// formulaire telechargement-restreint #h.01/01
@@ -256,10 +257,10 @@ debut_droite();
 		
 	
 		// formulaire "restriction"
-		debut_cadre_enfonce(_DIR_IMG_DW2."restreint-24.gif", false, "", _T('dw:rest_titre_formulaire'));
+		echo debut_cadre_enfonce(_DIR_IMG_DW2."restreint-24.gif", true, "", _T('dw:rest_titre_formulaire'));
 		
 			//commentaire dependance
-			debut_cadre_relief("", true, "","");
+			echo debut_cadre_relief("", true, "","");
 			 echo "<b>"._T('dw:rest_dependance_direct_sup')."</b><br />";
 			 if($maitre_p) {
 				echo _T('dw:rest_dependance_detail', array('maitre_p' => $maitre_p, 'titre_maitre_p'=>$titre_maitre_p)).
@@ -267,7 +268,7 @@ debut_droite();
 			} else {
 				echo _T('dw:rest_dependance_aucune');
 			}
-			fin_cadre_relief();		
+			echo fin_cadre_relief(true);
 			
 			
 			echo "<form action='".generer_url_action("dw2actions", "arg=restrictgen-".$iddoc)."' method='post' class='arial2'>\n";
@@ -281,18 +282,18 @@ debut_droite();
 			
 			echo "</form>\n";
 		
-		fin_cadre_enfonce();
+		echo fin_cadre_enfonce(true);
 	
 	}// fin restriction
 	
-	fin_cadre_relief();
+	echo fin_cadre_relief(true);
 	
 	
 	
 	//
 	// info document
 	//
-	debut_cadre_relief("doc-24.gif");
+	echo debut_cadre_relief("doc-24.gif",true);
 
 	if($statut=='archive') { echo "<div class='boite_doc_suppr'>"; }
 	
@@ -368,9 +369,9 @@ debut_droite();
 	// formulaire modif : Titre et Desc' du doc
 	if ($tail_fich && $statut=='actif')
 		{
-		debut_cadre_enfonce("rien.gif", false, "", _T('dw:champs_modif')._T('dw:doc_lie_trt_descrip'));
+		echo debut_cadre_enfonce("rien.gif", true, "", _T('dw:champs_modif')._T('dw:doc_lie_trt_descrip'));
 		form_titre_desc($id, $titre_doc, $desc_doc, generer_url_ecrire("dw2_modif", "id=".$id));
-		fin_cadre_enfonce();
+		echo fin_cadre_enfonce(true);
 		}
 
 
@@ -380,22 +381,25 @@ debut_droite();
 	$invisible = $iddoc;
 	if($tail_fich && $statut=='actif')
 		{		
-		debut_cadre_enfonce("article-24.gif", false, "", _T('dw:deplace_doc'));
+		echo debut_cadre_enfonce("article-24.gif", true, "", _T('dw:deplace_doc'));
 		
 		// avertissement
 		debut_boite_filet("a");
 		if ($invisible)
-			echo bouton_block_invisible('alert');
+			//echo bouton_block_invisible('alert');
+			bouton_block_depliable(_T("info_sans_titre"),false,'alert');
 		else 
-			echo bouton_block_visible('mess_alert');
+			//echo bouton_block_visible('mess_alert');
+			bouton_block_depliable(_T("info_sans_titre"),true,'mess_alert');
+			
 		echo "&nbsp;<span class='verdana2'><b>[ "._T('dw:attention_info')." ]</b></span>";
 		
 		if ($invisible)
-			echo debut_block_invisible('alert');
+			echo debut_block_depliable(false'alert');
 		else
-			echo debut_block_visible('mess_alert');
+			echo debut_block_depliable(true,'mess_alert');
 		
-		echo "<span class='verdana2'>"._T('dw:txt_deplace_doc')."</span><br />";
+		echo "<span class='verdana2'>"._T('dw:txt_deplace_doc')."</span><br />\n";
 		echo fin_block();
 		fin_bloc();
 		
@@ -418,10 +422,10 @@ debut_droite();
 
 		echo "</div>";
 
-		fin_cadre_enfonce();
+		echo fin_cadre_enfonce(true);
 		}
 
-	fin_cadre_relief();	
+	echo fin_cadre_relief(true);
 
 	
 	//
@@ -429,7 +433,7 @@ debut_droite();
 	//
 	if(!$tail_fich || $idtype<=3)
 		{
-		debut_cadre_relief("");		
+		echo debut_cadre_relief("",true);
 		if ($invisible)
 			echo bouton_block_invisible('efface', "warning-24.gif");
 		else 
@@ -450,7 +454,7 @@ debut_droite();
 		echo "</div>";
 		
 		echo fin_block();
-		fin_cadre_relief();
+		echo fin_cadre_relief(true);
 		}
 	}
 
@@ -459,6 +463,6 @@ debut_droite();
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
 	echo "<div style='clear:both;'></div>";
 
-	fin_page();
+	echo fin_page();
 } // fin exec_
 ?>

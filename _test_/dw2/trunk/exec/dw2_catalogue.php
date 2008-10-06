@@ -36,7 +36,7 @@ include_spip("inc/dw2_inc_pres");
 
 // config dw
 $nbr_lignes_tableau=$GLOBALS['dw2_param']['nbr_lignes_tableau'];
-
+$tbl_ltt=array();
 
 //
 // prepa
@@ -54,13 +54,13 @@ $dl=($vl+0);
 
 
 //Nbr Total de Doc ...(Docs actifs
-$rcc_nligne=spip_query("SELECT nom, id_document FROM spip_dw2_doc WHERE statut='actif' ORDER BY nom");
-$nligne=spip_num_rows($rcc_nligne);
+$rcc_nligne=sql_query("SELECT nom, id_document FROM spip_dw2_doc WHERE statut='actif' ORDER BY nom");
+$nligne=sql_count($rcc_nligne);
 	
 	
 // prepa toutdeplier toutreplier + tableau des prem lettres
 $gen_ltt = array();
-while ($row_dep=spip_fetch_array($rcc_nligne)) {
+while ($row_dep=sql_fetch($rcc_nligne)) {
 	$iddoc=$row_dep['id_document'];
 	$les_docs[] = "bout$iddoc";
 	$nom_block = "bout$iddoc";
@@ -115,21 +115,23 @@ $quer="SELECT d.id_document, DATE_FORMAT(d.dateur,'%d/%m/%Y - %H:%i') AS datetel
 		WHERE d.statut='actif' $where_ltt 
 		ORDER BY $orderby LIMIT $dl,$nbr_lignes_tableau";
 		
-$result=spip_query($quer);
-$nbliens=spip_num_rows($result);
+$result=sql_query($quer);
+$nbliens=sql_count($result);
 
 
 //
 // affichage page
 //
 
-debut_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
-echo "<a name='haut_page'></a><br />";
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
 
-gros_titre(_T('dw:titre_page_admin'));
+echo "<a name='haut_page'></a><br />\n";
+
+echo gros_titre(_T('dw:titre_page_admin'),'','',true);
 
 
-debut_gauche();
+echo debut_gauche('',true);
 
 	menu_administration_telech();
 	menu_voir_fiche_telech();
@@ -142,27 +144,28 @@ debut_gauche();
 	bloc_ico_page(_T('dw:acc_dw2_dd'), generer_url_ecrire("dw2_deloc"), _DIR_IMG_DW2."deloc.gif");
 
 
-creer_colonne_droite();
+echo creer_colonne_droite('',true);
 
 	// vers popup aide 
+	echo "<br />\n";
 	bloc_ico_aide_ligne();
 
 	// signature
-	echo "<br />";
-	debut_boite_info();
+	echo "<br />\n";
+	echo debut_boite_info(true);
 		echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-	fin_boite_info();
-	echo "<br />";
+	echo fin_boite_info(true);
+	echo "<br />\n";
 
-debut_droite();
+echo debut_droite('',true);
 
 
-debut_cadre_relief(_DIR_IMG_DW2."catalogue.gif");
+echo debut_cadre_relief(_DIR_IMG_DW2."catalogue.gif",true);
 
 if ($nbliens==0) {
 
-		echo "<br /><span class='t_alerte bold'>"._T('dw:txt_cat_aucun')."<br />";
-		echo "<br /><br /><a href='".generer_url_ecrire("dw2_ajouts")."'>"._T('dw:ajout_doc')."</a></span><br />";
+		echo "<br /><span class='t_alerte bold'>"._T('dw:txt_cat_aucun')."<br />\n";
+		echo "<br /><br /><a href='".generer_url_ecrire("dw2_ajouts")."'>"._T('dw:ajout_doc')."</a></span><br />\n";
 
 } else {
 	// valeur de tranche affichee	
@@ -182,17 +185,17 @@ if ($nbliens==0) {
 	if ($les_docs)
 		{
 		$les_docs = join($les_docs,",");
-		echo "<div style='float:left; padding:2px;'>";
-		echo "<b class='verdana2'>";
-		echo "<a href=\"javascript:$javasc_ouvrir\">";
+		echo "<div style='float:left; padding:2px;'>\n";
+		echo "<b class='verdana2'>\n";
+		echo "<a href=\"javascript:$javasc_ouvrir\">\n";
 		echo _T('lien_tout_deplier');
 		echo "</a>";
-		echo "</b></div>";
-		echo "<div style='float:right; padding:2px;'>";
+		echo "</b></div>\n";
+		echo "<div style='float:right; padding:2px;'>\n";
 		echo "<b class='verdana2'>";
 		echo "<a href=\"javascript:$javasc_fermer\">";
 		echo _T('lien_tout_replier');
-		echo "</a>";
+		echo "</a>\n";
 		echo "</b></div>\n";
 		echo "<div style='clear:both'></div>\n";
 		}
@@ -226,16 +229,16 @@ if ($nbliens==0) {
 	if($odb!='heb') {
 		$lien=parametre_url(self(),'odb','');
 		$lien=parametre_url(self(),'odb','heb');
-		echo "<a href='".$lien."'><img src='"._DIR_IMG_DW2."dot_serveur.gif' border='0' align='absmiddle'></a>";
+		echo "<a href='".$lien."'><img src='"._DIR_IMG_DW2."dot_serveur.gif' border='0' align='absmiddle' alt='' /></a>\n";
 
 	} else {
-		echo "<img src='"._DIR_IMG_DW2."dot_serveur.gif' border='0' align='absmiddle'>";
+		echo "<img src='"._DIR_IMG_DW2."dot_serveur.gif' border='0' align='absmiddle' alt='' />\n";
 	}	
 	echo "</td><td width='50%' class='tete_colonne'>\n";
 	if($odb!='nom') {
 		$lien=parametre_url(self(),'odb','');
 		$lien=parametre_url(self(),'odb','nom');
-		echo "<a href='".$lien."'>"._T('dw:nom_fiche')."</a>";
+		echo "<a href='".$lien."'>"._T('dw:nom_fiche')."</a>\n";
 	} else {
 		echo "<b>"._T('dw:nom_fiche')."</b>";
 	}
@@ -243,19 +246,19 @@ if ($nbliens==0) {
 	if($odb!='cat') {
 		$lien=parametre_url(self(),'odb','');
 		$lien=parametre_url(self(),'odb','cat');
-		echo "<a href='".$lien."'>"._T('dw:categorie')."</a>";
+		echo "<a href='".$lien."'>"._T('dw:categorie')."</a>\n";
 	} else {
-		echo "<b>"._T('dw:categorie')."</b>";
+		echo "<b>"._T('dw:categorie')."</b>\n";
 	}
 	echo "</td><td width='16%' class='tete_colonne'>\n";
 	if($odb!='date') {
 		$lien=parametre_url(self(),'odb','');
 		$lien=parametre_url(self(),'odb','date');
-		echo "<a href='".$lien."'>"._T('dw:entree_cat')."</a>";
+		echo "<a href='".$lien."'>"._T('dw:entree_cat')."</a>\n";
 	} else {
-		echo "<b>"._T('dw:entree_cat')."</b>";
+		echo "<b>"._T('dw:entree_cat')."</b>\n";
 	}
-	echo "</td></tr>";
+	echo "</td></tr>\n";
 
 
 	while ($a_row=spip_fetch_array($result))
@@ -289,7 +292,7 @@ if ($nbliens==0) {
 		$nomfichier = wordwrap($nomfichier,30,' ',1);
 		
 		if (!$t_s)
-			{ $taille = "<img src='"._DIR_IMG_DW2."puce-rouge-breve.gif'>&nbsp;"._T('dw:pas_dans_spip'); }
+			{ $taille = "<img src='"._DIR_IMG_DW2."puce-rouge-breve.gif' alt='' />&nbsp;\n"._T('dw:pas_dans_spip'); }
 		else
 			{ $taille = taille_en_octets($t_s); }
 
@@ -297,18 +300,18 @@ if ($nbliens==0) {
 		// ligne du tableau
 		//
 		$bouton = bouton_block_invisible("bout$iddoc");
-		echo "<tr bgcolor='$couleur'>";
+		echo "<tr bgcolor='$couleur'>\n";
 		echo "<td width=8%>$bouton ".origine_heberge($heberge)."</td>\n";
-		echo "<td width=50%><div class='verdana2'>";
+		echo "<td width=50%><div class='verdana2'>\n";
 		if (!$t_s)
-			{ echo "<img src='"._DIR_IMG_DW2."puce-rouge-breve.gif'>"; }
+			{ echo "<img src='"._DIR_IMG_DW2."puce-rouge-breve.gif' alt='' />\n"; }
 		echo "&nbsp;".$nom."</div></td>\n";
 		echo "<td width=26%><div align='center' class='verdana2'>".$categorie."</div></td>\n";
 		echo "<td width=16%><div align='center' class='arial2'>".$datecrea."</div></td>\n";
     	echo "</tr>\n";
 		
 		// Déroulant : fiche du Lien
-		echo "<tr bgcolor='$couleur'><td colspan='4'><span class='verdana1'>";
+		echo "<tr bgcolor='$couleur'><td colspan='4'><span class='verdana1'>\n";
 		echo debut_block_invisible("bout$iddoc");
 		
 		conten_bloc_bout();
@@ -338,7 +341,7 @@ if ($nbliens==0) {
 		echo _T('dw:dernier_telech')." : ".$datetel."<br />\n";
 		echo _T('dw:moyenne_jour')." : <span class='verdana2'>".$moyj."</span><br />\n";
 		echo _T('dw:compteur')." : <span class='verdana2'><b>".$total."</b></span><br />\n";
-		echo _T('dw:chemin')." : ".(($id_serveur>='1') ? "<b>".$heberge."</b>" : '').$cheminfichier."<br />";
+		echo _T('dw:chemin')." : ".(($id_serveur>='1') ? "<b>".$heberge."</b>" : '').$cheminfichier."<br />\n";
 		echo fin_block();		
 		echo "</span></td></tr>\n";
 		}
@@ -348,8 +351,8 @@ fin_cadre_relief();
 
 //
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
-	echo "<div style='clear:both;'></div>";
+	echo "<div style='clear:both;'></div>\n";
 
-	fin_page();
+	echo fin_page();
 } // fin exec_
 ?>

@@ -47,13 +47,14 @@ $nbr_lignes_tableau = $GLOBALS['dw2_param']['nbr_lignes_tableau'];
 // affichage
 //
 
-debut_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
 echo "<a name='haut_page'></a><br />";
 
-gros_titre(_T('dw:titre_page_admin'));
+echo gros_titre(_T('dw:titre_page_admin'),'','',true);
 
 
-debut_gauche();
+echo debut_gauche('',true);
 
 	// les fonctions principales de dw2 -> pages
 	menu_administration_telech();
@@ -71,47 +72,48 @@ debut_gauche();
 	bloc_ico_page(_T('dw:acc_dw2_dd'), generer_url_ecrire("dw2_deloc"), _DIR_IMG_DW2."deloc.gif");
 
 
-creer_colonne_droite();
+echo creer_colonne_droite('',true);
 
 	// controler MaJ du plugin sur serveur 
 	// via action cron 1 /2 jrs
 	if($GLOBALS['dw2_param']['avis_maj']=='oui' && $GLOBALS['dw2_param']['message_maj']!=0) {
 		$maj = unserialize($GLOBALS['dw2_param']['message_maj']);
-		debut_cadre_trait_couleur(_DIR_IMG_PACK."warning-24.gif", false, "", _T('dw:maj_evolution_dw'));
+		echo debut_cadre_trait_couleur(_DIR_IMG_PACK."warning-24.gif", true, "", _T('dw:maj_evolution_dw'));
 			echo "<ul class='avis_maj'>";
 			echo "<li>".typo($maj['nom'])." "._T('dw:maj_version')." <b>".$maj['version']."</b></li>";
 			echo "<li>"._T('dw:maj_etat')." <b>".$maj['etat']."</b></li>";
 			echo "<li>".propre($maj['description'])."</li>";
 			echo "<li>".propre($maj['lien'])."</li>";
 			echo "</ul>";
-		fin_cadre_trait_couleur();
+		echo fin_cadre_trait_couleur(true);
 		
 	}
 	
 	// vers popup aide 
+	echo "<br />";
 	bloc_ico_aide_ligne();
 
 	// signature
 	echo "<br />";
-	debut_boite_info();
+	echo debut_boite_info(true);
 		echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-	fin_boite_info();
+	echo fin_boite_info(true);
 	echo "<br />";
 
 
-debut_droite();
+echo debut_droite('',true);
 
 
 	// Affichage : Nombre de Doc gérés par DW2 (actifs et archives)
-	$result=spip_query("SELECT COUNT(*) as nb_glob FROM spip_dw2_doc");
-	$row=spip_fetch_array($result);
+	$result=sql_query("SELECT COUNT(*) as nb_glob FROM spip_dw2_doc");
+	$row=sql_fetch($result);
 	$nb_glob=$row['nb_glob'];
 	
-	$result=spip_query("SELECT id_document FROM spip_dw2_doc WHERE statut='actif'");
-	$nb_actif=spip_num_rows($result);
+	$result=sql_query("SELECT id_document FROM spip_dw2_doc WHERE statut='actif'");
+	$nb_actif=sql_count($result);
 	$nb_archive=$nb_glob-$nb_actif;
 
-debut_cadre_relief(_DIR_IMG_DW2."catalogue.gif");
+echo debut_cadre_relief(_DIR_IMG_DW2."catalogue.gif",true);
 
 	echo "<br /><div class='center verdana3'>"._T('dw:actuellement');
 		if($nb_actif<=1)
@@ -126,23 +128,22 @@ debut_cadre_relief(_DIR_IMG_DW2."catalogue.gif");
 			{ echo _T('dw:doc_dans_archive_s', array('nb_archive' => $nb_archive))." )</div><br />\n"; }
 		
 
-fin_cadre_relief();
+echo fin_cadre_relief(true);
 
 
 	//
 	// Alerte pour Documents supprimés de spip_documents
 	//
-	$query2="SELECT dw.id_document, dw.nom, dw.doctype, dw.id_doctype ".
-			"FROM spip_dw2_doc dw ".
-			"LEFT JOIN spip_documents sd ON dw.id_document = sd.id_document ".
-			"WHERE sd.id_document IS NULL AND dw.statut='actif'";
-	$result2=spip_query($query2);
+	$result2=sql_select("dw.id_document, dw.nom, dw.doctype, dw.id_doctype ",
+						"FROM spip_dw2_doc dw LEFT JOIN spip_documents sd ON dw.id_document = sd.id_document ",
+						"sd.id_document IS NULL AND dw.statut='actif'");
 	
-	if (spip_num_rows($result2)) {
-		debut_cadre_trait_couleur(_DIR_IMG_PACK."warning-24.gif", false, "", _T('dw:doc_pas_dans_spip'));
+	
+	if (sql_count($result2)) {
+		echo debut_cadre_trait_couleur(_DIR_IMG_PACK."warning-24.gif", true, "", _T('dw:doc_pas_dans_spip'));
 		
 		$num_arch = array();
-		while ($row2=spip_fetch_array($result2)) {
+		while ($row2=sql_fetch($result2)) {
 			$nom = $row2['nom'];
 			// h.20/01/07 .. cesure ' ' sur nom/nomfichier trop long + 40 caract
 			$nom = wordwrap($nom,40,' ',1);
@@ -171,7 +172,7 @@ fin_cadre_relief();
 		echo "</form>";
 		echo "</div>";
 
-		fin_cadre_trait_couleur();
+		echo fin_cadre_trait_couleur(true);
 	}
 
 
@@ -180,24 +181,34 @@ fin_cadre_relief();
 	// OU
 	// si mode_enregistre_doc = auto : liste des docs enreg. depuis 'n' jours
 	//
-	$query3="SELECT sd.id_document, sd.titre, sd.fichier 
-			FROM spip_documents sd 
-			LEFT JOIN spip_dw2_doc dw ON sd.id_document = dw.id_document 
-			WHERE sd.mode = 'document' ";
 
+	$where="";
+	$order="";
 	if ($mode_enregistre_doc=='manuel')
-		{ $query3.="AND sd.id_type > '3' AND dw.id_document IS NULL ORDER BY titre"; }
+		{	
+			$where = " AND sd.id_type > '3' AND dw.id_document IS NULL";
+			$order = "titre";
+		//$query3.="AND sd.id_type > '3' AND dw.id_document IS NULL ORDER BY titre"; 
+		}
 	if ($mode_enregistre_doc=='auto')
-		{ $query3.="AND dw.date_crea >= DATE_SUB(NOW(),INTERVAL $jours_affiche_nouv DAY) ORDER BY date_crea DESC"; }
-	$result3=spip_query($query3);
+		{ 
+		//$query3.="AND dw.date_crea >= DATE_SUB(NOW(),INTERVAL $jours_affiche_nouv DAY) ORDER BY date_crea DESC"; 
+			$where = " AND dw.date_crea >= DATE_SUB(NOW(),INTERVAL $jours_affiche_nouv DAY)";
+			$order = "date_crea DESC";
+		}
+	$result3=sql_select("sd.id_document, sd.titre, sd.fichier" ,
+					"spip_documents sd LEFT JOIN spip_dw2_doc dw ON sd.id_document = dw.id_document ",
+					"sd.mode = 'document' $where",
+					"", // group by
+					$order);
 	
 	
 	// potentielement y'a des Docs
-	if (spip_num_rows($result3)) {
+	if (sql_count($result3)) {
 		$prep_dispo=array();
 		
 		// le doc est-il enregistrable (origine = 'publie')
-		while ($row3=spip_fetch_array($result3)) {
+		while ($row3=sql_fetch($result3)) {
 			$iddoc = $row3['id_document'];
 			$origine=origine_doc($iddoc);
 			$nomfichier = substr(strrchr($row3['fichier'],'/'), 1);
@@ -220,7 +231,7 @@ fin_cadre_relief();
 			if ($mode_enregistre_doc=='auto')
 				{ $ttr_bloc = _T('dw:doc_dans_cat_depuis', array('jours_affiche_nouv' => $jours_affiche_nouv)); }	
 
-			debut_cadre_trait_couleur(_DIR_IMG_DW2."ajout_doc.gif", false, "", $ttr_bloc);
+			echo debut_cadre_trait_couleur(_DIR_IMG_DW2."ajout_doc.gif", true, "", $ttr_bloc);
 			
 			$i=0;
 			foreach($prep_dispo as $k => $v) {
@@ -256,7 +267,7 @@ fin_cadre_relief();
 				echo "</div>";
 			}
 						
-			fin_cadre_trait_couleur();
+			echo fin_cadre_trait_couleur(true);
 		}
 	}
 
@@ -268,26 +279,28 @@ fin_cadre_relief();
 		$dl=($_GET['vl']+0);
 		
 		// Verif. : telech aujourd'hui ?	
-		$rvtel=spip_query("SELECT id_doc, telech FROM spip_dw2_stats WHERE TO_DAYS(date)=TO_DAYS(NOW())");
-		$nligne=spip_num_rows($rvtel);
+		$rvtel=sql_query("SELECT id_doc, telech FROM spip_dw2_stats WHERE TO_DAYS(date)=TO_DAYS(NOW())");
+		$nligne=sql_count($rvtel);
 		
 	//tableau
-	$query4="SELECT ds.id_doc, ds.date, ds.telech, dd.url, dd.nom, dd.total ".
-			"FROM spip_dw2_stats ds LEFT JOIN spip_dw2_doc dd ON ds.id_doc=dd.id_document ".
-			"WHERE TO_DAYS(date)=TO_DAYS(NOW()) ORDER BY ds.telech DESC LIMIT $dl,$nbr_lignes_tableau";
-	$result4=spip_query($query4);
+	$result4=sql_select("ds.id_doc, ds.date, ds.telech, dd.url, dd.nom, dd.total ",
+						"spip_dw2_stats ds LEFT JOIN spip_dw2_doc dd ON ds.id_doc=dd.id_document ",
+						"TO_DAYS(date)=TO_DAYS(NOW())",
+						"", // group by
+						"ds.telech DESC", // order by
+						"$dl,$nbr_lignes_tableau"); // limit
 		
 	if ($nligne==0)
 		{
-		debut_cadre_relief(_DIR_IMG_PACK."statistiques-24.gif");
+		echo debut_cadre_relief(_DIR_IMG_PACK."statistiques-24.gif",true);
 		echo "<br /><b>"._T('dw:aucun_telech_moment')."</b><br /><br />\n";
-		fin_cadre_relief();
+		echo fin_cadre_relief(true);
 		}
 	else
 		{
 		// total des telech du jour !
 		$add_telech = array();
-		while ($l_rvtel=spip_fetch_array($rvtel))
+		while ($l_rvtel=sql_fetch($rvtel))
 			{
 			$telech = $l_rvtel['telech'];
 			$add_telech[]=$telech;
@@ -300,14 +313,14 @@ fin_cadre_relief();
 		// nbre de telechargement
 		$tt_telech_j = array_sum($add_telech);
 
-		debut_cadre_relief(_DIR_IMG_PACK."statistiques-24.gif");
+		echo debut_cadre_relief(_DIR_IMG_PACK."statistiques-24.gif",true);
 		
-		debut_boite_filet("a", "center");
+		echo debut_boite_filet("a", "center");
 			echo "<b>"._T('dw:telech_du_jour_nombre', array('nbr_tt'=>$tt_telech_j))."</b>\n";
-		fin_bloc();
+		echo fin_bloc();
 		debut_band_titre('#dfdfdf');
 			tranches($nba1, $nligne, $nbr_lignes_tableau);
-		fin_bloc();
+		echo fin_bloc();
 		
 		// tableau
 		echo "<table align='center' cellpadding='2' cellspacing='1' border='0' width='100%'>\n".
@@ -320,7 +333,7 @@ fin_cadre_relief();
 
 		$ifond = 0;
 
-		while ($row4=spip_fetch_array($result4))
+		while ($row4=sql_fetch($result4))
 			{
 			$iddoc = $row4['id_doc'];
 			$nomfichier = substr(strrchr($row4['url'],'/'), 1);
@@ -346,13 +359,13 @@ fin_cadre_relief();
 			}
 		echo "</table>";
 		
-		fin_cadre_relief();
+		echo fin_cadre_relief(true);
 		}
 
 //
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
 	echo "<div style='clear:both;'></div>";
 
-	fin_page();
+	echo fin_page();
 } // fin exec_
 ?>

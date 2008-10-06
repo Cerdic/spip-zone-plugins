@@ -39,13 +39,15 @@ include_spip("inc/dw2_inc_pres");
 include_spip("inc/dw2_inc_config");
 
 
-debut_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+
 echo "<a name='haut_page'></a><br />";
 
-gros_titre(_T('dw:titre_page_admin'));
+echo gros_titre(_T('dw:titre_page_admin'),'','',true);
 
 
-debut_gauche();
+echo debut_gauche('',true);
 
 	menu_administration_telech();
 	menu_voir_fiche_telech();
@@ -58,19 +60,20 @@ debut_gauche();
 	bloc_ico_page(_T('dw:acc_dw2_dd'), generer_url_ecrire("dw2_deloc"), _DIR_IMG_DW2."deloc.gif");
 
 
-creer_colonne_droite();
+echo creer_colonne_droite('',true);
 
 	// vers popup aide 
+	echo "<br />";
 	bloc_ico_aide_ligne();
 
 	// signature
 	echo "<br />";
-	debut_boite_info();
+	echo debut_boite_info(true);
 		echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-	fin_boite_info();
+	echo fin_boite_info(true);
 	echo "<br />";
 
-debut_droite();
+echo debut_droite('',true);
 
 	formulaire_configuration();
 
@@ -79,6 +82,6 @@ debut_droite();
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
 	echo "<div style='clear:both;'></div>";
 
-	fin_page();
+	echo fin_page();
 } // fin exec_
 ?>

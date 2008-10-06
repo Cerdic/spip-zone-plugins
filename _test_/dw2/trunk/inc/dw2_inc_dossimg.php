@@ -32,7 +32,7 @@ function dossimg() {
 	
 
 
-debut_cadre_trait_couleur(_DIR_IMG_PACK."doc-24.gif", false, "", _T('dw:conten_repert_img'));
+echo debut_cadre_trait_couleur(_DIR_IMG_PACK."doc-24.gif", true, "", _T('dw:conten_repert_img'));
 
 
 if ($b_repert=='')
@@ -42,8 +42,8 @@ $rep=opendir($b_repert);
 
 // lister les extensions connues de spip (pour limiter les dossiers affichés !)
 	$tab_ext=array();
-	$r_extens = spip_query("SELECT extension FROM spip_types_documents");
-	while ($s_ext = spip_fetch_array($r_extens))
+	$r_extens = sql_query("SELECT extension FROM spip_types_documents");
+	while ($s_ext = sql_fetch($r_extens))
 		{
 		$extens=$s_ext['extension'];
 		$tab_ext[]=$extens;
@@ -126,7 +126,7 @@ closedir($rep);
 
 
 		
-fin_cadre_trait_couleur();
+echo fin_cadre_trait_couleur(true);
 
 
 }// fin fonction 

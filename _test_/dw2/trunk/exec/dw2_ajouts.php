@@ -71,13 +71,14 @@ foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
 // affichage page
 //
 
-debut_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
 echo "<a name='haut_page'></a><br />";
 
-gros_titre(_T('dw:titre_page_admin'));
+echo gros_titre(_T('dw:titre_page_admin'),'','',true);
 
 
-debut_gauche();
+echo debut_gauche('',true);
 
 	menu_administration_telech();
 	menu_voir_fiche_telech();
@@ -90,19 +91,20 @@ debut_gauche();
 	bloc_ico_page(_T('dw:acc_dw2_dd'), generer_url_ecrire("dw2_deloc"), _DIR_IMG_DW2."deloc.gif");
 
 
-creer_colonne_droite();
+echo creer_colonne_droite('',true);
 
 	// vers popup aide 
+	echo "<br />";
 	bloc_ico_aide_ligne();
 
 	// signature
 	echo "<br />";
-	debut_boite_info();
+	echo debut_boite_info(true);
 		echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-	fin_boite_info();
+	echo fin_boite_info(true);
 	echo "<br />";
 
-debut_droite();
+echo debut_droite('',true);
 
 	//
 	// onglets page ajouts global/catalogue images		
@@ -113,7 +115,7 @@ debut_droite();
 	fin_onglet();
 
 
-debut_cadre_relief("rien.gif");
+echo debut_cadre_relief("rien.gif",true);
 
 debut_band_titre($couleur_foncee, "verdana3", "bold");
 	echo _T('dw:txt_ajout_titre_page');
@@ -154,11 +156,12 @@ fin_bloc();
 	// on regarde les documents dans spip_documents
 	// qui ne sont pas des type 1, 2 ou 3 (jpg,png,gif) et pas encore dans spip_dw2_doc
 	if($mode_enregistre_doc=='manuel') {
-		$query="SELECT sd.id_document, sd.fichier ".
-				"FROM spip_documents sd LEFT JOIN spip_dw2_doc dw ON sd.id_document = dw.id_document ".
-				"WHERE sd.mode = 'document' AND sd.id_type > '3' AND dw.id_document IS NULL ORDER BY titre";
-		$result=spip_query($query);
-		$nbres=spip_num_rows($result);
+		$result=sql_select("sd.id_document, sd.fichier ",
+							"spip_documents sd LEFT JOIN spip_dw2_doc dw ON sd.id_document = dw.id_document ",
+							"sd.mode = 'document' AND sd.id_type > '3' AND dw.id_document IS NULL",
+							"", // group by
+							"titre"); // order by
+		$nbres=sql_count($result);
 	}
 	
 	if ($nbres==0) {
@@ -171,7 +174,7 @@ fin_bloc();
 		// formulaire ajouter un Document
 		// selecteur, bouton ajout_un, bouton ajouttout
 		$prep_ajoutout=array(); 
-		while ($row=spip_fetch_array($result)) {
+		while ($row=sql_fetch($result)) {
 			$iddoc=$row['id_document'];
 			$nomfichier = substr(strrchr($row['fichier'],'/'), 1);
 			
@@ -235,13 +238,13 @@ fin_bloc();
 		}
 	}
 	echo "</div><br />";
-fin_cadre_relief();
+echo fin_cadre_relief(true);
 
 
 //
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
 	echo "<div style='clear:both;'></div>";
 
-	fin_page();
+	echo fin_page();
 } // fin exec_
 ?>

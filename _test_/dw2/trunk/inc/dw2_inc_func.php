@@ -101,8 +101,8 @@ function prepa_appart_doc($doctype, $iddoctype)
 	$query="SELECT $sup_select titre, id_rubrique, statut  
 			FROM spip_".$doctype."s 
 			WHERE id_".$doctype." = $iddoctype";
-	$result=spip_query($query);
-	$row=spip_fetch_array($result);
+	$result=sql_query($query);
+	$row=sql_fetch($result);
 
 		$tt_doctype=supprimer_numero($row['titre']);
 		$id_rub=$row['id_rubrique'];
@@ -120,14 +120,14 @@ function prepa_appart_doc($doctype, $iddoctype)
 			}
 		
 		if($doctype=="article" || $doctype=="breve") {
-			$r_rub=spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rub");
-			$l_rub=spip_fetch_array($r_rub);
+			$r_rub=sql_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rub");
+			$l_rub=sql_fetch($r_rub);
 			$tt_rubrique=supprimer_numero($l_rub['titre']);
 			}
 		
 		if($id_sect!=$id_rub) {
-			$r_sect=spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_sect");
-			$l_sect=spip_fetch_array($r_sect);
+			$r_sect=sql_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_sect");
+			$l_sect=sql_fetch($r_sect);
 			$tt_secteur=supprimer_numero($l_sect['titre']);
 			}
 		else { $id_sect=''; }
@@ -213,16 +213,13 @@ function aff_appart_doc($doctype, $iddoctype) {
 //
 function liste_documents_art_rub($id_objet,$objet,$mode,$type) {
 	
-	$q=spip_query("SELECT sdo.id_document, sd.id_type, sd.titre, sd.descriptif, 
-					sd.fichier, sd.taille, sd.mode 
-					FROM spip_documents_".$objet."s sdo 
-					LEFT JOIN spip_documents sd ON sdo.id_document = sd.id_document 
-					WHERE sdo.id_".$objet." = $id_objet $type $mode
-					");
+	$q=sql_select("sdo.id_document, sd.id_type, sd.titre, sd.descriptif, sd.fichier, sd.taille, sd.mode",
+					"spip_documents_".$objet."s sdo LEFT JOIN spip_documents sd ON sdo.id_document = sd.id_document ",
+					"sdo.id_".$objet." = $id_objet $type $mode");
 	$ret_lesdocs=array();
-	while($r=spip_fetch_array($q)) {
+	while($r=sql_fetch($q)) {
 		// ? dans dw2 ?
-		$dw=spip_fetch_array(spip_query("SELECT id_document FROM spip_dw2_doc WHERE id_document=".$r['id_document']));
+		$dw=sql_fetch(sql_query("SELECT id_document FROM spip_dw2_doc WHERE id_document=".$r['id_document']));
 		$dw=$dw['id_document'];
 		
 		$id_doc=$r['id_document'];
@@ -230,7 +227,7 @@ function liste_documents_art_rub($id_objet,$objet,$mode,$type) {
 		$nomfichier = substr(strrchr($r['fichier'],'/'), 1);
 		
 		// {{ comment. de DEV. SPIP ==> ".. a supprimer avec spip_types_documents .."" }}
-		$extension = spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE id_type=".$r['id_type']));
+		$extension = sql_fetch(sql_query("SELECT extension FROM spip_types_documents WHERE id_type=".$r['id_type']));
 		$extension = $extension['extension'];
 		
 		$ret_lesdocs[$id_doc]['fichier']=$nomfichier;
@@ -293,8 +290,8 @@ function controle_size_doc($id,$url,$id_serveur,$heberge,$anc_taille) {
 		//prepa connexion serveur
 		$nomfichier = substr(strrchr($url,'/'), 1);
 		$query ="SELECT * FROM spip_dw2_serv_ftp WHERE id_serv='$id_serveur'";
-		$result= spip_query($query);
-		$row = spip_fetch_array($result);
+		$result= sql_query($query);
+		$row = sql_fetch($result);
 		$ftp_server = $row['serv_ftp'];				// ftp.machin.net
 		$port = $row['port'];
 		$ftp_user_name = $row['login'];	
@@ -316,7 +313,7 @@ function controle_size_doc($id,$url,$id_serveur,$heberge,$anc_taille) {
 		}
 	}
 	if ($taille!='0')
-		{ spip_query("UPDATE spip_documents SET taille='$taille' WHERE id_document='$id'"); }
+		{ sql_query("UPDATE spip_documents SET taille='$taille' WHERE id_document='$id'"); }
 	
 	return $a=array($taille,$anc_taille);
 }
@@ -339,8 +336,8 @@ function taille_octets ($taille) {
 //
 // total des Docs actifs
 function total_compteur_actif() {
-	$query=spip_query("SELECT SUM(total) AS tac FROM spip_dw2_doc WHERE statut='actif'");
-	$row=spip_fetch_array($query);
+	$query=sql_query("SELECT SUM(total) AS tac FROM spip_dw2_doc WHERE statut='actif'");
+	$row=sql_fetch($query);
 	return $row['tac'];
 }
 
@@ -348,8 +345,8 @@ function total_compteur_actif() {
 //
 // premiere date des stats (annee)+(Ymd) --> pour dates : selecteur annee
 function premiere_date_stats_dw2() {
-	$pd=spip_query("SELECT DATE_FORMAT(date,'%Y') as annee, DATE_FORMAT(date,'%Y-%m-%d') as debstat FROM spip_dw2_stats LIMIT 0,1");
-	$rd=spip_fetch_array($pd);
+	$pd=sql_query("SELECT DATE_FORMAT(date,'%Y') as annee, DATE_FORMAT(date,'%Y-%m-%d') as debstat FROM spip_dw2_stats LIMIT 0,1");
+	$rd=sql_fetch($pd);
 	if(!$annee_stats = $rd['annee']) { $annee_stats=date('Y'); $debut_stats = date('Y-m-d'); }
 	else { $debut_stats = $rd['debstat']; }
 	return array($annee_stats,$debut_stats);	

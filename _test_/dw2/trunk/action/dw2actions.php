@@ -45,7 +45,7 @@ function action_dw2actions_supprimefiche($arg) {
 	global $redirect;
 	$arg = intval($arg);
 	
-	spip_query("DELETE FROM spip_dw2_doc WHERE id_document=$arg");
+	sql_query("DELETE FROM spip_dw2_doc WHERE id_document=$arg");
 	
 	redirige_par_entete(rawurldecode($redirect));
 }
@@ -59,7 +59,7 @@ function action_dw2actions_modifierfiche($arg) {
 	
 	// On controle que le champ "nom" pas vide
 	if (!empty ($n_nom)) {
-		spip_query("UPDATE spip_dw2_doc SET categorie='$n_categorie', nom='$n_nom', total='$n_total' WHERE id_document=$arg");
+		sql_query("UPDATE spip_dw2_doc SET categorie='$n_categorie', nom='$n_nom', total='$n_total' WHERE id_document=$arg");
 	}
 	redirige_par_entete(rawurldecode($redirect));
 }
@@ -71,9 +71,9 @@ function action_dw2actions_deplacerdocument($arg) {
 	global $new_doctype, $new_iddoctype, $anc_doctype;
 	$arg = intval($arg); // id_document
 	if(isset($new_iddoctype)) {
-		spip_query("UPDATE spip_dw2_doc SET doctype='$new_doctype', id_doctype='$new_iddoctype' WHERE id_document='$arg'");
-		spip_query("DELETE FROM spip_documents_".$anc_doctype."s WHERE id_document='$arg'");
-		spip_query("INSERT INTO spip_documents_".$new_doctype."s (id_document, id_$new_doctype) VALUES ('$arg','$new_iddoctype')");
+		sql_query("UPDATE spip_dw2_doc SET doctype='$new_doctype', id_doctype='$new_iddoctype' WHERE id_document='$arg'");
+		sql_query("DELETE FROM spip_documents_".$anc_doctype."s WHERE id_document='$arg'");
+		sql_query("INSERT INTO spip_documents_".$new_doctype."s (id_document, id_$new_doctype) VALUES ('$arg','$new_iddoctype')");
 	}
 	redirige_par_entete(rawurldecode($redirect));
 }
@@ -90,7 +90,7 @@ function action_dw2actions_majtitredocument($arg) {
 	$titre_document = addslashes(corriger_caracteres($titre_document));
 	$descriptif_document = addslashes(corriger_caracteres($descriptif_document));
 	
-	spip_query("UPDATE spip_documents SET titre='$titre_document', descriptif='$descriptif_document' WHERE id_document='$arg'");
+	sql_query("UPDATE spip_documents SET titre='$titre_document', descriptif='$descriptif_document' WHERE id_document='$arg'");
 	
 	redirige_par_entete(rawurldecode($redirect));
 }
@@ -103,7 +103,7 @@ function action_dw2actions_modifiercategorie($arg) {
 	
 	// On controle que nouv_categ (nouveau nom categorie) ne soit pas vide
 	if (!empty ($nouv_categ)) {
-		spip_query("UPDATE spip_dw2_doc SET categorie='".$nouv_categ."' WHERE categorie='".$arg."'");
+		sql_query("UPDATE spip_dw2_doc SET categorie='".$nouv_categ."' WHERE categorie='".$arg."'");
 	}
 	redirige_par_entete(rawurldecode($redirect));
 }
@@ -127,11 +127,11 @@ function action_dw2actions_changerstatut($arg) {
 	// vient dw2_modif (var) ou ci-dessus (tableau)
 	if(is_array($chg_statut_doc)) {
 		foreach($chg_statut_doc as $k) {
-			spip_query("UPDATE spip_dw2_doc SET statut='".$arg."' WHERE id_document=$k");
+			sql_query("UPDATE spip_dw2_doc SET statut='".$arg."' WHERE id_document=$k");
 		}
 	}
 	else {
-		spip_query("UPDATE spip_dw2_doc SET statut='".$arg."' WHERE id_document=$chg_statut_doc");
+		sql_query("UPDATE spip_dw2_doc SET statut='".$arg."' WHERE id_document=$chg_statut_doc");
 	}
 	
 	redirige_par_entete(rawurldecode($redirect));
@@ -144,7 +144,7 @@ function action_dw2actions_modifierintitule($arg) {
 	global $designe;
 	$arg = intval($arg); // id_serv
 	if($designe!='') {
-		spip_query("UPDATE spip_dw2_serv_ftp SET designe='$designe' WHERE id_serv=$arg");
+		sql_query("UPDATE spip_dw2_serv_ftp SET designe='$designe' WHERE id_serv=$arg");
 	}
 	redirige_par_entete(rawurldecode($redirect));
 }
@@ -157,7 +157,7 @@ function action_dw2actions_effaceserveur($arg) {
 
 	$arg = intval($arg);
 	#$redirect = generer_url_ecrire("dw2_deloc");
-	spip_query("DELETE FROM spip_dw2_serv_ftp WHERE id_serv=$arg");
+	sql_query("DELETE FROM spip_dw2_serv_ftp WHERE id_serv=$arg");
 
 	redirige_par_entete(rawurldecode($redirect));
 }
@@ -177,12 +177,12 @@ function action_dw2actions_inclusdocserveur($arg) {
 	// insert dans spip_documents
 	$req = "INSERT INTO spip_documents (id_vignette, id_type, date, fichier, taille, mode) ".
 			"VALUES ('0', '$id_type', NOW(), '$lien_fichier', '$taille', 'document')";
-	$result = spip_query($req);
-	$id_document = spip_insert_id();
+	$result = sql_query($req);
+	$id_document = mysql_insert_id();
 	
 	// prim insert dans spip_dw2_doc
 	$url = "/".$repert_dest.$fichier;
-	spip_query("INSERT INTO spip_dw2_doc (id_document, nom, url, date_crea, heberge, id_serveur) ".
+	sql_query("INSERT INTO spip_dw2_doc (id_document, nom, url, date_crea, heberge, id_serveur) ".
 			"VALUES ('$id_document', '$fichier', '$url', NOW(), '$sitedist', '$id_serv')");
 		
 	redirige_par_entete(rawurldecode($redirect."&id_document=".$id_document."&id_serv=".$id_serv));
@@ -212,19 +212,19 @@ function action_dw2actions_docserveurlier($arg) {
 	include_spip('inc/filtres');
 	$trt_doc = addslashes(corriger_caracteres($trt_doc));
 	$descrip_doc = addslashes(corriger_caracteres($descrip_doc));
-	spip_query ("UPDATE spip_documents SET titre='$trt_doc', descriptif='$descrip_doc' WHERE id_document=$arg");
+	sql_query ("UPDATE spip_documents SET titre='$trt_doc', descriptif='$descrip_doc' WHERE id_document=$arg");
 
 
 	if($proposition=='') {
 		// lier doc à la rubrique dans spip
-		spip_query("INSERT INTO spip_documents_rubriques (id_document, id_rubrique) ".
+		sql_query("INSERT INTO spip_documents_rubriques (id_document, id_rubrique) ".
 				"VALUES ('$arg', '$id_rub')");
 		$doctype='rubrique';
 		$id_doctype=$id_rub;
 
 	}
 	else {
-		spip_query("INSERT INTO spip_documents_articles(id_document, id_article) ".
+		sql_query("INSERT INTO spip_documents_articles(id_document, id_article) ".
 				"VALUES ('$arg', '$proposition')");
 		$doctype='article';
 		$id_doctype=$proposition;
@@ -233,14 +233,14 @@ function action_dw2actions_docserveurlier($arg) {
 	
 	// secteur ou rubrique
 		$query="SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rub";
-		$row=spip_fetch_array(spip_query($query));
+		$row=sql_fetch(sql_query($query));
 		if($row['id_secteur']!=$id_rub) { $id_sect = $row['id_secteur']; }
 		
 	// update final de spip_dw2_doc
 		if ($type_categorie=="secteur")
 			{ $class_cat=$id_sect; }
 		else { $class_cat=$id_rub; }
-		spip_query ("UPDATE spip_dw2_doc SET doctype='$doctype', id_doctype='$id_doctype', ".
+		sql_query ("UPDATE spip_dw2_doc SET doctype='$doctype', id_doctype='$id_doctype', ".
 					"categorie='".select_categorie_doc($class_cat)."' ".
 					"WHERE id_document=$arg");
 	
@@ -256,10 +256,10 @@ function action_dw2actions_annuledocserveur($arg) {
 	
 	$arg = intval($arg); // arg -> id_document
 	
-	spip_query("DELETE FROM spip_dw2_doc WHERE id_document=$arg");
-	spip_query("DELETE FROM spip_documents WHERE id_document=$arg");
-	spip_query("DELETE FROM spip_documents_articles WHERE id_document=$arg");
-	spip_query("DELETE FROM spip_documents_rubriques WHERE id_document=$arg");
+	sql_query("DELETE FROM spip_dw2_doc WHERE id_document=$arg");
+	sql_query("DELETE FROM spip_documents WHERE id_document=$arg");
+	sql_query("DELETE FROM spip_documents_articles WHERE id_document=$arg");
+	sql_query("DELETE FROM spip_documents_rubriques WHERE id_document=$arg");
 	
 	redirige_par_entete(rawurldecode($redirect));
 }
@@ -274,14 +274,14 @@ function action_dw2actions_changerassociation($arg) {
 	
 	// recup de l'ancienne url du fichier
 	if ($erazfichier=='oui') { 
-		$query = spip_query("SELECT url FROM spip_dw2_doc WHERE id_document=$arg");
-		$row = spip_fetch_array($query);
+		$query = sql_query("SELECT url FROM spip_dw2_doc WHERE id_document=$arg");
+		$row = sql_fetch($query);
 		$anc_url = $row['url'];
 	}
 	
 	// update de ces champs !
 	$nomfichier = substr(strrchr($url,'/'), 1);
-	spip_query("UPDATE spip_dw2_doc SET heberge='$heberge', url='$url', id_serveur='$id_serveur' 
+	sql_query("UPDATE spip_dw2_doc SET heberge='$heberge', url='$url', id_serveur='$id_serveur' 
 				WHERE id_document='$arg'");
 	
 	// supprimer le fichier local
@@ -336,12 +336,12 @@ function action_dw2actions_serveredit($arg) {
 	if($faire_insert) {
 		$query = "INSERT INTO spip_dw2_serv_ftp (serv_ftp, host_dir, port, login, mot_passe, site_distant, chemin_distant, date_crea) ".
 				"VALUES ('$serv_ftp', '$host_dir', '$port', '$login', '$mot_passe', '$site_distant', '$chemin_distant', NOW())";
-		$result = spip_query($query);
-		$id_serv = spip_insert_id();
-		spip_query("UPDATE spip_dw2_serv_ftp SET designe='"._T('dw:serveur')." - $id_serv' WHERE id_serv=$id_serv");
+		$result = sql_query($query);
+		$id_serv = mysql_insert_id();
+		sql_query("UPDATE spip_dw2_serv_ftp SET designe='"._T('dw:serveur')." - $id_serv' WHERE id_serv=$id_serv");
 	}
 	elseif($maj) {
-		spip_query("UPDATE spip_dw2_serv_ftp 
+		sql_query("UPDATE spip_dw2_serv_ftp 
 					SET serv_ftp='$serv_ftp', host_dir='$host_dir', port='$port', login='$login', 
 					mot_passe='$mot_passe', site_distant='$site_distant', chemin_distant='$chemin_distant' 
 					WHERE id_serv=$id_serv");
@@ -373,27 +373,27 @@ function action_dw2actions_restrictgen($arg) {
 	$restreint = intval($restreint);
 	
 	if($type=='racine') {
-		$q=spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent='0'");
-		while($r=spip_fetch_array($q)) {
+		$q=sql_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent='0'");
+		while($r=sql_fetch($q)) {
 			$idr=$r['id_rubrique'];
-			$ex=spip_query("SELECT id FROM spip_dw2_acces_restreint WHERE id_rubrique=$idr");
+			$ex=sql_query("SELECT id FROM spip_dw2_acces_restreint WHERE id_rubrique=$idr");
 			// déjà une ligne ?
-			if($s=spip_num_rows($ex)) {
-				spip_query("UPDATE spip_dw2_acces_restreint SET restreint='$restreint' WHERE id_rubrique=$idr");
+			if($s=sql_count($ex)) {
+				sql_query("UPDATE spip_dw2_acces_restreint SET restreint='$restreint' WHERE id_rubrique=$idr");
 			}
 			else {
-				spip_query("INSERT INTO spip_dw2_acces_restreint (id_rubrique, restreint) VALUES ('$idr','$restreint')");
+				sql_query("INSERT INTO spip_dw2_acces_restreint (id_rubrique, restreint) VALUES ('$idr','$restreint')");
 			}
 		}
 	}
 	else {
-		$q=spip_query("SELECT id FROM spip_dw2_acces_restreint WHERE id_$type=$arg");
+		$q=sql_query("SELECT id FROM spip_dw2_acces_restreint WHERE id_$type=$arg");
 		// déjà une ligne ?
-		if($s=spip_num_rows($q)) {
-			spip_query("UPDATE spip_dw2_acces_restreint SET restreint='$restreint' WHERE id_$type=$arg");
+		if($s=sql_count($q)) {
+			sql_query("UPDATE spip_dw2_acces_restreint SET restreint='$restreint' WHERE id_$type=$arg");
 		}
 		else {
-			spip_query("INSERT INTO spip_dw2_acces_restreint (id_$type, restreint) VALUES ('$arg','$restreint')");
+			sql_query("INSERT INTO spip_dw2_acces_restreint (id_$type, restreint) VALUES ('$arg','$restreint')");
 		}
 	}
 	redirige_par_entete(rawurldecode($redirect));
@@ -408,7 +408,7 @@ function action_dw2actions_menageracine($arg) {
 	$tbl = explode(',',$tbl_racine);
 
 	foreach($tbl as $id) {
-		spip_query("DELETE FROM spip_dw2_acces_restreint WHERE id_rubrique=".$id);
+		sql_query("DELETE FROM spip_dw2_acces_restreint WHERE id_rubrique=".$id);
 	}
 	redirige_par_entete(rawurldecode($redirect));
 }
@@ -423,7 +423,7 @@ function action_dw2actions_netcat($arg) {
 	# arg : ne vaut rien ;-) ==>'rien'
 	$date=$annee."-".$mois."-".$jour." ".$heure.":".$minute.":00";
 	if($choixselect=='date') {
-		spip_query("DELETE FROM spip_dw2_doc 
+		sql_query("DELETE FROM spip_dw2_doc 
 					WHERE date_crea BETWEEN '$date' AND NOW()
 				");
 	}

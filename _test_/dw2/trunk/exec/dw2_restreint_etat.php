@@ -50,8 +50,8 @@ foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
 //
 
 // recup des id_rub racine
-$q=spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent='0'");
-while($r=spip_fetch_array($q)) {
+$q=sql_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent='0'");
+while($r=sql_fetch($q)) {
 	$tbl_idrub_racine[] = $r['id_rubrique'];
 }
 
@@ -60,13 +60,13 @@ $tbl_collect_racine=array();
 $tbl_idr=array();
 $tbl_ida=array();
 
-$sq=spip_query("SELECT * FROM spip_dw2_acces_restreint");
+$sq=sql_query("SELECT * FROM spip_dw2_acces_restreint");
 
-while($rsq=spip_fetch_array($sq)) {
+while($rsq=sql_fetch($sq)) {
 	// lister rubriques
 	if($rsq['id_rubrique']!='0') {
-		$rt=spip_query("SELECT titre, id_parent FROM spip_rubriques WHERE id_rubrique='".$rsq['id_rubrique']."'");
-		$rl=spip_fetch_array($rt);
+		$rt=sql_query("SELECT titre, id_parent FROM spip_rubriques WHERE id_rubrique='".$rsq['id_rubrique']."'");
+		$rl=sql_fetch($rt);
 		$tbl_idr[$rsq['id_rubrique']]['res']=$rsq['restreint'];
 		$tbl_idr[$rsq['id_rubrique']]['titre']=$rl['titre'];
 		$tbl_idr[$rsq['id_rubrique']]['parent']=$rl['id_parent'];
@@ -76,8 +76,8 @@ while($rsq=spip_fetch_array($sq)) {
 	}
 	// lister articles
 	if($rsq['id_article']!='0') {
-		$rt=spip_query("SELECT titre FROM spip_articles WHERE id_article='".$rsq['id_article']."'");
-		$rl=spip_fetch_array($rt);
+		$rt=sql_query("SELECT titre FROM spip_articles WHERE id_article='".$rsq['id_article']."'");
+		$rl=sql_fetch($rt);
 		$tbl_ida[$rsq['id_article']]['res']=$rsq['restreint'];
 		$tbl_ida[$rsq['id_article']]['titre']=$rl['titre'];
 	}
@@ -96,13 +96,14 @@ $nb_ida=count($tbl_ida);
 // affichage page
 //
 
-debut_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+
 echo "<a name='haut_page'></a><br />";
 
-gros_titre(_T('dw:titre_page_admin'));
+echo gros_titre(_T('dw:titre_page_admin'),'','',true);
 
-
-debut_gauche();
+echo debut_gauche('',true);
 
 	menu_administration_telech();
 	menu_voir_fiche_telech();
@@ -114,20 +115,20 @@ debut_gauche();
 	// module delocaliser
 	bloc_ico_page(_T('dw:acc_dw2_dd'), generer_url_ecrire("dw2_deloc"), _DIR_IMG_DW2."deloc.gif");
 
-
-creer_colonne_droite();
+echo creer_colonne_droite('',true);
 
 	// vers popup aide 
+	echo "<br />\n";
 	bloc_ico_aide_ligne();
 
 	// signature
-	echo "<br />";
-	debut_boite_info();
+	echo "<br />\n";
+	echo debut_boite_info(true);
 		echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-	fin_boite_info();
-	echo "<br />";
+	echo fin_boite_info(true);
+	echo "<br />\n";
 
-debut_droite();
+echo debut_droite(true);
 
 	//
 	// onglets 		
@@ -135,7 +136,7 @@ debut_droite();
 		onglet(_T('dw:rest_page_hierarchie'), generer_url_ecrire("dw2_restreint"), 'page_res', '', "racine-site-24.gif").
 		onglet(_T('dw:rest_page_table'), generer_url_ecrire("dw2_restreint_etat"), 'page_resetat', 'page_resetat', _DIR_IMG_DW2."catalogue.gif").
 	fin_onglet();
-	echo "<br />";
+	echo "<br />\n";
 
 
 // faire menage dans table acces_restreint : 
@@ -147,36 +148,36 @@ debut_droite();
 	if(count(array_intersect($tbl_collect_racine, $tbl_idrub_racine)) == $nbr_secteurs) {
 		$exp_tbl=implode(',',$tbl_idrub_racine);
 
-		debut_cadre_relief("");
+		echo debut_cadre_relief("",true);
 		echo _T('dw:rest_tous_secteur_0');
-		echo "<br />";
+		echo "<br />\n";
 		echo "<form action='".generer_url_action("dw2actions", "arg=menageracine-".$nbr_secteurs)."' method='post' class='arial2'>\n";
 		echo "<input type='hidden' name='redirect' value='".generer_url_ecrire("dw2_restreint_etat")."' />\n";
-		echo "<input type='hidden' name='hash' value='".calculer_action_auteur("dw2actions-menageracine-".$nbr_secteurs)."' />";
-		echo "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />";
-		echo "<input type='hidden' name='tbl_racine' value='".$exp_tbl."' />";
+		echo "<input type='hidden' name='hash' value='".calculer_action_auteur("dw2actions-menageracine-".$nbr_secteurs)."' />\n";
+		echo "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />\n";
+		echo "<input type='hidden' name='tbl_racine' value='".$exp_tbl."' />\n";
 			
 		echo "<div class='bloc_bouton_r'><input type=submit value="._T('dw:validez')." class='fondo' /></div>\n";
 		echo "</form>\n";
-		fin_cadre_relief();
+		echo fin_cadre_relief(true);
 	}
 
 
-debut_cadre_relief(_DIR_IMG_DW2."restreint-24.gif");
+echo debut_cadre_relief(_DIR_IMG_DW2."restreint-24.gif",true);
 
 
 	echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>\n";
-	echo "<tr><th colspan='3' class='verdana3'>"._T('dw:rest_etat_table_restrict')."</th></tr>";
+	echo "<tr><th colspan='3' class='verdana3'>"._T('dw:rest_etat_table_restrict')."</th></tr>\n";
 	
 	// affiche ligne rubrique
 	if($nb_idr>0) {
 		ksort($tbl_idr);
 		foreach($tbl_idr as $k => $v) {
 			if($v['parent']=='0') {
-				$aff_icone = "<img src='"._DIR_IMG_PACK."secteur-12.gif' border='0' valign='absmiddle'>&nbsp;";
+				$aff_icone = "<img src='"._DIR_IMG_PACK."secteur-12.gif' border='0' valign='absmiddle' alt='' />&nbsp;\n";
 			}
 			else {
-				$aff_icone = "<img src='"._DIR_IMG_PACK."rubrique-12.gif' border='0' valign='absmiddle'>&nbsp;";
+				$aff_icone = "<img src='"._DIR_IMG_PACK."rubrique-12.gif' border='0' valign='absmiddle' alt='' />&nbsp;\n";
 			}
 			echo "<tr class='tr_liste verdana2'>\n";
 			echo "<td width='7%'><div align='right'>".$k."</div></td>\n";
@@ -198,7 +199,7 @@ debut_cadre_relief(_DIR_IMG_DW2."restreint-24.gif");
 			echo "<td><a href='".
 				generer_url_ecrire("dw2_restreint", "id_art=".$k).
 				"'>".
-				"<img src='"._DIR_IMG_PACK."article-24.gif' border='0' width='12'  height='12' valign='absmiddle'>&nbsp;".
+				"<img src='"._DIR_IMG_PACK."article-24.gif' border='0' width='12'  height='12' valign='absmiddle' alt='' />&nbsp;\n".
 				typo($v['titre']).
 				"</a></td>\n";
 			echo "<td width='7%'><div align='center'>".icone_niveau_restreint($v['res'])."</div></td>\n";
@@ -208,14 +209,12 @@ debut_cadre_relief(_DIR_IMG_DW2."restreint-24.gif");
 
 	echo "</table>\n";
 
-fin_cadre_relief();
-
-
+echo fin_cadre_relief(true);
 
 //
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
-	echo "<div style='clear:both;'></div>";
+	echo "<div style='clear:both;'></div>\n";
 
-	fin_page();
+	echo fin_page();
 } // fin exec
 ?>

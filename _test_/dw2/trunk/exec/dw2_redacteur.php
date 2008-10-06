@@ -27,20 +27,20 @@ function exec_dw2_redacteur() {
 //
 // prepa 
 //
-	$res=spip_query("SELECT saa.id_article, sa.titre 
+	$res=sql_query("SELECT saa.id_article, sa.titre 
 					FROM spip_auteurs_articles saa, spip_articles sa 
 					WHERE saa.id_auteur=$connect_id_auteur AND saa.id_article=sa.id_article 
 					AND sa.statut='publie'");
 					
 	$tab=array();
 	
-	while($row=spip_fetch_array($res)) {
+	while($row=sql_fetch($res)) {
 		$id_art = $row['id_article'];
 		
-		$rdoc=spip_query("SELECT id_document, url, total, DATE_FORMAT(dateur,'%d/%m/%Y - %H:%i') AS datetel 
+		$rdoc=sql_query("SELECT id_document, url, total, DATE_FORMAT(dateur,'%d/%m/%Y - %H:%i') AS datetel 
 							FROM spip_dw2_doc WHERE id_doctype=$id_art AND doctype='article'");
 		$i=0;
-		while ($ldoc=spip_fetch_array($rdoc)) {
+		while ($ldoc=sql_fetch($rdoc)) {
 			$nomfichier = substr(strrchr($ldoc['url'],'/'), 1);
 			$dateur = $ldoc['datetel'];
 			$total = $ldoc['total'];
@@ -58,17 +58,19 @@ function exec_dw2_redacteur() {
 // affichage 
 //
 
-	debut_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+
 	echo "<a name='haut_page'></a><br />";
 	
-	gros_titre(_T('dw:titre_page_admin'));
+	echo gros_titre(_T('dw:titre_page_admin'),'','',true);
 	
-	debut_gauche();
+	echo debut_gauche('',true);
 	
-	debut_droite();
+	echo debut_droite('',true);
 
 
-	debut_cadre_trait_couleur(_DIR_IMG_PACK."doc-24.gif", false, "", _T('dw:vos_doc'));
+	echo debut_cadre_trait_couleur(_DIR_IMG_PACK."doc-24.gif", true, "", _T('dw:vos_doc'));
 	
 	// entete table
 	echo "<table align='center' cellpadding='2' cellspacing='1' border='0' width='100%'>\n";
@@ -77,7 +79,7 @@ function exec_dw2_redacteur() {
 	echo "<td width='56%'>"._T('fichier')."</td>\n".
 		"<td width='12%'><div align='center'>"._T('compteur')."</div></td>\n".
 		"<td width='29%'><div align='center'>"._T('dw:dernier_telech')."</div></td>\n";
-	echo "</tr>";
+	echo "</tr>\n";
 	
 	// article(s)
 	foreach($tab as $k => $v) {
@@ -97,19 +99,19 @@ function exec_dw2_redacteur() {
 			echo "<td><div class='verdana2'>".$y[0]."</div></td>\n"; //nomfichier
 			echo "<td><div align='center' class='arial2'><b>".$y[1]."</b></div></td>\n"; //total
 			echo "<td><div align='center' class='verdana2'>".$y[2]."</div></td>\n"; //dateur
-			echo "</tr>";
+			echo "</tr>\n";
 		}
 	}
 	echo "</table><br />\n";	
 
-	fin_cadre_trait_couleur();
+	echo fin_cadre_trait_couleur(true);
 
 
 
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
-	echo "<div style='clear:both;'></div>";
+	echo "<div style='clear:both;'></div>\n";
 
-	fin_page();
+	echo fin_page();
 
 }
 ?>

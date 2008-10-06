@@ -147,8 +147,8 @@ function balise_ID_CONT_DOC($p) {
 
 // balise TITRE du cont. : titre article...
 function generer_tt_cont_doc($cont_type,$cont_id) {
-	$query=spip_query("SELECT titre FROM spip_".$cont_type."s WHERE id_".$cont_type." = $cont_id");
-	$row=spip_fetch_array($query);
+	$query=sql_query("SELECT titre FROM spip_".$cont_type."s WHERE id_".$cont_type." = $cont_id");
+	$row=sql_fetch($query);
 	$titre=supprimer_numero($row['titre']);
 	return $titre;
 }
@@ -179,8 +179,8 @@ function balise_URL_CONT_DOC($p) {
 
 // balise total des téléchargements du site
 function generer_total_compteur_actif() {
-	$query=spip_query("SELECT SUM(total) AS tac FROM spip_dw2_doc WHERE statut='actif'");
-	$row=spip_fetch_array($query);
+	$query=sql_query("SELECT SUM(total) AS tac FROM spip_dw2_doc WHERE statut='actif'");
+	$row=sql_fetch($query);
 	return $row['tac'];
 }
 function balise_TOTAL_DOC_SITE($p) {
@@ -270,7 +270,5 @@ $_id_objet = champ_sql('id_document', $p);
 $p->interdire_scripts = false;
 return $p;
 }
-
-
 
 ?>

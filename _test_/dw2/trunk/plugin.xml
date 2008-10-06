@@ -1,13 +1,13 @@
 <plugin>
-	<nom>DW2</nom>
+	<nom>DW2 pour SPIP 2.0</nom>
 	<auteur>scoty@koakidi.com</auteur>
-	<version>2.15</version>
+	<version>3.01</version>
 	<etat>test</etat>
 	<description>
 		<multi>
-		[fr] Gestion et suivi des documents propos&eacute;s en t&eacute;l&eacute;chargement sur ce site.
 		[en] Keep track of the documents available on this site.
 		[es] Gesti&oacute;n y seguimiento de los documentos propuestos para descarga desde el sitio.
+		[fr] Gestion et suivi des documents propos&eacute;s en t&eacute;l&eacute;chargement sur ce site.
 		</multi>
 	</description>
 	<options>dw2_mesoptions.php</options>

@@ -56,8 +56,8 @@ $id_serv=intval($id_serv);
 //
 // le serveur
 //
-$qs = spip_query("SELECT * FROM spip_dw2_serv_ftp WHERE id_serv=$id_serv");
-$row = spip_fetch_array($qs);
+$qs = sql_query("SELECT * FROM spip_dw2_serv_ftp WHERE id_serv=$id_serv");
+$row = sql_fetch($qs);
 	$ftp_server = $row['serv_ftp'];				// ftp.machin.net
 	$port = $row['port'];
 	$ftp_user_name = $row['login'];
@@ -75,8 +75,8 @@ $row = spip_fetch_array($qs);
 if($exporterdoc=='oui' && isset($id_de)) {
 	// infos fichier a exporter
 	$qdoc = "SELECT url FROM spip_dw2_doc WHERE id_document = $id_de";
-	$rdoc = spip_query($qdoc);
-	$ldoc = spip_fetch_array($rdoc);
+	$rdoc = sql_query($qdoc);
+	$ldoc = sql_fetch($rdoc);
 		$url = $ldoc['url'];						// -> (dw2) /IMG/zip/monfichier.zip
 		$fichier = substr(strrchr($url,'/'), 1);	// -> monfichier.zip
 		$chemin_loc = "..".$url;
@@ -97,7 +97,7 @@ if($exporterdoc=='oui' && isset($id_de)) {
 			unlink($chemin_loc);
 			//on met à jour dw2_doc
 			$new_url_dw = "/".$repert_distant.$fichier;
-			spip_query("UPDATE spip_dw2_doc SET id_serveur = '$id_serv', heberge = '$site_distant', ".
+			sql_query("UPDATE spip_dw2_doc SET id_serveur = '$id_serv', heberge = '$site_distant', ".
 						"url = '$new_url_dw' WHERE id_document='$id_de'");
 		}
 		else {
@@ -117,15 +117,15 @@ $dl=($vl+0);
 
 
 //Nbr Total de Doc exportables
-$rqndoc=spip_query("SELECT SUBSTRING_INDEX(url, '/', -1) AS fichier, id_document 
+$rqndoc=sql_query("SELECT SUBSTRING_INDEX(url, '/', -1) AS fichier, id_document 
 					FROM spip_dw2_doc 
 					WHERE heberge='local' AND statut='actif' ORDER BY nom");
-$nligne=spip_num_rows($rqndoc);
+$nligne=sql_count($rqndoc);
 	
 	
 // prepa toutdeplier toutreplier + tableau des prem lettres
 $gen_ltt = array();
-while ($row_dep=spip_fetch_array($rqndoc)) {
+while ($row_dep=sql_fetch($rqndoc)) {
 	$iddoc=$row_dep['id_document'];
 	$les_docs[] = "bout$iddoc";
 	$nom_block = "bout$iddoc";
@@ -169,26 +169,29 @@ if (isset($wltt)) {
 //
 // requete principale du catalogue
 //
-$quer="SELECT d.id_document, DATE_FORMAT(d.date_crea,'%d/%m/%Y') AS datecrea, ".
-		"SUBSTRING_INDEX(d.url, '/', -1) AS fichier, d.url, s.taille ".
-		"FROM spip_dw2_doc AS d LEFT JOIN spip_documents AS s ON d.id_document=s.id_document ".
-		"WHERE d.heberge = 'local' AND d.statut='actif' ".$where_ltt." ".
-		"ORDER BY $orderby LIMIT $dl,$nbr_lignes_tableau";
+$result=sql_select("d.id_document, DATE_FORMAT(d.date_crea,'%d/%m/%Y') AS datecrea,
+		SUBSTRING_INDEX(d.url, '/', -1) AS fichier, d.url, s.taille",
+		"spip_dw2_doc AS d LEFT JOIN spip_documents AS s ON d.id_document=s.id_document ",
+		"d.heberge = 'local' AND d.statut='actif' ".$where_ltt,
+		"",
+		$orderby,
+		"$dl,$nbr_lignes_tableau");
 		
-$result=spip_query($quer);
-$nbliens=spip_num_rows($result);
+$nbliens=sql_count($result);
 
 
 //
 // affichage
 //
 
-debut_page(_T('dw:titre_page_deloc'), "suivi", "dw2_deloc");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:titre_page_deloc'), "suivi", "dw2_deloc");
+
 	echo "<a name='haut_page'></a><br />";
-gros_titre(_T('dw:titre_page_deloc'));
+echo gros_titre(_T('dw:titre_page_deloc'),'','',true);
 
 
-debut_gauche();
+echo debut_gauche('',true);
 	// fonctions principales dw_deloc.php
 	menu_administration_deloc();
 	
@@ -201,26 +204,27 @@ debut_gauche();
 	
 	// Def. module doc deloc
 	echo "<br />";
-	debut_boite_info();
+	echo debut_boite_info(true);
 		echo "<span class='verdana2'>"._T('dw:txt_dd_intro_gauche')."</span><br />";
-	fin_boite_info();
+	echo fin_boite_info(true);
 	
-creer_colonne_droite();
+echo creer_colonne_droite("",true);
 
 	// vers popup aide 
+	echo "<br />\n";
 	bloc_ico_aide_ligne();
 
 	// signature
-	echo "<br />";
-	debut_boite_info();
+	echo "<br />\n";
+	echo debut_boite_info(true);
 		echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-	fin_boite_info();
+	echo fin_boite_info(true);
 	echo "<br />";
 
-debut_droite();
+echo debut_droite('',true);
 
 
-debut_cadre_relief(_DIR_IMG_DW2."export-24.gif");
+echo debut_cadre_relief(_DIR_IMG_DW2."export-24.gif");
 
 // titre
 debut_band_titre($couleur_foncee, "verdana3", "center");
@@ -313,7 +317,7 @@ if ($nbliens==0) {
 	echo "</td></tr>";
 
 
-	while ($a_row=spip_fetch_array($result))
+	while ($a_row=sql_fetch($result))
 		{
 		$ifond = $ifond ^ 1;
 		$couleur = ($ifond) ? '#FFFFFF' : $couleur_claire;
@@ -357,13 +361,13 @@ if ($nbliens==0) {
 		}
 	echo "</table>";
 }
-fin_cadre_relief();
+echo fin_cadre_relief(true);
 
 
 //
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
 	echo "<div style='clear:both;'></div>";
 
-	fin_page();
+	echo fin_page();
 } // fin exec_
 ?>

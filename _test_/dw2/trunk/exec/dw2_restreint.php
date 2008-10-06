@@ -56,13 +56,15 @@ foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
 // affichage page
 //
 
-debut_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+
 echo "<a name='haut_page'></a><br />";
 
-gros_titre(_T('dw:titre_page_admin'));
+echo gros_titre(_T('dw:titre_page_admin'),'','',true);
 
 
-debut_gauche();
+echo debut_gauche('',true);
 
 	menu_administration_telech();
 	menu_voir_fiche_telech();
@@ -75,19 +77,20 @@ debut_gauche();
 	bloc_ico_page(_T('dw:acc_dw2_dd'), generer_url_ecrire("dw2_deloc"), _DIR_IMG_DW2."deloc.gif");
 
 
-creer_colonne_droite();
+echo creer_colonne_droite('',true);
 
 	// vers popup aide 
+	echo "<br />\n";
 	bloc_ico_aide_ligne();
 
 	// signature
-	echo "<br />";
-	debut_boite_info();
+	echo "<br />\n";
+	echo debut_boite_info(true);
 		echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-	fin_boite_info();
-	echo "<br />";
+	echo fin_boite_info(true);
+	echo "<br />\n";
 
-debut_droite();
+echo debut_droite('',true);
 
 	//
 	// onglets 		
@@ -95,7 +98,7 @@ debut_droite();
 		onglet(_T('dw:rest_page_hierarchie'), generer_url_ecrire("dw2_restreint"), 'page_res', 'page_res', "racine-site-24.gif").
 		onglet(_T('dw:rest_page_table'), generer_url_ecrire("dw2_restreint_etat"), 'page_resetat', '', _DIR_IMG_DW2."catalogue.gif").
 	fin_onglet();
-	echo "<br />";
+	echo "<br />\n";
 
 // petit commentaire si ...
 // ## pas tres utile puisqu'on affiche pas le bouton du menu si pas "restreint"
@@ -103,7 +106,7 @@ if($GLOBALS['dw2_param']['mode_restreint']=='non') {
 	debut_band_titre('#E8C8C8');
 	echo _L('La restriction de téléchargement n\'est pas opérationnelle !<br />
 			(voir page "Configuration").<br />
-			Toutes les modifications apportés ici seront enregistrées dans la table de restriction
+			Toutes les modifications apportées ici seront enregistrées dans la table de restriction
 			mais non appliquées !');
 	fin_bloc();
 }
@@ -122,13 +125,13 @@ if(!$id_art) {
 	afficher_articles_enfants($id_rub);
 	
 }
-echo "<br />";
+echo "<br />\n";
 
 
 //
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
-	echo "<div style='clear:both;'></div>";
+	echo "<div style='clear:both;'></div>\n";
 
-	fin_page();
+	echo fin_page();
 } // fin exec_
 ?>

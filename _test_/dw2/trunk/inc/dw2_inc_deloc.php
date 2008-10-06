@@ -25,13 +25,13 @@ function aff_logo_serv($id_serv)
 // bouton annuler la Destination... 
 function bouton_annule_dest($id_document,$id_serv) {
 	global $connect_id_auteur, $couleur_claire;
-	echo "<form action='".generer_url_action("dw2actions", "arg=annuledocserveur-".$id_document)."' method='post'>";
+	echo "<form action='".generer_url_action("dw2actions", "arg=annuledocserveur-".$id_document)."' method='post'>\n";
 	echo "<div align='center' style='background:$couleur_claire; padding:2px;'>";
 	echo "<input type='hidden' name='redirect' value='".generer_url_ecrire("dw2_import", "id_serv=".$id_serv)."' />\n";
-	echo "<input type='hidden' name='hash' value='".calculer_action_auteur("dw2actions-annuledocserveur-".$id_document)."' />";
-	echo "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />";
-	echo "<input type=submit value='"._T('dw:annuler')."' class='fondo'>";
-	echo "</div></form>";
+	echo "<input type='hidden' name='hash' value='".calculer_action_auteur("dw2actions-annuledocserveur-".$id_document)."' />\n";
+	echo "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />\n";
+	echo "<input type=submit value='"._T('dw:annuler')."' class='fondo'>\n";
+	echo "</div></form>\n";
 }
 
 
@@ -104,14 +104,14 @@ function bout_select_fichier($fich, $idmf, $iddoc, $id_serv, $site_distant, $rep
 		$form_imp = "<input type='hidden' name='id_type' value='".$idtype."'>\n";
 
 		if ($idmf==0) {
-			$form_imp.="<input type='image' src='"._DIR_IMG_DW2."puce-verte.gif' align='absmiddle'>\n";
+			$form_imp.="<input type='image' src='"._DIR_IMG_DW2."puce-verte.gif' align='absmiddle' />\n";
 		}
 		else {
 			$form_imp = doublons_localiser($iddoc, $id_serv, $site_distant, $repert_distant);
 		} 
 	}
 	else {
-		$form_imp = "<img src='"._DIR_IMG_DW2."puce-poubelle-breve.gif' align='absmiddle'>\n";
+		$form_imp = "<img src='"._DIR_IMG_DW2."puce-poubelle-breve.gif' align='absmiddle' alt='' />\n";
 	}
 	
 	return $form_imp;
@@ -126,8 +126,8 @@ function extens_spipon($fichier) {
 		
 		if ($ext == 'htm') { $ext = 'html'; }
 		$req = "SELECT extension, id_type FROM spip_types_documents WHERE extension='$ext'";
-		$result = spip_query($req);
-		if ($row = @spip_fetch_array($result)) {
+		$result = sql_query($req);
+		if ($row = @sql_fetch($result)) {
 			$idtype = $row['id_type'];
 			return $idtype;
 		}
@@ -144,8 +144,8 @@ function extens_spipon($fichier) {
 // génère l'affichage adéquate
 function doublons_localiser($iddoc, $id_serv, $site_distant, $repert_distant)
 {
-	$result=spip_query("SELECT url, heberge FROM spip_dw2_doc WHERE id_document = $iddoc");
-	$row=spip_fetch_array($result);
+	$result=sql_query("SELECT url, heberge FROM spip_dw2_doc WHERE id_document = $iddoc");
+	$row=sql_fetch($result);
 	$url=$row['url'];
 	$heberge = $row['heberge'];
 	$nomfichier = substr(strrchr($url,'/'), 1); // extrait nomfichier d'url
@@ -153,27 +153,26 @@ function doublons_localiser($iddoc, $id_serv, $site_distant, $repert_distant)
 	$chemfichier = substr(strchr($chfi,'/'), 1); // vire le premier '/'
  	if ($heberge==$site_distant) {
 		if ($repert_distant !== $chemfichier) {
-			$aff_dbl = "<a href='".generer_url_ecrire("dw2_change_serv", "id_serv=".$id_serv."&id_doc=".$iddoc)."' title='$chemfichier'>".
-						"<img src='"._DIR_IMG_DW2."dot_serveur.gif' align='absmiddle' border='0'></a>\n";
+			$aff_dbl = "<a href='".generer_url_ecrire("dw2_change_serv", "id_serv=".$id_serv."&id_doc=".$iddoc)."' title='$chemfichier'>\n".
+						"<img src='"._DIR_IMG_DW2."dot_serveur.gif' align='absmiddle' border='0' alt='' /></a>\n";
 		}
 		else {
-			$aff_dbl = "<img src='"._DIR_IMG_DW2."puce-blanche-breve.gif' align='absmiddle'>";
+			$aff_dbl = "<img src='"._DIR_IMG_DW2."puce-blanche-breve.gif' align='absmiddle' alt='' />\n";
 		}
 	}
 	else if ($heberge == "local") {
-		$aff_dbl = "<a href='".generer_url_ecrire("dw2_change_serv", "id_serv=".$id_serv."&id_doc=".$iddoc)."' title='$heberge'>".
-					"<img src='"._DIR_IMG_DW2."dot_serveur3.gif' align='absmiddle' border='0'></a>\n";
+		$aff_dbl = "<a href='".generer_url_ecrire("dw2_change_serv", "id_serv=".$id_serv."&id_doc=".$iddoc)."' title='$heberge'>\n".
+					"<img src='"._DIR_IMG_DW2."dot_serveur3.gif' align='absmiddle' border='0' alt='' /></a>\n";
 	}
 	else if ($heberge == "distant") { // h.13/03 prend en charge 'distant'
-		$aff_dbl = "<img src='"._DIR_IMG_PACK."attachment.gif' align='absmiddle' border='0'></a>\n";
+		$aff_dbl = "<img src='"._DIR_IMG_PACK."attachment.gif' align='absmiddle' border='0' alt='' /></a>\n";
 	}
 	else {
-		$aff_dbl = "<a href='".generer_url_ecrire("dw2_change_serv", "id_serv=".$id_serv."&id_doc=".$iddoc)."' title='$heberge'>".
-					"<img src='"._DIR_IMG_DW2."dot_serveur2.gif' align='absmiddle' border='0'></a>\n";
+		$aff_dbl = "<a href='".generer_url_ecrire("dw2_change_serv", "id_serv=".$id_serv."&id_doc=".$iddoc)."' title='$heberge'>\n".
+					"<img src='"._DIR_IMG_DW2."dot_serveur2.gif' align='absmiddle' border='0' alt='' /></a>\n";
 	}
 	return $aff_dbl;
 }
-
 
 
 // Selecteur de rubrique ...
@@ -189,8 +188,8 @@ function rub_parent($leparent) {
 
 	$i++;
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
- 	$result=spip_query($query);
-	while($row=spip_fetch_array($result))
+ 	$result=sql_qeury($query);
+	while($row=sql_fetch($result))
 	{
 		$my_rubrique=$row['id_rubrique'];
 		$titre=typo($row['titre']);
@@ -238,7 +237,7 @@ function rub_parent($leparent) {
 			$titre = couper($titre." ", 50); // largeur maxi
 			if (lire_meta('multi_rubriques') == 'oui' AND ($langue_choisie_rub == "oui" OR $leparent == 0)) $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
 			echo "<OPTION value='".$my_rubrique."' style=\"$style\">$espace".supprimer_tags($titre)."\n";
-			echo "($my_rubrique)</option>"; //h.12/3
+			echo "($my_rubrique)</option>\n"; //h.12/3
 		/*}*/
 		$premier = 0;
 		rub_parent($my_rubrique);
@@ -246,7 +245,5 @@ function rub_parent($leparent) {
 	$i=$i-1;
 }
 //
-
-
 
 ?>

@@ -74,36 +74,36 @@ function exec_dw2_install() {
 // affichage
 //
 
-	debut_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+	
 	echo "<a name='haut_page'></a><br />";
 	
-	gros_titre(_T('dw:titre_page_admin'));
+	echo gros_titre(_T('dw:titre_page_admin'),'','',true);
+	echo debut_gauche('',true);
 	
 	
-	debut_gauche();
-	
-	
-	creer_colonne_droite();
+	echo creer_colonne_droite('',true);
 		// vers aide koakidi.com 
 		bloc_ico_aide_ligne();
 	
 		// signature
 		echo "<br />";
-		debut_boite_info();
+		echo debut_boite_info(true);
 			echo _T('dw:signature', array('version' => $GLOBALS['dw2_param']['version_installee']));
-		fin_boite_info();
+		echo fin_boite_info(true);
 		echo "<br />";
 	
 	
-	debut_droite();
+	echo debut_droite('',true);
 	
 	
-	debut_cadre_trait_couleur(_DIR_IMG_DW2."configure.gif", false, "", _T('dw:txt_install_09',array('vers_loc' => _DW2_VERS_PLUGIN)));
+	echo debut_cadre_trait_couleur(_DIR_IMG_DW2."configure.gif", true, "", _T('dw:txt_install_09',array('vers_loc' => _DW2_VERS_PLUGIN)));
 		
 		// petite phrase install/maj tables
 		echo "<br /><span class='verdana3'><b>".$info_tbl."</b></span><br />";
 
-	fin_cadre_trait_couleur();
+	echo fin_cadre_trait_couleur(true);
 	
 
 	// le formulaire de config
@@ -113,7 +113,7 @@ function exec_dw2_install() {
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
 	echo "<div style='clear:both;'></div>";
 	
-	fin_page();
+	echo fin_page();
 
 }
 ?>

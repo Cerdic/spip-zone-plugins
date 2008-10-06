@@ -21,18 +21,16 @@
 function tableau_doc_images()
 	{
 	// requete doc type jpg, png, gif
-	$query = "SELECT sd.id_document, sd.id_vignette, sd.id_type, sd.fichier, sd.largeur, 
-			sd.hauteur, sd.distant, sd.mode, IF (dd.id_document,'oui','non') AS dw_in 
-			FROM spip_documents sd LEFT JOIN spip_dw2_doc dd ON sd.id_document=dd.id_document
-			WHERE sd.id_type BETWEEN 1 AND 3 ";
-			
 	// ... avec 'vignette' (miniature)
-	$cond = "AND sd.id_vignette !='0' ";
+	$result = sql_select("sd.id_document, sd.id_vignette, sd.id_type, sd.fichier, sd.largeur, 
+			sd.hauteur, sd.distant, sd.mode, IF (dd.id_document,'oui','non') AS dw_in ",
+			"spip_documents sd LEFT JOIN spip_dw2_doc dd ON sd.id_document=dd.id_document",
+			"sd.id_type BETWEEN 1 AND 3 AND sd.id_vignette !='0' ");
+
+	$tab_small=array(); // h2/4/06	
+	$tab_spipimg=array();
 	
-	$tab_small=array(); // h2/4/06
-	
-	$result = spip_query($query.$cond);
-	while ($row=spip_fetch_array($result))
+	while ($row=sql_fetch($result))
 		{
 		$iddoc=$row['id_document'];
 		$idvign=$row['id_vignette'];
@@ -57,8 +55,11 @@ function tableau_doc_images()
 	reset($tab_small);
 	
 	// chercher doc pas dans tab_small (sans miniature)
-	$result2=spip_query($query);
-	while ($row2=spip_fetch_array($result2))
+	$result2 = sql_select("sd.id_document, sd.id_vignette, sd.id_type, sd.fichier, sd.largeur, 
+			sd.hauteur, sd.distant, sd.mode, IF (dd.id_document,'oui','non') AS dw_in ",
+			"spip_documents sd LEFT JOIN spip_dw2_doc dd ON sd.id_document=dd.id_document",
+			"sd.id_type BETWEEN 1 AND 3");	
+	while ($row2=sql_fetch($result2))
 		{
 		$iddoc=$row2['id_document'];
 		$idvign=$row2['id_vignette'];
@@ -120,7 +121,7 @@ if($hors_dw) {
 	//
 	// enregistrement Docs selectionnes, dans cat. dw
 	if($imgin=='oui' AND $tab_forcimg AND $connect_statut=="0minirezo" AND !$hors_dw)
-		{
+	{
 		debut_band_titre("#dfdfdf");
 		echo "<span class='verdana2'>"._T('dw:enreg_doc')." :<br>";
 		foreach($tab_forcimg as $id_in)
@@ -130,7 +131,7 @@ if($hors_dw) {
 			}
 		echo "</span>";
 		fin_bloc();
-		}
+	}
 
 
 	//
@@ -144,9 +145,9 @@ if($hors_dw) {
 		debut_cadre_relief(_DIR_IMG_DW2."catalogue.gif");
 		echo "<br><b>"._T('dw:aucun_doc_type_img').".<br>";
 		fin_cadre_relief();
-		break;
+		//break;
 	}
-
+	
 	// prepa données puis affichage
 	
 		//  recup' nombre de ligne et son retour, fixe LIMIT ...		
@@ -162,7 +163,7 @@ if($hors_dw) {
 			{ usort($tab_spipimg, "compare"); }
 		else
 			{ ksort($tab_spipimg); }
-			
+
 		// prepa toutdeplier toutreplier
 		while (list($id) = each($tab_spipimg))
 			{

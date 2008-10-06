@@ -55,13 +55,13 @@ $dl=($vl+0);
 
 
 //Nbr Total de Doc ...(Docs actifs
-$rcc_nligne=spip_query("SELECT nom, id_document FROM spip_dw2_doc WHERE statut='archive' ORDER BY nom");
-$nligne=spip_num_rows($rcc_nligne);
+$rcc_nligne=sql_query("SELECT nom, id_document FROM spip_dw2_doc WHERE statut='archive' ORDER BY nom");
+$nligne=sql_count($rcc_nligne);
 	
 	
 // prepa toutdeplier toutreplier + tableau des prem lettres
 $gen_ltt = array();
-while ($row_dep=spip_fetch_array($rcc_nligne)) {
+while ($row_dep=sql_fetch($rcc_nligne)) {
 	$iddoc=$row_dep['id_document'];
 	$les_docs[] = "bout$iddoc";
 	$nom_block = "bout$iddoc";
@@ -105,33 +105,33 @@ if (isset($wltt)) {
 
 
 // requete principale du catalogue
-$quer="SELECT d.id_document, DATE_FORMAT(d.dateur,'%d/%m/%Y - %H:%i') AS datetel, 
+$result=sql_select("d.id_document, DATE_FORMAT(d.dateur,'%d/%m/%Y - %H:%i') AS datetel, 
 		DATE_FORMAT(d.date_crea,'%d/%m/%Y') AS datecrea, 
 		d.nom, d.url, d.total, d.doctype, d.id_doctype, d.categorie, d.heberge, d.id_serveur, 
 		TO_DAYS(d.dateur) - TO_DAYS(d.date_crea) AS nbr_jour, 
 		ROUND(d.total/(TO_DAYS(d.dateur) - TO_DAYS(d.date_crea)),2) AS moyj, 
-		s.taille, s.id_type, s.distant 
-		FROM spip_dw2_doc AS d 
-		LEFT JOIN spip_documents AS s ON d.id_document=s.id_document 
-		WHERE d.statut='archive' $where_ltt 
-		ORDER BY $orderby LIMIT $dl,$nbr_lignes_tableau";
-		
-$result=spip_query($quer);
-$nbliens=spip_num_rows($result);
+		s.taille, s.id_type, s.distant",
+		"spip_dw2_doc AS d LEFT JOIN spip_documents AS s ON d.id_document=s.id_document ",
+		"d.statut='archive' $where_ltt ",
+		"",
+		$orderby,
+		"$dl,$nbr_lignes_tableau");
 
-
+$nbliens=sql_count($result);
 
 //
 // affichage page
 //
 
-debut_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+
 echo "<a name='haut_page'></a><br />";
 
-gros_titre(_T('dw:titre_page_admin'));
+echo gros_titre(_T('dw:titre_page_admin'),'','',true);
 
 
-debut_gauche();
+echo debut_gauche('',true);
 
 	menu_administration_telech();
 	menu_voir_fiche_telech();
@@ -144,22 +144,23 @@ debut_gauche();
 	bloc_ico_page(_T('dw:acc_dw2_dd'), generer_url_ecrire("dw2_deloc"), _DIR_IMG_DW2."deloc.gif");
 
 
-creer_colonne_droite();
+echo creer_colonne_droite('',true);
 
 	// vers popup aide 
+	echo "<br />";
 	bloc_ico_aide_ligne();
 
 	// signature
 	echo "<br />";
-	debut_boite_info();
+	echo debut_boite_info(true);
 		echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-	fin_boite_info();
+	echo fin_boite_info(true);
 	echo "<br />";
 
-debut_droite();
+echo debut_droite('',true);
 
 
-debut_cadre_relief(_DIR_IMG_DW2."catalogue.gif");
+echo debut_cadre_relief(_DIR_IMG_DW2."catalogue.gif",true);
 
 if ($nbliens==0) {
 
@@ -266,7 +267,7 @@ if ($nbliens==0) {
 	echo "</td></tr>";
 
 
-	while ($a_row=spip_fetch_array($result))
+	while ($a_row=sql_fetch($result))
 		{
 		$ifond = $ifond ^ 1;
 		$couleur = ($ifond) ? '#FFFFFF' : $couleur_claire;
@@ -308,7 +309,7 @@ if ($nbliens==0) {
 		echo "<td width=8%>$bouton ".origine_heberge($heberge)."</td>\n";
 		echo "<td width=50%><div class='verdana2'>";
 		if (!$t_s)
-			{ echo "<img src='"._DIR_IMG_DW2."puce-rouge-breve.gif'>"; }
+			{ echo "<img src='"._DIR_IMG_DW2."puce-rouge-breve.gif' />"; }
 		echo "&nbsp;".$nom."</div></td>\n";
 		echo "<td width=26%><div align='center' class='verdana2'>".$categorie."</div></td>\n";
 		echo "<td width=16%><div align='center' class='arial2'>".$datecrea."</div></td>\n";
@@ -356,13 +357,13 @@ if ($nbliens==0) {
 		}
 	echo "</table>\n";
 }
-fin_cadre_relief();
+echo fin_cadre_relief(true);
 
 
 //
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
 	echo "<div style='clear:both;'></div>";
 
-	fin_page();
+	echo fin_page();
 } // fin exec_
 ?>

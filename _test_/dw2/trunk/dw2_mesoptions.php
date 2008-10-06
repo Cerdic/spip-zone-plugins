@@ -19,18 +19,19 @@
 # de Doc (type jpg, png) part une mauvaise manip sur page config :
 # commenter la ligne (39) : $arg=$params['criteres_auto_doc'];
 
-
 // rev. h.02/02/07
 function inclus_auto_doc() {
-	$a = @spip_query("SHOW TABLES LIKE 'spip_dw2_config'");
-	if($b=spip_fetch_array($a)) {
-		$q=spip_query("SELECT nom, valeur FROM spip_dw2_config");
+	if (!function_exists('sql_showtable')) {include_spip('base/abstract_sql');}
+	$a = sql_showtable("spip_dw2_config",true);
+
+	if($a) {
+		$q=sql_query("SELECT nom, valeur FROM spip_dw2_config");
 		$params=array();
-		while($r=spip_fetch_array($q)) {
+		while($r=sql_fetch($q)) {
 			$params[$r['nom']] = $r['valeur'];
 		}
 		if($params['mode_enregistre_doc']=="auto") {
-			include(_DIR_PLUGINS."/dw2/inc/dw2_inc_ajouts.php");
+			include_spip('inc/dw2_inc_ajouts');
 			$arg='';
 			$typecat=$params['type_categorie'];
 			if(isset($params['criteres_auto_doc'])) {

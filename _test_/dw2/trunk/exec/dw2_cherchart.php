@@ -32,7 +32,7 @@ function exec_dw2_cherchart() {
 	// requete .. les articles de la rub selectionnee
 	//
 	$query="SELECT id_article, titre FROM spip_articles WHERE id_rubrique=$id_rub";
-	$result=spip_query($query);
+	$result=sql_query($query);
 	
 		# efface options de precedente recherche
 		print("<script>");
@@ -43,7 +43,7 @@ function exec_dw2_cherchart() {
 		print("}");
 		print("</script>");
 	
-	if(!spip_num_rows($result)) {
+	if(!sql_count($result)) {
 		# rub sans article .. on le dit
 		print("<script>");
 		print("with (parent.document){");
@@ -64,7 +64,7 @@ function exec_dw2_cherchart() {
 		print("</script>");
 		
 		# les articles dispo
-		while ($row = spip_fetch_array($result)) {
+		while ($row = sql_fetch($result)) {
 			$id_article=$row['id_article'];
 			$titre=$row['titre'];
 			print("<script>");

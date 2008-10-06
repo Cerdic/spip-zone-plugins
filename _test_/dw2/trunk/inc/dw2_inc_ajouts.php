@@ -17,8 +17,8 @@
 // retourne la Catégorie d'un doc selon choix config
 function select_categorie_doc($rub_select)
 	{
-	$quer_cat=spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique = $rub_select");
-	while ($row_cat=spip_fetch_array($quer_cat)) {
+	$quer_cat=sql_query("SELECT titre FROM spip_rubriques WHERE id_rubrique = $rub_select");
+	while ($row_cat=sql_fetch($quer_cat)) {
 		if(!function_exists('typo')) { include_spip("inc/texte"); }
 		$categorie=typo(supprimer_numero($row_cat['titre']));
 		}
@@ -38,18 +38,18 @@ function origine_doc($id_doc)
 	
 	while (list($k,$v) = each($tab_ido))
 		{
-		$requete=spip_query("SELECT id_".$k." FROM spip_documents_".$v." WHERE id_document = $id_doc");
-			#if($ok_ido=$res=spip_num_rows($requete)) {
-			if(spip_num_rows($requete)) {
-				$lg=spip_fetch_array($requete);
+		$requete=sql_query("SELECT id_".$k." FROM spip_documents_".$v." WHERE id_document = $id_doc");
+			#if($ok_ido=$res=sql_count($requete)) {
+			if(sql_count($requete)) {
+				$lg=sql_fetch($requete);
 				$iddoctype=$lg['id_'.$k];
 				$doctype=$k;
 				break;
 			}
 		}
 	if(isset($doctype)) {	
-		$query=spip_query("SELECT statut FROM spip_".$doctype."s WHERE id_".$doctype." = $iddoctype");
-		$row=spip_fetch_array($query);
+		$query=sql_query("SELECT statut FROM spip_".$doctype."s WHERE id_".$doctype." = $iddoctype");
+		$row=sql_fetch($query);
 		$statut=($row['statut']=="publie") ? '1' : '0';
 	}
 	return $origine_doc=array($doctype,$iddoctype,$statut);
@@ -74,8 +74,8 @@ function ajout_doc_catalogue($doc,$typecat='', $retour='') {
 	// si en statut 'publie' OK .. on enregistre
 	if($origine[2]=='1') {
 		$quet="SELECT id_document, fichier, distant FROM spip_documents WHERE id_document=$doc";
-		$resul=spip_query($quet);
-		$ro=spip_fetch_array($resul);
+		$resul=sql_query($quet);
+		$ro=sql_fetch($resul);
 		$distant=$ro['distant'];
 		$id_doc=$ro['id_document'];
 		
@@ -90,8 +90,8 @@ function ajout_doc_catalogue($doc,$typecat='', $retour='') {
 			
 		// trouver categorie
 		$req_cat="SELECT id_secteur, id_rubrique FROM spip_".$doctype."s WHERE id_".$doctype."=".$iddoctype."";
-		$rs_cat=spip_query($req_cat);
-		$ro_cat=spip_fetch_array($rs_cat);
+		$rs_cat=sql_query($req_cat);
+		$ro_cat=sql_fetch($rs_cat);
 		$idsect=$ro_cat['id_secteur'];
 		$idrub=$ro_cat['id_rubrique'];
 
@@ -101,11 +101,11 @@ function ajout_doc_catalogue($doc,$typecat='', $retour='') {
 			{ $class_cat=$idrub; }
 			
 		// enregistre le Doc
-		spip_query("INSERT INTO spip_dw2_doc (id_document, nom, url, total, dateur, doctype, id_doctype, categorie, date_crea) 
+		sql_query("INSERT INTO spip_dw2_doc (id_document, nom, url, total, dateur, doctype, id_doctype, categorie, date_crea) 
 			VALUES('$id_doc','$nomfichier','$url','0','','$doctype','$iddoctype','".select_categorie_doc($class_cat)."',NOW())");
 	}
 	if($heberge) {
-		spip_query("UPDATE spip_dw2_doc SET heberge='$heberge' WHERE id_document = $id_doc");
+		sql_query("UPDATE spip_dw2_doc SET heberge='$heberge' WHERE id_document = $id_doc");
 	}
 		
 	if ($retour=="oui") { return $nomfichier; }
@@ -132,14 +132,12 @@ function calc_inclus_auto_doc($arg='',$typecat) {
 			$where="";
 		}
 	}
-	$query="SELECT sd.id_document FROM spip_documents sd 
-			LEFT JOIN spip_dw2_doc dw ON sd.id_document = dw.id_document 
-			WHERE sd.mode = 'document' $where 
-			AND dw.id_document IS NULL";
-		
-	$result=spip_query($query);
-	if(spip_num_rows($result)) {
-		while ($row=spip_fetch_array($result)) {
+	$result=sql_select("sd.id_document",
+						"spip_documents sd LEFT JOIN spip_dw2_doc dw ON sd.id_document = dw.id_document ",
+						"sd.mode = 'document' $where AND dw.id_document IS NULL");
+
+	if(sql_count($result)) {
+		while ($row=sql_fetch($result)) {
 			$doc=$row['id_document'];
 			ajout_doc_catalogue($doc,$typecat);
 		}

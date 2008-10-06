@@ -58,7 +58,7 @@ include_spip('inc/commencer_page');
 	//
 	echo "<div class='boite_filet_b center'>";
 	bloc_minibout_act(_T('dw:outils'), generer_url_ecrire("dw2_outils"), _DIR_IMG_PACK."administration-24.gif",'','');
-	gros_titre(_T('dw:titre_page_outils'));
+	echo gros_titre(_T('dw:titre_page_outils'),'','',true);
 	echo "<div style='clear:both;'></div>";
 	echo "</div>";
 

@@ -17,11 +17,11 @@
 function sous_enfants_rubrique($collection2){
 	global $lang_dir, $spip_lang_dir, $spip_lang_left;
 
-	$result3 = spip_query("SELECT * FROM spip_rubriques WHERE id_parent='$collection2' ORDER BY 0+titre,titre");
+	$result3 = sql_query("SELECT * FROM spip_rubriques WHERE id_parent='$collection2' ORDER BY 0+titre,titre");
 
-	if (!spip_num_rows($result3)) return '';
+	if (!sql_count($result3)) return '';
 	$retour = debut_block_invisible("enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";
-	while($row=spip_fetch_array($result3)){
+	while($row=sql_fetch($result3)){
 			$id_rubrique2=$row['id_rubrique'];
 			$id_parent2=$row['id_parent'];
 			$titre2=$row['titre'];
@@ -55,9 +55,9 @@ function enfants_rubrique($collection){
 
 	$les_enfants = "";
 
-	$res = spip_query("SELECT id_rubrique, id_parent, titre, descriptif, lang FROM spip_rubriques WHERE id_parent='$collection' ORDER BY 0+titre,titre");
+	$res = sql_query("SELECT id_rubrique, id_parent, titre, descriptif, lang FROM spip_rubriques WHERE id_parent='$collection' ORDER BY 0+titre,titre");
 
-	while($row=spip_fetch_array($res)){
+	while($row=sql_fetch($res)){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
 		$titre=$row['titre'];
@@ -116,10 +116,10 @@ function aff_menu_parents($id_rubrique, $id_article, $parents="", $souche="") {
 
 	if ($id_article) {
 		if(!$souche) { $souche=$id_article; }
-		$result=spip_query("SELECT id_article, id_rubrique, titre 
+		$result=sql_query("SELECT id_article, id_rubrique, titre 
 							FROM spip_articles 
 							WHERE id_article=$id_article");
-		while($row = spip_fetch_array($result)) {
+		while($row = sql_fetch($result)) {
 			$id_article = $row['id_article'];
 			$id_rubrique = $row['id_rubrique'];
 			$titre = $row['titre'];
@@ -136,9 +136,9 @@ function aff_menu_parents($id_rubrique, $id_article, $parents="", $souche="") {
 		if(!$souche) { $souche=$id_rubrique; }
 		
 		$query = "SELECT id_rubrique, id_parent, titre, lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique";
-		$result = spip_query($query);
+		$result = sql_query($query);
 
-		while ($row = spip_fetch_array($result)) {
+		while ($row = sql_fetch($result)) {
 			$id_rubrique = $row['id_rubrique'];
 			$id_parent = $row['id_parent'];
 			$titre = $row['titre'];
@@ -183,15 +183,15 @@ function afficher_entete_restreindre($id_rubrique,$id_article) {
 	if($id_rubrique) {
 		// prepa info rubrique parent
 		$rq = "SELECT id_parent, titre, descriptif FROM spip_rubriques WHERE id_rubrique=$id_rubrique";
-		$res = spip_query($rq);
-		$row=spip_fetch_array($res);
+		$res = sql_query($rq);
+		$row=sql_fetch($res);
 		$titre = $row['titre'];
 		$id_parent = $row['id_parent'];
 	}
 	if($id_article) {
 		$rq = "SELECT titre FROM spip_articles WHERE id_article=$id_article";
-		$res = spip_query($rq);
-		$row=spip_fetch_array($res);
+		$res = sql_query($rq);
+		$row=sql_fetch($res);
 		$titre = $row['titre'];
 	}
 	
@@ -255,7 +255,7 @@ function afficher_entete_restreindre($id_rubrique,$id_article) {
 	if($type == 'article') { $nomobjet = 'id_art'; }
 	else { $nomobjet = 'id_rub';}
 	
-	debut_cadre_enfonce(_DIR_IMG_DW2."restreint-24.gif", false, "", _T('dw:rest_titre_formulaire'));
+	echo debut_cadre_enfonce(_DIR_IMG_DW2."restreint-24.gif", true, "", _T('dw:rest_titre_formulaire'));
 		
 	//commentaire dependance
 	if($flag_racine) {
@@ -289,7 +289,7 @@ function afficher_entete_restreindre($id_rubrique,$id_article) {
 		
 		echo "</form>\n";
 	
-	fin_cadre_enfonce();
+	echo fin_cadre_enfonce(true);
 	fin_cadre_relief();
 }
 
@@ -347,16 +347,16 @@ function afficher_articles_enfants($id_rubrique) {
 	
 	$nbr_lignes_tableau = $GLOBALS['dw2_param']['nbr_lignes_tableau'];
 	
-	$q=spip_query("SELECT SQL_CALC_FOUND_ROWS id_article, titre 
+	$q=sql_query("SELECT SQL_CALC_FOUND_ROWS id_article, titre 
 					FROM spip_articles 
 					WHERE id_rubrique=$id_rubrique 
 					LIMIT $dl,$nbr_lignes_tableau");
 	
-	$nl= spip_query("SELECT FOUND_ROWS()");
-	list($nligne) = @spip_fetch_array($nl);
+	$nl= sql_query("SELECT FOUND_ROWS()");
+	list($nligne) = @sql_fetch($nl);
 
 		
-	while($r=spip_fetch_array($q)) {
+	while($r=sql_fetch($q)) {
 		$id_article=$r['id_article'];
 		$titre=$r['titre'];
 		$hierarchie=hierarchie_art($id_article);
@@ -375,7 +375,7 @@ function afficher_articles_enfants($id_rubrique) {
 	
 	//
 	// aff...
-	if(spip_num_rows($q)) {
+	if(sql_count($q)) {
 		debut_cadre_relief("article-24.gif");
 		if($nligne>$nbr_lignes_tableau) {
 			debut_band_titre("#dfdfdf");
@@ -390,6 +390,5 @@ function afficher_articles_enfants($id_rubrique) {
 		fin_cadre_relief();
 	}
 }
-
 
 ?>

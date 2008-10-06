@@ -35,9 +35,9 @@ function netcat() {
 // prepa
 //
 // total des types fichiers du catalogue
-$q=spip_query("SELECT SUBSTRING_INDEX(url, '.', -1) AS typefich, COUNT(*) AS nbtype ".
+$q=sql_query("SELECT SUBSTRING_INDEX(url, '.', -1) AS typefich, COUNT(*) AS nbtype ".
 			"FROM spip_dw2_doc GROUP BY typefich");
-while($r=spip_fetch_array($q)) {
+while($r=sql_fetch($q)) {
 	$tbl_typefichier[]=$r['typefich'];
 }
 
@@ -47,7 +47,7 @@ if($date) {echo $date;}
 //
 // affichage
 //
-debut_cadre_trait_couleur("warning-24.gif", false, "", _T('dw:supprimer_doc_du_catalogue'));
+echo debut_cadre_trait_couleur("warning-24.gif", true, "", _T('dw:supprimer_doc_du_catalogue'));
 
 	echo _T('dw:supprimer_doc_du_catalogue_info')."<br />";
 
@@ -82,13 +82,13 @@ debut_cadre_trait_couleur("warning-24.gif", false, "", _T('dw:supprimer_doc_du_c
 	echo fin_bloc();
 	*/
 	echo "<div align='right'>
-		<input type='submit' class='fondo' value='". _T('dw:valider')."' />
+		<input type='submit' class='fondo' value='". _T('bouton_valider')."' />
 		</div>";
 	echo fin_bloc();
 	
 	echo "</form>";
 
-fin_cadre_trait_couleur();
+echo fin_cadre_trait_couleur(true);
 }
 
 ?>

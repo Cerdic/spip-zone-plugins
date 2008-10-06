@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'affiche_serveur' => 'Afficher ce serveur',
 'aide' => 'AIDE en ligne',
 'ajouter' => 'Ajouter',
-'ajout_doc' => 'Ajouter Documents',
+'ajout_doc' => 'Ajouter documents',
 'ajout_images_1_1' => 'Ajout Images 1/1',
 'ajout_manuel' => 'Ajout manuel',
 'ajout_par_article' => 'Ajout par Article',
@@ -100,7 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									v&eacute;rifiez les droits d\'&eacute;criture du
 									r&eacute;pertoire @rep_bases@.',
 'criteres_recherche_art_doc' => 'Crit&egrave;res de recherche des Articles/Rubriques<br />
-								contenant des Documents',
+								contenant des documents',
 
 
 // D
@@ -121,11 +121,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'doc_dans_archive' => '<b>@nb_archive@<b/> Fiche-Document Archiv&eacute;e',
 'doc_dans_archive_s' => '<b>@nb_archive@</b> Fiches-Document Archiv&eacute;es',
 'doc_dans_cat' => '&nbsp;<b>@nb_actif@</b> Document dans le Catalogue',
-'doc_dans_cat_s' => '&nbsp;<b>@nb_actif@</b> Documents dans le Catalogue',
+'doc_dans_cat_s' => '&nbsp;<b>@nb_actif@</b> documents dans le Catalogue',
 'doc_dans_cat_depuis' => 'Documents enregistr&eacute;s dans le Catalogue depuis @jours_affiche_nouv@ jours',
 'doc_de_rubrique' => 'Doc. de rubrique',
-'doc_pas_dans_cat' => 'Ces Documents ne sont pas dans le Catalogue',
-'doc_pas_dans_spip' => 'Les Documents suivants ne sont plus dans SPIP',
+'doc_pas_dans_cat' => 'Ces documents ne sont pas dans le Catalogue',
+'doc_pas_dans_spip' => 'Les documents suivants ne sont plus dans SPIP',
 'doc_spip_n' => 'Document Spip n&deg;',
 'doc_assoc' => '@nb_k@ Document associ&eacute;',
 'doc_assoc_s' => '@nb_k@ Documents associ&eacute;s',
@@ -185,8 +185,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'import_depuis_serv' => 'Import Virtuel depuis ce serveur',
 'import_virtuel' => 'IMPORT Virtuel',
 'info_change_statut_inverser' => 'Inverser : rendre actif la selection',
-'info_change_statut_masse' => 'Archiver des Fiches de Documents - mode par d&eacute;faut.<br />
-								Saisir les ID des Documents, s&eacute;par&eacute;s par des virgules (xxx,yyy,zzz).',
+'info_change_statut_masse' => 'Archiver des Fiches de documents - mode par d&eacute;faut.<br />
+								Saisir les ID des documents, s&eacute;par&eacute;s par des virgules (xxx,yyy,zzz).',
 'info_erreur_doc_out' => 'Le document demand&eacute; &agrave; chang&eacute; d\'identifiant<br />
 							ou a &eacute;t&eacute; retir&eacute; pour maintenance<br />
 							ou<br />n\'existe plus sur notre site !<br />
@@ -340,10 +340,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'serv_info_sitedist' => '( http://www.monsite.net )',
 'serv_sans_fich' => ' ne contient aucun fichier',
 'signature' => '<b>DW2 v. @version@</b><br />
-		Ces pages sont destin&eacute;es au suivi des Documents
+		Ces pages sont destin&eacute;es au suivi des documents
 		que vous proposez en t&eacute;l&eacute;chargement sur ce site.<br /><br />
 		Par Scoty, <a href=\'http://www.koakidi.com\'>koakidi.com</a><br />
-		(12/2004 - 02/2007).',
+		(12/2004 - 02/2007).<br />
+		Adaptations pour SPIP 2.0 par chryjs.',
 'soumettre' => 'Soumettre',
 'statistiques' => 'Stastistiques',
 'statistiques_auteurs' => 'Stats Inscrits',
@@ -450,15 +451,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'txt_install_09' => 'Installation de DW2 - @vers_loc@',
 'txt_install_10' => 'Mise &agrave; jour des tables .. fait !',
 'txt_install_11' => 'Activer le mode Anti-triche = un clic compt&eacute; par IP pour 24 heures.<br />
-					(Evites la comptabilisation de clics redondants du visiteur,
+					(Evite la comptabilisation de clics redondants du visiteur,
 					pour cette p&eacute;riode !).',
 'txt_install_14' => 'Indiquer le nombre de lignes affich&eacute;es dans les tableaux du Catalogue,
 					des statistiques, catalogue images ...',
 'txt_install_15' => 'Pour finir l\'installation, validez ce formulaire ...',
 'txt_install_16' => 'Cr&eacute;ation des tables dans la base .. fait !',
-'txt_install_17' => 'Mode d\'enregistrement des nouveaux Documents : ',
+'txt_install_17' => 'Mode d\'enregistrement des nouveaux Document : ',
 'txt_install_18' => 'Si Mode "Auto", afficher les derni&egrave;res entr&eacute;es (en jours) : ',
-'txt_install_19' => 'Mode d\'enregistrement des nouveaux Documents dans le Catalogue :<br />
+'txt_install_19' => 'Mode d\'enregistrement des nouveaux documents dans le Catalogue :<br />
 					"Manuel", vous validez l\'enregistrement depuis la fonction "ajouter documents" de DW2.<br />
 					"Auto", SPIP d&eacute;clenche l\'enregistrement automatiquement.',
 'txt_install_21' => 'En mode "Auto", DW2 affichera sur sa page d\'Accueil, les derniers enregistrements
@@ -466,7 +467,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'txt_install_22' => 'Par d&eacute;faut, DW2 pr&eacute;sente le catalogue des images :<br />
 					- Ligne : tableau des noms de fichier image.<br />
 					- Vignette : tableau des miniatures de fichier image.<br />
-					(voir page "ajout images 1/1" [Ajouts Documents])',
+					(voir page "ajout images 1/1" [Ajouts documents])',
 'txt_install_23' => 'Catalogue Images, afficher :',
 'txt_install_26' => 'Squelette du Catalogue Public :',
 'txt_install_27' => 'Saisissez le nom du squelette "Catalogue Public", sans l\'extension (.html).<br />
@@ -476,7 +477,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 					aux visiteurs, r&eacute;dacteurs ou administrateurs du site.<br />
 					(voir la documentation)',
 'txt_install_30' => 'Inclure les documents (jpg, png, gif) : ',
-'txt_install_31' => 'Forcer DW2 &agrave; enregistrer dans son Catalogue, les Documents images
+'txt_install_31' => 'Forcer DW2 &agrave; enregistrer dans son Catalogue, les documents images
 					(spip, mode : document) de type jpg, png, gif.<br />
 					Le mode d\'enregistrements des documents doit &ecirc;tre valid&eacute; en "Auto".',
 'txt_install_32' => 'Forcer URL DOCUMENT : ',#n2.13

@@ -48,19 +48,21 @@ include_spip("inc/dw2_inc_deloc");
 //
 
 $query = "SELECT * FROM spip_dw2_serv_ftp ORDER BY serv_ftp";
-$result = spip_query($query);
-$nbserv = spip_num_rows($result);
+$result = sql_query($query);
+$nbserv = sql_count($result);
 
 //
 // affichage
 //
 
-debut_page(_T('dw:titre_page_deloc'), "suivi", "dw2_deloc");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:titre_page_deloc'), "suivi", "dw2_deloc");
+
 	echo "<a name='haut_page'></a><br />";
-gros_titre(_T('dw:titre_page_deloc'));
+echo gros_titre(_T('dw:titre_page_deloc'),'','',true);
 
 
-debut_gauche();
+echo debut_gauche('',true);
 	// fonctions principales dw_deloc.php
 	menu_administration_deloc();
 	
@@ -69,57 +71,58 @@ debut_gauche();
 	
 	// retour dw2 admin
 	bloc_ico_page(_T('dw:acc_dw2_st'), generer_url_ecrire("dw2_admin"), _DIR_IMG_DW2."telech.gif");
-	echo "<br />";
+	echo "<br />\n";
 	
 	// Def. module doc deloc
 	echo "<br />";
-	debut_boite_info();
-		echo "<span class='verdana2'>"._T('dw:txt_dd_intro_gauche')."</span><br />";
-	fin_boite_info();
+	echo debut_boite_info(true);
+		echo "<span class='verdana2'>"._T('dw:txt_dd_intro_gauche')."</span><br />\n";
+	echo fin_boite_info(true);
 	
-creer_colonne_droite();
+echo creer_colonne_droite('',true);
 
 	// vers popup aide 
+	echo "<br />\n";
 	bloc_ico_aide_ligne();
 
 	// signature
-	echo "<br />";
-	debut_boite_info();
+	echo "<br />\n";
+	echo debut_boite_info(true);
 		echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-	fin_boite_info();
+	echo fin_boite_info(true);
 	echo "<br />";
 
-debut_droite();
+echo debut_droite('',true);
 
-
-debut_cadre_relief("");
+echo debut_cadre_relief("",true);
 
 
 if ($nbserv == 0)
 	{
-	echo "<div align='center'>"._T('dw:aucun_serv_enreg')."</div><br />";
+	echo "<div align='center'>"._T('dw:aucun_serv_enreg')."</div><br />\n";
 	}
 else
 	{
 	// bloc info export .. bloc infos Import
+	echo "<br />\n";
 	echo "<table width='100%' align='center' border='0' cellpadding='3' cellspacing='3'>\n";
-	echo "<tr>";
+	echo "<tr>\n";
 	echo "<td valign='top' width='50%'>\n";
 	debut_boite_filet('a','left');
-		echo "<img src='"._DIR_IMG_DW2."export-24.gif' border='0'> "._T('dw:export')."<br />";
+		echo "<img src='"._DIR_IMG_DW2."export-24.gif' border='0' alt='export' /> "._T('dw:export')."<br />\n";
 	fin_bloc();
 	echo "</td><td valign='top' width='50%'>\n";
 	debut_boite_filet('a','right');
-		echo _T('dw:import_virtuel')." <img src='"._DIR_IMG_DW2."import-24.gif' border='0'><br />";
+		echo _T('dw:import_virtuel')." <img src='"._DIR_IMG_DW2."import-24.gif' border='0' alt='import' /><br />";
 	fin_bloc();
-	echo "</td></tr></table>";
+	echo "</td></tr></table>\n";
 
 	// selection du serveur
 	debut_boite_filet('a','left');		
 	$ifond = 0;
 	echo "<table width='100%' cellpadding='4' cellspacing='0'>\n";
 
-	while ($row=spip_fetch_array($result))
+	while ($row=sql_fetch($result))
 		{
 		$ifond = $ifond ^ 1;
 		$couleur = ($ifond) ? '#FFFFFF' : $couleur_claire;
@@ -149,32 +152,32 @@ else
 		"</a></div>".
 		"<a href='".generer_url_ecrire("dw2_serv_details", "id_serv=".$id_serv)."'>\n".
 		"<span class='verdana3'><b>".$designe."</b></span></a><br />\n".
-		"<span class='arial2'> ".$serv_ftp.$host_dir.$chem_dist."</span>".
+		"<span class='arial2'> ".$serv_ftp.$host_dir.$chem_dist."</span>\n".
 		"</td>\n";
 
 		// bouton d'import
 		echo
 		"<td width='8%'><div align='center'>\n".
-		"<a href='".generer_url_ecrire("dw2_import", "id_serv=".$id_serv)."'>".
-		"<img src='"._DIR_IMG_DW2."import-24.gif' title='"._T('dw:import_depuis_serv')."' alt='import'>".
+		"<a href='".generer_url_ecrire("dw2_import", "id_serv=".$id_serv)."'>\n".
+		"<img src='"._DIR_IMG_DW2."import-24.gif' title='"._T('dw:import_depuis_serv')."' alt='import' />\n".
 		"</a></div></td>\n";
 		
 		echo "</tr>\n";
 		}
 		
 		
-	echo "</table>"; 
+	echo "</table>\n"; 
 	fin_bloc();
-	echo "<br />";
+	echo "<br />\n";
 	}
 	
-fin_cadre_relief();
+echo fin_cadre_relief(true);
 
 
 //
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
-	echo "<div style='clear:both;'></div>";
+	echo "<div style='clear:both;'></div>\n";
 
-	fin_page();
+	echo fin_page();
 } // fin exec_
 ?>

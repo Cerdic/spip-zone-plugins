@@ -46,9 +46,9 @@ if ($id_document = intval($id_document)) {
 	$query = "SELECT nom, total, DATE_FORMAT(date_crea,'%d/%m/%Y') AS datecrea 
 			FROM spip_dw2_doc 
 			WHERE statut='actif' AND id_document ='$id_document'";
-	$result = spip_query($query);
+	$result = sql_query($query);
 
-	if ($row = spip_fetch_array($result)) {
+	if ($row = sql_fetch($result)) {
 		// h.20/01/07 .. cesure ' ' sur nom/nomfichier trop long + 30 caract
 		$titre = wordwrap(typo($row['nom']),30,' ',1);
 		$total_absolu = $row['total'];
@@ -58,9 +58,9 @@ if ($id_document = intval($id_document)) {
 } 
 else {
 	$query = "SELECT SUM(total) AS total_absolu FROM spip_dw2_doc WHERE statut='actif'";
-	$result = spip_query($query);
+	$result = sql_query($query);
 
-	if ($row = spip_fetch_array($result)) {
+	if ($row = sql_fetch($result)) {
 		$total_absolu = $row['total_absolu'];
 	}
 }
@@ -68,7 +68,7 @@ else {
 //if ($titre) $pourarticle = " "._T('info_pour')." &laquo; $titre &raquo;";
 
 if ($id_document) {
-	if ($titre) gros_titre($titre);
+	if ($titre) echo gros_titre($titre,'','',true);
 	echo "<div class='verdana2' style='padding:3px;'>"._T('dw:enreg_dans_cat')." ".$date_crea."</div>";
 }
 
@@ -87,17 +87,17 @@ if (!$origine) {
 	// requete premiere date dans dw2_stats
 	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix FROM spip_dw2_stats ".
 		"WHERE $where ORDER BY date LIMIT 0,1";
-	$result = spip_query($query);
-	while ($row = spip_fetch_array($result)) {
+	$result = sql_query($query);
+	while ($row = sql_fetch($result)) {
 		$date_premier = $row['date_unix'];
 	}
 
 	// global sur la période (105 j. :$aff_jours)
 	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix, SUM(telech) AS visites FROM spip_dw2_stats ".
 		"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) AND TO_DAYS(date) < TO_DAYS(NOW()) GROUP BY date ORDER BY date";
-	$result=spip_query($query);
+	$result=sql_query($query);
 
-	while ($row = spip_fetch_array($result)) {
+	while ($row = sql_fetch($result)) {
 		$date = $row['date_unix'];
 		$visites = $row['visites'];
 
@@ -109,12 +109,12 @@ if (!$origine) {
 	// Visites du jour
 	if ($id_document) {
 		$query = "SELECT telech AS visites FROM spip_dw2_stats WHERE to_days(date) = to_days(NOW()) AND id_doc = $id_document";
-		$result = spip_query($query);
+		$result = sql_query($query);
 	} else {
 		$query = "SELECT SUM(telech) AS visites FROM spip_dw2_stats WHERE to_days(date) = to_days(NOW())";
-		$result = spip_query($query);
+		$result = sql_query($query);
 	}
-	if ($row = @spip_fetch_array($result))
+	if ($row = @sql_fetch($result))
 		$visites_today = $row['visites'];
 	else
 		$visites_today = 0;
@@ -137,7 +137,7 @@ if (!$origine) {
 		if ($largeur > 50) $largeur = 50;
 
 		// ...
-		debut_cadre_relief("");
+		echo debut_cadre_relief("",true);
 		// h.23/11
 		if(!$id_document) {
 			debut_band_titre($couleur_foncee);
@@ -433,10 +433,10 @@ if (!$origine) {
 		$query="SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%Y-%m') AS date_unix, SUM(telech) AS total_visites ".
 			"FROM spip_dw2_stats ".
 			"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL 2700 DAY) GROUP BY date_unix ORDER BY date";
-		$result=spip_query($query);
+		$result=sql_query($query);
 		
 		$i = 0;
-		while ($row = spip_fetch_array($result)) {
+		while ($row = sql_fetch($result)) {
 			$date = $row['date_unix'];
 			$visites = $row['total_visites'];
 			$i++;
@@ -573,7 +573,7 @@ if (!$origine) {
 	
 	/////
 		
-	fin_cadre_relief();
+	echo fin_cadre_relief(true);
 
 }
 

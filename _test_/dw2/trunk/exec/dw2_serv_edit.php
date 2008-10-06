@@ -75,8 +75,8 @@ if(isset($id_serv)) {
 	
 	// cas modif / Duplication serveur
 	$q_serv = "SELECT * FROM spip_dw2_serv_ftp WHERE id_serv='$id_serv'";
-	$r_serv = spip_query($q_serv);
-	$rw = spip_fetch_array($r_serv);
+	$r_serv = sql_query($q_serv);
+	$rw = sql_fetch($r_serv);
 	$serv_ftp = $rw['serv_ftp'];
 	$host_dir = $rw['host_dir'];
 	$port = $rw['port'];
@@ -112,12 +112,14 @@ if(empty($port)) { $port = '21'; }
 // affichage
 //
 
-debut_page(_T('dw:titre_page_deloc'), "suivi", "dw2_deloc");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:titre_page_deloc'), "suivi", "dw2_deloc");
+
 	echo "<a name='haut_page'></a><br />";
-gros_titre(_T('dw:titre_page_deloc'));
+echo gros_titre(_T('dw:titre_page_deloc'),'','',true);
 
 
-debut_gauche();
+echo debut_gauche('',true);
 	// fonctions principales dw_deloc.php
 	menu_administration_deloc();
 	
@@ -126,24 +128,24 @@ debut_gauche();
 	
 	// retour dw2 admin
 	bloc_ico_page(_T('dw:acc_dw2_st'), generer_url_ecrire("dw2_admin"), _DIR_IMG_DW2."telech.gif");
-	echo "<br />";
+	echo "<br />\n";
 	
 	// Def. module doc deloc
-	echo "<br />";
-	debut_boite_info();
+	echo "<br />\n";
+	echo debut_boite_info(true);
 		echo "<span class='verdana2'>"._T('dw:txt_dd_intro_gauche')."</span><br />";
-	fin_boite_info();
+	echo fin_boite_info(true);
 	
-creer_colonne_droite();
+echo creer_colonne_droite('',true);
 
 	// rappel Serveurs
 	# .. faire un fichier à inclure
-	$rq_serv = spip_query("SELECT * FROM spip_dw2_serv_ftp");
-	if(spip_num_rows($rq_serv)) {
+	$rq_serv = sql_query("SELECT * FROM spip_dw2_serv_ftp");
+	if(sql_count($rq_serv)) {
 		debut_boite_filet("a");
 		echo "<table width='100%' cellpadding='2' cellspacing='0'>";
 		$ifond = 0;
-		while ($lgs = spip_fetch_array($rq_serv))
+		while ($lgs = sql_fetch($rq_serv))
 			{
 			$numserv = $lgs['id_serv'];
 			$servftp = $lgs['serv_ftp'];
@@ -169,18 +171,19 @@ creer_colonne_droite();
 	}
 
 	// vers popup aide 
+	echo "<br />\n";
 	bloc_ico_aide_ligne();
 
 	// signature
-	echo "<br />";
-	debut_boite_info();
+	echo "<br />\n";
+	echo debut_boite_info(true);
 		echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-	fin_boite_info();
-	echo "<br />";
+	echo fin_boite_info(true);
+	echo "<br />\n";
 
-debut_droite();
+echo debut_droite('',true);
 
-debut_cadre_relief(_DIR_IMG_DW2."fich_serv.gif");
+echo debut_cadre_relief(_DIR_IMG_DW2."fich_serv.gif",true);
 
 	// titre du formulaire
 	debut_band_titre($couleur_foncee, 'verdana3', 'center');
@@ -192,18 +195,25 @@ debut_cadre_relief(_DIR_IMG_DW2."fich_serv.gif");
 	$invisible = $id_serv;
 	debut_boite_filet('a','left');
 	if ($invisible)
-		echo bouton_block_invisible('mess_alert');
+		//echo bouton_block_invisible('mess_alert');
+			bouton_block_depliable(_T("info_sans_titre"),false,'mess_alert');
+		
 	else 
-		echo bouton_block_visible('mess_alert');
+		//echo bouton_block_visible('mess_alert');
+			bouton_block_depliable(_T("info_sans_titre"),true,'mess_alert');
+		
 	echo "<span class='verdana3'> <b> [ "._T('dw:attention_info')." ]</b></span>";
 	
 	if ($invisible)
-		echo debut_block_invisible('mess_alert');
+		//echo debut_block_invisible('mess_alert');
+			debut_block_depliable(false,'mess_alert');
 	else
-		echo debut_block_visible('mess_alert');
+		//echo debut_block_visible('mess_alert');
+			debut_block_depliable(true,'mess_alert');
+		
 	echo "<span class='verdana2'>".$texte_intro."</span><br />\n";
-	fin_bloc();
 	echo fin_block();
+	fin_bloc();
 
 
 	//
@@ -235,12 +245,12 @@ debut_cadre_relief(_DIR_IMG_DW2."fich_serv.gif");
 	// fin tableau
 	
 	if ($duplic=='oui') {
-		echo "<input type='hidden' name='duplic' value='oui'>";
+		echo "<input type='hidden' name='duplic' value='oui' />\n";
 	}
 
 	echo "<input type='hidden' name='redirect' value='".generer_url_ecrire("dw2_serv_edit")."' />\n";
 	echo "<input type='hidden' name='hash' value='".calculer_action_auteur("dw2actions-serveredit-rien")."' />\n";
-	echo "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />";
+	echo "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />\n";
 
 	echo "<input type='hidden' name='id_serv' value='$id_serv'>\n";
 	if(!$aff_final) {
@@ -263,14 +273,14 @@ debut_cadre_relief(_DIR_IMG_DW2."fich_serv.gif");
 	}
 
 
-fin_cadre_relief();
+echo fin_cadre_relief(true);
 
 
 //
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
-	echo "<div style='clear:both;'></div>";
+	echo "<div style='clear:both;'></div>\n";
 
-	fin_page();
+	echo fin_page();
 } // fin exec_
 
 ?>

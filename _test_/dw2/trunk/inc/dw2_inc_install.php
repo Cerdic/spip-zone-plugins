@@ -32,7 +32,7 @@ function dw2_create_table($nom, $champs, $cles, $autoinc=false) {
 		(($autoinc && ($p == $k)) ? " auto_increment" : '');
 		$s = ",";
 	}
-	spip_query_db("CREATE TABLE IF NOT EXISTS $nom ($query" . ($keys ? ",$keys" : '') . ")\n");
+	sql_query("CREATE TABLE IF NOT EXISTS $nom ($query" . ($keys ? ",$keys" : '') . ")\n");
 }
 
 
@@ -45,6 +45,10 @@ function ecriture_tables_dw2() {
 	# Skedus 09/2006: prefixage des tables avec spip_ ou le prefix choisi
 	if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix']."_";
 	else $table_pref = "spip_";
+	# chryjs 6/10/8 gestion en 2.0
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
+	$table_pref = preg_replace('/^spip/', $prefixe, $table_pref);
 	
 	$tables_dw2[$table_pref.'dw2_doc']      = array('field' => &$spip_dw2_doc,     'key' => &$spip_dw2_doc_key);
 	$tables_dw2[$table_pref.'dw2_triche']   = array('field' => &$spip_dw2_triche,  'key' => &$spip_dw2_triche_key);
@@ -53,7 +57,8 @@ function ecriture_tables_dw2() {
 	$tables_dw2[$table_pref.'dw2_config']   = array('field' => &$spip_dw2_config,  'key' => &$spip_dw2_config_key);
 	$tables_dw2[$table_pref.'dw2_acces_restreint']   = array('field' => &$spip_dw2_acces_restreint,  'key' => &$spip_dw2_acces_restreint_key);
 	$tables_dw2[$table_pref.'dw2_stats_auteurs']   = array('field' => &$spip_dw2_stats_auteurs,  'key' => &$spip_dw2_stats_auteurs_key);
-
+	// version_installee ?
+	
 	// créer tables dans bdd
 	foreach($tables_dw2 as $k => $v) {
 		dw2_create_table($k, $v['field'], $v['key'], false);// false : auto_increm dans def. des tables !
@@ -67,41 +72,45 @@ function ecriture_tables_dw2() {
 function maj_tables_dw2($old_vers) {
 	if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix']."_";
 	else $table_pref = "spip_";
-	
+	# chryjs  6/9/8  ajout support SPIP 2.0
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
+	$table_pref = preg_replace('/^spip/', $prefixe, $table_pref);
+		
 		if ($old_vers < 2.013)
 			{
-			spip_query("ALTER TABLE dw2_doc ADD heberge VARCHAR(255) DEFAULT 'local' NOT NULL");
-			spip_query("ALTER TABLE dw2_doc ADD id_serveur BIGINT(21) NOT NULL");
-			spip_query("ALTER TABLE dw2_doc MODIFY doctype TINYTEXT NOT NULL");
-			spip_query("ALTER TABLE dw2_doc ADD statut VARCHAR(10) DEFAULT 'actif' NOT NULL");
-			spip_query("ALTER TABLE dw2_doc DROP COLUMN id_rubrique");
-			spip_query("ALTER TABLE dw2_doc DROP COLUMN id_secteur");
-			spip_query("ALTER TABLE dw2_serv_ftp ADD designe TEXT NOT NULL");
+			sql_query("ALTER TABLE dw2_doc ADD heberge VARCHAR(255) DEFAULT 'local' NOT NULL");
+			sql_query("ALTER TABLE dw2_doc ADD id_serveur BIGINT(21) NOT NULL");
+			sql_query("ALTER TABLE dw2_doc MODIFY doctype TINYTEXT NOT NULL");
+			sql_query("ALTER TABLE dw2_doc ADD statut VARCHAR(10) DEFAULT 'actif' NOT NULL");
+			sql_query("ALTER TABLE dw2_doc DROP COLUMN id_rubrique");
+			sql_query("ALTER TABLE dw2_doc DROP COLUMN id_secteur");
+			sql_query("ALTER TABLE dw2_serv_ftp ADD designe TEXT NOT NULL");
 			}
 
 		if ($old_vers < 2.016)
 			{
-			spip_query("ALTER TABLE dw2_doc DROP PRIMARY KEY");
-			spip_query("ALTER TABLE dw2_doc CHANGE id_doc id_document BIGINT(21) NOT NULL");
-			spip_query("ALTER TABLE dw2_doc ADD PRIMARY KEY (id_document)");
+			sql_query("ALTER TABLE dw2_doc DROP PRIMARY KEY");
+			sql_query("ALTER TABLE dw2_doc CHANGE id_doc id_document BIGINT(21) NOT NULL");
+			sql_query("ALTER TABLE dw2_doc ADD PRIMARY KEY (id_document)");
 			}
 
 		if ($old_vers < 2.11)
 			{
-			spip_query("ALTER TABLE dw2_stats DROP PRIMARY KEY");
-			spip_query("ALTER TABLE dw2_stats DROP INDEX id_doc");
-			spip_query("ALTER TABLE dw2_stats ADD PRIMARY KEY (date, id_doc)");
+			sql_query("ALTER TABLE dw2_stats DROP PRIMARY KEY");
+			sql_query("ALTER TABLE dw2_stats DROP INDEX id_doc");
+			sql_query("ALTER TABLE dw2_stats ADD PRIMARY KEY (date, id_doc)");
 			}
 		
 		if ($old_vers < 2.13)
 			{
 			// (skedus) passer les tables en prefixage spip_ ou autre..
-			spip_query("RENAME TABLE dw2_doc TO ".$table_pref."dw2_doc");
-			spip_query("RENAME TABLE dw2_triche TO ".$table_pref."dw2_triche");
-			spip_query("RENAME TABLE dw2_stats TO ".$table_pref."dw2_stats");
-			spip_query("RENAME TABLE dw2_serv_ftp TO ".$table_pref."dw2_serv_ftp");
+			sql_query("RENAME TABLE dw2_doc TO ".$table_pref."dw2_doc");
+			sql_query("RENAME TABLE dw2_triche TO ".$table_pref."dw2_triche");
+			sql_query("RENAME TABLE dw2_stats TO ".$table_pref."dw2_stats");
+			sql_query("RENAME TABLE dw2_serv_ftp TO ".$table_pref."dw2_serv_ftp");
 			// ajout champ 'port'  pour serveur distant (deloc)
-			spip_query("ALTER TABLE spip_dw2_serv_ftp ADD port MEDIUMINT DEFAULT '21' NOT NULL AFTER host_dir");
+			sql_query("ALTER TABLE ".$table_pref."dw2_serv_ftp ADD port MEDIUMINT DEFAULT '21' NOT NULL AFTER host_dir");
 			}
 			
 		/*if ($old_vers < 2.1x) { }*/

@@ -50,18 +50,18 @@ function cron_dw2_verif_maj($t) {
 		$new_dw = $tbl_avis['version'];
 		
 		// version installee
-		$q=spip_query("SELECT valeur FROM spip_dw2_config WHERE nom='version_installee'");
-		$r=spip_fetch_array($q);
+		$q=sql_query("SELECT valeur FROM spip_dw2_config WHERE nom='version_installee'");
+		$r=sql_fetch($q);
 		$vers_inst = $r['valeur'];
 		
 		$serial_avis = serialize($tbl_avis);
 		
 		if($new_dw > $vers_inst) {
-			spip_query("UPDATE spip_dw2_config SET valeur='oui' WHERE nom='avis_maj'");
-			spip_query("UPDATE spip_dw2_config SET valeur='".$serial_avis."' WHERE nom='message_maj'");
+			sql_query("UPDATE spip_dw2_config SET valeur='oui' WHERE nom='avis_maj'");
+			sql_query("UPDATE spip_dw2_config SET valeur='".$serial_avis."' WHERE nom='message_maj'");
 		}
 		else {
-			spip_query("UPDATE spip_dw2_config SET valeur='non' WHERE nom='avis_maj'");
+			sql_query("UPDATE spip_dw2_config SET valeur='non' WHERE nom='avis_maj'");
 		}
 		spip_log("verif maj DW2 : ok");
 		return 1;

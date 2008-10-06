@@ -52,17 +52,17 @@ function convertir_anc_param() {
 	}
 	else {
 		// dw2_config absent => on deduit (!) la version
-		$tbla = spip_mysql_showtable('dw2_stats');
+		$tbla = sql_showtable('dw2_stats');
 		if($tbla['key']['PRIMARY KEY']=="date,id_doc"){
 			$dw_version="2.11";
 		}
 		else {
-			$tblb = spip_mysql_showtable('dw2_doc');
+			$tblb = sql_showtable('dw2_doc');
 			if($tblb['key']['PRIMARY KEY']=="id_document") {
 				$dw_version="2.016";
 			}
 			else {
-				$tblc = spip_mysql_showtable('dw2_serv_ftp');
+				$tblc = sql_showtable('dw2_serv_ftp');
 				if($tblc['field']['designe']){
 					$dw_version="2.013";
 				}

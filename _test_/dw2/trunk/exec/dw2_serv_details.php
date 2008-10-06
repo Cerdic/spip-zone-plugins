@@ -53,20 +53,22 @@ $id_serv=intval($id_serv);
 $query = "SELECT id_serv, serv_ftp, host_dir, chemin_distant, site_distant, login, mot_passe, ".
 			"DATE_FORMAT(date_crea,'%d/%m/%Y') AS datecrea, designe ".
 			"FROM spip_dw2_serv_ftp WHERE id_serv=$id_serv";
-$result = spip_query($query);
-$nbserv = spip_num_rows($result);
+$result = sql_query($query);
+$nbserv = sql_count($result);
 
 
 //
 // affichage
 //
 
-debut_page(_T('dw:titre_page_deloc'), "suivi", "dw2_deloc");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:titre_page_deloc'), "suivi", "dw2_deloc");
+
 	echo "<a name='haut_page'></a><br />";
-gros_titre(_T('dw:titre_page_deloc'));
+echo gros_titre(_T('dw:titre_page_deloc'),'','',true);
 
 
-debut_gauche();
+echo debut_gauche('',true);
 	// fonctions principales dw_deloc.php
 	menu_administration_deloc();
 	
@@ -75,38 +77,39 @@ debut_gauche();
 	
 	// retour dw2 admin
 	bloc_ico_page(_T('dw:acc_dw2_st'), generer_url_ecrire("dw2_admin"), _DIR_IMG_DW2."telech.gif");
-	echo "<br />";
+	echo "<br />\n";
 	
 	// Def. module doc deloc
-	echo "<br />";
-	debut_boite_info();
+	echo "<br />\n";
+	echo debut_boite_info(true);
 		echo "<span class='verdana2'>"._T('dw:txt_dd_intro_gauche')."</span><br />";
-	fin_boite_info();
+	echo fin_boite_info(true);
 	
-creer_colonne_droite();
+echo creer_colonne_droite('',true);
 
 	// vers popup aide 
+	echo "<br />\n";
 	bloc_ico_aide_ligne();
 
 	// signature
-	echo "<br />";
-	debut_boite_info();
+	echo "<br />\n";
+	echo debut_boite_info(true);
 		echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-	fin_boite_info();
-	echo "<br />";
+	echo fin_boite_info(true);
+	echo "<br />\n";
 
-debut_droite();
+echo debut_droite('',true);
 
-debut_cadre_relief(_DIR_IMG_DW2."fich_serv.gif");
+echo debut_cadre_relief(_DIR_IMG_DW2."fich_serv.gif",true);
 
 
 if ($nbserv==0)
 	{
-	echo "<br /><b>"._T('dw:aucun_serv_enreg')."<br />";
-	echo "<form action='".generer_url_ecrire("dw2_serv_edit")."' method='post'>";
-	echo "<div align='right' style='padding:5px;'>";
+	echo "<br /><b>"._T('dw:aucun_serv_enreg')."<br />\n";
+	echo "<form action='".generer_url_ecrire("dw2_serv_edit")."' method='post'>\n";
+	echo "<div align='right' style='padding:5px;'>\n";
 	echo _T('dw:saisir_nouv_serv_ftp');	
-	echo "<input type=submit value='"._T('dw:suite')."' class='fondo'></div></form>";
+	echo "<input type=submit value='"._T('dw:suite')."' class='fondo' /></div></form>\n";
 	}
 else
 	{
@@ -118,14 +121,14 @@ else
 	//
 	// tableau 
 	$ifond = 0;
-	echo "<br />";
+	echo "<br />\n";
 	echo "<table width='100%' border='0' cellpadding='2' cellspacing='0' class='verdana2'>\n";
 	echo "<tr bgcolor='$couleur_foncee'>";
 	echo "<td colspan='2'></td>\n";
-	echo "<td width='35%'><div align='right'><font color='#FFFFFF'>"._T('dw:fonctions')."</font></div></td>\n";//
+	echo "<td width='35%'><div align='right'><font color='#FFFFFF'>"._T('dw:fonctions')."</font></div></td>\n";
     echo "</tr>\n";
 	
-	$row=spip_fetch_array($result);
+	$row=sql_fetch($result);
 
 		$ifond = $ifond ^ 1;
 		$couleur = ($ifond) ? '#FFFFFF' : $couleur_claire;
@@ -199,15 +202,14 @@ else
 	//
 	// affichage liste des fichiers affectés
 	
-		debut_cadre_relief(_DIR_IMG_PACK."doc-24.gif");
+		echo debut_cadre_relief(_DIR_IMG_PACK."doc-24.gif",true);
 		echo "<div style='margin:2px; padding:3px;' align='center'>";
 
-		$r_doc = spip_query("SELECT d.id_document, d.url, d.heberge, d.id_serveur, s.taille ".
-							"FROM spip_dw2_doc AS d ".
-							"LEFT JOIN spip_documents AS s ON d.id_document=s.id_document ".
-							"WHERE id_serveur=$id_serv AND d.statut='actif' AND s.id_document IS NOT NULL");
+		$r_doc = sql_select("d.id_document, d.url, d.heberge, d.id_serveur, s.taille ",
+							"spip_dw2_doc AS d LEFT JOIN spip_documents AS s ON d.id_document=s.id_document ",
+							"id_serveur=$id_serv AND d.statut='actif' AND s.id_document IS NOT NULL");
 		$listfich = array();
-		while ($ldoc=spip_fetch_array($r_doc))
+		while ($ldoc=sql_fetch($r_doc))
 			{
 			$numdoc = $ldoc['id_document'];
 			$url = $ldoc['url'];
@@ -230,7 +232,7 @@ else
 		//tableau 2 colonnes
 		double_colonne($listfich, $chaine_titre, $icone_item, $info_supp);
 
-		fin_cadre_relief();
+		echo fin_cadre_relief(true);
 		
 		
 		//  si aucun doc lié .. bouton "effacer"
@@ -251,13 +253,13 @@ else
 		}
 		
 	}
-fin_cadre_relief();
+echo fin_cadre_relief(true);
 
 
 //
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
 	echo "<div style='clear:both;'></div>";
 
-	fin_page();
+	echo fin_page();
 } // fin exec_
 ?>

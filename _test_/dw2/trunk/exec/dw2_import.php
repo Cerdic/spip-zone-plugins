@@ -52,8 +52,8 @@ $id_serv=intval($id_serv);
 
 // details du serveur de destination : mon_site_ftp
 $query ="SELECT * FROM spip_dw2_serv_ftp WHERE id_serv='$id_serv'";
-$result= spip_query($query);
-$row = spip_fetch_array($result);
+$result= sql_query($query);
+$row = sql_fetch($result);
 	$ftp_server = $row['serv_ftp'];				// ftp.machin.net
 	$port = $row['port'];
 	$ftp_user_name = $row['login'];	
@@ -69,12 +69,14 @@ $row = spip_fetch_array($result);
 // affichage
 //
 
-debut_page(_T('dw:titre_page_deloc'), "suivi", "dw2_deloc");
-	echo "<a name='haut_page'></a><br />";
-gros_titre(_T('dw:titre_page_deloc'));
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:titre_page_deloc'), "suivi", "dw2_deloc");
+
+	echo "<a name='haut_page'></a><br />\n";
+echo gros_titre(_T('dw:titre_page_deloc'),'','',true);
 
 
-debut_gauche();
+echo debut_gauche("",true);
 	// fonctions principales dw_deloc.php
 	menu_administration_deloc();
 	
@@ -83,31 +85,32 @@ debut_gauche();
 	
 	// retour dw2 admin
 	bloc_ico_page(_T('dw:acc_dw2_st'), generer_url_ecrire("dw2_admin"), _DIR_IMG_DW2."telech.gif");
-	echo "<br />";
+	echo "<br />\n";
 	
 	// Def. module doc deloc
-	echo "<br />";
-	debut_boite_info();
-		echo "<span class='verdana2'>"._T('dw:txt_dd_intro_gauche')."</span><br />";
-	fin_boite_info();
+	echo "<br />\n";
+	echo debut_boite_info(true);
+		echo "<span class='verdana2'>"._T('dw:txt_dd_intro_gauche')."</span><br />\n";
+	echo fin_boite_info(true);
 	
-creer_colonne_droite();
+echo creer_colonne_droite('',true);
 
 	// vers popup aide 
+	echo "<br />\n";
 	bloc_ico_aide_ligne();
 
 	// signature
-	echo "<br />";
-	debut_boite_info();
+	echo "<br />\n";
+	echo debut_boite_info(true);
 		echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-	fin_boite_info();
-	echo "<br />";
+	echo fin_boite_info(true);
+	echo "<br />\n";
 
-debut_droite();
+echo debut_droite('',true);
 //
 // tableau
 
-debut_cadre_relief(_DIR_IMG_DW2."import-24.gif");
+echo debut_cadre_relief(_DIR_IMG_DW2."import-24.gif",true);
 
 
 // titre
@@ -116,8 +119,6 @@ debut_band_titre($couleur_foncee, "verdana3", "center");
 	echo _T('dw:ouvrir_serv').$ftp_server.$repertoire_dest."<br />\n";
 fin_bloc();
 
-
-	
 //
 // connexion au serveur
 
@@ -162,15 +163,15 @@ if($conex) {
 	
 	// recup tableau du Catalogue DW2
 	$fich_q = "SELECT id_document, SUBSTRING_INDEX(url, '/', -1) AS idmfich FROM spip_dw2_doc";
-	$fich_r = spip_query($fich_q);
+	$fich_r = sql_query($fich_q);
 
-	while($fich_t = spip_fetch_array($fich_r)) {
+	while($fich_t = sql_fetch($fich_r)) {
 		$tab_t[$fich_t['id_document']]=$fich_t['idmfich'];
 	}
 	
 	reset ($tab_t);
 
-	echo "<br />";
+	echo "<br />\n";
 	debut_band_titre("#DFDFDF");
 	echo "<span class='verdana3'><b>";
 	if($nb_k<=1)
@@ -186,8 +187,8 @@ if($conex) {
 	// Afficher les 2 colonnes (a_list - b_list)
 	$ic='0';
 	foreach($double_colonne as $aff_colonne) {
-		echo "<td width='50%' valign='top'>";
-		echo "<table width='100%' border='0' cellpadding='1' cellspacing='0' align='center'>";
+		echo "<td width='50%' valign='top'>\n";
+		echo "<table width='100%' border='0' cellpadding='1' cellspacing='0' align='center'>\n";
 		
 		$ifond = $ic;
 		while (list($fichier, $taille) = each($aff_colonne))
@@ -203,8 +204,8 @@ if($conex) {
 				{
 				$idmf = '1';
 				$iddoc = array_search($fichier,$tab_t);
-				$r_etat=spip_query("SELECT statut FROM spip_dw2_doc WHERE id_document=$iddoc");
-				$ligne=spip_fetch_array($r_etat);
+				$r_etat=sql_query("SELECT statut FROM spip_dw2_doc WHERE id_document=$iddoc");
+				$ligne=sql_fetch($r_etat);
 				$etat_arch=$ligne['statut'];
 				// on distingue les doc en archive
 				if ($etat_arch=='archive') {$couleur="#E8C8C8"; }
@@ -215,65 +216,65 @@ if($conex) {
 			echo "<tr bgcolor='".$couleur."'>";
 			echo "<form action='".generer_url_action("dw2actions", "arg=inclusdocserveur-".$id_serv)."' method='post'>";
 			echo "<td width='7%' height='25'>".
-				"<input type='hidden' name='id_serv' value='".$id_serv."'>\n".
-				"<input type='hidden' name='fichier' value='".$fichier."'>\n".
-				"<input type='hidden' name='taille' value='".$taille."'>\n".
-				"<input type='hidden' name='repert_dest' value='".$repert_distant."'>\n".
-				"<input type='hidden' name='sitedist' value='".$site_distant."'>\n";
+				"<input type='hidden' name='id_serv' value='".$id_serv."' />\n".
+				"<input type='hidden' name='fichier' value='".$fichier."' />\n".
+				"<input type='hidden' name='taille' value='".$taille."' />\n".
+				"<input type='hidden' name='repert_dest' value='".$repert_distant."' />\n".
+				"<input type='hidden' name='sitedist' value='".$site_distant."' />\n";
 				
 			echo "<input type='hidden' name='redirect' value='".generer_url_ecrire("dw2_affect_doc")."' />\n";
-			echo "<input type='hidden' name='hash' value='".calculer_action_auteur("dw2actions-inclusdocserveur-".$id_serv)."' />";
-			echo "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />";
+			echo "<input type='hidden' name='hash' value='".calculer_action_auteur("dw2actions-inclusdocserveur-".$id_serv)."' />\n";
+			echo "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />\n";
 
 			echo bout_select_fichier($fichier, $idmf, $iddoc, $id_serv, $site_distant, $repert_distant)."</td>\n".
 				"<td><span class='verdana2'>".$fichier_aff."</span></td>\n";
-			echo "<td width='28%'><div align='right'><span class='verdana2'>".taille_octets($taille)."</span></div></td>";
-			echo "</form></tr>";
+			echo "<td width='28%'><div align='right'><span class='verdana2'>".taille_octets($taille)."</span></div></td>\n";
+			echo "</form></tr>\n";
 			}
-		echo "</table></td>";
+		echo "</table></td>\n";
 		$ic++;
 	}
 	
-	echo "</tr></table><br />";
+	echo "</tr></table><br />\n";
 }
 else {
 	message_echec_connexion($message_conex);
 }
-fin_cadre_relief();
+echo fin_cadre_relief(true);
 
 
 //
 // notice  des icones
 //
-debut_cadre_relief("");
-	echo "<table width='100%' border='0' cellpadding='2' cellspacing='0' class='verdana2'>";
-	echo "<tr><td width='5%'><img src='"._DIR_IMG_DW2."puce-verte.gif' align='absmiddle'>";
-	echo "</td><td>"._T('dw:txt_defico_import_1')."</td></tr>";
+echo debut_cadre_relief("",true);
+	echo "<table width='100%' border='0' cellpadding='2' cellspacing='0' class='verdana2'>\n";
+	echo "<tr><td width='5%'><img src='"._DIR_IMG_DW2."puce-verte.gif' align='absmiddle' alt='' />\n";
+	echo "</td><td>"._T('dw:txt_defico_import_1')."</td></tr>\n";
 	//echo "<img src='"._DIR_IMG_PACK."puce-rouge-breve.gif' align='absmiddle'>&nbsp;"._T('dw:txt_defico_import_2')."<br />";
-	echo "<tr><td width='5%'><img src='"._DIR_IMG_DW2."puce-poubelle-breve.gif' align='absmiddle'>";
-	echo "</td><td>"._T('dw:txt_defico_import_3')."</td></tr>";
-	echo "<tr><td width='5%'> </td><td><br /><b>"._T('dw:txt_defico_import_4')."</b></td></tr>";
-	echo "<tr><td width='5%'><img src='"._DIR_IMG_DW2."dot_serveur2.gif' align='absmiddle' border='0'>";
-	echo "</td><td>"._T('dw:txt_defico_import_5')."</td></tr>";
-	echo "<tr><td width='5%'><img src='"._DIR_IMG_DW2."dot_serveur.gif' align='absmiddle' border='0'>";
-	echo "</td><td>"._T('dw:txt_defico_import_6')."</td></tr>";
-	echo "<tr><td width='5%'><img src='"._DIR_IMG_DW2."dot_serveur3.gif' align='absmiddle'>";
-	echo "</td><td>"._T('dw:txt_defico_import_7')."</td></tr>";
-	echo "<tr><td width='5%'><img src='"._DIR_IMG_DW2."puce-blanche-breve.gif' align='absmiddle'>";
-	echo "</td><td>"._T('dw:txt_defico_import_8').$ftp_server.$repertoire_dest."</td></tr>";
-	echo "<tr><td width='5%'> </td><td> </td></tr>";
-	echo "<tr><td width='5%'><img src='"._DIR_IMG_PACK."attachment.gif' align='absmiddle'>";
-	echo "</td><td>"._T('dw:txt_defico_import_10')."</td></tr>";
-	echo "<tr><td width='5%'><div style='display:inline; width:14px; background:#E8C8C8;'>&nbsp;&nbsp;&nbsp;</div>";
-	echo "</td><td>"._T('dw:txt_defico_import_9')."</td></tr>";
-	echo "</table>";
-fin_cadre_relief();
+	echo "<tr><td width='5%'><img src='"._DIR_IMG_DW2."puce-poubelle-breve.gif' align='absmiddle' alt='' />\n";
+	echo "</td><td>"._T('dw:txt_defico_import_3')."</td></tr>\n";
+	echo "<tr><td width='5%'> </td><td><br /><b>"._T('dw:txt_defico_import_4')."</b></td></tr>\n";
+	echo "<tr><td width='5%'><img src='"._DIR_IMG_DW2."dot_serveur2.gif' align='absmiddle' border='0' alt='' />\n";
+	echo "</td><td>"._T('dw:txt_defico_import_5')."</td></tr>\n";
+	echo "<tr><td width='5%'><img src='"._DIR_IMG_DW2."dot_serveur.gif' align='absmiddle' border='0' alt='' />\n";
+	echo "</td><td>"._T('dw:txt_defico_import_6')."</td></tr>\n";
+	echo "<tr><td width='5%'><img src='"._DIR_IMG_DW2."dot_serveur3.gif' align='absmiddle' alt='' />\n";
+	echo "</td><td>"._T('dw:txt_defico_import_7')."</td></tr>\n";
+	echo "<tr><td width='5%'><img src='"._DIR_IMG_DW2."puce-blanche-breve.gif' align='absmiddle' alt='' />\n";
+	echo "</td><td>"._T('dw:txt_defico_import_8').$ftp_server.$repertoire_dest."</td></tr>\n";
+	echo "<tr><td width='5%'> </td><td> </td></tr>\n";
+	echo "<tr><td width='5%'><img src='"._DIR_IMG_PACK."attachment.gif' align='absmiddle' alt='' />\n";
+	echo "</td><td>"._T('dw:txt_defico_import_10')."</td></tr>\n";
+	echo "<tr><td width='5%'><div style='display:inline; width:14px; background:#E8C8C8;'>&nbsp;&nbsp;&nbsp;</div>\n";
+	echo "</td><td>"._T('dw:txt_defico_import_9')."</td></tr>\n";
+	echo "</table>\n";
+echo fin_cadre_relief(true);
 
 
 //
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
-	echo "<div style='clear:both;'></div>";
+	echo "<div style='clear:both;'></div>\n";
 
-	fin_page();
+	echo fin_page();
 } // fin exec_
 ?>

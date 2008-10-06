@@ -33,13 +33,11 @@ function verifier_infos_dw2($item) {
 //
 // verifier presence table
 function dw2_showtable($nomtable) {
-    $a = spip_query("SHOW TABLES LIKE '$nomtable'");
-	if(!$b=spip_fetch_array($a)) return false;
+    //$a = sql_query("SHOW TABLES LIKE '$nomtable'");
+	if(!$b=sql_showtable($nomtable)) return false;
 	else return true;
 }
 
-	
-	
 #
 # Qui va là ?
 #
@@ -71,8 +69,7 @@ function dw2_showtable($nomtable) {
 #
 # DW2 est-il completement installe ?
 #
-	if(dw2_showtable("spip_dw2_config")){
-		
+	if(dw2_showtable("spip_dw2_config")){		
 		// OUI .. on en profite pour declarer les globales de config
 		lire_dw2_config();
 

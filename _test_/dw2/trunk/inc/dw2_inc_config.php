@@ -31,43 +31,43 @@ function aff_ligne_config($param, $titre_ligne, $type, $options, $mode_aff_var, 
 	else
 		{ $aff_val_actu.="&nbsp;".$val_param; }
 			
-	debut_cadre_trait_couleur("", false, "", _T('dw:txt_install_'.$titre_ligne)." ".$aff_val_actu);
+	$res = debut_cadre_trait_couleur("", true, "", _T('dw:txt_install_'.$titre_ligne)." ".$aff_val_actu);
 	
-	echo "\n<table width='100%' cellspacing='0' cellpadding='3' border='0' />\n";
-	echo "<tr><td width='70%'>";
-	echo "<span class='verdana2'>"._T('dw:txt_install_'.$txt_instal)."</span>\n";
-	echo "</td><td width='5%'> </td><td width='25%' valign='middle'>";
+	$res.= "\n<table width='100%' cellspacing='0' cellpadding='3' border='0' />\n";
+	$res.= "<tr><td width='70%'>";
+	$res.= "<span class='verdana2'>"._T('dw:txt_install_'.$txt_instal)."</span>\n";
+	$res.= "</td><td width='5%'> </td><td width='25%' valign='middle'>";
 	
 	// aff. selecteurs ...
 	//
 	if($type=='text') {
 		$maxl = (!$options) ? '3' : '';
 		$tsize = ($options) ? $options : '4';
-		echo "<input type='text' name='".$param."' value='".$val_param."' size='".$tsize."' maxlength='".$maxl."' class='fondl' />\n";
+		$res.= "<input type='text' name='".$param."' value='".$val_param."' size='".$tsize."' maxlength='".$maxl."' class='fondl' />\n";
 	}
 	elseif($type=='select') {
-		echo "<select name='".$param."' class='fondl'>";
+		$res.= "<select name='".$param."' class='fondl'>";
 		foreach($options as $val) {
 			$aff_selected = ($val_param==$val) ? ' selected=\"selected\"' : '' ;
-			echo "<option value='".$val."'".$aff_selected.">";
+			$res.= "<option value='".$val."'".$aff_selected.">";
 			if($mode_aff_var=='trad')
-				{ echo _T('dw:cfg_'.$param.'_val_'.$val); }
+				{ $res.= _T('dw:cfg_'.$param.'_val_'.$val); }
 			else
-				{ echo $val; }
-			echo "</option>";
+				{ $res.= $val; }
+			$res.= "</option>";
 		}
-		echo "</select>\n";
+		$res.= "</select>\n";
 	}
 	#h.25/12 au cas ou !
 	elseif($type=='radio') {	
 		foreach($options as $val) {
 			$aff_checked = ($val_param==$val) ? 'checked=\"checked\"' : '' ;
-			echo "<input type='radio' name='".$param."' value='".$val."' ".$aff_checked." />&nbsp;";
+			$res.= "<input type='radio' name='".$param."' value='".$val."' ".$aff_checked." />&nbsp;";
 			if($mode_aff_var=='trad')
-				{ echo _T('dw:cfg_'.$param.'_val_'.$val); }
+				{ $res.= _T('dw:cfg_'.$param.'_val_'.$val); }
 			else
-				{ echo $val; }
-			echo "<br />\n";
+				{ $res.= $val; }
+			$res.= "<br />\n";
 		}
 	}
 	elseif($type=='checkbox') {
@@ -76,21 +76,21 @@ function aff_ligne_config($param, $titre_ligne, $type, $options, $mode_aff_var, 
 			$tb_val=array();
 		}
 		// on passe toujours le tableau(menage fait dans 'action')
-		echo "<input type='hidden' name='".$param."[]' value='0' />\n";
+		$res.= "<input type='hidden' name='".$param."[]' value='0' />\n";
 		
 		foreach($options as $val) {
 			$aff_checked = (in_array($val,$tb_val))? 'checked=\"checked\"' : '';
-			echo "<input type='checkbox' name='".$param."[]' value='".$val."' ".$aff_checked." />&nbsp;";
+			$res.= "<input type='checkbox' name='".$param."[]' value='".$val."' ".$aff_checked." />&nbsp;";
 			if($mode_aff_var=='trad')
-				{ echo _T('dw:cfg_'.$param.'_val_'.$val); }
+				{ $res.= _T('dw:cfg_'.$param.'_val_'.$val); }
 			else
-				{ echo $val; }
-			echo "<br />\n";
+				{ $res.= $val; }
+			$res.= "<br />\n";
 		}
 	}
-	echo "\n</td></tr></table>\n";
-	fin_cadre_trait_couleur();
-
+	$res.= "\n</td></tr></table>\n";
+	$res.= fin_cadre_trait_couleur(true);
+	return $res;
 }
 
 
@@ -104,7 +104,7 @@ function formulaire_configuration() {
 
 
 	// titre page
-	debut_cadre_couleur(_DIR_IMG_DW2."configure.gif", false, "",'' );
+	echo debut_cadre_couleur(_DIR_IMG_DW2."configure.gif", true, "",'' );
 	debut_band_titre($couleur_foncee,'verdana3');
 	echo _T('dw:txt_install_01', array('vers_loc' => _DW2_VERS_PLUGIN));
 	fin_bloc();
@@ -122,20 +122,20 @@ function formulaire_configuration() {
 	if($GLOBALS['flag_dw2_inst']) {
 		$url_redirect = generer_url_ecrire("dw2_admin");
 	} else {
-		$url_redirect = $url_redirect = generer_url_ecrire("dw2_config");
+		$url_redirect = generer_url_ecrire("dw2_config");
 	}
 	
 	echo "<form action='".generer_url_action("dw2_ecrireconfig", "arg="._DW2_VERS_PLUGIN)."' method='post' />\n";
-	echo "<input type='hidden' name='redirect' value='".$url_redirect."' />\n";
-	echo "<input type='hidden' name='hash' value='".calculer_action_auteur("dw2_ecrireconfig "._DW2_VERS_PLUGIN)."' />\n";
-	echo "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />\n";
+	$res = "<input type='hidden' name='redirect' value='".$url_redirect."' />\n";
+	$res.= "<input type='hidden' name='hash' value='".calculer_action_auteur("dw2_ecrireconfig "._DW2_VERS_PLUGIN)."' />\n";
+	$res.= "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />\n";
 	
 	// signaler a 'action' -> install/maj
 	if($GLOBALS['flag_dw2_inst']) {
-		echo "<input type='hidden' name='change_version' value='oui' />\n";
+		$res.= "<input type='hidden' name='change_version' value='oui' />\n";
 	}
 	
-	echo "<p style='padding:3px;'><b> ".
+	$res.= "<p style='padding:3px;'><b> ".
 			($GLOBALS['flag_dw2_inst']? _T('dw:txt_install_15'):_T('dw:actuellement')).
 			" </b></p>\n";
 	//
@@ -245,32 +245,33 @@ function formulaire_configuration() {
 		
 		// affiche le bloc du param
 		if($titre_ligne) {
-			aff_ligne_config($item, $titre_ligne, $type, $options, $mode_aff_var, $txt_instal, $v);		
+			$res.= aff_ligne_config($item, $titre_ligne, $type, $options, $mode_aff_var, $txt_instal, $v);		
 		}
 		else {
 			// autres parametres non modifiables
 			if($item=='avis_maj') {
-				echo "<input type='hidden' name='".$item."' value='".$v."' />\n";
+				$res.= "<input type='hidden' name='".$item."' value='".$v."' />\n";
 			}
 			elseif($item=='message_maj') {
 				if(empty($v)) { $v=' '; }
-				echo "<input type='hidden' name='".$item."' value='".$v."' />\n";
+				$res.= "<input type='hidden' name='".$item."' value='".$v."' />\n";
 			}
 		}
 	}
 	
 
-	echo "<br /><div align='right'><input type='submit' value='"._T('dw:valider')."' class='fondo'></div>\n";
+	$res.= "<br /><div align='right'><input type='submit' value='"._T('bouton_valider')."' class='fondo'></div>\n";
+	echo $res;
 	echo "</form>";
 	
 	// date de la derniere verif de MaJ
-	$q=spip_query("SELECT DATE_FORMAT(maj, '%d/%m/%Y %H:%i') as datemaj FROM spip_dw2_config WHERE nom='avis_maj'");
-	$r=spip_fetch_array($q);
+	$q=sql_query("SELECT DATE_FORMAT(maj, '%d/%m/%Y %H:%i') as datemaj FROM spip_dw2_config WHERE nom='avis_maj'");
+	$r=sql_fetch($q);
 	echo "<br />";
 	debut_boite_filet('b', 'center');
 	echo _T('dw:date_verif_avis_maj_plugin', array('datemaj' => $r['datemaj']));
 	fin_bloc();
 	
-	fin_cadre_couleur();
+	echo fin_cadre_couleur(true);
 }
 ?>

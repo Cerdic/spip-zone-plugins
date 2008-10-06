@@ -51,21 +51,23 @@ foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
 // Total Compteurs par Catégories, Modif Cat', type fichiers
 $req1="SELECT categorie, COUNT(id_document) AS nbr_doc, SUM(total) AS tt_cat ".
 		"FROM spip_dw2_doc WHERE statut='actif' GROUP BY categorie ORDER BY tt_cat DESC";
-$res1=spip_query($req1);
-$nbcat=spip_num_rows($res1);
+$res1=sql_query($req1);
+$nbcat=sql_count($res1);
 
 
 //
 // affichage page
 //
 
-debut_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+
 echo "<a name='haut_page'></a><br />";
 
-gros_titre(_T('dw:titre_page_admin'));
+echo gros_titre(_T('dw:titre_page_admin'),'','',true);
 
 
-debut_gauche();
+echo debut_gauche('',true);
 
 	menu_administration_telech();
 	menu_voir_fiche_telech();
@@ -78,30 +80,30 @@ debut_gauche();
 	bloc_ico_page(_T('dw:acc_dw2_dd'), generer_url_ecrire("dw2_deloc"), _DIR_IMG_DW2."deloc.gif");
 
 
-creer_colonne_droite();
+echo creer_colonne_droite('',true);
 
 	// vers popup aide 
 	bloc_ico_aide_ligne();
 
 	// signature
 	echo "<br />";
-	debut_boite_info();
+	echo debut_boite_info(true);
 		echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-	fin_boite_info();
+	echo fin_boite_info(true);
 	echo "<br />";
 
-debut_droite();
+echo debut_droite('',true);
 
 if ($nbcat==0)
 	{
-	debut_cadre_relief(_DIR_IMG_PACK."statistiques-24.gif");
+	echo debut_cadre_relief(_DIR_IMG_PACK."statistiques-24.gif",true);
 	echo "<div class='verdana3 bold center'><br><b>"._T('dw:txt_cat_aucun')."<br><br><br>";
 	echo "<a href='".generer_url_ecrire("dw2_ajouts")."'>"._T('dw:ajout_doc')."</a></div><br>";
-	fin_cadre_relief();
+	echo fin_cadre_relief(true);
 	}
 else
 	{
-	debut_cadre_trait_couleur("statistiques-24.gif", false, "", _T('dw:txt_categ_trt'));
+	echo debut_cadre_trait_couleur("statistiques-24.gif", true, "", _T('dw:txt_categ_trt'));
 
 	$ifond = 0;
 	echo "<table width='100%' align='center' border='0' cellpadding='0' cellspacing='0'>".
@@ -111,7 +113,7 @@ else
 		"<td width='20%'><div class='verdana2 center'>"._T('dw:compteur')."</div></td>\n".
 		"</tr>";
 		$add_totaux = array();
-		while ($ligne1=spip_fetch_array($res1))
+		while ($ligne1=sql_fetch($res1))
 			{
 			$nomcat=$ligne1['categorie'];
 			$nbrdoc=$ligne1['nbr_doc'];
@@ -153,18 +155,17 @@ else
 		echo "<td width='20%'><div style='color:#ffffff;' class='verdana2 center bold'>".array_sum($add_totaux)."</div></td>";
 		echo "</tr></table>";
 
-	fin_cadre_trait_couleur();
+	echo fin_cadre_trait_couleur(true);
 
 
 	// Nbre et Type d'extension fichier des catégories
-	$req2="SELECT categorie, SUBSTRING_INDEX(url, '.', -1) AS typefich, COUNT(*) AS nbtype ".
-		"FROM spip_dw2_doc WHERE statut='actif' GROUP BY categorie, typefich";
-	$res2=spip_query($req2);
+	$res2=sql_query("SELECT categorie, SUBSTRING_INDEX(url, '.', -1) AS typefich, COUNT(*) AS nbtype ".
+		"FROM spip_dw2_doc WHERE statut='actif' GROUP BY categorie, typefich");
 
-	debut_cadre_trait_couleur("doc-24.gif", false, "", _T('dw:types_fich_cat'));
+	echo debut_cadre_trait_couleur("doc-24.gif", true, "", _T('dw:types_fich_cat'));
 
 	echo "<table width='100%' align='center' border='0' cellpadding='2' cellspacing='0'>\n";
-	while ($lig=spip_fetch_array($res2))
+	while ($lig=sql_fetch($res2))
 		{
 		$cat=$lig['categorie'];
 		$type_fichier=strtoupper($lig['typefich']);
@@ -182,9 +183,8 @@ else
 	echo "</table>\n";
 
 	// total des types fichiers
-	$req3="SELECT SUBSTRING_INDEX(url, '.', -1) AS typefich, COUNT(*) AS nbtype ".
-			"FROM spip_dw2_doc WHERE statut='actif' GROUP BY typefich";
-	$res3=spip_query($req3);
+	$res3=sql_query("SELECT SUBSTRING_INDEX(url, '.', -1) AS typefich, COUNT(*) AS nbtype ".
+			"FROM spip_dw2_doc WHERE statut='actif' GROUP BY typefich");
 	
 	echo "<table width='100%' align='center' border='0' cellpadding='2' cellspacing='0'>\n";
 	echo "<tr><td colspan='3'>";
@@ -193,7 +193,7 @@ else
 	fin_bloc();
 	echo "</td></tr>\n";
 	
-	while ($li=spip_fetch_array($res3))
+	while ($li=sql_fetch($res3))
 		{
 		$type_fichier=strtoupper($li['typefich']);
 		$nb_type=$li['nbtype'];
@@ -209,14 +209,15 @@ else
 		}
 	echo "</table><br>\n";
 	
-	fin_cadre_trait_couleur();
+	echo fin_cadre_trait_couleur(true);
 
 	}
 
 //
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
+	
 	echo "<div style='clear:both;'></div>";
 
-	fin_page();
+	echo fin_page();
 } // fin exec_
 ?>

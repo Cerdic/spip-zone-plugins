@@ -12,8 +12,8 @@
 //
 // initialise globales config
 function lire_dw2_config() {
-	if ($result = @spip_query("SELECT nom, valeur FROM spip_dw2_config")) {
-		while ($row = spip_fetch_array($result))
+	if ($result = @sql_select("nom, valeur","spip_dw2_config")) {
+		while ($row = sql_fetch($result))
 			$GLOBALS['dw2_param'][$row['nom']] = $row['valeur'];
 	}
 }

@@ -121,20 +121,16 @@ foreach($_POST as $k => $v) { $$k=$v; }
 
 	
 	// articles du site ayant des docs (choix selon mode, type)
-	$q=spip_query("SELECT SQL_CALC_FOUND_ROWS sda.id_".$objet.", sa.titre, sa.statut, sd.mode, 
-			COUNT(sda.id_document) as nb_doc 
-			FROM spip_documents_".$objet."s sda 
-			LEFT JOIN spip_".$objet."s sa ON sda.id_".$objet."=sa.id_".$objet." 
-			LEFT JOIN spip_documents sd ON sda.id_document=sd.id_document 
-			LEFT JOIN spip_dw2_doc dw ON sda.id_document = dw.id_document 
-			WHERE 1 $type $mode $catdw 
-			GROUP BY sda.id_".$objet." 
-			ORDER BY sa.titre LIMIT $dl,$nbr_lignes_tableau 
-			");
+	$q=sql_select("SQL_CALC_FOUND_ROWS sda.id_".$objet.", sa.titre, sa.statut, sd.mode, COUNT(sda.id_document) as nb_doc",
+					"spip_documents_".$objet."s sda LEFT JOIN spip_".$objet."s sa ON sda.id_".$objet."=sa.id_".$objet." LEFT JOIN spip_documents sd ON sda.id_document=sd.id_document LEFT JOIN spip_dw2_doc dw ON sda.id_document = dw.id_document ",
+					" 1 $type $mode $catdw ", // where
+					"sda.id_".$objet, // group by
+					"sa.titre", // order by
+					"$dl,$nbr_lignes_tableau"); // limit
 
 	// récup nombre total d'entrée
-	$nl= spip_query("SELECT FOUND_ROWS()");
-	$r_found = @spip_fetch_array($nl);
+	$nl= sql_query("SELECT FOUND_ROWS()");
+	$r_found = @sql_fetch($nl);
 	$nligne=$r_found['FOUND_ROWS()'];
 	
 	
@@ -143,7 +139,7 @@ foreach($_POST as $k => $v) { $$k=$v; }
 	$arr_arg =array('vl','obj','md','tp', 'cdw');
 	
 	
-	while($r=spip_fetch_array($q)) {
+	while($r=sql_fetch($q)) {
 		$id_objet=$r['id_'.$objet];
 		$titre=$r['titre'];
 		$statut=$r['statut'];
@@ -195,13 +191,15 @@ foreach($_POST as $k => $v) { $$k=$v; }
 // affichage page
 //
 
-debut_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+
 echo "<a name='haut_page'></a><br />";
 
-gros_titre(_T('dw:titre_page_admin'));
+echo gros_titre(_T('dw:titre_page_admin'),'','',true);
 
 
-debut_gauche();
+echo debut_gauche('',true);
 
 	menu_administration_telech();
 	menu_voir_fiche_telech();
@@ -214,19 +212,20 @@ debut_gauche();
 	bloc_ico_page(_T('dw:acc_dw2_dd'), generer_url_ecrire("dw2_deloc"), _DIR_IMG_DW2."deloc.gif");
 
 
-creer_colonne_droite();
+echo creer_colonne_droite('',true);
 
 	// vers popup aide 
+	echo "<br />\n";
 	bloc_ico_aide_ligne();
 
 	// signature
-	echo "<br />";
-	debut_boite_info();
+	echo "<br />\n";
+	echo debut_boite_info(true);
 		echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-	fin_boite_info();
+	echo fin_boite_info(true);
 	echo "<br />";
 
-debut_droite();
+echo debut_droite('',true);
 	
 	//
 	// onglets page ajouts global/catalogue images		
@@ -315,7 +314,7 @@ debut_droite();
 	// tableau art - rub
 	//
 
-	if(spip_num_rows($q)) {
+	if(sql_count($q)) {
 		
 		debut_cadre_relief(_DIR_IMG_DW2."catalogue.gif");
 		
@@ -345,8 +344,8 @@ debut_droite();
 		// tableau document de l'objet (art/rub)
 		//
 		if($sel) {
-			$rqob=spip_query("SELECT titre, statut FROM spip_".$objet."s WHERE id_".$objet."=".$sel);
-			$lgob=spip_fetch_array($rqob);
+			$rqob=sql_query("SELECT titre, statut FROM spip_".$objet."s WHERE id_".$objet."=".$sel);
+			$lgob=sql_fetch($rqob);
 			$ttr_obj=supprimer_numero(typo($lgob['titre']));
 			$statut_obj=$lgob['statut'];
 			
@@ -466,7 +465,7 @@ debut_droite();
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
 	echo "<div style='clear:both;'></div>";
 
-	fin_page();
+	echo fin_page();
 } // fin exec_
 
 ?>

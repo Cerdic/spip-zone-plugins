@@ -19,22 +19,22 @@ function totaux_restreint_stats($prdd,$prdf) {
 	if($prdf=='--') { $wheredate="date='$prdd'"; }
 	else { $wheredate = "date BETWEEN '$prdd' AND '$prdf'"; }
 	
-	$qtd=spip_query("SELECT COUNT(id_doc) as nb_telech, id_auteur 
+	$qtd=sql_query("SELECT COUNT(id_doc) as nb_telech, id_auteur 
 					FROM spip_dw2_stats_auteurs 
 					WHERE $wheredate 
 					GROUP BY id_auteur");
-	$tot_auteur=spip_num_rows($qtd);
+	$tot_auteur=sql_count($qtd);
 
-	while($ra=spip_fetch_array($qtd)) {
+	while($ra=sql_fetch($qtd)) {
 		$tbl_tel[]=$ra['nb_telech'];
 	}
 	if($tot_auteur>0) { // <-- eviter erreur array_sum !
 		$tot_telech=array_sum($tbl_tel);
 		
-		$qtf=spip_query("SELECT COUNT(DISTINCT id_doc) as f 
+		$qtf=sql_query("SELECT COUNT(DISTINCT id_doc) as f 
 					FROM spip_dw2_stats_auteurs 
 					WHERE $wheredate");
-		while($rf=spip_fetch_array($qtf)) {
+		while($rf=sql_fetch($qtf)) {
 			$tot_fichier=$rf['f'];
 		}
 	}
@@ -50,27 +50,23 @@ function alpha_restreint_item($prdd,$prdf,$table) {
 	else { $wheredate = "ds.date BETWEEN '$prdd' AND '$prdf'"; }
 	
 	if($table=='auteurs') {
-	$rq=spip_query("SELECT sa.nom 
-					FROM spip_dw2_stats_auteurs AS ds 
-					LEFT JOIN spip_auteurs AS sa ON ds.id_auteur = sa.id_auteur 
-					WHERE $wheredate  
-					GROUP BY ds.id_auteur 
-					ORDER BY sa.nom 
-					");
+	$rq=sql_select("sa.nom ",
+					"spip_dw2_stats_auteurs AS ds LEFT JOIN spip_auteurs AS sa ON ds.id_auteur = sa.id_auteur ",
+					$wheredate ,
+					"ds.id_auteur",
+					"sa.nom");
 	}
 	if($table=='documents') {
-	$rq=spip_query("SELECT sd.nom 
-					FROM spip_dw2_stats_auteurs AS ds 
-					LEFT JOIN spip_dw2_doc AS sd ON ds.id_doc = sd.id_document 
-					WHERE $wheredate  
-					GROUP BY ds.id_doc 
-					ORDER BY sd.nom 
-					");
+	$rq=sql_select("sd.nom ",
+					"spip_dw2_stats_auteurs AS ds LEFT JOIN spip_dw2_doc AS sd ON ds.id_doc = sd.id_document ",
+					$wheredate,
+					"ds.id_doc",
+					"sd.nom");
 	}
 	
 	// prepa table des prem lettres + compteur
 	$gen_ltt=array();
-	while ($row=spip_fetch_array($rq)) {
+	while ($row=sql_fetch($rq)) {
 		$gen_ltt[]=strtoupper(substr($row['nom'],0,1));
 	}
 
@@ -90,11 +86,11 @@ function alpha_restreint_item($prdd,$prdf,$table) {
 
 
 function select_premiere_date() {
-	$prd=spip_query("SELECT DATE_FORMAT(MIN(date),'%d/%m/%Y') as prem 
+	$prd=sql_query("SELECT DATE_FORMAT(MIN(date),'%d/%m/%Y') as prem 
 					FROM spip_dw2_stats_auteurs 
 					GROUP BY date 
 					");
-	$row=spip_fetch_array($prd);
+	$row=sql_fetch($prd);
 	return $row['prem'];	
 }
 

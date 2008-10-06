@@ -26,9 +26,9 @@ charger_generer_url();
 | return '1' or '0'
 */
 function droits_telecharge_auteur($id_auteur, $origine, $statut_doc) {
-	$qaut=spip_query("SELECT statut FROM spip_auteurs WHERE id_auteur=$id_auteur");
+	$qaut=sql_select("statut","spip_auteurs",'id_auteur=$id_auteur"');
 	
-	$raut=spip_fetch_array($qaut);
+	$raut=sql_fetch($qaut);
 	$statut_aut=$raut['statut'];
 	
 	switch ($statut_aut) {
@@ -72,7 +72,7 @@ function action_dw2_out() {
 	
 
 	// Faire un peu de menage ... Si time ip trop vieux .. on efface l'enreg !
-	spip_query("DELETE FROM spip_dw2_triche WHERE time < $timevire");
+	sql_query("DELETE FROM spip_dw2_triche WHERE time < $timevire");
 	
 
 
@@ -80,17 +80,17 @@ function action_dw2_out() {
 	// recherche le doc ($id)
 	//
 	// ## h.18/12 .. ajout de 'dw.restreint' ##
-	$req_dw = spip_query("SELECT dw.id_document, dw.url, dw.heberge ".
+	$req_dw = sql_query("SELECT dw.id_document, dw.url, dw.heberge ".
 					"FROM spip_dw2_doc dw, spip_documents sd ".
 					"WHERE dw.id_document='$id' AND sd.id_document='$id' AND dw.statut='actif'");
 
-	if(spip_num_rows($req_dw)) {
-		$rec = spip_fetch_array($req_dw);
+	if(sql_count($req_dw)) {
+		$rec = sql_fetch($req_dw);
 		$tabdoc = array('dw', $rec['url'], $rec['heberge']);
 	}
 	else {
-		$req_spip = spip_query("SELECT id_document, fichier, distant FROM spip_documents WHERE id_document='$id'");
-		$res = spip_fetch_array($req_spip);
+		$req_spip = sql_query("SELECT id_document, fichier, distant FROM spip_documents WHERE id_document='$id'");
+		$res = sql_fetch($req_spip);
 		$tabdoc = array('sp', $res['fichier'], $res['distant']);
 	}
 
@@ -157,12 +157,12 @@ function action_dw2_out() {
 			if ($GLOBALS['dw2_param']['anti_triche']=="oui") {
 				
 				//On recherche si couple ip/id existe déjà dans la base
-				$req_ipid = spip_query("SELECT * FROM spip_dw2_triche WHERE idsite LIKE '$id' AND ip LIKE '%$ip%'");
+				$req_ipid = sql_query("SELECT * FROM spip_dw2_triche WHERE idsite LIKE '$id' AND ip LIKE '%$ip%'");
 			
 				//Si l'ip/id n'existe pas dans la table, on l'ajoute
-				if(!spip_num_rows($req_ipid)) {
-					spip_query("INSERT INTO spip_dw2_triche VALUES('','$ip','$id', '$timee')");
-					#$nouv_insert = spip_insert_id();		
+				if(!sql_count($req_ipid)) {
+					sql_query("INSERT INTO spip_dw2_triche VALUES('','$ip','$id', '$timee')");
+					#$nouv_insert = mysql_insert_id();		
 					$increm = "oui";
 				}
 			}
@@ -177,26 +177,26 @@ function action_dw2_out() {
 				
 				$date = date("Y-m-d");
 								
-				spip_query("UPDATE spip_dw2_doc SET total=total+1, dateur=NOW() WHERE id_document='$id'");
+				sql_query("UPDATE spip_dw2_doc SET total=total+1, dateur=NOW() WHERE id_document='$id'");
 				
 				//h.28/12 .. restreint .. crea||increm ligne sur table stats_auteurs
 				
 				if($auteur_session && $statut_restrict >= '1') {
-					$rq = spip_query("SELECT * FROM spip_dw2_stats_auteurs WHERE id_doc='$id' AND id_auteur='$auteur_session'");
+					$rq = sql_query("SELECT * FROM spip_dw2_stats_auteurs WHERE id_doc='$id' AND id_auteur='$auteur_session'");
 					
-					if(!spip_num_rows($rq)) {
-						spip_query("INSERT IGNORE INTO spip_dw2_stats_auteurs (date, id_auteur, id_doc, date_enreg) VALUES (CURDATE(), '$auteur_session', '$id', NOW())");
+					if(!sql_count($rq)) {
+						sql_query("INSERT IGNORE INTO spip_dw2_stats_auteurs (date, id_auteur, id_doc, date_enreg) VALUES (CURDATE(), '$auteur_session', '$id', NOW())");
 					spip_log('enreg stat auteur');
 					}
 				}
 				
 				// créa ligne || incrementation ligne .. dw2_stats
-				$rst = spip_query("SELECT * FROM spip_dw2_stats WHERE date=CURDATE() AND id_doc='$id'");
-				if(!spip_num_rows($rst)) {
-					spip_query("INSERT IGNORE INTO spip_dw2_stats (date, id_doc, telech) VALUES ('$date', '$id', '1')");
+				$rst = sql_query("SELECT * FROM spip_dw2_stats WHERE date=CURDATE() AND id_doc='$id'");
+				if(!sql_count($rst)) {
+					sql_query("INSERT IGNORE INTO spip_dw2_stats (date, id_doc, telech) VALUES ('$date', '$id', '1')");
 				}
 				else {
-					spip_query("UPDATE spip_dw2_stats SET telech=telech+1 WHERE id_doc='$id' AND date='$date'");
+					sql_query("UPDATE spip_dw2_stats SET telech=telech+1 WHERE id_doc='$id' AND date='$date'");
 				}
 			}
 			

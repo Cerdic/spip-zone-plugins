@@ -43,11 +43,11 @@ function titredesc() {
 	$dl=($vl+0);
 
 //Nbr Total de Doc ...(Docs actifs
-$rcc_nligne=spip_query("SELECT id_document FROM spip_dw2_doc WHERE statut='actif'");
-$nligne=spip_num_rows($rcc_nligne);
+$rcc_nligne=sql_query("SELECT id_document FROM spip_dw2_doc WHERE statut='actif'");
+$nligne=sql_count($rcc_nligne);
 
 // prepa toutdeplier toutreplier + tableau des prem lettres
-	while ($row_dep=spip_fetch_array($rcc_nligne))
+	while ($row_dep=sql_fetch($rcc_nligne))
 		{
 		$iddoc=$row_dep['id_document'];
 		$les_docs[] = "bout$iddoc";
@@ -70,23 +70,22 @@ $nligne=spip_num_rows($rcc_nligne);
 		else if ($odb=='id_typ') { $orderby = 'd.id_doctype'; }
 		else { $orderby = 'd.date_crea DESC'; $odb='date'; }
 
-$quer="SELECT d.id_document, ".
-		"DATE_FORMAT(d.date_crea,'%d/%m/%Y') AS datecrea, ".
-		"d.url, d.doctype, d.id_doctype, ".
-		"d.categorie, SUBSTRING_INDEX(url, '/', -1) AS fichier, ".
-		"s.titre, s.descriptif ".
-		"FROM spip_dw2_doc AS d LEFT JOIN spip_documents AS s ON d.id_document=s.id_document ".
-		"WHERE d.statut='actif' ".
-		"ORDER BY $orderby LIMIT $dl,$nbr_lignes_tableau";
-$result=spip_query($quer);
-$nbliens=spip_num_rows($result);
+$result=sql_select("d.id_document, DATE_FORMAT(d.date_crea,'%d/%m/%Y') AS datecrea, 
+					d.url, d.doctype, d.id_doctype, d.categorie, 
+					SUBSTRING_INDEX(url, '/', -1) AS fichier, s.titre, s.descriptif",
+					"spip_dw2_doc AS d LEFT JOIN spip_documents AS s ON d.id_document=s.id_document ",
+					"d.statut='actif' ",
+					"", // group by
+					$orderby,
+					"$dl,$nbr_lignes_tableau");
+$nbliens=sql_count($result);
 
 
 //
 // ...
 //
 
-debut_cadre_trait_couleur("doc-24.gif", false, "", _T('dw:modif_titre_descriptif'));
+echo debut_cadre_trait_couleur("doc-24.gif", true, "", _T('dw:modif_titre_descriptif'));
 
 if ($nbliens==0)
 	{
@@ -199,7 +198,7 @@ else
 		// ligne du tableau
 		echo "<tr><td colspan='5' valign='top'>";
 		
-		debut_cadre_enfonce("", false, "", $bouton." ".$fichier." -- ".$datecrea);
+		echo debut_cadre_enfonce("", true, "", $bouton." ".$fichier." -- ".$datecrea);
 		
 		echo "<div class='verdana3' align='right' style='padding:2px;'><b>".aff_appart_doc($doctype, $iddoctype)."</b></div>\n";
 		echo "<div class='arial2 fondl' style='min-height:12px;'><b> ".$titre_doc."</b></div>\n";
@@ -210,7 +209,7 @@ else
 			form_titre_desc($iddoc, $titre_doc, $desc_doc, generer_url_ecrire("dw2_outils","outil=titredesc"));
 		echo fin_block();
 		
-		fin_cadre_enfonce();
+		echo fin_cadre_enfonce(true);
 
 		echo "</td></tr>\n";
 		}
@@ -218,7 +217,7 @@ else
 	
 	}
 
-fin_cadre_trait_couleur();
+echo fin_cadre_trait_couleur(true);
 
 
 }

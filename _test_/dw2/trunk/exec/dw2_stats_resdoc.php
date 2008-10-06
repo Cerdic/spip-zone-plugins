@@ -100,7 +100,7 @@ foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
 		$tot_fichier=$tbl_ltt[$wltt];
 	}
 	
-	$rq_doc=spip_query("SELECT COUNT(ds.id_auteur) as nb_abo, ds.id_doc, ".
+	$rq_doc=sql_query("SELECT COUNT(ds.id_auteur) as nb_abo, ds.id_doc, ".
 						"dd.nom as fichier ".
 						"FROM spip_dw2_stats_auteurs as ds, spip_dw2_doc as dd ".
 						"WHERE $where_date AND ds.id_doc=dd.id_document $where_ltt ".
@@ -112,13 +112,15 @@ foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
 // affichage page
 //
 
-debut_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
-echo "<a name='haut_page'></a><br />";
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
 
-gros_titre(_T('dw:titre_page_admin'));
+echo "<a name='haut_page'></a><br />\n";
+
+echo gros_titre(_T('dw:titre_page_admin'),'','',true);
 
 
-debut_gauche();
+echo debut_gauche('',true);
 
 	menu_administration_telech();
 	menu_voir_fiche_telech();
@@ -131,19 +133,20 @@ debut_gauche();
 	bloc_ico_page(_T('dw:acc_dw2_dd'), generer_url_ecrire("dw2_deloc"), _DIR_IMG_DW2."deloc.gif");
 
 
-creer_colonne_droite();
+echo creer_colonne_droite('',true);
 
 	// vers popup aide 
+	echo "<br />\n";
 	bloc_ico_aide_ligne();
 
 	// signature
-	echo "<br />";
-	debut_boite_info();
+	echo "<br />\n";
+	echo debut_boite_info(true);
 		echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-	fin_boite_info();
-	echo "<br />";
+	echo fin_boite_info(true);
+	echo "<br />\n";
 
-debut_droite();
+echo debut_droite('',true);
 
 	//
 	// onglets choix periode + stat auteurs		
@@ -153,37 +156,36 @@ debut_droite();
 	fin_onglet();
 	
 	debut_band_titre($couleur_foncee);
-		echo "<div align='center' class='verdana3'><b>"._T('dw:stats_abonnes_les_docs')."</b></div>";
+		echo "<div align='center' class='verdana3'><b>"._T('dw:stats_abonnes_les_docs')."</b></div>\n";
 	fin_bloc();	
 	
 	// selecteur periode
-	debut_cadre_relief("rien.gif");
+	echo debut_cadre_relief("rien.gif",true);
 		
 		// premiere date stats DW2
 		debut_boite_filet('a','center');
-		echo "<span class='verdana3'>".
+		echo "<span class='verdana3'>\n".
 			_T('dw:premiere_date_stats_site', array('prem_date' => affdate_base($debut_stats,'entier'))).
-			"</span>";
+			"</span>\n";
 		fin_bloc();
 	
 	formulaire_periode($periode['date1'],$periode['date2'],$annee_select,_request('exec'));
 
-	fin_cadre_relief();
+	echo fin_cadre_relief(true);
 	
-	debut_cadre_relief(_DIR_IMG_PACK."statistiques-24.gif");
+	echo debut_cadre_relief(_DIR_IMG_PACK."statistiques-24.gif",true);
 
 	//
 	// aff date selection
 	//
-	debut_cadre_relief("");
-		echo "<div style='text-align:center;'>".
-			_T('dw:selection')." :<br />".
-			(($wltt)? _T('dw:abonne_s')." : [<b> $wltt </b>]" : '')."<br />".
-			$aff_date1. (($aff_date2)? "&nbsp;&nbsp;:|:&nbsp;&nbsp;".$aff_date2 : '' )."<br />".
+	echo debut_cadre_relief("",true);
+		echo "<div style='text-align:center;'>\n".
+			_T('dw:selection')." :<br />\n".
+			(($wltt)? _T('dw:abonne_s')." : [<b> $wltt </b>]" : '')."<br />\n".
+			$aff_date1. (($aff_date2)? "&nbsp;&nbsp;:|:&nbsp;&nbsp;".$aff_date2 : '' )."<br />\n".
 			_T('dw:stats_info_totaux', array('tot_auteur'=>$tot_auteur,'tot_telech'=>$tot_telech,'tot_fichier'=>$tot_fichier)).
-			"</div>";
-	fin_cadre_relief();
-
+			"</div>\n";
+	echo fin_cadre_relief(true);
 
 	if (!$tot_fichier)
 		{
@@ -192,8 +194,7 @@ debut_droite();
 	else {
 		// premiere val de tranche en cours
 		$nba1 = $dl+1;
-	
-		
+
 		debut_band_titre("#dfdfdf");
 			echo "<div align='center' class='verdana2'>\n";
 			tranches($nba1, $tot_fichier, $nbr_lignes_tableau);
@@ -202,7 +203,7 @@ debut_droite();
 		
 		// affichage lettres pour tri-alphabetique
 		
-		echo "<div class='verdana2'>";
+		echo "<div class='verdana2'>\n";
 		bouton_tout_catalogue($page_affiche,"&prdd=".$prdd."&prdf=".$prdf);
 		reset ($tbl_ltt);
 		while (list($k,$v) = each($tbl_ltt)) {
@@ -210,29 +211,28 @@ debut_droite();
 			echo bouton_alpha($k);
 			echo "</a>\n";
 		}
-		echo "</div><div style='clear:both;'></div>";	
+		echo "</div><div style='clear:both;'></div>\n";
 		//
 
 		$ifond = 0;
-		
-	
+
 		// Entete tableau ..
-		echo "<table align='center' border='0' cellpadding='2' cellspacing='0' width='100%'>	
-				<tr><td width='85%' colspan='2' class='tete_colonne'>";
+		echo "<table align='center' border='0' cellpadding='2' cellspacing='0' width='100%'>\n
+				<tr><td width='85%' colspan='2' class='tete_colonne'>\n";
 
-		echo "<b>"._T('dw:nom_fiche')."</b>";
+		echo "<b>"._T('dw:nom_fiche')."</b>\n";
 		if(isset($wltt))
-			{ echo ".. [ <b>".$wltt."</b> ]"; }
+			{ echo ".. [ <b>".$wltt."</b> ]\n"; }
 
-		echo "</td>";
+		echo "</td>\n";
 
-		echo "<td width='15%' class='tete_colonne'>";
+		echo "<td width='15%' class='tete_colonne'>\n";
 
-		echo "<b>"._T('dw:abonne_s')."</b>";
+		echo "<b>"._T('dw:abonne_s')."</b>\n";
 
-		echo "</td></tr>";
+		echo "</td></tr>\n";
 		
-		while ($row=spip_fetch_array($rq_doc))
+		while ($row=sql_fetch($rq_doc))
 			{
 			$iddoc = $row['id_doc'];
 			$nom = $row['fichier'];
@@ -242,32 +242,31 @@ debut_droite();
 			$couleur = ($ifond) ? '#ffffff' : $couleur_claire;
 			
 			// ligne du tableau
-			echo "<tr bgcolor='$couleur'>";
-			echo "<td width='4%' height='20'>";
-			echo "<a href='".generer_url_ecrire("dw2_modif", "id=".$iddoc)."'>";
-			echo "<img src='"._DIR_IMG_DW2."fiche_doc-15.gif' border='0' align='absmiddle' title='"._T('dw:voir_fiche')."'>";
-			echo "</a>";
-			echo "</td>";
-			echo "<td width='80%'>";
+			echo "<tr bgcolor='$couleur'>\n";
+			echo "<td width='4%' height='20'>\n";
+			echo "<a href='".generer_url_ecrire("dw2_modif", "id=".$iddoc)."'>\n";
+			echo "<img src='"._DIR_IMG_DW2."fiche_doc-15.gif' border='0' align='absmiddle' title='"._T('dw:voir_fiche')."' alt='' />\n";
+			echo "</a>\n";
+			echo "</td>\n";
+			echo "<td width='80%'>\n";
 				
-			echo "<div class='arial2'><b>";
+			echo "<div class='arial2'><b>\n";
 				popup_stats_graph($iddoc,$nom);
-			echo "</b></div></td>";
+			echo "</b></div></td>\n";
 
 			echo "<td width='15%'><div align='center' class='arial2'><b>$nb_abo</b></div></td>\n";
 
 			echo "</tr>\n";
 			}
-		echo "</table>";
+		echo "</table>\n";
 	}
-	fin_cadre_relief();	
-
+	echo fin_cadre_relief(true);
 
 //
 
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
-	echo "<div style='clear:both;'></div>";
+	echo "<div style='clear:both;'></div>\n";
 
-	fin_page();
+	echo fin_page();
 } // fin exec_
 ?>

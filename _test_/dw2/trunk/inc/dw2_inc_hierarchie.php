@@ -15,8 +15,8 @@
 //
 function titre_maitre_dependance($table,$id) {
 	if($table) {
-		$q=spip_query("SELECT titre FROM spip_".$table."s WHERE id_$table=$id");
-		$r=spip_fetch_array($q);
+		$q=sql_query("SELECT titre FROM spip_".$table."s WHERE id_$table=$id");
+		$r=sql_fetch($q);
 		return $r['titre'];
 	} 
 	else return;
@@ -25,8 +25,8 @@ function titre_maitre_dependance($table,$id) {
 // recup id_parent
 function mum_rub($id_rubrique) {
 	if($id_rubrique=='') return;
-	$r=spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
-	$s=spip_fetch_array($r);
+	$r=sql_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
+	$s=sql_fetch($r);
 	if ($s['id_parent']!=$id_rubrique) {
 		return $s['id_parent'];
 	}
@@ -36,8 +36,8 @@ function mum_rub($id_rubrique) {
 // reucp rub parent article
 function mum_art($id_article) {
 	if($id_article=='') return;
-	$q=spip_query("SELECT id_rubrique FROM spip_articles WHERE id_article=$id_article");
-	$r=spip_fetch_array($q);
+	$q=sql_query("SELECT id_rubrique FROM spip_articles WHERE id_article=$id_article");
+	$r=sql_fetch($q);
 	return $r['id_rubrique'];
 }
 
@@ -53,8 +53,8 @@ function complete_rub($id_rubrique) {
 // former tableau hierarchie du doc
 function hierarchie_doc($id_document) {
 
-	$q=spip_query("SELECT doctype, id_doctype FROM spip_dw2_doc WHERE id_document=$id_document");
-	$r=spip_fetch_array($q);
+	$q=sql_query("SELECT doctype, id_doctype FROM spip_dw2_doc WHERE id_document=$id_document");
+	$r=sql_fetch($q);
 	$doctype=$r['doctype'];
 	$id_doctype=$r['id_doctype'];
 	
@@ -97,22 +97,22 @@ function hierarchie_rub($id_rubrique) {
 function dependance_restriction($id_objet, $type, $hierarchie, $perso="") {
 
 	if($type=='document') {
-		$q=spip_query("SELECT restreint FROM spip_dw2_acces_restreint WHERE id_document=$id_objet");
-		if(spip_num_rows($q) && $perso){
-			$r=spip_fetch_array($q);
+		$q=sql_query("SELECT restreint FROM spip_dw2_acces_restreint WHERE id_document=$id_objet");
+		if(sql_count($q) && $perso){
+			$r=sql_fetch($q);
 			return $retour=array($r['restreint'],$type,$id_objet);
 		}
 		else {
-			$q=spip_query("SELECT restreint FROM spip_dw2_acces_restreint WHERE id_article=".$hierarchie['art']);
-			if(spip_num_rows($q)) {
-				$r=spip_fetch_array($q);
+			$q=sql_query("SELECT restreint FROM spip_dw2_acces_restreint WHERE id_article=".$hierarchie['art']);
+			if(sql_count($q)) {
+				$r=sql_fetch($q);
 				return $retour=array($r['restreint'],'article',$hierarchie['art']);
 			}
 			else {
 				foreach($hierarchie['rubs'] as $idrub) {
-					$q=spip_query("SELECT restreint FROM spip_dw2_acces_restreint WHERE id_rubrique=".$idrub);
-					if(spip_num_rows($q)) {
-						$r=spip_fetch_array($q);
+					$q=sql_query("SELECT restreint FROM spip_dw2_acces_restreint WHERE id_rubrique=".$idrub);
+					if(sql_cout($q)) {
+						$r=sql_fetch($q);
 						return $retour=array($r['restreint'],'rubrique',$idrub);
 					}
 				}
@@ -124,16 +124,16 @@ function dependance_restriction($id_objet, $type, $hierarchie, $perso="") {
 	
 	#
 	if($type=='article') {
-		$q=spip_query("SELECT restreint FROM spip_dw2_acces_restreint WHERE id_article=$id_objet");
-		if(spip_num_rows($q) && $perso) {
-			$r=spip_fetch_array($q);
+		$q=sql_query("SELECT restreint FROM spip_dw2_acces_restreint WHERE id_article=$id_objet");
+		if(sql_count($q) && $perso) {
+			$r=sql_fetch($q);
 			return $retour=array($r['restreint'],$type,$id_objet);
 		}
 		else {
 			foreach($hierarchie['rubs'] as $idrub) {
-				$q=spip_query("SELECT restreint FROM spip_dw2_acces_restreint WHERE id_rubrique=".$idrub);
-				if(spip_num_rows($q)) {
-					$r=spip_fetch_array($q);
+				$q=sql_query("SELECT restreint FROM spip_dw2_acces_restreint WHERE id_rubrique=".$idrub);
+				if(sql_count($q)) {
+					$r=sql_fetch($q);
 					return $retour=array($r['restreint'],'rubrique',$idrub);
 				}
 			}
@@ -144,16 +144,16 @@ function dependance_restriction($id_objet, $type, $hierarchie, $perso="") {
 	
 	#
 	if($type=='rubrique') {
-		$q=spip_query("SELECT restreint FROM spip_dw2_acces_restreint WHERE id_rubrique=$id_objet");
-		if(spip_num_rows($q) && $perso){
-			$r=spip_fetch_array($q);
+		$q=sql_query("SELECT restreint FROM spip_dw2_acces_restreint WHERE id_rubrique=$id_objet");
+		if(sql_count($q) && $perso){
+			$r=sql_fetch($q);
 			return $retour=array($r['restreint'],$type,$id_objet);
 		}
 		else {
 			foreach($hierarchie['rubs'] as $idrub) {
-				$q=spip_query("SELECT restreint FROM spip_dw2_acces_restreint WHERE id_rubrique=".$idrub);
-				if(spip_num_rows($q)) {
-					$r=spip_fetch_array($q);
+				$q=sql_query("SELECT restreint FROM spip_dw2_acces_restreint WHERE id_rubrique=".$idrub);
+				if(sql_count($q)) {
+					$r=sql_fetch($q);
 					return $retour=array($r['restreint'],'rubrique',$idrub);
 				}
 			}
@@ -165,18 +165,18 @@ function dependance_restriction($id_objet, $type, $hierarchie, $perso="") {
 	
 	#
 	if($type=='racine') {
-		$q=spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent='0'");
+		$q=sql_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent='0'");
 		$secteurs=array();
-		while($r=spip_fetch_array($q)) {
+		while($r=sql_fetch($q)) {
 			$secteurs[]=$r['id_rubrique'];
 		}
 		reset($secteurs);
 		$i=0;
 		$res=array();
 		foreach($secteurs as $id) {
-			$u=spip_query("SELECT restreint FROM spip_dw2_acces_restreint WHERE id_rubrique=$id");
-			if(spip_num_rows($u)) {
-				$t=spip_fetch_array($u);
+			$u=sql_query("SELECT restreint FROM spip_dw2_acces_restreint WHERE id_rubrique=$id");
+			if(sql_count($u)) {
+				$t=sql_fetch($u);
 				array_push($res,$t['restreint']);
 				if($i>0 && $t['restreint']!=$res[0]) {
 					// dependance variable donc 0

@@ -57,12 +57,14 @@ $id_serv=intval($id_serv);
 // affichage
 //
 
-debut_page(_T('dw:titre_page_deloc'), "suivi", "dw2_deloc");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:titre_page_deloc'), "suivi", "dw2_deloc");
+
 	echo "<a name='haut_page'></a><br />";
-gros_titre(_T('dw:titre_page_deloc'));
+echo gros_titre(_T('dw:titre_page_deloc'),'','',true);
 
 
-debut_gauche();
+echo debut_gauche('',true);
 	// fonctions principales dw_deloc.php
 	menu_administration_deloc();
 	
@@ -71,33 +73,34 @@ debut_gauche();
 	
 	// retour dw2 admin
 	bloc_ico_page(_T('dw:acc_dw2_st'), generer_url_ecrire("dw2_admin"), _DIR_IMG_DW2."telech.gif");
-	echo "<br />";
+	echo "<br />\n";
 	
 	// Def. module doc deloc
-	echo "<br />";
-	debut_boite_info();
+	echo "<br />\n";
+	echo debut_boite_info(true);
 		echo "<span class='verdana2'>"._T('dw:txt_dd_intro_gauche')."</span><br />";
-	fin_boite_info();
+	echo fin_boite_info(true);
 	
-creer_colonne_droite();
+echo creer_colonne_droite('',true);
 
 	// vers popup aide 
+	echo "<br />\n";
 	bloc_ico_aide_ligne();
 
 	// signature
-	echo "<br />";
-	debut_boite_info();
+	echo "<br />\n";
+	echo debut_boite_info(true);
 		echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-	fin_boite_info();
-	echo "<br />";
+	echo fin_boite_info(true);
+	echo "<br />\n";
 
-debut_droite();
+echo debut_droite('',true);
 
 // iframe de collecte articles
 echo "\n<iframe id='action_dw2' name='action_dw2' src='".generer_url_ecrire("dw2_cherchart")."' width='1' height='1' style='position: absolute; visibility:hidden;'></iframe>\n";
 
 
-debut_cadre_relief(_DIR_IMG_DW2."import-24.gif");
+echo debut_cadre_relief(_DIR_IMG_DW2."import-24.gif",true);
 
 	//titre
 	debut_band_titre($couleur_foncee);
@@ -106,8 +109,8 @@ debut_cadre_relief(_DIR_IMG_DW2."import-24.gif");
 	fin_bloc();
 	// nom fichier
 	$query="SELECT url FROM spip_dw2_doc WHERE id_document=$id_document";
-	$result=spip_query($query);
-	$row=spip_fetch_array($result);
+	$result=sql_query($query);
+	$row=sql_fetch($result);
 	$fichier = substr(strrchr($row['url'],'/'), 1);
 	echo "<br /><span class='verdana3'>"._T('dw:fichier')." ".$fichier."</span><br /><br />\n";
 	
@@ -119,19 +122,19 @@ debut_cadre_relief(_DIR_IMG_DW2."import-24.gif");
 	echo "<form name='designedoc' action='".generer_url_action("dw2actions", "arg=docserveurlier-".$id_document)."' method='post'>";
 
 	// #TITRE et #DESCRIPTIF du Doc
-	debut_cadre_enfonce(_DIR_IMG_PACK."doc-24.gif", false, "", _T('dw:doc_lie_trt_descrip'));
+	echo debut_cadre_enfonce(_DIR_IMG_PACK."doc-24.gif", true, "", _T('dw:doc_lie_trt_descrip'));
 	echo "<div align='center'>";
 	echo "<span class='verdana2'><b>"._T('dw:titre')."</b></span><br />\n";
 	echo "<textarea name='trt_doc' rows='1' cols='40' wrap='soft' class='fondl'></textarea><br />\n";
 	echo "<span class='verdana2'><b>"._T('dw:descriptif')."</b></span><br />\n";
 	echo "<textarea name='descrip_doc' rows='2' cols='40' wrap='soft' class='fondl'></textarea>\n";
 	echo "</div>";
-	fin_cadre_enfonce();
+	echo fin_cadre_enfonce(true);
 	
-	echo "<br />";
+	echo "<br />\n";
 
 	// choix rubrique
-	debut_cadre_relief(_DIR_IMG_PACK."rubrique-24.gif");
+	echo debut_cadre_relief(_DIR_IMG_PACK."rubrique-24.gif",true);
 	echo "<b>"._T('dw:dans_rub')."</b><br />\n";
 	echo "<br /><SELECT name='id_rub' style='background-color: $couleur_claire; font-size: 90%; width:100%; font-face:verdana,arial,helvetica,sans-serif;' size=1>\n";
 	rub_parent("0");
@@ -144,21 +147,21 @@ debut_cadre_relief(_DIR_IMG_DW2."import-24.gif");
 	echo "<select name='proposition'>\n";
 	echo "<option value=''>Articles de la rubrique -----></option>";
 	echo "</select>\n";
-	echo "<br />";
+	echo "<br />\n";
 	
-	fin_cadre_relief();
+	echo fin_cadre_relief(true);
 	echo "<input type='hidden' name='type_categorie' value='$type_categorie' />\n";
 	echo "<input type='hidden' name='fichier' value='$fichier' />\n";
 	echo "<input type ='hidden' name='id_serv' value='$id_serv' />\n";
 	echo "<input type='hidden' name='hash' value='".calculer_action_auteur("dw2actions-docserveurlier-".$id_document)."' />\n";
 	echo "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />\n";			
-	echo "<div align='right'><input type=submit value='"._T('dw:suite')."' class='fondo'></div>\n";
+	echo "<div align='right'><input type=submit value='"._T('dw:suite')."' class='fondo' /></div>\n";
 	echo "</form>\n";
 	
-fin_cadre_relief();
+echo fin_cadre_relief(true);
 	
 	// bouton annuler la Destination... 
-	echo "<br />";
+	echo "<br />\n";
 	bouton_annule_dest($id_document,$id_serv);
 
 
@@ -166,6 +169,6 @@ fin_cadre_relief();
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
 	echo "<div style='clear:both;'></div>";
 
-	fin_page();
+	echo fin_page();
 } // fin exec_
 ?>

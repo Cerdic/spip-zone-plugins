@@ -52,14 +52,16 @@ foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
 	$dl=($vl+0);
 		
 	//nombre de lignes dans le catalogue (Docs actifs)	
-	$rcc_nligne=spip_query("SELECT nom, total FROM spip_dw2_doc WHERE statut='actif' ORDER BY nom");
-	$nligne=spip_num_rows($rcc_nligne);
+	$rcc_nligne=sql_select("nom, total","spip_dw2_doc","statut='actif'","","nom");
+	$nligne=sql_count($rcc_nligne);
 	
 	// defini total compteur si tous doc affichés
 	$tt_compt=total_compteur_actif();
 
 	// prepa table des prem lettres + compteur
-	while ($row=spip_fetch_array($rcc_nligne)) {
+	$gen_ltt=array();
+	$tbl_ltt=array();
+	while ($row=sql_fetch($rcc_nligne)) {
 		$gen_ltt[][strtoupper(substr($row['nom'],0,1))] = $row['total'];
 		}
 
@@ -95,12 +97,14 @@ foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
 	else { $orderby = 'total DESC'; $odb='tot'; }
 
 	// requete principale
-	$rq_ttdoc=spip_query("SELECT *, ROUND(total/(TO_DAYS(NOW()) - TO_DAYS(date_crea)),2) AS moyj, ".
+	$rq_ttdoc=sql_select("*, ROUND(total/(TO_DAYS(NOW()) - TO_DAYS(date_crea)),2) AS moyj, ".
 						"DATE_FORMAT(date_crea,'%d/%m/%Y') AS datecrea, ".
-						"DATE_FORMAT(dateur,'%d/%m/%Y - %H:%i') AS derdate ".
-						"FROM spip_dw2_doc ".
-						"WHERE statut='actif' $where_ltt ".
-						"ORDER BY $orderby LIMIT $dl,$nbr_lignes_tableau");
+						"DATE_FORMAT(dateur,'%d/%m/%Y - %H:%i') AS derdate ",
+						"spip_dw2_doc ",
+						"statut='actif' $where_ltt ",
+						"", //group by
+						$orderby,
+						"$dl,$nbr_lignes_tableau");
 
 	
 	// premiere date des stats (annee) --> pour dates : selecteur annee
@@ -113,13 +117,14 @@ foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
 // affichage page
 //
 
-debut_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
 echo "<a name='haut_page'></a><br />";
 
-gros_titre(_T('dw:titre_page_admin'));
+echo gros_titre(_T('dw:titre_page_admin'),'','',true);
 
 
-debut_gauche();
+echo debut_gauche('',true);
 
 	menu_administration_telech();
 	menu_voir_fiche_telech();
@@ -132,33 +137,33 @@ debut_gauche();
 	bloc_ico_page(_T('dw:acc_dw2_dd'), generer_url_ecrire("dw2_deloc"), _DIR_IMG_DW2."deloc.gif");
 
 
-creer_colonne_droite();
+echo creer_colonne_droite('',true);
 
 	// vers popup aide 
 	bloc_ico_aide_ligne();
 
 	// signature
-	echo "<br />";
-	debut_boite_info();
+	echo "<br />\n";
+	echo debut_boite_info(true);
 		echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-	fin_boite_info();
-	echo "<br />";
+	echo fin_boite_info(true);
+	echo "<br />\n";
 
-debut_droite();
+echo debut_droite('',true);
 	
 	echo debut_onglet().
 	onglet(_T('dw:stats_generales_titre'), generer_url_ecrire("dw2_stats"), 'aff_gen', 'aff_gen', "cal-mois.gif").
 	onglet(_T('dw:stats_periode_titre'), generer_url_ecrire("dw2_stats_prd"), 'aff_prd', '', "cal-semaine.gif").
 	fin_onglet();
 	
-	debut_cadre_relief(_DIR_IMG_PACK."statistiques-24.gif");
+	echo debut_cadre_relief(_DIR_IMG_PACK."statistiques-24.gif",true);
 
 	if ($nligne==0)
 		{
-		echo "<br /><b>"._T('dw:txt_cat_aucun')."<br />";
-		echo "<br /><br /><font color='#cf4040'><a href='".generer_url_ecrire("dw2_ajouts")."'>"._T('dw:ajout_doc')."</a></font></b><br />";
-		fin_cadre_relief();
-		break;
+		echo "<br /><b>"._T('dw:txt_cat_aucun')."<br />\n";
+		echo "<br /><br /><font color='#cf4040'><a href='".generer_url_ecrire("dw2_ajouts")."'>"._T('dw:ajout_doc')."</a></font></b><br />\n";
+		echo fin_cadre_relief(true);
+		//break;
 		}
 	else
 		{
@@ -169,15 +174,15 @@ debut_droite();
 		debut_boite_filet('a','center');
 		echo "<span class='verdana3'>".
 			_T('dw:premiere_date_stats_site', array('prem_date' => affdate_base($debut_stats,'entier'))).
-			"</span>";
+			"</span>\n";
 		fin_bloc();
 		
 		
-		echo "<br /><div align='center' class='verdana3'>";
+		echo "<br /><div align='center' class='verdana3'>\n";
 		if(isset($wltt))
 			{ echo "[ <b>".$wltt."...</b> ]"; }
 		echo _T('dw:nbr_docs_nbr_telech', array('nligne' => $nligne, 'tt_compt' => $tt_compt));
-		echo "</div><br />";
+		echo "</div><br />\n";
 
 		debut_band_titre("#dfdfdf");
 			echo "<div align='center' class='verdana2'>\n";
@@ -188,7 +193,7 @@ debut_droite();
 		$ifond = 0;
 		
 		// affichage lettres pour tri-alphabetique
-		echo "<div class='verdana2'>";
+		echo "<div class='verdana2'>\n";
 		bouton_tout_catalogue("dw2_stats");
 		reset ($tbl_ltt);
 		while (list($k) = each($tbl_ltt))
@@ -198,49 +203,47 @@ debut_droite();
 			echo bouton_alpha($k);
 			echo "</a>\n";
 			}
-		echo "</div><div style='clear:both;'></div>";	
-		// 
-	
+		echo "</div><div style='clear:both;'></div>\n";
 	
 		// Entete tableau ..
-		echo " <table align='center' border='0' cellpadding='2' cellspacing='0' width='100%'>	
-				<tr><td width='53%' colspan='2' class='tete_colonne'>
-				<div style='float:right;' title='"._T('dw:telech_du_jour')."'>[x]</div>";
+		echo " <table align='center' border='0' cellpadding='2' cellspacing='0' width='100%'>\n	
+				<tr><td width='53%' colspan='2' class='tete_colonne'>\n
+				<div style='float:right;' title='"._T('dw:telech_du_jour')."'>[x]</div>\n";
 		if($odb!='nom') {
 			$lien=parametre_url(self(),'odb','');
 			$lien=parametre_url(self(),'odb','nom');
-			echo "<a href='".$lien."'>"._T('dw:nom_fiche')."</a>";
+			echo "<a href='".$lien."'>"._T('dw:nom_fiche')."</a>\n";
 		} else {
-			echo "<b>"._T('dw:nom_fiche')."</b>";
+			echo "<b>"._T('dw:nom_fiche')."</b>\n";
 		}
-		echo "</td><td width='23%' class='tete_colonne'>";
+		echo "</td><td width='23%' class='tete_colonne'>\n";
 		if($odb!='dat') {
 			$lien=parametre_url(self(),'odb','');
 			$lien=parametre_url(self(),'odb','dat');
-			echo "<a href='".$lien."'>"._T('dw:dernier_en_date')."</a>";
+			echo "<a href='".$lien."'>"._T('dw:dernier_en_date')."</a>\n";
 
 		} else {
-			echo "<b>"._T('dw:dernier_en_date')."</b>";
+			echo "<b>"._T('dw:dernier_en_date')."</b>\n";
 		}
-		echo "</td><td width='13%' class='tete_colonne'>";
+		echo "</td><td width='13%' class='tete_colonne'>\n";
 		if($odb!='tot') {
 			$lien=parametre_url(self(),'odb','');
 			$lien=parametre_url(self(),'odb','tot');
-			echo "<a href='".$lien."'>"._T('dw:compteur')."</a>";
+			echo "<a href='".$lien."'>"._T('dw:compteur')."</a>\n";
 		} else {
-			echo "<b>"._T('dw:compteur')."</b>";
+			echo "<b>"._T('dw:compteur')."</b>\n";
 		}
-		echo "</td><td width='11%' class='tete_colonne'>";
+		echo "</td><td width='11%' class='tete_colonne'>\n";
 		if($odb!='moy') {
 			$lien=parametre_url(self(),'odb','');
 			$lien=parametre_url(self(),'odb','moy');
-			echo "<a href='".$lien."'>"._T('dw:moyenne_jours')."</a>";
+			echo "<a href='".$lien."'>"._T('dw:moyenne_jours')."</a>\n";
 		} else {
-			echo "<b>"._T('dw:moyenne_jours')."</b>";
+			echo "<b>"._T('dw:moyenne_jours')."</b>\n";
 		}
-		echo "</td></tr>";
+		echo "</td></tr>\n";
 		
-		while ($a_row=spip_fetch_array($rq_ttdoc))
+		while ($a_row=sql_fetch($rq_ttdoc))
 			{
 			$iddoc = $a_row['id_document'];
 			$nom = $a_row['nom'];
@@ -254,10 +257,10 @@ debut_droite();
 			$nom = wordwrap($nom,25,' ',1);
 
 			// telech du jour
-			$res=spip_query("SELECT telech FROM spip_dw2_stats WHERE id_doc=$iddoc AND TO_DAYS(date)=TO_DAYS(NOW())");
-			$nl_res=spip_num_rows($res);
+			$res=sql_select("telech","spip_dw2_stats","id_doc=$iddoc AND TO_DAYS(date)=TO_DAYS(NOW())");
+			$nl_res=sql_count($res);
 			if($nl_res=1) {
-				$r_row=spip_fetch_array($res);
+				$r_row=sql_fetch($res);
 				$telech_jour = $r_row['telech'];
 			}
 			
@@ -265,38 +268,36 @@ debut_droite();
 			$couleur = ($ifond) ? '#ffffff' : $couleur_claire;
 			
 			// ligne du tableau
-			echo "<tr bgcolor='$couleur'>";
-			echo "<td width='4%' height='20'>";
-			echo "<a href='".generer_url_ecrire("dw2_modif", "id=".$iddoc)."'>";
-			echo "<img src='"._DIR_IMG_DW2."fiche_doc-15.gif' border='0' align='absmiddle' title='"._T('dw:voir_fiche')."'>";
-			echo "</a>";
-			echo "</td>";
-			echo "<td width='49%'>";
+			echo "<tr bgcolor='$couleur'>\n";
+			echo "<td width='4%' height='20'>\n";
+			echo "<a href='".generer_url_ecrire("dw2_modif", "id=".$iddoc)."'>\n";
+			echo "<img src='"._DIR_IMG_DW2."fiche_doc-15.gif' border='0' align='absmiddle' title='"._T('dw:voir_fiche')."' alt='voir fiche' />\n";
+			echo "</a>\n";
+			echo "</td>\n";
+			echo "<td width='49%'>\n";
 				if($telech_jour)
-					{ echo "<div style='float:right;'> [$telech_jour]</div>"; }
-			echo "<div class='arial2' title='".$datecrea."'><b>";
+					{ echo "<div style='float:right;'> [$telech_jour]</div>\n"; }
+			echo "<div class='arial2' title='".$datecrea."'><b>\n";
 				popup_stats_graph($iddoc,$nom);
-			echo "</b></div></td>";
+			echo "</b></div></td>\n";
 			echo "<td width='23%'><div align='center' class='arial2'>$der_date</div></td>\n";
 			echo "<td width='13%'><div align='center' class='arial2'><b>$total</b></div></td>\n";
 			echo "<td width='11%'><div align='center' class='arial2'>$moyj</div></td>\n";
 			echo "</tr>\n";
 			}
-		echo "</table>";
+		echo "</table>\n";
 		}
-	fin_cadre_relief();
-
+	echo fin_cadre_relief(true);
 
 	//
 	// graph stats globales base-105j ( <-- spip)
 	//
 	include(_DIR_PLUGIN_DW2."/inc/dw2_inc_stats.php");
 	
-	
 	//
 	//
 	if($anti_triche=='oui') {
-		debut_cadre_relief("");
+		echo debut_cadre_relief("",true);
 		// Nbre de visit pour telech. ce jour
 			$debj = getdate(time());
 			// timestamp debut journée (00:00) + 24h
@@ -304,29 +305,29 @@ debut_droite();
 			// temps T + 24h
 			$ts_now = time()+86400;
 	
-			$query="SELECT COUNT(DISTINCT ip) AS nb_visit 
-					FROM spip_dw2_triche WHERE time BETWEEN $ts_debj AND $ts_now";
-			$result = spip_query($query);
-			if ($rowv = @spip_fetch_array($result)) {
+			$result = sql_select("COUNT(DISTINCT ip) AS nb_visit",
+									"spip_dw2_triche",
+									"time BETWEEN $ts_debj AND $ts_now");
+			if ($rowv = @sql_fetch($result)) {
 				$nb_visit = $rowv['nb_visit'];
 			} else {
 				$nb_visit = '0';
 			}
-		echo "<div class='verdana2' align='right'>";
+		echo "<div class='verdana2' align='right'>\n";
 		if($nb_visit<=1)
 			{ echo _T('dw:telech_jour_par', array('nb_visit' => $nb_visit)); }
 		else
 			{ echo _T('dw:telech_jour_par_s', array('nb_visit' => $nb_visit)); }
-		echo "</div>";
-		fin_cadre_relief();
+		echo "</div>\n";
+		echo fin_cadre_relief(true);
 	}
 
 
 	//
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
-	echo "<div style='clear:both;'></div>";
+	echo "<div style='clear:both;'></div>\n";
 
-	fin_page();
+	echo fin_page();
 } // fin exec_
 
 ?>

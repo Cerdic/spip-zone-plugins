@@ -71,8 +71,8 @@ function dw_redir($texte) {
 			}
 			else {
 				$chem=$inreg[2];
-				$res=spip_query("SELECT id_document FROM spip_documents WHERE fichier='$chem'");
-				while($row=spip_fetch_array($res)) {
+				$res=sql_query("SELECT id_document FROM spip_documents WHERE fichier='$chem'");
+				while($row=sql_fetch($res)) {
 					$id = $row['id_document'];
 					$retour = $inreg[1]."?action=dw2_out&id=$id".$inreg[4];
 				}
@@ -87,8 +87,8 @@ function dw_redir($texte) {
 	if(preg_match_all($expres2, $texte, $reg2, PREG_SET_ORDER)) {
 		foreach($reg2 as $in_reg) {
 			$chemin=$inreg[2];
-			$res2=spip_query("SELECT id_document FROM spip_documents WHERE fichier='$chemin'");
-			while($row2 = spip_fetch_array($res2)) {
+			$res2=sql_query("SELECT id_document FROM spip_documents WHERE fichier='$chemin'");
+			while($row2 = sql_fetch($res2)) {
 				$id = $row2['id_document'];
 				$replace = $in_reg[1]."?action=dw2_out&id=$id".$in_reg[4];
 			}

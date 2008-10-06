@@ -28,7 +28,8 @@ global 	$connect_statut,
 	$hors_dw = true;
 //
 
-debut_page(_T('dw:cat_images_de', array('nom_site_spip' => $nom_site_spip)), "documents", "images");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:cat_images_de', array('nom_site_spip' => $nom_site_spip)), "documents", "images");
 echo "<a name='haut_page'></a>";
 	
 // function requises ...
@@ -37,7 +38,7 @@ include_spip("inc/dw2_inc_func");
 include_spip("inc/dw2_inc_pres");
 
 
-	debut_grand_cadre();
+echo	debut_grand_cadre(true);
 
 		# simple include pour ne pas passer par fonction spip en sup. (na !))
 		include(_DIR_PLUGIN_DW2."/inc/dw2_inc_images.php");
@@ -45,27 +46,27 @@ include_spip("inc/dw2_inc_pres");
 
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
 	echo "<div style='clear:both;'></div>";
-	fin_grand_cadre();
+	echo fin_grand_cadre(true);
 	
-	debut_gauche();
-		debut_boite_info();
-		echo "<img src='"._DIR_IMG_DW2."vignette-16.png' align='absmiddle'>
+	echo debut_gauche('',true);
+		echo debut_boite_info(true);
+		echo "<img src='"._DIR_IMG_DW2."vignette-16.png' align='absmiddle' alt='' />
 				<span class='arial2'> "._T('dw:txt_info_vignette')."</span>";
-		fin_boite_info();
+		echo fin_boite_info(true);
 	
 	
-	creer_colonne_droite();
+	echo creer_colonne_droite('',true);
 		// signature
-		debut_boite_info();
+		echo debut_boite_info(true);
 			echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-		fin_boite_info();
+		echo fin_boite_info(true);
 
 
 	// juste pour repousser à droite : creer_colonne_droite ..
-	debut_droite();
+	echo debut_droite('',true);
 
 
-	fin_page();
+	echo fin_page();
 
 }
 ?>

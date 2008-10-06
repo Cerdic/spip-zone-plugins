@@ -34,8 +34,8 @@ function balise_DW2_ALERTE_dyn($opt) {
 function affichage_dw2_alerte($opt) {
 
 	# recup nom squlett catalogue si opt=3
-	$result = @spip_query("SELECT valeur FROM spip_dw2_config WHERE nom='squelette_cata_public'");
-	while ($row = spip_fetch_array($result)) {
+	$result = @sql_query("SELECT valeur FROM spip_dw2_config WHERE nom='squelette_cata_public'");
+	while ($row = sql_fetch($result)) {
 		$cata = $row['valeur'];
 	}
 		

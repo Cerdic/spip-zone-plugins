@@ -75,7 +75,7 @@ foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
 	
 /*
 	// prepa table des prem lettres + compteur
-	while ($row=spip_fetch_array($rcc_nligne)) {
+	while ($row=sql_fetch($rcc_nligne)) {
 		$gen_ltt[][strtoupper(substr($row['nom'],0,1))] = $row['total'];
 		}
 
@@ -117,14 +117,16 @@ foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
 	
 
 	// requete principaleLIMIT $dl,$nbr_lignes_tableau
-	$rq=spip_query("SELECT ds.id_doc, ds.date, ds.telech, dd.url, dd.nom, dd.total ".
-			"FROM spip_dw2_stats ds LEFT JOIN spip_dw2_doc dd ON ds.id_doc=dd.id_document ".
-			"WHERE $where_date ORDER BY dd.nom ");
+	$rq=sql_select("ds.id_doc, ds.date, ds.telech, dd.url, dd.nom, dd.total ",
+			"spip_dw2_stats ds LEFT JOIN spip_dw2_doc dd ON ds.id_doc=dd.id_document ",
+			$where_date,
+			"",
+			"dd.nom"); // order by
 	
 	$tbl_fichier=array();
 	$i=0;
 	$nom_prec='';
-	while ($row=spip_fetch_array($rq)) {
+	while ($row=sql_fetch($rq)) {
 		$iddoc = $row['id_doc'];
 		$nomfichier = substr(strrchr($row['url'],'/'), 1);
 		$telech = $row['telech'];
@@ -166,13 +168,15 @@ foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
 // affichage page
 //
 
-debut_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('dw:titre_page_admin'), "suivi", "dw2_admin");
+
 echo "<a name='haut_page'></a><br />";
 
-gros_titre(_T('dw:titre_page_admin'));
+echo gros_titre(_T('dw:titre_page_admin'),'','',true);
 
 
-debut_gauche();
+echo debut_gauche('',true);
 
 	menu_administration_telech();
 	menu_voir_fiche_telech();
@@ -185,19 +189,20 @@ debut_gauche();
 	bloc_ico_page(_T('dw:acc_dw2_dd'), generer_url_ecrire("dw2_deloc"), _DIR_IMG_DW2."deloc.gif");
 
 
-creer_colonne_droite();
+echo creer_colonne_droite('',true);
 	
 	// vers popup aide 
+	echo "<br />\n";
 	bloc_ico_aide_ligne();
 
 	// signature
-	echo "<br />";
-	debut_boite_info();
+	echo "<br />\n";
+	echo debut_boite_info(true);
 		echo _T('dw:signature', array('version' => _DW2_VERS_LOC));
-	fin_boite_info();
-	echo "<br />";
+	echo fin_boite_info(true);
+	echo "<br />\n";
 
-debut_droite();
+echo debut_droite('',true);
 
 	echo debut_onglet().
 	onglet(_T('dw:stats_generales_titre'), generer_url_ecrire("dw2_stats"), 'aff_gen', '', "cal-mois.gif").
@@ -208,7 +213,7 @@ debut_droite();
 	
 	// formulaire de periode
 	//
-	debut_cadre_relief("rien.gif");
+	echo debut_cadre_relief("rien.gif",true);
 		
 		// premiere date stats DW2
 		debut_boite_filet('a','center');
@@ -219,17 +224,17 @@ debut_droite();
 	
 	formulaire_periode($periode['date1'],$periode['date2'],$annee_select,_request('exec'));
 
-	fin_cadre_relief();
+	echo fin_cadre_relief(true);
 	
 	
 	//
 	// tableau des documents
 	//
-	debut_cadre_relief(_DIR_IMG_PACK."statistiques-24.gif");
+	echo debut_cadre_relief(_DIR_IMG_PACK."statistiques-24.gif",true);
 
 	if ($nligne==0)
 		{
-		echo "<br /><b>"._T('dw:aucun_telech_periode')."</b><br /><br />";
+		echo "<br /><b>"._T('dw:aucun_telech_periode')."</b><br /><br />\n";
 		}
 	else
 		{
@@ -237,16 +242,16 @@ debut_droite();
 		$nba1 = $dl+1;
 	
 		// aff date selection
-		debut_cadre_relief("");
-			echo "<div style='text-align:center;'>".$aff_date1. (($aff_date2)? "&nbsp;&nbsp;:|:&nbsp;&nbsp;".$aff_date2 : '' )."</div>";
-		fin_cadre_relief();
+		echo debut_cadre_relief("",true);
+			echo "<div style='text-align:center;'>".$aff_date1. (($aff_date2)? "&nbsp;&nbsp;:|:&nbsp;&nbsp;".$aff_date2 : '' )."</div>\n";
+		echo fin_cadre_relief(true);
 		
 		// aff totaux
 		debut_boite_filet('a','center');
 			echo "<span class='verdana2'>".
 				_T('dw:nbr_docs_nbr_telech', array('nligne' => $nligne, 'tt_compt' => $tt_telech['tt'])).
 				"&nbsp;".(($diff_date>1)? $diff_date." "._T('dw:jour_s'):'').
-				"</span>";
+				"</span>\n";
 		fin_bloc();
 
 		debut_band_titre("#dfdfdf");
@@ -255,8 +260,6 @@ debut_droite();
 			echo "</div>\n";
 		fin_bloc();
 
-
-		
 		// table
 		//
 		$ifond = 0;
@@ -266,7 +269,7 @@ debut_droite();
 				"<td><span class='arial2' style='color:#FFFFFF;'>"._T('dw:fichier')."</span></td>\n".
 				"<td><div class='arial2' style='color:#FFFFFF; text-align:center;'>"._T('dw:totaux_periode')."</div></td>\n".
 				"<td><div class='arial2' style='color:#FFFFFF; text-align:center;'>"._T('dw:totaux_grand')."</div></td>\n".
-				"</tr>";
+				"</tr>\n";
 			
 		foreach($tbl_fichier as $k => $tbd) {
 		if($k>=$nba1 && $k<($nba1+$nbr_lignes_tableau)){
@@ -280,40 +283,37 @@ debut_droite();
 			$vu=$tbd['vu'];
 			#$moy_prd = round($telech/ ... ,1);
 			
-			echo "<tr bgcolor='$bgcolor'>";
-			echo "<td width='4%' height='20'>";
-			echo "<a href='".generer_url_ecrire("dw2_modif", "id=".$id)."'>";
-			echo "<img src='"._DIR_IMG_DW2."fiche_doc-15.gif' border='0' align='absmiddle' title='"._T('dw:voir_fiche')."'>";
-			echo "</a></td>";
-			echo "<td width='65%'><div class='arial2'><b>";
+			echo "<tr bgcolor='$bgcolor'>\n";
+			echo "<td width='4%' height='20'>\n";
+			echo "<a href='".generer_url_ecrire("dw2_modif", "id=".$id)."'>\n";
+			echo "<img src='"._DIR_IMG_DW2."fiche_doc-15.gif' border='0' align='absmiddle' title='"._T('dw:voir_fiche')."' alt='voir fiche' />\n";
+			echo "</a></td>\n";
+			echo "<td width='65%'><div class='arial2'><b>\n";
 				popup_stats_graph($id,$nomfichier);
-			echo "</b></div></td>";
-			echo "<td width='16%'><div align='center' class='arial2'><b>".$telech."</b></div></td>";
+			echo "</b></div></td>\n";
+			echo "<td width='16%'><div align='center' class='arial2'><b>".$telech."</b></div></td>\n";
 			#echo "<td width='7%'><div align='center' class='verdana1'><b>".$moy_prd."</b></div></td>";
-			echo "<td width='15%'><div align='center' class='verdana2'>".$total."</div></td>";
-			echo "</tr>";
+			echo "<td width='15%'><div align='center' class='verdana2'>".$total."</div></td>\n";
+			echo "</tr>\n";
 			}
 		}
-		echo "</table>";
-		
-		
+		echo "</table>\n";
+
 		// info colonne periode (nbre de telech)
-		echo "<br />";
+		echo "<br />\n";
 		debut_boite_filet('a');
-			echo "<span class='verdana2'>"._T('dw:totaux_periode_info')."</span>";
+			echo "<span class='verdana2'>"._T('dw:totaux_periode_info')."</span>\n";
 		fin_bloc();
 		
 		}
-	
-	fin_cadre_relief();
 
-
+	echo fin_cadre_relief(true);
 
 	//
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
-	echo "<div style='clear:both;'></div>";
+	echo "<div style='clear:both;'></div>\n";
 
-	fin_page();
+	echo fin_page();
 } // fin exec_
 
 ?>

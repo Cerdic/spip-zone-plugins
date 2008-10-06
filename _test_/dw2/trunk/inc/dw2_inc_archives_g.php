@@ -24,7 +24,7 @@ function archives_g() {
 	//
 	// Forcer : mise en archive de fiche 
 	//
-	debut_cadre_trait_couleur(_DIR_IMG_PACK."doc-24.gif", false, "", _T('dw:changer_statut_masse'));
+	echo debut_cadre_trait_couleur(_DIR_IMG_PACK."doc-24.gif", true, "", _T('dw:changer_statut_masse'));
 
 	echo "<div class='verdana3'>".
 		_T('dw:info_change_statut_masse').
@@ -45,7 +45,7 @@ function archives_g() {
 	echo "</div>\n";
 	echo "</form>\n";
 
-	fin_cadre_trait_couleur();
+	echo fin_cadre_trait_couleur(true);
 
 }
 ?>
