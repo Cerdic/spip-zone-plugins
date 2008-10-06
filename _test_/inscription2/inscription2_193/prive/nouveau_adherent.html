@@ -1,0 +1,18 @@
+#CACHE{0}
+[(#EVAL{''}|debut_gauche{true})]
+[(#PLUGIN{ABONNEMENT}|?{' ',''})
+		#INCLURE{fond=inc/menu_abonnement}	
+]
+
+[(#PLUGIN{ABONNEMENT}|?{'',' '})
+#INCLURE{fond=prive/menu_inscription2}	
+]
+
+[(#EVAL{''}|debut_droite{true})]
+[(#CHEMIN{images/redacteurs-24.gif}|debut_cadre_sous_rub{true,'',''})]
+
+	#FORMULAIRE_INSCRIPTION2_PASS
+
+[(#EVAL{''}|fin_cadre_sous_rub)]
+[(#EVAL{''}|fin_droite{true})]
+[(#EVAL{''}|fin_gauche{true})]
