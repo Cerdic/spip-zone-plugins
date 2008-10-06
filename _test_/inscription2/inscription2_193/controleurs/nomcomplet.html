@@ -6,11 +6,11 @@
 
 ]
 #CACHE{0}
-<BOUCLE_b(AUTEURS_ELARGIS){id_auteur}{tout}>
+<BOUCLE_b(AUTEURS_ELARGIS){id_auteur=#ENV{id_auteurs_elargi}}{tout}>
 [<script type="text/javascript" src="(#URL_PAGE{crayons_validation.js}|parametre_url{lang,#ENV{lang}})"></script>]
 <script type="text/javascript">
 		
-	var me = cQuery(".auteurs_elargi-nomcomplet-#ID_AUTEUR").crayon();
+	var me = cQuery(".auteurs_elargi-nomcomplet-#ID_AUTEUR");
 	var id = me.crayon().find('form');
 	
 	function validation(){
@@ -33,12 +33,12 @@
 				#ENV{name_nom_famille}: {
 					[(#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|?{required: true,}),]
 					chaine:true,
-					rangeLength:[2,30]
+					rangelength:[2,30]
 				},
 				#ENV{name_prenom}: {
 					[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{required: true,}),]
 					chaine:true,
-					rangeLength:[2,20]
+					rangelength:[2,20]
 				}
 			},
 			messages: {
