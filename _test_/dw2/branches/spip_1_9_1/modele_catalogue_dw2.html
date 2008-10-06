@@ -1,0 +1,74 @@
+<html>
+<head>
+<title>exemple catalogue dw2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET">
+
+<!-- divers inserts plugins (ici, pour DEREBLOC) -->
+#INSERT_HEAD
+
+</head>
+<body>
+
+Catalogue DW2. V. 2.13<br />
+Pour Spip 1.9.1<br /><br />
+Cette page HTML est proposée à titre d'exemple.<br />
+Elle n'est ni XHTML strict, ni chose, bidule et autre truc strict. Mais intégralement KOAK2.0 !<br />
+Et c'est déjà pas si mal ! <br /> 
+Elle vous propose typiquement l'intégration d'une Boucle "DW2_DOC", avec un contenu exagerement doté
+des balises 'DW2' utilisables dans une telle ... boucle.<br />
+Afin de s'approcher de l'ancien fichier de 'catalogue public' (dw2_catalogue.php pour les connaisseurs),
+j'ai créer 3 balises de gestion de bloc invisible - plugin DEREBLOC, sur koakidi.com - que sont :<br />
+BOUTON_BLOCK, DEBUT_BLOCK et FIN_BLOCK.<br />
+A chacun de déterminer les balises utiles à ses besoins, charte-graphique, etc. Les balises DW2 s'emploient théoriquement comme toutes
+balises SPIP.<br />
+Merci de m'informer du résultat de vos essais ! (scoty at koakidi.com).<br />
+
+<br /><br />
+
+			<B_toutcat>
+				#GRAND_TOTAL documents - pour #TOTAL_DOC_SITE téléchargements<br />
+
+				<div class="">#PAGINATION</div>
+				<table width="500" cellpadding="0" callspacing="0" border="0">
+				<tr class="">
+				<th></th>
+				<th><a href="[(#SELF|parametre_url{'odb','nom'}|parametre_url{'sens','0'})]">Nom fichier</a></th>
+				<th><a href="[(#SELF|parametre_url{'odb','total'}|parametre_url{'sens','1'})]">Compteur</a></th>
+				<th><a href="[(#SELF|parametre_url{'odb','categorie'}|parametre_url{'sens','0'})]">rubrique</a></th>
+				<th><a href="[(#SELF|parametre_url{'odb','dateur'}|parametre_url{'sens','1'})]">Date dernier</a></th>
+				</tr>			
+				<BOUCLE_toutcat(DW2_DOC){par #ENV{odb,nom}}{inverse #ENV{sens}}{pagination 20}>
+					<tr bgcolor="[(#COMPTEUR_BOUCLE|alterner{'#efefef','#dfdfdf'})]" class="">
+					<td width="3%">#BOUTON_BLOCK</td>
+					<td width="42%">
+						<a href="#URL_CONT_DOC" class="bold">[(#NOM_DOC)]</a><br />
+					</td>
+					<td width="8%" align="right">
+						#TOTAL_DOC
+					</td>
+					<td width="32%" align="center">
+						#CATEGORIE
+					</td>
+					<td width="20%" align="right">
+						[(#DATEUR_DOC|affdate{'d/m/Y'})]
+					</td>
+					</tr>
+					
+					<tr><td colspan="5">
+						#DEBUT_BLOCK
+						[(#LOGO_DOC|left|#URL_DOC_OUT)]
+						fichier :#FICHIER_DOC<br />
+						id_doc : #ID_DOCUMENT<br />
+						Taille : [(#TAILLE_DOC|taille_en_octets)]<br />
+						Publié le : [(#DATE_CREA|affdate{'d/m/y'})]<br />
+						Dans : #CONT_DOC - <a href="#URL_CONT_DOC">[ #ID_CONT_DOC ] #TITRE_CONT_DOC</a><br />
+						<span class="">#TITRE_DOC</span> - #DESCRIPTIF_DOC<br />
+						
+						#FIN_BLOCK
+					</td></tr>
+					
+			</BOUCLE_toutcat>
+				</table>
+			</B_toutcat>
+</body>
+</html>
