@@ -2,46 +2,56 @@
 
 function SelecteurGenerique_inserer_auteur() {
 
-	$ac = parametre_url(generer_url_ecrire('selecteur_generique',
-		'quoi=auteur'),
-		'id_article', _request('id_article'), '\\x26');
-
+	$ac = generer_url_ecrire('selecteur_generique');
+	$id_article = _request('id_article');
+	$statut = _request('statut');
+	if (_request('exec') == 'auteurs'){
+		$input = 'input[@name=recherche][autocomplete!=off]';
+	}
+	else{
+		$input = 'input[@name=cherche_auteur][autocomplete!=off]';
+	}
 	return <<<EOS
 
-var appliquer_selecteur_cherche_auteur = function() {
-
-	// chercher l'input de saisie
-	jQuery('input[@name=cherche_auteur]')
-	.not('[@autoCFG]')
-	.Autocomplete({
-		'source': '$ac',
-		'delay': 300,
-		'autofill': false,
-		'helperClass': 'autocompleter',
-		'selectClass': 'selectAutocompleter',
-		'minchars': 1,
-		'mustMatch': true,
-		'cacheLength': 20,
-		'onSelect': function(li) {
-			if (li.id > 0) {
-				inp.attr('name', 'old_value')
+(function($) {
+	var appliquer_selecteur_cherche_auteur = function() {
+		// chercher l'input de saisie
+		var me = jQuery('$input');
+		me.autocomplete('$ac',
+			{
+				extraParams:{quoi:'auteur',id_article:'$id_article',statut:'$statut'},
+				delay: 300,
+				autofill: false,
+				minChars: 1,
+				//'helperClass': 'autocompleter',
+				//'selectClass': 'selectAutocompleter',
+				formatItem: function(data, i, n, value) {
+					return data[0];
+				},
+				formatResult: function(data, i, n, value) {
+					return data[1];
+				},
+			}
+		);
+		me.result(function(event, data, formatted) {
+			if (data[2] > 0) {
+				me.attr('name', 'old_value')
 				.parents('form')
 				.append(
-					jQuery("<input type='hidden' name='nouv_auteur' value='"+li.id+"' />"
+					jQuery("<input type='hidden' name='nouv_auteur' value='"+data[2]+"' />"
 					)
 				)
 				.find("input[@type=submit]")
 					.click()
 				.end();
 			}
-		}
+		});
+	};
+	$(function(){
+		appliquer_selecteur_cherche_auteur();
+		onAjaxLoad(appliquer_selecteur_cherche_auteur);
 	});
-}
-
-jQuery(document).ready(function(){
-	setInterval(appliquer_selecteur_cherche_auteur,2000);
-});
-
+})(jQuery);
 EOS;
 
 }
@@ -58,61 +68,52 @@ function SelecteurGenerique_inserer_mot() {
 		$type = 'id_breve';
 	}
 
-	$ac = parametre_url(generer_url_ecrire('selecteur_generique',
-		'quoi=mot'),
-		$type, $id, '\\x26');
-
-
+	$ac = generer_url_ecrire('selecteur_generique');
 	return <<<EOS
 
-var appliquer_selecteur_cherche_mot = function() {
-
-	// chercher l'input de saisie
-	jQuery('input[@name=cherche_mot]')
-	.not('[@autoCFG]')
-	.each(function() {
-		var me = this;
-		var id_groupe = jQuery(me).parents('form').find('input[@name=select_groupe]').val();
-		
-		jQuery(this)
-		.Autocomplete({
-			'source': '$ac'+'\x26id_groupe='+id_groupe,
-			'delay': 300,
-			'autofill': false,
-			'helperClass': 'autocompleter',
-			'selectClass': 'selectAutocompleter',
-			'minchars': 1,
-			'mustMatch': true,
-		//	'multiple': true,
-			'cacheLength': 20,
-			'onSelect': function(li) {
-				if (li.id > 0) {
-					jQuery(me)
+(function($) {
+	var appliquer_selecteur_cherche_mot = function() {
+		// chercher l'input de saisie
+		var me = jQuery('input[@name=cherche_mot][autocomplete!=off]');
+		me.each(function(){
+			var inp = this;
+			var id_groupe = jQuery(this).parents('form').find('input[@name=select_groupe]').val();
+			jQuery(inp).autocomplete('$ac',{
+				extraParams:{quoi:'mot',$type:'$id',id_groupe:''+id_groupe+''},
+				delay: 300,
+				autofill: false,
+				minChars: 1,
+				//'helperClass': 'autocompleter',
+				//'selectClass': 'selectAutocompleter',
+				formatItem: function(data, i, n, value) {
+					return data[0];
+				},
+			});
+			jQuery(inp).result(function(event, data, formatted) {
+				if (data[2] > 0) {
+					jQuery(inp)
 					.attr('name', 'old_value')
 					.parents('form')
 					.append(
-						jQuery("<input type='hidden' name='nouv_mot' value='"+li.id+"' />"
-						)
-					)
-					.find("input[@type=submit]")
-						.click()
-					.end()
-					;
+						jQuery("<input type='hidden' name='nouv_mot' value='"+data[2]+"' />")
+					).find('input[@type=submit]')
+					.click()
+					.end();
 				}
-			}
+				else{
+					return data[1];
+				}
+			});
 		});
+	};
+	$(function(){
+		appliquer_selecteur_cherche_mot();
+		onAjaxLoad(appliquer_selecteur_cherche_mot);
 	});
-}
-
-jQuery(document).ready(function(){
-	setInterval(appliquer_selecteur_cherche_mot,2000);
-});
-
-
+})(jQuery);
 EOS;
 
 }
-
 
 function SelecteurGenerique_inserer_rubrique() {
 
@@ -175,33 +176,22 @@ function SelecteurGenerique_inserer_javascript($flux) {
 	$js = '';
 
 	if (_request('exec') == 'articles'
-	OR _request('exec') == 'acces_restreint_edit') {
+	OR _request('exec') == 'acces_restreint_edit'
+	OR _request('exec') == 'auteurs') {
 		$js .= SelecteurGenerique_inserer_auteur();
 	}
-
+	
 	if (_request('exec') == 'articles'
 	OR _request('exec') == 'naviguer'
 	OR _request('exec') == 'breves_voir'
 	OR _request('exec') == 'sites') {
 		$js .= SelecteurGenerique_inserer_mot();
 	}
-
-	if (_request('exec') == 'articles_edit'
-	OR _request('exec') == 'auteur_infos'
-	OR _request('exec') == 'sites_edit') {
-		$js .= SelecteurGenerique_inserer_rubrique();
-	}
-
 	if ($js)
 		$js =
 
 		'<script type="text/javascript" src="'
-		. find_in_path('javascript/iautocompleter.js')
-		. '"></script>'
-		. "\n"
-
-		. '<script type="text/javascript" src="'
-		. find_in_path('javascript/iutil.js')
+		. find_in_path('javascript/jquery.autocomplete.js')
 		. '"></script>'
 		. "\n"
 

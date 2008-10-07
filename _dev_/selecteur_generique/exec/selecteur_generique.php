@@ -15,18 +15,18 @@ function exec_selecteur_generique_dist() {
 
 	include_spip('public/assembler');
 	include_spip('public/parametrer');
-	$xml = recuperer_fond(
+	$text = recuperer_fond(
 		'selecteurs/'._request('quoi'),
 		calculer_contexte()
 	);
 
-	header('Content-Type: text/xml; charset='.$GLOBALS['meta']['charset']);
-	echo $xml;
+	header('Content-Type: text/plain; charset='.$GLOBALS['meta']['charset']);
+	echo $text;
 }
 
 
 // critere {contenu_auteur_select} , cf. sedna
-function critere_contenu_auteur_select($idb, &$boucles, $crit) {
+function critere_contenu_auteur_select_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 
 	if (isset($crit->param[0][0])
@@ -38,7 +38,7 @@ function critere_contenu_auteur_select($idb, &$boucles, $crit) {
 	// un peu trop rapide, ca... le compilateur exige mieux (??)
 	$boucle->hash = '
 	// RECHERCHE
-	if ($r = _request("value")) {
+	if ($r = _request("q")) {
 		$r = _q("'.$debut.'$r%");
 		$s = "(
 			auteurs.nom LIKE $r
@@ -65,7 +65,8 @@ function critere_contenu_auteur_select($idb, &$boucles, $crit) {
 // Un filtre pour afficher le bonhomme_statut
 function icone_statut_auteur($statut) {
 	include_spip('inc/presentation');
-	return bonhomme_statut(array('statut'=>$statut));
+	$text = bonhomme_statut(array('statut'=>$statut));
+	return replace($text,'\n','');
 }
 
 ?>
