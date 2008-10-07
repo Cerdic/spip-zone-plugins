@@ -57,12 +57,12 @@
 		<legend><:spipicious:add_tags:></legend>
 		<ul>
 			<li>
-<BOUCLE_groupes(GROUPES_MOTS){titre == #GET{groupe_mot}}>
-		<input type="hidden" id="select_groupe" name="select_groupe" value="#ID_GROUPE" />
-		<input type="hidden" id="type_groupe" name="type_groupe" value="#TITRE" />
-</BOUCLE_groupes>
-		<label for="tags">Tags:</label>
-		<input type="text" class="texte" id="tags" name="tags" size="25" value="" /><br />
+				<BOUCLE_groupes(GROUPES_MOTS){titre == #GET{groupe_mot}}>
+					<input type="hidden" id="select_groupe" name="select_groupe" value="#ID_GROUPE" />
+					<input type="hidden" id="type_groupe" name="type_groupe" value="#TITRE" />
+				</BOUCLE_groupes>
+				<label for="tags">Tags:</label>
+				<input type="text" class="texte" id="tags" name="tags" size="25" value="" /><br />
 			</li>
 		</ul>
 		<input type="hidden" name="spipicious_id" id="spipicious_id" value="#ENV{id}" />

@@ -30,9 +30,9 @@ _ Icon from [Wolfgang Bartelme and Chris Messina->http://www.factorycity.net/pro
 		<nom>affichage_final</nom>
 		<inclure>spipicious_head.php</inclure>
 	</pipeline>
-	<necessite id="SelecteurGenerique" version="[0.1;]" />
+	<necessite id="SelecteurGenerique" version="[0.2;]" />
 	<necessite id='cfg' version='[1.5.0;]' />
-	<necessite id="SPIP" version='[1.9.3;]' />
+	<necessite id="SPIP" version='[2.0.0 dev;]' />
 	<chemin dir='' />
 	<options>
 		spipicious_options.php

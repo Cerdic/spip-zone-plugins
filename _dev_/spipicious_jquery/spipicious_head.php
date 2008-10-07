@@ -5,61 +5,54 @@ function spipicious_affichage_final($page){
 	if (!strpos($page, 'formulaire_spipicious_ajax'))
 		return $page;
 
-	$iutils = find_in_path('javascript/iutil.js');
-	$iautocompleter = find_in_path('javascript/iautocompleter.js');
+	$autocompleter = find_in_path('javascript/jquery.autocomplete.js');
 	$autocompletecss = find_in_path('jquery.autocomplete.css');
 
-	$urlselecteur = parametre_url(generer_url_public('selecteurs_tags'),id_article, $id_article, '\\x26');
+	$selecteur = generer_url_public('selecteurs_tags');
 
     $incHead = <<<EOS
-		<script type='text/javascript' src='$iautocompleter'></script>
-		<script type='text/javascript' src='$iutils'></script>
+		<script type='text/javascript' src='$autocompleter'></script>
 		<link rel="stylesheet" href="$autocompletecss" type="text/css" media="all" />
 		<script  type="text/javascript"><!--
-	
+		
+	(function($) {
 	var appliquer_selecteur_cherche_mot = function() {
 
 		// chercher l'input de saisie
-		var inp = jQuery('input[@name=tags]', this);
-
-		// ne pas reappliquer si on vient seulement de charger les suggestions
-		if (!inp[0] || inp[0].autoCFG) return;
-
-		// attacher l'autocompleter
-		inp.each(function() {
-			var me = this;
-			var id_groupe = jQuery("#select_groupe").val();
-			var id_article = jQuery("#spipicious_id").val();
-			jQuery(this)
-			.Autocomplete({
-				'source': '$urlselecteur'+'\x26id_article='+id_article+'\x26id_groupe='+id_groupe,
-				'delay': 200,
-				'autofill': false,
-				'helperClass': "autocompleter",
-				'selectClass': "selectAutocompleter",
-				'minchars': 2,
-				'mustMatch': true,
-				'inputWidth': true,
-				'cacheLength': 20,
-				'multiple' : true,
-				'multipleSeparator' : ";",
-				fx : {type: "fade", duration: 400},
-				'onShow' : function(suggestionBox, suggestionIframe) {
-					jQuery('.autocompleter, .selectAutocompleter').fadeTo(300,0.8);
-				},
-				'onSelect': 
-				function(li) {
-					if (li.id > 0) {
+		var me = jQuery('input[@name=tags][autocomplete!=off]');
+		var id_groupe = jQuery("#select_groupe").val();
+		var id_article = jQuery("#spipicious_id").val();
+		me.autocomplete('$selecteur',
+					{
+						extraParams:{id_article:id_article,id_groupe:id_groupe},
+						delay: 200,
+						autofill: false,
+						minChars: 1,
+						multiple:true,
+						multipleSeparator:";",
+						formatItem: function(data, i, n, value) {
+							return data[0];
+						},
+						formatResult: function(data, i, n, value) {
+							return data[1];
+						},
+					}
+				);
+				me.result(function(event, data, formatted) {
+					if (data[2] > 0) {
 						jQuery(me)
 						.end();
 					}
-				}
+					else{
+						return data[1];
+					}
+				});
+			};
+			$(function(){
+				appliquer_selecteur_cherche_mot();
+				onAjaxLoad(appliquer_selecteur_cherche_mot);
 			});
-			jQuery('.autocompleter, .selectAutocompleter').css('opacity',0.7);
-		});
-	}
-	jQuery(document).ready(appliquer_selecteur_cherche_mot);
-	onAjaxLoad(function(){setTimeout(appliquer_selecteur_cherche_mot, 200);});
+		})(jQuery);
 // --></script>
 EOS;
 
