@@ -16,6 +16,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_id' => 'Num',
+	'confirmer_retirer_auteur_zone' => '&iquest;Tas seguru de que qui&eacute;s retirar esti autor de la zona?',
+	'confirmer_retirer_auteurs' => '&iquest;Tas seguru de que qui&eacute;s retirar toos los autores d\'esta zona?',
 	'creer_zone' => 'Crear una estaya nueva',
 
 	// D
@@ -24,14 +26,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_menu_config' => 'Accesu Torg&aacute;o',
 	'icone_supprimer_zone' => 'Desaniciar esta estaya',
+	'info_ajouter_auteur' => 'Amestar esti autor',
+	'info_ajouter_auteurs' => 'Amestar toos los autores',
 	'info_ajouter_zones' => 'A&ntilde;adir toes les estayes',
+	'info_aucun_acces' => 'Deng&uacute;n accesu autoriz&aacute;u',
+	'info_aucun_auteur' => 'Deng&uacute;n autor na zona',
+	'info_aucune_zone' => 'Denguna zona',
 	'info_auteurs_lies_zone' => 'Los autores con accesu a esta estaya',
 	'info_page' => 'Estae p&aacute;xina te permite xestionar les estayes con accesu torg&aacute;u nel to sitiu',
+	'info_retirer_auteurs' => 'Retirar toos los autores',
 	'info_retirer_zone' => 'Quitar de la estaya',
 	'info_retirer_zones' => 'Quitar de toes les estayes',
 
+	// M
+	'modifier_zone' => 'Iguar la zona',
+
 	// P
 	'page_zones_acces' => 'Accesu Torg&aacute;o',
+	'par_titre' => 'Pol t&iacute;tulu',
 	'privee' => 'Privao',
 	'publique' => 'P&uacute;blicu',
 
@@ -45,8 +57,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre' => 'T&iacute;tulu',
 	'titre_ajouter_zone' => 'Amestar la estaya',
+	'titre_cadre_modifier_zone' => 'Iguar una zona',
 	'titre_table' => 'Toes les estayes d\'accesu',
 	'titre_zones_acces' => 'Estayes d\'accesu torg&aacute;o',
+	'toutes' => 'Toes',
 
 	// V
 	'voir_toutes' => 'Ver toes les estayes',
