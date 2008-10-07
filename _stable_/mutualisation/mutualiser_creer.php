@@ -14,9 +14,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_PRIVILEGES_MYSQL_USER_BASE','Alter, Select, Insert, Update, Delete, Create, Drop');
 
+include_spip('inc/minipres');
+
+/* centrage...  */
+function mutu_minipres($titre="",$contenu=""){
+	return minipres($titre,"<div class='petit-centre'>" . $contenu . "</div>");
+}
+
 // http://doc.spip.org/@mutualiser_creer
 function mutualiser_creer($e, $options) {
-	include_spip('inc/minipres');
 	include_spip('base/abstract_sql');
 	include_once(dirname(__FILE__).'/base/abstract_mutu.php');
 
@@ -47,7 +53,7 @@ function mutu_etape_code_activation($e, $options){
 
 		if ($options['code'] != $_REQUEST['code_activation']
 		AND $_COOKIE['mutu_code_activation'] != $secret) {
-			echo minipres(
+			echo mutu_minipres(
 				_L('Installation de votre site SPIP'),
 				"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
 			
@@ -113,7 +119,7 @@ function mutu_etape_creer_base($e, $options){
 						#var_dump($page);
 						curl_close($ch);
 						if (!sql_selectdb(_INSTALL_NAME_DB, _INSTALL_SERVER_DB)) {
-							echo minipres(
+							echo mutu_minipres(
 								_L('La cr&#233;ation de la base de donn&#233;es <tt>'._INSTALL_NAME_DB.'</tt> a &#233;chou&#233;.'),
 								"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
 								'<h3>'
@@ -182,7 +188,7 @@ function mutu_etape_creer_base($e, $options){
 						include_spip('inc/flock');
 						@supprimer_fichier($e . _NOM_TEMPORAIRES_INACCESSIBLES . _MUTU_INSTALLATION_FILE);
 						
-						echo minipres(
+						echo mutu_minipres(
 							_L('La base de donn&#233;es <tt>'._INSTALL_NAME_DB.'</tt> a &#233;t&#233; cr&#233;&#233;e'),
 							"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
 							'<h3>'
@@ -200,7 +206,7 @@ function mutu_etape_creer_base($e, $options){
 						}
 						exit;
 					} else {
-						echo minipres(
+						echo mutu_minipres(
 							_L('Cr&#233;ation de la base de donn&#233;es <tt>'._INSTALL_NAME_DB.'</tt>'),
 							"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
 							'<h3>'
@@ -212,7 +218,7 @@ function mutu_etape_creer_base($e, $options){
 
 				}
 				else {
-					echo minipres(
+					echo mutu_minipres(
 						_L('Cr&#233;ation de la base de donn&#233;es <tt>'._INSTALL_NAME_DB.'</tt>'),
 						"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
 						'<h3>'
@@ -227,7 +233,7 @@ function mutu_etape_creer_base($e, $options){
 		}
 		
 		else {
-			echo minipres(
+			echo mutu_minipres(
 				_L('Creation de la base de donn&#233;es du site (<tt>'.joli_repertoire($e).'</tt>)'),
 
 				"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
@@ -250,7 +256,7 @@ function mutu_etape_creer_repertoires($e, $options){
 		AND is_writable(_DIR_RACINE . $options['repertoire']);
 
 		if (!$ok_dir) {
-			echo minipres(
+			echo mutu_minipres(
 				_L('Creation du r&eacute;pertoire du site (<tt>'.joli_repertoire($e).'</tt>)'),
 
 				"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
@@ -280,7 +286,7 @@ function mutu_etape_creer_repertoires($e, $options){
 				ecrire_fichier($e . _NOM_TEMPORAIRES_INACCESSIBLES . _MUTU_INSTALLATION_FILE, 'ok');
 			}
 			
-			echo minipres(
+			echo mutu_minipres(
 				_L('Creation du r&eacute;pertoire du site (<tt>'.joli_repertoire($e).'</tt>)'),
 
 				"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
@@ -307,7 +313,7 @@ function mutu_etape_creer_repertoires($e, $options){
 			|| !is_dir($e._NOM_TEMPORAIRES_INACCESSIBLES)
 			|| !is_dir($e._NOM_TEMPORAIRES_ACCESSIBLES)
 		) {
-			echo minipres(
+			echo mutu_minipres(
 				_L('Creation du r&eacute;pertoire du site (<tt>'.joli_repertoire($e).'</tt>)'),
 
 				"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
@@ -321,7 +327,7 @@ function mutu_etape_creer_repertoires($e, $options){
 		}
 
 	} else {
-		echo minipres(
+		echo mutu_minipres(
 			_L('Le r&eacute;pertoire du site (<tt>'.joli_repertoire($e).'</tt>) n\'existe pas'),
 			"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
 			'<h3>'
@@ -348,7 +354,7 @@ function mutu_etape_fin($e, $options){
 	include_spip('inc/flock');
 	@supprimer_fichier($e . _NOM_TEMPORAIRES_INACCESSIBLES . _MUTU_INSTALLATION_FILE);
 	
-	echo minipres(
+	echo mutu_minipres(
 		_L('Les r&#233;pertoires et la base de donn&#233;e du site sont maintenant cr&#233;&#233;s.'),
 
 		"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
