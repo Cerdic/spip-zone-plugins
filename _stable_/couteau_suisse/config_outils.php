@@ -645,6 +645,20 @@ add_outil( array(
 ));
 
 //-----------------------------------------------------------------------------//
+//                               NOISETTES                                     //
+//-----------------------------------------------------------------------------//
+
+add_outil( array(
+	'id' => 'visiteurs_connectes',
+	'auteur' => "Phil d'apr&egrave;s spip-contrib",
+	'categorie' => 'public',
+	'code:fonctions' => "define('_visiteurs_connectes',1);\nfunction cs_compter_visiteurs(){ return count(preg_files(_DIR_TMP.'visites/','.')); }",
+	'version-min' => '1.9200', // pour la balise #ARRAY
+//	une mise a jour toutes les 60sec ?
+//	'code:jq' => ' if(jQuery("span.cs_nb_visiteurs").length) trigger? ',
+));
+
+//-----------------------------------------------------------------------------//
 //                               TYPO                                          //
 //-----------------------------------------------------------------------------//
 

@@ -503,6 +503,12 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:jcorner_classes' => 'Am&eacute;liorer les coins des s&eacute;lecteurs suivantes :',
 	'label:jcorner_plugin' => 'Installer le plugin {jQuery} suivant :',
 	'jcorner_plugin' => '&laquo;&nbsp;Round Corners plugin&nbsp;&raquo;',
+
+	'visiteurs_connectes:description' => 'Offre une noisette pour votre squelette qui affiche le nombre de visiteurs connect&eacute;s sur le site public.
+
+Ajoutez simplement <code><INCLURE{fond=fonds/visiteurs_connectes}></code> dans vos pages.',
+	'visiteurs_connectes:nom' => 'Visiteurs connect&eacute;s',
+
 );
 
 ?>
