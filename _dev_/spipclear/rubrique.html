@@ -1,1 +1,8 @@
-<INCLURE{fond=dist/rubrique}{env}>
+<BOUCLE_feinte(RUBRIQUES){id_rubrique}{id_secteur IN #CONFIG{spipclear/secteurs}}>
+</BOUCLE_feinte>
+	<BOUCLE_r(RUBRIQUES){id_rubrique}>
+	<INCLURE{fond=spipclear}{env}{id_secteur=#ID_SECTEUR}{date}{archives}{recherche}{debut_liste}{decal} />
+	</BOUCLE_r>
+</B_feinte>
+	<INCLURE{fond=dist/rubrique}{env} />
+<//B_feinte>

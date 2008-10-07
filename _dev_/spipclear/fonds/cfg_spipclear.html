@@ -1,37 +1,48 @@
-[(#REM) descriptif=
-<h4>
-Configuration du plugin SpipClear.
-</h4>
-<a href="http://www.spip-contrib.net/Spip-Clears" class="spip_out">Documentation sur contrib</a>
-]
-
-[(#REM) titre=SpipClear]
-[(#REM) icone=images/spipclear.png]
-
 #CACHE{0}
 
-<form method="post">[(#ENV{_cfg_}|form_hidden)]
-<input class="fondo" style="float:right;" type="submit" name="_cfg_ok" value="<:bouton_valider:>" />
-<fieldset><legend><:spipclear:legend_layout:></legend>
-	<p><:spipclear:info_navigation:></p>
-	<p>
-		<label>
-			<input type="radio" name="navigation_gauche" value="0"[ (#ENV{navigation_gauche}|=={0}|?{checked="checked",''})] />
-			<:spipclear:label_navigation_droite:>
-		</label>
-		<br />
-		<label>
-			<input type="radio" name="navigation_gauche" value="1"[ (#ENV{navigation_gauche}|=={1}|?{checked="checked",''})] />
-			<:spipclear:label_navigation_gauche:>
-		</label>
-	<p><:spipclear:look_sommaire:></p>
-		<label>
-			<input type="checkbox" name="articles_entiers" [ (#ENV{articles_entiers}|=={on}|?{checked="checked",''})] />
-			<:spipclear:sommaire_articles_entiers:>
-		</label>
-	</p>
-</fieldset>
+<!-- descriptif=
+<h4>Configuration du plugin SpipClear.</h4>
+<a href="http://www.spip-contrib.net/Spip-Clears" class="spip_out">Documentation sur contrib</a>
+-->
+<!-- titre=SpipClear -->
+<!-- icone=images/spipclear.png -->
 
+
+<div class="formulaire_spip formulaire_editer formulaire_cfg">
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+	<ul>
+		<li class="editer_spipclear_navigation">
+			<label>Navigation</label>
+			<p class="explication"><:spipclear:info_navigation:></p>
+			<div class="choix">
+				<input type="radio" class="radio" name="navigation_gauche" id="navigation_gauche_non" value="0"[ (#ENV{navigation_gauche}|=={0}|?{checked="checked",''})] />
+				<label for="navigation_gauche_non"><:spipclear:label_navigation_droite:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" class="radio" name="navigation_gauche" id="navigation_gauche_oui" value="1"[ (#ENV{navigation_gauche}|=={1}|?{checked="checked",''})] />
+				<label for="navigation_gauche_oui"><:spipclear:label_navigation_gauche:></label>
+			</div>
+		</li>
+		<li class="editer_spipclear_articles_entiers">
+			<label>Sommaire</label>
+			<p class="explication"><:spipclear:look_sommaire:></p>
+			<div class="choix">
+				<input type="checkbox" name="articles_entiers" id="articles_entiers" [ (#ENV{articles_entiers}|=={on}|?{checked="checked",''})] />
+				<label for="articles_entiers"><:spipclear:sommaire_articles_entiers:></label>
+			</div>
+		</li>
+		<li class="editer_secteur">#SET{secteurs,#CONFIG{spipclear/secteurs,#ARRAY}}
+			<label><:spipclear:secteurs_spipclear:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{secteurs})</span>]
+			<select name="secteurs[]" multiple="multiple" size="9">
+				<option value=""></option>
+				<BOUCLE_racine(RUBRIQUES){racine}{tout}>
+				<option value="#ID_SECTEUR"[ (#ID_SECTEUR|in_array{#GET{secteurs}}|?{' selected="selected"'})]>#TITRE</option>
+				</BOUCLE_racine>
+			</select>
+		</li>
+	</ul>
+<!--
 <fieldset><legend><:spipclear:legend_theme:></legend>
 	<p><:spipclear:info_choix_theme:></p>
 	<p>
@@ -77,8 +88,12 @@ Configuration du plugin SpipClear.
     <p id="visionneuse" style="float:right; width: 250px;">[<img src="(#CHEMIN{[(#GET{chemin_theme})]screenshot.jpg})" />]</p>
     [(#ENV{nom_theme}|lister_themes)]
     
-	</div>
+	</div> -->
 </fieldset>
-
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
+		<input type="submit" name="_cfg_delete" class="submit" value="<:effacer:>" />
+	</p>
 </form>
-
+</div>
+#CFG_ARBO{spipclear}

@@ -1,6 +1,6 @@
 <B_liste>
 [<p><:spipclear:resultat_recherche:> <em>(#RECHERCHE|entites_html)</em></p>]
-[<div>(#PAGINATION)</div>]
+[<p class="pagination">(#PAGINATION)</p>]
 <BOUCLE_liste(ARTICLES){id_secteur}{recherche}{par points}{pagination 15}>
 <div class="post">
 	[(#LOGO_ARTICLE|right)]
@@ -30,7 +30,7 @@
 	</p>
 </div>
 </BOUCLE_liste>
-[<div>(#PAGINATION)</div>]
+[<p class="pagination">(#PAGINATION)</p>]
 </B_liste>
 [<div class="error"><strong><:spipclear:titre_erreur:></strong>
 	<p><:spipclear:texte_erreur1:>

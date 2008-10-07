@@ -1,1 +1,8 @@
-<INCLURE{fond=dist/article}{env}>
+<BOUCLE_feinte(ARTICLES){id_article}{id_secteur IN #CONFIG{spipclear/secteurs}}>
+</BOUCLE_feinte>
+	<BOUCLE_article(ARTICLES){id_article}>
+	<INCLURE{fond=spipclear}{env}{id_secteur=#ID_SECTEUR}{date}{decal}{recherche} />
+	</BOUCLE_article>
+</B_feinte>
+	<INCLURE{fond=dist/article}{env} />
+<//B_feinte>

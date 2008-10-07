@@ -1,10 +1,10 @@
 <div id="sidebar">
 <div id="blognav">
-	[(#CALENDRIER_MINI{[(#ENV{self})]})]
+	[(#MODELE{rubrique_calendrier}{id_rubrique=#ID_RUBRIQUE}{self=#SELF}{var_date=archives}{date=#ENV{archives,#DATE}})]
 
-	<INCLURE{fond=inc-archives}{id_secteur}{self=#SELF}{decal}{var_date=archives}{date=#ENV{archives,#DATE}}>
-	
-	#FORMULAIRE_RECHERCHE
+	<INCLURE{fond=inc-archives}{env}{decal}{var_date=archives}{date=#ENV{archives,#DATE}}{ajax}>
+
+	#FORMULAIRE_RECHERCHE{(#ID_SECTEUR||generer_url_entite{rubrique})}
 
 	<B_a_retenir>
 	<div id="selection">
