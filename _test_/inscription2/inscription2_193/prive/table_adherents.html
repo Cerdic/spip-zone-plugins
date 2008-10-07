@@ -44,7 +44,7 @@ function confirm(msg,callback) {
 	]
 </div>
 
-<div id="principal">
+<div id="principal" class="inscription2_liste">
 	<div id="tetiere" >
 		<div style="float:right" >
 		[(#PLUGIN{ABONNEMENT}|?{' ',''})
@@ -54,24 +54,23 @@ function confirm(msg,callback) {
 		</div>
 	
 	<div style="margin-bottom:5px">
-	<form method="post" action="?exec=inscription2_adherents">
+	<form method="post" action="#SELF">
 		[(#SELF|form_hidden)]
-		<input class="search_field fondl" type="text" name="valeur" onfocus='this.value=""' value="<:info_rechercher:>" />
+		<input class="search_field fondl" type="text" name="valeur" onfocus='this.value=""' value="[(#ENV{valeur}|?{#ENV{valeur},<:info_rechercher:>})]" />
 		<select name="case" id="case" class="fondl" style="padding:2px">
-		<?php
-			$case=_request('case');
-			foreach(lire_config('inscription2') as $cle => $val){
-				if($val!= '' and $cle!='id_table' and ereg("^.+_table.*$", $cle)){
-					$cle = str_replace("_table", "", $cle);
-					if ($cle == $case){
-						echo "<option value='$cle' selected>"._T('inscription2:'.$cle)."</option>";
-					}
-					else{
-						echo "<option value='$cle'>"._T('inscription2:'.$cle)."</option>";					
-					}
-				}
-			}
-		?>
+			#SET{case,#ENV{case}}
+			<BOUCLE_recherchefields(POUR){tableau #CONFIG{inscription2}}{valeur = 'on'}>
+			[(#CLE|match{_table}|?{' ',''})
+				[(#SET{cle,[(#CLE|replace{'_table',''})]})]
+				[(#GET{cle}|=={#GET{case}}|oui)
+					<option value='#GET{cle}' selected>[(#VAL{inscription2:}|concat{#GET{cle}}|_T)]</option>
+				]
+				[(#GET{cle}|=={#GET{case}}|non)
+					<option value='#GET{cle}'>[(#VAL{inscription2:}|concat{#GET{cle}}|_T)]</option>
+				]
+			]
+			<td><strong><a href="[(#SELF|parametre_url{'ordre',[(#CLE|replace{'_table',''})]}|parametre_url{'desc',#GET{desc}})]">[(#VAL{inscription2:}|concat{[(#CLE|replace{'_table',''})]}|_T)]</a></strong></td>]
+			</BOUCLE_recherchefields>
 		</select>
 		<input type="submit" class="fondo" value="<:info_rechercher:>" />
 		</form>
@@ -79,7 +78,7 @@ function confirm(msg,callback) {
 	<?php
 	include_spip('base/abstract_sql');
 	
-	$url = "?exec=inscription2_adherents";
+	$url = self();
 	//supprimer un auteur ou nettoyer 
 	$id=_request('id');
 	$act=_request('act');
@@ -90,11 +89,14 @@ function confirm(msg,callback) {
 
 	if (isset($valeur)) {
 		if($case=='id'){
-			$critere="a.id_auteur='$valeur'";
+			$critere="id_auteur='$valeur'";
+		}
+		elseif($case=='email'){
+			$critere="email='$valeur'";
 		}else
-			$critere="$case='$valeur'"; 
+			$critere="$case LIKE '$valeur%'";
 	}else{
-		$critere="a.id_auteur<>'0'"; 
+		$critere="id_auteur<>'0'"; 
 		//que les abonnes si le plugin est actif
 		if(defined('_DIR_PLUGIN_ABONNEMENT') AND _request('statut_abonnement') !='tous') $critere = $critere." AND b.statut_abonnement IN ('prospect','sorti','abonne','relance') [AND b.statut_abonnement='(#ENV{statut_abonnement})']" ;
 		}
@@ -119,8 +121,6 @@ function confirm(msg,callback) {
 		$desc = 'ASC';
 	else
 		$desc = 'DESC';
-                
-	//$url = $url.'&debut='.$debut;
 	
 	//supprimer un auteur
 	if(!empty($id) and $act=='sup'){
@@ -151,83 +151,73 @@ function confirm(msg,callback) {
 	}
 
 	$lettre = array();
-		$qlettre = spip_query('select distinct upper(left(a.nom,1)) l, count(*) from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur group by l order by l');
+		$qlettre = spip_query('select distinct upper(left(nom,1)) l, count(*) from spip_auteurs LEFT JOIN spip_auteurs_elargis USING(id_auteur) group by l order by l');
 		$count = 0;
 		while ($rlettre = sql_fetch($qlettre)) {
 			$lettre[$rlettre[0]] = $count;
 			$count += intval($rlettre[1]);
 		}
-
 	foreach ($lettre as $key => $val) {
 				if ($val == $debut)
 					echo "<b>$key</b> ";
 				else
 					echo "<a href='".parametre_url($url,'debut',$val)."'>$key</a> ";
 			}
-		echo "<a href='[(#SELF|parametre_url{debut,''})]'> tous</a> ";
 	?>
 	
 	</div>
+
+	[(#ENV{desc}|=={'ASC'}|?{[(#SET{desc,DESC})],[(#SET{desc,ASC})]})]
+	[(#SET{ordre,[(#SELF|parametre_url{'ordre'})]})]
 	<form method="post" action="#">
 	<table class="cadre-r">
 	<thead>
 		<tr>
+			<td>
+				<strong><a href="[(#SELF|parametre_url{'ordre','id_auteur'}|parametre_url{'desc',#GET{desc}})]"> <img src="#CHEMIN{images/admin-12.gif}" alt="admin" /></a></strong>
+			</td>
+			<BOUCLE_champshead(POUR){tableau #CONFIG{inscription2}}{valeur = 'on'}>
+			[(#CLE|match{_table}|?{' ',''})
+			<td><strong><a href="[(#SELF|parametre_url{'ordre',[(#CLE|replace{'_table',''})]}|parametre_url{'desc',#GET{desc}})]">[(#VAL{inscription2:}|concat{[(#CLE|replace{'_table',''})]}|_T)]</a></strong></td>]
+			</BOUCLE_champshead>
+			[(#PLUGIN{ABONNEMENT}|?{' ',''})
+			<td><a href="#"><strong>Produit</strong></a></td>
+			<td><a href="#"><strong>&Eacute;ch&eacute;ance / quantit&eacute;</strong></a></td>]
+			<td colspan="3" style="text-align:center;"><strong><a href="[(#SELF|parametre_url{'ordre','statut'}|parametre_url{'desc',#GET{desc}})]"><:inscription2:action_adherent:></a></strong></td>
+	</tr>
+	</thead>
 	<?php
-	echo '<td><strong><a href="'.$url.'&amp;ordre=id_auteur&amp;desc='.$desc.'"> <img src="'._DIR_PLUGIN_INSCRIPTION2.'images/admin-12.gif" alt="admin" /></a></strong></td>';
-	
 	foreach(lire_config('inscription2') as $cle => $val){
-		if($val!= '' and ereg("^.+_table.*$", $cle) and $cle!='nom_table'){
+		if($val!= '' and ereg("^.+_table$", $cle) and $cle!='nom_table'){
 			$cle = str_replace("_table", "", $cle);
-			if($cle == 'bio' or $cle == 'statut' or $cle == 'login' or $cle == 'email' or $cle == 'nom')
-				$table_auteurs[] = "a.".$cle;
-			elseif($cle == 'pays')
+			if($cle == 'pays')
 				$table_auteurs[] = "c.pays";
 			elseif($cle == 'pays_pro')
 				$table_auteurs[] = "d.pays as pays_pro";
 			else
-				$table_auteurs[] = "b.".$cle;
-			echo '<td><strong><a href="'.parametre_url(parametre_url($url,'ordre',$cle),'desc',$desc).'">'._T('inscription2:'.$cle).'</a></strong></td>';
+				$table_auteurs[] = $cle;
 		}
 	}
 	//abonnement
 	if(defined('_DIR_PLUGIN_ABONNEMENT')){
-		echo '<td><a href="#"><strong>Produit</strong></a></td>';
-		echo '<td><a href="#"><strong>&Eacute;ch&eacute;ance / quantit&eacute;</strong></a></td>';
 		$table_auteurs[] = 'b.statut_abonnement';
 	}
-	
-	echo '<td colspan="3" style="text-align:center;"><strong><a href="'.parametre_url(parametre_url($url,'ordre','statut'),'desc',$desc).'">'._T('inscription2:action_adherent').'</a></strong></td>';
-	echo '</tr>';
-	echo '</thead>';
-	
-	//$table_auteurs[] = 'b.id_auteur';
-	$table_auteurs[] = 'a.id_auteur';
-	$table_auteurs[] = 'a.statut';
+	$table_auteurs[] = 'id_auteur';
+	$table_auteurs[] = 'statut';
 		
 	if(lire_config('inscription2/pays_table') && lire_config('inscription2/pays_pro_table')) {
 		$query = sql_select(join(", ",$table_auteurs),
-			"spip_auteurs a 
-			LEFT JOIN `spip_auteurs_elargis` b ON b.id_auteur = a.id_auteur
-			left join spip_geo_pays c on b.pays=c.id_pays left join spip_geo_pays d on b.pays_pro=d.id_pays",
+			"spip_auteurs LEFT JOIN spip_auteurs_elargis USING(id_auteur)
+			LEFT JOIN spip_geo_pays c on pays=c.id_pays LEFT JOIN spip_geo_pays d on pays_pro=d.id_pays",
 			"$critere ORDER BY $ordre LIMIT $debut,$max_par_page");
 		}
 	elseif(lire_config('inscription2/pays_table'))
-		$query = sql_select(join(", ",$table_auteurs),"spip_auteurs a LEFT JOIN `spip_auteurs_elargis` b 
-			ON b.id_auteur = a.id_auteur LEFT JOIN spip_geo_pays c ON b.pays=c.id_pays","$critere ORDER BY $ordre LIMIT $debut,$max_par_page");
+		$query = sql_select(join(", ",$table_auteurs),"spip_auteurs LEFT JOIN spip_auteurs_elargis USING(id_auteur) LEFT JOIN spip_geo_pays c ON pays=c.id_pays","$critere ORDER BY $ordre LIMIT $debut,$max_par_page");
 	else
-		$query = sql_select(join(", ",$table_auteurs),"spip_auteurs a LEFT JOIN `spip_auteurs_elargis` b 
-			ON b.id_auteur = a.id_auteur","$critere ORDER BY $ordre LIMIT $debut,$max_par_page");
+		$query = sql_select(join(", ",$table_auteurs),"spip_auteurs LEFT JOIN spip_auteurs_elargis USING(id_auteur)","$critere ORDER BY $ordre LIMIT $debut,$max_par_page");
 		
-	$i=0;
+	$i=1;
 	while ($data = sql_fetch($query)) {
-		//switch statut
-		if($i%2 == 0){
-			$class='row';
-		} 
-		else {
-			$class='even';
-		}
-		//var_dump($data);die();
 		if(!empty($data['statut_abonnement'])) $class = $data['statut_abonnement'] ;
 		
 		if($data['statut']=='0minirezo')
@@ -241,7 +231,7 @@ function confirm(msg,callback) {
 		else
 			$url_logo = '"'._DIR_PLUGIN_INSCRIPTION2.'/images/defaut-12.gif"';
 		
-		echo '<tr class="'.$class.'">';
+		echo '<tr class="'.alterner($i,"row","even").'">';
 		$id = $data['id'] ;
 		if(!empty($data['id_auteur']))
 			echo '<td><a href="'.generer_url_ecrire('auteur_infos','id_auteur='.$data['id_auteur']).'"><img src='.$url_logo.' alt="'._T('inscription2:fiche_adherent').'" /></a></td>';
@@ -249,7 +239,7 @@ function confirm(msg,callback) {
 			echo '<td> </td>';
 		
 		foreach(lire_config('inscription2') as $cle => $val){
-			if($val!= '' and ereg("^.+_table.*$", $cle)){
+			if($val!= '' and ereg("^.+_table$", $cle)){
 				$cle = str_replace("_table", "", $cle);
 				if($cle == 'username'){
 					$cle = 'login';
@@ -310,9 +300,8 @@ function confirm(msg,callback) {
 	[<div style="margin-left:25%">(#PLUGIN{ABONNEMENT}|?{' ',''})
 		#INCLURE{fond=inc/pied_abonnement}</div>
 	]
-	
 	<div id="pagination" class="pagination">
-		<BOUCLE_auteurs_elargis(AUTEURS_ELARGIS spip_auteurs){par #ENV{ordre}}{pagination 30}>
+		<BOUCLE_auteurs_elargis(AUTEURS_ELARGIS spip_auteurs){par #ENV{ordre}}{pagination 30}{#ENV{case} = #ENV*{valeur}}>
 		</BOUCLE_auteurs_elargis>
 		#PAGINATION
 		</B_auteurs_elargis>
@@ -322,7 +311,6 @@ function confirm(msg,callback) {
 </div>
 
 <!-- Confirm Dialog -->
-
 <div class="jqmConfirm" id="confirm">
 	<div id="ex3b" class="jqmConfirmWindow">
 	    <div class="jqmConfirmTitle clearfix">
