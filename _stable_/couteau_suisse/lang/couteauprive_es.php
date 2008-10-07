@@ -194,7 +194,7 @@ Atenci&oacute;n: en los foros, peticiones, flujos sindicados, etc., la gesti&oac
 	'guillemets:nom' => 'Comillas tipogr&aacute;ficas',
 
 	// H
-	'help' => '{{Esta p&aacute;gina s&oacute;lo es accesible para los responsables del sitio.}}<p>Ofrece acceso a las diferentes  funciones suplementarias aportadas por el plugin &laquo;{{La&nbsp;Navaja&nbsp;Suiza}}&raquo;.</p><p>Versi&oacute;n local: @version@@distant@<br/>@pack@</p><p>Enlaces a la documentaci&oacute;n:<br/>• [La&nbsp;Navaja&nbsp;Suiza->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reinicializaciones:
+	'help' => '<MODIF>{{Esta p&aacute;gina s&oacute;lo es accesible para los responsables del sitio.}}<p>Ofrece acceso a las diferentes  funciones suplementarias aportadas por el plugin &laquo;{{La&nbsp;Navaja&nbsp;Suiza}}&raquo;.</p><p>Versi&oacute;n local: @version@@distant@<br/>@pack@</p><p>Enlaces a la documentaci&oacute;n:<br/>• [La&nbsp;Navaja&nbsp;Suiza->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reinicializaciones:
 _ • [&Uacute;tiles ocultos|Volver al aspecto inicial de esta p&aacute;gina->@hide@]
 _ • [De todo el plugin|Volver al estado inicial del plugin->@reset@]@install@
 </p>',
@@ -455,7 +455,7 @@ M&aacute;s informaci&oacute;n: [->http://www.spip.net/es_article2024.html]
 @puce@ {{&Uacute;nicamente si utilizas las URLS {arborescentes} de m&aacute;s arriba}}, es posible personalizar el resultado:</p>
 [[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]',
 	'type_urls:nom' => 'Formato de las URLs',
-	'typo_exposants:description' => 'Textos en franc&eacute;s: mejora la presentaci&oacute;n tipogr&aacute;fica de las abreviaturas corrientes, poniendo como super&iacute;ndices los elementos necesarios (as&iacute;, {<acronym>Mme</acronym>} se transforma en {M<sup>me</sup>}) y corrigiendo los errores comunes ({<acronym>2&egrave;me</acronym>} o  {<acronym>2me</acronym>}, por ejemplo, se transforman en {2<sup>e</sup>}, &uacute;nica abreviatura correcta).
+	'typo_exposants:description' => '<MODIF>Textos en franc&eacute;s: mejora la presentaci&oacute;n tipogr&aacute;fica de las abreviaturas corrientes, poniendo como super&iacute;ndices los elementos necesarios (as&iacute;, {<acronym>Mme</acronym>} se transforma en {M<sup>me</sup>}) y corrigiendo los errores comunes ({<acronym>2&egrave;me</acronym>} o  {<acronym>2me</acronym>}, por ejemplo, se transforman en {2<sup>e</sup>}, &uacute;nica abreviatura correcta).
 _ Las abreviaturas obtenidas son conformes con las de la Imprenta nacional francesa, tal como se indican en el {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (art&iacute;culo &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l\'Imprimerie nationale, Paris, 2002).',
 	'typo_exposants:nom' => 'Abreviaturas tipogr&aacute;ficas',
 

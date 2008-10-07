@@ -194,7 +194,7 @@ Aviso : nos foros, petici&oacute;ns, fluxos afiliados, etc., a xesti&oacute;n do
 	'guillemets:nom' => 'V&iacute;rgulas tipogr&aacute;ficas',
 
 	// H
-	'help' => '{{Esta p&aacute;xina &eacute; unicamente accesible para o responsable do web.}}<p>D&aacute; acceso &aacute;s diferentes funci&oacute;ns suplementarias achegadas polo m&oacute;dulo &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p><p>Version local : @version@@distant@<br/>@pack@</p><p>Ligaz&oacute;ns de documentaci&oacute;n :<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
+	'help' => '<MODIF>{{Esta p&aacute;xina &eacute; unicamente accesible para o responsable do web.}}<p>D&aacute; acceso &aacute;s diferentes funci&oacute;ns suplementarias achegadas polo m&oacute;dulo &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p><p>Version local : @version@@distant@<br/>@pack@</p><p>Ligaz&oacute;ns de documentaci&oacute;n :<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
 _ • [Ferramentas de cach&eacute;|Volver &aacute; apariencia inicial desta p&aacute;xina->@hide@]
 _ • [De todo o m&oacute;dulo|Volver ao estado inicial do m&oacute;dulo->@reset@]@install@
 </p>',
@@ -452,7 +452,7 @@ M&aacute;is info : [->http://www.spip.net/fr_article765.html]
 @puce@ {{Unicamente se vostede emprega os URL {arborescentes} tal e como segue}}, ent&oacute;n &eacute; posible personalizar o resultado :</p>
 [[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]',
 	'type_urls:nom' => 'Formato das URL',
-	'typo_exposants:description' => 'Textos franceses : mellora o rendementos tipogr&aacute;fico das abreviaturas correntes, metendo en super&iacute;ndice os elementos necesarios (as&iacute;, {<acronym>Mme</acronym>} produce {M<sup>me</sup>}) e corrixindo os erros correntes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, por exemplo, produce {2<sup>e</sup>}, s&oacute; abreviatura correcta).
+	'typo_exposants:description' => '<MODIF>Textos franceses : mellora o rendementos tipogr&aacute;fico das abreviaturas correntes, metendo en super&iacute;ndice os elementos necesarios (as&iacute;, {<acronym>Mme</acronym>} produce {M<sup>me</sup>}) e corrixindo os erros correntes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, por exemplo, produce {2<sup>e</sup>}, s&oacute; abreviatura correcta).
 _ As abreviaturas obtidas est&aacute;n conformes con aquelas da Imprenta nacional como constan en {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (artigo &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, imprentas da Imprimerie nationale, Paris, 2002).',
 	'typo_exposants:nom' => 'Super&iacute;ndices tipogr&aacute;ficos',
 

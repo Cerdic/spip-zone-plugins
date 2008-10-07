@@ -194,7 +194,7 @@ N.B.: in forums, petitions, RSS feeds, etc., Javascript is <b>always</b> made se
 	'guillemets:nom' => 'Curly inverted commas',
 
 	// H
-	'help' => '{{This page is only accessible to main site administrators.}}<p>It gives access to some additional functions of the {{Swiss Knife}}.</p><p>Local version: @version@@distant@<br/>@pack@</p><p>Documentation links:<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Resets :
+	'help' => '<MODIF>{{This page is only accessible to main site administrators.}}<p>It gives access to some additional functions of the {{Swiss Knife}}.</p><p>Local version: @version@@distant@<br/>@pack@</p><p>Documentation links:<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Resets :
 _ • [Hidden tools|Return to the original appearance of this page->@hide@]
 _ • [Whole plugin|Reset to the original state of the plugin->@reset@]@install@
 </p>',
@@ -454,7 +454,7 @@ More information: [->http://www.spip.net/en_article3588.html]
 @puce@ {{Only if you are using the type {arborescentes} describes aboves}}, you can customise the format:</p>
 [[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]',
 	'type_urls:nom' => 'Format of URLs',
-	'typo_exposants:description' => 'Text in French: improves the typographical rendering of common abbreviations by adding superscript where necessary (thus, {<acronym>Mme</acronym>} becomes {M<sup>me</sup>}). Common errors corrected:  ({<acronym>2&egrave;me</acronym>} and  {<acronym>2me</acronym>}, for example, become {2<sup>e</sup>}, the only correct abbreviation).
+	'typo_exposants:description' => '<MODIF>Text in French: improves the typographical rendering of common abbreviations by adding superscript where necessary (thus, {<acronym>Mme</acronym>} becomes {M<sup>me</sup>}). Common errors corrected:  ({<acronym>2&egrave;me</acronym>} and  {<acronym>2me</acronym>}, for example, become {2<sup>e</sup>}, the only correct abbreviation).
 _ The rendered abbreviations correspond to those of the Imprimerie nationale given in the {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, Presses de l\'Imprimerie nationale, Paris, 2002).',
 	'typo_exposants:nom' => 'Superscript',
 
