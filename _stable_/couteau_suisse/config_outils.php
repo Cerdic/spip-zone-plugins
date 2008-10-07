@@ -660,9 +660,9 @@ function action_visiteurs_connectes(){ echo cs_compter_visiteurs(); return true;
 /*	'code:js' => 'function Timer_visiteurs_connectes(){
 		jQuery("span.cs_nb_visiteurs").load("spip.php?action=visiteurs_connectes");
 		setTimeout("Timer_visiteurs_connectes()",120000);					
-}',*/
+}',
 	'code:jq' => ' if(jQuery("span.cs_nb_visiteurs").length) Timer_visiteurs_connectes(); ',
-	'jquery' => 'oui',
+	'jquery' => 'oui',*/
 ));
 
 //-----------------------------------------------------------------------------//
