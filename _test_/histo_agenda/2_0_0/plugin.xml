@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Historique Agenda pour SPIP 1.9.2
+	Historique Agenda 2.0
 	</nom>
 
 	<icon></icon>
@@ -10,13 +10,13 @@
 _ &#169; ao&ucirc;t 2008 - Licence GPL
 	</auteur>
 
-	<version>0.1</version>
+	<version>2.0</version>
 
 	<etat>test</etat>
 
 	<description>
 	Plugin permettant de visualiser les différences sur les agendas.
-_ {{Ce plugin n&#233;cessite le plugin Agenda 0.14 ou plus}}
+_ {{Ce plugin n&#233;cessite le plugin Agenda 0.18 ou plus}}
 	</description>
 
 	<!-- fichier charge a chaque hit -->
@@ -59,6 +59,6 @@ _ {{Ce plugin n&#233;cessite le plugin Agenda 0.14 ou plus}}
                 <inclure>inc/ha_pipelines.php</inclure>
         </pipeline-->
 
-	<necessite id="Agenda" version="[0.14;]" />
+	<necessite id="Agenda" version="[0.18;]" />
 	<chemin dir='' />
 </plugin>
