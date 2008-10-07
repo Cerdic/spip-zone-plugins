@@ -4,9 +4,6 @@
 // langue / language = fr
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-'config_plug' => 'Configurer Google Search',
-'getkey' => '(obtenir)',
-'addkey' => 'Clef ajout&eacute;e: '
 );
 
 ?>
