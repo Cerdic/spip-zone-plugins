@@ -1,31 +1,8 @@
-#CACHE{0}
-<?xml version="1.0"?>
-[(#REM)
-
-	Menu de selection de rubriques
-
-	La reponse doit etre en xml, elle sera exploitee par iautocompleter.js
-
-]
-<ajaxresponse>
 [(#REM) Chercher les rubriques correspondant a la requete ]
 <BOUCLE_s(RUBRIQUES){statut==.}
-{titre LIKE %(#ENV{value})%}{0,20}{par multi titre}>
-<item>
-	<text><![CDATA[
-		<BOUCLE_h(HIERARCHIE){statut==.}{n-3,3}>[(#TITRE|couper{12})]
-		&gt; </BOUCLE_h>
-		<b>#TITRE</b>]]></text>
-	<value><![CDATA[[(#TITRE|textebrut)]]]></value>
-	<id>#ID_RUBRIQUE</id>
-
-</item>
+{titre LIKE %(#ENV{q})%}{0,20}{par multi titre}>
+<BOUCLE_h(HIERARCHIE){statut==.}{n-3,3}>[(#TITRE|couper{12})] &gt; </BOUCLE_h><b>#TITRE</b>|[(#TITRE|textebrut)]|#ID_RUBRIQUE
 </BOUCLE_s>
 	[(#REM) Vraiment on n'a rien trouve ]
-	<item>
-	<text><![CDATA[<small class='autocomplete-message'><:selecteurgenerique:pas_suggestion:></small>]]></text>
-	<value><![CDATA[[(#ENV*{value}|textebrut)]]]></value>
-	<id>0</id>
-	</item>
+	<:selecteurgenerique:pas_suggestion:>|[(#ENV*{q}|textebrut)]|0
 <//B_s>
-</ajaxresponse>
