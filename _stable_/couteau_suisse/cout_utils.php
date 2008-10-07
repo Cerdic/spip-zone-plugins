@@ -120,7 +120,7 @@ function cs_get_defaut($variable) {
 	return $defaut2;
 }
 
-// $type ici est egal a 'options' ou 'fonctions'
+// $type ici est egal a 'config_options', 'options' ou 'fonctions'
 function ecrire_fichier_en_tmp($infos_pipelines, $type) {
 	global $cs_metas_pipelines;
 	$code = '';
@@ -311,6 +311,7 @@ function cs_initialise_includes($count_metas_outils) {
 				$temp_css[] = $f['texte']; 
 			}
 			// recherche d'un code inline eventuellement propose
+			if (isset($outil['code:config_options'])) $infos_pipelines['code_config_options'][] = $outil['code:config_options'];
 			if (isset($outil['code:options'])) $infos_pipelines['code_options'][] = $outil['code:options'];
 			if (isset($outil['code:fonctions'])) $infos_pipelines['code_fonctions'][] = $outil['code:fonctions'];
 			if (isset($outil['code:css'])) $temp_css[] = cs_optimise_if(cs_parse_code_js($outil['code:css']));
@@ -362,7 +363,7 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 		$traitements_utilises[$b] = join("\n", $traitements_utilises[$b]);		
 	}
 	if(count($traitements_utilises))
-		$infos_pipelines['code_options'][] = "// Table des traitements\n" . join("\n", $traitements_utilises);
+		$infos_pipelines['code_config_options'][] = "// Table des traitements\n" . join("\n", $traitements_utilises);
 	// effacement du repertoire temporaire de controle
 	if (@file_exists(_DIR_CS_TMP) && ($handle = @opendir(_DIR_CS_TMP))) {
 		while (($fichier = @readdir($handle)) !== false)
@@ -370,6 +371,7 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 		closedir($handle);
 	} else spip_log('Erreur - cs_initialise_includes() : '._DIR_CS_TMP.' introuvable !');
 	// installation de $cs_metas_pipelines
+	ecrire_fichier_en_tmp($infos_pipelines, 'config_options');
 	ecrire_fichier_en_tmp($infos_pipelines, 'options');
 	ecrire_fichier_en_tmp($infos_pipelines, 'fonctions');
 	$code = array();
@@ -377,6 +379,26 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 	if($nb=count($code))
 		ecrire_fichier(_DIR_CS_TMP . "pipelines.php", 
 			'<'."?php\n// Code de controle pour le plugin 'Couteau Suisse' : $nb pipeline(s) actif(s)\n\n".join("\n", $code).'?'.'>');
+}
+
+define('_CS_CONFIG_OPTIONS_A', "// Partie reservee au Couteau Suisse. Ne pas modifier, merci");
+define('_CS_CONFIG_OPTIONS_B', "// Fin du code. Ne pas modifier ces lignes, merci");
+
+// verifier le fichier d'options _FILE_OPTIONS (ecrire/mes_options.php ou config/mes_options.php)
+function cs_verif_FILE_OPTIONS($ecriture = false) {
+	$include = 'include_once \''.realpath (_DIR_CS_TMP.'mes_config_options.php')."';";
+cs_log("cs_verif_FILE_OPTIONS($ecriture) : le code d'appel est $include");
+	if (_FILE_OPTIONS && lire_fichier(_FILE_OPTIONS, $f)) {
+		// verification
+		$ok = preg_match('`\s*'.preg_quote(_CS_CONFIG_OPTIONS_A,'`').'.*'.preg_quote(_CS_CONFIG_OPTIONS_B,'`').'\s*`ms', $f, $regs);
+cs_log(" -- fichier "._FILE_OPTIONS." present. Inclusion " . ($ok?" trouvee".($ecriture?" et remplacee":""):"absente".($ecriture?" mais ajoutee":"")));
+		$inclusion = "\n"._CS_CONFIG_OPTIONS_A."\n".$include."\n"._CS_CONFIG_OPTIONS_B."\n\n";
+		$f = $ok?str_replace($regs[0], $inclusion, $f):str_replace('<?'.'php', '<?'.'php'.$inclusion, $f);
+		if($ecriture && strlen($f)) ecrire_fichier(_FILE_OPTIONS, $f);
+	} else {
+		// creation
+cs_log(" -- fichier "._FILE_OPTIONS." illisible. Inclusion ".($ecriture?"non ":"")."inseree");
+	}
 }
 
 // retire les guillemets extremes s'il y en a

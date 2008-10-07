@@ -95,8 +95,10 @@ cs_log("$rand -- foreach(\$outils) : cs_initialisation_d_un_outil()");
 	// installer $cs_metas_pipelines
 	$cs_metas_pipelines = array();
 cs_log("$rand -- cs_initialise_includes()... cout_fonctions.php sera probablement inclus.");
-	// creer les includes (mes_options et mes_fonctions) et le fichier de controle pipelines.php
+	// creer les includes (config/mes_options, mes_options et mes_fonctions) et le fichier de controle pipelines.php
 	cs_initialise_includes(count($metas_outils));
+	// verifier le fichier d'options _FILE_OPTIONS (ecrire/mes_options.php ou config/mes_options.php)
+	cs_verif_FILE_OPTIONS(true);
 	// sauver la configuration
 	cs_sauve_configuration();
 	// en metas : outils actifs

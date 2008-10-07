@@ -1,5 +1,6 @@
 <?php
 // Ce fichier est charge a chaque hit //
+echo "cout_options CS !:", _SPIP_SCRIPT, ' - ';
 
 // Compatibilites
 if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) @define('_SPIP19300', 1);
@@ -85,32 +86,43 @@ if($zap) {
 	   ) define('_CS_PRINT', 1);
 
 	// test sur le fichier a inclure ici
-	$cs_exists = file_exists($f_cs = _DIR_CS_TMP.'mes_options.php');
+	$cs_exists = file_exists($f_mo = _DIR_CS_TMP.'mes_options.php');
+	if(!$GLOBALS['cs_config_options']) $cs_exists |= file_exists($f_mco = _DIR_CS_TMP.'mes_config_options.php');
 
 	// fonctions indispensables a l'execution
 	include_spip('cout_lancement');
 	// lancer l'initialisation du plugin. on force la compilation si cs=calcul
-	if(!$cs_exists) spip_log(" -- '$f_cs' introuvable !");
+	if(!$cs_exists) spip_log(" -- '$f_mo' ou '$f_mco' introuvable !");
 	cs_initialisation(!$cs_exists || in_array('calcul', $GLOBALS['cs_params']));
 	cs_log("PUIS : cout_options, initialisation terminee");
 
 	// inclusion des options pre-compilees, si l'on n'est jamais passe par ici...
 	if (!$GLOBALS['cs_options']) {
-
-		if(file_exists($f_cs)) {
-			cs_log(" -- inclusion de '$f_cs'");
-			include_once($f_cs);
+		// inclusion des options de config si elles n'ont pas deja ete inclues par config/mes_options.php
+		if (!$GLOBALS['cs_config_options']) {
+			if(file_exists($f_mco)) {
+				cs_log(" -- inclusion de '$f_mco'");
+				include_once($f_mco);
+			} else {
+				$GLOBALS['cs_utils'] = 0;
+				cs_log(" -- fichier '$f_mco' toujours introuvable !!");
+			}
+		} else
+				cs_log(" -- fichier '$f_mco' deja inclu par config/mes_options.php");
+		if(file_exists($f_mo)) {
+			cs_log(" -- inclusion de '$f_mo'");
+			include_once($f_mo);
 			// verification des metas : reinitialisation si une erreur est detectee
 			if (count($metas_outils)<>$GLOBALS['cs_verif']) {
 				cs_log("ERREUR : metas incorrects - verif = $GLOBALS[cs_verif]");
 				cs_initialisation(true);
-				if (!$GLOBALS['cs_verif']) include_once($f_cs);
+				if (!$GLOBALS['cs_verif']) include_once($f_mo);
 			}
 		} else {
 			$GLOBALS['cs_utils'] = 0;
-			cs_log(" -- fichier '$f_cs' toujours introuvable !!");
+			cs_log(" -- fichier '$f_mo' toujours introuvable !!");
 		}
-	} else cs_log(" -- pas d'inclusion de '$f_cs' ; on est deja passe par ici !?");
+	} else cs_log(" -- pas d'inclusion de '$f_mo' ; on est deja passe par ici !?");
 
 	// si une recompilation a eu lieu avec succes...
 	if ($GLOBALS['cs_utils']) {
