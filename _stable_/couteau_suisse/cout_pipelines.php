@@ -81,16 +81,17 @@ function couteau_suisse_affiche_milieu($flux){
 	return $flux;
 }
 
-function couteau_suisse_header_prive($flux){
+function couteau_suisse_header_prive($flux_){
 	global $cs_metas_pipelines;
+	$flux = '';
 	if (isset($cs_metas_pipelines['header_prive']))
 		eval($cs_metas_pipelines['header_prive']);
 	if (isset($cs_metas_pipelines['header']))
-		$flux .= "\n<!-- Debut header du Couteau Suisse -->\n"
-			. join("\n", $cs_metas_pipelines['header'])
-			. "\n<!-- Fin header du Couteau Suisse -->\n\n";
-		else $flux .= "\n<!-- Rien pour le Couteau Suisse -->\n";
-	return $flux;
+		$flux .= join("\n", $cs_metas_pipelines['header']);
+	$flux = strlen(trim($flux))
+		?"\n<!-- Debut header du Couteau Suisse -->\n$flux<!-- Fin header du Couteau Suisse -->\n\n"
+		:$flux =  "\n<!-- Rien dans les metas -->\n\n";
+	return $flux_.$flux;
 }
 
 
@@ -105,14 +106,17 @@ function couteau_suisse_affichage_final($flux){
 	return $flux;
 }
 
-function couteau_suisse_insert_head($flux){
+function couteau_suisse_insert_head($flux_){
 	global $cs_metas_pipelines;
+	$flux = '';
 	if (isset($cs_metas_pipelines['insert_head']))
 		eval($cs_metas_pipelines['insert_head']);
 	if (isset($cs_metas_pipelines['header']))
-		$flux .=  "\n<!-- Debut header du Couteau Suisse -->\n" . join("\n", $cs_metas_pipelines['header']) . "<!-- Fin header du Couteau Suisse -->\n\n";
-		else $flux .=  "\n<!-- Rien pour le Couteau Suisse -->\n";
-	return $flux;
+		$flux .=  join("\n", $cs_metas_pipelines['header']);
+	$flux = strlen(trim($flux))
+		?"\n<!-- Debut header du Couteau Suisse -->\n$flux<!-- Fin header du Couteau Suisse -->\n\n"
+		:$flux =  "\n<!-- Rien dans les metas -->\n\n";
+	return $flux_.$flux;
 }
 
 /********

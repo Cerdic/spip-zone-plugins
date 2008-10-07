@@ -21,6 +21,8 @@ global $outils, $cs_variables;
 $cs_variables = $outils = array();
 // liste des types de variable
 $cs_variables['_chaines'] = $cs_variables['_nombres'] = array();
+define('_format_CHAINE', 10);
+define('_format_NOMBRE', 20);
 
 /*****************/
 /* COMPATIBILITE */
@@ -92,8 +94,8 @@ function add_variable($tableau) {
 	// enregistrement
 	$cs_variables[$nom] = $tableau;
 	// on fabrique ici une liste des chaines et une liste des nombres
-	if($tableau['format']=='nombre') $cs_variables['_nombres'][] = $nom;
-		elseif($tableau['format']=='chaine') $cs_variables['_chaines'][] = $nom;
+	if($tableau['format']==_format_NOMBRE) $cs_variables['_nombres'][] = $nom;
+		elseif($tableau['format']==_format_CHAINE) $cs_variables['_chaines'][] = $nom;
 
 }
 
@@ -109,11 +111,11 @@ function cs_get_defaut($variable) {
 	$variable = &$cs_variables[$variable];
 	$defaut = $variable['defaut'];
 	if(!strlen($defaut)) $defaut = "''";
-	if($variable['format']=='nombre') $defaut = "intval($defaut)";
-		elseif($variable['format']=='chaine') $defaut = "strval($defaut)";
+	if($variable['format']==_format_NOMBRE) $defaut = "intval($defaut)";
+		elseif($variable['format']==_format_CHAINE) $defaut = "strval($defaut)";
 //cs_log("cs_get_defaut() - \$defaut[{$variable['nom']}] = $defaut");
 	eval("\$defaut=$defaut;");
-	$defaut2 = cs_php_format($defaut, $variable['format']!='nombre');
+	$defaut2 = cs_php_format($defaut, $variable['format']!=_format_NOMBRE);
 //cs_log(" -- cs_get_defaut() - \$defaut[{$variable['nom']}] est devenu : $defaut2");
 	return $defaut2;
 }
@@ -331,11 +333,11 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 		$cs_metas_pipelines['header'][] = "<style type=\"text/css\">\n"
 			.compacte_css(join("\n", $temp_css))."\n</style>";
 	if (count($temp_jq_init)) {
-		$temp_js[] = "var cs_init = function() {\n".join("\n", $temp_jq_init)."\n}\nif(typeof onAjaxLoad=='function') onAjaxLoad(cs_init);";
+		$temp_js[] = "var cs_init = function() {\n\t".join("\n\t", $temp_jq_init)."\n}\nif(typeof onAjaxLoad=='function') onAjaxLoad(cs_init);";
 		$temp_jq[] = "cs_init.apply(document);";
 	}
 	if (count($temp_jq))
-		$temp_js[] = "if (window.jQuery) jQuery(document).ready(function(){\n".join("\n", $temp_jq)."\n});";
+		$temp_js[] = "if (window.jQuery) jQuery(document).ready(function(){\n\t".join("\n\t", $temp_jq)."\n});";
 	if (count($temp_js))
 		$cs_metas_pipelines['header'][] = "<script type=\"text/javascript\"><!--\n"
 			.compacte_js(join("\n", $temp_js))."\n// --></script>\n";
@@ -403,9 +405,9 @@ function cs_get_code_variable($variable, $valeur) {
 	$cs_variable = &$cs_variables[$variable];
 	// mise en forme php de $valeur
 	if(!strlen($valeur)) {
-		if($cs_variable['format']=='nombre') $valeur='0'; else $valeur='""';
+		if($cs_variable['format']==_format_NOMBRE) $valeur='0'; else $valeur='""';
 	} else
-		$valeur = cs_php_format($valeur, $cs_variable['format']!='nombre');
+		$valeur = cs_php_format($valeur, $cs_variable['format']!=_format_NOMBRE);
 	$code = '';
 	foreach($cs_variable as $type=>$param) if (preg_match(',^code(:(.*))?$,', $type, $regs)) {
 		$eval = '$test = ' . (isset($regs[2])?str_replace('%s', $valeur, $regs[2]):'true') . ';';

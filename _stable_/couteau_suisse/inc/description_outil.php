@@ -66,9 +66,9 @@ function description_outil_une_variable($index, $outil, $variable, $label, &$ok_
 	}
 	// ... ou un textarea ... ou une case input
 	else {
-		$len = $cs_variable['format']=='nombre'?4:0;
+		$len = $cs_variable['format']==_format_NOMBRE?4:0;
 		$width = $len?'':'style="width:100%;" ';
-		$lignes = $cs_variable['format']=='nombre'?0:strval($cs_variable['lignes']);
+		$lignes = $cs_variable['format']==_format_NOMBRE?0:strval($cs_variable['lignes']);
 //			else $len=strlen(strval($valeur));
 		$ok_input = $label .
 			( $lignes < 2
