@@ -8,7 +8,7 @@ function action_echoppe_attribuer_logo_categorie(){
 	
 	$type_file = $_FILES['logo_categorie']['type'];
 	
-	$content_dir = 'IMG/'; // dossier où sera déplacé le fichier
+	$content_dir = 'IMG/echoppe/categories/'; // dossier où sera déplacé le fichier
 
     $tmp_file = $_FILES['logo_categorie']['tmp_name'];
 

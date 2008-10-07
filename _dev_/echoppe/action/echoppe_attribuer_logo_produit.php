@@ -8,7 +8,7 @@ function action_echoppe_attribuer_logo_produit(){
 	
 	$type_file = $_FILES['logo_produit']['type'];
 	
-	$content_dir = 'IMG/'; // dossier où sera déplacé le fichier
+	$content_dir = 'IMG/echoppe/produits/'; // dossier où sera déplacé le fichier
 
     $tmp_file = $_FILES['logo_produit']['tmp_name'];
 

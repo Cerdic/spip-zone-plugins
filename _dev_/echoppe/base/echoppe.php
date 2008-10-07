@@ -10,29 +10,29 @@ global $tables_jointures;
 
 
 
-$GLOBALS['echoppe_version_base'] = 0.7;
+$GLOBALS['version_base'] = 0.7;
 
 
-$spip_echoppe_categories = array(
+$spip_categories = array(
 	"id_categorie"	=> "bigint(21) NOT NULL",
 	"id_parent"	=> "bigint(21) NOT NULL",
 	"id_secteur" => "bigint(21) NOT NULL"
 	);
 	
-$spip_echoppe_categories_key = array(
+$spip_categories_key = array(
 	"PRIMARY KEY"		=> "id_categorie",
 	"KEY id_parent"	=> "id_parent",
 	"KEY id_secteur" => "id_secteur"
 	);
 
-$spip_echoppe_categories_join = array(
+$spip_categories_join = array(
 	"id_categorie"		=> "id_categorie",
 	"id_parent"		=> "id_parent",
 	"id_secteur" => "id_secteur"
 	);
 
 
-$spip_echoppe_categories_descriptions = array(
+$spip_categories_descriptions = array(
 	"id_categorie_description"	=> "bigint(21) NOT NULL",
 	"id_categorie"				=> "bigint(21) NOT NULL",
 	"lang"					=> "VARCHAR(2) DEFAULT '' NOT NULL",
@@ -44,19 +44,19 @@ $spip_echoppe_categories_descriptions = array(
 	"statut"				=> "VARCHAR(10) DEFAULT '0' NOT NULL"	// ( je le mets ici, comme ça, on peut avoir moins de catégories dans les langues étrangères)
 	);
 
-$spip_echoppe_categories_descriptions_key = array(
+$spip_categories_descriptions_key = array(
 	"PRIMARY KEY"		=> "id_categorie_description",
 	"KEY id_categorie"    => "id_categorie",
 	"KEY lang"		=> "lang",
 	"KEY statut"		=> "statut"
 	);
 
-$spip_echoppe_categories_descriptions_join = array(
+$spip_categories_descriptions_join = array(
 	"id_categorie"		=>"id_categorie",
 	"lang"			=>"lang",
 	);
 
-$spip_echoppe_produits = array(
+$spip_produits = array(
 	"id_produit"		=> "bigint(21) NOT NULL",
 	"date_debut"		=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 	"date_fin"		=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
@@ -71,7 +71,7 @@ $spip_echoppe_produits = array(
 	"statut"		=> "VARCHAR(10) DEFAULT '0' NOT NULL"
 	);
 	
-$spip_echoppe_produits_key = array(
+$spip_produits_key = array(
 	"PRIMARY KEY"		=> "id_produit",
 	"KEY statut"		=> "statut",
 	"KEY date_debut"	=> "date_debut",
@@ -79,14 +79,14 @@ $spip_echoppe_produits_key = array(
 	"KEY ref_produit"	=> "ref_produit"
 	);
 
-$spip_echoppe_produits_join = array(
+$spip_produits_join = array(
 	"id_produit"	=> "id_produit",
 	"statut"	=> "statut",
 	"date_debut"	=> "date_debut",
 	"date_fin"	=> "date_fin"
 	);
 
-$spip_echoppe_produits_descriptions = array(
+$spip_produits_descriptions = array(
 	"id_descriptif_produit"	=> "bigint(21) NOT NULL",
 	"id_produit"			=> "bigint(21) NOT NULL",
 	"lang"				=> "VARCHAR(2) DEFAULT '' NOT NULL",
@@ -100,19 +100,19 @@ $spip_echoppe_produits_descriptions = array(
 	"maj"				=> "TIMESTAMP",
 	);
 
-$spip_echoppe_produits_descriptions_key = array(
+$spip_produits_descriptions_key = array(
 	"PRIMARY KEY"			=> "id_descriptif_produit",
 	"KEY id_produit"		=> "id_produit",
 	"KEY lang"			=> "lang"
 	);
 
-$spip_echoppe_produits_descriptions_join = array(
+$spip_produits_descriptions_join = array(
 	"id_produit"		=> "id_produit",
 	"lang"			=> "lang"
 	);
 
 
-$spip_echoppe_stock_produits = array(
+$spip_stock_produits = array(
 	"id_stock"			=> "bigint(21) NOT NULL",
 	"id_produit"		=> "bigint(21) NOT NULL",
 	"configuration"		=> "blob NOT NULL", // Utile si on veux renseigner qu'il y a 3 graveur DVD-425RW face noir+BurnProof et 10 graveur DVD-425RW face blanche+BurnProof
@@ -121,18 +121,18 @@ $spip_echoppe_stock_produits = array(
 	"maj"			=> "TIMESTAMP"
 	);
 
-$spip_echoppe_stock_produits_key = array(
+$spip_stock_produits_key = array(
 	"PRIMARY KEY"		=> "id_stock",
 	"KEY id_produit"	=> "id_produit",
 	"KEY id_depot"		=>"id_depot"
 	);
 
-$spip_echoppe_stock_produits_join = array(
+$spip_stock_produits_join = array(
 	"id_produit"	=> "id_produit",
 	"id_depot"	=>"id_depot"
 	);
 
-$spip_echoppe_depots = array(
+$spip_depots = array(
 	"id_depot"			=> "bigint(21) NOT NULL",
 	"titre"				=> "tinytext NOT NULL",
 	"descriptif"			=> "text NOT NULL",
@@ -140,25 +140,25 @@ $spip_echoppe_depots = array(
 	"maj"				=> "TIMESTAMP"
 	);
 
-$spip_echoppe_depots_key = array(
+$spip_depots_key = array(
 	"PRIMARY KEY"			=> "id_depot"
 	);
 
-$spip_echoppe_depots_join = array(
+$spip_depots_join = array(
 	"id_depot"			=> "id_depot"
 	);
 
-$spip_echoppe_categories_produits = array(
+$spip_categories_produits = array(
 	"id_categorie"			=> "bigint(21) NOT NULL",
 	"id_produit"			=> "bigint(21) NOT NULL"
 	);
 
-$spip_echoppe_categories_produits_key = array(
+$spip_categories_produits_key = array(
 	"PRIMARY KEY"			=> "id_categorie, id_produit",
 	"KEY id_produit"		=> "id_produit"
 	);
 
-$spip_echoppe_categories_produits_join = array(
+$spip_categories_produits_join = array(
 	"id_categorie"			=> "id_categorie",
 	"id_produit"			=> "id_produit"
 	);
@@ -167,31 +167,31 @@ $spip_echoppe_categories_produits_join = array(
 
 // Un produits peut faire partie d'une catégorie : écran smasung, mais aussi d'une gamme : "SyncMaster" ou "Ordinateur complet" 
 // A voir si ca fait pas double emplois avec les mots clés
-$spip_echoppe_gammes = array(
+$spip_gammes = array(
 	"id_gamme"			=> "bigint(21) NOT NULL",
 	"titre"				=> "text NOT NULL", // On se pete pas la tete, on utilise les multi
 	"descriptif"			=> "text NOT NULL"
 	);
 
-$spip_echoppe_gammes_key = array(
+$spip_gammes_key = array(
 	"PRIMARY KEY"			=> "id_gamme"
 	);
 
-$spip_echoppe_gammes_join = array(
+$spip_gammes_join = array(
 	"id_gamme"			=> "id_gamme"
 	);
 
-$spip_echoppe_gammes_produits = array(
+$spip_gammes_produits = array(
 	"id_gamme"			=> "bigint(21) NOT NULL",
 	"id_produit"			=> "bigint(21) NOT NULL"
 	);
 
-$spip_echoppe_gammes_produits_key = array(
+$spip_gammes_produits_key = array(
 	"PRIMARY KEY"			=> "id_gamme",
 	"KEY id_produit"		=> "id_produit"
 	);
 
-$spip_echoppe_gammes_produits_join = array(
+$spip_gammes_produits_join = array(
 	"id_gamme"			=> "id_gamme",
 	"id_produit"			=> "id_produit"
 	);
@@ -200,63 +200,63 @@ $spip_echoppe_gammes_produits_join = array(
 //
 // Base des liens avec les objets spip
 //
-$spip_echoppe_categories_rubriques = array(
+$spip_categories_rubriques = array(
 	"id_categorie"			=> "bigint(21) NOT NULL",
 	"id_rubrique"			=> "bigint(21) NOT NULL"
 	);
 
-$spip_echoppe_categories_rubriques_key = array(
+$spip_categories_rubriques_key = array(
 	"PRIMARY KEY"			=> "id_categorie, id_rubrique",
 	"KEY id_rubrique"		=> "id_rubrique"
 	);
 
-$spip_echoppe_categories_articles = array(
+$spip_categories_articles = array(
 	"id_categorie"			=> "bigint(21) NOT NULL",
 	"id_article"			=> "bigint(21) NOT NULL"
 	);
 
-$spip_echoppe_categories_articles_key = array(
+$spip_categories_articles_key = array(
 	"PRIMARY KEY"			=> "id_categorie,id_article",
 	"KEY id_article"		=> "id_article"
 	);
 
-$spip_echoppe_produits_articles = array(
+$spip_produits_articles = array(
 	"id_produit"			=> "bigint(21) NOT NULL",
 	"id_article"			=> "bigint(21) NOT NULL"
 	);
 
-$spip_echoppe_produits_articles_key = array(
+$spip_produits_articles_key = array(
 	"PRIMARY KEY"			=> "id_produit,id_article",
 	"KEY id_article"			=> "id_article"
 	);
 
-$spip_echoppe_produits_rubriques = array(
+$spip_produits_rubriques = array(
 	"id_produit"			=> "bigint(21) NOT NULL",
 	"id_rubrique"			=> "bigint(21) NOT NULL"
 	);
 
-$spip_echoppe_produits_rubriques_key = array(
+$spip_produits_rubriques_key = array(
 	"PRIMARY KEY"			=> "id_produit,id_rubrique",
 	"KEY id_rubrique"			=> "id_rubrique"
 	);
 
-$spip_echoppe_produits_sites = array(
+$spip_produits_sites = array(
 	"id_produit"			=> "bigint(21) NOT NULL",
 	"id_site"				=> "bigint(21) NOT NULL"
 	);
 
-$spip_echoppe_produits_sites_key = array(
+$spip_produits_sites_key = array(
 	"PRIMARY KEY"			=> "id_produit,id_site",
 	"KEY id_site"			=> "id_site"
 	);
 
-$spip_echoppe_produits_documents = array(
+$spip_produits_documents = array(
 	"id_produit"			=> "bigint(21) NOT NULL",
 	"lang"				=> "VARCHAR(2) DEFAULT '' NOT NULL", // Dans le cas ou le doc sert d'illu de pochette de dvd par ex, mettre la bonne pochette avec le titre du film dans la langue visitée
 	"id_document"		=> "bigint(21) NOT NULL"
 	);
 
-$spip_echoppe_produits_documents_key = array(
+$spip_produits_documents_key = array(
 	"PRIMARY KEY"		=> "id_produit,lang,id_document",
 	"KEY lang"		=> "lang", // Dans le cas ou le doc sert d'illu de pochette de dvd par ex, mettre la bonne pochette avec le titre du film dans la langue visitée
 	"KEY id_document"	=> "id_document"
@@ -268,46 +268,46 @@ $spip_echoppe_produits_documents_key = array(
 
 
 
-$spip_echoppe_options = array(
+$spip_options = array(
 	"id_option"	=> "bigint(21) NOT NULL",
 	"id_produit"	=> "bigint(21) DEFAULT '0' NOT NULL",//( si =0 et id_categorie != 0 c'est donc une option sur une categorie ) crowfoot +1
 	"id_categorie"	=> "bigint(21) DEFAULT '0' NOT NULL"
 	);
 
-$spip_echoppe_options_key = array(
+$spip_options_key = array(
 	"PRIMARY KEY"		=> "id_option",
 	"KEY id_produit"	=> "id_produit",//( si =0 et id_categorie != 0 c'est donc une option sur une categorie ) crowfoot +1
 	"KEY id_categorie"	=> "id_categorie"
 	);
 
-$spip_echoppe_options_join = array(
+$spip_options_join = array(
 	"id_option"	=> "id_option",
 	"id_produit"	=> "id_produit",//( si =0 et id_categorie != 0 c'est donc une option sur une categorie ) crowfoot +1
 	"id_categorie"	=> "id_categorie"
 	);
 
 
-$spip_echoppe_options_descriptifs = array( 
+$spip_options_descriptifs = array( 
 #	"id_traduction_options"		=> "bigint(21) NOT NULL",
 	"id_option"			=> "bigint(21) DEFAULT '0' NOT NULL",
 	"lang"				=> "VARCHAR(2) DEFAULT '' NOT NULL",
 	"texte"				=> "text NOT NULL"
 	);
 
-$spip_echoppe_options_descriptifs_key = array( 
+$spip_options_descriptifs_key = array( 
 #	"PRIMARY KEY"		=> "id_traduction_options",
 	"PRIMARY KEY"	=> "id_option,lang",
 	"KEY id_option"	=> "id_option",
 	"KEY lang"	=> "lang"
 	);
 
-$spip_echoppe_options_descriptifs_join = array( 
+$spip_options_descriptifs_join = array( 
 	"id_option"			=> "id_option",
 	"lang"				=> "lang"
 	);
 
 
-$spip_echoppe_options_valeurs = array(
+$spip_options_valeurs = array(
 	"id_options_valeurs"		=> "bigint(21) NOT NULL",
 	"id_option"			=> "bigint(21) NOT NULL",
 	"valeur"			=> "text NOT NULL",
@@ -315,21 +315,21 @@ $spip_echoppe_options_valeurs = array(
 	);
 
 
-$spip_echoppe_options_valeurs_key = array(
+$spip_options_valeurs_key = array(
 	"PRIMARY KEY"		=> "id_options_valeurs",
 	"KEY id_option"		=> "id_option",
 	"KEY defaut"		=> "defaut"
 	);
 
 
-$spip_echoppe_options_valeurs_join = array(
+$spip_options_valeurs_join = array(
 	"id_options_valeurs"		=> "id_options_valeurs",
 	"id_option"			=> "id_option",
 	"defaut"			=> "defaut"
 	);
 
 
-$spip_echoppe_options_valeurs_descriptifs = array(
+$spip_options_valeurs_descriptifs = array(
 #	"id_options_valeurs_descriptifs"	=> "bigint(21) NOT NULL",
 	"id_options_valeurs"				=> "bigint(21) NOT NULL",
 	"lang"						=> "VARCHAR(2) DEFAULT '' NOT NULL", //crowfoot : si langue ne vaut rien (ou 0), alors la valeur est accessible dans toutes les langues.( yoann : bonne idée)
@@ -337,21 +337,21 @@ $spip_echoppe_options_valeurs_descriptifs = array(
 	);
 
 
-$spip_echoppe_options_valeurs_descriptifs_key = array(
+$spip_options_valeurs_descriptifs_key = array(
 #	"id_options_valeurs_descriptifs"	=> "bigint(21) NOT NULL",
 	"PRIMARY KEY"					=> "id_options_valeurs,lang",
 	"KEY lang"					=> "lang", //crowfoot : si langue ne vaut rien (ou 0), alors la valeur est accessible dans toutes les langues.( yoann : bonne idée)
 	);
 
 
-$spip_echoppe_options_valeurs_descriptifs_join = array(
+$spip_options_valeurs_descriptifs_join = array(
 #	"id_options_valeurs_descriptifs"	=> "bigint(21) NOT NULL",
 	"id_options_valeurs"				=> "id_options_valeurs",
 	"lang"						=> "lang", //crowfoot : si langue ne vaut rien (ou 0), alors la valeur est accessible dans toutes les langues.( yoann : bonne idée)
 	);
 
 
-$spip_echoppe_prix = array(
+$spip_prix = array(
 	"id_prix"			=> "bigint(21) NOT NULL",
 	"id_produit"			=> "bigint(21) NOT NULL",
 	"configuration"			=> "longblob NOT NULL",
@@ -360,14 +360,14 @@ $spip_echoppe_prix = array(
 	"date_fin"			=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"
 );
 
-$spip_echoppe_prix_key = array(
+$spip_prix_key = array(
 	"PRIMARY KEY"			=> "id_prix",
 	"KEY id_produit"		=> "id_produit",
 	"KEY date_debut"		=> "date_debut",
 	"KEY date_fin"			=> "date_fin"
 );
 
-$spip_echoppe_prix_join = array(
+$spip_prix_join = array(
 	"id_prix"			=> "id_prix",
 	"id_produit"			=> "id_produit",
 	"date_debut"			=> "date_debut",
@@ -375,27 +375,27 @@ $spip_echoppe_prix_join = array(
 );
 
 
-$spip_echoppe_client = array(
+$spip_client = array(
 	"id_client"	=> "bigint(21) NOT NULL",
 	"id_auteur"	=> "bigint(21) NOT NULL",
 	"token_client"	=> "VARCHAR(255) NOT NULL"
 	);
 
 
-$spip_echoppe_client_key = array(
+$spip_client_key = array(
 	"PRIMARY KEY"		=> "id_client",
 	"KEY id_auteur"		=> "id_auteur",
 	"KEY token_client"	=> "token_client"
 	);
 
 
-$spip_echoppe_client_join = array(
+$spip_client_join = array(
 	"id_client"	=> "id_client",
 	"id_auteur"	=> "id_auteur",
 	"token_client"	=> "token_client"
 	);
 
-$spip_echoppe_paniers = array(
+$spip_paniers = array(
 	"id_panier"	=> "bigint(21) NOT NULL", //Un panier complet est constitue de plusieurs enregistrement de cette table. Tous relies par token_panier
 	"id_client"	=> "bigint(21) NOT NULL",
 	"id_produit"	=> "bigint(21) NOT NULL",
@@ -408,7 +408,7 @@ $spip_echoppe_paniers = array(
 	);
 
 
-$spip_echoppe_paniers_key = array(
+$spip_paniers_key = array(
 	"PRIMARY KEY"		=> "id_panier",
 	"KEY id_client"		=> "id_client",
 	"KEY token_client"	=> "token_client",
@@ -416,14 +416,14 @@ $spip_echoppe_paniers_key = array(
 	);
 
 
-$spip_echoppe_paniers_join = array(
+$spip_paniers_join = array(
 	"id_panier"	=> "id_panier",
 	"id_client"	=> "id_client",
 	"token_client"	=> "token_client",
 	"token_panier"	=> "token_panier"
 	);
 
-$spip_echoppe_statuts_paniers = array(
+$spip_statuts_paniers = array(
 	"id_status_panier"	=> "bigint(21) NOT NULL",
 	"token_panier"	=> "VARCHAR(255) NOT NULL",
 	"statut"		=> "VARCHAR(10) NOT NULL",
@@ -432,171 +432,171 @@ $spip_echoppe_statuts_paniers = array(
 	);
 
 
-$spip_echoppe_statuts_paniers_key = array(
+$spip_statuts_paniers_key = array(
 	"PRIMARY KEY"		=> "id_status_panier",
 	"KEY token_panier"	=> "token_panier"
 	);
 
 
-$spip_echoppe_statuts_paniers_join = array(
+$spip_statuts_paniers_join = array(
 	"token_panier"	=> "token_panier"
 	);
 
-$tables_principales['spip_echoppe_categories'] = array(
-	'field' => &$spip_echoppe_categories,
-	'key' => &$spip_echoppe_categories_key,
-	'join' => &$spip_echoppe_categories_join
+$tables_principales['spip_categories'] = array(
+	'field' => &$spip_categories,
+	'key' => &$spip_categories_key,
+	'join' => &$spip_categories_join
 	);
 
-$tables_principales['spip_echoppe_categories_descriptions'] = array(
-	'field' => &$spip_echoppe_categories_descriptions,
-	'key' => &$spip_echoppe_categories_descriptions_key,
-	'join' => &$spip_echoppe_categories_descriptions_join
+$tables_principales['spip_categories_descriptions'] = array(
+	'field' => &$spip_categories_descriptions,
+	'key' => &$spip_categories_descriptions_key,
+	'join' => &$spip_categories_descriptions_join
 	);
 
-$tables_principales['spip_echoppe_produits'] = array(
-	'field' => &$spip_echoppe_produits,
-	'key' => &$spip_echoppe_produits_key,
-	'join' => &$spip_echoppe_produits_join
+$tables_principales['spip_produits'] = array(
+	'field' => &$spip_produits,
+	'key' => &$spip_produits_key,
+	'join' => &$spip_produits_join
 	);
 
-$tables_principales['spip_echoppe_produits_descriptions'] = array(
-	'field' => &$spip_echoppe_produits_descriptions,
-	'key' => &$spip_echoppe_produits_descriptions_key,
-	'join' => &$spip_echoppe_produits_descriptions_join
+$tables_principales['spip_produits_descriptions'] = array(
+	'field' => &$spip_produits_descriptions,
+	'key' => &$spip_produits_descriptions_key,
+	'join' => &$spip_produits_descriptions_join
 	);
 
-$tables_principales['spip_echoppe_categories_produits'] = array(
-	'field' => &$spip_echoppe_categories_produits,
-	'key' => &$spip_echoppe_categories_produits_key,
-	'join' => &$spip_echoppe_categories_produits_join
+$tables_principales['spip_categories_produits'] = array(
+	'field' => &$spip_categories_produits,
+	'key' => &$spip_categories_produits_key,
+	'join' => &$spip_categories_produits_join
 	);
 
-$tables_principales['spip_echoppe_gammes'] = array(
-	'field' => &$spip_echoppe_gammes,
-	'key' => &$spip_echoppe_gammes_key,
-	'join' => &$spip_echoppe_gammes_join
+$tables_principales['spip_gammes'] = array(
+	'field' => &$spip_gammes,
+	'key' => &$spip_gammes_key,
+	'join' => &$spip_gammes_join
 	);
 
-$tables_principales['spip_echoppe_gammes_produits'] = array(
-	'field' => &$spip_echoppe_gammes_produits,
-	'key' => &$spip_echoppe_gammes_produits_key,
-	'join' => &$spip_echoppe_gammes_produits_join
+$tables_principales['spip_gammes_produits'] = array(
+	'field' => &$spip_gammes_produits,
+	'key' => &$spip_gammes_produits_key,
+	'join' => &$spip_gammes_produits_join
 	);
 
-$tables_principales['spip_echoppe_categories_rubriques'] = array(
-	'field' => &$spip_echoppe_categories_rubriques,
-	'key' => &$spip_echoppe_categories_rubriques_key,
-	'join' => &$spip_echoppe_categories_rubriques_join
+$tables_principales['spip_categories_rubriques'] = array(
+	'field' => &$spip_categories_rubriques,
+	'key' => &$spip_categories_rubriques_key,
+	'join' => &$spip_categories_rubriques_join
 	);
 	
-$tables_principales['spip_echoppe_categories_articles'] = array(
-	'field' => &$spip_echoppe_categories_articles,
-	'key' => &$spip_echoppe_categories_articles_key,
-	'join' => &$spip_echoppe_categories_articles_join
+$tables_principales['spip_categories_articles'] = array(
+	'field' => &$spip_categories_articles,
+	'key' => &$spip_categories_articles_key,
+	'join' => &$spip_categories_articles_join
 	);
 
-$tables_principales['spip_echoppe_produits_articles'] = array(
-	'field' => &$spip_echoppe_produits_articles,
-	'key' => &$spip_echoppe_produits_articles_key,
-	'join' => &$spip_echoppe_produits_articles_join
+$tables_principales['spip_produits_articles'] = array(
+	'field' => &$spip_produits_articles,
+	'key' => &$spip_produits_articles_key,
+	'join' => &$spip_produits_articles_join
 	);
 
-$tables_principales['spip_echoppe_produits_rubriques'] = array(
-	'field' => &$spip_echoppe_produits_rubriques,
-	'key' => &$spip_echoppe_produits_rubriques_key,
-	'join' => &$spip_echoppe_produits_rubriques_join
+$tables_principales['spip_produits_rubriques'] = array(
+	'field' => &$spip_produits_rubriques,
+	'key' => &$spip_produits_rubriques_key,
+	'join' => &$spip_produits_rubriques_join
 	);
 
-$tables_principales['spip_echoppe_produits_sites'] = array(
-	'field' => &$spip_echoppe_produits_sites,
-	'key' => &$spip_echoppe_produits_sites_key,
-	'join' => &$spip_echoppe_produits_sites_join
+$tables_principales['spip_produits_sites'] = array(
+	'field' => &$spip_produits_sites,
+	'key' => &$spip_produits_sites_key,
+	'join' => &$spip_produits_sites_join
 	);
 
-$tables_principales['spip_echoppe_produits_documents'] = array(
-	'field' => &$spip_echoppe_produits_documents,
-	'key' => &$spip_echoppe_produits_documents_key,
-	'join' => &$spip_echoppe_produits_documents_join
+$tables_principales['spip_produits_documents'] = array(
+	'field' => &$spip_produits_documents,
+	'key' => &$spip_produits_documents_key,
+	'join' => &$spip_produits_documents_join
 	);
 
-$tables_principales['spip_echoppe_options'] = array(
-	'field' => &$spip_echoppe_options,
-	'key' => &$spip_echoppe_options_key,
-	'join' => &$spip_echoppe_options_join
+$tables_principales['spip_options'] = array(
+	'field' => &$spip_options,
+	'key' => &$spip_options_key,
+	'join' => &$spip_options_join
 	);
 
-$tables_principales['spip_echoppe_options_descriptions'] = array(
-	'field' => &$spip_echoppe_options_descriptifs,
-	'key' => &$spip_echoppe_options_descriptifs_key,
-	'join' => &$spip_echoppe_options_descriptifs_join
+$tables_principales['spip_options_descriptions'] = array(
+	'field' => &$spip_options_descriptifs,
+	'key' => &$spip_options_descriptifs_key,
+	'join' => &$spip_options_descriptifs_join
 	);
 
-$tables_principales['spip_echoppe_options_valeurs'] = array(
-	'field' => &$spip_echoppe_options_valeurs,
-	'key' => &$spip_echoppe_options_valeurs_key,
-	'join' => &$spip_echoppe_options_valeurs_join
+$tables_principales['spip_options_valeurs'] = array(
+	'field' => &$spip_options_valeurs,
+	'key' => &$spip_options_valeurs_key,
+	'join' => &$spip_options_valeurs_join
 	);
 
-$tables_principales['spip_echoppe_options_valeurs_descriptifs'] = array(
-	'field' => &$spip_echoppe_options_valeurs_descriptifs,
-	'key' => &$spip_echoppe_options_valeurs_descriptifs_key,
-	'join' => &$spip_echoppe_options_valeurs_descriptifs_join
+$tables_principales['spip_options_valeurs_descriptifs'] = array(
+	'field' => &$spip_options_valeurs_descriptifs,
+	'key' => &$spip_options_valeurs_descriptifs_key,
+	'join' => &$spip_options_valeurs_descriptifs_join
 	);
 
-$tables_principales['spip_echoppe_prix'] = array(
-	'field' => &$spip_echoppe_prix,
-	'key' => &$spip_echoppe_prix_key,
-	'join' => &$spip_echoppe_prix_join
+$tables_principales['spip_prix'] = array(
+	'field' => &$spip_prix,
+	'key' => &$spip_prix_key,
+	'join' => &$spip_prix_join
 	);
 
-$tables_principales['spip_echoppe_client'] = array(
-	'field' => &$spip_echoppe_client,
-	'key' => &$spip_echoppe_client_key,
-	'join' => &$spip_echoppe_client_join
+$tables_principales['spip_client'] = array(
+	'field' => &$spip_client,
+	'key' => &$spip_client_key,
+	'join' => &$spip_client_join
 	);
 
-$tables_principales['spip_echoppe_paniers'] = array(
-	'field' => &$spip_echoppe_paniers,
-	'key' => &$spip_echoppe_paniers_key,
-	'join' => &$spip_echoppe_paniers_join
+$tables_principales['spip_paniers'] = array(
+	'field' => &$spip_paniers,
+	'key' => &$spip_paniers_key,
+	'join' => &$spip_paniers_join
 	);
 
-$tables_principales['spip_echoppe_statuts_paniers'] = array(
-	'field' => &$spip_echoppe_statuts_paniers,
-	'key' => &$spip_echoppe_statuts_paniers_key,
-	'join' => &$spip_echoppe_statuts_paniers_join
+$tables_principales['spip_statuts_paniers'] = array(
+	'field' => &$spip_statuts_paniers,
+	'key' => &$spip_statuts_paniers_key,
+	'join' => &$spip_statuts_paniers_join
 	);
 
-$tables_principales['spip_echoppe_depots'] = array(
-	'field' => &$spip_echoppe_depots,
-	'key' => &$spip_echoppe_depots_key,
-	'join' => &$spip_echoppe_depots_join
+$tables_principales['spip_depots'] = array(
+	'field' => &$spip_depots,
+	'key' => &$spip_depots_key,
+	'join' => &$spip_depots_join
 	);
 	
-$tables_principales['spip_echoppe_stock_produits'] = array(
-	'field' => &$spip_echoppe_stock_produits,
-	'key' => &$spip_echoppe_stock_produits_key,
-	'join' => &$spip_echoppe_stock_produits_join
+$tables_principales['spip_stock_produits'] = array(
+	'field' => &$spip_stock_produits,
+	'key' => &$spip_stock_produits_key,
+	'join' => &$spip_stock_produits_join
 	);
 
 global $table_des_tables;
-$table_des_tables['categories']='echoppe_categories';
+$table_des_tables['categories']='categories';
 global $tables_jointures;
-	$tables_jointures['spip_echoppe_categories'][]= 'spip_echoppe_categories_descriptions';
+	$tables_jointures['spip_categories'][]= 'spip_categories_descriptions';
 //global $tables_jointures;
-//$tables_jointures['spip_echoppe_categories'][]= 'spip_echoppe_categories_descriptions'; // ou echoppe_categories_description ?
-//$tables_jointures['spip_echoppe_categories_descriptions'][]= 'spip_echoppe_categories'; // ou echoppe_categories ? 
+//$tables_jointures['spip_categories'][]= 'spip_categories_descriptions'; // ou categories_description ?
+//$tables_jointures['spip_categories_descriptions'][]= 'spip_categories'; // ou categories ? 
 
 /*global $table_des_tables;
-$table_des_tables['categories']='echoppe_categories';
-$table_des_tables['categories_descriptions']='echoppe_categories_descriptions';
-$tables_jointures['spip_echoppe_categories'][]= 'echoppe_categories_descriptions';
-$tables_jointures['spip_echoppe_categories_descriptions'][]= 'echoppe_categories';
+$table_des_tables['categories']='categories';
+$table_des_tables['categories_descriptions']='categories_descriptions';
+$tables_jointures['spip_categories'][]= 'categories_descriptions';
+$tables_jointures['spip_categories_descriptions'][]= 'categories';
 */
 
-//$table_des_tables['produits_descriptions'] = 'echoppe_produits_descriptions';
-//$table_des_tables['categories_descriptions'] = 'echoppe_categories_descriptions';
-//$table_des_tables['produits'] = 'echoppe_produits';
-//$table_des_tables['categories'] = 'echoppe_categories';
+//$table_des_tables['produits_descriptions'] = 'produits_descriptions';
+//$table_des_tables['categories_descriptions'] = 'categories_descriptions';
+//$table_des_tables['produits'] = 'produits';
+//$table_des_tables['categories'] = 'categories';
 ?>
