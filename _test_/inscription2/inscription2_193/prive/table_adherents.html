@@ -61,7 +61,7 @@ function confirm(msg,callback) {
 		<?php
 			$case=_request('case');
 			foreach(lire_config('inscription2') as $cle => $val){
-				if($val!= '' and $cle!='id_table' and ereg("^.+_table$", $cle)){
+				if($val!= '' and $cle!='id_table' and ereg("^.+_table.*$", $cle)){
 					$cle = str_replace("_table", "", $cle);
 					if ($cle == $case){
 						echo "<option value='$cle' selected>"._T('inscription2:'.$cle)."</option>";
@@ -176,7 +176,7 @@ function confirm(msg,callback) {
 	echo '<td><strong><a href="'.$url.'&amp;ordre=id_auteur&amp;desc='.$desc.'"> <img src="'._DIR_PLUGIN_INSCRIPTION2.'images/admin-12.gif" alt="admin" /></a></strong></td>';
 	
 	foreach(lire_config('inscription2') as $cle => $val){
-		if($val!= '' and ereg("^.+_table$", $cle) and $cle!='nom_table'){
+		if($val!= '' and ereg("^.+_table.*$", $cle) and $cle!='nom_table'){
 			$cle = str_replace("_table", "", $cle);
 			if($cle == 'bio' or $cle == 'statut' or $cle == 'login' or $cle == 'email' or $cle == 'nom')
 				$table_auteurs[] = "a.".$cle;
@@ -249,7 +249,7 @@ function confirm(msg,callback) {
 			echo '<td> </td>';
 		
 		foreach(lire_config('inscription2') as $cle => $val){
-			if($val!= '' and ereg("^.+_table$", $cle)){
+			if($val!= '' and ereg("^.+_table.*$", $cle)){
 				$cle = str_replace("_table", "", $cle);
 				if($cle == 'username'){
 					$cle = 'login';
