@@ -1,6 +1,5 @@
 <?php
 // Ce fichier est charge a chaque hit //
-echo "cout_options CS !:", _SPIP_SCRIPT, ' - ';
 
 // Compatibilites
 if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) @define('_SPIP19300', 1);
