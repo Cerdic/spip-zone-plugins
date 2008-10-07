@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param unknown_type $boutons_admin
  * @return unknown
  */
-function AccesRestreint_ajouter_boutons($boutons_admin) {
+function accesrestreint_ajouter_boutons($boutons_admin) {
 	// si on est admin
 	if (autoriser('administrer','zone')) {
 	  // on voit le bouton dans la barre "naviguer"
@@ -32,7 +32,7 @@ function AccesRestreint_ajouter_boutons($boutons_admin) {
  * @param string $flux
  * @return string
  */
-function AccesRestreint_affiche_milieu($flux){
+function accesrestreint_affiche_milieu($flux){
 	switch($flux['args']['exec']) {
 		case 'auteur_infos':
 			$id_auteur = $flux['args']['id_auteur'];

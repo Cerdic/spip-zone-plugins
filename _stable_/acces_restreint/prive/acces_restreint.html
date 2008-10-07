@@ -13,8 +13,8 @@
 <ul class='liste_items'>
 <BOUCLE_zones(ZONES){par #ENV{tri,id_zone}}{publique==#ENV{publique,.*}}{privee==#ENV{privee,.*}}{pagination 10}>
 <li class='item zone[ (#ID_ZONE|accesrestreint_acces_zone|?{ok,interdit})]'><h3>#TITRE</h3>
-<span class='contenu'>[(#ID_ZONE|AccesRestreint_liste_contenu_zone_rub|count) <:accesrestreint:rubriques:>, ]
-[(#ID_ZONE|AccesRestreint_liste_contenu_zone_auteur|count) <:accesrestreint:auteurs:>]
+<span class='contenu'>[(#ID_ZONE|accesrestreint_liste_contenu_zone_rub|count) <:accesrestreint:rubriques:>, ]
+[(#ID_ZONE|accesrestreint_liste_contenu_zone_auteur|count) <:accesrestreint:auteurs:>]
 </span>
 <span class='descriptif'>#DESCRIPTIF</span>
 <span class='quoi'>[(#PUBLIQUE|=={oui}|oui)<:accesrestreint:publique:>[, (#PRIVEE|=={oui}|oui)]][ (#PRIVEE|=={oui}|oui)<:accesrestreint:privee:>]</span>

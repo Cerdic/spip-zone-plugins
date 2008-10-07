@@ -3,8 +3,8 @@ Cette page propose l'introduction de l'article et un formulaire de login.
 Elle peut etre appellée comme cela depuis article.html
 
 		</BOUCLE_article_principal>
-		[(#ID_ARTICLE|AccesRestreint_article_restreint|?{' ',''}) <INCLURE{fond=intro_article}{id_article}> ] 
-		[(#ID_ARTICLE|AccesRestreint_article_restreint|?{'',' '}) Cette page n'existe pas ] 
+		[(#ID_ARTICLE|accesrestreint_article_restreint|?{' ',''}) <INCLURE{fond=intro_article}{id_article}> ] 
+		[(#ID_ARTICLE|accesrestreint_article_restreint|?{'',' '}) Cette page n'existe pas ] 
 		<//B_article_principal>
 
 ]

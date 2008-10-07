@@ -8,7 +8,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function AccesRestreint_declarer_tables_interfaces($interface){
+function accesrestreint_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_auteurs'][] = 'zones_auteurs';
 	$interface['tables_jointures']['spip_zones'][] = 'zones_auteurs';
 	
@@ -26,7 +26,7 @@ function AccesRestreint_declarer_tables_interfaces($interface){
 	return $interface;
 }
 
-function AccesRestreint_declarer_tables_principales($tables_principales){
+function accesrestreint_declarer_tables_principales($tables_principales){
 	$spip_zones = array(
 		"id_zone" 	=> "bigint(21) NOT NULL",
 		"titre" 	=> "varchar(255) NOT NULL",
@@ -45,7 +45,7 @@ function AccesRestreint_declarer_tables_principales($tables_principales){
 	return $tables_principales;
 }
 
-function AccesRestreint_declarer_tables_auxiliaires($tables_auxiliaires){
+function accesrestreint_declarer_tables_auxiliaires($tables_auxiliaires){
 	$spip_zones_auteurs = array(
 		"id_zone" 	=> "bigint(21) NOT NULL",
 		"id_auteur" 	=> "bigint(21) NOT NULL");

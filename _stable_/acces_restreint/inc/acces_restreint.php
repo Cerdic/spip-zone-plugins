@@ -17,14 +17,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param int $id_auteur
  * @return string '1,2,3'
  */
-function AccesRestreint_liste_zones_autorisees($zones='', $id_auteur=NULL) {
+function accesrestreint_liste_zones_autorisees($zones='', $id_auteur=NULL) {
 	$id = NULL;
 	if (!is_null($id_auteur))
 		$id = $id_auteur;
 	elseif (isset($GLOBALS['visiteur_session']['id_auteur']) && $GLOBALS['visiteur_session']['id_auteur'])
 		$id = $GLOBALS['visiteur_session']['id_auteur'];
 	if (!is_null($id)) {
-		$new = AccesRestreint_liste_zones_appartenance_auteur($id);
+		$new = accesrestreint_liste_zones_appartenance_auteur($id);
 		if ($zones AND $new) {
 			$zones = array_unique(array_merge(split(',',$zones),$new));
 			sort($zones);
@@ -44,7 +44,7 @@ function AccesRestreint_liste_zones_autorisees($zones='', $id_auteur=NULL) {
  * @param int/string $id_zone
  * @return array
  */
-function AccesRestreint_liste_contenu_zone_rub_direct($id_zone){
+function accesrestreint_liste_contenu_zone_rub_direct($id_zone){
 	$liste_rubriques=array();
 	// liste des rubriques directement liees a la zone
 	$where = array();
@@ -65,9 +65,9 @@ function AccesRestreint_liste_contenu_zone_rub_direct($id_zone){
  * @param int/string $id_zone
  * @return array
  */
-function AccesRestreint_liste_contenu_zone_rub($id_zone){
+function accesrestreint_liste_contenu_zone_rub($id_zone){
 	include_spip('inc/rubriques');
-	$liste_rubriques = AccesRestreint_liste_contenu_zone_rub_direct($id_zone);
+	$liste_rubriques = accesrestreint_liste_contenu_zone_rub_direct($id_zone);
 	if (!count($liste_rubriques))
 		return $liste_rubriques;
 	$liste_rubriques = calcul_branche_in(join(',',$liste_rubriques));
@@ -83,7 +83,7 @@ function AccesRestreint_liste_contenu_zone_rub($id_zone){
  * @param int $id_auteur
  * @return array
  */
-function AccesRestreint_liste_zones_appartenance_auteur($id_auteur){
+function accesrestreint_liste_zones_appartenance_auteur($id_auteur){
 	static $liste_zones = array();
 	if (!isset($liste_zones[$id_auteur])){
 		include_spip('base/abstract_sql');
@@ -102,8 +102,8 @@ function AccesRestreint_liste_zones_appartenance_auteur($id_auteur){
  * @param unknown_type $id_auteur
  * @return unknown
  */
-function AccesRestreint_test_appartenance_zone_auteur($id_zone,$id_auteur){
-	return in_array($id_zone,AccesRestreint_liste_zones_appartenance_auteur($id_auteur));
+function accesrestreint_test_appartenance_zone_auteur($id_zone,$id_auteur){
+	return in_array($id_zone,accesrestreint_liste_zones_appartenance_auteur($id_auteur));
 }
 
 /**
@@ -112,7 +112,7 @@ function AccesRestreint_test_appartenance_zone_auteur($id_zone,$id_auteur){
  * @param int $id_zone
  * @return array
  */
-function AccesRestreint_liste_contenu_zone_auteur($id_zone) {
+function accesrestreint_liste_contenu_zone_auteur($id_zone) {
 	$liste_auteurs=array();
 	include_spip('base/abstract_sql');
 	$liste_auteurs = sql_allfetsel("id_auteur","spip_zones_auteurs","id_zone=".intval($id_zone));
@@ -125,16 +125,17 @@ function AccesRestreint_liste_contenu_zone_auteur($id_zone) {
  * -> condition NOT IN
  * Cette fonction renvoie la liste des rubriques interdites
  * au visiteur courant
- * d'ou le recours a $GLOBALS['AccesRestreint_zones_autorisees']
+ * d'ou le recours a $GLOBALS['accesrestreint_zones_autorisees']
  *
- * @param unknown_type $publique
- * @param unknown_type $id_auteur
- * @return unknown
+ * @param bool $publique
+ * @param int $id_auteur
+ * @return array
  */
-function AccesRestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL) {
+function accesrestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL) {
 	// cache static
 	static $liste_rub_exclues = array();
-	if (!isset($liste_rub_exclues[$publique]) || !is_array($liste_rub_exclues[$publique])) {
+	$id_auteur = is_null($id_auteur)?$GLOBALS['visiteur_session']['id_auteur']:$id_auteur;
+	if (!isset($liste_rub_exclues[$id_auteur][$publique]) || !is_array($liste_rub_exclues[$id_auteur][$publique])) {
 
 		$where = array();
 		// Ne selectionner que les zones pertinentes
@@ -147,16 +148,16 @@ function AccesRestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL)
 		// on selectionne les rubriques correspondant aux autres zones,
 		// sinon on selectionne toutes celles correspondant a une zone.
 		include_spip('base/abstract_sql');
-		if ($GLOBALS['AccesRestreint_zones_autorisees']
-		  AND (is_null($id_auteur) OR $id_auteur==$GLOBALS['visiteur_session']['id_auteur']))
-			$where[] = sql_in('zr.id_zone',$GLOBALS['AccesRestreint_zones_autorisees'],'NOT');
-		elseif (!is_null($id_auteur))
-			$where[] = sql_in('zr.id_zone',AccesRestreint_liste_zones_autorisees('',$id_auteur),'NOT');
+		if ($GLOBALS['accesrestreint_zones_autorisees']
+		  AND $id_auteur==$GLOBALS['visiteur_session']['id_auteur'])
+			$where[] = sql_in('zr.id_zone',$GLOBALS['accesrestreint_zones_autorisees'],'NOT');
+		elseif ($id_auteur)
+			$where[] = sql_in('zr.id_zone',accesrestreint_liste_zones_autorisees('',$id_auteur),'NOT');
 
-		$liste_rub_exclues[$publique] = AccesRestreint_liste_contenu_zone_rub($where);
+		$liste_rub_exclues[$id_auteur][$publique] = accesrestreint_liste_contenu_zone_rub($where);
 		#$liste_rub_exclues[$publique] = array_unique($liste_rub_exclues[$publique]);
 	}
-	return $liste_rub_exclues[$publique];
+	return $liste_rub_exclues[$id_auteur][$publique];
 }
 
 

@@ -15,7 +15,7 @@ include_spip('inc/config');
 
 
 // devrait etre une bonne "action"
-function AccesRestreint_appliquer_modifs_config() {
+function accesrestreint_appliquer_modifs_config() {
 	include_spip('inc/meta');
 
 	// modifs de secu (necessitent une authentification ftp)
@@ -55,7 +55,7 @@ function exec_acces_restreint_config(){
 	include_spip('inc/config');
 	inc_config_dist();
 	if (_request('changer_config') == 'oui')
-		AccesRestreint_appliquer_modifs_config();
+		accesrestreint_appliquer_modifs_config();
 
 	pipeline('exec_init',array('args'=>array('exec'=>'acces_restreint_config'),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -83,8 +83,8 @@ function exec_acces_restreint_config(){
 	echo "<input type='hidden' name='changer_config' value='oui' />";
 
 
-	AccesRestreint_htaccess_config();
-	AccesRestreint_htpasswd_config();
+	accesrestreint_htaccess_config();
+	accesrestreint_htpasswd_config();
 	echo '</div></form>';
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'acces_restreint_config'),'data'=>''));
@@ -96,7 +96,7 @@ function exec_acces_restreint_config(){
 //
 // Le core de SPIP sait gerer ces options de configuration
 //
-function AccesRestreint_htaccess_config() {
+function accesrestreint_htaccess_config() {
 
 	global $spip_lang_right;
 
@@ -122,7 +122,7 @@ function AccesRestreint_htaccess_config() {
 	echo "<br />";
 }
 
-function AccesRestreint_htpasswd_config() {
+function accesrestreint_htpasswd_config() {
 	global $spip_lang_right;
 
 	include_spip('inc/acces');

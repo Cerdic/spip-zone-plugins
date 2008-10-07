@@ -14,7 +14,7 @@ include_spip('inc/meta');
  * @param unknown_type $nom_meta_base_version
  * @param unknown_type $version_cible
  */
-function AccesRestreint_upgrade($nom_meta_base_version,$version_cible){
+function accesrestreint_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
@@ -65,7 +65,7 @@ function AccesRestreint_upgrade($nom_meta_base_version,$version_cible){
  *
  * @param unknown_type $nom_meta_base_version
  */
-function AccesRestreint_vider_tables($nom_meta_base_version) {
+function accesrestreint_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_zones");
 	sql_drop_table("spip_zones_auteurs");
 	sql_drop_table("spip_zones_rubriques");

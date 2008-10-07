@@ -14,7 +14,7 @@ function formulaires_editer_zone_charger_dist($id_zone='new', $retour='', $confi
 
 	// charger les rubriques associees a la zone
 	include_spip('inc/acces_restreint');
-	$valeurs['rubriques'] = AccesRestreint_liste_contenu_zone_rub_direct($id_zone);
+	$valeurs['rubriques'] = accesrestreint_liste_contenu_zone_rub_direct($id_zone);
 	
 	return $valeurs;
 }

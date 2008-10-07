@@ -40,7 +40,7 @@ function autoriser_auteur_affecterzones_dist($faire,$quoi,$id,$qui,$opts){
 	if ($id == $qui['id_auteur']) return false;
 	# les non admin ne peuvent affecter que les zones dont ils font partie
 	if ($opts['id_zone']
-	  AND !AccesRestreint_test_appartenance_zone_auteur($opts['id_zone'], $qui['id_auteur']))
+	  AND !accesrestreint_test_appartenance_zone_auteur($opts['id_zone'], $qui['id_auteur']))
 	  return false;
  return true;
 }
@@ -53,7 +53,7 @@ function autoriser_rubrique_voir($faire, $type, $id, $qui, $opt) {
 	$publique = isset($opt['publique'])?$opt['publique']:!test_espace_prive();
 	$id_auteur = isset($qui['id_auteur']) ? $qui['id_auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
 	if (!isset($rub_exclues[$id_auteur][$publique]) || !is_array($rub_exclues[$id_auteur][$publique])) {
-		$rub_exclues[$id_auteur][$publique] = AccesRestreint_liste_rubriques_exclues($publique,$id_auteur);
+		$rub_exclues[$id_auteur][$publique] = accesrestreint_liste_rubriques_exclues($publique,$id_auteur);
 		$rub_exclues[$id_auteur][$publique] = array_flip($rub_exclues[$id_auteur][$publique]);
 	}
 	return !isset($rub_exclues[$id_auteur][$publique][$id]);
@@ -112,7 +112,7 @@ function autoriser_document_voir($faire, $type, $id, $qui, $opt) {
 	$id_auteur = isset($qui['id_auteur']) ? $qui['id_auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
 	if (!isset($documents_statut[$id_auteur][$publique][$id])){
 		if (!isset($where[$publique])){
-			$where[$publique] = AccesRestreint_documents_accessibles_where('id_document', $publique?"true":"false");
+			$where[$publique] = accesrestreint_documents_accessibles_where('id_document', $publique?"true":"false");
 			$where[$publique] = eval("return ".$where[$publique].";");
 		}
 		$documents_statut[$id_auteur][$publique][$id] = sql_fetsel('id_document','spip_documents',array('id_document='.intval($id),$where[$publique]));
