@@ -1,0 +1,14 @@
+<div class="formulaire_spip formulaire_feedburner">
+	<form action="http://www.feedburner.com/fb/a/emailverify" method="post" target="popupwindow" onsubmit="window.open('http://www.feedburner.com/fb/a/emailverifySubmit?feedId=#ENV{_feedId}', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+	<ul>
+		<li>
+			<label><:form_pet_votre_email:></label>
+			<input type="text" class="text" name="email" value="#ENV{email}" />
+			<input type="hidden" name="url" value="http://feeds.feedburner.com/~e?ffid=#ENV{_feedId}" />
+			<input type="hidden" name="title" value="#NOM_SITE_SPIP" />
+			[<input type="hidden" name="loc" value="(#ENV{lang})_[(#ENV{lang}|strtoupper)]" />]
+		</li>
+	</ul>
+	<p class="boutons"><input type="submit" value="OK" /></p>
+	</form>
+</div>
