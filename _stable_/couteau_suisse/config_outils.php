@@ -904,8 +904,17 @@ add_variable( array(
 
 // coins ronds aux parents !
 .jc_parent"'
-		:'".rubriques, .breves, .syndic, .forums, .divers // coins ronds
-.liste-articles li .texte = corner(\"sc:#009\") // en couleur"',
+		:'" // coins ronds pour les menus de navigation
+.rubriques, .breves, .syndic, .forums, .divers
+
+ // en couleurs sur l\'accueil
+.liste-articles li .texte = css(\'background-color\', \'#E0F0F0\') .corner()
+
+// colorisation de la dist de SPIP 1.92 en ajoutant un parent
+\"#contenu .texte\" = wrap(\'<div style=\"padding:4px; background-color:#E0F0F0; margin:4px 0;\"></div>\') .parent() .addClass(\'jc_parent\')
+
+// coins ronds aux parents !
+.jc_parent"',
 	'code' => "define('_jcorner_CLASSES', %s);",
 ));
 add_variable( array(	// variable utilisee par 'pipelinecode:insert_head'
