@@ -6,7 +6,7 @@
 	<description>
 		- Affiche le nombre de visiteurs connect&eacute;s sur le site.
 		
-		- Ajouter <code>[(#INCLURE{fond=inc-visiteurs})]</code> dans vos pages.
+		- Ajouter <code><INCLURE{fond=inc-visiteurs}></code> dans vos pages.
 	</description>
 	<fonctions>visiteurs_fonctions.php</fonctions>
 	<prefix>visiteurs_connectes</prefix>
