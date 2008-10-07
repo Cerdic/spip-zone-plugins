@@ -381,23 +381,26 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 			'<'."?php\n// Code de controle pour le plugin 'Couteau Suisse' : $nb pipeline(s) actif(s)\n\n".join("\n", $code).'?'.'>');
 }
 
-define('_CS_CONFIG_OPTIONS_A', "// Partie reservee au Couteau Suisse. Ne pas modifier, merci");
-define('_CS_CONFIG_OPTIONS_B', "// Fin du code. Ne pas modifier ces lignes, merci");
-
 // verifier le fichier d'options _FILE_OPTIONS (ecrire/mes_options.php ou config/mes_options.php)
 function cs_verif_FILE_OPTIONS($ecriture = false) {
-	$include = '@include_once \''.realpath (_DIR_CS_TMP.'mes_config_options.php')."';";
+	define('_CS_CONFIG_OPTIONS_A', "// Partie reservee au Couteau Suisse. Ne pas modifier, merci");
+	define('_CS_CONFIG_OPTIONS_B', "// Fin du code. Ne pas modifier ces lignes, merci");
+
+	$include = '@include_once \''.realpath(_DIR_CS_TMP.'mes_config_options.php')."';";
+	$inclusion = "\n"._CS_CONFIG_OPTIONS_A."\n".$include."\n"._CS_CONFIG_OPTIONS_B."\n\n";
 cs_log("cs_verif_FILE_OPTIONS($ecriture) : le code d'appel est $include");
 	if (_FILE_OPTIONS && lire_fichier(_FILE_OPTIONS, $f)) {
 		// verification
 		$ok = preg_match('`\s*'.preg_quote(_CS_CONFIG_OPTIONS_A,'`').'.*'.preg_quote(_CS_CONFIG_OPTIONS_B,'`').'\s*`ms', $f, $regs);
 cs_log(" -- fichier "._FILE_OPTIONS." present. Inclusion " . ($ok?" trouvee".($ecriture?" et remplacee":""):"absente".($ecriture?" mais ajoutee":"")));
-		$inclusion = "\n"._CS_CONFIG_OPTIONS_A."\n".$include."\n"._CS_CONFIG_OPTIONS_B."\n\n";
 		$f = $ok?str_replace($regs[0], $inclusion, $f):str_replace('<?'.'php', '<?'.'php'.$inclusion, $f);
 		if($ecriture && strlen($f)) ecrire_fichier(_FILE_OPTIONS, $f);
 	} else {
 		// creation
-cs_log(" -- fichier "._FILE_OPTIONS." illisible. Inclusion ".($ecriture?"non ":"")."inseree");
+		$f = _DIR_RACINE . _NOM_PERMANENTS_INACCESSIBLES . _NOM_CONFIG . '.php';
+		$t = '<?'."php\n".$inclusion."\n?>";
+		if($ecriture) ecrire_fichier($f, $t);
+cs_log(" -- fichier "._FILE_OPTIONS." illisible. Fichier et inclusion ".(!$ecriture?"non ":"")."crees");
 	}
 }
 
