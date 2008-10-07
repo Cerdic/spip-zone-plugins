@@ -386,7 +386,7 @@ define('_CS_CONFIG_OPTIONS_B', "// Fin du code. Ne pas modifier ces lignes, merc
 
 // verifier le fichier d'options _FILE_OPTIONS (ecrire/mes_options.php ou config/mes_options.php)
 function cs_verif_FILE_OPTIONS($ecriture = false) {
-	$include = 'include_once \''.realpath (_DIR_CS_TMP.'mes_config_options.php')."';";
+	$include = '@include_once \''.realpath (_DIR_CS_TMP.'mes_config_options.php')."';";
 cs_log("cs_verif_FILE_OPTIONS($ecriture) : le code d'appel est $include");
 	if (_FILE_OPTIONS && lire_fichier(_FILE_OPTIONS, $f)) {
 		// verification
