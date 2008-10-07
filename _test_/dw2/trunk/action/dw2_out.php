@@ -17,8 +17,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
 // requis spip .h.26/12 charger le bon format url 
-charger_generer_url();
-
+//charger_generer_url();
+// chryjs7/10/8 a change dans spip 2.0
+generer_url_entite("", "", "", "", !NULL);
 
 /*
 | $origine ainsi que la distinction "admin" "redact" et "visteur",
@@ -73,23 +74,21 @@ function action_dw2_out() {
 
 	// Faire un peu de menage ... Si time ip trop vieux .. on efface l'enreg !
 	sql_query("DELETE FROM spip_dw2_triche WHERE time < $timevire");
-	
-
 
 	//
 	// recherche le doc ($id)
 	//
 	// ## h.18/12 .. ajout de 'dw.restreint' ##
-	$req_dw = sql_query("SELECT dw.id_document, dw.url, dw.heberge ".
-					"FROM spip_dw2_doc dw, spip_documents sd ".
-					"WHERE dw.id_document='$id' AND sd.id_document='$id' AND dw.statut='actif'");
+	$req_dw = sql_select("dw.id_document, dw.url, dw.heberge ",
+					"spip_dw2_doc dw, spip_documents sd ",
+					"dw.id_document='$id' AND sd.id_document='$id' AND dw.statut='actif'");
 
 	if(sql_count($req_dw)) {
 		$rec = sql_fetch($req_dw);
 		$tabdoc = array('dw', $rec['url'], $rec['heberge']);
 	}
 	else {
-		$req_spip = sql_query("SELECT id_document, fichier, distant FROM spip_documents WHERE id_document='$id'");
+		$req_spip = sql_select("id_document, fichier, distant","spip_documents","id_document='$id'");
 		$res = sql_fetch($req_spip);
 		$tabdoc = array('sp', $res['fichier'], $res['distant']);
 	}
@@ -157,7 +156,7 @@ function action_dw2_out() {
 			if ($GLOBALS['dw2_param']['anti_triche']=="oui") {
 				
 				//On recherche si couple ip/id existe déjà dans la base
-				$req_ipid = sql_query("SELECT * FROM spip_dw2_triche WHERE idsite LIKE '$id' AND ip LIKE '%$ip%'");
+				$req_ipid = sql_select("*","spip_dw2_triche","idsite LIKE '$id' AND ip LIKE '%$ip%'");
 			
 				//Si l'ip/id n'existe pas dans la table, on l'ajoute
 				if(!sql_count($req_ipid)) {
@@ -182,7 +181,7 @@ function action_dw2_out() {
 				//h.28/12 .. restreint .. crea||increm ligne sur table stats_auteurs
 				
 				if($auteur_session && $statut_restrict >= '1') {
-					$rq = sql_query("SELECT * FROM spip_dw2_stats_auteurs WHERE id_doc='$id' AND id_auteur='$auteur_session'");
+					$rq = sql_select("*","spip_dw2_stats_auteurs","id_doc='$id' AND id_auteur='$auteur_session'");
 					
 					if(!sql_count($rq)) {
 						sql_query("INSERT IGNORE INTO spip_dw2_stats_auteurs (date, id_auteur, id_doc, date_enreg) VALUES (CURDATE(), '$auteur_session', '$id', NOW())");
@@ -191,7 +190,7 @@ function action_dw2_out() {
 				}
 				
 				// créa ligne || incrementation ligne .. dw2_stats
-				$rst = sql_query("SELECT * FROM spip_dw2_stats WHERE date=CURDATE() AND id_doc='$id'");
+				$rst = sql_select("*","spip_dw2_stats","date=CURDATE() AND id_doc='$id'");
 				if(!sql_count($rst)) {
 					sql_query("INSERT IGNORE INTO spip_dw2_stats (date, id_doc, telech) VALUES ('$date', '$id', '1')");
 				}
@@ -207,11 +206,20 @@ function action_dw2_out() {
 			$heberge = $tabdoc[2]; // heberge
 			
 			if ($heberge == "local")
-				{ @header("Location: $adr_site$url"); }
+				{ 
+				@header("Location: $adr_site$url"); 
+				exit(0);
+			}
 			else if ($heberge == "distant")
-				{ @header("Location: $url"); }
+				{ 
+					@header("Location: $url"); 
+					exit(0);
+				}
 			else
-				{ @header("Location: $heberge$url"); }
+				{ 
+					@header("Location: $heberge$url"); 
+					exit(0);
+			}
 		
 		}
 		else {
@@ -219,11 +227,15 @@ function action_dw2_out() {
 			$url = $tabdoc[1]; // fichier
 			$distant = $tabdoc[2]; // distant
 				
-			if($distant=='oui')
-				{ @header("Location: $url");}
-			else
-				{ @header("Location: $adr_site/$url"); }
-		}
+			if($distant=='oui') { 
+				@header("Location: $url");
+				exit(0);
+			}
+			else {
+				@header("Location: $adr_site/$url"); 
+				exit(0);
+			}
+	}
 
 	}
 	else {

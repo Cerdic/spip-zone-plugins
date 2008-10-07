@@ -29,31 +29,18 @@ function select_categorie_doc($rub_select)
 //
 // Retourne tableau du proprio 
 function origine_doc($id_doc)
-	{
-	$tab_ido=array(
-		'article'=>'articles', 
-		'rubrique'=>'rubriques', 
-		'breve'=>'breves');
-		#'syndic'=>'syndic');
-	
-	while (list($k,$v) = each($tab_ido))
-		{
-		$requete=sql_query("SELECT id_".$k." FROM spip_documents_".$v." WHERE id_document = $id_doc");
-			#if($ok_ido=$res=sql_count($requete)) {
-			if(sql_count($requete)) {
-				$lg=sql_fetch($requete);
-				$iddoctype=$lg['id_'.$k];
-				$doctype=$k;
-				break;
-			}
-		}
-	if(isset($doctype)) {	
-		$query=sql_query("SELECT statut FROM spip_".$doctype."s WHERE id_".$doctype." = $iddoctype");
-		$row=sql_fetch($query);
-		$statut=($row['statut']=="publie") ? '1' : '0';
+{
+	$requete=sql_select("sd.id_document, sl.objet, sl.id_objet ",
+						"spip_documents AS sd, spip_documents_liens AS sl",
+						"sd.id_document=sl.id_document AND sd.id_document = $id_doc");
+	if (sql_count($requete)) {
+		$lg=sql_fetch($requete);
+		$iddoctype=$lg['id_objet'];
+		$doctype=$lg['objet'];
+		$statut='1'; // a priori plus géré en 2.0 ? a verifier
 	}
 	return $origine_doc=array($doctype,$iddoctype,$statut);
-	}
+}
 
 
 //

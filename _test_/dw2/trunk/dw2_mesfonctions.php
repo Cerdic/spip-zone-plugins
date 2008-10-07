@@ -32,6 +32,7 @@ include_spip('balise/dw2_boba');
 | redeclarer #URL_DOCUMENT
 | Eviter modification de squelette (voir config)
 */
+/*
 function balise_URL_DOCUMENT($p) {
 	if($GLOBALS['forcer_url_dw2']=="oui") {
 		return balise_URL_DOC_OUT($p);
@@ -39,7 +40,7 @@ function balise_URL_DOCUMENT($p) {
 		return balise_URL_DOCUMENT_dist($p);
 	}
 }
-
+*/
 
 #
 # Filtres

@@ -577,5 +577,10 @@ if (!$origine) {
 
 }
 
+// http://doc.spip.org/@http_href_img
+function http_href_img($href, $img, $att, $alt, $title='', $style='', $class='', $evt='') {
+	if (!$title) $title = $alt;
+	return  http_href($href, http_img_pack($img, $alt, $att), $title, $style, $class, $evt);
+}
 
 ?>
