@@ -46,7 +46,7 @@ function cron_histo_archivage($time)
 	{
 		// ne commence a tracer qu'au debut 
 		// de la page (enleve le javascript etc.)
-		if (($pos = strpos($line, "<div id=\"sep\"")) > 0)
+		if (($pos = strpos($line, "<div id=\"sep\"")) !== false)
 		{
 			if ($deb == false)
 				$line = substr($line, $pos);
