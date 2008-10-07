@@ -53,7 +53,7 @@ function autoriser_rubrique_voir($faire, $type, $id, $qui, $opt) {
 	$publique = isset($opt['publique'])?$opt['publique']:!test_espace_prive();
 	$id_auteur = isset($qui['id_auteur']) ? $qui['id_auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
 	if (!isset($rub_exclues[$id_auteur][$publique]) || !is_array($rub_exclues[$id_auteur][$publique])) {
-		$rub_exclues[$id_auteur][$publique] = AccesRestreint_liste_rubriques_exclues($publique,$id_auteur);
+		$rub_exclues[$id_auteur][$publique] = accesrestreint_liste_rubriques_exclues($publique,$id_auteur);
 		$rub_exclues[$id_auteur][$publique] = array_flip($rub_exclues[$id_auteur][$publique]);
 	}
 	return !isset($rub_exclues[$id_auteur][$publique][$id]);
