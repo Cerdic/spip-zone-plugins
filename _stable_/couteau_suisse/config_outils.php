@@ -656,11 +656,11 @@ add_outil( array(
 function cs_compter_visiteurs(){ return count(preg_files(_DIR_TMP.'visites/','.')); }
 function action_visiteurs_connectes(){ echo cs_compter_visiteurs(); return true; }",
 	'version-min' => '1.9200', // pour la balise #ARRAY
-	//	une mise a jour toutes les 15 sec ?
-	'code:js' => 'function Timer_visiteurs_connectes(){
+	//	une mise a jour toutes les 120 sec ?
+/*	'code:js' => 'function Timer_visiteurs_connectes(){
 		jQuery("span.cs_nb_visiteurs").load("spip.php?action=visiteurs_connectes");
-		setTimeout("Timer_visiteurs_connectes()",20000);					
-}',
+		setTimeout("Timer_visiteurs_connectes()",120000);					
+}',*/
 	'code:jq' => ' if(jQuery("span.cs_nb_visiteurs").length) Timer_visiteurs_connectes(); ',
 	'jquery' => 'oui',
 ));
