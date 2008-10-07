@@ -55,6 +55,9 @@ function cs_lien($lien, $texte='') {
 	return cs_propre("[{$texte}->{$lien}]");
 }
 
+// filtre pour ajouter un <span> autour d'un texte
+function cs_span($texte, $attr='') { return "<span $attr>$texte</span>"; }
+
 // Controle (basique!) des 3 balises usuelles p|div|span eventuellement coupees
 // Attention : simple traitement pour des balises non imbriquees
 function cs_safebalises($texte) {

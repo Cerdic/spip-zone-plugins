@@ -652,10 +652,17 @@ add_outil( array(
 	'id' => 'visiteurs_connectes',
 	'auteur' => "Phil d'apr&egrave;s spip-contrib",
 	'categorie' => 'public',
-	'code:fonctions' => "define('_visiteurs_connectes',1);\nfunction cs_compter_visiteurs(){ return count(preg_files(_DIR_TMP.'visites/','.')); }",
+	'code:options' => "define('_VISITEURS_CONNECTES',1);
+function cs_compter_visiteurs(){ return count(preg_files(_DIR_TMP.'visites/','.')); }
+function action_visiteurs_connectes(){ echo cs_compter_visiteurs(); return true; }",
 	'version-min' => '1.9200', // pour la balise #ARRAY
-//	une mise a jour toutes les 60sec ?
-//	'code:jq' => ' if(jQuery("span.cs_nb_visiteurs").length) trigger? ',
+	//	une mise a jour toutes les 15 sec ?
+	'code:js' => 'function Timer_visiteurs_connectes(){
+		jQuery("span.cs_nb_visiteurs").load("spip.php?action=visiteurs_connectes");
+		setTimeout("Timer_visiteurs_connectes()",20000);					
+}',
+	'code:jq' => ' if(jQuery("span.cs_nb_visiteurs").length) Timer_visiteurs_connectes(); ',
+	'jquery' => 'oui',
 ));
 
 //-----------------------------------------------------------------------------//

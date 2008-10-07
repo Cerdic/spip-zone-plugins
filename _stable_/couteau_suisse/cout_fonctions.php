@@ -9,9 +9,6 @@ elseif (defined('_CS_REPORTALL')) error_reporting(E_ALL);
 $GLOBALS['cs_fonctions_essai'] = 1;
 //cs_log("INIT : cout_fonctions ($GLOBALS[cs_options]/$GLOBALS[cs_fonctions]/$GLOBALS[cs_init])");
 
-// filtre pour ajouter un <span> dans une noisette
-function cs_span($texte, $attr='') { return "<span $attr>$texte</span>"; }
-
 // plugin initialise si cout_options est OK (fin de compilation par exemple)
 if(!$GLOBALS['cs_init']) {
 	if($GLOBALS['cs_options']) {
