@@ -78,7 +78,7 @@ function ha_voir_modifications($dt1, $dt2)
 		{
 			// ne commence a tracer qu'au debut
 			// de la page 
-			if (($pos = strpos($line, "XXX<div id=\"sep\"")) > 0)
+			if (($pos = strpos($line, "XXX<div id=\"sep\"")) !== false)
 			{
 				if ($deb == false)
 					$line = substr($line, $pos);
@@ -205,20 +205,36 @@ function ha_voir_evenements($dt)
 	if ($dt == "maintenant")
 	{
 		// regenere le fichier
-		$dt = date("Ymd");
+		//$dt = date("Ymd");
 		$fn = $ardir."/ar_".$dt.".txt";
 		$fdi = fopen("http://".$_SERVER["SERVER_NAME"]."/spip.php?page=histo&var_mode=recalcul", "r");
 		$fdo = fopen($fn, "w");
+		$deb = false;
 		while($line = fread($fdi, 1024))
-			fwrite($fdo, $line);
+		{
+			// ne commence a tracer qu'au debut 
+			// de la page (enleve le javascript etc.)
+			if (($pos = strpos($line, "<div id=\"sep\"")) !== false)
+			{
+				if ($deb == false)
+					$line = substr($line, $pos);
+				$deb = true;
+			}
+			if ($deb)
+				fwrite($fdo, $line);
+		}
 		fclose($fdo);
 		fclose($fdi);
 	}
 
 	$fn = $ardir."/ar_".$dt.".txt";
-	if (is_file($fn) && preg_match("/^[0-9]*$/", $dt))
+	if (is_file($fn) && 
+		(preg_match("/^[0-9]*$/", $dt) || ($dt=="maintenant")) )
 	{
-		$dts = date("d/m/Y", ha_mktime($dt));
+		if (preg_match("/^[0-9]*$/", $dt))
+			$dts = date("d/m/Y", ha_mktime($dt));
+		else
+			$dts = "maintenant";
 		$titre = _T('ha:titre_visualisation').$dts;
 		$contenu = "<style>#sep { display:block; }</style>\n";
 		$contenu .= file_get_contents($fn);
@@ -325,7 +341,7 @@ function exec_ha()
 	fin_cadre_enfonce();
 	echo "</form>";
 	
-	fin_gauche();
+	//echo fin_gauche();
 
 	debut_droite();
 	
@@ -348,7 +364,7 @@ function exec_ha()
 	}
 	
 	debut_cadre_enfonce('',false,'',$titre);
-	echo "<div>".$contenu."</div>";
+	echo $contenu;
 	fin_cadre_enfonce();
 	
 	echo fin_page();
