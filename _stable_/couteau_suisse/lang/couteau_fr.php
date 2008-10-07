@@ -54,7 +54,7 @@ Compatibilit&#233; : SPIP toutes versions 1.9x',
 
 	// V
 	'variable_vide' => '(Vide)',
-	'visiteurs_connectes' => 'Visiteurs connect&eacute;s : @nb@',
+	'visiteurs_connectes' => 'Visiteurs connect&eacute;s : @nb@'
 );
 
 ?>
