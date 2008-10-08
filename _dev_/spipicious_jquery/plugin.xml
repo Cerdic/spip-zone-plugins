@@ -27,7 +27,7 @@ _ Icon from [Wolfgang Bartelme and Chris Messina->http://www.factorycity.net/pro
 	<prefix>spipicious</prefix>
 	<install>base/spipicious_upgrade.php</install>
 	<pipeline>
-		<nom>affichage_final</nom>
+		<nom>insert_head</nom>
 		<inclure>spipicious_head.php</inclure>
 	</pipeline>
 	<necessite id="SelecteurGenerique" version="[0.2;]" />
