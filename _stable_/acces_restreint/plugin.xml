@@ -31,7 +31,7 @@ _ All SPIP's loops are loaded with the necessary tools to filter the results acc
 	<fonctions>inc/acces_restreint.php</fonctions>
 	<install>base/acces_restreint_install.php</install>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
-	<prefix>AccesRestreint</prefix>
+	<prefix>accesrestreint</prefix>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/acces_restreint.php</inclure>
@@ -50,7 +50,7 @@ _ All SPIP's loops are loaded with the necessary tools to filter the results acc
 	</pipeline>
 
 	<pipeline>
-		<nom>AccesRestreint_liste_zones_autorisees</nom>
+		<nom>accesrestreint_liste_zones_autorisees</nom>
 		<action>liste_zones_autorisees</action>
 		<inclure>inc/acces_restreint.php</inclure>
 	</pipeline>

@@ -30,7 +30,6 @@ function accesrestreint_securise_squelette($letexte){
 function accesrestreint_article_restreint($id_article, $id_auteur=null){
 	include_spip('public/quete');
 	$article = quete_parent_lang('spip_articles',$id_article);
-	include_spip('inc/acces_restreint');
 	return
 		@in_array($article['id_rubrique'],
 			accesrestreint_liste_rubriques_exclues(!test_espace_prive(), $id_auteur)
@@ -45,7 +44,6 @@ function accesrestreint_article_restreint($id_article, $id_auteur=null){
  * @return bool
  */
 function accesrestreint_rubrique_restreinte($id_rubrique, $id_auteur=null){
-	include_spip('inc/acces_restreint');
 	return
 		@in_array($id_rubrique,
 			accesrestreint_liste_rubriques_exclues(!test_espace_prive(), $id_auteur)

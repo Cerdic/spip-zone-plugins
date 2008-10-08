@@ -1,8 +1,7 @@
 <?php
 /**
- * Plugin Agenda pour Spip 2.0
- * Licence GPL
- * 
+ * Plugin Acces Restreint 3.0 pour Spip 2.0
+ * Licence GPL (c) 2006-2008 Cedric Morin
  *
  */
 include_spip('inc/actions');
@@ -13,7 +12,6 @@ function formulaires_editer_zone_charger_dist($id_zone='new', $retour='', $confi
 	$valeurs = formulaires_editer_objet_charger('zone',$id_zone,0,0,$retour,$config_fonc,$row,$hidden);
 
 	// charger les rubriques associees a la zone
-	include_spip('inc/acces_restreint');
 	$valeurs['rubriques'] = accesrestreint_liste_contenu_zone_rub_direct($id_zone);
 	
 	return $valeurs;

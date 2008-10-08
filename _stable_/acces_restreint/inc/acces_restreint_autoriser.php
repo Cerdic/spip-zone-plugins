@@ -46,7 +46,6 @@ function autoriser_auteur_affecterzones_dist($faire,$quoi,$id,$qui,$opts){
 }
 
 if(!function_exists('autoriser_rubrique_voir')) {
-include_spip('inc/acces_restreint');
 function autoriser_rubrique_voir($faire, $type, $id, $qui, $opt) {
 	static $rub_exclues;
 	$publique = isset($opt['publique'])?$opt['publique']:!test_espace_prive();
@@ -90,7 +89,6 @@ function autoriser_site_voir($faire, $type, $id, $qui, $opt) {
 }
 if(!function_exists('autoriser_evenement_voir')) {
 function autoriser_evenement_voir($faire, $type, $id, $qui, $opt) {
-	include_spip('inc/acces_restreint');
 	static $evenements_statut;
 	$publique = isset($opt['publique'])?$opt['publique']:!test_espace_prive();
 	$id_auteur = isset($qui['id_auteur']) ? $qui['id_auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
