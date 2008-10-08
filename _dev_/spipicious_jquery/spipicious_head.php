@@ -39,7 +39,7 @@ function spipicious_insert_head($flux){
 		);
 		spipicious.result(function(event, data, formatted) {
 			if (data[2] > 0) {
-				jQuery(me)
+				jQuery(spipicious)
 				.end();
 			}
 			else{
