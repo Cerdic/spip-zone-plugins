@@ -18,6 +18,9 @@
 				<h1><:spipthelia:mon_panier:></h1>
 			</div>
 				
+			<T_CONTENU_PANIER>
+			
+
 			[(#REM) Contenu du panier ]
 
 			<table id="panier">
@@ -27,6 +30,7 @@
     					<th class="enteteTableau"><:spipthelia:references_produits:></th>
     					<th class="enteteTableau"><:spipthelia:prix_unitaire:></th>
     					<th class="enteteTableau"><:spipthelia:quantite:></th>
+    					<th class="enteteTableau"><:spipthelia:actualiser:></th>
     					<th class="enteteTableau"><:spipthelia:total_ttc:></th>
     					<th class="enteteTableau"><:spipthelia:Vider:></th>
 				</tr>
@@ -42,9 +46,9 @@
 						</THELIA_decval>
 					</td>
 					<td class="ligneTableau">THELIA-PRIXU &euro; </td>
-    					<td class="ligneTableau">
-					<form action="#URL_PAGE{panier,lang=#LANG}" method="post" name="formpanierTHELIA-ARTICLE" id="formpanierTHELIA-ARTICLE">
-                				<input type="hidden" name="article" value="THELIA-ARTICLE" />
+    					<form action="#URL_PAGE{panier,lang=#LANG}" method="post" name="formpanierTHELIA-ARTICLE" id="formpanierTHELIA-ARTICLE">
+                			<td class="ligneTableau">
+						<input type="hidden" name="article" value="THELIA-ARTICLE" />
                 				<input type="hidden" name="thelia_action" value="modifier" />
                 				<input type="hidden" name="article" value="THELIA-ARTICLE" />
                 				<select name="quantite" size="1" class="zoneDeSaisie" onchange="document.formpanierTHELIA-ARTICLE.submit()">
@@ -52,14 +56,18 @@
 							<option value="THELIA-NUM" THELIA-SELECTED>THELIA-NUM</option>
 						</THELIA_quantite>
 						</select>
-					</form>
+						
 					</td>
+					<td class="ligneTableau">
+						<input type="submit" class="bouton-actualiser" value="[<:spipthelia:actualiser:>]" />
+					</td>
+					</form>
 					<td class="ligneTableau">THELIA-TOTAL &euro;</td>
 					<td class="ligneTableau"><a href="#URL_PAGE{panier,thelia_action=supprimer&thelia_article=THELIA-ARTICLE}"><:spipthelia:supprimer:></a></td>
 				</tr>
-  	  		</THELIA_CONTENU_PANIER>
+  	  			</THELIA_CONTENU_PANIER>
 			
-				<tr>
+				<tr class="ligneTableauTotal">
 					<td></td>
 					<td></td>
 					<td></td>
@@ -74,6 +82,9 @@
 				<div class="boutonMonCompteContenu">
 				<a href="#URL_PAGE{adresse}"><:spipthelia:valider_panier:></a>
 				</div>
+			</T_CONTENU_PANIER>
+				<p><:spipthelia:panier_vide:></p>
+			<//T_CONTENU_PANIER>
 				<div class="boutonMonCompteContenu">
 				<a href="#URL_SITE_SPIP"><:spipthelia:retour_boutique:></a>
 				</div>

@@ -22,7 +22,7 @@
 	
 			<form action="#URL_PAGE{commande,lang=#LANG}" id="formulaire" method="post">
 			<input type="hidden" name="thelia_action" value="codepromo" />
-			<table>
+			<table id="commande">
             		<thead> 
 				<tr>
     					<th class="enteteTableau"><:spipthelia:photo_produit:></th>
@@ -78,14 +78,15 @@
 				<h2><:spipthelia:choix_paiement:></h2>
 			</div>
 
-			[(#REM) contenu de la page ]
-			<table width="675" border="0" cellspacing="0" cellpadding="5">
-			   	<THELIA_PAIEMENT type="PAIEMENT">
-			 	<tr>
-				   	<td class="ligneTableau">THELIA-TITRE</td>
-               				<td class="ligneTableau"><a href="#URL_PAGE{commande,thelia_action=paiement&amp;type_paiement=THELIA-ID}"><:spipthelia:valider:></a></td>
-				</tr>
-
-			</THELIA_PAIEMENT>
-			</table>
-			
+			<T_PAIEMENT>
+			<form  method="get" action="commande.php"> 
+			   	<input type="hidden" name="thelia_action" value="paiement">
+				<THELIA_PAIEMENT type="PAIEMENT">
+			 		<br/><input type="radio" name="type_paiement" value="THELIA-ID" checked="checked">THELIA-TITRE
+				</THELIA_PAIEMENT>
+				<br /><input type="submit" value="<:spipthelia:continuer:>" class="bouton-etapes-thelia" />
+			</form>
+			</T_PAIEMENT>
+				<:spipthelia:paiement_desactive:>
+			<//T_PAIEMENT>
+				

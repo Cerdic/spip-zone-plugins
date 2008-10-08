@@ -78,25 +78,21 @@
 				<h2><:spipthelia:choix_mode_livraison:></h2>
 				</div>
 
-				[(#REM) contenu de la page ]
-
-				<div class="sousTitrePage">
-				<h3><:spipthelia:type_livraison_tarif:></h3>
-				</div>
-
+				
 				<div class="textePage">
 				<T_transport>
-				<THELIA_transport type="TRANSPORT">
-				THELIA-TITRE THELIA-PORT &euro;<br />
-				<div class="boutonMonCompteContenu">
-				<a href="THELIA-URLCMD"><:spipthelia:continuer:></a>
-				</div>
-				</THELIA_transport>
+					<form  method="get" action="commande.php"> 
+						<input type="hidden" name="thelia_action" value="transport">
+						<THELIA_transport type="TRANSPORT">
+							<br/><input type="radio" name="id" value="THELIA-ID" checked="checked">THELIA-TITRE THELIA-PORT &euro;
+						</THELIA_transport>
+						<br /><input type="submit" value="<:spipthelia:continuer:>" class="bouton-etapes-thelia" />
+					</form>
 				</T_transport>
 					<:spipthelia:probleme_adresse_livraison:>
 				<//T_transport>
 				</div>
-				<a href="THELIA-URLPREC"><:spipthelia:page_precedente:></a>
+				<a href="THELIA-URLPREC" class="lien-retour-thelia"><:spipthelia:page_precedente:></a>
 				
 				
 		  	

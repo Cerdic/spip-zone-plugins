@@ -5,21 +5,22 @@
 /* styles thelia */
 
 .titrePage {
-	text-align: center;
-	color: #000;
+	text-align: left;
+	text-transform: uppercase;
+	color: #f60;
 	font-family: 'Helvetica-Bold','Helvetica','Arial',sans-serif;
-	font-size: 1.4em;
+	font-size: 1.2em;
 	font-weight: bold;
-	line-height: 22px;
+	line-height: 1.2em;
+	margin-bottom: .5em;
+	margin-top: .5em;
 }
 
 .sousTitrePage {
 	color:  #7a6d2c;
 	text-align: left;
 	font-weight: bold;
-	padding-top: 0px;
-	padding-bottom: 0px;
-	padding-left: 20px;
+	padding: 0;
 }
 
 .textePage {
@@ -157,9 +158,14 @@ a.LIEN_pages:hover {
 
 .enteteTableau {
 	font-weight: bold;
-	border: 1px dashed #cccccc;
+	text-align: center; 
+	font-size: .8em;
 }
+#panier, #commande { width: 100%; background: #ccc; }
+#panier thead tr, #commande thead tr { background: #666; color: white; } 
+#panier tr.ligneTableauTotal, #commande tr.ligneTableauTotal { border-top: 1px solid #666; }
 
+.bouton-actualiser { border: none; background: none; text-decoration: underline; color: #7A6D2C; float: right; }
 .ligneTableau {
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
@@ -177,12 +183,23 @@ a.LIEN_pages:hover {
 	border-bottom-color: #FFFFFF;
 }
 
-.boutonMonCompteContenu {
-	font-weight: bold;
+.boutonMonCompteContenu, .lien-etapes-thelia {
 	text-align: right;
 	margin: 10px;
 }
+.boutonMonCompteContenu a, .lien-etapes-thelia {
+	color: #7A6D2C;
+	text-decoration: underline;
+}
+.bouton-etapes-thelia {
+	float: right;
+}
 
+a.lien-retour-thelia {
+	color: #666;
+	text-decoration: underline;
+	font-size: .9em;
+}
 
 .zoneDeSaisie {
 	color: #7a6d2c;
@@ -248,8 +265,7 @@ a.LIEN_pages:hover {
 #etapes-achat ul li div {
 	width: 75px;
 	padding: 5px;
-	padding-left: 10px;
-	/* border: 0px solid #ccc; */
+	padding-left: 0;
 }
 #etapes-achat ul li.etape-courante {
 	color: #F60;
