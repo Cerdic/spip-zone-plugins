@@ -133,7 +133,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'etapes_achat' => 'Les &eacute;tapes de ma commande :',
 'envoyer_commande' => 'J\'envoie ma commande',
 'paiement_desactive' => 'Le paiement est temporairement d&eacute;sactiv&eacute; sur ce site. Nous vous invitons &agrave; r&eacute;&eacute;ssayer ult&eacute;rieurement',
-'actualiser' => 'Actualiser'
+'actualiser' => 'Actualiser',
+'pas_de_commande' => 'Vous n\'avez pas de commande enregistr&eacute;es ou en cours'
 
 
 );

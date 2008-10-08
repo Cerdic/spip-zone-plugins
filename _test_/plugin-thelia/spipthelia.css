@@ -9,7 +9,7 @@
 	text-transform: uppercase;
 	color: #f60;
 	font-family: 'Helvetica-Bold','Helvetica','Arial',sans-serif;
-	font-size: 1.2em;
+	font-size: 1.1em;
 	font-weight: bold;
 	line-height: 1.2em;
 	margin-bottom: .5em;
@@ -34,8 +34,8 @@
 .separation {
 	height: 1px;
 	background-color: #7a6d2c;
-	margin-top: 5px;
-	margin-bottom: 5px;
+	margin-top: 1em;
+	margin-bottom: 1em;
 	overflow:hidden;
 	zoom:1;
 }
@@ -161,26 +161,19 @@ a.LIEN_pages:hover {
 	text-align: center; 
 	font-size: .8em;
 }
-#panier, #commande { width: 100%; background: #ccc; }
+#panier, #commande { width: 100%; background: #e9e9e9; }
 #panier thead tr, #commande thead tr { background: #666; color: white; } 
-#panier tr.ligneTableauTotal, #commande tr.ligneTableauTotal { border-top: 1px solid #666; }
 
 .bouton-actualiser { border: none; background: none; text-decoration: underline; color: #7A6D2C; float: right; }
 .ligneTableau {
-	border-bottom-width: 1px;
-	border-bottom-style: solid;
-	border-bottom-color: #c6cdde;
 	font-size: 0.9em;
 	padding-left: 3px;
 	padding-right: 3px;
 }
 
 .footerTableau {
-	color: #12335B;
+	color: #666;
 	font-weight: bold;
-	border-bottom-width: 1px;
-	border-bottom-style: solid;
-	border-bottom-color: #FFFFFF;
 }
 
 .boutonMonCompteContenu, .lien-etapes-thelia {

@@ -37,9 +37,9 @@
 				<tr>
 					<td class="ligneTableau"><THELIA_image type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><img src="THELIA-IMAGE" /></THELIA_image></td>
 					<td class="ligneTableau">THELIA-TITRE - THELIA-REF</td>
-                			<td class="ligneTableau">THELIA-PRIXU &euro;</td>
+                			<td class="ligneTableau">THELIA-PRIXU&nbsp;&euro;</td>
                     			<td class="ligneTableau">THELIA-QUANTITE</td>
-                    			<td class="ligneTableau">THELIA-TOTAL &euro;</td>
+                    			<td class="ligneTableau">THELIA-TOTAL&nbsp;&euro;</td>
 				</tr>
 				</THELIA_panier>
 				<tr>
@@ -47,21 +47,21 @@
                 		    	<td>&nbsp;</td>
                 		    	<td>&nbsp;</td>
                 		    	<td><:spipthelia:frais_livraison:></td>
-                    			<td>THELIA-PANIER_PORT &euro;</td>
+                    			<td>THELIA-PANIER_PORT&nbsp;&euro;</td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
                 		    	<td>&nbsp;</td>
                 		    	<td>&nbsp;</td>
                     			<td><:spipthelia:remise:> </td>
-                    			<td>THELIA-PANIER_REMISE &euro;</td>
+                    			<td>THELIA-PANIER_REMISE&nbsp;&euro;</td>
 				</tr>
 			  	<tr>
 					<td class="footerTableau">&nbsp;</td>
 					<td class="footerTableau">&nbsp;</td>
                 		    	<td class="footerTableau">&nbsp;</td>
                     			<td class="footerTableau"><:spipthelia:total:></td>
-                    			<td class="footerTableau">THELIA-PANIER_TOTPORT &euro;</td>
+                    			<td class="footerTableau">THELIA-PANIER_TOTPORT&nbsp;&euro;</td>
 				</tr>
 			</tbody>
 			</table>
@@ -82,9 +82,9 @@
 			<form  method="get" action="commande.php"> 
 			   	<input type="hidden" name="thelia_action" value="paiement">
 				<THELIA_PAIEMENT type="PAIEMENT">
-			 		<br/><input type="radio" name="type_paiement" value="THELIA-ID" checked="checked">THELIA-TITRE
+			 		<input type="radio" name="type_paiement" value="THELIA-ID" checked="checked">THELIA-TITRE<br/>
 				</THELIA_PAIEMENT>
-				<br /><input type="submit" value="<:spipthelia:continuer:>" class="bouton-etapes-thelia" />
+				<input type="submit" value="<:spipthelia:continuer:>" class="bouton-etapes-thelia" /><br />
 			</form>
 			</T_PAIEMENT>
 				<:spipthelia:paiement_desactive:>

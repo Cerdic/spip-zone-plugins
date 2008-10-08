@@ -126,7 +126,8 @@ Write here information about the settlement by transfer ...<br /><br />',
 'plugin_thelia' => 'with the Th&eacute;lia plugin for SPIP',
 'retour_boutique' => 'Continue shopping',
 'mes_achats' => 'My purchases',
-'bonjour' => 'Hello'
+'bonjour' => 'Hello',
+'actualiser' => 'refresh'
 
 
 

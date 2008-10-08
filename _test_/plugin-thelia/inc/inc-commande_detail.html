@@ -14,7 +14,7 @@
 				</div>
 				</THELIA_verifpay>
 				
-				<table>
+				<table id="commande">
             			<thead> 
 				<tr>
     					<th class="enteteTableau"><:spipthelia:produit_et_reference:>  </th>
@@ -28,9 +28,9 @@
 				<THELIA_venteprod type="VENTEPROD" commande="THELIA-ID">
 				<tr>
 					<td class="ligneTableau">THELIA-TITRE - THELIA-REF </td>
-    					<td class="ligneTableau">THELIA-PRIXU</td>
+    					<td class="ligneTableau">THELIA-PRIXU&nbsp;&euro;</td>
     					<td class="ligneTableau">THELIA-QUANTITE</td>
-   					<td class="ligneTableau">THELIA-TOTALPROD</td>
+   					<td class="ligneTableau">THELIA-TOTALPROD&nbsp;&euro;</td>
 				</tr>
 				</THELIA_venteprod>
 			
@@ -38,27 +38,27 @@
 					<td></td>
 					<td></td>
 					<td class="footerTableau"><:spipthelia:total:> : </td>
-    					<td class="footerTableau">THELIA-TOTALCMD</td>
+    					<td class="footerTableau">THELIA-TOTALCMD&nbsp;&euro;</td>
 			  	</tr>
 			
 				<tr>
 					<td></td>
 					<td></td>
-					<td class="enteteTableau"><:spipthelia:remise:> : </td>
-    					<td class="enteteTableau">THELIA-REMISE</td>
+					<td><:spipthelia:remise:> : </td>
+    					<td>THELIA-REMISE&nbsp;&euro;</td>
 				</tr>
 			
 				<tr>
 					<td></td>
 					<td></td>
-					<td class="enteteTableau"><:spipthelia:frais_livraison:>  : </td>
-    					<td class="enteteTableau">THELIA-PORT</td>
+					<td><:spipthelia:frais_livraison:>  : </td>
+    					<td>THELIA-PORT&nbsp;&euro;</td>
 			  	</tr>
 				<tr>
 					<td></td>
 					<td></td>
 					<td class="footerTableau"><:spipthelia:total:> : </td>
-    					<td class="footerTableau">THELIA-TOTCMDPORT</td>
+    					<td class="footerTableau">THELIA-TOTCMDPORT&nbsp;&euro;</td>
 			  	</tr>
 				</tbody>
 		    		</table>
