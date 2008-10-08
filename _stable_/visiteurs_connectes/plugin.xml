@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Nombres de visiteurs connect&eacute;s</nom>
 	<auteur>Phil d'apr&egrave;s spip-contrib</auteur>
-	<version>0.1</version>
+	<version>0.2</version>
 	<etat>stable</etat>
 	<description>
 		- Affiche le nombre de visiteurs connect&eacute;s sur le site.
