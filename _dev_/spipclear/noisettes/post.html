@@ -11,7 +11,7 @@
 <span>::</span><a href="[(#URL_PAGE{rss}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{type,co})]" title="<:spipclear:rss_pour:> : [(#TITRE|textebrut|entites_html)]">rss</a>
 </p>
 
-[<div class="post-chapo #EDIT{chapo}">
+[<div class="post-excerpt #EDIT{chapo}">
 	#DEBUT_SURLIGNE(#CHAPO)#FIN_SURLIGNE
 </div>]
 [<div class="post-content #EDIT{texte}" lang="#LANG">
@@ -25,28 +25,33 @@
 
 <div id="comments">
 	<h3 id="co"><:spipclear:commentaires|ucfirst:></h3>
+	<B_commentaires_article>
+	<dl>
 	<BOUCLE_commentaires_article(FORUMS){id_article}{par date}>
-	<p id="forum#ID_FORUM" class="comment-info">
-	<span class="comment-number"><a href="#URL_FORUM">#COMPTEUR_BOUCLE.</a></span>
-	[(#DATE|nom_jour)] [(#DATE|affdate)] <:spipclear:attime:>
-	[(#DATE|heures)]:[(#DATE|minutes)],
-	[<:par_auteur:>
-	<strong>(#NOM)</strong>]<BOUCLE_le_boss(AUTEURS){id_auteur}{statut=0minirezo}>
-	[(#REM) Feuilles de styles spipclear indexees par le theme choisie ]
-	[(#CONFIG{spipclear/choix_theme}|?{' ',''})
-		[(#SET{chemin_theme, [themes/(#CONFIG{spipclear/nom_theme})/]})]
-	]
-	[
-	<img src="(#CHEMIN{[(#GET{chemin_theme})]images/boss.gif})"
-	alt="<:spipclear:boss:>"
-	title="<:spipclear:boss:>" />
-	]</BOUCLE_le_boss>[ <span>::</span> <a href="(#URL_SITE)">[(#NOM_SITE|sinon{<:spipclear:site_comment:>})]</a>]</p>
-							
-	<blockquote[(#ID_ARTICLE|me{#ID_AUTEUR}|?{' ',''})class="me"]>
-		[<strong>(#TITRE)</strong><br />]
-		[(#TEXTE|liens_absolus)]
-	</blockquote>
+		<dt id="forum#ID_FORUM" class="comment-info[(#ID_ARTICLE|me{#ID_AUTEUR}|oui) me]">
+			<a href="#URL_FORUM" class="comment-number">#COMPTEUR_BOUCLE.</a>
+			[(#DATE|nom_jour)] [(#DATE|affdate)] <:spipclear:attime:>
+			[(#DATE|heures)]:[(#DATE|minutes)],
+			[<:par_auteur:>
+			<strong>(#NOM)</strong>]<BOUCLE_le_boss(AUTEURS){id_auteur}{statut=0minirezo}>
+			[(#REM) Feuilles de styles spipclear indexees par le theme choisie ]
+			[(#CONFIG{spipclear/choix_theme}|?{' ',''})
+				[(#SET{chemin_theme, [themes/(#CONFIG{spipclear/nom_theme})/]})]
+			]
+			[
+			<img src="(#CHEMIN{[(#GET{chemin_theme})]images/boss.gif})"
+			alt="<:spipclear:boss:>"
+			title="<:spipclear:boss:>" />
+			]</BOUCLE_le_boss>[ <span>::</span> <a href="(#URL_SITE)">[(#NOM_SITE|sinon{<:spipclear:site_comment:>})]</a>]
+		</dt>
+								
+		<dd[(#ID_ARTICLE|me{#ID_AUTEUR}|?{' ',''})class="me"]>
+			[<strong>(#TITRE)</strong><br />]
+			[(#TEXTE|liens_absolus)]
+		</dd>
 	</BOUCLE_commentaires_article>
+	</dl>
+	</B_commentaires_article>
 	<:spipclear:aucun_commentaire:>
 	<//B_commentaires_article>
 	<h3 id="reponse"><:spipclear:ajouter_commentaire:></h3>
