@@ -27,41 +27,25 @@
 		
 				<THELIA_venteprod type="VENTEPROD" commande="THELIA-ID">
 				<tr>
-					<td class="ligneTableau">THELIA-TITRE - THELIA-REF </td>
+					<td class="ligneTableau">THELIA-TITRE - Ref&nbsp;:&nbsp;THELIA-REF </td>
     					<td class="ligneTableau">THELIA-PRIXU&nbsp;&euro;</td>
     					<td class="ligneTableau">THELIA-QUANTITE</td>
    					<td class="ligneTableau">THELIA-TOTALPROD&nbsp;&euro;</td>
 				</tr>
 				</THELIA_venteprod>
 			
-				<tr>
-					<td></td>
-					<td></td>
-					<td class="footerTableau"><:spipthelia:total:> : </td>
-    					<td class="footerTableau">THELIA-TOTALCMD&nbsp;&euro;</td>
-			  	</tr>
-			
-				<tr>
-					<td></td>
-					<td></td>
-					<td><:spipthelia:remise:> : </td>
-    					<td>THELIA-REMISE&nbsp;&euro;</td>
-				</tr>
-			
-				<tr>
-					<td></td>
-					<td></td>
-					<td><:spipthelia:frais_livraison:>  : </td>
-    					<td>THELIA-PORT&nbsp;&euro;</td>
-			  	</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td class="footerTableau"><:spipthelia:total:> : </td>
-    					<td class="footerTableau">THELIA-TOTCMDPORT&nbsp;&euro;</td>
-			  	</tr>
 				</tbody>
 		    		</table>
+
+				<div class="sousTableau">
+				<ul>
+					<li><:spipthelia:total:> : THELIA-TOTALCMD&nbsp;&euro;</li>
+			  		<li><:spipthelia:remise:> : THELIA-REMISE&nbsp;&euro;</li>
+					<li><:spipthelia:frais_livraison:> : THELIA-PORT&nbsp;&euro;</li>
+			  		<li><:spipthelia:total:> : THELIA-TOTCMDPORT&nbsp;&euro;</li>
+			  	</ul>
+				</div>
+				<br class="nettoyeur" />
 
 				<div class="sousTitrePage">
 				  	<h3><:spipthelia:statut:> : THELIA-STATUT</h3>
