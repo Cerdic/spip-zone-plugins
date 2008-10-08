@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 global $tables_principales;
 global $table_des_tables;
+global $tables_dw2;
 
 $table_des_tables['dw2_doc'] = 'dw2_doc';
 
@@ -122,4 +123,23 @@ $tables_principales['spip_dw2_acces_restreint'] =
 $tables_principales['spip_dw2_serv_ftp'] =
 	array('field' => &$spip_dw2_serv_ftp, 'key' => &$spip_dw2_serv_ftp_key);
 
+
+	// prepa tableau tables .. 
+	# Skedus 09/2006: prefixage des tables avec spip_ ou le prefix choisi
+	if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix']."_";
+	else $table_pref = "spip_";
+	# chryjs 6/10/8 gestion en 2.0
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
+	$table_pref = preg_replace('/^spip/', $prefixe, $table_pref);
+	$tables_dw2 = array();
+	$tables_dw2[$table_pref.'dw2_doc']      = array('field' => &$spip_dw2_doc,     'key' => &$spip_dw2_doc_key);
+	$tables_dw2[$table_pref.'dw2_triche']   = array('field' => &$spip_dw2_triche,  'key' => &$spip_dw2_triche_key);
+	$tables_dw2[$table_pref.'dw2_stats']    = array('field' => &$spip_dw2_stats,   'key' => &$spip_dw2_stats_key);
+	$tables_dw2[$table_pref.'dw2_serv_ftp'] = array('field' => &$spip_dw2_serv_ftp,'key' => &$spip_dw2_serv_ftp_key);
+	$tables_dw2[$table_pref.'dw2_config']   = array('field' => &$spip_dw2_config,  'key' => &$spip_dw2_config_key);
+	$tables_dw2[$table_pref.'dw2_acces_restreint']   = array('field' => &$spip_dw2_acces_restreint,  'key' => &$spip_dw2_acces_restreint_key);
+	$tables_dw2[$table_pref.'dw2_stats_auteurs']   = array('field' => &$spip_dw2_stats_auteurs,  'key' => &$spip_dw2_stats_auteurs_key);
+	// version_installee ?
+	
 ?>
