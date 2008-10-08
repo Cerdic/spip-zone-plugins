@@ -14,10 +14,7 @@
 		[(#CONFIG{spipclear/choix_theme}|oui)
 			[(#SET{chemin_theme, [themes/(#CONFIG{spipclear/nom_theme})/]})]
 		]
-		[<link rel="stylesheet" type="text/css" href="(#CHEMIN{[(#GET{chemin_theme})]layout.css})" media="screen" />]
-		[(#CONFIG{spipclear/navigation_gauche}|=={1}|?{
-			[<link rel="stylesheet" type="text/css" href="(#CHEMIN{[(#GET{chemin_theme})]layout-gauche.css})" media="screen" />]
-		})]
+
 		[<link rel="stylesheet" type="text/css" href="(#CHEMIN{[(#GET{chemin_theme})]style.css})" media="screen" />]
 		[<link rel="shortcut icon" href="(#CHEMIN{[(#GET{chemin_theme})]images/favicon.ico})" />]
 		#INSERT_HEAD
@@ -39,24 +36,28 @@
 				<a href="#search"><:spipclear:go_search:></a>
 			</p>
 
-			<div id="main">
-				<div id="content">
-					[(#RECHERCHE|non)
-						[(#ENV{id_article}|non)
-						<INCLURE{fond=noisettes/list}{archives}{debut_liste}{env}{ajax}>
+			<div id="wrapper">
+				<div id="main">
+					<div id="content">
+						[(#RECHERCHE|non)
+							[(#ENV{id_article}|non)
+							<INCLURE{fond=noisettes/list}{archives}{debut_liste}{env}{ajax}>
+							]
 						]
-					]
-					[(#RECHERCHE|oui)
-						<INCLURE{fond=noisettes/search}{env}{ajax}>]
-					[(#ENV{id_article}|oui)
-						<INCLURE{fond=noisettes/post}{id_article}>]
+						[(#RECHERCHE|oui)
+							<INCLURE{fond=noisettes/search}{env}{ajax}>]
+						[(#ENV{id_article}|oui)
+							<INCLURE{fond=noisettes/post}{id_article}>]
+					</div>
 				</div>
+
+				[(#SET{url,[(#ENV{id_secteur}|generer_url_rubrique)]})]
+				<INCLURE{fond=noisettes/sidebar}{env}{date=#ENV{archives,#ENV{date}}}{archives=#ENV{archives,#ENV{date}}}>
 			</div>
-
-			[(#SET{url,[(#ENV{id_secteur}|generer_url_rubrique)]})]
-			<INCLURE{fond=noisettes/sidebar}{env}{date=#ENV{archives,#ENV{date}}}{archives=#ENV{archives,#ENV{date}}}>
-
-			<p id="footer"><:spipclear:credits:>, <a href="#URL_SITE_SPIP/"><:spipclear:hebergement:> #NOM_SITE_SPIP</a></p>
+			
+			<div id="footer">
+				<p><:spipclear:credits:>, <a href="#URL_SITE_SPIP/"><:spipclear:hebergement:> #NOM_SITE_SPIP</a></p>
+			</div>
 			
 		</div>
 

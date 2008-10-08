@@ -1,309 +1,520 @@
-/* ***** BEGIN LICENSE BLOCK *****
- * This file is part of DotClear.
- * Copyright (c) 2004 Maurice Svay and contributors. All rights
- * reserved.
- *
- * DotClear is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- * 
- * DotClear is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with DotClear; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- * ***** END LICENSE BLOCK *****
- *
- * Contributor(s):
- *  Maurice Svay
- */
-
-/* Ce fichier définit le style visuel pour les différents éléments du blog.
- * Dans l'ordre, vous trouverez les règles qui définissent l'apparence pour:
- * - les éléments HTML en général
- * - la page
- * - l'entête
- * - le prélude
- * - le contenu
- * - la barre de navigation
- * - le pied de page
- *
- * L'agengement des blocs est défini dans le fichier layout.css
- * Pour mettre la barre de navigation a gauche il faut utiliser layout-gauche.css
- */
-
-
-/* Les éléments HTML en général
--------------------------------------------------------- */
-body{
-	background: #EEE;
-	color: #000;
-	font-size: 80%;
-	line-height: 1.6em;
-	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
-	border-top: 10px solid #DDD;
+/*
+# -- BEGIN LICENSE BLOCK ----------------------------------
+#
+# This file is part of Dotclear 2.
+#
+# Copyright (c) 2003-2008 Olivier Meunier and contributors
+# Licensed under the GPL version 2.0 license.
+# See LICENSE file or
+# http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+#
+# -- END LICENSE BLOCK ------------------------------------
+*/
+body {
+	margin: 0;
+	padding: 0;
+	background: #e0e0e0 url(images/body-bg.png) repeat-x top;
+	color: #6b6b6b;
+	font: 62.5% "Lucida Grande",Arial,sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6{
-	font-family: "Trebuchet MS", sans-serif;
+a {
+	color: #279ac4;
+	text-decoration: none;
+}
+a:hover, a:active, a:focus {
+	color:#6d8824;
+	text-decoration: underline;
 }
 
-h1{font-size: 1.5em;}
-h2{font-size: 1.4em;}
-h3{font-size: 1.3em;}
-h4{font-size: 1.2em;}
-h5{font-size: 1.1em;}
-h6{font-size: 1em;}
-
-pre, code{
-	font-size: 1.2em;
-}
-
-pre{
-	width: 100%;
-	overflow: auto;
-	border: 1px solid #CCC;
-}
-
-fieldset{
+a img {
 	border: none;
 }
 
-label{
-	cursor: pointer;
-	cursor: hand;
+pre {
+	white-space: pre;
+	white-space: -moz-pre-wrap;
+	white-space: -hp-pre-wrap;
+	white-space: -o-pre-wrap;
+	white-space: -pre-wrap;
+	white-space: pre-wrap;
+	white-space: pre-line;
+	word-wrap: break-word;
 }
 
-.field label{
-	display: block;
-}
-
-input,textarea{
-	border: 1px solid #999;
-}
-
-textarea{
-	width: 100%;
-	font-size: 1em;
-	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
-}
-
-a{
-	color: #000;
-}
-
-a:visited{
-	color: #663;
-}
-
-a:hover{
-	color: #636;
-}
-
-.left{
+.left {
 	float: left;
-	margin-right: 1em;
 }
 
-.right{
+.right {
 	float: right;
-	margin-left: 1em;
 }
 
-/* La page
+/* Layout
 -------------------------------------------------------- */
-#page{
-	background: #fff url(images/page.png) repeat-y center top;
-	color: inherit;
-}
- 
-/* L'entête
--------------------------------------------------------- */
-#top{
-	height: 120px;
-	/*padding-top: 20px;*/
-	background: #FFF url(images/top.png) no-repeat left top;
+#page {
+	font-size: 1.2em;
 }
 
-#top h1{
-	height: 80px;
-	line-height: 80px;
-	margin: 0 0 0 40px;
-	padding-top: 20px;
-	color: #FFFFFF;
+#top {
+	position: relative;
+	height: 180px;
+	width: 800px;
+	padding: 0;
+	margin: 50px auto 0 auto;
+	background: transparent url(images/page-t.png) no-repeat bottom left;
 }
-
-#top h1 a{
-	text-decoration: none;
-	color: #FFFFFF;
-}
-
-/* Le prélude
--------------------------------------------------------- */ 
-#prelude{
-	background: transparent;
-	color: #DFDFDF;
+#top h1 {
+	position: absolute;
+	top: 25px;
+	width: 100%;
+	margin: 0;
 	text-align: center;
+	font-size: 3.5em;
+}
+#top h1 a {
+	color: #9ac528;
+	text-decoration: none;
 }
 
-#prelude a{
-	color: #DFDFDF;
-	background: transparent;
+#prelude {
+	position: absolute;
+	top: 7px;
+	right: 7px;
+	margin: 0;
+	padding: 0;
+	color: #ededed;
+}
+#prelude a {
+	color: #ededed;
+}
+#prelude a:focus, #prelude a:hover {
+	background: yellow;
+	color: red;
+	text-decoration: none;
 }
 
-#prelude a:hover{
-	color: #666;
-	background: transparent;
+#wrapper {
+	width: 800px;
+	overflow: hidden;
+	margin: 0 auto 0 auto;
+	padding: 20px 0;
+	background: #fff url(images/page-bg.png) repeat-y top left;
 }
 
-/* Le contenu
+#main {
+	width: 550px;
+	float: left;
+}
+
+#content {
+	padding: 0 25px;
+}
+
+#sidebar {
+	width: 250px;
+	float: right;
+}
+#blognav, #blogextra {
+	padding: 1px 25px;
+}
+
+#footer {
+	clear: both;
+	padding: 30px 0 0 0;
+	background: transparent url(images/page-b.png) no-repeat top center;
+}
+#footer p {
+	margin: 0 auto;
+	padding: 10px 0 20px;
+	background: #e0e0e0;
+	color: #9ac528;
+	text-align: center;
+	font-size: 1.2em;
+}
+#footer p a {
+	color: #6d8824;
+}
+
+
+/* Sidebar styles
 -------------------------------------------------------- */
-.day-date{
-	padding-left: 20px;
-	margin-left: -25px;
-	color: #888;
-	background: transparent url(images/day-date.png) no-repeat left center;
-	font-style: italic;
+#sidebar h2 {
+	margin: 0;
+	color: #8fb22f;
+}
+#sidebar h3 {
+	margin: 1em 0 0.5em;
+	color: #279ac4;
 }
 
-.post-title{
-	color: #F90;
-	background: transparent;
+#sidebar div div {
+	margin-bottom: 2em;
+}
+#sidebar div div div {
 	margin-bottom: 0;
 }
 
-.post-title a{
-	color: #F90;
-	background: transparent;
+#sidebar ul {
+	list-style: none;
+	margin: 1em 0;
+	padding: 0;
+	border-top: 1px solid #ffd02c;
+}
+#sidebar li {
+	display: block;
+	margin: 0;
+	padding: 4px 0;
+	border-bottom: 1px solid #FFD02C;
+}
+#sidebar li a {
+	color: #6B6B6B;
 	text-decoration: none;
 }
-
-.post-info{
-	margin-top: 0;
-	color: #FA0;
-	background: transparent;
-	padding-bottom: 1ex;
-	/*border-bottom: 1px solid #FC0;*/
+#sidebar li a:hover, #sidebar li a:focus, #sidebar li a:active {
+	color: #9ac528;
 }
 
-.post-info a{
-	color: #FA0;
-	background: transparent;
-	text-decoration: none;
+
+#search fieldset {
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+#q {
+	border: 1px solid #bfbfbf;
+	width: 150px;
+	color: #6b6b6b;
+}
+#search .submit {
+	padding: 0;
+	border: 1px solid #fff;
+	background: none;
+	font-weight: bold;
+	color: #6b6b6b;
+	text-transform: uppercase;
+}
+#search .submit:hover {
+	background: #9ac528;
+	color: #fff;
+	border: 1px solid #9ac528;
 }
 
-.post-content{
+#topnav ul {
+	border-bottom: 1px solid #ffd02c;
+	padding: 4px 0;
+}
+#topnav li {
+	display: inline;
+	border-bottom: none;
+}
+
+#sidebar .syndicate ul {
+	border-top: none;
+}
+#sidebar .syndicate li {
+	border-bottom: none;
+}
+
+#sidebar .tags ul {
+	border-top: none;
+	font-size: 1.1em;
 	text-align: justify;
 }
+#sidebar .tags ul li {
+	display: inline;
+	background: none;
+	margin: 0;
+	padding: 0;
+	border: none;
+	line-height: 1.8em;
+}
 
-.post-content blockquote{
-	font-family: Georgia, serif;
+.tag0 { font-size: 75%; }
+.tag10 { font-size: 80%; }
+.tag20 { font-size: 90%; }
+.tag30 { font-size: 100%; }
+.tag40 { font-size: 110%; }
+.tag50 { font-size: 120%; }
+.tag60 { font-size: 140%; }
+.tag70 { font-size: 150%; }
+.tag80 { font-size: 160%; }
+.tag90 { font-size: 170%; }
+.tag100 { font-size: 180%; }
+
+ul.tags {
+	list-style: none;
+	margin: 1em 0;
+	padding: 0;
+	font-size: 1.3em;
+	text-align: justify;
+}
+ul.tags li {
+	display: inline;
+	margin: 0;
+	padding: 0;
+	line-height: 1.8em;
+}
+
+
+/* Main content styles
+-------------------------------------------------------- */
+h2, h3, h4 {
+	margin: 1em 0 0 0;
+	padding: 0;
+}
+
+h2 {
+	font-size: 1.4em;
+}
+h3 {
+	font-size: 1.2em;
+}
+h4 {
+	font-size: 1em;
+}
+
+.day-date {
+	font-size: 1em;
+	margin: 0 0 0.5em;
+	text-align: right;
+	color: #279ac4;
+}
+
+.post {
+	margin: 0 0 2em 0;
+}
+.post-title {
+	color:#9ac528;
+	font-size:1.7em;
+}
+.post-title a {
+	color:#9ac528;
+}
+.post-info {
+	margin: 0 0 0 0;
+}
+
+.post-tags {
+	list-style: none;
+	margin: 1em 0 1em;
+	padding: 3px 0;
+}
+.post-tags li {
+	display: inline;
+	margin-right: 8px;
+	padding: 5px 0 5px 22px;
+	background: transparent url(images/tag.png) no-repeat 0 70%;
+}
+.post-tags li a {
+	color: #6b6b6b;
+}
+
+.post-info-co {
+	clear: left;
+	padding: 3px 0 3px 0.5em;
+	border-width: 1px 0;
+	border-style: solid;
+	border-color: #bfbfbf;
+	background: #fbfbfb;
+}
+.post-info-co a {
+	color: #2b2b2b;
+	padding: 2px 10px 2px 18px;
+}
+
+.comment_count {
+	background: transparent url(images/comment.png) no-repeat 0 50%;
+}
+.ping_count {
+	background: transparent url(images/trackback.png) no-repeat 0 50%;
+}
+.attach_count {
+	background: transparent url(images/attach.png) no-repeat 0 50%;
+}
+
+.read-it {
+	font-weight: bold;
+	clear: left;
+}
+
+a.feed {
+	background: transparent url(images/feed.png) no-repeat 0 0.25em;
+	padding: 5px 0 5px 22px;
+}
+
+/* Post content
+-------------------------------------------------------- */
+.post-content, .post-excerpt, #comments dd, #pings dd, dd.comment-preview {
+	line-height:1.4em;
+}
+.post-content acronym, .post-excerpt acronym {
+	cursor: help;
+	border-bottom: 1px dotted #666;
+}
+
+.post-content pre, .post-excerpt pre {
+	padding: 10px ;
+	font: 1.1em 'courier new', courier, monospace;
+}
+
+.post-content ul, .post-excerpt ul, .post-content ol, .post-excerpt ol {
+	margin: 0 0 0.5em 0;
+	padding: 0 0 0 15px;
+}
+
+.post-content li, .post-excerpt li {
+	margin: 0;
+	padding: 0;
+}
+
+.post-content blockquote, .post-excerpt blockquote {
+	margin: 4px 0 4px 0;
+	padding: 0 5px;
+	border-left: 4px solid #bfbfbf;
+}
+
+
+#attachments h3 {
+	font-size: 1.2em;
+}
+
+#attachments ul {
+	list-style: none;
+	margin: 0;
+	padding: 4px 0;
+}
+
+#attachments li {
+	margin: 0 0 0.6em;
+	padding: 2px 10px 2px 18px;
+	background: transparent url(images/attach.png) no-repeat 0 50%;
+}
+
+#attachments li object {
+	display: inline;
+	margin: 0;
+	padding: 0;
+	vertical-align: bottom;
+}
+
+/* Comments and trackbacks
+-------------------------------------------------------- */
+#comments h3, #comment-form h3, #pings h3 {
+	border-width: 1px 0;
+	border-style: solid;
+	border-color: #bfbfbf;
+	background: #fbfbfb;
+	padding: 5px;
+	margin: 20px 0 8px 0;
+	font-size: 1.2em;
+}
+
+#comments dt {
+	margin: 1.5em 0 0 0;
+	padding: 5px 0 16px 0;
+	background: transparent url(images/comment-t.png) no-repeat bottom left;
+}
+#comments dt.me {
+	background-image: url(images/commentmy-t.png);
+}
+#comments a.comment-number {
+	display: block;
+	float: left;
+	width: 30px;
+	margin-right: 40px;
+	font-size: 1.2em;
+}
+#comments dd {
+	margin: 0;
+	padding: 1px 1em 0.5em 1em;
+	background: #fffad1 url(images/comment-b.png) no-repeat bottom left;
+	color:#6b6b6b;
+}
+#comments dd.me {
+	background-color:#f5f9d9;
+	color:#6b6b6b;
+	background-image:url(images/commentmy-b.png);
+}
+#comments dd p {
+	margin: 0.5em 0;
+	line-height: 1.5em;
+}
+
+.error {
+	margin: 20px 0 0;
+	padding: 10px 5px;
+	background: #ffcccc;
+	border: 2px solid red;
+	font-weight: bold;
+}
+
+/* Forms
+-------------------------------------------------------- */
+#comment-form {
+	padding-top: 10px;
+}
+
+#comment-form fieldset {
+	border: none;
+}
+#comment-form fieldset p {
+	padding: 5px 0;
+}
+#comment-form fieldset p.field {
+	padding: 5px 0;
+	width: auto;
+	margin: 0;
+	clear: left;
+}
+#comment-form p.form-help {
+	width: 60%;
+	margin: 0 0 0 30%;
 	font-style: italic;
 }
 
-.post-info-co{
+#comment-form p label {
+	width: auto;
+}
+#comment-form p.field label {
+	font-weight: bold;
+	display: block;
+	padding: 0 1% 0 0;
+	width: 29%;
+	float: left;
 	text-align: right;
 }
-
-#trackbacks blockquote, #comments blockquote{
-	border: 1px solid #EEE;
-	margin: 1em 0;
-	padding: 1ex 1em;
+#comment-form input, #comment-form textarea {
+	font: 1em "Lucida Grande",Arial,sans-serif;
+	color: #279ac4;
+	border: 1px solid #cdcdcd;
+	padding: 1px 2px;	
+	width: 68%;
 }
 
-/* La barre de navigation
--------------------------------------------------------- */
-#sidebar div{
-	border-bottom: 1px solid #F0F0F0;
-	color: inherit;
-}
-
-#sidebar div ul{
+#comment-form p.remember {
 	margin: 0;
-	padding: 0;
-	list-style: none;
+}
+#comment-form input#c_remember {
+	width: auto;
+	border: 0;
+	margin: 0 5px 0 30%;
+}
+#comment-form input.preview {
+	margin-left: 30%;
 }
 
-#sidebar h2, #sidebar h3{
-	color: #9ED200;
-	margin: 0 0 1ex 0;
-}
-
-#sidebar h3{
+#comment-form input.preview, #comment-form input.submit {
+	width: auto;
+	color: #279ac4;
+	background: #fff;
 	font-size: 1em;
-	margin: 0;
-}
-
-#sidebar div#search{
-	background: transparent;
-	color: inherit;
-	line-height: 2.3em;
-}
-
-#search fieldset, #search p{
-	margin: 0;
-	padding: 0;
-}
-
-#q{
-	padding-left: 18px;
-	background: #fff url(images/q.png) no-repeat 4px center;
-}
-
-#sidebar div#calendar{
-	/*border-top: 1px solid #F0F0F0;*/
-}
-
-#sidebar div#calendar table{
-	font-size: 0.8em;
-	text-align: center;
-	margin: 0 auto;
-	border-collapse: collapse;
-}
-
-#sidebar div#calendar table caption{
-	margin: 0 auto;
-}
-
-#sidebar div#calendar table th{
-	color: #493;
-	background: transparent;
-}
-
-#sidebar div#calendar table td{
-	width: 14%;
-	line-height: 2em;
-	border: 1px solid #EEE;
-}
-
-#sidebar div#calendar table td a{
-	display: block;
-	background: #EFA;
-	color: #493;
 	font-weight: bold;
-	text-decoration: none;
+	text-transform: uppercase;
+	border: 1px solid #fff;
 }
-
-#sidebar div#calendar table td a:hover{
-	background: #DBB8DC;
-	color: #636;
-}
-
-/* Le pied de page
--------------------------------------------------------- */
-#footer{
-	margin: 0;
-	padding: 1em;
-	border-top: 1px solid #CCC;
-	background: #EEE;
-	color: #666;
-}
-
-#footer a{
-	color: #999;
+#comment-form input.preview:hover, #comment-form input.submit:hover {
+	background: #6d8824;
+	color: #fff;
+	border: 1px solid #6d8824;
 }

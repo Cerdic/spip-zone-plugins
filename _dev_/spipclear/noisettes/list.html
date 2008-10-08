@@ -27,7 +27,7 @@
 	[<div class="post-content" lang="#LANG"><strong><:voir_en_ligne:></strong> : <a href="(#URL_SITE)">#NOM_SITE</a></div>]
 	
 	<p class="post-info-co"> 
-	<a href="#URL_ARTICLE#co" title="<:spipclear:commentaires_pour:> : [(#TITRE|textebrut|entites_html)]">
+	<a href="#URL_ARTICLE#co" class="comment_count" title="<:spipclear:commentaires_pour:> : [(#TITRE|textebrut|entites_html)]">
 		<BOUCLE_commentaires(FORUMS){id_article}{plat}> </BOUCLE_commentaires>
 		#TOTAL_BOUCLE [(#TOTAL_BOUCLE|=={1}|?{<:spipclear:commentaire:>,<:spipclear:commentaires:>})]
 		</B_commentaires><:spipclear:aucun_commentaire:><//B_commentaires>
