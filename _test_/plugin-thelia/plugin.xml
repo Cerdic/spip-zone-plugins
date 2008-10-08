@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Interface Th&eacute;lia</nom>
- 	<version>1.2</version>
+ 	<version>1.25</version>
  	<prefix>spip_thelia</prefix>
  	<auteur>Arnault Pachot, Alain Cousin, Claude Chadoutaud, Aur&eacute;lien Dumas</auteur>
  	<description>Plugin permettant d'utiliser les boucles Th&eacute;lia dans vos squelettes <br/>

@@ -7,7 +7,46 @@ function spip_thelia_supprimer_balises_thelia($texte) {
 	return $texte;
 
 }
+function spip_thelia_demarrer_session_thelia () {
+	global $page;
+	
+	//sauvegarde des variables qui vont être modifiées pour thélia
+	$sav_page = $page;
+	$sav_session_navig_lang = $_SESSION['navig']->lang;
+	
+
+	//conflit sur la variable $page. 
+	$page = new stdclass;
+	$page = "";
+
+	include_once("../classes/Navigation.class.php");
+	
+	ini_set('arg_separator.output', '&amp;');
+	ini_set("url_rewriter.tags","a=href,area=href,frame=src,iframe=src,input=src");
+	session_start();
+}
 function spip_thelia_header_prive($flux) {
+	
+	//si une boite de sélection spip/thélia sera affichée sur la page, il faut démarrer préalablement une session thélia
+	$exec =  $_REQUEST['exec'];
+	$id_article= $_REQUEST['id_article'];
+	$id_rubrique= $_REQUEST['id_rubrique'];
+	if (function_exists('lire_config')) {
+		if ($exec=='articles'){
+			if((lire_config("spip_thelia/produits_articles_spip_thelia", "non") == "oui")||(lire_config("spip_thelia/rubriques_articles_spip_thelia", "non") == "oui"))
+				spip_thelia_demarrer_session_thelia();
+		}
+		else if (($exec=='naviguer')&&($id_rubrique)){
+			if((lire_config("spip_thelia/produits_rubriques_spip_thelia", "non") == "oui")||(lire_config("spip_thelia/rubriques_rubriques_spip_thelia", "non") == "oui"))
+				spip_thelia_demarrer_session_thelia();
+		}
+	}
+
+	//on restaure les variables session et request modifiées pour les plugins suivants sur affichage final
+	$page = $sav_page;
+	$_SESSION['navig']->lang = $sav_session_navig_lang;
+	
+
 	if (!file_exists("../fonctions/moteur.php")&&($_REQUEST['exec']!="")) 
 		echo ("erreur : th&eacute;lia introuvable, v&eacute;rifiez que les sous-r&eacute;pertoires de th&eacute;lia et spip sont dans le m&ecirc;me r&eacute;pertoire.");
 	if (!function_exists('lire_config'))
@@ -234,23 +273,11 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script){
 	// Afficher les produits associes
 	//
 	
-	//on bloque la sortie vers le navigateur le temps d'y faire quelques substitutions	
 	$res = recuperer_fond("fonds/produits_associes_article","id_article=".$id_article);
-	$res = str_replace("THELIA-", "#", $res);
-	
-	//avant d'envoyer à thélia, on convertie en iso pour thélia
-	$res = unicode2charset(charset2unicode($res, 'utf-8'),'iso-8859-1');
-	ob_start();
 	chdir('..');
-	include_once("fonctions/moteur.php");
+	$out .= spip_thelia_appeler_moteur_thelia($res);
 	chdir('ecrire');
-	$texte = ob_get_contents();
-	ob_end_clean();
-	$texte = remplacement_sortie_thelia($texte);
 
-	//au retour de thélia, on convertit en utf8 pour SPIP
-	$texte = unicode2charset(charset2unicode($texte, 'iso-8859-1'),'utf-8');
-	$out .= $texte;
 
 	$out .= "</form>\n";	
 
@@ -263,7 +290,8 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script){
 
 function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script){
 
-  	global $spip_lang_right;
+  	
+	global $spip_lang_right;
  	include_spip("inc/presentation");
 	include_spip('public/assembler');
 	include_spip('inc/charsets');
@@ -291,23 +319,10 @@ function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script){
 	// Afficher les produits associes
 	//
 	
-	//on bloque la sortie vers le navigateur le temps d'y faire quelques substitutions	
 	$res = recuperer_fond("fonds/produits_associes_rubrique","id_rubrique=".$id_rubrique);
-	$res = str_replace("THELIA-", "#", $res);
-	
-	//avant d'envoyer à thélia, on convertie en iso pour thélia
-	$res = unicode2charset(charset2unicode($res, 'utf-8'),'iso-8859-1');
-	ob_start();
 	chdir('..');
-	include_once("fonctions/moteur.php");
+	$out .= spip_thelia_appeler_moteur_thelia($res);
 	chdir('ecrire');
-	$texte = ob_get_contents();
-	ob_end_clean();
-	$texte = remplacement_sortie_thelia($texte);
-
-	//au retour de thélia, on convertit en utf8 pour SPIP
-	$texte = unicode2charset(charset2unicode($texte, 'iso-8859-1'),'utf-8');
-	$out .= $texte;
 
 	$out .= "</form>\n";	
 
