@@ -39,6 +39,7 @@ function autoriser_auteur_affecterzones_dist($faire,$quoi,$id,$qui,$opts){
 	# les non admin ne peuvent pas s'administrer eux meme pour eviter les erreurs
 	if ($id == $qui['id_auteur']) return false;
 	# les non admin ne peuvent affecter que les zones dont ils font partie
+	include_spip('inc/acces_restreint');
 	if ($opts['id_zone']
 	  AND !accesrestreint_test_appartenance_zone_auteur($opts['id_zone'], $qui['id_auteur']))
 	  return false;

@@ -8,9 +8,9 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 function formulaires_editer_zone_charger_dist($id_zone='new', $retour='', $config_fonc='zones_edit_config', $row=array(), $hidden=''){
-	
 	$valeurs = formulaires_editer_objet_charger('zone',$id_zone,0,0,$retour,$config_fonc,$row,$hidden);
 
+	include_spip('inc/acces_restreint');
 	// charger les rubriques associees a la zone
 	$valeurs['rubriques'] = accesrestreint_liste_contenu_zone_rub_direct($id_zone);
 	
