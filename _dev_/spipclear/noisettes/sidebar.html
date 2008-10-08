@@ -3,11 +3,11 @@
 	[(#MODELE{rubrique_calendrier}{id_rubrique=#ID_RUBRIQUE}{self=#SELF}{var_date=archives}{date=#ENV{archives,#DATE}})]
 
 	<INCLURE{fond=inc-archives}{env}{decal}{var_date=archives}{date=#ENV{archives,#DATE}}{ajax}>
-
-	#FORMULAIRE_RECHERCHE{(#ID_SECTEUR||generer_url_entite{rubrique})}
-
+	<div id="search">
+		#FORMULAIRE_RECHERCHE{(#ID_SECTEUR||generer_url_entite{rubrique})}
+	</div>
 	<B_a_retenir>
-	<div id="selection">
+	<div class="selected">
 		<h2><:spipclear:selection:></h2>
 		<ul>
 			<BOUCLE_a_retenir(ARTICLES){id_secteur}{titre_mot=selection}{par date}{inverse}>
@@ -20,7 +20,7 @@
 	</B_a_retenir>
 
 	<B_categories>
-	<div id="categories">
+	<div class="categories">
 		<h2><:spipclear:categories:></h2>
 		<ul>
 			<BOUCLE_categories(RUBRIQUES){id_secteur}{id_parent=#ENV{id_secteur}}{par num titre}>
@@ -35,7 +35,7 @@
 	</B_categories>
 
 	<B_languages>
-	<div id="languages">
+	<div class="languages">
 		<h2><:spipclear:langues:></h2>
 		<ul>
 			<BOUCLE_languages(ARTICLES){id_secteur ?}{fusion lang}>[(#TOTAL_BOUCLE|>{1}|?{' '})
@@ -46,8 +46,29 @@
 		</ul>
 	</div>
 	</B_languages>
-
+	
+	[(#PLUGIN{nuage}|oui)
+	<div class="tags">
+		<h2>Tags</h2>
+		[(#MODELE{nuage})]	
+	</div>
+	]
+	
 	#PIPELINE{boussole}
+	
+</div>
+<div id="blogextra">
+		
+	<div class="syndicate">
+		<h2><:spipclear:syndication:></h2>
+		<ul>
+			[<li><a href="(#URL_PAGE{rss}|parametre_url{id_rubrique,#ENV{id_secteur}})" class="feed"><:spipclear:fil_rss:></a></li>]
+			[<li><a href="(#URL_PAGE{rss}|parametre_url{id_rubrique,#ENV{id_secteur}}|parametre_url{type,co})" class="feed"><:spipclear:fil_rss_commentaires:></a></li>]
+			[<li><a href="(#URL_PAGE{atom}|parametre_url{id_rubrique,#ENV{id_secteur}})" class="feed"><:spipclear:fil_atom:></a></li>]
+			[<li><a href="(#URL_PAGE{atom}|parametre_url{id_rubrique,#ENV{id_secteur}}|parametre_url{type,co})" class="feed"><:spipclear:fil_atom_commentaires:></a></li>]
+		</ul>
+	</div>
+	
 	<B_links>
 	<div id="links">
 		<h2><:spipclear:liens:></h2>
@@ -59,17 +80,6 @@
 		</ul>
 	</div>
 	</B_links>
-</div>
-<div id="blogextra">
-		
-	<div id="syndicate">
-		<h2><:spipclear:syndication:></h2>
-		<ul>
-			[<li><a href="(#URL_PAGE{rss}|parametre_url{id_rubrique,#ENV{id_secteur}})"><:spipclear:fil_rss:></a></li>]
-			[<li><a href="(#URL_PAGE{rss}|parametre_url{id_rubrique,#ENV{id_secteur}}|parametre_url{type,co})"><:spipclear:fil_rss_commentaires:></a></li>]
-			[<li><a href="(#URL_PAGE{atom}|parametre_url{id_rubrique,#ENV{id_secteur}})"><:spipclear:fil_atom:></a></li>]
-			[<li><a href="(#URL_PAGE{atom}|parametre_url{id_rubrique,#ENV{id_secteur}}|parametre_url{type,co})"><:spipclear:fil_atom_commentaires:></a></li>]
-		</ul>
-	</div>
+
 </div>
 </div>
