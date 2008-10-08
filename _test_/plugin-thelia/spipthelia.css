@@ -60,10 +60,12 @@
 	list-style: none;
 	_height: 300px;
 	min-height: 300px;
+	font-size: .9em;
 }
 
 .contourImage {
-	border: 1px dashed #cccccc;
+	border-top: 1px solid #cccccc;
+	border-left: 1px solid #cccccc;
 	margin-bottom: 5px;
 	float: left;
 }
@@ -97,7 +99,7 @@
 .prixProduit {
 	color: #EC8000;
 	text-align: left;
-	font-weight: bold;
+	font-weight: normal;
 	margin-top: 5px;
 }
 
@@ -113,8 +115,18 @@ a.LIEN_commander {
 	text-decoration: none;
 	font-weight: bold;
 }
+input.LIEN_commander {
+	float: right;
+}
+.page_produit input.LIEN_commander {
+	float: none;
+	margin-top: .5em;
+	margin-bottom: 1em;
+}
 
-
+.caracteristiqueProduit ul li {
+	list-style: none;
+}
 
 /* Nombre de pages
 -------------------------------------------------------- */
@@ -220,8 +232,9 @@ a.lien-retour-thelia {
 	padding: 1em;
 }
 .thelia_promo {
-	font-size: 1.2em;
+	font-size: 1.1em;
 	color: #F60;
+	font-weight: bold;
 }
 .thelia_reappro {
 	font-style: italic;

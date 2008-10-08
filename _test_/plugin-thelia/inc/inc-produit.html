@@ -18,7 +18,10 @@
 						<input type="hidden" name="thelia_action" value="ajouter" />
                 				<input type="hidden" name="ref" value="THELIA-REF" />
                 			<div class="ficheProduit">
-				 		<div class="chapoProduit">
+				 		
+						
+
+						<div class="chapoProduit">
 						THELIA-CHAPO
 						</div>
 				 		<div class="descriptionProduit">
@@ -28,10 +31,14 @@
 						<div class="caracteristiqueProduit">
 							<ul>
 							<THELIA_caracteristique type="CARACTERISTIQUE" produit="THELIA-ID">
+								<T_caracval>
 								<li>THELIA-TITRE : 
 								<THELIA_caracval type="CARACVAL" produit="THELIA-PRODUIT" caracteristique="THELIA-ID">
 									THELIA-VALEUR
-								</THELIA_caracval></li>
+								</THELIA_caracval>
+								</li>
+								</T_caracval>
+								<//T_caracval>
 								
 								
 							</THELIA_caracteristique>
@@ -66,6 +73,7 @@
 						</div>
 						
 						
+						
 						<div class="prixProduit">
 							<T_produitpromo>
 							<THELIA_produitpromo type="PRODUIT" ref="THELIA-REF" promo="1">
@@ -75,13 +83,15 @@
 								THELIA-PRIX &euro;
 							<//T_produitpromo>
 						</div>
-				 		<T_produitreappro>
+				 		
+						<T_produitreappro>
 						<THELIA_produitreappro type="PRODUIT" ref="THELIA-REF" reappro="1">
 							<span class="thelia_reappro"><:spipthelia:en_cours_de_reapprovisionnement:></span>
 						</THELIA_produitreappro>
 						</T_produitreappro>
-							<input type="submit" class="LIEN_commander" value="<:spipthelia:ajouter_panier:>" />
+							<input type="submit"  class="LIEN_commander" value="<:spipthelia:ajouter_panier:>" />
 						<//T_produitreappro>
+
 					</div> 
 					</form>
 					<T_autresimages>
