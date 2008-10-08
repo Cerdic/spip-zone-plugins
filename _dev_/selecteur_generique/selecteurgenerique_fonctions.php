@@ -1,7 +1,7 @@
 <?php
 
 function selecteurgenerique_verifier_js($flux){
-    if(strpos($flux,'autocomplete')===FALSE){
+    if(strpos($flux,'jquery.autocomplete.js')===FALSE){
 		$autocompleter = find_in_path('javascript/jquery.autocomplete.js');
 		$autocompletecss = find_in_path('jquery.autocomplete.css');
 		$flux .= "<script type='text/javascript' src='$autocompleter'></script>";
