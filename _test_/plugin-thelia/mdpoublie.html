@@ -20,31 +20,9 @@
 
 		[(#REM) Contenu principal : contenu de la rubrique ]
 		<div id="contenu">
-			[(#REM) Titre de la rubrique ]
-
-				<div class="titrePage">
-				<h1><:spipthelia:mdp_oublie:></h1>
-				</div>
-
-			
-				[(#REM) Contenu de la page ]
-
-				<div class="sousTitrePage">
-				<h3><:spipthelia:mdp_oublie_message:></h3>
-				</div>
-				
-			<form action="#URL_PAGE{mdpoublie,lang=#LANG}" method="post" name="formmdp" id="formmdp">
-			<input type="hidden" name="thelia_action" value="chmdp" />
-			<table>
-  				<tr>
-   					<td class="ligneTableau"><:spipthelia:votre_email:></td>
-   					<td class="ligneTableau"><input name="email" type="text" class="zoneDeSaisie"/></td>
-  				</tr>
-			</table>
-				<div class="boutonMonCompteContenu">
-				<input type="submit" value="<:spipthelia:valider:>" />
-				</div>
-			</form>
+			  
+			<INCLURE{fond=inc/inc-mdpoublie}>
+		  	
 
 		</div> [(#REM)fin contenu]
 

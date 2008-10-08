@@ -1,0 +1,91 @@
+#CACHE{7200}
+
+				[(#REM) Afficher les étapes de la commande et visualiser l'étape courante ]
+				<div id="etapes-achat">
+				<h2 class="invisible"><:etapes_achat:></h2>
+				<ul>
+					<li><div><a href="[(#URL_PAGE{panier})]"><img src="[(#CHEMIN{img_pack/etape_1.jpg})]" alt="<:spipthelia:valider_panier:>"></a></div></li>
+				<li><div><a href="[(#URL_PAGE{connexion})]"><img src="[(#CHEMIN{img_pack/etape_2.jpg})]" alt="<:spipthelia:identifiez_vous:>"></a></div></li>					
+				<li><div><a href="[(#URL_PAGE{adresse})]"><img src="[(#CHEMIN{img_pack/etape_3.jpg})]" alt="<:spipthelia:choix_mode_livraison:>"></a></div></li>						
+				<li class="etape-courante"><div><img src="[(#CHEMIN{img_pack/etape_4_on.jpg})]" alt="<:spipthelia:choix_paiement:>"></div></li>			
+				<li class="derniere-etape"><div><img src="[(#CHEMIN{img_pack/etape_5.jpg})]" alt="<:spipthelia:envoyer_commande:>"></div></li>
+				</ul>
+				<br class="nettoyeur" />
+				</div>
+
+
+				<div class="titrePage">
+				<h1><:spipthelia:recapitulatif_commande:></h1>
+				</div>
+
+			[(#REM) Contenu de la page ]
+	
+			<form action="#URL_PAGE{commande,lang=#LANG}" id="formulaire" method="post">
+			<input type="hidden" name="thelia_action" value="codepromo" />
+			<table>
+            		<thead> 
+				<tr>
+    					<th class="enteteTableau"><:spipthelia:photo_produit:></th>
+    					<th class="enteteTableau"><:spipthelia:references_produits:></th>
+    					<th class="enteteTableau"><:spipthelia:prix_unitaire:></th>
+    					<th class="enteteTableau"><:spipthelia:quantite:></th>
+    					<th class="enteteTableau"><:spipthelia:total:></th>
+    				</tr>
+			</thead> 
+			<tbody>
+				<THELIA_panier type="PANIER">
+				<tr>
+					<td class="ligneTableau"><THELIA_image type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><img src="THELIA-IMAGE" /></THELIA_image></td>
+					<td class="ligneTableau">THELIA-TITRE - THELIA-REF</td>
+                			<td class="ligneTableau">THELIA-PRIXU &euro;</td>
+                    			<td class="ligneTableau">THELIA-QUANTITE</td>
+                    			<td class="ligneTableau">THELIA-TOTAL &euro;</td>
+				</tr>
+				</THELIA_panier>
+				<tr>
+					<td>&nbsp;</td>
+                		    	<td>&nbsp;</td>
+                		    	<td>&nbsp;</td>
+                		    	<td><:spipthelia:frais_livraison:></td>
+                    			<td>THELIA-PANIER_PORT &euro;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+                		    	<td>&nbsp;</td>
+                		    	<td>&nbsp;</td>
+                    			<td><:spipthelia:remise:> </td>
+                    			<td>THELIA-PANIER_REMISE &euro;</td>
+				</tr>
+			  	<tr>
+					<td class="footerTableau">&nbsp;</td>
+					<td class="footerTableau">&nbsp;</td>
+                		    	<td class="footerTableau">&nbsp;</td>
+                    			<td class="footerTableau"><:spipthelia:total:></td>
+                    			<td class="footerTableau">THELIA-PANIER_TOTPORT &euro;</td>
+				</tr>
+			</tbody>
+			</table>
+			<br />
+			<label for="code"><:spipthelia:code_reduction:></label>
+			<input id="code" name="code" type="text" class="zoneDeSaisie"/><input type="submit" value="<:spipthelia:valider:>" />
+			
+			</form>
+
+			<div class="separation">
+			</div>
+			
+			<div class="titrePage">
+				<h2><:spipthelia:choix_paiement:></h2>
+			</div>
+
+			[(#REM) contenu de la page ]
+			<table width="675" border="0" cellspacing="0" cellpadding="5">
+			   	<THELIA_PAIEMENT type="PAIEMENT">
+			 	<tr>
+				   	<td class="ligneTableau">THELIA-TITRE</td>
+               				<td class="ligneTableau"><a href="#URL_PAGE{commande,thelia_action=paiement&amp;type_paiement=THELIA-ID}"><:spipthelia:valider:></a></td>
+				</tr>
+
+			</THELIA_PAIEMENT>
+			</table>
+			

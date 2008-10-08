@@ -1,0 +1,124 @@
+#CACHE{7200}
+				[(#REM) Titre de la page ]
+
+				<div class="titrePage">
+				<h1><:spipthelia:modifier_informations:> </h1>
+				</div>
+				
+				[(#REM) contenu de la page ]
+
+				<div class="sousTitrePage">
+				<h3><:spipthelia:modifier_mdp:></h3>
+				</div>
+				
+				[(#REM) formulaire "Mot de passe" ]
+
+				<form action="#URL_PAGE{moncompte,lang=#LANG}" method="post" name="modifier1" id="modifier1">
+				<input type="hidden" name="thelia_action" value="modifiercompte" />
+				<table>
+				<tbody>
+ 				<tr>
+    					<td class="ligneTableau"><:spipthelia:nouveau_mdp:></td>
+   					<td class="ligneTableau"><input name="motdepasse1" type="password" class="zoneDeSaisie" /></td>
+  				</tr>
+  				<tr>
+    				<td class="ligneTableau"><:spipthelia:confirmation_mdp:></td>
+    				<td class="ligneTableau"><input name="motdepasse2" type="password" class="zoneDeSaisie" /></td>
+  				</tr>
+				</tbody>
+				</table>
+				
+				<div class="boutonMonCompteContenu">
+				<input type="submit" value="<:spipthelia:valider:>" />
+				</div>
+			  	</form>
+				
+				<div class="separation">
+				</div>
+				
+				<div class="sousTitrePage">
+				<h3><:spipthelia:modifier_coordonnees:></h3>
+				</div>
+
+			
+				[(#REM) formulaire "Modifier mes coordonnées" ]
+	
+				<form action="#URL_PAGE{compte_modifier,lang=#LANG}" method="post" name="modifier2" id="modifier2">
+				<input type="hidden" name="thelia_action" value="modifiercompte" /> 
+
+				<table>
+ 				<tbody>
+				<tr>
+    					<td class="ligneTableau"><:spipthelia:civilite:></td>
+    					<td class="ligneTableau">
+					<select name="raison" size="1" class="zoneDeSaisie">
+    				<option value=""><:spipthelia:choisissez:></option>
+    				<option value="1" THELIA-CLIENT_RAISON1F><:spipthelia:madame:></option>
+   					<option value="2" THELIA-CLIENT_RAISON2F><:spipthelia:mademoiselle:></option>
+    				<option value="3" THELIA-CLIENT_RAISON3F><:spipthelia:monsieur:></option>
+    				</select>
+					</td>
+  				</tr>
+  				<tr>
+					<td class="ligneTableau"><:spipthelia:nom:></td>
+    					<td class="ligneTableau"><input type="text" name="nom"   value="THELIA-CLIENT_NOM" class="zoneDeSaisie" /></td>
+  				</tr>
+  				<tr>
+   					<td class="ligneTableau"><:spipthelia:prenom:></td>
+    					<td class="ligneTableau"><input type="text" name="prenom"   value="THELIA-CLIENT_PRENOM" class="zoneDeSaisie" /></td>
+  				</tr>
+  				<tr>
+					<td class="ligneTableau"><:spipthelia:adresse:></td>
+    					<td class="ligneTableau"><input type="text" name="adresse1" class="zoneDeSaisie"  value="THELIA-CLIENT_ADRESSE1" /></td>
+  				</tr>
+  				<tr>
+    					<td class="ligneTableau"><:spipthelia:adresse_suite:></td>
+    					<td class="ligneTableau"><input type="text" name="adresse2" class="zoneDeSaisie"  value="THELIA-CLIENT_ADRESSE2"/></td>
+  				</tr>
+  				<tr>
+    					<td class="ligneTableau"><:spipthelia:complement_adresse:></td>
+    					<td class="ligneTableau"><input type="text" name="adresse3" class="zoneDeSaisie"  value="THELIA-CLIENT_ADRESSE3"/></td>
+  				</tr>
+  				<tr>
+					<td class="ligneTableau"><:spipthelia:code_postal:></td>
+					<td class="ligneTableau"><input type="text" name="cpostal" class="zoneDeSaisie"   value="THELIA-CLIENT_CPOSTAL"/></td>
+  				</tr>
+  				<tr>
+   					 <td class="ligneTableau"><:spipthelia:ville:></td>
+   					 <td class="ligneTableau"><input type="text" name="ville" class="zoneDeSaisie"   value="THELIA-CLIENT_VILLE"/></td>
+  				</tr>
+ 				<tr>
+    				<td class="ligneTableau"><:spipthelia:pays:></td>
+    				<td class="ligneTableau">
+					<select name="pays" size="1" class="zoneDeSaisie">
+					<option value="" selected="selected"><:spipthelia:choisissez:></option>
+					<THELIA_pays type="PAYS" zdefinie="1">           
+    				<option value="THELIA-ID"  THELIA-SELECTED>THELIA-TITRE</option>
+    				</THELIA_pays>
+    				</select>
+					</td>
+  				</tr>
+  				<tr>
+    				<td class="ligneTableau"><:spipthelia:telephone_fixe:></td>
+   					<td class="ligneTableau"><input type="text" name="telfixe"   value="THELIA-CLIENT_TELFIXE"  class="zoneDeSaisie" /></td>
+  				</tr>
+				<tr>
+    				<td class="ligneTableau"><:spipthelia:telephone_portable:></td>
+    				<td class="ligneTableau"><input type="text" name="telport" class="zoneDeSaisie"   value="THELIA-CLIENT_TELPORT"/></td>
+ 				</tr>
+  				<tr>
+    				<td class="ligneTableau"><:spipthelia:email:></td>
+    				<td class="ligneTableau"><input type="text" name="email1" class="zoneDeSaisie"  value="THELIA-CLIENT_EMAIL"/></td>
+  				</tr>
+  				<tr>
+    				<td class="ligneTableau"><:spipthelia:confirmation_email:></td>
+    				<td class="ligneTableau"><input type="text" name="email2" class="zoneDeSaisie"  value="THELIA-CLIENT_EMAIL"/></td>
+  				</tr>
+				</tbody>
+				</table>
+				
+				<div class="boutonMonCompteContenu">
+				<input type="submit" value="<:spipthelia:valider:>" />
+				</div>
+				
+				</form>

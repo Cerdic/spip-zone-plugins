@@ -21,84 +21,9 @@
 		[(#REM) Contenu principal : contenu de la rubrique ]
 		<div id="contenu">
 					
-			[(#REM) Afficher les étapes de la commande et visualiser l'étape courante ]
-			<div id="etapes-achat">
-			<h2 class="invisible"><:etapes_achat:></h2>
-			<ul>
-				<li class="etape-courante"><div><img src="[(#CHEMIN{img_pack/etape_1_on.jpg})]" alt="<:spipthelia:valider_panier:>"></div></li>
-					<li><div><img src="[(#CHEMIN{img_pack/etape_2.jpg})]" alt="<:spipthelia:identifiez_vous:>"></div></li>					
-					<li><div><img src="[(#CHEMIN{img_pack/etape_3.jpg})]" alt="<:spipthelia:choix_mode_livraison:>"></div></li>				
-					<li><div><img src="[(#CHEMIN{img_pack/etape_4.jpg})]" alt="<:spipthelia:choix_paiement:>"></div></li>			
-					<li class="derniere-etape"><div><img src="[(#CHEMIN{img_pack/etape_5.jpg})]" alt="<:spipthelia:envoyer_commande:>"></div></li>		
-			</ul>
-			<br class="nettoyeur" />
-			</div>
-
-			[(#REM) Titre de la page ]
-			<div class="titrePage">
-				<h1><:spipthelia:mon_panier:></h1>
-			</div>
-				
-			[(#REM) Contenu du panier ]
-
-			<table id="panier">
-  			<thead> 
-				<tr>
-    					<th class="enteteTableau"><:spipthelia:photo_produit:></th>
-    					<th class="enteteTableau"><:spipthelia:references_produits:></th>
-    					<th class="enteteTableau"><:spipthelia:prix_unitaire:></th>
-    					<th class="enteteTableau"><:spipthelia:quantite:></th>
-    					<th class="enteteTableau"><:spipthelia:total_ttc:></th>
-    					<th class="enteteTableau"><:spipthelia:Vider:></th>
-				</tr>
-			</thead>
-
-			<tbody> 
-				<THELIA_CONTENU_PANIER type="PANIER">
-				<tr>
-					<td class="ligneTableau"><THELIA_image type="IMAGE" produit="THELIA-ID" largeur="100" num="1"><img src="THELIA-IMAGE" /></THELIA_image></td>
-					<td class="ligneTableau">THELIA-REF<br/>THELIA-TITRE
-						<THELIA_decval type="DECVAL" article="THELIA-ARTICLE">
-							<br/>THELIA-DECLITITRE : THELIA-VALEUR
-						</THELIA_decval>
-					</td>
-					<td class="ligneTableau">THELIA-PRIXU &euro; </td>
-    					<td class="ligneTableau">
-					<form action="#URL_PAGE{panier,lang=#LANG}" method="post" name="formpanierTHELIA-ARTICLE" id="formpanierTHELIA-ARTICLE">
-                				<input type="hidden" name="article" value="THELIA-ARTICLE" />
-                				<input type="hidden" name="thelia_action" value="modifier" />
-                				<input type="hidden" name="article" value="THELIA-ARTICLE" />
-                				<select name="quantite" size="1" class="zoneDeSaisie" onchange="document.formpanierTHELIA-ARTICLE.submit()">
-                				<THELIA_quantite type="QUANTITE" article="THELIA-ARTICLE" max="50">
-							<option value="THELIA-NUM" THELIA-SELECTED>THELIA-NUM</option>
-						</THELIA_quantite>
-						</select>
-					</form>
-					</td>
-					<td class="ligneTableau">THELIA-TOTAL &euro;</td>
-					<td class="ligneTableau"><a href="#URL_PAGE{panier,thelia_action=supprimer&thelia_article=THELIA-ARTICLE}"><:spipthelia:supprimer:></a></td>
-				</tr>
-  	  		</THELIA_CONTENU_PANIER>
-			
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td align="right"><:spipthelia:total_panier:> :</td>
-    					<td>THELIA-PANIER_TOTAL &euro;</td>
-					<td></td>
-    				</tr>
-			</tbody>
-			</table>
-			
-
-				<div class="boutonMonCompteContenu">
-				<a href="#URL_PAGE{adresse}"><:spipthelia:valider_panier:></a>
-				</div>
-				<div class="boutonMonCompteContenu">
-				<a href="#URL_SITE_SPIP"><:spipthelia:retour_boutique:></a>
-				</div>
-		
+			  
+			<INCLURE{fond=inc/inc-panier}>
+		  	
 		</div>[(#REM) fin contenu ]
 
 		[(#REM) Menu de navigation laterale ]
