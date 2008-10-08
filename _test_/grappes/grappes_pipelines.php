@@ -42,24 +42,11 @@ EOS;
 }
 
 function grappes_inserer_javascript($flux){
+	include_spip('selecteurgenerique_fonctions');
+	$flux = selecteurgenerique_verifier_js($flux);
 	
 	$js = grappes_inserer_js_recherche_objet();
-	$js = 
-		'<script type="text/javascript" src="'
-		. find_in_path('javascript/jquery.autocomplete.js')
-		. '"></script>'
-		. "\n"
-
-		. '<link rel="stylesheet" type="text/css" '
-		. 'href="'.find_in_path('iautocompleter.css').'" />'
-		. "\n"
-
-		. '<script type="text/javascript"><!--'
-		. "\n"
-		. $js
-		. "\n"
-		. '// --></script>'
-		. "\n";
+	$js = "<script type='text/javascript'><!--\n$js\n// --></script>\n";
 
 	return $flux.$js;	
 }
