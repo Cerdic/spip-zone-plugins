@@ -19,7 +19,7 @@ function image_ragged ($img, $align, $margin=10, $coul=-1) {
   }
   else $placer_fond = false;
 
-  $image = image_valeurs_trans($img, "float-$align$coul", "php");
+  $image = image_valeurs_trans($img, "float-$align$coul$margin", "php");
   if (!$image) return("");
 
   $w = $image["largeur"];
@@ -84,7 +84,7 @@ function image_ragged ($img, $align, $margin=10, $coul=-1) {
 	  // uniquement si detourage par la couleur de fond
 	  if ($placer_fond && $haut_tot <= $h) $backg = " background: url($im) $align -".($haut_tot-$hauteur)."px no-repeat;";
 	  else $backg = "";
-			
+
 	  $forme .= "\n<div style='float: $align; clear: $align; $mrg: ".$margin."px; width: ".round(($w - ($resultat)*$rapport))."px ; height: ".round($hauteur)."px; overflow: hidden;$backg'></div>";
 	}
 	// Ajouter un div de plus en dessous
