@@ -41,7 +41,7 @@
 					<div id="content">
 						[(#RECHERCHE|non)
 							[(#ENV{id_article}|non)
-							<INCLURE{fond=noisettes/list}{archives}{debut_liste}{env}{ajax}>
+							<INCLURE{fond=noisettes/list}{id_rubrique=#ID_SECTEUR}{archives}{debut_liste}{env}{ajax}>
 							]
 						]
 						[(#RECHERCHE|oui)
