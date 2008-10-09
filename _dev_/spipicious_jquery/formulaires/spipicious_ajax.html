@@ -27,8 +27,6 @@
 		init_spipicious();
 	});
 // --></script>
-
-	</form>
 	<div class="formulaire_spip ajax">
 		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -55,7 +53,7 @@
 				<input type="text" class="forml" id="tags" name="tags" size="25" value="" /><br />
 			</li>
 			<li class="boutons">
-				<input type="hidden" name="remove_tag" id="remove_tag" value="">
+				<input type="hidden" name="remove_tag" id="remove_tag" value="" />
 				<input type="submit" name="add_tags" value="<:bouton_valider:>" class="valider submit" />
 			</li>
 		</ul>
