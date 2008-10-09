@@ -1,0 +1,23 @@
+<plugin>
+        <nom> <!-- Nom du plugin -->
+        Proposer les dates de publications d'un article
+        </nom>
+        <auteur>        <!-- Auteur du plugin -->
+        Phil
+        </auteur>
+        <version>
+        0.1
+        </version>
+        <etat>
+        stable
+        </etat>
+        <description>
+        Plugin qui permet d'afficher et de choisir les dates de publications de l'article avant sa publication. 
+		_ Fonctionne avec SPIP 192
+		_ Modifie le noyau de SPIP
+        </description>
+	<prefix> 
+	gerer_date
+	</prefix>
+	<options>gerer_date_options.php</options>
+</plugin>
