@@ -4,7 +4,7 @@ function spipicious_insert_head($flux){
 	global $visiteur_session;
 	
 	if(!$visiteur_session['id_auteur'])
-		return;
+		return $flux;
 
 	include_spip('selecteurgenerique_fonctions');
 	$flux .= selecteurgenerique_verifier_js($flux);
@@ -19,10 +19,10 @@ function spipicious_insert_head($flux){
 				return false;
 			}
 	(function($) {
+	var spipicious = jQuery('input[@name=tags][autocomplete!=off]');
 	var appliquer_selecteur_cherche_mot = function() {
-
-		// chercher l'input de saisie
 		var spipicious = jQuery('input[@name=tags][autocomplete!=off]');
+		// chercher l'input de saisie
 		var id_article = jQuery("#spipicious_id").val();
 		spipicious.autocomplete('$selecteur',
 			{
@@ -50,6 +50,7 @@ function spipicious_insert_head($flux){
 			}
 		});
 	};
+	
 		$(function(){
 			appliquer_selecteur_cherche_mot();
 			onAjaxLoad(appliquer_selecteur_cherche_mot);
