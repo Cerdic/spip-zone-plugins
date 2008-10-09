@@ -3,15 +3,14 @@
 function spipicious_insert_head($flux){
 	global $visiteur_session;
 	
-	if(!$visiteur_session['id_auteur'])
-		return $flux;
+	if($visiteur_session['id_auteur']){
 
 	include_spip('selecteurgenerique_fonctions');
-	$flux .= selecteurgenerique_verifier_js($flux);
+	$contenu = selecteurgenerique_verifier_js($flux);
 	
 	$selecteur = generer_url_public('selecteurs_tags');
     
-	$flux .= <<<EOS
+	$contenu .= <<<EOS
 		<script type="text/javascript"><!--
 			function deletetag(tag){
 				var tag = tag;
@@ -58,7 +57,8 @@ function spipicious_insert_head($flux){
 	})(jQuery);
 // --></script>
 EOS;
-	return $flux;
+	return $contenu;
+	}
 }
 
 ?>
