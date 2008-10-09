@@ -24,15 +24,20 @@ add_outil( array(
 ));
 */
 
+/* SPIP 2.0
+define('_NO_CACHE',-1); -> ne jamais utiliser le cache ni meme creer les fichiers cache
+define('_NO_CACHE',1); -> ne pas utiliser le fichier en cache, mais stocker le resultat du calcul dans le fichier cache
+define('_NO_CACHE',0); -> toujours prendre tous les fichiers en cache 
+*/
 add_variable( array(
 	'nom' => 'radio_desactive_cache3',
 	'format' => _format_NOMBRE,
-	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
+	'radio' => defined('_SPIP19300')?array(1 => 'item_oui', 0 => 'item_non', -1 => 'toto'):array(1 => 'item_oui', 0 => 'item_non'),
 	'defaut' => 0,
 	// si la variable est egale a 1, on code...
 	// jquery.js et forms_styles.css restent en cache.
-	'code:%s' => "\$fond = isset(\$GLOBALS['fond'])?\$GLOBALS['fond']:_request('page');
-if (!in_array(\$fond, array('jquery.js','forms_styles.css'))) \$_SERVER['REQUEST_METHOD']='POST';\n",
+	'code:%s' => "\$cs_fond = isset(\$GLOBALS['fond'])?\$GLOBALS['fond']:_request('page');
+if (!in_array(\$cs_fond, array('jquery.js','forms_styles.css'))) \$_SERVER['REQUEST_METHOD']='POST';\n",
 ));
 add_variable( array(
 	'nom' => 'duree_cache',

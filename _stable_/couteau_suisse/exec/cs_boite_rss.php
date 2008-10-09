@@ -7,6 +7,10 @@
 #-----------------------------------------------------#
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// on met a jour le flux rss toutes les 2 heures
+// contrib ici qui devra passer en fond et utiliser le cache de SPIP !
+define('_CS_RSS_UPDATE', 2*3600);
+
 // compatibilite spip 1.9
 if(!function_exists(ajax_retour)) { 
 	function ajax_retour($corps) {
@@ -32,13 +36,11 @@ function exec_cs_boite_rss_dist() {
 		echo defined('_SPIP19100')?minipres( _T('avis_non_acces_page')):minipres();
 		exit;
 	}
-$force = _request('force');
-$force = false;
 	$p = '';
-	// on cherche le flux rss toutes les deux heures
-	if(!$force) {
+	// on cherche le flux rss toutes les _CS_RSS_UPDATE minutes
+	if(in_array(_request('var_mode'), array('calcul', 'recalcul'))) {
 		$lastmodified = @file_exists(_DIR_RSS_TMP)?@filemtime(_DIR_RSS_TMP):0;
-		if (time()-$lastmodified < 2*3600) lire_fichier(_DIR_RSS_TMP, $p);
+		if (time()-$lastmodified < _CS_RSS_UPDATE) lire_fichier(_DIR_RSS_TMP, $p);
 	}
 	if(strlen($p)) { ajax_retour($p); return; }
 	include_spip('action/editer_site');

@@ -5,7 +5,9 @@
 // Doc : http://www.spip-contrib.net/?article2206
 
 include_spip('inc/charsets');
-charger_generer_url();  # pour generer_url_mot()
+
+// Compatibilite pour generer_url_mot(), mais deprecie sous SPIP 2.0
+function cs_foo_mot($id, $foo) { return generer_url_mot($gloss_id); } 
 
 // Compatibilite SPIP 1.91
 if(defined('_SPIP19100') && !function_exists('_q')) { function _q($t) {return spip_abstract_quote($t);} }
@@ -72,6 +74,11 @@ function cs_rempl_glossaire($texte) {
 	global $gloss_id;
 	static $accents;
 	if(!isset($accents)) $accents = cs_glossaire_accents();
+	static $cs_generer_url;
+	if(!isset($cs_generer_url_mot)) {
+		if(function_exists('charger_generer_url')) { charger_generer_url(); $cs_generer_url = 'cs_foo_mot'; /* avant SPIP 2.0 */ }
+			else $cs_generer_url = 'generer_url_entite'; /* depuis SPIP 2.0 */ 
+	}
 	$limit = defined('_GLOSSAIRE_LIMITE')?_GLOSSAIRE_LIMITE:-1;
 	$r = spip_query("SELECT id_mot, titre, texte, descriptif FROM spip_mots WHERE " . $GLOBALS['glossaire_groupes_type'] . " ORDER BY id_mot ASC");
 	// protection des liens SPIP
@@ -103,7 +110,7 @@ function cs_rempl_glossaire($texte) {
 				$texte = preg_replace_callback(",(?:$les_mots)&(?:$accents);,i", 'glossaire_echappe_balises_callback', $texte);
 			}
 			// on y va !
-			$lien = generer_url_mot($gloss_id);
+			$lien = $cs_generer_url($gloss_id, 'mot');
 			$mem = $GLOBALS['toujours_paragrapher'];
 			$GLOBALS['toujours_paragrapher'] = false;
 			// $definition =strlen($mot['descriptif'])?$mot['descriptif']:$mot['texte'];

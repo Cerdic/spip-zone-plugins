@@ -7,7 +7,7 @@ if (defined('_CS_REPORT')) error_reporting(E_ALL ^ E_NOTICE);
 elseif (defined('_CS_REPORTALL')) error_reporting(E_ALL);
 
 $GLOBALS['cs_fonctions_essai'] = 1;
-//cs_log("INIT : cout_fonctions ($GLOBALS[cs_options]/$GLOBALS[cs_fonctions]/$GLOBALS[cs_init])");
+//cs_log("INIT : cout_fonctions ($GLOBALS[cs_spip_options]/$GLOBALS[cs_options]/$GLOBALS[cs_fonctions]/$GLOBALS[cs_init])");
 
 // plugin initialise si cout_options est OK (fin de compilation par exemple)
 if(!$GLOBALS['cs_init']) {

@@ -387,21 +387,24 @@ define('_CS_SPIP_OPTIONS_B', "// Fin du code. Ne pas modifier ces lignes, merci"
 function cs_verif_FILE_OPTIONS($ecriture = false) {
 
 	$include = '@include_once \''.realpath(_DIR_CS_TMP.'mes_spip_options.php')."';";
-	$inclusion = "\n"._CS_SPIP_OPTIONS_A."\n".$include."\n"._CS_SPIP_OPTIONS_B."\n\n";
+	$inclusion = _CS_SPIP_OPTIONS_A."\n".$include."\n"._CS_SPIP_OPTIONS_B;
 cs_log("cs_verif_FILE_OPTIONS($ecriture) : le code d'appel est $include");
 	$fo = strlen(_FILE_OPTIONS)? _FILE_OPTIONS:false;
 	if ($fo) {
 		if (lire_fichier($fo, $t)) {
-			// verification
-			$ok = preg_match('`\s*'.preg_quote(_CS_SPIP_OPTIONS_A,'`').'.*'.preg_quote(_CS_SPIP_OPTIONS_B,'`').'\s*`ms', $t, $regs);
-	cs_log(" -- fichier $fo present. Inclusion " . ($ok?" trouvee".($ecriture?" et remplacee":""):"absente".($ecriture?" mais ajoutee":"")));
-			$t = $ok?str_replace($regs[0], $inclusion, $t):str_replace('<?'.'php', '<?'.'php'.$inclusion, $t);
-			if($ecriture && $fo) ecrire_fichier($fo, $t);
+			// verification du contenu inclu
+			$ok = preg_match('`\s*('.preg_quote(_CS_SPIP_OPTIONS_A,'`').'.*'.preg_quote(_CS_SPIP_OPTIONS_B,'`').')\s*`ms', $t, $regs);
+			// pas besoin de reecrire si le contenu est identique a l'inclusion
+			if ($regs[1]==$inclusion) $ecriture = false;
+	cs_log(" -- fichier $fo present. Inclusion " . ($ok?" trouvee".($ecriture?" et remplacee":" et validee"):"absente".($ecriture?" mais ajoutee":"")));
+			$t = $ok?str_replace($regs[0], "\n$inclusion\n\n", $t):preg_replace(',<\?(?:php)?\s*,', '<?'."php\n$inclusion\n\n", $t);
+			if($ecriture) $ok = ecrire_fichier($fo, $t);
+			if(!$ok) cs_log("ERREUR : l'ecriture du fichier $fo a echouee !");
 			return;
 		} else cs_log(" -- fichier $fo illisible. Inclusion non permise");
 	} else $fo = _DIR_RACINE . _NOM_PERMANENTS_INACCESSIBLES . _NOM_CONFIG . '.php';
 	// creation
-	$t = '<?'."php\n".$inclusion."\n?>";
+	$t = '<?'."php\n".$inclusion."\n\n?>";
 	if($ecriture) ecrire_fichier($fo, $t);
 cs_log(" -- fichier $fo absent. Fichier '$f' et inclusion ".(!$ecriture?"non ":"")."crees");
 }

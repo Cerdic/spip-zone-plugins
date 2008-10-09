@@ -152,6 +152,8 @@ _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.'
 	'erreur:distant' => 'le serveur distant',
 	'erreur:js' => 'Une erreur JavaScript semble &ecirc;tre survenue sur cette page et emp&ecirc;che son bon fonctionnement. Veuillez activer JavaScript sur votre navigateur ou d&eacute;sactiver certains plugins SPIP de votre site.',
 	'erreur:nojs' => 'Le JavaScript est d&eacute;sactiv&eacute; sur cette page.',
+	'erreur:jquery' => '{{Note}} : la librairie {jQuery} semble inactive sur cette page. Veuillez consulter [ici->http://www.spip-contrib.net/?article2166] le paragraphe sur les d&eacute;pendances du plugin.',
+	'erreur:bt' => '<span style=\"color:red;\">Attention :</span> la barre typographique (version @version@) semble ancienne.<br />Le Couteau Suisse est compatible avec une version sup&eacute;rieure ou &eacute;gale &agrave; 2.4.0.',
 	'erreur:nom' => 'Erreur !',
 	'erreur:probleme' => 'Probl&egrave;me sur : @pb@',
 	'erreur:traitements' => 'Le Couteau Suisse - Erreur de compilation des traitements : m&eacute;lange \'typo\' et \'propre\' interdit !',

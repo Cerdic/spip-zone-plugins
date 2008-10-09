@@ -419,17 +419,18 @@ verif_plugin();
 	echo "<br /><br /><br />";
 	gros_titre(_T('couteauprive:titre'), '', false);
 	echo barre_onglets("configuration", 'couteau_suisse');
-echo '<div style="font-size:85%"><p style="color:red;">Ancienne interface : <a href="', generer_url_ecrire('admin_couteau_suisse_old'), '">par ici</a></p>';
+	echo '<div style="font-size:85%">';
+//echo '<p style="color:red;">Ancienne interface : <a href="', generer_url_ecrire('admin_couteau_suisse_old'), '">par ici</a></p>';
 // verification d'une base venant de SPIP 1.8
 $res = spip_query("DESCRIBE spip_meta valeur");
 $resultat = function_exists('spip_fetch_array')?spip_fetch_array($res):sql_fetch($res);
 if($resultat['Type']!='text') echo "<p style=\"color:red;\">Attention : votre base semble ancienne et le Couteau Suisse ne va pas bien fonctionner.</p><p>La table 'spip_meta' a pour type de valeur '$resultat[Type]' au lieu de 'text'.</p>";
 // verification de la barre typo V2
-if (strlen($bt_version) and (version_compare($bt_version,'2.4.0','<'))) echo "<p><span style=\"color:red;\">Attention :</span> la barre typographique (version $bt_version) semble ancienne.<br />Le Couteau Suisse est compatible avec une version sup&eacute;rieure ou &eacute;gale &agrave; 2.4.0.</p>";
+if (strlen($bt_version) and (version_compare($bt_version,'2.4.0','<'))) echo "<p>"._T('erreur:bt', array('version'=>$bt_version))."</p>";
 echo "<script type=\"text/javascript\"><!-- 
-if (!window.jQuery) document.write('<p><span style=\"color:red;\">Note :</span> jQuery semble inactif sur cette page. Veuillez consulter <a href=\"http://www.spip-contrib.net/?article2166\">ici</a> le paragraphe sur les d&eacute;pendances du plugin.');
+if (!window.jQuery) document.write('".addslashes(propre('<p>'._T('couteauprive:erreur:jquery').'</p>'))."');
 //--></script>";
-echo '</div>';
+	echo '</div>';
 
 	cs_compat_boite('debut_gauche');
 	// pour la liste des docs sur spip-contrib
