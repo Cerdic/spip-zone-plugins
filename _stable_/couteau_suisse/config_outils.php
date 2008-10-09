@@ -53,18 +53,26 @@ add_variable( array(
 	'code' => "\$GLOBALS['quota_cache']=%s;\n",
 ));
 add_variable( array(
+	'nom' => 'derniere_modif_invalide',
+	'format' => _format_NOMBRE,
+	'radio' => array(0 => 'item_oui', 1 => 'item_non'),
+	'defaut' => 0,
+	'code' => "\$GLOBALS['derniere_modif_invalide']=%s;\n",
+));
+
+/*add_variable( array(
 	'nom' => 'exceptions_cache',
 	'format' => _format_CHAINE,
 	'defaut' => "''",
 	'code:strlen(%s)' => "define('_cache_PERSO', %s);",
-));
+));*/
 // balise pour choisir le cache a appliquer aux articles
 
 add_outil( array(
 	'id' => 'spip_cache',
-	'code:spip_options' => "%%radio_desactive_cache3%%%%duree_cache%%%%duree_cache_mutu%%%%quota_cache%%%%exceptions_cache%%",
+	'code:spip_options' => "%%radio_desactive_cache3%%%%duree_cache%%%%duree_cache_mutu%%%%quota_cache%%%%derniere_modif_invalide%%",//%%exceptions_cache%%",
 	'categorie' => 'admin',
-	'pipelinecode:insert_head' => 'if(defined(\'_cache_PERSO\')) cs_fixe_cache($GLOBALS[\'delais\']);'
+//	'pipelinecode:insert_head' => 'if(defined(\'_cache_PERSO\')) cs_fixe_cache($GLOBALS[\'delais\']);'
 ));
 
 	// ici on a besoin d'une case input. La variable est : dossier_squelettes
@@ -198,13 +206,13 @@ add_variable( array(
 		'perso' => 'couteauprive:tri_perso' ),
 	'radio/ligne' => 1,
 	'defaut' => "'date DESC'", //"'0+titre,titre'",
-	'code:%s!="perso"' => "@define('_TRI_ARTICLES_RUBRIQUE', %s);\n",
+	'code:%s!="perso"' => "define('_TRI_ARTICLES_RUBRIQUE', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'tri_perso',
 	'format' => _format_CHAINE,
 	'defaut' => '',
-	'code:strlen(%s)' => "@define('_TRI_ARTICLES_RUBRIQUE', %s);",
+	'code:strlen(%s)' => "define('_TRI_ARTICLES_RUBRIQUE', %s);",
 ));
 add_outil( array(
 	'id' => 'tri_articles',
