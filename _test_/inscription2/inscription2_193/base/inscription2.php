@@ -4,7 +4,6 @@
 	global $tables_auxiliaires;
 	global $table_des_tables;
 	
-	//$var_user = array();
 	$spip_auteurs_elargis['id_auteur'] = "bigint(21) NOT NULL";
 	
 	foreach(lire_config('inscription2') as $cle => $val) {
@@ -20,7 +19,6 @@
 				$spip_auteurs_elargis[$cle] = "int NOT NULL";
 			else	
 				$spip_auteurs_elargis[$cle] = "text NOT NULL";
-			//$var_user[$cle] = ' ';
 		}
 	}
 	$spip_auteurs_elargis_key = array("PRIMARY KEY" => "id_auteur");
