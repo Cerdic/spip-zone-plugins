@@ -1,0 +1,65 @@
+<script type="text/javascript"><!--
+	function init_spipicious(){
+		jQuery('.deletemot')
+			.unbind()
+			.bind(
+				'click',
+					function(){
+						var id = jQuery(this).attr('id').substr(4);
+						jQuery('#supprimer_mot').val(id);
+						jQuery('#formulaire_spipicious_mots').find('input[@type=submit]').eq(0).each(function(){ this.click(); });
+						jQuery('#deleteID').val('');
+						return false;
+					});
+	}
+
+	var callback = function() {
+		[(#ENV{id_document}|?{' ',''})
+			jQuery(".tags").empty().load("[(#URL_PAGE{mots_document}|parametre_url{id_document,#ENV{id_document},"&"})]", "", "");
+		]
+		[(#ENV{id_document}|?{'',' '})
+			jQuery(".tags").empty().load("[(#URL_PAGE{mots_article}|parametre_url{id_article,#ENV{id_article},"&"})]", "", "");
+		]
+	};
+	
+	onAjaxLoad(init_spipicious);
+	jQuery(document).ready(function(){
+		init_spipicious();
+	});
+// --></script>
+
+	</form>
+	<div class="formulaire_spip ajax">
+		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'>
+		<div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:spipicious:vos_tags:></legend>
+			<ul>
+				<li id="mesmots">
+				[(#ENV{id_document}|?{' '})<INCLURE{fond=spipicious_del_document}{id_document=#ENV{id_document}}>]
+				[(#ENV{id_document}|?{'',' '})<INCLURE{fond=spipicious_del_article}{id_article=#ENV{id_article}}>]
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset>
+		<legend><:spipicious:add_tags:></legend>
+		<ul>
+			<li>
+				<label for="tags">Tags:</label>
+				<input type="text" class="forml" id="tags" name="tags" size="25" value="" /><br />
+			</li>
+			<li class="boutons">
+				<input type="hidden" name="remove_tag" id="remove_tag" value="">
+				<input type="submit" name="add_tags" value="<:bouton_valider:>" class="valider submit" />
+			</li>
+		</ul>
+		</fieldset>
+		</div>
+	</form>]
+	</div>

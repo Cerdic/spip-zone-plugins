@@ -4,7 +4,7 @@
 _ R&#233;utilisation de code du plugin r&#233;alis&#233; par [erational->http://www.erational.org]
 _ &#169; 2007 - Licence GPL 
 	</auteur>
-	<version>0.3</version>
+	<version>0.4</version>
 	<etat>dev</etat>
 	<description>
 <multi>
@@ -31,7 +31,7 @@ _ Icon from [Wolfgang Bartelme and Chris Messina->http://www.factorycity.net/pro
 		<inclure>spipicious_head.php</inclure>
 	</pipeline>
 	<necessite id="SelecteurGenerique" version="[0.2;]" />
-	<necessite id='cfg' version='[1.5.0;]' />
+	<necessite id='cfg' version='[1.10.1;]' />
 	<necessite id="SPIP" version='[2.0.0 dev;]' />
 	<chemin dir='' />
 	<options>

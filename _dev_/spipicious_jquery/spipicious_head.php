@@ -13,17 +13,20 @@ function spipicious_insert_head($flux){
     
 	$flux .= <<<EOS
 		<script type="text/javascript"><!--
-		
+			function deletetag(tag){
+				var tag = tag;
+				jQuery('input#remove_tag').val(tag).parents('form').submit().end();
+				return false;
+			}
 	(function($) {
 	var appliquer_selecteur_cherche_mot = function() {
 
 		// chercher l'input de saisie
 		var spipicious = jQuery('input[@name=tags][autocomplete!=off]');
-		var id_groupe = jQuery("#select_groupe").val();
 		var id_article = jQuery("#spipicious_id").val();
 		spipicious.autocomplete('$selecteur',
 			{
-				extraParams:{id_article:id_article,id_groupe:id_groupe},
+				extraParams:{id_article:id_article},
 				delay: 200,
 				autofill: false,
 				minChars: 1,
