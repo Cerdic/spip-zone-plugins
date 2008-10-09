@@ -1,0 +1,48 @@
+#CACHE{7200}
+<THELIA_PROD type="PRODUIT" ref="THELIA-PRODUIT_REF"> 
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>THELIA-STRIPTITRE - [(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="description" content="THELIA-STRIPDESCRIPTION" />
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_produit">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	<div id="conteneur">
+
+		<div id="contenu">
+
+			[(#REM) Fil d'Ariane ]
+			<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><THELIA_chemrub type="CHEMIN" rubrique="THELIA-RUBRIQUE_ID">
+			<THELIA_rubdetchem type="RUBRIQUE" id="THELIA-ID">
+			&gt; <a href="#URL_PAGE{rubrique_thelia, id_rubrique=THELIA-ID}" class="LIEN_chemin">THELIA-TITRE</a> 
+			</THELIA_rubdetchem>
+			</THELIA_chemrub> &gt; <a href="#URL_PAGE{rubrique_thelia, id_rubrique=THELIA-RUBRIQUE_ID}">THELIA-RUBRIQUE_NOM</a> &gt; THELIA-TITRE</div>
+  
+			<INCLURE{fond=inc/inc-produit}>
+		  	
+
+		</div>[(#REM) fin contenu ]
+
+	</div>[(#REM) fin conteneur ]
+
+	[(#REM) Menu de navigation laterale ]
+	<div id="navigation">
+		[(#REM) Menu de navigation par rubriques ]
+		<INCLURE{fond=inc-rubriques}{id_rubrique_thelia=THELIA-RUBRIQUE_ID}>
+	</div>[(#REM) fin navigation ]
+
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div>[(#REM) fin page ]
+</body>
+</html>
+</THELIA_PROD>

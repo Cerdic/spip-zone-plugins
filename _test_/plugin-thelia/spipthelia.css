@@ -6,16 +6,18 @@
 
 .titrePage {
 	text-align: left;
-	text-transform: uppercase;
-	color: #f60;
-	font-family: 'Helvetica-Bold','Helvetica','Arial',sans-serif;
-	font-size: 1.1em;
-	font-weight: bold;
-	line-height: 1.2em;
 	margin-bottom: .5em;
 	margin-top: .5em;
 }
-
+.titrePage h1 {
+	color: #f60;
+	text-transform: uppercase;
+	font-family: 'Helvetica-Bold','Helvetica','Arial',sans-serif;
+	font-size: 1.4em;
+	font-weight: normal;
+	line-height: 1.2em;
+		
+}
 .sousTitrePage {
 	color:  #7a6d2c;
 	text-align: left;
@@ -51,7 +53,7 @@
 
 .produitPetit {
 	float: left;
-	width: 150px;
+	width: 145px;
 	margin-top: 20px;
 	margin-right: 20px;
 	margin-bottom: 0;
