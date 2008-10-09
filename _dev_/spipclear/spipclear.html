@@ -52,7 +52,7 @@
 				</div>
 
 				[(#SET{url,[(#ENV{id_secteur}|generer_url_rubrique)]})]
-				<INCLURE{fond=noisettes/sidebar}{env}{date=#ENV{archives,#ENV{date}}}{archives=#ENV{archives,#ENV{date}}}>
+				<INCLURE{fond=noisettes/sidebar}{env}{self=#GET{url}}{date=#ENV{archives,#ENV{date}}}{archives=#ENV{archives,#ENV{date}}}>
 			</div>
 			
 			<div id="footer">

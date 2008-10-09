@@ -20,7 +20,7 @@
 			{par date}{inverse}
 			{mois_relatif>=0}{mois_relatif<12}
 		>[<li>
-			<a href="[(#SELF|parametre_url{#ENV{var_date,date},[(#DATE|affdate{Y-m})]})]"[
+			<a href="[(#ENV{self}|parametre_url{#ENV{var_date,date},[(#DATE|affdate{Y-m})]})]"[
 				class="(#DATE|affdate{Y-m}|=={[(#ENV{date}|normaliser_date|affdate{Y-m})]}|?{on})"
 			]>(#DATE|affdate_mois_annee)</a>
 		</li>
