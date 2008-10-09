@@ -1,17 +1,18 @@
 <?php
 function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
-	$s = spip_query(
-	"SELECT id_rubrique,statut FROM spip_articles WHERE id_article="._q($id));
-	$r = spip_fetch_array($s);
-	include_spip('inc/auth');
+	$r = sql_fetsel("id_rubrique,statut", "spip_articles", "id_article=".sql_quote($id));
+
+	include_spip('inc/auth'); // pour auteurs_article si espace public
+
 	return
 		autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
 		OR (
 			in_array($qui['statut'], array('0minirezo', '1comite'))
-			//AND in_array($r['statut'], array('prop','prepa', 'poubelle'))
-			AND spip_num_rows(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
+			AND in_array($r['statut'], array('prop','prepa', 'poubelle'))
+			AND auteurs_article($id, "id_auteur=".$qui['id_auteur'])
 		);
 }
+
 
 function exec_dater()
 {
