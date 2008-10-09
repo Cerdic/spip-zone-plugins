@@ -86,7 +86,7 @@ if($zap) {
 
 	// test sur le fichier a inclure ici
 	$cs_exists = file_exists($f_mo = _DIR_CS_TMP.'mes_options.php');
-	if(!$GLOBALS['cs_config_options']) $cs_exists |= file_exists($f_mco = _DIR_CS_TMP.'mes_config_options.php');
+	if(!$GLOBALS['cs_spip_options']) $cs_exists |= file_exists($f_mco = _DIR_CS_TMP.'mes_spip_options.php');
 
 	// fonctions indispensables a l'execution
 	include_spip('cout_lancement');
@@ -98,10 +98,10 @@ if($zap) {
 	// inclusion des options pre-compilees, si l'on n'est jamais passe par ici...
 	if (!$GLOBALS['cs_options']) {
 		// inclusion des options de config si elles n'ont pas deja ete inclues par config/mes_options.php
-		if (!$GLOBALS['cs_config_options']) {
+		if (!$GLOBALS['cs_spip_options']) {
 			if(file_exists($f_mco)) {
 				cs_log(" -- inclusion de '$f_mco'");
-				include_once($f_mco);
+//				include_once($f_mco);
 			} else {
 				$GLOBALS['cs_utils'] = 0;
 				cs_log(" -- fichier '$f_mco' toujours introuvable !!");

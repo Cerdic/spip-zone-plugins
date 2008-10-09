@@ -62,7 +62,7 @@ add_variable( array(
 
 add_outil( array(
 	'id' => 'spip_cache',
-	'code:config_options' => "%%radio_desactive_cache3%%%%duree_cache%%%%duree_cache_mutu%%%%quota_cache%%%%exceptions_cache%%",
+	'code:spip_options' => "%%radio_desactive_cache3%%%%duree_cache%%%%duree_cache_mutu%%%%quota_cache%%%%exceptions_cache%%",
 	'categorie' => 'admin',
 	'pipelinecode:insert_head' => 'if(defined(\'_cache_PERSO\')) cs_fixe_cache($GLOBALS[\'delais\']);'
 ));
@@ -77,7 +77,7 @@ add_variable( array(
 ));
 add_outil( array(
 	'id' => 'dossier_squelettes',
-	'code:config_options' => '%%dossier_squelettes%%',
+	'code:spip_options' => '%%dossier_squelettes%%',
 	'categorie' => 'admin',
 ));
 
@@ -113,13 +113,13 @@ add_variable( array(
 ));
 add_outil( array(
 	'id' => 'paragrapher2',
-	'code:config_options' => '%%paragrapher%%',
+	'code:spip_options' => '%%paragrapher%%',
 	'categorie' => 'admin',
 ));
 
 add_outil( array(
 	'id' => 'forcer_langue',
-	'code:config_options' => "\$GLOBALS['forcer_lang']=true;",
+	'code:spip_options' => "\$GLOBALS['forcer_lang']=true;",
 	'categorie' => 'public',
 ));
 
@@ -177,7 +177,7 @@ add_outil( array(
 
 add_outil( array(
 	'id' => 'simpl_interface',
-	'code:config_options' => "@define('_ACTIVER_PUCE_RAPIDE', false);",
+	'code:spip_options' => "define('_ACTIVER_PUCE_RAPIDE', false);",
 	'categorie' => 'interface',
 	'version-min' => '1.9300',
 ));
@@ -208,7 +208,7 @@ add_variable( array(
 ));
 add_outil( array(
 	'id' => 'tri_articles',
-	'code:options' => "%%tri_articles%%%%tri_perso%%",
+	'code:spip_options' => "%%tri_articles%%%%tri_perso%%",
 	'categorie' => 'interface',
 	'version-min' => '1.9300',
 ));
@@ -264,7 +264,7 @@ add_variable( array(
 ));
 add_outil( array(
 	'id' => 'type_urls',
-	'code:config_options' => "%%radio_type_urls3%%%%spip_script%%%%url_arbo_minuscules%%%%url_arbo_sep_id%%%%urls_arbo_sans_type%%%%terminaison_urls_arbo%%",
+	'code:spip_options' => "%%radio_type_urls3%%%%spip_script%%%%url_arbo_minuscules%%%%url_arbo_sep_id%%%%urls_arbo_sans_type%%%%terminaison_urls_arbo%%",
 	'categorie' => 'admin',
 ));
 
@@ -294,7 +294,7 @@ add_variable( array(
 ));
 add_outil( array(
 	'id' => 'forum_lgrmaxi',
-	'code:config_options' => "%%forum_lgrmaxi%%",
+	'code:spip_options' => "%%forum_lgrmaxi%%",
 	'categorie' => 'admin',
 	'version-min' => '1.9200',
 ));
@@ -340,13 +340,13 @@ add_outil( array(
 
 add_outil( array(
 	'id' => 'no_IP',
-	'code:config_options' => '$ip = substr(md5($ip),0,16);',
+	'code:spip_options' => '$ip = substr(md5($ip),0,16);',
 	'categorie' => 'admin',
 ));
 
 add_outil( array(
 	'id' => 'flock',
-	'code:config_options' => "@define('_SPIP_FLOCK',false);",
+	'code:spip_options' => "define('_SPIP_FLOCK',false);",
 	'categorie' => 'admin',
 	'version-min' => '1.9300',
 ));

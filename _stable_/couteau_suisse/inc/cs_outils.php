@@ -33,7 +33,7 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 	// au cas ou des variables sont presentes dans le code
 	$outil['variables'] = array(); $outil['nb_variables'] = 0;
 	// ces 2 lignes peuvent initialiser des variables dans $metas_vars ou $metas_vars_code
-	if (isset($outil['code:config_options'])) $outil['code:config_options'] = cs_parse_code_php($outil['code:config_options']);
+	if (isset($outil['code:spip_options'])) $outil['code:spip_options'] = cs_parse_code_php($outil['code:spip_options']);
 	if (isset($outil['code:options'])) $outil['code:options'] = cs_parse_code_php($outil['code:options']);
 	if (isset($outil['code:fonctions'])) $outil['code:fonctions'] = cs_parse_code_php($outil['code:fonctions']);
 	// cette ligne peut utiliser des variables dans $metas_vars ou $metas_vars_code
