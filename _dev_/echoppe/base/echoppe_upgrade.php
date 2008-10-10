@@ -2,6 +2,37 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function echoppe_vider_tables(){
+	include_spip('base/abstract_sql');
+	sql_drop_table("spip_echoppe_categories");
+	sql_drop_table("spip_echoppe_categories_articles");
+	sql_drop_table("spip_echoppe_categories_descriptions");
+	sql_drop_table("spip_echoppe_categories_produits"); ,
+	sql_drop_table("spip_echoppe_categories_rubriques");
+	sql_drop_table("spip_echoppe_client");
+	sql_drop_table("spip_echoppe_clients");
+	sql_drop_table("spip_echoppe_prestataires");
+	sql_drop_table("spip_echoppe_depots");
+	sql_drop_table("spip_echoppe_gammes");
+	sql_drop_table("spip_echoppe_gammes_produits");
+	sql_drop_table("spip_echoppe_options");
+	sql_drop_table("spip_echoppe_options_descriptions");
+	sql_drop_table("spip_echoppe_options_valeurs");
+	sql_drop_table("spip_echoppe_options_valeurs_descriptifs");
+	sql_drop_table("spip_echoppe_panier");
+	sql_drop_table("spip_echoppe_prix");
+	sql_drop_table("spip_echoppe_paniers");
+	sql_drop_table("spip_echoppe_statuts_paniers");
+	sql_drop_table("spip_echoppe_produits");
+	sql_drop_table("spip_echoppe_produits_articles");
+	sql_drop_table("spip_echoppe_produits_descriptions");
+	sql_drop_table("spip_echoppe_produits_documents");
+	sql_drop_table("spip_echoppe_produits_rubriques");
+	sql_drop_table("spip_echoppe_produits_sites");
+	sql_drop_table("spip_echoppe_valeurs");
+	sql_drop_table("spip_echoppe_stock_produits");
+	effacer_meta('echoppedb_version');
+}
 
 //~ $version_echoppe_installee = $GLOBALS['meta']['echoppe_version'];
 function echoppe_install($action){
@@ -78,37 +109,7 @@ function echoppe_install($action){
 		case 'uninstall':
 			//Appel de la fonction de suppression
 			//quand l'utilisateur clickque sur "supprimer tout" (disponible si test retourne true)
-			
-			$sql_supprimer_table = "DROP TABLE `spip_echoppe_categories` ,
-							`spip_echoppe_categories_articles` ,
-							`spip_echoppe_categories_descriptions` ,
-							`spip_echoppe_categories_produits` ,
-							`spip_echoppe_categories_rubriques` ,
-							`spip_echoppe_client` ,
-							`spip_echoppe_clients` ,
-							`spip_echoppe_prestataires` ,
-							`spip_echoppe_depots` ,
-							`spip_echoppe_gammes` ,
-							`spip_echoppe_gammes_produits` ,
-							`spip_echoppe_options` ,
-							`spip_echoppe_options_descriptions` ,
-							`spip_echoppe_options_valeurs` ,
-							`spip_echoppe_options_valeurs_descriptifs` ,
-							`spip_echoppe_panier` ,
-							`spip_echoppe_prix` ,
-							`spip_echoppe_paniers` ,
-							`spip_echoppe_statuts_paniers` ,
-							`spip_echoppe_produits` ,
-							`spip_echoppe_produits_articles` ,
-							`spip_echoppe_produits_descriptions` ,
-							`spip_echoppe_produits_documents` ,
-							`spip_echoppe_produits_rubriques` ,
-							`spip_echoppe_produits_sites` ,
-							`spip_echoppe_valeurs` ,
-							`spip_echoppe_stock_produits` ;";
-			sql_query($sql_supprimer_table);
-			ecrire_meta('echoppedb_version','0.0');
-			ecrire_metas();
+			echoppe_vider_tables();
 		break;
 	}
 }
