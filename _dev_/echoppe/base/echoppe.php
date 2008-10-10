@@ -473,6 +473,22 @@ $spip_commentaires_paniers_join = array(
 	);
 
 
+$spip_prestataires = array(
+	"id_prestataire"	=> "bigint(21) NOT NULL",
+	"titre"	=> "VARCHAR(255) NOT NULL",
+	"texte"	=> "MEDIUMTEXT NOT NULL",
+	"modele"			=> "TINYTEXT NOT NULL",
+	"type"			=> "ENUM('paiement','livraison') DEFAULT 'paiement' NOT NULL",
+	"statut"		=> "VARCHAR(10) NOT NULL",
+	);
+
+
+$spip_prestataires_key = array(
+	"PRIMARY KEY"		=> "id_prestataire",
+	"KEY type"	=> "type"
+	);
+
+
 ////////////////////////////////////////////////////////////////////////
 
 
@@ -613,14 +629,24 @@ $tables_principales['spip_echoppe_stocks'] = array(
 	'key' => &$spip_stocks_key,
 	'join' => &$spip_stocks_join
 	);
+	
+$tables_principales['spip_echoppe_prestataires'] = array(
+	'field' => &$spip_prestataires,
+	'key' => &$spip_prestataires_key,
+	'join' => &$spip_prestataires_join
+	);
+
+
+global $table_des_tables;
+$table_des_tables['spip_echoppe_categories']='categories';
+$table_des_tables['spip_echoppe_produits']='produits';
+$table_des_tables['spip_echoppe_depots']='depots';
+$table_des_tables['spip_echoppe_stocks']='stocks';
+$table_des_tables['spip_echoppe_prestataires']='prestataires';
 
 /*
-global $table_des_tables;
-$table_des_tables['categories']='categories';
-
-
-global $tables_jointures;
-$tables_jointures['spip_categories'][]= 'spip_categories_descriptions';
+global $tables_des_jointures;
+$tables_des_jointures['spip_categories'][]= 'spip_categories_descriptions';
 */
 
 ?>

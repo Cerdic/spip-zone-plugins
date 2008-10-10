@@ -5,12 +5,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //~ $version_echoppe_installee = $GLOBALS['meta']['echoppe_version'];
 function echoppe_install($action){
-	$version_echoppe_installee = $GLOBALS['meta']['echoppe_version'];
+	$version_echoppe_installee = $GLOBALS['meta']['echoppedb_version'];
 	switch ($action){
 		case 'test':
 			//Contrôle du plugin à chaque chargement de la page d'administration
 			// doit retourner true si le plugin est proprement installé et à jour, false sinon
-			$version_echoppe_locale = 0.9;
+			$version_echoppe_locale = 1.0;
 			//echo "Echoppe DB V".$version_echoppe_installee;
 			//~ echo $version_echoppe_locale.' <-> '.$version_echoppe_installee.'<br />';
 			if ($version_echoppe_installee == $version_echoppe_locale){
@@ -25,7 +25,7 @@ function echoppe_install($action){
 		case 'install':
 			//Appel de la fonction d'installation. Lors du clic sur l'icône depuis le panel.
 			//quand le plugin est activé et test retourne false
-			$version_echoppe_locale = 0.9;
+			$version_echoppe_locale = 1.0;
 			include_spip('base/echoppe');
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
@@ -39,28 +39,38 @@ function echoppe_install($action){
 						patch_06to07();
 						patch_07to08();
 						patch_08to09();
+						patch_09to10();
 					break;
 					
 					case '0.6' :
 						patch_06to07();
 						patch_07to08();
 						patch_08to09();
+						patch_09to10();
 					break;
 					
 					case '0.7' :
 						patch_07to08();
 						patch_08to09();
+						patch_09to10();
 					break;
 					
 					case '0.8' :
 						patch_08to09();
+						patch_09to10();
+						
 					break;
+					
+					case '0.9' :
+						patch_09to10();
+					break;
+					
 				}
 				
 			}else{
 				spip_log('Installation plugin echoppe '.$version_echoppe_locale);
 				creer_base();
-				ecrire_meta('echoppe_version',$version_echoppe_locale);
+				ecrire_meta('echoppedb_version',$version_echoppe_locale);
 				ecrire_metas();
 			}
 			
@@ -75,6 +85,8 @@ function echoppe_install($action){
 							`spip_echoppe_categories_produits` ,
 							`spip_echoppe_categories_rubriques` ,
 							`spip_echoppe_client` ,
+							`spip_echoppe_clients` ,
+							`spip_echoppe_prestataires` ,
 							`spip_echoppe_depots` ,
 							`spip_echoppe_gammes` ,
 							`spip_echoppe_gammes_produits` ,
@@ -92,9 +104,10 @@ function echoppe_install($action){
 							`spip_echoppe_produits_documents` ,
 							`spip_echoppe_produits_rubriques` ,
 							`spip_echoppe_produits_sites` ,
+							`spip_echoppe_valeurs` ,
 							`spip_echoppe_stock_produits` ;";
-			spip_query($sql_supprimer_table);
-			ecrire_meta('echoppe_version','0.0');
+			sql_query($sql_supprimer_table);
+			ecrire_meta('echoppedb_version','0.0');
 			ecrire_metas();
 		break;
 	}
