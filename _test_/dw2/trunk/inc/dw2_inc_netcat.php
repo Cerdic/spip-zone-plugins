@@ -83,7 +83,7 @@ echo debut_cadre_trait_couleur("warning-24.gif", true, "", _T('dw:supprimer_doc_
 	*/
 	echo "<div align='right'>
 		<input type='submit' class='fondo' value='". _T('bouton_valider')."' />
-		</div>";
+		</div>\n";
 	echo fin_bloc();
 	
 	echo "</form>";

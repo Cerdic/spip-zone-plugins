@@ -327,7 +327,7 @@ echo debut_droite('',true);
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
 	echo "<div style='clear:both;'></div>\n";
 
-	echo fin_page();
+	echo fin_gauche().fin_page();
 } // fin exec_
 
 ?>

@@ -120,7 +120,7 @@ else
 			$ttcat=$ligne1['tt_cat'];
 			$add_totaux[] = $ttcat;
 			
-			$bouton = bouton_block_invisible('bout'.$nomcat);
+			$bouton = bouton_block_depliable(_T("info_sans_titre"),false,'bout'.$nomcat);
 			
 			$ifond = $ifond ^ 1;
 			$bgcolor = ($ifond) ? '#ffffff' : $couleur_claire;
@@ -133,7 +133,7 @@ else
 				</tr>\n";
 			echo "<tr bgcolor='$bgcolor'><td colspan='4'>\n";
 			
-			echo debut_block_invisible('bout'.$nomcat);
+			echo debut_block_depliable(false,'bout'.$nomcat); // block invisible
 			echo "<span class='verdana2 bold'>"._T('dw:modif_nom_categ')."</span>\n";
 			echo "<br><span class='arial2'>"._T('dw:txt_categ_01')."</span><br><br>\n";
 			
@@ -218,6 +218,6 @@ else
 	
 	echo "<div style='clear:both;'></div>";
 
-	echo fin_page();
+	echo fin_gauche().fin_page();
 } // fin exec_
 ?>

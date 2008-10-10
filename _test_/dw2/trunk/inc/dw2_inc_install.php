@@ -43,9 +43,15 @@ function ecriture_tables_dw2() {
 	include_spip('base/dw2_tables');
 
 	// créer tables dans bdd
+	/*
 	foreach($tables_dw2 as $k => $v) {
 		dw2_create_table($k, $v['field'], $v['key'], false);// false : auto_increm dans def. des tables !
 	}
+	*/
+
+	include_spip('base/create');
+	include_spip('base/abstract_sql');
+	creer_base();
 }	
 
 	

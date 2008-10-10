@@ -110,7 +110,7 @@ $result=sql_select("d.id_document, DATE_FORMAT(d.dateur,'%d/%m/%Y - %H:%i') AS d
 		d.nom, d.url, d.total, d.doctype, d.id_doctype, d.categorie, d.heberge, d.id_serveur, 
 		TO_DAYS(d.dateur) - TO_DAYS(d.date_crea) AS nbr_jour, 
 		ROUND(d.total/(TO_DAYS(d.dateur) - TO_DAYS(d.date_crea)),2) AS moyj, 
-		s.taille, s.id_type, s.distant",
+		s.taille, s.extension, s.distant",
 		"spip_dw2_doc AS d LEFT JOIN spip_documents AS s ON d.id_document=s.id_document ",
 		"d.statut='archive' $where_ltt ",
 		"",
@@ -288,7 +288,8 @@ if ($nbliens==0) {
 		$nbrjour=$a_row['nbr_jour'];
 		$moyj=$a_row['moyj'];
 		$statut=$a_row['statut'];
-		$idtype=$a_row['id_type'];
+		//$idtype=$a_row['id_type'];
+		$extension=$a_row['extension'];
 		$t_s=$a_row['taille'];
 		$distant=$a_row['distant'];
 		
@@ -304,7 +305,7 @@ if ($nbliens==0) {
 
 		// ligne du tableau
 		//
-		$bouton = bouton_block_invisible("bout$iddoc");
+		$bouton = bouton_block_depliable(_T("info_sans_titre"),false,"bout$iddoc");
 		echo "<tr bgcolor='$couleur'>";
 		echo "<td width=8%>$bouton ".origine_heberge($heberge)."</td>\n";
 		echo "<td width=50%><div class='verdana2'>";
@@ -317,7 +318,7 @@ if ($nbliens==0) {
 		
 		// Déroulant : fiche du Lien
 		echo "<tr bgcolor='$couleur'><td colspan='4'><span class='verdana1'>";
-		echo debut_block_invisible("bout$iddoc");
+		echo debut_block_depliable(false,"bout$iddoc"); //block invisible
 		
 		conten_bloc_bout();
 			//
@@ -336,7 +337,7 @@ if ($nbliens==0) {
 					{ $chem_telech = $url; }
 				else
 					{ $chem_telech = $heberge.$url; }
-				bloc_minibout_act(_T('dw:telech_fichier'), "$chem_telech", "", $idtype,"0");
+				bloc_minibout_act(_T('dw:telech_fichier'), "$chem_telech", "", $extension,"0");
 			}
 			//
 		fin_bloc();
@@ -364,6 +365,6 @@ echo fin_cadre_relief(true);
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
 	echo "<div style='clear:both;'></div>";
 
-	echo fin_page();
+	echo fin_gauche().fin_page();
 } // fin exec_
 ?>

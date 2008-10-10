@@ -166,7 +166,7 @@ function action_dw2actions_effaceserveur($arg) {
 //
 function action_dw2actions_inclusdocserveur($arg) {
 	global $redirect;
-	global $id_serv, $sitedist, $id_type, $repert_dest, $taille, $fichier;
+	global $id_serv, $sitedist, $extension, $repert_dest, $taille, $fichier;
 	
 	
 	// reconstruction chemin-fichier-spipien, type IMG/nnn/fichier
@@ -175,8 +175,8 @@ function action_dw2actions_inclusdocserveur($arg) {
 	$lien_fichier = "IMG/".$ext."/".$fichier;
 
 	// insert dans spip_documents
-	$req = "INSERT INTO spip_documents (id_vignette, id_type, date, fichier, taille, mode) ".
-			"VALUES ('0', '$id_type', NOW(), '$lien_fichier', '$taille', 'document')";
+	$req = "INSERT INTO spip_documents (id_vignette, extension, date, fichier, taille, mode) ".
+			"VALUES ('0', '$extension', NOW(), '$lien_fichier', '$taille', 'document')";
 	$result = sql_query($req);
 	$id_document = mysql_insert_id();
 	

@@ -1,7 +1,7 @@
 <plugin>
 	<nom>DW2 pour SPIP 2.0</nom>
 	<auteur>scoty@koakidi.com</auteur>
-	<version>3.02</version>
+	<version>3.03</version>
 	<etat>test</etat>
 	<description>
 		<multi>
@@ -16,6 +16,7 @@
 	<lien>
 		[Documentation (fr)->http://www.koakidi.com/rub_aide_dw2.php]
 	</lien>
+	<install>base/dw2_upgrade.php</install>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
@@ -34,4 +35,17 @@
 		<nom>taches_generales_cron</nom>
 		<inclure>dw2_pipe.php</inclure>
 	</pipeline>
+	<!-- declarations de tables suite au commit 11997 -->
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/dw2_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/dw2_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/dw2_tables.php</inclure>
+	</pipeline>	
 </plugin>

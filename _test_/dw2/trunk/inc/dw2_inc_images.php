@@ -22,10 +22,10 @@ function tableau_doc_images()
 	{
 	// requete doc type jpg, png, gif
 	// ... avec 'vignette' (miniature)
-	$result = sql_select("sd.id_document, sd.id_vignette, sd.id_type, sd.fichier, sd.largeur, 
+	$result = sql_select("sd.id_document, sd.id_vignette, sd.extension, sd.fichier, sd.largeur, 
 			sd.hauteur, sd.distant, sd.mode, IF (dd.id_document,'oui','non') AS dw_in ",
 			"spip_documents sd LEFT JOIN spip_dw2_doc dd ON sd.id_document=dd.id_document",
-			"sd.id_type BETWEEN 1 AND 3 AND sd.id_vignette !='0' ");
+			"sd.extension IN ('jpg','png','gif') AND sd.id_vignette !='0' ");
 
 	$tab_small=array(); // h2/4/06	
 	$tab_spipimg=array();
@@ -41,7 +41,8 @@ function tableau_doc_images()
 		$tab_spipimg[$iddoc]['fichier']=$fichier;
 		$tab_spipimg[$iddoc]['idvign']=$idvign;
 		$tab_spipimg[$iddoc]['urlfichier']=$urlfichier;
-		$tab_spipimg[$iddoc]['id_type']=$row['id_type'];
+		//$tab_spipimg[$iddoc]['id_type']=$row['id_type'];
+		$tab_spipimg[$iddoc]['extension']=$row['extension'];
 		$tab_spipimg[$iddoc]['largeur']=$row['largeur'];
 		$tab_spipimg[$iddoc]['hauteur']=$row['hauteur'];
 		$tab_spipimg[$iddoc]['dw_in']=$row['dw_in'];
@@ -55,10 +56,10 @@ function tableau_doc_images()
 	reset($tab_small);
 	
 	// chercher doc pas dans tab_small (sans miniature)
-	$result2 = sql_select("sd.id_document, sd.id_vignette, sd.id_type, sd.fichier, sd.largeur, 
+	$result2 = sql_select("sd.id_document, sd.id_vignette, sd.extension, sd.fichier, sd.largeur, 
 			sd.hauteur, sd.distant, sd.mode, IF (dd.id_document,'oui','non') AS dw_in ",
 			"spip_documents sd LEFT JOIN spip_dw2_doc dd ON sd.id_document=dd.id_document",
-			"sd.id_type BETWEEN 1 AND 3");	
+			"sd.extension IN ('jpg','png','gif')");	
 	while ($row2=sql_fetch($result2))
 		{
 		$iddoc=$row2['id_document'];
@@ -72,7 +73,8 @@ function tableau_doc_images()
 			$tab_spipimg[$iddoc]['id_document']=$iddoc;
 			$tab_spipimg[$iddoc]['idvign']=$idvign;
 			$tab_spipimg[$iddoc]['urlfichier']=$urlfichier;
-			$tab_spipimg[$iddoc]['id_type']=$row2['id_type'];
+			//$tab_spipimg[$iddoc]['id_type']=$row2['id_type'];
+			$tab_spipimg[$iddoc]['extension']=$row2['extension'];
 			$tab_spipimg[$iddoc]['largeur']=$row2['largeur'];
 			$tab_spipimg[$iddoc]['hauteur']=$row2['hauteur'];
 			$tab_spipimg[$iddoc]['dw_in']=$row2['dw_in'];
@@ -353,7 +355,7 @@ if($hors_dw) {
 			// traitement vignette affichee
 			//
 			// prepa fonction spip, suivante ..
-			$document=array('id_type'=> $id_type, 'id_vignette' => $idvign, 'fichier'=>$urlfichier);
+			$document=array('extension'=> $extension, 'id_vignette' => $idvign, 'fichier'=>$urlfichier);
 			if($idvign>'0')
 				{
 				$logo_idvign = "vignette-16.png";
@@ -367,7 +369,7 @@ if($hors_dw) {
 				}
 
 
-			$bouton = bouton_block_invisible("bout$id_document");
+			$bouton = bouton_block_depliable(_T("info_sans_titre"),false,"bout$id_document");
 			$ifond = $ifond ^ 1;
 			$couleur = ($ifond) ? '#ffffff' : $couleur_claire;
 
@@ -399,7 +401,7 @@ if($hors_dw) {
 				echo "<tr bgcolor='$couleur'><td colspan='5' class='verdana1'>\n";
 				
 				// deroulant
-				echo debut_block_invisible("bout$id_document");
+				echo debut_block_depliable(false,"bout$id_document"); // block invisible
 				echo "<div style='float:left; padding-right:6px;'>".$aff_vignette."</div>\n";
 				echo "<span class='verdana2'>&lt;".$mode."<b>".$id_document."</b>&gt;</span><br>".
 					aff_appart_doc($doctype,$iddoctype);
@@ -448,7 +450,7 @@ if($hors_dw) {
 				echo "</div>\n";
 				
 				// deroulant
-				echo debut_block_invisible("bout$id_document");
+				echo debut_block_depliable(false,"bout$id_document"); // block invisible
 				echo "<div class='verdana2'>\n";
 				echo aff_appart_doc($doctype,$iddoctype);
 				if($idvign>'0')

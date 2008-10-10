@@ -16,12 +16,12 @@ function pointe_page($case_page, $fonction) {
 	$pg_exec = _request('exec');
 	// --> if() : cas de voir la fiche
 	if($fonction) {
-		echo "<br /><img border='0' src='"._DIR_IMG_PACK."fleche-right.png' alt='' />&nbsp;\n".
+		echo "<br /><img style='border:0;' src='"._DIR_IMG_PACK."fleche-right.png' alt='' />&nbsp;\n".
 			"<a href='".generer_url_ecrire($case_page[0])."'>".$fonction."</a>\n";
 	}
 
 	if (in_array($pg_exec,$case_page)) {
-		echo "&nbsp;<img border='0' src='"._DIR_IMG_PACK."fleche-left.png' alt='' />\n";
+		echo "&nbsp;<img style='border:0;' src='"._DIR_IMG_PACK."fleche-left.png' alt='' />\n";
 	}
 	echo "<br />\n";
 }
@@ -112,7 +112,7 @@ function bloc_ico_page($texte, $lien, $icone)
 	{
 	debut_bloc_lien_page();
 	echo "<a href='".$lien."' style='text-decoration:none;'>\n";
-	echo "<img src='".$icone."' border='0' align='absmiddle'><span class='verdana2'><b> ".$texte."</b></span>\n";
+	echo "<img src='".$icone."' style='border:0;vertical-align:middle' alt='' />\n<span class='verdana2'><b> ".$texte."</b></span>\n";
 	echo "</a>\n";
 	fin_bloc();
 	}
@@ -148,8 +148,9 @@ function message_echec_connexion($message_conex) {
 //
 function href_popup_std($chemin, $target)
 	{
-	$href = "\"$chemin\" target=\"$target\" 
-		onclick=\"javascript:window.open(this.href, '$target', 
+	$href = '"$chemin" '. 
+		#target=\"$target\" 
+		"onclick=\"javascript:window.open(this.href, '$target', 
 		'width=540,height=550,menubar=no,scrollbars=yes,resizable=yes'); 
 		$target.focus(); return false; \"";
 	return $href;
@@ -176,7 +177,7 @@ function bloc_popup_outils() {
 	debut_bloc_lien_page();
 	echo "<a href=".href_popup_std($chemin,$target). 
 		"title=\""._T('dw:titre_page_outils')."\" style=\"text-decoration: none;\" >\n
-		<img src='"._DIR_IMG_PACK."administration-24.gif' align='absmiddle' border='0'>\n
+		<img src='"._DIR_IMG_PACK."administration-24.gif' style='vertical-align:middle;border:0' alt='' />\n
 		<span class='verdana2'><b> "._T('dw:outils')."</b></span>\n
 		</a>\n";
 	fin_bloc();
@@ -190,8 +191,8 @@ function bloc_popup_outils() {
 function bloc_ico_aide_ligne()
 	{
 	debut_bloc_lien_page();
-	echo "<a href='http://www.koakidi.com/rub_aide_dw2.php' title='"._T('dw:title_aide_01')."' target='_blank'>\n";
-	echo "<img src='"._DIR_IMG_PACK."racine-24.gif' border='0' align='absmiddle' alt='' />&nbsp;\n";
+	echo "<a href='http://www.koakidi.com/rub_aide_dw2.php' title='"._T('dw:title_aide_01')."' rel='external'>\n";
+	echo "<img src='"._DIR_IMG_PACK."racine-24.gif' style='vertical-align:middle;border:0' alt='' />&nbsp;\n";
 	echo "<span class='verdana2'>"._T('dw:aide')."</span>\n";
 	echo "</a>\n";
 	fin_bloc();
@@ -200,22 +201,22 @@ function bloc_ico_aide_ligne()
 
 
 // bouton fonction  - Fiche Catalogue - liste serveur
-function bloc_minibout_act($title, $lien, $icone, $idtype, $id_image) {
+function bloc_minibout_act($title, $lien, $icone, $extension, $id_image) {
 	if (!empty($icone)) {
 		// affiche une icone (img_pack)
 		echo "<div style='float:right; margin:0px 0px 1px 2px; text-align:center;' class='icone36' title='".$title."'>\n";
 		echo "<a href='".$lien."'>\n";
-		echo "<img src='".$icone."' border='0' valign='absmiddle' alt='' />\n";
+		echo "<img src='".$icone."' style='vertical-align:middle;border:0' alt='' />\n";
 		echo "</a></div>\n";
 	}
 	else {
 		// affiche une vignette Doc ou vignette par defaut
 		include_spip("inc/documents");
-		$result=sql_query("SELECT fichier FROM spip_documents WHERE id_vignette=$id_image");
+		$result=sql_select("fichier","spip_documents","id_vignette=$id_image");
 		$row=sql_fetch($result);
 		$fichier=$row['fichier'];
 		
-		$document=array('id_type'=>$idtype, 'id_vignette'=>$id_image, 'fichier'=>$fichier);
+		$document=array('extension'=>$extension, 'id_vignette'=>$id_image, 'fichier'=>$fichier);
 
 		$aff_vignette = document_et_vignette($document, $lien, true);
 		echo "<div style='float:right; margin:0px 0px 1px 2px; text-align:center;' class='icone36' title='".$title."'>\n";
@@ -255,9 +256,9 @@ function double_colonne($array, $chaine_titre, $icone_item, $info_supp)
 {
 global $couleur_claire;
 	if ($icone_item)
-		{ $ico_itm = "<img src='"._DIR_IMG_DW2.$icone_item."' border='0' align='absmiddle' alt='' />\n"; }
+		{ $ico_itm = "<img src='"._DIR_IMG_DW2.$icone_item."' style='vertical-align:middle;border:0' alt='' />\n"; }
 	else
-		{ $ico_itm = "<img src='"._DIR_IMG_PACK."rien.gif' border='0' alt='' />\n"; }
+		{ $ico_itm = "<img src='"._DIR_IMG_PACK."rien.gif' style='border:0' alt='' />\n"; }
 
 	// Prepa affichage tableau : listing fichiers (/ 2 coll.)
 	ksort($array);
@@ -363,7 +364,7 @@ function formulaire_periode($periode1,$periode2,$annee_select,$retour) {
 // menu fonction principales telech
 function menu_administration_telech() {
 	echo debut_cadre_enfonce(_DIR_IMG_DW2."telech.gif",true);
-		echo "<div class='verdana2' style='padding:4px;'><b>"._T('dw:administration')."<br />\n";
+		echo "<div class='verdana2' style='padding:4px;'><div style='font-weight:bold;'>"._T('dw:administration')."<br />\n";
 			pointe_page(array("dw2_admin"), _T('dw:accueil'));
 			pointe_page(array("dw2_catalogue"), _T('dw:catalogue'));
 			pointe_page(array("dw2_stats","dw2_stats_prd"), _T('dw:statistiques'));
@@ -373,7 +374,7 @@ function menu_administration_telech() {
 			pointe_page(array("dw2_categories"), _T('dw:categories'));
 			pointe_page(array("dw2_ajouts","dw2_ajouts_det","dw2_images"), _T('dw:ajout_doc'));
 			pointe_page(array("dw2_archives"), _T('dw:archives'));
-		echo "</b></div>\n";
+		echo "</div></div>\n";
 	echo fin_cadre_enfonce(true);
 }
 
@@ -382,13 +383,13 @@ function menu_voir_fiche_telech() {
 	echo debut_cadre_enfonce(_DIR_IMG_DW2."fiche_doc.gif",true);
 		echo "<div class='verdana2'>\n";
 		echo "<form action='".generer_url_ecrire("dw2_modif")."' method='post'>\n";
-		echo "<b>"._T('dw:voir_fiche')."</b> : \n";
+		echo "<p style='margin:2px;'><b>"._T('dw:voir_fiche')."</b> : \n";
 		echo "<input type='text' name='id' size='2' maxlength='10' onClick=\"setvisibility('voir_fiche','visible');\" class='fondl' />&nbsp;&nbsp;\n";
-		echo "<span  class='visible_au_chargement' id='voir_fiche'>\n";
-		echo "<input type='image' src='"._DIR_IMG_DW2."ok_fich.gif' align='top' title='"._T('bouton_valider')."' />\n";
+		echo "<span class='visible_au_chargement' id='voir_fiche'>\n";
+		echo "<input type='image' src='"._DIR_IMG_DW2."ok_fich.gif' style='vertical-align:top;' title='"._T('bouton_valider')."' />\n";
 		echo "</span>\n";
 		pointe_page(array("dw2_modif"), "");
-		echo "</form></div>\n";
+		echo "</p></form></div>\n";
 	echo fin_cadre_enfonce(true);
 }
 

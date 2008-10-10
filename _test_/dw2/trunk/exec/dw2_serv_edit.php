@@ -195,21 +195,16 @@ echo debut_cadre_relief(_DIR_IMG_DW2."fich_serv.gif",true);
 	$invisible = $id_serv;
 	debut_boite_filet('a','left');
 	if ($invisible)
-		//echo bouton_block_invisible('mess_alert');
-			bouton_block_depliable(_T("info_sans_titre"),false,'mess_alert');
-		
+			bouton_block_depliable(_T("info_sans_titre"),false,'mess_alert'); // bloc invisible
 	else 
-		//echo bouton_block_visible('mess_alert');
-			bouton_block_depliable(_T("info_sans_titre"),true,'mess_alert');
+			bouton_block_depliable(_T("info_sans_titre"),true,'mess_alert'); // bloc visible
 		
 	echo "<span class='verdana3'> <b> [ "._T('dw:attention_info')." ]</b></span>";
 	
 	if ($invisible)
-		//echo debut_block_invisible('mess_alert');
-			debut_block_depliable(false,'mess_alert');
+			debut_block_depliable(false,'mess_alert'); // block invisible
 	else
-		//echo debut_block_visible('mess_alert');
-			debut_block_depliable(true,'mess_alert');
+			debut_block_depliable(true,'mess_alert'); // b;lock visible
 		
 	echo "<span class='verdana2'>".$texte_intro."</span><br />\n";
 	echo fin_block();
@@ -280,7 +275,7 @@ echo fin_cadre_relief(true);
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
 	echo "<div style='clear:both;'></div>\n";
 
-	echo fin_page();
+	echo fin_gauche().fin_page();
 } // fin exec_
 
 ?>

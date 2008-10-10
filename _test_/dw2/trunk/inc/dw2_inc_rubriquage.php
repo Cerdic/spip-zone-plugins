@@ -20,7 +20,7 @@ function sous_enfants_rubrique($collection2){
 	$result3 = sql_query("SELECT * FROM spip_rubriques WHERE id_parent='$collection2' ORDER BY 0+titre,titre");
 
 	if (!sql_count($result3)) return '';
-	$retour = debut_block_invisible("enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";
+	$retour = debut_block_depliable(false,"enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n"; // block invisible
 	while($row=sql_fetch($result3)){
 			$id_rubrique2=$row['id_rubrique'];
 			$id_parent2=$row['id_parent'];
@@ -81,7 +81,7 @@ function enfants_rubrique($collection){
 		$les_enfants .= "<div class='enfants'>" .
 			debut_cadre_sous_rub(($id_parent ? "rubrique-24.gif" : "secteur-24.gif"), true) .
 		  (is_string($logo) ? $logo : '') .
-		  (!$les_sous_enfants ? "" : bouton_block_invisible("enfants$id_rubrique")) .
+		  (!$les_sous_enfants ? "" : bouton_block_depliable(_T("info_sans_titre"),false,"enfants$id_rubrique")) .
 		  (!acces_restreint_rubrique($id_rubrique) ? "" :
 		   http_img_pack("admin-12.gif", '', " width='12' height='12'", _T('image_administrer_rubrique'))) .
 		  " <span dir='$lang_dir'><b><a href='" . 

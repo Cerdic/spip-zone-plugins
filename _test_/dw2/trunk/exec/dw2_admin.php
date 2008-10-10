@@ -150,8 +150,8 @@ echo fin_cadre_relief(true);
 			
 			echo "<div class='boite_doc_suppr verdana3'>\n".
 				"<b>".$nom."</b>&nbsp;\n".
+				"<img src='"._DIR_IMG_DW2."fiche_doc-15.gif' style='border:0;vertical-align: middle;' title='"._T('dw:voir_fiche')."'>\n".
 				"<a href='".generer_url_ecrire("dw2_modif", "id=".$row2['id_document'])."'>\n".
-				"<img src='"._DIR_IMG_DW2."fiche_doc-15.gif' border='0' align='absmiddle' title='"._T('dw:voir_fiche')."'>\n".
 				"</a></div>\n";
 			// faire tableau des Docs Non Spip
 			$num_arch[]=$row2['id_document'];
@@ -186,7 +186,7 @@ echo fin_cadre_relief(true);
 	$order="";
 	if ($mode_enregistre_doc=='manuel')
 		{	
-			$where = " AND sd.id_type > '3' AND dw.id_document IS NULL";
+			$where = " AND sd.extension NOT IN ('png', 'jpg', gif') AND dw.id_document IS NULL";
 			$order = "titre";
 		//$query3.="AND sd.id_type > '3' AND dw.id_document IS NULL ORDER BY titre"; 
 		}
@@ -366,6 +366,6 @@ echo fin_cadre_relief(true);
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
 	echo "<div style='clear:both;'></div>";
 
-	echo fin_page();
+	echo fin_gauche().fin_page();
 } // fin exec_
 ?>

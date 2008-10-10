@@ -54,7 +54,7 @@ $dl=($vl+0);
 
 
 //Nbr Total de Doc ...(Docs actifs
-$rcc_nligne=sql_query("SELECT nom, id_document FROM spip_dw2_doc WHERE statut='actif' ORDER BY nom");
+$rcc_nligne=sql_select("nom, id_document","spip_dw2_doc","statut='actif'","","nom");
 $nligne=sql_count($rcc_nligne);
 	
 	
@@ -104,18 +104,20 @@ if (isset($wltt)) {
 
 
 // requete principale du catalogue
-$quer="SELECT d.id_document, DATE_FORMAT(d.dateur,'%d/%m/%Y - %H:%i') AS datetel, 
+
+$result=sql_select("d.id_document, DATE_FORMAT(d.dateur,'%d/%m/%Y - %H:%i') AS datetel, 
 		DATE_FORMAT(d.date_crea,'%d/%m/%Y') AS datecrea, 
 		d.nom, d.url, d.total, d.doctype, d.id_doctype, d.categorie, d.heberge, d.id_serveur, 
 		TO_DAYS(NOW()) - TO_DAYS(d.date_crea) AS nbr_jour, 
 		ROUND(d.total/(TO_DAYS(NOW()) - TO_DAYS(d.date_crea)),2) AS moyj, 
-		s.taille, s.id_type, s.distant, id_vignette 
-		FROM spip_dw2_doc AS d 
-		LEFT JOIN spip_documents AS s ON d.id_document=s.id_document 
-		WHERE d.statut='actif' $where_ltt 
-		ORDER BY $orderby LIMIT $dl,$nbr_lignes_tableau";
+		s.taille, s.extension, s.distant, s.id_vignette",
+		"spip_dw2_doc AS d 
+		LEFT JOIN spip_documents AS s ON d.id_document=s.id_document",
+		"d.statut='actif' $where_ltt ",
+		"",
+		$orderby,
+		"$dl,$nbr_lignes_tableau");
 		
-$result=sql_query($quer);
 $nbliens=sql_count($result);
 
 
@@ -261,7 +263,7 @@ if ($nbliens==0) {
 	echo "</td></tr>\n";
 
 
-	while ($a_row=spip_fetch_array($result))
+	while ($a_row=sql_fetch($result))
 		{
 		$ifond = $ifond ^ 1;
 		$couleur = ($ifond) ? '#FFFFFF' : $couleur_claire;
@@ -282,7 +284,8 @@ if ($nbliens==0) {
 		$nbrjour=$a_row['nbr_jour'];
 		$moyj=$a_row['moyj'];
 		$statut=$a_row['statut'];
-		$idtype=$a_row['id_type'];
+		//$idtype=$a_row['id_type'];
+		$extension=$a_row['extension'];
 		$t_s=$a_row['taille'];
 		$distant=$a_row['distant'];
 		$id_vignette=$a_row['id_vignette'];
@@ -299,7 +302,7 @@ if ($nbliens==0) {
 
 		// ligne du tableau
 		//
-		$bouton = bouton_block_invisible("bout$iddoc");
+		$bouton = bouton_block_depliable(_T("info_sans_titre"),false,"bout$iddoc"); // bloc invisible
 		echo "<tr bgcolor='$couleur'>\n";
 		echo "<td width=8%>$bouton ".origine_heberge($heberge)."</td>\n";
 		echo "<td width=50%><div class='verdana2'>\n";
@@ -312,7 +315,7 @@ if ($nbliens==0) {
 		
 		// Déroulant : fiche du Lien
 		echo "<tr bgcolor='$couleur'><td colspan='4'><span class='verdana1'>\n";
-		echo debut_block_invisible("bout$iddoc");
+		echo debut_block_depliable(false,"bout$iddoc"); // block invisible
 		
 		conten_bloc_bout();
 			// bouton "modifier"
@@ -328,7 +331,7 @@ if ($nbliens==0) {
 					{ $chem_telech = $heberge.$url; }
 				
 				$id_image = ($id_vignette=='0') ? '0' : $id_vignette;
-				bloc_minibout_act(_T('dw:telech_fichier'), "$chem_telech", "", $idtype,$id_image);
+				bloc_minibout_act(_T('dw:telech_fichier'), "$chem_telech", "", $extension,$id_image);
 			}
 		fin_bloc();
 
@@ -353,6 +356,6 @@ fin_cadre_relief();
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
 	echo "<div style='clear:both;'></div>\n";
 
-	echo fin_page();
+	echo fin_gauche().fin_page();
 } // fin exec_
 ?>

@@ -152,19 +152,15 @@ echo debut_cadre_trait_couleur(_DIR_IMG_PACK."base-24.gif", true, "", _T('dw:sau
 
 		$invisible = $jours_obso;
 		if ($invisible)
-			//echo bouton_block_invisible('param');
-			bouton_block_depliable(_T("info_sans_titre"),false,'param');
+			bouton_block_depliable(_T("info_sans_titre"),false,'param'); // bloc invisilble
 		else 
-			//echo bouton_block_visible('param');
-			bouton_block_depliable(_T("info_sans_titre"),true,'param');
+			bouton_block_depliable(_T("info_sans_titre"),true,'param'); // bloc visible
 		echo "<span class='verdana2'>&nbsp;&nbsp;"._T('dw:attention_info')."</span><br />\n";
 		
 		if ($invisible)
-			//echo debut_block_invisible('param');
-			debut_block_depliable(false,'param');
+			debut_block_depliable(false,'param'); // blok invisible
 		else
-			//echo debut_block_visible('param');
-			debut_block_depliable(true,'param');
+			debut_block_depliable(true,'param'); //block visible
 
 			echo "<div style='margin-left:60px;' class='verdana2'>"._T('dw:info_save_param')."</div>\n";
 		echo fin_block();
@@ -179,7 +175,7 @@ echo debut_cadre_trait_couleur(_DIR_IMG_PACK."base-24.gif", true, "", _T('dw:sau
 	// envoi fichier save par email ?
 	debut_boite_filet("a");
 	echo "<b>"._T('dw:envoi_sauvegarde_mail')."</b><br />\n";
-	echo "<input name='force_email' type='radio' value='' checked />"._T('dw:non')."<br />\n";
+	echo "<input name='force_email' type='radio' value='' checked='checked' />"._T('dw:non')."<br />\n";
 	echo "<input name='force_email' type='radio' value='1' />"._T('dw:au_webmaster')." ".$defaut_email."<br />\n";
 	echo "<input name='force_email' type='radio' value='2' />"._T('dw:cette_adresse')."&nbsp;\n";
 	echo "<input type='text' name='ponct_email' value='$ponct_email' size='30' class='fondl' /><br />\n";
@@ -195,7 +191,7 @@ echo debut_cadre_trait_couleur(_DIR_IMG_PACK."base-24.gif", true, "", _T('dw:sau
 	// compression gz ?
 	debut_boite_filet("a");
 	echo "<b>"._T('dw:compression_fichier')."</b><br />\n";
-	echo "<input name='gz' type='radio' value='".true."' checked />\n".
+	echo "<input name='gz' type='radio' value='".true."' checked='checked' />\n".
 				$rep_bases.$prefixe_save.$base."_".date("ymd")."<b>.gz</b>";
 	echo "<br />\n";
 	echo "<input name='gz' type='radio' value='".false."' />\n".
@@ -260,6 +256,6 @@ echo fin_cadre_relief(true);
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
 	echo "<div style='clear:both;'></div>\n";
 
-	echo fin_page();
+	echo fin_gauche().fin_page();
 } // fin exec_
 ?>

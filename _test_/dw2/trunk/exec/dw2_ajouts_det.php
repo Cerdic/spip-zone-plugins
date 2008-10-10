@@ -101,11 +101,11 @@ foreach($_POST as $k => $v) { $$k=$v; }
 	}
 	
 	// type : jpg-png-gif, autres types ou tous les types
-	if(!$tp) { $type="AND sd.id_type <=3"; $tp="img"; }
+	if(!$tp) { $type="AND sd.extension IN ('jpg', 'png', 'gif')"; $tp="img"; }
 	else {
 		switch ($tp) {
-			case "img": $type="AND sd.id_type <= 3"; break;
-			case "aut": $type="AND sd.id_type > 3"; break;
+			case "img": $type="AND sd.extension IN ('jpg', 'png', 'gif')"; break;
+			case "aut": $type="AND sd.extension  NOT IN ('jpg', 'png', 'gif')"; break;
 			case "tous": $type=""; break;
 		}
 	}
@@ -465,7 +465,7 @@ echo debut_droite('',true);
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
 	echo "<div style='clear:both;'></div>";
 
-	echo fin_page();
+	echo fin_gauche().fin_page();
 } // fin exec_
 
 ?>

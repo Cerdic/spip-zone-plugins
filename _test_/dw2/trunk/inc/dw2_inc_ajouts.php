@@ -60,8 +60,7 @@ function ajout_doc_catalogue($doc,$typecat='', $retour='') {
 
 	// si en statut 'publie' OK .. on enregistre
 	if($origine[2]=='1') {
-		$quet="SELECT id_document, fichier, distant FROM spip_documents WHERE id_document=$doc";
-		$resul=sql_query($quet);
+		$resul=sql_select("id_document, fichier, distant","spip_documents","id_document=$doc");
 		$ro=sql_fetch($resul);
 		$distant=$ro['distant'];
 		$id_doc=$ro['id_document'];
@@ -76,8 +75,7 @@ function ajout_doc_catalogue($doc,$typecat='', $retour='') {
 		$nomfichier=substr(strrchr($url,'/'), 1);
 			
 		// trouver categorie
-		$req_cat="SELECT id_secteur, id_rubrique FROM spip_".$doctype."s WHERE id_".$doctype."=".$iddoctype."";
-		$rs_cat=sql_query($req_cat);
+		$rs_cat=sql_select("id_secteur, id_rubrique","spip_".$doctype."s","id_".$doctype."=".$iddoctype);
 		$ro_cat=sql_fetch($rs_cat);
 		$idsect=$ro_cat['id_secteur'];
 		$idrub=$ro_cat['id_rubrique'];
@@ -88,13 +86,27 @@ function ajout_doc_catalogue($doc,$typecat='', $retour='') {
 			{ $class_cat=$idrub; }
 			
 		// enregistre le Doc
-		sql_query("INSERT INTO spip_dw2_doc (id_document, nom, url, total, dateur, doctype, id_doctype, categorie, date_crea) 
-			VALUES('$id_doc','$nomfichier','$url','0','','$doctype','$iddoctype','".select_categorie_doc($class_cat)."',NOW())");
+		//sql_query("INSERT INTO spip_dw2_doc (id_document, nom, url, total, dateur, doctype, id_doctype, categorie, date_crea) 
+		//	VALUES('$id_doc','$nomfichier','$url','0','','$doctype','$iddoctype','".select_categorie_doc($class_cat)."',NOW())");
+
+		sql_insertq("spip_dw2_doc", array(
+								'id_document' => $id_doc, 
+								'nom' => $nomfichier, 
+								'url' => $url,
+								//'total' => '0',
+								//'dateur' => '',
+								'doctype' => $doctype,
+								'id_doctype' => $iddoctype,
+								'categorie' => select_categorie_doc($class_cat),
+								'heberge' => $herberge ? $heberge : 'local',
+								'date_crea' => "NOW()",
+								) );
 	}
+	/* dans linsertq
 	if($heberge) {
 		sql_query("UPDATE spip_dw2_doc SET heberge='$heberge' WHERE id_document = $id_doc");
 	}
-		
+	*/	
 	if ($retour=="oui") { return $nomfichier; }
 }
 
@@ -105,15 +117,15 @@ function ajout_doc_catalogue($doc,$typecat='', $retour='') {
 # rev. h.02/02/07 ( ++ criteres d'enregistrement des docs)
 function calc_inclus_auto_doc($arg='',$typecat) {
 	if($arg=='') {
-		$where="AND sd.id_type > '3'";
+		$where="AND sd.extension NOT IN ('jpg','png','gif') ";
 	}
 	else {
 		$crit=explode(',',$arg);
 		if(count($crit)==1) {
-			$where="AND (sd.id_type > '3' OR sd.id_type = '$arg')";
+			$where="AND (sd.extension NOT IN ('jpg','png','gif') OR sd.extension = '$arg')";
 		}
 		elseif(count($crit)==2) {
-			$where="AND (sd.id_type > '3' OR sd.id_type IN ('$crit[0]','$crit[1]'))";
+			$where="AND (sd.extension NOT IN ('jpg','png','gif') OR sd.extension IN ('$crit[0]','$crit[1]'))";
 		}
 		else {
 			$where="";

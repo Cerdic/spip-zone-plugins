@@ -155,10 +155,11 @@ fin_bloc();
 	// si en mode inclus manuel :
 	// on regarde les documents dans spip_documents
 	// qui ne sont pas des type 1, 2 ou 3 (jpg,png,gif) et pas encore dans spip_dw2_doc
+	// chryjs 9/10/8 id_type n'existe plus, remplacé par extension
 	if($mode_enregistre_doc=='manuel') {
 		$result=sql_select("sd.id_document, sd.fichier ",
 							"spip_documents sd LEFT JOIN spip_dw2_doc dw ON sd.id_document = dw.id_document ",
-							"sd.mode = 'document' AND sd.id_type > '3' AND dw.id_document IS NULL",
+							"sd.mode = 'document' AND sd.extension NOT IN ('jpg', 'png', 'gif') AND dw.id_document IS NULL",
 							"", // group by
 							"titre"); // order by
 		$nbres=sql_count($result);
@@ -245,6 +246,6 @@ echo fin_cadre_relief(true);
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
 	echo "<div style='clear:both;'></div>";
 
-	echo fin_page();
+	echo fin_gauche().fin_page();
 } // fin exec_
 ?>

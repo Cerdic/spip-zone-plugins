@@ -213,7 +213,7 @@ function aff_appart_doc($doctype, $iddoctype) {
 //
 function liste_documents_art_rub($id_objet,$objet,$mode,$type) {
 	
-	$q=sql_select("sdo.id_document, sd.id_type, sd.titre, sd.descriptif, sd.fichier, sd.taille, sd.mode",
+	$q=sql_select("sdo.id_document, sd.extension, sd.titre, sd.descriptif, sd.fichier, sd.taille, sd.mode",
 					"spip_documents_".$objet."s sdo LEFT JOIN spip_documents sd ON sdo.id_document = sd.id_document ",
 					"sdo.id_".$objet." = $id_objet $type $mode");
 	$ret_lesdocs=array();
@@ -227,7 +227,7 @@ function liste_documents_art_rub($id_objet,$objet,$mode,$type) {
 		$nomfichier = substr(strrchr($r['fichier'],'/'), 1);
 		
 		// {{ comment. de DEV. SPIP ==> ".. a supprimer avec spip_types_documents .."" }}
-		$extension = sql_fetch(sql_query("SELECT extension FROM spip_types_documents WHERE id_type=".$r['id_type']));
+		$extension = sql_fetch(sql_query("SELECT extension FROM spip_types_documents WHERE extension=".$r['extension']));
 		$extension = $extension['extension'];
 		
 		$ret_lesdocs[$id_doc]['fichier']=$nomfichier;

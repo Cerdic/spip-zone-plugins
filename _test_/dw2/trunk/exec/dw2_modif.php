@@ -54,9 +54,9 @@ foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
 // prepa fiche
 //
 $result=sql_select("*, dd.id_document AS id_dw, DATE_FORMAT(dd.date_crea,'%d/%m/%Y') AS datecrea, 
-		sd.taille, sd.titre, sd.descriptif, sd.id_type, sd.id_vignette, sd.distant, 
+		sd.taille, sd.titre, sd.descriptif, sd.extension, sd.id_vignette, sd.distant, 
 		TO_DAYS(NOW()) - TO_DAYS(dd.date_crea) AS nbr_jour ",
-		"spip_dw2_doc dd LEFT JOIN spip_documents sd ON dd.id_document=sd.id_document"
+		"spip_dw2_doc dd LEFT JOIN spip_documents sd ON dd.id_document=sd.id_document",
 		"dd.id_document = $id");
 $okres=sql_count($result);
 if($okres==0)
@@ -85,7 +85,7 @@ while ($row=sql_fetch($result))
 	$tail_fich = $row['taille'];
 	$titre_doc = $row['titre'];
 	$desc_doc = $row['descriptif'];
-	$idtype = $row['id_type'];
+	$extension = $row['extension'];
 	$id_vignette = $row['id_vignette'];
 	$distant = $row['distant'];
 
@@ -305,7 +305,7 @@ echo debut_droite('',true);
 		if($heberge=='distant') { $chem_telech = $url; }
 		else if ($heberge=='local') { $chem_telech = "..".$url; }
 		else { $chem_telech = $heberge.$url; }
-		bloc_minibout_act(_T('dw:telech_fichier'), "$chem_telech", "", $idtype, $id_image);
+		bloc_minibout_act(_T('dw:telech_fichier'), "$chem_telech", "", $extension, $id_image);
 	}
 	fin_bloc();
 
@@ -386,16 +386,14 @@ echo debut_droite('',true);
 		// avertissement
 		debut_boite_filet("a");
 		if ($invisible)
-			//echo bouton_block_invisible('alert');
-			bouton_block_depliable(_T("info_sans_titre"),false,'alert');
+			bouton_block_depliable(_T("info_sans_titre"),false,'alert'); // bloc invisible
 		else 
-			//echo bouton_block_visible('mess_alert');
 			bouton_block_depliable(_T("info_sans_titre"),true,'mess_alert');
 			
 		echo "&nbsp;<span class='verdana2'><b>[ "._T('dw:attention_info')." ]</b></span>";
 		
 		if ($invisible)
-			echo debut_block_depliable(false'alert');
+			echo debut_block_depliable(false,'alert');
 		else
 			echo debut_block_depliable(true,'mess_alert');
 		
@@ -408,19 +406,19 @@ echo debut_droite('',true);
 
 		echo "<form action='".generer_url_action("dw2actions", "arg=deplacerdocument-".$iddoc)."' method='post'>\n";
 		echo _T('dw:destination_doc')."&nbsp;";
-		echo "<input type='radio' name='new_doctype' value='article' checked='checked'> "._T('dw:article')."&nbsp;&nbsp;&nbsp;".
-			"<input type='radio' name='new_doctype' value='rubrique' > "._T('dw:rubrique')." - "._T('dw:num_dblpt');
-		echo "<input type='text' name='new_iddoctype' size='4' maxlength='21' onClick=\"setvisibility('valider_iddoctype','visible');\" class='fondf'>";
-		echo "<input type='hidden' name='anc_doctype' value='".$doctype."'>\n";
-		echo "<span  class='visible_au_chargement' id='valider_iddoctype'>";
-		echo "<input type='submit' value="._T('dw:modifier')." class='fondo'>\n";
-		echo "</span>";
+		echo "<input type='radio' name='new_doctype' value='article' checked='checked' /> "._T('dw:article')."&nbsp;&nbsp;&nbsp;\n".
+			"<input type='radio' name='new_doctype' value='rubrique' />\n "._T('dw:rubrique')." - "._T('dw:num_dblpt');
+		echo "<input type='text' name='new_iddoctype' size='4' maxlength='21' onClick=\"setvisibility('valider_iddoctype','visible');\" class='fondf' />\n";
+		echo "<input type='hidden' name='anc_doctype' value='".$doctype."' />\n";
+		echo "<span  class='visible_au_chargement' id='valider_iddoctype' />\n";
+		echo "<input type='submit' value="._T('dw:modifier')." class='fondo' />\n";
+		echo "</span>\n";
 		echo "<input type='hidden' name='redirect' value='".generer_url_ecrire("dw2_modif", "id=".$iddoc)."' />\n";
-		echo "<input type='hidden' name='hash' value='".calculer_action_auteur("dw2actions-deplacerdocument-".$iddoc)."' />";
-		echo "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />";
+		echo "<input type='hidden' name='hash' value='".calculer_action_auteur("dw2actions-deplacerdocument-".$iddoc)."' />\n";
+		echo "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />\n";
 		echo "</form>";
 
-		echo "</div>";
+		echo "</div>\n";
 
 		echo fin_cadre_enfonce(true);
 		}
@@ -431,19 +429,19 @@ echo debut_droite('',true);
 	//
 	// Effacer fiche du catalogue
 	//
-	if(!$tail_fich || $idtype<=3)
+	if(!$tail_fich || $extension=="png" ||$extension=="gif" || $extension=="jpg" )
 		{
 		echo debut_cadre_relief("",true);
 		if ($invisible)
-			echo bouton_block_invisible('efface', "warning-24.gif");
+			echo bouton_block_depliable("warning-24.gif",false,'efface'); // bloc invisible
 		else 
-			echo bouton_block_visible('efface');
+			echo bouton_block_depliable(_T("info_sans_titre"),true,'efface'); // bloc visible
 		echo "<span class='verdana3'><b>&nbsp;&nbsp;"._T('dw:efface_fiche')." </b></span>";
 		
 		if ($invisible)
-			echo debut_block_invisible('efface');
+			echo debut_block_depliable(false,'efface'); // bock invisible
 		else
-			echo debut_block_visible('efface');
+			echo debut_block_depliable(true,'efface'); // block visible
 
 		echo "<div class='boite_filet_c center verdana3'>";
 		echo "<a href='".redirige_action_auteur('dw2actions', "supprimefiche-$iddoc", 'dw2_catalogue')
@@ -463,6 +461,6 @@ echo debut_droite('',true);
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
 	echo "<div style='clear:both;'></div>";
 
-	echo fin_page();
+	echo fin_gauche().fin_page();
 } // fin exec_
 ?>

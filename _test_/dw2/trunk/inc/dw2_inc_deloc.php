@@ -100,8 +100,8 @@ function verif_scheme_host($site_distant) //oemweb.com
 // avec controle doublons fichier dans catalog dw2
 // controle d'extension de fichier ..: dans spip ?
 function bout_select_fichier($fich, $idmf, $iddoc, $id_serv, $site_distant, $repert_distant) {
-	if ($idtype = extens_spipon($fich)) {
-		$form_imp = "<input type='hidden' name='id_type' value='".$idtype."'>\n";
+	if ($extension = extens_spipon($fich)) {
+		$form_imp = "<input type='hidden' name='extension' value='".$extension."'>\n";
 
 		if ($idmf==0) {
 			$form_imp.="<input type='image' src='"._DIR_IMG_DW2."puce-verte.gif' align='absmiddle' />\n";
@@ -125,11 +125,11 @@ function extens_spipon($fichier) {
 		$ext = strtolower($match[1]);
 		
 		if ($ext == 'htm') { $ext = 'html'; }
-		$req = "SELECT extension, id_type FROM spip_types_documents WHERE extension='$ext'";
+		$req = "SELECT extension FROM spip_types_documents WHERE extension='$ext'";
 		$result = sql_query($req);
 		if ($row = @sql_fetch($result)) {
-			$idtype = $row['id_type'];
-			return $idtype;
+			$extension = $row['extension'];
+			return $extension;
 		}
 		return false;
 		

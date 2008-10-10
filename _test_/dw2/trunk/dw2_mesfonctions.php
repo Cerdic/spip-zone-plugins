@@ -18,7 +18,8 @@
 #
 # Les tables de DW2
 #
-include_spip('base/dw2_tables');
+// chryjs 9/10/8 obsolete avec les pipelines du plugin
+//include_spip('base/dw2_tables');
 
 
 #

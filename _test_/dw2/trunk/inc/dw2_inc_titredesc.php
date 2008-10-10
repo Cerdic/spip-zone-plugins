@@ -193,7 +193,7 @@ else
 		$fichier = wordwrap($fichier,30,' ',1);
 
 		
-		$bouton = bouton_block_invisible('bout'.$iddoc);
+		$bouton = bouton_block_depliable(_T("info_sans_titre"),false,'bout'.$iddoc);
 
 		// ligne du tableau
 		echo "<tr><td colspan='5' valign='top'>";
@@ -204,7 +204,7 @@ else
 		echo "<div class='arial2 fondl' style='min-height:12px;'><b> ".$titre_doc."</b></div>\n";
 		echo "<div class='arial2 fondl' style='min-height:12px;'> ".$desc_doc."</div>\n";
 			
-		echo debut_block_invisible('bout'.$iddoc);
+		echo debut_block_depliable(false,'bout'.$iddoc); // block invisible
 			// le formulaire
 			form_titre_desc($iddoc, $titre_doc, $desc_doc, generer_url_ecrire("dw2_outils","outil=titredesc"));
 		echo fin_block();

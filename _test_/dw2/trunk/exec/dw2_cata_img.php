@@ -66,7 +66,7 @@ echo	debut_grand_cadre(true);
 	echo debut_droite('',true);
 
 
-	echo fin_page();
+	echo fin_gauche().fin_page();
 
 }
 ?>

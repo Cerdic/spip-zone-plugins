@@ -476,7 +476,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 					El modo de registro de los documentos debe estar ajustado en "Auto".',
 'txt_install_32' => 'Forcer URL DOCUMENT : ',#n2.13
 'txt_install_33' => 'Cette option permet d\'intercepter les balises #URL_DOCUMENT de vos squelettes 
-					et forcer celles-ci &agrave; produire un lien du type "spip.php?action=dw2_out&id=xxx".
+					et forcer celles-ci &agrave; produire un lien du type "spip.php?action=dw2_out&amp;id=xxx".
 					La balise #URL_DOC_OUT, propre &agrave; DW2, reste toujours fonctionnelle.',#n2.13
 'txt_modif_01' => 'Para corregir el nombre de la ficha, la categor&iacute;a<br />
 					o el valor del contador: pre-incrementaci&oacute;n',
