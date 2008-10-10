@@ -1,0 +1,16 @@
+#SET{total,0}
+<BOUCLE_s0(MOTS){spipicious.id_auteur=#SESSION{id_auteur}}{spipicious.id_article=#ENV{id_objet}}{doublons}> </BOUCLE_s0>
+<BOUCLE_s(MOTS){titre LIKE (#ENV{q})%}{type = #ENV{titre_groupe}}{0,20}{par titre}{doublons}>
+	#TITRE[ - (#DESCRIPTIF|textebrut|couper{20})]|[(#TITRE|textebrut)]|#ID_MOT
+</BOUCLE_s>
+#SET{total,#GET{total}|plus{#COMPTEUR_BOUCLE}}
+</B_s>
+
+<BOUCLE_s1(MOTS){titre LIKE %(#ENV{q})%}{type = #ENV{titre_groupe}}{0,20}{par titre}{doublons}>
+#TITRE[ - (#DESCRIPTIF|textebrut|couper{20})]|[(#TITRE|textebrut)]|#ID_MOT
+</BOUCLE_s1>
+#SET{total,#GET{total}|plus{#COMPTEUR_BOUCLE}}
+</B_s1>
+
+[(#REM) Vraiment on n'a rien trouve ]
+[(#GET{total}|>0|?{'',' '})<:selecteurgenerique:pas_suggestion:>|[(#ENV*{q}|textebrut)]|0]
