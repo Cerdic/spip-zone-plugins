@@ -11,7 +11,7 @@ function echoppe_install($action){
 			//Contrôle du plugin à chaque chargement de la page d'administration
 			// doit retourner true si le plugin est proprement installé et à jour, false sinon
 			$version_echoppe_locale = 0.9;
-			echo "Echoppe DB V".$version_echoppe_installee;
+			//echo "Echoppe DB V".$version_echoppe_installee;
 			//~ echo $version_echoppe_locale.' <-> '.$version_echoppe_installee.'<br />';
 			if ($version_echoppe_installee == $version_echoppe_locale){
 				$test = true; 
@@ -79,11 +79,13 @@ function echoppe_install($action){
 							`spip_echoppe_gammes` ,
 							`spip_echoppe_gammes_produits` ,
 							`spip_echoppe_options` ,
-							`spip_echoppe_options_descriptifs` ,
+							`spip_echoppe_options_descriptions` ,
 							`spip_echoppe_options_valeurs` ,
 							`spip_echoppe_options_valeurs_descriptifs` ,
 							`spip_echoppe_panier` ,
 							`spip_echoppe_prix` ,
+							`spip_echoppe_paniers` ,
+							`spip_echoppe_statuts_paniers` ,
 							`spip_echoppe_produits` ,
 							`spip_echoppe_produits_articles` ,
 							`spip_echoppe_produits_descriptions` ,
