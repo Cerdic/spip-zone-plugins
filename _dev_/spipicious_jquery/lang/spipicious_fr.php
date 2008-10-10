@@ -20,7 +20,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'spipicious' => "Spip.icio.us",
   
 	// T
-	'to' => "avec", 
+	'to' => "avec",
+	'tag_supprime' => 'Vous avez supprim&eacute; le tag :<br />@name@',
+	'tag_ajoute' => 'Vous avez ajout&eacute; un tag:<br />@name@',
+	'tags_ajoutes' => 'Vous avez ajout&eacute; plusieurs tags:<br />@name@',
+	'tag_deja_present' => 'Vous aviez d&eacute;j&agrave; ajout&eacute; ce tag.',
 
 	// V
 	'vos_tags' => 'Vos tags (modification)',  

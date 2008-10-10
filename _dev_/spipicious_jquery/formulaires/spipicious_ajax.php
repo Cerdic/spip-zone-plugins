@@ -64,20 +64,20 @@ function formulaires_spipicious_ajax_traiter($id_objet,$type) {
 				}
 				spip_log("mot toujours utilise : id_mot=".$remove_tag, 'spipicious');
 			}
+			$titre_mot = sql_getfetsel("titre","spip_mots","id_mot=$remove_tag");
 			$invalider = true;
-			$message = 'tags supprimes';
+			$message = _T('spipicious:tag_supprime',array('name'=>$titre_mot));
 		}
 
 	else if(!empty($add_tags)){
 		$tableau_tags = explode(";",$tags);
+		$position = 0;
 		if (is_array($tableau_tags)) {
-			$position = 0;
-			$tag_analysed = array();
 			spip_log($tableau_tags,'spipicious');
 			foreach ($tableau_tags as $k=>$tag) {
 				$tag = trim($tag);
 				if(!empty($tag)){
-					if ($tag!="" && !in_array($tag,$tag_analysed)) {
+					if (!in_array($tag,$tag_analysed)) {
 						$tag = corriger_caracteres($tag);
 		
 						// doit on creer un nouveau tag ?
@@ -99,15 +99,20 @@ function formulaires_spipicious_ajax_traiter($id_objet,$type) {
 					if(!$result_spipicious){
 						sql_insertq("spip_spipicious",array('id_mot' => $id_tag,'id_auteur' => $auteur_id,'id_'.$type.'' => $id_objet, 'position' => $position));
 						spip_log("insertion mot $id_tag in spip_spipicious","spipicious");	
-						$message = 'tags ajoutes';
+						$message = _T('spipicious:tag_ajoute',array('name'=>$tag));
 					}
 					else{
-						$message = 'tags deja present';
+						$message = _T('spipicious:tag_deja_present');
 					}
 					$position++;
 				}
+				$tag_analysed[] = $tag;
 			}
-			$tag_analysed[] = $tag;
+			
+			if($position > 1){
+				$tags = implode('<br />',$tag_analysed);
+				$message = _T('spipicious:tags_ajoutes',array('name'=>$tags));
+			}
 		}	
 	}
 	if($invalider){

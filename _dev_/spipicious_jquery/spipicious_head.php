@@ -59,6 +59,7 @@ function spipicious_insert_head($flux){
 EOS;
 	return $contenu;
 	}
+	else{return $flux;}
 }
 
 ?>
