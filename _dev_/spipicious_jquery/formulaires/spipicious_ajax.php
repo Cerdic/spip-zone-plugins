@@ -4,8 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 function formulaires_spipicious_ajax_charger($id_objet,$type) {
 	$id_type = 'id_'.$type;
-	$valeurs = array($id_type=>$id_objet);
-	spip_log("$id_type = $id_objet");
+	$valeurs = array($id_type=>$id_objet,'type'=>$type,'id_objet'=>$id_objet);
 	return $valeurs;
 }
 

@@ -18,14 +18,18 @@ function spipicious_insert_head($flux){
 				return false;
 			}
 	(function($) {
-	var spipicious = jQuery('input[@name=tags][autocomplete!=off]');
 	var appliquer_selecteur_cherche_mot = function() {
 		var spipicious = jQuery('input[@name=tags][autocomplete!=off]');
+
 		// chercher l'input de saisie
-		var id_article = jQuery("#spipicious_id").val();
+		var id_objet = jQuery("input#spipicious_id").val();
+		var type = jQuery("input#spipicious_type").val();
 		spipicious.autocomplete('$selecteur',
 			{
-				extraParams:{id_article:id_article},
+				extraParams:{
+					id_objet:id_objet,
+					type:type
+				},
 				delay: 200,
 				autofill: false,
 				minChars: 1,

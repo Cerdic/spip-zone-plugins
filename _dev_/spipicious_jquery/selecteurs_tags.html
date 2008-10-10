@@ -10,21 +10,7 @@
 	Eliminer d'abord les mots deja lies a l'article/breve etc.
 	Attention il FAUT passer un de ces 3 id_xxx en parametre
 ]
-[(#SET{type,#CONFIG{spipicious/groupe_mot}})]
+[(#SET{titre_groupe,#CONFIG{spipicious/groupe_mot}})]
 
-#SET{total,0}
 [(#REM) Chercher les mots correspondant a la requete ]
-<BOUCLE_s(MOTS){titre LIKE (#ENV{q})%}{type = #GET{type}}{0,20}{par titre}{doublons}>
-	#TITRE[ - (#DESCRIPTIF|textebrut|couper{20})]|[(#TITRE|textebrut)]|#ID_MOT
-</BOUCLE_s>
-#SET{total,#GET{total}|plus{#COMPTEUR_BOUCLE}}
-</B_s>
-
-<BOUCLE_s1(MOTS){titre LIKE %(#ENV{q})%}{type = #GET{type}}{0,20}{par titre}{doublons}>
-#TITRE[ - (#DESCRIPTIF|textebrut|couper{20})]|[(#TITRE|textebrut)]|#ID_MOT
-</BOUCLE_s1>
-#SET{total,#GET{total}|plus{#COMPTEUR_BOUCLE}}
-</B_s1>
-
-[(#REM) Vraiment on n'a rien trouve ]
-[(#GET{total}|>0|?{'',' '})<:selecteurgenerique:pas_suggestion:>|[(#ENV*{q}|textebrut)]|0]
+[(#INCLURE{fond=selecteurs/tags_#ENV{type}}{id_objet}{q=#ENV{q}}{titre_groupe=#GET{titre_groupe}})]

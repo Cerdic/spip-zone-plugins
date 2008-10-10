@@ -28,6 +28,18 @@ _ Icon from [Wolfgang Bartelme and Chris Messina->http://www.factorycity.net/pro
 		spipicious_options.php
 	</options>
 	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/spipicious.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/spipicious.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/spipicious.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>spipicious_head.php</inclure>
 	</pipeline>
