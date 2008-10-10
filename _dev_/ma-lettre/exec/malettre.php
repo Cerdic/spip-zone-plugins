@@ -2,7 +2,7 @@
 // ---------------------------------------------------------
 //  Ma lettre
 //
-//  version:  0.86 
+//  version:  0.90 
 //  author:   erational <http://www.erational.org>
 //  licence:  GPL
 // ---------------------------------------------------------
@@ -12,6 +12,13 @@
 
 
 include(dirname(__FILE__).'/../inc_malettre.php');
+
+include_spip('inc/presentation');
+include_spip('inc/distant');
+include_spip('inc/affichage');
+include_spip('inc/meta');
+include_spip('inc/filtres');
+include_spip('inc/lang');
 
 // -------------------------------
 // Main: Ma Lettre
@@ -121,6 +128,9 @@ function exec_malettre(){
             
             } else {                       // on cree la lettre avec la requete web
             
+            		include_spip('public/assembler');
+                include_spip('inc/charsets');
+            
                 $add = _request('add');
     						$lettre_title = trim(strip_tags(_request('lettre_title'))); 
                 $lettre_title = str_replace("\"","'", $lettre_title);
@@ -128,13 +138,13 @@ function exec_malettre(){
                             
       					// VERSION HTML
       					$sourceHTML = "";
-								$sourceHTML .= malettre_get_contents($path_url."?page=malettre_header");                             // head
-                $sourceHTML .= malettre_get_contents($path_url."?page=malettre_edito&id_article=$id_article_edito"); // edito
+								$sourceHTML .= malettre_get_contents("malettre_header");                   // head
+                $sourceHTML .= malettre_get_contents("malettre_edito", $id_article_edito); // edito
     						    
                 // radio button
                 if (strlen($add)>0) {   
       							foreach ($add as $value)
-      								    $sourceHTML .= malettre_get_contents($path_url."?page=malettre_item&id_article=$value");
+      								    $sourceHTML .= malettre_get_contents("malettre_item", $value);
       					}  							
       							
                 // csv							
@@ -144,10 +154,10 @@ function exec_malettre(){
       							foreach ($csv as $value2) {								
         						$value = trim($value2);								
           						if ($value!="") 	
-              								$sourceHTML .= malettre_get_contents($path_url."?page=malettre_item&id_article=$value");
+              								$sourceHTML .= malettre_get_contents("malettre_item",$value);
         						}
       					}					
-    						$sourceHTML .= malettre_get_contents($path_url."?page=malettre_footer");                             // foot
+    						$sourceHTML .= malettre_get_contents("malettre_footer");                             // foot
       							
       					// ecriture fichier       											
     						if ($handle = fopen($path_archive_full."/.malettre.html", w)) {						    
@@ -162,15 +172,14 @@ function exec_malettre(){
     						if (!$errorFlag) {               
                     $sourceTXT = "";
                                  
-        						// head							
-        						$sourceTXT = malettre_get_contents($path_url."?page=malettre_txt_header"); // erreur de php5: il faut appeler 2x le fichier               			
-        						$sourceTXT = malettre_get_contents($path_url."?page=malettre_txt_header");               			
-                    $sourceTXT .= malettre_get_contents($path_url."?page=malettre_txt_edito&id_article=$id_article_edito");     // edito         			
+        						// head	     			
+        						$sourceTXT = malettre_get_contents("malettre_txt_header");               			
+                    $sourceTXT .= malettre_get_contents("malettre_txt_edito",$id_article_edito);     // edito         			
         							
         						// radio button
         						if (strlen($add)>0) {
         								foreach ($add as $value) 
-        								  $sourceTXT .=  malettre_get_contents($path_url."?page=malettre_txt_item&id_article=$value"); 
+        								  $sourceTXT .=  malettre_get_contents("malettre_txt_item",$value); 
         						}
       							
         						// csv							
@@ -178,12 +187,12 @@ function exec_malettre(){
         								foreach ($csv as $value2) {								
         								$value = trim($value2);								
         								if ($value!="") 	
-            								$sourceTXT .=  malettre_get_contents($path_url."?page=malettre_txt_item&id_article=$value");                 
+            								$sourceTXT .=  malettre_get_contents("malettre_txt_item",$value);                 
                         }
         						}
         						
                     // foot
-        						$sourceTXT .= malettre_get_contents($path_url."?page=malettre_txt_footer"); 
+        						$sourceTXT .= malettre_get_contents("malettre_txt_footer"); 
         				
                     if ($handle = fopen($path_archive_full."/.malettre_txt.html", w)) { 			
         							fwrite($handle, $sourceTXT);					
