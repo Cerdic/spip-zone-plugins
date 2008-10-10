@@ -38,3 +38,22 @@ function blocs_init() {
 
 // un JS actif replie les blocs invisibles
 document.write('<style type="text/css">div.blocs_invisible{display:none;}</style>');
+
+// une fonction et une variable pour reperer une pagination
+function blocs_get_pagination(url) {
+	tab=url.match(/#pagination([0-9]+)/);
+	if (tab==null) return false;
+	return tab[1];
+}
+var blocs_pagination = blocs_get_pagination(window.location.hash);
+
+/*
+// Si un bloc contient une pagination inseree dans un bloc,
+// code JS a inserer dans votre squelette APRES les appels du Couteau Suisse
+jQuery(document).ready(function() {
+	if(blocs_pagination!==false) {
+		jQuery('div.cs_bloc' + blocs_pagination + ' h4.blocs_titre').eq(0).click();
+		window.location.hash = '#pagination' + blocs_pagination;
+	}
+});
+*/

@@ -12,20 +12,38 @@ Mon bloc depliable        / qui est aussi l'emplacement pour l'Ajax si le fragme
 
 */
 
-function balise_BLOC_TITRE($p) {
+// Un bloc titre numerote : #BLOC_TITRE_NUM{numero} ou #BLOC_TITRE_NUM{numero, fragment}
+function balise_BLOC_TITRE_NUM($p) {
 	// statut binaire : bit1=ajax bit2=titre bit3=resume bit4=debut
-	
 	global  $bloc_stade; /* 2 = ajax; 1 = titre pas d'ajax */
-	
-	if (($nom = interprete_argument_balise(1,$p))!==NULL){
+	if ($fragment = interprete_argument_balise(2, $p)!==NULL){
 		$ajax=' blocs_ajax ';
 		$bloc_stade[]=2;
 	} else {
-		$nom="'javascript:;'";
+		$fragment="'javascript:;'";
 		$ajax="";
 		$bloc_stade[]=1;
 	}
-	$p->code=" '<div class=\"cs_blocs\"><h4 class=\"blocs_titre blocs_replie blocs_click $ajax\"><a href=\"'.".$nom.".'\">' ";
+	$numero = interprete_argument_balise(1, $p);
+	$numero = $numero===NULL?"''":"bloc_is_num($numero)";
+	
+ 	$p->code=" '<div class=\"cs_blocs'.$numero.'\"><h4 class=\"blocs_titre blocs_replie blocs_click $ajax\"><a href=\"'.".$fragment.".'\">' ";
+	return $p;
+}
+
+// Un bloc titre simple : #BLOC_TITRE ou #BLOC_TITRE{fragment}
+function balise_BLOC_TITRE($p) {
+	// statut binaire : bit1=ajax bit2=titre bit3=resume bit4=debut
+	global  $bloc_stade; /* 2 = ajax; 1 = titre pas d'ajax */
+	if (($fragment = interprete_argument_balise(1,$p))!==NULL){
+		$ajax=' blocs_ajax ';
+		$bloc_stade[]=2;
+	} else {
+		$fragment="'javascript:;'";
+		$ajax="";
+		$bloc_stade[]=1;
+	}
+	$p->code=" '<div class=\"cs_blocs\"><h4 class=\"blocs_titre blocs_replie blocs_click $ajax\"><a href=\"'.".$fragment.".'\">' ";
 	return $p;
 }
 
@@ -69,4 +87,8 @@ function balise_BLOC_FIN($p) {
 	return $p;
 }
 
+// fonction pour le calcul de la balise #BLOC_TITRE_NUM
+function bloc_is_num($num) {
+	 return preg_match(',^\s*(\d+)\s*$,', $num, $regs)?" cs_bloc$regs[1]":"''";
+}
 ?>
