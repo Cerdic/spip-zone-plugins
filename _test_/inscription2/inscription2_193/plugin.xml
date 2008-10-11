@@ -27,20 +27,20 @@
 	</fonctions>
 	<pipeline>
 		<nom>header_prive</nom>
-		<inclure>inscription2_ajouter_onglets.php</inclure>
+		<inclure>inscription2_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>affichage_final</nom>
-		<inclure>inscription2_ajouter_onglets.php</inclure>
+		<inclure>inscription2_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouter_boutons</action>
-		<inclure>inscription2_ajouter_onglets.php</inclure>
+		<inclure>inscription2_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>affiche_milieu</nom>
-		<inclure>inscription2_ajouter_onglets.php</inclure>
+		<inclure>inscription2_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="cfg" version="[1.10.1;]" />
 	<necessite id="lib:jquery-validate" src="http://plugins.jquery.com/files/jquery.validate_9.zip" />
