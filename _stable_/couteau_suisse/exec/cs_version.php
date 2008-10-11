@@ -27,10 +27,11 @@ function exec_cs_version_dist() {
 		exit;
 	}
 	$version = _request('version');
+	$force = _request('force')=='oui';
 
-	// pour la version disponible, on regarde toutes les 1h06
+	// pour la version disponible, on regarde toutes les 2h00
 	$maj = isset($GLOBALS['meta']['tweaks_maj'])?unserialize($GLOBALS['meta']['tweaks_maj']):array(0, '');
-	if ($quiet = $maj[1] && (time()-$maj[0] < 4000)) $distant = $maj[1];
+	if (!$force && $maj[1] && (time()-$maj[0] < 2*3600)) $distant = $maj[1];
 	else {
 		include_spip('inc/distant');
 		$distant = recuperer_page(_URL_CS_PLUGIN_XML);

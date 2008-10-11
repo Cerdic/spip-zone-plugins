@@ -38,7 +38,8 @@ function exec_cs_boite_rss_dist() {
 	}
 	$p = '';
 	// on cherche le flux rss toutes les _CS_RSS_UPDATE minutes
-	if(in_array(_request('var_mode'), array('calcul', 'recalcul'))) {
+	$force = _request('force')=='oui';
+	if(!$force) {
 		$lastmodified = @file_exists(_DIR_RSS_TMP)?@filemtime(_DIR_RSS_TMP):0;
 		if (time()-$lastmodified < _CS_RSS_UPDATE) lire_fichier(_DIR_RSS_TMP, $p);
 	}

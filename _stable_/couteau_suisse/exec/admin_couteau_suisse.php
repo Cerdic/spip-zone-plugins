@@ -101,6 +101,7 @@ div.cs_sobre, input.cs_sobre {
 
 </style>
 EOF;
+	$force = in_array(_request('var_mode'), array('calcul', 'recalcul'));
 	echo "<script type=\"text/javascript\"><!--
 
 var cs_selected, cs_descripted;
@@ -216,9 +217,9 @@ if (window.jQuery) jQuery(function(){
 	});
 	
 	// verifier la version du CS
-	jQuery('span.cs_version').load('".generer_url_ecrire('cs_version', 'version='.$cs_version, true)."');
+	jQuery('span.cs_version').load('".generer_url_ecrire('cs_version', 'version='.$cs_version.($force?'&force=oui':''), true)."');
 	// afficher la boite rss, si elle existe
-	jQuery('div.cs_boite_rss').load('".generer_url_ecrire('cs_boite_rss')."');
+	jQuery('div.cs_boite_rss').load('".generer_url_ecrire('cs_boite_rss', $force?'force=oui':'', true)."');
 
 });
 
@@ -469,7 +470,7 @@ if (!window.jQuery) document.write('".addslashes(propre('<p>'._T('couteauprive:e
 
 	cs_compat_boite('creer_colonne_droite');
 	// on telecharge les news...
-	if (defined('boites_privees_CS')) cs_boite_rss(!$quiet);
+	if (defined('boites_privees_CS')) cs_boite_rss();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>''));
 	cs_compat_boite('debut_droite');
 
@@ -497,7 +498,7 @@ $_GET['modif']=='oui'?'<br/>'._T('couteauprive:vars_modifiees').'.':'','</div></
 cs_log(" FIN : exec_admin_couteau_suisse()");
 }
 
-function cs_boite_rss($force) {
+function cs_boite_rss() {
 	echo debut_boite_info(true), '<p><b>'._T('couteauprive:rss_titre').'</b></p><div class="cs_boite_rss"><p>'._T('couteauprive:rss_attente').'</p><noscript>'._T('couteauprive:outil_inactif').' !</noscript></div>'
 		/*.'<div style="text-align: right; font-size: 87%;"><a title="'._T('couteauprive:rss_desactiver').'" href="'
 		.generer_url_ecrire(_request('exec'),'cmd=toggle&outil=rss_couteau_suisse').'">'._T('couteauprive:supprimer_cadre').'</a></div>'*/
