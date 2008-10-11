@@ -27,6 +27,7 @@
 
 	[(#CONFIG{socialtags/misterwong}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_misterwong}|parametre_url{'bm_url',[(#URL_ARTICLE|url_absolue)]}|parametre_url{'bm_description',[(#TITRE|texte_script)]})]" title="Mister wong"><img src="[(#CHEMIN{images/misterwong.gif})]" title="Mister wong" alt="Mister wong" class="socialtags-hovers" /></a></li>,''})]
 
+	[(#CONFIG{socialtags/misterwong}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_viadeo}|parametre_url{'url',[(#URL_ARTICLE|url_absolue)]}|parametre_url{'title',[(#TITRE|texte_script)]})]" title="viadeo"><img src="[(#CHEMIN{images/viadeo.gif})]" title="Viadeo" alt="Viadeo" class="socialtags-hovers" /></a></li>,''})]
 </BOUCLE_article>
 </ul>
 </div>
