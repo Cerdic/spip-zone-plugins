@@ -14,8 +14,9 @@ if(!$GLOBALS['cs_init']) {
 	if($GLOBALS['cs_options']) {
 		if(!$GLOBALS['cs_fonctions']) {
 			// inclusion des fonctions pre-compilees
+			cs_log("INCL : "._DIR_CS_TMP.'mes_fonctions.php');
 			@include(_DIR_CS_TMP.'mes_fonctions.php');
-			cs_log("INCL : cout_fonctions, cs_fonctions = $GLOBALS[cs_fonctions]");
+			//cs_log("FIN INCL : "._DIR_CS_TMP.'mes_fonctions.php');
 		} // else cs_log(' FIN : cout_fonctions deja inclus');
 	} else cs_log('ESSAI : cout_fonctions, mais cout_options n\'est pas inclus');
 } else cs_log('ESSAI : cout_fonctions, mais initialisation en cours');

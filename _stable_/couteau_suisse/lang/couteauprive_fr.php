@@ -428,9 +428,15 @@ Listez ici les s&eacute;quences interdites@_CS_ASTER@ en les s&eacute;parant par
 	'tous' => 'Tous',
 	'toutes_couleurs' => 'Les 36 couleurs des styles css :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Blocs multilingues&nbsp;: <b><:trad:></b>',
-	'toutmulti:description' => 'Introduit le raccourci <code><:un_texte:></code> pour introduire librement des blocs multi-langues dans un article.
-_ La fonction SPIP utilis&eacute;e est : <code>_T(\'un_texte\', $flux)</code>.
-_ N\'oubliez pas de v&eacute;rifier que \'un_texte\' est bien d&eacute;fini dans les fichiers de langue.',
+	'toutmulti:description' => 'Introduit le raccourci <code><:chaine:></code> pour utiliser librement dans vos contenus les cha&icirc;nes de langues (blocs multi) de SPIP ou de vos squelettes : dans les articles, titres, messages, etc.
+
+La fonction SPIP utilis&eacute;e est : <code>_T(\'chaine\')</code>.
+
+Cet outil accepte &eacute;galement les arguments. Par exemple, le raccourci <code><:chaine{arg1=un texte, arg2=un autre texte}:></code> permet de passer deux param&egrave;tres &agrave; la cha&icirc;ne suivante : <code>\'chaine\'=>\'Voici mes arguments : @arg1@ et @arg2@\'</code>.
+
+La fonction SPIP utilis&eacute;e est alors : <code>_T(\'chaine\', array(\'arg1\'=>\'un texte\', \'arg2\'=>\'un autre texte\'))</code>.
+
+ N\'oubliez donc pas de v&eacute;rifier que la clef <code>\'chaine\'</code> est bien d&eacute;finie dans les fichiers de langues. Consultez [ici ->http://www.spip.net/fr_article2128.html] la documentation de SPIP &agrave; ce sujet.',
 	'toutmulti:nom' => 'Blocs multilingues',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Ce site sera r&eacute;tabli tr&egrave;s prochainement.

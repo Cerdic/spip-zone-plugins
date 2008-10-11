@@ -46,7 +46,7 @@ define('_URL_CONTRIB', 'http://www.spip-contrib.net/?article');
 define('_COUT_FONCTIONS_PHP', find_in_path('cout_fonctions.php'));
 $GLOBALS['cs_options'] = $GLOBALS['cs_fonctions'] = $GLOBALS['cs_fonctions_essai'] = $GLOBALS['cs_init'] = $GLOBALS['cs_verif'] = 0;
 
-// parametres concernant le plugin ?
+// parametres d'url concernant le plugin ?
 $GLOBALS['cs_params'] = isset($_GET['cs'])?explode(',', $_GET['cs']):array();
 
 // pour voir les erreurs ?
