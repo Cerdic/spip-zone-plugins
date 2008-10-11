@@ -39,6 +39,7 @@
 					include_spip('base/create');
 					include_spip('base/abstract_sql');
 					creer_base();
+					echo "Creation de la table spip_mots_documents<br/>";
 				}
 				echo "spipicious update @ 0.4<br/>";
 				ecrire_meta('spipicious_base_version',$current_version=0.4,'non');

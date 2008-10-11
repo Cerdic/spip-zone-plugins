@@ -13,7 +13,8 @@
 
 function spipicious_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_mots'][] = 'spipicious';
-	$interface['tables_jointures']['spip_mots'][]= 'mots_evenements';
+	$interface['tables_jointures']['spip_mots'][]= 'mots_documents';
+	$interface['tables_jointures']['spip_auteurs'][]= 'spipicious';
 	//-- Table des tables ----------------------------------------------------
 	$interface['table_des_tables']['spipicious']='spipicious';
 
