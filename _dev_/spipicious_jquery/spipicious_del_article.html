@@ -1,10 +1,9 @@
-#HTTP_HEADER{Content-Type:text/html}
 <B_mots>
 	<ul>
-<BOUCLE_mots(MOTS){id_article=#ENV{id_article}}{spipicious.id_auteur=#SESSION{id_auteur}}>
-	<li>#TITRE <a href="#" class="deletemot" onclick="return deletetag('#ID_MOT');" id="mot-#ID_MOT" style="display:inline" title="<:spipicious:remove:>"><img src="#CHEMIN{images/delete_mot.png}" alt="<:spipicious:remove:>" /></a></li>
-</BOUCLE_mots>
+	<BOUCLE_mots(MOTS){id_article=#ENV{id_article}}{spipicious.id_auteur=#SESSION{id_auteur}}>
+		<li>#TITRE <a href="#" class="deletemot" onclick="return deletetag('#ID_MOT');" id="mot-#ID_MOT" style="display:inline" title="<:spipicious:remove:>"><img src="#CHEMIN{images/delete_mot.png}" alt="<:spipicious:remove:>" /></a></li>
+	</BOUCLE_mots>
 	</ul>
 </B_mots>
-	<p><:spipicious:no_tags_associes:></p>
+<p><:spipicious:no_tags_associes:></p>
 <//B_mots>

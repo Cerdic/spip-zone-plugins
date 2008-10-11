@@ -1,0 +1,19 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type:text/html}
+<div id="tags">
+<B_motsarticle>
+	<ul>
+		<BOUCLE_motsarticle(MOTS){id_article ?}{id_document ?}{id_rubrique ?}>
+			<li><a href="#URL_MOT" title="#TITRE">#TITRE</a>
+		<B_aut>
+			<small>
+				(<BOUCLE_aut(SPIPICIOUS auteurs){id_mot}{id_article ?}{id_document ?}{id_rubrique ?}{', '}>#LOGIN</BOUCLE_aut>)
+			</small>
+		</B_aut>
+		</li>
+		</BOUCLE_motsarticle>
+	</ul>
+</B_motsarticle>
+	<p><:aucun_mots:></p>
+<//B_motsarticle>
+</div>

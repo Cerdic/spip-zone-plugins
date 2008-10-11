@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-function formulaires_spipicious_ajax_charger($id_objet,$type) {
+function formulaires_spipicious_ajax_charger($id_objet,$type='article') {
 	$id_type = 'id_'.$type;
 	$valeurs = array($id_type=>$id_objet,'type'=>$type,'id_objet'=>$id_objet);
 	return $valeurs;
@@ -27,7 +27,7 @@ function formulaires_spipicious_ajax_traiter($id_objet,$type) {
 	spip_log("table mots $table_mots",'spipicious');
 	
 	//recuperation des variables utiles
-	$tags = _request('tags');
+	$tags = _request('spipicious_tags');
 	$type_groupe_tags = lire_config('spipicious/groupe_mot');
 	$id_groupe = sql_getfetsel("id_groupe","spip_groupes_mots","titre = '$type_groupe_tags'");
 	if(!intval($id_groupe)){

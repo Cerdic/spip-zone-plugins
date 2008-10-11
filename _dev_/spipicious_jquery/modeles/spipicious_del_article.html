@@ -1,5 +1,5 @@
 <div id="mesmots">
-	<BOUCLE_mots(SPIP_SPIPICIOUS mots){id_auteur=#SESSION{id_auteur}}{id_article=#ENV{id_article}}{id_document=#ENV{id_document}}>
+	<BOUCLE_mots(MOTS){spipicious.id_auteur=#SESSION{id_auteur}}{spipicious.id_article ?}{spipicious.id_document ?}>
 		#TITRE <a href="#" class="deletemot" id="mot-#ID_MOT" style="display:inline" title="<:delete:>">[x]</a>&nbsp;
 	</BOUCLE_mots>
 	</B_mots>
