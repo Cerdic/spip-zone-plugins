@@ -1,24 +1,24 @@
 #HTTP_HEADER{Content-Type: text/css; charset=utf-8}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-[(#CONFIG{spipclear/choix_theme}|oui)
-	[(#SET{chemin_theme, [themes/(#CONFIG{spipclear/nom_theme})/]})]
-]
-/* Theme DotClear : #CONFIG{spipclear/nom_theme} */
-#INCLURE{#CHEMIN{(#GET{chemin_theme})style.css}|url_absolue_css}
-
 [(#REM) Feuille de style par defaut pour le code genere par SPIP ]
 #INCLURE{#CHEMIN{spip_style.css}|url_absolue_css}
 
 [(#REM) Feuille de style par defaut pour les formulaires de SPIP ]
 #INCLURE{#CHEMIN{spip_formulaires.css}|url_absolue_css}
 
+[(#CONFIG{spipclear/choix_theme}|oui)
+	[(#SET{chemin_theme, [themes/(#CONFIG{spipclear/nom_theme})/]})]
+]
+/* Theme DotClear : #CONFIG{spipclear/nom_theme} */
+#INCLURE{#CHEMIN{(#GET{chemin_theme})style.css}|url_absolue_css}
+
 /* Personnalisations SpipClear */
 
 #content #formulaire_forum { background: transparent; }
 #content #formulaire_forum input.submit { background: transparent; color: inherit; }
-#content table.spip_barre a:hover img { background: #e0e0e0; border: 1px solid #afafaf; }
 #content table.spip_barre a img { background: #f5f5f5; border: 1px solid #ddd; }
+#content table.spip_barre a:hover img { background: #e0e0e0; border: 1px solid #afafaf; }
 
 #calendar h2,
 #search h2 { margin-bottom: 1em; }
