@@ -6,7 +6,6 @@
 [(#ENV*{editable}|?{' '})
     <form action='#ENV{action}' method='post'>
 		#ACTION_FORMULAIRE{#SELF}
-		<input name="redirect" value="#SELF" type="hidden" />
 
 		<INCLURE{fond=formulaires/inscription2_infos_connection}{env}>
         

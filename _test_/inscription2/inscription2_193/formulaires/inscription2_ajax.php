@@ -59,17 +59,21 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 			if(preg_match('/^code_postal/', $champs)){
 				$cp = _request($champs);
 				$erreur = inscription2_valide_cp($cp);
-				$erreurs[$champs] = $erreur;
+				if($erreur){
+					$erreurs[$champs] = $erreur;
+				}
 			}
 			else if((preg_match('/^telephone/', $champs))||(preg_match('/^fax/', $champs))||(preg_match('/^mobile/', $champs))){
 				$numero = _request($champs);
 				$erreur = inscription2_valide_numero($numero);
-				$erreurs[$champs] = $erreur;
+				if($erreur){
+					$erreurs[$champs] = $erreur;
+				}
 			}
 			
 			//pipeline pour la verifications des donnees de plugins tiers
 			else {
-				$erreurs[$champs] = pipeline('i2_validation_formulaire',
+				$erreur = pipeline('i2_validation_formulaire',
 					array(
 						'args' => array(
 							'champs' => $champs,
@@ -78,6 +82,10 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 					'data' => null
 					)
 				);
+				if($erreur){
+					$erreurs[$champs] = $erreur;
+				}
+				
 			}
 			
 			//si clef obligatoire, obligatoire activé et _request() vide alors erreur
@@ -104,7 +112,7 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 			$erreurs['login'] = _T('inscription2:formulaire_login_deja_utilise');
 		}
 	}
-	
+	spip_log($erreurs,'inscription2');
 	//message d'erreur generalise
 	if (count($erreurs)) {
 		$erreurs['message_erreur'] .= _T('inscription2:formulaire_remplir_obligatoires');
@@ -114,7 +122,7 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 }
 
 function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
-
+	spip_log('traiter','inscription2');
 	global $tables_principales;
 	
 	/* Génerer la liste des champs à traiter
@@ -196,7 +204,36 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 		$envoyer_inscription($id_auteur);
 		$message = _T('inscription2:formulaire_inscription_ok');
     }
-    return $message;
+    return array('editable'=>"false",'message' => $message);
 }
 
+// http://doc.spip.org/@test_login
+function test_login($nom, $mail) {
+	include_spip('inc/charsets');
+	$nom = strtolower(translitteration($nom));
+	$login_base = preg_replace("/[^\w\d_]/", "_", $nom);
+
+	// il faut eviter que le login soit vraiment trop court
+	if (strlen($login_base) < 3) {
+		$mail = strtolower(translitteration(preg_replace('/@.*/', '', $mail)));
+		$login_base = preg_replace("/[^\w\d]/", "_", $nom);
+	}
+	if (strlen($login_base) < 3)
+		$login_base = 'user';
+
+	// eviter aussi qu'il soit trop long (essayer d'attraper le prenom)
+	if (strlen($login_base) > 10) {
+		$login_base = preg_replace("/^(.{4,}(_.{1,7})?)_.*/",
+			'\1', $login_base);
+		$login_base = substr($login_base, 0,13);
+	}
+
+	$login = $login_base;
+
+	for ($i = 1; ; $i++) {
+		if (!sql_countsel('spip_auteurs', "login='$login'"))
+			return $login;
+		$login = $login_base.$i;
+	}
+}
 ?>
