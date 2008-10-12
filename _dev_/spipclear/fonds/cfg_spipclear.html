@@ -15,7 +15,7 @@
 			<label>Sommaire</label>
 			<p class="explication"><:spipclear:look_sommaire:></p>
 			<div class="choix">
-				<input type="checkbox" name="articles_entiers" id="articles_entiers" [ (#ENV{articles_entiers}|=={on}|?{checked="checked",''})] />
+				<input type="checkbox" name="articles_entiers" id="articles_entiers"[ (#ENV{articles_entiers}|=={on}|?{checked="checked",''})] />
 				<label for="articles_entiers"><:spipclear:sommaire_articles_entiers:></label>
 			</div>
 		</li>
@@ -33,17 +33,17 @@
 			<label><:spipclear:legend_theme:></label>
 			<p class="explication"><:spipclear:info_choix_theme:></p>
 			<div class="choix">
-				<input type="radio" class="radio" name="choix_theme" id="choix_theme_non" value="0"[ (#ENV{choix_theme}|!={1}|?{checked="checked",''})] />
+				<input type="radio" name="choix_theme" id="choix_theme_non" class="radio" value="0"[ (#ENV{choix_theme}|!={1}|?{checked="checked",''})] />
 				<label for="choix_theme_non"><:spipclear:label_theme_defaut:></label>
 			</div>
 			<div class="choix">
-				<input type="radio" class="radio" name="choix_theme" id="choix_theme_oui" value="1"[ (#ENV{choix_theme}|=={1}|?{checked="checked",''})] />
+				<input type="radio" name="choix_theme" id="choix_theme_oui" class="radio" value="1"[ (#ENV{choix_theme}|=={1}|?{checked="checked",''})] />
 				<label for="choix_theme_oui"><:spipclear:label_theme_perso:></label>
 			</div>
 		</li>
 		<li class="editer_spipclear_nom_theme">
 			<p class="explication"><:spipclear:label_nom_theme:></p>
-			<input type="text" class="text" name="nom_theme" id="nom_theme" value="[(#ENV{nom_theme})]" size="32" />
+			<input type="text" name="nom_theme" id="nom_theme" class="text" value="[(#ENV{nom_theme})]" size="32" />
 		</li>
 	</ul>
 	<p class="boutons">

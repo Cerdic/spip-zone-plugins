@@ -1,0 +1,14 @@
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+[(#CONFIG{spipclear/choix_theme}|oui)
+	[(#SET{chemin_theme, [themes/(#CONFIG{spipclear/nom_theme})/]})]
+]
+/* Theme DotClear : #CONFIG{spipclear/nom_theme} */
+#INCLURE{#CHEMIN{(#GET{chemin_theme})style.css}|url_absolue_css}
+
+[(#REM) Feuille de style par defaut pour le code genere par SPIP ]
+#INCLURE{#CHEMIN{spip_style.css}|url_absolue_css}
+
+[(#REM) Feuille de style par defaut pour les formulaires de SPIP ]
+#INCLURE{#CHEMIN{spip_formulaires.css}|url_absolue_css}
