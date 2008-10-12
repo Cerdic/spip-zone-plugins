@@ -121,10 +121,10 @@ foreach($_POST as $k => $v) { $$k=$v; }
 
 	
 	// articles du site ayant des docs (choix selon mode, type)
-	$q=sql_select("SQL_CALC_FOUND_ROWS sda.id_".$objet.", sa.titre, sa.statut, sd.mode, COUNT(sda.id_document) as nb_doc",
-					"spip_documents_".$objet."s sda LEFT JOIN spip_".$objet."s sa ON sda.id_".$objet."=sa.id_".$objet." LEFT JOIN spip_documents sd ON sda.id_document=sd.id_document LEFT JOIN spip_dw2_doc dw ON sda.id_document = dw.id_document ",
+	$q=sql_select("SQL_CALC_FOUND_ROWS sda.id_objet AS id_".$objet.", sa.titre, sa.statut, sd.mode, COUNT(sda.id_document) as nb_doc",
+					"spip_documents_liens sda LEFT JOIN spip_".$objet."s sa ON ( sda.id_objet=sa.id_".$objet." AND sda.objet='$objet' ) LEFT JOIN spip_documents sd ON sda.id_document=sd.id_document LEFT JOIN spip_dw2_doc dw ON sda.id_document = dw.id_document ",
 					" 1 $type $mode $catdw ", // where
-					"sda.id_".$objet, // group by
+					"sda.id_objet", // group by
 					"sa.titre", // order by
 					"$dl,$nbr_lignes_tableau"); // limit
 
@@ -344,8 +344,7 @@ echo debut_droite('',true);
 		// tableau document de l'objet (art/rub)
 		//
 		if($sel) {
-			$rqob=sql_query("SELECT titre, statut FROM spip_".$objet."s WHERE id_".$objet."=".$sel);
-			$lgob=sql_fetch($rqob);
+			$lgob=sql_fetsel("titre, statut","spip_".$objet."s","id_".$objet."=".$sel);
 			$ttr_obj=supprimer_numero(typo($lgob['titre']));
 			$statut_obj=$lgob['statut'];
 			

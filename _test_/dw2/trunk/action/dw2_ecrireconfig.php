@@ -40,18 +40,18 @@ function action_dw2_ecrireconfig() {
 		
 	
 		if($v =_request('change_version') ) {
-			sql_query("REPLACE spip_dw2_config (nom, valeur) VALUES ('version_installee', $arg)");
+			sql_replace("spip_dw2_config",array('nom'=>'version_installee','valeur'=>$arg) );
 		}
 		elseif($v= _request('criteres_auto_doc')) {
 			// criteres_auto_doc est array avec systematiq '0' en prem val
 			if($v[0]=='0') {
 				if(count($v)==1) {
-					sql_query("REPLACE spip_dw2_config (nom, valeur) VALUES ('criteres_auto_doc','')");
+					sql_replace("spip_dw2_config", array('nom'=>'criteres_auto_doc', 'valeur'=>'') );
 				}
 				else {
 					$b=array_shift($v);
 					$vals=implode(',',$v);
-					sql_query("REPLACE spip_dw2_config (nom, valeur) VALUES ('criteres_auto_doc','$vals')");
+					sql_replace("spip_dw2_config", array('nom'=>'criteres_auto_doc', 'valeur'=>$vals) );
 				}
 			}
 		}
@@ -81,7 +81,7 @@ function action_dw2_ecrireconfig() {
 			$nom=$v;
 			$val=_request($v);
 			if ($val!=$GLOBALS['dw2_param'][$val]) {
-				sql_query("REPLACE spip_dw2_config (nom, valeur) VALUES ('$nom','$val')");
+				@sql_replace("spip_dw2_config", array('nom'=>$nom,'valeur'=>$val) );
 			}
 		}
 	redirige_par_entete(rawurldecode($redirect),true);

@@ -25,7 +25,7 @@ function inclus_auto_doc() {
 	$a = sql_showtable("spip_dw2_config",true);
 
 	if($a) {
-		$q=sql_query("SELECT nom, valeur FROM spip_dw2_config");
+		$q=sql_select("nom, valeur","spip_dw2_config");
 		$params=array();
 		while($r=sql_fetch($q)) {
 			$params[$r['nom']] = $r['valeur'];

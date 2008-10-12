@@ -56,8 +56,7 @@ $id_serv=intval($id_serv);
 //
 // Fiche du doc/fichier dans catalogue
 //
-$reqdoc = sql_query("SELECT url, heberge, id_serveur FROM spip_dw2_doc WHERE id_document='$id_doc'");
-$lig = sql_fetch($reqdoc);
+$lig = sql_fetsel("url, heberge, id_serveur","spip_dw2_doc","id_document='$id_doc'");
 $urldoc = $lig['url'];
 $hebergedoc = $lig['heberge'];
 $id_servdoc = $lig['id_serveur'];
@@ -73,9 +72,7 @@ $chemfich = substr(strchr($chfich,'/'), 1); // vire le premier '/'
 if ($hebergedoc!='local' && $hebergedoc!='distant') {
 	
 	//Donc ... détail du serveur enregistré dans dw2, du Doc d'entrée
-	$quero ="SELECT * FROM spip_dw2_serv_ftp WHERE id_serv='$id_servdoc'";
-	$reso = sql_query($quero);
-	$ro = sql_fetch($reso);
+	$ro = sql_fetsel("*","spip_dw2_serv_ftp","id_serv='$id_servdoc'");
 	$ftp_server = $ro['serv_ftp'];
 	$port = $ro['port'];						// ftp.machin.net
 	$ftp_user_name = $ro['login'];	
@@ -138,8 +135,7 @@ elseif ($hebergedoc=='local') {
 //
 // detail serveur selectionne
 //
-$reserv=sql_query("SELECT * FROM spip_dw2_serv_ftp WHERE id_serv=$id_serv");
-$row=sql_fetch($reserv);
+$row=sql_fetsel("*","spip_dw2_serv_ftp","id_serv=$id_serv");
 $serv_ftp = $row['serv_ftp'];
 $host_dir = $row['host_dir'];
 $chem_distant = $row['chemin_distant'];

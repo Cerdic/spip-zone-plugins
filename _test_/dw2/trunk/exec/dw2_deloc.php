@@ -47,8 +47,7 @@ include_spip("inc/dw2_inc_deloc");
 // prepa
 //
 
-$query = "SELECT * FROM spip_dw2_serv_ftp ORDER BY serv_ftp";
-$result = sql_query($query);
+$result = sql_select("*","spip_dw2_serv_ftp","","","serv_ftp");
 $nbserv = sql_count($result);
 
 //

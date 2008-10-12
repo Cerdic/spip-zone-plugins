@@ -108,9 +108,7 @@ echo debut_cadre_relief(_DIR_IMG_DW2."import-24.gif",true);
 		echo "<span class='verdana3'><b>"._T('dw:destination_doc')."</b></span></div>\n";
 	fin_bloc();
 	// nom fichier
-	$query="SELECT url FROM spip_dw2_doc WHERE id_document=$id_document";
-	$result=sql_query($query);
-	$row=sql_fetch($result);
+	$row=sql_fetsel("url","spip_dw2_doc","id_document=$id_document");
 	$fichier = substr(strrchr($row['url'],'/'), 1);
 	echo "<br /><span class='verdana3'>"._T('dw:fichier')." ".$fichier."</span><br /><br />\n";
 	

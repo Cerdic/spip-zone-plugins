@@ -102,11 +102,12 @@ foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
 	
 	// requete principale
 	//	
-	$rq_aut=sql_query("SELECT COUNT(DISTINCT ds.id_doc) as nb_doc, ds.id_auteur, ".
-						"sa.nom as n_auteur, sa.statut ".
-						"FROM spip_dw2_stats_auteurs as ds, spip_dw2_doc as dd, spip_auteurs as sa ".
-						"WHERE $where_date AND ds.id_auteur=sa.id_auteur $where_ltt ".
-						"GROUP BY ds.id_auteur ORDER BY sa.nom LIMIT $dl,$nbr_lignes_tableau");
+	$rq_aut=sql_select("COUNT(DISTINCT ds.id_doc) as nb_doc, ds.id_auteur, sa.nom as n_auteur, sa.statut ",
+						"spip_dw2_stats_auteurs as ds, spip_dw2_doc as dd, spip_auteurs as sa ",
+						"$where_date AND ds.id_auteur=sa.id_auteur $where_ltt ",
+						"ds.id_auteur",
+						"sa.nom",
+						"$dl,$nbr_lignes_tableau");
 
 
 //

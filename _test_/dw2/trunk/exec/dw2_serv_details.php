@@ -50,10 +50,9 @@ foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
 $id_serv=intval($id_serv);
 
 
-$query = "SELECT id_serv, serv_ftp, host_dir, chemin_distant, site_distant, login, mot_passe, ".
-			"DATE_FORMAT(date_crea,'%d/%m/%Y') AS datecrea, designe ".
-			"FROM spip_dw2_serv_ftp WHERE id_serv=$id_serv";
-$result = sql_query($query);
+$result = sql_select("id_serv, serv_ftp, host_dir, chemin_distant, site_distant, login, mot_passe, DATE_FORMAT(date_crea,'%d/%m/%Y') AS datecrea, designe ",
+			"spip_dw2_serv_ftp",
+			"id_serv=$id_serv");
 $nbserv = sql_count($result);
 
 

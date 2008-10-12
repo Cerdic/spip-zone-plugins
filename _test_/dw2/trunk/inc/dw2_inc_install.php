@@ -16,45 +16,20 @@
 //
 
 # duplique de function in create.php
-function dw2_create_table($nom, $champs=array(), $cles=array(), $autoinc=false) {
-	$query = ''; $keys = ''; $s = ''; $p='';
-
-	foreach($cles as $k => $v) {
-		$keys .= "$s\n\t\t$k ($v)";
-		if ($k == "PRIMARY KEY")
-			$p = $v;
-		$s = ",";
-	}
-	$s = '';
-
-	foreach($champs as $k => $v) {
-		$query .= "$s\n\t\t$k $v" .
-		(($autoinc && ($p == $k)) ? " auto_increment" : '');
-		$s = ",";
-	}
-	sql_query("CREATE TABLE IF NOT EXISTS $nom ($query" . ($keys ? ",$keys" : '') . ")\n");
-}
-
 
 function ecriture_tables_dw2() {
 	// charge def de tables
-	# h.17/10 -> disfonctionne  ==> include(_DIR_PLUGIN_DW2."/base/dw2_tables.php");
-	global $tables_dw2;
+	# h.17/10 -> disfonctionne  ==> include_spip('base/dw2_tables');
+//	global $tables_dw2;
 	include_spip('base/dw2_tables');
 
 	// créer tables dans bdd
-	/*
-	foreach($tables_dw2 as $k => $v) {
-		dw2_create_table($k, $v['field'], $v['key'], false);// false : auto_increm dans def. des tables !
-	}
-	*/
 
 	include_spip('base/create');
 	include_spip('base/abstract_sql');
 	creer_base();
 }	
 
-	
 //
 // maj des anciennes tables
 //
@@ -68,27 +43,27 @@ function maj_tables_dw2($old_vers) {
 		
 		if ($old_vers < 2.013)
 			{
-			sql_query("ALTER TABLE dw2_doc ADD heberge VARCHAR(255) DEFAULT 'local' NOT NULL");
-			sql_query("ALTER TABLE dw2_doc ADD id_serveur BIGINT(21) NOT NULL");
-			sql_query("ALTER TABLE dw2_doc MODIFY doctype TINYTEXT NOT NULL");
-			sql_query("ALTER TABLE dw2_doc ADD statut VARCHAR(10) DEFAULT 'actif' NOT NULL");
-			sql_query("ALTER TABLE dw2_doc DROP COLUMN id_rubrique");
-			sql_query("ALTER TABLE dw2_doc DROP COLUMN id_secteur");
-			sql_query("ALTER TABLE dw2_serv_ftp ADD designe TEXT NOT NULL");
+			sql_alter("TABLE dw2_doc ADD heberge VARCHAR(255) DEFAULT 'local' NOT NULL");
+			sql_alter("TABLE dw2_doc ADD id_serveur BIGINT(21) NOT NULL");
+			sql_alter("TABLE dw2_doc MODIFY doctype TINYTEXT NOT NULL");
+			sql_alter("TABLE dw2_doc ADD statut VARCHAR(10) DEFAULT 'actif' NOT NULL");
+			sql_alter("TABLE dw2_doc DROP COLUMN id_rubrique");
+			sql_alter("TABLE dw2_doc DROP COLUMN id_secteur");
+			sql_alter("TABLE dw2_serv_ftp ADD designe TEXT NOT NULL");
 			}
 
 		if ($old_vers < 2.016)
 			{
-			sql_query("ALTER TABLE dw2_doc DROP PRIMARY KEY");
-			sql_query("ALTER TABLE dw2_doc CHANGE id_doc id_document BIGINT(21) NOT NULL");
-			sql_query("ALTER TABLE dw2_doc ADD PRIMARY KEY (id_document)");
+			sql_alter("TABLE dw2_doc DROP PRIMARY KEY");
+			sql_alter("TABLE dw2_doc CHANGE id_doc id_document BIGINT(21) NOT NULL");
+			sql_alter("TABLE dw2_doc ADD PRIMARY KEY (id_document)");
 			}
 
 		if ($old_vers < 2.11)
 			{
-			sql_query("ALTER TABLE dw2_stats DROP PRIMARY KEY");
-			sql_query("ALTER TABLE dw2_stats DROP INDEX id_doc");
-			sql_query("ALTER TABLE dw2_stats ADD PRIMARY KEY (date, id_doc)");
+			sql_alter("TABLE dw2_stats DROP PRIMARY KEY");
+			sql_alter("TABLE dw2_stats DROP INDEX id_doc");
+			sql_alter("TABLE dw2_stats ADD PRIMARY KEY (date, id_doc)");
 			}
 		
 		if ($old_vers < 2.13)
@@ -99,7 +74,7 @@ function maj_tables_dw2($old_vers) {
 			sql_query("RENAME TABLE dw2_stats TO ".$table_pref."dw2_stats");
 			sql_query("RENAME TABLE dw2_serv_ftp TO ".$table_pref."dw2_serv_ftp");
 			// ajout champ 'port'  pour serveur distant (deloc)
-			sql_query("ALTER TABLE ".$table_pref."dw2_serv_ftp ADD port MEDIUMINT DEFAULT '21' NOT NULL AFTER host_dir");
+			sql_alter("TABLE ".$table_pref."dw2_serv_ftp ADD port MEDIUMINT DEFAULT '21' NOT NULL AFTER host_dir");
 			}
 			
 		/*if ($old_vers < 2.1x) { }*/

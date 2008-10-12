@@ -100,12 +100,12 @@ foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
 		$tot_fichier=$tbl_ltt[$wltt];
 	}
 	
-	$rq_doc=sql_query("SELECT COUNT(ds.id_auteur) as nb_abo, ds.id_doc, ".
-						"dd.nom as fichier ".
-						"FROM spip_dw2_stats_auteurs as ds, spip_dw2_doc as dd ".
-						"WHERE $where_date AND ds.id_doc=dd.id_document $where_ltt ".
-						"GROUP BY ds.id_doc ORDER BY dd.nom LIMIT $dl,$nbr_lignes_tableau");
-
+	$rq_doc=sql_select("COUNT(ds.id_auteur) as nb_abo, ds.id_doc, dd.nom as fichier ",
+						"spip_dw2_stats_auteurs as ds, spip_dw2_doc as dd ",
+						"$where_date AND ds.id_doc=dd.id_document $where_ltt ",
+						"ds.id_doc",
+						"dd.nom",
+						"$dl,$nbr_lignes_tableau");
 
 
 //

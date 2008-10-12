@@ -50,7 +50,7 @@ foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
 //
 
 // recup des id_rub racine
-$q=sql_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent='0'");
+$q=sql_select("id_rubrique","spip_rubriques","id_parent='0'");
 while($r=sql_fetch($q)) {
 	$tbl_idrub_racine[] = $r['id_rubrique'];
 }
@@ -60,13 +60,12 @@ $tbl_collect_racine=array();
 $tbl_idr=array();
 $tbl_ida=array();
 
-$sq=sql_query("SELECT * FROM spip_dw2_acces_restreint");
+$sq=sql_select("*","spip_dw2_acces_restreint");
 
 while($rsq=sql_fetch($sq)) {
 	// lister rubriques
 	if($rsq['id_rubrique']!='0') {
-		$rt=sql_query("SELECT titre, id_parent FROM spip_rubriques WHERE id_rubrique='".$rsq['id_rubrique']."'");
-		$rl=sql_fetch($rt);
+		$rl=sql_fetsel("titre, id_parent","spip_rubriques","id_rubrique='".$rsq['id_rubrique']."'");
 		$tbl_idr[$rsq['id_rubrique']]['res']=$rsq['restreint'];
 		$tbl_idr[$rsq['id_rubrique']]['titre']=$rl['titre'];
 		$tbl_idr[$rsq['id_rubrique']]['parent']=$rl['id_parent'];
@@ -76,8 +75,7 @@ while($rsq=sql_fetch($sq)) {
 	}
 	// lister articles
 	if($rsq['id_article']!='0') {
-		$rt=sql_query("SELECT titre FROM spip_articles WHERE id_article='".$rsq['id_article']."'");
-		$rl=sql_fetch($rt);
+		$rl=sql_fetsel("titre","spip_articles","id_article='".$rsq['id_article']."'");
 		$tbl_ida[$rsq['id_article']]['res']=$rsq['restreint'];
 		$tbl_ida[$rsq['id_article']]['titre']=$rl['titre'];
 	}

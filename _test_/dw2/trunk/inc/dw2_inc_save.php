@@ -61,10 +61,12 @@ function mail_attachement($to , $sujet , $message , $fichier, $nom, $reply="", $
    $attachement .= "\n\n\n------=$limite\n";
    
    //formatage des entêtes
-   if (! empty($reply)) $entete = "Reply-to: $reply\n";
-   if (! empty($from)) $entete .= "From: $from\n";
-   
-   return mail($to, $sujet, $texte.$attachement, $entete.$mail_mime);
+	//   if (! empty($reply)) $entete = "Reply-to: $reply\n";
+	//   if (! empty($from)) $entete .= "From: $from\n";
+
+	$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
+	return $envoyer_mail($to, $sujet, $texte.$attachement, $from, $entete.$mail_mime);
+	//   return mail($to, $sujet, $texte.$attachement, $entete.$mail_mime);
 }
 
 
@@ -75,28 +77,6 @@ function ecrire($texte,$fp , $_fputs) {
    #if($_fputs=="fputs") { fputs($fp, "$texte\n"); }
    #else { gzputs($fp, "$texte\n"); }
 }
-
-
-function mysql_version() {
-   $result = mysql_query('SELECT VERSION() AS version');
-   if ($result != FALSE && @mysql_num_rows($result) > 0) {
-      $row = mysql_fetch_array($result);
-      $match = explode('.', $row['version']);
-   }
-   else {
-      $result = @mysql_query('SHOW VARIABLES LIKE \'version\'');
-      if ($result != FALSE && @mysql_num_rows($result) > 0) {
-         $row = mysql_fetch_row($result);
-         $match = explode('.', $row[1]);
-      }
-   }
-   
-   if (!isset($match) || !isset($match[0])) $match[0] = 3;
-   if (!isset($match[1])) $match[1] = 21;
-   if (!isset($match[2])) $match[2] = 0;
-   return $match[0] . "." . $match[1] . "." . $match[2];
-}
-
 
 //
 // Sauvegarde ... action !
@@ -177,7 +157,7 @@ if ($GLOBALS['connect_statut']=="0minirezo" && $flag_save_dw) {
 			}
 
 			if ($res) {
-				$num_rows = mysql_num_rows($res);
+				$num_rows = sql_count($res);
 				$i = 0;
            
 				//création du fichier
@@ -204,7 +184,7 @@ if ($GLOBALS['connect_statut']=="0minirezo" && $flag_save_dw) {
 					}
 					ecrire("# OS Serveur : $os_serveur", $fp, $_fputs);
 					ecrire("# Version PHP : " . phpversion(), $fp, $_fputs);
-					ecrire("# Version mySQL : " . mysql_version(), $fp, $_fputs);
+					ecrire("# Version mySQL : " . sql_version(), $fp, $_fputs);
 					ecrire("# IP Client : ".$_SERVER['REMOTE_ADDR'], $fp, $_fputs);
 					ecrire("# Fichier SQL 100% compatible PhpMyAdmin\n", $fp, $_fputs);
 					ecrire("# -------debut du fichier----------", $fp, $_fputs);
@@ -220,9 +200,8 @@ if ($GLOBALS['connect_statut']=="0minirezo" && $flag_save_dw) {
 								ecrire("\n# Structure de la table $tablename", $fp, $_fputs);
 								ecrire("DROP TABLE IF EXISTS `$tablename`;\n", $fp, $_fputs);
 								// requete de creation de la table
-								$query = "SHOW CREATE TABLE $tablename";
-								$resCreate = mysql_query($query);
-								$row = mysql_fetch_array($resCreate);
+								$resCreate = sql_query("SHOW CREATE TABLE $tablename");
+								$row = sql_fetch($resCreate);
 								$schema = $row[1].";";
 								ecrire("$schema\n", $fp, $_fputs);
 							}

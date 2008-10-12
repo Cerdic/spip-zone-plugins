@@ -49,9 +49,11 @@ foreach($_POST as $k => $v) { $$k=$_POST[$k]; }
 //
 
 // Total Compteurs par Catégories, Modif Cat', type fichiers
-$req1="SELECT categorie, COUNT(id_document) AS nbr_doc, SUM(total) AS tt_cat ".
-		"FROM spip_dw2_doc WHERE statut='actif' GROUP BY categorie ORDER BY tt_cat DESC";
-$res1=sql_query($req1);
+$res1=sql_select("categorie, COUNT(id_document) AS nbr_doc, SUM(total) AS tt_cat ",
+				"spip_dw2_doc",
+				"statut='actif'",
+				"categorie",
+				"tt_cat DESC");
 $nbcat=sql_count($res1);
 
 
@@ -97,8 +99,8 @@ echo debut_droite('',true);
 if ($nbcat==0)
 	{
 	echo debut_cadre_relief(_DIR_IMG_PACK."statistiques-24.gif",true);
-	echo "<div class='verdana3 bold center'><br><b>"._T('dw:txt_cat_aucun')."<br><br><br>";
-	echo "<a href='".generer_url_ecrire("dw2_ajouts")."'>"._T('dw:ajout_doc')."</a></div><br>";
+	echo "<div class='verdana3 bold center'><br /><b>"._T('dw:txt_cat_aucun')."<br /><br /><br />\n";
+	echo "<a href='".generer_url_ecrire("dw2_ajouts")."'>"._T('dw:ajout_doc')."</a></div><br />\n";
 	echo fin_cadre_relief(true);
 	}
 else
@@ -106,11 +108,11 @@ else
 	echo debut_cadre_trait_couleur("statistiques-24.gif", true, "", _T('dw:txt_categ_trt'));
 
 	$ifond = 0;
-	echo "<table width='100%' align='center' border='0' cellpadding='0' cellspacing='0'>".
+	echo "<table style='width:100%;text-align=center;border:0' cellpadding='0' cellspacing='0'>".
 		"<tr class='cadre-couleur'>\n".
-		"<td width='65%' colspan='2'><div class='cadre-padding verdana2'>"._T('dw:categorie')."</div></td>\n".
-		"<td width='15%'><div class='verdana2 center'>"._T('dw:nbre_docs')."</div></td>\n".
-		"<td width='20%'><div class='verdana2 center'>"._T('dw:compteur')."</div></td>\n".
+		"<td style='width:65%' colspan='2'><div class='cadre-padding verdana2'>"._T('dw:categorie')."</div></td>\n".
+		"<td style='width:15%'><div class='verdana2 center'>"._T('dw:nbre_docs')."</div></td>\n".
+		"<td style='width:20%'><div class='verdana2 center'>"._T('dw:compteur')."</div></td>\n".
 		"</tr>";
 		$add_totaux = array();
 		while ($ligne1=sql_fetch($res1))
@@ -125,24 +127,24 @@ else
 			$ifond = $ifond ^ 1;
 			$bgcolor = ($ifond) ? '#ffffff' : $couleur_claire;
 			
-			echo "<tr bgcolor='$bgcolor' class='arial2 cadre-padding'>\n
-				<td width='5%'>".$bouton."</td>\n
-				<td width='60%'><div class='cadre-padding center bold'>".$nomcat."</div></td>\n
-				<td width='15%'><div class='cadre-padding center'>".$nbrdoc."</div></td>\n
-				<td width='20%'><div class='cadre-padding center bold'>".$ttcat."</div></td>\n
+			echo "<tr style='backgound-color:$bgcolor' class='arial2 cadre-padding'>\n
+				<td style='width:5%'>".$bouton."</td>\n
+				<td style='width:60%'><div class='cadre-padding center bold'>".$nomcat."</div></td>\n
+				<td style='width:15%'><div class='cadre-padding center'>".$nbrdoc."</div></td>\n
+				<td style='width:20%'><div class='cadre-padding center bold'>".$ttcat."</div></td>\n
 				</tr>\n";
-			echo "<tr bgcolor='$bgcolor'><td colspan='4'>\n";
+			echo "<tr style='background-color:$bgcolor'><td colspan='4'>\n";
 			
 			echo debut_block_depliable(false,'bout'.$nomcat); // block invisible
 			echo "<span class='verdana2 bold'>"._T('dw:modif_nom_categ')."</span>\n";
-			echo "<br><span class='arial2'>"._T('dw:txt_categ_01')."</span><br><br>\n";
+			echo "<br /><span class='arial2'>"._T('dw:txt_categ_01')."</span><br /><br />\n";
 			
 			echo "<form action='".generer_url_action("dw2actions", "arg=modifiercategorie-".$nomcat)."' method='post' class='cadre-padding'>\n";
 			echo _T('dw:nouveau_nom')." : ";
 			echo "<input type='text' name='nouv_categ' value='".$nomcat."' size='40' class='fondl'>\n";
 			echo "&nbsp;&nbsp;<input type='submit' value='"._T('dw:modifier')."' class='fondo'>\n";
 			echo "<input type='hidden' name='redirect' value='".generer_url_ecrire("dw2_categories")."' />\n";
-			echo "<input type='hidden' name='hash' value='".calculer_action_auteur("dw2actions-modifiercategorie-".$nomcat)."' />";
+			echo "<input type='hidden' name='hash' value='".calculer_action_auteur("dw2actions-modifiercategorie-".$nomcat)."' />\n";
 			echo "<input type='hidden' name='id_auteur' value='".$connect_id_auteur."' />";
 			echo "</form>";
 			
@@ -150,7 +152,7 @@ else
 			echo "</td></tr>\n";			
 			}
 		reset($add_totaux);
-		echo "<tr bgcolor='$couleur_foncee'><td colspan='3'>";
+		echo "<tr style='backgroundcolor:$couleur_foncee'><td colspan='3'>";
 		echo "<div class='bloc_bouton_r bold' style='color:#ffffff;'>"._T('dw:total_compteurs')."</div></td>";
 		echo "<td width='20%'><div style='color:#ffffff;' class='verdana2 center bold'>".array_sum($add_totaux)."</div></td>";
 		echo "</tr></table>";
@@ -159,8 +161,10 @@ else
 
 
 	// Nbre et Type d'extension fichier des catégories
-	$res2=sql_query("SELECT categorie, SUBSTRING_INDEX(url, '.', -1) AS typefich, COUNT(*) AS nbtype ".
-		"FROM spip_dw2_doc WHERE statut='actif' GROUP BY categorie, typefich");
+	$res2=sql_select("categorie, SUBSTRING_INDEX(url, '.', -1) AS typefich, COUNT(*) AS nbtype ",
+					"spip_dw2_doc",
+					"statut='actif'",
+					"categorie, typefich");
 
 	echo debut_cadre_trait_couleur("doc-24.gif", true, "", _T('dw:types_fich_cat'));
 
@@ -174,19 +178,21 @@ else
 		$ifond = $ifond ^ 1;
 		$bgcolor = ($ifond) ? '#ffffff' : $couleur_claire;
 		
-		echo "<tr class='verdana2' bgcolor='$bgcolor'>\n".
-		"<td width='10%'><div align='right'><b>$nb_type</b></div></td>\n".
-		"<td width='20%'><div align='center'>[ .$type_fichier ]</div></td>\n".
-		"<td width='70%'>$cat</td>".
+		echo "<tr class='verdana2' style='background-color:$bgcolor'>\n".
+		"<td style='width:10%'><div align='right'><b>$nb_type</b></div></td>\n".
+		"<td style='width:20%'><div align='center'>[ .$type_fichier ]</div></td>\n".
+		"<td style='width:70%'>$cat</td>".
 		"</tr>";
 		}
 	echo "</table>\n";
 
 	// total des types fichiers
-	$res3=sql_query("SELECT SUBSTRING_INDEX(url, '.', -1) AS typefich, COUNT(*) AS nbtype ".
-			"FROM spip_dw2_doc WHERE statut='actif' GROUP BY typefich");
+	$res3=sql_select("SUBSTRING_INDEX(url, '.', -1) AS typefich, COUNT(*) AS nbtype ",
+					"spip_dw2_doc",
+					"statut='actif'",
+					"typefich");
 	
-	echo "<table width='100%' align='center' border='0' cellpadding='2' cellspacing='0'>\n";
+	echo "<table style='width:100%;text-align:center;border:0' cellpadding='2' cellspacing='0'>\n";
 	echo "<tr><td colspan='3'>";
 	debut_band_titre("#dfdfdf");
 	echo _T('dw:total_type');
@@ -201,13 +207,13 @@ else
 		$ifond = $ifond ^ 1;
 		$bgcolor = ($ifond) ? '#ffffff' : $couleur_claire;
 		
-		echo "<tr class='verdana2' bgcolor='$bgcolor'>".
-		"<td width='10%'><div align='right'><b>$nb_type</b></div></td>\n".
-		"<td width='20%'><div align='center'>[ .$type_fichier ]</div></td>\n".
-		"<td width='70%'><div align='center'></div></td>\n".
+		echo "<tr class='verdana2' style='background-color:$bgcolor'>".
+		"<td style='width:10%'><div align='right'><b>$nb_type</b></div></td>\n".
+		"<td style='width:20%'><div align='center'>[ .$type_fichier ]</div></td>\n".
+		"<td style='width:70%'><div align='center'></div></td>\n".
 		"</tr>";
 		}
-	echo "</table><br>\n";
+	echo "</table><br />\n";
 	
 	echo fin_cadre_trait_couleur(true);
 

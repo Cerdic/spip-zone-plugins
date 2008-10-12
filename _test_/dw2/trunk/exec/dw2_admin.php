@@ -105,11 +105,10 @@ echo debut_droite('',true);
 
 
 	// Affichage : Nombre de Doc gérés par DW2 (actifs et archives)
-	$result=sql_query("SELECT COUNT(*) as nb_glob FROM spip_dw2_doc");
-	$row=sql_fetch($result);
+	$row=sql_fetsel("COUNT(*) as nb_glob","spip_dw2_doc");
 	$nb_glob=$row['nb_glob'];
 	
-	$result=sql_query("SELECT id_document FROM spip_dw2_doc WHERE statut='actif'");
+	$result=sql_select("id_document","spip_dw2_doc","statut='actif'");
 	$nb_actif=sql_count($result);
 	$nb_archive=$nb_glob-$nb_actif;
 
@@ -135,7 +134,7 @@ echo fin_cadre_relief(true);
 	// Alerte pour Documents supprimés de spip_documents
 	//
 	$result2=sql_select("dw.id_document, dw.nom, dw.doctype, dw.id_doctype ",
-						"FROM spip_dw2_doc dw LEFT JOIN spip_documents sd ON dw.id_document = sd.id_document ",
+						"spip_dw2_doc dw LEFT JOIN spip_documents sd ON dw.id_document = sd.id_document ",
 						"sd.id_document IS NULL AND dw.statut='actif'");
 	
 	
@@ -186,7 +185,7 @@ echo fin_cadre_relief(true);
 	$order="";
 	if ($mode_enregistre_doc=='manuel')
 		{	
-			$where = " AND sd.extension NOT IN ('png', 'jpg', gif') AND dw.id_document IS NULL";
+			$where = " AND sd.extension NOT IN ('png', 'jpg', 'gif') AND dw.id_document IS NULL";
 			$order = "titre";
 		//$query3.="AND sd.id_type > '3' AND dw.id_document IS NULL ORDER BY titre"; 
 		}
@@ -279,7 +278,7 @@ echo fin_cadre_relief(true);
 		$dl=($_GET['vl']+0);
 		
 		// Verif. : telech aujourd'hui ?	
-		$rvtel=sql_query("SELECT id_doc, telech FROM spip_dw2_stats WHERE TO_DAYS(date)=TO_DAYS(NOW())");
+		$rvtel=sql_select("id_doc, telech","spip_dw2_stats","TO_DAYS(date)=TO_DAYS(NOW())");
 		$nligne=sql_count($rvtel);
 		
 	//tableau

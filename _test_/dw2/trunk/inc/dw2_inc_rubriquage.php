@@ -17,7 +17,7 @@
 function sous_enfants_rubrique($collection2){
 	global $lang_dir, $spip_lang_dir, $spip_lang_left;
 
-	$result3 = sql_query("SELECT * FROM spip_rubriques WHERE id_parent='$collection2' ORDER BY 0+titre,titre");
+	$result3 = sql_select("*","spip_rubriques","id_parent='$collection2'","","0+titre,titre");
 
 	if (!sql_count($result3)) return '';
 	$retour = debut_block_depliable(false,"enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n"; // block invisible
@@ -55,7 +55,7 @@ function enfants_rubrique($collection){
 
 	$les_enfants = "";
 
-	$res = sql_query("SELECT id_rubrique, id_parent, titre, descriptif, lang FROM spip_rubriques WHERE id_parent='$collection' ORDER BY 0+titre,titre");
+	$res = sql_select("id_rubrique, id_parent, titre, descriptif, lang","spip_rubriques","id_parent='$collection'","","0+titre,titre");
 
 	while($row=sql_fetch($res)){
 		$id_rubrique=$row['id_rubrique'];
@@ -116,9 +116,9 @@ function aff_menu_parents($id_rubrique, $id_article, $parents="", $souche="") {
 
 	if ($id_article) {
 		if(!$souche) { $souche=$id_article; }
-		$result=sql_query("SELECT id_article, id_rubrique, titre 
-							FROM spip_articles 
-							WHERE id_article=$id_article");
+		$result=sql_select("id_article, id_rubrique, titre",
+							"spip_articles",
+							"id_article=$id_article");
 		while($row = sql_fetch($result)) {
 			$id_article = $row['id_article'];
 			$id_rubrique = $row['id_rubrique'];
@@ -134,9 +134,8 @@ function aff_menu_parents($id_rubrique, $id_article, $parents="", $souche="") {
 	}
 	else if($id_rubrique) {
 		if(!$souche) { $souche=$id_rubrique; }
-		
-		$query = "SELECT id_rubrique, id_parent, titre, lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique";
-		$result = sql_query($query);
+
+		$result = sql_select("id_rubrique, id_parent, titre, lang","spip_rubriques","id_rubrique=$id_rubrique");
 
 		while ($row = sql_fetch($result)) {
 			$id_rubrique = $row['id_rubrique'];
@@ -182,16 +181,12 @@ function afficher_entete_restreindre($id_rubrique,$id_article) {
 	
 	if($id_rubrique) {
 		// prepa info rubrique parent
-		$rq = "SELECT id_parent, titre, descriptif FROM spip_rubriques WHERE id_rubrique=$id_rubrique";
-		$res = sql_query($rq);
-		$row=sql_fetch($res);
+		$row = sql_fetsel("id_parent, titre, descriptif","spip_rubriques","id_rubrique=$id_rubrique");
 		$titre = $row['titre'];
 		$id_parent = $row['id_parent'];
 	}
 	if($id_article) {
-		$rq = "SELECT titre FROM spip_articles WHERE id_article=$id_article";
-		$res = sql_query($rq);
-		$row=sql_fetch($res);
+		$row=sql_fetsel("titre","spip_articles","id_article=$id_article");
 		$titre = $row['titre'];
 	}
 	
@@ -347,10 +342,12 @@ function afficher_articles_enfants($id_rubrique) {
 	
 	$nbr_lignes_tableau = $GLOBALS['dw2_param']['nbr_lignes_tableau'];
 	
-	$q=sql_query("SELECT SQL_CALC_FOUND_ROWS id_article, titre 
-					FROM spip_articles 
-					WHERE id_rubrique=$id_rubrique 
-					LIMIT $dl,$nbr_lignes_tableau");
+	$q=sql_select("SQL_CALC_FOUND_ROWS id_article, titre", 
+					"spip_articles",
+					"id_rubrique=$id_rubrique",
+					"",
+					"",
+					"$dl,$nbr_lignes_tableau");
 	
 	$nl= sql_query("SELECT FOUND_ROWS()");
 	list($nligne) = @sql_fetch($nl);

@@ -160,8 +160,8 @@ echo debut_droite('',true);
 
 	if ($nligne==0)
 		{
-		echo "<br /><b>"._T('dw:txt_cat_aucun')."<br />\n";
-		echo "<br /><br /><font color='#cf4040'><a href='".generer_url_ecrire("dw2_ajouts")."'>"._T('dw:ajout_doc')."</a></font></b><br />\n";
+		echo "<br /><p style='font-weight:bold'>"._T('dw:txt_cat_aucun')."<br />\n";
+		echo "<br /><div style='font-color:#cf4040'><a href='".generer_url_ecrire("dw2_ajouts")."'>"._T('dw:ajout_doc')."</a></div></p><br />\n";
 		echo fin_cadre_relief(true);
 		//break;
 		}
@@ -206,8 +206,8 @@ echo debut_droite('',true);
 		echo "</div><div style='clear:both;'></div>\n";
 	
 		// Entete tableau ..
-		echo " <table align='center' border='0' cellpadding='2' cellspacing='0' width='100%'>\n	
-				<tr><td width='53%' colspan='2' class='tete_colonne'>\n
+		echo " <table style='text-align:center;border:0;width:100%' cellpadding='2' cellspacing='0'>\n	
+				<tr><td style='width:53%' colspan='2' class='tete_colonne'>\n
 				<div style='float:right;' title='"._T('dw:telech_du_jour')."'>[x]</div>\n";
 		if($odb!='nom') {
 			$lien=parametre_url(self(),'odb','');
@@ -216,7 +216,7 @@ echo debut_droite('',true);
 		} else {
 			echo "<b>"._T('dw:nom_fiche')."</b>\n";
 		}
-		echo "</td><td width='23%' class='tete_colonne'>\n";
+		echo "</td><td style='width:23%' class='tete_colonne'>\n";
 		if($odb!='dat') {
 			$lien=parametre_url(self(),'odb','');
 			$lien=parametre_url(self(),'odb','dat');
@@ -225,7 +225,7 @@ echo debut_droite('',true);
 		} else {
 			echo "<b>"._T('dw:dernier_en_date')."</b>\n";
 		}
-		echo "</td><td width='13%' class='tete_colonne'>\n";
+		echo "</td><td style='width:13%' class='tete_colonne'>\n";
 		if($odb!='tot') {
 			$lien=parametre_url(self(),'odb','');
 			$lien=parametre_url(self(),'odb','tot');
@@ -269,20 +269,20 @@ echo debut_droite('',true);
 			
 			// ligne du tableau
 			echo "<tr bgcolor='$couleur'>\n";
-			echo "<td width='4%' height='20'>\n";
+			echo "<td style='width:4%;height:20px'>\n";
 			echo "<a href='".generer_url_ecrire("dw2_modif", "id=".$iddoc)."'>\n";
 			echo "<img src='"._DIR_IMG_DW2."fiche_doc-15.gif' border='0' align='absmiddle' title='"._T('dw:voir_fiche')."' alt='voir fiche' />\n";
 			echo "</a>\n";
 			echo "</td>\n";
-			echo "<td width='49%'>\n";
+			echo "<td style='width:49%'>\n";
 				if($telech_jour)
 					{ echo "<div style='float:right;'> [$telech_jour]</div>\n"; }
 			echo "<div class='arial2' title='".$datecrea."'><b>\n";
 				popup_stats_graph($iddoc,$nom);
 			echo "</b></div></td>\n";
-			echo "<td width='23%'><div align='center' class='arial2'>$der_date</div></td>\n";
-			echo "<td width='13%'><div align='center' class='arial2'><b>$total</b></div></td>\n";
-			echo "<td width='11%'><div align='center' class='arial2'>$moyj</div></td>\n";
+			echo "<td style='width:23%'><div align='center' class='arial2'>$der_date</div></td>\n";
+			echo "<td style='width:13%'><div align='center' class='arial2'><b>$total</b></div></td>\n";
+			echo "<td style='width:11%'><div align='center' class='arial2'>$moyj</div></td>\n";
 			echo "</tr>\n";
 			}
 		echo "</table>\n";
@@ -292,7 +292,7 @@ echo debut_droite('',true);
 	//
 	// graph stats globales base-105j ( <-- spip)
 	//
-	include(_DIR_PLUGIN_DW2."/inc/dw2_inc_stats.php");
+	include_spip('inc/dw2_inc_stats');
 	
 	//
 	//

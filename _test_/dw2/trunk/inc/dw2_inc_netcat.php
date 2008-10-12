@@ -35,8 +35,9 @@ function netcat() {
 // prepa
 //
 // total des types fichiers du catalogue
-$q=sql_query("SELECT SUBSTRING_INDEX(url, '.', -1) AS typefich, COUNT(*) AS nbtype ".
-			"FROM spip_dw2_doc GROUP BY typefich");
+$q=sql_select("SUBSTRING_INDEX(url, '.', -1) AS typefich, COUNT(*) AS nbtype ",
+				"spip_dw2_doc",
+				"typefich");
 while($r=sql_fetch($q)) {
 	$tbl_typefichier[]=$r['typefich'];
 }

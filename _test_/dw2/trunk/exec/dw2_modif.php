@@ -125,8 +125,7 @@ echo creer_colonne_droite('',true);
 	debut_boite_filet("b");
 		echo "<span class='verdana2 bold'>"._T('dw:categories_exist')." :</span>";
 			$ifond = 0;
-		$qcat="SELECT categorie FROM spip_dw2_doc GROUP BY categorie";
-		$rcat=sql_query($qcat);
+		$rcat=sql_select("categorie","spip_dw2_doc","","categorie");
 		while ($licat=sql_fetch($rcat)) {
 			$cat=$licat['categorie'];
 			$ifond = $ifond ^ 1;

@@ -15,21 +15,19 @@
 
 //
 // retourne la Catégorie d'un doc selon choix config
-function select_categorie_doc($rub_select)
-	{
-	$quer_cat=sql_query("SELECT titre FROM spip_rubriques WHERE id_rubrique = $rub_select");
+function select_categorie_doc($rub_select) {
+	$quer_cat=sql_select("titre","spip_rubriques","id_rubrique = $rub_select");
 	while ($row_cat=sql_fetch($quer_cat)) {
 		if(!function_exists('typo')) { include_spip("inc/texte"); }
 		$categorie=typo(supprimer_numero($row_cat['titre']));
-		}
-	return $categorie;
 	}
+	return $categorie;
+}
 
 
 //
 // Retourne tableau du proprio 
-function origine_doc($id_doc)
-{
+function origine_doc($id_doc) {
 	$requete=sql_select("sd.id_document, sl.objet, sl.id_objet ",
 						"spip_documents AS sd, spip_documents_liens AS sl",
 						"sd.id_document=sl.id_document AND sd.id_document = $id_doc");
@@ -104,7 +102,7 @@ function ajout_doc_catalogue($doc,$typecat='', $retour='') {
 	}
 	/* dans linsertq
 	if($heberge) {
-		sql_query("UPDATE spip_dw2_doc SET heberge='$heberge' WHERE id_document = $id_doc");
+		//sql_query("UPDATE spip_dw2_doc SET heberge='$heberge' WHERE id_document = $id_doc");
 	}
 	*/	
 	if ($retour=="oui") { return $nomfichier; }

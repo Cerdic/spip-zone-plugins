@@ -42,12 +42,11 @@ $rep=opendir($b_repert);
 
 // lister les extensions connues de spip (pour limiter les dossiers affichés !)
 	$tab_ext=array();
-	$r_extens = sql_query("SELECT extension FROM spip_types_documents");
-	while ($s_ext = sql_fetch($r_extens))
-		{
+	$r_extens = sql_select("extension","spip_types_documents");
+	while ($s_ext = sql_fetch($r_extens)) {
 		$extens=$s_ext['extension'];
 		$tab_ext[]=$extens;
-		}
+	}
 	
 	// ajouter le repert. "distant" // h.19/03
 	$tab_ext[]="distant";

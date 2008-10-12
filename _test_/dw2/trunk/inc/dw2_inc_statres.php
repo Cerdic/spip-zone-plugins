@@ -19,10 +19,10 @@ function totaux_restreint_stats($prdd,$prdf) {
 	if($prdf=='--') { $wheredate="date='$prdd'"; }
 	else { $wheredate = "date BETWEEN '$prdd' AND '$prdf'"; }
 	
-	$qtd=sql_query("SELECT COUNT(id_doc) as nb_telech, id_auteur 
-					FROM spip_dw2_stats_auteurs 
-					WHERE $wheredate 
-					GROUP BY id_auteur");
+	$qtd=sql_select("COUNT(id_doc) as nb_telech, id_auteur",
+					"spip_dw2_stats_auteurs",
+					$wheredate,
+					"id_auteur");
 	$tot_auteur=sql_count($qtd);
 
 	while($ra=sql_fetch($qtd)) {
@@ -31,9 +31,9 @@ function totaux_restreint_stats($prdd,$prdf) {
 	if($tot_auteur>0) { // <-- eviter erreur array_sum !
 		$tot_telech=array_sum($tbl_tel);
 		
-		$qtf=sql_query("SELECT COUNT(DISTINCT id_doc) as f 
-					FROM spip_dw2_stats_auteurs 
-					WHERE $wheredate");
+		$qtf=sql_select("COUNT(DISTINCT id_doc) as f",
+						"spip_dw2_stats_auteurs",
+						$wheredate);
 		while($rf=sql_fetch($qtf)) {
 			$tot_fichier=$rf['f'];
 		}
@@ -86,11 +86,9 @@ function alpha_restreint_item($prdd,$prdf,$table) {
 
 
 function select_premiere_date() {
-	$prd=sql_query("SELECT DATE_FORMAT(MIN(date),'%d/%m/%Y') as prem 
-					FROM spip_dw2_stats_auteurs 
-					GROUP BY date 
-					");
-	$row=sql_fetch($prd);
+	$row=sql_fetsel("DATE_FORMAT(MIN(date),'%d/%m/%Y') as prem",
+					"spip_dw2_stats_auteurs",
+					"date");
 	return $row['prem'];	
 }
 

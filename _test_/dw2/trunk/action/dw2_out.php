@@ -16,6 +16,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
+include_spip('inc/headers');
+
 // requis spip .h.26/12 charger le bon format url 
 //charger_generer_url();
 // chryjs7/10/8 a change dans spip 2.0
@@ -27,9 +29,8 @@ generer_url_entite("", "", "", "", !NULL);
 | return '1' or '0'
 */
 function droits_telecharge_auteur($id_auteur, $origine, $statut_doc) {
-	$qaut=sql_select("statut","spip_auteurs",'id_auteur=$id_auteur"');
-	
-	$raut=sql_fetch($qaut);
+
+	$raut=sql_fetsel("statut","spip_auteurs",'id_auteur=$id_auteur"');
 	$statut_aut=$raut['statut'];
 	
 	switch ($statut_aut) {
@@ -73,26 +74,24 @@ function action_dw2_out() {
 	
 
 	// Faire un peu de menage ... Si time ip trop vieux .. on efface l'enreg !
-	sql_query("DELETE FROM spip_dw2_triche WHERE time < $timevire");
+	sql_delete("spip_dw2_triche","time < $timevire");
 
 	//
 	// recherche le doc ($id)
 	//
 	// ## h.18/12 .. ajout de 'dw.restreint' ##
-	$req_dw = sql_select("dw.id_document, dw.url, dw.heberge ",
+	$req_dw = sql_select("dw.id_document, dw.url, dw.heberge, dw.total ",
 					"spip_dw2_doc dw, spip_documents sd ",
 					"dw.id_document='$id' AND sd.id_document='$id' AND dw.statut='actif'");
 
 	if(sql_count($req_dw)) {
 		$rec = sql_fetch($req_dw);
-		$tabdoc = array('dw', $rec['url'], $rec['heberge']);
+		$tabdoc = array('dw', $rec['url'], $rec['heberge'], $rec['total'] );
 	}
 	else {
-		$req_spip = sql_select("id_document, fichier, distant","spip_documents","id_document='$id'");
-		$res = sql_fetch($req_spip);
-		$tabdoc = array('sp', $res['fichier'], $res['distant']);
+		$res = sql_fetsel("id_document, fichier, distant","spip_documents","id_document='$id'");
+		$tabdoc = array('sp', $res['fichier'], $res['distant'], 0);
 	}
-
 
 	//
 	// origine du doc, le doc est-il dans un art/rub 'publie'
@@ -160,83 +159,61 @@ function action_dw2_out() {
 			
 				//Si l'ip/id n'existe pas dans la table, on l'ajoute
 				if(!sql_count($req_ipid)) {
-					sql_query("INSERT INTO spip_dw2_triche VALUES('','$ip','$id', '$timee')");
-					#$nouv_insert = mysql_insert_id();		
+					$nouv_insert = sql_insertq("spip_dw2_triche",array(
+										//'id' => '', //auto_increment
+										'ip' => $ip,
+										'idsite' => $id,
+										'time' => $timee
+										) );
+					#$nouv_insert = mysql_insert_id();
 					$increm = "oui";
 				}
 			}
 			else {
 				$increm = "oui";
 			}
-			
-			
+
 			// incremente compteur doc, stats
 			//
 			if ($increm == "oui") {
-				
 				$date = date("Y-m-d");
-								
-				sql_query("UPDATE spip_dw2_doc SET total=total+1, dateur=NOW() WHERE id_document='$id'");
+				
+				//sql_query("UPDATE spip_dw2_doc SET total=total+1, dateur=NOW() WHERE id_document='$id'");
+				sql_updateq("spip_dw2_doc",array('total'=>$tabdoc[3]+1, 'dateur'=>"NOW()"),"id_document='$id'");
 				
 				//h.28/12 .. restreint .. crea||increm ligne sur table stats_auteurs
 				
 				if($auteur_session && $statut_restrict >= '1') {
 					$rq = sql_select("*","spip_dw2_stats_auteurs","id_doc='$id' AND id_auteur='$auteur_session'");
-					
 					if(!sql_count($rq)) {
-						sql_query("INSERT IGNORE INTO spip_dw2_stats_auteurs (date, id_auteur, id_doc, date_enreg) VALUES (CURDATE(), '$auteur_session', '$id', NOW())");
+						sql_insertq("spip_dw2_stats_auteurs",array('date'=>"CURDATE()", 'id_auteur'=>$auteur_session, 'id_doc'=>$id, 'date_enreg'=>"NOW()"));
 					spip_log('enreg stat auteur');
 					}
 				}
 				
 				// créa ligne || incrementation ligne .. dw2_stats
-				$rst = sql_select("*","spip_dw2_stats","date=CURDATE() AND id_doc='$id'");
-				if(!sql_count($rst)) {
-					sql_query("INSERT IGNORE INTO spip_dw2_stats (date, id_doc, telech) VALUES ('$date', '$id', '1')");
+				$rst = sql_fetsel("*","spip_dw2_stats","date=CURDATE() AND id_doc='$id'");
+				if(!$rst) {
+					sql_insertq("spip_dw2_stats", array('date'=>$date, 'id_doc'=>$id, 'telech'=>1) );
 				}
 				else {
-					sql_query("UPDATE spip_dw2_stats SET telech=telech+1 WHERE id_doc='$id' AND date='$date'");
+					sql_updateq("spip_dw2_stats",array('telech'=>$rst['telech']+1),"id_doc='$id' AND date='$date'");
 				}
 			}
-			
-			
-			// et hop envois du Doc au visiteur
-			//
-			$url = $tabdoc[1]; // url
-			$heberge = $tabdoc[2]; // heberge
-			
-			if ($heberge == "local")
-				{ 
-				@header("Location: $adr_site$url"); 
-				exit(0);
-			}
-			else if ($heberge == "distant")
-				{ 
-					@header("Location: $url"); 
-					exit(0);
-				}
-			else
-				{ 
-					@header("Location: $heberge$url"); 
-					exit(0);
-			}
-		
+		}
+
+		// et hop envois du Doc au visiteur
+		$url = $tabdoc[1]; // fichier
+		include_spip("inc/documents");
+		$fichier=get_spip_doc($url);
+		if ($distant=='oui') { 
+			@header("Location: $fichier");
+			exit(0);
 		}
 		else {
-			// doc spip uniquement, on envois
-			$url = $tabdoc[1]; // fichier
-			$distant = $tabdoc[2]; // distant
-				
-			if($distant=='oui') { 
-				@header("Location: $url");
-				exit(0);
-			}
-			else {
-				@header("Location: $adr_site/$url"); 
-				exit(0);
-			}
-	}
-
+			@header("Location: ".$GLOBALS['meta']['adresse_site'] . '/'.$fichier); 
+			exit(0);
+		}
 	}
 	else {
 		// non distribution du fichier
@@ -254,7 +231,5 @@ function action_dw2_out() {
 			redirige_par_entete(generer_url_public('',"dwacces=3",true));
 		}
 	}
-			
-
 } // fin function
 ?>

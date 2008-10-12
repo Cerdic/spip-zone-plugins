@@ -55,7 +55,7 @@ $dl=($vl+0);
 
 
 //Nbr Total de Doc ...(Docs actifs
-$rcc_nligne=sql_query("SELECT nom, id_document FROM spip_dw2_doc WHERE statut='archive' ORDER BY nom");
+$rcc_nligne=sql_select("nom, id_document","spip_dw2_doc","statut='archive'","","nom");
 $nligne=sql_count($rcc_nligne);
 	
 	

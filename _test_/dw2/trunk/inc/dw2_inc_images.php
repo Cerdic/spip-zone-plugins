@@ -13,7 +13,7 @@
 +--------------------------------------------+
 */
 
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //
 // generer le tableau des fichiers imgages type : jpg(1), png(2), gif(3)

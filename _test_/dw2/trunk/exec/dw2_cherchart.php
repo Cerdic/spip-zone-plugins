@@ -9,6 +9,8 @@
 | iframe de "affect_doc", recup articles de Rub
 +--------------------------------------------+
 */
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/presentation');
 
 function exec_dw2_cherchart() {
@@ -31,8 +33,7 @@ function exec_dw2_cherchart() {
 	//
 	// requete .. les articles de la rub selectionnee
 	//
-	$query="SELECT id_article, titre FROM spip_articles WHERE id_rubrique=$id_rub";
-	$result=sql_query($query);
+	$result=sql_select(" id_article, titre","spip_articles","id_rubrique=$id_rub");
 	
 		# efface options de precedente recherche
 		print("<script>");

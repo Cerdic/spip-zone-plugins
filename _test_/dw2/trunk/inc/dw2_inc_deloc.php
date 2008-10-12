@@ -124,9 +124,10 @@ function extens_spipon($fichier) {
 	if (ereg("\.([^.]+)$", $fichier, $match)) {
 		$ext = strtolower($match[1]);
 		
-		if ($ext == 'htm') { $ext = 'html'; }
-		$req = "SELECT extension FROM spip_types_documents WHERE extension='$ext'";
-		$result = sql_query($req);
+		if ($ext == 'htm') { 
+			$ext = 'html';
+		}
+		$result = sql_select("extension","spip_types_documents","extension='$ext'");
 		if ($row = @sql_fetch($result)) {
 			$extension = $row['extension'];
 			return $extension;
@@ -144,8 +145,7 @@ function extens_spipon($fichier) {
 // génère l'affichage adéquate
 function doublons_localiser($iddoc, $id_serv, $site_distant, $repert_distant)
 {
-	$result=sql_query("SELECT url, heberge FROM spip_dw2_doc WHERE id_document = $iddoc");
-	$row=sql_fetch($result);
+	$row=sql_fetsel("url, heberge","spip_dw2_doc","id_document = $iddoc");
 	$url=$row['url'];
 	$heberge = $row['heberge'];
 	$nomfichier = substr(strrchr($url,'/'), 1); // extrait nomfichier d'url
@@ -187,8 +187,7 @@ function rub_parent($leparent) {
 	global $couleur_claire;
 
 	$i++;
- 	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
- 	$result=sql_qeury($query);
+ 	$result=sql_select("*","spip_rubriques","id_parent='$leparent'","","titre");
 	while($row=sql_fetch($result))
 	{
 		$my_rubrique=$row['id_rubrique'];

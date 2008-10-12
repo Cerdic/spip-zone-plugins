@@ -51,9 +51,7 @@ $id_serv=intval($id_serv);
 
 
 // details du serveur de destination : mon_site_ftp
-$query ="SELECT * FROM spip_dw2_serv_ftp WHERE id_serv='$id_serv'";
-$result= sql_query($query);
-$row = sql_fetch($result);
+$row = sql_fetsel("*","spip_dw2_serv_ftp","id_serv='$id_serv'");
 	$ftp_server = $row['serv_ftp'];				// ftp.machin.net
 	$port = $row['port'];
 	$ftp_user_name = $row['login'];	
@@ -162,8 +160,7 @@ if($conex) {
 	$double_colonne = array($a_list, $b_list);
 	
 	// recup tableau du Catalogue DW2
-	$fich_q = "SELECT id_document, SUBSTRING_INDEX(url, '/', -1) AS idmfich FROM spip_dw2_doc";
-	$fich_r = sql_query($fich_q);
+	$fich_r = sql_select("id_document, SUBSTRING_INDEX(url, '/', -1) AS idmfich","spip_dw2_doc");
 
 	while($fich_t = sql_fetch($fich_r)) {
 		$tab_t[$fich_t['id_document']]=$fich_t['idmfich'];
@@ -191,8 +188,7 @@ if($conex) {
 		echo "<table width='100%' border='0' cellpadding='1' cellspacing='0' align='center'>\n";
 		
 		$ifond = $ic;
-		while (list($fichier, $taille) = each($aff_colonne))
-			{
+		while (list($fichier, $taille) = each($aff_colonne)) {
 			$ifond = $ifond ^ 1;
 			$couleur = ($ifond) ? '#FFFFFF' : $couleur_claire;
 			
@@ -204,8 +200,7 @@ if($conex) {
 				{
 				$idmf = '1';
 				$iddoc = array_search($fichier,$tab_t);
-				$r_etat=sql_query("SELECT statut FROM spip_dw2_doc WHERE id_document=$iddoc");
-				$ligne=sql_fetch($r_etat);
+				$ligne=sql_fetsel("statut","spip_dw2_doc","id_document=$iddoc");
 				$etat_arch=$ligne['statut'];
 				// on distingue les doc en archive
 				if ($etat_arch=='archive') {$couleur="#E8C8C8"; }
@@ -230,7 +225,7 @@ if($conex) {
 				"<td><span class='verdana2'>".$fichier_aff."</span></td>\n";
 			echo "<td width='28%'><div align='right'><span class='verdana2'>".taille_octets($taille)."</span></div></td>\n";
 			echo "</form></tr>\n";
-			}
+		}
 		echo "</table></td>\n";
 		$ic++;
 	}

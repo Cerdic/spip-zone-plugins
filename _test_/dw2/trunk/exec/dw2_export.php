@@ -56,8 +56,7 @@ $id_serv=intval($id_serv);
 //
 // le serveur
 //
-$qs = sql_query("SELECT * FROM spip_dw2_serv_ftp WHERE id_serv=$id_serv");
-$row = sql_fetch($qs);
+$row = sql_fetsel("*","spip_dw2_serv_ftp","id_serv=$id_serv");
 	$ftp_server = $row['serv_ftp'];				// ftp.machin.net
 	$port = $row['port'];
 	$ftp_user_name = $row['login'];
@@ -74,9 +73,7 @@ $row = sql_fetch($qs);
 # laisser ici because blème (ftp_put) lorsque en "action" h.18/8/06
 if($exporterdoc=='oui' && isset($id_de)) {
 	// infos fichier a exporter
-	$qdoc = "SELECT url FROM spip_dw2_doc WHERE id_document = $id_de";
-	$rdoc = sql_query($qdoc);
-	$ldoc = sql_fetch($rdoc);
+	$ldoc = sql_fetsel("url","spip_dw2_doc","id_document = $id_de");
 		$url = $ldoc['url'];						// -> (dw2) /IMG/zip/monfichier.zip
 		$fichier = substr(strrchr($url,'/'), 1);	// -> monfichier.zip
 		$chemin_loc = "..".$url;
@@ -97,8 +94,11 @@ if($exporterdoc=='oui' && isset($id_de)) {
 			unlink($chemin_loc);
 			//on met à jour dw2_doc
 			$new_url_dw = "/".$repert_distant.$fichier;
-			sql_query("UPDATE spip_dw2_doc SET id_serveur = '$id_serv', heberge = '$site_distant', ".
-						"url = '$new_url_dw' WHERE id_document='$id_de'");
+			sql_updateq("spip_dw2_doc",array(
+						'id_serveur' => $id_serv,
+						'heberge' => $site_distant,
+						'url' => $new_url_dw),
+						"WHERE id_document='$id_de'" );
 		}
 		else {
 			$message_conex = "echecupload";
@@ -117,12 +117,13 @@ $dl=($vl+0);
 
 
 //Nbr Total de Doc exportables
-$rqndoc=sql_query("SELECT SUBSTRING_INDEX(url, '/', -1) AS fichier, id_document 
-					FROM spip_dw2_doc 
-					WHERE heberge='local' AND statut='actif' ORDER BY nom");
+$rqndoc=sql_select("SUBSTRING_INDEX(url, '/', -1) AS fichier, id_document",
+					"spip_dw2_doc",
+					"heberge='local' AND statut='actif'",
+					"",
+					"nom");
 $nligne=sql_count($rqndoc);
-	
-	
+
 // prepa toutdeplier toutreplier + tableau des prem lettres
 $gen_ltt = array();
 while ($row_dep=sql_fetch($rqndoc)) {

@@ -52,10 +52,9 @@ include_spip('inc/commencer_page');
 	
 	echo "<div style='padding:10px; text-align:center;'>\n";
 
-		include(_DIR_PLUGIN_DW2."/inc/dw2_inc_stats.php");
+		include_spip('inc/dw2_inc_stats');
 	
 	echo "</div>\n</body>\n</html>";
-
 }
 
 ?>

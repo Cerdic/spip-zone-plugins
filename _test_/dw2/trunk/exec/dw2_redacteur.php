@@ -27,18 +27,18 @@ function exec_dw2_redacteur() {
 //
 // prepa 
 //
-	$res=sql_query("SELECT saa.id_article, sa.titre 
-					FROM spip_auteurs_articles saa, spip_articles sa 
-					WHERE saa.id_auteur=$connect_id_auteur AND saa.id_article=sa.id_article 
-					AND sa.statut='publie'");
+	$res=sql_select("saa.id_article, sa.titre",
+					"spip_auteurs_articles saa, spip_articles sa",
+					"saa.id_auteur=$connect_id_auteur AND saa.id_article=sa.id_article AND sa.statut='publie'");
 					
 	$tab=array();
 	
 	while($row=sql_fetch($res)) {
 		$id_art = $row['id_article'];
 		
-		$rdoc=sql_query("SELECT id_document, url, total, DATE_FORMAT(dateur,'%d/%m/%Y - %H:%i') AS datetel 
-							FROM spip_dw2_doc WHERE id_doctype=$id_art AND doctype='article'");
+		$rdoc=sql_select("id_document, url, total, DATE_FORMAT(dateur,'%d/%m/%Y - %H:%i') AS datetel",
+						"spip_dw2_doc",
+						"id_doctype=$id_art AND doctype='article'");
 		$i=0;
 		while ($ldoc=sql_fetch($rdoc)) {
 			$nomfichier = substr(strrchr($ldoc['url'],'/'), 1);

@@ -99,7 +99,7 @@ echo debut_droite('',true);
 	
 	// catalogue d'images (enreg. img un/un)
 	# simple include pour ne pas passer par fonction spip en sup. (na !))
-	include(_DIR_PLUGIN_DW2."/inc/dw2_inc_images.php");
+	include_spip('inc/dw2_inc_images');
 	#
 
 //

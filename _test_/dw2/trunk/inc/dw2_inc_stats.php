@@ -16,6 +16,7 @@
 # Scoty - koakidi.com
 # (2.13 - prefix .. spip_)
 # 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // Donne la hauteur du graphe en fonction de la valeur maximale
@@ -43,10 +44,10 @@ global $spip_lang_left;
 
 
 if ($id_document = intval($id_document)) {
-	$query = "SELECT nom, total, DATE_FORMAT(date_crea,'%d/%m/%Y') AS datecrea 
-			FROM spip_dw2_doc 
-			WHERE statut='actif' AND id_document ='$id_document'";
-	$result = sql_query($query);
+
+	$result = sql_select("nom, total, DATE_FORMAT(date_crea,'%d/%m/%Y') AS datecrea",
+						"spip_dw2_doc",
+						"statut='actif' AND id_document ='$id_document'");
 
 	if ($row = sql_fetch($result)) {
 		// h.20/01/07 .. cesure ' ' sur nom/nomfichier trop long + 30 caract
@@ -57,8 +58,9 @@ if ($id_document = intval($id_document)) {
 	}
 } 
 else {
-	$query = "SELECT SUM(total) AS total_absolu FROM spip_dw2_doc WHERE statut='actif'";
-	$result = sql_query($query);
+	$result = sql_select("SUM(total) AS total_absolu",
+							"spip_dw2_doc",
+							"statut='actif'");
 
 	if ($row = sql_fetch($result)) {
 		$total_absolu = $row['total_absolu'];
@@ -85,17 +87,23 @@ if (!$origine) {
 	else { $where = "1"; }
 	
 	// requete premiere date dans dw2_stats
-	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix FROM spip_dw2_stats ".
-		"WHERE $where ORDER BY date LIMIT 0,1";
-	$result = sql_query($query);
+	$result = sql_select("UNIX_TIMESTAMP(date) AS date_unix",
+						"spip_dw2_stats ",
+						$where,
+						"",
+						"date",
+						"0,1");
+	
 	while ($row = sql_fetch($result)) {
 		$date_premier = $row['date_unix'];
 	}
 
 	// global sur la période (105 j. :$aff_jours)
-	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix, SUM(telech) AS visites FROM spip_dw2_stats ".
-		"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) AND TO_DAYS(date) < TO_DAYS(NOW()) GROUP BY date ORDER BY date";
-	$result=sql_query($query);
+		$result=sql_select("UNIX_TIMESTAMP(date) AS date_unix, SUM(telech) AS visites",
+							"spip_dw2_stats ",
+							"$where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) AND TO_DAYS(date) < TO_DAYS(NOW())",
+							"date",
+							"date");
 
 	while ($row = sql_fetch($result)) {
 		$date = $row['date_unix'];
@@ -108,11 +116,14 @@ if (!$origine) {
 
 	// Visites du jour
 	if ($id_document) {
-		$query = "SELECT telech AS visites FROM spip_dw2_stats WHERE to_days(date) = to_days(NOW()) AND id_doc = $id_document";
-		$result = sql_query($query);
+		$result = sql_select("telech AS visites",
+								"spip_dw2_stats",
+								"to_days(date) = to_days(NOW()) AND id_doc = $id_document");
+
 	} else {
-		$query = "SELECT SUM(telech) AS visites FROM spip_dw2_stats WHERE to_days(date) = to_days(NOW())";
-		$result = sql_query($query);
+		$result = sql_select("SUM(telech) AS visites",
+								"spip_dw2_stats",
+								"to_days(date) = to_days(NOW())");
 	}
 	if ($row = @sql_fetch($result))
 		$visites_today = $row['visites'];
@@ -430,11 +441,12 @@ if (!$origine) {
 
 		echo "<div align='left'>";
 		///////// Affichage par mois
-		$query="SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%Y-%m') AS date_unix, SUM(telech) AS total_visites ".
-			"FROM spip_dw2_stats ".
-			"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL 2700 DAY) GROUP BY date_unix ORDER BY date";
-		$result=sql_query($query);
-		
+		$result=sql_select("FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%Y-%m') AS date_unix, SUM(telech) AS total_visites ",
+							"spip_dw2_stats",
+							"$where AND date > DATE_SUB(NOW(),INTERVAL 2700 DAY)",
+							"date_unix",
+							"date");
+
 		$i = 0;
 		while ($row = sql_fetch($result)) {
 			$date = $row['date_unix'];

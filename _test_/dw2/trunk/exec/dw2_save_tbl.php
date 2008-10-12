@@ -72,7 +72,8 @@ if($force_email==2 && !empty($ponct_email)) { $destinataire_save = $ponct_email;
 
 //
 // Param. a laisser tel que ... pour DW2 !!
-$base = $GLOBALS['spip_mysql_db'];			// Nom BASE
+
+$base = $GLOBALS['connexions'][0]['db']; //$GLOBALS['spip_mysql_db'];			// Nom BASE
 $prefixe_save = "dw2_";						// Prefixe du fichier de sauvegarde
 $accepter = "dw2_";							// Sauver que les tables avec une chaine dans le nom :
 $eviter = "_index;_temp;_cache;_triche";	// Tables ignorees si contient dans son nom les chaines specifiees.
@@ -210,7 +211,7 @@ echo debut_cadre_trait_couleur(_DIR_IMG_PACK."base-24.gif", true, "", _T('dw:sau
 	if($flag_save_dw) {
 		echo "<br />\n";
 		echo debut_cadre_enfonce("", true, "", _T('dw:resultat_sauvegarde'));
-			include(_DIR_PLUGIN_DW2."/inc/dw2_inc_save.php");
+			include_spip('inc/dw2_inc_save');
 		echo fin_cadre_enfonce(true);
 	}
 echo fin_cadre_relief(true);

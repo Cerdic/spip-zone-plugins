@@ -43,7 +43,7 @@ function titredesc() {
 	$dl=($vl+0);
 
 //Nbr Total de Doc ...(Docs actifs
-$rcc_nligne=sql_query("SELECT id_document FROM spip_dw2_doc WHERE statut='actif'");
+$rcc_nligne=sql_select("id_document","spip_dw2_doc","statut='actif'");
 $nligne=sql_count($rcc_nligne);
 
 // prepa toutdeplier toutreplier + tableau des prem lettres

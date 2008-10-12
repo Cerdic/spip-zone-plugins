@@ -74,9 +74,7 @@ if(isset($id_serv)) {
 	$id_serv=intval($id_serv);
 	
 	// cas modif / Duplication serveur
-	$q_serv = "SELECT * FROM spip_dw2_serv_ftp WHERE id_serv='$id_serv'";
-	$r_serv = sql_query($q_serv);
-	$rw = sql_fetch($r_serv);
+	$rw = sql_fesel("*","spip_dw2_serv_ftp","id_serv='$id_serv'");
 	$serv_ftp = $rw['serv_ftp'];
 	$host_dir = $rw['host_dir'];
 	$port = $rw['port'];
@@ -140,7 +138,7 @@ echo creer_colonne_droite('',true);
 
 	// rappel Serveurs
 	# .. faire un fichier à inclure
-	$rq_serv = sql_query("SELECT * FROM spip_dw2_serv_ftp");
+	$rq_serv = sql_select("*","spip_dw2_serv_ftp");
 	if(sql_count($rq_serv)) {
 		debut_boite_filet("a");
 		echo "<table width='100%' cellpadding='2' cellspacing='0'>";

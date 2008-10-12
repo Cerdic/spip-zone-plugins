@@ -148,7 +148,7 @@ function message_echec_connexion($message_conex) {
 //
 function href_popup_std($chemin, $target)
 	{
-	$href = '"$chemin" '. 
+	$href = "\"$chemin\" ". 
 		#target=\"$target\" 
 		"onclick=\"javascript:window.open(this.href, '$target', 
 		'width=540,height=550,menubar=no,scrollbars=yes,resizable=yes'); 

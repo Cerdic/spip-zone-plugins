@@ -41,7 +41,7 @@ include_spip("inc/dw2_inc_pres");
 echo	debut_grand_cadre(true);
 
 		# simple include pour ne pas passer par fonction spip en sup. (na !))
-		include(_DIR_PLUGIN_DW2."/inc/dw2_inc_images.php");
+		include_spip('inc/dw2_inc_images');
 		#
 
 	bloc_minibout_act(_T('dw:top'), "#haut_page", _DIR_IMG_PACK."spip_out.gif","","");
