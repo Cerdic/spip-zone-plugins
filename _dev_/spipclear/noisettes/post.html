@@ -8,7 +8,6 @@
 [(#DATE|affdate_long)] <:spipclear:attime:> [(#DATE|heures)]:[(#DATE|minutes)]
 <span>::</span> <BOUCLE_categorie(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></BOUCLE_categorie>
 <span>::</span>#DEBUT_SURLIGNE<a href="#URL_SITE_SPIP/#URL_ARTICLE" title="<:spipclear:permalink_pour:> : [(#TITRE|textebrut|entites_html)]">##ID_ARTICLE</a>#FIN_SURLIGNE
-<span>::</span><a href="[(#URL_PAGE{rss}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{type,co})]" title="<:spipclear:rss_pour:> : [(#TITRE|textebrut|entites_html)]">rss</a>
 </p>
 
 [<div class="post-excerpt #EDIT{chapo}">
@@ -54,7 +53,16 @@
 	</B_commentaires_article>
 	<:spipclear:aucun_commentaire:>
 	<//B_commentaires_article>
+</div>
+
+<div id="comment-form">
 	<h3 id="reponse"><:spipclear:ajouter_commentaire:></h3>
 	[(#FORMULAIRE_FORUM)][(#PARAMETRES_FORUM|?{'',<:spipclear:commentaires_fermes:>})]
 </div>
+
+<p id="comments-feed">
+	<a href="[(#URL_PAGE{rss}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{type,co})]" class="feed" title="<:spipclear:rss_pour:> : [(#TITRE|textebrut|entites_html)]">
+	<:spipclear:rss_commentaire_article:>
+	</a>
+</p>
 </BOUCLE_article>

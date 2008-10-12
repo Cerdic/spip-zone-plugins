@@ -43,10 +43,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //E
 
 //F
-'fil_rss' => 'fil rss',
-'fil_rss_commentaires' => 'fil rss commentaires',
-'fil_atom' => 'fil atom',
-'fil_atom_commentaires' => 'fil atom commentaires',
+'fil_rss' => 'Fil RSS des billets',
+'fil_rss_commentaires' => 'Fil RSS des commentaires',
+'fil_atom' => 'Fil Atom des billets',
+'fil_atom_commentaires' => 'Fil Atom des commentaires',
 
 //G
 'go_main' => 'Aller au contenu',
@@ -82,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'recherche' => 'Recherche',
 'resultat_recherche' => 'R&eacute;sultats pour votre recherche de',
 'rss_pour' => 'fil RSS des commentaires de',
+'rss_commentaire_article' => 'Fil des commentaires de ce billet',
 
 //S
 'secteurs_spipclear' => 'Secteurs SpipClear',
