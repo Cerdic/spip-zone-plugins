@@ -24,15 +24,19 @@ add_outil( array(
 ));
 */
 
-/* SPIP 2.0
-define('_NO_CACHE',-1); -> ne jamais utiliser le cache ni meme creer les fichiers cache
-define('_NO_CACHE',1); -> ne pas utiliser le fichier en cache, mais stocker le resultat du calcul dans le fichier cache
+/* pour SPIP 2.0
+define('_NO_CACHE',-1); -> ne jamais utiliser le cache ni meme creer les fichiers cache (Compat : 1)
+define('_NO_CACHE',1); -> ne pas utiliser le fichier en cache, mais stocker le resultat du calcul dans le fichier cache (Compat : 0)
 define('_NO_CACHE',0); -> toujours prendre tous les fichiers en cache 
+ * La fonction retourne :
+ * 1 si il faut mettre le cache a jour
+ * 0 si le cache est valide
+ * -1 si il faut calculer sans stocker en cache
 */
 add_variable( array(
 	'nom' => 'radio_desactive_cache3',
 	'format' => _format_NOMBRE,
-	'radio' => defined('_SPIP19300')?array(1 => 'item_oui', 0 => 'item_non', -1 => 'toto'):array(1 => 'item_oui', 0 => 'item_non'),
+	'radio' => defined('_SPIP19300')?array(1 => 'item_oui', 0 => 'item_non'):array(1 => 'item_oui', 0 => 'item_non'),
 	'defaut' => 0,
 	// si la variable est egale a 1, on code...
 	// jquery.js et forms_styles.css restent en cache.
@@ -557,10 +561,17 @@ add_outil( array(
 	'categorie' => 'spip',
 ));
 
+add_variable( array(
+	'nom' => 'balise_decoupe',
+	'format' => _format_NOMBRE,
+	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
+	'defaut' => 0,
+	'code:%s' => "define('_decoupe_BALISE', %s);\n",
+));
 add_outil( array(
 	'id' => 'decoupe',
 	'contrib'	=> 2135,
-	'code:options' => "define('_onglets_FIN', '<span class=\'_fooonglets\'></span>');\n@define('_decoupe_SEPARATEUR', '++++');
+	'code:options' => "%%balise_decoupe%%define('_onglets_FIN', '<span class=\'_fooonglets\'></span>');\n@define('_decoupe_SEPARATEUR', '++++');
 if (isset(\$_GET['var_recherche'])) {
 	include_spip('inc/headers');
 	redirige_par_entete(str_replace('var_recherche=', 'decoupe_recherche=', \$GLOBALS['REQUEST_URI']));
@@ -616,7 +627,6 @@ div.cs_sommaire a:after {display:none;}",
 	// inserer : $table_des_traitements['TEXTE']['article']= 'sommaire_d_article(propre(%s))';
 	'traitement:TEXTE/articles:post_propre' => 'sommaire_d_article',
 	'traitement:CS_SOMMAIRE:post_propre' => 'sommaire_d_article_balise',
-	'traitement:CS_SOMMAIRE:pre_propre' => 'sommaire_supprime_notes',
 	'categorie' => 'typo-corr',
 	'pipeline:nettoyer_raccourcis_typo' => 'sommaire_nettoyer_raccourcis',
 ));

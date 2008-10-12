@@ -101,7 +101,7 @@ function sommaire_d_article($texte) {
 		else return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|onglets|table', 'sommaire_d_article_rempl', $texte, false);
 }
 
-// fonction appelee par le traitement pre_propre de #CS_SOMMAIRE
+// fonction pour la balise #CS_SOMMAIRE
 function sommaire_supprime_notes($texte) {
 	return preg_replace(', *\[\[(.*?)\]\],msS', '', $texte);
 }
@@ -113,14 +113,11 @@ function sommaire_d_article_balise($texte) {
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|onglets|table', 'sommaire_d_article_rempl', $texte, true);
 }
 
-// on veut la balise
+// si on veut la balise #CS_SOMMAIRE
 if (defined('_sommaire_BALISE')) {
-	// Balise #CS_SOMMAIRE
 	function balise_CS_SOMMAIRE($p) {
-		$type = $p->type_requete;
-		if ($type == 'articles') {
-			$_texte = champ_sql('texte', $p);
-			$p->code = "$_texte";
+		if ($p->type_requete == 'articles') {
+			$p->code = 'sommaire_supprime_notes('.champ_sql('texte', $p).')';
 		} else {
 			$p->code = "''";
 		}

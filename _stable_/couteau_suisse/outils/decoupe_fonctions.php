@@ -57,12 +57,13 @@ function decoupe_image($fich, $help, $self, $off, $val, &$images, $double=false)
 }
 
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
-function decouper_en_pages_rempl($texte) {
+function decouper_en_pages_rempl($texte, $pagination_seule=false) {
+echo $pagination_seule?'OUI':'NON';
 	// si pas de separateur, on sort
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
 
 	// au cas ou on ne veuille pas de decoupe, on remplace les '++++' par un filet.
-	if (defined('_CS_PRINT')) {
+	if (defined('_CS_PRINT') && !$pagination_seule) {
 		@define(_decoupe_FILET, '<p style="border-bottom:1px dashed #666; padding:0; margin:1em 20%; font-size:4pt;" >&nbsp; &nbsp;</p>');
 		return str_replace(_decoupe_SEPARATEUR, _decoupe_FILET, $texte);
 	}
@@ -76,7 +77,7 @@ function decouper_en_pages_rempl($texte) {
 	// traitement des pages
 	$pages = explode(_decoupe_SEPARATEUR, $texte);
 	$num_pages = count($pages);
-	if ($num_pages == 1) return $texte;
+	if ($num_pages == 1) return $pagination_seule?'':$texte;
 	$artpage = max(intval(artpage()), 1);
 	$artpage = min($artpage, $num_pages);
 /*
@@ -85,6 +86,17 @@ function decouper_en_pages_rempl($texte) {
 	if (strlen($_GET['var_recherche']) || $artpage < 1 || $artpage > $num_pages)
 		return join("<hr/>", $pages);
 */
+
+	// page demandee
+	$page = cs_safebalises($pages[$artpage-1]);
+	if (isset($_GET['decoupe_recherche'])) {
+		include_spip('inc/surligne');
+		$page = surligner_mots($page, $_GET['decoupe_recherche']);
+	}
+	decoupe_notes_orphelines($page);
+	// si la balise #CS_DECOUPE est utilisee on renvoie le texte sans pagination
+	if (!$pagination_seule && defined('_decoupe_BALISE')) return $sommaire.$page;
+
 	$self = nettoyer_uri();//self();//$GLOBALS['REQUEST_URI'];
 
 	// images calculees par decoupe_installe()
@@ -108,8 +120,8 @@ function decouper_en_pages_rempl($texte) {
 			$milieu[] = "<span style=\"color: lightgrey; font-weight: bold; text-decoration: underline;\">$i</span>";
 		} else {
 			// isoler la premiere ligne non vide de chaque page pour l'attribut title
-			$page = supprimer_tags(cs_safebalises(cs_introduire($pages[$i-1])));
-			$title = preg_split("/[\r\n]+/", trim($page), 2);
+			$page_ = supprimer_tags(cs_safebalises(cs_introduire($pages[$i-1])));
+			$title = preg_split("/[\r\n]+/", trim($page_), 2);
 			$title = attribut_html(/*propre*/(couper($title[0], _decoupe_NB_CARACTERES)));//.' (...)';
 			$title = _T('couteau:page_lien', array('page' => $i, 'title' => $title));
 			$milieu[] = '<a href="' . parametre_url($self,'artpage',"{$i}-$num_pages") . "\" title=\"$title\">$i</a>";
@@ -120,14 +132,10 @@ function decouper_en_pages_rempl($texte) {
 	// s'il existe plus de trois pages on retourne la pagination << < 1 2 3 4 > >>
 	// sinon une forme simplifiee : < 1 2 3 >
 	$pagination = $num_pages>3?"$debut\n$precedent\n$milieu\n$suivant\n$fin":"$precedent\n$milieu\n$suivant";
+	if ($pagination_seule) 
+		return "<div id='decoupe_balise' class='pagination decoupe_balise'>\n$pagination\n</div>\n";
 	$pagination1 = "<div id='decoupe_haut' class='pagination decoupe_haut'>\n$pagination\n</div>\n";
 	$pagination2 = "<div id='decoupe_bas' class='pagination decoupe_bas'>\n$pagination\n</div>\n";
-	$page = cs_safebalises($pages[$artpage-1]);
-	if (isset($_GET['decoupe_recherche'])) {
-		include_spip('inc/surligne');
-		$page = surligner_mots($page, $_GET['decoupe_recherche']);
-	}
-	decoupe_notes_orphelines($page);
 	return $sommaire.$pagination1.$page.$pagination2;
 }
 
@@ -146,10 +154,7 @@ function decoupe_notes_orphelines(&$texte) {
 	$GLOBALS['les_notes'] = trim($notes);
 }
 
-// ici on est en pre_propre, tests de compatibilite requis
-function cs_onglets($texte){
-	// protection du texte
-	$texte = cs_echappe_balises('html|code|cadre|frame|script|cite|jeux', false, $texte);
+function cs_decoupe_compat($texte){
 	// surcharge possible de _decoupe_SEPARATEUR par _decoupe_COMPATIBILITE
 	$rempl = ',\s*('
 		. preg_quote(_decoupe_SEPARATEUR,',')
@@ -157,14 +162,20 @@ function cs_onglets($texte){
 		. ')\s*,';
 	// mise au clair des separateurs : pour les onglets ET la decoupe en page
 	$texte = preg_replace($rempl, "\n\n"._decoupe_SEPARATEUR."\n\n", $texte);
-	// si pas d'onglets, on sort
+	// si pas d'onglets ou pagination seule demandee, on sort
 	if (strpos($texte, '<onglet')===false) return $texte;
-	// le texte est deja protege
-	return cs_echappe_balises(false, 'decouper_en_onglets_rempl', $texte);
+	// traitement des onglets
+	return decouper_en_onglets_rempl($texte);
 }
 
-// ici on est en post_propre, tests de compatibilite non requis
-function cs_decoupe($texte){
+// ici on est en pre_propre, tests de compatibilite requis, puis traitement des onglets
+function cs_onglets($texte){
+	return cs_echappe_balises('html|code|cadre|frame|script|cite|jeux', 'cs_decoupe_compat', $texte);
+}
+
+// ici on est en post_propre, tests de compatibilite effectues
+function cs_decoupe($texte, $pagination_seule=false){
+ echo $pagination_seule?'oui':'non';
 	// si pas de separateur, on sort
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
 	// verification des metas qui stockent les liens d'image
@@ -172,7 +183,7 @@ function cs_decoupe($texte){
 		include_spip('outils/decoupe');
 		decoupe_installe();
 	}
-	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|table', 'decouper_en_pages_rempl', $texte);
+	return cs_echappe_balises('html|code|cadre|frame|script|cite|table|jeux', 'decouper_en_pages_rempl', $texte, $pagination_seule);
 }
 
 // Compatibilite
@@ -210,6 +221,19 @@ function artpage_fin($t=false) {
 }
 function artpage_debut($t=false) {
 	return artpage($t)==1;
+}
+
+// si on veut la balise #CS_DECOUPE (pagination uniquement)
+if (defined('_decoupe_BALISE')) {
+	function balise_CS_DECOUPE($p) {
+		if ($p->type_requete == 'articles') {
+			$p->code = 'cs_decoupe(propre(cs_onglets('.champ_sql('texte', $p).')), true)';
+		} else {
+			$p->code = "''";
+		}
+		$p->interdire_scripts = true;
+		return $p;
+	}
 }
 
 ?>
