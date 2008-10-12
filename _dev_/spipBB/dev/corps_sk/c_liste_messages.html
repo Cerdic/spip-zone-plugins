@@ -24,12 +24,8 @@
 		<tr>
 	  		<th colspan="2"><:spipbb:message_s:></th>
 		</tr>
-		[(#REM) un peu lourd mais le critère {plat} déconne avec {id_secteur}]
-		<BOUCLE_s(ARTICLES){id_secteur=#ID_RUBRIQUE}>
-		<BOUCLE_a(FORUMS){doublons messages}{plat}{id_article} /> 
-		</BOUCLE_s>
 
-		<BOUCLE_liste_mess(FORUMS){id_auteur}{!doublons messages}{plat}{!par date}{pagination #CONFIG{spipbb/fixlimit}}>
+		<BOUCLE_liste_mess(FORUMS spip_articles){id_auteur}{id_secteur=#ID_RUBRIQUE}{plat}{!par date}{pagination #CONFIG{spipbb/fixlimit}}>
 
 		<tr class="inter entete_sujet">
 			<td id="forum#ID_FORUM" colspan="2">
