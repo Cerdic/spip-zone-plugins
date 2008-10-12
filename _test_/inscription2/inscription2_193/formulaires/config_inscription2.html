@@ -31,10 +31,10 @@
 					<table>
 						<thead>
 							<tr>
-								<th style="width:140px"> <:inscription2:form:></th>
-								<th style="width:70px"> <:inscription2:fiche_mod:> </th>
-								<th style="width:70px"> <:inscription2:fiche:> </th>
-								<th style="width:70px"> <:inscription2:table:> </th>
+								<th style="width:140px"><:inscription2:form:></th>
+								<th style="width:70px"><:inscription2:fiche_mod:></th>
+								<th style="width:70px"><:inscription2:fiche:></th>
+								<th style="width:70px"><:inscription2:table:></th>
 							</tr>
 						</thead>
 						<tr>
@@ -44,7 +44,7 @@
 						</tr>
 						<tr>
 							<td>
-								<input type="checkbox" name="nom" checked="checked" id="nom" onclick="alert('par defaut');return false;" />
+								<input type="checkbox" name="nom" [checked="(#ENV{nom}?{checked})"] id="nom" />
 								<div style="display:none;">
 									<input type="checkbox" name="nom_obligatoire" checked="checked" id="nom_obligatoire" />
 								</div>

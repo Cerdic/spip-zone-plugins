@@ -134,7 +134,14 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 	}
 	
 	//Définir le login
-	include_spip('balise/formulaire_inscription');
+	if(!$valeurs['nom']){
+		if($valeur['nom_famille']||$valeur['prenom']){
+			$valeur['nom'] = $valeur['prenom'].' '.$valeur['nom_famille'];
+		}
+		else{
+			$valeur['nom'] = strtolower(translitteration(preg_replace('/@.*/', '', $mail)));
+		}
+	}
 	if (!_request('login')) {
 		$valeurs['login'] = test_login($valeurs['nom'], $valeurs['email']);
 	}
@@ -167,8 +174,8 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 		);
 		$new = true;
 	}
+	
 	$table = 'spip_auteurs_elargis';
-
 	//extrait les valeurs propres à spip_auteurs_elargis
 	
 	//genere le tableau des valeurs à mettre à jour pour spip_auteurs
