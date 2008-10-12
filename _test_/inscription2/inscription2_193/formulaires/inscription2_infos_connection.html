@@ -1,0 +1,40 @@
+[(#REM) Charge les informations minimale d'un auteur]
+<fieldset class="info_connection">
+	<legend>
+	    <:inscription2:info_connection:>
+	</legend>
+
+	<ul>
+	    [(#CONFIG{inscription2/nom}|=={on}|?{' ', ''})	
+	    <li class="editer_nom[ (#CONFIG{inscription2/nom_obligatoire}|=={on}|?{obligatoire})]">
+	        <label for="nom"><:inscription2:nom:> (<:inscription2:nom_explication:>)</label>
+	        <input type="text" class="text" name="nom" id="nom" value="#ENV{nom}" />
+	        [<p class='erreur'>(#ENV**{erreurs}|table_valeur{nom})</p>]
+	    </li>]
+	    
+	    [(#CONFIG{inscription2/login}|=={on}|?{' ', ''})	
+	    <li class="editer_login[ (#CONFIG{inscription2/login_obligatoire}|=={on}|?{obligatoire})]">
+	        <label for="login"><:inscription2:login:></label>
+	        <input type="text" class="text" name="login" id="login" value="#ENV{login}" />
+	        [<p class='erreur'>(#ENV**{erreurs}|table_valeur{login})</p>]
+	    </li>]
+	
+	    [(#CONFIG{inscription2/email}|=={on}|?{' ', ''})	
+	    <li class="editer_email[ (#CONFIG{inscription2/email_obligatoire}|=={on}|?{obligatoire})]">
+	        <label for="email"><:inscription2:email:></label>
+	        <input type="text" class="text" name="email" id="email" value="#ENV{email}" />
+	        [<p class='erreur'>(#ENV**{erreurs}|table_valeur{email})</p>]
+	    </li>]
+		[(#CONFIG{inscription2/autorisation_bi}|=={on}|?{' ',''})
+		<li>
+			<label for="email">[(#MODELE{popup}{id_popup=157}{texte=<:inscription_autorisation_bi:>})]</label>
+			<input type="checkbox" name="autorisation_bi" id="autorisation_bi" value="ok" [(#ENV{autorisation_bi}|?{'checked="checked"',''})]/>
+			<br class="nettoyeur" />
+			<div [(#ENV{autorisation_bi}|?{'',' '})class="cache"]>
+				<label for="email"><:compte_nb:></label>
+				<input type="text" class="text" name="compte_nb" id="compte_nb" value="#ENV{compte_nb}" />
+			</div>
+		</li>
+		]
+	</ul>
+</fieldset>

@@ -25,15 +25,9 @@
 	jQuery("#inscription").validate({
 		event: "keyup",
 		errorPlacement: function(error, element) {
-			error.appendTo( element.parent("div") ).after("");
+			error.appendTo( element.parent("li") ).after("");
 		},
 		rules: {
-			[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
-				abonnement:{required: true},
-			]
-			[(#EVAL{defined('_DIR_PLUGIN_ECHOPPE')}|?{' ',''})
-				#INCLURE{fond=javascript/echoppe_inscription_rules}
-			]
 			sexe:{[(#CONFIG{inscription2/sexe_obligatoire}|=={on}|?{required: true})]},
 			nom_famille: {[(#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
 			prenom:{[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
@@ -60,13 +54,6 @@
 			pays:{[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{required: true,''})]}
 		},
 		messages: {
-			[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
-				abonnement: {
-					required:"<:inscription2:champ_obligatoire:>"},
-			]
-			[(#EVAL{defined('_DIR_PLUGIN_ECHOPPE')}|?{' ',''})
-				#INCLURE{fond=javascript/echoppe_inscription_messages}
-			]
 			sexe: {
 				required:"<:inscription2:champ_obligatoire:>"
 			},
@@ -165,18 +152,11 @@
 	});
 
 	// propose username and name by combining first- and lastname
-	jQuery("#username").focus(function() {
+	jQuery("#username, #nom").focus(function() {
 		var prenom = jQuery("#prenom").val();
 		var nom = jQuery("#nom_famille").val();
 		if(prenom && nom && !this.value) {
 			this.value = prenom + "." + nom;
-		}
-	});
-	jQuery("#nom").focus(function() {
-		var prenom = jQuery("#prenom").val();
-		var nom = jQuery("#nom_famille").val();
-		if(prenom && nom && !this.value) {
-			this.value = prenom + " " + nom;
 		}
 	});
 	jQuery('.obligatoire label').append('*');
