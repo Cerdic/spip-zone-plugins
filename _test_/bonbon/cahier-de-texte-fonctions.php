@@ -71,22 +71,34 @@ function bonbon_fusion_tableau($tab,$autretab) {
 }
 
 //Quelques fonctions pour que Bonbon manipule la base de données:
-//ajouter un groupe
+//ajouter un groupe. fonction sql corrigée
 function bonbon_ajoute_groupe ($nom_groupe){
 	$result=false;
-	$sql = "INSERT INTO spip_groupes_mots (titre,articles, breves,rubriques, syndic, minirezo, comite, forum) 
-		VALUES ('".trim($nom_groupe)."','oui','oui','oui','oui','oui','oui','oui')";
-		
+	$sql = sql_insertq('spip_groupes_mots',array(
+					'titre'=>$nom_groupe,
+					'descriptif'=>'descriptif',
+					'unseul'=>'non',
+					'obligatoire'=>'non',
+					'tables_liees'=>'articles,breves,rubriques,syndic',
+					'minirezo'=>'oui',
+					'comite'=>'oui',
+					'forum'=>'non'));
+	//$sql = "INSERT INTO spip_groupes_mots (titre,articles, breves,rubriques, syndic, minirezo, comite, forum) 
+	//	VALUES ('".trim($nom_groupe)."','oui','oui','oui','oui','oui','oui','oui')";
+	//echo '<br>Le groupe '.$nom_groupe.' vient d\'etre cr&eacute;&eacute;<br>';
 	$result = spip_query($sql);
 	if ($result) $result=spip_insert_id();
 	return $result;
 }
-//Insère un mot-clé dans la base.
+//Insère un mot-clé dans la base. fonction sql corrigée
 function bonbon_ajoute_mot ($titre,$id_groupe,$type){
 	$result=false;
-	$sql = "INSERT INTO spip_mots (titre, id_groupe,type) 
-		VALUES ('".trim($titre)."','".trim($id_groupe)."','".trim($type)."')";
-		
+	$sql = sql_insertq('spip_mots',array(
+				'titre'=>trim($titre),
+				'id_groupe'=>trim($id_groupe),
+				'type'=>trim($type)));
+	//$sql = "INSERT INTO spip_mots (titre, id_groupe,type) 
+	//	VALUES ('".trim($titre)."','".trim($id_groupe)."','".trim($type)."')";
 	$result = spip_query($sql);
 	if ($result) $result=spip_insert_id();
 	return $result;
@@ -105,28 +117,36 @@ function bonbon_remplit_groupe_mots ($id_groupe,$type,$liste_mots) {
 //Ajoute un mot-clé à un article par défaut ou une rubrique si précisé
 function bonbon_lier_mot ($id_mot,$id_objet,$type_objet="article") {
 	$result=false;
-	$sql = "INSERT INTO spip_mots_".$type_objet."s (id_mot, id_". $type_objet .") VALUES (" . $id_mot . ", " . $id_objet . ")";
+	$sql = sql_insertq('spip_mots_'.$type_objet.'s',array(
+				'id_mot'=>' . $id_mot . ',
+				"id_'. $type_objet .'"=>' . $id_objet . '));
+	//$sql = "INSERT INTO spip_mots_".$type_objet."s (id_mot, id_". $type_objet .") VALUES (" . $id_mot . ", " . $id_objet . ")";
 	$result = spip_query($sql);
 	return $result;
 }
 //rompt le lien entre un article (par défaut ou rubrique si précisé) et un mot-clé
 function bonbon_effacer_lien_mot ($id_mot,$id_objet,$type_objet="article") {
 	$result=false;
-	$sql = "DELETE FROM spip_mots_".$type_objet."s WHERE id_mot=$id_mot AND id_$type_objet=$id_objet";
+	$sql = sql_delete('spip_mots_'.$type_objet.'s', 'id_mot=$id_mot AND id_$type_objet=$id_objet');
+	//$sql = "DELETE FROM spip_mots_".$type_objet."s WHERE id_mot=$id_mot AND id_$type_objet=$id_objet";
 	$result = spip_query($sql);
 	return $result;
 }
 //Affecte un auteur à un article...
 function bonbon_affecter_auteur ($id_article, $id_auteur) {
 	$result=false;
-	$sql = "INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($id_auteur,$id_article)";
+	$sql = sql_insertq('spip_auteurs_articles',array(
+				'id_auteur'=>$id_auteur,
+				'id_article'=>$id_article));
+	//$sql = "INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($id_auteur,$id_article)";
 	$result = spip_query($sql);
 	return $result;
 }
 //désaffecte un auteur d'un article.
 function bonbon_desaffecter_auteur ($id_article, $id_auteur) {
 	$result=false;
-	$sql = "DELETE FROM spip_auteurs_articles WHERE id_auteur=$id_auteur AND  id_article=$id_article";
+	$sql = sql_delete('spip_auteurs_articles',"'id_auteur'=$id_auteur AND 'id_article'=$id_article");
+	//$sql = "DELETE FROM spip_auteurs_articles WHERE id_auteur=$id_auteur AND  id_article=$id_article";
 	$result = spip_query($sql);
 	return $result;
 }
@@ -134,7 +154,15 @@ function bonbon_desaffecter_auteur ($id_article, $id_auteur) {
 function bonbon_creer_fiche_prof ($nom, $id_auteur, $id_rubrique) {
 	$result=false;
 	$descriptif="Cet article décrit grâce à ses mots-clés, les classes et les matières enseignées par $nom";
-	$sql = "INSERT INTO spip_articles (titre, id_rubrique, statut, date, surtitre, descriptif,ps) VALUES ('$nom','$id_rubrique', 'publie', NOW(),'".addslashes("À propos d'un professeur")."','".addslashes($descriptif)."','$id_auteur')";
+	$sql = sql_insertq('spip_articles',array(
+				'titre'=>$nom,
+				'id_rubrique'=>$id_rubrique,
+				'statut'=>'publie',
+				'date'=>'NOW()',
+				'surtitre'=>'à propos du professeur',
+				'descriptif'=>$descriptif,
+				'ps'=>$id_auteur));
+	//$sql = "INSERT INTO spip_articles (titre, id_rubrique, statut, date, surtitre, descriptif,ps) VALUES ('$nom','$id_rubrique', 'publie', NOW(),'".addslashes("À propos d'un professeur")."','".addslashes($descriptif)."','$id_auteur')";
 	$result = spip_query($sql);
 	if ($result) {
 		$id_article=spip_insert_id();
@@ -146,8 +174,15 @@ function bonbon_creer_fiche_prof ($nom, $id_auteur, $id_rubrique) {
 //Crée une fiche pour la classe (jointure classe-matière-pp)
 function bonbon_creer_fiche_classe ($nom_classe, $id_rubrique, $id_mot) {
 	$result=false;
-	$descriptif="Cet article décrit grâce à ses mots-clés, son auteur et son éventuel contenu la classe de $nom_classe";
-	$sql = "INSERT INTO spip_articles (titre, id_rubrique, statut, date, surtitre, descriptif) VALUES ('$nom_classe','$id_rubrique', 'publie', NOW(),'".addslashes("À propos d'une classe")."','".addslashes($descriptif)."')";
+	$descriptif="Cet article décrit grâce à ses mots-clés, son auteur et son éventuel contenu la classe de".$nom_classe;
+	$sql = sql_insertq('spip_articles',array(
+				'titre'=>$nom_classe,
+				'id_rubrique'=>$id_rubrique,
+				'statut'=>'publie',
+				'date'=>'NOW()',
+				'surtitre'=>'à propos de la classe',
+				'descriptif'=>$descriptif));
+	//$sql = "INSERT INTO spip_articles (titre, id_rubrique, statut, date, surtitre, descriptif) VALUES ('$nom_classe','$id_rubrique', 'publie', NOW(),'".addslashes("À propos d'une classe")."','".addslashes($descriptif)."')";
 	$result = spip_query($sql);
 	if ($result) {
 		$id_article=spip_insert_id();
@@ -157,17 +192,28 @@ function bonbon_creer_fiche_classe ($nom_classe, $id_rubrique, $id_mot) {
 }
 //Crée une sous rubrique.
 function bonbon_creer_sous_rubrique ($id_parent, $titre, $descriptif) {
-	$sql = "INSERT INTO spip_rubriques (titre, id_parent, descriptif , statut, date) 
-	VALUES ('".addslashes($titre)."', '$id_parent','".addslashes($descriptif)."', 'publie',NOW())";
+	$sql = sql_insertq('spip_rubriques',array(
+				'titre'=>$titre,
+				'id_parent'=>$id_parent,
+				'descriptif'=>$descriptif,
+				'statut'=>'publie',
+				'date'=>'NOW()'));
+	//$sql = "INSERT INTO spip_rubriques (titre, id_parent, descriptif , statut, date) 
+	//VALUES ('".addslashes($titre)."', '$id_parent','".addslashes($descriptif)."', 'publie',NOW())";
 		
 	$result = spip_query($sql);
-	if ($result) $result=spip_insert_id();
+	if ($result) $result=mysql_insert_id();
 	return $result;
 }
 //Crée un secteur
 function bonbon_creer_rubrique ($titre, $descriptif) {
-	$sql = "INSERT INTO spip_rubriques (titre, descriptif , statut, date) 
-	VALUES ('".addslashes($titre)."','".addslashes($descriptif)."', 'publie',NOW())";
+	$sql = sql_insertq('spip_rubriques',array(
+				'titre'=>$titre,
+				'descriptif'=>$descriptif,
+				'statut'=>'publie',
+				'date'=>'NOW()'));
+	//$sql = "INSERT INTO spip_rubriques (titre, descriptif , statut, date) 
+	//VALUES ('".addslashes($titre)."','".addslashes($descriptif)."', 'publie',NOW())";
 		
 	$result = spip_query($sql);
 	if ($result) $result=spip_insert_id();
@@ -206,15 +252,25 @@ function bonbon_enregistrement_seance ($date,$titre,$contenu,$id_auteur,$id_rubr
 	$date_base_seance = date ("Y-m-d H:i:s", mktime(0,0,0,substr($date,3,2),substr($date,0,2),substr($date,6,4)));
 
 //le contenu
-	$sql = "INSERT INTO spip_articles (titre, texte, id_rubrique, statut, date, surtitre) 
-	VALUES ('".addslashes($titre)."','".addslashes($contenu)."','$id_rubrique_cdt', 'publie', '".addslashes($date_base_seance)."','".addslashes($surtitre_avec_docs)."')";
+	$sql = sql_insertq('spip_articles',array(
+				'titre'=>$titre,
+				'texte'=>$contenu,
+				'id_rubrique'=>$id_rubrique_cdt,
+				'statut'=>'publie',
+				'date'=>$date_base_seance,
+				'surtitre'=>$surtitre_avec_docs));
+	//$sql = "INSERT INTO spip_articles (titre, texte, id_rubrique, statut, date, surtitre) 
+	//VALUES ('".addslashes($titre)."','".addslashes($contenu)."','$id_rubrique_cdt', 'publie', '".addslashes($date_base_seance)."','".addslashes($surtitre_avec_docs)."')";
 	
 	$result = spip_query($sql);
 	$id_contenu_seance=spip_insert_id();
 	echo ("<!--$result article n°$id_contenu_seance-->\n");
 	
 	// auteur
-	$sql = "INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES (" . $id_auteur . ", " . $id_contenu_seance . ")";
+	$sql = sql_insertq('spip_auteurs_articles',array(
+					'id_auteur'=>' . $id_auteur . ',
+					'id_article'=>' . $id_contenu_seance . '));
+	//$sql = "INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES (" . $id_auteur . ", " . $id_contenu_seance . ")";
 	$result = spip_query($sql);
 	echo ("<!--auteur: $result-->\n");
 	return $id_contenu_seance;
@@ -225,8 +281,16 @@ function bonbon_enregistrement_devoir ($date,$fin_titre,$contenu,$id_auteur,$id_
 	//détermine la date au format de la base
 	$date_base_devoir = date ("Y-m-d H:i:s", mktime(0,0,0,substr($date,3,2),substr($date,0,2),substr($date,6,4)));
 	//insère le devoir avec titre, contenu, date et surtout un PS qui renvoie au contenu
-	$sql = "INSERT INTO spip_articles (titre, texte, id_rubrique, statut, date, ps, surtitre) 
-	VALUES ('".addslashes("Devoir à faire pour le $date$fin_titre")."','".addslashes($contenu)."','$id_rubrique_cdt', 'publie', '".addslashes($date_base_devoir)."','".addslashes("[Donné $titre_seance$fleche$id_seance]")."','".addslashes($surtitre_avec_docs)."')";
+	$sql = sql_insertq('spip_articles',array(
+				'titre'=>"'Devoir à faire pour le '.$date$fin_titre.'",
+				'texte'=>$contenu,
+				'id_rubrique'=>$id_rubrique_cdt,
+				'statut'=>'publie',
+				'date'=>$date_base_devoir,
+				'ps'=>"'[Donné '.$titre_seance$fleche$id_seance.']'",
+				'surtitre'=>$surtitre_avec_docs));
+	//$sql = "INSERT INTO spip_articles (titre, texte, id_rubrique, statut, date, ps, surtitre) 
+	//VALUES ('".addslashes("Devoir à faire pour le $date$fin_titre")."','".addslashes($contenu)."','$id_rubrique_cdt', 'publie', '".addslashes($date_base_devoir)."','".addslashes("[Donné $titre_seance$fleche$id_seance]")."','".addslashes($surtitre_avec_docs)."')";
 	
 	$result = spip_query($sql);
 	$id_contenu_devoir=spip_insert_id();
@@ -236,7 +300,10 @@ function bonbon_enregistrement_devoir ($date,$fin_titre,$contenu,$id_auteur,$id_
 	$ps_seance .= "- [Devoir n°$no_devoir pour le $date$fleche$id_contenu_devoir]\n";
 	
 	// auteur
-	$sql = "INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES (" . $id_auteur . ", " . $id_contenu_devoir . ")";
+	$sql = sql_insertq('spip_auteurs_articles',array(
+				'id_auteur'=>' . $id_auteur . ',
+				'id_article'=>' . $id_contenu_devoir . '));
+	//$sql = "INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES (" . $id_auteur . ", " . $id_contenu_devoir . ")";
 	$result = spip_query($sql);
 	echo ("<!--auteur: $result-->\n");
 //retourne deux valeurs: [0] est l'id_contenu_devoir et [1] est la chaîne du PS de l'article.
@@ -244,7 +311,8 @@ function bonbon_enregistrement_devoir ($date,$fin_titre,$contenu,$id_auteur,$id_
 }
 //rajout des références aux devoirs dans le PS du contenu de la séance
 function bonbon_ajout_devoirs_a_seance ($liste_devoirs,$id_seance) {
-	$sql ="UPDATE spip_articles SET ps='".addslashes($liste_devoirs)."' WHERE id_article=$id_seance";
+	$sql = sql_update('spip_articles',"'ps'=$liste_devoirs","'id_article'=$id_seance");
+	//$sql ="UPDATE spip_articles SET ps='".addslashes($liste_devoirs)."' WHERE id_article=$id_seance";
 	$result = spip_query($sql);
 	echo ("<!--update ps: $result-->\n");
 	return $result;
