@@ -48,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nom_famille' => 'Nom',
 'prenom' => 'Pr&eacute;nom',
 'naissance' => 'Date de naissance',
+'civilite' => 'Civilit&eacute;',
 'adresse' => 'Adresse',
 'code_postal' => 'Code Postal',
 'sexe' => 'Civilit&eacute;',
