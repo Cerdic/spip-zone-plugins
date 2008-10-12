@@ -32,7 +32,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 	</BOUCLE3>
 	</BOUCLE_rub>
 </B_feinte>
-	<BOUCLE_1(FORUMS){id_article?}{plat}{par date}{inverse}{0,25}>
+	<BOUCLE_1(FORUMS spip_articles){id_article?}{id_secteur IN #CONFIG{spipclear/secteurs}}{plat}{par date}{inverse}{0,25}>
 		<item>
 			<title>[(#TITRE|texte_backend)](1)</title>
 			<link>[(#URL_FORUM|url_absolue)]</link>
