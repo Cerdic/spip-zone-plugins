@@ -21,7 +21,7 @@
 	<lien>
 	[&#171; Bonbon ! &#187;, un cahier de texte pour SPIP (documentation)->http://www.spip-contrib.net/Bonbon-un-cahier-de-texte-pour]
 	</lien>
-	<icon>img_pack/logo-bonbon.png</icon>
+	<icon>images/logo-bonbon.png</icon>
 	<fonctions>cahier-de-texte-fonctions.php</fonctions>
 	<prefix>bonbon</prefix>
 	
@@ -29,7 +29,7 @@
     <necessite id='spip' version='[1.9.3;]' /> 
     
     <bouton id='bonbon_admin' parent='configuration'>
-        <icone>img_pack/bonbon.png</icone>
+        <icone>images/bonbon.png</icone>
         <titre>Bonbon</titre>
     </bouton>
     
