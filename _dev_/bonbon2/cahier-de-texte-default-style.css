@@ -1,0 +1,447 @@
+/*-----------------------------------------
+CSS du Cahier de texte pour Spip: Bonbon !
+Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
+Sous licence GPL (enfin bon, c'est bonbonware...)
+CopyLeft en juin 2007
+Cette CSS est inspirée de celle d'Eva-web (pour des raisons de compatibilité)
+-------------------------------------------*/
+
+/******************************************
+	PAGE : éléments d'habillage de la page
+	et éléments communs sur toute la page
+******************************************/
+body {
+	background-color: white ;
+	margin: 0;
+	padding: 10px;
+	
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: center;
+	}
+* {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	}
+div#NoMenu {
+	position:relative;
+	width: 750px;
+	margin:0 auto;
+	text-align: left;
+	}
+
+/* force le retour à la ligne, le plus souvent appliqué à <br> */
+.clear {
+	clear: both;
+	font-size:0;
+	}
+
+
+
+/******************************************
+	ENTETE : éléments des entêtes (titres, logos, ...)
+	des pages (accueil, rubriques, plan, ...) 
+******************************************/
+div#TitreSite {
+	display:none;
+	}
+div#EntetePage {
+	position:relative;
+	background-color: lightsteelblue ;
+	border: 1px solid steelblue;
+	-moz-border-radius: 8px;
+	}
+div#EntetePage h1 {
+	margin: 3px;
+	padding: 0;	
+	color: steelblue ;
+	font-size: 36px;
+	font-weight: bold;
+	}
+div#EntetePage h1 img.spip_logos, div#EntetePage h2 img.spip_logos {
+	vertical-align: middle;
+	border:none;
+	margin:2px;
+	}
+div#EntetePage h1 div, div#EntetePage h2 div {
+	display:inline;
+	}
+div#EntetePage h2 {
+	margin: 5px;
+	padding: 0;	
+	color:steelblue ;
+	font-size: 24px;
+	font-weight: bold;
+	vertical-align:middle;
+	}
+div#EntetePage h1 a, div#EntetePage h2 a {
+	color:steelblue ;
+	text-decoration:none;
+	}
+
+/* barre des boutons sur la page d'accueil (sommaire.html) */
+div#EntetePage ul.boutons {
+	position:relative;
+	padding: 0;
+	margin: 0;
+	border-bottom: 1px solid steelblue ;
+	background-color: azure;
+	text-align:right;
+	-moz-border-radius-topright: 8px;
+	-moz-border-radius-topleft: 8px;
+	}
+div#EntetePage ul.boutons img.spip_logos{
+	display:none;
+	}
+div#EntetePage ul.boutons span {
+	display:inline;
+	}
+div#EntetePage ul.boutons li {
+	list-style-type: none;
+	display: inline;
+	margin: 0 10px;
+	}
+div#EntetePage ul.boutons li a {
+	text-decoration:none;
+	font-size:12px;
+	font-weight:bold;
+}
+div#EntetePage ul.boutons li a:hover {
+	color:dodgerblue ;
+	}
+div#EntetePage ul.boutons li div {
+	display: inline;
+	}
+
+/******************************************
+	CONTENU : affichage du texte des pages ;
+	affichages des articles, sites 
+	référencés pour les rubriques ; etc ...
+******************************************/
+
+div#Contenu {
+	position:relative;
+	float:right;
+	width: 500px;
+	margin-top:20px;
+	text-align:justify;
+	font-size:12px;
+	color: black ;
+	}
+
+div#NoMenu div#Contenu {
+	float: none;
+	width: 100%;
+	border: none;
+}
+
+/* affichage des blocs */
+div#documents {
+	border: 1px solid steelblue ;
+	-moz-border-radius: 8px;
+	margin-bottom:20px;
+	}
+div.suite {
+	text-align:right;
+	font-style: italic;
+	font-size:10px;
+}
+div#Contenu h3.titre {
+	margin: 0;
+	padding: 2px;
+	border-bottom: 1px solid steelblue ;
+	background-color: azure ;
+	text-align:center;
+	font-size:16px;
+	font-weight:bold;
+	-moz-border-radius-topright: 8px;
+	-moz-border-radius-topleft: 8px;
+	}
+div#Contenu h3.titre img.spip_logos{
+	vertical-align: middle;
+	border:none;
+	margin: 1px;
+	}
+div#Contenu h3.titre a {
+	text-decoration:none;
+	}
+div#Contenu h3.titre a:hover {
+	color: dodgerblue ;
+	}
+
+/* affichage : texte, chapeau, etc ... */
+div#Contenu div.chapo {
+	margin: 5px 0;
+	padding: 4px;
+	font-size:16px;
+	font-weight:bold;
+	color : steelblue ;
+	}
+div#Contenu div.texte {
+	margin: 5px 0;
+	padding: 4px;
+	font-size:14px;
+	}
+div#Contenu div.lien {
+	border-top: 1px solid steelblue ;
+	text-align:center;
+	padding: 5px;
+	font-size:16px;
+	margin: 5px 0;
+	}
+div#Contenu div.ps, div#Contenu div.notes {
+	border: 2px solid steelblue ;
+	-moz-border-radius: 8px;
+	margin: 10px 0;
+	padding: 4px;
+	font-size:12px;
+	background-color: white ;
+	}
+div#Contenu div.ps h4, div#Contenu div.notes h4 {
+	display:none;
+	}
+div#Contenu div.ps div, div#Contenu div.notes div {
+	}
+div#Contenu p.spip, p.spip_note {
+	margin: 0;
+	padding: 4px;
+	}
+
+
+.spip_documents{
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size : 70%;
+}
+
+.spip_documents_center{
+	margin: auto; 
+	text-align: center;
+	width: 80%;
+}
+
+.spip_documents_left{
+	float: left;
+	margin-right: 15px; 
+	text-align: center;
+}
+
+.spip_documents_right{
+	float: right;
+	margin-left: 15px; 
+	text-align: center;
+}
+	
+/* formulaires dans le menu (inscription au site, référencer un site) */
+div.formulaires div {
+	padding:4px;
+	font-size:12px;
+	}
+div.formulaire fieldset{
+	background-color: /*fond_menu_off*/ #cde3ff ;
+	}
+
+/* blocs affichés dans le menu (brèves, mots-clés, ...) */
+div.bloc, div.formulaires {
+	border: 1px solid steelblue ;
+	-moz-border-radius: 8px;
+	margin: 0 0 20px;
+	}
+
+div#Menu h4 {
+	border-bottom: 1px solid /*bordures*/ #ff7200 ;
+	background-color: /*fond_titre*/ #fff7c0 ;
+	margin: 0;
+	padding: 2px 4px;
+	font-size:14px;
+	font-weight:bold;
+	color:/*texte*/ #000000 ;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright: 4px;
+	}
+	
+div.bloc ul {
+	margin: 0;
+	padding: 0;
+	}
+div.bloc li {
+	margin: 2px;
+	padding: 1px;
+	font-size:12px;
+	list-style: url(images/puceoff.gif) inside;
+	}
+div.bloc li.on {
+	padding: 2px 0;
+	background-color:/*formulaires*/ #fffef2 ;
+	border: 1px solid /*bordures*/ #ff7200 ;
+	-moz-border-radius: 5px;
+	list-style: url(images/puceon.gif) inside;
+	}
+div.bloc li.on a {
+	text-decoration:none;
+	color:/*texte*/ #000000 ;
+	}
+div.bloc li em {
+	color: /*texte_clair*/ #666666 ;
+	font-style: italic;
+	}
+
+/* pied de page de la page d'accueil */
+div#PiedPage {
+	margin: 2px;
+	text-align: center;
+	background-color: lightsteelblue ;
+	border: 1px solid steelblue ;
+	-moz-border-radius: 8px;
+	}
+div#PiedPage p.copyright {
+	position:relative;
+	margin:5px;
+	font-size: 10px;
+	}
+
+/******************************************
+	SPIP : éléménets générés par SPIP 
+******************************************/
+
+h3.spip {
+	text-align:center;
+	color: steelblue ;
+	font-size:20px;
+	font-weight:bold;
+	}
+.spip_surligne {
+	background-color: #FFFF66;
+}
+.spip_puce {
+	list-style-position: inside;
+}
+blockquote.spip {
+	margin-left : 5px 0 5px 20px;
+	border : solid 1px steelblue ;
+	-moz-border-radius: 5px;
+	background-color: white ;
+	padding: 5px;
+}
+
+/* Barre de raccourcis */
+a.spip_barre img {
+	border: 1px solid steelblue ;
+	padding: 3px;
+	background-color: white ;
+}
+a.spip_barre:hover img {
+	border: 1px solid steelblue ;
+	padding: 3px;
+	background-color: white ;
+}
+
+/* boutons */
+.spip_bouton, a.spip_bouton, a:visited.spip_bouton {
+	border:1px solid steelblue ;
+	-moz-border-radius: 5px;
+	background-color: white ;
+	padding:1px;
+	margin:2px;
+	color: steelblue ;
+	text-decoration: none;
+	font-size:12px;
+	font-weight: bold;
+	}
+.spip_bouton a {
+	color: steelblue ;
+	text-decoration: none;
+	font-size:10px;
+	}
+.spip_bouton:hover {
+	background-color: white ;
+	}
+	
+/* champs de formulaires */
+.forml {
+	width: 98%;
+	background-color:/*formulaires*/ #fffef2 ;
+	color: /*texte*/ #000000 ;
+	padding:2px;
+	font-size:12px;
+	}
+fieldset.spip_encadrer {
+	border: 2px solid /*bordures*/ #ff7200 ;
+	background-color:/*fond_menu_off*/ #cde3ff ;
+	text-align:left;
+	-moz-border-radius: 10px;
+	font-size:12px;
+	padding:5px;
+	}
+fieldset.spip_encadrer legend {
+	border: 1px solid /*bordures*/ #ff7200 ;
+	background-color:/*fond_menu_on*/ #ffffff ;
+	padding:2px 4px;
+	-moz-border-radius: 5px;
+	font-size:14px;
+	}
+/* tableau des smileys  */
+table#smileys {
+	position:relative;
+	float:left;
+	margin:4px;
+	border-collapse: collapse;
+	font-size:12px;
+	font-weight:bold;
+	color:/*texte*/ #000000 ;
+	}
+table#smileys tr.row_first {
+	background-color: /*titre_page*/ #ff7200 ;
+	color: /*fond_page*/ #f2faff ;
+	font-weight:bold;
+	text-align:center;
+	}
+table#smileys tr.row_odd {
+	background-color: /*fond_menu_off*/ #cde3ff ;
+	}
+table#smileys tr.row_even {
+	background-color: /*fond_page*/ #f2faff ;
+	}
+table#smileys td {
+	padding: 2px;
+	vertical-align: center;
+	border: 1px solid /*bordures*/ #ff7200 ;
+	}
+
+/* tableaux */
+table.spip {
+	padding: 0;
+	margin:10px auto;
+	border-collapse: collapse;
+	font-size:12px;
+	}
+table.spip tr.row_first {
+	background-color: /*titre_page*/ #ff7200 ;
+	color: /*fond_page*/ #f2faff ;
+	font-weight:bold;
+	text-align:center;
+	}
+table.spip tr.row_odd {
+	background-color: /*fond_menu_off*/ #cde3ff ;
+	color:/*texte*/ #000000 ;
+	}
+table.spip tr.row_even {
+	background-color: /*fond_page*/ #f2faff ;
+	color:/*texte*/ #000000 ;
+	}
+table.spip td {
+	padding: 2px;
+	vertical-align: center;
+	border: 1px solid /*bordures*/ #ff7200 ;
+	}
+	
+	
+/******************************************
+	BOUTONS ADMIN : boutons affichés pour
+	les administrateurs
+	(recalculer cette page , ...) 
+******************************************/
+.spip-admin {
+	text-align:left;
+	left:2px;
+	}
+.spip-admin form{
+	margin:2px;
+	}

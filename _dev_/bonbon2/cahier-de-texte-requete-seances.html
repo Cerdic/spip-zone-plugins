@@ -1,0 +1,37 @@
+#CACHE{12*60*60}
+#SET{virgule,","} [(#REM) utile pour les explodes]
+		<div class="liste-seances">
+<B_Seances>
+<div>
+#ANCRE_PAGINATION
+<BOUCLE_Seances(ARTICLES){id_rubrique}{titre_mot="Description de séance"}{id_auteur?}{titre_mot=#ENV{classe}}{titre_mot=#ENV{matiere}}{date>=#ENV{date_debut}}{date<=#ENV{date_fin}}{titre_mot?}{par #ENV{tri}}{pagination #ENV{nb,10}}{par date}{inverse #ENV{senschrono}}{'
+<br clear="both">
+<hr>'}>
+		<INCLURE(session.php){fond=cahier-de-texte-une-seance}{id_article=#ID_ARTICLE}>
+</BOUCLE_Seances>
+</div>
+[<div class="apres">Pages&nbsp;: (#PAGINATION{page_precedent_suivant})</div>]
+</B_Seances>
+<p>Pas encore de fiche dans le cahier de texte pour cette classe et cette matière.</p><p>Choisissez une autre classe [
+
+(#REM) On regarde s'il y a d'autres classes avec des fiches pour cette matière
+
+]<BOUCLE_Autres_classes_articles(ARTICLES){id_rubrique}{id_auteur?}{titre_mot=#ENV{matiere,#ENV{matiere_defaut}}}{titre_mot="Description de séance"}><BOUCLE_Autres_classes(MOTS){id_article}{type="Classes"}{par titre}{doublons autres_classes}></BOUCLE_Autres_classes></BOUCLE_Autres_classes_articles>
+[
+
+(#REM) Et on affiche ces classes
+
+]<B_Affiche_Autres_classes>(<BOUCLE_Affiche_Autres_classes(MOTS){!doublons autres_classes}{", "}><a href="[(#SELF|parametre_url{'classe',#TITRE})]" title="Afficher le cahier de texte de la [(#TITRE|textebrut)] en #ENV{matiere,#GET{matiere_defaut}}">#TITRE</a></BOUCLE_Affiche_Autres_classes>)</B_Affiche_Autres_classes>
+et/ou une autre matière [
+
+(#REM) On regarde s'il y a d'autres matières avec des fiches pour cette classe
+
+]<BOUCLE_Autres_matieres_articles(ARTICLES){id_rubrique}{id_auteur?}{titre_mot=#ENV{classe,#GET{classe_defaut}}}{titre_mot="Description de séance"}><BOUCLE_Autres_matieres(MOTS){id_article}{type="Matières"}{par titre}{doublons autres_matieres}></BOUCLE_Autres_matieres></BOUCLE_Autres_matieres_articles>[
+
+(#REM) Et on affiche ces matières
+
+]<B_Affiche_Autres_matieres>(<BOUCLE_Affiche_Autres_matieres(MOTS){!doublons autres_matieres}{", "}><a href="[(#SELF|parametre_url{'matiere',#TITRE})]" title="Afficher le cahier de texte de la [(#ENV{classe,#GET{classe_defaut}}|concat{" "})] en [(#TITRE|textebrut)]">#TITRE</a></BOUCLE_Affiche_Autres_matieres>)</B_Affiche_Autres_matieres>
+grâce aux onglets.</p>
+<//B_Seances>
+		<br clear="all" />
+		</div>

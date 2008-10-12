@@ -1,0 +1,30 @@
+BUGS:
+- problème avec les crayons/autorité sur les docs pour les rédacteurs (cf fil & james ?)
+- Souci avec la barre typo v2 les stats plantent (ramènent un 404)... ->voir avec RealET... (cohabitation avec jquery difficile à débugger avec http://demobonbon.free.fr/1.9/spip.php?page=testbtv2publique )... vaste pb avec le js semble-t-il...
+- ui.datepicker ne fonctionne pas partout (c'est le moins qu'on puisse dire)... Passer à jquery datepicker ??? http://kelvinluck.com/assets/jquery/datePicker/v2/demo/index.html
+
+FONCTIONALITÉS:
+
+- pouvoir supprimer un devoir sur une séance dupliquée (ou même quand on a cliqué par hasard)
+- pouvoir supprimer un devoir sur une séance
+- prévoir un systême d'import automatisé d'articles (avec un genre de xml-typographique)
+- pouvoir choisir plusieurs groupes en même temps
+- afficher sur le coté (droite) de saisir une noisette avec le plan du cours, issu du plugin intertitres hiérarchisés, et offrir la possibilité de l'afficher dans une popup.
+- faire une page de planning par classe (mensuel) avec des onglets par matière avec par défaut l'onglet pour toutes les matières
+- affecter un code couleur aux matières dans les devoirs et le planning.
+
+-chercher l'aide de spécialistes des CSS pour les onglets des matières (onglets verticaux positionnés à gauche)
+
+- prendre le look eva 3
+- pouvoir éditer plusieurs classes en même temps (sans que ce soit un
+regroupement de classes) ? (utile ? même s'il y a la duplication de séance ?)
+
+- le retour de FCKeditor ou assimilé quand j'aurai débuggué (la barre typo étendue de Spip 1.9 est mieux, donc est-ce encore necessaire ?).
+- pouvoir rééditer les fiches après coup en repassant dans l'interface de Bonbon...
+- faire une mise en forme spéciale impression.
+- rajouter une mention des emplois du temps (mention légale) -> plus facile depuis l'apparition des fiches pour les classes.
+- une page agenda...
+- des messages privés visibles depuis l'interface du CDT.
+- automatiser le renommage de cahier-de-texte-rubrique.html
+- utiliser cfg (ou autre) pour configurer les mots-clés/rubriques
+- automatiser la mise en place des mots-clés et rubriques 

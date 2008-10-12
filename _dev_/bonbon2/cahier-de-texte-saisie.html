@@ -1,0 +1,848 @@
+#CACHE{0}
+#SET{virgule,","} [(#REM) utile pour les explodes]
+<!--
+*****Cahier de texte pour Spip: Bonbon !
+*****Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
+*****Sous licence GPL (enfin bon, c'est bonbonware...)
+*****CopyLeft en juin 2007
+***Saisie du cahier de texte. Cette page prend des paramètres:
+Par GET:
+id_classex où x est un nombre= id du mot-clé de la classe x (il peut y avoir plusieurs classes
+classes= nombres de classes associées à ces fiches
+plusclasse= réafficher le formulaire avec un sélecteur de classe de plus
+moinsclasse= réafficher le formulaire avec un sélecteur de classe en moins
+id_matiere= id du mot-clé de la matière
+id_groupe= id du groupe
+classe_matiere= quand la classe et la matière sont déterminées
+id_article=contient un id_article que l'on veut dupliquer (ou modifier)
+Par POST:
+date_seance= date de la séance au format d/m/Y
+contenu_seance= le texte du contenu de la séance
+date_devoirx où x est un nombre= date du devoir n°x donné lors de la séance
+contenu_devoirx où x est un nombre= contenu du devoir n°x donné lors de la séance
+devoirs= nombre de devoirs-1 liés à la séance
+plusdate= rafficher le formulaire avec un champs devoirs+date en plus.
+moinsdate= retirer les dernier devoir (attention: sans confirmation)
+doc_seance_XXX= où XXX est un id_doc. quand on duplique une séance les docs d'id_documents=XXX où doc_seance_XXX est défini sont conservés, les autres enlevés.
+doc_devoirXXX_YYY= où YYY est un id_doc. XXX est le n° du devoir concerné (pas son ID). quand on duplique une séance les docs d'id_documents=YYY où doc_devoirXXX_YYY est défini sont conservés, les autres enlevés.
+liste_id_classes = la liste entre virgules (à exploder) des id_classe. Sous cette forme c'est plus pratique pour vérifier que d'autre séances pour ces classes n'existent pas.
+
+enregistrer_fiche= quand la fiche est validée
+modifier_fiche= quand la fiche est remplie, mais que le contenu doit être modifié
+effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>#NOM_SITE_SPIP: Saisie dans le cahier de texte en ligne</title>
+
+[(#REM)Inclusion du pied de page]
+[(#INCLURE{fond=cahier-de-texte-en-tete})]
+
+</head>
+<body>
+<div id="NoMenu">
+	<div id="EntetePage">
+			<ul class="boutons">
+				<li><a href="#URL_PAGE{cahier-de-texte-accueil}" title="Retourner à la page d'accueil du cahier de texte"><img src="#CHEMIN{images/dialog-ok-upside-down.png}" alt="icône" vspace="2" align="middle">Accueil du cahier de texte</a></li>
+				<li><a href="[(#URL_PAGE{cahier-de-texte-affichage,nb=10}|parametre_url{var_mode,calcul})]"><img src="#CHEMIN{images/system-search.png}" alt="icône" vspace="2" align="middle">Afficher les dernières séances</a></li>
+<?php if ($auteur_session) {?>
+				<li><a href="[(#URL_PAGE{cahier-de-texte-saisie}|parametre_url{id_auteur,#SESSION{id_auteur}})]" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une séance</a></li>
+				<li><a href="[(#URL_PAGE{cahier-de-texte-affichage,senschrono=1}|parametre_url{var_mode,calcul}|parametre_url{id_auteur,#SESSION{id_auteur}})]" title="Aller voir ses propres entrées du cahier de texte"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
+<?php }// fin du if auteur session ?>
+			</ul>
+[(#REM)Vérification de l'authentification]
+<?php if ($auteur_session) {
+//paramètres de session utilisés:
+	$auteur=$auteur_session['nom'];
+	$id_auteur=$auteur_session['id_auteur'];
+	echo "<p class='authentifie'>$auteur (si vous n'êtes pas $auteur, <a href=\"";
+?>#URL_LOGOUT<?php
+	echo "\" title=\"déconnexion immédiate !\">cliquez ici</a>)</p>\n";?>[
+(#REM) année scolaire en cours...
+][
+	(#SET{annee_scolaire,[(#ENV{date}|bonbon_annee_scolaire)]})
+
+]<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}>[
+(#REM)Vérifier si il existe déjà une sous rubrique du cahier de texte pour l'année en cours
+	]<BOUCLE_Verifie_RubriqueAnnee(RUBRIQUES){id_parent}{titre=#GET{annee_scolaire}}{0,1}><BOUCLE_determiner_id_rurbique_de_pcm(RUBRIQUES){id_parent}{titre="Professeurs-classes-matières"}>#SET{id_rubrique_pcm,#ID_RUBRIQUE}</BOUCLE_determiner_id_rurbique_de_pcm><?php
+		$id_rub_cdt='[(#ID_RUBRIQUE|texte_script)]'; //id_rub_cdt contient l'id de la sous-rubrique pour l'année en cours alors que #GET{id_rubrique_pcm} contient l'id de la rubrique qui contient les infos sur les classes et les profs
+
+//------------------------------------------------------------
+//Dans tous les cas, on récupère les paramètres du formulaire:
+//------------------------------------------------------------
+
+//récupération des parametres (GET et POST)
+	//echo "liste des GET\n";
+	//print_r($_GET);
+	//echo "liste des POST\n";
+	//print_r($_POST);
+	$id_article=($_GET['id_article']);
+	$classes=($_GET['classes']);
+	$liste_id_classes="";
+	for ($count=0; $count<=$classes; $count++) {
+		$id_classe[$count]=($_GET["id_classe$count"]);
+		$liste_id_classes.=($_GET["id_classe$count"]).",";
+	};//les classes ont été placées dans le tableau $id_classe[]
+	$id_groupe=($_GET["id_groupe"]);
+	$id_matiere=($_GET["id_matiere"]);
+
+	$date_seance=(stripslashes($_POST['date_seance']));
+	$contenu_seance=(stripslashes(html_entity_decode($_POST['contenu_seance'])));
+	$devoirs=($_POST['devoirs']);
+	for ($count=0; $count<=$devoirs; $count++) {
+		$date_devoir[$count]=($_POST["date_devoir$count"]);
+		$contenu_devoir[$count]=(stripslashes(html_entity_decode($_POST["contenu_devoir$count"])));
+	};//les dates ont été placées dans $date_devoir[], les contenus dans $contenu_devoir[]
+
+//Si le id_matière n'est pas défini, on essaie d'aider un peu en le prédéfinissant... C'est tj qq sec de gagnées pour le prof qui saisi.
+
+	if ((!$id_matiere) and ($_GET['id_auteur']==$auteur_session['id_auteur'])) { ?>
+		<BOUCLE_TrouveMatiere_auteur(ARTICLES){titre_mot="Description de séance"}{id_auteur=#SESSION{id_auteur}}{!par date}{0,1}><BOUCLE_TrouveMot_Matiere(MOTS){id_article}{type=Matières}><?php $id_matiere='[(#ID_MOT|texte_script)]';?> </BOUCLE_TrouveMot_Matiere></BOUCLE_TrouveMatiere_auteur>
+	<?php };// fin du if pas id_matiere et id_auteur ?>[
+	(#REM) Hack pour conditionner une boucle (évite un if en php et donc que les boucles englobées par Conditionnelle_1 soient exécutées quand la condition n'est pas remplie)
+
+	si on demande à dupliquer ou modifier un article: on récupère les données de l'article (si elles ne sont pas déjà présentes en GET)
+
+][(#SET{condition_boucle,''})]
+[(#ENV{id_article}|?{' ',''})
+	[(#ENV{id_classe0}|?{'',' '})
+		[(#ENV{enregistrer_fiche}|?{'',' '})
+			[(#ENV{modifier_fiche}|?{'',' '})
+				[(#ENV{valider_fiche}|?{'',' '})
+					[(#SET{condition_boucle,#ID_RUBRIQUE})]
+				]
+			]
+		]
+	]
+]<BOUCLE_CONDITIONNELLE_1(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}><?php		$count=-1;
+	?><BOUCLE_TrouveClasses_id_article(MOTS){id_article}{type=Classes}><?php
+		$count++;
+		$id_classe[$count]='[(#ID_MOT|texte_script)]';
+	?> </BOUCLE_TrouveClasses_id_article>
+		<?php $classes=$count; ?>
+	<BOUCLE_TrouveGroupe_id_article(MOTS){id_article}{type=Sous groupes de classes}><?php
+		$id_groupe='[(#ID_MOT|texte_script)]';
+	?> </BOUCLE_TrouveGroupe_id_article>
+	<BOUCLE_TrouveMatiere_id_article(MOTS){id_article}{type=Matières}><?php
+		$id_matiere='[(#ID_MOT|texte_script)]';
+	?> </BOUCLE_TrouveMatiere_id_article>
+</BOUCLE_CONDITIONNELLE_1>[
+
+	(#REM) Hack pour conditionner une boucle (évite un if en php et donc que les boucles englobées par Trouve_Infos_Seance_id_article soient exécutées quand la condition n'est pas remplie)
+
+	si on demande à dupliquer ou modifier un article *et qu'on a choisi classe et matière*: on récupère les données de l'article
+	si la matière est validée on récupère le contenu de la séance
+
+][(#SET{condition_boucle,''})]
+[(#ENV{id_article}|?{' ',''})
+	[(#ENV{classe_matiere}|?{' ',''})#SET{condition_boucle,#ENV{id_article}}]
+	[(#ENV{effacer_fiche}|?{' ',''})#SET{condition_boucle,#ENV{id_article}}]
+]
+
+<BOUCLE_Trouve_Infos_Seance_id_article(ARTICLES){id_article=#GET{condition_boucle}}>[
+
+(#REM) On récupère la liste des documents liés à l'article
+
+		]<BOUCLE_Documents_originaux_Seances(DOCUMENTS){id_article}>[(#SET{liste_docs_seance,#GET{liste_docs_seance}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Documents_originaux_Seances>[
+
+(#REM) On récupère dans le surtitre la liste des documents qui ont été copié dans cette séance (quand on veut ajouter des documents sans les remettre sur le serveur
+
+		][(#SET{liste_docs_copies_seance,[(#GET{virgule}|explode{[(#SURTITRE*|bonbon_matches_id_document)]})]})]
+		<BOUCLE_Copies_Documents_Seances(DOCUMENTS){id_document IN #GET{liste_docs_copies_seance}}>[(#SET{liste_docs_seance,#GET{liste_docs_seance}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Copies_Documents_Seances><?php
+		
+		if (!$_POST['enregistrer_fiche'] and !$_POST['modifier_fiche'] and !$_POST['valider_fiche']) {
+			//les autres infos sur la séance (seulement s'il n'y a pas eu potientiellement des modifs !): 
+			$date_seance='[(#DATE|affdate{d/m/Y}|texte_script)]';
+			$contenu_seance='[(#TEXTE*|texte_script)]';
+		}
+		$devoirs=-1;?>[
+		(#SET{liste_des_devoirs,[(#GET{virgule}|explode{[(#PS*|bonbon_matches_id_article)]})]})]
+	<BOUCLE_Trouve_Infos_Devoirs_id_article(ARTICLES){id_rubrique}{titre_mot="Devoirs à faire"}{id_article IN #GET{liste_des_devoirs}}><?php
+		$devoirs++;
+		$compteur_doc_devoirs=0;
+		$liste_docs_Devoirs="";?>[
+
+(#REM) On récupère la liste des documents liés à l'article
+
+		]<BOUCLE_Documents_originaux_Devoirs(DOCUMENTS){id_article}><?php
+			$compteur_doc_devoirs++;
+			$liste_docs_Devoirs[$compteur_doc_devoirs]='[(#ID_DOCUMENT)]'; ?>[(#SET{liste_docs_devoirs,#GET{liste_docs_devoirs}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Documents_originaux_Devoirs>[
+
+(#REM) On récupère dans le surtitre la liste des documents qui ont été copié dans cette séance (quand on veut ajouter des documents sans les remettre sur le serveur
+
+		][(#SET{liste_docs_copies_Devoirs,[(#GET{virgule}|explode{[(#SURTITRE*|bonbon_matches_id_document)]})]})]
+		<BOUCLE_Copies_Documents_Devoirs(DOCUMENTS){id_document IN #GET{liste_docs_copies_Devoirs}}><?php
+			$compteur_doc_devoirs++;
+			$liste_docs_Devoirs[$compteur_doc_devoirs]='[(#ID_DOCUMENT)]'; ?>[(#SET{liste_docs_devoirs,#GET{liste_docs_devoirs}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Copies_Documents_Devoirs>[
+(#REM) On met dans un tableau la liste des devoirs		
+		]<?php
+		$liste_des_listes_de_docs[$devoirs] = $liste_docs_Devoirs;
+
+		if (!$_POST['enregistrer_fiche'] and !$_POST['modifier_fiche'] and !$_POST['valider_fiche']) {
+
+			//les autres infos sur le devoir (seulement s'il n'y a pas eu potientiellement des modifs !): 
+			$date_devoir[$devoirs]='[(#DATE|affdate{d/m/Y}|texte_script)]';
+			$contenu_devoir[$devoirs]='[(#TEXTE*|texte_script)]';
+			$id_devoirs[$devoirs]='[(#ID_ARTICLE|texte_script)]';
+		}
+	?> </BOUCLE_Trouve_Infos_Devoirs_id_article>
+</BOUCLE_Trouve_Infos_Seance_id_article>
+<?php
+		if ($devoirs==-1) $devoirs="";
+
+
+//boutons qui ont été pressés pour ajouter des options
+//une classe de plus ?
+	if($_GET['plusclasse']){
+		$classes++;
+	};
+//une classe de moins ? (la dernière choisie)
+	if($_GET['moinsclasse']){
+		$classes--;
+	};
+	if($_POST['plusdate']){
+		$devoirs++;
+	};
+	if($_POST['moinsdate']){
+		$devoirs--;
+	}; ?>[
+	(#REM) Hack pour conditionner une boucle (évite un if en php et donc que les boucles englobées par Conditionnelle_2 soient exécutées quand la condition n'est pas remplie)
+
+	quelques strings bien utiles préparées à l'avance: (à partir des numéros d'id)
+
+][(#SET{condition_boucle,''})]
+[(#ENV{enregistrer_fiche}|?{' ',''})[(#SET{condition_boucle,#ID_RUBRIQUE})]]
+[(#ENV{valider_fiche}|?{' ',''})[(#SET{condition_boucle,#ID_RUBRIQUE})]]
+[(#ENV{effacer_fiche}|?{' ',''})[(#SET{condition_boucle,#ID_RUBRIQUE})]]
+[(#ENV{classe_matiere}|?{' ',''})[(#SET{condition_boucle,#ID_RUBRIQUE})]]
+<BOUCLE_CONDITIONNELLE_2(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}>
+	[(#REM)Nom de la matière]
+	<BOUCLE_DireMatiere(MOTS){type="Matières"}><?php if ('[(#ID_MOT|texte_script)]'==$id_matiere) {$matiere_titre='[(#TITRE)]';} ?> </BOUCLE_DireMatiere>
+<?php $premiere_classe="";
+for ($count=0; $count<=$classes; $count++) {?>
+	[(#REM)Nom de la ou les classes]
+	<BOUCLE_DireClasse(MOTS){type="Classes"}><?php if ('[(#ID_MOT|texte_script)]'==$id_classe[$count]) { $classes_titre .='[(#TITRE)]'; if (($count+1)<=$classes) $classes_titre .= ", "; if (!$premiere_classe) $premiere_classe='[(#TITRE)]'; } ?> </BOUCLE_DireClasse>
+<?php } //fin du for count classes
+if ($id_groupe!=0) { $groupe_titre .= " (";?>
+	[(#REM)Nom du groupe s'il y a... Il est encadré par une parenthèse]
+	<BOUCLE_DireGroupe(MOTS){type="Sous groupes de classes"}><?php if ('[(#ID_MOT|texte_script)]'==$id_groupe) { $groupe_titre .='[(#TITRE)]'; } ?> </BOUCLE_DireGroupe>
+<?php $groupe_titre .= ")"; }//fin du if id_groupe
+
+	$titre_matiere_classe="en $matiere_titre avec les $classes_titre$groupe_titre";
+	$titre_contenu_seance="Le $date_seance, $titre_matiere_classe";
+	$fragment_titre_devoir=", par les $classes_titre$groupe_titre en $matiere_titre";
+	$fleche="->";
+?> </BOUCLE_CONDITIONNELLE_2>[
+	(#REM) Hack de la boucle conditionnelle qui remplace le if:
+
+
+//----------------------------------------------------------------------
+//Si l'utilisateur veut effacer une fiche  dans la base (c'est confirmé)
+//----------------------------------------------------------------------
+
+
+
+][(#SET{condition_boucle,''})]
+[(#ENV{effacer_fiche}|?{' ',''})
+	[(#ENV{effacer_fiche}|!={"a_confirmer"}|?{' ',''})
+		[(#SET{condition_boucle,#ID_RUBRIQUE})]
+	]
+]<BOUCLE_CONDITIONNELLE_confirmation_effacement(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}>
+
+<BOUCLE_Recupere_infos(ARTICLES){id_article}>
+	<BOUCLE_Infos_Classes(MOTS){type="Classes"}{id_article}>[(#SET{liste_id_classes,#GET{liste_id_classes}|bonbon_fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_MOT}}})]#SET{classe,#TITRE}</BOUCLE_Infos_Classes>
+	<BOUCLE_Infos_Matiere(MOTS){type="Matières"}{id_article}>#SET{id_matiere,#ID_MOT}#SET{matiere,#TITRE}</BOUCLE_Infos_Matiere>
+</BOUCLE_Recupere_infos><?php
+		$liste_des_id_a_jetter[0]=$id_article;
+		$nb_trucs_a_jeter=$devoirs+1;
+		for ($count=1; $count<=$nb_trucs_a_jeter; $count++) {
+			$liste_des_id_a_jetter[$count]=$id_devoirs[$count-1];
+		};
+		for ($count=0; $count<=$nb_trucs_a_jeter; $count++) {
+			//l'article et les devoirs sont mis à la poubelle
+			$sql ="UPDATE spip_articles SET statut='poubelle' WHERE id_article=$liste_des_id_a_jetter[$count]";
+			$result = spip_query($sql);
+			echo ("<!--update ps: $result-->\n");
+		}
+?>[
+
+	(#REM) On vérifie la présence d'autres articles pour cette matière. S'il y en a plus, on désacocie la matière de la rurbique de l'année
+
+]<BOUCLE_Verifie_contenu_matiere(ARTICLES){id_article != #ENV{id_article}}{id_rubrique}{id_rubrique != #GET{id_rubrique_pcm}}{id_mot=#GET{id_matiere}}{0,1}>  </BOUCLE_Verifie_contenu_matiere>
+	<?php
+	$sql="DELETE FROM spip_mots_rubriques WHERE id_mot=".'[(#GET{id_matiere}|texte_script)]'." AND id_rubrique=".'[(#ID_RUBRIQUE)]';
+	$result = spip_query($sql);
+	echo ("<!--délier la matière à la rubrique: $result-->\n");
+	?>#SET{matiere,''}
+<//B_Verifie_contenu_matiere>[
+
+	(#REM) On vérifie la présence d'autres articles pour ces classes.
+	- si il y a des articles pour ces classes, on vérifie qu'il y a des articles pour la combinaison classe/matière. Si ce n'est pas le cas, on désassocie la matière de l'article classe.
+	- s'il n'y a plus d'articles pour la classe, on désassocie la classe de la rurbique de l'année et on met à la poubelle l'article de la classe.
+
+]<BOUCLE_Mot_de_la_classe(MOTS){id_mot IN #GET{liste_id_classes}}>
+	<BOUCLE_Article_de_la_classe(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{titre=#_Mot_de_la_classe:TITRE}>#SET{id_article_classe,#ID_ARTICLE}</BOUCLE_Article_de_la_classe>
+	<BOUCLE_Verifie_contenu_classe(ARTICLES){id_article != #ENV{id_article}}{id_rubrique}{id_rubrique != #GET{id_rubrique_pcm}}{id_mot}{0,1}>
+		<BOUCLE_Verifie_contenu_classe_et_matiere(ARTICLES){id_article != #ENV{id_article}}{id_rubrique}{id_rubrique != #GET{id_rubrique_pcm}}{id_mot}{id_mot=#GET{id_matiere}}{0,1}> </BOUCLE_Verifie_contenu_classe_et_matiere>
+			<?php
+			$sql="DELETE FROM spip_mots_articles WHERE id_mot=".'[(#GET{id_matiere}|texte_script)]'." AND id_article=".'[(#GET{id_article_classe})]';
+			$result = spip_query($sql);
+			echo ("<!--délier la matière de l'article de la classe: $result-->\n");
+			?>#SET{matiere,''}
+		<//B_Verifie_contenu_classe_et_matiere>
+	</BOUCLE_Verifie_contenu_classe>
+		<?php 
+			//effacer (mettre à la poubelle) le fichier de la classe
+			$sql ="UPDATE spip_articles SET statut='poubelle' WHERE id_article=".'[(#GET{id_article_classe})]';
+			$result = spip_query($sql);
+			echo ("<!--update poubelle: $result-->\n");
+			//délier classe et rubrique de l'année
+			$sql="DELETE FROM spip_mots_rubriques WHERE id_mot=".'[(#ID_MOT)]'." AND id_rubrique=".'[(#ID_RUBRIQUE)]';
+			$result = spip_query($sql);
+			echo ("<!--délier la classe à la rubrique: $result-->\n");
+		?>#SET{classe,''}
+	<//B_Verifie_contenu_classe>
+</BOUCLE_Mot_de_la_classe>
+	<h1>La fiche est définitivement effacée</h1>
+			<br class="clear" />	
+	</div>
+	<div id="Contenu"><div class="bloc"><div class="moyen-bloc">
+			<p><strong>Ne revenez pas en arrière, mais choisissez&nbsp;:</strong></p>
+			<ul>
+				<li><a href="#URL_PAGE{cahier-de-texte-saisie}<?php
+	echo ("&id_matiere=$id_matiere");
+	for ($count=0; $count<=$classes; $count++) {
+		echo("&id_classe$count=".$id_classe[$count]);
+	};
+	if ($classes>0) echo ("&classes=$classes");
+				?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une autre fiche</a></li>
+				<li><a href="[(#URL_PAGE{cahier-de-texte-affichage,senschrono=1}|parametre_url{var_mode,calcul}|parametre_url{classe,#GET{classe}}|parametre_url{matiere,#GET{matiere}}|parametre_url{id_auteur,#SESSION{id_auteur}})]" title="Afficher les séances que l'on a déjà saisies"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
+				<li><a href="#URL_PAGE{cahier-de-texte-accueil,var_mode=calcul}" title="retour à l'accueil"><img src="#CHEMIN{images/logo-mini2-22.png}" alt="icône" vspace="2" align="middle">Retourner à l'accueil/au tableau de bord</a></li>
+			</ul>
+</BOUCLE_CONDITIONNELLE_confirmation_effacement>[
+
+	(#REM) Hack de la boucle conditionnelle qui remplace le if:
+
+
+//------------------------------------------------------------------------------
+//Si l'utilisateur a écrit une fiche puis validée ou s'il veut effacer une fiche
+//------------------------------------------------------------------------------
+
+//Si la fiche est enregistrée (enregistrée mais non à modifier)
+//On l'affiche pour vérification...
+//todo: afficher avec la CSS Spip
+
+
+][(#SET{condition_boucle,''})]
+[(#ENV{effacer_fiche}|=={"a_confirmer"}
+			|?{' ',''})[(#SET{condition_boucle,#ID_RUBRIQUE})]]
+[(#ENV{enregistrer_fiche}|?{' ',''})
+	[(#ENV{modifier_fiche}|?{'',' '})[(#SET{condition_boucle,#ID_RUBRIQUE})]]
+]<BOUCLE_CONDITIONNELLE_Affichage_de_verification(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}>
+
+	<h1>Voici la fiche que vous <?php
+		if ($_GET['effacer_fiche']) {echo "voulez effacer";}
+		else {
+			echo "avez "; 
+			if ($id_article) {echo "dupliquée";}
+			 else {echo "remplie";};
+		}
+?>&nbsp;:</h1>
+			<br class="clear" />	
+	</div>
+	<div id="Contenu"><div class="bloc">
+		<div id="documents">
+			<h3 class="titre"><?php echo $titre_contenu_seance?></h3>
+			<div class="texte">
+				<?php
+//On vérifie que la date en est bien une grâce à bonbon_verifie_date... (ça a l'air de fonctionner).
+	if (!bonbon_verifie_date($date_seance)) echo "<p class=\"on\">Attention, la date de cette séance n'est pas correcte&nbsp;: date&nbsp;= \"$date_seance\"</p>"; echo propre($contenu_seance);?>
+			</div>[
+
+(#REM) Si la séance est dupliquée/Modifiée, on affiche les documents qui sont liés à la séance...
+
+]
+<BOUCLE_On_Affiche_les_Docs_seance_dupliquee_verif(ARTICLES){id_article}>[
+
+(#REM) On affiche les documents liés à la séance
+
+		]<B_Documents_Seances_verif>
+			<div class="documents-seance">
+				<h4 class="documents-seance"><b>>></b>&nbsp;Documents déjà joints à la séance&nbsp;:</h4>
+		<BOUCLE_Documents_Seances_verif(DOCUMENTS){id_document IN #GET{liste_docs_seance}}{"&nbsp;| "}{par titre}>
+				<?php if ($_POST['doc_seance_'.'[(#ID_DOCUMENT)]']) {?><a href="#URL_DOCUMENT">[(#LOGO_DOCUMENT||image_reduire{22,22})]&nbsp;[(#TITRE|sinon{#FICHIER|basename})] (<em>#TYPE_DOCUMENT</em> de [(#TAILLE|taille_en_octets)])</a>
+				<?php }// fin du if le document est conservé?>
+		</BOUCLE_Documents_Seances_verif>
+			</div>
+		</B_Documents_Seances_verif>
+</BOUCLE_On_Affiche_les_Docs_seance_dupliquee_verif>
+<?php //si il y a des devoirs
+if ($contenu_devoir[0]!="") {
+?>
+			<hr>
+			<div>
+				<h4 class="devoirs">Devoirs des<?php echo(" $classes_titre$groupe_titre&nbsp;:")?></h4>
+<?php //Pour chaque devoir qui a un contenu:
+ for ($count=0; ($count<=$devoirs and $contenu_devoir[$count]); $count++) {
+	$liste_docs_Devoir = $liste_des_listes_de_docs[$count]; ?>
+				<div class="devoirs"><h5 class="devoirs"><b>>></b>&nbsp;Devoir pour le <?php
+//On vérifie que la date en est bien une grâce à bonbon_verifie_date... (ça a l'air de fonctionner).
+	if (!bonbon_verifie_date($date_devoir[$count])) {echo "<span class=\"on\">Attention, la date de ce devoir n'est pas correcte&nbsp;: date&nbsp;= \"$date_devoir[$count]\"</span>";} else { echo $date_devoir[$count];}?>&nbsp;:</h5>
+				<span><?php echo propre($contenu_devoir[$count]);?></span>[
+
+(#REM) Si la fiche est dupliquée/Modifiée, on affiche les documents qui sont liés au devoir...
+
+		]<B_Documents_Devoir_verif><?php
+			if ($liste_docs_Devoir) {?>
+			<div class="documents-seance">
+				<b>>>></b>&nbsp;Documents déjà joints à ce devoir&nbsp;:
+			<?php } //fin du if liste_docs_Devoir ?>
+		<BOUCLE_Documents_Devoir_verif(DOCUMENTS){id_document IN #GET{liste_docs_devoirs}}{par titre}><?php
+//On vérifie parmis les docs liés aux (tous) devoirs de la fiche qu'ils correspondent au devoir: on vérifie que l'id_document est bien dans le tableau des docs liés à ce devoir.
+				reset($liste_docs_Devoir);
+				$ok=false;
+				while(list ($key, $val) = each ($liste_docs_Devoir)) {
+					if ($val=='[(#ID_DOCUMENT)]') $ok="ok";
+				}
+				if ($ok) {
+					 if ($_POST['doc_devoir'.$count.'_'.'[(#ID_DOCUMENT)]']) { ?><a href="#URL_DOCUMENT">[(#LOGO_DOCUMENT||image_reduire{22,22})]&nbsp;[(#TITRE|sinon{#FICHIER|basename})] (<em>#TYPE_DOCUMENT</em> de [(#TAILLE|taille_en_octets)])</a>&nbsp;| 
+					<?php }//fin du if doc_devoirXXX_YYY ?>
+				<?php } //fin du if liste_docs_Devoir ?>
+		</BOUCLE_Documents_Devoir_verif><?php
+			if ($liste_docs_Devoir) {?>
+			</div>
+			<?php } //fin du if liste_docs_Devoir ?>
+		</B_Documents_Devoir_verif>
+		</div><br />
+<?php } //fin du for count devoirs?>
+			</div>
+<?php } //fin du if contenu_devoir?>
+		</div>
+	<div><?php
+//Si l'utilisateur veut modifier la fiche (pas l'effacer)
+	if (!$_GET['effacer_fiche']) {?>
+	<form name="modifier" method="post">
+<?php
+//préparation du formulaire
+//on récupère tous les paramètres et on les remet dans le formulaire en POST cachés
+		$post=$_POST;
+		while (list($key,$val)=each($post)) {
+			if ($key!="enregistrer_fiche") {
+?>
+		<input type="Hidden" <?php echo 'name="'.$key.'" value="'.htmlentities($val).'"'; ?>>
+<?php			}//fin du if key
+		}//fin du while $key $val?>
+		<input type="hidden" name="liste_id_classes" value="<?php echo $liste_id_classes; ?>">
+	<!--Modifier la fiche -->
+		
+		<input type="Submit" name="modifier_fiche" value="Modifier la fiche">
+		<input type="Submit" name="valider_fiche" value="Confirmer l'enregistrement de la fiche (elle ne sera plus modifiée)">
+	</form>
+<?php	} //fin du if not effacer fiche
+// L'utilisateur veut effacer la fiche, on lui demande confirmation
+	else {?>
+	<form name="effacer" method="get">
+		<input type="hidden" name="page" value="cahier-de-texte-saisie">
+		<input type="hidden" name="id_article" value="#ENV{id_article}">
+		<input type="Submit" name="effacer_fiche" value="Confirmer l'effacement de la fiche ci-dessus (c'est définitif !)">
+	</form>
+<?php	} //fin du else if not effacer fiche (donc du if effacer fiche)
+?>
+</BOUCLE_CONDITIONNELLE_Affichage_de_verification>[
+
+	(#REM) Hack de la boucle conditionnelle qui remplace le if:
+
+//------------------------------------------------------------------
+//L'utilisateur veut enregistrer la fiche défintivement dans la base
+//------------------------------------------------------------------
+
+
+][(#SET{condition_boucle,''})]
+[(#ENV{valider_fiche}|?{' ',''})[(#SET{condition_boucle,#ID_RUBRIQUE})]]
+<BOUCLE_CONDITIONNELLE_Enregistrer_dans_base(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}>
+			<h1>La fiche <?php if ($id_article) {echo "dupliquée ";}; ?>est définitivement enregistrée&nbsp;:</h1>
+			<br class="clear" />	
+	</div>
+	<div id="Contenu"><div class="bloc"><div class="moyen-bloc">[
+
+(#REM) Si la séance est dupliquée/Modifiée, on enregistre dans le surtitre les documents qui sont liés à la séance...
+
+]
+<BOUCLE_On_Affiche_les_Docs_seance_dupliquee_enregistrement(ARTICLES){id_article}>[
+
+(#REM) On récupère dans le surtitre les documents de la liste
+
+		]<BOUCLE_Documents_Seances_enregistrement(DOCUMENTS){id_document IN #GET{liste_docs_seance}}{par titre}>
+				<?php
+			if ($_POST['doc_seance_'.'[(#ID_DOCUMENT)]']) {
+				$surtitre_avec_docs = $surtitre_avec_docs."<doc".'[(#ID_DOCUMENT)]'."> ";
+			}// fin du if le document est conservé?>
+		</BOUCLE_Documents_Seances_enregistrement>
+</BOUCLE_On_Affiche_les_Docs_seance_dupliquee_enregistrement>
+<?php
+
+//insertion de l'article du contenu du cours dans la base
+	$id_contenu_seance = bonbon_enregistrement_seance ($date_seance,$titre_contenu_seance,$contenu_seance,$id_auteur,$id_rub_cdt,$surtitre_avec_docs);
+	if (!$id_contenu_seance) echo "<p>Un problème inconnu est survenu pendant l'enregistrement de la fiche $titre_contenu_seance...</p>";
+//ajout des mots-clés
+	//le mot-clé qui définit que c'est le contenu d'une séance
+	//d'abord on récupère son id:?>
+<BOUCLE_Dire_id_mot_contenu(MOTS){titre="Description de séance"}><?php $id_identif_contenu = '[(#ID_MOT)]'?> </BOUCLE_Dire_id_mot_contenu>
+[(#SET{liste_id_classes_tableau,[(#GET{virgule}|explode{#ENV{liste_id_classes}})]})]
+<?php	//Puis on associe le mot à l'article
+	$result = bonbon_lier_mot($id_identif_contenu,$id_contenu_seance);
+	echo ("<!--identifiant de l'article: $result-->\n");
+	//les classes
+	for ($count=0; $count<=$classes; $count++) {
+		$result = bonbon_lier_mot($id_classe[$count],$id_contenu_seance);
+		echo ("<!--classe: $result-->\n");
+	} ?>[
+
+	(#REM) Vérification que la classe est liée à la rubrique de l'année et affectation si ce n'était pas le cas.
+	On crée aussi l'article support pour les matières de la classe
+
+]<BOUCLE_CLasses_de_env(MOTS){id_mot IN #GET{liste_id_classes_tableau}}><BOUCLE_Classe_liee_a_annee(RUBRIQUES){id_rubrique}{id_mot}> </BOUCLE_Classe_liee_a_annee>[
+<!--(#ID_MOT|bonbon_lier_mot{#ID_RUBRIQUE,"rubrique"}|?{' ',''})#TITRE a été rattaché au cahier de texte de l'année en cours-->
+	]<BOUCLE_Article_Classe_Present(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{titre=#_CLasses_de_env:TITRE}> </BOUCLE_Article_Classe_Present>[
+<!--(#_CLasses_de_env:TITRE|bonbon_creer_fiche_classe{#GET{id_rubrique_pcm},#_CLasses_de_env:ID_MOT}|?{' ',''})La fiche qui décrit la #_CLasses_de_env:TITRE est créée-->
+	]<//B_Article_Classe_Present>
+<//B_Classe_liee_a_annee></BOUCLE_CLasses_de_env>
+<?php
+	//le groupe éventuel:
+	if ($id_groupe!=0) {
+		$result = bonbon_lier_mot($id_groupe,$id_contenu_seance);
+		echo ("<!--groupe: $result-->\n");
+	}
+	//la matière:
+	$result = bonbon_lier_mot($id_matiere,$id_contenu_seance);
+	echo ("<!--matière: $result-->\n<p>La séance est enregistrée...</p>\n"); ?>[
+
+	(#REM) Vérification que la matière est liée à la rubrique de l'année et affectation si ce n'était pas le cas.
+	On associe aussi la matière à l'article support des classes...
+
+]<BOUCLE_Matiere_liee_a_annee(MOTS){id_rubrique}{id_mot=#ENV{id_matiere}}> </BOUCLE_Matiere_liee_a_annee>[
+<!--(#ENV{id_matiere}|bonbon_lier_mot{#ID_RUBRIQUE,"rubrique"}|?{' ',''})#TITRE a été rattaché au cahier de texte de l'année en cours-->
+]<//B_Matiere_liee_a_annee>
+<BOUCLE_mot_des_classes(MOTS){id_mot IN #GET{liste_id_classes_tableau}}>
+	<BOUCLE_Verifie_association_a_article_classe(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{titre=#TITRE}>#SET{id_article_a_associer,#ID_ARTICLE}
+		<BOUCLE_Verifie_association_a_matiere(MOTS){id_article}{id_mot=#ENV{id_matiere}}> </BOUCLE_Verifie_association_a_matiere>[
+<!--(#ENV{id_matiere}bonbon_lier_mot{#GET{id_article_a_associer}}|?{' ',''})#TITRE a été rattaché au cahier de texte de l'année en cours-->
+	]<//B_Verifie_association_a_matiere></BOUCLE_Verifie_association_a_article_classe><//B_Verifie_association_a_article_classe>
+</BOUCLE_mot_des_classes>
+
+<?php
+//insertion des articles de devoirs s'il y a
+
+if ($contenu_devoir[0]!="") {
+	$liste_devoirs_contenu ="{{Devoirs donnés:}}\n\n";
+	//d'abord on récupère l'id du mot-clé qui désigne les devoirs:?>
+	<BOUCLE_Dire_id_mot_devoir(MOTS){titre="Devoirs à faire"}><?php $id_identif_devoir='[(#ID_MOT)]'?> </BOUCLE_Dire_id_mot_devoir>
+	<?php
+	//Puis pour chaque devoir qui a un contenu:
+	for ($count=0; ($count<=$devoirs and $contenu_devoir[$count]); $count++) {
+		$liste_docs_Devoir = $liste_des_listes_de_docs[$count];
+		$surtitre_avec_docs="";?>[
+
+(#REM) Si la fiche est dupliquée/Modifiée, on enregistre dans le surtitre les documents qui sont liés au devoir...
+
+		]<BOUCLE_Documents_Devoir_enregistrement(DOCUMENTS){id_document IN #GET{liste_docs_devoirs}}{par titre}><?php
+//On vérifie parmis les docs liés aux (tous) devoirs de la fiche qu'ils correspondent au devoir: on vérifie que l'id_document est bien dans le tableau des docs liés à ce devoir.
+				reset($liste_docs_Devoir);
+				$ok=false;
+				while(list ($key, $val) = each ($liste_docs_Devoir)) {
+					if ($val=='[(#ID_DOCUMENT)]') $ok="ok";
+				}
+				if ($ok) {
+					 if ($_POST['doc_devoir'.$count.'_'.'[(#ID_DOCUMENT)]']) { 
+						$surtitre_avec_docs = $surtitre_avec_docs."<doc".'[(#ID_DOCUMENT)]'."> ";
+					 }//fin du if doc_devoirXXX_YYY ?>
+				<?php } //fin du if liste_docs_Devoir ?>
+		</BOUCLE_Documents_Devoir_enregistrement><?php
+		list ($id_contenu_devoir[$count],$liste_devoirs_contenu)=bonbon_enregistrement_devoir ($date_devoir[$count],$fragment_titre_devoir,$contenu_devoir[$count],$id_auteur,$id_rub_cdt,$titre_contenu_seance,$id_contenu_seance,$count+1,$liste_devoirs_contenu,$surtitre_avec_docs);
+		//ajout des mots-clés
+		//le mot-clé qui définit que c'est le contenu d'un devoir est associé à l'article
+		$result = bonbon_lier_mot($id_identif_devoir,$id_contenu_devoir[$count]);
+		echo ("<!--mot des devoirs: $result-->\n");
+		//les classes
+		for ($countc=0; $countc<=$classes; $countc++) {
+			$result = bonbon_lier_mot($id_classe[$countc],$id_contenu_devoir[$count]);
+			echo ("<!--classe: $result-->\n");
+		}
+		//le groupe éventuel:
+		if ($id_groupe!=0) {
+			$result = bonbon_lier_mot($id_groupe,$id_contenu_devoir[$count]);
+			echo ("<!--groupe: $result-->\n");
+		}
+		//la matière:
+		$result = bonbon_lier_mot($id_matiere,$id_contenu_devoir[$count]);
+		echo ("<!--matière: $result-->\n<p>Enregistrement du devoir n°".($count+1)."</p>\n");
+	}//fin du for chaque devoir
+	echo ("<p>Devoirs enregistrés...</p>\n");
+} //fin du if contenu_devoir
+
+//rajout des références aux devoirs dans le PS du contenu de la séance
+		$result = bonbon_ajout_devoirs_a_seance ($liste_devoirs_contenu, $id_contenu_seance);
+?>
+			<p><strong>Ne revenez pas en arrière, mais choisissez&nbsp;:</strong></p>
+			<ul>
+				<li><a href="#URL_PAGE{cahier-de-texte-affichage-seance,var_mode=calcul}&id_article=<?php echo ($id_contenu_seance); ?>" title="visualiser et ajouter des documents joints à cette séance ou ses devoirs" onClick="javascript:window.open(this.href,'affichage', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;">
+						<img src="#CHEMIN{images/x-office-spreadsheet.png}" alt="icône" vspace="2" align="middle">
+				Visualiser et/ou ajouter des documents à cette séance et ses devoirs
+				</a></li>
+				<li><a href="#URL_PAGE{cahier-de-texte-saisie}&id_article=<?php echo ($id_contenu_seance); ?>" title="Faire une copie de la séance que vous venez de saisir, pour une autre classe/groupe"><img src="#CHEMIN{images/go-jump.png}" alt="icône" vspace="2" align="middle">Dupliquer la séance pour une autre classe/groupe</a></li>
+				<li><a href="#URL_PAGE{cahier-de-texte-saisie}<?php
+	echo ("&id_matiere=$id_matiere");
+	for ($count=0; $count<=$classes; $count++) {
+		echo("&id_classe$count=".$id_classe[$count]);
+	};
+	if ($classes>0) echo ("&classes=$classes");
+				?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une autre fiche</a></li>
+				<li><a href="[(#URL_PAGE{cahier-de-texte-affichage,senschrono=1}|parametre_url{var_mode,'calcul'}|parametre_url{id_auteur,#SESSION{id_auteur}})]&classe=<?php echo($premiere_classe); ?>&matiere=<?php echo($matiere_titre);?>" title="Afficher les séances que l'on a déjà saisies"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
+				<li><a href="#URL_PAGE{cahier-de-texte-accueil,var_mode=calcul}" title="retour à l'accueil"><img src="#CHEMIN{images/logo-mini2-22.png}" alt="icône" vspace="2" align="middle">Retourner à l'accueil/au tableau de bord</a></li>
+			</ul>
+</BOUCLE_CONDITIONNELLE_Enregistrer_dans_base>[
+
+	(#REM) Hack de la boucle conditionnelle qui remplace le if:
+
+//---------------------------------------------------
+//L'utilisateur veut remplir une fiche ou la modifier
+//---------------------------------------------------
+
+
+][(#SET{condition_boucle,#ID_RUBRIQUE})]
+[(#ENV{valider_fiche}|?{' ',''})[(#SET{condition_boucle,''})]]
+[(#ENV{enregistrer_fiche}|?{' ',''})[(#SET{condition_boucle,''})]]
+[(#ENV{effacer_fiche}|?{' ',''})[(#SET{condition_boucle,''})]]
+<BOUCLE_CONDITIONNELLE_Saisir_sa_fiche(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}>
+	<h1><?php if ($id_article) {echo "Modifier";} else {echo "Remplir";}; ?> une fiche du cahier de texte</h1>
+		<h2><?php echo($titre_matiere_classe);?></h2>
+			<br class="clear" />	
+	</div>
+	<div id="Contenu"><div class="bloc"><div class="moyen-bloc">[
+
+	(#REM) Hack de la boucle conditionnelle qui remplace le if:
+
+//--------------------------------
+//Primo: remplir classe et matière
+//--------------------------------
+
+
+][(#SET{condition_boucle,''})]
+[(#ENV{classe_matiere}|?{'',' '})[(#SET{condition_boucle,#ID_RUBRIQUE})]]
+<BOUCLE_CONDITIONNELLE_Saisir_la_classe_matiere_ou_le_contenu(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}>
+<B_Fiche_du_prof>
+	<!--Selecteur de classe et matière-->
+		<form name="classe_matiere" method="get">
+		<input type="hidden" name="page" value="cahier-de-texte-saisie">
+<?php	if ($id_article) echo "<input type=\"hidden\" name=\"id_article\" value=\"$id_article\">";?>[
+
+	(#REM)On se met dans le contexte du prof grâce à son article-fiche
+
+]<BOUCLE_Fiche_du_prof(ARTICLES){id_rubrique=#GET{id_rubrique_pcm}}{id_auteur=#SESSION{id_auteur}}{ps=#SESSION{id_auteur}}{0,1}>
+[(#REM) {ps="À propos d'un professeur"} a été viré car posait des soucis d'encodage]
+	<B_ToutesLesClasses>
+		<fieldset>
+			<p class="infos">[(#TOTAL_BOUCLE|>{1}|?{"Seules vos classes sont affichées","Seule votre classe est affichée"})]. <a href="[(#URL_PAGE{cahier-de-texte-choix-classes-matieres}|parametre_url{id_auteur,#SESSION{id_auteur}})]#Classes" title="Rajouter et enlever des classes dans lesquelles on enseigne" onClick="javascript:window.open(this.href,'choix-doc', 'scrollbars=yes, resizable=yes, width=760, height=500'); return false;">Changer ses classes</a></p>
+			<legend><?php if ($id_article) {echo "Modifier ";}; ?>Classe<?php if ($classes>0) echo "s"?>&nbsp;:</legend>
+<?php //Une ou plusieurs classes
+if ($classes>0) echo ("Regroupement de classes&nbsp;:");
+for ($count=0; $count<=$classes; $count++) {
+?>
+			<select id="classe<?php echo $count;?>" name="id_classe<?php echo $count;?>" size="1">[
+	(#REM)On extrait toutes les classes de Spip
+
+	]<BOUCLE_ToutesLesClasses(MOTS){id_article}{type="Classes"}{par titre}>
+				<option value="#ID_MOT"<?php if ($id_classe[$count]=='[(#ID_MOT|texte_script)]') {echo " selected=selected";} else {echo $sinon;} $sinon='';?>>#TITRE</option>
+	</BOUCLE_ToutesLesClasses>
+			</select>
+<?php } //fin du for count classes
+
+//S'il y a plus d'une classe:
+
+if ($classes>0) {
+?>
+			<input type="Submit" value="Retirer une classe" name="moinsclasse">
+<?php } //fin du if classe?>
+
+			<input type="hidden" name="classes" value="<?php echo $classes;?>">
+			<input type="Submit" value="Rajouter une classe" name="plusclasse">
+			Groupe&nbsp;: <select id="groupe" name="id_groupe" size="1">
+				<option value="0">Pas de groupe</option>
+[(#REM)On extrait tous les groupes de Spip]
+	<BOUCLE_ToutesLesGroupes(MOTS){type="Sous groupes de classes"}{par titre}>
+				<option value="#ID_MOT"<?php if ($id_groupe=='[(#ID_MOT|texte_script)]') echo " selected=selected";?>>#TITRE</option>
+	</BOUCLE_ToutesLesGroupes>
+			</select>
+		</fieldset>
+
+	</B_ToutesLesClasses>
+<p>Vous n'avez pas encore indiqué à quelle(s) classe(s) vous enseignez.</p>
+<INCLURE{fond=cahier-de-texte-choix-classes-matieres}{id_auteur=#SESSION{id_auteur}}{inclu='oui'}{parent=#ENV{page}}>#SET{inclusion_choix,'oui'}
+	<//B_ToutesLesClasses>
+	<B_ToutesLesMatieres>
+		<fieldset>
+			<legend><?php if ($id_article) {echo "Modifier ";}; ?>Matière&nbsp;:</legend>
+			<p class="infos">[(#TOTAL_BOUCLE|>{1}|?{"Seules vos matières sont affichées","Seule votre matière est affichée"})]. <a href="[(#URL_PAGE{cahier-de-texte-choix-classes-matieres}|parametre_url{id_auteur,#SESSION{id_auteur}})]#Matières" title="Rajouter et enlever des matières dans lesquelles on enseigne" onClick="javascript:window.open(this.href,'choix-doc', 'scrollbars=yes, resizable=yes, width=760, height=500'); return false;">Changer ses matières</a></p>
+			<select id="matiere" name="id_matiere" size="1">
+[(#REM)On extrait toutes les matières de Spip]
+	<BOUCLE_ToutesLesMatieres(MOTS){id_article}{type="Matières"}{par num titre}{par titre}>
+				<option value="#ID_MOT"<?php if ($id_matiere=='[(#ID_MOT|texte_script)]') echo " selected=selected";?>>#TITRE</option>
+	</BOUCLE_ToutesLesMatieres>
+			</select>
+			</fieldset>
+	</B_ToutesLesMatieres>
+[(#GET{inclusion_choix}|!={'oui'}|?{' ',''})<p>Vous n'avez pas encore indiqué quelle(s) matière(s) vous enseignez</p>
+<INCLURE{fond=cahier-de-texte-choix-classes-matieres}{id_auteur=#SESSION{id_auteur}}{inclu='oui'}{parent=#ENV{page}}>][(#SET{inclusion_choix,'oui'})]
+	<//B_ToutesLesMatieres>
+</BOUCLE_Fiche_du_prof>
+[(#GET{inclusion_choix}|!={'oui'}|?{' ',''})
+			<input type="hidden" name="id_auteur" value="#SESSION{id_auteur}">
+			<input type="Submit" value="<?php if ($id_article) {echo "Modifier";} else {echo "Valider";}; ?> classe<?php if ($classes>0) echo "s"?> et matière" name="classe_matiere">]
+		</form>
+</B_Fiche_du_prof>
+[(#GET{inclusion_choix}|!={'oui'}|?{' ',''})<p>Vous n'avez pas encore indiqué quelle(s) matière(s) vous enseignez et à quelle(s) classe(s).</p>
+<INCLURE{fond=cahier-de-texte-choix-classes-matieres}{id_auteur=#SESSION{id_auteur}}{inclu='oui'}{parent=#ENV{page}}>]
+<//B_Fiche_du_prof>
+</BOUCLE_CONDITIONNELLE_Saisir_la_classe_matiere_ou_le_contenu>
+</B_CONDITIONNELLE_Saisir_la_classe_matiere_ou_le_contenu>[
+
+	(#REM) Suite du Hack: le else !
+
+//----------------------------------------------------------------------
+//Secundo: remplir le contenu (quand classes et matières sont renseignés)
+//----------------------------------------------------------------------
+
+]	<div>
+	<!--Contenu de la séance-->
+		<FORM NAME="contenu" method="post">
+		<input type="hidden" name="page" value="cahier-de-texte-saisie">
+			<fieldset>
+			<legend><?php if ($id_article) {echo "Modifier le ";}; ?>Contenu de la séance</legend>
+			<p class="dates">Séance du <INPUT TYPE="text" ID="date_seance" NAME="date_seance" VALUE="<?php if (!$date_seance) echo date("d/m/Y"); else echo $date_seance;?>" SIZE=12></p><div style="display: block; float: right; font-size:70%">(<em>Astuce&nbsp;:</em> il faut sauter une ligne pour faire un retour à la ligne) <a class='aide'
+href='./ecrire/?exec=aide_index&amp;aide=raccourcis&amp;var_lang=fr'
+onclick="javascript:window.open(this.href,'spip_aide', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;"><img src='#CHEMIN{/images/aide.gif}'
+alt="AIDE"  title="De l'aide sur cet &eacute;l&eacute;ment" class='aide' /></a></div><?php
+	include_spip('inc/barre');
+	echo afficher_barre("document.getElementById('contenu_seance')",$forum=true); ?>
+			<textarea id="contenu_seance" name="contenu_seance" cols="70" rows="5"
+				onselect='storeCaret(this);'
+				onclick='storeCaret(this);'
+				onkeyup='storeCaret(this);'
+				ondblclick='storeCaret(this);'><?php echo $contenu_seance;?></textarea>[
+
+(#REM) Si la séance est dupliquée/Modifiée, on affiche les documents qui sont liés à la séance...
+
+		]<B_Documents_Seances_saisie>
+			<div class="documents-seance">
+				<h4 class="documents-seance"><b>>></b>&nbsp;Documents déjà joints à la séance&nbsp;:</h4>
+				(décochez ceux que vous ne voulez pas conserver associés à cette séance)<br />
+		<BOUCLE_Documents_Seances_saisie(DOCUMENTS){id_document IN #GET{liste_docs_seance}}{"&nbsp;| "}{par titre}>
+				<input type="checkbox" name="doc_seance_#ID_DOCUMENT" <?php if ($_POST['doc_seance_'.'[(#ID_DOCUMENT)]'] or !$_POST['modifier_fiche']) echo "CHECKED"; ?> title="cochez pour conserver le document, décochez pour l'enlever"><a href="#URL_DOCUMENT">[(#LOGO_DOCUMENT||image_reduire{22,22})]&nbsp;[(#TITRE|sinon{#FICHIER|basename})] (<em>#TYPE_DOCUMENT</em> de [(#TAILLE|taille_en_octets)])</a>
+		</BOUCLE_Documents_Seances_saisie>
+			</div>
+		</B_Documents_Seances_saisie>
+			</fieldset>
+	<!--Devoirs à faire -->
+			<fieldset>
+			<legend><?php if ($id_article) {echo "Modifier les ";}; ?>Devoirs</legend>
+
+<?php for ($count=0; $count<=$devoirs; $count++) {
+	$liste_docs_Devoir = $liste_des_listes_de_docs[$count]; ?>
+			<p>À faire pour le <INPUT TYPE="text" class="date_calendrier" NAME="date_devoir<?php echo $count;?>" VALUE="<?php if (!$date_devoir[$count]) echo date("d/m/Y"); else echo $date_devoir[$count];?>" SIZE=12></p><div style="display: block; float: right; font-size:70%">(<em>Astuce&nbsp;:</em> il faut sauter une ligne pour faire un retour à la ligne) <a class='aide'
+href='./ecrire/?exec=aide_index&amp;aide=raccourcis&amp;var_lang=fr'
+onclick="javascript:window.open(this.href,'spip_aide', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;"><img src='#CHEMIN{/images/aide.gif}'
+alt="AIDE"  title="De l'aide sur cet &eacute;l&eacute;ment" class='aide' /></a></div><?php
+	echo afficher_barre("document.getElementById('contenu_devoir$count')",$forum=true); ?>
+			<textarea id="contenu_devoir<?php echo $count;?>" name="contenu_devoir<?php echo $count;?>" cols="70" rows="5"
+				onselect='storeCaret(this);'
+				onclick='storeCaret(this);'
+				onkeyup='storeCaret(this);'
+				ondblclick='storeCaret(this);'><?php echo $contenu_devoir[$count];?></textarea>[
+
+(#REM) Si la fiche est dupliquée/Modifiée, on affiche les documents qui sont liés au devoir...
+
+		]<B_Documents_Devoir_saisie><?php
+			if ($liste_docs_Devoir) {?>
+			<div class="documents-seance">
+				<h4 class="documents-seance"><b>>></b>&nbsp;Documents déjà joints à ce devoir&nbsp;:</h4> 
+				(décochez ceux que vous ne voulez pas conserver associés à cette séance)<br />
+			<?php } //fin du if liste_docs_Devoir ?>
+		<BOUCLE_Documents_Devoir_saisie(DOCUMENTS){id_document IN #GET{liste_docs_devoirs}}{par titre}><?php
+//On vérifie parmis les docs liés aux (tous) devoirs de la fiche qu'ils correspondent au devoir: on vérifie que l'id_document est bien dans le tableau des docs liés à ce devoir.
+				reset($liste_docs_Devoir);
+				$ok=false;
+				while(list ($key, $val) = each ($liste_docs_Devoir)) {
+					if ($val=='[(#ID_DOCUMENT)]') $ok="ok";
+				}
+				if ($ok) { ?>
+				<input type="checkbox" name="doc_devoir<?php echo $count;?>_#ID_DOCUMENT" <?php if ($_POST['doc_devoir'.$count.'_'.'[(#ID_DOCUMENT)]'] or !$_POST['modifier_fiche']) echo "CHECKED"; ?> title="cochez pour conserver le document, décochez pour l'enlever"><a href="#URL_DOCUMENT">[(#LOGO_DOCUMENT||image_reduire{22,22})]&nbsp;[(#TITRE|sinon{#FICHIER|basename})] (<em>#TYPE_DOCUMENT</em> de [(#TAILLE|taille_en_octets)])</a>
+				<?php } //fin du if liste_docs_Devoir ?>
+		</BOUCLE_Documents_Devoir_saisie><?php
+			if ($liste_docs_Devoir) {?>
+			</div>
+			<?php } //fin du if liste_docs_Devoir ?>
+		</B_Documents_Devoir_saisie>
+<?php }//fin du for count devoirs?>
+			<input type="hidden" name="devoirs" value="<?php echo $devoirs;?>">
+			<input style="float:right;" type="Submit" value="+ Rajouter un devoir pour une autre date" name="plusdate">
+<?php if ($devoirs) { ?>
+			<br>
+			<input style="float:right;" type="Submit" value="- Retirer le dernier devoir (pour le <?php if (!$date_devoir[$count]) echo date("d/m/Y"); else echo $date_devoir[$count];?>)" name="moinsdate">
+<?php } ?>
+			</fieldset>[
+(#REM) On ne parle de docs joints que si on est aps en train de dupliquer ou modifier une fiche.
+][
+	(#ENV{id_article}|?{'',' '})
+			<p>Vous pourrez ajouter des documents joints à la séance ou aux devoirs après les avoir enregistrés</p>]
+			<br>
+	<!--validation-->
+			<input type="Submit" value="Enregistrer dans le cahier de texte" name="enregistrer_fiche">
+		</form>
+<//B_CONDITIONNELLE_Saisir_la_classe_matiere_ou_le_contenu>
+</BOUCLE_CONDITIONNELLE_Saisir_sa_fiche>
+	</div></div>[
+	(#REM) Hack de la boucle conditionnelle qui remplace le if:
+
+//--------------------------------------------------------------------------
+// On affiche les séances du même type que celle saise (classe, matière, groupe)
+//-----------------------------------------------------------------------------
+
+
+][(#SET{condition_boucle,''})]
+[(#ENV{classe_matiere}|?{' ',''})[(#SET{condition_boucle,#ID_RUBRIQUE})]]
+<BOUCLE_CONDITIONNELLE_Affichage_des_fiches_connexes(RUBRIQUES){id_rubrique=#GET{condition_boucle}}{0,1}>
+	[(#INCLURE{fond=cahier-de-texte-affichage-seances-de-saisie}{id_classe0=#ENV*{id_classe0}}{id_matiere=#ENV*{id_matiere}}{id_groupe=#ENV*{id_groupe}}{id_auteur=#SESSION{id_auteur}}{id_mot=#ENV{id_groupe}})]
+</BOUCLE_CONDITIONNELLE_Affichage_des_fiches_connexes>
+	</div>
+[(#REM)Inclusion du pied de page]
+[(#INCLURE{fond=cahier-de-texte-pied})]
+</div>
+</BOUCLE_Verifie_RubriqueAnnee>[
+	
+	(#SET{descriptif_rubrique,"Cahier de texte de l'année scolaire "})
+][
+	(#SET{descriptif_rubrique,[(#GET{descriptif_rubrique}|concat{#GET{annee_scolaire},"\n\n{{Cette rubrique ne doit pas être renommée}}. Sinon, les enregistrements du cahier de texte de l'année en cours seront perdus"})]})
+]<?php
+//Si la rubrique pour l'année en cours n'existe pas, on la crée !?>
+[
+	(#SET{id_rub_annee_scolaire,#_Contexte_RubriqueCDT:ID_RUBRIQUE|bonbon_creer_sous_rubrique{#GET{annee_scolaire},#GET{descriptif_rubrique}}})
+	][<p>La sous-rubrique de l'année scolaire #GET{annee_rubrique} &nbsp;a été créée, c'est la rubrique n°(#GET{id_rub_annee_scolaire}).][ Elle contient une sous rubrique	n°(#GET{id_rub_annee_scolaire}|bonbon_creer_sous_rubrique{"Professeurs-classes-matières","Cette rubrique contient des données necessaires au fonctionnement du cahier de texte en ligne.
+
+
+	  {{Ne l'effacez pas}}. {{Ne la renommez pas}}. {{Ne modifiez pas son contenu}} sinon il ne fonctionnera plus correctement !"})&nbsp;nommée «Professeurs-classes-matières».] <strong>Ces sous-rubriques ont été créées pour gérer le cahier de texte de cette année scolaire. Ne les effacez pas, ne les renommez pas et laissez les dans la rubrique «Cahier de texte en-ligne» !</strong></p>
+		<a href="[(#SELF|parametre_url{var_mode,calcul})]" title="rafficher la page">Rafraichissez la page pour remplir une séance S.V.P.</a>
+	<//B_Verifie_RubriqueAnnee>
+</BOUCLE_Contexte_RubriqueCDT>
+
+
+  [(#REM)Fin de la zone à athentification]
+  <?php } else { ?>
+
+<h1>Cette partie est en accès restreint</h1>
+#LOGIN_PUBLIC
+
+<?php } ?>
+</body>
+</html>

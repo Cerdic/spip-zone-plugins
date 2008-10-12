@@ -1,0 +1,251 @@
+/*-----------------------------------------
+CSS du Cahier de texte pour Spip: Bonbon !
+Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
+Sous licence GPL (enfin bon, c'est bonbonware...)
+CopyLeft en juin 2007
+-------------------------------------------*/
+
+/*Tableaux des devoirs*/
+
+table.spip {
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid #999999;
+	border-collapse:collapse;
+}
+
+table.spip caption{
+	caption-side: top; /* bottom pas pris en compte par IE */
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 3px;
+	font-weight: bold;
+	font-family: "Arial", Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size : 70%;
+}
+
+table.spip th {
+	background-color: #a6a6a6;
+	border: 2px solid black;
+}
+
+table.spip tr.row_odd {
+	background-color: #d7d7d7;
+	border: 1px solid black;
+}
+
+table.spip tr.row_even {
+	border: 1px solid black;
+}
+
+table.spip td {
+	padding: 3px;
+	text-align: left;
+	border: 1px solid #999999;
+	vertical-align: middle;
+}
+
+img {
+	border:0px;
+}
+
+blockquote.spip {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: left;
+	font-style: italic;
+	font-weight: normal;
+	color:gray;
+	font-size:12px;
+	margin:0%;
+	padding:1px;
+	border: none;
+
+}
+
+p.avertissement {
+	font-style: italic;
+	font-size:70%;
+	color:red;
+	padding-bottom:5px;
+	
+}
+p.Copie_doc {
+	border: 1px solid black;
+}
+.Doc-joint {
+	text-align: center;
+	margin: 0.2em;
+	float: left;
+	width: 150px;
+	height: 10em;
+	padding: 0.5em;
+}
+.doc-cadre{
+	border: 1px solid red;
+	background-color: lightgray;
+	padding: 2px;
+	-moz-border-radius: 6px;
+}
+.liste-seances {
+/*
+	margin-right: 20em;
+	width:88%;
+*/
+}
+
+a.clic:hover {
+	cursor: pointer;
+}
+
+.bloc_doc {
+	width: 70%;
+	border: 1px solid black;
+	margin-left: 10%;
+	padding: 5px;
+	-moz-border-radius: 8px;
+}
+.bloc_fiches_doc {
+	width: 70%;
+	border: 1px solid black;
+	margin-left: 10%;
+	margin-bottom: 1em;	
+	padding: 5px;
+	background-color: lightgray;
+	-moz-border-radius: 8px;
+}
+.bloc_auteur {
+	float:right;
+	border: 1px solid red;
+	background-color: lightgray;
+	margin-left: 5px;
+	padding: 2px;
+	-moz-border-radius: 6px;
+	width: 50px;
+	font-size: 60%;
+}
+.bloc_auteur a {
+	text-decoration: none;
+}
+.bloc_auteur a:hover {
+	background-color: darkgray;
+	text-decoration: underline;
+}
+ul.puces_auteur {
+	list-style-position:inside;
+	list-style-type: none;
+	padding:0px;
+	margin:0px;
+	text-align: center;
+}
+li.puces_auteur {
+	list-style-position:inside;
+	list-style-type: none;
+	padding:none;
+	margin:none;
+	text-align: center;
+}
+
+.date {
+	font-style: italic;
+	font-weight:normal;
+	font-size: 1em;
+	color: blue;
+	
+}
+.groupe {
+	float:left;
+	width: 3em;
+	background-color: beige;
+	padding-top: 4em;
+	padding-bottom:4em;
+}
+.texte {
+}
+.infos {
+	font-size: 70%;
+	margin: 0px;
+	margin-bottom:0.5em;
+	padding: 0px;
+}
+.spip {
+	font-size: 1.1em;
+	font-family: "Times New Roman", serif;
+}
+h3.spip {
+	font-size: 2em;
+	color: purple;
+	font-weight:bold;
+	font-family: Georgia,"Times New Roman", serif;
+	text-align: left;
+	padding-left: 2em;
+	
+}
+.documents-seance {
+	font-weight:normal;
+	font-size: 1em;
+	color: green;
+}
+
+.documents-seance a {
+	text-decoration: none;
+}
+.documents-seance a:hover {
+	background-color: yellow;
+	text-decoration: underline;
+}
+
+.seance {
+	font-size: 1.1em;
+	font-family: "Times New Roman", serif;
+}
+
+option.on {
+	font-weight: bold;
+	color: red;
+}
+
+/*Devoirs affichés sous les séances*/
+.devoirs {
+	background-color:#CAE1FF;
+	font-size: 1.1em;
+	font-family: "Times New Roman", serif;
+}
+
+h4.devoirs {
+	margin: 0px;
+	padding: 0px;
+	text-align:center;
+}
+h5.devoirs {
+	display: inline;
+	font-style: italic;
+	font-weight:normal;
+	font-size: 1em;
+	color: blue;
+}
+
+/*élements de pagination*/
+.avant{
+	float: left;
+}
+.apres{
+	float: right;
+	margin-right: 3em;
+}
+.on {
+	color:red;
+}
+
+.on a:hover{
+	color:darkred;
+}
+/*Trucs en plus*/
+.authentifie{
+	margin-left: 60%;
+	font-size: 50%
+}
+.moyen-bloc {
+	width: 94%;
+margin-left: 3%
+}
