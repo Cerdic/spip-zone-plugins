@@ -435,6 +435,7 @@ liste."
    le nom de votre abonn&eacute; dans son courrier lors de l'envoi, placez dans 
    votre patron _AUTEUR_NOM_ (notez le tiret bas en d&eacute;but et fin de tag)."
 , 'personnaliser_le_courrier_label' => "Activer la personnalisation du courrier"
+, 'parametrer_la_meleuse' => "Param&eacute;trer la meleuse"
 
 //R
 , 'recherche' => 'Rechercher',

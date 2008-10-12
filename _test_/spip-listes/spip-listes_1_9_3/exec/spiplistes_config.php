@@ -348,7 +348,7 @@ function exec_spiplistes_config () {
 		. fin_cadre_relief(true)
 		//
 		// le nombre de lots d'envois
-		. debut_cadre_relief("", true, "", _T('spiplistes:Parametrer_la_meleuse'))
+		. debut_cadre_relief("", true, "", _T('spiplistes:parametrer_la_meleuse'))
 		. __boite_select_de_formulaire (
 			__array_values_in_keys(explode(";", _SPIPLISTES_LOTS_PERMIS)), $GLOBALS['meta']['spiplistes_lots']
 				, 'spiplistes_lots', 'spiplistes_lots'
