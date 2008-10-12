@@ -57,12 +57,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'hebergement' => 'h&eacute;bergement par',
 
 //I
-'info_navigation' => 'Choisissez l\'emplacement de la bande de navigation', // CFG
 'info_choix_theme' => 'Choisissez le th&egrave;me que vous souhaitez utiliser pour votre blog', // CFG
 
 //L
-'label_navigation_droite' => 'Bande de navigation &agrave; droite (valeur par d&eacute;faut)', // CFG
-'label_navigation_gauche' => 'Bande de navigation &agrave; gauche', // CFG
 'label_theme_defaut' => 'Th&egrave;me par d&eacute;faut (type DotClear)', // CFG
 'label_theme_perso' => 'Th&egrave;me perso (&agrave; d&eacute;finir ci-dessous)', // CFG
 'label_nom_theme' => 'Saisissez le nom du th&egrave;me perso (correspond &agrave xxxx du sous-r&eacute;pertoire squelettes/themes/xxxx/', // CFG

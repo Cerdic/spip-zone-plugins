@@ -11,18 +11,6 @@
 <div class="formulaire_spip formulaire_editer formulaire_cfg">
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
 	<ul>
-		<li class="editer_spipclear_navigation">
-			<label>Navigation</label>
-			<p class="explication"><:spipclear:info_navigation:></p>
-			<div class="choix">
-				<input type="radio" class="radio" name="navigation_gauche" id="navigation_gauche_non" value="0"[ (#ENV{navigation_gauche}|=={0}|?{checked="checked",''})] />
-				<label for="navigation_gauche_non"><:spipclear:label_navigation_droite:></label>
-			</div>
-			<div class="choix">
-				<input type="radio" class="radio" name="navigation_gauche" id="navigation_gauche_oui" value="1"[ (#ENV{navigation_gauche}|=={1}|?{checked="checked",''})] />
-				<label for="navigation_gauche_oui"><:spipclear:label_navigation_gauche:></label>
-			</div>
-		</li>
 		<li class="editer_spipclear_articles_entiers">
 			<label>Sommaire</label>
 			<p class="explication"><:spipclear:look_sommaire:></p>
