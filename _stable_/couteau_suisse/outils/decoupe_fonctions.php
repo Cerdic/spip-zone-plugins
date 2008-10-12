@@ -58,7 +58,6 @@ function decoupe_image($fich, $help, $self, $off, $val, &$images, $double=false)
 
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function decouper_en_pages_rempl($texte, $pagination_seule=false) {
-echo $pagination_seule?'OUI':'NON';
 	// si pas de separateur, on sort
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
 
@@ -175,7 +174,6 @@ function cs_onglets($texte){
 
 // ici on est en post_propre, tests de compatibilite effectues
 function cs_decoupe($texte, $pagination_seule=false){
- echo $pagination_seule?'oui':'non';
 	// si pas de separateur, on sort
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
 	// verification des metas qui stockent les liens d'image
