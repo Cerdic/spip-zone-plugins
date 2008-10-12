@@ -362,6 +362,7 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 		}
 		$traitements_utilises[$b] = join("\n", $traitements_utilises[$b]);		
 	}
+	// mes_spip_options.php : ajout des traitements
 	if(count($traitements_utilises))
 		$infos_pipelines['code_spip_options'][] = "// Table des traitements\n" . join("\n", $traitements_utilises);
 	// effacement du repertoire temporaire de controle

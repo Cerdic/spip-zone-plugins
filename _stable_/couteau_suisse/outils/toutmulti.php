@@ -1,7 +1,7 @@
 <?php
 /*
  - ToutMulti -
- Introduit le raccourci <:texte:> pour introduire librement des
+ Introduit le raccourci <:texte:> pour utiliser librement des
  blocs multi dans un flux de texte (via typo ou propre)
  Accepte egalement les arguments. Exemple :
   <:chaine{argument1=un texte, argument2=un autre texte}:>
