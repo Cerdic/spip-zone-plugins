@@ -3,27 +3,47 @@
 <!--
 *****Cahier de texte pour Spip: Bonbon !
 *****Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
+*****Adapté par Samuel BOCHAREL "PoongalOO"
 *****Sous licence GPL (enfin bon, c'est bonbonware...)
 *****CopyLeft en juin 2007
 ***Page d'installation des mots-clés dans Spip
 -->
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG">
 <head>
-  <title>Préparation du cahier de texte "Bonbon !" sous Spip</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
-</head>
+	[(#CONFIG{plugin}|match{EVA-WEB31}|?{' ',''})<INCLURE{fond=noisettes/headers/entete-meta}{env}>]
+	[(#CONFIG{plugin}|match{EVA-WEB31}|?{'',' '})]
+
+
+	
+	</head>
+	
 <body>
-<h1>Préparation ou mise à jour du cahier de texte sous Spip: ajout des classes et des matières et la rubrique du cahier de texte, mise à jour des fiches des classes et des profs</h1>[
+<div id="Page">
+	
+[(#REM) Entete de la page]
+	[(#CONFIG{plugin}|match{EVA-WEB31}|?{' ',''})<INCLURE {fond=noisettes/entete/inc_entete-page} >]
+	[(#CONFIG{plugin}|match{EVA-WEB31}|?{'',' '})<INCLURE{fond=cahier-de-texte-en-tete}{env}>]
+
+
+<h1>Préparation ou mise à jour du cahier de texte sous Spip</h1>[
 
 	(#REM) Hack pour conditionner une boucle
 	- On commence par mettre de coté un id_rubrique
 	- Ceux qui sont pas 0minirezo n'ont le droit qu'au texte...
 	- Et que le bouton n'a pas été pressé
 	- On fait la boucle conditionnelle
+]
 
-]<BOUCLE_Nimportequelle_rubrique(RUBRIQUES){0,1}>#SET{une_rubrique,#ID_RUBRIQUE}</BOUCLE_Nimportequelle_rubrique>[
+[Vous avez saisi les classes suivantes : (#CONFIG{bonbon/classes})]
+<br />
+[Vous avez saisi les groupes suivants : (#CONFIG{bonbon/groupes})]
+<br />
+[Vous avez saisi les matières suivantes : (#CONFIG{bonbon/matieres})]
+<br />
+<BOUCLE_Nimportequelle_rubrique(RUBRIQUES){0,1}>#SET{une_rubrique,#ID_RUBRIQUE}</BOUCLE_Nimportequelle_rubrique>[
 (#SET{condition_boucle,''})
 ][(#ENV{bouton}|?{'',' '})
 	[(#SET{condition_boucle,#GET{une_rubrique}})]
@@ -34,13 +54,7 @@
 
 ]<BOUCLE_CONDITIONNELLE_Bouton_presse_ou_non(RUBRIQUES){id_rubrique=#GET{condition_boucle}}>
 </BOUCLE_CONDITIONNELLE_Bouton_presse_ou_non>
-Avant d'exécuter cette page en cliquant sur le bouton, faites une <a href="./ecrire/?exec=admin_tech" title="aller faire la sauvegarde maintenant">sauvegarde de votre base de données</a>.<br>
-En cas de problème vous devrez réutiliser cette sauvegarde.<p>
-<p>Vous allez installer dans votre Spip les mots-clés, rubriques et autres élements utilisés par le cahier de texte sous Spip.<p>
-<p>Ces mots-clés sont la liste des classes, les listes de matières, quelques autres mots-clés de gestion. Il faut éditer le fichier «cahier-de-texte-installer-mots-cles.html» vers la ligne n°46 pour personnaliser les classes et matières.</p>
-<p>Puis, il sera rajouté une rubrique qui contiendra les entrées du cahier de texte sous forme d'articles. Cette rubrique contiendra aussi des sous-rubriques. Les noms de ces rubriques devront être conservés. Vous pouvez compléter le nom  de la rubrique racine du cahier de texte nommée «Cahier de texte en-ligne» (avec un numéro par exemple), mais devez impérativement garder tout le contenu de son titre actuel, sinon le cahier de texte ne fonctionnera plus.</p>
-<hr>
-<p><strong>Si vous mettez à jour votre cahier de texte, <em>attention</em>&nbsp;:</strong> l'opération peut être très lente et pendre beaucoup des ressources du serveur de base de données. Veillez à ne faire cette mise à jour que pendant des périodes de faible fréquentation du cahier de texte (en général, très tôt le matin ou très tard le soir).</p>
+
 <form name="form" method="get">
 	<input type="Hidden" value="#ENV{page}" name="page">[
 
@@ -49,76 +63,41 @@ En cas de problème vous devrez réutiliser cette sauvegarde.<p>
 ][
 (#SESSION{statut}|=={'0minirezo'}|?{' ',''})<input type="Submit" value="Installer les mots-clés du cahier de texte dans Spip" name="bouton">]
 </form>
-</B_CONDITIONNELLE_Bouton_presse_ou_non>[
+</B_CONDITIONNELLE_Bouton_presse_ou_non>
 
 
-	(#REM) Définition des paramètres à personnaliser: Les classes, les groupes et les matières.
+[(#REM) Définition des paramètres à personnaliser: Les classes, les groupes et les matières.
+***************************Zone à ne plus personnaliser !!!*****************************]
+
+[(#SET{les_classes,#CONFIG{bonbon/classes}})]
+[(#SET{les_groupes,#CONFIG{bonbon/groupes}})]
+[(#SET{les_matieres,#CONFIG{bonbon/matieres}})]
+
+[(#REM) **************************Fin de la zone*********************]
 
 
-***************************Zone à personnaliser*****************************	
+[(#SET{les_specifiques,"Description de séance,Devoirs à faire"})]
 
-	Vous pouvez personnaliser les classes, sous groupes et matières:
-
-		- Chaque élement (classe, groupe, matière) est séparé du suivant par une virgule.
-		- les élements ne peuvent contenir de virgules ou de guillemets droits (type: "). Vous pouvez utiliser des guillemets français: «»
-		- veillez à ce qu'il n'y ait pas d'espace avant ou après les virgules qui séparent les éléments.
-		- Vérifiez que la liste des classes, des groupes, des matières sont bien commencés et finis par des guillemets.
-
-
-][(#SET{les_classes,
-
-
-	"6A,6B,6C,6D,6E,6F,6G,6H,6I,6J,6K,6L,5A,5B,5C,5D,5E,5F,5G,5H,5I,5J,5K,5L,4A,4B,4C,4D,4E,4F,4G,4H,4I,4J,4K,4L,3A,3B,3C,3D,3E,3F,3G,3H,3I,3J,3K,3L"
-
-
-})][(#SET{les_groupes,
-
-
-	"groupe A,groupe B"
-
-
-})][(#SET{les_matieres,
-
-
-	"Allemand LV1,Allemand LV2,Anglais LV1,Anglais LV2,Arts Plastiques,E.P.S.,Education musicale,Espagnol LV2,Histoire Géographie,Latin,Grec,Français,Mathématiques,Physique Chimie,Sciences de la vie et de la Terre,Technologie,Vie de classe,Itinéraire de découverte"
-
-
-})][
-**************************Fin de la zone à personnaliser*********************
-
-
-
-	(#REM)À partir d'ici ne changez plus rien !!!
-
-][(#SET{les_specifiques,
-
-	"Description de séance,Devoirs à faire"
-
-})]
 [(#SET{tableau_classes,[(#GET{virgule}|explode{#GET{les_classes}})]})]
 [(#SET{tableau_matieres,[(#GET{virgule}|explode{#GET{les_matieres}})]})]
 [(#SET{tableau_groupes,[(#GET{virgule}|explode{#GET{les_groupes}})]})]
 [(#SET{tableau_specifiques,[(#GET{virgule}|explode{#GET{les_specifiques}})]})]
-[(#SET{les_groupes_mots,
+[(#SET{les_groupes_mots,"Classes,Sous groupes de classes,Matières,Cahier de texte en-ligne"})]
+[(#SET{tableau_groupes_mots,[(#GET{virgule}|explode{#GET{les_groupes_mots}})]})]
 
-	"Classes,Sous groupes de classes,Matières,Cahier de texte en-ligne"
+[(#REM) On vérifie qu'une rubrique pour le cahier de texte existe.
+Si elle existe, on vérifie que les sous rubriques aussi.
+Si la sous rubrique "Professeurs-classes-matières" n'existe pas, on la crée.
+On détermine quelle est l'année scolaire que l'on veut afficher]
 
-})]
-[(#SET{tableau_groupes_mots,[(#GET{virgule}|explode{#GET{les_groupes_mots}})]})][
+[(#SET{annee_rubrique,[(#ENV{date}|bonbon_annee_scolaire)]})]
 
-
-	(#REM) On vérifie qu'une rubrique pour le cahier de texte existe. Si elle existe, on vérifie que les sous rubriques aussi. Si la sous rubrique "Professeurs-classes-matières" n'existe pas, on la crée.
-
-
-][
-
-	(#REM) On détermine quelle est l'année scolaire que l'on veut afficher
-
-][	(#SET{annee_rubrique,[(#ENV{date}|bonbon_annee_scolaire)]})
-][	(#ENV{annee_scolaire}|?{' ',''})
+[(#ENV{annee_scolaire}|?{' ',''})
 		#SET{annee_rubrique,#ENV{annee_scolaire}}
-	]<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}>[
-(#SET{id_rubrique_globale,#ID_RUBRIQUE})
+	]
+	<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}>
+	
+[(#SET{id_rubrique_globale,#ID_RUBRIQUE})
 ]<BOUCLE_AnneeScol(RUBRIQUES){id_parent}{titre=#GET{annee_rubrique}}{!par titre}{0,1}>
 	<p>La rubrique pour le cahier de texte de l'année #TITRE existe déjà.</p>
 		[(#SET{id_rubrique,#ID_RUBRIQUE})][(#SET{cdt_existe,'oui'})]
@@ -135,13 +114,14 @@ En cas de problème vous devrez réutiliser cette sauvegarde.<p>
 		<//B_Rubrique_profs_classes_matieres>
 	</BOUCLE_AnneeScol>
 </BOUCLE_Contexte_RubriqueCDT>
-<h2>Les groupes de mots du cahier de texte&nbsp;:</h2>[
+<h2>Les groupes de mots du cahier de texte&nbsp;:</h2>
 
-	(#REM) On vérifie les groupes de mots et on les crée s'ils n'existent pas. On les faits un par uns car SPIP ne propose pas encore de solution permettant de parcourir un tableau de valeurs qui ne sont pas dans la base (sauf la balise #FOREACH qui necessite un plugin pour SPIP<1.9.3)
+[(#REM) On vérifie les groupes de mots et on les crée s'ils n'existent pas. On les faits un par uns car SPIP ne propose pas encore de solution permettant de parcourir un tableau de valeurs qui ne sont pas dans la base (sauf la balise #FOREACH qui necessite un plugin pour SPIP<1.9.3)]
 
-]<BOUCLE_Verifie_Groupe_Classes(GROUPES_MOTS){titre="Classes"}>
+<BOUCLE_Verifie_Groupe_Classes(GROUPES_MOTS){titre="Classes"}>
 	<p>Le groupe de mots-clés #TITRE existe déjà avec le n°#ID_GROUPE.</p>
 </BOUCLE_Verifie_Groupe_Classes>
+
 	[(#SET{titre_groupe,"Classes"})]
 	[<p>Ajout du groupe de mots nommé «&nbsp;#GET{titre_groupe}&nbsp;» (de n° (#GET{titre_groupe}|bonbon_ajoute_groupe|sinon{"erreur lors de la création du groupe"})).</p>]
 <//B_Verifie_Groupe_Classes>
@@ -280,20 +260,22 @@ En cas de problème vous devrez réutiliser cette sauvegarde.<p>
 //	}
 //}
 ?>
-</BOUCLE_Pour_Chaque_Groupe>[
-
-	(#REM) Gestion des fiches des profs
+</BOUCLE_Pour_Chaque_Groupe>
 
 
-][
 
-	(#REM) Hack de la boucle conditionnelle
-	-> si la cahier de texte existe
+[(#REM) Gestion des fiches des profs]
 
-][(#SET{condition_boucle,''})]
+[(#REM) Hack de la boucle conditionnelle
+	-> si la cahier de texte existe]
+	
+[(#SET{condition_boucle,''})]
+
 [(#GET{cdt_existe}|=={oui}|?{' ',''})
 	[(#SET{condition_boucle,#GET{id_rubrique}})]
-]<BOUCLE_CONDITIONNELLE_Traiter_les_auteurs_ou_non(RUBRIQUES){id_rubrique=#GET{condition_boucle}}>
+]
+
+<BOUCLE_CONDITIONNELLE_Traiter_les_auteurs_ou_non(RUBRIQUES){id_rubrique=#GET{condition_boucle}}>
 <h2>Création/Mise à jour des fiches des professeurs</h2>[
 
 	(#REM) Si le CDT de l'année existe, on teste pour chaque auteur s'il a une fiche descriptive. S'il n'en a pas: on regarde s'il a décrit des séances, et si c'est le cas on lui crée la fiche descriptive.
@@ -366,3 +348,7 @@ Son {titre} doit {{toujours}} contenir l'expression «{Cahier de texte en-ligne}»
 			<li>En cas de problème, réutilisez votre sauvegarde de la base.</li>
 	<p>
 <//B_CONDITIONNELLE_Bouton_presse_ou_non>
+
+	[(#CONFIG{plugin}|match{EVA-WEB31}|?{' ',''})<INCLURE{fond=noisettes/pied/inc_pied}{env}>]
+	[(#CONFIG{plugin}|match{EVA-WEB31}|?{'',' '})<INCLURE{fond=cahier-de-texte-pied}{env}>]
+</div>
