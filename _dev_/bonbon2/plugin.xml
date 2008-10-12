@@ -1,12 +1,12 @@
 <plugin>
-	<nom>&#171;Bonbon !&#187; le cahier de texte pour Spip
+	<nom>&#171;Bonbon&#178; &#187; le cahier de texte pour Spip
 	</nom>
 	<auteur>
     (c)2007 MARNE Bertrand (bmarne@ac-creteil.fr) Licence GNU/GPL <br />
     Contributions : Samuel Bocharel "Poongaloo" - [Equipe EVA-WEB->http://eva-web.edres74.net]
     </auteur>
 	<version>
-	1.9
+	2.0a
 	</version>
     <version_base>0.1</version_base>
 	<etat>
@@ -15,11 +15,11 @@
 	<description>Un cahier de texte qui fonctionne avec Spip.<br /> 
 	Les donn&#233;es entr&#233;es dans le cahier de texte sont des articles Spip avec 
 	des mots-cl&#233;s.<br /><br />
-	Pour configurer &#171;Bonbon !&#187;, rendez-vous dans "Configuration->Bonbon").
+	Pour configurer &#171;Bonbon&#178; &#187;, rendez-vous dans "Configuration->Bonbon").
 	</description>
 	
 	<lien>
-	[&#171; Bonbon ! &#187;, un cahier de texte pour SPIP (documentation)->http://www.spip-contrib.net/Bonbon-un-cahier-de-texte-pour]
+	[&#171; Bonbon&#178; &#187;, un cahier de texte pour SPIP (documentation)->http://www.spip-contrib.net/Bonbon-un-cahier-de-texte-pour]
 	</lien>
 	<icon>images/logo-bonbon.png</icon>
 	<fonctions>cahier-de-texte-fonctions.php</fonctions>
