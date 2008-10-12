@@ -69,6 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'legend_theme' => 'Th&egrave;me', // CFG
 'lien' => 'Lien', // Non utilise
 'liens' => 'Liens',
+'lire_la_suite' => 'Lire la suite',
 'look_sommaire' => 'Customisation de la page d\'accueil',
 
 //O
