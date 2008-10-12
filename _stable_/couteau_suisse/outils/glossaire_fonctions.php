@@ -76,8 +76,8 @@ function cs_rempl_glossaire($texte) {
 	if(!isset($accents)) $accents = cs_glossaire_accents();
 	static $cs_generer_url;
 	if(!isset($cs_generer_url_mot)) {
-		if(function_exists('charger_generer_url')) { charger_generer_url(); $cs_generer_url = 'cs_foo_mot'; /* avant SPIP 2.0 */ }
-			else $cs_generer_url = 'generer_url_entite'; /* depuis SPIP 2.0 */ 
+		if(defined('_SPIP19300')) $cs_generer_url = 'generer_url_entite'; /* depuis SPIP 2.0 */ 
+			else { charger_generer_url(); $cs_generer_url = 'cs_foo_mot'; /* avant SPIP 2.0 */ }
 	}
 	$limit = defined('_GLOSSAIRE_LIMITE')?_GLOSSAIRE_LIMITE:-1;
 	$r = spip_query("SELECT id_mot, titre, texte, descriptif FROM spip_mots WHERE " . $GLOBALS['glossaire_groupes_type'] . " ORDER BY id_mot ASC");

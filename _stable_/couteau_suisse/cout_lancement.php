@@ -143,7 +143,7 @@ function cs_echappe_balises($balises, $fonction, $texte, $arg=NULL){
 		return $texte;
 	}
 	// protection du texte
-	if(balise!==false) {
+	if($balise!==false) {
 		if(!strlen($balises)) $balises = 'html|code|cadre|frame|script';
 		$balises = ',<('.$balises.')(\s[^>]*)?>(.*)</\1>,UimsS';
 		include_spip('inc/texte');

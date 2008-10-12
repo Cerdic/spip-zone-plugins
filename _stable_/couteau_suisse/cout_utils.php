@@ -362,9 +362,9 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 		}
 		$traitements_utilises[$b] = join("\n", $traitements_utilises[$b]);		
 	}
-	// mes_spip_options.php : ajout des traitements
+	// mes_options.php : ajout des traitements
 	if(count($traitements_utilises))
-		$infos_pipelines['code_spip_options'][] = "// Table des traitements\n" . join("\n", $traitements_utilises);
+		$infos_pipelines['code_options'][] = "// Table des traitements\n" . join("\n", $traitements_utilises);
 	// effacement du repertoire temporaire de controle
 	if (@file_exists(_DIR_CS_TMP) && ($handle = @opendir(_DIR_CS_TMP))) {
 		while (($fichier = @readdir($handle)) !== false)
@@ -384,10 +384,11 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 
 define('_CS_SPIP_OPTIONS_A', "// Partie reservee au Couteau Suisse. Ne pas modifier, merci");
 define('_CS_SPIP_OPTIONS_B', "// Fin du code. Ne pas modifier ces lignes, merci");
+
 // verifier le fichier d'options _FILE_OPTIONS (ecrire/mes_options.php ou config/mes_options.php)
 function cs_verif_FILE_OPTIONS($ecriture = false) {
-
-	$include = '@include_once \''.realpath(_DIR_CS_TMP.'mes_spip_options.php')."';";
+	$include = realpath(_DIR_CS_TMP.'mes_spip_options.php');
+	$include = "if (@is_readable(\"$include\")) @include_once \"$include\";";
 	$inclusion = _CS_SPIP_OPTIONS_A."\n".$include."\n"._CS_SPIP_OPTIONS_B;
 cs_log("cs_verif_FILE_OPTIONS($ecriture) : le code d'appel est $include");
 	$fo = strlen(_FILE_OPTIONS)? _FILE_OPTIONS:false;
