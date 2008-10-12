@@ -1,14 +1,36 @@
 <plugin>
-	<nom>&#171;Bonbon !&#187; le cahier de texte pour Spip</nom>
-	<version>1.9</version>
-	<auteur>(c)2007 MARNE Bertrand (bmarne@ac-creteil.fr) Licence GNU/GPL</auteur>
-	<etat>test</etat>
-	<prefix>bonbon</prefix>
+	<nom>&#171;Bonbon !&#187; le cahier de texte pour Spip
+	</nom>
+	<auteur>
+    (c)2007 MARNE Bertrand (bmarne@ac-creteil.fr) Licence GNU/GPL <br />
+    Contributions : Samuel Bocharel "Poongaloo" - [Equipe EVA-WEB->http://eva-web.edres74.net]
+    </auteur>
+	<version>
+	1.9
+	</version>
+    <version_base>0.1</version_base>
+	<etat>
+	test
+	</etat>
+	<description>Un cahier de texte qui fonctionne avec Spip.<br /> 
+	Les donn&#233;es entr&#233;es dans le cahier de texte sont des articles Spip avec 
+	des mots-cl&#233;s.<br /><br />
+	Pour configurer &#171;Bonbon !&#187;, rendez-vous dans "Configuration->Bonbon").
+	</description>
+	
 	<lien>
-- Pour utiliser ce plugin [ cliquez d&#39;abord ici->../spip.php?page=cahier-de-texte-installation-maj] (pensez &#224; le faire m&#234;me lorsque vous changez de version de &#171;Bonbon !&#187;...). Cela ex&#233;cute un script de pr&#233;paration ou de mise &#224; jour du cahier de texte. Son ex&#233;cution peut-&#234;tre longue et charger le serveur de base de donn&#233;es.
-- [&#171; Bonbon ! &#187;, un cahier de texte pour SPIP (documentation)->http://www.spip-contrib.net/spip.php?id_article=2301]
+	[&#171; Bonbon ! &#187;, un cahier de texte pour SPIP (documentation)->http://www.spip-contrib.net/Bonbon-un-cahier-de-texte-pour]
 	</lien>
-	<description>Plugin qui permet d&#39;avoir un cahier de texte qui fonctionne avec Spip. Les donn&#233;es entr&#233;es dans le cahier de texte sont des articles Spip avec des mots-cl&#233;s.</description>
-	<icon>logo-mini2-64.png</icon>
+	<icon>img_pack/logo-bonbon.png</icon>
 	<fonctions>cahier-de-texte-fonctions.php</fonctions>
+	<prefix>bonbon</prefix>
+	
+    <necessite id='cfg' version='[1.10.3;]' />
+    <necessite id='spip' version='[1.9.3;]' /> 
+    
+    <bouton id='bonbon_admin' parent='configuration'>
+        <icone>img_pack/bonbon.png</icone>
+        <titre>Bonbon</titre>
+    </bouton>
+    
 </plugin>
