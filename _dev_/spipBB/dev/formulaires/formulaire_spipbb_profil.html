@@ -81,10 +81,6 @@
 	[(#REM) liste des threads de l_auteur ==> checkbox refus de suivi ]
 	#SET{select,#SPIPBB{refus_suivi_thread}|chaine2array}
 	<br />
-	[(#REM) un peu lourd mais le critère {plat} déconne avec {id_secteur}]
-	<BOUCLE_s(ARTICLES){id_secteur=#CONFIG{spipbb/id_secteur}}>
-	<BOUCLE_a(FORUMS){doublons messages}{plat}{id_article} /> 
-	</BOUCLE_s>
 
 	<B_suivi_forum>
 	<table class="spipforum" id="liste_refus_suivi">
@@ -93,7 +89,7 @@
 		<:spipbb:infos_refus_suivi_sujet:>
 		</th>
 	</tr>
-	<BOUCLE_suivi_forum(FORUMS){id_auteur}{plat}{!par date}{fusion id_thread}{!doublons messages}>
+	<BOUCLE_suivi_forum(FORUMS spip_articles){id_auteur}{id_secteur=#CONFIG{spipbb/id_secteur}}{plat}{!par date}{fusion id_thread}>
 	<tr class="ligne_sujet">
 		<td class="titreforum">
 			#ID_THREAD|&nbsp;&laquo;&nbsp;#TITRE&nbsp;&raquo;&nbsp;
