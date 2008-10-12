@@ -81,10 +81,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'permalink_pour' => 'Lien permanent vers',
 
 //R
+'recherche' => 'Recherche',
 'resultat_recherche' => 'R&eacute;sultats pour votre recherche de',
 'rss_pour' => 'fil RSS des commentaires de',
 
 //S
+'secteurs_spipclear' => 'Secteurs SpipClear',
+'secteur_spipclear_aucun' => 'Aucun',
 'selection' => '&agrave; retenir',
 'site_comment' => 'site',
 'syndication' => 'Syndication',

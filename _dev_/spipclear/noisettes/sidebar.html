@@ -4,6 +4,7 @@
 
 	<INCLURE{fond=inc-archives}{env}{decal}{var_date=archives}{date=#ENV{archives,#DATE}}{ajax}>
 	<div id="search">
+		<h2><:spipclear:recherche:></h2>
 		#FORMULAIRE_RECHERCHE{(#ID_SECTEUR||generer_url_entite{rubrique})}
 	</div>
 	<B_a_retenir>

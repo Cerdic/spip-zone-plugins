@@ -35,65 +35,47 @@
 			<label><:spipclear:secteurs_spipclear:></label>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{secteurs})</span>]
 			<select name="secteurs[]" multiple="multiple" size="9">
-				<option value=""></option>
+				<option value=""><:spipclear:secteur_spipclear_aucun:></option>
 				<BOUCLE_racine(RUBRIQUES){racine}{tout}>
 				<option value="#ID_SECTEUR"[ (#ID_SECTEUR|in_array{#GET{secteurs}}|?{' selected="selected"'})]>#TITRE</option>
 				</BOUCLE_racine>
 			</select>
 		</li>
+		<li class="editer_spipclear_choix_theme">
+			<label><:spipclear:legend_theme:></label>
+			<p class="explication"><:spipclear:info_choix_theme:></p>
+			<div class="choix">
+				<input type="radio" class="radio" name="choix_theme" id="choix_theme_non" value="0"[ (#ENV{choix_theme}|!={1}|?{checked="checked",''})] />
+				<label for="choix_theme_non"><:spipclear:label_theme_defaut:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" class="radio" name="choix_theme" id="choix_theme_oui" value="1"[ (#ENV{choix_theme}|=={1}|?{checked="checked",''})] />
+				<label for="choix_theme_oui"><:spipclear:label_theme_perso:></label>
+			</div>
+		</li>
+		<li class="editer_spipclear_nom_theme">
+			<p class="explication"><:spipclear:label_nom_theme:></p>
+			<input type="text" class="text" name="nom_theme" id="nom_theme" value="[(#ENV{nom_theme})]" size="32" />
+		</li>
 	</ul>
-<!--
-<fieldset><legend><:spipclear:legend_theme:></legend>
-	<p><:spipclear:info_choix_theme:></p>
-	<p>
-		<label>
-			<input type="radio" name="choix_theme" value="0"[ (#ENV{choix_theme}|=={0}|?{checked="checked",''})] />
-			<:spipclear:label_theme_defaut:>
-		</label>
-		<br />
-		<label>
-			<input type="radio" name="choix_theme" value="1"[ (#ENV{choix_theme}|=={1}|?{checked="checked",''})] />
-			<:spipclear:label_theme_perso:>
-		</label>
-	</p>
-	<script type="text/javascript">
-	//<![CDATA[
-		$(document).ready(function() {
-			[(#ENV{choix_theme}|!={1}|?{$("#bloc_nom_theme").hide();})]
-			$("input[@name='choix_theme']").change(function() {
-				if ($("input[@name='choix_theme']:checked").val() == 1)
-					$("#bloc_nom_theme").show();
-				else
-					$("#bloc_nom_theme").hide();
-				$(this).blur();
-			});	
-        $(".theme").click(function() {
-            $("input[@name='nom_theme']").val($(this).attr("id"));
-            return false;
-        });
-        $(".mini_capture").click(function() {
-            var src_capt = $(this).children("img").attr("src");
-            $("#visionneuse").html('<img src="' + src_capt + '"/>');
-            return false;
-        });
-		});
-	//]]>
-	</script>
-	<div id="bloc_nom_theme">
-		<label><:spipclear:label_nom_theme:><br />
-			<input type="text" name="nom_theme" value="[(#ENV{nom_theme})]" size="32" />
-		</label>
-    [(#SET{chemin_theme, [themes/(#CONFIG{spipclear/nom_theme})/]})]
-    <p><:spipclear:themes_installes:></p>
-    <p id="visionneuse" style="float:right; width: 250px;">[<img src="(#CHEMIN{[(#GET{chemin_theme})]screenshot.jpg})" />]</p>
-    [(#ENV{nom_theme}|lister_themes)]
-    
-	</div> -->
-</fieldset>
 	<p class="boutons">
 		<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
 		<input type="submit" name="_cfg_delete" class="submit" value="<:effacer:>" />
 	</p>
 </form>
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{choix_theme}|!={1}|?{jQuery(".editer_spipclear_nom_theme").hide();})]
+		jQuery("input[@name='choix_theme']").change(function() {
+			if (jQuery("input[@name='choix_theme']:checked").val() == 1)
+				jQuery(".editer_spipclear_nom_theme").show();
+			else
+				jQuery(".editer_spipclear_nom_theme").hide();
+			jQuery(this).blur();
+		});	
+	});
+//]]>
+</script>
 </div>
 #CFG_ARBO{spipclear}
