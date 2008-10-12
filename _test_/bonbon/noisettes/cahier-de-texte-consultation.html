@@ -1,0 +1,49 @@
+<div id="Menu">
+    <div class="bloc">
+	<h3 class="titre">
+            <img src="#CHEMIN{images/dialog-information.png}" alt="icône" vspace="2" align="top">Acc&egrave;s public</h3>
+            <form name="choisir_devoir" method="get" action="spip.php">
+		<input type="hidden" name="page" value="cahier-de-texte-affichage">
+		<select id="classe" name="classe" size="1">
+		<option value="" selected="selected">Classes</option>
+
+                [(#REM)On extrait toutes les classes de Spip, que pour,les devoirs]
+                <BOUCLE_ToutesLesClasses_devoirs(MOTS){id_rubrique}{type="Classes"}{par titre}>
+                	<BOUCLE_Que_devoirs(MOTS){titre="Devoirs à faire"}>
+                		<BOUCLE_Que_les_classes_avec_devoir(ARTICLES){id_mot=#_ToutesLesClasses_devoirs:ID_MOT}{id_mot=#_Que_devoirs:ID_MOT}{0,1}>
+					<option value="#_ToutesLesClasses_devoirs:TITRE">#_ToutesLesClasses_devoirs:TITRE</option>
+                		</BOUCLE_Que_les_classes_avec_devoir>
+                	</BOUCLE_Que_devoirs>
+                </BOUCLE_ToutesLesClasses_devoirs>
+		</select>
+		<input type="hidden" name="nb" value="10">
+		<input type="Submit" value="Consulter le travail à faire" name="devoirs_seuls">
+	</form>
+	<br>
+	<br>
+              
+        [(#REM) Que pour les Descriptions de séances:]
+        <BOUCLE_CDT_entier(MOTS){titre="Description de séance"}>
+            #SET{id_mot_description_seance,#ID_MOT}
+            <form name="choisir_simple" method="get" action="spip.php">
+		<input type="hidden" name="page" value="cahier-de-texte-affichage">
+		<select id="classe" name="classe" size="1">
+		<option value="" selected="selected">Classes</option>
+                [(#REM)On extrait toutes les classes de Spip]
+            	<BOUCLE_ToutesLesClasses_simple(MOTS){id_rubrique}{type="Classes"}{par titre}>
+                    <option value="#_ToutesLesClasses_simple:TITRE">#_ToutesLesClasses_simple:TITRE</option>
+                </BOUCLE_ToutesLesClasses_simple>
+		</select> et/ou 
+		<select id="matiere" name="matiere" size="1">
+		<option value="" selected="selected">Mati&egrave;res</option>
+                [(#REM)On extrait toutes les matières de Spip]
+        	<BOUCLE_ToutesLesMatieres_simple(MOTS){id_rubrique}{type="Matières"}{par num titre}{par titre}>
+                    <option value="#_ToutesLesMatieres_simple:TITRE">#_ToutesLesMatieres_simple:TITRE</option>
+                </BOUCLE_ToutesLesMatieres_simple>
+		</select>
+		<input type="hidden" name="nb" value="10">
+		<input type="Submit" value="Consulter le cahier de texte" name="afficher">
+            </form>
+        </BOUCLE_CDT_entier>
+    </div>
+    </div>
