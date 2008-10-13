@@ -18,25 +18,79 @@
 # 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/statistiques');
 
 // Donne la hauteur du graphe en fonction de la valeur maximale
 // Doit etre un entier "rond", pas trop eloigne du max, et dont
 // les graduations (divisions par huit) soient jolies :
 // on prend donc le plus proche au-dessus de x de la forme 12,16,20,40,60,80,100
+
+/* dans inc/statistiques 
 function maxgraph($max) {
-	$max = max(10,$max);
-	$p = pow(10, strlen($max)-2);
-	$m = $max/$p;
-	foreach (array(100,80,60,40,20,16,12,10) as $l)
-		if ($m<=$l) $maxgraph = $l*$p;
-	return $maxgraph;
+function http_img_rien($width, $height, $style='', $title='') {
+*/
+
+// cf statistiques_zoom
+function statistiques_zoom_document($id_document, $largeur_abs, $date_premier, $date_debut, $date_fin)
+{
+		if ($largeur_abs > 1) {
+			$inc = ceil($largeur_abs / 5);
+			$aff_jours_plus = 420 / ($largeur_abs - $inc);
+			$aff_jours_moins = 420 / ($largeur_abs + $inc);
+		}
+		
+		if ($largeur_abs == 1) {
+			$aff_jours_plus = 840;
+			$aff_jour_moins = 210;
+		}
+		
+		if ($largeur_abs < 1) {
+			$aff_jours_plus = 420 * ((1/$largeur_abs) + 1);
+			$aff_jours_moins = 420 * ((1/$largeur_abs) - 1);
+		}
+		
+		$aff_jours_plus = round($aff_jours * 1.5);		
+		$aff_jours_moins = round($aff_jours / 1.5);
+		
+		
+		
+		if ($id_document) {
+			$pour_article="&id_document=$id_document";
+			$url_type_aff_page ="dw2_popup_stats";
+			$arg_aff_page = "aff_jours=";
+		}
+		else {
+			$url_type_aff_page ="dw2_admin";
+			$arg_aff_page = "page_affiche=stats&aff_jours=";
+		}
+		
+		if ($date_premier < $date_debut )
+			$zoom = http_href(generer_url_ecrire($url_type_aff_page, $arg_aff_page.$aff_jours_plus.$pour_article),
+				 http_img_pack('loupe-moins.gif',
+					       _T('info_zoom'). '-',
+					       "style='border: 0px; vertical-align: middle;'"),
+				 "&nbsp;");
+		if ( (($date_fin - $date_debut) / (24*3600)) > 30)
+			$zoom .= http_href(generer_url_ecrire($url_type_aff_page, $arg_aff_page.$aff_jours_moins.$pour_article),
+				 http_img_pack('loupe-plus.gif',
+					       _T('info_zoom'). '+',
+					       "style='border: 0px; vertical-align: middle;'"),
+				 "&nbsp;");
+	return $zoom;
 }
 
-function http_img_rien($width, $height, $style='', $title='') {
-	return http_img_pack('rien.gif', $title, 
-		"width='$width' height='$height'" 
-		. (!$style ? '' : (" style='$style'"))
-		. (!$title ? '' : (" title=\"$title\"")));
+// cf statistiques_href
+function statistiques_href_telechargement($jour, $moyenne, $script='', $value='')
+{
+//	$ce_jour=date("Y-m-d", $jour_prec+(3600*24*($i+1)));
+	$ce_jour=date("Y-m-d H:i:s", $jour);
+//	$jour = nom_jour($ce_jour).' '.affdate_jourcourt($ce_jour);						
+
+	$title = nom_jour($ce_jour) . ' '
+		. affdate_court($ce_jour)  .' '.
+		" | " . _T('dw:telechargements')." $value | " ._T('info_moyenne')." "
+		. round($moyenne,2);
+	return attribut_html(supprimer_tags($title));
 }
 
 //h.8/11 ...............
@@ -83,20 +137,14 @@ if (!$aff_jours) $aff_jours = 105;
 
 if (!$origine) {
 
+	$order='date';
+	$table='spip_dw2_stats';
+
 	if ($id_document){ $where = "id_doc=$id_document"; }
-	else { $where = "1"; }
+	else { $where = '1'; }
 	
 	// requete premiere date dans dw2_stats
-	$result = sql_select("UNIX_TIMESTAMP(date) AS date_unix",
-						"spip_dw2_stats ",
-						$where,
-						"",
-						"date",
-						"0,1");
-	
-	while ($row = sql_fetch($result)) {
-		$date_premier = $row['date_unix'];
-	}
+	$date_premier = sql_getfetsel("UNIX_TIMESTAMP($order) AS d", $table, $where, '', $order, 1);
 
 	// global sur la période (105 j. :$aff_jours)
 		$result=sql_select("UNIX_TIMESTAMP(date) AS date_unix, SUM(telech) AS visites",
@@ -131,10 +179,18 @@ if (!$origine) {
 		$visites_today = 0;
 
 	if (count($log)>0) {
+		// ...
+		echo debut_cadre_relief("",true);
+		// h.23/11
+		if(!$id_document) {
+			debut_band_titre($couleur_foncee);
+			echo "<div align='center' class='verdana3'><b>"._T('dw:evolution_telech')."</b></div>";
+			fin_bloc();
+		}
+
 		$max = max(max($log),$visites_today);
 		$date_today = time();
 		$nb_jours = floor(($date_today-$date_debut)/(3600*24));
-
 		$maxgraph = maxgraph($max);
 		$rapport = 200 / $maxgraph;
 
@@ -146,59 +202,13 @@ if (!$origine) {
 			$agreg = 1;
 		}
 		if ($largeur > 50) $largeur = 50;
-
-		// ...
-		echo debut_cadre_relief("",true);
-		// h.23/11
-		if(!$id_document) {
-			debut_band_titre($couleur_foncee);
-			echo "<div align='center' class='verdana3'><b>"._T('dw:evolution_telech')."</b></div>";
-			fin_bloc();
-		}
 		
 		$largeur_abs = 420 / $aff_jours;
+
 		
-		if ($largeur_abs > 1) {
-			$inc = ceil($largeur_abs / 5);
-			$aff_jours_plus = 420 / ($largeur_abs - $inc);
-			$aff_jours_moins = 420 / ($largeur_abs + $inc);
-		}
-		
-		if ($largeur_abs == 1) {
-			$aff_jours_plus = 840;
-			$aff_jour_moins = 210;
-		}
-		
-		if ($largeur_abs < 1) {
-			$aff_jours_plus = 420 * ((1/$largeur_abs) + 1);
-			$aff_jours_moins = 420 * ((1/$largeur_abs) - 1);
-		}
-		
-		$aff_jours_plus = round($aff_jours * 1.5);		
-		$aff_jours_moins = round($aff_jours / 1.5);
-		
-		
-		
-		if ($id_document) {
-			$pour_article="&id_document=$id_document";
-			$url_type_aff_page ="dw2_popup_stats";
-			$arg_aff_page = "aff_jours=";
-		}
-		else {
-			$url_type_aff_page ="dw2_admin";
-			$arg_aff_page = "page_affiche=stats&aff_jours=";
-		}
-		
-		if ($date_premier < $date_debut )
-		  echo http_href_img(generer_url_ecrire($url_type_aff_page, $arg_aff_page.$aff_jours_plus.$pour_article),
-				     'loupe-moins.gif',
-				     "border='0' valign='center'",
-				     _T('info_zoom'). '-'), "&nbsp;";
-		if ( (($date_today - $date_debut) / (24*3600)) > 30)
-		  echo http_href_img(generer_url_ecrire($url_type_aff_page, $arg_aff_page.$aff_jours_moins.$pour_article), 
-				     'loupe-plus.gif',
-				     "border='0' valign='center'",
-				     _T('info_zoom'). '+'), "&nbsp;";
+//date_fin=date_today
+		echo statistiques_zoom_document($id_document, $largeur_abs, $date_premier, $date_debut, $date_today);
+
 	
 		/*
 		if ($spip_svg_plugin == 'oui') {
@@ -210,59 +220,49 @@ if (!$origine) {
 		} 
 		else {
 		*/
-			echo "<table cellpadding=0 cellspacing=0 border=0><tr>",
-			  "<td background='", _DIR_IMG_PACK, "fond-stats.gif'>";
-			echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
-	
-			echo "<td bgcolor='black'>", http_img_rien(1,200), "</td>";
+// cf statistiques_tous		
+			echo "\n<table cellpadding='0' cellspacing='0' border='0'><tr>" .
+				"\n<td ".http_style_background("fond-stats.gif").">"
+				. "\n<table cellpadding='0' cellspacing='0' border='0' class='bottom'><tr>"
+				. "\n<td style='background-color: black'>" . http_img_rien(1, 200) . "</td>";
 	
 			// Presentation graphique
-			while (list($key, $value) = each($log)) {
-				
-				$test_agreg ++;
-		
-				if ($test_agreg == $agreg) {	
-				
-				$test_agreg = 0;
-				$n++;
+			foreach ($log as $key => $value) {
 			
+				$test_agreg ++;
+				if ($test_agreg != $agreg) continue;
+				$test_agreg = 0;
 				if ($decal == 30) $decal = 0;
 				$decal ++;
 				$tab_moyenne[$decal] = $value;
-			
 				// Inserer des jours vides si pas d'entrees	
 				if ($jour_prec > 0) {
 					$ecart = floor(($key-$jour_prec)/((3600*24)*$agreg)-1);
-		
 					for ($i=0; $i < $ecart; $i++){
 						if ($decal == 30) $decal = 0;
 						$decal ++;
 						$tab_moyenne[$decal] = $value;
-	
-						$ce_jour=date("Y-m-d", $jour_prec+(3600*24*($i+1)));
-						$jour = nom_jour($ce_jour).' '.affdate_jourcourt($ce_jour);
-	
 						reset($tab_moyenne);
-						$moyenne = 0;
-						while (list(,$val_tab) = each($tab_moyenne))
-							$moyenne += $val_tab;
-						$moyenne = $moyenne / count($tab_moyenne);
-		
+						$moyenne = statistiques_moyenne($tab_moyenne);
 						$hauteur_moyenne = round(($moyenne) * $rapport) - 1;
-						echo "<td valign='bottom' width=$largeur>";
-						$difference = ($hauteur_moyenne) -1;
+						echo "\n<td style='width: ${largeur}px'>";
 						$moyenne = round($moyenne,2); // Pour affichage harmonieux
+						// cf statistiques_vides
+						/*
+						$ce_jour=date("Y-m-d", $jour_prec+(3600*24*($i+1)));
+						$jour = nom_jour($ce_jour).' '.affdate_jourcourt($ce_jour);						
 						$tagtitle= attribut_html(supprimer_tags("$jour | "
 						._T('dw:telechargements')." | "
 						._T('info_moyenne')." $moyenne"));
-						if ($difference > 0) {	
-						  echo http_img_rien($largeur,1, 'background-color:#333333;', $tagtitle);
-						  echo http_img_rien($largeur, $hauteur_moyenne, '', $tagtitle);
+						*/
+						$tagtitle = statistiques_href_telechargement($jour_prec+(3600*24*($i+1)), $moyenne, '', '');
+						if ($hauteur_moyenne > 1) {
+							echo http_img_rien($largeur,1, 'trait_moyen', $tagtitle)
+								. http_img_rien($largeur, $hauteur_moyenne, '', $tagtitle);						  
 						}
 						echo 
-						    http_img_rien($largeur,1,'background-color:black;', $tagtitle);
+							http_img_rien($largeur,1,'trait_bas', $tagtitle);
 						echo "</td>";
-						$n++;
 					}
 				}
 	
@@ -271,54 +271,52 @@ if (!$origine) {
 	
 				$total_loc = $total_loc + $value;
 				reset($tab_moyenne);
-	
+				/*
 				$moyenne = 0;
 				while (list(,$val_tab) = each($tab_moyenne))
 					$moyenne += $val_tab;
 				$moyenne = $moyenne / count($tab_moyenne);
+				*/
+				$moyenne = statistiques_moyenne($tab_moyenne);
 			
 				$hauteur_moyenne = round($moyenne * $rapport) - 1;
 				$hauteur = round($value * $rapport) - 1;
 				$moyenne = round($moyenne,2); // Pour affichage harmonieux
-				echo "<td valign='bottom' width=$largeur>";
+				echo "\n<td style='width: ${largeur}px'>";
 	
 				$tagtitle= attribut_html(supprimer_tags("$jour | "
 				._T('dw:telechargements')." : ".$value));
-	
+
+				$dimanche = (date("w",$key) == "0");
+				// cf statistiques_jour
 				if ($hauteur > 0){
+					$couleur = $dimanche ? "couleur_dimanche" :  "couleur_jour";
 					if ($hauteur_moyenne > $hauteur) {
 						$difference = ($hauteur_moyenne - $hauteur) -1;
-						echo http_img_rien($largeur, 1,'background-color:#333333;',$tagtitle);
-						echo http_img_rien($largeur, $difference, '', $tagtitle);
-						echo http_img_rien($largeur,1, "background-color:$couleur_foncee;", $tagtitle);
-						if (date("w",$key) == "0") // Dimanche en couleur foncee
-						  echo http_img_rien($largeur, $hauteur, "background-color:$couleur_foncee;", $tagtitle);
-						else
-						  echo http_img_rien($largeur,$hauteur, "background-color:$couleur_claire;", $tagtitle);
+
+						echo http_img_rien($largeur, 1,'trait_moyen',$tagtitle)
+							. http_img_rien($largeur, $difference, '', $tagtitle)
+							. http_img_rien($largeur, 1, "trait_haut", $tagtitle)
+							. http_img_rien($largeur, $hauteur, $couleur, $tagtitle);
+						
 					} else if ($hauteur_moyenne < $hauteur) {
 						$difference = ($hauteur - $hauteur_moyenne) -1;
-						echo http_img_rien($largeur,1,"background-color:$couleur_foncee;", $tagtitle);
-						if (date("w",$key) == "0") // Dimanche en couleur foncee
-							$couleur =  $couleur_foncee;
-						else
-							$couleur = $couleur_claire;
-						echo http_img_rien($largeur, $difference, "background-color:$couleur;", $tagtitle);
-						echo http_img_rien($largeur,1,"background-color:#333333;", $tagtitle);
-						echo http_img_rien($largeur, $hauteur_moyenne, "background-color:$couleur;", $tagtitle);
+
+						echo http_img_rien($largeur,1,"trait_haut", $tagtitle)
+							. http_img_rien($largeur, $difference, $couleur, $tagtitle)
+							. http_img_rien($largeur,1,"trait_moyen", $tagtitle)
+							. http_img_rien($largeur, $hauteur_moyenne, $couleur, $tagtitle);
+						
 					} else {
-					  echo http_img_rien($largeur, 1, "background-color:$couleur_foncee;", $tagtitle);
-						if (date("w",$key) == "0") // Dimanche en couleur foncee
-						  echo http_img_rien($largeur, $hauteur, "background-color:$couleur_foncee;", $tagtitle);
-						else
-						  echo http_img_rien($largeur,$hauteur, "background-color:$couleur_claire;", $tagtitle);
+						echo http_img_rien($largeur, 1, "trait_haut", $tagtitle)
+							. http_img_rien($largeur, $hauteur, $couleur, $tagtitle);
 					}
 				}
-				echo http_img_rien($largeur, 1, 'background-color:black;', $tagtitle);
+				echo http_img_rien($largeur,1,"trait_haut", $tagtitle);
 				echo "</td>\n";
 			
 				$jour_prec = $key;
 				$val_prec = $value;
-			}
 			}
 	
 			// Dernier jour
@@ -341,47 +339,18 @@ if (!$origine) {
 			}
 			echo http_img_rien($largeur, 1, 'background-color:black;');
 			echo "</td>";
-		
-			echo "<td bgcolor='black'>",http_img_rien(1, 1),"</td>";
-			echo "</tr></table>";
-			echo "</td>",
-			  "<td background='", _DIR_IMG_PACK, "fond-stats.gif' valign='bottom'>", http_img_rien(3, 1, 'background-color:black;'),"</td>";
-			echo "<td>", http_img_rien(5, 1),"</td>";
-			echo "<td valign='top'><font face='Verdana,Arial,Sans,sans-serif' size=2>";
-			echo "<table cellpadding=0 cellspacing=0 border=0>";
-			echo "<tr><td height=15 valign='top'>";		
-			echo "<font face='arial,helvetica,sans-serif' size=1><b>".round($maxgraph)."</b></font>";
-			echo "</td></tr>";
-			echo "<tr><td height=25 valign='middle'>";		
-			echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(7*($maxgraph/8))."</font>";
-			echo "</td></tr>";
-			echo "<tr><td height=25 valign='middle'>";		
-			echo "<font face='arial,helvetica,sans-serif' size=1>".round(3*($maxgraph/4))."</font>";
-			echo "</td></tr>";
-			echo "<tr><td height=25 valign='middle'>";		
-			echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(5*($maxgraph/8))."</font>";
-			echo "</td></tr>";
-			echo "<tr><td height=25 valign='middle'>";		
-			echo "<font face='arial,helvetica,sans-serif' size=1><b>".round($maxgraph/2)."</b></font>";
-			echo "</td></tr>";
-			echo "<tr><td height=25 valign='middle'>";		
-			echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(3*($maxgraph/8))."</font>";
-			echo "</td></tr>";
-			echo "<tr><td height=25 valign='middle'>";		
-			echo "<font face='arial,helvetica,sans-serif' size=1>".round($maxgraph/4)."</font>";
-			echo "</td></tr>";
-			echo "<tr><td height=25 valign='middle'>";		
-			echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(1*($maxgraph/8))."</font>";
-			echo "</td></tr>";
-			echo "<tr><td height=10 valign='bottom'>";		
-			echo "<font face='arial,helvetica,sans-serif' size=1><b>0</b></font>";
-			echo "</td>";
-			
-			
-			echo "</table>";
-			echo "</font></td>";
-			echo "</td></tr></table>";
-			
+
+			echo "\n<td style='background-color: black'>"
+				. http_img_rien(1, 1) ."</td>"
+				. "</tr></table>"
+				. "</td>\n<td "
+				. http_style_background("fond-stats.gif")."  valign='bottom'>"
+				. http_img_rien(3, 1, 'trait_bas') ."</td>"
+				. "\n<td>" . http_img_rien(5, 1) ."</td>"
+				. "\n<td valign='top'>"
+				. statistiques_echelle($maxgraph)
+				. "</td></tr></table>";
+				
 			echo "<div style='position: relative; height: 15px;'>";
 			$gauche_prec = -50;
 			for ($jour = $date_debut; $jour <= $date_today; $jour = $jour + (24*3600)) {
@@ -436,6 +405,8 @@ if (!$origine) {
 	}		
 	
 	if (count($log) > 60) {
+	
+		// voir statistiques_par_mois
 		echo "<p>";
 		echo "<font face='verdana,arial,helvetica,sans-serif' size='2'><b>"._T('info_visites_par_mois')."</b></font>";
 
@@ -495,7 +466,7 @@ if (!$origine) {
 			
 			$hauteur_moyenne = round($moyenne * $rapport) - 1;
 			$hauteur = round($value * $rapport) - 1;
-			echo "<td valign='bottom' width=$largeur>";
+			echo "\n<td style='width: ${largeur}px'>";
 
 			$tagtitle= attribut_html(supprimer_tags("$mois | "
 			._T('dw:telechargements')." : ".$value));
@@ -503,36 +474,34 @@ if (!$origine) {
 			if ($hauteur > 0){
 				if ($hauteur_moyenne > $hauteur) {
 					$difference = ($hauteur_moyenne - $hauteur) -1;
-					echo http_img_rien($largeur, 1, 'background-color:#333333;');
+					echo http_img_rien($largeur, 1, 'trait_moyen');
 					echo http_img_rien($largeur, $difference, '', $tagtitle);
-					echo http_img_rien($largeur,1,"background-color:$couleur_foncee;");
-					if (ereg("-01",$key)){ // janvier en couleur foncee
-					  echo http_img_rien($largeur,$hauteur,"background-color:$couleur_foncee;", $tagtitle);
-					} 
-					else {
-					  echo http_img_rien($largeur,$hauteur,"background-color:$couleur_claire;", $tagtitle);
+					echo http_img_rien($largeur,1,"trait_haut");
+					if (preg_match(",-01,",$key)){ // janvier en couleur foncee
+						echo http_img_rien($largeur,$hauteur,"couleur_janvier", $tagtitle);
+					} else {
+						echo http_img_rien($largeur,$hauteur,"couleur_mois", $tagtitle);
 					}
 				}
 				else if ($hauteur_moyenne < $hauteur) {
+				
 					$difference = ($hauteur - $hauteur_moyenne) -1;
-					echo http_img_rien($largeur,1,"background-color:$couleur_foncee;", $tagtitle);
-					if (ereg("-01",$key)){ // janvier en couleur foncee
-						$couleur =  $couleur_foncee;
-					} 
-					else {
-						$couleur = $couleur_claire;
+					echo http_img_rien($largeur,1,"trait_haut", $tagtitle);
+					if (preg_match(",-01,",$key)){ // janvier en couleur foncee
+							$couleur =  'couleur_janvier';
+					} else {
+							$couleur = 'couleur_mois';
 					}
-					echo http_img_rien($largeur,$difference, "background-color:$couleur;", $tagtitle);
-					echo http_img_rien($largeur,1,'background-color:#333333;',$tagtitle);
-					echo http_img_rien($largeur,$hauteur_moyenne,"background-color:$couleur;", $tagtitle);
+					echo http_img_rien($largeur,$difference, $couleur, $tagtitle);
+					echo http_img_rien($largeur,1,'trait_moyen',$tagtitle);
+					echo http_img_rien($largeur,$hauteur_moyenne, $couleur, $tagtitle);
 				}
 				else {
-				  echo http_img_rien($largeur,1,"background-color:$couleur_foncee;", $tagtitle);
-					if (ereg("-01",$key)){ // janvier en couleur foncee
-					  echo http_img_rien($largeur, $hauteur, "background-color:$couleur_foncee;", $tagtitle);
-					} 
-					else {
-					  echo http_img_rien($largeur,$hauteur, "background-color:$couleur_claire;", $tagtitle);
+					echo http_img_rien($largeur,1,"trait_haut", $tagtitle);
+					if (preg_match(",-01,",$key)){ // janvier en couleur foncee
+						echo http_img_rien($largeur, $hauteur, "couleur_janvier", $tagtitle);
+					} else {
+						echo http_img_rien($largeur,$hauteur, "couleur_mois", $tagtitle);
 					}
 				}
 			}
@@ -543,43 +512,14 @@ if (!$origine) {
 			$val_prec = $value;
 		}
 		
-		echo "<td bgcolor='black'>", http_img_rien(1, 1),"</td>";
-		echo "</tr></table>";
-		echo "</td>",
-		  "<td background='", _DIR_IMG_PACK, "fond-stats.gif' valign='bottom'>", http_img_rien(3, 1, 'background-color:black;'),"</td>";
-		echo "<td>", http_img_rien(5, 1),"</td>";
-		echo "<td valign='top'><font face='Verdana,Arial,Sans,sans-serif' size=2>";
-		echo "<table cellpadding=0 cellspacing=0 border=0>";
-		echo "<tr><td height=15 valign='top'>";		
-		echo "<font face='arial,helvetica,sans-serif' size=1><b>".round($maxgraph)."</b></font>";
-		echo "</td></tr>";
-		echo "<tr><td height=25 valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(7*($maxgraph/8))."</font>";
-		echo "</td></tr>";
-		echo "<tr><td height=25 valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size=1>".round(3*($maxgraph/4))."</font>";
-		echo "</td></tr>";
-		echo "<tr><td height=25 valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(5*($maxgraph/8))."</font>";
-		echo "</td></tr>";
-		echo "<tr><td height=25 valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size=1><b>".round($maxgraph/2)."</b></font>";
-		echo "</td></tr>";
-		echo "<tr><td height=25 valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(3*($maxgraph/8))."</font>";
-		echo "</td></tr>";
-		echo "<tr><td height=25 valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size=1>".round($maxgraph/4)."</font>";
-		echo "</td></tr>";
-		echo "<tr><td height=25 valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(1*($maxgraph/8))."</font>";
-		echo "</td></tr>";
-		echo "<tr><td height=10 valign='bottom'>";		
-		echo "<font face='arial,helvetica,sans-serif' size=1><b>0</b></font>";
-		echo "</font></td>"; // h. 26/63 ajot du </font> (!!??)
-
-		echo "</tr></table>";
-		echo "</td></tr></table>";
+		echo "<td bgcolor='black'>", http_img_rien(1, 1),"</td>"
+			. "</tr></table></td>"
+			. "\n<td ".http_style_background("fond-stats.gif")." valign='bottom'>"
+			. http_img_rien(3, 1, 'trait_bas') ."</td>"		  
+			. "\n<td>" . http_img_rien(5, 1) ."</td>"
+			. "\n<td valign='top'>"
+			. statistiques_echelle($maxgraph)
+			. "</td></tr></table>";
 		echo "</div>";
 	}
 	
