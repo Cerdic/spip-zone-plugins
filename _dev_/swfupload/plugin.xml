@@ -13,5 +13,9 @@ _ si vous avez cfg: [configuration->index.php?exec=cfg&amp;cfg=swfupload]
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
 		<inclure>swfupload_pipelines.php</inclure>
+	</pipeline>	
+  <pipeline>
+		<nom>header_prive</nom>
+		<inclure>swfupload_pipelines.php</inclure>
 	</pipeline>
 </plugin>

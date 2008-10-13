@@ -71,6 +71,7 @@ function swfupload_vider_upload($dirname)
 	if ($dirname!=determine_upload()) {
 	echo $dirname." : Dossier supprim&eacute;<br/>";
     return @rmdir($dirname);}
+  echo "<p><a href='?exec=swfupload_admin'>Revenir &agrave l'interface d'ajout de fichers de SWFupload</a></p>";
 }
  
 ?>
