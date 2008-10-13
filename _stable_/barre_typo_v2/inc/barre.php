@@ -271,7 +271,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$toolbox .= afficher_gestion_ancre($champ, $num_barre);
 	$toolbox .= afficher_gestion_remplacer($champ, $champhelp, $num_barre);
 	// Pipeline pour ajouter des toolzbox
-	$add = pipeline("BT_toolbox", $params_vierge);
+	$add = pipeline("bt_toolbox", $params_vierge);
 	$toolbox .= $add['flux'];
 
 	$ret .= "<table class='spip_barre' cellpadding='0' cellspacing='0' border='0'>";
@@ -282,7 +282,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	// Italique, gras, intertitres
 	$ret .= bouton_barre_racc("barre_raccourci('{','}',$champ, $num_barre)", _DIR_IMG_ICONES_BARRE."italique.png", _T('barre_italic'), $champhelp);
 	$ret .= bouton_barre_racc("barre_raccourci('{{','}}',$champ, $num_barre)", _DIR_IMG_ICONES_BARRE."gras.png", _T('barre_gras'), $champhelp);
-	$add = pipeline("BT_caracteres", $params_vierge);
+	$add = pipeline("bt_caracteres", $params_vierge);
 	$ret .= $add['flux'];
 
 
@@ -295,7 +295,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	} else {
 		$retP .= bouton_barre_racc("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ, $num_barre)", _DIR_IMG_ICONES_BARRE."quote.png", _T('barre_quote'), $champhelp);
 	}
-	$add = pipeline("BT_paragraphes", $params_vierge);
+	$add = pipeline("bt_paragraphes", $params_vierge);
 	$retP .= $add['flux'];
 	$ret .= "&nbsp;$retP</td>\n<td>";
 	$col++;
@@ -308,7 +308,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		$retL .= bouton_barre_racc("barre_raccourci('[[',']]',$champ, $num_barre)", _DIR_IMG_ICONES_BARRE."notes.png", _T('barre_note'), $champhelp);
 		$retL .= bouton_barre_racc("barre_raccourci('[?',']',$champ, $num_barre)", _DIR_BTV2_IMG.'barre-wiki.png', _T('bartypenr:barre_glossaire'), $champhelp);
 	}
-	$add = pipeline("BT_liens", $params_vierge);
+	$add = pipeline("bt_liens", $params_vierge);
 	$retL .= $add['flux'];
 	$ret .= "&nbsp;$retL</td>\n<td>";
 	$col++;
@@ -321,7 +321,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		// DEB Galerie JPK
 		// idee originale de http://www.gasteroprod.com/la-galerie-spip-pour-reutiliser-facilement-les-images-et-documents.html
 		$retS .= bouton_barre_racc("javascript:barre_galerie($champ, '"._DIR_RESTREINT."')", _DIR_BTV2_IMG.'galerie.png', _T('bartypenr:barre_galerie'), $champhelp);
-		$add = pipeline("BT_structures", $params_vierge);
+		$add = pipeline("bt_structures", $params_vierge);
 		$retS .= $add['flux'];
 		$ret .= "&nbsp;$retS</td>\n<td>";
 		$col++;
@@ -335,7 +335,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		$retG .= bouton_barre_racc("toggle_preview($num_barre,'".str_replace("'","\\'",$champ)."');", _DIR_BTV2_IMG.'eye.png', _T('bartypenr:barre_preview'), $champhelp);
 		$retG .= bouton_barre_racc("toggle_stats($num_barre,'".str_replace("'","\\'",$champ)."');", _DIR_BTV2_IMG.'stats.png', _T('bartypenr:barre_stats'), $champhelp);
 	}
-	$add = pipeline("BT_gadgets", $params_vierge);
+	$add = pipeline("bt_gadgets", $params_vierge);
 	$retG .= $add['flux'];
 	$ret .= "&nbsp;$retG</td>";
 	$col++;
