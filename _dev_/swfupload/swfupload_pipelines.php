@@ -44,8 +44,8 @@ $flux .= '<!-- swfupload -->
 			swfu = new SWFUpload({
 				// Flash Settings '._DIR_PLUGIN_SWFUPLOAD.'
 				flash_url : "'.url_absolue(_DIR_PLUGIN_SWFUPLOAD).'swfupload/swfupload_f9.swf",	// Relative to this file
-				// Backend Settings - Relative to the SWF file, utiliser url absolue cest mieux 
-				upload_url: "'.$GLOBALS['meta']["adresse_site"].'/'._DIR_RESTREINT_ABS.'?exec=swfupload_upload",	
+				// Backend Settings - Relative to the SWF file, utiliser url absolue cest mieux					
+				upload_url: "'.$GLOBALS['meta']["adresse_site"].'/?page=swfupload",
 
 				post_params: {"PHPSESSID": "'.$session.'"},
 				// File Upload Settings

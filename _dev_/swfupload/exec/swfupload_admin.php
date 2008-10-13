@@ -3,7 +3,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/actions'); // *action_auteur et determine_upload
-include_spip('inc/swfupload_form'); // *action_auteur et determine_upload
 
 session_start();
 $_SESSION["file_info"] = array();
@@ -30,17 +29,30 @@ echo "Le plugin SWFupload permet de t&eacute;l&eacute;charger des fichiers dans 
 fin_boite_info();
 echo "<br/>";
 debut_boite_info();
-echo "<a href='?exec=swfupload_vider'>Vider le dossier</a> ".determine_upload();
+echo "<a href='?exec=swfupload_vider' onclick='return confirm(\"Etes vous sûr ?\");'>Vider le dossier</a> ".determine_upload();
 echo "<br/><strong>Attention en cliquant sur ce lien vous supprimerez tous les fichiers et dossiers.</strong>";
 fin_boite_info();
 
 echo debut_droite();
 echo gros_titre(_T('swfupload:titre_swfupload'));
-echo swfupload_form();
+echo '
+<form id="form1" action="index.php" method="post" enctype="multipart/form-data">
+		<div>'._T('swfupload:texte_swfupload').'</div>
+
+		<div class="content">
+			<fieldset class="flash" id="fsUploadProgress">
+				<legend>'._T('swfupload:texte_uploadqueue').'</legend>
+			</fieldset>
+			<div id="divStatus">0 '._T('swfupload:texte_filesupload').'</div>
+			<div>
+				<input type="button" value="'._T('swfupload:texte_boutonupload').'" onclick="swfu.selectFiles()" style="font-size: 8pt;" />
+				<input id="btnCancel" type="button" value="'._T('swfupload:texte_cancelupload').'" onclick="swfu.cancelQueue();" disabled="disabled" style="font-size: 8pt;" /><br />
+
+			</div>
+		</div>
+	</form>';
 echo fin_gauche();
 echo fin_page();
 }
-
-
 
 ?>

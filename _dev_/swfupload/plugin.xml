@@ -1,9 +1,9 @@
 <plugin>
 	<nom>SWFupload</nom>
-	<auteur>Phil 2008</auteur>
-	<version>0.3</version>
+	<auteur>Phil 2008, [erational->http://www.erational.org]</auteur>
+	<version>0.4</version>
 	<etat>dev</etat>
-	<description>Permet de t&eacute;l&eacute;charger des images dans le dossier upload sans acc&egrave;s FTP (valable uniquement sous internet explorer)
+	<description>Permet de t&eacute;l&eacute;charger des images dans le dossier upload sans acc&egrave;s FTP
 _ si vous avez cfg: [configuration->index.php?exec=cfg&amp;cfg=swfupload]
   </description>
 	<icon>images/swfupload-24.png</icon>
