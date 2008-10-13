@@ -46,7 +46,35 @@
 <script type="text/javascript" src="#CHEMIN{js/jquery.flipv.js}"></script>
 <script type="text/javascript">
 	[(#MODE_JEU|=={'oui'}|?{' ',''})var mode_jeu=1;]
-	
+	//chargement des objets à ramasser pour terminer le jeu
+	var chaine_objets_a_ramasser = "[(#LISTE_OBJETS_JEU)]";
+	var tableau_objets_a_ramasser = new Array(); 
+	tableau_objets_a_ramasser = chaine_objets_a_ramasser.split(','); 
+
+	function verifier_objets_ramasses() {
+		var partie_terminee=0;
+		for (var i=0; i<tableau_objets_a_ramasser.length; i++) {
+			if ($('div.panorama-panier ul').find('.objet'+tableau_objets_a_ramasser[i]).length > 0) {
+				partie_terminee++;
+				
+			}
+		}	
+		if (partie_terminee == tableau_objets_a_ramasser.length) {
+			$('.panorama-viewport').append("<div class='panorama-fond-demarrer'></div>")
+			.append("<div class='panorama-bouton-demarrer'><a href='#'><:panoramas:bravo:></a></div>");
+			
+			$('.panorama-bouton-demarrer a').bind('click', function(){
+					$.cookie('lieux_visites','');
+					$.cookie('objets_ramasses',' ');
+					$.cookie('jeux_reussis','');
+					$('.panorama-bouton-demarrer, .panorama-fond-demarrer').fadeOut(1000);
+					document.location.href="?page=visite&id_visite=#ID_VISITE";
+					return false;
+				});
+		}
+		
+	}
+
 	tb_pathToImage = "#CHEMIN{img_pack/ajax-loader.gif}";
 
 <BOUCLE_carte(DOCUMENTS){id_document=#ID_CARTE}>
@@ -106,6 +134,9 @@ $(document).ready(function(){
 			nouveau_cookie_lieux += ',' + tableau_lieux_visites[i];
 		}
 		$.cookie('lieux_visites', nouveau_cookie_lieux);
+
+		
+		
 	}
 	<BOUCLE_toutesinteractions(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
 		
@@ -140,6 +171,8 @@ $(document).ready(function(){
 						var objets_ramasses = $('div.panorama-panier ul').html();
 						$.cookie('objets_ramasses', objets_ramasses);
 						
+						//vérifier si on a trouvé tous les objets du jeu. Si oui, on affiche un message de félicitation et la partie est terminée
+						verifier_objets_ramasses();			
 					}
 				});
 				
@@ -388,9 +421,10 @@ $(document).ready(function(){
 		objEvent.preventDefault();
 
 		return false;
-
+	
 	});
-
+	
+	verifier_objets_ramasses();
 });
 </script>
 

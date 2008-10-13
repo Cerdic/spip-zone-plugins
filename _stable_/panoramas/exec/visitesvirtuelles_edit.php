@@ -81,6 +81,7 @@ function exec_visitesvirtuelles_edit(){
 			$id_lieu_depart = $row['id_lieu_depart'];
 			$id_carte = $row['id_carte'];
 			$mode_jeu = $row['mode_jeu'];
+			$liste_objets_jeu = $row['liste_objets_jeu'];
 		}
 		$focus = "";
 		$action_link = generer_action_auteur("visitesvirtuelles_edit","$id_visite",urlencode($redirect));
@@ -181,6 +182,7 @@ function Panoramas_boite_proprietes_visitevirtuelle($id_visite, $row, $focus, $a
 	if ($hauteur==0) $hauteur=400;	
 	$id_lieu_depart = intval($row['id_lieu_depart']);	
 	$mode_jeu = $row['mode_jeu'];	
+	$liste_objets_jeu = $row['liste_objets_jeu'];	
 	
 
 	$out .= "<strong><label for='titre_visite'>"._T("panoramas:titre_visite")."</label></strong> "._T('info_obligatoire_02');
@@ -218,6 +220,8 @@ function Panoramas_boite_proprietes_visitevirtuelle($id_visite, $row, $focus, $a
 	if ($mode_jeu=="oui") $out .= "selected=\"selected\"";
 	
 
+	
+
 	$out .= " >"._T("panoramas:oui")."</option>
 			<option value=\"non\"";
 
@@ -226,6 +230,11 @@ function Panoramas_boite_proprietes_visitevirtuelle($id_visite, $row, $focus, $a
 	$out .= " >"._T("panoramas:non")."</option>
 		</select><br />\n";
 	
+	$out .= "<strong><label for='liste_objets_jeu_visite'>"._T("panoramas:liste_objets_jeu")."</label></strong> ";
+	$out .= "<input type='text' name='liste_objets_jeu' id='liste_objets_jeu_visite' class='formo $focus' ".
+		"value=\"".$liste_objets_jeu."\" size='5' /><br />\n";
+	
+
 	$out .= "<div style='text-align:right'>";
 	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";
 

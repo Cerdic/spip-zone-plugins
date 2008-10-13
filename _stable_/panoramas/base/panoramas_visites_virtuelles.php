@@ -18,6 +18,7 @@ $visites_virtuelles = array(
 		"id_carte"	=> "bigint(21) NOT NULL", /* carte 2D associée à la visite, id du document */
 		"id_lieu_depart"	=> "bigint(21) NOT NULL",
 		"mode_jeu"	=> "ENUM('oui', 'non') DEFAULT 'non' NOT NULL", /* il s'agit d'un jeu plus que d'une visite virtuelle, on affiche entre autre le bouton démarrer au départ + mémorisation des scores.. etc... */
+		"liste_objets_jeu"	=> "text NOT NULL", /* si le mode_jeu='oui' on donne ici la liste des objets que le joueur doit ramasser (ou gagner). Lorsque tous les objets sont ramassés, on affiche un panneau bravo */
 		"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
 		"maj"	=> "TIMESTAMP"
 		);
