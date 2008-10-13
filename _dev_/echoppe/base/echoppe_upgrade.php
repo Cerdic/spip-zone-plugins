@@ -2,58 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function echoppe_vider_tables(){
-	include_spip('base/abstract_sql');
-	sql_drop_table("spip_echoppe_categories");
-	sql_drop_table("spip_echoppe_categories_articles");
-	sql_drop_table("spip_echoppe_categories_descriptions");
-	sql_drop_table("spip_echoppe_categories_produits"); ,
-	sql_drop_table("spip_echoppe_categories_rubriques");
-	sql_drop_table("spip_echoppe_client");
-	sql_drop_table("spip_echoppe_clients");
-	sql_drop_table("spip_echoppe_prestataires");
-	sql_drop_table("spip_echoppe_depots");
-	sql_drop_table("spip_echoppe_gammes");
-	sql_drop_table("spip_echoppe_gammes_produits");
-	sql_drop_table("spip_echoppe_options");
-	sql_drop_table("spip_echoppe_options_descriptions");
-	sql_drop_table("spip_echoppe_options_valeurs");
-	sql_drop_table("spip_echoppe_options_valeurs_descriptifs");
-	sql_drop_table("spip_echoppe_panier");
-	sql_drop_table("spip_echoppe_prix");
-	sql_drop_table("spip_echoppe_paniers");
-	sql_drop_table("spip_echoppe_statuts_paniers");
-	sql_drop_table("spip_echoppe_produits");
-	sql_drop_table("spip_echoppe_produits_articles");
-	sql_drop_table("spip_echoppe_produits_descriptions");
-	sql_drop_table("spip_echoppe_produits_documents");
-	sql_drop_table("spip_echoppe_produits_rubriques");
-	sql_drop_table("spip_echoppe_produits_sites");
-	sql_drop_table("spip_echoppe_valeurs");
-	sql_drop_table("spip_echoppe_stock_produits");
-	effacer_meta('echoppedb_version');
-}
-
-//~ $version_echoppe_installee = $GLOBALS['meta']['echoppe_version'];
-function echoppe_install($action){
-	$version_echoppe_installee = $GLOBALS['meta']['echoppedb_version'];
-	switch ($action){
-		case 'test':
-			//Contrôle du plugin à chaque chargement de la page d'administration
-			// doit retourner true si le plugin est proprement installé et à jour, false sinon
-			$version_echoppe_locale = 1.0;
-			//echo "Echoppe DB V".$version_echoppe_installee;
-			//~ echo $version_echoppe_locale.' <-> '.$version_echoppe_installee.'<br />';
-			if ($version_echoppe_installee == $version_echoppe_locale){
-				$test = true; 
-			}else{
-				$test = false;
-			}
-			//~ echo ('Test :'.$test.'<br />');
-			//~ return ($GLOBALS['meta']['echoppe_version'] == $version_echoppe_locale);
-			return $test;
-		break;
-		case 'install':
+function installer_echoppe(){
 			//Appel de la fonction d'installation. Lors du clic sur l'icône depuis le panel.
 			//quand le plugin est activé et test retourne false
 			$version_echoppe_locale = 1.0;
@@ -104,7 +53,61 @@ function echoppe_install($action){
 				ecrire_meta('echoppedb_version',$version_echoppe_locale);
 				ecrire_metas();
 			}
-			
+}
+
+function echoppe_vider_tables(){
+	include_spip('base/abstract_sql');
+	sql_drop_table("spip_echoppe_categories");
+	sql_drop_table("spip_echoppe_categories_articles");
+	sql_drop_table("spip_echoppe_categories_descriptions");
+	sql_drop_table("spip_echoppe_categories_produits");
+	sql_drop_table("spip_echoppe_categories_rubriques");
+	sql_drop_table("spip_echoppe_client");
+	sql_drop_table("spip_echoppe_clients");
+	sql_drop_table("spip_echoppe_prestataires");
+	sql_drop_table("spip_echoppe_depots");
+	sql_drop_table("spip_echoppe_gammes");
+	sql_drop_table("spip_echoppe_gammes_produits");
+	sql_drop_table("spip_echoppe_options");
+	sql_drop_table("spip_echoppe_options_descriptions");
+	sql_drop_table("spip_echoppe_options_valeurs");
+	sql_drop_table("spip_echoppe_options_valeurs_descriptifs");
+	sql_drop_table("spip_echoppe_panier");
+	sql_drop_table("spip_echoppe_prix");
+	sql_drop_table("spip_echoppe_paniers");
+	sql_drop_table("spip_echoppe_statuts_paniers");
+	sql_drop_table("spip_echoppe_produits");
+	sql_drop_table("spip_echoppe_produits_articles");
+	sql_drop_table("spip_echoppe_produits_descriptions");
+	sql_drop_table("spip_echoppe_produits_documents");
+	sql_drop_table("spip_echoppe_produits_rubriques");
+	sql_drop_table("spip_echoppe_produits_sites");
+	sql_drop_table("spip_echoppe_valeurs");
+	sql_drop_table("spip_echoppe_stock_produits");
+	effacer_meta('echoppedb_version');
+}
+
+//~ $version_echoppe_installee = $GLOBALS['meta']['echoppe_version'];
+function echoppe_install($action){
+	$version_echoppe_installee = $GLOBALS['meta']['echoppedb_version'];
+	switch ($action){
+		case 'test':
+			//Contrôle du plugin à chaque chargement de la page d'administration
+			// doit retourner true si le plugin est proprement installé et à jour, false sinon
+			$version_echoppe_locale = 1.0;
+			//echo "Echoppe DB V".$version_echoppe_installee;
+			//~ echo $version_echoppe_locale.' <-> '.$version_echoppe_installee.'<br />';
+			if ($version_echoppe_installee == $version_echoppe_locale){
+				$test = true; 
+			}else{
+				$test = false;
+			}
+			//~ echo ('Test :'.$test.'<br />');
+			//~ return ($GLOBALS['meta']['echoppe_version'] == $version_echoppe_locale);
+			return $test;
+		break;
+		case 'install':
+			installer_echoppe();
 		break;
 		case 'uninstall':
 			//Appel de la fonction de suppression
