@@ -10,5 +10,15 @@
 		]
 	</BOUCLE_lieuxvisite>
 	<p class="descriptif-visite">#DESCRIPTIF</p>
-
+	[(#MODE_JEU|=={oui}|?{' ',''})<script type="text/javascript">
+		$(document).ready(function(){
+			$('.panorama-viewport').append("<div class='panorama-fond-demarrer'></div>")
+			.append("<div class='panorama-bouton-demarrer'><a href='#'><:panoramas:demarrer:></a></div>");
+		
+			$('.panorama-bouton-demarrer a').bind('click', function(){
+					$('.panorama-bouton-demarrer, .panorama-fond-demarrer').fadeOut(1000);
+					return false;
+				});
+		});
+	</script>]
 </BOUCLE_visite>

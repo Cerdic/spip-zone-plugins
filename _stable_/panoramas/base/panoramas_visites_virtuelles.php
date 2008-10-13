@@ -17,6 +17,7 @@ $visites_virtuelles = array(
 		"hauteur"	=> "int(21) DEFAULT '400' NOT NULL",
 		"id_carte"	=> "bigint(21) NOT NULL", /* carte 2D associée à la visite, id du document */
 		"id_lieu_depart"	=> "bigint(21) NOT NULL",
+		"mode_jeu"	=> "ENUM('oui', 'non') DEFAULT 'non' NOT NULL", /* il s'agit d'un jeu plus que d'une visite virtuelle, on affiche entre autre le bouton démarrer au départ + mémorisation des scores.. etc... */
 		"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
 		"maj"	=> "TIMESTAMP"
 		);

@@ -80,6 +80,7 @@ function exec_visitesvirtuelles_edit(){
 			$hauteur = $row['hauteur'];
 			$id_lieu_depart = $row['id_lieu_depart'];
 			$id_carte = $row['id_carte'];
+			$mode_jeu = $row['mode_jeu'];
 		}
 		$focus = "";
 		$action_link = generer_action_auteur("visitesvirtuelles_edit","$id_visite",urlencode($redirect));
@@ -179,7 +180,8 @@ function Panoramas_boite_proprietes_visitevirtuelle($id_visite, $row, $focus, $a
 	if ($largeur==0) $largeur=600;	
 	if ($hauteur==0) $hauteur=400;	
 	$id_lieu_depart = intval($row['id_lieu_depart']);	
-
+	$mode_jeu = $row['mode_jeu'];	
+	
 
 	$out .= "<strong><label for='titre_visite'>"._T("panoramas:titre_visite")."</label></strong> "._T('info_obligatoire_02');
 	$out .= "<br />";
@@ -208,6 +210,21 @@ function Panoramas_boite_proprietes_visitevirtuelle($id_visite, $row, $focus, $a
 	$out .= "<strong><label for='id_carte_visite'>"._T("panoramas:id_carte")."</label></strong> ";
 	$out .= "<input type='text' name='id_carte' id='id_carte_visite' class='formo $focus' ".
 		"value=\"".$id_carte."\" size='5' /><br />\n";
+	
+	$out .= "<strong><label for='mode_jeu_visite'>"._T("panoramas:mode_jeu")."</label></strong> ";
+	$out .= "<select name='mode_jeu' id='mode_jeu_visite' class='formo $focus' ".
+		"value=\"".$mode_jeu."\" >
+			<option value=\"oui\"";
+	if ($mode_jeu=="oui") $out .= "selected=\"selected\"";
+	
+
+	$out .= " >"._T("panoramas:oui")."</option>
+			<option value=\"non\"";
+
+	if (!($mode_jeu=="oui")) $out .= "selected=\"selected\"";
+
+	$out .= " >"._T("panoramas:non")."</option>
+		</select><br />\n";
 	
 	$out .= "<div style='text-align:right'>";
 	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";
