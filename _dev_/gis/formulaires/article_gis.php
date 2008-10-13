@@ -142,15 +142,13 @@ function formulaires_article_gis_verifier_dist(){
 
 function formulaires_article_gis_traiter_dist(){
 	
-	$message = array();
-
 	// signaler que l'on vient de soumettre le formulaire
 	// pour que charger ne remette pas les anciennes valeurs
 	// puisqu'on propose sa reedition dans la foulee
 
 	set_request('soumission_gis_enregistre',true);
 
-	return array(1,_T("gis:ok_formulaire_soumis"));
+	return array('editable'=>true,'message_ok'=>_T('gis:ok_formulaire_soumis'));
 
 }
 
