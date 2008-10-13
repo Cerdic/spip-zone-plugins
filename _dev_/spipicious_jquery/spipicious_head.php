@@ -1,17 +1,18 @@
 <?php
 
 function spipicious_insert_head($flux){
+	$contenu = " ";
 	global $visiteur_session;
 	
 	if($visiteur_session['id_auteur']){
 
 	include_spip('selecteurgenerique_fonctions');
-	$contenu = selecteurgenerique_verifier_js($flux);
+	$flux .= selecteurgenerique_verifier_js($flux);
 	
 	$selecteur = generer_url_public('selecteurs_tags');
     $tags_link = generer_url_public('inc-tags');
 	
-	$contenu .= <<<EOS
+	$flux .= <<<EOS
 		<script type="text/javascript"><!--
 			function deletetag(tag){
 				var tag = tag;
@@ -77,9 +78,8 @@ function spipicious_insert_head($flux){
 	})(jQuery);
 // --></script>
 EOS;
-	return $contenu;
-	}
-	else{return $flux;}
+}
+	return $flux;
 }
 
 ?>
