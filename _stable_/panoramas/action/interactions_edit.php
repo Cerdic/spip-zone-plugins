@@ -36,6 +36,7 @@ function Interactions_update($id_interaction){
 	$texte_apres_activation = _request('texte_apres_activation');
 	$id_audio_avant_activation = intval(_request('id_audio_avant_activation'));
 	$id_audio_apres_activation = intval(_request('id_audio_apres_activation'));
+	$id_objet_apres_activation = intval(_request('id_objet_apres_activation'));
 	$images_transition = _request('images_transition');
 	$images_transition_delai = intval(_request('images_transition_delai'));
 	$id_film_transition = intval(_request('id_film_transition'));
@@ -79,6 +80,7 @@ function Interactions_update($id_interaction){
 			"texte_apres_activation="._q($texte_apres_activation).", ".
 			"id_audio_avant_activation="._q($id_audio_avant_activation).", ".
 			"id_audio_apres_activation="._q($id_audio_apres_activation).", ".
+			"id_objet_apres_activation="._q($id_objet_apres_activation).", ".
 			"images_transition="._q($images_transition).", ".
 			"images_transition_delai="._q($images_transition_delai).", ".
 			"id_film_transition="._q($id_film_transition).", ".

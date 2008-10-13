@@ -201,7 +201,7 @@ $(document).ready(function(){
 
 		[ (#REM) interactions qui requièrent un objet pour être actives (il faudra drag and dropper l'objet sur l'interaction depuis le panier ]
 		<BOUCLE_objetactivationobjet(DOCUMENTS){id_document=#ID_OBJET_ACTIVATION}>
-			[(#MODE_JEU|=={'oui'}|?{' ',''})
+			if (mode_jeu) {
 			$('.interaction#ID_INTERACTION')
 				.unbind('click')
 				.bind('click', function() {
@@ -214,6 +214,18 @@ $(document).ready(function(){
 					hoverClass: 'droppable-hover',
 					drop: function(ev, ui) {
 						[alert("(#TEXTE_APRES_ACTIVATION)");]
+						<BOUCLE_documentobjetapresactivationobjet(DOCUMENTS){id_document=#ID_OBJET_APRES_ACTIVATION}>
+							$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
+							$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
+						
+							//mis à jour des cookies
+							var objets_ramasses = $('div.panorama-panier ul').html();
+							$.cookie('objets_ramasses', objets_ramasses);
+						
+							//vérifier si on a trouvé tous les objets du jeu. Si oui, on affiche un message de félicitation et la partie est terminée
+							verifier_objets_ramasses();
+						</BOUCLE_documentobjetapresactivationobjet>		
+					
 						$('div.panorama-panier').hide();
 						$('h2.panorama-carte').show();
 						$(this).unbind('click');
@@ -226,12 +238,12 @@ $(document).ready(function(){
 						
 					}
 			});
-			][(#REM) fin mode_jeu ]
+			}[(#REM) fin mode_jeu ]
 		</BOUCLE_objetactivationobjet>
 
 		[ (#REM) interactions qui requièrent d'avoir visité un lieu ]
 		<BOUCLE_objetactivationlieu(VISITES_VIRTUELLES_LIEUX){id_lieu=#ID_LIEU_ACTIVATION}>
-			[(#MODE_JEU|=={'oui'}|?{' ',''})
+			if (mode_jeu) {
 			$('.interaction#ID_INTERACTION')
 				.unbind('click')
 				.bind('click', function() {
@@ -239,6 +251,17 @@ $(document).ready(function(){
 								var tableau_lieux_visites = $.cookie('lieux_visites').split(','); 
 								if (tableau_lieux_visites.indexOf('#ID_LIEU')>=0) {
 									[alert("(#TEXTE_APRES_ACTIVATION)");]
+									<BOUCLE_documentobjetapresactivationlieu(DOCUMENTS){id_document=#ID_OBJET_APRES_ACTIVATION}>
+										$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
+										$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
+						
+										//mis à jour des cookies
+										var objets_ramasses = $('div.panorama-panier ul').html();
+										$.cookie('objets_ramasses', objets_ramasses);
+						
+										//vérifier si on a trouvé tous les objets du jeu. Si oui, on affiche un message de félicitation et la partie est terminée
+										verifier_objets_ramasses();
+									</BOUCLE_documentobjetapresactivationlieu>		
 								} else {
 									[alert("(#TEXTE_AVANT_ACTIVATION)");]
 								}
@@ -247,12 +270,12 @@ $(document).ready(function(){
 							}
 							return false;
 						});
-			][(#REM) fin mode_jeu ]
+			}[(#REM) fin mode_jeu ]
 		</BOUCLE_objetactivationlieu>
 
 		[ (#REM) interactions qui requièrent d'avoir réussi un questionnaire avant ]
 		<BOUCLE_objetactivationjeu(JEUX){id_jeu=#ID_JEU_ACTIVATION}>
-			[(#MODE_JEU|=={'oui'}|?{' ',''})
+			if (mode_jeu) {
 			$('.interaction#ID_INTERACTION')
 				.unbind('click')
 				.bind('click', function() {
@@ -260,6 +283,17 @@ $(document).ready(function(){
 								var tableau_jeux_visites = $.cookie('jeux_reussis').split(','); 
 								if (tableau_jeux_visites.indexOf('#ID_JEU')>=0) {
 									[alert("(#TEXTE_APRES_ACTIVATION)");]
+									<BOUCLE_documentobjetapresactivationjeu(DOCUMENTS){id_document=#ID_OBJET_APRES_ACTIVATION}>
+										$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
+										$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
+						
+										//mis à jour des cookies
+										var objets_ramasses = $('div.panorama-panier ul').html();
+										$.cookie('objets_ramasses', objets_ramasses);
+						
+										//vérifier si on a trouvé tous les objets du jeu. Si oui, on affiche un message de félicitation et la partie est terminée
+										verifier_objets_ramasses();
+									</BOUCLE_documentobjetapresactivationjeu>
 								} else {
 									[alert("(#TEXTE_AVANT_ACTIVATION)");]
 								}
@@ -268,7 +302,7 @@ $(document).ready(function(){
 							}
 							return false;
 						});
-			][(#REM) fin mode_jeu ]
+			}[(#REM) fin mode_jeu ]
 		</BOUCLE_objetactivationjeu>
 
 		

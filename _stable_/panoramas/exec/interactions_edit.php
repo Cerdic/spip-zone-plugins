@@ -93,6 +93,7 @@ function exec_interactions_edit(){
 			$texte_apres_activation = $row['texte_apres_activation'];
 			$id_audio_avant_activation = $row['id_audio_avant_activation'];
 			$id_audio_apres_activation = $row['id_audio_apres_activation'];
+			$id_objet_apres_activation = $row['id_objet_apres_activation'];
 			$images_transition = $row['images_transition'];
 			$images_transition_delai = $row['images_transition_delai'];
 			$id_film_transition = $row['id_film_transition'];
@@ -142,6 +143,7 @@ function exec_interactions_edit(){
 		$row['texte_apres_activation'] = $texte_apres_activation;
 		$row['id_audio_avant_activation'] = $id_audio_avant_activation;
 		$row['id_audio_apres_activation'] = $id_audio_apres_activation;
+		$row['id_objet_apres_activation'] = $id_objet_apres_activation;
 		$row['images_transition'] = $images_transition;
 		$row['images_transition_delai'] = $images_transition_delai;
 		$row['id_film_transition'] = $id_film_transition;
@@ -238,6 +240,7 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$texte_apres_activation = $row['texte_apres_activation'];
 	$id_audio_avant_activation = intval($row['id_audio_avant_activation']);
 	$id_audio_apres_activation = intval($row['id_audio_apres_activation']);
+	$id_objet_apres_activation = intval($row['id_objet_apres_activation']);
 	$images_transition = $row['images_transition'];
 	$images_transition_delai = intval($row['images_transition_delai']);
 	$id_film_transition = intval($row['id_film_transition']);
@@ -436,6 +439,10 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$out .= "<strong><label for='id_audio_apres_activation_interaction' id='id_audio_apres_activation_interaction_label'>"._T("panoramas:id_audio_apres_activation")."</label></strong> ";
 	$out .= "<input type='text' name='id_audio_apres_activation' id='id_audio_apres_activation_interaction' class='formo $focus' ".
 		"value=\"".$id_audio_apres_activation."\" size='5' />\n";
+
+	$out .= "<strong><label for='id_objet_apres_activation_interaction' id='id_objet_apres_activation_interaction_label'>"._T("panoramas:id_objet_apres_activation")."</label></strong> ";
+	$out .= "<input type='text' name='id_objet_apres_activation' id='id_objet_apres_activation_interaction' class='formo $focus' ".
+		"value=\"".$id_objet_apres_activation."\" size='5' />\n";
 
 	$out .= "</fieldset>";
 	
