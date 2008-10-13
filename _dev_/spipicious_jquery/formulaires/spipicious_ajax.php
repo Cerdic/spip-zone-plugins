@@ -3,6 +3,15 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 function formulaires_spipicious_ajax_charger($id_objet,$type='article') {
+	global $visiteur_session;
+	$autorise = lire_config('spipicious/people');
+	spip_log($autorise,'spipicious');
+	if (!$visiteur_session['id_auteur'] OR !in_array($visiteur_session['statut'],$autorise)) {
+		spip_log('pas auteur pour spipicious');
+		return array('editable'=>'');
+	} else {
+		$auteur_id = $visiteur_session['id_auteur'];
+	}
 	$id_type = 'id_'.$type;
 	$valeurs = array($id_type=>$id_objet,'type'=>$type,'id_objet'=>$id_objet);
 	return $valeurs;
@@ -10,8 +19,11 @@ function formulaires_spipicious_ajax_charger($id_objet,$type='article') {
 
 function formulaires_spipicious_ajax_traiter($id_objet,$type) {
 	global $visiteur_session;
+	if(!function_exists('sql_get_fetsel')){
+		include_spip('base/abstract_sql');	
+	}
 	$autorise = lire_config('spipicious/people');
-	
+	spip_log($autorise,'spipicious');
 	if (!$visiteur_session['id_auteur'] OR !in_array($visiteur_session['statut'],$autorise)) {
 		spip_log('pas auteur pour spipicious');
 		return '';
