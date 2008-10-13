@@ -7,7 +7,7 @@ define('_DIR_PLUGIN_COMPTEURGRAPHIQUE',(_DIR_PLUGINS.end($p)));
 		if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
 		  // on voit le bouton dans la barre "naviguer"
 			$boutons_admin['statistiques_visites']->sousmenu['compteur_graphique']= new Bouton(
-			"../"._DIR_PLUGIN_COMPTEURGRAPHIQUE."/img_pack/CompteurGraphique.gif",  // icone
+			"../"._DIR_PLUGIN_COMPTEURGRAPHIQUE."img_pack/CompteurGraphique.gif",  // icone
 			"Compteurs graphiques"	// titre
 			);
 		}
