@@ -24,7 +24,7 @@ echo $commencer_page(_T('swfupload:titre_swfupload'));
 echo "<br />";
 echo debut_gauche();
 debut_boite_info();
-echo "Le plugin Jupload permet de t&eacute;l&eacute;charger des fichiers dans votre dossier ".determine_upload()." m&ecirc;me si vous n'avez pas d'acc&egrave;s ftp.<br/><br/>Vous pourrez alors acc&egrave;der &agrave; ces fichiers lors de l'ajout de documents ou images &agrave; un article.";
+echo "Le plugin SWFupload permet de t&eacute;l&eacute;charger des fichiers dans votre dossier ".determine_upload()." m&ecirc;me si vous n'avez pas d'acc&egrave;s ftp.<br/><br/>Vous pourrez alors acc&egrave;der &agrave; ces fichiers lors de l'ajout de documents ou images &agrave; un article.";
 fin_boite_info();
 echo "<br/>";
 debut_boite_info();
@@ -32,7 +32,7 @@ echo "<a href='?exec=swfupload_vider'>Vider le dossier</a> ".determine_upload();
 fin_boite_info();
 
 echo debut_droite();
-echo gros_titre('Jupload - Suppression des fichiers');
+echo gros_titre('SWFupload - Suppression des fichiers');
 echo debut_cadre_relief('image-24.gif',true);
 swfupload_vider_upload($upload_dir);
 echo fin_cadre_relief(true);

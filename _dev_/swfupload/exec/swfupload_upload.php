@@ -1,10 +1,12 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/actions'); // *action_auteur et determine_upload
 include_spip('inc/presentation'); // indispensable pour eviter pb de droits
 
 function exec_swfupload_upload()
 {
-
+  if ($connect_statut != '0minirezo' ) {
 	// Get the session Id passed from SWFUpload. We have to do this to work-around the Flash Player Cookie Bug
 	if (isset($_POST["PHPSESSID"])) {
 		session_id($_POST["PHPSESSID"]);
@@ -29,6 +31,7 @@ function exec_swfupload_upload()
 	//$_SESSION["file_info"][$file_id] = $imagevariable;
 	
 	echo $file_id;	// Return the file id to the script
+	}
 }
 	
 ?>
