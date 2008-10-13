@@ -587,7 +587,7 @@ div.pagination img { border:0pt none; margin:0pt; padding:0pt; }",
 	'traitement:TEXTE/articles:post_propre' => 'cs_decoupe',
 	'traitement:TEXTE/articles:pre_propre' => 'cs_onglets',
 	'categorie' => 'typo-racc',
-	'pipeline:BT_toolbox' => 'decoupe_BarreTypo',
+	'pipeline:bt_toolbox' => 'decoupe_BarreTypo',
 	'pipeline:nettoyer_raccourcis_typo' => 'decoupe_nettoyer_raccourcis',
 ));
 
@@ -726,7 +726,7 @@ add_outil( array(
 	'categorie'	 => 'typo-racc',
 	'code:options' => "%%decoration_styles%%",
 	'pipeline:pre_typo' => 'decoration_pre_typo',
-	'pipeline:BT_toolbox' => 'decoration_BarreTypo',
+	'pipeline:bt_toolbox' => 'decoration_BarreTypo',
 ));
 
 add_variable( array(
@@ -757,7 +757,7 @@ add_outil( array(
 	'categorie'	 => 'typo-racc',
 	'contrib'	=> 2427,
 	'pipeline:pre_typo' => 'couleurs_pre_typo',
-	'pipeline:BT_toolbox' => 'couleurs_BarreTypo',
+	'pipeline:bt_toolbox' => 'couleurs_BarreTypo',
 	'code:options' => "%%couleurs_fonds%%%%set_couleurs%%%%couleurs_perso%%",
 	'code:fonctions' => "// aide le Couteau Suisse a calculer la balise #INTRODUCTION
 function couleurs_introduire(\$texte) {
@@ -818,7 +818,7 @@ add_outil( array(
 	'categorie'	 => 'typo-racc',
 	'contrib'	=> 1563,
 	'pipeline:pre_typo' => 'filets_sep',
-	'pipeline:BT_toolbox' => 'filets_sep_BarreTypo',
+	'pipeline:bt_toolbox' => 'filets_sep_BarreTypo',
 ));
 
 add_outil( array(
@@ -828,7 +828,7 @@ add_outil( array(
 	'contrib'	=> 1561,
 	'code:css' => "table.cs_smileys td {text-align:center; font-size:90%; font-weight:bold;}",
 	'pipeline:pre_typo' => 'cs_smileys_pre_typo',
-	'pipeline:BT_toolbox' => 'cs_smileys_BarreTypo',
+	'pipeline:bt_toolbox' => 'cs_smileys_BarreTypo',
 ));
 
 add_outil( array(
@@ -836,7 +836,7 @@ add_outil( array(
 	'auteur' 	 => "BoOz pour l'id&eacute;e originale",
 	'categorie'	 => 'typo-racc',
 	'pipeline:pre_typo' => 'chatons_pre_typo',
-	'pipeline:BT_toolbox' => 'chatons_BarreTypo',
+	'pipeline:bt_toolbox' => 'chatons_BarreTypo',
 ));
 
 add_variable( array(
@@ -909,7 +909,7 @@ add_outil( array(
 	'code:jq_init' => 'blocs_init.apply(this);',
 	'jquery'	=> 'oui',
 	'pipeline:pre_typo' => 'blocs_pre_typo',
-	'pipeline:BT_toolbox' => 'blocs_BarreTypo',
+	'pipeline:bt_toolbox' => 'blocs_BarreTypo',
 ));
 
 add_variable( array(	// variable utilisee par 'pipelinecode:insert_head'

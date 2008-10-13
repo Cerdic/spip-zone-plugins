@@ -159,11 +159,11 @@ function couteau_suisse_post_typo($flux){
 }
 
 // le contenu du sous-menu est gere par les lames elles-memes
-function couteau_suisse_BT_toolbox($params) {
+function couteau_suisse_bt_toolbox($params) {
 	global $cs_metas_pipelines;
-	if (!isset($cs_metas_pipelines['BT_toolbox'])) return $params;
+	if (!isset($cs_metas_pipelines['bt_toolbox'])) return $params;
 	$flux = '';
-	eval($cs_metas_pipelines['BT_toolbox']);
+	eval($cs_metas_pipelines['bt_toolbox']);
 	$tableau_formulaire = '
  <table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">'
 	. str_replace(array('@@champ@@','@@span@@'), array($params['champ'], 'span style="vertical-align:75%;"'), $flux) . '
@@ -173,9 +173,9 @@ function couteau_suisse_BT_toolbox($params) {
 }
 
 // bouton principal du Couteau Suisse
-function couteau_suisse_BT_gadgets($params) {
+function couteau_suisse_bt_gadgets($params) {
 	global $cs_metas_pipelines;
-	if (!isset($cs_metas_pipelines['BT_toolbox'])) return $params;
+	if (!isset($cs_metas_pipelines['bt_toolbox'])) return $params;
 	$params['flux'] .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['couteau_suisse']."','');", _DIR_PLUGIN_COUTEAU_SUISSE."/img/couteau-24.gif", _T('couteauprive:raccourcis_barre'), $params['help']);
 	return $params;
 }
