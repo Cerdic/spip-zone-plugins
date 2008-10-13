@@ -5,7 +5,7 @@ function swfupload_ajouterBoutons($boutons_admin) {
 		//AND $GLOBALS["options"]=="avancees") {
 		  // on voit le bouton dans la barre "naviguer"
 			$boutons_admin['naviguer']->sousmenu['swfupload_admin']= new Bouton(
-			"../"._DIR_PLUGIN_SWFUPLOAD."/swfupload-24.png",  // icone
+			"../"._DIR_PLUGIN_SWFUPLOAD."/images/swfupload-24.png",  // icone
 			_T('swfupload:SWFupload')	// titre
 			);
 		}
