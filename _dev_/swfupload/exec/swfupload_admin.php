@@ -31,7 +31,7 @@ fin_boite_info();
 echo "<br/>";
 debut_boite_info();
 echo "<a href='?exec=swfupload_vider'>Vider le dossier</a> ".determine_upload();
-echo "<br/><h4>Attention en cliquant sur ce lien vous supprimerez tous les fichiers et dossiers.</h4>";
+echo "<br/><strong>Attention en cliquant sur ce lien vous supprimerez tous les fichiers et dossiers.</strong>";
 fin_boite_info();
 
 echo debut_droite();

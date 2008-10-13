@@ -1,5 +1,6 @@
 <?php
 include_spip('inc/actions'); // *action_auteur et determine_upload
+include_spip('inc/presentation'); // indispensable pour eviter pb de droits
 
 function exec_swfupload_upload()
 {
