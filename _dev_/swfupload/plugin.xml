@@ -3,7 +3,7 @@
 	<auteur>Phil 2008</auteur>
 	<version>0.3</version>
 	<etat>dev</etat>
-	<description>Permet de t&eacute;l&eacute;charger des images dans le dossier upload sans acc&egrave;s FTP
+	<description>Permet de t&eacute;l&eacute;charger des images dans le dossier upload sans acc&egrave;s FTP (valable uniquement sous internet explorer)
 _ si vous avez cfg: [configuration->index.php?exec=cfg&amp;cfg=swfupload]
   </description>
 	<icon>images/swfupload-24.png</icon>
