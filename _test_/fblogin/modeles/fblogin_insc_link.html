@@ -1,0 +1,6 @@
+[(#REM)
+Afficher le lien vers FB lors de l'inscription
+]<BOUCLE_social(AUTEURS){id_auteur=#SESSION{id_auteur}}{fb_uid!=''}> </BOUCLE_social>
+<a href="http://www.facebook.com/login.php?api_key=#EVAL{_FB_API_KEY}&v=1.0[&next=(#VAL{&redirect=}|concat{#SELF}|urlencode)]"><img src="#CHEMIN{img_pack/fb-login.gif}">
+[(#SESSION{id_auteur,''}
+|?{<:fblogin:je_veux_utiliser_fb:>,<:fblogin:je_veux_utiliser_fb_insc:>})]</a><//B_social>

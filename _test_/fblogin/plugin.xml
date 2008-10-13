@@ -1,0 +1,52 @@
+<plugin>
+  <nom>FB Login</nom>
+  <auteur>Cedric Morin [yterium.com->http://www.yterium.com]</auteur>
+  <version>1.0</version>
+  <version_base>0.1.0</version_base>
+  <etat>test</etat>
+  <description>FB Login : Inscription et Login via FB</description>
+	<lien></lien> <!-- URI de documentation -->
+  <options>fblogin_options.php</options>
+  <install>base/fblogin.php</install>
+  <prefix>fblogin</prefix>
+  <pipeline>
+  	<nom>declarer_tables_principales</nom>
+  	<inclure>base/fblogin.php</inclure>
+  </pipeline>
+  <pipeline>
+  	<nom>recuperer_fond</nom>
+  	<inclure>fblogin_pipeline.php</inclure>
+  </pipeline>
+  <pipeline>
+  	<nom>social_login_links</nom>
+  	<inclure>fblogin_pipeline.php</inclure>
+  </pipeline>
+  <pipeline>
+  	<nom>social_inscription_links</nom>
+  	<inclure>fblogin_pipeline.php</inclure>
+  </pipeline>
+  <pipeline>
+  	<nom>social_profil_links</nom>
+  	<inclure>fblogin_pipeline.php</inclure>
+  </pipeline>
+  <pipeline>
+  	<nom>social_charger_profil</nom>
+  	<inclure>fblogin_pipeline.php</inclure>
+  </pipeline>
+  <pipeline>
+  	<nom>definir_session</nom>
+  	<inclure>fblogin_pipeline.php</inclure>
+  </pipeline>  
+  <pipeline>
+  	<nom>affichage_final</nom>
+  	<inclure>fblogin_pipeline.php</inclure>
+  </pipeline>  
+  <pipeline>
+  	<nom>social_lister_amis</nom>
+  	<inclure>fblogin_pipeline.php</inclure>
+  </pipeline>
+	<pipeline>
+		<nom>notifications</nom>
+		<inclure>fblogin_notifications.php</inclure>
+	</pipeline>
+</plugin>

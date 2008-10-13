@@ -1,0 +1,7 @@
+[(#REM)
+Afficher le lien vers FB dans la page du profil
+][<a href="http://www.facebook.com/profile.php?id=(#SESSION{fb_session}|table_valeur{uid})" class='fb'><:fblogin:acceder_a_mon_profil_fb:></a>]
+<BOUCLE_social(AUTEURS){id_auteur=#SESSION{id_auteur}}{fb_uid!=''}>#MODELE{fblogin_login_link}</BOUCLE_social>
+[(#SESSION{fb_session}|table_valeur{app_added}|?{'',' '})
+<a href="http://www.facebook.com/add.php?api_key=#EVAL{_FB_API_KEY}&amp;ref=mf" class='fb_add'><:fblogin:ajouter_application:></a>
+]
