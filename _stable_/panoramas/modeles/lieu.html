@@ -1,13 +1,14 @@
 <B_lieux>
 
 <BOUCLE_lieux(VISITES_VIRTUELLES_LIEUX){id_lieu}>
+<BOUCLE_visites(VISITES_VIRTUELLES){id_visite=#ID_VISITE}>
 	
 	
 	<a id="[lieu(#ID_LIEU)]" name="[lieu(#ID_LIEU)]"></a>
 	<BOUCLE_photo(DOCUMENTS){id_document=#ID_PHOTO}>
 		<img src="#URL_DOCUMENT" class="panorama#ID_LIEU" width="#LARGEUR" height="#HAUTEUR" 
 	</BOUCLE_photo>
-	 alt="#TITRE" usemap="map#ID_LIEU" />
+	 alt="#_lieux:TITRE" usemap="map#ID_LIEU" />
 	<B_interactions>
 	<map id="map#ID_LIEU" name="map#ID_LIEU"> 
 		<BOUCLE_interactions(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
@@ -46,14 +47,15 @@
 <script type="text/javascript" src="#CHEMIN{js/jquery.advanced-panorama.js}"></script>
 <script type="text/javascript" src="#CHEMIN{js/jquery.flipv.js}"></script>
 <script type="text/javascript">
+	[(#MODE_JEU|=={'oui'}|?{' ',''})var mode_jeu=1;]
+	
 	tb_pathToImage = "#CHEMIN{img_pack/ajax-loader.gif}";
 
-<BOUCLE_visites(VISITES_VIRTUELLES){id_visite=#ID_VISITE}>
 <BOUCLE_carte(DOCUMENTS){id_document=#ID_CARTE}>
 $(document).ready(function(){
-	if (!$.cookie('objets_ramasses')) 
-		$.cookie('objets_ramasses',' ');
-	$('.panorama-viewport').append("<div class='panorama-onglets'><div class='panorama-carte'><img src='#URL_DOCUMENT' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><BOUCLE_position(VISITES_VIRTUELLES_LIEUX){id_visite=#ID_VISITE}{position_x_carte>0}><a class='icone-carte' href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'><img src='<B_iconecarte><BOUCLE_iconecarte(DOCUMENTS){id_document=#ICONE_CARTE}>#URL_DOCUMENT</BOUCLE_iconecarte></B_iconecarte>#CHEMIN{img_pack/icone_carte.png}<//B_iconecarte>'  style='cursor: pointer; position: absolute; [left: (#POSITION_X_CARTE)px;][ top: (#POSITION_Y_CARTE)px;]' /></a><span class='lien-plan' style='display: none; [left: (#POSITION_X_CARTE|plus{13})px;][ top: (#POSITION_Y_CARTE|moins{33})px;]'><a href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'[(#ACCES_CARTE|=={si_visite}|?{' ',''})class='verifier-lien-plan verifier-lien-plan#ID_LIEU']>[(#TITRE|replace{' ','&nbsp;'})]</a></span></BOUCLE_position></div><div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:><ul>"+ $.cookie('objets_ramasses') +"</ul></div><div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2><h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2></div></div>");
+	[(#MODE_JEU|=={'oui'}|?{' ',''})if (!$.cookie('objets_ramasses')) 
+		$.cookie('objets_ramasses',' ');]
+	$('.panorama-viewport').append("<div class='panorama-onglets'><div class='panorama-carte'><img src='#URL_DOCUMENT' height='"+parseInt($('.panorama-viewport').css('height'))+"' /><BOUCLE_position(VISITES_VIRTUELLES_LIEUX){id_visite=#ID_VISITE}{position_x_carte>0}><a class='icone-carte' href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'><img src='<B_iconecarte><BOUCLE_iconecarte(DOCUMENTS){id_document=#ICONE_CARTE}>#URL_DOCUMENT</BOUCLE_iconecarte></B_iconecarte>#CHEMIN{img_pack/icone_carte.png}<//B_iconecarte>'  style='cursor: pointer; position: absolute; [left: (#POSITION_X_CARTE)px;][ top: (#POSITION_Y_CARTE)px;]' /></a><span class='lien-plan' style='display: none; [left: (#POSITION_X_CARTE|plus{13})px;][ top: (#POSITION_Y_CARTE|moins{33})px;]'><a href='[(#URL_CARTE|sinon{[(#URL_PAGE{lieu,id_lieu=#ID_LIEU})]#[(#REM)]lieu#ID_LIEU})]'[(#ACCES_CARTE|=={si_visite}|?{' ',''})class='verifier-lien-plan verifier-lien-plan#ID_LIEU']>[(#TITRE|replace{' ','&nbsp;'})]</a></span></BOUCLE_position></div>[(#MODE_JEU|=={'oui'}|?{' ',''})<div class='panorama-panier' style='width: "+parseInt(parseInt($('.panorama-viewport').css('width'))/3)+"px; height: "+parseInt($('.panorama-viewport').css('height'))+"px;' ><:panoramas:contenu_panier:><ul>"+ $.cookie('objets_ramasses') +"</ul></div>][(#REM) fin mode_jeu ]<div class='panorama-onglets-titres'><h2 class='panorama-carte'><a href='#'><:panoramas:carte:></a></h2>[(#MODE_JEU|=={'oui'}|?{' ',''})<h2 class='panorama-panier'><a href='#'><:panoramas:panier:></a></h2>][(#REM) fin mode_jeu ]</div></div>");
 	
 	$('.panorama-viewport a.icone-carte').bind('mouseover', function(){
 		if ($(this).next().css('display') == 'none') {
@@ -68,45 +70,45 @@ $(document).ready(function(){
 							});
 	$('.panorama-onglets h2.panorama-carte a').flipv().bind('click', function() { 
 				$('div.panorama-carte').toggle();
-				if ($('div.panorama-carte').css('display') != 'none') 
+				[(#MODE_JEU|=={'oui'}|?{' ',''})if ($('div.panorama-carte').css('display') != 'none') 
 					$('h2.panorama-panier').hide();
 				else
-					$('h2.panorama-panier').show();
+					$('h2.panorama-panier').show();][(#REM) fin mode_jeu ]
 				return false;
 	});
-	$('.panorama-onglets h2.panorama-panier a').flipv().bind('click', function() { 
+	[(#MODE_JEU|=={'oui'}|?{' ',''})$('.panorama-onglets h2.panorama-panier a').flipv().bind('click', function() { 
 				$('div.panorama-panier').toggle();
 				if ($('div.panorama-panier').css('display') != 'none') 
 					$('h2.panorama-carte').hide();
 				else
 					$('h2.panorama-carte').show();
 				return false;
-	});
+	});][(#REM) fin mode_jeu ]
 	
 });
 </BOUCLE_carte>
-</BOUCLE_visites>
+
 	$(document).ready(function(){
 		
-	//maj des lieux visites
-	var tableau_lieux_visites = new Array();
-	if ($.cookie('lieux_visites')) {
-		tableau_lieux_visites = $.cookie('lieux_visites').split(','); 
-		if (tableau_lieux_visites.indexOf('#ID_LIEU')>=0) {
-			//le lieu est déja dans la liste
+	if (mode_jeu) {
+		//maj des lieux visites
+		var tableau_lieux_visites = new Array();
+		if ($.cookie('lieux_visites')) {
+			tableau_lieux_visites = $.cookie('lieux_visites').split(','); 
+			if (tableau_lieux_visites.indexOf('#ID_LIEU')>=0) {
+				//le lieu est déja dans la liste
+			} else {
+				tableau_lieux_visites.push('#ID_LIEU');
+			}
 		} else {
 			tableau_lieux_visites.push('#ID_LIEU');
 		}
-	} else {
-		tableau_lieux_visites.push('#ID_LIEU');
+		var nouveau_cookie_lieux = '';
+		for (var i=0;i<tableau_lieux_visites.length;i++) {
+			nouveau_cookie_lieux += ',' + tableau_lieux_visites[i];
+		}
+		$.cookie('lieux_visites', nouveau_cookie_lieux);
 	}
-	var nouveau_cookie_lieux = '';
-	for (var i=0;i<tableau_lieux_visites.length;i++) {
-		nouveau_cookie_lieux += ',' + tableau_lieux_visites[i];
-	}
-	$.cookie('lieux_visites', nouveau_cookie_lieux);
-	
-
 	<BOUCLE_toutesinteractions(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
 		
 		[ (#REM) interactions qui ont précisé une image de fond : ajouter l'image dans le cadre ]
@@ -121,6 +123,7 @@ $(document).ready(function(){
 
 		[ (#REM) interactions avec les objets : ajouter l'image de l'objet et gérer le drag and drop dans le panier ]
 		<BOUCLE_objetcourant(DOCUMENTS){id_document=#ID_OBJET}>
+			[(#MODE_JEU|=={'oui'}|?{' ',''})	
 			[(#TYPE|=={'objet'}|?{' ',''})  
 				$('.type-objet#ID_DOCUMENT').append("<img src='#URL_DOCUMENT' width='100%' height='100%' />");
 				$('.type-objet#ID_DOCUMENT').bind('click', function() {
@@ -148,10 +151,12 @@ $(document).ready(function(){
 				}
 				
 			]
+			][(#REM) fin mode_jeu ]
 		</BOUCLE_objetcourant>
 
 		[ (#REM) interactions de type personnage : ajouter l'image du personnage ]
 		<BOUCLE_personnagecourant(DOCUMENTS){id_document=#ID_PERSONNAGE}>
+			[(#MODE_JEU|=={'oui'}|?{' ',''})
 			[(#TYPE|=={'personnage'}|?{' ',''})  
 				$('.type-personnage#ID_DOCUMENT').append("<img src='#URL_DOCUMENT' width='100%' height='100%' />").css('opacity',1).css('border','none').css('background','none');
 				$('.type-personnage#ID_DOCUMENT').bind('click', function() {
@@ -160,10 +165,12 @@ $(document).ready(function(){
 				
 				
 			]
+			][(#REM) fin mode_jeu ]
 		</BOUCLE_personnagecourant>
 
 		[ (#REM) interactions qui requièrent un objet pour être actives (il faudra drag and dropper l'objet sur l'interaction depuis le panier ]
 		<BOUCLE_objetactivationobjet(DOCUMENTS){id_document=#ID_OBJET_ACTIVATION}>
+			[(#MODE_JEU|=={'oui'}|?{' ',''})
 			$('.interaction#ID_INTERACTION')
 				.unbind('click')
 				.bind('click', function() {
@@ -188,10 +195,12 @@ $(document).ready(function(){
 						
 					}
 			});
+			][(#REM) fin mode_jeu ]
 		</BOUCLE_objetactivationobjet>
 
 		[ (#REM) interactions qui requièrent d'avoir visité un lieu ]
 		<BOUCLE_objetactivationlieu(VISITES_VIRTUELLES_LIEUX){id_lieu=#ID_LIEU_ACTIVATION}>
+			[(#MODE_JEU|=={'oui'}|?{' ',''})
 			$('.interaction#ID_INTERACTION')
 				.unbind('click')
 				.bind('click', function() {
@@ -207,10 +216,12 @@ $(document).ready(function(){
 							}
 							return false;
 						});
+			][(#REM) fin mode_jeu ]
 		</BOUCLE_objetactivationlieu>
 
 		[ (#REM) interactions qui requièrent d'avoir réussi un questionnaire avant ]
 		<BOUCLE_objetactivationjeu(JEUX){id_jeu=#ID_JEU_ACTIVATION}>
+			[(#MODE_JEU|=={'oui'}|?{' ',''})
 			$('.interaction#ID_INTERACTION')
 				.unbind('click')
 				.bind('click', function() {
@@ -226,6 +237,7 @@ $(document).ready(function(){
 							}
 							return false;
 						});
+			][(#REM) fin mode_jeu ]
 		</BOUCLE_objetactivationjeu>
 
 		
@@ -268,6 +280,7 @@ $(document).ready(function(){
 		});
 	
 		
+	[(#MODE_JEU|=={'oui'}|?{' ',''})
 	//vérifier si les lieux doivent être affichés sur le plan
 	//certains doivent avoir été visités pour apparaître
 	$('.lien-plan a.verifier-lien-plan').each(function(){
@@ -283,7 +296,7 @@ $(document).ready(function(){
 		}
 		
 	});
-
+	][(#REM) fin mode_jeu ]
 });
 	
 
@@ -346,7 +359,7 @@ $(document).ready(function(){
 </script>
 </B_imagestransition>
 </BOUCLE_interactionstransitions>
-
+</BOUCLE_visites>
 </BOUCLE_lieux>
 
 [(#REM) Gestion de la molette de la souris pour aller à gauche à droite ]
@@ -382,4 +395,6 @@ $(document).ready(function(){
 
 });
 </script>
+
+
 </B_lieux>
