@@ -190,6 +190,7 @@ $(document).ready(function(){
 			[(#MODE_JEU|=={'oui'}|?{' ',''})
 			[(#TYPE|=={'personnage'}|?{' ',''})  
 				$('.type-personnage#ID_DOCUMENT').append("<img src='#URL_DOCUMENT' width='100%' height='100%' />").css('opacity',1).css('border','none').css('background','none');
+				
 				$('.type-personnage#ID_DOCUMENT').bind('click', function() {
 							return false;
 						});
@@ -197,6 +198,19 @@ $(document).ready(function(){
 				
 			]
 			][(#REM) fin mode_jeu ]
+			
+			[(#REM) éventuellement, une image différente pour le survol a été définie ]
+			<BOUCLE_personnagesurvol(DOCUMENTS){id_document=#ID_PERSONNAGE_SURVOL}>
+				[(#MODE_JEU|=={'oui'}|?{' ',''})
+				[(#TYPE|=={'personnage'}|?{' ',''})  
+				$('.type-personnage#_personnagecourant:ID_DOCUMENT img').bind('mouseover', function(){
+					$(this).attr('src', '#URL_DOCUMENT');
+				}).bind('mouseout', function(){
+					$(this).attr('src', '#_personnagecourant:URL_DOCUMENT');
+				});
+				]
+				][(#REM) fin mode_jeu ]
+			</BOUCLE_personnagesurvol>	
 		</BOUCLE_personnagecourant>
 
 		[ (#REM) interactions qui requièrent un objet pour être actives (il faudra drag and dropper l'objet sur l'interaction depuis le panier ]

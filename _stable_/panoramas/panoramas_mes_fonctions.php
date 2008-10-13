@@ -24,6 +24,14 @@ function memoriser_resultat_jeu($texte, $id_jeu) {
 		}
 	return "Resultat m&eacute;moris&eacute;";
 }
+function remplir_sacoche($texte, $id_objet, $img_src) {
 
+	//mise à jour de la liste des objets ramassés
+	
+	//$objet_ajoute = "<li><div class=\"objet".$id_objet."\"><img src=\"".$img_src."\" /><span style=\"display: none;\">".$id_objet."</span></div></li>";
+	//if ($_COOKIE['objets_ramasses']) setcookie("objets_ramasses", $_COOKIE['objets_ramasses'].$objet_ajoute);
+	//else setcookie("objets_ramasses", $objet_ajoute);
+	return ""; // - Un objet a &eacute;t&eacute; donn&eacute; en r&eacute;compense";
+}
 
 ?>

@@ -104,6 +104,7 @@ $visites_virtuelles_interactions = array(
 		"id_document_cible"	=> "bigint(21)", /* l'interaction pointe vers un document (qui sera affiché en surimpression via thickbox) */
 		"id_visite_cible"	=> "bigint(21)", /* l'interaction ammène dans une autre visite */
 		"id_jeu_cible"	=> "bigint(21)", /* l'interaction est un jeu (nécessite le plugin jeu) */
+		"id_objet_recompense"	=> "bigint(21)", /* si le jeu est réussi, le joueur reçoit un objet en récompense */
 		"url_cible"	=> "text", /*'interaction pointe vers une url */
 		"id_objet"	=> "bigint(21)", /* lorsque l'interaction est un objet, id de l'image de l'objet */
 		"id_personnage"	=> "bigint(21)", /* lorsque l'interaction est un personnage, id de l'image du personnage */

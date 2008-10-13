@@ -82,6 +82,7 @@ function exec_interactions_edit(){
 			$id_document_cible = $row['id_document_cible'];
 			$id_visite_cible = $row['id_visite_cible'];
 			$id_jeu_cible = $row['id_jeu_cible'];
+			$id_objet_recompense = $row['id_objet_recompense'];
 			$url_cible = $row['url_cible'];
 			$id_objet = $row['id_objet'];
 			$id_personnage = $row['id_personnage'];
@@ -138,6 +139,7 @@ function exec_interactions_edit(){
 		$row['id_lieu_activation'] = $id_lieu_activation;
 		$row['id_jeu_activation'] = $id_jeu_activation;
 		$row['id_jeu_cible'] = $id_jeu_cible;
+		$row['id_objet_recompense'] = $id_objet_recompense;
 		$row['id_personnage_survol'] = $id_personnage_survol;
 		$row['texte_avant_activation'] = $texte_avant_activation;
 		$row['texte_apres_activation'] = $texte_apres_activation;
@@ -235,6 +237,7 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$id_jeu_activation = intval($row['id_jeu_activation']);
 	$id_rubrique_cible = intval($row['id_rubrique_cible']);
 	$id_jeu_cible = intval($row['id_jeu_cible']);
+	$id_objet_recompense = intval($row['id_objet_recompense']);
 	$id_personnage_survol = intval($row['id_personnage_survol']);
 	$texte_avant_activation = $row['texte_avant_activation'];
 	$texte_apres_activation = $row['texte_apres_activation'];
@@ -378,6 +381,10 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$out .= "<input type='text' name='id_jeu_cible' id='id_jeu_cible_interaction' class='formo $focus' ".
 		"value=\"".$id_jeu_cible."\" size='5' />\n";
 
+	$out .= "<strong><label for='id_objet_recompense_interaction' id='id_objet_recompense_interaction_label'>"._T("panoramas:id_objet_recompense")."</label></strong> ";
+	$out .= "<input type='text' name='id_objet_recompense' id='id_objet_recompense_interaction' class='formo $focus' ".
+		"value=\"".$id_objet_recompense."\" size='5' />\n";
+
 	$out .= "<strong><label for='id_lieu_cible_interaction' id='id_lieu_cible_interaction_label'>"._T("panoramas:id_lieu_cible")."</label></strong> ";
 	$out .= "<input type='text' name='id_lieu_cible' id='id_lieu_cible_interaction' class='formo $focus' ".
 		"value=\"".$id_lieu_cible."\" size='5' />\n";
@@ -486,7 +493,7 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 						case 'article' : $('#id_article_cible_interaction, #id_article_cible_interaction_label').show(); break;
 						case 'lieu' : $('#id_lieu_cible_interaction, #id_lieu_cible_interaction_label, #x_lieu_cible_interaction, #x_lieu_cible_interaction_label').show(); break;
 						case 'visite' : $('#id_visite_cible_interaction, #id_visite_cible_interaction_label').show(); break;
-						case 'jeu' : $('#id_jeu_cible_interaction, #id_jeu_cible_interaction_label').show(); break;
+						case 'jeu' : $('#id_jeu_cible_interaction, #id_objet_recompense_interaction, #id_objet_recompense_interaction_label, #id_jeu_cible_interaction_label').show(); break;
 						case 'rubrique' : $('#id_rubrique_cible_interaction, #id_rubrique_cible_interaction_label').show(); break;
 						case 'document' : $('#id_document_cible_interaction, #id_document_cible_interaction_label').show(); break;
 						case 'url' : $('#url_cible_interaction, #url_cible_interaction_label').show(); break;

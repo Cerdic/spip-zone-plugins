@@ -21,6 +21,7 @@ function Interactions_update($id_interaction){
 	$id_article_cible = intval(_request('id_article_cible'));
 	$id_rubrique_cible = intval(_request('id_rubrique_cible'));
 	$id_jeu_cible = intval(_request('id_jeu_cible'));
+	$id_objet_recompense = intval(_request('id_objet_recompense'));
 	$id_lieu_cible = intval(_request('id_lieu_cible'));
 	$id_document_cible = intval(_request('id_document_cible'));
 	$id_visite_cible = intval(_request('id_visite_cible'));
@@ -75,6 +76,7 @@ function Interactions_update($id_interaction){
 			"id_lieu_activation="._q($id_lieu_activation).", ".
 			"id_rubrique_cible="._q($id_rubrique_cible).", ".
 			"id_jeu_cible="._q($id_jeu_cible).", ".
+			"id_objet_recompense="._q($id_objet_recompense).", ".
 			"id_personnage_survol="._q($id_personnage_survol).", ".
 			"texte_avant_activation="._q($texte_avant_activation).", ".
 			"texte_apres_activation="._q($texte_apres_activation).", ".
