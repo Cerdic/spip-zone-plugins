@@ -30,12 +30,12 @@ function afficher_boutonsavances($champ, $champhelp, $num_barre) {
 		return produceWharf('tableau_boutonsavances','',$tableau_formulaire);
 }
 
-function TypoEnluminee_BT_toolbox($params) {
+function TypoEnluminee_bt_toolbox($params) {
 	$params['flux'] .= afficher_boutonsavances($params['champ'], $params['help'], $params['num']);
 	return $params;
 }
 
-function TypoEnluminee_BT_caracteres($params) {
+function TypoEnluminee_bt_caracteres($params) {
 	$params['flux'] .= bouton_barre_racc("barre_raccourci('[*','*]',$params[champ], $params[num])", _DIR_BTE_IMG.'miseenevidence.png', _T('enlumtypo:barre_miseenevidence'), $params['help'])
 		. bouton_barre_racc("barre_raccourci('&lt;sup&gt;','&lt;/sup&gt;',$params[champ], $params[num])", _DIR_BTE_IMG.'exposant.png', _T('enlumtypo:barre_exposant'), $params['help'])
 		. bouton_barre_racc("barre_raccourci('&lt;sub&gt;','&lt;/sub&gt;',$params[champ], $params[num])", _DIR_BTE_IMG.'indice.png', _T('enlumtypo:barre_indice'), $params['help'])
@@ -44,7 +44,7 @@ function TypoEnluminee_BT_caracteres($params) {
 }
 
 // bouton qui controle la toolbox 'tableau_boutonsavances'
-function TypoEnluminee_BT_paragraphes($params) {
+function TypoEnluminee_bt_paragraphes($params) {
 	if(!$params['forum']) $params['flux'] .= 
 		bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_boutonsavances']."','');", _DIR_BTE_IMG.'avances.png', _T('enlumtypo:barre_boutonsavances'), $params['help']);
     return $params;
