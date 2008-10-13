@@ -1,8 +1,5 @@
 <?php
 	/**Plugin Inscription 2 avec CFG **/
-	//verifier qu'on a bien cfg
-	if(!function_exists('lire_config')) die("Installez cfg voyons !");
-
 	include_spip('base/inscription2');
 	include_spip('base/abstract_sql');
 
