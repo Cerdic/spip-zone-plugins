@@ -211,8 +211,8 @@ function analyser_backend_spip2spip($rss){
 
 //
 // recuperer rubrique (normalement uniquement) lié à un mot
-function get_id_rubrique($mot) { 
-    $id_group_spip2spip = get_id_groupemot("- spip2spip -");
+function spip2spip_get_id_rubrique($mot) { 
+    $id_group_spip2spip = spip2spip_get_id_groupemot("- spip2spip -");
     $sql = "SELECT id_mot FROM spip_mots WHERE titre='".addslashes($mot)."' AND id_groupe='$id_group_spip2spip'"; // extra plus large utiliser  LIKE ?   
     $result = spip_query($sql);    
     while ($row = spip_fetch_array($result)) {
@@ -229,7 +229,7 @@ function get_id_rubrique($mot) {
 
 //
 // recupère id d'un groupe de mots-clés
-function get_id_groupemot($titre) {
+function spip2spip_get_id_groupemot($titre) {
     $sql = "SELECT id_groupe FROM spip_groupes_mots WHERE titre='".addslashes($titre)."'"; 
     $result = spip_query($sql);
     while ($row = spip_fetch_array($result)) {
@@ -240,7 +240,7 @@ function get_id_groupemot($titre) {
 
 //
 // recupère id d'un mot
-function get_id_mot($titre) {
+function spip2spip_get_id_mot($titre) {
     $sql = "SELECT id_mot FROM spip_mots WHERE titre='".addslashes($titre)."'"; 
     $result = spip_query($sql);
     while ($row = spip_fetch_array($result)) {
@@ -251,7 +251,7 @@ function get_id_mot($titre) {
 
 //
 // recupere id d'un auteur selon son nom ou le creer
-function get_id_auteur($name) {
+function spip2spip_get_id_auteur($name) {
     if (trim($name)=="") return false;    
     $sql = "SELECT id_auteur FROM spip_auteurs WHERE nom='".addslashes($name)."'";
     $result = spip_query($sql);
@@ -266,21 +266,21 @@ function get_id_auteur($name) {
 
 //
 // restaure le formatage des extra
-function convert_extra($texte,$documents) {
-	$texte = convert_ln($texte); 
-	$texte = convert_img($texte,$documents);
+function spip2spip_convert_extra($texte,$documents) {
+	$texte = spip2spip_convert_ln($texte); 
+	$texte = spip2spip_convert_img($texte,$documents);
 	return $texte;
 }
 
 //
 // restaure le formatage des img et doc avec le tableau fourni
-function convert_img($texte,$documents) {
+function spip2spip_convert_img($texte,$documents) {
   $original = $texte;
 	foreach($documents as $k=>$val) {	      
 	   $texte = preg_replace("/__IMG$k(.*?)__/i", "<img$val$1>",$texte);
 	   $texte = preg_replace("/__DOC$k(.*?)__/i", "<doc$val$1>",$texte);
      // changement ? (PHP<5, pas de parametre count)
-    if ($original != $texte) passe_document_mode_vignette($val);  	   
+    if ($original != $texte) spip2spip_passe_document_mode_vignette($val);  	   
   }	
   
   //$texte = preg_replace("/__(IMG|DOC)(.*?)__/i", "",$texte); // nettoyage des codes qui resteraient eventuellement
@@ -290,14 +290,14 @@ function convert_img($texte,$documents) {
 
 //
 // restaure le formatage des ln
-function convert_ln($texte) {
+function spip2spip_convert_ln($texte) {
 	$texte = str_replace("__LN__","\n\n",$texte); 
 	return $texte;
 }
 
 //
 // passe un document en mode vignette (ou autre)
-function passe_document_mode_vignette($id_document,$mode="vignette") {
+function spip2spip_passe_document_mode_vignette($id_document,$mode="vignette") {
    global $table_prefix;
    
    $sql="UPDATE ".$table_prefix."_documents SET mode = '$mode' WHERE id_document='$id_document' LIMIT 1";                        

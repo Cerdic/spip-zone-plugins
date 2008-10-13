@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'back' => 'retour',
 
 // C
-'copy_spip2spip' => 'Spip2Spip: Copie SPIP Ã  SPIP',
+'copy_spip2spip' => 'Spip2Spip: Copie SPIP à  SPIP',
 'config_spip2spip' => 'Configurer',
 
 // F
@@ -23,40 +23,40 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_s2s_3' => 'Ajouter ce site',
 
 // H
-'how_to' => 'Pensez Ã  bien attribuer les mots-cl&eacute;s du groupe - spip2spip - [<a href=\'?exec=mots_tous\'>Voir le groupe</a>]<br /><br />
-- attribuer les mots cl&eacute;s de ce groupe Ã  vos <strong>articles</strong> dont vous voulez partager le contenu avec les autres<br /><br />
-- attribuer les mots cl&eacute;s de ce groupe Ã  vos <strong>rubriques</strong> dans lequel vous voulez importer les articles d\'autres sites utilisant spip2spip dont vous voulez importer Ã  une th&eacute;matique donn&eacute;e.',
+'how_to' => 'Pensez &agrave;  bien attribuer les mots-cl&eacute;s du groupe - spip2spip - [<a href=\'?exec=mots_tous\'>Voir le groupe</a>]<br /><br />
+- attribuez les mots cl&eacute;s de ce groupe aux <strong>articles</strong> dont vous voulez envoyer le contenu vers les autres spip2spip<br /><br />
+- attribuez les mots cl&eacute;s de ce groupe aux <strong>rubriques</strong> dans lequelles vous voulez importer les articles spip2spip li&eacute;s à  une th&eacute;matique donn&eacute;e.',
 
 // I
-'intro_spip2spip' => '<strong>SPIP 2 SPIP</strong><br /><p>Permet de recopier automatiquement des articles d\'un SPIP Ã  l\'autre.</p>',
+'intro_spip2spip' => '<strong>SPIP 2 SPIP</strong><br /><p>Permet de recopier automatiquement des articles d\'un SPIP &agrave;  l\'autre.</p>',
 'install_spip2spip' => 'Installation de SPIP2SPIP',
 'install_spip2spip_1' => 'Cr&eacute;ation de la table SQL',
 'install_spip2spip_2' => 'Ajout des flux backends',
 'install_spip2spip_3' => 'Cr&eacute;ation du groupe de mots cl&eacute;s spip2spip',
-'install_spip2spip_4' => 'ce groupe sert Ã  spip2spip pour d&eacute;signer les articles et rubriques Ã  synchroniser.',
+'install_spip2spip_4' => 'ce groupe sert &agrave;  spip2spip pour d&eacute;signer les articles et rubriques &agrave;  synchroniser.',
 'install_spip2spip_5' => '{{mode d\'emploi:}}
-- attribuer les mots cl&eacute;s de ce groupe aux {{articles}} que vous voulez partager aux sites utilisant spip2spip.
-- attribuer les mots aux {{rubriques}} dans lequel vous voulez importer les articles spip2spip li&eacute; Ã  une th&eacute;matique donn&eacute;e.',
-'install_spip2spip_99' => '<p>Installation de SPIP2SPIP complÃ¨te !</p><a href=\'?exec=spip2spip\'>Retourner sur l\'interface principale de SPIP2SPIP</a>',
-'imported_already' => 'article d&eacute;jÃ  import&eacute;',
+- attribuez les mots clés de ce groupe aux {{articles}} que vous voulez envoyer vers les sites utilisant spip2spip.
+- attribuez les mots clés de ce groupe aux {{rubriques}} dans lequelles vous voulez importer les articles spip2spip liés à  une thématique donnée.',
+'install_spip2spip_99' => '<p>Installation de SPIP2SPIP complète !</p><a href=\'?exec=spip2spip\'>Retourner sur l\'interface principale de SPIP2SPIP</a>',
+'imported_already' => 'article d&eacute;j&agrave;  import&eacute;',
 'imported_new' => 'nouvel article',
 'imported_update' => 'article mis &agrave; jour  ',
 'event_ok' => 'Nouvel Evenement le ',
 'imported_view' => 'consulter l\'article import&eacute;',
-'installed' => 'spip2spip est install&eacute;. cette page ne sert plus Ã  rien</p>',
+'installed' => 'spip2spip est install&eacute;. cette page ne sert plus &agrave;  rien</p>',
 
 // L
-'last_syndic' => 'DerniÃ¨re syndication',
+'last_syndic' => 'Derni&egrave;re syndication',
 
 // N
-'no_target' => 'aucune rubrique li&eacute;e Ã  ce mot cl&eacute;',
+'no_target' => 'aucune rubrique li&eacute;e &agrave;  ce mot cl&eacute;',
 'not_installed' => 'spip2spip n\'est pas encore install&eacute;.<p><a href=\'?exec=spip2spip_install\'>installer spip2spip</a></p>',
 
 // O
 'origin_url' => 'L\'adresse originale de cet article est',
 
 // S
-'site_manage' => 'Gestion des sites Ã  synchroniser',
+'site_manage' => 'Gestion des sites &agrave;  synchroniser',
 'site_available' => 'Sites inscrits',
 'site_add' => 'Ajouter un nouveau site',
 

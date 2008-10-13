@@ -21,7 +21,7 @@ function exec_spip2spip_syndic(){
   //-------------------------------
   global $table_prefix;
   // groupe mot cle "licence" installe ? (contrib: http://www.spip-contrib.net/Filtre-Licence )
-  if (get_id_groupemot("licence"))  $isLicenceInstalled = true; 
+  if (spip2spip_get_id_groupemot("licence"))  $isLicenceInstalled = true; 
                               else  $isLicenceInstalled = false;
                               
   // si cfg dispo, on charge les valeurs
@@ -105,19 +105,19 @@ function exec_spip2spip_syndic(){
                       				$_soustitre = $article['soustitre'];
                       				if($modif['soustitre']!=$_soustitre){$_amodif=true;$_elemmodif .="soustitre, ";}
                       				
-                      				$_descriptif = convert_extra($article['descriptif'],$documents_current_article);
+                      				$_descriptif = spip2spip_convert_extra($article['descriptif'],$documents_current_article);
                       				if($modif['descriptif']!=$_descriptif){$_amodif=true;$_elemmodif .="descriptif, ";}
                       				
-                      				$_chapo = convert_extra($article['chapo'],$documents_current_article);
+                      				$_chapo = spip2spip_convert_extra($article['chapo'],$documents_current_article);
                       				if($modif['chapo']!=$_chapo){$_amodif=true;$_elemmodif .="chapo, "; echo "<hr />";
                       				echo $modif['chapo'];
                       				echo "<hr />";
                       				echo $_chapo;}
                       				
-                      				$_texte = convert_extra($article['texte'],$documents_current_article);
+                      				$_texte = spip2spip_convert_extra($article['texte'],$documents_current_article);
                       				if($modif['texte']!=$_texte){$_amodif=true;$_elemmodif .="texte, ";}
                       				
-                      				$_ps = convert_extra($article['ps'],$documents_current_article);
+                      				$_ps = spip2spip_convert_extra($article['ps'],$documents_current_article);
                       				if($modif['ps']!=$_ps){$_amodif=true;$_elemmodif .="ps, ";}
                       				
                       				$_date =  date('Y-m-d H:i:s',time()); // $article['date'];  // date de la syndication ou date de l'article ?
@@ -188,7 +188,7 @@ function exec_spip2spip_syndic(){
               echo "<li>[<span style='color:#090'>"._T('spiptospip:imported_new')."</span>] $current_titre<br />\n";
               
               // on cherche la rubrique destination
-              $target = get_id_rubrique($article['keyword']);
+              $target = spip2spip_get_id_rubrique($article['keyword']);
               if (!$target) {
                   // pas de destination
                   echo "<span style='color:#009'>"._T('spiptospip:no_target')." <strong>".$article['keyword']."</strong></span></li>\n";                    
@@ -259,10 +259,10 @@ function exec_spip2spip_syndic(){
                   $_surtitre = addslashes($article['surtitre']);
               		$_titre = addslashes($article['titre']);
               		$_soustitre = addslashes($article['soustitre']);
-              		$_descriptif = addslashes(convert_extra($article['descriptif'],$documents_current_article));
-              		$_chapo = addslashes(convert_extra($article['chapo'],$documents_current_article));
-              		$_texte = addslashes(convert_extra($article['texte'],$documents_current_article));
-              		$_ps = addslashes(convert_extra($article['ps'],$documents_current_article));
+              		$_descriptif = addslashes(spip2spip_convert_extra($article['descriptif'],$documents_current_article));
+              		$_chapo = addslashes(spip2spip_convert_extra($article['chapo'],$documents_current_article));
+              		$_texte = addslashes(spip2spip_convert_extra($article['texte'],$documents_current_article));
+              		$_ps = addslashes(spip2spip_convert_extra($article['ps'],$documents_current_article));
               		$_date =  date('Y-m-d H:i:s',time()); // $article['date'];  // date de la syndication ou date de l'article ?
               		$_lang =  addslashes($article['lang']);
               		$_id_rubrique = $target;            		          		
@@ -292,7 +292,7 @@ function exec_spip2spip_syndic(){
   				        if ($_id_auteur) {
   				            $auteurs = explode(", ",$_id_auteur);
   				            foreach($auteurs as $auteur) {
-  				                $id_auteur = get_id_auteur($auteur);
+  				                $id_auteur = spip2spip_get_id_auteur($auteur);
   				                if ($id_auteur) {  				                
         				            $sql="INSERT INTO ".$table_prefix."_auteurs_articles (id_auteur, id_article) VALUES ($id_auteur, $id_nouvel_article)";
         				            spip_query($sql);                              				            
@@ -335,7 +335,7 @@ function exec_spip2spip_syndic(){
                                        
                   // .... dans le groupe mot "licence" ?
                   if ($_licence !="" && isLicenceInstalled) {                              		
-                      $id_mot = get_id_mot($_licence);
+                      $id_mot = spip2spip_get_id_mot($_licence);
                       if ($id_mot) {
                         $sql = "INSERT INTO ".$table_prefix."_mots_articles (id_mot, id_article) VALUES ($id_mot,$id_nouvel_article)";
                         spip_query($sql);                       
