@@ -8,7 +8,7 @@
 <description>
 Ce plugin permet d'utiliser [FeedBurner->http://www.feedburner.com] sur votre site, c'est-&agrave;-dire de proposer aux internautes de {{s'abonner par mail et/ou flux RSS}}, &agrave; leur choix, simplement, pour recevoir les derniers articles du site, proprement.
 
-Mise en service : Dans FeedBurner, d&eacute;clarez votre backend (avec la variable <code>&var_feedburner=oui</code>). Configurez ensuite ce plugin avec l'identifiant FeedBurner du&nbsp;flux. La balise <code>#FORMULAIRE_FEEDBURNER</code> affichera le formulaire d'abonnement dans vos squelettes.
+Mise en service : Dans FeedBurner, d&eacute;clarez votre backend (avec la variable <code>&amp;var_feedburner=oui</code>). Configurez ensuite ce plugin avec l'identifiant FeedBurner du&nbsp;flux. La balise <code>#FORMULAIRE_FEEDBURNER</code> affichera le formulaire d'abonnement dans vos squelettes.
 </description>
 <lien>http://www.feedburner.com</lien>
 <prefix>feedburner</prefix>
