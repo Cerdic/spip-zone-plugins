@@ -43,7 +43,7 @@ EOS;
 
 function grappes_inserer_javascript($flux){
 	include_spip('selecteurgenerique_fonctions');
-	$flux = selecteurgenerique_verifier_js($flux);
+	$flux .= selecteurgenerique_verifier_js($flux);
 	
 	$js = grappes_inserer_js_recherche_objet();
 	$js = "<script type='text/javascript'><!--\n$js\n// --></script>\n";
