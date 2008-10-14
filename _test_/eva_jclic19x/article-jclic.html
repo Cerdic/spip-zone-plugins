@@ -1,0 +1,131 @@
+﻿<BOUCLE_principale(ARTICLES){id_article}>
+	<INCLURE{fond=inc_entete-meta}{id_article}{lang}>
+	</head>
+	<body>
+	<div id="Page">
+	
+		[(#REM) Entête de la page]
+		<INCLURE{fond=inc_entete-page}{id_article}{id_rubrique}>
+		<INCLURE{fond=inc_meta-jclic}>
+
+		[(#REM) Conteneur]
+		<div id="Conteneur">
+		
+			[(#REM) Inclusion du menu ]
+			<div id="Menu">
+
+				<B_article_jclic>
+				<div class="bloc">
+				<h3 class="titre">Liste des activités Jclic</h3>
+				
+				<ul>
+				<div class="MenuPaginationHaut"><em>[&nbsp;(#PAGINATION)]</em></div>
+				
+				<BOUCLE_article_jclic(ARTICLES){titre_mot=jclic}{pagination 10}>
+					<li [class="(#COMPTEUR_BOUCLE|alterner{'un','deux'})"]>
+						<a href="#URL_ARTICLE" [ class="(#EXPOSE)"]>[(#TITRE|supprimer_numero)]</a><br/>
+						<em>#DESCRIPTIF</em>
+					</li>
+				</BOUCLE_article_jclic>
+				<div class="MenuPaginationBas"><em>Il y a au total #GRAND_TOTAL activité(s).<br /> Ce bloc en affiche #TOTAL_BOUCLE</em></div>
+				</ul>
+				</div>
+				</B_article_jclic>
+			
+			[(#REM) Inclusion du compteur graphique si le plugin est activé ]
+			[(#CONFIG{plugin}|match{COMPTEURGRAPHIQUE}|?{' '})<INCLURE{fond=inc_compteurgraphique-article-normal}{id_article}>] 
+
+			</div>
+		
+			[(#REM) Contenu de la page]
+			<div id="Contenu">
+
+#DEBUT_SURLIGNE
+
+<div class="bloc2">
+
+[(#REM) Liste des Documents joints  ]
+	<BOUCLE_activites_jclic(DOCUMENTS){id_article}{mode=document} {extension = zip}>
+		<center>
+
+			<p></p>
+			<script language="JavaScript">
+			setJarBase('http://clic.xtec.net/dist/jclic');
+			setExitUrl('');
+			writePlugin('#URL_SITE_SPIP/[(#URL_DOCUMENT)]', '455px', '435px');
+			</script>
+</center>
+		<p></p>
+
+		[(#REM) Auteurs et dates]
+	<ul id="AuteursDates">
+		<B_auteurs>
+		<li class="premier"><strong><:par:></strong> <BOUCLE_auteurs(AUTEURS){id_article}{par nom}{", "}>
+				<a href="#URL_AUTEUR">#NOM</a></BOUCLE_auteurs></li>
+		</B_auteurs>
+		
+		[<li><strong><:publie:></strong>
+			(#DATE|affdate_jourcourt)</li>]
+	</ul>
+
+		[<div class="">(#DESCRIPTIF)</div>]
+		<p></p>
+	
+		[<div class="">(#TEXTE)</div>]
+		<p></p>
+
+
+
+			<a href="#" title="Lancer l'activité" onclick="openBrWindow('spip.php?page=jclic&id_document=#ID_DOCUMENT','#TITRE','resizable=yes,fullscreen')" type="#MIME_TYPE">
+			Voir en plein écran <img src="#URL_SITE_SPIP/plugins/eva_jclic/img_pack/jclic_aqua.png" width="30" height="30" border="0" alt="">
+			</a>
+		<p></p>	
+		<div class=""><a href="#URL_DOCUMENT" title="Télécharger l'activité ">Télécharger l'activité <img src="#URL_SITE_SPIP/plugins/eva_jclic/img_pack/install.png" border="0" alt=""></a></div>
+
+
+	</BOUCLE_activites_jclic>
+
+</div> [(#REM) Fin du bloc2 ]
+
+[(#REM)  Post scriptum ]	
+	[<div class="divers">
+		<h4><:post_scriptum:></h4>
+		<div class="contenu">(#PS)</div>
+	</div>]
+	
+[(#REM)  Notes de bas de page ]
+	[<div class="divers">
+		<h4><:notes:></h4>
+		<div class="contenu">(#NOTES)</div>
+	</div>]
+	
+
+
+#FIN_SURLIGNE
+
+[(#REM) pétition de l'article sous forme de signatures ]
+				<div id="bloc">
+					<BOUCLE_signatures_decompte(SIGNATURES) {id_article} >
+					</BOUCLE_signatures_decompte>
+					<h3>[il y a (#TOTAL_BOUCLE) signature(s) &agrave; cette p&eacute;tition.]</h3>
+					<dl>
+					<BOUCLE_signatures(SIGNATURES) {id_article} {par date} {inverse} >
+						<dt>Par <strong>#NOM</strong>[ (site : <a href="#URL_SITE">(#NOM_SITE)</a>)]<em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em></dt>
+						[<dd>(#MESSAGE)</dd>]
+					</BOUCLE_signatures>
+					</dl>
+					</B_signatures_decompte>
+				</div>
+								
+				
+				[(#REM) Inclure le forum ]
+				<INCLURE{fond=inc_forum}{id_article}{lang}>	
+			</div>
+			
+			<div class="nettoyeur"></div>
+		</div>
+		<INCLURE{fond=inc_pied}{lang}>
+	</div>
+</body>
+</html>
+</BOUCLE_principale>

@@ -1,0 +1,34 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Lecteur d'activit&eacute;s Jclic
+	</nom>
+	<auteur>
+    Samuel Bocharel, &eacute;quipe de d&eacute;veloppement Eva-WEB.<br/>
+	 <a rel="Spip-edu" target="_blank" href="http://spip-edu.edres74.net">http://spip-edu.edres74.net</a><br/>
+    Cette r&eacute;alisation est mise &agrave; disposition sous licence GNU GPL.
+    <br />&nbsp;<br /><div style="text-align:center;"><a rel="licence" target="_blank" href="http://www.april.org/gnu/gpl_french.html"><img alt="Licence GNU GPL" style="border-width:0" width="80" height="100" src="http://www.fsf.org/graphics/philosophical-gnu-sm.jpg"/></a></div>
+    Merci &agrave; l'&eacute;quipe de <a rel="Clicapplic" target="_blank" href="http://jclic.clicapplic.net/">ClicApplic</a>
+	</auteur>
+	<version>
+	0.2
+	</version>
+    <version_base>0.1</version_base>
+	<etat>
+	test
+	</etat>
+    <description>
+    Permet de lire des activit&eacute;s Jclic &agrave; partir de spip.<br/>
+    A utiliser plut&ocirc;t avec un affichage en 100%.<br/>
+    Cr&eacute;er le mot-cl&eacute; "jclic". Dans un article, compl&eacute;tez le titre, le descriptif et le texte puis ajouter
+    l'activit&eacute; au format .jclic.zip en pièce jointe ("joindre un document" après avoir enregistr&eacute; l'article).
+    </description>
+    <prefix>
+    evajclic
+    </prefix>
+
+    <pipeline>
+        <nom>ajouter_boutons</nom>
+        <action>AjouterBoutons</action>
+		<inclure>eva_jclic_pipeline.php</inclure>
+    </pipeline>
+</plugin>
