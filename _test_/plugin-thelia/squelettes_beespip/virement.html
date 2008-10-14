@@ -52,14 +52,7 @@ if (($auteur_session) || (#CONFIG{spipgen_intranet}=='non')) {
               </div><!-- /blocarrondi -->
               <div class="espacebloc">&nbsp;</div>
 
-			[(#REM) contenu de la page ]
-			<:spipthelia:reglement_virement_message:>
-					
-			<THELIA_cmd type="COMMANDE" ref="THELIA-COMMANDE_REF">	
-			<:spipthelia:numero_commande:> : THELIA-REF <br />
-			<:spipthelia:date:> : THELIA-DATE<br />
-			<:spipthelia:total:> : THELIA-TOTCMDPORT &euro;<br />	
-			</THELIA_cmd>
+			<INCLURE{fond=inc/inc-virement}>
     </div></div>
 
 

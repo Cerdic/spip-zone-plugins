@@ -51,31 +51,7 @@ if (($auteur_session) || (#CONFIG{spipgen_intranet}=='non')) {
                 <div class="babas"><div><div></div></div></div>
               </div><!-- /blocarrondi -->
               <div class="espacebloc">&nbsp;</div>
-
-			[(#REM) Contenu de la page ]
-
-			<table>
-			<thead>
-				<tr>
-					<th class="enteteTableau"><:spipthelia:numero_commande:></td>
-    					<th class="enteteTableau"><:spipthelia:date_commande:></td>
-    					<th class="enteteTableau"><:spipthelia:montant:></td>
-   					<th class="enteteTableau"><:spipthelia:statut:></td>
-   					<th class="enteteTableau"><:spipthelia:voir_commande:></td>
-  				</tr>
-			</thead>
-			<tbody>
-			<THELIA_cmd type="COMMANDE" client="THELIA-CLIENT_ID">
-				<tr>
-    					<td class="ligneTableau"><span class="TexteColonne100">THELIA-REF</span></td>
-    					<td class="ligneTableau">THELIA-DATE</td>
-    					<td class="ligneTableau"><span class="TexteColonne100">THELIA-TOTCMDPORT</span></td>
-   					<td class="ligneTableau"><span class="TexteColonne100">THELIA-STATUT</span></td>
-   					<td class="ligneTableau"><a href="#URL_PAGE{commande_detail,commande=THELIA-REF}"><:spipthelia:voir_commande:></a></td>
-  				</tr>
-			</THELIA_cmd>
-			</tbody>
-			</table>
+			<INCLURE{fond=inc/inc-commande_visualiser}>
     </div></div>
 
 

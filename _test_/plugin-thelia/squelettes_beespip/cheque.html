@@ -54,15 +54,7 @@ if (($auteur_session) || (#CONFIG{spipgen_intranet}=='non')) {
 
 			[(#REM) contenu de la page ]
 	
-			<:spipthelia:texte_paiement_cheque:>
-			<br />
-			<br />
-				
-			<THELIA_cmd type="COMMANDE" ref="THELIA-COMMANDE_REF">	
-			N&deg; DE COMMANDE : THELIA-REF <br />
-			DATE : THELIA-DATE<br />
-			TOTAL : THELIA-TOTCMDPORT &euro;<br />	
-			</THELIA_cmd>
+			<INCLURE{fond=inc/inc-cheque}>
     </div></div>
 
 

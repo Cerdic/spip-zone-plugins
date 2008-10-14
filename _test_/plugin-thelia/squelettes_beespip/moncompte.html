@@ -51,15 +51,7 @@ if (($auteur_session) || (#CONFIG{spipgen_intranet}=='non')) {
                 <div class="babas"><div><div></div></div></div>
               </div><!-- /blocarrondi -->
               <div class="espacebloc">&nbsp;</div>
-			[(#REM) Contenu de la page ]
-
-			<div class="sousTitrePage">
-				<h3><:spipthelia:visualiser_coordonnees_commandes:></h3>
-			</div>
-
-			<a href="#URL_PAGE{compte_modifier}"><:spipthelia:modifier_info_perso:> <br />
-			</a><a href="#URL_PAGE{livraison_adresse}"><:spipthelia:modifier_adresse_livraison:><br />
-			</a><a href="#URL_PAGE{commande_visualiser}"><:spipthelia:visualiser_commandes:></a>
+			<INCLURE{fond=inc/inc-moncompte}>
     </div></div>
 
 

@@ -53,72 +53,7 @@ if (($auteur_session) || (#CONFIG{spipgen_intranet}=='non')) {
               </div><!-- /blocarrondi -->
               <div class="espacebloc">&nbsp;</div>
 
-				[(#REM) Détail de la commande ]
-
-				<THELIA_verifpay type="COMMANDE" ref="THELIA-COMMANDE_REF" statut="paye">					
-				<div class="sousTitrePage">
-				<h3><:spipthelia:numero_facture:> : THELIA-FACTURE / <:spipthelia:date_facture:> : THELIA-DATE</h3>
-				</div>
-				</THELIA_verifpay>
-				
-				<table>
-            			<thead> 
-				<tr>
-    					<th class="enteteTableau"><:spipthelia:produit_et_reference:>  </th>
-    					<th class="enteteTableau"><:spipthelia:prix_unitaire:> </th>
-    					<th class="enteteTableau"><:spipthelia:quantite:></th>
-   					<th class="enteteTableau"><:spipthelia:total:></th>
-				</tr>
-				</thead> 
-				<tbody>
-		
-				<THELIA_venteprod type="VENTEPROD" commande="THELIA-ID">
-				<tr>
-					<td class="ligneTableau">THELIA-TITRE - THELIA-REF </td>
-    					<td class="ligneTableau">THELIA-PRIXU</td>
-    					<td class="ligneTableau">THELIA-QUANTITE</td>
-   					<td class="ligneTableau">THELIA-TOTALPROD</td>
-				</tr>
-				</THELIA_venteprod>
-			
-				<tr>
-					<td></td>
-					<td></td>
-					<td class="footerTableau"><:spipthelia:total:> : </td>
-    					<td class="footerTableau">THELIA-TOTALCMD</td>
-			  	</tr>
-			
-				<tr>
-					<td></td>
-					<td></td>
-					<td class="enteteTableau"><:spipthelia:remise:> : </td>
-    					<td class="enteteTableau">THELIA-REMISE</td>
-				</tr>
-			
-				<tr>
-					<td></td>
-					<td></td>
-					<td class="enteteTableau"><:spipthelia:frais_livraison:>  : </td>
-    					<td class="enteteTableau">THELIA-PORT</td>
-			  	</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td class="footerTableau"><:spipthelia:total:> : </td>
-    					<td class="footerTableau">THELIA-TOTCMDPORT</td>
-			  	</tr>
-				</tbody>
-		    		</table>
-
-				<div class="sousTitrePage">
-				  	<h3><:spipthelia:statut:> : THELIA-STATUT</h3>
-				</div>
-
-				<THELIA_verifpay type="COMMANDE" ref="THELIA-COMMANDE_REF" statut="paye">			 
-				<div class="boutonMonCompteContenu">
-				<a href="client/pdf/facture.php?ref=THELIA-REF"><:spipthelia:visualiser_pdf:> </a>
-				</div>
-				</THELIA_verifpay>	
+				<INCLURE{fond=inc/inc-commande_detail}>
     </div></div>
 
 
