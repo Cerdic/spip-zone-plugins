@@ -10,86 +10,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 require _DIR_RESTREINT . 'inc/afficher_objets.php';
 
-function afficher_articles_boucle($row, &$tous_id, $afficher_auteurs, $afficher_langue, $langue_defaut, $voir_logo)
-{
-  global $connect_id_auteur, $dir_lang, $options, $spip_lang_right;
-
-	$vals = '';
-
-	$id_article = $row['id_article'];
-	$tous_id[] = $id_article;
-	$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
-	$id_rubrique = $row['id_rubrique'];
-	$date = $row['date'];
-	$statut = $row['statut'];
-	if ($lang = $row['lang']) changer_typo($lang);
-	$descriptif = $row['descriptif'];
-	if ($descriptif) $descriptif = ' title="'.attribut_html(typo($descriptif)).'"';
-	$petition = $row['petition'];
-
-	if ($afficher_auteurs) {
-		$les_auteurs = "";
-		$result_auteurs = spip_query("SELECT auteurs.id_auteur, nom, messagerie, login, bio FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article=$id_article AND auteurs.id_auteur=lien.id_auteur");
-
-
-		while ($row = spip_fetch_array($result_auteurs)) {
-			$id_auteur = $row['id_auteur'];
-			$nom_auteur = typo($row['nom']);
-			$auteur_messagerie = $row['messagerie'];
-
-			if ($bio = texte_backend(supprimer_tags(couper($row['bio'],50))))
-				$bio = " title=\"$bio\"";
-
-
-			$les_auteurs .= ", <a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "'$bio>$nom_auteur</a>";
-
-		}
-		$les_auteurs = substr($les_auteurs, 2);
-	}
-
-	// La petite puce de changement de statut
-	$vals[] = puce_statut_article($id_article, $statut, $id_rubrique);
-
-	// Le titre (et la langue)
-	$s = "<div>";
-
-	if (acces_restreint_rubrique($id_rubrique))
-		$s .= http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'));
-
-	$s .= "<a href='" . generer_url_ecrire("articles","id_article=$id_article") .
-		"'$descriptif$dir_lang style=\"display:block;\">";
-
-	if ($voir_logo) {
-		$logo_f = charger_fonction('chercher_logo', 'inc');
-		if ($logo = $logo_f($id_article, 'id_article', 'on'))
-			if ($logo = decrire_logo("id_article", 'on', $id_article, 26, 20, $logo))
-				$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
-	}
-
-	$s .= typo($titre);
-	if ($afficher_langue AND $lang != $langue_defaut)
-		$s .= " <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>";
-	if ($petition) $s .= " <font size=1 color='red'>"._T('lien_petitions')."</font>";
-	$s .= "</a>";
-	$s .= "</div>";
-	
-	$vals[] = $s;
-
-	// Les auteurs
-	if ($afficher_auteurs) $vals[] = $les_auteurs;
-
-	// La date
-	$vals[] = affdate_jourcourt($date);
-
-	// Le numero (moche)
-	if ($options == "avancees") {
-		$vals[] = "<b>"._T('info_numero_abbreviation')."$id_article</b>";
-	}
-	
-
-	return $vals;
-}
-
 									  
 function afficher_liste_articles($choses,$nb_aff=20)
 {
@@ -323,41 +243,26 @@ function afficher_liste_messages($choses,$nb_aff=20) {
 
 function afficher_liste_auteurs($choses,$nb_aff=20) {
   
-  $deb_aff = intval(_request('t_debut'));
+  $afficher_objets = charger_fonction('afficher_objets','inc');
+  echo $afficher_objets('auteur', 'Auteurs', 
+			array('SELECT' => 'id_auteur, nom, login, email, extra, statut',
+			      'FROM' => 'spip_auteurs as auteurs',
+			      'WHERE' => sql_in('auteurs.id_auteur', $choses)),
+			'formater_auteur_mots');
+}
 
-  $query = 'SELECT id_auteur, nom, login, email, extra, statut FROM spip_auteurs as auteurs WHERE auteurs.id_auteur'.((count($choses))?(' IN('.calcul_in($choses).')'):''). " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : "99999");
-  
-  $tranches =  afficher_tranches_requete(count($choses), 2,'debut',false,$nb_aff);
-	
-  echo "<div style='height: 12px;'></div>";
-  echo "<div class='liste'>";
-  bandeau_titre_boite2(_T('auteurs'),"auteur-24.gif");
-  
-  echo afficher_liste_debut_tableau();
-  
-  if(count($choses) >= $nb_aff) echo $tranches;
+function formater_auteur_mots($row, $own='')
+{
+	static $formater = NULL;
+	static $cpt = 0;
+	if (!$formater)
+		$formater = charger_fonction('formater_auteur', 'inc');
 
-  $result = spip_query($query);
-  $i = 0;
-  $table = array();
-  while ($row = spip_fetch_array($result)) {
-	$i++;
-	$crap = array();
-	$vals = affiche_auteur_boucle($row,$crap);
-	
+	$cpt++;
 	$id_auteur = $row['id_auteur'];
-	
-	$vals[] = "<input type='checkbox' name='choses[]' value='$id_auteur' id='id_chose$i'/>";
-		
-	$table[] = $vals;
-  }
-  sql_free($result);
-
-  $largeurs = array('', 100);
-  $styles = array('arial2', 'arial1');
-  echo afficher_liste($largeurs, $table, $styles);
-  
-  echo afficher_liste_fin_tableau();
+	list($s, $mail, $nom, $w, $p) = $formater($id_auteur);
+	$in = "<input type='checkbox' name='choses[]' value='$id_auteur' id='id_chose$cpt' />";
+	return array($s, $mail, $nom, $w, $in);
 }
 
 function afficher_liste_groupes_mots($choses, $nb_aff=20) {
