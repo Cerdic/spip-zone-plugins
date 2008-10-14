@@ -57,6 +57,21 @@ _
 	    <action>I2_cfg_form</action>
 	    <inclure>echoppe_pipeline.php</inclure>
 	</pipeline>
+	<pipeline>
+		   <nom>declarer_tables_principales</nom>
+		   <inclure>base/tables_principales.php</inclure>
+		   <action>tables_principales</action>
+	</pipeline>
+	<pipeline>
+		   <nom>declarer_tables_auxiliaires</nom>
+		   <inclure>base/tables_auxiliaires.php</inclure>
+		   <action>tables_auxiliaires</action>
+	</pipeline>
+	<pipeline>
+		   <nom>declarer_tables_interfaces</nom>
+		   <inclure>base/tables_interfaces.php</inclure>
+		   <action>tables_interfaces</action>
+	</pipeline>
 	<bouton id='echoppe' parent='naviguer'>
 		<icone>images/logo.png</icone>
 		<titre>Echoppe</titre>

@@ -4,6 +4,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 function patch_05to06(){
+	include_spip('base/create');
+	include_spip('base/abstract_sql');
 	spip_log("Mise à jour de echoppeBD -> 0.6");
 	$sql_ajout_id_secteur = "ALTER TABLE spip_echoppe_categories ADD id_secteur BIGINT NOT NULL AFTER id_parent ;";
 	$res_ajout_id_secteur = spip_query($sql_ajout_id_secteur);
@@ -12,6 +14,8 @@ function patch_05to06(){
 }
 
 function patch_06to07(){
+	include_spip('base/create');
+	include_spip('base/abstract_sql');
 	spip_log("Mise à jour de echoppeBD -> 0.7");
 	$sql_ajout_id_secteur = "ALTER TABLE spip_echoppe_paniers ADD statut VARCHAR(10) NOT NULL AFTER token_panier ;";
 	$res_ajout_id_secteur = spip_query($sql_ajout_id_secteur);
@@ -31,6 +35,8 @@ function patch_06to07(){
 }
 
 function patch_07to08(){
+	include_spip('base/create');
+	include_spip('base/abstract_sql');
 	spip_log("Mise à jour de echoppeBD -> 0.8");
 	$sql_rename_table = "RENAME TABLE spip_echoppe_options_descriptifs TO spip_echoppe_options_descriptions;";
 	$res_rename_table = spip_query($sql_rename_table);
@@ -39,6 +45,8 @@ function patch_07to08(){
 }
 
 function patch_08to09(){
+	include_spip('base/create');
+	include_spip('base/abstract_sql');
 	spip_log("Mise à jour de echoppeBD -> 0.9");
 	$sql_reparer_primary_2 = "ALTER TABLE `spip_echoppe_options` DROP INDEX `id_option` ";
 	$res_reparer_primary_2 = spip_query($sql_reparer_primary_2);
@@ -51,6 +59,8 @@ function patch_08to09(){
 }
 
 function patch_09to10(){
+	include_spip('base/create');
+	include_spip('base/abstract_sql');
 	spip_log("Mise à jour de echoppeBD -> 1.0");
 	
 	// Il faut ecrire le code de la maj si on veut garder la compatibilité avec les versions de developpement ...
