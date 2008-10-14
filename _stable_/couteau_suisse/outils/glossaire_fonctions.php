@@ -23,7 +23,7 @@ function glossaire_groupes() {
 // TODO : QUERY pour SPIP 2.0
 
 // Compatibilite pour generer_url_mot(), mais deprecie sous SPIP 2.0
-function cs_foo_mot($id, $foo='') { return generer_url_mot($gloss_id); } 
+function cs_foo_mot($id, $foo='') { return generer_url_mot($id); } 
 
 // surcharge possible de la fonction d'url pour le clic sur les mots trouves : 
 //   exemple pour annuler le lien : function my_generer_url_entite($id, $foo='') { return 'javascript:;'; }
