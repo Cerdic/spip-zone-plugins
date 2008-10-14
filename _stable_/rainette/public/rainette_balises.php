@@ -1,5 +1,7 @@
 <?php
 function balise_RAINETTE_INFOS($p) {
+	include_spip('inc/rainette_utils');
+
 	$code_meteo = interprete_argument_balise(1,$p);
 	$code_meteo = isset($code_meteo) ? str_replace('\'', '"', $code_meteo) : '""';
 	$type_info = interprete_argument_balise(2,$p);
