@@ -1,0 +1,58 @@
+
+
+
+
+[(#PARAMETRES_FORUM|?) Cette balise (invisible) provoque le recalcul du forum la premiere fois qu'un message est poste (cf. inc/invalideur). ]
+
+[(#REM) Nombre total de messages ]
+<BOUCLE_decompte(FORUMS) {id_syndic} [{titre=(#TITRE|md5)}] {plat}></BOUCLE_decompte>[<h2 class="forum-decompte">(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})
+[(#TOTAL_BOUCLE|=={1}|?{<:message:>,<:messages_forum:>})]</h2>]<//B_decompte>
+
+[(#REM) Messages du forum ]
+<B_forums>
+<ul class="forum">
+
+	<BOUCLE_forums(FORUMS) {id_syndic} [{titre=(#TITRE|md5)}] {par date}>
+
+	<li class="forum-fil">
+
+		<div class="forum-message">
+			<div class="forum-chapo">
+				<small>[(#DATE|affdate)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM|couper{80})]</small>
+			</div>
+			<div class="forum-texte">
+				[(#TEXTE|lignes_longues)]
+				[<p class="forum-lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+				[<p class="forum-repondre-message"><a href="spip.php?page=forum-pmb&(#PARAMETRES_FORUM{#SELF})&id_syndic_article=#ID_SYNDIC_ARTICLE[&titre=(#TITRE|md5)]"><:repondre_message:></a></p>]
+			</div>
+		</div>
+
+		<B_forums_fils>
+		<ul>
+			<BOUCLE_forums_fils(FORUMS){id_parent}{par date}>
+
+			<li>
+				<div class="forum-message">
+					<div class="forum-chapo">
+						<small>[(#DATE|affdate)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM|couper{80})]</small>
+					</div>
+					<div class="forum-texte">
+						[(#TEXTE|lignes_longues)]
+						[<p class="forum-lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+						[<p class="forum-repondre-message"><a href="spip.php?page=forum-pmb&(#PARAMETRES_FORUM{#SELF})&id_syndic_article=#ID_SYNDIC_ARTICLE[&titre=(#TITRE|md5)]"><:repondre_message:></a></p>]
+					</div>
+				</div>
+
+				<BOUCLE_Forums_Boucle(boucle_forums_fils)></BOUCLE_Forums_Boucle>
+
+			</li>
+
+			</BOUCLE_forums_fils>
+		</ul>
+		</B_forums_fils>
+
+	</li>
+	</BOUCLE_forums>
+
+</ul>
+</B_forums>

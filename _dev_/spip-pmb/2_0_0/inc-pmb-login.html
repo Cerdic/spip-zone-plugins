@@ -1,0 +1,28 @@
+#CACHE{0}
+#HTTP_HEADER{"Cache-Control: no-store, no-cache, must-revalidate"}
+#HTTP_HEADER{"Pragma: no-cache"}
+
+<BOUCLE_flux_pmb(SYNDIC_ARTICLES_PMB){0,1}>
+
+	<h2 class="acces-compte">> accéder à votre compte de lecteur</h2>
+	<B_ESSAI>
+		<BOUCLE_ESSAI(AUTEURS_PMB){id_auteur=#SESSION{id_auteur}}>
+		<form action="#PMB_URL_BASEempr.php" target="_blank" method="post">
+			<div class="spip_bouton">
+				<input name="ok" class="spip_bouton" value="Ok" type="submit" />
+			</div>
+			<input name="login" size="14" value="#PMB_ID" onfocus="this.value='';" type="text" />
+			<input name="password" size="8" value="#PMB_PASSWD" onfocus="this.value='';" type="password" />
+		</form>
+		</BOUCLE_ESSAI>
+	</B_ESSAI>
+		<form action="#PMB_URL_BASEempr.php" target="_blank" method="post">
+			<div class="spip_bouton">
+				<input name="ok" class="spip_bouton" value="Ok" type="submit" />
+			</div>
+			<input name="login" size="14" value="" onfocus="this.value='';" type="text" />
+			<input name="password" size="8" value="" onfocus="this.value='';"  type="password" />
+		</form>
+	<//B_ESSAI>
+
+</BOUCLE_flux_pmb>
