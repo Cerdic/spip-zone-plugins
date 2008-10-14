@@ -5,6 +5,12 @@
 
 
 TO-DO:
+- exporter liste abonnés. Voir si possibilité ajouter champ ('fonction' si auteurs_details installé)
+- corriger css pour http://localhost:8206/ecrire/?exec=spiplistes_liste_gerer sous IE6
+- préciser dans /ecrire/?exec=spiplistes_listes_toutes les listes sans patron
+- revoir formulaire de recherche d'abonné/invité dans la page /ecrire/?exec=spiplistes_liste_gerer, boite "Les abonnés à cette liste"
+- /ecrire/?exec=spiplistes_courrier_gerer, prévisu texte seul n'apparait pas sous IE6
+- /ecrire/?exec=spiplistes_liste_gerer, plier/déplier programmer envoi auto semble ne pas fonctionner sous IE6
 - Sur 193: les admins tt rubriques n'ont pas d'accès à la maintenance (?). A corriger.
 - revoir liste auteurs, l'ajax n'a pas le bon retour (ex.: fleche droite perd la page d'appel, du coup le clic suivant sur th de tri se perd)
 - revoir spiplistes_abonne_edit (desabonne, abonne, format ..., pas tres clair). Voire supprimer cette page et renvoyer son formulaire corrige sur auteur_infos.
