@@ -118,39 +118,39 @@ function action_mots_partout() {
 		$from = array('spip_mots');
 		$select = array('id_groupe');
 		$where = array("id_mot = $m");
-		$res = spip_abstract_select($select,$from,$where);
+		$res = sql_select($select,$from,$where);
 		$unseul = false;
 		$id_groupe = 0;
 		$titre_groupe = '';
-		if($row = spip_abstract_fetch($res)) {
-		  spip_abstract_free($res);
+		if($row = sql_fetch($res)) {
+		  sql_free($res);
 		  $from = array('spip_groupes_mots');
 		  $select = array('unseul','titre');
 		  $id_groupe = $row['id_groupe'];
 		  $where = array("id_groupe = $id_groupe");
-		  $res = spip_abstract_select($select,$from,$where);
-		  if($row = spip_abstract_fetch($res)) {
+		  $res = sql_select($select,$from,$where);
+		  if($row = sql_fetch($res)) {
 			$unseul = ($row['unseul'] == 'oui');
 			$titre_groupe = $row['titre'];
 		  }
 		}
-		spip_abstract_free($res);
+		sql_free($res);
 		foreach($choses as $d) {
 		  if($unseul) {
 			$from = array("spip_mots_$nom_chose",'spip_mots');
 			$select = array("count('id_mot') as cnt");
 			$where = array("spip_mots.id_groupe = $id_groupe","spip_mots_$nom_chose.id_mot = spip_mots.id_mot","spip_mots_$nom_chose.$id_chose = $d");
 			$group = "spip_mots_$nom_chose.$id_chose";
-			$res = spip_abstract_select($select,$from,$where,$group);
-			if($row = spip_abstract_fetch($res)) {	
+			$res = sql_select($select,$from,$where,$group);
+			if($row = sql_fetch($res)) {	
 			  if($row['cnt'] > 0) {
 				$warnings[] = array(_T('motspartout:dejamotgroupe',array('groupe' => $titre_groupe, 'chose' => $d)));
 				continue; 
 			  }
 			}
-			spip_abstract_free($res);
+			sql_free($res);
 		  }
-		  spip_abstract_insert("spip_mots_$nom_chose","(id_mot,$id_chose)","($m,$d)");
+		  sql_insert("spip_mots_$nom_chose","(id_mot,$id_chose)","($m,$d)");
 		}
 	  }
 	}

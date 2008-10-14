@@ -18,12 +18,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function calcul_generationmot ($generation) {
 	include_spip('base/abstract_sql');
 	$lesfils = array();
-	$result = spip_abstract_select(array('id_groupe'),
+	$result = sql_select(array('id_groupe'),
 				array('spip_groupes_mots AS groupes_mots'),
 				array(calcul_mysql_in('id_parent', 
 					$generation,
 						      '')));
-	while ($row = spip_abstract_fetch($result))
+	while ($row = sql_fetch($result))
 		$lesfils[] = $row['id_groupe'];
 	return join(",",$lesfils);
 }

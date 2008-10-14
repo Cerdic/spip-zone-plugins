@@ -39,13 +39,13 @@ function verifier_auteur($table, $id_objet, $id) {
   
   $where = array("id_auteur = $connect_id_auteur", "$id_objet = $id");
   
-  $result = spip_abstract_select($select,$from,$where);
+  $result = sql_select($select,$from,$where);
   
-  if (spip_abstract_count($result) > 0) {
-	spip_abstract_free($result);
+  if (sql_count($result) > 0) {
+	sql_free($result);
 	return true;
   }
-  spip_abstract_free($result);
+  sql_free($result);
   return false;
 }
 
@@ -279,12 +279,12 @@ global $choses_possibles;
 	  $from[] = "$table_principale as main"; 
 	}
 
-	$res=spip_abstract_select($select,$from,$where,$group,$order);
+	$res=sql_select($select,$from,$where,$group,$order);
 	
 	$choses = array();
 	$avec_sans = (count($mots_cacher) > 0);
 	if($avec_sans) $in_sans = calcul_in($mots_cacher);
-	while ($row = spip_abstract_fetch($res)) {
+	while ($row = sql_fetch($res)) {
 	  if(!isset($table_auth) ||
 		 (isset($table_auth) &&
 		  (verifier_admin() ||
@@ -293,11 +293,11 @@ global $choses_possibles;
 		  )
 		 ) {
 		if($avec_sans) {
-		  $test = spip_abstract_select(array($id_chose),array("spip_mots_$nom_chose"),array("id_mot IN ($in_sans)","$id_chose = ".$row[$id_chose]));
-		  if(spip_abstract_count($test) > 0) {
+		  $test = sql_select(array($id_chose),array("spip_mots_$nom_chose"),array("id_mot IN ($in_sans)","$id_chose = ".$row[$id_chose]));
+		  if(sql_count($test) > 0) {
 			continue;
 		  }
-		  spip_abstract_free($test);
+		  sql_free($test);
 		}
 		if(count($mots_voir) > 0 && $strict) {
 		  if($row['tot'] >= count($mots_voir)) {
@@ -310,7 +310,7 @@ global $choses_possibles;
 		}
 	  }
 	}
-	spip_abstract_free($res);
+	sql_free($res);
   }
 
   if(count($choses) > 0) {
@@ -323,7 +323,7 @@ global $choses_possibles;
 	while ($row = spip_fetch_array($res)) {
 	  $show_mots[] = $row['id_mot'];
 	}
-	spip_free_result($res);
+	sql_free($res);
   } 
 
 
@@ -437,9 +437,9 @@ _T('motspartout:stricte').
   $select = array('*');
   $from = array('spip_groupes_mots');
   $order = array('titre');
-  $m_result_groupes = spip_abstract_select($select,$from,'','',$order);
+  $m_result_groupes = sql_select($select,$from,'','',$order);
 
-  while ($row_groupes = spip_abstract_fetch($m_result_groupes)) {
+  while ($row_groupes = sql_fetch($m_result_groupes)) {
 	$id_groupe = $row_groupes['id_groupe'];
 	$titre_groupe = typo($row_groupes['titre']);
 	$unseul = $row_groupes['unseul'];
@@ -453,16 +453,16 @@ _T('motspartout:stricte').
 	  //
 	  // Afficher les mots-cles du groupe
 	  //
-	  $result = spip_abstract_select(array('*'),
+	  $result = sql_select(array('*'),
 									 array('spip_mots'),
 									 array("id_groupe = '$id_groupe'"),
 									 '', array('titre'));
 	  $table = '';
 	  
-	  if (spip_abstract_count($result) > 0) {
+	  if (sql_count($result) > 0) {
 		echo "<div class='liste'>";
 		$i =0;
-		while ($row = spip_abstract_fetch($result)) {
+		while ($row = sql_fetch($result)) {
 		  $vals = '';
 		  
 		  $id_mot = $row['id_mot'];
@@ -500,12 +500,12 @@ _T('motspartout:stricte').
 					  );
 	  md_afficher_liste($largeurs, $table, $styles);
 	  echo "</div>";
-	  spip_abstract_free($result);
+	  sql_free($result);
 	  
 	  fin_cadre_enfonce();
 	}
   }
-  spip_abstract_free($m_result_groupes);
+  sql_free($m_result_groupes);
 
 
   //Milieu
