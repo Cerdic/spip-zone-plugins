@@ -115,7 +115,7 @@ function sommaire_d_article_balise($texte) {
 
 // si on veut la balise #CS_SOMMAIRE
 if (defined('_sommaire_BALISE')) {
-	function balise_CS_SOMMAIRE($p) {
+	function balise_CS_SOMMAIRE_dist($p) {
 		if ($p->type_requete == 'articles') {
 			$p->code = 'sommaire_supprime_notes('.champ_sql('texte', $p).')';
 		} else {

@@ -59,7 +59,7 @@ function decoupe_image($fich, $help, $self, $off, $val, &$images, $double=false)
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function decouper_en_pages_rempl($texte, $pagination_seule=false) {
 	// si pas de separateur, on sort
-	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
+	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $pagination_seule?'':$texte;
 
 	// au cas ou on ne veuille pas de decoupe, on remplace les '++++' par un filet.
 	if (defined('_CS_PRINT') && !$pagination_seule) {
@@ -175,7 +175,7 @@ function cs_onglets($texte){
 // ici on est en post_propre, tests de compatibilite effectues
 function cs_decoupe($texte, $pagination_seule=false){
 	// si pas de separateur, on sort
-	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
+	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $pagination_seule?'':$texte;
 	// verification des metas qui stockent les liens d'image
 	if (!isset($GLOBALS['meta']['cs_decoupe'])) {
 		include_spip('outils/decoupe');
@@ -223,7 +223,7 @@ function artpage_debut($t=false) {
 
 // si on veut la balise #CS_DECOUPE (pagination uniquement)
 if (defined('_decoupe_BALISE')) {
-	function balise_CS_DECOUPE($p) {
+	function balise_CS_DECOUPE_dist($p) {
 		if ($p->type_requete == 'articles') {
 			$p->code = 'cs_decoupe(propre(cs_onglets('.champ_sql('texte', $p).')), true)';
 		} else {
