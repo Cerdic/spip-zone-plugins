@@ -1,8 +1,8 @@
 <?php
 
 //	  action/mots_partout.php
-//    Fichier cr�� pour SPIP avec un bout de code emprunt� � celui ci.
-//    Distribu� sans garantie sous licence GPL./
+//    Fichier pour SPIP avec un bout de code issu de celui ci.
+//    Distribue sans garantie sous licence GPL./
 //    Copyright (C) 2006  Pierre ANDREWS
 //
 //    This program is free software; you can redistribute it and/or modify
@@ -89,7 +89,7 @@ function action_mots_partout() {
   $strict = intval(_request('strict'));
 
   /***********************************************************************/
-  /* r�cuperation de la chose sur laquelle on travaille*/
+  /* recuperation de la chose sur laquelle on travaille*/
   /***********************************************************************/
 
 
@@ -179,7 +179,7 @@ function action_mots_partout() {
 	  if ($m) $par_mots .= "&mots[$id]=$m";
   }
 
-  $redirect = _request('redirect')."&nom_chose=$nom_chose&stict=$strict&switch=$switch&ajax=$ajax&warning=$warning&redirect=$redirect$par_choses$par_mots";
+  $redirect = _request('redirect')."&nom_chose=$nom_chose&strict=$strict&switch=$switch&ajax=$ajax&warning=$warning&redirect=$redirect$par_choses$par_mots";
 
   redirige_par_entete($redirect);
 

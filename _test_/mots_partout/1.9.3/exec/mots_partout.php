@@ -2,8 +2,8 @@
 
 
 //	  exec/mots_partout.php
-//    Fichier cr�� pour SPIP avec un bout de code emprunt� � celui ci.
-//    Distribu� sans garantie sous licence GPL./
+//    Fichier  pour SPIP avec un bout de code issu de celui ci.
+//    Distribue sans garantie sous licence GPL./
 //    Copyright (C) 2006  Pierre ANDREWS
 //
 //    This program is free software; you can redistribute it and/or modify
@@ -33,20 +33,8 @@ function verifier_admin() {
 
 function verifier_auteur($table, $id_objet, $id) {
   global $connect_id_auteur;
-  $select = array('id_auteur');
-  
-  $from =  array($table);
-  
-  $where = array("id_auteur = $connect_id_auteur", "$id_objet = $id");
-  
-  $result = sql_select($select,$from,$where);
-  
-  if (sql_count($result) > 0) {
-	sql_free($result);
-	return true;
-  }
-  sql_free($result);
-  return false;
+
+  return sql_fetsel('id_auteur', $table, "id_auteur = $connect_id_auteur AND $id_objet = $id");
 }
 
 
@@ -181,7 +169,6 @@ global $choses_possibles;
   include_spip ("inc/presentation");
   include_spip ("inc/documents");
   include_spip ("base/abstract_sql");
-  include_spip("inc/objet");
 
   /***********************************************************************/
 /* PREFIXE*/
@@ -191,7 +178,7 @@ global $choses_possibles;
   
   
   /***********************************************************************/
-  /* r�cuperation de la chose sur laquelle on travaille*/
+  /* recuperation de la chose sur laquelle on travaille*/
   /***********************************************************************/
 
   $nom_chose = addslashes(_request('nom_chose'));
@@ -246,7 +233,7 @@ global $choses_possibles;
 		  $order = array('tot DESC');
 		}
 	  }
-	  if(count($mots_cacher) > 0) {
+	  if($mots_cacher) {
 		$from[1] = "spip_mots_$nom_chose as table_temp";
 		$where[1] = "table_temp.$id_chose = main.$id_chose";
 		$where[] = "table_temp.id_mot not IN (".calcul_in($mots_cacher).')';
@@ -256,7 +243,7 @@ global $choses_possibles;
 		  $order = array('tot DESC');
 		}
 	  }	
-	} else if((count($mots_voir) > 0)||(count($mots_cacher) > 0)){
+	} else if((count($mots_voir) > 0)||($mots_cacher)){
 	  if(count($mots_voir) > 0) {
 		$from[0] = "spip_mots_$nom_chose as main";
 		$where[] = "main.id_mot IN (".calcul_in($mots_voir).')';
@@ -266,7 +253,7 @@ global $choses_possibles;
 		  $order = array('tot DESC');
 		}
 	  }
-	  if(count($mots_cacher) > 0) {
+	  if($mots_cacher) {
 		$from[0] = "spip_mots_$nom_chose as main";
 		$where[] = "main.id_mot not IN (".calcul_in($mots_cacher).')';
 		if($strict) {
@@ -278,26 +265,19 @@ global $choses_possibles;
 	} else {
 	  $from[] = "$table_principale as main"; 
 	}
-
+	$select = join(',',$select);
+	$from = join(',',$from);
+	$where = join(',',$where);
 	$res=sql_select($select,$from,$where,$group,$order);
-	
+
 	$choses = array();
-	$avec_sans = (count($mots_cacher) > 0);
-	if($avec_sans) $in_sans = calcul_in($mots_cacher);
+	$in_sans = $mots_cacher ? sql_in('id_mot', $mots_cacher) : '';
+	$do = (!isset($table_auth) || (isset($table_auth) && verifier_admin()));
 	while ($row = sql_fetch($res)) {
-	  if(!isset($table_auth) ||
-		 (isset($table_auth) &&
-		  (verifier_admin() ||
-		   verifier_auteur($table_auth,$id_chose,$row[$id_chose])
-		   )
-		  )
-		 ) {
-		if($avec_sans) {
-		  $test = sql_select(array($id_chose),array("spip_mots_$nom_chose"),array("id_mot IN ($in_sans)","$id_chose = ".$row[$id_chose]));
-		  if(sql_count($test) > 0) {
-			continue;
-		  }
-		  sql_free($test);
+	  if($do OR verifier_auteur($table_auth,$id_chose,$row[$id_chose])) {
+		if($mots_cacher) {
+		  $test = sql_countsel("spip_mots_$nom_chose", $in_sans . " AND $id_chose = ".$row[$id_chose]);
+		  if($test) continue;
 		}
 		if(count($mots_voir) > 0 && $strict) {
 		  if($row['tot'] >= count($mots_voir)) {
@@ -316,14 +296,7 @@ global $choses_possibles;
   if(count($choses) > 0) {
 	$debut_aff = _request('t_debut');
 
-	$query = "SELECT spip_mots_$nom_chose.id_mot FROM spip_mots_$nom_chose WHERE spip_mots_$nom_chose.$id_chose".((count($choses))?(' IN('.calcul_in(array_slice($choses,$debut_aff,$nb_aff)).')'):'');
-
-	$res = spip_query($query);
-	
-	while ($row = spip_fetch_array($res)) {
-	  $show_mots[] = $row['id_mot'];
-	}
-	sql_free($res);
+	$show_mots = array_map('array_shift', sql_allfetsel("spip_mots_$nom_chose.id_mot", "spip_mots_$nom_chose", sql_in("spip_mots_$nom_chose.$id_chose", array_slice($choses,$debut_aff,$nb_aff))));
   } 
 
 
@@ -448,33 +421,26 @@ _T('motspartout:stricte').
 	$acces_admin =  $row_groupes['minirezo'];
 	$acces_redacteur = $row_groupes['comite'];
 
-	if($row_groupes[$nom_chose] == 'oui' && (($GLOBALS['connect_statut'] == '1comite' AND $acces_redacteur == 'oui') OR ($GLOBALS['connect_statut'] == '0minirezo' AND $acces_admin == 'oui'))) {
+	if(preg_match("/,$nom_chose,/", ',' . $row_groupes['tables_liees']) AND (($GLOBALS['connect_statut'] == '1comite' AND $acces_redacteur == 'oui') OR ($GLOBALS['connect_statut'] == '0minirezo' AND $acces_admin == 'oui'))) {
 	  // Afficher le titre du groupe
 	  debut_cadre_enfonce("groupe-mot-24.gif", false, '', $titre_groupe);
 	  
 	  //
 	  // Afficher les mots-cles du groupe
 	  //
-	  $result = sql_select(array('*'),
-									 array('spip_mots'),
-									 array("id_groupe = '$id_groupe'"),
-									 '', array('titre'));
-	  $table = '';
+	  $result = sql_select('id_mot,titre','spip_mots',"id_groupe=$id_groupe", '', 'titre');
+	  $table = array();
 	  
 	  if (sql_count($result) > 0) {
 		echo "<div class='liste'>";
 		$i =0;
 		while ($row = sql_fetch($result)) {
-		  $vals = '';
-		  
-		  $id_mot = $row['id_mot'];
-		  $titre_mot = $row['titre'];
-		  
-		  $s = typo($titre_mot);
-		  
-		  $vals["$s"] = calcul_numeros($show_mots,$id_mot,count($choses));
 
-		  $vals['<select id="id_mot'.$id_mot.'" name="mots['.$id_mot.']"><option value="">--'._T('motspartout:action').'--</option><option value="voir">'._T('motspartout:voir').'</option><option value="cacher">'._T('motspartout:cacher').'</option><option value="avec">'._T('motspartout:ajouter').'</option><option value="sans">'._T('motspartout:enlever').'</option></select>'] = calcul_numeros($show_mots,$id_mot,count($choses));
+		  $id_mot = $row['id_mot'];
+		  $show = calcul_numeros($show_mots,$id_mot,count($choses));
+		  $vals = array(typo($row['titre']) => $show);
+
+		  $vals['<select id="id_mot'.$id_mot.'" name="mots['.$id_mot.']"><option value="">--'._T('motspartout:action').'--</option><option value="voir">'._T('motspartout:voir').'</option><option value="cacher">'._T('motspartout:cacher').'</option><option value="avec">'._T('motspartout:ajouter').'</option><option value="sans">'._T('motspartout:enlever').'</option></select>'] = $show;
 		  $table[] = $vals;
 		}
 		
