@@ -6,13 +6,10 @@
 
 include_spip('inc/charsets');
 
-// Compatibilite pour generer_url_mot(), mais deprecie sous SPIP 2.0
-function cs_foo_mot($id, $foo) { return generer_url_mot($gloss_id); } 
+// liste des accents (sans casse)
+define('_GLOSSAIRE_ACCENTS', '#(19[2-9]|2[023][0-9]|21[0-46-9]|24[0-689]|25[0-4]|33[89]|35[23]|376)||a(?:acute|circ|elig|grave|ring|tilde|uml)|ccedil|e(?:acute|circ|grave|th|uml)|i(?:acute|circ|grave|uml)|ntilde|o(?:acute|circ|elig|grave|slash|tilde|uml)|s(?:caron|zlig)|thorn|u(?:acute|circ|grave|uml)|y(?:acute|uml)');
 
-// Compatibilite SPIP 1.91
-if(defined('_SPIP19100') && !function_exists('_q')) { function _q($t) {return spip_abstract_quote($t);} }
-
-// on calcule ici la globale $GLOBALS['glossaire_groupes_type']
+// on calcule ici la constante _GLOSSAIRE_QUERY, surchargeable dans config/mes_options.php
 function glossaire_groupes() {
 	$groupes = trim($GLOBALS['glossaire_groupes']);
 	if(!strlen($groupes)) return _q('Glossaire');
@@ -22,9 +19,21 @@ function glossaire_groupes() {
 			return join(" OR type=", $groupes);
 		}
 }
-$GLOBALS['glossaire_groupes_type'] = 'type=' . glossaire_groupes();
+@define('_GLOSSAIRE_QUERY', 'SELECT id_mot, titre, texte, descriptif FROM spip_mots WHERE type=' . glossaire_groupes() . ' ORDER BY id_mot ASC');
+// TODO : QUERY pour SPIP 2.0
 
-// compatibilite SPIP 1.91
+// Compatibilite pour generer_url_mot(), mais deprecie sous SPIP 2.0
+function cs_foo_mot($id, $foo='') { return generer_url_mot($gloss_id); } 
+
+// surcharge possible de la fonction d'url pour le clic sur les mots trouves : 
+//   exemple pour annuler le lien : function my_generer_url_entite($id, $foo='') { return 'javascript:;'; }
+//   appel par le plugin : $lien = $cs_generer_url($gloss_id, 'mot');
+# @define('_GLOSSAIRE_URL', 'my_generer_url_entite');
+
+// Compatibilite pour SPIP 1.91
+if(defined('_SPIP19100') && !function_exists('_q')) { function _q($t) {return spip_abstract_quote($t);} }
+
+// compatibilite pour SPIP 1.91
 include_spip('inc/texte');
 if(!function_exists('nettoyer_chapo')) {
 	// Ne pas renvoyer le chapo si article virtuel
@@ -72,26 +81,34 @@ function glossaire_safe($texte) {
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite|a
 function cs_rempl_glossaire($texte) {
 	global $gloss_id;
-	static $accents;
-	if(!isset($accents)) $accents = cs_glossaire_accents();
+	// mise en static de la fonction qui genere l'url des mots
 	static $cs_generer_url;
 	if(!isset($cs_generer_url_mot)) {
-		if(defined('_SPIP19300')) $cs_generer_url = 'generer_url_entite'; /* depuis SPIP 2.0 */ 
-			else { charger_generer_url(); $cs_generer_url = 'cs_foo_mot'; /* avant SPIP 2.0 */ }
+		if(defined('_GLOSSAIRE_URL')) $cs_generer_url = _GLOSSAIRE_URL;
+		else {
+			if(defined('_SPIP19300')) $cs_generer_url = 'generer_url_entite'; /* depuis SPIP 2.0 */ 
+				else { charger_generer_url(); $cs_generer_url = 'cs_foo_mot'; /* avant SPIP 2.0 */ }
+		}
+	}
+	// mise en static de la table des mots pour eviter d'interrroger la base a chaque fois
+	// attention aux besoins de memoire...
+	static $glossaire_array;
+	if(!isset($glossaire_array)) {
+		$glossaire_array = array();
+		// compatibilite SPIP 1.92
+		$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array';
+		$query = spip_query(_GLOSSAIRE_QUERY);
+		while($glossaire_array[] = $fetch($query));
 	}
 	$limit = defined('_GLOSSAIRE_LIMITE')?_GLOSSAIRE_LIMITE:-1;
-	$r = spip_query("SELECT id_mot, titre, texte, descriptif FROM spip_mots WHERE " . $GLOBALS['glossaire_groupes_type'] . " ORDER BY id_mot ASC");
 	// protection des liens SPIP
 	if (strpos($texte, '[')!==false) 
 		$texte = preg_replace_callback(',\[[^][]*->>?[^]]*\],msS', 'glossaire_echappe_balises_callback', $texte);
-	// compatibilite SPIP 1.92
-	$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array';
 	// parcours de tous les mots, sauf celui qui peut faire partie du contexte (par ex : /spip.php?mot5)
 	$mot_contexte=$GLOBALS['contexte']['id_mot']?$GLOBALS['contexte']['id_mot']:_request('id_mot');
-	while($mot = $fetch($r)) if ($mot['id_mot']<>$mot_contexte) {
+	foreach ($glossaire_array as $mot) if (($gloss_id = $mot['id_mot']) <> $mot_contexte) {
 		// prendre en compte les formes du mot : architrave/architraves
 		$a = explode('/', $titre = extraire_multi($mot['titre']));
-		$gloss_id = $mot['id_mot'];
 		$les_mots = array();
 		foreach ($a as $m) $les_mots[] = charset2unicode($m = trim($m));
 		$les_mots = array_unique($les_mots);
@@ -106,8 +123,8 @@ function cs_rempl_glossaire($texte) {
 			if($GLOBALS['meta']['charset'] != 'iso-8859-1') $texte = charset2unicode($texte);
 			// prudence 3 : on neutralise le mot si on trouve un accent (HTML ou unicode) juste avant ou apres
 			if (strpos($texte, '&')!==false) {
-				$texte = preg_replace_callback(",&(?:$accents);(?:$les_mots),i", 'glossaire_echappe_balises_callback', $texte);
-				$texte = preg_replace_callback(",(?:$les_mots)&(?:$accents);,i", 'glossaire_echappe_balises_callback', $texte);
+				$texte = preg_replace_callback(',&(?:'._GLOSSAIRE_ACCENTS.");(?:$les_mots),i", 'glossaire_echappe_balises_callback', $texte);
+				$texte = preg_replace_callback(",(?:$les_mots)&(?:"._GLOSSAIRE_ACCENTS.');,i', 'glossaire_echappe_balises_callback', $texte);
 			}
 			// on y va !
 			$lien = $cs_generer_url($gloss_id, 'mot');
@@ -133,10 +150,6 @@ function cs_rempl_glossaire($texte) {
 
 function cs_glossaire($texte) {
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|a', 'cs_rempl_glossaire', $texte);
-}
-
-// liste des accents (sans casse)
-function cs_glossaire_accents() { return '#(19[2-9]|2[023][0-9]|21[0-46-9]|24[0-689]|25[0-4]|33[89]|35[23]|376)||a(?:acute|circ|elig|grave|ring|tilde|uml)|ccedil|e(?:acute|circ|grave|th|uml)|i(?:acute|circ|grave|uml)|ntilde|o(?:acute|circ|elig|grave|slash|tilde|uml)|s(?:caron|zlig)|thorn|u(?:acute|circ|grave|uml)|y(?:acute|uml)';
 }
 
 ?>

@@ -25,7 +25,7 @@ define('_URL_CONTRIB', 'http://www.spip-contrib.net/?article');
 // chemin du fichier de fonctions
 define('_COUT_FONCTIONS_PHP', find_in_path('cout_fonctions.php'));
 // globales de controles de passes
-$GLOBALS['cs_spip_options'] = $GLOBALS['cs_options'] = $GLOBALS['cs_fonctions'] = $GLOBALS['cs_fonctions_essai'] = $GLOBALS['cs_init'] = $GLOBALS['cs_utils'] = $GLOBALS['cs_verif'] = 0;
+$GLOBALS['cs_options'] = $GLOBALS['cs_fonctions'] = $GLOBALS['cs_fonctions_essai'] = $GLOBALS['cs_init'] = $GLOBALS['cs_utils'] = $GLOBALS['cs_verif'] = 0;
 // parametres d'url concernant le plugin ?
 $GLOBALS['cs_params'] = isset($_GET['cs'])?explode(',', $_GET['cs']):array();
 // fichiers/dossiers temporaires pour le Couteau Suisse
