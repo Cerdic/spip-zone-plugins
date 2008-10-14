@@ -584,6 +584,7 @@ function analyser_backend_pmb($rss, $url_syndic='') {
 
 		if (strpos($data['descriptif'], "Résumé") !== FALSE) {
 			$data['descriptif'] = trim(substr($data['descriptif'], strpos($data['descriptif'], "Résumé")+10));
+			$data['descriptif'] = htmlentities($data['descriptif']);
 		}	
 
 		//echo("<br/>pmb_descriptif = ".$data['descriptif']);
