@@ -331,15 +331,18 @@ global $choses_possibles;
   /* affichage*/
   /***********************************************************************/
 
-  debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_MOTSPARTOUT."/mots_partout.css");
-  echo'</script>';
-
-	  echo '<br><br><center>';
-  gros_titre(_T('motspartout:titre_page'));
+  $commencer_page = charger_fonction('commencer_page', 'inc');
+  $l = $commencer_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots');
+  $css = '<link rel="stylesheet" type="text/css" href="'
+    . url_absolue( _DIR_PLUGIN_MOTSPARTOUT."/mots_partout.css")
+    . '" id="cssprivee" />'  . "\n";
+  echo str_replace('</head>', "$css</head>", $l);
+  echo '<br><br><center>';
+  echo gros_titre(_T('motspartout:titre_page'), '', false);
   echo '</center>';
 
   //Colonne de gauche
-  debut_gauche();
+  echo debut_gauche('', true);
 
   echo '<form method="post" action="'.generer_url_ecrire('mots_partout','').'">';
 
@@ -354,7 +357,6 @@ global $choses_possibles;
   if (!$tables_installees){
 	$tables_installees=array("articles"=>true,"rubriques"=>true,"breves"=>true,"syndic"=>true);
 	ecrire_meta('MotsPartout:tables_installees',serialize($tables_installees));
-	ecrire_metas();
   }
   foreach($choses_possibles as $cho => $m) {
 	  if($tables_installees[$cho]) {
@@ -398,7 +400,7 @@ global $choses_possibles;
   }
 
 	echo "	</table></div>";
-  fin_cadre_enfonce();
+  echo fin_cadre_enfonce(true);
 
   $redirect = generer_url_ecrire('mots_partout',"limit=$limit&identifiant_limit=$id_limit&nb_aff=$nb_aff");
 
@@ -430,7 +432,7 @@ _T('motspartout:stricte').
 		   </tr>
 		   </table>
 		   </div>";
-	fin_cadre_enfonce();
+	echo fin_cadre_enfonce(true);
   }
   creer_colonne_droite();
   // affichage de mots clefs.
@@ -502,7 +504,7 @@ _T('motspartout:stricte').
 	  echo "</div>";
 	  sql_free($result);
 	  
-	  fin_cadre_enfonce();
+	  echo fin_cadre_enfonce(true);
 	}
   }
   sql_free($m_result_groupes);
@@ -510,7 +512,7 @@ _T('motspartout:stricte').
 
   //Milieu
 
-  debut_droite();
+  echo debut_droite('',true);
 
   if(count($warnings) > 0) {
 	debut_cadre_relief('',false,'',_T('motspartout:ATTENTION'));
@@ -523,7 +525,7 @@ _T('motspartout:stricte').
 	fin_cadre_relief();
   }
 
-  // Affichage de toutes les choses (on pourrait imaginer faire une pagination l�)
+  // Affichage de toutes les choses (on pourrait imaginer faire une pagination
   debut_cadre_relief('',false,'document', _T('portfolio'));
   if(count($choses) > 0) {
   	
