@@ -87,58 +87,29 @@ function afficher_articles_boucle($row, &$tous_id, $afficher_auteurs, $afficher_
 }
 
 									  
-function afficher_liste_articles($choses,$nb_aff=20) {
+function afficher_liste_articles($choses,$nb_aff=20)
+{
+  $afficher_objets = charger_fonction('afficher_objets','inc');
+  echo $afficher_objets('article', 'Articles', 
+		  array(
+	'SELECT' => 'id_article, titre, id_rubrique, date, statut, lang, descriptif',
+	'FROM' => 'spip_articles as articles',
+	'WHERE' => sql_in('articles.id_article', $choses)),
+		       'formater_articles_mots');
+}
 
-  $tmp_var = 't_' . substr(md5(join(' ',$choses)), 0, 4);
-  $tranches =  afficher_tranches_requete(count($choses), 6,$tmp_var,false,$nb_aff);
-	
-  echo "<div class='liste'>";
-  bandeau_titre_boite2('Articles', "article-24.gif");
-  
-  echo afficher_liste_debut_tableau();
-  if(count($choses) >= $nb_aff) echo $tranches;
-  
-  
-  $deb_aff = intval(_request('t_debut'));
+function formater_articles_mots($row, $own='')
+{
+	static $formater = NULL;
+	static $cpt = 0;
+	if (!$formater)
+		$formater = charger_fonction('formater_article', 'inc');
 
-  $query = 'SELECT id_article, titre, id_rubrique, date, statut, lang, descriptif FROM spip_articles as articles WHERE articles.id_article'
-	.((count($choses))?(' IN('.calcul_in($choses).')'):'') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : "99999");
-
-  $results = spip_query($query);
-  
-  $table = array();
-  $i = 0;
-  while ($row = spip_fetch_array($results)) {
-	$i++;
+	$cpt++;
+	list ($puce, $lien, $auteurs, $date, $num) = $formater($row, $own);
 	$id_article=$row['id_article'];
-	$vals = afficher_articles_boucle($row, $tous_id, true, false, false, $voir_logo);
-	$vals[] = "<input type='checkbox' name='choses[]' value='$id_article' id='id_chose$i'/>";
-	$table[] = $vals; 
-  }
-  sql_free($results);
-  
-	if ($options == "avancees") { // Afficher le numero (JMB)
-	  if ($afficher_auteurs) {
-		$largeurs = array(11, '', 80, 100, 35);
-		$styles = array('', 'arial2', 'arial1', 'arial1', 'arial1');
-	  } else {
-		$largeurs = array(11, '', 100, 35);
-		$styles = array('', 'arial2', 'arial1', 'arial1');
-	  }
-	} else {
-	  if ($afficher_auteurs) {
-		$largeurs = array(11, '', 100, 100);
-		$styles = array('', 'arial2', 'arial1', 'arial1');
-	  } else {
-		$largeurs = array(11, '', 100);
-		$styles = array('', 'arial2', 'arial1');
-	  }
-	}
-	echo afficher_liste($largeurs, $table, $styles);
-	
-	echo afficher_liste_fin_tableau();
-	echo '</div>';
-
+	$in = "<input type='checkbox' name='choses[]' value='$id_article' id='id_chose$cpt' />";
+	return array($puce, $lien, $auteurs, $date, $in);
 }
 
 
