@@ -26,7 +26,7 @@ function spipicious_insert_head($flux){
 		// chercher l'input de saisie
 		var id_objet = $("input#spipicious_id").val();
 		var type = $("input#spipicious_type").val();
-		if(spipicious.size()>0){
+		if((spipicious.size()>0)&&(type!='')){
 			$.ajax({
 				type: "GET",
 				url:'$tags_link&id_'+type+'='+id_objet,
