@@ -76,7 +76,7 @@ function dw_redir($texte) {
 				$res=sql_select("id_document","spip_documents","fichier='$chem'");
 				while($row=sql_fetch($res)) {
 					$id = $row['id_document'];
-					$retour = $inreg[1]."?action=dw2_out&id=$id".$inreg[4];
+					$retour = parametre_url(parametre_url($inreg[1],"action","dw2_out"),"id",$id,"&amp;").$inreg[4];
 				}
 				$texte = str_replace($inreg[0], $retour, $texte);
 			}
@@ -92,7 +92,7 @@ function dw_redir($texte) {
 			$res2=sql_select("id_document","spip_documents","fichier='$chemin'");
 			while($row2 = sql_fetch($res2)) {
 				$id = $row2['id_document'];
-				$replace = $in_reg[1]."?action=dw2_out&id=$id".$in_reg[4];
+				$replace = parametre_url(parametre_url($in_reg[1],"action","dw2_out"),"id",$id,"&amp;").$in_reg[4];
 			}
 			$texte = str_replace($in_reg[0], $replace, $texte);
 			

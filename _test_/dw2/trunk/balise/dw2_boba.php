@@ -47,7 +47,7 @@ function boucle_DW2_DOC($id_boucle, &$boucles) {
 function generer_url_doc_out($_id_document) {
 	# h.17/11/06 problème de formation de l'url dans backend -> erreur xml
 	# $ret_bal = "?action=dw2_out&id=$_id_document"; #
-	$ret_bal = generer_url_action('dw2_out', 'id='.$_id_document, true);
+	$ret_bal = generer_url_action('dw2_out', 'id='.$_id_document, false, true);
 	return $ret_bal;
 }
 function balise_URL_DOC_OUT($p) {

@@ -222,7 +222,8 @@ function action_dw2_out() {
 		
 		//  auteur identifié mais pas les bon droits ('2') || auteur non identifié ('1')
 		if(isset($flag_dwacces)) {
-			redirige_par_entete($function_generer($origine[1])."&dwacces=".$flag_dwacces);
+			include_spip('inc/utils'); // parametre_url
+			redirige_par_entete(parametre_url($function_generer($origine[1]),"dwacces",$flag_dwacces,'&'));
 		}
 		// doc invalide ou article non publié
 		else {
