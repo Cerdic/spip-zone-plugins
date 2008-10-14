@@ -167,11 +167,11 @@ Compatibilidade : SPIP todas as versi&oacute;ns 1.9x
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>BT_gadgets</nom>
+		<nom>bt_gadgets</nom>
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>BT_toolbox</nom>
+		<nom>bt_toolbox</nom>
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 </plugin>
