@@ -3,11 +3,11 @@
 <div id="tags">
 <B_motsElement>
 	<ul>
-		<BOUCLE_motsElement(MOTS){id_article ?}{id_document ?}{id_rubrique ?}{id_syndic ?}>
+		<BOUCLE_motsElement(MOTS){id_evenement ?}>
 			<li><a href="#URL_MOT" title="#TITRE" rel="tag">#TITRE</a>
 		<B_aut>
 			<small>
-				(<BOUCLE_aut(SPIPICIOUS auteurs){id_mot}{id_article ?}{id_document ?}{id_rubrique ?}{id_syndic ?}{', '}>#NOM</BOUCLE_aut>)
+				(<BOUCLE_aut(SPIPICIOUS auteurs){id_mot}{id_evenement ?}{', '}>#NOM</BOUCLE_aut>)
 			</small>
 		</B_aut>
 		</li>

@@ -1,6 +1,6 @@
 <?php
 
-	$GLOBALS['spipicious_base_version'] = 0.4;
+	$GLOBALS['spipicious_base_version'] = 0.5;
 
 	function spipicious_upgrade(){
 		$version_base = $GLOBALS['spipicious_base_version'];
@@ -43,6 +43,12 @@
 				}
 				echo "spipicious update @ 0.4<br/>";
 				ecrire_meta('spipicious_base_version',$current_version=0.4,'non');
+			}
+			if($current_version<0.5){
+					sql_alter("TABLE `spip_spipicious` ADD id_syndic bigint(21) NOT NULL AFTER`id_document` ");
+					sql_alter("TABLE `spip_spipicious` ADD id_evenement bigint(21) NOT NULL AFTER`id_syndic` ");
+					echo "spipicious update @ 0.5<br/>";
+					ecrire_meta('spipicious_base_version',$current_version=0.5,'non');
 			}
 			ecrire_metas();
 		}

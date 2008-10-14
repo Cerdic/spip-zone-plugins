@@ -28,7 +28,9 @@ function spipicious_declarer_tables_principales($tables_principales){
 	  	"id_article" 	=> "bigint(21) NOT NULL",
 		"id_rubrique" 	=> "bigint(21) NOT NULL",
 		"id_document" 	=> "bigint(21) NOT NULL",
-	    "position"    => "int(10) NOT NULL",
+		"id_syndic" 	=> "bigint(21) NOT NULL",
+		"id_evenement" 	=> "bigint(21) NOT NULL",
+		"position"    => "int(10) NOT NULL",
 		"maj" => "TIMESTAMP");
 	
 	$spip_spipicious_key = array(
