@@ -12,8 +12,9 @@
 				<h3><:spipthelia:modifier_mdp:></h3>
 				</div>
 									
-			<form action="#URL_PAGE{moncompte,lang=#LANG}" method="post" name="modifier1" id="modifier1">
-            		<input type="hidden" name="thelia_action" value="modifiercompte" />
+			<form action="#URL_PAGE{moncompte,lang=#LANG}" method="post" id="modifier1" class="formulaire-thelia">
+            		<fieldset>
+			<input type="hidden" name="thelia_action" value="modifiercompte" />
 			<table>
  				<tbody>
 				<tr>
@@ -30,6 +31,7 @@
 			<div class="boutonMonCompteContenu">
 				<input type="submit" value="<:spipthelia:valider:>" />
 			</div>
+			</fieldset>
 			</form>
 				
 				<div class="separation">
@@ -41,8 +43,9 @@
 				<h3><:spipthelia:nouveau_client:></h3>
 				</div>
 				
-		   	<form action="#URL_PAGE{compte_modifier,lang=#LANG}" method="post" name="modifier2" id="modifier2">
-           		 <input type="hidden" name="thelia_action" value="modifiercompte" /> 
+		   	<form action="#URL_PAGE{compte_modifier,lang=#LANG}" method="post" id="modifier2" class="formulaire-thelia">
+           		<fieldset>
+			<input type="hidden" name="thelia_action" value="modifiercompte" /> 
 			<table>
 			<tbody>
   				<tr>
@@ -115,4 +118,5 @@
 				<div class="boutonMonCompteContenu">
 				<input type="submit" value="<:spipthelia:valider:>" />
 				</div>
+			</fieldset>
 			</form>

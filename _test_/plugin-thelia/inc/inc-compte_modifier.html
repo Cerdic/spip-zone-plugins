@@ -13,7 +13,8 @@
 				
 				[(#REM) formulaire "Mot de passe" ]
 
-				<form action="#URL_PAGE{moncompte,lang=#LANG}" method="post" name="modifier1" id="modifier1">
+				<form action="#URL_PAGE{moncompte,lang=#LANG}" method="post" id="modifier1" class="formulaire-thelia">
+				<fieldset>
 				<input type="hidden" name="thelia_action" value="modifiercompte" />
 				<table>
 				<tbody>
@@ -31,7 +32,8 @@
 				<div class="boutonMonCompteContenu">
 				<input type="submit" value="<:spipthelia:valider:>" />
 				</div>
-			  	</form>
+			  	</fieldset>
+				</form>
 				
 				<div class="separation">
 				</div>
@@ -43,7 +45,8 @@
 			
 				[(#REM) formulaire "Modifier mes coordonnées" ]
 	
-				<form action="#URL_PAGE{compte_modifier,lang=#LANG}" method="post" name="modifier2" id="modifier2">
+				<form action="#URL_PAGE{compte_modifier,lang=#LANG}" method="post" id="modifier2" class="formulaire-thelia">
+				<fieldset>
 				<input type="hidden" name="thelia_action" value="modifiercompte" /> 
 
 				<table>
@@ -121,4 +124,5 @@
 				<input type="submit" value="<:spipthelia:valider:>" />
 				</div>
 				
+				</fieldset>
 				</form>

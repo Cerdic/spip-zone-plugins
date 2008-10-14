@@ -4,11 +4,11 @@
 			<div id="etapes-achat">
 			<h2 class="invisible"><:etapes_achat:></h2>
 			<ul>
-				<li class="etape-courante"><div><img src="[(#CHEMIN{img_pack/etape_1_on.jpg})]" alt="<:spipthelia:valider_panier:>"></div></li>
-					<li><div><img src="[(#CHEMIN{img_pack/etape_2.jpg})]" alt="<:spipthelia:identifiez_vous:>"></div></li>					
-					<li><div><img src="[(#CHEMIN{img_pack/etape_3.jpg})]" alt="<:spipthelia:choix_mode_livraison:>"></div></li>				
-					<li><div><img src="[(#CHEMIN{img_pack/etape_4.jpg})]" alt="<:spipthelia:choix_paiement:>"></div></li>			
-					<li class="derniere-etape"><div><img src="[(#CHEMIN{img_pack/etape_5.jpg})]" alt="<:spipthelia:envoyer_commande:>"></div></li>		
+				<li class="etape-courante"><div><img src="[(#CHEMIN{img_pack/etape_1_on.jpg})]" alt="<:spipthelia:valider_panier:>" /></div></li>
+					<li><div><img src="[(#CHEMIN{img_pack/etape_2.jpg})]" alt="<:spipthelia:identifiez_vous:>" /></div></li>					
+					<li><div><img src="[(#CHEMIN{img_pack/etape_3.jpg})]" alt="<:spipthelia:choix_mode_livraison:>" /></div></li>				
+					<li><div><img src="[(#CHEMIN{img_pack/etape_4.jpg})]" alt="<:spipthelia:choix_paiement:>" /></div></li>			
+					<li class="derniere-etape"><div><img src="[(#CHEMIN{img_pack/etape_5.jpg})]" alt="<:spipthelia:envoyer_commande:>" /></div></li>		
 			</ul>
 			<br class="nettoyeur" />
 			</div>
@@ -47,12 +47,12 @@
 						<br />(Ref&nbsp;:&nbsp;THELIA-REF)</a>
 					</td>
 					<td class="ligneTableau">THELIA-PRIXU&nbsp;&euro; </td>
-    					<form action="#URL_PAGE{panier,lang=#LANG}" method="post" name="formpanierTHELIA-ARTICLE" id="formpanierTHELIA-ARTICLE">
+    					<form action="#URL_PAGE{panier,lang=#LANG}" method="post" id="formpanierTHELIA-ARTICLE">
                 			<td class="ligneTableau">
 						<input type="hidden" name="article" value="THELIA-ARTICLE" />
                 				<input type="hidden" name="thelia_action" value="modifier" />
                 				<input type="hidden" name="article" value="THELIA-ARTICLE" />
-                				<select name="quantite" size="1" class="zoneDeSaisie" onchange="document.formpanierTHELIA-ARTICLE.submit()">
+                				<select name="quantite" size="1" class="zoneDeSaisie" onchange="$('#formpanierTHELIA-ARTICLE').submit()">
                 				<THELIA_quantite type="QUANTITE" article="THELIA-ARTICLE" max="50">
 							<option value="THELIA-NUM" THELIA-SELECTED>THELIA-NUM</option>
 						</THELIA_quantite>

@@ -26,8 +26,9 @@
 				<h3><:spipthelia:ajouter_adresse_livraison:></h3>
 				</div>
 				
-			<form action="#URL_PAGE{adresse,lang=#LANG}" method="post" name="nouveau" id="nouveau">
-          			  <input type="hidden" name="thelia_action" value="creerlivraison" />
+			<form action="#URL_PAGE{adresse,lang=#LANG}" method="post" id="nouveau" class="formulaire-thelia">
+          		<fieldset>
+			  <input type="hidden" name="thelia_action" value="creerlivraison" />
 			<table>
   				<tbody>
 				<tr>
@@ -94,5 +95,6 @@
 			 	<div class="boutonMonCompteContenu">
 				<input type="submit" value="<:spipthelia:valider:>" />
 				</div>
+			</fieldset>
 			</form>
 

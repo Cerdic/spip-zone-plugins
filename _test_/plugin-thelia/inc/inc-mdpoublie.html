@@ -12,7 +12,8 @@
 				<h3><:spipthelia:mdp_oublie_message:></h3>
 				</div>
 				
-			<form action="#URL_PAGE{mdpoublie,lang=#LANG}" method="post" name="formmdp" id="formmdp">
+			<form action="#URL_PAGE{mdpoublie,lang=#LANG}" method="post" id="formmdp" class="formulaire-thelia">
+			<fieldset>
 			<input type="hidden" name="thelia_action" value="chmdp" />
 			<table>
   				<tr>
@@ -23,5 +24,6 @@
 				<div class="boutonMonCompteContenu">
 				<input type="submit" value="<:spipthelia:valider:>" />
 				</div>
+			</fieldset>
 			</form>
 

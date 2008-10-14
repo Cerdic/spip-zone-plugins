@@ -233,6 +233,10 @@ a.lien-retour-thelia {
 	font-weight: bold;
 	color: #7a6d2c;
 }
+.formulaire-thelia fieldset, .formulaire-produit fieldset {
+	border: none;
+	padding: 0;
+}
 
 /* style propre aux modeles <produit>*/
 

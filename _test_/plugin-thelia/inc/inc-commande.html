@@ -4,11 +4,11 @@
 				<div id="etapes-achat">
 				<h2 class="invisible"><:etapes_achat:></h2>
 				<ul>
-					<li><div><a href="[(#URL_PAGE{panier})]"><img src="[(#CHEMIN{img_pack/etape_1.jpg})]" alt="<:spipthelia:valider_panier:>"></a></div></li>
-				<li><div><a href="[(#URL_PAGE{connexion})]"><img src="[(#CHEMIN{img_pack/etape_2.jpg})]" alt="<:spipthelia:identifiez_vous:>"></a></div></li>					
-				<li><div><a href="[(#URL_PAGE{adresse})]"><img src="[(#CHEMIN{img_pack/etape_3.jpg})]" alt="<:spipthelia:choix_mode_livraison:>"></a></div></li>						
-				<li class="etape-courante"><div><img src="[(#CHEMIN{img_pack/etape_4_on.jpg})]" alt="<:spipthelia:choix_paiement:>"></div></li>			
-				<li class="derniere-etape"><div><img src="[(#CHEMIN{img_pack/etape_5.jpg})]" alt="<:spipthelia:envoyer_commande:>"></div></li>
+					<li><div><a href="[(#URL_PAGE{panier})]"><img src="[(#CHEMIN{img_pack/etape_1.jpg})]" alt="<:spipthelia:valider_panier:>" /></a></div></li>
+				<li><div><a href="[(#URL_PAGE{connexion})]"><img src="[(#CHEMIN{img_pack/etape_2.jpg})]" alt="<:spipthelia:identifiez_vous:>" /></a></div></li>					
+				<li><div><a href="[(#URL_PAGE{adresse})]"><img src="[(#CHEMIN{img_pack/etape_3.jpg})]" alt="<:spipthelia:choix_mode_livraison:>" /></a></div></li>						
+				<li class="etape-courante"><div><img src="[(#CHEMIN{img_pack/etape_4_on.jpg})]" alt="<:spipthelia:choix_paiement:>" /></div></li>			
+				<li class="derniere-etape"><div><img src="[(#CHEMIN{img_pack/etape_5.jpg})]" alt="<:spipthelia:envoyer_commande:>" /></div></li>
 				</ul>
 				<br class="nettoyeur" />
 				</div>
@@ -20,7 +20,8 @@
 
 			[(#REM) Contenu de la page ]
 	
-			<form action="#URL_PAGE{commande,lang=#LANG}" id="formulaire" method="post">
+			<form action="#URL_PAGE{commande,lang=#LANG}" id="formulaire" method="post" class="formulaire-thelia">
+			<fieldset>
 			<input type="hidden" name="thelia_action" value="codepromo" />
 			<table id="commande">
             		<thead> 
@@ -65,6 +66,7 @@
 				<label for="code"><:spipthelia:code_reduction:> :</label>
 				<input id="code" name="code" type="text" class="zoneDeSaisie"/><input type="submit" value="<:spipthelia:valider:>" />
 			</div>
+			</fieldset>
 			</form>
 
 			
@@ -74,12 +76,14 @@
 			</div>
 
 			<T_PAIEMENT>
-			<form  method="get" action="commande.php"> 
+			<form  method="get" action="commande.php" class="formulaire-thelia"> 
+			<fieldset>
 			   	<input type="hidden" name="thelia_action" value="paiement">
 				<THELIA_PAIEMENT type="PAIEMENT">
 			 		<input type="radio" name="type_paiement" id='type_paiementTHELIA-ID' value="THELIA-ID" checked="checked"><label for="type_paiementTHELIA-ID">THELIA-TITRE</label><br/>
 				</THELIA_PAIEMENT>
 				<input type="submit" value="<:spipthelia:continuer:>" class="bouton-etapes-thelia" /><br />
+			</fieldset>
 			</form>
 			</T_PAIEMENT>
 				<:spipthelia:paiement_desactive:>

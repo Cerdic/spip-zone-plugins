@@ -13,7 +13,8 @@
 				<ul class = "ListeProduitsPetits">
 				<THELIA_PROD type="PRODUIT" rubrique="THELIA-RUBRIQUE_ID" classement="inverse" num="12">
 					<li class="produitPetit">
-					<form action="#URL_PAGE{panier,lang=#LANG}" method="post" id="formAjouterTHELIA-ID">
+					<form action="#URL_PAGE{panier,lang=#LANG}" method="post" id="formAjouterTHELIA-ID" class="formulaire-produit">
+					<fieldset>
 						<input type="hidden" name="thelia_action" value="ajouter" />
                 				<input type="hidden" name="ref" value="THELIA-REF" />
                 			<a href="#URL_PAGE{produit,ref=THELIA-REF&amp;id_rubrique=THELIA-RUBRIQUE_ID}">
@@ -72,11 +73,7 @@
 							
 						</div>
 						
-						
-						
-				    		
-						
-					 
+					</fieldset>
 					</form>
 					</li>
 				</THELIA_PROD>

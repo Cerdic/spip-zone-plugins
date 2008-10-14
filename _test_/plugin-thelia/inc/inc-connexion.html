@@ -5,11 +5,11 @@
 				<div id="etapes-achat">
 				<h2 class="invisible"><:etapes_achat:></h2>
 				<ul>
-				<li><div><a href="[(#URL_PAGE{panier})]"><img src="[(#CHEMIN{img_pack/etape_1.jpg})]" alt="<:spipthelia:valider_panier:>"></a></li>
-					<li class="etape-courante"><div><img src="[(#CHEMIN{img_pack/etape_2_on.jpg})]" alt="<:spipthelia:identifiez_vous:>"></div></li>					
-					<li><div><img src="[(#CHEMIN{img_pack/etape_3.jpg})]" alt="<:spipthelia:choix_mode_livraison:>"></div></li>				
-					<li><div><img src="[(#CHEMIN{img_pack/etape_4.jpg})]" alt="<:spipthelia:choix_paiement:>"></div></li>			
-					<li class="derniere-etape"><div><img src="[(#CHEMIN{img_pack/etape_5.jpg})]" alt="<:spipthelia:envoyer_commande:>"></div></li>
+					<li><div><a href="[(#URL_PAGE{panier})]"><img src="[(#CHEMIN{img_pack/etape_1.jpg})]" alt="<:spipthelia:valider_panier:>" /></a></div></li>
+					<li class="etape-courante"><div><img src="[(#CHEMIN{img_pack/etape_2_on.jpg})]" alt="<:spipthelia:identifiez_vous:>" /></div></li>					
+					<li><div><img src="[(#CHEMIN{img_pack/etape_3.jpg})]" alt="<:spipthelia:choix_mode_livraison:>" /></div></li>				
+					<li><div><img src="[(#CHEMIN{img_pack/etape_4.jpg})]" alt="<:spipthelia:choix_paiement:>" /></div></li>			
+					<li class="derniere-etape"><div><img src="[(#CHEMIN{img_pack/etape_5.jpg})]" alt="<:spipthelia:envoyer_commande:>" /></div></li>
 				</ul>
 				<br class="nettoyeur" />
 				</div>
@@ -27,8 +27,9 @@
 				<h3><:spipthelia:deja_compte:></h3>
 				</div>
 				
-				<form action="#URL_PAGE{connexion,lang=#LANG}" method="post" name="connexion" id="connexion">
-            				<input type="hidden" name="thelia_action" value="connexion" />
+				<form action="#URL_PAGE{connexion,lang=#LANG}" method="post" id="connexion" class="formulaire-thelia">
+            			<fieldset>
+					<input type="hidden" name="thelia_action" value="connexion" />
 				
 				<table>
 				<tbody>
@@ -45,6 +46,7 @@
 				<div class="boutonMonCompteContenu">
 					<input type="submit" value="<:spipthelia:valider:>" />
 				</div>
+				</fieldset>
 				</form>
 				
 				<div class="separation">
@@ -54,8 +56,9 @@
 				<h3><:spipthelia:nouveau_client:></h3>
 				</div>
 				
-				<form action="#URL_PAGE{nouveau,lang=#LANG}" method="post" name="nouveau" id="nouveau">
-            				<input type="hidden" name="thelia_action" value="creercompte" />
+				<form action="#URL_PAGE{nouveau,lang=#LANG}" method="post" id="nouveau" class="formulaire-thelia">
+            			<fieldset>
+					<input type="hidden" name="thelia_action" value="creercompte" />
 				
 				<table>
 				<tbody>
@@ -139,4 +142,5 @@
 			<div class="boutonMonCompteContenu">
            			 <input type="submit" value="<:spipthelia:valider:>" />
 			</div>
-            		</form>
+            		</fieldset>
+			</form>
