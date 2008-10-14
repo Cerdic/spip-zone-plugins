@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*
 +--------------------------------------------+
 | DW2 2.14 (03/2007) - SPIP 1.9.2
@@ -26,7 +26,7 @@ global $connect_statut, $connect_toutes_rubriques;
 // verifier info plugin DW2 en cours
 function verifier_infos_dw2($item) {
 	include_spip('inc/plugin');
-	$info_plugin_dw2 = plugin_get_infos('dw2');
+	$info_plugin_dw2 = plugin_get_infos(_DIR_PLUGIN_DW2);
 	return $info_dw2 = $info_plugin_dw2[$item];
 }
 
@@ -72,14 +72,11 @@ function dw2_showtable($nomtable) {
 	if(dw2_showtable("spip_dw2_config")){		
 		// OUI .. on en profite pour declarer les globales de config
 		lire_dw2_config();
-
 		// ... mais changement de version ?
-		if($GLOBALS['dw2_param']['version_installee'] < _DW2_VERS_PLUGIN) {
+		if(version_compare($GLOBALS['dw2_param']['version_installee'],_DW2_VERS_PLUGIN,'<')) {
 			$GLOBALS['flag_dw2_inst'] = 'maj';
 		}
-		
 		define("_DW2_VERS_LOC", $GLOBALS['dw2_param']['version_installee']);	
-
 	}
 	elseif (dw2_showtable("dw2_doc")) {
 		// OUI mais vers. ante 2.13
@@ -92,7 +89,8 @@ function dw2_showtable($nomtable) {
 
 	// install/maj -> on redirige vers page dw2_install
 	// si on n'y est pas deja !
-	if($GLOBALS['flag_dw2_inst'] && _request('exec')!='dw2_install')
-		{ redirige_par_entete(generer_url_ecrire("dw2_install")); }
+	if($GLOBALS['flag_dw2_inst'] && _request('exec')!='dw2_install') {
+		redirige_par_entete(generer_url_ecrire("dw2_install"));
+	}
 
 ?>
