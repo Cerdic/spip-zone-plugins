@@ -37,46 +37,44 @@ function formater_articles_mots($row, $own='')
 }
 
 
-function afficher_horizontal_document_assoc($document,$with_check, $case) {
-  global $connect_id_auteur, $connect_statut;
-  global $spip_lang_left, $spip_lang_right;
+function afficher_liste_documents($choses,$nb_aff=20) {
 
-  $bord_droit = 2;
+  $afficher_objets = charger_fonction('afficher_objets','inc');
+  echo $afficher_objets('document', 'Documents', 
+			array('SELECT' => '*',
+			      'FROM' => 'spip_documents AS D',
+			      'WHERE' => sql_in('id_document', $choses)),
+			'formater_documents_mots');
+}
+
+// cette fonction n'existe pas en standard,
+// il risque d'y avoir des conflits.
+
+function afficher_documents_boucle($document,$own='') {
+  global $spip_lang_right;
 
   $id_document = $document['id_document'];
   $id_vignette = $document['id_vignette'];
   $id_type = $document['id_type'];
   $titre = $document['titre'];
   $descriptif = $document['descriptif'];
-  $url = generer_url_document($id_document);
+  $url = generer_url_entite($id_document, 'document');
   $fichier = $document['fichier'];
   $largeur = $document['largeur'];
   $hauteur = $document['hauteur'];
   $taille = $document['taille'];
-  $date = $document['date'];
-  $mode = $document['mode'];
   
-  if ($case == 0) {
-	echo "<tr style='border-top: 1px solid black;'>";
-  }
-  
-  $style = "border-$spip_lang_left: 1px solid $couleur; border-bottom: 1px solid $couleur;";
-  if ($case == $bord_droit) $style .= " border-$spip_lang_right: 1px solid $couleur;";
-  echo "<td width='33%' style='text-align: $spip_lang_left; $style' valign='top'>";
-  
-  echo "<label for='doc$case'>"._T('motspartout:voir').'</label>';
-  echo "<input type='checkbox' name='choses[]' id='doc$case' value='$id_document' />";
+  // Pourquoi y aurait-il un label pour lui et pas les autres ?
+  $in= # "<label for='doc'>"._T('motspartout:voir').'</label>' .
+  "<input type='checkbox' name='choses[]' id='doc$case' value='$id_document' />";
   
   // Signaler les documents distants par une icone de trombone
   if ($document['distant'] == 'oui') {
-	echo "<img src='"._DIR_IMG_PACK.'attachment.gif'."' style='float: $spip_lang_right;' alt=\"".entites_html($document['fichier'])."\" title=\"" .
+	$puce = "<img src='"._DIR_IMG_PACK.'attachment.gif'."' style='float: $spip_lang_right;' alt=\"".entites_html($document['fichier'])."\" title=\"" .
 	  entites_html($document['fichier'])."\" />\n";
   }
   
   // bloc vignette + rotation
-  echo "<div style='text-align:center;'>";
-  
-  
   // 'extension', a ajouter dans la base quand on supprimera spip_types_documents
   switch ($id_type) {
 	case 1:
@@ -93,74 +91,39 @@ function afficher_horizontal_document_assoc($document,$with_check, $case) {
   //
   // Recuperer la vignette et afficher le doc
   //
-  echo document_et_vignette($document, $url, true); 
-  
-  echo "</div>"; // fin du bloc vignette + rotation
-  
+
+  $vignette = "<div style='text-align:center;'>"
+    . document_et_vignette($document, $url, true)
+    . "</div>"; // fin du bloc vignette + rotation
   
   // bloc titre et descriptif
   if (strlen($titre) > 0) {
-	echo '<div class=\'verdana2\' style=\'text-align:center;\'><b>'.typo($titre).'</b></div>';
+	$nom = '<div class=\'verdana2\' style=\'text-align:center;\'><b>'.typo($titre).'</b></div>';
   } else {
 	$nom_fichier = basename($fichier);
 	
 	if (strlen($nom_fichier) > 20) {
 	  $nom_fichier = substr($nom_fichier, 0, 10)."...".substr($nom_fichier, strlen($nom_fichier)-10, strlen($nom_fichier));
 	}
-	echo "<div class='verdana1' style='text-align:center;'>$triangle$nom_fichier";
-	echo '</div>';
+	$nom = "<div class='verdana1' style='text-align:center;'>$triangle$nom_fichier</div>";
   }
   
   if (strlen($descriptif) > 0) {
-	echo "<div class='verdana1'>".propre($descriptif)."</div>";
+	$nom .= "<div class='verdana1'>".propre($descriptif)."</div>";
   }
   
   // Taille de l'image ou poids du document
-  echo "<div class='verdana1' style='text-align: center;'>";
+  $dim=  "<div class='verdana1' style='text-align: center;'>";
   if ($largeur * $hauteur)
-	echo _T('info_largeur_vignette',
+	$dim .= _T('info_largeur_vignette',
 			array('largeur_vignette' => $largeur,
 				  'hauteur_vignette' => $hauteur));
   else
-	echo taille_en_octets($taille);
-  echo "</div>";
-  
-  
-  echo "</td>\n";
+	$dim .= taille_en_octets($taille);
+  $dim .= "</div>";
+  return array($puce, $vignette, $nom, $dim, $in);
+ 
 }
-
-function afficher_liste_documents($choses,$nb_aff=20) {
-  global $spip_lang_left;
-  echo "<table width='100%' cellspacing='0' cellpadding='3' style=\"border-top:1px solid black\">\n";
-  $i=0;
-  
-  $deb_aff = intval(_request('t_debut'));
-
-  $query = "SELECT * FROM spip_documents WHERE id_document".((count($choses))?(' IN('.calcul_in($choses).')'):''). " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : "99999");
-
-  $tranches =  afficher_tranches_requete(count($choses), 3,'debut',false,$nb_aff);
-  
-  if(count($choses) >= $nb_aff) echo $tranches;
-  
-  $results = spip_query($query);
-  
-  while($document = spip_fetch_array($results)) {
-	afficher_horizontal_document_assoc($document,true,$i);
-	$i++;
-	if ($i > 2) {
-	  $i = 0;
-	  echo "</tr>\n";
-	}
-  }
-  // fermer la derniere ligne
-  if ($i > 0) {
-	echo "<td style='border-$spip_lang_left: 1px solid $couleur;'>&nbsp;</td>";
-	echo "</tr>";
-  }
-
-  echo '</table>';
-}
-
 
 function afficher_liste_messages($choses,$nb_aff=20) {
 
