@@ -4,7 +4,11 @@
 /* Definition des choses sur lesquels on peut vouloir mettre des mots clefs*/
 /***********************************************************************/
 
-//==========================ARTICLES============================================
+//=======================ARTICLES============================================
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+require _DIR_RESTREINT . 'inc/afficher_objets.php';
 
 function afficher_articles_boucle($row, &$tous_id, $afficher_auteurs, $afficher_langue, $langue_defaut, $voir_logo)
 {

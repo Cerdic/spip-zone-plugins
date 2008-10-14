@@ -21,6 +21,12 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include(_DIR_PLUGIN_MOTSPARTOUT."/mots_partout_choses.php");
+include_spip('inc/afficher_objets');
+include_spip("inc/presentation");
+include_spip("inc/documents");
+include_spip("base/abstract_sql");
+
 /***********************************************************************/
 /* function*/
 /***********************************************************************/
@@ -38,7 +44,8 @@ function verifier_auteur($table, $id_objet, $id) {
 }
 
 
-//on calcul le style pour ce mot. I.E. on regarde si il est attache � tout ou seulement une partie
+// on calculr le style pour ce mot. I.E. 
+// on regarde s'il est attache a tout ou seulement une partie
 function calcul_numeros($array, $search, $total) {
   if(is_array($array))
 	$tt = count(array_keys($array,$search));
@@ -52,10 +59,8 @@ function calcul_numeros($array, $search, $total) {
 
 //liste des mots a droite
 function md_afficher_liste($largeurs, $table, $styles = '') {
-  global $couleur_claire;
+
   global $browser_name;
-  global $spip_display;
-  global $spip_lang_left;
 
   if (!is_array($table)) return;
   reset($table);
@@ -86,6 +91,58 @@ function md_afficher_liste($largeurs, $table, $styles = '') {
 	echo "</ul>\n";
 	echo "\n";
   }
+}
+
+//
+// Afficher les mots-cles d'un groupe
+//
+function mots_partout_affiche($id_groupe, $titre_groupe, $choses, $show_mots)
+{
+	$result = sql_select('id_mot,titre','spip_mots',"id_groupe=$id_groupe", '', 'titre');
+	$table = array();
+	while ($row = sql_fetch($result)) {
+		$id_mot = $row['id_mot'];
+		$show = calcul_numeros($show_mots,$id_mot,count($choses));
+		$vals = array(typo($row['titre']) => $show);
+
+		$vals['<select id="id_mot'.$id_mot.'" name="mots['.$id_mot.']"><option value="">--'.
+		_T('motspartout:action').'--</option><option value="voir">'.
+		_T('motspartout:voir').'</option><option value="cacher">'.
+		_T('motspartout:cacher').'</option><option value="avec">'.
+		_T('motspartout:ajouter').'</option><option value="sans">'.
+		_T('motspartout:enlever').'</option></select>'] = $show;
+		$table[] = $vals;
+	}
+	sql_free($result);
+	if ($table) {
+		$largeurs = array(40, 10, 10);
+		$styles = array(
+					  array('arial11',
+							'partie arial11',
+							'avec arial11'),
+					  array('arial1',
+							'partie arial1',
+							'avec arial1'),
+					  array('arial1',
+							'partie arial1',
+							'avec arial1'),
+					  array('arial1',
+							'partie arial1',
+							'avec arial1'),
+					  array('arial1',
+							'partie arial1',
+							'avec arial1'),
+					  array('arial1',
+							'partie arial1',
+							'avec arial1')
+					  );
+
+		echo debut_cadre_enfonce("groupe-mot-24.gif", true, '', typo($titre_groupe));
+		echo "<div class='liste'>";
+		md_afficher_liste($largeurs, $table, $styles);
+		echo "</div>";
+		echo fin_cadre_enfonce(true);
+	}
 }
 
 function find_tables($nom, $tables) {
@@ -164,18 +221,6 @@ function afficher_liste_defaut($choses) {
 
 function exec_mots_partout() {
 global $choses_possibles;
-  include(_DIR_PLUGIN_MOTSPARTOUT."/mots_partout_choses.php");
-  include_spip("inc/choses");
-  include_spip ("inc/presentation");
-  include_spip ("inc/documents");
-  include_spip ("base/abstract_sql");
-
-  /***********************************************************************/
-/* PREFIXE*/
-  /***********************************************************************/
-  $table_pref = 'spip';
-  if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix'];
-  
   
   /***********************************************************************/
   /* recuperation de la chose sur laquelle on travaille*/
@@ -226,40 +271,40 @@ global $choses_possibles;
 	  if(count($mots_voir) > 0) {
 		$from[1] = "spip_mots_$nom_chose as table_temp";
 		$where[1] = "table_temp.$id_chose = main.$id_chose";
-		$where[] = "table_temp.id_mot IN (".calcul_in($mots_voir).')';
+		$where[] = sql_in("table_temp.id_mot", $mots_voir);
 		if($strict) {
 		  $select[] = 'count(id_mot) as tot';
 		  $group = "main.$id_chose";
-		  $order = array('tot DESC');
+		  $order = ('tot DESC');
 		}
 	  }
 	  if($mots_cacher) {
 		$from[1] = "spip_mots_$nom_chose as table_temp";
 		$where[1] = "table_temp.$id_chose = main.$id_chose";
-		$where[] = "table_temp.id_mot not IN (".calcul_in($mots_cacher).')';
+		$where[] = sql_in("table_temp.id_mot", $mots_cacher, 'NOT');
 		if($strict) {
 		  $select[] = 'count(id_mot) as tot';
 		  $group = "main.$id_chose";
-		  $order = array('tot DESC');
+		  $order = ('tot DESC');
 		}
 	  }	
 	} else if((count($mots_voir) > 0)||($mots_cacher)){
 	  if(count($mots_voir) > 0) {
 		$from[0] = "spip_mots_$nom_chose as main";
-		$where[] = "main.id_mot IN (".calcul_in($mots_voir).')';
+		$where[] = sql_in("main.id_mot", $mots_voir);
 		if($strict) {
 		  $select[] = 'count(id_mot) as tot';
 		  $group = "main.$id_chose";
-		  $order = array('tot DESC');
+		  $order = ('tot DESC');
 		}
 	  }
 	  if($mots_cacher) {
 		$from[0] = "spip_mots_$nom_chose as main";
-		$where[] = "main.id_mot not IN (".calcul_in($mots_cacher).')';
+		$where[] = sql_in("main.id_mot", $mots_cacher,'NOT');
 		if($strict) {
 		  $select[] = 'count(id_mot) as tot';
 		  $group = "main.$id_chose";
-		  $order = array('tot DESC');
+		  $order = ('tot DESC');
 		}
 	  }
 	} else {
@@ -297,7 +342,7 @@ global $choses_possibles;
 	$debut_aff = _request('t_debut');
 
 	$show_mots = array_map('array_shift', sql_allfetsel("spip_mots_$nom_chose.id_mot", "spip_mots_$nom_chose", sql_in("spip_mots_$nom_chose.$id_chose", array_slice($choses,$debut_aff,$nb_aff))));
-  } 
+  }
 
 
   /***********************************************************************/
@@ -408,73 +453,20 @@ _T('motspartout:stricte').
 	echo fin_cadre_enfonce(true);
   }
   creer_colonne_droite();
-  // affichage de mots clefs.
-  $select = array('*');
-  $from = array('spip_groupes_mots');
-  $order = array('titre');
-  $m_result_groupes = sql_select($select,$from,'','',$order);
 
-  while ($row_groupes = sql_fetch($m_result_groupes)) {
-	$id_groupe = $row_groupes['id_groupe'];
-	$titre_groupe = typo($row_groupes['titre']);
-	$unseul = $row_groupes['unseul'];
-	$acces_admin =  $row_groupes['minirezo'];
-	$acces_redacteur = $row_groupes['comite'];
+  $where = "tables_liees REGEXP '(^|,)$nom_chose($|,)'";
 
-	if(preg_match("/,$nom_chose,/", ',' . $row_groupes['tables_liees']) AND (($GLOBALS['connect_statut'] == '1comite' AND $acces_redacteur == 'oui') OR ($GLOBALS['connect_statut'] == '0minirezo' AND $acces_admin == 'oui'))) {
-	  // Afficher le titre du groupe
-	  debut_cadre_enfonce("groupe-mot-24.gif", false, '', $titre_groupe);
-	  
-	  //
-	  // Afficher les mots-cles du groupe
-	  //
-	  $result = sql_select('id_mot,titre','spip_mots',"id_groupe=$id_groupe", '', 'titre');
-	  $table = array();
-	  
-	  if (sql_count($result) > 0) {
-		echo "<div class='liste'>";
-		$i =0;
-		while ($row = sql_fetch($result)) {
+  $index = ($GLOBALS['connect_statut'] == '0minirezo')
+  ? 'minirezo'
+  : (($GLOBALS['connect_statut'] == '1comite') ? 'comite' : '');
 
-		  $id_mot = $row['id_mot'];
-		  $show = calcul_numeros($show_mots,$id_mot,count($choses));
-		  $vals = array(typo($row['titre']) => $show);
+  if ($index) $where .= " AND ($index='oui')";
 
-		  $vals['<select id="id_mot'.$id_mot.'" name="mots['.$id_mot.']"><option value="">--'._T('motspartout:action').'--</option><option value="voir">'._T('motspartout:voir').'</option><option value="cacher">'._T('motspartout:cacher').'</option><option value="avec">'._T('motspartout:ajouter').'</option><option value="sans">'._T('motspartout:enlever').'</option></select>'] = $show;
-		  $table[] = $vals;
-		}
-		
-	  }
-	  $largeurs = array(40, 10, 10);
-	  $styles = array(
-					  array('arial11',
-							'partie arial11',
-							'avec arial11'),
-					  array('arial1',
-							'partie arial1',
-							'avec arial1'),
-					  array('arial1',
-							'partie arial1',
-							'avec arial1'),
-					  array('arial1',
-							'partie arial1',
-							'avec arial1'),
-					  array('arial1',
-							'partie arial1',
-							'avec arial1'),
-					  array('arial1',
-							'partie arial1',
-							'avec arial1')
-					  );
-	  md_afficher_liste($largeurs, $table, $styles);
-	  echo "</div>";
-	  sql_free($result);
-	  
-	  echo fin_cadre_enfonce(true);
-	}
-  }
-  sql_free($m_result_groupes);
+  $q = sql_select('*','spip_groupes_mots',$where,'','titre');
+  while ($r = sql_fetch($q))
+	mots_partout_affiche($r['id_groupe'], $r['titre'], $choses, $show_mots);
 
+  sql_free($q);
 
   //Milieu
 
