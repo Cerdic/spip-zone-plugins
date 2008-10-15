@@ -97,51 +97,46 @@ function md_afficher_liste($largeurs, $table, $styles = '') {
 //
 function mots_partout_affiche($id_groupe, $titre_groupe, $choses, $show_mots)
 {
-	$result = sql_select('id_mot,titre','spip_mots',"id_groupe=$id_groupe", '', 'titre');
-	$table = array();
-	while ($row = sql_fetch($result)) {
+	$table = sql_allfetsel('id_mot, titre','spip_mots',"id_groupe=$id_groupe", '', 'titre');
+	foreach($table as $k => $row) {
 		$id_mot = $row['id_mot'];
 		$show = calcul_numeros($show_mots,$id_mot,count($choses));
-		$vals = array(typo($row['titre']) => $show);
-
-		$vals['<select id="id_mot'.$id_mot.'" name="mots['.$id_mot.']"><option value="">--'.
+		$sel = '<select id="id_mot'.$id_mot.'" name="mots['.$id_mot.']"><option value="">--'.
 		_T('motspartout:action').'--</option><option value="voir">'.
 		_T('motspartout:voir').'</option><option value="cacher">'.
 		_T('motspartout:cacher').'</option><option value="avec">'.
 		_T('motspartout:ajouter').'</option><option value="sans">'.
-		_T('motspartout:enlever').'</option></select>'] = $show;
-		$table[] = $vals;
+		  _T('motspartout:enlever').'</option></select>';
+		$table[$k] = array(typo($row['titre']) => $show, $sel=>$show);
 	}
-	sql_free($result);
-	if ($table) {
-		$largeurs = array(40, 10, 10);
-		$styles = array(
-					  array('arial11',
+	if (!$table) return '';
+	$largeurs = array(40, 10, 10);
+	$styles = array(
+			array('arial11',
 							'partie arial11',
 							'avec arial11'),
-					  array('arial1',
+			array('arial1',
 							'partie arial1',
 							'avec arial1'),
-					  array('arial1',
+			array('arial1',
 							'partie arial1',
 							'avec arial1'),
-					  array('arial1',
+			array('arial1',
 							'partie arial1',
 							'avec arial1'),
-					  array('arial1',
+			array('arial1',
 							'partie arial1',
 							'avec arial1'),
-					  array('arial1',
+			array('arial1',
 							'partie arial1',
 							'avec arial1')
-					  );
+			);
 
-		echo debut_cadre_enfonce("groupe-mot-24.gif", true, '', typo($titre_groupe));
-		echo "<div class='liste'>";
-		md_afficher_liste($largeurs, $table, $styles);
-		echo "</div>";
-		echo fin_cadre_enfonce(true);
-	}
+	echo debut_cadre_enfonce("groupe-mot-24.gif", true, '', typo($titre_groupe));
+	echo "<div class='liste'>";
+	md_afficher_liste($largeurs, $table, $styles);
+	echo "</div>";
+	echo fin_cadre_enfonce(true);
 }
 
 
@@ -302,15 +297,6 @@ global $choses_possibles;
   //Colonne de gauche
   echo debut_gauche('', true);
 
-  echo '<form method="post" action="'.generer_url_ecrire('mots_partout','').'">';
-
-
-  // choix de la chose sur laquelle on veut ajouter des mots
-  debut_cadre_enfonce('',false,'',_T('motspartout:choses'));
-  echo '<div class=\'liste\'>
-<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">
-<tr class=\'tr_liste\'>
-<td colspan=2><select name="nom_chose">';
   $tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
   if (!$tables_installees) {
     $tables_installees=array(
@@ -324,53 +310,12 @@ global $choses_possibles;
 	);
 	ecrire_meta('MotsPartout:tables_installees',serialize($tables_installees));
   }
-  foreach($choses_possibles as $cho => $m) {
-	  if($tables_installees[$cho]) {
-		echo "<option value=\"$cho\"".(($cho == $nom_chose)?'selected':'').'>'._T($m['titre_chose']).'</option>';
-	  }
-  }
-  echo '</select></td>';
 
-  echo '</tr>
-<tr class=\'tr_liste\'><td colspan=2>'.
-	_T('motspartout:limite').
-	':</td></tr>';
-  echo '<tr class=\'tr_liste\'><td><select name="limit">
-<option value="rien" selected="true">'.
-	_T('motspartout:aucune').
-	'</option>';
-  
-  foreach($tables_limite as $t => $m) {
-	echo "<option value=\"$t\"".(($t == $limit)?'selected':'').">$t</option>";
-  }
-  
-  echo '</select></td>';
-  echo "<td><input type='text' size='3' name='identifiant_limit' value='$id_limit'></td></tr>";
-  echo '<tr class=\'tr_liste\'>';
-  echo "
-	<td>
-	<button type='submit' name='switch' value='chose'>";
-  echo _T('motspartout:voir');
-  echo"    </button>
-	</td>";
-
-  if(count($choses)>0) {
-	echo '<td colspan=2><label for="nb_aff">'._T('motspartout:par').':</label><select name="nb_aff">';
-	
-	for($nb = 10;$nb<count($choses);$nb=$nb+10)
-	  echo "<option value=\"$nb\"".(($nb == $nb_aff)?'selected="true"':'').">$nb</option>";
-	
-	echo '</select></td>';
-  } else {
-	echo '<td colspan=2></td>';
-  }
-
-	echo "	</table></div>";
-  echo fin_cadre_enfonce(true);
+  echo mots_partout_choix($choses, $choses_possibles, $id_limit, $limit, $nb_aff, $nom_chose, $tables_installees, $tables_limite);
 
   $redirect = generer_url_ecrire('mots_partout',"limit=$limit&identifiant_limit=$id_limit&nb_aff=$nb_aff");
 
-  echo "</form><form method='post' action='".generer_url_action('mots_partout',"redirect=$redirect")."'>";
+  echo "<form method='post' action='".generer_url_action('mots_partout',"redirect=$redirect")."'>";
   
   echo '<input type="hidden" name="nom_chose" value="'.$nom_chose.'">'; 
   
@@ -405,8 +350,8 @@ _T('motspartout:stricte').
   $where = "tables_liees REGEXP '(^|,)$nom_chose($|,)'";
 
   $index = ($GLOBALS['connect_statut'] == '0minirezo')
-  ? 'minirezo'
-  : (($GLOBALS['connect_statut'] == '1comite') ? 'comite' : '');
+      ? 'minirezo'
+      : (($GLOBALS['connect_statut'] == '1comite') ? 'comite' : '');
 
   if ($index) $where .= " AND ($index='oui')";
 
@@ -468,6 +413,57 @@ function selectAll(formObj, isInverse)
 </script>';
   
   fin_page();
-  
 }
+
+// choix de la chose sur laquelle on veut ajouter des mots
+
+function mots_partout_choix($choses, $choses_possibles, $id_limit, $limit, $nb_aff, $nom_chose, $tables_installees, $tables_limite)
+{
+  $res = debut_cadre_enfonce('',true,'',_T('motspartout:choses'));
+  $res .= '<div class=\'liste\'>
+<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">
+<tr class=\'tr_liste\'>
+<td colspan=2><select name="nom_chose">';
+
+  foreach($choses_possibles as $cho => $m) {
+	  if($tables_installees[$cho]) {
+		$res .= "<option value=\"$cho\"".(($cho == $nom_chose)?'selected':'').'>'._T($m['titre_chose']).'</option>';
+	  }
+  }
+
+  $res .= '</select></td>'
+	.'</tr>
+<tr class=\'tr_liste\'><td colspan=2>'.
+	_T('motspartout:limite').
+	':</td></tr>'
+	.'<tr class=\'tr_liste\'><td><select name="limit">
+<option value="rien" selected="true">'.
+	_T('motspartout:aucune').
+	'</option>';
+  
+  foreach($tables_limite as $t => $m)
+	$res .= "<option value=\"$t\"".(($t == $limit)?'selected':'').">$t</option>";
+  
+  $res .= '</select></td>'
+	."<td><input type='text' size='3' name='identifiant_limit' value='$id_limit'></td></tr>"
+	.'<tr class=\'tr_liste\'>'
+	."<td>
+	<button type='submit' name='switch' value='chose'>"
+	._T('motspartout:voir')
+	."    </button>
+	</td>";
+
+  if (count($choses)>0) {
+	$res .= '<td colspan=2><label for="nb_aff">'._T('motspartout:par').':</label><select name="nb_aff">';
+	for($nb = 10;$nb<count($choses);$nb=$nb+10)
+		$res .="<option value=\"$nb\"".(($nb == $nb_aff)?'selected="true"':'').">$nb</option>";
+	$res .= '</select></td>';
+  } else $res .= '<td colspan=2></td>';
+
+  $res .= "	</table></div>"
+	.fin_cadre_enfonce(true);
+
+  return generer_form_ecrire('mots_partout', $res, " method='get'");
+}
+
 ?>
