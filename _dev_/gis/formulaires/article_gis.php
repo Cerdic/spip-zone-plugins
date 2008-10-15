@@ -42,6 +42,10 @@ function formulaires_article_gis_verifier_dist(){
 	if ($id_article AND !_request('document'))
 		return $erreurs;
 	
+	if (!$titre = _request('titre')){
+		$erreurs['titre'] = _T('gis:erreur_titre');
+	}
+	
 	if (!$texte = _request('texte')){
 		$erreurs['texte'] = _T('gis:erreur_texte');
 	}

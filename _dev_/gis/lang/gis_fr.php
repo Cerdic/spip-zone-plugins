@@ -24,9 +24,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"erreur_ajout_article" => "Erreur lors de l'ajout de l'article",
 	"erreur_copie_impossible" => "Impossible de copier le document",
 	"erreur_formats_acceptes" => "Formats accept&#233;s : @formats@.",
+	"erreur_titre" => "Titre obligatoire",
 	"erreur_texte" => "Veuillez entrer un texte",
 	"erreur_upload" => "Erreur lors du chargement du fichier",
-	'ok_formulaire_soumis' => 'Votre article a &eacute;t&eacute; envoy&eacute; sur le site.',
+	"ok_formulaire_soumis" => "Votre article a &eacute;t&eacute; envoy&eacute; sur le site.",
 
 );
 
