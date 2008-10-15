@@ -1,6 +1,5 @@
 <?php 
 
-
 //	  exec/mots_partout.php
 //    Fichier  pour SPIP avec un bout de code issu de celui ci.
 //    Distribue sans garantie sous licence GPL./
@@ -44,7 +43,7 @@ function verifier_auteur($table, $id_objet, $id) {
 }
 
 
-// on calculr le style pour ce mot. I.E. 
+// on calcule le style pour ce mot. I.E. 
 // on regarde s'il est attache a tout ou seulement une partie
 function calcul_numeros($array, $search, $total) {
   if(is_array($array))
@@ -145,24 +144,6 @@ function mots_partout_affiche($id_groupe, $titre_groupe, $choses, $show_mots)
 	}
 }
 
-function find_tables($nom, $tables) {
-  $toret = array();
-  foreach($tables as $t => $dec) {
-	if(ereg($nom,$t)) {
-	  $toret[] = $t;
-	}
-  }
-  return $toret;
-}
-
-//genere la liste de IN a partir d'un tableau
-function calcul_in($mots) {
-  for($i=0; $i < count($mots); $i++) {
-	if($i > 0) $to_ret .= ',';
-	$to_ret .= $mots[$i];
-  }
-  return $to_ret;
-}
 
 //force a un tableau de int
 function secureIntArray($array) {
@@ -372,8 +353,16 @@ global $choses_possibles;
 <tr class=\'tr_liste\'>
 <td colspan=2><select name="nom_chose">';
   $tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
-  if (!$tables_installees){
-	$tables_installees=array("articles"=>true,"rubriques"=>true,"breves"=>true,"syndic"=>true);
+  if (!$tables_installees) {
+    $tables_installees=array(
+	"articles"=>true,
+	"rubriques"=>true,
+	"breves"=>true,
+	"syndic"=>true,
+#	"messages"=>true,
+#	'documents'=>true,
+#	'groupes_mots'=>true
+	);
 	ecrire_meta('MotsPartout:tables_installees',serialize($tables_installees));
   }
   foreach($choses_possibles as $cho => $m) {
@@ -487,15 +476,6 @@ _T('motspartout:stricte').
   debut_cadre_relief('',false,'document', _T('portfolio'));
   if(count($choses) > 0) {
   	
-  	/*$requete=array("SELECT" =>"titre","FROM" =>$table_principale,"WHERE" =>$id_chose." IN (".calcul_in($choses).")");
-  	global  $couleur_foncee, $options;
- 	$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
-
-	$largeurs = array('7','', '100', '38');
-	$styles = array('', 'arial11', 'arial1', 'arial1');
-	echo serialize($requete);
-	echo affiche_tranche_bandeau($requete, $nom_chose."-24.gif", $couleur_foncee, "white", $tmp_var, $nom_chose, false, $largeurs, $styles, 'afficher_'.$nom_chose.'_boucle');
-  	*/	
   	$function = "afficher_liste_$nom_chose";
 	if(function_exists($function)) 
 	  $function($choses,$nb_aff);

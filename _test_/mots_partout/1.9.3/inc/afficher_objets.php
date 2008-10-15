@@ -4,13 +4,10 @@
 /* Definition des choses sur lesquels on peut vouloir mettre des mots clefs*/
 /***********************************************************************/
 
-//=======================ARTICLES============================================
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 require _DIR_RESTREINT . 'inc/afficher_objets.php';
-
-									  
+							  
 function afficher_liste_articles($choses,$nb_aff=20)
 {
   $afficher_objets = charger_fonction('afficher_objets','inc');
@@ -183,40 +180,25 @@ function formater_auteur_mots($row, $own='')
 	return array($s, $mail, $nom, $w, $in);
 }
 
-function afficher_liste_groupes_mots($choses, $nb_aff=20) {
-  $rez = sql_select(
-							  array('id_groupe','titre','descriptif'),
-							  array('spip_groupes_mots'),
-							  array('id_groupe IN ('.calcul_in($choses).')'),'',array('titre')
-							  );
 
-  echo afficher_liste_debut_tableau();
-  $table = array();
-  $i = 0;
-  $table[] = array('','<b>ID</b>','<b>Titre</b>','<b>Descriptif</b>');
-  while($row = sql_fetch($rez)) {
-	$i++;
-	$id_groupe = $row['id_groupe'];
-	$vals = array();
-	$vals[] = "<input type='checkbox' name='choses[]' value='$id_groupe' id='id_chose$i'/>";
-	$vals[] = $id_groupe;
-	$vals[] = $row['titre'];
-	$vals[] = $row['descriptif'];
-		
-	$table[] = $vals;
-	
-  }
-  sql_free($rez);
-  $largeurs = array(2, 2, 26, 70);
-  $styles = array('','arial1','arial2', 'arial1');
-  echo afficher_liste($largeurs, $table, $styles);
-  
-  echo afficher_liste_fin_tableau();
-
-  
-
+function afficher_liste_groupes_mots($choses, $nb_aff=20)
+{  
+  $afficher_objets = charger_fonction('afficher_objets','inc');
+  echo $afficher_objets('groupes_mot', 'mots', 
+			array('SELECT' => 'id_groupe, titre, descriptif',
+			      'FROM' => 'spip_groupes_mots',
+			      'WHERE' => sql_in('id_groupe', $choses),
+			      'ORDER BY' => 'titre'));
 }
 
+function afficher_groupes_mots_boucle($row,$own='')
+{
+	static $i = 0;
+	$i++;
+	$id_groupe = $row['id_groupe'];
+	return array($id_groupe, $row['titre'], $row['descriptif'],
+		      "<input type='checkbox' name='choses[]' value='$id_groupe' id='id_chose$i'/>");		
+}
 
 //=============================MOTS=========================================
 /*
