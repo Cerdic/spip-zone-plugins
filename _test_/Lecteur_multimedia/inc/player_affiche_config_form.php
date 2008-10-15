@@ -6,8 +6,8 @@
 	// $LastChangedBy$
 	// $LastChangedDate$
 
-// CP-20080321 : correction style (tous les formul en espace privé utilisent verdana2)
-// CP-20080321 : déplacement de la fonction initiale ici. Peut-être à recoler en page admin ?
+// CP-20080321 : correction style (tous les formul en espace prive utilisent verdana2)
+// CP-20080321 : deplacement de la fonction initiale ici. Peut-etre a recoler en page admin ?
 
 function player_affiche_config_form ($exec_page){
 

@@ -6,7 +6,7 @@
 	// $LastChangedBy$
 	// $LastChangedDate$
 
-// CP-20080321 : création de la table
+// CP-20080321 : creation de la table
 
 
 /*
@@ -30,9 +30,9 @@ function player_array_set_key_from_value () {
 
 function player_flv_config () {
 
-	// la grosse table commune à tous les profils
+	// la grosse table commune a tous les profils
 	$player_flv_config = array(
-		  'flv' // Les URLs des fichiers vidéos FLV à charger, séparés par des |
+		  'flv' // Les URLs des fichiers videos FLV a charger, separes par des |
 		  => array(
 			'type' => "url"
 		  	, 'class' => "mini normal maxi multi"
@@ -53,7 +53,7 @@ function player_flv_config () {
 			, 'label' => _T(_PLAYER_LANG."label_configxml")
 			, 'default' => ''
 		  )
-		, 'buffer' // Le nombre de secondes pour la mémoire tampon. Par défaut à 5.
+		, 'buffer' // Le nombre de secondes pour la memoire tampon. Par defaut a 5.
 		  => array(
 			'type' => "list"
 		  	, 'class' => "mini normal maxi multi"
@@ -61,21 +61,21 @@ function player_flv_config () {
 			, 'values' => player_array_set_key_from_value(5, 10, 20, 30, 60)
 			, 'default' => '5'
 		  )
-		, 'buffermessage' // Le message de la mémoire tampon. Par défaut à Buffering _n_, _n_ indiquant le pourcentage.
+		, 'buffermessage' // Le message de la memoire tampon. Par defaut a Buffering _n_, _n_ indiquant le pourcentage.
 		  => array(
 			'type' => "text"
 		  	, 'class' => "maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_buffermessage")
 			, 'default' => ''
 		  )
-		, 'title' // Les titres séparés par des |
+		, 'title' // Les titres separes par des |
 		  => array(
 			'type' => "text"
 		  	, 'class' => "normal maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_title")
 			, 'default' => ''
 		  )
-		, 'titlesize' // La taille de la police du titre. Par défaut à 20.
+		, 'titlesize' // La taille de la police du titre. Par defaut a 20.
 		  => array(
 			'type' => "list"
 		  	, 'class' => "normal maxi multi"
@@ -83,14 +83,14 @@ function player_flv_config () {
 			, 'values' => player_array_set_key_from_value(10, 20, 30)
 			, 'default' => '20'
 		  )
-		, 'titlecolor' // La couleur du titre. Par défaut à ffffff.
+		, 'titlecolor' // La couleur du titre. Par defaut a ffffff.
 		  => array(
 			'type' => "color"
 		  	, 'class' => "maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_titlecolor")
 			, 'default' => 'ffffff'
 		  )
-		, 'margin' // La marge de la vidéo par rapport au Flash (utile pour les skins)
+		, 'margin' // La marge de la video par rapport au Flash (utile pour les skins)
 		  => array(
 			'type' => "list"
 		  	, 'class' => "normal maxi multi"
@@ -98,14 +98,14 @@ function player_flv_config () {
 			, 'values' => player_array_set_key_from_value(0, 1, 2, 4, 8, 16, 24, 32)
 			, 'default' => '8'
 		  )
-		, 'srt' // 1 pour utiliser les sous-titres SRT (le fichier doit être au même endroit que la vidéo et avoir le même nom que le fichier vidéo mais avec l'extension .srt)
+		, 'srt' // 1 pour utiliser les sous-titres SRT (le fichier doit etre au mï¿½me endroit que la video et avoir le meme nom que le fichier video mais avec l'extension .srt)
 		  => array(
 		  	'type' => "boolean"
 		  	, 'class' => "normal maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_srt")
 			, 'default' => '0'
 		  )
-		, 'srtsize' // La taille du texte des sous-titres. Par défaut à 11.
+		, 'srtsize' // La taille du texte des sous-titres. Par defaut a 11.
 		  => array(
 			'type' => "list"
 		  	, 'class' => "maxi multi"
@@ -134,21 +134,21 @@ function player_flv_config () {
 			, 'label' => _T(_PLAYER_LANG."label_autoplay")
 			, 'default' => '0'
 		  )
-		, 'autoload' // 1 pour lancer le chargement et afficher la première image de la vidéo
+		, 'autoload' // 1 pour lancer le chargement et afficher la premiere image de la video
 		  => array(
 		  	'type' => "boolean"
 		  	, 'class' => "mini normal maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_autoload")
 			, 'default' => '1'
 		  )
-		, 'autonext' // 0 pour ne pas lire automatiquement la vidéo suivante.
+		, 'autonext' // 0 pour ne pas lire automatiquement la video suivante.
 		  => array(
 		  	'type' => "boolean"
 		  	, 'class' => "multi"
 			, 'label' => _T(_PLAYER_LANG."label_autonext")
 			, 'default' => '0'
 		  )
-		, 'shuffle' // 1 pour lire aléatoirement.
+		, 'shuffle' // 1 pour lire aleatoirement.
 		  => array(
 		  	'type' => "boolean"
 		  	, 'class' => "multi"
@@ -193,7 +193,7 @@ function player_flv_config () {
 			, 'label' => _T(_PLAYER_LANG."label_shownext")
 			, 'default' => '0'
 		  )
-		, 'showopen' // 0 pour cacher le bouton OPEN. 2 pour afficher la playlist au démarrage.
+		, 'showopen' // 0 pour cacher le bouton OPEN. 2 pour afficher la playlist au demarrage.
 		  => array(
 			'type' => "list"
 		  	, 'class' => "multi"
@@ -209,7 +209,7 @@ function player_flv_config () {
 			, 'values' => player_array_set_key_from_value('autohide', 'always', 'never')
 			, 'default' => 'autohide'
 		  )
-		, 'showfullscreen' // 1 pour afficher le bouton pour le plein écran (nécessite Flash Player 9.0.16.60 ou supérieur)
+		, 'showfullscreen' // 1 pour afficher le bouton pour le plein ecran (necessite Flash Player 9.0.16.60 ou superieur)
 		  => array(
 		  	'type' => "boolean"
 		  	, 'class' => "maxi multi"
@@ -246,14 +246,14 @@ function player_flv_config () {
 //			, 'default' => '240'
 			, 'default' => ''
 		  )
-		, 'startimage' // Les images de titre séparées par des |
+		, 'startimage' // Les images de titre separees par des |
 		  => array(
 			'type' => "url"
 		  	, 'class' => "normal maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_startimage")
 			, 'default' => ''
 		  )
-		, 'skin' // L'URL du fichier JPEG (non progressif) à charger
+		, 'skin' // L'URL du fichier JPEG (non progressif) a charger
 		  => array(
 			'type' => "url"
 		  	, 'class' => "normal maxi multi"
@@ -281,14 +281,14 @@ function player_flv_config () {
 			, 'label' => _T(_PLAYER_LANG."label_bgcolor")
 			, 'default' => 'cccccc'
 		  )
-		, 'bgcolor1' // La première couleur du dégradé du fond
+		, 'bgcolor1' // La premiere couleur du degrade du fond
 		  => array(
 			'type' => "color"
 		  	, 'class' => "normal maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_bgcolor1")
 			, 'default' => 'ffcccc'
 		  )
-		, 'bgcolor2' // La seconde couleur du dégradé du fond
+		, 'bgcolor2' // La seconde couleur du degrade du fond
 		  => array(
 			'type' => "color"
 		  	, 'class' => "normal maxi multi"
@@ -309,14 +309,14 @@ function player_flv_config () {
 			, 'label' => _T(_PLAYER_LANG."label_buttonovercolor")
 			, 'default' => '00ffcc'
 		  )
-		, 'slidercolor1' // La première couleur du dégradé de la barre
+		, 'slidercolor1' // La premiere couleur du degrade de la barre
 		  => array(
 			'type' => "color"
 		  	, 'class' => "normal maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_slidercolor1")
 			, 'default' => '00ffff'
 		  )
-		, 'slidercolor2' // La seconde couleur du dégradé de la barre
+		, 'slidercolor2' // La seconde couleur du degrade de la barre
 		  => array(
 			'type' => "color"
 		  	, 'class' => "normal maxi multi"
@@ -331,35 +331,35 @@ function player_flv_config () {
 			, 'label' => _T(_PLAYER_LANG."label_sliderovercolor")
 			, 'default' => '00cccc'
 		  )
-		, 'scrollbarcolor' // La couleur de la barre de défilement.
+		, 'scrollbarcolor' // La couleur de la barre de defilement.
 		  => array(
 			'type' => "color"
 		  	, 'class' => "multi"
 			, 'label' => _T(_PLAYER_LANG."label_scrollbarcolor")
 			, 'default' => 'ff0000'
 		  )
-		, 'scrollbarovercolor' // La couleur de la barre de défilement au survol.
+		, 'scrollbarovercolor' // La couleur de la barre de defilement au survol.
 		  => array(
 			'type' => "color"
 		  	, 'class' => "normal maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_scrollbarovercolor")
 			, 'default' => '00ffff'
 		  )
-		, 'currentflvcolor' // La couleur de la vidéo sélectionnée.
+		, 'currentflvcolor' // La couleur de la video selectionnee.
 		  => array(
 			'type' => "color"
 		  	, 'class' => "multi"
 			, 'label' => _T(_PLAYER_LANG."label_currentflvcolor")
 			, 'default' => '00ff00'
 		  )
-		, 'onclick' // L'URL de la destination au click sur la vidéo. Par défaut à playpause qui signifie que la vidéo fait play ou pause au click. Pour ne rien faire, il faut mettre none.
+		, 'onclick' // L'URL de la destination au click sur la video. Par defaut a playpause qui signifie que la video fait play ou pause au click. Pour ne rien faire, il faut mettre none.
 		  => array(
 			'type' => "url"
 		  	, 'class' => "maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_onclick")
 			, 'default' => 'playpause'
 		  )
-		, 'onclicktarget' // La cible de l'URL au click sur la vidéo. Par défaut à _self. Pour ouvrir une nouvelle fenêtre, mettez _blank.
+		, 'onclicktarget' // La cible de l'URL au click sur la video. Par defaut a _self. Pour ouvrir une nouvelle fenetre, mettez _blank.
 		  => array(
 			'type' => "list"
 		  	, 'class' => "maxi multi"
@@ -367,14 +367,14 @@ function player_flv_config () {
 			, 'values' => player_array_set_key_from_value('_self', '_blank')
 			, 'default' => '_self'
 		  )
-		, 'ondoubleclick' // Action sur le double click: none, fullscreen, playpause, ou l'url à ouvrir.
+		, 'ondoubleclick' // Action sur le double click: none, fullscreen, playpause, ou l'url a ouvrir.
 		  => array(
 			'type' => "text"
 		  	, 'class' => "maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_ondoubleclick")
 			, 'default' => 'fullscreen'
 		  )
-		, 'ondoubleclicktarget' // La cible de l'URL au double click sur la vidéo. Par défaut à _self. Pour ouvrir une nouvelle fenêtre, mettez _blank.
+		, 'ondoubleclicktarget' // La cible de l'URL au double click sur la video. Par defaut a _self. Pour ouvrir une nouvelle fenetre, mettez _blank.
 		  => array(
 			'type' => "list"
 		  	, 'class' => "maxi multi"
@@ -382,21 +382,21 @@ function player_flv_config () {
 			, 'values' => player_array_set_key_from_value('_self', '_blank')
 			, 'default' => '_self'
 		  )
-		, 'playertimeout' // Le délai en milliseconde avant que le lecteur se cache (quand il est en mode autohide bien sûr. Par défaut à 1500.
+		, 'playertimeout' // Le delai en milliseconde avant que le lecteur se cache (quand il est en mode autohide bien sur. Par defaut a 1500.
 		  => array(
 			'type' => "int"
 		  	, 'class' => "maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_playertimeout")
 			, 'default' => '1500'
 		  )
-		, 'videodelay' // La durée d'affichage du titre au changement de vidéo, en milliseconde. Par défaut à 0.
+		, 'videodelay' // La duree d'affichage du titre au changement de video, en milliseconde. Par defaut a 0.
 		  => array(
 			'type' => "int"
 		  	, 'class' => "multi"
 			, 'label' => _T(_PLAYER_LANG."label_videodelay")
 			, 'default' => '0'
 		  )
-		, 'shortcut' // 0 pour désactiver les raccourcis clavier.
+		, 'shortcut' // 0 pour desactiver les raccourcis clavier.
 		  => array(
 		  	'type' => "boolean"
 		  	, 'class' => "maxi multi"
@@ -411,7 +411,7 @@ function player_flv_config () {
 			, 'values' => player_array_set_key_from_value(0, 25, 50, 100, 150, 175, 200)
 			, 'default' => '100'
 		  )
-		, 'videobgcolor' // La couleur du fond de la vidéo quand il n'y a pas de vidéo.
+		, 'videobgcolor' // La couleur du fond de la video quand il n'y a pas de video.
 		  => array(
 			'type' => "color"
 		  	, 'class' => "maxi multi"
@@ -425,14 +425,14 @@ function player_flv_config () {
 			, 'label' => _T(_PLAYER_LANG."label_playlisttextcolor")
 			, 'default' => 'cccccc'
 		  )
-		, 'playonload' // 0 pour ne pas jouer la vidéo au chargement (de la vidéo).
+		, 'playonload' // 0 pour ne pas jouer la video au chargement (de la video).
 		  => array(
 		  	'type' => "boolean"
 		  	, 'class' => "multi"
 			, 'label' => _T(_PLAYER_LANG."label_playonload")
 			, 'default' => '0'
 		  )
-		, 'scrollbarsize' // La taille de la barre de défilement (4 par défaut)
+		, 'scrollbarsize' // La taille de la barre de defilement (4 par defaut)
 		  => array(
 			'type' => "list"
 		  	, 'class' => "multi"
@@ -464,14 +464,14 @@ function player_flv_config () {
 			, 'values' => player_array_set_key_from_value('always', 'autohide', 'never')
 			, 'default' => 'autohide'
 		  )
-		, 'top1' // Charger une image par dessus la vidéo et la placer à une coordonnée x et y (par exemple url|x|y)
+		, 'top1' // Charger une image par dessus la video et la placer a une coordonnee x et y (par exemple url|x|y)
 		  => array(
 			'type' => "text"
 		  	, 'class' => "maxi multi"
 			, 'label' => _T(_PLAYER_LANG."label_top1")
 			, 'default' => ''
 		  )
-		, 'showiconplay' // 1 pour afficher l'icone PLAY au milieu de la vidéo.
+		, 'showiconplay' // 1 pour afficher l'icone PLAY au milieu de la video.
 		  => array(
 		  	'type' => "boolean"
 		  	, 'class' => "maxi multi"
@@ -500,7 +500,7 @@ function player_flv_config () {
 			, 'values' => player_array_set_key_from_value(0, 20, 40, 60, 80, 100)
 			, 'default' => '100'
 		  )
-		, 'showtitleandstartimage' // 1 pour afficher le titre et l'image de départ en même temps.
+		, 'showtitleandstartimage' // 1 pour afficher le titre et l'image de depart en meme temps.
 		  => array(
 		  	'type' => "boolean"
 		  	, 'class' => "maxi multi"

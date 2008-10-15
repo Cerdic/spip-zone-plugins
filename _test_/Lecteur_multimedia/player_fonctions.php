@@ -13,13 +13,13 @@ if (!defined('_DIR_PLUGIN_PLAYER')){ // defini automatiquement par SPIP 1.9.2
 
 function Player_head(){
 	$flux = "";
-	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'soundmanager/soundmanager2.js"></script>';
+	$flux .= '<script type="text/javascript" src="'.find_in_path('soundmanager/soundmanager2.js').'"></script>';
 	$flux .= '<script type="text/javascript"><!--'."\n"
-	. 'var musicplayerurl="'._DIR_PLUGIN_PLAYER.'eraplayer_playlist.swf";'."\n"
-	. 'var image_play="'._DIR_PLUGIN_PLAYER_IMAGES.'playl.gif";'."\n"
-	. 'var image_pause="'._DIR_PLUGIN_PLAYER_IMAGES.'pausel.gif";'."\n"
-	. 'soundManager.url = "'._DIR_PLUGIN_PLAYER.'soundmanager/soundmanager2.swf";'."\n"
-  	. 'soundManager.nullURL = "'._DIR_PLUGIN_PLAYER.'soundmanager/null.mp3";'."\n"
+	. 'var musicplayerurl="'.find_in_path('flash/eraplayer_playlist.swf').'";'."\n"
+	. 'var image_play="'.find_in_path('images/playl.gif').'";'."\n"
+	. 'var image_pause="'.find_in_path('images/pausel.gif').'";'."\n"
+	. 'soundManager.url = "'.find_in_path('soundmanager/soundmanager2.swf').'";'."\n"
+  	. 'soundManager.nullURL = "'.find_in_path('soundmanager/null.mp3').'";'."\n"
 	. 'var videoNullUrl = "'._DIR_PLUGIN_PLAYER.'null.flv";'."\n"
 	. 'var DIR_PLUGIN_PLAYER = "'._DIR_PLUGIN_PLAYER.'";'
 	. "//--></script>\n";
@@ -51,7 +51,7 @@ function Player_affichage_final($flux){
  */
 
 // Contrairement au plugin original (http://zone.spip.org/trac/spip-zone/browser/_plugins_branche_stable_/_spip_1_9_0_/dewplayer)
-// Cette version pour la version 1.9.1 utilisera la modification du mod�le doc pour traiter les adresses relatives 
+// Cette version pour la version 1.9.1 utilisera la modification du modele doc pour traiter les adresses relatives 
 // qu'on retrouverait si on placerait un lien dans le texte par une balise <docXX>
 // ajout d'un rel="enclosure" simple sur les liens mp3
 function Player_post_propre($texte) {

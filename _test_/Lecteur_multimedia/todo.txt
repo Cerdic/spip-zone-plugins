@@ -11,4 +11,4 @@ TO DO
 - ajouter la fonction pause
 
 - nettoyer le code pour avoir notamment un player_enclosure.js propre et des css propres et faciles a customiser ...
-			
+	
