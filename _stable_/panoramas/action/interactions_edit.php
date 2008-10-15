@@ -16,6 +16,7 @@ function Interactions_update($id_interaction){
 	$y1 = intval(_request('y1'));
 	$y2 = intval(_request('y2'));
 	$id_image_fond = intval(_request('id_image_fond'));
+	$id_image_fond_survol = intval(_request('id_image_fond_survol'));
 	$type = _request('type');
 	$x_lieu_cible = intval(_request('x_lieu_cible'));
 	$id_article_cible = intval(_request('id_article_cible'));
@@ -26,13 +27,9 @@ function Interactions_update($id_interaction){
 	$id_document_cible = intval(_request('id_document_cible'));
 	$id_visite_cible = intval(_request('id_visite_cible'));
 	$url_cible = _request('url_cible');
-	$id_objet = intval(_request('id_objet'));
-	$id_personnage = intval(_request('id_personnage'));
 	$id_objet_activation = intval(_request('id_objet_activation'));
 	$id_jeu_activation = intval(_request('id_jeu_activation'));
 	$id_lieu_activation = intval(_request('id_lieu_activation'));
-
-	$id_personnage_survol = intval(_request('id_personnage_survol'));
 	$texte_avant_activation = _request('texte_avant_activation');
 	$texte_apres_activation = _request('texte_apres_activation');
 	$id_audio_avant_activation = intval(_request('id_audio_avant_activation'));
@@ -62,6 +59,7 @@ function Interactions_update($id_interaction){
 			"y1="._q($y1).", ".
 			"y2="._q($y2).", ".
 			"id_image_fond="._q($id_image_fond).", ".
+			"id_image_fond_survol="._q($id_image_fond_survol).", ".
 			"type="._q($type).", ".
 			"x_lieu_cible="._q($x_lieu_cible).", ".
 			"id_article_cible="._q($id_article_cible).", ".
@@ -69,15 +67,12 @@ function Interactions_update($id_interaction){
 			"id_document_cible="._q($id_document_cible).", ".
 			"id_visite_cible="._q($id_visite_cible).", ".
 			"url_cible="._q($url_cible).", ".
-			"id_objet="._q($id_objet).", ".
-			"id_personnage="._q($id_personnage).", ".
 			"id_objet_activation="._q($id_objet_activation).", ".
 			"id_jeu_activation="._q($id_jeu_activation).", ".
 			"id_lieu_activation="._q($id_lieu_activation).", ".
 			"id_rubrique_cible="._q($id_rubrique_cible).", ".
 			"id_jeu_cible="._q($id_jeu_cible).", ".
 			"id_objet_recompense="._q($id_objet_recompense).", ".
-			"id_personnage_survol="._q($id_personnage_survol).", ".
 			"texte_avant_activation="._q($texte_avant_activation).", ".
 			"texte_apres_activation="._q($texte_apres_activation).", ".
 			"id_audio_avant_activation="._q($id_audio_avant_activation).", ".

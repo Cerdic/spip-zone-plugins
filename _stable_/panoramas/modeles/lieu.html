@@ -22,8 +22,7 @@
 				<BOUCLE_documentmp3pointe(DOCUMENTS){id_document=#ID_DOCUMENT_CIBLE}{extension IN mp3,MP3}>[(#TYPE|=={'document'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_PAGE{document_ajax,id_document=#ID_DOCUMENT_CIBLE&KeepThis=true&TB_iframe=true&height=400&width=600}" class="interaction#ID_INTERACTION type-audio thickbox" alt="#TITRE" />]</BOUCLE_documentmp3pointe>
 				<BOUCLE_documentvideopointe(DOCUMENTS){id_document=#ID_DOCUMENT_CIBLE}{extension IN flv,FLV,swf,SWF}>[(#TYPE|=={'document'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_PAGE{document_ajax,id_document=#ID_DOCUMENT_CIBLE&KeepThis=true&TB_iframe=true&height=400&width=600}" class="interaction#ID_INTERACTION type-video thickbox" alt="#TITRE" />]</BOUCLE_documentvideopointe>
 				[(#MODE_JEU|=={'oui'}|?{' ',''})[(#TYPE|=={'jeu'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#URL_PAGE{jeu_interaction_ajax,id_interaction=#ID_INTERACTION&KeepThis=true&TB_iframe=true&height=400&width=600}" class="interaction#ID_INTERACTION type-jeu thickbox" alt="#TITRE" />]]
-				<BOUCLE_objet(DOCUMENTS){id_document=#ID_OBJET}>[(#MODE_JEU|=={'oui'}|?{' ',''})[(#TYPE|=={'objet'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#" class="interaction#ID_INTERACTION type-objet type-objet#ID_DOCUMENT" alt="#TITRE" />]]</BOUCLE_objet>
-				<BOUCLE_personnage(DOCUMENTS){id_document=#ID_PERSONNAGE}>[(#MODE_JEU|=={'oui'}|?{' ',''})[(#TYPE|=={'personnage'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#" class="interaction#ID_INTERACTION type-personnage type-personnage#ID_DOCUMENT" alt="#TITRE" />]]</BOUCLE_personnage>
+				<BOUCLE_objetetpersonnage(DOCUMENTS){id_document=#ID_IMAGE_FOND}>[(#MODE_JEU|=={'oui'}|?{' ',''})[(#TYPE|=={'objet'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#" class="interaction#ID_INTERACTION type-objet type-objet#ID_DOCUMENT" alt="#TITRE" />][(#TYPE|=={'personnage'}|?{' ',''})<area shape="rect" coords="#X1,#Y1,#X2,#Y2" href="#" class="interaction#ID_INTERACTION type-personnage type-personnage#ID_DOCUMENT" alt="#TITRE" />]]</BOUCLE_objetetpersonnage>
 		</BOUCLE_interactions>
 		
 	</map>
@@ -147,14 +146,23 @@ $(document).ready(function(){
 							return false;
 						});
 				
+			[ (#REM) interactions qui ont précisé une image de fond au survol : ajouter l'image dans le cadre ]
+			<BOUCLE_imagedefondsurvolcourante(DOCUMENTS){id_document=#ID_IMAGE_FOND_SURVOL}>
+				$('.interaction#_toutesinteractions:ID_INTERACTION img').bind('mouseover', function(){
+					$(this).attr('src', '#URL_DOCUMENT');
+				}).bind('mouseout', function(){
+					$(this).attr('src', '#_imagedefondcourante:URL_DOCUMENT');
+				});
+				
+			</BOUCLE_imagedefondsurvolcourante>
 				
 		</BOUCLE_imagedefondcourante>
+		
 
 		[ (#REM) interactions avec les objets : ajouter l'image de l'objet et gérer le drag and drop dans le panier ]
-		<BOUCLE_objetcourant(DOCUMENTS){id_document=#ID_OBJET}>
+		<BOUCLE_objetcourant(DOCUMENTS){id_document=#ID_IMAGE_FOND}>
 			[(#MODE_JEU|=={'oui'}|?{' ',''})	
-			[(#TYPE|=={'objet'}|?{' ',''})  
-				$('.type-objet#ID_DOCUMENT').append("<img src='#URL_DOCUMENT' width='100%' height='100%' />");
+			[(#TYPE|=={'objet'}|?{' ',''})
 				$('.type-objet#ID_DOCUMENT').bind('click', function() {
 							return false;
 						}).draggable({helper: 'clone', opacity: .4, revert: true});
@@ -184,34 +192,7 @@ $(document).ready(function(){
 			]
 			][(#REM) fin mode_jeu ]
 		</BOUCLE_objetcourant>
-
-		[ (#REM) interactions de type personnage : ajouter l'image du personnage ]
-		<BOUCLE_personnagecourant(DOCUMENTS){id_document=#ID_PERSONNAGE}>
-			[(#MODE_JEU|=={'oui'}|?{' ',''})
-			[(#TYPE|=={'personnage'}|?{' ',''})  
-				$('.type-personnage#ID_DOCUMENT').append("<img src='#URL_DOCUMENT' width='100%' height='100%' />").css('opacity',1).css('border','none').css('background','none');
-				
-				$('.type-personnage#ID_DOCUMENT').bind('click', function() {
-							return false;
-						});
-				
-				
-			]
-			][(#REM) fin mode_jeu ]
-			
-			[(#REM) éventuellement, une image différente pour le survol a été définie ]
-			<BOUCLE_personnagesurvol(DOCUMENTS){id_document=#ID_PERSONNAGE_SURVOL}>
-				[(#MODE_JEU|=={'oui'}|?{' ',''})
-				[(#TYPE|=={'personnage'}|?{' ',''})  
-				$('.type-personnage#_personnagecourant:ID_DOCUMENT img').bind('mouseover', function(){
-					$(this).attr('src', '#URL_DOCUMENT');
-				}).bind('mouseout', function(){
-					$(this).attr('src', '#_personnagecourant:URL_DOCUMENT');
-				});
-				]
-				][(#REM) fin mode_jeu ]
-			</BOUCLE_personnagesurvol>	
-		</BOUCLE_personnagecourant>
+		
 
 		[ (#REM) interactions qui requièrent un objet pour être actives (il faudra drag and dropper l'objet sur l'interaction depuis le panier ]
 		<BOUCLE_objetactivationobjet(DOCUMENTS){id_document=#ID_OBJET_ACTIVATION}>
@@ -399,6 +380,12 @@ $(document).ready(function(){
 <script type="text/javascript" src="#CHEMIN{js/thickbox.js}"></script>
 
 <BOUCLE_interactionstransitions(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
+
+	[ (#REM) préchargement des images de fond de survol ]
+	<BOUCLE_imagedefondsurvolprechargement(DOCUMENTS){id_document=#ID_IMAGE_FOND_SURVOL}>
+		<img src="#URL_DOCUMENT"  width="0" height="0" alt="" />				
+	</BOUCLE_imagedefondsurvolprechargement>
+
 #SET{transition, #IMAGES_TRANSITION}
 <B_imagestransition>
 <div class="images-transition-interaction#ID_INTERACTION" style="display: none; position: absolute; top: 0; left: 0;">

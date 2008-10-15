@@ -148,6 +148,9 @@ h2.panorama-carte a, h2.panorama-panier a {
 	width: 20px;
 	height: 70px;
 }
+.panorama-panier {
+	overflow: auto;
+}
 .type-objet, .type-personnage {
 	border: none;
 	background: none;
