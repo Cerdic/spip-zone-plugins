@@ -15,6 +15,8 @@
 
 	[(#CONFIG{socialtags/live}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_live}|parametre_url{'add',[(#URL_ARTICLE|url_absolue)]}|parametre_url{'title',[(#TITRE|texte_script)]})]" title="Live"><img src="[(#CHEMIN{images/live.png})]" title="Live" alt="Live" class="socialtags-hovers" /></a></li>,''})]
 
+	[(#CONFIG{socialtags/myspace}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_myspace}|parametre_url{'u',[(#URL_ARTICLE|url_absolue)]}|parametre_url{'t',[(#TITRE|texte_script)]})]" title="MySpace"><img src="[(#CHEMIN{images/myspace.gif})]" title="MySpace" alt="MySpace" class="socialtags-hovers" /></a></li>,''})]
+
 	[(#CONFIG{socialtags/scoopeo}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_scoopeo}|parametre_url{'newurl',[(#URL_ARTICLE|url_absolue)]}|parametre_url{'title',[(#TITRE|texte_script)]})]" title="Scoopeo"><img src="[(#CHEMIN{images/scoopeo.png})]" title="Scoopeo" alt="Scoopeo" class="socialtags-hovers" /></a></li>,''})]
 
 	[(#CONFIG{socialtags/wikio}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_wikio}|parametre_url{'newurl',[(#URL_ARTICLE|url_absolue)]})]" title="Wikio"><img src="[(#CHEMIN{images/wikio.gif})]" title="Wikio" alt="Wikio" class="socialtags-hovers" /></a></li>,''})]

@@ -53,6 +53,13 @@ Ici vous pouvez choisir les sites de partages de vos articles.<br /><br />
 
 <br />
 <label>
+<img src="[(#CHEMIN{images/myspace.gif})]" title="MySpace" alt="MySpace" />
+<input type="checkbox" name="myspace" [checked="(#ENV{myspace}|?{checked})"] id="myspace" />[(#ENV{myspace}|?{<strong>})]MySpace[(#ENV{myspace}|?{</strong>})]</label>
+<input type="hidden" name="url_myspace" value="http://www.myspace.com/Modules/PostTo/Pages/?"/>
+
+
+<br />
+<label>
 <img src="[(#CHEMIN{images/scoopeo.png})]" title="Scoopeo" alt="Scoopeo" />
 <input type="checkbox" name="scoopeo" [checked="(#ENV{scoopeo}|?{checked})"] id="scoopeo" />[(#ENV{scoopeo}|?{<strong>})]Scoopeo[(#ENV{scoopeo}|?{</strong>})]</label>
 <input type="hidden" name="url_scoopeo" value="http://www.scoopeo.com/scoop/new"/>
