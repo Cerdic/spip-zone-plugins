@@ -18,48 +18,10 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
-//force a un tableau de int
-function secureIntArray($array) {
-  $to_return = Array();
-  if(is_array($array)) {
-	foreach($array as $id) {
-	  $to_return[] = intval($id);
-	}
-  } 
-  return $to_return;
-}
-
-// transfert la variable POST d'un tableau (19 => 'avec', 20=>'voir') en 4 tableaux avec=(19) voir=(20)
-function splitArrayIds($array) {
-  $voir = Array();
-  $cacher = Array();
-  $ajouter = Array();
-  $enlever = Array();
-  if(is_array($array)) {
-    foreach($array as $id_mot => $action) {
-      $id_mot = intval($id_mot);
-      if($id_mot > 0) {
-        switch(addslashes($action)) {
-		  case 'avec': 
-			$ajouter[] = $id_mot;
-		  case 'voir':
-			$voir[] = $id_mot;
-			break;
-		  case 'sans':
-			$enlever[] = $id_mot;
-			break;
-		  case 'cacher':
-			$cacher[] = $id_mot;
-            break; 
-
-        }
-      }
-    }
-  }
-  return array($voir, $cacher, $ajouter, $enlever);
-}
-
+include_once(_DIR_PLUGIN_MOTSPARTOUT."/mots_partout_choses.php");
+include_spip('base/abstract_sql');
 
 function action_mots_partout() {
   /*
@@ -71,10 +33,6 @@ function action_mots_partout() {
 	minipres(_T('info_acces_interdit'));
   }
   */   
-  
-  include(_DIR_PLUGIN_MOTSPARTOUT."/mots_partout_choses.php");
-  include_spip('base/abstract_sql');
-  
 
   $choses = secureIntArray(_request('choses'));
 
