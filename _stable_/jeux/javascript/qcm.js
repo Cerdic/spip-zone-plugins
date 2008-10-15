@@ -8,10 +8,10 @@ function qcm_affichage_une_par_une(){
 	
 	// on crée les boutons
 	var qcm_bouton_prec = $('<input type="button" value="&lt;&lt;&lt;" />').click(function(){
-		$(this).parent().hide().prev().show();
+		$(this).parent().hide().prevAll('.qcm_element').eq(0).show();
 	});
 	var qcm_bouton_suiv = $('<input type="button" value="&gt;&gt;&gt;" />').click(function(){
-		$(this).parent().hide().next().show();
+		$(this).parent().hide().nextAll('.qcm_element').eq(0).show();
 	});
 	
 	// on ajoute les boutons à chaque élément
