@@ -4,7 +4,7 @@
 | DW2 2.14 (03/2007) - SPIP 1.9.2
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
-| Script certifié KOAK2.0 strict, mais si !
+| Script certifiÃ© KOAK2.0 strict, mais si !
 +--------------------------------------------+
 | Aiguilleur de sortie :
 | Generer le lien de telechargement
@@ -21,7 +21,7 @@ include_spip('inc/headers');
 // requis spip .h.26/12 charger le bon format url 
 //charger_generer_url();
 // chryjs7/10/8 a change dans spip 2.0
-generer_url_entite("", "", "", "", !NULL);
+@generer_url_entite("", "", "", "", !NULL);
 
 /*
 | $origine ainsi que la distinction "admin" "redact" et "visteur",
@@ -65,7 +65,7 @@ function action_dw2_out() {
 	include_spip("inc/dw2_inc_hierarchie"); // -> hierarchie ; dependance_restriction()
 	$adr_site=lire_meta("adresse_site");
 
-	
+
 	// qq variables ...
 	$ip = $_SERVER["REMOTE_ADDR"];	// ip du visiteur 
 	$tconn=3600*24;					// duree avant eraze : 24 heures 
@@ -86,11 +86,11 @@ function action_dw2_out() {
 
 	if(sql_count($req_dw)) {
 		$rec = sql_fetch($req_dw);
-		$tabdoc = array('dw', $rec['url'], $rec['heberge'], $rec['total'] );
+		$tabdoc = array('dw', $rec['url'], $rec['heberge'], 'total' => $rec['total'] );
 	}
 	else {
 		$res = sql_fetsel("id_document, fichier, distant","spip_documents","id_document='$id'");
-		$tabdoc = array('sp', $res['fichier'], $res['distant'], 0);
+		$tabdoc = array('sp', $res['fichier'], $res['distant'], 'total' => 0);
 	}
 
 	//
@@ -138,27 +138,22 @@ function action_dw2_out() {
 		}
 	}	
 	
-	
+
 	//
 	// traitement
 	//
 	// statut origine = 'publie' ('1') OK ..
-	if($origine[2]=='1') {
-		
+	if ($origine[2]=='1') {
 		// doc commun dw et spip
-		if($tabdoc[0]=='dw') {
-		
+		if ($tabdoc[0]=='dw') {
 			// incrementation compteur oui/non ... initialise :
 			$increm = "";
-						
-			// mode anti triche activé ?
-			if ($GLOBALS['dw2_param']['anti_triche']=="oui") {
-				
-				//On recherche si couple ip/id existe déjà dans la base
+			// mode anti triche activÃ© ?
+			if ( isset($GLOBALS['dw2_param']['anti_triche']) AND $GLOBALS['dw2_param']['anti_triche']=="oui") {
+				//On recherche si couple ip/id existe dÃ©jÃ  dans la base
 				$req_ipid = sql_select("*","spip_dw2_triche","idsite LIKE '$id' AND ip LIKE '%$ip%'");
-			
 				//Si l'ip/id n'existe pas dans la table, on l'ajoute
-				if(!sql_count($req_ipid)) {
+				if (!sql_count($req_ipid)) {
 					$nouv_insert = sql_insertq("spip_dw2_triche",array(
 										//'id' => '', //auto_increment
 										'ip' => $ip,
@@ -172,47 +167,46 @@ function action_dw2_out() {
 			else {
 				$increm = "oui";
 			}
-
 			// incremente compteur doc, stats
 			//
 			if ($increm == "oui") {
 				$date = date("Y-m-d");
-				
-				//sql_query("UPDATE spip_dw2_doc SET total=total+1, dateur=NOW() WHERE id_document='$id'");
-				sql_updateq("spip_dw2_doc",array('total'=>$tabdoc[3]+1, 'dateur'=>"NOW()"),"id_document='$id'");
-				
+				sql_query("UPDATE spip_dw2_doc SET total=total+1, dateur=NOW() WHERE id_document='$id'");
 				//h.28/12 .. restreint .. crea||increm ligne sur table stats_auteurs
-				
-				if($auteur_session && $statut_restrict >= '1') {
+				if ($auteur_session && $statut_restrict >= '1') {
 					$rq = sql_select("*","spip_dw2_stats_auteurs","id_doc='$id' AND id_auteur='$auteur_session'");
 					if(!sql_count($rq)) {
-						sql_insertq("spip_dw2_stats_auteurs",array('date'=>"CURDATE()", 'id_auteur'=>$auteur_session, 'id_doc'=>$id, 'date_enreg'=>"NOW()"));
+						@sql_insertq("spip_dw2_stats_auteurs",array('date'=>"CURDATE()", 'id_auteur'=>$auteur_session, 'id_doc'=>$id, 'date_enreg'=>"NOW()"));
 					spip_log('enreg stat auteur');
 					}
 				}
-				
-				// créa ligne || incrementation ligne .. dw2_stats
+				// crÃ©a ligne || incrementation ligne .. dw2_stats
 				$rst = sql_fetsel("*","spip_dw2_stats","date=CURDATE() AND id_doc='$id'");
 				if(!$rst) {
-					sql_insertq("spip_dw2_stats", array('date'=>$date, 'id_doc'=>$id, 'telech'=>1) );
+					@sql_insertq("spip_dw2_stats", array('date'=>$date, 'id_doc'=>$id, 'telech'=>1) );
 				}
 				else {
-					sql_updateq("spip_dw2_stats",array('telech'=>$rst['telech']+1),"id_doc='$id' AND date='$date'");
+					sql_query("UPDATE spip_dw2_stats SET telech=telech+1 WHERE id_doc='$id' AND date='$date'");
+				//	@sql_updateq("spip_dw2_stats",array('telech'=>$rst['telech']+1),"id_doc='$id' AND date='$date'");
 				}
 			}
 		}
+		
+/////
 
 		// et hop envois du Doc au visiteur
 		$url = $tabdoc[1]; // fichier
 		include_spip("inc/documents");
 		$fichier=get_spip_doc($url);
 		if ($distant=='oui') { 
-			@header("Location: $fichier");
-			exit(0);
+			//@header("Location: $fichier");
+			//exit(0);
+			redirige_par_entete($fichier);
 		}
 		else {
-			@header("Location: ".$GLOBALS['meta']['adresse_site'] . '/'.$fichier); 
-			exit(0);
+			// @header("Location: ".$GLOBALS['meta']['adresse_site'] . '/'.$fichier); 
+			//exit(0);
+			redirige_par_entete($GLOBALS['meta']['adresse_site'] . '/'.$fichier);
 		}
 	}
 	else {
@@ -220,12 +214,12 @@ function action_dw2_out() {
 		// reconstitue page referer (sans referer, yep !)
 		$function_generer = 'generer_url_'.$origine[0];
 		
-		//  auteur identifié mais pas les bon droits ('2') || auteur non identifié ('1')
+		//  auteur identifiÃ© mais pas les bon droits ('2') || auteur non identifiÃ© ('1')
 		if(isset($flag_dwacces)) {
-			include_spip('inc/utils'); // parametre_url
+//			include_spip('inc/utils'); // parametre_url
 			redirige_par_entete(parametre_url($function_generer($origine[1]),"dwacces",$flag_dwacces,'&'));
 		}
-		// doc invalide ou article non publié
+		// doc invalide ou article non publiÃ©
 		else {
 		#	redirige_par_entete(generer_url_public('dw2_erreur_out',"cata=".$GLOBALS['dw2_param']['squelette_cata_public'],true));
 			// renvois sur 'sommaire'
