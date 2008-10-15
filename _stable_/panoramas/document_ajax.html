@@ -4,9 +4,13 @@
 <INCLURE{fond=inc-head}>
 </head>
 <body>
-<BOUCLE_video(DOCUMENTS){id_document}>
+<BOUCLE_videolocale(DOCUMENTS){id_document}{distant=non}>
 	[(#MODELE{doc_player}{id_document=#ID_DOCUMENT})]
-</BOUCLE_video>
+</BOUCLE_videolocale>
+<BOUCLE_videodistante(DOCUMENTS){id_document}{distant=oui}>
+	[(#MODELE{emb}{id_document=#ID_DOCUMENT})]
+</BOUCLE_videodistante>
+
 
 </body>
 </html>
