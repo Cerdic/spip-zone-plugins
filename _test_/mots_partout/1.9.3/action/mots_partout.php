@@ -1,22 +1,18 @@
 <?php
 
-//	  action/mots_partout.php
-//    Fichier pour SPIP avec un bout de code issu de celui ci.
-//    Distribue sans garantie sous licence GPL./
-//    Copyright (C) 2006  Pierre ANDREWS
-//
-//    This program is free software; you can redistribute it and/or modify
-//    it under the terms of the GNU General Public License as published by
-//    the Free Software Foundation; either version 2 of the License, or any later version.
-//
-//    This program is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
-//
-//    You should have received a copy of the GNU General Public License
-//    along with this program; if not, write to the Free Software
-//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *  Plugin Mots-Partout                                                    *
+ *                                                                         *
+ *  Copyright (c) 2006-2008                                                *
+ *  Pierre ANDREWS, Yoann Nogues, Emmanuel Saint-James                     *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *    This program is free software; you can redistribute it and/or modify *
+ *    it under the terms of the GNU General Public License as published by * 
+ *    the Free Software Foundation.                                        *
+\***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -81,7 +77,7 @@ function action_mots_partout() {
 		$titre_groupe = '';
 		if($id_groupe = intval(sql_getfetsel($select,$from,$where))) {
 		  $from = ('spip_groupes_mots');
-		  $select =('unseul','titre');
+		  $select =('unseul, titre');
 		  $where = ("id_groupe = $id_groupe");
 		  if($row = sql_fetsel($select,$from,$where)) {
 			$unseul = ($row['unseul'] == 'oui');
@@ -106,7 +102,7 @@ function action_mots_partout() {
   }
   if ($mots_enlever AND $choses) {
 	foreach($mots_enlever as $m) {
-	    sql_delete(.$table, "id_mot=$m AND " sql_in($id_chose, $choses));
+	    sql_delete($table, "id_mot=$m AND " . sql_in($id_chose, $choses));
 	}
   }
 

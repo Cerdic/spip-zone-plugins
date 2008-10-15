@@ -1,14 +1,21 @@
 <?php
 
-/*
- * mots partout
- *
- * interface de gestion des mots clefs
- *
- * Auteur : Pierre Andrews (Mortimer)
- * � 2006 - Distribue sous licence GPL
- *
- */
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *  Plugin Mots-Partout                                                    *
+ *                                                                         *
+ *  Copyright (c) 2006-2008                                                *
+ *  Pierre ANDREWS, Yoann Nogues, Emmanuel Saint-James                     *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *    This program is free software; you can redistribute it and/or modify *
+ *    it under the terms of the GNU General Public License as published by * 
+ *    the Free Software Foundation.                                        *
+\***************************************************************************/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function MotsPartout_ajouterBoutons($boutons_admin) {
   
 	//if (autoriser('mottous','MotsPartout')) {
