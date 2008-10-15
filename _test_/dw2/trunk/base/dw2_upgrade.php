@@ -1,14 +1,12 @@
 <?php
 	
 	function dw2_verifier_base(){
-		include_spip('base/dw2_tables');
 		include_spip('base/create');
 		include_spip('base/abstract_sql');
 		creer_base();
 	}
 	
 	function dw2_vider_tables() {
-		include_spip('base/dw2_tables');
 		include_spip('base/abstract_sql');
 		sql_drop_table("spip_dw2_doc");
 		sql_drop_table("spip_dw2_serv_ftp");
