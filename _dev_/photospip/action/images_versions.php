@@ -51,7 +51,7 @@ function action_images_versions_post($r){
 		
 		$row = sql_fetsel("*", "spip_documents_inters", "id_document=$arg AND version=$version");
 		
-		$src = _DIR_RACINE . copie_locale(get_spip_doc($row['fichier']));
+		$src = _DIR_RACINE . copie_locale(_NOM_PERMANENTS_ACCESSIBLES.$row['fichier']);
 		spip_log("la source est $src","photospip");
 		if (preg_match(',^(.*)-photospip(\d+).([^.]+)$,', $src, $match)) {
 			//On est dans une image déjà modifiee
@@ -69,7 +69,7 @@ function action_images_versions_post($r){
 				sql_delete("spip_documents_inters","id_document =$arg AND version = ".$version_delete['version']);
 				spip_log("Pour le doc $arg on delete la version ".$version_delete['version'],"photospip");
 				if(($version_delete['version'] > 1) && ($total_delete > 1)){
-					unlink(get_spip_doc($version_delete['fichier']));
+					unlink(_NOM_PERMANENTS_ACCESSIBLES.$version_delete['fichier']);
 					spip_log("On vire le fichier ".$version_delete['fichier'],"photospip");
 				}
 				else{
@@ -81,7 +81,7 @@ function action_images_versions_post($r){
 		spip_log("script image_version... on supprimer une version","photospip");
 		$row = sql_fetsel("*", "spip_documents_inters", "id_document=$arg AND version=$version");
 		spip_log("On vire le fichier ".$row['fichier'],"photospip");
-		unlink(get_spip_doc($row['fichier']));
+		unlink(_NOM_PERMANENTS_ACCESSIBLES.$row['fichier']);
 		sql_delete("spip_documents_inters","id_document=$arg AND version=$version");
 		spip_log("supprimer la version $version","photospip");
 		
