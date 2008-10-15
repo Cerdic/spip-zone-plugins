@@ -34,13 +34,8 @@ function formulaires_spipicious_ajax_traiter($id_objet,$type) {
 	if(!$type){
 		$type = 'article';
 	}
-
-	if(table_objet_sql('spip_mots_'.$type)){
-		$table_mot = table_objet_sql('spip_mots_'.$type);
-	}
-	else{
-		$table_mot = table_objet_sql('spip_mots_'.$type.'s');
-	}
+	
+	$table_mot = table_objet_sql('spip_mots_'.table_objet($type));
 	spip_log("table mots $table_mots",'spipicious');
 	
 	//recuperation des variables utiles
