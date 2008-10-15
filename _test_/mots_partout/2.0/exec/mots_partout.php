@@ -300,6 +300,7 @@ global $choses_possibles;
 	"rubriques"=>true,
 	"breves"=>true,
 	"syndic"=>true,
+#	"auteurs" => true,
 #	"messages"=>true,
 #	'documents'=>true,
 #	'groupes_mots'=>true
@@ -376,12 +377,20 @@ _T('motspartout:stricte').
   debut_cadre_relief('',false,'document', _T('portfolio'));
   if(count($choses) > 0) {
   	
-  	$function = "afficher_liste_$nom_chose";
-	if(function_exists($function)) 
-	  $function($choses,$nb_aff);
-	else {
-	  afficher_liste_defaut($choses,$nb_aff);
-	}
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$afficher_objets = charger_fonction('afficher_objets','inc');
+	$desc = $trouver_table($nom_chose);
+	$nom_choe = substr($nom_chose, 0,-1); # enlever le 's' final
+	if (charger_fonction("afficher_{$nom_choe}s", 'inc', true)
+	OR function_exists('afficher_' . $nom_choe . 's_boucle')) {
+		if (!function_exists($f = 'formater_' . $nom_chose . '_mots'))				$f='';
+		echo $afficher_objets($nom_choe, $nom_chose,
+			array('SELECT' => '*', 
+				'FROM' => $desc['table'], 
+				'WHERE' => sql_in($desc['key']['PRIMARY KEY'], $choses)),
+		       $f);
+	} else afficher_liste_defaut($choses,$nb_aff);
+
 	echo "<!--
 <input type=\"radio\" name=\"selectall\" id=\"all\" onclick=\"selectAll(this.form, 'choses[]', 0);\"><label for=\"all\">Select All</label>
 <input  type=\"radio\" name=\"selectall\" id=\"inverse\"  onclick=\"selectAll(this.form, 'choses[]', 1);\"><label for=\"inverse\">Inverse All</label>

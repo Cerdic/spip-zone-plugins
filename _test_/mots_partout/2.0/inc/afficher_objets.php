@@ -18,16 +18,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 require _DIR_RESTREINT . 'inc/afficher_objets.php';
 							  
-function afficher_liste_articles($choses,$nb_aff=20)
-{
-  $afficher_objets = charger_fonction('afficher_objets','inc');
-  echo $afficher_objets('article', 'Articles', 
-		  array(
-	'SELECT' => 'id_article, titre, id_rubrique, date, statut, lang, descriptif',
-	'FROM' => 'spip_articles as articles',
-	'WHERE' => sql_in('articles.id_article', $choses)),
-		       'formater_articles_mots');
-}
 
 function formater_articles_mots($row, $own='')
 {
@@ -41,16 +31,6 @@ function formater_articles_mots($row, $own='')
 	$id_article=$row['id_article'];
 	$in = "<input type='checkbox' name='choses[]' value='$id_article' id='id_chose$cpt' />";
 	return array($puce, $lien, $auteurs, $date, $in);
-}
-
-
-function afficher_liste_documents($choses,$nb_aff=20) {
-
-  $afficher_objets = charger_fonction('afficher_objets','inc');
-  echo $afficher_objets('document', 'Documents', 
-			array('SELECT' => '*',
-			      'FROM' => 'spip_documents AS D',
-			      'WHERE' => sql_in('id_document', $choses)));
 }
 
 // cette fonction n'existe pas en standard,
@@ -131,15 +111,6 @@ function afficher_documents_boucle($document,$own='') {
  
 }
 
-function afficher_liste_messages($choses,$nb_aff=20) {
-	$afficher_objets = charger_fonction('afficher_objets','inc');
-	echo $afficher_objets('message', 'Messages', 
-			array('SELECT' => '*',
-			      'FROM' => 'spip_messages',
-			      'WHERE' => sql_in('id_message', $choses)
-			      ));
-}
-
 // cette fonction n'existe pas en standard,
 // il risque d'y avoir des conflits.
 
@@ -165,18 +136,7 @@ function afficher_messages_boucle($row,$own='') {
 	return array($titre, $date, $num, $in);
 }
 
-
-function afficher_liste_auteurs($choses,$nb_aff=20) {
-  
-  $afficher_objets = charger_fonction('afficher_objets','inc');
-  echo $afficher_objets('auteur', 'Auteurs', 
-			array('SELECT' => 'id_auteur, nom, login, email, extra, statut',
-			      'FROM' => 'spip_auteurs as auteurs',
-			      'WHERE' => sql_in('auteurs.id_auteur', $choses)),
-			'formater_auteur_mots');
-}
-
-function formater_auteur_mots($row, $own='')
+function formater_auteurs_mots($row, $own='')
 {
 	static $formater = NULL;
 	static $cpt = 0;
@@ -188,17 +148,6 @@ function formater_auteur_mots($row, $own='')
 	list($s, $mail, $nom, $w, $p) = $formater($id_auteur);
 	$in = "<input type='checkbox' name='choses[]' value='$id_auteur' id='id_chose$cpt' />";
 	return array($s, $mail, $nom, $w, $in);
-}
-
-
-function afficher_liste_groupes_mots($choses, $nb_aff=20)
-{  
-  $afficher_objets = charger_fonction('afficher_objets','inc');
-  echo $afficher_objets('groupes_mot', 'mots', 
-			array('SELECT' => 'id_groupe, titre, descriptif',
-			      'FROM' => 'spip_groupes_mots',
-			      'WHERE' => sql_in('id_groupe', $choses),
-			      'ORDER BY' => 'titre'));
 }
 
 function afficher_groupes_mots_boucle($row,$own='')
