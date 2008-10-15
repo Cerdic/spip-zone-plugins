@@ -26,7 +26,7 @@
 		<h4><:photospip:versions_precedentes:></h4>
 			<div class="infos">
 			<B_interd>
-				<p><:photospip:limite_versions_public:>#CONFIG{photospip/limite_version}</p>
+				<p><:photospip:limite_versions_public{limite=#CONFIG{photospip/limite_version}}:></p>
 					<BOUCLE_interd(DOCUMENTS_INTERS){id_document}{par maj}{inverse}>
 						<div class="version">
 							<form action="[(#URL_ACTION_AUTEUR{images_versions,#ENV{id_document}})]" onsubmit="return AjaxSqueeze(this,'image-container',aftersubmit_modif,event)" method="post">

@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tester' => 'Tester',
 	'valider' => 'Appliquer',
 	
-	'limite_versions_public' => 'Les versions pr&eacute;c&eacute;dentes sont limit&eacute;es &agrave; ',
+	'limite_versions_public' => 'Les versions pr&eacute;c&eacute;dentes sont limit&eacute;es &agrave; @limite@',
 	'revenir_version' => 'Revenir &agrave; la version : ',
 	'supprimer_version' => 'Supprimer la version : ',
 	'nb_versions_depasse' => 'Le nombre de versions diff&eacute;rentes de l\'image a &eacute;t&eacute; d&eacute;pass&eacute;. Vous ne pouvez que tester et non appliquer les modifications.',
