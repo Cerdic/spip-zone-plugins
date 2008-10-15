@@ -1,6 +1,6 @@
 .formulaire_ecrire_message form label,
-.formulaire_recommander form label {width:100px;}
-.formulaire_ecrire_message form textarea#texte {width:420px;height:10em;}
+.formulaire_recommander form label {}
+.formulaire_ecrire_message form textarea#texte {height:10em;}
 .formulaire_recommander form textarea#texte {width:320px;height:5em;}
 
 .formulaire_ecrire_message form span.dest {padding:3px;background:#F4FFBF;border:1px solid #89AF02;display:block;float:left;margin:0 4px 3px 0;}
@@ -46,4 +46,4 @@ ced.formulaire_ecrire_message form li {clear:left;}
 .messages li .message .texte {display:none;}
 .messages li.on .message .intro {display:none}
 .messages li.on .message .texte {display:block;font-size:1em;}
-.messages li .message .repondre {float:right;padding:0;margin:-0.8em 0 0 8px;background:url(bg-comment.gif) no-repeat right 2px;position:relative;display:inline;font-size:0.95em;}
+.messages li .message .repondre {clear:none;float:right;padding:0;margin:-0.8em 0 0 8px;background:url(bg-comment.gif) no-repeat right 2px;position:relative;display:inline;font-size:0.95em;}

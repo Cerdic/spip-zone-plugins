@@ -43,7 +43,7 @@ function autoriser_message_destiner_general_dist($faire, $quoi, $id, $qui, $opts
 	return $qui['statut']=='0minirezo';
 }
 
-#define('_ID_ARTICLE_ENVOYER_MESSAGE',4);
+#define('_URL_ENVOYER_MESSAGE','art4');
 #define('_REDIRECT_POST_ENVOI_MESSAGE','art3');
 
 ?>

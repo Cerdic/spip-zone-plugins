@@ -13,7 +13,8 @@
  * @return array
  */
 function formulaires_messages_recus_charger_dist(){
-	$valeurs = array();
+	include_spip('inc/lien');
+	$valeurs = array('_url_ecrire_message'=>calculer_url(_URL_ENVOYER_MESSAGE));
 
 	return $valeurs;
 }

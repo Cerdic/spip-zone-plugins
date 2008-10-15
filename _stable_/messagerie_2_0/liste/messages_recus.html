@@ -6,7 +6,7 @@
 <li class='item[ (#EXPOSE{on})
 <?php include_spip('inc/messages');messagerie_marquer_lus('#ENV{id_auteur}',array('#ID_MESSAGE'));?>
 ]' id='message_#ID_MESSAGE'><div class='message[ (#VU|=={non}|?{new})]'><input type='checkbox' name='selectionne[]' value='#ID_MESSAGE' class='checkbox' /><a href='[(#SELF|parametre_url{id_message,''})]' class='plier' title='<:messagerie:replier:>' onclick="$('#message_#ID_MESSAGE').removeClass('on');return false;"><img src='#CHEMIN{habillage/replier.gif}' alt='<:messagerie:replier:>'></a>
-<span class="repondre"><a href="[(#URL_ARTICLE{#EVAL{_ID_ARTICLE_ENVOYER_MESSAGE}}|parametre_url{repondre,#ID_MESSAGE})]"><img src='#CHEMIN{habillage/repondre.png}' alt='<:messagerie:repondre_message|attribut_html:>' /></a></span>
+<span class="repondre"><a href="[(#ENV{_url_ecrire_message}|parametre_url{repondre,#ID_MESSAGE})]"><img src='#CHEMIN{habillage/repondre.png}' alt='<:messagerie:repondre_message|attribut_html:>' /></a></span>
 <span class='from'>
 <BOUCLE_from(AUTEURS){id_auteur}{tout}>#SET{nom,#NOM}</BOUCLE_from>
 [(#TYPE|=={genera}|?{' '})<:messagerie:titre_message_general:>]

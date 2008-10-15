@@ -14,7 +14,7 @@ parametre : url d'action ]
 [(#ENV{destinataire}|is_null|non)
 #SET{name,destinataire} #SET{obli,obligatoire} #SET{erreur,#ENV*{erreurs}|table_valeur{#GET{name}}}
 <li class="[saisie_(#GET{name})][ (#GET{obli}|sinon{facultatif})][ (#GET{erreur}|oui)erreur]">
-<label for='#GET{name}' class='nocmx'>[(#ENV{form}|concat{':label_',#GET{name}}|_T)]
+<label for='#GET{name}'>[(#ENV{form}|concat{':label_',#GET{name}}|_T)]
 [(#GET{obli}|?{' '})<em><:formulaires:info_obligatoire:></em>]
 </label>[<span
  class='erreur_message'>(#GET{erreur})</span>]<div class='faux_input'>
@@ -47,7 +47,7 @@ parametre : url d'action ]
 </li>
 </ul></fieldset>
 
-<div class='bouton'><input type="submit" name='valider' value="[(#ENV{form}|concat{':label_envoyer'}|_T)]" /></div>
+<div class='boutons'><input type="submit" name='valider' value="[(#ENV{form}|concat{':label_envoyer'}|_T)]" /></div>
 <div class='legende_obligatoire'><em><:formulaires:info_obligatoire:></em> <:formulaires:info_obligatoire_legende:></div>
 
 </form>
