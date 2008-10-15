@@ -69,70 +69,54 @@ function action_mots_partout() {
   $switch = addslashes($switch);
   if($switch == '') $switch = 'voir';
   $strict = intval($strict);
+  $table = 'spip_mots_'.$nom_chose;
 
   if(count($mots_ajouter) && count($choses)) {
 	if(count($mots_ajouter)) {
 	  foreach($mots_ajouter as $m) {
-		$from = array('spip_mots');
-		$select = array('id_groupe');
-		$where = array("id_mot = $m");
-		$res = sql_select($select,$from,$where);
+		$from = 'spip_mots';
+		$select = 'id_groupe';
+		$where = "id_mot = $m";
 		$unseul = false;
-		$id_groupe = 0;
 		$titre_groupe = '';
-		if($row = sql_fetch($res)) {
-		  sql_free($res);
-		  $from = array('spip_groupes_mots');
-		  $select = array('unseul','titre');
-		  $id_groupe = $row['id_groupe'];
-		  $where = array("id_groupe = $id_groupe");
-		  $res = sql_select($select,$from,$where);
-		  if($row = sql_fetch($res)) {
+		if($id_groupe = intval(sql_getfetsel($select,$from,$where))) {
+		  $from = ('spip_groupes_mots');
+		  $select =('unseul','titre');
+		  $where = ("id_groupe = $id_groupe");
+		  if($row = sql_fetsel($select,$from,$where)) {
 			$unseul = ($row['unseul'] == 'oui');
 			$titre_groupe = $row['titre'];
 		  }
 		}
-		sql_free($res);
 		foreach($choses as $d) {
 		  if($unseul) {
-			$from = array("spip_mots_$nom_chose",'spip_mots');
+			$from = array($table,'spip_mots');
 			$select = array("count('id_mot') as cnt");
-			$where = array("spip_mots.id_groupe = $id_groupe","spip_mots_$nom_chose.id_mot = spip_mots.id_mot","spip_mots_$nom_chose.$id_chose = $d");
-			$group = "spip_mots_$nom_chose.$id_chose";
-			$res = sql_select($select,$from,$where,$group);
-			if($row = sql_fetch($res)) {	
-			  if($row['cnt'] > 0) {
+			$where = array("spip_mots.id_groupe = $id_groupe", $table . ".id_mot = spip_mots.id_mot", $table . ".$id_chose = $d");
+			$group = $table . ".$id_chose";
+			if($row = sql_getfetsel($select,$from,$where,$group)) {
 				$warnings[] = array(_T('motspartout:dejamotgroupe',array('groupe' => $titre_groupe, 'chose' => $d)));
 				continue; 
-			  }
 			}
-			sql_free($res);
 		  }
-		  sql_insert("spip_mots_$nom_chose","(id_mot,$id_chose)","($m,$d)");
+		  sql_insertq($table, array("id_mot" => $m, $id_chose => $d));
 		}
 	  }
 	}
   }
-  if (count($mots_enlever) && count($choses)) {
-	$table_pref = 'spip';
-	if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix'];
+  if ($mots_enlever AND $choses) {
 	foreach($mots_enlever as $m) {
-	  foreach($choses as $d) {
-		spip_query('DELETE FROM '.$table_pref.'_mots_'.$nom_chose." WHERE id_mot=$m AND $id_chose=$d");
-	  }
+	    sql_delete(.$table, "id_mot=$m AND " sql_in($id_chose, $choses));
 	}
   }
 
   $par_choses = '';
 
-  if(count($choses)) {
-	foreach($choses as $c) 
-	  if ($c) $par_choses .= "&choses[]=$c";
-  }
+  foreach($choses as $c) if ($c) $par_choses .= "&choses[]=$c";
 
   $par_mots = '';
 
-  if(count(_request('mots'))) {
+  if(is_array(_request('mots'))) {
 	foreach(_request('mots') as $id => $m) 
 	  if ($m) $par_mots .= "&mots[$id]=$m";
   }
