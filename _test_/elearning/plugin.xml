@@ -1,0 +1,47 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+		E-Learning
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 		RastaPopoulos - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version> <!-- Version du plugin -->
+		0.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+		dev
+	</etat>
+	<description>
+Ce plugin permet d'utiliser SPIP comme une plateforme simple de E-Learning.
+
+Sur le principe, il est une aggr&eacute;ggation de plusieurs plugins, plus des fonctionnalités qui lui sont propres.
+_ En plus d'avoir ses cours en ligne, on peut donc faire des tests notés, voir les connexions et les pages visitées par les élèves, définir une progression dans les cours suivant les notes du cours précédent, etc.
+	</description>
+	<lien>http://www.spip-contrib.net/Plugin-E-learning</lien> <!-- URI de documentation -->
+	<prefix> 
+		elearning
+	</prefix>
+	<options>elearning_options.php</options>
+	<fonctions>elearning_fonctions.php</fonctions>
+	<install>base/elearning_installation.php</install>
+	
+	<pipeline>
+		<nom>jeux_caracteristiques</nom>
+		<inclure>elearning_pipelines.php</inclure>
+		<action>jeux_caracteristiques</action>
+	</pipeline>
+	
+	<pipeline>
+		<nom>accesrestreint_liste_zones_autorisees</nom>
+		<action>liste_zones_autorisees</action>
+		<inclure>inc/elearning_zones.php</inclure>
+	</pipeline>
+	
+	<!-- Le e-learning dans SPIP nécessite les plugins suivant -->
+	<necessite id='cfg' version="[1.0.4;]" />
+	<necessite id='AccesRestreint' version="[0.3;]" />
+	<necessite id='bigbrother' version="[0.1;]" />
+	<necessite id='jeux' version="[1.0.08;]" />
+	<necessite id='Crayons' version="[1.0;]" />
+	<necessite id='marquepages' version="[0.2;]"/>
+</plugin>
