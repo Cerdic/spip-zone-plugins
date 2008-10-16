@@ -82,9 +82,10 @@ function critere_frequence_dist($idb, &$boucles, $crit) {
 			list($table, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
 		}
 		else {
-			$desc = trouver_table($type, $boucle);
-			$table = $desc['table'];
-		}
+      $trouver_table = charger_fonction('trouver_table','base');
+      $desc=$trouver_table($type, $boucle->sql_serveur);
+      $table = $desc['table'];
+    }
 		/*Ajouter ici un test et produire une erreur si table non trouvee*/
 		$ids = $desc['key']['PRIMARY KEY'];
 		foreach(split(',', $ids) as $_id)
