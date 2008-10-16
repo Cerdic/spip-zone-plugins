@@ -29,6 +29,9 @@
  * [(#TEXTE|table_des_matieres{table_seule})]
  * - ajout d'une fonction qui converti les intertitres des enluminures en
  * intertitres compatibles avec cette contrib'
+ * 
+ * Petites modifications de Stéphane Deschamps
+ * - prise en compte des niveaux de titres si ils sont déclarés dans mes_fonctions ou mes_options par $GLOBALS['debut_intertitre']
 */
 function IntertitresTdm_table_des_matieres($texte,$tableseule=false) {
   global $debut_intertitre, $fin_intertitre;
