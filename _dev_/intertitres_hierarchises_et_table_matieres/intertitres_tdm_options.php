@@ -6,6 +6,7 @@
  *    Date : aout 2004
  *    Auteur :  Mortimer Porte mortimer.pa@free.fr
  *    Modifications: Bertrand Marne bmarne@gmail.com
+ *    Modifications: Stéphane Deschamps spip@nota-bene.org
  *   +-------------------------------------+
  *    Fonctions de ce filtre :
  *     affiche une table des matières ou génère automatiquement la numérotation des titres.
@@ -37,6 +38,18 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false) {
   // les raccourcis soient remplacés par des headlines (<hx>)
   $css_debut_intertitre = "\n<h%num% class=\"spip\">";
   $css_fin_intertitre = "</h%num%>\n";
+
+  // on trouve combien ajouter au level pour être dans le bon niveau de titres quand on génère la balise <hx>
+  // sinon par defaut on ajoute 2 pour garder les niveaux du script original
+  if($GLOBALS['debut_intertitre']) {
+	$find = @preg_match("/(\<h)([0-9])/",$GLOBALS['debut_intertitre'],$matches);
+	if($matches) {
+		$level_base = $matches[2] -1; // on déduit 1 pour être au bon niveau ensuite : ce sera 1 + nombre d'astérisques trouvées
+	}
+  }
+  if(!isset($level_base)) {
+ 	$level_base = 2;
+  }
 
   // on cherche les noms de section commençant par des * et #
   $my_debut_intertitre=trim($debut_intertitre); //astuce des trim trouvée là : http://www.spip-contrib.net/Generation-automatique-de#forum383092
@@ -160,9 +173,9 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false) {
 	$lastlevel = strlen($level);
 
         //on génère la balise avec le bon style pour le niveau
-	//et on ajoute 2 à $lastlevel pour avoir des <hx> qui commencent à <h3>
-	$mdebut_intertitre = str_replace('%num%',$lastlevel+2,$css_debut_intertitre);
-	$mfin_intertitre = str_replace('%num%',$lastlevel+2,$css_fin_intertitre);
+	//et on ajoute $level_base à $lastlevel pour avoir des <hx> qui commencent à <h{$level_base}>
+	$mdebut_intertitre = str_replace('%num%',$lastlevel+$level_base,$css_debut_intertitre);
+	$mfin_intertitre = str_replace('%num%',$lastlevel+$level_base,$css_fin_intertitre);
 
         //on remplace le titre dans le texte
 	$texte = str_replace($matches[0][$j],"$mdebut_intertitre<a name='$numeros'></a>$titre$mfin_intertitre",$texte);
