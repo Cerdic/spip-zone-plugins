@@ -1,5 +1,5 @@
 <?php
-function ExtensionMultilingue_BT_toolbox($params) {
+function ExtensionMultilingue_bt_toolbox($params) {
 
 //test pour savoir si on est appelé par la btv2 ou récursivement par la btm( barre typo multilingue)
 //c'est à dire que la btm va créer n nouvelles btv2 pour chaque langues, donc ce pipeline sera appelé pour chacune, et ne devra pas s'exécuter

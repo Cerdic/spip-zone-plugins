@@ -49,7 +49,7 @@
 	</icon>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
-		<nom>BT_toolbox</nom>
+		<nom>bt_toolbox</nom>
 		<inclure>extension_multilingue.php</inclure>
 	</pipeline>
  	
