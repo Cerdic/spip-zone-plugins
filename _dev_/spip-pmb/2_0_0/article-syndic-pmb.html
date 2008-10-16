@@ -1,0 +1,120 @@
+<BOUCLE_article_principal(SYNDIC_ARTICLES_PMB) {id_syndic_article}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>[
+<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />
+]<B_URLMOT>
+<link rel="alternate" type="application/rss+xml" title="<:titre_page_mots_tous:>" href="#URL_PAGE{backend}<BOUCLE_URLMOT(MOTS){id_article}>&amp;id_mot[]=#ID_MOT</BOUCLE_URLMOT>" />
+</B_URLMOT><B_URLAUTEURS>
+<link rel="alternate" type="application/rss+xml" title="<:icone_auteurs:>" href="#URL_PAGE{backend}<BOUCLE_URLAUTEURS(AUTEURS){id_article}>&amp;id_auteur[]=#ID_AUTEUR</BOUCLE_URLAUTEURS>" />
+</B_URLAUTEURS><INCLURE{fond=inc-head}>
+
+<link rel="stylesheet" href="#CHEMIN{nyroModal.full.css}" type="text/css" media="projection, screen, tv" />
+<script type="text/javascript" src="#CHEMIN{javascript/jquery.nyroModal-1.2.8.pack.js}" ></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('a.lien-modal').nyroModal({bgColor: '#E6E8D5', minWidth: 400, minHeight: 400});
+	});
+</script>
+</head>
+
+<body class="page_article page_ouvrage">
+<div id="page">
+	<img src="#CHEMIN{bg-encart.png}" class="logo-fond" width="426" height="268" alt="" />
+
+	[(#REM) Contenu principal : contenu de l'article ]
+    <div class="hfeed" id="conteneur">
+    <div class="hentry" id="contenu">
+    
+        [(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
+
+	<div class="cartouche">
+            <div class="surlignable">
+				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+				<h1 class="#EDIT{titre} entry-title[ (#TITRE|strlen|>{30}|?{'titre-long',''})]">[(#TITRE|ucfirst)]</h1>
+				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+            </div>
+
+           
+            
+        </div>
+		
+       [(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{130,0})]
+	 
+	<div class="surlignable">
+		
+		[(#REM) Inclure le modele des liens de traductions ]
+        	#MODELE{article_traductions}
+		
+		<div class="pmb-ouvrage-infos">	
+			[<p><:auteur:> : (#LESAUTEURS)</p>]
+			[<p><:serie:> : (#PMB_SERIE)</p>]
+			[<p><:type:> : (#PMB_TYPE)</p>]
+			[<p><:editeur:> : (#PMB_EDITEUR)</p>]
+			[<p><:format:> : (#PMB_FORMAT)</p>]
+			[<p><:annee_publication:> : (#PMB_ANNEE_DE_PUBLICATION)</p>]
+			[<p><:importance:> : (#PMB_IMPORTANCE)</p>]
+			[<p><:presentation:> : (#PMB_PRESENTATION)</p>]
+			[<p><:isbn:> : (#PMB_ISBN)</p>]
+		</div>
+		
+		[<div class="#EDIT{texte} texte entry-content">(#DESCRIPTIF|image_reduire{500,0})</div>]
+	</div>
+
+
+		<div class="pmb-reserver"><a class="lien-modal" href="#PMB_URL_BASEdo_resa.php?lvl=resa&id_notice=#PMB_ID_NOTICE&$id_empr=&oresa=popup">> Réserver l'ouvrage</a></div>
+		<div class="pmb-rajoutertag"><a class="lien-modal" href="#PMB_URL_BASEaddtags.php?noticeid=#PMB_ID_NOTICE">> Ajouter un tag&nbsp;<img src="#PMB_URL_BASEimages/tag.png" title=">" alt="Ajouter un tag" align="absmiddle" border="0"></a></div>
+		<div class="pmb-consulter"><a class="lien-modal" title="Consulter ou donner son avis" href="#PMB_URL_BASEavis.php?todo=liste&noticeid=#PMB_ID_NOTICE">> Consulter ou donner son avis</a></div>
+			
+
+		[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+        
+		[<div class="ps surlignable"><h2 class="pas_surlignable"><:info_ps:></h2><div class="#EDIT{ps}">(#PS|image_reduire{500,0})</div></div>]
+
+		<br class="nettoyeur" />
+
+		
+		
+     
+		[(#REM) Forum de l'ouvrage]
+		<a href="#forum" name="forum" id="forum"></a>
+		<INCLURE{fond=inc-forum-pmb}{id_syndic}{id_syndic_article}{titre=#TITRE}>
+		[<p class="repondre"><a href="spip.php?page=forum-pmb&(#PARAMETRES_FORUM{#SELF})&id_syndic_article=#ID_SYNDIC_ARTICLE[&titre=(#TITRE|md5)]" rel="noindex nofollow"><:repondre_article:></a></p>] 	
+
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+
+    [(#REM) Menu de navigation laterale ]
+    <div id="navigation">
+
+        [(#REM) Menu de navigation par rubriques ]
+        <INCLURE{fond=inc-rubriques}{id_rubrique}>
+
+
+        [(#REM) Articles dans la meme rubrique ]
+        <B_articles_rubrique>
+        <div class="menu">
+            <h2><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
+            <ul>
+                <BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date}{inverse} {0,10}>
+                <li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>#TITRE</a></li>
+                </BOUCLE_articles_rubrique>
+            </ul>
+        </div>
+        </B_articles_rubrique>
+
+    </div><!--#navigation-->
+    
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!--#page-->
+</body>
+</html>
+</BOUCLE_article_principal>

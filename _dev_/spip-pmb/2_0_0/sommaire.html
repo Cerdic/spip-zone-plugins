@@ -1,0 +1,162 @@
+[(#REM)
+	Un cache plus court, pour la boucle syndic_articles
+]#CACHE{3600}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_sommaire">
+<div id="page">
+
+	<img src="#CHEMIN{bg-encart.png}" class="logo-fond" width="426" height="268" alt="" />
+
+	[(#REM) Contenu principal : derniers articles publies ]
+	<div class="hfeed" id="conteneur">
+	<div id="contenu">
+		
+		[(#REM) Entete de la page + titre du site ]
+		<INCLURE{fond=inc-entete}>
+
+
+		<div class="cartouche invisible">
+			<h1 class="invisible">#NOM_SITE_SPIP</h1>
+		</div>
+		
+		
+		[(#REM) Derniers articles ]
+		<B_articles_recents>
+		<div class="menu articles">
+			<h2><:derniers_articles:></h2><a href="#URL_PAGE{actualites}" class="plus-de-liens"><:toute_actualite:> +</a>
+			[(#REM) Adapter la mise en page en fonction des 3 premiers articles ]
+			<ul class="mise-en-page<BOUCLE_testlogos(ARTICLES) {id_rubrique!=34}{par date}{inverse}{0,3} >[(#LOGO_ARTICLE||?{'-logo','-sans'})]</BOUCLE_testlogos>">
+				
+				[(#REM) Encarts Actualités ]
+				<BOUCLE_articles_recents(ARTICLES) {id_rubrique!=34}{par date}{inverse}{0,3}{doublons} >
+				<li class="hentry[ (#COMPTEUR_BOUCLE|=={1}|?{'premier',''})][ encart-(#COMPTEUR_BOUCLE)][ (#LOGO_ARTICLE||?{'avec-logo','sans-logo'})]">
+					[<div class="logo-encart">(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{90,130})</div>]
+					<h3 class="entry-title"><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></h3>
+					<small class="invisible"><abbr class="published"[ title="(#DATE|date_iso)"]>[(#DATE|affdate_jourcourt)]</abbr></small>
+					<small>[(#SOUSTITRE)]</small>
+					[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION|couper{100})</div>]
+					<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="#URL_ARTICLE"><:lire_la_suite:> +</a>
+				</li>
+				</BOUCLE_articles_recents>
+			</ul>
+			
+		</div>
+		</B_articles_recents>
+		
+		[(#REM) Nouveaux ouvrages ]
+		<B_syndic_pmb>
+		<div class="menu articles nouveautes">
+			<h2><:nouveautes:></h2><a href="#URL_PAGE{nouveautes}" class="plus-de-liens"><:toutes_nouveautes:> +</a>
+			<ul>
+			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){pmb_photo_src!=""} {par hasard} {0,50}>
+				[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'',' '})
+					[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{width}|>{20}|?{' ',''})
+						[(#DESCRIPTIF|strlen|>{100}|?{' ',''})
+							[(#SET{nb_revues,[(#GET{nb_revues}|plus{1})]})]
+							[(#GET{nb_revues}|>{2}|?{'',' '})
+								<li class="hentry[ (#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'','avec-logo'})][ (#GET{nb_revues}|=={1}|?{'premier',''})]">
+							
+								[<div class="logo-encart">(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'',' '})<a href="spip.php?page=article-syndic-pmb&amp;id_syndic_article=#ID_SYNDIC_ARTICLE">[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130})]</a></div>]
+								<h3 class="entry-title"><a href="spip.php?page=article-syndic-pmb&amp;id_syndic_article=#ID_SYNDIC_ARTICLE"[ title="(#NOM_SITE|texte_backend)"]>[(#TITRE|couper{30})]</a></h3> 
+								[<small>	<:auteur:> : (#LESAUTEURS)</small>]
+								[<small>	<:serie:> : (#PMB_SERIE)</small>]
+								[<div class="introduction entry-content">(#DESCRIPTIF|couper{150})</div>]
+								<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="spip.php?page=article-syndic-pmb&amp;id_syndic_article=#ID_SYNDIC_ARTICLE"><:lire_la_suite:> +</a>
+								</li>
+							]
+						]
+					]
+				]
+			</BOUCLE_syndic_pmb>
+			</ul>
+			
+		</div>
+		</B_syndic_pmb>
+				
+		[(#REM) Coups de coeur ]
+		<BOUCLE_rubriquecoupsdecoeur(RUBRIQUES){id_rubrique=34}>
+		<B_articles_coupsdecoeur>
+		<div class="menu articles">
+			<h2>[(#TITRE|ucfirst)]</h2><a href="#URL_RUBRIQUE" class="plus-de-liens"><:tous_coupsdecoeur:> +</a>
+			<ul class="mise-en-page<BOUCLE_testlogoscoupscoeur(ARTICLES) {par date}{inverse}{0,3} >[(#LOGO_ARTICLE||?{'-logo','-sans'})]</BOUCLE_testlogoscoupscoeur>">
+				[(#REM) Encarts Coups de coeur ]
+				<BOUCLE_articles_coupsdecoeur(ARTICLES) {id_rubrique} {par date} {inverse} {0,3} {doublons} >
+				<li class="hentry[ (#COMPTEUR_BOUCLE|=={1}|?{'premier',''})][ encart-(#COMPTEUR_BOUCLE)][ (#LOGO_ARTICLE||?{'avec-logo','sans-logo'})]">
+					[<div class="logo-encart">(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{90,130})</div>]
+					<h3 class="entry-title"><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></h3>
+					<small class="invisible"><abbr class="published"[ title="(#DATE|date_iso)"]>[(#DATE|affdate_jourcourt)]</abbr></small>
+					<small>[(#SOUSTITRE)]</small>
+					[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION|couper{100})</div>]
+					<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="#URL_ARTICLE"><:lire_la_suite:> +</a>
+				</li>
+				</BOUCLE_articles_coupsdecoeur>
+			</ul>
+			
+		</div>
+		</B_articles_coupsdecoeur>
+		</BOUCLE_rubriquecoupsdecoeur>
+
+		[(#REM) Sur le Web ]
+		<B_syndic>
+		<div class="menu web">
+			<h2><:nouveautes_web:></h2>
+			<ul>
+				<BOUCLE_syndic(SYNDIC_ARTICLES) {age<180} {par date}{inverse} {0,6}>
+				<li>[(#DATE|affdate_jourcourt) &ndash; ]<a href="#URL_ARTICLE"[ title="(#NOM_SITE|texte_backend)"] class="spip_out">#TITRE</a></li>
+				</BOUCLE_syndic>
+			</ul>
+		</div>
+		</B_syndic>
+
+		<br class="nettoyeur" />
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+	
+	
+
+	[(#REM) Menu de navigation laterale ]
+	<div id="navigation">
+		
+		[(#REM) Menu de navigation par rubriques ]
+		<INCLURE{fond=inc-rubriques}>
+		
+		<div class="menu multimedia">
+			<h2><:conferences:></h2>
+			[(#MODELE{playliste}{site})]
+		</div>
+
+		[(#REM) Liens des forums ]
+		<B_forums_liens>
+		<div class="menu forums">
+			<h2><:derniers_commentaires:></h2>
+				<ul>
+				<BOUCLE_forums_liens(FORUMS) {plat} {par date}{inverse} {0,10}>
+					<B_enleverbreves>
+					<BOUCLE_enleverbreves(BREVES){id_breve}>
+					</BOUCLE_enleverbreves>
+					</B_enleverbreves>
+						<li>#SET{titre_tmp, #TITRE}[(#DATE|affdate_court) &ndash; ]<B_pmb><BOUCLE_pmb(SYNDIC_ARTICLES_PMB) {id_syndic}>[(#TITRE|md5|=={#GET{titre_tmp}}|?{<a href="spip.php?page=article-syndic-pmb&id_syndic_article=#ID_SYNDIC_ARTICLE#forum">, })]</BOUCLE_pmb></B_pmb><a href="#URL_FORUM"><//B_pmb>[(#TEXTE|couper{50})]</a></li>
+					<//B_enleverbreves>
+				</BOUCLE_forums_liens>
+				</ul>
+		</div>
+		</B_forums_liens>
+
+
+	</div><!--#navigation-->
+	
+	
+	
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+	
+</div><!--#page-->
+</body>
+</html>

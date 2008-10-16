@@ -1,0 +1,71 @@
+[(#REM)
+	Un cache plus court, pour la boucle syndic_articles
+]#CACHE{3600}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title><:derniers_articles:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+[(#REM) Lien vers le flux RSS de la rubrique ]
+</head>
+
+<body class="page_actualites">
+<div id="page">
+	<img src="#CHEMIN{bg-encart.png}" class="logo-fond" width="426" height="268" alt="" />
+
+	[(#REM) Contenu principal : contenu de la rubrique ]
+    	<div id="conteneur">
+    	<div id="contenu">
+    
+        [(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:derniers_articles:></div>
+
+        <div class="cartouche">
+            <h1 class="#EDIT{titre}"><:derniers_articles:></h1>
+        </div>
+
+       [(#REM) Articles de la rubrique ]
+        <B_articles>
+        <div class="menu articles">
+            #ANCRE_PAGINATION
+            [<p class="pagination">(#PAGINATION)</p>]
+	    <h2 class="invisible"><:articles_rubrique:></h2>
+            <ul>
+                <BOUCLE_articles(ARTICLES) {par date}{inverse} {pagination}>
+                <li>
+                    	[(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{120,140})]
+                    	<h3><a href="#URL_ARTICLE">#TITRE</a></h3>
+                	[<small>(#SOUSTITRE)</small>]
+			[<small>(#DATE|affdate_jourcourt)[, <:par_auteur:> (#LESAUTEURS)]</small>]
+			[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION|couper{300})</div>]
+			<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="#URL_ARTICLE"><:lire_la_suite:> +</a>
+                </li>
+                </BOUCLE_articles>
+            </ul>
+            [<p class="pagination">(#PAGINATION)</p>]
+        </div>
+        </B_articles>
+
+        
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+    [(#REM) Menu de navigation laterale ]
+    <div id="navigation">
+
+        [(#REM) Menu de navigation par rubriques ]
+        <INCLURE{fond=inc-rubriques}{id_rubrique}>
+
+    </div><!--#navigation-->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!--#page-->
+</body>
+</html>
+
