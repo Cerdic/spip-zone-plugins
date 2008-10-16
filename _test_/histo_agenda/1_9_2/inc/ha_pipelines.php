@@ -15,6 +15,10 @@ function ha_taches_generales_cron($taches_generales)
 
 function ha_ajbouton($boutons_admin) 
 {
+  	global $connect_statut, $connect_toutes_rubriques;
+  	if (($connect_statut != '0minirezo') OR !$connect_toutes_rubriques)
+		return $boutons_admin;
+
 	// on voit les bouton dans la barre "edition"
 	$boutons_admin['naviguer']->sousmenu["ha"]= new Bouton(
 		_DIR_PLUGIN_HA."/imgs/tag.png",  // icone
