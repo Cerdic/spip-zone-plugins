@@ -22,13 +22,14 @@ function glossaire_groupes() {
 @define('_GLOSSAIRE_QUERY', 'SELECT id_mot, titre, texte, descriptif FROM spip_mots WHERE type=' . glossaire_groupes() . ' ORDER BY id_mot ASC');
 // TODO : QUERY pour SPIP 2.0
 
-// Compatibilite pour generer_url_mot(), mais deprecie sous SPIP 2.0
-function cs_foo_mot($id, $foo='') { return generer_url_mot($id); } 
-
-// surcharge possible de la fonction d'url pour le clic sur les mots trouves : 
-//   exemple pour annuler le lien : function my_generer_url_entite($id, $foo='') { return 'javascript:;'; }
-//   appel par le plugin : $lien = $cs_generer_url($gloss_id, 'mot');
-# @define('_GLOSSAIRE_URL', 'my_generer_url_entite');
+// surcharge possible de cette fonction glossaire_generer_url_dist par : glossaire_generer_url($id_mot, $titre) 
+// si elle existe, elle sera utilisee pour generee l'url cliquable des mots trouves
+//   exemple pour annuler le clic : function glossaire_generer_url($id_mot, $titre) { return 'javascript:;'; }
+function glossaire_generer_url_dist($id_mot) {
+	if(defined('_SPIP19300')) 
+		return generer_url_entite($id_mot, 'mot'); // depuis SPIP 2.0
+		else { charger_generer_url(); return generer_url_mot($id_mot); } // avant SPIP 2.0
+}
 
 // Compatibilite pour SPIP 1.91
 if(defined('_SPIP19100') && !function_exists('_q')) { function _q($t) {return spip_abstract_quote($t);} }
@@ -81,15 +82,6 @@ function glossaire_safe($texte) {
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite|a
 function cs_rempl_glossaire($texte) {
 	global $gloss_id;
-	// mise en static de la fonction qui genere l'url des mots
-	static $cs_generer_url;
-	if(!isset($cs_generer_url_mot)) {
-		if(defined('_GLOSSAIRE_URL')) $cs_generer_url = _GLOSSAIRE_URL;
-		else {
-			if(defined('_SPIP19300')) $cs_generer_url = 'generer_url_entite'; /* depuis SPIP 2.0 */ 
-				else { charger_generer_url(); $cs_generer_url = 'cs_foo_mot'; /* avant SPIP 2.0 */ }
-		}
-	}
 	// mise en static de la table des mots pour eviter d'interrroger la base a chaque fois
 	// attention aux besoins de memoire...
 	static $glossaire_array;
@@ -127,7 +119,9 @@ function cs_rempl_glossaire($texte) {
 				$texte = preg_replace_callback(",(?:$les_mots)&(?:"._GLOSSAIRE_ACCENTS.');,i', 'glossaire_echappe_balises_callback', $texte);
 			}
 			// on y va !
-			$lien = $cs_generer_url($gloss_id, 'mot');
+			$lien = function_exists('glossaire_generer_url')
+				?$glossaire_generer_url($gloss_id, $titre)
+				:glossaire_generer_url_dist($gloss_id);
 			$mem = $GLOBALS['toujours_paragrapher'];
 			$GLOBALS['toujours_paragrapher'] = false;
 			// $definition =strlen($mot['descriptif'])?$mot['descriptif']:$mot['texte'];
