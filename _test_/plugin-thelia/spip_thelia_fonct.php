@@ -59,7 +59,7 @@ function spip_thelia_insert_head($flux) {
 	return $flux;
 }
 
-function spip_thelia_appeler_moteur_thelia($texte)
+function spip_thelia_appeler_moteur_thelia($texte, $dans_espace_prive="")
 {
 	include_spip('inc/charsets');
 
@@ -273,12 +273,31 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script){
 	// Afficher les produits associes
 	//
 	
+	//masquer provisoirement les warning de session de Thélia en attendant une correction
+	//Thélia retourne des warning de session (headers already sent) car elle démarre trop tard, mais on ne l'utilise pas, on se contente de lister les produits
+	$sav_error_reporting = error_reporting(E_ERROR);
+	
+	//on bloque la sortie vers le navigateur le temps d'y faire quelques substitutions	
 	$res = recuperer_fond("fonds/produits_associes_article","id_article=".$id_article);
+	$res = str_replace("THELIA-", "#", $res);
+	
+	//avant d'envoyer à thélia, on convertie en iso pour thélia
+	$res = unicode2charset(charset2unicode($res, 'utf-8'),'iso-8859-1');
+	ob_start();
 	chdir('..');
-	$out .= spip_thelia_appeler_moteur_thelia($res);
+	include_once("fonctions/moteur.php");
 	chdir('ecrire');
+	$texte = ob_get_contents();
+	ob_end_clean();
+	$texte = remplacement_sortie_thelia($texte);
 
-
+	//au retour de thélia, on convertit en utf8 pour SPIP
+	$texte = unicode2charset(charset2unicode($texte, 'iso-8859-1'),'utf-8');
+	$out .= $texte;
+	
+	//remettre le niveau d'erreur précédent
+	error_reporting($sav_error_reporting);
+	
 	$out .= "</form>\n";	
 
 	$out .= fin_block();
@@ -290,8 +309,7 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script){
 
 function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script){
 
-  	
-	global $spip_lang_right;
+  	global $spip_lang_right;
  	include_spip("inc/presentation");
 	include_spip('public/assembler');
 	include_spip('inc/charsets');
@@ -319,11 +337,31 @@ function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script){
 	// Afficher les produits associes
 	//
 	
+	//masquer provisoirement les warning de session de Thélia en attendant une correction
+	//Thélia retourne des warning de session (headers already sent) car elle démarre trop tard, mais on ne l'utilise pas, on se contente de lister les produits
+	$sav_error_reporting = error_reporting(E_ERROR);
+	
+	//on bloque la sortie vers le navigateur le temps d'y faire quelques substitutions	
 	$res = recuperer_fond("fonds/produits_associes_rubrique","id_rubrique=".$id_rubrique);
+	$res = str_replace("THELIA-", "#", $res);
+	
+	//avant d'envoyer à thélia, on convertie en iso pour thélia
+	$res = unicode2charset(charset2unicode($res, 'utf-8'),'iso-8859-1');
+	ob_start();
 	chdir('..');
-	$out .= spip_thelia_appeler_moteur_thelia($res);
+	include_once("fonctions/moteur.php");
 	chdir('ecrire');
+	$texte = ob_get_contents();
+	ob_end_clean();
+	$texte = remplacement_sortie_thelia($texte);
 
+	//au retour de thélia, on convertit en utf8 pour SPIP
+	$texte = unicode2charset(charset2unicode($texte, 'iso-8859-1'),'utf-8');
+	$out .= $texte;
+
+	//remettre le niveau d'erreur précédent
+	error_reporting($sav_error_reporting);
+	
 	$out .= "</form>\n";	
 
 	$out .= fin_block();
