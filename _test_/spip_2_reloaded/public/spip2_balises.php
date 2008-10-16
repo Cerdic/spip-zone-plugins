@@ -8,13 +8,50 @@
  */
 
 /**
- * Empile un element dans un tableau declare par #SET{tableau,#ARRAY}
- * #PUSH{tableau,valeur}
+ * #SET
+ * Affecte une variable locale au squelette
+ * #SET{nom,valeur}
+ * 
+ * SURCHARGE DU CORE : 
+ * 		Affecte un filtre a une variable locale au squelette
+ * 		#SET{nom,filtre,param1,param2,...,paramN}
  *
  * @param object $p : objet balise
- * @return " "/""
+ * @return ""
 **/
-function balise_PUSH_dist($p){
+/*
+function balise_SET($p){
+	$_code = array();	
+	
+	$n=1;
+	while ($_v = interprete_argument_balise($n++,$p))
+		$_code[] = $_v;
+
+	$_nom = array_shift($_code);
+	$_valeur = array_shift($_code);
+	if ($_nom AND $_valeur AND count($_code)) {
+		$filtre = str_replace("'", "", strtolower($_valeur));
+		$f = chercher_filtre($filtre);
+		$p->code = "vide(\$Pile['vars'][$_nom]=$f(". join(', ',$_code)."))";
+	} elseif ($_nom AND $_valeur)
+		$p->code = "vide(\$Pile['vars'][$_nom] = $_valeur)";
+	else
+		$p->code = "''";
+
+	$p->interdire_scripts = false; // la balise ne renvoie rien
+	return $p;
+}
+*/
+
+
+/**
+ * Empile un element dans un tableau declare par #SET{tableau,#ARRAY}
+ * #SET_PUSH{tableau,valeur}
+ *
+ * @param object $p : objet balise
+ * @return ""
+**/
+function balise_SET_PUSH_dist($p){
 	$_nom = interprete_argument_balise(1,$p);
 	$_valeur = interprete_argument_balise(2,$p);
 
@@ -33,17 +70,17 @@ function balise_PUSH_dist($p){
 
 /**
  * Si 3 arguments : Cree un tableau nom_tableau de t1 + t2
- * #MERGE{nom_tableau,t1,t2}
- * #MERGE{nom_tableau,#GET{tableau},#ARRAY{cle,valeur}}
+ * #SET_MERGE{nom_tableau,t1,t2}
+ * #SET_MERGE{nom_tableau,#GET{tableau},#ARRAY{cle,valeur}}
  * 
  * Si 2 arguments : Merge t1 dans nom_tableau
- * #MERGE{nom_tableau,t1}
- * #MERGE{nom_tableau,#GET{tableau}}
+ * #SET_MERGE{nom_tableau,t1}
+ * #SET_MERGE{nom_tableau,#GET{tableau}}
  * 
  * @param object $p : objet balise
- * @return " "/""
+ * @return ""
 **/
-function balise_MERGE_dist($p){
+function balise_SET_MERGE_dist($p){
 	$_nom = interprete_argument_balise(1,$p);
 	$_t1 = interprete_argument_balise(2,$p);
 	$_t2 = interprete_argument_balise(3,$p);
