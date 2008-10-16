@@ -37,11 +37,11 @@
 				[(#REM) Encarts Actualités ]
 				<BOUCLE_articles_recents(ARTICLES) {id_rubrique!=34}{par date}{inverse}{0,3}{doublons} >
 				<li class="hentry[ (#COMPTEUR_BOUCLE|=={1}|?{'premier',''})][ encart-(#COMPTEUR_BOUCLE)][ (#LOGO_ARTICLE||?{'avec-logo','sans-logo'})]">
-					[<div class="logo-encart">(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{90,130})</div>]
+					[<div class="logo-encart">(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{0,130}|image_recadre{90,130,center})</div>]
 					<h3 class="entry-title"><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></h3>
 					<small class="invisible"><abbr class="published"[ title="(#DATE|date_iso)"]>[(#DATE|affdate_jourcourt)]</abbr></small>
 					<small>[(#SOUSTITRE)]</small>
-					[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION|couper{100})</div>]
+					[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION|couper{[(#REM|?{'','100'}|moins{[(#SOUSTITRE|strlen)]})],'...'})</div>]
 					<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="#URL_ARTICLE"><:lire_la_suite:> +</a>
 				</li>
 				</BOUCLE_articles_recents>
@@ -63,11 +63,11 @@
 							[(#GET{nb_revues}|>{2}|?{'',' '})
 								<li class="hentry[ (#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'','avec-logo'})][ (#GET{nb_revues}|=={1}|?{'premier',''})]">
 							
-								[<div class="logo-encart">(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'',' '})<a href="spip.php?page=article-syndic-pmb&amp;id_syndic_article=#ID_SYNDIC_ARTICLE">[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130})]</a></div>]
+								[<div class="logo-encart">(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'',' '})<a href="spip.php?page=article-syndic-pmb&amp;id_syndic_article=#ID_SYNDIC_ARTICLE">[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{0,130}|image_recadre{90,130,center})]</a></div>]
 								<h3 class="entry-title"><a href="spip.php?page=article-syndic-pmb&amp;id_syndic_article=#ID_SYNDIC_ARTICLE"[ title="(#NOM_SITE|texte_backend)"]>[(#TITRE|couper{30})]</a></h3> 
 								[<small>	<:auteur:> : (#LESAUTEURS)</small>]
 								[<small>	<:serie:> : (#PMB_SERIE)</small>]
-								[<div class="introduction entry-content">(#DESCRIPTIF|couper{150})</div>]
+								[<div class="introduction entry-content">(#DESCRIPTIF|couper{150,'...'})</div>]
 								<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="spip.php?page=article-syndic-pmb&amp;id_syndic_article=#ID_SYNDIC_ARTICLE"><:lire_la_suite:> +</a>
 								</li>
 							]
@@ -89,11 +89,11 @@
 				[(#REM) Encarts Coups de coeur ]
 				<BOUCLE_articles_coupsdecoeur(ARTICLES) {id_rubrique} {par date} {inverse} {0,3} {doublons} >
 				<li class="hentry[ (#COMPTEUR_BOUCLE|=={1}|?{'premier',''})][ encart-(#COMPTEUR_BOUCLE)][ (#LOGO_ARTICLE||?{'avec-logo','sans-logo'})]">
-					[<div class="logo-encart">(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{90,130})</div>]
+					[<div class="logo-encart">(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{0,130}|image_recadre{90,130,center})</div>]
 					<h3 class="entry-title"><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></h3>
 					<small class="invisible"><abbr class="published"[ title="(#DATE|date_iso)"]>[(#DATE|affdate_jourcourt)]</abbr></small>
 					<small>[(#SOUSTITRE)]</small>
-					[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION|couper{100})</div>]
+					[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION|couper{[(#REM|?{'','100'}|moins{[(#SOUSTITRE|strlen)]})],'...'})</div>]
 					<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="#URL_ARTICLE"><:lire_la_suite:> +</a>
 				</li>
 				</BOUCLE_articles_coupsdecoeur>

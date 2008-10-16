@@ -35,14 +35,14 @@
 			<ul>
 			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){pmb_photo_src!=""} {par date}{inverse}{pagination 10}>[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'',' '})
 					[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{width}|>{20}|?{' ',''})
-						[(#DESCRIPTIF|nettoyer_descriptif_pmb|strlen|>{100}|?{' ',''})
+						[(#DESCRIPTIF|strlen|>{100}|?{' ',''})
 								<li class="hentry[ (#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'','avec-logo'})][ (#GET{nb_revues}|=={1}|?{'premier',''})]">
 							
 								[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'',' '})<a href="spip.php?page=article-syndic-pmb&amp;id_syndic_article=#ID_SYNDIC_ARTICLE">[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130})]</a>]
 								<h3 class="entry-title"><a href="spip.php?page=article-syndic-pmb&amp;id_syndic_article=#ID_SYNDIC_ARTICLE"[ title="(#NOM_SITE|texte_backend)"]>[(#TITRE|couper{30})]</a></h3> 
 								[<small>	<:auteur:> : (#LESAUTEURS)</small>]
 								[<small>	<:serie:> : (#PMB_SERIE)</small>]
-								[<div class="introduction entry-content">(#DESCRIPTIF|nettoyer_descriptif_pmb|couper{300})</div>]
+								[<div class="introduction entry-content">(#DESCRIPTIF|couper{300})</div>]
 								<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="spip.php?page=article-syndic-pmb&amp;id_syndic_article=#ID_SYNDIC_ARTICLE"><:lire_la_suite:> +</a>
 								</li>
 						]
