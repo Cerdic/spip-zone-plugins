@@ -11,8 +11,9 @@
 
 <body class="page_nouveautes">
 <div id="page">
-	<img src="#CHEMIN{bg-encart.png}" class="logo-fond" width="426" height="268" alt="" />
-
+	
+	<div class="fond-blanc"></div>
+	
 	[(#REM) Contenu principal : contenu de la rubrique ]
     	<div id="conteneur">
     	<div id="contenu">
@@ -42,7 +43,7 @@
 								<h3 class="entry-title"><a href="spip.php?page=article-syndic-pmb&amp;id_syndic_article=#ID_SYNDIC_ARTICLE"[ title="(#NOM_SITE|texte_backend)"]>[(#TITRE|couper{30})]</a></h3> 
 								[<small>	<:auteur:> : (#LESAUTEURS)</small>]
 								[<small>	<:serie:> : (#PMB_SERIE)</small>]
-								[<div class="introduction entry-content">(#DESCRIPTIF|couper{300})</div>]
+								[<div class="introduction entry-content">(#DESCRIPTIF|couper{300,'...'})</div>]
 								<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="spip.php?page=article-syndic-pmb&amp;id_syndic_article=#ID_SYNDIC_ARTICLE"><:lire_la_suite:> +</a>
 								</li>
 						]

@@ -17,8 +17,9 @@ href="[(#URL_PAGE{backend})]<BOUCLE_URLMOT(MOTS){id_rubrique}>&amp;id_mot[]=#ID_
 
 <body class="page_rubrique">
 <div id="page">
-	<img src="#CHEMIN{bg-encart.png}" class="logo-fond" width="426" height="268" alt="" />
-
+	
+	<div class="fond-blanc"></div>
+	
 	[(#REM) Contenu principal : contenu de la rubrique ]
     	<div id="conteneur">
     	<div id="contenu">
@@ -65,7 +66,7 @@ href="[(#URL_PAGE{backend})]<BOUCLE_URLMOT(MOTS){id_rubrique}>&amp;id_mot[]=#ID_
 
 	<div class="surlignable">
 	   	[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
-		[<p><small><:dernier_ajout:> : (#DATE|affdate_jourcourt).</small></p>]
+		[<p class="date-auteur"><small><:dernier_ajout:> : (#DATE|affdate_jourcourt).</small></p>]
         	
 	</div>
        
@@ -84,7 +85,7 @@ href="[(#URL_PAGE{backend})]<BOUCLE_URLMOT(MOTS){id_rubrique}>&amp;id_mot[]=#ID_
                     	<h3><a href="#URL_ARTICLE">#TITRE</a></h3>
                 	[<small>(#SOUSTITRE)</small>]
 			[<small>(#DATE|affdate_jourcourt)[, <:par_auteur:> (#LESAUTEURS)]</small>]
-			[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION|couper{300})</div>]
+			[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION|couper{300,'...'})</div>]
 			<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="#URL_ARTICLE"><:lire_la_suite:> +</a>
                 </li>
                 </BOUCLE_articles>

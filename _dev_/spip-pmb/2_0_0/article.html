@@ -13,8 +13,8 @@
 
 <body class="page_article">
 <div id="page">
-	<img src="#CHEMIN{bg-encart.png}" class="logo-fond" width="426" height="268" alt="" />
-
+	<div class="fond-blanc"></div>
+	
 	[(#REM) Contenu principal : contenu de l'article ]
     <div class="hfeed" id="conteneur">
     <div class="hentry" id="contenu">
@@ -31,7 +31,6 @@
             <div class="surlignable">
 				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
 				<h1 class="#EDIT{titre} entry-title[ (#TITRE|strlen|>{30}|?{'titre-long',''})]">[(#TITRE|ucfirst)]</h1>
-				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
 				[(#INCLURE{fond=noisettes/socialtags}{id_article})]
             </div>
 
@@ -47,15 +46,17 @@
         	#MODELE{article_traductions}
 			
 		
+		[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE|ucfirst)</p>]
+				
 		[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{500,0})</div>]
 		[<div class="#EDIT{texte} texte entry-content">(#TEXTE|image_reduire{500,0})</div>]
 
-		<p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour|ucfirst) ][(#DATE|affdate)]</abbr>[, <:par_auteur:> (#LESAUTEURS)][ (<:texte_date_publication_anterieure:> (#DATE_REDAC|affdate)).]</small></p>
+		<p class="date-auteur"><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour|ucfirst) ][(#DATE|affdate)]</abbr>[, <:par_auteur:> (#LESAUTEURS)][ (<:texte_date_publication_anterieure:> (#DATE_REDAC|affdate)).]</small></p>
 
 	</div>
 
 
-		[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+		[<div class="#EDIT{hyperlien} hyperlien"><h2 class="pas_surlignable"><:voir_en_ligne:></h2><a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></div>]
         
 		[<div class="ps surlignable"><h2 class="pas_surlignable"><:info_ps:></h2><div class="#EDIT{ps}">(#PS|image_reduire{500,0})</div></div>]
 
@@ -109,7 +110,8 @@
         </B_articles_rubrique>
 
     </div><!--#navigation-->
-    
+
+    <br class="nettoyeur" />
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 

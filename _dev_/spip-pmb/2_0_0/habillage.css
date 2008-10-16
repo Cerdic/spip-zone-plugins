@@ -55,15 +55,15 @@ table.spip { border: none; width: 100%; } /*Cf.: spip_style.css*/
 /*  ------------------------------------------ */
 body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 
-#page { position: relative; width: 950px; margin: 0 auto; text-align: left; background-color: #e6e8d5; background-image: url(bg-page-top.gif); background-repeat: repeat-x; background-position: top left; }
+#page { position: relative; width: 950px; margin: 0 auto; text-align: left; background-color: #e6e8d5; background-image: url(bg-logo.png); background-repeat: no-repeat; background-position: bottom left; }
 
-#top { position: relative; margin: 0; padding-top: 1em; height: 118px; margin-bottom: 1.5em; }
+#top { position: relative; margin: 0; padding: 0; height: 118px; margin-bottom: 1.5em; }
 #top a img.spip_logos { vertical-align: bottom; line-height: 1em; }
 #top #nom_site_spip { font-size: 2.2em; font-family: Georgia, Times, serif; margin-left: .5em; display: none; }
 #top #formulaire_recherche { position: absolute; right: 0; top: 1em; text-align: right; } /*Cf.: spip_formulaires.css*/
 #top #formulaire_recherche input.text { width: 10em; text-align: left; } /*Cf.: spip_formulaires.css*/
 
-#conteneur { position: relative; margin-top: .5em; clear: both; float: left; width: 730px; overflow: hidden; background-image: url(bordure-gris.gif); background-repeat: repeat-y; background-position: top right;}
+#conteneur { position: relative; margin-top: 10px; clear: both; float: left; width: 730px; overflow: hidden; background-image: url(bordure-gris.gif); background-repeat: repeat-y; background-position: top right;}
 #contenu { margin-right: 10px; padding-left: 1em; }
 .logo-fond { position: absolute; bottom: 1.99em; left: 0; }
 
@@ -87,7 +87,7 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 /*  ------------------------------------------ */
 
 #hierarchie { clear: both; margin-bottom: 2em; font-size: 0.90em; }
-#hierarchie, #hierarchie a { color: #666; }
+#hierarchie, #hierarchie a { color: #999966; }
 #hierarchie .on { font-weight: normal; }
 
 .cartouche { margin-bottom: 2em; }
@@ -99,14 +99,14 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 
 
 .cartouche p { margin: 0; padding: 0; clear: left; }
-.surtitre, .soustitre { font-size: 0.90em; color: #67741F; text-transform: uppercase; letter-spacing: 0.10em; padding-bottom: .2em;}
+.surtitre { font-size: 0.90em; color: #333300; text-transform: uppercase; letter-spacing: 0.10em; padding-bottom: .2em;}
 .cartouche .surtitre { margin-bottom: 0.30em; }
-.cartouche .soustitre { margin-top: 0.50em; margin-bottom: 0.30em; }
 .cartouche .traductions { font-size: 0.90em; }
 
-.surlignable p small { margin-left: 150px; color: #336666; font-style: italic; text-align: right; margin-right: 1em; } 
+.surlignable p.date-auteur { margin-left: 150px; color: #999966; text-align: right; margin-right: 1em; } 
+.surlignable p.date-auteur small { color: #999966; }
 .page_ouvrage .surlignable p small { text-align: left; margin-left: 1em; }
-.surlignable p small a { color: #336666; text-decoration: none;}
+.surlignable p small a { color: #999966; text-decoration: none;}
 .surlignable p small a:hover { color: #336666; text-decoration: none;}
 
 .pmb-ouvrage-infos { margin-left: 150px; color: #336666; }
@@ -114,8 +114,9 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 
 .surlignable .spip_logos { float: left; margin-right: 16px; margin-bottom: 4px; }
 
+.soustitre { color: #336666; text-decoration: none; margin-top: 0.50em; margin-bottom: 0.30em; margin-left: 150px; font-style: italic; }
 .chapo { margin-left: 150px; line-height: 1.40em; font-family: Georgia, serif; font-weight: bold; }
-.texte { margin-left: 150px; line-height: 1.60em; padding-top: 1em; color: #000; font-family: Georgia, serif; }
+.texte { margin-left: 150px; line-height: 1.60em; padding-top: .5em; color: #000; font-family: Georgia, serif; }
 .hyperlien { margin-left: 150px; display: block; font-weight: bold; color: #999966; }
 .ps, .notes { margin-left: 150px; margin-bottom: 2em; line-height: 1.40em; }
 .notes { margin-left: 150px; clear: both; font-size: 0.90em; }
@@ -128,12 +129,15 @@ abbr.published { border: 0; }
 
 /* Portfolio */
 #documents_portfolio { clear: both; margin-left: 150px; margin-top: 2em; text-align: center; }
-#documents_portfolio h2 { text-align: left; background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: bottom left; padding-bottom: .4em; margin-bottom: .5em; }
 #documents_portfolio .spip_logos { margin: 6px 3px 0 3px; padding: 4px; border: 1px solid #DDD; }
 #documents_portfolio a:hover .spip_logos { border-color: #99AC2D; }
 #documents_portfolio a.on .spip_logos { border-color: #8B6F92; }
 #document_actif { margin: 1em auto; }
 #document_actif img { padding: 4px; border: 1px solid #DDD; }
+
+
+/* style de la plupart des h2 */
+#documents_portfolio h2, .ps h2, .hyperlien h2 { text-align: left; background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: bottom left; padding-bottom: .4em; margin-bottom: .5em; margin-top: 1.5em; }
 
 
 /* Habillage des forums
@@ -250,7 +254,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 
 /* page d'accueil */
 .page_sommaire .articles ul { float: left; background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: top left; }
-.page_sommaire .articles ul li { width: 25%; height: auto; float: left; clear: none; background-image: url(bordure-gris.gif); background-repeat: repeat-y; background-position: top left; }
+.page_sommaire .articles ul li { width: 25%; _height: 13em; min-height: 13em; float: left; clear: none; padding-bottom: 0; margin-top: .5em; background-image: url(bordure-gris.gif); background-repeat: repeat-y; background-position: top left; }
 .page_sommaire .articles ul li.premier { background-image: none; }
 .page_sommaire .articles ul li.avec-photo { width: 45%; }
 .page_sommaire .articles ul li div, .page_sommaire .articles ul li a.lire-la-suite, .page_sommaire .articles ul li small, .page_sommaire .articles ul li h3 { display: block;  margin-left: 1em; margin-right: 1em; }
@@ -259,24 +263,34 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .page_sommaire .nouveautes ul li, .page_sommaire .nouveautes ul li.premier, .page_sommaire .nouveautes ul li.avec-photo  { width: 48%; height: auto;}
 
 /* adapter la mise en page en fonction de la présence de logos */
-/* cas 1 : les deux premiers ont des logos = on affiche que les deux premières actus */
-.page_sommaire .articles .mise-en-page-logo-logo-sans li.encart-1, .page_sommaire .articles .mise-en-page-logo-logo-logo li.encart-1 { width: 48%; }
-.page_sommaire .articles .mise-en-page-logo-logo-sans li.encart-2, .page_sommaire .articles .mise-en-page-logo-logo-logo li.encart-2 { width: 48%; }
-.page_sommaire .articles .mise-en-page-logo-logo-sans li.encart-3, .page_sommaire .articles .mise-en-page-logo-logo-logo li.encart-3 { display: none; }
+/* cas 1 : les trois articles ont des logos, on partage équitablement la largeur disponible */
+.page_sommaire .articles .mise-en-page-logo-logo-logo li.encart-1 { width: 33%; }
+.page_sommaire .articles .mise-en-page-logo-logo-logo li.encart-2 { width: 32%; }
+.page_sommaire .articles .mise-en-page-logo-logo-logo li.encart-3 { width: 33%; }
 
 /* cas 2 : un seul a un logo */
 .page_sommaire .articles .mise-en-page-logo-sans-sans li.sans-logo, .page_sommaire .articles .mise-en-page-sans-logo-sans li.sans-logo, .page_sommaire .articles .mise-en-page-sans-sans-logo li.sans-logo { width: 24%; }
 .page_sommaire .articles .mise-en-page-logo-sans-sans li.avec-logo, .page_sommaire .articles .mise-en-page-sans-logo-sans li.avec-logo, .page_sommaire .articles .mise-en-page-sans-sans-logo li.avec-logo { width: 48%; }
 
-/* cas 3 : logo,sans,logo ou sans,logo,logo = idem précédent + on cache le logo du troisième article */
-.page_sommaire .articles .mise-en-page-logo-sans-logo li.sans-logo, .page_sommaire .articles .mise-en-page-sans-logo-logo li.sans-logo { width: 24%; }
-.page_sommaire .articles .mise-en-page-logo-sans-logo li.avec-logo, .page_sommaire .articles .mise-en-page-sans-logo-logo li.avec-logo { width: 48%; }
-.page_sommaire .articles .mise-en-page-logo-sans-logo li.encart-3 { width: 24%; }
-.page_sommaire .articles .mise-en-page-logo-sans-logo li.encart-3 .logo-encart { display: none; }
+/* cas 3 : logo,sans,logo  */
+.page_sommaire .articles .mise-en-page-logo-sans-logo li.encart-1 { width: 38%; }
+.page_sommaire .articles .mise-en-page-logo-sans-logo li.encart-2 { width: 22%; }
+.page_sommaire .articles .mise-en-page-logo-sans-logo li.encart-3 { width: 38%; }
+
+
+/* cas 4 : logo,logo et sans */
+.page_sommaire .articles .mise-en-page-logo-logo-sans li.encart-1 { width: 38%; }
+.page_sommaire .articles .mise-en-page-logo-logo-sans li.encart-2 { width: 38%; }
+.page_sommaire .articles .mise-en-page-logo-logo-sans li.encart-3 { width: 22%; }
+
+/* cas 5 : sans,logo,logo  */
+.page_sommaire .articles .mise-en-page-sans-logo-logo li.encart-1 { width: 22%; }
+.page_sommaire .articles .mise-en-page-sans-logo-logo li.encart-2 { width: 38%; }
+.page_sommaire .articles .mise-en-page-sans-logo-logo li.encart-3 { width: 38%; }
 
 
 /* page rubrique */
-.page_rubrique .articles .spip_logos, .page_actualites .articles .spip_logos, .page_nouveautes .articles .spip_logos { margin-left: 0; }
+.page_rubrique .articles .spip_logos, .page_actualites .articles .spip_logos, .page_nouveautes .articles .spip_logos, .page_recherche .articles .spip_logos { margin-left: 0; }
 .page_rubrique .articles ul li .introduction { font-size: 1.2em; }
 .page_rubrique .articles .lire-la-suite { margin-right: 2em; }
 .page_rubrique .articles ul li small { display: block; }
@@ -381,3 +395,6 @@ div#page, div#conteneur, div#navigation, div#extra { width: auto; }
 #page #navigation .formulaire_spip { background-image: none; }
 #page .formulaire_spip .boutons input, #page input.submit { background-color: #333300; border-color: #333300; }
 #page .formulaire_recherche .boutons input, #page .formulaire_recherche input.submit { background-color: white; border-color: #333300; }
+
+
+.fond-blanc { position: absolute; top: 0; left: 0; width: 100%; height: 108px; background: white; }
