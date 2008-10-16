@@ -427,7 +427,8 @@ $res = spip_query("DESCRIBE spip_meta valeur");
 $resultat = function_exists('spip_fetch_array')?spip_fetch_array($res):sql_fetch($res);
 if($resultat['Type']!='text') echo "<p style=\"color:red;\">Attention : votre base semble ancienne et le Couteau Suisse ne va pas bien fonctionner.</p><p>La table 'spip_meta' a pour type de valeur '$resultat[Type]' au lieu de 'text'.</p>";
 // verification de la barre typo V2
-if (strlen($bt_version) and (version_compare($bt_version,'2.4.0','<'))) echo "<p>"._T('erreur:bt', array('version'=>$bt_version))."</p>";
+$mini = '2.5.3';
+if (strlen($bt_version) and (version_compare($bt_version,$mini,'<'))) echo "<p>"._T('couteauprive:erreur:bt', array('version'=>$bt_version, 'mini'=>$mini))."</p>";
 echo "<script type=\"text/javascript\"><!-- 
 if (!window.jQuery) document.write('".addslashes(propre('<p>'._T('couteauprive:erreur:jquery').'</p>'))."');
 //--></script>";
