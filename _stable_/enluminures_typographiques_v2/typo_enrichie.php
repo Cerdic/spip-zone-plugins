@@ -33,6 +33,14 @@
 	 *
 	*/
 
+// Gerer les variables de personnalisation, fonction depreciee sous SPIP 2.0
+// A suivre sur la methode...
+if(funcion_exists('tester_variable')) {
+	function tester_variable($var, $val){
+		if (!isset($GLOBALS[$var]))	$GLOBALS[$var] = $val;
+	}
+}
+
 function TypoEnluminee_pre_propre($texte) {
 	static $chercher_raccourcis=NULL;
 	static $remplacer_raccourcis=NULL;
