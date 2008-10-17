@@ -5,7 +5,7 @@
 	Joseph et toutes les bonnes volont&eacute;es - 2007
 	</auteur>
 	<version>0.3.1</version>
-	<version_base>0.2</version_base>
+	<version_base>0.3</version_base>
 	<etat>
 	test
 	</etat>
@@ -43,7 +43,15 @@ les mots cl&eacute;s.
 		<action>autoriser_groupemots</action>
 		<inclure>mots_techniques_pipelines.php</inclure>
 	</pipeline>
-	<install>inc/mots_techniques_install.php</install>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/mots_techniques.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/mots_techniques.php</inclure>
+	</pipeline>
+	<install>base/mots_techniques_install.php</install>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<chemin dir='' />
 </plugin>
