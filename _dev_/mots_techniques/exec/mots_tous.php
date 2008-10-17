@@ -32,9 +32,20 @@ function exec_mots_tous_dist()
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 
 	if (autoriser('creer','groupemots')  AND !$conf_mot){
-		$res = icone_horizontale(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif",false);
+		$out = "";
+		$result = sql_select("*, ".sql_multi ("titre", "$spip_lang"), "spip_groupes_mots", "", "", "multi");
+		while ($row_groupes = sql_fetch($result)) {
+			$id_groupe = $row_groupes['id_groupe'];
+			$titre_groupe = typo($row_groupes['titre']);		
+			$out .= "<li><a href='#mots_tous-$id_groupe' onclick='$(\"div.mots_tous\").hide().filter(\"#mots_tous-$id_groupe\").show();return false;'>$titre_groupe</a></li>";
+		}
+		if (strlen($out))
+			$out = "
+			<ul class='raccourcis_rapides'>".$out."</ul>
+			<a href='#' onclick='$(\"div.mots_tous\").show();return false;'>"._T('icone_voir_tous_mots_cles')."</a>";
 
-		echo bloc_des_raccourcis($res);
+		$res = icone_horizontale(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif",false);
+		echo bloc_des_raccourcis($res . $out);
 	}
 
 
@@ -50,51 +61,48 @@ function exec_mots_tous_dist()
 
 //
 // On boucle d'abord sur les groupes de mots 
-// On affiche tous les mots ici, meme technique='titi',
-// c'est a autoriser de proposer ou non un affichage du groupe de mot
+// ### mt: On affiche tous les mots ici, meme technique='titi',
+// 		   c'est a autoriser de proposer ou non un affichage du groupe de mot ###
 //
 
 	$result = sql_select("*, ".sql_multi ("titre", "$spip_lang"), "spip_groupes_mots", "", "", "multi");
 
 	while ($row_groupes = sql_fetch($result)) {
 		
+		### nouvelle autorisation (mt) ###
 		// si pas le droit de voir, on passe...
 		if (!autoriser('voir','groupemots', $row_groupes['id_groupe'])) {
 			continue;
 		}
-			
+		
 		$id_groupe = $row_groupes['id_groupe'];
 		$titre_groupe = typo($row_groupes['titre']);
 		$descriptif = $row_groupes['descriptif'];
 		$texte = $row_groupes['texte'];
 		$unseul = $row_groupes['unseul'];
 		$obligatoire = $row_groupes['obligatoire'];
-		$articles = $row_groupes['articles'];
-		$breves = $row_groupes['breves'];
-		$rubriques = $row_groupes['rubriques'];
-		$syndic = $row_groupes['syndic'];
+		$tables_liees = $row_groupes['tables_liees'];
 		$acces_minirezo = $row_groupes['minirezo'];
 		$acces_comite = $row_groupes['comite'];
 		$acces_forum = $row_groupes['forum'];
 		$technique = $row_groupes['technique'];
-
+		
 		// Afficher le titre du groupe
-		echo "<a id='mots_tous-$id_groupe'></a>";
+		echo "<div id='mots_tous-$id_groupe' class='mots_tous'>";
 
-		// icone du mot
-		if ($technique)
-			$icone = (($s = get_icone("mot-technique", $technique, 24)) ? $s : "groupe-mot-24.gif");
-		else 
-			$icone = "groupe-mot-24.gif";
-		
+		### mt: icone differente si mot technique ###
+		$icone = $technique ? (($s = mt_get_icone("mot-technique", $technique, 24)) ? $s : "groupe-mot-24.gif") : "groupe-mot-24.gif";
+			
 		echo debut_cadre_enfonce($icone, true, '', $titre_groupe);
-		
 		// Affichage des options du groupe (types d'elements, permissions...)
 		$res = '';
-		if ($articles == "oui") $res .= "> "._T('info_articles_2')." &nbsp;&nbsp;";
-		if ($breves == "oui") $res .= "> "._T('info_breves_02')." &nbsp;&nbsp;";
-		if ($rubriques == "oui") $res .= "> "._T('info_rubriques')." &nbsp;&nbsp;";
-		if ($syndic == "oui") $res .= "> "._T('icone_sites_references')." &nbsp;&nbsp;";
+		$tables_liees = explode(',',$tables_liees);
+		
+		$libelles = array('articles'=>'info_articles_2','breves'=>'info_breves_02','rubriques'=>'info_rubriques','syndic'=>'icone_sites_references');
+		$libelles = pipeline('libelle_association_mots',$libelles);
+		foreach($tables_liees as $table)
+			if (strlen($table))
+				$res .= "> " . _T(isset($libelles[$table])?$libelles[$table]:"$table:info_$table") . " &nbsp;&nbsp;";
 
 		if ($unseul == "oui" OR $obligatoire == "oui") $res .= "<br />";
 		if ($unseul == "oui") $res .= "> "._T('info_un_mot')." &nbsp;&nbsp;";
@@ -118,17 +126,17 @@ function exec_mots_tous_dist()
 		// Afficher les mots-cles du groupe
 		//
 
-		$groupe = sql_fetsel("COUNT(*) AS n", "spip_mots", "id_groupe=$id_groupe");
-		$groupe = $groupe['n'];
-		
-		echo "<div\nid='editer_mot-$id_groupe' style='position: relative;'>";
+		$groupe = sql_countsel("spip_mots", "id_groupe=$id_groupe");
+
+		echo "<div\nid='editer_mots-$id_groupe' style='position: relative;'>";
 
 		// Preliminaire: confirmation de suppression d'un mot lie a qqch
 		// (cf fin de afficher_groupe_mots_boucle executee a l'appel precedent)
 		if ($conf_mot  AND $son_groupe==$id_groupe) {
+			include_spip('inc/grouper_mots');
 			echo confirmer_mot($conf_mot, $id_groupe, $groupe);
 		}
-		if ($groupe && autoriser('voirmots','groupemots',$id_groupe)) {
+		if ($groupe AND autoriser('voirmots', 'groupemots', $id_groupe)) {### mt: nouvelle autorisation ###
 		  	$grouper_mots = charger_fonction('grouper_mots', 'inc');
 			echo $grouper_mots($id_groupe, $groupe);
 		}
@@ -141,7 +149,7 @@ function exec_mots_tous_dist()
 			echo "<td>";
 			echo icone_inline(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif", $spip_lang_left);
 			echo "</td>";
-			echo "\n<td id='editer_mot-$id_groupe-supprimer'",
+			echo "\n<td id='editer_mots-$id_groupe-supprimer'",
 			  (!$groupe ? '' : " style='visibility: hidden'"),
 			  ">";
 			echo icone_inline(_T('icone_supprimer_groupe_mots'), redirige_action_auteur('instituer_groupe_mots', "-$id_groupe", "mots_tous"), "groupe-mot-24.gif", "supprimer.gif", $spip_lang_left);
@@ -152,6 +160,7 @@ function exec_mots_tous_dist()
 		}	
 
 		echo fin_cadre_enfonce(true);
+		echo "</div>";
 	}
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
@@ -191,8 +200,6 @@ function confirmer_mot ($conf_mot, $son_groupe, $total)
 		$texte_lie .= _T('info_nombre_rubriques', array('nb_rubriques' => $nr))." ";
 	}
 
-	include_spip('inc/grouper_mots');
-	
 	return debut_boite_info(true)
 	. "<div class='serif'>"
 	. _T('info_delet_mots_cles', array('titre_mot' => $titre_mot, 'type_mot' => $type_mot, 'texte_lie' => $texte_lie))
@@ -204,7 +211,7 @@ function confirmer_mot ($conf_mot, $son_groupe, $total)
 	  /* troublant. A refaire avec une visibility
 	 . "<li><b><a href='" 
 	. generer_url_ecrire("mots_tous")
-	. "#editer_mot-$son_groupe"
+	. "#editer_mots-$son_groupe"
 	. "'>"
 	. _T('item_non')
 	. "</a>,</b> "

@@ -17,67 +17,48 @@ include_spip('inc/actions');
 include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@inc_grouper_mots_dist
-function inc_grouper_mots_dist($id_groupe, $cpt) {
+function inc_grouper_mots_dist($id_groupe, $total) {
 	global $connect_statut, $spip_lang_right, $spip_lang;
+
+	$presenter_liste = charger_fonction('presenter_liste', 'inc');
 
 	// ceci sert a la fois:
 	// - a construire le nom du parametre d'URL indiquant la tranche
 	// - a donner un ID a la balise ou greffer le retour d'Ajax
 	// tant pour la prochaine tranche que pour le retrait de mot
-	$tmp_var = "editer_mot-$id_groupe";
+	$tmp_var = "editer_mots-$id_groupe";
+	$url = generer_url_ecrire('grouper_mots',"id_groupe=$id_groupe");
 
-	$nb_aff = floor(1.5 * _TRANCHES);
-
-	if ($cpt > $nb_aff) {
-		$nb_aff = _TRANCHES; 
-		$tranches = afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('grouper_mots',"id_groupe=$id_groupe&total=$cpt"), $nb_aff);
-	} else $tranches = '';
-
-
-	$deb_aff = _request($tmp_var);
-	$deb_aff = ($deb_aff !== NULL ? intval($deb_aff) : 0);
 	$select = 'id_mot, id_groupe, titre, descriptif, '
 	. sql_multi ("titre", $spip_lang);
 
-	$result = sql_select($select, 'spip_mots', "id_groupe=$id_groupe", '',  'multi', (($deb_aff < 0) ? '' : "$deb_aff, $nb_aff"));
+	$requete = array('SELECT' => $select, 'FROM' => 'spip_mots', 'WHERE' => "id_groupe=$id_groupe", 'ORDER BY' => 'multi');
 
-	$table = array();
+	$tableau = array();
 	$occurrences = calculer_liens_mots($id_groupe);
-	while ($row = sql_fetch($result)) {
-		$table[] = afficher_groupe_mots_boucle($row, $occurrences, $cpt, "$tmp_var=$deb_aff");
-	}
-
-	// si droits de suppression des mots, mettre le lien pour cela
-	if (autoriser('modifiermots', 'groupemots', $id_groupe)) {
-			$largeurs = array('', 100, 130);
-			$styles = array('arial11', 'arial1', 'arial1');
+	if (autoriser('modifiermots', 'groupemots', $id_groupe)) { ### Nouvelle autorisation (mt) ###
+		$styles = array(array('arial11'), array('arial1', 100), array('arial1', 130));
 	} else {
-			$largeurs = array('', 100);
-			$styles = array('arial11', 'arial1');
+		$styles = array(array('arial11'), array('arial1', 100));
 	}
-
-	return http_img_pack("searching.gif", "*", "style='visibility: hidden; position: absolute; $spip_lang_right: 0px; top: -20px;' id='img_$tmp_var'") 
-	  . "<div class='cadre-liste'>"
-	  . $tranches
-	  . "<table border='0' cellspacing='0' cellpadding='3' width='100%'>"
-	  . afficher_liste($largeurs, $table, $styles)
-	  . "</table>"
-	  . "</div>";
+	return $presenter_liste($requete, 'presenter_groupe_mots_boucle', $tableau, array($occurrences, $total, $deb_aff), false, $styles, $tmp_var, '', '', $url);
 }
 
 // http://doc.spip.org/@afficher_groupe_mots_boucle
-function afficher_groupe_mots_boucle($row, $occurrences, $total, $deb_aff)
+function presenter_groupe_mots_boucle($row, $own)
 {
 	global $connect_statut;
 
+	list($occurrences, $total, $deb_aff) = $own;
 	$id_mot = $row['id_mot'];
 	$id_groupe = $row['id_groupe'];
 	$titre = typo($row['titre']);
 	$descriptif = entites_html($row['descriptif']);
 			
-	if (autoriser('voirmots', 'groupemots', $id_groupe)
-	 OR autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe))) {
-		$h = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=" . generer_url_retour('mots_tous') . "#editer_mot-$id_groupe");
+	if (autoriser('voirmots', 'groupemots', $id_groupe)  ### Nouvelle autorisation (mt) ###
+	 OR autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe))
+	OR $occurrences['articles'][$id_mot] > 0) {
+		$h = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=" . generer_url_retour('mots_tous') . "#editer_mots-$id_groupe");
 		if ($descriptif)  $descriptif = " title=\"$descriptif\"";
 		$titre = "<a href='$h' class='liste-mot'$descriptif>$titre</a>";
 	}
@@ -117,13 +98,13 @@ function afficher_groupe_mots_boucle($row, $occurrences, $total, $deb_aff)
 		$clic =  '<small>'
 		._T('info_supprimer_mot')
 		. "&nbsp;<img style='vertical-align: bottom;' src='"
-		. _DIR_IMG_PACK
-		. "croix-rouge.gif' alt='X' width='7' height='7' />"
+		. chemin_image('croix-rouge.gif')
+		. "' alt='X' width='7' height='7' />"
 		. '</small>';
 
 		if ($nr OR $na OR $ns OR $nb)
 			$href = "<a href='"
-			. generer_url_ecrire("mots_tous","conf_mot=$id_mot&na=$na&nb=$nb&nr=$nr&ns=$ns&son_groupe=$id_groupe") . "#editer_mot-$id_groupe"
+			. generer_url_ecrire("mots_tous","conf_mot=$id_mot&na=$na&nb=$nb&nr=$nr&ns=$ns&son_groupe=$id_groupe") . "#editer_mots-$id_groupe"
 			. "'>$clic</a>";
 		else {
 			$href = generer_supprimer_mot($id_mot, $id_groupe, $clic, $total, $deb_aff);
@@ -140,9 +121,9 @@ function generer_supprimer_mot($id_mot, $id_groupe, $clic, $total, $deb_aff='')
 {
 	$cont = ($total > 1)
 	? ''
-	: "function(r) {jQuery('#editer_mot-$id_groupe-supprimer').css('visibility','visible');}";
+	: "function(r) {jQuery('#editer_mots-$id_groupe-supprimer').css('visibility','visible');}";
 
-	return ajax_action_auteur('editer_mot', "$id_groupe,$id_mot,,,",'grouper_mots', "id_groupe=$id_groupe&$deb_aff", array($clic,''), '', $cont);
+	return ajax_action_auteur('editer_mots', "$id_groupe,$id_mot,,,",'grouper_mots', "id_groupe=$id_groupe&$deb_aff", array($clic,''), '', $cont);
 }
 
 //
