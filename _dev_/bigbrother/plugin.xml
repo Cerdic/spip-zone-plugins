@@ -12,8 +12,6 @@
 		dev
 	</etat>
 	<description>
-		Surveiller et punir.
-		
 		Ce plugin garde en m&eacute;moire les visites de toutes les personnes ayant un compte.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
@@ -22,6 +20,14 @@
 	</prefix>
 	<options>bigbrother_options.php</options>
 	<install>base/bigbrother_installation.php</install>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>bigbrother_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>bigbrother_tables.php</inclure>
+	</pipeline>
 	
 	<!-- Big brother nécessite les plugins suivant -->
 	<necessite id='cfg' version="[1.0.4;]" />

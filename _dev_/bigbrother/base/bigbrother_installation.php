@@ -34,11 +34,6 @@ function bigbrother_vider_tables() {
 	effacer_meta('bigbrother_version_base');
 }
 
-// Compatibilite <= SPIP 1.92
-function bigbrother_sql_swhotable($table, $table_spip = false, $serveur='') {
-	return spip_abstract_showtable($table, $serveur, $table_spip);
-}
-
 // Met à jour le numéro de version dans les métas
 function bigbrother_maj_version(&$v1, $v2) {
 	echo "MAJ Big Brother : $v1 =&gt; $v2<br />";
@@ -61,11 +56,6 @@ function bigbrother_maj(){
 		
 		include_spip('base/create');
 		include_spip('base/abstract_sql');
-		include_spip('base/bigbrother_tables');
-		
-		// compatibilite SPIP 1.92
-		$showtable = function_exists('sql_showtable')?'sql_showtable':'bigbrother_sql_swhotable';
-		$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array';
 				
 		if ($version_en_cours == 0.0){
 			// A la première installation on crée les tables
