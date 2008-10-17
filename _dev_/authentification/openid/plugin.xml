@@ -29,7 +29,7 @@
 	[Documentation sur spip-contrib->http://www.spip-contrib.net/Plugin-d-authentification-OpenID]
    </lien> <!-- URI de documentation -->
     <!-- spip en version 193 mini -->
-	<necessite id='spip' version='[1.9.3;]' />   
+	<necessite id='spip' version='[2.0 beta2;]' />   
 	<necessite id="lib:php-openid-2.1.2" src="http://openidenabled.com/files/php-openid/packages/php-openid-2.1.2.zip" />
    <prefix>openid</prefix>
    <install>base/openid_install.php</install>
