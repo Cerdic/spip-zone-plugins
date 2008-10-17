@@ -1,0 +1,15 @@
+<ul>
+	<li class="fieldset">
+		<fieldset>
+			<h3 class="legend"><:motstechniques:info_mots_cles_techniques:></h3>
+			<ul>
+				<li class="editer_groupe_mots_techniques">
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{technique})</span>]
+					<div class='choix'><input type='checkbox' class='checkbox' name='technique' value='oui'[ (#ENV{technique}|=={oui}) checked='checked'] id='technique' /><label for='technique'><:motstechniques:bouton_mots_cles_techniques:></label></div>
+					<input type="hidden" name="mt_technique_present" value="oui" />
+				</li>
+			</ul>
+		</fieldset>
+	</li>
+</ul>
+

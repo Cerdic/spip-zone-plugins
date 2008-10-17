@@ -35,9 +35,17 @@ les mots cl&eacute;s.
 	<prefix> 
 	mots_techniques
 	</prefix>
+ 	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>mots_techniques_pipelines.php</inclure>
+	</pipeline>	
+ 	<pipeline>
+		<nom>pre_edition</nom>
+		<inclure>mots_techniques_pipelines.php</inclure>
+	</pipeline>	
+	
 	<pipeline>
 		<nom>autoriser_groupemots</nom>
-		<action>autoriser_groupemots</action>
 		<inclure>mots_techniques_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>

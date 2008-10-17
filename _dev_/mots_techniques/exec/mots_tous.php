@@ -63,7 +63,7 @@ function exec_mots_tous_dist()
 // On boucle d'abord sur les groupes de mots 
 // ### mt: On affiche tous les mots ici, meme technique='titi',
 // 		   c'est a autoriser de proposer ou non un affichage du groupe de mot ###
-//
+include_spip(_DIR_PLUGIN_MOTS_TECHNIQUES.'mots_techniques_fonctions');
 
 	$result = sql_select("*, ".sql_multi ("titre", "$spip_lang"), "spip_groupes_mots", "", "", "multi");
 
