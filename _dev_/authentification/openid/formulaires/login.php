@@ -68,7 +68,7 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null){
 	{
 		$auth_http = generer_url_action('cookie',"",false,true);
 	}
-	
+		
 	$valeurs = array(
 		'auth_http' => $auth_http,
 		'var_login' => $login,
@@ -81,17 +81,16 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null){
 	$valeurs['_hidden'] = 
 	'<input type="hidden" name="session_password_md5" value="" />'
 	. '<input type="hidden" name="next_session_password_md5" value="" />';
-	
+
 	// Si on est connecte, envoyer vers la destination
 	// si on en a le droit, et sauf si on y est deja
-	
+
 	if ($auteur) {
-		verifier_visiteur();
 		$valeurs['editable'] = false;
+		verifier_visiteur();
 	}
-	
 	if (_request('var_erreur')
-	OR !$GLOBALS['visiteur_session']['id_auteur']) 
+	OR !$GLOBALS['visiteur_session']['id_auteur'])
 		$valeurs['editable'] = true;
 
 	if (is_null($prive) ? is_url_prive($cible) : $prive) {
@@ -100,7 +99,8 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null){
 	} else {
 		$loge = ($visiteur_session['auth'] != '');
 	}
-	if ($auteur and $loge) {
+
+	if ($auteur AND $loge) {
 		// on est a destination ?
 		if ($cible == self())
 			$valeurs['editable'] = false;
@@ -135,25 +135,25 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 	$session_md5next = _request('next_session_password_md5');
 	$session_remember = _request('session_remember');
 
-			
-	// tester le login openid
-if (is_openid($session_login)) {
-	// * Si quelqu'un possede effectivement cet openid,
-	// on demande l'authentification
-	$auth_openid = charger_fonction('auth_openid','inc');
-	if ($auth_openid($session_login)) {
-		// * Si l'openid existe, la procedure continue en redirigeant 
-		// vers le fournisseur d'identite. En cas d'erreur, il y a une redirection de faite
-		// sur la page login, en cas de reussite, sur l'action controler_openid
-		// * S'il l'openid n'existe pas, on est de retour ici, et on continue
-		// pour d'autres methodes d'identification
-		include_spip('inc/openid');
-		$erreurs['openid'] = demander_authentification_openid($session_login, $cible);
-		// potentiellement, on arrive ici avec une erreur si l'openid donne n'existe pas
-		// dans le cas où ce n'etait pas un openid, il faut poursuivre les methodes de connexion
-		// et si une est valide, il faut supprimer cette erreur sinon pas de traitement !
+	#openid# tester le login openid
+	if (is_openid($session_login)) {
+		// * Si quelqu'un possede effectivement cet openid,
+		// on demande l'authentification
+		$auth_openid = charger_fonction('auth_openid','inc');
+		if ($auth_openid($session_login)) {spip_log('is_op2','login');
+			// * Si l'openid existe, la procedure continue en redirigeant 
+			// vers le fournisseur d'identite. En cas d'erreur, il y a une redirection de faite
+			// sur la page login, en cas de reussite, sur l'action controler_openid
+			// * S'il l'openid n'existe pas, on est de retour ici, et on continue
+			// pour d'autres methodes d'identification
+			include_spip('inc/openid');
+			$erreurs['openid'] = demander_authentification_openid($session_login, $cible);
+			// potentiellement, on arrive ici avec une erreur si l'openid donne n'existe pas
+			// dans le cas où ce n'etait pas un openid, il faut poursuivre les methodes de connexion
+			// et si une est valide, il faut supprimer cette erreur sinon pas de traitement !
+		}
 	}
-}	
+	#/openid#	
 		
 	if ($session_login) {
 		$row =  sql_fetsel('*', 'spip_auteurs', "login=" . sql_quote($session_login));
@@ -190,9 +190,12 @@ if (is_openid($session_login)) {
 				$erreurs['password'] = ' ';
 		}
 		else {
-			# login ok
+			#openid#
 			// on supprime l'eventuelle erreur sur openid inconnu
 			unset($erreurs['openid']);
+			#/openid#
+			
+			# login ok
 			# verifier si on a pas affaire a un visiteur 
 			# qui essaye de se loge sur ecrire/
 			verifier_visiteur();
@@ -211,14 +214,18 @@ if (is_openid($session_login)) {
 			array('login' => htmlspecialchars($login)));
 	}
 	
+	#openid# ajouter l'erreur openid aux messages d'erreurs
+	# (evite de surcharger le formulaire .html)
+	if (isset($erreurs['openid'])){
+		$erreurs['message_erreur'] .= "<p>".$erreurs['openid']."</p>";
+	}
+	#/openid#
+	
 	return $erreurs;
 }
 
 function formulaires_login_traiter_dist($cible="",$login="",$prive=null){
-	$message = '';	
-	#$auth = charger_fonction('auth','inc');
-	#$auth();
-
+	$res = array();
 	// Si on se connecte dans l'espace prive, 
 	// ajouter "bonjour" (repere a peu pres les cookies desactives)
 	if (is_null($prive) ? is_url_prive($cible) : $prive) {
@@ -246,14 +253,14 @@ function formulaires_login_traiter_dist($cible="",$login="",$prive=null){
 	 AND ($cible!=self())) {
 		if (!headers_sent() AND !$_GET['var_mode']) {
 			include_spip('inc/headers');
-			$message .= redirige_formulaire($cible);
+			$res['redirect'] = $cible;
 		} else {
-			$message .= "<a href='$cible'>" .
+			$res['message_ok'] .= "<a href='$cible'>" .
 			  _T('login_par_ici') .
 			  "</a>";
 		}
 	}
-	return $message;
+	return $res;
 }
 
 
