@@ -10,23 +10,5 @@
 		]
 	</BOUCLE_lieuxvisite>
 	<p class="descriptif-visite">#DESCRIPTIF</p>
-	[(#MODE_JEU|=={oui}|?{' ',''})<script type="text/javascript">
-		$(document).ready(function(){
-			if (!$.cookie('nom_joueur')) {
-				$('.panorama-viewport').append("<div class='panorama-fond-demarrer'></div>")
-				.append("<div class='panorama-bouton-demarrer'><label for='nom_joueur'><:panoramas:nom_joueur:> :</label> <input type='text' value='' id='nom_joueur' name='nom_joueur'/><br /><a href='#'><:panoramas:demarrer:></a></div>");
-		
-				$('.panorama-bouton-demarrer a').bind('click', function(){
-						if ($('#nom_joueur').val() == "") {
-							alert("<:panoramas:nom_obligatoire:>");
-						} else {
-							$.cookie('nom_joueur',$('#nom_joueur').val());
-							$('.panorama-bouton-demarrer, .panorama-fond-demarrer').fadeOut(1000);
-						}
-						return false;
-					});
-			}
-			
-		});
-	</script>]
+
 </BOUCLE_visite>

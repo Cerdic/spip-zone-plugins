@@ -59,8 +59,9 @@
 			}
 		}	
 		if (partie_terminee == tableau_objets_a_ramasser.length) {
+			var panorama_bravo = "<:panoramas:bravo:>";
 			$('.panorama-viewport').append("<div class='panorama-fond-demarrer'></div>")
-			.append("<div class='panorama-bouton-demarrer'><a href='#'><:panoramas:bravo:></a></div>");
+			.append("<div class='panorama-bouton-demarrer'><a href='#'>"+panoramas_bravo.replace("NOM_JOUEUR",$.cookie('nom_joueur'))+"</a></div>");
 			
 			$('.panorama-bouton-demarrer a').bind('click', function(){
 					$.cookie('lieux_visites','');
@@ -201,7 +202,9 @@ $(document).ready(function(){
 			$('.interaction#ID_INTERACTION')
 				.unbind('click')
 				.bind('click', function() {
-							[alert("(#TEXTE_AVANT_ACTIVATION)");]
+							[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION)";
+							texte_avant_activation = texte_avant_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
+							alert(texte_avant_activation);]
 							return false;
 						})
 				.droppable({
@@ -209,7 +212,10 @@ $(document).ready(function(){
 					activeClass: 'droppable-active',
 					hoverClass: 'droppable-hover',
 					drop: function(ev, ui) {
-						[alert("(#TEXTE_APRES_ACTIVATION)");]
+						[var texte_apres_activation = "(#TEXTE_APRES_ACTIVATION)";
+							texte_apres_activation = texte_apres_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
+							alert(texte_apres_activation);]
+
 						<BOUCLE_documentobjetapresactivationobjet(DOCUMENTS){id_document=#ID_OBJET_APRES_ACTIVATION}>
 							$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
 							$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
@@ -246,7 +252,10 @@ $(document).ready(function(){
 							if ($.cookie('lieux_visites')) {
 								var tableau_lieux_visites = $.cookie('lieux_visites').split(','); 
 								if (tableau_lieux_visites.indexOf('#ID_LIEU')>=0) {
-									[alert("(#TEXTE_APRES_ACTIVATION)");]
+									[var texte_apres_activation = "(#TEXTE_APRES_ACTIVATION)";
+									texte_apres_activation = texte_apres_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
+									alert(texte_apres_activation);]
+
 									<BOUCLE_documentobjetapresactivationlieu(DOCUMENTS){id_document=#ID_OBJET_APRES_ACTIVATION}>
 										$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
 										$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
@@ -259,10 +268,14 @@ $(document).ready(function(){
 										verifier_objets_ramasses();
 									</BOUCLE_documentobjetapresactivationlieu>		
 								} else {
-									[alert("(#TEXTE_AVANT_ACTIVATION)");]
+									[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION)";
+									texte_avant_activation = texte_avant_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
+									alert(texte_avant_activation);]
 								}
 							} else {
-								[alert("(#TEXTE_AVANT_ACTIVATION)");]
+								[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION)";
+								texte_avant_activation = texte_avant_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
+								alert(texte_avant_activation);]
 							}
 							return false;
 						});
@@ -278,7 +291,9 @@ $(document).ready(function(){
 							if($.cookie('jeux_reussis')) {
 								var tableau_jeux_visites = $.cookie('jeux_reussis').split(','); 
 								if (tableau_jeux_visites.indexOf('#ID_JEU')>=0) {
-									[alert("(#TEXTE_APRES_ACTIVATION)");]
+									[var texte_apres_activation = "(#TEXTE_APRES_ACTIVATION)";
+									texte_apres_activation = texte_apres_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
+									alert(texte_apres_activation);]
 									<BOUCLE_documentobjetapresactivationjeu(DOCUMENTS){id_document=#ID_OBJET_APRES_ACTIVATION}>
 										$('div.panorama-panier ul').append("<li><div class='objet#ID_DOCUMENT'><img src='#URL_DOCUMENT' /><span style='display: none;'>#ID_DOCUMENT</span></div></li>");
 										$('div.panorama-panier ul li div').draggable({helper: 'clone', opacity: .4, revert: true});
@@ -291,10 +306,14 @@ $(document).ready(function(){
 										verifier_objets_ramasses();
 									</BOUCLE_documentobjetapresactivationjeu>
 								} else {
-									[alert("(#TEXTE_AVANT_ACTIVATION)");]
+									[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION)";
+									texte_avant_activation = texte_avant_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
+									alert(texte_avant_activation);]
 								}
 							} else	{
-								[alert("(#TEXTE_AVANT_ACTIVATION)");]
+								[var texte_avant_activation = "(#TEXTE_AVANT_ACTIVATION)";
+								texte_avant_activation = texte_avant_activation.replace("NOM_JOUEUR",$.cookie('nom_joueur'));
+								alert(texte_avant_activation);]
 							}
 							return false;
 						});
@@ -426,43 +445,74 @@ $(document).ready(function(){
 </script>
 </B_imagestransition>
 </BOUCLE_interactionstransitions>
+
+<script type="text/javascript">
+
+	function gestion_molette_souris() {
+		[(#REM) Gestion de la molette de la souris pour aller à gauche à droite ]
+		var intOverallDelta = 0;
+		$(".panorama-viewport").mousewheel(function(objEvent, intDelta){
+			if (intDelta > 0) { 
+			      	intOverallDelta++;
+				if (intOverallDelta>0) {
+					intOverallDelta = 1;
+					$('.panorama-control-right').trigger('click');
+				} else {
+					$('.panorama-control-pause').trigger('click');
+				}
+			} else if (intDelta < 0) {
+				intOverallDelta--;
+				if (intOverallDelta<0) {
+					intOverallDelta = -1;
+					$('.panorama-control-left').trigger('click');
+				} else {
+					$('.panorama-control-pause').trigger('click');
+				}
+			}
+									
+			objEvent.stopPropagation();
+			objEvent.preventDefault();
+	
+			return false;
+		
+		});
+	
+		
+	}
+
+	$(document).ready(function(){
+		[(#MODE_JEU|=={oui}|?{' ',''})
+		verifier_objets_ramasses();
+		if (!$.cookie('nom_joueur')) {
+			$('.panorama-viewport').append("<div class='panorama-fond-demarrer'></div>")
+			.append("<div class='panorama-bouton-demarrer'><label for='nom_joueur'><:panoramas:nom_joueur:> :</label> <input type='text' value='' id='nom_joueur' name='nom_joueur'/><br /><a href='#'><:panoramas:demarrer:></a></div>");
+		
+			$('.panorama-bouton-demarrer a').bind('click', function(){
+					if ($('#nom_joueur').val() == "") {
+						alert("<:panoramas:nom_obligatoire:>");
+					} else {
+						$.cookie('nom_joueur',$('#nom_joueur').val());
+						$('.panorama-bouton-demarrer, .panorama-fond-demarrer').fadeOut(1000);
+						gestion_molette_souris();
+					}
+					return false;
+				});
+		} else {
+			gestion_molette_souris();
+		}]
+		[(#MODE_JEU|=={oui}|?{'',' '})
+			gestion_molette_souris();
+		]
+			
+	});
+</script>
+
 </BOUCLE_visites>
 </BOUCLE_lieux>
 
-[(#REM) Gestion de la molette de la souris pour aller à gauche à droite ]
-<script type="text/javascript">
-$(document).ready(function(){
-
-	var intOverallDelta = 0;
-	$(".panorama-viewport").mousewheel(function(objEvent, intDelta){
-		if (intDelta > 0) { 
-		      	intOverallDelta++;
-			if (intOverallDelta>0) {
-				intOverallDelta = 1;
-				$('.panorama-control-right').trigger('click');
-			} else {
-				$('.panorama-control-pause').trigger('click');
-			}
-		} else if (intDelta < 0) {
-			intOverallDelta--;
-			if (intOverallDelta<0) {
-				intOverallDelta = -1;
-				$('.panorama-control-left').trigger('click');
-			} else {
-				$('.panorama-control-pause').trigger('click');
-			}
-		}
-								
-		objEvent.stopPropagation();
-		objEvent.preventDefault();
-
-		return false;
 	
-	});
-	
-	verifier_objets_ramasses();
-});
-</script>
+
+
 
 
 </B_lieux>
