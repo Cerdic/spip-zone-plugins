@@ -18,18 +18,16 @@ function exec_echoppe_categorie(){
 	$contexte['id_categorie'] = _request('id_categorie');
 	$contexte['new'] = _request('new');
 	
-	$sql_test_categorie_existe = "SELECT * FROM spip_echoppe_categories WHERE id_categorie = '".$contexte['id_categorie']."';";
+	/*$sql_test_categorie_existe = "SELECT * FROM spip_echoppe_categories WHERE id_categorie = '".$contexte['id_categorie']."';";
 	$res_test_categorie_existe = spip_query($sql_test_categorie_existe);
 	if (sql_count ($res_test_categorie_existe) != 1 && $new != 'oui'){
 		die(inc_commencer_page_dist(_T('echoppe:les_categories'), "redacteurs", "echoppe")._T('echoppe:pas_de_categorie_ici').fin_page());
-	}
+	}*/
 	
-	$sql_select_categorie = "SELECT cat.*, cat_desc.* FROM spip_echoppe_categories cat, spip_echoppe_categories_descriptions cat_desc WHERE cat.id_categorie = '".$contexte['id_categorie']."' AND cat.id_categorie = cat_desc.id_categorie AND cat_desc.lang='".$contexte['lang_categorie']."';";
-	$res_select_categorie = spip_query($sql_select_categorie);
-	$categorie = spip_fetch_array($res_select_categorie);
-	
+	$sql_select_categorie = sql_select("*", "spip_echoppe_categories", "id_categorie =" . $contexte['id_categorie']);
+	$categorie = sql_fetch($sql_select_categorie);
 	(is_array($categorie))?$contexte = array_merge($contexte,$categorie):$contexte = $contexte;
-	
+	/*
 	$date_derniere_modification = affdate($contexte['maj']);
 	if (empty($date_derniere_modification)){
 		$date_derniere_modification = _T('echoppe:pas_encore_cree');
@@ -38,7 +36,7 @@ function exec_echoppe_categorie(){
 			$date_derniere_modification = _T('echoppe:pas_encore_modifie');
 		}
 	}
-	
+	*/
 	
 	echo inc_commencer_page_dist($contexte['titre'], "redacteurs", "echoppe");
 	
@@ -50,7 +48,7 @@ function exec_echoppe_categorie(){
 
 	$les_langues = explode(',',$GLOBALS['meta']['langues_multilingue']);
 
-	//if (count($les_langues) > 1){
+	/*if (count($les_langues) > 1){
 		echo '<form action="index.php" method="get">
 		<input type="hidden" name="exec" value="echoppe_edit_categorie" />
 		<input type="hidden" name="id_categorie" value="'.$contexte['id_categorie'].'" />
@@ -62,7 +60,7 @@ function exec_echoppe_categorie(){
 		echo '</form>
 		<input type="submit" value="'._T('echoppe:editer').'" />
 		</select>';
-	//}
+	}*/
 	echo fin_boite_info(true);
 	
 	

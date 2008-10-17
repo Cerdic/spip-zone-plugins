@@ -10,7 +10,7 @@
 <div>
 	<strong><:echoppe:les_sous_categories:></strong>
 		<ul>
-		<BOUCLE_LesSousCategorie(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS spip_echoppe_categories){id_secteur = #ID_CATEGORIE}{par num titre}>
+		<BOUCLE_LesSousCategorie(CATEGORIES){id_secteur = #ID_CATEGORIE}{par num titre}>
 			<li class="cadre-sous_rub" style="width: 45%;margin: 10px 0px 0px 0px;">
 					<strong><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">[(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})]</a></strong>
 					[<div class="verdana1">(#DESCRIPTIF|couper{150})</div>]
@@ -31,7 +31,7 @@
 		<table width="100%">
 		<tbody>
 		
-			<BOUCLE_LesProduits(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits spip_echoppe_categories_produits){id_categorie}{lang=""}>
+			<BOUCLE_LesProduits(PRODUITS){id_categorie}{lang=""}>
 				<tr class="tr_liste">
 				<td style="width: 11px;"><div class='etat #STATUT'> </div></td>
 				<td class="arial2">
