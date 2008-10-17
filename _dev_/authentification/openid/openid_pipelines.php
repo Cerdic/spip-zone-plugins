@@ -15,7 +15,7 @@ function openid_editer_contenu_objet($flux){
 function openid_pre_edition($flux){
 	if ($flux['args']['table']=='spip_auteurs' AND $flux['args']['action']=='modifier') {
 		if ($openid = _request('openid')) {
-			$flux['args']['data']['openid'] = vider_url($openid, false);
+			$flux['data']['openid'] = vider_url($openid, false);
 		}
 	}
 	return $flux;
