@@ -7,7 +7,8 @@ stili .un .deux non utilizzati (forse in eva...)
 ]
 <div id="abcalendrier">
 	<h2 class="menu-titre"><:abcalendrier:agenda:></h2>
-			<a href="[(#SELF|parametre_url{'calendrier_annee',''}|parametre_url{'calendrier_mois',''})][(#SELF|strpos{'?'}|>{0}|?{'&','?'})]calendrier_mois=#ENV{prec_mois}&calendrier_annee=#ENV{prec_annee}" title="<:abcalendrier:mois_precedent:>">&lt;&lt;</a>&nbsp;&nbsp;#ENV*{moise_annee_curr}&nbsp;&nbsp;<a href="[(#SELF|parametre_url{'calendrier_annee',''}|parametre_url{'calendrier_mois',''})][(#SELF|strpos{'?'}|>{0}|?{'&','?'})]calendrier_mois=#ENV{suiv_mois}
+			<a href="[(#SELF|parametre_url{'calendrier_mois',#ENV{prec_mois}}|parametre_url{'calendrier_annee',#ENV{prec_annee}})]" title="<:abcalendrier:mois_precedent:>">&lt;&lt;</a>&nbsp;&nbsp;#ENV*{moise_annee_curr}&nbsp;&nbsp;<a href="[(#SELF|parametre_url{'calendrier_mois',#ENV{suiv_mois}}|parametre_url{'calendrier_annee',#ENV{suiv_annee}})]
+			[(#SELF|parametre_url{'calendrier_annee',''}|parametre_url{'calendrier_mois',''})][(#SELF|strpos{'?'}|>{0}|?{'&','?'})]calendrier_mois=#ENV{suiv_mois}
 &calendrier_annee=#ENV{suiv_annee}" title="<:abcalendrier:mois_suivant:>"> &gt;&gt;</a>
 	[(#ENV*{abcal_table})]
 	<table width="100%"  border="0" cellspacing="0" cellpadding="2">
