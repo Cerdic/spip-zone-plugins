@@ -1,6 +1,8 @@
 <?php
-include_spip('base/mots_techniques');
 
+/**
+ * Prendre en compte les criteres "technique" et "tout"
+ */
 function boucle_MOTS($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
@@ -16,10 +18,9 @@ function boucle_MOTS($id_boucle, &$boucles) {
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
-//
-// <BOUCLE(GROUPES_MOTS)>
-//
-// http://doc.spip.org/@boucle_GROUPES_MOTS_dist
+/**
+ * Prendre en compte les criteres "technique" et "tout"
+ */
 function boucle_GROUPES_MOTS($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;

@@ -29,12 +29,9 @@ les mots cl&eacute;s.
 
 	</multi>
 	</description>
-	<options> <!-- fichier charge a chaque hit -->
-	mots_techniques_options.php
-	</options>
-	<fonctions> <!-- fichier charge a chaque recalcul -->
-	mots_techniques_fonctions.php
-	</fonctions>
+	<options>mots_techniques_options.php</options>
+	<fonctions>mots_techniques_autorisations.php</fonctions>
+	<fonctions>mots_techniques_fonctions.php</fonctions>
 	<prefix> 
 	mots_techniques
 	</prefix>

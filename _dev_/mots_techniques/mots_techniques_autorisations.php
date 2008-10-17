@@ -1,37 +1,4 @@
 <?php
-include_spip('base/mots_techniques');
-
-// signaler le pipeline de autorisation sur les mots
-$GLOBALS['spip_pipeline']['autoriser_groupemot'] = "";
-
-
-// -> dans inc/filtre.php
-// ----------------------
-//
-// recherche une icone dans le path de spip, stockee dans le dossier $dossier ("images/" par defaut)
-// si get_icone('nom','categorie','16');
-// cherche dans le path :
-// - images/nom-categorie-16.png
-// - images/nom-categorie-16.gif
-// - images/nom-16.png
-// - images/nom-16.gif
-function get_icone($nom_base, $categorie='', $taille=24, $dossier='images/'){
-	$exts = array('png','gif');
-	// recherche du nom de base
-	if ($categorie) {
-		foreach ($exts as $ext){
-			if ($f = find_in_path("$dossier$nom_base-$categorie-$taille.$ext")) return $f;
-		}
-	}
-	foreach ($exts as $ext){
-		if ($f = find_in_path("$dossier$nom_base-$taille.$ext")) return $f;
-	}	
-	return "";
-}
-
-
-
-
 
 // -> dans inc/autoriser.php
 // -----------------------------
