@@ -15,7 +15,6 @@ function mots_techniques_editer_contenu_objet($flux){
 
 // ajouter le champ technique soumis lors de la soumission du formulaire CVT editer_groupe_mots
 function mots_techniques_pre_edition($flux){
-	spip_log($flux['args'],'p');
 	if ($flux['args']['table']=='spip_groupes_mots' AND $flux['args']['action']=='modifier') {
 		if (_request('mt_technique_present')=='oui') {
 			$technique = _request('technique'); 
