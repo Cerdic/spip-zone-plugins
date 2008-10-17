@@ -21,6 +21,7 @@ function Lieux_update($id_lieu){
 	$icone_carte = intval(_request('icone_carte'));
 	$decalage_x = intval(_request('decalage_x'));
 	$documents_associes = _request('documents_associes');
+	$nb_points_lieu = intval(_request('nb_points_lieu'));
 	
 	//
 	// Modifications des donnees du lieu
@@ -47,6 +48,7 @@ function Lieux_update($id_lieu){
 			"acces_carte="._q($acces_carte).", ".
 			"decalage_x="._q($decalage_x).", ".
 			"documents_associes="._q($documents_associes).", ".
+			"nb_points_lieu="._q($nb_points_lieu).", ".
 			"id_visite="._q($id_visite).
 		" WHERE id_lieu="._q($id_lieu);
 		$result = spip_query($query);

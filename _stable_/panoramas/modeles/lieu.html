@@ -50,6 +50,8 @@
 	var tableau_objets_a_ramasser = new Array(); 
 	tableau_objets_a_ramasser = chaine_objets_a_ramasser.split(','); 
 
+	
+
 	function verifier_objets_ramasses() {
 		var partie_terminee=0;
 		for (var i=0; i<tableau_objets_a_ramasser.length; i++) {
@@ -73,7 +75,6 @@
 					return false;
 				});
 		}
-		
 	}
 
 	tb_pathToImage = "#CHEMIN{img_pack/ajax-loader.gif}";

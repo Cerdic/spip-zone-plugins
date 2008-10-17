@@ -60,6 +60,7 @@ $visites_virtuelles_lieux = array(
 		"icone_carte"	=> "bigint(21) NOT NULL", /* icone symbolisant le lieu sur la carte */
 		"decalage_x"	=> "int(21) NOT NULL", /* décalage par défaut du panorama (start_position) */
 		"documents_associes"	=> "text NOT NULL", /* id des documents associés au lieu, séparés par des virgules */
+		"nb_points_lieu"	=> "bigint(21) NOT NULL", /* nombre de points gagnés lorsque le lieu a été visité */
 		"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
 		"maj"	=> "TIMESTAMP"
 		);
@@ -119,6 +120,7 @@ $visites_virtuelles_interactions = array(
 		"images_transition_delai"	=> "bigint(21) NOT NULL", /* durée d'affichage d'une image avant de passer à la suivante */
 		"id_film_transition"	=> "bigint(21) NOT NULL", /* jouer un film pendant la transition */
 		"film_transition_duree"	=> "bigint(21) NOT NULL", /* durée du film pendant la transition */
+		"nb_points_objet"	=> "bigint(21) NOT NULL", /* nombre de points gagnés lorsque l'objet a été ramassé */
 		"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
 		"maj"	=> "TIMESTAMP"
 		);

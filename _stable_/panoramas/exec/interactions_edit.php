@@ -97,6 +97,7 @@ function exec_interactions_edit(){
 			$images_transition_delai = $row['images_transition_delai'];
 			$id_film_transition = $row['id_film_transition'];
 			$film_transition_duree = $row['film_transition_duree'];
+			$nb_points_objet = $row['nb_points_objet'];
 	
 		}
 		$focus = "";
@@ -146,6 +147,7 @@ function exec_interactions_edit(){
 		$row['images_transition_delai'] = $images_transition_delai;
 		$row['id_film_transition'] = $id_film_transition;
 		$row['film_transition_duree'] = $film_transition_duree;
+		$row['nb_points_objet'] = $nb_points_objet;
 		
 		$action_link = generer_action_auteur("interactions_edit","new",urlencode($redirect));
 	}
@@ -242,6 +244,7 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$images_transition_delai = intval($row['images_transition_delai']);
 	$id_film_transition = intval($row['id_film_transition']);
 	$film_transition_duree = intval($row['film_transition_duree']);
+	$nb_points_objet = intval($row['nb_points_objet']);
 	
 	$out = "";
 	$out .= "<p>";
@@ -379,6 +382,10 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 	$out .= "<input type='text' name='id_jeu_cible' id='id_jeu_cible_interaction' class='formo $focus' ".
 		"value=\"".$id_jeu_cible."\" size='5' />\n";
 
+	$out .= "<strong><label for='nb_points_objet_interaction' id='nb_points_objet_interaction_label'>"._T("panoramas:nb_points_objet")."</label></strong> ";
+	$out .= "<input type='text' name='nb_points_objet' id='nb_points_objet_interaction' class='formo $focus' ".
+		"value=\"".$nb_points_objet."\" size='5' />\n";
+
 	$out .= "<strong><label for='id_objet_recompense_interaction' id='id_objet_recompense_interaction_label'>"._T("panoramas:id_objet_recompense")."</label></strong> ";
 	$out .= "<input type='text' name='id_objet_recompense' id='id_objet_recompense_interaction' class='formo $focus' ".
 		"value=\"".$id_objet_recompense."\" size='5' />\n";
@@ -483,7 +490,7 @@ function Panoramas_boite_proprietes_interaction($id_interaction, $row, $focus, $
 						case 'rubrique' : $('#id_rubrique_cible_interaction, #id_rubrique_cible_interaction_label').show(); break;
 						case 'document' : $('#id_document_cible_interaction, #id_document_cible_interaction_label').show(); break;
 						case 'url' : $('#url_cible_interaction, #url_cible_interaction_label').show(); break;
-						case 'objet' : break;
+						case 'objet' : $('#nb_points_objet_interaction, #nb_points_objet_interaction_label').show(); break;
 						case 'personnage' : break;
 						case 'descriptif' : break;
 						default : $('#infos-cible input, #infos-cible textarea, #infos-cible label').show();

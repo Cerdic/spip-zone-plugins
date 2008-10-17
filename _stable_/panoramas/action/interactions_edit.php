@@ -39,6 +39,7 @@ function Interactions_update($id_interaction){
 	$images_transition_delai = intval(_request('images_transition_delai'));
 	$id_film_transition = intval(_request('id_film_transition'));
 	$film_transition_duree = intval(_request('film_transition_duree'));
+	$nb_points_objet = intval(_request('nb_points_objet'));
 	
 	//
 	// Modifications des donnees d'une interaction
@@ -82,6 +83,7 @@ function Interactions_update($id_interaction){
 			"images_transition_delai="._q($images_transition_delai).", ".
 			"id_film_transition="._q($id_film_transition).", ".
 			"film_transition_duree="._q($film_transition_duree).", ".
+			"nb_points_objet="._q($nb_points_objet).", ".
 			"id_lieu="._q($id_lieu).", ".
 			"id_visite="._q($id_visite).
 		" WHERE id_interaction="._q($id_interaction);

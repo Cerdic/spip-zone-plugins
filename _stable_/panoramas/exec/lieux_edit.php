@@ -89,6 +89,7 @@ function exec_lieux_edit(){
 			$icone_carte = $row['icone_carte'];
 			$decalage_x = $row['decalage_x'];
 			$documents_associes = $row['documents_associes'];
+			$nb_points_lieu = $row['nb_points_lieu'];
 		}
 		$focus = "";
 		$action_link = generer_action_auteur("lieux_edit","$id_lieu",urlencode($redirect));
@@ -185,6 +186,7 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 	$icone_carte =  intval($row['icone_carte']);
 	$decalage_x =  intval($row['decalage_x']);
 	$documents_associes =  $row['documents_associes'];
+	$nb_points_lieu =  intval($row['nb_points_lieu']);
 	
 	$out = "";
 	$out .= "<p>";
@@ -288,6 +290,10 @@ function Panoramas_boite_proprietes_lieu($id_lieu, $row, $focus, $action_link, $
 	$out .= "<strong><label for='documents_associes_lieu'>"._T("panoramas:documents_associes")."</label></strong> ";
 	$out .= "<input type='text' name='documents_associes' id='documents_associes_lieu' class='formo $focus' ".
 		"value=\"".$documents_associes."\" size='5' /><br />\n";
+
+	$out .= "<strong><label for='nb_points_lieu_lieu'>"._T("panoramas:nb_points_lieu")."</label></strong> ";
+	$out .= "<input type='text' name='nb_points_lieu' id='nb_points_lieu_lieu' class='formo $focus' ".
+		"value=\"".$nb_points_lieu."\" size='5' /><br />\n";
 
 	$out .= "<div style='text-align:right'>";
 	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";

@@ -46,7 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pas_d_objets' => 'Votre panier est vide',
 'demarrer' => 'D&eacute;marrer le jeu',
 'liste_objets_jeu' => 'Liste des objets &agrave; avoir dans la sacoche pour terminer le jeu (id s&eacute;par&eacute;s par des virgules)',
-'bravo' => 'F&eacute;licitation ! cliquez ici pour recommencer',
+'bravo' => 'F&eacute;licitation NOM_JOUEUR ! clique ici pour recommencer',
 'nom_joueur' => 'Inscris ton nom',
 'nom_obligatoire' => 'Il faut d\'abord inscrire ton nom pour pouvoir jouer'
 );
