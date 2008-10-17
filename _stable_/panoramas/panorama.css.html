@@ -82,14 +82,22 @@ div.panorama-bouton-demarrer {
 	top: 50%; 
 	left: 0; 
 	width: 100%; 
-	text-align: center;
+	text-align: left;
 }
-div.panorama-bouton-demarrer a {
+div.panorama-bouton-demarrer {
+	position: absolute;
+	left: 50%;
+	top: 50%; 
+	margin-left: -15%;
+	margin-top: -3em;
 	background: white; 
 	padding: 1em;
-	color: #f60;
+	color: #666;
 	text-decoration: none;
+	width: 30%;
 }
+div.panorama-bouton-demarrer label { font-size: .9em; }
+div.panorama-bouton-demarrer a { color: #f60; padding: .2em; float: right; margin-top: 1em; border: 1px dotted #f60; font-size: .95em }
 div.panorama-bouton-demarrer a:hover {
 	text-decoration: none;
 	color: white;

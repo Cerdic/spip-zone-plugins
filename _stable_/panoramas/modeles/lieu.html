@@ -6,9 +6,9 @@
 	
 	<a id="[lieu(#ID_LIEU)]" name="[lieu(#ID_LIEU)]"></a>
 	<BOUCLE_photo(DOCUMENTS){id_document=#ID_PHOTO}>
-		<img src="#URL_DOCUMENT" class="panorama#ID_LIEU" width="#LARGEUR" height="#HAUTEUR" 
+		<img src="#URL_DOCUMENT" class="panorama#ID_LIEU" width="#LARGEUR" height="#HAUTEUR"  
 	</BOUCLE_photo>
-	 alt="#_lieux:TITRE" usemap="map#ID_LIEU" />
+	 alt="[(#_lieux:TITRE|texte_backend)]" usemap="map#ID_LIEU" />
 	<B_interactions>
 	<map id="map#ID_LIEU" name="map#ID_LIEU"> 
 		<BOUCLE_interactions(VISITES_VIRTUELLES_INTERACTIONS){id_lieu}>
@@ -66,6 +66,7 @@
 					$.cookie('lieux_visites','');
 					$.cookie('objets_ramasses',' ');
 					$.cookie('jeux_reussis','');
+					$.cookie('nom_joueur','');
 					$('.panorama-bouton-demarrer, .panorama-fond-demarrer').fadeOut(1000);
 					document.location.href="?page=visite&id_visite=#ID_VISITE";
 					return false;
