@@ -140,7 +140,7 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 		// * Si quelqu'un possede effectivement cet openid,
 		// on demande l'authentification
 		$auth_openid = charger_fonction('auth_openid','inc');
-		if ($auth_openid($session_login)) {spip_log('is_op2','login');
+		if ($auth_openid($session_login)) {
 			// * Si l'openid existe, la procedure continue en redirigeant 
 			// vers le fournisseur d'identite. En cas d'erreur, il y a une redirection de faite
 			// sur la page login, en cas de reussite, sur l'action controler_openid
