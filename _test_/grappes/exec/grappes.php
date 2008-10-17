@@ -91,8 +91,10 @@ function exec_grappes_dist()
 
 		// afficher les restrictions d'associations (qui peut asocier)
 		$res .= "<br />";
-		foreach ($options['acces'] as $type)
-			$res .= "> "._T('grappes:info_acces_' . $type)." &nbsp;&nbsp;";
+		if (is_array($options['acces'])){
+			foreach ($options['acces'] as $type)
+				$res .= "> "._T('grappes:info_acces_' . $type)." &nbsp;&nbsp;";
+		}
 		
  		echo "<span class='verdana1 spip_x-small'>", $res, "</span>";
  		

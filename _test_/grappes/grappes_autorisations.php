@@ -13,7 +13,7 @@ function autoriser_grappe_associer_dist($faire, $type, $id, $qui, $opt){
 	if (!is_array($options = @unserialize($res['options'])))
 		$acces = array('0minirezo');
 	else {
-		$acces = $options['acces'];
+		$acces = is_array($options['acces'])?$options['acces']:array('0minirezo');
 	}
 	// tester le statut de l'auteur
 	if (!in_array($qui['statut'],$acces)) 
