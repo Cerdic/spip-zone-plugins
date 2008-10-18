@@ -55,7 +55,7 @@ function presenter_groupe_mots_boucle($row, $own)
 	$titre = typo($row['titre']);
 	$descriptif = entites_html($row['descriptif']);
 			
-	if (autoriser('voirmots', 'groupemots', $id_groupe)  ### Nouvelle autorisation (mt) ###
+	if (autoriser('voir', 'groupemots', $id_groupe)  ### Nouvelle autorisation (mt) ###
 	 OR autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe))
 	OR $occurrences['articles'][$id_mot] > 0) {
 		$h = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=" . generer_url_retour('mots_tous') . "#editer_mots-$id_groupe");

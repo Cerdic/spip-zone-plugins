@@ -33,16 +33,13 @@ function autoriser_groupemots($faire, $type, $id, $qui, $opt) {
 		$autoriser = ($qui['statut'] == '0minirezo' AND !$qui['restreint']);
 	}
 	
-	if ($faire == 'voir' 
-		OR $faire == 'voirmots') {
+	if ($faire == 'voir' ) {
 			$autoriser = true;
 	}	
-	if ($faire == 'creer' 
-		OR $faire == 'modifier') {
+	if ($faire == 'modifier') {
 			$autoriser = ($qui['statut'] == '0minirezo' AND !$qui['restreint']);
 	}
 	if ($faire == 'liermots'		
-		OR $faire == 'creermots' 
 		OR $faire == 'modifiermots'){
 		// chercher le champ 'minirezo', 'comite' ou 'forum'
 		if ($r)
@@ -88,14 +85,14 @@ function autoriser_mot_modifier($faire, $type, $id, $qui, $opt) {
 function autoriser_mot_voir($faire, $type, $id, $qui, $opt) {
 	// id groupe mot present
 	if (isset($opt['id_groupe']) AND $opt['id_groupe']){
-		return autoriser('voirmots', 'groupemots', $opt['id_groupe'], $qui, $opt);
+		return autoriser('voir', 'groupemots', $opt['id_groupe'], $qui, $opt);
 	}
 	// id mot present, on retrouve le groupe
 	if ($id && ($t = sql_getfetsel("id_groupe", "spip_mots", "id_mot=".sql_quote($id)))){
-		return autoriser('voirmots', 'groupemots', $t, $qui, $opt);
+		return autoriser('voir', 'groupemots', $t, $qui, $opt);
 	}
 	// sinon defaut
-	return autoriser('voirmots', 'groupemots');
+	return autoriser('voir', 'groupemots');
 }
 
 ?>

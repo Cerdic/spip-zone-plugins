@@ -31,7 +31,7 @@ function exec_mots_tous_dist()
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 
-	if (autoriser('creer','groupemots')  AND !$conf_mot){
+	if (autoriser('modifier','groupemots')  AND !$conf_mot){
 		$out = "";
 		$result = sql_select("*, ".sql_multi ("titre", "$spip_lang"), "spip_groupes_mots", "", "", "multi");
 		while ($row_groupes = sql_fetch($result)) {
@@ -54,7 +54,7 @@ function exec_mots_tous_dist()
 	echo debut_droite('', true);
 
 	echo gros_titre(_T('titre_mots_tous'),'', false);
-	if (autoriser('creer','groupemots')) {
+	if (autoriser('modifier','groupemots')) {
 	  echo typo(_T('info_creation_mots_cles')) . aide ("mots") ;
 	}
 	echo "<br /><br />";
@@ -136,7 +136,7 @@ include_spip(_DIR_PLUGIN_MOTS_TECHNIQUES.'mots_techniques_fonctions');
 			include_spip('inc/grouper_mots');
 			echo confirmer_mot($conf_mot, $id_groupe, $groupe);
 		}
-		if ($groupe AND autoriser('voirmots', 'groupemots', $id_groupe)) {### mt: nouvelle autorisation ###
+		if ($groupe) {
 		  	$grouper_mots = charger_fonction('grouper_mots', 'inc');
 			echo $grouper_mots($id_groupe, $groupe);
 		}
