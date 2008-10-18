@@ -53,6 +53,7 @@ $GLOBALS['jquery_plugins'] = array(
 	//ui
 	'ui' => array(
 		'dir' => 'jquery.ui-1.6rc2/ui',
+		'dir_themes' => 'jquery.ui-1.6rc2/themes',
 		'url' => 'http://ui.jquery.com/',
 		'install' => 'http://jquery-ui.googlecode.com/files/jquery.ui-1.6rc2.zip',
 		// declarer des dossiers de themes
@@ -61,8 +62,8 @@ $GLOBALS['jquery_plugins'] = array(
 		// #JQUERY_PLUGIN_THEME{flora, flora.tabs} ce qui chargera les css
 		// 'themes/flora/flora.css' et 'themes/flora/flora.tabs.css'
 		'themes' => array(
-			'ui' 	=> 'themes/default',
-			'flora' 	=> 'themes/flora'
+			'ui' 	=> 'default',
+			'flora' 	=> 'flora'
 		)
 	),
 	

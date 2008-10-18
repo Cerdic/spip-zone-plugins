@@ -24,12 +24,10 @@ function balise_JQUERY_PLUGINS_TELECHARGEMENT_dist($p) {
 /*
  * Balise #JQUERY_PLUGIN{x1, x2...}
  * 
- * Ecrit le code html appelant le script jQuery UI
- * indique par x
+ * Ecrit le code html appelant le script jQuery UI indique par x
  * 
- * Exemples : 
- * - #JQUERY_PLUGIN{ui.tabs}
- * - #JQUERY_PLUGIN{ui.droppable, ui.mouse}
+ * Exemple : 
+ * - #JQUERY_PLUGIN{ui.core, ui.tabs}
  */
 function balise_JQUERY_PLUGIN($p){
 
@@ -60,7 +58,7 @@ function balise_JQUERY_PLUGIN($p){
  * Optionnellement le nom des plugins qui ont un theme specifique
  * comme flora.tabs.css 
  * #JQUERY_PLUGIN{flora} // theme de ui
- * #JQUERY_PLUGIN{flora, tabs} ajoute flora.css et flora.tabs.css
+ * #JQUERY_PLUGIN{flora, flora.tabs} ajoute flora.css et flora.tabs.css
  * #JQUERY_PLUGIN{monquelette.css} ajoute un lien vers un squelette compile (monsquelette.css.html)
  */
 function balise_JQUERY_PLUGIN_THEME($p){
@@ -71,7 +69,6 @@ function balise_JQUERY_PLUGIN_THEME($p){
 	
 	// liste des themes
 	$themes = jqueryp_liste_themes_dispo();
-	spip_log($themes,'jqp');
 	$i = 0;
 	while ($theme = interprete_argument_balise(++$i, $p)){
 		$theme = str_replace("'", "", $theme);
@@ -82,15 +79,13 @@ function balise_JQUERY_PLUGIN_THEME($p){
 		// c'est le nom d'un theme
 		} else {
 			// si 'theme.extension', ne garder que 'theme'
-			$t = explode('.',$theme);
-			$t = array_shift($t);
+			$t = array_shift(explode('.',$theme));
 			// si le theme existe
 			if (isset($themes[$t])) {
 				jqueryp_add_link($p, $themes[$t] . '/' . $theme . '.css');
 			}
 		}
 	}
-
 
 	$p->interdire_scripts = false;
 	return $p;
@@ -112,7 +107,7 @@ function jqueryp_add_link(&$p, $adresse, $generer_url=false){
 		return $p->code .= '. "\n<link rel=\"stylesheet\" href=\"' 
 				. (($generer_url)?generer_url_public($adresse):$f)
 				. '\" type=\"text/css\" media=\"screen\" />\n"';	
-	
+
 	return false;
 }
 
@@ -133,7 +128,7 @@ function jqueryp_add_plugins($plugins, $flux=array()){
 	$lpa = jqueryp_liste_fichiers_dispo();
 	foreach ($plugins as $nom){
 		if (isset($flux[$nom]) AND $flux[$nom]) continue; // meme nom, deja present, on passe
-		if ($c = chemin($lpa[$nom])) 
+		if ($c = chemin($lpa[$nom])) {
 			if (!in_array($c, $flux)) $flux[$nom] = $c;
 		} else {
 			spip_log("Adresse introuvable ($lpa[$nom]) sur $nom",'jquery_plugins');
@@ -263,8 +258,6 @@ function jqueryp_liste_plugins($type, $groupe=''){
 			}
 			return $plugs;
 			break;
-			
-
 	}	
 }
 
@@ -296,21 +289,19 @@ function jqueryp_liste_themes($type, $groupe=''){
 			
 			foreach ($plugs as $nom=>$extension){
 				// eliminer les plugins non installes
-				// eliminer les plugins dans themes
+				// eliminer les plugins sans themes
 				if ((!is_dir($dir = _DIR_LIB . $extension['dir']))
 					OR (!isset($extension['themes']))) {
 						unset($plugs[$nom]);
 				} else {
 					// mettre la bonne adresse
 					foreach ($extension['themes'] as $t=>$dir) {
-						$plugs[$nom]['themes'][$t] = str_replace(_DIR_RACINE,'', _DIR_LIB) . $extension['dir'] . '/' . $dir;
+						$plugs[$nom]['themes'][$t] = str_replace(_DIR_RACINE,'', _DIR_LIB) . $extension['dir_themes'] . '/' . $dir;
 					}
 				}
 			}
 			return $plugs;
 			break;
-			
-
 	}	
 }
 
