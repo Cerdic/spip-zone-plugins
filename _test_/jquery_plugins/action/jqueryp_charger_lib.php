@@ -56,7 +56,7 @@ function action_jqueryp_charger_lib_dist() {
 	$texte = "<div style='text-align:$spip_lang_left;'>$texte</div>\n";
 
 	echo minipres(_T('jqueryp:installation_librairies'),
-			 generer_form_ecrire(str_replace('exec=','',_request('retour')),
+			 generer_form_ecrire(preg_replace(',^.*exec\=,', '', rawurldecode(_request('redirect'))),
 				$texte . bouton_suivant())
 	);
 	exit;

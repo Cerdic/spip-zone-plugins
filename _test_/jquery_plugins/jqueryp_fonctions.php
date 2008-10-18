@@ -146,7 +146,7 @@ function jqueryp_add_plugins($plugins, $flux=array()){
  * Soit on a un zip a recuperer,
  * soit un array de fichiers js
  */
-function jqueryp_bouton_telechargement($id_jquery_plugin){
+function jqueryp_bouton_telechargement($id_jquery_plugin,$redirect=""){
 	global $jquery_plugins;
 	$j = $jquery_plugins[$id_jquery_plugin];
 
@@ -166,17 +166,16 @@ function jqueryp_bouton_telechargement($id_jquery_plugin){
 	} else {
 		$action = 'jqueryp_charger_lib';
 		$args = '';
-		$input = "<input type='hidden' name='id_jquery_plugin' value='$id_jquery_plugin' />"
-				. "<input type='hidden' name='retour' value='".$_SERVER['QUERY_STRING']."' />";
+		$input = "<input type='hidden' name='id_jquery_plugin' value='$id_jquery_plugin' />";
 	}
 	
 	include_spip('inc/actions');
-	return redirige_action_auteur(
-		$action, $args, '', '',
+	return generer_action_auteur(
+		$action, $args, $redirect,
 			$input
-			."<input type='submit' class='fondo' name='ok' value='"
+			."<input type='submit' class='submit' name='ok' value='"
 			. (($quoi=='update')?_T('jqueryp:bouton_mettre_a_jour'):_T('bouton_telecharger'))
-			."' />","\nmethod='post'");
+			."' />"," method='post'");
 
 }
 
