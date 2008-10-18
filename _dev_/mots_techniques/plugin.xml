@@ -42,8 +42,7 @@ les mots cl&eacute;s.
  	<pipeline>
 		<nom>pre_edition</nom>
 		<inclure>mots_techniques_pipelines.php</inclure>
-	</pipeline>	
-	
+	</pipeline>		
 	<pipeline>
 		<nom>autoriser_groupemots</nom>
 		<inclure>mots_techniques_pipelines.php</inclure>

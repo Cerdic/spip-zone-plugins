@@ -24,7 +24,6 @@ function mots_techniques_pre_edition($flux){
 	return $flux;
 }
 
-
 //
 // Recapitulons nos autorisations
 //

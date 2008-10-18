@@ -147,15 +147,15 @@ include_spip(_DIR_PLUGIN_MOTS_TECHNIQUES.'mots_techniques_fonctions');
 			echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 			echo "<tr>";
 			echo "<td>";
-			echo icone_inline(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif", $spip_lang_left);
+			echo icone_inline(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), $icone, "edit.gif", $spip_lang_left);
 			echo "</td>";
 			echo "\n<td id='editer_mots-$id_groupe-supprimer'",
 			  (!$groupe ? '' : " style='visibility: hidden'"),
 			  ">";
-			echo icone_inline(_T('icone_supprimer_groupe_mots'), redirige_action_auteur('instituer_groupe_mots', "-$id_groupe", "mots_tous"), "groupe-mot-24.gif", "supprimer.gif", $spip_lang_left);
+			echo icone_inline(_T('icone_supprimer_groupe_mots'), redirige_action_auteur('instituer_groupe_mots', "-$id_groupe", "mots_tous"), $icone, "supprimer.gif", $spip_lang_left);
 			echo "</td>";
 			echo "<td>";
-			echo icone_inline(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit","new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous', "#mots_tous-$id_groupe")), "mot-cle-24.gif", "creer.gif", $spip_lang_right);
+			echo icone_inline(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit","new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous', "#mots_tous-$id_groupe")), $icone, "creer.gif", $spip_lang_right);
 			echo "</td></tr></table>";
 		}	
 
