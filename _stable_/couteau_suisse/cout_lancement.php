@@ -98,7 +98,10 @@ cs_log("$rand -- cs_initialise_includes()... cout_fonctions.php sera probablemen
 	// creer les includes (config/mes_options, mes_options et mes_fonctions) et le fichier de controle pipelines.php
 	cs_initialise_includes(count($metas_outils));
 	// verifier le fichier d'options _FILE_OPTIONS (ecrire/mes_options.php ou config/mes_options.php)
-	cs_verif_FILE_OPTIONS(true);
+	// De'sactive' par de'faut, cf : http://permalink.gmane.org/gmane.comp.web.spip.zone/10346
+	if (_CS_ECRIRE_MES_OPTIONS=='drapeau_rouge') {
+		cs_verif_FILE_OPTIONS(true);
+	}
 	// sauver la configuration
 	cs_sauve_configuration();
 	// en metas : outils actifs
