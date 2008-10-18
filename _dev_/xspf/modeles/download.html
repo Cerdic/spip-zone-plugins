@@ -2,12 +2,12 @@
 <:xspf:jw_rotator:>
 <?php
 	include_spip('inc/actions');
-	echo redirige_action_auteur('charger_plugin','lib','cfg','cfg=xspf_rotator',"<input type='hidden' name='url_zip_plugin' value='http://www.jeroenwijering.com/upload/imagerotator-3-16.zip' />"."<input type='submit' class='fondo' name='ok' value='"._T('bouton_telecharger')."' />","\nmethod='post'");
+	echo redirige_action_auteur('charger_plugin','lib','cfg','cfg=xspf_rotator',"<input type='hidden' name='url_zip_plugin' value='http://www.jeroenwijering.com/upload/imagerotator.zip' />"."<input type='submit' class='fondo' name='ok' value='"._T('bouton_telecharger')."' />","\nmethod='post'");
 ?>]
 
 [(#ENV{player}|=={mediaplayer}|?{' '})
 <:xspf:jw_media_player:>
 <?php
 	include_spip('inc/actions');
-	echo redirige_action_auteur('charger_plugin','lib','cfg','cfg=xspf_mediaplayer',"<input type='hidden' name='url_zip_plugin' value='http://www.jeroenwijering.com/upload/mediaplayer-3-16.zip' />"."<input type='submit' class='fondo' name='ok' value='"._T('bouton_telecharger')."' />","\nmethod='post'");
+	echo redirige_action_auteur('charger_plugin','lib','cfg','cfg=xspf_mediaplayer',"<input type='hidden' name='url_zip_plugin' value='http://www.jeroenwijering.com/upload/mediaplayer.zip' />"."<input type='submit' class='fondo' name='ok' value='"._T('bouton_telecharger')."' />","\nmethod='post'");
 ?>]

@@ -12,7 +12,7 @@
 <!-- liens*=xspf_musicplayer -->
 <!-- liens*=xspf_rotator -->
 
-[(#CHEMIN{lib/mediaplayer-3-16/mediaplayer.swf}|?{' ',''})
+[(#CHEMIN{lib/mediaplayer/player.swf}|?{' ',''})
 
 <form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]
 
@@ -37,12 +37,10 @@
 		<label for="mpldisplayheight"><a href="#mpldisplayheight" title="<:xspf:displayheight:> - <:xspf:desc_displayheight:>"><:xspf:displayheight:></a></label>&nbsp;
 		<input type="text" name="mpldisplayheight" class="forml" style="width:4em;display:inline" id="mpldisplayheight" value="#CONFIG{xspf/mpldisplayheight}" />&nbsp;<i>px</i>
 		
-		<span class="picker" style="float:right;padding:3px;">&nbsp;</span>
-		
 		<p><strong><:xspf:color_anim:></strong></p>
-		<label for="mplbackcolor"><a href="#mplbackcolor" title="<:xspf:backcolor:> - <:xspf:desc_backcolor:>"><:xspf:backcolor:></a></label>&nbsp;<input type="text" name="mplbackcolor" class="colorwell" style="width:100px;display:inline" id="mplbackcolor" value="[(#CONFIG{xspf/mplbackcolor}|sinon{#000000})]" maxlength="7" /><br />
-		<label for="mplfrontcolor"><a href="#mplfrontcolor" title="<:xspf:frontcolor:> - <:xspf:desc_frontcolor:>"><:xspf:frontcolor:></a></label>&nbsp;<input type="text" name="mplfrontcolor" class="colorwell" style="width:100px;display:inline" id="mplfrontcolor" value="[(#CONFIG{xspf/mplfrontcolor}|sinon{#CCCCCC})]" maxlength="7" /><br />
-		<label for="mpllightcolor"><a href="#mpllightcolor" title="<:xspf:lightcolor:> - <:xspf:desc_lightcolor:>"><:xspf:lightcolor:></a></label>&nbsp;<input type="text" name="mpllightcolor" class="colorwell" style="width:100px;display:inline" id="mpllightcolor" value="[(#CONFIG{xspf/mpllightcolor}|sinon{#996600})]" maxlength="7" />
+		<label for="mplbackcolor"><a href="#mplbackcolor" title="<:xspf:backcolor:> - <:xspf:desc_backcolor:>"><:xspf:backcolor:></a></label>&nbsp;<input type="text" name="mplbackcolor" class="palette" style="width:100px;display:inline" id="mplbackcolor" value="[(#CONFIG{xspf/mplbackcolor}|sinon{#000000})]" maxlength="7" /><br />
+		<label for="mplfrontcolor"><a href="#mplfrontcolor" title="<:xspf:frontcolor:> - <:xspf:desc_frontcolor:>"><:xspf:frontcolor:></a></label>&nbsp;<input type="text" name="mplfrontcolor" class="palette" style="width:100px;display:inline" id="mplfrontcolor" value="[(#CONFIG{xspf/mplfrontcolor}|sinon{#CCCCCC})]" maxlength="7" /><br />
+		<label for="mpllightcolor"><a href="#mpllightcolor" title="<:xspf:lightcolor:> - <:xspf:desc_lightcolor:>"><:xspf:lightcolor:></a></label>&nbsp;<input type="text" name="mpllightcolor" class="palette" style="width:100px;display:inline" id="mpllightcolor" value="[(#CONFIG{xspf/mpllightcolor}|sinon{#996600})]" maxlength="7" />
 		
 		<p><strong><:xspf:opt_lec:></strong></p>
 		<label for="mplautostart"><a href="#mplautostart" title="<:xspf:autostart:> - <:xspf:desc_autostart:>"><:xspf:autostart:></a></label>&nbsp;
@@ -180,7 +178,7 @@
 	
 ]
 	
-[(#CHEMIN{lib/mediaplayer-3-16/mediaplayer.swf}|?{'',' '})
+[(#CHEMIN{lib/mediaplayer/player.swf}|?{'',' '})
 
 [(#CONFIG{version_installee}|>={1.941}|?{' ',''})
 

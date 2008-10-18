@@ -12,7 +12,7 @@
 <!-- liens*=xspf_mediaplayer -->
 <!-- liens*=xspf_musicplayer -->
 
-[(#CHEMIN{lib/imagerotator-3-16/imagerotator-3-16/imagerotator.swf}|?{' ',''})
+[(#CHEMIN{lib/imagerotator/imagerotator.swf}|?{' ',''})
 
 <form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]
 
@@ -30,18 +30,16 @@
 		<input type="text" name="rotdisplaywidth" class="forml" style="width:4em;display:inline" id="rotdisplaywidth" value="#CONFIG{xspf/rotdisplaywidth}" />&nbsp;<i>px</i>&nbsp;&nbsp;
 		<label for="rotdisplayheight"><a href="#rotdisplayheight" title="<:xspf:displayheight:> - <:xspf:desc_displayheight:>"><:xspf:displayheight:></a></label>&nbsp;
 		<input type="text" name="rotdisplayheight" class="forml" style="width:4em;display:inline" id="rotdisplayheight" value="#CONFIG{xspf/rotdisplayheight}" />&nbsp;<i>px</i>
-		
-		<div class="picker" style="float:right; padding:3px;">&nbsp;</div>
 				
 		<p><strong><:xspf:color_anim:></strong></p>
 		<label for="rotbackcolor"><a href="#rotbackcolor" title="<:xspf:backcolor:> - <:xspf:desc_backcolor:>"><:xspf:backcolor:></a></label>&nbsp;
-		<input type="text" name="rotbackcolor" class="colorwell" style="width:100px;display:inline" id="rotbackcolor" value="[(#CONFIG{xspf/rotbackcolor}|sinon{#FFFFFF})]" maxlength="7" />&nbsp;&nbsp;
+		<input type="text" name="rotbackcolor" class="palette" style="width:100px;display:inline" id="rotbackcolor" value="[(#CONFIG{xspf/rotbackcolor}|sinon{#FFFFFF})]" maxlength="7" />&nbsp;&nbsp;
 		<br />
 		<label for="rotfrontcolor"><a href="#rotfrontcolor" title="<:xspf:frontcolor:> - <:xspf:desc_frontcolor:>"><:xspf:frontcolor:></a></label>&nbsp;
-		<input type="text" name="rotfrontcolor" class="colorwell" style="width:100px;display:inline" id="rotfrontcolor" value="[(#CONFIG{xspf/rotfrontcolor}|sinon{#000000})]" maxlength="7" />&nbsp;&nbsp;
+		<input type="text" name="rotfrontcolor" class="palette" style="width:100px;display:inline" id="rotfrontcolor" value="[(#CONFIG{xspf/rotfrontcolor}|sinon{#000000})]" maxlength="7" />&nbsp;&nbsp;
 		<br />
 		<label for="rotlightcolor"><a href="#rotlightcolor" title="<:xspf:lightcolor:> - <:xspf:desc_lightcolor:>"><:xspf:lightcolor:></a></label>&nbsp;
-		<input type="text" name="rotlightcolor" class="colorwell" style="width:100px;display:inline" id="rotlightcolor" value="[(#CONFIG{xspf/rotlightcolor}|sinon{#CC0000})]" maxlength="7" />&nbsp;&nbsp;
+		<input type="text" name="rotlightcolor" class="palette" style="width:100px;display:inline" id="rotlightcolor" value="[(#CONFIG{xspf/rotlightcolor}|sinon{#CC0000})]" maxlength="7" />&nbsp;&nbsp;
 
 		
 		<p><strong><:xspf:opt_lec:></strong></p>
@@ -164,7 +162,7 @@
 </form>
 ]
 
-[(#CHEMIN{lib/imagerotator-3-16/imagerotator-3-16/imagerotator.swf}|?{'',' '})
+[(#CHEMIN{lib/imagerotator/imagerotator.swf}|?{'',' '})
 
 [(#CONFIG{version_installee}|>={1.941}|?{' ',''})
 
