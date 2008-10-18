@@ -1,0 +1,289 @@
+#CACHE{0}
+<!-- titre=<multi>[fr]Menu Rosace</multi>-->
+<!-- descriptif=<multi>[fr]Configuration du menu Rosace.</multi>
+<br /><a href="#" class="spip_out">Vers documentation</a>
+-->
+<!-- nom=rosace -->
+<!-- refus=Rien &agrave; faire par ici!
+<br />Vous ne pouvez pas acceder &agrave; ce formulaire !
+<br />Vous devez &ecirc;tre administrateur et connect&eacute;.
+ -->
+
+<!-- icone=img_pack/logo_rosace_24.png-->
+
+<form method="post" name="form" enctype="multipart/form-data" id="form_cfg_rosace">[(#ENV{_cfg_}|form_hidden)]
+	<fieldset>
+		<legend>Modifier/Ajouter des liens au menu</legend>
+				<B_secteurs>
+				<BOUCLE_secteurs(RUBRIQUES){racine}{!par num titre}{par titre}{0,8}> 
+				<p>
+					<span class="demi"><label for="nom_lien_#COMPTEUR_BOUCLE">Titre du lien #COMPTEUR_BOUCLE</label></span>
+					<input type="text" name="nom_lien_#COMPTEUR_BOUCLE" id="nom_lien_#COMPTEUR_BOUCLE" size="25" value="[(#ENV{nom_lien_#COMPTEUR_BOUCLE}|?{#ENV{nom_lien_#COMPTEUR_BOUCLE},#TITRE})]"/>
+					<span class="demi"><label for="desc_lien_#COMPTEUR_BOUCLE">Descriptif du lien #COMPTEUR_BOUCLE</label></span>
+					<input type="text" name="desc_lien_#COMPTEUR_BOUCLE" id="desc_lien_#COMPTEUR_BOUCLE" size="30" value="[(#ENV{desc_lien_#COMPTEUR_BOUCLE}|?{#ENV{desc_lien_#COMPTEUR_BOUCLE},#DESCRIPTIF})]"/>
+					<span class="demi"><label for="url_lien_#COMPTEUR_BOUCLE">Url du lien #COMPTEUR_BOUCLE</label></span>
+					<input type="text" name="url_lien_#COMPTEUR_BOUCLE" id="url_lien_#COMPTEUR_BOUCLE" size="30" value="[(#ENV{url_lien_#COMPTEUR_BOUCLE}|?{#ENV{url_lien_#COMPTEUR_BOUCLE},?rubrique#ID_RUBRIQUE})]"/>
+				</p>
+				</BOUCLE_secteurs>
+				<p>
+					[(#SET{liens_sups,#EVAL{8-#TOTAL_BOUCLE}})]
+					[(#SET{total_boucle,#TOTAL_BOUCLE})]
+					[(#TOTAL_BOUCLE|<{8}|?{Vous ne disposez que de #TOTAL_BOUCLE rubriques &agrave la racine du site! 
+					Vous pouvez ajouter [(#EVAL{8-#TOTAL_BOUCLE}|={1}|?{ 1 lien,[(#EVAL{8-#TOTAL_BOUCLE}) liens]})] dans le menu rosace})]
+				</p>
+				</B_secteurs>
+			[(#GET{liens_sups}|>={1}|?{' '})
+				</p>
+					<span class="demi"><label for="nom_lien_sup_1">Titre du lien #EVAL{1+#GET{total_boucle}}</label></span>
+					<input type="text" name="nom_lien_sup_1" id="nom_lien_sup_1" size="25" value="[(#ENV{nom_lien_sup_1})]"/>
+					<span class="demi"><label for="desc_lien_sup_1">Descriptif du lien #EVAL{1+#GET{total_boucle}}</label></span>
+					<input type="text" name="desc_lien_sup_1" id="desc_lien_sup_1" size="30" value="[(#ENV{desc_lien_sup_1})]"/>
+					<span class="demi"><label for="url_lien_sup_1">Url du lien #EVAL{1+#GET{total_boucle}}</label></span>
+					<input type="text" name="url_lien_sup_1" id="url_lien_sup_1" size="30" value="[(#ENV{url_lien_sup_1})]"/>
+				<p>
+			]
+			[(#GET{liens_sups}|>={2}|?{' '})
+				</p>
+					<span class="demi"><label for="nom_lien_sup_2">Titre du lien #EVAL{2+#GET{total_boucle}}</label></span>
+					<input type="text" name="nom_lien_sup_2" id="nom_lien_sup_2" size="25" value="[(#ENV{nom_lien_sup_2})]"/>
+					<span class="demi"><label for="desc_lien_sup_2">Descriptif du lien #EVAL{2+#GET{total_boucle}}</label></span>
+					<input type="text" name="desc_lien_sup_2" id="desc_lien_sup_2" size="30" value="[(#ENV{desc_lien_sup_2})]"/>
+					<span class="demi"><label for="url_lien_sup_2">Url du lien #EVAL{2+#GET{total_boucle}}</label></span>
+					<input type="text" name="url_lien_sup_2" id="url_lien_sup_2" size="25" value="[(#ENV{url_lien_sup_2})]"/>
+				<p>
+			]
+			[(#GET{liens_sups}|>={3}|?{' '})
+				</p>
+					<span class="demi"><label for="nom_lien_sup_3">Titre du lien #EVAL{3+#GET{total_boucle}}</label></span>
+					<input type="text" name="nom_lien_sup_3" id="nom_lien_sup_3" size="25" value="[(#ENV{nom_lien_sup_3})]"/>
+					<span class="demi"><label for="desc_lien_sup_3">Descriptif du lien #EVAL{3+#GET{total_boucle}}</label></span>
+					<input type="text" name="desc_lien_sup_3" id="desc_lien_sup_3" size="30" value="[(#ENV{desc_lien_sup_3})]"/>
+					<span class="demi"><label for="url_lien_sup_3">Url du lien #EVAL{3+#GET{total_boucle}}</label></span>
+					<input type="text" name="url_lien_sup_3" id="url_lien_sup_3" size="25" value="[(#ENV{url_lien_sup_3})]"/>
+				<p>
+			]
+			[(#GET{liens_sups}|>={4}|?{' '})
+				</p>
+					<span class="demi"><label for="nom_lien_sup_4">Titre du lien #EVAL{4+#GET{total_boucle}}</label></span>
+					<input type="text" name="nom_lien_sup_4" id="nom_lien_sup_4" size="25" value="[(#ENV{nom_lien_sup_4})]"/>
+					<span class="demi"><label for="desc_lien_sup_4">Descriptif du lien #EVAL{4+#GET{total_boucle}}</label></span>
+					<input type="text" name="desc_lien_sup_4" id="desc_lien_sup_4" size="30" value="[(#ENV{desc_lien_sup_4})]"/>
+					<span class="demi"><label for="url_lien_sup_4">Url du lien #EVAL{4+#GET{total_boucle}}</label></span>
+					<input type="text" name="url_lien_sup_4" id="url_lien_sup_4" size="25" value="[(#ENV{url_lien_sup_4})]"/>
+				<p>
+			]
+			[(#GET{liens_sups}|>={5}|?{' '})
+				</p>
+					<span class="demi"><label for="nom_lien_sup_5">Titre du lien #EVAL{4+#GET{total_boucle}}</label></span>
+					<input type="text" name="nom_lien_sup_5" id="nom_lien_sup_5" size="25" value="[(#ENV{nom_lien_sup_5})]"/>
+					<span class="demi"><label for="desc_lien_sup_5">Descriptif du lien #EVAL{5+#GET{total_boucle}}</label></span>
+					<input type="text" name="desc_lien_sup_5" id="desc_lien_sup_5" size="30" value="[(#ENV{desc_lien_sup_5})]"/>
+					<span class="demi"><label for="url_lien_sup_5">Url du lien #EVAL{4+#GET{total_boucle}}</label></span>
+					<input type="text" name="url_lien_sup_5" id="url_lien_sup_5" size="25" value="[(#ENV{url_lien_sup_5})]"/>
+				<p>
+			]
+			[(#GET{liens_sups}|>={6}|?{' '})
+				</p>
+					<span class="demi"><label for="nom_lien_sup_6">Titre du lien #EVAL{6+#GET{total_boucle}}</label></span>
+					<input type="text" name="nom_lien_sup_6" id="nom_lien_sup_6" size="25" value="[(#ENV{nom_lien_sup_6})]"/>
+					<span class="demi"><label for="desc_lien_sup_6">Descriptif du lien #EVAL{6+#GET{total_boucle}}</label></span>
+					<input type="text" name="desc_lien_sup_6" id="desc_lien_sup_6" size="30" value="[(#ENV{desc_lien_sup_6})]"/>
+					<span class="demi"><label for="url_lien_sup_6">Url du lien #EVAL{6+#GET{total_boucle}}</label></span>
+					<input type="text" name="url_lien_sup_6" id="url_lien_sup_6" size="25" value="[(#ENV{url_lien_sup_6})]"/>
+				<p>
+			]
+			[(#GET{liens_sups}|>={7}|?{' '})
+				</p>
+					<span class="demi"><label for="nom_lien_sup_7">Titre du lien #EVAL{7+#GET{total_boucle}}</label></span>
+					<input type="text" name="nom_lien_sup_7" id="nom_lien_sup_7" size="25" value="[(#ENV{nom_lien_sup_7})]"/>
+					<span class="demi"><label for="desc_lien_sup_7">Descriptif du lien #EVAL{7+#GET{total_boucle}}</label></span>
+					<input type="text" name="desc_lien_sup_7" id="desc_lien_sup_7" size="30" value="[(#ENV{desc_lien_sup_7})]"/>
+					<span class="demi"><label for="url_lien_sup_7">Url du lien #EVAL{7+#GET{total_boucle}}</label></span>
+					<input type="text" name="url_lien_sup_7" id="url_lien_sup_7" size="25" value="[(#ENV{url_lien_sup_7})]"/>
+				<p>
+			]
+	</fieldset>
+	<fieldset>
+		<legend>Choix de la rosace</legend>
+		<p>
+			<span class="demi"><label for="rosace_modele">Choisir un mod&agrave;le de rosace</label></span>
+			<select name="rosace_modele">
+				<option value=""[(#ENV{rosace_modele}|?{selected="selected",''})]>  </option>
+				<option value="bleu" [(#ENV{rosace_modele}|=={bleu}|?{selected="selected",''})]> Bleu argent </option>
+				<option value="tispip" [(#ENV{rosace_modele}|=={tispip}|?{selected="selected",''})]> TiSpiP-sKeLeT </option>
+				<option value="durzy" [(#ENV{rosace_modele}|=={durzy}|?{selected="selected",''})]> Durzy </option>
+				<option value="perso" [(#ENV{rosace_modele}|=={perso}|?{selected="selected",''})]> Personnalis&eacute; </option>
+			</select>
+		</p>
+	</fieldset>
+	<fieldset>
+		<legend>Taille et couleur de polices</legend>
+		<p>
+			<span class="demi"><label for="color_titre">Couleur du titre des liens</label></span>
+			<input type="text" name="color_titre" id="color_titre" class="palette" size="7" value="[(#ENV{color_titre}|?{#ENV{color_titre},#336699})]" /><br style="line-height:1px;height:1px;clear:both"/>
+			<span class="demi"><label for="taille_titre">Taille du titre des liens</label></span>
+			<input type="text" name="taille_titre" id="taille_titre" size="2" value="[(#ENV{taille_titre})]"/>
+		</p>
+		<p>
+			<span class="demi"><label for="color_desc">Couleur du descriptif des liens</label></span>
+			<input type="text" name="color_desc" id="color_desc" class="palette" size="7" value="[(#ENV{color_desc}|?{#ENV{color_desc},#6699bb})]" /><br style="line-height:1px;height:1px;clear:both"/>
+			<span class="demi"><label for="taille_desc">Taille du descriptif des liens</label></span>
+			<input type="text" name="taille_desc" id="taille_desc" size="2" value="[(#ENV{taille_desc})]"/>
+		</p>
+		<br class="leon" />
+	</fieldset>
+	<fieldset>
+		<legend>Image du centre de la rosace</legend>
+		<div>
+			<label>
+			<input type="checkbox" name="aff_logo" value="oui" class="affCheckbox" id="aff_logo"[(#ENV{aff_logo}|=={oui}|?{checked,''})] />Afficher le logo du site</label>
+			<div class="deplier_conf">
+			<span class="demi"><label for="logo_top">D&eacute;calage vertical du logo</label></span>
+			<input type="text" name="logo_top" id="logo_top" size="2" value="[(#ENV{logo_top})]"/><br class="leon" />
+			<span class="demi"><label for="logo_left">D&eacute;calage horizontal du logo</label></span>
+			<input type="text" name="logo_left" id="logo_left" size="2" value="[(#ENV{logo_left})]"/><br class="leon" />
+			</div>
+		</div>
+		<div>
+			<label><input type="checkbox" name="aff_imgpalogo" class="affCheckbox" id="aff_imgpalogo" value="oui" [checked="(#ENV{aff_imgpalogo}|?{checked})" ][(#ENV{aff_logo}|?{' disabled="disabled"'})] /> Afficher une image autre que le logo
+			</label>
+			<div id="img_palogo" class="deplier_conf">
+				<label>Charger l'&rsquo;image :
+				<input type="file" name="img_palogo" value="" size="30" /></label>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{img_palogo})</span>]
+				<div>Image actuelle
+				<dl>		
+					<dt>[(#ENV{img_palogo}|?{[(#CFG_CHEMIN{rosace/img_palogo}|image_reduire{200,200})],Aucune image})]</dt>
+				</dl>
+				<span class="demi"><label for="imgpalogo_top">D&eacute;calage vertical de l&rsquo;image</label></span>
+				<input type="text" name="imgpalogo_top" id="imgpalogo_top" size="2" value="[(#ENV{imgpalogo_top})]"/><br class="leon" />
+				<span class="demi"><label for="imgpalogo_left">D&eacute;calage horizontal de l&rsquo;image</label></span>
+				<input type="text" name="imgpalogo_left" id="imgpalogo_left" size="2" value="[(#ENV{imgpalogo_left})]"/><br class="leon" />
+				</div>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>Liens suppl&eacute;mentaires</legend>
+		<div>
+			<label><input type="checkbox" name="aff_lien_tl" class="affCheckbox" id="aff_lien_tl" value="oui" [checked="(#ENV{aff_lien_tl}|?{checked})" ][(#ENV{aff_logo}|?{' disabled="disabled"'})] /> Afficher un lien suppl&eacute;mentaire en haut &agrave; gauche
+			</label><br />
+			<div class="deplier_conf">
+				<span class="demi"><label for="url_lien_tl">Url du lien (<em>haut-gauche</em>)</label></span>
+				<input type="text" name="url_lien_tl" id="url_lien_tl" size="25" value="[(#ENV{url_lien_tl})]"/><br class="leon" />
+				<span class="demi"><label for="title_lien_tl">Titre du lien (<em>au survol</em>)</label></span>
+				<input type="text" name="title_lien_tl" id="title_lien_tl" size="25" value="[(#ENV{title_lien_tl})]"/><br class="leon" />
+				<label>Charger l'&rsquo;image :
+				<input type="file" name="img_lien_tl" value="" size="30" /></label>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{img_lien_tl})</span>]
+					[ - (#ENV{img_lien_tl}|?{[(#CFG_CHEMIN{rosace/img_lien_tl}|image_reduire{75,75}|inserer_attribut{style, vertical-align:middle})],Aucune image})]<br class="leon" />
+				<span class="demi"><label for="img_lien_tl_top">D&eacute;calage vers le bas</label></span>
+				<input type="text" name="img_lien_tl_top" id="img_lien_tl_top" size="2" value="[(#ENV{img_lien_tl_top})]"/><br class="leon" />
+				<span class="demi"><label for="img_lien_tl_left">D&eacute;calage vers la droite</label></span>
+				<input type="text" name="img_lien_tl_left" id="img_lien_tl_left" size="2" value="[(#ENV{img_lien_tl_left})]"/><br class="leon" />
+			</div>
+		</div>
+		<div>
+			<label><input type="checkbox" name="aff_lien_tr" class="affCheckbox" id="aff_lien_tr" value="oui" [checked="(#ENV{aff_lien_tr}|?{checked})" ][(#ENV{aff_logo}|?{' disabled="disabled"'})] /> Afficher un lien suppl&eacute;mentaire en haut &agrave; droite
+			</label><br />
+			<div class="deplier_conf">
+				<span class="demi"><label for="url_lien_tr">Url du lien (<em>haut-droite</em>)</label></span>
+				<input type="text" name="url_lien_tr" id="url_lien_tr" size="25" value="[(#ENV{url_lien_tr})]"/><br class="leon" />
+				<span class="demi"><label for="title_lien_tr">Titre du lien (<em>au survol</em>)</label></span>
+				<input type="text" name="title_lien_tr" id="title_lien_tr" size="25" value="[(#ENV{title_lien_tr})]"/><br class="leon" />
+				<label>Charger l'&rsquo;image :
+				<input type="file" name="img_lien_tr" value="" size="30" /></label>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{img_lien_tr})</span>]
+					[ - (#ENV{img_lien_tr}|?{[(#CFG_CHEMIN{rosace/img_lien_tr}|image_reduire{75,75}|inserer_attribut{style, vertical-align:middle})],Aucune image})]<br class="leon" />
+				<span class="demi"><label for="img_lien_tr_top">D&eacute;calage vers le bas</label></span>
+				<input type="text" name="img_lien_tr_top" id="img_lien_tr_top" size="2" value="[(#ENV{img_lien_tr_top})]"/><br class="leon" />
+				<span class="demi"><label for="img_lien_tr_right">D&eacute;calage vers la gauche</label></span>
+				<input type="text" name="img_lien_tr_right" id="img_lien_tr_right" size="2" value="[(#ENV{img_lien_tr_right})]"/><br class="leon" />
+			</div>
+		</div>
+		<div>
+			<label><input type="checkbox" name="aff_lien_bl" class="affCheckbox" id="aff_lien_bl" value="oui" [checked="(#ENV{aff_lien_bl}|?{checked})" ][(#ENV{aff_logo}|?{' disabled="disabled"'})] /> Afficher un lien suppl&eacute;mentaire en bas &agrave; gauche
+			</label>
+			<div class="deplier_conf">
+				<span class="demi"><label for="url_lien_bl">Url du lien (<em>bas-gauche</em>)</label></span>
+				<input type="text" name="url_lien_bl" id="url_lien_bl" size="25" value="[(#ENV{url_lien_bl})]"/><br class="leon" />
+				<span class="demi"><label for="title_lien_bl">Titre du lien (<em>au survol</em>)</label></span>
+				<input type="text" name="title_lien_bl" id="title_lien_bl" size="25" value="[(#ENV{title_lien_bl})]"/><br class="leon" />
+				<label>Charger l'&rsquo;image :
+				<input type="file" name="img_lien_bl" value="" size="30" /></label>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{img_lien_bl})</span>]
+					[ - (#ENV{img_lien_bl}|?{[(#CFG_CHEMIN{rosace/img_lien_bl}|image_reduire{75,75}|inserer_attribut{style, vertical-align:middle})],Aucune image})]<br class="leon" />
+				<span class="demi"><label for="img_lien_bl_bottom">D&eacute;calage vers le haut</label></span>
+				<input type="text" name="img_lien_bl_bottom" id="img_lien_bl_bottom" size="2" value="[(#ENV{img_lien_bl_bottom})]"/><br class="leon" />
+				<span class="demi"><label for="img_lien_bl_left">D&eacute;calage vers la droite</label></span>
+				<input type="text" name="img_lien_bl_left" id="img_lien_bl_left" size="2" value="[(#ENV{img_lien_bl_left})]"/><br class="leon" />
+			</div>
+		</div>
+		<div>
+			<label><input type="checkbox" name="aff_lien_br" class="affCheckbox" id="aff_lien_br" value="oui" [checked="(#ENV{aff_lien_br}|?{checked})" ][(#ENV{aff_logo}|?{' disabled="disabled"'})] /> Afficher un lien suppl&eacute;mentaire en bas &agrave; droite
+			</label><br />
+			<div class="deplier_conf">
+				<span class="demi"><label for="url_lien_br">Url du lien (<em>bas-droite</em>)</label></span>
+				<input type="text" name="url_lien_br" id="url_lien_br" size="25" value="[(#ENV{url_lien_br})]"/><br class="leon" />
+				<span class="demi"><label for="title_lien_br">Titre du lien (<em>au survol</em>)</label></span>
+				<input type="text" name="title_lien_br" id="title_lien_br" size="25" value="[(#ENV{title_lien_br})]"/><br class="leon" />
+				<label>Charger l'&rsquo;image :
+				<input type="file" name="img_lien_br" value="" size="30" /></label>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{img_lien_br})</span>]
+					[ - (#ENV{img_lien_br}|?{[(#CFG_CHEMIN{rosace/img_lien_br}|image_reduire{75,75}|inserer_attribut{style, vertical-align:middle})],Aucune image})]<br class="leon" />
+				<span class="demi"><label for="img_lien_br_bottom">D&eacute;calage vers le haut</label></span>
+				<input type="text" name="img_lien_br_bottom" id="img_lien_br_bottom" size="2" value="[(#ENV{img_lien_br_bottom})]"/><br class="leon" />
+				<span class="demi"><label for="img_lien_br_right">D&eacute;calage vers la gauche</label></span>
+				<input type="text" name="img_lien_br_right" id="img_lien_br_right" size="2" value="[(#ENV{img_lien_br_right})]"/><br class="leon" />
+			</div>
+		</div>
+	</fieldset>
+	<p>
+		<input type="submit" name="_cfg_ok" value="<:OK:>" />
+		<input type="reset" value="<:Reset:>" />
+		<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+	</p>
+</form>
+<script type="text/javascript"><!--
+	$('.affCheckbox')
+		.bind('change', function() {
+            $(this).parents('div')
+			.children('div.deplier_conf')
+			.slideToggle('slow');
+	})
+		$('div.deplier_conf').hide();
+		$('.affCheckbox:checked')
+		.parents('div')
+		.children('div.deplier_conf').show();
+
+//  on desactive la case a cocher non utilisée
+	$('#aff_logo')
+	.bind('change', function() {
+		var on = $(this).is(':checked');
+		$(this)
+		.parents('fieldset')
+		.find('#aff_imgpalogo')
+			.attr('disabled', on ? 'disabled' : '')
+		.end();
+	})
+	
+	$('#aff_imgpalogo')
+	.bind('change', function() {
+		var on = $(this).is(':checked');
+		$(this)
+		.parents('fieldset')
+		.find('#aff_logo')
+			.attr('disabled', on ? 'disabled' : '')
+		.end();
+	})
+	$('#aff_imgpalogo')
+		.parents('fieldset')
+		.find('#aff_logo')
+			.attr('disabled', $('#aff_imgpalogo').is(':checked') ? 'disabled' : '')
+	$('#aff_logo')
+		.parents('fieldset')
+		.find('#aff_imgpalogo')
+			.attr('disabled', $('#aff_logo').is(':checked') ? 'disabled' : '')
+// --></script>
+
+ 
