@@ -4,7 +4,7 @@
 		Le menu Rosace propose une navigation vers les diff&eacute;rents secteurs du site.<br /><strong>Ce plugin n&eacute;cessite l&rsquo;activation du plugin CFG version 1.7 ou sup&eacute;rieure</strong>
 	</description>
 	<lien>
-		<a href="/ecrire/?exec=cfg&cfg=rosace" title="Aller &agrave; la configuration du menu">Configuration</a><br />
+		<a href="/ecrire/?exec=cfg&amp;cfg=rosace" title="Aller &agrave; la configuration du menu">Configuration</a><br />
 		<a href="#" title="Voir la proc&eacute;dure d&rsquo;installation">Installation </a> et <a href="" title="Voir la documentation">documentation </a>
 	</lien>
 	<version>1.0</version>
