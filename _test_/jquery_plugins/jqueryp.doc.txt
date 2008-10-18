@@ -5,7 +5,7 @@ l'installation et l'utilisation de plugins pour jquery.
 
 Ce plugin necessite
 -------------------
-- SPIP 1.9.3 (chargeur de plugins necessaire)
+- SPIP 2.0 beta 2 (chargeur de plugins necessaire)
 - plugin CFG
 
 
@@ -58,14 +58,24 @@ Soit par un pipeline :
 	
 	<necessite id="jqueryp" />
 	<pipeline>
-			<nom>insert_jquery_plugins</nom>
-			<inclure>PREFIX_pipeline.php</inclure>
+			<nom>jquery_plugins</nom>
+			<inclure>PREFIX_pipelines.php</inclure>
 	</pipeline>
 	
 	Avec la fonction php suivante (ajoute ui.mouse et ui.tabs) :
 	
-	function PREFIX_insert_jquery_plugins($flux) {
-			return jqueryp_add_plugins(array('ui.mouse','ui.tabs'), $flux);
+	function PREFIX_jquery_plugins($flux) {
+			// Avec le plugin jQuery plugins actif :
+			return jqueryp_add_plugins(array('ui.accordion','ui.tabs'), $flux);
+			
+			// OU
+			// Sans le plugin actif (qui n'est pas obligatoire),
+			// il faut connaitre le chemin pour ajouter
+			// les js dans le path
+			$flux[] = 'lib/jquery-ui-1.6rc2/ui/ui.core.js'; 
+			$flux[] = 'lib/jquery-ui-1.6rc2/ui/ui.tabs.js'; 
+			$flux[] = 'lib/jquery-ui-1.6rc2/ui/ui.accordion.js';
+			return $flux;
 	}
 
 Soit par une balise :

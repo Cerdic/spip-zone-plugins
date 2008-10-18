@@ -9,7 +9,9 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 	<etat>test</etat>
     <description>
 	Permet d'automatiser l'installation et l'utilisation des plugins de jQuery.
-	N&eacute;cessite SPIP >= 1.9.3 
+	N&eacute;cessite SPIP 2 b&ecirc;ta 2 ou sup&eacute;rieur 
+	
+	
 - T&eacute;l&eacute;charge sur demande des librairies de 
   plugins jQuery (il faut cr&eacute;er un dossier <code>lib/</code> avec acc&egrave;s en &eacute;criture)
 - Fournit un formulaire CFG avec les plugins &agrave; cocher 
@@ -27,8 +29,8 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 - DatePicker : [->http://jquery.com/plugins/project/datepicker]
 - Easing : [->http://jquery.com/plugins/project/Easing]
 - SyncHeight : [->http://ginader.devjavu.com/browser/trunk/jquery/plugins/syncHeight/]
-- UI : [->http://jquery.com/plugins/project/ui]
-- Validate : [->http://jquery.com/plugins/files/jquery.validate_8.zip]
+- UI : [->http://ui.jquery.com/]
+- Validate : [->http://bassistance.de/jquery-plugins/jquery-plugin-validation/]
 - Yav : [->http://jquery.com/plugins/project/jquery_yav]
 	</description>
 	<icon>images/jQuery-logo.gif</icon>
@@ -38,12 +40,6 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
     <fonctions>jqueryp_fonctions.php</fonctions>
     <options>jqueryp_options.php</options>
 	<chemin dir='' />
-	<!-- pour SPIP < 1.9.3 -->
-	<pipeline>
-		<nom>insert_jquery_plugins</nom>
-		<inclure>jqueryp_pipeline.php</inclure>
-	</pipeline>
-	<!-- pour SPIP = 1.9.3 -->
 	<pipeline>
 		<nom>jquery_plugins</nom>
 		<inclure>jqueryp_pipeline.php</inclure>

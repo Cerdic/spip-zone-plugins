@@ -7,15 +7,6 @@ function jqueryp_insert_jquery_plugins($flux){
 	return $flux . "\n\n" . $inline;
 }
 
-/*
-// ajoute les plugins jquery dans jquery.js.html
-function jqueryp_insert_js($flux) {
-	if (isset($flux) && $flux['type']=='fichier')
-		$flux = _jqueryp_insert_jquery_plugins($flux);
-	return $flux;
-}
-*/
-
 function _jqueryp_insert_jquery_plugins($flux = null){
 	if (!$lpa = jqueryp_liste_plugins('actifs'))
 		return $flux;
@@ -35,8 +26,9 @@ function _jqueryp_insert_jquery_plugins($flux = null){
  * cf. http://doc.spip.org/@f_jQuery
  */
 function jqueryp_jquery_plugins($flux) {
-	chemin('jqueryp_fonctions.php','',1); // inclure les fonctions
+	include_spip(_DIR_PLUGIN_JQUERYP.'jqueryp_fonctions'); // inclure les fonctions
 	$flux = array_unique(array_merge($flux,(array)jqueryp_liste_plugins('actifs')));
+	spip_log($flux,'jqp');
 	return $flux;
 }
 
