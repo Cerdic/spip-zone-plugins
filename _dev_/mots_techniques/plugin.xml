@@ -32,6 +32,7 @@ les mots cl&eacute;s.
 	<options>mots_techniques_options.php</options>
 	<fonctions>mots_techniques_autorisations.php</fonctions>
 	<fonctions>mots_techniques_fonctions.php</fonctions>
+	<fonctions>public/mots_techniques_boucles.php</fonctions>
 	<prefix> 
 	mots_techniques
 	</prefix>
