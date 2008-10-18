@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
-	<nom>Mots techniques pour SPIP svn</nom>
+	<nom>Mots techniques pour SPIP 2 beta 2</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Joseph et toutes les bonnes volont&eacute;es - 2007
 	</auteur>
-	<version>0.3.1</version>
+	<version>0.4</version>
 	<version_base>0.3</version_base>
 	<etat>
 	test
 	</etat>
 	<description>
 	<multi>
-	Plugin de dev pour tester l'ajout d'un champs technique aux mots cl&eacute;s. Cf. les discussions sur spip-dev.
-_ Le d&eacute;veloppement s'est bas&eacute; sur la version 1.9.3 dev SVN 11460 de SPIP.
+	Ce plugin ajoute une sp&eacute;cialisation "technique" aux groupes de mots cl&eacute;s. 
+_ Test&eacute; sur la version 2.0 beta 2 [12984] de SPIP.
 - Ajout d'un champ technique de type texte &agrave; la table spip_groupes_mots.
-- Sur la page exec/mots_type ajout d'une case à cocher mots techniques. 
+- Sur le formulaire editer_groupe_mot, ajout d'une case à cocher mots techniques. 
 Si elle est coch&eacute;e, alors la valeur 'oui' sera mise dans le champs 
 technique sinon le champs technique restera vide.
 - Les plugins pourront rajouter des groupes de mots-cl&eacute;s avec une autre 
 valeur dans le champs technique. Ce sera au plugin de d&eacute;finir les autorisations du groupe de mots-cl&eacute;s, 
 en fonction de chaque usage.
 - Pour mieux distinguer les mots cl&eacute;s non techniques des mots cl&eacute;s 
-techniques, les mots cl&eacute;s techniques seront repr&eacute;sent&eacute;s par une petite 
-roue dent&eacute;e au lieu d'une cl&eacute; à molette.
+techniques, les mots cl&eacute;s techniques sont repr&eacute;sent&eacute;s par une petite 
+roue dent&eacute;e au lieu d'une cl&eacute; à molette (sur la page exec=mots-tous uniquement pour le moment)
 - Par d&eacute;faut, les boucles MOTS et GROUPES_MOTS filtreront les mots-cl&eacute;s 
 techniques. Cependant, le critère {tout} permettra de renvoyer tous 
-les mots cl&eacute;s.
-
+les mots cl&eacute;s et le crit&egrave;re {technique=oui} 
+permet de s&eacute;lectionner par type technique
 	</multi>
 	</description>
 	<options>mots_techniques_options.php</options>
