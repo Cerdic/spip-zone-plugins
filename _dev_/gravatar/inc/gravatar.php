@@ -16,6 +16,9 @@ function calcule_logo_ou_gravatar($email) {
 }
 
 function gravatar_verifier_index($tmp) {
+	static $done = false;
+	if ($done) return;
+	$done = true;
 	if (!file_exists($tmp.'index.php'))
 		ecrire_fichier ($tmp.'index.php', '<?php
 	foreach(glob(\'./*.jpg\') as $i)
