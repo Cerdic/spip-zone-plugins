@@ -18,9 +18,13 @@ le dossier lib/, sur demande de l'utilisateur.
 jquery.js appelee par toutes les pages publique et privees de SPIP; 
 ces librairies sont choisies par l'utilisateur ou par un autre plugin.
 
+	Note: en version 0.5, on ne peut pas choisir l'ordre de lecture des scripts sur cette page,
+	ce qui fait que si un script necessite un autre (ui.tabs.js necessite ui.core.js),
+	et que l'on coche les deux dans cette interface, il risque d'y avoir des erreurs blocantes.
+
 3) a d'autres plugins ou squelettes une methode simple pour ajouter
 une librairie :
-	- sur toutes les pages du site (en ajoutant la librairie dans jquery.js)
+	- sur toutes les pages du site, en utilisant le pipeline jquery_plugins,
 	- sur certaines pages du site, en utilisant une balise #JQUERY_PLUGIN
 
 
@@ -36,16 +40,14 @@ Telechargement des plugins jquery
 Le bouton de telechargement propose soit "telecharger" soit "mettre a jour"
 
 Dans tous les cas, si le plugin est dans un zip, c'est le chargeur
-de plugins de spip 1.9.3 qui l'installera.
+de plugins de SPIP 2.0 qui l'installera.
 
 Si le plugin jquery est fourni simplement par un/des fichiers js, 
 l'installation sera realisee par l'action 'jqueryp_charger_lib'
 
 
-
 Vue de l'exterieur
 ------------------
-
 Lorsqu'un plugin veut forcer l'utilisation d'un plugin
 de jquery (qui a été téléchargé), il peut le signaler
 de deux facons :
@@ -62,16 +64,16 @@ Soit par un pipeline :
 			<inclure>PREFIX_pipelines.php</inclure>
 	</pipeline>
 	
-	Avec la fonction php suivante (ajoute ui.mouse et ui.tabs) :
+	Avec la fonction php suivante dans le fichier PREFIX_pipelines.php
+	(mettre l'un ou l'autre des deux propositions) :
 	
 	function PREFIX_jquery_plugins($flux) {
 			// Avec le plugin jQuery plugins actif :
-			return jqueryp_add_plugins(array('ui.accordion','ui.tabs'), $flux);
+			return jqueryp_add_plugins(array('ui.core','ui.accordion','ui.tabs'), $flux);
 			
 			// OU
-			// Sans le plugin actif (qui n'est pas obligatoire),
-			// il faut connaitre le chemin pour ajouter
-			// les js dans le path
+			// Sans le plugin SPIP jquery_plugins actif (qui n'est pas obligatoire),
+			// il faut connaitre le chemin pour ajouter les js dans le path
 			$flux[] = 'lib/jquery-ui-1.6rc2/ui/ui.core.js'; 
 			$flux[] = 'lib/jquery-ui-1.6rc2/ui/ui.tabs.js'; 
 			$flux[] = 'lib/jquery-ui-1.6rc2/ui/ui.accordion.js';
@@ -81,17 +83,4 @@ Soit par un pipeline :
 Soit par une balise :
 
 	Ce qui ajoute <script url...> a l'endroit ou est situee la balise
-	
-	#JQUERY_PLUGIN{ui.tabs, ui.mouse}
-	
-	
-	
-Question subsidiaire
---------------------
-	
-	Que doit-on faire si UI n'a pas ete telecharge par l'utilisateur
-	dans le cadre de l'exemple precedent ?
-	
-	Les plugins spip qui souhaitent utiliser un plugin jquery present dans jquery_plugins
-	doivent signaler a leurs utilisateurs de telecharger ce plugin depuis
-	l'interface de jquery_plugins.
+	#JQUERY_PLUGIN{ui.core, ui.tabs}

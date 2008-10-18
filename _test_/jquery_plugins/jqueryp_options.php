@@ -58,25 +58,24 @@ $GLOBALS['jquery_plugins'] = array(
 		// declarer des dossiers de themes
 		// ces dossiers contiennent des fichiers nom.css ; optionnellement nom.ext.css
 		// par exemple le theme light pourra etre appele par :
-		// #JQUERY_PLUGIN_THEME{light, light.tabs} ce qui chargera les css
-		// 'themes/light/light.css' et 'themes/light/light.tabs.css'
+		// #JQUERY_PLUGIN_THEME{flora, flora.tabs} ce qui chargera les css
+		// 'themes/flora/flora.css' et 'themes/flora/flora.tabs.css'
 		'themes' => array(
-			'dark' 		=> 'themes/dark',
-			'flora' 	=> 'themes/flora',
-			'light' 	=> 'themes/light'
+			'ui' 	=> 'themes/default',
+			'flora' 	=> 'themes/flora'
 		)
 	),
 	
 	//validate (test avec version 1.4)
 	'validate' => array(
-		'dir' => 'jquery.validate',
+		'dir' => 'jquery-validate',
 		'url' => 'http://bassistance.de/jquery-plugins/jquery-plugin-validation/',
 		'install' => 'http://jquery.bassistance.de/validate/jquery.validate.zip',
 	),
 		
 	//yav
 	'yav' => array(
-		'dir' => 'jquery.yav1.2.0',
+		'dir' => 'jquery.yav.1.2.0',
 		'url' => 'http://jquery.com/plugins/project/jquery_yav',
 		'install' => 'http://plugins.jquery.com/files/jquery.yav.1.2.0.zip'
 	)

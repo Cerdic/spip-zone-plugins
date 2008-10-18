@@ -1,24 +1,5 @@
 <?php
 
-function jqueryp_insert_jquery_plugins($flux){
-	$js = array('type'=>'inline','data'=>array());
-	$js = _jqueryp_insert_jquery_plugins($js);
-	$inline = join($js['data'],"\n");
-	return $flux . "\n\n" . $inline;
-}
-
-function _jqueryp_insert_jquery_plugins($flux = null){
-	if (!$lpa = jqueryp_liste_plugins('actifs'))
-		return $flux;
-		
-	if (isset($flux))
-		$flux = jqueryp_add_plugins(array_values(array_flip($lpa)), $flux);
-	else
-		$flux = jqueryp_add_plugins(array_values(array_flip($lpa)));
-	
-	return $flux;
-}
-
 
 /* 
  * Pipeline 'jquery_plugins' pour SPIP = 1.9.3 : ajouter simplement
@@ -28,7 +9,6 @@ function _jqueryp_insert_jquery_plugins($flux = null){
 function jqueryp_jquery_plugins($flux) {
 	include_spip(_DIR_PLUGIN_JQUERYP.'jqueryp_fonctions'); // inclure les fonctions
 	$flux = array_unique(array_merge($flux,(array)jqueryp_liste_plugins('actifs')));
-	spip_log($flux,'jqp');
 	return $flux;
 }
 

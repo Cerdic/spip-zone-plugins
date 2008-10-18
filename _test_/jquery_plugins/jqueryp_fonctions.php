@@ -71,7 +71,7 @@ function balise_JQUERY_PLUGIN_THEME($p){
 	
 	// liste des themes
 	$themes = jqueryp_liste_themes_dispo();
-	
+	spip_log($themes,'jqp');
 	$i = 0;
 	while ($theme = interprete_argument_balise(++$i, $p)){
 		$theme = str_replace("'", "", $theme);
@@ -117,54 +117,30 @@ function jqueryp_add_link(&$p, $adresse, $generer_url=false){
 }
 
 /* 
- * Retourne le contenu des fichiers js des plugin jquery dont les id 
- * sont envoyes.
+
+ * Renvoie un tableau avec les adresses des fichiers a inserer
+ * pour le pipeline jquery_plugins :
  * 
- * - renvoie un array() avec le nom des fichiers à inserer
- *   pour le pipeline insert_jquery_plugins
- * jqueryp_add_plugins('ui.tabs', $flux);
- * jqueryp_add_plugins('ui.tabs','ui.dimensions', $flux);
- * 
- * - renvoie <script language='javascript'>...</script>
- *   pour le pipeline insert_head 
- * jqueryp_add_plugins('ui.tabs');
- * jqueryp_add_plugins(array('ui.tabs','ui.dimensions'));
- * 
+ * function plugin_jquery_plugins($flux){
+ * 		return jqueryp_add_plugins('ui.tabs', $flux);
+ * 		#return jqueryp_add_plugins(array('ui.core','ui.tabs'), $flux);
+ * }
  */
-function jqueryp_add_plugins($plugins, $flux=null){
-	static $lpda; // liste plugins deja actifs (même nom OU meme adresse)
-		
-	if (empty($lpda)) $lpda = array('nom' => array(), 'adresse' => array());
+function jqueryp_add_plugins($plugins, $flux=array()){
+	if (!$plugins) return $flux;
 	if (!is_array($plugins)) $plugins = array($plugins);
 	
 	$lpa = jqueryp_liste_fichiers_dispo();
-			
-	$res = '';
 	foreach ($plugins as $nom){
-		if ($lpda['nom'][$nom] OR $lpda['adresse'][$lpa[$nom]])
-			continue;
-			
-		if ($c = find_in_path($lpa[$nom])) {
-			if (isset($flux)){
-				if ($flux['type']=='fichier')
-					$flux['data'][$nom] = substr($lpa[$nom],0,-3); // enlever '.js'
-				elseif ($flux['type']=='inline')
-					$flux['data'][$nom] =  spip_file_get_contents($c);
-			} else {
-				// inline dans insert_head (compat 1.9.2)
-				$res .=  "\n\n" . spip_file_get_contents($c) . "\n\n";	
-			}
-			// pas deux fois la meme chose...
-			$lpda['nom'][$nom] = $lpda['adresse'][$lpa[$nom]] = true;
+		if (isset($flux[$nom]) AND $flux[$nom]) continue; // meme nom, deja present, on passe
+		if ($c = chemin($lpa[$nom])) 
+			if (!in_array($c, $flux)) $flux[$nom] = $c;
 		} else {
 			spip_log("Adresse introuvable ($lpa[$nom]) sur $nom",'jquery_plugins');
 		}
 	}
-
-	if (isset($flux))
-		return $flux;
-	else
-		return "<script language='text/javascript'>" . $res . "</script>";
+	// retourner la liste completee avec les plugins ajoutes
+	return $flux;
 }
 
 
