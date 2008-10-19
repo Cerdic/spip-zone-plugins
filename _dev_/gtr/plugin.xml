@@ -9,7 +9,7 @@
 		Yohann
 	</auteur>
 	<version>
-		0.5beta
+		0.5
 	</version>
 	<etat>
 		dev
@@ -23,17 +23,11 @@
 	<prefix>
 		gtr
 	</prefix>
+	<bouton id='gtr' parent='naviguer'>
+		<icone>img_pack/icone.png</icone>
+		<titre>Traducteur</titre>
+		<url>traducteur</url>
+	</bouton>
 	
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
-    <pipeline>
-       	<nom>
-			ajouter_boutons
-		</nom>
-       	<action>
-			ajouterBoutons
-		</action>
-		<inclure>
-			inc_gtr.php
-		</inclure>
-    </pipeline>
+
 </plugin>
