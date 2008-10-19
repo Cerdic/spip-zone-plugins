@@ -96,6 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'sommaire_articles_entiers' => 'Afficher les articles en entiers (par d&eacute;faut, seule une introduction est affich&eacute;e)',
 
 //T
+'tag' => 'Tag',
 'texte_erreur1' => 'La recherche de',
 'texte_erreur2' => 'ne donne aucun r&eacute;sultat.',
 'titre_erreur' => 'Erreur :',

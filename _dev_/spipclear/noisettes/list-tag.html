@@ -1,6 +1,9 @@
-<B_liste>
+<div id="content-info">
+	<h2><:spipclear:tag:> - <BOUCLE_titre(MOTS){id_mot}>#TITRE</BOUCLE_titre></h2>
+</div>
+<B_articles_tag>
 [(#ENV{debut_liste}|?{[<p class="pagination">(#PAGINATION)</p>],#ANCRE_PAGINATION})]
-<BOUCLE_liste(ARTICLES){branche ?}{lang ?}{archives ?}{par date}{inverse}{pagination 15}>
+<BOUCLE_articles_tag(ARTICLES){branche ?}{lang ?}{archives ?}{id_mot} {par popularite}{inverse} {pagination 10}>
 <div class="post">
 	[(#LOGO_ARTICLE|right|#URL_ARTICLE|liens_absolus)]
 	[<p class="day-date">(#DATE|affdate_long|unique)</p>]
@@ -45,6 +48,6 @@
 	
 	</p>
 </div>
-</BOUCLE_liste>
+</BOUCLE_articles_tag>
 [<p class="pagination">(#PAGINATION)</p>]
-</B_liste>
+</B_articles_tag>

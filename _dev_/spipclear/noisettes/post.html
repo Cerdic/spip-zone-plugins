@@ -1,25 +1,33 @@
 <BOUCLE_article(ARTICLES){id_article}>
 <div class="post">
-[(#LOGO_ARTICLE|right|#URL_ARTICLE|liens_absolus|inserer_attribut{class,#EDIT{logo}})]
-[<p class="surtitre #EDIT{soustitre}">(#SURTITRE)</p>]
-<h2 class="post-title #EDIT{titre}">#TITRE</h2>
-[<p class="soustitre #EDIT{surtitre}">(#SOUSTITRE)</p>]
-<p class="post-info"><B_auteurs><:par_auteur|ucfirst:> <BOUCLE_auteurs(AUTEURS){id_article}{", "}><span[ title="(#BIO|couper{60}|texte_backend)"]>#NOM</span></BOUCLE_auteurs>,</B_auteurs>
-[(#DATE|affdate_long)] <:spipclear:attime:> [(#DATE|heures)]:[(#DATE|minutes)]
-<span>::</span> <BOUCLE_categorie(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></BOUCLE_categorie>
-<span>::</span>#DEBUT_SURLIGNE<a href="#URL_SITE_SPIP/#URL_ARTICLE" title="<:spipclear:permalink_pour:> : [(#TITRE|textebrut|entites_html)]">##ID_ARTICLE</a>#FIN_SURLIGNE
-</p>
+	[(#LOGO_ARTICLE|right|#URL_ARTICLE|liens_absolus|inserer_attribut{class,#EDIT{logo}})]
+	[<p class="surtitre #EDIT{soustitre}">(#SURTITRE)</p>]
+	<h2 class="post-title #EDIT{titre}">#TITRE</h2>
+	[<p class="soustitre #EDIT{surtitre}">(#SOUSTITRE)</p>]
+	<p class="post-info"><B_auteurs><:par_auteur|ucfirst:> <BOUCLE_auteurs(AUTEURS){id_article}{", "}><span[ title="(#BIO|couper{60}|texte_backend)"]>#NOM</span></BOUCLE_auteurs>,</B_auteurs>
+	[(#DATE|affdate_long)] <:spipclear:attime:> [(#DATE|heures)]:[(#DATE|minutes)]
+	<span>::</span> <BOUCLE_categorie(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></BOUCLE_categorie>
+	<span>::</span>#DEBUT_SURLIGNE<a href="#URL_SITE_SPIP/#URL_ARTICLE" title="<:spipclear:permalink_pour:> : [(#TITRE|textebrut|entites_html)]">##ID_ARTICLE</a>#FIN_SURLIGNE
+	</p>
 
-[<div class="post-excerpt #EDIT{chapo}">
-	#DEBUT_SURLIGNE(#CHAPO)#FIN_SURLIGNE
-</div>]
-[<div class="post-content #EDIT{texte}" lang="#LANG">
-	#DEBUT_SURLIGNE(#TEXTE|reduire_image{450})#FIN_SURLIGNE
-	<br style="clear: both;" />
-	[<div class="#EDIT{ps}">#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>]
-	[<div>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
-	[<div><strong><:voir_en_ligne:></strong> : <a href="(#URL_SITE)">#NOM_SITE</a></div>]
-</div>]
+	<B_mots>
+	<ul class="post-tags">
+		<BOUCLE_mots(MOTS){id_article}>
+		<li><a href="[(#URL_PAGE{tag}|parametre_url{id_mot,#ID_MOT}|parametre_url{id_secteur,#ID_SECTEUR})]">#TITRE</a></li>
+		</BOUCLE_mots>
+	</ul>
+	</B_mots>
+
+	[<div class="post-excerpt #EDIT{chapo}">
+		#DEBUT_SURLIGNE(#CHAPO)#FIN_SURLIGNE
+	</div>]
+	[<div class="post-content #EDIT{texte}" lang="#LANG">
+		#DEBUT_SURLIGNE(#TEXTE|reduire_image{450})#FIN_SURLIGNE
+		<br style="clear: both;" />
+		[<div class="#EDIT{ps}">#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>]
+		[<div>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
+		[<div><strong><:voir_en_ligne:></strong> : <a href="(#URL_SITE)">#NOM_SITE</a></div>]
+	</div>]
 </div>
 
 <div id="comments">

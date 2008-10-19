@@ -34,13 +34,17 @@
 					<div id="content">
 						[(#RECHERCHE|non)
 							[(#ENV{id_article}|non)
-							<INCLURE{fond=noisettes/list}{id_rubrique=#ID_RUBRIQUE}{archives}{debut_liste}{env}{ajax}>
+								[(#ENV{id_mot}|non)
+								<INCLURE{fond=noisettes/list}{id_rubrique=#ID_RUBRIQUE}{archives}{debut_liste}{env}{ajax}>
+								]
 							]
 						]
 						[(#RECHERCHE|oui)
 							<INCLURE{fond=noisettes/search}{env}{ajax}>]
 						[(#ENV{id_article}|oui)
 							<INCLURE{fond=noisettes/post}{id_article}>]
+						[(#ENV{id_mot}|oui)
+							<INCLURE{fond=noisettes/list-tag}{id_mot}{env}{ajax}>]
 					</div>
 				</div>
 
