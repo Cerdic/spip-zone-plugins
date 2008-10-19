@@ -32,26 +32,26 @@
 	Ce fichier est un des composants de LiLo. 
 	
 	LiLo est un programme libre, vous pouvez le redistribuer et/ou le modifier 
-	selon les termes de la Licence Publique Generale GNU publiée par 
-	la Free Software Foundation (version 2 ou bien toute autre version ultérieure 
+	selon les termes de la Licence Publique Generale GNU publiee par 
+	la Free Software Foundation (version 2 ou bien toute autre version ulterieure 
 	choisie par vous).
 	
-	LiLo est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,
+	LiLo est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,
 	ni explicite ni implicite, y compris les garanties de commercialisation ou
-	d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU 
-	pour plus de détails. 
+	d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU 
+	pour plus de details. 
 	
-	Vous devez avoir reçu une copie de la Licence Publique Generale GNU 
-	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez à la  
+	Vous devez avoir recu une copie de la Licence Publique Generale GNU 
+	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la  
 	Free Software Foundation, Inc., 
-	59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.
+	59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.
 	
 	*****************************************************/
 	
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // pipeline (plugin.xml)
-// Insère les js et css dans head de l'espace public
+// Insere les js et css dans head de l'espace public
 function lilo_insert_head ($flux) {
 
 	include_spip('inc/filtres');
@@ -177,6 +177,9 @@ function lilo_insert_head ($flux) {
 				margin:3px 0 0 !important;
 				line-height:1.4em;
 			}
+			@media print {
+				#lilo-statut-public { display:none; }
+			}
 		"; // end $lilo_css_insert_head
 
 		$lilo_js_insert_head .= 
@@ -203,7 +206,7 @@ function lilo_insert_head ($flux) {
 	$lilo_js_insert_head = lilo_compacter_script($lilo_js_insert_head);
 	$lilo_css_insert_head = lilo_compacter_script($lilo_css_insert_head);
 	
-	// inclure le résultat dans le head
+	// inclure le resultat dans le head
 	$flux .= "\n<!-- "._LILO_PREFIX." -->\n" . $lilo_css_insert_head . $lilo_js_insert_head . "<!-- /"._LILO_PREFIX." -->\n";
 
 	return ($flux);
@@ -239,7 +242,7 @@ function lilo_envelopper_script ($s, $type) {
 	return($s);
 }
 
-// complément des deux 'compacte'. supprimer les espaces en trop.
+// complement des deux 'compacte'. supprimer les espaces en trop.
 function lilo_compacter_script ($s) {
 	if(!empty($s)) {
 		$s = preg_replace('=[[:space:]]+=', ' ', $s);
