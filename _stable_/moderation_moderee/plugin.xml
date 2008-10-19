@@ -26,18 +26,8 @@
 		moderation
 	</prefix>
 	
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
-    <pipeline>
-       	<nom>
-			ajouter_boutons
-		</nom>
-       	<action>
-			ajouterBoutons
-		</action>
-		<inclure>
-			inc_moderation.php
-		</inclure>
-    </pipeline>
+
+   
 	<fonctions>
 	fonctions_mod.php
 	</fonctions>
