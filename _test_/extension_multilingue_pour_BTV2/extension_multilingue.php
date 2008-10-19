@@ -24,7 +24,10 @@ if (strpos($params['champ'], "zone_multilingue") === FALSE)
 			return $params;
 	
 		if ($_GET['new'] == "oui") {
-			$titre = filtrer_entites(_T('titre_nouvelle_rubrique'));
+			if (lire_config('ExtensionMultilingue/nepasremplirtitres_ExtensionMultilingue', '') != "on")
+				$titre = filtrer_entites(_T('titre_nouvelle_rubrique'));
+			else
+				$titre = "";
 			$descriptif = "";
 			$texte = "";
 		} else {
@@ -46,7 +49,10 @@ if (strpos($params['champ'], "zone_multilingue") === FALSE)
 
 		if ($_GET['new'] == "oui") {
 			$surtitre = "";
-			$titre = filtrer_entites(_T('info_nouvel_article'));
+			if (lire_config('ExtensionMultilingue/nepasremplirtitres_ExtensionMultilingue', '') != "on")
+				$titre = filtrer_entites(_T('info_nouvel_article'));
+			else
+				$titre = "";
 			$soustitre = "";
 			$descriptif = "";
 			$chapo = "";
@@ -75,7 +81,10 @@ if (strpos($params['champ'], "zone_multilingue") === FALSE)
 			return $params;
 		if ($_GET['new'] == "oui") 
 		{
-			$titre = filtrer_entites(_T('titre_nouvelle_breve'));
+			if (lire_config('ExtensionMultilingue/nepasremplirtitres_ExtensionMultilingue', '') != "on")
+				$titre = filtrer_entites(_T('titre_nouvelle_breve'));
+			else
+				$titre = "";
 			$texte = "";
 			$lien_titre = "";
 		} 
@@ -123,8 +132,11 @@ if (strpos($params['champ'], "zone_multilingue") === FALSE)
 		if (lire_config("ExtensionMultilingue/groupesmots_".$nom_champ."_ExtensionMultilingue", '') != "on")
 			return $params;
 		if ($_GET['new'] == "oui") {
-		  	$titre = filtrer_entites(_T('titre_nouveau_groupe'));
-		  	$descriptif = "";
+			if (lire_config('ExtensionMultilingue/nepasremplirtitres_ExtensionMultilingue', '') != "on")
+				$titre = filtrer_entites(_T('titre_nouveau_groupe'));
+			else
+				$titre = "";
+			$descriptif = "";
 			$texte = "";
 		  
 		} else {
