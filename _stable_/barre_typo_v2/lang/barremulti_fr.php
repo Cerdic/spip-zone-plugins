@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_multi_titre' => 'Configuration de l\'extension multilingue pour BTV2', 
 'barre_multi_langues' => 'Langues (s&eacute;par&eacute;es par des virgules)',
 'barre_multi_affiche_titres' => 'Afficher la barre typo sur les titres',
+'barre_multi_desactive_preremplissage_titres' => 'Ne pas pr&eacute;remplir les titres &agrave; la cr&eacute;ation d\'un objet',
 'barre_multi_affiche_descriptifs' => 'Afficher la barre typo sur les descriptifs',
 'barre_multi_affiche_textes' => 'Afficher la barre typo sur les textes',
 'barre_multi_activer_articles' => 'Activer le multilinguisme sur les articles',
