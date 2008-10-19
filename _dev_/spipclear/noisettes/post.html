@@ -35,7 +35,7 @@
 	<B_commentaires_article>
 	<dl>
 	<BOUCLE_commentaires_article(FORUMS){id_article}{par date}>
-		<dt id="forum#ID_FORUM" class="comment-info[(#ID_ARTICLE|me{#ID_AUTEUR}|oui) me]">
+		<dt id="forum#ID_FORUM" class="[(#ID_ARTICLE|me{#ID_AUTEUR}|oui) me][(#COMPTEUR_BOUCLE|alterner{' odd',''})][ (#COMPTEUR_BOUCLE|=={1}|oui)first]">
 			<a href="#URL_FORUM" class="comment-number">#COMPTEUR_BOUCLE.</a>
 			[(#DATE|nom_jour)] [(#DATE|affdate)] <:spipclear:attime:>
 			[(#DATE|heures)]:[(#DATE|minutes)],
@@ -52,7 +52,7 @@
 			]</BOUCLE_le_boss>[ <span>::</span> <a href="(#URL_SITE)">[(#NOM_SITE|sinon{<:spipclear:site_comment:>})]</a>]
 		</dt>
 								
-		<dd[(#ID_ARTICLE|me{#ID_AUTEUR}|?{' ',''})class="me"]>
+		<dd class="[(#ID_ARTICLE|me{#ID_AUTEUR}|oui)me][(#COMPTEUR_BOUCLE|alterner{' odd',''})][ (#COMPTEUR_BOUCLE|=={1}|oui)first]">
 			[<strong>(#TITRE)</strong><br />]
 			[(#TEXTE|liens_absolus)]
 		</dd>
