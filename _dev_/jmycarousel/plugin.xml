@@ -9,10 +9,9 @@
 <fonctions>jmycarousel.php</fonctions>
 <prefix>jmycarousel</prefix>
 <pipeline>
-<nom>insert_head</nom>
-<action>insert_head</action>
-<inclure>jmycarousel.php</inclure>
+	<nom>insert_head</nom>
+	<action>insert_head</action>
+	<inclure>jmycarousel.php</inclure>
 </pipeline>
-<inclure>jmycarousel.php</inclure>
 </plugin>
 
