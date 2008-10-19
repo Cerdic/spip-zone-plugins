@@ -12,8 +12,8 @@
 	dev
 	</etat>
 	<description>
-	permet de configurer l'envoi de mel à son lapin
- <h4>[Configuration->.?exec=cfg&amp;cfg=nabaztag]</h4>
+	Permet de configurer l'envoi de mel &agrave; son lapin
+ 	<h4>[Configuration->.?exec=cfg&amp;cfg=nabaztag]</h4>
 	</description>
 	<icon>icon.png</icon>
 	<lien>
