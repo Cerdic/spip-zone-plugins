@@ -1,5 +1,7 @@
 <B_liste>
-[<p><:spipclear:resultat_recherche:> <em>(#RECHERCHE|entites_html)</em></p>]
+<div id="content-info">
+	[<h2><:spipclear:resultat_recherche:> <em>(#RECHERCHE|entites_html)</em></h2>]
+</div>
 [<p class="pagination">(#PAGINATION)</p>]
 <BOUCLE_liste(ARTICLES){id_secteur}{recherche}{par points}{pagination 15}>
 <div class="post[(#COMPTEUR_BOUCLE|alterner{' odd',''})][ (#COMPTEUR_BOUCLE|=={1}|oui)first]" lang="#LANG" xml:lang="#LANG">
@@ -32,9 +34,8 @@
 </BOUCLE_liste>
 [<p class="pagination">(#PAGINATION)</p>]
 </B_liste>
-[<div class="error"><strong><:spipclear:titre_erreur:></strong>
-	<p><:spipclear:texte_erreur1:>
-	<em>(#RECHERCHE|entites_html)</em>
-	<:spipclear:texte_erreur2:></p>
-</div>]
+<div id="content-info">
+	[<h2><:spipclear:resultat_recherche:> <em>(#RECHERCHE|entites_html)</em></h2>]
+	[<p><:spipclear:texte_erreur1:> <em>(#RECHERCHE|entites_html)</em> <:spipclear:texte_erreur2:></p>]
+</div>
 <//B_liste>
