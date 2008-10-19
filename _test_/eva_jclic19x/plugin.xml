@@ -4,10 +4,10 @@
 	</nom>
 	<auteur>
     Samuel Bocharel, &eacute;quipe de d&eacute;veloppement Eva-WEB.<br/>
-	 <a rel="Spip-edu" target="_blank" href="http://spip-edu.edres74.net">http://spip-edu.edres74.net</a><br/>
+	 <a rel="Spip-edu" class="spip_out" href="http://spip-edu.edres74.net">http://spip-edu.edres74.net</a><br/>
     Cette r&eacute;alisation est mise &agrave; disposition sous licence GNU GPL.
-    <br />&nbsp;<br /><div style="text-align:center;"><a rel="licence" target="_blank" href="http://www.april.org/gnu/gpl_french.html"><img alt="Licence GNU GPL" style="border-width:0" width="80" height="100" src="http://www.fsf.org/graphics/philosophical-gnu-sm.jpg"/></a></div>
-    Merci &agrave; l'&eacute;quipe de <a rel="Clicapplic" target="_blank" href="http://jclic.clicapplic.net/">ClicApplic</a>
+    <br />&nbsp;<br /><div style="text-align:center;"><a rel="licence" class="spip_out" href="http://www.april.org/gnu/gpl_french.html"><img alt="Licence GNU GPL" style="border-width:0" width="80" height="100" src="http://www.fsf.org/graphics/philosophical-gnu-sm.jpg"/></a></div>
+    Merci &agrave; l'&eacute;quipe de <a rel="Clicapplic" class="spip_out" href="http://jclic.clicapplic.net/">ClicApplic</a>
 	</auteur>
 	<version>
 	0.2
