@@ -8,7 +8,7 @@
     [jsMath->http://www.math.union.edu/~dpvc/jsmath/] dans SPIP. Tapez 
     simplement les formules comme en TeX (entre dollars) et le 
     syst&egrave;me se charge du reste. (Pour ins&eacute;rer un 
-    caract&egrave;re <html>$</html> dans un article, l'entourer de 
+    caract&egrave;re <code>$</code> (dollar) dans un article, l'entourer de 
     balises SPIP &lt;html&gt;.)
 
     Le plugin contient la partie javascript de la librairie 
