@@ -22,8 +22,9 @@
 		{{Exemple : }}
 		<ul>
 		<li>- La page popup_radio.html contient un squelette spip utilisant la balise #WEBRADIO</li>
-		<li>- Elle est appel&#233; depuis une autre page via le petit script javascript :</li>
+		<li>- Elle est appel&#233; depuis une autre page via le petit script javascript :
 		<div style='width=100%; background-color: #fff; border: 1px dotted #000;'><code><a href="javascript: affichage_radio('#URL_PAGE{popup_radio}', 'Ma Web radio');">radio</a></code></div>
+		</li>
 		<li>- La fenetre popup aura pour titre : "Ma Web radio".</li>
 		</ul>
 	
