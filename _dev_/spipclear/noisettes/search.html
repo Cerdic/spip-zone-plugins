@@ -2,7 +2,7 @@
 [<p><:spipclear:resultat_recherche:> <em>(#RECHERCHE|entites_html)</em></p>]
 [<p class="pagination">(#PAGINATION)</p>]
 <BOUCLE_liste(ARTICLES){id_secteur}{recherche}{par points}{pagination 15}>
-<div class="post">
+<div class="post[(#COMPTEUR_BOUCLE|alterner{' odd',''})][ (#COMPTEUR_BOUCLE|=={1}|oui)first]" lang="#LANG" xml:lang="#LANG">
 	[(#LOGO_ARTICLE|right)]
 	[<p class="day-date">(#DATE|affdate_long|unique)</p>]
 
