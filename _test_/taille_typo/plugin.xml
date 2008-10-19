@@ -20,8 +20,8 @@
 	<br /><code>[(#SELF|parametre_url{taille_typo,1})]</code>
 	<br />Le param&egrave;tre &agrave; passer dans l'url est la taille de typo souhait&eacute;e en em.
 	</multi>
-	<lien></lien> <!-- URI de documentation -->
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
 	taille_typo
 	</prefix>	
