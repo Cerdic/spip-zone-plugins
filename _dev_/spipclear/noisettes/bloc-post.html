@@ -1,0 +1,43 @@
+<BOUCLE_article(ARTICLES){id_article}>
+[(#LOGO_ARTICLE|right|#URL_ARTICLE|liens_absolus)]
+[<p class="day-date">(#DATE|affdate_long|unique)</p>]
+
+<h2 id="p#ID_ARTICLE" class="post-title"><a href="#URL_ARTICLE">#TITRE</a></h2>
+
+<p class="post-info">
+<B_auteurs><:par_auteur|ucfirst:> <BOUCLE_auteurs(AUTEURS){id_article}{", "}><span[ title="(#BIO|couper{60}|texte_backend)"]>#NOM</span></BOUCLE_auteurs>, </B_auteurs>
+[(#DATE|affdate_long)] <:spipclear:attime:> [(#DATE|heures)]:[(#DATE|minutes)]
+<span>::</span>
+<BOUCLE_categorie(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_categorie>
+</p>
+
+<B_mots>
+<ul class="post-tags">
+	<BOUCLE_mots(MOTS){id_article}>
+	<li><a href="[(#URL_PAGE{tag}|parametre_url{id_mot,#ID_MOT}|parametre_url{id_secteur,#ID_SECTEUR})]">#TITRE</a></li>
+	</BOUCLE_mots>
+</ul>
+</B_mots>
+
+[(#CONFIG{spipclear/articles_entiers}|=={on}?{' ',''})
+[<div class="post-content #EDIT{texte}" lang="#LANG">
+	(#TEXTE)
+</div>]]
+
+[(#CONFIG{spipclear/articles_entiers}|=={on}?{'',' '})
+[<div class="post-content #EDIT{intro}" lang="#LANG">
+	(#INTRODUCTION)
+</div>]
+<p class="read-it"><a href="#URL_ARTICLE" title="[Lire la suite (#TITRE|texte_script)]"><:spipclear:lire_la_suite:></a>...</p>
+]
+	
+[<div class="post-content" lang="#LANG"><strong><:voir_en_ligne:></strong> : <a href="(#URL_SITE)">#NOM_SITE</a></div>]
+
+<p class="post-info-co"> 
+<a href="#URL_ARTICLE#co" class="comment_count" title="<:spipclear:commentaires_pour:> : [(#TITRE|textebrut|entites_html)]">
+	<BOUCLE_commentaires(FORUMS){id_article}{plat}> </BOUCLE_commentaires>
+	#TOTAL_BOUCLE [(#TOTAL_BOUCLE|=={1}|?{<:spipclear:commentaire:>,<:spipclear:commentaires:>})]
+	</B_commentaires><:spipclear:aucun_commentaire:><//B_commentaires>
+</a>
+</p>
+</BOUCLE_article>
