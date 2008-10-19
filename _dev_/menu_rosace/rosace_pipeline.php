@@ -42,7 +42,7 @@ function rosace_ajouterOnglets($flux) {
 // css prive
 	function rosace_header_prive($flux) {
 		$flux.= "\n".'<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_ROSACE.'css/rosace_prive.css" />'."\n";
-		$flux.= "\n".'<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_ROSACE.'css/rosace_public.css" />'."\n";
+//		$flux.= "\n".'<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_ROSACE.'css/rosace_public.css" />'."\n";
 		return $flux;
 	}
 	
