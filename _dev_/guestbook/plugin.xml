@@ -3,7 +3,11 @@
 	<auteur>Bernard Blazin - Novembre 2006 &amp; Yohann Prigent - Septembre 2008</auteur>
 	<version>1</version>
 	<etat>dev</etat>
-	<description>Un Livre d'or pour votre site Spip. Ce livre d'or fonctionne avec une table différente des tables de SPIP, ce qui en fais un système à part. Par contre il fonctionne avec les tables de SPIP</description>
+	<description>
+	Un Livre d'or pour votre site Spip. Ce livre d'or fonctionne avec une table &#13;
+	diff&eacute;rente des tables de SPIP, ce qui en fais un syst&egrave;me &agrave; part. &#13;
+	Par contre il fonctionne avec les tables de SPIP
+	</description>
 	<fonctions>livre_fonctions.php</fonctions>
 	<prefix>livre</prefix>
 	<pipeline>
