@@ -28,7 +28,7 @@ _ <code>svn://zone.spip.org/spip-zone/_plugins_/_stable_/cfg plugins/cfg</code>
 	<prefix>
 	svn_update
 	</prefix>
-	
+	<necessite id="cfg" />
 	<options>
 	    svn_update_options.php
 	</options>
