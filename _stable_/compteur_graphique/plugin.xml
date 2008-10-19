@@ -4,16 +4,8 @@
 	</nom>
 	<auteur>
     Olivier Gautier, &eacute;quipe de d&eacute;veloppement Eva-WEB.
-    <br/>Cette 
-	<span xmlns:dc="http://purl.org/dc/elements/1.1/" href="http://purl.org/dc/dcmitype/InteractiveResource" rel="dc:type">
-	cr&eacute;ation</span> 
-	est mise &agrave; disposition sous un 
-	<a rel="license" href="http://creativecommons.org/licenses/by/2.0/fr/">
-	contrat Creative Commons</a>.
-    <br />&nbsp;<br />
-	<div style="text-align:center;"><a rel="license" href="http://creativecommons.org/licenses/by/2.0/fr/">
-	<img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by/2.0/fr/88x31.png"/></a>
-	</div>
+    <br/>Cette <a href="http://purl.org/dc/dcmitype/InteractiveResource" rel="dc:type">cr&eacute;ation</a> est mise &agrave; disposition sous un <a rel="license" href="http://creativecommons.org/licenses/by/2.0/fr/">contrat Creative Commons</a>.
+    <br />&nbsp;<br /><div style="text-align:center;"><a rel="license" href="http://creativecommons.org/licenses/by/2.0/fr/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by/2.0/fr/88x31.png"/></a></div>
 	</auteur>
 	<version>
 	0.4
