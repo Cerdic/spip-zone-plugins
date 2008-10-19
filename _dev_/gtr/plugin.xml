@@ -15,10 +15,10 @@
 		dev
 	</etat>
 	<description>
-		Ce plugin permettera de traduire des articles depuis l'espace public, et d'avoir un traducteur disponible pour les rédacteurs depuis l'espace privé.
+		Ce plugin permettera de traduire des articles depuis l'espace public, et d'avoir un traducteur disponible pour les r&eacute;dacteurs depuis l'espace priv&eacute;.
 	</description>
 	<lien>
-		[Site de l'éditeur->http://www.chambredesecrets.net]
+		[Site de l'&eacute;diteur->http://www.chambredesecrets.net]
 	</lien>
 	<prefix>
 		gtr
