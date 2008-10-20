@@ -46,6 +46,7 @@
 	$essais[] = array(true, 'tablepack::~/test_cfg_chemin/casier/truc', 'trac');
 	// dans rubriques
 	$essais[] = array(true, 'tablepack::rubriques@extra:1/test_cfg_chemin/casier/truc', 'trac');
+	$essais[] = array(true, 'tablepack::rubrique@extra:1/test_cfg_chemin/casier/chose', 'trac');
 	
 	$err = tester_fun('ecrire_config', $essais);
 	
@@ -70,6 +71,7 @@
 	$essais[] = array(null, 'tablepack::~/test_cfg_chemin/casier/three/huit');
 	// dans rubrique
 	$essais[] = array('trac', 'tablepack::rubriques@extra:1/test_cfg_chemin/casier/truc');
+	$essais[] = array('trac', 'tablepack::rubrique@extra:1/test_cfg_chemin/casier/chose');
 	
 	$err = tester_fun('lire_config', $essais);
 	
@@ -97,6 +99,7 @@
 	$essais[] = array(true, 'tablepack::~/test_cfg_chemin/casier/truc'); // supprimer chemin/casier
 	// dans rubrique
 	$essais[] = array(true, 'tablepack::rubriques@extra:1/test_cfg_chemin/casier/truc');
+	$essais[] = array(true, 'tablepack::rubrique@extra:1/test_cfg_chemin/casier/chose');
 	
 	$err = tester_fun('effacer_config', $essais);
 	
@@ -117,6 +120,7 @@
 	$essais[] = array(null, 'tablepack::~/test_cfg_chemin');
 	// dans rubrique
 	$essais[] = array(null, 'tablepack::rubriques@extra:1/test_cfg_chemin/casier/truc');
+	$essais[] = array(null, 'tablepack::rubrique@extra:1/test_cfg_chemin/casier/chose');
 	$essais[] = array(null, 'tablepack::rubriques@extra:1/test_cfg_chemin');
 	
 	$err = tester_fun('lire_config', $essais);
