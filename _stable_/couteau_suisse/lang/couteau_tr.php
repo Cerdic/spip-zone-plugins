@@ -55,7 +55,8 @@ Compatibilit&eacute; : SPIP toutes versions 1.9x',
 	'titre' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;',
 
 	// V
-	'variable_vide' => '(Bo&#351;)'
+	'variable_vide' => '(Bo&#351;)',
+	'visiteurs_connectes' => 'Ba&#287;l&#305; ziyaret&ccedil;iler : @nb@'
 );
 
 ?>

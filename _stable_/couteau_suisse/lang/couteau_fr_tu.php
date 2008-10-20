@@ -55,7 +55,8 @@ Compatibilit&eacute; : SPIP toutes versions 1.9x',
 	'titre' => 'Le Couteau Suisse',
 
 	// V
-	'variable_vide' => '(Vide)'
+	'variable_vide' => '(Vide)',
+	'visiteurs_connectes' => 'Visiteurs connect&eacute;s : @nb@'
 );
 
 ?>

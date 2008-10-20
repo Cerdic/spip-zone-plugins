@@ -55,7 +55,8 @@ De verenigbaarheid: SPIP iedereen betaalden 1.9x',
 	'titre' => 'Het Zwitserland Mes',
 
 	// V
-	'variable_vide' => '(Leegte)'
+	'variable_vide' => '(Leegte)',
+	'visiteurs_connectes' => 'Aangesloten bezoekers : @nb@'
 );
 
 ?>

@@ -55,7 +55,8 @@ Compatibilidade: SPIP em todas as vers&otilde;es 1.9x',
 	'titre' => 'Canivete Su&iacute;&ccedil;o',
 
 	// V
-	'variable_vide' => '(Vazio)'
+	'variable_vide' => '(Vazio)',
+	'visiteurs_connectes' => 'Visitantes online: @nb@'
 );
 
 ?>

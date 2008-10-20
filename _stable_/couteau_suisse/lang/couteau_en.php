@@ -45,7 +45,7 @@ Compatibility: SPIP 1.9x (all versions)',
 	'smileys_dispos' => 'Available smileys:',
 	'sommaire_page' => ',&nbsp;p@page@',
 	'sommaire_page_long' => ',&nbsp;page&nbsp;@page@',
-	'sommaire_titre' => 'Table of content',
+	'sommaire_titre' => 'Table of contents',
 	'stats_auteur' => '@icon@ @nom@, @date@',
 	'stats_date' => '@jour@/@mois@/@annee@&nbsp;at&nbsp;@h@:@m@',
 
@@ -55,7 +55,8 @@ Compatibility: SPIP 1.9x (all versions)',
 	'titre' => 'Swiss Knife',
 
 	// V
-	'variable_vide' => '(Empty)'
+	'variable_vide' => '(Empty)',
+	'visiteurs_connectes' => 'Logged in visitors: @nb@'
 );
 
 ?>

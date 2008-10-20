@@ -55,7 +55,8 @@ Compatibilitat: SPIP totes les versions 1.9x',
 	'titre' => 'El Ganivet Su&iacute;s',
 
 	// V
-	'variable_vide' => '(Buit)'
+	'variable_vide' => '(Buit)',
+	'visiteurs_connectes' => 'Visitants connectats: @nb@'
 );
 
 ?>

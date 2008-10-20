@@ -55,7 +55,8 @@ Compatibilid&aacute;: SPIP toes les versiones 1.9x',
 	'titre' => 'La Navaya Suiza',
 
 	// V
-	'variable_vide' => '(Vac&iacute;u)'
+	'variable_vide' => '(Vac&iacute;u)',
+	'visiteurs_connectes' => 'Visites coneut&aacute;es: @nb@'
 );
 
 ?>

@@ -55,7 +55,8 @@ Compatibilidade : SPIP todas as versi&oacute;ns 1.9x',
 	'titre' => 'A navalla su&iacute;za',
 
 	// V
-	'variable_vide' => '(Baleiro)'
+	'variable_vide' => '(Baleiro)',
+	'visiteurs_connectes' => 'Visitantes conectados: @nb@'
 );
 
 ?>

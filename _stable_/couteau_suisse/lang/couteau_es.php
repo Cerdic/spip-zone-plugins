@@ -55,7 +55,8 @@ Compatibilidad: todas las versiones 1.9x de SPIP',
 	'titre' => 'La Navaja Suiza',
 
 	// V
-	'variable_vide' => '(Vac&iacute;o)'
+	'variable_vide' => '(Vac&iacute;o)',
+	'visiteurs_connectes' => 'Visitantes conectados: @nb@'
 );
 
 ?>
