@@ -50,7 +50,7 @@
 		<BOUCLE_rechercheurlbase(SYNDIC_ARTICLES_PMB){0,1}>
 		<div class="menu articles" id="recherche-pmb">
 			<?php	
-				echo(extraire_element_distant("#PMB_URL_BASEindex.php?lvl=search_result&user_query=".$_REQUEST['recherche'], 'div#search_result'));
+				echo(extraire_element_distant("#PMB_URL_BASE", "index.php?lvl=search_result&user_query=".$_REQUEST['recherche'], 'div#search_result'));
 			 ?>
 		</div>
 		</BOUCLE_rechercheurlbase>

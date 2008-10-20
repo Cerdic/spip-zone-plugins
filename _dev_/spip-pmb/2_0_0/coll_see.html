@@ -34,12 +34,12 @@
         <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
 	<BOUCLE_rechercheurlbase(SYNDIC_ARTICLES_PMB){0,1}>
 	
+	
 	<?php
 		
-		echo(extraire_element_distant("#PMB_URL_BASE", "index.php?lvl=author_see&id=".$_REQUEST['id'], 'div#aut_details'));
+		echo(extraire_element_distant("#PMB_URL_BASE","index.php?lvl=coll_see&id=".$_REQUEST['id'], 'div#aut_details'));
 		
-	?>
-
+	?>	
 	</BOUCLE_rechercheurlbase>
 
 	<div class="cartouche">
