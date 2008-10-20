@@ -1,0 +1,99 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>[
+<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />
+]<B_URLMOT>
+<link rel="alternate" type="application/rss+xml" title="<:titre_page_mots_tous:>" href="#URL_PAGE{backend}<BOUCLE_URLMOT(MOTS){id_article}>&amp;id_mot[]=#ID_MOT</BOUCLE_URLMOT>" />
+</B_URLMOT><B_URLAUTEURS>
+<link rel="alternate" type="application/rss+xml" title="<:icone_auteurs:>" href="#URL_PAGE{backend}<BOUCLE_URLAUTEURS(AUTEURS){id_article}>&amp;id_auteur[]=#ID_AUTEUR</BOUCLE_URLAUTEURS>" />
+</B_URLAUTEURS><INCLURE{fond=inc-head}>
+
+<link rel="stylesheet" href="#CHEMIN{nyroModal.full.css}" type="text/css" media="projection, screen, tv" />
+<script type="text/javascript" src="#CHEMIN{javascript/jquery.nyroModal-1.2.8.pack.js}" ></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('a.lien-modal').nyroModal({bgColor: '#E6E8D5', minWidth: 400, minHeight: 400});
+	});
+</script>
+</head>
+
+<body class="page_article page_ouvrage">
+<div id="page">
+	
+	<div class="fond-blanc"></div>
+	[(#REM) Contenu principal : contenu de l'article ]
+    <div class="hfeed" id="conteneur">
+    <div class="hentry" id="contenu">
+    
+        [(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
+	<BOUCLE_rechercheurlbase(SYNDIC_ARTICLES_PMB){0,1}>
+	
+	
+	<?php
+
+		$resultat_recherche_locale = copie_locale("#PMB_URL_BASEindex.php?lvl=author_see&id=".$_REQUEST['id'],'auto');
+				if($resultat_recherche_locale != false) {
+					$resultat_recherche_html = unicode2charset(charset2unicode(file_get_contents($resultat_recherche_locale), 'iso-8859-1'),'utf-8');
+					//$resultat_recherche_html = liens_absolus($resultat_recherche_html, "#PMB_URL_BASE");
+					$resultat_recherche_html = str_replace("addtags.php", "#PMB_URL_BASEaddtags.php", $resultat_recherche_html);
+					$resultat_recherche_html = str_replace("avis.php", "#PMB_URL_BASEavis.php", $resultat_recherche_html);
+					$resultat_recherche_html = str_replace("./do_resa.php", "#PMB_URL_BASEdo_resa.php", $resultat_recherche_html);
+					
+					$resultat_recherche_html = str_replace("index.php?lvl=", "index.php?page=", $resultat_recherche_html);
+					$pos1 = strpos($resultat_recherche_html, "aut_details") - 9;
+					$pos2 = strpos($resultat_recherche_html, "div id=\"footer\"") - 41;
+					echo(substr($resultat_recherche_html, $pos1, $pos2-$pos1));
+				}
+		
+	?>	
+	</BOUCLE_rechercheurlbase>
+
+	<div class="cartouche">
+            <div class="surlignable">
+				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+				<h1 class="#EDIT{titre} entry-title[ (#TITRE|strlen|>{30}|?{'titre-long',''})]">[(#TITRE|ucfirst)]</h1>
+				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+            </div>
+
+           
+            
+        </div>
+		
+      
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+
+    [(#REM) Menu de navigation laterale ]
+    <div id="navigation">
+
+        [(#REM) Menu de navigation par rubriques ]
+        <INCLURE{fond=inc-rubriques}{id_rubrique}>
+
+
+        [(#REM) Articles dans la meme rubrique ]
+        <B_articles_rubrique>
+        <div class="menu">
+            <h2><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
+            <ul>
+                <BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date}{inverse} {0,10}>
+                <li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>#TITRE</a></li>
+                </BOUCLE_articles_rubrique>
+            </ul>
+        </div>
+        </B_articles_rubrique>
+
+    </div><!--#navigation-->
+    
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!--#page-->
+</body>
+</html>
