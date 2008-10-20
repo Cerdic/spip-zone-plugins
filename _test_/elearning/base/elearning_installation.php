@@ -22,7 +22,7 @@ function elearning_install($install){
 			elearning_maj();
 			break;
 		case 'uninstall':
-			//elearning_vider_tables();
+			elearning_vider_tables();
 			break;
 	}
 	
@@ -30,7 +30,7 @@ function elearning_install($install){
 
 // Supprimer les tables du plugin
 function elearning_vider_tables() {
-	include_spip('base/abstract_sql');
+	//include_spip('base/abstract_sql');
 	/* Blabla effacer les tables */
 	effacer_meta('elearning_version_base');
 }
@@ -55,9 +55,8 @@ function elearning_maj(){
 	// On met à jour seulement si les versions sont différentes
 	if ($version_en_cours != $version_du_plugin){
 		
-		include_spip('base/create');
-		include_spip('base/abstract_sql');
-		include_spip('base/elearning_tables');
+		//include_spip('base/create');
+		//include_spip('base/abstract_sql');
 				
 		if ($version_en_cours == 0.0){
 			elearning_maj_version($version_en_cours, 0.1);

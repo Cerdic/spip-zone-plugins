@@ -8,7 +8,5 @@
 #-----------------------------------------------------------------#
 
 
-// On inclue la définition des tables
-include_spip('base/elearning_tables');
 
 ?>

@@ -18,7 +18,7 @@
 <select name="jeu">
 	<option value="0"><:elearning:configuration_selectionnez_test:></option>
 	<option value="0" [(#ENV{jeu}|=={0}|?{'selected="selected"'})]><:elearning:configuration_test_aucun:></option>
-	<BOUCLE_jeux(JEUX)>
+	<BOUCLE_jeux(JEUX){tout}>
 	<option value="#ID_JEU" [(#ENV{jeu}|=={#ID_JEU}|?{'selected="selected"'})]>#TITRE_PRIVE</option>
 	</BOUCLE_jeux>
 </select>
@@ -27,6 +27,5 @@
 </B_jeux>
 
 <input type="submit" name="_cfg_ok" value="<:oK:>" />
-[(#REM)<input type="submit" name="_cfg_delete" value="<:supprimer:>" />]
 
 </form>
