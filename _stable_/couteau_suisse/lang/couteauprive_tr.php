@@ -127,10 +127,10 @@ Le param&egrave;tre {type} ci-dessus peut prendre trois valeurs :
 	'decoration:nom' => 'Dekorasyon',
 	'decoupe:aide' => 'T&#305;rnak blo&#287;u : <b>&lt;onglets>&lt;/onglets></b><br/>Sayfa veya t&#305;rnak ayrac&#305;&nbsp;: @sep@',
 	'decoupe:aide2' => 'Alias&nbsp;:&nbsp;@sep@',
-	'decoupe:description' => '<NEW>D&eacute;coupe l\'affichage public d\'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. placez simplement dans votre article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l\'endroit qui doit recevoir la coupure.
-_ Si vous utilisez ce s&eacute;parateur &agrave; l\'int&eacute;rieur des balises &lt;onglets&gt; et &lt;/onglets&gt; alors vous obtiendrez un jeu d\'onglets.
-_ Dans les squelettes : vous avez &agrave; votre disposition les nouvelles balises #ONGLETS_DEBUT, #ONGLETS_TITRE et #ONGLETS_FIN.
-_ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.',
+	'decoupe:description' => '<MODIF>Bir makalenin, otomatik bir sayfalama ile kamusal alanda bir ka&ccedil; sayfaya b&ouml;l&uuml;nerek g&ouml;sterilmesini sa&#287;lar. Makalenizde sadece pe&#351;pe&#351;e art&#305; i&#351;aretlerini(<code>++++</code>) kesinti yap&#305;lacak yerde kullan&#305;n.
+_ E&#287;er bu ayrac&#305; &lt;onglets&gt; ve &lt;/onglets&gt; komutlar&#305;yla kullan&#305;rsan&#305;z bir &ccedil;ift t&#305;rnak elde edersiniz.
+_ &#304;skeletlerde : &#351;u yeni komutlara sahipsiniz #ONGLETS_DEBUT, #ONGLETS_TITRE ve #ONGLETS_FIN.
+_ Bu gere&ccedil; {makaleleriniz i&ccedil;in bir &ouml;zet} ile birlikte kullan&#305;labilir.',
 	'decoupe:nom' => 'Sayfalara ve ba&#351;l&#305;klara ay&#305;r',
 	'desactiver_flash:description' => 'Sitenizin web sayfalar&#305;ndaki flash nesneleri siler ve ilintili alternatif i&ccedil;erikler de&#287;i&#351;tiri.',
 	'desactiver_flash:nom' => 'Flash nesnelerini deaktive eder',
@@ -193,12 +193,14 @@ Dikkat : forumlarda, dilek&ccedil;elerde, payla&#351;&#305;lan ak&#305;larda ve 
 	'guillemets:nom' => 'Tipografik t&#305;rnaklar',
 
 	// H
-	'help' => '<MODIF><NEW>{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p><p>Version locale : @version@@distant@<br/>@pack@</p><p>Liens de documentation :<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
-_ • [Des outils cach&eacute;s|Revenir &agrave; l\'apparence initiale de cette page->@hide@]
-_ • [De tout le plugin|Revenir &agrave; l\'&eacute;tat initial du plugin->@reset@]@install@
-</p>',
+	'help' => '{{Bu sayfa yaln&#305;z site sorumlular&#305;n&#305;n eri&#351;imine a&ccedil;&#305;kt&#305;r.}} &laquo;{{&#304;svi&ccedil;re&nbsp;&Ccedil;ak&#305;s&#305;}}&raquo; eklentisinin getirdi&#287;i farkl&#305; bir &ccedil;ok ek i&#351;levin d&uuml;zenlenmesine izin verir .',
 	'help0' => '{{Bu sayfa sadece site sorumlusunun eri&#351;imine a&ccedil;&#305;kt&#305;r.}}<p>&laquo;{{&#304;svi&ccedil;re&nbsp;&Ccedil;ak&#305;s&#305;}}&raquo; eklentisinin fonksiyonlar&#305;na eri&#351;im olana&#287;&#305; tan&#305;r.</p><p>Belgeleme ba&#287;lant&#305;s&#305; :<br/>• [&#304;svi&ccedil;re&nbsp;&Ccedil;ak&#305;s&#305;->http://www.spip-contrib.net/?article2166]</p><p>S&#305;f&#305;rlama (Yeniden ba&#351;latma) :
 _ • [T&uuml;m eklentiyi ba&#351;tan->@reset@]
+</p>',
+	'help2' => 'Yerel s&uuml;r&uuml;m : @version@',
+	'help3' => 'Belgelendirme ba&#287;lant&#305;lar&#305; :<br/>• [&#304;svi&ccedil;re&nbsp;&Ccedil;ak&#305;s&#305;->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Yeniden ba&#351;lat&#305;lmas&#305; :
+_ • [Gizli gere&ccedil;lerin|Bu sayfan&#305;n ilk g&ouml;r&uuml;n&uuml;m&uuml;ne d&ouml;n&uuml;lmesi->@hide@]
+_ • [T&uuml;m eklentinin|Eklentini ilk durumuna d&ouml;n&uuml;lmesi->@reset@]@install@
 </p>',
 
 	// I
@@ -222,6 +224,14 @@ Bu logoyu tan&#305;mlamak i&ccedil;in &laquo;&nbsp;Konfig&uuml;rasyon&nbsp;&raqu
 	'introduction:nom' => '#INTRODUCTION komutu',
 
 	// J
+	'jcorner:description' => '<NEW>&laquo;&nbsp;Jolis Coins&nbsp;&raquo; est un outil permettant de modifier facilement l\'aspect des coins de vos {{cadres color&eacute;s}} en partie publique de votre site. Tout est possible, ou presque !
+_ Voyez le r&eacute;sultat sur cette page : [->http://www.malsup.com/jquery/corner/].
+
+Listez ci-dessous les objets de votre squelette &agrave; arrondir en utilisant la syntaxe CSS (.class, #id, etc. ). Utilisez le le signe &laquo;&nbsp;=&nbsp;&raquo; pour sp&eacute;cifier la commande jQuery &agrave; utiliser et un double slash (&laquo;&nbsp;//&nbsp;&raquo;) pour les commentaires. En absence du signe &eacute;gal, des coins ronds seront appliqu&eacute;s (&eacute;quivalent &agrave; : <code>.ma_classe = .corner()</code>).[[%jcorner_classes%]]
+
+Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corners}. Le Couteau Suisse peut l\'installer directement si vous cochez la case suivante. [[%jcorner_plugin%]]',
+	'jcorner:nom' => '<NEW>Jolis Coins',
+	'jcorner_plugin' => '<NEW>&laquo;&nbsp;Round Corners plugin&nbsp;&raquo;',
 	'js_defaut' => 'Varsay&#305;lan',
 	'js_jamais' => 'Asla',
 	'js_toujours' => 'Daima',
@@ -242,6 +252,8 @@ Bu logoyu tan&#305;mlamak i&ccedil;in &laquo;&nbsp;Konfig&uuml;rasyon&nbsp;&raqu
 	'label:glossaire_js' => 'Kullan&#305;lan teknik :',
 	'label:glossaire_limite' => 'Olu&#351;turulan maksimum ba&#287; :',
 	'label:insertions' => 'Otomatik d&uuml;zeltmeler :',
+	'label:jcorner_classes' => '<NEW>Am&eacute;liorer les coins des s&eacute;lecteurs suivantes :',
+	'label:jcorner_plugin' => '<NEW>Installer le plugin {jQuery} suivant :',
 	'label:lgr_introduction' => '&Ouml;zet\'in uzunlu&#287;u :',
 	'label:lgr_sommaire' => '&Ouml;zet\'in b&uuml;y&uuml;kl&uuml;&#287;&uuml; (9 &agrave; 99) :',
 	'label:lien_introduction' => 'T&#305;klanabilir &uuml;&ccedil; nokta :',
@@ -360,7 +372,7 @@ Si vous r&eacute;initialisez le plugin en cliquant sur un pack, le Couteau Suiss
 
 	// S
 	'sauf_admin' => 'Y&ouml;neticiler d&#305;&#351;&#305;nda herkes',
-	'set_options:description' => '<NEW>S&eacute;lectionne d\'office le type d’interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes.[[%radio_set_options4%]]',
+	'set_options:description' => '<NEW>S&eacute;lectionne d\'office le type d&rsquo;interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes.[[%radio_set_options4%]]',
 	'set_options:nom' => '&Ouml;zel aray&uuml;z tipi',
 	'sf_amont' => '<NEW>En amont',
 	'sf_tous' => 'Hepsi',
@@ -375,13 +387,13 @@ _ Dessins : [Sylvain Michel->http://www.guaph.net/]',
 
 Attention, cet outil a besoin pour fonctionner de deux plugins {jQuery} : {ScrollTo} et {LocalScroll}. Le Couteau Suisse peut les installer directement si vous cochez les cases suivantes. [[%scrollTo%]][[->%LocalScroll%]]',
 	'soft_scroller:nom' => 'Yumu&#351;ak &ccedil;apalar',
-	'sommaire:description' => '<NEW>Construit un sommaire pour vos articles afin d’acc&eacute;der rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
+	'sommaire:description' => '<NEW>Construit un sommaire pour vos articles afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
 
 @puce@ Vous pouvez d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire :[[%lgr_sommaire% caract&egrave;res]]
 
 @puce@ Vous pouvez aussi fixer le comportement du plugin concernant la cr&eacute;ation du sommaire: 
-_ • Syst&eacute;matique pour chaque article (une balise <code>[!sommaire]</code> plac&eacute;e n’importe o&ugrave; &agrave; l’int&eacute;rieur du texte de l’article cr&eacute;era une exception).
-_ • Uniquement pour les articles contenant la balise <code>[sommaire]</code>.
+_ &bull; Syst&eacute;matique pour chaque article (une balise <code>[!sommaire]</code> plac&eacute;e n&rsquo;importe o&ugrave; &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article cr&eacute;era une exception).
+_ &bull; Uniquement pour les articles contenant la balise <code>[sommaire]</code>.
 
 [[%auto_sommaire%]]
 
@@ -397,7 +409,7 @@ Ce sommaire peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe en pages et ong
 Burada yasaklanacak serileri @_CS_ASTER@ aralar&#305;nda bir bo&#351;luk b&#305;rakarak listeleyiniz. [[%spam_mots%]]
 @_CS_ASTER@Tek bir s&ouml;zc&uuml;&#287;&uuml; parantez i&ccedil;ine al&#305;n&#305;z. Bo&#351;luklar i&ccedil;eren bir deyimi t&#305;rnak i&ccedil;ine al&#305;n&#305;z.',
 	'spam:nom' => 'SPAM\'a kar&#351;&#305; sava&#351;',
-	'spip_cache:description' => '<NEW>@puce@ Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.[[%radio_desactive_cache3%]]@puce@ Le cache occupe un certain espace disque et SPIP peut en limiter l\'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu\'aucun quota ne s\'applique.[[%quota_cache% Mo]]@puce@ Si la balise #CACHE n\'est pas trouv&eacute;e dans vos squelettes locaux, SPIP consid&egrave;re par d&eacute;faut que le cache d\'une page a une dur&eacute;e de vie de 24 heures avant de la recalculer. Afin de mieux g&eacute;rer la charge de votre serveur, vous pouvez ici modifier cette valeur.[[%duree_cache% heures]]@puce@ Si vous avez plusieurs sites en mutualisation, vous pouvez sp&eacute;cifier ici la valeur par d&eacute;faut prise en compte par tous les sites locaux (SPIP 1.93).[[%duree_cache_mutu% heures]]',
+	'spip_cache:description' => '<MODIF>@puce@ Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.[[%radio_desactive_cache3%]]@puce@ Le cache occupe un certain espace disque et SPIP peut en limiter l\'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu\'aucun quota ne s\'applique.[[%quota_cache% Mo]]@puce@ Si la balise #CACHE n\'est pas trouv&eacute;e dans vos squelettes locaux, SPIP consid&egrave;re par d&eacute;faut que le cache d\'une page a une dur&eacute;e de vie de 24 heures avant de la recalculer. Afin de mieux g&eacute;rer la charge de votre serveur, vous pouvez ici modifier cette valeur.[[%duree_cache% heures]]@puce@ Si vous avez plusieurs sites en mutualisation, vous pouvez sp&eacute;cifier ici la valeur par d&eacute;faut prise en compte par tous les sites locaux (SPIP 1.93).[[%duree_cache_mutu% heures]]',
 	'spip_cache:nom' => 'SPIP ve &ouml;nbellek…',
 	'stat_auteurs' => 'Stat durumundaki yazarlar',
 	'statuts_spip' => 'Sadece &#351;u SPIP stat&uuml;s&uuml; :',
@@ -414,7 +426,7 @@ Burada yasaklanacak serileri @_CS_ASTER@ aralar&#305;nda bir bo&#351;luk b&#305;
 	'tous' => 'Hepsi',
 	'toutes_couleurs' => 'Css stillerinin 36 rengi :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => '&Ccedil;ok dilli bloklar&nbsp;: <b><:trad:></b>',
-	'toutmulti:description' => 'Bir makaleye kolayca &ccedil;ok dilli bloklar eklemek i&ccedil;in <code><:un_texte:></code> k&#305;sayolunu sunar.
+	'toutmulti:description' => '<MODIF>Bir makaleye kolayca &ccedil;ok dilli bloklar eklemek i&ccedil;in <code><:un_texte:></code> k&#305;sayolunu sunar.
 _ Kullan&#305;lan SPIP fonksiyonu &#351;udur : <code>_T(\'un_texte\', 
 flux)</code>.
 _ Dil dosyalar&#305;nda \'un_texte\' de&#287;i&#351;keninin d&uuml;zg&uuml;n bi&ccedil;imde tan&#305;mland&#305;&#287;&#305;ndan ein olun.',
@@ -434,19 +446,25 @@ Les propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL 
 	'tri_titre' => 'Ba&#351;l&#305;&#287;a g&ouml;re s&#305;ralama (ORDER BY 0+titre,titre)',
 	'type_urls:description' => '<NEW>@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'acc&egrave;s aux pages de votre site :
 <div style="font-size:90%; margin:0 2em;">
-- {{page}} : la valeur par d&eacute;faut pour SPIP v1.9x : <code>/spip.php?article123</code>.
+- {{page}} : la valeur par d&eacute;faut depuis SPIP version 1.9x : <code>/spip.php?article123</code>.
 - {{html}} : les liens ont la forme des pages html classiques : <code>/article123.html</code>.
 - {{propre}} : les liens sont calcul&eacute;s gr&acirc;ce au titre: <code>/Mon-titre-d-article</code>.
 - {{propres2}} : l\'extension \'.html\' est ajout&eacute;e aux adresses g&eacute;n&eacute;r&eacute;es : <code>/Mon-titre-d-article.html</code>.
-- {{standard}} : URLs utilis&eacute;es par SPIP v1.8 et pr&eacute;c&eacute;dentes : <code>article.php3?id_article=123</code>
-- {{propres-qs}} : ce syst&egrave;me fonctionne en "Query-String", c\'est-&agrave;-dire sans utilisation de .htaccess ; les liens sont de la forme : <code>/?Mon-titre-d-article</code>.</div>
+- {{arborescentes}} (&agrave; partir de SPIP 2.0 uniquement) les liens sont de type arborescent : <code>/secteur/rubrique1/rubrique2/article</code>.
+- {{standard}} : URLs utilis&eacute;es par SPIP v1.8 et pr&eacute;c&eacute;dentes : <code>article.php3?id_article=123</code>.
+- {{propres-qs}} : ce syst&egrave;me fonctionne en &quot;Query-String&quot;, c\'est-&agrave;-dire sans utilisation de .htaccess ; les liens sont de la forme : <code>/?Mon-titre-d-article</code>.
+
+</div>
 
 Plus d\'infos : [->http://www.spip.net/fr_article765.html]
 [[%radio_type_urls3%]]
-<p style=\'font-size:85%\'>@_CS_ASTER@pour utiliser les formats {html}, {propre} ou {propre2}, Recopiez le fichier "htaccess.txt" du r&eacute;pertoire de base du site SPIP sous le sous le nom ".htaccess" (attention &agrave; ne pas &eacute;craser d\'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en "sous-r&eacute;pertoire", vous devrez aussi &eacute;diter la ligne "RewriteBase" ce fichier. Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de SPIP.</p>
+<p style=\'font-size:85%\'>@_CS_ASTER@pour utiliser les formats {html}, {propre}, {propre2} ou {arborescentes}, Recopiez le fichier &quot;htaccess.txt&quot; du r&eacute;pertoire de base du site SPIP sous le sous le nom &quot;.htaccess&quot; (attention &agrave; ne pas &eacute;craser d\'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en &quot;sous-r&eacute;pertoire&quot;, vous devrez aussi &eacute;diter la ligne &quot;RewriteBase&quot; ce fichier. Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de SPIP.</p>
 
 @puce@ {{Uniquement si vous utilisez le format {page} ci-dessus}}, alors il vous est possible de choisir le script d\'appel &agrave; SPIP. Par d&eacute;faut, SPIP choisit {spip.php}, mais {index.php} (format : <code>/index.php?article123</code>) ou une valeur vide (format : <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il vous faut absolument cr&eacute;er le fichier correspondant dans la racine de SPIP, &agrave; l\'image de celui qui existe d&eacute;j&agrave; : {index.php}.
-[[%spip_script%]]',
+[[%spip_script%]]
+
+@puce@ {{Uniquement si vous utilisez les URLS {arborescentes} ci-dessus}}, alors il vous est possible d\'en personnaliser le rendu :</p>
+[[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]',
 	'type_urls:nom' => 'URL\'lerin formatlar&#305;',
 	'typo_exposants:description' => '<MODIF>Frans&#305;zca metinler : g&uuml;ncel k&#305;saltmalar&#305;n tipografik g&ouml;r&uuml;n&uuml;m&uuml;n&uuml; gerekli elemanlar&#305; &uuml;s\'e koyarak geli&#351;tirir, (b&ouml;ylece, {<acronym>Mme</acronym>} &#351;u hale gelir {M<sup>me</sup>}) ve s&#305;k&ccedil;a yap&#305;lan hatalar&#305; d&uuml;zeltir ({<acronym>2&egrave;me</acronym>} veya {<acronym>2me</acronym>} &#351;u hale gelir {2<sup>e</sup>}).
 _ Burada elde edilen k&#305;saltmalar 2002 y&#305;l&#305;nda yay&#305;nlanan Ulusal Bas&#305;mevi standartlar&#305;na uygundur. [Buradaki bilgiler Frans&#305;zca i&ccedil;in ge&ccedil;erlidir. &Ccedil;N]',
@@ -468,10 +486,18 @@ _ Burada elde edilen k&#305;saltmalar 2002 y&#305;l&#305;nda yay&#305;nlanan Ulu
 	'version_a_jour' => 'S&uuml;r&uuml;m&uuml;n&uuml;z g&uuml;ncel.',
 	'version_distante' => 'En eski s&uuml;r&uuml;m...',
 	'version_nouvelle' => 'Yeni s&uuml;r&uuml;m : @version@',
+	'version_revision' => 'G&ouml;zden ge&ccedil;irme : @revision@',
+	'version_update' => 'Otomatik g&uuml;ncelleme',
+	'version_update_title' => 'Eklentinin son s&uuml;r&uuml;m&uuml;n&uuml; indirir ve otomatik g&uuml;ncellemeyi ba&#351;lat&#305;r',
 	'verstexte:description' => '&#304;skeletleriniz i&ccedil;in, daha hafif sayfalar olu&#351;turman&#305;z&#305; sa&#287;layacak 2 filtre.
 _ version_texte : birka&ccedil; &ouml;nemli komut d&#305;&#351;&#305;nda bir html sayfan&#305;n metin i&ccedil;eri&#287;ini al&#305;r.
 _ version_plein_texte : bir html sayfan&#305;n t&uuml;m metin i&ccedil;eri&#287;ini al&#305;r.',
 	'verstexte:nom' => 'Metin s&uuml;r&uuml;m&uuml;',
+	'visiteurs_connectes:description' => '&#304;skeletiniz i&ccedil;in, kamusal sitedeki ziyaret&ccedil;i say&#305;s&#305;n&#305; g&ouml;steren bir programc&#305;k sunar.
+
+Sayfalar&#305;n&#305;za yaln&#305;zca &#351;unu ekleyin  <code><INCLURE{fond=fonds/visiteurs_connectes}></code>.',
+	'visiteurs_connectes:nom' => 'Ba&#287;l&#305; ziyaret&ccedil;iler',
+	'voir' => 'Bkz : @voir@',
 	'votre_choix' => 'Se&ccedil;iminiz :',
 
 	// X

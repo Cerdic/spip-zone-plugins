@@ -127,7 +127,7 @@ Le param&egrave;tre {type} ci-dessus peut prendre trois valeurs :
 	'decoration:nom' => 'Versiering',
 	'decoupe:aide' => 'Blok tabben : <b>&lt;onglets>&lt;/onglets></b><br/>S&eacute;parateur van bladzijdes of tabben&nbsp;: @sep@',
 	'decoupe:aide2' => 'Alias&nbsp;:&nbsp;@sep@',
-	'decoupe:description' => '<NEW>D&eacute;coupe l\'affichage public d\'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. placez simplement dans votre article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l\'endroit qui doit recevoir la coupure.
+	'decoupe:description' => '<MODIF>D&eacute;coupe l\'affichage public d\'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. placez simplement dans votre article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l\'endroit qui doit recevoir la coupure.
 _ Si vous utilisez ce s&eacute;parateur &agrave; l\'int&eacute;rieur des balises &lt;onglets&gt; et &lt;/onglets&gt; alors vous obtiendrez un jeu d\'onglets.
 _ Dans les squelettes : vous avez &agrave; votre disposition les nouvelles balises #ONGLETS_DEBUT, #ONGLETS_TITRE et #ONGLETS_FIN.
 _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.',
@@ -200,6 +200,11 @@ _ • [Van hele plugin|Aan de eerste stand van plugin terugkomen->@reset@]@install
 	'help0' => '<NEW>{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p><p>Lien de documentation :<br/>&bull; [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]</p><p>R&eacute;initialisation :
 _ &bull; [De tout le plugin->@reset@]
 </p>',
+	'help2' => '<NEW>Version locale : @version@',
+	'help3' => '<NEW><p>Liens de documentation :<br/>&bull; [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
+_ &bull; [Des outils cach&eacute;s|Revenir &agrave; l\'apparence initiale de cette page->@hide@]
+_ &bull; [De tout le plugin|Revenir &agrave; l\'&eacute;tat initial du plugin->@reset@]@install@
+</p>',
 
 	// I
 	'icone_visiter:description' => '<NEW>Remplace l\'image du bouton standard &laquo;&nbsp;Visiter&nbsp;&raquo; (en haut &agrave; droite sur cette page)  par le logo du site, s\'il existe.
@@ -222,6 +227,14 @@ Pour d&eacute;finir ce logo, rendez-vous sur la page &laquo;&nbsp;Configuration 
 	'introduction:nom' => 'Baken #INTRODUCTION',
 
 	// J
+	'jcorner:description' => '<NEW>&laquo;&nbsp;Jolis Coins&nbsp;&raquo; est un outil permettant de modifier facilement l\'aspect des coins de vos {{cadres color&eacute;s}} en partie publique de votre site. Tout est possible, ou presque !
+_ Voyez le r&eacute;sultat sur cette page : [->http://www.malsup.com/jquery/corner/].
+
+Listez ci-dessous les objets de votre squelette &agrave; arrondir en utilisant la syntaxe CSS (.class, #id, etc. ). Utilisez le le signe &laquo;&nbsp;=&nbsp;&raquo; pour sp&eacute;cifier la commande jQuery &agrave; utiliser et un double slash (&laquo;&nbsp;//&nbsp;&raquo;) pour les commentaires. En absence du signe &eacute;gal, des coins ronds seront appliqu&eacute;s (&eacute;quivalent &agrave; : <code>.ma_classe = .corner()</code>).[[%jcorner_classes%]]
+
+Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corners}. Le Couteau Suisse peut l\'installer directement si vous cochez la case suivante. [[%jcorner_plugin%]]',
+	'jcorner:nom' => '<NEW>Jolis Coins',
+	'jcorner_plugin' => '<NEW>&laquo;&nbsp;Round Corners plugin&nbsp;&raquo;',
 	'js_defaut' => 'Gebrek',
 	'js_jamais' => 'Nooit',
 	'js_toujours' => 'Nog steeds',
@@ -242,6 +255,8 @@ Pour d&eacute;finir ce logo, rendez-vous sur la page &laquo;&nbsp;Configuration 
 	'label:glossaire_js' => 'Gebruikte techniek :',
 	'label:glossaire_limite' => 'Maximumaantal gecre&euml;erde band :',
 	'label:insertions' => 'Automatische correcties :',
+	'label:jcorner_classes' => '<NEW>Am&eacute;liorer les coins des s&eacute;lecteurs suivantes :',
+	'label:jcorner_plugin' => '<NEW>Installer le plugin {jQuery} suivant :',
 	'label:lgr_introduction' => 'Lengte van de samenvatting :',
 	'label:lgr_sommaire' => 'Breedte van het overzicht (9 &agrave; 99) :',
 	'label:lien_introduction' => 'Punten van vervolg cliquables :',
@@ -397,7 +412,7 @@ Ce sommaire peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe en pages et ong
 Listez ici les s&eacute;quences interdites@_CS_ASTER@ en les s&eacute;parant par des espaces. [[%spam_mots%]]
 @_CS_ASTER@Pour sp&eacute;cifier un mot entier, mettez-le entre paranth&egrave;ses. Pour une expression avec des espaces, placez-la entre guillemets.',
 	'spam:nom' => 'SPAM Bestrijding',
-	'spip_cache:description' => '<NEW>@puce@ Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.[[%radio_desactive_cache3%]]@puce@ Le cache occupe un certain espace disque et SPIP peut en limiter l\'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu\'aucun quota ne s\'applique.[[%quota_cache% Mo]]@puce@ Si la balise #CACHE n\'est pas trouv&eacute;e dans vos squelettes locaux, SPIP consid&egrave;re par d&eacute;faut que le cache d\'une page a une dur&eacute;e de vie de 24 heures avant de la recalculer. Afin de mieux g&eacute;rer la charge de votre serveur, vous pouvez ici modifier cette valeur.[[%duree_cache% heures]]@puce@ Si vous avez plusieurs sites en mutualisation, vous pouvez sp&eacute;cifier ici la valeur par d&eacute;faut prise en compte par tous les sites locaux (SPIP 1.93).[[%duree_cache_mutu% heures]]',
+	'spip_cache:description' => '<MODIF>@puce@ Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.[[%radio_desactive_cache3%]]@puce@ Le cache occupe un certain espace disque et SPIP peut en limiter l\'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu\'aucun quota ne s\'applique.[[%quota_cache% Mo]]@puce@ Si la balise #CACHE n\'est pas trouv&eacute;e dans vos squelettes locaux, SPIP consid&egrave;re par d&eacute;faut que le cache d\'une page a une dur&eacute;e de vie de 24 heures avant de la recalculer. Afin de mieux g&eacute;rer la charge de votre serveur, vous pouvez ici modifier cette valeur.[[%duree_cache% heures]]@puce@ Si vous avez plusieurs sites en mutualisation, vous pouvez sp&eacute;cifier ici la valeur par d&eacute;faut prise en compte par tous les sites locaux (SPIP 1.93).[[%duree_cache_mutu% heures]]',
 	'spip_cache:nom' => 'SPIP en het dekblad…',
 	'stat_auteurs' => 'De auteurs in stat',
 	'statuts_spip' => 'Alleen de volgende SPIP statuten :',
@@ -414,7 +429,7 @@ Listez ici les s&eacute;quences interdites@_CS_ASTER@ en les s&eacute;parant par
 	'tous' => 'Iedereen',
 	'toutes_couleurs' => 'De 36 kleuren van de css stijlen :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Meertalige blokken&nbsp;: <b><:trad:></b>',
-	'toutmulti:description' => '<NEW>Introduit le raccourci <code><:un_texte:></code> pour introduire librement des blocs multi-langues dans un article.
+	'toutmulti:description' => '<MODIF>Introduit le raccourci <code><:un_texte:></code> pour introduire librement des blocs multi-langues dans un article.
 _ La fonction SPIP utilis&eacute;e est : <code>_T(\'un_texte\', $flux)</code>.
 _ N\'oubliez pas de v&eacute;rifier que \'un_texte\' est bien d&eacute;fini dans les fichiers de langue.',
 	'toutmulti:nom' => 'Meertalige blokken',
@@ -467,10 +482,18 @@ _ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l\'Imprimer
 	'version_a_jour' => 'Uw versie is aan dag.',
 	'version_distante' => 'Verwijderde versie...',
 	'version_nouvelle' => 'Nieuwe versie : @version@',
+	'version_revision' => '<NEW>R&eacute;vision : @revision@',
+	'version_update' => '<NEW>Mise &agrave; jour automatique',
+	'version_update_title' => '<NEW>T&eacute;l&eacute;charge la derni&egrave;re version du plugin et lance sa mise &agrave; jour automatique',
 	'verstexte:description' => '2 filters voor uw skeletten, die het mogelijk maken om lichtere bladzijdes te produceren.
 _ de tekst_versie : uitgetrokken de inhoud tekst van een HTML bladzijde met uitsluiting van enkele elementaire bakens.
 _ volle_tekst_versie : uitgetrokken de inhoud tekst van een HTML bladzijde om van de volle tekst terug te geven.',
 	'verstexte:nom' => 'Tekst versie',
+	'visiteurs_connectes:description' => '<NEW>Offre une noisette pour votre squelette qui affiche le nombre de visiteurs connect&eacute;s sur le site public.
+
+Ajoutez simplement <code><INCLURE{fond=fonds/visiteurs_connectes}></code> dans vos pages.',
+	'visiteurs_connectes:nom' => '<NEW>Visiteurs connect&eacute;s',
+	'voir' => '<NEW>Voir : @voir@',
 	'votre_choix' => 'Uw keus :',
 
 	// X

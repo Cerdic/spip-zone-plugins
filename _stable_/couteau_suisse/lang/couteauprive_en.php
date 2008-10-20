@@ -128,7 +128,7 @@ The parameter {type} above can be one of three values:
 	'decoration:nom' => 'Decoration',
 	'decoupe:aide' => 'Tabbed block: <b>&lt;onglets>&lt;/onglets></b><br/>Page or tab separator: @sep@',
 	'decoupe:aide2' => 'Alias:&nbsp;@sep@',
-	'decoupe:description' => 'Divides the display of an article using automatic page numbering. Simply place four consecutive + signes (<code>++++</code>) where you wish a page break to occur.
+	'decoupe:description' => '<MODIF>Divides the display of an article using automatic page numbering. Simply place four consecutive + signes (<code>++++</code>) where you wish a page break to occur.
 _ If you use this separator between  &lt;onglets&gt; and &lt;/onglets&gt; tags, then you will receive a tabbed page instead.
 _ In templates you can use the tags #ONGLETS_DEBUT, #ONGLETS_TITRE and #ONGLETS_FIN.
 _ This tool may be combined with {A summary for your articles}.',
@@ -194,12 +194,14 @@ N.B.: in forums, petitions, RSS feeds, etc., Javascript is <b>always</b> made se
 	'guillemets:nom' => 'Curly inverted commas',
 
 	// H
-	'help' => '<MODIF>{{This page is only accessible to main site administrators.}}<p>It gives access to some additional functions of the {{Swiss Knife}}.</p><p>Local version: @version@@distant@<br/>@pack@</p><p>Documentation links:<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Resets :
-_ • [Hidden tools|Return to the original appearance of this page->@hide@]
-_ • [Whole plugin|Reset to the original state of the plugin->@reset@]@install@
-</p>',
+	'help' => '{{This page is only accessible to main site administrators.}} It gives access to the configuration of some additional functions of the {{Swiss Knife}}.',
 	'help0' => '{{This page is only accessible to main site administrators.}}<p>It gives access to additional functions of  &laquo;{{The&nbsp;Swiss&nbsp;Knife}}&raquo;.</p><p>Documentation link:<br/>• [The&nbsp;Swiss&nbsp;Knife->http://www.spip-contrib.net/?article2166]</p><p>Reset :
 _ • [the whole plugin->@reset@]
+</p>',
+	'help2' => 'Local version: @version@',
+	'help3' => '<p>Documentation links:<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Resets :
+_ • [Hidden tools|Return to the original appearance of this page->@hide@]
+_ • [Whole plugin|Reset to the original state of the plugin->@reset@]@install@
 </p>',
 
 	// I
@@ -224,6 +226,14 @@ To set this logo, go to the page "Site configuration" by clicking the "Configura
 	'introduction:nom' => '#INTRODUCTION tag',
 
 	// J
+	'jcorner:description' => '"Pretty Corners" is a tool which makes it easy to change the appearance of the corners of {{coloured boxes}} on the public pages of your site. Almost anything is possible!
+_ See this page for examples: [->http://www.malsup.com/jquery/corner/].
+
+Make a list below of the elements in your templates which are to be rounded. Use CSS syntax (.class, #id, etc. ). Use the sign "&nbsp;=&nbsp;" to specify the jQuery command to apply, and a double slash ("&nbsp;//&nbsp;") for comments. If no equals sign is provided, rounded corners equivalent to  <code>.ma_classe = .corner()</code> will be applied.[[%jcorner_classes%]]
+
+N.B. This tool requires the {Round Corners} jQuery plugin in order to function. The Swiss Knife can install it automatically if you check this box. [[%jcorner_plugin%]]',
+	'jcorner:nom' => 'Pretty Corners',
+	'jcorner_plugin' => '"&nbsp;Round Corners plugin&nbsp;"',
 	'js_defaut' => 'Default',
 	'js_jamais' => 'Never',
 	'js_toujours' => 'Always',
@@ -244,6 +254,8 @@ To set this logo, go to the page "Site configuration" by clicking the "Configura
 	'label:glossaire_js' => 'Technique used:',
 	'label:glossaire_limite' => 'Maximum number of links created:',
 	'label:insertions' => 'Auto-correct:',
+	'label:jcorner_classes' => 'Improve the corners of elements with the following CSS selectors',
+	'label:jcorner_plugin' => 'Install the following {jQuery} plugin:',
 	'label:lgr_introduction' => 'Length of summary:',
 	'label:lgr_sommaire' => 'Length of summary (9 to 99):',
 	'label:lien_introduction' => 'Clickable follow-on dots:',
@@ -399,7 +411,7 @@ The summary can be used in conjunction with : {Division into pages and tabs}.',
 List here the sequences you wish to prohibit@_CS_ASTER@ separating them with spaces. [[%spam_mots%]]
 @_CS_ASTER@To specify a whole word, place it in brackets. Expressions containing spaces should be placed with inverted commas.',
 	'spam:nom' => 'Fight against SPAM',
-	'spip_cache:description' => '@puce@ By default, SPIP calculates all the public pages and caches them in order to accelerate their display. It can be useful, when developing the site to disable the cache temporarily, in order to see the effect of changes immediately.[[%radio_desactive_cache3%]]@puce@ The cache occupies disk space and SPIP can limit the amount of space taken up. Leaving empty or putting 0 means that no quota will be applied.[[%quota_cache% Mo]]@puce@ If the  #CACHE tag is not found in a template, then, by default, SPIP caches a page for 24 hours before recalculating it. You can modify this default here.[[%duree_cache% heures]]@puce@ If you are running several mutualised sites, you can specify here the default value for all the local sites (SPIP 1.93).[[%duree_cache_mutu% heures]]',
+	'spip_cache:description' => '<MODIF>@puce@ By default, SPIP calculates all the public pages and caches them in order to accelerate their display. It can be useful, when developing the site to disable the cache temporarily, in order to see the effect of changes immediately.[[%radio_desactive_cache3%]]@puce@ The cache occupies disk space and SPIP can limit the amount of space taken up. Leaving empty or putting 0 means that no quota will be applied.[[%quota_cache% Mo]]@puce@ If the  #CACHE tag is not found in a template, then, by default, SPIP caches a page for 24 hours before recalculating it. You can modify this default here.[[%duree_cache% heures]]@puce@ If you are running several mutualised sites, you can specify here the default value for all the local sites (SPIP 1.93).[[%duree_cache_mutu% heures]]',
 	'spip_cache:nom' => 'SPIP and the cache',
 	'stat_auteurs' => 'Authors in statistics',
 	'statuts_spip' => 'Only the following SPIP status:',
@@ -416,7 +428,7 @@ List here the sequences you wish to prohibit@_CS_ASTER@ separating them with spa
 	'tous' => 'All',
 	'toutes_couleurs' => 'The 36 colours in CSS styles: @_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Multilingual blocks: <b><:trad:></b>',
-	'toutmulti:description' => 'Makes it possible to use the shortcut <code><:a_text:></code> in order to place multilingual blocks anywhere in the text of an article.
+	'toutmulti:description' => '<MODIF>Makes it possible to use the shortcut <code><:a_text:></code> in order to place multilingual blocks anywhere in the text of an article.
 _ The SPIP function used is: <code>_T(\'a_text\', 
 flux)</code>.
 _ Do not forget to check that the variable used (here, "a_text") is defined in the language files.',
@@ -454,8 +466,13 @@ More information: [->http://www.spip.net/en_article3588.html]
 @puce@ {{Only if you are using the type {arborescentes} describes aboves}}, you can customise the format:</p>
 [[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]',
 	'type_urls:nom' => 'Format of URLs',
-	'typo_exposants:description' => '<MODIF>Text in French: improves the typographical rendering of common abbreviations by adding superscript where necessary (thus, {<acronym>Mme</acronym>} becomes {M<sup>me</sup>}). Common errors corrected:  ({<acronym>2&egrave;me</acronym>} and  {<acronym>2me</acronym>}, for example, become {2<sup>e</sup>}, the only correct abbreviation).
-_ The rendered abbreviations correspond to those of the Imprimerie nationale given in the {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, Presses de l\'Imprimerie nationale, Paris, 2002).',
+	'typo_exposants:description' => '{{Text in French}}: improves the typographical rendering of common abbreviations by adding superscript where necessary (thus, {<acronym>Mme</acronym>} becomes {M<sup>me</sup>}). Common errors corrected:  ({<acronym>2&egrave;me</acronym>} and  {<acronym>2me</acronym>}, for example, become {2<sup>e</sup>}, the only correct abbreviation).
+
+The rendered abbreviations correspond to those of the Imprimerie nationale given in the {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, Presses de l\'Imprimerie nationale, Paris, 2002).
+
+The following expressions are also handled: <html>Dr, Pr, Mgr, St, Bx, m2, m3, Mn, Md, St&eacute;, &Eacute;ts, Vve, bd, Cie, 1o, 2o, etc.</html>
+
+{{English text}}: the suffixes of ordinal numbers are placed in superscript: <html>1st, 2nd</html>, etc.',
 	'typo_exposants:nom' => 'Superscript',
 
 	// U
@@ -474,10 +491,18 @@ _ The rendered abbreviations correspond to those of the Imprimerie nationale giv
 	'version_a_jour' => 'Your version is up to date.',
 	'version_distante' => 'Distant version...',
 	'version_nouvelle' => 'New version: @version@',
+	'version_revision' => 'version: @revision@',
+	'version_update' => 'Automatic update',
+	'version_update_title' => 'Downloads the latest version of the plugin and updates it automatically.',
 	'verstexte:description' => '2 filters for your templates which make it possible to produce lighter pages.
 _ version_texte : extracts the text content of an HTML page (includes only a few very basic tags).
 _ version_plein_texte : extracts the text content from an html to render full text.',
 	'verstexte:nom' => 'Text version',
+	'visiteurs_connectes:description' => 'Creates an HTML fragment for your templates which displays on the public site the number of vistors logged in.
+
+Simply add <code><INCLURE{fond=fonds/visiteurs_connectes}></code> in the template.',
+	'visiteurs_connectes:nom' => 'Vistors logged in',
+	'voir' => 'See: @voir@',
 	'votre_choix' => 'Your choice:',
 
 	// X

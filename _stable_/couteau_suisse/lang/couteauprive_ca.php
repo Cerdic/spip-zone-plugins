@@ -130,7 +130,7 @@ El par&agrave;metre {tipus} de m&eacute;s amunt pot agafar tres valors:
 	'decoration:nom' => 'Decoraci&oacute;',
 	'decoupe:aide' => 'Bloc de pestanyes: <b>&lt;pestanyes>&lt;/pestanyes></b><br/>Separador  de p&agrave;gines o de pestanyes: @sep@',
 	'decoupe:aide2' => '&Agrave;lies:&nbsp;@sep@',
-	'decoupe:description' => 'Talla la visualitzaci&oacute; p&uacute;blica d\'un article en diverses p&agrave;gines gr&agrave;cies a una paginaci&oacute; autom&agrave;tica. Col&middot;loqueu simplement a dins del vostre article quatre signes mes consecutius (<code>++++</code>) on s\'hagi de realitzar el tall.
+	'decoupe:description' => '<MODIF>Talla la visualitzaci&oacute; p&uacute;blica d\'un article en diverses p&agrave;gines gr&agrave;cies a una paginaci&oacute; autom&agrave;tica. Col&middot;loqueu simplement a dins del vostre article quatre signes mes consecutius (<code>++++</code>) on s\'hagi de realitzar el tall.
 _ Si feu servir aquest separador a l\'interior d\'etiquetes &lt;pestanyes&gt; i &lt;/pestanyes&gt; obtindreu un joc de pestanyes.
 _ A dins dels esquelets: teniu a la vostra disposici&oacute; les noves etiquetes #ONGLETS_DEBUT, #ONGLETS_TITRE i #ONGLETS_FIN.
 _ Aquesta eina es pot completar amb {Un sumari pels vostres articles}.',
@@ -196,13 +196,15 @@ Atenci&oacute;: a dins dels f&ograve;rums, peticions, flux sindicats, etc., la g
 	'guillemets:nom' => 'Cometes tipogr&agrave;fiques',
 
 	// H
-	'help' => '<MODIF>{{Aquesta p&agrave;gina nom&eacute;s &eacute;s accessible pels responsables del lloc.}}<p>D&oacute;na acc&eacute;s a les diferents funcions suplement&agrave;ries aportades pel plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p><p>Versi&oacute; local: @version@@distant@<br/>@pack@</p><p>Enlla&ccedil;os de documentaci&oacute;:<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reiniciacions:
-_ • [Eines amagades|Tornar a l\'aparen&ccedil;a inicial d\'aquesta p&agrave;gina->@hide@]
-_ • [De tot el plugin|Tornar a l\'estat inicial del plugin->@reset@]@install@
-</p>',
+	'help' => '{{Aquesta p&agrave;gina nom&eacute;s &eacute;s accessible pels responsables del lloc.}}<p>Permet la configuraci&oacute; de les diferents funcions suplement&agrave;ries aportades pel plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.',
 	'help0' => '{{Aquesta p&agrave;gina &eacute;s nom&eacute;s accessible als responsables del lloc.}}<p>Permet accedir a les diferents funcions suplement&agrave;ries aportades pel plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p><p>Enlla&ccedil; de documentaci&oacute;:<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]</p><p>Reiniciaci&oacute;:
 _ • [De tot el plugin->@reset@]
 </p>',
+	'help2' => 'Versi&oacute; local: @version@',
+	'help3' => '<p>Enlla&ccedil;os de documentaci&oacute;:<br/>•[Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reiniciacions:
+_ • [Eines amagades|Tornar a l\'aparen&ccedil;a inicial d\'aquesta p&agrave;gina->@hide@]
+_ • [De tot el plugin|Tornar a l\'estat inicial del plugin->@reset@]@install@
+</p></p>',
 
 	// I
 	'icone_visiter:description' => 'Substitueix la imatge del bot&oacute; est&agrave;ndard &laquo;&nbsp;Visitar&nbsp;&raquo; (a dalt a la dreta d\'aquesta p&agrave;gina) pel logotip del lloc, si existeix.
@@ -225,6 +227,14 @@ Per definir aquest logotip, dirigiu-vos a la p&agrave;gina &laquo;&nbsp;Configur
 	'introduction:nom' => 'Etiqueta #INTRODUCTION',
 
 	// J
+	'jcorner:description' => '&laquo;&nbsp;Jolis Coins&nbsp;&raquo; &eacute;s una eina que permet modificar f&agrave;cilment l\'aspecte de les cantonades dels vostres {{requadres acolorits}} a la part p&uacute;blica del vostre lloc. Tot &eacute;s possible, o gaireb&eacute; tot!
+_ Podeu veure\'n el resultat a la p&agrave;gina seg&uuml;ent: [->http://www.malsup.com/jquery/corner/].
+
+Llisteu m&eacute;s avall els objectes del vostre esquelet que cal arrodonir utilitzant la sintaxi CSS (.class, #id, etc. ). Feu servir el signe &laquo;&nbsp;=&nbsp;&raquo; per especificar el comandament jQuery que s\'ha de fer servir i una doble barra inclinada (&laquo;&nbsp;//&nbsp;&raquo;) pels comentaris. En abs&egrave;ncia del signe igual, s\'aplicaran les cantonades rodones (equivalent a: <code>.ma_classe = .corner()</code>).[[%jcorner_classes%]]
+
+Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round Corners}. El Ganivet Su&iacute;s es pot instal&middot;lar directament si marqueu amb una creu la casella seg&uuml;ent. [[%jcorner_plugin%]]',
+	'jcorner:nom' => 'Jolis Coins',
+	'jcorner_plugin' => '&laquo;&nbsp;Round Corners plugin&nbsp;&raquo;',
 	'js_defaut' => 'Per defecte',
 	'js_jamais' => 'Mai',
 	'js_toujours' => 'Sempre',
@@ -245,6 +255,8 @@ Per definir aquest logotip, dirigiu-vos a la p&agrave;gina &laquo;&nbsp;Configur
 	'label:glossaire_js' => 'T&egrave;cnica utilitzada:',
 	'label:glossaire_limite' => 'N&uacute;mero m&agrave;xim d\'enlla&ccedil;os creats:',
 	'label:insertions' => 'Correccions autom&agrave;tiques:',
+	'label:jcorner_classes' => 'Millorar les cantonades dels seg&uuml;ents selectors:',
+	'label:jcorner_plugin' => 'Instal&middot;lar el plugin {jQuery} seg&uuml;ent:',
 	'label:lgr_introduction' => 'Llargada del resum:',
 	'label:lgr_sommaire' => 'Llargada del sumari (9 a 99):',
 	'label:lien_introduction' => 'Punts de continuaci&oacute; clicables:',
@@ -400,7 +412,7 @@ Aquest sumari pot ser acoblat a: {Tallat en p&agrave;gines i pestanyes}.',
 Llisteu aqu&iacute; les seq&uuml;&egrave;ncies prohibides @_CS_ASTER@ separant-les per espais. [[%spam_mots%]]
 @_CS_ASTER@Per especificar una paraula sencera, poseu-la entre par&egrave;ntesi. En cas d\'una expressi&oacute; amb espais, poseu-la entre cometes. ',
 	'spam:nom' => 'Lluita contra l\'SPAM',
-	'spip_cache:description' => '@puce@ Per defecte, SPIP calcula totes les p&agrave;gines p&uacute;bliques i les situa a la mem&ograve;ria cau per tal d\'accelerar la consulta. Desactivar temporalment la mem&ograve;ria cau pot ajudar al desenvolupament del lloc.[[%radio_desactive_cache3%]]@puce@ La mem&ograve;ria cau ocupa un cert espai del disc i SPIP pot limitar-ne la import&agrave;ncia. Un valor buit o igual a 0 significa que no s\'aplica cap quota.[[%quota_cache% Mo]]@puce@ Si l\'etiqueta #CACHE no es troba als vostres esquelets locals, SPIP considera per defecte que la mem&ograve;ria cau d\'una p&agrave;gina t&eacute; una durada de vida de 24 hores abans de tornar-la a calcular. Per tal de gestionar millor l&iexcl;enc&agrave;rrec del vostre servidor, podeu modificar aqu&iacute; aquest valor.[[%duree_cache% heures]]@puce@ Si teniu diversos llocs mutualitzats, podeu especificar aqu&iacute; el valor per defecte que tindran en compte tots els llocs locals (SPIP 1.93).[[%duree_cache_mutu% heures]]',
+	'spip_cache:description' => '<MODIF>@puce@ Per defecte, SPIP calcula totes les p&agrave;gines p&uacute;bliques i les situa a la mem&ograve;ria cau per tal d\'accelerar la consulta. Desactivar temporalment la mem&ograve;ria cau pot ajudar al desenvolupament del lloc.[[%radio_desactive_cache3%]]@puce@ La mem&ograve;ria cau ocupa un cert espai del disc i SPIP pot limitar-ne la import&agrave;ncia. Un valor buit o igual a 0 significa que no s\'aplica cap quota.[[%quota_cache% Mo]]@puce@ Si l\'etiqueta #CACHE no es troba als vostres esquelets locals, SPIP considera per defecte que la mem&ograve;ria cau d\'una p&agrave;gina t&eacute; una durada de vida de 24 hores abans de tornar-la a calcular. Per tal de gestionar millor l&iexcl;enc&agrave;rrec del vostre servidor, podeu modificar aqu&iacute; aquest valor.[[%duree_cache% heures]]@puce@ Si teniu diversos llocs mutualitzats, podeu especificar aqu&iacute; el valor per defecte que tindran en compte tots els llocs locals (SPIP 1.93).[[%duree_cache_mutu% heures]]',
 	'spip_cache:nom' => 'SPIP i la mem&ograve;ria cau…',
 	'stat_auteurs' => 'Els autors en stat',
 	'statuts_spip' => 'Nom&eacute;s els statuts SPIP seg&uuml;ents:',
@@ -417,7 +429,7 @@ Llisteu aqu&iacute; les seq&uuml;&egrave;ncies prohibides @_CS_ASTER@ separant-l
 	'tous' => 'Tots',
 	'toutes_couleurs' => 'Els 36 colors dels estils CSS :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Blocs multiling&uuml;es&nbsp;: <b><:trad:></b>',
-	'toutmulti:description' => 'Introdueix la drecera <code><:un_texte:></code> per introduir lliurement blocs multiling&uuml;es en un article.
+	'toutmulti:description' => '<MODIF>Introdueix la drecera <code><:un_texte:></code> per introduir lliurement blocs multiling&uuml;es en un article.
 _ La funci&oacute; SPIP utilitzada &eacute;s: <code>_T(\'un_texte\', 
 flux)</code>.
 _ No oblideu verificar que \'un_texte\' estigui ben definit als fitxers de llengua. ',
@@ -453,8 +465,13 @@ M&eacute;s informacions: [->http://www.spip.net/fr_article765.html]
 [[%spip_script%]]
 ',
 	'type_urls:nom' => 'Format dels URLs',
-	'typo_exposants:description' => '<MODIF>Textos francesos: millora el retorn tipogr&agrave;fic de les abreviacions corrents, exposant els elements necessaris (aix&iacute;, {<acronym>Mme</acronym>} esdev&eacute; {M<sup>me</sup>}) i corregint-ne els errors normals ({<acronym>2&egrave;me</acronym>} o  {<acronym>2me</acronym>}, per exemple, esdevenen {2<sup>e</sup>}, &uacute;nica abreviaci&oacute; correcta).
-_ Les abreviacions obtingudes s&oacute;n conformes a les de la Impremta nacional tal com s\'indiquen al {L&egrave;xic de les regles tipogr&agrave;fiques en &uacute;s a la Impremta nacional} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l\'Imprimerie nationale, Paris, 2002).',
+	'typo_exposants:description' => '((Textos francesos)): millora el retorn tipogr&agrave;fic de les abreviacions corrents, exposant els elements necessaris (aix&iacute;, {<acronym>Mme</acronym>} esdev&eacute; {M<sup>me</sup>}) i corregint-ne els errors normals ({<acronym>2&egrave;me</acronym>} o  {<acronym>2me</acronym>}, per exemple, esdevenen {2<sup>e</sup>}, &uacute;nica abreviaci&oacute; correcta).
+
+Les abreviacions obtingudes s&oacute;n conformes a les de la Impremta nacional tal com s\'indiquen al {L&egrave;xic de les regles tipogr&agrave;fiques en &uacute;s a la Impremta nacional} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l\'Imprimerie nationale, Paris, 2002).
+
+Tamb&eacute; es tracten les seg&uuml;ents expressions: : <html>Dr, Pr, Mgr, St, Bx, m2, m3, Mn, Md, St&eacute;, &Eacute;ts, Vve, bd, Cie, 1o, 2o, etc.</html>
+
+{{Textos anglesos}} : manera d\'exposar els n&uacute;meros ordinals: <html>1st, 2nd</html>, etc.',
 	'typo_exposants:nom' => 'Super&iacute;ndexs',
 
 	// U
@@ -473,10 +490,18 @@ _ Les abreviacions obtingudes s&oacute;n conformes a les de la Impremta nacional
 	'version_a_jour' => 'La vostra versi&oacute; est&agrave; al dia.',
 	'version_distante' => 'Versi&oacute; distant...',
 	'version_nouvelle' => 'Nova versi&oacute;: @version@',
+	'version_revision' => 'R&eacute;visi&oacute;: @revision@',
+	'version_update' => 'Actualitzaci&oacute; autom&agrave;tica',
+	'version_update_title' => 'Descarrega l\'&uacute;ltima versi&oacute; del plugin i comen&ccedil;ar la seva actualitzaci&oacute; autom&agrave;tica',
 	'verstexte:description' => '2 filtres pels vostres esquelets, permetent produir p&agrave;gines m&eacute;s lleugeres.
 _ version_texte: extreu el contingut text d\'una p&agrave;gina html excepte algunes etiquetes elementals.
 _ version_plein_texte : extreu el contingut text d\'una p&agrave;gina html per retornar text complet. ',
 	'verstexte:nom' => 'Versi&oacute; text',
+	'visiteurs_connectes:description' => 'Ofereix una petita eina pel vostre esquelet que mostra el n&uacute;mero de visitants que hi ha connectats al vostre lloc p&uacute;blic.
+
+Afegiu simplement <code><INCLURE{fond=fonds/visiteurs_connectes}></code> a les vostres p&agrave;gines.',
+	'visiteurs_connectes:nom' => 'Visitants connectats',
+	'voir' => 'Veure: @voir@',
 	'votre_choix' => 'La vostre elecci&oacute;:',
 
 	// X

@@ -128,7 +128,7 @@ Le param&egrave;tre {type} ci-dessus peut prendre trois valeurs :
 	'decoration:nom' => 'D&eacute;coration',
 	'decoupe:aide' => 'Bloc d\'onglets : <b>&lt;onglets>&lt;/onglets></b><br/>S&eacute;parateur de pages ou d\'onglets&nbsp;: @sep@',
 	'decoupe:aide2' => 'Alias&nbsp;:&nbsp;@sep@',
-	'decoupe:description' => 'D&eacute;coupe l\'affichage public d\'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. Places simplement dans ton article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l\'endroit qui doit recevoir la coupure.
+	'decoupe:description' => '<MODIF>D&eacute;coupe l\'affichage public d\'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. Places simplement dans ton article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l\'endroit qui doit recevoir la coupure.
 _ Si tu utilises ce s&eacute;parateur &agrave; l\'int&eacute;rieur des balises &lt;onglets&gt; et &lt;/onglets&gt; alors tu obtiendras un jeu d\'onglets.
 _ Dans les squelettes : tu as &agrave; ta disposition les nouvelles balises #ONGLETS_DEBUT, #ONGLETS_TITRE et #ONGLETS_FIN.
 _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour tes articles}.',
@@ -194,12 +194,14 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'guillemets:nom' => 'Guillemets typographiques',
 
 	// H
-	'help' => '<MODIF>{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p><p>Version locale : @version@@distant@<br/>@pack@</p><p>Liens de documentation :<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
-_ • [Des outils cach&eacute;s|Revenir &agrave; l\'apparence initiale de cette page->@hide@]
-_ • [De tout le plugin|Revenir &agrave; l\'&eacute;tat initial du plugin->@reset@]@install@
-</p>',
+	'help' => '{{Cette page est uniquement accessible aux responsables du site.}} Elle permet la configuration des diff&eacute;rentes fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.',
 	'help0' => '{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p><p>Lien de documentation :<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]</p><p>R&eacute;initialisation :
 _ • [De tout le plugin->@reset@]
+</p>',
+	'help2' => 'Version locale : @version@',
+	'help3' => '<p>Liens de documentation :<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
+_ • [Des outils cach&eacute;s|Revenir &agrave; l\'apparence initiale de cette page->@hide@]
+_ • [De tout le plugin|Revenir &agrave; l\'&eacute;tat initial du plugin->@reset@]@install@
 </p>',
 
 	// I
@@ -223,6 +225,14 @@ Pour d&eacute;finir ce logo, vas sur la page &laquo;&nbsp;Configuration du site&
 	'introduction:nom' => 'Balise #INTRODUCTION',
 
 	// J
+	'jcorner:description' => '&laquo;&nbsp;Jolis Coins&nbsp;&raquo; est un outil permettant de modifier facilement l\'aspect des coins de vos {{cadres color&eacute;s}} en partie publique de votre site. Tout est possible, ou presque !
+_ Voir le r&eacute;sultat sur cette page : [->http://www.malsup.com/jquery/corner/].
+
+Liste ci-dessous les objets de ton squelette &agrave; arrondir en utilisant la syntaxe CSS (.class, #id, etc. ). Utilise le le signe &laquo;&nbsp;=&nbsp;&raquo; pour sp&eacute;cifier la commande jQuery &agrave; utiliser et un double slash (&laquo;&nbsp;//&nbsp;&raquo;) pour les commentaires. En absence du signe &eacute;gal, des coins ronds seront appliqu&eacute;s (&eacute;quivalent &agrave; : <code>.ma_classe = .corner()</code>).[[%jcorner_classes%]]
+
+Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corners}. Le Couteau Suisse peut l\'installer directement si tu coches la case suivante. [[%jcorner_plugin%]]',
+	'jcorner:nom' => 'Jolis Coins',
+	'jcorner_plugin' => '&laquo;&nbsp;Round Corners plugin&nbsp;&raquo;',
 	'js_defaut' => 'D&eacute;faut',
 	'js_jamais' => 'Jamais',
 	'js_toujours' => 'Toujours',
@@ -243,6 +253,8 @@ Pour d&eacute;finir ce logo, vas sur la page &laquo;&nbsp;Configuration du site&
 	'label:glossaire_js' => 'Technique utilis&eacute;e :',
 	'label:glossaire_limite' => 'Nombre maximal de liens cr&eacute;&eacute;s :',
 	'label:insertions' => 'Corrections automatiques :',
+	'label:jcorner_classes' => 'Am&eacute;liorer les coins des s&eacute;lecteurs suivantes :',
+	'label:jcorner_plugin' => 'Installer le plugin {jQuery} suivant :',
 	'label:lgr_introduction' => 'Longueur du r&eacute;sum&eacute; :',
 	'label:lgr_sommaire' => 'Largeur du sommaire (9 &agrave; 99) :',
 	'label:lien_introduction' => 'Points de suite cliquables :',
@@ -398,7 +410,7 @@ Ce sommaire peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe en pages et ong
 Listes ici les s&eacute;quences interdites@_CS_ASTER@ en les s&eacute;parant par des espaces. [[%spam_mots%]]
 @_CS_ASTER@Pour sp&eacute;cifier un mot entier, mets-le entre paranth&egrave;ses. Pour une expression avec des espaces, place-la entre guillemets.',
 	'spam:nom' => 'Lutte contre le SPAM',
-	'spip_cache:description' => '@puce@ Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.[[%radio_desactive_cache3%]]@puce@ Le cache occupe un certain espace disque et SPIP peut en limiter l\'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu\'aucun quota ne s\'applique.[[%quota_cache% Mo]]@puce@ Si la balise #CACHE n\'est pas trouv&eacute;e dans tes squelettes locaux, SPIP consid&egrave;re par d&eacute;faut que le cache d\'une page a une dur&eacute;e de vie de 24 heures avant de la recalculer. Afin de mieux g&eacute;rer la charge de ton serveur, tu peux ici modifier cette valeur.[[%duree_cache% heures]]@puce@ Si tu as plusieurs sites en mutualisation, tu peux sp&eacute;cifier ici la valeur par d&eacute;faut prise en compte par tous les sites locaux (SPIP 1.93).[[%duree_cache_mutu% heures]]',
+	'spip_cache:description' => '<MODIF>@puce@ Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.[[%radio_desactive_cache3%]]@puce@ Le cache occupe un certain espace disque et SPIP peut en limiter l\'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu\'aucun quota ne s\'applique.[[%quota_cache% Mo]]@puce@ Si la balise #CACHE n\'est pas trouv&eacute;e dans tes squelettes locaux, SPIP consid&egrave;re par d&eacute;faut que le cache d\'une page a une dur&eacute;e de vie de 24 heures avant de la recalculer. Afin de mieux g&eacute;rer la charge de ton serveur, tu peux ici modifier cette valeur.[[%duree_cache% heures]]@puce@ Si tu as plusieurs sites en mutualisation, tu peux sp&eacute;cifier ici la valeur par d&eacute;faut prise en compte par tous les sites locaux (SPIP 1.93).[[%duree_cache_mutu% heures]]',
 	'spip_cache:nom' => 'SPIP et le cache…',
 	'stat_auteurs' => 'Les auteurs en stat',
 	'statuts_spip' => 'Uniquement les statuts SPIP suivants :',
@@ -415,7 +427,7 @@ Listes ici les s&eacute;quences interdites@_CS_ASTER@ en les s&eacute;parant par
 	'tous' => 'Tous',
 	'toutes_couleurs' => 'Les 36 couleurs des styles css :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Blocs multilingues&nbsp;: <b><:trad:></b>',
-	'toutmulti:description' => 'Introduit le raccourci <code><:un_texte:></code> pour introduire librement des blocs multi-langues dans un article.
+	'toutmulti:description' => '<MODIF>Introduit le raccourci <code><:un_texte:></code> pour introduire librement des blocs multi-langues dans un article.
 _ La fonction SPIP utilis&eacute;e est : <code>_T(\'un_texte\', 
 flux)</code>.
 _ N\'oublies pas de v&eacute;rifier que \'un_texte\' est bien d&eacute;fini dans les fichiers de langue.',
@@ -455,8 +467,13 @@ Plus d\'infos : [->http://www.spip.net/fr_article765.html]
 @puce@ {{Uniquement si tu utilises les URLS {arborescentes} ci-dessus}}, alors il t\'es possible d\'en personnaliser le rendu :</p>
 [[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]',
 	'type_urls:nom' => 'Format des URLs',
-	'typo_exposants:description' => '<MODIF>Textes fran&ccedil;ais : am&eacute;liore le rendu typographique des abr&eacute;viations courantes, en mettant en exposant les &eacute;l&eacute;ments n&eacute;cessaires (ainsi, {<acronym>Mme</acronym>} devient {M<sup>me</sup>}) et en corrigeant les erreurs courantes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, par exemple, deviennent {2<sup>e</sup>}, seule abr&eacute;viation correcte).
-_ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l\'Imprimerie nationale telles qu\'indiqu&eacute;es dans le {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l\'Imprimerie nationale, Paris, 2002).',
+	'typo_exposants:description' => '{{Textes fran&ccedil;ais}} : am&eacute;liore le rendu typographique des abr&eacute;viations courantes, en mettant en exposant les &eacute;l&eacute;ments n&eacute;cessaires (ainsi, {<acronym>Mme</acronym>} devient {M<sup>me</sup>}) et en corrigeant les erreurs courantes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, par exemple, deviennent {2<sup>e</sup>}, seule abr&eacute;viation correcte).
+
+Les abr&eacute;viations obtenues sont conformes &agrave; celles de l\'Imprimerie nationale telles qu\'indiqu&eacute;es dans le {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l\'Imprimerie nationale, Paris, 2002).
+
+Sont &eacute;galement trait&eacute;es les expressions suivantes : <html>Dr, Pr, Mgr, St, Bx, m2, m3, Mn, Md, St&eacute;, &Eacute;ts, Vve, bd, Cie, 1o, 2o, etc.</html>
+
+{{Textes anglais}} : mise en exposant des nombres ordinaux : <html>1st, 2nd</html>, etc.',
 	'typo_exposants:nom' => 'Exposants typographiques',
 
 	// U
@@ -475,10 +492,18 @@ _ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l\'Imprimer
 	'version_a_jour' => 'Ta version est &agrave; jour.',
 	'version_distante' => 'Version distante...',
 	'version_nouvelle' => 'Nouvelle version : @version@',
+	'version_revision' => 'R&eacute;vision : @revision@',
+	'version_update' => 'Mise &agrave; jour automatique',
+	'version_update_title' => 'T&eacute;l&eacute;charge la derni&egrave;re version du plugin et lance sa mise &agrave; jour automatique',
 	'verstexte:description' => '2 filtres pour tes squelettes, permettant de produire des pages plus l&eacute;g&egrave;res.
 _ version_texte : extrait le contenu texte d\'une page html &agrave; l\'exclusion de quelques balises &eacute;l&eacute;mentaires.
 _ version_plein_texte : extrait le contenu texte d\'une page html pour rendre du texte plein.',
 	'verstexte:nom' => 'Version texte',
+	'visiteurs_connectes:description' => 'Offre une noisette pour ton squelette qui affiche le nombre de visiteurs connect&eacute;s sur le site public.
+
+Ajoute simplement <code><INCLURE{fond=fonds/visiteurs_connectes}></code> dans tes pages.',
+	'visiteurs_connectes:nom' => 'Visiteurs connect&eacute;s',
+	'voir' => 'Voir : @voir@',
 	'votre_choix' => 'Ton choix :',
 
 	// X

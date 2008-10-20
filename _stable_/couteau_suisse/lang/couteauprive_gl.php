@@ -128,7 +128,7 @@ O par&aacute;metro {type} seguinte pode ter tres valores:
 	'decoration:nom' => 'Decoraci&oacute;n',
 	'decoupe:aide' => 'Bloque de pestanas : <b>&lt;onglets>&lt;/onglets></b><br/>Separador de p&aacute;xinas ou pestanas&nbsp;: @sep@',
 	'decoupe:aide2' => 'Alias&nbsp;:&nbsp;@sep@',
-	'decoupe:description' => 'Partir a presentaci&oacute;n p&uacute;blica dun artigo en varias p&aacute;xinas merc&eacute; a unha paxinaci&oacute;n autom&aacute;tica. Sit&uacute;e simplemente no seu artigo catro signos de m&aacute;is consecutivos (<code>++++</code>) no lugar que debe recibir o corte.
+	'decoupe:description' => '<MODIF>Partir a presentaci&oacute;n p&uacute;blica dun artigo en varias p&aacute;xinas merc&eacute; a unha paxinaci&oacute;n autom&aacute;tica. Sit&uacute;e simplemente no seu artigo catro signos de m&aacute;is consecutivos (<code>++++</code>) no lugar que debe recibir o corte.
 _ De utilizar este separador no interior das balizas &lt;pestanas&gt; e &lt;/pestanas&gt; obter&aacute; un xogo de pestanas.
 _ Nos esqueletos : ten &aacute; s&uacute;a disposici&oacute;n as novas balizas #ONGLETS_DEBUT, #ONGLETS_TITRE e #ONGLETS_FIN.
 _ Esta utilidade pode ser emparellada cun {Sumario para os seus artigos}.',
@@ -194,12 +194,14 @@ Aviso : nos foros, petici&oacute;ns, fluxos afiliados, etc., a xesti&oacute;n do
 	'guillemets:nom' => 'V&iacute;rgulas tipogr&aacute;ficas',
 
 	// H
-	'help' => '<MODIF>{{Esta p&aacute;xina &eacute; unicamente accesible para o responsable do web.}}<p>D&aacute; acceso &aacute;s diferentes funci&oacute;ns suplementarias achegadas polo m&oacute;dulo &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p><p>Version local : @version@@distant@<br/>@pack@</p><p>Ligaz&oacute;ns de documentaci&oacute;n :<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
-_ • [Ferramentas de cach&eacute;|Volver &aacute; apariencia inicial desta p&aacute;xina->@hide@]
-_ • [De todo o m&oacute;dulo|Volver ao estado inicial do m&oacute;dulo->@reset@]@install@
-</p>',
+	'help' => '{{Esta p&aacute;xina s&oacute; &eacute; accesible para o responsable do web.}}<p>D&aacute; acceso &aacute;s diferentes funci&oacute;ns suplementarias achegadas polo m&oacute;dulo &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.',
 	'help0' => '{{Esta p&aacute;xina s&oacute; &eacute; acces&iacute;bel para os respons&aacute;beis do web.}}<p>D&aacute; acceso a diferentes funci&oacute;ns suplementarias achegadas polo m&oacute;dulo &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p><p>Ligaz&oacute;n de documentaci&oacute;n :<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]</p><p>Reinicializaci&oacute;n:
 _ • [De todo o m&oacute;dulo->@reset@]
+</p>',
+	'help2' => 'Versi&oacute;n local: @version@',
+	'help3' => '<p>Ligaz&oacute;ns de documentaci&oacute;n:<br/>• [A&nbsp;Navalla&nbsp;Suiza->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reinicios:
+_ • [Ferramentas cacheadas|Volver &aacute; apariencia inicial desta p&aacute;xina->@hide@]
+_ • [De todo o m&oacute;dulo|Volver ao estado inicial do m&oacute;dulo->@reset@]@install@
 </p>',
 
 	// I
@@ -223,6 +225,14 @@ Para definir o logo, vaia &aacute; p&aacute;xina &laquo;&nbsp;Configuraci&oacute
 	'introduction:nom' => 'Baliza #INTRODUCTION',
 
 	// J
+	'jcorner:description' => '&laquo;&nbsp;Jolis Coins&nbsp;&raquo; &eacute; unha ferramenta que permite modificar doadamente o aspecto das esquinas dos {{cadros coloreados}} na parte p&uacute;blica do seu web. Todo &eacute; posible ou case!
+_ Vexa o resultado nest&aacute; p&aacute;xina: [->http://www.malsup.com/jquery/corner/].
+
+Liste aqu&iacute; abaixo os obxectos do seu esqueleto a redondear usando a sintaxe CSS (.class, #id, etc. ). Utilice o signo &laquo;&nbsp;=&nbsp;&raquo; para especificar o comando jQuery a usar e unha dobre barra (&laquo;&nbsp;//&nbsp;&raquo;) para o comentarios. En ausencia do signo igual, as esquinas redondeadas ser&aacute;n aplicadas (equivalent e : <code>.ma_classe = .corner()</code>).[[%jcorner_classes%]]
+
+Atenci&oacute;n, esta ferramenta, precisa para funcionar do m&oacute;dulo {jQuery} : {Round Corners}. A Navalla Su&iacute;za p&oacute;dea instalar directamente se marca a caixa seguinte. [[%jcorner_plugin%]]',
+	'jcorner:nom' => 'Jolis Coins',
+	'jcorner_plugin' => '&laquo;M&oacute;dulo&nbsp;Round Corners&nbsp;&raquo;',
 	'js_defaut' => 'Predeterminado',
 	'js_jamais' => 'Nunca',
 	'js_toujours' => 'Sempre',
@@ -243,6 +253,8 @@ Para definir o logo, vaia &aacute; p&aacute;xina &laquo;&nbsp;Configuraci&oacute
 	'label:glossaire_js' => 'T&eacute;cnica usada :',
 	'label:glossaire_limite' => 'N&uacute;mero m&aacute;ximo de ligaz&oacute;ns creadas :',
 	'label:insertions' => 'Correcci&oacute;ns autom&aacute;ticas :',
+	'label:jcorner_classes' => 'Mellorar as esquinas dos selectores seguintes:',
+	'label:jcorner_plugin' => 'Instalar o m&oacute;dulo {jQuery} seguinte:',
 	'label:lgr_introduction' => 'Lonxitude do resumo :',
 	'label:lgr_sommaire' => 'Lonxitude do sumario (9 a 99) :',
 	'label:lien_introduction' => 'Puntos suspensivos de continuidade activos :',
@@ -398,7 +410,7 @@ Este sumario pode ser aparellado con : {Partici&oacute;n en p&aacute;xinas e pes
 Liste aqu&iacute; as secuencias prohibidas @_CS_ASTER@ separ&aacute;ndoas por espazos. [[%spam_mots%]]
 @_CS_ASTER@Para especificar unha palabra enteira, p&oacute;&ntilde;aa entre par&eacute;nteses. Para unha expresi&oacute;n con espazos, sit&uacute;ea entre comas.',
 	'spam:nom' => 'Loita contra o SPAM',
-	'spip_cache:description' => '@puce@ De modo predeterminado, SPIP calcula todas as p&aacute;xinas p&uacute;blicas e as sit&uacute;a na cach&eacute; co fin de acelerar a consulta. Desactivar temporalmente a cach&eacute; pode axudar ao desenvolvemento do web.[[%radio_desactive_cache3%]]@puce@ A cach&eacute; ocupa un certo espazo de disco e SPIP pode limitar o tama&ntilde;o. Un valor baleiro ou igual a 0 significa que non se aplica ningunha cota.[[%quota_cache% Mo]]@puce@ Se a baliza #CACHE non se encontra nos seus esqueletos, SPIP considera de modo predeterminado que a cach&eacute; dunha p&aacute;xina ten unha duraci&oacute;n de vida de 24 horas antes de a recalcular. Co fin de xestionar mellor a carga do seu servidor, pode modificar aqu&iacute; este valor.[[%duree_cache% heures]]@puce@ Se vostede ten varios webs en mutualizaci&oacute;n, pode especificar aqu&iacute; o valor predeterminado tomado en conta por todos os web locais (SPIP 1.93).[[%duree_cache_mutu% heures]]',
+	'spip_cache:description' => '<MODIF>@puce@ De modo predeterminado, SPIP calcula todas as p&aacute;xinas p&uacute;blicas e as sit&uacute;a na cach&eacute; co fin de acelerar a consulta. Desactivar temporalmente a cach&eacute; pode axudar ao desenvolvemento do web.[[%radio_desactive_cache3%]]@puce@ A cach&eacute; ocupa un certo espazo de disco e SPIP pode limitar o tama&ntilde;o. Un valor baleiro ou igual a 0 significa que non se aplica ningunha cota.[[%quota_cache% Mo]]@puce@ Se a baliza #CACHE non se encontra nos seus esqueletos, SPIP considera de modo predeterminado que a cach&eacute; dunha p&aacute;xina ten unha duraci&oacute;n de vida de 24 horas antes de a recalcular. Co fin de xestionar mellor a carga do seu servidor, pode modificar aqu&iacute; este valor.[[%duree_cache% heures]]@puce@ Se vostede ten varios webs en mutualizaci&oacute;n, pode especificar aqu&iacute; o valor predeterminado tomado en conta por todos os web locais (SPIP 1.93).[[%duree_cache_mutu% heures]]',
 	'spip_cache:nom' => 'SPIP e a memoria cach&eacute;…',
 	'stat_auteurs' => 'Os estado dos autores',
 	'statuts_spip' => 'Unicamente os estados SPIP seguintes :',
@@ -415,7 +427,7 @@ Liste aqu&iacute; as secuencias prohibidas @_CS_ASTER@ separ&aacute;ndoas por es
 	'tous' => 'Todos',
 	'toutes_couleurs' => 'As 36 cores dos estilos css :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Bloques multiling&uuml;es&nbsp;: <b><:trad:></b>',
-	'toutmulti:description' => 'Introduce o atallo <code><:un_texte:></code> para introducir libremente bloques multiling&uuml;es nun artigo.
+	'toutmulti:description' => '<MODIF>Introduce o atallo <code><:un_texte:></code> para introducir libremente bloques multiling&uuml;es nun artigo.
 _ A funci&oacute;n SPIP usada &eacute; : <code>_T(\'un_texte\', 
 flux)</code>.
 _ Non esqueza verificar \'un_texte\' est&aacute; ben definido nos ficheiros de lingua.',
@@ -452,8 +464,8 @@ M&aacute;is info : [->http://www.spip.net/fr_article765.html]
 @puce@ {{Unicamente se vostede emprega os URL {arborescentes} tal e como segue}}, ent&oacute;n &eacute; posible personalizar o resultado :</p>
 [[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]',
 	'type_urls:nom' => 'Formato das URL',
-	'typo_exposants:description' => '<MODIF>Textos franceses : mellora o rendementos tipogr&aacute;fico das abreviaturas correntes, metendo en super&iacute;ndice os elementos necesarios (as&iacute;, {<acronym>Mme</acronym>} produce {M<sup>me</sup>}) e corrixindo os erros correntes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, por exemplo, produce {2<sup>e</sup>}, s&oacute; abreviatura correcta).
-_ As abreviaturas obtidas est&aacute;n conformes con aquelas da Imprenta nacional como constan en {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (artigo &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, imprentas da Imprimerie nationale, Paris, 2002).',
+	'typo_exposants:description' => 'Textos franceses : mellora o rendemento tipogr&aacute;fico das abreviaturas correntes, metendo en super&iacute;ndice os elementos necesarios (as&iacute;, {<acronym>Mme</acronym>} produce {M<sup>me</sup>}) e corrixindo os erros correntes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, por exemplo, produce {2<sup>e</sup>}, s&oacute; abreviatura correcta).
+As abreviaturas obtidas est&aacute;n conformes con aquelas da Imprenta nacional como constan en {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (artigo &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, imprentas da Imprimerie nationale, Paris, 2002).',
 	'typo_exposants:nom' => 'Super&iacute;ndices tipogr&aacute;ficos',
 
 	// U
@@ -472,10 +484,18 @@ _ As abreviaturas obtidas est&aacute;n conformes con aquelas da Imprenta naciona
 	'version_a_jour' => 'A s&uacute;a versi&oacute;n est&aacute; actualizada.',
 	'version_distante' => 'Versi&oacute;n remota...',
 	'version_nouvelle' => 'Nova versi&oacute;n : @version@',
+	'version_revision' => 'Revisi&oacute;nn : @revision@',
+	'version_update' => 'Actualizaci&oacute;n autom&aacute;tica',
+	'version_update_title' => 'Descarga a &uacute;ltima versi&oacute;n do m&oacute;dulo e lanza a s&uacute;a posta ao d&iacute;a autom&aacute;tica',
 	'verstexte:description' => '2 filtros para os seus esqueletos, que permiten producir p&aacute;xinas m&aacute;is lixeiras.
 _ version_texte : extrae o contido de texto dunha p&aacute;xina html coa exclusi&oacute;n dalgunhas balizas elementares.
 _ version_plein_texte : extrae o contido de texto dunha p&aacute;xina html para manter o texto pleno.',
 	'verstexte:nom' => 'Versi&oacute;n de texto',
+	'visiteurs_connectes:description' => 'Ofrece un elemento para o seu esqueleto que mostra o n&uacute;mero de visitantes conectados ao web p&uacute;blico.
+
+Engada simplemente<code><INCLURE{fond=fonds/visiteurs_connectes}></code> nas s&uacute;as p&aacute;xinas.',
+	'visiteurs_connectes:nom' => 'Visitantes conectados',
+	'voir' => 'Ver: @voir@',
 	'votre_choix' => 'A s&uacute;a elecci&oacute;n :',
 
 	// X
