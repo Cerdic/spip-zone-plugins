@@ -12,4 +12,5 @@
 		<nom>insert_head</nom> 
 		<inclure>nuage_pipelines_public.php</inclure>
 	</pipeline>
+	<noisette>modeles/nuage.html</noisette>
 </plugin>
