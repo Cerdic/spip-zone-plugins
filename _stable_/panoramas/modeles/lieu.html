@@ -413,7 +413,7 @@ $(document).ready(function(){
 <ul class="innerfade">
 	
 <BOUCLE_imagestransition(DOCUMENTS)>[(#ID_DOCUMENT|inclusdans{#GET**{transition}}|?{' ',''})
-		<li>[(#FICHIER|image_reduire{0,375})]</li>
+		<li>[<img src="(#FICHIER)" height="#_visites:HAUTEUR" />]</li>
 	]</BOUCLE_imagestransition>
 </ul>
 </div>
