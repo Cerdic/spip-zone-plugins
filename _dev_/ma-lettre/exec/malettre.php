@@ -347,9 +347,7 @@ function exec_malettre(){
               if (spip_num_rows($result) == 0) {
 							                    echo "aucun";
               } else {	                							
-                echo "<form method='post'>";
-                echo "<input type='hidden' name='exec' value='$page' />";
-                echo "<input type='hidden' name='page' value='$page' />";
+                echo "<form method='post' action='?exec=malettre'>"; 
                 echo "<input type='hidden' name='action' value='letter_compose' />";
 								echo "<fieldset>\n";
 								echo "Sujet du mail :<i>(format spip non support&eacute;)</i><br />\n";
