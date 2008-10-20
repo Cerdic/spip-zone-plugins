@@ -8,7 +8,9 @@
 // Chargement de la librairie de fonctions
 find_in_path('bigbrother.php', 'inc/', true);
 
-// A chaque hit, on teste s'il faut enregistrer la visite ou pas
-bigbrother_tester_la_visite_du_site();
+
+// Si la config est ok, à chaque hit, on teste s'il faut enregistrer la visite ou pas
+if (lire_config('bigbrother/enregistrer_visite') == 'oui')
+	bigbrother_tester_la_visite_du_site();
 
 ?>

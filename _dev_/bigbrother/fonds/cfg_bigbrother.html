@@ -1,0 +1,25 @@
+<!-- descriptif=
+<:bigbrother:configuration_description:>
+-->
+<!-- titre=<:bigbrother:configuration_titre:> -->
+<!-- icone=images/bigbrother-24.png -->
+
+<form method="post" action="#SELF">
+		[(#ENV{_cfg_}|form_hidden)]
+	
+	<ul>	
+		<li class="choix">
+			<input type="checkbox" name="enregistrer_visite" id="enregistrer_visite" value="oui"[ checked="checked"(#ENV{enregistrer_visite}|=={oui}|oui)] />
+			<label for="enregistrer_visite"><:bigbrother:configuration_enregistrer_visite:></label>
+		</li>
+		<li class="choix">
+			<input type="checkbox" name="enregistrer_visite_article" id="enregistrer_visite_article" value="oui"[ checked="checked"(#ENV{enregistrer_visite_article}|=={oui}|oui)] />
+			<label for="enregistrer_visite_article"><:bigbrother:configuration_enregistrer_visite_article:></label>
+		</li>
+	
+		<li>
+			<input type="submit" name="_cfg_ok" value="<:oK:>" />
+			<input type="submit" name="_cfg_delete" value="<:supprimer:>" />
+		</li>
+	</ul>
+</form>

@@ -50,6 +50,8 @@ function bigbrother_declarer_tables_principales($tables_principales){
 		'field' => &$spip_visites_articles_auteurs_champs,
 		'key' => &$spip_visites_articles_auteurs_cles
 	);
+	
+	return $tables_principales;
 
 }
 

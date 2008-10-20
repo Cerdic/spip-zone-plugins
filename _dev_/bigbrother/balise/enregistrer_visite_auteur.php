@@ -10,6 +10,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function balise_ENREGISTRER_VISITE_AUTEUR($p) {
 	
+    // Si c'est pas configuré pour, on arrête
+    if (lire_config('bigbrother/enregistrer_visite_article') != 'oui')
+    	return '';
+    
+    
     return calculer_balise_dynamique(
     	$p,
     	'ENREGISTRER_VISITE_AUTEUR',

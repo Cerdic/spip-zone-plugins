@@ -6,11 +6,12 @@
  		RastaPopoulos - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version> <!-- Version du plugin -->
-		0.1
+		0.2
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 		dev
 	</etat>
+	<icon>images/bigbrother.png</icon>
 	<description>
 		Ce plugin garde en m&eacute;moire les visites de toutes les personnes ayant un compte.
 	</description>
@@ -22,13 +23,17 @@
 	<install>base/bigbrother_installation.php</install>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
-		<inclure>bigbrother_tables.php</inclure>
+		<inclure>base/bigbrother_tables.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
-		<inclure>bigbrother_tables.php</inclure>
+		<inclure>base/bigbrother_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>bigbrother_pipelines.php</inclure>
 	</pipeline>
 	
 	<!-- Big brother nécessite les plugins suivant -->
-	<necessite id='cfg' version="[1.0.4;]" />
+	<necessite id='cfg' version="[1.10.3;]" />
 </plugin>

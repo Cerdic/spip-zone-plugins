@@ -82,7 +82,7 @@ function bigbrother_enregistrer_la_sortie_d_un_article($id_article, $id_auteur, 
 		array(
 			'date_fin' => $date_fin
 		),
-		"id_article=$id_article AND id_auteur=$id_auteur AND date_debut='$date_debut'"
+		"id_article=".intval($id_article)." AND id_auteur=".intval($id_auteur)." AND date_debut=".sql_quote($date_debut)
 	);
 	
 	return $date_fin;
