@@ -106,16 +106,20 @@
 	<fieldset>
 		<legend>Choix de la rosace</legend>
 		<p>
-			<span class="demi"><label for="rosace_modele">Choisir un mod&agrave;le de rosace</label></span>
+			<span class="demi"><label for="rosace_modele">Choisir un mod&#232;le de rosace</label></span>
 			<select name="rosace_modele">
 				<option value=""[(#ENV{rosace_modele}|?{selected="selected",''})]>  </option>
 				<option value="bleu" [(#ENV{rosace_modele}|=={bleu}|?{selected="selected",''})]> Bleu argent </option>
 				<option value="or" [(#ENV{rosace_modele}|=={tispip}|?{selected="selected",''})]> Bleu et Or </option>
 				<option value="durzy" [(#ENV{rosace_modele}|=={durzy}|?{selected="selected",''})]> Durzy </option>
 				<option value="rouge" [(#ENV{rosace_modele}|=={rouge}|?{selected="selected",''})]> Rouge </option>
+				<option value="ipod" [(#ENV{rosace_modele}|=={ipod}|?{selected="selected",''})]> Ipod </option>
 				<option value="perso" [(#ENV{rosace_modele}|=={perso}|?{selected="selected",''})]> Personnalis&eacute; </option>
+	
 			</select>
+			<img src="[(#CHEMIN{img_pack/[(#ENV{rosace_modele})]/logo.png})]"  alt="Logo rosace"/>
 		</p>
+		
 	</fieldset>
 	<fieldset>
 		<legend>Taille et couleur de polices</legend>
