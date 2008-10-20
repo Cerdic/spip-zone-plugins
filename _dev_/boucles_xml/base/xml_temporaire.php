@@ -11,6 +11,11 @@
 
 // Definition des tables temporaires pour permettre la squeletisation des formulaires
 //
+		include_spip('base/create');
+		include_spip('base/abstract_sql');
+		include_spip('base/db_mysql');
+		include_spip('base/spiplistes_tables');
+		include_spip('inc/vieilles_defs');
 
 // Boucle XML
 $xml_field = array(
@@ -39,11 +44,12 @@ function xml_creer_tables_temporaires(){
 	static $ok=NULL;
 	if ($ok==NULL){
 		$ok=true;
+
+	
 		$nom = 'spip_xml';
 		$champs = $GLOBALS['tables_principales'][$nom]['field'];
 		$cles = $GLOBALS['tables_principales'][$nom]['key'];
 		spip_mysql_create($nom, $champs, $cles, true, true);
-		
 	}
 }
 
@@ -63,16 +69,21 @@ function xml_fill_table($xml_file, $is_code=false) {
 	} else {
 		$contenu= $xml_file;
 	}
-	include_spip('inc/plugin');
-	$tree = parse_plugin_xml($contenu);
-	spip_query("DELETE FROM spip_xml WHERE xml=".spip_abstract_quote($key));
+	$contenu = str_replace("<![CDATA[", "", $contenu);
+	$contenu = str_replace("]]>", "", $contenu);
+
+	include_spip("inc/xml");
+	$tree = spip_xml_parse($contenu);
+	@spip_query("DELETE FROM spip_xml WHERE xml=".spip_abstract_quote($key));
+	
 	xml_recurse_parse_to_table($key,'/',0,$tree);
 	$file_done[$key]=true;
 }
 
 function xml_recurse_parse_to_table(&$file,$xpath,$id_parent,&$subtree){
 	if (!is_array($subtree)){
-		die('erreur inatendue');
+		return;
+//		die('erreur inatendue');
 	}
 	foreach($subtree as $tag=>$tagoccur){
 		$attrs = explode(' ',$tag);
