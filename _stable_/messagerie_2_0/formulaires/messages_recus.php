@@ -12,9 +12,11 @@
  *
  * @return array
  */
-function formulaires_messages_recus_charger_dist(){
+function formulaires_messages_recus_charger_dist($url_repondre=""){
+	if (!$url_repondre AND defined('_URL_ENVOYER_MESSAGE'))
+		$url_repondre = _URL_ENVOYER_MESSAGE;
 	include_spip('inc/lien');
-	$valeurs = array('_url_ecrire_message'=>calculer_url(_URL_ENVOYER_MESSAGE));
+	$valeurs = array('_url_ecrire_message'=>calculer_url($url_repondre));
 
 	return $valeurs;
 }
@@ -25,7 +27,7 @@ function formulaires_messages_recus_charger_dist(){
  *
  * @return string
  */
-function formulaires_messages_recus_traiter_dist(){
+function formulaires_messages_recus_traiter_dist($url_repondre=""){
 	include_spip('base/abstract_sql');
 	include_spip('inc/texte');
 	$liste = _request('selectionne');

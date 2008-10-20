@@ -7,7 +7,7 @@
  */
 
 /**
- * Chargement des valeirs par defaut de #FORMULAIRE_ECRIRE_MESSAGE
+ * Chargement des valeirs par defaut de #FORMULAIRE_ECRIRE_MESSAGE{url_redirection_apres_envoi}
  * la fonction recoit en entree les arguments de la balise dans le squelette
  * renvoyer la liste des champs en cle, et les valeurs par defaut a la saisie
  * les valeurs seront automatiquement surchargees par _request() en cas de second tour de saisie
@@ -18,7 +18,7 @@
  *  
  * @return unknown
  */
-function formulaires_ecrire_message_charger_dist(){
+function formulaires_ecrire_message_charger_dist($redirect=""){
 	include_spip('base/abstract_sql');
 	include_spip('inc/filtres');
 	$valeurs = array('objet'=>'','texte'=>'');
@@ -46,7 +46,7 @@ function formulaires_ecrire_message_charger_dist(){
  *
  * @return array
  */
-function formulaires_ecrire_message_verifier_dist(){
+function formulaires_ecrire_message_verifier_dist($redirect=""){
 	include_spip('inc/messages');
 	return messagerie_verifier(array('objet','texte'));
 }
@@ -57,14 +57,14 @@ function formulaires_ecrire_message_verifier_dist(){
  *
  * @return string
  */
-function formulaires_ecrire_message_traiter_dist(){
+function formulaires_ecrire_message_traiter_dist($redirect=""){
 	include_spip('inc/texte');
 	include_spip('inc/messages');
 
 	$objet = typo(_request('objet'));
 	$texte = _request('texte');
 	$out = _T("ecrire_message:message_envoye_erreur");
-	$redirect = "";
+	$ok = false;
 
 	$exp = $GLOBALS['visiteur_session']['id_auteur'];
 	$dests = _request('destinataires');
@@ -86,21 +86,23 @@ function formulaires_ecrire_message_traiter_dist(){
 		// et invalidons les pages en cache faisant reference au message
 		include_spip('inc/invalideur');
 		suivre_invalideur("envoyermessage/$id_message");
-
-		$out = _T("ecrire_message:message_envoye");
-		if (defined('_REDIRECT_POST_ENVOI_MESSAGE')) {
-			$redirect = calculer_url(_REDIRECT_POST_ENVOI_MESSAGE);
-		}
+		$ok = true;
 	}
 	$texte = textebrut($texte);
 	$texte = pipeline('messagerie_signer_message',$texte);
 	$objet = textebrut($objet);
 	if (messagerie_mailer($objet,$texte,$email_dests)){
-		$out = _T("ecrire_message:message_envoye");
+		$ok = true;
 	}
-
-	include_spip('inc/headers');
-	return $out.($redirect?" ".redirige_formulaire($redirect):'');
+	if ($ok){
+		$out = _T("ecrire_message:message_envoye");
+		if (!$redirect AND defined('_REDIRECT_POST_ENVOI_MESSAGE'))
+			$redirect = _REDIRECT_POST_ENVOI_MESSAGE;
+		$redirect = calculer_url($redirect);
+		return array('message_ok'=>$out,'id_message'=>$id_message,'redirect'=>$redirect);
+	}
+	else
+		return array('message_erreur'=>$out);
 }
 
 ?>
