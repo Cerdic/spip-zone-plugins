@@ -34,24 +34,12 @@
         <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
 	<BOUCLE_rechercheurlbase(SYNDIC_ARTICLES_PMB){0,1}>
 	
-	
 	<?php
-
-		$resultat_recherche_locale = copie_locale("#PMB_URL_BASEindex.php?lvl=author_see&id=".$_REQUEST['id'],'auto');
-				if($resultat_recherche_locale != false) {
-					$resultat_recherche_html = unicode2charset(charset2unicode(file_get_contents($resultat_recherche_locale), 'iso-8859-1'),'utf-8');
-					//$resultat_recherche_html = liens_absolus($resultat_recherche_html, "#PMB_URL_BASE");
-					$resultat_recherche_html = str_replace("addtags.php", "#PMB_URL_BASEaddtags.php", $resultat_recherche_html);
-					$resultat_recherche_html = str_replace("avis.php", "#PMB_URL_BASEavis.php", $resultat_recherche_html);
-					$resultat_recherche_html = str_replace("./do_resa.php", "#PMB_URL_BASEdo_resa.php", $resultat_recherche_html);
-					
-					$resultat_recherche_html = str_replace("index.php?lvl=", "index.php?page=", $resultat_recherche_html);
-					$pos1 = strpos($resultat_recherche_html, "aut_details") - 9;
-					$pos2 = strpos($resultat_recherche_html, "div id=\"footer\"") - 41;
-					echo(substr($resultat_recherche_html, $pos1, $pos2-$pos1));
-				}
 		
-	?>	
+		echo(extraire_element_distant("#PMB_URL_BASEindex.php?lvl=author_see&id=".$_REQUEST['id'], 'div#aut_details'));
+		
+	?>
+
 	</BOUCLE_rechercheurlbase>
 
 	<div class="cartouche">
