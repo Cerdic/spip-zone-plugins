@@ -182,7 +182,7 @@ function cs_les_tests() {
 		"__degrade.png__\n__ornement.png__",
 		"\n__6__\n__5__\n__4__\n__3__\n__2__\n__1__\n__0__\n",
 	);
-	test_outil(cs_test_fun($textes, 'filets_sep'), 'Test sur : filets_sep()');
+	test_outil(cs_test_fun($textes, create_function('$t','return propre(filets_sep($t));')), 'Test sur : filets_sep()');
 
 	// test des liens orphelins
 	$GLOBALS["liens_orphelins_etendu"]=true;

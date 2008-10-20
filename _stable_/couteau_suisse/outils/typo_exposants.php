@@ -74,11 +74,12 @@ function typo_exposants_echappe_balises_callback($matches) {
  return cs_code_echappement($matches[1], 'EXPO');
 }
 
+// ici on est en pipeline post_typo
 function typo_exposants($texte){
 	if (!$lang = $GLOBALS['lang_objet']) $lang = $GLOBALS['spip_lang'];
 	if(!function_exists($fonction = 'typo_exposants_'.lang_typo($lang))) return $texte;
 	// prudence : on protege les balises <a> et <img>
-	if (strpos($texte, '<')!==false) 
+	if (strpos($texte, '<')!==false)
 		$texte = preg_replace_callback('/(<(a|img) [^>]+>)/Ums', 'typo_exposants_echappe_balises_callback', $texte);
 	$texte = cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', $fonction, $texte);
 	return echappe_retour($texte, 'EXPO');

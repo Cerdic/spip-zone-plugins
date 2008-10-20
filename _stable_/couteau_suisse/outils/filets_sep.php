@@ -21,7 +21,7 @@ function filets_sep_installe() {
 			list(,$haut) = @getimagesize("$path/$reg[1]");
 			if ($haut) $haut="height:{$haut}px;";
 			$f = url_absolue($path).'/'.$reg[1];
-			$filets[1][] = "<html><p class=\"spip filet_sep filet_sep_image\" style=\"$haut background-image: url($f);\">&nbsp; &nbsp; &nbsp;</p></html>";
+			$filets[1][] = code_echappement("<p class=\"filet_sep filet_sep_image\" style=\"$haut background-image: url($f);\"></p>");
 		}
 	}
 	ecrire_meta('cs_filets_sep_racc', join(', ', $liste));
@@ -42,19 +42,22 @@ function filets_sep_rempl($texte) {
 	if (strpos($texte, '__')===false) return $texte;
 
 	// On memorise les modeles d'expression rationnelle a utiliser pour chercher les balises numeriques.
-	$modele_nombre = "#([\n\r]\s*)__(\d+)__(\s*[\n\r])#iU";
+	$modele_nombre = "#(?:\s*[\n\r]\s*)__(\d+)__(?=\s*[\n\r]\s*)#iU";
 
-	// On remplace les balises filets numeriques dans le texte par le code HTML correspondant.
+	// On remplace les balises filets numeriques dans le texte par le code HTML correspondant
+	// le resultat est protege pour eviter que la typo de SPIP y touche
 	while (preg_match($modele_nombre, $texte))
-		$texte = preg_replace($modele_nombre,'$1<p class="spip filet_sep filet_sep_$2">&nbsp; &nbsp; &nbsp;</p>$3',$texte); 
+		$texte = preg_replace_callback($modele_nombre, 
+			create_function('$matches', 'return code_echappement("<p class=\'filet_sep filet_sep_$matches[1]\'></p>");'), $texte); 
 	if (strpos($texte, '__')===false) return $texte;
 
 	// On remplace les balises filets images dans le texte par le code HTML correspondant.
+	// le resultat est protege pour eviter que la typo de SPIP y touche
 	$filets_rempl = unserialize($GLOBALS['meta']['cs_filets_sep']);
 	return str_replace($filets_rempl[0], $filets_rempl[1], $texte);
 }
 
-// fonction pipeline
+// fonction pipeline pre_typo
 function filets_sep($texte) {
 	if (strpos($texte, '__')===false) return $texte;
 	return cs_echappe_balises('', 'filets_sep_rempl', $texte);
