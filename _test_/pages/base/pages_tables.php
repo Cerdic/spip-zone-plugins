@@ -9,8 +9,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-global $tables_principales;
+function pages_declarer_tables_principales($tables_principales){
 
-$tables_principales['spip_articles']['field']['page'] = 'varchar(20) not null';
+	$tables_principales['spip_articles']['field']['page'] = 'varchar(20) not null';
+	return $tables_principales;
+
+}
 
 ?>

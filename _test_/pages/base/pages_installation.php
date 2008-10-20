@@ -60,7 +60,6 @@ function pages_maj(){
 		
 		find_in_path('create.php', 'base/', true);
 		include_spip('abstract_sql.php', 'base/', true);
-		include_spip('pages_tables.php', 'base/', true);
 				
 		if ($version_en_cours == 0.0){
 			creer_base();

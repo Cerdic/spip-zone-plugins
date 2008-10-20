@@ -6,7 +6,7 @@
  		RastaPopoulos - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version> <!-- Version du plugin -->
-		0.1
+		0.2
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 		test
@@ -29,6 +29,11 @@ Cela permet notamment de créer des pages de notice légale, d'à-propos, de con
 		<icone>images/article-24.gif</icone>
 		<titre>Pages uniques</titre>
 	</bouton>
+	
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/pages_tables.php</inclure>
+	</pipeline>
 	
 	<pipeline>
 		<nom>affiche_milieu</nom>
