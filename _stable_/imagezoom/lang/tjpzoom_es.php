@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'other' => 'Otro',
 
 	// S
+	'size_vignette' => 'Tama&ntilde;o M&aacute;ximo de la Vi&ntilde;eta',
 	'style' => 'Estilo de la Lupa',
 
 	// T

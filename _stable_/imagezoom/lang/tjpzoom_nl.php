@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'other' => 'Ander',
 
 	// S
+	'size_vignette' => 'Maximumbreedte van de zegel',
 	'style' => 'Stijl van het Vergrootglas',
 
 	// T
