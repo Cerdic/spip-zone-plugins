@@ -31,9 +31,6 @@ function glossaire_generer_url_dist($id_mot) {
 		else { charger_generer_url(); return generer_url_mot($id_mot); } // avant SPIP 2.0
 }
 
-// Compatibilite pour SPIP 1.91
-if(defined('_SPIP19100') && !function_exists('_q')) { function _q($t) {return spip_abstract_quote($t);} }
-
 // compatibilite pour SPIP 1.91
 include_spip('inc/texte');
 if(!function_exists('nettoyer_chapo')) {

@@ -26,6 +26,9 @@ if(defined('_SPIP19100')) {
 		}
 		return $texte;
 	}
+	if(!function_exists('_q')) { 
+		function _q($t) {return spip_abstract_quote($t);}
+	}
 }
 
 // fonction appelant une liste de fonctions qui permettent de nettoyer un texte original de ses raccourcis indesirables
