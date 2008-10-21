@@ -63,6 +63,12 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 #top #formulaire_recherche { position: absolute; right: 0; top: 1em; text-align: right; } /*Cf.: spip_formulaires.css*/
 #top #formulaire_recherche input.text { width: 10em; text-align: left; } /*Cf.: spip_formulaires.css*/
 
+#formulaire_recherche .choix-recherche, #formulaire_recherche .champ-recherche { display: block; }
+#formulaire_recherche .choix-recherche label { display: inline; font-size: .8em; color: white; }
+#formulaire_recherche .choix-recherche span { width: 50%; float: left; }
+#formulaire_recherche .choix-recherche span.tous-champs { float: left; clear: left; position: relative; width: 100%; }
+formulaire_recherche .champ-recherche input.text { padding-left: .5em; }
+
 #conteneur { position: relative; margin-top: 10px; clear: both; float: left; width: 730px; overflow: hidden; background-image: url(bordure-gris.gif); background-repeat: repeat-y; background-position: top right;}
 #contenu { margin-right: 10px; padding-left: 1em; }
 .logo-fond { position: absolute; bottom: 1.99em; left: 0; }

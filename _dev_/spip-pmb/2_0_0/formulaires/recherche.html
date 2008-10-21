@@ -1,9 +1,21 @@
 <div class="formulaire_spip formulaire_recherche" id="formulaire_recherche">
-<form action="[(#ENV{action})]" method="get"><div>
-	[(#ENV{action}|form_hidden)]
-	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
-	<label for="recherche"><:info_rechercher_02:></label>
-	<input type="text" class="text" size="10" name="recherche" id="recherche"[ value="(#ENV{recherche})"] accesskey="4" />
-	<input type="submit" class="submit" value="Ok" />
-</div></form>
+<form action="[(#ENV{action})]" method="get">
+	<div>
+		[(#ENV{action}|form_hidden)]
+		[<input type="hidden" name="lang" value="(#ENV{lang})" />]
+		<div class="choix-recherche">
+		<span><input type='checkbox' name='look_TITLE' id='look_TITLE' value='1'  /><label for='look_TITLE'> Titres </label></span>
+		<span><input type='checkbox' name='look_AUTHOR' id='look_AUTHOR' value='1'  /><label for='look_AUTHOR'> Auteurs </label></span>
+		<span><input type='checkbox' name='look_ABSTRACT' id='look_ABSTRACT' value='1'  /><label for='look_ABSTRACT'> Résumé et notes </label></span>
+		</div>
+		<div class="choix-recherche">
+			<span class="tous-champs"><input type='checkbox' name='look_ALL' id='look_ALL' value='1' checked /><label for='look_ALL'> Tous les champs </label></span>
+		</div>
+		<div class="champ-recherche">
+			<label for="recherche"><:info_rechercher_02:></label>
+			<input type="text" class="text" size="10" name="recherche" id="recherche"[ value="(#ENV{recherche})"] accesskey="4" />
+			<input type="submit" class="submit" value="Ok" />
+		</div>
+	</div>
+</form>
 </div>
