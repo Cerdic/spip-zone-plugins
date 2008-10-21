@@ -1,4 +1,4 @@
 [(#REM)
 Afficher le lien vers FB lors du login
 ][(#SESSION{fb_session}|?{'',' '})
-[(#ENV{fb_auth,''}|?{<:fblogin:auth_fb_ok_connectez_vous:>})][(#ENV{fb_auth,''}|?{'',' '})<a href="http://www.facebook.com/login.php?api_key=#EVAL{_FB_API_KEY}&amp;v=1.0[&amp;next=(#VAL{&redirect=}|concat{#SELF}|urlencode)]"><img src="#CHEMIN{img_pack/fb-login.gif}"></a>]]
+[(#ENV{fb_auth,''}|?{<:fblogin:auth_fb_ok_connectez_vous:>})][(#ENV{fb_auth,''}|?{'',' '})<a href="http://www.facebook.com/login.php?api_key=#EVAL{_FB_API_KEY}&amp;v=1.0[&amp;next=(#VAL{&redirect=}|concat{#SELF}|urlencode)]"><img src="#CHEMIN{img_pack/fb-login.gif}" /></a>]]
