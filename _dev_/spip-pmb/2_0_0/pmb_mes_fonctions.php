@@ -23,7 +23,7 @@ function extraire_element_distant ($url_base, $file, $selector) {
 			}
 		}
 
-// retourne le champ d'une notice pmb parmi le titre, descriptif.. 
+// retourne un tableau associatif contenant tous les champs d'une notice 
 function pmb_notice_extraire ($id_notice, $url_base) {
 	$tableau_resultat = Array();
 	$resultat_recherche_locale = copie_locale($url_base."index.php?lvl=notice_display&id=".$id_notice,'auto');
@@ -45,7 +45,10 @@ function pmb_notice_extraire ($id_notice, $url_base) {
 					$tableau_resultat['titre_complet'] = $htmldom->find('span.header_title', 0)->innertext;
 					$tableau_resultat['auteur'] = substr($htmldom->find('#drag_noti_'.$id_notice, 0)->innertext, strrpos($htmldom->find('#drag_noti_'.$id_notice, 0)->innertext, '/')+1); 
 					$tableau_resultat['logo_src'] = $htmldom->find('#notice table img',0)->src; 
-					
+					$tableau_resultat['exemplaires'] = $htmldom->find('.exemplaires',0)->outertext;
+					$tableau_resultat['autres_lecteurs'] = $htmldom->find('.autres_lectures',0)->next_sibling()->outertext;
+										
+
 					$tablechamps = $htmldom->find('#notice table table tr');
 					foreach($tablechamps as $tr) {
 						$libelle = htmlentities($tr->find('td',0)->innertext);

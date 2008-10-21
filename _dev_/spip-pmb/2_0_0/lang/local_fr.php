@@ -19,7 +19,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'annee_publication' => 'Ann&eacute;e de publication',
 'importance' => 'Importance',
 'presentation' => 'Pr&eacute;sentation',
-'rubriques' => 'Qui sommes-nous ?'
+'rubriques' => 'Qui sommes-nous ?',
+'catalogue' => 'Catalogue',
+'exemplaires' => 'Exemplaires',
+'autres_lecteurs' => 'Les abonn&eacute;s qui ont emprunt&eacute; ce document ont &eacute;galement emprunt&eacute;'
 
 );
 

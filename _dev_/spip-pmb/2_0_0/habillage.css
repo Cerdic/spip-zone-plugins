@@ -137,7 +137,7 @@ abbr.published { border: 0; }
 
 
 /* style de la plupart des h2 */
-#documents_portfolio h2, .ps h2, .hyperlien h2 { text-align: left; background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: bottom left; padding-bottom: .4em; margin-bottom: .5em; margin-top: 1.5em; }
+#documents_portfolio h2, .pmb-exemplaires h2, .pmb-autreslecteurs h2, .ps h2, .hyperlien h2 { text-align: left; background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: bottom left; padding-bottom: .4em; margin-bottom: .5em; margin-top: 1.5em; }
 
 
 /* Habillage des forums
@@ -349,6 +349,12 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .sous-rubriques ul { border: none; }
 .sous-rubriques ul li { border: none; }
 .sous-rubriques h2 { color: #333300; }
+
+/*notices */
+.pmb-exemplaires, .pmb-autreslecteurs {
+	margin-left: 150px;
+	margin-bottom: 2em;
+}
 
 #navigation .menu { margin-right: 10px; }
 

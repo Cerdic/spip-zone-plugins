@@ -31,7 +31,7 @@
 	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Fil d'Ariane ]
-        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:catalogue:></strong></div>
 	<BOUCLE_rechercheurlbase(SYNDIC_ARTICLES_PMB){0,1}>
 	[(#SET{notice, [(#ENV{id}|pmb_notice_extraire{#PMB_URL_BASE})]})]
 	<div class="cartouche">
@@ -66,6 +66,19 @@
 	</div>
 
 	<br class="nettoyeur" />
+
+	[<div class="pmb-exemplaires">
+		<h2><:exemplaires:></h2>
+
+		(#GET{notice}|pmb_notice_champ{'exemplaires'})
+	</div>]
+
+	[<div class="pmb-autreslecteurs">
+		<h2><:autres_lecteurs:></h2>
+
+		(#GET{notice}|pmb_notice_champ{'autres_lecteurs'})
+	</div>]
+
 	</BOUCLE_rechercheurlbase>
 
 	
