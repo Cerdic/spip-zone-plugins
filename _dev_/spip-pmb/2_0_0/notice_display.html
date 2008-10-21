@@ -33,25 +33,47 @@
 	[(#REM) Fil d'Ariane ]
         <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
 	<BOUCLE_rechercheurlbase(SYNDIC_ARTICLES_PMB){0,1}>
-	
-	
-	<?php
-		
-		echo(extraire_element_distant("#PMB_URL_BASE", "index.php?lvl=notice_display&seule=1&id=".$_REQUEST['id'], 'div#notice'));
-		
-	?>	
-	</BOUCLE_rechercheurlbase>
-
+	[(#SET{notice, [(#ENV{id}|pmb_notice_extraire{#PMB_URL_BASE})]})]
 	<div class="cartouche">
             <div class="surlignable">
 				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
-				<h1 class="#EDIT{titre} entry-title[ (#TITRE|strlen|>{30}|?{'titre-long',''})]">[(#TITRE|ucfirst)]</h1>
+				<h1 class="#EDIT{titre} entry-title[ (#GET{notice}|pmb_notice_champ{'titre'}|strlen|>{30}|?{'titre-long',''})]">[(#GET{notice}|pmb_notice_champ{'titre'})]</h1>
 				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
             </div>
 
            
             
         </div>
+
+		
+       [(#LOGO_SITE_SPIP||inserer_attribut{src,[(#TEST)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{130,0})]
+	 
+	<div class="surlignable">
+		
+		
+		<div class="pmb-ouvrage-infos">	
+			[<p><:auteur:> : (#GET{notice}|pmb_notice_champ{'lesauteurs'})</p>]
+			[<p><:serie:> : (#GET{notice}|pmb_notice_champ{'serie'})</p>]
+			[<p><:type:> : (#GET{notice}|pmb_notice_champ{'type'})</p>]
+			[<p><:editeur:> : (#GET{notice}|pmb_notice_champ{'editeur'})</p>]
+			[<p><:format:> : (#GET{notice}|pmb_notice_champ{'format'})</p>]
+			[<p><:annee_publication:> : (#GET{notice}|pmb_notice_champ{'annee_publication'})</p>]
+			[<p><:importance:> : (#GET{notice}|pmb_notice_champ{'importance'})</p>]
+			[<p><:presentation:> : (#GET{notice}|pmb_notice_champ{'presentation'})</p>]
+			[<p><:isbn:> : (#GET{notice}|pmb_notice_champ{'isbn'})</p>]
+		</div>
+		
+		[<div class="texte entry-content">(#GET{notice}|pmb_notice_champ{'resume'})</div>]
+	</div>
+
+	<?php
+		
+		//echo(extraire_element_distant("#PMB_URL_BASE", "index.php?lvl=notice_display&seule=1&id=".$_REQUEST['id'], 'div#notice'));
+		
+	?>	
+	</BOUCLE_rechercheurlbase>
+
+	
 		
       
 	</div><!--#contenu-->
