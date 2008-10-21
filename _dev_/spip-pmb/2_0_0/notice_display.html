@@ -45,8 +45,7 @@
             
         </div>
 
-		
-       [(#LOGO_SITE_SPIP||inserer_attribut{src,[(#TEST)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{130,0})]
+       [(#LOGO_SITE_SPIP||inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'})]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{130,0})]
 	 
 	<div class="surlignable">
 		
@@ -66,11 +65,7 @@
 		[<div class="texte entry-content">(#GET{notice}|pmb_notice_champ{'resume'})</div>]
 	</div>
 
-	<?php
-		
-		//echo(extraire_element_distant("#PMB_URL_BASE", "index.php?lvl=notice_display&seule=1&id=".$_REQUEST['id'], 'div#notice'));
-		
-	?>	
+	<br class="nettoyeur" />
 	</BOUCLE_rechercheurlbase>
 
 	

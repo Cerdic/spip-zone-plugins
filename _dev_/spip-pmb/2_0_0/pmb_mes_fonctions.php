@@ -44,6 +44,7 @@ function pmb_notice_extraire ($id_notice, $url_base) {
 					
 					$tableau_resultat['titre_complet'] = $htmldom->find('span.header_title', 0)->innertext;
 					$tableau_resultat['auteur'] = substr($htmldom->find('#drag_noti_'.$id_notice, 0)->innertext, strrpos($htmldom->find('#drag_noti_'.$id_notice, 0)->innertext, '/')+1); 
+					$tableau_resultat['logo_src'] = $htmldom->find('#notice table img',0)->src; 
 					
 					$tablechamps = $htmldom->find('#notice table table tr');
 					foreach($tablechamps as $tr) {
