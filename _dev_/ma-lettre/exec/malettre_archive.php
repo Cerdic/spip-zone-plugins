@@ -54,15 +54,19 @@ function exec_malettre_archive(){
           $ext_start = substr($myfile, 0 , 6);
           $ext = substr($myfile, -4 , 4); 
           $daty =  substr($myfile, 13 , 2).".".substr($myfile, 11 , 2).".".substr($myfile, 7 , 4);
-          if ($ext_start=="lettre" && $ext == "html") {
-	            $out_file =  " - <a href=\"../$path_archive/$myfile\" target='_blank' />lettre du  $daty</a> <a href='?exec=malettre_archive&amp;action=del&amp;f=$myfile' style='color:red;'>effacer</a><br />\n".$out_file;
-	            $c++;
+          if ($ext_start=="lettre" && $ext == "html") {          
+	            $out_file_current =  " - <a href=\"../$path_archive/$myfile\" target='_blank' />lettre du  $daty</a>";
+              $out_file_current .= " : <a href='#' onclick=\"malettref.location.href='../$path_archive/$myfile'\" style='color:green;'>voir</a>";
+              $out_file_current .= " - <a href='?exec=malettre_archive&amp;action=del&amp;f=$myfile'  onclick='return confirm(\"Etes vous sûr ?\");' style='color:red;'>effacer</a><br />\n";	            
+	            $out_file =  $out_file_current.$out_file;
+              $c++;
           } 
         		 
         }
          
         echo $out_dir.$out_file;
         echo "<p><small>$c lettre(s) disponible(s)</small></p>";
+        echo "<iframe width=\"750\" height=\"500\" src='' id='malettref' name='malettref'></iframe>\n";
 		}
 		//--				
 	
@@ -70,6 +74,8 @@ function exec_malettre_archive(){
 	}	else { 
 		echo "<strong>Vous n'avez pas acc&egrave;s &agrave; cette page.</strong>"; 
 	}
+	
+	echo fin_page();
 }
 
 ?>

@@ -207,7 +207,7 @@ function exec_malettre(){
 							
 					  // affichage ?
 					  if (!$errorFlag) {
-						  echo "<form method='post'><fieldset>\n";  
+						  echo "<form method='post' action='?exec=malettre'><fieldset>\n";  
 						  echo "<input type='hidden' name='action' value='letter_send' />\n";
               echo "<h4>Exp&eacute;diteur</h4>\n";
               echo "<select name='expediteur'>\n";
@@ -228,7 +228,7 @@ function exec_malettre(){
               
 							echo "<h4>Apercu</h4>\n";
 							echo "Sujet: <input type='text' size='55' name='lettre_title' value=\"".$lettre_title."\" /><br />\n";
-              echo "<iframe width=\"600\" height=\"500\" src=\"$path_archive_full/.malettre.html?nocache=".time()."\"></iframe>\n";
+              echo "<iframe width=\"750\" height=\"500\" src=\"$path_archive_full/.malettre.html?nocache=".time()."\"></iframe>\n";
 							echo "<h4>Version HTML</h4>\n";
 							echo "<textarea cols='70' rows='20'>$sourceHTML</textarea>";
 							echo "<h4>Version Texte</h4>\n";
@@ -253,6 +253,10 @@ function exec_malettre(){
               $sujet = $lettre_title;
             }
             
+            // hash
+            $lettre_hash = substr(md5(time()),0,7);
+            $url_lettre_archive = "$path_url/$path_archive/lettre_".date("Ymd")."_$lettre_hash.html";
+            
             // recup contenu HTML
             $texte = $path_archive_full."/.malettre.html";
             $fr=fopen($texte,"r");
@@ -262,6 +266,7 @@ function exec_malettre(){
                           $recup .= fgets($fr,1024);
             }
             fclose($fr);
+            $recup = str_replace("{URL_MALETTRE}",$url_lettre_archive,$recup);
             
             // recup contenu TXT
             $texte = $path_archive_full."/.malettre_txt.html";
@@ -272,6 +277,7 @@ function exec_malettre(){
                         $recup_txt .= fgets($fr,1024);
             }
             fclose($fr);
+            $recup_txt = str_replace("{URL_MALETTRE}",$url_lettre_archive,$recup_txt);
             
             // envoi lettre
             $exp_email = _request('expediteur_more');
@@ -321,11 +327,11 @@ function exec_malettre(){
             }
             
             // archivage de la lettre en dur
-            $lettre_archive = "$path_archive_full/lettre_".date("Ymd").".html";
+            $lettre_archive = "$path_archive_full/lettre_".date("Ymd")."_$lettre_hash.html";
             $f_archive=fopen($lettre_archive,"w");
             fwrite($f_archive,$recup); 
             fclose($f_archive);
-            echo "<div style=\"margin:15px 0;\">Lettre plac&eacute;e en archive (<a href='$path_url/IMG/lettre/lettre_".date("Ymd").".html' target='_blank'>consulter</a>)</div>";
+            echo "<div style=\"margin:15px 0;\">Lettre plac&eacute;e en archive (<a href='$url_lettre_archive' target='_blank'>consulter</a>)</div>";
                       
            
             
