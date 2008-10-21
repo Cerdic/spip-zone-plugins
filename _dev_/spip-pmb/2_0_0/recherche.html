@@ -38,7 +38,7 @@
                     		<h3><a href="#URL_ARTICLE">#TITRE</a></h3>
                 			[<small>(#SOUSTITRE)</small>]
 					[<small>(#DATE|affdate_jourcourt)[, <:par_auteur:> (#LESAUTEURS)]</small>]
-					[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION|couper{300})</div>]
+					[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION|couper{300,'...'})</div>]
 					<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="#URL_ARTICLE"><:lire_la_suite:> +</a>
 				</li>
 				</BOUCLE_articles>
@@ -48,10 +48,28 @@
 		</B_articles>
 			
 		<BOUCLE_rechercheurlbase(SYNDIC_ARTICLES_PMB){0,1}>
-		<div class="menu articles" id="recherche-pmb">
-			<?php	
-				echo(extraire_element_distant("#PMB_URL_BASE", "index.php?lvl=search_result&user_query=".$_REQUEST['recherche'], 'div#search_result'));
-			 ?>
+
+		<div class="menu articles">
+			<h2><:ouvrages:></h2>
+			<ul>
+		<?php
+			$tab_resultat = pmb_recherche_extraire($_REQUEST['recherche'], "#PMB_URL_BASE");
+			foreach($tab_resultat as $resultat) {
+
+		?>
+			<li>	
+				<img src="<?php echo($resultat['logo_src']); ?>" class="spip_logos" />
+				<h3><a href="index.php?page=notice_display&id=<?php echo($resultat['id']); ?>&seule=1"><?php echo($resultat['titre']); ?></a></h3>
+                			<small><:par_auteur:> <?php echo($resultat['lesauteurs']); ?></small>
+					<div class="introduction entry-content"><?php echo(couper($resultat['resume'],300,'...')); ?></div>
+					<a class="lire-la-suite" title="<?php echo(texte_backend($resultat['titre'])); ?>" href="index.php?page=notice_display&id=<?php echo($resultat['id']); ?>&seule=1"><:lire_la_suite:> +</a>
+			</li>
+
+		<?php
+			}
+			
+		?>
+			</ul>
 		</div>
 		</BOUCLE_rechercheurlbase>
 
