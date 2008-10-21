@@ -19,7 +19,8 @@ function cron_spip2spip($t) {
   include_spip("inc/distant"); 
   include_spip("inc/syndic"); 
   include_spip("inc/mail"); 
-  include_spip("inc/getdocument"); 
+  include_spip("inc/getdocument");
+  include_spip("inc/ajouter_documents");  
   
   // Recupere la config
   //-------------------------------
@@ -60,6 +61,7 @@ function cron_spip2spip($t) {
       $date_syndic  = $row_site["last_syndic"];
       
       $mailLog = "";
+      spip_log("spip2spip: syndication de $current_site"); 
               
       // Aller chercher les donnees du flux RSS et les analyser
       $rss = recuperer_page($url_syndic, true);
