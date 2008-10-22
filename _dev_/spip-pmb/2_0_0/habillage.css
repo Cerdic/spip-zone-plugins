@@ -250,6 +250,15 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .articles .lire-la-suite { color: #771f1c; font-size: .85em; float: right; padding-top: .5em; }
 .articles .lire-la-suite:hover { text-decoration: underline; }
 
+
+/* liste d'ouvrages pmb */
+.ouvrages { margin-left: 150px; clear: none; }
+.ouvrages ul li { float: right; clear: right; width: 100%; } 
+
+/* liste des collections d'un éditeur pmb */
+.collections { background: #E6E8D5; }
+
+
 /* sites référencés */
 .web { float: right; width: 35%; margin-top: 3em; margin-bottom: 2em; color: #333300; }
 .web h2 { font-family: Arial, sans-serif; text-transform: uppercase; font-size: .9em; }

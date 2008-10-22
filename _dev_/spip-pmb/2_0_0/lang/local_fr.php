@@ -23,7 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'catalogue' => 'Catalogue',
 'exemplaires' => 'Exemplaires',
 'autres_lecteurs' => 'Les abonn&eacute;s qui ont emprunt&eacute; ce document ont &eacute;galement emprunt&eacute;',
-'ouvrages' => 'Ouvrages'
+'ouvrages' => 'Ouvrages',
+'collections' => 'Collections'
 
 );
 

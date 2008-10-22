@@ -19,7 +19,7 @@
 </script>
 </head>
 
-<body class="page_article page_ouvrage">
+<body class="page_article page_editeur">
 <div id="page">
 	
 	<div class="fond-blanc"></div>
@@ -43,17 +43,25 @@
 				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
           	  	</div>
         	</div>
+
+		[(#REM) afficher les collections ]
+        	<div class="menu sous-rubriques collections">
+           		 <h2><:collections:></h2>
+            		<?php echo($tab_resultat[0]['collections_editeur']); ?>
+            	</div>
+        
 	
 		<div class="surlignable">
 			<div class="texte entry-content"><?php echo($tab_resultat[0]['infos_editeur']); ?></div>
 		</div>
-		<div class="menu articles">
+		<div class="menu articles ouvrages">
 			
-			<ul>
+			
 		<?php
 			if (count($tab_resultat)>0) {
 		?>
 				<h2><:ouvrages:></h2>
+			<ul>
 		<?php
 			}
 
