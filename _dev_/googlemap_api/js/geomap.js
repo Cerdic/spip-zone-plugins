@@ -87,9 +87,9 @@ function agregarMarcador (xmlItem, idmap, minZoom, maxZoom) {
 		// creamos el marcador con los datos almacenados en las variables
 		var marcador = creaMarcador(point, html, icono_categoria, son, idmap);
 		// recollemos a informacion que sexa necesaria en distintos arrays, usando como identificador a id do artigo
-		marcadores[id] = marcador;
-		contidosHTML[id] = html;
-		URLsons[id] = son;
+		marcadores["id_"+id] = marcador;
+		contidosHTML["id_"+id] = html;
+		URLsons["id_"+id] = son;
 		//engadimos o marcador ao markerManager antes "map.addOverlay(marker);"
 		if (maxZoom) {
 			if(marker){
@@ -107,12 +107,12 @@ function agregarMarcador (xmlItem, idmap, minZoom, maxZoom) {
 function abrirVentana(identificador, idmap) {
 	var map = eval('map'+ idmap);
 	map.closeInfoWindow();
-	GEvent.addListener(marcadores[identificador], "infowindowopen", function() {
-		if(URLsons[identificador]){
+	GEvent.addListener(marcadores["id_"+identificador], "infowindowopen", function() {
+		if(URLsons["id_"+identificador]){
 			//esta parte del codigo enbebe un obxecto flah na ventana creado con flashobject.js
-			var fo = new FlashObject( URLbaseGis + "/img_pack/musicplayer.swf?autoplay=true&song_url=" + URLsons[identificador], "player_x", "17", "17", "6", "#FFFFFF");
+			var fo = new FlashObject( URLbaseGis + "/img_pack/musicplayer.swf?autoplay=true&song_url=" + URLsons["id_"+identificador], "player_x", "17", "17", "6", "#FFFFFF");
 			fo.write("player");
 		}
 	});
-	marcadores[identificador].openInfoWindowHtml(contidosHTML[identificador]);
+	marcadores["id_"+identificador].openInfoWindowHtml(contidosHTML["id_"+identificador]);
 }
