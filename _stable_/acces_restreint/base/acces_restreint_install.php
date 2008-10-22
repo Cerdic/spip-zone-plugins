@@ -30,6 +30,7 @@ function accesrestreint_upgrade($nom_meta_base_version,$version_cible){
 			if (!isset($desc['field']['privee']))
 				sql_alter("TABLE spip_zones ADD privee ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER publique");
 			echo "AccesRestreint Install<br/>";
+			effacer_meta($nom_meta_base_version); // salade de majuscules
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 		}
 		if (version_compare($current_version,'0.2','<')){
