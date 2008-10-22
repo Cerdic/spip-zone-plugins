@@ -19,6 +19,46 @@ function pmb_charger_page ($url_base, $file) {
 					
 
 }
+function pmb_serie_extraire($id_serie, $url_base, $pmb_page=1) {
+	$tableau_resultat = Array();
+	
+	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=serie_see&page=".$pmb_page."&id=".$id_serie)) {
+			$tableau_resultat[0] = Array();
+			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
+			$tableau_resultat[0]['titre_serie'] = $htmldom->find('#aut_see h3',0)->innertext;
+			
+			$resultats_recherche = $htmldom->find('.child');
+			$i = 1;
+			foreach($resultats_recherche as $res) {
+				$tableau_resultat[$i] = Array();				
+				pmb_parser_notice($res, $tableau_resultat[$i]);
+				$i++;
+			}	
+	}
+	return $tableau_resultat;
+
+}
+
+function pmb_collection_extraire($id_collection, $url_base, $pmb_page=1) {
+	$tableau_resultat = Array();
+	
+	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=coll_see&page=".$pmb_page."&id=".$id_collection)) {
+			$tableau_resultat[0] = Array();
+			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
+			$tableau_resultat[0]['titre_collection'] = $htmldom->find('#aut_see h3',0)->innertext;
+			$tableau_resultat[0]['collections_infos'] = $htmldom->find('#aut_see ul',0)->outertext;
+			
+			$resultats_recherche = $htmldom->find('.child');
+			$i = 1;
+			foreach($resultats_recherche as $res) {
+				$tableau_resultat[$i] = Array();				
+				pmb_parser_notice($res, $tableau_resultat[$i]);
+				$i++;
+			}	
+	}
+	return $tableau_resultat;
+
+}
 
 function pmb_editeur_extraire($id_editeur, $url_base, $pmb_page=1) {
 	$tableau_resultat = Array();
@@ -28,7 +68,6 @@ function pmb_editeur_extraire($id_editeur, $url_base, $pmb_page=1) {
 			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
 			$tableau_resultat[0]['titre_editeur'] = $htmldom->find('#aut_see h3',0)->innertext;
 			$tableau_resultat[0]['collections_editeur'] = $htmldom->find('#aut_see ul',0)->outertext;
-			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
 			$infos_editeur = $htmldom->find('#aut_see p');
 			$tableau_resultat[0]['infos_editeur'] = '';
 			foreach($infos_editeur as $p_editeur) {

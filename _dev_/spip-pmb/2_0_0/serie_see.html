@@ -34,20 +34,15 @@
         <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
 	<BOUCLE_rechercheurlbase(SYNDIC_ARTICLES_PMB){0,1}>
 	<div class="cartouche">
-	       	<div class="surlignable">
-			[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
-			<h1 class="entry-title"><?php 
-					$tab_resultat = pmb_collection_extraire($_REQUEST['id'], "#PMB_URL_BASE", $_REQUEST['pmb_page'] ? $_REQUEST['pmb_page'] : 1);
-					echo($tab_resultat[0]['titre_collection']); 
-			?></h1>
-			[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
-          	  </div>
+	        	<div class="surlignable">
+				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+				<h1 class="entry-title"><?php 
+						$tab_resultat = pmb_serie_extraire($_REQUEST['id'], "#PMB_URL_BASE", $_REQUEST['pmb_page'] ? $_REQUEST['pmb_page'] : 1);
+						 
+				?><:serie:></h1>
+				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+          	  	</div>
         </div>
-
-	<div class="surlignable">
-		<div class="texte entry-content"><?php echo($tab_resultat[0]['infos_collection']); ?></div>
-	</div>
-		
 	<div class="menu articles ouvrages">
 			
 			
@@ -80,6 +75,7 @@
 			
 					<?php 
 					}
+					
 					?>
 					<div class="introduction entry-content"><?php echo(couper($resultat['resume'],300,'...')); ?></div>
 					<a class="lire-la-suite" title="<?php echo(texte_backend($resultat['titre'])); ?>" href="index.php?page=notice_display&id=<?php echo($resultat['id']); ?>&seule=1"><:lire_la_suite:> +</a>
@@ -96,7 +92,17 @@
 
 	</BOUCLE_rechercheurlbase>
 
-	
+	<div class="cartouche">
+            <div class="surlignable">
+				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+				<h1 class="#EDIT{titre} entry-title[ (#TITRE|strlen|>{30}|?{'titre-long',''})]">[(#TITRE|ucfirst)]</h1>
+				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+            </div>
+
+           
+            
+        </div>
+		
       
 	</div><!--#contenu-->
 	</div><!--#conteneur-->

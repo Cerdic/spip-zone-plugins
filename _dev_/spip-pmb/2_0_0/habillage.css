@@ -117,6 +117,8 @@ formulaire_recherche .champ-recherche input.text { padding-left: .5em; }
 
 .pmb-ouvrage-infos { margin-left: 150px; color: #336666; }
 .pmb-ouvrage-infos p { margin-top: .2em; margin-bottom: .2em; }
+.pmb-ouvrage-infos a { color: #336666; text-decoration: none; border-bottom: 1px dotted #336666; }
+.pmb-ouvrage-infos a:hover { color: #336666; text-decoration: none; border-bottom: 1px solid #336666; }
 
 .surlignable .spip_logos { float: left; margin-right: 16px; margin-bottom: 4px; }
 
