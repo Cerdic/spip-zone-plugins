@@ -580,12 +580,11 @@ if (isset(\$_GET['var_recherche'])) {
 div.pagination img { border:0pt none; margin:0pt; padding:0pt; }",
 	// construction des onglets
 	'code:jq_init' => "onglets_init.apply(this);",
-	// inserer : $table_des_traitements['TEXTE'][]= 'cs_decoupe(propre(%s))';
-	'traitement:TEXTE:post_propre' => 'cs_decoupe',
-	'traitement:TEXTE:pre_propre' => 'cs_onglets',
-	// sans oublier les articles : $table_des_traitements['TEXTE']['articles']= 'cs_decoupe(propre(%s))';
+	// pour les articles et rubriques : $table_des_traitements['TEXTE']['articles']= 'cs_decoupe(propre(%s))';
 	'traitement:TEXTE/articles:post_propre' => 'cs_decoupe',
 	'traitement:TEXTE/articles:pre_propre' => 'cs_onglets',
+	'traitement:TEXTE/rubriques:post_propre' => 'cs_decoupe',
+	'traitement:TEXTE/rubriques:pre_propre' => 'cs_onglets',
 	'categorie' => 'typo-racc',
 	'pipeline:bt_toolbox' => 'decoupe_BarreTypo',
 	'pipeline:nettoyer_raccourcis_typo' => 'decoupe_nettoyer_raccourcis',
@@ -626,6 +625,7 @@ div.cs_sommaire a:after {display:none;}",
 	'code:jq' => 'if(jQuery("div.cs_sommaire").length) jQuery("div.decoupe_haut").css("display", "none");',
 	// inserer : $table_des_traitements['TEXTE']['article']= 'sommaire_d_article(propre(%s))';
 	'traitement:TEXTE/articles:post_propre' => 'sommaire_d_article',
+	'traitement:TEXTE/rubriques:post_propre' => 'sommaire_d_article',
 	'traitement:CS_SOMMAIRE:post_propre' => 'sommaire_d_article_balise',
 	'categorie' => 'typo-corr',
 	'pipeline:nettoyer_raccourcis_typo' => 'sommaire_nettoyer_raccourcis',
@@ -865,8 +865,9 @@ add_outil( array(
 	'code:options' => "%%glossaire_limite%%%%glossaire_groupes%%%%glossaire_js%%",
 //	'traitement:LIEU:post_propre' => 'cs_glossaire',
 	'traitement:TEXTE:post_propre' => 'cs_glossaire',
-	// sans oublier les articles...
+	// sans oublier les articles et les rubriques...
 	'traitement:TEXTE/articles:post_propre' => 'cs_glossaire',
+	'traitement:TEXTE/rubriques:post_propre' => 'cs_glossaire',
 	// et le chapo des articles...
 	'traitement:CHAPO:post_propre' => 'cs_glossaire',
 	// Precaution pour les articles virtuels
@@ -999,6 +1000,7 @@ add_outil( array(
 	'code:options' => "%%insertions%%",
 	'traitement:TEXTE:pre_propre' => 'insertions_pre_propre',
 	'traitement:TEXTE/articles:pre_propre' => 'insertions_pre_propre',
+	'traitement:TEXTE/rubriques:pre_propre' => 'insertions_pre_propre',
 ));
 
 // Ajout des outils personnalises
