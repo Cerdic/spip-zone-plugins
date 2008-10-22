@@ -865,7 +865,8 @@ add_outil( array(
 	'code:options' => "%%glossaire_limite%%%%glossaire_groupes%%%%glossaire_js%%",
 //	'traitement:LIEU:post_propre' => 'cs_glossaire',
 	'traitement:TEXTE:post_propre' => 'cs_glossaire',
-	// sans oublier les articles et les rubriques...
+	// sans oublier les articles et les rubriques :
+	// SPIP ne considere pas que la definition precedente est un tronc commun...
 	'traitement:TEXTE/articles:post_propre' => 'cs_glossaire',
 	'traitement:TEXTE/rubriques:post_propre' => 'cs_glossaire',
 	// et le chapo des articles...
@@ -999,6 +1000,8 @@ add_outil( array(
 	'categorie'	 => 'typo-corr',
 	'code:options' => "%%insertions%%",
 	'traitement:TEXTE:pre_propre' => 'insertions_pre_propre',
+	// sans oublier les articles et les rubriques :
+	// SPIP ne considere pas que la definition precedente est un tronc commun...
 	'traitement:TEXTE/articles:pre_propre' => 'insertions_pre_propre',
 	'traitement:TEXTE/rubriques:pre_propre' => 'insertions_pre_propre',
 ));
