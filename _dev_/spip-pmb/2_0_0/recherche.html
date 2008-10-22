@@ -60,8 +60,9 @@
 		<?php
 			}
 
-			foreach($tab_resultat as $resultat) {
-			
+			for($j=1;$j<count($tab_resultat);$j++) {
+			 	$resultat = $tab_resultat[$j];
+
 
 		?>
 			<li>	
@@ -98,6 +99,7 @@
 			
 		?>
 			</ul>
+			<?php echo($tab_resultat[0]['nav_bar']); ?>
 		</div>
 		</BOUCLE_rechercheurlbase>
 

@@ -37,7 +37,7 @@
 	        	<div class="surlignable">
 				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
 				<h1 class="entry-title"><?php 
-						$tab_resultat = pmb_editeur_extraire($_REQUEST['id'], "#PMB_URL_BASE");
+						$tab_resultat = pmb_editeur_extraire($_REQUEST['id'], "#PMB_URL_BASE", $_REQUEST['pmb_page'] ? $_REQUEST['pmb_page'] : 1);
 						echo($tab_resultat[0]['titre_editeur']); 
 				?></h1>
 				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
@@ -88,6 +88,8 @@
 			
 		?>
 			</ul>
+
+			<?php echo($tab_resultat[0]['nav_bar']); ?>
 		</div>
 		
 		

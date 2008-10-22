@@ -7,6 +7,7 @@ function pmb_charger_page ($url_base, $file) {
 	if($resultat_recherche_locale != false) {
 		$resultat_recherche_html = unicode2charset(charset2unicode(file_get_contents($resultat_recherche_locale), 'iso-8859-1'),'utf-8');
 		
+		$resultat_recherche_html = str_replace("page=", "pmb_page=", $resultat_recherche_html);
 		$resultat_recherche_html = str_replace("addtags.php", $url_base."addtags.php", $resultat_recherche_html);
 		$resultat_recherche_html = str_replace("avis.php", $url_base."avis.php", $resultat_recherche_html);
 		$resultat_recherche_html = str_replace("./do_resa.php", $url_base."do_resa.php", $resultat_recherche_html);
@@ -17,12 +18,13 @@ function pmb_charger_page ($url_base, $file) {
 
 }
 
-function pmb_editeur_extraire($id_editeur, $url_base) {
+function pmb_editeur_extraire($id_editeur, $url_base, $pmb_page=1) {
 	$tab_resultat = Array();
-	$resultat_recherche_locale = copie_locale($url_base."index.php?lvl=publisher_see&id=".$id_editeur,'auto');
+	$resultat_recherche_locale = copie_locale($url_base."index.php?lvl=publisher_see&page=".$pmb_page."&id=".$id_editeur,'auto');
 	if($resultat_recherche_locale != false) {
 		$resultat_recherche_html = unicode2charset(charset2unicode(file_get_contents($resultat_recherche_locale), 'iso-8859-1'),'utf-8');
 		
+					$resultat_recherche_html = str_replace("page=", "pmb_page=", $resultat_recherche_html);
 					$resultat_recherche_html = str_replace("addtags.php", $url_base."addtags.php", $resultat_recherche_html);
 					$resultat_recherche_html = str_replace("avis.php", $url_base."avis.php", $resultat_recherche_html);
 					$resultat_recherche_html = str_replace("./do_resa.php", $url_base."do_resa.php", $resultat_recherche_html);
@@ -37,6 +39,7 @@ function pmb_editeur_extraire($id_editeur, $url_base) {
 					$tab_resultat[0] = Array();
 					$tab_resultat[0]['titre_editeur'] = $htmldom->find('#aut_see h3',0)->innertext;
 					$tab_resultat[0]['collections_editeur'] = $htmldom->find('#aut_see ul',0)->outertext;
+					$tab_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
 					$infos_editeur = $htmldom->find('#aut_see p');
 					$tab_resultat[0]['infos_editeur'] = '';
 					foreach($infos_editeur as $p_editeur) {
@@ -90,6 +93,7 @@ function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS=0, $loo
 	if($resultat_recherche_locale != false) {
 		$resultat_recherche_html = unicode2charset(charset2unicode(file_get_contents($resultat_recherche_locale), 'iso-8859-1'),'utf-8');
 		
+					$resultat_recherche_html = str_replace("page=", "pmb_page=", $resultat_recherche_html);
 					$resultat_recherche_html = str_replace("addtags.php", $url_base."addtags.php", $resultat_recherche_html);
 					$resultat_recherche_html = str_replace("avis.php", $url_base."avis.php", $resultat_recherche_html);
 					$resultat_recherche_html = str_replace("./do_resa.php", $url_base."do_resa.php", $resultat_recherche_html);
@@ -100,8 +104,12 @@ function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS=0, $loo
 					require(find_in_path('simple_html_dom.php'));
 					
 					$htmldom = str_get_html($resultat_recherche_html);
+					$tab_resultat[0] = Array();
+					$tab_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
+										
+
 					$resultats_recherche = $htmldom->find('.child');
-					$i = 0;
+					$i = 1;
 					foreach($resultats_recherche as $res) {
 						$id_notice = intval(substr($res->id,2));
 						$tableau_resultat[$i] = Array();
@@ -146,6 +154,7 @@ function pmb_notice_extraire ($id_notice, $url_base) {
 	if($resultat_recherche_locale != false) {
 		$resultat_recherche_html = unicode2charset(charset2unicode(file_get_contents($resultat_recherche_locale), 'iso-8859-1'),'utf-8');
 		
+					$resultat_recherche_html = str_replace("page=", "pmb_page=", $resultat_recherche_html);
 					$resultat_recherche_html = str_replace("addtags.php", $url_base."addtags.php", $resultat_recherche_html);
 					$resultat_recherche_html = str_replace("avis.php", $url_base."avis.php", $resultat_recherche_html);
 					$resultat_recherche_html = str_replace("./do_resa.php", $url_base."do_resa.php", $resultat_recherche_html);
@@ -203,6 +212,7 @@ function extraire_element_distant ($url_base, $file, $selector) {
 			if($resultat_recherche_locale != false) {
 					$resultat_recherche_html = unicode2charset(charset2unicode(file_get_contents($resultat_recherche_locale), 'iso-8859-1'),'utf-8');
 					
+					$resultat_recherche_html = str_replace("page=", "pmb_page=", $resultat_recherche_html);
 					$resultat_recherche_html = str_replace("addtags.php", $url_base."addtags.php", $resultat_recherche_html);
 					$resultat_recherche_html = str_replace("avis.php", $url_base."avis.php", $resultat_recherche_html);
 					$resultat_recherche_html = str_replace("./do_resa.php", $url_base."do_resa.php", $resultat_recherche_html);
