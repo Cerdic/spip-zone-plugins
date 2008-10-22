@@ -51,4 +51,8 @@
 		<nom>editer_contenu_objet</nom>
 		<inclure>openid_pipelines.php</inclure>
 	</pipeline>	
+ 	<pipeline>
+		<nom>pre_edition</nom>
+		<inclure>openid_pipelines.php</inclure>
+	</pipeline>	
 </plugin>
