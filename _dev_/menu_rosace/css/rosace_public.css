@@ -7,7 +7,7 @@ div#lien_bl{bottom:0;left:0}
 div#lien_br{bottom:0;right:0}
 div#rosace div.item{float:left;width:250px;height:100px;position:relative;}
 div#rosace div.item a{display:block;position:relative}
-div#rosace div.item span{display:bloc;position:absolute;float:left;top:0;line-height:.8em}
+div#rosace div.item span{display:bloc;position:absolute;top:0;line-height:.8em}
 div#rosace div.item span strong{font-size:.9em}
 div#rosace div.item span em{font-style:normal;font-size:.7em}
 div#rosace div.item a{text-decoration:none}
@@ -18,7 +18,7 @@ div#rosace div#item_2,div#rosace div#item_3,div#rosace div#item_5,div#rosace div
 div#rosace div#item_1 span,div#rosace div#item_4 span,div#rosace div#item_6  span,div#rosace div#item_7  span{right:5px}
 div#rosace div#item_2 span,div#rosace div#item_3 span,div#rosace div#item_5  span,div#rosace div#item_8  span{left:5px}
 div#rosace div#item_5 span,div#rosace div#item_6 span{top:15px;}
-div#rosace div#item_7 span,div#rosace div#item_8 span{top:60px;width:60%}
+div#rosace div#item_7 span,div#rosace div#item_8 span{top:65px;width:60%}
 div#rosace div#item_3 span,div#rosace div#item_4 span,div#rosace div#item_5  span,div#rosace div#item_6  span{width:40%}
 div#rosace div#item_3 span,div#rosace div#item_5 span{padding-left:10px}
 div#rosace div#item_4 span,div#rosace div#item_6 span{padding-right:10px}
