@@ -104,10 +104,15 @@ function agregarMarcador (xmlItem, idmap, minZoom, maxZoom) {
 	}	
 }
 
-function abrirVentana(identificador) {
-	map1.closeInfoWindow();
+function abrirVentana(identificador, idmap) {
+	var map = eval('map'+ idmap);
+	map.closeInfoWindow();
+	GEvent.addListener(marcadores[identificador], "infowindowopen", function() {
+		if(URLsons[identificador]){
+			//esta parte del codigo enbebe un obxecto flah na ventana creado con flashobject.js
+			var fo = new FlashObject( URLbaseGis + "/img_pack/musicplayer.swf?autoplay=true&song_url=" + URLsons[identificador], "player_x", "17", "17", "6", "#FFFFFF");
+			fo.write("player");
+		}
+	});
 	marcadores[identificador].openInfoWindowHtml(contidosHTML[identificador]);
-	//enbebemos o flash player do son
-	var fo = new FlashObject( URLbaseGis + "/img_pack/musicplayer.swf?autoplay=true&song_url=" + URLsons[identificador], "player_x", "17", "17", "6", "#FFFFFF");
-	fo.write("player");
 }
