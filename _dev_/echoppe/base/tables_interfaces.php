@@ -3,18 +3,18 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function echoppe_tables_interfaces($tables_interfaces){
-
-	$tables_interfaces['table_des_tables']['echoppe_categories'] = 'categories';
-	$tables_interfaces['table_des_tables']['echoppe_produits'] = 'produits';
-	$tables_interfaces['table_des_tables']['echoppe_stocks'] = 'stocks';
-	$tables_interfaces['table_des_tables']['echoppe_depots'] = 'depots';
-	$tables_interfaces['table_des_tables']['echoppe_gammes'] = 'gammes';
-	$tables_interfaces['table_des_tables']['echoppe_options'] = 'options';
-	$tables_interfaces['table_des_tables']['echoppe_valeurs'] = 'valeurs';
-	$tables_interfaces['table_des_tables']['echoppe_prix'] = 'prix';
-	$tables_interfaces['table_des_tables']['echoppe_clients'] = 'clients';
-	$tables_interfaces['table_des_tables']['echoppe_commentaires_paniers'] = 'commentaires_paniers';
-	$tables_interfaces['table_des_tables']['echoppe_prestataires'] = 'prestataires';
+	
+	$tables_interfaces['table_des_tables']['spip_echoppe_categories'] = 'echoppe_categories';
+	$tables_interfaces['table_des_tables']['spip_echoppe_produits'] = 'echoppe_produits';
+	$tables_interfaces['table_des_tables']['spip_echoppe_stocks'] = 'echoppe_stocks';
+	$tables_interfaces['table_des_tables']['spip_echoppe_depots'] = 'echoppe_depots';
+	$tables_interfaces['table_des_tables']['spip_echoppe_gammes'] = 'echoppe_gammes';
+	$tables_interfaces['table_des_tables']['spip_echoppe_options'] = 'echoppe_options';
+	$tables_interfaces['table_des_tables']['spip_echoppe_valeurs'] = 'echoppe_valeurs';
+	$tables_interfaces['table_des_tables']['spip_echoppe_prix'] = 'echoppe_prix';
+	$tables_interfaces['table_des_tables']['spip_echoppe_clients'] = 'echoppe_clients';
+	$tables_interfaces['table_des_tables']['spip_echoppe_commentaires_paniers'] = 'echoppe_commentaires_paniers';
+	$tables_interfaces['table_des_tables']['spip_echoppe_prestataires'] = 'echoppe_prestataires';
 	
 	
 	
@@ -42,7 +42,7 @@ function echoppe_tables_interfaces($tables_interfaces){
 	$tables_interfaces['tables_jointures']['echoppe_produits'] = 'echoppe_produits_sites';
 	$tables_interfaces['tables_jointures']['sites'] = 'echoppe_produits_sites';
 	
-	
+	//var_dump($tables_interfaces);
 }
 
 ?>

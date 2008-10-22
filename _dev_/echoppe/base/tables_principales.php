@@ -98,7 +98,7 @@ function echoppe_tables_principales($tables_principales){
 
 	$spip_stocks_key = array(
 		"PRIMARY KEY"		=> "id_stock",
-		"KEY ref_produit"	=> "id_produit",
+		"KEY ref_produit"	=> "ref_produit",
 		"KEY id_depot"		=>"id_depot"
 		);
 

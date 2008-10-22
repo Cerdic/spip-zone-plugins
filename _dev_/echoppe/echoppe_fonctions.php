@@ -1,15 +1,5 @@
 <?php
 
-include_spip('public/boucles');
-include_spip('base/echoppe');
-include_spip('inc/session');
-
-
-//global $tables_jointures;
-
-//$tables_jointures['spip_echoppe_categories'][] = 'spip_echoppe_categories_descriptions';
-//$tables_jointures['spip_echoppe_categories_produits'][] = 'spip_echoppe_produits';
-
 function generer_url_validation_panier(){
 	return "?page=echoppe_panier";
 	
@@ -137,23 +127,4 @@ function balise_TOTAL_STOCK($p){
 	$p->interdire_scripts = false;
 	return $p;
 }
-
-/*
- * function balise_TOTAL_PANIER_HTVA($p){
-	$_sql = "SELECT id_produit, quantite FROM spip_echoppe_paniers WHERE token_panier='".session_get('echoppe_token_panier')."' AND token_client = '".session_get('echoppe_token_client')."' ;";
-	$_res = spip_query($_sql);
-	//echo $_sql;
-	$total_panier = 0;
-	while ($_produit = spip_fetch_array($_res)){
-		$_sql_le_produit = "SELECT prix_base_htva FROM spip_echoppe_produits WHERE id_produit = '".$_produit['id_produit']."';";
-		//echo $_sql_le_produit;
-		$_res_le_produit = spip_query($_sql_le_produit);
-		$_le_produit = spip_fetch_array($_res_le_produit);
-		$total_panier = $total_panier + ($_produit['quantite'] * $_le_produit['prix_base_htva']);
-	}
-	$p->code = "zero_si_vide($total_panier)";
-	$p->interdire_scripts = false;
-	return $p;
-}
-*/
 ?>
