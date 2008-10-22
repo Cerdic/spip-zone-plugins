@@ -1,30 +1,92 @@
 <?php
 include_spip('base/pmb_tables');
-function extraire_element_distant ($url_base, $file, $selector) {
-			$resultat_recherche_locale = copie_locale($url_base.$file,'auto');
-			if($resultat_recherche_locale != false) {
-					$resultat_recherche_html = unicode2charset(charset2unicode(file_get_contents($resultat_recherche_locale), 'iso-8859-1'),'utf-8');
+
+function pmb_charger_page ($url_base, $file) {
+	$resultat_recherche_html = "";
+	$resultat_recherche_locale = copie_locale($url_base."index.php?lvl=search_result&user_query=".$recherche,'auto');
+	if($resultat_recherche_locale != false) {
+		$resultat_recherche_html = unicode2charset(charset2unicode(file_get_contents($resultat_recherche_locale), 'iso-8859-1'),'utf-8');
+		
+		$resultat_recherche_html = str_replace("addtags.php", $url_base."addtags.php", $resultat_recherche_html);
+		$resultat_recherche_html = str_replace("avis.php", $url_base."avis.php", $resultat_recherche_html);
+		$resultat_recherche_html = str_replace("./do_resa.php", $url_base."do_resa.php", $resultat_recherche_html);
+		$resultat_recherche_html = str_replace("index.php?lvl=", "index.php?page=", $resultat_recherche_html);
+	}
+	return $resultat_recherche_html;		
 					
+
+}
+
+function pmb_editeur_extraire($id_editeur, $url_base) {
+	$tab_resultat = Array();
+	$resultat_recherche_locale = copie_locale($url_base."index.php?lvl=publisher_see&id=".$id_editeur,'auto');
+	if($resultat_recherche_locale != false) {
+		$resultat_recherche_html = unicode2charset(charset2unicode(file_get_contents($resultat_recherche_locale), 'iso-8859-1'),'utf-8');
+		
 					$resultat_recherche_html = str_replace("addtags.php", $url_base."addtags.php", $resultat_recherche_html);
 					$resultat_recherche_html = str_replace("avis.php", $url_base."avis.php", $resultat_recherche_html);
 					$resultat_recherche_html = str_replace("./do_resa.php", $url_base."do_resa.php", $resultat_recherche_html);
 					
 					$resultat_recherche_html = str_replace("index.php?lvl=", "index.php?page=", $resultat_recherche_html);
 					
-					require(find_in_path('simple_html_dom.php'));
-					$htmldom = str_get_html($resultat_recherche_html);
 					
-					foreach($htmldom->find($selector) as $e) {
-  		 			 	return $e->innertext;
+					require(find_in_path('simple_html_dom.php'));
+					
+					$htmldom = str_get_html($resultat_recherche_html);
+					//info générales sur l'éditeur					
+					$tab_resultat[0] = Array();
+					$tab_resultat[0]['titre_editeur'] = $htmldom->find('#aut_see h3',0)->innertext;
+					$tab_resultat[0]['collections_editeur'] = $htmldom->find('#aut_see ul',0)->outertext;
+					$infos_editeur = $htmldom->find('#aut_see p');
+					$tab_resultat[0]['infos_editeur'] = '';
+					foreach($infos_editeur as $p_editeur) {
+						$tab_resultat[0]['infos_editeur'] .= $p_editeur->outertext;
 					}
 					
-					
-			}
-		}
 
-function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS=0, $look_ALL=1, $look_AUTHOR=0, $look_PUBLISHER=0, $look_COLLECTION=0, $look_SUBCOLLECTION=0, $look_CATEGORY=0, $look_INDEXINT=0, $look_KEYWORDS=0, $look_TITLE=0, $look_ALL=0, $look_ABSTRACT=0) {
+					//ouvrages de l'éditeur
+					$resultats_recherche = $htmldom->find('.child');
+					$i = 1;
+					foreach($resultats_recherche as $res) {
+						$id_notice = intval(substr($res->id,2));
+						$tab_resultat[$i] = Array();
+						$tab_resultat[$i]['id'] = $id_notice;	
+						$tab_resultat[$i]['logo_src'] = $res->find('table img',0)->src; 
+											
+
+						$tablechamps = $res->find('table table tr');
+						foreach($tablechamps as $tr) {
+							$libelle = htmlentities($tr->find('td',0)->innertext);
+							$valeur = $tr->find('td',1)->innertext;
+							if (strpos($libelle, 'Titre de s')) $tab_resultat[$i]['serie'] = $valeur; 
+							if (strpos($libelle, 'Titre')) $tab_resultat[$i]['titre'] = $valeur; 
+							else if (strpos($libelle, 'Type de document')) $tab_resultat[$i]['type'] = $valeur; 
+							else if (strpos($libelle, 'Editeur')) $tab_resultat[$i]['editeur'] = $valeur; 
+							else if (strpos($libelle, 'Auteurs')) $tab_resultat[$i]['lesauteurs'] = $valeur; 
+							else if (strpos($libelle, 'de publication')) $tab_resultat[$i]['annee_publication'] = $valeur; 
+							else if (strpos($libelle, 'Collection')) $tab_resultat[$i]['collection'] = $valeur; 
+							else if (strpos($libelle, 'Importance')) $tab_resultat[$i]['importance'] = $valeur; 
+							else if (strpos($libelle, 'Présentation')) $tab_resultat[$i]['presentation'] = $valeur; 
+							else if (strpos($libelle, 'Format')) $tab_resultat[$i]['format'] = $valeur; 
+							else if (strpos($libelle, 'Importance')) $tab_resultat[$i]['importance'] = $valeur; 
+							else if (strpos($libelle, 'ISBN')) $tab_resultat[$i]['isbn'] = $valeur; 
+							else if (strpos($libelle, 'Prix')) $tab_resultat[$i]['prix'] = $valeur; 
+							else if (strpos($libelle, 'Langues')) $tab_resultat[$i]['langues'] = $valeur; 
+							else if (strpos($libelle, 'sum')) $tab_resultat[$i]['resume'] = $valeur; 
+						
+						}
+						$i++;
+			
+					}
+	}
+	return $tab_resultat;
+}
+
+function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS=0, $look_ALL=0, $look_AUTHOR=0, $look_PUBLISHER=0, $look_COLLECTION=0, $look_SUBCOLLECTION=0, $look_CATEGORY=0, $look_INDEXINT=0, $look_KEYWORDS=0, $look_TITLE=0, $look_ABSTRACT=0) {
 	$tableau_resultat = Array();
-	$resultat_recherche_locale = copie_locale($url_base."index.php?lvl=search_result&user_query=".$recherche,'auto');
+	
+
+	$resultat_recherche_locale = copie_locale($url_base."index.php?lvl=search_result&look_ALL=".$look_ALL."&look_FIRSTACCESS=".$look_FIRSTACCESS."&look_AUTHOR=".$look_AUTHOR."&look_PUBLISHER=".$look_PUBLISHER."&look_COLLECTION=".$look_COLLECTION."&look_CATEGORY=".$look_CATEGORY."&look_INDEXINT=".$look_INDEXINT."&look_KEYWORDS=".$look_KEYWORDS."&look_ABSTRACT=".$look_ABSTRACT."&user_query=".$recherche,'auto');
 	if($resultat_recherche_locale != false) {
 		$resultat_recherche_html = unicode2charset(charset2unicode(file_get_contents($resultat_recherche_locale), 'iso-8859-1'),'utf-8');
 		
@@ -42,7 +104,7 @@ function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS=0, $loo
 					$i = 0;
 					foreach($resultats_recherche as $res) {
 						$id_notice = intval(substr($res->id,2));
-						
+						$tableau_resultat[$i] = Array();
 						$tableau_resultat[$i]['id'] = $id_notice;	
 						$tableau_resultat[$i]['logo_src'] = $res->find('table img',0)->src; 
 											
@@ -134,5 +196,29 @@ function pmb_notice_extraire ($id_notice, $url_base) {
 function pmb_notice_champ ($tableau_resultat, $champ) {
 	return $tableau_resultat[$champ];
 }
+
+
+function extraire_element_distant ($url_base, $file, $selector) {
+			$resultat_recherche_locale = copie_locale($url_base.$file,'auto');
+			if($resultat_recherche_locale != false) {
+					$resultat_recherche_html = unicode2charset(charset2unicode(file_get_contents($resultat_recherche_locale), 'iso-8859-1'),'utf-8');
+					
+					$resultat_recherche_html = str_replace("addtags.php", $url_base."addtags.php", $resultat_recherche_html);
+					$resultat_recherche_html = str_replace("avis.php", $url_base."avis.php", $resultat_recherche_html);
+					$resultat_recherche_html = str_replace("./do_resa.php", $url_base."do_resa.php", $resultat_recherche_html);
+					
+					$resultat_recherche_html = str_replace("index.php?lvl=", "index.php?page=", $resultat_recherche_html);
+					
+					require(find_in_path('simple_html_dom.php'));
+					$htmldom = str_get_html($resultat_recherche_html);
+					
+					foreach($htmldom->find($selector) as $e) {
+  		 			 	return $e->innertext;
+					}
+					
+					
+			}
+		}
+
 
 ?>

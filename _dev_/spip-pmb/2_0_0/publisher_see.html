@@ -33,13 +33,64 @@
 	[(#REM) Fil d'Ariane ]
         <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
 	<BOUCLE_rechercheurlbase(SYNDIC_ARTICLES_PMB){0,1}>
+		<div class="cartouche">
+	        	<div class="surlignable">
+				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+				<h1 class="entry-title"><?php 
+						$tab_resultat = pmb_editeur_extraire($_REQUEST['id'], "#PMB_URL_BASE");
+						echo($tab_resultat[0]['titre_editeur']); 
+				?></h1>
+				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+          	  	</div>
+        	</div>
 	
-	
-	<?php
+		<div class="surlignable">
+			<div class="texte entry-content"><?php echo($tab_resultat[0]['infos_editeur']); ?></div>
+		</div>
+		<div class="menu articles">
+			
+			<ul>
+		<?php
+			if (count($tab_resultat)>0) {
+		?>
+				<h2><:ouvrages:></h2>
+		<?php
+			}
+
+			for($j=1;$j<count($tab_resultat);$j++) {
+			 	$resultat = $tab_resultat[$j];
+
+		?>
+			<li>	
+				<?php 
+					
+					if($resultat['logo_src']) {
+						echo("<img src=\"".$resultat['logo_src']."\" class=\"spip_logos\" />");
+					}
+				?>
+				<h3><a href="index.php?page=notice_display&id=<?php echo($resultat['id']); ?>&seule=1"><?php echo($resultat['titre']); ?></a></h3>
+                			
+				<?php 
+					if($resultat['lesauteurs']) {
+					
+					?>
+						<small><:par_auteur:> <?php echo($resultat['lesauteurs']); ?></small>
+			
+					<?php 
+					}
+					?>
+					<div class="introduction entry-content"><?php echo(couper($resultat['resume'],300,'...')); ?></div>
+					<a class="lire-la-suite" title="<?php echo(texte_backend($resultat['titre'])); ?>" href="index.php?page=notice_display&id=<?php echo($resultat['id']); ?>&seule=1"><:lire_la_suite:> +</a>
+			</li>
+
+		<?php
+			}
+			
+		?>
+			</ul>
+		</div>
 		
-		echo(extraire_element_distant("#PMB_URL_BASE", "index.php?lvl=publisher_see&id=".$_REQUEST['id'], 'div#aut_details'));
 		
-	?>	
 	</BOUCLE_rechercheurlbase>
 
 	<div class="cartouche">

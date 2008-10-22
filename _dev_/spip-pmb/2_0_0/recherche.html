@@ -66,8 +66,16 @@
 		?>
 			<li>	
 				<?php 
+					/*if($resultat['logo_src']) {
+						if ($cl = copie_locale($resultat['logo_src'])) {
+							if ($ir = image_reduire($resultat['logo_src'], 130, 0)) {
+								echo(inserer_attribut($ir,'class','spip_logos')); 
+							}	
+						}
+						
+					}*/
 					if($resultat['logo_src']) {
-						echo(inserer_attribut(image_reduire(copie_locale($resultat['logo_src']), 130, 0),'class','spip_logos')); 
+						echo("<img src=\"".$resultat['logo_src']."\" class=\"spip_logos\" />");
 					}
 				?>
 				<h3><a href="index.php?page=notice_display&id=<?php echo($resultat['id']); ?>&seule=1"><?php echo($resultat['titre']); ?></a></h3>
