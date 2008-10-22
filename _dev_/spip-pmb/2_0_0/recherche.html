@@ -67,7 +67,7 @@
 			<li>	
 				<?php 
 					if($resultat['logo_src']) {
-						echo("<img src=\"".$resultat['logo_src']."\" class=\"spip_logos\" />"); 
+						echo(inserer_attribut(image_reduire(copie_locale($resultat['logo_src']), 130, 0),'class','spip_logos')); 
 					}
 				?>
 				<h3><a href="index.php?page=notice_display&id=<?php echo($resultat['id']); ?>&seule=1"><?php echo($resultat['titre']); ?></a></h3>
