@@ -11,9 +11,9 @@ Choisissez dans quelles rubriques activer le plugin.
 	[(#ENV{_cfg_}|form_hidden)]
 	<ul>
 	#SET{wichrub,#CONFIG{gis/rubriques_gis,#ARRAY}}
-		<li>
-			<label for="rubriques_gis"><:gis:rubriques_plugin_actif:></label>
-			<p class="explications">Choisissez la ou les rubriques &agrave; utiliser :</p>
+		<li class="editer_rubriques_gis">
+			<label for="rubriques_gis"><:gis:pages_prive:></label>
+			<p class="explications"><:gis:explication_pages_prive:></p>
 			<select name="rubriques_gis[]" multiple="multiple" size="9">
 				<option value=""[ (#GET{wichrub}|?{'',' '})selected="selected"]>Toutes</option>
 				<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}{tout}>
@@ -29,46 +29,52 @@ Choisissez dans quelles rubriques activer le plugin.
 				</BOUCLE_secteurs>
 			</select>
 		</li>
-		<li>
-			<fieldset>
-			<h3 class="legend"><:gis:parametres_formulaire:></h3>
-			<ul>
-				<li>
-					<label for="rubrique_cible"><:gis:info_rubrique_cible:></label>
-					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{rubrique_cible})</span>]
-					<select name="rubrique_cible">
-						<BOUCLE_r1(RUBRIQUES){racine}{par num titre}>
-						<option value=''></option>
-						<optgroup label="<:gis:secteur:> [(#TITRE|couper{40})]">
-							<option value="#ID_RUBRIQUE"[(#ENV{rubrique_cible}|=={#ID_RUBRIQUE}|?{' selected="selected"'})]>[(#TITRE|couper{40})] (<:gis:racine:>)</option>
-							<B_r2>
-							<option value="" class='mysteric_hr' disabled='disabled'><:gis:ou_choisir:></option>
-							<BOUCLE_r2(RUBRIQUES){id_parent}{par num titre}>
-								<option value="#ID_RUBRIQUE"[(#ENV{rubrique_cible}|=={#ID_RUBRIQUE}|?{' selected="selected"'})]>[(#TITRE|couper{40})]</option>
-							</BOUCLE_r2>
-						</optgroup>
-						</BOUCLE_r1>
-					</select>
-				</li>
-				<li>
-					<label for="statut"><:gis:info_statut_articles:></label>
-					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{statut})</span>]
-					<select name="statut">
-						<option value='prepa'[(#ENV{statut}|=={prepa}|?{' selected="selected"'})]>En cours de rédaction</option>
-						<option value='prop'[(#ENV{statut}|=={prop}|?{' selected="selected"'})]>Proposé</option>
-						<option value='publie'[(#ENV{statut}|=={publie}|?{' selected="selected"'})]>Publié</option>
-					</select>
-				</li>
-				<li class="editer_formats_documents[ (#ENV**{erreurs}|table_valeur{formats_documents}|?{'erreur'})]">
-					<label for="formats_documents"><:gis:info_formats_documents:></label>
-					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{formats_documents})</span>]
-					<p class="explications"><:gis:texte_formats_documents:></p>
-					<input type="text" name="formats_documents" class="text" value="#ENV{formats_documents,'jpg,png,gif'}"  />
-				</li>
-			</ul>
-			</fieldset>
+		<li class="editer_swfobject_gis">
+			<label><:gis:pages_public:></label>
+			<p class="explications"><:gis:explication_swfobject:></p>
+			<div class="choix">
+				<input type="checkbox" name="swfobject" class="checkbox" value="non" id="swfobject_non"[ (#ENV{swfobject}|=={non}|?{'checked="checked"'})] />
+				<label for="swfobject_non"><:gis:desactiver_swfobject:></label>
+			</div>
 		</li>
 	</ul>
+	<fieldset>
+		<legend><:gis:parametres_formulaire:></legend>
+		<ul>
+			<li class="editer_rubrique_formulaire_gis">
+				<label for="rubrique_cible"><:gis:rubrique_cible:></label>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{rubrique_cible})</span>]
+				<select name="rubrique_cible">
+					<BOUCLE_r1(RUBRIQUES){racine}{par num titre}>
+					<option value=''></option>
+					<optgroup label="<:gis:secteur:> [(#TITRE|couper{40})]">
+						<option value="#ID_RUBRIQUE"[(#ENV{rubrique_cible}|=={#ID_RUBRIQUE}|?{' selected="selected"'})]>[(#TITRE|couper{40})] (<:gis:racine:>)</option>
+						<B_r2>
+						<option value="" class='mysteric_hr' disabled='disabled'><:gis:ou_choisir:></option>
+						<BOUCLE_r2(RUBRIQUES){id_parent}{par num titre}>
+							<option value="#ID_RUBRIQUE"[(#ENV{rubrique_cible}|=={#ID_RUBRIQUE}|?{' selected="selected"'})]>[(#TITRE|couper{40})]</option>
+						</BOUCLE_r2>
+					</optgroup>
+					</BOUCLE_r1>
+				</select>
+			</li>
+			<li class="editer_statut_formulaire_gis">
+				<label for="statut"><:gis:statut_articles:></label>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{statut})</span>]
+				<select name="statut">
+					<option value='prepa'[(#ENV{statut}|=={prepa}|?{' selected="selected"'})]>En cours de rédaction</option>
+					<option value='prop'[(#ENV{statut}|=={prop}|?{' selected="selected"'})]>Proposé</option>
+					<option value='publie'[(#ENV{statut}|=={publie}|?{' selected="selected"'})]>Publié</option>
+				</select>
+			</li>
+			<li class="editer_formats_documents[ (#ENV**{erreurs}|table_valeur{formats_documents}|?{'erreur'})]">
+				<label for="formats_documents"><:gis:formats_documents:></label>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{formats_documents})</span>]
+				<p class="explications"><:gis:texte_formats_documents:></p>
+				<input type="text" name="formats_documents" class="text" value="#ENV{formats_documents,'jpg,png,gif'}"  />
+			</li>
+		</ul>
+	</fieldset>
 
 	<p class="boutons">
 		<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />

@@ -6,6 +6,18 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	//elements du formulaire CFG
+	
+	"explication_pages_prive" => "Choisissez les rubriques dans lesquelles le plugin sera disponible.",
+	"explication_swfobject" => "D&eacute;sactiver l'insertion du script swf_object dans les pages publiques (si vous n'utilisez pas le lecteur de son dans les infobulles).",
+	"desactiver_swfobject" => "D&eacute;sactiver swf_object",
+	"formats_documents" => "Format des documents",
+	"pages_public" => "Partie publique",
+	"pages_prive" => "Partie priv&eacute;e",
+	"parametres_formulaire" => "Param&egrave;tres du formulaire public",
+	"rubrique_cible" => "Rubrique cible",
+	"statut_articles" => "Statut des articles",
+	
 	//elements de formulaire pour editer les coordonnees
 	
 	"clave_engadida" => "Clef ajout&eacute;e: ",
