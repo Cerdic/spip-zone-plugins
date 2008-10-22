@@ -93,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_comment' => 'site',
 'syndication' => 'Syndication',
 'selectionner_theme' => 'Cliquez pour s&eacute;lectionner ce th&ecirc;me',
-'sommaire_articles_entiers' => 'Afficher les articles en entiers (par d&eacute;faut, seule une introduction est affich&eacute;e)',
+'sommaire_articles_entiers' => 'Afficher les articles en entier (par d&eacute;faut, seule une introduction est affich&eacute;e)',
 
 //T
 'tag' => 'Tag',
