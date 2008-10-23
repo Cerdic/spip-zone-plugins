@@ -100,7 +100,7 @@ formulaire_recherche .champ-recherche input.text { padding-left: .5em; }
 .page_nouveautes .cartouche, .page_actualites .cartouche {margin-bottom: 0; }
 .cartouche h1 { background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: bottom left; font-family: Georgia, serif; font-size: 3em; color: #333300; line-height: 1em; padding-bottom: .5em; }
 .cartouche h1.titre-long { font-size: 2.5em; }
-.page_nouveautes .cartouche h1, .page_actualites .cartouche h1 { background: none; padding-bottom: 0; }
+.page_nouveautes .cartouche h1, .page_auteur .cartouche h1, .page_ouvrages .cartouche h1 .page_actualites .cartouche h1 { background: none; padding-bottom: 0; }
 .cartouche div.socialtags { clear: none; float: right; }
 
 
@@ -255,6 +255,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 
 /* liste d'ouvrages pmb */
 .ouvrages { margin-left: 150px; clear: none; }
+.page_auteur_pmb .ouvrages { margin-left: 0; }
 .ouvrages ul li { float: right; clear: right; width: 100%; } 
 
 /* liste des collections d'un éditeur pmb */
@@ -421,3 +422,5 @@ div#page, div#conteneur, div#navigation, div#extra { width: auto; }
 
 
 .fond-blanc { position: absolute; top: 0; left: 0; width: 100%; height: 108px; background: white; }
+
+.navbar { clear: right; float: right; margin-right: 2em; }

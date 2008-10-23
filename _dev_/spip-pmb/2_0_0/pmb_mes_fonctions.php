@@ -1,6 +1,23 @@
 <?php
 include_spip('base/pmb_tables');
 
+function pmb_transformer_nav_bar($nav_bar) {
+	//si une seule page, on retourne vide
+	if (strpos($nav_bar,"1/1")) return "";
+
+	//sinon, on transforme les liens vers les images locales
+	$nav_bar = str_replace("./images/first-grey.gif", find_in_path("img/pmb-first-grey.gif"), $nav_bar);
+	$nav_bar = str_replace("./images/prev-grey.gif", find_in_path("img/pmb-prev-grey.gif"), $nav_bar);
+	$nav_bar = str_replace("./images/first.gif", find_in_path("img/pmb-first.gif"), $nav_bar);
+	$nav_bar = str_replace("./images/prev.gif", find_in_path("img/pmb-prev.gif"), $nav_bar);
+	$nav_bar = str_replace("./images/next-grey.gif", find_in_path("img/pmb-next-grey.gif"), $nav_bar);
+	$nav_bar = str_replace("./images/last-grey.gif", find_in_path("img/pmb-last-grey.gif"), $nav_bar);
+	$nav_bar = str_replace("./images/next.gif", find_in_path("img/pmb-next.gif"), $nav_bar);
+	$nav_bar = str_replace("./images/last.gif", find_in_path("img/pmb-last.gif"), $nav_bar);
+	return $nav_bar;
+}
+
+
 function pmb_charger_page ($url_base, $file) {
 	$resultat_recherche_locale = copie_locale($url_base.$file,'auto');
 	if($resultat_recherche_locale != false) {
@@ -19,12 +36,51 @@ function pmb_charger_page ($url_base, $file) {
 					
 
 }
+
+function pmb_accueil_extraire($url_base) {
+	$tableau_resultat = Array();
+	
+	if ($htmldom = pmb_charger_page($url_base, "index.php")) {
+			$resultats_recherche = $htmldom->find('#location-container td');
+			$i=0;
+			foreach($resultats_recherche as $res) {
+				$tableau_resultat[$i] = $res->find('a',1)->outertext;				
+				
+				$i++;
+			}	
+	}
+	return $tableau_resultat;
+
+}
+
+function pmb_section_extraire($id_section, $id, $url_base, $pmb_page=1) {
+	$tableau_resultat = Array();
+	
+	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=section_see&page=".$pmb_page."&location=".$id_section."&id=".$id)) {
+			$tableau_resultat[0] = Array();
+			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
+			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
+
+			$tableau_resultat[0]['titre_section'] = $htmldom->find('#aut_details h3',0)->innertext;
+			
+			$resultats_recherche = $htmldom->find('#aut_details_container table td');
+			$i = 1;
+			foreach($resultats_recherche as $res) {
+				$tableau_resultat[$i] = $res->find('a', 1)->outertext;
+				$i++;
+			}	
+	}
+	return $tableau_resultat;
+
+}
+
 function pmb_serie_extraire($id_serie, $url_base, $pmb_page=1) {
 	$tableau_resultat = Array();
 	
 	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=serie_see&page=".$pmb_page."&id=".$id_serie)) {
 			$tableau_resultat[0] = Array();
 			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
+			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
 			$tableau_resultat[0]['titre_serie'] = $htmldom->find('#aut_see h3',0)->innertext;
 			
 			$resultats_recherche = $htmldom->find('.child');
@@ -45,6 +101,7 @@ function pmb_collection_extraire($id_collection, $url_base, $pmb_page=1) {
 	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=coll_see&page=".$pmb_page."&id=".$id_collection)) {
 			$tableau_resultat[0] = Array();
 			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
+			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
 			$tableau_resultat[0]['titre_collection'] = $htmldom->find('#aut_see h3',0)->innertext;
 			$tableau_resultat[0]['collections_infos'] = $htmldom->find('#aut_see ul',0)->outertext;
 			
@@ -66,6 +123,7 @@ function pmb_editeur_extraire($id_editeur, $url_base, $pmb_page=1) {
 	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=publisher_see&page=".$pmb_page."&id=".$id_editeur)) {
 			$tableau_resultat[0] = Array();
 			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
+			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
 			$tableau_resultat[0]['titre_editeur'] = $htmldom->find('#aut_see h3',0)->innertext;
 			$tableau_resultat[0]['collections_editeur'] = $htmldom->find('#aut_see ul',0)->outertext;
 			$infos_editeur = $htmldom->find('#aut_see p');
@@ -92,6 +150,7 @@ function pmb_auteur_extraire($id_auteur, $url_base, $pmb_page=1) {
 	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=author_see&page=".$pmb_page."&id=".$id_auteur)) {
 			$tableau_resultat[0] = Array();
 			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
+			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
 			$tableau_resultat[0]['titre_auteur'] = $htmldom->find('#aut_see h3',0)->innertext;
 			
 			$resultats_recherche = $htmldom->find('.child');
@@ -112,7 +171,8 @@ function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS=0, $loo
 	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=search_result&look_ALL=".$look_ALL."&look_FIRSTACCESS=".$look_FIRSTACCESS."&look_AUTHOR=".$look_AUTHOR."&look_PUBLISHER=".$look_PUBLISHER."&look_COLLECTION=".$look_COLLECTION."&look_CATEGORY=".$look_CATEGORY."&look_INDEXINT=".$look_INDEXINT."&look_KEYWORDS=".$look_KEYWORDS."&look_ABSTRACT=".$look_ABSTRACT."&user_query=".$recherche)) {
 			$tableau_resultat[0] = Array();
 			$tableau_resultatt[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
-			
+			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
+
 			$resultats_recherche = $htmldom->find('.child');
 			$i = 1;
 			foreach($resultats_recherche as $res) {
