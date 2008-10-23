@@ -11,7 +11,7 @@
 	<prefix>rosace</prefix>
 	<etat>dev</etat>
 	<auteur>Dominique (DoM) Lepaisant - Equipe TICE - CRDP de Basse Normandie <br />Fr&eacute;d&eacute;ric Taraud - Lyc&eacute;e Durzy</auteur>
-	<icon>img_pack/logo_rosace_75.png</icon>
+	<icon>img_pack/logo_anim_64.gif</icon>
 	<fonctions></fonctions>
 	<necessite id="cfg" version="[1.7;]" />
 	<install></install>
