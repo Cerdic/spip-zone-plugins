@@ -25,7 +25,6 @@
 ][(#ENV**{commentaire_envoye}|?{'',' '})
 
 <form action="#SELF#formulaire_livre_dor#ENV{id}" method="post">
-[<input type="hidden" name="num_formulaire_livre_dor" value="(#ENV{id})" />]
 
 [(#REM) 
 	==============================
@@ -50,6 +49,7 @@
 <input type="text" class="forml" name="signature#ENV{id}" id="signature#ENV{id}" value="#ENV{signature}" size="15" style="line-height:1.4em;font-size:100%;" /></p>
 
 [<p class="spip_bouton" style="text-align:#ENV{bouton_align}"><input type="submit" name="valide" value="(#ENV{bouton})" /></p>]
+[<input type="hidden" name="num_formulaire_livre_dor" value="(#ENV{id})" />]
 </fieldset>
 
 </form>
