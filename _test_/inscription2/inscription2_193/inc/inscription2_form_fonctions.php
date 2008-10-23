@@ -68,13 +68,12 @@ function inscription2_valide_numero($numero){
 function inscription2_valid_login($login,$nom) {
 	if(!isset($login))
 		$login=$nom;
-	for ($i = 1; ; $i++) {
-		$n = sql_count(sql_select("id_auteur","spip_auteurs","login='$login' LIMIT 1"));
-		if (!$n){
-			return $login;
-		}
-		$login = $login.$i;
+		
+	$n = sql_countsel("spip_auteurs","login='$login'");
+	if ($n==0){
+		return $login;
 	}
+	$login = $login.($n+1);
 	return $login;
 }
 ?>

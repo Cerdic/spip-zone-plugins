@@ -7,7 +7,7 @@ function inscription2_fiche_adherent($id_adherent){
 	$auteur = array();
 	//liste d'elements a afficher
 	foreach(lire_config('inscription2') as $cle => $val) {
-		//Si la $cle est marqué pour être affichée mais pas modifiable
+		//Si la $cle est marque pour etre affichee mais pas modifiable
 		if($val!='' and ereg("^.+_fiche.*$", $cle)){ 
 			$aux = ereg_replace("_fiche.*", "", $cle);
 			if($aux == 'username' or $aux == 'nom' or $aux == 'email')

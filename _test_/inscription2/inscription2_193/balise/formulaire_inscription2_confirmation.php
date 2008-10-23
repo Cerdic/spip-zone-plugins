@@ -54,7 +54,7 @@ function balise_FORMULAIRE_INSCRIPTION2_CONFIRMATION_dyn($mode, $retour) {
 			echo _T('inscription2:rien_a_faire');
 	}else{
 		include_spip('inc/acces');
-		include_spip('inc/envoyer_mail');
+		include_spip('inc/mail');
 		
 		$htpass = generer_htpass($pass);
 		$statut = lire_config('inscription2/statut_nouveau');

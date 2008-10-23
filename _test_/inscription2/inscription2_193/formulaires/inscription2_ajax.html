@@ -1,7 +1,7 @@
 <div class="ajax formulaire_spip formulaire_inscription2" id="formulaire_inscription2[_(#ENV{id_auteur})]">
 
-[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
-[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
 [(#ENV*{editable}|?{' '})
     <form action='#ENV{action}' method='post'>
