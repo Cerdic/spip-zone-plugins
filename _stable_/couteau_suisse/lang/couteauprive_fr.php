@@ -77,17 +77,24 @@ _ Cet outil remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trou
 Vous pouvez ici d&eacute;finir certains raccourcis de SPIP. Une valeur vide &eacute;quivaut &agrave; utiliser la valeur par d&eacute;faut.[[%racc_hr%]][[%puce%]]',
 	'class_spip:description3' => '
 
+{Notez : si l\'outil &laquo;&nbsp;Belles puces&nbsp;&raquo; est activ&eacute;, le remplacement du tiret &laquo;&nbsp;-&nbsp;&raquo; ne sera plus effectu&eacute&nbsp;; une liste &lt;ul>&lt;li> sera utilis&eacute;e &agrave; la place.}
+
 SPIP utilise habituellement la balise &lt;h3&gt; pour les intertitres. Choisissez ici un autre remplacement :[[%racc_h1%]][[->%racc_h2%]]',
 	'class_spip:description4' => '
 
-SPIP a choisi d\'utiliser la balise &lt;i> pour transcrire les italiques. Mais &lt;em> aurait pu &eacute;galement convenir. &Agrave; vous de voir :[[%racc_i1%]][[->%racc_i2%]]
-Notez : en modifiant le remplacement des raccourcis d\'italiques, le style {{2.}} sp&eacute;cifi&eacute; plus haut ne sera pas appliqu&eacute;.
+SPIP a choisi d\'utiliser la balise &lt;strong> pour transcrire les gras. Mais &lt;b> aurait pu &eacute;galement convenir, avec ou sans style. &Agrave; vous de voir :[[%racc_g1%]][[->%racc_g2%]]
 
-@puce@ {{Les styles de SPIP}}. Jusqu\'&agrave; la version 1.92 de SPIP, les raccourcis typographiques produisaient des balises syst&eacute;matiquement affubl&eacute;s du style &quot;spip&quot;. Par exemple : <code><p class="spip"></code>. Vous pouvez ici d&eacute;finir le style de ces balises en fonction de vos feuilles de style. Une case vide signifie qu\'aucun style particulier ne sera appliqu&eacute;.<blockquote style=\'margin:0 2em;\'>
+SPIP a choisi d\'utiliser la balise &lt;i> pour transcrire les italiques. Mais &lt;em> aurait pu &eacute;galement convenir, avec ou sans style. &Agrave; vous de voir :[[%racc_i1%]][[->%racc_i2%]]
+
+@puce@ {{Les styles de SPIP par d&eacute;faut}}. Jusqu\'&agrave; la version 1.92 de SPIP, les raccourcis typographiques produisaient des balises syst&eacute;matiquement affubl&eacute;s du style &quot;spip&quot;. Par exemple : <code><p class="spip"></code>. Vous pouvez ici d&eacute;finir le style de ces balises en fonction de vos feuilles de style. Une case vide signifie qu\'aucun style particulier ne sera appliqu&eacute;.
+
+{Attention : si certains raccourcis (ligne horizontale, intertitre, italique, gras) ont &eacute;t&eacute; modifi&eacute;s ci-dessus, alors les styles ci-dessous ne seront pas appliqu&eacute;s.}
+
+<blockquote style=\'margin:0 2em;\'>
 _ {{1.}} Balises &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; et les listes (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[%style_p%]]
 _ {{2.}} Balises &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; et &lt;blockquote&gt; :[[%style_h%]]
 
-Notez : en modifiant ce deuxi&egrave;me param&egrave;tre, vous perdez alors les styles standards associ&eacute;s &agrave; ces balises.</blockquote>',
+Notez bien : en modifiant ce deuxi&egrave;me style, vous perdez alors les styles standards de SPIP associ&eacute;s &agrave; ces balises.</blockquote>',
 	'class_spip:nom' => 'SPIP et ses raccourcis&hellip;',
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Fonctions',
@@ -275,7 +282,8 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:quota_cache' => 'Valeur du quota :',
 	'label:racc_h1' => 'Entr&eacute;e et sortie d\'un &laquo;<html>{{{intertitre}}}</html>&raquo; :',
 	'label:racc_hr' => 'Ligne horizontale &laquo;<html>----</html>&raquo; :',
-	'label:racc_i1' => 'Entr&eacute;e et sortie d\'un &laquo;<html>{italique}</html>&raquo; :',
+	'label:racc_i1' => 'Entr&eacute;e et sortie de la mise en &laquo;<html>{italique}</html>&raquo; :',
+	'label:racc_g1' => 'Entr&eacute;e et sortie de la mise en &laquo;<html>{{gras}}</html>&raquo; :',
 	'label:radio_desactive_cache3' => 'D&eacute;sactiver le cache :',
 	'label:radio_filtrer_javascript3' => '@_CS_CHOIX@',
 	'label:radio_set_options4' => '@_CS_CHOIX@',
