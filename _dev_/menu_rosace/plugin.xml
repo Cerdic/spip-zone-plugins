@@ -5,12 +5,12 @@
 	</description>
 	<lien>
 		<a href="/ecrire/?exec=cfg&amp;cfg=rosace" title="Aller &agrave; la configuration du menu">Configuration</a><br />
-		<a href="#" title="Voir la proc&eacute;dure d&rsquo;installation">Installation </a> et <a href="" title="Voir la documentation">documentation </a>
+		<a href="#" title="Voir la proc&eacute;dure d&rsquo;installation">Installation </a> et <a href="http://tispip.etab.ac-caen.fr/?Menu-rosace" title="Voir la documentation">documentation </a>
 	</lien>
 	<version>1.0</version>
 	<prefix>rosace</prefix>
 	<etat>dev</etat>
-	<auteur>Dominique (DoM) Lepaisant - Equipe TICE - CRDP de Basse Normandie <br />Fr&eacute;d&eacute;ric Taraud</auteur>
+	<auteur>Dominique (DoM) Lepaisant - Equipe TICE - CRDP de Basse Normandie <br />Fr&eacute;d&eacute;ric Taraud - Lyc&eacute;e Durzy</auteur>
 	<icon>img_pack/logo_rosace_75.png</icon>
 	<fonctions></fonctions>
 	<necessite id="cfg" version="[1.7;]" />
