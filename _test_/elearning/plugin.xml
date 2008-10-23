@@ -43,5 +43,5 @@ _ En plus d'avoir ses cours en ligne, on peut donc faire des tests notés, voir 
 	<necessite id='bigbrother' version="[0.2;]" />
 	<necessite id='jeux' version="[1.0.08;]" />
 	<necessite id='Crayons' version="[1.0;]" />
-	<necessite id='marquepages' version="[0.2;]"/>
+	<!--necessite id='marquepages' version="[0.2;]"/-->
 </plugin>
