@@ -2,87 +2,89 @@
 <!-- refus=Seuls les webmestres du site sont autoris&#233;s &#224; modifier ces param&#232;tres. -->
 <!-- nom=inscription2 -->
 
-[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
-[<p class="formulaire_message">(#ENV*{message_ok})</p>]
-	
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
 <form method="post" action="#SELF">
 	<div>
 		#ACTION_FORMULAIRE{SELF}
 	
 		[(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
-		<div class="entete-formulaire">
-			<h1><:inscription2:info_defaut:></h1>
-		</div>
-		<div class="formulaire_spip">
+		<fieldset>
 			<ul>
-				<li>
-					<div class="explication">
-						<p><:inscription2:info_defaut_desc:></p>
-						<small id="legend">
-							<strong><:inscription2:form:></strong><:inscription2:form_expl:><br />
-							<strong><span style="color:red">*</span></strong><:inscription2:form_oblig_expl:><br />
-							<strong><:inscription2:fiche_mod:></strong><:inscription2:fiche_mod_expl:><br />
-							<strong><:inscription2:fiche:></strong><:inscription2:fiche_expl:><br />
-							<strong><:inscription2:table:></strong><:inscription2:table_expl:><br />
-						</small>	
-					</div>
-				</li>
-				<li>
-					<table>
-						<thead>
-							<tr>
-								<th style="width:140px"><:inscription2:form:></th>
-								<th style="width:70px"><:inscription2:fiche_mod:></th>
-								<th style="width:70px"><:inscription2:fiche:></th>
-								<th style="width:70px"><:inscription2:table:></th>
-							</tr>
-						</thead>
-						<tr>
-						<td>
-							<label><:inscription2:nom:></label>
-						</td>
-						</tr>
-						<tr>
-							<td>
-								<input type="checkbox" name="nom" [checked="(#ENV{nom}?{checked})"] id="nom" />
-								<div style="display:none;">
-									<input type="checkbox" name="nom_obligatoire" checked="checked" id="nom_obligatoire" />
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:inscription2:info_defaut:></h3>
+						<ul>
+							<li>
+								<div class="explication">
+									<p><:inscription2:info_defaut_desc:></p>
+									<small id="legend">
+										<strong><:inscription2:form:></strong><:inscription2:form_expl:><br />
+										<strong><span style="color:red">*</span></strong><:inscription2:form_oblig_expl:><br />
+										<strong><:inscription2:fiche_mod:></strong><:inscription2:fiche_mod_expl:><br />
+										<strong><:inscription2:fiche:></strong><:inscription2:fiche_expl:><br />
+										<strong><:inscription2:table:></strong><:inscription2:table_expl:><br />
+									</small>	
 								</div>
-							</td>
-							<td>
-								<input type="checkbox" name="nom_fiche_mod" onclick="enadis(this,nom_fiche)" [checked="(#ENV{nom_fiche_mod}?{checked})"] id="nom_fiche_mod" />
-							</td>
-							<td>
-								<input type="checkbox" name="nom_fiche" [checked="(#ENV{nom_fiche}?{checked})"] id="nom_fiche" [disabled ="(#ENV{nom_fiche_mod}?{disabled})"] />
-							</td>
-							<td>
-								<input type="checkbox" name="nom_table" [checked="(#ENV{nom_table}?{checked})"] id="nom_table" />
-							</td>
-						</tr>
-						<tr>
-							<td><label><:inscription2:email:></label></td>
-						</tr>
-						<tr>
-							<td>
-								<input type="checkbox" name="email" checked="checked" id="email" onclick="alert('par defaut');return false;"/>
-								<div style="display:none;">
-									<input type="checkbox" name="email_obligatoire" checked="checked" id="email_obligatoire" />
-								</div>
-							</td>
-							<td>
-								<input type="checkbox" name="email_fiche_mod" onclick = "enadis(this,email_fiche)" [checked="(#ENV{email_fiche_mod}?{checked})"] id="email_fiche_mod" />
-							</td>
-							<td>
-								<input type="checkbox" name="email_fiche" [checked="(#ENV{email_fiche}?{checked})"] id="email_fiche" [disabled ="(#ENV{email_fiche_mod}?{disabled})"] />
-							</td>
-							<td>
-								<input type="checkbox" name="email_table" [checked="(#ENV{email_table}?{checked})"] id="email_table" />
-							</td>
-						</tr>
-					</table>
+							</li>
+							<li>
+								<table>
+									<thead>
+										<tr>
+											<th style="width:140px"><:inscription2:form:></th>
+											<th style="width:70px"><:inscription2:fiche_mod:></th>
+											<th style="width:70px"><:inscription2:fiche:></th>
+											<th style="width:70px"><:inscription2:table:></th>
+										</tr>
+									</thead>
+									<tr>
+									<td>
+										<label><:inscription2:nom:></label>
+									</td>
+									</tr>
+									<tr>
+										<td>
+											<input type="checkbox" name="nom" [checked="(#ENV{nom}?{checked})"] id="nom" />
+											<div style="display:none;">
+												<input type="checkbox" name="nom_obligatoire" checked="checked" id="nom_obligatoire" />
+											</div>
+										</td>
+										<td>
+											<input type="checkbox" name="nom_fiche_mod" onclick="enadis(this,nom_fiche)" [checked="(#ENV{nom_fiche_mod}?{checked})"] id="nom_fiche_mod" />
+										</td>
+										<td>
+											<input type="checkbox" name="nom_fiche" [checked="(#ENV{nom_fiche}?{checked})"] id="nom_fiche" [disabled ="(#ENV{nom_fiche_mod}?{disabled})"] />
+										</td>
+										<td>
+											<input type="checkbox" name="nom_table" [checked="(#ENV{nom_table}?{checked})"] id="nom_table" />
+										</td>
+									</tr>
+									<tr>
+										<td><label><:inscription2:email:></label></td>
+									</tr>
+									<tr>
+										<td>
+											<input type="checkbox" name="email" checked="checked" id="email" onclick="alert('par defaut');return false;"/>
+											<div style="display:none;">
+												<input type="checkbox" name="email_obligatoire" checked="checked" id="email_obligatoire" />
+											</div>
+										</td>
+										<td>
+											<input type="checkbox" name="email_fiche_mod" onclick = "enadis(this,email_fiche)" [checked="(#ENV{email_fiche_mod}?{checked})"] id="email_fiche_mod" />
+										</td>
+										<td>
+											<input type="checkbox" name="email_fiche" [checked="(#ENV{email_fiche}?{checked})"] id="email_fiche" [disabled ="(#ENV{email_fiche_mod}?{disabled})"] />
+										</td>
+										<td>
+											<input type="checkbox" name="email_table" [checked="(#ENV{email_table}?{checked})"] id="email_table" />
+										</td>
+									</tr>
+								</table>
+							</li>
+						</ul>
+					</fieldset>
 				</li>
-			</ul>
-		</div>
 		
 		[(#REM) ------------------------ INFORMATIONS PERSONNELLES? ------------------------ ]
 		<INCLURE{fond=fonds/inscription2_infos_persos}>
@@ -102,10 +104,9 @@
 		#PIPELINE{I2_cfg_form}
 		
 		[(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
-		<div class="entete-formulaire" id="option">
-			<h1><:inscription2:info_gener:></h1>
-		</div>
-		<div class="formulaire_spip">
+		<li class="fieldset" id="option">
+			<fieldset>
+			<h3 class="legend"><:inscription2:info_gener:></h3>
 			<ul>
 				<li>
 					<p class="explication">
@@ -123,38 +124,38 @@
 					<label>
 						<:inscription2:exp_domaines:>
 					</label>
-					<p><input type="checkbox" name="domaines" onclick="showhide(this, '#expl')" [(#ENV{domaines}|?{checked="checked"})] id="domaines" /></p>
+					<input type="checkbox" name="domaines" onclick="showhide(this, '#expl')" [(#ENV{domaines}|?{checked="checked"})] id="domaines" />
 					<span id="expl" style="[(#ENV{domaines}|=={on}|?{display: block;, display:none;})]"><:inscription2:exp_domaines2:></span>
 				</li>
 			</ul>
-		</div>
+			</fieldset>
+		</li>
 	
-		<div class="entete-formulaire">
-			<h1><:inscription2:info_internes:></h1>
-		</div>
-		<div class="formulaire_spip">
+		<li class="fieldset">
+			<fieldset>
+			<h3 class="legend"><:inscription2:info_internes:></h3>
 			<ul>
 				<li>
 					<p class="explication">
-					<:inscription2:info_internes_desc:>
+						<:inscription2:info_internes_desc:>
 					</p>
 				</li>
 				<li>
-					<label><:inscription2:divers:></label>
 					<p class="explication"><:inscription2:exp_divers:></p>
+					<label><:inscription2:divers:></label>
 					<input type="checkbox" name="divers" [checked="(#ENV{divers}?{checked})"] id="divers" />
 				</li>
 				<li>
 					<label><:inscription2:statut:></label>
 					<p class="explication"><:inscription2:exp_statut:></p>
 					<select name="statut_nouveau" id="statut_nouveau">
-						<option value='6forum' [selected="(#ENV{statut_nouveau}|=={6forum}|?{selected})"]><:inscription2:visiteur:></option>
-						<option value='1comite' [selected="(#ENV{statut_nouveau}|=={1comite}|?{selected})"]><:inscription2:auteur:></option>
+						<option value='6forum' [selected="(#ENV{statut_nouveau}|=={6forum}|oui)selected"]><:inscription2:visiteur:></option>
+						<option value='1comite' [selected="(#ENV{statut_nouveau}|=={1comite}|oui)selected"]><:inscription2:auteur:></option>
 					</select>
 				</li>
 				<li>
 					<label><:inscription2:creation:></label>
-					<p><input type="checkbox" name="creation" [checked="(#ENV{creation}?{checked})"] id="creation" /></p>
+					<input type="checkbox" name="creation" [checked="(#ENV{creation}|oui)checked"] id="creation" />
 				</li>
 				<li>
 					<label><:inscription2:statut_rel:></label>
@@ -163,11 +164,14 @@
 					<input type="text" name="statut_interne" id="statut_interne" style="[(#ENV{statut_int}|=={on}|?{display: block;, display:none;})]" value="#ENV{statut_interne}" />
 				</li>
 			</ul>
-			<p class="boutons">
-				<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
-				<input type="submit" name="_cfg_delete" class="submit" value="<:effacer:>" />
-			</p>
-		</div>
+			</fieldset>
+		</li>
+	</ul>
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
+		<input type="submit" name="_cfg_delete" class="reset" value="<:effacer:>" />
+	</p>
+		</fieldset>
 	</div>
 </form>
 

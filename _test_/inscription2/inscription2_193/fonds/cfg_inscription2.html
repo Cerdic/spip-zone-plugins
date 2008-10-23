@@ -1,8 +1,6 @@
 <!-- titre=Inscription2 -->
 <!-- icone=images/inscription2_icone.png-->
-
 [(#SET{logo, <img src='[(#CHEMIN{images/inscription2.png})]' width='64' height='64' alt='Hand writing' style="float:#LANG_RIGHT;" /> })]
-
 <!-- descriptif= [(#GET{logo})] Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site,vous pouvez choisir ici les champs suppl&eacute;mentaires
 
 <a href="?exec=inscription2_adherents"><:inscription2:liste_adherents:></a> 
@@ -26,11 +24,7 @@
 ]
 -->
 
-<!-- autoriser=webmestre -->
-<!-- refus=Seuls les webmestres du site sont autoris&#233;s &#224; modifier ces param&#232;tres. -->
-<!-- presentation=non -->
-
 #CACHE{0}
-<h2>Inscription2</h2>
-<div class="ajax">
-#FORMULAIRE_CONFIG_INSCRIPTION2</div>
+<div class="formulaire_spip formulaire_editer ajax">
+#FORMULAIRE_CONFIG_INSCRIPTION2
+</div>
