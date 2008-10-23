@@ -1,4 +1,4 @@
-<?
+<?php
 echo "spip";
 function afficher_livres($langue){
 	return 'spip';

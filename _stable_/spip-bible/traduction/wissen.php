@@ -1,4 +1,4 @@
-<?
+<?php
 
 
 function recuperer_passage($livre,$ref,$wissen,$lang){

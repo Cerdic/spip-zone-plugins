@@ -1,4 +1,4 @@
-<?
+<?php
 function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapitre_fin='',$verset_fin='',$id_trad,$lang){
 	$verset_debut=='' ? $verset_debut = 1 : $verset_debut = $verset_debut;
 	//reperer le numero de livre
