@@ -77,7 +77,7 @@ _ Cet outil remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trou
 Vous pouvez ici d&eacute;finir certains raccourcis de SPIP. Une valeur vide &eacute;quivaut &agrave; utiliser la valeur par d&eacute;faut.[[%racc_hr%]][[%puce%]]',
 	'class_spip:description3' => '
 
-{Notez : si l\'outil &laquo;&nbsp;Belles puces&nbsp;&raquo; est activ&eacute;, le remplacement du tiret &laquo;&nbsp;-&nbsp;&raquo; ne sera plus effectu&eacute&nbsp;; une liste &lt;ul>&lt;li> sera utilis&eacute;e &agrave; la place.}
+{Attention : si l\'outil &laquo;&nbsp;Belles puces&nbsp;&raquo; est activ&eacute;, le remplacement du tiret &laquo;&nbsp;-&nbsp;&raquo; ne sera plus effectu&eacute;&nbsp;; une liste &lt;ul>&lt;li> sera utilis&eacute;e &agrave; la place.}
 
 SPIP utilise habituellement la balise &lt;h3&gt; pour les intertitres. Choisissez ici un autre remplacement :[[%racc_h1%]][[->%racc_h2%]]',
 	'class_spip:description4' => '
