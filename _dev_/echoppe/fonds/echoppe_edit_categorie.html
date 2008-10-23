@@ -11,15 +11,16 @@
 		
 		<b><:echoppe:dans_la_categorie:></b><br />
 		<B_les_categ>
-		<select name="id_parent" >
-		<BOUCLE_les_categ(CATEGORIES)>
+		<select name="categorie[id_parent]" >
+			<option value="0"><:echoppe:a_la_racine:></option>
+		<BOUCLE_les_categ(ECHOPPE_CATEGORIES)>
 			<option value="#ID_CATEGORIE">#TITRE</option>
 		</BOUCLE_les_categ>
 		</select>
 		</B_les_categ>
 		<input type="text" class="forml" name="fake_id_parent" value="<:echoppe:a_la_racine:>" disabled="disabled" />
 		<input type="hidden" name="categorie[id_parent]" value="0" />
-		</B_les_categ>
+		<//B_les_categ>
 		<br />
 		<br />
 		<b><:echoppe:descriptif:></b><br />

@@ -16,8 +16,6 @@ function action_echoppe_sauver_categorie(){
 	$id_secteur = recuperer_id_secteur($id_parent, $id_categorie, 'categorie');
 	$categorie = _request('categorie');
 	
-	var_dump($categorie);
-	
 	switch ($new){
 		case 'oui':
 			$valeur = array('id_categorie'=>'','id_parent'=>$id_parent,'id_secteur'=>$id_secteur);

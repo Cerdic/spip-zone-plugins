@@ -41,7 +41,7 @@ function echoppe_tables_principales($tables_principales){
 	
 	$spip_produits = array(
 		"id_produit"		=> "bigint(21) NOT NULL",
-		"id_parent"		=> "bigint(21) DEFAULT '0' NOT NULL",
+		"id_categorie"		=> "bigint(21) DEFAULT '0' NOT NULL",
 		"date_debut"		=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"date_fin"		=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"poids"			=> "float DEFAULT '0' NOT NULL", 	// (crowfoot : probablement pas internationalisé pour le calcul des frais de port)
@@ -66,6 +66,7 @@ function echoppe_tables_principales($tables_principales){
 	
 	$spip_produits_key = array(
 		"PRIMARY KEY"		=> "id_produit",
+		"KEY id_categorie"		=> "id_categorie",
 		"KEY statut"		=> "statut",
 		"KEY date_debut"	=> "date_debut",
 		"KEY date_fin"		=> "date_fin",
@@ -75,6 +76,7 @@ function echoppe_tables_principales($tables_principales){
 
 	$spip_produits_join = array(
 		"id_produit"	=> "id_produit",
+		"id_categorie"	=> "id_categorie",
 		"statut"	=> "statut",
 		"date_debut"	=> "date_debut",
 		"date_fin"	=> "date_fin",
@@ -351,6 +353,7 @@ function echoppe_tables_principales($tables_principales){
 	);
 	
 	return $tables_principales;
+	
 	
 }
 

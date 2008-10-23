@@ -9,14 +9,14 @@
 <br />
 <div>
 	<strong><:echoppe:les_sous_categories:></strong>
-		<ul>
-		<BOUCLE_LesSousCategorie(CATEGORIES){id_secteur = #ID_CATEGORIE}{par num titre}>
-			<li class="cadre-sous_rub" style="width: 45%;margin: 10px 0px 0px 0px;">
+		
+		<BOUCLE_LesSousCategorie(ECHOPPE_CATEGORIES){id_parent = #ID_CATEGORIE}{par num titre}>
+			<div class="cadre-sous_rub" style="width: 45%;margin: 10px 0px 0px 0px;">
 					<strong><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">[(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})]</a></strong>
 					[<div class="verdana1">(#DESCRIPTIF|couper{150})</div>]
-			</li>
+			</div>
 		</BOUCLE_LesSousCategorie>
-		</ul>
+		
 	<div class="nettoyeur"> </div>
 </div>
 </B_LesSousCategorie>
@@ -31,7 +31,7 @@
 		<table width="100%">
 		<tbody>
 		
-			<BOUCLE_LesProduits(PRODUITS){id_categorie}{lang=""}>
+			<BOUCLE_LesProduits(ECHOPPE_PRODUITS){id_categorie}>
 				<tr class="tr_liste">
 				<td style="width: 11px;"><div class='etat #STATUT'> </div></td>
 				<td class="arial2">
@@ -39,7 +39,7 @@
 						<strong><a href="[(#EVAL{echoppe_produit}|generer_url_ecrire{id_produit=#ID_PRODUIT})]">[(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})]</a></strong>[<div class="verdana1">(#DESCRIPTIF|couper{150})</div>]
 					
 				</td>
-				<td width="80px" class="arial1">&nbsp;<?php $grand_total = 0;  ?><BOUCLE_LeTotal(SPIP_ECHOPPE_STOCK_PRODUITS){id_produit}><?php $grand_total = $grand_total + #QUANTITE;  ?></BOUCLE_LeTotal><?php echo $grand_total;  ?> <:echoppe:en_stock:></td>
+				<td width="80px" class="arial1">&nbsp;<?php $grand_total = 0;  ?><BOUCLE_LeTotal(ECHOPPE_STOCK_PRODUITS){id_produit}><?php $grand_total = $grand_total + #QUANTITE;  ?></BOUCLE_LeTotal><?php echo $grand_total;  ?> <:echoppe:en_stock:></td>
 				<td width="50px" class="arial1">[(#REF_PRODUIT|sinon{<em><:echoppe:pas_de_num_de_ref:></em>})]</td>
 				</tr>
 			</BOUCLE_LesProduits>
