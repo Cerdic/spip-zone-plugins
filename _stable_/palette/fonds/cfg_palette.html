@@ -15,9 +15,9 @@ Exemple: <input class="palette" name="couleur" value="#dfdfdf" style="width:5em"
 <form method="post" action="#SELF">[<div>(#ENV{_cfg_}|form_hidden)</div>]
   <fieldset><legend><:titre_configuration:></legend>
   <p align="#LANG_RIGHT">
-  <label><:palette:palette_public:></label><input type="checkbox" name="palette_public" [checked="(#ENV{palette_public}|!={''}|?{'checked'})"] class="fondl" />
+  <label><:palette:palette_public:></label><input type="checkbox" name="palette_public" [checked="(#ENV{palette_public}|!={''}|?{'checked'})"] class="fondl" value="on" />
   <br />
-  <label><:palette:palette_ecrire:></label><input type="checkbox" name="palette_ecrire" [checked="(#ENV{palette_ecrire}|!={''}|?{'checked'})"] class="fondl" />
+  <label><:palette:palette_ecrire:></label><input type="checkbox" name="palette_ecrire" [checked="(#ENV{palette_ecrire}|!={''}|?{'checked'})"] class="fondl" value="on" />
   </p>
   </fieldset>
 

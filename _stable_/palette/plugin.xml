@@ -4,12 +4,12 @@
 _ &#169; 2008 - <multi>[fr]Distribu&#233; sous licence[en]Released under license[de]Vertrieb unter Lizenz</multi> GNU/LGPL
     </auteur>
     <version>
-    1.0
+    1.0.1
     </version>
     <etat>
     stable
     </etat>
-    <install>palette_pipeline.php</install>
+    <install>palette_install.php</install>
     
     <description>
 			<multi>[fr]S&#233;lecteur de couleurs<br />Donnez la classe palette &agrave; un input pour lui ajouter un s&#233;lecteur de couleurs:<br />&lt;input <b>class="palette"</b> name="couleur" value="#dfdfdf" /&gt;[en]Color picker<br />Set class palette to an input to add a color picker:<br />&lt;input <b>class="palette"</b> name="color" value="#dfdfdf" /&gt;</multi>
@@ -20,8 +20,7 @@ _ &#169; 2008 - <multi>[fr]Distribu&#233; sous licence[en]Released under license
     <icon>
     images/palette.png
     </icon>
-
-		<options>palette_options.php</options>
+	<options>palette_options.php</options>
     <pipeline>
         <nom>insert_head</nom>
         <action>insert_head</action>
@@ -33,4 +32,5 @@ _ &#169; 2008 - <multi>[fr]Distribu&#233; sous licence[en]Released under license
         <action>header_prive</action>
         <inclure>palette_pipeline.php</inclure>
     </pipeline>
+	<utilise id="cfg" version="[1.10.4;]" />
 </plugin>

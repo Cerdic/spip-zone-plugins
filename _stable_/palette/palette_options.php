@@ -8,7 +8,6 @@
  * pour la partie publique et pour l'espace ecrire
  *
  */
-
 if (!function_exists('lire_config')) {
   $options_palette = array(
     'palette_public' => 'on', // la valeur 'on' active Palette pour le site public
