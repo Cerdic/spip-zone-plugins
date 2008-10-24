@@ -5,12 +5,15 @@
 // Traduction -- Pierre FICHES <pierre.fiches@free.fr>
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-//elements de formulaire pour editer les coordonnees
-'clave_engadida' => 'Clef ajout&eacute;e: ',
-'conseguir' => '(obtenir)',
-'default_geoloc' => 'Position par d&eacute;faut des cartes :',
-'configuration' => 'Configuration',
-'miseajour' => 'Mise &agrave; jour'
+
+	'clave_engadida' => 'Clef ajout&eacute;e: ',
+	'conseguir' => '(obtenir)',
+	'default_geoloc' => 'Position par d&eacute;faut des cartes :',
+	'desactiver_custom_control' => 'D&eacute;sactiver custom_control.js',
+	'explication_custom_control' => 'D&eacute;sactiver les contr&ocirc;les personnalis&eacute;s :',
+	'configuration' => 'Configuration',
+	'miseajour' => 'Mise &agrave; jour',
+	'pages_public' => 'Pages publiques'
 );
 
 ?>
