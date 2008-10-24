@@ -1,3 +1,16 @@
+// fonction de de/re-pliement
+(function($) { 
+	$.fn.blocs_toggle = function() { 
+		return $(this).toggleClass('blocs_replie').next().toggleClass('blocs_invisible'); 
+	};
+})(jQuery);
+
+// replie tout sauf le bloc appelant
+// todo : eviter de replier un parent !!
+function blocs_replie_tout(appel) {
+	jQuery('h4.blocs_click').not('.blocs_replie').not(appel).blocs_toggle();
+}
+
 // compatibilite Ajax : ajouter "this" a "jQuery" pour mieux localiser les actions 
 // et tagger avec cs_done pour eviter de binder plrs fois le meme bloc
 function blocs_init() {
@@ -5,8 +18,7 @@ function blocs_init() {
 	jQuery('div.blocs_resume', this).not('.cs_done').addClass('cs_done')
 	  .prev().removeClass('blocs_click')
 	  .click(function(){
-		jQuery(this).toggleClass('blocs_replie')
-		.next().toggleClass('blocs_invisible')
+		jQuery(this).blocs_toggle()
 		.next().toggleClass('blocs_invisible');
 		// annulation du clic
 		return false;
@@ -15,8 +27,8 @@ function blocs_init() {
 	// sinon...
 	jQuery('h4.blocs_click', this).not('.cs_done').addClass('cs_done')
 	  .click( function(){
-		jQuery(this).toggleClass('blocs_replie')
-		.next().toggleClass('blocs_invisible');
+//		blocs_replie_tout(this);
+		jQuery(this).blocs_toggle();
 		// annulation du clic
 		return false;
 		});
