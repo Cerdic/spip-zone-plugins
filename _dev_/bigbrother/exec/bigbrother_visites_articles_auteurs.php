@@ -1,4 +1,10 @@
 <?php
+#---------------------------------------------------#
+#  Plugin  : Big Brother                            #
+#  Auteur  : RastaPopoulos                          #
+#  Licence : GPL                                    #
+#------------------------------------------------- -#
+
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -13,38 +19,106 @@ function exec_bigbrother_visites_articles_auteurs_dist(){
 	
 	if ($id_article <= 0 and $id_auteur <= 0)
 		echo minipres(_T('bigbrother:erreur_statistiques'));
-	elseif ($id_auteur > 0){
+	else{
 	
-		find_in_path('abstract_sql.php', 'base/', true);
-		// On récupère l'auteur
-		$auteur = sql_fetsel(
-			'*',
-			'spip_auteurs',
-			'id_auteur = '.$id_auteur
-		);
+		// On vérifie si l'auteur exsite
+		if ($id_auteur > 0){
+	
+			find_in_path('abstract_sql.php', 'base/', true);
+			// On récupère l'auteur
+			$auteur = sql_fetsel(
+				'id_auteur, nom',
+				'spip_auteurs',
+				'id_auteur = '.$id_auteur
+			);
 		
-		if (!$auteur)
-			echo minipres(_T('public:aucun_auteur'));
-		else
-			exec_bigbrother_visites_auteur($auteur);
+			if (!$auteur){
+				echo minipres(_T('public:aucun_auteur'));
+				return;
+			}
+	
+		}
+		
+		// On vérifie si l'article existe
+		if ($id_article > 0){
+	
+			find_in_path('abstract_sql.php', 'base/', true);
+			// On récupère l'auteur
+			$article = sql_fetsel(
+				'id_article, titre',
+				'spip_articles',
+				'id_article = '.$id_article
+			);
+		
+			if (!$article){
+				echo minipres(_T('public:aucun_article'));
+				return;
+			}
+	
+		}
+		
+		// Si tout s'est bien passé on affiche les stats
+		if ($id_auteur > 0 and $id_article > 0)
+			echo bigbrother_visites_article_auteur($article, $auteur);
+		elseif ($id_auteur > 0)
+			echo bigbrother_visites_auteur($auteur);
+		elseif ($id_article > 0)
+			echo bigbrother_visites_article($article);
 	
 	}
-	elseif ($id_article > 0){
 	
-		find_in_path('abstract_sql.php', 'base/', true);
-		// On récupère l'auteur
-		$article = sql_fetsel(
-			'*',
-			'spip_articles',
-			'id_article = '.$id_article
+}
+
+
+// Affiche le détail des visites d'un auteur sur un article
+function bigbrother_visites_article_auteur($article, $auteur){
+
+	pipeline('exec_init',array('args'=>array('exec'=>'bigbrother_visites_articles_auteurs','id_auteur'=>$auteur['id_auteur'], 'id_article' => $article['id_article']),'data'=>''));
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	
+	echo $commencer_page($auteur['nom'],"auteurs","redacteurs");
+	
+	echo debut_gauche('', true);
+	
+	echo debut_boite_info(true);
+	echo icone_horizontale(
+		_T('bigbrother:voir_statistiques_auteur'),
+		generer_url_ecrire('bigbrother_visites_articles_auteurs','id_auteur='.$auteur['id_auteur']),
+		find_in_path('redacteurs-24.gif', 'images/', false),
+		'',
+		false
+	);
+	echo icone_horizontale(
+		_T('bigbrother:voir_statistiques_article'),
+		generer_url_ecrire('bigbrother_visites_articles_auteurs','id_article='.$article['id_article']),
+		find_in_path('article-24.gif', 'images/', false),
+		'',
+		false
+	);
+	echo fin_boite_info(true);
+	
+	echo creer_colonne_droite('', true);
+	echo pipeline('affiche_droite',
+		array('args' => array(
+			'exec' => 'bigbrother_visites_articles_auteurs',
+			'id_auteur' => $auteur['id_auteur'],
+			'id_article' => $article['id_article']),
+			'data'=>'')
 		);
-		
-		if (!$article)
-			echo minipres(_T('public:aucun_article'));
-		else
-			exec_bigbrother_visites_article($article);
+	echo debut_droite('', true);
+
+	echo debut_cadre_relief("redacteurs-24.gif", true,'','','auteur-voir');
+	echo recuperer_fond(
+		'fonds/bigbrother_statistiques_article_auteur',
+		array(
+			'id_auteur' => $auteur['id_auteur'],
+			'id_article' => $article['id_article'],
+			'titre' => _T('bigbrother:visites_article_auteur', array('nom' => $auteur['nom'], 'titre' => $article['titre']))
+		)
+	);
+	echo fin_cadre_relief(true);
 	
-	}
+	echo fin_gauche(), fin_page();
 	
 }
 
@@ -52,89 +126,93 @@ function exec_bigbrother_visites_articles_auteurs_dist(){
 // Affiche les statistiques de visites d'articles d'un auteur
 // On affiche tous les articles qu'il a visité
 // et à côté le cumul du temps qu'il y a passé
-function exec_bigbrother_visites_auteur($auteur){
+function bigbrother_visites_auteur($auteur){
 
-	pipeline('exec_init',array('args'=>array('exec'=>'bigbrother_visites_articles_auteurs','id_auteur'=>$id_auteur),'data'=>''));
+	pipeline('exec_init',array('args'=>array('exec'=>'bigbrother_visites_articles_auteurs','id_auteur'=>$auteur['id_auteur']),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	
 	echo $commencer_page($auteur['nom'],"auteurs","redacteurs");
 	
 	echo debut_gauche('', true);
 	
+	echo debut_boite_info(true);
+	echo icone_horizontale(
+		_T('lien_voir_auteur'),
+		generer_url_ecrire('auteur_infos','id_auteur='.$auteur['id_auteur']),
+		find_in_path('redacteurs-24.gif', 'images/', false),
+		'',
+		false
+	);
+	echo fin_boite_info(true);
+	
+	echo creer_colonne_droite('', true);
+	echo pipeline('affiche_droite',
+		array('args' => array(
+			'exec'=>'bigbrother_visites_articles_auteurs',
+			'id_auteur'=>$auteur['id_auteur']),
+			'data'=>'')
+		);
+	echo debut_droite('', true);
+
+	echo debut_cadre_relief("redacteurs-24.gif", true,'','','auteur-voir');
+	echo recuperer_fond(
+		'fonds/bigbrother_statistiques_auteur',
+		array(
+			'id_auteur' => $auteur['id_auteur'],
+			'nom' => $auteur['nom']
+		)
+	);
+	echo fin_cadre_relief(true);
+	
+	echo fin_gauche(), fin_page();
 	
 }
 
 
-// http://doc.spip.org/@articles_edit
-function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new, $config_fonc, $row)
-{
-	$id_article = $row['id_article'];
-	$id_rubrique = $row['id_rubrique'];
-	$titre = sinon($row["titre"],_T('info_sans_titre'));
+// Affiche les statistiques de visites d'un article par des auteurs
+// On affiche tous les auteurs qui l'ont visité
+// et à côté le cumul du temps qu'ils y ont passé
+// puis le cumul du tout et la moyenne
+function bigbrother_visites_article($article){
+
+	pipeline('exec_init',array('args'=>array('exec'=>'bigbrother_visites_articles_auteurs','id_article'=>$article['id_article']),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	pipeline('exec_init',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
 	
-	if ($id_version) $titre.= ' ('._T('version')." $id_version)";
-
-	echo $commencer_page(_T('titre_page_articles_edit', array('titre' => $titre)), "naviguer", "articles", $id_rubrique);
-
-	echo debut_grand_cadre(true);
-	echo afficher_hierarchie($id_rubrique);
-	echo fin_grand_cadre(true);
-
-	echo debut_gauche("",true);
-
-	// Pave "documents associes a l'article"
+	echo $commencer_page($article['titre'],"articles","redacteurs");
 	
-	if (!$new){
-		# affichage sur le cote des pieces jointes, en reperant les inserees
-		# note : traiter_modeles($texte, true) repere les doublons
-		# aussi efficacement que propre(), mais beaucoup plus rapidement
-		traiter_modeles(join('',$row), true);
-		echo afficher_documents_colonne($id_article, 'article');
-	} else {
-		# ICI GROS HACK
-		# -------------
-		# on est en new ; si on veut ajouter un document, on ne pourra
-		# pas l'accrocher a l'article (puisqu'il n'a pas d'id_article)...
-		# on indique donc un id_article farfelu (0-id_auteur) qu'on ramassera
-		# le moment venu, c'est-a-dire lors de la creation de l'article
-		# dans editer_article.
-		echo afficher_documents_colonne(
-			0-$GLOBALS['visiteur_session']['id_auteur'], 'article');
-	}
-
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
-	echo creer_colonne_droite("",true);
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
-	echo debut_droite("",true);
+	echo debut_gauche('', true);
 	
-	$oups = ($lier_trad ?
-	     generer_url_ecrire("articles","id_article=$lier_trad")
-	     : ($new
-		? generer_url_ecrire("naviguer","id_rubrique=".$row['id_rubrique'])
-		: generer_url_ecrire("articles","id_article=".$row['id_article'])
-		));
-
-	$contexte = array(
-	'icone_retour'=>icone_inline(_T('icone_retour'), $oups, "article-24.gif", "rien.gif",$GLOBALS['spip_lang_left']),
-	'redirect'=>generer_url_ecrire("articles"),
-	'titre'=>$titre,
-	'new'=>$new?$new:$row['id_article'],
-	'id_rubrique'=>$row['id_rubrique'],
-	'lier_trad'=>$lier_trad,
-	'config_fonc'=>$config_fonc,
-	// passer row si c'est le retablissement d'une version anterieure
-	'row'=> $id_version
-		? $row
-		: null
+	echo debut_boite_info(true);
+	echo icone_horizontale(
+		_T('icone_modifier_article'),
+		generer_url_ecrire('articles','id_article='.$article['id_article']),
+		find_in_path('article-24.gif', 'images/', false),
+		'',
+		false
 	);
-
-	$milieu = recuperer_fond("prive/editer/article", $contexte);
+	echo fin_boite_info(true);
 	
-	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>$milieu));
+	echo creer_colonne_droite('', true);
+	echo pipeline('affiche_droite',
+		array('args' => array(
+			'exec'=>'bigbrother_visites_articles_auteurs',
+			'id_article'=>$article['id_article']),
+			'data'=>'')
+		);
+	echo debut_droite('', true);
 
+	echo debut_cadre_relief("article-24.gif", true,'','','article-voir');
+	echo recuperer_fond(
+		'fonds/bigbrother_statistiques_article',
+		array(
+			'id_article' => $article['id_article'],
+			'titre' => $article['titre']
+		)
+	);
+	echo fin_cadre_relief(true);
+	
 	echo fin_gauche(), fin_page();
+	
 }
 
 ?>

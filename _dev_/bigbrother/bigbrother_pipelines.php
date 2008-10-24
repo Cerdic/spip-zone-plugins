@@ -21,6 +21,21 @@ function bigbrother_affiche_droite($flux){
 		$flux['data'] .= $boite;  
 	
 	}
+	elseif ($flux['args']['exec'] == 'articles'){
+	
+		$boite = debut_boite_info(true)
+			. icone_horizontale(
+				_T('bigbrother:voir_statistiques_article'),
+				generer_url_ecrire('bigbrother_visites_articles_auteurs','id_article='.$flux['args']['id_article']),
+				find_in_path('bigbrother-24.png', 'images/', false),
+				'',
+				false
+			)
+			. fin_boite_info(true);		
+		
+		$flux['data'] .= $boite;  
+	
+	}
 	
 	return $flux;
 }

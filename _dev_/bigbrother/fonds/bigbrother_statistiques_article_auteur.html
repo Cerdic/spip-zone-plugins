@@ -1,0 +1,26 @@
+#CACHE{0}
+
+<h1>#ENV*{titre}</h1>
+
+<B_visites_articles>
+<table cellspacing="0" cellpadding="2" width="100%">
+	<thead>
+		<tr class="row_first">
+			<th><:bigbrother:date_debut:></th>
+			<th><:bigbrother:date_fin:></th>
+			<th><:bigbrother:temps_passe:></th>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_visites_articles(VISITES_ARTICLES_AUTEURS){id_auteur}{id_article}{par date_debut}>
+[(#DATE_FIN|!={0000-00-00 00:00:00}|oui)
+	<tr class="tr_liste">
+		<td>[(#DATE_DEBUT|affdate_court)], [(#DATE_DEBUT|affdate{H:i:s})]</td>
+		<td>[(#DATE_FIN|affdate_court)], [(#DATE_FIN|affdate{H:i:s})]</td>
+		<td>[(#DATE_DEBUT|bigbrother_duree{#DATE_FIN,horaire})]</td>
+	</tr>
+]
+</BOUCLE_visites_articles>
+	</tbody>
+</table>
+</B_visites_articles>

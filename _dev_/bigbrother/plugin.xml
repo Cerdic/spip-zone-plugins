@@ -6,20 +6,21 @@
  		RastaPopoulos - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version> <!-- Version du plugin -->
-		0.2
+		0.3
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 		dev
 	</etat>
 	<icon>images/bigbrother.png</icon>
 	<description>
-		Ce plugin garde en m&eacute;moire les visites de toutes les personnes ayant un compte.
+		Ce plugin permet de garder en m&eacute;moire les visites de toutes les personnes ayant un compte.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
 		bigbrother
 	</prefix>
 	<options>bigbrother_options.php</options>
+	<fonctions>bigbrother_fonctions.php</fonctions>
 	<install>base/bigbrother_installation.php</install>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>

@@ -1,0 +1,43 @@
+#CACHE{0}
+
+<h1>#ENV{nom}</h1>
+
+#SET{temps, #ARRAY}
+#SET{articles,#ARRAY}
+<BOUCLE_comptage(VISITES_ARTICLES_AUTEURS){id_auteur}{par date_debut}>
+[(#DATE_FIN|!={0000-00-00 00:00:00}|oui)
+	#SET{
+		temps,
+		#GET{temps}|array_merge{
+			#ARRAY{
+				art#ID_ARTICLE,
+				#GET{temps}|table_valeur{art#ID_ARTICLE,0}|plus{#DATE_DEBUT|bigbrother_duree{#DATE_FIN,secondes}}
+			}
+		}
+	}
+	#SET{articles,#GET{articles}|push{#ID_ARTICLE}}
+]
+</BOUCLE_comptage>
+#SET{articles,#GET{articles}|array_unique}
+
+
+<B_visites_articles>
+<table cellspacing="0" cellpadding="2" width="100%">
+	<thead>
+		<tr class="row_first">
+			<th>Id</th>
+			<th><:articles:></th>
+			<th><:bigbrother:temps_passe:></th>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_visites_articles(ARTICLES){id_article IN #GET{articles}}{par titre}>
+	<tr class="tr_liste">
+		<td>N°#ID_ARTICLE</td>
+		<td><a title="<:bigbrother:detail:>" href="[(#URL_ECRIRE{bigbrother_visites_articles_auteurs}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{id_auteur,#ID_AUTEUR})]">#TITRE</a></td>
+		[<td>(#GET{temps}|table_valeur{art#ID_ARTICLE}|bigbrother_duree{0,horaire})</td>]
+	</tr>
+</BOUCLE_visites_articles>
+	</tbody>
+</table>
+</B_visites_articles>
