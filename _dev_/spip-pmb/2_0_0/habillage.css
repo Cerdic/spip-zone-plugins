@@ -127,10 +127,12 @@ h1.pas-de-texte, .page_recherche h1, .page_nouveautes .cartouche h1, .page_actua
 
 .surlignable .spip_logos { float: left; margin-right: 16px; margin-bottom: 4px; }
 
-.soustitre { color: #336666; text-decoration: none; margin-top: 0.50em; margin-bottom: 0.30em; margin-left: 150px; font-style: italic; }
-.chapo { margin-left: 150px; line-height: 1.40em; font-family: Georgia, serif; font-weight: bold; }
-.texte { margin-left: 150px; line-height: 1.60em; padding-top: .5em; color: #000; font-family: Georgia, serif; }
-.hyperlien { margin-left: 150px; display: block; font-weight: bold; color: #999966; }
+.corps-conteneur { margin-left: 150px };
+
+.soustitre { color: #336666; text-decoration: none; margin-top: 0.50em; margin-bottom: 0.30em; font-style: italic; }
+.chapo { line-height: 1.40em; font-family: Georgia, serif; font-weight: bold; }
+.texte { line-height: 1.60em; padding-top: .5em; color: #000; font-family: Georgia, serif; }
+.hyperlien { display: block; font-weight: bold; color: #999966; }
 .ps, .notes { margin-left: 150px; margin-bottom: 2em; line-height: 1.40em; }
 .notes { margin-left: 150px; clear: both; font-size: 0.90em; }
 
