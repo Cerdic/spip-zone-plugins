@@ -1,7 +1,7 @@
 /*
-  Un defilement doux code alternatif propose par ZiWaM <ziwam@bzh.net>
-  avec une modif par Fil <fil@rezo.net>
-  cf. http://www.spip-contrib.net/Ancres-douces#forum409454
+  Un defilement doux code provenant de
+  http://www.learningjquery.com/2007/10/improved-animated-scrolling-script-for-same-page-links
+  update 3 (en bas de la page)
 */
 ;(function($){
 $.fn.ancresdouces = function() {
