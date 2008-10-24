@@ -32,19 +32,19 @@
 	Ce fichier est un des composants de Menudep. 
 	
 	Menudep est un programme libre, vous pouvez le redistribuer et/ou le modifier 
-	selon les termes de la Licence Publique Generale GNU publiée par 
-	la Free Software Foundation (version 2 ou bien toute autre version ultérieure 
+	selon les termes de la Licence Publique Generale GNU publie'e par 
+	la Free Software Foundation (version 2 ou bien toute autre version ulterieure 
 	choisie par vous).
 	
-	Menudep est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,
+	Menudep est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,
 	ni explicite ni implicite, y compris les garanties de commercialisation ou
-	d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU 
-	pour plus de détails. 
+	d'adaptation dans un but specifique. Reportez-vous a' la Licence Publique Generale GNU 
+	pour plus de details. 
 	
-	Vous devez avoir reçu une copie de la Licence Publique Generale GNU 
-	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez à la  
+	Vous devez avoir recu une copie de la Licence Publique Generale GNU 
+	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a' la  
 	Free Software Foundation, Inc., 
-	59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.
+	59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.
 	
 	*****************************************************/
 
@@ -78,7 +78,7 @@ function exec_menudep_configuration () {
 	$menudep_values_array = unserialize(_MENUDEP_DEFAULT_VALUES_ARRAY);
 	
 	////////////////////////////////////
-	// initialise les variables postées par le formulaire
+	// initialise les variables postees par le formulaire
 	foreach(array_merge(
 		array(
 			'btn_valider_configure'
@@ -107,7 +107,7 @@ function exec_menudep_configuration () {
 	// valider la configuration
 	if($btn_valider_configure) {
 		$config = array();
-		// compléter les checkbox manquantes
+		// completer les checkbox manquantes
 		foreach($menudep_values_array as $key => $value) {
 			if(($value == 'oui') && !isset($$key)) {
 				$$key = 'non';
@@ -129,7 +129,7 @@ function exec_menudep_configuration () {
 		}
 	}
 	
-	// mettre à jour les variables locales
+	// mettre a' jour les variables locales
 	$config = __plugin_lire_key_in_serialized_meta('config', _MENUDEP_META_PREFERENCES);
 	foreach($config as $key=>$value) {
 		$$key = $value;
@@ -165,7 +165,7 @@ function exec_menudep_configuration () {
 		;
 
 	////////////////////////////////////
-	// Boite principale des réglages
+	// Boite principale des reglages
 	$page_result .= ""
 		. debut_cadre_trait_couleur(_DIR_PLUGIN_MENUDEP_IMG_PACK."administration-24.png", true, "", _T(_MENUDEP_LANG."configuration_menu_depliant"))
 		. "<div  style='text-align: $spip_lang_left;font-style: italic;' class='verdana2'>\n"
@@ -175,7 +175,7 @@ function exec_menudep_configuration () {
 		. menudep_form_debut_form('form_configuration')
 		;
 	//
-	// sélecteurs
+	// selecteurs
 	$page_result .= ""
 		. "<fieldset class='text-center'>\n"
 		. "<legend>"._T(_MENUDEP_LANG."configurer_selecteurs")."</legend>\n"

@@ -32,19 +32,19 @@
 	Ce fichier est un des composants de Menudep. 
 	
 	Menudep est un programme libre, vous pouvez le redistribuer et/ou le modifier 
-	selon les termes de la Licence Publique Generale GNU publiée par 
-	la Free Software Foundation (version 2 ou bien toute autre version ultérieure 
+	selon les termes de la Licence Publique Generale GNU publie'e par 
+	la Free Software Foundation (version 2 ou bien toute autre version ulterieure 
 	choisie par vous).
 	
-	Menudep est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,
+	Menudep est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,
 	ni explicite ni implicite, y compris les garanties de commercialisation ou
-	d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU 
-	pour plus de détails. 
+	d'adaptation dans un but specifique. Reportez-vous a' la Licence Publique Generale GNU 
+	pour plus de details. 
 	
-	Vous devez avoir reçu une copie de la Licence Publique Generale GNU 
-	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez à la  
+	Vous devez avoir recu une copie de la Licence Publique Generale GNU 
+	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a' la  
 	Free Software Foundation, Inc., 
-	59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.
+	59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.
 	
 	*****************************************************/
 
@@ -56,8 +56,8 @@ function menudep_install ($action) {
 
 	switch($action) {
 		case 'test':
-			// si renvoie true, c'est que la base est à jour, inutile de re-installer
-			// la valise plugin "effacer tout" apparaît.
+			// si renvoie true, c'est que la base est a' jour, inutile de re-installer
+			// la valise plugin "effacer tout" apparait.
 			// si renvoie false, SPIP revient avec $action = 'install' (une seule fois)
 			$result = intval(isset($GLOBALS['meta'][_MENUDEP_META_PREFERENCES]));
 			return($result);
@@ -66,7 +66,7 @@ function menudep_install ($action) {
 			return(menudep_init());
 			break;
 		case 'uninstall':
-			// est appellé lorsque "Effacer tout" dans exec=admin_plugin
+			// est appelle lorsque "Effacer tout" dans exec=admin_plugin
 			return(menudep_vider_tables());
 			break;
 		default:
@@ -81,7 +81,7 @@ function menudep_init () {
 		'prefix' => _MENUDEP_PREFIX
 		, 'version' => __plugin_real_tag_get(_MENUDEP_PREFIX, 'version')
 		, 'date_install' => date('Y-m-d_H:i:s')
-		, 'config' => array() // configuration complétée par exec_config
+		, 'config' => array() // configuration completee par exec_config
 	);
 	ecrire_meta(_MENUDEP_META_PREFERENCES, serialize($menudep_init));
 	return(__ecrire_metas());
