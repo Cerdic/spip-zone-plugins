@@ -37,6 +37,8 @@ function pmb_charger_page ($url_base, $file) {
 
 }
 
+
+
 function pmb_accueil_extraire($url_base) {
 	$tableau_resultat = Array();
 	

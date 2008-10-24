@@ -63,11 +63,16 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 #top #formulaire_recherche { position: absolute; right: 0; top: 1em; text-align: right; } /*Cf.: spip_formulaires.css*/
 #top #formulaire_recherche input.text { width: 10em; text-align: left; } /*Cf.: spip_formulaires.css*/
 
-#formulaire_recherche .choix-recherche, #formulaire_recherche .champ-recherche { display: block; }
+#formulaire_recherche .choix-recherche { display: block;; padding-left: .5em; margin-bottom: .5em; }
+#formulaire_recherche .champ-recherche { display: block; }
 #formulaire_recherche .choix-recherche label { display: inline; font-size: .8em; color: white; }
-#formulaire_recherche .choix-recherche span { width: 50%; float: left; }
+#formulaire_recherche .choix-recherche span { display: block; }
 #formulaire_recherche .choix-recherche span.tous-champs { float: left; clear: left; position: relative; width: 100%; }
-formulaire_recherche .champ-recherche input.text { padding-left: .5em; }
+#formulaire_recherche .champ-recherche input.text { padding-left: .5em; }
+#formulaire_recherche .choix-recherche span input { margin-left: 0; }
+#formulaire_recherche .recherche-avancee { float: right; padding-right: .5em; }
+#formulaire_recherche .recherche-avancee a { color: white; font-size: .8em; }
+
 
 #conteneur { position: relative; margin-top: 10px; clear: both; float: left; width: 730px; overflow: hidden; background-image: url(bordure-gris.gif); background-repeat: repeat-y; background-position: top right;}
 #contenu { margin-right: 10px; padding-left: 1em; }
@@ -100,7 +105,7 @@ formulaire_recherche .champ-recherche input.text { padding-left: .5em; }
 .page_nouveautes .cartouche, .page_actualites .cartouche {margin-bottom: 0; }
 .cartouche h1 { background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: bottom left; font-family: Georgia, serif; font-size: 3em; color: #333300; line-height: 1em; padding-bottom: .5em; }
 .cartouche h1.titre-long { font-size: 2.5em; }
-.page_nouveautes .cartouche h1, .page_auteur .cartouche h1, .page_ouvrages .cartouche h1 .page_actualites .cartouche h1 { background: none; padding-bottom: 0; }
+h1.pas-de-texte, .page_recherche h1, .page_nouveautes .cartouche h1, .page_actualites .cartouche h1, .page_auteur .cartouche h1, .page_ouvrages .cartouche h1 .page_actualites .cartouche h1 { background: none; padding-bottom: 0; }
 .cartouche div.socialtags { clear: none; float: right; }
 
 
@@ -235,12 +240,12 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .principal ul li a:hover { color: white; background: #999966; text-decoration: none; }
 
 /* Listes d'articles et extraits introductifs */
-.articles { padding: 1em; padding-right: 0; }
+.articles { position: relative; padding: 0; }
 .articles .plus-de-liens { color: #999966; font-size: 1.4em; padding-left: .6em; font-family: Georgia, serif;}
 .articles .plus-de-liens { vertical-align: bottom; }
 .articles .plus-de-liens:hover { color: #999966; }
 .articles ul { border: none; }
-.articles ul li { clear: both; padding: 1.2em 0.20em; padding-left: 0; border: none; background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: top left;}
+.articles ul li { clear: both; padding: 1.2em 0; padding-left: 0; border: none; background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: top left;}
 .articles ul li h3 { margin: 0.30em 0; text-transform: uppercase; font-family: Arial, sans-serif; font-size: 1em;}
 .articles .logo-encart { float: left; clear: left; height: 11em; }
 .articles .spip_logos { margin: 0; margin-bottom: .5em; margin-right: 1em; margin-left: 1em; }
@@ -259,8 +264,8 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .ouvrages ul li { float: right; clear: right; width: 100%; } 
 
 /* liste des collections d'un éditeur pmb */
-.collections { background: #E6E8D5; }
-
+.collections { }
+.page_editeur .spip_logos { margin-left: 0; }
 
 /* sites référencés */
 .web { float: right; width: 35%; margin-top: 3em; margin-bottom: 2em; color: #333300; }
@@ -271,7 +276,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .web ul li a:hover { color: #333333; text-decoration: none; border-bottom: 1px solid #333300; }
 
 /* page d'accueil */
-.page_sommaire .articles ul { float: left; background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: top left; }
+.page_sommaire .articles ul { float: left; width: 100%; background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: top left; }
 .page_sommaire .articles ul li { width: 25%; _height: 13em; min-height: 13em; float: left; clear: none; padding-bottom: 0; margin-top: .5em; background-image: url(bordure-gris.gif); background-repeat: repeat-y; background-position: top left; }
 .page_sommaire .articles ul li.premier { background-image: none; }
 .page_sommaire .articles ul li.avec-photo { width: 45%; }
@@ -423,4 +428,4 @@ div#page, div#conteneur, div#navigation, div#extra { width: auto; }
 
 .fond-blanc { position: absolute; top: 0; left: 0; width: 100%; height: 108px; background: white; }
 
-.navbar { clear: right; float: right; margin-right: 2em; }
+.navbar { clear: right; float: right; margin-right: 2em; margin-bottom: 2em; }

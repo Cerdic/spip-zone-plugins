@@ -34,7 +34,7 @@
 			#ANCRE_PAGINATION
 			[<p class="pagination">(#PAGINATION)</p>]
 			<ul>
-			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){pmb_photo_src!=""} {par date}{inverse}{pagination 10}>[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'',' '})
+			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){pmb_photo_src!=""} {par date}{inverse}{pagination 50}>[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'',' '})
 					[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{width}|>{20}|?{' ',''})
 						[(#DESCRIPTIF|strlen|>{100}|?{' ',''})
 								<li class="hentry[ (#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'','avec-logo'})][ (#GET{nb_revues}|=={1}|?{'premier',''})]">

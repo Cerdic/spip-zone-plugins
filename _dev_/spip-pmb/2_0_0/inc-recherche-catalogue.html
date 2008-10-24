@@ -1,0 +1,55 @@
+<BOUCLE_rechercheurlbase(SYNDIC_ARTICLES_PMB){0,1}>
+
+		<div class="menu articles">
+			
+			<ul>
+		<?php
+			$tab_resultat = pmb_recherche_extraire($_REQUEST['recherche'], "#PMB_URL_BASE" );
+			if (count($tab_resultat)>0) {
+		?>
+				<h2><:ouvrages:></h2>
+		<?php
+			}
+
+			for($j=1;$j<count($tab_resultat);$j++) {
+			 	$resultat = $tab_resultat[$j];
+
+
+		?>
+			<li>	
+				<?php 
+					/*if($resultat['logo_src']) {
+						if ($cl = copie_locale($resultat['logo_src'])) {
+							if ($ir = image_reduire($resultat['logo_src'], 130, 0)) {
+								echo(inserer_attribut($ir,'class','spip_logos')); 
+							}	
+						}
+						
+					}*/
+					if($resultat['logo_src']) {
+						echo("<img src=\"".$resultat['logo_src']."\" class=\"spip_logos\" />");
+					}
+				?>
+				<h3><a href="index.php?page=notice_display&id=<?php echo($resultat['id']); ?>&seule=1"><?php echo($resultat['titre']); ?></a></h3>
+                			
+				<?php 
+					if($resultat['lesauteurs']) {
+					
+					?>
+						<small><:par_auteur:> <?php echo($resultat['lesauteurs']); ?></small>
+			
+					<?php 
+					}
+					?>
+					<div class="introduction entry-content"><?php echo(couper($resultat['resume'],300,'...')); ?></div>
+					<a class="lire-la-suite" title="<?php echo(texte_backend($resultat['titre'])); ?>" href="index.php?page=notice_display&id=<?php echo($resultat['id']); ?>&seule=1"><:lire_la_suite:> +</a>
+			</li>
+
+		<?php
+			}
+			
+		?>
+			</ul>
+			<?php echo($tab_resultat[0]['nav_bar']); ?>
+		</div>
+		</BOUCLE_rechercheurlbase>

@@ -25,7 +25,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'autres_lecteurs' => 'Les abonn&eacute;s qui ont emprunt&eacute; ce document ont &eacute;galement emprunt&eacute;',
 'ouvrages' => 'Ouvrages',
 'collections' => 'Collections',
-'isbn' => 'ISBN/ISSN/EAN'
+'isbn' => 'ISBN/ISSN/EAN',
+'recherche_catalogue' => 'Dans le catalogue',
+'recherche_portail_web' => 'Dans le site',
+'recherche_avancee' => 'Recherche avanc&eacute;e'
 
 );
 
