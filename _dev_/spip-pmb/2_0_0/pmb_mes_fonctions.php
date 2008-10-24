@@ -167,10 +167,10 @@ function pmb_auteur_extraire($id_auteur, $url_base, $pmb_page=1) {
 
 }
 
-function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS=0, $look_ALL=0, $look_AUTHOR=0, $look_PUBLISHER=0, $look_COLLECTION=0, $look_SUBCOLLECTION=0, $look_CATEGORY=0, $look_INDEXINT=0, $look_KEYWORDS=0, $look_TITLE=0, $look_ABSTRACT=0) {
+function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS='', $look_ALL='', $look_AUTHOR='', $look_PUBLISHER='', $look_COLLECTION='', $look_SUBCOLLECTION='', $look_CATEGORY='', $look_INDEXINT='', $look_KEYWORDS='', $look_TITLE='', $look_ABSTRACT='', $surligne='', $typdoc='', $ok='') {
 	$tableau_resultat = Array();
 	
-	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=search_result&look_ALL=".$look_ALL."&look_FIRSTACCESS=".$look_FIRSTACCESS."&look_AUTHOR=".$look_AUTHOR."&look_PUBLISHER=".$look_PUBLISHER."&look_COLLECTION=".$look_COLLECTION."&look_CATEGORY=".$look_CATEGORY."&look_INDEXINT=".$look_INDEXINT."&look_KEYWORDS=".$look_KEYWORDS."&look_ABSTRACT=".$look_ABSTRACT."&user_query=".$recherche)) {
+	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=search_result&surligne=".$surligne."&typdoc=".$typdoc."&ok=".$ok."&look_ALL=".$look_ALL."&look_FIRSTACCESS=".$look_FIRSTACCESS."&look_AUTHOR=".$look_AUTHOR."&look_PUBLISHER=".$look_PUBLISHER."&look_COLLECTION=".$look_COLLECTION."&look_CATEGORY=".$look_CATEGORY."&look_INDEXINT=".$look_INDEXINT."&look_KEYWORDS=".$look_KEYWORDS."&look_ABSTRACT=".$look_ABSTRACT."&user_query=".$recherche)) {
 			$tableau_resultat[0] = Array();
 			$tableau_resultatt[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
 			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);

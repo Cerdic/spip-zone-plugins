@@ -1,10 +1,11 @@
+<a id="resultats_recherche"></a>
+			
 <BOUCLE_rechercheurlbase(SYNDIC_ARTICLES_PMB){0,1}>
 
 		<div class="menu articles">
-			
 			<ul>
 		<?php
-			$tab_resultat = pmb_recherche_extraire($_REQUEST['recherche'], "#PMB_URL_BASE" );
+			$tab_resultat = pmb_recherche_extraire($_REQUEST['recherche'], "#PMB_URL_BASE", $_REQUEST['look_FIRSTACCESS'], $_REQUEST['look_ALL'], $_REQUEST['look_AUTHOR'], $_REQUEST['look_PUBLISHER'], $_REQUEST['look_COLLECTION'], $_REQUEST['look_SUBCOLLECTION'], $_REQUEST['look_CATEGORY'], $_REQUEST['look_INDEXINT'], $_REQUEST['look_KEYWORDS'], $_REQUEST['look_TITLE'], $_REQUEST['look_ABSTRACT'], $_REQUEST['surligne'], $_REQUEST['typdoc'], $_REQUEST['ok']);
 			if (count($tab_resultat)>0) {
 		?>
 				<h2><:ouvrages:></h2>
@@ -26,9 +27,8 @@
 						}
 						
 					}*/
-					if($resultat['logo_src']) {
-						echo("<img src=\"".$resultat['logo_src']."\" class=\"spip_logos\" />");
-					}
+					
+					echo("<img src=\"".$resultat['logo_src']."\" class=\"spip_logos\" />");
 				?>
 				<h3><a href="index.php?page=notice_display&id=<?php echo($resultat['id']); ?>&seule=1"><?php echo($resultat['titre']); ?></a></h3>
                 			

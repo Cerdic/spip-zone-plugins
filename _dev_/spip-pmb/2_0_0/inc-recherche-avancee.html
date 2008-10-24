@@ -8,7 +8,7 @@
 
 			<div class='row'>
 
-			<form name='search_input' action='index.php' method='get' onSubmit="if (search_input.user_query.value.length == 0) { search_input.user_query.value='*'; return true; }">
+			<form name='search_input' action='index.php#resultats_recherche' method='get' onSubmit="if (search_input.user_query.value.length == 0) { search_input.user_query.value='*'; return true; }">
 
 				 <select name='typdoc'>  <option  value='' selected>tout type de document</option>
 					  <option  value='2'></option>
@@ -32,21 +32,22 @@
 				<input type='hidden' name='surligne' value=''/>
 				<input type='hidden' name='page' value='recherche'/>
 				<input type='hidden' name='recherche_avancee' value='1'/>
+				<input type='hidden' name='look_PMB' value='1'/>
 				<input type='text' name='recherche' class='text_query' value="#ENV{recherche}" size='65' />
 
 				<input type='submit' name='ok' value='Rechercher' class='boutonrechercher'/>
 				<div id='simple_search_zone'><div class='row'>
 				
-						<span style='width: 30%; float: left;'><input type='checkbox' name='look_TITLE' id='look_TITLE' value='1'  /><label for='look_TITLE'> Titres </label></span>
-						<span style='width: 30%; float: left;'><input type='checkbox' name='look_AUTHOR' id='look_AUTHOR' value='1'  /><label for='look_AUTHOR'> Auteurs </label></span>
-						<span style='width: 30%; float: left;'><input type='checkbox' name='look_PUBLISHER' id='look_PUBLISHER' value='1'  /><label for='look_PUBLISHER'> Editeurs </label></span>
-						<span style='width: 30%; float: left;'><input type='checkbox' name='look_COLLECTION' id='look_COLLECTION' value='1'  /><label for='look_COLLECTION'> Collections </label></span>
-						<span style='width: 30%; float: left;'><input type='checkbox' name='look_SUBCOLLECTION' id='look_SUBCOLLECTION' value='1'  /><label for='look_SUBCOLLECTION'> Sous-collections </label></span>
-						<span style='width: 30%; float: left;'><input type='checkbox' name='look_CATEGORY' id='look_CATEGORY' value='1'  /><label for='look_CATEGORY'> Catégories </label></span>
+						<span style='width: 30%; float: left;'><input type='checkbox' name='look_TITLE' id='look_TITLE' value='1'[(#ENV{look_TITLE}|=={1}|?{' ',''})checked]  /><label for='look_TITLE'> Titres </label></span>
+						<span style='width: 30%; float: left;'><input type='checkbox' name='look_AUTHOR' id='look_AUTHOR' value='1'[(#ENV{look_AUTHOR}|=={1}|?{' ',''})checked]  /><label for='look_AUTHOR'> Auteurs </label></span>
+						<span style='width: 30%; float: left;'><input type='checkbox' name='look_PUBLISHER' id='look_PUBLISHER' value='1'[(#ENV{look_PUBLISHER}|=={1}|?{' ',''})checked]  /><label for='look_PUBLISHER'> Editeurs </label></span>
+						<span style='width: 30%; float: left;'><input type='checkbox' name='look_COLLECTION' id='look_COLLECTION' value='1'[(#ENV{look_COLLECTION}|=={1}|?{' ',''})checked]  /><label for='look_COLLECTION'> Collections </label></span>
+						<span style='width: 30%; float: left;'><input type='checkbox' name='look_SUBCOLLECTION' id='look_SUBCOLLECTION' value='1'[(#ENV{look_SUBCOLLECTION}|=={1}|?{' ',''})checked]  /><label for='look_SUBCOLLECTION'> Sous-collections </label></span>
+						<span style='width: 30%; float: left;'><input type='checkbox' name='look_CATEGORY' id='look_CATEGORY' value='1'[(#ENV{look_CATEGORY}|=={1}|?{' ',''})checked]  /><label for='look_CATEGORY'> Catégories </label></span>
 						
-						<span style='width: 30%; float: left;'><input type='checkbox' name='look_INDEXINT' id='look_INDEXINT' value='1'  /><label for='look_INDEXINT'> Indexations décimales </label></span>
-						<span style='width: 30%; float: left;'><input type='checkbox' name='look_KEYWORDS' id='look_KEYWORDS' value='1'  /><label for='look_KEYWORDS'> Tags</label></span>
-						<span style='width: 30%; float: left;'><input type='checkbox' name='look_ABSTRACT' id='look_ABSTRACT' value='1'  /><label for='look_ABSTRACT'> Résumé et notes </label></span>
+						<span style='width: 30%; float: left;'><input type='checkbox' name='look_INDEXINT' id='look_INDEXINT' value='1'[(#ENV{look_INDEXINT}|=={1}|?{' ',''})checked]  /><label for='look_INDEXINT'> Indexations décimales </label></span>
+						<span style='width: 30%; float: left;'><input type='checkbox' name='look_KEYWORDS' id='look_KEYWORDS' value='1'[(#ENV{look_KEYWORDS}|=={1}|?{' ',''})checked]  /><label for='look_KEYWORDS'> Tags</label></span>
+						<span style='width: 30%; float: left;'><input type='checkbox' name='look_ABSTRACT' id='look_ABSTRACT' value='1'[(#ENV{look_ABSTRACT}|=={1}|?{' ',''})checked]  /><label for='look_ABSTRACT'> Résumé et notes </label></span>
 						<span style='width: 30%; float: left;'><input type='checkbox' name='look_ALL' id='look_ALL' value='1' checked /><label for='look_ALL'> Tous les champs </label></span></div><div style='clear: both;'><input type='hidden' name='look_FIRSTACCESS' value='1' />
 				</div></div>
 
