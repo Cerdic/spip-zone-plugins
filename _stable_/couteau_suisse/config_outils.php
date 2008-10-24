@@ -412,12 +412,14 @@ add_variable( array(
 	'format' => _format_CHAINE,
 	'defaut' => defined('_SPIP19300')?"''":"'<h3 class=\"spip\">'",
 	'code:strlen(%s)' => "\$GLOBALS['debut_intertitre']=%s;\n",
+	'code:!strlen(%s)' => "\$GLOBALS['debut_intertitre']=\"<h3\$GLOBALS[class_spip_plus]>\";\n",
 ));
 add_variable( array(
 	'nom' => 'racc_h2',
 	'format' => _format_CHAINE,
 	'defaut' => defined('_SPIP19300')?"''":"'</h3>'",
 	'code:strlen(%s)' => "\$GLOBALS['fin_intertitre']=%s;\n",
+	'code:!strlen(%s)' => "\$GLOBALS['fin_intertitre']='</h3>';\n",
 ));
 add_variable( array(
 	'nom' => 'racc_i1',
@@ -450,7 +452,7 @@ add_variable( array(
 add_variable( array(
 	'nom' => 'puce',
 	'format' => _format_CHAINE,
-	'defaut' => '"AUTO"',
+	'defaut' => defined('_SPIP19300')?"''":'"AUTO"',
 	'code:strlen(%s)' => "\$GLOBALS['puce']=%s;",
 ));
 add_outil( array(
@@ -463,7 +465,7 @@ add_outil( array(
 		(!defined('_SPIP19300')?'<:class_spip:1:>':'<:class_spip:2:>').
 	// des SPIP 1.91 : les intertitres
 		'<:class_spip:3:>'.
-	// des SPIP 1.93 : les italiques + les styles
+	// des SPIP 1.93 : les italiques, les gras + les styles
 		(!defined('_SPIP19300')?'':'<:class_spip:4:>'),
 ));
 

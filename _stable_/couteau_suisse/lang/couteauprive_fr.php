@@ -91,8 +91,8 @@ SPIP a choisi d\'utiliser la balise &lt;i> pour transcrire les italiques. Mais &
 {Attention : si certains raccourcis (ligne horizontale, intertitre, italique, gras) ont &eacute;t&eacute; modifi&eacute;s ci-dessus, alors les styles ci-dessous ne seront pas appliqu&eacute;s.}
 
 <blockquote style=\'margin:0 2em;\'>
-_ {{1.}} Balises &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; et les listes (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[%style_p%]]
-_ {{2.}} Balises &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; et &lt;blockquote&gt; :[[%style_h%]]
+_ {{1.}} Balises &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; :[[%style_p%]]
+_ {{2.}} Balises &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt;, &lt;blockquote&gt; et les listes (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[%style_h%]]
 
 Notez bien : en modifiant ce deuxi&egrave;me style, vous perdez alors les styles standards de SPIP associ&eacute;s &agrave; ces balises.</blockquote>',
 	'class_spip:nom' => 'SPIP et ses raccourcis&hellip;',
