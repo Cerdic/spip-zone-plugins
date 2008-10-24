@@ -5,22 +5,28 @@
 */
 ;(function($){
 $.fn.ancresdouces = function() {
-  return this.click(function() {
-    if ((location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,''))
-    && (location.hostname == this.hostname)) {
-      var hash = this.hash.slice(1);
-      var $target = $('#'+hash);
-      $target = $target.length && $target
-        || $('[name=' + this.hash +']');
-      if ($target.length) {
-        var targetOffset = $target.offset().top;
-        $('html,body')
-        .animate({scrollTop: targetOffset},
-          1000,
-          function(){location.hash = hash;}
-        );
-        return false;
-     }
+  function filterPath(string) {
+  return string
+    .replace(/^\//,'')
+    .replace(/(index|default).[a-zA-Z]{3,4}$/,'')
+    .replace(/\/$/,'');
   }
-});
+  var locationPath = filterPath(location.pathname);
+  return this.each(function() {
+    var thisPath = filterPath(this.pathname) || locationPath;
+    if (  locationPath == thisPath
+    && (location.hostname == this.hostname || !this.hostname)
+    && this.hash.replace(/#/,'') ) {
+      var $target = $(this.hash), target = this.hash;
+      if (target) {
+        var targetOffset = $target.offset().top;
+        $(this).click(function(event) {
+          event.preventDefault();
+          $('html, body').animate({scrollTop: targetOffset}, 1000, function() {
+            location.hash = target;
+          });
+        });
+      }
+    }
+  });
 }})(jQuery);
