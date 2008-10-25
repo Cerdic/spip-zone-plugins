@@ -1,28 +1,30 @@
 // fonction de de/re-pliement
-(function($) { 
-	$.fn.blocs_toggle = function() {
-		dest = $(this).toggleClass('blocs_replie')
-			.next().toggleClass('blocs_invisible')
-		// est-on sur un resume ?
-		if (dest.is('div.blocs_resume')) dest.next().toggleClass('blocs_invisible');
-		// est-on sur un bloc ajax ?
-		url = $(this).children().attr("href");
-		if(url != 'javascript:;') {
-			// une fois le bloc ajax en place, plus besoin de le recharger ensuite
-			$(this).children().attr("href", 'javascript:;');
-			// ici, on charge !
-			$(this).parent().children(".blocs_destination")
-			//.animeajax()
-			.load(url);
-		}
-		return $(this);
-	};
-})(jQuery);
+jQuery.fn.blocs_toggle = function() {
+	if (!this.length) return this;
+	dest = this.toggleClass('blocs_replie')
+		.next().toggleClass('blocs_invisible')
+	// est-on sur un resume ?
+	if (dest.is('div.blocs_resume')) dest.next().toggleClass('blocs_invisible');
+	// est-on sur un bloc ajax ?
+	url = this.children().attr("href");
+	if(url != 'javascript:;') {
+		// une fois le bloc ajax en place, plus besoin de le recharger ensuite
+		this.children().attr("href", 'javascript:;');
+		// ici, on charge !
+		this.parent().children(".blocs_destination")
+		//.animeajax()
+		.load(url);
+	}
+	return this;
+};
 
 // replie tout sauf le bloc appelant et sa lignee parentale
-function blocs_replie_tout(appel) {
-	lignee = jQuery(appel).parents('div.cs_blocs').children('h4.blocs_titre');
-	jQuery('h4.blocs_titre').not('h4.blocs_replie').not(lignee).blocs_toggle();
+jQuery.fn.blocs_replie_tout = function() {
+	if(blocs_replier_tout) {
+		var lignee = this.parents('div.cs_blocs').children('h4.blocs_titre');
+		jQuery('h4.blocs_titre').not('.blocs_replie').not(lignee).blocs_toggle();
+	}
+	return this;
 }
 
 // compatibilite Ajax : ajouter "this" a "jQuery" pour mieux localiser les actions 
@@ -30,8 +32,7 @@ function blocs_replie_tout(appel) {
 function blocs_init() {
 	jQuery('h4.blocs_titre', this).not('.cs_done').addClass('cs_done')
 	  .click( function(){
-		if(blocs_replier_tout) blocs_replie_tout(this);
-		jQuery(this).blocs_toggle();
+		jQuery(this).blocs_replie_tout().blocs_toggle();
 		// annulation du clic
 		return false;
 		});
