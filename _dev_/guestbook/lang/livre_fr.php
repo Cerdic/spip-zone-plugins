@@ -13,11 +13,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // C
 	'creation_des_tables_mysql' => 'Création des tables MySQL',
 	'creer_tables_mysql' => 'Créer les tables MySQL',
-	'confirm' => 'Confirmez !',
+	'confirm' => 'Confirmer !',
 // D
 	'destroy' => 'Destruction des tables',
 // E
-	'email' => 'Email',
+	'email' => 'E-mail',
 // I
 	'installhd' => 'Vos nouvelles tables sont créées !',
 // L
