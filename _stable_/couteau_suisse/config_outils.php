@@ -922,13 +922,21 @@ add_outil( array(
 	'code:css' => 'a.spip_out:after {display:none;}',
 )); 
 
+add_variable( array(
+	'nom' => 'bloc_unique',
+	'format' => _format_NOMBRE,
+	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
+	'defaut' => 0,
+	'code:%s' => "define('_decoupe_BALISE', %s);\n",
+));
 add_outil( array(
 	'id' => 'blocs',
 	'categorie'	=> 'typo-racc',
 	'contrib' => 2583,
 	// fonction blocs_init() codee dans blocs.js : executee lors du chargement de la page et a chaque hit ajax
+	'code:js' => "var blocs_replier_tout = %%bloc_unique%%;",
 	'code:jq_init' => 'blocs_init.apply(this);',
-	'jquery'	=> 'oui',
+	'jquery' => 'oui',
 	'pipeline:pre_typo' => 'blocs_pre_typo',
 	'pipeline:bt_toolbox' => 'blocs_BarreTypo',
 ));

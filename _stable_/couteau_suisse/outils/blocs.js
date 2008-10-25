@@ -1,49 +1,38 @@
 // fonction de de/re-pliement
 (function($) { 
-	$.fn.blocs_toggle = function() { 
-		return $(this).toggleClass('blocs_replie').next().toggleClass('blocs_invisible'); 
+	$.fn.blocs_toggle = function() {
+		dest = $(this).toggleClass('blocs_replie')
+			.next().toggleClass('blocs_invisible')
+		// est-on sur un resume ?
+		if (dest.is('div.blocs_resume')) dest.next().toggleClass('blocs_invisible');
+		// est-on sur un bloc ajax ?
+		url = $(this).children().attr("href");
+		if(url != 'javascript:;') {
+			// une fois le bloc ajax en place, plus besoin de le recharger ensuite
+			$(this).children().attr("href", 'javascript:;');
+			// ici, on charge !
+			$(this).parent().children(".blocs_destination")
+			//.animeajax()
+			.load(url);
+		}
+		return $(this);
 	};
 })(jQuery);
 
-// replie tout sauf le bloc appelant
-// todo : eviter de replier un parent !!
+// replie tout sauf le bloc appelant et sa lignee parentale
 function blocs_replie_tout(appel) {
-	jQuery('h4.blocs_click').not('.blocs_replie').not(appel).blocs_toggle();
+	lignee = jQuery(appel).parents('div.cs_blocs').children('h4.blocs_titre')
+	jQuery('h4.blocs_titre').not('h4.blocs_replie').not(lignee).blocs_toggle();
 }
 
 // compatibilite Ajax : ajouter "this" a "jQuery" pour mieux localiser les actions 
 // et tagger avec cs_done pour eviter de binder plrs fois le meme bloc
 function blocs_init() {
-	// si un resume est present...
-	jQuery('div.blocs_resume', this).not('.cs_done').addClass('cs_done')
-	  .prev().removeClass('blocs_click')
-	  .click(function(){
-		jQuery(this).blocs_toggle()
-		.next().toggleClass('blocs_invisible');
-		// annulation du clic
-		return false;
-		});
-
-	// sinon...
-	jQuery('h4.blocs_click', this).not('.cs_done').addClass('cs_done')
+	jQuery('h4.blocs_titre', this).not('.cs_done').addClass('cs_done')
 	  .click( function(){
-//		blocs_replie_tout(this);
+		if(blocs_replier_tout) blocs_replie_tout(this);
 		jQuery(this).blocs_toggle();
 		// annulation du clic
-		return false;
-		});
-
-	// si un bloc ajax est present...
-	jQuery('h4.blocs_ajax', this).not('.cs_done').addClass('cs_done')
-	  .click(function(){
-		var k=jQuery(this).children().attr("href");
-		if(k=='javascript:;') return false;
-		// une fois le bloc ajax en place, plus besoin de le recharger ensuite
-		jQuery(this).children().attr("href", 'javascript:;');
-		// ici, on charge !
-		jQuery(this).parent().children(".blocs_destination")
-//.animeajax()
-		.load(k);
 		return false;
 		});
 }
@@ -61,7 +50,7 @@ var blocs_pagination = blocs_get_pagination(window.location.hash);
 
 /*
 // Si un bloc contient une pagination inseree dans un bloc,
-// code JS a inserer dans votre squelette APRES les appels du Couteau Suisse
+// code JS a inserer dans le header de votre squelette APRES les appels du Couteau Suisse
 jQuery(document).ready(function() {
 	if(blocs_pagination!==false) {
 		jQuery('div.cs_bloc' + blocs_pagination + ' h4.blocs_titre').eq(0).click();

@@ -27,7 +27,7 @@ function balise_BLOC_TITRE_NUM($p) {
 	$numero = interprete_argument_balise(1, $p);
 	$numero = $numero===NULL?"''":"bloc_is_num($numero)";
 	
- 	$p->code=" '<div class=\"cs_blocs'.$numero.'\"><h4 class=\"blocs_titre blocs_replie blocs_click $ajax\"><a href=\"'.".$fragment.".'\">' ";
+ 	$p->code=" '<div class=\"cs_blocs'.$numero.'\"><h4 class=\"blocs_titre blocs_replie $ajax\"><a href=\"'.".$fragment.".'\">' ";
 	return $p;
 }
 
@@ -43,7 +43,7 @@ function balise_BLOC_TITRE($p) {
 		$ajax="";
 		$bloc_stade[]=1;
 	}
-	$p->code=" '<div class=\"cs_blocs\"><h4 class=\"blocs_titre blocs_replie blocs_click $ajax\"><a href=\"'.".$fragment.".'\">' ";
+	$p->code=" '<div class=\"cs_blocs\"><h4 class=\"blocs_titre blocs_replie $ajax\"><a href=\"'.".$fragment.".'\">' ";
 	return $p;
 }
 

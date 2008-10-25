@@ -50,7 +50,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  #BLOC_DEBUT
  Mon bloc depliable (qui contiendra l\'URL pointee si necessaire)
  #BLOC_FIN</code></quote>
+ 
+@puce@ En cochant &laquo;oui&raquo; ci-dessous, l\'ouverture d\'un bloc provoquera la fermeture de tous les autres blocs de la page, afin d\'en avoir qu\'un seul ouvert &agrave; la fois.[[%bloc_unique%]]
 ',
+	'label:bloc_unique' => 'Un seul bloc ouvert sur la page :',
 	'blocs:nom' => 'Blocs D&eacute;pliables',
 	'boites_privees:description' => 'Toutes les bo&icirc;tes d&eacute;crites ci-dessous apparaissent dans la partie priv&eacute;e.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]]
 - {{Les r&eacute;visions du Couteau Suisse}} : un cadre sur la pr&eacute;sente page de configuration, indiquant les derni&egrave;res modifications apport&eacute;es au code du plugin ([Source->@_CS_RSS_SOURCE@]).
