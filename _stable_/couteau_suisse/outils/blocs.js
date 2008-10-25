@@ -21,7 +21,7 @@
 
 // replie tout sauf le bloc appelant et sa lignee parentale
 function blocs_replie_tout(appel) {
-	lignee = jQuery(appel).parents('div.cs_blocs').children('h4.blocs_titre')
+	lignee = jQuery(appel).parents('div.cs_blocs').children('h4.blocs_titre');
 	jQuery('h4.blocs_titre').not('h4.blocs_replie').not(lignee).blocs_toggle();
 }
 
