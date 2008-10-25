@@ -50,7 +50,8 @@ function typo_exposants_fr($texte){
 
 		'/(\b[0-9IVX]+)i?(?:e|'._TYPO_EGRAVE.')?me(s?)\b/', // Erreurs (i)(e)me(s) + accents
 		'/\b([0-9IVX]+)(es?)\b/', // 2e(s), IIIe(s)... (les 1(e?r?s?) ont deja ete remplaces)
-		'/\b(\d+)o\b/', // primo, secondo, etc.
+		'/\b(r|v|\d+)o\b/', // recto, verso, primo, secondo, etc.
+		'/(?<=\bM)(es?)(?= [A-Z])/', // Maitre(s) (suivi d'un espace et d'une majuscule)
 	), array(
 		_TYPO_sup, _TYPO_sup,		// Mlle(s), Mme(s), Mgr
 
@@ -65,7 +66,8 @@ function typo_exposants_fr($texte){
 
 		'$1<sup class="typo_exposants">e$2</sup>', // Erreurs me, eme, ème, ième + pluriels
 		_TYPO_sup2, // 2e(s), IIIe(s)...
-		'$1<sup class="typo_exposants">o</sup>', // 1o, 2o, etc.
+		'$1<sup class="typo_exposants">o</sup>', // ro, vo, 1o, 2o, etc.
+		_TYPO_sup,	// Me(s)
 	));
 	return preg_replace($typo[0], $typo[1], $texte);
 }
