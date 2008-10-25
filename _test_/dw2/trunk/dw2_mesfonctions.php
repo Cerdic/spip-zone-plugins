@@ -61,48 +61,47 @@ function balise_URL_DOCUMENT($p) {
 */
 function dw_redir($texte) {
 	# doc local IMG
-	$expres = "!(<a\ href=\")(IMG/([[:alnum:]]+)/[a-zA-Z0-9_-]+\.\\3)(\"\ (.*)>)!";
+
+	$expres = "!(<a\ href=[\"'])("._DIR_IMG."([[:alnum:]]+)/[a-zA-Z0-9_-]+\.\\3)([\"']\ (.*)>)!";
 	if (preg_match_all($expres, $texte, $reg, PREG_SET_ORDER)) {
 		
 		foreach($reg as $inreg) {
 			$sup_chaine=$inreg[5];
 			# temporaire a peaufiner car : si on veux mettre compteur sur image en <docxxx|...> ?? hein ?
 			#h.24/11 .. ne pas modifier si type=image/...
-			if(ereg("type=\"image\/",$inreg[5])) {
+			if(ereg("type=[\"']image\/",$inreg[5])) {
 				$retour = $inreg[0];
 			}
 			else {
 				$chem=$inreg[2];
-				$res=sql_select("id_document","spip_documents","fichier='$chem'");
-				while($row=sql_fetch($res)) {
+
+				if ( $row=sql_fetsel("id_document","spip_documents","fichier='$chem' OR fichier='".set_spip_doc($chem)."'") ) {
 					$id = $row['id_document'];
 					$retour = parametre_url(parametre_url($inreg[1],"action","dw2_out"),"id",$id,"&amp;").$inreg[4];
+					$texte = str_replace($inreg[0], $retour, $texte);
 				}
-				$texte = str_replace($inreg[0], $retour, $texte);
 			}
 		}
 	}
 
 
 	// et distant ...
-	$expres2 = "!(<a\ href=\")([http://|ftp://]([a-zA-Z0-9/_-]+))(\"\ (.*)>)!";
+	$expres2 = "!(<a\ href=[\"'])([http://|ftp://]([a-zA-Z0-9/_-]+))([\"']\ (.*)>)!";
 	if(preg_match_all($expres2, $texte, $reg2, PREG_SET_ORDER)) {
 		foreach($reg2 as $in_reg) {
 			$chemin=$inreg[2];
-			$res2=sql_select("id_document","spip_documents","fichier='$chemin'");
-			while($row2 = sql_fetch($res2)) {
+			if ($row2=sql_fetsel("id_document","spip_documents","fichier='$chemin'")) {
 				$id = $row2['id_document'];
 				$replace = parametre_url(parametre_url($in_reg[1],"action","dw2_out"),"id",$id,"&amp;").$in_reg[4];
-			}
-			$texte = str_replace($in_reg[0], $replace, $texte);
-			
-			# modif title et alt
-			$expres3="!".$chemin."!";
-			if(preg_match_all($expres3, $texte, $elems, PREG_SET_ORDER)) {
-				foreach($elems as $elem) {
-					$fichier=basename($elem[0]);
+				$texte = str_replace($in_reg[0], $replace, $texte);			
+				# modif title et alt
+				$expres3="!".$chemin."!";
+				if(preg_match_all($expres3, $texte, $elems, PREG_SET_ORDER)) {
+					foreach($elems as $elem) {
+						$fichier=basename($elem[0]);
+					}
+					$texte = str_replace($elem[0], $fichier, $texte);
 				}
-				$texte = str_replace($elem[0], $fichier, $texte);
 			}
 		
 		}
