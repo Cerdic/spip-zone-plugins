@@ -10,4 +10,5 @@
 		<nom>affiche_droite</nom>
 		<inclure>numero_pipeline.php</inclure>
 	</pipeline>
+	<necessite id='SPIP' version='[1.925;]' />
 </plugin>
