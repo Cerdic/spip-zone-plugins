@@ -1,0 +1,51 @@
+<style>
+#galerie { float: none; width: 100%; }
+#galerie table { width: 100%; border: none; }
+#galerie table thead { background: #eee; }
+#galerie table td { min-height: 100px; vertical-align: top; }
+#galerie table th, #galerie table td { padding: 1em .3em; border-bottom: 1px solid #ccc; }
+#galerie table td.id { width: 80px; text-align: right; vertical-align: middle; line-height: normal; }
+#galerie table td.id strong { font-size: 36px; color: #666; font-weight: normal; }
+#galerie table td.logo { width: 250px; overflow: hidden; }
+#galerie table td.logo img { border: 1px solid #666; }
+#galerie table td.exif { white-space: nowrap; }
+#galerie table td.exif small { display: inline; }
+#galerie table td.descriptif { }
+</style>
+<div id="galerie">
+	<B_galerie>
+	[<p class="pagination">#GRAND_TOTAL images : (#PAGINATION)</p>]
+	<table>
+	<thead>
+		<th>ID</th>
+		<th>Logo</th>
+		<th>Informations techniques</th>
+		<th>Descriptif</th>
+	</thead>
+	<BOUCLE_galerie(DOCUMENTS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?} {!par id_document} {pagination}>
+	<tr>
+		<td class="id">
+			<strong>#ID_DOCUMENT</strong><br />
+			<BOUCLE_article(ARTICLES){id_document}><a href="#URL_ARTICLE">Article #ID_ARTICLE</a></BOUCLE_article>
+			<BOUCLE_breve(BREVES){id_document}><a href="#URL_BREVE">Breve #ID_BREVE</a></BOUCLE_breve>
+			<BOUCLE_rubrique(RUBRIQUES){id_document}><a href="#URL_RUBRIQUE">Rubrique #ID_RUBRIQUE</a></BOUCLE_rubrique>
+			<span style="color: red; font-weight: bold;">???</span><//B_rubrique><//B_breve><//B_article>
+		</td>
+		<td class="logo">[<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#TITRE|couper{80}|texte_backend)"]>(#URL_DOCUMENT||image_reduire{250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>]</td>
+		<td class="exif">
+			[<strong style="font-size: 14px;">(#FICHIER|extension)</strong>]
+			<br />[<small>(#FICHIER)</small>]
+			<br />[(#LARGEUR|?{[(#LARGEUR)[ x (#HAUTEUR) pixels]],''})]
+			<br />[<strong>(#TAILLE|taille_en_octets)</strong>]
+			<br />[(#DATE|affdate{d/m/Y})]
+		</td>
+		<td class="descriptif">
+			[<strong class="#EDIT{titre}">(#TITRE|sinon{<i>sans titre</i>})</strong>]
+			[<div class="#EDIT{descriptif}">(#DESCRIPTIF|sinon{...})</div>]
+		</td>
+	</tr>
+	</BOUCLE_galerie>
+	</table>
+	[<p class="pagination">#GRAND_TOTAL images : (#PAGINATION)</p>]
+	</B_galerie>
+</div><!--#galerie-->
