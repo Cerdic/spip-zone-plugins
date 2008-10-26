@@ -58,7 +58,7 @@ function balise_FORMULAIRE_INSCRIPTION2_CONFIRMATION_dyn($mode, $retour) {
 		
 		$htpass = generer_htpass($pass);
 		$statut = lire_config('inscription2/statut_nouveau');
-		/* Confirme l'inscription par la mise à jour du statut par défaut et le mot de passe */
+		/* Confirme l'inscription par la mise a jour du statut par defaut et le mot de passe */
 		sql_updateq(
 		    "spip_auteurs",
 		    array(
@@ -73,6 +73,7 @@ function balise_FORMULAIRE_INSCRIPTION2_CONFIRMATION_dyn($mode, $retour) {
 		$var_user = sql_fetsel("nom, email, login","spip_auteurs","id_auteur=".$id);
 
 		if($var_user){
+			include_spip('inc/envoyer_mail');
 			$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 			$adresse_site = $GLOBALS['meta']["adresse_site"];
 			

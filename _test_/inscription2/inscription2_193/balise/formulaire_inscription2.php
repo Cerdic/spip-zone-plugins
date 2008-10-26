@@ -28,7 +28,7 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode,$option,$article) {
 	
 	if (!test_mode_inscription2($mode)) 
 		return _T('pass_rien_a_faire_ici');
-	//recuperer les infos inserées par le visiteur
+	//recuperer les infos inserees par le visiteur
 	$var_user = array();
 	foreach(lire_config('inscription2') as $cle => $val) {
 		if($val!='' and !ereg("^.+_(obligatoire|fiche|table).*$", $cle)){
@@ -164,7 +164,7 @@ function inscription2_nouveau($declaration){
 	$declaration = inscription2_test_login($declaration);
 
 	$declaration['statut'] = 'aconfirmer';
-	//insertion des données ds la table spip_auteurs
+	//insertion des donnees ds la table spip_auteurs
 	foreach($declaration as $cle => $val){
 		if($cle == 'newsletters' or $cle == 'zones' or $cle =='sites' or $cle == 'zone' or $cle =='abonnement' or $cle=='option' or $cle=='article')
 			continue;
@@ -173,14 +173,14 @@ function inscription2_nouveau($declaration){
 		else
 			$elargis[$cle]= $val;
 	}
-	//insertion des données dans la table spip_auteurs
+	//insertion des donnees dans la table spip_auteurs
 	$declaration['alea_actuel'] = rand(1,99999);
 	$auteurs['alea_actuel']=$declaration['alea_actuel'];
 	$n = sql_insert('spip_auteurs', ('(' .join(',',array_keys($auteurs)).')'), ("(" .join(", ",array_map('_q', $auteurs)) .")"));
 	$declaration['id_auteur'] = $n;
 	$elargis['id_auteur'] = $n;
 	$date = date('Y-m-d');
-	//insertion des données dans la table spip_auteurs_elargis
+	//insertion des donnees dans la table spip_auteurs_elargis
 	if(isset($declaration['newsletters'])){
 		foreach($declaration['newsletters'] as $value){
 			if($value != '0')

@@ -14,7 +14,7 @@ function balise_FORMULAIRE_INSCRIPTION2_PASS_stat($args, $filtres) {
 	return array($mode);}
 
 function balise_FORMULAIRE_INSCRIPTION2_PASS_dyn($mode) {
-	//recuperer les infos inserées par le visiteur
+	//recuperer les infos inserees par le visiteur
 	$var_user = array();
 	foreach(lire_config('inscription2') as $cle => $val) {
 		if($val!='' and !ereg("^.+_(obligatoire|fiche|table).*$", $cle)){
@@ -105,7 +105,7 @@ function message_inscription2_pass($var_user, $mode) {
 function inscription2_nouveau_pass($declaration){
 	$declaration = inscription2_test_login($declaration);
 
-	//insertion des données ds la table spip_auteurs
+	//insertion des donnees ds la table spip_auteurs
 	foreach($declaration as $cle => $val){
 		if($cle == 'newsletters' or $cle == 'zones' or $cle =='sites' or $cle == 'zone' or $cle =='abonnement')
 			continue;
@@ -114,12 +114,12 @@ function inscription2_nouveau_pass($declaration){
 		else
 			$elargis[$cle]= $val;
 	}
-	//insertion des données dans la table spip_auteurs
+	//insertion des donnees dans la table spip_auteurs
 	$n = sql_insert('spip_auteurs', ('(' .join(',',array_keys($auteurs)).')'), ("(" .join(", ",array_map('_q', $auteurs)) .")"));
 	$declaration['id_auteur'] = $n;
 	$elargis['id_auteur'] = $n;
 	$date = date('Y-m-d');
-	//insertion des données dans la table spip_auteurs_elargis
+	//insertion des donnees dans la table spip_auteurs_elargis
 	if(isset($declaration['newsletters'])){
 		foreach($declaration['newsletters'] as $value){
 			if($value != '0')
@@ -149,7 +149,7 @@ function envoyer_inscription2_pass($var_user) {
 	include_spip('inc/envoyer_mail');
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 			$adresse_site = $GLOBALS['meta']["adresse_site"];
-			$message = _T('inscription2:message_auto')
+			$message = _T('inscription2:message_auto')."\n\n"
 			. _T('inscription2:email_bonjour', array('nom'=>$var_user['nom']))."\n\n"
 			. _T('inscription2:texte_email_confirmation', array('login'=> $var_user['login'], 'nom_site' => $nom_site_spip));
 
