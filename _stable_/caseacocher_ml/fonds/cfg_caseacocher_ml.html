@@ -1,0 +1,35 @@
+[(#REM) descriptif=
+<h4>Configuration du plugin Case &agrave; cocher ML (mailing list)</h4>
+Ici vous pouvez configurer le sujet et le mail recevant des requetes la liste.<br /><br />
+<a href="http://www.spip-contrib.net/?article1385" class="spip_out">Documentation sur contrib</a>
+]
+
+[(#REM) titre=Case &agrave; cocher ML (mailing list)]
+#CACHE{0}
+
+<form method="post" action="#SELF">
+<div>[(#ENV{_cfg_}|form_hidden)]
+<fieldset>
+<legend><strong>Configuration Mailing list</strong></legend>
+
+<label for="sujet_inscription_mailinglist"><strong><:sujet_inscription_mailinglist:></strong></label><br/>
+<:sujet_inscription_mailinglist_explication:><br/>
+<input type="text" name="inscri_ml_sujet" id="inscri_ml_sujet" value="#ENV{inscri_ml_sujet,subscribe address=}" />
+</label>
+
+<br />
+<label for="mail_inscription_mailinglist"><strong><:mail_inscription_mailinglist:></strong></label><br/>
+<:mail_inscription_mailinglist_explication:><br/>
+<input type="text" name="inscri_ml_mail" id="inscri_ml_mail" value="#ENV{inscri_ml_mail,nomdelaliste-request@domaine.com}" />
+</label>
+
+</fieldset>
+</div>
+
+
+<div>
+<input type="submit" name="_cfg_ok" value="<:ok:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</div>
+</form>
+

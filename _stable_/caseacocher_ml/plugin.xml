@@ -1,0 +1,9 @@
+<plugin>
+	<nom>Case &agrave; cocher inscription mailinglist</nom>
+	<auteur>Phil 2008 - Licence GNU/GPL</auteur>
+	<version>0.1</version>
+	<etat>stable</etat>
+	<description>Ajouter une case &agrave; cocher permettant d'inscrire les visiteurs &agrave; une liste de discussion</description>
+	<lien>http://www.spip-contrib.net/?article1385</lien> <!-- URI de documentation -->
+	<prefix>caseacocher_ml</prefix>
+</plugin>
