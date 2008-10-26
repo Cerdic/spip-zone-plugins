@@ -4,20 +4,32 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 function alias_aliaser_objet($id_article) {
-	include_spip('action/editer_article');
-	$res = spip_query("SELECT id_rubrique FROM spip_articles WHERE id_article="._q($id_article));
-	$new = 0;
-	if ($row = spip_fetch_array($res)) {
-		$new = insert_article($row['id_rubrique']);
-		articles_set($new,array(
+	if (version_compare($GLOBALS['spip_version_code'],'2','<')){
+		$res = spip_query("SELECT id_rubrique FROM spip_articles WHERE id_article="._q($id_article));
+		$row = spip_fetch_array($res);
+	}
+	else {
+		include_spip('base/abstract_sql');
+		$row = sql_fetsel('id_rubrique','spip_articles','id_article='.intval($id_article));
+	}
+	$c = array(
 		'surtitre' => "<article$id_article|surtitre>",
 		'titre' => "<article$id_article|titre>",
 		'soustitre' => "<article$id_article|soustitre>",
 		'descriptif' => "<article$id_article|descriptif>",
 		'chapo' => "<article$id_article|chapo>",
 		'texte' => "<article$id_article|texte>",
-		'ps' => "<article$id_article|ps>",
-		));
+		'ps' => "<article$id_article|ps>");
+	$new = 0;
+	if ($row) {
+		include_spip('action/editer_article');
+		$new = insert_article($row['id_rubrique']);
+		if (version_compare($GLOBALS['spip_version_code'],'2','<'))
+			articles_set($new,$c);
+		else {
+			include_spip('inc/modifier');
+			revision_article($new, $c);
+		}
 	}
 	return $new;
 }
