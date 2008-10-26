@@ -62,12 +62,14 @@ function array_where_teste($cle,$valeur,$table,$where){
 	'cle',
 	"$table.valeur",
 	'valeur',
+	'NOT('
 	),
 	array(
 	"'".addslashes($cle)."'",
 	"'".addslashes($cle)."'",
 	"'".addslashes($valeur)."'",
-	"'".addslashes($valeur)."'"
+	"'".addslashes($valeur)."'",
+	"!("
 	),$where);
 	return eval("if ($where) return true; else return false;");
 }
@@ -110,8 +112,9 @@ function array_query_filter($cle,$valeur,$table,$where){
 function &array_results($hash,$store='get'){
 	static $array_results = array();
 	if($store=='get'){
-		if (isset($array_results[$hash]['res']))
+		if (isset($array_results[$hash]['res'])){
 			return each($array_results[$hash]['res']);
+		}
 		if (isset($array_results[$hash]['iter'])) {
 			$pas = $array_results[$hash]['iter']['pas'];
 			$valeur = $array_results[$hash]['iter']['debut']+$array_results[$hash]['iter']['i']*$pas;
@@ -135,6 +138,7 @@ function &array_results($hash,$store='get'){
 		// un tableau direct
 		if (is_array($store)){
 			$array_results[$hash]['res'] = $store;
+			reset($array_results[$hash]['res']);
 		}
 		elseif(is_string($store) AND strpos($store,':')!==FALSE){
 			$iter = explode(':',$store);
@@ -348,7 +352,7 @@ function spip_array_showbase($match, $serveur='')
 function spip_array_showtable($nom_table, $serveur='')
 {
 	if (in_array($nom_table,array('pour')))
-		return array('field'=>array('cle'=>'int','valeur'=>'text'),'key'=>array('PRIMARY KEY'=>'cle'));
+		return array('field'=>array('cle'=>'text','valeur'=>'text'),'key'=>array('PRIMARY KEY'=>'cle'));
 	if (in_array($nom_table,array('condition')))
 		return array('field'=>array('valeur'=>'text'),'key'=>array());
 	return false;
