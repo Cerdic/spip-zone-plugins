@@ -34,15 +34,12 @@ function balise_DW2_ALERTE_dyn($opt) {
 function affichage_dw2_alerte($opt) {
 
 	# recup nom squlett catalogue si opt=3
-	$result = sql_select("valeur","spip_dw2_config","nom='squelette_cata_public'");
-	while ($row = sql_fetch($result)) {
-		$cata = $row['valeur'];
+	if ($row = sql_fetsel("valeur","spip_dw2_config","nom='squelette_cata_public'")) {
+		return array(
+			'formulaires/dw2_alerte'.$opt,
+			0,#delais
+			array('type' => $opt,"cata" => $row['valeur'])
+			);
 	}
-		
-	return array(
-		'formulaires/dw2_alerte'.$opt,
-		0,#delais
-		array('type' => $opt,"cata" => $cata)
-		);
 }
 ?>
