@@ -1,0 +1,22 @@
+<plugin>
+	<nom>Flickr CC</nom>
+	<auteur>ARNO*</auteur>
+	<version>0.1</version>
+	<etat>test</etat>
+	<description>
+Flickr CC vous permet de rechercher des images Flickr en Creative Commons et de les ins&eacute;rer dans vos articles directement depuis la page d'&eacute;dition d'un article.	
+
+Ce produit utilise l'API Flickr mais n'est ni soutenu, ni certifi&eacute; par Flickr.
+	</description>
+	<icon>imgs/flickrcc.png</icon>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix>flickr_cc</prefix>
+	<licence>GPL v3</licence>
+	<options>flickr_cc_options.php</options>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<action>interface</action>
+		<inclure>flickr_cc.php</inclure>
+	</pipeline>
+</plugin>
+
