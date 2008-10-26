@@ -4,11 +4,18 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
   
-  'articles_tous' => "Tous les articles dans la corbeille :",
-  'aucun' => "Aucun",
-	'auteurs_tous' => "Tous les auteurs dans la corbeille :",
-  
-  'breves_toutes' => "Toutes les br&egrave;ves dans la corbeille :",
+  'articles_corbeille_tous' => "@nb@ articles dans la corbeille",
+  'articles_corbeille_un' => "1 article dans la corbeille",
+
+ 	'aucun_element_supprime' => 'Rien n\'a &eacute;t&eacute; enlev&eacute; de la corbeille',
+
+ 	'aucun' => "Aucun",
+  'auteurs_corbeille_tous' => "@nb@ auteurs dans la corbeille",
+  'auteurs_corbeille_un' => "1 auteur dans la corbeille",
+
+	// B
+  'breves_corbeille_tous' => "@nb@ br&egrave;ves dans la corbeille",
+  'breves_corbeille_un' => "1 br&egrave;ve dans la corbeille",
 	
 	// C
   'corbeille'=>'Corbeille',
@@ -16,11 +23,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   
   // D
   'doc_effaces' => 'Documents effac&eacute;s :',
- 	
+
+  // E
  	'ecrit' => " a &eacute;crit :",
-	'effacer' => "Effacer",
+	'effacer' => "Effacer la selection",
+	'effacer_tout' => 'Tout effacer',
  	'erreur' => " : erreur !",
- 	
+ 	'elements_supprimes' => '@ids@ ont &eacute;t&eacute; supprim&eacute;s de la corbeille',
+ 	'element_supprime' => '@ids@ a &eacute;t&eacute; supprim&eacute; de la corbeille',
+
+ 	// F
+  'forums_publics_corbeille_tous' => "@nb@ messages de forums publics dans la corbeille",
+  'forums_publics_corbeille_un' => "1 messages de forums publics dans la corbeille",
+  'forums_prives_corbeille_tous' => "@nb@ messages de forums publics dans la corbeille",
+  'forums_prives_corbeille_un' => "1 messages de forums publics dans la corbeille",
+
+  // I
 	'icone_syndic' => "Sites syndiqu&eacute;s",
 	
   //M
@@ -34,10 +52,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   
   // readme
   'readme' => 'Cette page permet de {{supprimer d&eacute;finitivement}} tout document que vous avez jet&eacute; &agrave; la corbeille. Vous pouvez laisser un document dans la corbeille tant que vous le souhaitez. C\'est {{&agrave; vous}} de faire le m&eacute;nage.',
-  
+
+  // S
   'signe' => " a sign&eacute; via :",
   'souci' => "souci grave !",
-  'syndic_tous' => "Toutes les syndications dans la corbeille :",
+  'sites_corbeille_tous' => "@nb@ sites dans la corbeille",
+  'sites_corbeille_un' => "1 site dans la corbeille",
+  'signatures_corbeille_tous' => "@nb@ signatures dans la corbeille",
+  'signatures_corbeille_un' => "1 signature dans la corbeille",
   
   'titre' => "Titre",
   

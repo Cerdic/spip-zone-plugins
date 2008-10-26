@@ -40,18 +40,14 @@ _ <multi>
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
 	ce parametre est obligatoire et doit etre non vide
 	-->
-	<prefix> 
-	Corbeille
-	</prefix>	
-  <icon>
-  img_pack/trash-full-24.png
-  </icon>
+	<prefix>corbeille</prefix>	
+  <icon>img_pack/trash-full-24.png</icon>
+  <options>corbeille_options.php</options>
+  <options>corbeille_fonctions.php</options>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
-	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouterBoutons</action>
-		<inclure>inc_corbeille.php</inclure>
-	</pipeline>
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
-	<chemin dir='' type='prive' />
+	<bouton id='corbeille' parent='configuration'>
+		<titre>corbeille:corbeille</titre>
+		<icone>img_pack/trash-full-24.png</icone>
+	</bouton>	
+	<necessite id='SPIP' version='[2.0.0 dev;]' />
 </plugin>
