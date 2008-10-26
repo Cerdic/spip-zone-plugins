@@ -29,6 +29,13 @@ function alias_aliaser_objet($id_article) {
 		else {
 			include_spip('inc/modifier');
 			revision_article($new, $c);
+			// et on peut meme aliaser le portfolio
+			$rows = sql_allfetsel('id_document','spip_documents_liens',"objet='article' AND id_objet=".intval($id_article));
+			foreach($rows as $k=>$row){
+				$rows[$k] = array('id_objet'=>$new,'id_document'=>$row['id_document'],'objet'=>'article');
+			}
+			if (count($rows))
+				sql_insertq_multi('spip_documents_liens',$rows);
 		}
 	}
 	return $new;
