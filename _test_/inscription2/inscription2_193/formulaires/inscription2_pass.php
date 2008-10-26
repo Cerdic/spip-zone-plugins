@@ -22,14 +22,14 @@ function formulaires_inscription2_pass_charger_dist($id_auteur = NULL){
 
 	global $tables_principales;
    
-	//initialise les variables d'environnement pas défaut
+	//initialise les variables d'environnement pas defaut
 	$valeurs = array();
 
-	//récupere la liste des champs possible
+	//recupere la liste des champs possible
 	$champs = inscription2_champs_formulaire();
 
-	//si on a bien un auteur alors on préremplit le formulaire avec ses informations
-	//les nom des champs sont les memes que ceux de la base de données
+	//si on a bien un auteur alors on preremplit le formulaire avec ses informations
+	//les noms des champs sont les memes que ceux de la base de donnees
 	if (is_numeric($id_auteur)) {
 		$auteur = sql_fetsel(
 			$champs,
@@ -51,7 +51,7 @@ function formulaires_inscription2_pass_verifier_dist($id_auteur = NULL){
 	$erreurs = array();
 				
 	//messages d'erreur au cas par cas
-	//vérifier les champs obligatoire
+	//verifier les champs obligatoire
 	foreach (lire_config('inscription2/') as $clef => $valeur) {
 		$champs = ereg_replace("_(obligatoire|fiche|table|mod)", "", $clef);
 		
@@ -80,7 +80,7 @@ function formulaires_inscription2_pass_verifier_dist($id_auteur = NULL){
 				);
 			}
 			
-			//si clef obligatoire, obligatoire activé et _request() vide alors erreur
+			//si clef obligatoire, obligatoire active et _request() vide alors erreur
 			if (!$erreurs[$champs] && (lire_config('inscription2/'.$champs.'_obligatoire') == 'on') && !_request($champs)) {
 				$erreurs[$champs] = _T('inscription2:champ_obligatoire');
 			}
@@ -117,7 +117,7 @@ function formulaires_inscription2_pass_traiter_dist($id_auteur = NULL){
 
 	global $tables_principales;
 	
-	/* Génerer la liste des champs à traiter
+	/* Generer la liste des champs a traiter
 	* champ => valeur formulaire
 	*/
 	
@@ -125,7 +125,7 @@ function formulaires_inscription2_pass_traiter_dist($id_auteur = NULL){
 		$valeurs[$valeur] = _request($valeur);  
 	}
 	
-	//Définir le login
+	//Definir le login
 	include_spip('balise/formulaire_inscription');
 	if (!_request('login')) {
 		$valeurs['login'] = test_login($valeurs['nom'], $valeurs['email']);
@@ -136,13 +136,13 @@ function formulaires_inscription2_pass_traiter_dist($id_auteur = NULL){
 	//definir les champs pour spip_auteurs
 	$table = "spip_auteurs";
     
-	//genere le tableau des valeurs à mettre à jour pour spip_auteurs
-	//toutes les clefs qu'inscription2 peut mettre à jour
+	//genere le tableau des valeurs a mettre a jour pour spip_auteurs
+	//toutes les clefs qu'inscription2 peut mettre a jour
 	$clefs = array_fill_keys(array('login','nom','email','bio'),'');
-	//extrait uniquement les données qui ont été proposées à la modification
+	//extrait uniquement les donnees qui ont ete proposees a la modification
 	$val = array_intersect_key($valeurs,$clefs);
 	
-	//inserer les données dans spip_auteurs -- si $id_auteur mise à jour autrement nouvelle entrée
+	//inserer les donnees dans spip_auteurs -- si $id_auteur mise a jour autrement nouvelle entree
 	if (is_numeric($id_auteur)) {
 		$where = 'id_auteur = '.$id_auteur;
 		sql_updateq(
@@ -161,17 +161,17 @@ function formulaires_inscription2_pass_traiter_dist($id_auteur = NULL){
 	}
 	$table = 'spip_auteurs_elargis';
 
-	//extrait les valeurs propres à spip_auteurs_elargis
+	//extrait les valeurs propres a spip_auteurs_elargis
 	
-	//genere le tableau des valeurs à mettre à jour pour spip_auteurs
-	//toutes les clefs qu'inscription2 peut mettre à jour
+	//genere le tableau des valeurs a mettre a jour pour spip_auteurs
+	//toutes les clefs qu'inscription2 peut mettre a jour
 	//s'appuie sur les tables definies par le plugin
 	$clefs = $tables_principales['spip_auteurs_elargis']['field'];
 	
-	//extrait uniquement les données qui ont été proposées à la modification
+	//extrait uniquement les donnees qui ont ete proposees a la modification
 	$val = array_intersect_key($valeurs,$clefs);
 	
-	//recherche la presence d'un complément sur l'auteur
+	//recherche la presence d'un complement sur l'auteur
 	$id_elargi = sql_getfetsel('id_auteur','spip_auteurs_elargis','id_auteur='.$id_auteur);
 	
 	if ($id_elargi) {
@@ -220,7 +220,7 @@ function message_inscription2_pass($var_user, $mode) {
 function inscription2_nouveau_pass($declaration){
 	$declaration = inscription2_test_login($declaration);
 
-	//insertion des données ds la table spip_auteurs
+	//insertion des donnees ds la table spip_auteurs
 	foreach($declaration as $cle => $val){
 		if($cle == 'newsletters' or $cle == 'zones' or $cle =='sites' or $cle == 'zone' or $cle =='abonnement')
 			continue;
@@ -229,12 +229,12 @@ function inscription2_nouveau_pass($declaration){
 		else
 			$elargis[$cle]= $val;
 	}
-	//insertion des données dans la table spip_auteurs
+	//insertion des donnees dans la table spip_auteurs
 	$n = sql_insert('spip_auteurs', ('(' .join(',',array_keys($auteurs)).')'), ("(" .join(", ",array_map('_q', $auteurs)) .")"));
 	$declaration['id_auteur'] = $n;
 	$elargis['id_auteur'] = $n;
 	$date = date('Y-m-d');
-	//insertion des données dans la table spip_auteurs_elargis
+	//insertion des donnees dans la table spip_auteurs_elargis
 	if(isset($declaration['newsletters'])){
 		foreach($declaration['newsletters'] as $value){
 			if($value != '0')
