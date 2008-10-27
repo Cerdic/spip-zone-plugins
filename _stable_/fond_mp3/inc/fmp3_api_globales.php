@@ -50,6 +50,14 @@
 	
 include_spip('inc/utils');
 
+/*
+ * si reseau local, activer le log de dev
+ * Vous pouvez forcer l'option en placant define("_FMP3_DEBUG", true) dans *_options.php
+ */
+if(!defined("_FMP3_DEBUG")) {
+	define("_FMP3_DEBUG", preg_match('/^(192\.168|127\.0)/', $_SERVER['SERVER_ADDR']));
+}
+
 function fmp3_spip_est_inferieur_193 () {
 	static $is_inf;
 	if($is_inf===NULL) {
@@ -60,10 +68,9 @@ function fmp3_spip_est_inferieur_193 () {
 
 /*
  * Journal de bord.
- * Activé uniquement en dev (voir fmp3_options.php)
  */
-function fmp3_log ($message, $flag = null) {
-	if(!empty($message) && defined('_FMP3_DEBUG') && _FMP3_DEBUG) {
+function fmp3_log ($message, $flag = null, $force = true) {
+	if(!empty($message) && $force) {
 		$flag = 
 			($flag === null)
 			? ""
@@ -237,4 +244,40 @@ $(document).ready(function(){
 	return($bouton_play);
 }
 
+/*
+ * 
+ */
+function fmp3_envelopper_script ($source, $format) {
+	$source = trim($source);
+	if(!empty($source)) {
+		switch($format) {
+			case 'css':
+				$source = "\n<style type='text/css'>\n<!--\n" 
+					. $source
+					. "\n-->\n</style>";
+				break;
+			case 'js':
+				$source = "\n<script type='text/javascript'>\n//<![CDATA[\n" 
+					. $source
+					. "\n//]]>\n</script>";
+				break;
+			default:
+				$source = "\n\n<!-- erreur envelopper: format inconnu [$format] -->\n\n";
+		}
+	}
+	return($source);
+} // end fmp3_envelopper_script()
+
+/*
+ * complément des deux 'compacte'. supprimer les espaces en trop.
+ */ 
+function fmp3_compacter_script ($source, $format) {
+	$source = trim($source);
+	if(!empty($source)) {
+		$source = compacte($source, $format);
+		$source = preg_replace(",/\*.*\*/,Ums","",$source); // pas de commentaires
+		$source = preg_replace('=[[:space:]]+=', ' ', $source); // réduire les espaces
+	}
+	return($source);
+} // end fmp3_compacter_script()
 ?>

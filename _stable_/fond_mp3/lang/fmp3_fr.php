@@ -49,7 +49,12 @@ $GLOBALS['i18n_fmp3_fr'] = array(
 
 	, 'reset' => "Reset"
 	, 'reset_title' => "R&#233;tablir les r&#233;glages par d&#233;faut"
-	
+
+	, 'voir_journal' => "Voir le journal"
+	, 'titre_page_voir_journal' => "Journal du plugin (log)"
+	, 'recharger_journal' => "Recharger le journal"
+
+	, 'mode_debug_actif' => "Mode debug actif"	
 );
 
 ?>

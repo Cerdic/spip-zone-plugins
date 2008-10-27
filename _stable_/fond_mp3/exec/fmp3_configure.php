@@ -52,6 +52,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/fmp3_api_globales');
 include_spip('inc/fmp3_api_prive');
+include_spip('inc/fmp3_api_journal');
 
 /*
  * Page de configuration du plugin
@@ -131,6 +132,8 @@ function exec_fmp3_configure () {
 		. fmp3_boite_plugin_info(_FMP3_PREFIX)
 		. creer_colonne_droite($rubrique, true)
 		. fmp3_boite_aide_info(true)
+		. "<br />"
+		. fmp3_raccourci_journal()
 		. debut_droite($rubrique, true)
 		;
 	
