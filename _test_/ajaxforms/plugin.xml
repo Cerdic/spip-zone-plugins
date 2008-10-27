@@ -6,15 +6,18 @@
 	Collectif
 	</auteur>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
-	dev
+	test
 	</etat>
 	<description>
-	Ce plugin offre une collection de formulaires en ajax un peu rigolos ; soit pour les utiliser (et pourquoi pas), soit pour s'en inspirer pour construire les siens.
+	Ce plugin offre une collection de formulaires en ajax un peu rigolos ; 
+	soit pour les utiliser (et pourquoi pas), soit pour s'en inspirer 
+	pour construire les siens.
 
-	#FORMULAIRE_QUI_ES_TU
+-* #FORMULAIRE_QUI_ES_TU
+-* #FORMULAIRE_LOGO
 
 	</description>
 	<lien>
