@@ -15,7 +15,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_test' => 'Test :',
 	'configuration_test_aucun' => 'Aucun test',
 	'configuration_titre' => 'Configuration du plugin E-Learning',
-	'pas_de_modules' => 'La rubrique choisie ne contient aucun module.'
+	'moyenne' => 'Moyenne',
+	'pas_de_modules' => 'La rubrique choisie ne contient aucun module.',
+	'resultats' => 'R&eacute;sultats des tests',
+	'test' => 'Test'
 
 );
 
