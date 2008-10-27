@@ -10,9 +10,10 @@
 	  <ul>
 	    <li class="editer_logo_on [ (#ENV**{erreurs}|table_valeur{logo_on}|oui)erreur]">
 				<label for="logo_on"><:ajaxform:logo:></label>[
+				<div class="spip_logos">(#ENV{logo_on}|image_reduire{50})</div>][
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_on})</span>
-				]<input type='file' class='file' name='logo_on' id='logo_on' value="" />
-				[<div class="spip_logos">(#ENV{logo_on}|image_reduire{50})</div>
+				]<input type='file' class='file' name='logo_on' size="15" id='logo_on_#ENV{objet}_#ENV{id_objet}' value="" />
+				[(#ENV{logo_on}|oui)
 					[(#ENV{logo_off}|non)
 					<div class="choix">
 						<input type='checkbox' class='checkbox' id="supprimer_logo_on_#ENV{objet}_#ENV{id_objet}" name="supprimer_logo_on" value='1' />
@@ -24,12 +25,10 @@
 		[(#ENV{logo_survol}|oui)
 	    <li class="editer_logo_off [ (#ENV**{erreurs}|table_valeur{logo_off}|oui)erreur]">
 				<label for="logo_off"><:ajaxform:logo_survol:></label>[
+				<div class="spip_logos">(#ENV{logo_off}|image_reduire{50})</div>][
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_off})</span>
-				]<input type='file' class='file' name='logo_off' id='logo_off' value="" />
-				[<div class="spip_logos">(#ENV{logo_off}|image_reduire{50})
-					<input type='submit' class='submit' name="supprimer_logo_off" value='<:formulaire_logo:supprimer:>' />
-				</div>]
-				[<div class="spip_logos">(#ENV{logo_off}|image_reduire{50})</div>
+				]<input type='file' class='file' name='logo_off' size="15" id='logo_off_#ENV{objet}_#ENV{id_objet}' value="" />
+				[(#ENV{logo_off}|oui)
 					<div class="choix">
 						<input type='checkbox' class='checkbox' id="supprimer_logo_off_#ENV{objet}_#ENV{id_objet}" name="supprimer_logo_off" value='1' />
 						<label for="supprimer_logo_off_#ENV{objet}_#ENV{id_objet}"><:lien_supprimer:></label>
