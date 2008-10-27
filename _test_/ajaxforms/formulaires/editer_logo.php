@@ -68,7 +68,7 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet){
 	if (($on = _request('supprimer_logo_on')) OR (_request('supprimer_logo_off'))){
 		if ($logo = $chercher_logo($id_objet, $_id_objet, $on ? 'on' : 'off'))
 			spip_unlink($logo[0]);
-		$res['message_ok'] = _T('formulaire_logo:Suppression_effectuee');
+		$res['message_ok'] = _T('ajaxform:confirmer_suppression');
 	}
 	
 	// sinon supprimer ancien logo puis copier le nouveau
@@ -80,7 +80,7 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet){
 				if ($logo = $chercher_logo($id_objet, $_id_objet, $etat))
 					spip_unlink($logo[0]);
 				$ajouter_image($type.$etat.$id_objet," ",$file);
-				$res['message_ok'] = _T('formulaire_logo:Insertion_effectuee');
+				$res['message_ok'] = _T('ajaxform:logo_maj');
 			}
 		}
 	}

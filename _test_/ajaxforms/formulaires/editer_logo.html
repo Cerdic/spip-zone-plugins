@@ -9,27 +9,38 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <ul>
 	    <li class="editer_logo_on [ (#ENV**{erreurs}|table_valeur{logo_on}|oui)erreur]">
-				<label for="logo_on"><:formulaire_logo:logo:></label>[
+				<label for="logo_on"><:ajaxform:logo:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_on})</span>
 				]<input type='file' class='file' name='logo_on' id='logo_on' value="" />
-				[<div class="spip_logo">(#ENV{logo_on}|image_reduire{50})
-					[(#ENV{logo_off}|non)<input type='submit' class='submit' name="supprimer_logo_on" value='<:formulaire_logo:supprimer:>' />]
-				</div>]
+				[<div class="spip_logos">(#ENV{logo_on}|image_reduire{50})</div>
+					[(#ENV{logo_off}|non)
+					<div class="choix">
+						<input type='checkbox' class='checkbox' id="supprimer_logo_on_#ENV{objet}_#ENV{id_objet}" name="supprimer_logo_on" value='1' />
+						<label for="supprimer_logo_on_#ENV{objet}_#ENV{id_objet}"><:lien_supprimer:></label>
+					</div>
+					]
+				]
 	    </li>
 		[(#ENV{logo_survol}|oui)
 	    <li class="editer_logo_off [ (#ENV**{erreurs}|table_valeur{logo_off}|oui)erreur]">
-				<label for="logo_off"><:formulaire_logo:logo_survol:></label>[
+				<label for="logo_off"><:ajaxform:logo_survol:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_off})</span>
 				]<input type='file' class='file' name='logo_off' id='logo_off' value="" />
-				[<div class="spip_logo">(#ENV{logo_off}|image_reduire{50})
+				[<div class="spip_logos">(#ENV{logo_off}|image_reduire{50})
 					<input type='submit' class='submit' name="supprimer_logo_off" value='<:formulaire_logo:supprimer:>' />
 				</div>]
+				[<div class="spip_logos">(#ENV{logo_off}|image_reduire{50})</div>
+					<div class="choix">
+						<input type='checkbox' class='checkbox' id="supprimer_logo_off_#ENV{objet}_#ENV{id_objet}" name="supprimer_logo_off" value='1' />
+						<label for="supprimer_logo_off_#ENV{objet}_#ENV{id_objet}"><:lien_supprimer:></label>
+					</div>
+				]
 	    </li>
 		]
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
-	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_valider:>' /></p>
 	</div></form>
 	]
 </div>
