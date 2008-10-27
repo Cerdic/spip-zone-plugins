@@ -1,0 +1,35 @@
+#CACHE{0}
+<div class='formulaire_spip formulaire_editer formulaire_editer_logo formulaire_editer_logo_#ENV{objet}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <ul>
+	    <li class="editer_logo_on [ (#ENV**{erreurs}|table_valeur{logo_on}|oui)erreur]">
+				<label for="logo_on"><:formulaire_logo:logo:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_on})</span>
+				]<input type='file' class='file' name='logo_on' id='logo_on' value="" />
+				[<div class="spip_logo">(#ENV{logo_on}|image_reduire{50})
+					[(#ENV{logo_off}|non)<input type='submit' class='submit' name="supprimer_logo_on" value='<:formulaire_logo:supprimer:>' />]
+				</div>]
+	    </li>
+		[(#ENV{logo_survol}|oui)
+	    <li class="editer_logo_off [ (#ENV**{erreurs}|table_valeur{logo_off}|oui)erreur]">
+				<label for="logo_off"><:formulaire_logo:logo_survol:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_off})</span>
+				]<input type='file' class='file' name='logo_off' id='logo_off' value="" />
+				[<div class="spip_logo">(#ENV{logo_off}|image_reduire{50})
+					<input type='submit' class='submit' name="supprimer_logo_off" value='<:formulaire_logo:supprimer:>' />
+				</div>]
+	    </li>
+		]
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>
