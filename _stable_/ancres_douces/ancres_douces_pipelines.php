@@ -8,7 +8,7 @@ $flux .= '<script src="'.url_absolue(find_in_path("js/jquery.localscroll.js")).'
 // Code d'init
 $flux .= '<script type="text/javascript"><!--
 if(window.jQuery)jQuery(document).ready(function(){
-if(typeof jQuery.localScroll=="function")jQuery.localScroll({hash:true})});
+if(typeof jQuery.localScroll=="function" && !jQuery.brwser.opera)jQuery.localScroll({hash:true})});
 // --></script>';
 
 return $flux;
