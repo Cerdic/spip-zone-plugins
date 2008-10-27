@@ -34,6 +34,14 @@
 		<nom>affiche_droite</nom>
 		<inclure>bigbrother_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>bigbrother_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>bigbrother_pipelines.php</inclure>
+	</pipeline>
 	
 	<!-- Big brother nécessite les plugins suivant -->
 	<necessite id='cfg' version="[1.10.3;]" />

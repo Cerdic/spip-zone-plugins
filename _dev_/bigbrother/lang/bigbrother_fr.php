@@ -17,8 +17,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'temps_passe' => 'Temps pass&eacute;',
 	'temps_total' => 'Temps total',
 	'visites_article_auteur' => 'Visites de @nom@ sur l\'article <em>@titre@</em>',
-	'voir_statistiques_article' => 'Voir les statistiques de visite de l\'article',
-	'voir_statistiques_auteur' => 'Voir les statistiques de visite de cette personne'
+	'voir_statistiques_article' => 'Statistiques de visite de l\'article',
+	'voir_statistiques_auteur' => 'Statistiques de visite de cette personne'
 
 );
 

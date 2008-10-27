@@ -84,7 +84,7 @@ function bigbrother_visites_article_auteur($article, $auteur){
 	echo icone_horizontale(
 		_T('bigbrother:voir_statistiques_auteur'),
 		generer_url_ecrire('bigbrother_visites_articles_auteurs','id_auteur='.$auteur['id_auteur']),
-		find_in_path('redacteurs-24.gif', 'images/', false),
+		find_in_path('auteur-24.gif', 'images/', false),
 		'',
 		false
 	);
@@ -108,12 +108,13 @@ function bigbrother_visites_article_auteur($article, $auteur){
 	echo debut_droite('', true);
 
 	echo debut_cadre_relief("redacteurs-24.gif", true,'','','auteur-voir');
+	echo "<h1>"._T('bigbrother:visites_article_auteur', array('nom' => $auteur['nom'], 'titre' => $article['titre']))."</h1>";
 	echo recuperer_fond(
 		'fonds/bigbrother_statistiques_article_auteur',
 		array(
 			'id_auteur' => $auteur['id_auteur'],
 			'id_article' => $article['id_article'],
-			'titre' => _T('bigbrother:visites_article_auteur', array('nom' => $auteur['nom'], 'titre' => $article['titre']))
+			'mode' => 'prive'
 		)
 	);
 	echo fin_cadre_relief(true);
@@ -139,7 +140,7 @@ function bigbrother_visites_auteur($auteur){
 	echo icone_horizontale(
 		_T('lien_voir_auteur'),
 		generer_url_ecrire('auteur_infos','id_auteur='.$auteur['id_auteur']),
-		find_in_path('redacteurs-24.gif', 'images/', false),
+		find_in_path('auteur-24.gif', 'images/', false),
 		'',
 		false
 	);
@@ -155,11 +156,12 @@ function bigbrother_visites_auteur($auteur){
 	echo debut_droite('', true);
 
 	echo debut_cadre_relief("redacteurs-24.gif", true,'','','auteur-voir');
+	echo "<h1>".$auteur['nom']."</h1>";
 	echo recuperer_fond(
 		'fonds/bigbrother_statistiques_auteur',
 		array(
 			'id_auteur' => $auteur['id_auteur'],
-			'nom' => $auteur['nom']
+			'mode' => 'prive'
 		)
 	);
 	echo fin_cadre_relief(true);
@@ -202,11 +204,12 @@ function bigbrother_visites_article($article){
 	echo debut_droite('', true);
 
 	echo debut_cadre_relief("article-24.gif", true,'','','article-voir');
+	echo "<h1>".$article['titre']."</h1>";
 	echo recuperer_fond(
 		'fonds/bigbrother_statistiques_article',
 		array(
 			'id_article' => $article['id_article'],
-			'titre' => $article['titre']
+			'mode' => 'prive'
 		)
 	);
 	echo fin_cadre_relief(true);

@@ -103,7 +103,9 @@ function bigbrother_duree($date_debut,$date_fin,$type_affichage='court') {
 		case "horaire":
 			$str = ($diff_hours+($diff_days*24)+($diff_weeks*24*7)+($diff_year*24*7*365))."h ";
 			if ($diff_minutes<10) $str .= "0";
-			$str .= $diff_minutes."min ".$diff_seconds."s";
+			$str .= $diff_minutes."min ";
+			if ($diff_seconds<10) $str .= "0";
+			$str .= $diff_seconds."s";
 			break;
 
 		case "minutes":
