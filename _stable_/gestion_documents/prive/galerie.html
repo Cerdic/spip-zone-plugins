@@ -4,21 +4,28 @@
 .galerie table thead { background: #eee; }
 .galerie table td { min-height: 100px; vertical-align: top; }
 .galerie table th, .galerie table td { padding: 0.5em .3em; border-bottom: 1px solid #ccc; }
+.galerie table th.id { text-align: right; }
 .galerie table td.id { width: 80px; text-align: right; vertical-align: top; line-height: normal; }
-.galerie table td.id strong { font-size: 24px; color: #666; font-weight: normal; }
+.galerie table td.id strong { font-size: 1.6em; color: #666; font-weight: normal; }
+.galerie table td.statut { width: 9px; }
 .galerie table td.logo { width: 250px; overflow: hidden; }
-.galerie table td.logo img { border: 1px solid #666; }
-.galerie table td.exif { white-space: nowrap; }
+.galerie table td.logo img { /*border: 1px solid #666;*/ }
+.galerie table td.exif { width: 140px; white-space: nowrap; }
 .galerie table td.exif small { display: inline; }
+.galerie table td.exif .extension {}
+.galerie table td.exif .dimensions { font-size: .9em; }
+.galerie table td.exif .taille { font-size: .9em; font-weight: bold; color: #666; }
+.galerie table td.exif .date { font-size: .9em; }
 .galerie table td.descriptif { }
 
-.galerie.media-image h2 {background:url(#CHEMIN{img_pack/photo-32.png}) no-repeat center left;padding:6px;padding-left:40px;}
-.galerie.media-audio h2 {background:url(#CHEMIN{img_pack/audio-32.png}) no-repeat center left;padding:6px;padding-left:40px;}
-.galerie.media-video h2 {background:url(#CHEMIN{img_pack/video-32.png}) no-repeat center left;padding:6px;padding-left:40px;}
+.galerie.media-image h2 { background: url(#CHEMIN{img_pack/photo-32.png}) no-repeat center left; padding: 6px;padding-left: 40px; }
+.galerie.media-audio h2 { background: url(#CHEMIN{img_pack/audio-32.png}) no-repeat center left; padding: 6px;padding-left: 40px; }
+.galerie.media-video h2 { background: url(#CHEMIN{img_pack/video-32.png}) no-repeat center left; padding: 6px;padding-left: 40px; }
 
-.galerie table td.media-image {background:url(#CHEMIN{img_pack/photo-32.png}) no-repeat top left;}
-.galerie table td.media-audio {background:url(#CHEMIN{img_pack/audio-32.png}) no-repeat top left;}
-.galerie table td.media-video {background:url(#CHEMIN{img_pack/video-32.png}) no-repeat top left;}
+.galerie table td.exif { background-repeat: no-repeat; background-position: top right; }
+.galerie table .media-image td.exif { background-image: url([(#CHEMIN{img_pack/photo-32.png}|image_nb|image_gamma{100}|extraire_attribut{src})]); }
+.galerie table .media-audio td.exif { background-image: url([(#CHEMIN{img_pack/audio-32.png}|image_nb|image_gamma{80}|extraire_attribut{src})]); }
+.galerie table .media-video td.exif { background-image: url([(#CHEMIN{img_pack/video-32.png}|image_nb|image_gamma{60}|extraire_attribut{src})]); }
 
 </style>
 <div class='nettoyeur'></div>

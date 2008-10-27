@@ -14,19 +14,19 @@
 	<p class="pagination"><a href='[(#SELF|parametre_url{tri,id_document})]'><:gestdoc:par_id:></a> | <a href='[(#SELF|parametre_url{tri,date})]'><:gestdoc:par_date:></a> [| (#PAGINATION{page})]</p>
 	<table>
 	<thead>
+		<th class="id"><:gestdoc:id:></th>
 		<th></th>
-		<th><:gestdoc:id:></th>
 		<th><:gestdoc:logo:></th>
 		<th><:gestdoc:infos:></th>
 		<th><:gestdoc:descriptif:></th>
 	</thead>
 	<BOUCLE_galerie(DOCUMENTS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?} {!par #ENV{tri,id_document}}{media?}{statut==#ENV{statut,.*}}{pagination 10}>
-	<tr>
+	<tr class="[(#ENV{media}|non)[ media-(#MEDIA)]]">
+		<td class="id">
+			<strong>#ID_DOCUMENT</strong>
+		</td>
 		<td class='statut'>
 		[(#ID_DOCUMENT|gestdoc_puce_statut_document{#STATUT})]
-		</td>
-		<td class="id[(#ENV{media}|non)[ media-(#MEDIA)]]">
-			<strong>#ID_DOCUMENT</strong>
 		</td>
 		<td class="logo">[
 		(#EXTENSION|in_any{#ARRAY{0,gif,1,png,2,jpg}}|oui)
@@ -36,17 +36,16 @@
 		[<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#FICHIER)"]>(#LOGO_DOCUMENT||image_reduire{250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>]
 		]</td>
 		<td class="exif">
-			[<strong style="font-size: 14px;">(#EXTENSION)</strong>]
-			<br />[(#LARGEUR|?{[(#LARGEUR)[ x (#HAUTEUR) pixels]],''})]
-			<br />[<strong>(#TAILLE|taille_en_octets)</strong>]
-			<br />[(#DATE|affdate{d/m/Y})]
+			[<strong class="extension">(#EXTENSION)</strong>]
+			[<div class="dimensions">(#LARGEUR|?{[(#LARGEUR)[ x (#HAUTEUR) pixels]],''})</div>]
+			[<div class="taille">(#TAILLE|taille_en_octets)</div>]
+			[<div class="date">(#DATE|affdate{d/m/Y})</div>]
 			<B_liens>
-			<br />
 			[(#TOTAL_BOUCLE|>{1}|oui)
-			<a href='#' onclick="jQuery(this).next().show();$(this).hide();return false;">[(#TOTAL_BOUCLE|gestdoc_affiche_un_ou_plusieurs{gestdoc:une_utilisation,gestdoc:des_utilisations})]</a><div style='display:none;'>
+			<a href='#' onclick="jQuery(this).next().show();$(this).hide();return false;">[(#TOTAL_BOUCLE|gestdoc_affiche_un_ou_plusieurs{gestdoc:une_utilisation,gestdoc:des_utilisations})]</a><div style='display: none;'>
 			]
 			<BOUCLE_liens(DOCUMENTS_LIENS){id_document}{'<br />'}>
-			<a href="[(#ID_OBJET|generer_url_entite{#OBJET,'','',0})]">#OBJET ##ID_OBJET</a>
+			<a href="[(#ID_OBJET|generer_url_entite{#OBJET,'','',0})]">#OBJET #ID_OBJET</a>
 			</BOUCLE_liens>
 			[(#TOTAL_BOUCLE|>{1}|oui)</div>]
 			</B_liens>
