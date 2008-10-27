@@ -1,0 +1,25 @@
+<style>
+.galerie { float: none; width: 100%; }
+.galerie table { width: 100%; border: none; }
+.galerie table thead { background: #eee; }
+.galerie table td { min-height: 100px; vertical-align: top; }
+.galerie table th, .galerie table td { padding: 0.5em .3em; border-bottom: 1px solid #ccc; }
+.galerie table td.id { width: 80px; text-align: right; vertical-align: top; line-height: normal; }
+.galerie table td.id strong { font-size: 24px; color: #666; font-weight: normal; }
+.galerie table td.logo { width: 250px; overflow: hidden; }
+.galerie table td.logo img { border: 1px solid #666; }
+.galerie table td.exif { white-space: nowrap; }
+.galerie table td.exif small { display: inline; }
+.galerie table td.descriptif { }
+
+.galerie.media-image h2 {background:url(#CHEMIN{img_pack/photo-32.png}) no-repeat center left;padding:6px;padding-left:40px;}
+.galerie.media-audio h2 {background:url(#CHEMIN{img_pack/audio-32.png}) no-repeat center left;padding:6px;padding-left:40px;}
+.galerie.media-video h2 {background:url(#CHEMIN{img_pack/video-32.png}) no-repeat center left;padding:6px;padding-left:40px;}
+
+.galerie table td.media-image {background:url(#CHEMIN{img_pack/photo-32.png}) no-repeat top left;}
+.galerie table td.media-audio {background:url(#CHEMIN{img_pack/audio-32.png}) no-repeat top left;}
+.galerie table td.media-video {background:url(#CHEMIN{img_pack/video-32.png}) no-repeat top left;}
+
+</style>
+<div class='nettoyeur'></div>
+<INCLURE{fond=prive/inc-galerie}{media}{ajax}{env}>

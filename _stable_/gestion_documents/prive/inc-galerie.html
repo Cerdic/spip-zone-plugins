@@ -1,0 +1,55 @@
+<a class='ajax[(#ENV{media,''}|non) on]' href='[(#SELF|parametre_url{media,''})]'><:gestdoc:tous_les_medias:></a>
+<BOUCLE_medias(TYPES_DOCUMENTS){media IN image,audio,video,file}{fusion media}>
+| <a class='ajax[(#ENV{media,''}|=={#MEDIA}|oui) on]' href='[(#SELF|parametre_url{media,#MEDIA})]'>[(#VAL{gestdoc:media_}|concat{#MEDIA}|_T)]</a>
+</BOUCLE_medias>
+<div class="galerie[ media-(#ENV{media,''})]">
+	<B_galerie>
+	<h2>[(#GRAND_TOTAL|gestdoc_affiche_un_ou_plusieurs{#VAL{gestdoc:un_}|concat{#ENV{media,document}},#VAL{gestdoc:des_}|concat{#ENV{media,document},s}})]</h2>
+	<p class="pagination"><a href='[(#SELF|parametre_url{tri,id_document})]'><:gestdoc:par_id:></a> | <a href='[(#SELF|parametre_url{tri,date})]'><:gestdoc:par_date:></a> [| (#PAGINATION{page})]</p>
+	<table>
+	<thead>
+		<th><:gestdoc:id:></th>
+		<th><:gestdoc:logo:></th>
+		<th><:gestdoc:infos:></th>
+		<th><:gestdoc:descriptif:></th>
+	</thead>
+	<BOUCLE_galerie(DOCUMENTS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?} {!par #ENV{tri,id_document}}{media?} {pagination 10}>
+	<tr>
+		<td class="id[(#ENV{media}|non)[ media-(#MEDIA)]]">
+			<strong>#ID_DOCUMENT</strong>
+		</td>
+		<td class="logo">[
+		(#EXTENSION|in_any{#ARRAY{0,gif,1,png,2,jpg}}|oui)
+		[<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#FICHIER)"]>(#URL_DOCUMENT||image_reduire{250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>]
+		]
+		[(#EXTENSION|in_any{#ARRAY{0,gif,1,png,2,jpg}}|non)
+		[<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#FICHIER)"]>(#LOGO_DOCUMENT||image_reduire{250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>]
+		]</td>
+		<td class="exif">
+			[<strong style="font-size: 14px;">(#EXTENSION)</strong>]
+			<br />[(#LARGEUR|?{[(#LARGEUR)[ x (#HAUTEUR) pixels]],''})]
+			<br />[<strong>(#TAILLE|taille_en_octets)</strong>]
+			<br />[(#DATE|affdate{d/m/Y})]
+			<B_liens>
+			<br />
+			[(#TOTAL_BOUCLE|>{1}|oui)
+			<a href='#' onclick="jQuery(this).next().show();$(this).hide();return false;">[(#TOTAL_BOUCLE|gestdoc_affiche_un_ou_plusieurs{gestdoc:une_utilisation,gestdoc:des_utilisations})]</a><div style='display:none;'>
+			]
+			<BOUCLE_liens(DOCUMENTS_LIENS){id_document}{'<br />'}>
+			<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#OBJET ##ID_OBJET</a>
+			</BOUCLE_liens>
+			[(#TOTAL_BOUCLE|>{1}|oui)</div>]
+			</B_liens>
+		</td>
+		<td class="descriptif">
+			[<strong class="#EDIT{titre}">(#TITRE|sinon{<i>sans titre</i>})</strong>]
+			[<div class="#EDIT{descriptif}">(#DESCRIPTIF|sinon{...})</div>]
+		</td>
+	</tr>
+	</BOUCLE_galerie>
+	</table>
+	[<p class="pagination">(#PAGINATION{page})</p>]
+	</B_galerie>
+	<h2>[(#VAL{gestdoc:aucun_}|concat{#ENV{media,document}}|_T)]</h2>
+	<//B_galerie>
+</div><!--#galerie-->
