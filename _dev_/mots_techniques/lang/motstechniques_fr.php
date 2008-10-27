@@ -7,5 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_mots_cles_techniques'=>'Groupe de mots-cl&eacute;s techniques&nbsp;: ',
 'bouton_mots_cles_techniques'=>'les mots-cl&eacute;s de ce groupe seront filtr&eacute;s par d&eacute;faut dans les boucles de l\'espace public.',
 
+'mots_techniques'=>'Groupes techniques',
+'mots_generaux'=>'Groupes g&eacute;n&eacute;raux',
 );
 ?>
