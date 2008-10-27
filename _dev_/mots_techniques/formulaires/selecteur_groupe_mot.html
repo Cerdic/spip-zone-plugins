@@ -1,0 +1,9 @@
+<B_groupes>
+<select[ name='(#ENV{name})'][ id='(#ENV{id})']>#SET{un,''}
+<BOUCLE_groupes(GROUPES_MOTS){par technique}{par titre}{tout}{tables_liees==#VAL{'(^|,)'}|concat{#ENV{table,.*},'($|,)'}}>
+[[(#GET{un}|oui)</optgroup>]#SET{un,1}<optgroup label="(#TECHNIQUE|unique|=={oui}|?{<:motstechniques:mots_techniques:>,[(#TECHNIQUE|non|?{<:motstechniques:mots_generaux:>,#TECHNIQUE})]})" />]
+<option value='#ID_GROUPE'[(#EXPOSE{' '})selected='selected']>[(#TITRE|supprimer_tags|texte_backend)]</option>
+</BOUCLE_groupes>
+</optgroup>
+</select>
+</B_groupes>
