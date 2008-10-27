@@ -1,0 +1,11 @@
+
+#FORMULAIRE_LOGO
+----------------
+
+Ce formulaire ajoute, modifie ou supprime des logos sur les objets de SPIP.
+- En dehors d'une boucle, ce formulaire modifie le logo du site.
+- Dans une boucle, il modifie le logo de la table selectionnee.
+Pensez juste que l'appel de #LOGO_{TYPE} s'appuie sur le nom de la cle primaire et non sur le
+nom de l'objet reel. Par exemple on ecrira #LOGO_GROUPE (et non #LOGO_GROUPEMOTS) pour afficher
+un logo issu du formulaire mis dans une boucle GROUPES_MOTS
+- il est possible de lui passer les parametres objet et id : #FORMULAIRE_LOGO{article,1}
