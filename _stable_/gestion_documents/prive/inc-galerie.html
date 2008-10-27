@@ -1,20 +1,30 @@
+<div class='statut'>
+<a class='ajax[(#ENV{statut}|=={publie}|non) on]' href='[(#SELF|parametre_url{statut,''})]'><:gestdoc:documents_tous:></a>
+| <a class='ajax[(#ENV{statut}|=={publie}|oui) on]' href='[(#SELF|parametre_url{statut,publie})]'><:gestdoc:documents_publies:></a>
+</div>
+<div class='media-type'>
 <a class='ajax[(#ENV{media,''}|non) on]' href='[(#SELF|parametre_url{media,''})]'><:gestdoc:tous_les_medias:></a>
 <BOUCLE_medias(TYPES_DOCUMENTS){media IN image,audio,video,file}{fusion media}>
 | <a class='ajax[(#ENV{media,''}|=={#MEDIA}|oui) on]' href='[(#SELF|parametre_url{media,#MEDIA})]'>[(#VAL{gestdoc:media_}|concat{#MEDIA}|_T)]</a>
 </BOUCLE_medias>
+</div>
 <div class="galerie[ media-(#ENV{media,''})]">
 	<B_galerie>
 	<h2>[(#GRAND_TOTAL|gestdoc_affiche_un_ou_plusieurs{#VAL{gestdoc:un_}|concat{#ENV{media,document}},#VAL{gestdoc:des_}|concat{#ENV{media,document},s}})]</h2>
 	<p class="pagination"><a href='[(#SELF|parametre_url{tri,id_document})]'><:gestdoc:par_id:></a> | <a href='[(#SELF|parametre_url{tri,date})]'><:gestdoc:par_date:></a> [| (#PAGINATION{page})]</p>
 	<table>
 	<thead>
+		<th></th>
 		<th><:gestdoc:id:></th>
 		<th><:gestdoc:logo:></th>
 		<th><:gestdoc:infos:></th>
 		<th><:gestdoc:descriptif:></th>
 	</thead>
-	<BOUCLE_galerie(DOCUMENTS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?} {!par #ENV{tri,id_document}}{media?} {pagination 10}>
+	<BOUCLE_galerie(DOCUMENTS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?} {!par #ENV{tri,id_document}}{media?}{statut==#ENV{statut,.*}}{pagination 10}>
 	<tr>
+		<td class='statut'>
+		[(#ID_DOCUMENT|gestdoc_puce_statut_document{#STATUT})]
+		</td>
 		<td class="id[(#ENV{media}|non)[ media-(#MEDIA)]]">
 			<strong>#ID_DOCUMENT</strong>
 		</td>
@@ -36,7 +46,7 @@
 			<a href='#' onclick="jQuery(this).next().show();$(this).hide();return false;">[(#TOTAL_BOUCLE|gestdoc_affiche_un_ou_plusieurs{gestdoc:une_utilisation,gestdoc:des_utilisations})]</a><div style='display:none;'>
 			]
 			<BOUCLE_liens(DOCUMENTS_LIENS){id_document}{'<br />'}>
-			<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#OBJET ##ID_OBJET</a>
+			<a href="[(#ID_OBJET|generer_url_entite{#OBJET,'','',0})]">#OBJET ##ID_OBJET</a>
 			</BOUCLE_liens>
 			[(#TOTAL_BOUCLE|>{1}|oui)</div>]
 			</B_liens>

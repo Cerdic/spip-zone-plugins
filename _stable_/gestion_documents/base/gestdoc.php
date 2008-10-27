@@ -1,8 +1,7 @@
 <?php
 /**
- * Plugin Agenda pour Spip 2.0
- * Licence GPL
- * 
+ * Plugin Portfolio/Gestion des documents
+ * Licence GPL (c) 2006-2008 Cedric Morin, romy.tetue.net
  *
  */
 
@@ -14,6 +13,7 @@ function gestdoc_declarer_tables_interfaces($interface){
 function gestdoc_declarer_tables_principales($tables_principales){
 	
 	$tables_principales['spip_types_documents']['field']['media'] = "varchar(10) DEFAULT 'file' NOT NULL";
+	$tables_principales['spip_documents']['field']['statut'] = "varchar(10) DEFAULT '0' NOT NULL";
 	return $tables_principales;
 }
 
@@ -44,8 +44,14 @@ function gestdoc_upgrade($nom_meta_base_version,$version_cible){
 			sql_updateq('spip_types_documents',array('media'=>'image'),"mime_type='application/illustrator'");
 			sql_updateq('spip_types_documents',array('media'=>'image'),"mime_type='application/illustrator'");
 			sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type='application/mp4'");
-			
-			#ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
+
+			sql_alter("TABLE spip_documents ADD statut varchar(10) DEFAULT '0' NOT NULL");
+			// mettre a jour maintenant tous les statut des documents :
+			$res = sql_select('id_document','spip_documents',"statut='0'");
+			include_spip('action/editer_document');
+			while ($row = sql_fetch($res))
+				instituer_document($row['id_document']);
+			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 		}
 	}
 }

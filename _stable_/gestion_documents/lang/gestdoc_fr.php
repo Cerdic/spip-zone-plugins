@@ -13,6 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// D
 	'documents'=> 'Documents',
+	'documents_publies'=> 'Documents publies uniquement',
+	'documents_tous'=> 'Tous les documents',
 	'descriptif'=>'Description',
 	'des_documents'=>'@nb@ documents',
 	'des_files'=>'@nb@ documents',

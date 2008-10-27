@@ -11,7 +11,7 @@
 	<icon>img_pack/portfolio-64.png</icon>
 	<auteur>Cedric MORIN [->http://www.yterium.net] &amp; romy.tetue [->http://romy.tetue.net]
 	</auteur>
-	<version>0.2</version>
+	<version>0.3</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<description><multi>
@@ -35,7 +35,10 @@
 		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/gestdoc.php</inclure>
 	</pipeline>
-
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>gestdoc_pipelines.php</inclure>
+	</pipeline>
 	<bouton id='documents' parent='naviguer'>
 		<titre>gestdoc:documents</titre>
 		<icone>img_pack/portfolio-24.png</icone>
