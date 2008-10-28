@@ -41,8 +41,9 @@ function critere_CONDITION_si_dist($idb, &$boucles, $crit) {
 function critere_compteur($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
 	
+	$_fusion = calculer_liste($crit->param[1], array(), $boucles, $boucle->id_parent);
 	$params = $crit->param;
-	$table = array_shift($params);
+	$table = reset($params);
 	$table = $table[0]->texte;
 	if(preg_match(',^(\w+)([<>=])([0-9]+)$,',$table,$r)){
 		$table=$r[1];
@@ -59,11 +60,14 @@ function critere_compteur($idb, &$boucles, $crit){
 	$depart = array($boucle->id_table,$trouver_table($boucle->id_table, $boucle->sql_serveur));
 
 	if ($compt = calculer_jointure($boucle,$depart,$arrivee)){
-		// en cas de jointure, on ne veut pas du group_by sur la cle primaire !
-		// cela casse le compteur !
-		foreach($boucle->group as $k=>$group)
-			if ($group == $boucle->id_table.'.'.$boucle->primary)
-				unset($boucle->group[$k]);
+		if ($_fusion){
+			// en cas de jointure, on ne veut pas du group_by sur la cle primaire !
+			// cela casse le compteur !
+			foreach($boucle->group as $k=>$group)
+				if ($group == $boucle->id_table.'.'.$boucle->primary)
+					unset($boucle->group[$k]);
+			$boucle->group[] = '".($gb='.$_fusion.')."';
+		}
 
 		$boucle->select[]= "COUNT($compt.$type_id) AS compteur_$table";	
 		if ($op)
