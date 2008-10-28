@@ -14,6 +14,7 @@ function gestdoc_declarer_tables_principales($tables_principales){
 	
 	$tables_principales['spip_types_documents']['field']['media'] = "varchar(10) DEFAULT 'file' NOT NULL";
 	$tables_principales['spip_documents']['field']['statut'] = "varchar(10) DEFAULT '0' NOT NULL";
+	$tables_principales['spip_documents']['field']['date_publication'] = "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL";
 	return $tables_principales;
 }
 
@@ -27,10 +28,8 @@ function gestdoc_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-		if (version_compare($current_version,'0.0','<=')){
+		if (version_compare($current_version,'0.2','<')){
 			include_spip('base/abstract_sql');
-			/*include_spip('base/create');
-			creer_base();*/
 			
 			sql_alter("TABLE spip_types_documents ADD media varchar(10) DEFAULT 'file' NOT NULL");
 			// mettre a jour les bonnes valeurs
@@ -51,7 +50,27 @@ function gestdoc_upgrade($nom_meta_base_version,$version_cible){
 			include_spip('action/editer_document');
 			while ($row = sql_fetch($res))
 				instituer_document($row['id_document']);
-			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
+			ecrire_meta($nom_meta_base_version,$current_version="0.2",'non');
+		}
+		if (version_compare($current_version,'0.3','<')){
+			include_spip('base/abstract_sql');
+			// ajouter un champ
+			sql_alter("TABLE spip_documents ADD date_publication datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
+			// vider le cache des descriptions de tables
+			$trouver_table = charger_fonction('trouver_table','base');
+			$trouver_table(false);
+			// reinit les statuts
+			sql_updateq('spip_documents',array('statut'=>'0'));
+			// ecrire la version pour ne plus passer la
+			ecrire_meta($nom_meta_base_version,$current_version="0.3",'non');
+		}			
+		if (version_compare($current_version,'0.4','<')){
+			// recalculer tous les statuts en tenant compte de la date de publi des articles...
+			$res = sql_select('id_document','spip_documents',"statut='0'");
+			include_spip('action/editer_document');
+			while ($row = sql_fetch($res))
+				instituer_document($row['id_document']);
+			ecrire_meta($nom_meta_base_version,$current_version="0.4",'non');
 		}
 	}
 }

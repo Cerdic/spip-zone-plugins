@@ -75,6 +75,8 @@ function boucle_DOCUMENTS($id_boucle, &$boucles) {
 		if ($GLOBALS['var_preview']) {
 			array_unshift($boucle->where,"'($id_table.statut IN (\"publie\",\"prop\",\"prepa\")");
 		} else {
+			if ($GLOBALS['meta']["post_dates"] == 'non')
+				array_unshift($boucle->where,array("'<'", "'$id_table" . ".date_publication'", "sql_quote(quete_date_postdates())"));
 			array_unshift($boucle->where,"'(($id_table.statut = \"publie\"))'");
 		}
 	}

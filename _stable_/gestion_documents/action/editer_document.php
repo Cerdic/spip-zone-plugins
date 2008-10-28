@@ -119,33 +119,50 @@ function revisions_documents ($id_document, $c=false) {
  *
  * @param int $id_document
  */
-function instituer_document($id_document,$statut=null){
-	$statut_ancien = sql_getfetsel("statut", "spip_documents", "id_document=$id_document");
+function instituer_document($id_document,$statut=null, $date_publication = null){
+	$row = sql_getfetsel("statut,date_publication", "spip_documents", "id_document=$id_document");
+	$statut_ancien = $row['statut'];
+	$date_publication_ancienne = $row['date_publication'];
 	if ($statut===null){
 		$statut = 'prepa';
 	
 		$trouver_table = charger_fonction('trouver_table','base');
 		$res = sql_select('id_objet,objet','spip_documents_liens','id_document='.intval($id_document));
+		// dans 10 ans, ca nous fera un bug a corriger vers 2018
+		// penser a ouvrir un ticket d'ici la :p
+		$date_publication=time()+10*365*24*3600;
 		while($row = sql_fetch($res)){
 			$table = table_objet_sql($row['objet']);
 			$desc = $trouver_table($table);
+			// si pas de champ statut, c'est un objet publie, donc c'est bon
 			if (!isset($desc['field']['statut'])){
 				$statut = 'publie';
+				$date_publication=0;
 				continue;
 			}
 			$id_table = id_table_objet($row['objet']);
-			if (sql_getfetsel('statut',$table,$id_table.'='.intval($row['id_objet']))=='publie'){
+			$row2 = sql_fetsel('statut'.($table=='spip_articles'?",date":""),$table,$id_table.'='.intval($row['id_objet']));
+			if ($row2['statut']=='publie'){
 				$statut = 'publie';
-				continue;
+				// si ce n'est pas un article, c'est donc deja publie, on met la date a 0
+				if (!$row2['date']){
+					$date_publication=0;
+					continue;
+				}
+				else {
+					$date_publication = min($date_publication,strtotime($row2['date']));
+				}
 			}
 		}
-		if ($statut=='publie' AND $statut_ancien=='publie')
+		$date_publication = date('Y-m-d H:i:s',$date_publication);
+		if ($statut=='publie' AND $statut_ancien=='publie' AND $date_publie==$date_publication_ancienne)
 			return false;
-		if ($statut!='publie' AND $statut_ancien!='publie')
+		if ($statut!='publie' AND $statut_ancien!='publie' AND $statut_ancien!='0')
 			return false;
 	}
-	if ($statut!==$statut_ancien){
-		sql_updateq('spip_documents',array('statut'=>$statut),'id_document='.intval($id_document));
+	if ($statut!==$statut_ancien
+	OR $date_publication!=$date_publication_ancienne){
+		sql_updateq('spip_documents',array('statut'=>$statut,'date_publication'=>$date_publication),'id_document='.intval($id_document));
 		return true;
 	}
 	return false;
