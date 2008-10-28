@@ -1,0 +1,41 @@
+[(#REM) descriptif=
+<h4>Configuration du plugin Piwik</h4>
+Ici vous pouvez indiquer votre identifiant piwik. Ainsi que l'adresse du serveur gérant vos statistiques<br />
+<br />
+
+]
+
+[(#REM) titre=piwik]
+[(#REM) icone=images/ga-22.png]
+#CACHE{0}
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<fieldset><legend><:piwik:textes_url_piwik:></legend>
+<p>
+<label for="_google_id"><:piwik:adresse_du_serveur_web:></label>
+<input type="text" name="UrlPiwik" class="type_txt" id="_piwik_url" size="60"
+	value="#ENV{UrlPiwik}" />
+</p>
+
+</fieldset>
+
+<fieldset><legend><:piwik:textes_id_piwik:></legend>
+<p>
+<label for="_google_id"><:piwik:texte_votre_identifiant:></label>
+<input type="text" name="idPiwik" class="type_txt" id="_piwik_id" size="60"
+	value="#ENV{idPiwik}" />
+</p>
+
+
+</fieldset>
+
+
+
+<div>
+<input type="submit" name="_cfg_ok" value="<:ok:>" class="fondo" />
+<input type="reset" value="<:reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</div>
+</form>
+

@@ -1,0 +1,30 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	piwik
+	</nom>
+	<auteur> <!-- Auteur du plugin -->
+	jsb
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Ajoute le script piwik dans l'espace public en ins&eacute;rant le code perso de piwik dans l'espace
+ priv&eacute;
+ <h4>[Configuration->.?exec=cfg&amp;cfg=piwik]</h4>
+	</description>
+	<icon>ga.png</icon>
+	<lien>
+		[Documentation->http://www.spip-contrib.net/?article2495]
+    </lien>
+	<prefix>
+	piwik
+	</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+</plugin>
