@@ -13,9 +13,10 @@
 </ul>
 <B_types>
 <ul class='choix type'>
-<BOUCLE_types(DOCUMENTS){id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?}{statut==#ENV{statut,.*}}{compteur types_documents}{fusion documents.extension}{media=#ENV{media,''}}>
-<BOUCLE_titre(TYPES_DOCUMENTS){extension}>#SET{titre,#TITRE}</BOUCLE_titre>
-[<li>(#GET{self}|parametre_url{extension,#EXTENSION}|aouspan{#GET{titre}|concat{' (',#COMPTEUR{types_documents},')'},#ENV{extension}|=={#EXTENSION},ajax})</li>]
+<BOUCLE_types(TYPES_DOCUMENTS){media=#ENV{media,''}}>
+<BOUCLE_compte(DOCUMENTS){id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?}{statut==#ENV{statut,.*}}{extension} />
+[(#TOTAL_BOUCLE|oui)[<li>(#GET{self}|parametre_url{extension,#EXTENSION}|aouspan{#TITRE|concat{' (',#TOTAL_BOUCLE,')'},#ENV{extension}|=={#EXTENSION},ajax})</li>]]
+<//B_compte>
 </BOUCLE_types>
 </ul>
 </B_types>
