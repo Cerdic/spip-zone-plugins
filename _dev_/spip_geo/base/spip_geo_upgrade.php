@@ -20,20 +20,19 @@
 			return;
 			
 		if ($current_version==0.0){
-			$table_pays = "spip_geo_pays";
-			$descpays = sql_showtable($table_pays, '', false);
+			$descpays = sql_showtable('spip_geo_pays', '', false);
 			if(isset($descpays['field']['pays'])){
-				echo 'virage de la table spip_geo_pays';
 				sql_drop_table("spip_geo_pays");
+				echo 'virage de la table spip_geo_pays<br />';
 			}
 			include_spip('base/spip_geo');
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
-			include_spip('inc/import_origine');
 			creer_base();
-			echo "SPIP_Geo installed @ 0.01 <br/>";
+			include_spip('inc/import_origine');
 			import_origine_continents();
 			import_origine_pays();
+			echo "SPIP_Geo installed @ 0.01 <br/>";
 			ecrire_meta('spip_geo_base_version',$current_version=$version_base);
 		}
 		ecrire_metas();

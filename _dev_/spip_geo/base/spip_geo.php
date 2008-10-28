@@ -13,72 +13,81 @@
 // Structure des tables
 //
 
-global $tables_principales;
-global $tables_auxiliaires;
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
-$spip_geo_continent = array(
-	"id_continent" 	=> "SMALLINT NOT NULL",
-	"continent" 	=> "varchar(255) NOT NULL",
-	"code_onu" 	=> "SMALLINT NOT NULL",
-	"latitude" 	=> "text",
-	"longitude" 	=> "text",
-	"zoom" 	=> "text",
-	"maj" 		=> "TIMESTAMP");
+function spip_geo_declarer_tables_interfaces($interface){
 
-$spip_geo_continent_key = array(
-	"PRIMARY KEY" => "id_continent");
+	$interface['tables_jointures']['spip_geo_continent'][] = 'geo_pays';
+	$interface['tables_jointures']['spip_geo_continent'][] = 'geo_ville';
+	$interface['tables_jointures']['spip_geo_pays'][] = 'geo_ville';
+
 	
-$spip_geo_pays = array(
-	"id_pays" 	=> "SMALLINT NOT NULL",
-	"id_continent" 	=> "SMALLINT NOT NULL",
-	"pays" 	=> "varchar(255) NOT NULL",
-	"code_iso" => "text",
-	"latitude" 	=> "text",
-	"longitude" 	=> "text",
-	"zoom" 	=> "text",
-	"indic_tel" => "text",
-	"maj" 		=> "TIMESTAMP");
-
-$spip_geo_pays_key = array(
-	"KEY id_continent" 	=> "id_continent",
-	"PRIMARY KEY id_pays" 	=> "id_pays");
+	//-- Table des tables ----------------------------------------------------
 	
-$spip_geo_ville = array(
-	"id_ville" 	=> "int NOT NULL",
-	"id_continent" 	=> "SMALLINT NOT NULL",
-	"id_pays" 	=> "SMALLINT NOT NULL",
-	"ville" 	=> "varchar(255) NOT NULL",
-	"latitude" 	=> "text",
-	"longitude" => "text",
-	"zoom" 	=> "text",
-	"maj" 		=> "TIMESTAMP");
+	$interface['table_des_tables']['geo_continent']='geo_continent';
+	$interface['table_des_tables']['geo_pays']='geo_pays';
+	$interface['table_des_tables']['geo_ville']='geo_ville';
 
-$spip_geo_ville_key = array(
-	"KEY id_continent" 	=> "id_continent",
-	"KEY id_pays" 	=> "id_pays",
-	"PRIMARY KEY id_ville" 	=> "id_ville");
+	return $interface;
+}
 
-$tables_principales['spip_geo_continent'] = array(
-	'field' => &$spip_geo_continent,
-	'key' => &$spip_geo_continent_key);
-
-$tables_principales['spip_geo_pays'] = array(
-	'field' => &$spip_geo_pays,
-	'key' => &$spip_geo_pays_key);
+function spip_geo_declarer_tables_principales($tables_principales){
+	$spip_geo_continent = array(
+		"id_continent" 	=> "SMALLINT NOT NULL",
+		"continent" 	=> "varchar(255) NOT NULL",
+		"code_onu" 	=> "SMALLINT NOT NULL",
+		"latitude" 	=> "text",
+		"longitude" 	=> "text",
+		"zoom" 	=> "text",
+		"maj" 		=> "TIMESTAMP");
 	
-$tables_principales['spip_geo_ville'] = array(
-	'field' => &$spip_geo_ville,
-	'key' => &$spip_geo_ville_key);
+	$spip_geo_continent_key = array(
+		"PRIMARY KEY" => "id_continent");
+		
+	$spip_geo_pays = array(
+		"id_pays" 	=> "SMALLINT NOT NULL",
+		"id_continent" 	=> "SMALLINT NOT NULL",
+		"pays" 	=> "varchar(255) NOT NULL",
+		"code_iso" => "text",
+		"latitude" 	=> "text",
+		"longitude" => "text",
+		"zoom" 	=> "text",
+		"indic_tel" => "text",
+		"maj" 		=> "TIMESTAMP");
+	
+	$spip_geo_pays_key = array(
+		"KEY id_continent" 	=> "id_continent",
+		"PRIMARY KEY id_pays" 	=> "id_pays");
+		
+	$spip_geo_ville = array(
+		"id_ville" 	=> "int NOT NULL",
+		"id_continent" 	=> "SMALLINT NOT NULL",
+		"id_pays" 	=> "SMALLINT NOT NULL",
+		"ville" 	=> "varchar(255) NOT NULL",
+		"latitude" 	=> "text",
+		"longitude" => "text",
+		"zoom" 	=> "text",
+		"maj" 		=> "TIMESTAMP");
+	
+	$spip_geo_ville_key = array(
+		"KEY id_continent" 	=> "id_continent",
+		"KEY id_pays" 	=> "id_pays",
+		"PRIMARY KEY id_ville" 	=> "id_ville");
+	
+	$tables_principales['spip_geo_continent'] = array(
+		'field' => &$spip_geo_continent,
+		'key' => &$spip_geo_continent_key);
+	
+	$tables_principales['spip_geo_pays'] = array(
+		'field' => &$spip_geo_pays,
+		'key' => &$spip_geo_pays_key);
+		
+	$tables_principales['spip_geo_ville'] = array(
+		'field' => &$spip_geo_ville,
+		'key' => &$spip_geo_ville_key);
+		
+	return $tables_principales;
+}
 
-//-- Relations ----------------------------------------------------
-global $tables_jointures;
-$tables_jointures['spip_geo_continent'][] = 'geo_pays';
-$tables_jointures['spip_geo_continent'][] = 'geo_ville';
-$tables_jointures['spip_geo_pays'][] = 'geo_ville';
-
-global $table_des_tables;
-$table_des_tables['geo_continent']='geo_continent';
-$table_des_tables['geo_pays'] = 'geo_pays';
-$table_des_tables['geo_ville'] = 'geo_ville';
 
 ?>

@@ -22,6 +22,14 @@ _ &#169; 2007 - Distribu&eacute; sous licence GPL
 	<options>
 	spip_geo_options.php
 	</options>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/spip_geo.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/spip_geo.php</inclure>
+	</pipeline>
 	<install>base/spip_geo_upgrade.php</install>
 	<necessite id="SPIP" version='[1.9.3;]' />
 	<chemin dir='' />

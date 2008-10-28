@@ -1,4 +1,4 @@
-@id_pays;id_continent;Nom;Code ISO;Latitude (WGS 84);Longitude (WGS 84);Indicatif téléphonique
+id_pays;id_continent;Nom;Code ISO;Latitude (WGS 84);Longitude (WGS 84);Indicatif téléphonique
 1;4;Afghanistan;AF;33;65;93
 2;1;Afrique du Sud;ZA;-29;24;27
 3;5;Åland;AX;60.2;20.0;
