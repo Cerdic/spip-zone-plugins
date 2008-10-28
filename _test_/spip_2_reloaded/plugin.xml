@@ -1,11 +1,12 @@
 <plugin>
-  <nom>Spip 2.0 Reloaded</nom>
+  <nom>Spip Bonux 2.0</nom>
   <auteur>Collectif</auteur>
+  <icon>logo-bonux.gif</icon>
   <version>1.1</version>
   <etat>stable</etat>
-  <description>Ce que vous ne trouverez pas dans Spip 2.0</description>
+  <description>Le plugin qui lave plus SPIP que SPIP, avec des cadeaux dedans</description>
   <fonctions>public/spip2_criteres.php</fonctions>
   <fonctions>public/spip2_balises.php</fonctions>
-  <prefix>spip2</prefix>
+  <prefix>spip-bonux</prefix>
   <necessite id='SPIP' version='[2.0.0 dev;]' />
 </plugin>
