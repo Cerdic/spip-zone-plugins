@@ -7,6 +7,6 @@
   <description>Le plugin qui lave plus SPIP que SPIP, avec des cadeaux dedans</description>
   <fonctions>public/spip2_criteres.php</fonctions>
   <fonctions>public/spip2_balises.php</fonctions>
-  <prefix>spip-bonux</prefix>
+  <prefix>spip_bonux</prefix>
   <necessite id='SPIP' version='[2.0.0 dev;]' />
 </plugin>
