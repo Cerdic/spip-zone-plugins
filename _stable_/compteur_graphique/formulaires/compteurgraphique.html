@@ -1,8 +1,14 @@
-#CACHE{0}
+[
 
-[(#ENV**{editable}|?{' '})
-<form action='#SELF' method='post'>
-#ACTION_FORMULAIRE{#SELF}
-</form>
+[(#REM) Debut du code conditionnel a ecrire avant l'image]
+
+
+[(#REM) Fin du code conditionnel a ecrire avant l'image]
+<img src="#EVAL{_DIR_IMG}CompteurGraphique/(#ENV{compteurgraphique}|texte_script)" alt="" />
+[(#REM) Debut du code conditionnel a ecrire apres l'image]
+
+
+[(#REM) Fin du code conditionnel a ecrire apres l'image]
 ]
-[<img src="#EVAL{_DIR_IMG}CompteurGraphique/(#ENV*{compteurgraphique})" alt="" />]
+
+

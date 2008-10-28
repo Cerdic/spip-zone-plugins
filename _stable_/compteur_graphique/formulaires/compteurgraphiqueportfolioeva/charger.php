@@ -1,5 +1,5 @@
 <?php
-function formulaires_compteurgraphique_charger_dist($id_article){
+function formulaires_compteurgraphiqueportfolioeva_charger_dist($id_article){
 
     $CG_ida = $id_article;
     $CG_nom_table = "spip_compteurgraphique";
@@ -38,11 +38,11 @@ function formulaires_compteurgraphique_charger_dist($id_article){
                 sql_updateq($CG_nom_table,array("decompte" => $CG_decompte),"id_compteur = $num_compt");
             }
             $envoi_final = compteur_graphique_calcul_image($CG_longueur,$CG_decompte,$CG_habillage,$CGtechnique);
-            return array('compteurgraphique'=>$envoi_final);
+            return array('compteurgraphiqueportfolioeva'=>$envoi_final);
         }
         //Si suppression : retour d'une chaine vide
         else {
-        return array('compteurgraphique'=>'');
+        return array('compteurgraphiqueportfolioeva'=>'');
         }
     }
     else {
@@ -95,7 +95,7 @@ function formulaires_compteurgraphique_charger_dist($id_article){
                     $CG_fichier = _DIR_IMG."CompteurGraphique/CompteurGraphique".$CG_destruction.".gif";
                     if (file_exists($CG_fichier)) {unlink($CG_fichier);}
                     $envoi_final = compteur_graphique_calcul_image($CG_longueur,$CG_vis+$visites_today,$CG_habillage,$CGtechnique);
-                    return array('compteurgraphique'=>$envoi_final);
+                    return array('compteurgraphiqueportfolioeva'=>$envoi_final);
                     }
                         
                     //Second cas : statut = 2 ; on envoie des statistiques personnalisées gérées par le champ 'decompte' qui est alors incrémenté
@@ -109,12 +109,12 @@ function formulaires_compteurgraphique_charger_dist($id_article){
                     $CG_decompte++;
                     sql_updateq($CG_nom_table,array("decompte" => $CG_decompte),"id_article = $CG_ida");
                     $envoi_final = compteur_graphique_calcul_image($CG_longueur,$CG_decompte,$CG_habillage,$CGtechnique);
-                    return array('compteurgraphique'=>$envoi_final);
+                    return array('compteurgraphiqueportfolioeva'=>$envoi_final);
                     }                        
                         
                     //Troisième cas : statut = 3 ; l'administrateur a désactivé le compteur de visite pour l'article, on renvoie une chaine vide
                 if ($CG_statut==3) {
-                        return array('compteurgraphique'=>'');
+                        return array('compteurgraphiqueportfolioeva'=>'');
                 }
             }
             //Sinon, on réalise un traitement pour la rubrique
@@ -136,11 +136,11 @@ function formulaires_compteurgraphique_charger_dist($id_article){
                         $CG_fichier = _DIR_IMG."CompteurGraphique/CompteurGraphique".$CG_destruction.".gif";
                         if (file_exists($CG_fichier)) {unlink($CG_fichier);}
                         $envoi_final = compteur_graphique_calcul_image($CG_longueur,$CG_vis+$visites_today,$CG_habillage,$CGtechnique);
-                        return array('compteurgraphique'=>$envoi_final);
+                        return array('compteurgraphiqueportfolioeva'=>$envoi_final);
                     }
                     // Second cas : statut = 5 : l'administrateur a désactivé le compteur pour tous les articles de la rubrique : on envoie une chaine vide :
                     if ($CG_statut==5) {
-                        return array('compteurgraphique'=>'');
+                        return array('compteurgraphiqueportfolioeva'=>'');
                     }
                 }
             
@@ -158,15 +158,15 @@ function formulaires_compteurgraphique_charger_dist($id_article){
                         $CG_fichier = _DIR_IMG."CompteurGraphique/CompteurGraphique".$CG_destruction.".gif";
                         if (file_exists($CG_fichier)) {unlink($CG_fichier);}
                         $envoi_final = compteur_graphique_calcul_image($CG_longueur,$CG_vis+$visites_today,$CG_habillage,$CGtechnique);
-                        return array('compteurgraphique'=>$envoi_final);
+                        return array('compteurgraphiqueportfolioeva'=>$envoi_final);
                     }
-		    else {return array('compteurgraphique'=>'');}
+		    else {return array('compteurgraphiqueportfolioeva'=>'');}
                 }
             }
         }
     //Si on n'est pas dans un article et que le numéro de compteur n'est pas défini dans le paramètre de la balise (erreur du webmestre), alors on renvoie une chaine vide
         else {
-            return array('compteurgraphique'=>'');
+            return array('compteurgraphiqueportfolioeva'=>'');
         }
     }
 }

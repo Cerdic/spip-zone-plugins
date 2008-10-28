@@ -54,7 +54,7 @@ function exec_compteur_graphique(){
     }
     
     if (is_numeric($_POST['suppression_tous']) && ($_POST['suppression_tous']==1)) {
-        $resultat_suppr_tous = sql_query($CG_nom_table,"statut = 6");
+        $resultat_suppr_tous = sql_delete($CG_nom_table,"statut = 6");
     }
 
 
