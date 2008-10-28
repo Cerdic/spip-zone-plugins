@@ -27,10 +27,16 @@
 .galerie table .media-audio td.exif { background-image: url([(#CHEMIN{img_pack/audio-32.png}|image_nb|image_gamma{80}|extraire_attribut{src})]); }
 .galerie table .media-video td.exif { background-image: url([(#CHEMIN{img_pack/video-32.png}|image_nb|image_gamma{60}|extraire_attribut{src})]); }
 
-ul.choix {list-style:none;clear:left;padding:0;margin:0;border-top:2px solid #ddd;}
-ul.choix li {display:inline;}
-ul.choix li a,ul.choix li span.on {display:block;float:left;padding:2px 5px;border-right:1px solid #ddd;border-left:1px solid #ddd;}
+ul.choix {list-style:none;clear:left;padding:0;margin:0;float:left;}
+ul.choix li {float:left;}
+ul.choix li a,ul.choix li span.on {display:block;float:left;padding:2px 5px;border-right:1px solid #ddd;border-left:1px solid #ddd;border-top:2px solid #ddd;}
 ul.choix li a:hover,ul.choix li span.on {background:#ddd;}
+
+ul.choix.statut,
+ul.choix.distant,
+ul.choix.brises {padding-right:20px;}
+ul.choix.distant,
+ul.choix.brises {clear:none;}
 </style>
 <div class='nettoyeur'></div>
 <INCLURE{fond=prive/inc-galerie}{media}{ajax}{env}>

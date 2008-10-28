@@ -15,6 +15,7 @@ function gestdoc_declarer_tables_principales($tables_principales){
 	$tables_principales['spip_types_documents']['field']['media'] = "varchar(10) DEFAULT 'file' NOT NULL";
 	$tables_principales['spip_documents']['field']['statut'] = "varchar(10) DEFAULT '0' NOT NULL";
 	$tables_principales['spip_documents']['field']['date_publication'] = "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL";
+	$tables_principales['spip_documents']['field']['brise'] = "tinyint DEFAULT 0";
 	return $tables_principales;
 }
 
@@ -72,6 +73,15 @@ function gestdoc_upgrade($nom_meta_base_version,$version_cible){
 				instituer_document($row['id_document']);
 			ecrire_meta($nom_meta_base_version,$current_version="0.4",'non');
 		}
+		if (version_compare($current_version,'0.5','<')){
+			include_spip('base/abstract_sql');
+			// ajouter un champ
+			sql_alter("TABLE spip_documents ADD brise tinyint DEFAULT 0");
+			// vider le cache des descriptions de tables
+			$trouver_table = charger_fonction('trouver_table','base');
+			$trouver_table(false);
+			ecrire_meta($nom_meta_base_version,$current_version="0.5",'non');
+		}			
 	}
 }
 

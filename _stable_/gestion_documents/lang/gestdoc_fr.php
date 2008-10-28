@@ -13,8 +13,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// D
 	'documents'=> 'Documents',
-	'documents_publies'=> 'Documents publies uniquement',
-	'documents_tous'=> 'Tous les documents',
+	'documents_distants'=> 'Distants',
+	'documents_locaux'=> 'Locaux',
+	'documents_non_publies'=> 'Non publies',
+	'documents_publies'=> 'Publies',
+	'documents_tous'=> 'Tous',
 	'descriptif'=>'Description',
 	'des_documents'=>'@nb@ documents',
 	'des_files'=>'@nb@ documents',
@@ -35,6 +38,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'media_video' => 'S&eacute;quences',
 	'media_image' => 'Images',
 	'media_file' => 'Autres documents',
+	
+	// P
+	'par_id' => 'ID',
+	'par_date' => 'Date',
+	'par_taille' => 'Poids',
+	'par_largeur' => 'Largeur',
+	'par_hauteur' => 'Hauteur',
+	'par_titre' => 'Titre',
 	
 	// T
 	'tous_les_medias'=>'Tous les medias',
