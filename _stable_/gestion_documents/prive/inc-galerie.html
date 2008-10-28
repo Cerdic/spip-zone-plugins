@@ -1,17 +1,36 @@
-<div class='statut'>
-<a class='ajax[(#ENV{statut}|=={publie}|non) on]' href='[(#SELF|parametre_url{statut,''})]'><:gestdoc:documents_tous:></a>
-| <a class='ajax[(#ENV{statut}|=={publie}|oui) on]' href='[(#SELF|parametre_url{statut,publie})]'><:gestdoc:documents_publies:></a>
-</div>
-<div class='media-type'>
-<a class='ajax[(#ENV{media,''}|non) on]' href='[(#SELF|parametre_url{media,''})]'><:gestdoc:tous_les_medias:></a>
-<BOUCLE_medias(TYPES_DOCUMENTS){media IN image,audio,video,file}{fusion media}>
-| <a class='ajax[(#ENV{media,''}|=={#MEDIA}|oui) on]' href='[(#SELF|parametre_url{media,#MEDIA})]'>[(#VAL{gestdoc:media_}|concat{#MEDIA}|_T)]</a>
+#SET{self,#SELF|parametre_url{debut_galerie,''}}
+<ul class='choix statut'>
+[<li>(#GET{self}|parametre_url{statut,''}|aouspan{<:gestdoc:documents_tous:>,#ENV{statut,.*}|=={.*},ajax})</li>]
+[<li>(#GET{self}|parametre_url{statut,publie}|aouspan{<:gestdoc:documents_publies:>,#ENV{statut}|=={publie},ajax})</li>]
+[<li>(#GET{self}|parametre_url{statut,prepa|poubelle}|aouspan{<:gestdoc:documents_non_publies:>,#ENV{statut}|=={prepa|poubelle},ajax})</li>]
+</ul>
+#SET{self,#GET{self}|parametre_url{extension,''}}
+<ul class='choix media-type'>
+[<li>(#GET{self}|parametre_url{media,''}|aouspan{<:gestdoc:tous_les_medias:>,#ENV{media,''}|=={''},ajax})</li>]
+<BOUCLE_medias(DOCUMENTS){id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?}{statut==#ENV{statut,.*}}{compteur types_documents}{fusion media}{media IN image,audio,video,file}>
+[<li>(#GET{self}|parametre_url{media,#MEDIA}|aouspan{#VAL{gestdoc:media_}|concat{#MEDIA}|_T|concat{' (',#COMPTEUR{types_documents},')'},#ENV{media}|=={#MEDIA},ajax})</li>]
 </BOUCLE_medias>
-</div>
+</ul>
+<B_types>
+<ul class='choix type'>
+<BOUCLE_types(DOCUMENTS){id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?}{statut==#ENV{statut,.*}}{compteur types_documents}{fusion documents.extension}{media=#ENV{media,''}}>
+<BOUCLE_titre(TYPES_DOCUMENTS){extension}>#SET{titre,#TITRE}</BOUCLE_titre>
+[<li>(#GET{self}|parametre_url{extension,#EXTENSION}|aouspan{#GET{titre}|concat{' (',#COMPTEUR{types_documents},')'},#ENV{extension}|=={#EXTENSION},ajax})</li>]
+</BOUCLE_types>
+</ul>
+</B_types>
 <div class="galerie[ media-(#ENV{media,''})]">
 	<B_galerie>
 	<h2>[(#GRAND_TOTAL|gestdoc_affiche_un_ou_plusieurs{#VAL{gestdoc:un_}|concat{#ENV{media,document}},#VAL{gestdoc:des_}|concat{#ENV{media,document},s}})]</h2>
-	<p class="pagination"><a href='[(#SELF|parametre_url{tri,id_document})]'><:gestdoc:par_id:></a> | <a href='[(#SELF|parametre_url{tri,date})]'><:gestdoc:par_date:></a> [| (#PAGINATION{page})]</p>
+	<p class="pagination">
+	[ (#SELF|parametre_url{sens,-1}|aouspan{#CHEMIN{img_pack/croissant-16.png}|tag_img{<:gestdoc:par_tri_croissant:>},#ENV{sens,1}|<{0},ajax})]
+	[<span class='invisible'>|</span> (#SELF|parametre_url{sens,1}|aouspan{#CHEMIN{img_pack/decroissant-16.png}|tag_img{<:gestdoc:par_tri_decroissant:>},#ENV{sens,1}|>{0},ajax})]
+	[| (#SELF|parametre_url{tri,id_document}|aouspan{<:gestdoc:par_id:>,#ENV{tri,id_document}|=={id_document},ajax})]
+	[| (#SELF|parametre_url{tri,date}|aouspan{<:gestdoc:par_date:>,#ENV{tri,id_document}|=={date},ajax})]
+	[| (#SELF|parametre_url{tri,taille}|aouspan{<:gestdoc:par_taille:>,#ENV{tri,id_document}|=={taille},ajax})]
+	[| (#SELF|parametre_url{tri,largeur}|aouspan{<:gestdoc:par_largeur:>,#ENV{tri,id_document}|=={largeur},ajax})]
+	[| (#SELF|parametre_url{tri,hauteur}|aouspan{<:gestdoc:par_hauteur:>,#ENV{tri,id_document}|=={hauteur},ajax})]
+	[| (#PAGINATION{page})]</p>
 	<table>
 	<thead>
 		<th class="id"><:gestdoc:id:></th>
@@ -20,7 +39,7 @@
 		<th><:gestdoc:infos:></th>
 		<th><:gestdoc:descriptif:></th>
 	</thead>
-	<BOUCLE_galerie(DOCUMENTS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?} {!par #ENV{tri,id_document}}{media?}{statut==#ENV{statut,.*}}{pagination 10}>
+	<BOUCLE_galerie(DOCUMENTS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?} {par #ENV{tri,id_document}}{inverse #ENV{sens,1}|>{0}}{media?}{extension?}{statut==#ENV{statut,.*}}{pagination 10}>
 	<tr class="[(#ENV{media}|non)[ media-(#MEDIA)]]">
 		<td class="id">
 			<strong>#ID_DOCUMENT</strong>

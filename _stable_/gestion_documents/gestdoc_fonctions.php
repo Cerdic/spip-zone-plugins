@@ -81,4 +81,28 @@ function boucle_DOCUMENTS($id_boucle, &$boucles) {
 
 	return calculer_boucle($id_boucle, $boucles);
 }
+
+function aouspan($url,$libelle,$on=false,$class="",$title=""){
+	return 
+	($on ?"<span class='on'>":
+		"<a href='$url'"
+	  	.($title?" title='".attribut_html($title)."'":'')
+	  	.($class?" class='".attribut_html($class)."'":'')
+	  	.">"
+	)
+	. $libelle
+	. ($on ? "</span>":"</a>");
+}
+function tag_img($img,$alt="",$class=""){
+	$taille = taille_image($img);
+	list($hauteur,$largeur) = $taille;
+	if (!$hauteur OR !$largeur)
+		return "";
+	return 
+	"<img src='$img' width='$largeur' height='$hauteur'"
+	  ." alt='".attribut_html($alt)."'"
+	  .($class?" class='".attribut_html($class)."'":'')
+	  .' />';
+}
+
 ?>

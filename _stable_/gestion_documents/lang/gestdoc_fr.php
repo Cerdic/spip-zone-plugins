@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_file'=>'Aucun document',
 	'aucun_image'=>'Aucune image',
 	'aucun_audio'=>'Aucune bande son',
-	'aucun_video'=>'Aucune video ou animation',
+	'aucun_video'=>'Aucune s&eacute;quence',
 	
 	// D
 	'documents'=> 'Documents',
@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'des_files'=>'@nb@ documents',
 	'des_images'=>'@nb@ images',
 	'des_audios'=>'@nb@ bandes sons',
-	'des_videos'=>'@nb@ videos et animations',
+	'des_videos'=>'@nb@ s&eacute;quences',
 	'des_utilisations'=>'@nb@ utilisations',
 	
 	// I
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// M
 	'media_audio' => 'Bandes sons',
-	'media_video' => 'Videos et animations',
+	'media_video' => 'S&eacute;quences',
 	'media_image' => 'Images',
 	'media_file' => 'Autres documents',
 	
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'un_file'=>'1 document',
 	'un_image'=>'1 image',
 	'un_audio'=>'1 bande son',
-	'un_video'=>'1 video ou animation',
+	'un_video'=>'1 s&eacute;quence',
 	'une_utilisation'=>'1 utilisation',
 	
 	
