@@ -18,40 +18,71 @@
 		define(_PB_DICTIONARY, "dictionary.txt");
 		define (_PB_EXCLUDE_TAGS, "code,pre,script,style,pbperso");
 
+		// supply a mbstring alternative
+		// should use spip_strpos if any in the future
+		// inspired from inc/charsets.php (SPIP)
+		function pb_strpos($haystack, $needle, $offset=NULL, $encoding=NULL) {
+			// Si ce n'est pas utf-8, utiliser strlen
+			if ($GLOBALS['meta']['charset'] != 'utf-8')
+				return strpos($haystack, $needle, $offset);
 
+			// Sinon, utiliser mb_strpos() si disponible
+			if (init_mb_string())
+				return mb_strpos($haystack, $needle, $offset, $encoding);
+
+			// Methode manuelle : on supprime les bytes 10......,
+			// on compte donc les ascii (0.......) et les demarrages
+			// de caracteres utf-8 (11......)
+			return strpos($haystack, $needle, $offset);
+		}
+		
+		function pb_strtolower($str, $encoding=NULL ) {
+			// Si ce n'est pas utf-8, utiliser strlen
+			if ($GLOBALS['meta']['charset'] != 'utf-8')
+				return strtolower($str);
+
+			// Sinon, utiliser mb_strtolower() si disponible
+			if (init_mb_string())
+				return mb_strtolower($str, $encoding);
+
+			// Methode manuelle : on supprime les bytes 10......,
+			// on compte donc les ascii (0.......) et les demarrages
+			// de caracteres utf-8 (11......)
+			return strtolower($str);
+		}
 
 // FUNCTIONS
 			
 			// Function: Replace by comparing
 			function pb_str_replace_comp($needle, $replace, $string_a, $string_b) {
 				$position = 0;
-				while($position !== false && $position < mb_strlen($string_a)) {
-					$position = mb_strpos($string_a, $needle, $position + 1);
-					if($position != 0) $string_b = mb_substr($string_b, 0, $position) . $replace . mb_substr($string_b, $position);
+				while($position !== false && $position < spip_strlen($string_a)) {
+					$position = pb_strpos($string_a, $needle, $position + 1);
+					if($position != 0) $string_b = spip_substr($string_b, 0, $position) . $replace . spip_substr($string_b, $position);
 				}
 				return $string_b;
 			}
 
 			// Function: Word hyphenation
 			function pb_word_hyphenation($word) {
-				if(mb_strlen($word) < $GLOBALS["pb_charmin"]) return $word;
+				if(spip_strlen($word) < $GLOBALS["pb_charmin"]) return $word;
 				
 				if(($key = array_search(strtolower($word), $GLOBALS["dictionary_words"])) !== false)
 					return pb_str_replace_comp("/", _PB_HYPHEN, trim($GLOBALS["pb_dictionary"][$key]), $word);
 			
 				$positions = ""; $hyphenated_word = ""; $word_without_PB_HYPHEN = "";
-				$tex_word = " " . mb_strtolower($word) . " ";
-				for($i = 0; $i < mb_strlen($tex_word); $i++) $positions .= 0;
+				$tex_word = " " . pb_strtolower($word) . " ";
+				for($i = 0; $i < spip_strlen($tex_word); $i++) $positions .= 0;
 				
-				for($start = 0; $start < mb_strlen($tex_word); $start++) {
-					for($length = 1; $length <= mb_strlen($tex_word) - $start; $length++) {
-						$patterns_index = mb_substr(mb_substr($tex_word, $start), 0, $length);
+				for($start = 0; $start < spip_strlen($tex_word); $start++) {
+					for($length = 1; $length <= spip_strlen($tex_word) - $start; $length++) {
+						$patterns_index = spip_substr(spip_substr($tex_word, $start), 0, $length);
 						if(isset($GLOBALS["patterns"][$patterns_index])) {
 							$values = $GLOBALS["patterns"][$patterns_index];
 							$i = $start;
 							
-							for($p = 0; $p < mb_strlen($values); $p++) {
-								$value = mb_substr($values, $p, 1);
+							for($p = 0; $p < spip_strlen($values); $p++) {
+								$value = spip_substr($values, $p, 1);
  								if($value > $positions[$i - 1]) $positions[$i - 1] = $value;
 								$i++;
 							}
@@ -61,12 +92,12 @@
 				
 				$positions = trim($positions);
 		
-				for($i = 0; $i < mb_strlen($word); $i++) {
+				for($i = 0; $i < spip_strlen($word); $i++) {
 					$word_without_PB_HYPHEN = str_replace(_PB_HYPHEN, "", $hyphenated_word);
-					if($positions[$i] % 2 != 0 && $i != 0 && $i >= $GLOBALS["pb_leftmin"] && $i <= mb_strlen($word) - $GLOBALS["pb_rightmin"]) $hyphenated_word .= mb_substr($word, mb_strlen($word_without_PB_HYPHEN), $i - mb_strlen($word_without_PB_HYPHEN)) . _PB_HYPHEN;
+					if($positions[$i] % 2 != 0 && $i != 0 && $i >= $GLOBALS["pb_leftmin"] && $i <= spip_strlen($word) - $GLOBALS["pb_rightmin"]) $hyphenated_word .= spip_substr($word, spip_strlen($word_without_PB_HYPHEN), $i - spip_strlen($word_without_PB_HYPHEN)) . _PB_HYPHEN;
 				}
 				
-				$hyphenated_word .= mb_substr($word, mb_strlen($word_without_PB_HYPHEN), $i - mb_strlen($word_without_PB_HYPHEN));
+				$hyphenated_word .= spip_substr($word, spip_strlen($word_without_PB_HYPHEN), $i - spip_strlen($word_without_PB_HYPHEN));
 				
 				return $hyphenated_word;
 			}
@@ -79,7 +110,7 @@
 				$GLOBALS["pb_leftmin"] = 2;
 				$GLOBALS["pb_rightmin"] = 2;
 				$GLOBALS["pb_charmin"] = 4;
-				mb_internal_encoding("utf-8");
+				if (init_mb_string()) mb_internal_encoding("utf-8");
 			
 			
 				if(file_exists(_PB_PATH_TO_PATTERNS . $lang . ".php")) { include(_PB_PATH_TO_PATTERNS . $lang . ".php"); $GLOBALS["patterns"] = $patterns; } else $GLOBALS["patterns"] = array();
@@ -93,9 +124,9 @@
 
 				$text = $text . " ";
 				
-				for($i = 0; $i < mb_strlen($text); $i++) {
-					$char = mb_substr($text, $i, 1);
-					if(mb_strpos($word_boundaries, $char) === false && $tag == "") {
+				for($i = 0; $i < spip_strlen($text); $i++) {
+					$char = spip_substr($text, $i, 1);
+					if(pb_strpos($word_boundaries, $char) === false && $tag == "") {
 						$word .= $char;
 					} else {
 						if($word != "") { 
@@ -111,7 +142,7 @@
 						}
 						if($tag != "" || $char == "<") $tag .= $char;
 						if($tag != "" && $char == ">") {
-							$tag_name = (mb_strpos($tag, " ")) ? mb_substr($tag, 1, mb_strpos($tag, " ") - 1) : mb_substr($tag, 1, mb_strpos($tag, ">") - 1);
+							$tag_name = (pb_strpos($tag, " ")) ? spip_substr($tag, 1, pb_strpos($tag, " ") - 1) : spip_substr($tag, 1, pb_strpos($tag, ">") - 1);
 							if($tag_jump == 0) {
 								if(in_array($tag_name, explode(',',_PB_EXCLUDE_TAGS))) $tag_jump = 1; else { $output[] = $tag; $tag = ""; }
 							} else { $output[] = $tag; $tag = ""; }
