@@ -1,6 +1,6 @@
 
 #FORMULAIRE_EDITER_LOGO
-----------------
+-----------------------
 
 Ce formulaire ajoute, modifie ou supprime des logos sur les objets de SPIP.
 - En dehors d'une boucle, ce formulaire modifie le logo du site.
@@ -9,3 +9,23 @@ Pensez juste que l'appel de #LOGO_{TYPE} s'appuie sur le nom de la cle primaire 
 nom de l'objet reel. Par exemple on ecrira #LOGO_GROUPE (et non #LOGO_GROUPEMOTS) pour afficher
 un logo issu du formulaire mis dans une boucle GROUPES_MOTS
 - il est possible de lui passer les parametres objet et id : #FORMULAIRE_EDITER_LOGO{article,1}
+
+
+#FORMULAIRE_AJOUTER_UN_DOCUMENT
+-------------------------------
+
+Ce formulaire permet de telecharger UN document (un zip ne sera pas decompresse).
+- En dehors d'une boucle, le document est simplement ajoute a la table spip_document
+- Dans une boucle, il sera ajoute et lie a l'objet de la boucle.
+- il est possible de passer les parametres objet et id : #FORMULAIRE_AJOUTER_UN_DOCUMENT{article,1}
+
+Note 1) document ou image ?
+	Les documents sont ajoutes en mode 'choix', c'est a dire que c'est SPIP qui
+	place le document en type 'image' ou 'document' selon le profil du fichier envoye.
+	Par defaut, une image de plus de 400px sera consideree comme un document.
+
+Note 2) afficher les documents
+	Pour afficher une liste de documents qui s'actualise quand on ajoute un element, 
+	il faut soit ne pas utiliser l'ajax, soit inserer la liste des documents 
+	a la suite du formulaire en utilisant le pipeline charger des 
+	formulaires CVT pour inserer ce contenu.

@@ -18,6 +18,7 @@
 
 -* #FORMULAIRE_QUI_ES_TU
 -* #FORMULAIRE_EDITER_LOGO
+-* #FORMULAIRE_AJOUTER_UN_DOCUMENT
 
 	</description>
 	<lien>
@@ -25,6 +26,5 @@
 	<prefix>
 	Ajaxforms
 	</prefix>
-	<icon>
-	</icon>
+	<fonctions>ajaxform_fonctions.php</fonctions>
 </plugin>
