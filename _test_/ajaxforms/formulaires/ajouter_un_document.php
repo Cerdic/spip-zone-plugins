@@ -69,10 +69,10 @@ function formulaires_ajouter_un_document_traiter_dist($objet, $id_objet){
 		$res['message_ok'] = _T('ajaxform:document_ajoute');
 		
 		// inserer texte et descriptif
-		$texte = _request('texte');
+		$titre = _request('titre');
 		$descriptif = _request('descriptif');
 		if ($texte OR $descriptif) {
-			$modifs = array('texte'=>$texte,'descriptif'=>$descriptif);
+			$modifs = array('titre'=>$titre,'descriptif'=>$descriptif);
 			include_spip('inc/modifier');
 			revision_document($id, $modifs);
 		}
