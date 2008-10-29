@@ -105,7 +105,7 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 .page_nouveautes .cartouche, .page_actualites .cartouche {margin-bottom: 0; }
 .cartouche h1 { background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: bottom left; font-family: Georgia, serif; font-size: 3em; color: #333300; line-height: 1em; padding-bottom: .5em; }
 .cartouche h1.titre-long { font-size: 2.5em; }
-h1.pas-de-texte, .page_recherche h1, .page_nouveautes .cartouche h1, .page_actualites .cartouche h1, .page_auteur .cartouche h1, .page_ouvrages .cartouche h1 .page_actualites .cartouche h1 { background: none; padding-bottom: 0; }
+h1.pas-de-texte, .page_recherche h1, .page_nouveautes .cartouche h1, .page_actualites .cartouche h1, .page_auteur .cartouche h1, .page_ouvrages .cartouche h1, .page_serie .cartouche h1, .page_actualites .cartouche h1 { background: none; padding-bottom: 0; }
 .cartouche div.socialtags { clear: none; float: right; }
 
 
