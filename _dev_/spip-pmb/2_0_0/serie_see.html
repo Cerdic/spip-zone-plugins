@@ -39,7 +39,7 @@
 				<h1 class="entry-title"><?php 
 						$tab_resultat = pmb_serie_extraire($_REQUEST['id'], "#PMB_URL_BASE", $_REQUEST['pmb_page'] ? $_REQUEST['pmb_page'] : 1);
 						 
-				?><:serie:></h1>
+				?><:serie:> : <?php echo($tab_resultat[1]['serie']); ?></h1>
 				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
           	  	</div>
         </div>

@@ -120,7 +120,7 @@ h1.pas-de-texte, .page_recherche h1, .page_nouveautes .cartouche h1, .page_actua
 .surlignable p small a { color: #999966; text-decoration: none;}
 .surlignable p small a:hover { color: #336666; text-decoration: none;}
 
-.pmb-ouvrage-infos { margin-left: 150px; color: #336666; }
+.pmb-ouvrage-infos { color: #336666; }
 .pmb-ouvrage-infos p { margin-top: .2em; margin-bottom: .2em; }
 .pmb-ouvrage-infos a { color: #336666; text-decoration: none; border-bottom: 1px dotted #336666; }
 .pmb-ouvrage-infos a:hover { color: #336666; text-decoration: none; border-bottom: 1px solid #336666; }
