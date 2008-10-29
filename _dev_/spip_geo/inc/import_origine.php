@@ -26,8 +26,8 @@ function import_origine_pays(){
 	array_shift($pays); # supprimer la premiere ligne
 
 	foreach ($pays as $ligne) {
-		list($id_pays,$id_continent,$nom,$latitude,$longitude,$zoom,$indic_tel) = explode(';', $ligne);
-		spip_query("INSERT IGNORE spip_geo_pays (id_pays,id_continent, pays, code_iso, latitude, longitude, zoom, indic_tel) VALUES ('$id_pays', '$id_continent', "._q($nom).", '$code_iso', '$latitude', '$longitude', '$zoom', '$indic_tel')");
+		list($id_pays,$id_continent,$nom,$code_iso,$latitude,$longitude,$indic_tel) = explode(';', $ligne);
+		spip_query("INSERT IGNORE spip_geo_pays (id_pays,id_continent, pays, code_iso, latitude, longitude, zoom, indic_tel) VALUES ('$id_pays', '$id_continent', ".sql_quote($nom).", '$code_iso', '$latitude', '$longitude', '$zoom', '$indic_tel')");
 	}
 }
 ?>
