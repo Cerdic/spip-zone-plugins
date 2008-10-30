@@ -75,11 +75,14 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	if(!strlen($sommaire) || $nbh3<_sommaire_NB_TITRES_MINI) 
 		return $sommaire_seul?'':sommaire_nettoyer_raccourcis($texte0);
 
-	// calcul du sommaire en recuperant le fond qui va bien
-	$fond = strpos($texte0, _sommaire_SANS_FOND)!==false ?2:1;
+	// calcul du sommaire
 	include_spip('public/assembler');
 	@define('_sommaire_TITRE', _T('couteau:sommaire_titre'));
-	$sommaire = recuperer_fond('fonds/sommaire'.$fond, array('sommaire'=>$sommaire, 'titre'=>_sommaire_TITRE));
+	$sommaire = recuperer_fond('fonds/sommaire', array(
+		'sommaire'=>$sommaire,
+		'titre'=>_sommaire_TITRE, 
+		'fond_css'=>strpos($texte0, _sommaire_SANS_FOND)===false ?'avec':'sans',
+	));
 
 	// si on ne veut que le sommaire, on renvoie le sommaire
 	// sinon, on n'insere ce sommaire en tete de texte que si la balise #CS_SOMMAIRE n'est pas activee

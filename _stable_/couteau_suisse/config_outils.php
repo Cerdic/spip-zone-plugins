@@ -632,15 +632,11 @@ add_variable( array(
 	'code:%s' => "define('_sommaire_BALISE', %s);",
 ));
 include_spip('inc/filtres');
-$path = url_absolue(find_in_path(defined('_SPIP19100')?"img_pack/spip_out.gif":"images/spip_out.gif"));
 add_outil( array(
 	'id' => 'sommaire',
 	'contrib'	=> 2378,
 	'code:options' => "define('_sommaire_REM', '<span class=\'_foosommaire\'></span>');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_sommaire_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%%%auto_sommaire%%%%balise_sommaire%%",
 	// s'il y a un sommaire, on cache la navigation haute sur les pages
-	'code:css' => "div.cs_sommaire {display:block; float:right; margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; max-height:350px; text-align:left;}
-a.sommaire_ancre {background:transparent url($path) no-repeat scroll left center; padding-left:10px; text-decoration:none; }
-div.cs_sommaire a:after {display:none;}",
 	'code:jq' => 'if(jQuery("div.cs_sommaire").length) jQuery("div.decoupe_haut").css("display", "none");',
 	// inserer : $table_des_traitements['TEXTE']['article']= 'sommaire_d_article(propre(%s))';
 	'traitement:TEXTE/articles:post_propre' => 'sommaire_d_article',
