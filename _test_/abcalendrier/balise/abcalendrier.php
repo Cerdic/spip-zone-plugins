@@ -181,7 +181,8 @@ function mkdate($month, $day, $year)
 function crea_eventi($Y,$M,$D)
 {
   include_spip('inc/filtres');
-  include_spip('urls/standard');//senza questo non trova generer_url_article() quando la pagina è in cache
+  charger_generer_url();
+  //include_spip('urls/standard');//senza questo non trova generer_url_article() quando la pagina è in cache
   /*
   include_spip('inc/urls');
   include_spip('urls/propres');
