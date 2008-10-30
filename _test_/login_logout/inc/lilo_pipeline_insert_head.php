@@ -64,21 +64,22 @@ function lilo_insert_head ($flux) {
 	
 	$config = __plugin_lire_key_in_serialized_meta('config', _LILO_META_PREFERENCES);
 
+	$config_default = unserialize(_LILO_DEFAULT_VALUES_ARRAY);
+
+	/*
+	 * si plugin non configure', reprendre les valeurs par defaut
+	 */
+	foreach($config_default as $key => $value) {
+		if(!isset($config[$key])) {
+			$config[$key] = $value;
+		}
+	}
+	
 	if(!$config) $config = array();
 
 	$lilo_values_array = unserialize(_LILO_DEFAULT_VALUES_ARRAY);
 
 	$lilo_js_insert_head = "";
-	
-	foreach($lilo_values_array as $key => $value) {
-		if(!isset($config[$key]) || !$config[$key] || empty($config[$key])) $config[$key] = $value;
-		$lilo_js_insert_head .= "'".preg_replace(',(lilo_),','',$key)."':'".$config[$key]."',";
-	}
-	$lilo_js_insert_head = ""; /*
-		//" jQuery().ready(function(){ "
-		. "var lilo_config = { " . rtrim($lilo_js_insert_head, ",") . " }; "
-		//. "});"; // fin ready
-		;*/
 
 	if($page == 'login') {
 	
@@ -197,57 +198,74 @@ function lilo_insert_head ($flux) {
 
 	} // end else
 	
-	$lilo_css_insert_head = lilo_envelopper_script(compacte_css($lilo_css_insert_head), 'css');
+	
+	// compacte_css() compresse une chaine et renvoie le resultat compresse' (string)
+	// compacte() compresse et place le resultat dans le cache 'local'
+
+	if($config['lilo_statut_css_perso'] == 'non') {
+		// prendre le css par defaut
+		$lilo_css_insert_head = lilo_envelopper_script(lilo_compacter_script($lilo_css_insert_head, 'css'), 'css');
+	}
+	else {
+		// rechercher le css personnalise'
+		$lilo_css_insert_head = ""
+			. "<link rel='stylesheet' type='text/css' href='" 
+			. url_absolue(compacte(find_in_path('lilo_public.css'), 'css'))
+			. "' />";
+	}
+	
 	if(!empty($lilo_js_insert_head)) {
-		$lilo_js_insert_head = lilo_envelopper_script(compacte_js($lilo_js_insert_head), 'js');
+		$lilo_js_insert_head = lilo_envelopper_script(lilo_compacter_script($lilo_js_insert_head, 'js'), 'js');
 	}
 		
-	// compacter un peu plus
-	$lilo_js_insert_head = lilo_compacter_script($lilo_js_insert_head);
-	$lilo_css_insert_head = lilo_compacter_script($lilo_css_insert_head);
-	
+
 	// inclure le resultat dans le head
-	$flux .= "\n<!-- "._LILO_PREFIX." -->\n" . $lilo_css_insert_head . $lilo_js_insert_head . "<!-- /"._LILO_PREFIX." -->\n";
+	$flux .= "\n\n<!-- "._LILO_PREFIX." -->\n" 
+		. $lilo_css_insert_head 
+		. $lilo_js_insert_head 
+		. "\n<!-- /"._LILO_PREFIX." -->\n";
 
 	return ($flux);
 	
 } // end lilo_insert_head()
 
-function lilo_envelopper_script ($s, $type) {
-	if(empty($s)) return($s);
-	switch($type) {
-		case 'css':
-			$s = "
-				<style type='text/css'>
-				<!--
-				" 
-				. $s
-				. "
-				-->
-				</style>
-			";
-			break;
-		case 'js':
-			$s = "
-				<script type='text/javascript'>
-				" 
-				. $s
-				. "
-				</script>
-			";
-			break;
-		default:
-			$s = "\n\n<!-- erreur envelopper: type inconnu -->\n\n";
-	}
-	return($s);
-}
 
-// complement des deux 'compacte'. supprimer les espaces en trop.
-function lilo_compacter_script ($s) {
-	if(!empty($s)) {
-		$s = preg_replace('=[[:space:]]+=', ' ', $s);
+/*
+ * 
+ */
+function lilo_envelopper_script ($source, $format) {
+	$source = trim($source);
+	if(!empty($source)) {
+		switch($format) {
+			case 'css':
+				$source = "<style type='text/css'>\n<!--\n" 
+					. $source
+					. "\n-->\n</style>";
+				break;
+			case 'js':
+				$source = "\n<script type='text/javascript'>\n//<![CDATA[\n" 
+					. $source
+					. "\n//]]>\n</script>";
+				break;
+			default:
+				$source = "\n\n<!-- erreur envelopper: format inconnu [$format] -->\n\n";
+		}
 	}
-	return($s);
-}
+	return($source);
+} // end lilo_envelopper_script()
+
+/*
+ * complement des deux 'compacte'. supprimer les espaces en trop.
+ */ 
+function lilo_compacter_script ($source, $format) {
+	$source = trim($source);
+	if(!empty($source)) {
+		$source = compacte($source, $format);
+		$source = preg_replace(",/\*.*\*/,Ums","",$source); // pas de commentaires
+		$source = preg_replace('=[[:space:]]+=', ' ', $source); // réduire les espaces
+		$source = trim($source);
+	}
+	return($source);
+} // end lilo_compacter_script()
 
 ?>

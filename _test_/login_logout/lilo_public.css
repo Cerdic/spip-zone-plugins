@@ -1,0 +1,79 @@
+/* 
+
+	// lilo_public.css 
+
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	Pour personnaliser la boite de statut :
+		recopier ce fichier dans votre dossier de squelettes
+
+*/
+
+	/*
+		Si modification, vider le cache (le css est compresse' par 'compacte()'
+	*/
+
+#lilo-statut-public {
+	font: normal 11px/normal 'Myriad Web Pro', 'Myriad Web', Verdana, Arial, Helvetica, sans-serif;
+	color: #fff;
+	background: #00f;
+	height: auto;
+	border: 1px solid black;
+	z-index:1024;
+	margin:0;
+	padding:2px;
+	text-align:left;
+	display:table;
+}
+#lilo-statut-public .row {
+	display:table-row; font-size:100%;
+}
+#lilo-statut-public * {
+	margin:0; padding:0;
+}
+#lilo-statut-public #lilo-tete {
+	width:26px; height:26px;
+	margin-right:2px;
+	display:block;
+	float:left;
+	height:100%;
+	padding:1px;
+}
+#lilo-statut-public>#lilo-tete {
+	display:table-cell;
+	float:none;
+}
+#lilo-statut-public #lilo-tete img {
+	width:24px; height:24px; display:block;
+}
+#lilo-statut-public #lilo-buste {
+	display:block; height:24px; padding:0; line-height:1.4em; height: auto;
+}
+#lilo-statut-public>#lilo-buste {
+	display:table-cell;
+	padding-left:24px;
+	font-size:90%;
+}
+#lilo-statut-public .lilo-nom {
+	font-weight:700;
+}
+#lilo-statut-public .lilo-login {
+	font-size:75%; text-align:center;
+}
+#lilo-statut-public .spip-admin-bloc-lilo {
+}
+#lilo-statut-public .spip-admin-boutons-lilo {
+	white-space: nowrap;
+}
+#lilo-statut-public a {
+	display:block;
+	color: #ff0;
+	text-decoration: underline;
+	margin:3px 0 0 !important;
+	line-height:1.4em;
+}
+@media print {
+	#lilo-statut-public { display:none; }
+}

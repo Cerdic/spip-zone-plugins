@@ -62,6 +62,7 @@
 				  'lilo_login_voir_logo' => 'non'
 				, 'lilo_login_voir_erreur' => 'non'
 				, 'lilo_login_session_remember' => 'oui'
+				, 'lilo_statut_css_perso' => 'non'
 				, 'lilo_statut_voir_logo' => 'oui'
 				, 'lilo_statut_voir_boutons_admins' => 'oui'
 				, 'lilo_statut_transparent' => 'non'

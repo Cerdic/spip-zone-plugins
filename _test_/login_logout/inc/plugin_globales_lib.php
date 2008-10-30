@@ -6,11 +6,11 @@
 // $LastChangedDate$
 
 // librairie de fonctions et defines globales 
-// indépendantes de tout plugin
+// independantes de tout plugin
 
-// toutes les fonctions ici sont préfixées '__' (2 tirets)
-// sauf re-déclaration inc/vieilles_defs.php
-// sauf déclaration des fonctions php5
+// toutes les fonctions ici sont pre'fixe'es '__' (2 tirets)
+// sauf re-declaration inc/vieilles_defs.php
+// sauf declaration des fonctions php5
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -19,15 +19,15 @@ define("_PGL_PLUGIN_GLOBALES_LIB", 20080224.2026); //date.heure
 
 // HISTORY:
 // CP-20080224: ajout de __lire_meta()
-// CP-20071231: __plugin_current_version_base_get complète par lecture plugin.xml si vb manquant dans meta
+// CP-20071231: __plugin_current_version_base_get complete par lecture plugin.xml si vb manquant dans meta
 // CP-20071224: ajout de __plugin_current_svnrevision_get() et modif __plugin_html_signature()
 // CP-20071222: optimisation __plugin_boite_meta_info() pour plugin en mode stable et mode dev
 
 include_spip("inc/plugin");
 
 if(!function_exists('__server_in_private_ip_adresses')) {
-	// vérifie si le serveur est dans Adresses IP privées de classe C (Private IP addresses)
-	// renvoie true si serveur dans classe privée
+	// verifie si le serveur est dans Adresses IP privees de classe C (Private IP addresses)
+	// renvoie true si serveur dans classe privee
 	function __server_in_private_ip_adresses() {
 		return(preg_match('/^192\.168/', $_SERVER['SERVER_ADDR']));
 	}
@@ -57,7 +57,7 @@ if(!function_exists('__syslog_trace')) {
 }
 
 if(!function_exists('__syslog_dump')) {
-	// fonction récursive
+	// fonction recursive
 	// dump du contenu d'un var dans le log
 	// pratique en mode debug
 	// ne pas utiliser dans version de production
@@ -107,7 +107,9 @@ if(!function_exists('__plugin_current_version_get')) {
 	}
 }
 
-/**/
+/*
+ * 
+ */
 if(!function_exists('__plugin_current_version_base_get')) {
 	// renvoie la version_base en cours
 		// doc: voir inc/plugin.php sur version_base (plugin.xml)
@@ -121,22 +123,22 @@ if(!function_exists('__plugin_current_version_base_get')) {
 } // end if __plugin_current_version_base_get
 
 if(!function_exists('__plugin_current_svnrevision_get')) {
-	// renvoie le dernier numero de révision svn
+	// renvoie le dernier numero de revision svn
 	function __plugin_current_svnrevision_get ($prefix, $verifier_svn) {
 		static $svn_revision = false;
 		if(!empty($prefix)) {
-			// lire directement dans plugin.xml (éviter le cache ?)
+			// lire directement dans plugin.xml (eviter le cache ?)
 			$dir_plugin = _DIR_PLUGINS.__plugin_get_meta_dir($prefix);
 			// cherche si sur version svn
 			if(!$result = version_svn_courante($dir_plugin)) {
-				// méfiance: il faut que svn/entries soit à jour (svn update sur le poste de travail/serveur !)
+				// mefiance: il faut que svn/entries soit a jour (svn update sur le poste de travail/serveur !)
 				// si pas de svn/entries, lire l'attribut dans plugin.xml
 				$file = $dir_plugin."/"._FILE_PLUGIN_CONFIG;
 				$result = __plugin_svn_revision_read($file);
 			}
 			if($verifier_svn && !$svn_revision) {
-				// vérifier les fichiers inclus (gourmand et peut-être trompeur si fichier fantôme ?)
-				// ne vérifier que sur deux niveaux (PLUGIN_ROOT et ses répertoires directs, pas en dessous)
+				// verifier les fichiers inclus (gourmand et peut-etre trompeur si fichier fantome ?)
+				// ne verifier que sur deux niveaux (PLUGIN_ROOT et ses repertoires directs, pas en dessous)
 				define("_PGL_SVN_LIRE_EXTENSIONS", "css|html|js|php|xml");
 				$script_files = array();
 				if(is_dir($dir_plugin) && ($dh = opendir($dir_plugin))) {
@@ -164,8 +166,9 @@ if(!function_exists('__plugin_current_svnrevision_get')) {
 	}
 }
 
-/**/
-// lire le fichier, en espérant trouver le mot clé svn dans les $buf_size premiers caractères
+/*
+ * lire le fichier, en esperant trouver le mot cle svn dans les $buf_size premiers caracteres
+ */
 function __plugin_svn_revision_read ($filename, $buf_size = 2048) {
 	if($fh = fopen($filename, "rb")) {
 		$buf = fread($fh, $buf_size);
@@ -180,7 +183,12 @@ function __plugin_svn_revision_read ($filename, $buf_size = 2048) {
 	return (false);
 }
 
-/**/
+/*
+ * 
+ * @return 
+ * @param $prefix Object
+ * @param $s Object
+ */
 if(!function_exists('__plugin_real_tag_get')) {
 	function __plugin_real_tag_get ($prefix, $s) {
 		$dir = __plugin_get_meta_dir($prefix);
@@ -194,7 +202,9 @@ if(!function_exists('__plugin_real_tag_get')) {
 	}
 } // end if __plugin_real_tag_get
 
-/**/
+/*
+ * 
+ */
 if(!function_exists('__plugin_get_meta_infos')) {
 	// renvoie les infos du plugin contenues dans les metas
 	// qui contient 'dir' et 'version'
@@ -210,10 +220,10 @@ if(!function_exists('__plugin_get_meta_infos')) {
 	}
 } // end if __plugin_get_meta_infos
 
-/**/
+/*
+ * renvoie le dir du plugin present dans les metas
+ */
 if(!function_exists('__plugin_get_meta_dir')) {
-	// renvoie le dir du plugin
-	// présent dans les metas
 	function __plugin_get_meta_dir($prefix) {
 		$result = false;
 		$info = __plugin_get_meta_infos($prefix);
@@ -224,10 +234,11 @@ if(!function_exists('__plugin_get_meta_dir')) {
 	}
 } // end if __plugin_get_meta_dir
 
-/**/
+/*
+ * renvoie le num de version du plugin lors de la derniere installation
+ * present dans les metas
+ */
 if(!function_exists('__plugin_meta_version')) {
-	// renvoie le num de version du plugin lors de la dernière installation
-	// présent dans les metas
 	function __plugin_get_meta_version($prefix) {
 		$result = false;
 		$info = __plugin_get_meta_infos($prefix);
@@ -238,9 +249,10 @@ if(!function_exists('__plugin_meta_version')) {
 	}
 }
 
-/**/
+/*
+ * affiche un petit bloc info sur le plugin
+ */
 if(!function_exists('__plugin_boite_meta_info')) {
-	// affiche un petit bloc info sur le plugin
 	function __plugin_boite_meta_info ($prefix, $return = false) {
 		include_spip('inc/meta');
 		$result = false;
@@ -287,7 +299,12 @@ if(!function_exists('__plugin_boite_meta_info')) {
 		if($return) return($result);
 		else echo($result);
 	}
-	/**/
+	/*
+	 * 
+	 * @return 
+	 * @param $array Object
+	 * @param $recursive Object[optional]
+	 */
 	function __plugin_boite_meta_info_liste($array, $recursive = false) {
 		global $spip_lang_left;
 		$result = "";
@@ -314,10 +331,11 @@ if(!function_exists('__plugin_boite_meta_info')) {
 	}
 } // end if __plugin_boite_meta_info
 
-/**/
+/*
+ * petite signature de plugin
+ * du style "Dossier plugin [version]"
+ */
 if(!function_exists('__plugin_html_signature')) {
-	// petite signature de plugin
-	// du style "Dossier plugin [version]"
 	function __plugin_html_signature ($prefix, $return = false, $html = true, $verifier_svn = false) {
 
 		$info = plugin_get_infos(__plugin_get_meta_dir($prefix));
@@ -347,8 +365,9 @@ if(!function_exists('__plugin_html_signature')) {
 	}
 } // end if __plugin_html_signature
 
-/*//////////////////////////
-*/
+/*
+ * //////////////////////////
+ */
 
 if(!function_exists('__mysql_date_time')) {
 	function __mysql_date_time($time = 0) {
@@ -364,7 +383,7 @@ if(!function_exists('__is_mysql_date')) {
 }
 
 if(!function_exists('__mysql_max_allowed_packet')) {
-	// renvoie la taille maxi d'un paquet PySQL (taille d'une requête)
+	// renvoie la taille maxi d'un paquet PySQL (taille d'une requete)
 	function __mysql_max_allowed_packet() {
 		$sql_result = spip_query("SHOW VARIABLES LIKE 'max_allowed_packet'");
 		$row = spip_fetch_array($sql_result, SPIP_NUM);
@@ -372,8 +391,8 @@ if(!function_exists('__mysql_max_allowed_packet')) {
 	}
 }
 
-// si inc/vieilles_defs.php disparaît ?
-// CP20080224: nota: ce passage/fonction probablement à supprimer (redondant)
+// si inc/vieilles_defs.php disparait ?
+// CP20080224: nota: ce passage/fonction probablement a supprimer (redondant)
 if(!function_exists("lire_meta")) {
 	function lire_meta($key) {
 		$result = 0;
@@ -413,10 +432,10 @@ if(!function_exists("__boite_alerte")) {
 if(!function_exists("html_entity_decode")) {
 	function html_entity_decode ($string, $quote_style = "", $charset = "")
 	{
-		// Remplace les entités numériques
+		// Remplace les entites numeriques
 		$string = preg_replace('~&#x([0-9a-f]+);~ei', 'chr(hexdec("\\1"))', $string);
 		$string = preg_replace('~&#([0-9]+);~e', 'chr("\\1")', $string);
-		// Remplace les entités litérales
+		// Remplace les entites literales
 		$trans_tbl = get_html_translation_table (HTML_ENTITIES);
 		$trans_tbl = array_flip ($trans_tbl);
 		return strtr ($string, $trans_tbl);
@@ -563,7 +582,7 @@ if(!function_exists('__array_values_in_keys')) {
 }
 
 if(!function_exists('__plugin_aide')) {
-	// petit bouton aide à placer à droite du titre de bloc
+	// petit bouton aide a placer a droite du titre de bloc
 	function __plugin_aide ($fichier_exec_aide, $aide='', $return=true) {
 		include_spip('inc/minipres');
 		global $spip_lang
@@ -597,7 +616,7 @@ if(!function_exists('__plugin_aide')) {
 }
 
 if(!function_exists('__plugin_ecrire_key_in_serialized_meta')) {
-	// ecriture dans les metas, format sérialisé
+	// ecriture dans les metas, format serialise
 	function __plugin_ecrire_key_in_serialized_meta ($key, $value, $meta_name) {
 		if(isset($GLOBALS['meta'][$meta_name])) {
 			$s_meta = unserialize($GLOBALS['meta'][$meta_name]);
@@ -610,7 +629,7 @@ if(!function_exists('__plugin_ecrire_key_in_serialized_meta')) {
 }
 
 if(!function_exists('__plugin_lire_serialized_meta')) {
-	// lecture dans les metas, format sérialisé
+	// lecture dans les metas, format serialise
 	function __plugin_lire_serialized_meta ($meta_name) {
 		if(isset($GLOBALS['meta'][$meta_name])) {
 			return(unserialize($GLOBALS['meta'][$meta_name]));
@@ -620,7 +639,7 @@ if(!function_exists('__plugin_lire_serialized_meta')) {
 }
 
 if(!function_exists('__plugin_lire_key_in_serialized_meta')) {
-// lecture d'une clé dans la meta sérialisée
+// lecture d'une cle dans la meta serialisee
 	function __plugin_lire_key_in_serialized_meta ($key, $meta_name) {
 		$result = false;
 		$s_meta = __plugin_lire_serialized_meta($meta_name);

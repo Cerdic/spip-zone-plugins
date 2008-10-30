@@ -29,6 +29,10 @@ $GLOBALS['i18n_'._LILO_PREFIX.'_fr'] = array(
 , 'configurer_login_session_remember' => "Cookie de correspondance"
 , 'configurer_login_session_remember_desc' => "Forcer le cookie de correspondance."
 
+, 'configurer_statut_css_perso' => "Feuille de style (css)"
+, 'configurer_statut_css_perso_desc' => "Personnaliser la feuille de style de la boite statut
+	(recopiez le fichier <em>lilo_public.css</em> dans votre dossier squelettes et adaptez-le à votre site)."
+
 , 'configurer_statut' => "Boite de statut"
 , 'configurer_statut_desc' => "La boite de statut apparaît en espace public si le visiteur/auteur est authentifié."
 
