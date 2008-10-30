@@ -9,9 +9,9 @@ div.cs_sommaire {
 	text-align:left;
 }
 
-[(#EVAL{defined('_SPIP19100')}|?{#SET{path,img_pack},#SET{path,images}})]
+[(#EVAL{defined('_SPIP19100')}|?{#SET{path,img_pack/spip_out.gif},#SET{path,images/spip_out.gif}})]
 a.sommaire_ancre {
-	background:transparent url([(#CHEMIN{#GET{path}|concat{'/spip_out.gif'}}|url_absolue)]) no-repeat scroll left center;
+	background:transparent url([(#CHEMIN{#GET{path}}|url_absolue)]) no-repeat scroll left center;
 	padding-left:10px;
 	text-decoration:none;
 }
