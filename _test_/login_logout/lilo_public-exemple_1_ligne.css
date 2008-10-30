@@ -1,0 +1,75 @@
+/* 
+
+	// lilo_public.css 
+
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	Pour personnaliser la boite de statut :
+		recopier ce fichier dans votre dossier de squelettes
+
+*/
+
+	/*
+		Si modification, vider le cache (le css est compresse par compacte()
+	*/
+	
+	/*
+	 * CP-20081030: exemple de lilo_statut.css pour obtenir
+	 * la boite sur toute la largeur de l ecran.
+	 * Les elements de la boite sont alignes sur une seule ligne.
+	 */
+
+#lilo-statut-public {
+	font: normal 1.2em/normal 'Myriad Web Pro', 'Myriad Web', Verdana, Arial, Helvetica, sans-serif;
+	color: #fff;
+	z-index:1024;
+	margin:0;
+	padding:0.5em 1em 0;
+	text-align:left;
+	width:100%;
+	height:50px;
+	background-color:#969696;
+	overflow:hidden;
+}
+#lilo-statut-public * {
+	margin:0; padding:0;
+}
+/*
+ * illustration auteur
+ */
+#lilo-statut-public #lilo-tete, #lilo-statut-public #lilo-tete img {
+	display:block;
+	width:26px; 
+	height:26px;
+}
+#lilo-statut-public #lilo-tete {
+	margin:0 1ex;
+	float:left;
+}
+#lilo-statut-public #lilo-buste, #lilo-statut-public #lilo-buste span {
+	display:block;
+	margin-right:2ex;
+	float:left;
+}
+#lilo-statut-public .lilo-nom { 
+	font-weight:700;
+}
+#lilo-statut-public a {
+	display:block;
+	color: #fff;
+	text-decoration: underline;
+	margin:0 1ex;
+	float:left;
+}
+/*
+ * ne pas afficher pas le login
+ */
+.lilo-login { display:none !important; }
+/*
+ * ne pas imprimer la boite
+ */
+@media print {
+	#lilo-statut-public { display:none; }
+}
