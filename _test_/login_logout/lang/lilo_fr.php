@@ -36,6 +36,9 @@ $GLOBALS['i18n_'._LILO_PREFIX.'_fr'] = array(
 , 'configurer_statut' => "Boite de statut"
 , 'configurer_statut_desc' => "La boite de statut apparaît en espace public si le visiteur/auteur est authentifié."
 
+, 'configurer_statut_sans_anim' => "Effet plier/déplier"
+, 'configurer_statut_sans_anim_desc' => "Ne pas animer la boite de statut."
+
 , 'configurer_statut_voir_logo' => "Logo auteur"
 , 'configurer_statut_voir_logo_desc' => "Afficher le logo auteur dans la boite de statut."
 

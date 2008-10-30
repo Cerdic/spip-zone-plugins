@@ -183,18 +183,23 @@ function lilo_insert_head ($flux) {
 			}
 		"; // end $lilo_css_insert_head
 
-		$lilo_js_insert_head .= 
-		// Javascript
-		"
-		jQuery().ready(function(){
-			$('#lilo-ventre').hide();
-			$('#lilo-statut-public').hover(function(){
-				$('#lilo-ventre').show('slow');
-			 },function(){
-				$('#lilo-ventre').hide('slow');
+		/*
+		 * 
+		 */
+		if($config['lilo_statut_sans_animation'] == 'non') {
+			$lilo_js_insert_head .= 
+			// Javascript
+			"
+			jQuery().ready(function(){
+				$('#lilo-ventre').hide();
+				$('#lilo-statut-public').hover(function(){
+					$('#lilo-ventre').show('slow');
+				 },function(){
+					$('#lilo-ventre').hide('slow');
+				});
 			});
-		});
-		"; // end $lilo_js_insert_head
+			"; // end $lilo_js_insert_head
+		}
 
 	} // end else
 	

@@ -204,6 +204,12 @@ function exec_lilo_configuration () {
 		. lilo_form_checkbox_button ('lilo_statut_css_perso', _T(_LILO_LANG."configurer_statut_css_perso_desc")
 			, ($lilo_statut_css_perso == 'oui'), 'oui', true)
 		. "</fieldset>"
+		// desactiver l'animation
+		. "<fieldset class='text-center'>\n"
+		. lilo_form_legend('configurer_statut_sans_anim')
+		. lilo_form_checkbox_button ('lilo_statut_sans_animation', _T(_LILO_LANG."configurer_statut_sans_anim_desc")
+			, ($lilo_statut_sans_animation == 'oui'), 'oui', true)
+		. "</fieldset>"
 		// position 
 		. "<fieldset class='text-center'>\n"
 		. lilo_form_legend('configurer_statut_position')
