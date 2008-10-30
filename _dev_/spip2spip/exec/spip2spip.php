@@ -50,19 +50,6 @@ function exec_spip2spip(){
     
   echo debut_droite();
   
-  //
-  // spip2spip installed ?
-  $sql = "SELECT COUNT(titre) AS c FROM ".$table_prefix."_groupes_mots WHERE titre='- spip2spip -'";
-  $k = spip_fetch_array(spip_query($sql));
-  if ($k['c']!=1){
-    debut_cadre_relief();
-    echo "<div style='color:red'>"._T('spiptospip:not_installed')."</div>";
-    fin_cadre_relief();
-    fin_page();
-    exit;
-  }
-  
-  
   
   //
   // gestion des sites

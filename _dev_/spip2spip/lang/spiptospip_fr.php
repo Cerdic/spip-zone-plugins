@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'back' => 'retour',
 
 // C
-'copy_spip2spip' => 'Spip2Spip: Copie SPIP à  SPIP',
+'copy_spip2spip' => 'Spip2Spip: Copie SPIP &agrave;  SPIP',
 'config_spip2spip' => 'Configurer',
 
 // F
@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // H
 'how_to' => 'Pensez &agrave;  bien attribuer les mots-cl&eacute;s du groupe - spip2spip - [<a href=\'?exec=mots_tous\'>Voir le groupe</a>]<br /><br />
 - attribuez les mots cl&eacute;s de ce groupe aux <strong>articles</strong> dont vous voulez envoyer le contenu vers les autres spip2spip<br /><br />
-- attribuez les mots cl&eacute;s de ce groupe aux <strong>rubriques</strong> dans lequelles vous voulez importer les articles spip2spip li&eacute;s à  une th&eacute;matique donn&eacute;e.',
+- attribuez les mots cl&eacute;s de ce groupe aux <strong>rubriques</strong> dans lequelles vous voulez importer les articles spip2spip li&eacute;s &agrave;  une th&eacute;matique donn&eacute;e.',
 
 // I
 'intro_spip2spip' => '<strong>SPIP 2 SPIP</strong><br /><p>Permet de recopier automatiquement des articles d\'un SPIP &agrave;  l\'autre.</p>',
@@ -34,9 +34,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'install_spip2spip_2' => 'Ajout des flux backends',
 'install_spip2spip_3' => 'Cr&eacute;ation du groupe de mots cl&eacute;s spip2spip',
 'install_spip2spip_4' => 'ce groupe sert &agrave;  spip2spip pour d&eacute;signer les articles et rubriques &agrave;  synchroniser.',
-'install_spip2spip_5' => '{{mode d\'emploi:}}
-- attribuez les mots clés de ce groupe aux {{articles}} que vous voulez envoyer vers les sites utilisant spip2spip.
-- attribuez les mots clés de ce groupe aux {{rubriques}} dans lequelles vous voulez importer les articles spip2spip liés à  une thématique donnée.',
+'install_spip2spip_5' => '{{mode d&#039;emploi:}}
+-* attribuez les mots clés de ce groupe aux {{articles}} que vous voulez envoyer vers les sites utilisant spip2spip.
+-* attribuez les mots clés de ce groupe aux {{rubriques}} dans lequelles vous voulez importer les articles spip2spip liés &agrave;  une thématique donnée.',
 'install_spip2spip_99' => '<p>Installation de SPIP2SPIP complète !</p><a href=\'?exec=spip2spip\'>Retourner sur l\'interface principale de SPIP2SPIP</a>',
 'imported_already' => 'article d&eacute;j&agrave;  import&eacute;',
 'imported_new' => 'nouvel article',
