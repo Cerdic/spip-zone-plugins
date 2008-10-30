@@ -68,7 +68,7 @@ function exec_lilo_configuration () {
 	include_spip('inc/utils');
 	include_spip('inc/acces');
 	include_spip('inc/plugin_globales_lib');
-	
+		
 	if (!(($connect_statut == '0minirezo') && $connect_toutes_rubriques)) {
 		echo _T('avis_non_acces_page');
 		echo fin_gauche(), fin_page();
@@ -249,19 +249,7 @@ function exec_lilo_configuration () {
 		// couleur de fond
 		. "<fieldset class='text-center'>\n"
 		. lilo_form_legend('configurer_statut_bgcolor')
-		. "<div><div style='float:left;margin-right:1ex;'>\n"
-		. lilo_form_radio_button_color ('lilo_statut_bgcolor', "configurer_statut_couleur_000", ($lilo_statut_bgcolor == '000'), '000')
-		. "</div><div style='float:left;margin-right:1ex;'>\n"
-		. lilo_form_radio_button_color ('lilo_statut_bgcolor', "configurer_statut_couleur_f00", ($lilo_statut_bgcolor == 'f00'), 'f00')
-		. "</div><div style='float:left;margin-right:1ex;'>\n"
-		. lilo_form_radio_button_color ('lilo_statut_bgcolor', "configurer_statut_couleur_f0f", ($lilo_statut_bgcolor == 'f0f'), 'f0f')
-		. "</div><div style='float:left;margin-right:1ex;'>\n"
-		. lilo_form_radio_button_color ('lilo_statut_bgcolor', "configurer_statut_couleur_0c0", ($lilo_statut_bgcolor == '0c0'), '0c0')
-		. "</div><div style='float:left;margin-right:1ex;'>\n"
-		. lilo_form_radio_button_color ('lilo_statut_bgcolor', "configurer_statut_couleur_00f", ($lilo_statut_bgcolor == '00f'), '00f')
-		. "</div><div style='float:left;margin-right:1ex;'>\n"
-		. lilo_form_radio_button_color ('lilo_statut_bgcolor', "configurer_statut_couleur_666", ($lilo_statut_bgcolor == '666'), '666')
-		. "</div></div>\n"
+		. lilo_ie_color_select('lilo_statut_bgcolor', $lilo_statut_bgcolor, "display:block;margin:0 auto;")
 		. "</fieldset>\n"
 		//
 		. fin_cadre_relief(true)
@@ -380,6 +368,96 @@ function lilo_form_radio_button_color ($nom_radio, $label_radio, $current_value,
 		;
 	$idcolor++;
 	return($page_result);
+}
+
+/*
+ * @return boite select pour les couleurs
+ * @param name nom du select
+ * @param current valeur courante de la couleur
+ * @param style css style complementaire du select
+ */
+function lilo_ie_color_select ($name, $current, $style = "") {
+	
+	if(!empty($style)) {
+		$style = trim($style, ";") . ";";
+	}
+	
+	if(strlen($current) == 3) {
+		$current = 
+			( $ii = substr($current, 0, 1) . $ii)
+			. ( $ii = substr($current, 1, 1) . $ii)
+			. ( $ii = substr($current, 2, 1) . $ii)
+			;
+	}
+	if(empty($current)) {
+		$current = "f0f8ff"; // prendre la premiere par defaut
+	}
+	$style .= "background-color:#$current;color:white";
+	
+	$lilo_ie_colors = array (
+		'aliceblue' => "f0f8ff"
+		, 'antiquewhite' => "faebd7"
+		, 'aquamarine' => "7fffd4"
+		, 'azure' => "f0ffff"
+		, 'beige' => "f5f5dc"
+		, 'bisque' => "ffe4c4"
+		, 'blanchedalmond' => "ffebcd"
+		, 'blueviolet' => "8a2be2"
+		, 'brown' => "a52a2a"
+		, 'burlywood' => "deb887"
+		, 'cadetblue' => "5f9ea0"
+		, 'chartreuse' => "7fff00"
+		, 'chocolate' => "d2691e"
+		, 'coral' => "ff7f50"
+		, 'cornflowerblue' => "6495ed"
+		, 'cornsilk' => "fff8dc"
+		, 'crimson' => "dc143c"
+		, 'darkblue' => "00008b"
+		, 'darkcyan' => "008b8b"
+		, 'darkgoldenrod' => "b8860b"
+		, 'darkgray' => "a9a9a9"
+		, 'darkgreen' => "006400"
+		, 'darkkhaki' => "bdb76b"
+		, 'darkmagenta' => "8b008b"
+		, 'darkolivegreen' => "556b2f"
+		, 'darkorange' => "ff8c00"
+		, 'darkorchid' => "9932cc"
+		, 'darkred' => "8b0000"
+		, 'darksalmon' => "e9967a"
+		, 'darkseagreen' => "8fbc8b"
+		, 'dodgerblue' => "1e90ff"
+		, 'forestgreen' => "228b22"
+		, 'indianred' => "cd5c5c"
+		, 'lavender' => "e6e6fa"
+		, 'lemonchiffon' => "fffacd"
+		, 'lightgrey' => "d3d3d3"
+		, 'lightseagreen' => "20b2aa"
+		, 'mediumslateblue' => "7b68ee"
+		, 'orange' => "ffa500"
+		, 'salmon' => "fa8072"
+		, 'slateblue' => "6a5acd"
+		, 'yellowgreen' => "9acd32"
+	);
+
+	$result = "";
+	
+	foreach($lilo_ie_colors as $key => $value) {
+		// prend les poids forts de chaque
+		$ii = substr($value, 0, 1). substr($value, 2, 1) . substr($value, 4, 1);
+		$ii = preg_replace("=[0-9a-c]=", '', $ii);
+		if(strlen($ii) >= 2 ) {
+			// eviter si couleur trop claire
+			continue;
+		}
+		$selected = ($value == $current) ? "selected='selected'" : "";
+		$result .= "<option value='$value' $selected style='background-color:#$value'>$key (#$value)</option>\n";
+	}
+	$result =
+		"<select name='$name' style='$style'>\n"
+		. $result
+		. "</select>\n"
+		;
+	return($result);
 }
 
 //

@@ -103,7 +103,7 @@ ul.meta-info-liste p { display:inline; } /* supprimes les <p> ajoute's aux infos
 </style>
 <script language='JavaScript' type='text/JavaScript'>
 jQuery().ready(function(){
-	/* ne pr�sente le formulaire que si jQuery pr�sent */
+	/* ne presente le formulaire que si jQuery present */
 	$('#lilo_bloc_configuration').show();
 });
 </script>
