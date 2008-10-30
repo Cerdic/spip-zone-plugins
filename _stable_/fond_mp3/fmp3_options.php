@@ -50,12 +50,6 @@
 	
 include_spip('inc/fmp3_api_globales');
 
-/*
- * Option debug, à n'activer qu'en dev.
- * Permet d'avoir le journal "tmp/fmp3_log" 
- * */
-//define("_FMP3_DEBUG", true);
-
 define("_FMP3_PREFIX", "fmp3");
 
 if(!defined('_DIR_PLUGIN_FMP3')) {
