@@ -32,23 +32,23 @@
 	Ce fichier est un des composants de LiLo. 
 	
 	LiLo est un programme libre, vous pouvez le redistribuer et/ou le modifier 
-	selon les termes de la Licence Publique Generale GNU publiée par 
-	la Free Software Foundation (version 2 ou bien toute autre version ultérieure 
+	selon les termes de la Licence Publique Generale GNU publie'e par 
+	la Free Software Foundation (version 2 ou bien toute autre version ulterieure 
 	choisie par vous).
 	
-	LiLo est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,
+	LiLo est distribue' car potentiellement utile, mais SANS AUCUNE GARANTIE,
 	ni explicite ni implicite, y compris les garanties de commercialisation ou
-	d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU 
-	pour plus de détails. 
+	d'adaptation dans un but specifique. Reportez-vous a' la Licence Publique Generale GNU 
+	pour plus de details. 
 	
-	Vous devez avoir reçu une copie de la Licence Publique Generale GNU 
-	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez à la  
+	Vous devez avoir recu une copie de la Licence Publique Generale GNU 
+	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la  
 	Free Software Foundation, Inc., 
-	59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.
+	59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.
 	
 	*****************************************************/
 	
-	// page de configuration espace privé
+	// page de configuration espace privï¿½
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -78,7 +78,7 @@ function exec_lilo_configuration () {
 	$lilo_values_array = unserialize(_LILO_DEFAULT_VALUES_ARRAY);
 	
 	////////////////////////////////////
-	// initialise les variables postées par le formulaire
+	// initialise les variables postï¿½es par le formulaire
 	foreach(array_merge(
 		array(
 			'btn_valider_configure'
@@ -100,14 +100,14 @@ function exec_lilo_configuration () {
 	// valider la configuration
 	if($btn_valider_configure) {
 		$config = array();
-		// compléter les checkbox manquantes
+		// complï¿½ter les checkbox manquantes
 		foreach($lilo_values_array as $key => $value) {
 			if(($value == 'oui') && !isset($$key)) {
-				// si radio non coché, valeur = 'non'
+				// si radio non cochï¿½, valeur = 'non'
 				$$key = 'non';
 			}
 		}
-		// initialiser la config par défaut si besoin (installation non configurée)
+		// initialiser la config par dï¿½faut si besoin (installation non configurï¿½e)
 		foreach($lilo_values_array as $key => $value) {
 			$config[$key] = (isset($$key) && !empty($$key)) ? $$key	: $lilo_values_array[$key];
 		}
@@ -117,7 +117,7 @@ function exec_lilo_configuration () {
 		
 	}
 	
-	// mettre à jour les variables locales
+	// mettre ï¿½ jour les variables locales
 	$config = __plugin_lire_key_in_serialized_meta('config', _LILO_META_PREFERENCES);
 	foreach($config as $key=>$value) {
 		$$key = $value;
@@ -153,7 +153,7 @@ function exec_lilo_configuration () {
 		;
 
 	////////////////////////////////////
-	// Boite principale des réglages
+	// Boite principale des rï¿½glages
 	$page_result .= ""
 		. debut_cadre_trait_couleur(_DIR_PLUGIN_LILO_IMG_PACK."administration-24.png", true, "", _T(_LILO_LANG."configuration_login_logout"))
 		. "<script type='text/javascript'><!-- \n"
@@ -169,7 +169,7 @@ function exec_lilo_configuration () {
 		. lilo_form_debut_form('form_configuration')
 		;
 	//
-	// Ecran login (appelé pour accéder à l'espace privé, login.html) 
+	// Ecran login (appelï¿½ pour accï¿½der ï¿½ l'espace privï¿½, login.html) 
 	$page_result .= ""
 		. debut_cadre_relief(_DIR_PLUGIN_LILO_IMG_PACK."lilo-login-win-24.png", true, '', _T(_LILO_LANG."configurer_login_prive"))
 		. lilo_form_description('configurer_login_prive_desc')
@@ -210,7 +210,7 @@ function exec_lilo_configuration () {
 		. "</ul>\n"
 		. "</div>"
 		. "</fieldset>\n"
-		// boite flotante ou fixée
+		// boite flotante ou fixï¿½e
 		. "<fieldset class='text-center'>\n"
 		. lilo_form_legend('configurer_statut_fixed')
 		. lilo_form_checkbox_button ('lilo_statut_fixed', _T(_LILO_LANG."configurer_statut_fixed_desc")
@@ -222,7 +222,7 @@ function exec_lilo_configuration () {
 		. lilo_form_checkbox_button ('lilo_statut_voir_logo', _T(_LILO_LANG."configurer_statut_voir_logo_desc")
 			, ($lilo_statut_voir_logo == 'oui'), 'oui', true)
 		. "</fieldset>\n"
-		// insérer boutons spip admin
+		// insï¿½rer boutons spip admin
 		. "<fieldset class='text-center'>\n"
 		. lilo_form_legend('configurer_statut_voir_btn_admins')
 		. lilo_form_checkbox_button ('lilo_statut_voir_boutons_admins', _T(_LILO_LANG."configurer_statut_voir_btn_admins_desc")
