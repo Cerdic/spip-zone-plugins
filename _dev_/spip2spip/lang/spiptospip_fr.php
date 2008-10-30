@@ -35,9 +35,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'install_spip2spip_3' => 'Cr&eacute;ation du groupe de mots cl&eacute;s spip2spip',
 'install_spip2spip_4' => 'ce groupe sert &agrave;  spip2spip pour d&eacute;signer les articles et rubriques &agrave;  synchroniser.',
 'install_spip2spip_5' => '{{mode d&#039;emploi:}}
--* attribuez les mots clés de ce groupe aux {{articles}} que vous voulez envoyer vers les sites utilisant spip2spip.
--* attribuez les mots clés de ce groupe aux {{rubriques}} dans lequelles vous voulez importer les articles spip2spip liés &agrave;  une thématique donnée.',
-'install_spip2spip_99' => '<p>Installation de SPIP2SPIP complète !</p><a href=\'?exec=spip2spip\'>Retourner sur l\'interface principale de SPIP2SPIP</a>',
+-* attribuez les mots cl&eacute;s de ce groupe aux {{articles}} que vous voulez envoyer vers les sites utilisant spip2spip.
+-* attribuez les mots cl&eacute;s de ce groupe aux {{rubriques}} dans lequelles vous voulez importer les articles spip2spip li&eacute;s &agrave;  une th&eacute;matique donn&eacute;e.',
+'install_spip2spip_99' => '<p>Installation de SPIP2SPIP compl&egrave;te !</p><a href=\'?exec=spip2spip\'>Retourner sur l\'interface principale de SPIP2SPIP</a>',
 'imported_already' => 'article d&eacute;j&agrave;  import&eacute;',
 'imported_new' => 'nouvel article',
 'imported_update' => 'article mis &agrave; jour  ',
