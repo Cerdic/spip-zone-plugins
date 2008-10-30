@@ -46,11 +46,6 @@ function gestdoc_upgrade($nom_meta_base_version,$version_cible){
 			sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type='application/mp4'");
 
 			sql_alter("TABLE spip_documents ADD statut varchar(10) DEFAULT '0' NOT NULL");
-			// mettre a jour maintenant tous les statut des documents :
-			$res = sql_select('id_document','spip_documents',"statut='0'");
-			include_spip('action/editer_document');
-			while ($row = sql_fetch($res))
-				instituer_document($row['id_document']);
 			ecrire_meta($nom_meta_base_version,$current_version="0.2",'non');
 		}
 		if (version_compare($current_version,'0.3','<')){
@@ -60,7 +55,7 @@ function gestdoc_upgrade($nom_meta_base_version,$version_cible){
 			// vider le cache des descriptions de tables
 			$trouver_table = charger_fonction('trouver_table','base');
 			$trouver_table(false);
-			// reinit les statuts
+			// reinit les statuts pour ceux qui avaient subi une version 0.2 bugguee
 			sql_updateq('spip_documents',array('statut'=>'0'));
 			// ecrire la version pour ne plus passer la
 			ecrire_meta($nom_meta_base_version,$current_version="0.3",'non');

@@ -120,7 +120,7 @@ function revisions_documents ($id_document, $c=false) {
  * @param int $id_document
  */
 function instituer_document($id_document,$statut=null, $date_publication = null){
-	$row = sql_getfetsel("statut,date_publication", "spip_documents", "id_document=$id_document");
+	$row = sql_fetsel("statut,date_publication", "spip_documents", "id_document=$id_document");
 	$statut_ancien = $row['statut'];
 	$date_publication_ancienne = $row['date_publication'];
 	if ($statut===null){
