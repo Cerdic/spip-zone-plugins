@@ -12,7 +12,8 @@
 		test
 	</etat>
 	<description>
-		Inscription personnalis&eacute;e au site par l&rsquo;ajout de champs compl&eacute;mentaires
+		Inscription personnalis&eacute;e au site par l&rsquo;ajout de champs compl&eacute;mentaires.<br />
+		cette version n&eacute;cessite provisoirement que votre serveur dispose de <b>php 5.2</b> au minimum.
 	</description>
 	<icon>images/inscription2.png</icon>
 	<prefix>
