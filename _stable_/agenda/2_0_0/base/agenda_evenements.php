@@ -12,6 +12,7 @@ function Agenda_declarer_tables_interfaces($interface){
 	
 	//-- Jointures ----------------------------------------------------
 	$interface['tables_jointures']['spip_evenements'][]= 'mots'; // a placer avant la jointure sur articles
+	$interface['tables_jointures']['spip_mots'][]= 'evenements'; // a placer avant la jointure sur articles
 	$interface['tables_jointures']['spip_articles'][]= 'evenements';
 	$interface['tables_jointures']['spip_evenements'][] = 'articles';
 	$interface['tables_jointures']['spip_mots'][]= 'mots_evenements';
@@ -22,6 +23,7 @@ function Agenda_declarer_tables_interfaces($interface){
 	// permet d'utiliser les criteres racine, meme_parent, id_parent
 	$interface['exceptions_des_tables']['evenements']['id_parent']='id_evenement_source';
 	$interface['exceptions_des_tables']['evenements']['id_rubrique']=array('spip_articles', 'id_rubrique');
+	$interface['exceptions_des_tables']['evenements']['id_mot']=array('spip_mots', 'id_mot');
 		
 	$interface['table_date']['evenements'] = 'date_debut';
 
@@ -52,7 +54,7 @@ function Agenda_declarer_tables_principales($tables_principales){
 			);
 	
 	$tables_principales['spip_evenements'] =
-		array('field' => &$evenements, 'key' => &$evenements_key, 'join'=>array('id_article'=>'id_article'));
+		array('field' => &$evenements, 'key' => &$evenements_key, 'join'=>array('id_article'=>'id_article','id_mot'=>'id_evenement'));
 
 
 	return $tables_principales;
@@ -75,6 +77,7 @@ function Agenda_declarer_tables_auxiliaires($tables_auxiliaires){
 		
 	global $exceptions_des_tables;
 	$exceptions_des_tables['evenements']['id_rubrique']=array('spip_articles', 'id_rubrique');
+	$exceptions_des_tables['evenements']['id_mot']=array('spip_mots', 'id_mots');
 	
 	global $table_date;
 	$table_date['evenements'] = 'date_debut';
