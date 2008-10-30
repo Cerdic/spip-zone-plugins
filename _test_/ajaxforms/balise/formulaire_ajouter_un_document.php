@@ -8,7 +8,7 @@ function balise_FORMULAIRE_AJOUTER_UN_DOCUMENT_dist ($p) {
 	// on recupere le nom de la boucle
 	// sauf qu'il faut passer par une balise renvoyant le nom 
 	# $table = $p->boucles[$p->id_boucle]->id_table;
-	
+
 	// on recupere la valeur de la cle primaire de l'objet
 	$pk = $p->boucles[$p->id_boucle]->primary;
 	return calculer_balise_dynamique($p,'FORMULAIRE_AJOUTER_UN_DOCUMENT', array('AJAXFORM_TYPE_BOUCLE',$pk));

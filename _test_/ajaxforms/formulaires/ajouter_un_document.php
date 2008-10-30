@@ -26,7 +26,7 @@ function formulaires_ajouter_un_document_verifier_dist($objet, $id_objet){
 	$erreurs = array();	
 	
 	if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
-	if (!is_array($_FILES) or !isset($_FILES['fichier'])) 
+	if (!is_array($_FILES) or !isset($_FILES['fichier']) or $_FILES['fichier']['error'] == 4 ) 
 		$erreurs['message_erreur'] = _T('ajaxform:aucun_fichier_recu');
 	if ($_FILES['fichier']['error'] != 0)
 		$erreurs['fichier'] = _T('ajaxform:mauvaise_reception');
@@ -43,7 +43,7 @@ function formulaires_ajouter_un_document_verifier_dist($objet, $id_objet){
  * - les autres modes de documents ('choix' par defaut)
  */
 function formulaires_ajouter_un_document_traiter_dist($objet, $id_objet){
-	$res = array('editable'=>' ');
+	$res = array('editable'=>' ', 'message_ok'=>'');
 
 	// parametres de ajouter_documents()
 	$mode='choix';
@@ -51,13 +51,9 @@ function formulaires_ajouter_un_document_traiter_dist($objet, $id_objet){
 	$actifs = array(); // seront ajoutes les fichiers actifs dans le tableau - inutile ici...
 	
 	if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
-
-	$arg = $_FILES['fichier'];
-	// verifier l'extension du fichier en fonction de son type mime
-	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
-	list($extension,$arg['name']) = fixer_extension_document($arg);
-	$id = $ajouter_documents($arg['tmp_name'], $arg['name'], 
-				objet_type($objet), $id_objet, $mode, $id_document, $actifs);
+	
+	include_spip('inc/ajaxform_documents');
+	$id = ajaxform_creer_document($_FILES['fichier']);
 	
 	if ($id) {
 		// signaler que l'on vient de soumettre le formulaire
@@ -68,14 +64,7 @@ function formulaires_ajouter_un_document_traiter_dist($objet, $id_objet){
 		$res['id_document'] = $id;
 		$res['message_ok'] = _T('ajaxform:document_ajoute');
 		
-		// inserer texte et descriptif
-		$titre = _request('titre');
-		$descriptif = _request('descriptif');
-		if ($texte OR $descriptif) {
-			$modifs = array('titre'=>$titre,'descriptif'=>$descriptif);
-			include_spip('inc/modifier');
-			revision_document($id, $modifs);
-		}
+		ajaxform_modifier_document($id, array('titre','descriptif'));
 	} else {
 		$res['message_erreur'] = _T('ajaxform:erreur_ajout_document');
 	}

@@ -29,3 +29,18 @@ Note 2) afficher les documents
 	il faut soit ne pas utiliser l'ajax, soit inserer la liste des documents 
 	a la suite du formulaire en utilisant le pipeline charger des 
 	formulaires CVT pour inserer ce contenu.
+
+
+#FORMULAIRE_EDITER_DOCUMENT
+---------------------------
+
+Ce formulaire permet de modifier un document. 
+Le formulaire doit etre place dans un environnement ayant un id_document.
+On peut autrement forcer l'id par #FORMULAIRE_EDITER_DOCUMENT{34}
+
+Note 1)
+	Ce formulaire permet de changer le fichier du document.
+	Certaines informations seront alors mises a jour en fonction du nouveau document (taille, poids...)
+	
+Note 2)
+	Ce formulaire ne permet pour l'instant que d'editer le titre et le descriptif.

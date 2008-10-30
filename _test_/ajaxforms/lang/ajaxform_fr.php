@@ -16,5 +16,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_ajout_document' => 'Une erreur est survenue lors de l\'ajout du document.',
 'mauvaise_reception' => 'Oups ! Erreur dans la r&eacute;ception du fichier. R&eacute;essayez...',
 
+// formulaire modifier document
+'changer_document'=>'Changer le document',
+
 );
 ?>
