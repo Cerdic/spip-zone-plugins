@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"valider" => "Valider",
 	"install" => "Installer le plugin !",
 	"installer" => "Installer",
-	"explain_install" => "<br />En cliquant sur le bouton ci dessous, le plugin &eacute;crira 3 entr&eacute;es dans la table <b>spip_metas</b>. Elles permettront de g&eacute;rer les autorisations de validation.<br /><br />",
+	"explain_install" => "<br />En cliquant sur le bouton ci dessous, le plugin &eacute;crira 3 entr&eacute;es dans la table <b>spip_meta</b>. Elles permettront de g&eacute;rer les autorisations de validation.<br /><br />",
 
 	);
 ?>
