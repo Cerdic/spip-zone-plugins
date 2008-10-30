@@ -33,26 +33,26 @@
 	Ce fichier est un des composants de LiLo. 
 	
 	LiLo est un programme libre, vous pouvez le redistribuer et/ou le modifier 
-	selon les termes de la Licence Publique Generale GNU publiée par 
-	la Free Software Foundation (version 2 ou bien toute autre version ultérieure 
+	selon les termes de la Licence Publique Generale GNU publie'e par 
+	la Free Software Foundation (version 2 ou bien toute autre version ulterieure 
 	choisie par vous).
 	
-	LiLo est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,
+	LiLo est distribue' car potentiellement utile, mais SANS AUCUNE GARANTIE,
 	ni explicite ni implicite, y compris les garanties de commercialisation ou
-	d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU 
-	pour plus de détails. 
+	d'adaptation dans un but specifique. Reportez-vous a' la Licence Publique Generale GNU 
+	pour plus de details. 
 	
-	Vous devez avoir reçu une copie de la Licence Publique Generale GNU 
-	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez à la  
+	Vous devez avoir recu une copie de la Licence Publique Generale GNU 
+	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la  
 	Free Software Foundation, Inc., 
-	59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.
+	59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.
 	
 	*****************************************************/
 	
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // pipeline (plugin.xml)
-// Ajoute l'appel aux feuilles de style dans le header privé
+// Ajoute l'appel aux feuilles de style dans le header privï¿½
 function lilo_header_prive ($flux) {
 
 	global $connect_statut
@@ -103,7 +103,7 @@ ul.meta-info-liste p { display:inline; } /* supprimes les <p> ajoute's aux infos
 </style>
 <script language='JavaScript' type='text/JavaScript'>
 jQuery().ready(function(){
-	/* ne présente le formulaire que si jQuery présent */
+	/* ne prï¿½sente le formulaire que si jQuery prï¿½sent */
 	$('#lilo_bloc_configuration').show();
 });
 </script>
