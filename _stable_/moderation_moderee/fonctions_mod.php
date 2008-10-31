@@ -1,6 +1,4 @@
 <?php
-$GLOBALS['spip_pipeline']['pre_edition'] .= '|moderation_vip';
-
 function moderation_vip($flux){
 	if ($flux['args']['table']=='spip_forum'
 	  AND $flux['args']['action']=='instituer'){
