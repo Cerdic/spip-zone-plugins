@@ -77,10 +77,8 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 
 	// calcul du sommaire
 	include_spip('public/assembler');
-	@define('_sommaire_TITRE', _T('couteau:sommaire_titre'));
 	$sommaire = recuperer_fond('fonds/sommaire', array(
 		'sommaire'=>$sommaire,
-		'titre'=>_sommaire_TITRE, 
 		'fond_css'=>strpos($texte0, _sommaire_SANS_FOND)===false ?'avec':'sans',
 	));
 
