@@ -3,8 +3,6 @@
 @define('_sommaire_NB_TITRES_MINI', 2);
 @define('_sommaire_SANS_FOND', '[!fond]');
 
-// TODO : ajouter un fichier css pour le sommaire
-
 // aide le Couteau Suisse a calculer la balise #INTRODUCTION
 $GLOBALS['cs_introduire'][] = 'sommaire_nettoyer_raccourcis';
 
