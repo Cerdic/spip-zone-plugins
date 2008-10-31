@@ -1,5 +1,6 @@
 <?php
 /*
+maxnev &   charger_generer_url();
 calcola i parametri:
 #ENV{prec_mois}
 #ENV{prec_annee}
@@ -12,10 +13,16 @@ l'asterisco serve a inserire l'html
 */
 function balise_ABCALENDRIER($p) {
    return calculer_balise_dynamique($p,ABCALENDRIER,array('prec_mois','prec_annee','moise_annee_curr','suiv_mois','suiv_annee','abcal_table','event_table'));
-
 }
-
-function balise_ABCALENDRIER_dyn() {
+/*function balise_ABCALENDRIER_stat($args) {
+//echo "stat";
+//print_r($args);
+//   echo "ciao maxev=".$args[7]."--|";
+   return $args;
+}*/
+function balise_ABCALENDRIER_dyn($prec_mois,$prec_annee,$moise_annee_curr,$suiv_mois,$suiv_annee,$abcal_table,$event_table,$maxnev=1000) {
+//  echo "2 max=".$maxnev."--|";
+// maxnev maximum number events visualized after the calendar, first parameter of balis
 
    $calendrier_mois=$_GET['calendrier_mois'];
    $calendrier_annee=$_GET['calendrier_annee'];
@@ -127,14 +134,16 @@ function balise_ABCALENDRIER_dyn() {
          $datai=$Y.$Mi.$i;
          if(isset($events[$datai]))
          {
-            foreach($events[$datai] as $myevent){
+             if($test_boucle<$maxnev){
+               foreach($events[$datai] as $myevent){
                 $my_event_tab .= "<tr>
                     <td class=\"date\">$i-$M: </td>
                     <td class=\"eventtitle\"><a href=\"{$myevent[link]}\" >{$myevent[title]}</a>
                     </td>
                     </tr>";
                 }
-                $test_boucle++;
+              }
+              $test_boucle++;
             }
 
         }
