@@ -32,12 +32,11 @@
 	<prefix>
 		moderation
 	</prefix>
-	
-
-   
-	<fonctions>
-	fonctions_mod.php
-	</fonctions>
+    <pipeline>
+        <nom>pre_edition</nom>
+        <action>vip</action>
+        <inclure>fonctions_mod.php</inclure>
+    </pipeline>
 	
 	<bouton id='moderation' parent='forum'>
       <icone>img_pack/icone.png</icone>
