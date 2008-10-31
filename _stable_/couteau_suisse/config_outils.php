@@ -596,7 +596,8 @@ if (isset(\$_GET['var_recherche'])) {
 	redirige_par_entete(str_replace('var_recherche=', 'decoupe_recherche=', \$GLOBALS['REQUEST_URI']));
 }",
 	'code:css' => "div.pagination {display:block; text-align:center; }
-div.pagination img { border:0pt none; margin:0pt; padding:0pt; }",
+div.pagination img { border:0pt none; margin:0pt; padding:0pt; }
+span.cs_pagination_off {color: lightgrey; font-weight: bold; text-decoration: underline;} ",
 	// construction des onglets
 	'code:jq_init' => "onglets_init.apply(this);",
 	// pour les articles et rubriques : $table_des_traitements['TEXTE']['articles']= 'cs_decoupe(propre(%s))';

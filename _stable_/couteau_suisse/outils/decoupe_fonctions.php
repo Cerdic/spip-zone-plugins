@@ -7,6 +7,11 @@ define('_onglets_DEBUT', '<div class="onglets_bloc_initial">');
 // aide le Couteau Suisse a calculer la balise #INTRODUCTION
 $GLOBALS['cs_introduire'][] = 'decoupe_nettoyer_raccourcis';
 
+// filtre ajoutant 'artpage' a l'url 
+function decoupe_url($url, $page, $num_pages) {
+	return parametre_url($url, 'artpage',"{$page}-{$num_pages}");
+}
+
 function onglets_callback($matches) {
 	// cas des onglets imbriques
 	$matches[2] = preg_replace_callback(',<onglets([0-9]*)>(.*?)</onglets\1>,ms', 'onglets_callback', $matches[2]);
@@ -97,7 +102,7 @@ function decouper_en_pages_rempl($texte, $pagination_seule=false) {
 	if (!$pagination_seule && defined('_decoupe_BALISE')) return $sommaire.$page;
 
 	$self = nettoyer_uri();//self();//$GLOBALS['REQUEST_URI'];
-
+/*
 	// images calculees par decoupe_installe()
 	$images = unserialize($GLOBALS['meta']['cs_decoupe']);
 
@@ -111,26 +116,31 @@ function decouper_en_pages_rempl($texte, $pagination_seule=false) {
 		$fin = isset($images['fin'])
 			?decoupe_image('fin', 'page_fin', $self, $artpage==$num_pages, "{$num_pages}-$num_pages", $images)
 			:decoupe_image('suivant', 'page_fin', $self, $artpage==$num_pages, "{$num_pages}-$num_pages", $images, true);
-	}
+	}*/
 	// liens des differentes pages sous forme : 1 2 3 4
-	$milieu = array();
+	$milieu = '';
 	for ($i = 1; $i <= $num_pages; $i++) {
-		if ($i == $artpage) {
-			$milieu[] = "<span style=\"color: lightgrey; font-weight: bold; text-decoration: underline;\">$i</span>";
-		} else {
-			// isoler la premiere ligne non vide de chaque page pour l'attribut title
-			$page_ = supprimer_tags(cs_safebalises(cs_introduire(echappe_retour($pages[$i-1],'CS'))));
-			$title = preg_split("/[\r\n]+/", trim($page_), 2);
-			$title = attribut_html(/*propre*/(couper($title[0], _decoupe_NB_CARACTERES)));//.' (...)';
-			$title = _T('couteau:page_lien', array('page' => $i, 'title' => $title));
-			$milieu[] = '<a href="' . parametre_url($self,'artpage',"{$i}-$num_pages") . "\" title=\"$title\">$i</a>";
-		}
+		$page_ = supprimer_tags(cs_safebalises(cs_introduire(echappe_retour($pages[$i-1],'CS'))));
+		$title = preg_split("/[\r\n]+/", trim($page_), 2);
+		$title = attribut_html(/*propre*/(couper($title[0], _decoupe_NB_CARACTERES)));//.' (...)';
+		$milieu .= recuperer_fond('fonds/decoupe_item', array(
+			'page'=>$i, 'artpage'=>$artpage, 'derniere_page'=>$num_pages,
+			'title_page'=>_T('couteau:page_lien', array('page' => $i, 'title' => $title)), 
+//			'lien_page'=>parametre_url($self,'artpage',"{$i}-$num_pages"),
+			'self' =>$self,
+//			'separateur'=>'&nbsp;',
+		));
 	}
-	$milieu = join(' ', $milieu);
-
+/*
 	// s'il existe plus de trois pages on retourne la pagination << < 1 2 3 4 > >>
 	// sinon une forme simplifiee : < 1 2 3 >
-	$pagination = $num_pages>3?"$debut\n$precedent\n$milieu\n$suivant\n$fin":"$precedent\n$milieu\n$suivant";
+	$pagination = $num_pages>3?"$debut\n$precedent\n$milieu\n$suivant\n$fin":"$precedent\n$milieu\n$suivant"; */
+	$pagination = recuperer_fond('fonds/decoupe', array(
+		'artpage'=>$artpage, 'derniere_page'=>$num_pages,
+		'items'=>$milieu,
+		'self' =>$self,
+//		'separateur'=>'&nbsp;',
+	));
 	if ($pagination_seule) 
 		return "<div id='decoupe_balise' class='pagination decoupe_balise'>\n$pagination\n</div>\n";
 	$pagination1 = "<div id='decoupe_haut' class='pagination decoupe_haut'>\n$pagination\n</div>\n";
@@ -177,11 +187,11 @@ function cs_onglets($texte){
 function cs_decoupe($texte, $pagination_seule=false){
 	// si pas de separateur, on sort
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $pagination_seule?'':$texte;
-	// verification des metas qui stockent les liens d'image
+/*	// verification des metas qui stockent les liens d'image
 	if (!isset($GLOBALS['meta']['cs_decoupe'])) {
 		include_spip('outils/decoupe');
 		decoupe_installe();
-	}
+	}*/
 	return cs_echappe_balises('html|code|cadre|frame|script|cite|table|jeux', 'decouper_en_pages_rempl', $texte, $pagination_seule);
 }
 

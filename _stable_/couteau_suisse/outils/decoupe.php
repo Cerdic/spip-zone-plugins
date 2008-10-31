@@ -6,7 +6,7 @@
 	Serieuse refonte et integration en mars 2007 : Patrice Vanneufville
 	+-------------------------------------------------------------------+
 */
-
+/*
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 // et calcule a l'avance les images trouvees dans le repertoire img/decoupe/
 function decoupe_installe() {
@@ -22,7 +22,7 @@ function decoupe_installe() {
 	}
 	ecrire_meta('cs_decoupe', serialize($images));
 	ecrire_metas();
-}
+}*/
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 // le resultat est une chaine apportant des informations sur les nouveaux raccourcis ajoutes par l'outil
