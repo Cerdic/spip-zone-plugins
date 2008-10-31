@@ -447,9 +447,9 @@ if (!window.jQuery) document.write('".addslashes(propre('<p>'._T('couteauprive:e
 		"<input type='hidden' name='url_zip_plugin' value='http://files.spip.org/spip-zone/couteau_suisse.zip' />"
 		. "<br/><div class='cs_sobre'><input type='submit' value='&bull; " . attribut_html(_T('couteauprive:version_update')) . "' class='cs_sobre' title='" . attribut_html(_T('couteauprive:version_update_title')) . "'/></div>"
 		:"";
-	// si le plugin plugin "Telechargeur" est present (SPIP < 2.0)
+	// un lien si le plugin plugin "Telechargeur" est present (SPIP < 2.0)
 	$form_update = (!strlen($form_update) && defined('_DIR_PLUGIN_CHARGEUR'))?
-		"<br/>&bull; <a title='" . attribut_html(_T('couteauprive:version_update_chargeur_title')) . "' href='../spip.php?action=charger&plugin=cfg&url_retour=".urlencode(generer_url_ecrire('admin_couteau_suisse'))."'>"._T('couteauprive:version_update_chargeur').'</a>'
+		"<br/>&bull; <a title='" . attribut_html(_T('couteauprive:version_update_chargeur_title')) . "' href='../spip.php?action=charger&plugin=couteau_suisse&url_retour=".urlencode(generer_url_ecrire('admin_couteau_suisse'))."'>"._T('couteauprive:version_update_chargeur').'</a>'
 		:"";
 	// compilation du bandeau gauche
 	$aide =	_T('couteauprive:help2', array(
