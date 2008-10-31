@@ -89,6 +89,8 @@ function demander_authentification_openid($login, $cible){
         	$auth_request->addExtension($sreg_request);
 		}
 
+		$erreur = "";
+		
 		// OPENID 1
 		if ($auth_request->shouldSendRedirect()) {
 			openid_log("Redirection pour version 1 d'OpenID", 3);
@@ -100,7 +102,7 @@ function demander_authentification_openid($login, $cible){
 			// If the redirect URL can't be built, display an error message.
 			if (Auth_OpenID::isFailure($redirect)) {
 				openid_log("Erreur sur l'adresse de redirection : $redirect", 2);
-				$redirect = openid_url_erreur(_L("Could not redirect to server: " . $redirect->message), $cible);
+				$erreur = openid_url_erreur(_L("Could not redirect to server: " . $redirect->message), $cible);
 			}
 		}
 		
@@ -116,7 +118,7 @@ function demander_authentification_openid($login, $cible){
 			// otherwise, render the HTML.
 			if (Auth_OpenID::isFailure($form_html)) {
 				openid_log("Erreur sur le formulaire de redirection : $form_html", 2);
-				$redirect = openid_url_erreur(_L("Could not redirect to server: " . $form_html->message), $cible);
+				$erreur = openid_url_erreur(_L("Could not redirect to server: " . $form_html->message), $cible);
 			} 
 			
 			// pas d'erreur : affichage du formulaire et arret du script
@@ -135,9 +137,17 @@ function demander_authentification_openid($login, $cible){
 		}
 
 	}	
+	
+	if ($erreur) {
+		openid_log("Rentrer avec l'erreur", 3);
+		return $erreur;
+	}
+	
 	openid_log("Redirection par entete", 3);
 	include_spip('inc/headers');
-	redirige_par_entete($redirect);		
+	#redirige_par_entete($redirect);		
+	echo redirige_formulaire($redirect);
+	exit;
 }
 
 

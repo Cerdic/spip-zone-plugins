@@ -1,3 +1,5 @@
+0.8.6 (31 10 2008)
+- Permettre les redirections vers les serveurs openid meme si l'on des dans un bloc ajax
 
 0.8.5 (17 10 2008)
 - Ne plus surcharger action/editer_auteur, ni formulaires/login.html (il reste formulaires/login.php)
