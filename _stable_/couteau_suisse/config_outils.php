@@ -373,6 +373,11 @@ add_outil( array(
 ));
 
 add_outil( array(
+	'id' => 'distant_off',
+	'code:spip_options' => "define('_CS_PAS_DE_DISTANT',1);",
+));
+
+add_outil( array(
 	'id' => 'xml',
 	'code:options' => "\$GLOBALS['xhtml']='sax';",
 	'auteur' => 'Ma&iuml;eul Rouquette',

@@ -326,6 +326,8 @@ _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<htm
 	'liens_orphelins:nom' => 'Belles URLs',
 	'log_couteau_suisse:description' => 'Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin \'Le Couteau Suisse\' dans les fichiers spip.log que l\'on peut trouver dans le r&eacute;pertoire : @_CS_DIR_TMP@',
 	'log_couteau_suisse:nom' => 'Log d&eacute;taill&eacute; du Couteau Suisse',
+	'distant_off:description' => "Le Couteau Suisse v&eacute;rifie r&eacute;guli&egrave;rement l'existence d'une version plus r&eacute;cente de son code et informe d'une mise &agrave; jour &eacute;ventuellement disponible. Si les requ&ecirc;tes externes de votre serveur posent des probl&egrave;mes, alors cet outil d&eacute;sactive cette fonctionnalit&eacute;.",
+	'distant_off:nom' => 'Pas de v&eacute;rification distante',
 
 	// M
 	'mailcrypt:description' => 'Masque tous les liens de courriels pr&eacute;sents dans vos textes en les rempla&ccedil;ant par un lien Javascript permettant quand m&ecirc;me d\'activer la messagerie du lecteur. Cet outil antispam tente d\'emp&ecirc;cher les robots de collecter les adresses &eacute;lectroniques laiss&eacute;es en clair dans les forums ou dans les balises de vos squelettes.',
@@ -515,6 +517,7 @@ Sont &eacute;galement trait&eacute;es les expressions suivantes : <html>Dr, Pr, 
 	'vars_modifiees' => 'Les donn&eacute;es ont bien &eacute;t&eacute; modifi&eacute;es',
 	'version_a_jour' => 'Votre version est &agrave; jour.',
 	'version_distante' => 'Version distante...',
+	'version_distante_off' => 'V&eacute;rification distante d&eacute;sactiv&eacute;e',
 	'version_nouvelle' => 'Nouvelle version : @version@',
 	'version_revision' => 'R&eacute;vision : @revision@',
 	'version_update' => 'Mise &agrave; jour automatique',

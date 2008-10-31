@@ -453,7 +453,9 @@ if (!window.jQuery) document.write('".addslashes(propre('<p>'._T('couteauprive:e
 		:"";
 	// compilation du bandeau gauche
 	$aide =	_T('couteauprive:help2', array(
-			'version' => $cs_version.$cs_revision.'<br/><span class="cs_version">'._T('couteauprive:version_distante').'</span>'))
+			'version' => $cs_version.$cs_revision.'<br/>'.
+				(defined('_CS_PAS_DE_DISTANT')?_T('couteauprive:version_distante_off'):'<span class="cs_version">'._T('couteauprive:version_distante').'</span>')
+				))
 		. $form_update
 		. '<br/>&bull;&nbsp;['._T('couteauprive:pack_titre') . '|' . _T('couteauprive:pack_alt') . '->' . generer_url_ecrire($exec,'cmd=pack#cs_infos') . "]\n\n"
 		. _T('couteauprive:help3', array(
