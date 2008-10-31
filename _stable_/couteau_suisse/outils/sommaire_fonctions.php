@@ -34,7 +34,7 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 				. $ancre . $haut . $titre
 				. substr($texte, $pos2 + strlen($regs[1][$i])+1 + strlen($regs[2][$i]));
 			$pos = $pos2 + strlen($ancre) + strlen($regs[0][$i]);
-			$brut = preg_replace(',[\n\r]+,',' ',textebrut($regs[2][$i]));
+			$brut = preg_replace(',[\n\r]+,',' ',textebrut(echappe_retour($regs[2][$i],'CS')));
 			$lien = cs_propre(couper($brut, _sommaire_NB_CARACTERES));
 			$lien = preg_replace('/[!?,;.:]+$/', '', $lien); // eviter une ponctuation a la fin
 			$titre = attribut_html(couper($brut, 100));
