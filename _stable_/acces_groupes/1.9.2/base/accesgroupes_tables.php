@@ -69,6 +69,6 @@
 		$table_des_tables['accesgroupes_acces'] = 'accesgroupes_acces';
 		$table_des_tables['accesgroupes_auteurs'] = 'accesgroupes_auteurs';
 		
-		
+	ecrire_config('accesgroupes','1.0.3');	
 		
 ?>
