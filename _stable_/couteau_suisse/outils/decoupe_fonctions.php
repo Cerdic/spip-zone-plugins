@@ -102,21 +102,7 @@ function decouper_en_pages_rempl($texte, $pagination_seule=false) {
 	if (!$pagination_seule && defined('_decoupe_BALISE')) return $sommaire.$page;
 
 	$self = nettoyer_uri();//self();//$GLOBALS['REQUEST_URI'];
-/*
-	// images calculees par decoupe_installe()
-	$images = unserialize($GLOBALS['meta']['cs_decoupe']);
 
-	// images et liens pour la navigation sous forme : << < ... > >>
-	$precedent = decoupe_image('precedent', 'page_precedente', $self, $artpage==1, ($artpage - 1)."-$num_pages", $images);
-	$suivant = decoupe_image('suivant', 'page_suivante', $self, $artpage==$num_pages, ($artpage + 1)."-$num_pages", $images);
-	if ($num_pages>3) {
-		$debut = isset($images['debut'])
-			?decoupe_image('debut', 'page_debut', $self, $artpage==1, 0, $images)
-			:decoupe_image('precedent', 'page_debut', $self, $artpage==1, 0, $images, true);
-		$fin = isset($images['fin'])
-			?decoupe_image('fin', 'page_fin', $self, $artpage==$num_pages, "{$num_pages}-$num_pages", $images)
-			:decoupe_image('suivant', 'page_fin', $self, $artpage==$num_pages, "{$num_pages}-$num_pages", $images, true);
-	}*/
 	// liens des differentes pages sous forme : 1 2 3 4
 	$milieu = '';
 	for ($i = 1; $i <= $num_pages; $i++) {
@@ -126,20 +112,15 @@ function decouper_en_pages_rempl($texte, $pagination_seule=false) {
 		$milieu .= recuperer_fond('fonds/decoupe_item', array(
 			'page'=>$i, 'artpage'=>$artpage, 'derniere_page'=>$num_pages,
 			'title_page'=>_T('couteau:page_lien', array('page' => $i, 'title' => $title)), 
-//			'lien_page'=>parametre_url($self,'artpage',"{$i}-$num_pages"),
 			'self' =>$self,
-//			'separateur'=>'&nbsp;',
 		));
 	}
-/*
-	// s'il existe plus de trois pages on retourne la pagination << < 1 2 3 4 > >>
-	// sinon une forme simplifiee : < 1 2 3 >
-	$pagination = $num_pages>3?"$debut\n$precedent\n$milieu\n$suivant\n$fin":"$precedent\n$milieu\n$suivant"; */
+
+	// pagination finale
 	$pagination = recuperer_fond('fonds/decoupe', array(
 		'artpage'=>$artpage, 'derniere_page'=>$num_pages,
 		'items'=>$milieu,
 		'self' =>$self,
-//		'separateur'=>'&nbsp;',
 	));
 	if ($pagination_seule) 
 		return "<div id='decoupe_balise' class='pagination decoupe_balise'>\n$pagination\n</div>\n";
@@ -187,11 +168,6 @@ function cs_onglets($texte){
 function cs_decoupe($texte, $pagination_seule=false){
 	// si pas de separateur, on sort
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $pagination_seule?'':$texte;
-/*	// verification des metas qui stockent les liens d'image
-	if (!isset($GLOBALS['meta']['cs_decoupe'])) {
-		include_spip('outils/decoupe');
-		decoupe_installe();
-	}*/
 	return cs_echappe_balises('html|code|cadre|frame|script|cite|table|jeux', 'decouper_en_pages_rempl', $texte, $pagination_seule);
 }
 

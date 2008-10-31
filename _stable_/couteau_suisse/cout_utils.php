@@ -68,6 +68,7 @@ function cs_compatibilite_ascendante() {
 	cs_suppr_metas_var('target_blank');
 	cs_suppr_metas_var('url_glossaire_externe', 'url_glossaire_externe2');
 	cs_suppr_metas_var('');
+	effacer_meta('cs_decoupe');
 }
 
 /*************/

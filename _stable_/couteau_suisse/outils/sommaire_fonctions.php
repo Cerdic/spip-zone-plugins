@@ -8,7 +8,7 @@ $GLOBALS['cs_introduire'][] = 'sommaire_nettoyer_raccourcis';
 
 // renvoie le sommaire d'une page d'article
 // $page=false reinitialise le compteur interne des ancres
-function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
+function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 	static $index; if(!$index || $page===false) $index=0;
 	if ($page===false) return;
 	@define('_sommaire_NB_CARACTERES', 30);
@@ -34,9 +34,11 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 			$pos = $pos2 + strlen($ancre) + strlen($regs[0][$i]);
 			$brut = preg_replace(',[\n\r]+,',' ',textebrut(echappe_retour($regs[2][$i],'CS')));
 			$lien = cs_propre(couper($brut, _sommaire_NB_CARACTERES));
-			$lien = preg_replace('/[!?,;.:]+$/', '', $lien); // eviter une ponctuation a la fin
+			$lien = preg_replace('/\s+[!?,;.:]+$/', '', $lien); // eviter une ponctuation a la fin
 			$titre = attribut_html(couper($brut, 100));
-			$sommaire .= "<li><a $st title=\"$titre\" href=\"".parametre_url($self,'artpage', $page)."#outil_sommaire_$index\">$lien</a>$p</li>";
+			// si la decoupe en page est active...
+			$artpage = function_exists('decoupe_url')?decoupe_url($self, $page, $num_pages):$self;
+			$sommaire .= "<li><a $st title=\"$titre\" href=\"{$artpage}#outil_sommaire_$index\">$lien</a>$p</li>";
 		}
 	}
 	return $sommaire;
@@ -64,9 +66,9 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	// couplage avec l'outil 'decoupe_article'
 	if(defined('_decoupe_SEPARATEUR') && !defined('_CS_PRINT')) {
 		$pages = explode(_decoupe_SEPARATEUR, $texte);
-		if (count($pages) == 1) $sommaire = sommaire_d_une_page($texte, $nbh3);
+		if (($num_page=count($pages)) == 1) $sommaire = sommaire_d_une_page($texte, $nbh3);
 		else {
-			foreach($pages as $p=>$page) { $sommaire .= sommaire_d_une_page($page, $nbh3, $i++); $pages[$p] = $page; }
+			foreach($pages as $p=>$page) { $sommaire .= sommaire_d_une_page($page, $nbh3, $i++, $num_page); $pages[$p] = $page; }
 			$texte = join(_decoupe_SEPARATEUR, $pages);
 		}
 	} else $sommaire = sommaire_d_une_page($texte, $nbh3);
