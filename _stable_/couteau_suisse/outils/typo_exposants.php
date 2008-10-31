@@ -30,45 +30,55 @@ function typo_exposants_en($texte){
 // elle n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
 function typo_exposants_fr($texte){
 	static $typo;
-	if(!$typo) $typo = array( array(
-		'/(?<=\bM)e?(lles?)\b/',		// Mlle(s), Mme(s) et erreurs Melle(s)
-		'/(?<=\bM)(gr|mes?)\b/',	// Mme(s) et Mgr
+	if(!$typo) {
+		$typo = array( array(
+			'/(?<=\bM)e?(lles?)\b/',		// Mlle(s), Mme(s) et erreurs Melle(s)
+			'/(?<=\bM)(gr|mes?)\b/',	// Mme(s) et Mgr
+			'/(?<=\b[DP])(rs?)(?=[\s\.-])/',	// Dr(s), Pr(s) suivis d'un espace d'un point ou d'un tiret
 
-		'/(?<=\b[DP])(rs?)(?=[\s\.-])/',	// Dr(s), Pr(s) suivis d'un espace d'un point ou d'un tiret
-		'/(?<=\bS)(te?s?)(?=[\s\.-])/',  // St(e)(s) suivis d'un espace d'un point ou d'un tiret
-		'/(?<=\bB)(x|se|ses)(?=[\s\.-])/',  // Bx, Bse(s) suivis d'un espace d'un point ou d'un tiret
+			'/\bm²\b/', '/(?<=\bm)([23])\b/',	 // m2, m3, m²
+			'/(?<=\b[Mm])([nd]s?)\b/',	// millions, milliards
+			'/(?<=\bV)(ves?)\b/', '/(?<=\bC)(ies?)\b/',	// veuves et Cie(s)
+			'/(?<=\bS)(t(?:'._TYPO_EAIGU1.')s?)(?=\W)/', '/(?<=\W)(?:E|'._TYPO_EAIGU2.')ts\b/',	 // Societes(s), Etablissements
+	
+			'/(?<=\b[1I])i?(ers?)\b/',	// 1er(s), Erreurs 1ier(s), 1ier(s)
+			'/(?<=\b[1I])i?(?:e|'._TYPO_EGRAVE.')(res?)\b/',	// Erreurs 1(i)ere(s) + accents
+			'/(?<=\b1)(r?es?)\b/', // 1e(s), 1re(s)
+			'/(?<=\b2)(nde?s?)\b/',	// 2nd(e)(s)
+	
+			'/(\b[0-9IVX]+)i?(?:e|'._TYPO_EGRAVE.')?me(s?)\b/', // Erreurs (i)(e)me(s) + accents
+			'/\b([0-9IVX]+)(es?)\b/', // 2e(s), IIIe(s)... (les 1(e?r?s?) ont deja ete remplaces)
+			'/(?<!;)\b(r|v|\d+)o\b/', // recto, verso, primo, secondo, etc.
+			'/(?<=\bM)(es?)(?= [A-Z])/', // Maitre(s) (suivi d'un espace et d'une majuscule)
+		), array(
+			_TYPO_sup, _TYPO_sup,		// Mlle(s), Mme(s), Mgr
+			_TYPO_sup,		// Dr(s), Pr(s), 
+	
+			'm<sup class="typo_exposants">2</sup>',	_TYPO_sup,	// m2, m3, m²
+			_TYPO_sup, _TYPO_sup, _TYPO_sup,	// Vve(s), Mn(s), Md(s), Bd(s), Cie(s)
+			_TYPO_sup, '&#201;<sup class="typo_exposants">ts</sup>',	// Sté(s), Ets
+	
+			_TYPO_sup, _TYPO_sup, _TYPO_sup, // 1er et Cie
+			_TYPO_sup,	// 2nd(e)(s)
+	
+			'$1<sup class="typo_exposants">e$2</sup>', // Erreurs me, eme, ème, ième + pluriels
+			_TYPO_sup2, // 2e(s), IIIe(s)...
+			'$1<sup class="typo_exposants">o</sup>', // ro, vo, 1o, 2o, etc.
+			_TYPO_sup,	// Me(s)
+		));
 
-		'/\bm²\b/', '/(?<=\bm)([23])\b/',	 // m2, m3, m²
-		'/(?<=\b[Mm])([nd]s?)\b/',	// millions, milliards
-		'/(?<=\bV)(ves?)\b/', '/(?<=\b[Bb])(ds?)\b/', '/(?<=\bC)(ies?)\b/',	// veuves, boulevard(s) et Cie(s)
-		'/(?<=\bS)(t(?:'._TYPO_EAIGU1.')s?)(?=\W)/', '/(?<=\W)(?:E|'._TYPO_EAIGU2.')ts\b/',	 // Societes(s), Etablissements
-
-		'/(?<=\b[1I])i?(ers?)\b/',	// 1er(s), Erreurs 1ier(s), 1ier(s)
-		'/(?<=\b[1I])i?(?:e|'._TYPO_EGRAVE.')(res?)\b/',	// Erreurs 1(i)ere(s) + accents
-		'/(?<=\b1)(r?es?)\b/', // 1e(s), 1re(s)
-		'/(?<=\b2)(nde?s?)\b/',	// 2nd(e)(s)
-
-		'/(\b[0-9IVX]+)i?(?:e|'._TYPO_EGRAVE.')?me(s?)\b/', // Erreurs (i)(e)me(s) + accents
-		'/\b([0-9IVX]+)(es?)\b/', // 2e(s), IIIe(s)... (les 1(e?r?s?) ont deja ete remplaces)
-		'/\b(r|v|\d+)o\b/', // recto, verso, primo, secondo, etc.
-		'/(?<=\bM)(es?)(?= [A-Z])/', // Maitre(s) (suivi d'un espace et d'une majuscule)
-	), array(
-		_TYPO_sup, _TYPO_sup,		// Mlle(s), Mme(s), Mgr
-
-		_TYPO_sup, _TYPO_sup, _TYPO_sup,	// Dr(s), Pr(s), St(e)(s), Bx, Bse(s)
-
-		'm<sup class="typo_exposants">2</sup>',	_TYPO_sup,	// m2, m3, m²
-		_TYPO_sup, _TYPO_sup, _TYPO_sup, _TYPO_sup,	// Vve(s), Mn(s), Md(s), Bd(s), Cie(s)
-		_TYPO_sup, '&#201;<sup class="typo_exposants">ts</sup>',	// Ste(s), Ets
-
-		_TYPO_sup, _TYPO_sup, _TYPO_sup, // 1er et Cie
-		_TYPO_sup,	// 2nd(e)(s)
-
-		'$1<sup class="typo_exposants">e$2</sup>', // Erreurs me, eme, ème, ième + pluriels
-		_TYPO_sup2, // 2e(s), IIIe(s)...
-		'$1<sup class="typo_exposants">o</sup>', // ro, vo, 1o, 2o, etc.
-		_TYPO_sup,	// Me(s)
-	));
+		if(defined('_CS_EXPO_BOFBOF')) {
+			$typo[0] = array_merge($typo[0], array(
+				'/(?<=\bS)(te?s?)(?=[\s\.-])/',  // St(e)(s) suivis d'un espace d'un point ou d'un tiret
+				'/(?<=\bB)(x|se|ses)(?=[\s\.-])/',  // Bx, Bse(s) suivis d'un espace d'un point ou d'un tiret
+				'/(?<=\b[Bb])(ds?)\b/',	 '/(?<=\b[Ff])(gs?)\b/', // boulevard(s) et faubourgs(s)
+			));
+			$typo[1] = array_merge($typo[1], array(
+				_TYPO_sup, _TYPO_sup,	// St(e)(s), Bx, Bse(s)
+				_TYPO_sup, _TYPO_sup,	// Bd(s) et Fg(s)
+			));
+		}
+	}
 	return preg_replace($typo[0], $typo[1], $texte);
 }
 
