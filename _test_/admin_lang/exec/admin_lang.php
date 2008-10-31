@@ -388,7 +388,7 @@ if ($submit) {
 				 $trad = strtr($trad, $trans);
 				 //$trad = addslashes($trad); 
 				
-			$any_line[$ctr] = "'$item' => '$trad $target_to_change',";
+			$any_line[$ctr] = "'$item' => '$trad$target_to_change',";
 			if ($display_debug) {
 			print $any_line[$ctr]."<br />";
 			}
