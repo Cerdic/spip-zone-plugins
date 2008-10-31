@@ -52,7 +52,7 @@ function Agenda_declarer_tables_principales($tables_principales){
 			);
 	
 	$tables_principales['spip_evenements'] =
-		array('field' => &$evenements, 'key' => &$evenements_key, 'join'=>array('id_article'=>'id_article','id_mot'=>'id_evenement'));
+		array('field' => &$evenements, 'key' => &$evenements_key, 'join'=>array('id_evenement'=>'id_evenement','id_article'=>'id_article'));
 
 
 	return $tables_principales;
