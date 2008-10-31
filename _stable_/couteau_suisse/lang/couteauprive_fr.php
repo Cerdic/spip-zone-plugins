@@ -519,6 +519,8 @@ Sont &eacute;galement trait&eacute;es les expressions suivantes : <html>Dr, Pr, 
 	'version_revision' => 'R&eacute;vision : @revision@',
 	'version_update' => 'Mise &agrave; jour automatique',
 	'version_update_title' => 'T&eacute;l&eacute;charge la derni&egrave;re version du plugin et lance sa mise &agrave; jour automatique',
+	'version_update_chargeur' => 'T&eacute;l&eacute;chargement automatique',
+	'version_update_chargeur_title' => 'T&eacute;l&eacute;charge la derni&egrave;re version du plugin gr&acirc;ce au plugin &laquo;T&eacute;l&eacute;chargeur&raquo;',
 	'verstexte:description' => '2 filtres pour vos squelettes, permettant de produire des pages plus l&eacute;g&egrave;res.
 _ version_texte : extrait le contenu texte d\'une page html &agrave; l\'exclusion de quelques balises &eacute;l&eacute;mentaires.
 _ version_plein_texte : extrait le contenu texte d\'une page html pour rendre du texte plein.',
