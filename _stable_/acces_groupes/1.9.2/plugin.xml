@@ -32,6 +32,7 @@ pour afficher les contenus restreints aux utilisateurs n'ayant pas acc&#232;s da
 					Ce plugin est compatible avec les versions <strong>1.9.0</strong> et <strong>1.9.1</strong> de spip.
 					Il n’est <strong>pas compatible</strong> avec la version SVN spip 1.9.2 alpha.
 <br />v 1.0.3 Ce script devient compatible avec SPIP 1.9.2 et +
+<br />v 1.0.4 Ajoute le numéro de version du plugin dans la table spip_meta
 		</description>
 				<lien>http://www.spip-contrib.net/Le-plugin-acces-restreint-par</lien> <!-- URI de documentation -->
 				<icon>img_pack/groupe-48.png</icon>
