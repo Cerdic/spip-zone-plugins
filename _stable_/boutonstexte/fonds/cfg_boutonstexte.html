@@ -44,24 +44,24 @@ Pour supprimer une fonctionnalit&eacute;, mettez <b>_</b> dans la valeur du text
 </p>
 </fieldset>
 
+[(#EVAL{_BTX_CFG_MODE_DEBUG}|=={oui}|?{' '})
 <fieldset><legend><:boutonstexte:donnees_techniques:></legend>
 <p><label for="_btx_jsFile">Fichier javascript</label>
 <input type="text" name="jsFile" class="type_file" id="_btx_jsFile" size="15"
-	value="#ENV{jsFile,boutonstexte.js}" />
-<label for="_btx_cssFile">Fichier style</label>
+	value="#ENV{jsFile,boutonstexte.js}" /></p>
+<p><label for="_btx_cssFile">Fichier style</label>
 <input type="text" name="cssFile" class="type_file" id="_btx_cssFile" size="15"
-	value="#ENV{cssFile,boutonstexte}" />
-<label for="_btx_imgPath">R&eacute;pertoire d'image</label>
+	value="#ENV{cssFile,boutonstexte}" /></p>
+<p><label for="_btx_imgPath">R&eacute;pertoire d'image</label>
 <input type="text" name="imgPath" class="type_file" id="_btx_imgPath" size="20"
-	value="#ENV{imgPath,images/fontsizeup.png}" />(adresse d'une image)
+	value="#ENV{imgPath,images/fontsizeup.png}" /> (adresse d'une image)
 </p>
 <p>Si vide, reviendront au d&eacute;faut</p>
 </fieldset>
-
+]
 <div>
-<input type="submit" name="_cfg_ok" value="<:ok:>" class="fondo" />
-<input type="reset" value="<:reset:>" class="fondo" />
-<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+	<input type="submit" name="_cfg_ok" class="fondo" value="<:sarkaspip:valider:>" />
+	<input type="submit" name="_cfg_delete" class="fondo" value="<:sarkaspip:effacer:>" />
 </div>
 </form>
 
