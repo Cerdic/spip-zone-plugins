@@ -1,5 +1,6 @@
 <?php
 include_spip('base/abstract_sql');
+include_spip('base/inscription2_compat_php4');
 
 function confirmation_inscription2($id, $mode, $cle){
 	$q = sql_fetsel("statut, alea_actuel","spip_auteurs","id_auteur = '$id'");
