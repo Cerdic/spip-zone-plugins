@@ -19,13 +19,13 @@ function onglets_callback($matches) {
 		$texte = preg_replace(','.preg_quote(_decoupe_SEPARATEUR, ',').'(.*?)(\n\n|\r\n\r\n|\r\r),ms', _decoupe_FILET."<h4>$1</h4>\n\n", $t[1]);
 		// on sait jamais...
 		str_replace(_decoupe_SEPARATEUR, _decoupe_FILET, $texte);
-		return '<div class="onglets_print"><h4>' . textebrut($t[0]) . "</h4>\n$texte</div>";
+		return '<div class="onglets_print"><h4>' . textebrut(echappe_retour($t[0],'CS')) . "</h4>\n$texte</div>";
 	}
 	$onglets = $contenus = array();
 	$pages = explode(_decoupe_SEPARATEUR, $matches[2]);
 	foreach ($pages as $p) {
 		$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $p, 2);
-		$t = array(trim(textebrut(nettoyer_raccourcis_typo($t[0]))), cs_safebalises($t[1]));
+		$t = array(trim(textebrut(nettoyer_raccourcis_typo(echappe_retour($t[0],'CS')))), cs_safebalises($t[1]));
 		if(strlen($t[0].$t[1])) $contenus[] = _onglets_CONTENU.$t[0]."</a></h2><div>\n".$t[1]."\n</div></div>";
 	}
 	return _onglets_DEBUT.join('', $contenus).'</div>'._onglets_FIN;
@@ -119,7 +119,7 @@ function decouper_en_pages_rempl($texte, $pagination_seule=false) {
 			$milieu[] = "<span style=\"color: lightgrey; font-weight: bold; text-decoration: underline;\">$i</span>";
 		} else {
 			// isoler la premiere ligne non vide de chaque page pour l'attribut title
-			$page_ = supprimer_tags(cs_safebalises(cs_introduire($pages[$i-1])));
+			$page_ = supprimer_tags(cs_safebalises(cs_introduire(echappe_retour($pages[$i-1],'CS'))));
 			$title = preg_split("/[\r\n]+/", trim($page_), 2);
 			$title = attribut_html(/*propre*/(couper($title[0], _decoupe_NB_CARACTERES)));//.' (...)';
 			$title = _T('couteau:page_lien', array('page' => $i, 'title' => $title));
