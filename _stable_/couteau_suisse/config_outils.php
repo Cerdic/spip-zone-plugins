@@ -790,12 +790,20 @@ function couleurs_introduire(\$texte) {
 ",
 ));
 
-// outil specifiquement français. D'autres langues peuvent etre ajoutees dans outils/typo_exposants.php
+// outil essentiellement français. D'autres langues peuvent etre ajoutees dans outils/typo_exposants.php
+add_variable( array(
+	'nom' => 'expo_bofbof',
+	'format' => _format_NOMBRE,
+	'radio' => array(1 => 'item_oui', 0 => 'item_non' ),
+	'defaut' => 0,
+	'code:%s' => "define('_CS_EXPO_BOFBOF', %s);",
+));
 add_outil( array(
 	'id' => 'typo_exposants',
 	'auteur' 	 => 'Vincent Ramos, Pat',
 	'categorie'	 => 'typo-corr',
 	'contrib'	=> 1564,
+	'code:options' => '%%expo_bofbof%%',
 	'pipeline:post_typo' => 'typo_exposants',
 	'code:css' => 'sup.typo_exposants { font-size:75%; font-variant:normal; vertical-align:super; }',
 ));
