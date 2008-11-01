@@ -64,7 +64,8 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	$descrip = cs_initialisation_d_un_outil($outil_id, $description_outil, true);
 
 	include_spip('inc/presentation');
-	$s = /*debut_cadre_relief('', true).'toto</div>'.*/'<div class="cs-cadre">';
+	$s = '<div class="cs-cadre">';
+
 	$outil = $outils[$outil_id]; unset($outils);
 	$actif = $outil['actif'];
 	$puce = $actif?'puce-verte.gif':'puce-rouge.gif';
@@ -72,6 +73,10 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	$nb_var = intval($outil['nb_variables']);
 	
 	$s .= "<h3 class='titrem'><img src='"._DIR_IMG_PACK."$puce' name='puce_$id_input' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;" . $outil['nom'] . '</h3>';
+
+	if(!cout_autoriser('outiller', $outil))
+		return _DIV_CS_INFOS . $s . _T('info_acces_interdit') . '</div></div>';
+
 	$s .= '<div style="text-align:right; font-size:85%; margin-bottom:0.8em;">';
 	if ($nb_var)
 		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=reset&outil='.$outil_id).'" title="' . _T('couteauprive:par_defaut') . '">' . _T('couteauprive:par_defaut') . '</a>&nbsp;|&nbsp;';
@@ -105,7 +110,7 @@ function liste_outils() {
 		$s_actifs = $s_inactifs = array();
 		foreach($outils as $outil) if ($outil['categorie']==$i) {
 			$test = $outil['actif']?'s_actifs':'s_inactifs';
-			$hide = cs_version_erreur($outil) || (!$outil['actif'] && isset($metas_caches[$outil['id']]['cache']));
+			$hide = cs_version_erreur($outil) || (!$outil['actif'] && isset($metas_caches[$outil['id']]['cache'])) || !cout_autoriser('outiller', $outil);
 			if (!$hide)
 				${$test}[] .= $outil['nom'] . '|' . $outil['index'] . '|' . $outil['id'];
 		}

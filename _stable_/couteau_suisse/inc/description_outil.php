@@ -24,7 +24,7 @@ define('_VAR_OUTIL', cs_code_echappement("<!--  VAR-OUTIL -->\n", 'OUTIL'));
 	(defined('_SPIP19100')?_DIR_RESTREINT.'mes_options.php':_DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php')
 ));
 include_spip('inc/autoriser');
-if(defined('_SPIP19200')) if(cout_autoriser('webmestre')) {
+if(defined('_SPIP19200')) {
 	// Qui sont les webmestres et les administrateurs ?
 	include_spip('inc/texte');
 	function def_liste_adminsitrateurs() {

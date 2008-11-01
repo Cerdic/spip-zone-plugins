@@ -288,9 +288,11 @@ cs_log("INIT : enregistre_modif_outils()");
 	$_GET['outil'] = ($cmd!='hide' && count($toggle)==1)?$toggle[0]:'';
 	$i = $cmd=='hide'?'cache':'actif';
 	${$i} = isset($GLOBALS['meta']["tweaks_{$i}s"])?unserialize($GLOBALS['meta']["tweaks_{$i}s"]):array();
-	foreach($toggle as $o) if(isset(${$i}[$o][$i]))
-			unset(${$i}[$o][$i]);
-			else ${$i}[$o][$i] = 1;
+	foreach($toggle as $o) if(cout_autoriser('outiller', $outils[$o])) {
+		if(isset(${$i}[$o][$i]))
+			unset(${$i}[$o][$i]); 
+		else ${$i}[$o][$i] = 1;
+	}
 	if(defined('_SPIP19300')) $connect_id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 		else global $connect_id_auteur;
 	spip_log("Changement de statut ($i) des outils par l'auteur id=$connect_id_auteur : ".implode(', ',array_keys(${$i})));
@@ -364,10 +366,12 @@ verif_plugin();
 		global $outils;
 		include_spip('cout_utils');
 		include_spip('config_outils');
-		include_spip('inc/cs_outils');
-		cs_initialisation_d_un_outil($_GET['outil'], charger_fonction('description_outil', 'inc'), true);
-		foreach ($outils[$_GET['outil']]['variables'] as $a) unset($metas_vars[$a]);
-		ecrire_meta('tweaks_variables', serialize($metas_vars));
+		if(cout_autoriser('outiller', $outils[$_GET['outil']])) {
+			include_spip('inc/cs_outils');
+			cs_initialisation_d_un_outil($_GET['outil'], charger_fonction('description_outil', 'inc'), true);
+			foreach ($outils[$_GET['outil']]['variables'] as $a) unset($metas_vars[$a]);
+			ecrire_meta('tweaks_variables', serialize($metas_vars));
+		}
 		cout_exec_redirige("cmd=descrip&outil={$_GET[outil]}#cs_infos");
 	}
 	// reset de l'affichage

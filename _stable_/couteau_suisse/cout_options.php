@@ -126,6 +126,14 @@ if($zap) cs_log(' FIN : cout_options sans initialisation du plugin'); else {
 // appelee sans argument cette fonction renvoie le droit de configurer le Couteau Suisse
 // (droits equivalents a 'configurer' les 'plugins')
 function cout_autoriser($faire='configurer', $type='plugins', $id=0, $qui = NULL, $opt = NULL) {
+	// autorisation sur les outils $type=$outil
+	if($faire=='outiller') {
+		if(isset($type['autoriser'])) {
+			eval('$test = '.$type['autoriser'].';');
+			return $test;
+		}
+		return true;
+	}
 	// SPIP >= 1.92
 	include_spip("inc/autoriser");
 	if(function_exists('autoriser')) return autoriser($faire, $type, $id, $qui, $opt);
