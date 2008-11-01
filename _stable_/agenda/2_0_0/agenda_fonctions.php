@@ -29,6 +29,10 @@ function agenda_critere_fusion_par_xx($format, $as, $idb, &$boucles, $crit){
 
 	$date = $boucle->id_table. '.' .substr($_date,1,-1);
 
+	// annuler une eventuelle fusion sur cle primaire !
+	foreach($boucles[$idb]->group as $k=>$g)
+		if ($g==$boucle->id_table.'.'.$boucle->primary)
+			unset($boucles[$idb]->group[$k]);
 	$boucles[$idb]->group[]  = 'DATE_FORMAT('.$boucle->id_table.'.".'.$_date.'.", ' . "'$format')"; 
 	$boucles[$idb]->select[] = 'DATE_FORMAT('.$boucle->id_table.'.".'.$_date.'.", ' . "'$format') AS $as";	
 }

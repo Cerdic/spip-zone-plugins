@@ -1,15 +1,24 @@
-/* listes */
-.liste_items {list-style:none;margin:1em 0;padding:0;border-top:1px solid #ddd;clear:both;}
-.liste_items li.item {border-bottom:1px solid #ddd;padding:0.4em 0; font-size: 0.9em;}
-.liste_items li.item:hover {background-color:transparent;}
-.liste_items li.court:hover {background-color:#eee;}
-.liste_items li.item.on {background-color:#F4FFBF;font-weight:normal;}
-.liste_items li.item.on:hover {background-color:#EEFF9F;}
+#CACHE{0}
+[(#REM)
 
-.pagination {background:#eee;border-top:1px solid #ddd;border-bottom:1px solid #ddd; margin: 0;padding:2px 0; font-size: 0.9em; font-weight: bold; text-align: right; white-space: nowrap; }
-.pagination .on { background:#ccc;padding:2px 3px;color:#fff; }
+	Ce squelette definit les styles de l'espace prive
 
-.clicable {cursor:hand;cursor:pointer;}
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
 /* vevent */
 li.item div.vevent h3 {margin:0;font-size:1.1em;}
@@ -31,15 +40,9 @@ li.item .repetitions li {display:inline;margin:0;padding:0;}
 
 .evenements p.actions {text-align:right;font-size:0.9em;margin:5px 0 0;}
 
-
-/* navigation gauche */
-ul.agenda_navigation, ul.agenda_navigation li, ul.agenda_navigation ul {list-style:none;margin:0;padding:0;}
-ul.agenda_navigation li {border-bottom:1px solid #eee; padding:2px 0;}
-
-
 /* sur la fiche article */
 .articles .fiche_objet #agenda { border: 1px solid #999;}
-.articles .fiche_objet #agenda h2.titre { margin: 0; padding: 4px 4px 8px; background: #c0cad4; font-size: 100%; }
+.articles .fiche_objet #agenda h2.titre { margin: 0; padding: 4px 4px 8px; background: #GET{claire}; font-size: 100%; }
 .articles .fiche_objet .plier_deplier a:hover { color:#333;}
 .articles .fiche_objet .plier_deplier { float: right; margin: 8px 4px 0 0; font-size: 0.8em;}
 .articles .fiche_objet .evenements { margin-left: 4px; margin-right: 4px; }
@@ -89,7 +92,7 @@ overflow-x:hidden;text-align:left;z-index:1000;height:10em;width:auto !important
 .formulaire_editer_evenement li.editer_mots ul.groupes_contenus {clear:left;}
 .formulaire_editer_evenement li.editer_mots ul.groupes_contenus li {padding:0;margin:0;border:0;clear:none;float:left;width:48%;margin-right:5px;}
 .formulaire_editer_evenement li.editer_mots ul.groupes_contenus li.groupe a {background:url(triangle-droite.gif) no-repeat center right;padding-right:12px;}
-.formulaire_editer_evenement li.editer_mots ul.groupes_contenus li.mot a {color:#89AF02;}
+.formulaire_editer_evenement li.editer_mots ul.groupes_contenus li.mot a {color:#GET{claire};}
 
 .formulaire_editer_evenement li.editer_repetitions div.ajouter_repetitions.cachee #repetitions_picker {display:none;}
 .formulaire_editer_evenement li.editer_repetitions div.ajouter_repetitions.cachee textarea {margin:0;padding:0;height:1px;visibility:hidden;} /* bug ff : si on le met hidden on ne peut plus saisir dedans apres */
