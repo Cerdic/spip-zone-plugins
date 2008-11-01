@@ -502,7 +502,7 @@ Sont aussi trait&eacute;es les expressions suivantes : <html>Dr, Pr, Mgr, m2, m3
 Choisissez ici de mettre en exposant certains raccourcis suppl&eacute;mentaires, malgr&eacute; un avis d&eacute;favorable de l\'Imprimerie nationale :[[%expo_bofbof%]]
 
 {{Textes anglais}} : mise en exposant des nombres ordinaux : <html>1st, 2nd</html>, etc.',
-	'label:expo_bofbof' => 'Mise en exposants pour : St(e)(s), Bx, Bd(s) et Fb(s)',
+	'label:expo_bofbof' => 'Mise en exposants pour : <html>St(e)(s), Bx, Bd(s) et Fb(s)</html>',
 	'typo_exposants:nom' => 'Exposants typographiques',
 
 	// U

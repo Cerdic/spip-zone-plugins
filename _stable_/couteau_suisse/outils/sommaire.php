@@ -9,7 +9,7 @@
 +-------------------------------+
  Presente un petit sommaire 
  en haut de l'article base sur 
- les balises <h3> ou {{{}}}
+ les balises {{{}}}
 +-------------------------------+
 
 */

@@ -27,7 +27,7 @@ define('_COUT_FONCTIONS_PHP', find_in_path('cout_fonctions.php'));
 // globales de controles de passes
 $GLOBALS['cs_options'] = $GLOBALS['cs_fonctions'] = $GLOBALS['cs_fonctions_essai'] = $GLOBALS['cs_init'] = $GLOBALS['cs_utils'] = $GLOBALS['cs_verif'] = 0;
 // parametres d'url concernant le plugin ?
-$GLOBALS['cs_params'] = isset($_GET['cs'])?explode(',', $_GET['cs']):array();
+$GLOBALS['cs_params'] = isset($_GET['cs'])?explode(',', urldecode($_GET['cs'])):array();
 // fichiers/dossiers temporaires pour le Couteau Suisse
 define('_DIR_CS_TMP', sous_repertoire(_DIR_TMP, "couteau-suisse"));
 
@@ -107,6 +107,10 @@ if($zap) cs_log(' FIN : cout_options sans initialisation du plugin'); else {
 		// lancer la procedure d'installation pour chaque outil
 		cs_log(' -- cs_installe_outils...');
 		cs_installe_outils();
+		if(in_array('calcul', $GLOBALS['cs_params'])) {
+			include_spip('inc/headers');
+			redirige_par_entete(parametre_url($GLOBALS['REQUEST_URI'],'cs',str_replace('calcul','ok',join(',',$GLOBALS['cs_params'])),'&'));
+		}
 	}
 
 	// a-t-on voulu inclure cout_fonctions.php ?

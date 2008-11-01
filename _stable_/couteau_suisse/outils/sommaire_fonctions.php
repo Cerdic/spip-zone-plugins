@@ -10,7 +10,9 @@ $GLOBALS['cs_introduire'][] = 'sommaire_nettoyer_raccourcis';
 // $page=false reinitialise le compteur interne des ancres
 function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 	static $index; if(!$index || $page===false) $index=0;
-	if ($page===false) return;
+	if($page===false) return;
+	// trouver quel <hx> est utilise
+	$hierarchie = preg_match(',<h(\d),',$GLOBALS['debut_intertitre'],$regs)?$regs[1]:'3';
 	@define('_sommaire_NB_CARACTERES', 30);
 	$self = nettoyer_uri();//self();//$GLOBALS['REQUEST_URI'];
 	// si on n'est pas en mode impression, on calcule l'image de retour au sommaire
@@ -18,8 +20,8 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 		$titre = _T('couteau:sommaire_titre');
 		$haut = "<a title=\"$titre\" href=\"".$self."#outil_sommaire\" class=\"sommaire_ancre\">&nbsp;</a>";
 	} else $haut = '';
-	// traitement des titres <h3>
-	preg_match_all(',(<h3[^>]*)>(.*)</h3>,Umsi',$texte, $regs);
+	// traitement des intertitres <hx>
+	preg_match_all(",(<h{$hierarchie}[^>]*)>(.*)</h{$hierarchie}>,Umsi",$texte, $regs);
 	$nbh3 += count($regs[0]);
 	$pos = 0; $sommaire = '';
 	// calcul de la page
@@ -34,7 +36,7 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 			$pos = $pos2 + strlen($ancre) + strlen($regs[0][$i]);
 			$brut = preg_replace(',[\n\r]+,',' ',textebrut(echappe_retour($regs[2][$i],'CS')));
 			$lien = cs_propre(couper($brut, _sommaire_NB_CARACTERES));
-			$lien = preg_replace('/\s+[!?,;.:]+$/', '', $lien); // eviter une ponctuation a la fin
+			$lien = preg_replace('/(&nbsp;|\s)*[!?,;.:]+$/', '', $lien); // eviter une ponctuation a la fin
 			$titre = attribut_html(couper($brut, 100));
 			// si la decoupe en page est active...
 			$artpage = function_exists('decoupe_url')?decoupe_url($self, $page, $num_pages):$self;
@@ -48,11 +50,11 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	// pour sommaire_nettoyer_raccourcis()
 	include_spip('outils/sommaire');
-	// si le sommaire est malvenu ou s'il n'y a pas de balise <h3>, alors on laisse tomber
+	// si le sommaire est malvenu ou s'il n'y a pas de balise <hx>, alors on laisse tomber
 	$inserer_sommaire =  defined('_sommaire_AUTOMATIQUE')
 		?strpos($texte0, _sommaire_SANS_SOMMAIRE)===false
 		:strpos($texte0, _sommaire_AVEC_SOMMAIRE)!==false;
-	if (!$inserer_sommaire || strpos($texte0, '<h3')===false) 
+	if (!$inserer_sommaire || strpos($texte0, '<h')===false) 
 		return $sommaire_seul?'':sommaire_nettoyer_raccourcis($texte0);
 	// on retire les raccourcis du texte
 	$texte = sommaire_nettoyer_raccourcis($texte0);
@@ -98,7 +100,7 @@ function sommaire_echappe_onglets_callback($matches) {
 function sommaire_d_article($texte) {
 	// s'il n'y a aucun intertitre, on ne fait rien
 	// si la balise est utilisee, il faut quand meme inserer les ancres de retour
-	if((strpos($texte, '<h3')===false)) return $texte;
+	if((strpos($texte, '<h')===false)) return $texte;
 		else return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|onglets|table', 'sommaire_d_article_rempl', $texte, false);
 }
 
@@ -110,7 +112,7 @@ function sommaire_supprime_notes($texte) {
 // fonction appelee par le traitement post_propre de #CS_SOMMAIRE
 function sommaire_d_article_balise($texte) {
 	// si la balise n'est pas utilisee ou s'il n'y a aucun intertitre, on ne fait rien
-	if(!defined('_sommaire_BALISE') || (strpos($texte, '<h3')===false)) return '';
+	if(!defined('_sommaire_BALISE') || (strpos($texte, '<h')===false)) return '';
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|onglets|table', 'sommaire_d_article_rempl', $texte, true);
 }
 
