@@ -5,7 +5,7 @@
 _ &#169; 2008 - Licence GPL
 	</auteur>
 	<icon>habillage/messagerie-64.png</icon>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<version_base>1.0</version_base>
 	<etat>test</etat>
 	<lien></lien> <!-- URI de documentation -->
@@ -15,7 +15,7 @@ _ &#169; 2008 - Licence GPL
 	<prefix>messagerie</prefix>
 	<install>base/messagerie_install.php</install>
 	<fonctions>messagerie_fonctions.php</fonctions>
-	<options>messagerie_fonctions.php</options>
+	<options>messagerie_options.php</options>
 	<pipeline>
 		<nom>messagerie_signer_message</nom>
 		<inclure>messagerie_pipelines.php</inclure>
