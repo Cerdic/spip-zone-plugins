@@ -10,6 +10,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // on met a jour le flux rss toutes les 2 heures
 // contrib ici qui devra passer en fond et utiliser le cache de SPIP !
 define('_CS_RSS_UPDATE', 2*3600);
+define('_CS_RSS_COUNT', 15);
 
 // compatibilite spip 1.9
 if(!function_exists(ajax_retour)) { 
@@ -55,7 +56,7 @@ function exec_cs_boite_rss_dist() {
 	if($c) {
 		$r3 = &$r2['item'];
 		$c = count($r3); $p='';
-		for($i=0; $i<min($c, 12); $i++) {
+		for($i=0; $i<min($c, _CS_RSS_COUNT); $i++) {
 		 $l = $r3[$i]['link'][0];
 		 $t = str_replace('&amp;', '&', htmlentities($r3[$i]['title'][0], ENT_NOQUOTES, "UTF-8"));
 		 $t = preg_replace(',\s*&#8364;(&brvbar;)?,', '&nbsp;(&hellip;)', $t);
