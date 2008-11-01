@@ -23,6 +23,24 @@ define('_VAR_OUTIL', cs_code_echappement("<!--  VAR-OUTIL -->\n", 'OUTIL'));
 @define('_CS_FILE_OPTIONS', str_replace('../','',(defined('_FILE_OPTION') && strlen(_FILE_OPTION))?_FILE_OPTION:
 	(defined('_SPIP19100')?_DIR_RESTREINT.'mes_options.php':_DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php')
 ));
+include_spip('inc/autoriser');
+if(defined('_SPIP19200')) if(cout_autoriser('webmestre')) {
+	// Qui sont les webmestres et les administrateurs ?
+	include_spip('inc/texte');
+	function def_liste_adminsitrateurs() {
+		$webmestres = array();
+		$s = spip_query("SELECT * FROM spip_auteurs WHERE statut='0minirezo'");
+		$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array'; // compatibilite SPIP 1.92
+		while ($qui = $fetch($s)) {
+			$nom = typo($qui['nom']." (id_auteur=$qui[id_auteur])");
+			if (autoriser('webmestre','','',$qui)) $webmestres[$qui['id_auteur']] = $nom;
+			else if (autoriser('configurer','plugins','',$qui)) $admins[$qui['id_auteur']] = $nom;
+		}
+		@define('_CS_LISTE_WEBMESTRES', join(', ', $webmestres));
+		@define('_CS_LISTE_ADMINS', join(', ', $admins));
+	}
+	def_liste_adminsitrateurs();
+}
 
 // fin des constantes
 

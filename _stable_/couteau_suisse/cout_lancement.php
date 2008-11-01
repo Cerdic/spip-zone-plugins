@@ -10,6 +10,7 @@
 #  Seulement s'il y a lieu, on va inclure ici         #
 #  cout_utils.php et compiler les outils.             #
 #-----------------------------------------------------#
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 cs_log("inclusion des fonctions de cout_lancement.php pour initialisation");
 

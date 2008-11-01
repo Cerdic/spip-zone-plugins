@@ -8,6 +8,7 @@
 #  Fichier contenant les fonctions utilisees pendant  #
 #  la configuration du plugin                         #
 #-----------------------------------------------------#
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 cs_log("chargement de cout_utils.php et lancement de cs_initialisation...");
 $GLOBALS['cs_utils']++;

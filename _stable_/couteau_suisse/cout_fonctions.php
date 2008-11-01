@@ -1,6 +1,7 @@
 <?php
 // Ce fichier est charge a chaque recalcul
 // Attention, ici il se peut que le plugin ne soit pas initialise (cas des .js/.css par exemple)
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // pour voir les erreurs ?
 if (defined('_CS_REPORT')) error_reporting(E_ALL ^ E_NOTICE);

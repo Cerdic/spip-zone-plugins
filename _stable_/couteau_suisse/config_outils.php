@@ -6,6 +6,7 @@
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
 #  Infos : http://www.spip-contrib.net/?article2166   #
 #-----------------------------------------------------#
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Noter :
 // outils/mon_outil.php : inclus par les pipelines de l'outil
@@ -139,6 +140,23 @@ add_outil( array(
 	'code:spip_options' => "\$GLOBALS['forcer_lang']=true;",
 	'categorie' => 'public',
 ));
+
+if(defined('_SPIP19200')) if(cout_autoriser('webmestre')) {
+	add_variable( array(
+		'nom' => 'webmestres',
+		'format' => _format_CHAINE,
+		'defaut' => '"1"',
+		'code:strlen(%s)' => "define('_ID_WEBMESTRES', %s);",
+		'code:!strlen(%s)' => "define('_ID_WEBMESTRES', 1);",
+	));
+	add_outil( array(
+		'id' => 'webmestres',
+		'code:spip_options' => '%%webmestres%%',
+		'categorie' => 'admin',
+		// non supporte avant la version 1.92
+		'version-min' => '1.9200',
+	));
+}
 
 add_outil( array(
 	'id' => 'insert_head',

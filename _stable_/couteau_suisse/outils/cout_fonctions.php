@@ -1,5 +1,6 @@
 <?php
 // Ce fichier contient des fonctions toujours compilees dans tmp/couteau-suisse/mes_fonctions.php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // compatibilite SPIP < 1.92
 if(defined('_SPIP19100')) {

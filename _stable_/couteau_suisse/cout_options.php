@@ -1,5 +1,6 @@
 <?php
 // Ce fichier est charge a chaque hit //
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Pour forcer les logs du plugin, outil actif ou non :
 // define('_LOG_CS_FORCE', 'oui');
@@ -121,12 +122,21 @@ if($zap) cs_log(' FIN : cout_options sans initialisation du plugin'); else {
 	cs_log(" FIN : cout_options, cs_spip_options = $GLOBALS[cs_spip_options], cs_options = $GLOBALS[cs_options], cs_fonctions_essai = $GLOBALS[cs_fonctions_essai]");
 }
 
-// Droits pour le Couteau Suisse
-function cout_autoriser() {
+// Droits pour le Couteau Suisse, compatibilite si la fonction autoriser() n'est pas trouvee
+// appelee sans argument cette fonction renvoie le droit de configurer le Couteau Suisse
+// (droits equivalents a 'configurer' les 'plugins')
+function cout_autoriser($faire='configurer', $type='plugins', $id=0, $qui = NULL, $opt = NULL) {
+	// SPIP >= 1.92
 	include_spip("inc/autoriser");
-	return function_exists('autoriser')
-		?autoriser('configurer', 'plugins')
-		:$GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"];
+	if(function_exists('autoriser')) return autoriser($faire, $type, $id, $qui, $opt);
+	// SPIP 1.91
+// ici $qui n'est jamais rempli
+//	if ($qui === NULL) $qui = $GLOBALS['auteur_session']; // "" si pas connecte
+//	elseif (is_int($qui)) $qui = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=".$qui));
+
+	/*if(($faire=='configurer') && ($type=='plugins'))*/ 
+		return $GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"];
+	return false;
 }
 
 // Logs de tmp/spip.log
