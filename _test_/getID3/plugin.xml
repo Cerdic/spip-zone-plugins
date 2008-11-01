@@ -1,9 +1,10 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	GetId3 pour spip 2.0
+	<nom>
+	GetId3 pour SPIP 2.0
 	</nom>
-	<auteur>	<!-- Auteur du plugin -->
+	<auteur>
  	BoOz, booz@rezo.net	
+	_ Kent1, kent1@arscenic.info
 	</auteur>
 	<version>
 	0.2
@@ -22,16 +23,10 @@
 	<fonctions>
 	getid3_fonctions.php
 	</fonctions>
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
 	<prefix> 
 	getid3
 	</prefix>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
-		<pipeline>
+	<pipeline>
 		<nom>editer_contenu_objet</nom>
 		<action>editer_contenu_objet</action>
 		<inclure>getid3_pipelines.php</inclure>
@@ -43,5 +38,4 @@
 	</pipeline>
 	<install>base/getid3_upgrade.php</install>
 	<necessite id="SPIP" version='[2.0;]' />
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>

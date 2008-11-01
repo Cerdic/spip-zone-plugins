@@ -17,17 +17,22 @@ function inc_recuperer_id3_dist($fichier,$info=null,$mime=null){
 		$id3['genre'] = ($ThisFileInfo['comments_html']['genre']['0']) ? $ThisFileInfo['comments_html']['genre']['0'] : $ThisFileInfo['id3v2']['comments']['genre']['0'] ;
 		$id3['comment'] = ($ThisFileInfo['comments_html']['comment']) ? $ThisFileInfo['comments_html']['comment']['0'] : $ThisFileInfo['id3v2']['comment']['0'] ;
 		$id3['year'] = ($ThisFileInfo['comments_html']['date']['0']) ? $ThisFileInfo['comments_html']['date']['0'] : $ThisFileInfo['id3v2']['comments']['year']['0'] ;
+		$id3['format'] = $ThisFileInfo['audio']['dataformat'];
+		$id3['lossless'] = $ThisFileInfo['audio']['lossless'];
 		$id3['sample_rate'] = $ThisFileInfo['audio']['sample_rate'] ;
+		$id3['bits'] = $ThisFileInfo['audio']['bits_per_sample'];
 		$id3['track'] = $ThisFileInfo['tags']['id3v2']['track']['0'] ;
-		$id3['encoded_by'] = ($ThisFileInfo['audio']['encoder']) ? $ThisFileInfo['audio']['encoder'] : $ThisFileInfo['tags']['id3v2']['encoded_by']['0'] ;
+		$id3['encoded_by'] = ($ThisFileInfo['comments_html']['encoded by']) ? $ThisFileInfo['comments_html']['encoded by']['0'] : $ThisFileInfo['tags']['id3v2']['encoded_by']['0'] ;
+		$id3['codec'] = ($ThisFileInfo['audio']['encoder']) ? $ThisFileInfo['audio']['encoder'] : $ThisFileInfo['tags']['id3v2']['encoded_by']['0'] ;
 		$id3['totaltracks'] = $ThisFileInfo['tags']['id3v2']['totaltracks']['0'] ;
-		$id3['tracknum'] = $ThisFileInfo['tags']['id3v2']['totaltracks']['0'] ;
+		$id3['tracknum'] = ($ThisFileInfo['comments_html']['tracknumber']) ? $ThisFileInfo['comments_html']['tracknumber']['0'] : $ThisFileInfo['tags']['id3v2']['totaltracks']['0'] ;
 		$id3['bitrate'] = $ThisFileInfo['audio']['bitrate'];
 		$id3['bitrate_mode'] = $ThisFileInfo['audio']['bitrate_mode'];
 		$id3['duree_secondes'] = $ThisFileInfo['playtime_seconds'];
 		$id3['duree'] = $ThisFileInfo['playtime_string'];
 		$id3['channels'] = $ThisFileInfo['audio']['channels'];
 		$id3['channel_mode'] = $ThisFileInfo['audio']['channelmode'];
+		$id3['source'] = $ThisFileInfo['comments_html']['source']['0'];
 		$id3['mime'] = $ThisFileInfo['mime_type'];
 	}
 	spip_log($ThisFileInfo);
