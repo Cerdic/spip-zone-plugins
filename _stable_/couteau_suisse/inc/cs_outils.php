@@ -158,7 +158,7 @@ function detail_outil($outil_id) {
 	$details = array();
 	if ($erreur_version) $details[] = _T('couteauprive:erreur:version');
 	$a = array();
-	foreach(array('options', 'fonctions', 'js', 'jq', 'css') as $in)
+	foreach(array('spip_options', 'options', 'fonctions', 'js', 'jq', 'css') as $in)
 		if(isset($outil['code:'.$in])) $a[] = _T('couteauprive:code_'.$in);
 	if(count($a)) $details[] = _T('couteauprive:detail_inline') . ' ' . join(', ', $a);
 	$a = array();

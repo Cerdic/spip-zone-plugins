@@ -104,6 +104,7 @@ Notez bien : en modifiant ce deuxi&egrave;me style, vous perdez alors les styles
 	'code_jq' => 'jQuery',
 	'code_js' => 'Javascript',
 	'code_options' => 'Options',
+	'code_spip_options' => 'Options SPIP',
 	'contrib' => 'Plus d\'infos : @url@',
 	'couleurs:aide' => 'Mise en couleurs : <b>[coul]texte[/coul]</b>@fond@ avec <b>coul</b> = @liste@',
 	'couleurs:description' => 'Permet d\'appliquer facilement des couleurs &agrave; tous les textes du site (articles, br&egrave;ves, titres, forum, &hellip;) en utilisant des balises en raccourcis.
@@ -324,10 +325,20 @@ _ &bull; {Basique} : sont remplac&eacute;s les liens du type {<html>http://spip.
 _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} ou {<html>news:mesnews</html>}.
 [[%liens_orphelins%]]',
 	'liens_orphelins:nom' => 'Belles URLs',
-	'log_couteau_suisse:description' => 'Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin \'Le Couteau Suisse\' dans les fichiers spip.log que l\'on peut trouver dans le r&eacute;pertoire : @_CS_DIR_TMP@',
-	'log_couteau_suisse:nom' => 'Log d&eacute;taill&eacute; du Couteau Suisse',
-	'distant_off:description' => "Le Couteau Suisse v&eacute;rifie r&eacute;guli&egrave;rement l'existence d'une version plus r&eacute;cente de son code et informe d'une mise &agrave; jour &eacute;ventuellement disponible. Si les requ&ecirc;tes externes de votre serveur posent des probl&egrave;mes, alors cet outil d&eacute;sactive cette fonctionnalit&eacute;.",
-	'distant_off:nom' => 'Pas de v&eacute;rification distante',
+	'cs_log_couteau_suisse' => 'Les logs d&eacute;taill&eacute;s du Couteau Suisse',
+	'cs_comportement:description' => "@puce@ {{Logs.}} Obtenez de nombreux renseignements &agrave; propos du fonctionnement du Couteau Suisse dans les fichiers {spip.log} que l'on peut trouver dans le r&eacute;pertoire : {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
+
+@puce@ {{Options SPIP.}} SPIP ordonne les plugins dans un ordre sp&eacute;cifique. Afin d'&ecirc;tre s&ucirc;r que le Couteau Suisse soit en t&ecirc;te et g&egrave;re en amont certaines options de SPIP, alors cochez l'option suivante. Si les droits de votre serveur le permettent, le fichier {@_CS_FILE_OPTIONS@} sera automatiquement modifi&eacute; pour inclure le fichier {@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php}.
+[[%spip_options_on%]]
+
+@puce@ {{Requ&ecirc;tes externes.}} Le Couteau Suisse v&eacute;rifie r&eacute;guli&egrave;rement l'existence d'une version plus r&eacute;cente de son code et informe sur sa page de configuration d'une mise &agrave; jour &eacute;ventuellement disponible. Si les requ&ecirc;tes externes de votre serveur posent des probl&egrave;mes, alors cochez la case suivante.[[%distant_off%]]",
+	'cs_comportement:nom' => 'Comportements du Couteau Suisse',
+	'cs_distant_off' => 'Les v&eacute;rifications de versions distantes',
+	'cs_spip_options_on' => 'Les options SPIP dans &laquo;@_CS_FILE_OPTIONS@&raquo;',
+	'label:log_couteau_suisse' => 'Activer :',
+	'label:spip_options_on' => 'Inclure :',
+	'label:distant_off' => 'D&eacute;sactiver :',
+	
 
 	// M
 	'mailcrypt:description' => 'Masque tous les liens de courriels pr&eacute;sents dans vos textes en les rempla&ccedil;ant par un lien Javascript permettant quand m&ecirc;me d\'activer la messagerie du lecteur. Cet outil antispam tente d\'emp&ecirc;cher les robots de collecter les adresses &eacute;lectroniques laiss&eacute;es en clair dans les forums ou dans les balises de vos squelettes.',

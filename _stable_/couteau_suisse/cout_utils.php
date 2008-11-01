@@ -387,9 +387,9 @@ define('_CS_SPIP_OPTIONS_A', "// Partie reservee au Couteau Suisse. Ne pas modif
 define('_CS_SPIP_OPTIONS_B', "// Fin du code. Ne pas modifier ces lignes, merci");
 
 // verifier le fichier d'options _FILE_OPTIONS (ecrire/mes_options.php ou config/mes_options.php)
-function cs_verif_FILE_OPTIONS($ecriture = false) {
-	$include = realpath(_DIR_CS_TMP.'mes_spip_options.php');
-	$include = "if (@is_readable(\"$include\")) @include_once \"$include\";";
+function cs_verif_FILE_OPTIONS($activer=false, $ecriture = false) {
+	$include = str_replace('\\','/',realpath(_DIR_CS_TMP.'mes_spip_options.php'));
+	$include = "@include_once \"$include\";\nif(\$GLOBALS['cs_spip_options']) define('_CS_SPIP_OPTIONS_OK',1);";
 	$inclusion = _CS_SPIP_OPTIONS_A."\n".$include."\n"._CS_SPIP_OPTIONS_B;
 cs_log("cs_verif_FILE_OPTIONS($ecriture) : le code d'appel est $include");
 	$fo = strlen(_FILE_OPTIONS)? _FILE_OPTIONS:false;
@@ -397,19 +397,28 @@ cs_log("cs_verif_FILE_OPTIONS($ecriture) : le code d'appel est $include");
 		if (lire_fichier($fo, $t)) {
 			// verification du contenu inclu
 			$ok = preg_match('`\s*('.preg_quote(_CS_SPIP_OPTIONS_A,'`').'.*'.preg_quote(_CS_SPIP_OPTIONS_B,'`').')\s*`ms', $t, $regs);
-			// pas besoin de reecrire si le contenu est identique a l'inclusion
-			if ($regs[1]==$inclusion) $ecriture = false;
-	cs_log(" -- fichier $fo present. Inclusion " . ($ok?" trouvee".($ecriture?" et remplacee":" et validee"):"absente".($ecriture?" mais ajoutee":"")));
-			$t = $ok?str_replace($regs[0], "\n$inclusion\n\n", $t):preg_replace(',<\?(?:php)?\s*,', '<?'."php\n$inclusion\n\n", $t);
-			if($ecriture) $ok = ecrire_fichier($fo, $t);
-			if(!$ok) cs_log("ERREUR : l'ecriture du fichier $fo a echouee !");
+			// s'il faut une inclusion
+			if ($activer) {
+				// pas besoin de reecrire si le contenu est identique a l'inclusion
+				if (($regs[1]==$inclusion)) $ecriture = false;
+				$t2 = $ok?str_replace($regs[0], "\n$inclusion\n\n", $t):preg_replace(',<\?(?:php)?\s*,', '<?'."php\n$inclusion\n\n", $t);
+			} else {
+				$t2 = $ok?str_replace($regs[0], "\n", $t):$t;
+			}
+cs_log(" -- fichier $fo present. Inclusion " . ($ok?" trouvee".($ecriture?" et remplacee":""):"absente".(($ecriture && $activer)?" mais ajoutee":"")));
+			if($ecriture) if($t2<>$t) {
+				$ok = ecrire_fichier($fo, $t2);
+				if(!$ok) cs_log("ERREUR : l'ecriture du fichier $fo a echoue !");
+			}
 			return;
 		} else cs_log(" -- fichier $fo illisible. Inclusion non permise");
-	} else $fo = _DIR_RACINE . _NOM_PERMANENTS_INACCESSIBLES . _NOM_CONFIG . '.php';
+	} else 
+		$fo = defined('_SPIP19100')?_DIR_RESTREINT.'mes_options.php':_DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php';
 	// creation
-	$t = '<?'."php\n".$inclusion."\n\n?>";
-	if($ecriture) ecrire_fichier($fo, $t);
+	if($activer) {
+		if($ecriture) ecrire_fichier($fo, '<?'."php\n".$inclusion."\n\n?>");
 cs_log(" -- fichier $fo absent. Fichier '$f' et inclusion ".(!$ecriture?"non ":"")."crees");
+	}
 }
 
 // retire les guillemets extremes s'il y en a

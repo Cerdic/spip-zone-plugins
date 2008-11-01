@@ -368,14 +368,27 @@ add_outil( array(
 	'version-min' => '1.9300',
 ));
 
+add_variable( array(
+	'nom' => 'log_couteau_suisse',
+	'check' => 'couteauprive:cs_log_couteau_suisse',
+	'defaut' => 0,
+));
+add_variable( array(
+	'nom' => 'spip_options_on',
+	'check' => 'couteauprive:cs_spip_options_on',
+	'defaut' => 0,
+));
+add_variable( array(
+	'nom' => 'distant_off',
+	'check' => 'couteauprive:cs_distant_off',
+	'defaut' => 0,
+	'code:%s' => "define('_CS_PAS_DE_DISTANT','oui');",
+));
 add_outil( array(
-	'id' => 'log_couteau_suisse',
+	'id' => 'cs_comportement',
+	'code:spip_options' => "%%distant_off%%",
 ));
 
-add_outil( array(
-	'id' => 'distant_off',
-	'code:spip_options' => "define('_CS_PAS_DE_DISTANT',1);",
-));
 
 add_outil( array(
 	'id' => 'xml',

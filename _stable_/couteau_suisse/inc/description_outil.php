@@ -20,6 +20,9 @@ define('_VAR_OUTIL', cs_code_echappement("<!--  VAR-OUTIL -->\n", 'OUTIL'));
 @define('_CS_TRAVAUX_TITRE', '<i>'._T('info_travaux_titre').'</i>');
 @define('_CS_NOM_SITE', '<i>'.$GLOBALS['meta']['nom_site'].'</i>');
 @define('_CS_CHOIX', _T('couteauprive:votre_choix'));
+@define('_CS_FILE_OPTIONS', str_replace('../','',(defined('_FILE_OPTION') && strlen(_FILE_OPTION))?_FILE_OPTION:
+	(defined('_SPIP19100')?_DIR_RESTREINT.'mes_options.php':_DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php')
+));
 
 // fin des constantes
 
