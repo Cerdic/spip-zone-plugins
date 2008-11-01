@@ -8,6 +8,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour_a_spip' => 'Retour &agrave; la page compl&egrave;te',
 'augmenter_police' => 'Augmenter police',
 'diminuer_police' => 'Diminuer police',
+'selecteur' => 'S&eacute;lecteur du texte &agrave; traiter',
+
 'donnees_techniques' => 'Donn&eacute;es techniques &agrave; ne pas changer'
 );
 ?>
