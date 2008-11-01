@@ -1,20 +1,5 @@
-#SET{'env_categ',#ID_CATEGORIE}
-<div class="verdana3" style="background: transparent url(../dist/images/racine-site-12.gif) no-repeat scroll left top;padding-left: 15px;"><a href="[(#EVAL{echoppe}|generer_url_ecrire)]"><strong><:echoppe:chemin_categorie:></strong></a></div>
-<B_CatsALaRacine>
-<ul class="chemin">
-<BOUCLE_CatsALaRacine(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS spip_echoppe_categories){lang = ""}{id_parent = 0}{par num titre}>
-	<li class="verdana3" style="background: transparent url(../dist/images/secteur-12.gif) no-repeat scroll left top; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; padding-left: 15px; padding-bottom:4px;">
-		[<a href="[(#EVAL{echoppe_categorie}|GENERER_URL_ECRIRE{id_categorie=#ID_CATEGORIE})]" >(#TITRE|couper{100})]</a>
-		<B_SousCats>
-		<ul style="display: [#ID_SECTEUR|=={#GET{'env_categ'}}|?{block,none})];">
-		<BOUCLE_SousCats(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS spip_echoppe_categories){lang = ""}{id_parent = #ID_CATEGORIE}>
-			<li  style="background: transparent url(../dist/images/secteur-12.gif) no-repeat scroll left center; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; padding-left: 15px;">
-				[<a href="[(#EVAL{echoppe_categorie}|GENERER_URL_ECRIRE{id_categorie=#ID_CATEGORIE})]" >(#TITRE|couper{100})]</a>
-			</li>
-		</BOUCLE_SousCats>
-		</ul>
-		</B_SousCats>
-	</li>
-</BOUCLE_CatsALaRacine>
-</ul>
-</B_CatsALaRacine>
+
+#ID_SECTEUR
+<BOUCLE_LaBase(ECHOPPE_CATEGORIES){racine}{" > "}{id_secteur}>
+#TITRE
+</BOUCLE_LaBase>

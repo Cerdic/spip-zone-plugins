@@ -6,6 +6,7 @@ include_spip('inc/echoppe');
 include_spip('inc/commencer_page');
 include_spip('inc/presentation');
 include_spip('public/assembler');
+include_spip('inc/barre');
 
 function exec_echoppe_edit_categorie(){
 	
@@ -47,11 +48,7 @@ function exec_echoppe_edit_categorie(){
 		echo inc_commencer_page_dist(_T('echoppe:les_categories'), "redacteurs", "echoppe");
 	}
 
-	echo debut_gauche('',true);
-
-	echo debut_boite_info(true);
-	echo recuperer_fond('fonds/echoppe_logo_categorie',$contexte);
-	echo fin_boite_info(true);	
+	echo debut_gauche('',true);	
 	
 	include_spip('inc/echoppe_raccourcis');
 	$raccourcis = generer_raccourcis_echoppe();

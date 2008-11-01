@@ -28,6 +28,7 @@ _
 	<prefix>echoppe</prefix>
 	<necessite id='cfg' version='[1.0.6;]' />
 	<necessite id='Inscription2' version='[0.2;]' />
+	<necessite id="lib:jquery.ui-1.6rc2" src="http://jquery-ui.googlecode.com/files/jquery.ui-1.6rc2.zip" />
 	<install>base/echoppe_upgrade.php</install>
 	<options>echoppe_options.php</options>
 	<fonctions>echoppe_fonctions.php</fonctions>

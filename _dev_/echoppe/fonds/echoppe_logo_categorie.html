@@ -1,8 +1,8 @@
 <div class="titre_logo"><:echoppe:logo_de_la_categorie:></div>
 <div class="logo_categorie">
 	<div class="logo">
-	<BOUCLE_LeLogo(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS){id_categorie = #ID_CATEGORIE}{lang = #LANG_CATEGORIE}>
-	[<img src="../IMG/(#LOGO)" />]
+	<BOUCLE_LeLogo(ECHOPPE_CATEGORIES){id_categorie = #ID_CATEGORIE}>
+	[(#LOGO_CATEGORIE|imgae_reduire{100})]
 	</BOUCLE_LeLogo>
 	</B_LeLogo>
 	<//B_LeLogo>

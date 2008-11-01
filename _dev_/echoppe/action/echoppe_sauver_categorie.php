@@ -17,27 +17,20 @@ function action_echoppe_sauver_categorie(){
 	$categorie = _request('categorie');
 	
 	switch ($new){
+		
 		case 'oui':
 			$valeur = array('id_categorie'=>'','id_parent'=>$id_parent,'id_secteur'=>$id_secteur);
 			$new_id_categorie = sql_insertq('spip_echoppe_categories',$categorie);
-			//$id_secteur = recuperer_id_secteur($id_parent, $id_categorie, 'categorie');
-			
-			//$sql_maj_id_secteur = "UPDATE id_secteur FROM spip_echoppe_categories WHERE id_categorie = '".$new_id_categorie."';";
-			
-			//$sql_insert_categorie_descriptif = "INSERT INTO spip_echoppe_categories_descriptions VALUES ('','".$new_id_categorie."','".$lang_categorie."','".addslashes($titre)."','".addslashes($descriptif)."','".addslashes($texte)."','".$logo."','','".$statut."') ";
-			//$res_insert_categorie_descriptif = spip_query($sql_insert_categorie_descriptif);
 			$id_categorie = $new_id_categorie;
 			break;
-		/*
-		case 'description' :
-			$sql_insert_categorie_descriptif = "INSERT INTO spip_echoppe_categories_descriptions VALUES ('','".$id_categorie."','".$lang_categorie."','".addslashes($titre)."','".addslashes($descriptif)."','".addslashes($texte)."','".$logo."','".$lang_categorie."','".$statut."') ";
-			$res_insert_categorie_descriptif = spip_query($sql_insert_categorie_descriptif);
-			break;
-		*/
+		
+		
 		default :
-			$sql_update_categorie_descriptif = "UPDATE spip_echoppe_categories_descriptions SET titre = '".addslashes($titre)."', descriptif = '".addslashes($descriptif)."', texte = '".addslashes($texte)."', statut = '".$statut."' WHERE id_categorie = '".$id_categorie."' AND lang = '".$lang_categorie."' ";
+			/*$sql_update_categorie_descriptif = "UPDATE spip_echoppe_categories_descriptions SET titre = '".addslashes($titre)."', descriptif = '".addslashes($descriptif)."', texte = '".addslashes($texte)."', statut = '".$statut."' WHERE id_categorie = '".$id_categorie."' AND lang = '".$lang_categorie."' ";
 			//echo $sql_update_categorie_descriptif;
-			$res_update_categorie_descriptif = spip_query($sql_update_categorie_descriptif);
+			$res_update_categorie_descriptif = spip_query($sql_update_categorie_descriptif);*/
+			$sav_update = sql_updateq('spip_echoppe_categories',$categorie,'id_categorie = '.$categorie['id_categorie']);
+			$id_categorie = $categorie['id_categorie'];
 			break;
 		
 	}

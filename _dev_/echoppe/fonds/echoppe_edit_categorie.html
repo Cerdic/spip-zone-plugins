@@ -4,7 +4,7 @@
 		<input type="hidden" name="categorie[id_parent]" value="#ID_PARENT" />
 		<input type="hidden" name="redirect" value="[(#EVAL{echoppe}|generer_url_action)]" />
 		[<input type="hidden" name="new" value="(#NEW)" />]
-		<input type="hidden" name="categorie[id_categorie]" value="#ID_CATEGORIE_DESCRIPTION" />
+		<input type="hidden" name="categorie[id_categorie]" value="#ID_CATEGORIE" />
 		<b><:echoppe:titre_categorie:></b><br />
 		<input type="text" class="forml" name="categorie[titre]" value="#TITRE"/><br />
 		
@@ -24,9 +24,12 @@
 		<br />
 		<br />
 		<b><:echoppe:descriptif:></b><br />
-		<textarea name="categorie[descriptif]" class="forml" >#DESCRIPTIF*</textarea><br />
+		<textarea name="categorie[descriptif]" class="forml" >#DESCRIPTIF**</textarea><br />
 		<b><:echoppe:texte:></b><br />
-		[(#TEXTE**|barre_textarea{20,40,#LANG_CATEGORIE})]
+		[(#EVAL{text_area}|barre_typo)]
+		<textarea name='categorie[texte]' id='text_area' class='barre_inserer forml' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
+				(#ENV**{browser_caret,''})]>[(#TEXTE**)]</textarea>
+		
 		<input type="submit" class="fondo" />
 	</form>
 [(#EVAL{1}|fin_cadre_trait_couleur)]

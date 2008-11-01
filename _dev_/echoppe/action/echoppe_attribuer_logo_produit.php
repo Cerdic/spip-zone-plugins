@@ -8,8 +8,17 @@ function action_echoppe_attribuer_logo_produit(){
 	
 	$type_file = $_FILES['logo_produit']['type'];
 	
-	$content_dir = 'IMG/echoppe/produits/'; // dossier où sera déplacé le fichier
-
+	$content_dir = getcwd().'IMG/echoppe/produits/'; // dossier où sera déplacé le fichier
+	
+	if (!file_exists(getcwd().'/../IMG/echoppe/')){
+		mkdir(getcwd().'/../IMG/echoppe/');
+	}
+	
+	if (!file_exists($content_dir)){
+		mkdir($content_dir);
+	}
+	
+	
     $tmp_file = $_FILES['logo_produit']['tmp_name'];
 
     if( !is_uploaded_file($tmp_file) )

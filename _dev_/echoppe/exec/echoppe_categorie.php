@@ -41,8 +41,10 @@ function exec_echoppe_categorie(){
 	echo inc_commencer_page_dist($contexte['titre'], "redacteurs", "echoppe");
 	
 	
-	echo debut_gauche('',true);
+	debut_grand_cadre(true);
 	echo recuperer_fond('fonds/echoppe_chemin_categorie',$contexte);
+	fin_grand_cadre(true);
+	echo debut_gauche('',true);
 	echo debut_boite_info(true);
 	echo recuperer_fond('fonds/echoppe_info_categorie',$contexte);
 
@@ -63,6 +65,9 @@ function exec_echoppe_categorie(){
 	}*/
 	echo fin_boite_info(true);
 	
+	echo debut_boite_info(true);
+		echo recuperer_fond('fonds/echoppe_logo_categorie',$contexte);
+	echo fin_boite_info(true);
 	
 	include_spip('inc/echoppe_raccourcis');
 	$raccourcis = generer_raccourcis_echoppe();

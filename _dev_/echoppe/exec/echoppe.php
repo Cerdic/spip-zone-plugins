@@ -18,7 +18,7 @@ function exec_echoppe(){
 	
 	
 	echo debut_boite_info(true);
-		echo (_T('echoppe:descriptif_echoppe'));
+		echo recuperer_fond('fonds/descriptif_echoppe');
 	echo fin_boite_info(true);
 	
 	

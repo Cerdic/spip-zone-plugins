@@ -8,7 +8,15 @@ function action_echoppe_attribuer_logo_categorie(){
 	
 	$type_file = $_FILES['logo_categorie']['type'];
 	
-	$content_dir = 'IMG/echoppe/categories/'; // dossier où sera déplacé le fichier
+	$content_dir = getcwd().'/../IMG/echoppe/categories/'; // dossier où sera déplacé le fichier
+	
+	if (!file_exists(getcwd().'/../IMG/echoppe/')){
+		mkdir(getcwd().'/../IMG/echoppe/');
+	}
+	
+	if (!file_exists($content_dir)){
+		mkdir($content_dir);
+	}
 
     $tmp_file = $_FILES['logo_categorie']['tmp_name'];
 
@@ -31,8 +39,8 @@ function action_echoppe_attribuer_logo_categorie(){
         die(_T('echoppe:inmpossible_copier_dans').$content_dir);
     }
 
-    $sql_maj_logo_categorie = "UPDATE spip_echoppe_categories_descriptions SET logo = '".$name_file."' WHERE id_categorie = '".$contexte['id_categorie']."' AND lang = '".$contexte['lang']."';";
-    $res_maj_logo_categorie = spip_query($sql_maj_logo_categorie);
+    $sql_maj_logo_categorie = "UPDATE spip_echoppe_categories SET logo = '".$name_file."' WHERE id_categorie = '".$contexte['id_categorie']."';";
+    $res_maj_logo_categorie = sql_query($sql_maj_logo_categorie);
     //die($sql_maj_logo_categorie);
     
     $redirect = generer_url_ecrire('echoppe_edit_categorie', 'id_categorie='.$contexte['id_categorie'].'&lang_categorie='.$contexte['lang_categorie'],'&');
