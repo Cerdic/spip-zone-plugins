@@ -18,16 +18,16 @@
  * @param string $title
  * @return string
  */
-function aouspan($url,$libelle,$on=false,$class="",$title=""){
+function aoustrong($url,$libelle,$on=false,$class="",$title=""){
 	return 
-	($on ?"<span class='on'>":
+	($on ?"<strong class='on'>":
 		"<a href='$url'"
 	  	.($title?" title='".attribut_html($title)."'":'')
 	  	.($class?" class='".attribut_html($class)."'":'')
 	  	.">"
 	)
 	. $libelle
-	. ($on ? "</span>":"</a>");
+	. ($on ? "</strong>":"</a>");
 }
 
 
