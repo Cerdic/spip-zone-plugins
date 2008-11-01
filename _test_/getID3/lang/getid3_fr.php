@@ -16,8 +16,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'son_bitrate_vbr' => 'Bitrate variable',
 	'son_audiosamplerate' => 'Audio Samplerate :',
 	'son_encodeur' => 'Encodeur :',
-	'verifier_formulaire' => 'V&eacute;rifiez le remplissage du formulaire.'
+	'verifier_formulaire' => 'V&eacute;rifiez le remplissage du formulaire.',
 	
+	// Les tags
+	'titre' => 'Titre',
+	'artiste' => 'Artiste',
+	'album' => 'Album',
+	'genre' => 'Genre',
+	'comment' => 'Commentaires',
+	'sample_rate' => 'Sample rate',
+	'track' => 'Piste',
+	'encoded_by' => 'Encod&eacute; par',
+	'totaltracks' => 'Nombre total de pistes',
+	'tracknum' => 'Piste num&eacute;ro',
+	'bitrate' => 'Bitrate',
+	'bitrate_mode' => 'Mode',
+	'duree_secondes' => 'Dur&eacute;e (en secondes)',
+	'duree' => 'Dur&eacute;e',
+	'channels' => 'Nombre de canaux',
+	'year' => 'Ann&eacute;e',
+	'channel_mode' => 'Mode (channel)',
+	'mime' => 'Type mime',
 );
 
 
