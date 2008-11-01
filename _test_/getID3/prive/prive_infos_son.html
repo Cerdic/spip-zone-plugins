@@ -4,8 +4,8 @@
 	<div id="infos_son_haut_#ID_DOCUMENT" class="infos_son_haut">
 		<strong>[(#LOGO_DOCUMENT||image_reduire{24,24}|inserer_attribut{class,logo})]<a href="#" onclick="if(jQuery('#infos_son_bas_#ID_DOCUMENT').is(':visible')){jQuery('#infos_son_bas_#ID_DOCUMENT').slideUp(); return false;}else{jQuery('#infos_son_bas_#ID_DOCUMENT').slideDown(); return false;}"><:getid3:son_infos_techniques:></a></strong>
 		<div id="infos_son_bas_#ID_DOCUMENT" class="infos_son_bas">
-			[(#PLUGIN{Player}|?{' ',''})
-			[(#EXTENSION|=={mp3}|?{' '})
+			[(#PLUGIN{Player}|oui)
+			[(#EXTENSION|=={mp3}|oui)
 				[(#MODELE{doc_player_getid3}{id_document}{bgcolor=#ENV{couleur_foncee}})]
 			]]
 			<table cellspacing='3' cellpadding='0'>
