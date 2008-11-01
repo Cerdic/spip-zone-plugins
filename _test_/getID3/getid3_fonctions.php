@@ -9,7 +9,11 @@ include_spip('inc/documents');
 	$fichier = ereg_replace(" ","%20",$fichier);
 	$id3_content = $recuperer_id3($fichier,$info,$mime);
 	
-	return $id3_content;
+	$output = '';
+	foreach($id3_content as $cle => $val){
+		$output .= _T($cle).' : '.$val.'<br />';
+	}
+	return $output;
 }
 
 ?>
