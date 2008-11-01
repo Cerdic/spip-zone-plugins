@@ -484,7 +484,6 @@ $tableau_livres = array(
 	'Jn'=>'Jean',
 	'Mc'=>'Marc',
 	'Ac'=>'Acte des Ap&ocirc;tres',
-	'Ro'=>'Romains',
 	'1Co'=>'1 Corinthiens',
 	'2Co'=>'2 Corinthiens',
 	'Ga'=>'Galates',
