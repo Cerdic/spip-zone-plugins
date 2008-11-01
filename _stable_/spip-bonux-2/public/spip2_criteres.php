@@ -60,7 +60,7 @@ function critere_compteur($idb, &$boucles, $crit){
 	$depart = array($boucle->id_table,$trouver_table($boucle->id_table, $boucle->sql_serveur));
 
 	if ($compt = calculer_jointure($boucle,$depart,$arrivee)){
-		if ($_fusion){
+		if ($_fusion!="''"){
 			// en cas de jointure, on ne veut pas du group_by sur la cle primaire !
 			// cela casse le compteur !
 			foreach($boucle->group as $k=>$group)
