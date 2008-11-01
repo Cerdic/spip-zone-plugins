@@ -1,10 +1,10 @@
 <plugin>
-  <nom>FB Login</nom>
+  <nom>Login avec FaceBook</nom>
   <auteur>Cedric Morin [yterium.com->http://www.yterium.com]</auteur>
   <version>1.0</version>
   <version_base>0.1.0</version_base>
   <etat>test</etat>
-  <description>FB Login : Inscription et Login via FB</description>
+  <description>Permet aux internaute d'utiliser leur compte FaceBook pour s'inscrire et s'identifier sur le site</description>
 	<lien></lien> <!-- URI de documentation -->
   <options>fblogin_options.php</options>
   <install>base/fblogin.php</install>
