@@ -87,4 +87,5 @@ div.onglets_bloc .onglets_contenu {
 
 div.onglets_bloc .onglets_contenu.selected {
 	display:block;
+	overflow:auto;
 }

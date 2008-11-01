@@ -72,7 +72,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	$titre_etat = _T('couteauprive:outil_'.($actif?'actif':'inactif'));
 	$nb_var = intval($outil['nb_variables']);
 	
-	if(!strlen($outil['id']) || !cout_autoriser('outiller', $outil))
+	if(!strlen($outil['id']) || !cout_autoriser('outiller', $outil) || cs_version_erreur($outil))
 		return _DIV_CS_INFOS . $s . _T('info_acces_interdit') . '</div></div>';
 
 	$s .= "<h3 class='titrem'><img src='"._DIR_IMG_PACK."$puce' name='puce_$id_input' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;" . $outil['nom'] . '</h3>';
