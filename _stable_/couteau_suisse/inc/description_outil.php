@@ -108,7 +108,7 @@ function description_outil_input_callback($matches) {
 	return '<fieldset><legend>'._T('couteauprive:label:'.$matches[3]).'</legend><div style="margin:0;">'.$matches[1].'</div></fieldset>';
 }
 function description_outil_const_callback($matches) {
-	return constant($matches[1]);
+	return defined($matches[1])?constant($matches[1]):'';
 }
 function description_outil_descrip_callback($matches) {
 	return _T("couteauprive:$matches[1]:description$matches[2]");
