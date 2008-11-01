@@ -71,8 +71,14 @@ function exec_cs_boite_rss_dist() {
 	include_spip('inc/filtres');
 	$du = affdate_heure(date('Y-m-d H:i:s',time()));
 	$p = '<ul style="list-style-type:none; padding:0; margin:0; ">'.$p
-		.'</ul><p class="spip_xx-small"><b>'
-		._T('couteauprive:rss_edition')."</b><br/>$du</p>";
+		.'</ul><p class="spip_xx-small" style="border-top:solid gray thin;"><b>'
+		._T('couteauprive:rss_edition')."</b><br/>$du</p>"
+		.'<p style="text-align:right"><a href="'
+		.generer_url_ecrire('admin_couteau_suisse','var_mode=calcul', true).'" onclick="'
+		."javascipt:jQuery('div.cs_boite_rss').load('".generer_url_ecrire('cs_boite_rss', 'force=oui', true).'\');return false;">'
+		._T('couteauprive:rss_actualiser').'</a> | <a href="'
+		._CS_RSS_SOURCE.'">'
+		._T('couteauprive:rss_source').'</a></p>';
 	if($c) ecrire_fichier(_DIR_RSS_TMP, $p);
 	
 	ajax_retour($p);
