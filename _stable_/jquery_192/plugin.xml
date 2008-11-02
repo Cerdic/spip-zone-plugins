@@ -1,0 +1,29 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	jQuery pour SPIP 1.92x
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+Mise en plugin pour SPIP 1.92x : Patrice Vanneufvile
+_ Librairie javascript : John Resig pour [jquery.js->http://jquery.com]
+	</auteur>
+	<version>
+	1.0.0
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+D&eacute;sactive l'ancienne librairie {jQuery} distribu&eacute;e avec SPIP 1.92x ({{jquery.js v1.1.1}}) et ajoute un appel &#224; {{jquery.js v1.2.6}} dans l'ent&#234;te publique (fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>)
+
+Ce plugin vous permet donc de b&eacute;n&eacute;ficier d'une version r&eacute;cente de {jQuery} pour vos squelettes, tout en gardant en partie priv&eacute;e la version originale.
+
+Ajout au passage du pipeline {jquery_plugins} et des plugins {jquery.form} et {ajaxCallback}. {{Important}} : ce plugin ne concerne que les version 1.92x de SPIP.
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix>
+	JQuery192
+	</prefix>
+	<options> <!-- fichier charge a chaque hit -->
+	jquery_192_options.php
+	</options>
+</plugin>
