@@ -7,7 +7,7 @@ _ &#169; 2008 - Licence GPL
 	<icon>habillage/messagerie-64.png</icon>
 	<version>2.0.1</version>
 	<version_base>1.0</version_base>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<lien></lien> <!-- URI de documentation -->
 	<description>
 	Gestion de la messagerie interne entre auteurs dans les squelettes publics.
