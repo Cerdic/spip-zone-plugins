@@ -404,7 +404,7 @@ Si vous r&eacute;initialisez le plugin en cliquant sur un pack, le Couteau Suiss
 	'rss_edition' => 'Flux RSS mis &agrave; jour le :',
 	'rss_titre' => '&laquo;&nbsp;Le Couteau Suisse&nbsp;&raquo; en d&eacute;veloppement :',
 	'rss_var' => 'Les r&eacute;visions du Couteau Suisse',
-	'rss_actualiser' => 'Actualiser ce flux',
+	'rss_actualiser' => 'Actualiser',
 	'rss_source' => 'Source RSS',
 
 	// S
