@@ -982,13 +982,13 @@ add_outil( array(
 
 add_variable( array(	// variable utilisee par 'pipelinecode:insert_head'
 	'nom' => 'scrollTo',
-	'check' => 'couteauprive:scrollTo',
+	'check' => 'couteauprive:jq_scrollTo',
 	'defaut' => 1,
 	'format' => _format_NOMBRE,
 ));
 add_variable( array(	// variable utilisee par 'pipelinecode:insert_head'
 	'nom' => 'LocalScroll',
-	'check' => 'couteauprive:LocalScroll',
+	'check' => 'couteauprive:jq_localScroll',
 	'defaut' => 1,
 	'format' => _format_NOMBRE,
 ));

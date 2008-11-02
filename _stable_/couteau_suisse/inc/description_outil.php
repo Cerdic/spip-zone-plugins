@@ -178,6 +178,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	}
 //cs_log(" FIN : inc_description_outil_dist({$outil['id']}) - {$outil['nb_variables']} variables(s) trouvee(s)");
 	$res = preg_replace(',(<br />)?</fieldset><fieldset><legend></legend>,', '', $res);
+	$res = preg_replace(',(<br />)?</fieldset><fieldset><legend>-</legend>,', '<br />', $res);
 	$res = str_replace('</label></div><div style="margin:0;"><label><input type="checkbox"', '</label>&nbsp;<label><input type="checkbox"', $res);
 	// remplacement des puces
 	$res = str_replace('@puce@', definir_puce(), $res);
