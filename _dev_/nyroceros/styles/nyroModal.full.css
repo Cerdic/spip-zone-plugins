@@ -8,7 +8,7 @@ div#nyroModalFull {
 div#nyroModalFull div#nyroModalLoading {
 	border: 4px solid #777;
 	width: 150px;
-	height: 150	px;
+	height: 150px;
 	text-indent: -9999em;
 	background: #fff url(../img/ajaxLoader.gif) no-repeat;
 	background-position: center;

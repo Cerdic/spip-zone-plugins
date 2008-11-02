@@ -1,6 +1,6 @@
 // Inside the function "this" will be "document" when called by ready() 
 // and "the ajaxed element" when called because of onAjaxLoad 
-var init_f = function() {
+var nyro_init = function() {
 	if (nyro_traiter_toutes_images) {
 		// selectionner tous les liens vers des images
 		$("a[@type=\'image/jpeg\'],a[@type=\'image/png\'],a[@type=\'image/gif\']",this)

@@ -24,8 +24,8 @@ var nyro_selecteur_commun="'.$config['selecteur_commun'].'";
 var nyro_preload="'.($config['preload'] == 'non'?'false':'true').'";
 //onAjaxLoad is defined in private area only
 if (window.jQuery)
-(function($){if(typeof onAjaxLoad == "function") onAjaxLoad(init_f);
-	$(init_f);
+(function($){if(typeof onAjaxLoad == "function") onAjaxLoad(nyro_init);
+	$(nyro_init);
  })(jQuery);
 /* ]]> */</script>
 <link rel="stylesheet" href="'.url_absolue(find_in_path('styles/nyroModal.full.css')).'" type="text/css" media="all"/>
