@@ -12,13 +12,15 @@ function inc_recuperer_id3_dist($fichier,$info=null,$mime=null){
 	//return $ThisFileInfo;
 	if(sizeof($ThisFileInfo)>0){
 		// Cover art?
-		foreach($ThisFileInfo['id3v2']['APIC'] as $cle=>$val){
-		if (isset($ThisFileInfo['id3v2']['APIC'][$cle]['data']) && isset($ThisFileInfo['id3v2']['APIC'][$cle]['image_mime']) && isset($ThisFileInfo['id3v2']['APIC'][$cle]['dataoffset'])) {
-	            $imagechunkcheck = getid3_lib::GetDataImageSize($ThisFileInfo['id3v2']['APIC'][$cle]['data']);
-				spip_log($imagechunkcheck);
-	            $tmp_file = 'getid3-'.$ThisFileInfo['id3v2']['APIC'][$cle]['dataoffset'].'.'.getid3_lib::ImageTypesLookup($imagechunkcheck[2]);
-				if (ecrire_fichier(_NOM_TEMPORAIRES_ACCESSIBLES . $tmp_file, $ThisFileInfo['id3v2']['APIC'][$cle]['data'])) {
-					$id3['cover'.$cle] = _NOM_TEMPORAIRES_ACCESSIBLES . $tmp_file;
+		if(isset($ThisFileInfo['id3v2']['APIC'])){
+			foreach($ThisFileInfo['id3v2']['APIC'] as $cle=>$val){
+			if (isset($ThisFileInfo['id3v2']['APIC'][$cle]['data']) && isset($ThisFileInfo['id3v2']['APIC'][$cle]['image_mime']) && isset($ThisFileInfo['id3v2']['APIC'][$cle]['dataoffset'])) {
+		            $imagechunkcheck = getid3_lib::GetDataImageSize($ThisFileInfo['id3v2']['APIC'][$cle]['data']);
+					spip_log($imagechunkcheck);
+		            $tmp_file = 'getid3-'.$ThisFileInfo['id3v2']['APIC'][$cle]['dataoffset'].'.'.getid3_lib::ImageTypesLookup($imagechunkcheck[2]);
+					if (ecrire_fichier(_NOM_TEMPORAIRES_ACCESSIBLES . $tmp_file, $ThisFileInfo['id3v2']['APIC'][$cle]['data'])) {
+						$id3['cover'.$cle] = _NOM_TEMPORAIRES_ACCESSIBLES . $tmp_file;
+					}
 				}
 			}
 		}

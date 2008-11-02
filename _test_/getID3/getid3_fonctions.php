@@ -17,7 +17,6 @@ include_spip('inc/documents');
 			$output .= ($val) ? _T('getid3:'.$cle).' : '.$val.'<br />' : '';
 		}
 	}
-	
 	return $output;
 }
 
