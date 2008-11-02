@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_ide' => 'aux personnes enregistr&eacute;es ',
 	'item_all' => '&agrave; tous ',
 	'titre_ip' => 'Mode de fonctionnement :',
-	'info_ip' => 'Pour &ecirc;tre le plus facile possible d\'utilisation, la note est fix&eacute;e sur l\'adress IP du votant, ce qui &eacute;vite deux votes successifs dans la base, avec quelques inconv&eacute;nients... en particulier si vous g&eacute;rez des votes d\'auteurs.<br />
+	'info_ip' => 'Pour &ecirc;tre le plus facile possible d\'utilisation, la note est fix&eacute;e sur l\'adresse IP du votant, ce qui &eacute;vite deux votes successifs dans la base, avec quelques inconv&eacute;nients... en particulier si vous g&eacute;rez des votes d\'auteurs.<br />
                 Dans ce cas, on fixe la note sur l\'identifiant de l\'utilisateur (quand celui-ci est enregistr&eacute;, bien s&ucirc;r).<br />
                 Si vous voulez garantir l\'unicit&eacute; de la note, limitez le vote aux <b>seules</b> personnes enregistr&eacute;es (ci-dessus).',
 	'item_ip' => 'un votepar IP',
