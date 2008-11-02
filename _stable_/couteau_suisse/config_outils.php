@@ -25,24 +25,31 @@ add_outil( array(
 ));
 */
 
-/* pour SPIP 2.0
-define('_NO_CACHE',-1); -> ne jamais utiliser le cache ni meme creer les fichiers cache (Compat : 1)
-define('_NO_CACHE',1); -> ne pas utiliser le fichier en cache, mais stocker le resultat du calcul dans le fichier cache (Compat : 0)
-define('_NO_CACHE',0); -> toujours prendre tous les fichiers en cache 
- * La fonction retourne :
- * 1 si il faut mettre le cache a jour
- * 0 si le cache est valide
- * -1 si il faut calculer sans stocker en cache
-*/
+// SPIP<=1.92
 add_variable( array(
 	'nom' => 'radio_desactive_cache3',
 	'format' => _format_NOMBRE,
-	'radio' => defined('_SPIP19300')?array(1 => 'item_oui', 0 => 'item_non'):array(1 => 'item_oui', 0 => 'item_non'),
+	'radio' => array(0 => 'couteauprive:cache_nornal', 1 => 'couteauprive:cache_sans'),
 	'defaut' => 0,
-	// si la variable est egale a 1, on code...
-	// jquery.js et forms_styles.css restent en cache.
-	'code:%s' => "\$cs_fond = isset(\$GLOBALS['fond'])?\$GLOBALS['fond']:_request('page');
+	// si la variable est egale a 1, on code (jquery.js et forms_styles.css restent en cache)
+	'code:%s' => defined('_SPIP19300')?'':"\$cs_fond = isset(\$GLOBALS['fond'])?\$GLOBALS['fond']:_request('page');
 if (!in_array(\$cs_fond, array('jquery.js','forms_styles.css'))) \$_SERVER['REQUEST_METHOD']='POST';\n",
+));
+/*
+pour SPIP 2.0 :
+ define('_NO_CACHE',0); -> toujours prendre tous les fichiers en cache
+ define('_NO_CACHE',-1); -> ne jamais utiliser le cache ni meme creer les fichiers cache
+ define('_NO_CACHE',1); -> ne pas utiliser le fichier en cache, mais stocker le resultat du calcul dans le fichier cache
+ La fonction cache_valide() retourne :
+	'1' si il faut mettre le cache a jour, '0' si le cache est valide, '-1' s'il faut calculer sans stocker en cache
+*/
+add_variable( array(
+	'nom' => 'radio_desactive_cache4',
+	'format' => _format_NOMBRE,
+	'radio' => array(2 => 'couteauprive:cache_nornal', 0 => 'couteauprive:cache_permanent', -1 => 'couteauprive:cache_sans', 1 => 'couteauprive:cache_controle'),
+	'radio/ligne' => 2,
+	'defaut' => 2,
+	'code:%s!=2' => "define('_NO_CACHE',%s);\n",
 ));
 add_variable( array(
 	'nom' => 'duree_cache',
@@ -69,20 +76,12 @@ add_variable( array(
 	'defaut' => 0,
 	'code' => "\$GLOBALS['derniere_modif_invalide']=%s;\n",
 ));
-
-/*add_variable( array(
-	'nom' => 'exceptions_cache',
-	'format' => _format_CHAINE,
-	'defaut' => "''",
-	'code:strlen(%s)' => "define('_cache_PERSO', %s);",
-));*/
-// balise pour choisir le cache a appliquer aux articles
-
 add_outil( array(
 	'id' => 'spip_cache',
-	'code:spip_options' => "%%radio_desactive_cache3%%%%duree_cache%%%%duree_cache_mutu%%%%quota_cache%%%%derniere_modif_invalide%%",//%%exceptions_cache%%",
+	'code:spip_options' => "%%radio_desactive_cache".(defined('_SPIP19300')?'4':'3')
+		."%%%%duree_cache%%%%duree_cache_mutu%%%%quota_cache%%%%derniere_modif_invalide%%",
 	'categorie' => 'admin',
-//	'pipelinecode:insert_head' => 'if(defined(\'_cache_PERSO\')) cs_fixe_cache($GLOBALS[\'delais\']);'
+	'description' => (defined('_SPIP19300')?'<:spip_cache:2:>':'<:spip_cache:1:>').'<:spip_cache::>',
 ));
 
 	// ici on a besoin d'une case input. La variable est : dossier_squelettes

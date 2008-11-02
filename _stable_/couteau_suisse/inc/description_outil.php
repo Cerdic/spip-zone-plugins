@@ -23,6 +23,8 @@ define('_VAR_OUTIL', cs_code_echappement("<!--  VAR-OUTIL -->\n", 'OUTIL'));
 @define('_CS_FILE_OPTIONS', str_replace('../','',(defined('_FILE_OPTION') && strlen(_FILE_OPTION))?_FILE_OPTION:
 	(defined('_SPIP19100')?_DIR_RESTREINT.'mes_options.php':_DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php')
 ));
+
+@define('_CS_PLUGIN_JQUERY192', defined('_SPIP19300')?'':_T('couteauprive:detail_jquery3'));
 include_spip('inc/autoriser');
 if(defined('_SPIP19200')) {
 	// Qui sont les webmestres et les administrateurs ?
@@ -124,7 +126,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$descrip = isset($outil['description'])?$outil['description']:_T('couteauprive:'.$outil['id'].':description');
 	// reconstitution d'une description eventuellement morcelee
 	// exemple : <:mon_outil:3:> est remplace par _T('couteauprive:mon_outil:description3')
-	$descrip = preg_replace_callback(',<:([a-zA-Z_][a-zA-Z0-9_-]*):([0-9]+):>,', 'description_outil_descrip_callback', $descrip);
+	$descrip = preg_replace_callback(',<:([a-zA-Z_][a-zA-Z0-9_-]*):([0-9]*):>,', 'description_outil_descrip_callback', $descrip);
 	// remplacement des zone input de format [[label->variable]]
 	$descrip = preg_replace(',(\[\[([^][]*)->([^]]*)\]\]),msS', '<fieldset><legend>\\2</legend><div style="margin:0;">\\3</div></fieldset>', $descrip);
 	// remplacement des zone input de format [[tata %variable% toto]] en utilisant _T('couteauprive:label:variable') comme label
@@ -181,6 +183,12 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$res = str_replace('@puce@', definir_puce(), $res);
 	// remplacement des constantes
 	$res = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 'description_outil_const_callback', $res);
+	// deuxieme reconstitution d'une description introduite par les constantes
+//	$res = preg_replace_callback(',<:([a-zA-Z_][a-zA-Z0-9_-]*):([0-9]*):>,', 'description_outil_descrip_callback', $res);
+	// remplacement des blocs avec style
+	$res = str_replace(array('<q1>','</q1>','<q2>','</q2>','<q3>','</q3>'),
+//		array('<div class="q1">', '</div>', '<div class="q2">', '</div>', '<div class="q3">', '</div>'), $res);
+		array("<div style='margin:0 2em;'>", '</div>', '<div style="margin-left:2em;">', '</div>', '<div style="font-size:85%;">', '</div>'), $res);
 
 	$modif=$modif?'<div style="font-weight:bold; color:green; margin:0.4em; text-align:center">&gt;&nbsp;'._T('couteauprive:vars_modifiees').'&nbsp;&lt;</div>':'';
 	return cs_ajax_action_greffe("description_outil-$index", $res, $modif);
