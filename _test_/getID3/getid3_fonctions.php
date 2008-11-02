@@ -11,7 +11,11 @@ include_spip('inc/documents');
 	
 	$output = '';
 	foreach($id3_content as $cle => $val){
-		$output .= ($val) ? _T('getid3:'.$cle).' : '.$val.'<br />' : '';
+		if(preg_match('/cover/',$cle)){
+			$output .= ($val) ? '<img src='.$val.' /><br />' : '';
+		}else{
+			$output .= ($val) ? _T('getid3:'.$cle).' : '.$val.'<br />' : '';
+		}
 	}
 	
 	return $output;

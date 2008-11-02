@@ -11,6 +11,17 @@ function inc_recuperer_id3_dist($fichier,$info=null,$mime=null){
 	
 	//return $ThisFileInfo;
 	if(sizeof($ThisFileInfo)>0){
+		// Cover art?
+		foreach($ThisFileInfo['id3v2']['APIC'] as $cle=>$val){
+		if (isset($ThisFileInfo['id3v2']['APIC'][$cle]['data']) && isset($ThisFileInfo['id3v2']['APIC'][$cle]['image_mime']) && isset($ThisFileInfo['id3v2']['APIC'][$cle]['dataoffset'])) {
+	            $imagechunkcheck = getid3_lib::GetDataImageSize($ThisFileInfo['id3v2']['APIC'][$cle]['data']);
+				spip_log($imagechunkcheck);
+	            $tmp_file = 'getid3-'.$ThisFileInfo['id3v2']['APIC'][$cle]['dataoffset'].'.'.getid3_lib::ImageTypesLookup($imagechunkcheck[2]);
+				if (ecrire_fichier(_NOM_TEMPORAIRES_ACCESSIBLES . $tmp_file, $ThisFileInfo['id3v2']['APIC'][$cle]['data'])) {
+					$id3['cover'.$cle] = _NOM_TEMPORAIRES_ACCESSIBLES . $tmp_file;
+				}
+			}
+		}
 		$id3['titre'] = ($ThisFileInfo['comments_html']['title']['0']) ? $ThisFileInfo['comments_html']['title']['0'] : $ThisFileInfo['id3v2']['comments']['title']['0'] ;
 		$id3['artiste'] = ($ThisFileInfo['comments_html']['artist']['0']) ? $ThisFileInfo['comments_html']['artist']['0'] : $ThisFileInfo['id3v2']['comments']['artist']['0'] ;
 		$id3['album']  = ($ThisFileInfo['comments_html']['album']['0']) ? $ThisFileInfo['comments_html']['album']['0'] : $ThisFileInfo['id3v2']['comments']['album']['0'] ;
@@ -34,8 +45,9 @@ function inc_recuperer_id3_dist($fichier,$info=null,$mime=null){
 		$id3['channel_mode'] = $ThisFileInfo['audio']['channelmode'];
 		$id3['source'] = $ThisFileInfo['comments_html']['source']['0'];
 		$id3['mime'] = $ThisFileInfo['mime_type'];
+
 	}
-	spip_log($ThisFileInfo);
+	//spip_log($ThisFileInfo);
 	if(!$info){
 		return $id3;
 	}
