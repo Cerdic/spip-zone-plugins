@@ -70,6 +70,10 @@ function cs_compatibilite_ascendante() {
 	cs_suppr_metas_var('url_glossaire_externe', 'url_glossaire_externe2');
 	cs_suppr_metas_var('');
 	effacer_meta('cs_decoupe');
+	if(defined('_SPIP19300')) {
+		if($metas_vars['radio_desactive_cache3']==1) $metas_vars['radio_desactive_cache4']=-1;
+		cs_suppr_metas_var('radio_desactive_cache3');
+	}
 }
 
 /*************/
