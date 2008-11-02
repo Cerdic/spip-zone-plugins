@@ -1,4 +1,4 @@
-<?
+<?php
 // ---------------------------------------------
 //  Plugin admin_lang
 //	admin_lang_fonctions.php
