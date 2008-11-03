@@ -1,7 +1,7 @@
 <plugin>
   <nom>Notation</nom>
   <auteur>JEM - b_b</auteur>
-  <version>0.5</version>
+  <version>0.5.1</version>
   <version_base>0.5.0</version_base>
   <etat>dev</etat>
   <prefix>notation</prefix>
@@ -15,20 +15,32 @@
   </description>
   <icon>img_pack/note.gif</icon>
   <fonctions>notation_fonctions.php</fonctions>
-  <options>notation_options.php</options>
   <install>base/notation_upgrade.php</install>
+	 <pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/notation.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/notation.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/notation.php</inclure>
+	</pipeline>
 	<pipeline>
         <nom>ajouter_boutons</nom>
         <action>ajouterBoutons</action>
         <inclure>notation_fonctions.php</inclure>
 	</pipeline>
+
 	<pipeline>
-		<nom>insert_head</nom>
-		<inclure>notation_pipeline.php</inclure>
-	</pipeline>
-		<pipeline>
 		<nom>affichage_final</nom>
 		<action>affichage_final</action>
+		<inclure>notation_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
 		<inclure>notation_pipeline.php</inclure>
 	</pipeline>
 	<pipeline>

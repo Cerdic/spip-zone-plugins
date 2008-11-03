@@ -13,11 +13,6 @@
 include_spip('inc/notation_util');
 
 
-$p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_NOTATION', (_DIR_PLUGINS.end($p)));
-define('_NOM_PLUGIN_NOTATION', (end($p)));
-
-
 /** Filtre pour les tableaux :
 * transforme une liste (separee par de ,) en un tableau exploitable avec IN
 */
@@ -75,14 +70,6 @@ function notation_etoile($nb,$id){
 *  
 **/
 
-// balise type_boucle de Rastapopoulos dans le plugin étiquettes
-function balise_TYPE_BOUCLE($p) {
-	
-	$type = $p->boucles[$p->id_boucle]->id_table;
-	$p->code = $type ? $type : "balise_hors_boucle";
-	return $p;
-    
-}
 
 function balise_NOTATION_ETOILE($p){
 	$nb = interprete_argument_balise(1,$p);

@@ -3,17 +3,14 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 function balise_FORMULAIRE_NOTATION ($p) {
-	// on récupère le type d'objet de la boucle courante et son id
-	$b = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
-	$type = $p->boucles[$b]->type_requete;
-	$id_objet = $p->boucles[$b]->primary;
-	// et on les pass à la fonction suivante ATTENTION = type_boucle est interprété avec la balise type_boucle de /notation.php
+	// on prend nom de la cle primaire de l'objet pour calculer sa valeur
+    $_id_objet = $p->boucles[$p->id_boucle]->primary;
 	return calculer_balise_dynamique(
 		$p,
 		'FORMULAIRE_NOTATION',
 		array(
-			'type_boucle',
-			$id_objet
+			'NOTATION_TYPE_BOUCLE', // demande du type d'objet
+			$_id_objet
 		)
 	);
 
@@ -21,12 +18,33 @@ function balise_FORMULAIRE_NOTATION ($p) {
 
 
 function balise_FORMULAIRE_NOTATION_stat($args, $filtres) {
-	// on récupère les arguments
-	$type = $args[0];
+	// si on force les parametres par #FORMULAIRE_NOTATION{article,12}
+	// on enleve les parametres calcules
+	if (isset($args[3])) {
+		array_shift($args);
+		array_shift($args);
+	}
+	$objet = $args[0];
 	$id_objet = $args[1];
-	// et on les passe à la fonciton charger du formulaire CVT fomulaires/notation.php
-	return array($type, $id_objet);
+	// pas dans une boucle ? on generera une erreur ?
+	if ($objet == 'balise_hors_boucle') {
+		$objet = '';
+		$id_objet = '';
+	} else {		
+		$objet = table_objet($objet);
+	}
+	// on envoie les arguments à la fonction charger 
+	// du formulaire CVT fomulaires/notation.php
+	return array($objet, $id_objet);
 	
 }
-	
+
+// balise type_boucle de Rastapopoulos dans le plugin etiquettes
+// present aussi dans plugin ajaxforms...
+// bref, a integrer dans le core ? :p
+function balise_NOTATION_TYPE_BOUCLE($p) {
+	$type = $p->boucles[$p->id_boucle]->id_table;
+	$p->code = $type ? $type : "balise_hors_boucle";
+	return $p;  
+}
 ?>

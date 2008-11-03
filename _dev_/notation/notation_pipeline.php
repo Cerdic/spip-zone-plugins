@@ -1,7 +1,7 @@
 <?php
 
 function notation_header_prive($flux){
-	$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_NOTATION."css/notation.css' type='text/css' media='all' />\n";
+	$flux = notation_insert_head($flux);
 	return $flux;
 }
 
@@ -11,7 +11,7 @@ function notation_insert_head($flux){
 }
 
 function notation_affichage_final($flux){
-    if ((strpos($flux, '<div class="formulaire_notation') == true) or (strpos($flux, "class='formulaire_notation") == true)){
+    if (strpos($flux, "formulaire_notation") !== false){
 		$incHead .= "\n<link href='"._DIR_PLUGIN_NOTATION."css/jquery.rating.css' type='text/css' rel='stylesheet'/>\n";
 		$incHead .= "<script src='"._DIR_PLUGIN_NOTATION."javascript/jquery.MetaData.js' type='text/javascript'></script>\n";
 		$incHead .= "<script src='"._DIR_PLUGIN_NOTATION."javascript/jquery.rating.js' type='text/javascript'></script>\n";
