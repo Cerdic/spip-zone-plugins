@@ -33,7 +33,7 @@ function inc_geomap_append_clicable_map_dist($target_id,$target_lat_id,$target_l
 				formMap.addControl(new GLargeMapControl());
 				formMap.addControl(new GMapTypeControl());
 				formMap.addControl(new mapAddressControl());
-				formMap.setCenter(new GLatLng(lat,long), '.$view_zoom.', G_MAP_TYPE);'
+				formMap.setCenter(new GLatLng(lat,long), '.$view_zoom.');'
 	.($Marker?'
 				point = new GPoint(long,lat);
 				marker = new GMarker(point,{draggable:true});

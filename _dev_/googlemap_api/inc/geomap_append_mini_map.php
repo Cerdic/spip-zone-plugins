@@ -4,8 +4,8 @@
  * Insetar google maps en SPIP
  *
  * Autores :
- * Horacio Gonz‡lez, Berio Molina
- * (c) 2007 - Distribu’do baixo licencia GNU/GPL
+ * Horacio Gonzalez, Berio Molina
+ * (c) 2007 - Distribudo baixo licencia GNU/GPL
  *
  */
 
@@ -30,7 +30,7 @@ function inc_geomap_append_mini_map_dist($target_id,$target_lat_id,$target_long_
 				var long='.$view_long.';
 				var formMap = new GMap2(document.getElementById("'.$target_id.'"));
 				formMap.addControl(new GSmallMapControl());
-				formMap.setCenter(new GLatLng(lat,long), '.$view_zoom.', G_MAP_TYPE);'
+				formMap.setCenter(new GLatLng(lat,long), '.$view_zoom.'	);'
 	.($Marker?'
 				point = new GPoint(long,lat);
 				formMap.addOverlay(new GMarker(point));':'')

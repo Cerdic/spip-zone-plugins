@@ -4,8 +4,8 @@
  * Insetar google maps en SPIP
  *
  * Autores :
- * Horacio Gonz‡lez, Berio Molina
- * (c) 2007 - Distribu’do baixo licencia GNU/GPL
+ * Horacio Gonzalez, Berio Molina
+ * (c) 2007 - Distribudo baixo licencia GNU/GPL
  *
  */
 include_spip('inc/distant');

@@ -44,7 +44,7 @@ function inc_geomap_append_moveend_map_dist($target_id,$target_lat_id,$target_lo
 			formMap = new GMap2(document.getElementById("'.$target_id.'"));
 			formMap.addControl(new GLargeMapControl());
 			formMap.addControl(new GMapTypeControl());
-			formMap.setCenter(new GLatLng(lat,long), '.$view_zoom.', G_MAP_TYPE);
+			formMap.setCenter(new GLatLng(lat,long), '.$view_zoom.');
 			geocoder = new GClientGeocoder();'
 	.($Marker?'
 			point = new GPoint(parseFloat(long),parseFloat(lat));
