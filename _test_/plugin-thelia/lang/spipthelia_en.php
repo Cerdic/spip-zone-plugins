@@ -127,7 +127,8 @@ Write here information about the settlement by transfer ...<br /><br />',
 'retour_boutique' => 'Continue shopping',
 'mes_achats' => 'My purchases',
 'bonjour' => 'Hello',
-'actualiser' => 'refresh'
+'actualiser' => 'refresh',
+'prix' => 'price'
 
 
 
