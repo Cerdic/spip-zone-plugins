@@ -32,8 +32,8 @@
 
 	[(#REM) Fil d'Ariane ]
         <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:catalogue:></strong></div>
-	<BOUCLE_rechercheurlbase(SYNDIC_ARTICLES_PMB){0,1}>
-	[(#SET{notice, [(#ENV{id}|pmb_notice_extraire{#PMB_URL_BASE})]})]
+	[(#SET{notice, [(#ENV{id}|pmb_notice_extraire{#CONFIG{spip_pmb/url}})]})]
+	
 	<div class="cartouche">
             <div class="surlignable">
 				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
@@ -79,8 +79,7 @@
 		(#GET{notice}|pmb_notice_champ{'autres_lecteurs'})
 	</div>]
 
-	</BOUCLE_rechercheurlbase>
-
+	
 	
 		
       

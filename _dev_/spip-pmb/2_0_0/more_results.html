@@ -47,13 +47,12 @@
 		</div>
 		</B_articles>
 			
-		<BOUCLE_rechercheurlbase(SYNDIC_ARTICLES_PMB){0,1}>
 		<div class="menu articles" id="recherche-pmb">
 			<?php	
-				echo(extraire_element_distant("#PMB_URL_BASE", "/index.php?lvl=more_results&user_query=".$_REQUEST['recherche'], 'div#resultatrech'));
+				echo(extraire_element_distant("#CONFIG{spip_pmb/url}", "/index.php?lvl=more_results&user_query=".$_REQUEST['recherche'], 'div#resultatrech'));
 			 ?>
 		</div>
-		</BOUCLE_rechercheurlbase>
+		
 
 		
 		
