@@ -46,5 +46,5 @@
 	<necessite id="cfg" version="[1.10.1;]" />
 	<necessite id="lib:jquery-validate" src="http://plugins.jquery.com/files/jquery.validate_9.zip" />
 	<necessite id="SPIP" version='[2.0.0 dev;]' />
-	<necessite id='spip2' version='[1.0;]' />
+	<necessite id='spip_bonux' version='[1.2;]' />
 </plugin>
