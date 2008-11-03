@@ -4,8 +4,8 @@
  * Insetar google maps en SPIP
  *
  * Autores :
- * Horacio Gonz‡lez, Berio Molina
- * (c) 2007 - Distribu’do baixo licencia GNU/GPL
+ * Horacio Gonzalez, Berio Molina
+ * (c) 2007 - Distribudo baixo licencia GNU/GPL
  *
  */
 include_spip('base/abstract_sql');
@@ -124,7 +124,7 @@ function gis_mots($id_mot) {
 	
 	if ((isset($GLOBALS['meta']['gis_map']))&&($GLOBALS['meta']['gis_map']!='no')&&(strpos($GLOBALS['meta']['plugin'] , strtoupper($GLOBALS['meta']['gis_map'])))) {
 		$gis_append_mini_map = charger_fonction($GLOBALS['meta']['gis_map'].'_append_mini_map','inc');
-		$s .= '<div id="formMap" name="formMap" style="width: 180px; height: 180px"></div>';
+		$s .= '<div id="formMap" name="formMap" style="width: 180px; height: 180px;overflow:hidden;"></div>';
 		$s .= $gis_append_mini_map('formMap','form_lat','form_long',$glat,$glonx,'form_zoom',$gzoom,$row?true:false);
 	} else {
 		$s .= '<div>'. _T('gis:falta_plugin') .'</div>';

@@ -4,8 +4,8 @@
  * Insetar google maps en SPIP
  *
  * Autores :
- * Horacio Gonz‡lez, Berio Molina
- * (c) 2007 - Distribu’do baixo licencia GNU/GPL
+ * Horacio Gonzalez, Berio Molina
+ * (c) 2007 - Distribudo baixo licencia GNU/GPL
  *
  */
 
@@ -14,7 +14,7 @@ include_spip('exec/gis');
 function gis_ajouterBoutons($boutons_admin) {
 	// si eres administrador
 	if (autoriser('administrer','gis')) {
-    // vese o bot—n na barra de "configuraci—n"
+    // vese o boton na barra de "configuracion"
 	    $boutons_admin['configuration']->sousmenu['gis_config']= new Bouton(
 		    _DIR_PLUGIN_GIS.'img_pack/correxir.png', _T('gis:configuration'));
 	}
