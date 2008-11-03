@@ -221,4 +221,11 @@ function image_watermark($im) {
 	return image_ecrire_tag($image,array('src'=>$dest,'width'=>$x_dest,'height'=>$y_dest));
 }
 
+function doc_download($url) {
+	if (!empty($url)) {
+ 		return generer_url_action("album_download","file=".$url,true);
+	} else {
+		return;
+	}
+}
 ?>

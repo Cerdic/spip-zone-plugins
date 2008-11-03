@@ -1,0 +1,35 @@
+<BOUCLE_download(ARTICLES documents_articles documents){id_document}>
+
+[(#REM)
+
+	Modele pour <img>
+
+	Affiche un tableau de documents image à telecharger.
+
+]
+
+#SET{taille, #ENV{taille, #CONFIG{album/taille, 450}}}
+<B_galerie>
+[(#ANCRE_PAGINATION)]
+<table style="text-align:center; width:99%;">
+<BOUCLE_galerie(DOCUMENTS){id_article}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}{pagination 10}>
+[(#COMPTEUR_BOUCLE|alterner{'<tr>',''})]
+<td style="margin:5px; vetical-align:top; width:50%;" >
+<span class="spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok" style="[float:(#ENV{align}|match{left|right}); ]height:#GET{taille}px; width:#GET{taille}px;">
+	<dl class="catalog">
+		[<div class="image"><a [href="(#URL_DOCUMENT|doc_download)"]><img src="(#FICHIER)"[ width="(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{width})"][ height="(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{height})"][ alt='(#TITRE|supprimer_numero|texte_backend)'] title="<:album:cliquez_ici_pour_telecharger_l_image:>." /></a></div>]
+			[<dt class='titre'>(#TITRE)</dt>]
+			[<dd class='taille'><:album:taille:> : (#TAILLE|taille_en_octets)</dd>]
+			[<dd class='taille'><:album:dimension:> : (#LARGEUR) x [(#HAUTEUR)]</dd>]
+			[<dd class='date'><:album:publie_le:> : (#DATE|affdate{'d/m/y'})</dd>]
+			[<dd class='descriptif'>(#DESCRIPTIF)#NOTES</dd>]
+    	</dl>
+	</span>
+</td>
+[(#COMPTEUR_BOUCLE|alterner{'','</tr>'})]
+</BOUCLE_galerie>
+</table>
+<br class="nettoyeur" />
+[<p>(#PAGINATION)</p>]
+</B_galerie>
+</BOUCLE_download>

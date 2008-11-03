@@ -32,12 +32,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cfg_titre' => 'Configuration du plugin SPIP-Album',
 'cfg_watermark' => 'Configuration de l\'option Watermark',
 'clic_photo' => 'Cliquer sur la photo pour la visualiser dans sa taille originale.',
+'cliquez_ici_pour_telecharger_l_image' => 'Cliquez ici pour t&eacute;l&eacute;charger l\'image',
 'close' => 'fermer',
 'croissant' => 'Croissant',
 
 // D
 'decroissant' => 'D&eacute;croissant',
 'desactive' => 'D&eacute;sactiv&eacute;',
+'dimension' => 'Dimension',
 
 // E
 
@@ -67,6 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // P
 'photos' => 'Photos',
+'publie_le' => 'Publi&eacute; le',
 'precedent' => 'Pr&eacute;c&eacute;dent',
 
 // R
@@ -78,6 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'suivant' => 'Suivant',
 
 // T
+'taille' => 'Taille',
 'text' => 'Copyright sous forme de texte',
 'top' => 'Haut de l\'image',
 

@@ -27,7 +27,7 @@
 ]
 
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[width:(#GET{width}|min{350}|max{120})]px;']>
-<dt>[<a href="(#GET{url}|sinon{[(#LOGO_DOCUMENT||image_watermark|extraire_attribut{src})]})"[ class="(#ENV{lien_class})"][ title="(#TITRE|supprimer_numero|texte_backend)"][ (#ENV{lien}|?{'',type="#MIME_TYPE"})][(#MODE|=={vignette}|?{rel="imagebox-img", ''})]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}'[ alt='(#GET{titre}|?{#GET{titre},#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]})'] /></a></dt>[
+<dt>[<a href="(#GET{url}|doc_download|sinon{[(#LOGO_DOCUMENT||image_watermark|extraire_attribut{src})]})"[ class="(#ENV{lien_class})"][ title="(#TITRE|supprimer_numero|texte_backend)"][ (#ENV{lien}|?{'',type="#MIME_TYPE"})][(#MODE|=={vignette}|?{rel="imagebox-img", ''})]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}'[ alt='(#GET{titre}|?{#GET{titre},#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]})'] /></a></dt>[
 <dt class='spip_doc_titre'[ style='width:(#GET{width}|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
 <dd class='spip_doc_descriptif'[ style='width:(#GET{width}|min{350}|max{120})px;']>(#DESCRIPTIF)#NOTES</dd>]
 </dl>

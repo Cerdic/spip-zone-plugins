@@ -28,15 +28,15 @@ var init_diapo = function(){
 			autoplay: 5,
 			random: false,
 			images: [
-<BOUCLE_imgarticle(ARTICLES documents_articles documents){id_document}><BOUCLE_imgdocart(DOCUMENTS){id_article}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}{", "}>
+<BOUCLE_imgarticle(ARTICLES documents_articles documents){id_document}><BOUCLE_imgdocart(DOCUMENTS){id_article}{extension IN png,jpg,gif}{par num titre, date}{date<=#ENV{date}}{inverse #GET{sens}}{", "}>
 						{ src: '[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]', caption: '[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]' }</BOUCLE_imgdocart></BOUCLE_imgarticle>
-<BOUCLE_imgbreve(BREVES documents_breves documents){id_document}><BOUCLE_imgdocbreve(DOCUMENTS){id_breve}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}{", "}>
+<BOUCLE_imgbreve(BREVES documents_breves documents){id_document}><BOUCLE_imgdocbreve(DOCUMENTS){id_breve}{extension IN png,jpg,gif}{par num titre, date}{date<=#ENV{date}}{inverse #GET{sens}}{", "}>
 						{ src: '[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]', caption: '[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]' }</BOUCLE_imgdocbreve></BOUCLE_imgbreve>
-<BOUCLE_imgrub(RUBRIQUES documents_rubriques documents){id_document}><BOUCLE_imgdocrub(DOCUMENTS){id_rubrique}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}{", "}>
+<BOUCLE_imgrub(RUBRIQUES documents_rubriques documents){id_document}><BOUCLE_imgdocrub(DOCUMENTS){id_rubrique}{extension IN png,jpg,gif}{par num titre, date}{date<=#ENV{date}}{inverse #GET{sens}}{", "}>
 						{ src: '[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]', caption: '[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]' }</BOUCLE_imgdocrub></BOUCLE_imgrub>
-<BOUCLE_imgrubrique(DOCUMENTS documents_articles articles types_documents){id_rubrique}{statut=publie}{extension IN png,jpg,gif}{par date}{inverse #GET{sens}}{0,#GET{increment}}{", "}>
+<BOUCLE_imgrubrique(DOCUMENTS documents_articles articles types_documents){id_rubrique}{statut=publie}{extension IN png,jpg,gif}{par date}{date<=#ENV{date}}{inverse #GET{sens}}{0,#GET{increment}}{", "}>
 						{ src: '[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]', caption: '[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]' }</BOUCLE_imgrubrique>
-<BOUCLE_imgsecteur(DOCUMENTS documents_articles articles types_documents){id_secteur ?}{statut=publie}{extension IN png,jpg,gif}{par date}{inverse #GET{sens}}{0,#GET{increment}}{", "}>
+<BOUCLE_imgsecteur(DOCUMENTS documents_articles articles types_documents){id_secteur ?}{statut=publie}{extension IN png,jpg,gif}{par date}{date<=#ENV{date}}{inverse #GET{sens}}{0,#GET{increment}}{", "}>
 						 { src: '[(#LOGO_DOCUMENT||image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]', caption: '[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]' }</BOUCLE_imgsecteur><//B_imgrubrique><//B_imgrub><//B_imgbreve><//B_imgarticle>
 					]
 		}

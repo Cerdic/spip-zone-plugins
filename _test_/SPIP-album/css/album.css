@@ -89,6 +89,16 @@
 	-khtml-opacity: 1;
 	opacity: 1; }
 
+/*  --------------------------------------------------------
+    Definition des styles propres a l'affichage en catalogue
+    -------------------------------------------------------- */
+.catalog { padding:0.5em; }
+.catalog .image { margin:0; text-align:center; }
+.catalog .titre { font-weight: bold; margin:0; text-align:center; }
+.catalog .taille { font-size:0.77em; margin:0; text-align:center; }
+.catalog .date { font-size:0.77em; margin:0; padding-bottom:0.4em; text-align:center; }
+.catalog .descriptif { font-size:0.9em; font-style:italic; margin:0; text-align:justify;  }
+
 /*  ------------------------------------------------------
     Definition des styles propres a l'affichage en livre
     ------------------------------------------------------ */
