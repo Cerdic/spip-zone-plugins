@@ -86,6 +86,7 @@ function pmb_serie_extraire($id_serie, $url_base, $pmb_page=1) {
 			$tableau_resultat[0]['titre_serie'] = $htmldom->find('#aut_see h3',0)->innertext;
 			
 			$resultats_recherche = $htmldom->find('.child');
+			$tableau_resultat[0]['nb_resultats'] = count($resultats_recherche);
 			$i = 1;
 			foreach($resultats_recherche as $res) {
 				$tableau_resultat[$i] = Array();				
@@ -108,6 +109,7 @@ function pmb_collection_extraire($id_collection, $url_base, $pmb_page=1) {
 			$tableau_resultat[0]['collections_infos'] = $htmldom->find('#aut_see ul',0)->outertext;
 			
 			$resultats_recherche = $htmldom->find('.child');
+			$tableau_resultat[0]['nb_resultats'] = count($resultats_recherche);
 			$i = 1;
 			foreach($resultats_recherche as $res) {
 				$tableau_resultat[$i] = Array();				
@@ -135,6 +137,7 @@ function pmb_editeur_extraire($id_editeur, $url_base, $pmb_page=1) {
 			}
 			
 			$resultats_recherche = $htmldom->find('.child');
+			$tableau_resultat[0]['nb_resultats'] = count($resultats_recherche);
 			$i = 1;
 			foreach($resultats_recherche as $res) {
 				$tableau_resultat[$i] = Array();				
@@ -156,6 +159,7 @@ function pmb_auteur_extraire($id_auteur, $url_base, $pmb_page=1) {
 			$tableau_resultat[0]['titre_auteur'] = $htmldom->find('#aut_see h3',0)->innertext;
 			
 			$resultats_recherche = $htmldom->find('.child');
+			$tableau_resultat[0]['nb_resultats'] = count($resultats_recherche);
 			$i = 1;
 			foreach($resultats_recherche as $res) {
 				$tableau_resultat[$i] = Array();				
@@ -176,6 +180,7 @@ function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS='', $lo
 			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
 
 			$resultats_recherche = $htmldom->find('.child');
+			$tableau_resultat[0]['nb_resultats'] = count($resultats_recherche);
 			$i = 1;
 			foreach($resultats_recherche as $res) {
 				$tableau_resultat[$i] = Array();				

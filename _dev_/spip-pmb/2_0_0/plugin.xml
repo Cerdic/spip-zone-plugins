@@ -18,7 +18,8 @@ _ &#169; 2008 - Licence GPL
 	</etat>
 	<description>
 	Ce plugin permet d'interfacer SPIP avec un catalogue en ligne sous PMB. Il fournit des boucles, balises et critères pour parcourir le catalogue depuis
-	vos squelettes. 
+	vos squelettes. <br />
+	[acc&egrave;s au panneau de configuration pour param&eacute;trer le plugin->.?exec=cfg&amp;cfg=spip_pmb] 
 	</description>
 	<lien>http://www.spip-contrib.net/Interface-PMB-pour-SPIP</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
@@ -32,10 +33,6 @@ _ &#169; 2008 - Licence GPL
   		<action>traitement_flux</action>
   		<inclure>pmb_parsing.php</inclure>
  	</pipeline>
-
-	
-		
-
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
@@ -45,6 +42,7 @@ _ &#169; 2008 - Licence GPL
 	pmb
 	</prefix>
 
+ 	<necessite id="CFG" version="[1.0;]" />
+	<necessite id='spip' version='[1.9.2;]' />
 
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>

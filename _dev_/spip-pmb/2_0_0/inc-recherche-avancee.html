@@ -10,7 +10,8 @@
 
 			<form name='search_input' action='index.php#resultats_recherche' method='get' onSubmit="if (search_input.user_query.value.length == 0) { search_input.user_query.value='*'; return true; }">
 
-				 <select name='typdoc'>  <option  value=''>tout type de document</option>
+				 <select name='typdoc'>  
+					  <option  value=''>tout type de document</option>
 					  <option  value='2'[(#ENV{typdoc}|=={2}|?{' ',''})selected="selected")]></option>
 					  <option  value='8'[(#ENV{typdoc}|=={8}|?{' ',''})selected="selected")]></option>
 					

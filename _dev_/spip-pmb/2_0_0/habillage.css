@@ -274,6 +274,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .web h2 { font-family: Arial, sans-serif; text-transform: uppercase; font-size: .9em; }
 .web ul { background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: top left; padding-top: .5em; margin-top: .2em; border: none; }
 .web ul li { font-size: .8em; border: none; margin: 0; }
+.web ul li li { font-size: 1em; }
 .web ul li a { color: #333300; border-bottom: 1px dotted #333300; padding-right: 0; background-image: none; }
 .web ul li a:hover { color: #333333; text-decoration: none; border-bottom: 1px solid #333300; }
 
