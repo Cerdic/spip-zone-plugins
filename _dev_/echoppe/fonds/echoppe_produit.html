@@ -9,10 +9,9 @@
 				
 				<fieldset id="date_mise_en_vente" style="float: left;">
 					<b><:echoppe:date_de_mise_en_vente:></b><br />
-					[(#DATE_DEBUT|affdate)]<br />
-					<input type="text" size="1" class="formo" maxlength="2" name="jour_date_en_ligne" value="[(#DATE_DEBUT|affdate{'d'})]" /> / 
-					<input type="text" size="1" class="formo" maxlength="2" name="mois_date_en_ligne" value="[(#DATE_DEBUT|affdate{'m'})]"> / 
-					<input type="text" size="5" class="formo" maxlength="4" name="annee_date_en_ligne" value="[(#DATE_DEBUT|affdate{'Y'})]" /><br />
+					<input type="text" size="1"  maxlength="2" name="jour_date_en_ligne" value="[(#DATE_DEBUT|affdate{'d'})]" /> / 
+					<input type="text" size="1"  maxlength="2" name="mois_date_en_ligne" value="[(#DATE_DEBUT|affdate{'m'})]"> / 
+					<input type="text" size="5"  maxlength="4" name="annee_date_en_ligne" value="[(#DATE_DEBUT|affdate{'Y'})]" /><br />
 					<input type="checkbox" name="ignorer_date_mise_en_vente" onclick="$('#date_mise_en_vente').disabled();" /><:echoppe:ignorer_date_mise_en_vente:>
 				</fieldset>
 			
@@ -20,10 +19,9 @@
 				
 				<fieldset id="date_retrait_de_vente" style="float: right;" >
 					<b><:echoppe:date_de_retrait_de_vente:></b><br />
-					[(#DATE_FIN|affdate)]<br />
-					<input type="text" size="1" class="formo" maxlength="2" name="jour_date_retrait_ligne" value="[(#DATE_FIN|affdate{'d'})]"/> / 
-					<input type="text" size="1" class="formo" maxlength="2" name="mois_date_retrait_ligne" value="[(#DATE_FIN|affdate{'m'})]" /> / 
-					<input type="text" size="5" class="formo" maxlength="4" name="annee_date_retrait_ligne" value="[(#DATE_FIN|affdate{'Y'})]" /><br />
+					<input type="text" size="1"  maxlength="2" name="jour_date_retrait_ligne" value="[(#DATE_FIN|affdate{'d'})]"/> / 
+					<input type="text" size="1"  maxlength="2" name="mois_date_retrait_ligne" value="[(#DATE_FIN|affdate{'m'})]" /> / 
+					<input type="text" size="5"  maxlength="4" name="annee_date_retrait_ligne" value="[(#DATE_FIN|affdate{'Y'})]" /><br />
 					<input type="checkbox" name="ignorer_date_mise_en_vente" /><:echoppe:ignorer_date_de_retrait_de_vente:>
 				</fieldset>
 			
@@ -53,9 +51,9 @@
 				[(#SET{'current_id',#ID_CATEGORIE})]
 				
 				<select name="id_new_categorie">
-					<BOUCLE_LesCategorie(SPIP_ECHOPPE_CATEGORIES)>
-					<option value="#ID_CATEGORIE" [(#ID_CATEGORIE|=={#GET{'current_id'}}|?{'selected',''})]><BOUCLE_LeTitre(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS){id_categorie = #ID_CATEGORIE}>#ID_CATEGORIE [(#TITRE|couper{80})]</BOUCLE_LeTitre></option>
-					</BOUCLE_LesCategorie>
+					<BOUCLE_LesCateg(ECHOPPE_CATEGORIES){tout}>
+					<option value="#ID_CATEGORIE" [(#ID_CATEGORIE|=={#GET{'current_id'}}|?{'selected',''})]><BOUCLE_LeTitre(SPIP_ECHOPPE_CATEGORIES){id_categorie = #ID_CATEGORIE}>#ID_CATEGORIE [(#TITRE|couper{80})]</BOUCLE_LeTitre></option>
+					</BOUCLE_LesCateg>
 				</select>
 			</div>
 			<br />

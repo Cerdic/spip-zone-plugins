@@ -3,7 +3,7 @@
 	<h3><:echoppe:les_options_du_produit:></h3>
 	</B_LesOptionsDuProduit>
 		<ul>
-	<BOUCLE_LesOptionsDuProduit(SPIP_ECHOPPE_OPTIONS_DESCRIPTIONS spip_echoppe_options){id_produit}>
+	<BOUCLE_LesOptionsDuProduit(ECHOPPE_OPTIONS){id_produit}>
 		<li><a href="#EVAL{echoppe_edit_option}|generer_url_ecrire{id_option=#ID_OPTION}">#TEXTE</a></li>
 	</BOUCLE_LesOptionsDuProduit>
 		</ul>

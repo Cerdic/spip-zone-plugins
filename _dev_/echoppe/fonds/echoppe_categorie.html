@@ -15,7 +15,7 @@
 		
 		<BOUCLE_LesSousCategorie(ECHOPPE_CATEGORIES){id_parent = #ID_CATEGORIE}{par num titre}>
 		<div class="cadre-sous_rub" style="float: left; width: 40%; margin: 5px; height: 80px;">
-			<strong><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">#TITRE</a></strong>
+			<strong><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">[(#TITRE|sinon{<em><:sans_titre:></em>})]</a></strong>
 			[<div class="verdana1 cadre_padding">(#DESCRIPTIF|couper{80})</div>]
 		</div>
 		</BOUCLE_LesSousCategorie>

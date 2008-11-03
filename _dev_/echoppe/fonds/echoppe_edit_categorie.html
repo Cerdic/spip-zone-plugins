@@ -1,35 +1,41 @@
 [(#CHEMIN{images/categorie-24.png}|debut_cadre_trait_couleur{1,"",[(#TITRE|sinon{#NEW|=={oui}|?{<:echoppe:nouvelle_categorie:>,<em><:pas_de_titre:></em>}})],"",categorie})]
 	<form action="[(#EVAL{echoppe_sauver_categorie}|generer_url_action{id_categorie=#ID_CATEGORIE&lang_categorie=#LANG_CATEGORIE})]" method="post" >
-		<input type="hidden" name="categorie[lang]" value="#LANG_CATEGORIE" />
-		<input type="hidden" name="categorie[id_parent]" value="#ID_PARENT" />
-		<input type="hidden" name="redirect" value="[(#EVAL{echoppe}|generer_url_action)]" />
-		[<input type="hidden" name="new" value="(#NEW)" />]
-		<input type="hidden" name="categorie[id_categorie]" value="#ID_CATEGORIE" />
-		<b><:echoppe:titre_categorie:></b><br />
-		<input type="text" class="forml" name="categorie[titre]" value="#TITRE"/><br />
-		
-		
-		<b><:echoppe:dans_la_categorie:></b><br />
-		<B_les_categ>
-		<select name="categorie[id_parent]" >
-			<option value="0"><:echoppe:a_la_racine:></option>
-		<BOUCLE_les_categ(ECHOPPE_CATEGORIES)>
-			<option value="#ID_CATEGORIE">#TITRE</option>
-		</BOUCLE_les_categ>
-		</select>
-		</B_les_categ>
-		<input type="text" class="forml" name="fake_id_parent" value="<:echoppe:a_la_racine:>" disabled="disabled" />
-		<input type="hidden" name="categorie[id_parent]" value="0" />
-		<//B_les_categ>
-		<br />
-		<br />
-		<b><:echoppe:descriptif:></b><br />
-		<textarea name="categorie[descriptif]" class="forml" >#DESCRIPTIF**</textarea><br />
-		<b><:echoppe:texte:></b><br />
-		[(#EVAL{text_area}|barre_typo)]
-		<textarea name='categorie[texte]' id='text_area' class='barre_inserer forml' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
-				(#ENV**{browser_caret,''})]>[(#TEXTE**)]</textarea>
-		
-		<input type="submit" class="fondo" />
+		<div>
+			<input type="hidden" name="lang" value="#LANG_CATEGORIE" />
+			<input type="hidden" name="id_parent" value="#ID_PARENT" />
+			<input type="hidden" name="redirect" value="[(#EVAL{echoppe}|generer_url_action)]" />
+			[<input type="hidden" name="new" value="(#NEW)" />]
+			<input type="hidden" name="id_categorie" value="#ID_CATEGORIE" />
+		</div>
+		<ul>
+			<li>
+				<label for="titre_categorie"><:echoppe:titre_categorie:></label>
+				<input type="text" class="forml" id="titre_categorie" name="titre_categorie" value="#TITRE"/><br />
+			</li>
+			<B_les_categ>
+				<li>
+					<label><:echoppe:dans_la_categorie:></label>
+					<select name="id_parent" class="forml" >
+						<option value="0"><:echoppe:a_la_racine:></option>
+					<BOUCLE_les_categ(ECHOPPE_CATEGORIES)>
+						<option value="#ID_CATEGORIE">#TITRE</option>
+					</BOUCLE_les_categ>
+					</select>
+				<li>
+			</B_les_categ>
+			<input type="text" class="forml" name="fake_id_parent" value="<:echoppe:a_la_racine:>" disabled="disabled" />
+			<input type="hidden" name="id_parent" value="0" />
+			<//B_les_categ>
+			<li>
+				<label for="descriptif_categorie" ><:echoppe:descriptif:></label><br />
+				<textarea name="descriptif" id="descriptif_categorie" class="forml" >#DESCRIPTIF**</textarea>
+			</li>
+			<li>
+				<label for="text_area" ><:echoppe:texte:></label><br />
+				[(#EVAL{text_area}|barre_typo)]
+				<textarea name='texte' id='text_area' class='barre_inserer forml' rows='30' cols='40'[(#ENV**{browser_caret,''})]>[(#TEXTE**)]</textarea>
+			</li>
+			<input type="submit" class="fondo" />
+		</ul>
 	</form>
 [(#EVAL{1}|fin_cadre_trait_couleur)]
