@@ -19,7 +19,6 @@ function agenda_ajouter_onglets($flux) {
  * @return unknown
  */
 function agenda_header_prive($flux) {
-	$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('img_pack/agenda.css').'" media="screen" />'."\n";
 	$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('img_pack/datePicker.css').'" media="screen" />'."\n";
 	return $flux;
 }
