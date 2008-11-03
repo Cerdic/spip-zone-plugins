@@ -14,7 +14,7 @@ function generer_raccourcis_echoppe(){
 	$raccourcis .= "<br />";
 	$raccourcis .= icone_horizontale(_T('echoppe:gerer_les_prestataire_paiement'), generer_url_ecrire("echoppe_gerer_prestataire_paiement"), _DIR_PLUGIN_ECHOPPE."images/credit_cards.png","", false);
 	$raccourcis .= "<hr />";
-	$raccourcis .= icone_horizontale(_T('echoppe:configurer_echoppe'), generer_url_ecrire("cfg","cfg=echoppe","&"), find_in_path('cfg-22.png'),"", false);
+	$raccourcis .= icone_horizontale(_T('echoppe:configurer_echoppe'), generer_url_ecrire("cfg","cfg=echoppe",false), find_in_path('cfg-22.png'),"", false);
 	
 	return $raccourcis;
 }
