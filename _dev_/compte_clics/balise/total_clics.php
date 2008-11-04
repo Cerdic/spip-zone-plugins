@@ -39,7 +39,7 @@ function balise_TOTAL_CLICS_dyn($id_syndic = 0, $id_syndic_article = 0) {
 	}
 	else return '';
 
-	spip_fetch_array($r);
+	$o = spip_fetch_array($r);
 	return $o['clic_compteur'] ;
 }
 
