@@ -1028,13 +1028,13 @@ add_outil( array(
 	'pipeline:pre_edition' => 'moderation_vip',
 ));
 add_variable( array(
-'nom' => 'moderation_admin', 'check' => 'couteauprive:moderation_admins', 'defaut' => 1, 'code:%s' => "define('_MOD_MOD_ADMIN',%s)",
+'nom' => 'moderation_admin', 'check' => 'couteauprive:moderation_admins', 'defaut' => 1, 'code:%s' => "define('_MOD_MOD_ADMIN',%s);",
 ));
 add_variable( array(
-'nom' => 'moderation_redac', 'check' => 'couteauprive:moderation_redacs', 'defaut' => 0, 'code:%s' => "define('_MOD_MOD_REDAC',%s)",
+'nom' => 'moderation_redac', 'check' => 'couteauprive:moderation_redacs', 'defaut' => 0, 'code:%s' => "define('_MOD_MOD_REDAC',%s);",
 ));
 add_variable( array(
-'nom' => 'moderation_visit', 'check' => 'couteauprive:moderation_visits', 'defaut' => 0, 'code:%s' => "define('_MOD_MOD_VISIT',%s)",
+'nom' => 'moderation_visit', 'check' => 'couteauprive:moderation_visits', 'defaut' => 0, 'code:%s' => "define('_MOD_MOD_VISIT',%s);",
 ));
 
 // Ajout des outils personnalises
