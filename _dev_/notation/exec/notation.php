@@ -23,10 +23,11 @@ function petit_titre($titre){
 }
 
 function exec_notation(){
-	if (ecrire_menu()){
-		$flux = recuperer_fond('fonds/notation_recap', $contexte=array());
-		echo "$flux";
-	}
+	notation_ecrire_menu();
+	
+	$flux = recuperer_fond('fonds/notation_recap', $contexte=array());
+	echo "$flux";
+	
 	// Fin de la page
 	echo fin_gauche(), fin_page();
 }

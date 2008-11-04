@@ -1,0 +1,48 @@
+<!-- autoriser=configurer -->
+<!-- nom=notation -->
+
+
+#CACHE{0}
+[(#CHEMIN{img_pack/poids.gif}|debut_cadre_trait_couleur{1,"",<:notation:ponderation:>})]
+	[(#VAL|debut_cadre_relief{1})]
+			<span class='verdana2'><:notation:info_ponderation:></span>
+	[(#VAL{1}|fin_cadre_relief)]
+	<:notation:exemple{ponderation=#ENV*{ponderation}}:>
+	<table class="spip"><tr>
+	<td><:notation:nbvotes:></td><td>1</td><td>10</td><td>25</td><td>50</td><td>100</td><td>150</td><td>200</td>
+	</tr><tr>
+	<td><:notation:note:></td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td>
+	</tr><tr>
+	<td><:notation:note_pond:></td>
+	<td>[(#VAL{5}|notation_ponderee{1})]</td>
+	<td>[(#VAL{5}|notation_ponderee{10})]</td>
+	<td>[(#VAL{5}|notation_ponderee{25})]</td>
+	<td>[(#VAL{5}|notation_ponderee{50})]</td>
+	<td>[(#VAL{5}|notation_ponderee{100})]</td>
+	<td>[(#VAL{5}|notation_ponderee{150})]</td>
+	<td>[(#VAL{5}|notation_ponderee{200})]</td>
+	</tr></table>
+	
+	
+		<div class="formulaire_spip formulaire_configurer_notation formulaire_configurer_notation_ponderation">
+		[<div class="formulaire_message formulaire_message_ok">(#ENV*{message_ok})</div>]
+		[<div class="formulaire_message formulaire_message_erreur">(#ENV*{message_erreur})</div>]
+
+		<form method="post" action="#SELF">
+		<div>
+		#ACTION_FORMULAIRE{#SELF}
+		<ul>
+			<li class="editer_notation_ponderation">
+				<label for="notation_ponderation"><:notation:valeur_ponderation:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ponderation})</span>]
+				<input type="text" name="ponderation" class="text" value="#ENV{ponderation}" id="notation_ponderation" size='8' />				
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:oK:>" class="submit" />
+		</p>
+		</div>
+		</form>
+		</div>
+
+[(#VAL{1}|fin_cadre_trait_couleur)]

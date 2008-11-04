@@ -1,0 +1,68 @@
+<!-- autoriser=configurer -->
+<!-- nom=notation -->
+
+
+#CACHE{0}
+[(#VAL{redacteurs-24.gif}|debut_cadre_trait_couleur{1,"",<:notation:acces:>})]
+
+		[(#VAL|debut_cadre_relief{1,'',<:notation:titre_ip:>})]
+			<span class='verdana2'><:notation:info_ip:></span>
+		[(#VAL{1}|fin_cadre_relief)]
+		
+		<div class="formulaire_spip formulaire_configurer_notation formulaire_configurer_notation_acces">
+		[<div class="formulaire_message formulaire_message_ok">(#ENV*{message_ok})</div>]
+		[<div class="formulaire_message formulaire_message_erreur">(#ENV*{message_erreur})</div>]
+
+		<form method="post" action="#SELF">
+		<div>
+		#ACTION_FORMULAIRE{#SELF}
+		<ul>
+			<li class="fieldset">
+				<h3 class="legend"><:notation:info_acces:></h3>
+				<ul>
+					<li class="editer_notation_acces">
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{acces})</span>]
+						<div class="choix">
+							<input type="radio" name="acces" class="radio" value="adm"
+								[ (#ENV{acces}|=={adm}|oui)checked="checked"] id="notation_acces_admin" />				
+							<label for="notation_acces_admin"><:notation:item_adm:></label>
+						</div>
+						<div class="choix">
+							<input type="radio" name="acces" class="radio" value="aut"
+								[ (#ENV{acces}|=={aut}|oui)checked="checked"] id="notation_acces_aut" />				
+							<label for="notation_acces_aut"><:notation:item_aut:></label>
+						</div>
+						<div class="choix">
+							<input type="radio" name="acces" class="radio" value="ide"
+								[ (#ENV{acces}|=={ide}|oui)checked="checked"] id="notation_acces_ide" />				
+							<label for="notation_acces_ide"><:notation:item_ide:></label>
+						</div>
+						<div class="choix">
+							<input type="radio" name="acces" class="radio" value="all"
+								[ (#ENV{acces}|=={all}|oui)checked="checked"] id="notation_acces_all" />				
+							<label for="notation_acces_all"><:notation:item_all:></label>
+						</div>
+					</li>
+				</ul>
+			</li>
+			<li class="fieldset">
+				<h3 class="legend"><:notation:info_modifications:></h3>
+				<ul>
+					<li class="editer_notation_modifier_note">
+						<div class="choix">
+						<input type="checkbox" name="change_note" class="checkbox" id="notation_changer_note"[ (#ENV{change_note}|=={oui}|oui)checked="checked"] value="oui" />
+						<label for="notation_changer_note"><:notation:change_note_label:></label>
+						</div>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:oK:>" class="submit" />
+		</p>
+		</div>
+		</form>
+		</div>
+		
+[(#VAL{1}|fin_cadre_trait_couleur)]

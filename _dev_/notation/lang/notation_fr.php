@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
                 Si vous voulez garantir l\'unicit&eacute; de la note, limitez le vote aux <b>seules</b> personnes enregistr&eacute;es (ci-dessus).',
 	'item_ip' => 'un votepar IP',
 	'item_id' => 'un vote par utilisateur ',
-	'nb_etoiles' => 'Valeure des notes',
+	'nb_etoiles' => 'Valeur des notes',
 	'info_etoiles' => 'Ce param&egrave;tre vous permet de modifier la valeure maximale de la note (le nombre d\'&eacute;toiles, entre 1 et 10, et 5 par d&eacute;faut).<br />
                     <strong style="color:red">/!\ Attention</strong> : vous ne devez pas toucher &agrave; ce param&egrave;tre une fois la notation engag&eacute;e car les notes ne seront pas recalul&eacute;es et cela peut provoquer des incoh&eacute;rences dans la notation...<br />
                     Ce param&egrave;tres doit &ecirc;tre fix&eacute; une fois pour toute &agrave; la c&eacute;ation des notes.',
@@ -91,8 +91,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vote' => 'vote',
 	'bouton_voter' => 'Voter',
 	'auteur' => 'Auteur',
-	'ip' => 'IP'
+	'ip' => 'IP',
 
+	'change_note_label' => "Autoriser les votants &agrave; modifier leur note ?",
+	'info_modifications' => "Modifications des notes",
+	
 );
 
 ?>

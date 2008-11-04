@@ -1,0 +1,34 @@
+<!-- autoriser=configurer -->
+<!-- nom=notation -->
+
+
+#CACHE{0}
+[(#CHEMIN{img_pack/note.gif}|debut_cadre_trait_couleur{1,"",<:notation:nb_etoiles:>})]
+
+		[(#VAL|debut_cadre_relief{1,'',<:notation:titre_ip:>})]
+			<span class='verdana2'><:notation:info_etoiles:></span>
+		[(#VAL{1}|fin_cadre_relief)]
+		
+		<div class="formulaire_spip formulaire_configurer_notation formulaire_configurer_notation_acces">
+		[<div class="formulaire_message formulaire_message_ok">(#ENV*{message_ok})</div>]
+		[<div class="formulaire_message formulaire_message_erreur">(#ENV*{message_erreur})</div>]
+
+		<form method="post" action="#SELF">
+		<div>
+		#ACTION_FORMULAIRE{#SELF}
+		<ul>
+			<li class="editer_notation_etoile">
+				<label for="notation_etoiles"><:notation:valeur_nb_etoiles:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{acces})</span>]
+					<input type="text" name="nombre" class="radio" value="#ENV{nombre}" size="8" id="notation_etoiles" />				
+			</li>
+		</ul>
+	
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:oK:>" class="submit" />
+		</p>
+		</div>
+		</form>
+		</div>
+		
+[(#VAL{1}|fin_cadre_trait_couleur)]

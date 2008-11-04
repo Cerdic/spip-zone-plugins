@@ -194,7 +194,7 @@ function notation_recalculer_total($objet,$id_objet){
 	} else {
 		// Mettre ajour dans les autres cas
 		sql_updateq("spip_notations_objets", array(
-			"note" => $lanote,
+			"note" => $note,
 			"note_ponderee" => $note_ponderee,
 			"nombre_votes" => $total),
 			array(
@@ -224,7 +224,7 @@ function notation_calculer_total($objet, $id_objet){
 	}	
 	$moyenne = $somme/$total;
 	$moyenne = intval($moyenne*100)/100;
-	$note = round($moyenne);
+	$note = $moyenne; //round($moyenne);
 	$note_ponderee = notation_ponderee($moyenne, $total);
 	return array($total, $note, $note_ponderee);
 }
