@@ -10,17 +10,16 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-function formulaires_guestbook_charger() {
+function formulaires_guestbook_charger_dist() {
 return true;
 }
-function formulaires_guestbook_verifier(){
+function formulaires_guestbook_verifier_dist(){
 return true;
 }
 
 
-function formulaires_guestbook_traiter() {
+function formulaires_guestbook_traiter_dist() {
 
-	include_spip('base/abstract_sql');
 $maj    = date('Y-m-d H:i:s');
 $nom	= $_POST['nom'];
 $ville	= $_POST['ville'];
