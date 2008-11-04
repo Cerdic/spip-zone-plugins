@@ -308,10 +308,13 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:style_p' => 'Votre style :',
 	'label:suite_introduction' => 'Points de suite :',
 	'label:terminaison_urls_arbo' => 'Terminaison des URls (ex : .html) :',
+	'label:terminaison_urls_page' => 'Terminaison des URls (ex : .html) :',
+	'label:terminaison_urls_propres' => 'Terminaison des URls (ex : .html) :',
 	'label:titre_travaux' => 'Titre du message :',
 	'label:tri_articles' => 'Votre choix :',
 	'label:url_arbo_minuscules' => 'Conserver la casse des titres dans les URLs :',
 	'label:url_arbo_sep_id' => 'Caract&egrave;re de s&eacute;paration \'titre-id\' en cas de doublon :<br/>(ne pas utiliser \'/\')',
+	'label:separateur_urls_page' => 'Caract&egrave;re de s&eacute;paration \'type-id\' (ex. : ?article-123) :',
 	'label:url_glossaire_externe2' => 'Lien vers le glossaire externe :',
 	'label:urls_arbo_sans_type' => 'Afficher le type d\'objet SPIP dans les URLs :',
 	'liens_en_clair:description' => 'Met &agrave; votre disposition le filtre : \'liens_en_clair\'. Votre texte contient probablement des liens hypertexte qui ne sont pas visibles lors d\'une impression. Ce filtre ajoute entre crochets la destination de chaque lien cliquable (liens externes ou mails). Attention : en mode impression (parametre \'cs=print\' ou \'page=print\' dans l\'url de la page), cette fonctionnalit&eacute; est appliqu&eacute;e automatiquement.',
@@ -527,11 +530,13 @@ Plus d\'infos : [->http://www.spip.net/fr_article765.html]
 [[%radio_type_urls3%]]
 <q3>@_CS_ASTER@pour utiliser les formats {html}, {propre}, {propre2} ou {arborescentes}, Recopiez le fichier &quot;htaccess.txt&quot; du r&eacute;pertoire de base du site SPIP sous le sous le nom &quot;.htaccess&quot; (attention &agrave; ne pas &eacute;craser d\'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en &quot;sous-r&eacute;pertoire&quot;, vous devrez aussi &eacute;diter la ligne &quot;RewriteBase&quot; ce fichier. Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de SPIP.</q3>
 
-@puce@ {{Uniquement si vous utilisez le format {page} ci-dessus}}, alors il vous est possible de choisir le script d\'appel &agrave; SPIP. Par d&eacute;faut, SPIP choisit {spip.php}, mais {index.php} (format : <code>/index.php?article123</code>) ou une valeur vide (format : <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il vous faut absolument cr&eacute;er le fichier correspondant dans la racine de SPIP, &agrave; l\'image de celui qui existe d&eacute;j&agrave; : {index.php}.
+@puce@ Si vous utilisez le format {page} ci-dessus ou si l\'objet demand&eacute; n\'est pas reconnu, alors il vous est possible de choisir {{le script d\'appel}} &agrave; SPIP. Par d&eacute;faut, SPIP choisit {spip.php}, mais {index.php} (exemple de format : <code>/index.php?article123</code>) ou une valeur vide (format : <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il vous faut absolument cr&eacute;er le fichier correspondant dans la racine de SPIP, &agrave; l\'image de celui qui existe d&eacute;j&agrave; : {index.php}.
 [[%spip_script%]]
 
-@puce@ {{Uniquement si vous utilisez les URLS {arborescentes} ci-dessus}}, alors il vous est possible d\'en personnaliser le rendu :</p>
-[[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]',
+<radio_type_urls3 valeur="page">@puce@ {{Uniquement si vous utilisez les URLS {page} ci-dessus}}, alors il vous est possible d\'en personnaliser le rendu :[[%terminaison_urls_page%]][[%separateur_urls_page%]]</radio_type_urls3>
+
+<radio_type_urls3 valeur="arbo">@puce@ {{Uniquement si vous utilisez les URLS {arborescentes} ci-dessus}}, alors il vous est possible d\'en personnaliser le rendu :</p>
+[[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]</radio_type_urls3>',
 	'type_urls:nom' => 'Format des URLs',
 	'typo_exposants:description' => '{{Textes fran&ccedil;ais}} : am&eacute;liore le rendu typographique des abr&eacute;viations courantes, en mettant en exposant les &eacute;l&eacute;ments n&eacute;cessaires (ainsi, {<acronym>Mme</acronym>} devient {M<sup>me</sup>}) et en corrigeant les erreurs courantes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, par exemple, deviennent {2<sup>e</sup>}, seule abr&eacute;viation correcte).
 
