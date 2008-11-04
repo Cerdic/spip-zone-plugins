@@ -11,7 +11,15 @@
 \***************************************************************************/
 
 function formulaires_guestbook_charger_dist() {
-return true;
+	$valeurs = array(
+		'name'=>$nom,
+		'maj'=>date('Y-m-d H:i:s');,
+		'ville'=>$ville,
+		'email'=>$email,
+		'note'=>$note,
+		'texte'=>$texte,
+	);
+	$ip = $_SERVER['REMOTE_ADDR'];
 }
 function formulaires_guestbook_verifier_dist(){
 return true;
@@ -20,7 +28,6 @@ return true;
 
 function formulaires_guestbook_traiter_dist() {
 
-$maj    = date('Y-m-d H:i:s');
 $nom	= $_POST['nom'];
 $ville	= $_POST['ville'];
 $email	= $_POST['email'];
