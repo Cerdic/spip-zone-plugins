@@ -167,6 +167,14 @@ Compatibilidade : SPIP todas as versi&oacute;ns 1.9x
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>pre_edition</nom>
+		<inclure>cout_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>cout_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>bt_gadgets</nom>
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>

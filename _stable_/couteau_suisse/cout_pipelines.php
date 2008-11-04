@@ -158,6 +158,24 @@ function couteau_suisse_post_typo($flux){
 	return $flux;
 }
 
+/********
+ * BASE *
+ *******/
+
+function couteau_suisse_pre_edition($flux){
+	global $cs_metas_pipelines;
+	if (isset($cs_metas_pipelines['pre_edition']))
+		eval($cs_metas_pipelines['pre_edition']);
+	return $flux;
+}
+
+function couteau_suisse_post_edition($flux){
+	global $cs_metas_pipelines;
+	if (isset($cs_metas_pipelines['post_edition']))
+		eval($cs_metas_pipelines['post_edition']);
+	return $flux;
+}
+
 // le contenu du sous-menu est gere par les lames elles-memes
 function couteau_suisse_bt_toolbox($params) {
 	global $cs_metas_pipelines;
