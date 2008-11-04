@@ -109,13 +109,17 @@ function autoriser_document_voir($faire, $type, $id, $qui, $opt) {
 	$publique = isset($opt['publique'])?$opt['publique']:!test_espace_prive();
 	$id_auteur = isset($qui['id_auteur']) ? $qui['id_auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
 	if (!isset($documents_statut[$id_auteur][$publique][$id])){
-		if (!isset($where[$publique])){
-			$where[$publique] = accesrestreint_documents_accessibles_where('id_document', $publique?"true":"false");
-			$where[$publique] = eval("return ".$where[$publique].";");
-		}
-		$documents_statut[$id_auteur][$publique][$id] = sql_fetsel('id_document','spip_documents',array('id_document='.intval($id),$where[$publique]));
-		if ($documents_statut[$id_auteur][$publique][$id])
+		if (!$id)
 			$documents_statut[$id_auteur][$publique][$id] = autoriser_document_voir_dist($faire, $type, $id, $qui, $opt);
+		else {
+			if (!isset($where[$publique])){
+				$where[$publique] = accesrestreint_documents_accessibles_where('id_document', $publique?"true":"false");
+				$where[$publique] = eval("return ".$where[$publique].";");
+			}
+			$documents_statut[$id_auteur][$publique][$id] = sql_getfetsel('id_document','spip_documents',array('id_document='.intval($id),$where[$publique]));
+			if ($documents_statut[$id_auteur][$publique][$id])
+				$documents_statut[$id_auteur][$publique][$id] = autoriser_document_voir_dist($faire, $type, $id, $qui, $opt);
+		}
 	}
 	return $documents_statut[$id_auteur][$publique][$id];
 }
