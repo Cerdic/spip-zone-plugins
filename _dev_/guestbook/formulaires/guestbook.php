@@ -20,6 +20,7 @@ function formulaires_guestbook_charger_dist() {
 		'texte'=>$texte,
 	);
 	$ip = $_SERVER['REMOTE_ADDR'];
+	return $valeurs;
 }
 function formulaires_guestbook_verifier_dist(){
 return true;
