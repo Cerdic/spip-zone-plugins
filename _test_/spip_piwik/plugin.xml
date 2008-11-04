@@ -18,7 +18,7 @@
 	</description>
 	<icon>ga.png</icon>
 	<lien>
-		[Documentation->http://www.spip-contrib.net/?article2495]
+		[Documentation->http://www.spip-contrib.net/?article2860]
     </lien>
 	<prefix>
 	piwik
@@ -27,4 +27,5 @@
 		<nom>insert_head</nom>
 		<inclure>head.php</inclure>
 	</pipeline>
+	<necessite id='cfg' version='[1.4;]' />
 </plugin>

@@ -7,6 +7,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'textes_url_piwik' => 'Votre serveur piwik',
 'texte_votre_identifiant' => 'Votre identifiant',
 'retour_a_spip' => 'Retour &agrave; la page compl&egrave;te',
-'adresse_du_serveur_web' => 'url de serveur',
+'adresse_du_serveur_web' => 'url du serveur',
 );
 ?>
