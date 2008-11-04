@@ -354,7 +354,7 @@ _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<htm
 	'mailcrypt:nom' => 'MailCrypt',
 	'modifier_vars' => 'Modifier ces @nb@ param&egrave;tres',
 	'moderation_moderee:nom' => 'Mod&eacute;ration Mod&eacute;r&eacute;e',
-	'label:moderation_admin' => 'Valider automatiquement les message des : ',
+	'label:moderation_admin' => 'Valider automatiquement les messages des : ',
 	'moderation_moderee:description' => 'Permet de mod&eacute;rer la mod&eacute;ration des forums pour les utilisateurs inscrits [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
 	'moderation_admins' => 'administrateurs authentifi&eacute;s',
 	'moderation_redacs' => 'r&eacute;dacteurs authentifi&eacute;s',
