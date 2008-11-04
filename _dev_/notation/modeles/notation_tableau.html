@@ -11,7 +11,7 @@ exemple : afficher la note des auteurs 10,2,5 pour l'article 33, sur 2 colonnes
   <BOUCLE_aut(AUTEURS){id_auteur}{tout}>
   <td class="nom">#NOM</td>
   <td class="note">
-      #NOTATION_ETOILE{#NOTE,auteur#ID_AUTEUR}
+    #NOTATION_ETOILE{#NOTE,auteur#ID_AUTEUR-article#ID_ARTICLE}
   </td>
   </BOUCLE_aut>
   [(#COMPTEUR_BOUCLE|modulo{[(#ENV{col,3})]}|=={0}|?{'</tr><tr>',''})]

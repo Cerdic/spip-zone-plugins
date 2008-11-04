@@ -14,14 +14,14 @@
 		<BOUCLE_notes_aut(NOTATIONS_OBJETS){!par note_ponderee}>
 		<tr[ style="background:(#COMPTEUR_BOUCLE|alterner{#eee,#fff});"]>
 			<BOUCLE_feinte_aa(ARTICLES){0,1}>[(#GET{limit}|<{5}|?{' '})]</BOUCLE_feinte_aa>
-			<BOUCLE_aa(ARTICLES){id_article}{id_auteur=#ENV{id_auteur,#ENV|notation_qui_est_la}}>
+			<BOUCLE_aa(ARTICLES){id_article}{id_auteur=#ENV{id_auteur,#SESSION{id_auteur}}}>
 			<td>Article : <a href="#URL_ARTICLE">#TITRE</a></td>
 			<td>#NOTE_PONDEREE</td><td>#NOTE</td><td>#NOMBRE_VOTES</td>
 			[(#SET{limit,[(#GET{limit}|plus{1})]})]
 			</BOUCLE_aa>
 			</B_feinte_aa>
 			<BOUCLE_feinte_ff(ARTICLES){0,1}>[(#GET{limit}|<{5}|?{' '})]</BOUCLE_feinte_ff>
-			<BOUCLE_ff(FORUMS){id_forum}{id_auteur=#ENV{id_auteur,#ENV|notation_qui_est_la}}>
+			<BOUCLE_ff(FORUMS){id_forum}{id_auteur=#ENV{id_auteur,#SESSION{id_auteur}}}>
 			<td>Forum : <a href="#URL_FORUM">#TITRE</a></td>
 			<td>#NOTE_PONDEREE</td><td>#NOTE</td><td>#NOMBRE_VOTES</td>
 			[(#SET{limit,[(#GET{limit}|plus{1})]})]

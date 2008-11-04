@@ -6,7 +6,6 @@
 * Copyright (c) 2008
 * Logiciel libre distribue sous licence GNU/GPL.
 *  
-* Definition du path
 *  
 **/
 
@@ -17,17 +16,10 @@ include_spip('inc/notation_util');
 * transforme une liste (separee par de ,) en un tableau exploitable avec IN
 */
 function notation_tab ($tab)
-{ $tab = split(',',$tab);
+{ $tab = explode(',',$tab);
   return $tab;
 }
 
-/** Renvoie qui est connecté
-*/
-function notation_qui_est_la($var)
-{ 	global $auteur_session;
-	$auteur	= $auteur_session ? intval($auteur_session['id_auteur']) : 0;
-	return $auteur;
-}
 
 // Affichage des etoiles cliquables
 function notation_etoile_click($nb, $id) { 
@@ -121,9 +113,5 @@ function notation_ajouterBoutons($boutons_admin){
 	return $boutons_admin;
 }
 
-function notation_ajouterOnglets($flux){
-	$rubrique = $flux['args'];
-	return $flux;
-}
 
 ?>

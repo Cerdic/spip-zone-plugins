@@ -11,7 +11,7 @@ exemple :
 	</tr>
 	</thead>
 	
-<BOUCLE_not(NOTATIONS){par note}{inverse}{par maj}{inverse}{id_auteur=#ENV{id_auteur,#ENV|notation_qui_est_la}}>
+<BOUCLE_not(NOTATIONS){par note}{inverse}{par maj}{inverse}{id_auteur=#ENV{id_auteur,#SESSION{id_auteur}}}>
   <tr class=ligne_[(#COMPTEUR_BOUCLE|alterner{impaire,paire})]>
   <td>#COMPTEUR_BOUCLE</td>
 	<BOUCLE_aa(ARTICLES){id_article}>
