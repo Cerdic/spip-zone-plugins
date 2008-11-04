@@ -206,7 +206,7 @@ if (window.jQuery) jQuery(function(){
 		// annulation du clic
 		return false;
 	});
-	
+
 	// clic sur le bouton 'tous les actifs'	
 	jQuery('#cs_tous_a').click( function() {
 		jQuery('div.cs_actifs a.cs_href').addClass('outil_on');
@@ -215,13 +215,27 @@ if (window.jQuery) jQuery(function(){
 		// annulation du clic
 		return false;
 	});
-	
+
+	// masquage/demasquage des blocs <variable></variable> liees a des checkbox
+	input_init.apply(document);
+
 	// verifier la version du CS
 	jQuery('span.cs_version').load('".generer_url_ecrire('cs_version', 'version='.$cs_version.($force?'&force=oui':''), true)."');
 	// afficher la boite rss, si elle existe
 	jQuery('div.cs_boite_rss').load('".generer_url_ecrire('cs_boite_rss', $force?'force=oui':'', true)."');
 
 });
+
+// masquage/demasquage des blocs <variable></variable> liees a des checkbox
+// compatibilite Ajax : ajouter this dans jQuery()
+var input_init=function(){
+	jQuery('.cs_input_checkbox', this).change( function() {
+		jQuery('.groupe_'+this.name).addClass('cs_hidden');
+		jQuery('.valeur_'+this.name+'_'+this.value).removeClass('cs_hidden');
+	});
+	jQuery('input.cs_input_checkbox:checked',this).change();
+}
+if(typeof onAjaxLoad=='function') onAjaxLoad(input_init);
 
 var dixans=new Date;
 dixans.setFullYear(dixans.getFullYear()+10);

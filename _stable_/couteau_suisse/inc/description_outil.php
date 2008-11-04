@@ -70,7 +70,7 @@ function description_outil_une_variable($index, $outil, $variable, $label, &$ok_
 		foreach($radios as $code=>$traduc) {
 			$br = (($nb>0) && ( ++$i % $nb == 0))?'<br />':' ';
 			$ok_input .=
-				"<label><input id=\"label_{$variable}_$code\" type=\"radio\""
+				"<label><input id=\"label_{$variable}_$code\" class=\"cs_input_checkbox\" type=\"radio\""
 				.($valeur==$code?' checked="checked"':'')." value=\"$code\" name=\"HIDDENCSVAR__$variable\"/>"
 				.($valeur==$code?'<b>':'')._T($traduc).($valeur==$code?'</b>':'')
 				."</label>$br";
@@ -106,9 +106,20 @@ function description_outil_une_variable($index, $outil, $variable, $label, &$ok_
 	$ok_input_ .= $ok_input; $ok_valeur_ .= $ok_valeur;
 }
 
-function description_outil_input_callback($matches) {
+// callback sur les zones input de format [[label->variable]]
+function description_outil_input1_callback($matches) {
+	global $cs_input_variable;
+	$cs_input_variable[] = str_replace('%','',$matches[2]);
+	return "<fieldset><legend>$matches[1]</legend><div style=\"margin:0;\">$matches[2]</div></fieldset>";
+}
+
+// callback sur les zones input de format [[tata %variable% toto]] en utilisant _T('couteauprive:label:variable') comme label
+function description_outil_input2_callback($matches) {
+	global $cs_input_variable;
+	$cs_input_variable[] = str_replace('%','',$matches[1]);
 	return '<fieldset><legend>'._T('couteauprive:label:'.$matches[3]).'</legend><div style="margin:0;">'.$matches[1].'</div></fieldset>';
 }
+
 function description_outil_const_callback($matches) {
 	return defined($matches[1])?constant($matches[1]):'';
 }
@@ -127,10 +138,17 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	// reconstitution d'une description eventuellement morcelee
 	// exemple : <:mon_outil:3:> est remplace par _T('couteauprive:mon_outil:description3')
 	$descrip = preg_replace_callback(',<:([a-zA-Z_][a-zA-Z0-9_-]*):([0-9]*):>,', 'description_outil_descrip_callback', $descrip);
-	// remplacement des zone input de format [[label->variable]]
-	$descrip = preg_replace(',(\[\[([^][]*)->([^]]*)\]\]),msS', '<fieldset><legend>\\2</legend><div style="margin:0;">\\3</div></fieldset>', $descrip);
-	// remplacement des zone input de format [[tata %variable% toto]] en utilisant _T('couteauprive:label:variable') comme label
-	$descrip = preg_replace_callback(',\[\[(([^][]*)%([a-zA-Z_][a-zA-Z0-9_]*)%([^]]*))\]\],msS', 'description_outil_input_callback', $descrip);
+	global $cs_input_variable;
+	$cs_input_variable = array();
+	// remplacement des zones input de format [[label->variable]]
+	$descrip = preg_replace_callback(',\[\[([^][]*)->([^]]*)\]\],msS', 'description_outil_input1_callback' , $descrip);
+	// remplacement des zones input de format [[tata %variable% toto]] en utilisant _T('couteauprive:label:variable') comme label
+	$descrip = preg_replace_callback(',\[\[(([^][]*)%([a-zA-Z_][a-zA-Z0-9_]*)%([^]]*))\]\],msS', 'description_outil_input2_callback', $descrip);
+	// recherche des blocs <variable></variable> eventuels associes pour du masquage/demasquage
+	foreach($cs_input_variable as $v) {
+		$descrip = str_replace("</$v>", '</div>', preg_replace(",<$v\s+valeur=(['\"])(.*?)\\1\s*>,", "<div class='groupe_{$v} valeur_{$v}_$2'>", $descrip));
+	}
+	unset($cs_input_variable);
 	// remplacement des variables de format : %variable%
 	$t = preg_split(',%([a-zA-Z_][a-zA-Z0-9_]*)%,', $descrip, -1, PREG_SPLIT_DELIM_CAPTURE);
 
