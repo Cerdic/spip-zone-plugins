@@ -23,7 +23,8 @@ function formulaires_guestbook_charger_dist() {
 	return $valeurs;
 }
 function formulaires_guestbook_verifier_dist(){
-return true;
+$erreurs = array();
+return $erreurs;
 }
 
 
