@@ -246,60 +246,8 @@ add_outil( array(
 	'version-min' => '1.9300',
 ));
 
-// ici on a besoin de six boutons radio : 'page', 'html', 'propres', 'propres2, ''standard' et 'propres-qs'
-define('_CS_PROPRE_QS', defined('_SPIP19300')?'propres_qs':'propres-qs');
-add_variable( array(
-	'nom' => 'radio_type_urls3',
-	'format' => _format_CHAINE,
-	'radio' => array('page' => 'couteauprive:url_page',
-					 'html' => 'couteauprive:url_html', 
-					 'propres' => 'couteauprive:url_propres',
-					 'propres2' => 'couteauprive:url_propres2',
-					  'arbo'=> 'couteauprive:url_arbo',
-					  'standard' => 'couteauprive:url_standard',
-					   _CS_PROPRE_QS => 'couteauprive:url_propres-qs'),
-	'radio/ligne' => 4,
-	'defaut' => "'page'",
-	'code' => "\$GLOBALS['type_urls']=%s;\n",
-));
-add_variable( array(
-	'nom' => 'url_arbo_minuscules',
-	'format' => _format_NOMBRE,
-	'radio' => array(0 => 'item_oui', 1 => 'item_non'),				
-	'defaut' => 1,
-	'code' => "define('_url_arbo_minuscules', %s);\n",
-));
-add_variable( array(
-	'nom' => 'urls_arbo_sans_type',
-	'format' => _format_NOMBRE,
-	'radio' => array(0 => 'item_oui', 1 => 'item_non'),				
-	'defaut' => 0,
-	'code' => "define('_urls_arbo_sans_type', %s);\n"
-));
-
-add_variable( array(
-	'nom' => 'spip_script',
-	'format' => _format_CHAINE,
-	'defaut' => "get_spip_script()",
-	'code' => "define('_SPIP_SCRIPT', %s);\n",
-));
-add_variable( array(
-	'nom' => 'url_arbo_sep_id',
-	'format' => _format_CHAINE,
-	'defaut' => "'-'",
-	'code' => "define('_url_arbo_sep_id', %s);\n",
-));
-add_variable( array(
-	'nom' => 'terminaison_urls_arbo',
-	'format' => _format_CHAINE,
-	'defaut' => "''",
-	'code' => "define('_terminaison_urls_arbo', %s);\n",
-));
-add_outil( array(
-	'id' => 'type_urls',
-	'code:spip_options' => "%%radio_type_urls3%%%%spip_script%%%%url_arbo_minuscules%%%%url_arbo_sep_id%%%%urls_arbo_sans_type%%%%terminaison_urls_arbo%%",
-	'categorie' => 'admin',
-));
+// inclusion de l'outil gerant le format des urls
+include_spip('config_outils_urls');
 
 	// ici on a besoin de trois boutons radio : _T('couteauprive:js_jamais'), _T('couteauprive:js_defaut') et _T('couteauprive:js_toujours')
 add_variable( array(
