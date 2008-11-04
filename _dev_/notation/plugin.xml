@@ -1,22 +1,30 @@
 <plugin>
-  <nom>Notation</nom>
-  <auteur>JEM - b_b</auteur>
-  <version>0.5.2</version>
-  <version_base>0.5.0</version_base>
-  <etat>dev</etat>
-  <prefix>notation</prefix>
-  <description>
-    <b>Attribuer une note aux &eacute;l&eacute;ments de Spip</b><hr/>
-    D&eacute;finition de la balise <code>#FORMULAIRE_NOTATION</code> permettant 
-    la saise et l'affichage de la note d'un &eacute;l&eacute;ment de boucle.<br />
-    D&eacute;finition des mod&egrave;les <em>&gt;autxx|notation|id_article=yy&lt;</em> 
-    qui donne la note de l'auteur <i>xx</i> pour l'article <i>yy</i>
-    et <em>&gt;notation|topten&lt;</em> qui donne les 10 meilleurs articles.
-  </description>
-  <icon>img_pack/note.gif</icon>
-  <fonctions>notation_fonctions.php</fonctions>
-  <install>base/notation_upgrade.php</install>
-  <necessite id="spip" version="[2.0 beta2;]" />
+	<nom>Notation</nom>
+	<auteur>JEM - b_b - Matthieu Marcillaud</auteur>
+	<version>0.5.3</version>
+	<version_base>0.5.0</version_base>
+	<etat>dev</etat>
+	<prefix>notation</prefix>
+	<description>
+		<b>Attribuer une note aux &eacute;l&eacute;ments de Spip</b><hr/>
+		D&eacute;finition de la balise <code>#FORMULAIRE_NOTATION</code> permettant 
+		la saise et l'affichage de la note d'un &eacute;l&eacute;ment de boucle.<br />
+		D&eacute;finition des mod&egrave;les <em>&gt;autxx|notation|id_article=yy&lt;</em> 
+		qui donne la note de l'auteur <i>xx</i> pour l'article <i>yy</i>
+		et <em>&gt;notation|topten&lt;</em> qui donne les 10 meilleurs articles.
+	</description>
+	<lien>[Documentation->http://www.spip-contrib.net/Notation-d-articles-SPIP]</lien>
+	<licence>GPL</licence>
+	<necessite id="spip" version="[2.0 beta2;]" />
+
+	<icon>img_pack/note.gif</icon>
+
+	<fonctions>notation_fonctions.php</fonctions>
+	<fonctions>inc/notation_autorisations.php</fonctions>
+	<fonctions>inc/notation_balises.php</fonctions>
+
+	<install>base/notation_upgrade.php</install>
+  
 	 <pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/notation.php</inclure>
@@ -29,23 +37,34 @@
 		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/notation.php</inclure>
 	</pipeline>
-	<pipeline>
-        <nom>ajouter_boutons</nom>
-        <action>ajouterBoutons</action>
-        <inclure>notation_fonctions.php</inclure>
-	</pipeline>
 
 	<pipeline>
 		<nom>affichage_final</nom>
 		<action>affichage_final</action>
-		<inclure>notation_pipeline.php</inclure>
+		<inclure>notation_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>notation_pipeline.php</inclure>
+		<inclure>notation_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
-		<inclure>notation_pipeline.php</inclure>
+		<inclure>notation_pipelines.php</inclure>
 	</pipeline>
+	
+	<bouton id='notation' parent='forum'>
+		<icone>img_pack/notation.png</icone>
+		<titre>notation:notation</titre>
+		<url>notation</url>
+	</bouton>
+	<onglet id='notation' parent='notation'>
+		<icone>img_pack/notation.png</icone>
+		<titre>notation:afficher_tables</titre>
+		<url>notation</url>
+	</onglet>
+	<onglet id='notation_param' parent='notation'>
+		<icone>img_pack/notation.png</icone>
+		<titre>notation:param</titre>
+		<url>notation_param</url>
+	</onglet>	
 </plugin>

@@ -1,8 +1,15 @@
 <?php
-
+/**
+* Plugin Notation 
+* par JEM (jean-marc.viglino@ign.fr) / b_b / Matthieu Marcillaud
+* 
+* Copyright (c) 2008
+* Logiciel libre distribue sous licence GNU/GPL.
+*  
+**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/notation_util');
+include_spip('inc/notation');
 include_spip('base/abstract_sql');
 
 function formulaires_notation_charger_dist($objet, $id_objet){
@@ -146,26 +153,6 @@ function modifier_notation($id_notation,$c=array()) {
 }
 
 
-function autoriser_notation_modifier_dist($faire, $type, $id, $qui, $opt){
-	// la config interdit de modifier la note ?
-	if ($id AND !lire_config('notation/change_note'))
-		return false;
-		
-	// sinon est-on autorise a voter ?
-	$acces = notation_get_acces();
-	if ($acces!='all'){
-		// tous visiteur
-		if ($acces=='ide' && $qui['statut']=='')
-			return false;
-		// auteur
-		if ($acces=='aut' && !in_array($qui['statut'],array("0minirezo","1comite")))
-			return false;
-		// admin
-		if ($acces=='adm' && !$qui['statut']=="0minirezo")
-			return false;
-	}
-	return true;
-}
 
 
 // je me demande vraiment si tout cela est utile...

@@ -6,14 +6,12 @@
 * Copyright (c) 2008
 * Logiciel libre distribue sous licence GNU/GPL.
 *  
-* Affichage de l'aide
-*  
 **/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/notation_menu');
+include_spip('inc/notation');
 
 function exec_notation_param(){
 	if (!autoriser('configurer')) {
@@ -22,8 +20,9 @@ function exec_notation_param(){
 	}
 	
 	// Afficher les menus
-	notation_ecrire_menu("param");
-
+	notation_commencer_page();
+	echo barre_onglets("notation", "notation_param");
+	
 	// configs CFG
 	include_spip("public/assembler");
 	echo recuperer_fond("fonds/notation_config");
