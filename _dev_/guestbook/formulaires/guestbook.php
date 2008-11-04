@@ -29,14 +29,12 @@ function formulaires_guestbook_verifier_dist(){
 
 
 function formulaires_guestbook_traiter_dist() {
-
-$nom	= $_POST['nom'];
-$ville	= $_POST['ville'];
-$email	= $_POST['email'];
-$note	= $_POST['note'];
-$texte	= $_POST['texte'];
-sql_insertq("spip_livre", array('email' => $email, 'nom' => $nom, 'ville' => $ville, 'maj' => $maj, 'note' => $note, 'texte' => $texte));
-echo "Merci de votre participation! Le message apparaitra dès que le webmaster aura répondu.";
+	$nom	= _request('nom');
+	$ville	= _request('ville');
+	$email	= _request('ville');
+	$note	= _request('note');
+	$texte	= _request('texte');
+	sql_insertq("spip_livre", array('email' => $email, 'nom' => $nom, 'ville' => $ville, 'maj' => $maj, 'note' => $note, 'texte' => $texte, 'ip' => $ip));
 }
 
 
