@@ -2,16 +2,16 @@
 <div class="formulaire_notation ajax">
 
 [(#ENV**{editable}|oui)
-	<form action="#SELF" method="post" id="notation[-(#ENV*{type})][(#ENV*{id_objet})]" enctype="multipart/form-data" style="display:inline; padding:0; spacing:0; border:0">
+	<form action="#SELF" method="post" id="notation[-(#ENV*{objet})][(#ENV*{id_objet})]" enctype="multipart/form-data" style="display:inline; padding:0; spacing:0; border:0">
 		#ACTION_FORMULAIRE{#SELF}
 		<div style="display:inline">
-			[(#NOTATION_ETOILE_CLICK{[(#ENV*{note})],[-(#ENV*{type})][(#ENV*{id_objet})]})]
+			[(#NOTATION_ETOILE_CLICK{[(#ENV*{note})],[-(#ENV*{objet})][(#ENV*{id_objet})]})]
 			[(#REM) ne pas envoyer une variable commencant par id_ 
 			    sinon elle se retrouve dans l'url (fonctionnement normal de SPIP
 			    du coup, prefixe par notation_
 			]
-			<input type="hidden" name="notation_id_donnees" id="id_donnees[-(#ENV*{type})][(#ENV*{id_objet})]" value="[(#ENV*{id_objet})]" />
-			<input type="hidden" name="content" id="content[-(#ENV*{type})][(#ENV*{id_objet})]" value="" />
+			<input type="hidden" name="notation_id_donnees" id="id_donnees[-(#ENV*{objet})][(#ENV*{id_objet})]" value="[(#ENV*{id_objet})]" />
+			<input type="hidden" name="content" id="content[-(#ENV*{objet})][(#ENV*{id_objet})]" value="" />
 			<input type="submit" class="access" value="Voter"/>
 			[<span class="note">(#ENV*{total}) [(#ENV*{total}|>{1}|?{<:notation:votes:>,<:notation:vote:>})]</span>]
 		</div>
@@ -19,7 +19,7 @@
 ]
 
 [(#ENV**{editable}|non)
-	[(#NOTATION_ETOILE{[(#ENV*{note})],[-(#ENV*{type})][(#ENV*{id_objet})]})]
+	[(#NOTATION_ETOILE{[(#ENV*{note})],[-(#ENV*{objet})][(#ENV*{id_objet})]})]
 	[<span class="note">(#ENV*{total}) [(#ENV*{total}|>{1}|?{<:notation:votes:>,<:notation:vote:>})]</span>]
 ]
 

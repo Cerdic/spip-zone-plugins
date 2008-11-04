@@ -33,7 +33,7 @@ function notation_get_nb_notes(){
 }
 
 // Calcule de la note ponderee
-function notation_ponderee ($note, $nb){
+function notation_ponderee($note, $nb){
    $note_ponderee = round($note*(1-exp(-5*$nb/notation_get_ponderation()))*100)/100;
    return $note_ponderee;
 }

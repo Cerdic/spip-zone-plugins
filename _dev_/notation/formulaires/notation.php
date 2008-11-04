@@ -3,218 +3,229 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/notation_util');
-include_spip('inc/vieilles_defs');
-include_spip('balise/notation_balises');
 include_spip('base/abstract_sql');
 
-function formulaires_notation_charger_dist($type, $id_objet, $retour='', $row=array(), $hidden=''){
+function formulaires_notation_charger_dist($objet, $id_objet){
 
-	// définition des valeurs de base du formulaire
+	// definition des valeurs de base du formulaire
 	$valeurs = array(
-		'type'=>$type,
+		'objet'=>$objet,
 		'id_objet'=>$id_objet,
-		'editable'=>true
+		'editable'=>true,
+		'note'=>0,
+		'note_ponderee'=>0,
+		'total'=>0
 	);
-	// on recupère l'id de l'auteur connecté sinon on le fixe à 0 et on récupère l'IP du visiteur
-	if ($GLOBALS["auteur_session"]) {
-		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
-		$statut = $GLOBALS['auteur_session']['statut'];
-	}else{
+	$_id_objet = id_table_objet($objet);
+	
+	
+	// on recupere l'id de l'auteur connecte, sinon ip
+	if (!$id_auteur = $GLOBALS['visiteur_session']['id_auteur']) {
 		$id_auteur = 0;
 		$ip	= $_SERVER['REMOTE_ADDR'];
 	}
 	
-	$acces = notation_get_acces();
-	
-	$id_table_objet = id_table_objet($type);
-	
-	// on récupère la note pondérée de l'objet et le nombre de votes
-	$res = sql_select(
-		"spip_notations_objets.$id_table_objet,spip_notations_objets.note_ponderee,spip_notations_objets.nombre_votes",
-		"spip_notations_objets",
-		"$id_table_objet=" . sql_quote($id_objet)
-		);
-	// on récupère la note de l'auteur pour l'élément en cours
-	$note=0;
-	$total=0;
-	if ($row = sql_fetch($res)){
-		$note = $row['note_ponderee'];
-		$total = $row['nombre_votes'];
+	// on recupere la note ponderee de l'objet et le nombre de votes
+		// list($valeurs["total"], $valeurs["note"], $valeurs["note_ponderee"]) 
+		//	= notation_calculer_total($objet, $id_objet);
+	if ($row = sql_fetsel(
+			array("note", "note_ponderee", "nombre_votes"),
+			"spip_notations_objets",
+			"$_id_objet=" . sql_quote($id_objet)
+		)) {
+		$valeurs["note"] = $row['note'];
+		$valeurs["note_ponderee"] = $row['note_ponderee'];
+		$valeurs["total"] = $row['nombre_votes'];
 	}
-	// et on les ajoute au contexte du formulaire html
-	$valeurs["note"] = $note;
-	$valeurs["total"] = $total;
 	
-	// l'auteur a-t-il déjà voté ?
-	if($id_auteur){
-		$deja_vote = sql_countsel(
-			"spip_notations",
-			"$id_table_objet=" . sql_quote($id_objet) . " AND id_auteur=" . sql_quote($id_auteur)
-			);
-	}
-	// le visiteur a-t-il déjà voté ?
-	if($ip){
-		$deja_vote = sql_countsel(
-			"spip_notations",
-			"$id_table_objet=" . sql_quote($id_objet) . " AND ip=" . sql_quote($ip)
-			);	
-	}
+	
+	// l'auteur ou l'ip a-t-il deja vote ?
+	$where = array(
+		"objet=" . sql_quote($objet),
+		"$_id_objet=" . sql_quote($id_objet),
+	);
+	if ($id_auteur) 
+		$where[] = "id_auteur=" . sql_quote($id_auteur);
+	else 
+		$where[] = "ip=" . sql_quote($ip);
+	$id_notation = sql_getfetsel("id_notation","spip_notations",$where);
+	
 
 	// peut il modifier son vote ?
-	
-	if($deja_vote)
-		if(!lire_config('notation/change_note')){
-			$valeurs['editable']=false;
-			return $valeurs;
-		}
-	
-	// est-on autorise a voter ?
-	$isauteur = ($statut=="0minirezo" || $statut=="1comite");
-	if ($acces=='all'){
-		return $valeurs;
-	}else{
-		if (($acces=='ide' && $statut!='') || ($acces=='aut' && $isauteur) || ($acces=='adm' && $statut=="0minirezo")){
-			return $valeurs;
-		}else{
-			$valeurs['editable']=false;
-			return $valeurs;
-		}
+	include_spip('inc/autoriser');
+	if (!autoriser('modifier', 'notation', $id_notation, null, array('objet'=>$objet, 'id_objet'=>$id_objet))) {
+		$valeurs['editable']=false;
 	}
+
+	return $valeurs;
 }
 
-function formulaires_notation_traiter_dist($type, $id_objet, $retour='', $row=array(), $hidden=''){
-	return noter_objet_traiter($type, $id_objet, $retour, $row, $hidden);
+
+function formulaires_notation_verifier_dist($objet, $id_objet){
+	$erreurs = array();
+	
+	$_id_objet = id_table_objet($objet);
+	
+	//  s'assurer que l'objet existe bien
+	// et que le champ robot n'est pas rempli
+	if (!sql_countsel("spip_$objet", "$_id_objet=" . sql_quote($id_objet))
+		OR (_request('content')!="")) { 
+		$erreurs['message_erreur'] = ' ';
+	// note dans la bonne fourchette
+	} else {
+		$note = intval(_request("notation-$objet$id_objet"));
+		if($note<1 || $note>notation_get_nb_notes())
+			$erreurs['message_erreur'] = _T('notation:note_hors_plage');
+	}
+	return $erreurs;
 }
-
-function noter_objet_traiter($type, $id_objet){
-
-	$id_table_objet = id_table_objet($type);
+	
+function formulaires_notation_traiter_dist($objet, $id_objet){
+	$_id_objet = id_table_objet($objet);
 	
 	if ($GLOBALS["auteur_session"]) {
 		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
-	}else{
+	} else {
 		$id_auteur = 0;
 	}
-
 	$ip	= $_SERVER['REMOTE_ADDR'];
 	
-	//recuperation des champs
-	$note = intval(_request("notation-$type$id_objet"));
-	$robot = _request('content');
+	// recuperation des champs
+	$note = intval(_request("notation-$objet$id_objet"));
 	$id_donnees	= _request('notation_id_donnees');
-	$acces = notation_get_acces();
 
-	$erreur = '';
-
-	//  s'assurer que l'objet existe bien
-	if (sql_countsel("spip_$type", "$id_table_objet=" . sql_quote($id_objet))){
-		
-		
-		// On est en train de voter
-		if (($id_donnees==$id_objet) && $robot==''){	// Note correcte ?
-			if($note<1 || $note>notation_get_nb_notes()){
-				$erreur = _T('notation:note_hors_plage');
-			}else{
-				include_spip('ecrire/inc_connect');
-				// Si pas inscrit : recuperer la note de l'objet sur l'IP
-				if ($id_auteur == 0){
-					$res = sql_select(
-						"spip_notations.id_notation,spip_notations.id_auteur,spip_notations.note",
-						"spip_notations",
-						"$id_table_objet=" . sql_quote($id_objet) . " AND ip=" . sql_quote($ip)
-						);
-				// Sinon rechercher la note de l'auteur
-				}else{
-					$res = sql_select(
-						"spip_notations.id_notation,spip_notations.id_auteur,spip_notations.note",
-						"spip_notations",
-						"$id_table_objet=" . sql_quote($id_objet) . " AND id_auteur=" . sql_quote($id_auteur)
-						);
-				}
-				// Premier vote
-				if (sql_count($res) == 0){  // Remplir la table de notation
-					sql_insertq("spip_notations", array(
-						"objet" => $type,
-						"$id_table_objet" => $id_objet,
-						"id_auteur" => $id_auteur,
-						"ip" => $ip,
-						"note" => $note
-						));
-					$duchangement = true;
-				}else{  // Modifier la note
-					$row = sql_fetch($res);
-					// Seulement si elle a changee ou que l'auteur a change
-					if ($row['note'] != $note || ($row['id_auteur'] != $id_auteur)){  // Un auteur non reference ne remplace pas la note d'un auteur reference
-						if ($row['id_auteur'] == 0 || $id_auteur != 0){
-							sql_update("spip_notations", array(
-								"note" => $note,
-								"id_auteur" => $id_auteur),
-								"id_notation=" . sql_quote($row["id_notation"])
-								);
-							$duchangement = true;
-						}
-					}
-				}
-				// Calculer la nouvelle note de l'article
-				if ($duchangement){
-					$res = sql_select(
-						"spip_notations.$id_table_objet,spip_notations.note",
-						"spip_notations",
-						"$id_table_objet=" . sql_quote($id_objet)
-						);
-					$lanote = 0;
-					$total = 0;
-					while ($row =sql_fetch($res)){
-						$lanote += $row['note'];
-						$total++;
-					}
-					$lanote = $lanote/$total;
-					$lanote = intval($lanote*100)/100;
-					$note = round($lanote);
-					$note_ponderee = notation_ponderee ($lanote, $total);
-					// Mise à jour ou insertion ?
-					if (!sql_countsel("spip_notations_objets", "$id_table_objet=" . sql_quote($id_objet))){
-						// Remplir la table de notation des objets
-						sql_insertq("spip_notations_objets", array(
-							"objet" => $type,
-							"$id_table_objet" => $id_objet,
-							"note" => $note,
-							"note_ponderee" => $note_ponderee,
-							"nombre_votes" => $total
-							));
-					}else{
-						// Mettre ajour dans les autres cas
-						sql_update("spip_notations_objets", array(
-							"note" => $lanote,
-							"note_ponderee" => $note_ponderee,
-							"nombre_votes" => $total),
-							"$id_table_objet=" . sql_quote($id_objet)
-							);
-					}
-				}
-			}
-		}
-		$res = sql_select(
-			"spip_notations_objets.$id_table_objet,spip_notations_objets.note_ponderee,spip_notations_objets.nombre_votes",
-			"spip_notations_objets",
-			"$id_table_objet=" . sql_quote($id_objet)
-			);
-		$lanote=0;
-		$total=0;
-		if ($row = sql_fetch($res)){
-			$lanote = $row['note_ponderee'];
-			$total = $row['nombre_votes'];
-		}
-		$note = round($lanote);
-	}
-
-	return array(
-		true,
-		"note"=>$note,
-		"total"=>$total
+	// Si pas inscrit : recuperer la note de l'objet sur l'IP
+	// Sinon rechercher la note de l'auteur
+	$where = array("$_id_objet=" . sql_quote($id_objet));
+	if ($id_auteur == 0) $where[] = "id_auteur=" . sql_quote($id_auteur);
+	else $where[] = "ip=" . sql_quote($ip);
+	$row = sql_fetsel(
+		array("id_notation", "id_auteur", "note"),
+		"spip_notations",
+		$where
 	);
 
+	// Premier vote
+	if (!$row){  // Remplir la table de notation
+		$id_notation = insert_notation();
+	} else {
+		$id_notation = $row['id_notation'];
+	}
+	
+	// Modifier la note
+	$c = array(			
+		"objet" => $objet,
+		"$_id_objet" => $id_objet,
+		"note" => $note,
+		"id_auteur" => $id_auteur,
+		"ip" => $ip
+	);
+	modifier_notation($id_notation,$c);
+	notation_recalculer_total($objet,$id_objet);	
+
+	return array("editable"=>true,"message_ok"=>"");
 }
 
 
+function insert_notation(){
+	return sql_insertq("spip_notations", array(
+			"objet" => "",
+			//"id_objet" => 0,
+			"id_auteur" => 0,
+			"ip" => "",
+			"note" => 0
+			));
+}
+
+function modifier_notation($id_notation,$c=array()) {
+	// pipeline pre edition
+	sql_updateq('spip_notations',$c,'id_notation='.sql_quote($id_notation));
+	// pipeline post edition
+	return true;
+	
+}
+
+
+function autoriser_notation_modifier_dist($faire, $type, $id, $qui, $opt){
+	// la config interdit de modifier la note ?
+	if ($id AND !lire_config('notation/change_note'))
+		return false;
+		
+	// sinon est-on autorise a voter ?
+	$acces = notation_get_acces();
+	if ($acces!='all'){
+		// tous visiteur
+		if ($acces=='ide' && $qui['statut']=='')
+			return false;
+		// auteur
+		if ($acces=='aut' && !in_array($qui['statut'],array("0minirezo","1comite")))
+			return false;
+		// admin
+		if ($acces=='adm' && !$qui['statut']=="0minirezo")
+			return false;
+	}
+	return true;
+}
+
+
+// je me demande vraiment si tout cela est utile...
+// vu que tout peut etre calcule en requete depuis spip_notations
+function notation_recalculer_total($objet,$id_objet){
+	
+	list($total, $note, $note_ponderee) = notation_calculer_total($objet, $id_objet);
+	
+	// selection a corriger en passant a 'objet' + 'id_objet'
+	$_id_objet = id_table_objet($objet);	
+	
+	// Mise a jour ou insertion ?
+	if (!sql_countsel("spip_notations_objets", 
+			array(
+				"objet=" . sql_quote($objet),
+				"$_id_objet=" . sql_quote($id_objet)
+				))) {
+		// Remplir la table de notation des objets
+		sql_insertq("spip_notations_objets", array(
+			"objet" => $objet,
+			"$_id_objet" => $id_objet,
+			"note" => $note,
+			"note_ponderee" => $note_ponderee,
+			"nombre_votes" => $total
+			));
+	} else {
+		// Mettre ajour dans les autres cas
+		sql_updateq("spip_notations_objets", array(
+			"note" => $lanote,
+			"note_ponderee" => $note_ponderee,
+			"nombre_votes" => $total),
+			array(
+				"objet=" . sql_quote($objet),
+				"$_id_objet=" . sql_quote($id_objet)
+			));
+	}
+}
+
+
+function notation_calculer_total($objet, $id_objet){
+	// selection a corriger en passant a 'objet' + 'id_objet'
+	$_id_objet = id_table_objet($objet);	
+	
+	// Calculer la note de l'objet
+	$somme = $total = 0;
+	if ($row = sql_fetsel(
+			array("COUNT(note) AS nombre","SUM(note) AS somme"),
+			"spip_notations",
+			array(
+				"objet=". sql_quote($objet),
+				"$_id_objet=" . sql_quote($id_objet) ///// a changer
+			))){
+				
+		$somme = $row['somme'];
+		$total = $row['nombre'];
+	}	
+	$moyenne = $somme/$total;
+	$moyenne = intval($moyenne*100)/100;
+	$note = round($moyenne);
+	$note_ponderee = notation_ponderee($moyenne, $total);
+	return array($total, $note, $note_ponderee);
+}
 ?>
