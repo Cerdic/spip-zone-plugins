@@ -35,9 +35,8 @@ $ville	= $_POST['ville'];
 $email	= $_POST['email'];
 $note	= $_POST['note'];
 $texte	= $_POST['texte'];
-$texte=nl2br($texte); 
 sql_insertq("spip_livre", array('email' => $email, 'nom' => $nom, 'ville' => $ville, 'maj' => $maj, 'note' => $note, 'texte' => $texte));
-echo"Merci de votre participation! Le message apparaitra dès que le webmaster aura répondu.";
+echo "Merci de votre participation! Le message apparaitra dès que le webmaster aura répondu.";
 }
 
 
