@@ -68,12 +68,12 @@ function action_echoppe_sauver_produit(){
 			'ref_produit' => $ref_produit,
 			'prix_base_htva' => $prix_base_htva,
 			'maj' => $maj,
-			'statut' => $statut,
+			'statut' => "prepa",
 			'lang'=>$lang_produit,
-			'titre'=>addslashes($titre),
-			'descriptif'=>addslashes($descriptif),
-			'texte' => addslashes($texte),
-			'ps' => addslashes($ps),
+			'titre'=> $titre,
+			'descriptif'=> $descriptif,
+			'texte' => $texte,
+			'ps' => $ps,
 			'tva' => $tva,
 			'quantite_mini' => $quantite_mini
 			);
@@ -82,49 +82,25 @@ function action_echoppe_sauver_produit(){
 			
 			break;
 		
-		case 'ajout_description' :
-			$arg_insert_produit_descriptif = array(
-				'id_descriptif_produit'=>'',
-				'id_produit'=>$new_id_produit,
-				'lang'=>$lang_produit,
-				'titre'=>addslashes($titre),
-				'descriptif'=>addslashes($descriptif),
-				'texte' => addslashes($texte),
-				'ps' => addslashes($ps),
-				'tva' => $tva,
-				'quantite_mini' => $quantite_mini,
-				'logo' => '',
-				'maj' => $maj
-			);
-			$res_insert_produit_descriptif = sql_insertq('spip_echoppe_produits_descriptions',$arg_insert_produit_descriptif);
-			break;
-		
-		case 'maj_description' :
-			$arg_insert_produit_descriptif = array(
-				'id_descriptif_produit'=>'',
-				'id_produit'=>$new_id_produit,
-				'lang'=>$lang_produit,
-				'titre'=>addslashes($titre),
-				'descriptif'=>addslashes($descriptif),
-				'texte' => addslashes($texte),
-				'ps' => addslashes($ps),
-				'tva' => $tva,
-				'quantite_mini' => $quantite_mini,
-				'logo' => '',
-				'maj' => $maj
-			);
-			$res_insert_produit_descriptif = sql_updateq('spip_echoppe_produits_descriptions',$arg_insert_produit_descriptif);
-			break;
-		
 		default :
-			//$sql_update_produit_descriptif = "UPDATE spip_echoppe_produits_descriptions SET titre = '".addslashes($titre)."', descriptif = '".addslashes($descriptif)."', texte = '".addslashes($texte)."', statut = '".$statut."' WHERE id_produit = '".$id_produit."' AND lang = '".$lang_produit."' ";
-			//echo $sql_update_produit_descriptif;
-			//$res_update_produit_descriptif = spip_query($sql_update_produit_descriptif);
+			$arg_inser_produit = array(
+			'id_produit' => $id_produit,
+			'id_categorie' => $id_categorie,
+			'ref_produit' => $ref_produit,
+			'titre'=> $titre,
+			'descriptif'=> $descriptif,
+			'texte' => $texte,
+			'ps' => $ps,
+			'tva' => $tva,
+			'quantite_mini' => $quantite_mini
+			);
+			sql_updateq('spip_echoppe_produits',$arg_inser_produit);
 			break;
 		
 	}
+	
 	$redirect = generer_url_ecrire('echoppe_produit', 'id_produit='.$id_produit,'&');
-	//echo $redirect;
+	
 	redirige_par_entete($redirect);
 }
 

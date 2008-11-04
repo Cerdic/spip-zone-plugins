@@ -41,33 +41,25 @@ function exec_echoppe_categorie(){
 	echo inc_commencer_page_dist($contexte['titre'], "redacteurs", "echoppe");
 	
 	
-	debut_grand_cadre(true);
-	echo recuperer_fond('fonds/echoppe_chemin_categorie',$contexte);
-	fin_grand_cadre(true);
+	
+	if ($contexte['id_categorie'] != "0"){
+		debut_grand_cadre(true);
+		echo recuperer_fond('fonds/echoppe_chemin_categorie',$contexte);
+		fin_grand_cadre(true);
+	}
+	
 	echo debut_gauche('',true);
-	echo debut_boite_info(true);
-	echo recuperer_fond('fonds/echoppe_info_categorie',$contexte);
-
-	$les_langues = explode(',',$GLOBALS['meta']['langues_multilingue']);
-
-	/*if (count($les_langues) > 1){
-		echo '<form action="index.php" method="get">
-		<input type="hidden" name="exec" value="echoppe_edit_categorie" />
-		<input type="hidden" name="id_categorie" value="'.$contexte['id_categorie'].'" />
-		<select name="lang_categorie">';
-		echo '<option value="">'._T('echoppe:par_defaut').'</option>';
-		foreach ($les_langues as $value) {
-			echo '<option value="'.$value.'">'.traduire_nom_langue($value).'</option>';
-		}
-		echo '</form>
-		<input type="submit" value="'._T('echoppe:editer').'" />
-		</select>';
-	}*/
-	echo fin_boite_info(true);
 	
-	
-	echo recuperer_fond('fonds/echoppe_logo_categorie',$contexte);
-	
+	if ($contexte['id_categorie'] != "0"){
+			echo debut_boite_info(true);
+				echo recuperer_fond('fonds/echoppe_info_categorie',$contexte);
+			echo fin_boite_info(true);
+			echo recuperer_fond('fonds/echoppe_logo_categorie',$contexte);
+	}else{
+		echo debut_boite_info(true);
+			echo recuperer_fond('fonds/descriptif_echoppe');
+		echo fin_boite_info(true);
+	}
 	
 	include_spip('inc/echoppe_raccourcis');
 	$raccourcis = generer_raccourcis_echoppe();
@@ -76,9 +68,11 @@ function exec_echoppe_categorie(){
 	echo creer_colonne_droite(true);
 	
 	echo debut_droite(true,_T('echoppe:echoppe'));
-	
-	echo recuperer_fond('fonds/echoppe_categorie', $contexte);
-	
+	if ($contexte['id_categorie'] == "0"){
+		echo recuperer_fond('fonds/echoppe_echoppe', $contexte);
+	}else{
+		echo recuperer_fond('fonds/echoppe_categorie', $contexte);
+	}
 	echo fin_gauche(true);
 	echo fin_page(true);	
 }

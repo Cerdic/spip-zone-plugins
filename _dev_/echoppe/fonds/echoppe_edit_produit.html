@@ -1,17 +1,26 @@
+<div class="entete-formulaire">
+	<a class="icone36 secteur-24" [href="(#EVAL{echoppe_categorie}|generer_url_ecrire{[id_categorie=(#ID_CATEGORIE|sinon{#ID_PARENT})]})" style="float: left;">]
+	[<img width="24" height="24" alt="Retour" src="(#CHEMIN{images/produit-24.png})"/>]
+	<span><:retour:></span>
+	</a>
+	<:echoppe:edition_de_produit:> :
+	[<h1>(#TITRE|sinon{#NEW|=={oui}|?{<:echoppe:nouveau_produit:>,<:echoppe:pas_de_titre:>}})</h1>]
+</div>
 <div class="formulaire_spip">
 	<form [action="(#ACTION|generer_url_action{id_produit=#ID_PRODUIT&id_categorie=#ID_CATEGORIE&lang_produit=#LANG_PRODUIT&new=#NEW})"] method="post" >
 		<div class="echoppe_edit_produit">
 			[<input type="hidden" name="new" value="(#NEW)" />]
-			[<input type="hidden" name="lang_produit" value="(#LANG_PRODUIT)" />]
+			[<input type="hidden" name="lang" value="(#LANG)" />]
+			[<input type="hidden" name="id_produit" value="(#ID_PRODUIT)" />]
 			<ul>
-				<li>
+				<li class="editer_titre obligatoire" >
 					<label for="titre_produit" ><:echoppe:titre_produit:></label>
-					<input type=text class="forml" id="titre_produit" name="titre" value="#TITRE**"/><br />
+					<input type="text" class="forml" id="titre_produit" name="titre" value="#TITRE**"/><br />
 				</li>
 				
 				<li>
-					<label for="ref_produit" ><:echoppe:titre_produit:></label>
-					<input type=text class="forml" id="ref_produit" name="titre" value="#REF_PRODUIT"/><br />
+					<label for="ref_produit" ><:echoppe:reference_interne:></label>
+					<input type="text" class="forml" id="ref_produit" name="ref_produit" value="#REF_PRODUIT"/><br />
 				</li>
 				
 				<li>

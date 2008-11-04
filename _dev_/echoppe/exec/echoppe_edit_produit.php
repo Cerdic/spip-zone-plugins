@@ -47,7 +47,6 @@ function exec_echoppe_edit_produit(){
 	
 	echo creer_colonne_droite(true);
 	echo debut_droite(_T('echoppe:edition_de_produit'),true);
-	echo gros_titre(_T("echoppe:edition_de_produit"),'',false);
 	echo recuperer_fond('fonds/echoppe_edit_produit', $contexte);
 
 	echo fin_gauche(true);
