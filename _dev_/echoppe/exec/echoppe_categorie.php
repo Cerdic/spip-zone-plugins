@@ -65,9 +65,9 @@ function exec_echoppe_categorie(){
 	}*/
 	echo fin_boite_info(true);
 	
-	echo debut_boite_info(true);
-		echo recuperer_fond('fonds/echoppe_logo_categorie',$contexte);
-	echo fin_boite_info(true);
+	
+	echo recuperer_fond('fonds/echoppe_logo_categorie',$contexte);
+	
 	
 	include_spip('inc/echoppe_raccourcis');
 	$raccourcis = generer_raccourcis_echoppe();

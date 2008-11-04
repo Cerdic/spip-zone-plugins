@@ -12,7 +12,7 @@ function exec_echoppe_produit(){
 	$contexte = array();
 	$contexte['id_produit'] = _request('id_produit');
 	$contexte['lang_produit'] = _request('lang_produit');
-	
+	/*
 	$sql_lien_produit_categorie = "SELECT id_categorie FROM spip_echoppe_categories_produits WHERE id_produit = '".$contexte['id_produit']."';";
 	//echo $sql_lien_produit_categorie;
 	$res_lien_produit_categorie = spip_query($sql_lien_produit_categorie);
@@ -29,10 +29,14 @@ function exec_echoppe_produit(){
 	$description_produit = spip_fetch_array($res_description_produit);
 	(is_array($description_produit))?$contexte = array_merge($contexte,$description_produit):$contexte = $contexte;
 	
-	
 	$contexte['action'] = 'echoppe_sauve_general_produit';
 	
-	if (sql_count($res_le_produit) != 1 && $contexte['new'] != "oui"){
+	*/
+	
+	$res_leproduit = sql_select('*','spip_echoppe_produits','id_produit = '.$contexte['id_produit']);
+	$contexte = array_merge($contexte,sql_fetch($res_leproduit));
+	
+	if (sql_count($res_leproduit) != 1 && $contexte['new'] != "oui"){
 		die(inc_commencer_page_dist(_T('echoppe:les_produits'), "redacteurs", "echoppe")._T('echoppe:pas_de_produit_ici').fin_page());
 	}
 	
@@ -43,27 +47,17 @@ function exec_echoppe_produit(){
 	echo recuperer_fond('fonds/echoppe_chemin_categorie',$contexte);
 	echo fin_grand_cadre();*/
 	
+	debut_grand_cadre(true);
+		echo recuperer_fond('fonds/echoppe_chemin_categorie',$contexte);
+	fin_grand_cadre(true);
+	
 	echo debut_gauche('',true);
 	
-	echo recuperer_fond('fonds/echoppe_chemin_categorie',$contexte);
 	echo debut_boite_info(true);
 	echo recuperer_fond('fonds/echoppe_info_produit', $contexte);
-	$les_langues = explode(',',$GLOBALS['meta']['langues_multilingue']);
-	//if (count($les_langues) > 1){
-		echo '<form action="index.php" method="get">
-		<input type="hidden" name="exec" value="echoppe_edit_produit" />
-		<input type="hidden" name="id_produit" value="'.$contexte['id_produit'].'" />
-		<select name="lang_produit">';
-		echo '<option value="">'._T('echoppe:par_defaut').'</option>';
-		foreach ($les_langues as $value) {
-			echo '<option value="'.$value.'">'.traduire_nom_langue($value).'</option>';
-		}
-		echo '</form>
-		<input type="submit" value="'._T('echoppe:editer').'" />
-		</select>';
-	//}
 	echo fin_boite_info(true);
 	
+	echo recuperer_fond('fonds/echoppe_logo_produit',$contexte);
 	
 	include_spip('inc/echoppe_raccourcis');
 	$raccourcis = generer_raccourcis_echoppe();

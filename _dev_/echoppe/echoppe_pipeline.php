@@ -12,7 +12,7 @@ function echoppe_ajouter_boutons($flux){
 	return $flux;	
 }
 function echoppe_header_prive($flux){
-	//$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_ECHOPPE.'css/echoppe.css'.'" type="text/css" media="all" />';
+	$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_ECHOPPE.'css/echoppe.css'.'" type="text/css" media="all" />';
 	return $flux;	
 }
 

@@ -1,23 +1,31 @@
 <div style="text-align: center;">
 	<B_LeProduit>
 
-	<BOUCLE_LeProduit(SPIP_ECHOPPE_PRODUITS){id_produit}>
+	<BOUCLE_LeProduit(ECHOPPE_PRODUITS){id_produit}>
 		<div style="font-weight:bold;text-align: center; text-transform : uppercase;"><:echoppe:produit_numero:></div>
 		<div style="font-weight:bold;text-align: center;" class="spip_xx-large">#ID_PRODUIT</div>
+		<br />
+		<div style="font-weight:bold;text-align: center; text-transform : uppercase;"><:echoppe:reference_du_produit:></div>
+		<div style="font-weight:bold;text-align: center;" class="spip_xx-large">[(#REF_PRODUIT|sinon{"#REF!"})]</div>
+		<br />
 		<div style="font-size: 10;text-align: center;"><:echoppe:derniere_modification:> : <br />
 		[<strong>(#MAJ|affdate|sinon{<:echoppe:pas_encore_modifie:>})</strong></div>]
 		<br />
-		<strong><:echoppe:etat_du_produit:></strong>
-		<div class="boutton_statut [(#STATUT|=={prepa}|?{'prepa',''})]"><a href="[(#EVAL{echoppe_preparer_produit}|generer_url_action{id_produit=#ID_PRODUIT})]"><:echoppe:prepa:></a></div>
-		<div class="boutton_statut [(#STATUT|=={propose}|?{'propose',''})]"><a href="[(#EVAL{echoppe_proposer_produit}|generer_url_action{id_produit=#ID_PRODUIT})]"><:echoppe:propose:></a><br /></div>
-		<div class="boutton_statut [(#STATUT|=={publie}|?{'publie',''})]"><a href="[(#EVAL{echoppe_publier_produit}|generer_url_action{id_produit=#ID_PRODUIT})]"><:echoppe:publie:></a><br /></div>
-		<div class="boutton_statut [(#STATUT|=={poubelle}|?{'poubelle',''})]"><a href="[(#EVAL{echoppe_effacer_produit}|generer_url_action{id_produit=#ID_PRODUIT})]"><:echoppe:poubelle:></a><br /></div>
-		
+		<ul class="instituer">
+			<li><:echoppe:etat_du_produit:>
+				<ul>
+					<li class="prepa [(#STATUT|=={prepa}|?{'selected',''})]"><a href="[(#EVAL{echoppe_preparer_produit}|generer_url_action{id_produit=#ID_PRODUIT})]"><img src="[(#CHEMIN{images/puce-blanche.gif})]" /><:echoppe:prepa:></a></li>
+					<li class="prop [(#STATUT|=={propose}|?{'selected',''})]"><a href="[(#EVAL{echoppe_proposer_produit}|generer_url_action{id_produit=#ID_PRODUIT})]"><img src="[(#CHEMIN{images/puce-orange.gif})]" /><:echoppe:propose:></a></li>
+					<li class="publie [(#STATUT|=={publie}|?{'selected',''})]"><a href="[(#EVAL{echoppe_publier_produit}|generer_url_action{id_produit=#ID_PRODUIT})]"><img src="[(#CHEMIN{images/puce-verte.gif})]" /><:echoppe:publie:></a></li>
+					<li class="poubelle [(#STATUT|=={poubelle}|?{'selected',''})]"><a href="[(#EVAL{echoppe_effacer_produit}|generer_url_action{id_produit=#ID_PRODUIT})]"><img src="[(#CHEMIN{images/puce-poubelle.gif})]" /><:echoppe:poubelle:></a></li>
+				</ul>
+			</li>
+		</ul>
 		<br />
-		<:echoppe:edition_de_la_version:><br />
+		[(#LOGO_PRODUIT{#ID_PRODUIT}||image_reduire{175})]
 	</BOUCLE_LeProduit>
-
+	
 	</B_LeProduit>
-	<:echoppe:pas_de_produit_ici:>
+		<:echoppe:pas_de_produit_ici:>
 	<//B_LeProduit>
 </div>

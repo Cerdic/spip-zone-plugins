@@ -22,14 +22,24 @@ function action_echoppe_sauver_categorie(){
 		case 'oui':
 			$valeur = array('id_categorie'=>'','id_parent'=>$id_parent,'id_secteur'=>$id_secteur);
 			$new_id_categorie = sql_insertq('spip_echoppe_categories',$categorie);
-			sql_updateq('spip_echoppe_categories',array('id_secteur' => recuperer_id_secteur($categorie['id_parent'],'categorie')), 'id_categorie = '.$new_id_categorie);
+			if($categorie['id_parent'] == 0) {
+				$temp_id_parent = $categorie['id_categorie'];
+			}else{
+				$temp_id_parent = $categorie['id_parent'];
+			}
+			sql_updateq('spip_echoppe_categories',array('id_secteur' => recuperer_id_secteur($temp_id_parent,'categorie')), 'id_categorie = '.$new_id_categorie);
 			$id_categorie = $new_id_categorie;
 			break;
 		
 		
 		default :
 			$sav_update = sql_updateq('spip_echoppe_categories',$categorie,'id_categorie = '.$categorie['id_categorie']);
-			sql_updateq('spip_echoppe_categories',array('id_secteur' => recuperer_id_secteur($categorie['id_parent'],'categorie')), 'id_categorie = '.$categorie['id_categorie']);
+			if($categorie['id_parent'] == 0) {
+				$temp_id_parent = $categorie['id_categorie'];
+			}else{
+				$temp_id_parent = $categorie['id_parent'];
+			}
+			sql_updateq('spip_echoppe_categories',array('id_secteur' => recuperer_id_secteur($temp_id_parent,'categorie')), 'id_categorie = '.$categorie['id_categorie']);
 			$id_categorie = $categorie['id_categorie'];
 			break;
 		

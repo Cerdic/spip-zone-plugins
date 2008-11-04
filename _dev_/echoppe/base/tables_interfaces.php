@@ -16,7 +16,7 @@ function echoppe_tables_interfaces($tables_interfaces){
 	$tables_interfaces['table_des_tables']['echoppe_commentaires_paniers'] = 'echoppe_commentaires_paniers';
 	$tables_interfaces['table_des_tables']['echoppe_prestataires'] = 'echoppe_prestataires';
 	
-	
+	$tables_interfaces['table_des_tables']['echoppe_hierarchie'] = 'echoppe_categories';
 	
 	$tables_interfaces['tables_jointures']['echoppe_categories'] = 'echoppe_categories_produits';
 	$tables_interfaces['tables_jointures']['echoppe_produits'] = 'echoppe_categories_produits';
@@ -41,6 +41,7 @@ function echoppe_tables_interfaces($tables_interfaces){
 	
 	$tables_interfaces['tables_jointures']['echoppe_produits'] = 'echoppe_produits_sites';
 	$tables_interfaces['tables_jointures']['sites'] = 'echoppe_produits_sites';
+	
 	
 	//var_dump($tables_interfaces);
 	return $tables_interfaces;

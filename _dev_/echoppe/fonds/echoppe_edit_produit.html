@@ -1,26 +1,55 @@
-[(#CHEMIN{images/produit-24.png}|debut_cadre_trait_couleur{1,"",<:echoppe:edition_de:> [(#TITRE|sinon{#NEW|=={oui}|?{<:echoppe:nouveau_produit:>,<em><:pas_de_titre:></em>}})],"",produit})]
-<form [action="(#ACTION|generer_url_action{id_produit=#ID_PRODUIT&id_categorie=#ID_CATEGORIE&lang_produit=#LANG_PRODUIT&new=#NEW})"] method="post" >
-	<div class="echoppe_edit_produit">
-		[<input type="hidden" name="new" value="(#NEW)" />]
-		[<input type="hidden" name="lang_produit" value="(#LANG_PRODUIT)" />]
-		<b><:echoppe:titre_produit:></b><br />
-		<input type=text class="forml" name="titre" value="#TITRE**"/><br />
-		
-		<b><:echoppe:descriptif:></b><br />
-		<textarea name="description" class="forml" >#DESCRIPTIF**</textarea><br />
-		
-		<b><:echoppe:texte:></b><br />
-		[(#TEXTE**|barre_textarea{20,40,#LANG})]
-		<br />
-		
-		<b><:echoppe:ps:></b><br />
-		<textarea name="ps" class="forml" >#PS*</textarea><br />
-		
-		
-		<b><:echoppe:quantite_minimum:></b>&nbsp;<input type="text" name="quantite_mini" value="[(#QUANTITE_MINI|sinon{1})]" />&nbsp;<:echoppe:unites:><br /><br />
-		<b><:echoppe:tva:></b>&nbsp;<input type="text" name="tva" value="[(#TVA|sinon{#CONFIG{echoppe/taux_de_tva_par_defaut, 6}})]" />&nbsp;%
-		<hr/>
-		<input type="submit" class="fondo" />
-	</div>
-</form>
-[(#EVAL{1}|fin_cadre_trait_couleur)]
+<div class="formulaire_spip">
+	<form [action="(#ACTION|generer_url_action{id_produit=#ID_PRODUIT&id_categorie=#ID_CATEGORIE&lang_produit=#LANG_PRODUIT&new=#NEW})"] method="post" >
+		<div class="echoppe_edit_produit">
+			[<input type="hidden" name="new" value="(#NEW)" />]
+			[<input type="hidden" name="lang_produit" value="(#LANG_PRODUIT)" />]
+			<ul>
+				<li>
+					<label for="titre_produit" ><:echoppe:titre_produit:></label>
+					<input type=text class="forml" id="titre_produit" name="titre" value="#TITRE**"/><br />
+				</li>
+				
+				<li>
+					<label for="ref_produit" ><:echoppe:titre_produit:></label>
+					<input type=text class="forml" id="ref_produit" name="titre" value="#REF_PRODUIT"/><br />
+				</li>
+				
+				<li>
+					<label for="descriptif_produit" ><:echoppe:descriptif:></label>
+					<textarea id="descriptif_produit" name="descriptif" class="forml" >#DESCRIPTIF**</textarea><br />
+				</li>
+				
+				<li>
+					<label for="text_area" ><:echoppe:texte:></label><br />
+					[(#EVAL{text_area}|barre_typo)]
+					<textarea name='texte' id='text_area' class='barre_inserer forml' rows='20' cols='40'[(#ENV**{browser_caret,''})]>[(#TEXTE**)]</textarea>
+				</li>
+				[(#SET{'parent',#ID_CATEGORIE})]
+				<B_les_categ>
+					<li>
+						<label for="id_categorie_produit"><:echoppe:dans_la_categorie:></label>
+						<select name="id_categorie" class="forml" id="id_categorie_produit" >
+							<option value="0"><:echoppe:a_la_racine:></option>
+						<BOUCLE_les_categ(ECHOPPE_CATEGORIES)>
+							<option value="#ID_CATEGORIE" [(#ID_CATEGORIE|=={#GET{'parent'}}|?{'selected="selected"',''})]>#TITRE</option>
+						</BOUCLE_les_categ>
+						</select>
+					</li>
+				</B_les_categ>
+				<li>
+					<label for="ps_produit" ><:echoppe:ps:></label>
+					<textarea id="ps_produit" name="ps" class="forml" >#PS*</textarea><br />
+				</li>
+				<li>
+					<label for="quantite_mini" ><:echoppe:quantite_minimum:></label>&nbsp;<input type="text" id="quantite_mini" name="quantite_mini" value="[(#QUANTITE_MINI|sinon{1})]" />&nbsp;<:echoppe:unites:><br /><br />
+				</li>
+				<li>
+					<label for="tva" ><:echoppe:tva:></label>&nbsp;<input type="text" id="tva" name="tva" value="[(#TVA|sinon{#CONFIG{echoppe/taux_de_tva_par_defaut, 6}})]" />&nbsp;%
+				</li>
+				<li>
+					<input type="submit" class="fondo" />
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>

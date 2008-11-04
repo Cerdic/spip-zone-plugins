@@ -3,25 +3,5 @@
 	<div style="font-weight:bold;" class="spip_xx-large">#ID_CATEGORIE</div>
 	<div style="font-size: 10;"><:echoppe:derniere_modification:> : <br /><b>[(#MAJ|affdate|=={0000}|?{<:echoppe:pas_encore_modifie:>,#MAJ|affdate})]</b></div>
 	<br />
-	<:echoppe:edition_de_la_version:><br />
-	<!--
-			if (empty($contexte['lang_categorie'])) {
-				echo '<b>=> <a href="'.generer_url_ecrire('echoppe_edit_categorie','id_categorie='.$contexte['id_categorie'].'&lang_categorie=').'">'._T('echoppe:par_defaut').'</a></b><br />';
-			}else{
-				echo '<a href="'.generer_url_ecrire('echoppe_edit_categorie','id_categorie='.$contexte['id_categorie'].'&lang_categorie=').'">'._T('echoppe:par_defaut').'</a><br />';
-			}
-			$les_langues = explode(',',$GLOBALS['meta']['langues_multilingue']);
-
-			if (count($les_langues) > 1){
-				/*$les_langues = explode(',',$GLOBALS['meta']['langues_multilingue']);*/
-				foreach ($les_langues as $key => $value){
-					if ($value == $lang_categorie) {
-						echo '<b>=> <a href="'.generer_url_ecrire('echoppe_edit_categorie','id_categorie='.$id_categorie.'&lang_categorie='.$value).'">'.traduire_nom_langue($value).'</a></b><br />';
-					}else{
-						echo '<a href="'.generer_url_ecrire('echoppe_edit_categorie','id_categorie='.$id_categorie.'&lang_categorie='.$value).'">'.traduire_nom_langue($value).'</a><br />';
-					}
-					
-				}
-			}
-	-->
+	[(#LOGO_CATEGORIE{#ID_CATEGORIE}||image_reduire{175})]
 </div>

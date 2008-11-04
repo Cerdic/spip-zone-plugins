@@ -8,7 +8,7 @@ function action_echoppe_attribuer_logo_produit(){
 	
 	$type_file = $_FILES['logo_produit']['type'];
 	
-	$content_dir = getcwd().'IMG/echoppe/produits/'; // dossier où sera déplacé le fichier
+	$content_dir = getcwd().'/../IMG/echoppe/produits/'; // dossier où sera déplacé le fichier
 	
 	if (!file_exists(getcwd().'/../IMG/echoppe/')){
 		mkdir(getcwd().'/../IMG/echoppe/');

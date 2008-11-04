@@ -5,16 +5,14 @@
 		</div>
 		[<h1 class="categorie ">(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})</h1>]
 		[<p class="verdana1 spip_small">(#DESCRIPTIF)</p>]
-		[<p class="spip">(#TEXTE)</p>]
 	</div>
 </div>
 <B_LesSousCategorie>
-<br />
 <div>
 	<strong><:echoppe:les_sous_categories:></strong>
 		
 		<BOUCLE_LesSousCategorie(ECHOPPE_CATEGORIES){id_parent = #ID_CATEGORIE}{par num titre}>
-		<div class="cadre-sous_rub" style="float: left; width: 40%; margin: 5px; height: 80px;">
+		<div class="cadre-sous_rub" style="float: left; width: 45%; margin: 5px; height: 80px;">
 			<strong><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">[(#TITRE|sinon{<em><:sans_titre:></em>})]</a></strong>
 			[<div class="verdana1 cadre_padding">(#DESCRIPTIF|couper{80})</div>]
 		</div>
@@ -53,7 +51,7 @@
 	</div>
 </B_LesProduits>
 <div style="clear: right;">
-	<a style="float: right;" class="icone36" href="[(#EVAL{echoppe_edit_categorie}|generer_url_ecrire{new=oui&id_categorie=#ID_CATEGORIE})]"><img src="[(#CHEMIN{images/categorie-24.png})]" /><span><:echoppe:ajouter_une_categorie:></span></a>
+	<a style="float: right;" class="icone36" href="[(#EVAL{echoppe_edit_categorie}|generer_url_ecrire{new=oui})]"><img src="[(#CHEMIN{images/categorie-24.png})]" /><span><:echoppe:ajouter_une_categorie:></span></a>
 </div>
 </B_LesProduits>
 <div style="clear: right;">

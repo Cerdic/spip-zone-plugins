@@ -17,9 +17,9 @@ function balise_TOTAL_ITEM_PANIER_dyn($cible) {
 
 	$_sql = "SELECT id_produit FROM spip_echoppe_paniers WHERE token_panier = '".session_get('echoppe_token_panier')."';";
 	//echo $_sql;
-	$_res = spip_query($_sql);
+	$_res = sql_query($_sql);
 	//var_dump($_res);
-	$_quantite = spip_num_rows($_res);
+	$_quantite = sql_count($_res);
 	//var_dump($_quantite);
 	zero_si_vide($_quantite);
 	//var_dump($_quantite);

@@ -39,25 +39,15 @@ function exec_echoppe_edit_produit(){
 	echo inc_commencer_page_dist(_T('echoppe:les_produits'), "redacteurs", "echoppe");
 	
 	echo debut_gauche('',true);
-
-	/*echo debut_boite_info();
-		echo recuperer_fond('fonds/echoppe_info_edit_produit',$contexte);
-	echo fin_boite_info();*/
 	
 	
 	include_spip('inc/echoppe_raccourcis');
 	$raccourcis = generer_raccourcis_echoppe();
 	echo bloc_des_raccourcis($raccourcis);
-
-	if ($contexte['new'] != 'oui' && $contexte['new'] != 'ajout_description'){
-		echo debut_boite_info(true);
-		echo recuperer_fond('fonds/echoppe_logo_produit',$contexte);
-		echo fin_boite_info(true);
-	}
-
+	
 	echo creer_colonne_droite(true);
 	echo debut_droite(_T('echoppe:edition_de_produit'),true);
-	
+	echo gros_titre(_T("echoppe:edition_de_produit"),'',false);
 	echo recuperer_fond('fonds/echoppe_edit_produit', $contexte);
 
 	echo fin_gauche(true);

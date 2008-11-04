@@ -35,13 +35,14 @@
 		<B_CategoriesALaRacine>
 		<div >
 			<ul>
-				<BOUCLE_CategoriesALaRacine(SPIP_ECHOPPE_CATEGORIES_DESCRIPTIONS spip_echoppe_categories){par num titre}{id_secteur = 0}{lang = ""}>
+				<BOUCLE_CategoriesALaRacine(ECHOPPE_CATEGORIES){par num titre}>
 				<li>[<strong>(#TITRE|supprimer_numero)</strong>]<br />
 					<div style="border: 1px #CCC dotted;">[<small>(#DESCRIPTIF|couper{100})</small>]
+					[(#LOGO_CATEGORIE||image_reduire{100})<br />]
 					[(#TEXTE)]</div>
 					<B_LesProduitsDeCetteCategorie>
 						<ul>
-							<BOUCLE_LesProduitsDeCetteCategorie(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits spip_echoppe_categories_produits){statut = publie}{par num titre}{id_categorie}{lang=""}{"<hr />"}>
+							<BOUCLE_LesProduitsDeCetteCategorie(ECHOPPE_PRODUITS){statut = publie}{par num titre}{id_categorie}{"<hr />"}>
 							<li>
 								[<em>(#TITRE|supprimer_numero)</em><br />]
 								[(#LOGO_PRODUIT||image_reduire{100})<br />]

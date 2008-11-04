@@ -8,20 +8,20 @@ function echoppe_echec_autorisation(){
 	echo fin_boite_alerte();
 }
 
-function recuperer_id_secteur($id, $objet){
+function recuperer_id_secteur($id_parent, $objet){
 	switch ($objet){
 		case 'categorie':
 			if($id != 0){
-				//$sql_recup_id_secteur = ("SELECT id_secteur FROM spip_echoppe_categories WHERE id_categorie = '".$id."';");
-				$res_recup_id_secteur = sql_select(array("id_secteur"),array("spip_echoppe_".$objet."s"), array("id_".$objet." = ".$id));
-				//$res_recup_id_secteur = spip_query($sql_recup_id_secteur);
-				$id_secteur = sql_fetch($res_recup_id_secteur);
-				return $id_secteur['id_secteur'];				
+				$res_recup_id_secteur = sql_select(array("id_secteur"),array("spip_echoppe_".$objet."s"), array("id_".$objet." = ".$id_parent));
+				$temp = sql_fetch($res_recup_id_secteur);
+				$id_secteur = $temp['id_secteur'];				
 			}else{
-				return $id;
+				$id_secteur = $id_parent;
 			}
 		break;
 	}
+	
+	return $id_secteur;
 }
 
 function array2select($tab, $nom, $style){

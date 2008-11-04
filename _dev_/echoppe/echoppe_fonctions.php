@@ -5,12 +5,12 @@ function generer_url_validation_panier(){
 	
 }
 
-function generer_logo($nom_fichier){
+/*function generer_logo($nom_fichier){
 	
 	$logo = '<img src="IMG/'.$nom_fichier.'" alt="'.textebrut($nom_fichier).'" />';
 	if (strlen($nom_fichier) > 0) return $logo;
 	
-}
+}*/
 
 function generer_url_inscription(){
 	return "";
@@ -126,5 +126,37 @@ function balise_TOTAL_STOCK($p){
 	$p->code = "calculer_stock($_id_produit)";
 	$p->interdire_scripts = false;
 	return $p;
+}
+
+
+/*=============================BOUCLES================================*/
+
+function boucle_ECHOPPE_HIERARCHIE_dist($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table . ".id_categorie";
+
+// Si la boucle mere est une boucle RUBRIQUES il faut ignorer la feuille
+// sauf en presence du critere {tout} (vu par phraser_html)
+
+	$boucle->hierarchie = 'if (!($id_categorie = intval('
+	. calculer_argument_precedent($boucle->id_boucle, 'id_categorie', $boucles)
+	. ")))\n\t\treturn '';\n\t"
+	. '$hierarchie = '
+	. (isset($boucle->modificateur['tout']) ? '",$id_categorie"' : "''")
+	. ";\n\t"
+	. 'while ($id_categorie = sql_getfetsel("id_parent","spip_echoppe_categories","id_categorie=" . $id_categorie,"","","", "", $connect)) { 
+		$hierarchie = ",$id_categorie$hierarchie";
+	}
+	if (!$hierarchie) return "";
+	$hierarchie = substr($hierarchie,1);';
+
+	$boucle->where[]= array("'IN'", "'$id_table'", '"($hierarchie)"');
+
+    $order = "FIELD($id_table, \$hierarchie)";
+	if ($boucle->default_order[0] != " DESC")
+		$boucle->default_order[] = "\"$order\"";
+	else
+		$boucle->default_order[0] = "\"$order DESC\"";
+	return calculer_boucle($id_boucle, $boucles); 
 }
 ?>
