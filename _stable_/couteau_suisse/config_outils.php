@@ -1019,6 +1019,23 @@ add_outil( array(
 	'traitement:TEXTE/articles:pre_propre' => 'insertions_pre_propre',
 	'traitement:TEXTE/rubriques:pre_propre' => 'insertions_pre_propre',
 ));
+add_outil( array(
+	'id' => 'moderation_moderee',
+	'auteur' => 'Yohann(potter64)',
+	'categorie' => 'admin',
+	'version-min' => '1.9300',
+	'code:options' => '%%moderation_admin%%%%moderation_redac%%%%moderation_visit%%',
+	'pipeline:pre_edition' => 'moderation_vip',
+));
+add_variable( array(
+'nom' => 'moderation_admin', 'check' => 'couteauprive:moderation_admins', 'defaut' => 1, 'code:%s' => "define('_MOD_MOD_ADMIN',%s)",
+));
+add_variable( array(
+'nom' => 'moderation_redac', 'check' => 'couteauprive:moderation_redacs', 'defaut' => 0, 'code:%s' => "define('_MOD_MOD_REDAC',%s)",
+));
+add_variable( array(
+'nom' => 'moderation_visit', 'check' => 'couteauprive:moderation_visits', 'defaut' => 0, 'code:%s' => "define('_MOD_MOD_VISIT',%s)",
+));
 
 // Ajout des outils personnalises
 if(isset($GLOBALS['mes_outils']))
