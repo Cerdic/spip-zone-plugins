@@ -351,10 +351,11 @@ _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<htm
 	'mailcrypt:nom' => 'MailCrypt',
 	'modifier_vars' => 'Modifier ces @nb@ param&egrave;tres',
 	'moderation_moderee:nom' => 'Mod&eacute;ration Mod&eacute;r&eacute;e',
-	'moderation_moderee:description' => 'Permet de mod&eacute;r&eacute;r la mod&eacute;ration des forums pour les utilisateurs inscrits [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
-	'moderation_admins' => 'Activer la modération mod&eacute;r&eacute;e pour les administrateurs',
-	'moderation_redacs' => 'Activer la modération mod&eacute;r&eacute;e pour les rédacteurs',
-	'moderation_visits' => 'Activer la modération mod&eacute;r&eacute;e pour les visiteurs',
+	'label:moderation_admin' => 'Valider automatiquement les message des : '
+	'moderation_moderee:description' => 'Permet de mod&eacute;rer la mod&eacute;ration des forums pour les utilisateurs inscrits [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
+	'moderation_admins' => 'administrateurs authentifi&eacute;s',
+	'moderation_redacs' => 'r&eacute;dacteurs authentifi&eacute;s',
+	'moderation_visits' => 'visiteurs authentifi&eacute;s',
 
 	// N
 	'no_IP:description' => 'D&eacute;sactive le m&eacute;canisme d\'enregistrement automatique des adresses IP des visiteurs de votre site par soucis de confidentialit&eacute; : SPIP ne conservera alors plus aucun num&eacute;ro IP, ni temporairement lors des visites (pour g&eacute;rer les statistiques ou alimenter spip.log), ni dans les forums (responsabilit&eacute;).',
