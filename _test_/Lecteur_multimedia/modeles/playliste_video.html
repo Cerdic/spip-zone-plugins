@@ -84,11 +84,6 @@ eval(args);
 
 <style type="text/css">
 
-	.radiobox, #player{
-		width:320px;
-		margin-top:5px;
-	}
-
 	#vscrollbar{
 		clear:both;
 		height:5px;
@@ -124,9 +119,6 @@ eval(args);
 
 	#vscrollbar {
 		clear:none;
-	}
-	#player .timeline a:hover {
-		background-image: url(#CHEMIN{images/control_slider_blue.png});
 	}
 	
 	#playerv a{
@@ -187,11 +179,10 @@ eval(args);
 
 	}
 
-	ul.playliste{ clear:both; margin : 10px 20px; padding:10px 0px; border:none;text-align:left; }
-	ul.playliste a, #playliste_video a{ color:#fff; }
-	ul.playliste li, #playliste_video li{ f }
-	ul.playliste li.over, #playliste_video li.over{ background-color:#eeeeee; }
-	ul.playliste li.play_on, li.overli.play_on{ background-color:#a22c38; }
+	ul.video { clear:both; margin : 10px 20px; padding:10px 0px; border:none;text-align:left; }
+	ul.video a { color:#fff; }
+	ul.video li.over{ background-color:#eeeeee; }
+	ul.video li.play_on { background-color:#a22c38; }
 </style>
 
 <div id="playliste_video">
@@ -217,8 +208,8 @@ eval(args);
 			<div id="vposition"></div>
 		</div>
 	
-		<ul class="playliste">
-			<BOUCLE_doc (DOCUMENTS) {id_rubrique ?} {id_article ?} {extension==flv} {fichier == (flv$)} {!par date}{0,100}>
+		<ul class="playliste video">
+			<BOUCLE_doc (DOCUMENTS) {id_rubrique ?} {id_article ?} {extension==flv} {fichier == (flv$)} {!par date}{0,10}>
 			<li class="play_">
 				<a href="[(#FICHIER|replace{"\?key=(.)*$",""})]" type="#TYPE" rel="video">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{50})]})]</a>
 			</li>
