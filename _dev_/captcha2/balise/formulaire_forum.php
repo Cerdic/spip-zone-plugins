@@ -28,7 +28,7 @@ charger_generer_url();
 // 
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));   // surcharge plugin
 define('_DIR_PLUGIN_CAPTCHA2',(_DIR_PLUGINS.end($p))); // surcharge plugin
-
+include_spip("../"._DIR_PLUGIN_CAPTCHA2.'/captcha2_fonctions') ;// surcharge plugin
 
 /*******************************/
 /* GESTION DU FORMULAIRE FORUM */
@@ -224,6 +224,8 @@ function inclure_previsu($texte,$titre, $email_auteur, $auteur, $url_site, $nom_
 		$erreur = _T('forum_attention_trois_caracteres');
 	else if ($captcha!==$_SESSION['captcha2'])   // surcharge plugin
 	  $erreur = _T("captcha2:erreur_captcha");   // surcharge plugin 
+	else if (captcha2_ratio_non_ascii($texte)<0.5)       // surcharge plugin - FIXME integrer le ratio ds config
+	  $erreur = _T("captcha2:erreur_captcha_charset");   // surcharge plugin
 	else if (defined('_FORUM_LONGUEUR_MAXI')
 	AND _FORUM_LONGUEUR_MAXI > 0
 	AND strlen($texte) > _FORUM_LONGUEUR_MAXI)
