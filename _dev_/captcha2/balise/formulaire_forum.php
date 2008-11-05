@@ -224,7 +224,7 @@ function inclure_previsu($texte,$titre, $email_auteur, $auteur, $url_site, $nom_
 		$erreur = _T('forum_attention_trois_caracteres');
 	else if ($captcha!==$_SESSION['captcha2'])   // surcharge plugin
 	  $erreur = _T("captcha2:erreur_captcha");   // surcharge plugin 
-	else if (captcha2_ratio_non_ascii($texte)<0.5)       // surcharge plugin - FIXME integrer le ratio ds config
+	else if (captcha2_ratio_ascii($texte)<0.5)       // surcharge plugin - FIXME integrer le ratio ds config
 	  $erreur = _T("captcha2:erreur_captcha_charset");   // surcharge plugin
 	else if (defined('_FORUM_LONGUEUR_MAXI')
 	AND _FORUM_LONGUEUR_MAXI > 0
