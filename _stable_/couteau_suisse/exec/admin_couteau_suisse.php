@@ -30,12 +30,19 @@ div.cadre_padding form{	padding:0; margin:0; }
 div.cs-cadre{ padding:0.5em; margin:1px; width=100%; border:1px solid #666666; }
 div.cs-cadre h3 { margin:0.2em 0; border-bottom:1px solid #666666; }
 div.cs_infos { }
-div.cs_infos p { margin:0.3em 1em 0.3em 0pt; padding:0pt; }
+div.cs_infos p { margin:0.3em 1em 0.3em 0; padding:0; }
 div.cs_infos h3.titrem { border-bottom:solid 1px; font-weight:bold; display:block; }
 div.cs_infos legend { font-weight:bold; }
 div.cs_infos fieldset {	margin:.8em 4em .5em 4em; /* -moz-border-radius:8px; */ }
+div.cs_infos fieldset fieldset { border:0; margin:0 0 0 4em; padding:0.3em; }
+div.cs_infos fieldset>div { margin:0; }
 div.cs_infos sup { font-size:85%; font-variant:normal; vertical-align:super; }
 div.cs_infos hr { border:0; border-top:1px solid #67707F; }
+div.cs_infos img { border:0; }
+div.cs_infos div.cs_bouton { margin-top: 0; text-align: right; }
+div.cs_infos div.cs_modif_ok { font-weight:bold; color:green; margin:0.4em; text-align:center; }
+div.cs_infos div.cs_menu_outil { text-align:right; font-size:85%; margin-bottom:0.8em; }
+div.cs_infos div.cs_details_outil { font-size:85%; margin-top:0.8em; border-top:solid 1px; }
 
 .conteneur {
 	clear:both;
@@ -98,6 +105,11 @@ div.cs_sobre, input.cs_sobre {
 	text-align:left;
 	width:180px;
 }
+
+/* classes de description */
+.q1 { margin:0 2em; }
+.q2 { margin-left:2em; }
+.q3 { font-size:85%; }
 
 </style>
 EOF;

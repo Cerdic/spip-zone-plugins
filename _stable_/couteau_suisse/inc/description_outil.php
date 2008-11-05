@@ -106,18 +106,24 @@ function description_outil_une_variable($index, $outil, $variable, $label, &$ok_
 	$ok_input_ .= $ok_input; $ok_valeur_ .= $ok_valeur;
 }
 
-// callback sur les zones input de format [[label->variable]]
+// callback sur les labels de zones input ; format : [[label->qq chose]]
+// regexpr : ,\[\[([^][]*)->([^]]*)\]\],msS
 function description_outil_input1_callback($matches) {
 	global $cs_input_variable;
-	$cs_input_variable[] = str_replace('%','',$matches[2]);
-	return "<fieldset><legend>$matches[1]</legend><div style=\"margin:0;\">$matches[2]</div></fieldset>";
+	// pas de label : [[->qq chose]]
+	if(!strlen($matches[1])) return "<fieldset><div>$matches[2]</div></fieldset>";
+	// retour a la ligne : [[-->qq chose]]
+	if($matches[1]=='-') return "<fieldset> <div>$matches[2]</div></fieldset>";
+	// format complet : [[label->qq chose]]
+	return "<fieldset><legend>$matches[1]</legend><div>$matches[2]</div></fieldset>";
 }
 
-// callback sur les zones input de format [[tata %variable% toto]] en utilisant _T('couteauprive:label:variable') comme label
+// callback sur les label de zones input en utilisant _T('couteauprive:label:variable') ; format [[qq chose %variable% qq chose]]
+// regexpr : ,\[\[((.*?)%([a-zA-Z_][a-zA-Z0-9_]*)%(.*?))\]\],msS
 function description_outil_input2_callback($matches) {
 	global $cs_input_variable;
-	$cs_input_variable[] = str_replace('%','',$matches[1]);
-	return '<fieldset><legend>'._T('couteauprive:label:'.$matches[3]).'</legend><div style="margin:0;">'.$matches[1].'</div></fieldset>';
+	$cs_input_variable[] = $matches[3];
+	return '<fieldset><legend>'._T('couteauprive:label:'.$matches[3]).'</legend><div>'.$matches[1].'</div></fieldset>';
 }
 
 function description_outil_const_callback($matches) {
@@ -140,10 +146,10 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$descrip = preg_replace_callback(',<:([a-zA-Z_][a-zA-Z0-9_-]*):([0-9]*):>,', 'description_outil_descrip_callback', $descrip);
 	global $cs_input_variable;
 	$cs_input_variable = array();
-	// remplacement des zones input de format [[label->variable]]
+	// remplacement des zones input de format [[label->qq chose]]
 	$descrip = preg_replace_callback(',\[\[([^][]*)->([^]]*)\]\],msS', 'description_outil_input1_callback' , $descrip);
-	// remplacement des zones input de format [[tata %variable% toto]] en utilisant _T('couteauprive:label:variable') comme label
-	$descrip = preg_replace_callback(',\[\[(([^][]*)%([a-zA-Z_][a-zA-Z0-9_]*)%([^]]*))\]\],msS', 'description_outil_input2_callback', $descrip);
+	// remplacement des zones input de format [[qq chose %variable% qq chose]] en utilisant _T('couteauprive:label:variable') comme label
+	$descrip = preg_replace_callback(',\[\[((.*?)%([a-zA-Z_][a-zA-Z0-9_]*)%(.*?))\]\],msS', 'description_outil_input2_callback', $descrip);
 	// recherche des blocs <variable></variable> eventuels associes pour du masquage/demasquage
 	foreach($cs_input_variable as $v) {
 		$descrip = str_replace("</$v>", '</div>', preg_replace(",<$v\s+valeur=(['\"])(.*?)\\1\s*>,", "<div class='groupe_{$v} valeur_{$v}_$2'>", $descrip));
@@ -176,10 +182,10 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	// attention : on ne peut pas modifier les variables si l'outil est inactif
 	if ($actif) {
 		$bouton = "<input type='submit' class='fondo' value=\"".($c>1?_T('couteauprive:modifier_vars', array('nb'=>$c)):_T('bouton_modifier'))."\" />";
-		if($c>1) $ok_input .= "<div style=\"margin-top: 0; text-align: right;\">$bouton</div>";
+		if($c>1) $ok_input .= "<div class=\"cs_bouton\">$bouton</div>";
 			else $ok_input = str_replace(_VAR_OUTIL, $bouton, $ok_input);
 	} else
-		$ok_input = $ok_valeur . '<div style="margin-top: 0; text-align: right;">'._T('couteauprive:validez_page').' <span class="fondo" style="cursor:pointer; padding:0.2em;" onclick="submit_general('.$index.')">'._T('bouton_valider').'</span></div>';
+		$ok_input = $ok_valeur . '<div class="cs_bouton">'._T('couteauprive:validez_page').' <span class="fondo" style="cursor:pointer; padding:0.2em;" onclick="submit_general('.$index.')">'._T('bouton_valider').'</span></div>';
 	// nettoyage...
 	$ok_input = str_replace(_VAR_OUTIL, '', $ok_input);
 	// HIDDENCSVAR__ pour eviter d'avoir deux inputs du meme nom...
@@ -195,21 +201,18 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 		$res = ajax_action_auteur('description_outil', $index, $url_self, "modif=oui&cmd=descrip&outil={$outil['id']}", "$res");
 	}
 //cs_log(" FIN : inc_description_outil_dist({$outil['id']}) - {$outil['nb_variables']} variables(s) trouvee(s)");
-	$res = preg_replace(',(<br />)?</fieldset><fieldset><legend></legend>,', '', $res);
-	$res = preg_replace(',(<br />)?</fieldset><fieldset><legend>-</legend>,', '<br />', $res);
-	$res = str_replace('</label></div><div style="margin:0;"><label><input type="checkbox"', '</label>&nbsp;<label><input type="checkbox"', $res);
+	// remplacement des blocs avec style. ex : <q2>bla bla</q2>
+	$res = preg_replace(',</q(\d)>,','</div>', preg_replace(',<q(\d)>,','<div class="q$1">', $res));
+	// remplacement des inputs successifs sans label : [[%var1%]][[->%var2%]] ou [[%var1%]][[-->%var2%]]
+	$res = preg_replace(',(<br />)?</fieldset><fieldset>( ?<div>),', '$2', $res);
 	// remplacement des puces
 	$res = str_replace('@puce@', definir_puce(), $res);
 	// remplacement des constantes
 	$res = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 'description_outil_const_callback', $res);
 	// deuxieme reconstitution d'une description introduite par les constantes
 //	$res = preg_replace_callback(',<:([a-zA-Z_][a-zA-Z0-9_-]*):([0-9]*):>,', 'description_outil_descrip_callback', $res);
-	// remplacement des blocs avec style
-	$res = str_replace(array('<q1>','</q1>','<q2>','</q2>','<q3>','</q3>'),
-//		array('<div class="q1">', '</div>', '<div class="q2">', '</div>', '<div class="q3">', '</div>'), $res);
-		array("<div style='margin:0 2em;'>", '</div>', '<div style="margin-left:2em;">', '</div>', '<div style="font-size:85%;">', '</div>'), $res);
 
-	$modif=$modif?'<div style="font-weight:bold; color:green; margin:0.4em; text-align:center">&gt;&nbsp;'._T('couteauprive:vars_modifiees').'&nbsp;&lt;</div>':'';
+	$modif=$modif?'<div class="cs_modif_ok">&gt;&nbsp;'._T('couteauprive:vars_modifiees').'&nbsp;&lt;</div>':'';
 	return cs_ajax_action_greffe("description_outil-$index", $res, $modif);
 }
 ?>

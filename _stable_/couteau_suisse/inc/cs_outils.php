@@ -44,7 +44,7 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 function cs_description_pack() {
 	if(!isset($GLOBALS['cs_pack_actuel'])) return '';
 	return _DIV_CS_INFOS . debut_cadre_relief('', true)
-		. "<h3 class='titrem'><img src='"._DIR_IMG_PACK."puce-verte.gif' width='9' height='9' style='border:0;' alt='-' />&nbsp;" . _T('couteauprive:pack_titre') . '</h3>'
+		. "<h3 class='titrem'><img src='"._DIR_IMG_PACK."puce-verte.gif' width='9' height='9' alt='-' />&nbsp;" . _T('couteauprive:pack_titre') . '</h3>'
 		. propre(_T('couteauprive:pack_descrip') . "\n\n" . _T('couteauprive:contrib', array('url'=>'[->'._URL_CONTRIB.'2552]')))
 		. '<br/><textarea rows=30 cols=200 style="width:520px; font-size:90%;">'.htmlentities($GLOBALS[cs_pack_actuel], ENT_QUOTES, $GLOBALS['meta']['charset']).'</textarea>'
 		. fin_cadre_relief(true) . '</div>';
@@ -75,8 +75,8 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	if(!strlen($outil['id']) || !cout_autoriser('outiller', $outil) || cs_version_erreur($outil))
 		return _DIV_CS_INFOS . $s . _T('info_acces_interdit') . '</div></div>';
 
-	$s .= "<h3 class='titrem'><img src='"._DIR_IMG_PACK."$puce' name='puce_$id_input' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;" . $outil['nom'] . '</h3>';
-	$s .= '<div style="text-align:right; font-size:85%; margin-bottom:0.8em;">';
+	$s .= "<h3 class='titrem'><img src='"._DIR_IMG_PACK."$puce' name='puce_$id_input' width='9' height='9' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;" . $outil['nom'] . '</h3>';
+	$s .= '<div class="cs_menu_outil">';
 	if ($nb_var)
 		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=reset&outil='.$outil_id).'" title="' . _T('couteauprive:par_defaut') . '">' . _T('couteauprive:par_defaut') . '</a>&nbsp;|&nbsp;';
 	if (!$actif)
@@ -157,8 +157,8 @@ document.write('<div id=\"sous_liste_$id\" class=\"'+cs_Categorie('sous_liste_$i
 function detail_outil($outil_id) {
 	global $outils;
 	$outil = &$outils[$outil_id];
-	$hr = '<!hr style="margin:6pt 0 0 0;"/><div style="font-size:85%; margin-top:0.8em; border-top:solid 1px;">';
-	if (cs_version_erreur($outil)) return $hr . _T('couteauprive:erreur:version') . '</div>';
+	$div = '<div class="cs_details_outil">';
+	if (cs_version_erreur($outil)) return $div . _T('couteauprive:erreur:version') . '</div>';
 	$details = array();
 	if ($erreur_version) $details[] = _T('couteauprive:erreur:version');
 	$a = array();
@@ -174,7 +174,7 @@ function detail_outil($outil_id) {
 		$details[] =  _T('couteauprive:detail_traitements') . ' #' . join(', #', array_unique($regs[1]));	
 	if (preg_match_all(',(pipeline|pipelinecode):([a-z_]+),', serialize(array_keys($outil)), $regs, PREG_PATTERN_ORDER))
 		$details[] = _T('couteauprive:detail_pipelines') . ' ' . join(', ', array_unique($regs[2]));	
-	if(count($details)) return $hr . join('<br />', $details) . '</div>';
+	if(count($details)) return $div . join('<br />', $details) . '</div>';
 	return '';
 }
 ?>
