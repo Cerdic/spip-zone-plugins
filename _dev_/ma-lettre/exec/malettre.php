@@ -294,6 +294,9 @@ function exec_malettre(){
             $desti = _request('desti');
             $desti_more = _request('desti_more'); 
             if ($desti_more!="") $desti[] = $desti_more;
+            
+            echo "<h3>Envoi <i style='color:#999;'>$sujet</i></h3>\n";
+            echo "<div style='border:1px solid;background:#eee;margin:10px 0;padding:10px;font-family:arial,sans-serif;font-size:0.9em;'>";
                        
             if (is_array($desti)) {
               foreach ($desti as $k=>$adresse) { // envoi a tous les destinataires
@@ -317,7 +320,7 @@ function exec_malettre(){
                     $msg .="Mailer Error: " . $mail->ErrorInfo; 
                     $success_flag = false;
                 } else {  
-                    $msg = "<div style='color:green'><strong>$adresse</strong> - $sujet : <span style='color:green'>Lettre bien envoy&eacute;e !</span></div>";         
+                    $msg = "<div style='color:green'><strong>$adresse</strong> - <span style='color:green'>Lettre bien envoy&eacute;e !</span></div>";         
                 }
                  
                 echo $msg;
@@ -325,6 +328,7 @@ function exec_malettre(){
             } else {
               echo "<div style='color:red'>Erreur: aucun destinataire</div>";
             }
+            echo "</div>";
             
             // archivage de la lettre en dur
             $lettre_archive = "$path_archive_full/lettre_".date("Ymd")."_$lettre_hash.html";
