@@ -13,7 +13,6 @@
 
 <body class="page_article">
 <div id="page">
-	<div class="fond-blanc"></div>
 	
 	[(#REM) Contenu principal : contenu de l'article ]
     <div class="hfeed" id="conteneur">
@@ -83,6 +82,7 @@
 		<a href="#forum" name="forum" id="forum"></a>
 		<INCLURE{fond=inc-forum}{id_syndic}{id_article}>
 		[<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:repondre_article:></a></p>] 
+		<br class="nettoyeur" />
 
 	</div><!--#contenu-->
 	</div><!--#conteneur-->

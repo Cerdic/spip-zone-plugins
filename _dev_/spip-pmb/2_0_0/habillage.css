@@ -57,7 +57,7 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 
 #page { position: relative; width: 950px; margin: 0 auto; text-align: left; background-color: #e6e8d5; background-image: url(bg-logo.png); background-repeat: no-repeat; background-position: bottom left; }
 
-#top { position: relative; margin: 0; padding: 0; height: 118px; margin-bottom: 1.5em; }
+#top { position: absolute; margin: 0; padding: 0; top: 0; left: 0; width: 100%; height: 10em; margin-bottom: 10px; background: white; }
 #top a img.spip_logos { vertical-align: bottom; line-height: 1em; }
 #top #nom_site_spip { font-size: 2.2em; font-family: Georgia, Times, serif; margin-left: .5em; display: none; }
 #top #formulaire_recherche { position: absolute; right: 0; top: 1em; text-align: right; } /*Cf.: spip_formulaires.css*/
@@ -74,8 +74,8 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 #formulaire_recherche .recherche-avancee a { color: white; font-size: .8em; }
 
 
-#conteneur { position: relative; margin-top: 10px; clear: both; float: left; width: 730px; overflow: hidden; background-image: url(bordure-gris.gif); background-repeat: repeat-y; background-position: top right;}
-#contenu { margin-right: 10px; padding-left: 1em; }
+#conteneur { margin-top: 0; clear: both; float: left; width: 730px; overflow: hidden; background-image: url(bordure-gris.gif); background-repeat: repeat-y; background-position: top right;}
+#contenu { padding-top: 12em; margin-right: 10px; padding-left: 1em; }
 .logo-fond { position: absolute; bottom: 1.99em; left: 0; }
 
 
@@ -106,7 +106,7 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 .cartouche h1 { background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: bottom left; font-family: Georgia, serif; font-size: 3em; color: #333300; line-height: 1em; padding-bottom: .5em; }
 .cartouche h1.titre-long { font-size: 2.5em; }
 h1.pas-de-texte, .page_recherche h1, .page_nouveautes .cartouche h1, .page_actualites .cartouche h1, .page_auteur .cartouche h1, .page_ouvrages .cartouche h1, .page_serie .cartouche h1, .page_actualites .cartouche h1 { background: none; padding-bottom: 0; }
-.cartouche div.socialtags { clear: none; float: right; }
+.cartouche div.socialtags { clear: none; float: right; margin-top: .5em; margin-bottom: 1em; }
 
 
 .cartouche p { margin: 0; padding: 0; clear: left; }
@@ -127,7 +127,7 @@ h1.pas-de-texte, .page_recherche h1, .page_nouveautes .cartouche h1, .page_actua
 
 .surlignable .spip_logos { float: left; margin-right: 16px; margin-bottom: 4px; }
 
-.corps-conteneur { margin-left: 150px };
+.corps-conteneur { margin-left: 150px; clear: right; }
 
 .soustitre { color: #336666; text-decoration: none; margin-top: 0.50em; margin-bottom: 0.30em; font-style: italic; }
 .chapo { line-height: 1.40em; font-family: Georgia, serif; font-weight: bold; }
@@ -228,14 +228,14 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .rubriques ul li li li { padding-right: 0; padding-left: 1em; font-size: 1.1em; }
 
 /* Recherche */
-.recherche { background: #333300; padding-bottom: 1em;}
+.recherche { background: #333300; padding-bottom: 0;}
 .recherche h2 { color: white; padding: .5em; background-image: url(bordure-vert-fonce.gif); background-repeat: repeat-x; background-position: bottom left; }
 .recherche .formulaire_recherche { background: none; }
 .recherche .formulaire_recherche input.text { width: 9em; margin-left: .5em;}
 .recherche .formulaire_recherche input.submit { background: white; color: #333300; text-transform: uppercase; padding: 0; font-weight: bold; }
 
 /*menu de rubriques principales*/
-.principal { position: absolute; bottom: 0; left: 0; margin-top: 2.5em; padding-bottom: 0; margin-bottom: 0; }
+.principal { position: absolute; width: 100%; bottom: 0; left: 0; background: #E6E8D5; margin-bottom: 0;}
 .principal ul { margin: 0; padding: 0; border: none; }
 .principal ul li { float: left; margin: 0; margin-left: 1em; border: none; text-transform: uppercase; padding: 0; font-family: Verdana, sans-serif; }
 .principal ul li a { padding: .3em; background: white; }
@@ -429,7 +429,7 @@ div#page, div#conteneur, div#navigation, div#extra { width: auto; }
 #page .formulaire_recherche .boutons input, #page .formulaire_recherche input.submit { background-color: white; border-color: #333300; }
 
 
-.fond-blanc { position: absolute; top: 0; left: 0; width: 100%; height: 108px; background: white; }
+.fond-blanc { dispaly: none; }
 
 .navbar { clear: right; float: right; margin-right: 2em; margin-bottom: 2em; }
 

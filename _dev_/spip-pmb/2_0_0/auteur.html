@@ -10,7 +10,6 @@
 <body class="page_auteur">
 <div id="page">
 
-	<div class="fond-blanc"></div>
 	
 	[(#REM) Contenu principal : affichage de l'auteur ]
     <div id="conteneur">
@@ -29,7 +28,7 @@
 		<h1 class="#EDIT{qui} fn">#NOM</h1>
         </div>
 
-        [(#LOGO_AUTEUR||sinon{#CHEMIN{spipeur.png}}|image_reduire{200,0}|inserer_attribut{class,spip_logos})]
+        [(#LOGO_AUTEUR||sinon{#CHEMIN{spipeur.png}}|image_reduire{130,0}|inserer_attribut{class,spip_logos})]
 
 		<div class="corps-conteneur surlignable">
 			[<div class="#EDIT{bio} texte note">(#BIO)</div>]
