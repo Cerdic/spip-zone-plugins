@@ -65,7 +65,8 @@ function action_compteclics() {
 
 	// [fr] Puis on redirige vers l'URL du site
 	// [en] Last the redirect to the URI
-	header("Location:$o[url]");
+	include_spip('inc/headers');
+	redirige_par_entete($o[url]);
 }
 
 ?>
