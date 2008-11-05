@@ -43,7 +43,7 @@ table.spip { border: none; width: 100%; } /*Cf.: spip_style.css*/
 /* Logos, documents et images */
 .spip_logos { float: left; } /*Cf.: spip_style.css*/
 .spip_documents {} /*Cf.: spip_style.css*/
-.spip_documents_center {} /*Cf.: spip_style.css*/
+.spip_documents_center { width: auto; } /*Cf.: spip_style.css*/
 .spip_documents_left {} /*Cf.: spip_style.css*/
 .spip_documents_right {} /*Cf.: spip_style.css*/
 .spip_doc_titre {} /*Cf.: spip_style.css*/
@@ -57,8 +57,8 @@ body { background: gray; margin: 0; padding: 0; text-align: center; }
 
 #page { position: relative; width: 950px; margin: 0 auto; text-align: left; background-color: #e6e8d5; background-image: url(bg-logo.png); background-repeat: no-repeat; background-position: bottom left; }
 
-#top { position: absolute; margin: 0; padding: 0; top: 0; left: 0; width: 100%; height: 10.5em; margin-bottom: 10px; background: white; }
-#top a img.spip_logos { vertical-align: bottom; line-height: 1em; padding-top: 1em; padding-left: 1.5em; }
+#top { position: absolute; margin: 0; padding: 0; top: 0; left: 0; width: 950px; height: 10.5em; margin-bottom: 10px; background: white; }
+#top a img.spip_logos { vertical-align: bottom; line-height: 1em; margin-top: 1em; margin-left: 1.5em; }
 #top #nom_site_spip { font-size: 2.2em; font-family: Georgia, Times, serif; margin-left: .5em; display: none; }
 #top #formulaire_recherche { position: absolute; right: 0; top: 1em; text-align: right; } /*Cf.: spip_formulaires.css*/
 #top #formulaire_recherche input.text { width: 10em; text-align: left; } /*Cf.: spip_formulaires.css*/
@@ -74,12 +74,12 @@ body { background: gray; margin: 0; padding: 0; text-align: center; }
 #formulaire_recherche .recherche-avancee a { color: white; font-size: .8em; }
 
 
-#conteneur { margin-top: 0; clear: both; float: left; width: 730px; overflow: hidden; background-image: url(bordure-gris.gif); background-repeat: repeat-y; background-position: top right;}
-#contenu { padding-top: 12.5em; margin-right: 10px; padding-left: 1.5em; }
+#conteneur { margin-top: 0; padding-bottom: 1em; clear: both; float: left; width: 727px; overflow: hidden; }
+#contenu { padding-top: 12.5em; padding-left: 1.5em; }
 .logo-fond { position: absolute; bottom: 1.99em; left: 0; }
 
 
-#navigation { position: relative; float: right; width: 210px; margin-top: .5em; overflow: hidden; }
+#navigation { position: relative; float: right; width: 220px; margin-top: .5em; overflow: hidden; background-image: url(bordure-gris.gif); background-repeat: repeat-y; background-position: top left; }
 #extra { float: right; clear: right; width: 30%; margin-top: 1em; overflow: hidden; }
 
 #pied { clear: both; width: 100%; margin: 0; padding: 0.40em 0; text-align: left; font-size: 0.80em; color: white; background: gray; height: 2em; padding-top: 1em; }
@@ -106,7 +106,7 @@ body { background: gray; margin: 0; padding: 0; text-align: center; }
 .cartouche h1 { background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: bottom left; font-family: Georgia, serif; font-size: 3em; color: #333300; line-height: 1em; padding-bottom: .5em; }
 .cartouche h1.titre-long { font-size: 2.5em; }
 h1.pas-de-texte, .page_recherche h1, .page_nouveautes .cartouche h1, .page_actualites .cartouche h1, .page_auteur .cartouche h1, .page_ouvrages .cartouche h1, .page_serie .cartouche h1, .page_actualites .cartouche h1 { background: none; padding-bottom: 0; }
-.cartouche div.socialtags { clear: none; float: right; margin-top: .5em; margin-bottom: 1em; }
+.cartouche div.socialtags { clear: none; float: right; margin-top: 1em; margin-bottom: 1em; }
 
 
 .cartouche p { margin: 0; padding: 0; clear: left; }
@@ -147,7 +147,7 @@ abbr.published { border: 0; }
 #documents_portfolio .spip_logos { margin: 6px 3px 0 3px; padding: 4px; border: 1px solid #DDD; }
 #documents_portfolio a:hover .spip_logos { border-color: #99AC2D; }
 #documents_portfolio a.on .spip_logos { border-color: #8B6F92; }
-#document_actif { margin: 1em auto; }
+#document_actif { margin: 1em auto; margin-left: 150px; }
 #document_actif img { padding: 4px; border: 1px solid #DDD; }
 
 
@@ -228,7 +228,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .rubriques ul li li li { padding-right: 0; padding-left: 1em; font-size: 1.1em; }
 
 /* Recherche */
-.recherche { background: #333300; padding-bottom: 0;}
+.recherche { background: #333300; padding-bottom: 0; }
 .recherche h2 { color: white; padding: .5em; background-image: url(bordure-vert-fonce.gif); background-repeat: repeat-x; background-position: bottom left; }
 .recherche .formulaire_recherche { background: none; }
 .recherche .formulaire_recherche input.text { width: 9em; margin-left: .5em;}
@@ -246,7 +246,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .articles .plus-de-liens { color: #999966; font-size: 1.4em; padding-left: .6em; font-family: Georgia, serif;}
 .articles .plus-de-liens {  }
 .articles .plus-de-liens:hover { color: #999966; }
-.articles ul { border: none; }
+.articles ul { border: none; margin-bottom: 1em; }
 .articles ul li { clear: both; padding: 1.2em 0; padding-left: 0; border: none; background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: top left;}
 .articles ul li h3 { margin: 0.30em 0; text-transform: uppercase; font-family: Arial, sans-serif; font-size: 1em;}
 .articles .logo-encart { float: left; clear: left; height: 11em; }
@@ -270,7 +270,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .page_editeur .spip_logos { margin-left: 0; }
 
 /* sites référencés */
-.web { float: right; width: 35%; margin-top: 3em; margin-bottom: 2em; color: #333300; }
+.web { float: right; clear: right; width: 35%; margin-top: 3em; margin-bottom: 2em; color: #333300; }
 .web h2 { font-family: Arial, sans-serif; text-transform: uppercase; font-size: .9em; }
 .web ul { background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: top left; padding-top: .5em; margin-top: .2em; border: none; }
 .web ul li { font-size: .8em; border: none; margin: 0; }
@@ -374,7 +374,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .sous-rubriques { float: left; clear: left; width: 130px; border-right: 1px dotted #666; margin-top: 2em; }
 .sous-rubriques ul { border: none; }
 .sous-rubriques ul li { border: none; }
-.sous-rubriques h2 { color: #333300; }
+.sous-rubriques h2 { color: #333300; display: none;}
 
 /*notices */
 .pmb-exemplaires, .pmb-autreslecteurs {
@@ -382,7 +382,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 	margin-bottom: 2em;
 }
 
-#navigation .menu { margin-right: 10px; }
+#navigation .menu { margin-right: 10px; margin-left: 15px; }
 
 /* Couleurs des liens
 ---------------------------------------------- */
@@ -433,4 +433,4 @@ div#page, div#conteneur, div#navigation, div#extra { width: auto; }
 
 .navbar { clear: right; float: right; margin-right: 2em; margin-bottom: 2em; }
 
-#search { margin-bottom: 2em; background: #67741F; color: white; padding: .5em; }
+#search { margin-bottom: 2em; background: #999966; color: white; padding: .5em; }

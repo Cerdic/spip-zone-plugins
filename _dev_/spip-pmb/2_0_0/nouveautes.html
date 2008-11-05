@@ -1,6 +1,3 @@
-[(#REM)
-	Un cache plus court, pour la boucle syndic_articles
-]#CACHE{3600}
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
@@ -30,12 +27,12 @@
         [(#REM) Nouveaux ouvrages ]
 		<B_syndic_pmb>
 		<div class="menu articles nouveautes">
-			#ANCRE_PAGINATION
-			[<p class="pagination">(#PAGINATION)</p>]
 			<ul>
-			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){pmb_photo_src!=""} {par date}{inverse}{pagination 50}>[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'',' '})
+			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){pmb_photo_src!=""} {par date}{inverse}{1,50}>[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'',' '})
 					[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{width}|>{20}|?{' ',''})
 						[(#DESCRIPTIF|strlen|>{100}|?{' ',''})
+							[(#SET{nb_revues,[(#GET{nb_revues}|plus{1})]})]
+							[(#GET{nb_revues}|>{5}|?{'',' '})
 								<li class="hentry[ (#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'','avec-logo'})][ (#GET{nb_revues}|=={1}|?{'premier',''})]">
 							
 								[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'',' '})<a href="#URL_PAGE{notice_display,id=#PMB_ID_NOTICE&amp;seule=1}">[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130})]</a>]
@@ -45,11 +42,12 @@
 								[<div class="introduction entry-content">(#DESCRIPTIF|couper{300,'...'})</div>]
 								<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="#URL_PAGE{notice_display,id=#PMB_ID_NOTICE&amp;seule=1}"><:lire_la_suite:> +</a>
 								</li>
+							]
 						]
 					]
 				]</BOUCLE_syndic_pmb>
 			</ul>
-			[<p class="pagination">(#PAGINATION)</p>]
+			
 			
 		</div>
 		</B_syndic_pmb>
