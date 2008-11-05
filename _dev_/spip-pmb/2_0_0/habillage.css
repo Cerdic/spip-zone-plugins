@@ -53,12 +53,12 @@ table.spip { border: none; width: 100%; } /*Cf.: spip_style.css*/
 /*  ------------------------------------------
 /*  Disposition a l'ecran des blocs principaux
 /*  ------------------------------------------ */
-body { background: #FFF; margin: 0; padding: 0; text-align: center; }
+body { background: gray; margin: 0; padding: 0; text-align: center; }
 
 #page { position: relative; width: 950px; margin: 0 auto; text-align: left; background-color: #e6e8d5; background-image: url(bg-logo.png); background-repeat: no-repeat; background-position: bottom left; }
 
-#top { position: absolute; margin: 0; padding: 0; top: 0; left: 0; width: 100%; height: 10em; margin-bottom: 10px; background: white; }
-#top a img.spip_logos { vertical-align: bottom; line-height: 1em; }
+#top { position: absolute; margin: 0; padding: 0; top: 0; left: 0; width: 100%; height: 10.5em; margin-bottom: 10px; background: white; }
+#top a img.spip_logos { vertical-align: bottom; line-height: 1em; padding-top: 1em; padding-left: 1.5em; }
 #top #nom_site_spip { font-size: 2.2em; font-family: Georgia, Times, serif; margin-left: .5em; display: none; }
 #top #formulaire_recherche { position: absolute; right: 0; top: 1em; text-align: right; } /*Cf.: spip_formulaires.css*/
 #top #formulaire_recherche input.text { width: 10em; text-align: left; } /*Cf.: spip_formulaires.css*/
@@ -75,15 +75,15 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 
 
 #conteneur { margin-top: 0; clear: both; float: left; width: 730px; overflow: hidden; background-image: url(bordure-gris.gif); background-repeat: repeat-y; background-position: top right;}
-#contenu { padding-top: 12em; margin-right: 10px; padding-left: 1em; }
+#contenu { padding-top: 12.5em; margin-right: 10px; padding-left: 1.5em; }
 .logo-fond { position: absolute; bottom: 1.99em; left: 0; }
 
 
 #navigation { position: relative; float: right; width: 210px; margin-top: .5em; overflow: hidden; }
 #extra { float: right; clear: right; width: 30%; margin-top: 1em; overflow: hidden; }
 
-#pied { clear: both; width: 100%; margin: 0; padding: 0.40em 0; text-align: left; font-size: 0.80em; color: #404754; background: white; height: 2em; padding-top: 0; }
-#pied a {color: #404754; }
+#pied { clear: both; width: 100%; margin: 0; padding: 0.40em 0; text-align: left; font-size: 0.80em; color: white; background: gray; height: 2em; padding-top: 1em; }
+#pied a {color: white; }
 #pied img { vertical-align: middle; }
 
 /* Espaceur de blocs */
@@ -236,15 +236,15 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 
 /*menu de rubriques principales*/
 .principal { position: absolute; width: 100%; bottom: 0; left: 0; background: #E6E8D5; margin-bottom: 0;}
-.principal ul { margin: 0; padding: 0; border: none; }
+.principal ul { margin: 0; padding: 0; border: none; margin-left: .5em; }
 .principal ul li { float: left; margin: 0; margin-left: 1em; border: none; text-transform: uppercase; padding: 0; font-family: Verdana, sans-serif; }
-.principal ul li a { padding: .3em; background: white; }
+.principal ul li a { display: block; padding: .3em; background: white; }
 .principal ul li a:hover { color: white; background: #999966; text-decoration: none; }
 
 /* Listes d'articles et extraits introductifs */
 .articles { position: relative; padding: 0; }
 .articles .plus-de-liens { color: #999966; font-size: 1.4em; padding-left: .6em; font-family: Georgia, serif;}
-.articles .plus-de-liens { vertical-align: bottom; }
+.articles .plus-de-liens {  }
 .articles .plus-de-liens:hover { color: #999966; }
 .articles ul { border: none; }
 .articles ul li { clear: both; padding: 1.2em 0; padding-left: 0; border: none; background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: top left;}
@@ -356,7 +356,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 
 
 /* newsletter */
-.forums { background: #b2d100; }
+.forums { background: #999966; }
 .forums h2 { color: white; padding: .5em; background-image: url(bordure-vert-tresclair.gif); background-repeat: repeat-x; background-position: bottom left; }
 .forums ul { padding: .5em; }
 .forums ul li { border: none; font-size: .8em; letter-spacing: -1px; color: white; }
