@@ -17,19 +17,19 @@ $exceptions =
 // si ya pas d'exception, on bloque le site pour travaux
 if (!$exceptions)
 	$_GET['action'] = "cs_travaux";
-//echo'=';print_r($GLOBALS['auteur_session']);$controler_date_rss=true;
+
 // nettoyage
 unset($exceptions);
 
 function action_cs_travaux(){
 	include_spip('public/assembler');
-	echo recuperer_fond(defined('_SPIP19300')?'fonds/en_travaux2':'fonds/en_travaux', array(
+	echo recuperer_fond('fonds/en_travaux', array(
 		'message'=>_en_travaux_MESSAGE, 
 		'titre'=>defined('_en_travaux_TITRE')?_T('info_travaux_titre'):$GLOBALS['meta']['nom_site'],
 		// SPIP 2.0 : suppression pour l'instant de la possibilite de se logger directement pour un admin
 		// car les redacteurs pourraient acceder qd meme au site (1 seule page, mais 1 page de trop)
-		 'login'=>_en_travaux_ADMIN==1?'oui':'',
-		//'login'=>defined('_SPIP19300')?'':(_en_travaux_ADMIN==1?'oui':''),
+		// 'login'=>_en_travaux_ADMIN==1?'oui':'',
+		'login'=>defined('_SPIP19300')?'':(_en_travaux_ADMIN==1?'oui':''),
 	));
 	return true;
 }
