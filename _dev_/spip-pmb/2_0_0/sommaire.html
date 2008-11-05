@@ -51,7 +51,7 @@
 		<div class="menu articles nouveautes">
 			<h2><:nouveautes:></h2><a href="#URL_PAGE{nouveautes}" class="plus-de-liens"><:toutes_nouveautes:> +</a>
 			<ul>
-			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){pmb_photo_src!=""} {par hasard} {0,50}>
+			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){pmb_photo_src!=""} {par hasard} {0,20}>
 				[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'',' '})
 					[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{width}|>{20}|?{' ',''})
 						[(#DESCRIPTIF|strlen|>{100}|?{' ',''})

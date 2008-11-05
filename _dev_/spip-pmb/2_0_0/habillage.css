@@ -132,7 +132,8 @@ h1.pas-de-texte, .page_recherche h1, .page_nouveautes .cartouche h1, .page_actua
 .soustitre { color: #336666; text-decoration: none; margin-top: 0.50em; margin-bottom: 0.30em; font-style: italic; }
 .chapo { line-height: 1.40em; font-family: Georgia, serif; font-weight: bold; }
 .texte { line-height: 1.60em; padding-top: .5em; color: #000; font-family: Georgia, serif; }
-.hyperlien { display: block; font-weight: bold; color: #999966; }
+.hyperlien { display: block;  margin-left: 150px; font-weight: bold; color: #999966; }
+.page_auteur .hyperlien { margin-left:0 }
 .ps, .notes { margin-left: 150px; margin-bottom: 2em; line-height: 1.40em; }
 .notes { margin-left: 150px; clear: both; font-size: 0.90em; }
 
@@ -237,7 +238,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 /*menu de rubriques principales*/
 .principal { position: absolute; width: 100%; bottom: 0; left: 0; background: #E6E8D5; margin-bottom: 0;}
 .principal ul { margin: 0; padding: 0; border: none; margin-left: .5em; }
-.principal ul li { float: left; margin: 0; margin-left: 1em; border: none; text-transform: uppercase; padding: 0; font-family: Verdana, sans-serif; }
+.principal ul li { float: left; margin: 0; margin-left: .6em; border: none; text-transform: uppercase; padding: 0; font-family: Verdana, sans-serif; }
 .principal ul li a { display: block; padding: .3em; background: white; }
 .principal ul li a:hover { color: white; background: #999966; text-decoration: none; }
 
@@ -313,6 +314,9 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .page_sommaire .articles .mise-en-page-sans-logo-logo li.encart-1 { width: 22%; }
 .page_sommaire .articles .mise-en-page-sans-logo-logo li.encart-2 { width: 38%; }
 .page_sommaire .articles .mise-en-page-sans-logo-logo li.encart-3 { width: 38%; }
+
+/* cas 6 : sans,sans,sans  */
+.page_sommaire .articles .mise-en-page-sans-logo-logo li { width: 33%; }
 
 
 /* page rubrique */
