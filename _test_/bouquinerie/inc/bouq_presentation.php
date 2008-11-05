@@ -90,7 +90,7 @@ function bouq_afficher_admin() {
 
 function bouq_afficher_infos() {
 	cadre_gauche_bouq(_T('bouq:infos'),array(
-		'<a href="http://www.spip-contrib.net/spip.php?article28">'._T('bouq:documentation'). '</a>',
+		'<a href="'._T('bouq:url_documentation').'">'._T('bouq:documentation'). '</a>',
 		'Plugin Bouquinerie '. $GLOBALS['meta']['bouq_version'].'<br />'. _T('bouq:licence')
 	));
 }

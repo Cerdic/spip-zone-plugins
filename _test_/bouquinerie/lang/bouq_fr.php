@@ -194,7 +194,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_supprimer_catalogue' => 'Supprimer un catalogue',
 	'titre_importation' => 'Importation',
 	'titre_catalogue_export' => 'Exportation',
-	'type_livre' => 'Type du livre :'
+	'type_livre' => 'Type du livre :',
+	
+	// U
+	'url_documentation' => 'http://www.spip-contrib.net/Plugin-Bouquinerie'
 
 );
 

@@ -17,7 +17,7 @@
 	</ul>
 	Compatibilit&#233; : spip 2.0, toute version > 1.9.2
 	</description>
-	<lien>[Documentation->http://www.spip-contrib.net/?article1605]</lien>
+	<lien>[Documentation->http://www.spip-contrib.net/Plugin-Bouquinerie]</lien>
 	<icon>images/bibliotheque.png</icon>
 	<options>bouq_options.php</options>
 	<fonctions>bouq_fonctions.php</fonctions>
