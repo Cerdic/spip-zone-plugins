@@ -7,7 +7,7 @@
 	Arnault PACHOT 
  	[OpenStudio->http://www.openstudio.fr]
 _ Renaud Aioutz 
-	[Bibliothèques de Tence, Saint-Jeures et Le Mazet-Saint-Voy->http://www.3bm.fr]
+	[Biblioth&egrave;ques de Tence, Saint-Jeures et Le Mazet-Saint-Voy->http://www.3bm.fr]
 _ &#169; 2008 - Licence GPL
 	</auteur>
 	<version>
@@ -17,7 +17,7 @@ _ &#169; 2008 - Licence GPL
 	test
 	</etat>
 	<description>
-	Ce plugin permet d'interfacer SPIP avec un catalogue en ligne sous PMB. Il fournit des boucles, balises et critères pour parcourir le catalogue depuis
+	Ce plugin permet d'interfacer SPIP avec un catalogue en ligne sous PMB. Il fournit des boucles, balises et crit&egrave;res pour parcourir le catalogue depuis
 	vos squelettes. <br />
 	[acc&egrave;s au panneau de configuration pour param&eacute;trer le plugin->.?exec=cfg&amp;cfg=spip_pmb] 
 	</description>
