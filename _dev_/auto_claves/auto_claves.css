@@ -1,0 +1,72 @@
+/* auto_claves */
+/* Définir ci-dessous les styles nécessaires et désirés */
+span.ac_noir {
+	color: black; }
+span.ac_marron {
+	color: maroon; }
+span.ac_rouge {
+	color: red;}
+span.ac_orange {
+	color: orange; }
+span.ac_jaune {
+	color: yellow; }
+span.ac_vert {
+	color: green; }
+span.ac_bleu {
+	color: blue; }
+span.ac_violet {
+	color: purple; }
+span.ac_gris {
+	color: gray; }
+span.ac_blanc {
+	color: white; }
+
+#lista_auto_claves div {
+     border-bottom: 1px solid rgb(204, 204, 204);
+     padding: 2px 2px 2px 18px;
+     background: rgb(224, 224, 224) none no-repeat scroll 1% 50%;
+     -moz-background-clip: -moz-initial;
+     -moz-background-origin: -moz-initial;
+     -moz-background-inline-policy: -moz-initial;
+     font-family: Verdana,Arial,Sans,sans-serif;
+     font-size: 11px;
+     text-decoration: none;
+     overflow: hidden;
+}
+
+div#lista_auto_claves {
+  padding: 0;
+  margin: 0;
+  font-size: 11px;
+}
+
+div#lista_auto_claves .previa {
+  padding: 0 0px;
+  margin: 0;
+ font-weight: none;
+ fontStyle: italic;
+ color:#848384; /* (dark gray) */
+}
+
+div#lista_auto_claves .nueva {
+  padding: 0 0px;
+  margin: 0;
+ font-weight: bold;
+}
+
+div#lista_auto_claves .parcial {
+  padding: 0 0px;
+  margin: 0;
+ font-weight: none;
+ color:#660066; 
+}
+
+div#lista_auto_claves .heredada {
+  padding: 0 0px;
+  margin: 0;
+ font-weight: bold;
+ fontStyle: italic;
+ color:#F60; 
+ background: #F4F8F8;
+
+} 
