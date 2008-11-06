@@ -5,12 +5,8 @@
 
 
 TO-DO:
-- exporter liste abonnés. Voir si possibilité ajouter champ ('fonction' si auteurs_details installé)
-- corriger css pour http://localhost:8206/ecrire/?exec=spiplistes_liste_gerer sous IE6
-- préciser dans /ecrire/?exec=spiplistes_listes_toutes les listes sans patron
-- revoir formulaire de recherche d'abonné/invité dans la page /ecrire/?exec=spiplistes_liste_gerer, boite "Les abonnés à cette liste"
-- /ecrire/?exec=spiplistes_courrier_gerer, prévisu texte seul n'apparait pas sous IE6
-- /ecrire/?exec=spiplistes_liste_gerer, plier/déplier programmer envoi auto semble ne pas fonctionner sous IE6
+- A vérifier: Pour toutes mes listes, le nombre d’abonnés et toujours égal au nombre de désabonnés alors que je force l’envoi en html et que je teste l’envoi réel. (Marcel BOLLA 20081106)
+- A vérifier: Il est impossible d’ajouter des abonnés à une liste, si le nombre d’auteurs élligibles est supérieur à _SPIPLISTES_SELECT_MIN_AUTEURS soit 50 dans le cas présent ... l’affichage de la boite de recherche ne fonctionne pas. J’ai contourné en supprimant le test !!! pour le problème suivant. (Marcel BOLLA 20081106)
 - Sur 193: les admins tt rubriques n'ont pas d'accès à la maintenance (?). A corriger.
 - revoir liste auteurs, l'ajax n'a pas le bon retour (ex.: fleche droite perd la page d'appel, du coup le clic suivant sur th de tri se perd)
 - revoir spiplistes_abonne_edit (desabonne, abonne, format ..., pas tres clair). Voire supprimer cette page et renvoyer son formulaire corrige sur auteur_infos.
