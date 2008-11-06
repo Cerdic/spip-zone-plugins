@@ -58,10 +58,10 @@ function notation_upgrade($nom_meta_base_version,$version_cible){
 			sql_alter("TABLE spip_notations ADD COLUMN id_objet BIGINT(21) NOT NULL DEFAULT '0' AFTER objet");
 			sql_alter("TABLE spip_notations_objets ADD COLUMN id_objet BIGINT(21) NOT NULL DEFAULT '0' AFTER objet");
 			// remplissage des valeurs deja existantes
-			sql_update("spip_notations", array("id_objet" => "id_article", "objet" => "article"), "id_article>".sql_quote(0));
-			sql_update("spip_notations", array("id_objet" => "id_forum", "objet" => "forum"), "id_forum>".sql_quote(0));
-			sql_update("spip_notations_objets", array("id_objet" => "id_article", "objet" => "article"), "id_article>".sql_quote(0));
-			sql_update("spip_notations_objets", array("id_objet" => "id_forum", "objet" => "article"), "id_forum>".sql_quote(0));
+			sql_update("spip_notations", array("id_objet" => "id_article", "objet" => sql_quote("article")), "id_article>".sql_quote(0));
+			sql_update("spip_notations", array("id_objet" => "id_forum", "objet" => sql_quote("forum")), "id_forum>".sql_quote(0));
+			sql_update("spip_notations_objets", array("id_objet" => "id_article", "objet" => sql_quote("article")), "id_article>".sql_quote(0));
+			sql_update("spip_notations_objets", array("id_objet" => "id_forum", "objet" => sql_quote("forum")), "id_forum>".sql_quote(0));
 			// suppression des index
 			sql_alter("TABLE spip_notations DROP INDEX id_article");
 			sql_alter("TABLE spip_notations DROP INDEX id_forum");
