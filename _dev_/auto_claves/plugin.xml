@@ -1,16 +1,16 @@
 <plugin>
 <nom>
 <multi>
-[fr]Auto Mots, pour asignation automatique de mots cl&eacute;s
+[fr]Auto Mots, pour assignation automatique de mots cl&eacute;s
 [es]Auto Claves, facilita la asignaci&oacute;n de palabras clave
 </multi>
 </nom>
 <etat>test</etat>
 <version>0.0a</version>
-<auteur>Laura Primo, Javier San Juan, Martín Gaitán</auteur>
+<auteur>Laura Primo, Javier San Juan, Mart&iacute;n Gait&aacute;n</auteur>
 <icon>couleurs_spip.png</icon>
 <description>
-	<multi>[fr]Pour automatizer l\' asignation des mots cles. Compaire le texte de l\' article avec les mots cl&eacute;s et asigne en bloc les selectione&eacute;s.
+	<multi>[fr]Pour automatiser l' assignation des mots cl&eacute;s. Compare le texte de l' article avec les mots cl&eacute;s et assigne les mots cl&eacute;s selectione&eacute;s &agrave; l'article.
 [es]Para automatizar la asignaci&oacute;n de palabras clave. Compara el texto del art&iacute;culo con las palabras clave y permite asignar en bloque las seleccionadas.
 	</multi>
 </description>
@@ -21,18 +21,14 @@
 	<action>definirspan</action>
 	<inclure>auto_claves.php</inclure>
 </pipeline>
-
 <pipeline>
 	<nom>header_prive</nom>
 	<action>inclurecss</action>
 	<inclure>auto_claves.php</inclure>
 </pipeline>
-
-	
-
-	<pipeline>
-		<nom>affiche_droite</nom>
-		<action>affiche_droite</action>
+<pipeline>
+	<nom>affiche_droite</nom>
+	<action>affiche_droite</action>
 	<inclure>auto_claves.php</inclure>
 	</pipeline>	
 <pipeline>
