@@ -6,7 +6,7 @@
 	<etat>dev</etat>
 	<prefix>notation</prefix>
 	<description>
-		<b>Attribuer une note aux &eacute;l&eacute;ments de Spip</b><hr/>
+		<b>Attribuer une note aux &eacute;l&eacute;ments de Spip</b><hr />
 		D&eacute;finition de la balise <code>#FORMULAIRE_NOTATION</code> permettant 
 		la saise et l'affichage de la note d'un &eacute;l&eacute;ment de boucle.<br />
 		D&eacute;finition des mod&egrave;les <em>&gt;autxx|notation|id_article=yy&lt;</em> 
