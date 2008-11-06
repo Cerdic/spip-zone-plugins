@@ -10,18 +10,27 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // section incluse par config_outils.php et specialement dediee a la configuration des URLs
 
-// ici on a besoin de boutons radio : 'page', 'html', 'propres', 'propres2, 'arbo', 'standard' et 'propres-qs'
-define('_CS_PROPRE_QS', defined('_SPIP19300')?'propres_qs':'propres-qs');
+// ici on a besoin de boutons radio : 'page', 'html', 'propres', 'propres2, 'arbo', 'libres', 'standard' et 'propres-qs'
 add_variable( array(
 	'nom' => 'radio_type_urls3',
 	'format' => _format_CHAINE,
-	'radio' => array('page' => 'couteauprive:url_page',
+	'radio' => defined('_SPIP19300')
+				// a partir de SPIP 2.0
+				?array('page' => 'couteauprive:url_page',
 					 'html' => 'couteauprive:url_html', 
 					 'propres' => 'couteauprive:url_propres',
 					 'propres2' => 'couteauprive:url_propres2',
+					 'libres'=> 'couteauprive:url_libres',
 					 'arbo'=> 'couteauprive:url_arbo',
 					 'standard' => 'couteauprive:url_standard',
-					 _CS_PROPRE_QS => 'couteauprive:url_propres-qs'),
+					 'propres_qs' => 'couteauprive:url_propres-qs')
+				// max SPIP 1.92
+				:array('page' => 'couteauprive:url_page',
+					 'html' => 'couteauprive:url_html', 
+					 'propres' => 'couteauprive:url_propres',
+					 'propres2' => 'couteauprive:url_propres2',
+					 'standard' => 'couteauprive:url_standard',
+					 'propres-qs' => 'couteauprive:url_propres-qs'),
 	'radio/ligne' => 4,
 	'defaut' => "'page'",
 	'code' => "\$GLOBALS['type_urls']=%s;\n",
@@ -69,14 +78,14 @@ add_variable( array(
 	'format' => _format_NOMBRE,
 	'radio' => array(0 => 'item_oui', 1 => 'item_non'),				
 	'defaut' => 1,
-	'code' => "define('_url_arbo_minuscules', %s);\n",
+	'code:%s' => "define('_url_arbo_minuscules', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'urls_arbo_sans_type',
 	'format' => _format_NOMBRE,
 	'radio' => array(0 => 'item_oui', 1 => 'item_non'),				
-	'defaut' => 0,
-	'code' => "define('_urls_arbo_sans_type', %s);\n"
+	'defaut' => 1,
+	'code:!%s' => "\$GLOBALS['url_arbo_types']=array('rubrique'=>'rubrique','article'=>'article','breve'=>'breve','mot'=>'mot','auteur'=>'auteur','site'=>'site');\n"
 ));
 add_variable( array(
 	'nom' => 'url_arbo_sep_id',

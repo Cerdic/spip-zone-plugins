@@ -52,7 +52,7 @@ function typo_exposants_fr($texte){
 			'/(?<=\bM)(e)(?= [A-Z])/', // Maitre (suivi d'un espace et d'une majuscule)
 		), array(
 			_TYPO_sup, _TYPO_sup,		// Mlle(s), Mme(s), Mgr
-			_TYPO_sup,		// Dr(s), Pr(s), 
+			_TYPO_sup,		// Dr, Pr, 
 	
 			'm<sup class="typo_exposants">2</sup>',	_TYPO_sup,	// m2, m3, m²
 			_TYPO_sup, _TYPO_sup, _TYPO_sup,	// Vve, Mn(s), Md(s), Bd(s), Cie(s)

@@ -181,7 +181,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	// bouton 'Modifier' : en dessous du texte s'il y a plusieurs variables, a la place de _VAR_OUTIL s'il n'y en a qu'une.
 	// attention : on ne peut pas modifier les variables si l'outil est inactif
 	if ($actif) {
-		$bouton = "<input type='submit' class='fondo' value=\"".($c>1?_T('couteauprive:modifier_vars', array('nb'=>$c)):_T('bouton_modifier'))."\" />";
+		$bouton = "<input type='submit' class='fondo' value=\"".($c>1?_T('couteauprive:modifier_vars', array('nb'=>''/*$c*/)):_T('bouton_modifier'))."\" />";
 		if($c>1) $ok_input .= "<div class=\"cs_bouton\">$bouton</div>";
 			else $ok_input = str_replace(_VAR_OUTIL, $bouton, $ok_input);
 	} else
