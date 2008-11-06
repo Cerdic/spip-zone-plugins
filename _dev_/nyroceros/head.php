@@ -14,7 +14,7 @@ function Nyro_insert_head($flux){
 	), $config);
 
 	$flux .='
-<script src="'.url_absolue(find_in_path('js/jquery.nyroModal-1.2.8.js')).'" type="text/javascript"></script>
+<script src="'.url_absolue(find_in_path('js/jquery.nyroModal-1.3.0.js')).'" type="text/javascript"></script>
 <script src="'.url_absolue(find_in_path('js/nyromodal.js')).'" type="text/javascript"></script>
 <script type="text/javascript">/* <![CDATA[ */
 var nyro_traiter_toutes_images='.($config['traiter_toutes_images'] == 'oui'?'true':'false').';

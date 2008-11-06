@@ -7,8 +7,8 @@
  *
  * Include this file AFTER nyroModal if you want absolutely no animation with nyroModal
  *
- * $Date: 2008-06-24 (Tue, 24 Jun 2008) $
- * $version: 1.2.8
+ * $Date: 2008-10-22 (Wed, 22 Oct 2008) $
+ * $version: 1.3.0
  */
  jQuery(function($) {
 	$.fn.nyroModal.settings.showBackground = function(elts, settings, callback) {
@@ -39,14 +39,10 @@
 	};
 	
 	$.fn.nyroModal.settings.showLoading = function(elts, settings, callback) {
-		var h = elts.loading.height();
-		var w = elts.loading.width();
 		elts.loading
 			.css({
-				height: h+'px',
-				width: w+'px',
-				marginTop: (-h/2 + settings.marginScrollTop)+'px',
-				marginLeft: (-w/2 + settings.marginScrollLeft)+'px'
+				marginTop: settings.marginTopLoading+'px',
+				marginLeft: settings.marginLeftLoading+'px'
 			})
 			.show();
 		callback();
@@ -76,9 +72,9 @@
 		elts.contentWrapper
 			.css({
 				width: settings.width+'px',
-				marginLeft: (settings.marginLeft)+'px',
+				marginLeft: settings.marginLeft+'px',
 				height: settings.height+'px',
-				marginTop: (settings.marginTop)+'px'
+				marginTop: settings.marginTop+'px'
 			})
 			.show();
 		elts.loading.hide();
@@ -89,9 +85,9 @@
 		elts.contentWrapper
 			.css({
 				width: settings.width+'px',
-				marginLeft: (settings.marginLeft)+'px',
+				marginLeft: settings.marginLeft+'px',
 				height: settings.height+'px',
-				marginTop: (settings.marginTop)+'px'
+				marginTop: settings.marginTop+'px'
 			});
 		callback();
 	};
