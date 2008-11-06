@@ -23,8 +23,7 @@ function formulaires_notation_charger_dist($objet, $id_objet){
 		'note_ponderee'=>0,
 		'total'=>0
 	);
-	$_id_objet = id_table_objet($objet);
-	
+
 	
 	// on recupere l'id de l'auteur connecte, sinon ip
 	if (!$id_auteur = $GLOBALS['visiteur_session']['id_auteur']) {
@@ -38,7 +37,10 @@ function formulaires_notation_charger_dist($objet, $id_objet){
 	if ($row = sql_fetsel(
 			array("note", "note_ponderee", "nombre_votes"),
 			"spip_notations_objets",
-			"$_id_objet=" . sql_quote($id_objet)
+			array(
+				"objet=" . sql_quote(objet_type($objet)),
+				"id_objet=" . sql_quote($id_objet),
+				)
 		)) {
 		$valeurs["note"] = $row['note'];
 		$valeurs["note_ponderee"] = $row['note_ponderee'];
@@ -48,9 +50,9 @@ function formulaires_notation_charger_dist($objet, $id_objet){
 	
 	// l'auteur ou l'ip a-t-il deja vote ?
 	$where = array(
-		"objet=" . sql_quote($objet),
-		"$_id_objet=" . sql_quote($id_objet),
-	);
+		"objet=" . sql_quote(objet_type($objet)),
+		"id_objet=" . sql_quote($id_objet),
+		);
 	if ($id_auteur) 
 		$where[] = "id_auteur=" . sql_quote($id_auteur);
 	else 
@@ -71,11 +73,13 @@ function formulaires_notation_charger_dist($objet, $id_objet){
 function formulaires_notation_verifier_dist($objet, $id_objet){
 	$erreurs = array();
 	
-	$_id_objet = id_table_objet($objet);
-	
 	//  s'assurer que l'objet existe bien
 	// et que le champ robot n'est pas rempli
-	if (!sql_countsel("spip_$objet", "$_id_objet=" . sql_quote($id_objet))
+	$trouver_table = charger_fonction('trouver_table','base');
+	$table_objet = $trouver_table($objet);
+	$_id_objet = id_table_objet($table_objet['table']);
+	
+	if (!sql_countsel($table_objet['table'], "$_id_objet=" . sql_quote($id_objet))
 		OR (_request('content')!="")) { 
 		$erreurs['message_erreur'] = ' ';
 	// note dans la bonne fourchette
@@ -88,8 +92,7 @@ function formulaires_notation_verifier_dist($objet, $id_objet){
 }
 	
 function formulaires_notation_traiter_dist($objet, $id_objet){
-	$_id_objet = id_table_objet($objet);
-	
+
 	if ($GLOBALS["auteur_session"]) {
 		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 	} else {
@@ -103,7 +106,11 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 
 	// Si pas inscrit : recuperer la note de l'objet sur l'IP
 	// Sinon rechercher la note de l'auteur
-	$where = array("$_id_objet=" . sql_quote($id_objet));
+	$objet = objet_type($objet);
+	$where = array(
+		"objet=" . sql_quote($objet),
+		"id_objet=" . sql_quote($id_objet),
+		);
 	if ($id_auteur == 0) $where[] = "id_auteur=" . sql_quote($id_auteur);
 	else $where[] = "ip=" . sql_quote($ip);
 	$row = sql_fetsel(
@@ -122,12 +129,24 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 	// Modifier la note
 	$c = array(			
 		"objet" => $objet,
-		"$_id_objet" => $id_objet,
+		"id_objet" => $id_objet,
 		"note" => $note,
 		"id_auteur" => $id_auteur,
 		"ip" => $ip
 	);
 	modifier_notation($id_notation,$c);
+	
+	// mettre a jour les stats
+	//
+	// cette action est presque devenue inutile
+	// comme la table spip_notations_objets 
+	// (qui devrait s'appeler spip_notations_stats plutot !)
+	// car le critere {notation} permet d'obtenir ces resultats
+	// totalements a jour...
+	// Cependant, quelques cas tres particuliers de statistiques
+	// font que je le laisse encore, comme calculer l'objet le mieux note :
+	// 	<BOUCLE_notes_pond(NOTATIONS_OBJETS){0,10}{!par note_ponderee}>
+	// qu'il n'est pas possible de traduire dans une boucle NOTATION facilement.
 	notation_recalculer_total($objet,$id_objet);	
 
 	return array("editable"=>true,"message_ok"=>"");
@@ -137,7 +156,7 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 function insert_notation(){
 	return sql_insertq("spip_notations", array(
 			"objet" => "",
-			//"id_objet" => 0,
+			"id_objet" => 0,
 			"id_auteur" => 0,
 			"ip" => "",
 			"note" => 0
@@ -154,26 +173,24 @@ function modifier_notation($id_notation,$c=array()) {
 
 
 
-
 // je me demande vraiment si tout cela est utile...
 // vu que tout peut etre calcule en requete depuis spip_notations
+// a peu de choses pres (!)
 function notation_recalculer_total($objet,$id_objet){
 	
 	list($total, $note, $note_ponderee) = notation_calculer_total($objet, $id_objet);
 	
-	// selection a corriger en passant a 'objet' + 'id_objet'
-	$_id_objet = id_table_objet($objet);	
+	$objet = objet_type($objet);
 	
 	// Mise a jour ou insertion ?
-	if (!sql_countsel("spip_notations_objets", 
-			array(
+	if (!sql_countsel("spip_notations_objets", array(
 				"objet=" . sql_quote($objet),
-				"$_id_objet=" . sql_quote($id_objet)
+				"id_objet=" . sql_quote($id_objet),
 				))) {
 		// Remplir la table de notation des objets
 		sql_insertq("spip_notations_objets", array(
 			"objet" => $objet,
-			"$_id_objet" => $id_objet,
+			"id_objet" => $id_objet,
 			"note" => $note,
 			"note_ponderee" => $note_ponderee,
 			"nombre_votes" => $total
@@ -186,24 +203,22 @@ function notation_recalculer_total($objet,$id_objet){
 			"nombre_votes" => $total),
 			array(
 				"objet=" . sql_quote($objet),
-				"$_id_objet=" . sql_quote($id_objet)
+				"id_objet=" . sql_quote($id_objet)
 			));
 	}
 }
 
 
 function notation_calculer_total($objet, $id_objet){
-	// selection a corriger en passant a 'objet' + 'id_objet'
-	$_id_objet = id_table_objet($objet);	
-	
+
 	// Calculer la note de l'objet
 	$somme = $total = 0;
 	if ($row = sql_fetsel(
 			array("COUNT(note) AS nombre","SUM(note) AS somme"),
 			"spip_notations",
 			array(
-				"objet=". sql_quote($objet),
-				"$_id_objet=" . sql_quote($id_objet) ///// a changer
+				"objet=". sql_quote(objet_type($objet)),
+				"id_objet=" . sql_quote($id_objet) ///// a changer
 			))){
 				
 		$somme = $row['somme'];
@@ -215,4 +230,5 @@ function notation_calculer_total($objet, $id_objet){
 	$note_ponderee = notation_ponderee($moyenne, $total);
 	return array($total, $note, $note_ponderee);
 }
+
 ?>

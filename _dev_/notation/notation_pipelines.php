@@ -11,7 +11,7 @@ function notation_insert_head($flux){
 }
 
 function notation_affichage_final($flux){
-    if (strpos($flux, "<!--formulaire_notation-->") === false)
+    if (strpos($flux, "'notation_note'") === false)
 		return $flux;
 
 	$incHead .= "\n<link href='"._DIR_PLUGIN_NOTATION."css/jquery.rating.css' type='text/css' rel='stylesheet'/>\n";

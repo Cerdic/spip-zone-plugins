@@ -7,7 +7,7 @@ exemple : afficher la note des auteurs 10,2,5 pour l'article 33, sur 2 colonnes
 <B_not>
 <span class="notation"[ style="float:(#ENV{align}|match{left|right});"]>
 <table class="auteurs"[ (#ENV{align}|=={center}|?{'style="margin: 0 auto;"'})]><tr>
-<BOUCLE_not(NOTATIONS articles){id_article=#ENV{id,0}}{id_auteur IN (#ENV{id_auteur}|notation_tab)}>
+<BOUCLE_not(NOTATIONS){id_article=#ENV{id,0}}{id_auteur IN (#ENV{id_auteur}|notation_tab)}>
   <BOUCLE_aut(AUTEURS){id_auteur}{tout}>
   <td class="nom">#NOM</td>
   <td class="note">

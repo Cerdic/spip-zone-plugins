@@ -7,37 +7,28 @@
 	<table>
 		<tr>
 			<td><:notation:objets:></td>
-			<td style='width:10%;'><:notation:notesp:></td>
-			<td style='width:10%;'><:notation:notes:></td>
+			<td style='width:10%;'><:notation:votre_note:></td>
+			<td style='width:10%;'><:notation:moyennep:></td>
+			<td style='width:10%;'><:notation:moyenne:></td>
 			<td style='width:10%'><:notation:nbvotes:></td>
 		</tr>
-		<BOUCLE_notes_aut(NOTATIONS_OBJETS){!par note_ponderee}>
+		<BOUCLE_notes_aut(NOTATIONS){!par note}{id_auteur=#SESSION{id_auteur}}{0,10}>
 		<tr[ style="background:(#COMPTEUR_BOUCLE|alterner{#eee,#fff});"]>
-			<BOUCLE_feinte_aa(ARTICLES){0,1}>[(#GET{limit}|<{5}|?{' '})]</BOUCLE_feinte_aa>
-			<BOUCLE_aa(ARTICLES){id_article}{id_auteur=#ENV{id_auteur,#SESSION{id_auteur}}}>
-			<td>Article : <a href="#URL_ARTICLE">#TITRE</a></td>
-			<td>#NOTE_PONDEREE</td><td>#NOTE</td><td>#NOMBRE_VOTES</td>
-			[(#SET{limit,[(#GET{limit}|plus{1})]})]
-			</BOUCLE_aa>
-			</B_feinte_aa>
-			<BOUCLE_feinte_ff(ARTICLES){0,1}>[(#GET{limit}|<{5}|?{' '})]</BOUCLE_feinte_ff>
-			<BOUCLE_ff(FORUMS){id_forum}{id_auteur=#ENV{id_auteur,#SESSION{id_auteur}}}>
-			<td>Forum : <a href="#URL_FORUM">#TITRE</a></td>
-			<td>#NOTE_PONDEREE</td><td>#NOTE</td><td>#NOMBRE_VOTES</td>
-			[(#SET{limit,[(#GET{limit}|plus{1})]})]
-			</BOUCLE_ff>
-			</B_feinte_ff>
-		</tr>
+			[(#INCLURE{fond=modeles/inc-notation-preferee-#OBJET}{id_objet})]
+			<td>#NOTE</td>
+			<BOUCLE_note_obj(NOTATIONS_OBJETS){objet}{id_objet}>
+				<td>#NOTE_PONDEREE</td><td>#NOTE</td><td>#NOMBRE_VOTES</td>
+			</BOUCLE_note_obj>
+		</tr>		
 		</BOUCLE_notes_aut>
 	</table>
 </div>
 </B_notes_aut>
 
 <div class="cadre cadre-trait-couleur" style="padding: 5px;">
-	<BOUCLE_nbobjets(NOTATIONS_OBJETS)></BOUCLE_nbobjets>
+	<BOUCLE_nbobjets(NOTATIONS){fusion objet}{fusion id_objet}></BOUCLE_nbobjets>
 	[<:notation:nbobjets_note:> (#TOTAL_BOUCLE)]
 	<//B_nbobjets>
-
 	<hr />
 
 	<BOUCLE_nbvotes(NOTATIONS)></BOUCLE_nbvotes>
@@ -51,14 +42,13 @@
 	<table>
 		<tr>
 			<td><:notation:objets:></td>
-			<td style='width:10%;'><:notation:notesp:></td>
-			<td style='width:10%;'><:notation:notes:></td>
+			<td style='width:10%;'><:notation:moyennep:></td>
+			<td style='width:10%;'><:notation:moyenne:></td>
 			<td style='width:10%'><:notation:nbvotes:></td>
 		</tr>
 		<BOUCLE_notes_pond(NOTATIONS_OBJETS){0,10}{!par note_ponderee}>
 		<tr[ style="background:(#COMPTEUR_BOUCLE|alterner{#eee,#fff});"]>
-			<BOUCLE_aa2(ARTICLES){id_article}><td>Article : <a href="#URL_ARTICLE">#TITRE</a></td></BOUCLE_aa2>
-			<BOUCLE_ff2(FORUMS){id_forum}><td>Forum : <a href="#URL_FORUM">#TITRE</a></td></BOUCLE_ff2>
+			[(#INCLURE{fond=modeles/inc-notation-preferee-#OBJET}{id_objet})]
 			<td>#NOTE_PONDEREE</td><td>#NOTE</td><td>#NOMBRE_VOTES</td>
 		</tr>
 		</BOUCLE_notes_pond>
@@ -72,14 +62,14 @@
 	<table>
 		<tr>
 			<td><:notation:objets:></td>
-			<td style='width:10%;'><:notation:notes:></td>
+			<td style='width:10%;'><:notation:moyennep:></td>
+			<td style='width:10%;'><:notation:moyenne:></td>
 			<td style='width:10%'><:notation:nbvotes:></td>
 		</tr>
 	<BOUCLE_nombre_votes(NOTATIONS_OBJETS){0,10}{!par nombre_votes}>
 	<tr[ style="background:(#COMPTEUR_BOUCLE|alterner{#eee,#fff});"]>
-		<BOUCLE_aaa(ARTICLES){id_article}><td>Article : <a href="#URL_ARTICLE">#TITRE</a></td></BOUCLE_aaa>
-		<BOUCLE_fff(FORUMS){id_forum}><td>Forum : <a href="#URL_FORUM">#TITRE</a></td></BOUCLE_fff>
-		<td>#NOTE</td><td>#NOMBRE_VOTES</td>
+		[(#INCLURE{fond=modeles/inc-notation-preferee-#OBJET}{id_objet})]
+		<td>#NOTE_PONDEREE</td><td>#NOTE</td><td>#NOMBRE_VOTES</td>
 	</tr>
 	</BOUCLE_nombre_votes>
 	</table>

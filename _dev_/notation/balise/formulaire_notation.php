@@ -9,6 +9,16 @@
 **/
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
+
+/**
+ * Ce formulaire permet de noter des objets de SPIP.
+ * Par defaut, l'objet et son identifiant sont pris dans la boucle
+ * <BOUCLE_(ARTICLES){id_article}> #FORMULAIRE_NOTATION ...
+ * 
+ * Mais il est possible de forcer un objet particulier :
+ * #FORMULAIRE_NOTATION{article,8}
+ * 
+ */
 function balise_FORMULAIRE_NOTATION ($p) {
 	// on prend nom de la cle primaire de l'objet pour calculer sa valeur
     $_id_objet = $p->boucles[$p->id_boucle]->primary;

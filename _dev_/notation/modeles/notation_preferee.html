@@ -5,33 +5,20 @@ exemple :
 ]
 
 <B_not>
-<span class="notation"[ style="float:(#ENV{align}|match{left|right});"]>
+<div class="notation"[ style="float:(#ENV{align}|match{left|right});"]>
 <table class="topten"[ (#ENV{align}|=={center}|?{'style="margin: 0 auto;"'})]>
 	<thead><tr><td colspan=4>#ENV{titre,Mon TopTen}</td>
 	</tr>
 	</thead>
-	
-<BOUCLE_not(NOTATIONS){par note}{inverse}{par maj}{inverse}{id_auteur=#ENV{id_auteur,#SESSION{id_auteur}}}>
+<BOUCLE_not(NOTATIONS){!par note}{!par maj}{id_auteur=#ENV{id_auteur,#SESSION{id_auteur}}}{0,#ENV{max,5}}>
   <tr class=ligne_[(#COMPTEUR_BOUCLE|alterner{impaire,paire})]>
   <td>#COMPTEUR_BOUCLE</td>
-	<BOUCLE_aa(ARTICLES){id_article}>
+  	[(#INCLURE{fond=modeles/inc-notation-preferee-#OBJET}{id_objet})]
 	<td>
-		<a href="#URL_ARTICLE">Article : #TITRE</a>
+	[(#NOTATION_ETOILE{#ENV{note}})]
 	</td>
-	<td>
-		[(#NOTATION_ETOILE{#NOTE,preferee_article#ID_ARTICLE})]
-	</td>
-	</BOUCLE_aa>
-	<BOUCLE_ff(FORUMS){id_forum}>
-	<td>
-		<a href="#URL_FORUM">Forum : #TITRE</a>
-	</td>
-	<td>
-		[(#NOTATION_ETOILE{#NOTE,preferee_forum#ID_FORUM})]
-	</td>
-	</BOUCLE_ff>
   </tr>
 </BOUCLE_not>
 </table>
-</span>
+</div>
 </B_not>

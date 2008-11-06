@@ -37,20 +37,12 @@ function notation_upgrade($nom_meta_base_version,$version_cible){
 			sql_alter("TABLE spip_notations ADD COLUMN objet varchar(21) DEFAULT '' NOT NULL AFTER id_notation");
 			sql_alter("TABLE spip_notations ADD INDEX (id_forum)");
 			sql_alter("TABLE spip_notations ADD INDEX (objet)");
-			// insertion de "articles" dans les champs "objet" des deux tables (les données présentes avant la maj ne concernent que des articles)
-			$objet = "articles";
-			$res = sql_select("spip_notations_objets.id_article","spip_notations_objets");
-			if ($n = sql_count($res)){
-				while ($t = sql_fetch($res)) {
-					sql_updateq("spip_notations_objets", array("objet" => $objet), "id_article=" . sql_quote($t["id_article"]));
-				}
-			}
-			$res = sql_select("spip_notations.id_article","spip_notations");
-			if ($n = sql_count($res)){
-				while ($t = sql_fetch($res)) {
-					sql_updateq("spip_notations", array("objet" => $objet), "id_article=" . sql_quote($t["id_article"]));
-				}
-			}
+			// insertion de "articles" dans les champs "objet" des deux tables 
+			// (les donnees présentes avant la maj ne concernent que des articles)
+			// change ensuite (0.6) en 'article' (comme le core - cf spip_documents_liens)
+			sql_updateq("spip_notations", array("objet" => "articles"));
+			sql_updateq("spip_notations_objets", array("objet" => "articles"));
+
 			//on vire les metas dans la verison précédente (maintenant on se sert de CFG)
 			sql_delete("spip_meta","nom =" .sql_quote("notation_acces"));
 			sql_delete("spip_meta","nom =" .sql_quote("notation_ip"));
@@ -58,6 +50,38 @@ function notation_upgrade($nom_meta_base_version,$version_cible){
 			sql_delete("spip_meta","nom =" .sql_quote("notation_ponderation"));		
 			
 			ecrire_meta($nom_meta_base_version,$current_version="0.5.0");
+		}
+		
+		// mise a jour pour transformer les id_article et id_forum en id_objet
+		if (version_compare($current_version,"0.6","<")){
+			// ajout des champ id_objet
+			sql_alter("TABLE spip_notations ADD COLUMN id_objet BIGINT(21) NOT NULL DEFAULT '0' AFTER objet");
+			sql_alter("TABLE spip_notations_objets ADD COLUMN id_objet BIGINT(21) NOT NULL DEFAULT '0' AFTER objet");
+			// remplissage des valeurs deja existantes
+			sql_update("spip_notations", array("id_objet" => "id_article", "objet" => "article"), "id_article>".sql_quote(0));
+			sql_update("spip_notations", array("id_objet" => "id_forum", "objet" => "forum"), "id_forum>".sql_quote(0));
+			sql_update("spip_notations_objets", array("id_objet" => "id_article", "objet" => "article"), "id_article>".sql_quote(0));
+			sql_update("spip_notations_objets", array("id_objet" => "id_forum", "objet" => "article"), "id_forum>".sql_quote(0));
+			// suppression des index
+			sql_alter("TABLE spip_notations DROP INDEX id_article");
+			sql_alter("TABLE spip_notations DROP INDEX id_forum");
+			sql_alter("TABLE spip_notations_objets DROP INDEX id_article");
+			sql_alter("TABLE spip_notations_objets DROP INDEX id_forum");
+			// suppression des vieux champs id_article et id_forum
+			sql_alter("TABLE spip_notations DROP COLUMN id_article");
+			sql_alter("TABLE spip_notations DROP COLUMN id_forum");
+			sql_alter("TABLE spip_notations_objets DROP COLUMN id_article");
+			sql_alter("TABLE spip_notations_objets DROP COLUMN id_forum");
+			// recreation d'index sur id_objet
+			sql_alter("TABLE spip_notations ADD INDEX (id_objet)");
+			// creation d'une cle primaire multiple sur la table notations_objets
+			sql_alter("TABLE spip_notations_objets DROP INDEX objet");
+			sql_alter("TABLE spip_notations_objets ADD PRIMARY KEY (objet, id_objet)");
+			// corriger le 'articles' en 'article' ocazou il en resterait 
+			sql_updateq("spip_notations", array("objet" => "article"), "objet=".sql_quote($a="articles"));
+			sql_updateq("spip_notations_objets", array("objet" => "article"), "objet=".sql_quote($a="articles"));
+		
+			ecrire_meta($nom_meta_base_version,$current_version="0.6");
 		}
 		ecrire_metas();
 	}
