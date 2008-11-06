@@ -19,9 +19,9 @@ Surcharge les formulaires de SPIP en leur ajoutant des [Captchas->http://fr.wiki
 _ Rejete aussi les messages contenant trop de caract&#232;res non ASCII (chinois, japonais, russe, ...)
    
 Formulaires disponibles:
--* #FORMULAIRE_FORUM
--* #FORMULAIRE_SITE
--* #FORMULAIRE_INSCRIPTION
+-* &#035;FORMULAIRE_FORUM
+-* &#035;FORMULAIRE_SITE
+-* &#035;FORMULAIRE_INSCRIPTION
 
 Les autres formulaires &#224; venir bient&#244;t ....
 
