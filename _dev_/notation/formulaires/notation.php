@@ -10,6 +10,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/notation');
+include_spip('inc/notation_autorisations');
 include_spip('base/abstract_sql');
 
 function formulaires_notation_charger_dist($objet, $id_objet){
@@ -64,7 +65,7 @@ function formulaires_notation_charger_dist($objet, $id_objet){
 	include_spip('inc/autoriser');
 	if (!autoriser('modifier', 'notation', $id_notation, null, array('objet'=>$objet, 'id_objet'=>$id_objet))) {
 		$valeurs['editable']=false;
-	}
+	} 
 
 	return $valeurs;
 }
@@ -149,7 +150,14 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 	// qu'il n'est pas possible de traduire dans une boucle NOTATION facilement.
 	notation_recalculer_total($objet,$id_objet);	
 
-	return array("editable"=>true,"message_ok"=>"");
+	$res = array("editable"=>true,"message_ok"=>"");
+	
+	// peut il modifier son vote ?
+	include_spip('inc/autoriser');
+	if (!autoriser('modifier', 'notation', $id_notation, null, array('objet'=>$objet, 'id_objet'=>$id_objet))) {
+		$res['editable']=false;
+	}
+	return $res;
 }
 
 
