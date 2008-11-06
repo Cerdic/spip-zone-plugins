@@ -14,7 +14,7 @@ function inc_recuperer_id3_dist($fichier,$info=null,$mime=null){
 		// Cover art?
 		if(isset($ThisFileInfo['id3v2']['APIC'])){
 			foreach($ThisFileInfo['id3v2']['APIC'] as $cle=>$val){
-			if (isset($ThisFileInfo['id3v2']['APIC'][$cle]['data']) && isset($ThisFileInfo['id3v2']['APIC'][$cle]['image_mime']) && isset($ThisFileInfo['id3v2']['APIC'][$cle]['dataoffset'])) {
+				if (isset($ThisFileInfo['id3v2']['APIC'][$cle]['data']) && isset($ThisFileInfo['id3v2']['APIC'][$cle]['image_mime']) && isset($ThisFileInfo['id3v2']['APIC'][$cle]['dataoffset'])) {
 		            $imagechunkcheck = getid3_lib::GetDataImageSize($ThisFileInfo['id3v2']['APIC'][$cle]['data']);
 					spip_log($imagechunkcheck);
 		            $tmp_file = 'getid3-'.$ThisFileInfo['id3v2']['APIC'][$cle]['dataoffset'].'.'.getid3_lib::ImageTypesLookup($imagechunkcheck[2]);
@@ -24,32 +24,27 @@ function inc_recuperer_id3_dist($fichier,$info=null,$mime=null){
 				}
 			}
 		}
-		$id3['titre'] = ($ThisFileInfo['comments_html']['title']['0']) ? $ThisFileInfo['comments_html']['title']['0'] : $ThisFileInfo['id3v2']['comments']['title']['0'] ;
-		$id3['artiste'] = ($ThisFileInfo['comments_html']['artist']['0']) ? $ThisFileInfo['comments_html']['artist']['0'] : $ThisFileInfo['id3v2']['comments']['artist']['0'] ;
-		$id3['album']  = ($ThisFileInfo['comments_html']['album']['0']) ? $ThisFileInfo['comments_html']['album']['0'] : $ThisFileInfo['id3v2']['comments']['album']['0'] ;
-		$id3['genre'] = ($ThisFileInfo['comments_html']['genre']['0']) ? $ThisFileInfo['comments_html']['genre']['0'] : $ThisFileInfo['id3v2']['comments']['genre']['0'] ;
-		$id3['comment'] = ($ThisFileInfo['comments_html']['comment']) ? $ThisFileInfo['comments_html']['comment']['0'] : $ThisFileInfo['id3v2']['comment']['0'] ;
-		$id3['year'] = ($ThisFileInfo['comments_html']['date']['0']) ? $ThisFileInfo['comments_html']['date']['0'] : $ThisFileInfo['id3v2']['comments']['year']['0'] ;
+		if(isset($ThisFileInfo['comments_html'])){
+			foreach($ThisFileInfo['comments_html'] as $cle=>$val){
+				$id3[$cle] = $val['0'];
+			}
+		}
 		$id3['format'] = $ThisFileInfo['audio']['dataformat'];
 		$id3['lossless'] = $ThisFileInfo['audio']['lossless'];
 		$id3['sample_rate'] = $ThisFileInfo['audio']['sample_rate'] ;
 		$id3['bits'] = $ThisFileInfo['audio']['bits_per_sample'];
 		$id3['track'] = $ThisFileInfo['tags']['id3v2']['track']['0'] ;
-		$id3['encoded_by'] = ($ThisFileInfo['comments_html']['encoded by']) ? $ThisFileInfo['comments_html']['encoded by']['0'] : $ThisFileInfo['tags']['id3v2']['encoded_by']['0'] ;
 		$id3['codec'] = ($ThisFileInfo['audio']['encoder']) ? $ThisFileInfo['audio']['encoder'] : $ThisFileInfo['tags']['id3v2']['encoded_by']['0'] ;
 		$id3['totaltracks'] = $ThisFileInfo['tags']['id3v2']['totaltracks']['0'] ;
-		$id3['tracknum'] = ($ThisFileInfo['comments_html']['tracknumber']) ? $ThisFileInfo['comments_html']['tracknumber']['0'] : $ThisFileInfo['tags']['id3v2']['totaltracks']['0'] ;
 		$id3['bitrate'] = $ThisFileInfo['audio']['bitrate'];
 		$id3['bitrate_mode'] = $ThisFileInfo['audio']['bitrate_mode'];
 		$id3['duree_secondes'] = $ThisFileInfo['playtime_seconds'];
 		$id3['duree'] = $ThisFileInfo['playtime_string'];
 		$id3['channels'] = $ThisFileInfo['audio']['channels'];
 		$id3['channel_mode'] = $ThisFileInfo['audio']['channelmode'];
-		$id3['source'] = $ThisFileInfo['comments_html']['source']['0'];
 		$id3['mime'] = $ThisFileInfo['mime_type'];
-
 	}
-	//spip_log($ThisFileInfo);
+	spip_log($ThisFileInfo);
 	if(!$info){
 		return $id3;
 	}

@@ -19,11 +19,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'verifier_formulaire' => 'V&eacute;rifiez le remplissage du formulaire.',
 	
 	// Les tags
-	'titre' => 'Titre',
-	'artiste' => 'Artiste',
+	'title' => 'Titre',
+	'artist' => 'Artiste',
 	'album' => 'Album',
 	'genre' => 'Genre',
-	'comment' => 'Commentaires',
+	'comment' => 'Commentaire',
 	'year' => 'Ann&eacute;e',
 	'format' => 'Format',
 	'lossless' => 'Aucune perte de compression',
@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'encoded_by' => 'Encod&eacute; par',
 	'codec' => 'Codec',
 	'totaltracks' => 'Nombre total de pistes',
-	'tracknum' => 'Piste num&eacute;ro',
+	'track_number' => 'Piste num&eacute;ro',
 	'bitrate' => 'Bitrate',
 	'bitrate_mode' => 'Mode',
 	'duree_secondes' => 'Dur&eacute;e (en secondes)',
@@ -42,6 +42,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'channel_mode' => 'Mode (channel)',
 	'source' => 'Source',
 	'mime' => 'Type mime',
+	
+	// Tags trouvés sur Jamendo
+	'copyright_message' => 'Message de copyright',
+	'original_filename' => 'Nom original',
+	'encoding_time' => 'Date d\'encodage',
+	'original_release_time' => 'Date de cr&eacute;ation originale',
+	'comments' => 'Commentaires',
+	'commercial_information' => 'Informations commerciales',
+	'copyright' => 'Copyright',
+	'url_file' => 'Url du fichier',
+	'url_artist' => 'Url de l\'artiste',
+	'url_source' => 'Url de la source',
+	'url_payment' => 'Url de paiement',
+	'url_station' => 'Url de station (?)',
+	'url_publisher' => 'Url du site de publication',
+	
 );
 
 

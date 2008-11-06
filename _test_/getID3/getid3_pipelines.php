@@ -15,7 +15,7 @@ function getid3_editer_contenu_objet($flux){
 			$flux['data'] .= $infos_son($id,$id_document,$type);
 		}
 	}
-	return $flux['data'];
+	return $flux;
 }
 
 function getid3_post_edition($flux){
