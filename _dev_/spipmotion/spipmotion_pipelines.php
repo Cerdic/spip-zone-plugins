@@ -9,12 +9,12 @@ function spipmotion_editer_contenu_objet($flux){
 		$extension = $document['extension'];
 		$type = $document['objet'];
 		$id = $document['id_objet'];
-		if(($extension == 'mov')||($extension == 'flv')||($extension == 'avi')){
+		if(($extension == 'mov')||($extension == 'flv')||($extension == 'avi')||($extension == 'mp4')){
 			$infos_videos = charger_fonction('infos_videos', 'inc');
 			$flux['data'] .= $infos_videos($id,$id_document,$type);
 		}
 	}
-	return $flux['data'];
+	return $flux;
 }
 
 function spipmotion_taches_generales_cron($taches_generales){

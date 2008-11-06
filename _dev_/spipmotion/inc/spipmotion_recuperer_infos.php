@@ -4,13 +4,12 @@
 			return;
 		}
 		include_spip('inc/documents');
-		$document = sql_fetsel("docs.id_document,docs.extension,docs.fichier,docs.taille,docs.mode", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
+		$document = sql_fetsel("docs.extension,docs.fichier,docs.taille,docs.mode", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
 		$chemin = $document['fichier'];
 		$movie_chemin = get_spip_doc($chemin);
-		spip_log("on travail sur $movie","spipmotion");	
+		spip_log("on travail sur $movie_chemin","spipmotion");	
 	
 		$movie = @new ffmpeg_movie($movie_chemin, 0);
-		
 		$height = $movie->getFrameHeight();
 		$width = $movie->getFrameWidth();
 		$duree = $movie->getDuration();
