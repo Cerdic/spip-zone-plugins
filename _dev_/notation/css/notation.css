@@ -9,7 +9,8 @@
 *  
 **/
 
-.formulaire_notation .note{ padding:0; margin:0 5px; }
+.formulaire_notation .notation_note { display: inline; }
+.formulaire_notation .note { padding:0; margin:0 5px; }
 
 /* Pour affichage dans les modeles
 */
