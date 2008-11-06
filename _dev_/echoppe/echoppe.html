@@ -36,7 +36,7 @@
 		<div >
 			<ul>
 				<BOUCLE_CategoriesALaRacine(ECHOPPE_CATEGORIES){par num titre}>
-				<li>[<strong>(#TITRE|supprimer_numero)</strong>]<br />
+				<li id="cat_#ID_CATEGORIE">[<strong><a href="#URL_CATEGORIE">(#TITRE|supprimer_numero)</a></strong>]<br />
 					<div style="border: 1px #CCC dotted;">[<small>(#DESCRIPTIF|couper{100})</small>]
 					[(#LOGO_CATEGORIE||image_reduire{100})<br />]
 					[(#TEXTE)]</div>

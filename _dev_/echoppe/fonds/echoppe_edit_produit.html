@@ -1,5 +1,5 @@
 <div class="entete-formulaire">
-	<a class="icone36 secteur-24" [href="(#EVAL{echoppe_categorie}|generer_url_ecrire{[id_categorie=(#ID_CATEGORIE|sinon{#ID_PARENT})]})" style="float: left;">]
+	<a class="icone36 secteur-24" href="[(#ID_PRODUIT|>{0}|?{[(#EVAL{echoppe_produit}|generer_url_ecrire{id_produit=#ID_PRODUIT})],[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]})]" style="float: left;">
 	[<img width="24" height="24" alt="Retour" src="(#CHEMIN{images/produit-24.png})"/>]
 	<span><:retour:></span>
 	</a>
