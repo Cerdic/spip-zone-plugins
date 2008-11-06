@@ -10,12 +10,12 @@
 	<ul>
 	<li>La gestion de deux nouveaux objets : Livre et Catalogue.</li>
 	<li>Deux nouvelles boucles : LIVRES et CATALOGUES pour les squelettes.</li>
-	<li>La possibilit&#233; de lier des mots-cl&#233; à l'objet livre.</li>
+	<li>La possibilit&#233; de lier des mots-cl&#233; &agrave; l'objet livre.</li>
 	<li>une nouvelle page dans l'interface priv&#233;e donnant acc&#233;s &#224; toutes les fonctions d'administrations.</li>
 	<li>L'importation de fichiers provenant de sites sp&#233;cialis&#233;s dans la vente de livres.</li>
 	<li>L'exportation de la base de donn&#233;e dans un fichier xml.</li>
 	</ul>
-	Compatibilit&#233; : spip 2.0, toute version > 1.9.2
+	Compatibilit&#233; : spip 2.0, toute version &gt; 1.9.2
 	</description>
 	<lien>[Documentation->http://www.spip-contrib.net/Plugin-Bouquinerie]</lien>
 	<icon>images/bibliotheque.png</icon>
