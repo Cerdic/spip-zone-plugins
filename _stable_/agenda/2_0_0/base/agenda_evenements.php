@@ -6,7 +6,7 @@
  *
  */
 
-function Agenda_declarer_tables_interfaces($interface){
+function agenda_declarer_tables_interfaces($interface){
 	// 'spip_' dans l'index de $tables_principales
 	$interface['table_des_tables']['evenements']='evenements';
 	
@@ -28,7 +28,7 @@ function Agenda_declarer_tables_interfaces($interface){
 	return $interface;
 }
 
-function Agenda_declarer_tables_principales($tables_principales){
+function agenda_declarer_tables_principales($tables_principales){
 	//-- Table EVENEMENTS ------------------------------------------
 	$evenements = array(
 			"id_evenement"	=> "bigint(21) NOT NULL",
@@ -58,7 +58,7 @@ function Agenda_declarer_tables_principales($tables_principales){
 	return $tables_principales;
 }
 
-function Agenda_declarer_tables_auxiliaires($tables_auxiliaires){
+function agenda_declarer_tables_auxiliaires($tables_auxiliaires){
 	
 	//-- Table de relations MOTS_EVENEMENTS----------------------
 	$spip_mots_evenements = array(

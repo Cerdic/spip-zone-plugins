@@ -1,7 +1,13 @@
 <?php
-	
+/**
+ * Plugin Agenda pour Spip 2.0
+ * Licence GPL
+ * 
+ *
+ */
+
 	$GLOBALS['agenda_base_version'] = 0.18;
-	function Agenda_verifier_base(){
+	function agenda_verifier_base(){
 		$version_base = $GLOBALS['agenda_base_version'];
 		$current_version = 0.0;
 		if (   (!isset($GLOBALS['meta']['agenda_base_version']) )
@@ -46,7 +52,7 @@
 		}
 	}
 	
-	function Agenda_vider_tables() {
+	function agenda_vider_tables() {
 		include_spip('base/agenda_evenements');
 		include_spip('base/abstract_sql');
 		sql_drop_table("spip_evenements");
@@ -54,17 +60,17 @@
 		effacer_meta('agenda_base_version');
 	}
 	
-	function Agenda_install($action){
+	function agenda_install($action){
 		$version_base = $GLOBALS['agenda_base_version'];
 		switch ($action){
 			case 'test':
 				return (isset($GLOBALS['meta']['agenda_base_version']) AND ($GLOBALS['meta']['agenda_base_version']>=$version_base));
 				break;
 			case 'install':
-				Agenda_verifier_base();
+				agenda_verifier_base();
 				break;
 			case 'uninstall':
-				Agenda_vider_tables();
+				agenda_vider_tables();
 				break;
 		}
 	}
