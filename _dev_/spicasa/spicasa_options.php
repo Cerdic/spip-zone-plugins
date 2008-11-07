@@ -111,7 +111,7 @@ function spicasa_add($id_image, $id_article, $id_album, $user){
 	
 
 
-	//this line file! get 404 on spip.log
+	//this line fail! get 404 on spip.log
 	
 	$img_local = copie_locale($url);
 	$img_local = ereg_replace("^"._DIR_IMG, "", $img_local);
