@@ -76,8 +76,8 @@ $flux .= "
 <script type='text/javascript'>
 	var menudep = { ".$js_var_menudep." };
 </script>
-<script type='text/javascript' src='/".find_in_path('javascript/jquery-menudep.js')."'></script>
-<!-- "._MENUDEP_PREFIX." END -->
+<script type='text/javascript' src='/".url_absolue(find_in_path('javascript/jquery-menudep.js'))."'></script>
+<!-- / "._MENUDEP_PREFIX." -->\n
 ";
 
 	return ($flux);

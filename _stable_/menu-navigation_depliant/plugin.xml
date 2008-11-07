@@ -11,7 +11,7 @@
 	 -->
 	<nom>Menu de navigation d&eacute;pliant (MenuDep)</nom>
 	<auteur>cpaulus@quesaco.org</auteur>
-	<version>1.06</version>
+	<version>1.07</version>
 	<version_base>0.01</version_base>
 	<icon>images/menudep-64.png</icon>
 	<etat>stable</etat>
