@@ -1,4 +1,4 @@
-<BOUCLE_document(DOCUMENTS){id_document}{tout}>
+#CACHE{0}<BOUCLE_document(DOCUMENTS){id_document}{tout}>
 <div id="infosdoc-#ID_DOCUMENT">
 	<div id="infos_video_haut_#ID_DOCUMENT" class="infos_video_haut">
 		<span style="float: #LANG_RIGHT;"><a href="#" onclick="if(jQuery('#infos_video_bas_#ID_DOCUMENT').is(':visible')){jQuery('#infos_video_bas_#ID_DOCUMENT').slideUp(); return false;}else{jQuery('#infos_video_bas_#ID_DOCUMENT').slideDown(); return false;}">[<img src="(#CHEMIN{images/noeud_plus.gif})" alt="-" />]</a></span>
@@ -8,7 +8,7 @@
 		<div id="infos_video_bas_#ID_DOCUMENT" class="infos_video_bas">
 			[(#PLUGIN{Player}|oui)
 				[(#EXTENSION|=={flv}|oui)
-				affichage d'un player ici?
+				[(#MODELE{doc_video_spipmotion}{id=#ID_DOCUMENT}{largeur=210})]
 				]
 			]
 			<table cellspacing='3' cellpadding='0' style='width: 100%;  font-family: verdana; border: 0px;'>
