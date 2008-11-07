@@ -1,0 +1,21 @@
+<div class="cadre-formulaire">
+	<h3><:echoppe:etat_des_stocks:></h3>
+	<strong><:echoppe:stock_total:>&nbsp;:&nbsp;<?php $grand_total = 0;  ?><BOUCLE_LeTotal(SPIP_ECHOPPE_STOCK_PRODUITS){ref_produit=#REF_PRODUIT}><?php $grand_total = $grand_total + #QUANTITE;  ?></BOUCLE_LeTotal><?php echo $grand_total;  ?></strong><br />
+	<form action="[(#EVAL{echoppe_modifier_stock}|generer_url_action{ref_produit=#REF_PRODUIT&onglet=stocks})]" method="post" >
+		<input type="hidden" name="id_produit" value="#ID_PRODUIT" />
+		<input type="submit" name="plus" value="+" />/<input type="submit" name="moins" value="-" />&nbsp;<input type="text" name="modif_stock" size="2" value="1" />&nbsp;<:echoppe:unite_dans_le_depot:>
+		<select name="id_depot">
+		<B_LesDepots>	
+		<BOUCLE_LesDepots(SPIP_ECHOPPE_DEPOTS)>
+			<option value="#ID_DEPOT">#TITRE</option>
+		</BOUCLE_LesDepots>
+		</B_LesDepots>
+			[(#CONFIG{echoppe/utiliser_depot_fournisseur,non}|=={non}|?{'',' '})<option value="-1"><:echoppe:chez_le_fournisseur:></option>]
+		</select>
+	</form>
+	<br />
+	<div style="text-align : right; vertical-align: center;">
+		<a href="#" id="afficher_detail_stock" ><img src="#CHEMIN{images/system-search.png}" alt="<:echoppe:detail_du_stock:>" /><:echoppe:detail_du_stock:></a>
+	</div>
+	<div id="detail_stock" ></div>
+</div>

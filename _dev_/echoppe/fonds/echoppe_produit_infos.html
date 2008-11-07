@@ -1,8 +1,6 @@
-<h1>[<img src="(#CHEMIN{'images/produit-24.png'})" />]&nbsp;[(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})]</h1>
 <div class="cadre-formulaire">
-	<form [action="(#ACTION|generer_url_action{id_produit=#ID_PRODUIT&id_categorie=#ID_CATEGORIE&lang_produit=#LANG_PRODUIT&new=#NEW})"] method="post" >
+	<form [action="(#EVAL{echoppe_sauver_infos_produit}|generer_url_action{id_produit=#ID_PRODUIT})"] method="post" >
 		<div class="echoppe_edit_produit">
-			[<input type="hidden" name="new" value="(#NEW)" />]
 			<h3><:echoppe:edition_donnees_globales:></h3>
 				
 				<fieldset id="date_mise_en_vente" style="float: left;">
@@ -40,44 +38,8 @@
 			<div>
 				<b><:echoppe:colisage:> (<:echoppe:euro:>)</b>&nbsp;<input class="forml" type="text" name="colisage" value="#COLISAGE" /><br /><br />
 				<b><:echoppe:prix_base:> (<:echoppe:euro:>)</b>&nbsp;<input class="forml" type="text" name="prix_base_htva" value="#PRIX_BASE_HTVA" />&nbsp;#DEVISE<br /><br />
-				<b><:echoppe:reference_interne:></b>&nbsp;<input class="forml" type="text" name="ref_produit" value="#REF_PRODUIT" /><!-- <input type="checkbox" name="ref_produit_auto" checked=true /><:echoppe:creer_un_ref_automatiquement:> -->
 			</div>
-			<br />
-			<div>
-				<strong><:echoppe:dans_la_categorie:></strong>
-				[(#SET{'current_id',#ID_CATEGORIE})]
-				
-				<select name="id_new_categorie">
-					<BOUCLE_LesCateg(ECHOPPE_CATEGORIES){tout}>
-					<option value="#ID_CATEGORIE" [(#ID_CATEGORIE|=={#GET{'current_id'}}|?{'selected',''})]><BOUCLE_LeTitre(SPIP_ECHOPPE_CATEGORIES){id_categorie = #ID_CATEGORIE}>#ID_CATEGORIE [(#TITRE|couper{80})]</BOUCLE_LeTitre></option>
-					</BOUCLE_LesCateg>
-				</select>
-			</div>
-			<br />
 			<input type="submit" class="fondo" value="<:echoppe:mettre_a_jour:>" />
 		</div>
 	</form>
-</div>
-
-<br />
-
-<div class="cadre-formulaire">
-	<h3><:echoppe:etat_des_stocks:></h3>
-	<strong><:echoppe:stock_total:>&nbsp;:&nbsp;<?php $grand_total = 0;  ?><BOUCLE_LeTotal(SPIP_ECHOPPE_STOCK_PRODUITS){id_produit}><?php $grand_total = $grand_total + #QUANTITE;  ?></BOUCLE_LeTotal><?php echo $grand_total;  ?></strong><br />
-	<form action="[(#EVAL{echoppe_modifier_stock}|generer_url_action{id_produit=#ID_PRODUIT})]" method="post" >
-		<input type="submit" name="plus" value="+" />/<input type="submit" name="moins" value="-" />&nbsp;<input type="text" name="modif_stock" size="2" value="1" />&nbsp;<:echoppe:unite_dans_le_depot:>
-		<select name="id_depot">
-		<B_LesDepots>	
-		<BOUCLE_LesDepots(SPIP_ECHOPPE_DEPOTS)>
-			<option value="#ID_DEPOT">#TITRE</option>
-		</BOUCLE_LesDepots>
-		</B_LesDepots>
-			[(#CONFIG{echoppe/utiliser_depot_fournisseur,non}|=={non}|?{'',' '})<option value="-1"><:echoppe:chez_le_fournisseur:></option>]
-		</select>
-	</form>
-	<br />
-	<div style="text-align : right; vertical-align: center;">
-		<a href="#" id="afficher_detail_stock" ><img src="#CHEMIN{images/system-search.png}" alt="<:echoppe:detail_du_stock:>" /><:echoppe:detail_du_stock:></a>
-	</div>
-	<div id="detail_stock" ></div>
 </div>

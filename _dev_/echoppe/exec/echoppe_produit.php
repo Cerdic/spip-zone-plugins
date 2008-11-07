@@ -44,6 +44,7 @@ function exec_echoppe_produit(){
 	echo creer_colonne_droite(true);
 	
 	echo debut_droite(false,_T('echoppe:visualisation_d_un_produit'),'');
+	echo gros_titre($contexte['titre'],'',false);
 	echo recuperer_fond('fonds/echoppe_onglets_produit',$contexte);
 	switch ($contexte['onglet']){
 		case 'options' :
