@@ -60,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'repetition_de' => "R&eacute;p&eacute;tition de",
 'un_mot_clef' => '1&nbsp;mot-cl&eacute;',
 'une_repetition' => '1&nbsp;r&eacute;p&eacute;tition',
+'voir_evenements_rubrique' => 'Voir les &eacute;v&eacute;nements de la rubrique',
 );
 
 
