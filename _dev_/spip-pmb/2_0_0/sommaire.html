@@ -52,14 +52,13 @@
 			<h2><:nouveautes:></h2><a href="#URL_PAGE{nouveautes}" class="plus-de-liens"><:toutes_nouveautes:> +</a>
 			<ul>
 			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){pmb_photo_src!=""} {par hasard} {0,20}>
-				[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'',' '})
-					[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{width}|>{20}|?{' ',''})
+				[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|image_reduire{90,130}|extraire_attribut{width}|>{20}|?{' ',''})
 						[(#DESCRIPTIF|strlen|>{100}|?{' ',''})
 							[(#SET{nb_revues,[(#GET{nb_revues}|plus{1})]})]
 							[(#GET{nb_revues}|>{2}|?{'',' '})
 								<li class="hentry[ (#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'','avec-logo'})][ (#GET{nb_revues}|=={1}|?{'premier',''})]">
 							
-								[<div class="logo-encart">(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'',' '})<a href="#URL_PAGE{notice_display,id=#PMB_ID_NOTICE&amp;seule=1}">[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{0,130}|image_recadre{90,130,center})]</a></div>]
+								<div class="logo-encart"><a href="#URL_PAGE{notice_display,id=#PMB_ID_NOTICE&amp;seule=1}">[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|image_reduire{0,130}|image_recadre{90,130,center})]</a></div>
 								<h3 class="entry-title"><a href="#URL_PAGE{notice_display,id=#PMB_ID_NOTICE&amp;seule=1}"[ title="(#NOM_SITE|texte_backend)"]>[(#TITRE|couper{30})]</a></h3> 
 								[<small>	<:auteur:> : (#LESAUTEURS)</small>]
 								[<small>	<:serie:> : (#PMB_SERIE)</small>]
@@ -69,7 +68,6 @@
 							]
 						]
 					]
-				]
 			</BOUCLE_syndic_pmb>
 			</ul>
 			
@@ -81,7 +79,7 @@
 		<B_articles_coupsdecoeur>
 		<div class="menu articles">
 			<h2>[(#TITRE|ucfirst)]</h2><a href="#URL_RUBRIQUE" class="plus-de-liens"><:tous_coupsdecoeur:> +</a>
-			<ul class="mise-en-page<BOUCLE_testlogoscoupscoeur(ARTICLES) {par date}{inverse}{0,3} >[(#LOGO_ARTICLE||?{'-logo','-sans'})]</BOUCLE_testlogoscoupscoeur>">
+			<ul class="mise-en-page<BOUCLE_testlogoscoupscoeur(ARTICLES) {id_rubrique} {par date}{inverse}{0,3} >[(#LOGO_ARTICLE||?{'-logo','-sans'})]</BOUCLE_testlogoscoupscoeur>">
 				[(#REM) Encarts Coups de coeur ]
 				<BOUCLE_articles_coupsdecoeur(ARTICLES) {id_rubrique} {par date} {inverse} {0,3} {doublons} >
 				<li class="hentry[ (#COMPTEUR_BOUCLE|=={1}|?{'premier',''})][ encart-(#COMPTEUR_BOUCLE)][ (#LOGO_ARTICLE||?{'avec-logo','sans-logo'})]">
@@ -125,7 +123,7 @@
 		
 		<div class="menu multimedia">
 			<h2><:conferences:></h2>
-			[(#MODELE{playliste}{site})]
+			[(#MODELE{playliste}{site}{ajax})]
 		</div>
 
 		[(#REM) Liens des forums ]

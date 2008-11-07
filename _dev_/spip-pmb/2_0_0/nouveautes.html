@@ -28,14 +28,12 @@
 		<B_syndic_pmb>
 		<div class="menu articles nouveautes">
 			<ul>
-			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){pmb_photo_src!=""} {par date}{inverse}{1,50}>[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'',' '})
-					[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{width}|>{20}|?{' ',''})
-						[(#DESCRIPTIF|strlen|>{100}|?{' ',''})
+			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){pmb_photo_src!=""} {par date}{1,50}>[(#DESCRIPTIF|strlen|>{100}|?{' ',''})
 							[(#SET{nb_revues,[(#GET{nb_revues}|plus{1})]})]
 							[(#GET{nb_revues}|>{5}|?{'',' '})
-								<li class="hentry[ (#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'','avec-logo'})][ (#GET{nb_revues}|=={1}|?{'premier',''})]">
+								<li class="hentry[ (#GET{nb_revues}|=={1}|?{'premier',''})]">
 							
-								[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'',' '})<a href="#URL_PAGE{notice_display,id=#PMB_ID_NOTICE&amp;seule=1}">[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130})]</a>]
+								[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|image_reduire{90,130}|extraire_attribut{src}|match{gif_doc_numphp}|?{'',' '})<a href="#URL_PAGE{notice_display,id=#PMB_ID_NOTICE&amp;seule=1}">[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|copie_locale|image_reduire{90,130})]</a>]
 								<h3 class="entry-title"><a href="#URL_PAGE{notice_display,id=#PMB_ID_NOTICE&amp;seule=1}"[ title="(#NOM_SITE|texte_backend)"]>[(#TITRE|couper{30})]</a></h3> 
 								[<small>	<:auteur:> : (#LESAUTEURS)</small>]
 								[<small>	<:serie:> : (#PMB_SERIE)</small>]
@@ -43,9 +41,7 @@
 								<a class="lire-la-suite" title="[(#TITRE|texte_backend)]" href="#URL_PAGE{notice_display,id=#PMB_ID_NOTICE&amp;seule=1}"><:lire_la_suite:> +</a>
 								</li>
 							]
-						]
-					]
-				]</BOUCLE_syndic_pmb>
+						]</BOUCLE_syndic_pmb>
 			</ul>
 			
 			
