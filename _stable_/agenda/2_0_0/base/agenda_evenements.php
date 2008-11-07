@@ -54,6 +54,7 @@ function agenda_declarer_tables_principales($tables_principales){
 	$tables_principales['spip_evenements'] =
 		array('field' => &$evenements, 'key' => &$evenements_key, 'join'=>array('id_evenement'=>'id_evenement','id_article'=>'id_article'));
 
+	$tables_principales['spip_rubriques']['field']['agenda'] = 'tinyint(1) DEFAULT 0 NOT NULL';
 
 	return $tables_principales;
 }

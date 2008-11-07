@@ -23,25 +23,80 @@ function agenda_header_prive($flux) {
 	return $flux;
 }
 
+// Calcul d'une hierarchie
+// (liste des id_rubrique contenants une rubrique donnee)
+function calcul_hierarchie_in($id) {
+
+	// normaliser $id qui a pu arriver comme un array
+	$id = is_array($id)
+		? join(',', array_map('sql_quote', $id))
+		: $id;
+
+	// Notre branche commence par la rubrique de depart
+	$hier = $id;
+
+	// On ajoute une generation (les filles de la generation precedente)
+	// jusqu'a epuisement
+	while ($parents = sql_allfetsel('id_parent', 'spip_rubriques',
+	sql_in('id_rubrique', $id))) {
+		$id = join(',', array_map('reset', $parents));
+		$hier .= ',' . $id;
+	}
+
+	return $hier;
+}
+
 function agenda_affiche_milieu($flux) {
 	$exec =  $flux['args']['exec'];
-	$id_article = $flux['args']['id_article'];
 	
-	if ($exec=='articles'){
-		//on teste si cfg est actif
-		$afficher = true;
-		//Cette strategie est erronnee : si un article possede des evenements, il *faut* les montrer
-		// ou qu'on soit
-		/* if (defined('_DIR_PLUGIN_CFG') && (count(lire_config("agenda/rubriques_agenda",' '))>1)) {
-			$arracfgrubriques=lire_config("agenda/rubriques_agenda",' ');
-			if ($id_article!=''){
-				//on cherche la rubrique de l'article
-				$id_rubrique = sql_getfetsel("id_rubrique", "spip_articles", "id_article=$id_article");
-				//et si la rubrique est dans l'arrayrub
-				if ($id_rubrique  AND !in_array($id_rubrique, $arracfgrubriques))
-					$afficher = false;
+	if ($exec=='naviguer'){
+		$id_rubrique = $flux['args']['id_rubrique'];
+		$activer = true;
+		$res = "";
+		$actif = sql_getfetsel('agenda','spip_rubriques','id_rubrique='.intval($id_rubrique));
+		$statut="-48";
+		if (!sql_countsel('spip_rubriques','agenda=1'))
+			$res .= _T('agenda:aucune_rubrique_mode_agenda').'<br />';
+		else {
+			if (sql_countsel('spip_rubriques',sql_in('id_rubrique',calcul_hierarchie_in($id_rubrique))." AND agenda=1 AND id_rubrique<>".intval($id_rubrique))){
+				$res .= _T('agenda:rubrique_dans_une_rubrique_mode_agenda').'<br />';
+				$activer = false;
+				$statut="-ok-48";
 			}
-		}*/
+			elseif(!$actif) {
+				$res .= _T('agenda:rubrique_sans_gestion_evenement').'<br />';
+				$statut="-non-24";
+			}
+			if ($actif){
+				$res .= _T('agenda:rubrique_mode_agenda').'<br />';
+				$statut="-ok-48";
+			}
+		}
+
+		if (!$actif){
+			if($activer){
+				$res .= "<a href='".generer_action_auteur('rubrique_activer_agenda',$id_rubrique,self())."'>"._T('agenda:rubrique_activer_agenda').'</a>';
+			}
+		}
+		else
+			$res .= "<a href='".generer_action_auteur('rubrique_activer_agenda',"-$id_rubrique",self())."'>"._T('agenda:rubrique_desactiver_agenda').'</a>';
+		if ($res)
+			$flux['data'] .= "<div class='verdana2'><img src='".find_in_path("img_pack/agenda$statut.png")."' class='agenda-statut' />$res<div class='nettoyeur'></div></div>";
+	}
+	if ($exec=='articles'){
+		$id_article = $flux['args']['id_article'];
+		$afficher = true;
+		// un article avec des evenements a toujours le bloc
+		if (!sql_countsel('spip_evenements','id_article='.intval($id_article))){
+			// si au moins une rubrique a le flag agenda
+			if (sql_countsel('spip_rubriques','agenda=1')){
+				// alors il faut le flag agenda dans cette branche !
+				$afficher = false;
+				include_spip('inc/rubriques');
+				$in = calcul_hierarchie_in(sql_getfetsel('id_rubrique','spip_articles','id_article='.intval($id_article)));
+				$afficher = sql_countsel('spip_rubriques',sql_in('id_rubrique',$in)." AND agenda=1");
+			}
+		}
 		if ($afficher) {
 			$contexte = array();
 			foreach($_GET as $key=>$val)
