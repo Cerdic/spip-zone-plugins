@@ -20,7 +20,8 @@ global $table_des_tables;
 $spip_spipmotion_attentes = array(
 	"id_spipmotion_attente" => "BIGINT(21) NOT NULL auto_increment",
 	"id_document" => "BIGINT(21) NOT NULL DEFAULT '0'",
-	"id_article" => "BIGINT(21) NOT NULL DEFAULT '0'",
+	"id_objet" => "BIGINT(21) NOT NULL DEFAULT '0'",
+	"objet" => "VARCHAR(25)",
 	"id_auteur" => "BIGINT(21) NOT NULL DEFAULT '0'",
 	"encode"	=> "VARCHAR(21)",
 	"maj" => "TIMESTAMP"
@@ -28,7 +29,7 @@ $spip_spipmotion_attentes = array(
 $spip_spipmotion_attentes_key = array(
 	"PRIMARY KEY" => "id_spipmotion_attente",
 	"KEY id_document" => "id_document",
-	"KEY id_article" => "id_article",
+	"KEY id_objet" => "id_objet",
 	"KEY encode" => "encode"
 );
 

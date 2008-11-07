@@ -6,6 +6,11 @@
 		<br class="nettoyeur" />
 
 		<div id="infos_video_bas_#ID_DOCUMENT" class="infos_video_bas">
+			[(#PLUGIN{Player}|oui)
+				[(#EXTENSION|=={flv}|oui)
+				affichage d'un player ici?
+				]
+			]
 			<table cellspacing='3' cellpadding='0' style='width: 100%;  font-family: verdana; border: 0px;'>
 				[<tr>
 					<td class="video_left">

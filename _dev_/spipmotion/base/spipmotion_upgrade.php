@@ -1,6 +1,6 @@
 <?php
 	
-	$GLOBALS['spipmotion_base_version'] = 0.3;
+	$GLOBALS['spipmotion_base_version'] = 0.4;
 	function spipmotion_verifier_base(){
 		$version_base = $GLOBALS['spipmotion_base_version'];
 		$current_version = 0.0;
@@ -12,7 +12,7 @@
 				include_spip('base/abstract_sql');
 				creer_base();
 				echo 'Cr&eacute;ation de la base de spipmotion';
-				ecrire_meta('spipmotion_base_version',$current_version=$version_base);
+				ecrire_meta('spipmotion_base_version',$current_version=0.1);
 			}
 			if ($current_version<0.2){
 				sql_alter("TABLE spip_spipmotion_attentes ADD `id_auteur` BIGINT(21) NOT NULL DEFAULT '0' AFTER `id_article`");
@@ -34,6 +34,12 @@
 				sql_alter("TABLE spip_documents ADD `audiochannels` INTEGER AFTER `audiocodec`");
 				ecrire_meta('spipmotion_base_version',$current_version=0.3);
 				echo 'Mise &agrave; jour de la base de spipmotion en 0.3';
+			}
+			if ($current_version<0.4){
+				sql_alter("TABLE spip_spipmotion_attentes CHANGE `id_article` `id_objet` BIGINT(21) NOT NULL DEFAULT '0'");
+				sql_alter("TABLE spip_spipmotion_attentes ADD `objet` VARCHAR(25) AFTER `id_objet`");
+				ecrire_meta('spipmotion_base_version',$current_version=0.4);
+				echo 'Mise &agrave; jour de la base de spipmotion en 0.4';
 			}
 			ecrire_metas();
 		}
