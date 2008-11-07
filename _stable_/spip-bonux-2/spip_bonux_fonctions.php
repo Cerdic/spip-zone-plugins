@@ -18,12 +18,13 @@
  * @param string $title
  * @return string
  */
-function aoustrong($url,$libelle,$on=false,$class="",$title=""){
+function aoustrong($url,$libelle,$on=false,$class="",$title="",$rel=""){
 	return 
 	($on ?"<strong class='on'>":
 		"<a href='$url'"
 	  	.($title?" title='".attribut_html($title)."'":'')
 	  	.($class?" class='".attribut_html($class)."'":'')
+	  	.($rel?" rel='".attribut_html($rel)."'":'')
 	  	.">"
 	)
 	. $libelle
