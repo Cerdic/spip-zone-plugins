@@ -1,8 +1,13 @@
 #SET{self,#SELF|parametre_url{date_debut|id_evenement|debut_agenda,''}}#SET{yena,''}
-<p class='plier_deplier'><a href="#URL_ECRIRE{evenements_edit,new=oui&id_article=#ID_ARTICLE}"><:agenda:creer_evenement:></a> | <a href='#' onclick='jQuery("li.item.court").removeClass("court");return false;'><:lien_tout_deplier:></a> | <a href='#' onclick='set_vevent();return false;'><:lien_tout_replier:></a></p>
 <h2 class='titre'><:agenda:agenda:> : 
 <BOUCLE_compte(EVENEMENTS){id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?} />[(#TOTAL_BOUCLE|agenda_affiche_un_ou_plusieurs{agenda:info_un_evenement,agenda:info_nombre_evenements}|sinon{<:agenda:aucun_evenement:>})]#SET{yena,#TOTAL_BOUCLE|oui}<//B_compte></h2>
-<B_agenda><ul class='liste_items evenements'>
+<B_agenda>
+<div class='pagination'>
+<div class='plier_deplier'><a href='#' onclick='jQuery("li.item.court").removeClass("court");return false;' class='noajax'><:lien_tout_deplier:></a> | <a href='#' onclick='set_vevent();return false;' class='noajax'><:lien_tout_replier:></a></div>
+[(#GET{self}|parametre_url{date_debut,1900-01-01}|aoustrong{<:agenda:evenements_depuis_debut:>,#ENV{date_debut}|=={1900-01-01},noajax}) |]
+[(#GET{self}|aoustrong{<:agenda:evenements_a_venir:>,#ENV{date_debut}|=={#ENV{date}|affdate{Y-m-d}},noajax}) ]
+</div>
+<ul class='liste_items evenements'>
 	<BOUCLE_agenda(EVENEMENTS){par date_debut}{pagination #ENV{pagine,20}}{age_relatif_debut<=0}{id_evenement?}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>
 	<li class='item[ (#EXPOSE)][ (#ID_EVENEMENT_SOURCE|oui)repetition]'><div class='jour'>[(#DATE_DEBUT|affdate_jourcourt|unique)]</div>
 		[(#MODELE{evenement_vevent}|trim|sinon{'?'})]
@@ -24,14 +29,14 @@
 		</p>
 	</li>
 	</BOUCLE_agenda>
-</ul>#SET{self,#GET{self}|ancre_url{agenda}}
-<p class='pagination'>[(#PAGINATION{page}) | ]
+</ul>
+<div class='pagination'><a href="#URL_ECRIRE{evenements_edit,new=oui&id_article=#ID_ARTICLE}" class='noajax creer'><:agenda:creer_evenement:></a>[ | (#PAGINATION{page})]<div class='nettoyeur'></div></div>
+</B_agenda>
+<div class='pagination'><a href="#URL_ECRIRE{evenements_edit,new=oui&id_article=#ID_ARTICLE}" class='noajax creer'><:agenda:creer_evenement:></a>
+[(#GET{yena})
 [(#GET{self}|parametre_url{date_debut,1900-01-01}|aoustrong{<:agenda:evenements_depuis_debut:>,#ENV{date_debut}|=={1900-01-01},noajax}) |]
-[(#GET{self}|aoustrong{<:agenda:evenements_a_venir:>,#ENV{date_debut,''}|=={''},noajax}) ]
-</p>
-</B_agenda>[(#GET{yena})
-<p class='pagination'>
-[(#GET{self}|parametre_url{date_debut,1900-01-01}|aoustrong{<:agenda:evenements_depuis_debut:>,#ENV{date_debut}|=={1900-01-01},noajax}) |]
-[(#GET{self}|aoustrong{<:agenda:evenements_a_venir:>,#ENV{date_debut,''}|=={''},noajax}) ]
-</p>]
+[(#GET{self}|aoustrong{<:agenda:evenements_a_venir:>,#ENV{date_debut}|=={#ENV{date}|affdate{Y-m-d}},noajax}) ]
+]
+<div class='nettoyeur'></div>
+</div>
 <//B_agenda>

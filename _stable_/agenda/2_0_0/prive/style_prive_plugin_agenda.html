@@ -20,6 +20,7 @@
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
+.pagination a.creer {float:#GET{left};}
 /* vevent */
 li.item div.vevent h3 {margin:0;font-size:1.1em;}
 li.item div.vevent p {margin:2px 0 0;}
@@ -28,10 +29,10 @@ ul.evenements li.item.court p { display: none; }
 li.item div.vevent p.category {font-size:0.9em;color:#999;}
 
 /* liste des evenements */
-.plier_deplier { float: right; font-size: 0.9em; }
+.plier_deplier { float: #GET{left}; font-size: 0.9em; }
 .evenements li.item { padding-left: 130px; }
 .evenements li.court { border-width: 1px; }
-.evenements li.item .jour { width: 120px; margin-left: -130px; float: left; display: inline; position: relative; overflow: hidden; white-space: nowrap; font-size: 98%; }
+.evenements li.item .jour { width: 120px; margin-left: -130px; float: #GET{left}; display: inline; position: relative; overflow: hidden; white-space: nowrap; font-size: 98%; }
 
 li.item .repetitions {margin-top:0.5em;font-size:0.9em;}
 li.court .repetitions {display: none;}
@@ -44,7 +45,6 @@ li.item .repetitions li {display:inline;margin:0;padding:0;}
 .articles .fiche_objet #agenda { border: 1px solid #999;}
 .articles .fiche_objet #agenda h2.titre { margin: 0; padding: 4px 4px 8px; background: #GET{claire}; font-size: 100%; }
 .articles .fiche_objet .plier_deplier a:hover { color:#333;}
-.articles .fiche_objet .plier_deplier { float: right; margin: 8px 4px 0 0; font-size: 0.8em;}
 .articles .fiche_objet .evenements { margin-left: 4px; margin-right: 4px; }
 .articles .fiche_objet .evenements li.item { padding-left: 120px; }
 .articles .fiche_objet .evenements li.item .jour { width: 110px; margin-left: -120px; }
