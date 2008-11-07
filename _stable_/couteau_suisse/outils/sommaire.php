@@ -16,13 +16,12 @@
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function sommaire_raccourcis() {
-	return defined('_sommaire_AUTOMATIQUE')
-		?_T('couteauprive:sommaire_sans', array('racc' => _sommaire_SANS_SOMMAIRE))
-		:_T('couteauprive:sommaire_avec', array('racc' => _sommaire_AVEC_SOMMAIRE));
+	return _T('couteauprive:sommaire_'.(defined('_sommaire_AUTOMATIQUE')?'sans':'avec'));
 }
 
+// pipeline 'nettoyer_raccourcis'
 function sommaire_nettoyer_raccourcis($texte) {
-	return str_replace(array(_sommaire_SANS_FOND, _sommaire_SANS_SOMMAIRE, _sommaire_AVEC_SOMMAIRE), '', $texte);
+	return str_replace(array(_sommaire_SANS_FOND, _CS_SANS_SOMMAIRE, _CS_AVEC_SOMMAIRE), '', $texte);
 }
 
 ?>

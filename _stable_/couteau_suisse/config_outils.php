@@ -618,7 +618,7 @@ include_spip('inc/filtres');
 add_outil( array(
 	'id' => 'sommaire',
 	'contrib'	=> 2378,
-	'code:options' => "define('_sommaire_REM', '<span class=\'_foosommaire\'></span>');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_sommaire_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%%%auto_sommaire%%%%balise_sommaire%%",
+	'code:options' => "define('_sommaire_REM', '<span class=\'_foosommaire\'></span>');\ndefine('_CS_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_CS_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%%%auto_sommaire%%%%balise_sommaire%%",
 	// s'il y a un sommaire, on cache la navigation haute sur les pages
 	'code:jq' => 'if(jQuery("div.cs_sommaire").length) jQuery("div.decoupe_haut").css("display", "none");',
 	// inserer : $table_des_traitements['TEXTE']['article']= 'sommaire_d_article(propre(%s))';
@@ -868,7 +868,7 @@ add_outil( array(
 	'id' => 'glossaire',
 	'categorie'	=> 'typo-corr',
 	'contrib'	=> 2206,
-	'code:options' => "%%glossaire_limite%%%%glossaire_groupes%%%%glossaire_js%%",
+	'code:options' => "@define('_CS_SANS_GLOSSAIRE', '[!glossaire]');\n%%glossaire_limite%%%%glossaire_groupes%%%%glossaire_js%%",
 //	'traitement:LIEU:post_propre' => 'cs_glossaire',
 	'traitement:TEXTE:post_propre' => 'cs_glossaire',
 	// sans oublier les articles et les rubriques :
@@ -882,6 +882,7 @@ add_outil( array(
 	'code:css' =>  'a.cs_glossaire:after {display:none;}',
 	// fonction glossaire_init() codee dans glossaire.js : executee lors du chargement de la page et a chaque hit ajax
 	'code:jq_init' => 'glossaire_init.apply(this);',
+	'pipelinecode:nettoyer_raccourcis_typo' => '$flux=str_replace(_CS_SANS_GLOSSAIRE, "", $flux);',
 ));
 
 // attention : mailcrypt doit etre place apres liens_orphelins

@@ -126,12 +126,6 @@ function description_outil_input2_callback($matches) {
 	return '<fieldset><legend>'._T('couteauprive:label:'.$matches[3]).'</legend><div>'.$matches[1].'</div></fieldset>';
 }
 
-function description_outil_const_callback($matches) {
-	return defined($matches[1])?constant($matches[1]):'';
-}
-function description_outil_descrip_callback($matches) {
-	return _T("couteauprive:$matches[1]:description$matches[2]");
-}
 
 // renvoie la description de $outil_ : toutes les %variables% ont ete remplacees par le code adequat
 function inc_description_outil_dist($outil_, $url_self, $modif=false) {
@@ -143,7 +137,8 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$descrip = isset($outil['description'])?$outil['description']:_T('couteauprive:'.$outil['id'].':description');
 	// reconstitution d'une description eventuellement morcelee
 	// exemple : <:mon_outil:3:> est remplace par _T('couteauprive:mon_outil:description3')
-	$descrip = preg_replace_callback(',<:([a-zA-Z_][a-zA-Z0-9_-]*):([0-9]*):>,', 'description_outil_descrip_callback', $descrip);
+	$descrip = preg_replace_callback(',<:([a-zA-Z_][a-zA-Z0-9_-]*):([0-9]*):>,', 
+		create_function('$matches','return _T("couteauprive:$matches[1]:description$matches[2]");'), $descrip);
 	global $cs_input_variable;
 	$cs_input_variable = array();
 	// remplacement des zones input de format [[label->qq chose]]
@@ -207,10 +202,9 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$res = preg_replace(',(<br />)?</fieldset><fieldset>( ?<div>),', '$2', $res);
 	// remplacement des puces
 	$res = str_replace('@puce@', definir_puce(), $res);
-	// remplacement des constantes
-	$res = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 'description_outil_const_callback', $res);
-	// deuxieme reconstitution d'une description introduite par les constantes
-//	$res = preg_replace_callback(',<:([a-zA-Z_][a-zA-Z0-9_-]*):([0-9]*):>,', 'description_outil_descrip_callback', $res);
+	// remplacement des constantes de forme @_CS_XXXX@
+	$res = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 
+		create_function('$matches','return defined($matches[1])?constant($matches[1]):"";'), $res);
 
 	$modif=$modif?'<div class="cs_modif_ok">&gt;&nbsp;'._T('couteauprive:vars_modifiees').'&nbsp;&lt;</div>':'';
 	return cs_ajax_action_greffe("description_outil-$index", $res, $modif);

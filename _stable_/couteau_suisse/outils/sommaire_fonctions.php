@@ -52,8 +52,8 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	include_spip('outils/sommaire');
 	// si le sommaire est malvenu ou s'il n'y a pas de balise <hx>, alors on laisse tomber
 	$inserer_sommaire =  defined('_sommaire_AUTOMATIQUE')
-		?strpos($texte0, _sommaire_SANS_SOMMAIRE)===false
-		:strpos($texte0, _sommaire_AVEC_SOMMAIRE)!==false;
+		?strpos($texte0, _CS_SANS_SOMMAIRE)===false
+		:strpos($texte0, _CS_AVEC_SOMMAIRE)!==false;
 	if (!$inserer_sommaire || strpos($texte0, '<h')===false) 
 		return $sommaire_seul?'':sommaire_nettoyer_raccourcis($texte0);
 	// on retire les raccourcis du texte

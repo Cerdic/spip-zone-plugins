@@ -206,7 +206,10 @@ function cs_aide_raccourcis() {
 		}
 	}
 	if(!count($aide)) return '';
-	return '<p><b>' . _T('couteauprive:raccourcis') . '</b></p><ul style="list-style-type:none; padding:0; margin: 0; list-style-image: none; list-style-position: outside; ">' . join("\n", $aide) . '</ul>';
+	// remplacement des constantes de forme @_CS_XXXX@
+	$aide = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 
+		create_function('$matches','return defined($matches[1])?constant($matches[1]):"";'), join("\n", $aide));
+	return '<p><b>' . _T('couteauprive:raccourcis') . '</b></p><ul class="cs_raccourcis">' . $aide . '</ul>';
 }
 
 // retourne une aide concernant les pipelines utilises par l'outil

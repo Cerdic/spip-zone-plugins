@@ -79,6 +79,9 @@ function glossaire_safe($texte) {
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite|a
 function cs_rempl_glossaire($texte) {
 	global $gloss_id;
+	// si [!glossaire] est trouve on sort
+	if(strpos($texte, _CS_SANS_GLOSSAIRE)!==false)
+		return str_replace(_CS_SANS_GLOSSAIRE, '', $texte);
 	// mise en static de la table des mots pour eviter d'interrroger la base a chaque fois
 	// attention aux besoins de memoire...
 	static $glossaire_array;

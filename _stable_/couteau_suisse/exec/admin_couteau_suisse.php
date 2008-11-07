@@ -44,6 +44,11 @@ div.cs_infos div.cs_modif_ok { font-weight:bold; color:green; margin:0.4em; text
 div.cs_infos div.cs_menu_outil { text-align:right; font-size:85%; margin-bottom:0.8em; }
 div.cs_infos div.cs_details_outil { font-size:85%; margin-top:0.8em; border-top:solid 1px; }
 
+.cs_raccourcis {
+	list-style-type:none; padding:0; margin: 0; list-style-image: none; list-style-position: outside;
+}
+.cs_raccourcis b { color:darkRed; }
+
 .conteneur {
 	clear:both;
 	width:100%;
