@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'video_audiosamplerate' => 'Fr&eacute;quence d\'&eacute;chantillonnage audio : ',
 	'video_videocodec' => 'Codec vid&eacute;o : ',
 	'video_audiocodec' => 'Codec audio : ',
-	'video_audiochannels' => 'Nombres de channels audios : ',
+	'video_audiochannels' => 'Nombres de canaux audios : ',
 	
 	'recuperer_logo' => 'R&eacute;cup&eacute;rer un logo depuis la video',
 	'zzzz' => 'zzzz'

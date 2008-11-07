@@ -19,7 +19,7 @@ function inc_infos_videos_dist($id, $id_document,$type,$script='',$ignore_flag =
 		include_spip('public/assembler');
 		include_spip('inc/presentation');
 	}
-	$corps = recuperer_fond('prive_infos_video', $contexte=array('id_document'=>$id_document));
+	$corps = recuperer_fond('prive/prive_infos_video', $contexte=array('id_document'=>$id_document));
 	
 	// Si on a le droit de modifier les documents, on affiche les icones pour récupérer les infos et le logo
 	if(autoriser('joindredocument',$type, $id)){

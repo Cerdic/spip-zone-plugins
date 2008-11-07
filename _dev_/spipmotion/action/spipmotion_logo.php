@@ -47,7 +47,8 @@ function action_infos_video_post($r){
 	$fichier_temp = "$dossier_temp$query.jpg";
 	spip_log("fichier temporaire = $fichier_temp","spipmotion");	
 	
-	$frame1 = $movie->getFrame(200);
+	$frame1 = $movie->getFrame(400);
+	spip_log($frame1);
 	$img_temp = $frame1->toGDImage();
 	imagejpeg($img_temp, $fichier_temp);
 	$img_finale = $fichier_temp;
