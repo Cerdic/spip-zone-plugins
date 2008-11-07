@@ -22,7 +22,7 @@ function exec_echoppe_depot(){
 	
 	
 	
-	if (spip_num_rows($res_le_depot) != 1 && $contexte['new'] != "oui"){
+	if (sql_count($res_le_depot) != 1 && $contexte['new'] != "oui"){
 		die(inc_commencer_page_dist(_T('echoppe:les_depots'), "redacteurs", "echoppe")._T('echoppe:pas_de_depot_ici').fin_page());
 	}
 	
