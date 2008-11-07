@@ -155,7 +155,9 @@ function balise_PLAYER_FLV_PLAYER ($p) {
 
 		$player_config = unserialize($GLOBALS['meta'][_PLAYER_META_PREFERENCES]);
 		$result = $player_config['player_video'];
-		
+		if(!$result){
+			$result = 'player_flv_maxi.swf'; 
+		}
 		$p->code = "'$result'";
 	}
 	$p->interdire_scripts = true;
