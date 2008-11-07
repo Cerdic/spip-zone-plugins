@@ -1,0 +1,9 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-Type: image/jpg})]
+[(#HTTP_HEADER{Expires: Mon, 26 Jul 1997 05:00:00 GMT})]
+[(#HTTP_HEADER{Last-Modified: #EVAL{gmdate( 'D, d M Y H:i:s' )} GMT})]
+[(#HTTP_HEADER{Cache-Control: no-store, no-cache, must-revalidate})]
+[(#HTTP_HEADER{Cache-Control: post-check=0, pre-check=0', false ))]
+[(#HTTP_HEADER{Pragma: no-cache})]
+[(#EVAL{file_get_contents('#ENV{url}')})]
+

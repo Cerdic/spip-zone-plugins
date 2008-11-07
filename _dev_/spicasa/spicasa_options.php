@@ -86,6 +86,10 @@ function spicasa_add($id_image, $id_article, $id_album, $user){
 	print $user."<br>";
 	*/
 	
+	
+	
+	
+	
 	$pic = new Picasa();
 	$image = $pic->getImageById($user, $id_album, $id_image, null, 1024);
 	foreach($image->getContentUrlMap() as $value) $url = $value; //just one
@@ -110,12 +114,18 @@ function spicasa_add($id_image, $id_article, $id_album, $user){
 	$hauteur = $image->getHeight();
 	
 
-
-	//this line fail! get 404 on spip.log
+	$url = $GLOBALS['meta']['adresse_site']."/?page=picasaimage&url=".$url;
+	print "<a href='$url'>remote</a><br>";
 	
+	//this line fail! get 404 on spip.log
 	$img_local = copie_locale($url);
+	
+	print "<a href='../$img_local'>local</a><br>";
+	
 	$img_local = ereg_replace("^"._DIR_IMG, "", $img_local);
 
+	
+	
 	
 	$taille = filesize($img_local);
 	
