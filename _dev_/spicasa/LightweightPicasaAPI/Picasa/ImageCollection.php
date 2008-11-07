@@ -178,6 +178,13 @@ class Picasa_ImageCollection {
 		return $this->picasaAuthor;
 	}
 
+    /** added by Martin Gaitan 
+    */
+    public function getTotalResults(){
+        return $this->totalResults;
+    }
+
+
 	/**
 	 * @param string
 	 * @return void

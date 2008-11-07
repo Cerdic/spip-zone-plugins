@@ -798,6 +798,30 @@ class Picasa {
 		return $image;
 	}
 
+    /* added by martin gaitan */
+    public function getImageById_alt($username, $albumname, $imageid, $thumbsize=null, $imgmax=null) {
+		$image = null;
+	    	$params = '';
+		if ($thumbsize !== null) {
+			$params .= '?thumbsize='.$thumbsize;
+			if ($imgmax !== null) {
+		    		$params .= '&imgmax='.$imgmax;
+			}
+		} else if ($imgmax !== null) {
+		    	$params .= '?imgmax='.$imgmax;
+		}
+
+	    	try {
+			$image = new Picasa_Image(Picasa::$BASE_QUERY_URL.'/user/'.$username.'/album/'.$albumname.'/photoid/'.$imageid.$params, null, $this->contextArray);
+		} catch (Picasa_Exception $e) {	
+			throw $e;
+		}
+		return $image;
+	}
+
+
+
+
 
 	/**
 	 * Retrieves the image with the given id as an entry as opposed to a feed.   
