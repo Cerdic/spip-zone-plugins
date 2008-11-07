@@ -26,7 +26,7 @@ function spicasa_resultados($recherche, $id_article, $debut=1, $max_results=400,
 					
 				$id_image = $img->getIdnum();
 				$id_album = $img->getAlbumid(); //$img->getAlbumid();
-				print "<script>console.log($id_album);</script>";
+				//print "<script>console.log($id_album);</script>";
 				$author = $img->getAuthor()->getUser();
 				
 				$titre = $img->getTitle();
@@ -109,13 +109,13 @@ function spicasa_add($id_image, $id_article, $id_album, $user){
 	$largeur = $image->getWidth();
 	$hauteur = $image->getHeight();
 	
-	print $url."<br>";
+
+
+	//this line file! get 404 on spip.log
 	
 	$img_local = copie_locale($url);
-	
-	$img_local = ereg_replace("^"._DIR_IMG, "", $image);
-	
-	print "local: ".$img_local."<br>";
+	//$img_local = ereg_replace("^"._DIR_IMG, "", $img_local);
+
 	
 	$taille = filesize($img_local);
 	
@@ -153,109 +153,6 @@ function spicasa_add($id_image, $id_article, $id_album, $user){
 }
 
 
-
-function flickr_ajouter ($id_image, $id_article) {
-	include_spip('inc/distant'); // pour 'copie_locale'
-
-	$url = "http://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key="._KEY_API_FLICKR."&photo_id=".$id_image;
-	
-	echo "<div>$url</div>";
-	$contenu = recuperer_page($url,false,false,_COPIE_LOCALE_MAX_SIZE);
-	
-	if (ereg("label=\"Medium\" width=\"([0-9]+)\" height=\"([0-9]+)\" source=\"([^\"]*)\"", $contenu, $regs)) {
-		$largeur = $regs[1];
-		$hauteur = $regs[2];
-		$image = $regs[3];
-	}
-			
-	if (ereg("label=\"Large\" width=\"([0-9]+)\" height=\"([0-9]+)\" source=\"([^\"]*)\"", $contenu, $regs)) {
-		$largeur = $regs[1];
-		$hauteur = $regs[2];
-		$image = $regs[3];
-	}
-		
-	/* En largeur 1024, ca devrait suffir pour des images...
-	if (ereg("label=\"Original\" width=\"([0-9]+)\" height=\"([0-9]+)\" source=\"([^\"]*)\"", $contenu, $regs)) {
-		$largeur = $regs[1];
-		$hauteur = $regs[2];
-		$image = $regs[3];
-	}
-	*/
-		
-	echo $image;
-	echo " - $largeur x $hauteur";
-	
-	$extension = substr($image, strlen($image)-3, 3);
-	
-	echo " ($extension)";
-
-	$url = "http://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key="._KEY_API_FLICKR."&photo_id=".$id_image;
-	$contenu = recuperer_page($url,false,false,_COPIE_LOCALE_MAX_SIZE);
-//	$contenu = str_replace("<", "&lt;", $contenu);
-	
-//	echo $contenu;
-	
-	if (ereg("<title>(.*)</title>", $contenu, $regs2)) {
-		$titre = $regs2[1];
-		
-		echo "<div>$titre</div>";
-	}
-	
-	
-	if (ereg("username=\"([^\"]*)\" realname=\"([^\"]*)\"", $contenu, $regs2)) {
-		$realname = $regs2[2];
-		$username = $regs2[1];
-		
-		if (strlen($realname) > 0) $username = $realname;
-		
-		echo "<div>$username</div>";
-	}
-	if (ereg("<url type=\"photopage\">(.*)</url>", $contenu, $regs2)) {
-		$page = $regs2[1];
-		
-		echo "<div>$page</div>";
-		
-		$username = "(cc) <a href='$page'>$username</a>";
-	}
-
-	$image = copie_locale($image);
-	
-	$taille = filesize($image);
-	echo "<div>taille: $taille</div>";
-	
-	$image = ereg_replace("^"._DIR_IMG, "", $image);
-	
-	echo $image;
-
-	include_spip("base/abstract_sql");
-	$id_document = sql_insertq (
-		"spip_documents",
-		array (
-			"extension" => "$extension",
-			"titre" => "$titre",
-			"date" => "NOW()",
-			"descriptif" => "$username",
-			"fichier" => "$image",
-			"largeur" => "$largeur",
-			"hauteur" => "$hauteur",
-			"mode" => "image",
-			"taille" => $taille,
-			"distant" => "non"
-		)
-	);
-	if ($id_document) {
-		sql_insertq (
-			"spip_documents_liens",
-			array(
-				"id_document" => $id_document,
-				"id_objet" => $id_article,
-				"objet" => "article"
-			)
-		);
-	}
-
-
-}
 
 
 
