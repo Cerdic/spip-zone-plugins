@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Flickr CC</nom>
 	<auteur>ARNO*</auteur>
-	<version>0.1</version>
+	<version>0.2</version>
 	<etat>test</etat>
 	<description>
 Flickr CC vous permet de rechercher des images Flickr en Creative Commons et de les ins&eacute;rer dans vos articles directement depuis la page d'&eacute;dition d'un article.	
