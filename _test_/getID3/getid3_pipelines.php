@@ -29,11 +29,11 @@ function getid3_post_edition($flux){
 			$infos = $recuperer_infos($id_document);
 		}
 		else{
-			return;
+			return $flux;
 		}
 	}
 	else{
-		return;
+		return $flux;
 	}
 }
 ?>
