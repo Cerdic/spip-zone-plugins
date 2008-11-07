@@ -26,11 +26,6 @@
 	spipmotion
 	</prefix>
 	<pipeline>
-		<nom>affiche_droite</nom>
-		<action>affiche_droite</action>
-		<inclure>spipmotion_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>editer_contenu_objet</nom>
 		<action>editer_contenu_objet</action>
 		<inclure>spipmotion_pipelines.php</inclure>
