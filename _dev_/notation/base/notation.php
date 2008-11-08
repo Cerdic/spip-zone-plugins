@@ -21,8 +21,6 @@ function notation_declarer_tables_principales($tables_principales){
 		"id_notation" => "BIGINT(21) NOT NULL auto_increment",
 		"objet"	=> "varchar(21) DEFAULT '' NOT NULL",
 		"id_objet" => "BIGINT(21) NOT NULL DEFAULT '0'",
-		//"id_article" => "BIGINT(21) NOT NULL DEFAULT '0'",
-		//"id_forum" => "BIGINT(21) NOT NULL DEFAULT '0'",
 		"id_auteur" => "BIGINT(21) NOT NULL",
 		"ip"	=> "VARCHAR(255) NOT NULL",
 		"note" => "TINYINT(1) NOT NULL",
@@ -32,8 +30,6 @@ function notation_declarer_tables_principales($tables_principales){
 		"PRIMARY KEY" => "id_notation",
 		"KEY objet" => "objet",
 		"KEY id_objet" => "id_objet",
-		//"KEY id_article" => "id_article",
-		//"KEY id_forum" => "id_forum",
 		"KEY id_auteur"	=> "id_auteur",
 		"KEY ip" => "ip",
 		"KEY note" => "note"
@@ -61,6 +57,7 @@ function notation_declarer_tables_auxiliaires($tables_auxiliaires){
 		"nombre_votes" => "BIGINT(21) NOT NULL"
 	);
 	$spip_notations_objets_key = array(
+		"PRIMARY KEY" => "(objet, id_objet)",
 		"KEY objet" => "objet",
 		"KEY id_objet" => "id_objet",
 		"KEY note" => "note",
