@@ -24,7 +24,7 @@ function spip_cache_action_rapide() {
 	else
 	  $info = _T('taille_cache_vide');
 	return redirige_action_post('purger', 'cache', 'admin_couteau_suisse', "cmd=descrip&outil=spip_cache#cs_infos",
-			"\n<div style='text-align: center;'><input class='fondo' type='submit' value=\"" .
+			"\n<div style='text-align: center; padding:0.4em;'><input class='fondo' type='submit' value=\"" .
 			attribut_html(_T('bouton_vider_cache')) .
 			"\" />&nbsp;($info)</div>");
 }
