@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Notation</nom>
 	<auteur>JEM - b_b - Matthieu Marcillaud</auteur>
-	<version>0.6</version>
+	<version>0.6.1</version>
 	<version_base>0.6</version_base>
 	<etat>dev</etat>
 	<prefix>notation</prefix>

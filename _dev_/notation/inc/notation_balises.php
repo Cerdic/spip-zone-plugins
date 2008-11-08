@@ -98,10 +98,10 @@ function notation_calculer_id($p){
 	$objet = objet_type($boucle->type_requete);
 	$id_table = $boucle->id_table . '.' . $boucle->primary;
 
+	$ponderation = lire_config('notation/ponderation',30);
 	$boucle->select[]= 'COUNT(notations.note) AS nombre_votes';
-	$boucle->select[]= 'ROUND(SUM(notations.note)/COUNT(notations.note),2) AS moyenne';
-	$ponderation = lire_config('notations/ponderation',30);
-	$boucle->select[]= 'ROUND((SUM(notations.note)/COUNT(notations.note))*(1-EXP(-5*COUNT(notations.note)/'.$ponderation.')),2) AS moyenne_ponderee';
+	$boucle->select[]= 'ROUND(AVG(notations.note),2) AS moyenne';
+	$boucle->select[]= 'ROUND(AVG(notations.note)*(1-EXP(-5*COUNT(notations.note)/'.$ponderation.')),2) AS moyenne_ponderee';
 	$boucle->from[$boucle->id_table] .= " LEFT JOIN spip_notations AS notations 
 		ON (notations.id_objet=$id_table AND notations.objet='.sql_quote($objet).')";
 	$boucle->group[]=$id_table;

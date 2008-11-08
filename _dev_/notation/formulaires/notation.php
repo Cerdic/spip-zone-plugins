@@ -220,21 +220,19 @@ function notation_recalculer_total($objet,$id_objet){
 function notation_calculer_total($objet, $id_objet){
 
 	// Calculer la note de l'objet
-	$somme = $total = 0;
+	$moyenne = $total = 0;
 	if ($row = sql_fetsel(
-			array("COUNT(note) AS nombre","SUM(note) AS somme"),
+			array("COUNT(note) AS nombre","ROUND(AVG(note),2) AS moyenne"),
 			"spip_notations",
 			array(
 				"objet=". sql_quote(objet_type($objet)),
 				"id_objet=" . sql_quote($id_objet) ///// a changer
 			))){
 				
-		$somme = $row['somme'];
+		$moyenne = $row['moyenne'];
 		$total = $row['nombre'];
 	}	
-	$moyenne = $somme/$total;
-	$moyenne = intval($moyenne*100)/100;
-	$note = $moyenne; //round($moyenne);
+	$note = $moyenne;
 	$note_ponderee = notation_ponderee($moyenne, $total);
 	return array($total, $note, $note_ponderee);
 }
