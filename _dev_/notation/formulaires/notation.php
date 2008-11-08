@@ -219,22 +219,28 @@ function notation_recalculer_total($objet,$id_objet){
 
 function notation_calculer_total($objet, $id_objet){
 
-	// Calculer la note de l'objet
-	$moyenne = $total = 0;
-	if ($row = sql_fetsel(
-			array("COUNT(note) AS nombre","ROUND(AVG(note),2) AS moyenne"),
-			"spip_notations",
+	$ponderation = lire_config('notation/ponderation',30);
+	
+	// Calculer les moyennes
+	// cf critere {notation}
+	$select = array(
+		'notations.objet',
+		'notations.id_objet',
+		'COUNT(notations.note) AS nombre_votes',
+		'ROUND(AVG(notations.note),2) AS moyenne',
+		'ROUND(AVG(notations.note)*(1-EXP(-5*COUNT(notations.note)/'.$ponderation.')),2) AS moyenne_ponderee'
+	);
+	if (!$row = sql_fetsel(
+			$select,
+			"spip_notations AS notations",
 			array(
-				"objet=". sql_quote(objet_type($objet)),
-				"id_objet=" . sql_quote($id_objet) ///// a changer
-			))){
-				
-		$moyenne = $row['moyenne'];
-		$total = $row['nombre'];
-	}	
-	$note = $moyenne;
-	$note_ponderee = notation_ponderee($moyenne, $total);
-	return array($total, $note, $note_ponderee);
+				"notations.objet=". sql_quote(objet_type($objet)),
+				"notations.id_objet=" . sql_quote($id_objet) 
+			))) {
+		return array(0,0,0);		
+	} else {
+		return array($row['nombre_votes'], $row['moyenne'], $row['moyenne_ponderee']);
+	}
 }
 
 ?>
