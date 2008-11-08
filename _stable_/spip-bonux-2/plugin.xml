@@ -1,11 +1,12 @@
 <plugin>
-  <nom>Spip Bonux 2.0</nom>
-  <auteur>Mathieu Marcillaud, Cedric Morin, Romy Tetue</auteur>
+  <nom>SPIP Bonux 2.0</nom>
+  <auteur>Cedric Morin, Mathieu Marcillaud, romy.tetue.net</auteur>
   <icon>img_pack/spip-bonux.png</icon>
   <licence>(c) 2008 GPL</licence>
   <version>1.2</version>
   <etat>stable</etat>
-  <description>Le plugin qui lave plus SPIP que SPIP, avec des cadeaux dedans</description>
+  <description>Le plugin qui lave plus SPIP que SPIP, avec des chouettes cadeaux dedans ! Interface douce, boucles POUR et CONDITION, tableaux, compteur, etc.</description>
+  <lien>http://www.spip-contrib.net/SPIP-Bonux</lien>
   <fonctions>public/spip_bonux_criteres.php</fonctions>
   <fonctions>public/spip_bonux_balises.php</fonctions>
   <fonctions>spip_bonux_fonctions.php</fonctions>
