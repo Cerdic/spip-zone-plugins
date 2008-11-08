@@ -8,7 +8,8 @@
 <:spip_bonux:pages:>
 [<a href='[(#ENV{url}|parametre_url{#ENV{debut},''})]##ENV{ancre}' class='lien_pagination' rel='nofollow'>(#GET{premiere}|>{1}|?{'...',''})</a> #GET*{separateur}]
 <BOUCLE_pages(POUR){tableau #GET{pages}}>
-[(#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}}|aoustrong{#VALEUR,#VALEUR|=={#ENV{page_courante}},lien_pagination,'',nofollow)]
+[(#SET{item, #VALEUR|moins{1}|mult{#ENV{pas}} })]
+[(#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}}|aoustrong{#VALEUR,#VALEUR|=={#ENV{page_courante}},lien_pagination,'',nofollow})]
 [(#VALEUR|<{#GET{derniere}}|?{#GET{separateur}})]
 </BOUCLE_pages>
 [#GET*{separateur} <a href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})]##ENV{ancre}' class='lien_pagination' rel='nofollow'>(#GET{derniere}|<{#ENV{nombre_pages}}|?{'...',''})</a>]
