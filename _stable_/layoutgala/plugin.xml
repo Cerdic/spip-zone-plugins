@@ -1,14 +1,14 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Layout Gala pour la dist de SPIP 1.9.3
+	Layout Gala pour la dist de SPIP 2.0
 	</nom>
 	<auteur><!-- Auteur du plugin -->
-[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_]
+[Jacques->http://www.pyrat.net/]
 
 &#169; 2008 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
-	0.9.1
+	0.9.2
 	</version>
 	<etat>
 	test
@@ -23,7 +23,7 @@ Permet de choisir un agencement parmis les 40 de [LayoutGala->http://blog.html.i
 	ce parametre est obligatoire et doit etre non vide
 	-->
 	<prefix> 
-	LayoutGala
+	layoutgala
 	</prefix>
 	<options>layoutgala_options.php</options>
 	<icon>
@@ -34,6 +34,6 @@ Permet de choisir un agencement parmis les 40 de [LayoutGala->http://blog.html.i
 		<nom>insert_head</nom>
 		<inclure>layoutgala_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version='[1.9.3;]' />
-	<necessite id="cfg" version="[1.0.8;]" />
+	<necessite id='SPIP' version='[2.0.0 dev;]' />
+	<necessite id="cfg" version="[1.10.3;]" />
 </plugin>
