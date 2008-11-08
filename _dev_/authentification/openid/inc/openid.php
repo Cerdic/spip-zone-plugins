@@ -206,11 +206,11 @@ function terminer_authentification_openid($cible){
 			// on ajoute un auteur uniquement si les inscriptions sont autorisees sur le site
 			if ($GLOBALS['meta']['accepter_inscriptions']=='oui') {
 				
-				openid_log("Tenter d'ajouter de '$openid' dans SPIP");
+				openid_log("Tenter d'ajouter '$openid' dans SPIP");
 				// verifier qu'on a les infos necessaires
 				if (!$ok = ($couples['login'] AND $couples['email'])) {
 					openid_log("Les informations transmises ne sont pas suffisantes : il manque le login et/ou l'email pour $openid.");
-					$redirect = openid_url_erreur(_L("Inscription impossible : un login identique existe deja"), $cible);
+					$redirect = openid_url_erreur(_L("Inscription impossible : login ou email non renvoy&eacute;"), $cible);
 				}
 				// ajouter l'auteur si le login propose n'existe pas deja
 				elseif (!$ok = openid_ajouter_auteur($couples)) {
