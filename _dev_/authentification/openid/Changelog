@@ -1,3 +1,6 @@
+0.8.7 (08 11 2008)
+- Ne pas inscrire un openid si les donnees requises ne sont pas transmises
+
 0.8.6 (31 10 2008)
 - Permettre les redirections vers les serveurs openid meme si l'on des dans un bloc ajax
 

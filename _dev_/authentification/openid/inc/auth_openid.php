@@ -20,7 +20,7 @@ function inc_auth_openid_dist ($login) {
 	if (!$login) return false;
 
 	// Si l'utilisateur figure deja dans la base, y recuperer les infos
-	$result = sql_fetsel("*", "spip_auteurs", "openid=" . sql_quote($login));
+	$result = sql_fetsel("*", "spip_auteurs", array("statut!=".sql_quote("5poubelle") , "openid=" . sql_quote($login)));
 	
 	return is_array($result) ? $result : array(); 
 }

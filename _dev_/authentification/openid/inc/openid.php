@@ -77,7 +77,7 @@ function demander_authentification_openid($login, $cible){
 		// vers laquelle le bonhomme souhaite aller (url=$cible)
 		
 		// attention, il ne faut pas utiliser parametre_url() afin
-		// d'encoderer $cible, ce qui casserait la transaction...
+		// d'encoder $cible, ce qui casserait la transaction...
 		$retour = parametre_url(openid_url_reception(), "url", url_absolue($cible), '&');
 		openid_log("Adresse de retour : $retour", 2);
 		// on demande quelques informations, dont le login obligatoire
@@ -205,16 +205,25 @@ function terminer_authentification_openid($cible){
 
 			// on ajoute un auteur uniquement si les inscriptions sont autorisees sur le site
 			if ($GLOBALS['meta']['accepter_inscriptions']=='oui') {
-				// d'abord ajouter l'auteur si le login propose n'existe pas deja
-				openid_log("Ajout de '$openid' dans SPIP");
-				if (!$ok = openid_ajouter_auteur($couples)) {
+				
+				openid_log("Tenter d'ajouter de '$openid' dans SPIP");
+				// verifier qu'on a les infos necessaires
+				if (!$ok = ($couples['login'] AND $couples['email'])) {
+					openid_log("Les informations transmises ne sont pas suffisantes : il manque le login et/ou l'email pour $openid.");
+					$redirect = openid_url_erreur(_L("Inscription impossible : un login identique existe deja"), $cible);
+				}
+				// ajouter l'auteur si le login propose n'existe pas deja
+				elseif (!$ok = openid_ajouter_auteur($couples)) {
 					openid_log("Inscription impossible de '$openid' car un login ($couples[login]) existe deja dans SPIP");
 					$redirect = openid_url_erreur(_L("Inscription impossible : un login identique existe deja"), $cible);
-				} else {
-					// verifier que l'insertion s'est bien deroulee 
+				} 
+				// verifier que l'insertion s'est bien deroulee 
+				else {
 					if (($ok = $identifier_login($openid, "")) && $cible){					
 						openid_log("Inscription de '$openid' dans SPIP OK", 3);
 						$cible = parametre_url($cible,'message_ok',_L('openid:Vous &ecirc;tes maintenant inscrit et identifi&eacute; sur le site. Merci.'),'&');
+					} else {
+						openid_log("Echec de l'ajout de '$openid' dans SPIP", 3);
 					}
 				}
 			}
@@ -290,10 +299,9 @@ function openid_ajouter_auteur($couples){
 		return false;
 	}
 	$id_auteur = sql_insertq("spip_auteurs", array('statut' => $statut));
-	
-	include_spip('action/editer_auteur');
+	openid_log("Creation de l'auteur '$id_auteur' pour $couples[login]", 3);
 	include_spip('inc/modifier');
-	instituer_auteur($id_auteur, $couples);
+	revision_auteur($id_auteur, $couples);
 	
 	return true;
 }
