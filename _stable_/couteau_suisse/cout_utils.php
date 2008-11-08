@@ -10,7 +10,7 @@
 #-----------------------------------------------------#
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-cs_log("chargement de cout_utils.php et lancement de cs_initialisation...");
+cs_log("chargement de cout_utils.php");
 $GLOBALS['cs_utils']++;
 
 // $outils : tableau ultra complet avec tout ce qu'il faut savoir sur chaque outil
@@ -399,7 +399,7 @@ function cs_verif_FILE_OPTIONS($activer=false, $ecriture = false) {
 	$include = str_replace('\\','/',realpath(_DIR_CS_TMP.'mes_spip_options.php'));
 	$include = "@include_once \"$include\";\nif(\$GLOBALS['cs_spip_options']) define('_CS_SPIP_OPTIONS_OK',1);";
 	$inclusion = _CS_SPIP_OPTIONS_A."\n// Please don’t modify; this code is auto-generated\n$include\n"._CS_SPIP_OPTIONS_B;
-cs_log("cs_verif_FILE_OPTIONS($ecriture) : le code d'appel est $include");
+cs_log("cs_verif_FILE_OPTIONS($activer, $ecriture) : le code d'appel est $include");
 	$fo = strlen(_FILE_OPTIONS)? _FILE_OPTIONS:false;
 	if ($fo) {
 		if (lire_fichier($fo, $t)) {

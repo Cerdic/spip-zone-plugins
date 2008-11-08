@@ -32,16 +32,21 @@ cs_log("couteau_suisse_install($action)");
 		case 'install':
 			break;
 		case 'uninstall':
+			// effacement de toutes les metas du Couteau Suisse
 			foreach(array_keys($GLOBALS['meta']) as $meta) {
 				if(strpos($meta, 'tweaks_') === 0) effacer_meta($meta);
 				if(strpos($meta, 'cs_') === 0) effacer_meta($meta);
 			}
 			ecrire_metas();
+			// effacement du repertoire temporaire tmp/couteau-suisse
 			if (@file_exists(_DIR_CS_TMP)) {
 				include_spip('inc/getdocument');
 				effacer_repertoire_temporaire(_DIR_CS_TMP);
 			}
 			@unlink(_DIR_RSS_TMP);
+			// retrait de l'inclusion eventuelle dans config/mes_options.php
+			include_spip('cout_utils');
+			cs_verif_FILE_OPTIONS(false, true);
 			break;
 	}
 }

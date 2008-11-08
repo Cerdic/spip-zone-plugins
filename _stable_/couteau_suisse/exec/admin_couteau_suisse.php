@@ -33,7 +33,7 @@ div.cs_infos { }
 div.cs_infos p { margin:0.3em 1em 0.3em 0; padding:0; }
 div.cs_infos h3.titrem { border-bottom:solid 1px; font-weight:bold; display:block; }
 div.cs_infos legend { font-weight:bold; }
-div.cs_infos fieldset {	margin:.8em 4em .5em 4em; /* -moz-border-radius:8px; */ }
+div.cs_infos fieldset {	margin:.8em 4em .5em 4em; }
 div.cs_infos fieldset fieldset { border:0; margin:0 0 0 4em; padding:0.3em; }
 div.cs_infos fieldset>div { margin:0; }
 div.cs_infos sup { font-size:85%; font-variant:normal; vertical-align:super; }
