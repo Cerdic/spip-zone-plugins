@@ -83,6 +83,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=hide&outil='.$outil_id).'" title="' . _T('couteauprive:outil_cacher') . '">' . _T('couteauprive:outil_cacher') . '</a>&nbsp;|&nbsp;';
 	$act = $actif?'des':'';
 	$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=toggle&outil='.$outil_id).'" title="'._T("couteauprive:outil_{$act}activer_le").'">'._T("couteauprive:outil_{$act}activer")."</a></div>";
+	$s .= cs_action_rapide($outil_id);
 	include_spip('inc/texte');
 	$s .= propre($descrip);
 
@@ -177,4 +178,21 @@ function detail_outil($outil_id) {
 	if(count($details)) return $div . join('<br />', $details) . '</div>';
 	return '';
 }
+
+// renvoie les boutons eventuels d'action rapide
+function cs_action_rapide($outil_id) {
+	$f = "{$outil_id}_action_rapide";
+	include_spip("outils/$f");
+	if(!function_exists($f)) return '';
+	$f = $f();
+	if(strlen($f)) {
+		$mem = $GLOBALS['toujours_paragrapher'];
+		$GLOBALS['toujours_paragrapher'] = false;
+		$info = '<div><strong>' . definir_puce() . '&nbsp;' . propre(_T('couteauprive:action_rapide')) . "</strong></div>";
+		$GLOBALS['toujours_paragrapher'] = $mem;
+		return '<div class="cs_action_rapide">'.$info.$f.'</div>';
+	}
+	return '';
+}
+
 ?>

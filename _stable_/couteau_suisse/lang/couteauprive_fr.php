@@ -464,7 +464,7 @@ Listez ici les s&eacute;quences interdites@_CS_ASTER@ en les s&eacute;parant par
 @_CS_ASTER@Pour sp&eacute;cifier un mot entier, mettez-le entre paranth&egrave;ses. Pour une expression avec des espaces, placez-la entre guillemets.',
 	'spam:nom' => 'Lutte contre le SPAM',
 	'spip_cache:description1' => '@puce@ Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]',
-	'spip_cache:description2' => '@puce@ Quatre options pour vous aider &agrave; g&eacute;rer le cache de SPIP : <q1>
+	'spip_cache:description2' => '@puce@ Quatre options pour orienter le fonctionnement du cache de SPIP : <q1>
 _ &bull; {Usage normal} : SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. Apr&egrave;s un certain d&eacute;lai, le cache est recalcul&eacute; et stock&eacute;.
 _ &bull; {Cache permanent} : les d&eacute;lais d\'invalidation du cache sont ignor&eacute;s.
 _ &bull; {Pas de cache} : d&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. Ici, rien n\'est stock&eacute; sur le disque.
@@ -605,6 +605,7 @@ En tant que webmestre vous-m&ecirc;me, vous avez ici les droits de modifier cett
 	'cache_permanent' => 'Cache permanent',
 	'cache_controle' => 'Contr&ocirc;le du cache',
 	'message_perso' => 'Un grand merci aux traducteurs qui passeraient par ici. Pat ;-)',
+	'action_rapide' => 'Action rapide, uniquement si vous savez ce que vous faites !',
 
 );
 
