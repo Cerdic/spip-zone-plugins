@@ -354,6 +354,7 @@ _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<htm
 	'mailcrypt:description' => 'Masque tous les liens de courriels pr&eacute;sents dans vos textes en les rempla&ccedil;ant par un lien Javascript permettant quand m&ecirc;me d\'activer la messagerie du lecteur. Cet outil antispam tente d\'emp&ecirc;cher les robots de collecter les adresses &eacute;lectroniques laiss&eacute;es en clair dans les forums ou dans les balises de vos squelettes.',
 	'mailcrypt:nom' => 'MailCrypt',
 	'modifier_vars' => 'Modifier ces @nb@ param&egrave;tres',
+	'modifier_vars_0' => 'Modifier ces param&egrave;tres',
 	'moderation_moderee:nom' => 'Mod&eacute;ration mod&eacute;r&eacute;e',
 	'label:moderation_admin' => 'Valider automatiquement les messages des : ',
 	'moderation_moderee:description' => 'Permet de mod&eacute;rer la mod&eacute;ration des forums pour les utilisateurs inscrits. [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',

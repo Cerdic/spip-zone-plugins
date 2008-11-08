@@ -23,7 +23,7 @@ function spip_cache_action_rapide() {
 	  $info = _T('taille_cache_octets', array('octets' => taille_en_octets($n)));
 	else
 	  $info = _T('taille_cache_vide');
-	return redirige_action_post('purger', 'cache', 'admin_couteau_suisse', "cmd=descrip&outil=spip_cache",
+	return redirige_action_post('purger', 'cache', 'admin_couteau_suisse', "cmd=descrip&outil=spip_cache#cs_infos",
 			"\n<div style='text-align: center;'><input class='fondo' type='submit' value=\"" .
 			attribut_html(_T('bouton_vider_cache')) .
 			"\" />&nbsp;($info)</div>");
