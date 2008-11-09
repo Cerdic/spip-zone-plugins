@@ -55,7 +55,8 @@ Kompatibel mit: SPIP 1.9x',
 	'titre' => 'Schweizer Taschenmesser',
 
 	// V
-	'variable_vide' => '(Leer)'
+	'variable_vide' => '(Leer)',
+	'visiteurs_connectes' => 'Angemeldete Besucher: @nb@'
 );
 
 ?>
