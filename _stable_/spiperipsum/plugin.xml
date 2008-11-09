@@ -1,0 +1,22 @@
+<plugin>
+	<nom>SPIPer Ipsum</nom>
+	<auteur>SarkASmeL, sur une id&eacute;e de Gwen</auteur>
+	<version>0.1</version>
+	<etat>stable</etat>
+	<licence>GPL 3</licence>
+	<description>
+Ce plugin permet d'afficher les diff&eacute;rentes lectures de l'&eacute;vangile du jour ou d'un jour donn&eacute; selon le calendrier fix&eacute; par l'Eglise catholique.
+Ce service est propos&eacute; par le site de &#171; [L'Evangile au Quotidien->http://www.levangileauquotidien.org] &#187; dans plusieurs langues.
+
+L'affichage des lectures se fait principalement via l'utilisation d'un mod&egrave;le {{spiperipsum}} dans les squelettes utilisateur ou dans les articles.
+<code>
+- dans un squelette [(#MODELE{spiperipsum, jour=aujourdhui, lecture=evangile})]
+- dans un article <spiperipsum|jour=aujourdhui|lecture=evangile>
+</code>
+	</description>
+	<lien>http://plugins.spip.net</lien>
+	<prefix>spiperipsum</prefix>
+	<icon>spiperipsum-64.png</icon>
+	<fonctions>spiperipsum_fonctions.php</fonctions>
+	<options>spiperipsum_options.php</options>
+</plugin>

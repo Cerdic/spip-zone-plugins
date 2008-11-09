@@ -1,0 +1,37 @@
+#CACHE{1800}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<title>PERIPSUM - Demo</title>
+</head>
+<body style="color: #000000;font-family: Arial,Helvetica,sans-serif;font-size: 11px;margin: auto;width: 640px;">
+	<span style="float: left; margin-right: 20px;">
+		<img height="32" width="32" title="Plugin Peripsum" alt="Plugin Peripsum" src="plugins/peripsum/peripsum-64.gif"/>
+	</span>
+	<h1 style="margin-bottom: 20px; color: #798F74;">PLUGIN SPIPER IPSUM</h1>
+	<p style="font-size: 12px;">Pour appeler la page de demo:</p>
+	<ul>
+		<li><strong>http://monsite/spip.php?page=spiperipsum_demo</strong> (tout par d&eacute;faut)</li>
+	</ul>
+	<br /><br />
+	
+	<div id="evangile">
+		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>peripsum</strong></p>
+		[(#MODELE{spiperipsum, jour=aujourdhui, lecture=evangile})]
+		<br /><br />
+		[(#MODELE{spiperipsum, jour=aujourdhui, lecture=premiere})]
+		<br /><br />
+		[(#MODELE{spiperipsum, jour=aujourdhui, lecture=seconde})]
+		<br /><br />
+		[(#MODELE{spiperipsum, jour=aujourdhui, lecture=psaume})]
+		<br /><br />
+	
+		<p style="font-size: 12px;">&gt;&gt;&nbsp;Utilisation de la balise <strong>SPIPERIPSUM</strong></p>
+<!-- 
+		<ul>
+			<li>Essai:&nbsp;<strong>#PERIPSUM_EVANGILE{tout, aujourdhui}</strong></li>
+		</ul>
+ -->
+	</div>
+</body>
+</html>
