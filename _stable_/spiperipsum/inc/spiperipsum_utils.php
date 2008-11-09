@@ -64,6 +64,12 @@ function date2url_date($date){
 	return $url;
 }
 
+// Determine le jour de la semaine a partir de la date fournie (0=dimanche)
+function date2jour_semaine($date){
+	$infos = getdate(strtotime($date));
+	return $infos['wday'];
+}
+
 // Charger le fichier des lectures du jour j
 // - si le fichier existe on retourne directement son nom complet
 // - sinon on le cree dans le cache du plugin
@@ -97,10 +103,10 @@ function charger_lectures($langue, $jour){
 		$tableau['premiere']['texte'] = $textes[2];
 		$tableau['premiere'] = preg_replace(',</?font\b.*>,UimsS', '', $tableau['premiere']);
 		$tableau['premiere'] = preg_replace(',</?br\b.*>,UimsS', '<br />', $tableau['premiere']);
-		// Traitement de la seconde lecture
-		$url = "http://www.levangileauquotidien.org/ind-gospel-d.php?language=".$code_langue."&typeRead=SR".$url_date;
-		$textes = extraire_balises(recuperer_page($url), 'font');
-		if ($textes) {
+		// Traitement de la seconde lecture - uniquement le dimanche
+		if (date2jour_semaine($date) == 0) {
+			$url = "http://www.levangileauquotidien.org/ind-gospel-d.php?language=".$code_langue."&typeRead=SR".$url_date;
+			$textes = extraire_balises(recuperer_page($url), 'font');
 			$tableau['seconde']['titre'] = $textes[0];
 			$tableau['seconde']['verset'] = $textes[1];
 			$tableau['seconde']['texte'] = $textes[2];
