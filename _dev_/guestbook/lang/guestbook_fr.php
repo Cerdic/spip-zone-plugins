@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_tables_mysql' => 'Créer les tables MySQL',
 	'confirm' => 'Confirmer !',
 // D
+	'date' => '<td>Date</td>',
 	'destroy' => 'Destruction des tables',
 // E
 	'email' => 'E-mail',
@@ -27,13 +28,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // M
 	"mercivp" => "Merci de votre participation! Le message apparaitra dès que le webmaster aura répondu.",
 // N
+	'numero' => "<td>N&deg;</td>";
 	'note' => 'Note sur 10',
-	'nom' => 'Nom',
+	'nom' => '<td>Nom</td>',
 // R
+	"repondre" => "<td>R&eacute;pondre</td>",
 	"repondremdl" => "Répondre aux messages du livre d'or",
 	"rienmis" => "Vous n'avez pas défini le nom ou le contenu du message. Veuillez rééssayer.",
 // T
-	'texte' => 'Votre message',
+	'message' => 'Votre message',
+	'texte' => '<td>Texte</td>',
 // V
 	'valider' => 'Valider',
 	"pascoch" => "Vous n'avez rien coché !",

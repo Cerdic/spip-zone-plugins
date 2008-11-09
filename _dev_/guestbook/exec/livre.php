@@ -16,15 +16,52 @@
 		echo _T('avis_non_acces_page');
 		exit;
 	}
-	debut_page(_T('livre:livre'), "naviguer", "livre");
-	debut_gauche();
-	debut_raccourcis();
-	icone_horizontale(_T('livre:creer_tables_mysql'), generer_url_ecrire("table"), '../'._DIR_PLUGIN_LIVRE.'/img_pack/sql.png', 'creer.gif');
-	icone_horizontale(_T('livre:effacer_les_tables'), generer_url_ecrire("efface"), '../'._DIR_PLUGIN_LIVRE.'/img_pack/nosql.png', 'creer.gif');
-	icone_horizontale(_T('livre:repondre_aux_messages'), generer_url_ecrire("livre_edition"), '../'._DIR_PLUGIN_LIVRE.'/img_pack/livredor.png', 'creer.gif');
-	fin_raccourcis();
-    debut_droite();
+	debut_page(_T('livre:lelivre'), "", "");
+	debut_javascript();
+	
 	echo '<br />';
+	echo '<div style="margin:auto; width :70%;">';
+	debut_boite_info();
+	echo gros_titre(_T('livre:lelivre'),"","");
+	//ici les messages sans réponse avec appel du formulaire de réponse
+	echo '<table width="70%"  style="margin:auto;" border="" cellspacing="0" cellpadding="2">';
+	echo '<tr>';
+	echo _T('guestbook:numero');
+	echo _T('guestbook:texte');
+	echo _T('guestbook:nom');
+	echo _T('guestbook:date');
+	echo _T('guestbook:repondre');
+	echo '</tr>';
+	
+	$query = "SELECT * FROM spip_guestbook ORDER BY date DESC";
+	$res = spip_query($query);
+	while ($row =spip_fetch_array($res)){
+	$id_messages= $row['id_messages'];
+	$texte= $row['texte'];
+	$nom= $row['nom'];
+	$email= $row['email'];
+	sscanf($row['maj'], "%4s-%2s-%2s", $annee, $mois, $jour);
+	
+	echo '<tr>';
+	echo '<td>'.$id_messages.'</td>';
+	echo '<td>'.$texte.'</td>';
+	echo "<td><a href='mailto:".$email."'>".$nom."</a></td>";
+	echo '<td>'.$jour.'/'.$mois.'/'.$annee.'</td>';
+	echo "<td>";
+	$sql2= spip_query("SELECT * FROM  spip_guestbook_reponses WHERE id_message='".$id_messages."'");
+	while ($ask2= mysql_fetch_array($sql2))
+	{
+		$name= $ask2['nom'];
+		$repons=$ask2['reponses'];
+	echo $name.' a répondu  : <i>"'.$repons.'"</i><br />';
+	}
+	echo " <a href='?exec=repondre&id_message=".$id_messages."'>R&eacute;pondre</a></td>";
+	echo '</tr>';		
+	}
+	//fin
+	echo '</table>';
+fin_boite_info();
+echo '</div>';
 	fin_page();
 	}
 ?>
