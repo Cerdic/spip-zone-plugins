@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'acces_admin' => 'Administrators\' access:',
 	'auteur_forum:description' => 'Request all authors of public messages to fill in (with at least one letter!) the field "@_CS_FORUM_NOM@" in order to avoid completely anonymous messages.',
 	'auteur_forum:nom' => 'No anonymous forums',
-	'auteurs:description' => 'This tool configures the appearance of [the authors\' page->./?exec=auteurs], in the private area.
+	'auteurs:description' => '<MODIF>This tool configures the appearance of [the authors\' page->./?exec=auteurs], in the private area.
 
 @puce@ Define here the maximum number of authors to display in the central frame of the author\'s page. Beyond this number page numbering will be triggered.[[%max_auteurs_page%]]
 
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'basique' => 'Basic',
 	'blocs:aide' => 'Folding blocks: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) and <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => 'Allows you to create blocks which show/hide when you click on the title.
+	'blocs:description' => '<MODIF>Allows you to create blocks which show/hide when you click on the title.
 
 @puce@ {{In SPIP texts}}: authors can use the tags &lt;bloc&gt; (or &lt;invisible&gt;) and &lt;visible&gt; in this way: 
 
@@ -77,10 +77,10 @@ _ This tool will replace the shortcuts by the images of the same name found in t
 	'class_spip:description2' => '@puce@ {{SPIP shortcuts}}.
 
 Here you can define some SPIP shortcuts. An empty value is equivalent to using the default.[[%racc_hr%]][[%puce%]]',
-	'class_spip:description3' => '
+	'class_spip:description3' => '<MODIF>
 
 SPIP normally uses the &lt;h3&gt; tag for subtitles. Here you can choose a different tag: [[%racc_h1%]][[->%racc_h2%]]',
-	'class_spip:description4' => '
+	'class_spip:description4' => '<MODIF>
 
 SPIP normally uses &lt;i> for marking italics. But &lt;em> could also be used. You can choose: [[%racc_i1%]][[->%racc_i2%]]
 N.B.: if you change the tag used for italics, style {{2.}} above will not be applied.
@@ -128,10 +128,16 @@ The parameter {type} above can be one of three values:
 	'decoration:nom' => 'Decoration',
 	'decoupe:aide' => 'Tabbed block: <b>&lt;onglets>&lt;/onglets></b><br/>Page or tab separator: @sep@',
 	'decoupe:aide2' => 'Alias:&nbsp;@sep@',
-	'decoupe:description' => '<MODIF>Divides the display of an article using automatic page numbering. Simply place four consecutive + signes (<code>++++</code>) where you wish a page break to occur.
-_ If you use this separator between  &lt;onglets&gt; and &lt;/onglets&gt; tags, then you will receive a tabbed page instead.
-_ In templates you can use the tags #ONGLETS_DEBUT, #ONGLETS_TITRE and #ONGLETS_FIN.
-_ This tool may be combined with {A summary for your articles}.',
+	'decoupe:description' => '<MODIF>@puce@ Divides the display of an article into pages using automatic page numbering. Simply place four consecutive + signes (<code>++++</code>) where you wish a page break to occur.
+
+By default, the Swiss Knife inserts the pagination links at the top and bottom of the page. But you can place the links elsewhere in your template by using the #CS_DECOUPE tag, which you can activate here:
+[[%balise_decoupe%]]
+
+@puce@ If you use this separator between  &lt;onglets&gt; and &lt;/onglets&gt; tags, then you will receive a tabbed page instead.
+
+In templates you can use the tags #ONGLETS_DEBUT, #ONGLETS_TITRE and #ONGLETS_FIN.
+
+This tool may be combined with {A summary for your articles}.',
 	'decoupe:nom' => 'Division in pages and tabs',
 	'desactiver_flash:description' => 'Deletes the flash objects from your site and replaces them by the associated alternative content.',
 	'desactiver_flash:nom' => 'Deactivate flash objects',
@@ -150,8 +156,10 @@ _ This tool may be combined with {A summary for your articles}.',
 	'en_travaux:description' => 'Makes it possible to display a customised message on the public site during maintenance work.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]]',
 	'en_travaux:nom' => 'Site in maintenance mode',
+	'erreur:bt' => '<span style=\\"color:red;\\">Warning:</span> the typographical bar appears to be an old version (@version@).<br />The Swiss Knife is compatible only with version @mini@ or newer.',
 	'erreur:description' => 'missing id in the tool\'s definition!',
 	'erreur:distant' => 'The distant server',
+	'erreur:jquery' => '{{N.B.}} : {jQuery} does not appear to be active for this page. Please consult the paragraph about the plugin\'s required libraries [in this article->http://www.spip-contrib.net/?article2166].',
 	'erreur:js' => 'A Javascript error appears to have occurred on this page, hindering its action. Please activate Javascript in your browser, or try deactivating some SPIP plugins which may be causing interference.',
 	'erreur:nojs' => 'Javascript has been deactivated on this page.',
 	'erreur:nom' => 'Error!',
@@ -186,7 +194,7 @@ N.B.: in forums, petitions, RSS feeds, etc., Javascript is <b>always</b> made se
 	'forum_lgrmaxi:nom' => 'Size of forums',
 
 	// G
-	'glossaire:description' => '@puce@ Use one or several groups of keywords to manage an internal glossary. Enter the names of the groups here, separating them by  colons (:). If you leave the box empty (or enter "Glossaire"), it is the "Glossaire" group which will be used.[[%glossaire_groupes%]]@puce@ You can indicate the maximum number of links to create in a text for each word. A null or negative value will mean that all instances of the words will be treated. [[%glossaire_limite% par mot-cl&eacute;]]@puce@ There is a choice of two options for generating the small window which appears on the mouseover. [[%glossaire_js%]]',
+	'glossaire:description' => '<MODIF>@puce@ Use one or several groups of keywords to manage an internal glossary. Enter the names of the groups here, separating them by  colons (:). If you leave the box empty (or enter "Glossaire"), it is the "Glossaire" group which will be used.[[%glossaire_groupes%]]@puce@ You can indicate the maximum number of links to create in a text for each word. A null or negative value will mean that all instances of the words will be treated. [[%glossaire_limite% par mot-cl&eacute;]]@puce@ There is a choice of two options for generating the small window which appears on the mouseover. [[%glossaire_js%]]',
 	'glossaire:nom' => 'Internal glossary',
 	'glossaire_css' => 'CSS solution',
 	'glossaire_js' => 'Javascript solution',
@@ -242,10 +250,12 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:admin_travaux' => 'Close the public site for:',
 	'label:auteurs_tout_voir' => '@_CS_CHOIX@',
 	'label:auto_sommaire' => 'Systematic creation of a summary:',
+	'label:balise_decoupe' => 'Activate the #CS_DECOUPE tag:',
 	'label:balise_sommaire' => 'Activate the tag #CS_SOMMAIRE :',
 	'label:couleurs_fonds' => 'Allow backgrounds:',
 	'label:cs_rss' => 'Activate:',
 	'label:decoration_styles' => 'Your personalised style tags:',
+	'label:derniere_modif_invalide' => 'Refresh immediately after a modification:',
 	'label:dossier_squelettes' => 'Directory(ies) to use:',
 	'label:duree_cache' => 'Duration of local cache:',
 	'label:duree_cache_mutu' => 'Duration of mutualised cache:',
@@ -268,8 +278,8 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:quota_cache' => 'Quota value',
 	'label:racc_h1' => 'Beginning and end of a &laquo;<html>{{{subtitle}}}</html>&raquo;:',
 	'label:racc_hr' => 'Horizontal line (<html>----</html>) :',
-	'label:racc_i1' => 'Beginning and end of &laquo;<html>{italics}</html>&raquo;:',
-	'label:radio_desactive_cache3' => 'Deactivate the cache',
+	'label:racc_i1' => '<MODIF>Beginning and end of &laquo;<html>{italics}</html>&raquo;:',
+	'label:radio_desactive_cache3' => '<MODIF>Deactivate the cache',
 	'label:radio_filtrer_javascript3' => '@_CS_CHOIX@',
 	'label:radio_set_options4' => '@_CS_CHOIX@',
 	'label:radio_suivi_forums3' => '@_CS_CHOIX@',
@@ -306,8 +316,6 @@ _ • {Basic}: links such as {<html>http://spip.net</html>} (whatever protocol) an
 _ • {Extended}: additionally links such as these are also replaced:  {<html>me@spip.net</html>}, {<html>mailto:myaddress</html>} ou {<html>news:mynews</html>}.
 [[%liens_orphelins%]]',
 	'liens_orphelins:nom' => 'Fine URLs',
-	'log_couteau_suisse:description' => 'Logs a lot of information about the functioning of "The Swiss Knife" to the spip.log files. They can be found in the @_CS_DIR_TMP@ directory.',
-	'log_couteau_suisse:nom' => 'Detailed log for the Swiss Knife',
 
 	// M
 	'mailcrypt:description' => 'Hides all the email links in your textes and replaces them with a Javascript link which activates the visitor\'s email programme when the link is clicked. This antispam tool attempts to prevent web robots from collecting email addresses which have been placed in forums or in the text displayed by the tags in your templates.',
@@ -385,11 +393,11 @@ If you reset the plugin by clicking on a pack, the Swiss Knife will reconfigure 
 _ A tag is available for displaying a table of smileys in templates: #SMILEYS.
 _ Images : [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'Smileys',
-	'soft_scroller:description' => 'Gives a slow scroll effect when a visitor clicks on a link with an anchor tag. This helps the visitor to know where they are in a long text.
+	'soft_scroller:description' => '<MODIF>Gives a slow scroll effect when a visitor clicks on a link with an anchor tag. This helps the visitor to know where they are in a long text.
 
 N.B. In order to work, this tool requires two {jQuery} plugins: {ScrollTo} et {LocalScroll}. The Swiss Knife can install them itself if you check the following two boxes. [[%scrollTo%]][[->%LocalScroll%]]',
 	'soft_scroller:nom' => 'Soft anchors',
-	'sommaire:description' => 'Builds a summary of your articles in order to access the main headings quickly (HTML tags &lt;h3>A Subtitle&lt;/h3> or SPIP subtitle shortcuts in the form: <code>{{{My subtitle}}}</code>).
+	'sommaire:description' => '<MODIF>Builds a summary of your articles in order to access the main headings quickly (HTML tags &lt;h3>A Subtitle&lt;/h3> or SPIP subtitle shortcuts in the form: <code>{{{My subtitle}}}</code>).
 
 @puce@ You can define the maximum number of characters of the subtitles used to make the summary:[[%lgr_sommaire% caract&egrave;res]]
 
@@ -404,14 +412,14 @@ _ • Only for articles containing the <code>[sommaire]</code> tag.
 
 The summary can be used in conjunction with : {Division into pages and tabs}.',
 	'sommaire:nom' => 'A summary for your articles',
-	'sommaire_avec' => 'An article with summary: <b>@racc@</b>',
-	'sommaire_sans' => 'An article without summary: <b>@racc@</b>',
+	'sommaire_avec' => '<MODIF>An article with summary: <b>@racc@</b>',
+	'sommaire_sans' => '<MODIF>An article without summary: <b>@racc@</b>',
 	'spam:description' => 'Attempts to fight against the sending of abusive and automatic messages through forms on the public site. Some words and the tags  &lt;a>&lt;/a> are prohibited.
 
 List here the sequences you wish to prohibit@_CS_ASTER@ separating them with spaces. [[%spam_mots%]]
 @_CS_ASTER@To specify a whole word, place it in brackets. Expressions containing spaces should be placed with inverted commas.',
 	'spam:nom' => 'Fight against SPAM',
-	'spip_cache:description' => '<MODIF>@puce@ By default, SPIP calculates all the public pages and caches them in order to accelerate their display. It can be useful, when developing the site to disable the cache temporarily, in order to see the effect of changes immediately.[[%radio_desactive_cache3%]]@puce@ The cache occupies disk space and SPIP can limit the amount of space taken up. Leaving empty or putting 0 means that no quota will be applied.[[%quota_cache% Mo]]@puce@ If the  #CACHE tag is not found in a template, then, by default, SPIP caches a page for 24 hours before recalculating it. You can modify this default here.[[%duree_cache% heures]]@puce@ If you are running several mutualised sites, you can specify here the default value for all the local sites (SPIP 1.93).[[%duree_cache_mutu% heures]]',
+	'spip_cache:description' => '<MODIF>@puce@ By default, SPIP calculates all the public pages and caches them in order to accelerate their display. It can be useful, when developing the site to disable the cache temporarily, in order to see the effect of changes immediately.[[%radio_desactive_cache3%]]@puce@ The cache occupies disk space and SPIP can limit the amount of space taken up. Leaving empty or putting 0 means that no limit will be applied.[[%quota_cache% Mo]]@puce@ When the site\'s contents are changed, SPIP immediately invalidates the cache without waiting for the next periodic recalculation. If your site experiences performance problems because of the load of repeated recalculations, you can choose "no" for this option.[[%derniere_modif_invalide%]]@puce@ If the #CACHE tag is not found in a template then by default SPIP caches a page for 24 hours before recalculating it. You can modify this default here.[[%duree_cache% heures]]@puce@ If you are running several mutualised sites, you can specify here the default value for all the local sites (SPIP 1.93).[[%duree_cache_mutu% heures]]',
 	'spip_cache:nom' => 'SPIP and the cache',
 	'stat_auteurs' => 'Authors in statistics',
 	'statuts_spip' => 'Only the following SPIP status:',
@@ -428,10 +436,15 @@ List here the sequences you wish to prohibit@_CS_ASTER@ separating them with spa
 	'tous' => 'All',
 	'toutes_couleurs' => 'The 36 colours in CSS styles: @_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Multilingual blocks: <b><:trad:></b>',
-	'toutmulti:description' => '<MODIF>Makes it possible to use the shortcut <code><:a_text:></code> in order to place multilingual blocks anywhere in the text of an article.
-_ The SPIP function used is: <code>_T(\'a_text\', 
-flux)</code>.
-_ Do not forget to check that the variable used (here, "a_text") is defined in the language files.',
+	'toutmulti:description' => '<MODIF>Makes it possible to use the shortcut <code><:a_text:></code> in order to place multilingual blocks anywhere in the text, titles, etc. of an article.
+
+The SPIP function used is: <code>_T(\'a_text\')</code>.
+
+User variables can also be added to the shortcuts. For example, <code><:a_text{name=John, tel=2563}:></code> makes it possible to pass the values to the SPIP language file: <code>\'a_text\'=>\'Please contact @name@, the administrator, on @tel@.</code>.
+
+In this case, the SPIP function used is: <code>_T(\'a_text\', array(\'var1\'=>\'first text\', \'var2\'=>\'second text\', ...))</code>.
+
+Do not forget to check that the variable used <code>\'a_text\'</code> is defined in the language files. Consult [this article->http://www.spip.net/en_article2444.html] for documentation.',
 	'toutmulti:nom' => 'Multilingual blocks',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'This site will be back online soon.
@@ -446,7 +459,7 @@ The options below use the SQL function \'ORDER BY\'. Only use the customised opt
 	'tri_perso' => 'Sort by customised SQL, ORDER BY:',
 	'tri_publi' => 'Sort by publication date (ORDER BY date DESC)',
 	'tri_titre' => 'Sort by title (ORDER BY 0+titre,titre)',
-	'type_urls:description' => '@puce@ SPIP offers a choice between several types of URLs for your site:
+	'type_urls:description' => '<MODIF>@puce@ SPIP offers a choice between several types of URLs for your site:
 <div style="font-size:90%; margin:0 2em;">
 - {{page}} : the default type for SPIP since version 1.9: <code>/spip.php?article123</code>.
 - {{html}} : URLs take the form of classic html pages: <code>/article123.html</code>.
@@ -466,7 +479,7 @@ More information: [->http://www.spip.net/en_article3588.html]
 @puce@ {{Only if you are using the type {arborescentes} describes aboves}}, you can customise the format:</p>
 [[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]',
 	'type_urls:nom' => 'Format of URLs',
-	'typo_exposants:description' => '{{Text in French}}: improves the typographical rendering of common abbreviations by adding superscript where necessary (thus, {<acronym>Mme</acronym>} becomes {M<sup>me</sup>}). Common errors corrected:  ({<acronym>2&egrave;me</acronym>} and  {<acronym>2me</acronym>}, for example, become {2<sup>e</sup>}, the only correct abbreviation).
+	'typo_exposants:description' => '<MODIF>{{Text in French}}: improves the typographical rendering of common abbreviations by adding superscript where necessary (thus, {<acronym>Mme</acronym>} becomes {M<sup>me</sup>}). Common errors corrected:  ({<acronym>2&egrave;me</acronym>} and  {<acronym>2me</acronym>}, for example, become {2<sup>e</sup>}, the only correct abbreviation).
 
 The rendered abbreviations correspond to those of the Imprimerie nationale given in the {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, Presses de l\'Imprimerie nationale, Paris, 2002).
 

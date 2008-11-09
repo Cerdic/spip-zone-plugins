@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'acces_admin' => 'Toegang beheerders :',
 	'auteur_forum:description' => 'Zet alle auteurs van openbare berichten ertoe aan om te vullen (van minstens van een brief!) het veld &laquo;@_CS_FORUM_NOM@&raquo; teneinde de volkomen onbekende bijdragen te vermijden.',
 	'auteur_forum:nom' => 'Geen onbekende forums',
-	'auteurs:description' => 'Dit werktuig configureert de schijn van [de bladzijde van de auteurs ->./?exec=auteurs], gedeeltelijk particulier.
+	'auteurs:description' => '<MODIF>Dit werktuig configureert de schijn van [de bladzijde van de auteurs ->./?exec=auteurs], gedeeltelijk particulier.
 
 @puce@ Bepaalt hier het maximumaantal auteurs die op het centrale kader van de bladzijde van de auteurs moeten aangegeven worden. Verder is een paginering opgesteld.[[%max_auteurs_page%]]
 
@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'basique' => 'Fundamenteel',
 	'blocs:aide' => 'Openvouwen blokken : <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias : <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) et <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => 'Laat u toe om blokken te cre&euml;ren waarvan de titel cliquable ze zichtbaar of onzichtbaar kan maken.
+	'blocs:description' => '<MODIF>Laat u toe om blokken te cre&euml;ren waarvan de titel cliquable ze zichtbaar of onzichtbaar kan maken.
 
 @puce@ {{In de SPIP teksten}} : de redacteuren hebben ter beschikking de nieuwe bakens &lt;bloc&gt; (om &lt;invisible&gt;) en &lt;visible&gt; om bij hun teksten zoals dit te gebruiken : 
 
@@ -76,10 +76,10 @@ _ Dit werktuig vervangt deze link door de beelden van dezelfde naam die hij in d
 	'class_spip:description2' => '@puce@ {{De kortere wegen van SPIP}}.
 
 U kunt hier bepaalde kortere wegen van SPIP bepalen. Een lege waarde staat gelijk om de waarde per gebrek te gebruiken.[[%racc_hr%]][[%puce%]]',
-	'class_spip:description3' => '
+	'class_spip:description3' => '<MODIF>
 
 SPIP gebruikt gewoonlijk het baken &lt;h3&gt; voor intertitres. Kiest hier een andere vervanging :[[%racc_h1%]][[->%racc_h2%]]',
-	'class_spip:description4' => '
+	'class_spip:description4' => '<MODIF>
 
 SPIP heeft verkozen om het baken &lt;i> te gebruiken om italiques over te schrijven. Maar &lt;em> had eveneens kunnen passen. Aan u te zien :[[%racc_i1%]][[->%racc_i2%]]
 Merkt op: door de vervanging van de kortere wegen van italiques te wijzigen, de stijl {{2.}} hierboven zal gespecificeerd niet toegepast zijn.
@@ -149,8 +149,10 @@ _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.'
 	'en_travaux:description' => 'Maakt het mogelijk om een aan de persoonlijke behoeften aanpasbaar bericht te kennen te geven gedurende een fase van onderhoud op de hele openbare site.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]]',
 	'en_travaux:nom' => 'Site in werkzaamheden',
+	'erreur:bt' => '<NEW><span style=\\"color:red;\\">Opgelet :</span> de typografische staaf (versie @version@) lijkt oud.<br />Het Zwitserland Mes is verenigbaar met een hogere versie of gelijk aan @mini@.',
 	'erreur:description' => 'id gebrek hebbend aan in de definitie van het werktuig !',
 	'erreur:distant' => 'de verwijderde server',
+	'erreur:jquery' => '<NEW>{{Note}} : la librairie {jQuery} semble inactive sur cette page. Veuillez consulter [ici->http://www.spip-contrib.net/?article2166] le paragraphe sur les d&eacute;pendances du plugin.',
 	'erreur:js' => 'Een fout JavaScript schijnt op deze bladzijde voorgekomen zijn en verhindert zijn goede werking. Gelieve JavaScript op uw navigator activeren om af-activeren sommige plugins SPIP van uw site.',
 	'erreur:nojs' => 'JavaScript wordt op deze bladzijde af-activeerd.',
 	'erreur:nom' => 'Fout !',
@@ -185,7 +187,7 @@ Opgelet: in de forums, petities, georganiseerde stromen, enz., het beleid van ja
 	'forum_lgrmaxi:nom' => 'Omvang van de forums',
 
 	// G
-	'glossaire:description' => '@puce@ Beleid van een intern glossarium in verband met &eacute;&eacute;n of meer groepen sleutelwoorden. Schrijft hier de naam van de groepen in door ze te scheiden door beide punten &laquo;&nbsp;:&nbsp;&raquo;. Door leegte te laten het hokje dat (of door "Glossarium" te typen) volgt, is het de groep "Glossarium" die zal gebruikt worden.[[%glossaire_groupes%]]@puce@ Voor elk woord, hebt u de mogelijkheid om het maximumaantal band te kiezen die in uw teksten wordt gecre&euml;erd. Elke nul of negatieve waarde impliceert dat alle erkende woorden zullen behandeld worden. [[%glossaire_limite% per sleutelwoord]]@puce@ worden Twee oplossingen u aangeboden om het kleine automatische venster te cre&euml;ren dat bij het overzicht van de muis blijkt.[[%glossaire_js%]]',
+	'glossaire:description' => '<MODIF>@puce@ Beleid van een intern glossarium in verband met &eacute;&eacute;n of meer groepen sleutelwoorden. Schrijft hier de naam van de groepen in door ze te scheiden door beide punten &laquo;&nbsp;:&nbsp;&raquo;. Door leegte te laten het hokje dat (of door "Glossarium" te typen) volgt, is het de groep "Glossarium" die zal gebruikt worden.[[%glossaire_groupes%]]@puce@ Voor elk woord, hebt u de mogelijkheid om het maximumaantal band te kiezen die in uw teksten wordt gecre&euml;erd. Elke nul of negatieve waarde impliceert dat alle erkende woorden zullen behandeld worden. [[%glossaire_limite% per sleutelwoord]]@puce@ worden Twee oplossingen u aangeboden om het kleine automatische venster te cre&euml;ren dat bij het overzicht van de muis blijkt.[[%glossaire_js%]]',
 	'glossaire:nom' => 'Intern glossarium',
 	'glossaire_css' => 'Oplossing CSS',
 	'glossaire_js' => 'Oplossing Javascript',
@@ -243,10 +245,12 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:admin_travaux' => 'De openbare site sluiten voor :',
 	'label:auteurs_tout_voir' => '@_CS_CHOIX@',
 	'label:auto_sommaire' => 'Systematische oprichting van het overzicht :',
+	'label:balise_decoupe' => '<NEW>Activer la balise #CS_DECOUPE :',
 	'label:balise_sommaire' => 'Het baken #CS_SOMMAIRE activeren :',
 	'label:couleurs_fonds' => 'De middelen toelaten :',
 	'label:cs_rss' => 'Activeren :',
 	'label:decoration_styles' => 'Uw bakens van verpersoonlijkte stijl :',
+	'label:derniere_modif_invalide' => '<NEW>Recalculer juste apr&egrave;s une modification :',
 	'label:dossier_squelettes' => 'Te gebruiken dossier(s) :',
 	'label:duree_cache' => 'Duur van het plaatselijke dekblad :',
 	'label:duree_cache_mutu' => 'Duur van het dekblad in mutualisatie :',
@@ -269,8 +273,8 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:quota_cache' => 'Waarde van de quota :',
 	'label:racc_h1' => 'Toegang en output van een &laquo;<html>{{{intertitel}}}</html>&raquo; :',
 	'label:racc_hr' => 'Horizontale lijn &laquo;<html>----</html>&raquo; :',
-	'label:racc_i1' => 'Toegang en output van een &laquo;<html>{italique}</html>&raquo; :',
-	'label:radio_desactive_cache3' => 'het dekblad deactiveren :',
+	'label:racc_i1' => '<MODIF>Toegang en output van een &laquo;<html>{italique}</html>&raquo; :',
+	'label:radio_desactive_cache3' => '<MODIF>het dekblad deactiveren :',
 	'label:radio_filtrer_javascript3' => '@_CS_CHOIX@',
 	'label:radio_set_options4' => '@_CS_CHOIX@',
 	'label:radio_suivi_forums3' => '@_CS_CHOIX@',
@@ -307,8 +311,6 @@ _ &bull; {Basique} : sont remplac&eacute;s les liens du type {<html>http://spip.
 _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} ou {<html>news:mesnews</html>}.
 [[%liens_orphelins%]]',
 	'liens_orphelins:nom' => 'Mooi URLs',
-	'log_couteau_suisse:description' => 'Ingeschrevene van talrijke inlichtingen met betrekking tot de werking van plugin \'het Mes Zwitserland\' in de bestanden spip.log die men in de lijst kan vinden : @_CS_DIR_TMP@',
-	'log_couteau_suisse:nom' => 'Uitvoerige Log van het Mes Zwitserland',
 
 	// M
 	'mailcrypt:description' => '<NEW>Masque tous les liens de courriels pr&eacute;sents dans vos textes en les rempla&ccedil;ant par un lien Javascript permettant quand m&ecirc;me d\'activer la messagerie du lecteur. Cet outil antispam tente d\'emp&ecirc;cher les robots de collecter les adresses &eacute;lectroniques laiss&eacute;es en clair dans les forums ou dans les balises de vos squelettes.',
@@ -386,11 +388,11 @@ Als u plugin r&eacute;initialiserd door op een pakijs te klikken, reconfiguratie
 _ Une balise est disponible pour aficher un tableau de smileys dans vos squelettes : #SMILEYS.
 _ Dessins : [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'Smileys',
-	'soft_scroller:description' => '<NEW>Offre &agrave; votre site public un d&eacute;filement  adouci de la page lorsque le visiteur clique sur un lien pointant vers une ancre : tr&egrave;s utile pour &eacute;viter de se perdre dans une page complexe ou un texte tr&egrave;s long...
+	'soft_scroller:description' => '<MODIF>Offre &agrave; votre site public un d&eacute;filement  adouci de la page lorsque le visiteur clique sur un lien pointant vers une ancre : tr&egrave;s utile pour &eacute;viter de se perdre dans une page complexe ou un texte tr&egrave;s long...
 
 Attention, cet outil a besoin pour fonctionner de deux plugins {jQuery} : {ScrollTo} et {LocalScroll}. Le Couteau Suisse peut les installer directement si vous cochez les cases suivantes. [[%scrollTo%]][[->%LocalScroll%]]',
 	'soft_scroller:nom' => 'Zachte ankers',
-	'sommaire:description' => '<NEW>Construit un sommaire pour vos articles afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
+	'sommaire:description' => '<MODIF>Construit un sommaire pour vos articles afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
 
 @puce@ Vous pouvez d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire :[[%lgr_sommaire% caract&egrave;res]]
 
@@ -405,8 +407,8 @@ _ &bull; Uniquement pour les articles contenant la balise <code>[sommaire]</code
 
 Ce sommaire peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe en pages et onglets}.',
 	'sommaire:nom' => 'Een overzicht voor uw artikelen',
-	'sommaire_avec' => 'Een artikel met overzicht&nbsp;: <b>@racc@</b>',
-	'sommaire_sans' => 'Een artikel zonder overzicht&nbsp;: <b>@racc@</b>',
+	'sommaire_avec' => '<MODIF>Een artikel met overzicht&nbsp;: <b>@racc@</b>',
+	'sommaire_sans' => '<MODIF>Een artikel zonder overzicht&nbsp;: <b>@racc@</b>',
 	'spam:description' => '<NEW>Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises &lt;a>&lt;/a> sont interdits.
 
 Listez ici les s&eacute;quences interdites@_CS_ASTER@ en les s&eacute;parant par des espaces. [[%spam_mots%]]

@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'acces_admin' => 'Acceso de administradores:',
 	'auteur_forum:description' => 'Pide a todos los autores de mensajes p&uacute;blicos que rellenen (&iexcl;al menos con una letra!) el campo &laquo;@_CS_FORUM_NOM@&raquo; para evitar las contribuciones completamente an&oacute;nimas.',
 	'auteur_forum:nom' => 'Sin foros an&oacute;nimos',
-	'auteurs:description' => 'Esta herramienta configura la apariencia de [la p&aacute;gina de los autores->./?exec=auteurs], en el espacio privado.
+	'auteurs:description' => '<MODIF>Esta herramienta configura la apariencia de [la p&aacute;gina de los autores->./?exec=auteurs], en el espacio privado.
 
 @puce@ Define aqu&iacute; el n&uacute;mero m&aacute;ximo de autores que se ver&aacute;n en el cuadro central de la p&aacute;gina de autores. A partir de ah&iacute;, se realiza la compaginaci&oacute;n.[[%max_auteurs_page%]]
 
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'basique' => 'B&aacute;sico',
 	'blocs:aide' => '<Bloques Desplegables : <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias : <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) et <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => 'Te permite de crear bloques que pueden hacerse visibles o invisibles al pulsar en su t&iacute;tulo.
+	'blocs:description' => '<MODIF>Te permite de crear bloques que pueden hacerse visibles o invisibles al pulsar en su t&iacute;tulo.
 
 @puce@ {{En los textos de SPIP}}: los redactores disponen de las  nuevas balizas &lt;bloc&gt; (o &lt;invisible&gt;) y &lt;visible&gt; para utilizarlas en sus textos as&iacute;: 
 
@@ -77,10 +77,10 @@ _ Esta herramienta reemplaza estos atajos con las im&aacute;genes con el mismo n
 	'class_spip:description2' => '@puce@ {{Los atajos de SPIP}}.
 
 Aqu&iacute; puedes definir ciertos atajos de SPIP. Un valor vac&iacute;o equivale a utilizar el valor por omisi&oacute;n.[[%racc_hr%]][[%puce%]]',
-	'class_spip:description3' => '
+	'class_spip:description3' => '<MODIF>
 
 SPIP utiliza habitualmente la baliza &lt;h3&gt; para los intert&iacute;tulos. Elige aqu&iacute; otra alternativa: [[%racc_h1%]][[->%racc_h2%]]',
-	'class_spip:description4' => '
+	'class_spip:description4' => '<MODIF>
 
 SPIP ha elegido usar la baliza &lt;i> para transcribir las it&aacute;licas. Pero &lt;em> tambi&eacute;n podr&iacute;a ser conveniente. A tu elecci&oacute;n:[[%racc_i1%]][[->%racc_i2%]]
 Nota: al modificar el reemplazo de los atajos para it&aacute;licas, el estilo {{2.}} especificado m&aacute;s arriba no se aplicar&aacute;.
@@ -129,9 +129,15 @@ El par&aacute;metro {type} puede tomar tres valores:
 	'decoupe:aide' => 'Bloque de pesta&ntilde;as: <b>&lt;onglets>&lt;/onglets></b><br/>Separador de p&aacute;ginas o de pesta&ntilde;as: @sep@',
 	'decoupe:aide2' => 'Alias:&nbsp;@sep@',
 	'decoupe:description' => '<MODIF>Divide la presentaci&oacute;n p&uacute;blica de un art&iacute;culo en varias p&aacute;ginas mediante una compaginaci&oacute;n autom&aacute;tica. Simplemente sit&uacute;a en tu art&iacute;culo cuatro signos de suma consecutivos (<code>++++</code>) en el lugar donde haya que cortar.
-_ Si utilizas este separador entre las balizas &lt;onglets&gt; y &lt;/onglets&gt; lo que obtienes es un conjunto de pesta&ntilde;as.
-_ En los esqueletos: tienes a tu disposici&oacute;n las nuevas balizas #ONGLETS_DEBUT, #ONGLETS_TITRE y #ONGLETS_FIN.
-_ Esta herramienta puede acoplarse con {Un sumario para tus art&iacute;culos}.',
+
+Por omisi&oacute;n, la Navaja Suiza inserta la numeraci&oacute;n de p&aacute;gina en el encabezado y en el pie del art&iacute;culo autom&aacute;ticamente. Pero tienes la posibilidad de situar esta numeraci&oacute;n en otro lugar del esqueleto gracias a la baliza #CS_DECOUPE que puedes activar aqu&iacute;:
+[[%balise_decoupe%]]
+
+@puce@ Si utilizas este separador entre las balizas &lt;onglets&gt; y &lt;/onglets&gt; lo que obtienes es un conjunto de pesta&ntilde;as.
+
+En los esqueletos: tienes a tu disposici&oacute;n las nuevas balizas #ONGLETS_DEBUT, #ONGLETS_TITRE y #ONGLETS_FIN.
+
+Esta herramienta puede acoplarse con {Un sumario para tus art&iacute;culos}.',
 	'decoupe:nom' => 'Dividir en p&aacute;ginas y pesta&ntilde;as',
 	'desactiver_flash:description' => 'Suprime los objetos flash de las p&aacute;ginas de tu sitio y las reemplaza por el contenido alternativo asociado.',
 	'desactiver_flash:nom' => 'Desactiva los objetos flash',
@@ -150,8 +156,10 @@ _ Esta herramienta puede acoplarse con {Un sumario para tus art&iacute;culos}.',
 	'en_travaux:description' => 'Permite mostrar un mensaje personalizable durante una fase de mantenimiento en todas las p&aacute;ginas p&uacute;blicas.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]]',
 	'en_travaux:nom' => 'Sitio en mantenimiento',
+	'erreur:bt' => '<span style=\\"color:red;\\">Atenci&oacute;n:</span> la barra de tipograf&iacute;as (version @version@) parece antigua.<br />La Navaja Suiza es compatible con una versi&oacute;n superior o igual a @mini@.',
 	'erreur:description' => '&iexcl;falta la id en la definici&oacute;n de la herramienta!',
 	'erreur:distant' => 'el servidor externo',
+	'erreur:jquery' => '{{Note}} : la biblioteca {jQuery} parece estar inactiva para esta p&aacute;gina. Consulta [aqu&iacute;->http://www.spip-contrib.net//La-navaja-suiza] el p&aacute;rrafo sobre las dependencias del plugin.',
 	'erreur:js' => 'Parece que ha ocurrido un error de JavaScript en esta p&aacute;gina que impide su buen funcionamiento. Intenta activar JavaScript en tu navegador o desactivar ciertos plugins de SPIP de tu sitio web.',
 	'erreur:nojs' => 'JavaScript est&aacute; desactivado en esta p&aacute;gina.',
 	'erreur:nom' => '&iexcl;Error!',
@@ -186,7 +194,7 @@ Atenci&oacute;n: en los foros, peticiones, flujos sindicados, etc., la gesti&oac
 	'forum_lgrmaxi:nom' => 'Tama&ntilde;o de los foros',
 
 	// G
-	'glossaire:description' => '@puce@ Gesti&oacute;n de un glosario interno ligado a uno o m&aacute;s grupos de palabras-clave. Escribe aqu&iacute; el nombre de los grupos separ&aacute;ndolos mediante dos puntos &laquo;&nbsp;:&nbsp;&raquo;. Si se deja vac&iacute;o el cuadro siguiente (o escribiendo "Glossaire"), se utilizar&aacute; el grupo "Glossaire".[[%glossaire_groupes%]]@puce@ Para cada palabra, tendr&aacute;s la posibilidad de elegir el n&uacute;mero m&aacute;ximo de enlaces creados en los textos. Cualquier valor nulo o negativo implica que se procesar&aacute;n todas las palabras reconocidas. [[%glossaire_limite% par mot-cl&eacute;]]@puce@ Se ofrecer&aacute;n dos soluciones para generar la peque&ntilde;a ventana autom&aacute;tica que aparece al pasar el rat&oacute;n por encima. [[%glossaire_js%]]',
+	'glossaire:description' => '<MODIF>@puce@ Gesti&oacute;n de un glosario interno ligado a uno o m&aacute;s grupos de palabras-clave. Escribe aqu&iacute; el nombre de los grupos separ&aacute;ndolos mediante dos puntos &laquo;&nbsp;:&nbsp;&raquo;. Si se deja vac&iacute;o el cuadro siguiente (o escribiendo "Glossaire"), se utilizar&aacute; el grupo "Glossaire".[[%glossaire_groupes%]]@puce@ Para cada palabra, tendr&aacute;s la posibilidad de elegir el n&uacute;mero m&aacute;ximo de enlaces creados en los textos. Cualquier valor nulo o negativo implica que se procesar&aacute;n todas las palabras reconocidas. [[%glossaire_limite% par mot-cl&eacute;]]@puce@ Se ofrecer&aacute;n dos soluciones para generar la peque&ntilde;a ventana autom&aacute;tica que aparece al pasar el rat&oacute;n por encima. [[%glossaire_js%]]',
 	'glossaire:nom' => 'Glosario interno',
 	'glossaire_css' => 'Soluci&oacute;n CSS',
 	'glossaire_js' => 'Soluci&oacute;n Javascript',
@@ -241,10 +249,12 @@ Atenci&oacute;n, esta herramienta necesita el plugin {jQuery} : {Round Corners} 
 	'label:admin_travaux' => 'Cerrar el sitio p&uacute;blico por:',
 	'label:auteurs_tout_voir' => '@_CS_CHOIX@',
 	'label:auto_sommaire' => 'Crear un sumario autom&aacute;ticamente:',
+	'label:balise_decoupe' => 'Activar la baliza #CS_DECOUPE :',
 	'label:balise_sommaire' => 'Activar la baliza #CS_SOMMAIRE:',
 	'label:couleurs_fonds' => 'Permitir los fondos:',
 	'label:cs_rss' => 'Activar:',
 	'label:decoration_styles' => 'Tus balizas de estilo personalizado:',
+	'label:derniere_modif_invalide' => 'Recalcular inmediatamente despu&eacute;s de una modificaci&oacute;n:',
 	'label:dossier_squelettes' => 'Carpeta(s) a utilizar:',
 	'label:duree_cache' => 'Duraci&oacute;n de la cach&eacute; local:',
 	'label:duree_cache_mutu' => 'Duraci&oacute;n de la cach&eacute; en mutualizaci&oacute;n:',
@@ -267,8 +277,8 @@ Atenci&oacute;n, esta herramienta necesita el plugin {jQuery} : {Round Corners} 
 	'label:quota_cache' => 'Valor de la cuota de cach&eacute;:',
 	'label:racc_h1' => 'Entrada y salida de un &laquo;<html>{{{intert&iacute;tulo}}}</html>&raquo;:',
 	'label:racc_hr' => 'L&iacute;nea horizontal &laquo;<html>----</html>&raquo;:',
-	'label:racc_i1' => 'Entrada y salida de un &laquo;<html>{it&aacute;lica}</html>&raquo;:',
-	'label:radio_desactive_cache3' => 'Desactivar la cach&eacute;:',
+	'label:racc_i1' => '<MODIF>Entrada y salida de un &laquo;<html>{it&aacute;lica}</html>&raquo;:',
+	'label:radio_desactive_cache3' => '<MODIF>Desactivar la cach&eacute;:',
 	'label:radio_filtrer_javascript3' => '@_CS_CHOIX@',
 	'label:radio_set_options4' => '@_CS_CHOIX@',
 	'label:radio_suivi_forums3' => '@_CS_CHOIX@',
@@ -305,8 +315,6 @@ _ • {B&aacute;sico}: se reemplazan los enlaces del tipo {<html>http://spip.net</
 _ • {Extendido}: se reemplazan adem&aacute;s los enlaces del tipo {<html>yo@spip.net</html>}, {<html>mailto:micorreo</html>} o {<html>news:misnews</html>}.
 [[%liens_orphelins%]]',
 	'liens_orphelins:nom' => 'Buenas URLs',
-	'log_couteau_suisse:description' => 'Escribe abundante informaci&oacute;n sobre el funcionamiento del plugin \'La Navaja Suiza\' en los ficheros spip.log que se pueden encontrar en la carpeta: @_CS_DIR_TMP@',
-	'log_couteau_suisse:nom' => 'Registro detallado de la Navaja Suiza',
 
 	// M
 	'mailcrypt:description' => 'Enmascara todos los enlaces de correo presentes en los textos y los reemplaza por un enlace Javascript que permite activar igual la aplicaci&oacute;n de correo del lector. Esta herramienta antispam intenta impedir que los robots recojan las direcciones electr&oacute;nicas escritas en claro en los foros o en las balizas de tus esqueletos.',
@@ -384,11 +392,11 @@ Si reinicializas el plugin en pulsando en un pack, la Navaja Suiza volver&aacute
 _ Hay una baliza disponible para mostrar una tabla de smileys en tus esqueletos: #SMILEYS.
 _ Dibujos : [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'Smileys',
-	'soft_scroller:description' => 'A&ntilde;ade al sitio p&uacute;blico un desplazamiento suave de la p&aacute;gina cuando el visitante hace clic en un enlace que apunta a un ancla: muy &uacute;til para evitar perderse en una p&aacute;gina compleja u en un texto muy largo...
+	'soft_scroller:description' => '<MODIF>A&ntilde;ade al sitio p&uacute;blico un desplazamiento suave de la p&aacute;gina cuando el visitante hace clic en un enlace que apunta a un ancla: muy &uacute;til para evitar perderse en una p&aacute;gina compleja u en un texto muy largo...
 
 Atenci&oacute;n, para que funcione esta herramienta se necesitan dos plugins {jQuery}: {ScrollTo} y {LocalScroll}. La Navaja Suiza puede instalarlos directamente si marcas las casillas siguientes. [[%scrollTo%]][[->%LocalScroll%]]',
 	'soft_scroller:nom' => 'Anclas suaves',
-	'sommaire:description' => 'Construye un sumario para tus art&iacute;culos con el fin de acceder r&aacute;pidamente a los intert&iacute;tulos (etiquetas HTML &lt;h3>Un intert&iacute;tulo&lt;/h3> o atajos de SPIP: intert&iacute;tulos de la forma: <code>{{{Un intert&iacute;tulo}}}</code>).
+	'sommaire:description' => '<MODIF>Construye un sumario para tus art&iacute;culos con el fin de acceder r&aacute;pidamente a los intert&iacute;tulos (etiquetas HTML &lt;h3>Un intert&iacute;tulo&lt;/h3> o atajos de SPIP: intert&iacute;tulos de la forma: <code>{{{Un intert&iacute;tulo}}}</code>).
 
 @puce@ Aqui puedes definir el n&uacute;mero m&aacute;ximo de caracteres tomados de los intert&iacute;tulos para construir el sumario: [[%lgr_sommaire% caract&egrave;res]]
 
@@ -403,14 +411,14 @@ _ • &Uacute;nicamente para los art&iacute;culos que contengan la baliza <code>[s
 
 Este sumario puede combinarse con: {Dividir en p&aacute;ginas y pesta&ntilde;as}.',
 	'sommaire:nom' => 'Un sumario para tus art&iacute;culos',
-	'sommaire_avec' => 'Un art&iacute;culo con sumario: <b>@racc@</b>',
-	'sommaire_sans' => 'Un art&iacute;culo sin sumario: <b>@racc@</b>',
+	'sommaire_avec' => '<MODIF>Un art&iacute;culo con sumario: <b>@racc@</b>',
+	'sommaire_sans' => '<MODIF>Un art&iacute;culo sin sumario: <b>@racc@</b>',
 	'spam:description' => 'Intenta luchar contra los env&iacute;os de mensajes autom&aacute;ticos y malintencionados en la parte p&uacute;blica. Ciertas palabras y las etiquetas &lt;a>&lt;/a> est&aacute;n prohibidas.
 
 Lista aqu&iacute; las secuencias prohibidas@_CS_ASTER@ separ&aacute;ndolas por espacios. [[%spam_mots%]]
 @_CS_ASTER@Para especificar una palabra completa, ponla entre par&eacute;ntesis. Para una expresi&oacute;n con espacios, ponla entre comillas.',
 	'spam:nom' => 'Lucha contra el SPAM',
-	'spip_cache:description' => '<MODIF>@puce@ Por omisi&oacute;n, SPIP calcula todas las p&aacute;ginas p&uacute;blicas y las sit&uacute;a en la cach&eacute; para acelerar su consulta. Desactivar temporalmente la cach&eacute; puede ser de ayuda durante el desarrollo de un sitio.[[%radio_desactive_cache3%]]@puce@ La cach&eacute; ocupa un cierto espacio en disco y SPIP puede limitar su extensi&oacute;n. Une valor vac&iacute;o o igual a 0 significa que no se aplica ninguna cuota.[[%quota_cache% Mo]]@puce@ Si la baliza #CACHE no se encuentra en tus esqueletos locales, SPIP considera por omisi&oacute;n que la cach&eacute; de una p&aacute;gina tiene un tiempo de vida de 24 horas antes de recalcularla. Para gestionar mejor la carga en tu servidor, puedes modificar este valor aqu&iacute;.[[%duree_cache% heures]]@puce@ Si tienes varios sitios mutualizados, puedes especificar aqu&iacute; el valor por omisi&oacute;n que se toma para todos los sitios locales (SPIP 1.93).[[%duree_cache_mutu% heures]]',
+	'spip_cache:description' => '<MODIF>@puce@ Por omisi&oacute;n, SPIP calcula todas las p&aacute;ginas p&uacute;blicas y las sit&uacute;a en la cach&eacute; para acelerar su consulta. Desactivar temporalmente la cach&eacute; puede ser de ayuda durante el desarrollo de un sitio.[[%radio_desactive_cache3%]]@puce@ La cach&eacute; ocupa un cierto espacio en disco y SPIP puede limitar su extensi&oacute;n. Une valor vac&iacute;o o igual a 0 significa que no se aplica ninguna cuota.[[%quota_cache% Mo]]@puce@ Cuando se hace una modificaci&oacute;n del contenido del sitio, SPIP invalida inmediatamente la cach&eacute; sin esperar el siguiente c&aacute;lculo peri&oacute;dico. Si tu sitio tiene problemas de rendimiento debidos a una carga muy alta, puedes marcar &laquo;&nbsp;no&nbsp;&raquo; e esta opci&oacute;n.[[%derniere_modif_invalide%]@puce@ Si la baliza #CACHE no se encuentra en tus esqueletos locales, SPIP considera por omisi&oacute;n que la cach&eacute; de una p&aacute;gina tiene un tiempo de vida de 24 horas antes de recalcularla. Para gestionar mejor la carga en tu servidor, puedes modificar este valor aqu&iacute;.[[%duree_cache% heures]]@puce@ Si tienes varios sitios mutualizados, puedes especificar aqu&iacute; el valor por omisi&oacute;n que se toma para todos los sitios locales (SPIP 1.93).[[%duree_cache_mutu% heures]]',
 	'spip_cache:nom' => 'SPIP y la cach&eacute;…',
 	'stat_auteurs' => 'Estado de los autores',
 	'statuts_spip' => '&Uacute;nicamente los siguientes estados SPIP:',
@@ -427,10 +435,15 @@ Lista aqu&iacute; las secuencias prohibidas@_CS_ASTER@ separ&aacute;ndolas por e
 	'tous' => 'Todos',
 	'toutes_couleurs' => 'Los 36 colores de los estilos css: @_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Bloques multiling&uuml;es: <b><:trad:></b>',
-	'toutmulti:description' => '<MODIF>Introduce el atajo <code><:un_texte:></code> para introducir libremente bloques multiling&uuml;es en un art&iacute;culo.
-_ La funci&oacute;n SPIP utilizada es: <code>_T(\'un_texte\', 
-flux)</code>.
-_ No te olvides de verificar que \'un_texte\' est&eacute; bien definido en los ficheros de idioma.',
+	'toutmulti:description' => '<MODIF>Introduce el atajo <code><:cadena:></code> para introducir libremente bloques multiling&uuml;es (blocs multi) de SPIP o de tus esqueletos: en los art&iacute;culos, t&iacute;tulos, mensajes, etc..
+
+La funci&oacute;n SPIP utilizada es: <code>_T(\'cadena\')</code>.
+
+Esta herramienta tambi&eacute;n acepta argumentos. Por ejemplo, el atajo <code><:cadena{arg1=un texto, arg2=otro texto}:></code> permite pasar dos par&aacute;metros en la cadena siguiente: <code>\'cadena\'=>\'Estos son mis argumentos: @arg1@ y @arg2@\'</code>.
+
+La funci&oacute;n de SPIP utilizada es entonces: <code>_T(\'cadena\', array(\'arg1\'=>\'un texto\', \'arg2\'=>\'otro texto\'))</code>.
+
+No te olvides de verificar que la clave \'cadena\' est&eacute; bien definido en los ficheros de idioma. Consulta [aqu&iacute; ->http://www.spip.net/es_article2247.html] la documentaci&oacute;n de SPIP sobre el tema.',
 	'toutmulti:nom' => 'Bloques multiling&uuml;es',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Este sitio se reactivar&aacute; en breve.
@@ -445,7 +458,7 @@ Las propuestas siguientes se basan en la funci&oacute;n SQL \'ORDER BY\': utiliz
 	'tri_perso' => 'Ordenaci&oacute;n SQL personalizada, ORDER BY seguido por:',
 	'tri_publi' => 'Ordenar por fecha de publicaci&oacute;n (ORDER BY date DESC)',
 	'tri_titre' => 'Ordenar por t&iacute;tulo (ORDER BY 0+titre,titre)',
-	'type_urls:description' => '@puce@ SPIP te permite elegir entre varios tipos de URLs para crear los enlaces de acceso a las p&aacute;ginas de tu sitio:
+	'type_urls:description' => '<MODIF>@puce@ SPIP te permite elegir entre varios tipos de URLs para crear los enlaces de acceso a las p&aacute;ginas de tu sitio:
 <div style="font-size:90%; margin:0 2em;">
 - {{page}}: el valor por omisi&oacute;n desde SPIP v1.9x : <code>/spip.php?article123</code>.
 - {{html}}: enlaces con forma de p&aacute;ginas html cl&aacute;sicas : <code>/article123.html</code>.
@@ -467,7 +480,7 @@ M&aacute;s informaci&oacute;n: [->http://www.spip.net/es_article2024.html]
 @puce@ {{&Uacute;nicamente si utilizas las URLS {arborescentes} de m&aacute;s arriba}}, es posible personalizar el resultado:</p>
 [[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]',
 	'type_urls:nom' => 'Formato de las URLs',
-	'typo_exposants:description' => '{{Textos en franc&eacute;s}}: mejora la presentaci&oacute;n tipogr&aacute;fica de las abreviaturas corrientes, poniendo como super&iacute;ndices los elementos necesarios (as&iacute;, {<acronym>Mme</acronym>} se transforma en {M<sup>me</sup>}) y corrigiendo los errores comunes ({<acronym>2&egrave;me</acronym>} o  {<acronym>2me</acronym>}, por ejemplo, se transforman en {2<sup>e</sup>}, &uacute;nica abreviatura correcta).
+	'typo_exposants:description' => '<MODIF>{{Textos en franc&eacute;s}}: mejora la presentaci&oacute;n tipogr&aacute;fica de las abreviaturas corrientes, poniendo como super&iacute;ndices los elementos necesarios (as&iacute;, {<acronym>Mme</acronym>} se transforma en {M<sup>me</sup>}) y corrigiendo los errores comunes ({<acronym>2&egrave;me</acronym>} o  {<acronym>2me</acronym>}, por ejemplo, se transforman en {2<sup>e</sup>}, &uacute;nica abreviatura correcta).
 
 Las abreviaturas obtenidas son conformes con las de la Imprenta nacional francesa, tal como se indican en el {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (art&iacute;culo &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l\'Imprimerie nationale, Paris, 2002).
 

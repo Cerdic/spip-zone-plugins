@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'acces_admin' => 'Acc&eacute;s administradors:',
 	'auteur_forum:description' => 'Incita a tots els autors de missatges p&uacute;blics a omplir (amb una lletra com a m&iacute;nim!) el camp &laquo;@_CS_FORUM_NOM@&raquo; per tal d\'evitar les contribucions totalment an&ograve;nimes.',
 	'auteur_forum:nom' => 'No als f&ograve;rums an&ograve;nims',
-	'auteurs:description' => 'Aquesta eina configura l\'aparen&ccedil;a de [la p&agrave;gina autors->./?exec=auteurs], a la part privada.
+	'auteurs:description' => '<MODIF>Aquesta eina configura l\'aparen&ccedil;a de [la p&agrave;gina autors->./?exec=auteurs], a la part privada.
 
 @puce@ Defineix aqu&iacute; el nombre m&agrave;xim d\'autors a mostrar en el quadre central de la p&agrave;gina d\'autors. M&eacute;s enll&agrave;, trobem una paginaci&oacute;.[[%max_auteurs_page%]]
 
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'basique' => 'B&agrave;sic',
 	'blocs:aide' => 'Blocs Desplegables: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (&agrave;lies: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) i <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => 'Us permet crear blocs que, amb el t&iacute;tol clicable, els pot tornar visibles o invisibles.
+	'blocs:description' => '<MODIF>Us permet crear blocs que, amb el t&iacute;tol clicable, els pot tornar visibles o invisibles.
 
 @puce@ {{En els textos SPIP}}: els redactors tenen disponibles les noves etiquetes &lt;bloc&gt; (o &lt;invisible&gt;) i &lt;visible&gt; per utilitzar en el seus textos d\'aquesta manera: 
 
@@ -79,10 +79,10 @@ _ Aquesta eina substitueix aquestes dreceres per les imatges del mateix nom que 
 	'class_spip:description2' => '@puce@ {{Les dreceres d\'SPIP}}.
 
 Aqu&iacute; podeu definir algunes dreceres d\'SPIP. Un valor buit equival a fer servir el valor per defecte.[[%racc_hr%]][[%puce%]]',
-	'class_spip:description3' => '
+	'class_spip:description3' => '<MODIF>
 
 SPIP utilitza habitualment l\'etiqueta &lt;h3&gt; pels subt&iacute;tols. Escolliu aqu&iacute; un altre empla&ccedil;ament:[[%racc_h1%]][[->%racc_h2%]]',
-	'class_spip:description4' => '
+	'class_spip:description4' => '<MODIF>
 
 SPIP ha escollit utilitzar l\'etiqueta &lt;i> per transcriure les it&agrave;liques. Per&ograve; &lt;em> tamb&eacute; hauria pogut anar b&eacute;. Vosaltres decidiu:[[%racc_i1%]][[->%racc_i2%]]
 Tingueu present: modificant la substituci&oacute; de les dreceres it&agrave;liques, l\'estil {{2.}} especificat m&eacute;s amunt no s\'aplicar&agrave;.
@@ -130,10 +130,16 @@ El par&agrave;metre {tipus} de m&eacute;s amunt pot agafar tres valors:
 	'decoration:nom' => 'Decoraci&oacute;',
 	'decoupe:aide' => 'Bloc de pestanyes: <b>&lt;pestanyes>&lt;/pestanyes></b><br/>Separador  de p&agrave;gines o de pestanyes: @sep@',
 	'decoupe:aide2' => '&Agrave;lies:&nbsp;@sep@',
-	'decoupe:description' => '<MODIF>Talla la visualitzaci&oacute; p&uacute;blica d\'un article en diverses p&agrave;gines gr&agrave;cies a una paginaci&oacute; autom&agrave;tica. Col&middot;loqueu simplement a dins del vostre article quatre signes mes consecutius (<code>++++</code>) on s\'hagi de realitzar el tall.
-_ Si feu servir aquest separador a l\'interior d\'etiquetes &lt;pestanyes&gt; i &lt;/pestanyes&gt; obtindreu un joc de pestanyes.
-_ A dins dels esquelets: teniu a la vostra disposici&oacute; les noves etiquetes #ONGLETS_DEBUT, #ONGLETS_TITRE i #ONGLETS_FIN.
-_ Aquesta eina es pot completar amb {Un sumari pels vostres articles}.',
+	'decoupe:description' => '<MODIF>@puce@ Talla la visualitzaci&oacute; p&uacute;blica d\'un article en diverses p&agrave;gines gr&agrave;cies a una paginaci&oacute; autom&agrave;tica. Situeu simplement a dins del vostre article quatre signes m&eacute;s consecutius (<code>++++</code>) on s\'hagi de realitzar el tall.
+
+Per defecte, el Ganivet Su&iacute;s insereix la paginaci&oacute; al capdamunt i al peu de l\'article autom&agrave;ticament. Per&ograve; teniu la possibilitat de situar aquesta paginaci&oacute; all&agrave; on us interessi del vostre esquelet gr&agrave;cies a una etiqueta #CS_DECOUPE que podeu activar aqu&iacute;:
+[[%balise_decoupe%]]
+
+@puce@ Si feu servir aquest separador a l\'interior d\'etiquetes &lt;pestanyes&gt; i &lt;/pestanyes&gt; obtindreu aleshores un joc de pestanyes.
+
+A dins dels esquelets: teniu a la vostra disposici&oacute; les noves etiquetes #ONGLETS_DEBUT, #ONGLETS_TITRE i #ONGLETS_FIN.
+
+Aquesta eina es pot completar amb {Un sumari pels vostres articles}.',
 	'decoupe:nom' => 'Talla en p&agrave;gines i pestanyes',
 	'desactiver_flash:description' => 'Suprimeix els objectes flash de les p&agrave;gines del vostre lloc i les substitueix pel contingut alternatiu associat.',
 	'desactiver_flash:nom' => 'Desactiva els objectes flash',
@@ -152,8 +158,10 @@ _ Aquesta eina es pot completar amb {Un sumari pels vostres articles}.',
 	'en_travaux:description' => 'Permet mostrar un missatge personalitzat durant una fase de manteniment a tot el lloc p&uacute;blic.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]]',
 	'en_travaux:nom' => 'Lloc en manteniment',
+	'erreur:bt' => '<span style=\\"color:red;\\">Atenci&oacute;:</span> la barra tipogr&agrave;fica (version @version@) semble ancienne.<br />El Ganivet Su&iacute;s &eacute;s compatible amb una versi&oacute; superior o igual a @mini@.',
 	'erreur:description' => 'id absent en la definici&oacute; de l\'eina!',
 	'erreur:distant' => 'servidor distant',
+	'erreur:jquery' => '{{Nota}}: la llibreria {jQuery} sembla inactiva en aquesta p&agrave;gina. Consulteu [aqu&iacute;->http://www.spip-contrib.net/?article2166] el par&agrave;graf sobre les depend&egrave;ncies d\'aquest plugin. ',
 	'erreur:js' => 'Sembla que s\'ha produ&iuml;t un error JavaScript en aquesta p&agrave;gina i impedeix el seu bon funcionament. Vulgueu activar JavaScript al vostre navegador o desactivar alguns plugins SPIP del vostre lloc.',
 	'erreur:nojs' => 'Aquesta p&agrave;gina t&eacute; el JavaScript desactivat.',
 	'erreur:nom' => 'Error!',
@@ -188,7 +196,7 @@ Atenci&oacute;: a dins dels f&ograve;rums, peticions, flux sindicats, etc., la g
 	'forum_lgrmaxi:nom' => 'Mida dels f&ograve;rums',
 
 	// G
-	'glossaire:description' => '@puce@ Gesti&oacute; d\'un glossari intern lligat a un o diversos grups de paraules clau. Inscriviu aqu&iacute; el nom dels grups separant-los per dos punts &laquo;&nbsp;:&nbsp;&raquo;. Deixant buida la casella que segueix (o teclejant "Glossari"), &eacute;s el grup "Glossari" el que es far&agrave; servir.[[%glossaire_groupes%]]@puce@ Per cada paraula, teniu la possibilitat d\'escollir el n&uacute;mero m&agrave;xim d\'enlla&ccedil;os creats als vostres textos. Tot valor nul o negatiu implica que es tractaran totes les paraules reconegudes. [[%glossaire_limite% per paraula clau]]@puce@ S\'ofereixen dues solucions per gestionar la petita finestra autom&agrave;tica que apareix quan hi passes per sobre el ratol&iacute;.  [[%glossaire_js%]]',
+	'glossaire:description' => '<MODIF>@puce@ Gesti&oacute; d\'un glossari intern lligat a un o diversos grups de paraules clau. Inscriviu aqu&iacute; el nom dels grups separant-los per dos punts &laquo;&nbsp;:&nbsp;&raquo;. Deixant buida la casella que segueix (o teclejant "Glossari"), &eacute;s el grup "Glossari" el que es far&agrave; servir.[[%glossaire_groupes%]]@puce@ Per cada paraula, teniu la possibilitat d\'escollir el n&uacute;mero m&agrave;xim d\'enlla&ccedil;os creats als vostres textos. Tot valor nul o negatiu implica que es tractaran totes les paraules reconegudes. [[%glossaire_limite% per paraula clau]]@puce@ S\'ofereixen dues solucions per gestionar la petita finestra autom&agrave;tica que apareix quan hi passes per sobre el ratol&iacute;.  [[%glossaire_js%]]',
 	'glossaire:nom' => 'Glossari intern',
 	'glossaire_css' => 'Soluci&oacute; CSS',
 	'glossaire_js' => 'Soluci&oacute; Javascript',
@@ -243,10 +251,12 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'label:admin_travaux' => 'Tancar el lloc p&uacute;blic per:',
 	'label:auteurs_tout_voir' => '@_CS_CHOIX@',
 	'label:auto_sommaire' => 'Creaci&oacute; sistem&agrave;tica del sumari:',
+	'label:balise_decoupe' => 'Activar l\'etiqueta #CS_DECOUPE :',
 	'label:balise_sommaire' => 'Activar l\'etiqueta #CS_SOMMAIRE :',
 	'label:couleurs_fonds' => 'Permetre els fons:',
 	'label:cs_rss' => 'Activar:',
 	'label:decoration_styles' => 'Les vostres etiquetes d\'estil personalitzat:',
+	'label:derniere_modif_invalide' => 'Tornar a calcular despr&eacute;s d\'una modificaci&oacute;:',
 	'label:dossier_squelettes' => 'Carpeta(es) a utilitzar:',
 	'label:duree_cache' => 'Durada de la mem&ograve;ria cau local:',
 	'label:duree_cache_mutu' => 'Durada de la mem&ograve;ria cau en mutualitzaci&oacute;:',
@@ -269,8 +279,8 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'label:quota_cache' => 'Valor de la quota :',
 	'label:racc_h1' => 'Entrada i sortida d\'un &laquo;<html>{{{subt&iacute;tol}}}</html>&raquo; :',
 	'label:racc_hr' => 'L&iacute;nia horitzontal &laquo;<html>----</html>&raquo;:',
-	'label:racc_i1' => 'Entrada i sortida d\'una &laquo;<html>{cursiva}</html>&raquo; :',
-	'label:radio_desactive_cache3' => 'Desactivar la mem&ograve;ria cau:',
+	'label:racc_i1' => '<MODIF>Entrada i sortida d\'una &laquo;<html>{cursiva}</html>&raquo; :',
+	'label:radio_desactive_cache3' => '<MODIF>Desactivar la mem&ograve;ria cau:',
 	'label:radio_filtrer_javascript3' => '@_CS_CHOIX@',
 	'label:radio_set_options4' => '@_CS_CHOIX@',
 	'label:radio_suivi_forums3' => '@_CS_CHOIX@',
@@ -307,8 +317,6 @@ _ • {B&agrave;sic}: s&oacute;n substitu&iuml;ts els enlla&ccedil;os del tipus {<
 _ • {Extens}: s&oacute;n substitu&iuml;ts a m&eacute;s els enlla&ccedil;os del tipus {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} o {<html>news:mesnews</html>}.
 [[%liens_orphelins%]]',
 	'liens_orphelins:nom' => 'URLs bonics',
-	'log_couteau_suisse:description' => 'Inscrit de nombroses informacions pel que fa al funcionament del plugin \'El Ganivet Su&iacute;s\' en els fitxers spip.log que es poden trobar en el directori: @_CS_DIR_TMP@',
-	'log_couteau_suisse:nom' => 'Registre detallat del Ganivet Su&iacute;s',
 
 	// M
 	'mailcrypt:description' => 'Amaga tots els enlla&ccedil;os de correus presents als vostres textos substituint-los per un enlla&ccedil; Javascript que permet malgrat tot activar la missatgeria del lector. Aquesta eina antispam impedeix que els robots recullin les adreces electr&ograve;niques deixades visibles als f&ograve;rums o a les etiquetes dels vostres esquelets.',
@@ -386,11 +394,11 @@ Si torneu a iniciar el plugin fent un clic sobre un pack, el Ganivet Su&iacute;s
 _ Hi ha una etiqueta per mostrar una taula d\'emoticones als vostres esquelets: #SMILEYS.
 _ Dibuixos: [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'Emoticones',
-	'soft_scroller:description' => 'Ofereix al vostre lloc p&uacute;blic un avan&ccedil;ament endolcit de la p&agrave;gina quan el visitant fa un clic damunt d\'un enlla&ccedil; que apunta a una &agrave;ncora: molt &uacute;til per evitar perdre\'s en una p&agrave;gina complexa o en un text molt llarg...
+	'soft_scroller:description' => '<MODIF>Ofereix al vostre lloc p&uacute;blic un avan&ccedil;ament endolcit de la p&agrave;gina quan el visitant fa un clic damunt d\'un enlla&ccedil; que apunta a una &agrave;ncora: molt &uacute;til per evitar perdre\'s en una p&agrave;gina complexa o en un text molt llarg...
 
 Alerta, aquesta eina necessita per funcionar dos plugins {jQuery}: {ScrollTo} i {LocalScroll}. El Ganivet Su&iacute;s els pot instal&middot;lar directament si marqueu les caselles seg&uuml;ents. [[%scrollTo%]][[->%LocalScroll%]]',
 	'soft_scroller:nom' => '&Agrave;ncores suaus',
-	'sommaire:description' => 'Construeix un sumari pels vostres articles per tal d\'accedir r&agrave;pidament als titulars (balises HTML &lt;h3>Un subt&iacute;tol&lt;/h3> o dreceres SPIP: subt&iacute;tols del tipus:<code>{{{Un gran t&iacute;tol}}}</code>).
+	'sommaire:description' => '<MODIF>Construeix un sumari pels vostres articles per tal d\'accedir r&agrave;pidament als titulars (balises HTML &lt;h3>Un subt&iacute;tol&lt;/h3> o dreceres SPIP: subt&iacute;tols del tipus:<code>{{{Un gran t&iacute;tol}}}</code>).
 
 @puce@ Podeu definir aqu&iacute; el nombre m&agrave;xim de car&agrave;cters que es retindran dels subt&iacute;tols a l\'hora de construir el sumari:[[%lgr_sommaire% car&agrave;cters]]
 
@@ -405,14 +413,14 @@ _ • Nom&eacute;s pels articles que continguin l\'etiqueta <code>[sommaire]</code
 
 Aquest sumari pot ser acoblat a: {Tallat en p&agrave;gines i pestanyes}.',
 	'sommaire:nom' => 'Un sumari pels vostres articles',
-	'sommaire_avec' => 'Un article amb sumari: <b>@racc@</b>',
-	'sommaire_sans' => 'Un article sense sumari: <b>@racc@</b>',
+	'sommaire_avec' => '<MODIF>Un article amb sumari: <b>@racc@</b>',
+	'sommaire_sans' => '<MODIF>Un article sense sumari: <b>@racc@</b>',
 	'spam:description' => 'Intenta lluitar contra els enviaments de missatges autom&agrave;tics i malevolents a la part p&uacute;blica. Algunes paraules i les etiquetes &lt;a>&lt;/a> estan prohibides.
 
 Llisteu aqu&iacute; les seq&uuml;&egrave;ncies prohibides @_CS_ASTER@ separant-les per espais. [[%spam_mots%]]
 @_CS_ASTER@Per especificar una paraula sencera, poseu-la entre par&egrave;ntesi. En cas d\'una expressi&oacute; amb espais, poseu-la entre cometes. ',
 	'spam:nom' => 'Lluita contra l\'SPAM',
-	'spip_cache:description' => '<MODIF>@puce@ Per defecte, SPIP calcula totes les p&agrave;gines p&uacute;bliques i les situa a la mem&ograve;ria cau per tal d\'accelerar la consulta. Desactivar temporalment la mem&ograve;ria cau pot ajudar al desenvolupament del lloc.[[%radio_desactive_cache3%]]@puce@ La mem&ograve;ria cau ocupa un cert espai del disc i SPIP pot limitar-ne la import&agrave;ncia. Un valor buit o igual a 0 significa que no s\'aplica cap quota.[[%quota_cache% Mo]]@puce@ Si l\'etiqueta #CACHE no es troba als vostres esquelets locals, SPIP considera per defecte que la mem&ograve;ria cau d\'una p&agrave;gina t&eacute; una durada de vida de 24 hores abans de tornar-la a calcular. Per tal de gestionar millor l&iexcl;enc&agrave;rrec del vostre servidor, podeu modificar aqu&iacute; aquest valor.[[%duree_cache% heures]]@puce@ Si teniu diversos llocs mutualitzats, podeu especificar aqu&iacute; el valor per defecte que tindran en compte tots els llocs locals (SPIP 1.93).[[%duree_cache_mutu% heures]]',
+	'spip_cache:description' => '<MODIF>@puce@ Per defecte, SPIP calcula totes les p&agrave;gines p&uacute;bliques i les situa a la mem&ograve;ria cau per tal d\'accelerar la consulta. Desactivar temporalment la mem&ograve;ria cau pot ajudar al desenvolupament del lloc.[[%radio_desactive_cache3%]]@puce@ La mem&ograve;ria cau ocupa un cert espai del disc i SPIP pot limitar-ne la import&agrave;ncia. Un valor buit o igual a 0 significa que no s\'aplica cap quota.[[%quota_cache% Mo]]@puce@ Quan es fa una modificaci&oacute; del contingut del lloc, SPIP invalida immediatament la mem&ograve;ria cau sense esperar el c&agrave;lcul peri&ograve;dic seg&uuml;ent. Si el vostre lloc t&eacute; problemes degut a una c&agrave;rrega molt elevada, podeu marcar &laquo;&nbsp;non&nbsp;&raquo; en aquesta opci&oacute;. [[%derniere_modif_invalide%]]@puce@ Si l\'etiqueta #CACHE no es troba als vostres esquelets locals, SPIP considera per defecte que la mem&ograve;ria cau d\'una p&agrave;gina t&eacute; una durada de vida de 24 hores abans de tornar-la a calcular. Per tal de gestionar millor l&iexcl;enc&agrave;rrec del vostre servidor, podeu modificar aqu&iacute; aquest valor.[[%duree_cache% heures]]@puce@ Si teniu diversos llocs mutualitzats, podeu especificar aqu&iacute; el valor per defecte que tindran en compte tots els llocs locals (SPIP 2.0 mini).[[%duree_cache_mutu% heures]]',
 	'spip_cache:nom' => 'SPIP i la mem&ograve;ria cau…',
 	'stat_auteurs' => 'Els autors en stat',
 	'statuts_spip' => 'Nom&eacute;s els statuts SPIP seg&uuml;ents:',
@@ -429,10 +437,15 @@ Llisteu aqu&iacute; les seq&uuml;&egrave;ncies prohibides @_CS_ASTER@ separant-l
 	'tous' => 'Tots',
 	'toutes_couleurs' => 'Els 36 colors dels estils CSS :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Blocs multiling&uuml;es&nbsp;: <b><:trad:></b>',
-	'toutmulti:description' => '<MODIF>Introdueix la drecera <code><:un_texte:></code> per introduir lliurement blocs multiling&uuml;es en un article.
-_ La funci&oacute; SPIP utilitzada &eacute;s: <code>_T(\'un_texte\', 
-flux)</code>.
-_ No oblideu verificar que \'un_texte\' estigui ben definit als fitxers de llengua. ',
+	'toutmulti:description' => '<MODIF>Introdueix la drecera <code><:chaine:></code> per utilitzar lliurement a dins dels vostres continguts les cadenes de lleng&uuml;es (blocs multi) d\'SPIP o dels vostres esquelets: en els articles, t&iacute;tols, missatges, etc.
+
+ La funci&oacute; SPIP utilitzada &eacute;s: <code>_T(\'chaine\')</code>.
+
+Aquesta eina accepta igualment els arguments. Per exemple, la drecera <code><:chaine{arg1=un texte, arg2=un altre text}:></code> permet passar dos par&agrave;metres a la seg&uuml;ent cadena: <code>\'chaine\'=>\'Heus aqu&iacute; els meus arguments: @arg1@ et @arg2@\'</code>.
+
+La funci&oacute; SPIP utilitzada &eacute;s llavors: <code>_T(\'chaine\', array(\'arg1\'=>\'un texte\', \'arg2\'=>\'un autre texte\'))</code>.
+
+No oblideu verificar que la clau  <code>\'chaine\'</code> est&agrave; ben definida en els fitxers de lleng&uuml;es. Consulteu [aqu&iacute; ->http://www.spip.net/fr_article2128.html] la documentaci&oacute; d\'SPIP sobre aquest tema.',
 	'toutmulti:nom' => 'Blocs multiling&uuml;es',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Aquest lloc es restablir&agrave; ben aviat.
@@ -447,7 +460,7 @@ Les propostes que hi han m&eacute;s avall estan basades en la funcionalitat SQL 
 	'tri_perso' => 'Tria SQL personalitzada, ORDER BY seguit de:',
 	'tri_publi' => 'Tria sobre la data de publicaci&oacute; (ORDER BY date DESC)',
 	'tri_titre' => 'Tria sobre el t&iacute;tol (ORDER BY 0+titre,titre)',
-	'type_urls:description' => '@puce@ SPIP ofereix la possibilitat d\'escollir entre diversos jocs d\'URLs per fabricar els enlla&ccedil;os d\'acc&eacute;s a les p&agrave;gines del vostre lloc:
+	'type_urls:description' => '<MODIF>@puce@ SPIP ofereix la possibilitat d\'escollir entre diversos jocs d\'URLs per fabricar els enlla&ccedil;os d\'acc&eacute;s a les p&agrave;gines del vostre lloc:
 <div style="font-size:90%; margin:0 2em;">
 - {{page}}: el valor per defecte per SPIP v1.9x: <code>/spip.php?article123</code>.
 - {{html}}: els enlla&ccedil;os tenen la forma de p&agrave;gines html cl&agrave;ssiques: <code>/article123.html</code>.
@@ -465,7 +478,7 @@ M&eacute;s informacions: [->http://www.spip.net/fr_article765.html]
 [[%spip_script%]]
 ',
 	'type_urls:nom' => 'Format dels URLs',
-	'typo_exposants:description' => '((Textos francesos)): millora el retorn tipogr&agrave;fic de les abreviacions corrents, exposant els elements necessaris (aix&iacute;, {<acronym>Mme</acronym>} esdev&eacute; {M<sup>me</sup>}) i corregint-ne els errors normals ({<acronym>2&egrave;me</acronym>} o  {<acronym>2me</acronym>}, per exemple, esdevenen {2<sup>e</sup>}, &uacute;nica abreviaci&oacute; correcta).
+	'typo_exposants:description' => '<MODIF>((Textos francesos)): millora el retorn tipogr&agrave;fic de les abreviacions corrents, exposant els elements necessaris (aix&iacute;, {<acronym>Mme</acronym>} esdev&eacute; {M<sup>me</sup>}) i corregint-ne els errors normals ({<acronym>2&egrave;me</acronym>} o  {<acronym>2me</acronym>}, per exemple, esdevenen {2<sup>e</sup>}, &uacute;nica abreviaci&oacute; correcta).
 
 Les abreviacions obtingudes s&oacute;n conformes a les de la Impremta nacional tal com s\'indiquen al {L&egrave;xic de les regles tipogr&agrave;fiques en &uacute;s a la Impremta nacional} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l\'Imprimerie nationale, Paris, 2002).
 

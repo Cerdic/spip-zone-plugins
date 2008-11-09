@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'acces_admin' => 'Acc&egrave;s administrateurs :',
+	'action_rapide' => 'Action rapide, uniquement si vous savez ce que vous faites !',
 	'auteur_forum:description' => 'Incite tous les auteurs de messages publics &agrave; remplir (d\'au moins d\'une lettre !) le champ &laquo;@_CS_FORUM_NOM@&raquo; afin d\'&eacute;viter les contributions totalement anonymes.',
 	'auteur_forum:nom' => 'Pas de forums anonymes',
 	'auteurs:description' => 'Cet outil configure l\'apparence de [la page des auteurs->./?exec=auteurs], en partie priv&eacute;e.
@@ -53,7 +54,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  
 @puce@ En cochant &laquo;oui&raquo; ci-dessous, l\'ouverture d\'un bloc provoquera la fermeture de tous les autres blocs de la page, afin d\'en avoir qu\'un seul ouvert &agrave; la fois.[[%bloc_unique%]]
 ',
-	'label:bloc_unique' => 'Un seul bloc ouvert sur la page :',
 	'blocs:nom' => 'Blocs D&eacute;pliables',
 	'boites_privees:description' => 'Toutes les bo&icirc;tes d&eacute;crites ci-dessous apparaissent dans la partie priv&eacute;e.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]]
 - {{Les r&eacute;visions du Couteau Suisse}} : un cadre sur la pr&eacute;sente page de configuration, indiquant les derni&egrave;res modifications apport&eacute;es au code du plugin ([Source->@_CS_RSS_SOURCE@]).
@@ -62,6 +62,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'boites_privees:nom' => 'Bo&icirc;tes priv&eacute;es',
 
 	// C
+	'cache_controle' => 'Contr&ocirc;le du cache',
+	'cache_nornal' => 'Usage normal',
+	'cache_permanent' => 'Cache permanent',
+	'cache_sans' => 'Pas de cache',
 	'categ:admin' => '1. Administration',
 	'categ:divers' => '60. Divers',
 	'categ:interface' => '10. Interface priv&eacute;e',
@@ -118,6 +122,16 @@ Idem pour changer le fond, si l\'option ci-dessous le permet :@_CS_EXEMPLE_COULE
 @_CS_ASTER@Le format de ces balises personnalis&eacute;es doit lister des couleurs existantes ou d&eacute;finir des couples &laquo;balise=couleur&raquo;, le tout s&eacute;par&eacute; par des virgules. Exemples : &laquo;gris, rouge&raquo;, &laquo;faible=jaune, fort=rouge&raquo;, &laquo;bas=#99CC11, haut=brown&raquo; ou encore &laquo;gris=#DDDDCC, rouge=#EE3300&raquo;. Pour le premier et le dernier exemple, les balises autoris&eacute;es sont : <code>[gris]</code> et <code>[rouge]</code> (<code>[fond gris]</code> et <code>[fond rouge]</code> si les fonds sont permis).',
 	'couleurs:nom' => 'Tout en couleurs',
 	'couleurs_fonds' => ', <b>[fond&nbsp;coul]texte[/coul]</b>, <b>[bg&nbsp;coul]texte[/coul]</b>',
+	'cs_comportement:description' => '@puce@ {{Logs.}} Obtenez de nombreux renseignements &agrave; propos du fonctionnement du Couteau Suisse dans les fichiers {spip.log} que l\'on peut trouver dans le r&eacute;pertoire : {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
+
+@puce@ {{Options SPIP.}} SPIP ordonne les plugins dans un ordre sp&eacute;cifique. Afin d\'&ecirc;tre s&ucirc;r que le Couteau Suisse soit en t&ecirc;te et g&egrave;re en amont certaines options de SPIP, alors cochez l\'option suivante. Si les droits de votre serveur le permettent, le fichier {@_CS_FILE_OPTIONS@} sera automatiquement modifi&eacute; pour inclure le fichier {@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php}.
+[[%spip_options_on%]]
+
+@puce@ {{Requ&ecirc;tes externes.}} Le Couteau Suisse v&eacute;rifie r&eacute;guli&egrave;rement l\'existence d\'une version plus r&eacute;cente de son code et informe sur sa page de configuration d\'une mise &agrave; jour &eacute;ventuellement disponible. Si les requ&ecirc;tes externes de votre serveur posent des probl&egrave;mes, alors cochez la case suivante.[[%distant_off%]]',
+	'cs_comportement:nom' => 'Comportements du Couteau Suisse',
+	'cs_distant_off' => 'Les v&eacute;rifications de versions distantes',
+	'cs_log_couteau_suisse' => 'Les logs d&eacute;taill&eacute;s du Couteau Suisse',
+	'cs_spip_options_on' => 'Les options SPIP dans &laquo;@_CS_FILE_OPTIONS@&raquo;',
 
 	// D
 	'decoration:aide' => 'D&eacute;coration&nbsp;: <b>&lt;balise&gt;test&lt;/balise&gt;</b>, avec <b>balise</b> = @liste@',
@@ -204,13 +218,13 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'forum_lgrmaxi:nom' => 'Taille des forums',
 
 	// G
+	'glossaire:aide' => 'Un texte sans glossaire : <b>@_CS_SANS_GLOSSAIRE@</b>',
 	'glossaire:description' => '@puce@ Gestion d&rsquo;un glossaire interne li&eacute; &agrave; un ou plusieurs groupes de mots-cl&eacute;s. Inscrivez ici le nom des groupes en  les s&eacute;parant par les deux points &laquo;&nbsp;:&nbsp;&raquo;. En laissant vide la case qui  suit (ou en tapant &quot;Glossaire&quot;), c&rsquo;est le groupe &quot;Glossaire&quot; qui sera utilis&eacute;.[[%glossaire_groupes%]]
 
 @puce@ Pour chaque mot, vous avez la possibilit&#233; de choisir le nombre maximal de liens cr&#233;&#233;s dans vos textes. Toute valeur nulle ou n&#233;gative implique que tous les mots reconnus seront trait&#233;s. [[%glossaire_limite% par mot-cl&#233;]]
 
 @puce@ Deux solutions vous sont offertes pour g&#233;n&#233;rer la petite fen&ecirc;tre automatique qui apparait lors du survol de la souris. [[%glossaire_js%]]',
 	'glossaire:nom' => 'Glossaire interne',
-	'glossaire:aide' => 'Un texte sans glossaire : <b>@_CS_SANS_GLOSSAIRE@</b>',
 	'glossaire_css' => 'Solution CSS',
 	'glossaire_js' => 'Solution Javascript',
 	'guillemets:description' => 'Remplace automatiquement les guillemets droits (") par les guillemets typographiques de la langue de composition. Le remplacement, transparent pour l\'utilisateur, ne modifie pas le texte original mais seulement l\'affichage final.',
@@ -256,6 +270,8 @@ Listez ci-dessous les objets de votre squelette &agrave; arrondir en utilisant l
 Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corners}. Le Couteau Suisse peut l\'installer directement si vous cochez la case suivante. [[%jcorner_plugin%]]',
 	'jcorner:nom' => 'Jolis Coins',
 	'jcorner_plugin' => '&laquo;&nbsp;Round Corners plugin&nbsp;&raquo;',
+	'jq_localScroll' => 'jQuery.LocalScroll ([d&eacute;mo->http://demos.flesler.com/jquery/localScroll/])',
+	'jq_scrollTo' => 'jQuery.ScrollTo ([d&eacute;mo->http://demos.flesler.com/jquery/scrollTo/])',
 	'js_defaut' => 'D&eacute;faut',
 	'js_jamais' => 'Jamais',
 	'js_toujours' => 'Toujours',
@@ -266,13 +282,16 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:auto_sommaire' => 'Cr&eacute;ation syst&eacute;matique du sommaire :',
 	'label:balise_decoupe' => 'Activer la balise #CS_DECOUPE :',
 	'label:balise_sommaire' => 'Activer la balise #CS_SOMMAIRE :',
+	'label:bloc_unique' => 'Un seul bloc ouvert sur la page :',
 	'label:couleurs_fonds' => 'Permettre les fonds :',
 	'label:cs_rss' => 'Activer :',
 	'label:decoration_styles' => 'Vos balises de style personnalis&eacute; :',
 	'label:derniere_modif_invalide' => 'Recalculer juste apr&egrave;s une modification :',
+	'label:distant_off' => 'D&eacute;sactiver :',
 	'label:dossier_squelettes' => 'Dossier(s) &agrave; utiliser :',
 	'label:duree_cache' => 'Dur&eacute;e du cache local :',
 	'label:duree_cache_mutu' => 'Dur&eacute;e du cache en mutualisation :',
+	'label:expo_bofbof' => 'Mise en exposants pour : <html>St(e)(s), Bx, Bd(s) et Fb(s)</html>',
 	'label:forum_lgrmaxi' => 'Valeur (en caract&egrave;res) :',
 	'label:glossaire_groupes' => 'Groupe(s) utilis&eacute;(s) :',
 	'label:glossaire_js' => 'Technique utilis&eacute;e :',
@@ -285,15 +304,17 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:lien_introduction' => 'Points de suite cliquables :',
 	'label:liens_interrogation' => 'Prot&eacute;ger les URLs :',
 	'label:liens_orphelins' => 'Liens cliquables :',
+	'label:log_couteau_suisse' => 'Activer :',
 	'label:max_auteurs_page' => 'Auteurs par page :',
 	'label:message_travaux' => 'Votre message de maintenance :',
+	'label:moderation_admin' => 'Valider automatiquement les messages des : ',
 	'label:paragrapher' => 'Toujours paragrapher :',
 	'label:puce' => 'Puce publique &laquo;<html>-</html>&raquo; :',
 	'label:quota_cache' => 'Valeur du quota :',
+	'label:racc_g1' => 'Entr&eacute;e et sortie de la mise en &laquo;<html>{{gras}}</html>&raquo; :',
 	'label:racc_h1' => 'Entr&eacute;e et sortie d\'un &laquo;<html>{{{intertitre}}}</html>&raquo; :',
 	'label:racc_hr' => 'Ligne horizontale &laquo;<html>----</html>&raquo; :',
 	'label:racc_i1' => 'Entr&eacute;e et sortie de la mise en &laquo;<html>{italique}</html>&raquo; :',
-	'label:racc_g1' => 'Entr&eacute;e et sortie de la mise en &laquo;<html>{{gras}}</html>&raquo; :',
 	'label:radio_desactive_cache3' => 'Utilisation du cache :',
 	'label:radio_desactive_cache4' => 'Utilisation du cache :',
 	'label:radio_filtrer_javascript3' => '@_CS_CHOIX@',
@@ -302,8 +323,10 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:radio_target_blank3' => 'Nouvelle fen&ecirc;tre pour les liens externes :',
 	'label:radio_type_urls3' => 'Format des URLs :',
 	'label:scrollTo' => 'Installer les plugins {jQuery} suivants :',
+	'label:separateur_urls_page' => 'Caract&egrave;re de s&eacute;paration \'type-id\' (ex. : ?article-123) :',
 	'label:set_couleurs' => 'Set &agrave; utiliser :',
 	'label:spam_mots' => 'S&eacute;quences interdites :',
+	'label:spip_options_on' => 'Inclure :',
 	'label:spip_script' => 'Script d\'appel :',
 	'label:style_h' => 'Votre style :',
 	'label:style_p' => 'Votre style :',
@@ -315,9 +338,9 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:tri_articles' => 'Votre choix :',
 	'label:url_arbo_minuscules' => 'Conserver la casse des titres dans les URLs :',
 	'label:url_arbo_sep_id' => 'Caract&egrave;re de s&eacute;paration \'titre-id\' en cas de doublon :<br/>(ne pas utiliser \'/\')',
-	'label:separateur_urls_page' => 'Caract&egrave;re de s&eacute;paration \'type-id\' (ex. : ?article-123) :',
 	'label:url_glossaire_externe2' => 'Lien vers le glossaire externe :',
 	'label:urls_arbo_sans_type' => 'Afficher le type d\'objet SPIP dans les URLs :',
+	'label:webmestres' => 'Liste des webmestres du site :',
 	'liens_en_clair:description' => 'Met &agrave; votre disposition le filtre : \'liens_en_clair\'. Votre texte contient probablement des liens hypertexte qui ne sont pas visibles lors d\'une impression. Ce filtre ajoute entre crochets la destination de chaque lien cliquable (liens externes ou mails). Attention : en mode impression (parametre \'cs=print\' ou \'page=print\' dans l\'url de la page), cette fonctionnalit&eacute; est appliqu&eacute;e automatiquement.',
 	'liens_en_clair:nom' => 'Liens en clair',
 	'liens_orphelins:description' => 'Cet outil a deux fonctions :
@@ -335,32 +358,18 @@ _ &bull; {Basique} : sont remplac&eacute;s les liens du type {<html>http://spip.
 _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} ou {<html>news:mesnews</html>}.
 [[%liens_orphelins%]]',
 	'liens_orphelins:nom' => 'Belles URLs',
-	'cs_log_couteau_suisse' => 'Les logs d&eacute;taill&eacute;s du Couteau Suisse',
-	'cs_comportement:description' => "@puce@ {{Logs.}} Obtenez de nombreux renseignements &agrave; propos du fonctionnement du Couteau Suisse dans les fichiers {spip.log} que l'on peut trouver dans le r&eacute;pertoire : {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
-
-@puce@ {{Options SPIP.}} SPIP ordonne les plugins dans un ordre sp&eacute;cifique. Afin d'&ecirc;tre s&ucirc;r que le Couteau Suisse soit en t&ecirc;te et g&egrave;re en amont certaines options de SPIP, alors cochez l'option suivante. Si les droits de votre serveur le permettent, le fichier {@_CS_FILE_OPTIONS@} sera automatiquement modifi&eacute; pour inclure le fichier {@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php}.
-[[%spip_options_on%]]
-
-@puce@ {{Requ&ecirc;tes externes.}} Le Couteau Suisse v&eacute;rifie r&eacute;guli&egrave;rement l'existence d'une version plus r&eacute;cente de son code et informe sur sa page de configuration d'une mise &agrave; jour &eacute;ventuellement disponible. Si les requ&ecirc;tes externes de votre serveur posent des probl&egrave;mes, alors cochez la case suivante.[[%distant_off%]]",
-	'cs_comportement:nom' => 'Comportements du Couteau Suisse',
-	'cs_distant_off' => 'Les v&eacute;rifications de versions distantes',
-	'cs_spip_options_on' => 'Les options SPIP dans &laquo;@_CS_FILE_OPTIONS@&raquo;',
-	'label:log_couteau_suisse' => 'Activer :',
-	'label:spip_options_on' => 'Inclure :',
-	'label:distant_off' => 'D&eacute;sactiver :',
-	
 
 	// M
 	'mailcrypt:description' => 'Masque tous les liens de courriels pr&eacute;sents dans vos textes en les rempla&ccedil;ant par un lien Javascript permettant quand m&ecirc;me d\'activer la messagerie du lecteur. Cet outil antispam tente d\'emp&ecirc;cher les robots de collecter les adresses &eacute;lectroniques laiss&eacute;es en clair dans les forums ou dans les balises de vos squelettes.',
 	'mailcrypt:nom' => 'MailCrypt',
-	'modifier_vars' => 'Modifier ces @nb@ param&egrave;tres',
-	'modifier_vars_0' => 'Modifier ces param&egrave;tres',
-	'moderation_moderee:nom' => 'Mod&eacute;ration mod&eacute;r&eacute;e',
-	'label:moderation_admin' => 'Valider automatiquement les messages des : ',
-	'moderation_moderee:description' => 'Permet de mod&eacute;rer la mod&eacute;ration des forums pour les utilisateurs inscrits. [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
+	'message_perso' => 'Un grand merci aux traducteurs qui passeraient par ici. Pat ;-)',
 	'moderation_admins' => 'administrateurs authentifi&eacute;s',
+	'moderation_moderee:description' => 'Permet de mod&eacute;rer la mod&eacute;ration des forums pour les utilisateurs inscrits. [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
+	'moderation_moderee:nom' => 'Mod&eacute;ration mod&eacute;r&eacute;e',
 	'moderation_redacs' => 'r&eacute;dacteurs authentifi&eacute;s',
 	'moderation_visits' => 'visiteurs authentifi&eacute;s',
+	'modifier_vars' => 'Modifier ces @nb@ param&egrave;tres',
+	'modifier_vars_0' => 'Modifier ces param&egrave;tres',
 
 	// N
 	'no_IP:description' => 'D&eacute;sactive le m&eacute;canisme d\'enregistrement automatique des adresses IP des visiteurs de votre site par soucis de confidentialit&eacute; : SPIP ne conservera alors plus aucun num&eacute;ro IP, ni temporairement lors des visites (pour g&eacute;rer les statistiques ou alimenter spip.log), ni dans les forums (responsabilit&eacute;).',
@@ -414,13 +423,13 @@ Si vous r&eacute;initialisez le plugin en cliquant sur un pack, le Couteau Suiss
 	'raccourcis' => 'Raccourcis typographiques actifs du Couteau Suisse&nbsp;:',
 	'raccourcis_barre' => 'Les raccourcis typographiques du Couteau Suisse',
 	'reserve_admin' => 'Acc&egrave;s r&eacute;serv&eacute; aux administrateurs.',
+	'rss_actualiser' => 'Actualiser',
 	'rss_attente' => 'Attente RSS...',
 	'rss_desactiver' => 'D&eacute;sactiver les &laquo; R&eacute;visions du Couteau Suisse &raquo;',
 	'rss_edition' => 'Flux RSS mis &agrave; jour le :',
+	'rss_source' => 'Source RSS',
 	'rss_titre' => '&laquo;&nbsp;Le Couteau Suisse&nbsp;&raquo; en d&eacute;veloppement :',
 	'rss_var' => 'Les r&eacute;visions du Couteau Suisse',
-	'rss_actualiser' => 'Actualiser',
-	'rss_source' => 'Source RSS',
 
 	// S
 	'sauf_admin' => 'Tous, sauf les administrateurs',
@@ -440,8 +449,6 @@ _ Dessins : [Sylvain Michel->http://www.guaph.net/]',
 Attention, cet outil a besoin pour fonctionner de pages au &laquo;DOCTYPE XHTML&raquo; (non HTML !) et de deux plugins {jQuery} : {ScrollTo} et {LocalScroll}. Le Couteau Suisse peut les installer directement si vous cochez les cases suivantes. [[%scrollTo%]][[-->%LocalScroll%]]
 @_CS_PLUGIN_JQUERY192@',
 	'soft_scroller:nom' => 'Ancres douces',
-	'jq_scrollTo' => 'jQuery.ScrollTo ([d&eacute;mo->http://demos.flesler.com/jquery/scrollTo/])',
-	'jq_localScroll' => 'jQuery.LocalScroll ([d&eacute;mo->http://demos.flesler.com/jquery/localScroll/])',
 	'sommaire:description' => 'Construit un sommaire pour le texte de vos articles et de vos rubriques afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
 
 @puce@ Vous pouvez d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire :[[%lgr_sommaire% caract&egrave;res]]
@@ -464,12 +471,6 @@ Ce sommaire peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe en pages et ong
 Listez ici les s&eacute;quences interdites@_CS_ASTER@ en les s&eacute;parant par des espaces. [[%spam_mots%]]
 @_CS_ASTER@Pour sp&eacute;cifier un mot entier, mettez-le entre paranth&egrave;ses. Pour une expression avec des espaces, placez-la entre guillemets.',
 	'spam:nom' => 'Lutte contre le SPAM',
-	'spip_cache:description1' => '@puce@ Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]',
-	'spip_cache:description2' => '@puce@ Quatre options pour orienter le fonctionnement du cache de SPIP : <q1>
-_ &bull; {Usage normal} : SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. Apr&egrave;s un certain d&eacute;lai, le cache est recalcul&eacute; et stock&eacute;.
-_ &bull; {Cache permanent} : les d&eacute;lais d\'invalidation du cache sont ignor&eacute;s.
-_ &bull; {Pas de cache} : d&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. Ici, rien n\'est stock&eacute; sur le disque.
-_ &bull; {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&eacute;dente, avec une &eacute;criture sur le disque de tous les r&eacute;sultats afin de pouvoir &eacute;ventuellement les contr&ocirc;ler.</q1>[[%radio_desactive_cache4%]]',
 	'spip_cache:description' => '@puce@ Le cache occupe un certain espace disque et SPIP peut en limiter l\'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu\'aucun quota ne s\'applique.[[%quota_cache% Mo]]
 
 @puce@ Lorsqu\'une modification du contenu du site est faite, SPIP invalide imm&eacute;diatement le cache sans attendre le calcul p&eacute;riodique suivant. Si votre site a des probl&egrave;mes de performance face &agrave; une charge tr&egrave;s &eacute;lev&eacute;e, vous pouvez cocher &laquo;&nbsp;non&nbsp;&raquo; &agrave; cette option.[[%derniere_modif_invalide%]]
@@ -477,6 +478,12 @@ _ &bull; {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&ea
 @puce@ Si la balise #CACHE n\'est pas trouv&eacute;e dans vos squelettes locaux, SPIP consid&egrave;re par d&eacute;faut que le cache d\'une page a une dur&eacute;e de vie de 24 heures avant de la recalculer. Afin de mieux g&eacute;rer la charge de votre serveur, vous pouvez ici modifier cette valeur.[[%duree_cache% heures]]
 
 @puce@ Si vous avez plusieurs sites en mutualisation, vous pouvez sp&eacute;cifier ici la valeur par d&eacute;faut prise en compte par tous les sites locaux (SPIP 2.0 mini).[[%duree_cache_mutu% heures]]',
+	'spip_cache:description1' => '@puce@ Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]',
+	'spip_cache:description2' => '@puce@ Quatre options pour orienter le fonctionnement du cache de SPIP : <q1>
+_ &bull; {Usage normal} : SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. Apr&egrave;s un certain d&eacute;lai, le cache est recalcul&eacute; et stock&eacute;.
+_ &bull; {Cache permanent} : les d&eacute;lais d\'invalidation du cache sont ignor&eacute;s.
+_ &bull; {Pas de cache} : d&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. Ici, rien n\'est stock&eacute; sur le disque.
+_ &bull; {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&eacute;dente, avec une &eacute;criture sur le disque de tous les r&eacute;sultats afin de pouvoir &eacute;ventuellement les contr&ocirc;ler.</q1>[[%radio_desactive_cache4%]]',
 	'spip_cache:nom' => 'SPIP et le cache&hellip;',
 	'stat_auteurs' => 'Les auteurs en stat',
 	'statuts_spip' => 'Uniquement les statuts SPIP suivants :',
@@ -497,7 +504,7 @@ _ &bull; {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&ea
 	
 Consultez [ici ->http://www.spip.net/fr_article2128.html] la documentation de SPIP &agrave; ce sujet.
 
-Cet outil accepte &eacute;galement les arguments introduits par SPIP 2.0. Par exemple, le raccourci <code><:ma_chaine{nom=Charles Martin, age=37}:></code> permet de passer deux param&egrave;tres &agrave; la cha&icirc;ne suivante : <code>\'ma_chaine\'=>"Bonjour, je suis @nom@ et j\'ai @age@ ans\"</code>.
+Cet outil accepte &eacute;galement les arguments introduits par SPIP 2.0. Par exemple, le raccourci <code><:ma_chaine{nom=Charles Martin, age=37}:></code> permet de passer deux param&egrave;tres &agrave; la cha&icirc;ne suivante : <code>\'ma_chaine\'=>"Bonjour, je suis @nom@ et j\'ai @age@ ans\\"</code>.
 
 La fonction SPIP utilis&eacute;e en PHP est <code>_T(\'chaine\')</code> sans argument, et  <code>_T(\'chaine\', array(\'arg1\'=>\'un texte\', \'arg2\'=>\'un autre texte\'))</code> avec arguments.
 
@@ -553,14 +560,13 @@ Sont aussi trait&eacute;es les expressions suivantes : <html>Dr, Pr, Mgr, m2, m3
 Choisissez ici de mettre en exposant certains raccourcis suppl&eacute;mentaires, malgr&eacute; un avis d&eacute;favorable de l\'Imprimerie nationale :[[%expo_bofbof%]]
 
 {{Textes anglais}} : mise en exposant des nombres ordinaux : <html>1st, 2nd</html>, etc.',
-	'label:expo_bofbof' => 'Mise en exposants pour : <html>St(e)(s), Bx, Bd(s) et Fb(s)</html>',
 	'typo_exposants:nom' => 'Exposants typographiques',
 
 	// U
 	'url_arbo' => 'arborescentes@_CS_ASTER@',
 	'url_html' => 'html@_CS_ASTER@',
-	'url_page' => 'page',
 	'url_libres' => 'libres@_CS_ASTER@',
+	'url_page' => 'page',
 	'url_propres' => 'propres@_CS_ASTER@',
 	'url_propres-qs' => 'propres-qs',
 	'url_propres2' => 'propres2@_CS_ASTER@',
@@ -576,9 +582,9 @@ Choisissez ici de mettre en exposant certains raccourcis suppl&eacute;mentaires,
 	'version_nouvelle' => 'Nouvelle version : @version@',
 	'version_revision' => 'R&eacute;vision : @revision@',
 	'version_update' => 'Mise &agrave; jour automatique',
-	'version_update_title' => 'T&eacute;l&eacute;charge la derni&egrave;re version du plugin et lance sa mise &agrave; jour automatique',
 	'version_update_chargeur' => 'T&eacute;l&eacute;chargement automatique',
 	'version_update_chargeur_title' => 'T&eacute;l&eacute;charge la derni&egrave;re version du plugin gr&acirc;ce au plugin &laquo;T&eacute;l&eacute;chargeur&raquo;',
+	'version_update_title' => 'T&eacute;l&eacute;charge la derni&egrave;re version du plugin et lance sa mise &agrave; jour automatique',
 	'verstexte:description' => '2 filtres pour vos squelettes, permettant de produire des pages plus l&eacute;g&egrave;res.
 _ version_texte : extrait le contenu texte d\'une page html &agrave; l\'exclusion de quelques balises &eacute;l&eacute;mentaires.
 _ version_plein_texte : extrait le contenu texte d\'une page html pour rendre du texte plein.',
@@ -590,24 +596,18 @@ Ajoutez simplement <code><INCLURE{fond=fonds/visiteurs_connectes}></code> dans v
 	'voir' => 'Voir : @voir@',
 	'votre_choix' => 'Votre choix :',
 
-	// X
-	'xml:description' => 'Active le validateur xml pour l\'espace public tel qu\'il est d&eacute;crit dans la [documentation->http://www.spip.net/fr_article3541.html]. Un bouton intitul&eacute; &laquo;&nbsp;Analyse XML&nbsp;&raquo; est ajout&eacute; aux autres boutons d\'administration.',
-	'xml:nom' => 'Validateur XML',
-	'webmestres:description' => "Un {{webmestre}} au sens SPIP est un {{administrateur}} ayant acc&egrave;s &agrave; l'espace FTP. Par d&eacute;faut et &agrave; partir de SPIP 2.0, il est l’administrateur <code>id_auteur=1</code> du site. Les webmestres ici d&eacute;finis ont le privil&egrave;ge de ne plus &ecirc;tre oblig&eacute;s de passer par FTP pour valider les op&eacute;rations sensibles du site, comme la mise &agrave; jour de la base de donn&eacute;es ou la restauration d&rsquo;un dump.
+	// W
+	'webmestres:description' => 'Un {{webmestre}} au sens SPIP est un {{administrateur}} ayant acc&egrave;s &agrave; l\'espace FTP. Par d&eacute;faut et &agrave; partir de SPIP 2.0, il est l’administrateur <code>id_auteur=1</code> du site. Les webmestres ici d&eacute;finis ont le privil&egrave;ge de ne plus &ecirc;tre oblig&eacute;s de passer par FTP pour valider les op&eacute;rations sensibles du site, comme la mise &agrave; jour de la base de donn&eacute;es ou la restauration d&rsquo;un dump.
 
 Webmestre(s) actuel(s) : {@_CS_LISTE_WEBMESTRES@}.
 _ Administrateur(s) &eacute;ligible(s) : {@_CS_LISTE_ADMINS@}.
 
-En tant que webmestre vous-m&ecirc;me, vous avez ici les droits de modifier cette liste d'ids -- s&eacute;par&eacute;s par les deux points &laquo;&nbsp;:&nbsp;&raquo; s'ils sont plusieurs. Exemple : &laquo;1:5:6&raquo;.[[%webmestres%]]",
+En tant que webmestre vous-m&ecirc;me, vous avez ici les droits de modifier cette liste d\'ids -- s&eacute;par&eacute;s par les deux points &laquo;&nbsp;:&nbsp;&raquo; s\'ils sont plusieurs. Exemple : &laquo;1:5:6&raquo;.[[%webmestres%]]',
 	'webmestres:nom' => 'Liste des webmestres',
-	'label:webmestres' => 'Liste des webmestres du site :',
-	'cache_nornal' => 'Usage normal',
-	'cache_sans' => 'Pas de cache',
-	'cache_permanent' => 'Cache permanent',
-	'cache_controle' => 'Contr&ocirc;le du cache',
-	'message_perso' => 'Un grand merci aux traducteurs qui passeraient par ici. Pat ;-)',
-	'action_rapide' => 'Action rapide, uniquement si vous savez ce que vous faites !',
 
+	// X
+	'xml:description' => 'Active le validateur xml pour l\'espace public tel qu\'il est d&eacute;crit dans la [documentation->http://www.spip.net/fr_article3541.html]. Un bouton intitul&eacute; &laquo;&nbsp;Analyse XML&nbsp;&raquo; est ajout&eacute; aux autres boutons d\'administration.',
+	'xml:nom' => 'Validateur XML'
 );
 
 ?>
