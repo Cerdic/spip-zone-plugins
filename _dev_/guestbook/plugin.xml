@@ -57,7 +57,7 @@
 			declarer_tables_auxiliaires
 		</nom>
 		<inclure>
-			base/notation.php
+			base/guestbook.php
 		</inclure>
 	</pipeline>
 	<bouton id='livredor' parent='forum'>

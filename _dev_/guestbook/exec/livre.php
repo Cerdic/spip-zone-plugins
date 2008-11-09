@@ -16,7 +16,8 @@
 		echo _T('avis_non_acces_page');
 		exit;
 	}
-	debut_page(_T('livre:lelivre'), "", "");
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('livre:lelivre'), "", "");
 	debut_javascript();
 	
 	echo '<br />';

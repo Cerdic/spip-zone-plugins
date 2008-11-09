@@ -12,8 +12,8 @@
 	include_spip('inc/presentation');
 	function exec_repondre(){
 	global $connect_statut, $connect_toutes_rubriques;
-	debut_page(_T('livre:lelivre'), "", "");
-	debut_gauche();
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('livre:lelivre'), "", "");	debut_gauche();
 	echo "<br /><br />";
 	gros_titre(_T('livre:repondremdl'));
 	debut_cadre_relief();   
