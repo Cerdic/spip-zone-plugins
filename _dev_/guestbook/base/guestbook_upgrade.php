@@ -14,15 +14,16 @@
 	include_spip('inc/vieilles_defs');
 
 	function guestbook_upgrade($nom_meta_base_version,$version_cible){
-		$current_version = 0.0;
-		if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
-			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-			if ($current_version==0.0){
+		$current_version = 2.0;
+		$test = sql_showtable("spip_guestbook");
+		if (!$test){
+			$livre = sql_showtable("spip_livre");
+			if (!$livre){
 				include_spip('base/guestbook');
 				creer_base();
 				ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 			}
-			if (version_compare($current_version,"2.0","<")){
+			else{
 				//modifications de la table livre en guestbook
 				sql_alter("TABLE spip_livre RENAME TO spip_guestbook");
 				sql_alter("TABLE spip_guestbook CHANGE id_messages id_message BIGINT(21) NOT NULL AUTO_INCREMENT");

@@ -16,14 +16,14 @@
 		echo _T('avis_non_acces_page');
 		exit;
 	}
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('livre:lelivre'), "", "");
+			$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo	$commencer_page(_T('guestbook:lelivre'), "", "");
 	debut_javascript();
 	
 	echo '<br />';
 	echo '<div style="margin:auto; width :70%;">';
-	debut_boite_info();
-	echo gros_titre(_T('livre:lelivre'),"","");
+	echo debut_boite_info();
+	echo gros_titre(_T('guestbook:lelivre'),"","");
 	//ici les messages sans réponse avec appel du formulaire de réponse
 	echo '<table width="70%"  style="margin:auto;" border="" cellspacing="0" cellpadding="2">';
 	echo '<tr>';
