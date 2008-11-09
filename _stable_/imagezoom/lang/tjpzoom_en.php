@@ -8,7 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => 'This page allows you to configure the style of the magnifier . A personal style can be configured through a specific file, see the <a href="http://plugins.spip.net/?page=article&amp;id_article=49">online documentation</a>.',
+	'descriptif' => 'This page allows you to configure the style of the magnifier. A personal style can be configured through a specific file, see the <a href="http://plugins.spip.net/?page=article&amp;id_article=49">online documentation</a>.',
 
 	// E
 	'example' => 'Graphical Result',
@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'other' => 'Other',
 
 	// S
+	'size_vignette' => 'Maximum width of the thumbnail',
 	'style' => 'Style of the Magnifier',
 
 	// T
