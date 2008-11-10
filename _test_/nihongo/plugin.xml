@@ -1,0 +1,14 @@
+<plugin>
+	<version>0.1</version>
+	<nom>Nihongo</nom>
+	<prefix>nihongo</prefix>
+	<auteur>[erational->http://www.erational.org]
+_ &copy; 2008 - Distribu&eacute; sous licence GNU/GPL version 3</auteur>
+	<etat>test</etat>
+	<lien></lien>
+	<description><multi>
+[fr]Introduit des mod&egrave;les r&ocirc;maji pour &eacute;crire les hiragana et katakana japonais
+</multi></description>
+	<icon>nihongo.png</icon>
+	<fonctions>nihongo_fonctions.php</fonctions>
+</plugin>

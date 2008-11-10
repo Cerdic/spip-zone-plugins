@@ -1,0 +1,5 @@
+[(#ENV{r}|?{'',' '})
+<dl class="nihongo">
+  [<dt[ class="(#ENV{m})"]>(#ENV{p}|nihongo_convert{#ENV{m}})</dt>]
+  [<dd>(#ENV{p}|nihongo_romaji)</dd>]
+</dl>][(#ENV{r}|?{' ',''})[(#REM|nihongo_random{{#ENV{m}})]]
