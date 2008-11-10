@@ -212,7 +212,9 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 
 /* Pagination */
 .pagination { clear: both; text-align: right; font-size: 0.90em; color: #666; }
-.pagination .on { font-weight: bold; color: #666; }
+.pagination .on { font-weight: bold; color: #999966; border: 1px solid transparent; }
+.pagination a { background: #999966; color: white; border: 1px solid #999966; }
+.pagination a:hover { background: none; color: #999966; text-decoration: none; }
 
 /* Rubriques */
 .rubriques { background: #67741f; padding-bottom: 1em; }
@@ -242,7 +244,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 
 /* Listes d'articles et extraits introductifs */
 .articles { position: relative; padding: 0; }
-.articles .plus-de-liens { color: #999966; font-size: 1.4em; padding-left: .6em; font-family: Georgia, serif;}
+.articles .plus-de-liens { color: #999966; font-size: 1.5em; padding-left: .6em; font-family: Georgia, serif;}
 .articles .plus-de-liens {  }
 .articles .plus-de-liens:hover { color: #999966; }
 .articles ul { border: none; margin-bottom: 1em; }
@@ -253,11 +255,11 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .articles .premier .spip_logos { margin-left: 0; }
 .articles ul li .enclosures { float: right; text-align: right; max-width: 60%; margin: 0; }
 .articles ul li .introduction { margin-top: 0.30em; line-height: 1.3em; font-family: Times, serif; font-size: 1.2em; }
-.articles h2 { display: inline; color: #333300; font-size: 1.9em; font-weight: normal; font-family: Georgia, serif; font-size: 2.4em; }
+.articles h2 { display: inline; color: #333300; font-size: 2.5em; font-weight: normal; font-family: Georgia, serif; font-size: 2.4em; }
 .articles ul li small { color: #336666; font-style: italic; }
 .articles .lire-la-suite { color: #771f1c; font-size: .85em; float: right; padding-top: .5em; }
 .articles .lire-la-suite:hover { text-decoration: underline; }
-
+.page_rubrique .articles { margin-left: 150px; }
 
 /* liste d'ouvrages pmb */
 .ouvrages { margin-left: 150px; clear: none; }
