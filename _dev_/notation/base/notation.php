@@ -57,7 +57,7 @@ function notation_declarer_tables_auxiliaires($tables_auxiliaires){
 		"nombre_votes" => "BIGINT(21) NOT NULL"
 	);
 	$spip_notations_objets_key = array(
-		"PRIMARY KEY" => "(objet, id_objet)",
+		"PRIMARY KEY" => "objet, id_objet",
 		"KEY objet" => "objet",
 		"KEY id_objet" => "id_objet",
 		"KEY note" => "note",

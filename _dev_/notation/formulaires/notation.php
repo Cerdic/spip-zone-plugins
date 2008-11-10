@@ -228,7 +228,8 @@ function notation_calculer_total($objet, $id_objet){
 		'notations.id_objet',
 		'COUNT(notations.note) AS nombre_votes',
 		'ROUND(AVG(notations.note),2) AS moyenne',
-		'ROUND(AVG(notations.note)*(1-EXP(-5*COUNT(notations.note)/'.$ponderation.')),2) AS moyenne_ponderee'
+		// *1.0 pour forcer une division reelle sinon 4/3=1 (sql server, sqlite...)
+		'ROUND(AVG(notations.note)*(1-EXP(-5*COUNT(notations.note)*1.0/'.$ponderation.')),2) AS moyenne_ponderee'
 	);
 	if (!$row = sql_fetsel(
 			$select,
