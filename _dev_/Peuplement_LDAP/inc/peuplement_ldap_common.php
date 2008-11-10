@@ -52,15 +52,15 @@ function genere_etape_2($entreesLdap){
 	$table='';
 	echo "<div style='text-align:right'><b>".$entreesLdap['count']."</b>"._T('peuplementldap:nombre_entrees')."</div>";
 	for ($i=0;$i<count($entreesLdap)-1;$i++){
-		$table[$i][0]="<input type='checkbox' name='ajouter_entree_".$i."' value='".$entreesLdap[$i]["dn"]."#".$entreesLdap[$i]["mail"][0]."#".$entreesLdap[$i]["mail"][1]."'/>";
+		$table[$i][0]="<input type='checkbox' name='ajouter_entree_".$i."' value='".$entreesLdap[$i]["dn"]."#".$entreesLdap[$i]["mail"][0]."#".$entreesLdap[$i]["cn"][0]."'/>";
         $table[$i][1]=$entreesLdap[$i]["cn"][0];
     	$table[$i][2]=$entreesLdap[$i]["mail"][0];
 	}
-	echo "<table width='100%' cellpadding='5' cellspacing='0' border='0'>";
+	echo afficher_liste_debut_tableau();
 	$largeurs = array('','','');
 	$styles = array('arial11', 'arial1', 'arial1','arial1');
 	echo afficher_liste($largeurs, $table, $styles);
-	echo "</table>";
+	echo afficher_liste_fin_tableau();
 	
 	echo "<br />";
 	echo "<div style='text-align:right'>";
@@ -73,7 +73,7 @@ function genere_etape_2($entreesLdap){
 	fin_cadre_relief();	
 }
 
-function genere_etape_3(){
+function genere_etape_3($compte_rendu){
 	global $couleur_claire;
 	// Cadre d'information sur la partie gauche
 	debut_gauche();// Partie gauche de la page
@@ -81,15 +81,20 @@ function genere_etape_3(){
 	echo propre(_T('peuplementldap:info_etape_3'));
 	fin_boite_info();
 	
-	
-	
-	// Formulaire sur la partie centrale
+	// Compte rendu des insertions d'auteur
 	debut_droite();
 	$icone = "../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/personal.png";
 	debut_cadre_relief();
 	echo "<br />";
-	echo generer_url_post_ecrire("peuplement_ldap");
 	bandeau_titre_boite2(_T('peuplementldap:titre_form_etape_3'), $icone, $couleur_claire, "black");
+	echo "<br />";
+	echo afficher_liste_debut_tableau();
+	$largeurs = array('','','','');
+	$styles = array('arial11', 'arial1', 'arial1');
+	echo afficher_liste($largeurs, $compte_rendu, $styles);
+	echo afficher_liste_fin_tableau();
+	
+	
 }
 
 function recherche_ldap($filtre){
@@ -116,7 +121,7 @@ function recherche_ldap($filtre){
 * 2 Ok
 */
 function insere_auteur($dn,$mail){
-        // Controle qu'un identifiant de connexion identique ne soit pas déjà présent
+		// Controle qu'un identifiant de connexion identique ne soit pas déjà présent
         $cpt = spip_num_rows(spip_query("SELECT * FROM spip_auteurs WHERE email=\"".strtolower($mail)."\""));
         if ($cpt > 0){
                 return 1;
@@ -127,4 +132,15 @@ function insere_auteur($dn,$mail){
                 return 0;
 }
 
+/*
+ * En fonction de $id_result (resultat de la fonction insere_auteur),
+ * renvoi le nom de l'image a utiliser pour l'affichage du compte-rendu.
+ */
+function getImage($id_result){
+	switch($id_result){
+		case 0: return "no.png";
+		case 1: return "status_unknown.png";
+		case 2: return "ok.png";
+	}
+}
 ?>
