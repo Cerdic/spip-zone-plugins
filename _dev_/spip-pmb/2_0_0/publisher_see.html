@@ -6,13 +6,6 @@
 <meta name="description" content="(#GET{tab_resultat}|pmb_tableau2_valeur{0,infos_editeur}|attribut_html)" />
 ]<INCLURE{fond=inc-head}>
 
-<link rel="stylesheet" href="#CHEMIN{nyroModal.full.css}" type="text/css" media="projection, screen, tv" />
-<script type="text/javascript" src="#CHEMIN{javascript/jquery.nyroModal-1.2.8.pack.js}" ></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('a.lien-modal').nyroModal({bgColor: '#E6E8D5', minWidth: 400, minHeight: 400});
-	});
-</script>
 </head>
 
 <body class="page_article page_editeur">
@@ -29,7 +22,7 @@
         <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
 		<div class="cartouche">
 	        	<div class="surlignable">
-				<h1 class="entry-title">
+				<h1 class="entry-title[ (#GET{tab_resultat}|pmb_tableau2_valeur{0,titre_editeur}|strlen|>{30}|?{'titre-long',''})][ (#GET{tab_resultat}|pmb_tableau2_valeur{0,infos_editeur}|?{'','pas-de-texte'})]">
 					[(#GET{tab_resultat}|pmb_tableau2_valeur{0,titre_editeur})]
 				</h1>
           	  	</div>
@@ -42,9 +35,9 @@
 		</div>
         
 	
-		<div class="corps-conteneur surlignable">
-			<div class="texte entry-content">[(#GET{tab_resultat}|pmb_tableau2_valeur{0,infos_editeur})]</div>
-		</div>
+		[<div class="corps-conteneur surlignable">
+			<div class="texte entry-content">(#GET{tab_resultat}|pmb_tableau2_valeur{0,infos_editeur})</div>
+		</div>]
 		<div class="menu articles ouvrages">
 			
 			<B_tab_resultat>
