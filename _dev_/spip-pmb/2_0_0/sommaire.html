@@ -138,7 +138,12 @@
 					<BOUCLE_enleverbreves(BREVES){id_breve}>
 					</BOUCLE_enleverbreves>
 					</B_enleverbreves>
-						<li>#SET{titre_tmp, #TITRE}[(#DATE|affdate_court) &ndash; ]<B_pmb><BOUCLE_pmb(SYNDIC_ARTICLES_PMB) {id_syndic}>[(#TITRE|md5|=={#GET{titre_tmp}}|?{<a href="spip.php?page=article-syndic-pmb&id_syndic_article=#ID_SYNDIC_ARTICLE#forum">, })]</BOUCLE_pmb></B_pmb><a href="#URL_FORUM"><//B_pmb>[(#TEXTE|couper{50})]</a></li>
+						<B_pmb>
+						<BOUCLE_pmb(SYNDIC_ARTICLES_PMB) {id_syndic}>
+						</BOUCLE_pmb>
+						</B_pmb>
+							<li><a href="#URL_FORUM">[(#TEXTE|couper{50})]</a></li>
+						<//B_pmb>
 					<//B_enleverbreves>
 				</BOUCLE_forums_liens>
 				</ul>
