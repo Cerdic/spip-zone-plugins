@@ -9,9 +9,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //CP-20080603
-// utilisé par exec/spiplistes_liste_gerer.php
+// utilise par exec/spiplistes_liste_gerer.php
 
-// sélectionne les auteurs elligibles à un abonnement
+// selectionne les auteurs elligibles a un abonnement
 // - adresse email obligatoire
 
 define("_SPIPLISTES_LIGNES_PAR_PAGE", 10);
@@ -21,28 +21,28 @@ define("_SPIPLISTES_SELECT_MIN_AUTEURS", 50); // nb auteurs dans le <select>
 // renvoie un tableau d'auteurs, du style
 // $result['1comite'][$id_auteur] = nom
 // + le nombre d'elligibles
-// si $id_liste == 0, liste complète
-// sinon, ceux non abonnés à la liste
-// Si liste privée, uiquement redacs
-// Si liste publique, tout le monde (sauf si déjà abonné)
-// $nb_non_abonnes = nombre d'elligibles trouvés
-// Pour récupérer le résultat :
+// si $id_liste == 0, liste complete
+// sinon, ceux non abonnes a la liste
+// Si liste privee, uiquement redacs
+// Si liste publique, tout le monde (sauf si deja abonne)
+// $nb_non_abonnes = nombre d'elligibles trouves
+// Pour recuperer le resultat :
 //   list($non_abonnes, $nb_non_abonnes) = spiplistes_listes_auteurs_elligibles($id_liste, $statut);
 function spiplistes_listes_auteurs_elligibles ($id_liste, $statut_liste = '', $faire = '') {
 	$nb_auteurs = 0;
 	$auteurs_array = array();
 	if($lister_moderateurs = ($faire == 'moderer')) {
-		// récupère la liste des modérateurs
+		// recupere la liste des moderateurs
 		$ids_already = spiplistes_mod_listes_get_id_auteur($id_liste);
 		$ids_already = (isset($ids_already[$id_liste]) ? $ids_already[$id_liste] : array());
 		$sql_where[] = "statut=".sql_quote('0minirezo');
 	}
 	else {
-		// récupère la liste des abonnés
+		// recupere la liste des abonnes
 		$ids_already = spiplistes_listes_liste_abo_ids($id_liste);
-		// prépare la liste des non-abonnés elligibles
+		// prepare la liste des non-abonnes elligibles
 		$sql_where = array("email <> ''"); // email obligatoire !
-		// si liste privée, ne prend que l'equipe de redacs
+		// si liste privee, ne prend que l'equipe de redacs
 		if($statut_liste == _SPIPLISTES_PRIVATE_LIST) {
 			$sql_where[] = "(statut=".sql_quote('0minirezo')." OR statut=".sql_quote('1comite').")";
 		}
@@ -52,7 +52,7 @@ function spiplistes_listes_auteurs_elligibles ($id_liste, $statut_liste = '', $f
 	$sql_result = sql_select("nom,id_auteur,statut", $sql_from, $sql_where, '', array('statut','nom'));
 	if(sql_count($sql_result)) {
 		while($row = sql_fetch($sql_result)) {
-			// ne pas prendre ceux déjà abonnés
+			// ne pas prendre ceux deja abonnes
 			if(in_array($row['id_auteur'], $ids_already)) {
 				continue;
 			}
@@ -67,7 +67,7 @@ function spiplistes_listes_auteurs_elligibles ($id_liste, $statut_liste = '', $f
 }
 
 //CP-20080603
-// renvoie la boite en liste des abonnés à une liste
+// renvoie la boite en liste des abonnes a une liste
 // si $id_liste == 0, liste tous les abonnements
 function spiplistes_listes_boite_abonnes ($id_liste, $tri, $debut, $scrip_retour) {
 	$id_liste = intval($id_liste);
@@ -119,7 +119,7 @@ function spiplistes_listes_boite_abonnes ($id_liste, $tri, $debut, $scrip_retour
 }
 
 //CP-20080603
-// met en forme le résultat de spiplistes_listes_auteurs_elligibles()
+// met en forme le resultat de spiplistes_listes_auteurs_elligibles()
 // retourne liste des elligibles sous forme de select, selecteur_spip ou recherche 
 // si trop nombreux.
 function spiplistes_listes_selectionner_elligibles (
@@ -142,7 +142,7 @@ function spiplistes_listes_selectionner_elligibles (
 			, '6forum' => _T('info_visiteurs')
 			, '6visiteur' => _T('info_visiteurs')
 		);
-		// si un seul, activer plutot la sélection par la souris 
+		// si un seul, activer plutot la selection par la souris 
 		// onchange n'est pas transmis si un seul 'option'
 		$onevent = ($nb_non_abonnes == 1) ? "onmousedown" : "onchange";
 		$select_abo = ""
@@ -160,7 +160,7 @@ function spiplistes_listes_selectionner_elligibles (
 			;
 		$clic = _T('bouton_ajouter');
 	// Il existe sous SPIP une autre boite selecteur lorsque le nombre d'auteurs > 10
-	//  A voir si besoin d'adapter pour SPIP-Listes ? (trier les sans emails, les déja abonnés, etc.)
+	//  A voir si besoin d'adapter pour SPIP-Listes ? (trier les sans emails, les deja abonnes, etc.)
 	// En attendant, au dela de _SPIPLISTES_SELECT_MIN_AUTEURS, affiche la boite de recherche.
 	//
 	//} else if((_SPIP_AJAX < 1) || ($nb_non_abonnes >= _SPIP_SELECT_MAX_AUTEURS)) {
@@ -184,7 +184,7 @@ function spiplistes_listes_selectionner_elligibles (
 		. "<form style='margin:0px; border:0px' action='$action' method='post'>\n"
 		. "<div id='boite_selection_elligibles_$bouton_id' style='padding:0;margin:0.5em 0 0'>\n"
 		. $select_abo
-		. "<span><input type='submit' value='Ajouter' "
+		. "<span><input type='submit' value='$clic' "
 			. " onclick=\"return AjaxSqueeze(this.form, '$id_grosse_boite', '$retour', event)\" "
 			. " class='fondo visible_au_chargement' id='valider_ajouter_abo_$bouton_id'/></span>\n"
 		. "</div>\n"
@@ -198,21 +198,27 @@ function spiplistes_listes_selectionner_elligibles (
 } //
 
 //CP20080603
-// la boite complète (abonnés et elligibles)
-// fonction appelé aussi par action pour resultat en ajax
-function spiplistes_listes_boite_abonnements ($id_liste, $statut_liste, $tri, $debut, $script_retour) {
+// la boite complete (abonnes et elligibles)
+// fonction appele aussi par action pour resultat en ajax
+/*
+ * @param $elligibles transmis par action/ajax lors de la recherche, tableau des elligibles
+ */
+function spiplistes_listes_boite_abonnements ($id_liste, $statut_liste, $tri, $debut, $script_retour, $elligibles = null, $nb_elligibles = 0) {
 	$boite_abonnements = ""
 		. "<div id='grosse_boite_abonnements' class='verdana1'>\n"
 		. "<div id='auteurs'>\n"
 		. spiplistes_listes_boite_abonnes($id_liste, $tri, $debut, $script_retour)
 		. "</div>\n"
 		;
-	// demande la liste des elligibles
-	list($non_abonnes, $nb_non_abonnes) = spiplistes_listes_auteurs_elligibles($id_liste, $statut_liste);
-	if($nb_non_abonnes > 0) {
+	if($elligibles === null) {
+		// si pas transmis par ajax
+		// demande la liste des elligibles
+		list($elligibles, $nb_elligibles) = spiplistes_listes_auteurs_elligibles($id_liste, $statut_liste);
+	}
+	if($nb_elligibles > 0) {
 		$boite_abonnements .= spiplistes_listes_selectionner_elligibles(
-			$non_abonnes
-			, $nb_non_abonnes
+			$elligibles
+			, $nb_elligibles
 			, $id_liste
 			, $tri
 			, _SPIPLISTES_ACTION_ABONNER_AUTEUR

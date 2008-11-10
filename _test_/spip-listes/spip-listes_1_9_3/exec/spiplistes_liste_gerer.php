@@ -14,10 +14,10 @@
 /*                                                                                        */
 /* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but specifique. Reportez-vous à la Licence Publique Generale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Generale GNU                    */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
 /* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
@@ -33,7 +33,7 @@ include_spip('inc/spiplistes_api_globales');
 
 	// Precision sur la table spip_listes:
 	// 'date': date d'envoi souhaitee
-	// 'maj': date d'envoi du courrier mis a  jour par cron.
+	// 'maj': date d'envoi du courrier mis aï¿½ jour par cron.
 	// 'description': (pas utilise au 20071006)
 	// 'texte': description affichee dans formulaire abonnement
 	
@@ -92,9 +92,8 @@ function exec_spiplistes_liste_gerer () {
 	$envoyer_maintenant = ($envoyer_maintenant == 'oui');
 	
 	$boite_pour_confirmer_envoi_maintenant = 
-		$grosse_boite_moderateurs = "";
-	
-	$page_result = "";
+		$grosse_boite_moderateurs = 
+		$page_result = "";
 
 	if(!$id_liste) {
 	//////////////////////////////////////////////////////
@@ -105,7 +104,7 @@ function exec_spiplistes_liste_gerer () {
 		
 		if ($btn_liste_edit && ($new=='oui')) {
 			
-			if ($titre=='') {
+			if ($titre == '') {
 				$titre = _T('spiplistes:liste_sans_titre');
 			}
 			
@@ -136,7 +135,7 @@ function exec_spiplistes_liste_gerer () {
 			
 			///////////////////////////////////
 			// Les modifications (sql_upadteq)
-			// A noter, ne pas préparer les valeurs par sql_quote()
+			// A noter, ne pas preparer les valeurs par sql_quote()
 			//  sql_upadteq() s'en occupe
 			
 			$sql_champs = array();
@@ -230,7 +229,7 @@ function exec_spiplistes_liste_gerer () {
 							break;
 						case 'auto_hebdo':
 							if($auto_weekly == 'oui') {
-								// début de semaine ?
+								// debut de semaine ?
 								$sql_champs['statut'] = _SPIPLISTES_WEEKLY_LIST;
 								// corrige la date pour le lundi de la semaine
 								$time = strtotime($envoyer_quand);
@@ -244,7 +243,7 @@ function exec_spiplistes_liste_gerer () {
 							break;
 						case 'auto_mensuel':
 							if($auto_mois == 'oui') {
-								// début du mois ?
+								// debut du mois ?
 								$sql_champs['statut'] = _SPIPLISTES_MONTHLY_LIST;
 								// corrige la date, 1' du mois
 								$envoyer_quand = substr($envoyer_quand, 0, 8)."01 00:00:00";
@@ -387,7 +386,7 @@ function exec_spiplistes_liste_gerer () {
 // PAGE CONTENU
 ////////////////////////////////////
 
-	// bloc jQuery pour interactivité du formulaire
+	// bloc jQuery pour interactivite du formulaire
 	$page_result .= "
 <script type='text/javascript'>
 //<![CDATA[
@@ -444,7 +443,7 @@ function exec_spiplistes_liste_gerer () {
 	// fin bloc jQuery
 		
 	$titre_page = _T('spiplistes:spip_listes');
-	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
+	// Permet entre autres d'ajouter les classes a la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = _SPIPLISTES_PREFIX;
 	$sous_rubrique = "liste_gerer";
 
@@ -713,7 +712,7 @@ function exec_spiplistes_liste_gerer () {
 				. spiplistes_form_input_checkbox('auto_mois', 'oui'
 					, _T('spiplistes:en_debut_de_mois'), ($statut == _SPIPLISTES_MONTHLY_LIST), true, false)
 				. "</li>\n"
-			// chrono année
+			// chrono annee
 			. "<li>"
 				. spiplistes_form_input_radio ('auto_chrono', 'auto_an'
 					, _T('spiplistes:Tous_les_ans')
@@ -852,7 +851,7 @@ function spiplistes_pied_page_html_get ($pied_patron, $lang = "") {
 
 
 /******************************************************************************************/
-/* SPIP-listes est un systa¨me de gestion de listes d'abonnes et d'envoi d'information     */
+/* SPIP-listes est un systaï¿½me de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email  pour SPIP.                                                                  */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
@@ -862,11 +861,11 @@ function spiplistes_pied_page_html_get ($pied_patron, $lang = "") {
 /*                                                                                        */
 /* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but specifique. Reportez-vous a  la Licence Publique Geneale GNU  */
+/* d'adaptation dans un but specifique. Reportez-vous aï¿½ la Licence Publique Geneale GNU  */
 /* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir rea§u une copie de la Licence Publique Generale GNU                    */
-/* en maªme temps que ce programme ; si ce n'est pas le cas, ecrivez a  la                  */
+/* Vous devez avoir reaï¿½u une copie de la Licence Publique Generale GNU                    */
+/* en maï¿½me temps que ce programme ; si ce n'est pas le cas, ecrivez aï¿½ la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
