@@ -1,13 +1,10 @@
+[(#SET{tab_resultat,[(#ENV{id}|pmb_editeur_extraire{[(#CONFIG{spip_pmb/url})],[(#ENV{pmb_page}|sinon{1})]})]})]
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
-<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>[
-<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />
-]<B_URLMOT>
-<link rel="alternate" type="application/rss+xml" title="<:titre_page_mots_tous:>" href="#URL_PAGE{backend}<BOUCLE_URLMOT(MOTS){id_article}>&amp;id_mot[]=#ID_MOT</BOUCLE_URLMOT>" />
-</B_URLMOT><B_URLAUTEURS>
-<link rel="alternate" type="application/rss+xml" title="<:icone_auteurs:>" href="#URL_PAGE{backend}<BOUCLE_URLAUTEURS(AUTEURS){id_article}>&amp;id_auteur[]=#ID_AUTEUR</BOUCLE_URLAUTEURS>" />
-</B_URLAUTEURS><INCLURE{fond=inc-head}>
+<title>[(#GET{tab_resultat}|pmb_tableau2_valeur{0,titre_editeur}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>[
+<meta name="description" content="(#GET{tab_resultat}|pmb_tableau2_valeur{0,infos_editeur}|attribut_html)" />
+]<INCLURE{fond=inc-head}>
 
 <link rel="stylesheet" href="#CHEMIN{nyroModal.full.css}" type="text/css" media="projection, screen, tv" />
 <script type="text/javascript" src="#CHEMIN{javascript/jquery.nyroModal-1.2.8.pack.js}" ></script>
@@ -32,70 +29,46 @@
         <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
 		<div class="cartouche">
 	        	<div class="surlignable">
-				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
-				<h1 class="entry-title"><?php 
-						$tab_resultat = pmb_editeur_extraire($_REQUEST['id'], "#CONFIG{spip_pmb/url}", $_REQUEST['pmb_page'] ? $_REQUEST['pmb_page'] : 1);
-						echo($tab_resultat[0]['titre_editeur']); 
-				?></h1>
-				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+				<h1 class="entry-title">
+					[(#GET{tab_resultat}|pmb_tableau2_valeur{0,titre_editeur})]
+				</h1>
           	  	</div>
         	</div>
 
 		[(#REM) afficher les collections ]
         	<div class="menu sous-rubriques collections">
            		 <h2><:collections:></h2>
-            		<?php echo($tab_resultat[0]['collections_editeur']); ?>
-            	</div>
+			[(#GET{tab_resultat}|pmb_tableau2_valeur{0,collections_editeur})]
+		</div>
         
 	
 		<div class="corps-conteneur surlignable">
-			<div class="texte entry-content"><?php echo($tab_resultat[0]['infos_editeur']); ?></div>
+			<div class="texte entry-content">[(#GET{tab_resultat}|pmb_tableau2_valeur{0,infos_editeur})]</div>
 		</div>
 		<div class="menu articles ouvrages">
 			
-			
-		<?php
-			if (count($tab_resultat)>0) {
-		?>
 				<h2><:ouvrages:></h2>
 			<ul>
-		<?php
-			}
+				<BOUCLE_tab_resultat(POUR){tableau #GET{tab_resultat}}>
 
-			for($j=1;$j<count($tab_resultat);$j++) {
-			 	$resultat = $tab_resultat[$j];
-
-		?>
-			<li>	
-				<?php 
+				
+				[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})
+			 		<li>
+						[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, logo_src})]|inserer_attribut{width,}|inserer_attribut{height,}|image_reduire{130,0})]	
+						<h3><a href="index.php?page=notice_display&id=[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, id})]&seule=1">[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, titre})]</a></h3>
+                				[<small><:par_auteur:> (#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, lesauteurs})</small>]
 					
-					if($resultat['logo_src']) {
-						echo("<img src=\"".$resultat['logo_src']."\" class=\"spip_logos\" />");
-					}
-				?>
-				<h3><a href="index.php?page=notice_display&id=<?php echo($resultat['id']); ?>&seule=1"><?php echo($resultat['titre']); ?></a></h3>
-                			
-				<?php 
-					if($resultat['lesauteurs']) {
-					
-					?>
-						<small><:par_auteur:> <?php echo($resultat['lesauteurs']); ?></small>
-			
-					<?php 
-					}
-					?>
-					<div class="introduction entry-content"><?php echo(couper($resultat['resume'],300,'...')); ?></div>
-					<a class="lire-la-suite" title="<?php echo(texte_backend($resultat['titre'])); ?>" href="index.php?page=notice_display&id=<?php echo($resultat['id']); ?>&seule=1"><:lire_la_suite:> +</a>
-			</li>
+						[<div class="introduction entry-content">(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, resume}|couper{300,'...'})</div>]
+						<a class="lire-la-suite" title="[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, titre})]" href="index.php?page=notice_display&id=[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, id})]&seule=1"><:lire_la_suite:> +</a>
 
-		<?php
-			}
-			
-		?>
+					</li>
+				]
+				</BOUCLE_tab_resultat>
 			</ul>
 
-			<?php echo($tab_resultat[0]['nav_bar']); ?>
+			[(#GET{tab_resultat}|pmb_tableau2_valeur{0,nav_bar})]
 		</div>
+
 		
 		
 	

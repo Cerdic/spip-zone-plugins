@@ -237,6 +237,10 @@ function pmb_notice_extraire ($id_notice, $url_base) {
 function pmb_notice_champ ($tableau_resultat, $champ) {
 	return $tableau_resultat[$champ];
 }
+function pmb_tableau2_valeur ($tableau_resultat, $indice1, $indice2) {
+	return $tableau_resultat[$indice1][$indice2];
+}
+
 
 
 ?>
