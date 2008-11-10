@@ -28,8 +28,6 @@ function action_spiplistes_listes_abonner_auteur_dist () {
 		$elligibles = null;
 		$nb_elligibles = 0;
 
-		spiplistes_log("tri: $tri ");
-
 		$statut_liste = sql_getfetsel('statut', 'spip_listes', "id_liste=".sql_quote($id_liste), '', '', 1);
 		
 		if($id_auteur > 0) {
