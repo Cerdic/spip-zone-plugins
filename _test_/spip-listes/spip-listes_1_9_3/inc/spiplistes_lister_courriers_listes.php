@@ -3,20 +3,21 @@
 // inc/spiplistes_lister_courriers_listes.php
 
 /******************************************************************************************/
-/* SPIP-listes est un systeme de gestion de listes d'information par email pour SPIP      */
-/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
+/* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
+/* par email pour SPIP. http://bloog.net/spip-listes                                      */
+/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net                               */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
+/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
@@ -30,19 +31,19 @@ include_spip('inc/spiplistes_api_globales');
 /**
 * Adaptation de spiplistes_afficher_en_liste de SL192
 *
-* affiche des listes d'éléments
+* affiche des listes d'elements
 *
 * @param string titre
 * @param string image
 * @param string statut
 * @param string recherche
 * @param string nom_position
-* @return string la liste des lettres pour le statut demandé @author BoOz / Pierre Basson
+* @return string la liste des lettres pour le statut demande @author BoOz / Pierre Basson
 **/
 /*
 	CP 20070904
-	Ce qui est affiché entre () est le nombre de destinataire
-	La date affichée est celle du départ pour un courrier encour|publie|etc..
+	Ce qui est affiche entre () est le nombre de destinataire
+	La date affichee est celle du depart pour un courrier encour|publie|etc..
 	
 	Ne sert que pour la liste des courriers et des listes de diffusion
 */
@@ -60,8 +61,8 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 	
 	//////////////////////////////////
 	// requete
-	// construction de la requête SQL
-	// sera (en partie) utilisée plus bas pour compter et pagination
+	// construction de la requete SQL
+	// sera (en partie) utilisee plus bas pour compter et pagination
 	switch($element) { 
 		case 'abonnements':
 			$sql_select = "listes.id_liste,listes.titre,listes.statut,listes.date,abos.id_auteur";
@@ -77,7 +78,7 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 			break;
 		case 'listes':
 			if (
-				// pour lister les listes programmées dans un futur 
+				// pour lister les listes programmees dans un futur 
 				in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS_OK)) 
 				&& ($apres_maintenant == true)
 			) {
@@ -175,10 +176,10 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 							;
 					}
 					break;
-			// si liste, donne le nombre d'abonnés
+			// si liste, donne le nombre d'abonnes
 				case 'listes':
 					//$nb_abo = spiplistes_nb_abonnes_liste($id_row);
-					// affiche infos complémentaires pour les listes
+					// affiche infos complementaires pour les listes
 					$en_liste .=
 						" <span style='font-size:100%;color:#666666' dir='ltr'>\n"
 						. "<span class='spiplistes-legend-stitre'>".spiplistes_nb_abonnes_liste_str_get($id_row)."</span>"

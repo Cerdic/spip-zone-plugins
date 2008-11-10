@@ -3,22 +3,23 @@
 // exec/spiplistes_listes_toutes.php
 
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
-/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
+/* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
+/* par email pour SPIP. http://bloog.net/spip-listes                                      */
+/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net                               */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
+/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 // $LastChangedRevision$
 // $LastChangedBy$
@@ -44,7 +45,7 @@ function exec_spiplistes_listes_toutes(){
 	$flag_editable = ($connect_statut == "0minirezo");
 
 	if($flag_editable) {
-		// initialise les variables postées par le formulaire
+		// initialise les variables postees par le formulaire
 		foreach(array(
 			'btn_supprimer_liste_confirme', 'id_liste' // _SPIPLISTES_EXEC_LISTE_GERER
 			, 'btn_confirmer_envoi_maintenant', 'titre_message'
@@ -56,7 +57,7 @@ function exec_spiplistes_listes_toutes(){
 			$$key = intval($$key);
 		}
 
-		// envoyer maintenant demandé par _SPIPLISTES_EXEC_LISTE_GERER
+		// envoyer maintenant demande' par _SPIPLISTES_EXEC_LISTE_GERER
 		if($btn_confirmer_envoi_maintenant && ($id_liste > 0)) {
 			$array_set = array(
 				'date' => 'NOW()'
@@ -66,7 +67,7 @@ function exec_spiplistes_listes_toutes(){
 			}
 		}
 
-		// suppression demandée par _SPIPLISTES_EXEC_LISTE_GERER
+		// suppression demandee par _SPIPLISTES_EXEC_LISTE_GERER
 		if($btn_supprimer_liste_confirme 
 			&& $id_liste
 			&& spiplistes_listes_liste_supprimer($id_liste)
@@ -80,14 +81,14 @@ function exec_spiplistes_listes_toutes(){
 ////////////////////////////////////
 
 	$titre_page = _T('spiplistes:spip_listes');
-	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
+	// Permet entre autres d'ajouter les classes a la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = _SPIPLISTES_PREFIX;
 	$sous_rubrique = "listes_toutes";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
 	
-	// la gestion des abonnés est réservée aux admins 
+	// la gestion des abonnes est reservee aux admins 
 	if(!$flag_editable) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
@@ -135,23 +136,4 @@ function exec_spiplistes_listes_toutes(){
 	
 }
 
-/******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'abonnés et d'envoi d'information     */
-/* par email  pour SPIP.                                                                  */
-/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
-/*                                                                                        */
-/* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
-/* (version 2).                                                                           */
-/*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
-/* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
-/*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
-/* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
-/******************************************************************************************/
 ?>

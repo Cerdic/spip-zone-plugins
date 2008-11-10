@@ -194,8 +194,8 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Desabonner_definitif' => "D&eacute;sabonner ce compte de toutes les listes de diffusion.",
 'Desabonner' => "D&eacute;sabonner"
 , 'dupliquer_ce_courrier' => "Dupliquer ce courrier"
-, 'desabonne_sing' => ' d&eacute;sabonn&eacute;'
-, 'desabonnes_plur' => ' d&eacute;sabonn&eacute;s'
+, 'desabonne_sing' => " d&eacute;sabonn&eacute; ou sans format de r&eacute;ception"
+, 'desabonnes_plur' => " d&eacute;sabonn&eacute;s ou sans format de r&eacute;ception"
 
 //E
 , 'email' => 'E-mail',
