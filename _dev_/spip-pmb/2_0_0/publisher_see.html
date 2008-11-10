@@ -1,5 +1,5 @@
-[(#SET{tab_resultat,[(#ENV{id}|pmb_editeur_extraire{[(#CONFIG{spip_pmb/url})],[(#ENV{pmb_page}|sinon{1})]})]})]
-<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+[(#SET{tab_resultat,[(#ENV{id}|pmb_editeur_extraire{[(#CONFIG{spip_pmb/url})],[(#ENV{pmb_page}|sinon{1})]})]})
+]<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
 <title>[(#GET{tab_resultat}|pmb_tableau2_valeur{0,titre_editeur}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>[
@@ -54,7 +54,8 @@
 				
 				[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})
 			 		<li>
-						[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, logo_src})]|inserer_attribut{width,}|inserer_attribut{height,}|image_reduire{130,0})]	
+						[(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, logo_src}|copie_locale)]}|image_reduire{130,0})]
+	
 						<h3><a href="index.php?page=notice_display&id=[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, id})]&seule=1">[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, titre})]</a></h3>
                 				[<small><:par_auteur:> (#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, lesauteurs})</small>]
 					
