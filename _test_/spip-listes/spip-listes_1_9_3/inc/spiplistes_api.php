@@ -13,10 +13,10 @@
 /*                                                                                        */
 /* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but specifique. Reportez-vous à la Licence Publique Generale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous ï¿½ la Licence Publique Generale GNU  */
+/* pour plus de dï¿½tails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Generale GNU                    */
+/* Vous devez avoir reï¿½u une copie de la Licence Publique Generale GNU                    */
 /* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
@@ -41,7 +41,7 @@ include_spip('inc/spiplistes_api_globales');
 
 /* function privee
  * multi_queries mysql n'est pas en mesure de le faire en natif :-(
- * A tranformer le jour où mysql gerera correctement le multi_query
+ * A tranformer le jour ou mysql gerera correctement le multi_query
  * Et a transformer en transanction quand spip utilisera innodb ou autre table transactionnelle
  * @param $queries : requetes separees par des ';'
  */
@@ -100,7 +100,7 @@ function spiplistes_courriers_casier_premier ($sql_select, $sql_whereq) {
 // Les fonctions spiplistes_abonnements_*() concernent les abonnements
 // Table cible : spip_auteurs_listes
 
-// CP-20080324 : abonner un id_auteur à une id_liste
+// CP-20080324 : abonner un id_auteur a une id_liste
 // CP-20080508 : ou une liste de listes ($id_liste est un tableau de (id)listes)
 function spiplistes_abonnements_ajouter ($id_auteur, $id_liste) {
 	$result = false;
@@ -157,7 +157,7 @@ function spiplistes_abonnements_auteurs_supprimer ($auteur_statut) {
 		$result = sql_delete("spip_auteurs_listes", 
 					"WHERE id_auteur IN (SELECT id_auteur FROM spip_auteurs WHERE $auteur_statut)");
 	} else {
-		// Sur les précieux conseils de MM :
+		// Sur les precieux conseils de MM :
 		// passer la requete en 2 etapes pour assurer portabilite sql
 		$selection =
 			sql_select("id_auteur", "spip_auteurs", $auteur_statut,'','','','','',false);
@@ -374,7 +374,7 @@ function spiplistes_courriers_en_queue_supprimer ($sql_whereq) {
 }
 
 // CP-20080621
-// la première etiquette sur le tas
+// la premiere etiquette sur le tas
 function spiplistes_courriers_en_queue_premier ($select, $where) {
 	return(
 		sql_getfetsel(
@@ -396,9 +396,9 @@ function spiplistes_format_abo_suspendre ($id_auteur) {
 	return(spiplistes_format_abo_modifier($id_auteur));
 }
 
-// modifier le format abonné
+// modifier le format abonne
 // si id_auteur, celui-ci uniquement
-// sinon, 'tous' pour modifier globalement (uniquement ceux ayant déjà un format)
+// sinon, 'tous' pour modifier globalement (uniquement ceux ayant deja un format)
 function spiplistes_format_abo_modifier ($id_auteur, $format = 'non') {
 	if($format = spiplistes_format_valide($format)) {
 		$sql_table = "spip_auteurs_elargis";
@@ -436,7 +436,7 @@ function spiplistes_format_abo_demande ($id_auteur) {
 			$result = $result['spip_listes_format'];
 		}
 		/**/
-		/* Code à valider. Si ok, supprimer ci-dessus.
+		/* Code a valider. Si ok, supprimer ci-dessus.
 		$GLOBALS['mysql_rappel_nom_base'] = false;
 		$result = sql_getfetsel("spip_listes_format", "spip_auteurs_elargis", "id_auteur=".sql_quote($id_auteur));
 		$result = spiplistes_format_valide($result);
@@ -474,7 +474,7 @@ function spiplistes_mod_listes_get_id_auteur ($id_liste) {
 	return(false);
 }
 
-// CP-20080503: supprime un ou + modérateurs d'une liste
+// CP-20080503: supprime un ou + moderateurs d'une liste
 function spiplistes_mod_listes_supprimer ($id_auteur, $id_liste) {
 	$sql_where = array();
 	if($id_auteur != "tous") {
@@ -505,7 +505,7 @@ function spiplistes_mod_listes_compter ($id_liste) {
 }
 
 //CP-20080620
-// renvoie tableau id_liste des listes modérées par l'auteur
+// renvoie tableau id_liste des listes moderees par l'auteur
 function spiplistes_mod_listes_id_auteur ($id_auteur) {
 	$result = false;
 	if($sql_result = sql_select('id_liste', 'spip_auteurs_mod_listes', 'id_auteur='.sql_quote($id_auteur))) {
@@ -519,7 +519,7 @@ function spiplistes_mod_listes_id_auteur ($id_auteur) {
 
 //function spiplistes_texte_propre($texte)
 // passe propre() sur un texte puis nettoie les trucs rajoutes par spip sur du html
-// 	Remplace spiplistes_courrier_propre() qui est à supprimer après vérif.
+// 	Remplace spiplistes_courrier_propre() qui est a supprimer apres verif.
 function spiplistes_texte_propre($texte){
 	$temp_style = ereg("<style[^>]*>[^<]*</style>", $texte, $style_reg);
 	if (isset($style_reg[0])) 
@@ -531,7 +531,7 @@ function spiplistes_texte_propre($texte){
 	if( !preg_match(',</?('._BALISES_BLOCS.')[>[:space:]],iS', $texte) ) 
 	$texte = propre($texte); // pb: enleve aussi <style>...  
 	
-	// Corrections complémentaires
+	// Corrections complementaires
 	$patterns = array();
 	$replacements = array();
 	// html
@@ -549,7 +549,7 @@ function spiplistes_texte_propre($texte){
 
 	$texte = ereg_replace("__STYLE__", $style_str, $texte);
 	
-	//les liens avec double début #URL_SITE_SPIP/#URL_ARTICLE
+	//les liens avec double debut #URL_SITE_SPIP/#URL_ARTICLE
 	$texte = ereg_replace($GLOBALS['meta']['adresse_site']."/".$GLOBALS['meta']['adresse_site'], $GLOBALS['meta']['adresse_site'], $texte);
 	$texte = liens_absolus($texte);
 	
@@ -558,12 +558,12 @@ function spiplistes_texte_propre($texte){
 
 function spiplistes_titre_propre($titre){
 	$titre = spiplistes_texte_propre($titre);
-	$titre = substr($titre, 0, 128); // Au cas où copié/collé
+	$titre = substr($titre, 0, 128); // Au cas ou copie/colle
 	return($titre);
 }
 
 // traduit charset
-// complète caracteres manquants dans SPIP
+// complete caracteres manquants dans SPIP
 function spiplistes_translate_2_charset ($texte, $charset='AUTO') {
 	
 	$texte = charset2unicode($texte);
@@ -573,9 +573,9 @@ function spiplistes_translate_2_charset ($texte, $charset='AUTO') {
 			"&#8217;"=>"'"	// quote
 			, "&#8220;"=>'"' // guillemets
 			, "&#8221;"=>'"' // guillemets
-			, "&#255;" => "ÿ" // &yuml
-			, "&#159;" => "Ÿ" // &Yuml
-			, "&#339;" => "œ"	// e dans o
+			, "&#255;" => "ï¿½" // &yuml
+			, "&#159;" => "ï¿½" // &Yuml
+			, "&#339;" => "ï¿½"	// e dans o
 			)
 			;
 		$texte = strtr($texte, $remplacements);
@@ -715,10 +715,10 @@ function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $heade
 /*                                                                                        */
 /* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but specifique. Reportez-vous à la Licence Publique Generale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous ï¿½ la Licence Publique Generale GNU  */
+/* pour plus de dï¿½tails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Generale GNU                    */
+/* Vous devez avoir reï¿½u une copie de la Licence Publique Generale GNU                    */
 /* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
