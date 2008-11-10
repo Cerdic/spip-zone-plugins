@@ -1,0 +1,31 @@
+<plugin>
+	<nom>
+	<multi>[fr]Peuplement LDAP[en]LDAP Populate</multi>
+	</nom>
+	<icon>img_pack/kdmconfig.png</icon>
+	<auteur>
+ 		benjamin.revel@gmail.com
+		<multi>
+			2008[fr]Distribu&#233; sous licence GPL
+			[es]Distribuido bajo licencia GPL 
+			[en]Distribued under GPL license
+		</multi>
+	</auteur>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<description>
+		<multi>
+			[fr] Initialise la liste des auteurs du site en fonction d'un critère de recherche sur l'annuaire Ldap.
+		</multi>
+	</description>
+	<lien>Todo</lien> <!-- URI de documentation -->
+	<options>peuplement_ldap_options.php</options>
+	<fonctions>peuplement_ldap.php</fonctions>
+	<prefix>PeuplementLdap</prefix>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>peuplement_ldap_pipelines.php</inclure>
+	</pipeline>
+</plugin>
