@@ -10,7 +10,7 @@
 function nihongo_hiragana_table() {
     // unicode range 3041-3094
     $hiragana_ref = 12353;
-    $hiragana = array("a*","a","i*","i","u*","u","e*","e","o","o*",
+    $hiragana = array("a*","a","i*","i","u*","u","e*","e","o*","o",
                        "ka","ga","ki","gi","ku","gu","ke","ge","ko","go",
                        "sa","za","shi","ji","su","zu","se","ze","so","zo",
                        "ta","da","chi","di","tsu*","tsu","du","te","de","to","do",
@@ -28,7 +28,7 @@ function nihongo_hiragana_table() {
 function nihongo_katakana_table() {
     // unicode range 30A0-30FA
     $katakana_ref = 12449;
-    $katakana = array( "a*","a","i*","i","u*","u","e*","e","o","o*",
+    $katakana = array( "a*","a","i*","i","u*","u","e*","e","o*","o",
                        "ka","ga","ki","gi","ku","gu","ke","ge","ko","go",
                        "sa","za","shi","ji","su","zu","se","ze","so","zo",
                        "ta","da","chi","di","tsu*","tsu","du","te","de","to","do",
@@ -40,7 +40,8 @@ function nihongo_katakana_table() {
                        "wa*","wa","wi","we","wo",
                        "n","vu",
                        "ka*","ke*",
-                       "va","vi","ve","vo"
+                       "va","vi","ve","vo",
+                       "ten","choonpu"
                       
     );
     return array($katakana_ref,$katakana);    
@@ -53,7 +54,8 @@ function nihongo_katakana_table() {
 //
 
 // parse une chaine en syllale
-function nihongo_romaji($str,$parse_char="."){    
+function nihongo_romaji($str,$parse_char="."){  
+   $str = str_replace("*","",$str);  
    return str_replace($parse_char,"",$str);
 }
 
@@ -110,13 +112,12 @@ function nihongo_random($str,$mode="hiragana"){
     // action : parser la phrase
     $key_rnd = rand(0,count($charset_table)-1);    
     $html_val = $charset_ref + $key_rnd;
-    $romaji = $charset_table[$key_rnd];
-    $extra_char = array("*","2");
-    $romaji = str_replace($extra_char,"",$romaji);
+    $romaji = $charset_table[$key_rnd];   
+    $romaji = str_replace("*","",$romaji);
     
-    $output = "<dl class=\"nihongo\">\n";
-    $output .= "<dt class=\"$mode\">&#$html_val;</dt>\n";
-    $output .= "<dd class=\"$mode\">$romaji</dd>\n";
+    $output = "<dl class=\"nihongo nihongo_rnd\">\n";
+    $output .= "<dt>&#$html_val;</dt>\n";
+    $output .= "<dd>$romaji</dd>\n";
     $output .= "</dl>\n";
     
 
