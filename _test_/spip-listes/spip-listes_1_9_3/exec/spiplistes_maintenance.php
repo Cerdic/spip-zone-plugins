@@ -27,8 +27,11 @@ function exec_spiplistes_maintenance () {
 		, $couleur_foncee
 		, $spip_lang_right
 		;
-			
-	// initialise les variables postées par le formulaire
+	// la globale de connect_id_auteur est string
+	// c'est un entier qu'il faut envoyer a autoriser()
+	$connect_id_auteur = intval($GLOBALS['connect_id_auteur']);
+	
+	// initialise les variables postees par le formulaire
 	foreach(array_merge(
 		array(
 			'btn_supprimer_courriers', 'btn_reset_listes', 'btn_supprimer_listes'
@@ -37,7 +40,7 @@ function exec_spiplistes_maintenance () {
 		$$key = _request($key);
 	}
 	
-	// la maintenance spiplistes est réservée à l'admin principal 
+	// la maintenance spiplistes est reservee a l'admin principal 
 	$flag_autorise = autoriser('webmestre','','',$connect_id_auteur);
 	
 	$tous_les_statuts_courriers = array(_SPIPLISTES_COURRIER_STATUT_REDAC, _SPIPLISTES_COURRIER_STATUT_READY
@@ -59,7 +62,7 @@ function exec_spiplistes_maintenance () {
 		;
 	
 	/////////////////
-	// Faire ce qui est demandé par le formulaire
+	// Faire ce qui est demande par le formulaire
 	if($flag_autorise) {
 	
 		$msg_ok = "<span style='color:green;'>"._T('pass_ok');
@@ -89,7 +92,7 @@ function exec_spiplistes_maintenance () {
 			}
 		}
 		
-		// les listes en chronos à repasser en non-chrono
+		// les listes en chronos a repasser en non-chrono
 		// en realite', conserve le statut mais supprime la date d'envoi
 		// ainsi, la trieuse ne preparera pas le courrier
 		if($btn_reset_listes) {
@@ -155,7 +158,7 @@ function exec_spiplistes_maintenance () {
 						: "$nb_listes "._T('spiplistes:info_liste_2')
 						;
 	$listes_array = spiplistes_listes_select("id_liste,statut,titre,message_auto");
-	// listes auto (crhono) compte'es à part
+	// listes auto (crhono) compte'es a part
 	$nb_listes_auto = 0;
 	foreach($listes_array as $row) {
 		if($row['message_auto']=='oui') {
@@ -212,7 +215,7 @@ function exec_spiplistes_maintenance () {
 	}
 
 	//////////////////////////////////////////////////////
-	// Boite de maintenance du casier à courriers
+	// Boite de maintenance du casier a courriers
 	$objet = array('objet' => _T('spiplistes:des_courriers'));
 	$page_result .= ""
 		. debut_cadre_trait_couleur("administration-24.gif", true, "", _T('spiplistes:maintenance_objet', $objet))
@@ -239,7 +242,7 @@ function exec_spiplistes_maintenance () {
 		;
 
 	/////////////////////////////////////////
-	// boite de maintenance des listes : la date des listes sont remises à zéro (supprimer les chronos)
+	// boite de maintenance des listes : la date des listes sont remises a zero (supprimer les chronos)
 	$objet = array('objet' => _T('spiplistes:des_listes'));
 	$page_result .= ""
 		. debut_cadre_trait_couleur("administration-24.gif", true, "", _T('spiplistes:maintenance_objet', $objet))

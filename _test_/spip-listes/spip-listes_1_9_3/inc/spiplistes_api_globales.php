@@ -13,10 +13,10 @@
 /*                                                                                        */
 /* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but specifique. Reportez-vous à la Licence Publique Generale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Generale GNU                    */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
 /* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
@@ -26,11 +26,11 @@
 // $LastChangedDate$
 
 /*
-	Les fonctions qui doivent être chargées par tous les scripts sauf inc/spiplistes_api*
+	Les fonctions qui doivent etre chargees par tous les scripts sauf inc/spiplistes_api*
 */
 
-// Certains hébergeurs ont désactivé l'accès à syslog (free,...)
-// Recréer les constantes pour trier les journaux
+// Certains hebergeurs ont desactive l'acces a syslog (free,...)
+// Recreer les constantes pour trier les journaux
 if(!defined("LOG_WARNING")) {
 	define("LOG_WARNING", 4);
 	define("LOG_DEBUG", 7);
