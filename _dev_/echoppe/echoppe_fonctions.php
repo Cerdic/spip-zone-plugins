@@ -144,6 +144,18 @@ function balise_TOTAL_STOCK($p){
 
 /*=============================BOUCLES================================*/
 
+function boucle_ECHOPPE_PRODUITS_dist($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+	$mstatut = $id_table .'.statut';
+	var_dump($boucle);
+	// Restreindre aux elements publies, sauf si le critere statut est utilise
+	if (!isset($boucle->modificateur['criteres']['statut'])) {
+		array_unshift($boucle->where,array("'<>'", "'$mstatut'", "'\\'poubelle\\''"));
+	} 
+	return calculer_boucle($id_boucle, $boucles); 
+}
+
 function boucle_ECHOPPE_HIERARCHIE_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table . ".id_categorie";
