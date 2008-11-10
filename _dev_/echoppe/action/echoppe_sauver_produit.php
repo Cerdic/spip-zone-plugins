@@ -3,7 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_echoppe_sauver_produit(){
-	$lang_produit = _request('lang_produit');
+	$lang = _request('lang');
 	$titre = _request('titre');
 	$descriptif = _request('descriptif');
 	$texte = _request('texte');
@@ -23,6 +23,7 @@ function action_echoppe_sauver_produit(){
 	$colisage = _request('colisage');
 	$ref_produit = _request('ref_produit');
 	$prix_base_htva = _request('prix_base_htva');
+	$id_trad = _request('id_trad');
 	
 	$tva = str_replace(" ","",$tva);
 	$tva = str_replace(".","",$tva);
@@ -69,7 +70,8 @@ function action_echoppe_sauver_produit(){
 			'prix_base_htva' => $prix_base_htva,
 			'maj' => $maj,
 			'statut' => "prepa",
-			'lang'=>$lang_produit,
+			'lang'=>$lang,
+			'id_trad' => $id_trad,
 			'titre'=> $titre,
 			'descriptif'=> $descriptif,
 			'texte' => $texte,
@@ -78,15 +80,16 @@ function action_echoppe_sauver_produit(){
 			'quantite_mini' => $quantite_mini
 			);
 			$id_produit = sql_insertq('spip_echoppe_produits',$arg_inser_produit);
-			//echo $sql_insert_produit_descriptif.'<hr />';
+			
+			if (empty($id_trad)) sql_updateq('spip_echoppe_produits',array('id_trad' => $id_produit),"id_produit='".$id_produit."'");
 			
 			break;
 		
 		default :
 			$arg_inser_produit = array(
-			'id_produit' => $id_produit,
 			'id_categorie' => $id_categorie,
 			'ref_produit' => $ref_produit,
+			'lang' => $lang,
 			'titre'=> $titre,
 			'descriptif'=> $descriptif,
 			'texte' => $texte,
@@ -94,7 +97,7 @@ function action_echoppe_sauver_produit(){
 			'tva' => $tva,
 			'quantite_mini' => $quantite_mini
 			);
-			sql_updateq('spip_echoppe_produits',$arg_inser_produit);
+			sql_updateq('spip_echoppe_produits',$arg_inser_produit,"id_produit='".$id_produit."'");
 			break;
 		
 	}

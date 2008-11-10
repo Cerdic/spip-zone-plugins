@@ -1,3 +1,37 @@
+
+<br />
+[(#SET{id_produit_depart,#ID_PRODUIT})]
+<B_LesTraductions>
+<div class="cadre cadre-e">
+	<div class="titrem deplie depliant">
+		<strong><:echoppe:les_traductions_de_ce_produit:></strong>
+		<img class="cadre-icone" alt="" src="[(#CHEMIN{images/langues-24.gif})]"/>
+	</div>
+	<div class="cadre_padding">
+		<div class="cadre cadre-liste" style="">
+			<div class="bloc_depliable blocdeplie">
+				<table  width="100%" cellspacing="0" cellpadding="2" border="0">
+				<BOUCLE_LesTraductions(ECHOPPE_PRODUITS){id_trad = #ID_TRAD}>
+					<tr class="tr_liste">
+						<td>
+							<img src="[(#STATUT|=={prepa}|?{[(#CHEMIN{images/puce-blanche.gif})],''})][(#STATUT|=={propose}|?{[(#CHEMIN{images/puce-orange.gif})],''})][(#STATUT|=={publie}|?{[(#CHEMIN{images/puce-verte.gif})],''})][(#STATUT|=={poubelle}|?{[(#CHEMIN{images/puce-poubelle.gif})],''})]" alt="statut #STATUT"/>
+						</td>
+						<td class="arial2" >
+							[(#ID_PRODUIT|=={#GET{id_produit_depart}}|?{<span>,<a href="[(#EVAL{echoppe_produit}|generer_url_ecrire{id_produit=#ID_PRODUIT})]">})][(#ID_TRAD|=={#ID_PRODUIT}|?{<strong>,''})]#TITRE[&nbsp;(#ID_TRAD|=={#ID_PRODUIT}|?{(<:echoppe:produit_de_reference:>)</strong>,''})][(#ID_PRODUIT|=={#GET{id_produit_depart}}|?{</span>,</a>})]
+						</td>
+						<td class="arial2" >
+							[(#_LesTraductions:LANG|traduire_nom_langue)]
+						</td>
+					</tr>
+				</BOUCLE_LesTraductions>
+				</table>
+			</div>
+		</div>
+	</div>
+	&nbsp;#PUCE&nbsp;<a href="[(#EVAL{echoppe_edit_produit}|generer_url_ecrire{new=oui&ref_produit=#REF_PRODUIT&id_trad=#ID_TRAD})]" ><:echoppe:ecrire_une_traduction_de_ce_produit:></a>
+	<br />
+</div>
+<br />
 <div class="fiche_objet produit">
 	<div class="cadre_padding">
 		<div style="clear: right;">

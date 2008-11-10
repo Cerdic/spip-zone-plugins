@@ -1,13 +1,42 @@
 <h1><:echoppe:echoppe:></h1>
 <B_CatsALaRacine>
-<div >
-	<BOUCLE_CatsALaRacine(ECHOPPE_CATEGORIES){id_parent = 0}>
-		<div class="cadre-sous_rub" style="float: left; width: 45%; margin: 5px; height: 80px;">
-			<strong><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">#TITRE</a></strong>
-			[<div class="verdana1 cadre_padding">(#DESCRIPTIF|couper{80})</div>]
-		</div>
+	<div class="gauche" >
+	<BOUCLE_CatsALaRacine(ECHOPPE_CATEGORIES){id_parent = 0}{1/2}>
+			<div class="enfants">
+				<div class="cadre cadre-sous_rub" style="margin-top: 20px;">
+					<img src="#CHEMIN{images/categorie-24.png}" alt="" class="cadre-icone" />
+					<div class="titrem impliable">
+						<a class="titremancre"></a> 
+						<span dir="ltr"><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">[(#TITRE|sinon{<em><:sans_titre:></em>})]</a></span>
+					</div>
+					<div class="cadre_padding">
+						<div style="clear: both;">[(#DESCRIPTIF)]</div>
+						<div class="nettoyeur"></div>
+					</div>
+				</div>
+			</div>
 	</BOUCLE_CatsALaRacine>
-</div>
+	</div>
+		<B_CatsALaRacine2>
+		<div class="droite">
+		<BOUCLE_CatsALaRacine2(ECHOPPE_CATEGORIES){id_parent = 0}{2/2}>
+				<div class="enfants">
+					<div class="cadre cadre-sous_rub" style="margin-top: 20px;">
+						<img src="#CHEMIN{images/categorie-24.png}" alt="" class="cadre-icone" />
+						<div class="titrem impliable">
+							<a class="titremancre"></a> 
+							<span dir="ltr"><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">[(#TITRE|sinon{<em><:sans_titre:></em>})]</a></span>
+						</div>
+						<div class="cadre_padding">
+							<div style="clear: both;">[(#DESCRIPTIF)]</div>
+							<div class="nettoyeur"></div>
+						</div>
+					</div>
+				</div>
+		</BOUCLE_CatsALaRacine2>
+		</div>
+		</B_CatsALaRacine2>
+	</B_CatsALaRacine>
 </B_CatsALaRacine>
 	<:echoppe:pas_encore_de_categorie:>
 <//B_CatsALaRacine>

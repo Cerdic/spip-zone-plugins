@@ -54,6 +54,7 @@ function echoppe_tables_principales($tables_principales){
 		"maj"			=> "TIMESTAMP",
 		"statut"			=> "VARCHAR(10) DEFAULT '0' NOT NULL",
 		"lang"				=> "VARCHAR(2) DEFAULT '' NOT NULL",
+		"id_trad"				=> "bigint(21) NOT NULL",
 		"titre"				=> "text NOT NULL", 
 		"descriptif"		=> "text NOT NULL",
 		"texte"				=> "longblob NOT NULL",

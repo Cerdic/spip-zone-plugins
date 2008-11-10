@@ -61,11 +61,21 @@ function patch_08to09(){
 function patch_09to10(){
 	include_spip('base/create');
 	include_spip('base/abstract_sql');
-	spip_log("Mise à jour de echoppeBD -> 1.0");
+	spip_log("Mise à jour de echoppeBD -> 0.3.0");
 	
 	// Il faut ecrire le code de la maj si on veut garder la compatibilité avec les versions de developpement ...
 	
-	ecrire_meta('echoppedb_version',"1.0");
+	ecrire_meta('echoppedb_version',"0.3.0");
+	ecrire_metas();
+}
+
+function patch_10to11(){
+	include_spip('base/create');
+	include_spip('base/abstract_sql');
+	spip_log("Mise à jour de echoppeBD -> 0.3.1");
+	sql_alter('ALTER TABLE `spip_echoppe_produits` ADD `id_trad` BIGINT NOT NULL AFTER `lang` ;');
+	echo "Mise à jour de echoppeBD -> 0.3.1";
+	ecrire_meta('echoppedb_version',"0.3.1");
 	ecrire_metas();
 }
 

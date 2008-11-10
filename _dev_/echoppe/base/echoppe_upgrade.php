@@ -95,7 +95,7 @@ function echoppe_vider_tables($nom_meta_base_version){
 //~ $version_echoppe_installee = $GLOBALS['meta']['echoppe_version'];
 function echoppe_upgrade($nom_meta_base_version,$version_cible){
 	
-	$version_echoppe_locale = '0.3.0';
+	$version_echoppe_locale = '0.3.1';
 
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) ) || (($version_echoppe_locale = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 
@@ -118,33 +118,38 @@ function echoppe_upgrade($nom_meta_base_version,$version_cible){
 			patch_07to08();
 			patch_08to09();
 			patch_09to10();
-		 	ecrire_meta($nom_meta_base_version,$version_echoppe_locale='0.3.0','non');
+			patch_10to11();
+		 	ecrire_meta($nom_meta_base_version,$version_echoppe_locale='0.3.1','non');
 		}
 		
 		if (version_compare($version_echoppe_locale,'0.0.6','==')){
 			patch_06to07();
 			patch_07to08();
 			patch_08to09();
-			patch_09to10();	
-		 	ecrire_meta($nom_meta_base_version,$version_echoppe_locale='0.3.0','non');	 	
+			patch_09to10();
+			patch_10to11();	
+		 	ecrire_meta($nom_meta_base_version,$version_echoppe_locale='0.3.1','non');	 	
 		}
 		
 		if (version_compare($version_echoppe_locale,'0.0.7','==')){
 		 	patch_07to08();
 			patch_08to09();
 			patch_09to10();	
-		 	ecrire_meta($nom_meta_base_version,$version_echoppe_locale='0.3.0','non');	
+			patch_10to11();
+		 	ecrire_meta($nom_meta_base_version,$version_echoppe_locale='0.3.1','non');	
 		}
 		
 		if (version_compare($version_echoppe_locale,'0.0.8','==')){
 		 	patch_08to09();
 			patch_09to10();
-		 	ecrire_meta($nom_meta_base_version,$version_echoppe_locale='0.3.0','non');
+			patch_10to11();
+		 	ecrire_meta($nom_meta_base_version,$version_echoppe_locale='0.3.1','non');
 		}
 		
 		if (version_compare($version_echoppe_locale,'0.0.9','==')){
 		 	patch_09to10();
-		 	ecrire_meta($nom_meta_base_version,$version_echoppe_locale='0.3.0','non');
+			patch_10to11();
+		 	ecrire_meta($nom_meta_base_version,$version_echoppe_locale='0.3.1','non');
 		}
 		
 		

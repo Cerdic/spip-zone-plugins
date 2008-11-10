@@ -1,32 +1,53 @@
-<div class="cadre cadre-sous_rub" style="margin-top: 20px;">
-	<img src="../prive/images/secteur-24.gif" alt="" class="cadre-icone">
-	<div class="titrem impliable">
-		<a class="titremancre"></a> 
-		<span dir="ltr"><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">[(#TITRE|sinon{<em><:sans_titre:></em>})]</a></span>
-	</div>
-	<div style="clear: right;">
-		<a style="float: right;" class="icone36" href="[(#EVAL{echoppe_edit_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]"><img src="[(#CHEMIN{images/categorie-24.png})]" /><span><:echoppe:editer:></span></a>
-	</div>
+<div class="fiche_objet categorie">
 	<div class="cadre_padding">
-		[<div style="clear: both;">(#DESCRIPTIF)</div>]
-		<div class="nettoyeur"></div>
+		<div style="clear: right;">
+				<a style="float: right;" class="icone36" href="[(#EVAL{echoppe_edit_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]"><img src="[(#CHEMIN{images/categorie-24.png})]" /><span><:echoppe:editer:></span></a>
+		</div>
+		[<h1 class="categorie ">(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})</h1>]
+		[<p class="verdana1 spip_small">(#DESCRIPTIF)</p>]
 	</div>
 </div>
-<B_LesSousCategorie>
-<div>
-	<strong><:echoppe:les_sous_categories:></strong>
-		
-		<BOUCLE_LesSousCategorie(ECHOPPE_CATEGORIES){id_parent = #ID_CATEGORIE}{par num titre}>
-		<div class="cadre-sous_rub" style="float: left; width: 45%; margin: 5px; height: 80px;">
-			<strong><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">[(#TITRE|sinon{<em><:sans_titre:></em>})]</a></strong>
-			[<div class="verdana1 cadre_padding">(#DESCRIPTIF|couper{80})</div>]
-		</div>
-		</BOUCLE_LesSousCategorie>
-		
-	<div class="nettoyeur"> </div>
-</div>
-</B_LesSousCategorie>
 
+<B_LesSousCategorie>
+	<strong><:echoppe:les_sous_categories:></strong>
+	<div class="gauche">
+		<BOUCLE_LesSousCategorie(ECHOPPE_CATEGORIES){id_parent = #ID_CATEGORIE}{par num titre}{1/2}>
+			<div class="enfants">
+				<div class="cadre cadre-sous_rub" style="margin-top: 20px;">
+					<img src="#CHEMIN{images/categorie-24.png}" alt="" class="cadre-icone" />
+					<div class="titrem impliable">
+						<a class="titremancre"></a> 
+						<span dir="ltr"><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">[(#TITRE|sinon{<em><:sans_titre:></em>})]</a></span>
+					</div>
+					<div class="cadre_padding">
+						<div style="clear: both;">[(#DESCRIPTIF)]</div>
+						<div class="nettoyeur"></div>
+					</div>
+				</div>
+			</div>
+		</BOUCLE_LesSousCategorie>
+	</div>
+</B_LesSousCategorie>
+<B_LesSousCategorie2>
+	<div class="droite">
+		<BOUCLE_LesSousCategorie2(ECHOPPE_CATEGORIES){id_parent = #ID_CATEGORIE}{par num titre}{2/2}>
+			<div class="enfants">
+				<div class="cadre cadre-sous_rub" style="margin-top: 20px;">
+					<img src="#CHEMIN{images/categorie-24.png}" alt="" class="cadre-icone" />
+					<div class="titrem impliable">
+						<a class="titremancre"></a> 
+						<span dir="ltr"><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">[(#TITRE|sinon{<em><:sans_titre:></em>})]</a></span>
+					</div>
+					<div class="cadre_padding">
+						<div style="clear: both;">[(#DESCRIPTIF)]</div>
+						<div class="nettoyeur"></div>
+					</div>
+				</div>
+			</div>
+		</BOUCLE_LesSousCategorie2>
+	</div>
+</B_LesSousCategorie2>
+<div class="nettoyeur"> </div>
 <B_LesProduits>
 <br />
 	<div class="liste">
@@ -39,7 +60,7 @@
 		
 			<BOUCLE_LesProduits(ECHOPPE_PRODUITS){id_categorie}>
 				<tr class="tr_liste">
-				<td style="width: 11px;"><div class='etat #STATUT'> </div></td>
+				<td style="width: 11px;"><img src="[(#STATUT|=={prepa}|?{[(#CHEMIN{images/puce-blanche.gif})],''})][(#STATUT|=={propose}|?{[(#CHEMIN{images/puce-orange.gif})],''})][(#STATUT|=={publie}|?{[(#CHEMIN{images/puce-verte.gif})],''})][(#STATUT|=={poubelle}|?{[(#CHEMIN{images/puce-poubelle.gif})],''})]" alt="statut #STATUT"/></td>
 				<td class="arial2">
 					
 						<strong><a href="[(#EVAL{echoppe_produit}|generer_url_ecrire{id_produit=#ID_PRODUIT})]">[(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})]</a></strong>[<div class="verdana1">(#DESCRIPTIF|couper{150})</div>]

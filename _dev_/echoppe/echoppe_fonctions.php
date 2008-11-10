@@ -11,6 +11,19 @@ function generer_url_validation_panier(){
 	if (strlen($nom_fichier) > 0) return $logo;
 	
 }*/
+function select_lang($les_langues, $nom, $value, $style){
+	$les_langues = explode(",",$les_langues);
+	$select .= '<select name="'.$nom.'" class="'.$style.'">';
+	
+	foreach ($les_langues as $option){
+		$select .= '<option value="'.$option.'"';
+		if ($value == $option) { $select .= ' selected="selected" '; }
+		$select .= '>'.traduire_nom_langue($option).'</option>';
+	}
+	
+	$select .= '</select>';
+	return $select;
+}
 
 function generer_url_inscription(){
 	return "";

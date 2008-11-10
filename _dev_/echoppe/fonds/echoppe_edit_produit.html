@@ -12,15 +12,22 @@
 			[<input type="hidden" name="new" value="(#NEW)" />]
 			[<input type="hidden" name="lang" value="(#LANG)" />]
 			[<input type="hidden" name="id_produit" value="(#ID_PRODUIT)" />]
+			[<input type="hidden" name="id_trad" value="(#ID_TRAD)" />]
 			<ul>
 				<li class="editer_titre obligatoire" >
 					<label for="titre_produit" ><:echoppe:titre_produit:></label>
 					<input type="text" class="forml" id="titre_produit" name="titre" value="#TITRE**"/><br />
 				</li>
 				
+				<li class="editer_lang" >
+					<label for="titre_produit" ><:echoppe:langue_du_produit:></label>
+					[(#CONFIG{langues_proposees}|select_lang{lang,#LANG,forml})]
+				</li>
+				
 				<li>
-					<label for="ref_produit" ><:echoppe:reference_interne:></label>
-					<input type="text" class="forml" id="ref_produit" name="ref_produit" value="#REF_PRODUIT"/><br />
+					<label for="[(#REF_PRODUIT|?{ref_produit_fake,ref_produit})]" ><:echoppe:reference_interne:></label>
+					<input type="text" class="forml" id="[(#REF_PRODUIT|?{ref_produit_fake,ref_produit})]" name="[(#REF_PRODUIT|?{ref_produit_fake,ref_produit})]" value="#REF_PRODUIT" [(#REF_PRODUIT|?{disabled="disabled",''})]/><br />
+					[(#REF_PRODUIT|?{<input type="hidden" name="ref_produit" value="#REF_PRODUIT" />,''})]
 				</li>
 				
 				<li>
