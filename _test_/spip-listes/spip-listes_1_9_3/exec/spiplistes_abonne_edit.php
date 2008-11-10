@@ -3,22 +3,23 @@
 //exec/spiplistes_abonne_edit.php
 
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
-/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
+/* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
+/* par email pour SPIP. http://bloog.net/spip-listes                                      */
+/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net                               */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
+/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 
 // _SPIPLISTES_EXEC_ABONNE_EDIT
@@ -28,7 +29,7 @@
 // $LastChangedDate$
 
 /*
-	Formulaire édition d'un abonné
+	Formulaire ï¿½dition d'un abonnï¿½
 */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -46,7 +47,7 @@ function exec_spiplistes_abonne_edit () {
 		, $connect_id_auteur
 		;
 
-	// initialise les variables postées par le formulaire
+	// initialise les variables postï¿½es par le formulaire
 	foreach(array(
 		'id_auteur'
 		, 'btn_confirmer_format', 'modif_abo'
@@ -66,7 +67,7 @@ function exec_spiplistes_abonne_edit () {
 		);
 	
 	//////////////////////////////////////////////////////
-	// Modifie format si demandé
+	// Modifie format si demandï¿½
 	if($flag_editable && $btn_confirmer_format) {
 		switch($modif_abo) {
 			case 'html':
@@ -83,7 +84,7 @@ function exec_spiplistes_abonne_edit () {
 	}
 
 	//////////////////////////////////////////////////////
-	// Recharge les données de l'auteur
+	// Recharge les donnï¿½es de l'auteur
 	if($id_auteur > 0) {
 	
 		$sql_select = "nom,bio,email,nom_site,url_site,login,pass,statut,pgp,messagerie,imessage,low_sec";
@@ -102,8 +103,8 @@ function exec_spiplistes_abonne_edit () {
 	$format_abo = spiplistes_format_abo_demande($id_auteur);
 
 	//////////////////////////////////////////////////////
-	// préparation du bouton 
-		// Propose de supprimer l'auteur invité 
+	// prï¿½paration du bouton 
+		// Propose de supprimer l'auteur invitï¿½ 
 	$gros_bouton_modifier = 
 		($flag_editable)
 		? icone (
@@ -116,7 +117,7 @@ function exec_spiplistes_abonne_edit () {
 				)
 		: ""
 		;
-		// Propose de supprimer l'auteur invité 
+		// Propose de supprimer l'auteur invitï¿½ 
 	$gros_bouton_supprimer = 
 		($id_auteur && $flag_editable && ($statut=='6forum'))
 		? icone (
@@ -135,14 +136,14 @@ function exec_spiplistes_abonne_edit () {
 ////////////////////////////////////
 
 	$titre_page = _T('spiplistes:spip_listes');
-	// Permet entre autre d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
+	// Permet entre autre d'ajouter les classes ï¿½ la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = _SPIPLISTES_PREFIX;
 	$sous_rubrique = "abonne_edit";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
 	
-	// la gestion des abonnés est réservée aux admins et à l'auteur
+	// la gestion des abonnï¿½s est rï¿½servï¿½e aux admins et ï¿½ l'auteur
 	if(!$flag_editable) {
 		// erreur sur appel de page ?
 		if(!($id_auteur > 0)) {
@@ -217,7 +218,7 @@ function exec_spiplistes_abonne_edit () {
 			. spiplistes_form_input_radio ('modif_abo', 'suspend', _T('spiplistes:Desabonner_temporaire')
 				, ($modif_abo == 'suspend'), true, false)
 			. fin_cadre_relief(true)
-			// résilier les abonnements
+			// rï¿½silier les abonnements
 			. debut_cadre_relief('', true)
 			. spiplistes_form_input_radio ('modif_abo', 'non', _T('spiplistes:Desabonner_definitif')
 				, (($format_abo == 'non') && ($modif_abo != 'suspend')), true, false)
@@ -261,22 +262,22 @@ function exec_spiplistes_abonne_edit () {
 }
 
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'abonnés et d'envoi d'information     */
+/* SPIP-listes est un systï¿½me de gestion de listes d'abonnï¿½s et d'envoi d'information     */
 /* par email  pour SPIP.                                                                  */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Gï¿½nï¿½rale GNU publiï¿½e par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribuï¿½ car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but spï¿½cifique. Reportez-vous ï¿½ la Licence Publique Gï¿½nï¿½rale GNU  */
+/* pour plus de dï¿½tails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir reï¿½u une copie de la Licence Publique Gï¿½nï¿½rale GNU                    */
+/* en mï¿½me temps que ce programme ; si ce n'est pas le cas, ï¿½crivez ï¿½ la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, ï¿½tats-Unis.                   */
 /******************************************************************************************/
 ?>
