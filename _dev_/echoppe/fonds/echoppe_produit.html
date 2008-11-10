@@ -11,7 +11,7 @@
 		<div class="cadre cadre-liste" style="">
 			<div class="bloc_depliable blocdeplie">
 				<table  width="100%" cellspacing="0" cellpadding="2" border="0">
-				<BOUCLE_LesTraductions(ECHOPPE_PRODUITS){id_trad = #ID_TRAD}>
+				<BOUCLE_LesTraductions(ECHOPPE_PRODUITS){id_trad = #ID_TRAD}{ref_produit = #REF_PRODUIT}>
 					<tr class="tr_liste">
 						<td>
 							<img src="[(#STATUT|=={prepa}|?{[(#CHEMIN{images/puce-blanche.gif})],''})][(#STATUT|=={propose}|?{[(#CHEMIN{images/puce-orange.gif})],''})][(#STATUT|=={publie}|?{[(#CHEMIN{images/puce-verte.gif})],''})][(#STATUT|=={poubelle}|?{[(#CHEMIN{images/puce-poubelle.gif})],''})]" alt="statut #STATUT"/>
