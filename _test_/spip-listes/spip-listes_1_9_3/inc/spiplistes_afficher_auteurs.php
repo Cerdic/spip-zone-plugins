@@ -1,22 +1,23 @@
 <?php
 // inc/spiplistes_afficher_auteurs.php
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
-/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
+/* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
+/* par email pour SPIP. http://bloog.net/spip-listes                                      */
+/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net                               */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous ï¿½ la Licence Publique Generale GNU  */
+/* pour plus de dï¿½tails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir reï¿½u une copie de la Licence Publique Generale GNU                    */
+/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 // $LastChangedRevision$
 // $LastChangedBy$
@@ -154,7 +155,7 @@ function spiplistes_afficher_auteurs (
 
 	// reglage du debut
 	if(!$debut) {
-		// si js pas activé, récupère dans l'url
+		// si js pas activï¿½, rï¿½cupï¿½re dans l'url
 		$debut = intval(_request('debut'));
 	}
 	if ($debut > $nombre_auteurs - $max_par_page) {
@@ -231,7 +232,7 @@ function spiplistes_afficher_auteurs (
 		.	"<th>"._T('info_site')
 		. "</th>\n"
 		//
-		// #5: Format si abonné	
+		// #5: Format si abonnï¿½	
 		.	"<th>"._T('spiplistes:format')
 		. "</th>\n"
 		//
@@ -379,7 +380,7 @@ function spiplistes_afficher_auteurs (
 				)
 			. "</td>\n"
 			//
-			// #5: Format si abonné	
+			// #5: Format si abonnï¿½	
 			. "<td>"
 			.	(
 				(($abo = $row['format']) && (!empty($abo)) && ($abo != 'non'))
@@ -435,7 +436,7 @@ function spiplistes_afficher_auteurs (
 		. "</table>\n"
 		;
 		
-	// flèche de pagination si besoin
+	// flï¿½che de pagination si besoin
 	$debut_suivant = $debut + $max_par_page;
 	
 	if (($debut_suivant < $nombre_auteurs) || ($debut > 0)) {
@@ -484,7 +485,7 @@ function spiplistes_bonhomme_statut ($row) {
 	return(spiplistes_corrige_img_pack(bonhomme_statut($row)));
 }
 
-// Lorsqu'appelé par ?action (ajax), perd la position
+// Lorsqu'appelï¿½ par ?action (ajax), perd la position
 // corrige le lien relatif
 function spiplistes_corrige_img_pack ($img) {
 	if(preg_match(",^<img src='dist/images,", $img)) {
@@ -504,10 +505,10 @@ function spiplistes_corrige_img_pack ($img) {
 /*                                                                                        */
 /* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but specifique. Reportez-vous à la Licence Publique Generale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous ï¿½ la Licence Publique Generale GNU  */
+/* pour plus de dï¿½tails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Generale GNU                    */
+/* Vous devez avoir reï¿½u une copie de la Licence Publique Generale GNU                    */
 /* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */

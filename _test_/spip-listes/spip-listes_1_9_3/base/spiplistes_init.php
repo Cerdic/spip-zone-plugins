@@ -9,8 +9,8 @@
 // $LastChangedDate$
 
 ///////////////////////////////////////
-// A chaque appel de exec/admin_plugin, si le plugin est activé, 
-// spip détecte spiplistes_install() et l'appelle 3 fois :
+// A chaque appel de exec/admin_plugin, si le plugin est active, 
+// spip detecte spiplistes_install() et l'appelle 3 fois :
 // 1/ $action = 'test'
 // 2/ $action = 'install'
 // 3/ $action = 'test'
@@ -25,8 +25,8 @@ function spiplistes_install ($action) {
 
 	switch($action) {
 		case 'test':
-			// si renvoie true, c'est que la base est à jour, inutile de re-installer
-			// la valise plugin "effacer tout" apparaît.
+			// si renvoie true, c'est que la base est a jour, inutile de re-installer
+			// la valise plugin "effacer tout" apparait.
 			// si renvoie false, SPIP revient avec $action = 'install' (une seule fois)
 			$spiplistes_version = $GLOBALS['meta']['spiplistes_version'];
 			$result = (
@@ -43,7 +43,7 @@ function spiplistes_install ($action) {
 				$str_log = "create";
 			}
 			else {
-				// logiquement, ne devrait pas passer par là (upgrade assuré par mes_options)
+				// logiquement, ne devrait pas passer par la (upgrade assure par mes_options)
 				include_spip('base/spiplistes_upgrade');
 				$result = spiplistes_upgrade();
 				$str_log = "upgrade";
@@ -55,8 +55,8 @@ function spiplistes_install ($action) {
 				);
 			$str_log = "INSTALL: $str_log " . spiplistes_str_ok_error($result);
 			if(!$result) {
-				// nota: SPIP ne filtre pas le résultat. Si retour en erreur,
-				// la case à cocher du plugin sera quand même cochée
+				// nota: SPIP ne filtre pas le resultat. Si retour en erreur,
+				// la case a cocher du plugin sera quand meme cochee
 				$str_log .= ": PLEASE REINSTALL PLUGIN";
 			}
 			else {
@@ -68,7 +68,7 @@ function spiplistes_install ($action) {
 			return($result);
 			break;
 		case 'uninstall':
-			// est appellé lorsque "Effacer tout" dans exec=admin_plugin
+			// est appelle lorsque "Effacer tout" dans exec=admin_plugin
 			$result = spiplistes_vider_tables();
 			spiplistes_log("UNINSTALL: " . spiplistes_str_ok_error($result));
 			return($result);
@@ -83,7 +83,7 @@ function spiplistes_base_creer () {
 
 //spiplistes_log("spiplistes_base_creer() <<", _SPIPLISTES_LOG_DEBUG);
 
-	// demande à SPIP de créer les tables (base/create.php)
+	// demande a SPIP de creer les tables (base/create.php)
 	include_spip('base/create');
 	include_spip('base/abstract_sql');
 	include_spip('base/db_mysql');
@@ -107,12 +107,12 @@ function spiplistes_initialise_spip_metas_spiplistes ($reinstall = false) {
 		$GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES] = "";
 	}
 
-	// par default, simuler les envois à l'installation
+	// par default, simuler les envois a l'installation
 	__plugin_ecrire_key_in_serialized_meta ('opt_simuler_envoi', "oui", _SPIPLISTES_META_PREFERENCES);
 	
-	// les autres preferences serialisées ('_SPIPLISTES_META_PREFERENCES') sont installées par exec/spiplistes_config
+	// les autres preferences serialisees ('_SPIPLISTES_META_PREFERENCES') sont installees par exec/spiplistes_config
 
-	// autres valeurs par défaut à l'installation
+	// autres valeurs par defaut a l'installation
 	$spiplistes_spip_metas = array(
 		'spiplistes_lots' => _SPIPLISTES_LOT_TAILLE
 		, 'spiplistes_charset_envoi' => _SPIPLISTES_CHARSET_ENVOI
@@ -150,7 +150,7 @@ function spiplistes_vider_tables () {
 
 	include_spip('base/abstract_sql');
 	
-	// ne supprime pas la table spip_auteurs_elargis (utilisée par inscription2, echoppe, ... ? )
+	// ne supprime pas la table spip_auteurs_elargis (utilisee par inscription2, echoppe, ... ? )
 	$sql_tables = "spip_listes, spip_courriers, spip_auteurs_courriers, spip_auteurs_listes, spip_auteurs_mod_listes";
 	
 	spiplistes_log("DROPT TABLES ".$sql_tables);

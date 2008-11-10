@@ -9,11 +9,11 @@
 // $LastChangedDate$
 
 /*
-	Supprime l'auteur (visiteur) demandé
-	retourne sur redirect si précisé
+	Supprime l'auteur (visiteur) demande
+	retourne sur redirect si precise
 */
 
-// CP-20080324: ce script de SPIP-Listes-V n'est pas encore utilisé. A conserver
+// CP-20080324: ce script de SPIP-Listes-V n'est pas encore utilise. A conserver
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

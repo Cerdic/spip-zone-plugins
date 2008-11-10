@@ -9,14 +9,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/spiplistes_api');
 
 /*
-	Formulaire de sélection destinataire
+	Formulaire de selection destinataire
 
-	$flag_admin: si true, possibilité de modifier le destinataire
-	sinon, ne fait qu'afficher l'état
+	$flag_admin: si true, possibilite de modifier le destinataire
+	sinon, ne fait qu'afficher l'etat
 	
 	Renvoie :
-	$$nom_bouton_validation: si bouton de validation pressé
-	$radio_destination: détermine le choix
+	$$nom_bouton_validation: si bouton de validation presse
+	$radio_destination: determine le choix
 	-> soit 'email_test' si adresse mail choisie
 	-> soit 'id_liste' si c'est une liste qui est choisie
 	$email_test: adresse email de test

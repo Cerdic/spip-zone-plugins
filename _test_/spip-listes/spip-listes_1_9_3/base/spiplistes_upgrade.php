@@ -3,22 +3,23 @@
 // base/spiplistes_upgrade.php
 
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
-/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
+/* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
+/* par email pour SPIP. http://bloog.net/spip-listes                                      */
+/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net                               */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de dï¿½tails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir reï¿½u une copie de la Licence Publique Generale GNU                    */
+/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 // $LastChangedRevision$
 // $LastChangedBy$
@@ -26,11 +27,11 @@
 
 
 /*
-	Script appelé à chaque appel par mes_options
+	Script appele a chaque appel par mes_options
 	
-	spiplistes_upgrade() : si mise à jour de spiplistes
+	spiplistes_upgrade() : si mise a jour de spiplistes
 	
-	spiplistes_upgrade_base() : si mise à jour de la base spiplistes
+	spiplistes_upgrade_base() : si mise a jour de la base spiplistes
 */
 
 include_spip('inc/spiplistes_api_globales');
@@ -48,7 +49,7 @@ function spiplistes_upgrade () {
 	spiplistes_log("VERSIONS MOD DETECTED [$spiplistes_current_version::$spiplistes_real_version][$spiplistes_current_version_base::$spiplistes_real_version_base]");
 
 	if(!$spiplistes_current_version) {
-	// SPIP-Listes n'a jamais été installé ? 
+	// SPIP-Listes n'a jamais ete installe ? 
 		include_spip('base/spiplistes_init');
 		$spiplistes_current_version_base = spiplistes_base_creer();
 	}
@@ -68,7 +69,7 @@ function spiplistes_upgrade () {
 		spiplistes_log("UPGRADING $spiplistes_name $spiplistes_current_version TO $spiplistes_real_version");
 
 		if($spiplistes_current_version < 1.9982) {
-			// Ne modifie pas le schéma. Ajoute juste une légende sur les tables
+			// Ne modifie pas le schema. Ajoute juste une legende sur les tables
 			sql_alter("TABLE spip_listes COMMENT ".sql_quote("Listes de diffusion"));
 			sql_alter("TABLE spip_courriers COMMENT ".sql_quote("Panier des courriers (casiers)"));
 			sql_alter("TABLE spip_auteurs_courriers COMMENT ".sql_quote("Queue des envois de courriers"));
@@ -101,19 +102,19 @@ function spiplistes_upgrade_base (
 //spiplistes_log("spiplistes_upgrade_base() <<", _SPIPLISTES_LOG_DEBUG);
 	
 	if($spiplistes_current_version_base && ($spiplistes_current_version_base >= $spiplistes_real_version_base)) {
-	// La base est à jour
+	// La base est a jour
 		return($spiplistes_current_version_base);
 	}
 	
-	// faire la mise à jour
+	// faire la mise a jour
 	spiplistes_log("UPGRADING DATABASE $spiplistes_name $spiplistes_current_version_base TO $spiplistes_real_version_base", _SPIPLISTES_LOG_DEBUG);
 	
 
 	// 'version_base' n'apparait que dans SPIP-Listes 1.98001
-	// Cherche sur $spiplistes_version pour les versions précédentes 
+	// Cherche sur $spiplistes_version pour les versions precedentes 
 
 	//install
-	$version_base = 1.91; // ou inférieur ?
+	$version_base = 1.91; // ou inferieur ?
 	
 	if (   
 		(!$spiplistes_current_version)
@@ -211,7 +212,7 @@ function spiplistes_upgrade_base (
 					sql_delete('spip_articles', "id_article =".sql_quote($id_article));
 					sql_delete('spip_auteurs_articles', "id_article =".sql_quote($id_article));
 		
-					//manque un traitement pour récuperer les courriers
+					//manque un traitement pour recuperer les courriers
 				}
 				//evaluer les extras de tous les auteurs et les virer
 				$result = sql_select(

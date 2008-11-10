@@ -6,9 +6,9 @@
 // $LastChangedDate$
 
 /*
-	Appelé 
+	Appele 
 	- pour l'init de la base
-	- par les exec en charge d'interpréter un patron (ex.: spiplistes_courrier_gerer)
+	- par les exec en charge d'interpreter un patron (ex.: spiplistes_courrier_gerer)
 	- par l'espace public
 	
 	Ne pas oublier de faire l'include dans {PLUGIN}_mes_fonctions.php
@@ -19,7 +19,7 @@ include_spip('inc/spiplistes_api_globales');
 
 //////////////////////////////////
 // Ici on declare la structure des tables au compilo
-// Inspiré de spip-lettres, Pierre Basson
+// Inspire de spip-lettres, Pierre Basson
 
 	global $table_des_tables
 	, $tables_principales
