@@ -47,7 +47,8 @@
 		</div>
 		<div class="menu articles ouvrages">
 			
-				<h2><:ouvrages:></h2>
+			<B_tab_resultat>
+			<h2><:ouvrages:></h2>
 			<ul>
 				<BOUCLE_tab_resultat(POUR){tableau #GET{tab_resultat}}>
 
@@ -68,6 +69,11 @@
 			</ul>
 
 			[(#GET{tab_resultat}|pmb_tableau2_valeur{0,nav_bar})]
+
+			</B_tab_resultat>
+				<:pmb:pas_d_ouvrages_trouves:>
+			<//B_tab_resultat>
+			
 		</div>
 
 		
