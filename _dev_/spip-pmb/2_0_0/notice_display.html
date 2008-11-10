@@ -94,21 +94,27 @@
 	<br class="nettoyeur" />
 
 	[<div class="pmb-exemplaires">
-		<h2><:exemplaires:></h2>
+		<h2><:pmb:exemplaires:></h2>
 
 		(#GET{notice}|pmb_notice_champ{'exemplaires'})
 	</div>]
 
 	[<div class="pmb-autreslecteurs">
-		<h2><:autres_lecteurs:></h2>
+		<h2><:pmb:autres_lecteurs:></h2>
 
 		(#GET{notice}|pmb_notice_champ{'autres_lecteurs'})
 	</div>]
 
 	
-	
-		
-      
+	<div class="pmb-toolbox">
+		<h2><:pmb:compte_lecteur:></h2>
+		<ul>
+			<li><a href="#CONFIG{spip_pmb/url}do_resa.php?lvl=resa&id_notice=#ENV{id}&$id_empr=&oresa=popup" class="lien-modal"><:pmb:reserver_ouvrage:></a></li>
+			<li><a href="#CONFIG{spip_pmb/url}addtags.php?noticeid=#ENV{id}" class="lien-modal"><:pmb:ajouter_tag:></a></li>
+			<li><a href="#CONFIG{spip_pmb/url}avis.php?todo=liste&noticeid=#ENV{id}" class="lien-modal"><:pmb:donner_avis:></a></li>
+    		</ul>
+	</div>	
+
 	</div><!--#contenu-->
 	</div><!--#conteneur-->
 

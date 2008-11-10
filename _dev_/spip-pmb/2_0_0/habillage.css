@@ -151,7 +151,7 @@ abbr.published { border: 0; }
 
 
 /* style de la plupart des h2 */
-#documents_portfolio h2, .pmb-exemplaires h2, .pmb-autreslecteurs h2, .ps h2, .hyperlien h2 { text-align: left; background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: bottom left; padding-bottom: .4em; margin-bottom: .5em; margin-top: 1.5em; }
+#documents_portfolio h2, .pmb-exemplaires h2, .pmb-autreslecteurs h2, .pmb-toolbox h2, .ps h2, .hyperlien h2 { text-align: left; background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: bottom left; padding-bottom: .4em; margin-bottom: .5em; margin-top: 1.5em; }
 
 
 /* Habillage des forums
@@ -211,7 +211,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 
 
 /* Pagination */
-.pagination { clear: both; text-align: right; font-size: 0.90em; color: #666; }
+.pagination { clear: both; text-align: right; font-size: 0.90em; color: #ccc; }
 .pagination .on { font-weight: bold; color: #999966; border: 1px solid transparent; }
 .pagination a { background: #999966; color: white; border: 1px solid #999966; }
 .pagination a:hover { background: none; color: #999966; text-decoration: none; }
@@ -360,7 +360,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 
 
 /* newsletter */
-.forums { background: #999966; }
+.forums { background: #99AC2D; }
 .forums h2 { color: white; padding: .5em; background-image: url(bordure-vert-tresclair.gif); background-repeat: repeat-x; background-position: bottom left; }
 .forums ul { padding: .5em; }
 .forums ul li { border: none; font-size: .8em; letter-spacing: -1px; color: white; }
@@ -438,3 +438,9 @@ div#page, div#conteneur, div#navigation, div#extra { width: auto; }
 .navbar { clear: right; float: right; margin-right: 2em; margin-bottom: 2em; }
 
 #search { margin-bottom: 2em; background: #999966; color: white; padding: .5em; }
+
+.pmb-toolbox { margin-left: 150px; }
+.pmb-toolbox ul { margin-left: 0; list-style: none; padding-left: 0; }
+.pmb-toolbox ul li { margin-left: 0; padding-left: 13px; margin-bottom: .3em; background-image: url(bg-puce.gif); background-repeat: no-repeat; background-position: left center; }
+
+
