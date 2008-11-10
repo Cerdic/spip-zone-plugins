@@ -6,7 +6,7 @@ $id_piwik=lire_config('piwik/idPiwik');
 $url_piwik=lire_config('piwik/UrlPiwik');
 
 
-	$flux='
+	$flux .= '
 	<script type="text/javascript">
 	var pkBaseURL = (("https:" == document.location.protocol) ? "https:/'.$url_piwik.'" : "http://'.$url_piwik.'");
 document.write(unescape("%3Cscript src=\'" + pkBaseURL + "piwik.js\' type=\'text/javascript\'%3E%3C/script%3E"));
