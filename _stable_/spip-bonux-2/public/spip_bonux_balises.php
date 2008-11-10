@@ -33,6 +33,34 @@ function balise_URL_ACTION_AUTEUR($p) {
 	$p->interdire_scripts = false;
 	return $p;
 }
+//
+// #URL_ECRIRE{naviguer} -> ecrire/?exec=naviguer
+//
+// http://doc.spip.org/@balise_URL_ECRIRE_dist
+function balise_URL_ECRIRE($p) {
+
+	if ($p->boucles[$p->id_boucle]->sql_serveur
+	AND $p->boucles[$p->id_boucle]->sql_serveur!='pour'
+	AND $p->boucles[$p->id_boucle]->sql_serveur!='condition') {
+		$p->code = 'generer_url_public("404")';
+		return $p;
+	}
+
+	$p->code = interprete_argument_balise(1,$p);
+	$args = interprete_argument_balise(2,$p);
+	if ($args != "''" && $args!==NULL)
+		$p->code .= ','.$args;
+
+	// autres filtres (???)
+	array_shift($p->param);
+
+	$p->code = 'generer_url_ecrire(' . $p->code .')';
+
+	#$p->interdire_scripts = true;
+	return $p;
+}
+
+
 
 /**
  * #SET
