@@ -1,7 +1,7 @@
 [(#CHEMIN{images/go-home.png}|debut_cadre_trait_couleur{1,"",<:echoppe:gestion_des_depots:>,"",gestion_depots})]
 <B_LesDepots>
 <ul>
-<BOUCLE_LesDepots(SPIP_ECHOPPE_DEPOTS){par titre}>
+<BOUCLE_LesDepots(ECHOPPE_DEPOTS){par titre}>
 <li><a href="[(#EVAL{'echoppe_depot'}|generer_url_ecrire{id_depot=#ID_DEPOT})]">#TITRE</a></li>
 </BOUCLE_LesDepots>
 [(#CONFIG{echoppe/utiliser_depot_fournisseur,non}|=={oui}|?{<li><:echoppe:depot_virtuel:></li>,''})]
