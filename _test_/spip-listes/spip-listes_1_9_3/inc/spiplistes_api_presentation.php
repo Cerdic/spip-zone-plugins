@@ -747,7 +747,8 @@ function spiplistes_nb_abonnes_liste_str_get ($id_liste, $nb_abos = false, $html
 	$absents = $nb_abos - ($html + $texte);
 	$result =
 		($nb_abos)
-		? "(" 
+		?	""
+			//. "(" 
 			. spiplistes_singulier_pluriel_str_get($nb_abos, _T('spiplistes:nb_abonnes_sing'), _T('spiplistes:nb_abonnes_plur')) 
 			.	(
 				$absents 
@@ -756,8 +757,9 @@ function spiplistes_nb_abonnes_liste_str_get ($id_liste, $nb_abos = false, $html
 						, _T('spiplistes:desabonnes_plur'))
 				: ""
 				)
-			. ")"
-		: "("._T('spiplistes:sans_abonne').")"
+			//. ")"
+		//: "("._T('spiplistes:sans_abonne').")"
+		: _T('spiplistes:sans_abonne')
 		;
 	return ($result);
 }

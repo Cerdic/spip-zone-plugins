@@ -11,10 +11,10 @@
 /*                                                                                        */
 /* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but specifique. Reportez-vous � la Licence Publique Generale GNU  */
-/* pour plus de d�tails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir re�u une copie de la Licence Publique Generale GNU                    */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
 /* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
@@ -155,7 +155,7 @@ function spiplistes_afficher_auteurs (
 
 	// reglage du debut
 	if(!$debut) {
-		// si js pas activ�, r�cup�re dans l'url
+		// si js pas active, recupere dans l'url
 		$debut = intval(_request('debut'));
 	}
 	if ($debut > $nombre_auteurs - $max_par_page) {
@@ -232,7 +232,7 @@ function spiplistes_afficher_auteurs (
 		.	"<th>"._T('info_site')
 		. "</th>\n"
 		//
-		// #5: Format si abonn�	
+		// #5: Format si abonne	
 		.	"<th>"._T('spiplistes:format')
 		. "</th>\n"
 		//
@@ -380,7 +380,7 @@ function spiplistes_afficher_auteurs (
 				)
 			. "</td>\n"
 			//
-			// #5: Format si abonn�	
+			// #5: Format si abonne	
 			. "<td>"
 			.	(
 				(($abo = $row['format']) && (!empty($abo)) && ($abo != 'non'))
@@ -436,7 +436,7 @@ function spiplistes_afficher_auteurs (
 		. "</table>\n"
 		;
 		
-	// fl�che de pagination si besoin
+	// fleche de pagination si besoin
 	$debut_suivant = $debut + $max_par_page;
 	
 	if (($debut_suivant < $nombre_auteurs) || ($debut > 0)) {
@@ -485,7 +485,7 @@ function spiplistes_bonhomme_statut ($row) {
 	return(spiplistes_corrige_img_pack(bonhomme_statut($row)));
 }
 
-// Lorsqu'appel� par ?action (ajax), perd la position
+// Lorsqu'appele par ?action (ajax), perd la position
 // corrige le lien relatif
 function spiplistes_corrige_img_pack ($img) {
 	if(preg_match(",^<img src='dist/images,", $img)) {
@@ -505,10 +505,10 @@ function spiplistes_corrige_img_pack ($img) {
 /*                                                                                        */
 /* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but specifique. Reportez-vous � la Licence Publique Generale GNU  */
-/* pour plus de d�tails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir re�u une copie de la Licence Publique Generale GNU                    */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
 /* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */

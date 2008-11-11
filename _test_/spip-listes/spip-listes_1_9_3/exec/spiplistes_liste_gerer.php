@@ -343,7 +343,7 @@ function exec_spiplistes_liste_gerer () {
 		$titre_boite = _T('spiplistes:abos_cette_liste');
 		$nb = spiplistes_listes_nb_abonnes_compter($id_liste);
 		$legend = _T('spiplistes:nbre_abonnes').$nb;
-		$legend = "<small>".spiplistes_nb_abonnes_liste_str_get($id_liste)."</small>";
+		$legend = "<small id='legend-abos1'>".spiplistes_nb_abonnes_liste_str_get($id_liste)."</small>";
 		$grosse_boite_abonnements = ""
 			. "<!-- boite abonnes/elligibles -->\n"
 			. debut_cadre_enfonce("auteur-24.gif", true, "", $titre_boite)
@@ -455,6 +455,19 @@ function exec_spiplistes_liste_gerer () {
 		});
 		$('input[@name=forcer_format_reception]').click( function() { 
 			$('#forcer_format_abo').attr('checked','checked');
+		});
+		// sparadra !
+		// fait disparaitre la legende si deplie'
+		var sparadra;
+		$('#triangle1').click( function() { 
+			if(!sparadra) {
+				$('#legend-abos1').html('');
+				sparadra = true;
+			}
+			else {
+				$('#legend-abos1').html($('#legend-abos1-propre').html());
+				sparadra = false;
+			}
 		});
 	});
 //]]>

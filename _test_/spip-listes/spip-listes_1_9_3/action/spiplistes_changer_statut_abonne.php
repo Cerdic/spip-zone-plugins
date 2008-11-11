@@ -30,8 +30,11 @@ function action_spiplistes_changer_statut_abonne_dist () {
 	$action = $arg[1];
 
 	if(($id_auteur > 0) && ($connect_id_auteur > 0)) {
+		
+		spiplistes_log($action);
+		
 		if ($action=='format') {
-			//modification du format abonné ('html', 'texte' ou 'non')
+			//modification du format abonne ('html', 'texte' ou 'non')
 			$statut = _request('statut');
 			if(autoriser('modifierformat', 'abonne', $id_auteur)) {
 				if(spiplistes_format_abo_modifier($id_auteur, $statut)) {
@@ -40,15 +43,17 @@ function action_spiplistes_changer_statut_abonne_dist () {
 						include_spip('inc/spiplistes_afficher_auteurs');
 						include_spip('inc/spiplistes_api_presentation');
 						include_spip('inc/spiplistes_listes_selectionner_auteur');
-						echo(spiplistes_listes_boite_abonnes($id_liste, $tri, $debut, $script_retour));
+						//echo(spiplistes_listes_boite_abonnes($id_liste, $tri, $debut, $script_retour));
+						echo(spiplistes_listes_boite_abonnements($id_liste, $statut_liste, $tri, $debut, $redirect, $elligibles, $nb_elligibles));
 						exit(0);
 					}
 				}
 			}
 		}
-		// CP-20080324: l'abonnement par action/ actuellement pas utilisé par le formulaire abonnes_tous.
+		// CP-20080324: l'abonnement par action/ actuellement pas utilise par le formulaire abonnes_tous.
 		// A voir si on conserve 
-		/**/
+		// CP-20081111: code probablement inutile. Un autre script action fait le meme boulot. A supprimer apres verif
+		/* */
 		if ($action=='listeabo') {
 			//abonne un auteur, force en _SPIPLISTES_FORMAT_DEFAULT si pas de format
 			if ($id_auteur 
@@ -67,7 +72,7 @@ function action_spiplistes_changer_statut_abonne_dist () {
 			spiplistes_log("SUBSCRIBE ID_AUTEUR #$id_auteur to ID_LISTE #$id_liste by ID_AUTEUR #$connect_id_auteur");	
 		}
 		if ($action=='listedesabo') {
-			// désabonne un auteur
+			// desabonne un auteur
 			if ($id_liste = intval($arg[2])) {
 				if (autoriser('desabonnerauteur', 'liste', $id_liste, NULL, array('id_auteur'=>$id_auteur))) {
 					if(spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste)) {
@@ -76,6 +81,7 @@ function action_spiplistes_changer_statut_abonne_dist () {
 				}
 			}
 		}
+		// CP-20081111: fin de code inutile.
 	}
 	if ($redirect){
 		redirige_par_entete(str_replace("&amp;","&",$redirect)."#abo$id_auteur");

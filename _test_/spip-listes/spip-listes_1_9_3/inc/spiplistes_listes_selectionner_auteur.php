@@ -204,8 +204,12 @@ function spiplistes_listes_selectionner_elligibles (
  * @param $elligibles transmis par action/ajax lors de la recherche, tableau des elligibles
  */
 function spiplistes_listes_boite_abonnements ($id_liste, $statut_liste, $tri, $debut, $script_retour, $elligibles = null, $nb_elligibles = 0) {
+	$nb = spiplistes_listes_nb_abonnes_compter($id_liste);
+	$legend = _T('spiplistes:nbre_abonnes').$nb;
+	$legend = "<small>".spiplistes_nb_abonnes_liste_str_get($id_liste)."</small>";
 	$boite_abonnements = ""
 		. "<div id='grosse_boite_abonnements' class='verdana1'>\n"
+		. "<div class='verdana2' id='legend-abos1-propre'>$legend</div>\n"
 		. "<div id='auteurs'>\n"
 		. spiplistes_listes_boite_abonnes($id_liste, $tri, $debut, $script_retour)
 		. "</div>\n"
