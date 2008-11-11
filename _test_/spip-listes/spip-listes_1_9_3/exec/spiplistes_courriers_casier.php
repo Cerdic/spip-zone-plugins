@@ -204,14 +204,14 @@ function exec_spiplistes_courriers_casier () {
 // PAGE CONTENU
 ////////////////////////////////////
 
-	$titre_page = _T('spiplistes:spip_listes');
+	$titre_page = _T('spiplistes:casier_a_courriers');
 
 	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = _SPIPLISTES_PREFIX;
 	$sous_rubrique = "courrier_casier";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
+	echo($commencer_page(_T('spiplistes:spip_listes') . " - " . trim($titre_page), $rubrique, $sous_rubrique));
 	
 	// la gestion des courriers est réservée aux admins 
 	if($connect_statut != "0minirezo") {
@@ -219,7 +219,9 @@ function exec_spiplistes_courriers_casier () {
 	}
 
 	$page_result = ""
-		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $titre_page, true)
+		. "<br /><br />\n"
+		. spiplistes_gros_titre($titre_page, '', true)
+		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $sous_rubrique)
 		. debut_gauche($rubrique, true)
 		. spiplistes_naviguer_paniers_courriers(_T('spiplistes:aller_au_panier_'), true)
 		. creer_colonne_droite($rubrique, true)

@@ -75,7 +75,7 @@ function spiplistes_gros_titre($titre, $ze_logo='', $return = false) {
 /*
 	Les onglets dans la rubrique Edition (naviguer)
 */
-function spiplistes_onglets ($rubrique, $onglet, $return = false) {
+function spiplistes_onglets ($rubrique, $onglet) {
 
 	$result = "";
 	
@@ -83,18 +83,19 @@ function spiplistes_onglets ($rubrique, $onglet, $return = false) {
 		$result = ""
 			. "<br />"
 			. debut_onglet()
-			. onglet(_T('spiplistes:Casier_a_courriers'), generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE), $rubrique
-				, $onglet, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_hyperlink-mail-and-news-24.gif")
-			. onglet(_T('spiplistes:listes_de_diffusion_'), generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE), $rubrique
-				, $onglet, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply-to-all-24.gif")
-			. onglet(_T('spiplistes:Suivi_des_abonnements'), generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE), $rubrique
-				, $onglet, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."addressbook-24.gif")
+			. onglet(_T('spiplistes:casier_a_courriers'), generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE)
+				, 'courrier_casier', $onglet
+				, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_hyperlink-mail-and-news-24.gif")
+			. onglet(_T('spiplistes:listes_de_diffusion_'), generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE)
+				, 'listes_toutes', $onglet
+				, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply-to-all-24.gif")
+			. onglet(_T('spiplistes:Suivi_des_abonnements'), generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE)
+				, 'abonnes_tous', $onglet
+				, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."addressbook-24.gif")
 			. fin_onglet()
 		;
 	}
-
-	if($return) return($result);
-	else echo($result);
+	return($result);
 } // end spiplistes_onglets()
 
 // CP:20080322 :

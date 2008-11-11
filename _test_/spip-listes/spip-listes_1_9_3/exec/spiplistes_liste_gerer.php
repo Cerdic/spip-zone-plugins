@@ -463,13 +463,13 @@ function exec_spiplistes_liste_gerer () {
 		;
 	// fin bloc jQuery
 		
-	$titre_page = _T('spiplistes:spip_listes');
+	$titre_page = _T('spiplistes:gestion_dune_liste');
 	// Permet entre autres d'ajouter les classes a la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = _SPIPLISTES_PREFIX;
 	$sous_rubrique = "liste_gerer";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
+	echo($commencer_page(_T('spiplistes:spip_listes') . " - " . $titre_page, $rubrique, $sous_rubrique));
 
 	// la gestion des listes de courriers est reservee aux admins 
 	if($connect_statut != "0minirezo") {
@@ -477,7 +477,9 @@ function exec_spiplistes_liste_gerer () {
 	}
 
 	$page_result .= ""
-		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $titre_page, true)
+		. "<br /><br />\n"
+		. spiplistes_gros_titre($titre_page, '', true)
+		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $sous_rubrique)
 		. debut_gauche($rubrique, true)
 		. spiplistes_boite_info_id(_T('spiplistes:liste_numero'), $id_liste, true)
 		. spiplistes_naviguer_paniers_listes(_T('spiplistes:aller_aux_listes_'), true)

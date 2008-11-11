@@ -140,7 +140,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Complement_tampon_editeur' => "Ajouter le tampon Editeur",
 'Complement_tampon_editeur_desc' => "Cette option vous permet de rajouter le tampon de l'&eacute;diteur en fin de courrier. ",
 'Complement_tampon_editeur_label' => "Ajouter le tampon Editeur en fin de courrier"
-, 'Casier_a_courriers' => "Casier &agrave; courriers"
+, 'casier_a_courriers' => "Casier &agrave; courriers"
 , 'Courriers_en_cours_de_redaction' => 'Courriers en cours de r&eacute;daction',
 'Courriers_prets_a_etre_envoye' => "Courriers pr&ecirc;ts &agrave; &ecirc;tre envoy&eacute;s"
 , 'Courriers_publies' => "Courriers publi&eacute;s"
@@ -238,6 +238,9 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , 'editer_fiche_abonne' => "Editer la fiche de l'abonn&eacute;"
 , 'export_etendu_' => "Export &eacute;tendu "
 , 'exporter_statut' => "Exporter le statut (invit&eacute;, r&eacute;dacteur, etc.)"
+, 'edition_du_courrier' => "Edition du courrier"
+, 'edition_dune_liste' => "Edition d'une liste"
+, 'edition_dun_abonne' => "Edition d'un abonn&eacute;"
 ,
 
 //F
@@ -280,9 +283,13 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , 'generer_patron_' => "G&eacute;n&eacute;rer le patron "
 , 'generer_patron_avant' => "avant le sommaire"
 , 'generer_patron_apres' => "apr&egrave;s le sommaire."
+, 'gestion_du_courrier' => "Gestion du courrier"
+, 'gestion_dune_liste' => "Gestion d'une liste"
+,
 
 //H
-, 'Historique_des_envois' => 'Historique des envois',
+'Historique_des_envois' => 'Historique des envois'
+,
 
 //I
 'info_auto' => 'SPIP-Listes pour spip peut envoyer r&eacute;guli&egrave;rement aux inscrits, l\'annonce des derni&egrave;res nouveaut&eacute;s du site (articles et br&egrave;ves r&eacute;cemment publi&eacute;s).',
@@ -456,7 +463,7 @@ liste."
 'spip_ident' => 'Requiert une identification',
 'smtp_hote' => 'H&ocirc;te',
 'smtp_port' => 'Port',
-'spip_listes' => 'Spip listes',
+'spip_listes' => "Spip listes",
 'suivi' => 'Suivi des abonnements',
 'Suivi_des_abonnements' => 'Suivi des abonnements',
 'sujet_nouveau' => 'Nouveau sujet',

@@ -141,13 +141,13 @@ function exec_spiplistes_import_export(){
 // PAGE CONTENU
 ////////////////////////////////////
 
-	$titre_page = _T('spiplistes:spip_listes');
+	$titre_page = _T('spiplistes:listes_de_diffusion_');
 	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = _SPIPLISTES_PREFIX;
 	$sous_rubrique = "import_export";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
+	echo($commencer_page(_T('spiplistes:spip_listes') . " - " . _T('spiplistes:import_export'), $rubrique, $sous_rubrique));
 
 	// la gestion du courrier est réservée aux admins 
 	if (!$flag_autorise) {
@@ -155,7 +155,9 @@ function exec_spiplistes_import_export(){
 	}       
 
 	$page_result = ""
-		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $titre_page, true)
+		. "<br /><br />\n"
+		. spiplistes_gros_titre($titre_page, '', true)
+		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $sous_rubrique)
 		. debut_gauche($rubrique, true)
 		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)

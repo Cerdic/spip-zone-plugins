@@ -135,15 +135,15 @@ function exec_spiplistes_abonne_edit () {
 // PAGE CONTENU
 ////////////////////////////////////
 
-	$titre_page = _T('spiplistes:spip_listes');
-	// Permet entre autre d'ajouter les classes � la page : <body class='$rubrique $sous_rubrique'>
+	$titre_page = _T('spiplistes:edition_dun_abonne');
+	// Permet entre autre d'ajouter les classes a la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = _SPIPLISTES_PREFIX;
 	$sous_rubrique = "abonne_edit";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
+	echo($commencer_page(_T('spiplistes:spip_listes') . " - " . $titre_page, $rubrique, $sous_rubrique));
 	
-	// la gestion des abonn�s est r�serv�e aux admins et � l'auteur
+	// la gestion des abonnes est reservee aux admins et a l'auteur
 	if(!$flag_editable) {
 		// erreur sur appel de page ?
 		if(!($id_auteur > 0)) {
@@ -153,7 +153,9 @@ function exec_spiplistes_abonne_edit () {
 	}
 	
 	$page_result = ""
-		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'), true)
+		. "<br /><br />\n"
+		. spiplistes_gros_titre($titre_page, '', true)
+		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $sous_rubrique)
 		. debut_gauche($rubrique, true)
 		. spiplistes_boite_info_id(_T('titre_cadre_numero_auteur'), $id_auteur, true, 'id_auteur')
 		. creer_colonne_droite($rubrique, true)
@@ -218,7 +220,7 @@ function exec_spiplistes_abonne_edit () {
 			. spiplistes_form_input_radio ('modif_abo', 'suspend', _T('spiplistes:Desabonner_temporaire')
 				, ($modif_abo == 'suspend'), true, false)
 			. fin_cadre_relief(true)
-			// r�silier les abonnements
+			// resilier les abonnements
 			. debut_cadre_relief('', true)
 			. spiplistes_form_input_radio ('modif_abo', 'non', _T('spiplistes:Desabonner_definitif')
 				, (($format_abo == 'non') && ($modif_abo != 'suspend')), true, false)
@@ -262,22 +264,22 @@ function exec_spiplistes_abonne_edit () {
 }
 
 /******************************************************************************************/
-/* SPIP-listes est un syst�me de gestion de listes d'abonn�s et d'envoi d'information     */
-/* par email  pour SPIP.                                                                  */
-/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
+/* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
+/* par email pour SPIP. http://bloog.net/spip-listes                                      */
+/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net                               */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique G�n�rale GNU publi�e par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribu� car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but sp�cifique. Reportez-vous � la Licence Publique G�n�rale GNU  */
-/* pour plus de d�tails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir re�u une copie de la Licence Publique G�n�rale GNU                    */
-/* en m�me temps que ce programme ; si ce n'est pas le cas, �crivez � la                  */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
+/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, �tats-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 ?>

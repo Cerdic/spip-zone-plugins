@@ -4,22 +4,23 @@
 
 // _SPIPLISTES_EXEC_LISTE_EDIT
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
-/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
+/* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
+/* par email pour SPIP. http://bloog.net/spip-listes                                      */
+/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net                               */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
+/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 // $LastChangedRevision$
 // $LastChangedBy$
@@ -42,10 +43,10 @@ function exec_spiplistes_liste_edit(){
 		, $spip_ecran
 		;
 	
-	// initialise les variables postées par le formulaire
+	// initialise les variables postees par le formulaire
 	foreach(array(
 		'new'	// nouvelle liste si 'oui'
-		, 'id_liste'// si modif dans l'éditeur
+		, 'id_liste'// si modif dans l'editeur
 		, 'titre', 'texte'
 		) as $key) {
 		$$key = _request($key);
@@ -90,7 +91,7 @@ function exec_spiplistes_liste_edit(){
 		$titre = filtrer_entites(_T('spiplistes:Nouvelle_liste_de_diffusion'));
 		$texte = "";
 		$clearonfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
-		// les admins ont droit de créer une liste
+		// les admins ont droit de creer une liste
 		$flag_editable = ($connect_statut == "0minirezo");
 	}
 
@@ -112,27 +113,29 @@ function exec_spiplistes_liste_edit(){
 // PAGE CONTENU
 ////////////////////////////////////
 
-	$titre_page = _T('spiplistes:spip_listes');
-	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
+	$titre_page = _T('spiplistes:edition_dune_liste');
+	// Permet entre autres d'ajouter les classes a la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = _SPIPLISTES_PREFIX;
 	$sous_rubrique = "liste_edit";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
+	echo($commencer_page(_T('spiplistes:spip_listes') . " - " . $titre_page, $rubrique, $sous_rubrique));
 
-	// la gestion des listes de courriers est réservée aux admins 
+	// la gestion des listes de courriers est reservee aux admins 
 	if(!$flag_editable) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 
 	$page_result = ""
-		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $titre_page, true)
+		. "<br /><br />\n"
+		. spiplistes_gros_titre($titre_page, '', true)
+		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $sous_rubrique)
 		. debut_gauche($rubrique, true)
 		. spiplistes_boite_info_id(_T('spiplistes:liste_numero'), $id_liste, true)
 		. spiplistes_naviguer_paniers_listes(_T('spiplistes:aller_aux_listes_'), true)
 		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
-		//. spiplistes_boite_autocron() // ne pas géner l'édition
+		//. spiplistes_boite_autocron() // ne pas gener l'edition
 		. spiplistes_boite_info_spiplistes(true)
 		. debut_droite($rubrique, true)
 		;
@@ -169,7 +172,7 @@ function exec_spiplistes_liste_edit(){
 			($id_liste)
 			? "<input type='hidden' name='id_liste' value='$id_liste' />" 
 			: "<input type='hidden' name='new' value='oui' />"
-				// une nouvelle liste est toujours privée
+				// une nouvelle liste est toujours privee
 				. "<input type='hidden' name='statut_nouv' value='"._SPIPLISTES_PRIVATE_LIST."' />"
 			)
 		.	(
@@ -185,7 +188,7 @@ function exec_spiplistes_liste_edit(){
 		. "<br />"
 		. "<strong>"._T('spiplistes:txt_inscription')."</strong>"
 		. "<br />"._T('spiplistes:txt_abonnement')
-		// boite édition texte
+		// boite edition texte
 		. afficher_barre('document.formulaire.texte')
 		. "<textarea id='text_area' name='texte' ".$GLOBALS['browser_caret']." class='formo' rows='".(($spip_ecran == "large") ? 28 : 20)."' cols='40' wrap=soft>"
 		. $texte
@@ -211,22 +214,22 @@ function exec_spiplistes_liste_edit(){
 
 }
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'abonnés et d'envoi d'information     */
-/* par email  pour SPIP.                                                                  */
-/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
+/* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
+/* par email pour SPIP. http://bloog.net/spip-listes                                      */
+/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net                               */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
+/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 ?>

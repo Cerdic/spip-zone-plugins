@@ -54,10 +54,10 @@ function exec_spiplistes_aide () {
 		changer_langue($var_lang);
 	}
 		
-	$meta_info = __plugin_get_meta_infos(_SPIPLISTES_PREFIX); // dir et version
-	$info = plugin_get_infos($meta_info['dir']);
+	$info = plugin_get_infos(__plugin_get_meta_dir(_SPIPLISTES_PREFIX));
 	$nom = typo($info['nom']);
-
+	$version = typo($info['version']);
+		
 	$fichier_aide_spiplistes = is_readable($f = _DIR_PLUGIN_SPIPLISTES . "docs/"._SPIPLISTES_EXEC_PREFIX."aide_".$var_lang."html")
 		? $f
 		: _DIR_PLUGIN_SPIPLISTES . "docs/"._SPIPLISTES_EXEC_PREFIX."aide_fr.html"
@@ -76,7 +76,7 @@ function exec_spiplistes_aide () {
 			);
 		$replacement = array(
 			$nom
-			, __plugin_get_meta_version(_SPIPLISTES_PREFIX)
+			, $version
 			, ''
 			, ''
 			, _T('spiplistes:_aide')

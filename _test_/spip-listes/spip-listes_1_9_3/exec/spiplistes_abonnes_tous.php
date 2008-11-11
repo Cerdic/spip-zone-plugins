@@ -86,13 +86,13 @@ function exec_spiplistes_abonnes_tous () {
 // PAGE CONTENU
 ////////////////////////////////////
 
-	$titre_page = _T('spiplistes:spip_listes');
+	$titre_page = _T('spiplistes:Suivi_des_abonnements');
 	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = _SPIPLISTES_PREFIX;
 	$sous_rubrique = "abonnes_tous";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
+	echo($commencer_page(_T('spiplistes:spip_listes') . " - " . $titre_page, $rubrique, $sous_rubrique));
 	
 	// la gestion des abonnés est réservée aux admins 
 	if(!$flag_autorise) {
@@ -100,7 +100,9 @@ function exec_spiplistes_abonnes_tous () {
 	}
 	
 	$page_result = ""
-		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $titre_page, true)
+		. "<br /><br />\n"
+		. spiplistes_gros_titre($titre_page, '', true)
+		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $sous_rubrique)
 		. debut_gauche($rubrique, true)
 		;
 

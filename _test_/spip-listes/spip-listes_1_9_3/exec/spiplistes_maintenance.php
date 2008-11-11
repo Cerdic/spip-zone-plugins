@@ -181,13 +181,13 @@ function exec_spiplistes_maintenance () {
 // PAGE CONTENU
 ////////////////////////////////////
 
-	$titre_page = _T('spiplistes:spip_listes');
+	$titre_page = _T('titre_admin_tech');
 	// Permet entre autres d'ajouter les classes a' la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = _SPIPLISTES_PREFIX;
 	$sous_rubrique = "maintenance";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
+	echo($commencer_page(_T('spiplistes:spip_listes') . " - " . trim($titre_page), $rubrique, $sous_rubrique));
 
 	if(!$flag_autorise) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
@@ -195,8 +195,8 @@ function exec_spiplistes_maintenance () {
 
 	$page_result = ""
 		. "<br /><br />\n"
-		. spiplistes_gros_titre(_T('titre_admin_tech'), '', true)
-		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $titre_page, true)
+		. spiplistes_gros_titre($titre_page, '', true)
+		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $sous_rubrique)
 		. debut_gauche($rubrique, true)
 		. __plugin_boite_meta_info(_SPIPLISTES_PREFIX, true)
 		. creer_colonne_droite($rubrique, true)
