@@ -46,7 +46,7 @@ div.cs_infos div.cs_details_outil { font-size:85%; margin-top:0.8em; border-top:
 
 div.cs_action_rapide { border:1px dotted; margin-bottom:1em; padding-bottom:0.4em; background-color:#F0EEEE; }
 div.cs_action_rapide select.ar_select { width:auto; display:inline; }
-#ar_edit_info { font-size:85%; }
+div.cs_action_rapide .ar_edit_info { font-size:85%; font-style:italic; }
 
 .cs_raccourcis {
 	list-style-type:none; padding:0; margin: 0; list-style-image: none; list-style-position: outside;

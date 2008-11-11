@@ -55,7 +55,7 @@ function ar_load() {
 		jQuery("#ar_edit_info").html(ar_valeur_vide);
 		jQuery("#url_objet_input").removeClass("cs_hidden");
 	}
-	jQuery("#ar_edit_info").parent().removeClass("cs_hidden");
+	jQuery("#ar_edit_info").removeClass("cs_hidden");
 }
 
 </script>
@@ -93,7 +93,7 @@ function ar_load() {
 	  <b><:couteauprive:urls_url_objet:></b>&nbsp;<span id="ar_url_propre"> </span><br />
 	  <span id="label_url_calculee" style="font-weight:bold;">[(#REM|sinon{<:couteauprive:urls_url_calculee:>}|replace{@type@,#ENV*{type_urls}})]</span>  <span id="ar_url_calculee">&nbsp;</span><br />
 	  <label><b><:couteauprive:urls_nouvelle:></b><input style="width:100%;" id="ar_url_objet" name="ar_url_objet" value="" disabled="disabled"/></label>
-	  <em class="cs_hidden"><span id="ar_edit_info">&nbsp;</span></em>
+	  <div class="ar_edit_info cs_hidden" id="ar_edit_info">&nbsp;</div>
 	 </div>
 	 <div style="text-align:right"><input name="submit" id='url_objet_input' class='fondo' type='submit' disabled="disabled" value="<:couteauprive:urls_enregistrer:>" /></div>
 	 <div id="ar_url_trouvee" class="cs_hidden">||</div>

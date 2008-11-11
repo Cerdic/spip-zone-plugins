@@ -618,8 +618,9 @@ En tant que webmestre vous-m&ecirc;me, vous avez ici les droits de modifier cett
 	'urls_enregistrer' => 'Enregistrer cette URL en base',
 	'urls_nouvelle' => '&Eacute;diter son URL &laquo;&nbsp;propre&nbsp;&raquo;&nbsp;:',
 	'urls_rechercher' => 'Rechercher cet objet en base',
-	'urls_purger_tout' => 'R&eacute;initialiser toutes les URLs stock&eacute;es dans la base&nbsp;:',
+	'urls_purger_tout' => 'R&eacute;initialiser les URLs stock&eacute;es dans la base&nbsp;:',
 	'urls_purger' => 'Tout vider',
+	'urls_purger_tables' => 'Vider les tables s&eacute;lectionn&eacute;es',
 	'urls_base_vide' => 'La base des URLs est vide',
 	'urls_base_total' => 'Il y a actuellement @nb@ URL(s) en base',
 	'attente' => 'Attente...',
@@ -630,6 +631,12 @@ En tant que webmestre vous-m&ecirc;me, vous avez ici les droits de modifier cett
 	'objet_auteur'=>'Auteur',
 	'objet_mot'=>'Mot',
 	'objet_syndic'=>'Site',
+	'objet_articles'=>'Articles',
+	'objet_rubriques'=>'Rubriques',
+	'objet_breves'=>'Br&egrave;ves',
+	'objet_auteurs'=>'Auteurs',
+	'objet_mots'=>'Mots',
+	'objet_syndics'=>'Sites',
 
 );
 

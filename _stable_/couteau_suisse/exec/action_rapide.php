@@ -51,6 +51,24 @@ cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour()
 
 	// renvoie les caracteristiques URLs d'un objet (cas SPIP < 2.0)
 	case 'type_urls_spip':
+		$type_url = $GLOBALS['type_urls']?$GLOBALS['type_urls']:'page';
+		list($type, $table) = explode('_',_request('type_objet'));
+		$id_objet = intval(_request('id_objet'));
+//		sql_fetsel("url_propre", "spip_$type", "id_objet=$id_objet", '', '', 1)
+		$r0 = "SELECT url_propre, titre FROM spip_$table WHERE id_$type=$id_objet";
+		$r = spip_query($r0);
+		if ($r AND $r = spip_fetch_array($r)) { $url_1 = $r['url_propre']; $titre = $r['titre']; }
+		/*charger_generer_url();*/
+		if(!function_exists($fct = "generer_url_$type")) {
+			if($f = include_spip('urls/'.$type_url, false))
+				include_once($f);
+		}
+		$url = function_exists($fct)?$fct($id_objet):'??';
+		$r = spip_query($r0);
+		if ($r AND $r = spip_fetch_array($r)) $url_2 = $r['url_propre'];
+		// url propre en base || titre || url complete || type d'URLs || URL recalculee
+		echo $url_1.'||'.$titre.'||'.$url.'||'.$type_url.'||'.$url_2;
+		break;
 	// renvoie les caracteristiques URLs d'un objet (cas SPIP >= 2.0)
 	case 'type_urls_spip2':
 		$type = _request('type_objet');
@@ -68,14 +86,13 @@ cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour()
 		if (!$row) return false; # Quand $id_objet n'est pas un numero connu
 		list($champ_titre,) = explode(',', $champ_titre, 2);
 		// Calcul de l'URL complete
-//		if(defined('_SPIP19300')) 
-			$url = generer_url_entite($id_objet, $type, '', '', true); // depuis SPIP 2.0
-//			else { charger_generer_url(); $f = "generer_url_$type"; $url = $f($id_objet); } // avant SPIP 2.0
+		$url = generer_url_entite($id_objet, $type, '', '', true);
 		$row2 = !strlen($url2 = $row['url'])
 			// si l'URL n'etait pas presente en base, maintenant elle l'est !
 			?sql_fetsel("url", "spip_urls", "id_objet=$id_objet AND type='$type'", '', '', 1)
 			:array('url'=>$url2);
 		$type = $GLOBALS['type_urls']?$GLOBALS['type_urls']:'page';
+		// url propre en base || titre || url complete || type d'URLs || URL recalculee
 		echo $url2.'||'.$row[trim($champ_titre)].'||'.$url.'||'.$type.'||'.$row2['url'];
 		break;
 

@@ -5,6 +5,7 @@
 include_spip('inc/actions');
 
 function type_urls_action_rapide() {
+	include_spip('public/assembler'); // pour recuperer_fond()
 	$fd = recuperer_fond(defined('_SPIP19300')?'fonds/type_urls':'fonds/type_urls_191', array(
 		'type_urls' => $GLOBALS['type_urls']?$GLOBALS['type_urls']:'page',
 		'ar_num_objet' => _request('ar_num_objet'),

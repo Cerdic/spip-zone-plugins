@@ -21,12 +21,15 @@ cs_log("INIT : action_action_rapide_dist() - Une action rapide a ete demandee !"
 	}
 
 	spip_log("action 'action_rapide' du Couteau suisse : $arg / "._request('submit'));
-//	spip_log($_POST);
+cs_log($_POST);
 
 	switch ($arg) {
 
 	// forms[0] : tout purger (cas SPIP < 2.0)
 	case 'edit_urls_0':
+		foreach(array('articles', 'rubriques', 'breves', 'auteurs', 'mots', 'syndic') as $t)
+			if($table=_request("purger_$t")) spip_query("UPDATE spip_$table SET url_propre = ''");
+		spip_log("OK purge");
 		break;
 	// forms[0] : tout purger (cas SPIP >= 2.0)
 	case 'edit_urls2_0': 
@@ -36,13 +39,22 @@ cs_log("INIT : action_action_rapide_dist() - Une action rapide a ete demandee !"
 
 	// forms[1] : editer un objet (cas SPIP < 2.0)
 	case 'edit_urls_1':
+		list($type, $table) = explode('_',_request('ar_type_objet'));
+		$id = intval(_request('ar_num_objet'));
+		$url = trim(_request('ar_url_objet'));
+		$q = "UPDATE spip_$table SET url_propre="._q($url)." WHERE id_$type=$id";
+		spip_query($q);
+cs_log($q);
+		// ajout de l'objet en URL de redirection pour provoquer un reaffichage
+		if($_POST['redirect']) $_POST['redirect'] .= urlencode("&ar_num_objet=$id&ar_type_objet="._request('ar_type_objet'));
+cs_log($_POST['redirect']);
 		break;
 	// forms[1] : editer un objet (cas SPIP >= 2.0)
 	case 'edit_urls2_1': 
 		$type = _request('ar_type_objet');
-		$id = _request('ar_num_objet');
+		$id = intval(_request('ar_num_objet'));
 		$url = trim(_request('ar_url_objet'));
-		$where = 'id_objet='.sql_quote($id).' AND type='.sql_quote($type);
+		$where = 'id_objet='.$id.' AND type='.sql_quote($type);
 		if(!$url) {
 			sql_delete('spip_urls', $where);
 			spip_log("L'URL $type#$id est supprimee");
