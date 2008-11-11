@@ -689,7 +689,15 @@ function spiplistes_auteurs_auteur_select ($sql_select, $sql_where) {
 
 //CP-20080511
 function spiplistes_auteurs_auteur_delete ($sql_where) {
-	if(($result = sql_delete('spip_auteurs', $sql_where." LIMIT 1")) === false) {
+	// détruire ou mettre à la poubelle ?
+	// SPIP ne détruit pas lui !
+	// dans le doute...
+	// if(($result = sql_delete('spip_auteurs', $sql_where." LIMIT 1")) === false) {
+	if(($result = sql_update(
+					"spip_auteurs"
+					, array('statut' => sql_quote('5poubelle'))
+					, $sql_where . " LIMIT 1"
+				)) === false) {
 		spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
 	}
 	return($result);
