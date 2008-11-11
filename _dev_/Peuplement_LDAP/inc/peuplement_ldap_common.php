@@ -15,7 +15,7 @@ function genere_etape_1(){
         
 	// Formulaire sur la partie centrale
 	debut_droite();
-	$icone = "../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/personal.png";
+	$icone = "../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_icon'];
 	debut_cadre_relief();
 	echo "<br />";
 	echo generer_url_post_ecrire("peuplement_ldap");
@@ -24,7 +24,7 @@ function genere_etape_1(){
 	echo "<input type='hidden' name='peuplement_ldap_etape' value='2' />";
 	echo "<br />";
 	echo "<div style='text-align:right'>";
-	echo "<input type='submit' value='Valider' class='fondo' name='peuplement_ldap_btnvalider' />";
+	echo "<input type='submit' value='"._T('peuplementldap:titre_btn_valider')."' class='fondo' name='peuplement_ldap_btnvalider' />";
 	echo "</div>";
 	echo "</form>";
 	fin_cadre_relief();
@@ -40,7 +40,7 @@ function genere_etape_2($entreesLdap){
 	fin_boite_info();	
 	// Formulaire sur la partie centrale
 	debut_droite();
-	$icone = "../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/personal.png";
+	$icone = "../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_icon'];
 	debut_cadre_relief();
 	echo "<br />";
 	echo generer_url_post_ecrire("peuplement_ldap");
@@ -80,10 +80,13 @@ function genere_etape_3($compte_rendu){
 	debut_boite_info();// Cadre d'information concernant le plugin
 	echo propre(_T('peuplementldap:info_etape_3'));
 	fin_boite_info();
-	
+	echo "<br /><br />";
+	debut_boite_info();
+	echo affiche_legende();
+	fin_boite_info();
 	// Compte rendu des insertions d'auteur
 	debut_droite();
-	$icone = "../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/personal.png";
+	$icone = "../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_icon'];
 	debut_cadre_relief();
 	echo "<br />";
 	bandeau_titre_boite2(_T('peuplementldap:titre_form_etape_3'), $icone, $couleur_claire, "black");
@@ -138,9 +141,21 @@ function insere_auteur($dn,$mail){
  */
 function getImage($id_result){
 	switch($id_result){
-		case 0: return "no.png";
-		case 1: return "status_unknown.png";
-		case 2: return "ok.png";
+		case 0: return $GLOBALS['peuplement_ldap_insert_ko'];
+		case 1: return $GLOBALS['peuplement_ldap_insert_doublon'];
+		case 2: return $GLOBALS['peuplement_ldap_insert_ok'];
 	}
 }
+
+
+function affiche_legende(){
+	$legende = "<strong>"._T('peuplementldap:legende')."</strong><br />";
+	$legende.= "<img src=\"../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_insert_ok']."\" />&nbsp;"._T('peuplementldap:legende_ok')."<br />";
+	$legende.= "<img src=\"../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_insert_doublon']."\" />&nbsp;"._T('peuplementldap:legende_doublon')."<br />";
+	$legende.= "<img src=\"../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_insert_ko']."\" />&nbsp;"._T('peuplementldap:legende_ko')."<br />";
+	
+	return $legende;
+}
+
+
 ?>
