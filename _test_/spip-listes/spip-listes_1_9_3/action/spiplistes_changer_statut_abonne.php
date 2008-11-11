@@ -31,8 +31,6 @@ function action_spiplistes_changer_statut_abonne_dist () {
 
 	if(($id_auteur > 0) && ($connect_id_auteur > 0)) {
 		
-		spiplistes_log($action);
-		
 		if ($action=='format') {
 			//modification du format abonne ('html', 'texte' ou 'non')
 			$statut = _request('statut');
