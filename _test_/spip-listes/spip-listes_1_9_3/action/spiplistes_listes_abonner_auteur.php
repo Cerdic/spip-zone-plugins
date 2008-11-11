@@ -68,7 +68,7 @@ function action_spiplistes_listes_abonner_auteur_dist () {
 				}
 			}
 			else {
-				spiplistes_log("DATABASE ERROR: [" . spip_sql_errno() . "] " . spip_sql_error());
+				spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
 			}
 			$nb_elligibles = count($elligibles);
 		}
