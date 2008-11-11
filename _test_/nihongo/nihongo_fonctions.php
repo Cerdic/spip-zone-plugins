@@ -97,7 +97,7 @@ function nihongo_convert($str,$mode="hiragana",$parse_char="."){
 // mode: 
 // hiragana, h (default, facultatif): affichage en hiragana
 // katakana, k                      : affichage en katakana
-function nihongo_random($str,$mode="hiragana"){
+function nihongo_random($str="",$mode="hiragana"){
     // mode ?
     if ($mode=="katakana"||$mode=="k") {
         $nihongo_katakana_table = nihongo_katakana_table();
@@ -119,8 +119,47 @@ function nihongo_random($str,$mode="hiragana"){
     $output .= "<dt>&#$html_val;</dt>\n";
     $output .= "<dd>$romaji</dd>\n";
     $output .= "</dl>\n";
-    
 
+    return $output; 
+}
+
+// affiche le tableau de correspondance 
+//
+// mode: 
+// hiragana, h (default, facultatif): affichage en hiragana
+// katakana, k                      : affichage en katakana
+function nihongo_chart($str="",$mode="hiragana"){
+    // mode ?    
+    if ($mode=="katakana"||$mode=="k") {
+        $nihongo_katakana_table = nihongo_katakana_table();
+        $charset_table = $nihongo_katakana_table[1];
+        $charset_ref = $nihongo_katakana_table[0];
+    }    else {
+        $nihongo_hiragana_table = nihongo_hiragana_table();
+        $charset_table = $nihongo_hiragana_table[1];
+        $charset_ref = $nihongo_hiragana_table[0];
+    } 
+    
+    // parametre
+    $nb_cols = 10; 
+    
+    // action
+    $nb_rows = (int) (count($charset_table)/$nb_cols)+1;    
+    $output = "<table class=\"nihongo\">\n";                      
+    for ($i=0 ; $i<$nb_rows ; $i++) {
+        $output .= "<tr>";
+        for ($j=0 ; $j<$nb_cols ; $j++) {
+            $p = $i*$nb_cols + $j;
+            $val = "";
+            if (isset($charset_table[$p])) {
+                $val = "<dl><dt>".nihongo_convert($charset_table[$p],$mode)."</dt><dd>$charset_table[$p]</dd></dl>";                
+            } 
+            $output .=  "<td>$val</td>";
+        }
+        $output .= "</tr>\n";
+    }
+    $output .= "</table>\n";
+    
     return $output; 
 }
 
