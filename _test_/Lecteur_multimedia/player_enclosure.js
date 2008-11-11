@@ -170,49 +170,8 @@ function player_play(i){
 	jQuery(".play_:eq("+i+")").addClass("play_on");
 
 	if(soundManager.url != 'undefined'){
-		soundManager.createSound({
-			id:'son_'+i,url:mp3Array[i],
-			onfinish:function(){
-				/*console.log(this.sID+' finished playing'),*/
-				player_play(i+1)
-			},     
-			onid3:function(){
-				/*console.log(this.id3['songname'])*/
-			},                
-			onload:function(){
-				/*console.log(this.sID+' finished loading')*/
-			},              
-			whileloading:function(){
-				/*console.log('sound '+this.sID+' loading, '+this.bytesLoaded+' of '+this.bytesTotal);*/
-				var timer = this.bytesLoaded / this.bytesTotal * 100 ;
-				var minutes = Math.floor(this.durationEstimate / 1000 / 60) ;
-				var secondes = Math.floor((this.durationEstimate - minutes*1000*60) /1000);
-				jQuery(".duration").html(minutes + "'" + secondes +"''");
-				jQuery("#loading").css({width:Math.round(timer) +"%"});
-			}, // callback function for "download progress update" (X of Y bytes received)
-			onplay:function(){
-				jQuery("#loading").css("cursor","hand");
-				var minutes = Math.floor(this.durationEstimate / 1000 / 60) ;
-				var secondes = Math.floor((this.durationEstimate - minutes*1000*60) /1000);
-				jQuery(".duration").html(minutes + "'" + secondes +"''");		 
-			},// callback for "play" start
-			whileplaying:function(){
-				var minutes = Math.floor(this.position / 1000 / 60) ;
-				var secondes = Math.floor((this.position - minutes*1000*60) /1000);
-				var timer2 = this.position / this.durationEstimate * 100 ;
-				jQuery("#position").css({width:Math.round(timer2) +"%"});
-				jQuery(".position").html(minutes + "'" + secondes +"''");
-			},// callback during play (position update)
-			//'onstop':unLoad(this.sID),     // callback for "user stop"
-			//'onbeforefinish': null,        // callback for "before sound finished playing (at [time])"
-			//'onbeforefinishtime': 5000,    // offset (milliseconds) before end of sound to trigger beforefinish..
-			//'onbeforefinishcomplete':null, // function to call when said sound finishes playing
-			//'onjustbeforefinish':null,     // callback for [n] msec before end of current sound
-			//'onjustbeforefinishtime':200,  // [n] - if not using, set to 0 (or null handler) and event will not fire.
-			//'multiShot': true,             // let sounds "restart" or layer on top of each other when played multiple times..
-			//'pan': 0,                      // "pan" settings, left-to-right, -100 to 100
-			'volume': 100    	
-	 	 });
+		
+		player_creer_son(i);
 	  
 	  	//jQuery("span#now_playing").html(i+"("+mp3Array[i]+")"+track_index);
 	  	//jQuery("span#now_playing").append("son_"+i.id3.artist);
@@ -281,6 +240,53 @@ function player_play(i){
 		// Fin modification
 	}
 }
+
+function player_creer_son(i){
+			soundManager.createSound({
+			id:'son_'+i,url:mp3Array[i],
+			onfinish:function(){
+				/*console.log(this.sID+' finished playing'),*/
+				player_play(i+1)
+			},     
+			onid3:function(){
+				/*console.log(this.id3['songname'])*/
+			},                
+			onload:function(){
+				/*console.log(this.sID+' finished loading')*/
+			},              
+			whileloading:function(){
+				/*console.log('sound '+this.sID+' loading, '+this.bytesLoaded+' of '+this.bytesTotal);*/
+				var timer = this.bytesLoaded / this.bytesTotal * 100 ;
+				var minutes = Math.floor(this.durationEstimate / 1000 / 60) ;
+				var secondes = Math.floor((this.durationEstimate - minutes*1000*60) /1000);
+				jQuery(".duration").html(minutes + "'" + secondes +"''");
+				jQuery("#loading").css({width:Math.round(timer) +"%"});
+			}, // callback function for "download progress update" (X of Y bytes received)
+			onplay:function(){
+				jQuery("#loading").css("cursor","hand");
+				var minutes = Math.floor(this.durationEstimate / 1000 / 60) ;
+				var secondes = Math.floor((this.durationEstimate - minutes*1000*60) /1000);
+				jQuery(".duration").html(minutes + "'" + secondes +"''");		 
+			},// callback for "play" start
+			whileplaying:function(){
+				var minutes = Math.floor(this.position / 1000 / 60) ;
+				var secondes = Math.floor((this.position - minutes*1000*60) /1000);
+				var timer2 = this.position / this.durationEstimate * 100 ;
+				jQuery("#position").css({width:Math.round(timer2) +"%"});
+				jQuery(".position").html(minutes + "'" + secondes +"''");
+			},// callback during play (position update)
+			//'onstop':unLoad(this.sID),     // callback for "user stop"
+			//'onbeforefinish': null,        // callback for "before sound finished playing (at [time])"
+			//'onbeforefinishtime': 5000,    // offset (milliseconds) before end of sound to trigger beforefinish..
+			//'onbeforefinishcomplete':null, // function to call when said sound finishes playing
+			//'onjustbeforefinish':null,     // callback for [n] msec before end of current sound
+			//'onjustbeforefinishtime':200,  // [n] - if not using, set to 0 (or null handler) and event will not fire.
+			//'multiShot': true,             // let sounds "restart" or layer on top of each other when played multiple times..
+			//'pan': 0,                      // "pan" settings, left-to-right, -100 to 100
+			'volume': 100    	
+	 		});	
+
+}	
 
 function player_stop(){
 	//reinit d'un autre play
