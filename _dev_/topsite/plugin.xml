@@ -15,7 +15,7 @@
 		Permet de compter les clics entrant gr&acirc;ce &agrave; l'identifiant d'un site enregsitr&eacute; comme site syndiqu&eacute;.
 	</description>
 	
-	<prefix>topsite</prefixe>
+	<prefix>topsite</prefix>
 	<install>base/topsite_init.php</install>
 	 <pipeline>
 	  <nom>affichage_final</nom>
