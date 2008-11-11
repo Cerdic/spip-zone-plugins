@@ -6,8 +6,8 @@
 </multi>
 </nom>
 <etat>test</etat>
-<version>0.0a</version>
-<auteur>Laura Primo, Javier San Juan, Mart&iacute;n Gait&aacute;n</auteur>
+<version>0.03a</version>
+<auteur>Javier San Juan, Mart&iacute;n Gait&aacute;n</auteur>
 <icon>couleurs_spip.png</icon>
 <description>
 	<multi>[fr]Pour automatiser l' assignation des mots cl&eacute;s. Compare le texte de l' article avec les mots cl&eacute;s et assigne les mots cl&eacute;s selectione&eacute;s &agrave; l'article.
