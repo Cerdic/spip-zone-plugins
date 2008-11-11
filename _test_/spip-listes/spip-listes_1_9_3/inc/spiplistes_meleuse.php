@@ -10,10 +10,10 @@
 /*                                                                                        */
 /* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but specifique. Reportez-vous à la Licence Publique Generale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Generale GNU                    */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
 /* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
@@ -34,19 +34,19 @@ include_spip('inc/spiplistes_api_globales');
 	- id_auteur (pour reprendre l'adresse mail de id_auteur)
 	- id_courrier (le courrier a dupliquer/envoyer)
 	
-	la queue (spip_auteurs_courriers) a été remplie par cron_spiplistes_cron()
+	la queue (spip_auteurs_courriers) a ete remplie par cron_spiplistes_cron()
 	se sert de la queue pour ventiler les envois par lots
 
 	le courrier (spip_courriers) doit avoir date <= time() et statut 'encour'
-	si email_test, la meleuse envoie le courrier à email_test, 
+	si email_test, la meleuse envoie le courrier a email_test, 
 		supprime email_test du courrier 
 		et repositionne le statut du courrier en 'redac'
 	si pas email_test mais id_liste, 
 		regarde la queue d'envois (spip_auteurs_courriers) 
-		et passe le statut du courrier (spip_courriers) à :
+		et passe le statut du courrier (spip_courriers) a :
 			'publie' si type == 'nl' (newsletter)
-			'auto' si type == 'auto' (liste programmée)
-		et envoie les courriers précisés aux abonnés de cette liste
+			'auto' si type == 'auto' (liste programmee)
+		et envoie les courriers precises aux abonnes de cette liste
 		et supprime l'identifiant du courrier dans la queue d'envois (spip_auteurs_courriers)
 
 	renvoie:
@@ -68,7 +68,7 @@ function spiplistes_meleuse ($last_time) {
 	
 	include_once(_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
 
-	// initialise les options (préférences)
+	// initialise les options (preferences)
 	foreach(array(
 		'opt_simuler_envoi'
 		, 'opt_suspendre_meleuse'
@@ -106,7 +106,7 @@ spiplistes_log($prefix_log.$nb_etiquettes." job(s), distribution...", _SPIPLISTE
 		$nomsite = $GLOBALS['meta']['nom_site'];
 		$urlsite = $GLOBALS['meta']['adresse_site'];
 
-		// prépare le tampon editeur
+		// prepare le tampon editeur
 		if(
 			($opt_ajout_tampon_editeur == 'oui')
 			&& !empty($tampon_patron)
@@ -132,7 +132,7 @@ spiplistes_log($prefix_log.$nb_etiquettes." job(s), distribution...", _SPIPLISTE
 			);
 spiplistes_log($prefix_log."etiquette en cours pour id_courrier #$id_courrier", _SPIPLISTES_LOG_DEBUG);
 		} else {
-			// un vieux bug dans une ancienne version, eradiqué depuis (j'espère ;-)
+			// un vieux bug dans une ancienne version, eradique depuis (j'espere ;-)
 spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Supprimer cette etiquette manuellement !");
 		}
 		
@@ -152,7 +152,7 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 			$nb_emails = array();
 			
 			// compteur pour la session uniquement
-			// le total de chaque sera ajouté en fin de session
+			// le total de chaque sera ajoute en fin de session
 			$nb_emails_envoyes =
 				$nb_emails_echec = 
 				$nb_emails_non_envoyes = 
@@ -167,11 +167,11 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 			//////////////////////////
 			// Determiner email de l emetteur
 			if($is_a_test = email_valide($email_test)) {
-				// courrier à destination adresse email de test
+				// courrier a destination adresse email de test
 				$str_log .= " TO: $email_test (TEST)";
 			} 
 			else if($id_liste > 0) {
-				// courrier à destination des abonnés d'une liste
+				// courrier a destination des abonnes d'une liste
 				$total_abonnes = spiplistes_listes_nb_abonnes_compter($id_liste);
 				$str_log .= " TO id_liste #$id_liste ($total_abonnes users)"; 
 	
@@ -239,7 +239,7 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 				}
 			}
 			
-			// corrige les liens relatifs (celui de texte a déjà été corrigé par la trieuse (cron)
+			// corrige les liens relatifs (celui de texte a deja ete corrige par la trieuse (cron)
 			foreach(array('pied_page_html', 'pied_page_texte'
 				, 'pied_rappel_html', 'pied_rappel_texte', 'tampon_html', 'tampon_texte') as $key) {
 				if(!empty($$key)) {
@@ -273,12 +273,12 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 						, "email=".sql_quote($email_test)." LIMIT 1");
 				}
 				else {
-					// Pour mémo: les étiquettes sont créées par la trieuse
+					// Pour memo: les etiquettes sont creees par la trieuse
 					// ou directement en backoffice 
 					// - pour les envois de test
 					// - pour les envoyer maintenant des courriers
 					
-					// Traitement d'une liasse d'étiquettes
+					// Traitement d'une liasse d'etiquettes
 					// un id pour ce processus (le tampon est unique par liasse)
 					$id_process = intval(substr(creer_uniqid(),0,5));
 					
@@ -290,7 +290,7 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 							, "etat=".sql_quote('')." AND id_courrier=".sql_quote($id_courrier)." LIMIT $limit"
 					);
 					
-					// prendre la liasse des etiquettes tamponnées
+					// prendre la liasse des etiquettes tamponnees
 					$sql_adresses_dest = sql_select(
 						  array('a.nom', 'a.id_auteur', 'a.email')
 						, array('spip_auteurs AS a', 'spip_auteurs_courriers AS b')
@@ -362,7 +362,7 @@ spiplistes_log($prefix_log."total_abos: $total_abonnes, en_cour: $nb_destinatair
 									$page_texte = spiplistes_personnaliser_courrier($page_texte, $id_auteur);
 								}
 								
-								// le &amp; semble poser problème sur certains MUA. A suivre...
+								// le &amp; semble poser probleme sur certains MUA. A suivre...
 								$_url = preg_replace(',(&amp;),','&', $_url);
 								switch($format_abo) {
 									case 'html':
@@ -474,7 +474,7 @@ spiplistes_log($prefix_log."envoi OK. Supprimer queue $id_process", _SPIPLISTES_
 				$str_log .= " (HTML: ".$nb_emails['html'].") (TEXT: ".$nb_emails['texte'].") (NONE: $nb_emails_non_envoyes)";
 
 				///////////////////////
-				// si courrier pas terminé, redemande la main au CRON, sinon nettoyage.
+				// si courrier pas termine, redemande la main au CRON, sinon nettoyage.
 				if($t = spiplistes_courriers_en_queue_compter("id_courrier=".sql_quote($id_courrier))) {
 					$str_log .= " LEFT $t jobs"; 
 				}
@@ -496,7 +496,7 @@ spiplistes_log($prefix_log."envoi OK. Supprimer queue $id_process", _SPIPLISTES_
 	spiplistes_log($str_log);
 
 	if(($ii = spiplistes_courriers_total_abonnes()) > 0) {
-		// il en reste après la meleuse ? Signale au CRON tache non terminée
+		// il en reste apres la meleuse ? Signale au CRON tache non terminee
 		$nb_etiquettes = spiplistes_courriers_en_queue_compter("etat=".sql_quote(''));
 		spiplistes_log($prefix_log."courriers prets au depart (".$nb_etiquettes."/".$ii.")");
 		$last_time = -$last_time;
@@ -522,7 +522,7 @@ function spiplistes_listes_langue ($id_liste) {
 
 //CP-20080608 :: personnalisation du courrier
 // recherche/remplace les tags _AUTEUR_CLE_ en masse dans le corps du message.
-// (toutes les cles présentes dans la table *_auteur sont utilisables)
+// (toutes les cles presentes dans la table *_auteur sont utilisables)
 function spiplistes_personnaliser_courrier ($corps, $id_auteur) {
 
 	if($auteur = sql_fetsel("*", 'spip_auteurs', "id_auteur=".sql_quote($id_auteur), '','', 1)) {
@@ -552,10 +552,10 @@ function spiplistes_personnaliser_courrier ($corps, $id_auteur) {
 /*                                                                                        */
 /* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but specifique. Reportez-vous à la Licence Publique Generale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Generale GNU                    */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
 /* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
