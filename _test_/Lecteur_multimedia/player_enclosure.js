@@ -27,21 +27,12 @@ mp3Titles = new Array();
 
 flvArray = new Array();
 flvTitles = new Array();
-	
-function Player_init(url_player) {
-	soundManager.onload = function() {
-		// soundManager is initialised, ready to use. Create a sound for this demo page.
-		soundManager.createSound('aDrumSound',url_player);
-	}
-}
-
-// Nouvelle methode pour les tableaux// Retourne la premiere occurence correspondant, sinon falseArray.prototype.contains = function (ele) {	for (var i = 0; i < this.length; i++) {		if (this[i] == ele) {			return true;		}	}	return false;};
 
 jQuery(document).ready(function(){
 	//lecteur_debug();
 	lecteur_multimedia_init();});function lecteur_multimedia_init(){
 
-	var aff= jQuery("a[@rel='enclosure'][@hrefjQuery=mp3]").size(); 
+	var aff= jQuery("a[@rel='enclosure'][@href$=mp3]").size(); 
 
 	//jQuery("body").css({background:"#FF0000"});
 	// preparer un plan B si flash < 8
@@ -179,7 +170,11 @@ function player_play(i){
 	live_track = i ;
 
 	//jQuery("span.play_:eq("+i+")").html("stop").addClass("play_on");		
-	jQuery("span.play_:eq("+i+")").html("<img src='" + image_pause + "'/>").addClass("play_on");	// i c pas forcemment bon si t'as un player avant le lien, il faut retrancher le nb d'item de la playlist du lecteur (ne pas mettre enclosure aux deux ?)	
+	jQuery("span.play_:eq("+i+")").html("<img src='" + image_pause + "'/>").addClass("play_on");	
+	// i c pas forcemment bon si t'as un player avant le lien, il faut retrancher le nb d'item de la playlist du lecteur 
+	// (ne pas mettre enclosure aux deux ?)	
+	// limiter une playliste a son parent plutot qu'a la page ?
+	
 	jQuery(".play_:eq("+i+")").addClass("play_on");
 
 	if(soundManager.url != 'undefined'){
@@ -345,6 +340,17 @@ function reset_boutons(){
 	jQuery(".position").html("0'00''");
 	jQuery("#position,#loading").width(0);
 }
+
+
+function Player_init(url_player) {
+	soundManager.onload = function() {
+		// soundManager is initialised, ready to use. Create a sound for this demo page.
+		soundManager.createSound('aDrumSound',url_player);
+	}
+}
+
+// Nouvelle methode pour les tableaux// Retourne la premiere occurence correspondant, sinon falseArray.prototype.contains = function (ele) {	for (var i = 0; i < this.length; i++) {		if (this[i] == ele) {			return true;		}	}	return false;};
+
 
 // lecteur video
 // doc : http://flv-player.net/players/js/documentation/

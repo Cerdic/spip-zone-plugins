@@ -1,3 +1,5 @@
+div.movieContainer { top: 0; } /* 1 pixel contenant le player */
+
 .radiobox{
 	margin:10px 0px 10px 0px;
 	padding:0px;
