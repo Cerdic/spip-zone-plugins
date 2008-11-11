@@ -197,7 +197,9 @@ function spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste) {
 			$nb_listes++;
 		}
 		if(!empty($sql_where)) {
-			$result = sql_delete($sql_table, $sql_where);
+			if(($result = sql_delete($sql_table, $sql_where)) === false) {
+				spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+			}
 		}
 	}
 	spiplistes_log("API: listes_desabonner id_auteur #$id_auteur to $nb_listes liste(s) "
@@ -209,6 +211,7 @@ function spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste) {
 function spiplistes_abonnements_supprimer ($sql_whereq) {
 	return(sql_delete('spip_auteurs_listes', $sql_whereq));
 }
+
 
 //CP-20080508 : dans la table des abonnements
 function spiplistes_abonnements_compter ($sql_whereq = "") {
@@ -309,6 +312,10 @@ function spiplistes_listes_nb_abonnes_compter ($id_liste = 0, $preciser = false)
 	return($total);
 }
 
+function spiplistes_desabonner_auteur ($id_auteur) {
+	
+}
+
 //CP-20080509: renvoie email emetteur d'une liste
 function spiplistes_listes_email_emetteur ($id_liste = 0) {
 	$id_liste = intval($id_liste);
@@ -365,12 +372,10 @@ function spiplistes_courriers_en_queue_modifier ($array_set, $sql_whereq) {
 
 // CP-20080510
 function spiplistes_courriers_en_queue_supprimer ($sql_whereq) {
-	return(
-		sql_delete(
-			'spip_auteurs_courriers'
-			, $sql_whereq
-		)
-	);
+	if(($result = sql_delete('spip_auteurs_courriers', $sql_whereq)) === false) {
+		spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+	}
+	return($result);
 }
 
 // CP-20080621
@@ -395,6 +400,17 @@ function spiplistes_courriers_en_queue_premier ($select, $where) {
 function spiplistes_format_abo_suspendre ($id_auteur) {
 	return(spiplistes_format_abo_modifier($id_auteur));
 }
+
+//CP2008111 supprimer le format d'un id_auteur
+function spiplistes_format_abo_supprimer ($id_auteur) {
+	if(($id_auteur = intval($id_auteur)) > 0) {
+		if(($result = sql_delete("spip_auteurs_elargis", "id_auteur=".sql_quote($id_auteur))) === false) {
+			spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+		}
+	}
+	return($result);
+}
+
 
 // modifier le format abonne
 // si id_auteur, celui-ci uniquement
@@ -673,7 +689,10 @@ function spiplistes_auteurs_auteur_select ($sql_select, $sql_where) {
 
 //CP-20080511
 function spiplistes_auteurs_auteur_delete ($sql_where) {
-	return(sql_delete('spip_auteurs', $sql_where." LIMIT 1"));
+	if(($result = sql_delete('spip_auteurs', $sql_where." LIMIT 1")) === false) {
+		spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+	}
+	return($result);
 }
 
 //CP-20080511

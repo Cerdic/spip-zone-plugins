@@ -185,8 +185,8 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn()", _SPIPLISTES_LOG_DEBUG);
 
 
 // Abonnement d'un visiteur.
-// Si adresse_mail déjà dans la base, rajoute l'abonnement
-// sinon, créé un login à partir de l'email et l'abonne
+// Si adresse_mail deja dans la base, rajoute l'abonnement
+// sinon, cree un login a partir de l'email et l'abonne
 // Dans ces deux cas, renvoie un mail de confirmation.
 function spiplistes_formulaire_inscription ($mail_inscription_, $type, $acces_membres, $formulaire) {
 	
@@ -249,7 +249,7 @@ spiplistes_log("### : ->".$mail_inscription_, _SPIPLISTES_LOG_DEBUG);
 				$reponse_formulaire = _T('form_forum_access_refuse');
 			}
 			else if($statut == 'nouveau') {
-				// nouveau. N'a pas confirmé (pas reçu mail de confirmation ?)
+				// nouveau. N'a pas confirme (pas recu mail de confirmation ?)
 				if($id_auteur > 1) {
 					spiplistes_auteurs_auteur_delete("id_auteur=".sql_quote($id_auteur));
 				}
@@ -302,7 +302,7 @@ spiplistes_log("message:".$message, _SPIPLISTES_LOG_DEBUG);
 			//verify suppl_abo is correct
 			if($desabo!="oui" && $type_abo!="texte" && $type_abo!="html") return;
 			
-			// inscription d'un abonné
+			// inscription d'un abonne
 			if($login_) {
 				if(sql_count(
 						spiplistes_auteurs_auteur_select('id_auteur', "email=".sql_quote($mail_inscription_))
@@ -312,7 +312,7 @@ spiplistes_log("message:".$message, _SPIPLISTES_LOG_DEBUG);
 					}
 				}
 				else {
-					// n'existe pas, création du compte ...
+					// n'existe pas, creation du compte ...
 					$id_abo = 
 						// en SPIP 192 & 193, renvoie insert_id
 						spiplistes_auteurs_auteur_insertq(
@@ -331,7 +331,7 @@ spiplistes_log("message:".$message, _SPIPLISTES_LOG_DEBUG);
 				spiplistes_format_abo_modifier($id_abo, $type_abo);
 			}
 	
-			// abonnement aux listes demandées
+			// abonnement aux listes demandees
 			if(
 				is_array($listes_demande)
 				&& count($listes_demande)
@@ -430,7 +430,7 @@ spiplistes_log("inscription : ->".$mail_inscription_, _SPIPLISTES_LOG_DEBUG);
 	
 	} // end if($mail_valide && $nom_inscription_)
 	else {
-		//Non c'è email o non è valida
+		//Non c'ï¿½ email o non ï¿½ valida
 		if($mail_inscription_ && !$mail_valide && $verify_source_fond) {
 			$reponse_formulaire =_T('spiplistes:erreur_adresse');
 		}
@@ -448,7 +448,7 @@ function spiplistes_login_from_email ($mail) {
 		return(false);
 	}
 
-	// récupère la partie gauche de @
+	// recupere la partie gauche de @
 	$login_tmp = ereg_replace(
 		"[^a-z0-9]"
 		, ""
@@ -459,7 +459,7 @@ function spiplistes_login_from_email ($mail) {
 		$login_tmp = "user";
 	}
 
-	// demande la liste des logins pour assurer unicité
+	// demande la liste des logins pour assurer unicite
 	$sql_result = sql_select('login', 'spip_auteurs');
 	$logins_base = array();
 	while($row = sql_fetch($sql_result)) {

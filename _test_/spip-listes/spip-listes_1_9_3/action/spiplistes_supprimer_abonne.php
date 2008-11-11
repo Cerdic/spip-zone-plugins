@@ -13,8 +13,6 @@
 	retourne sur redirect si precise
 */
 
-// CP-20080324: ce script de SPIP-Listes-V n'est pas encore utilise. A conserver
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spiplistes_api_globales');
@@ -28,8 +26,6 @@ function action_spiplistes_supprimer_abonne_dist () {
 	//global $connect_id_auteur;
 	$connect_id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 		
-//spiplistes_log("action_spiplistes_supprimer_abonne_dist() <<", _SPIPLISTES_LOG_DEBUG);
-
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_auteur = intval($securiser_action());
 	$redirect = urldecode(_request('redirect'));
@@ -47,16 +43,25 @@ function action_spiplistes_supprimer_abonne_dist () {
 				($id_auteur > 0)
 				&& ($statut=='6forum') 
 			) {
-				sql_delete("spip_auteurs_courriers", "id_auteur=".sql_quote($id_auteur));
-				sql_update(
-					"spip_auteurs"
-					, "statut=".sql_quote('5poubelle')
-					, "id_auteur=".sql_quote($id_auteur)." LIMIT 1"
-				);
-				spiplistes_format_abo_modifier($id_auteur, 'non');
-
-				// garde une petite trace...
-				spiplistes_log("ID_AUTEUR #$id_auteur deleted by ID_AUTEUR #$connect_id_auteur");
+				$sql_whereq = "id_auteur=".sql_quote($id_auteur);
+				
+				if(
+						// vide la queue du courrier en attente pour cet abonne'
+					spiplistes_courriers_en_queue_supprimer($sql_whereq)
+						// supprime l'abonne' des abonnements
+					&& spiplistes_abonnements_auteur_desabonner($id_auteur, 'toutes')
+						// supprime l'abonne' des formats elargis
+					&& spiplistes_format_abo_supprimer($id_auteur)
+				) {
+					spiplistes_log("ID_AUTEUR #$id_auteur UNSUBSCRIBE BY ID_AUTEUR #$connect_id_auteur");
+					  // ne peut supprimer que les invites
+					if($statut=='6forum') {
+						if(spiplistes_auteurs_auteur_delete($sql_whereq)) {
+								// garde une petite trace...
+							spiplistes_log("ID_AUTEUR #$id_auteur DELETED BY ID_AUTEUR #$connect_id_auteur");
+						}
+					}
+				}
 			}
 		}
 	}	

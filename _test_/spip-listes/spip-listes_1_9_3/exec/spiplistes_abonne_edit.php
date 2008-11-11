@@ -29,7 +29,7 @@
 // $LastChangedDate$
 
 /*
-	Formulaire �dition d'un abonn�
+	Formulaire edition d'un abonne
 */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -47,7 +47,7 @@ function exec_spiplistes_abonne_edit () {
 		, $connect_id_auteur
 		;
 
-	// initialise les variables post�es par le formulaire
+	// initialise les variables postees par le formulaire
 	foreach(array(
 		'id_auteur'
 		, 'btn_confirmer_format', 'modif_abo'
@@ -67,7 +67,7 @@ function exec_spiplistes_abonne_edit () {
 		);
 	
 	//////////////////////////////////////////////////////
-	// Modifie format si demand�
+	// Modifie format si demande
 	if($flag_editable && $btn_confirmer_format) {
 		switch($modif_abo) {
 			case 'html':
@@ -84,7 +84,7 @@ function exec_spiplistes_abonne_edit () {
 	}
 
 	//////////////////////////////////////////////////////
-	// Recharge les donn�es de l'auteur
+	// Recharge les donnees de l'auteur
 	if($id_auteur > 0) {
 	
 		$sql_select = "nom,bio,email,nom_site,url_site,login,pass,statut,pgp,messagerie,imessage,low_sec";
@@ -103,8 +103,8 @@ function exec_spiplistes_abonne_edit () {
 	$format_abo = spiplistes_format_abo_demande($id_auteur);
 
 	//////////////////////////////////////////////////////
-	// pr�paration du bouton 
-		// Propose de supprimer l'auteur invit� 
+	// preparation du bouton 
+		// Propose de supprimer l'auteur invite 
 	$gros_bouton_modifier = 
 		($flag_editable)
 		? icone (
@@ -117,7 +117,7 @@ function exec_spiplistes_abonne_edit () {
 				)
 		: ""
 		;
-		// Propose de supprimer l'auteur invit� 
+		// Propose de supprimer l'auteur invite 
 	$gros_bouton_supprimer = 
 		($id_auteur && $flag_editable && ($statut=='6forum'))
 		? icone (
