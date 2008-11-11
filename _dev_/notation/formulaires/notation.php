@@ -203,7 +203,14 @@ function notation_recalculer_total($objet,$id_objet){
 			"note_ponderee" => $note_ponderee,
 			"nombre_votes" => $total
 			));
+		include_spip('inc/invalideur');
+		suivre_invalideur("notation/$objet/$id_objet");
+			
 	} else {
+		$anc_note_ponderee = sql_getfetsel('note_ponderee','spip_notations_objets',array(
+				"objet=" . sql_quote($objet),
+				"id_objet=" . sql_quote($id_objet)
+			));
 		// Mettre ajour dans les autres cas
 		sql_updateq("spip_notations_objets", array(
 			"note" => $note,
@@ -213,6 +220,11 @@ function notation_recalculer_total($objet,$id_objet){
 				"objet=" . sql_quote($objet),
 				"id_objet=" . sql_quote($id_objet)
 			));
+		// on optimise en n'invalidant que si la notre ponderee change (sinon ca ne se verra pas)
+		if (round($anc_note_ponderee)!=$note_ponderee){
+			include_spip('inc/invalideur');
+			suivre_invalideur("notation/$objet/$id_objet");
+		}
 	}
 }
 
