@@ -34,14 +34,6 @@ jQuery(document).ready(function(){
 
 	var aff= jQuery("a[@rel='enclosure'][@href$=mp3]").size(); 
 
-	//jQuery("body").css({background:"#FF0000"});
-	// preparer un plan B si flash < 8
-	playa  =  '<div id="musicplayer" style="">' +
-	         '</div>';
-			
-	jQuery('body').append(playa);
-	jQuery('div#musicplayer').css({position:"fixed",top:"10px", right:"10px",width:"0",height:"0"});
-	
 	// lister les mp3 de la page 
 	jQuery("a[@rel='enclosure'][@href$=mp3]").each(
 		function(i) {	 
@@ -258,6 +250,11 @@ function player_play(i){
  		//lecteur_debug();
 	    
 	}else{
+		// preparer un plan B si flash < 8
+		playa  =  '<div id="musicplayer" style="">' +
+	         '</div>';	
+		jQuery('body').append(playa);
+		jQuery('div#musicplayer').css({position:"fixed",top:"10px", right:"10px",width:"0",height:"0"});
 	
 		//Ajouter le musicplayer de secours
 		playlist='';
@@ -271,8 +268,8 @@ function player_play(i){
 				playlist = mp3Array[j];
 				deb=1;
 			}
-		}
-	
+		}	
+		
 		jQuery("#musicplayer").html('<object '+
 			'type="application/x-shockwave-flash" '+
 			'data="'+musicplayerurl+'" '+
