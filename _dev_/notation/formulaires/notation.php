@@ -237,7 +237,7 @@ function notation_calculer_total($objet, $id_objet){
 			array(
 				"notations.objet=". sql_quote(objet_type($objet)),
 				"notations.id_objet=" . sql_quote($id_objet) 
-			))) {
+			),'notations.id_objet')) {
 		return array(0,0,0);		
 	} else {
 		return array($row['nombre_votes'], $row['moyenne'], $row['moyenne_ponderee']);
