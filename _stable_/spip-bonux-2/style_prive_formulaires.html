@@ -89,7 +89,7 @@
 
 
 /* intitules (label) */
-.formulaire_spip label {
+.formulaire_spip li label {
 	width: 120px;
 	float:#GET{left};
 	margin-#GET{left}:-125px; 
@@ -326,3 +326,19 @@ table.spip_barre {
 table.spip_barre a img {padding: 3px; border: 1px outset #GET{claire}; }
 table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
 table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
+
+/* retablir les ul.spip dans les explications */
+
+.formulaire_spip ul.spip {
+	margin:10px 0;
+	margin-#GET{left}: 10px;
+	list-style-type: disc;
+	list-style-position: outside;
+}
+.formulaire_spip ul.spip li {
+	margin-#GET{left}: 10px;
+	padding: 0;
+	overflow:visible;
+}
+
+.formulaire_spip a {color:[#(#GET{foncee}|couleur_foncer)];}
