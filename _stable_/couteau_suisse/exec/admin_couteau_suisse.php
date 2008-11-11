@@ -29,7 +29,7 @@ div.cadre-padding form{ padding:0; margin:0; }
 div.cadre_padding form{	padding:0; margin:0; }
 div.cs-cadre{ padding:0.5em; margin:1px; width=100%; border:1px solid #666666; }
 div.cs-cadre h3 { margin:0.2em 0; border-bottom:1px solid #666666; }
-div.cs_infos { }
+div.cs_infos { overflow:hidden; }
 div.cs_infos p { margin:0.3em 1em 0.3em 0; padding:0; }
 div.cs_infos h3.titrem { border-bottom:solid 1px; font-weight:bold; display:block; }
 div.cs_infos legend { font-weight:bold; }
@@ -45,6 +45,8 @@ div.cs_infos div.cs_menu_outil { text-align:right; font-size:85%; margin-bottom:
 div.cs_infos div.cs_details_outil { font-size:85%; margin-top:0.8em; border-top:solid 1px; }
 
 div.cs_action_rapide { border:1px dotted; margin-bottom:1em; padding-bottom:0.4em; background-color:#F0EEEE; }
+div.cs_action_rapide select.ar_select { width:auto; display:inline; }
+#ar_edit_info { font-size:85%; }
 
 .cs_raccourcis {
 	list-style-type:none; padding:0; margin: 0; list-style-image: none; list-style-position: outside;
@@ -420,7 +422,7 @@ verif_plugin();
 	$afficher_outil = ($cmd=='descrip' OR $cmd=='toggle')?$_GET['outil']:'';
 
 	// initialisation generale forcee : recuperation de $outils;
-	cs_initialisation(true);
+	cs_initialisation(true, $cmd!='noinclude');
 	cs_installe_outils();
 
 	// mise a jour des donnees si envoi via formulaire
@@ -527,9 +529,9 @@ if (!window.jQuery) document.write('".addslashes(propre('<p>'._T('couteauprive:e
 	include_spip('inc/cs_outils');
 	$_GET['source'] = $exec;
 	echo '<div class="conteneur">', liste_outils(),
-		'</div><br class="conteneur" /><div class="conteneur">',
+		'</div><br class="conteneur" /><div class="conteneur"><div id="cs_infos" class="cs_infos">',
 		$cmd=='pack'?cs_description_pack():description_outil2($afficher_outil),
-		'<script type="text/javascript"><!--
+		'</div><script type="text/javascript"><!--
 var cs_descripted = "', $afficher_outil, '";
 document.write("<style>#csjs{display:none;}</style>");
 //--></script><div id="csjs" style="color:red;"><br/>', _T('couteauprive:erreur:js'),'</div>

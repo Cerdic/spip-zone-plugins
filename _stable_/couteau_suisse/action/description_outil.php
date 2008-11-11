@@ -14,6 +14,8 @@ cs_log("INIT : action_description_outil_dist() - Une modification de variable(s)
 		$var_f();
 		$arg = _request('arg');
 	}
+	spip_log("action_description_outil du Couteau suisse : $arg / "._request('submit'));
+//	spip_log($_POST);
 
 //cs_log(" -- arg = $arg (index de l'outil appelant)");
 	if (preg_match(",^\W*(\d+)$,", $arg, $r))

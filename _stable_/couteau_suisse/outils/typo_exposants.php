@@ -3,6 +3,9 @@
 // serieuse refonte 2006 : Patrice Vanneufville
 // Toutes les infos sur : http://www.spip-contrib.net/?article1564
 
+// TODO : raccourci pour les exposants et indices (Pouce^2 ou Pouce^2^, H_2O ou H_2_O ou H,,2,,O
+// exemple : http://zone.spip.org/trac/spip-zone/wiki/WikiFormatting
+
 include_spip('inc/charsets');
 // en principe, pas besoin de : caractere_utf_8(232)
 define('_TYPO_EGRAVE', unicode2charset('&#232;').'|&#232;|&egrave;');

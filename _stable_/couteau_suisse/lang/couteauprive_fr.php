@@ -607,7 +607,30 @@ En tant que webmestre vous-m&ecirc;me, vous avez ici les droits de modifier cett
 
 	// X
 	'xml:description' => 'Active le validateur xml pour l\'espace public tel qu\'il est d&eacute;crit dans la [documentation->http://www.spip.net/fr_article3541.html]. Un bouton intitul&eacute; &laquo;&nbsp;Analyse XML&nbsp;&raquo; est ajout&eacute; aux autres boutons d\'administration.',
-	'xml:nom' => 'Validateur XML'
+	'xml:nom' => 'Validateur XML',
+	'urls_type_objet' => 'Type de l\'objet&nbsp;:',
+	'urls_num_objet' => 'Son num&eacute;ro&nbsp;:',
+	'urls_url_objet' => 'Son URL &laquo;&nbsp;propre&nbsp;&raquo; enregistr&eacute;e&nbsp;:',
+	'urls_url_calculee' => 'Calcul de son URL &laquo;&nbsp;@type@&nbsp;&raquo;&nbsp;:',
+	'urls_edit_erreur' => 'Le format actuel des URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) ne permet pas d\'&eacute;dition.',
+	'urls_choix_objet' => 'Edition en base de l\'URL d\'un objet sp&eacute;cifique&nbsp;:',
+	'urls_titre_objet' => 'Son titre enregistr&eacute; &nbsp;:',
+	'urls_enregistrer' => 'Enregistrer cette URL en base',
+	'urls_nouvelle' => '&Eacute;diter son URL &laquo;&nbsp;propre&nbsp;&raquo;&nbsp;:',
+	'urls_rechercher' => 'Rechercher cet objet en base',
+	'urls_purger_tout' => 'R&eacute;initialiser toutes les URLs stock&eacute;es dans la base&nbsp;:',
+	'urls_purger' => 'Tout vider',
+	'urls_base_vide' => 'La base des URLs est vide',
+	'urls_base_total' => 'Il y a actuellement @nb@ URL(s) en base',
+	'attente' => 'Attente...',
+	'urls_valeur_vide' => "(Une valeur vide entraine la suppression de l'URL)",
+	'objet_article'=>'Article',
+	'objet_rubrique'=>'Rubrique',
+	'objet_breve'=>'Br&egrave;ve',
+	'objet_auteur'=>'Auteur',
+	'objet_mot'=>'Mot',
+	'objet_syndic'=>'Site',
+
 );
 
 ?>

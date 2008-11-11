@@ -34,7 +34,7 @@ function cs_preg_quote(&$item) {
 
 // lit ecrit les metas et initialise $cs_metas_pipelines
 // cette fonction est appellee par cout_options a chaque hit de la page
-function cs_initialisation($forcer=false) {
+function cs_initialisation($forcer=false, $init_includes=true) {
 	global $cs_metas_pipelines, $metas_outils;
 	$rand = sprintf('[#%04x] ', rand());
 	static $deja_passe_ici;
@@ -97,7 +97,7 @@ cs_log("$rand -- foreach(\$outils) : cs_initialisation_d_un_outil()");
 	$cs_metas_pipelines = array();
 cs_log("$rand -- cs_initialise_includes()... cout_fonctions.php sera probablement inclus.");
 	// creer les includes (config/mes_options, mes_options et mes_fonctions) et le fichier de controle pipelines.php
-	cs_initialise_includes(count($metas_outils));
+	if($init_includes) cs_initialise_includes(count($metas_outils));
 	// verifier le fichier d'options _FILE_OPTIONS (ecrire/mes_options.php ou config/mes_options.php)
 	// De'sactive' par de'faut. Activer l'outil "Comportements du Couteau Suisse" pour ge'rer cette option.
 	cs_verif_FILE_OPTIONS($metas_outils['cs_comportement']['actif'] && $metas_vars['spip_options_on'], true);

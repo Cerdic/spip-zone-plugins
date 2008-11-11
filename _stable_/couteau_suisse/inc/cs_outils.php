@@ -11,7 +11,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-@define('_DIV_CS_INFOS', '<div id="cs_infos" class="cs_infos">');
 @define('_URL_CONTRIB', 'http://www.spip-contrib.net/?article');
 
 // TODO : revoir tout ca avec la syntaxe de <necessite>
@@ -43,16 +42,16 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 // renvoie le configuration du pack actuel
 function cs_description_pack() {
 	if(!isset($GLOBALS['cs_pack_actuel'])) return '';
-	return _DIV_CS_INFOS . debut_cadre_relief('', true)
+	return debut_cadre_relief('', true)
 		. "<h3 class='titrem'><img src='"._DIR_IMG_PACK."puce-verte.gif' width='9' height='9' alt='-' />&nbsp;" . _T('couteauprive:pack_titre') . '</h3>'
 		. propre(_T('couteauprive:pack_descrip') . "\n\n" . _T('couteauprive:contrib', array('url'=>'[->'._URL_CONTRIB.'2552]')))
 		. '<br/><textarea rows=30 cols=200 style="width:520px; font-size:90%;">'.htmlentities($GLOBALS[cs_pack_actuel], ENT_QUOTES, $GLOBALS['meta']['charset']).'</textarea>'
-		. fin_cadre_relief(true) . '</div>';
+		. fin_cadre_relief(true);
 }
 
 // renvoie (pour la nouvelle interface) la description d'un outil
 function description_outil2($outil_id) {
-	if(!strlen($outil_id)) return _DIV_CS_INFOS . _T('couteauprive:outils_cliquez') . '</div>';
+	if(!strlen($outil_id)) return _T('couteauprive:outils_cliquez');
 	global $outils, $metas_vars, $metas_outils;
 	include_spip('cout_utils');
 	// remplir $outils (et aussi $cs_variables qu'on n'utilise pas ici);
@@ -73,7 +72,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	$nb_var = intval($outil['nb_variables']);
 	
 	if(!strlen($outil['id']) || !cout_autoriser('outiller', $outil) || cs_version_erreur($outil))
-		return _DIV_CS_INFOS . $s . _T('info_acces_interdit') . '</div></div>';
+		return $s . _T('info_acces_interdit') . '</div>';
 
 	$s .= "<h3 class='titrem'><img src='"._DIR_IMG_PACK."$puce' name='puce_$id_input' width='9' height='9' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;" . $outil['nom'] . '</h3>';
 	$s .= '<div class="cs_menu_outil">';
@@ -83,7 +82,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=hide&outil='.$outil_id).'" title="' . _T('couteauprive:outil_cacher') . '">' . _T('couteauprive:outil_cacher') . '</a>&nbsp;|&nbsp;';
 	$act = $actif?'des':'';
 	$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=toggle&outil='.$outil_id).'" title="'._T("couteauprive:outil_{$act}activer_le").'">'._T("couteauprive:outil_{$act}activer")."</a></div>";
-	$s .= cs_action_rapide($outil_id);
+	if(strlen($temp = cs_action_rapide($outil_id))) $s .= "<div class='cs_action_rapide' id='cs_action_rapide'>$temp</div>";
 	include_spip('inc/texte');
 	$s .= propre($descrip);
 
@@ -96,7 +95,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	$s .= propre($p);
 	$s .= detail_outil($outil_id);
 
-	return _DIV_CS_INFOS . $s . '</div></div>';
+	return $s . '</div>';
 }
 
 // renvoie simplement deux liste des outils actifs/inactifs
@@ -184,13 +183,13 @@ function cs_action_rapide($outil_id) {
 	$f = "{$outil_id}_action_rapide";
 	include_spip("outils/$f");
 	if(!function_exists($f)) return '';
-	$f = $f();
+	$f = trim($f());
 	if(strlen($f)) {
 		$mem = $GLOBALS['toujours_paragrapher'];
 		$GLOBALS['toujours_paragrapher'] = false;
-		$info = '<div><strong>' . definir_puce() . '&nbsp;' . propre(_T('couteauprive:action_rapide')) . "</strong></div>";
+		$info = '<strong>' . definir_puce() . '&nbsp;' . propre(_T('couteauprive:action_rapide')) . "</strong>";
 		$GLOBALS['toujours_paragrapher'] = $mem;
-		return '<div class="cs_action_rapide">'.$info.$f.'</div>';
+		return "<div>$info</div><div>$f</div>";
 	}
 	return '';
 }
