@@ -72,7 +72,7 @@ function exec_spiplistes_liste_gerer () {
 			, 'titre_message', 'patron', 'periode', 'envoyer_maintenant'
 			, 'jour', 'mois', 'annee', 'heure', 'minute'
 		, 'btn_patron_pied', 'btn_grand_patron' // boites gauches
-		, 'btn_valider_forcer_abos', 'forcer_abo'
+		, 'btn_valider_forcer_abos', 'forcer_abo', 'forcer_format_abo', 'forcer_format_reception'
 		, 'btn_supprimer_liste' //local
 		) as $key) {
 		$$key = _request($key);
@@ -85,14 +85,15 @@ function exec_spiplistes_liste_gerer () {
 	}
 	$lang = $changer_lang;
 
-	$cherche_auteur = _request('cherche_auteur'); // ??
-	$debut = _request('debut'); // ??
+	$cherche_auteur = _request('cherche_auteur');
+	$debut = _request('debut');
 
 
 	$envoyer_maintenant = ($envoyer_maintenant == 'oui');
 	
 	$boite_pour_confirmer_envoi_maintenant = 
 		$grosse_boite_moderateurs = 
+		$message_erreur =
 		$page_result = "";
 
 	if(!$id_liste) {
@@ -273,9 +274,15 @@ function exec_spiplistes_liste_gerer () {
 			
 			// Forcer les abonnements
 			if($btn_valider_forcer_abos && $forcer_abo && in_array($forcer_abo, array('tous', 'auteurs', '6forum', 'aucun'))) {
+				
+				$forcer_format_reception = 
+					(($forcer_format_abo == 'oui') && in_array($forcer_format_reception, explode(';', _SPIPLISTES_FORMATS_ALLOWED)))
+					? $forcer_format_reception
+					: false
+					;
 				include_spip("inc/spiplistes_listes_forcer_abonnement");
-				if(spiplistes_listes_forcer_abonnement ($id_liste, $forcer_abo) ===  false) {
-					$page_result .= __boite_alerte(_T('spiplistes:Forcer_abonnement_erreur'), true);
+				if(spiplistes_listes_forcer_abonnement ($id_liste, $forcer_abo, $forcer_format_reception) ===  false) {
+					$message_erreur .= __boite_alerte(_T('spiplistes:Forcer_abonnement_erreur'), true);
 				}
 			}
 			
@@ -435,6 +442,20 @@ function exec_spiplistes_liste_gerer () {
 			$('#auto_weekly').attr('checked',false);
 			$('input[@name=auto_chrono][@value=auto_mensuel]').attr('checked','checked');
 		});
+		/*
+		* forcer le format de reception ? 
+		*/
+		$('input[@name=forcer_abo]').click( function() { 
+			if($(this).val() == 'aucun') {
+				$('#forcer_format').hide();
+			}
+			else {
+				$('#forcer_format').show();
+			}
+		});
+		$('input[@name=forcer_format_reception]').click( function() { 
+			$('#forcer_format_abo').attr('checked','checked');
+		});
 	});
 //]]>
 </script>
@@ -473,6 +494,7 @@ function exec_spiplistes_liste_gerer () {
 		. spiplistes_boite_autocron()
 		. spiplistes_boite_info_spiplistes(true)
 		. debut_droite($rubrique, true)
+		. $message_erreur
 		;
 
 	changer_typo('','liste'.$id_liste);
@@ -786,12 +808,12 @@ function exec_spiplistes_liste_gerer () {
 	if($connect_toutes_rubriques) {
 		$page_result .= ""
 			. "\n<!-- forcer abo -->\n"
-			. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."abonner-24.png", true, '', _T('spiplistes:Forcer_les_abonnement_liste').__plugin_aide("forcerliste"))."\n"
+			. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."abonner-24.png", true, '', _T('spiplistes:forcer_les_abonnement_liste').__plugin_aide("forcerliste"))."\n"
 			. "<p class='verdana2'>\n"
-			. _T('spiplistes:Forcer_abonnement_desc')
+			. _T('spiplistes:forcer_abonnement_desc')
 			. "</p>\n"
 			. "<p class='verdana2' style='margin-bottom:1em'><em>"
-			. _T('spiplistes:Forcer_abonnement_aide', array('lien_retour' => generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE)))
+			. _T('spiplistes:forcer_abonnement_aide', array('lien_retour' => generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE)))
 			. "</em></p>\n"
 			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste#auteurs")."' id='form_forcer_abo' name='form_forcer_abo' method='post'>\n"
 			. debut_cadre_relief("", true)."\n"
@@ -801,7 +823,9 @@ function exec_spiplistes_liste_gerer () {
 			.	(
 					($statut==_SPIPLISTES_PRIVATE_LIST)
 					? "<div class='verdana2'><input type='radio' name='forcer_abo' value='auteurs' id='forcer_abo_tous' />\n"
-						. "<label for='forcer_abo_tous'>"._T('spiplistes:Abonner_tous_les_inscrits_prives')."</label></div>\n"
+						. "<label for='forcer_abo_tous'>"._T('spiplistes:Abonner_tous_les_inscrits_prives')."</label>"
+						. "</div>\n"
+						. spiplistes_boutons_forcer_format('forcer_format', _T('spiplistes:forcer_abonnements_nouveaux'))
 					: ""
 				)
 			//
@@ -810,6 +834,7 @@ function exec_spiplistes_liste_gerer () {
 					(($statut!=_SPIPLISTES_PRIVATE_LIST) && ($statut!=_SPIPLISTES_TRASH_LIST))
 					? "<div class='verdana2'><input type='radio' name='forcer_abo' value='6forum' id='forcer_abo_6forum' />\n"
 						. "<label for='forcer_abo_6forum'>"._T('spiplistes:Abonner_tous_les_invites_public')."</label></div>\n"
+						. spiplistes_boutons_forcer_format('forcer_format', _T('spiplistes:forcer_abonnements_nouveaux'))
 					: ""
 				)
 			. (
@@ -849,6 +874,27 @@ function spiplistes_pied_page_html_get ($pied_patron, $lang = "") {
 	return($result);
 } // end spiplistes_pied_page_html_get()
 
+
+function spiplistes_boutons_forcer_format ($id_bloc, $message = '') {
+	if(!empty($message)) {
+		$message = "<div>$message</div>\n";
+	}
+	return(
+		"<div id='$id_bloc' class='verdana2' style='margin-left:2ex; display:none'>"
+		. $message
+		. "<label>"
+		. "<input type='checkbox' name='forcer_format_abo' id='forcer_format_abo' value='oui' />"
+		. _T('spiplistes:forcer_les_abonnements_au_format_')
+		. "</label>\n"
+		. "<label>"
+		. "<input type='radio' name='forcer_format_reception' value='html' checked='checked' />" . _T('spiplistes:html')
+		. "</label>\n"
+		. "<label>"
+		. "<input type='radio' name='forcer_format_reception' value='texte' />" . _T('spiplistes:texte')
+		. "</label>\n"
+		. "</div>\n"
+	);
+}
 
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */

@@ -13,10 +13,10 @@
 /*                                                                                        */
 /* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but specifique. Reportez-vous � la Licence Publique Generale GNU  */
-/* pour plus de d�tails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir re�u une copie de la Licence Publique Generale GNU                    */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
 /* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
@@ -428,14 +428,12 @@ function spiplistes_format_abo_demande ($id_auteur) {
 	$result = false;
 	$sql_where = "id_auteur=".sql_quote($id_auteur);
 	if($id_auteur > 0) {
-		/**/
 		if(spiplistes_spip_est_inferieur_193()) {
 			$result = sql_getfetsel("`spip_listes_format`", "spip_auteurs_elargis", $sql_where);
 		} else {
 			$result = sql_fetsel("`spip_listes_format`", "spip_auteurs_elargis", $sql_where);
 			$result = $result['spip_listes_format'];
 		}
-		/**/
 		/* Code a valider. Si ok, supprimer ci-dessus.
 		$GLOBALS['mysql_rappel_nom_base'] = false;
 		$result = sql_getfetsel("spip_listes_format", "spip_auteurs_elargis", "id_auteur=".sql_quote($id_auteur));
@@ -715,10 +713,10 @@ function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $heade
 /*                                                                                        */
 /* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but specifique. Reportez-vous � la Licence Publique Generale GNU  */
-/* pour plus de d�tails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir re�u une copie de la Licence Publique Generale GNU                    */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
 /* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */

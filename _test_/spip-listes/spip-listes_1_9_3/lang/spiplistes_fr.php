@@ -255,16 +255,19 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
    cet abonn&eacute;.<br /><br />
    Vous pouvez &eacute;galement d&eacute;sabonner temporairement ce contact. 
    Il reste inscrit dans les listes en tant que destinataire, mais les courriers 
-   ne lui seront pas envoy&eacute;s tant que vous ne lui aurez pas d&eacute;fini un format de r&eacute;ception de courriers.",
-'Forcer_les_abonnement_liste' => "Forcer les abonnement pour cette liste",
-'Forcer_abonnement_desc' => "Vous pouvez forcer ici les abonnements &agrave; cette liste, soit pour tous 
+   ne lui seront pas envoy&eacute;s tant que vous ne lui aurez pas d&eacute;fini un format de r&eacute;ception de courriers."
+, 'forcer_les_abonnement_liste' => "Forcer les abonnements pour cette liste"
+, 'forcer_abonnement_desc' => "Vous pouvez forcer ici les abonnements &agrave; cette liste, soit pour tous 
    les membres inscrits (visiteurs, auteurs et administrateurs), soit pour tous 
-   les visiteurs.",
-'Forcer_abonnement_aide' => "<strong>Attention</strong>: un membre abonn&eacute; ne re&ccedil;oit pas forc&eacute;ment 
+   les visiteurs."
+, 'forcer_abonnement_aide' => "<strong>Attention</strong>: un membre abonn&eacute; ne re&ccedil;oit pas forc&eacute;ment 
    le courrier de cette liste. Il faut attendre qu'il confirme lui-m&ecirc;me 
    le format de r&eacute;ception : html ou texte seul.<br />
-	Vous pouvez forcer le format par abonn&eacute; <a href='@lien_retour@'>sur la page du suivi des abonnements</a>",
-'Forcer_desabonner_tous_les_inscrits' => "D&eacute;sabonner tous les membres inscrits pour cette liste.",
+	Vous pouvez forcer le format par abonn&eacute; <a href='@lien_retour@'>sur la page du suivi des abonnements</a>"
+, 'forcer_abonnements_nouveaux' => "En s&eacute;lectionnant cette option, 
+	vous confirmez le format de r&eacute;ception des nouveaux abonn&eacute;s.
+	Les anciens abonn&eacute;s conservent leur pr&eacute;f&eacute;rence de r&eacute;ception."
+, 'Forcer_desabonner_tous_les_inscrits' => "D&eacute;sabonner tous les membres inscrits pour cette liste.",
 'Forcer_abonnement_erreur' => "Erreur technique signal&eacute;e lors de la modification d'une liste abonn&eacute;e. 
 	V&eacute;rifiez cette liste avant de poursuivre votre op&eacute;ration.",
 'Format_obligatoire_pour_diffusion' => "Pour confirmer l'abonnement de ce compte, vous devez s&eacute;lectionner un format 
@@ -569,9 +572,9 @@ liste."
 , 'envoi_manuel' => "Envoi manuel"
 
 , 'format_date' => 'Y/m/d',
-'format_aucun' => "Aucun",
-
-'html' => 'HTML',
+'format_aucun' => "Aucun"
+, 'forcer_les_abonnements_au_format_' => "Forcer les abonnements au format : "
+, 'html' => 'HTML',
 
 'importer' => 'Importer une liste d\'abonn&eacute;s',
 'importer_fichier' => 'Importer un fichier',
