@@ -251,7 +251,7 @@ function compat_spiplistes_defs_dist() {
 
 		// n'existe pas en 1.9.2
 		// on cree la requete directement
-		# Nombre de lignes dans le résultat
+		# Nombre de lignes dans le rï¿½sultat
 		'sql_count' => 
 			'(
 				$res, $serveur=\'\', $option=true
@@ -273,6 +273,18 @@ function compat_spiplistes_defs_dist() {
 				$r = sql_select(\'COUNT(*)\', $from, $where, $groupby, \'\', $limit, $having, $serveur, $requeter);
 				if ($r && $requeter) list($r) = mysql_fetch_array($r, MYSQL_NUM);
 				return($r);
+			}',
+			
+		// n'existe pas en 1.9.2
+		'sql_errno' => 
+			'($serveur=\'\') {
+				return(spip_sql_errno());
+			}',
+
+		// n'existe pas en 1.9.2
+		'sql_error' => 
+			'($query=\'\', $serveur=\'\', $option=true) {
+				return(spip_sql_error());
 			}'
 
 	);
