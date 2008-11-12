@@ -98,6 +98,7 @@ function cs_date($numdate) {
 	$date_array = recup_date($numdate);
 	if (!$date_array) return '?';
 	list($annee, $mois, $jour, $heures, $minutes, $sec) = $date_array;
+	if(!defined('_SPIP19300')) list($heures, $minutes) =array(heures($numdate), minutes($numdate));
 	return _T('couteau:stats_date', array('jour'=>$jour, 'mois'=>$mois, 'annee'=>substr($annee,2), 'h'=>$heures, 'm'=>$minutes, 's'=>$sec));
 }
 
