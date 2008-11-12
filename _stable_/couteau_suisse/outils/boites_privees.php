@@ -159,7 +159,9 @@ function cs_urls_propres_descrip($type, $id) {
 	$format = in_array($type_urls, array('page', 'standard', 'html'))
 		?_T('couteau:urls_propres_erreur')
 		:_T('couteau:urls_propres_objet');
-	return propre(
+	$mem=$GLOBALS['class_spip_plus'];
+	$GLOBALS['class_spip_plus']=' class="spip"';
+	$res = propre(
 		_T('couteau:urls_propres_format', array(
 			'format'=>$type_urls,
 			'url'=>generer_url_ecrire('admin_couteau_suisse', 'cmd=descrip&outil=type_urls#cs_infos')
@@ -172,8 +174,9 @@ function cs_urls_propres_descrip($type, $id) {
 		. (strlen($url)
 			?"\n[<span>[". _T('couteau:urls_propres_lien'). "|{$url}->{$url}]</span>]\n\n"
 			:'<iframe src="./?exec=action_rapide&arg=type_urls_spip&format=iframe&type_objet='.$type.'&id_objet='.$id.'" width="100%" style="border:none; height:4em;"></iframe>')
-		
 	);
+	$GLOBALS['class_spip_plus']=$mem;
+	return $res;
 }
 
 ?>
