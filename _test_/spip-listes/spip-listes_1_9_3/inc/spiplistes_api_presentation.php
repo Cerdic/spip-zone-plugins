@@ -302,12 +302,12 @@ function spiplistes_boite_raccourcis ($return = false) {
 				,false
 				)
 			. "</li>\n"
+			// lecture du journal (log)
+			. spiplistes_raccourci_journal(false)
+			//
 			;
 	}
 	$result .= ""
-		// lecture du journal (log)
-		. spiplistes_raccourci_journal(false)
-		//
 		. "<!-- aide en ligne -->\n"
 		. "<li>"
 		. icone_horizontale(

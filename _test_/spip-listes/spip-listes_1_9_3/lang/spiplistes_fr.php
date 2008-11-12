@@ -196,6 +196,8 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , 'dupliquer_ce_courrier' => "Dupliquer ce courrier"
 , 'desabonne_sing' => " d&eacute;sabonn&eacute; ou sans format de r&eacute;ception"
 , 'desabonnes_plur' => " d&eacute;sabonn&eacute;s ou sans format de r&eacute;ception"
+, 'destinataire_sans_format_alert' => "Destinataire sans format de r&eacute;ception.
+	Appliquez un format de r&eacute;ception (texte ou html) pour ce compte ou s&eacute;lectionnez un autre destinataire."
 
 //E
 , 'email' => 'E-mail',

@@ -29,7 +29,7 @@ function action_spiplistes_journal () {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$args = $securiser_action();
 
-	$autoriser_lire = ($connect_statut == "0minirezo") && $connect_toutes_rubriques;
+	$autoriser_lire = (autoriser('webmestre','','',$connect_id_auteur));
 	
 	if($autoriser_lire) {
 

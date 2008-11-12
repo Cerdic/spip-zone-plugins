@@ -37,10 +37,18 @@ if(!defined("LOG_WARNING")) {
 }
 
 function spiplistes_log($texte, $level = LOG_WARNING) {
-	if(__server_in_private_ip_adresses()
-		&& (spiplistes_pref_lire('opt_console_syslog') == 'oui')
-	) {
-		__syslog_trace($texte, $level);
+	static $lan;
+	if($lan === null) {
+		$lan = __server_in_private_ip_adresses();
+	}
+	if($lan) {
+		if(spiplistes_pref_lire('opt_console_syslog') == 'oui') {
+			__syslog_trace($texte, $level);
+		}
+		else {
+			spip_log($texte, _SPIPLISTES_PREFIX);
+		}
+		
 	}
 	else if($level < LOG_DEBUG) {
 		// Taille du log SPIP trop courte en 192

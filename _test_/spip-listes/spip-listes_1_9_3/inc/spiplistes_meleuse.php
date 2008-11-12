@@ -58,7 +58,7 @@ include_spip('inc/spiplistes_api_globales');
 	
 function spiplistes_meleuse ($last_time) { 
 //return(0); //pour debuguer uniquement
-
+spiplistes_log("spiplistes_meleuse()");
 	include_spip('inc/meta');
 	include_spip('inc/texte');
 	include_spip('inc/filtres');
@@ -281,7 +281,8 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 					// Traitement d'une liasse d'etiquettes
 					// un id pour ce processus (le tampon est unique par liasse)
 					$id_process = intval(substr(creer_uniqid(),0,5));
-					
+spiplistes_log($prefix_log."PROCESS #$id_process", _SPIPLISTES_LOG_DEBUG);
+			
 					// un coup de tampon sur les etiquettes 
 					// des courriers qui vont partir
 					spiplistes_courriers_en_queue_modifier(
@@ -304,7 +305,7 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 				}
 					
 				$nb_destinataires = sql_count($sql_adresses_dest);
-//spiplistes_log($prefix_log."nb etiquettes a traiter: $nb_destinataires", _SPIPLISTES_LOG_DEBUG);
+spiplistes_log($prefix_log."nb etiquettes a traiter: $nb_destinataires", _SPIPLISTES_LOG_DEBUG);
 				if($nb_destinataires > 0) {
 
 spiplistes_log($prefix_log."total_abos: $total_abonnes, en_cour: $nb_destinataires, limit: $limit"
@@ -414,11 +415,14 @@ spiplistes_log($prefix_log."total_abos: $total_abonnes, en_cour: $nb_destinatair
 									$str_temp .= _T('spiplistes:sans_adresse');
 								}
 							}
-						} else {  
+						} // end if(($format_abo=='html') || ($format_abo=='texte'))
+						else {  
 							$nb_emails_non_envoyes++; 
 							if($log_voir_destinataire) {
 								$str_temp .= " "._T('spiplistes:msg_abonne_sans_format');
 							}
+							// prevenir qu'il manque le format
+							spiplistes_log($prefix_log." destination format MISSING FOR ID_AUTEUR $id_auteur");
 						} /* fin abo*/
 						
 						if($log_voir_destinataire) {
@@ -488,7 +492,7 @@ spiplistes_log($prefix_log."envoi OK. Supprimer queue $id_process", _SPIPLISTES_
 				spiplistes_courrier_modifier($id_courrier, $sql_set_array, false);
 			}
 		} // end while()
-	} // end if()
+	} // end if($nb_etiquettes)
 	else {
 		$str_log .= " no job"; 
 	}

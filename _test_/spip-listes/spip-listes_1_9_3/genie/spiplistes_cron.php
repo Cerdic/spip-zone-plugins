@@ -28,23 +28,23 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-	// Appelé en tache de fond (CRON SPIP)
+	// Appele' en tache de fond (CRON SPIP)
 	
 	// Trieuse 
 	
-	// - Verifie toutes les listes auto==oui publiques et privées
+	// - Verifie toutes les listes auto==oui publiques et privees
 	//   dont la date d'envoi est passee
-	// - crée le courrier pour la méleuse dans la table spip_courriers
+	// - cree le courrier pour la meleuse dans la table spip_courriers
 	// - determine les dates prochain envoi si periode > 0
 	// - si periode < 0, repasse la liste en dormeuse
 
 	// Precision sur la table spip_listes:
 	// 'date': date d'envoi souhaitee (prochain envoi)
 	// 'maj': date d'envoi du courrier mis a' jour par cron.
-	// 'type' : type de liste attribuée soit en direct, via liste_gerer, 
+	// 'type' : type de liste attribuee soit en direct, via liste_gerer, 
 	//          soit par la trieuse, en cron
-	// type = 'nl' : (newsletter) liste envoyée en direct
-	// type = 'auto' : liste traitée par la trieuse, en cron
+	// type = 'nl' : (newsletter) liste envoyee en direct
+	// type = 'auto' : liste traitee par la trieuse, en cron
 	
 /*
 	cron_spiplistes_cron() renvoie:
@@ -127,7 +127,7 @@ spiplistes_log($prefix_log."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_D
 			$id_auteur = 
 				(isset($mod_listes_ids[$id_liste]) && ($mod_listes_ids[$id_liste][0] > 0))
 				? $mod_listes_ids[$id_liste][0]
-				: 1 // attribué à l'admin principal si manquant
+				: 1 // attribue a l'admin principal si manquant
 				;
 			
 			// Tampon date prochain envoi (dans 'date') et d'envoi (dans 'maj')
@@ -138,7 +138,7 @@ spiplistes_log($prefix_log."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_D
 				$job_minute = date("i", $job_time);
 				$job_mois = date("m", $job_time);
 				$job_jour = (($statut == _SPIPLISTES_MONTHLY_LIST) ? 1 : date("j", $job_time));
-				$job_an = date("Y"); // la date est forcée par celle du système (eviter erreurs)
+				$job_an = date("Y"); // la date est forcee par celle du systeme (eviter erreurs)
 				switch($statut) {
 					case _SPIPLISTES_YEARLY_LIST:
 						$next_time = mktime($job_heure, $job_minute, 0, $job_mois, $job_jour, $job_an+1);
@@ -181,8 +181,8 @@ spiplistes_log($prefix_log."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_D
 			}
 	
 			/////////////////////////////
-			// preparation du courrier à placer dans le panier (spip_courriers)
-			// en cas de période, la date est dans le passé pour avoir les elements publies depuis cette date
+			// preparation du courrier a placer dans le panier (spip_courriers)
+			// en cas de periode, la date est dans le passe pour avoir les elements publies depuis cette date
 			include_spip('public/assembler');
 			$contexte_patron = array('date' => $dernier_envoi, 'patron'=>$patron, 'lang'=>$lang);
 			$texte = recuperer_fond('patrons/'.$patron, $contexte_patron);
@@ -234,7 +234,7 @@ spiplistes_log($prefix_log."envoi mail nouveautes : courrier vide", _SPIPLISTES_
 
 			if($taille_courrier_ok) {
 				// place les etiquettes
-				// (ajout des abonnés dans la queue (spip_auteurs_courriers))
+				// (ajout des abonnes dans la queue (spip_auteurs_courriers))
 				spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste);
 			} 
 		} // end while // fin traitement des listes
@@ -255,8 +255,8 @@ spiplistes_log($prefix_log."$n job(s), appel meleuse", _SPIPLISTES_LOG_DEBUG);
 	return ($last_time); 
 } // cron_spiplistes_cron()
 
-// En SPIP 192, c'est cron_* qui est appellé
-// En SPIP 193, c'est genie_* qui est appellé
+// En SPIP 192, c'est cron_* qui est appelle
+// En SPIP 193, c'est genie_* qui est appelle
 
 function genie_spiplistes_cron ($last_time) {
 	include_spip('inc/spiplistes_api_globales');

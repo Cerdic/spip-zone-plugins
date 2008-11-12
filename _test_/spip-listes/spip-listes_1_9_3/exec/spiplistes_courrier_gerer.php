@@ -123,6 +123,7 @@ function exec_spiplistes_courrier_gerer () {
 			
 			if($btn_changer_destination) {
 				if($radio_destination == 'email_test') {
+					
 					// demande d'envoi au mail de test (retour formulaire local)
 					if(email_valide($email_test)) {
 						if(!($id_auteur_test = spiplistes_idauteur_depuis_email($email_test))) {
@@ -131,16 +132,32 @@ function exec_spiplistes_courrier_gerer () {
 							$message_erreur .= __boite_alerte (_T('spiplistes:Erreur_Adresse_email_inconnue'), true);
 						}
 						else {
-							// Ok. Enregistre l'adresse test
-							spiplistes_courrier_modifier(
-								$id_courrier
-								, array(
-									  'email_test' => $email_test
-									, 'total_abonnes' => 1
-									, 'id_liste' => ($id_liste = 0)
-									, 'statut' => ($change_statut = _SPIPLISTES_COURRIER_STATUT_READY)
-									)
-							);
+							
+							$format_abo = spiplistes_format_abo_demande($id_auteur);
+							
+							/*
+							 * meme le compte qui veut recevoir un test doit avoir
+							 * un format de reception
+							 */
+							if(
+								in_array($format_abo, explode(';', _SPIPLISTES_FORMATS_ALLOWED))
+								&& ($format_abo != 'non')
+							) {
+								// Ok. Enregistre l'adresse test
+								spiplistes_courrier_modifier(
+									$id_courrier
+									, array(
+										  'email_test' => $email_test
+										, 'total_abonnes' => 1
+										, 'id_liste' => ($id_liste = 0)
+										, 'statut' => ($change_statut = _SPIPLISTES_COURRIER_STATUT_READY)
+										)
+								);
+							}
+							else {
+								$message_erreur .= __boite_alerte (_T('spiplistes:destinataire_sans_format_alert'), true);
+							}
+							
 							$str_destinataire = _T('spiplistes:email_adresse') . " : $email_test";
 						}
 					}
