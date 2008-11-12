@@ -50,12 +50,13 @@
 	
 	$spip_societes_key = array('PRIMARY KEY' => 'id_societe', 'KEY id_pays' => 'id_pays');
 
-	$tables_auxiliaires['spip_auteurs_elargis'] = array('field' => &$spip_auteurs_elargis, 'key' => &$spip_auteurs_elargis_key);
+	$tables_principales['spip_auteurs_elargis'] = array('field' => &$spip_auteurs_elargis, 'key' => &$spip_auteurs_elargis_key);
 	$tables_principales['spip_geo_pays'] = array('field' => &$spip_geo_pays, 'key' => &$spip_geo_pays_key);
 	$tables_principales['spip_societes'] = array('field' => &$spip_societes, 'key' => &$spip_societes_key);
 
 	global $tables_jointures;
-	$tables_jointures['spip_auteurs']['']= 'auteurs_elargis';
+	$tables_jointures['spip_auteurs_elargis']['']= 'auteurs';
 
+	$table_des_tables['auteurs_elargis'] = 'auteurs_elargis';
     $table_des_tables['societes'] = 'societes';
 ?>
