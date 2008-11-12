@@ -11,7 +11,7 @@ function echoppe_echec_autorisation(){
 function recuperer_id_secteur($id_parent, $objet){
 	switch ($objet){
 		case 'categorie':
-			if($id != 0){
+			if($id_parent != 0){
 				$res_recup_id_secteur = sql_select(array("id_secteur"),array("spip_echoppe_".$objet."s"), array("id_".$objet." = ".$id_parent));
 				$temp = sql_fetch($res_recup_id_secteur);
 				$id_secteur = $temp['id_secteur'];				

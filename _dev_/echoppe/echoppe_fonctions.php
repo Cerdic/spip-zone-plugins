@@ -148,21 +148,20 @@ function boucle_ECHOPPE_PRODUITS_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$mstatut = $id_table .'.statut';
-	var_dump($boucle);
 	// Restreindre aux elements publies, sauf si le critere statut est utilise
 	if (!isset($boucle->modificateur['criteres']['statut'])) {
 		array_unshift($boucle->where,array("'<>'", "'$mstatut'", "'\\'poubelle\\''"));
-	} 
+	}
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
 function boucle_ECHOPPE_HIERARCHIE_dist($id_boucle, &$boucles) {
+	//var_dump($id_boucle);
+	//var_dump($boucles);
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table . ".id_categorie";
-
-// Si la boucle mere est une boucle RUBRIQUES il faut ignorer la feuille
-// sauf en presence du critere {tout} (vu par phraser_html)
-
+	// Si la boucle mere est une boucle RUBRIQUES il faut ignorer la feuille
+	// sauf en presence du critere {tout} (vu par phraser_html)
 	$boucle->hierarchie = 'if (!($id_categorie = intval('
 	. calculer_argument_precedent($boucle->id_boucle, 'id_categorie', $boucles)
 	. ")))\n\t\treturn '';\n\t"
@@ -174,9 +173,9 @@ function boucle_ECHOPPE_HIERARCHIE_dist($id_boucle, &$boucles) {
 	}
 	if (!$hierarchie) return "";
 	$hierarchie = substr($hierarchie,1);';
-
-	$boucle->where[]= array("'IN'", "'$id_table'", '"($hierarchie)"');
-
+	
+	$boucle->where = array('"echoppe_categories.id_categorie IN ($hierarchie)"');
+    
     $order = "FIELD($id_table, \$hierarchie)";
 	if ($boucle->default_order[0] != " DESC")
 		$boucle->default_order[] = "\"$order\"";

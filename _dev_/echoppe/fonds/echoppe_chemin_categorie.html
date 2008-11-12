@@ -1,4 +1,3 @@
-#ID_CATEGORIE
-<BOUCLE_LaBase(ECHOPPE_HIERARCHIE){id_categorie}>
-#TITRE ->
-</BOUCLE_LaBase>
+<a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=0})]"><:echoppe:echoppe:></a><B_Hierarchie> > <BOUCLE_Hierarchie(ECHOPPE_HIERARCHIE){id_categorie}{tout}{" > "}>
+<a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">#TITRE</a>
+</BOUCLE_Hierarchie>
