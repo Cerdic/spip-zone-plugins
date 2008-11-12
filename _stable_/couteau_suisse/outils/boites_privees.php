@@ -124,9 +124,13 @@ function cs_non_confirmes($fetch){
 } 
 
 function cs_urls_propres($type, $id) {
-	// fonction reservee a SPIP 2.0
-	if(!defined('_SPIP19200')) return '';
-
+	// SPIP < 2.0
+	if(!defined('_SPIP19300')) return debut_cadre_relief(find_in_path('img/couteau-24.gif'), true)
+		. "<div class='verdana1' style='text-align: left;'>"
+		. block_parfois_visible('bp', '<b>'._T('couteau:urls_propres_titre').'</b>', cs_urls_propres_descrip($type, $id), 'text-align: center;')
+		. "</div>"
+		. fin_cadre_relief(true);
+	// SPIP >= 2.0
 	return cadre_depliable(find_in_path('img/couteau-24.gif'),
 		'<b>'._T('couteau:urls_propres_titre').'</b>',
 		false,	// true = deplie
@@ -136,12 +140,22 @@ function cs_urls_propres($type, $id) {
 
 function cs_urls_propres_descrip($type, $id) {
 	global $type_urls;
-	$url = generer_url_entite_absolue($id, $type, '', '', true);
-	$s = sql_select("url", "spip_urls", "id_objet=$id AND type='$type'", '', 'date DESC');
 	$res = "";
-	while ($t = sql_fetch($s)) $res .= "&bull;&nbsp;$t[url]\n";
+	// SPIP >= 2.0
+	if(defined('_SPIP19300')) {
+		$url = generer_url_entite_absolue($id, $type, '', '', true);
+		$s = sql_select("url", "spip_urls", "id_objet=$id AND type='$type'", '', 'date DESC');
+		while ($t = sql_fetch($s)) $res .= "&bull;&nbsp;$t[url]\n";
+	// SPIP < 2.0
+	} else {
+		// impossible de calculer l'url publique d'ici.
+		$url = '';
+		$table = $type.($type=='syndic'?'':'s');
+		$r0 = "SELECT url_propre FROM spip_$table WHERE id_$type=$id";
+		$r = spip_query($r0);
+		if ($r AND $r = spip_fetch_array($r)) $res .= "&bull;&nbsp;$r[url_propre]\n";
+	}
 
-//spip_log($row);
 	$format = in_array($type_urls, array('page', 'standard', 'html'))
 		?_T('couteau:urls_propres_erreur')
 		:_T('couteau:urls_propres_objet');
@@ -151,11 +165,13 @@ function cs_urls_propres_descrip($type, $id) {
 			'url'=>generer_url_ecrire('admin_couteau_suisse', 'cmd=descrip&outil=type_urls#cs_infos')
 		)). "\n\n"
 		. $format . "\n\n"
-		. '{{'. _T('couteau:2pts', array(
+		. '|{{'. _T('couteau:2pts', array(
 			'objet'=>strtoupper(unicode2charset(html2unicode(_T('couteau:objet_'.$type)))).' '.$id
-		))."}}\n\n"
-		. "$res\n\n[["
-		. _T('couteau:urls_propres_lien'). "|{$url}->{$url}]]\n\n"
+		))."}}|\n"
+		. "|$res|\n"
+		. (strlen($url)
+			?"\n[<span>[". _T('couteau:urls_propres_lien'). "|{$url}->{$url}]</span>]\n\n"
+			:'<iframe src="./?exec=action_rapide&arg=type_urls_spip&format=iframe&type_objet='.$type.'&id_objet='.$id.'" width="100%" style="border:none; height:4em;"></iframe>')
 		
 	);
 }

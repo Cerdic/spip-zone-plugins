@@ -59,7 +59,7 @@ cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour()
 		$r = spip_query($r0);
 		if ($r AND $r = spip_fetch_array($r)) { $url_1 = $r['url_propre']; $titre = $r['titre']; }
 		/*charger_generer_url();*/
-		if(!function_exists($fct = "generer_url_$type")) {
+		if(!function_exists($fct = 'generer_url_'.($type=='syndic'?'site':$type))) {
 			if($f = include_spip('urls/'.$type_urls, false))
 				include_once($f);
 		}
@@ -67,7 +67,9 @@ cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour()
 		$r = spip_query($r0);
 		if ($r AND $r = spip_fetch_array($r)) $url_2 = $r['url_propre'];
 		// url propre en base || titre || url complete || type d'URLs || URL recalculee
-		echo $url_1.'||'.$titre.'||'.$url.'||'.$type_urls.'||'.$url_2;
+		echo _request('format')=='iframe'
+			?"<span style='font-family:Verdana,Arial,Sans,sans-serif; font-size:10px;'>[<a href='../$url' title='$url' target='_blank'>"._T('couteau:urls_propres_lien').'</a>]</span>'
+			:$url_1.'||'.$titre.'||'.$url.'||'.$type_urls.'||'.$url_2;
 		break;
 	// renvoie les caracteristiques URLs d'un objet (cas SPIP >= 2.0)
 	case 'type_urls_spip2':
