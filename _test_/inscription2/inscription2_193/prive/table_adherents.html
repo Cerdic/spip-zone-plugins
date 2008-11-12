@@ -69,11 +69,10 @@ function confirm(msg,callback) {
 					<option value='#GET{cle}'>[(#VAL{inscription2:}|concat{#GET{cle}}|_T)]</option>
 				]
 			]
-			<td><strong><a href="[(#SELF|parametre_url{'ordre',[(#CLE|replace{'_table',''})]}|parametre_url{'desc',#GET{desc}})]">[(#VAL{inscription2:}|concat{[(#CLE|replace{'_table',''})]}|_T)]</a></strong></td>]
 			</BOUCLE_recherchefields>
 		</select>
 		<input type="submit" class="fondo" value="<:info_rechercher:>" />
-		</form>
+		</form><a href='[(#SELF|parametre_url{debut,''}|parametre_url{ordre,''}|parametre_url{desc,''})]'> tous</a>
 	</div>
 	<?php
 	include_spip('base/abstract_sql');

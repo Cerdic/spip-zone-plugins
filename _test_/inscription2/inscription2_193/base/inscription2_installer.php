@@ -292,7 +292,7 @@ function inscription2_upgrade(){
 		$spip_societes['id_pays'] = "bigint(21) NOT NULL";
 		$spip_societes['telephone'] = "text NOT NULL ";
 		
-		$spip_societes_key = array('PRIMARY KEY' => 'id_societe', 'KEY id_pay' => 'id_pays');
+		$spip_societes_key = array('PRIMARY KEY' => 'id_societe', 'KEY id_pays' => 'id_pays');
 		
 		sql_create('spip_societes', $spip_societes,$spip_societes_key,true);
 		
@@ -303,7 +303,7 @@ function inscription2_upgrade(){
 		include_spip('base/abstract_sql');
 		// Suppression du champs id et on remet la primary key sur id_auteur...
 		spip_query("ALTER TABLE spip_auteurs_elargis DROP id, DROP INDEX id_auteur, ADD PRIMARY KEY (id_auteur)");
-		echo "Inscription2 update @ 0.63<br/>On supprimer le champs id pour privilegier id_auteur";
+		echo "Inscription2 update @ 0.63<br />On supprimer le champs id pour privilegier id_auteur";
 		ecrire_meta('inscription2_version',$current_version=0.63);
 	}	
 	if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) ecrire_metas();
