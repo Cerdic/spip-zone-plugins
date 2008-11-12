@@ -2,6 +2,14 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// compatibilite avec SPIP 1.91
+if(!function_exists('block_parfois_visible')) {
+	function block_parfois_visible($nom, $invite, $masque, $style='') {
+		return "<div style='$style'>" . bouton_block_invisible($nom) . "$invite</div>"
+		. debut_block_invisible($nom) . "<div id='$nom'>$masque</div>" . fin_block() . '</div>';
+	}
+}
+
 function boites_privees_affiche_gauche($flux){
 	if(defined('boites_privees_URLS_PROPRES')) 
 		switch($flux['args']['exec']) {
@@ -75,7 +83,7 @@ function cs_formatspip($id_article){
 			. $row['ps']."\n\n"; $i++;
 	}
 	$titre =  _T('couteau:texte'.($i>1?'s':'').'_formatspip');
-	// compatibilite SPIP < v1.93
+	// compatibilite SPIP < 2.0
 	$compat = function_exists('bouton_block_depliable');
 	$bouton = $compat?bouton_block_depliable($titre, 'invisible', "formatspip")
 		:bouton_block_invisible("formatspip").$titre;
