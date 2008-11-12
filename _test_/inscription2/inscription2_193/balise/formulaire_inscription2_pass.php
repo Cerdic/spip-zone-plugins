@@ -153,7 +153,7 @@ function envoyer_inscription2_pass($var_user) {
 			. _T('inscription2:email_bonjour', array('nom'=>$var_user['nom']))."\n\n"
 			. _T('inscription2:texte_email_confirmation', array('login'=> $var_user['login'], 'nom_site' => $nom_site_spip));
 
-	if (envoyer_mail($var_user['email'],"[$nom_site_spip] "._T('inscription2:compte_active'), $message))
+	if (envoyer_mail($var_user['email'],"[$nom_site_spip] "._T('inscription2:compte_active', array('nom_site' => $nom_site_spip)), $message))
 		return false;
 	else
 		return _T('inscription2:probleme_email');
