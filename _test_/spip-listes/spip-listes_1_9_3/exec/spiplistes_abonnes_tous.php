@@ -190,10 +190,12 @@ function exec_spiplistes_abonnes_tous () {
 	
 	$tri = _request('tri') ? _request('tri') : 'nom';
 
+	$id_boite_dest_ajax = 'auteurs';
+	
 	$page_result .= ""
 		. debut_cadre_relief('redacteurs-24.gif', true)
-		. "<div id='auteurs'>\n"
-		. spiplistes_listes_boite_abonnes(0, $tri, $debut, _SPIPLISTES_EXEC_ABONNES_LISTE)
+		. "<div id='$id_boite_dest_ajax'>\n"
+		. spiplistes_listes_boite_abonnes(0, $tri, $debut, _SPIPLISTES_EXEC_ABONNES_LISTE, $id_boite_dest_ajax)
 		. "</div>\n"
 		. fin_cadre_relief(true)
 		;

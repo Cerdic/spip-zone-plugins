@@ -144,6 +144,7 @@ function spiplistes_afficher_auteurs (
 	, $tri = 'nom'
 	, $id_liste = 0
 	, $debut = 0
+	, $id_boite_dest_ajax = 'auteurs'
 ) {
 	
 	global 
@@ -274,7 +275,7 @@ function spiplistes_afficher_auteurs (
 				$result .= 
 					"<a href='"
 						. parametre_url($exec_url, 'redirect', $exec_url)
-						. "' onclick=\"return AjaxSqueeze('$action_url','auteurs','$exec_url',event)\">"
+						. "' onclick=\"return AjaxSqueeze('$action_url', '$id_boite_dest_ajax', '$exec_url',event)\">"
 						. $j
 						. "</a>\n"
 						;
@@ -304,7 +305,7 @@ function spiplistes_afficher_auteurs (
 					? "<strong>$key</strong> "
 					: "<a href='"
 						. parametre_url($exec_url, 'redirect', $exec_url)
-						. "' onclick=\"return AjaxSqueeze('$action_url','auteurs','$exec_url',event)\">"
+						. "' onclick=\"return AjaxSqueeze('$action_url', '$id_boite_dest_ajax', '$exec_url',event)\">"
 						. $key
 						. "</a>\n"
 					;
@@ -418,7 +419,7 @@ function spiplistes_afficher_auteurs (
 					. parametre_url($action_url, 'statut', $key)
 					. "' onclick=\"return AjaxSqueeze('"
 					. parametre_url($action_url_ajax, 'statut', $key)
-						."','auteurs','',event)\">"
+						."', '$id_boite_dest_ajax', '',event)\">"
 					. _T('spiplistes:'.$legend)
 					. "</a>\n"
 				;		
@@ -454,7 +455,7 @@ function spiplistes_afficher_auteurs (
 			$result .= ""
 				. "<a href='"
 				. parametre_url($action_url, 'redirect', $exec_url)
-				. "' onclick=\"return AjaxSqueeze('$action_url','auteurs','$exec_url',event)\">"
+				. "' onclick=\"return AjaxSqueeze('$action_url', '$id_boite_dest_ajax', '$exec_url',event)\">"
 						. "&lt;&lt;&lt;"
 						. "</a>\n"
 				;
@@ -467,7 +468,7 @@ function spiplistes_afficher_auteurs (
 				. "<!-- fleche suivante -->\n"
 				. "<a href='"
 				. parametre_url($action_url, 'redirect', $exec_url)
-				. "' onclick=\"return AjaxSqueeze('$action_url','auteurs','$exec_url',event)\">"
+				. "' onclick=\"return AjaxSqueeze('$action_url', '$id_boite_dest_ajax', '$exec_url',event)\">"
 						. "&gt;&gt;&gt;"
 						. "</a>\n"
 				;

@@ -10,7 +10,7 @@ include_spip('inc/spiplistes_api_presentation');
 include_spip('inc/spiplistes_listes_selectionner_auteur');
 
 //CP-20080603
-// principalement utilisé par exec/spiplistes_liste_gerer.php
+// principalement utilise par exec/spiplistes_liste_gerer.php
 // et exec/spiplistes_listes_toutes.php
 function action_spiplistes_liste_des_abonnes_dist () {
 

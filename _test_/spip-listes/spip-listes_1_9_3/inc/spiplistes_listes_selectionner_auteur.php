@@ -69,7 +69,10 @@ function spiplistes_listes_auteurs_elligibles ($id_liste, $statut_liste = '', $f
 //CP-20080603
 // renvoie la boite en liste des abonnes a une liste
 // si $id_liste == 0, liste tous les abonnements
-function spiplistes_listes_boite_abonnes ($id_liste, $tri, $debut, $scrip_retour) {
+function spiplistes_listes_boite_abonnes (
+	$id_liste, $tri, $debut, $scrip_retour
+	, $id_boite_dest_ajax
+	) {
 	$id_liste = intval($id_liste);
 	$sql_where = array("aut.statut <> ".sql_quote('5poubelle'));
 	switch ($tri) {
@@ -113,6 +116,7 @@ function spiplistes_listes_boite_abonnes ($id_liste, $tri, $debut, $scrip_retour
 			, $tri
 			, $id_liste
 			, $debut
+			, $id_boite_dest_ajax
 			)
 		;
 	return($boite_abonnes);
@@ -207,11 +211,12 @@ function spiplistes_listes_boite_abonnements ($id_liste, $statut_liste, $tri, $d
 	$nb = spiplistes_listes_nb_abonnes_compter($id_liste);
 	$legend = _T('spiplistes:nbre_abonnes').$nb;
 	$legend = "<small>".spiplistes_nb_abonnes_liste_str_get($id_liste)."</small>";
+	$id_boite_dest_ajax = "grosse_boite_abonnements";
 	$boite_abonnements = ""
-		. "<div id='grosse_boite_abonnements' class='verdana1'>\n"
+		. "<div id='$id_boite_dest_ajax' class='verdana1'>\n"
 		. "<div class='verdana2' id='legend-abos1-propre'>$legend</div>\n"
 		. "<div id='auteurs'>\n"
-		. spiplistes_listes_boite_abonnes($id_liste, $tri, $debut, $script_retour)
+		. spiplistes_listes_boite_abonnes($id_liste, $tri, $debut, $script_retour, $id_boite_dest_ajax)
 		. "</div>\n"
 		;
 	if($elligibles === null) {
@@ -219,7 +224,9 @@ function spiplistes_listes_boite_abonnements ($id_liste, $statut_liste, $tri, $d
 		// demande la liste des elligibles
 		list($elligibles, $nb_elligibles) = spiplistes_listes_auteurs_elligibles($id_liste, $statut_liste);
 	}
-	if($nb_elligibles > 0) {
+	if(($nb_elligibles > 0)
+		&& ($id_liste > 0) // ?exec=spiplistes_abonnes_tous a sa propre boite de recherche
+	) {
 		$boite_abonnements .= spiplistes_listes_selectionner_elligibles(
 			$elligibles
 			, $nb_elligibles
@@ -227,7 +234,7 @@ function spiplistes_listes_boite_abonnements ($id_liste, $statut_liste, $tri, $d
 			, $tri
 			, _SPIPLISTES_ACTION_ABONNER_AUTEUR
 			, _SPIPLISTES_EXEC_LISTE_GERER
-			, 'grosse_boite_abonnements'
+			, $id_boite_dest_ajax
 		);
 	}
 	$boite_abonnements .= ""
