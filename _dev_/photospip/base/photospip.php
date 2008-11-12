@@ -2,12 +2,13 @@
 
 /*
  * Photospip
- * Un Photoshop-lite dans spip?
+ * Un Photoshop-light dans spip?
  *
  * Auteurs :
- * Quentin Drouet
+ * Quentin Drouet (kent1@arscenic.info)
  *
  * © 2008 - Distribue sous licence GNU/GPL
+ * Pour plus de details voir le fichier COPYING.txt
  *
  */
 
