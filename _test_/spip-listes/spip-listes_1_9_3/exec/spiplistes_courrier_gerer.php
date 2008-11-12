@@ -133,8 +133,8 @@ function exec_spiplistes_courrier_gerer () {
 						}
 						else {
 							
-							$format_abo = spiplistes_format_abo_demande($id_auteur);
-							
+							$format_abo = spiplistes_format_abo_demande($id_auteur_test);
+
 							/*
 							 * meme le compte qui veut recevoir un test doit avoir
 							 * un format de reception

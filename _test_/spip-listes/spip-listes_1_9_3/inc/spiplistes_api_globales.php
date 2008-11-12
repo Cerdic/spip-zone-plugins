@@ -39,11 +39,22 @@ if(!defined("LOG_WARNING")) {
 function spiplistes_log($texte, $level = LOG_WARNING) {
 	static $lan;
 	if($lan === null) {
-		$lan = __server_in_private_ip_adresses();
+		$lan = spiplistes_server_rezo_local();
 	}
 	if($lan) {
 		if(spiplistes_pref_lire('opt_console_syslog') == 'oui') {
-			__syslog_trace($texte, $level);
+			$tag = "_";
+			if(empty($tag)) { 
+				$tag = basename ($_SERVER['PHP_SELF']); 
+			}
+			else if($level == LOG_DEBUG) {
+				$tag = "DEBUG: ".$tag; 
+			}
+			return(
+				openlog ($tag, LOG_PID | LOG_CONS, LOG_USER) 
+					&& syslog ($level, (string)$texte) 
+					&&	closelog()
+			);
 		}
 		else {
 			spip_log($texte, _SPIPLISTES_PREFIX);
@@ -57,6 +68,14 @@ function spiplistes_log($texte, $level = LOG_WARNING) {
 		spip_log($texte, _SPIPLISTES_PREFIX);
 	}
 	return(true);
+}
+
+function spiplistes_server_rezo_local () {
+	static $lan;
+	if($lan === null) {
+		$lan = preg_match('/^(192\.168|127\.0)/', $_SERVER['SERVER_ADDR']);
+	}
+	return($lan);
 }
 
 // CP-20080324
