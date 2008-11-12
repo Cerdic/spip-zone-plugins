@@ -34,7 +34,7 @@ function formulaires_inscription2_ajax_charger_dist($id_auteur = NULL){
 		$auteur = sql_fetsel(
 			$champs,
 			'spip_auteurs LEFT JOIN spip_auteurs_elargis USING(id_auteur)',
-			'id_auteur ='.$id_auteur            
+			'id_auteur ='.$id_auteur
 		);
 
 		$champs = $auteur;
@@ -90,6 +90,7 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 			
 			//si clef obligatoire, obligatoire activé et _request() vide alors erreur
 			if (!$erreurs[$champs] && (lire_config('inscription2/'.$champs.'_obligatoire') == 'on') && !_request($champs)) {
+				spip_log("erreur sur $champs","inscription2");
 				$erreurs[$champs] = _T('inscription2:champ_obligatoire');
 			}
 		}
@@ -115,9 +116,10 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 	spip_log($erreurs,'inscription2');
 	//message d'erreur generalise
 	if (count($erreurs)) {
+		spip_log("$erreurs","inscription2");
 		$erreurs['message_erreur'] .= _T('inscription2:formulaire_remplir_obligatoires');
 	}
-
+	
     return $erreurs; // si c'est vide, traiter sera appele, sinon le formulaire sera resoumis
 }
 

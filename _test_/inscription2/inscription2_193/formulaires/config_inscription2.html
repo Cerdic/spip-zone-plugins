@@ -45,9 +45,10 @@
 									</tr>
 									<tr>
 										<td>
-											<input type="checkbox" name="nom" [checked="(#ENV{nom}?{checked})"] id="nom" />
-											<div style="display:none;">
-												<input type="checkbox" name="nom_obligatoire" checked="checked" id="nom_obligatoire" />
+											<input type="checkbox" name="nom" [checked="(#ENV{nom}?{checked})"] onclick="showoblig(this)" id="nom" />
+											<div style="[(#CONFIG{inscription2/nom}|=={on}|?{display: block;, display:none;})]">
+												<input type="checkbox" name="nom_obligatoire" [checked="(#CONFIG{inscription2/nom_obligatoire}?{checked})"] id="nom_obligatoire" />
+												<span style="color:red">*</span>
 											</div>
 										</td>
 										<td>
