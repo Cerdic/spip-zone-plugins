@@ -34,6 +34,12 @@
 	if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /*
+ * CP-20081112: script obsolete
+ * 
+ */
+ 
+ 
+/*
 /* Ajax, renvoie le contenu de la console SPIPLISTES
 /**/
 function action_spiplistes_lire_console_dist () {

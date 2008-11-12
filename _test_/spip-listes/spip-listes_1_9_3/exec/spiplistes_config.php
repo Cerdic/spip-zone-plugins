@@ -423,12 +423,17 @@ function exec_spiplistes_config () {
 		if(!($ii = spiplistes_pref_lire('opt_console_syslog')) || ($ii == 'non')) {
 		// si syslog non activé, on visualise les journaux de spip
 			// lien sur logs ou affiche logs
+			/*
+			 * CP-20081112: deplace' dans les raccourcis
+			 */
+			/*
 			$page_result .= ""
 				. "<a id='view-spiplistes-log' name='view-spiplistes-log' href='#view-spiplistes-log' class='verdana2'>"
 					. _T('spiplistes:log_voir_les_journaux')
 					. "</a>\n"
 				. "<div id='view-spiplistes-log-box'></div>\n"
 				;
+			*/
 		}
 		$page_result .= ""
 			. fin_cadre_trait_couleur(true)

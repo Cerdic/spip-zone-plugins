@@ -336,7 +336,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , 'log_console_syslog_desc' => "Vous &ecirc;tes sur un r&eacute;seau local (@IP_LAN@). Si besoin, vous pouvez activer la console sur syslog au lieu des journaux SPIP (conseill&eacute; sous unix)."
 , 'log_console_syslog_texte' => "Activer les journaux syst&egrave;mes (renvoi sur syslog)"
 , 'log_console_syslog' => "Console syslog"
-, 'log_voir_les_journaux' => "Voir les journaux SPIPLISTES"
+, 'log_voir_le_journal' => "Voir le journal de SPIP-Listes"
 
 
 //M
@@ -391,6 +391,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'meleuse_suspendue_info' => "L'envoi des courriers en attente d'exp&eacute;dition est suspendu.",
 'Meleuse_reactivee' => "M&egrave;leuse r&eacute;activ&eacute;e"
 , 'max_' => "Max "
+, 'mode_debug_actif' => "Mode debug actif"
 
 //n
 , 'nb_abonnes_sing' => " abonn&eacute;"
@@ -519,6 +520,7 @@ liste."
 , 'Trieuse_reactivee' => "Trieuse r&eacute;activ&eacute;e"
 , 'trieuse_suspendue' => "Trieuse suspendue"
 , 'trieuse_suspendue_info' => "Le traitement des listes de diffusion programm&eacute;es est suspendu."
+, 'titre_page_voir_journal' => "Journal de SPIP-Listes"
 
 //U
 , 'Utilisez_formulaire' => "Utilisez le formulaire ci-contre pour activer/d&eacute;activer cette option.",
@@ -530,7 +532,7 @@ liste."
 'vous_pouvez_egalement' => 'Vous pouvez &eacute;galement',
 'vous_inscrire_auteur' => 'vous inscrire en tant qu\'auteur',
 'voir_discussion' => 'Voir la discussion',
-'masquer_les_journaux_SPIPLISTES' => "Masquer les journaux SPIPLISTES"
+'masquer_le_journal_SPIPLISTES' => "Masquer le journal de SPIP-Listes"
 , 'Vides' => "Vides",
 'Valider_abonnement' => "Valider cet abonnement"
 , 'vous_etes_abonne_aux_listes_selectionnees_' => "Vous &ecirc;tes abonn&eacute; aux listes s&eacute;lectionn&eacute;es "

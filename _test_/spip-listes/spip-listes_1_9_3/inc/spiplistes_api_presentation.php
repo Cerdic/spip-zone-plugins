@@ -26,6 +26,7 @@
 // $LastChangedDate$
 
 include_spip('inc/presentation');
+include_spip('inc/spiplistes_api_journal');
 
 /*
 	Les fonctions affichage et presentation dans l'espace prive
@@ -304,6 +305,9 @@ function spiplistes_boite_raccourcis ($return = false) {
 			;
 	}
 	$result .= ""
+		// lecture du journal (log)
+		. spiplistes_raccourci_journal(false)
+		//
 		. "<!-- aide en ligne -->\n"
 		. "<li>"
 		. icone_horizontale(
@@ -853,6 +857,48 @@ function spiplistes_listes_lister_abos () {
 	}
 	return(NULL);
 }
+
+/*
+ * CP-20081112
+ * deux fonctions issues de fmp3
+ * - fmp3_envelopper_script()
+ * - fmp3_compacter_script()
+ * 
+ * enveloppe un script javascript pour insertion dans le code de la page
+ */
+function spiplistes_envelopper_script ($source, $format) {
+	$source = trim($source);
+	if(!empty($source)) {
+		switch($format) {
+			case 'css':
+				$source = "\n<style type='text/css'>\n<!--\n" 
+					. $source
+					. "\n-->\n</style>";
+				break;
+			case 'js':
+				$source = "\n<script type='text/javascript'>\n//<![CDATA[\n" 
+					. $source
+					. "\n//]]>\n</script>";
+				break;
+			default:
+				$source = "\n\n<!-- erreur envelopper: format inconnu [$format] -->\n\n";
+		}
+	}
+	return($source);
+} // end spiplistes_envelopper_script()
+
+/*
+ * complément des deux 'compacte'. supprimer les espaces en trop.
+ */ 
+function spiplistes_compacter_script ($source, $format) {
+	$source = trim($source);
+	if(!empty($source)) {
+		$source = compacte($source, $format);
+		$source = preg_replace(",/\*.*\*/,Ums","",$source); // pas de commentaires
+		$source = preg_replace('=[[:space:]]+=', ' ', $source); // réduire les espaces
+	}
+	return($source);
+} // end spiplistes_compacter_script()
 
 //
 ?>

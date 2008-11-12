@@ -1,0 +1,75 @@
+Log:
+quelques remarques
+
+Modified:
+    _plugins_/_test_/spip-listes/spip-listes_1_9_3/TO-DO.txt
+
+Modified: _plugins_/_test_/spip-listes/spip-listes_1_9_3/TO-DO.txt
+==============================================================================
+--- _plugins_/_test_/spip-listes/spip-listes_1_9_3/TO-DO.txt (original)
++++ _plugins_/_test_/spip-listes/spip-listes_1_9_3/TO-DO.txt Thu Nov  6 
++++ 08:25:33 2008
+@@ -5,12 +5,8 @@
+ 
+ 
+ TO-DO:
+-- exporter liste abonnés. Voir si possibilité ajouter champ ('fonction' si auteurs_details installé)
+-- corriger css pour http://localhost:8206/ecrire/?exec=spiplistes_liste_gerer sous IE6
+-- préciser dans /ecrire/?exec=spiplistes_listes_toutes les listes sans patron
+-- revoir formulaire de recherche d'abonné/invité dans la page /ecrire/?exec=spiplistes_liste_gerer, boite "Les abonnés à cette liste"
+-- /ecrire/?exec=spiplistes_courrier_gerer, prévisu texte seul n'apparait pas sous IE6
+-- /ecrire/?exec=spiplistes_liste_gerer, plier/déplier programmer envoi auto semble ne pas fonctionner sous IE6
++- A vérifier: Pour toutes mes listes, le nombre d’abonnés et 
++toujours égal au nombre de désabonnés alors que je force l’envoi 
++en html et que je teste l’envoi réel. (Marcel BOLLA 20081106)
++- A vérifier: Il est impossible d’ajouter des abonnés à une liste, 
++si le nombre d’auteurs élligibles est supérieur à 
++_SPIPLISTES_SELECT_MIN_AUTEURS soit 50 dans le cas présent ... 
++l’affichage de la boite de recherche ne fonctionne pas. J’ai 
++contourné en supprimant le test !!! pour le problème suivant. (Marcel 
++BOLLA 20081106)
+ - Sur 193: les admins tt rubriques n'ont pas d'accès à la maintenance (?). A corriger.
+ - revoir liste auteurs, l'ajax n'a pas le bon retour (ex.: fleche droite perd la page d'appel, du coup le clic suivant sur th de tri se perd)
+ - revoir spiplistes_abonne_edit (desabonne, abonne, format ..., pas tres clair). Voire supprimer cette page et renvoyer son formulaire corrige sur auteur_infos.
+
+ 
+ Bonjour, Je n’avais pas non plus accès à la maintenance technique après être passé de Spip-listes 192 à 193. Ma configuration actuelle est la suivante :
+
+SPIP 1.9.2d [15298] SPIP-Listes 1.9975-21081 <1.98> Site hébergé chez Free
+
+J’ai donc tenté une réinstallation "au propre". Après avoir supprimé les tables Spip-listes avec "Effacer tout" lors de la desinstallation, vidé le cache et refait un installation de Spip-listes 193, j’ai accès à la maintenance. Si ça peut aider...
+
+Il reste cependant 2 soucis :
+
+1 - Impossible de faire prendre en compte le format d’abonnement des abonnés. Je précise que j’abonne les administrateurs du site ainsi que les visiteurs enregistrés et dont les droits sont gérés par le plugin accès restreint (0.2 stable).
+
+Si je change le format d’abonnement dans /ecrire/ ?exec=spiplistes_abonnes_tous, le format chosit (html par exemple) apparaît dans la colonne "Format", mais "qt" reste vide. L’enregistrement est est bien prit en compte dans la table spip_auteurs_elargis, mais pas dans la table spip_auteurs_liste (vérifié via phpmyadmin).
+
+Si J’importe un abonné via "import/export", les deux tables sont bien renseignées, mais le statut dans spip_auteurs_listes reste sur "a_valider". J’ai essayé de le mettre sur "valide" pour tester un envoi, mais ça ne change pas le résultat (pas d’envoi - j’y viens).
+
+Si j’essaye de changer les valeurs du formulaire "Listes de diffusion" dans ecrire/ ?exec=auteur_infos&id_auteur=1, par exemple, l’abonnement est bien enregistré, mais jamais le format : les boutons radio restent vide après validation, quelque soit le format que je choisisse ! Du coups, j’ai toujours le message "Votre abonnement est suspendu. Vous ne recevrez pas les courriers des listes de diffusion listées ci-dessous. Pour recevoir à nouveau le courrier de vos listes préférées, choisissez un format de réception et validez ce formulaire. ". Lorque je reviens sur la page, j’ai la mention :
+
+Listes de diffusion
+1/1 liste. Format de réception : <aucun>
+
+Par contre, si je retourne voir / ?exec=spiplistes_abonnes_tous, la colonne "qt" est incrémentée de 1 pour chaque tentative que je fais dans ecrire/ ?exec=auteur_infos
+
+2 - Lorsque je fais un envoi de message, personne ne reçoit, puisque personne n’est réellement abonné. Dans ecrire/ ?exec=spiplistes_courrier_gerer, j’obtiens pour le message envoyé : "
+
+# Nombre d\’abonnés : 10
+
+* Format html : 0 * Format texte : 0 * Désabonnés : 10
+
+# Nombre d’envois en erreur : 0 " (c’est une petite liste de test)
+
+Au niveau des journeaux, ça nous donne :
+
+Nov 08 16:38:20 88.166.101.13 (pid 3064) MEL : envoi OK. Supprimer queue 21984 Nov 08 16:38:20 88.166.101.13 (pid 3064) MEL : total_abos : 10, en_cour : 10, limit : 30 Nov 08 16:38:20 88.166.101.13 (pid 3064) MEL : etiquette en cours pour id_courrier #5 Nov 08 16:38:20 88.166.101.13 (pid 3064) MEL : 10 job(s), distribution... Nov 08 16:38:20 88.166.101.13 (pid 3064) CRON : 10 job(s), appel meleuse Nov 08 16:38:20 88.166.101.13 (pid 3064) CRON : nb listes depart : 0 Nov 08 16:38:20 88.166.101.13 (pid 3064) SEND id_courrier #5 ON id_liste #1 BY id_auteur
+
+Mais évidemment, rien ne part vraiment.
+
+Voilà. Désolé d’avoir été si bavard, mais j’ai essayé d’être précis.
+
+Merci pour votre aide !
+_______________________________________________
+Spip-zone-commit@rezo.net - http://listes.rezo.net/mailman/listinfo/spip-zone-commit
