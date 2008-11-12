@@ -85,7 +85,7 @@ cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour()
 		// chercher dans la table des URLS
 		include_spip('base/abstract_sql');
 		//  Recuperer une URL propre correspondant a l'objet.
-		$row = sql_fetsel("U.url, O.$champ_titre", "$table AS O LEFT JOIN spip_urls AS U ON (U.type='$type' AND U.id_objet=O.$col_id)", "O.$col_id=$id_objet", '', 'date DESC', 1);
+		$row = sql_fetsel("U.url, O.$champ_titre", "$table AS O LEFT JOIN spip_urls AS U ON (U.type='$type' AND U.id_objet=O.$col_id)", "O.$col_id=$id_objet", '', 'U.date DESC', 1);
 
 		if (!$row) return false; # Quand $id_objet n'est pas un numero connu
 		list($champ_titre,) = explode(',', $champ_titre, 2);
