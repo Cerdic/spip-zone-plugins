@@ -55,10 +55,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 @puce@ En cochant &laquo;oui&raquo; ci-dessous, l\'ouverture d\'un bloc provoquera la fermeture de tous les autres blocs de la page, afin d\'en avoir qu\'un seul ouvert &agrave; la fois.[[%bloc_unique%]]
 ',
 	'blocs:nom' => 'Blocs D&eacute;pliables',
-	'boites_privees:description' => 'Toutes les bo&icirc;tes d&eacute;crites ci-dessous apparaissent dans la partie priv&eacute;e.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]]
+	'boites_privees:description' => 'Toutes les bo&icirc;tes d&eacute;crites ci-dessous apparaissent dans la partie priv&eacute;e.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]]
 - {{Les r&eacute;visions du Couteau Suisse}} : un cadre sur la pr&eacute;sente page de configuration, indiquant les derni&egrave;res modifications apport&eacute;es au code du plugin ([Source->@_CS_RSS_SOURCE@]).
 - {{Les articles au format SPIP}} : un cadre repliable suppl&eacute;mentaire pour vos articles afin de conna&icirc;tre le code source utilis&eacute; par leurs auteurs.
-- {{Les auteurs en stat}} : un cadre suppl&eacute;mentaires sur [la page des auteurs->./?exec=auteurs] indiquant les 10 derniers connect&eacute;s et les inscriptions non confirm&eacute;es. Seuls les administrateurs voient ces informations.',
+- {{Les auteurs en stat}} : un cadre suppl&eacute;mentaires sur [la page des auteurs->./?exec=auteurs] indiquant les 10 derniers connect&eacute;s et les inscriptions non confirm&eacute;es. Seuls les administrateurs voient ces informations.
+- {{Voir les URLs propres}} : un cade d&eacute;pliable pour chaque objet de contenu (article, rubrique, auteur, ...) indiquant l\'URL propre associ&eacute;e ainsi que leurs alias &eacute;ventuels. L\'outil &laquo;&nbsp;[.->type_urls]&nbsp;&raquo; vous permet une configuration des URLs.',
 	'boites_privees:nom' => 'Bo&icirc;tes priv&eacute;es',
 
 	// C
@@ -84,7 +85,7 @@ _ Cet outil remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trou
 Vous pouvez ici d&eacute;finir certains raccourcis de SPIP. Une valeur vide &eacute;quivaut &agrave; utiliser la valeur par d&eacute;faut.[[%racc_hr%]][[%puce%]]',
 	'class_spip:description3' => '
 
-{Attention : si l\'outil &laquo;&nbsp;Belles puces&nbsp;&raquo; est activ&eacute;, le remplacement du tiret &laquo;&nbsp;-&nbsp;&raquo; ne sera plus effectu&eacute;&nbsp;; une liste &lt;ul>&lt;li> sera utilis&eacute;e &agrave; la place.}
+{Attention : si l\'outil &laquo;&nbsp;[.->pucesli]&nbsp;&raquo; est activ&eacute;, le remplacement du tiret &laquo;&nbsp;-&nbsp;&raquo; ne sera plus effectu&eacute;&nbsp;; une liste &lt;ul>&lt;li> sera utilis&eacute;e &agrave; la place.}
 
 SPIP utilise habituellement la balise &lt;h3&gt; pour les intertitres. Choisissez ici un autre remplacement :[[%racc_h1%]][[->%racc_h2%]]',
 	'class_spip:description4' => '
@@ -160,7 +161,7 @@ Par d&eacute;faut, le Couteau Suisse ins&egrave;re la pagination en t&ecirc;te e
 
 Dans les squelettes : vous avez &agrave; votre disposition les nouvelles balises #ONGLETS_DEBUT, #ONGLETS_TITRE et #ONGLETS_FIN.
 
-Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.',
+Cet outil peut &ecirc;tre coupl&eacute; avec &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.',
 	'decoupe:nom' => 'D&eacute;coupe en pages et onglets',
 	'desactiver_flash:description' => 'Supprime les objets flash des pages de votre site et les remplace par le contenu alternatif associ&eacute;.',
 	'desactiver_flash:nom' => 'D&eacute;sactive les objets flash',
@@ -323,7 +324,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:radio_target_blank3' => 'Nouvelle fen&ecirc;tre pour les liens externes :',
 	'label:radio_type_urls3' => 'Format des URLs :',
 	'label:scrollTo' => 'Installer les plugins {jQuery} suivants :',
-	'label:separateur_urls_page' => 'Caract&egrave;re de s&eacute;paration \'type-id\' (ex. : ?article-123) :',
+	'label:separateur_urls_page' => 'Caract&egrave;re de s&eacute;paration \'type-id\'<br/>(ex. : ?article-123) :',
 	'label:set_couleurs' => 'Set &agrave; utiliser :',
 	'label:spam_mots' => 'S&eacute;quences interdites :',
 	'label:spip_options_on' => 'Inclure :',
@@ -331,9 +332,17 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:style_h' => 'Votre style :',
 	'label:style_p' => 'Votre style :',
 	'label:suite_introduction' => 'Points de suite :',
-	'label:terminaison_urls_arbo' => 'Terminaison des URls (ex : .html) :',
-	'label:terminaison_urls_page' => 'Terminaison des URls (ex : .html) :',
-	'label:terminaison_urls_propres' => 'Terminaison des URls (ex : .html) :',
+	'label:debut_urls_propres' => 'D&eacute;but des URLs :',
+	'label:debut_urls_propres2' => '<:label:debut_urls_propres:>',
+	'label:debut_urls_libres' => '<:label:debut_urls_propres:>',
+	'label:marqueurs_urls_propres' => 'Ajouter les marqueurs dissociant les objets (SPIP>=2.0) :<br/>(ex. : &laquo;&nbsp;-&nbsp;&raquo; pour -Ma-rubrique-, &laquo;&nbsp;@&nbsp;&raquo; pour @Mon-site@) ',
+	'label:marqueurs_urls_propres2' => '<:label:marqueurs_urls_propres:>',
+	'label:marqueurs_urls_propres_qs' => '<:label:marqueurs_urls_propres:>',
+	'label:terminaison_urls_arbo' => '<:label:terminaison_urls_page:>',
+	'label:terminaison_urls_page' => 'Terminaison des URLs (ex : &laquo;&nbsp;.html&nbsp;&raquo;) :',
+	'label:terminaison_urls_propres' => '<:label:terminaison_urls_page:>',
+	'label:terminaison_urls_propres_qs' => '<:label:terminaison_urls_page:>',
+	'label:terminaison_urls_libres' => '<:label:terminaison_urls_page:>',
 	'label:titre_travaux' => 'Titre du message :',
 	'label:tri_articles' => 'Votre choix :',
 	'label:url_arbo_minuscules' => 'Conserver la casse des titres dans les URLs :',
@@ -462,7 +471,7 @@ _ &bull; Uniquement pour les articles contenant la balise <code>@_CS_AVEC_SOMMAI
 @puce@ Par d&eacute;faut, le Couteau Suisse ins&egrave;re le sommaire en t&ecirc;te d\'article automatiquement. Mais vous avez la possibilt&eacute; de placer ce sommaire ailleurs dans votre squelette gr&acirc;ce &agrave; une balise #CS_SOMMAIRE que vous pouvez activer ici :
 [[%balise_sommaire%]]
 
-Ce sommaire peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe en pages et onglets}.',
+Ce sommaire peut &ecirc;tre coupl&eacute; avec : &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
 	'sommaire:nom' => 'Un sommaire pour vos articles',
 	'sommaire_avec' => 'Un texte avec sommaire&nbsp;: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un texte sans sommaire&nbsp;: <b>@_CS_SANS_SOMMAIRE@</b>',
@@ -525,28 +534,42 @@ Les propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL 
 	'tri_titre' => 'Tri sur le titre (ORDER BY 0+titre,titre)',
 	'type_urls:description' => '@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'acc&egrave;s aux pages de votre site.
 
-Plus d\'infos : [->http://www.spip.net/fr_article765.html]
+Plus d\'infos : [->http://www.spip.net/fr_article765.html]. L\'outil &laquo;&nbsp;[.->boites_privees]&nbsp;&raquo; vous permet de voir sur la page de chaque objet SPIP l\'URL propre associ&eacute;e.
 [[%radio_type_urls3%]]
 <q3>@_CS_ASTER@pour utiliser les formats {html}, {propre}, {propre2}, {libres} ou {arborescentes}, recopiez le fichier &quot;htaccess.txt&quot; du r&eacute;pertoire de base du site SPIP sous le sous le nom &quot;.htaccess&quot; (attention &agrave; ne pas &eacute;craser d\'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en &quot;sous-r&eacute;pertoire&quot;, vous devrez aussi &eacute;diter la ligne &quot;RewriteBase&quot; ce fichier. Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de SPIP.</q3>
 
 <radio_type_urls3 valeur="page">@puce@ {{URLs &laquo;page&raquo;}} : ce sont les liens par d&eacute;faut, utilis&eacute;s par SPIP depuis sa version 1.9x.
 _ Exemple : <code>/spip.php?article123</code>[[%terminaison_urls_page%]][[%separateur_urls_page%]]</radio_type_urls3>
+
 <radio_type_urls3 valeur="html">@puce@ {{URLs &laquo;html&raquo;}} : les liens ont la forme des pages html classiques.
 _ Exemple : <code>/article123.html</code></radio_type_urls3>
-<radio_type_urls3 valeur="propres">@puce@ {{URLs &laquo;propres&raquo;}} : les liens sont calcul&eacute;s gr&acirc;ce au titre des objets demand&eacute;s. Des marqueurs (_, -, +, etc.) encadrent les titres en fonction du type d\'objet.
-_ Exemples : <code>/Mon-titre-d-article</code> ou <code>/-Ma-rubrique-</code> ou <code>/@Mon-site@</code></radio_type_urls3>
+
+<radio_type_urls3 valeur="propres">@puce@ {{URLs &laquo;propres&raquo;}} : les liens sont calcul&eacute;s gr&acirc;ce au titre des objets demand&eacute;s. Des marqueurs (_, -, +, @, etc.) encadrent les titres en fonction du type d\'objet.
+_ Exemples : <code>/Mon-titre-d-article</code> ou <code>/-Ma-rubrique-</code> ou <code>/@Mon-site@</code>[[%terminaison_urls_propres%]][[%debut_urls_propres%]][[%marqueurs_urls_propres%]]</radio_type_urls3>
+
 <radio_type_urls3 valeur="propres2">@puce@ {{URLs &laquo;propres2&raquo;}} : l\'extension \'.html\' est ajout&eacute;e aux liens {&laquo;propres&raquo;}.
-_ Exemple : <code>/Mon-titre-d-article.html</code> ou <code>/-Ma-rubrique-.html</code></radio_type_urls3>
-<radio_type_urls3 valeur="libres">@puce@ {{URLs &laquo;libres&raquo;}} : les liens sont {&laquo;propres&raquo;}, mais sans marqueurs (_, -, +, etc.).
-_ Exemple : <code>/Mon-titre-d-article</code> ou <code>/Ma-rubrique</code></radio_type_urls3>
+_ Exemple : <code>/Mon-titre-d-article.html</code> ou <code>/-Ma-rubrique-.html</code>
+[[%debut_urls_propres2%]][[%marqueurs_urls_propres2%]]</radio_type_urls3>
+
+<radio_type_urls3 valeur="libres">@puce@ {{URLs &laquo;libres&raquo;}} : les liens sont {&laquo;propres&raquo;}, mais sans marqueurs dissociant les objets (_, -, +, @, etc.).
+_ Exemple : <code>/Mon-titre-d-article</code> ou <code>/Ma-rubrique</code>
+[[%terminaison_urls_libres%]][[%debut_urls_libres%]]</radio_type_urls3>
+
 <radio_type_urls3 valeur="arbo">@puce@ {{URLs &laquo;arborescentes&raquo;}} : les liens sont {&laquo;propres&raquo;}, mais de type arborescent.
-_ Exemple : <code>/secteur/rubrique1/rubrique2/Mon-titre-d-article</code>[[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]</radio_type_urls3>
+_ Exemple : <code>/secteur/rubrique1/rubrique2/Mon-titre-d-article</code>
+[[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]</radio_type_urls3>
+
 <radio_type_urls3 valeur="propres-qs">@puce@ {{URLs &laquo;propres-qs&raquo;}} : ce syst&egrave;me fonctionne en &quot;Query-String&quot;, c\'est-&agrave;-dire sans utilisation de .htaccess ; les liens sont {&laquo;propres&raquo;}.
-_ Exemple : <code>/?Mon-titre-d-article</code></radio_type_urls3>
+_ Exemple : <code>/?Mon-titre-d-article</code>
+[[%terminaison_urls_propres_qs%]]</radio_type_urls3>
+
 <radio_type_urls3 valeur="propres_qs">@puce@ {{URLs &laquo;propres_qs&raquo;}} : ce syst&egrave;me fonctionne en &quot;Query-String&quot;, c\'est-&agrave;-dire sans utilisation de .htaccess ; les liens sont {&laquo;propres&raquo;}.
-_ Exemple : <code>/?Mon-titre-d-article</code></radio_type_urls3>
+_ Exemple : <code>/?Mon-titre-d-article</code>
+[[%terminaison_urls_propres_qs%]][[%marqueurs_urls_propres_qs%]]</radio_type_urls3>
+
 <radio_type_urls3 valeur="standard">@puce@ {{URLs &laquo;standard&raquo;}} : ces liens d&eacute;sormais obsol&egrave;tes &eacute;taient utilis&eacute;s par SPIP jusqu\'&agrave; sa version 1.8.
-_ Exemple : <code>article.php3?id_article=123</code></radio_type_urls3>
+_ Exemple : <code>article.php3?id_article=123</code>
+</radio_type_urls3>
 
 @puce@ Si vous utilisez le format {page} ci-dessus ou si l\'objet demand&eacute; n\'est pas reconnu, alors il vous est possible de choisir {{le script d\'appel}} &agrave; SPIP. Par d&eacute;faut, SPIP choisit {spip.php}, mais {index.php} (exemple de format : <code>/index.php?article123</code>) ou une valeur vide (format : <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il vous faut absolument cr&eacute;er le fichier correspondant dans la racine de SPIP, &agrave; l\'image de celui qui existe d&eacute;j&agrave; : {index.php}.
 [[%spip_script%]]',
@@ -569,6 +592,7 @@ Choisissez ici de mettre en exposant certains raccourcis suppl&eacute;mentaires,
 	'url_page' => 'page',
 	'url_propres' => 'propres@_CS_ASTER@',
 	'url_propres-qs' => 'propres-qs',
+	'url_propres_qs' => 'propres_qs',
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_standard' => 'standard',
 
@@ -625,18 +649,7 @@ En tant que webmestre vous-m&ecirc;me, vous avez ici les droits de modifier cett
 	'urls_base_total' => 'Il y a actuellement @nb@ URL(s) en base',
 	'attente' => 'Attente...',
 	'urls_valeur_vide' => "(Une valeur vide entraine la suppression de l'URL)",
-	'objet_article'=>'Article',
-	'objet_rubrique'=>'Rubrique',
-	'objet_breve'=>'Br&egrave;ve',
-	'objet_auteur'=>'Auteur',
-	'objet_mot'=>'Mot',
-	'objet_syndic'=>'Site',
-	'objet_articles'=>'Articles',
-	'objet_rubriques'=>'Rubriques',
-	'objet_breves'=>'Br&egrave;ves',
-	'objet_auteurs'=>'Auteurs',
-	'objet_mots'=>'Mots',
-	'objet_syndics'=>'Sites',
+	'bp_urls_propres' => 'Voir les URLs propres',
 
 );
 

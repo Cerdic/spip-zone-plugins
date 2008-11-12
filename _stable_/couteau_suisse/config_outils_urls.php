@@ -23,7 +23,7 @@ add_variable( array(
 					 'libres'=> 'couteauprive:url_libres',
 					 'arbo'=> 'couteauprive:url_arbo',
 					 'standard' => 'couteauprive:url_standard',
-					 'propres_qs' => 'couteauprive:url_propres-qs')
+					 'propres_qs' => 'couteauprive:url_propres_qs')
 				// max SPIP 1.92
 				:array('page' => 'couteauprive:url_page',
 					 'html' => 'couteauprive:url_html', 
@@ -62,13 +62,13 @@ add_variable( array(
 	'nom' => 'terminaison_urls_page',
 	'format' => _format_CHAINE,
 	'defaut' => "''",
-	'code:strlen(%s)' => "define('_terminaison_urls_page', %s);\n",
+	'code:strlen(%s)' => "define('_terminaison_urls_page', %s);",
 ));
 add_variable( array(
 	'nom' => 'separateur_urls_page',
 	'format' => _format_CHAINE,
 	'defaut' => "''",
-	'code' => "define('_separateur_urls_page', %s);\n",
+	'code:strlen(%s)' => "define('_separateur_urls_page', %s);",
 ));
 
 ///////////  define('URLS_ARBO_EXEMPLE', '/article/Titre'); /////////////////
@@ -78,26 +78,26 @@ add_variable( array(
 	'format' => _format_NOMBRE,
 	'radio' => array(0 => 'item_oui', 1 => 'item_non'),				
 	'defaut' => 1,
-	'code:%s' => "define('_url_arbo_minuscules', %s);\n",
+	'code:!%s' => "define('_url_arbo_minuscules', %s);",
 ));
 add_variable( array(
 	'nom' => 'urls_arbo_sans_type',
 	'format' => _format_NOMBRE,
 	'radio' => array(0 => 'item_oui', 1 => 'item_non'),				
 	'defaut' => 1,
-	'code:!%s' => "\$GLOBALS['url_arbo_types']=array('rubrique'=>'rubrique','article'=>'article','breve'=>'breve','mot'=>'mot','auteur'=>'auteur','site'=>'site');\n"
+	'code:!%s' => "\n\$GLOBALS['url_arbo_types']=array('rubrique'=>'rubrique','article'=>'article','breve'=>'breve','mot'=>'mot','auteur'=>'auteur','site'=>'site');"
 ));
 add_variable( array(
 	'nom' => 'url_arbo_sep_id',
 	'format' => _format_CHAINE,
 	'defaut' => "'-'",
-	'code' => "define('_url_arbo_sep_id', %s);\n",
+	'code' => "define('_url_arbo_sep_id', %s);",
 ));
 add_variable( array(
 	'nom' => 'terminaison_urls_arbo',
 	'format' => _format_CHAINE,
-	'defaut' => "''",
-	'code:strlen(%s)' => "define('_terminaison_urls_arbo', %s);\n",
+	'defaut' => "'.html'",
+	'code' => "define('_terminaison_urls_arbo', %s);",
 ));
 
 ///////////  define('URLS_PROPRES_EXEMPLE', 'Titre-de-l-article -Rubrique-'); /////////////////
@@ -106,34 +106,75 @@ add_variable( array(
 	'nom' => 'terminaison_urls_propres',
 	'format' => _format_CHAINE,
 	'defaut' => "''",
-	'code:strlen(%s)' => "define('_terminaison_urls_propres', %s);\n",
+	'code:strlen(%s)' => "define('_terminaison_urls_propres', %s);",
 ));
 add_variable( array(
 	'nom' => 'debut_urls_propres',
 	'format' => _format_CHAINE,
 	'defaut' => "''",
-	'code:strlen(%s)' => "define('_debut_urls_propres', %s);\n",
+	'code:strlen(%s)' => "define('_debut_urls_propres', %s);",
 ));
 add_variable( array(
 	'nom' => 'marqueurs_urls_propres',
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),				
 	'defaut' => 1,
-	'code:!%s' => "define('_MARQUEUR_URL', false);\n"
+	'code:!%s' => "define('_MARQUEUR_URL', false);"
+));
+
+add_variable( array(
+	'nom' => 'debut_urls_propres2',
+	'format' => _format_CHAINE,
+	'defaut' => "''",
+	'code:strlen(%s)' => "define('_debut_urls_propres', %s);",
 ));
 add_variable( array(
-	'nom' => 'forum_lgrmaxi',
+	'nom' => 'marqueurs_urls_propres2',
 	'format' => _format_NOMBRE,
-	'defaut' => 0,
-	'code:%s' => "define('_FORUM_LONGUEUR_MAXI', %s);",
+	'radio' => array(1 => 'item_oui', 0 => 'item_non'),				
+	'defaut' => 1,
+	'code:!%s' => "define('_MARQUEUR_URL', false);"
+));
+
+add_variable( array(
+	'nom' => 'terminaison_urls_libres',
+	'format' => _format_CHAINE,
+	'defaut' => "''",
+	'code:strlen(%s)' => "define('_terminaison_urls_propres', %s);",
+));
+add_variable( array(
+	'nom' => 'debut_urls_libres',
+	'format' => _format_CHAINE,
+	'defaut' => "''",
+	'code:strlen(%s)' => "define('_debut_urls_propres', %s);",
+));
+
+add_variable( array(
+	'nom' => 'terminaison_urls_propres_qs',
+	'format' => _format_CHAINE,
+	'defaut' => "''",
+	'code:strlen(%s)' => "define('_terminaison_urls_propres', %s);",
+));
+add_variable( array(
+	'nom' => 'marqueurs_urls_propres_qs',
+	'format' => _format_NOMBRE,
+	'radio' => array(1 => 'item_oui', 0 => 'item_non'),				
+	'defaut' => 1,
+	'code:!%s' => "define('_MARQUEUR_URL', false);"
 ));
 
 add_outil( array(
 	'id' => 'type_urls',
 	'code:spip_options' => "%%radio_type_urls3%%%%spip_script%%
-%%terminaison_urls_page%%%%separateur_urls_page%%
-%%url_arbo_minuscules%%%%url_arbo_sep_id%%%%urls_arbo_sans_type%%%%terminaison_urls_arbo%%
-%%debut_urls_propres%%%%terminaison_urls_propres%%%%marqueurs_urls_propres%%",
+switch(\$GLOBALS['type_urls']) {
+	case 'page':%%terminaison_urls_page%%%%separateur_urls_page%%break;
+	case 'propres':%%debut_urls_propres%%%%terminaison_urls_propres%%%%marqueurs_urls_propres%%break;
+	case 'propres2':%%debut_urls_propres2%%%%marqueurs_urls_propres2%%break;
+	case 'libres':%%debut_urls_libres%%%%terminaison_urls_libres%%break;
+	case 'arbo':%%url_arbo_minuscules%%%%url_arbo_sep_id%%%%terminaison_urls_arbo%%%%urls_arbo_sans_type%%break;
+	case 'propres_qs':%%terminaison_urls_propres_qs%%%%marqueurs_urls_propres_qs%%break;
+	case 'propres-qs':%%terminaison_urls_propres_qs%%break;
+}",
 	'categorie' => 'admin',
 ));
 

@@ -71,6 +71,9 @@ function couteau_suisse_affiche_gauche($flux){
 		$flux['data'] .= 
 			icone_horizontale(_T('couteau:titre'), generer_url_ecrire('admin_couteau_suisse'), find_in_path('img/couteau-24.gif'), '', false);
 */
+	global $cs_metas_pipelines;
+	if (isset($cs_metas_pipelines['affiche_gauche']))
+		eval($cs_metas_pipelines['affiche_gauche']);
 	return $flux;
 }
 function couteau_suisse_affiche_droite($flux){

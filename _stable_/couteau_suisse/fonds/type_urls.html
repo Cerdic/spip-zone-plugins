@@ -80,12 +80,12 @@ function ar_load() {
 	<fieldset><legend><:couteauprive:urls_choix_objet:> </legend>
     <label><b><:couteauprive:urls_type_objet:></b>
     <select class="forml ar_select" name="ar_type_objet" id="ar_type_objet">
-        <option class='maj-debut' value='article' [selected="(#ENV{ar_type_objet,article}|=={article}|?{selected})"] ><:couteauprive:objet_article:></option>
-        <option class='maj-debut' value='rubrique' [selected="(#ENV{ar_type_objet,article}|=={rubrique}|?{selected})"] ><:couteauprive:objet_rubrique:></option>
-        <option class='maj-debut' value='breve' [selected="(#ENV{ar_type_objet,article}|=={breve}|?{selected})"] ><:couteauprive:objet_breve:></option>
-        <option class='maj-debut' value='auteur' [selected="(#ENV{ar_type_objet,article}|=={auteur}|?{selected})"] ><:couteauprive:objet_auteur:></option>
-        <option class='maj-debut' value='mot' [selected="(#ENV{ar_type_objet,article}|=={mot}|?{selected})"] ><:couteauprive:objet_mot:></option>
-        <option class='maj-debut' value='syndic' [selected="(#ENV{ar_type_objet,article}|=={syndic}|?{selected})"] ><:couteauprive:objet_syndic:></option>
+        <option class='maj-debut' value='article' [selected="(#ENV{ar_type_objet,article}|=={article}|?{selected})"] ><:couteau:objet_article:></option>
+        <option class='maj-debut' value='rubrique' [selected="(#ENV{ar_type_objet,article}|=={rubrique}|?{selected})"] ><:couteau:objet_rubrique:></option>
+        <option class='maj-debut' value='breve' [selected="(#ENV{ar_type_objet,article}|=={breve}|?{selected})"] ><:couteau:objet_breve:></option>
+        <option class='maj-debut' value='auteur' [selected="(#ENV{ar_type_objet,article}|=={auteur}|?{selected})"] ><:couteau:objet_auteur:></option>
+        <option class='maj-debut' value='mot' [selected="(#ENV{ar_type_objet,article}|=={mot}|?{selected})"] ><:couteau:objet_mot:></option>
+        <option class='maj-debut' value='syndic' [selected="(#ENV{ar_type_objet,article}|=={syndic}|?{selected})"] ><:couteau:objet_syndic:></option>
     </select></label>
 	 <div><label for="ar_num_objet"><b><:couteauprive:urls_num_objet:></b>&nbsp;<input class="ar_num_objet" id="ar_num_objet" name="ar_num_objet" size="5" value="#ENV*{ar_num_objet}"/></label><img id="ar_chercher" style="vertical-align:bottom; cursor:pointer; margin-left:1em;" title="<:couteauprive:urls_rechercher:>" src="#EVAL{_DIR_IMG_PACK}loupe.png" alt="<:bouton_chercher:>"/></div>
 	 <div style="text-align:left;">

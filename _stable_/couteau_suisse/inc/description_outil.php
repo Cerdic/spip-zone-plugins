@@ -126,6 +126,11 @@ function description_outil_input2_callback($matches) {
 	return '<fieldset><legend>'._T('couteauprive:label:'.$matches[3]).'</legend><div>'.$matches[1].'</div></fieldset>';
 }
 
+function description_outil_liens_callback($matches) {
+	$nom = _T("couteauprive:$matches[1]:nom");
+	return '<a href="'.generer_url_ecrire('admin_couteau_suisse', 'cmd=descrip&outil=')
+		."$matches[1]\" name=\"$matches[1]\" onclick=\"javascript:return cs_href_click(this);\">$nom</a>";
+}
 
 // renvoie la description de $outil_ : toutes les %variables% ont ete remplacees par le code adequat
 function inc_description_outil_dist($outil_, $url_self, $modif=false) {
@@ -145,6 +150,12 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$descrip = preg_replace_callback(',\[\[([^][]*)->([^]]*)\]\],msS', 'description_outil_input1_callback' , $descrip);
 	// remplacement des zones input de format [[qq chose %variable% qq chose]] en utilisant _T('couteauprive:label:variable') comme label
 	$descrip = preg_replace_callback(',\[\[((.*?)%([a-zA-Z_][a-zA-Z0-9_]*)%(.*?))\]\],msS', 'description_outil_input2_callback', $descrip);
+	// remplacement des labels en doublon
+	$descrip = preg_replace_callback(',<:label:([a-zA-Z_][a-zA-Z0-9_-]*):>,', 
+		create_function('$matches','return _T("couteauprive:label:$matches[1]");'), $descrip);
+	// remplacement des liens sur un outil
+	$descrip = preg_replace_callback(',\[\.->([a-zA-Z_][a-zA-Z0-9_-]*)\],', 'description_outil_liens_callback', $descrip);
+
 	// recherche des blocs <variable></variable> eventuels associes pour du masquage/demasquage
 	foreach($cs_input_variable as $v) {
 		$descrip = str_replace("</$v>", '</div>', preg_replace(",<$v\s+valeur=(['\"])(.*?)\\1\s*>,", "<div class='groupe_{$v} valeur_{$v}_$2'>", $descrip));

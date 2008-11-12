@@ -2,6 +2,19 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function boites_privees_affiche_gauche($flux){
+	if(defined('boites_privees_URLS_PROPRES')) 
+		switch($flux['args']['exec']) {
+			case 'articles': $flux['data'] .= cs_urls_propres('article', $flux['args']['id_article']); break;
+			case 'naviguer': $flux['data'] .= cs_urls_propres('rubrique', $flux['args']['id_rubrique']); break;
+			case 'auteur_infos': $flux['data'] .= cs_urls_propres('auteur', $flux['args']['id_auteur']); break;
+			case 'breves_voir': $flux['data'] .= cs_urls_propres('breve', $flux['args']['id_breve']); break;
+			case 'mots_edit': $flux['data'] .= cs_urls_propres('mot', $flux['args']['id_mot']); break;
+			case 'sites': $flux['data'] .= cs_urls_propres('syndic', $flux['args']['id_syndic']); break;
+		}
+	return $flux;
+}
+
 function boites_privees_affiche_milieu($flux){
 	switch($flux['args']['exec']) {
 		case 'articles': {
@@ -109,5 +122,42 @@ function cs_non_confirmes($fetch){
 	)); 
 	return cs_listeulli($res);
 } 
+
+function cs_urls_propres($type, $id) {
+	// fonction reservee a SPIP 2.0
+	if(!defined('_SPIP19200')) return '';
+
+	return cadre_depliable(find_in_path('img/couteau-24.gif'),
+		'<b>'._T('couteau:urls_propres_titre').'</b>',
+		false,	// true = deplie
+		cs_urls_propres_descrip($type, $id),
+		'bp_urls_propres');
+}
+
+function cs_urls_propres_descrip($type, $id) {
+	global $type_urls;
+	$url = generer_url_entite_absolue($id, $type, '', '', true);
+	$s = sql_select("url", "spip_urls", "id_objet=$id AND type='$type'", '', 'date DESC');
+	$res = "";
+	while ($t = sql_fetch($s)) $res .= "&bull;&nbsp;$t[url]\n";
+
+//spip_log($row);
+	$format = in_array($type_urls, array('page', 'standard', 'html'))
+		?_T('couteau:urls_propres_erreur')
+		:_T('couteau:urls_propres_objet');
+	return propre(
+		_T('couteau:urls_propres_format', array(
+			'format'=>$type_urls,
+			'url'=>generer_url_ecrire('admin_couteau_suisse', 'cmd=descrip&outil=type_urls#cs_infos')
+		)). "\n\n"
+		. $format . "\n\n"
+		. '{{'. _T('couteau:2pts', array(
+			'objet'=>strtoupper(unicode2charset(html2unicode(_T('couteau:objet_'.$type)))).' '.$id
+		))."}}\n\n"
+		. "$res\n\n[["
+		. _T('couteau:urls_propres_lien'). "|{$url}->{$url}]]\n\n"
+		
+	);
+}
 
 ?>

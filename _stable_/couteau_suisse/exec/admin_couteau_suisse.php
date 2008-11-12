@@ -154,6 +154,21 @@ function outils_toggle() {
 	document.csform.submit();
 }
 
+// clic sur un outil
+function cs_href_click(this_) {
+	// on s'en va si l'outil est deja affiche
+	if(cs_descripted==this_.name) return false;
+	cs_descripted=this_.name;
+	// on charge la nouvelle description
+	jQuery('#cs_infos')
+		.css('opacity', '0.5')
+		.parent()
+		.prepend(ajax_image_searching)
+		.load('".generer_url_ecrire('charger_description_outil', 'source='._request('exec').'&outil=', '\\x26')."'+this_.name);
+	// annulation du clic
+	return false;
+}
+
 if (window.jQuery) jQuery(function(){
 	// decalage a supprimer sur FF2
 	if (jQuery.browser.mozilla) jQuery('input.cs_sobre').css('margin-left','-3px');
@@ -185,22 +200,10 @@ if (window.jQuery) jQuery(function(){
 
 	// clic sur un outil
 	jQuery('a.cs_href').click( function() {
-//alert(jQuery('#cs_infos')[0].className);
 		jQuery(this).toggleClass('outil_on');
-//jQuery('#cs_infos').show();
 		set_selected();
 		set_categ(this.parentNode.id);
-		// on s'en va si l'outil est deja affiche
-		if(cs_descripted==this.name) return false;
-		cs_descripted=this.name;
-		// on charge la nouvelle description
-		jQuery('#cs_infos')
-			.css('opacity', '0.5')
-			.parent()
-			.prepend(ajax_image_searching)
-			.load('".generer_url_ecrire('charger_description_outil', 'source='._request('exec').'&outil=', '\\x26')."'+this.name);
-		// annulation du clic
-		return false;
+		return cs_href_click(this);
 	})
 	.dblclick(function(){
 		jQuery('a.outil_on').removeClass('outil_on');

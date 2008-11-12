@@ -480,6 +480,12 @@ add_outil( array(
 ));
 
 add_variable( array(
+	'nom' => 'bp_urls_propres',
+	'check' => 'couteauprive:bp_urls_propres',
+	'defaut' => 1,
+	'code:%s' => "define('boites_privees_URLS_PROPRES', %s);\n",
+));
+add_variable( array(
 	'nom' => 'cs_rss',
 	'check' => 'couteauprive:rss_var',
 	'defaut' => 1,
@@ -501,10 +507,11 @@ add_outil( array(
 	'id' => 'boites_privees',
 	'auteur'=>'Pat, Joseph LARMARANGE (format SPIP)',
 	'contrib' => 2564,
-	'code:options' => "%%cs_rss%%%%format_spip%%%%stat_auteurs%%",
+	'code:options' => "%%cs_rss%%%%format_spip%%%%stat_auteurs%%%%bp_urls_propres%%",
 	'categorie' => 'interface',
 	'pipeline:affiche_milieu' => 'boites_privees_affiche_milieu',
 	'pipeline:affiche_droite' => 'boites_privees_affiche_droite',
+	'pipeline:affiche_gauche' => 'boites_privees_affiche_gauche',
 ));
 
 add_variable( array(

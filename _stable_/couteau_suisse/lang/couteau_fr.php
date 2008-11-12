@@ -54,7 +54,26 @@ Compatibilit&#233; : SPIP toutes versions 1.9x',
 
 	// V
 	'variable_vide' => '(Vide)',
-	'visiteurs_connectes' => 'Visiteurs connect&eacute;s : @nb@'
+	'visiteurs_connectes' => 'Visiteurs connect&eacute;s : @nb@',
+	'urls_propres_titre' => 'URLS PROPRES',
+	'urls_propres_objet' => 'Son list&eacute;es ici les URLs propres stock&eacute;es en base gr&acirc;ce auxquelles les visiteurs pourront naviguer sur votre site.',
+	'objet_article'=>'Article',
+	'objet_rubrique'=>'Rubrique',
+	'objet_breve'=>'Br&egrave;ve',
+	'objet_auteur'=>'Auteur',
+	'objet_mot'=>'Mot',
+	'objet_syndic'=>'Site',
+	'objet_articles'=>'Articles',
+	'objet_rubriques'=>'Rubriques',
+	'objet_breves'=>'Br&egrave;ves',
+	'objet_auteurs'=>'Auteurs',
+	'objet_mots'=>'Mots',
+	'objet_syndics'=>'Sites',
+	'urls_propres_format' => 'Le format actuel des URLs est : {{&laquo;&nbsp;@format@&nbsp;&raquo;}}. [[Configuration->@url@]]',
+	'urls_propres_erreur' => 'Ce format ne prend pas compte de la liste qui suit.',
+	'urls_propres_lien' => 'Lien public d\'acc&egrave;s',
+	'2pts' => '@objet@&nbsp;:',
+
 );
 
 ?>
