@@ -97,7 +97,7 @@ function exec_spiplistes_liste_edit(){
 
 	// construit le pied
 	$pied_page = spiplistes_pied_de_page_liste($id_liste, $lang);
-	
+
 	$gros_bouton_retour = icone(
 		_T('spiplistes:retour_link')
 		, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=" . ($lier_trad ? $lier_trad : $id_liste) )

@@ -84,7 +84,7 @@ function spiplistes_raccourci_journal ($envelopper = true) {
 	}
 	$result .= ""
 		.	(
-				(defined("_SPIPLISTES_LOG_DEBUG") && _SPIPLISTES_LOG_DEBUG)
+				(spiplistes_server_rezo_local())
 				? "<div class='verdana2' style='padding:0.5ex;text-align:center'>" 
 					// avertir qu'on est en mode debug
 					. "<div style='font-weight:700;color:white;background-color:red;'>" . _T('spiplistes:mode_debug_actif') . "</div>\n"
