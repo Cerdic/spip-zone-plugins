@@ -73,7 +73,7 @@ function balise_FORMULAIRE_INSCRIPTION2_CONFIRMATION_dyn($mode, $retour) {
 		$var_user = sql_fetsel("nom, email, login","spip_auteurs","id_auteur=".$id);
 
 		if($var_user){
-			include_spip('inc/envoyer_mail');
+			include_spip('inc/mail');
 			$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 			$adresse_site = $GLOBALS['meta']["adresse_site"];
 			
