@@ -81,7 +81,7 @@ function exec_spip2spip_syndic(){
           echo "<ul>\n";        
           // Est que l'article n'a pas été déjà importée ?
           if (isset($article['titre'])) {
-		  	$documents_current_article = array();
+		  	    $documents_current_article = array();
             $current_titre = $article['titre'];
             $sql2 = "SELECT COUNT(titre) as c FROM ".$table_prefix."_articles WHERE titre='".addslashes($current_titre)."'";
             $nb_article = spip_fetch_array(spip_query($sql2));
@@ -96,7 +96,7 @@ function exec_spip2spip_syndic(){
                              	$modif = spip_fetch_array(spip_query($sql3));
                       				
                       				$_amodif=false; $_elemmodif="";
-                                      $_surtitre = $article['surtitre'];
+                              $_surtitre = $article['surtitre'];
                       				if($modif['surtitre']!=$_surtitre){$_amodif=true; $_elemmodif .="surtitre, ";}
                       				
                       				$_titre = $article['titre'];
@@ -196,11 +196,11 @@ function exec_spip2spip_syndic(){
                   // tout est bon, on insert les donnnees ! 
                   
                   // traitement des documents
-                  $_documents = $article['documents'];
+                  $_documents = $article['documents'];                    
                   $documents_current_article = array();
                   if ($_documents!="") {
                     $_documents = unserialize($_documents);                  
-                    foreach($_documents as $_document) {                      
+                    foreach($_documents as $_document) { 
                         $id_distant = $_document['id'];
                         $source = $_document['url'];
                         $titre = $_document['titre'];                        
@@ -218,6 +218,7 @@ function exec_spip2spip_syndic(){
                     			$distant = 'oui';
                     			$mode = 'document';
                     			
+                          $date =  date('Y-m-d H:i:s',time()); // date de la syndication ou date du doc original (a ajouter car non parse) ?
                     			// FIXME verif secu (par rapport ext) 
                     			
                     			// extension
@@ -237,7 +238,7 @@ function exec_spip2spip_syndic(){
                           $sql="INSERT INTO ".$table_prefix."_documents(id_type,titre,date,descriptif,fichier,taille,largeur,hauteur,mode,distant,idx) 
                                                                 VALUES ('$id_type',
                                                                         '".addslashes($titre)."',
-                                                                        '$_date',
+                                                                        '$date',
                                                                         '".addslashes($desc)."',
                                                                         '".addslashes($source)."',
                                                                         '$taille',
@@ -248,7 +249,7 @@ function exec_spip2spip_syndic(){
                                                                         'oui'                                                                      
                                                                         )";
                           
-        				          spip_query($sql);        				          
+                          spip_query($sql);  
                           $id_nouveau_doc = spip_insert_id(); 
                           $documents_current_article[$id_distant] = $id_nouveau_doc;                   			
                     		}  
@@ -302,13 +303,13 @@ function exec_spip2spip_syndic(){
                   
                   // ....dans la table documents_article
                   foreach($documents_current_article as $document_current_article) { 
-                       $sql="INSERT INTO ".$table_prefix."_documents_articles (id_document,id_article) VALUES ('$document_current_article','$id_nouvel_article')";                     
+                       $sql="INSERT INTO ".$table_prefix."_documents_articles (id_document,id_article) VALUES ('$document_current_article','$id_nouvel_article')";                   
                        spip_query($sql);                  			
                   }                       
  
                    // traitement des evenements
                   $_evenements = $article['evenements'];
-				  $_evenements = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_evenements );
+				          $_evenements = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_evenements );
                   if ($_evenements!="") {
                    $_evenements=unserialize($_evenements);           
                     foreach($_evenements as $_evenement) {                      

@@ -1,8 +1,5 @@
 <?php
 
-// FIXME 
-// - integrer table_prefix 
-
 //---------------------------------------
 // Fonctions
 //---------------------------------------
@@ -34,7 +31,7 @@ function is_spip2spip_backend($str) {
 
 // 
 // parse le backend xml spip2spip 
-// basée sur la fonction originale: analyser_backend()
+// basée sur la fonction originale: ecrire/inc/syndic.php -> analyser_backend()
 function analyser_backend_spip2spip($rss){  
   include_ecrire("inc_texte.php"); # pour couper()
 	include_ecrire("inc_filtres.php"); # pour filtrer_entites()
@@ -101,18 +98,20 @@ function analyser_backend_spip2spip($rss){
 		}
 	}
 	
+  // supprimer les commentaires
+	$rss = preg_replace(',<!--\s+.*\s-->,Ums', '', $rss);
+	
+	
 	$items = array();
 	if (preg_match_all($syndic_regexp['item'],$rss,$r, PREG_SET_ORDER))
 	foreach ($r as $regs) {
 		$debut_item = strpos($rss,$regs[0]);
 		$fin_item = strpos($rss,
-			$syndic_regexp['itemfin'])+strlen($syndic_regexp['itemfin']);
+		$syndic_regexp['itemfin'])+strlen($syndic_regexp['itemfin']);
 		$items[] = substr($rss,$debut_item,$fin_item-$debut_item);
 		$debut_texte = substr($rss, "0", $debut_item);
 		$fin_texte = substr($rss, $fin_item, strlen($rss));
 		$rss = $debut_texte.$fin_texte;
-		
-		
 	}
 
 	// Analyser chaque <item>...</item> du backend et le transformer en tableau
@@ -136,20 +135,20 @@ function analyser_backend_spip2spip($rss){
     }	
     
     // On parse le noeud documents
-    if ($data['documents'] != "") {         
-          
+    if ($data['documents'] != "") {        
           $documents = array();
           if (preg_match_all($document_regexp['document'],$data['documents'],$r2, PREG_SET_ORDER))
           	foreach ($r2 as $regs) {
           		$debut_item = strpos($data['documents'],$regs[0]);
           		$fin_item = strpos($data['documents'],
-          			$document_regexp['documentfin'])+strlen($document_regexp['documentfin']);
+          		$document_regexp['documentfin'])+strlen($document_regexp['documentfin']);
           		$documents[] = substr($data['documents'],$debut_item,$fin_item-$debut_item);
           		$debut_texte = substr($data['documents'], "0", $debut_item);
           		$fin_texte = substr($data['documents'], $fin_item, strlen($data['documents']));
           		$data['documents'] = $debut_texte.$fin_texte;
           }
           
+          $portfolio = array();
           if (count($documents)) {          
               foreach ($documents as $document) {                 
                  $data_node = array();
@@ -180,6 +179,7 @@ function analyser_backend_spip2spip($rss){
 				
           }
           
+          $agenda = array();
           if (count($evenements)) {          
               foreach ($evenements as $evenement) {                 
                  $data_node = array();
@@ -187,10 +187,10 @@ function analyser_backend_spip2spip($rss){
                     if (preg_match($evenement_regexp[$xml_event_tag],$evenement,$match)) $data_node[$xml_event_tag] = $match[1]; 
   				                                                                      else $data_node[$xml_event_tag] = "";
   				       } 
-                $portfolio[] = $data_node;                                                     
-              }   
-			  //print_r($portfolio)    ;      
-              $data['evenements'] =  serialize($portfolio); 
+                $agenda[] = $data_node;                                                     
+              }  
+     
+              $data['evenements'] =  serialize($agenda); 
           }       
     }	
 	

@@ -197,6 +197,7 @@ function cron_spip2spip($t) {
                     			$distant = 'oui';
                     			$mode = 'document';
                     			
+                    			$date =  date('Y-m-d H:i:s',time()); // date de la syndication ou date du doc original (a ajouter car non parse) ?
                     			// FIXME verif secu (par rapport ext) 
                     			
                     			// extension
@@ -216,7 +217,7 @@ function cron_spip2spip($t) {
                           $sql="INSERT INTO ".$table_prefix."_documents(id_type,titre,date,descriptif,fichier,taille,largeur,hauteur,mode,distant,idx) 
                                                                 VALUES ('$id_type',
                                                                         '".addslashes($titre)."',
-                                                                        '$_date',
+                                                                        '$date',
                                                                         '".addslashes($desc)."',
                                                                         '".addslashes($source)."',
                                                                         '$taille',

@@ -1,5 +1,5 @@
 <?php
-
+// version spip2spip lancée par le cron
 include(dirname(__FILE__).'/../spiptospip_fonctions.php');
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
