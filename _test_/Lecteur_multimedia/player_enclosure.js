@@ -10,7 +10,6 @@
 **/
 
 var track_index = 0;
-var playa='';
 
 live_track = 'stop' ; 
 live_video = 'stop' ; 
@@ -21,17 +20,16 @@ isPlaying = false ;
 soundManager.consoleOnly = true;
 soundManager.debugMode = false;
 
-//tableau des mp3 de la page
-mp3Array = new Array();
-mp3Titles = new Array();
-
-flvArray = new Array();
-flvTitles = new Array();
 
 jQuery(document).ready(function(){
 	//lecteur_debug();
 	lecteur_multimedia_init();});function lecteur_multimedia_init(){
-
+	//tableau des fichiers multimedia de la page
+	mp3Array = new Array();
+	mp3Titles = new Array();
+	flvArray = new Array();
+	flvTitles = new Array();
+	
 	var aff= jQuery("a[@rel='enclosure'][@href$=mp3]").size(); 
 
 	// lister les mp3 de la page 
@@ -210,6 +208,7 @@ function player_play(i){
 	    
 	}else{
 		// preparer un plan B si flash < 8
+		var playa='';
 		playa  =  '<div id="musicplayer" style="">' +
 	         '</div>';	
 		jQuery('body').append(playa);
