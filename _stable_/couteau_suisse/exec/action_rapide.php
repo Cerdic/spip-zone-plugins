@@ -19,6 +19,7 @@ if(!function_exists(ajax_retour)) {
 }
 
 function exec_action_rapide_dist() {
+	global $type_urls;
 	if (!cout_autoriser()) {
 		include_spip('inc/minipres');
 		echo defined('_SPIP19100')?minipres( _T('avis_non_acces_page')):minipres();
@@ -51,7 +52,6 @@ cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour()
 
 	// renvoie les caracteristiques URLs d'un objet (cas SPIP < 2.0)
 	case 'type_urls_spip':
-		$type_url = $GLOBALS['type_urls']?$GLOBALS['type_urls']:'page';
 		list($type, $table) = explode('_',_request('type_objet'));
 		$id_objet = intval(_request('id_objet'));
 //		sql_fetsel("url_propre", "spip_$type", "id_objet=$id_objet", '', '', 1)
@@ -60,14 +60,14 @@ cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour()
 		if ($r AND $r = spip_fetch_array($r)) { $url_1 = $r['url_propre']; $titre = $r['titre']; }
 		/*charger_generer_url();*/
 		if(!function_exists($fct = "generer_url_$type")) {
-			if($f = include_spip('urls/'.$type_url, false))
+			if($f = include_spip('urls/'.$type_urls, false))
 				include_once($f);
 		}
 		$url = function_exists($fct)?$fct($id_objet):'??';
 		$r = spip_query($r0);
 		if ($r AND $r = spip_fetch_array($r)) $url_2 = $r['url_propre'];
 		// url propre en base || titre || url complete || type d'URLs || URL recalculee
-		echo $url_1.'||'.$titre.'||'.$url.'||'.$type_url.'||'.$url_2;
+		echo $url_1.'||'.$titre.'||'.$url.'||'.$type_urls.'||'.$url_2;
 		break;
 	// renvoie les caracteristiques URLs d'un objet (cas SPIP >= 2.0)
 	case 'type_urls_spip2':
@@ -80,6 +80,8 @@ cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour()
 		if (!$col_id) return false; // Quand $type ne reference pas une table
 		$id_objet = intval(_request('id_objet'));
 
+		// chercher dans la table des URLS
+		include_spip('base/abstract_sql');
 		//  Recuperer une URL propre correspondant a l'objet.
 		$row = sql_fetsel("U.url, O.$champ_titre", "$table AS O LEFT JOIN spip_urls AS U ON (U.type='$type' AND U.id_objet=O.$col_id)", "O.$col_id=$id_objet", '', '', 1);
 
@@ -91,9 +93,8 @@ cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour()
 			// si l'URL n'etait pas presente en base, maintenant elle l'est !
 			?sql_fetsel("url", "spip_urls", "id_objet=$id_objet AND type='$type'", '', '', 1)
 			:array('url'=>$url2);
-		$type = $GLOBALS['type_urls']?$GLOBALS['type_urls']:'page';
 		// url propre en base || titre || url complete || type d'URLs || URL recalculee
-		echo $url2.'||'.$row[trim($champ_titre)].'||'.$url.'||'.$type.'||'.$row2['url'];
+		echo $url2.'||'.$row[trim($champ_titre)].'||'.$url.'||'.$type_urls.'||'.$row2['url'];
 		break;
 
 	}
