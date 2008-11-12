@@ -147,7 +147,7 @@ function inscription2_nouveau_pass($declaration){
 
 function envoyer_inscription2_pass($var_user) {
 	include_spip('inc/mail');
-	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
+	$nom_site_spip = I2_nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 			$adresse_site = $GLOBALS['meta']["adresse_site"];
 			$message = _T('inscription2:message_auto')."\n\n"
 			. _T('inscription2:email_bonjour', array('nom'=>$var_user['nom']))."\n\n"
@@ -170,5 +170,9 @@ function inscription2_test_login($var_user) {
 		}
 		$login = $var_user['login'].$i;
 	}
+}
+
+function I2_nettoyer_titre_email($titre) {
+	return str_replace("\n", ' ', supprimer_tags(extraire_multi($titre)));
 }
 ?>
