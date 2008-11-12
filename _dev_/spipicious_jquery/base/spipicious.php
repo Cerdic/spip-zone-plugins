@@ -1,4 +1,5 @@
 <?php
+
 /*
  * spipicious
  * Gestion de tags lies aux auteurs

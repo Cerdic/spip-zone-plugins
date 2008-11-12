@@ -1,5 +1,17 @@
 <?php
 
+/*
+ * spipicious
+ * Gestion de tags lies aux auteurs
+ *
+ * Auteurs :
+ * Quentin Drouet
+ * Erational
+ * 
+ * 2007-2008 - Distribue sous licence GNU/GPL
+ *
+ */
+ 
 	$GLOBALS['spipicious_base_version'] = 0.5;
 
 	function spipicious_upgrade(){
