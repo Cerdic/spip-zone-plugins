@@ -1,5 +1,17 @@
 <?php
 
+/*
+ * SPIP_Geo
+ * Avoir a disposition dans spip une liste de continent / pays / ville utilisable par les autres plugins facilement...
+ *
+ * Auteurs :
+ * Quentin Drouet
+ *
+ * (c) 2007-2008 - Distribue sous licence GNU/GPL
+ * Pour plus de details voir le fichier COPYING.txt
+ *
+ */
+ 
 function import_origine_continents(){
 	spip_log('import des continents','spip_geo');
 	$continents = file(_DIR_PLUGIN_SPIP_GEO."csv/continents.csv");
