@@ -17,6 +17,8 @@ function exec_echoppe_depot(){
 	$res_le_depot = spip_query($sql_le_depot);
 	$le_depot = spip_fetch_array($res_le_depot);
 	$adresse_depot = unserialize($le_depot['adresse']);
+	var_dump($le_depot['adresse']);
+	var_dump($adresse_depot);
 	(is_array($le_depot))?$contexte = array_merge($contexte, $le_depot):$contexte = $contexte;
 	(is_array($adresse_depot))?$contexte = array_merge($contexte, $adresse_depot):$contexte = $contexte;
 	
@@ -33,25 +35,25 @@ function exec_echoppe_depot(){
 	}
 	
 	
-	echo debut_gauche();
+	echo debut_gauche('',true);
 	
 	//echo recuperer_fond('fonds/echoppe_depot',$contexte);
-	echo debut_boite_info();
+	echo debut_boite_info(true);
 	echo recuperer_fond('fonds/echoppe_info_depot', $contexte);
-	echo fin_boite_info();
+	echo fin_boite_info(true);
 	
 	include_spip('inc/echoppe_raccourcis');
 	$raccourcis = generer_raccourcis_echoppe();
 	echo bloc_des_raccourcis($raccourcis);
 	
-	echo creer_colonne_droite();
+	echo creer_colonne_droite(true);
 	
-	echo debut_droite(_T('echoppe:visualisation_d_un_depot'));
+	echo debut_droite(true,_T('echoppe:visualisation_d_un_depot'));
 	//echo gros_titre($contexte['titre']);
 	
 	echo recuperer_fond('fonds/echoppe_depot', $contexte);
-	echo fin_gauche();
-	echo fin_page();
+	echo fin_gauche(true);
+	echo fin_page(true);
 	
 }
 

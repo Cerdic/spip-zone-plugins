@@ -1,4 +1,4 @@
-[(#CHEMIN{images/go-home.png}|debut_cadre_trait_couleur{0,"",<:echoppe:edition_de:> [(#TITRE|sinon{#NEW|=={oui}|?{<:echoppe:nouveau_depot:>,<em><:pas_de_titre:></em>}})],"",depot})]
+[(#CHEMIN{images/go-home.png}|debut_cadre_trait_couleur{1,"",<:echoppe:edition_de:> [(#TITRE|sinon{#NEW|=={oui}|?{<:echoppe:nouveau_depot:>,<em><:pas_de_titre:></em>}})],"",depot})]
 <form action="[(#EVAL{echoppe_sauver_depot}|generer_url_action)]" method="post" >
 	<input type="hidden" name="new" value="#NEW" />
 	<input type="hidden" name="id_depot" value="#ID_DEPOT" />
