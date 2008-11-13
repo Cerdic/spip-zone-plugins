@@ -37,8 +37,6 @@ function pmb_charger_page ($url_base, $file) {
 
 }
 
-
-
 function pmb_accueil_extraire($url_base) {
 	$tableau_resultat = Array();
 	
@@ -255,7 +253,13 @@ function pmb_notice_champ ($tableau_resultat, $champ) {
 function pmb_tableau2_valeur ($tableau_resultat, $indice1, $indice2) {
 	return $tableau_resultat[$indice1][$indice2];
 }
-
+/*mettre le champ de recherche au format de pmb */
+function pmb_prepare_recherche ($recherche) {
+	$recherche = str_replace("+"," ",$recherche);
+	//$recherche = htmlentities($recherche);
+	//$recherche = unicode2charset(charset2unicode($recherche, 'utf-8'),'iso-8859-1');
+	return $recherche;
+}
 
 
 ?>

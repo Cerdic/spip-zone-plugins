@@ -19,7 +19,7 @@
 	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Fil d'Ariane ]
-        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:pmb:editeurs:> &gt; [(#GET{tab_resultat}|pmb_tableau2_valeur{0,titre_editeur}|couper{80})]</div>
 		<div class="cartouche">
 	        	<div class="surlignable">
 				<h1 class="entry-title[ (#GET{tab_resultat}|pmb_tableau2_valeur{0,titre_editeur}|strlen|>{30}|?{'titre-long',''})][ (#GET{tab_resultat}|pmb_tableau2_valeur{0,infos_editeur}|?{'','pas-de-texte'})]">
@@ -30,7 +30,7 @@
 
 		[(#REM) afficher les collections ]
         	<div class="menu sous-rubriques collections">
-           		 <h2><:collections:></h2>
+           		 <h2><:pmb:collections:></h2>
 			[(#GET{tab_resultat}|pmb_tableau2_valeur{0,collections_editeur})]
 		</div>
         
@@ -41,10 +41,11 @@
 		<div class="menu articles ouvrages">
 			
 			<B_tab_resultat>
-			<h2><:ouvrages:></h2>
-			<ul>
+			
 				<BOUCLE_tab_resultat(POUR){tableau #GET{tab_resultat}}>
-
+				[(#COMPTEUR_BOUCLE|=={2}|?{' ',''})
+					<h2><:pmb:ouvrages:></h2><ul>
+				]
 				
 				[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})
 			 		<li>
@@ -54,7 +55,7 @@
                 				[<small><:par_auteur:> (#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, lesauteurs})</small>]
 					
 						[<div class="introduction entry-content">(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, resume}|couper{300,'...'})</div>]
-						<a class="lire-la-suite" title="[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, titre})]" href="index.php?page=notice_display&id=[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, id})]&seule=1"><:lire_la_suite:> +</a>
+						<a class="lire-la-suite" title="[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, titre})]" href="index.php?page=notice_display&id=[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, id})]&seule=1"><:pmb:lire_la_suite:> +</a>
 
 					</li>
 				]
@@ -62,7 +63,8 @@
 			</ul>
 
 			[(#GET{tab_resultat}|pmb_tableau2_valeur{0,nav_bar})]
-
+			[(#COMPTEUR_BOUCLE|=={1}|?{' ',''})<:pmb:pas_d_ouvrages_trouves:>]
+			
 			</B_tab_resultat>
 				<:pmb:pas_d_ouvrages_trouves:>
 			<//B_tab_resultat>
