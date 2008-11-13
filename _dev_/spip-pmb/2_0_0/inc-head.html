@@ -41,6 +41,22 @@
 	C'est ici que SPIP va inserer l'appel de la librairie jQuery
 ]
 #INSERT_HEAD
+<B_documents>
+[<script type='text/javascript' src='(#CHEMIN{javascript/jquery.cross-slide.js})'></script>]
+
+<script type='text/javascript'>
+$(document).ready(function(){
+	$('#image-haut').css('height','150px').crossSlide({
+		sleep: 4,
+  fade: 3
+}, [
+<BOUCLE_documents(DOCUMENTS){extension IN jpg,JPG}{descriptif==^diapo}{','}{par hasard}{0,4}>
+	[{ src:  '(#FICHIER|image_reduire{200,0}|image_recadre{200,150,center}|extraire_attribut{src})'}]
+</BOUCLE_documents>
+]);
+});
+</script>
+</B_documents>
 
 
 [(#REM) Agreger et compacter tout cela dans des fichiers statiques ]

@@ -286,7 +286,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .page_sommaire .articles ul li { width: 25%; _height: 13em; min-height: 13em; float: left; clear: none; padding-bottom: 0; margin-top: .5em; background-image: url(bordure-gris.gif); background-repeat: repeat-y; background-position: top left; }
 .page_sommaire .articles ul li.premier { background-image: none; }
 .page_sommaire .articles ul li.avec-photo { width: 45%; }
-.page_sommaire .articles ul li div, .page_sommaire .articles ul li a.lire-la-suite, .page_sommaire .articles ul li small, .page_sommaire .articles ul li h3 { display: block;  margin-left: 1em; margin-right: 1em; }
+.page_sommaire .articles ul li div, .page_sommaire .articles ul li a.lire-la-suite, .page_nouveautes .articles ul li a.lire-la-suite, .page_sommaire .articles ul li small, .page_sommaire .articles ul li h3 { display: block;  margin-left: 1em; margin-right: 1em; }
 .page_sommaire .articles ul li.premier div, .page_sommaire .articles ul li.premier a.lire-la-suite, .page_sommaire .articles ul li.premier small, .page_sommaire .articles ul li.premier h3, .page_sommaire .articles ul li.avec-photo small { display: block; margin-left: 0; }
 
 .page_sommaire .nouveautes ul li, .page_sommaire .nouveautes ul li.premier, .page_sommaire .nouveautes ul li.avec-photo  { width: 48%; height: auto;}
@@ -443,7 +443,7 @@ div#page, div#conteneur, div#navigation, div#extra { width: auto; }
 
 #search { margin-bottom: 2em; background: #999966; color: white; padding: .5em; }
 
-.pmb-toolbox { margin-left: 150px; }
+.pmb-toolbox { margin-left: 150px; margin-bottom: 2em; }
 .pmb-toolbox ul { margin-left: .5em; list-style: none; padding-left: 0; }
 .pmb-toolbox ul li { margin-left: 0; padding-left: 13px; margin-bottom: .3em; background-image: url(bg-puce.gif); background-repeat: no-repeat; background-position: left center; }
 
