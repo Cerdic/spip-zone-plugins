@@ -37,7 +37,7 @@ blockquote.spip_poesie {} /*Cf.: spip_style.css*/
 table.spip { border: none; width: 100%; } /*Cf.: spip_style.css*/
 #page table.spip th, #page table.spip td { border: none; }
 #page table.spip tr.row_even { background: #d8dac8; } 
-#page table.spip tr.row_first { background: #67741F; color: white; }
+#page table.spip tr.row_first { background: #999966; color: white; }
 #page table.spip tr.row_odd { background: none; }
 
 /* Logos, documents et images */
@@ -447,4 +447,9 @@ div#page, div#conteneur, div#navigation, div#extra { width: auto; }
 .pmb-toolbox ul { margin-left: .5em; list-style: none; padding-left: 0; }
 .pmb-toolbox ul li { margin-left: 0; padding-left: 13px; margin-bottom: .3em; background-image: url(bg-puce.gif); background-repeat: no-repeat; background-position: left center; }
 
+.pmb-autreslecteurs tr.surbrillance { background: #999966; color: white; }
+.pmb-autreslecteurs tr.even { background: #D8DAC8; }
+.pmb-autreslecteurs tr.odd { background: none; }
 
+.pmb-exemplaires th { background: #999966; color: white; font-weight: normal; }
+.pmb-exemplaires .expl_situation strong { color: #67741F; font-weight: normal; }

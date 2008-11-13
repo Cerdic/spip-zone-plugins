@@ -256,6 +256,7 @@ function pmb_tableau2_valeur ($tableau_resultat, $indice1, $indice2) {
 /*mettre le champ de recherche au format de pmb */
 function pmb_prepare_recherche ($recherche) {
 	$recherche = str_replace("+"," ",$recherche);
+	$recherche = str_replace(" ","%20",$recherche);
 	//$recherche = htmlentities($recherche);
 	//$recherche = unicode2charset(charset2unicode($recherche, 'utf-8'),'iso-8859-1');
 	return $recherche;
