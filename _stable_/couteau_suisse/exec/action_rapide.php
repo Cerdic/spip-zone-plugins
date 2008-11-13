@@ -26,7 +26,7 @@ function exec_action_rapide_dist() {
 		exit;
 	}
 	$arg = _request('arg');
-	spip_log("exec 'action_rapide' du Couteau suisse : $arg / "._request('submit'));
+//	spip_log("exec 'action_rapide' du Couteau suisse : $arg / "._request('submit'));
 //	spip_log($_POST); spip_log($_GET);
 
 	switch ($arg) {
@@ -52,9 +52,9 @@ cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour()
 
 	// renvoie les caracteristiques URLs d'un objet (cas SPIP < 2.0)
 	case 'type_urls_spip':
-		list($type, $table) = explode('_',_request('type_objet'));
+		$type = _request('type_objet');
+		$table = $type.($type=='syndic'?'':'s');
 		$id_objet = intval(_request('id_objet'));
-//		sql_fetsel("url_propre", "spip_$type", "id_objet=$id_objet", '', '', 1)
 		$r0 = "SELECT url_propre, titre FROM spip_$table WHERE id_$type=$id_objet";
 		$r = spip_query($r0);
 		if ($r AND $r = spip_fetch_array($r)) { $url_1 = $r['url_propre']; $titre = $r['titre']; }

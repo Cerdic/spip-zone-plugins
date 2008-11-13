@@ -58,6 +58,12 @@ function ar_load() {
 	jQuery("#ar_edit_info").removeClass("cs_hidden");
 }
 
+// cette fonction sert a transmettre les valeurs '' et '' lors de la redirection vers : ?exec=action_rapide
+function add_param_redirect(this_) {
+	var redirect = jQuery(this_).parents('form').find('input[@name=redirect]');
+	redirect.val(redirect.val()+'%26ar_num_objet%3D'+jQuery("#ar_num_objet").val()+'%26ar_type_objet%3D'+jQuery("#ar_type_objet").val());
+}
+
 </script>
 <div style='text-align: left; padding:0.4em;'>
 	<fieldset><legend><:couteauprive:urls_purger_tout:> </legend>
@@ -107,16 +113,18 @@ function ar_load() {
 
 <div style='text-align: center; padding:0.4em;'>
 	<fieldset><legend><:couteauprive:urls_choix_objet:> </legend>
-    <label><b><:couteauprive:urls_type_objet:></b>
-    <select class="forml ar_select" name="ar_type_objet" id="ar_type_objet">
-        <option value='article_articles' [selected="(#ENV{ar_type_objet,article}|=={article}|?{selected})"] ><:couteau:objet_article:></option>
-        <option value='rubrique_rubriques' [selected="(#ENV{ar_type_objet,article}|=={rubrique}|?{selected})"] ><:couteau:objet_rubrique:></option>
-        <option value='breve_breves' [selected="(#ENV{ar_type_objet,article}|=={breve}|?{selected})"] ><:couteau:objet_breve:></option>
-        <option value='auteur_auteurs' [selected="(#ENV{ar_type_objet,article}|=={auteur}|?{selected})"] ><:couteau:objet_auteur:></option>
-        <option value='mot_mots' [selected="(#ENV{ar_type_objet,article}|=={mot}|?{selected})"] ><:couteau:objet_mot:></option>
-        <option value='syndic_syndic' [selected="(#ENV{ar_type_objet,article}|=={syndic}|?{selected})"] ><:couteau:objet_syndic:></option>
-    </select></label>
-	 <div><label for="ar_num_objet"><b><:couteauprive:urls_num_objet:></b>&nbsp;<input class="ar_num_objet" id="ar_num_objet" name="ar_num_objet" size="5" value="#ENV*{ar_num_objet}"/></label><img id="ar_chercher" style="vertical-align:bottom; cursor:pointer; margin-left:1em;" title="<:couteauprive:urls_rechercher:>" src="#EVAL{_DIR_IMG_PACK}loupe.png" alt="<:bouton_chercher:>"/></div>
+     <div style="margin:0.3em 0;"><label><b><:couteauprive:urls_type_objet:></b>
+     <select class="forml ar_select" name="ar_type_objet" id="ar_type_objet">
+        <option value='article' [selected="(#ENV{ar_type_objet,article}|=={article}|?{selected})"] ><:couteau:objet_article:></option>
+        <option value='rubrique' [selected="(#ENV{ar_type_objet,article}|=={rubrique}|?{selected})"] ><:couteau:objet_rubrique:></option>
+        <option value='breve' [selected="(#ENV{ar_type_objet,article}|=={breve}|?{selected})"] ><:couteau:objet_breve:></option>
+        <option value='auteur' [selected="(#ENV{ar_type_objet,article}|=={auteur}|?{selected})"] ><:couteau:objet_auteur:></option>
+        <option value='mot' [selected="(#ENV{ar_type_objet,article}|=={mot}|?{selected})"] ><:couteau:objet_mot:></option>
+        <option value='syndic' [selected="(#ENV{ar_type_objet,article}|=={syndic}|?{selected})"] ><:couteau:objet_syndic:></option>
+     </select></label>
+	 &nbsp;
+	 <label for="ar_num_objet"><b><:couteauprive:urls_num_objet:></b>&nbsp;<input class="ar_num_objet" id="ar_num_objet" name="ar_num_objet" size="5" value="#ENV*{ar_num_objet}"/></label><img id="ar_chercher" style="vertical-align:bottom; cursor:pointer; margin-left:1em;" title="<:couteauprive:urls_rechercher:>" src="#EVAL{_DIR_IMG_PACK}loupe.png" alt="<:bouton_chercher:>"/>
+	 </div>
 	 <div style="text-align:left;">
 	  <b><:couteauprive:urls_titre_objet:></b>&nbsp;<span id="ar_titre"> </span><br />
 	  <b><:couteauprive:urls_url_objet:></b>&nbsp;<span id="ar_url_propre"> </span><br />
@@ -124,7 +132,7 @@ function ar_load() {
 	  <label><b><:couteauprive:urls_nouvelle:></b><input style="width:100%;" id="ar_url_objet" name="ar_url_objet" value="" disabled="disabled"/></label>
 	  <div class="ar_edit_info cs_hidden" id="ar_edit_info">&nbsp;</div>
 	 </div>
-	 <div style="text-align:right"><input name="submit" id='url_objet_input' class='fondo' type='submit' disabled="disabled" value="<:couteauprive:urls_enregistrer:>" /></div>
+	 <div style="text-align:right"><input name="submit" id='url_objet_input' class='fondo' type='submit' disabled="disabled" value="<:couteauprive:urls_enregistrer:>"  onclick="javascript:add_param_redirect(this);" /></div>
 	 <div id="ar_url_trouvee" class="cs_hidden">||</div>
 	</fieldset>
 </div>
