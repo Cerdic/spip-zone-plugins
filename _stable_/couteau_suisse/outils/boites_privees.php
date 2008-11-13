@@ -3,7 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // compatibilite avec SPIP 1.91
-if(!function_exists('block_parfois_visible')) {
+if(!defined('_SPIP19200')) {
 	function block_parfois_visible($nom, $invite, $masque, $style='') {
 		return "<div style='$style'>" . bouton_block_invisible($nom) . "$invite</div>"
 		. debut_block_invisible($nom) . "<div id='$nom'>$masque</div>" . fin_block() . '</div>';
