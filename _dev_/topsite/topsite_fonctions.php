@@ -26,12 +26,14 @@ function topsite_ajout($flux) {
 	verifier_visiteur(); // securite...
 	$site = $_SERVER['HTTP_REFERER'];
 	preg_split(",\t,", $site, 3);
-	if(spip_query("SELECT url_site  FROM spip_syndic WHERE url_site='$site' LIMIT 1"))
+	if($row=mysql_fetch_array(spip_query("SELECT url_site, topsite  FROM spip_syndic WHERE url_site='$site' LIMIT 1")))
 	{
-
-		spip_query("UPDATE LOW_PRIORITY spip_syndic SET topsite = topsite + 1 WHERE url_site='$site' LIMIT 1");
-	
+		$topsite=$row['topsite'];
+sql_updateq("spip_syndic", array("topsite" => $topsite), "ulr_site=$site");
+		
 	}
+	return $flux;
+
 	
 }
 ?>
