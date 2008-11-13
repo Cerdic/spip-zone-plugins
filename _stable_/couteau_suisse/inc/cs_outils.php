@@ -180,6 +180,7 @@ function detail_outil($outil_id) {
 
 // renvoie les boutons eventuels d'action rapide
 function cs_action_rapide($outil_id) {
+	include_spip('inc/texte');
 	$f = "{$outil_id}_action_rapide";
 	include_spip("outils/$f");
 	if(!function_exists($f)) return '';

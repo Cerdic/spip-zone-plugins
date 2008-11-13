@@ -31,6 +31,8 @@ function exec_action_rapide_dist() {
 
 	switch ($arg) {
 
+	// outil "spip_cache" : purger le cache
+	case 'purger_cache':
 	// forms[0] : tout purger (cas SPIP < 2.0)
 	case 'edit_urls_0': // idem edit_urls2_1
 	// forms[1] : editer un objet (cas SPIP < 2.0)

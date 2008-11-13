@@ -25,6 +25,11 @@ cs_log("INIT : action_action_rapide_dist() - Une action rapide a ete demandee !"
 
 	switch ($arg) {
 
+	// pour purger le cache de SPIP...
+	case 'cache':
+		include_spip('action/purger');
+		action_purger_dist(); // beurk
+		break;
 	// forms[0] : tout purger (cas SPIP < 2.0)
 	case 'edit_urls_0':
 		foreach(array('articles', 'rubriques', 'breves', 'auteurs', 'mots', 'syndic') as $t)
