@@ -44,9 +44,13 @@
 			
 				<BOUCLE_tab_resultat(POUR){tableau #GET{tab_resultat}}>
 				[(#COMPTEUR_BOUCLE|=={2}|?{' ',''})
-					<h2><:pmb:ouvrages:></h2><ul>
+					[(#GET{tab_resultat}|pmb_tableau2_valeur{0,nav_bar})]
+					<h2><:pmb:ouvrages:></h2>
+
+				<ul>
 				]
 				
+			
 				[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})
 			 		<li>
 						[(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, logo_src}|copie_locale)]}|image_reduire{130,0})]
@@ -60,7 +64,7 @@
 					</li>
 				]
 				</BOUCLE_tab_resultat>
-			</ul>
+				</ul>
 
 			[(#GET{tab_resultat}|pmb_tableau2_valeur{0,nav_bar})]
 			[(#COMPTEUR_BOUCLE|=={1}|?{' ',''})<:pmb:pas_d_ouvrages_trouves:>]

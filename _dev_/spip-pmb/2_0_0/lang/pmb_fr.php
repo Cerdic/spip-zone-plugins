@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'catalogue' => 'Catalogue',
 'ouvrages' => 'Ouvrages',
 'editeurs' => 'Editeurs',
+'auteurs' => 'Auteurs',
 'collections' => 'Collections',
 'isbn' => 'ISBN/ISSN/EAN',
 'recherche_catalogue' => 'Dans le catalogue',

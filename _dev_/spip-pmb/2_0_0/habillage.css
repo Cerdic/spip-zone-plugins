@@ -100,7 +100,7 @@ body { background: gray; margin: 0; padding: 0; text-align: center; }
 #hierarchie .on { font-weight: normal; }
 
 .cartouche { margin-bottom: 2em; }
-.page_nouveautes .cartouche, .page_actualites .cartouche {margin-bottom: 0; }
+.page_nouveautes .cartouche, .page_actualites .cartouche, .page_editeur .cartouche {margin-bottom: 0; }
 .cartouche h1 { background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: bottom left; font-family: Georgia, serif; font-size: 3em; color: #333300; line-height: 1em; padding-bottom: .5em; }
 .cartouche h1.titre-long { font-size: 2.5em; }
 h1.pas-de-texte, .page_recherche h1, .page_nouveautes .cartouche h1, .page_actualites .cartouche h1, .page_auteur .cartouche h1, .page_ouvrages .cartouche h1, .page_serie .cartouche h1, .page_actualites .cartouche h1 { background: none; padding-bottom: 0; }
@@ -264,11 +264,12 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 
 /* liste d'ouvrages pmb */
 .ouvrages { margin-left: 150px; clear: none; }
-.page_auteur_pmb .ouvrages { margin-left: 0; }
+.page_auteur_pmb .ouvrages { margin-left: 150px; }
 .ouvrages ul li { float: right; clear: right; width: 100%; } 
 
 /* liste des collections d'un éditeur pmb */
-.collections { }
+.collections ul li { text-transform: uppercase; font-size: .85em; }
+.collections ul li a { color: #336666; }
 .page_editeur .spip_logos { margin-left: 0; }
 
 /* sites référencés */
@@ -436,7 +437,9 @@ div#page, div#conteneur, div#navigation, div#extra { width: auto; }
 
 .fond-blanc { dispaly: none; }
 
-.navbar { clear: right; float: right; margin-right: 2em; margin-bottom: 2em; }
+.navbar { clear: right; float: right; margin-right: 2em; margin-bottom: 2em; color: #666; }
+.navbar .numero_page { background: none; }
+.navbar img { vertical-align: middle; }
 
 #search { margin-bottom: 2em; background: #999966; color: white; padding: .5em; }
 

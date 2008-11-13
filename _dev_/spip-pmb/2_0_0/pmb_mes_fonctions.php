@@ -261,5 +261,8 @@ function pmb_prepare_recherche ($recherche) {
 	return $recherche;
 }
 
-
+/* fonction str_replace avec l'ordre des parametres compatible spip */
+function pmb_remplacer ($chaine, $p1, $p2) {
+	return str_replace($p1,$p2,$chaine);
+}
 ?>
