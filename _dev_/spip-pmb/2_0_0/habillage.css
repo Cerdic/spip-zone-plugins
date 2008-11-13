@@ -53,12 +53,12 @@ table.spip { border: none; width: 100%; } /*Cf.: spip_style.css*/
 /*  ------------------------------------------
 /*  Disposition a l'ecran des blocs principaux
 /*  ------------------------------------------ */
-body { background: gray; margin: 0; padding: 0; text-align: center; }
+body { background: #ccc; margin: 0; padding: 0; text-align: center; }
 
 #page { position: relative; width: 950px; margin: 0 auto; text-align: left; background-color: #e6e8d5; background-image: url(bg-logo.png); background-repeat: no-repeat; background-position: bottom left; }
 
 #top { position: absolute; margin: 0; padding: 0; top: 0; left: 0; width: 950px; height: 11.5em; margin-bottom: 10px; background: white; }
-#top a img.spip_logos { vertical-align: bottom; line-height: 1em; margin-top: 1em; margin-left: 1.5em; }
+#top a img.spip_logos { vertical-align: bottom; line-height: 1em; margin-top: 1.9em; margin-left: 2em; }
 #top #nom_site_spip { font-size: 2.2em; font-family: Georgia, Times, serif; margin-left: .5em; display: none; }
 
 #formulaire_recherche .choix-recherche { display: block;; padding-left: .5em; margin-bottom: .5em; }
@@ -80,8 +80,8 @@ body { background: gray; margin: 0; padding: 0; text-align: center; }
 #navigation { position: relative; float: right; width: 220px; margin-top: .5em; overflow: hidden; background-image: url(bordure-gris.gif); background-repeat: repeat-y; background-position: top left; }
 #extra { float: right; clear: right; width: 30%; margin-top: 1em; overflow: hidden; }
 
-#pied { clear: both; width: 100%; margin: 0; padding: 0.40em 0; text-align: left; font-size: 0.80em; color: white; background: gray; height: 2em; padding-top: 1em; }
-#pied a {color: white; }
+#pied { clear: both; width: 100%; margin: 0; padding: 0.40em 0; text-align: left; font-size: 0.80em; color: #000; background: #ccc; height: 2em; padding-top: 1em; }
+#pied a {color: #000; }
 #pied img { vertical-align: middle; }
 
 /* Espaceur de blocs */
@@ -230,7 +230,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .rubriques ul li li li { padding-right: 0; padding-left: 1em; font-size: 1.1em; }
 
 /* Recherche */
-.recherche { background: #333300; padding-bottom: 0; }
+.recherche { background: #424206; padding-bottom: 0; }
 .recherche h2 { color: white; padding: .5em; background-image: url(bordure-vert-fonce.gif); background-repeat: repeat-x; background-position: bottom left; }
 .recherche .formulaire_recherche { background: none; }
 .recherche .formulaire_recherche input.text { width: 9em; margin-left: .5em;}
@@ -431,7 +431,7 @@ div#page, div#conteneur, div#navigation, div#extra { width: auto; }
 /* surcharges formulaires */
 #page .formulaire_spip { background: none; background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: top left; }
 #page #navigation .formulaire_spip { background-image: none; }
-#page .formulaire_spip .boutons input, #page input.submit { background-color: #333300; border-color: #333300; }
+#page .formulaire_spip p.boutons input, #page input.submit { background-color: #333300; border-color: #333300; }
 #page .formulaire_recherche .boutons input, #page .formulaire_recherche input.submit { background-color: white; border-color: #333300; }
 
 
@@ -453,3 +453,14 @@ div#page, div#conteneur, div#navigation, div#extra { width: auto; }
 
 .pmb-exemplaires th { background: #999966; color: white; font-weight: normal; }
 .pmb-exemplaires .expl_situation strong { color: #67741F; font-weight: normal; }
+
+#page .formulaire_moncomptepmb { width: 277px; position: absolute; right: 220px; top: 50px; background: none; margin-bottom: 0; padding: 0; }
+#page .formulaire_moncomptepmb ul li {  font-size: .8em; padding-bottom: 0; float: left; clear: left; }
+#page .formulaire_moncomptepmb ul li.boutons { clear: none; position: absolute; right: 0; bottom: 0; }
+#page .formulaire_moncomptepmb ul li.boutons input { font-weight: bold; }
+#page .formulaire_moncomptepmb ul li input { float: left; width: 7em; margin-right: .5em; background: #E6E8D5; border: none; color: black; padding: .2em; }
+#page .formulaire_moncomptepmb ul li.boutons input:hover { background-color: #999966; }
+#page .formulaire_moncomptepmb ul li label { float: left; margin-right: .5em; }
+#page .formulaire_moncomptepmb fieldset { margin-bottom: 0; }
+#page .formulaire_moncomptepmb h2 { font-family: verdana; text-transform: uppercase; font-size: .9em; margin: 0; padding: 0; background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: bottom left; padding-bottom: .5em; width: 100%; }
+#page .formulaire_moncomptepmb fieldset legend { display: none; }
