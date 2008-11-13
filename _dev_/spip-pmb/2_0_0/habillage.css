@@ -455,12 +455,12 @@ div#page, div#conteneur, div#navigation, div#extra { width: auto; }
 .pmb-exemplaires .expl_situation strong { color: #67741F; font-weight: normal; }
 
 #page .formulaire_moncomptepmb { width: 277px; position: absolute; right: 220px; top: 50px; background: none; margin-bottom: 0; padding: 0; }
-#page .formulaire_moncomptepmb ul li {  font-size: .8em; padding-bottom: 0; float: left; clear: left; }
-#page .formulaire_moncomptepmb ul li.boutons { clear: none; position: absolute; right: 0; bottom: 0; }
+#page .formulaire_moncomptepmb ul li { font-size: .8em; padding-bottom: 0; float: left; clear: left; width: 100%; }
+#page .formulaire_moncomptepmb ul li.boutons { clear: none; position: absolute; right: 0; bottom: 0; width: auto; }
 #page .formulaire_moncomptepmb ul li.boutons input { font-weight: bold; }
 #page .formulaire_moncomptepmb ul li input { float: left; width: 7em; margin-right: .5em; background: #E6E8D5; border: none; color: black; padding: .2em; }
 #page .formulaire_moncomptepmb ul li.boutons input:hover { background-color: #999966; }
-#page .formulaire_moncomptepmb ul li label { float: left; margin-right: .5em; }
+#page .formulaire_moncomptepmb ul li label { float: left; margin-right: .5em; width: 8em; position: relative; }
 #page .formulaire_moncomptepmb fieldset { margin-bottom: 0; }
 #page .formulaire_moncomptepmb h2 { font-family: verdana; text-transform: uppercase; font-size: .9em; margin: 0; padding: 0; background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: bottom left; padding-bottom: .5em; width: 100%; }
 #page .formulaire_moncomptepmb fieldset legend { display: none; }
