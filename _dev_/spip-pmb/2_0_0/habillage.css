@@ -132,7 +132,7 @@ h1.pas-de-texte, .page_recherche h1, .page_nouveautes .cartouche h1, .page_actua
 .chapo { line-height: 1.40em; font-family: Georgia, serif; font-weight: bold; }
 .texte { line-height: 1.60em; padding-top: .5em; color: #000; font-family: Georgia, serif; }
 .hyperlien { display: block;  margin-left: 150px; font-weight: bold; color: #999966; }
-.page_auteur .hyperlien { margin-left:0 }
+.page_site .hyperlien, .page_auteur .hyperlien { margin-left:0 }
 .ps, .notes { margin-left: 150px; margin-bottom: 2em; line-height: 1.40em; }
 .notes { margin-left: 150px; clear: both; font-size: 0.90em; }
 
@@ -230,7 +230,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .rubriques ul li li li { padding-right: 0; padding-left: 1em; font-size: 1.1em; }
 
 /* Recherche */
-.recherche { background: #424206; padding-bottom: 0; }
+.recherche { background: #999966; padding-bottom: 0; }
 .recherche h2 { color: white; padding: .5em; background-image: url(bordure-vert-fonce.gif); background-repeat: repeat-x; background-position: bottom left; }
 .recherche .formulaire_recherche { background: none; }
 .recherche .formulaire_recherche input.text { width: 9em; margin-left: .5em;}
@@ -286,7 +286,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .page_sommaire .articles ul li { width: 25%; _height: 13em; min-height: 13em; float: left; clear: none; padding-bottom: 0; margin-top: .5em; background-image: url(bordure-gris.gif); background-repeat: repeat-y; background-position: top left; }
 .page_sommaire .articles ul li.premier { background-image: none; }
 .page_sommaire .articles ul li.avec-photo { width: 45%; }
-.page_sommaire .articles ul li div, .page_sommaire .articles ul li a.lire-la-suite, .page_nouveautes .articles ul li a.lire-la-suite, .page_sommaire .articles ul li small, .page_sommaire .articles ul li h3 { display: block;  margin-left: 1em; margin-right: 1em; }
+.page_sommaire .articles ul li div, .page_sommaire .articles ul li a.lire-la-suite, .page_actualites .articles ul li a.lire-la-suite, .page_nouveautes .articles ul li a.lire-la-suite, .page_sommaire .articles ul li small, .page_sommaire .articles ul li h3 { display: block;  margin-left: 1em; margin-right: 1em; }
 .page_sommaire .articles ul li.premier div, .page_sommaire .articles ul li.premier a.lire-la-suite, .page_sommaire .articles ul li.premier small, .page_sommaire .articles ul li.premier h3, .page_sommaire .articles ul li.avec-photo small { display: block; margin-left: 0; }
 
 .page_sommaire .nouveautes ul li, .page_sommaire .nouveautes ul li.premier, .page_sommaire .nouveautes ul li.avec-photo  { width: 48%; height: auto;}
@@ -322,7 +322,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 
 
 /* page rubrique */
-.page_rubrique .articles .spip_logos, .page_actualites .articles .spip_logos, .page_nouveautes .articles .spip_logos, .page_recherche .articles .spip_logos { margin-left: 0; }
+.page_rubrique .articles .spip_logos, .page_actualites .articles .spip_logos, .page_nouveautes .articles .spip_logos, .page_site .articles .spip_logos, .page_recherche .articles .spip_logos { margin-left: 0; }
 .page_rubrique .articles ul li .introduction { font-size: 1.2em; }
 .page_rubrique .articles .lire-la-suite { margin-right: 2em; }
 .page_rubrique .articles ul li small { display: block; }
