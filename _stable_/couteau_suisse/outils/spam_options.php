@@ -62,13 +62,14 @@ if ( count($_POST)
 	// cas des actions
 	&& !isset($_POST['action'])
 	) {
+print_r($_POST);
 
 	if (!isset($GLOBALS['meta']['cs_spam_mots'])) spam_installe();
 
 	// champs de formulaires a visiter
 	//    un message en forum : texte, titre, auteur
 	//    un message a un auteur : texte_message_auteur_XX, sujet_message_auteur_XX, email_message_auteur_XX
-	$spam_POST_reg = ',^(texte|titre|sujet|auteur|email),i';
+	$spam_POST_reg = ',^(texte|titre|sujet|auteur|email|session),i';
 
 	// on compile $spam_POST en fonction des variables $_POST trouvees
 	$spam_POST_compile = array();
