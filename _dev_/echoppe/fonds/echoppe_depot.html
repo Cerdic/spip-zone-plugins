@@ -1,27 +1,59 @@
-[(#CHEMIN{images/go-home.png}|debut_cadre_trait_couleur{1,"",<:echoppe:edition_de:> [(#TITRE|sinon{#NEW|=={oui}|?{<:echoppe:nouveau_depot:>,<em><:pas_de_titre:></em>}})],"",depot})]
-<form action="[(#EVAL{echoppe_sauver_depot}|generer_url_action)]" method="post" >
-	<input type="hidden" name="new" value="#NEW" />
-	<input type="hidden" name="id_depot" value="#ID_DEPOT" />
-	<input type="text" name ="titre" class="forml" value="#TITRE" /><br /><br />
-	<strong><:echoppe:description_du_depot:></strong><br />
-	[(#DESCRIPTIF**|barre_textarea{10,20,#LANG})]
-	<br />
-	<strong><:echoppe:adresse_du_depot:></strong><br />
-	<input type="text" name="adresse[adresse]" class="forml" value="#ADRESSE" /><br />
-	<strong><:echoppe:numero_du_depot:></strong><br />
-	<input type="text" name="adresse[num]" class="forml" value="#NUM" /><br />
-	<strong><:echoppe:code_postal_du_depot:></strong><br />
-	<input type="text" name="adresse[codepostal]" class="forml" value="#CODEPOSTAL" /><br />
-	<strong><:echoppe:ville_du_depot:></strong><br />
-	<input type="text" name="adresse[ville]" class="forml" value="#VILLE" /><br />
-	<strong><:echoppe:pays_du_depot:></strong><br />
-	<input type="text" name="adresse[pays]" class="forml" value="#PAYS" /><br />
-	<strong><:echoppe:telephone_du_depot:></strong><br />
-	<input type="text" name="adresse[telephone]" class="forml" value="#TELEPHONE" /><br />
-	<strong><:echoppe:fax_du_depot:></strong><br />
-	<input type="text" name="adresse[fax]" class="forml" value="#FAX" /><br />
-	<strong><:echoppe:email_du_depot:></strong><br />
-	<input type="text" name="adresse[email]" class="forml" value="#EMAIL" /><br />
-	<input type="submit" value="<:echoppe:enregistrer:>" class="fondo" />
-</form>
-[(#EVAL{1}|fin_cadre_trait_couleur)]
+<div class="entete-formulaire">
+	<a class="icone36 secteur-24" href="[(#EVAL{echoppe_gerer_depots}|generer_url_ecrire)]" style="float: left;">
+	[<img width="24" height="24" alt="Retour" src="(#CHEMIN{images/go-home.png})"/>]
+	<span><:retour:></span>
+	</a>
+	<:echoppe:edition_d_un_depot:> :
+	[<h1>(#TITRE|sinon{#NEW|=={oui}|?{<:echoppe:nouveau_produit:>,<:echoppe:pas_de_titre:>}})</h1>]
+</div>
+<div class="formulaire_spip">
+	<form action="[(#EVAL{echoppe_sauver_depot}|generer_url_action)]" method="post" >
+		<div class="echoppe_edit_produit">
+			[<input type="hidden" name="new" value="(#NEW)" />]
+			<input type="hidden" name="id_depot" value="#ID_DEPOT" />
+			<ul>
+				<li class="editer_titre obligatoire" >
+					<label for="titre_depot" ><:echoppe:titre_du_depot:></label>
+					<input type="text" class="forml" id="titre_depot" name="titre" value="#TITRE**"/><br />
+				</li>
+				<li class="editer_texte" >
+					<label for="text_area" ><:echoppe:description:></label><br />
+					[(#EVAL{text_area}|barre_typo)]
+					<textarea name='texte' id='text_area' class='barre_inserer forml' rows='5' cols='40'[(#ENV**{browser_caret,''})]>[(#TEXTE**)]</textarea>
+				</li>
+				<li class="editer_adresse_depot" >
+					<label for="titre_depot" ><:echoppe:adresse_du_depot:></label>
+					<input type="text" class="forml" id="titre_depot" name="titre" value="#TITRE**"/><br />
+				</li>
+				<li class="editer_numero_depot" >
+					<label for="numero_depot" ><:echoppe:numero_du_depot:></label>
+					<input type="text" class="forml" id="numero_depot" name="numero_depot" value="#TITRE**"/><br />
+				</li>
+				<li class="editer_code_postal_depot" >
+					<label for="code_postal_depot" ><:echoppe:code_postal_du_depot:></label>
+					<input type="text" class="forml" id="code_postal_depot" name="code_postal_depot" value="#TITRE**"/><br />
+				</li>
+				<li class="editer_ville_depot" >
+					<label for="ville_depot" ><:echoppe:ville_du_depot:></label>
+					<input type="text" class="forml" id="ville_depot" name="ville_depot" value="#TITRE**"/><br />
+				</li>
+				<li class="editer_pays_depot" >
+					<label for="pays_depot" ><:echoppe:pays_du_depot:></label>
+					<input type="text" class="forml" id="pays_depot" name="pays_depot" value="#TITRE**"/><br />
+				</li>
+				<li class="editer_telephone_depot" >
+					<label for="telephone_depot" ><:echoppe:telephone_du_depot:></label>
+					<input type="text" class="forml" id="telephone_depot" name="telephone_depot" value="#TITRE**"/><br />
+				</li>
+				<li class="editer_fax_depot" >
+					<label for="fax_depot" ><:echoppe:fax_du_depot:></label>
+					<input type="text" class="forml" id="fax_depot" name="fax_depot" value="#TITRE**"/><br />
+				</li>
+				<li class="editer_email_depot" >
+					<label for="email_depot" ><:echoppe:email_du_depot:></label>
+					<input type="text" class="forml" id="email_depot" name="email_depot" value="#TITRE**"/><br />
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>

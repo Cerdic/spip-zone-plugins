@@ -36,5 +36,7 @@
 		session_set('echoppe_statut_panier', 'temp' );
 	}
 	
-	
+	define ('_terminaison_urls_page', '');
+	define ('_separateur_urls_page', '');
+	define ('_debut_urls_page','');
 ?>

@@ -63,6 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'editer_panier'=>'&Eacute;diter mon panier',
 'edition_de' => '&Eacute;dition de',
 'edition_de_cetegorie'=>'&Eacute;dition d\'une cat&eacute;gorie',
+'edition_d_un_depot'=>'&Eacute;dition d\'un d&eacute;pot',
 'edition_de_la_version'=>'&Eacute;dition de la version',
 //'edition_langue' => '&Eacute;dition de la langue', // A verifier car en doublons (mattheoh)
 'edition_de_produit' => '&Eacute;dition d\'un produit',
@@ -231,6 +232,7 @@ L\'équipe de ',
 'titre_ou_texte_de_l_option' => 'Titre/Texte de l\'option',
 'information_de_l_option' => 'informations dur l\'option',
 'titre_produit' => 'Titre du produit :',
+'titre_du_depot' => 'Titre du d&eacute;pot',
 'tva' => 'TVA',
 'total' => 'Total',
 

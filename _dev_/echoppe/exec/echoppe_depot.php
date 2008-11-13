@@ -17,8 +17,6 @@ function exec_echoppe_depot(){
 	$res_le_depot = spip_query($sql_le_depot);
 	$le_depot = spip_fetch_array($res_le_depot);
 	$adresse_depot = unserialize($le_depot['adresse']);
-	var_dump($le_depot['adresse']);
-	var_dump($adresse_depot);
 	(is_array($le_depot))?$contexte = array_merge($contexte, $le_depot):$contexte = $contexte;
 	(is_array($adresse_depot))?$contexte = array_merge($contexte, $adresse_depot):$contexte = $contexte;
 	

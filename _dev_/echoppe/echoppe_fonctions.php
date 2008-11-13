@@ -1,16 +1,5 @@
 <?php
 
-function generer_url_validation_panier(){
-	return "?page=echoppe_panier";
-	
-}
-
-/*function generer_logo($nom_fichier){
-	
-	$logo = '<img src="IMG/'.$nom_fichier.'" alt="'.textebrut($nom_fichier).'" />';
-	if (strlen($nom_fichier) > 0) return $logo;
-	
-}*/
 function select_lang($les_langues, $nom, $value, $style){
 	$les_langues = explode(",",$les_langues);
 	$select .= '<select name="'.$nom.'" class="'.$style.'">';
@@ -82,6 +71,15 @@ function calculer_stock($_id_produit){
 	$_quantite = zero_si_vide($_quantite);
 	return $_quantite;
 }
+
+function calculer_balise_url_echoppe($p, $nom){
+	$_id = interprete_argument_balise(1,$p);
+    if (!$_id) $_id = champ_sql('id_'.$nom, $p);
+    $p->code = "vider_url(generer_url_public($nom,'id_'.$nom.'='.$_id))";
+    $p->interdire_scripts = false;
+    return $p;
+}
+
 /*=============================BALISES===============================*/
 function balise_PRIX_TVAC($p){
 	$_prix = champ_sql('prix_base_htva', $p);
@@ -127,6 +125,14 @@ function balise_URL_ACHAT_RAPIDE($p){
 	return $p;
 }
 
+function balise_URL_PRODUIT_dist($p) {
+    return  calculer_balise_url_echoppe($p, 'produit');
+}
+
+function balise_URL_CATEGORIE_dist($p) {
+    return  calculer_balise_url_echoppe($p, 'categorie');
+}
+
 function generer_URL_PANIER($p){
 	$_page = lire_config('echoppe/squelette_panier','echoppe_panier');
 	$_url = generer_url_public($_page);
@@ -151,6 +157,8 @@ function boucle_ECHOPPE_PRODUITS_dist($id_boucle, &$boucles) {
 	// Restreindre aux elements publies, sauf si le critere statut est utilise
 	if (!isset($boucle->modificateur['criteres']['statut'])) {
 		array_unshift($boucle->where,array("'<>'", "'$mstatut'", "'\\'poubelle\\''"));
+		array_unshift($boucle->where,array("'<>'", "'$mstatut'", "'\\'propose\\''"));
+		array_unshift($boucle->where,array("'<>'", "'$mstatut'", "'\\'prepa\\''"));
 	}
 	return calculer_boucle($id_boucle, $boucles); 
 }

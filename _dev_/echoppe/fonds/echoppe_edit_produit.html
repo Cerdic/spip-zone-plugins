@@ -15,14 +15,14 @@
 			<ul>
 				<li class="editer_titre obligatoire" >
 					<label for="titre_produit" ><:echoppe:titre_produit:></label>
-					<input type="text" class="forml" id="titre_produit" name="titre" value="#TITRE**"/><br />
+					<input type="text" class="forml" id="titre_produit" name="titre" value="[(#TITRE**)]"/><br />
 				</li>
 				
 				[<li class="editer_lang" >
 					<label for="titre_produit" ><:echoppe:langue_du_produit:></label>
 					(#CONFIG{langues_multilingue}|select_lang{lang,#LANG,forml})
 				</li>]
-				[(#CONFIG{langues_multilingue}|=={}|?{<input type="hidden" name="lang" value="[(#CONFIG{langue_site})]" />,''})]
+				[(#CONFIG{langues_multilingue}|=={''}|?{<input type="hidden" name="lang" value="[(#CONFIG{langue_site})]" />,''})]
 				<li class="editer_ref_produit obligatoire" >
 					<label for="[(#REF_PRODUIT|?{ref_produit_fake,ref_produit})]" ><:echoppe:reference_interne:></label>
 					<input type="text" class="forml" id="[(#REF_PRODUIT|?{ref_produit_fake,ref_produit})]" name="[(#REF_PRODUIT|?{ref_produit_fake,ref_produit})]" value="#REF_PRODUIT" [(#REF_PRODUIT|?{disabled="disabled",''})]/><br />
@@ -31,7 +31,7 @@
 				
 				<li>
 					<label for="descriptif_produit" ><:echoppe:descriptif:></label>
-					<textarea id="descriptif_produit" name="descriptif" class="forml" >#DESCRIPTIF**</textarea><br />
+					<textarea id="descriptif_produit" name="descriptif" class="forml" >[(#DESCRIPTIF**)]</textarea><br />
 				</li>
 				
 				<li>
@@ -46,14 +46,14 @@
 						<select name="id_categorie" class="forml" id="id_categorie_produit" >
 							<option value="0"><:echoppe:a_la_racine:></option>
 						<BOUCLE_les_categ(ECHOPPE_CATEGORIES)>
-							<option value="#ID_CATEGORIE" [(#ID_CATEGORIE|=={#GET{'parent'}}|?{'selected="selected"',''})]>#TITRE</option>
+							<option value="#ID_CATEGORIE" [(#ID_CATEGORIE|=={#GET{'parent'}}|?{'selected="selected"',''})] >#TITRE</option>
 						</BOUCLE_les_categ>
 						</select>
 					</li>
 				</B_les_categ>
 				<li>
 					<label for="ps_produit" ><:echoppe:ps:></label>
-					<textarea id="ps_produit" name="ps" class="forml" >#PS*</textarea><br />
+					<textarea id="ps_produit" name="ps" class="forml" >[(#PS*)]</textarea><br />
 				</li>
 				<li>
 					<label for="quantite_mini" ><:echoppe:quantite_minimum:></label>&nbsp;<input type="text" id="quantite_mini" name="quantite_mini" value="[(#QUANTITE_MINI|sinon{1})]" />&nbsp;<:echoppe:unites:><br /><br />
