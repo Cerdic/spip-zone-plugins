@@ -62,7 +62,6 @@ if ( count($_POST)
 	// cas des actions
 	&& !isset($_POST['action'])
 	) {
-print_r($_POST);
 
 	if (!isset($GLOBALS['meta']['cs_spam_mots'])) spam_installe();
 
