@@ -320,10 +320,7 @@ function exec_spiplistes_courrier_gerer () {
 		$gros_bouton_supprimer = 
 		$gros_bouton_arreter_envoi = ""
 		;
-	$flag_autorise = (
-		(($connect_statut == "0minirezo") && ($connect_toutes_rubriques)) 
-		|| ($connect_id_auteur == $id_auteur));
-	
+
 	if($flag_autorise) {
 		
 		if(($statut == _SPIPLISTES_COURRIER_STATUT_REDAC) || ($statut == _SPIPLISTES_COURRIER_STATUT_READY)) {
