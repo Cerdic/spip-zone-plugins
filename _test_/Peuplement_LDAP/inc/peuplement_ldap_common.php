@@ -28,6 +28,12 @@ function genere_etape_1(){
 	echo "</div>";
 	echo "</form>";
 	fin_cadre_relief();
+	echo "<br />";
+	echo debut_boite_alerte();
+	echo "<center>";
+	echo _T('peuplementldap:attention_au_filtre');
+	echo "</center>";
+	echo fin_boite_alerte();
 }
 
 
@@ -96,8 +102,6 @@ function genere_etape_3($compte_rendu){
 	$styles = array('arial11', 'arial1', 'arial1');
 	echo afficher_liste($largeurs, $compte_rendu, $styles);
 	echo afficher_liste_fin_tableau();
-	
-	
 }
 
 function recherche_ldap($filtre){
