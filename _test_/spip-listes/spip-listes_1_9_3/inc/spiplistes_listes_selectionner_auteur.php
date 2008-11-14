@@ -71,7 +71,7 @@ function spiplistes_listes_auteurs_elligibles ($id_liste, $statut_liste = '', $f
 // si $id_liste == 0, liste tous les abonnements
 function spiplistes_listes_boite_abonnes (
 	$id_liste, $tri, $debut, $scrip_retour
-	, $id_boite_dest_ajax
+	, $id_boite_dest_ajax = ''
 	) {
 	$id_liste = intval($id_liste);
 	$sql_where = array("aut.statut <> ".sql_quote('5poubelle'));
