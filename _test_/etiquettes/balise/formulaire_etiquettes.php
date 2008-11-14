@@ -192,10 +192,13 @@ function balise_FORMULAIRE_ETIQUETTES_dyn($groupe, $id_groupe, $aide_nuage, $aid
 			include_spip ("inc/invalideur");
 			suivre_invalideur("1");
 			
+			$test = self('&');
+			spip_log("$test","bb");
+			
 			// Relance la page
 			include_spip('inc/headers');
 			redirige_par_entete(
-				self()
+				self('&')
 			);
 			
 		}
