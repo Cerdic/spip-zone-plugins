@@ -7,7 +7,7 @@
 	[<h1>(#TITRE|sinon{#NEW|=={oui}|?{<:echoppe:nouveau_produit:>,<:echoppe:pas_de_titre:>}})</h1>]
 </div>
 <div class="formulaire_spip">
-	<form [action="(#ACTION|generer_url_action{id_produit=#ID_PRODUIT&id_categorie=#ID_CATEGORIE&lang_produit=#LANG_PRODUIT&new=#NEW})"] method="post" >
+	<form [action="(#ACTION|generer_url_action)"] method="post" >
 		<div class="echoppe_edit_produit">
 			[<input type="hidden" name="new" value="(#NEW)" />]
 			[<input type="hidden" name="id_produit" value="(#ID_PRODUIT)" />]
@@ -42,8 +42,8 @@
 				[(#SET{'parent',#ID_CATEGORIE})]
 				<B_les_categ>
 					<li>
-						<label for="id_categorie_produit"><:echoppe:dans_la_categorie:></label>
-						<select name="id_categorie" class="forml" id="id_categorie_produit" >
+						<label for="id_categorie"><:echoppe:dans_la_categorie:></label>
+						<select name="id_categorie" class="forml" id="id_categorie" >
 							<option value="0"><:echoppe:a_la_racine:></option>
 						<BOUCLE_les_categ(ECHOPPE_CATEGORIES)>
 							<option value="#ID_CATEGORIE" [(#ID_CATEGORIE|=={#GET{'parent'}}|?{'selected="selected"',''})] >#TITRE</option>

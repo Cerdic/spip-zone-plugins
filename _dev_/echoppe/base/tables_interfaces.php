@@ -15,6 +15,7 @@ function echoppe_tables_interfaces($tables_interfaces){
 	$tables_interfaces['table_des_tables']['echoppe_clients'] = 'echoppe_clients';
 	$tables_interfaces['table_des_tables']['echoppe_commentaires_paniers'] = 'echoppe_commentaires_paniers';
 	$tables_interfaces['table_des_tables']['echoppe_prestataires'] = 'echoppe_prestataires';
+	$tables_interfaces['table_des_tables']['echoppe_paniers'] = 'echoppe_paniers';
 	
 	$tables_interfaces['table_des_tables']['echoppe_hierarchie'] = 'echoppe_categories';
 	

@@ -4,6 +4,7 @@
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
 	<fieldset><legend><:echoppe:configuration_generale:></legend>
 		<:echoppe:taux_de_tva_par_defaut:>&nbsp;<input type="text" name="taux_de_tva_par_defaut" value="#CONFIG{echoppe/taux_de_tva_par_defaut, 6}" size="1" />&nbsp;%<br />
+		<input type="checkbox" name="arrondi_superieur_de_prix_tvac" [(#CONFIG{echoppe/arrondi_superieur_de_prix_tvac,non}|=={on}|?{CHECKED="CHECKED",})] /><:echoppe:arrondire_les_prix_de_la_balise_prix_tvac_a_l_unite_superieure:>
 		<:echoppe:nombre_de_chiffre_apres_la_virgule:>:&nbsp;<input type="text" name="nombre_chiffre_apres_virgule" value="[(#CONFIG{echoppe/nombre_chiffre_apres_virgule,2})]" size="1" /><br />
 		<:echoppe:devise_utilisee:>
 		<select name="devise">
@@ -46,7 +47,6 @@
 		<:echoppe:pays_du_beneficiaire:>&nbsp;<br /><input type="text" name="pays_beneficiaire" value="#CONFIG{echoppe/pays_beneficiaire}" size="50" /><br /><br />
 		<:echoppe:email_du_beneficiaire:>&nbsp;<br /><input type="text" name="email_beneficiaire" value="#CONFIG{echoppe/email_beneficiaire}" size="50" /><br /><br />
 		<:echoppe:numero_de_compte_du_beneficiaire:>&nbsp;<br /><input type="text" name="numero_de_compte_beneficiaire" value="#CONFIG{echoppe/numero_de_compte_beneficiaire}" size="50" /><br /><br />
-		
 	</fieldset>
 	<br />
 	<input type="submit" name="_cfg_reset" value="<:Reset:>" /><input type="submit" name="_cfg_ok" value="<:OK:>" /><input type="submit" name="_cfg_delete" value="<:suprimer:>" />

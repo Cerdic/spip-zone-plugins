@@ -92,7 +92,7 @@ function echoppe_tables_principales($tables_principales){
 	
 	$spip_stocks = array(
 		"id_stock"			=> "bigint(21) NOT NULL",
-		"ref_produit"		=> "bigint(21) NOT NULL",
+		"ref_produit"		=> "VARCHAR(255) NOT NULL",
 		"configuration"		=> "longblob NOT NULL", // Utile si on veux renseigner qu'il y a 3 graveur DVD-425RW face noir+BurnProof et 10 graveur DVD-425RW face blanche+BurnProof
 		"id_depot"		=> "bigint(21) NOT NULL",
 		"quantite"		=> "int NOT NULL",
@@ -119,8 +119,16 @@ function echoppe_tables_principales($tables_principales){
 	$spip_depots = array(
 		"id_depot"			=> "bigint(21) NOT NULL",
 		"titre"				=> "tinytext NOT NULL",
-		"descriptif"			=> "text NOT NULL",
-		"adresse"				=> "tinytext NOT NULL",
+		"description"			=> "text NOT NULL",
+		"adresse_depot"				=> "tinytext NOT NULL",
+		"numero_depot"				=> "VARCHAR(10) NOT NULL",
+		"code_postal_depot"				=> "tinytext NOT NULL",
+		"ville_depot"				=> "tinytext NOT NULL",
+		"pays_depot"				=> "tinytext NOT NULL",
+		"telephone_depot"				=> "VARCHAR(15) NOT NULL",
+		"fax_depot"				=> "VARCHAR(15) NOT NULL",
+		"gsm_depot"				=> "VARCHAR(15) NOT NULL",
+		"email_depot"				=> "tinytext NOT NULL",
 		"maj"				=> "TIMESTAMP"
 		);
 	

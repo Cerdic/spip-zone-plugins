@@ -3,14 +3,14 @@
 	<B_LesPanierstemporaire>
 	[(#PAGINATION)<br />]
 	<ul>
-<BOUCLE_LesPanierstemporaire(SPIP_ECHOPPE_PANIERS){statut = temp}{pagination}{par date}{inverse}>
+<BOUCLE_LesPanierstemporaire(ECHOPPE_PANIERS){statut = temp}{pagination}{par date}{inverse}>
 	<li>
 		<dl>
 			<dt><a href="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{token_panier=#TOKEN_PANIER, &})]">[(#DATE|affdate)]</a></dt>
 			<dd>
 			<:echoppe:id:>: [(#TOKEN_PANIER|unique)]<br />
-			<BOUCLE_leclientTemp(SPIP_ECHOPPE_CLIENT){token_client = #TOKEN_CLIENT}>
-				<BOUCLE_auteurTemp(SPIP_AUTEURS_ELARGIS){id_auteur=#ID_AUTEUR}>
+			<BOUCLE_leclientTemp(ECHOPPE_CLIENTS){token_client = #TOKEN_CLIENT}>
+				<BOUCLE_auteurTemp(AUTEURS_ELARGIS){id_auteur=#ID_AUTEUR}>
 				<a href="mailto:#EMAIL">#NOM_FAMILLE #PRENOM</a><br />
 				</BOUCLE_auteurTemp>
 			</BOUCLE_leclientTemp>
@@ -27,14 +27,14 @@
 <B_LesPaniersreserve>
 	[(#PAGINATION)<br />]
 	<ul>
-<BOUCLE_LesPaniersreserve(SPIP_ECHOPPE_PANIERS){statut = reserve}{pagination}{par date}{inverse}>
+<BOUCLE_LesPaniersreserve(ECHOPPE_PANIERS){statut = reserve}{pagination}{par date}{inverse}>
 	<li>
 		<dl>
 			<dt><a href="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{token_panier=#TOKEN_PANIER, &})]">[(#DATE|affdate)]</a></dt>
 			<dd>
 			<:echoppe:id:>: [(#TOKEN_PANIER|unique)]<br />
-			<BOUCLE_leclientreserve(SPIP_ECHOPPE_CLIENT){token_client = #TOKEN_CLIENT}>
-				<BOUCLE_auteurreserve(SPIP_AUTEURS_ELARGIS spip_auteurs){id_auteur=#ID_AUTEUR}>
+			<BOUCLE_leclientreserve(ECHOPPE_CLIENTS){token_client = #TOKEN_CLIENT}>
+				<BOUCLE_auteurreserve(AUTEURS_ELARGIS spip_auteurs){id_auteur=#ID_AUTEUR}>
 				<a href="mailto:#EMAIL">#NOM_FAMILLE #PRENOM</a> <br />
 				</BOUCLE_auteurreserve>
 			</BOUCLE_leclientreserve>
@@ -51,14 +51,14 @@
 <B_LesPaniersvalide>
 	[(#PAGINATION)<br />]
 	<ul>
-<BOUCLE_LesPaniersvalide(SPIP_ECHOPPE_PANIERS){statut = valide}{pagination}{par date}{inverse}>
+<BOUCLE_LesPaniersvalide(ECHOPPE_PANIERS){statut = valide}{pagination}{par date}{inverse}>
 	<li>
 		<dl>
 			<dt><a href="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{token_panier=#TOKEN_PANIER, &})]">[(#DATE|affdate)]</a></dt>
 			<dd>
 			<:echoppe:id:>: [(#TOKEN_PANIER|unique)]<br />
-			<BOUCLE_leclientvalide(SPIP_ECHOPPE_CLIENT){token_client = #TOKEN_CLIENT}>
-				<BOUCLE_auteurvalide(SPIP_AUTEURS_ELARGIS){id_auteur=#ID_AUTEUR}>
+			<BOUCLE_leclientvalide(ECHOPPE_CLIENTS){token_client = #TOKEN_CLIENT}>
+				<BOUCLE_auteurvalide(AUTEURS_ELARGIS){id_auteur=#ID_AUTEUR}>
 				<a href="mailto:#EMAIL">#NOM_FAMILLE #PRENOM</a><br />
 				</BOUCLE_auteurvalide>
 			</BOUCLE_leclientvalide>
@@ -75,14 +75,14 @@
 <B_LesPanierspaye>
 	[(#PAGINATION)<br />]
 	<ul>
-<BOUCLE_LesPanierspaye(SPIP_ECHOPPE_PANIERS){statut = paye}{pagination}{par date}{inverse}>
+<BOUCLE_LesPanierspaye(ECHOPPE_PANIERS){statut = paye}{pagination}{par date}{inverse}>
 	<li>
 		<dl>
 			<dt><a href="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{token_panier=#TOKEN_PANIER, &})]">[(#DATE|affdate)]</a></dt>
 			<dd>
 			<:echoppe:id:>: [(#TOKEN_PANIER|unique)]<br />
-			<BOUCLE_leclientpaye(SPIP_ECHOPPE_CLIENT){token_client = #TOKEN_CLIENT}>
-				<BOUCLE_auteurpaye(SPIP_AUTEURS_ELARGIS){id_auteur=#ID_AUTEUR}>
+			<BOUCLE_leclientpaye(ECHOPPE_CLIENTS){token_client = #TOKEN_CLIENT}>
+				<BOUCLE_auteurpaye(AUTEURS_ELARGIS){id_auteur=#ID_AUTEUR}>
 				<a href="mailto:#EMAIL">#NOM_FAMILLE #PRENOM</a><br />
 				</BOUCLE_auteurpaye>
 			</BOUCLE_leclientpaye>
@@ -99,14 +99,14 @@
 <B_LesPanierstraite>
 	[(#PAGINATION)<br />]
 	<ul>
-<BOUCLE_LesPanierstraite(SPIP_ECHOPPE_PANIERS){statut = traite}{pagination}{par date}{inverse}>
+<BOUCLE_LesPanierstraite(ECHOPPE_PANIERS){statut = traite}{pagination}{par date}{inverse}>
 	<li>
 		<dl>
 			<dt><a href="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{token_panier=#TOKEN_PANIER, &})]">[(#DATE|affdate)]</a></dt>
 			<dd>
 			<:echoppe:id:>: [(#TOKEN_PANIER|unique)]<br />
-			<BOUCLE_leclienttraite(SPIP_ECHOPPE_CLIENT){token_client = #TOKEN_CLIENT}>
-				<BOUCLE_auteurtraite(SPIP_AUTEURS_ELARGIS){id_auteur=#ID_AUTEUR}>
+			<BOUCLE_leclienttraite(ECHOPPE_CLIENTS){token_client = #TOKEN_CLIENT}>
+				<BOUCLE_auteurtraite(AUTEURS_ELARGIS){id_auteur=#ID_AUTEUR}>
 				<a href="mailto:#EMAIL">#NOM_FAMILLE #PRENOM</a><br />
 				#ADRESSE
 				</BOUCLE_auteurtraite>
@@ -124,14 +124,14 @@
 <B_LesPaniersenvoye>
 	[(#PAGINATION)<br />]
 	<ul>
-<BOUCLE_LesPaniersenvoye(SPIP_ECHOPPE_PANIERS){statut = envoye}{pagination}{par date}{inverse}>
+<BOUCLE_LesPaniersenvoye(ECHOPPE_PANIERS){statut = envoye}{pagination}{par date}{inverse}>
 	<li>
 		<dl>
 			<dt><a href="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{token_panier=#TOKEN_PANIER, &})]">[(#DATE|affdate)]</a></dt>
 			<dd>
 			<:echoppe:id:>: [(#TOKEN_PANIER|unique)]<br />
-			<BOUCLE_leclientenvoye(SPIP_ECHOPPE_CLIENT){token_client = #TOKEN_CLIENT}>
-				<BOUCLE_auteurenvoye(SPIP_AUTEURS_ELARGIS){id_auteur=#ID_AUTEUR}>
+			<BOUCLE_leclientenvoye(ECHOPPE_CLIENTS){token_client = #TOKEN_CLIENT}>
+				<BOUCLE_auteurenvoye(AUTEURS_ELARGIS){id_auteur=#ID_AUTEUR}>
 				<a href="mailto:#EMAIL">#NOM_FAMILLE #PRENOM</a><br />
 				#ADRESSE
 				</BOUCLE_auteurenvoye>

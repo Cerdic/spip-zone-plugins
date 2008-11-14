@@ -24,6 +24,9 @@ function calculer_prix_tvac($prix_htva, $taux_tva){
 	}
 	$prix_ttc = $prix_htva + ($prix_htva * ($taux_tva / 100));
 	$prix_ttc = round($prix_ttc, lire_config('echoppe/nombre_chiffre_apres_virgule',2));
+	if (lire_config('echoppe/arrondi_superieur_de_prix_tvac','non') == 'on'){
+		$prix_ttc = ceil($prix_ttc);
+	}
 	return $prix_ttc;
 }
 
@@ -63,9 +66,8 @@ function calculer_url_achat_rapide($_var){
 	
 }
 function calculer_stock($_id_produit){
-	$_sql_stock = "SELECT quantite FROM spip_echoppe_stock_produits WHERE id_produit = '$_id_produit';";
-	$_res_stock = spip_query($_sql_stock);
-	while($_la_quantite = spip_fetch_array($_res_stock)){
+	$sql_quantite = sql_select('quantite','spip_echoppe_stocks',array("ref_produit = '".$_id_produit."'"));
+	while($_la_quantite = sql_fetch($sql_quantite)){
 		$_quantite = $_quantite + $_la_quantite['quantite'];
 	}
 	$_quantite = zero_si_vide($_quantite);
@@ -141,8 +143,8 @@ function generer_URL_PANIER($p){
 
 
 function balise_TOTAL_STOCK($p){
-	$_id_produit = champ_sql('id_produit', $p);
-	$p->code = "calculer_stock($_id_produit)";
+	$_ref_produit = champ_sql('ref_produit', $p);
+	$p->code = "calculer_stock($_ref_produit)";
 	$p->interdire_scripts = false;
 	return $p;
 }

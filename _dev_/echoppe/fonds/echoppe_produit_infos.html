@@ -1,5 +1,6 @@
 <div class="cadre-formulaire">
 	<form [action="(#EVAL{echoppe_sauver_infos_produit}|generer_url_action{id_produit=#ID_PRODUIT})"] method="post" >
+		<input type="hidden" name="ref_produit" value="#REF_PRODUIT" />
 		<div class="echoppe_edit_produit">
 			<h3><:echoppe:edition_donnees_globales:></h3>
 				

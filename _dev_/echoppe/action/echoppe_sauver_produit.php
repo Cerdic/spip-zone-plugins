@@ -51,9 +51,9 @@ function action_echoppe_sauver_produit(){
 	$hauteur = str_replace(".","",$hauteur);
 	$hauteur = str_replace(",",".",$hauteur);
 	
+	if ($lang == ''){ $lang = lire_config(langue_site);}
 	
 	//echo $new.'<---';
-	
 	switch ($new){
 		case 'oui':
 			$arg_inser_produit = array(
@@ -86,6 +86,7 @@ function action_echoppe_sauver_produit(){
 			break;
 		
 		default :
+			
 			$arg_inser_produit = array(
 			'id_categorie' => $id_categorie,
 			'ref_produit' => $ref_produit,

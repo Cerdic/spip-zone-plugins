@@ -58,7 +58,7 @@
 		<table width="100%">
 		<tbody>
 		
-			<BOUCLE_LesProduits(ECHOPPE_PRODUITS){id_categorie}{tout}>
+			<BOUCLE_LesProduits(ECHOPPE_PRODUITS){id_categorie}{statut IN propose,prepa,publie}>
 				<tr class="tr_liste">
 				<td style="width: 11px;"><img src="[(#STATUT|=={prepa}|?{[(#CHEMIN{images/puce-blanche.gif})],''})][(#STATUT|=={propose}|?{[(#CHEMIN{images/puce-orange.gif})],''})][(#STATUT|=={publie}|?{[(#CHEMIN{images/puce-verte.gif})],''})][(#STATUT|=={poubelle}|?{[(#CHEMIN{images/puce-poubelle.gif})],''})]" alt="statut #STATUT"/></td>
 				<td class="arial2">
