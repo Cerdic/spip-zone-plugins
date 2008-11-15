@@ -84,16 +84,4 @@ function boucle_DOCUMENTS($id_boucle, &$boucles) {
 	return calculer_boucle($id_boucle, $boucles);
 }
 
-function aouspan($url,$libelle,$on=false,$class="",$title=""){
-	return 
-	($on ?"<span class='on'>":
-		"<a href='$url'"
-	  	.($title?" title='".attribut_html($title)."'":'')
-	  	.($class?" class='".attribut_html($class)."'":'')
-	  	.">"
-	)
-	. $libelle
-	. ($on ? "</span>":"</a>");
-}
-
 ?>
