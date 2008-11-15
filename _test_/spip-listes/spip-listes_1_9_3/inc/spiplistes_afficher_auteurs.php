@@ -234,19 +234,28 @@ function spiplistes_afficher_auteurs (
 		// #5: Format si abonne	
 		.	"<th>"._T('spiplistes:format')
 		. "</th>\n"
-		//
+		;
 		// #6: Nombre d'abonnements	
+		$j = 0;
+		// si js inactif, $exec_url prend le relais
+		$exec_url = generer_url_ecrire($script_retour, "id_liste=$id_liste&tri=nombre&debut=$js");
+		// sinon, ajax animera la boite des abos
+		$action_url = generer_action_auteur(_SPIPLISTES_ACTION_LISTE_ABONNES
+			, $id_liste." ".$j." nombre");
+	$result .= ""
 		.	"<th>"
 		.	(
 			($tri=='nombre')
 			? _T('spiplistes:nb_abos')
 			: "<a href='"
-				. generer_url_ecrire($script_retour,"tri=nombre".$id_liste_url)
-				. "' title='"._T('spiplistes:lien_trier_nombre')."'>"._T('spiplistes:nb_abos')."</a>"
+				. parametre_url($exec_url, 'redirect', $exec_url)."'"
+				. " onclick=\"return AjaxSqueeze('$action_url', '$id_boite_dest_ajax', '$exec_url', event)\""
+				. " title='"._T('spiplistes:lien_trier_nombre')."'>"._T('spiplistes:nb_abos')."</a>"
 			)
 		. "</th>\n"
-		//
+		;
 		// #7: Modifier l'abonnement
+	$result .= ""
 		.	"<th>"
 		. _T('spiplistes:modifier')
 		. "</th></tr>\n"
