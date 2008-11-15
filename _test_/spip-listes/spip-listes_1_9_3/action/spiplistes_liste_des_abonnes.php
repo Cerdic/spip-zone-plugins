@@ -27,7 +27,7 @@ function action_spiplistes_liste_des_abonnes_dist () {
 	$debut = intval($r[2]);
 	$tri = $r[3];
 
-	echo(spiplistes_listes_boite_abonnes($id_liste, $tri, $debut, $redirect));
+	echo(spiplistes_listes_boite_abonnements($id_liste, $statut_liste, $tri, $debut, $redirect));
 	
 	exit(0);
 
