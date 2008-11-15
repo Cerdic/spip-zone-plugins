@@ -965,7 +965,6 @@ function spiplistes_html_entity_decode_utf8($string)
 // Returns the utf string corresponding to the unicode value (from php.net, courtesy - romans@void.lv)
 // thank to: akniep at rayo dot info
 function spiplistes_code2utf($number)  {
-	spiplistes_log("####");
 	static $windows_illegals_chars;
 	if($windows_illegals_chars === null) {
 		$windows_illegals_chars = array(
