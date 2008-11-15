@@ -120,6 +120,24 @@ function spiplistes_lire_key_in_serialized_meta ($key, $meta_name) {
 }
 
 /*
+ * ecriture dans les metas, format serialise
+ * @return 
+ * @param $key la cle meta a appliquer
+ * @param $value sa valeur
+ * @param $meta_name nom du champ meta
+ */
+function spiplistes_ecrire_key_in_serialized_meta ($key, $value, $meta_name) {
+	if(isset($GLOBALS['meta'][$meta_name])) {
+		$s_meta = unserialize($GLOBALS['meta'][$meta_name]);
+		$s_meta[$key] = $value;
+		ecrire_meta($meta_name, serialize($s_meta));
+		return(true);
+	}
+	else return(false);
+}
+
+
+/*
  * @return la version du fichier plugin.xml 
  */
 function spiplistes_real_version_get ($prefix) {

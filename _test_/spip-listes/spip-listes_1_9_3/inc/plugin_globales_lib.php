@@ -223,19 +223,6 @@ if(!function_exists('__texte_html_2_iso')) {
 
 
 
-if(!function_exists('__plugin_ecrire_key_in_serialized_meta')) {
-	// ecriture dans les metas, format s�rialis�
-	function __plugin_ecrire_key_in_serialized_meta ($key, $value, $meta_name) {
-		if(isset($GLOBALS['meta'][$meta_name])) {
-			$s_meta = unserialize($GLOBALS['meta'][$meta_name]);
-			$s_meta[$key] = $value;
-			ecrire_meta($meta_name, serialize($s_meta));
-			return(true);
-		}
-		else return(false);
-	}
-}
-
 
 /*
  * ne sert plus

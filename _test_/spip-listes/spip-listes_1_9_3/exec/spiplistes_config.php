@@ -110,7 +110,7 @@ function exec_spiplistes_config () {
 
 	if($btn_complement_courrier) {
 		foreach($keys_complement_courrier as $key) {
-			__plugin_ecrire_key_in_serialized_meta(
+			spiplistes_ecrire_key_in_serialized_meta(
 				$key
 				, (!empty($$key) ? $$key : 'non')
 				, _SPIPLISTES_META_PREFERENCES
@@ -129,7 +129,7 @@ function exec_spiplistes_config () {
 		}
 		foreach($keys_opts_param_valider as $key) {
 			$$key = (!empty($$key)) ? $$key : 'non';
-			__plugin_ecrire_key_in_serialized_meta ($key, $$key, _SPIPLISTES_META_PREFERENCES);
+			spiplistes_ecrire_key_in_serialized_meta ($key, $$key, _SPIPLISTES_META_PREFERENCES);
 			$str_log .= $key." = ".$$key.", ";
 		}
 		$doit_ecrire_metas = true;
@@ -152,7 +152,7 @@ function exec_spiplistes_config () {
 			} else {
 				$$key = (!empty($$key)) ? $$key : 'non';
 			}
-			__plugin_ecrire_key_in_serialized_meta ($key, $$key, _SPIPLISTES_META_PREFERENCES);
+			spiplistes_ecrire_key_in_serialized_meta($key, $$key, _SPIPLISTES_META_PREFERENCES);
 			$str_log .= $key." = ".$$key.", ";
 		}
 		$doit_ecrire_metas = true;

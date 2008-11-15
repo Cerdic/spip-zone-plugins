@@ -108,7 +108,7 @@ function spiplistes_initialise_spip_metas_spiplistes ($reinstall = false) {
 	}
 
 	// par default, simuler les envois a l'installation
-	__plugin_ecrire_key_in_serialized_meta ('opt_simuler_envoi', "oui", _SPIPLISTES_META_PREFERENCES);
+	spiplistes_ecrire_key_in_serialized_meta ('opt_simuler_envoi', "oui", _SPIPLISTES_META_PREFERENCES);
 	
 	// les autres preferences serialisees ('_SPIPLISTES_META_PREFERENCES') sont installees par exec/spiplistes_config
 

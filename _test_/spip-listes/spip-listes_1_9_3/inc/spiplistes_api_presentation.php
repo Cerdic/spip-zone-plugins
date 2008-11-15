@@ -572,7 +572,7 @@ function spiplistes_boite_autocron () {
 	if($opt_suspendre_trieuse == 'oui') {
 		if(_request('opt_suspendre_trieuse')=='non') {
 			if(autoriser('webmestre','','',$connect_id_auteur)) {
-				__plugin_ecrire_key_in_serialized_meta ('opt_suspendre_trieuse', $opt_suspendre_trieuse = 'non', _SPIPLISTES_META_PREFERENCES);
+				spiplistes_ecrire_key_in_serialized_meta ('opt_suspendre_trieuse', $opt_suspendre_trieuse = 'non', _SPIPLISTES_META_PREFERENCES);
 				spiplistes_ecrire_metas();
 				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:Trieuse_reactivee')."</p>\n";
 			}
@@ -589,7 +589,7 @@ function spiplistes_boite_autocron () {
 	if($opt_suspendre_meleuse == 'oui') {
 		if(_request('opt_suspendre_meleuse')=='non') {
 			if(autoriser('webmestre','','',$connect_id_auteur)) {
-				__plugin_ecrire_key_in_serialized_meta ('opt_suspendre_meleuse', $opt_suspendre_meleuse = 'non', _SPIPLISTES_META_PREFERENCES);
+				spiplistes_ecrire_key_in_serialized_meta ('opt_suspendre_meleuse', $opt_suspendre_meleuse = 'non', _SPIPLISTES_META_PREFERENCES);
 				spiplistes_ecrire_metas();
 				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:Meleuse_reactivee')."</p>\n";
 			}
@@ -606,7 +606,7 @@ function spiplistes_boite_autocron () {
 	if($opt_simuler_envoi == 'oui') {
 		if(_request('opt_simuler_envoi')=='non') {
 			if(autoriser('webmestre','','',$connect_id_auteur)) {
-				__plugin_ecrire_key_in_serialized_meta ('opt_simuler_envoi', $opt_simuler_envoi = 'non', _SPIPLISTES_META_PREFERENCES);
+				spiplistes_ecrire_key_in_serialized_meta ('opt_simuler_envoi', $opt_simuler_envoi = 'non', _SPIPLISTES_META_PREFERENCES);
 				spiplistes_ecrire_metas();
 				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:simulation_desactive')."</p>\n";
 			}
