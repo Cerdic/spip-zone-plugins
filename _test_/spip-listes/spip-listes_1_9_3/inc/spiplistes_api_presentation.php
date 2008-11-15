@@ -27,7 +27,6 @@
 
 include_spip('inc/presentation');
 include_spip('inc/spiplistes_api_journal');
-include_spip('inc/plugin_globales_lib');
 
 /*
 	Les fonctions affichage et presentation dans l'espace prive

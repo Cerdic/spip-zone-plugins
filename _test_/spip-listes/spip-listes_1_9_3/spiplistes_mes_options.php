@@ -11,7 +11,6 @@ include_spip('base/abstract_sql');
 // la declaration des tables en spiplites 192 est dans 'spip-listes.php'. Elle se trouve dans 'spiplistes_tables.php' en 193
 // include_spip ('base/spip-listes');
 include_spip('base/spiplistes_tables');
-include_spip("inc/plugin_globales_lib");
 include_spip('inc/spiplistes_api_globales');
 include_spip('inc/spiplistes_api_abstract_sql');
 

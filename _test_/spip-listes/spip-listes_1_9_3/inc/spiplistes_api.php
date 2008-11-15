@@ -36,7 +36,6 @@ include_spip('inc/charsets');
 include_spip('base/abstract_sql');
 
 include_spip('inc/spiplistes_api_abstract_sql');
-include_spip('inc/plugin_globales_lib');
 include_spip('inc/spiplistes_api_globales');
 
 /* function privee
