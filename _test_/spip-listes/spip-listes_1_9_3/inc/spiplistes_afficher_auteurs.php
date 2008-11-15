@@ -289,7 +289,7 @@ function spiplistes_afficher_auteurs (
 			. "</td></tr>\n"
 			;
 		// onglets : affichage des lettres
-		if (($tri == 'nom') && ($GLOBALS['options'] == 'avancees')) {
+		if ($tri == 'nom') {
 			$result .= ""
 				. "<tr class='onglets'><td colspan='7'>\n"
 				. "<!-- onglets des lettres -->\n"
