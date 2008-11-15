@@ -655,10 +655,6 @@ function spiplistes_format_valide ($format) {
 	return(in_array($format, array("non", "texte", "html")) ? $format : false);
 }
 
-function spiplistes_ecrire_metas() {
-	return(__ecrire_metas());
-}
-
 //CP-20080519
 // Les fonctions spiplistes_auteurs_*() concernent les auteurs
 // Table cible : spip_auteurs

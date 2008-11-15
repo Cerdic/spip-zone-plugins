@@ -237,6 +237,9 @@ if(!function_exists('__table_items_count')) {
 	}
 }
 
+/*
+ * ne sert plus
+ */
 if(!function_exists('__table_items_get')) {
 	function __table_items_get ($table, $keys, $where='', $limit='') {
 		$result = array();
