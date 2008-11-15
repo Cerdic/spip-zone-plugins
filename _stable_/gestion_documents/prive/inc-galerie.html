@@ -34,7 +34,7 @@
 <div class="galerie[ media-(#ENV{media,''})]">
 	<B_galerie>
 	<h2>[(#GRAND_TOTAL|gestdoc_affiche_un_ou_plusieurs{#VAL{gestdoc:un_}|concat{#ENV{media,document}},#VAL{gestdoc:des_}|concat{#ENV{media,document},s}})]</h2>
-	<p class="pagination">
+	<div class="pagination"><div class='tris'>
 	[ (#SELF|parametre_url{sens,-1}|aoustrong{#CHEMIN{img_pack/croissant-16.png}|tag_img{<:gestdoc:par_tri_croissant:>},#ENV{sens,1}|<{0},ajax})]
 	[<span class='invisible'>|</span> (#SELF|parametre_url{sens,1}|aoustrong{#CHEMIN{img_pack/decroissant-16.png}|tag_img{<:gestdoc:par_tri_decroissant:>},#ENV{sens,1}|>{0},ajax})]
 	[| (#SELF|parametre_url{tri,id_document}|aoustrong{<:gestdoc:par_id:>,#ENV{tri,id_document}|=={id_document},ajax})]
@@ -42,8 +42,8 @@
 	[| (#SELF|parametre_url{tri,taille}|aoustrong{<:gestdoc:par_taille:>,#ENV{tri,id_document}|=={taille},ajax})]
 	[| (#SELF|parametre_url{tri,largeur}|aoustrong{<:gestdoc:par_largeur:>,#ENV{tri,id_document}|=={largeur},ajax})]
 	[| (#SELF|parametre_url{tri,hauteur}|aoustrong{<:gestdoc:par_hauteur:>,#ENV{tri,id_document}|=={hauteur},ajax})]
-	[| (#SELF|parametre_url{tri,'titre'}|aoustrong{<:gestdoc:par_titre:>,#ENV{tri,id_document}|=={'titre'},ajax})]
-	[| (#PAGINATION{page})]</p>
+	[| (#SELF|parametre_url{tri,'titre'}|aoustrong{<:gestdoc:par_titre:>,#ENV{tri,id_document}|=={'titre'},ajax})]</div>
+	[| (#PAGINATION{page})]</div>
 	<table>
 	<thead>
 		<th></th>
