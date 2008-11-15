@@ -894,7 +894,7 @@ function spiplistes_pied_page_html_get ($pied_patron, $lang = "") {
  * @return 
  * @param $id_bloc Object
  * @param $message Object[optional]
- */*/
+ */
 function spiplistes_boutons_forcer_format ($id_bloc, $message = '') {
 	if(!empty($message)) {
 		$message = "<div>$message</div>\n";
