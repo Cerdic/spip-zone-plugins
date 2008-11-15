@@ -31,7 +31,7 @@ function spiplistes_install ($action) {
 			$spiplistes_version = $GLOBALS['meta']['spiplistes_version'];
 			$result = (
 				$spiplistes_version
-				&& ($spiplistes_version >= __plugin_real_version_get(_SPIPLISTES_PREFIX))
+				&& ($spiplistes_version >= spiplistes_real_version_get(_SPIPLISTES_PREFIX))
 				&& sql_showtable("spip_listes")
 				);
 			//spiplistes_log("TEST: ".($result ? "OK" : "NO"), _SPIPLISTES_LOG_DEBUG);
@@ -91,7 +91,7 @@ function spiplistes_base_creer () {
 	creer_base();
 	spiplistes_log("INSTALL: database creation");
 
-	$spiplistes_base_version = __plugin_real_version_base_get(_SPIPLISTES_PREFIX);
+	$spiplistes_base_version = spiplistes_real_version_base_get(_SPIPLISTES_PREFIX);
 	ecrire_meta('spiplistes_base_version', $spiplistes_base_version);
 	spiplistes_ecrire_metas();
 	
@@ -118,7 +118,7 @@ function spiplistes_initialise_spip_metas_spiplistes ($reinstall = false) {
 		, 'spiplistes_charset_envoi' => _SPIPLISTES_CHARSET_ENVOI
 		, 'mailer_smtp' => 'non'
 		, 'abonnement_config' => 'simple'
-		, 'spiplistes_version' => __plugin_real_version_get(_SPIPLISTES_PREFIX)
+		, 'spiplistes_version' => spiplistes_real_version_get(_SPIPLISTES_PREFIX)
 	);
 	foreach($spiplistes_spip_metas as $key => $value) {
 		if($reinstall 

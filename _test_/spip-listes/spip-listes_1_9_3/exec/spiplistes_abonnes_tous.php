@@ -200,7 +200,7 @@ function exec_spiplistes_abonnes_tous () {
 		. fin_cadre_relief(true)
 		;
 	echo($page_result);
-	echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
+	echo spiplistes_html_signature(_SPIPLISTES_PREFIX), fin_gauche(), fin_page();
 }
 
 //CP-200080519

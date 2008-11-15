@@ -89,7 +89,108 @@ function spiplistes_spip_est_inferieur_193 () {
 
 //CP-20080512
 function spiplistes_pref_lire ($key) {
-	return(__plugin_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES));
+	return(spiplistes_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES));
 }
+
+/*
+ * lecture dans les metas, format serialise
+ * @return 
+ * @param $meta_name Object
+ */
+function spiplistes_lire_serialized_meta ($meta_name) {
+	if(isset($GLOBALS['meta'][$meta_name])) {
+		return(unserialize($GLOBALS['meta'][$meta_name]));
+	}
+	return(false);
+}
+
+/*
+ * lecture d'une cle dans la meta serialisee
+ * @return 
+ * @param $key Object
+ * @param $meta_name Object
+ */
+function spiplistes_lire_key_in_serialized_meta ($key, $meta_name) {
+	$result = false;
+	$s_meta = spiplistes_lire_serialized_meta($meta_name);
+	if($s_meta && isset($s_meta[$key])) {
+		$result = $s_meta[$key];
+	}
+	return($result);
+}
+
+/*
+ * @return la version du fichier plugin.xml 
+ */
+function spiplistes_real_version_get ($prefix) {
+	$r = spiplistes_real_tag_get($prefix, 'version');
+	return ($r);
+}
+
+/*
+ * renvoie la version_base du fichier plugin.xml
+ */
+function spiplistes_real_version_base_get ($prefix) {
+	$r = spiplistes_real_tag_get($prefix, 'version_base');
+	return ($r);
+}
+
+function spiplistes_current_version_get ($prefix) {
+	global $meta; 
+	return $meta[$prefix."_version"];
+}
+
+function spiplistes_real_tag_get ($prefix, $s) {
+	$dir = spiplistes_get_meta_dir($prefix);
+	$f = _DIR_PLUGINS.$dir."/"._FILE_PLUGIN_CONFIG;
+	if(is_readable($f) && ($c = file_get_contents($f))) {
+		$p = array("/<!--(.*?)-->/is","/<\/".$s.">.*/s","/.*<".$s.">/s");
+		$r = array("","","");
+		$r = preg_replace($p, $r, $c);
+	}
+	return(!empty($r) ? $r : false);
+}
+
+/*
+ * renvoie les infos du plugin contenues dans les metas
+ * qui contient 'dir' et 'version'
+ */
+function spiplistes_get_meta_infos ($prefix) {
+	if(isset($GLOBALS['meta']['plugin'])) {
+		$result = unserialize($GLOBALS['meta']['plugin']);
+		$prefix = strtoupper($prefix);
+		if(isset($result[$prefix])) {
+			return($result[$prefix]);
+		}
+	}
+	return(false);
+}
+
+/*
+ * renvoie le dir du plugin present dans les metas
+ */
+function spiplistes_get_meta_dir($prefix) {
+	$result = false;
+	$info = spiplistes_get_meta_infos($prefix);
+	if(isset($info['dir'])) {
+		$result = $info['dir'];
+	}
+	return($result);
+}
+
+/*
+ * @return la version_base en cours
+ * doc: voir inc/plugin.php sur version_base (plugin.xml)
+ * qui s'appelle base_version en spip_meta %-}
+ */
+function spiplistes_current_version_base_get ($prefix) {
+	global $meta;
+	if(!($vb = $meta[$prefix."_base_version"])) {
+		$vb = spiplistes_real_version_base_get ($prefix);
+	}
+	return($vb);
+}
+
+
 
 ?>

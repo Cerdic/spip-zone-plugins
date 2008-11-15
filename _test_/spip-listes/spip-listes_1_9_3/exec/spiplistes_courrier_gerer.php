@@ -129,7 +129,7 @@ function exec_spiplistes_courrier_gerer () {
 						if(!($id_auteur_test = spiplistes_idauteur_depuis_email($email_test))) {
 							// verifie si l'adresse est dans la table des auteurs
 							// si inconnue, refuse d'envoyer
-							$message_erreur .= __boite_alerte (_T('spiplistes:Erreur_Adresse_email_inconnue'), true);
+							$message_erreur .= spiplistes_boite_alerte (_T('spiplistes:Erreur_Adresse_email_inconnue'), true);
 						}
 						else {
 							
@@ -155,14 +155,14 @@ function exec_spiplistes_courrier_gerer () {
 								);
 							}
 							else {
-								$message_erreur .= __boite_alerte (_T('spiplistes:destinataire_sans_format_alert'), true);
+								$message_erreur .= spiplistes_boite_alerte (_T('spiplistes:destinataire_sans_format_alert'), true);
 							}
 							
 							$str_destinataire = _T('spiplistes:email_adresse') . " : $email_test";
 						}
 					}
 					else {
-						$message_erreur .= __boite_alerte (_T('spiplistes:Erreur_Adresse_email_invalide'), true);
+						$message_erreur .= spiplistes_boite_alerte (_T('spiplistes:Erreur_Adresse_email_invalide'), true);
 					}
 				} // end if($radio_destination == 'email_test')
 				
@@ -190,7 +190,7 @@ function exec_spiplistes_courrier_gerer () {
 							);
 						}
 						else {
-							$message_erreur .= __boite_alerte (_T('spiplistes:Erreur_liste_vide'), true);
+							$message_erreur .= spiplistes_boite_alerte (_T('spiplistes:Erreur_liste_vide'), true);
 						}
 					}
 				} // end if($radio_destination
@@ -208,7 +208,7 @@ function exec_spiplistes_courrier_gerer () {
 					);
 				}
 				else {
-					$message_erreur .= __boite_alerte (_T('spiplistes:Erreur_courrier_titre_vide'), true);
+					$message_erreur .= spiplistes_boite_alerte (_T('spiplistes:Erreur_courrier_titre_vide'), true);
 				}
 			}
 			// FIN DES MODIFICATIONS
@@ -239,7 +239,7 @@ function exec_spiplistes_courrier_gerer () {
 			);
 		}
 		else {
-			$message_erreur .= __boite_alerte (_T('spiplistes:Erreur_courrier_titre_vide'), true);
+			$message_erreur .= spiplistes_boite_alerte (_T('spiplistes:Erreur_courrier_titre_vide'), true);
 		}
 	}
 
@@ -583,7 +583,7 @@ function exec_spiplistes_courrier_gerer () {
 	else {
 		$page_result .= 
 			(empty($message_erreur))
-			? __boite_alerte (_T('spiplistes:Erreur_courrier_introuvable'), true)
+			? spiplistes_boite_alerte (_T('spiplistes:Erreur_courrier_introuvable'), true)
 			: $message_erreur
 			;
 	}
@@ -592,7 +592,7 @@ function exec_spiplistes_courrier_gerer () {
 	
 	// GERER COURRIER: FIN DE PAGE
 	
-	echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
+	echo spiplistes_html_signature(_SPIPLISTES_PREFIX), fin_gauche(), fin_page();
 
 } // end function exec_spiplistes_courrier_gerer ()
 

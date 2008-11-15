@@ -83,4 +83,20 @@ function spiplistes_naviguer_paniers_courriers ($titre = '') {
 	return($result);
 }
 
+if(!function_exists("array_fill_keys")) {
+	/*
+	 * Remplit un tableau avec des valeurs, en spécifiant les clés
+	 * @return array
+	 * @param $array Object
+	 * @param $fill Object
+	 */
+	function array_fill_keys($array, $fill) {
+		$result = array();
+		foreach($array as $key) {
+				$result[$key] = $fill;
+		}
+		return ($result);
+	}
+} 
+
 ?>

@@ -282,7 +282,7 @@ function exec_spiplistes_liste_gerer () {
 					;
 				include_spip("inc/spiplistes_listes_forcer_abonnement");
 				if(spiplistes_listes_forcer_abonnement ($id_liste, $forcer_abo, $forcer_format_reception) ===  false) {
-					$message_erreur .= __boite_alerte(_T('spiplistes:Forcer_abonnement_erreur'), true);
+					$message_erreur .= spiplistes_boite_alerte(_T('spiplistes:Forcer_abonnement_erreur'), true);
 				}
 			}
 			
@@ -517,7 +517,7 @@ function exec_spiplistes_liste_gerer () {
 	// message alerte et demande de confirmation si supprimer liste
 	if(($btn_supprimer_liste > 0) && ($btn_supprimer_liste == $id_liste)) {
 		$page_result .= ""
-			. __boite_alerte (_T('spiplistes:Attention_suppression_liste')."<br />"._T('spiplistes:Confirmez_requete'), true)
+			. spiplistes_boite_alerte (_T('spiplistes:Attention_suppression_liste')."<br />"._T('spiplistes:Confirmez_requete'), true)
 			. "<form name='form_suppr_liste' id='form_suppr_liste' method='post' action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE, "")."'>\n"
 			. "<div class='verdana2' style='text-align:right;'>\n"
 			. "<input type='hidden' name='id_liste' value='$id_liste' />\n"
@@ -555,7 +555,7 @@ function exec_spiplistes_liste_gerer () {
 
 	$page_result .= ""
 		//. debut_cadre_relief("racine-site-24.gif", true)
-		. debut_cadre_relief("racine-site-24.gif", true, '', _T('spiplistes:Diffusion').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "diffusion"))
+		. debut_cadre_relief("racine-site-24.gif", true, '', _T('spiplistes:Diffusion').spiplistes_plugin_aide(_SPIPLISTES_EXEC_AIDE, "diffusion"))
 		//
 		////////////////////////////
 		// Formulaire diffusion
@@ -604,7 +604,7 @@ function exec_spiplistes_liste_gerer () {
 		////////////////////////////
 		// Formulaire adresse email pour le reply-to
 	$page_result .= ""
-		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply_to-24.png", true, '', _T('spiplistes:adresse_de_reponse').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "replyto"))
+		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply_to-24.png", true, '', _T('spiplistes:adresse_de_reponse').spiplistes_plugin_aide(_SPIPLISTES_EXEC_AIDE, "replyto"))
 		. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste"), true)
 		. "<p class='verdana2'>\n"
 		. _T('spiplistes:adresse_mail_retour').":<br />\n"
@@ -626,10 +626,10 @@ function exec_spiplistes_liste_gerer () {
 	$page_result .= ""
 		. "<a name='form-programmer' id='form-programmer'></a>\n"
 		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_timer.png", true, '', _T('spiplistes:messages_auto')
-			. __plugin_aide(_SPIPLISTES_EXEC_AIDE, "temporiser"))
+			. spiplistes_plugin_aide(_SPIPLISTES_EXEC_AIDE, "temporiser"))
 		;
 	if(empty($patron)) {
-		$page_result .= __boite_alerte(_T('spiplistes:Patron_manquant'), true);
+		$page_result .= spiplistes_boite_alerte(_T('spiplistes:Patron_manquant'), true);
 	}
 	$page_result .= ""
 		. $boite_pour_confirmer_envoi_maintenant
@@ -823,7 +823,7 @@ function exec_spiplistes_liste_gerer () {
 	if($connect_toutes_rubriques) {
 		$page_result .= ""
 			. "\n<!-- forcer abo -->\n"
-			. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."abonner-24.png", true, '', _T('spiplistes:forcer_les_abonnement_liste').__plugin_aide("forcerliste"))."\n"
+			. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."abonner-24.png", true, '', _T('spiplistes:forcer_les_abonnement_liste').spiplistes_plugin_aide("forcerliste"))."\n"
 			. "<p class='verdana2'>\n"
 			. _T('spiplistes:forcer_abonnement_desc')
 			. "</p>\n"
@@ -872,7 +872,7 @@ function exec_spiplistes_liste_gerer () {
 	
 	echo($page_result);
 
-	echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
+	echo spiplistes_html_signature(_SPIPLISTES_PREFIX), fin_gauche(), fin_page();
 
 } // end exec_spiplistes_liste_gerer()
 

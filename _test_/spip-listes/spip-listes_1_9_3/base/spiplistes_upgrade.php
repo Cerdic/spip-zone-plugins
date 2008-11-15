@@ -41,10 +41,10 @@ include_spip('inc/spiplistes_api_abstract_sql');
 function spiplistes_upgrade () {
 
 	$spiplistes_name = _SPIPLISTES_PREFIX;
-	$spiplistes_current_version =  __plugin_current_version_get(_SPIPLISTES_PREFIX);
-	$spiplistes_real_version = __plugin_real_version_get(_SPIPLISTES_PREFIX);
-	$spiplistes_current_version_base = __plugin_current_version_base_get(_SPIPLISTES_PREFIX);
-	$spiplistes_real_version_base = __plugin_real_version_base_get(_SPIPLISTES_PREFIX);
+	$spiplistes_current_version =  spiplistes_current_version_get(_SPIPLISTES_PREFIX);
+	$spiplistes_real_version = spiplistes_real_version_get(_SPIPLISTES_PREFIX);
+	$spiplistes_current_version_base = spiplistes_current_version_base_get(_SPIPLISTES_PREFIX);
+	$spiplistes_real_version_base = spiplistes_real_version_base_get(_SPIPLISTES_PREFIX);
 
 	spiplistes_log("VERSIONS MOD DETECTED [$spiplistes_current_version::$spiplistes_real_version][$spiplistes_current_version_base::$spiplistes_real_version_base]");
 

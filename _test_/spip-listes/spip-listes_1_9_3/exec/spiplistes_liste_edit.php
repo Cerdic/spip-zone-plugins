@@ -210,7 +210,7 @@ function exec_spiplistes_liste_edit(){
 
 	// MODE LISTE EDIT: FIN --------------------------------------------------------
 	
-	echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
+	echo spiplistes_html_signature(_SPIPLISTES_PREFIX), fin_gauche(), fin_page();
 
 }
 /******************************************************************************************/

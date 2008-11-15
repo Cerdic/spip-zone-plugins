@@ -48,7 +48,7 @@ function spiplistes_afficher_pile_messages() {
 	
 	$pile_result = ""
 		. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_timer.gif', true, ''
-			, _T('spiplistes:Messages_automatiques').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "casier_courriers"))
+			, _T('spiplistes:Messages_automatiques').spiplistes_plugin_aide(_SPIPLISTES_EXEC_AIDE, "casier_courriers"))
 		. "\n"
 		. "<table class='spiplistes-tab' width='100%'  border='0' cellspacing='1' cellpadding='0'>\n" 
 		. "<tr>\n"
@@ -278,7 +278,7 @@ spiplistes_log("SEND id_courrier #$id_courrier TO #$id_auteur_test TEST BY id_au
 	
 	// MODE HISTORIQUE FIN ---------------------------------------------------------
 	
-	echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
+	echo spiplistes_html_signature(_SPIPLISTES_PREFIX), fin_gauche(), fin_page();
 
 } // exec_spip_listes()
 

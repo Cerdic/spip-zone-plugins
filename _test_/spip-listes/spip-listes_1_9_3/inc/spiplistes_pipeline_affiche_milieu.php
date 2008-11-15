@@ -129,7 +129,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 				// desabonne de tout
 				else {
 					if(spiplistes_abonnements_auteur_desabonner($id_auteur, "toutes") === false) {
-						$result .= __boite_alerte(_T('spiplistes:Erreur_sur_la_base'), true);
+						$result .= spiplistes_boite_alerte(_T('spiplistes:Erreur_sur_la_base'), true);
 					}
 				}
 			} // end if

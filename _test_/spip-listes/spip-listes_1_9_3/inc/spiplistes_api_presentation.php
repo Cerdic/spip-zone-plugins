@@ -27,6 +27,7 @@
 
 include_spip('inc/presentation');
 include_spip('inc/spiplistes_api_journal');
+include_spip('inc/plugin_globales_lib');
 
 /*
 	Les fonctions affichage et presentation dans l'espace prive
@@ -904,5 +905,247 @@ function spiplistes_compacter_script ($source, $format) {
 	return($source);
 } // end spiplistes_compacter_script()
 
-//
+/*
+ * @return petite signature de plugin, du style "Dossier plugin [version]"
+ * @param $prefix prefix du plugin
+ * @param
+ * @param $html si true, renvoyer le resultat au format html
+ * @param $verifier_svn si true
+ */
+function spiplistes_html_signature ($prefix, $return = false, $html = true, $verifier_svn = false) {
+	$info = plugin_get_infos(spiplistes_get_meta_dir($prefix));
+	$nom = typo($info['nom']);
+	$version = typo($info['version']);
+	//$base_version = typo($info['version_base']); // cache ?
+	$base_version = spiplistes_current_version_base_get($prefix);
+	$svnrevision = spiplistes_current_svnrevision_get($prefix, $verifier_svn);
+	$revision = "";
+	if($html) {
+		$version = (($version) ? " <span style='color:gray;'>".$version : "")
+			. (($svnrevision) ? "-".$svnrevision : "")
+			. "</span>"
+			;
+		$base_version = (($base_version) ? " <span style='color:#66c;'>&lt;".$base_version."&gt;</span>" : "");
+	}
+	$result = ""
+		. $nom
+		. " " . $version
+		. " " . $base_version
+		;
+	if($html) {
+		$result = "<p class='verdana1 spip_xx-small' style='font-weight:bold;'>$result</p>\n";
+	}
+	if($return) return($result);
+	else echo($result);
+} // end spiplistes_html_signature()
+
+/*
+ * @return le numero de revision svn
+ * @param $prefix prefix du plugin
+ * @param $s si true, va chercher le numero dans le repertoire du plugin
+ */
+function spiplistes_current_svnrevision_get ($prefix, $verifier_svn) {
+	static $svn_revision = false;
+	if(!empty($prefix)) {
+		// lire directement dans plugin.xml (eviter le cache ?)
+		$dir_plugin = _DIR_PLUGINS.spiplistes_get_meta_dir($prefix);
+		// cherche si sur version svn
+		if(!$result = version_svn_courante($dir_plugin)) {
+			// mefiance: il faut que svn/entries soit a jour (svn update sur le poste de travail/serveur !)
+			// si pas de svn/entries, lire l'attribut dans plugin.xml
+			$file = $dir_plugin."/"._FILE_PLUGIN_CONFIG;
+			$result = spiplistes_svn_revision_read($file);
+		}
+		if($verifier_svn && !$svn_revision) {
+			// verifier les fichiers inclus (gourmand et peut-etre trompeur si fichier fantome ?)
+			// ne verifier que sur deux niveaux (PLUGIN_ROOT et ses repertoires directs, pas en dessous)
+			define("_PGL_SVN_LIRE_EXTENSIONS", "css|html|js|php|xml");
+			$script_files = array();
+			if(is_dir($dir_plugin) && ($dh = opendir($dir_plugin))) {
+				while (($file = readdir($dh)) !== false) {
+					if($file[0] == ".") continue;
+					if(is_dir($dir_plugin_sub = $dir_plugin."/".$file) && ($dh_s = opendir($dir_plugin_sub))) {
+						while (($file = readdir($dh_s)) !== false) {
+							if($file[0] == ".") continue;
+							if(preg_match('=\.('._PGL_SVN_LIRE_EXTENSIONS.')$=i', $file)) {
+								$script_files[] = $dir_plugin_sub."/".$file;
+							}
+						}
+						closedir($dh_s);
+					}
+					else if(preg_match('=\.('._PGL_SVN_LIRE_EXTENSIONS.')$=i', $file)) {
+						$script_files[] = $dir_plugin."/".$file;
+					}
+				}
+				closedir($dh);
+			}
+			foreach($script_files as $file) {
+				if(!$ii = spiplistes_svn_revision_read ($file)) {	continue; }
+				$result = max($ii, $result);
+			}
+		}
+		if(!empty($result) && (intval($result) > 0)) return($result);
+	}
+	return(false);
+} // end spiplistes_current_svnrevision_get()
+
+/*
+ * lire le fichier, en esperant trouver le mot cle svn dans les $buf_size premiers caracteres
+ * @return le numero de revision svn
+ * @param $filename
+ * @param $buf_size
+ */
+function spiplistes_svn_revision_read ($filename, $buf_size = 2048) {
+	if($fh = fopen($filename, "rb")) {
+		$buf = fread($fh, $buf_size);
+		fclose($fh);
+		if($buf = strstr($buf, "$"."LastChanged"."Revision:")) {
+			$revision = preg_replace('=^\$LastChanged'.'Revision: ([0-9]+) \$.*$=s', '${1}', $buf, 1);
+			if(strval(intval($revision)) == $revision) { 
+				return($revision);
+			}
+		}
+	}
+	return (false);
+} // end spiplistes_svn_revision_read()
+
+/*
+ * @return Renvoie ou affiche une boite d'alerte
+ */
+function spiplistes_boite_alerte ($message, $return = false) {
+	$result = ""
+		. debut_boite_alerte()
+		.  http_img_pack("warning.gif", _T('info_avertissement'), 
+				 "style='width:48px;height:48px;float:right;margin:5px;'")
+		. "<span class='message-alerte'>$message</span>\n"
+		. fin_boite_alerte()
+		. "\n<br />"
+		;
+	if($return) return($result);
+	else echo($result);
+}
+
+ /*
+  * affiche un petit bloc info sur le plugin
+  * @return 
+  * @param $prefix Object
+  * @param $return Object[optional]
+  */
+function spiplistes_boite_meta_info ($prefix, $return = false) {
+	include_spip('inc/meta');
+	$result = false;
+	if(!empty($prefix)) {
+		$meta_info = spiplistes_get_meta_infos($prefix); // dir et version
+		$info = plugin_get_infos($meta_info['dir']);
+		$icon = 
+			(isset($info['icon']))
+			? "<div "
+				. " style='width:64px;height:64px;"
+					. "margin:0 auto 1em;"
+					. "background: url(". _DIR_PLUGINS.$meta_info['dir']."/".trim($info['icon']).") no-repeat center center;overflow: hidden;'"
+				. " title='Logotype plugin $prefix'>"
+				. "</div>\n"
+			: ""
+			;
+		if(isset($info['etat']) && ($info['etat']=='stable')) {
+		// en version stable, ne sort plus les infos de debug
+			foreach(array('description','lien','auteur') as $key) {
+				if(isset($info[$key]) && !isset($meta_info[$key])) {
+					$meta_info[$key] = $info[$key];
+				}
+			}
+			$result .= spiplistes_boite_meta_info_liste($meta_info, true) // nom, etat, dir, version, description, lien, auteur
+				;
+		}
+		else {
+		// un peu plus d'info en mode test et dev
+			$mode_dev = (isset($info['etat']) && ($info['etat']=='dev'));
+			$result .= 
+				spiplistes_boite_meta_info_liste($meta_info, true) // nom, etat, dir, version
+				. spiplistes_boite_meta_info_liste($info, $mode_dev)  // et tout ce qu'on a en magasin
+				;
+		}
+		if(!empty($result)) {
+			$result = ""
+				. debut_cadre_relief('plugin-24.gif', true, '', $prefix)
+				. $icon
+				. $result
+				. fin_cadre_relief(true)
+				;
+		}
+	}
+	if($return) return($result);
+	else echo($result);
+} // spiplistes_boite_meta_info()
+
+/*
+ * 
+ * @return 
+ * @param $array Object
+ * @param $recursive Object[optional]
+ */
+function spiplistes_boite_meta_info_liste($array, $recursive = false) {
+	global $spip_lang_left;
+	$result = "";
+	if(is_array($array)) {
+		foreach($array as $key=>$value) {
+			$sub_result = "";
+			if(is_array($value)) {
+				if($recursive) {
+					$sub_result = spiplistes_boite_meta_info_liste($value);
+				}
+			}
+			else {
+				$sub_result = propre($value);
+			}
+			if(!empty($sub_result)) {
+				$result .= "<li><span style='font-weight:bold;'>$key</span> : $sub_result</li>\n";
+			}
+		}
+		if(!empty($result)) {
+			$result = "<ul style='margin:0;padding:0 1ex;list-style: none;text-align: $spip_lang_left;' class='verdana2 meta-info-liste'>$result</ul>";
+		}
+	}
+	return($result);
+}
+
+/*
+ * petit bouton aide a placer a droite du titre de bloc
+ * @return 
+ * @param $fichier_exec_aide Object
+ * @param $aide Object[optional]
+ * @param $return Object[optional]
+ */
+function spiplistes_plugin_aide ($fichier_exec_aide, $aide='', $return=true) {
+	include_spip('inc/minipres');
+	global $spip_lang
+		, $spip_lang_rtl
+		, $spip_display
+		;
+	if (!$aide || $spip_display == 4) return;
+	
+	$t = _T('titre_image_aide');
+	$result = ""
+	. "\n&nbsp;&nbsp;<a class='aide'\nhref='"
+	. generer_url_ecrire($fichier_exec_aide, "var_lang=$spip_lang")
+	. (
+		(!empty($aide)) 
+		? "#$aide" 
+		: ""
+		)
+	. "'"
+	. " onclick=\"javascript:window.open(this.href,'spip_aide', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;\">\n"
+	. http_img_pack(
+		"aide".aide_lang_dir($spip_lang,$spip_lang_rtl).".gif"
+		, _T('info_image_aide')
+		, " title=\"$t\" class='aide'"
+		)
+	. "</a>"
+	;
+	
+	if($return) return($result);
+	else echo($result);
+} // spiplistes_plugin_aide()
+
+
 ?>

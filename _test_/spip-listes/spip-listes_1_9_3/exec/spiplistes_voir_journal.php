@@ -88,7 +88,7 @@ function exec_spiplistes_voir_journal () {
 		. spiplistes_gros_titre($titre_page, '', true)
 		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $sous_rubrique)
 		. debut_gauche($rubrique, true)
-		. __plugin_boite_meta_info(_SPIPLISTES_PREFIX, true)
+		. spiplistes_boite_meta_info(_SPIPLISTES_PREFIX, true)
 		. $message_gauche
 		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
@@ -106,7 +106,7 @@ function exec_spiplistes_voir_journal () {
 		
 	// Fin de la page
 	echo($page_result);
-	echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
+	echo spiplistes_html_signature(_SPIPLISTES_PREFIX), fin_gauche(), fin_page();
 }
 
 ?>

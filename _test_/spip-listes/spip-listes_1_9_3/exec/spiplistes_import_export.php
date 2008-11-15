@@ -109,7 +109,7 @@ function exec_spiplistes_import_export(){
 			$exporter_statut_auteur = ($exporter_statut_auteur == 'oui');
 			
 			$str_export = ""
-				. "# ".__plugin_html_signature(_SPIPLISTES_PREFIX, true, false)."\n"
+				. "# ".spiplistes_html_signature(_SPIPLISTES_PREFIX, false)."\n"
 				. "# "._T('spiplistes:membres_liste')."\n"
 				. "# liste id: $export_id\n"
 				. "# ".$GLOBALS['meta']['nom_site']."\n"
@@ -172,7 +172,7 @@ function exec_spiplistes_import_export(){
 	if($btn_valider_import && $flag_import_fichier_ok) {
 		if(!($abos_liste && is_array($abos_liste) && count($abos_liste))) {
 		// A oublie' de selectionner une liste de destination
-			$page_result .= __boite_alerte(_T('spiplistes:Selectionnez_une_liste_pour_import'), true);
+			$page_result .= spiplistes_boite_alerte(_T('spiplistes:Selectionnez_une_liste_pour_import'), true);
 		}
 	}
 		
@@ -212,7 +212,7 @@ function exec_spiplistes_import_export(){
 	}
 	
 	if(!$nb_listes) {
-		$page_result .= __boite_alerte(_T('spiplistes:Pas_de_liste_pour_import'), true);
+		$page_result .= spiplistes_boite_alerte(_T('spiplistes:Pas_de_liste_pour_import'), true);
 	} 
 	else {
 		$page_result .= ""
@@ -350,7 +350,7 @@ function exec_spiplistes_import_export(){
 
 	echo($page_result);
 	
-	echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
+	echo spiplistes_html_signature(_SPIPLISTES_PREFIX), fin_gauche(), fin_page();
 }
 
 function spiplistes_fieldset_separateur ($sep)  {

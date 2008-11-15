@@ -22,7 +22,7 @@ include_spip('inc/spiplistes_api_globales');
 function spiplistes_insert_head ($flux) {
 
 	$flux .= ""
-		. "\n\n<!-- PLUGIN SPIPLISTES v.: ".__plugin_real_version_get(_SPIPLISTES_PREFIX)." -->\n"
+		. "\n\n<!-- PLUGIN SPIPLISTES v.: ".spiplistes_real_version_get(_SPIPLISTES_PREFIX)." -->\n"
 		. "<link rel='stylesheet' href='"._DIR_PLUGIN_SPIPLISTES."spiplistes_formulaire.css' type='text/css' media='all' />\n"
 		;
 

@@ -136,7 +136,7 @@ function exec_spiplistes_config () {
 	}
 		
 	if($btn_console_syslog) {
-		if(!__server_in_private_ip_adresses()) {
+		if(!spiplistes_in_private_ip_adresses()) {
 		}
 		foreach($keys_console_syslog as $key) {
 			if($key == $opt_log_voir_destinataire) {
@@ -146,7 +146,7 @@ function exec_spiplistes_config () {
 				// si pas sur réseau privé et option syslog validé,
 				// retire l'option syslog (cas de copie de base du LAN sur celle du WAN)
 				($key == 'opt_console_syslog')
-				&& !__server_in_private_ip_adresses()
+				&& !spiplistes_in_private_ip_adresses()
 			) {
 				$$key = 'non';
 			} else {
@@ -198,7 +198,7 @@ function exec_spiplistes_config () {
 		. spiplistes_gros_titre(_T('titre_page_config_contenu'), '', true)
 		. barre_onglets($rubrique, _SPIPLISTES_PREFIX)
 		. debut_gauche($rubrique, true)
-		. __plugin_boite_meta_info(_SPIPLISTES_PREFIX, true)
+		. spiplistes_boite_meta_info(_SPIPLISTES_PREFIX, true)
 		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
 		. spiplistes_boite_autocron()
@@ -349,15 +349,15 @@ function exec_spiplistes_config () {
 		//
 		// le nombre de lots d'envois
 		. debut_cadre_relief("", true, "", _T('spiplistes:parametrer_la_meleuse'))
-		. __boite_select_de_formulaire (
-			__array_values_in_keys(explode(";", _SPIPLISTES_LOTS_PERMIS)), $GLOBALS['meta']['spiplistes_lots']
+		. spiplistes_boite_select_de_formulaire (
+			spiplistes_array_values_in_keys(explode(";", _SPIPLISTES_LOTS_PERMIS)), $GLOBALS['meta']['spiplistes_lots']
 				, 'spiplistes_lots', 'spiplistes_lots'
 				, 1, '', 'fondo', _T('spiplistes:nombre_lot')." : ", '', 'verdana2')
 		. "<br />\n"
 		//
 		// sélection du charset d'envoi
-		. __boite_select_de_formulaire (
-			__array_values_in_keys(explode(";", _SPIPLISTES_CHARSETS_ALLOWED)), $GLOBALS['meta']['spiplistes_charset_envoi']
+		. spiplistes_boite_select_de_formulaire (
+			spiplistes_array_values_in_keys(explode(";", _SPIPLISTES_CHARSETS_ALLOWED)), $GLOBALS['meta']['spiplistes_charset_envoi']
 				, 'spiplistes_charset_envoi', 'spiplistes_charset_envoi'
 				, 1, '', 'fondo', _T('spiplistes:Jeu_de_caracteres')." : ", '', 'verdana2')
 		. fin_cadre_relief(true)
@@ -404,7 +404,7 @@ function exec_spiplistes_config () {
 			. fin_cadre_relief(true)
 			;
 		// Paramétrer la console de debug/logs si sur LAN
-		if(__server_in_private_ip_adresses()) {
+		if(spiplistes_in_private_ip_adresses()) {
 			$page_result .= ""
 				. debut_cadre_relief("", true, "", _T('spiplistes:log_console_syslog'))
 				. "<p class='verdana2'>"._T('spiplistes:log_console_syslog_desc', array('IP_LAN' => $_SERVER['SERVER_ADDR']))."</p>\n"
@@ -441,8 +441,79 @@ function exec_spiplistes_config () {
 	
 	// Fin de la page
 	echo($page_result);
-	echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
+	echo spiplistes_html_signature(_SPIPLISTES_PREFIX), fin_gauche(), fin_page();
 	
 } // exec_config()
+
+/*
+ * verifie si le serveur est dans Adresses IP privees de classe C (Private IP addresses)
+ * renvoie true si serveur dans classe privee
+ */
+function spiplistes_in_private_ip_adresses() {
+	static $onlan;
+	if($on === null) {
+		$onlan = preg_match('/^192\.168/', $_SERVER['SERVER_ADDR']);
+	}
+	return($onlan);
+}
+
+
+/*
+ * renvoie une boite select pour un formulaire
+ * @return 
+ * @param $array_values Object
+ * @param $selected Object
+ * @param $select_id Object
+ * @param $select_name Object
+ * @param $size Object[optional]
+ * @param $select_style Object[optional]
+ * @param $select_class Object[optional]
+ * @param $label_value Object[optional]
+ * @param $label_style Object[optional]
+ * @param $label_class Object[optional]
+ * @param $multiple Object[optional]
+ */
+function spiplistes_boite_select_de_formulaire ($array_values, $selected, $select_id, $select_name
+	, $size=1, $select_style='', $select_class=''
+	, $label_value='', $label_style='', $label_class='', $multiple=false
+	) {
+	$result = "";
+	foreach($array_values as $key=>$value) {
+		$result .= "<option".mySel($value, $selected).">$key</option>\n";
+	}
+	$result = ""
+		. (
+			(!empty($label_value))
+			? "<label for='$select_id'"
+				.(!empty($label_style) ? " style='$label_style'" : "")
+				.(!empty($label_class) ? " class='$label_class'" : "")
+				.">$label_value</label>\n" 
+			: ""
+			)
+		. "<select name='$select_name' size='$size'"
+			.(($multiple && ($size>1)) ? " multiple='multiple'" : "")
+			.(!empty($select_style) ? " style='$select_style'" : "")
+			.(!empty($select_class) ? " class='$select_class'" : "")
+			." id='$select_id'>\n"
+		. $result
+		. "</select>\n"
+		;
+	return($result);
+} // spiplistes_boite_select_de_formulaire()
+
+/*
+ * renvoie tableau avec key => value 
+ * @return 
+ * @param $array Object
+ */
+function spiplistes_array_values_in_keys($array) {
+	$result = array();
+	foreach($array as $value) {
+		$result[$value] = $value;
+	}
+	return($result);
+} // spiplistes_array_values_in_keys()
+
+
 
 ?>
