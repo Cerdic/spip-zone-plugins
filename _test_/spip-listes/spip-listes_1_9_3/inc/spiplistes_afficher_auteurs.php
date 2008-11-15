@@ -146,7 +146,7 @@ function spiplistes_afficher_auteurs (
 	, $debut = 0
 	, $id_boite_dest_ajax = 'auteurs'
 ) {
-	
+
 	global 
 		  $spip_lang_left
 		, $spip_lang_right
@@ -180,15 +180,13 @@ function spiplistes_afficher_auteurs (
 	}
 		
 	$lettres_onglet = array();
-	if($tri == 'nom') {
-		$sql_result = sql_select(
-			array("DISTINCT UPPER(LEFT(nom,1)) AS l"
-				, "COUNT(*) AS n")
-			, "spip_auteurs", '', "l", array("l"));
-		$count = 0;
-		while ($row = sql_fetch($sql_result)) {
-			$lettres_onglet[$row['l']] = $count;
-			$count += intval($row['n']);
+	if(count($les_auteurs)) {
+		foreach($les_auteurs as $key => $value) {
+			$ii = strtoupper(substr($les_auteurs['nom'], 0, 1));
+			if(!isset($lettres_onglet[$ii])) {
+				$lettres_onglet[$ii] = 0;
+			}
+			$lettres_onglet[$ii]++;
 		}
 	}
 	
