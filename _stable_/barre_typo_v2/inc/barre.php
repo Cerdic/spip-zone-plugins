@@ -257,7 +257,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 	if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) {
 		$ret = ($num_barre > 1)  ? '' :
-		  "<script type='text/javascript' src='". find_in_path(_JAVASCRIPT.'layer.js') ."'></script><script type='text/javascript' src='". find_in_path(_JAVASCRIPT.'spip_barre.js') ."'></script>";
+		  "</script><script type='text/javascript' src='". find_in_path(_JAVASCRIPT.'spip_barre.js') ."'></script>";
 	} else {
 		$ret = ($num_barre > 1)  ? '' :
 		  "<script type='text/javascript' src='". find_in_path(_JAVASCRIPT.'layer.js') ."'></script>".http_script('', _DIR_PLUGIN_BARRETYPOENRICHIE.'javascript/spip_barre.js');
