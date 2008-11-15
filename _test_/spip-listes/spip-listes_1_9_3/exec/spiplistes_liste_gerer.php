@@ -923,7 +923,7 @@ function spiplistes_boutons_forcer_format ($id_bloc, $message = '') {
  * @param $string Object
  * @param $charset Object
  * @param $unspace Object[optional]
- */*/
+ */
 function spiplistes_texte_html_2_iso($string, $charset, $unspace = false) {
 	$charset = strtoupper($charset);
 	// html_entity_decode a qq soucis avec UTF-8
