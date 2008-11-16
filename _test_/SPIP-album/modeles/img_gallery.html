@@ -22,7 +22,7 @@
 <table class="galerie_photo" style="[width:(#GET{taille}|plus{100})px; ][height:(#GET{taille}|plus{100})px;]">
 	<tr>
 		<td>
-<BOUCLE_photo_expose(DOCUMENTS){id_article}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}{#EVAL{_request('debut_galerie'), 0}, 1}>
+<BOUCLE_photo_expose(DOCUMENTS){id_article}{extension IN png,jpg,gif}{par #ENV{partri}}{par num titre, date}{inverse #GET{sens}}{#EVAL{_request('debut_galerie'), 0}, 1}>
 			<dl>
 				<dt id="affiche_photo" style="background:url('#CHEMIN{img_pack/loading.gif}') no-repeat center 50%; width:#GET{taille}; height:#GET{taille};">
 					<a href="[(#FICHIER|image_watermark|extraire_attribut{src})]" rel="imagebox-gallery"[ title="(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})"]>
@@ -43,7 +43,7 @@
 <table id="bande_vignette" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="arrow">[(#PAGINATION{galleryprecedent})]</td>
-<BOUCLE_galerie(DOCUMENTS){id_article}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens}}{pagination #GET{increment}}>
+<BOUCLE_galerie(DOCUMENTS){id_article}{extension IN png,jpg,gif}{par #ENV{partri}}{par num titre, date}{inverse #GET{sens}}{pagination #GET{increment}}>
 		<td class="vignette">
 			[<a target="_self" href="javascript:Affiche_Image('[(#FICHIER|image_watermark|extraire_attribut{src})]','[(#FICHIER|image_reduire{#GET{taille},#GET{taille}}|extraire_attribut{src})]','[(#FICHIER|image_reduire{#GET{taille},#GET{taille}}|largeur)]','[(#FICHIER|image_reduire{#GET{taille},#GET{taille}}|hauteur)]','[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]','[(#DESCRIPTIF|entites_html)]');" title="[(#TITRE|supprimer_numero|entites_html|sinon{[(#FICHIER)]})]">
 				(#FICHIER||image_reduire{50,50}|image_recadre{50,50,center}|inserer_attribut{alt,[(#TITRE|supprimer_numero|supprimer_tags|entites_html|sinon{[(#FICHIER)]})]})
