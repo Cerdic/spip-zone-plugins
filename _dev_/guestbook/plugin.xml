@@ -20,7 +20,7 @@
 		Par contre il fonctionne avec les tables de SPIP
 	</description>
 	<install>
-		base/guestbook_upgrade.php
+		base/guestbook_install.php
 	</install>
 	<lien>
 		[Documentation->http://www.spip-contrib.net/Plugin-Guestbook]

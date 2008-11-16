@@ -9,14 +9,18 @@
 	 * Pour plus de details voir le fichier COPYING.txt.
 	 *  
 	 **/
+	if (!defined("_ECRIRE_INC_VERSION")) return;
 	include_spip('inc/meta');
-	include_spip('base/create');
-	include_spip('inc/vieilles_defs');
-
 	function guestbook_upgrade($nom_meta_base_version,$version_cible){
-		$current_version = 2.0;
-		$test = sql_showtable("spip_guestbook");
-		if (!$test){
+		$current_version = 0.0;
+		if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))|(($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
+		include_spip('base/guestbook');
+		if (version_compare($current_version,'0.0','<=')){
+		include_spip('base/create');
+		include_spip('base/abstract_sql');
+		creer_base();
+		$desc = sql_showtable("spip_guestbook", true);
+		if (!$desc){
 			$livre = sql_showtable("spip_livre");
 			if (!$livre){
 				include_spip('base/guestbook');
@@ -58,6 +62,8 @@
 				ecrire_meta($nom_meta_base_version,$current_version="0.5.0");
 			}
 		}
+	}
+	}
 	}
 
 	function guestbook_vider_tables($nom_meta_base_version) {
