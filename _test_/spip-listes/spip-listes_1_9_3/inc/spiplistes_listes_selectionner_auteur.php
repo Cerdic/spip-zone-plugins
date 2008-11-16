@@ -8,11 +8,18 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-//CP-20080603
-// utilise par exec/spiplistes_liste_gerer.php
+//CP-20081116
+// utilise par 
+// - exec/spiplistes_liste_gerer.php
+// - exec/spiplistes_abonnes_tous.php
+// - action/spiplistes_listes_abonner_auteur.php
+// - action/spiplistes_liste_des_abonnes.php
+// - action/spiplistes_changer_statut_abonne.php
 
 // selectionne les auteurs elligibles a un abonnement
 // - adresse email obligatoire
+
+include_spip('inc/spiplistes_afficher_auteurs');
 
 define("_SPIPLISTES_LIGNES_PAR_PAGE", 10);
 define("_SPIPLISTES_SELECT_MIN_AUTEURS", 50); // nb auteurs dans le <select>

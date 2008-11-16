@@ -25,117 +25,7 @@
 
 include_spip('inc/spiplistes_api');
 
-function spiplistes_cherche_auteur () {
-	if (!$cherche_auteur = _request('cherche_auteur')) return;
-	
-	$col = strpos($cherche_auteur, '@') !== false ? 'email' : 'nom';
-	$like = '';
-	if (strpos($cherche_auteur, '%') !== false) {
-		$like = " WHERE $col LIKE '" . $cherche_auteur . "'";
-		$cherche_auteur = str_replace('%', ' ', $cherche_auteur);
-	}
-	
-	$sql_result = sql_select("id_auteur,$col", "spip_auteurs", $like);
-	
-	while($row = sql_fetch($sql_result)) {
-		$table_auteurs[] = $row[$col];
-		$table_ids[] = $row['id_auteur'];
-	}
-	
-	$resultat = mots_ressemblants($cherche_auteur, $table_auteurs, $table_ids);
 
-	$result = ""
-		. "<div id='boite-result-chercher-auteur'>"
-		. debut_boite_info(true)
-		;
-	if (!$resultat) {
-		$result .= ""
-			. "<strong>"._T('texte_aucun_resultat_auteur', array('cherche_auteur' => $cherche_auteur)).".</strong><br />\n"
-			;
-	}
-	else if (count($resultat) == 1) {
-		list(, $nouv_auteur) = each($resultat);
-		$result .= ""
-			. "<strong>"._T('spiplistes:une_inscription')."</strong>:<br />\n"
-			. "<ul>"
-			;
-		$sql_result = sql_select("id_auteur,nom,email,bio", "spip_auteurs", "id_auteur=".sql_quote($nouv_auteur), '', '', 1);
-		while ($row = sql_fetch($sql_result)) {
-			$id_auteur = $row['id_auteur'];
-			$nom_auteur = $row['nom'];
-			$email_auteur = $row['email'];
-			$bio_auteur = $row['bio'];
-
-			$result .= ""
-				. "<li class='auteur'>"
-					. "<a class='nom_auteur' href=\"".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT, "id_auteur=$id_auteur")."\">".typo($nom_auteur)."</a>"
-				. " | $email_auteur"
-				. "</li>\n"
-				;
-		}
-		$result .= ""
-			. "</ul>\n"
-			;
-	}
-	else if (count($resultat) < 16) {
-		reset($resultat);
-		unset($les_auteurs);
-		while (list(, $id_auteur) = each($resultat)) {
-			$les_auteurs[] = $id_auteur;
-		}
-		if($les_auteurs) {
-			$les_auteurs = join(',', $les_auteurs);
-			$result .= ""
-				. "<strong>"._T('texte_plusieurs_articles', array('cherche_auteur' => $cherche_auteur))."</strong><br />"
-				. "<ul>"
-				;
-			$sql_select = array('id_auteur','nom','email','bio');
-			$sql_result = sql_select($sql_select, "spip_auteurs", "id_auteur IN ($les_auteurs)", '', array('nom'));
-			while ($row = sql_fetch($sql_result)) {
-				$id_auteur = $row['id_auteur'];
-				$nom_auteur = $row['nom'];
-				$email_auteur = $row['email'];
-				$bio_auteur = $row['bio'];
-				
-				$result .= ""
-					. "<li class='auteur'><span class='nom_auteur'>".typo($nom_auteur)."</span>"
-					;
-				if ($email_auteur) {
-					$result .= ""
-						. " ($email_auteur)"
-						;
-				}
-				$result .= ""
-					. " | <a href=\"".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT,"id_auteur=$id_auteur")."\">"
-					. _T('spiplistes:choisir')."</a>"
-					;
-				if (trim($bio_auteur)) {
-					$result .= ""
-						. "<br /><font size=1>".couper(propre($bio_auteur), 100)."</font>\n"
-						;
-				}
-				$result .= ""
-					. "</li>\n"
-					;
-			}
-			$result .= ""
-				. "</ul>\n"
-				;
-		}
-	}
-	else {
-		$result .= ""
-			. "<strong>"._T('texte_trop_resultats_auteurs', array('cherche_auteur' => $cherche_auteur))."</strong><br />"
-			;
-	}
-	
-	$result .= ""
-		. fin_boite_info(true)
-		. "</div>"
-		;
-
-	return($result);
-}
 
 function spiplistes_afficher_auteurs (
 	$sql_select, $sql_from, $sql_where, $sql_group, $sql_order
@@ -180,13 +70,24 @@ function spiplistes_afficher_auteurs (
 	}
 		
 	$lettres_onglet = array();
-	if(count($les_auteurs)) {
-		foreach($les_auteurs as $key => $value) {
-			$ii = strtoupper(substr($les_auteurs['nom'], 0, 1));
-			if(!isset($lettres_onglet[$ii])) {
-				$lettres_onglet[$ii] = 0;
+	
+	if($nombre_auteurs > 10) { 
+		// SELECT DISTINCT UPPER(LEFT(nom,1)) AS l, COUNT(*) AS n FROM spip_auteurs GROUP BY l ORDER BY l
+		$sql_result = sql_select(
+			array("DISTINCT UPPER(LEFT(nom,1)) AS l"
+				, "COUNT(*) AS n")
+			, "spip_auteurs" // FROM
+			, $sql_where 
+			, "l", array("l"));
+		if($result === false) {
+				spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+		} 
+		else {
+			$count = 0;
+			while ($row = sql_fetch($sql_result)) {
+				$lettres_onglet[$row['l']] = $count;
+				$count += intval($row['n']);
 			}
-			$lettres_onglet[$ii]++;
 		}
 	}
 	
@@ -296,7 +197,7 @@ function spiplistes_afficher_auteurs (
 			. "</td></tr>\n"
 			;
 		// onglets : affichage des lettres
-		if ($tri == 'nom') {
+		//if ($tri == 'nom') {
 			$result .= ""
 				. "<tr class='onglets'><td colspan='7'>\n"
 				. "<!-- onglets des lettres -->\n"
@@ -320,7 +221,7 @@ function spiplistes_afficher_auteurs (
 			$result .= ""
 				. "</td></tr>\n"
 				;
-		}
+		//}
 		$result .= ""
 			. "<tr height='5'></tr>"
 			;

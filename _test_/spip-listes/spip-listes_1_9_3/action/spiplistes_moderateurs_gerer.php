@@ -5,11 +5,10 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
-include_spip('inc/spiplistes_afficher_auteurs');
 include_spip('inc/spiplistes_api_presentation');
 
 //CP-20080603
-// principalement utilisé par exec/spiplistes_liste_gerer.php
+// principalement utilise par exec/spiplistes_liste_gerer.php
 function action_spiplistes_moderateurs_gerer_dist () {
 	global $auteur_session;
 	

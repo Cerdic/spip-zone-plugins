@@ -6,7 +6,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
 include_spip('inc/spiplistes_api_globales');
-include_spip('inc/spiplistes_afficher_auteurs');
 include_spip('inc/spiplistes_api_presentation');
 
 //CP-20080603

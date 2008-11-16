@@ -5,7 +5,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
-include_spip('inc/spiplistes_afficher_auteurs');
 include_spip('inc/spiplistes_api_presentation');
 include_spip('inc/spiplistes_listes_selectionner_auteur');
 

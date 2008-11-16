@@ -35,9 +35,7 @@ function exec_spiplistes_abonnes_tous () {
 	include_spip('inc/presentation');
 	include_spip('inc/mots');
 	include_spip('inc/spiplistes_api');
-	include_spip('inc/spiplistes_api');
 	include_spip('inc/spiplistes_api_presentation');
-	include_spip('inc/spiplistes_afficher_auteurs');
 
 	global $connect_statut
 		, $connect_toutes_rubriques
@@ -240,23 +238,138 @@ function spiplistes_auteurs_non_abonnes_compter () {
 	return($nb);
 }
 
+/*
+ * @return boite de selection des auteurs trouves
+ */
+function spiplistes_cherche_auteur () {
+	if (!$cherche_auteur = _request('cherche_auteur')) return;
+	
+	$col = strpos($cherche_auteur, '@') !== false ? 'email' : 'nom';
+	$like = '';
+	if (strpos($cherche_auteur, '%') !== false) {
+		$like = " WHERE $col LIKE '" . $cherche_auteur . "'";
+		$cherche_auteur = str_replace('%', ' ', $cherche_auteur);
+	}
+	
+	$sql_result = sql_select("id_auteur,$col", "spip_auteurs", $like);
+	
+	while($row = sql_fetch($sql_result)) {
+		$table_auteurs[] = $row[$col];
+		$table_ids[] = $row['id_auteur'];
+	}
+	
+	$resultat = mots_ressemblants($cherche_auteur, $table_auteurs, $table_ids);
+
+	$result = ""
+		. "<div id='boite-result-chercher-auteur'>"
+		. debut_boite_info(true)
+		;
+	if (!$resultat) {
+		$result .= ""
+			. "<strong>"._T('texte_aucun_resultat_auteur', array('cherche_auteur' => $cherche_auteur)).".</strong><br />\n"
+			;
+	}
+	else if (count($resultat) == 1) {
+		list(, $nouv_auteur) = each($resultat);
+		$result .= ""
+			. "<strong>"._T('spiplistes:une_inscription')."</strong>:<br />\n"
+			. "<ul>"
+			;
+		$sql_result = sql_select("id_auteur,nom,email,bio", "spip_auteurs", "id_auteur=".sql_quote($nouv_auteur), '', '', 1);
+		while ($row = sql_fetch($sql_result)) {
+			$id_auteur = $row['id_auteur'];
+			$nom_auteur = $row['nom'];
+			$email_auteur = $row['email'];
+			$bio_auteur = $row['bio'];
+
+			$result .= ""
+				. "<li class='auteur'>"
+					. "<a class='nom_auteur' href=\"".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT, "id_auteur=$id_auteur")."\">".typo($nom_auteur)."</a>"
+				. " | $email_auteur"
+				. "</li>\n"
+				;
+		}
+		$result .= ""
+			. "</ul>\n"
+			;
+	}
+	else if (count($resultat) < 16) {
+		reset($resultat);
+		unset($les_auteurs);
+		while (list(, $id_auteur) = each($resultat)) {
+			$les_auteurs[] = $id_auteur;
+		}
+		if($les_auteurs) {
+			$les_auteurs = join(',', $les_auteurs);
+			$result .= ""
+				. "<strong>"._T('texte_plusieurs_articles', array('cherche_auteur' => $cherche_auteur))."</strong><br />"
+				. "<ul>"
+				;
+			$sql_select = array('id_auteur','nom','email','bio');
+			$sql_result = sql_select($sql_select, "spip_auteurs", "id_auteur IN ($les_auteurs)", '', array('nom'));
+			while ($row = sql_fetch($sql_result)) {
+				$id_auteur = $row['id_auteur'];
+				$nom_auteur = $row['nom'];
+				$email_auteur = $row['email'];
+				$bio_auteur = $row['bio'];
+				
+				$result .= ""
+					. "<li class='auteur'><span class='nom_auteur'>".typo($nom_auteur)."</span>"
+					;
+				if ($email_auteur) {
+					$result .= ""
+						. " ($email_auteur)"
+						;
+				}
+				$result .= ""
+					. " | <a href=\"".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT,"id_auteur=$id_auteur")."\">"
+					. _T('spiplistes:choisir')."</a>"
+					;
+				if (trim($bio_auteur)) {
+					$result .= ""
+						. "<br /><font size=1>".couper(propre($bio_auteur), 100)."</font>\n"
+						;
+				}
+				$result .= ""
+					. "</li>\n"
+					;
+			}
+			$result .= ""
+				. "</ul>\n"
+				;
+		}
+	}
+	else {
+		$result .= ""
+			. "<strong>"._T('texte_trop_resultats_auteurs', array('cherche_auteur' => $cherche_auteur))."</strong><br />"
+			;
+	}
+	
+	$result .= ""
+		. fin_boite_info(true)
+		. "</div>"
+		;
+
+	return($result);
+} // end spiplistes_cherche_auteur()
+
 /******************************************************************************************/
-/* SPIP-listes est un syst�e de gestion de listes d'abonn� et d'envoi d'information     */
-/* par email  pour SPIP.                                                                  */
-/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
+/* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
+/* par email pour SPIP. http://bloog.net/spip-listes                                      */
+/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net                               */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique G��ale GNU publi� par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribu�car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but sp�ifique. Reportez-vous �la Licence Publique G��ale GNU  */
-/* pour plus de d�ails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir re� une copie de la Licence Publique G��ale GNU                    */
-/* en m�e temps que ce programme ; si ce n'est pas le cas, �rivez �la                  */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
+/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, �ats-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 ?>

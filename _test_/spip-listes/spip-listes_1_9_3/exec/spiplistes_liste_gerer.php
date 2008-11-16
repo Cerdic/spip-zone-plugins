@@ -33,7 +33,7 @@ include_spip('inc/spiplistes_api_globales');
 
 	// Precision sur la table spip_listes:
 	// 'date': date d'envoi souhaitee
-	// 'maj': date d'envoi du courrier mis a� jour par cron.
+	// 'maj': date d'envoi du courrier mis a jour par cron.
 	// 'description': (pas utilise au 20071006)
 	// 'texte': description affichee dans formulaire abonnement
 	
@@ -48,7 +48,6 @@ function exec_spiplistes_liste_gerer () {
 	include_spip('inc/spiplistes_api_presentation');
 	include_spip('inc/spiplistes_dater_envoi');
 	include_spip('inc/spiplistes_naviguer_paniers');
-	include_spip('inc/spiplistes_afficher_auteurs');
 	include_spip('inc/spiplistes_listes_selectionner_auteur');
 	
 	global $meta
