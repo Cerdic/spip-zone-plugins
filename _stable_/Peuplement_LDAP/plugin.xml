@@ -13,7 +13,7 @@
 	</auteur>
 	<version>1.0</version>
 	<version_base>1.9.2e</version_base>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description>
 		<multi>
 			[fr] Initialise la liste des auteurs du site en fonction d'un critere de recherche sur l'annuaire Ldap.
