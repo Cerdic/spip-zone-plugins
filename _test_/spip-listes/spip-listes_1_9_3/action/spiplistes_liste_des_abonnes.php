@@ -14,6 +14,7 @@ include_spip('inc/spiplistes_listes_selectionner_auteur');
 function action_spiplistes_liste_des_abonnes_dist () {
 
 	include_spip('inc/autoriser');
+	include_spip('inc/spiplistes_api');
 	
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
