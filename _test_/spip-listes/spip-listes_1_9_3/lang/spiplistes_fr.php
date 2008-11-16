@@ -269,7 +269,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
    le courrier de cette liste. Il faut attendre qu'il confirme lui-m&ecirc;me 
    le format de r&eacute;ception : html ou texte seul.<br />
 	Vous pouvez forcer le format par abonn&eacute; <a href='@lien_retour@'>sur la page du suivi des abonnements</a>"
-, 'forcer_abonnements_nouveaux' => "En s&eacute;lectionnant cette option, 
+, 'forcer_abonnements_nouveaux' => "En s&eacute;lectionnant l'option <strong>Forcer les abonnements au format...</strong>, 
 	vous confirmez le format de r&eacute;ception des nouveaux abonn&eacute;s.
 	Les anciens abonn&eacute;s conservent leur pr&eacute;f&eacute;rence de r&eacute;ception."
 , 'Forcer_desabonner_tous_les_inscrits' => "D&eacute;sabonner tous les membres inscrits pour cette liste.",
