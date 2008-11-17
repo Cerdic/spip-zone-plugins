@@ -23,9 +23,10 @@ if ($_GET["ajouter_selection"] > 0) {
 		if ($row_test = sql_fetch($result_test)) {
 			echo "Cet article est déjà sélectionné.";
 		} else {
-			$result_num = sql_select("ordre", "spip_pb_selection", "id_rubrique=$id_rubrique", "ordre DESC LIMIT 0,1");
+			// Pas moyen de faire fonctionner le LIMIT 0,1 et l'ordre inverse avec sqlite
+			$result_num = sql_select("ordre", "spip_pb_selection", "id_rubrique=$id_rubrique", "ordre");
 			$ordre = 0;
-			if ($row_num = sql_fetch($result_num)) {
+			while ($row_num = sql_fetch($result_num)) {
 				$ordre = $row_num["ordre"];
 			}
 			$ordre ++;
