@@ -244,7 +244,11 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$ret = ($num_barre > 1)  ? '' :
 	  http_script('',  'spip_barre.js');
 
-
+	$params_vierge['champ'] = $champ;
+	$params_vierge['num'] = $num_barre;
+	$params_vierge['help'] = $champhelp;
+	$params['forum'] = $forum;
+	
 	// Pregeneration des toolzbox.. (wharfing)
 	$toolbox .= afficher_caracteres($champ, $spip_lang, $champhelp, $num_barre);
 	$toolbox .= afficher_formatages_speciaux($champ, $spip_lang, $champhelp, $num_barre);
