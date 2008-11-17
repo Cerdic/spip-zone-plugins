@@ -60,7 +60,6 @@ function cron_spip2spip($t) {
       $url_syndic   = $row_site["site_rss"];
       $date_syndic  = $row_site["last_syndic"];
       
-      $mailLog = "";
       spip_log("spip2spip: syndication de $current_site"); 
               
       // Aller chercher les donnees du flux RSS et les analyser
@@ -74,7 +73,7 @@ function cron_spip2spip($t) {
                  
           // Est que l'article n'a pas été déjà importée ?
           if (isset($article['titre'])) {
-		  	$documents_current_article = array();
+		  	    $documents_current_article = array();
             $current_titre = $article['titre'];
             $sql2 = "SELECT COUNT(titre) as c FROM ".$table_prefix."_articles WHERE titre='".addslashes($current_titre)."'";
             $nb_article = spip_fetch_array(spip_query($sql2));
@@ -327,20 +326,19 @@ function cron_spip2spip($t) {
           }  
 
           
-          // alerte email ?	
-          if ($email_alerte && $mailLog !="") {
+        }  // fin boucle articles
+        
+        // alerte email ?	
+        if ($email_alerte && $mailLog !="") 
               envoyer_mail($email_suivi,"Syndication automatique SPIP2SPIP", $mailLog);	    
-          } 
-          
-        }
-      } 
       
-      // update syndic date
-      $sql = "UPDATE ".$table_prefix."_spip2spip SET last_syndic = NOW() WHERE id=$current_id LIMIT 1";
-      spip_query($sql);
+     } 
+      
+     // update syndic date
+     $sql = "UPDATE ".$table_prefix."_spip2spip SET last_syndic = NOW() WHERE id=$current_id LIMIT 1";
+     spip_query($sql);
   }
   spip_log("spip2spip (end)");
-
 
 }
 
