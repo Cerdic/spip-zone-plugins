@@ -1,6 +1,7 @@
 <?php
 
 // action/spiplistes_liste_des_abonnes.php
+// _SPIPLISTES_ACTION_LISTE_ABONNES
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -26,8 +27,13 @@ function action_spiplistes_liste_des_abonnes_dist () {
 	$id_liste = intval($r[1]);
 	$debut = intval($r[2]);
 	$tri = $r[3];
-
-	echo(spiplistes_listes_boite_abonnements($id_liste, $statut_liste, $tri, $debut, $redirect));
+	$redirect = rawurldecode(_request('redirect'));
+	
+	$statut_liste = ($id_liste > 0)
+		? sql_getfetsel('statut', 'spip_listes', "id_liste=".sql_quote($id_liste), '', '', 1)
+		: false
+		;
+	echo(spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut, $redirect));
 	
 	exit(0);
 

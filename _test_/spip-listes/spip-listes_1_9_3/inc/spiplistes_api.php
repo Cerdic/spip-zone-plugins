@@ -342,6 +342,11 @@ function spiplistes_listes_liste_fetsel ($id_liste, $keys = "*") {
 	return(sql_fetsel($keys, "spip_listes", "id_liste=".sql_quote($id_liste)." LIMIT 1"));
 }
 
+//CP-20081116
+function spiplistes_listes_liste_statut ($id_liste) {
+	return(spiplistes_listes_liste_fetsel($id_liste, 'statut'));
+}
+
 // CP-20080505 : renvoie array sql_where des listes publiees
 function spiplistes_listes_sql_where_or ($listes) {
 	return("statut=".implode(" OR statut=", array_map("sql_quote", explode(";", $listes))));
@@ -499,19 +504,31 @@ function spiplistes_mod_listes_supprimer ($id_auteur, $id_liste) {
 	}
 	$id_liste = intval($id_liste);
 	$sql_where[] = "id_liste=".sql_quote($id_liste);
-	return(sql_delete('spip_auteurs_mod_listes', $sql_where));	
+	if($result = sql_delete('spip_auteurs_mod_listes', $sql_where)) {
+		spiplistes_log("DELETE moderator #$id_auteur FROM ".$str_log);
+	}
+	else if($sql_result == false) {
+		spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+	}
+	return($result);
 }
 
 //CP-20080512
 function spiplistes_mod_listes_ajouter ($id_auteur, $id_liste) {
-	return(
+	if($result =
 		sql_insertq('spip_auteurs_mod_listes'
 			, array(
 				  'id_auteur' => $id_auteur
 				, 'id_liste' => $id_liste
 				)
 		)
-	);
+		) {
+		spiplistes_log("ADD moderator #$id_auteur TO ".$str_log);
+	}
+	else if($sql_result == false) {
+		spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+	}
+	return($result);
 }
 
 //CP-2080610
@@ -529,6 +546,9 @@ function spiplistes_mod_listes_id_auteur ($id_auteur) {
 		while($row = sql_fetch($sql_result)) {
 			$result[] = $row['id_liste'];
 		}
+	}
+	else if($sql_result == false) {
+		spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
 	}
 	return($result);
 }

@@ -30,15 +30,18 @@ function action_spiplistes_moderateurs_gerer_dist () {
 	}
 
 	if($id_liste > 0 && $id_auteur > 0) {
-		$str_log = "id_liste #$id_liste BY id_auteur #".$auteur_session['id_auteur'];
+		
+		include_spip('inc/spiplistes_api');
+		
 		switch($faire) {
 			case 'ajouter':
-				spiplistes_mod_listes_ajouter($id_auteur, $id_liste);
-				spiplistes_log("ADD moderator #$id_auteur TO ".$str_log);
+				$id_auteur = intval(_request('ajouter_id_mod'));
+				if($id_auteur > 0) {
+					spiplistes_mod_listes_ajouter($id_auteur, $id_liste);
+				}
 				break;
 			case 'supprimer':
 				spiplistes_mod_listes_supprimer($id_auteur, $id_liste);
-				spiplistes_log("DELETE moderator #$id_auteur FROM ".$str_log);
 				break;
 		}
 	}

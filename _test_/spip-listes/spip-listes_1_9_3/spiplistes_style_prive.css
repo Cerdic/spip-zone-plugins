@@ -33,7 +33,11 @@
 .spiplistes .titre-boite-date .date {}
 .spiplistes .boite-generer-option {margin:0.5em 0}
 .spiplistes .boite-generer-option .option {margin:0.5em 0 0 5ex; display:none}
-table.spiplistes-abos {	font-size:80%;	border:1px solid gray }
+.spiplistes .supprimer_cet_abo {background: url() no-repeat center;}
+.spiplistes .supprimer_cet_abo a {display:block;}
+.spiplistes .supprimer_cet_abo span {display:none}
+#spiplistes_l_recherche img {margin:0;border:0;float:left;width:26px;height:20px;display:block}
+table.spiplistes-abos {	border:1px solid gray }
 table.spiplistes-abos tr.onglets { border-bottom: 10px solid #ccc;line-height:1.8em;margin-bottom:1em;padding:1em }
 table.spiplistes-abos td { line-height:1.25em; border-bottom: 1px solid #ccc }
 table.spiplistes-tab { margin-top:5px; font-size:90% }
@@ -54,5 +58,5 @@ ul.liste-listes li .description { font-size:90%;color:gray }
 ul.liste-listes li .periodicite { font-size:90% }
 ul.liste-format, ul.liste-format-desabo { padding-left:0;margin:0;list-style:none }
 ul.liste-format li, ul.liste-format-desabo li { display:block }
-/* supprimes les <p> ajoutés aux infos par 193 */
+/* supprimes les <p> ajoutï¿½s aux infos par 193 */
 ul.meta-info-liste p { display:inline }

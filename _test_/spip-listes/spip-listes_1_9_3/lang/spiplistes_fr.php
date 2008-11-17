@@ -104,6 +104,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , 'msg_abonne_sans_format' => "format de reception manquant"
 , 'a_partir_de_patron' => "A partir d'un patron"
 , 'avec_introduction' => "Avec texte d'introduction"
+, 'ajouter_un_moderateur' => "Ajouter un mod&eacute;rateur "
 
 //B
 
@@ -194,8 +195,10 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Desabonner_definitif' => "D&eacute;sabonner ce compte de toutes les listes de diffusion.",
 'Desabonner' => "D&eacute;sabonner"
 , 'dupliquer_ce_courrier' => "Dupliquer ce courrier"
-, 'desabonne_sing' => " d&eacute;sabonn&eacute; ou sans format de r&eacute;ception"
-, 'desabonnes_plur' => " d&eacute;sabonn&eacute;s ou sans format de r&eacute;ception"
+//, 'desabonne_sing' => " d&eacute;sabonn&eacute; ou sans format de r&eacute;ception"
+//, 'desabonnes_plur' => " d&eacute;sabonn&eacute;s ou sans format de r&eacute;ception"
+, 'desabonne_sing' => " sans format de r&eacute;ception"
+, 'desabonnes_plur' => " sans format de r&eacute;ception"
 , 'destinataire_sans_format_alert' => "Destinataire sans format de r&eacute;ception.
 	Appliquez un format de r&eacute;ception (texte ou html) pour ce compte ou s&eacute;lectionnez un autre destinataire."
 
@@ -507,6 +510,9 @@ liste."
 , 'simuler_les_envois' => "Simuler les envois de courriers"
 , 'sup_mod' => "Supprimer ce mod&eacute;rateur"
 , 'sommaire_date_debut' => "A partir de la date définie ci-dessus"
+, 'sup_' => "Sup."
+, 'supprimer_un_abo' => "Supprimer un abonné de cette liste"
+, 'supprimer_cet_abo' => "Supprimer cet abonné de cette liste"
 
  //T
 , 'texte_boite_en_cours' => 'SPIP-Listes envoie un courrier.<p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>',
@@ -541,8 +547,8 @@ liste."
 
 , 'abon' => 'LES ABONNES'
 , 'abos_cette_liste' => "Les abonn&eacute;s &agrave; cette liste"
-, 'abon_ajouter' => 'AJOUTER UN ABONNE &nbsp; ',
-'abonees' => 'tous les abonn&eacute;s',
+, 'abon_ajouter' => "Ajouter un abonn&eacute; "
+, 'abonees' => 'tous les abonn&eacute;s',
 'abonne_listes' => 'Ce contact est abonn&eacute; aux listes suivantes',
 'abonne_aucune_liste' => 'Abonn&eacute;s &agrave; aucune liste',
 'abonnement_simple' => '<strong>Abonnement simple : </strong><br /><i>Les abonn&eacute;s re&ccedil;oivent un message de confirmation apr&egrave;s leur abonnement</i>',

@@ -75,6 +75,16 @@ function spiplistes_raccourci_journal ($envelopper = true) {
 			, ''
 			,false
 			)
+		.	(
+				(spiplistes_server_rezo_local())
+				? "<span class='verdana2' style='display:block;padding:0.5ex;text-align:center'>" 
+					// avertir qu'on est en mode debug
+					. "<span style='display:block;font-weight:700;color:white;background-color:red;'>" . _T('spiplistes:mode_debug_actif') . "</span>\n"
+					// l'adresse IP pour info
+					. "<span style='display:block;'>" . $_SERVER['SERVER_ADDR'] . "</span>\n"
+					. "</span>\n"
+				: ""
+			)
 		. "</li>\n"
 		;
 	if($envelopper) {
@@ -82,18 +92,6 @@ function spiplistes_raccourci_journal ($envelopper = true) {
 			. "</ul>\n"
 			;
 	}
-	$result .= ""
-		.	(
-				(spiplistes_server_rezo_local())
-				? "<div class='verdana2' style='padding:0.5ex;text-align:center'>" 
-					// avertir qu'on est en mode debug
-					. "<div style='font-weight:700;color:white;background-color:red;'>" . _T('spiplistes:mode_debug_actif') . "</div>\n"
-					// l'adresse IP pour info
-					. "<div>" . $_SERVER['SERVER_ADDR'] . "</div>\n"
-					. "</div>\n"
-				: ""
-			)
-		;
 	
 	if($envelopper) {
 		$result .= ""

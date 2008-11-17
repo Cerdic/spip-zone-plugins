@@ -109,7 +109,7 @@ function exec_spiplistes_abonnes_tous () {
 		$page_result .= ""
 			. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."contact_loupe-24.png", true, "", _T('spiplistes:chercher_un_auteur'))
 			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE)."' method='post' class='verdana2'>"
-			. "<div align=center>\n"
+			. "<div style='text-align:center'>\n"
 			. "<input type='text' name='cherche_auteur' class='fondl' value='' size='20' />"
 			. "<div style='text-align:right;margin-top:0.5em;'><input type='submit' name='Chercher' value='"._T('bouton_chercher')."' class='fondo' /></div>"
 			. "</div></form>"
@@ -193,7 +193,10 @@ function exec_spiplistes_abonnes_tous () {
 	$page_result .= ""
 		. debut_cadre_relief('redacteurs-24.gif', true)
 		. "<div id='$id_boite_dest_ajax'>\n"
-		. spiplistes_listes_boite_abonnes(0, $tri, $debut, _SPIPLISTES_EXEC_ABONNES_LISTE, $id_boite_dest_ajax)
+		//. spiplistes_listes_boite_abonnes(0, $tri, $debut, _SPIPLISTES_EXEC_ABONNES_LISTE, $id_boite_dest_ajax)
+		. spiplistes_listes_boite_abonnements(
+			0, false, $tri, $debut, _SPIPLISTES_EXEC_ABONNES_LISTE
+			)
 		. "</div>\n"
 		. fin_cadre_relief(true)
 		;

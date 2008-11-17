@@ -80,22 +80,37 @@ function spiplistes_header_prive ($flux) {
 	$(document).ready(function(){
 		$('#opt-lien-en-tete-courrier').click( function() { $(this).toggle_options('#div-lien-en-tete-courrier') } );
 		$('#opt-ajout-tampon-editeur').click( function() { $(this).toggle_options('#div-ajout-tampon-editeur') } );
-		/*
-		$('#view-spiplistes-log').toggle(function(){
-			// demander le journal systeme
-			$.post('" . generer_url_action('spiplistes_lire_console', '') . "', function(data) {
-				$('#view-spiplistes-log-box').append(data);
-			});
-			$(this).html(\""._T('spiplistes:masquer_le_journal_SPIPLISTES')."\");
-		},function(){
-			$('#view-spiplistes-log-box').empty();
-			$(this).html(\""._T('spiplistes:Voir_les_journaux_SPIPLISTES')."\");
-		});
-		*/
 	});
 //-->
 </script>
 ";
+				break;
+			case _SPIPLISTES_EXEC_LISTE_GERER:
+			case _SPIPLISTES_EXEC_ABONNES_LISTE:
+				$flux .= "
+<!-- SpipListes JS -->
+<script type='text/JavaScript'>
+<!--
+	$(document).ready(function(){
+		$('#btn_chercher_id').hide();
+		$('#btn_ajouter_id_abo').hide();
+		$('#btn_ajouter_id_mod').hide();
+		$('#in_cherche_auteur').click( function() {
+			$('#btn_chercher_id').show();
+		});
+		$('#sel_ajouter_id_abo').click( function() {
+			$('#btn_ajouter_id_abo').show();
+		});
+		$('#sel_ajouter_id_mod').click( function() {
+			$('#btn_ajouter_id_mod').show();
+		});
+	});
+//-->
+</script>
+<style type='text/css'>
+.spiplistes .supprimer_cet_abo {background-image:url(".find_in_path("images/croix-rouge.gif").")}
+</style>
+";			
 				break;
 		}
 
