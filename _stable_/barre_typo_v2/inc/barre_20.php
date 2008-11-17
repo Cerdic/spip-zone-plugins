@@ -283,8 +283,8 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 	$retL = '';
 	// Gestion des liens, ancres, notes, glossaire
+	$retL .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_lien']."','');", _DIR_IMG_ICONES_BARRE."lien.png", _T('barre_lien'), $champhelp);
 	if (test_espace_prive()) {
-		$retL .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_lien']."','');", _DIR_IMG_ICONES_BARRE."lien.png", _T('barre_lien'), $champhelp);
 		$retL .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_ancre']."','');", _DIR_BTV2_IMG.'ancre.png', _T('bartypenr:barre_ancres'), $champhelp);  
 		$retL .= bouton_barre_racc("barre_raccourci('[[',']]',$champ, $num_barre)", _DIR_IMG_ICONES_BARRE."notes.png", _T('barre_note'), $champhelp);
 		$retL .= bouton_barre_racc("barre_raccourci('[?',']',$champ, $num_barre)", _DIR_BTV2_IMG.'barre-wiki.png', _T('bartypenr:barre_glossaire'), $champhelp);
@@ -313,8 +313,8 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$retG = '';
 	// Insertion de caracteres difficiles a taper au clavier (guillemets, majuscules accentuees...)
 
+	$retG .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_caracteres']."','');", _DIR_BTV2_IMG.'clavier.png', _T('bartypenr:barre_caracteres'), $champhelp);
 	if (!$crayons && test_espace_prive() && !$forum) {
-		$retG .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_caracteres']."','');", _DIR_BTV2_IMG.'clavier.png', _T('bartypenr:barre_caracteres'), $champhelp);
 		$retG .= bouton_barre_racc("toggle_preview($num_barre,'".str_replace("'","\\'",$champ)."');", _DIR_BTV2_IMG.'eye.png', _T('bartypenr:barre_preview'), $champhelp);
 		$retG .= bouton_barre_racc("toggle_stats($num_barre,'".str_replace("'","\\'",$champ)."');", _DIR_BTV2_IMG.'stats.png', _T('bartypenr:barre_stats'), $champhelp);
 	}
@@ -381,6 +381,9 @@ $(document).ready(function(){';
 	$("input").change ( function() {form_dirty=true;} );
 });
 	 //--></script>';
+	} else {
+		$ret .= ($num_barre > 1)  ? '' : 
+			"<script type='text/javascript' src='". find_in_path(_JAVASCRIPT.'layer.js') ."'></script>";
 	}
 	return $ret;
 }
