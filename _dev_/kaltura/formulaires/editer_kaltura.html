@@ -8,10 +8,12 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
+		[(#ENV{kshow_id}|oui)
 		[(#ENV{kshow_id}|kaltura_html_widget{#ENV{user_id}})]
+		]
 	  <p class='boutons'>
-	  <input type='submit' class='submit' value='<:kaltura:bouton_reset:>' name='resetks' />
-	  <input type='submit' class='submit' value='<:bouton_ajouter:>' name='ajouter' />
+	  <input type='submit' class='submit' value='<:kaltura:bouton_reset_video:>' name='resetks' />[(#ENV{kshow_id}|oui)
+	  <input type='submit' class='submit' value='<:kaltura:bouton_ajouter_video:>' name='ajouter' />]
 	  </p>
 	</div></form>
 	]

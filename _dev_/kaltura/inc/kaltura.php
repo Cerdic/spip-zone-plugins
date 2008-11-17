@@ -73,61 +73,40 @@ function kaltura_instancie($options){
 }
 
 define('_KALTURA_VIDEO_PLAYER',1);
+define('_KALTURA_VIDEO_WIKI_COMPACT',2);
 define('_KALTURA_VIDEO_WIKI',3);
+
+
+
 /**
- * Creer le widget kaltura en html
+ * Generer l'url de la video kaltura
  *
  * @param int $kshow_id
  * @param int $user_id
  * @param array $options
  * @return string
  */
-function kaltura_html_widget ( $kshow_id , $user_id , $options = array() ){
+function kaltura_url_video( $kshow_id , $user_id , $options = array() ){
 	include_spip('inc/kalturaapi_php5_lib');
-	
 	$entry_id = null;
 	
 	$size = kaltura_option('size',$options,'l');
 	$version = kaltura_option('version',$options,'-1');
 	$media_type = kaltura_option('media_type',$options,2);
-	$widget_type = kaltura_option('widget_type',$options,_KALTURA_VIDEO_WIKI);
+	$widget_type = kaltura_option('widget_type',$options,_KALTURA_VIDEO_PLAYER);
 	$entry_id = kaltura_option('entry_id',$options,'-1');
 
 	$version_kshow_name=kaltura_option('version_kshow_name',$options);
 	$version_kshow_description=kaltura_option('version_kshow_description',$options);
-    
+
 	// add the version as an additional parameter
 	$domain = $GLOBALS['WIDGET_HOST']; //"http://www.kaltura.com";
-	$swf_url = "/index.php/widget/$kshow_id/" . 
-		( $entry_id ? $entry_id : "-1" ) . "/" .
-		( $media_type ? $media_type : "-1" ) . "/" .
-		( $widget_type ? $widget_type : _KALTURA_VIDEO_WIKI ) . "/" . // widget_type=3 -> WIKIA
-		( "$version" );
+	$swf_url = "/index.php/widget/$kshow_id/$entry_id/$media_type/$widget_type/$version";
 
-	#$current_widget_kshow_id_list[] = $kshow_id;
-	
 	$kshowCallUrl = "$domain/index.php/browse?kshow_id=$kshow_id";
 	$widgetCallUrl = "$kshowCallUrl&browseCmd=";
 	$editCallUrl = "$domain/index.php/edit?kshow_id=$kshow_id";
 
-	/* 
-  widget3:
-  url:  /widget/:kshow_id/:entry_id/:kmedia_type/:widget_type/:version
-  param: { module: browse , action: widget }
-	*/
-	if ( $size == "m"){
-  	// medium size
-  	$height = 198 + 105;
-  	$width = 267;
-	}
-  else {
-		// large size
-		$height = 300 + 105 + 20;
-		$width = 400;
-	}
-  
-	#$root_url = "" ; //getRootUrl();
-	#$external_url = "http://" . @$_SERVER["HTTP_HOST"] ."$root_url";
 	$external_url = self('&',true);
 	$share = "TODO" ; //$titleObj->getFullUrl ();
     
@@ -138,10 +117,38 @@ function kaltura_html_widget ( $kshow_id , $user_id , $options = array() ){
 		"edit" => "Special:KalturaVideoEditor?kshow_id=$kshow_id" ,
 		"share" => $share ,
 	);
- 	#var_dump($links_arr);   	
 	$links_str = str_replace ( array ( "|" , "/") , array ( "|01" , "|02" ) , base64_encode ( serialize ( $links_arr ) ) ) ;
- 	#var_dump($links_str);
+	$swf_url .= "/" . $links_str;
+	
+	return $domain . $swf_url;
+}
+
+
+/**
+ * Creer le player kaltura en html
+ *
+ * @param int $kshow_id
+ * @param int $user_id
+ * @param array $options
+ * @return string
+ */
+function kaltura_player($clip_url, $options = array() ){
+	include_spip('inc/kalturaapi_php5_lib');
+	
+	$size = kaltura_option('size',$options,'l');
+	if ( $size == "m"){
+  	// medium size
+  	$height = 198;
+  	$width = 267;
+	}
+  else {
+		// large size
+		$height = 300 + 20;
+		$width = 400;
+	}
+  
 	$kaltura_link_str = _T("kaltura:propulse_par",array('nom'=>$GLOBALS['kaltura_partner_name']));
+	
 	$url_wizard = generer_url_public('kaltura_contributionwizard',"uid=$user_id&kshow_id=$kshow_id",true,true);
 	$js_func_suff = "_$user_id_$kshow_id";
 	$js = "
@@ -168,15 +175,94 @@ function gotoEditor$js_func_suff(){	alert ( \"Editor - Will be implemented in th
 	if ( $version_kshow_name ) $flash_vars["Title"] = $version_kshow_name;
 	if ( $version_kshow_description ) $flash_vars["Description"] = $version_kshow_description;	
 
-	$swf_url .= "/" . $links_str;
 	$flash_vars_str = http_build_query( $flash_vars , "" , "&" )		;	
 
 	$widget = /*$extra_links .*/
-		'<object id="kaltura_player_' . (int)microtime(true) . '" type="application/x-shockwave-flash" allowScriptAccess="always" allowNetworking="all" height="' . $height . '" width="' . $width . '" data="'.$domain. $swf_url . '">'.
+		'<object id="kaltura_player_' . (int)microtime(true) . '" type="application/x-shockwave-flash" allowScriptAccess="always" allowNetworking="all" height="' . $height . '" width="' . $width . '" data="'.$clip_url. '">'.
 		'<param name="allowScriptAccess" value="always" />'.
 		'<param name="allowNetworking" value="all" />'.
 		'<param name="bgcolor" value=#000000 />'.
-		'<param name="movie" value="'.$domain. $swf_url . '"/>'.
+		'<param name="movie" value="'.$clip_url . '"/>'.
+		'<param name="flashVars" value="' . $flash_vars_str . '"/>'.
+		'<param name="wmode" value="opaque"/>'.
+		$kaltura_link_str .
+		'</object>' 
+		// .	"<div class='kaltura_powered'>$kaltura_link_str</div>"
+		;
+
+	return $js . $widget ;
+}
+
+
+
+/**
+ * Creer le widget kaltura en html
+ *
+ * @param int $kshow_id
+ * @param int $user_id
+ * @param array $options
+ * @return string
+ */
+function kaltura_html_widget( $kshow_id , $user_id , $options = array() ){
+	include_spip('inc/kalturaapi_php5_lib');
+	
+	$entry_id = null;
+	
+	$options['widget_type'] = kaltura_option('widget_type',$options,_KALTURA_VIDEO_WIKI_COMPACT);
+	
+	$version_kshow_name=kaltura_option('version_kshow_name',$options);
+	$version_kshow_description=kaltura_option('version_kshow_description',$options);
+
+	$clip_url = kaltura_url_video($kshow_id , $user_id , $options);
+
+	$size = kaltura_option('size',$options,'l');
+	if ( $size == "m"){
+  	// medium size
+  	$height = 198 + 105;
+  	$width = 267;
+	}
+  else {
+		// large size
+		$height = 300 + 105 + 20;
+		$width = 400;
+	}
+  
+	$kaltura_link_str = _T("kaltura:propulse_par",array('nom'=>$GLOBALS['kaltura_partner_name']));
+	
+	$url_wizard = generer_url_public('kaltura_contributionwizard',"uid=$user_id&kshow_id=$kshow_id",true,true);
+	$js_func_suff = "_$user_id_$kshow_id";
+	$js = "
+<script type='text/javascript'>
+if (true){ /* || typeof('gotoCW$js_func_suff')==undefined*/
+function gotoCW$js_func_suff(){	kalturaInitModalBox ( \"$url_wizard\");}
+function gotoEditor$js_func_suff(){	alert ( \"Editor - Will be implemented in the near future.\" );	return;}
+}
+</script>
+	";
+	
+	$flash_vars = array (  
+		"CW" => "gotoCW$js_func_suff" ,
+		"Edit" => "gotoEdit" ,
+		"Editor" => "gotoEditor$js_func_suff" ,
+		"Kaltura" => "",//gotoKalturaArticle" ,
+		"Generate" => "" , //gotoGenerate" ,
+		"share" => "" , //$share ,
+		"WidgetSize" => $size,
+//		"kshow_id" => $kshow_id,
+	);
+
+	// add only if not null 							
+	if ( $version_kshow_name ) $flash_vars["Title"] = $version_kshow_name;
+	if ( $version_kshow_description ) $flash_vars["Description"] = $version_kshow_description;	
+
+	$flash_vars_str = http_build_query( $flash_vars , "" , "&" )		;	
+
+	$widget = /*$extra_links .*/
+		'<object id="kaltura_player_' . (int)microtime(true) . '" type="application/x-shockwave-flash" allowScriptAccess="always" allowNetworking="all" height="' . $height . '" width="' . $width . '" data="'.$clip_url. '">'.
+		'<param name="allowScriptAccess" value="always" />'.
+		'<param name="allowNetworking" value="all" />'.
+		'<param name="bgcolor" value=#000000 />'.
+		'<param name="movie" value="'.$clip_url . '"/>'.
 		'<param name="flashVars" value="' . $flash_vars_str . '"/>'.
 		'<param name="wmode" value="opaque"/>'.
 		$kaltura_link_str .

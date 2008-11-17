@@ -1,7 +1,7 @@
 <plugin>
   <nom>Kaltura</nom>
   <auteur>Cedric Morin [->www.yterium.com]</auteur>
-  <icon>images/logo.gif</icon>
+  <icon>images/logo.png</icon>
   <version>0.1</version>
   <etat>dev</etat>
   <description>La video en ligne facile avec [->http://corp.kaltura.com/]</description>

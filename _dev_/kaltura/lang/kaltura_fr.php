@@ -3,6 +3,13 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	// B
+  'bouton_reset_video' => 'Nouvelle vid&eacute;o',
+  'bouton_ajouter_video' => 'Enregistrer cette vid&eacute;o',
+
+	// N
+  'nouvelle_video' => 'Ajouter une nouvelle vid&eacute;o',
+
   // P
   'params_connect'=>'Param&egrave;tres de connexion Kaltura',
   'partner_id' => 'ID partenaire',
@@ -14,7 +21,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   
   // V
   'video_de_nom' => 'Vid&eacute;o de @nom@',
- 
 );
 
 
