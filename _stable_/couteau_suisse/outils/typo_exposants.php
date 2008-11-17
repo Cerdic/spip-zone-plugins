@@ -7,12 +7,8 @@
 // exemple : http://zone.spip.org/trac/spip-zone/wiki/WikiFormatting
 
 include_spip('inc/charsets');
-// en principe, pas besoin de : caractere_utf_8(232)
-define('_TYPO_EGRAVE', unicode2charset('&#232;').'|&#232;|&egrave;');
-define('_TYPO_EAIGU1', unicode2charset('&#233;').'|&#233;|&eacute;');
-define('_TYPO_EAIGU2', unicode2charset('&#201;').'|&#201;|&Eacute;');
-define('_TYPO_sup', '<sup class="typo_exposants">\\1</sup>');
-define('_TYPO_sup2', '\\1<sup class="typo_exposants">\\2</sup>');
+@define('_TYPO_sup', '<sup class="typo_exposants">\\1</sup>');
+@define('_TYPO_sup2', '\\1<sup class="typo_exposants">\\2</sup>');
 
 // cette fonction ne fonctionne que pour l'anglais
 // elle n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
@@ -32,8 +28,14 @@ function typo_exposants_en($texte){
 // cette fonction ne fonctionne que pour le francais
 // elle n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
 function typo_exposants_fr($texte){
-	static $typo;
-	if(!$typo) {
+	static $typo = null;
+	static $egrave; static $eaigu1; static $eaigu2; static $accents;
+	if (is_null($typo)) {
+		// en principe, pas besoin de : caractere_utf_8(232)
+		$egrave = unicode2charset('&#232;').'|&#232;|&egrave;';
+		$eaigu1 = unicode2charset('&#233;').'|&#233;|&eacute;';
+		$eaigu2 = unicode2charset('&#201;').'|&#201;|&Eacute;';
+		$accents = unicode2charset('&#224;&#225;&#226;&#228;&#229;&#230;&#232;&#233;&#234;&#235;&#236;&#237;&#238;&#239;&#242;&#243;&#244;&#246;&#249;&#250;&#251;&#252;');
 		$typo = array( array(
 			'/(?<=\bM)e?(lles?)\b/',		// Mlle(s), Mme(s) et erreurs Melle(s)
 			'/(?<=\bM)(gr|mes?)\b/',	// Mme(s) et Mgr
@@ -42,16 +44,16 @@ function typo_exposants_fr($texte){
 			'/\bm²\b/', '/(?<=\bm)([23])\b/',	 // m2, m3, m²
 			'/(?<=\b[Mm])([nd]s?)\b/',	// millions, milliards
 			'/(?<=\bV)(ve)\b/', '/(?<=\bC)(ies?)\b/',	// Vve et Cie(s)
-			'/(?<=\bS)(t(?:'._TYPO_EAIGU1.')s?)(?=\W)/', '/(?<=\W)(?:E|'._TYPO_EAIGU2.')ts\b/',	 // Societes(s), Etablissements
+			"/(?<=\bS)(t(?:$eaigu1)s?)(?=\W)/", "/(?<=\W)(?:E|$eaigu2)ts\b/",	 // Societes(s), Etablissements
 	
 			'/(?<=\b[1I])i?(ers?)\b/',	// 1er(s), Erreurs 1ier(s), 1ier(s)
-			'/(?<=\b[1I])i?(?:e|'._TYPO_EGRAVE.')(res?)\b/',	// Erreurs 1(i)ere(s) + accents
+			"/(?<=\b[1I])i?(?:e|$egrave)(res?)\b/",	// Erreurs 1(i)ere(s) + accents
 			'/(?<=\b1)(r?es?)\b/', // 1e(s), 1re(s)
 			'/(?<=\b2)(nde?s?)\b/',	// 2nd(e)(s)
 	
-			'/(\b[0-9IVX]+)i?(?:e|'._TYPO_EGRAVE.')?me(s?)\b/', // Erreurs (i)(e)me(s) + accents
+			"/(\b[0-9IVX]+)i?(?:e|$egrave)?me(s?)\b/", // Erreurs (i)(e)me(s) + accents
 			'/\b([0-9IVX]+)(es?)\b/', // 2e(s), IIIe(s)... (les 1(e?r?s?) ont deja ete remplaces)
-			'/(?<!;)\b(r|v|\d+)o\b/', // recto, verso, primo, secondo, etc.
+			"/(?<![;$accents])\b(\d+|r|v)o\b/", // recto, verso, primo, secondo, etc.
 			'/(?<=\bM)(e)(?= [A-Z])/', // Maitre (suivi d'un espace et d'une majuscule)
 		), array(
 			_TYPO_sup, _TYPO_sup,		// Mlle(s), Mme(s), Mgr
