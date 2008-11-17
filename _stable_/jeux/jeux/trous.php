@@ -58,7 +58,7 @@ function trous_inserer_le_trou($indexJeux, $indexTrou, $size, $corriger) {
   $nomVarSelect = "var{$indexJeux}_T{$indexTrou}";
   $mots = $propositionsTROUS[$indexTrou];
   $prop = strtolower($_POST[$nomVarSelect] = trim($_POST[$nomVarSelect]));						  // function TrackFocus(BoxNumber){CurrentWord = BoxNumber;}
-  $codeHTML = " <input name=\"$nomVarSelect\" class=\"jeux_input\" size=\"$size\"  type=\"text\"" //onfocus=\"TrackFocus('$nomVarSelect')\"
+  $codeHTML = " <input name=\"$nomVarSelect\" class=\"jeux_input trous\" size=\"$size\"  type=\"text\"" //onfocus=\"TrackFocus('$nomVarSelect')\"
 	  . ($prop?" value=\"{$_POST[$nomVarSelect]}\"":'') . "> "
 	 ;// . " (".join('|', $mots).")";
 
@@ -77,9 +77,9 @@ function trous_inserer_les_trous($chaine, $indexJeux) {
 	$texteApres = trous_inserer_les_trous($texteApres, $indexJeux);
 	if (($sizeInput = intval(jeux_config('taille')))==0)
 		foreach($propositionsTROUS as $trou) foreach($trou as $mot) $sizeInput = max($sizeInput, strlen($mot));
-	$chaine = $texteAvant.jeux_rem('TROU-DEBUT', $indexTROU)
+	$chaine = $texteAvant.jeux_rem('TROU-DEBUT', $indexTROU, '', 'span')
 		. trous_inserer_le_trou($indexJeux, $indexTROU, $sizeInput, isset($_POST["var_correction_".$indexJeux]))
-		. jeux_rem('TROU-FIN', $indexTROU)
+		. jeux_rem('TROU-FIN', $indexTROU, '', 'span')
 		. $texteApres; 
   }
   return $chaine;

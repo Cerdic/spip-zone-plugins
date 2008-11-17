@@ -117,7 +117,7 @@ unset($temp);
 // ca peut toujours servir pour les controles...
 // dossiers : jeux/style/ et jeux/javascript/
 global $jeux_header_prive, $jeux_javascript_prive;
-$jeux_header_prive = array('jeux','qcm', 'mots_croises', 'sudoku', 'pendu');
+$jeux_header_prive = array('jeux','qcm', 'mots_croises', 'sudoku', 'pendu', 'trous');
 // mots_croises.js suffit car sudoku.js est a priori l'exacte copie
 $jeux_javascript_prive = array('qcm', 'layer', 'pendu', 'mots_croises');
 
