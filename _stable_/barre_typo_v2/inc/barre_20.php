@@ -283,8 +283,8 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 	$retL = '';
 	// Gestion des liens, ancres, notes, glossaire
-	$retL .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_lien']."','');", _DIR_IMG_ICONES_BARRE."lien.png", _T('barre_lien'), $champhelp);
 	if (test_espace_prive()) {
+		$retL .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_lien']."','');", _DIR_IMG_ICONES_BARRE."lien.png", _T('barre_lien'), $champhelp);
 		$retL .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_ancre']."','');", _DIR_BTV2_IMG.'ancre.png', _T('bartypenr:barre_ancres'), $champhelp);  
 		$retL .= bouton_barre_racc("barre_raccourci('[[',']]',$champ, $num_barre)", _DIR_IMG_ICONES_BARRE."notes.png", _T('barre_note'), $champhelp);
 		$retL .= bouton_barre_racc("barre_raccourci('[?',']',$champ, $num_barre)", _DIR_BTV2_IMG.'barre-wiki.png', _T('bartypenr:barre_glossaire'), $champhelp);
@@ -313,8 +313,8 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$retG = '';
 	// Insertion de caracteres difficiles a taper au clavier (guillemets, majuscules accentuees...)
 
-	$retG .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_caracteres']."','');", _DIR_BTV2_IMG.'clavier.png', _T('bartypenr:barre_caracteres'), $champhelp);
 	if (!$crayons && test_espace_prive() && !$forum) {
+		$retG .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_caracteres']."','');", _DIR_BTV2_IMG.'clavier.png', _T('bartypenr:barre_caracteres'), $champhelp);
 		$retG .= bouton_barre_racc("toggle_preview($num_barre,'".str_replace("'","\\'",$champ)."');", _DIR_BTV2_IMG.'eye.png', _T('bartypenr:barre_preview'), $champhelp);
 		$retG .= bouton_barre_racc("toggle_stats($num_barre,'".str_replace("'","\\'",$champ)."');", _DIR_BTV2_IMG.'stats.png', _T('bartypenr:barre_stats'), $champhelp);
 	}
@@ -331,6 +331,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 	$ret .= "</table>";
 	$ret .= $toolbox;
+	if (!$crayons && test_espace_prive() && !$forum) {
 	$ret .= '<script type="text/javascript"><!--';
 	$ret .= '
 form_dirty = false;
@@ -354,12 +355,7 @@ $(document).ready(function(){';
 		$('.$champ.').after("<div id=\"article_preview'.$num_barre.'\"></div>");
 		$('.$champ.').before("<div id=\"article_stats'.$num_barre.'\"></div>");
 		';
-		global $spip_version_code;
-		if (version_compare($spip_version_code,'1.9250','<')){
-			$ret .= '$.ajaxTimeout( 5000 );'; // jquery < 1.1.4
-		} else {
-			$ret .= '$.ajaxSetup({timeout: 5000});'; // a partir de jquery 1.1.4, donc de SPIP 1.9.3
-		}
+		$ret .= '$.ajaxSetup({timeout: 5000});'; // a partir de jquery 1.1.4, donc de SPIP 1.9.3
 		$ret .= '
 		$('.$champ.').keypress(function() { MajPreview('.$num_barre.',"'.$champ.'") });
 		$('.$champ.').select(function() { MajStats('.$num_barre.',"'.$champ.'") });
@@ -385,6 +381,7 @@ $(document).ready(function(){';
 	$("input").change ( function() {form_dirty=true;} );
 });
 	 //--></script>';
+	}
 	return $ret;
 }
 
