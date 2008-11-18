@@ -16,15 +16,29 @@ jQuery().ready(function(){
 	var alea_actuel = '', alea_futur = '';
 	var qstring = window.location.search;
 	var page_login = (qstring.length && (qstring.search(/page=login/)>0));
-
-//	$('#var_login_id').blur(function(){
-
-// utiliser une variable pour éviter que focus() relance l'appel des aléas toutes les secondes tant que le champ de mot de passe est sélectionné
-  var str_login = '';
-// vider le champ mot de passe si il est pré-rempli
-  $(document).ready(function(){ $('#session_password').val(''); });
-// lancer la récupération des aleas par ajax sur le focus dans le champ de mot de passe
-  $('#session_password').focus(function(){ recup_aleas(); });
+	[(#REM) 
+	
+		utiliser une variable pour controler, eviter que focus() relance l'appel 
+		des aleas toutes les secondes tant que le champ de mot de passe est selectionne'.
+		
+	]var str_login = '';
+	
+$(document).ready(function(){
+	[(#REM) 
+		
+		placer le focus sur le premier champ (login) 
+		
+	]$('#var_login_id').focus();
+	[(#REM) 
+		
+		vider le champ mot de passe si il est pre-rempli 
+		
+	]$('#session_password').val(''); });
+	[(#REM) 
+	
+		lancer la recuperation des aleas par ajax sur le focus dans le champ de mot de passe 
+		
+	]$('#session_password').focus(function(){ recup_aleas(); });
     
   function recup_aleas() {
 		if($('#var_login_id').val().length && $('#var_login_id').val() != str_login) {
@@ -69,7 +83,7 @@ jQuery().ready(function(){
 			}
 		return(false);
 	}); // end submit
-});
+});[(#REM) fin de .ready() ]
 </script>
 
 [(#ENV{echec_cookie})
