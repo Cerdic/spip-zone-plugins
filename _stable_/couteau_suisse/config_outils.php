@@ -902,11 +902,12 @@ add_outil( array(
 	'pipelinecode:post_propre' => "if(strpos(\$flux, '@')!==false) \$flux=cs_echappe_balises('', 'mailcrypt', \$flux);",
 	'code:js' => "function lancerlien(a,b){ x='ma'+'ilto'+':'+a+'@'+b; return x; }",
 	// function jQuery pour corriger le title qui a ete protege
-	'code:jq' => "jQuery.fn.cs_title = function() { var t = this.attr('title');
-return typeof t=='string'?this.attr('title',t.replace(/\.\..t\.\./,'[\x40]')):this; };",
+	'code:jq' => "jQuery.fn.cs_title = function() {
+		var t = this.length?this.attr('title'):null;
+		return typeof t=='string'?this.attr('title',t.replace(/\.\..t\.\./,'[\x40]')):this; };",
 	// jQuery pour remplacer l'arobase image par l'arobase texte
 	'code:jq_init' => "jQuery('span.spancrypt', this).attr('class','cryptOK').html('&#6'+'4;');
-jQuery(\"a[@title*='..']\").cs_title();",
+	jQuery(\"a[@title*='..']\", this).cs_title();",
 	'code:css' => 'span.spancrypt {background:transparent url(' . url_absolue(find_in_path('img/mailcrypt/leure.gif'))
 		. ') no-repeat scroll 0.1em center; padding-left:12px; text-decoration:none;}',
 	'traitement:EMAIL' => 'mailcrypt',

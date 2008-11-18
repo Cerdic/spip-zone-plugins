@@ -58,7 +58,7 @@ function ar_load() {
 	jQuery("#ar_edit_info").removeClass("cs_hidden");
 }
 
-// cette fonction sert a transmettre les valeurs '' et '' lors de la redirection vers : ?exec=action_rapide
+// cette fonction sert a transmettre les valeurs 'ar_type_objet' et 'ar_num_objet' lors de la redirection vers : ?exec=action_rapide
 function add_param_redirect(this_) {
 	var redirect = jQuery(this_).parents('form').find('input[@name=redirect]');
 	redirect.val(redirect.val()+'%26ar_num_objet%3D'+jQuery("#ar_num_objet").val()+'%26ar_type_objet%3D'+jQuery("#ar_type_objet").val());
