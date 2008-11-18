@@ -1,4 +1,4 @@
-<BOUCLE_testsirub(GROUPES_MOTS){id_groupe=#ENV{id_groupe}}{rubriques=oui}><B_rechrub>
+<BOUCLE_testsirub(GROUPES_MOTS){id_groupe=#ENV{id_groupe}}{tables_liees == rubriques}><B_rechrub>
 <h3 class='rubrique'><:info_rubriques_trouvees:></h3>
 <div class='pagination'><span class='tri'>
 <a href='[(#SELF|parametre_url{tri,date})]'><:par_date:></a> |

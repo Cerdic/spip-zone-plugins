@@ -1,4 +1,4 @@
-<BOUCLE_testsiart(GROUPES_MOTS){id_groupe=#ENV{id_groupe}}{articles=oui}><B_rechart>
+<BOUCLE_testsiart(GROUPES_MOTS){id_groupe=#ENV{id_groupe}}{tables_liees == articles}><B_rechart>
 <h3 class='article'><:info_articles_trouves:></h3>
 <div class='pagination'><span class='tri'>
 <a href='[(#SELF|parametre_url{tri,date})]'><:par_date:></a> |
