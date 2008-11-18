@@ -4,15 +4,13 @@
 // Formulaires : Structure
 //
 
+function pb_selection_declarer_tables_principales($tables_principales){
 
-	function pb_selection_upgrade() {
 		global $tables_principales;
 	
 		$version_base = 0.3;
 		$current_version = 0.0;
 		
-
-		include_spip('base/serial');
 
 		$spip_pb_selection = array(
 			"id_rubrique" 	=> "bigint(21) NOT NULL",
@@ -28,12 +26,8 @@
 			'field' => &$spip_pb_selection,
 			'key' => &$spip_pb_selection_key);
 	
-			include_spip('base/create');
-			include_spip('inc/metas');
-//			echo "CREER";			
-			creer_base();
-			ecrire_meta("pb_selection_version",$version_base,'non');
-			ecrire_metas();
+	
+		return $tables_principales;
 	
 	}
 

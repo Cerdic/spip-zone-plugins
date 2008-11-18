@@ -1,7 +1,7 @@
 <plugin>
 	<nom>S&eacute;lection d'articles</nom>
 	<auteur>ARNO*</auteur>
-	<version>1.0</version>
+	<version>1.1</version>
 	<version_base>0.3.1</version_base>
 	<etat>stable</etat>
 	<description>
@@ -13,8 +13,10 @@
 	<lien></lien> <!-- URI de documentation -->
 	<licence>GPL 3</licence>
 	<prefix>pb_selection</prefix>
-	<install>base/pb_selection_install.php</install>
-
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/pb_selection_install.php</inclure>
+	</pipeline>
 	<pipeline>
 		<nom>affiche_milieu</nom>
 		<action>interface</action>
