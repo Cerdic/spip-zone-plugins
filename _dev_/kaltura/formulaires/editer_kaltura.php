@@ -12,7 +12,7 @@
  * @param unknown_type $id_auteur
  * @return unknown
  */
-function formulaires_editer_kaltura_charger_dist($objet='', $id_objet=0, $kshow_id=0){
+function formulaires_editer_kaltura_charger_dist($objet='', $id_objet=0, $redirect='', $kshow_id=0){
 	include_spip('inc/kaltura');
 	$id_auteur=$GLOBALS['visiteur_session']['id_auteur'];
 	if (!$kshow_id OR $kshow_id==-1){
@@ -36,17 +36,18 @@ function formulaires_editer_kaltura_charger_dist($objet='', $id_objet=0, $kshow_
  * @param unknown_type $kshow_id
  * @param unknown_type $id_auteur
  */
-function formulaires_editer_kaltura_verifier_dist($objet='', $id_objet=0, $kshow_id=0){
+function formulaires_editer_kaltura_verifier_dist($objet='', $id_objet=0, $redirect='', $kshow_id=0){
 	if (_request('resetks'))
 		$erreurs['message_ok']=_T('kaltura:nouvelle_video');
-	if (!$id_auteur=$GLOBALS['visiteur_session']['id_auteur']
-		OR (!$kshow_id AND !$kshow_id = $GLOBALS['visiteur_session']['kshow_id']))
-		$erreurs['message_erreur'] = _T('kaltura:interdit');
-
+	else {
+		if (!$id_auteur=$GLOBALS['visiteur_session']['id_auteur']
+			OR (!$kshow_id AND !$kshow_id = $GLOBALS['visiteur_session']['kshow_id']))
+			$erreurs['message_erreur'] = _T('kaltura:interdit');
+	}
 	return $erreurs;
 }
 
-function formulaires_editer_kaltura_traiter_dist($objet='', $id_objet=0, $kshow_id=0){
+function formulaires_editer_kaltura_traiter_dist($objet='', $id_objet=0, $redirect='', $kshow_id=0){
 	include_spip('inc/kaltura');
 	include_spip('base/abstract_sql');
 	
@@ -70,8 +71,15 @@ function formulaires_editer_kaltura_traiter_dist($objet='', $id_objet=0, $kshow_
 	if ($id_document AND $objet AND $id_objet){
 		sql_insertq('spip_documents_liens',array('id_document'=>$id_document,'objet'=>$objet,'id_objet'=>$id_objet));
 	}
+	
+	include_spip('inc/invalideur');
+	suivre_invalideur("$objet/$id_objet");
+	
 	// virer le kshow_id de la
 	session_set('kshow_id',null);
-	return array('message_ok'=>'ok','editable'=>true);
+	$res = array('message_ok'=>'ok','editable'=>true);
+	if ($redirect)
+		$res['redirect'] = $redirect;
+	return $res;
 }
 ?>
