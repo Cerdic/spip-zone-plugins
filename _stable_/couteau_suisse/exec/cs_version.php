@@ -7,7 +7,8 @@
 #-----------------------------------------------------#
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-@define('_URL_CS_PLUGIN_XML', 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/_stable_/couteau_suisse/plugin.xml?format=txt');
+include_spip('cout_define');
+cout_define('distant');
 
 // compatibilite spip 1.9
 if(!function_exists(ajax_retour)) { 

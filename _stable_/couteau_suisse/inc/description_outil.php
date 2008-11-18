@@ -7,44 +7,8 @@
 #-----------------------------------------------------#
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_VAR_OUTIL', cs_code_echappement("<!--  VAR-OUTIL -->\n", 'OUTIL'));
-
-// constantes utilisees dans la description des outils, sous forme @_CS_MACONSTANTE@
-
-@define('_CS_EXEMPLE_COULEURS', '<br /><span style="font-weight:normal; font-size:85%;"><span style="background-color:black; color:white;">black/noir</span>, <span style="background-color:red;">red/rouge</span>, <span style="background-color:maroon;">maroon/marron</span>, <span style="background-color:green;">green/vert</span>, <span style="background-color:olive;">olive/vert&nbsp;olive</span>, <span style="background-color:navy; color:white;">navy/bleu&nbsp;marine</span>, <span style="background-color:purple;">purple/violet</span>, <span style="background-color:gray;">gray/gris</span>, <span style="background-color:silver;">silver/argent</span>, <span style="background-color:chartreuse;">chartreuse/vert&nbsp;clair</span>, <span style="background-color:blue;">blue/bleu</span>, <span style="background-color:fuchsia;">fuchsia/fuchia</span>, <span style="background-color:aqua;">aqua/bleu&nbsp;clair</span>, <span style="background-color:white;">white/blanc</span>, <span style="background-color:azure;">azure/bleu&nbsp;azur</span>, <span style="background-color:bisque;">bisque/beige</span>, <span style="background-color:brown;">brown/brun</span>, <span style="background-color:blueviolet;">blueviolet/bleu&nbsp;violet</span>, <span style="background-color:chocolate;">chocolate/brun&nbsp;clair</span>, <span style="background-color:cornsilk;">cornsilk/rose&nbsp;clair</span>, <span style="background-color:darkgreen;">darkgreen/vert&nbsp;fonce</span>, <span style="background-color:darkorange;">darkorange/orange&nbsp;fonce</span>, <span style="background-color:darkorchid;">darkorchid/mauve&nbsp;fonce</span>, <span style="background-color:deepskyblue;">deepskyblue/bleu&nbsp;ciel</span>, <span style="background-color:gold;">gold/or</span>, <span style="background-color:ivory;">ivory/ivoire</span>, <span style="background-color:orange;">orange/orange</span>, <span style="background-color:lavender;">lavender/lavande</span>, <span style="background-color:pink;">pink/rose</span>, <span style="background-color:plum;">plum/prune</span>, <span style="background-color:salmon;">salmon/saumon</span>, <span style="background-color:snow;">snow/neige</span>, <span style="background-color:turquoise;">turquoise/turquoise</span>, <span style="background-color:wheat;">wheat/jaune&nbsp;paille</span>, <span style="background-color:yellow;">yellow/jaune</span></span><span style="font-size:50%;"><br />&nbsp;</span>');
-@define('_CS_EXEMPLE_COULEURS2', "\n-* <code>Lorem ipsum [rouge]dolor[/rouge] sit amet</code>\n-* <code>Lorem ipsum [red]dolor[/red] sit amet</code>.");
-@define('_CS_EXEMPLE_COULEURS3', "\n-* <code>Lorem ipsum [fond rouge]dolor[/fond rouge] sit amet</code>\n-* <code>Lorem ipsum [bg red]dolor[/bg red] sit amet</code>.");
-@define('_CS_ASTER', '<sup>(*)</sup>');
-@define('_CS_DIR_TMP', cs_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP));
-@define('_CS_FORUM_NOM', _T('forum_votre_nom'));
-@define('_CS_TRAVAUX_TITRE', '<i>'._T('info_travaux_titre').'</i>');
-@define('_CS_NOM_SITE', '<i>'.$GLOBALS['meta']['nom_site'].'</i>');
-@define('_CS_CHOIX', _T('couteauprive:votre_choix'));
-@define('_CS_FILE_OPTIONS', str_replace('../','',(defined('_FILE_OPTION') && strlen(_FILE_OPTION))?_FILE_OPTION:
-	(defined('_SPIP19100')?_DIR_RESTREINT.'mes_options.php':_DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php')
-));
-
-@define('_CS_PLUGIN_JQUERY192', defined('_SPIP19300')?'':_T('couteauprive:detail_jquery3'));
-include_spip('inc/autoriser');
-if(defined('_SPIP19200')) {
-	// Qui sont les webmestres et les administrateurs ?
-	include_spip('inc/texte');
-	function def_liste_adminsitrateurs() {
-		$webmestres = array();
-		$s = spip_query("SELECT * FROM spip_auteurs WHERE statut='0minirezo'");
-		$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array'; // compatibilite SPIP 1.92
-		while ($qui = $fetch($s)) {
-			$nom = typo($qui['nom']." (id_auteur=$qui[id_auteur])");
-			if (autoriser('webmestre','','',$qui)) $webmestres[$qui['id_auteur']] = $nom;
-			else if (autoriser('configurer','plugins','',$qui)) $admins[$qui['id_auteur']] = $nom;
-		}
-		@define('_CS_LISTE_WEBMESTRES', join(', ', $webmestres));
-		@define('_CS_LISTE_ADMINS', join(', ', $admins));
-	}
-	def_liste_adminsitrateurs();
-}
-
-// fin des constantes
+include_spip('cout_define');
+cout_define('description_outils');
 
 include_spip('inc/actions');
 include_spip('inc/texte');
@@ -138,6 +102,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$outil = &$outils[$outil_];
 	$actif = $outil['actif'];
 	$index = $outil['index'];
+	cout_define($outil_);
 	// la description de base est a priori dans le fichier de langue
 	$descrip = isset($outil['description'])?$outil['description']:_T('couteauprive:'.$outil['id'].':description');
 	// reconstitution d'une description eventuellement morcelee

@@ -11,7 +11,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-@define('_URL_CONTRIB', 'http://www.spip-contrib.net/?article');
+include_spip('cout_define');
+cout_define('distant');
 
 // TODO : revoir tout ca avec la syntaxe de <necessite>
 function cs_version_erreur($outil) {

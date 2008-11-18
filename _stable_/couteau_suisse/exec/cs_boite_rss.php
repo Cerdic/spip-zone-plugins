@@ -7,11 +7,6 @@
 #-----------------------------------------------------#
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// on met a jour le flux rss toutes les 2 heures
-// contrib ici qui devra passer en fond et utiliser le cache de SPIP !
-define('_CS_RSS_UPDATE', 2*3600);
-define('_CS_RSS_COUNT', 15);
-
 // compatibilite spip 1.9
 if(!function_exists(ajax_retour)) { 
 	function ajax_retour($corps) {
@@ -37,6 +32,8 @@ function exec_cs_boite_rss_dist() {
 		echo defined('_SPIP19100')?minipres( _T('avis_non_acces_page')):minipres();
 		exit;
 	}
+	include_spip('cout_define');
+	cout_define('distant');
 	$p = '';
 	// on cherche le flux rss toutes les _CS_RSS_UPDATE minutes
 	$force = _request('force')=='oui';

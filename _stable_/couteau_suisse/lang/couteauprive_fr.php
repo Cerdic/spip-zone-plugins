@@ -536,7 +536,7 @@ Les propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL 
 
 Plus d\'infos : [->http://www.spip.net/fr_article765.html]. L\'outil &laquo;&nbsp;[.->boites_privees]&nbsp;&raquo; vous permet de voir sur la page de chaque objet SPIP l\'URL propre associ&eacute;e.
 [[%radio_type_urls3%]]
-<q3>@_CS_ASTER@pour utiliser les formats {html}, {propre}, {propre2}, {libres} ou {arborescentes}, recopiez le fichier &quot;htaccess.txt&quot; du r&eacute;pertoire de base du site SPIP sous le sous le nom &quot;.htaccess&quot; (attention &agrave; ne pas &eacute;craser d\'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en &quot;sous-r&eacute;pertoire&quot;, vous devrez aussi &eacute;diter la ligne &quot;RewriteBase&quot; ce fichier. Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de SPIP.</q3>
+<q3>@_CS_ASTER@pour utiliser les formats {html}, {propres}, {propres2}, {libres} ou {arborescentes}, recopiez le fichier &quot;htaccess.txt&quot; du r&eacute;pertoire de base du site SPIP sous le sous le nom &quot;.htaccess&quot; (attention &agrave; ne pas &eacute;craser d\'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en &quot;sous-r&eacute;pertoire&quot;, vous devrez aussi &eacute;diter la ligne &quot;RewriteBase&quot; ce fichier. Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de SPIP.</q3>
 
 <radio_type_urls3 valeur="page">@puce@ {{URLs &laquo;page&raquo;}} : ce sont les liens par d&eacute;faut, utilis&eacute;s par SPIP depuis sa version 1.9x.
 _ Exemple : <code>/spip.php?article123</code>[[%terminaison_urls_page%]][[%separateur_urls_page%]]</radio_type_urls3>
@@ -634,13 +634,13 @@ En tant que webmestre vous-m&ecirc;me, vous avez ici les droits de modifier cett
 	'xml:nom' => 'Validateur XML',
 	'urls_type_objet' => 'Objet&nbsp;:',
 	'urls_num_objet' => 'Num&eacute;ro&nbsp;:',
-	'urls_url_objet' => 'URL &laquo;&nbsp;propre&nbsp;&raquo; enregistr&eacute;e&nbsp;:',
+	'urls_url_objet' => 'URL &laquo;&nbsp;propres&nbsp;&raquo; enregistr&eacute;e&nbsp;:',
 	'urls_url_calculee' => 'URL publique &laquo;&nbsp;@type@&nbsp;&raquo;&nbsp;:',
 	'urls_edit_erreur' => 'Le format actuel des URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) ne permet pas d\'&eacute;dition.',
 	'urls_choix_objet' => 'Edition en base de l\'URL d\'un objet sp&eacute;cifique&nbsp;:',
 	'urls_titre_objet' => 'Titre enregistr&eacute; &nbsp;:',
 	'urls_enregistrer' => 'Enregistrer cette URL en base',
-	'urls_nouvelle' => '&Eacute;diter l\'URL &laquo;&nbsp;propre&nbsp;&raquo;&nbsp;:',
+	'urls_nouvelle' => '&Eacute;diter l\'URL &laquo;&nbsp;propres&nbsp;&raquo;&nbsp;:',
 	'urls_rechercher' => 'Rechercher cet objet en base',
 	'urls_purger_tout' => 'R&eacute;initialiser les URLs stock&eacute;es dans la base&nbsp;:',
 	'urls_purger' => 'Tout vider',

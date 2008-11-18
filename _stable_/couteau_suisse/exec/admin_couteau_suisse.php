@@ -6,8 +6,6 @@
 #  Infos : http://www.spip-contrib.net/?article2166   #
 #-----------------------------------------------------#
 
-@define('_URL_CONTRIB', 'http://www.spip-contrib.net/?article');
-
 include_spip('inc/texte');
 include_spip('inc/layer');
 include_spip("inc/presentation");

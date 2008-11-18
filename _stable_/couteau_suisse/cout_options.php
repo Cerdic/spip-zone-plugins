@@ -19,10 +19,6 @@ $metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['
 if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) @define('_SPIP19300', 1);
 if (version_compare($GLOBALS['spip_version_code'],'1.9200','>=')) @define('_SPIP19200', 1);
 else @define('_SPIP19100', 1);
-// RSS de trac
-@define('_CS_RSS_SOURCE', 'http://zone.spip.org/trac/spip-zone/log/_plugins_/_stable_/couteau_suisse?format=rss&mode=stop_on_copy&limit=20');
-// Doc de spip-contrib.net
-define('_URL_CONTRIB', 'http://www.spip-contrib.net/?article');
 // chemin du fichier de fonctions
 define('_COUT_FONCTIONS_PHP', find_in_path('cout_fonctions.php'));
 // globales de controles de passes
