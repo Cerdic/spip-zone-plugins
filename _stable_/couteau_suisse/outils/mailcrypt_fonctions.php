@@ -8,7 +8,8 @@ function mailcrypt($texte) {
 		$ok = true;
 		// pour _cs_liens_AUTORISE
 		include_spip('outils/inc_cs_liens');
-		// tip visible onMouseOver
+		// tip visible onMouseOver (title)
+		// jQuery replacera ensuite le '@' comme ceci : title.replace(/\.\..t\.\./,'[\x40]')
 		@define('_mailcrypt_AROBASE_JS', '..&aring;t..');
 		@define('_mailcrypt_AROBASE_JSQ', preg_quote(_mailcrypt_AROBASE_JS,','));
 		// span ayant l'arobase en background
