@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  #BLOC_DEBUT
  Mon bloc de\'pliable (qui contiendra l\'URL pointe\'e si ne\'ce\'ssaire)
  #BLOC_FIN</code></quote>
- 
+
 @puce@ En cochant &laquo;oui&raquo; ci-dessous, l\'ouverture d\'un bloc provoquera la fermeture de tous les autres blocs de la page, afin d\'en avoir qu\'un seul ouvert &agrave; la fois.[[%bloc_unique%]]
 ',
 	'blocs:nom' => 'Blocs D&eacute;pliables',
