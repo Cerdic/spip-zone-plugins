@@ -2,6 +2,7 @@
 
     //sudo pear install File_Bittorrent2
 
+    include_spip('inc/torrent_hex2bin');
     /*
      * Genere, sauvegarde et affecte un torrent
      * 
