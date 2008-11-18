@@ -12,7 +12,10 @@
 		[(#ENV{kshow_id}|kaltura_html_widget{#ENV{user_id}})]
 		]
 	  <p class='boutons'>
-	  <input type='submit' class='submit' value='<:kaltura:bouton_reset_video:>' name='resetks' />[(#ENV{kshow_id}|oui)
+	  [(#ENV{kshow_id}|non)
+	  <input type='submit' class='submit' value='<:kaltura:bouton_nouvelle_video:>' name='resetks' />
+	  ][(#ENV{kshow_id}|oui)
+	  <input type='submit' class='submit' value='<:kaltura:bouton_reset_video:>' name='resetks' />
 	  <input type='submit' class='submit' value='<:kaltura:bouton_ajouter_video:>' name='ajouter' />]
 	  </p>
 	</div></form>
