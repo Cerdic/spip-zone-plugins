@@ -6,9 +6,9 @@
     /*
      * Genere, sauvegarde et affecte un torrent
      * 
-     * @param $id_document 
+     * @param integer $id_document 
      *      Identifiant du document source
-     * @return
+     * @return 
      *      Résultat de l'écriture du torrent
      *
      */
@@ -35,7 +35,7 @@
      * Calcul le contenu du torrent
      *
      * Genere le binaire d'un torrent à partir de valeur par défaut ou bien selon un CFG si celui ci est configuré
-     * @param data
+     * @param array $data
      *      data['source_uri'] chemin absolu du document source
      *      data['descriptif'] contenu du commentaire
      * @return string
@@ -79,9 +79,9 @@
      *
      * Ecrit le torrent dans IMG/torrent avec pour nom de fichier "id_document.alea.torrent"
      *
-     * @param $id_document 
+     * @param integer $id_document 
      *      Document à l'origine du torrent
-     * @param $metainfo
+     * @param blob $metainfo
      *      Contenu du torrent à écrire
      * @return boulean
      *      Si création alors true sinon false
