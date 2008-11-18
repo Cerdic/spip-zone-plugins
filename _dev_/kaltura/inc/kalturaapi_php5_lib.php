@@ -209,13 +209,38 @@ if ( $log_kaltura_services ) kalturaLog ( "\n\n[$SERVICE_URL]" );
 		return $generic_result;
 	}	
 	
+	public function deletekshow ( $kaltura_user , $params = null)
+	{
+		if ( $params == null )			$params = array();
+		
+		$generic_result = $this->hit ( "addkshow" , $kaltura_user, $params );
+		return $generic_result;
+	}
+	
 	public function addentry ( $kaltura_user , $params = null)
 	{
 		if ( $params == null )			$params = array();
 		
 		$generic_result = $this->hit ( "addentry" , $kaltura_user, $params );
 		return $generic_result;
-	}		
+	}
+	
+	public function listkshows ( $kaltura_user , $params = null)
+	{
+		if ( $params == null )			$params = array();
+		
+		$generic_result = $this->hit ( "listkshows" , $kaltura_user, $params );
+		return $generic_result;
+	}
+
+	public function listentries ( $kaltura_user , $params = null)
+	{
+		if ( $params == null )			$params = array();
+		
+		$generic_result = $this->hit ( "listentries" , $kaltura_user, $params );
+		return $generic_result;
+	}
+	
 }
 
 class kalturaUser

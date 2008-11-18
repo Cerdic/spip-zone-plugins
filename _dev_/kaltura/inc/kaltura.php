@@ -71,7 +71,77 @@ function kaltura_instancie($options){
 	}
 	return array($kshow["id"],$id_auteur);	
 }
+function kaltura_delete($options){
+	$id_auteur = kaltura_option('id_auteur',$options,$GLOBALS['visiteur_session']['id_auteur']);
+	$nom = kaltura_option('nom',$options,($id_auteur==$GLOBALS['visiteur_session']['id_auteur'])?$GLOBALS['visiteur_session']['nom']:"#$id_auteur");
+	$kshow_id = kaltura_option('kshow_id',$options);
+	if ($kshow_id){
+		include_spip('inc/kalturaapi_php5_lib');
+	
+		$kaltura_user = new kalturaUser();
+		$kaltura_user->puser_id=$id_auteur;
+		$kaltura_user->puser_name=$nom;
+		
+		$kaltura_service = kalturaService::getInstance( $kaltura_user );
+		$params = array
+			(
+				"kshow_id" => $kshow_id
+			);
+		
+		$res = $kaltura_service->deletekshow ( $kaltura_user , $params );
+		$kshow = @$res["result"]["deleted_kshow "];
+		if ( !$kshow ){
+			return false;
+		}
+		return array($kshow["id"],$id_auteur);	
+	}
+}
 
+
+function kaltura_vignette($options){
+	$id_auteur = kaltura_option('id_auteur',$options,$GLOBALS['visiteur_session']['id_auteur']);
+	$nom = kaltura_option('nom',$options,($id_auteur==$GLOBALS['visiteur_session']['id_auteur'])?$GLOBALS['visiteur_session']['nom']:"#$id_auteur");
+	$kshow_id = kaltura_option('kshow_id',$options);
+	//NIY
+	if (false AND $kshow_id){
+		include_spip('inc/kalturaapi_php5_lib');
+	
+		$kaltura_user = new kalturaUser();
+		$kaltura_user->puser_id=$id_auteur;
+		$kaltura_user->puser_name=$nom;
+		
+		$kaltura_service = kalturaService::getInstance( $kaltura_user );
+		$params = array
+			(
+			'detailed' =>0,
+			//"filter__eq_kshow_id" => $kshow_id,
+			);
+		$res = $kaltura_service->listentries ( $kaltura_user , $params );
+		#var_dump($res);
+		/*$kshow = @$res["result"]["entries "];
+		if ( !$kshow ){
+			return false;
+		}
+		return array($kshow["id"],$id_auteur);	*/
+	}
+
+	// http://cdn.kaltura.com/p/{partner_id}/sp/{subp_id}/servicename/{params}.
+/*
+Return a resized thumbnail / image of an entry.
+The parameters are passed the following form /param1_name/param1_value/param2_name/param2_value.
+[edit] Parameters
+Name 	Type 	Mandatory 	Description
+entry_id 	string 	no 	the entry id.
+widget_id 	string 	no 	the widget id.
+version 	integer 	no 	the thumbnail version.
+width 	integer 	no 	requested width in pixels.
+height 	integer 	no 	requested height in pixels.
+type 	integer 	no 	type of crop to be used. see remarks section below
+bgcolor 	string 	no 	6 hex digits web color code
+crop_provider 	string 	no 	internal.
+quality 	string 	no 	jpeg quality for output (0-100). The default value is 75. 
+*/
+}
 define('_KALTURA_VIDEO_PLAYER',1);
 define('_KALTURA_VIDEO_WIKI_COMPACT',2);
 define('_KALTURA_VIDEO_WIKI',3);
@@ -123,6 +193,19 @@ function kaltura_url_video( $kshow_id , $user_id , $options = array() ){
 	return $domain . $swf_url;
 }
 
+/**
+ * Recuperer le kshow_id depuis l'url
+ *
+ * @param unknown_type $url
+ * @return unknown
+ */
+function kaltura_kshow_id_from_url( $url ){
+	$kshow_id = 0;
+	if (preg_match(",widget/([^/]*)/,i",$url,$regs)){
+		$kshow_id = $regs[1];
+	}
+	return $kshow_id;
+}
 
 /**
  * Creer le player kaltura en html
