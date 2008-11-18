@@ -1,0 +1,41 @@
+#CACHE{0}
+
+[(#REM) Le hash doit traité en hexa
+    Si longueur de 20, conversion binaire vers hexadécimal requise
+    Si longueur de 40, on garde tel quel
+    
+    Si celui ci est nul alors on retournera l'intégralité des torrents disponible
+    
+    Pour gérer les différent cas on prefere passer par une REGEXP dans le critére de boucle
+]
+
+[(#ENV{info_hash}|strlen|=={20}|?{
+    #SET{info_hash, ^#ENV{info_hash}|bin2hex}$,
+    #SET{info_hash, ^#ENV{info_hash}}$
+})]
+
+[(#REM)
+    Si pas de hash fournit
+]
+[(#ENV{info_hash}|?{'',' '})
+    #SET{info_hash,.*)}
+]
+
+
+<B_scrape>
+#HTTP_HEADER{Content-type: text/plain}
+#HTTP_HEADER{header("Pragma: no-cache")}
+
+
+<BOUCLE_scrape{torrents} {info_hash==#GET{info_hash}} {par info_hash}>
+d5:filesd
+20:[(#INFO_HASH|hex2bin)]d;
+8:completei[(#SEEDS)]e
+10:downloadedi[(#FINISHED)]e
+10:incompletei[(LEECHERS)]e
+[4:name[(#FILENAME|strlen)]:(#FILENAME)]e
+ee
+</BOUCLE_scrape> 
+[(#REM) Si on ne trouve rien alors on répond que la demande est erronée]
+#HTTP_HEADER{HTTP/1.0 400 Bad Request}
+<//B_scrape>
