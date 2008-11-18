@@ -5,8 +5,8 @@
 
 
 TO-DO:
-. sous SPIP 2, spiplistes_courrier_edit, générer courrier, le sélecteur de langue est vide.
-. sous SPIP 1.9.2|2, spiplistes_courrier_edit, générer courrier ne fonctionne pas. 
+. sous SPIP 2, spiplistes_courrier_edit, generer courrier, le sélecteur de langue est vide.
+. sous SPIP 1.9.2|2, spiplistes_courrier_edit, generer courrier ne fonctionne pas. Revoir egalement la selection de la date d'envoi
 . ?exec=spiplistes_listes_toutes preciser les listes sans patron
 . ?exec=spiplistes_courrier_gerer, previsu texte seul n'apparait pas sous IE6
 . ?exec=spiplistes_liste_gerer, plier/déplier programmer envoi auto semble ne pas fonctionner sous IE6
