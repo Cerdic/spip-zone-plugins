@@ -7,6 +7,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// 2
+	'2pts' => '@objet@&nbsp;:',
+
 	// A
 	'attente_confirmation' => 'En espera de confirmaci&oacute;n',
 
@@ -22,6 +25,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nom_forum' => 'Grazas por especificar o seu nome !',
 	'non_confirmes' => 'Non confirmados :',
+
+	// O
+	'objet_article' => 'Artigo',
+	'objet_articles' => 'Artigos',
+	'objet_auteur' => 'Autor',
+	'objet_auteurs' => 'Autores',
+	'objet_breve' => 'Breve',
+	'objet_breves' => 'Breves',
+	'objet_mot' => 'Palabra',
+	'objet_mots' => 'Palabras',
+	'objet_rubrique' => 'Secci&oacute;n',
+	'objet_rubriques' => 'Secci&oacute;ns',
+	'objet_syndic' => 'Web',
+	'objet_syndics' => 'Webs',
 
 	// P
 	'page_debut' => 'Primeira p&aacute;xina',
@@ -53,6 +70,13 @@ Compatibilidade : SPIP todas as versi&oacute;ns 1.9x',
 	'texte_formatspip' => 'TEXTO ORIXINAL EN FORMATO SPIP',
 	'textes_formatspip' => 'TEXTOS ORIXINAIS EN FORMATO SPIP',
 	'titre' => 'A navalla su&iacute;za',
+
+	// U
+	'urls_propres_erreur' => 'Este formato non toma en conta os URL propios listados a seguir.',
+	'urls_propres_format' => 'O formato actual dos URL &eacute; : {{&laquo;&nbsp;@format@&nbsp;&raquo;}}. [<span>[Configuraci&oacute;n->@url@]</span>]',
+	'urls_propres_lien' => 'Ligaz&oacute;n p&uacute;blica de acceso',
+	'urls_propres_objet' => 'Son listado aqu&iacute; os URL propios gardados merc&eacute; aos cales os visitantes poder&aacute;n navegar no seu web.',
+	'urls_propres_titre' => 'URL PROPIOS',
 
 	// V
 	'variable_vide' => '(Baleiro)',

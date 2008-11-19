@@ -7,6 +7,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// 2
+	'2pts' => '@objet@&nbsp;:',
+
 	// A
 	'attente_confirmation' => 'Esperant confirmaci&oacute;',
 
@@ -22,6 +25,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nom_forum' => 'Gr&agrave;cies per especificar el vostre nom!',
 	'non_confirmes' => 'No confirmats:',
+
+	// O
+	'objet_article' => 'Article',
+	'objet_articles' => 'Articles',
+	'objet_auteur' => 'Autor',
+	'objet_auteurs' => 'Autors',
+	'objet_breve' => 'Breu',
+	'objet_breves' => 'Breus',
+	'objet_mot' => 'Paraula',
+	'objet_mots' => 'Paraules',
+	'objet_rubrique' => 'Secci&oacute;',
+	'objet_rubriques' => 'Seccions',
+	'objet_syndic' => 'Lloc',
+	'objet_syndics' => 'Llocs',
 
 	// P
 	'page_debut' => 'Primera p&agrave;gina',
@@ -53,6 +70,13 @@ Compatibilitat: SPIP totes les versions 1.9x',
 	'texte_formatspip' => 'TEXT ORIGINAL EN FORMAT SPIP',
 	'textes_formatspip' => 'TEXTOS ORIGINALS EN FORMAT SPIP',
 	'titre' => 'El Ganivet Su&iacute;s',
+
+	// U
+	'urls_propres_erreur' => 'Aquest format no t&eacute; en compte els URLs propis llistats m&eacute;s avall. ',
+	'urls_propres_format' => 'L\'actual format dels URLs &eacute;s: {{&laquo;&nbsp;@format@&nbsp;&raquo;}}. [<span>[Configuraci&oacute;->@url@]</span>]',
+	'urls_propres_lien' => 'Enlla&ccedil; p&uacute;blic d\'acc&eacute;s',
+	'urls_propres_objet' => 'Aqu&iacute; es llisten els URLs propis emmagatzemats a la base gr&agrave;cies a les que els visitants podran navegar pel vostre lloc. ',
+	'urls_propres_titre' => 'URLS PR&Ograve;PIES',
 
 	// V
 	'variable_vide' => '(Buit)',

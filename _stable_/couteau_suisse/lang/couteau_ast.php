@@ -7,6 +7,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// 2
+	'2pts' => '@objet@:',
+
 	// A
 	'attente_confirmation' => 'N\'espera de confirmaci&oacute;n',
 
@@ -22,6 +25,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nom_forum' => '&iexcl;Ties que poner el to nome!',
 	'non_confirmes' => 'Nun confirm&aacute;os:',
+
+	// O
+	'objet_article' => 'Art&iacute;culu',
+	'objet_articles' => 'Art&iacute;culos',
+	'objet_auteur' => 'Autor',
+	'objet_auteurs' => 'Autores',
+	'objet_breve' => 'Breve',
+	'objet_breves' => 'Breves',
+	'objet_mot' => 'Pallabra',
+	'objet_mots' => 'Pallabres',
+	'objet_rubrique' => 'Estaya',
+	'objet_rubriques' => 'Estayes',
+	'objet_syndic' => 'Sitiu',
+	'objet_syndics' => 'Sitios',
 
 	// P
 	'page_debut' => 'Primera p&aacute;xina',
@@ -53,6 +70,13 @@ Compatibilid&aacute;: SPIP toes les versiones 1.9x',
 	'texte_formatspip' => 'TESTU ORIXINAL EN FORMATU SPIP',
 	'textes_formatspip' => 'TESTOS ORIXINALES EN FORMATU SPIP',
 	'titre' => 'La Navaya Suiza',
+
+	// U
+	'urls_propres_erreur' => 'Esti formatu nun tien en cuenta les URLs propies llist&aacute;es embaxo.',
+	'urls_propres_format' => 'El formatu actual de les URLs ye: {{&laquo;&nbsp;@format@&nbsp;&raquo;}}. [<span>[Axuste->@url@]</span>]',
+	'urls_propres_lien' => 'Enllaz p&uacute;blicu d\'accesu',
+	'urls_propres_objet' => 'Equ&iacute; ll&iacute;stense les URLs propies guard&aacute;es na base gracies a le cuales les visites van poder &ntilde;avegar pol to sitiu.',
+	'urls_propres_titre' => 'URLS PROPIES',
 
 	// V
 	'variable_vide' => '(Vac&iacute;u)',

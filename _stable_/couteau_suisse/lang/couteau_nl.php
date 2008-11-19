@@ -7,6 +7,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// 2
+	'2pts' => '@objet@&nbsp;:',
+
 	// A
 	'attente_confirmation' => 'In wachten van bevestiging',
 
@@ -22,6 +25,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nom_forum' => 'Bedankt om uw naam te specificeren !',
 	'non_confirmes' => 'Niet bevestigd :',
+
+	// O
+	'objet_article' => 'Artikel',
+	'objet_articles' => 'Artikelen',
+	'objet_auteur' => 'Auteur',
+	'objet_auteurs' => 'Auteurs',
+	'objet_breve' => 'Kort',
+	'objet_breves' => 'Kort',
+	'objet_mot' => 'Woord',
+	'objet_mots' => 'Woorden',
+	'objet_rubrique' => 'Rubriek',
+	'objet_rubriques' => 'Rubrieken',
+	'objet_syndic' => 'Site',
+	'objet_syndics' => 'Siten',
 
 	// P
 	'page_debut' => 'Eerste bladzijde',
@@ -53,6 +70,13 @@ De verenigbaarheid: SPIP iedereen betaalden 1.9x',
 	'texte_formatspip' => 'ORIGINELE TEKST AAN HET SPIP FORMAAT',
 	'textes_formatspip' => 'ORIGINELE TEKSTEN AAN HET SPIP FORMAAT',
 	'titre' => 'Het Zwitserland Mes',
+
+	// U
+	'urls_propres_erreur' => 'Dit formaat neemt geen rekening van URL eigen hieronder op een lijst gezet.',
+	'urls_propres_format' => 'Het huidige formaat van URLs is: {{&laquo;&nbsp;@format@&nbsp;&raquo;}}. [<span>[Configuratie->@url@]</span>]',
+	'urls_propres_lien' => 'Openbare toegang link',
+	'urls_propres_objet' => 'Hier URLs eigen opgeslagen baseert erover op een lijst worden gezet waardoor de bezoekers zullen kunnen varen op uw siten.',
+	'urls_propres_titre' => 'URLS EIGEN',
 
 	// V
 	'variable_vide' => '(Leegte)',

@@ -7,6 +7,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// 2
+	'2pts' => '@objet@&nbsp;:',
+
 	// A
 	'attente_confirmation' => 'En espera de confirmaci&oacute;n',
 
@@ -22,6 +25,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nom_forum' => '&iexcl;Por favor, especifica tu nombre!',
 	'non_confirmes' => 'No confirmados:',
+
+	// O
+	'objet_article' => 'Art&iacute;culo',
+	'objet_articles' => 'Art&iacute;culos',
+	'objet_auteur' => 'Autor',
+	'objet_auteurs' => 'Autores',
+	'objet_breve' => 'Breve',
+	'objet_breves' => 'Breves',
+	'objet_mot' => 'Palabra',
+	'objet_mots' => 'Palabras',
+	'objet_rubrique' => 'Secci&oacute;n',
+	'objet_rubriques' => 'Secciones',
+	'objet_syndic' => 'Sitio',
+	'objet_syndics' => 'Sitios',
 
 	// P
 	'page_debut' => 'Primera p&aacute;gina',
@@ -53,6 +70,13 @@ Compatibilidad: todas las versiones 1.9x de SPIP',
 	'texte_formatspip' => 'TEXTO ORIGINAL EN FORMATO SPIP',
 	'textes_formatspip' => 'TEXTOS ORIGINALES EN FORMATO SPIP',
 	'titre' => 'La Navaja Suiza',
+
+	// U
+	'urls_propres_erreur' => 'Este formato no tiene en cuenta las URLs propias listadas debajo.',
+	'urls_propres_format' => 'El formato actual de las URLs es: {{&laquo;&nbsp;@format@&nbsp;&raquo;}}. [<span>[Configuraci&oacute;n->@url@]</span>]',
+	'urls_propres_lien' => 'Enlace p&uacute;blico de acceso',
+	'urls_propres_objet' => 'Aqu&iacute; se listan las URLs propias guardadas en la base de datos gracias a las cuales los visitantes podr&aacute;n navegar por tu sitio web.',
+	'urls_propres_titre' => 'URLS PROPIAS',
 
 	// V
 	'variable_vide' => '(Vac&iacute;o)',

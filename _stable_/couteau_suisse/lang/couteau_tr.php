@@ -7,6 +7,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// 2
+	'2pts' => '@objet@&nbsp;:',
+
 	// A
 	'attente_confirmation' => 'Onay bekliyor',
 
@@ -22,6 +25,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nom_forum' => 'L&uuml;tfen isminizi belirtiniz !',
 	'non_confirmes' => 'Onaylanmam&#305;&#351; :',
+
+	// O
+	'objet_article' => 'Makale',
+	'objet_articles' => 'Makaleler',
+	'objet_auteur' => 'Yazar',
+	'objet_auteurs' => 'Yazarlar',
+	'objet_breve' => 'K&#305;sa haber',
+	'objet_breves' => 'K&#305;sa haberler',
+	'objet_mot' => 'S&ouml;zc&uuml;k',
+	'objet_mots' => 'S&ouml;zc&uuml;kler',
+	'objet_rubrique' => 'Ba&#351;l&#305;k',
+	'objet_rubriques' => 'Ba&#351;l&#305;klar',
+	'objet_syndic' => 'Site',
+	'objet_syndics' => 'Siteler',
 
 	// P
 	'page_debut' => '&#304;lk sayfa',
@@ -53,6 +70,13 @@ Compatibilit&eacute; : SPIP toutes versions 1.9x',
 	'texte_formatspip' => 'SPIP FORMATINDA OR&#304;J&#304;NAL MET&#304;N',
 	'textes_formatspip' => 'SPIP FORMATINDA OR&#304;J&#304;NAL MET&#304;NLER',
 	'titre' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;',
+
+	// U
+	'urls_propres_erreur' => 'Bu format a&#351;a&#287;&#305;da belirtilen &ouml;zel URL\'leri dikkate almaz.',
+	'urls_propres_format' => 'URL\'lerin &#351;u anki format&#305; : {{&laquo;&nbsp;@format@&nbsp;&raquo;}}. [<span>[Configuration->@url@]</span>]',
+	'urls_propres_lien' => 'Kamusal eri&#351;im ba&#287;&#305;',
+	'urls_propres_objet' => 'Burada veritaban&#305;nda depolanm&#305;&#351; &ouml;zel URL\'ler listelenmi&#351;tir b&ouml;ylece ziyaret&ccedil;iler sitenizde gezinebilir.',
+	'urls_propres_titre' => '&Ouml;ZEL URL\'LER',
 
 	// V
 	'variable_vide' => '(Bo&#351;)',

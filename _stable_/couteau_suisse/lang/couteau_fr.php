@@ -5,6 +5,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// 2
+	'2pts' => '@objet@&nbsp;:',
+
 	// A
 	'attente_confirmation' => 'En attente de confirmation',
 
@@ -20,6 +23,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nom_forum' => 'Merci de sp&eacute;cifier votre nom !',
 	'non_confirmes' => 'Non confirm&eacute;s :',
+
+	// O
+	'objet_article' => 'Article',
+	'objet_articles' => 'Articles',
+	'objet_auteur' => 'Auteur',
+	'objet_auteurs' => 'Auteurs',
+	'objet_breve' => 'Br&egrave;ve',
+	'objet_breves' => 'Br&egrave;ves',
+	'objet_mot' => 'Mot',
+	'objet_mots' => 'Mots',
+	'objet_rubrique' => 'Rubrique',
+	'objet_rubriques' => 'Rubriques',
+	'objet_syndic' => 'Site',
+	'objet_syndics' => 'Sites',
 
 	// P
 	'page_debut' => 'Premi&egrave;re page',
@@ -52,28 +69,16 @@ Compatibilit&#233; : SPIP toutes versions 1.9x',
 	'textes_formatspip' => 'TEXTES ORIGINAUX AU FORMAT SPIP',
 	'titre' => 'Le Couteau Suisse',
 
+	// U
+	'urls_propres_erreur' => 'Ce format ne prend pas compte les URLs propres list&eacute;es ci-dessous.',
+	'urls_propres_format' => 'Le format actuel des URLs est : {{&laquo;&nbsp;@format@&nbsp;&raquo;}}. [<span>[Configuration->@url@]</span>]',
+	'urls_propres_lien' => 'Lien public d\'acc&egrave;s',
+	'urls_propres_objet' => 'Sont list&eacute;es ici les URLs propres stock&eacute;es en base gr&acirc;ce auxquelles les visiteurs pourront naviguer sur votre site.',
+	'urls_propres_titre' => 'URLS PROPRES',
+
 	// V
 	'variable_vide' => '(Vide)',
-	'visiteurs_connectes' => 'Visiteurs connect&eacute;s : @nb@',
-	'urls_propres_titre' => 'URLS PROPRES',
-	'urls_propres_objet' => 'Sont list&eacute;es ici les URLs propres stock&eacute;es en base gr&acirc;ce auxquelles les visiteurs pourront naviguer sur votre site.',
-	'objet_article'=>'Article',
-	'objet_rubrique'=>'Rubrique',
-	'objet_breve'=>'Br&egrave;ve',
-	'objet_auteur'=>'Auteur',
-	'objet_mot'=>'Mot',
-	'objet_syndic'=>'Site',
-	'objet_articles'=>'Articles',
-	'objet_rubriques'=>'Rubriques',
-	'objet_breves'=>'Br&egrave;ves',
-	'objet_auteurs'=>'Auteurs',
-	'objet_mots'=>'Mots',
-	'objet_syndics'=>'Sites',
-	'urls_propres_format' => 'Le format actuel des URLs est : {{&laquo;&nbsp;@format@&nbsp;&raquo;}}. [<span>[Configuration->@url@]</span>]',
-	'urls_propres_erreur' => 'Ce format ne prend pas compte les URLs propres list&eacute;es ci-dessous.',
-	'urls_propres_lien' => 'Lien public d\'acc&egrave;s',
-	'2pts' => '@objet@&nbsp;:',
-
+	'visiteurs_connectes' => 'Visiteurs connect&eacute;s : @nb@'
 );
 
 ?>
