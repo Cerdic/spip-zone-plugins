@@ -52,24 +52,8 @@ switch($contexte) {
 		@define('_CS_NOM_SITE', '<i>'.$GLOBALS['meta']['nom_site'].'</i>');
 		break;
 	case 'webmestres':
-		include_spip('inc/autoriser');
-		if(defined('_SPIP19200')) {
-			// Qui sont les webmestres et les administrateurs ?
-			include_spip('inc/texte');
-			function def_liste_adminsitrateurs() {
-				$webmestres = array();
-				$s = spip_query("SELECT * FROM spip_auteurs WHERE statut='0minirezo'");
-				$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array'; // compatibilite SPIP 1.92
-				while ($qui = $fetch($s)) {
-					$nom = typo($qui['nom']." (id_auteur=$qui[id_auteur])");
-					if (autoriser('webmestre','','',$qui)) $webmestres[$qui['id_auteur']] = $nom;
-					else if (autoriser('configurer','plugins','',$qui)) $admins[$qui['id_auteur']] = $nom;
-				}
-				@define('_CS_LISTE_WEBMESTRES', join(', ', $webmestres));
-				@define('_CS_LISTE_ADMINS', join(', ', $admins));
-			}
+		if(defined('_SPIP19200'))
 			def_liste_adminsitrateurs();
-		}
 		break;
 	case 'boites_privees':
 		// RSS de trac
@@ -77,5 +61,21 @@ switch($contexte) {
 		break;
 
 }} // function cout_define($contexte)
+
+// Qui sont les webmestres et les administrateurs ?
+function def_liste_adminsitrateurs() {
+	include_spip('inc/autoriser');
+	include_spip('inc/texte');
+	$webmestres = array();
+	$s = spip_query("SELECT * FROM spip_auteurs WHERE statut='0minirezo'");
+	$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array'; // compatibilite SPIP 1.92
+	while ($qui = $fetch($s)) {
+		$nom = typo($qui['nom']." (id_auteur=$qui[id_auteur])");
+		if (autoriser('webmestre','','',$qui)) $webmestres[$qui['id_auteur']] = $nom;
+		else if (autoriser('configurer','plugins','',$qui)) $admins[$qui['id_auteur']] = $nom;
+	}
+	@define('_CS_LISTE_WEBMESTRES', join(', ', $webmestres));
+	@define('_CS_LISTE_ADMINS', join(', ', $admins));
+}
 
 ?>
