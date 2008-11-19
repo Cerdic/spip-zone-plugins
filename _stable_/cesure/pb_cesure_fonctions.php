@@ -22,6 +22,8 @@
 		// should use spip_strpos if any in the future
 		// inspired from inc/charsets.php (SPIP)
 		function pb_strpos($haystack, $needle, $offset=NULL, $encoding=NULL) {
+		$encoding = $GLOBALS['meta']['charset'];
+
 			// Si ce n'est pas utf-8, utiliser strlen
 			if ($GLOBALS['meta']['charset'] != 'utf-8')
 				return strpos($haystack, $needle, $offset);
@@ -37,6 +39,7 @@
 		}
 		
 		function pb_strtolower($str, $encoding=NULL ) {
+			$encoding = $GLOBALS['meta']['charset'];
 			// Si ce n'est pas utf-8, utiliser strlen
 			if ($GLOBALS['meta']['charset'] != 'utf-8')
 				return strtolower($str);
