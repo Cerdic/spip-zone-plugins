@@ -15,6 +15,12 @@ function action_echoppe_sauver_infos_produit(){
 	$produit['ref_produit'] = _request('ref_produit');
 	$produit['prix_base_htva'] = _request('prix_base_htva');
 	
+	
+	$produit['prix_base_htva'] = str_replace(' ','',$produit['prix_base_htva']);
+	$produit['prix_base_htva'] = str_replace('.','',$produit['prix_base_htva']);
+	$produit['prix_base_htva'] = str_replace(',','.',$produit['prix_base_htva']);
+	
+	
 	sql_updateq("spip_echoppe_produits",$produit,"id_produit = '".$produit['id_produit']."'");
 	
 	$redirect = generer_url_ecrire('echoppe_produit', 'id_produit='.$produit['id_produit'].'&onglet=infos','&');

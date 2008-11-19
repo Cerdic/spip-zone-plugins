@@ -56,22 +56,20 @@
 			<div style="border-bottom: 1px solid rgb(68, 68, 68); padding: 3px 3px 3px 30px; background-color: white; color: black;" class="verdana2"><strong><:echoppe:les_produits_de_cette_categories:></strong></div>
 		</div>
 		<table width="100%">
-		<tbody>
-		
-			<BOUCLE_LesProduits(ECHOPPE_PRODUITS){id_categorie}{statut IN propose,prepa,publie}>
-				<tr class="tr_liste">
-				<td style="width: 11px;"><img src="[(#STATUT|=={prepa}|?{[(#CHEMIN{images/puce-blanche.gif})],''})][(#STATUT|=={propose}|?{[(#CHEMIN{images/puce-orange.gif})],''})][(#STATUT|=={publie}|?{[(#CHEMIN{images/puce-verte.gif})],''})][(#STATUT|=={poubelle}|?{[(#CHEMIN{images/puce-poubelle.gif})],''})]" alt="statut #STATUT"/></td>
-				<td class="arial2">
-					
-						<strong><a href="[(#EVAL{echoppe_produit}|generer_url_ecrire{id_produit=#ID_PRODUIT})]">[(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})]</a></strong>[<div class="verdana1">(#DESCRIPTIF|couper{150})</div>]
-					
-				</td>
-				<td width="80px" class="arial1">&nbsp;<?php $grand_total = 0;  ?><BOUCLE_LeTotal(ECHOPPE_STOCK_PRODUITS){id_produit}><?php $grand_total = $grand_total + #QUANTITE;  ?></BOUCLE_LeTotal><?php echo $grand_total;  ?> <:echoppe:en_stock:></td>
-				<td width="50px" class="arial1">[(#REF_PRODUIT|sinon{<em><:echoppe:pas_de_num_de_ref:></em>})]</td>
-				</tr>
-			</BOUCLE_LesProduits>
-		
-		</tbody>
+			<tbody>
+				<BOUCLE_LesProduits(ECHOPPE_PRODUITS){id_categorie}{statut IN propose,prepa,publie}>
+					<tr class="tr_liste">
+					<td style="width: 11px;"><img src="[(#STATUT|=={prepa}|?{[(#CHEMIN{images/puce-blanche.gif})],''})][(#STATUT|=={propose}|?{[(#CHEMIN{images/puce-orange.gif})],''})][(#STATUT|=={publie}|?{[(#CHEMIN{images/puce-verte.gif})],''})][(#STATUT|=={poubelle}|?{[(#CHEMIN{images/puce-poubelle.gif})],''})]" alt="statut #STATUT"/></td>
+					<td class="arial2">
+						
+							<strong><a href="[(#EVAL{echoppe_produit}|generer_url_ecrire{id_produit=#ID_PRODUIT})]">[(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})]</a></strong>[<div class="verdana1">(#DESCRIPTIF|couper{150})</div>]
+						
+					</td>
+					<td width="80px" class="arial1">&nbsp;#TOTAL_STOCK&nbsp;<:echoppe:en_stock:></td>
+					<td width="50px" class="arial1">[(#REF_PRODUIT|sinon{<em><:echoppe:pas_de_num_de_ref:></em>})]</td>
+					</tr>
+				</BOUCLE_LesProduits>
+			</tbody>
 		</table>
 		<div class="nettoyeur"> </div>
 	</div>

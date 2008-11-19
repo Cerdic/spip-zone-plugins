@@ -18,9 +18,9 @@ function exec_echoppe_edit_produit(){
 	$contexte['new'] = _request('new');
 	
 	$res_le_produit = sql_select("*", "spip_echoppe_produits", "id_produit=" . sql_quote($contexte['id_produit']) . " OR ref_produit = '".sql_quote($contexte['ref_produit'])."'");
-	if (sql_count($res_le_produit) == 0 && $contexte['new'] != "oui"){
+	/*if (sql_count($res_le_produit) == 0 && $contexte['new'] != "oui"){
 		die(inc_commencer_page_dist(_T('echoppe:les_produits'), "redacteurs", "echoppe")._T('echoppe:pas_de_produit_ici').fin_page());
-	}
+	}*/
 	$le_produit = sql_fetch($res_le_produit);
 	
 	(is_array($le_produit))?$contexte = array_merge($contexte, $le_produit):$contexte = $contexte;

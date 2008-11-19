@@ -35,4 +35,9 @@ function array2select($tab, $nom, $style){
 	$select .= '</select>';
 }
 
+function ref_produit_unique($ref_produit, $id_produit){
+	
+	return true;
+}
+
 ?>

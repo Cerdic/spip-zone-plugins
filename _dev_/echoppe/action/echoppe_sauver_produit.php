@@ -86,7 +86,6 @@ function action_echoppe_sauver_produit(){
 			break;
 		
 		default :
-			
 			$arg_inser_produit = array(
 			'id_categorie' => $id_categorie,
 			'ref_produit' => $ref_produit,
