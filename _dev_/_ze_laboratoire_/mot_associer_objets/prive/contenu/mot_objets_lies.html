@@ -42,3 +42,47 @@
         <div class='nettoyeur'></div>
     </div>
 </B_articles>
+
+<B_rubriques>
+    <div class="presenter_liste cadre cadre-liste">
+    <img src="../prive/images/rubrique-24.gif" alt="" class="cadre-icone"/>
+    <div class="titrem deplie depliant">
+        <a class="titremancre"> </a>
+        <b><:info_rubriques_lies_mot:></b>
+    </div>
+
+    <div>
+        <div class="bloc_depliable blocdeplie">
+            <div style=";" class="arial1 tranches" id="a1">                    
+                <a href='[(#SELF|parametre_url{tri,date})]'><:par_date:></a> |
+                <a href='[(#SELF|parametre_url{tri,titre})]'><:par_titre:></a> |
+                <a href='[(#SELF|parametre_url{senstri,asc})]'><img src='#CHEMIN{images/monter-16.png}' alt='croissant' /></a> |
+                <a href='[(#SELF|parametre_url{senstri,desc})]'><img src='#CHEMIN{images/descendre-16.png}' alt='decroissant' /></a> |
+                [(#PAGINATION)] 
+            </div>
+            
+            <ul class='items'>
+                <BOUCLE_rubriques(RUBRIQUES){id_mot}{pagination 5}{par #ENV{tri,date}}{inverse #ENV{senstri,desc}|=={asc}|?{0,1}}{statut IN #ENV{statuts,#ARRAY{publie}}}>
+                    <li class='item article'>
+                        <span class='action'>
+                            <a class='ajax' href="#URL_ACTION_AUTEUR{editer_mots,#ID_RUBRIQUE|concat{',',#ID_MOT,',rubriques,id_rubrique,rubrique'},#SELF|parametre_url{recherche,#ENV{recherche},'&'}}">
+                            <img src='#CHEMIN{images/croix-rouge.gif}' alt='X'></a>
+                        </span>
+                        <span class='statut'>[(#ID_RUBRIQUE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</span>
+                        <span class='titre'>
+                            [<span class='logo'>(#LOGO_RUBRIQUE||image_reduire{26,20})</span>]
+                            <a href='#URL_ECRIRE{rubriques,id_rubrique=#ID_RUBRIQUE}' title='<:info_numero_abbreviation:> #ID_RUBRIQUE'>#TITRE</a>
+                        </span>
+                        <span class='auteurs'>
+                            <BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href='#URL_ECRIRE{auteurs_infos,id_auteur=#ID_AUTEUR}'>#NOM</a></BOUCLE_auteurs>
+                        </span>
+                        <span class='date'>[(#DATE|affdate_jourcourt)]</span>
+                        <span class='numero'><:info_numero_abbreviation:> #ID_RUBRIQUE</span>
+                        <div class='nettoyeur'></div>
+                    </li>
+                </BOUCLE_rubriques>
+            </ul>
+        </div>
+        <div class='nettoyeur'></div>        
+    </div>
+</B_rubriques>
