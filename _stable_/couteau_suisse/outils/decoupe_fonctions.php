@@ -63,6 +63,9 @@ function decoupe_image($fich, $help, $self, $off, $val, &$images, $double=false)
 
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function decouper_en_pages_rempl($texte, $pagination_seule=false) {
+	// un seul id par page...
+	static $id_decoupe = " id='decoupe_balise'";
+	
 	// si pas de separateur, on sort
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $pagination_seule?'':$texte;
 
@@ -122,8 +125,11 @@ function decouper_en_pages_rempl($texte, $pagination_seule=false) {
 		'items'=>$milieu,
 		'self' =>$self,
 	));
-	if ($pagination_seule) 
-		return "<div id='decoupe_balise' class='pagination decoupe_balise'>\n$pagination\n</div>\n";
+	if ($pagination_seule) {
+		return "<div$id_decoupe class='pagination decoupe_balise'>\n$pagination\n</div>\n";
+		// un seul id par page
+		$id_decoupe='';
+	}
 	$pagination1 = "<div id='decoupe_haut' class='pagination decoupe_haut'>\n$pagination\n</div>\n";
 	$pagination2 = "<div id='decoupe_bas' class='pagination decoupe_bas'>\n$pagination\n</div>\n";
 	return $sommaire.$pagination1.$page.$pagination2;
