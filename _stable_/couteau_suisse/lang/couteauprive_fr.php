@@ -217,7 +217,7 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'forcer_langue:description' => 'Force le contexte de langue pour les jeux de squelettes multilingues disposant d\'un formulaire ou d\'un menu de langues sachant g&eacute;rer le cookie de langues.',
 	'forcer_langue:nom' => 'Forcer langue',
 	'format_spip' => 'Les articles au format SPIP',
-	'forum_lgrmaxi:description' => 'Par d&eacute;faut les messages de forum ne sont pas limit&eacute;s en taille. Si cet outil est activ&eacute;, un message d\'erreur s\'affichera lorsque quelqu\'un voudra poster un message  d\'une taille sup&eacute;rieure &agrave; la valeur sp&eacute;cifi&eacute;e, et le message sera refus&eacute;. Une valeur vide ou &eacute;gale &agrave; 0 signifie n&eacute;amoins qu\'aucune limite ne s\'applique.[[%forum_lgrmaxi%]]',
+	'forum_lgrmaxi:description' => 'Par d&eacute;faut les messages de forum ne sont pas limit&eacute;s en taille. Si cet outil est activ&eacute;, un message d\'erreur s\'affichera lorsque quelqu\'un voudra poster un message  d\'une taille sup&eacute;rieure &agrave; la valeur sp&eacute;cifi&eacute;e, et le message sera refus&eacute;. Une valeur vide ou &eacute;gale &agrave; 0 signifie n&eacute;anmoins qu\'aucune limite ne s\'applique.[[%forum_lgrmaxi%]]',
 	'forum_lgrmaxi:nom' => 'Taille des forums',
 
 	// G
@@ -257,7 +257,7 @@ Pour d&eacute;finir ce logo, rendez-vous sur la page &laquo;&nbsp;Configuration 
 <p>{{Attention}} : Avant d\'activer cette fonctionnalit&eacute;, v&eacute;rifiez bien qu\'aucune fonction {balise_INTRODUCTION()} n\'existe d&eacute;j&agrave; dans votre squelette ou vos plugins, la surcharge produirait alors une erreur de compilation.</p>
 @puce@ Vous pouvez pr&eacute;ciser (en pourcentage par rapport &agrave; la valeur utilis&eacute;e par d&eacute;faut) la longueur du texte renvoy&eacute; par balise #INTRODUCTION. Une valeur nulle ou &eacute;gale &agrave; 100 ne modifie pas l\'aspect de l\'introduction et utilise donc les valeurs par d&eacute;faut suivantes : 500 caract&egrave;res pour les articles, 300 pour les br&egrave;ves et 600 pour les forums ou les rubriques.
 [[%lgr_introduction%&nbsp;%]]
-@puce@ Par d&eacute;faut, les points de suite ajout&eacute;s au r&eacute;sultat de la balise #INTRODUCTION si le texte est trop long sont : <html>&laquo;&amp;nbsp;(&hellip;)&raquo;</html>. Vous pouvez ici pr&eacute;ciser votre propre cha&icirc;ne de carat&egrave;re indiquant au lecteur que le texte tronqu&eacute; a bien une suite.
+@puce@ Par d&eacute;faut, les points de suite ajout&eacute;s au r&eacute;sultat de la balise #INTRODUCTION si le texte est trop long sont : <html>&laquo;&amp;nbsp;(&hellip;)&raquo;</html>. Vous pouvez ici pr&eacute;ciser votre propre cha&icirc;ne de caract&egrave;re indiquant au lecteur que le texte tronqu&eacute; a bien une suite.
 [[%suite_introduction%]]
 @puce@ Si la balise #INTRODUCTION est utilis&eacute;e pour r&eacute;sumer un article, alors le Couteau Suisse peut fabriquer un lien hypertexte sur les points de suite d&eacute;finis ci-dessus afin de mener le lecteur vers le texte original. Par exemple : &laquo;Lire la suite de l\'article&hellip;&raquo;
 [[%lien_introduction%]]
@@ -397,7 +397,7 @@ _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<htm
 	'outil_desactiver' => 'D&eacute;sactiver',
 	'outil_desactiver_le' => 'D&eacute;sactiver l\'outil',
 	'outil_inactif' => 'Outil inactif',
-	'outil_intro' => 'Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; votre disposition.<br /><br />En cliquant sur le nom des outils ci-dessous, vous s&eacute;lectionnez ceux dont vous pourrez permuter l\'&eacute;tat &agrave; l\'aide du bouton central : les outils activ&eacute;s seront d&eacute;sactiv&eacute;s et <i>vice versa</i>. &Agrave; chaque clic, la description appara&icirc;t au-dessous des listes. Les cat&eacute;gories sont repliables et les outils peuvent &ecirc;tre cach&eacute;s. Le double-clic permet de permuter rapidement un outil.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d\'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d\'autres plugins.<br /><br />Note : le simple chargement de cette page recompile l\'ensemble des outils du Couteau Suisse.',
+	'outil_intro' => 'Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; votre disposition.<br /><br />En cliquant sur le nom des outils ci-dessous, vous s&eacute;lectionnez ceux dont vous pourrez permuter l\'&eacute;tat &agrave; l\'aide du bouton central : les outils activ&eacute;s seront d&eacute;sactiv&eacute;s et <i>vice versa</i>. &Agrave; chaque clic, la description appara&icirc;t au-dessous des listes. Les cat&eacute;gories sont repliables et les outils peuvent &ecirc;tre cach&eacute;s. Le double-clic permet de permuter rapidement un outil.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d\'activer les outils un par un, au cas o&ugrave; appara&icirc;traient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d\'autres plugins.<br /><br />Note : le simple chargement de cette page recompile l\'ensemble des outils du Couteau Suisse.',
 	'outil_intro_old' => 'Cette interface est ancienne.<br /><br />Si vous rencontrez des probl&egrave;mes dans l\'utilisation de la <a href=\'./?exec=admin_couteau_suisse\'>nouvelle interface</a>, n\'h&eacute;sitez pas &agrave; nous en faire part sur le forum de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
 	'outil_nb' => '@pipe@ : @nb@ outil',
 	'outil_nbs' => '@pipe@ : @nb@ outils',
@@ -452,7 +452,7 @@ Si vous r&eacute;initialisez le plugin en cliquant sur un pack, le Couteau Suiss
 	'simpl_interface:nom' => 'All&egrave;gement de l\'interface priv&eacute;e',
 	'smileys:aide' => 'Smileys : @liste@',
 	'smileys:description' => 'Ins&egrave;re des smileys dans tous les textes o&ugrave; appara&icirc;t un raccourci du genre <acronym>:-)</acronym>. Id&eacute;al pour les  forums.
-_ Une balise est disponible pour aficher un tableau de smileys dans vos squelettes : #SMILEYS.
+_ Une balise est disponible pour afficher un tableau de smileys dans vos squelettes : #SMILEYS.
 _ Dessins : [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'Smileys',
 	'soft_scroller:description' => 'Offre &agrave; votre site public un d&eacute;filement  adouci de la page lorsque le visiteur clique sur un lien pointant vers une ancre : tr&egrave;s utile pour &eacute;viter de se perdre dans une page complexe ou un texte tr&egrave;s long...
@@ -599,7 +599,7 @@ Choisissez ici de mettre en exposant certains raccourcis suppl&eacute;mentaires,
 	'url_standard' => 'standard',
 	'urls_base_total' => 'Il y a actuellement @nb@ URL(s) en base',
 	'urls_base_vide' => 'La base des URLs est vide',
-	'urls_choix_objet' => 'Edition en base de l\'URL d\'un objet sp&eacute;cifique&nbsp;:',
+	'urls_choix_objet' => '&Eacute;dition en base de l\'URL d\'un objet sp&eacute;cifique&nbsp;:',
 	'urls_edit_erreur' => 'Le format actuel des URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) ne permet pas d\'&eacute;dition.',
 	'urls_enregistrer' => 'Enregistrer cette URL en base',
 	'urls_nouvelle' => '&Eacute;diter l\'URL &laquo;&nbsp;propres&nbsp;&raquo;&nbsp;:',
@@ -629,7 +629,7 @@ Choisissez ici de mettre en exposant certains raccourcis suppl&eacute;mentaires,
 	'version_update_title' => 'T&eacute;l&eacute;charge la derni&egrave;re version du plugin et lance sa mise &agrave; jour automatique',
 	'verstexte:description' => '2 filtres pour vos squelettes, permettant de produire des pages plus l&eacute;g&egrave;res.
 _ version_texte : extrait le contenu texte d\'une page html &agrave; l\'exclusion de quelques balises &eacute;l&eacute;mentaires.
-_ version_plein_texte : extrait le contenu texte d\'une page html pour rendre du texte plein.',
+_ version_plein_texte : extrait le contenu texte d\'une page html pour rendre du texte brut.',
 	'verstexte:nom' => 'Version texte',
 	'visiteurs_connectes:description' => 'Offre une noisette pour votre squelette qui affiche le nombre de visiteurs connect&eacute;s sur le site public.
 
