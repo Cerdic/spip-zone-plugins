@@ -88,5 +88,11 @@ function cs_safebalises($texte) {
 	}
 	return $texte;
 }
-	
+
+// fonction de suppression de notes. Utile pour #CS_SOMMAIRE ou #CS_DECOUPE
+function cs_supprime_notes($texte) {
+	return preg_replace(', *\[\[(.*?)\]\],msS', '', $texte);
+}
+
+
 ?>

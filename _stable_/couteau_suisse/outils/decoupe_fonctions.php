@@ -212,7 +212,7 @@ function artpage_debut($t=false) {
 if (defined('_decoupe_BALISE')) {
 	function balise_CS_DECOUPE_dist($p) {
 		if ($p->type_requete == 'articles') {
-			$p->code = 'cs_decoupe(propre(cs_onglets('.champ_sql('texte', $p).')), true)';
+			$p->code = 'cs_decoupe(propre(cs_onglets(cs_supprime_notes('.champ_sql('texte', $p).'))), true)';
 		} else {
 			$p->code = "''";
 		}
