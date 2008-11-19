@@ -126,9 +126,11 @@ function decouper_en_pages_rempl($texte, $pagination_seule=false) {
 		'self' =>$self,
 	));
 	if ($pagination_seule) {
-		return "<div$id_decoupe class='pagination decoupe_balise'>\n$pagination\n</div>\n";
+		if(trim($pagination)=="") return "";
+		$pagination = "<div$id_decoupe class='pagination decoupe_balise'>\n$pagination\n</div>\n";
 		// un seul id par page
 		$id_decoupe='';
+		return $pagination;
 	}
 	$pagination1 = "<div id='decoupe_haut' class='pagination decoupe_haut'>\n$pagination\n</div>\n";
 	$pagination2 = "<div id='decoupe_bas' class='pagination decoupe_bas'>\n$pagination\n</div>\n";
