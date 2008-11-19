@@ -10,8 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+# compatibilite mutualisation (modifier la definition de $site au besoin)
+$site = str_replace('www.', '', $_SERVER['HTTP_HOST']);
+list($site) = explode(':', $site); // supprimer le :80 (flash)
+define('_FC_LANCEUR', 'tmp/fc_config_' . $site . '.inc');
 
-define('_FC_LANCEUR', 'tmp/pre_spip.inc');
 if (@file_exists(_FC_LANCEUR)) include _FC_LANCEUR;
 else {
 

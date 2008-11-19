@@ -92,7 +92,8 @@ function Fastcache_affichage_final($texte) {
 }
 
 # s'inserer au *debut* du pipeline affichage_final pour etre avant f_surligne etc
-$GLOBALS['spip_pipeline']['affichage_final'] = '|Fastcache_affichage_final'.$GLOBALS['spip_pipeline']['affichage_final'];
+# mais de preference apres mutualisation_url_img_courtes pour qu'il s'applique
+$GLOBALS['spip_pipeline']['affichage_final'] = preg_replace(',\|mutualisation_url_img_courtes|^,','\0|Fastcache_affichage_final', $GLOBALS['spip_pipeline']['affichage_final']);
 
 
 # supprimer les fc_cache trop vieux ?
