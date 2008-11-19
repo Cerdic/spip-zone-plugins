@@ -64,7 +64,7 @@ function decoupe_image($fich, $help, $self, $off, $val, &$images, $double=false)
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function decouper_en_pages_rempl($texte, $pagination_seule=false) {
 	// un seul id par page...
-	static $id_decoupe = " id='decoupe_balise'";
+	static $id_decoupe = '';
 	
 	// si pas de separateur, on sort
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $pagination_seule?'':$texte;
@@ -127,13 +127,12 @@ function decouper_en_pages_rempl($texte, $pagination_seule=false) {
 	));
 	if ($pagination_seule) {
 		if(trim($pagination)=="") return "";
-		$pagination = "<div$id_decoupe class='pagination decoupe_balise'>\n$pagination\n</div>\n";
-		// un seul id par page
-		$id_decoupe='';
+		$pagination = "<div id='decoupe_balise$id_decoupe' class='pagination decoupe_balise'>\n$pagination\n</div>\n";
 		return $pagination;
 	}
-	$pagination1 = "<div id='decoupe_haut' class='pagination decoupe_haut'>\n$pagination\n</div>\n";
-	$pagination2 = "<div id='decoupe_bas' class='pagination decoupe_bas'>\n$pagination\n</div>\n";
+	$pagination1 = "<div id='decoupe_haut$id_decoupe' class='pagination decoupe_haut'>\n$pagination\n</div>\n";
+	$pagination2 = "<div id='decoupe_bas$id_decoupe' class='pagination decoupe_bas'>\n$pagination\n</div>\n";
+	$id_decoupe++;
 	return $sommaire.$pagination1.$page.$pagination2;
 }
 
