@@ -21,11 +21,11 @@ function formulaires_mot_associer_objets_charger_dist($id_mot,$id_groupe){
 		$statuts = array('prop','publie');
 
 	$valeurs = array(
-	'id' => $id_mot,
-	'id_groupe' => $id_groupe,
-	'statuts' => $statuts,
-	'recherche'=> '',
-	'_ajax'=>true,
+	    'id' => $id_mot,
+	    'id_groupe' => $id_groupe,
+	    'statuts' => $statuts,
+	    'recherche'=> '',
+	    '_ajax'=>true
 	);
 	return $valeurs;
 }
@@ -45,7 +45,9 @@ function formulaires_mot_associer_objets_traiter_dist($id_mot,$id_groupe){
 				}
 			}
 	}
-	return array(true,'');
+	return array(
+        'message_ok' => 'Mots clefs affectés'
+	);
 }
 
 ?>
