@@ -46,6 +46,7 @@ function formulaires_mot_associer_objets_traiter_dist($id_mot,$id_groupe){
 			}
 	}
 	return array(
+	    'editable' => true,
         'message_ok' => 'Mots clefs affectés'
 	);
 }
