@@ -219,11 +219,13 @@ function demarrer_site($site = '', $options = array()) {
 	 * ne pourra fonctionner car les fichiers
 	 * .htaccess de /IMG et /local n'ont pas
 	 * connaissance du nom du repertoire.
-	 * 
+	 *
+	 * A mettre au debut du pipe pour compatibilite avec fastcache
 	 */
 	if ($options['url_img_courtes']) {
 		$GLOBALS['spip_pipeline']['affichage_final']
-			.= '|mutualisation_url_img_courtes';
+			= '|mutualisation_url_img_courtes'
+			. $GLOBALS['spip_pipeline']['affichage_final'];
 	}
 }
 
