@@ -59,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 - {{Les r&eacute;visions du Couteau Suisse}} : un cadre sur la pr&eacute;sente page de configuration, indiquant les derni&egrave;res modifications apport&eacute;es au code du plugin ([Source->@_CS_RSS_SOURCE@]).
 - {{Les articles au format SPIP}} : un cadre repliable suppl&eacute;mentaire pour vos articles afin de conna&icirc;tre le code source utilis&eacute; par leurs auteurs.
 - {{Les auteurs en stat}} : un cadre suppl&eacute;mentaire sur [la page des auteurs->./?exec=auteurs] indiquant les 10 derniers connect&eacute;s et les inscriptions non confirm&eacute;es. Seuls les administrateurs voient ces informations.
-- {{Voir les URLs propres}} : un cadre d&eacute;pliable pour chaque objet de contenu (article, rubrique, auteur, ...) indiquant l\'URL propre associ&eacute;e ainsi que leurs alias &eacute;ventuels. L\'outil &laquo;&nbsp;[.->type_urls]&nbsp;&raquo; vous permet une configuration des URLs.',
+- {{Les URLs propres}} : un cadre d&eacute;pliable pour chaque objet de contenu (article, rubrique, auteur, ...) indiquant l\'URL propre associ&eacute;e ainsi que leurs alias &eacute;ventuels. L\'outil &laquo;&nbsp;[.->type_urls]&nbsp;&raquo; vous permet une configuration fine des URLs de votre site.',
 	'boites_privees:nom' => 'Bo&icirc;tes priv&eacute;es',
 
 	// C
@@ -184,7 +184,7 @@ Cet outil peut &ecirc;tre coupl&eacute; avec &laquo;&nbsp;[.->sommaire]&nbsp;&ra
 	'erreur:bt' => '<span style=\\"color:red;\\">Attention :</span> la barre typographique (version @version@) semble ancienne.<br />Le Couteau Suisse est compatible avec une version sup&eacute;rieure ou &eacute;gale &agrave; @mini@.',
 	'erreur:description' => 'id manquant dans la d&eacute;finition de l\'outil !',
 	'erreur:distant' => 'le serveur distant',
-	'erreur:jquery' => '{{Note}} : la librairie {jQuery} semble inactive sur cette page. Veuillez consulter [ici->http://www.spip-contrib.net/?article2166] le paragraphe sur les d&eacute;pendances du plugin.',
+	'erreur:jquery' => '{{Note}} : la librairie {jQuery} semble inactive sur cette page. Veuillez consulter [ici->http://www.spip-contrib.net/?article2166] le paragraphe sur les d&eacute;pendances du plugin ou recharger cette page.',
 	'erreur:js' => 'Une erreur JavaScript semble &ecirc;tre survenue sur cette page et emp&ecirc;che son bon fonctionnement. Veuillez activer JavaScript sur votre navigateur ou d&eacute;sactiver certains plugins SPIP de votre site.',
 	'erreur:nojs' => 'Le JavaScript est d&eacute;sactiv&eacute; sur cette page.',
 	'erreur:nom' => 'Erreur !',
@@ -649,7 +649,7 @@ En tant que webmestre vous-m&ecirc;me, vous avez ici les droits de modifier cett
 	'urls_base_total' => 'Il y a actuellement @nb@ URL(s) en base',
 	'attente' => 'Attente...',
 	'urls_valeur_vide' => "(Une valeur vide entraine la suppression de l'URL)",
-	'bp_urls_propres' => 'Voir les URLs propres',
+	'bp_urls_propres' => 'Les URLs propres',
 
 );
 
