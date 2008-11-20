@@ -1032,32 +1032,34 @@ add_outil( array(
 	'traitement:TEXTE/articles:pre_propre' => 'insertions_pre_propre',
 	'traitement:TEXTE/rubriques:pre_propre' => 'insertions_pre_propre',
 ));
-//le plugin moderation moderee dans le couteau suisse
+
+// le plugin moderation moderee dans le couteau suisse
 add_outil( array(
 	'id' => 'moderation_moderee',
 	'auteur' => 'Yohann(potter64)',
 	'categorie' => 'admin',
 	'version-min' => '1.9300',
 	'code:options' => '%%moderation_admin%%%%moderation_redac%%%%moderation_visit%%',
+	'code:jq_init' => 'if (window.location.search.match(/page=forum/)!=null) jQuery("legend:contains(\''.addslashes(unicode2charset(html2unicode(_T('bouton_radio_modere_priori')))).'\')", this).next().html(\''.addslashes(_T('couteauprive:moderation_message')).'\');',
 	'pipeline:pre_edition' => 'moderation_vip',
 ));
 add_variable( array(
 	'nom' => 'moderation_admin',
 	'check' => 'couteauprive:moderation_admins',
 	'defaut' => 1,
-	'code:%s' => "define('_MOD_MOD_ADMIN',%s);",
+	'code:%s' => "define('_MOD_MOD_0minirezo',%s);",
 ));
 add_variable( array(
 	'nom' => 'moderation_redac',
 	'check' => 'couteauprive:moderation_redacs',
 	'defaut' => 0,
-	'code:%s' => "define('_MOD_MOD_REDAC',%s);",
+	'code:%s' => "define('_MOD_MOD_1comite',%s);",
 ));
 add_variable( array(
 	'nom' => 'moderation_visit',
 	'check' => 'couteauprive:moderation_visits',
 	'defaut' => 0,
-	'code:%s' => "define('_MOD_MOD_VISIT',%s);",
+	'code:%s' => "define('_MOD_MOD_6forum',%s);",
 ));
 
 // Ajout des outils personnalises
