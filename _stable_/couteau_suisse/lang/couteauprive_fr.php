@@ -109,7 +109,7 @@ Notez bien : en modifiant ce deuxi&egrave;me style, vous perdez alors les styles
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Fonctions',
 	'code_jq' => 'jQuery',
-	'code_js' => 'Javascript',
+	'code_js' => 'JavaScript',
 	'code_options' => 'Options',
 	'code_spip_options' => 'Options SPIP',
 	'contrib' => 'Plus d\'infos : @url@',
@@ -196,7 +196,7 @@ Cet outil peut &ecirc;tre coupl&eacute; avec &laquo;&nbsp;[.->sommaire]&nbsp;&ra
 	'etendu' => '&Eacute;tendu',
 
 	// F
-	'f_jQuery:description' => 'Emp&ecirc;che l\'installation de {jQuery} dans la partie publique afin d\'&eacute;conmiser un peu de &laquo;temps machine&raquo;. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de Javascript et peut &ecirc;tre utilis&eacute;e par certains plugins. SPIP l\'utilise dans sa partie priv&eacute;e.
+	'f_jQuery:description' => 'Emp&ecirc;che l\'installation de {jQuery} dans la partie publique afin d\'&eacute;conmiser un peu de &laquo;temps machine&raquo;. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de JavaScript et peut &ecirc;tre utilis&eacute;e par certains plugins. SPIP l\'utilise dans sa partie priv&eacute;e.
 
 Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions de {jQuery}. ',
 	'f_jQuery:nom' => 'D&eacute;sactive jQuery',
@@ -204,13 +204,13 @@ Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions d
 	'filets_sep:description' => 'Ins&egrave;re des filets de s&eacute;paration, personnalisables par des feuilles de style, dans tous les textes de SPIP.
 _ La syntaxe est : &quot;__code__&quot;, o&ugrave; &quot;code&quot; repr&eacute;sente soit le num&eacute;ro d&rsquo;identification (de 0 &agrave; 7) du filet &agrave; ins&eacute;rer en relation directe avec les styles correspondants, soit le nom d\'une image plac&eacute;e dans le dossier plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'Filets de S&eacute;paration',
-	'filtrer_javascript:description' => 'Pour g&eacute;rer l\'insertion de javascript dans les articles, trois modes sont disponibles :
-- <i>jamais</i> : le javascript est refus&eacute; partout
-- <i>d&eacute;faut</i> : le javascript est signal&eacute; en rouge dans l\'espace priv&eacute;
-- <i>toujours</i> : le javascript est accept&eacute; partout.
+	'filtrer_javascript:description' => 'Pour g&eacute;rer l\'insertion de JavaScript dans les articles, trois modes sont disponibles :
+- <i>jamais</i> : le JavaScript est refus&eacute; partout
+- <i>d&eacute;faut</i> : le JavaScript est signal&eacute; en rouge dans l\'espace priv&eacute;
+- <i>toujours</i> : le JavaScript est accept&eacute; partout.
 
-Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la gestion du javascript est <b>toujours</b> s&eacute;curis&eacute;e.[[%radio_filtrer_javascript3%]]',
-	'filtrer_javascript:nom' => 'Gestion du javascript',
+Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la gestion du JavaScript est <b>toujours</b> s&eacute;curis&eacute;e.[[%radio_filtrer_javascript3%]]',
+	'filtrer_javascript:nom' => 'Gestion du JavaScript',
 	'flock:description' => 'D&eacute;sactive le syst&egrave;me de verrouillage de fichiers en neutralisant la fonction PHP {flock()}. Certains h&eacute;bergements posent en effet des probl&egrave;mes graves suite &agrave; un syst&egrave;me de fichiers inadapt&eacute; ou &agrave; un manque de synchronisation. N\'activez pas cet outil si votre site fonctionne normalement.',
 	'flock:nom' => 'Pas de verrouillage de fichiers',
 	'fonds' => 'Fonds :',
@@ -229,7 +229,7 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 @puce@ Deux solutions vous sont offertes pour g&#233;n&#233;rer la petite fen&ecirc;tre automatique qui appara&icirc;t lors du survol de la souris. [[%glossaire_js%]]',
 	'glossaire:nom' => 'Glossaire interne',
 	'glossaire_css' => 'Solution CSS',
-	'glossaire_js' => 'Solution Javascript',
+	'glossaire_js' => 'Solution JavaScript',
 	'guillemets:description' => 'Remplace automatiquement les guillemets droits (") par les guillemets typographiques de la langue de composition. Le remplacement, transparent pour l\'utilisateur, ne modifie pas le texte original mais seulement l\'affichage final.',
 	'guillemets:nom' => 'Guillemets typographiques',
 
@@ -249,7 +249,7 @@ _ &bull; [De tout le plugin|Revenir &agrave; l\'&eacute;tat initial du plugin->@
 
 Pour d&eacute;finir ce logo, rendez-vous sur la page &laquo;&nbsp;Configuration du site&nbsp;&raquo; en cliquant sur le bouton &laquo;&nbsp;Configuration&nbsp;&raquo;.',
 	'icone_visiter:nom' => 'Bouton &laquo;&nbsp;Visiter&nbsp;&raquo;',
-	'insert_head:description' => 'Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Gr&acirc;ce &agrave; cette option, les plugins pourront ins&eacute;rer du javascript (.js) ou des feuilles de style (.css).',
+	'insert_head:description' => 'Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Gr&acirc;ce &agrave; cette option, les plugins pourront ins&eacute;rer du JavaScript (.js) ou des feuilles de style (.css).',
 	'insert_head:nom' => 'Balise #INSERT_HEAD',
 	'insertions:description' => 'ATTENTION : outil en cours de d&eacute;veloppement !! [[%insertions%]]',
 	'insertions:nom' => 'Corrections automatiques',
@@ -371,12 +371,12 @@ _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<htm
 	'liens_orphelins:nom' => 'Belles URLs',
 
 	// M
-	'mailcrypt:description' => 'Masque tous les liens de courriels pr&eacute;sents dans vos textes en les rempla&ccedil;ant par un lien Javascript permettant quand m&ecirc;me d\'activer la messagerie du lecteur. Cet outil antispam tente d\'emp&ecirc;cher les robots de collecter les adresses &eacute;lectroniques laiss&eacute;es en clair dans les forums ou dans les balises de vos squelettes.',
+	'mailcrypt:description' => 'Masque tous les liens de courriels pr&eacute;sents dans vos textes en les rempla&ccedil;ant par un lien JavaScript permettant quand m&ecirc;me d\'activer la messagerie du lecteur. Cet outil antispam tente d\'emp&ecirc;cher les robots de collecter les adresses &eacute;lectroniques laiss&eacute;es en clair dans les forums ou dans les balises de vos squelettes.',
 	'mailcrypt:nom' => 'MailCrypt',
 	'message_perso' => 'Un grand merci aux traducteurs qui passeraient par ici. Pat ;-)',
 	'moderation_admins' => 'administrateurs authentifi&eacute;s',
 	'moderation_message' => 'Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n\'appara&icirc;tra qu\'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site, sauf si votre statut a &eacute;t&eacute; autoris&eacute; &agrave; la publication directe.',
-	'moderation_moderee:description' => 'Permet de mod&eacute;rer la mod&eacute;ration des forums publics <b>configur&eacute;s &agrave; priori</b> pour les utilisateurs inscrits.<br />Exemple : Je suis le webmestre de mon site, et je r&eacute;ponds &agrave; un message d\'un utilisateur, pourquoi valider mon propre message ? Mod&eacute;ration mod&eacute;r&eacute;e le fait pour moi ! [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
+	'moderation_moderee:description' => 'Permet de mod&eacute;rer la mod&eacute;ration des forums publics <b>configur&eacute;s &agrave; priori</b> pour les utilisateurs inscrits.<br />Exemple : Je suis le webmestre de mon site, et je r&eacute;ponds &agrave; un message d\'un utilisateur, pourquoi devoir valider mon propre message ? Mod&eacute;ration mod&eacute;r&eacute;e le fait pour moi ! [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
 	'moderation_moderee:nom' => 'Mod&eacute;ration mod&eacute;r&eacute;e',
 	'moderation_redacs' => 'r&eacute;dacteurs authentifi&eacute;s',
 	'moderation_visits' => 'visiteurs authentifi&eacute;s',

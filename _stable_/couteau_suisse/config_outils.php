@@ -202,7 +202,7 @@ add_outil( array(
 	'auteur' 	 => 'Vincent Ramos',
 	'code:options' => "%%radio_set_options4%%",
 	'categorie' => 'interface',
-	// pipeline pour retirer en javascript le bouton de controle de l'interface
+	// pipeline pour retirer en JavaScript le bouton de controle de l'interface
 	'pipeline:header_prive' => 'set_options_header_prive',
 	// non supporte a partir de la version 1.93
 	'version-max' => '1.9299',
