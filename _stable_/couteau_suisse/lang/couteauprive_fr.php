@@ -375,7 +375,7 @@ _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<htm
 	'mailcrypt:nom' => 'MailCrypt',
 	'message_perso' => 'Un grand merci aux traducteurs qui passeraient par ici. Pat ;-)',
 	'moderation_admins' => 'administrateurs authentifi&eacute;s',
-	'moderation_moderee:description' => 'Permet de mod&eacute;rer la mod&eacute;ration des forums pour les utilisateurs inscrits. [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
+	'moderation_moderee:description' => 'Permet de mod&eacute;rer la mod&eacute;ration des forums publics <b>configur&eacute;s &agrave; priori</b> pour les utilisateurs inscrits.<br />Exemple : Je suis le webmestre de mon site, et je r&eacute;ponds &agrave; un message d\'un utilisateur, pourquoi valider mon propre message ? Mod&eacute;ration mod&eacute;r&eacute;e le fait pour moi ! [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
 	'moderation_moderee:nom' => 'Mod&eacute;ration mod&eacute;r&eacute;e',
 	'moderation_redacs' => 'r&eacute;dacteurs authentifi&eacute;s',
 	'moderation_visits' => 'visiteurs authentifi&eacute;s',
