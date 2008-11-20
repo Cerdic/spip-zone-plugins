@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'documents_non_publies'=> 'Non publies',
 	'documents_publies'=> 'Publies',
 	'documents_tous'=> 'Tous',
+	'documents_brises' => 'Fichiers manquants',
 	'descriptif'=>'Description',
 	'des_documents'=>'@nb@ documents',
 	'des_files'=>'@nb@ documents',
@@ -58,6 +59,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'un_video'=>'1 s&eacute;quence',
 	'une_utilisation'=>'1 utilisation',
 	
+	//
+	'verifier_documents_brises' => 'V&eacute;rifier les fichiers manquants',
+
 	
 /*	'affichage' => 'Affichage :',
 	'attr_alt' => 'Pas de balise alt ?? ',
