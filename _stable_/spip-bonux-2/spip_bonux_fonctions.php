@@ -64,4 +64,8 @@ function affiche_un_ou_plusieurs($nb,$chaine_un,$chaine_plusieurs,$var='nb'){
 	else return _T($chaine_un);
 }
 
+function timestamp($fichier){
+	$m = filemtime($fichier);
+	return "$fichier?$m";
+}
 ?>
