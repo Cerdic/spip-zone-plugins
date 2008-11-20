@@ -375,7 +375,7 @@ _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<htm
 	'mailcrypt:nom' => 'MailCrypt',
 	'message_perso' => 'Un grand merci aux traducteurs qui passeraient par ici. Pat ;-)',
 	'moderation_admins' => 'administrateurs authentifi&eacute;s',
-	'moderation_message' => 'Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n\'appara&icirc;tra qu\'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site, sauf si votre statut a &eacute;t&eacute; autoris&eacute; &agrave; la publication directe.',
+	'moderation_message' => 'Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n\'appara&icirc;tra qu\'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site, sauf si vous &ecirc;tes identifi&eacute; et autoris&eacute; &agrave; poster directement.',
 	'moderation_moderee:description' => 'Permet de mod&eacute;rer la mod&eacute;ration des forums publics <b>configur&eacute;s &agrave; priori</b> pour les utilisateurs inscrits.<br />Exemple : Je suis le webmestre de mon site, et je r&eacute;ponds &agrave; un message d\'un utilisateur, pourquoi devoir valider mon propre message ? Mod&eacute;ration mod&eacute;r&eacute;e le fait pour moi ! [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
 	'moderation_moderee:nom' => 'Mod&eacute;ration mod&eacute;r&eacute;e',
 	'moderation_redacs' => 'r&eacute;dacteurs authentifi&eacute;s',
