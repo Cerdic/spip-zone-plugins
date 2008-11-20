@@ -6,5 +6,11 @@
 #HTTP_HEADER{'Content-Type: text/javascript'}
 [(#CONFIG**{geomap_googlemapkey,''}|?{' '})
 #SET{cache,#REM|sinon{http://maps.google.com/maps?file=api&v=}|concat{#CONFIG**{geomap_googlemapversion}}|concat{&key=}|concat{#CONFIG**{geomap_googlemapkey}}|concat{&hl=}|concat{#LANG}}
-[(#GET{cache}|recuperer_page|compacte_js)]]
+	[(#CHARSET|=={utf-8}|?{' '})
+		[(#GET{cache}|recuperer_page|utf8_encode)]
+	]
+	[(#CHARSET|=={utf-8}|?{'',' '})
+		[(#GET{cache}|recuperer_page)]
+	]
+]
 [(#INCLURE{js/geomap.js})]
