@@ -27,10 +27,12 @@
 			);
 			
 		  // on voit le bouton dans la barre "naviguer"
+		  /* # Pas compatible SPIP 2 d'après les retours...
 			$boutons_admin['naviguer']->sousmenu["tables_tous"]= new Bouton(
 			"../"._DIR_PLUGIN_FORMS."img_pack/table-24.gif",  // icone
 			_T("forms:tables") //titre
 			);
+			*/
 		}
 		return $boutons_admin;
 	}
