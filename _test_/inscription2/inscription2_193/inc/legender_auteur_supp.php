@@ -12,9 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@inc_legender_auteur_dist
-function inc_legender_auteur_supp_dist($auteur)
-{
+function inc_legender_auteur_supp_dist($auteur){
 	if (!$auteur['id_auteur']) {
 		if (_request('new') == 'oui') {
 			$new = true;
@@ -23,35 +21,23 @@ function inc_legender_auteur_supp_dist($auteur)
 			redirige_par_entete(generer_url_ecrire('auteurs'));
 		}
 	}
-	
+   
 	if (!$new) {
 		if (autoriser('modifier', 'auteur', $auteur['id_auteur'])) {
-		$auteur_infos_voir_supp = legender_auteur_supp_voir($auteur, $redirect);
-		$corps = legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect);
-	} else {
-		$corps = ' ';
+			$auteur_infos_voir_supp = legender_auteur_supp_voir($auteur, $redirect);
+		}
 	}
-	
-	}else {
-		$corps = '';
+	return $auteur_infos_voir_supp;
 }
-	
-
-	return $corps;
-}
-
 // La partie affichage du formulaire...
-function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect){
-
-	global $options, $connect_statut, $connect_id_auteur, $connect_toutes_rubriques;
-
-	include_spip('inc/autoriser');
-
+function legender_auteur_supp_saisir($auteur){
 	$id_auteur = $auteur['id_auteur'];
-	$setconnecte = ($connect_id_auteur == $id_auteur);
-
+	
+	$corps_supp = '<li class="editer_inscription2 fieldset">';
+	$corps_supp .= '<fieldset><h3 class="legend">Inscription 2</h3>';
+	$corps_supp .= '<ul>';
+	
 	// Elaborer le formulaire
-	$corps_supp = '';
 	$var_user['b.id_auteur'] = '0';
 	$var_user['a.login'] = '0';
 	foreach(lire_config('inscription2') as $cle => $val){
@@ -96,11 +82,11 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 	
 	foreach ($query as $cle => $val){
 		if(($cle == 'id_pays') || ($cle == 'id_pays_pro') ||  ($cle == 'login') || ($cle == 'nom') || ($cle == 'email')){
-			$corps_supp .= "<input type='hidden' id='$cle' name='$cle' value='$val'>";
+			$corps_supp .= "<input type='hidden' id='$cle' name='$cle' value='$val' />";
 		}
 		elseif($cle == 'pays'){
-			$corps_supp .= "<strong>"._T('inscription2:'.$cle)."</strong><br />"
-				. "<select name='$cle' id='$cle' class='formo' style='width:auto'>"
+			$corps_supp .= "<li><label>"._T('inscription2:'.$cle)."</label>"
+				. "<select name='$cle' id='$cle' class='text' style='width:auto'>"
 				. "<option value=''>"._T('inscription2:pays')."</option>";
 			include(_DIR_PLUGIN_INSCRIPTION2."/inc/pays.php");
 			foreach($liste_pays as $cle => $val){
@@ -108,11 +94,11 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 					$corps_supp .= "<option value='$cle' selected>$val</option>";
 				else 
 					$corps_supp .= "<option value='$cle'>$val</option>";
-			}$corps_supp .= "</select>";
+			}$corps_supp .= "</select></li>";
 		}
 		elseif($cle == 'pays_pro'){
-			$corps_supp .= "<strong>"._T('inscription2:'.$cle)."</strong><br />"
-				. "<select name='$cle' id='$cle' class='formo' style='width:auto'>"
+			$corps_supp .= "<li><label>"._T('inscription2:'.$cle)."</label>"
+				. "<select name='$cle' id='$cle' class='text' style='width:auto'>"
 				. "<option value=''>"._T('inscription2:pays')."</option>";
 			include(_DIR_PLUGIN_INSCRIPTION2."/inc/pays.php");
 			foreach($liste_pays as $cle=> $val){
@@ -120,23 +106,23 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 					$corps_supp .= "<option value='$cle' selected>$val</option>";
 				else 
 					$corps_supp .= "<option value='$cle'>$val</option>";
-			}$corps_supp .= "</select>";
+			}$corps_supp .= "</select></li>";
 		}
 		elseif ($cle == 'latitude'){
 			if ($geomap_append_moveend_map = charger_fonction('geomap_append_clicable_map','inc',true)){
 				$corps_supp .= "<br /><div class='geomap' id='map' style='width:100%;height:350px'> </div><br />";
 				$corps_supp .= $geomap_append_moveend_map("map",'latitude','longitude',$query['latitude'],$query['longitude'], NULL,NULL,true);
 			}
-			$corps_supp .= "<strong>"._T('inscription2:'.$cle)."</strong><br />"
-			. "<input type='text' id='$cle' name='$cle' class='formo' value='$val'><br />";
+			$corps_supp .= "<li><label>"._T('inscription2:'.$cle)."</label>"
+			. "<input type='text' id='$cle' name='$cle' class='text' value='$val' /></li>";
 		}
 		elseif($cle!= 'id_auteur' and $cle != 'statut_nouveau')
-		$corps_supp .= "<strong>"._T('inscription2:'.$cle)."</strong><br />"
-		. "<input type='text' id='$cle' name='$cle' class='formo' value='".typo($val)."'><br />"; 
+		$corps_supp .= "<li><label>"._T('inscription2:'.$cle)."</label>"
+		. "<input type='text' id='$cle' name='$cle' class='text' value='".typo($val)."' /><li>"; 
 	}
 	if($news){
 		if ($aux4){
-		$corps_supp .= "<strong>"._T('inscription2:newsletter')."</strong><br />"
+		$corps_supp .= "<li><label>"._T('inscription2:newsletter')."</label>"
 		. "<select name='news[]' id='news' multiple>";
 		foreach($aux4 as $val){
 			if (in_array($val['id_liste'], $aux3))
@@ -147,93 +133,15 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 		$corps_supp .= "</select><br/><a onclick=\"$('#news').find('option').attr('selected', false);\">"._T('inscription2:deselect_listes')."</a> </small><br /></td></tr>";
 		}
 	}
-		$corps_supp .= "\n<br />";
-
-
-	//
-	// Retour
-	//
-
-	$corps_supp = $auteur_infos_voir_supp
-		. "<div id='auteur_infos_edit_supp'>\n"
-		. "\n<div class='serif'>"
-		. debut_cadre_relief("fiche-perso-24.gif",
-			true, "", _T("icone_informations_personnelles"))
-		. $corps_supp
-		. fin_cadre_relief(true)
-		. "</div>\n" # /serif
-		. "</div>\n"; # /auteur_infos_edit
-
-	// Installer la fiche "auteur_infos_voir"
-	// et masquer le formulaire si on n'en a pas besoin
-	$new = ($auteur_infos_voir_supp == '');
-	if (!$new
-	AND !_request('echec')
-	AND !_request('edit')) {
-		$corps_supp .= "<script>jQuery('#auteur_infos_edit_supp').hide()</script>\n";
-	} else {
-		$corps_supp .= "<script>jQuery('#auteur_infos_voir_supp').hide()</script>\n";
-	}
-
-	// Redirection apres enregistrement ?
-	if ($redirect)
-		$corps_supp .= "<input type='hidden' name='redirect' value=\"".attribut_html($redirect)."\" />\n";
-
-	$corps_supp .= "<div style='text-align: right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
-
-	$arg = intval($id_auteur);
-	$ret .= generer_action_auteur('editer_auteur_supp', $arg, $redirect, $corps_supp, ' method="POST"');
-
-	return $ret;
+		$corps_supp .= "\n</li></ul>";
+		$corps_supp .= "\n</fieldset></li>";
+	return $corps_supp;
 }
 
 // L'affichage des infos supplémentaires...
-function legender_auteur_supp_voir($auteur, $redirect)
-{
-	global $connect_toutes_rubriques, $connect_statut, $connect_id_auteur, $champs_extra, $options, $spip_lang_right;
-	$res = "";
-
-	if (!$id_auteur = $auteur['id_auteur']) {
-		$new = true;
-	}
-
-	// Bouton "modifier" ?
-	if (autoriser('modifier', 'auteur', $id_auteur)) {
-		$res .= "<span id='bouton_modifier_auteur_supp'>";
-
-		if (_request('edit_supp') == 'oui') {
-			$clic = _T('icone_retour');
-			$retour = _T('inscription2:admin_modifier_auteur_supp');
-		} else {
-			$clic = _T('inscription2:admin_modifier_auteur_supp');
-			$retour = _T('icone_retour');
-		}
-
-		$h = generer_url_ecrire("auteur_infos","id_auteur=$id_auteur&edit_supp=oui");
-		$h = "<a\nhref='$h'>$clic</a>";
-		$res .= icone_inline($clic, $h, "redacteurs-24.gif", "edit.gif", $spip_lang_right);
-
-		$res .= "<script type='text/javascript'><!--
-		var intitule_bouton = ".sql_quote($retour).";
-		jQuery('#bouton_modifier_auteur_supp a')
-		.click(function() {
-			jQuery('#auteur_infos_edit_supp')
-			.toggle();
-			jQuery('#auteur_infos_voir_supp')
-			.toggle();
-			jQuery('#bouton_modifier_auteur_supp > a > span')
-			.each(function(){
-				var tmp = jQuery(this).html();
-				jQuery(this).html(intitule_bouton);
-				intitule_bouton = tmp;
-			});
-			return false;
-		});
-		// --></script>\n";
-		$res .= "</span>\n";
-	}
-	
-	$res .= "<h2 class='titrem'>Inscription2</h2>";
+function legender_auteur_supp_voir($auteur)
+{	
+	$res = "<h2 class='titrem'>Inscription2</h2>";
 
 	$res .= "<div class='nettoyeur'></div>";
 	$res .= "<div id='auteur_infos_voir_supp'>";
