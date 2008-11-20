@@ -40,7 +40,7 @@ function legender_auteur_supp_saisir($auteur){
 	// Elaborer le formulaire
 	$var_user['b.id_auteur'] = '0';
 	$var_user['a.login'] = '0';
-	foreach(lire_config('inscription2') as $cle => $val){
+	foreach(lire_config('inscription2',array()) as $cle => $val){
 		if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut_nouveau'){
 			$cle = ereg_replace("^username.*$", "login", $cle);
 			$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
@@ -149,7 +149,7 @@ function legender_auteur_supp_voir($auteur)
 	$id_auteur = _request('id_auteur');
 	
 	$var_user['a.id_auteur'] = '0';
-	foreach(lire_config('inscription2') as $cle => $val){
+	foreach(lire_config('inscription2',array()) as $cle => $val){
 		if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut_nouveau'){
 			$cle = ereg_replace("^username.*$", "login", $cle);
 			$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);

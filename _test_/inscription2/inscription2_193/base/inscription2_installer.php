@@ -198,7 +198,7 @@ function inscription2_upgrade(){
 	
 		//ajouts des differents champs ecris dans les metas
 		if (is_array(lire_config('inscription2'))){
-			foreach(lire_config('inscription2') as $cle => $val) {
+			foreach(lire_config('inscription2',array()) as $cle => $val) {
 				$cle = ereg_replace("_(obligatoire|fiche|table).*$","", $cle);
 				if($val!='' and !isset($desc['field'][$cle]) and $cle == 'naissance'){
 					spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." DATE DEFAULT '0000-00-00' NOT NULL");
@@ -313,7 +313,7 @@ function inscription2_upgrade(){
 	function inscription2_vider_tables() {
 		include_spip('base/abstract_sql');
 		//supprime la table spip_auteurs_elargis
-		foreach(lire_config('inscription2') as $cle => $val){
+		foreach(lire_config('inscription2',array()) as $cle => $val){
 			$cle = ereg_replace("_(obligatoire|fiche|table).*", "", $cle);
 			$desc = sql_showtable('spip_auteurs_elargis','', '', true);
 			if(isset($desc['field'][$cle]) and $cle != 'id_auteur' and $cle != 'spip_listes_format'){

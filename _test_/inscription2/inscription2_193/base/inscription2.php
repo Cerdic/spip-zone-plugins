@@ -6,7 +6,7 @@
 	
 	$spip_auteurs_elargis['id_auteur'] = "bigint(21) NOT NULL";
 	
-	foreach(lire_config('inscription2') as $cle => $val) {
+	foreach(lire_config('inscription2',array()) as $cle => $val) {
 		$cle = ereg_replace("_(obligatoire|fiche|table).*", "", $cle);
 		if($val!='' and $clef != 'login' and $cle != 'nom' and $cle != 'statut_nouveau' and $cle != 'email' and $cle != 'username' and $cle != 'statut_int'  and $cle != 'accesrestreint' and !ereg("^(categories|zone|newsletter).*$", $cle) ){
 			if($cle == 'naissance' )

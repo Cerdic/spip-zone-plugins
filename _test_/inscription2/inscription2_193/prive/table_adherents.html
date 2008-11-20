@@ -36,7 +36,7 @@ function confirm(msg,callback) {
 
 <div id="menu">
 		
-	[(#PLUGIN{ABONNEMENT}|?{' ',''})
+	[(#PLUGIN{ABONNEMENT}|oui)
 		#INCLURE{fond=inc/menu_abonnement}	
 	]
 	[(#PLUGIN{ABONNEMENT}|?{'',' '})
@@ -47,7 +47,7 @@ function confirm(msg,callback) {
 <div id="principal" class="inscription2_liste">
 	<div id="tetiere" >
 		<div style="float:right" >
-		[(#PLUGIN{ABONNEMENT}|?{' ',''})
+		[(#PLUGIN{ABONNEMENT}|oui)
 			[(#INCLURE{fond=inc/statuts_forms}{statut_abonnement=[(#ENV{statut_abonnement})]} )]
 		]
 		
@@ -60,7 +60,7 @@ function confirm(msg,callback) {
 		<select name="case" id="case" class="fondl" style="padding:2px">
 			#SET{case,#ENV{case}}
 			<BOUCLE_recherchefields(POUR){tableau #CONFIG{inscription2}}{valeur = 'on'}>
-			[(#CLE|match{_table}|?{' ',''})
+			[(#CLE|match{_table}|oui)
 				[(#SET{cle,[(#CLE|replace{'_table',''})]})]
 				[(#GET{cle}|=={#GET{case}}|oui)
 					<option value='#GET{cle}' selected>[(#VAL{inscription2:}|concat{#GET{cle}}|_T)]</option>
@@ -176,17 +176,17 @@ function confirm(msg,callback) {
 				<strong><a href="[(#SELF|parametre_url{'ordre','id_auteur'}|parametre_url{'desc',#GET{desc}})]"> <img src="#CHEMIN{images/admin-12.gif}" alt="admin" /></a></strong>
 			</td>
 			<BOUCLE_champshead(POUR){tableau #CONFIG{inscription2}}{valeur = 'on'}>
-			[(#CLE|match{_table}|?{' ',''})
+			[(#CLE|match{_table}|oui)
 			<td><strong><a href="[(#SELF|parametre_url{'ordre',[(#CLE|replace{'_table',''})]}|parametre_url{'desc',#GET{desc}})]">[(#VAL{inscription2:}|concat{[(#CLE|replace{'_table',''})]}|_T)]</a></strong></td>]
 			</BOUCLE_champshead>
-			[(#PLUGIN{ABONNEMENT}|?{' ',''})
+			[(#PLUGIN{ABONNEMENT}|oui)
 			<td><a href="#"><strong>Produit</strong></a></td>
 			<td><a href="#"><strong>&Eacute;ch&eacute;ance / quantit&eacute;</strong></a></td>]
 			<td colspan="3" style="text-align:center;"><strong><a href="[(#SELF|parametre_url{'ordre','statut'}|parametre_url{'desc',#GET{desc}})]"><:inscription2:action_adherent:></a></strong></td>
 	</tr>
 	</thead>
 	<?php
-	foreach(lire_config('inscription2') as $cle => $val){
+	foreach(lire_config('inscription2',array()) as $cle => $val){
 		if($val!= '' and ereg("^.+_table$", $cle) and $cle!='nom_table'){
 			$cle = str_replace("_table", "", $cle);
 			if($cle == 'pays')
@@ -237,7 +237,7 @@ function confirm(msg,callback) {
 		else 
 			echo '<td> </td>';
 		
-		foreach(lire_config('inscription2') as $cle => $val){
+		foreach(lire_config('inscription2',array()) as $cle => $val){
 			if($val!= '' and ereg("^.+_table$", $cle)){
 				$cle = str_replace("_table", "", $cle);
 				if($cle == 'username'){
@@ -269,7 +269,7 @@ function confirm(msg,callback) {
 		}
 		//abonnement
 		if(defined('_DIR_PLUGIN_ABONNEMENT')){
-			$abonnement = sql_fetch(spip_query("select a.libelle, b.validite from `spip_abonnements` a join `spip_auteurs_elargis_abonnements` b where a.id_abonnement=b.id_abonnement and b.id_auteur_elargi='$id'" ));
+			$abonnement = sql_fetch(sql_select("a.libelle, b.validite","spip_abonnements a join spip_auteurs_elargis_abonnements b","a.id_abonnement=b.id_abonnement and b.id_auteur_elargi='$id'"));
 			$au_numero = sql_fetch(spip_query("select count(id_article) as 'n' from `spip_auteurs_elargis_articles` a where a.id_auteur_elargi='$id'" ));
 			if($abonnement["libelle"] =="" AND $au_numero["n"] > 0){
 				$libelle = "achat au numero" ;
@@ -296,7 +296,7 @@ function confirm(msg,callback) {
 	</table>	
 	</form>
 
-	[<div style="margin-left:25%">(#PLUGIN{ABONNEMENT}|?{' ',''})
+	[<div style="margin-left:25%">(#PLUGIN{ABONNEMENT}|oui)
 		#INCLURE{fond=inc/pied_abonnement}</div>
 	]
 	<div id="pagination" class="pagination">

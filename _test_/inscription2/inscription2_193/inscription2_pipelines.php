@@ -69,7 +69,7 @@ function inscription2_editer_contenu_objet($flux){
 	return $flux;
 }
 
-// ajouter l'open_id soumis lors de la soumission du formulaire CVT editer_auteur
+// ajouter les champs inscription2 soumis lors de la soumission du formulaire CVT editer_auteur
 function inscription2_post_edition($flux){
 	if ($flux['args']['table']=='spip_auteurs') {
 		$id_auteur = $flux['args']['id_objet'];
@@ -78,7 +78,7 @@ function inscription2_post_edition($flux){
 			spip_log("editer_auteur_supp $r");
 			$echec = array();
 		
-				foreach(lire_config('inscription2') as $cle => $val){
+				foreach(lire_config('inscription2',array()) as $cle => $val){
 					if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle)){
 						$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
 						if($cle == 'nom' or $cle == 'email' or $cle == 'login')
@@ -145,6 +145,5 @@ function inscription2_post_edition($flux){
 			$echec = $echec ? '&echec=' . join('@@@', $echec) : '';
 	}
 	return $flux;
-}
-
+}	
 ?>
