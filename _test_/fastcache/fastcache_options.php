@@ -13,13 +13,6 @@ function Fastcache_versionie($page) {
 	return $msiefix($page);
 }
 
-function Fastcache_lancer_stats() {
-	if ($GLOBALS['meta']["activer_statistiques"] == 'oui') {
-		$stats = charger_fonction('stats', 'public');
-		$stats();
-	}
-}
-
 function Fastcache_affichage_final($texte) {
 	global $page, $html; # dommage le pipeline ne connait pas les entetes...
 

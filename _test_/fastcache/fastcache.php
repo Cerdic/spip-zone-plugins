@@ -54,8 +54,8 @@ AND (
 
 	// faire les stats ?
 	if (_FC_STATS_SPIP) {
-		include_once _DIR_RESTREINT_ABS.'inc_version.php';
-		Fastcache_lancer_stats();
+		include_once _DIR_PLUGIN_FASTCACHE.'public/stats.php';
+		public_stats();
 	}
 }
 
