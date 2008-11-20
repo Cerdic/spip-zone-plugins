@@ -1,11 +1,8 @@
 <plugin>
 	<nom>
-	<multi>[fr]
-	Gestion de documents
-	[it]
-	Gestione dei documenti
-	[es]
-	Gesti&oacute;n de los documentos
+	<multi>[fr]Mediath&egrave;que
+	[it]Gestione dei documenti
+	[es]Gesti&oacute;n de los documentos
 	</multi>
 	</nom>
 	<icon>img_pack/portfolio-64.png</icon>

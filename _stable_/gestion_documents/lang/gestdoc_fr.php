@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_video'=>'Aucune s&eacute;quence',
 	
 	// D
-	'documents'=> 'Documents',
+	'documents'=> 'Mediath&egrave;que',
 	'documents_distants'=> 'Distants',
 	'documents_locaux'=> 'Locaux',
 	'documents_non_publies'=> 'Non publies',
