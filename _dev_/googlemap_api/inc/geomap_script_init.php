@@ -17,11 +17,20 @@ function inc_geomap_script_init_dist(){
 	$config = lire_meta('geomap_googlemapkey');
 	$version = lire_meta('geomap_googlemapversion');
 	$geomap = compacte_js(find_in_path('js/geomap.js'));
-	$gmap_script = compacte_js(recuperer_page('http://maps.google.com/maps?file=api&v='.$version.'&key='.$config.'&hl='.$GLOBALS['spip_lang']));
+	if($GLOBALS['meta']['charset'] == 'utf-8'){
+		$gmap_script = compacte_js(utf8_encode(recuperer_page('http://maps.google.com/maps?file=api&v='.$version.'&key='.$config.'&hl='.$GLOBALS['spip_lang'])));
+	}
+	else{
+		$gmap_script = compacte_js(recuperer_page('http://maps.google.com/maps?file=api&v='.$version.'&key='.$config.'&hl='.$GLOBALS['spip_lang']));
+	}
 	$out = '
 	<script type="text/javascript" src="'.$geomap.'"></script>
-	<script type="application/javascript">'.$gmap_script.'</script>
-	<script type="application/javascript" src="'._DIR_PLUGIN_GEOMAP.'js/customControls.js"></script>';
+	<script type="application/javascript">'.$gmap_script.'</script>';
+	
+	if (function_exists('lire_config') && lire_config("geomap/custom_control") != 'non'){
+		$out .= '<script type="application/javascript" src="'._DIR_PLUGIN_GEOMAP.'js/customControls.js"></script>';
+	}
+	
 	return $out;
 }
 
