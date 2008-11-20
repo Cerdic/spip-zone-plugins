@@ -45,6 +45,17 @@ function nospam_formulaire_verifier($flux){
 			$flux['data']['message_erreur'] .= _T('nospam:erreur_jeton');
 			unset($flux['data']['previsu']);
 		}
+		if (!isset($flux['data']['texte'])
+			AND $GLOBALS['meta']['forums_texte'] == 'oui'){
+			// regarder si il y a du contenu en dehors des liens !
+			$texte = PtoBR(propre(_request('texte')));
+			$texte = preg_replace(',<a.*</a>,Uims','',$texte);
+			$texte = trim(preg_replace(',[\W]+,ims',' ',$texte));
+			if (strlen($texte) < 10){
+				$flux['data']['texte'] = _T('forum_attention_dix_caracteres');
+				unset($flux['data']['previsu']);
+			}
+		}
 	}
 	return $flux;
 }
