@@ -308,14 +308,6 @@ function cs_initialise_includes($count_metas_outils) {
 					// rien a faire : $traitements_utilises est rempli par is_traitements_outil()
 				}
 			}
-			// recherche d'un code inline eventuellement propose
-			if (isset($outil['code:spip_options'])) $infos_pipelines['code_spip_options'][] = $outil['code:spip_options'];
-			if (isset($outil['code:options'])) $infos_pipelines['code_options'][] = $outil['code:options'];
-			if (isset($outil['code:fonctions'])) $infos_pipelines['code_fonctions'][] = $outil['code:fonctions'];
-			if (isset($outil['code:css'])) $temp_css[] = cs_optimise_if(cs_parse_code_js($outil['code:css']));
-			if (isset($outil['code:js'])) $temp_js[] = cs_optimise_if(cs_parse_code_js($outil['code:js']));
-			if (isset($outil['code:jq_init'])) $temp_jq_init[] = cs_optimise_if(cs_parse_code_js($outil['code:jq_init']));
-			if (isset($outil['code:jq'])) $temp_jq[] = cs_optimise_if(cs_parse_code_js($outil['code:jq']));
 			// recherche d'un fichier .css, .css.html et/ou .js eventuellement present dans outils/
 			if ($f=find_in_path($_css = "outils/$inc.css")) $cs_metas_pipelines['header'][] = cs_insert_header($f, 'css');
 			if ($f=find_in_path("outils/$inc.js")) $cs_metas_pipelines['header'][] = cs_insert_header($f, 'js');
@@ -327,6 +319,14 @@ function cs_initialise_includes($count_metas_outils) {
 				$GLOBALS['cs_options']--;
 				$temp_css[] = $f['texte']; 
 			}
+			// recherche d'un code inline eventuellement propose
+			if (isset($outil['code:spip_options'])) $infos_pipelines['code_spip_options'][] = $outil['code:spip_options'];
+			if (isset($outil['code:options'])) $infos_pipelines['code_options'][] = $outil['code:options'];
+			if (isset($outil['code:fonctions'])) $infos_pipelines['code_fonctions'][] = $outil['code:fonctions'];
+			if (isset($outil['code:css'])) $temp_css[] = cs_optimise_if(cs_parse_code_js($outil['code:css']));
+			if (isset($outil['code:js'])) $temp_js[] = cs_optimise_if(cs_parse_code_js($outil['code:js']));
+			if (isset($outil['code:jq_init'])) $temp_jq_init[] = cs_optimise_if(cs_parse_code_js($outil['code:jq_init']));
+			if (isset($outil['code:jq'])) $temp_jq[] = cs_optimise_if(cs_parse_code_js($outil['code:jq']));
 			// recherche d'un fichier monoutil_options.php ou monoutil_fonctions.php pour l'inserer dans le code
 			if ($temp=cs_lire_fichier_php("outils/{$inc}_options.php")) 
 				$infos_pipelines['code_options'][] = $temp;
@@ -340,8 +340,9 @@ function cs_initialise_includes($count_metas_outils) {
 span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 	// concatenation des css inline, js inline et filtres trouves
 	if (count($temp_css))
-		$cs_metas_pipelines['header'][] = "<style type=\"text/css\">\n"
-			.compacte_css(join("\n", $temp_css))."\n</style>";
+		$cs_metas_pipelines['header'] = array_merge( 
+			array("<style type=\"text/css\">\n".compacte_css(join("\n", $temp_css))."\n</style>"),
+			$cs_metas_pipelines['header']);
 	if (count($temp_jq_init)) {
 		$temp_js[] = "var cs_init = function() {\n\t".join("\n\t", $temp_jq_init)."\n}\nif(typeof onAjaxLoad=='function') onAjaxLoad(cs_init);";
 		$temp_jq[] = "cs_init.apply(document);";
@@ -349,8 +350,9 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 	if (count($temp_jq))
 		$temp_js[] = "if (window.jQuery) jQuery(document).ready(function(){\n\t".join("\n\t", $temp_jq)."\n});";
 	if (count($temp_js))
-		$cs_metas_pipelines['header'][] = "<script type=\"text/javascript\"><!--\n"
-			.compacte_js(join("\n", $temp_js))."\n// --></script>\n";
+		$cs_metas_pipelines['header'] = array_merge( 
+			array("<script type=\"text/javascript\"><!--\n".compacte_js(join("\n", $temp_js))."\n// --></script>\n"),
+			$cs_metas_pipelines['header']);
 	// mise en code des traitements trouves
 	foreach($traitements_utilises as $b=>$balise) {
 		foreach($balise as $p=>$precision) {
