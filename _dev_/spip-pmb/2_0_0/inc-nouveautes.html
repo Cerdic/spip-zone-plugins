@@ -4,7 +4,8 @@
             		[<p class="pagination">(#PAGINATION)</p>]
 	   		<ul>
 			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){pmb_photo_src!=""} {par hasard}{pagination 50}>
-				[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|image_reduire{90,130}|extraire_attribut{src}|match{doc_numphp}|?{'',' '})
+							
+					[(#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|image_reduire{90,130}|extraire_attribut{src}|match{doc_numphp}|?{'',' '})
 				
 					[(#DESCRIPTIF|strlen|>{100}|?{' ',''})
 							[(#SET{nb_revues,[(#GET{nb_revues}|plus{1})]})]
@@ -22,6 +23,7 @@
 						]
 
 				]
+			
 			</BOUCLE_syndic_pmb>
 			</ul>
 			[<p class="pagination">(#PAGINATION)</p>]

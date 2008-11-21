@@ -58,6 +58,14 @@ $(document).ready(function(){
 </script>
 </B_documents>
 
+<script type='text/javascript'>
+	$(document).ready(function(){
+		$('.formulaire_moncomptepmb form').bind('submit', function(){
+		alert("<:pmb:message_compte_lecteur:>");
+		return true;	
+	});
+});
+</script>
 
 [(#REM) Agreger et compacter tout cela dans des fichiers statiques ]
 #FILTRE{compacte_head}

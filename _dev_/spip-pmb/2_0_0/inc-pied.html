@@ -5,6 +5,15 @@
 	][(#SESSION{id_auteur}|?{'',' '})| <a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]" class='login_modal'><:lien_connecter:></a>][
 	(#AUTORISER{ecrire})| <a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a>] | 
 	<a href="#URL_PAGE{plan}"><:plan_site:></a> | 
+
+	[(#REM) afficher les articles et rubriques qui ont le mot clef pied_de_page]
+	<BOUCLE_articlespied(ARTICLES){titre_mot=pied_de_page}>
+	<a href="#URL_ARTICLE">#TITRE</a> | 
+	</BOUCLE_articlespied>
+	<BOUCLE_rubriquespied(RUBRIQUES){titre_mot=pied_de_page}>
+	<a href="#URL_RUBRIQUE">#TITRE</a> | 
+	</BOUCLE_rubriquespied>
+	
 	<a href="#URL_PAGE{backend}" title="<:syndiquer_site:>"><img src="#CHEMIN{feed.png}" alt="<:icone_suivi_activite:>" width="16" height="16" />&nbsp;RSS&nbsp;2.0</a> 
 </div>
 [(#REM)
