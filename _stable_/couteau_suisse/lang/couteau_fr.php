@@ -50,11 +50,11 @@ Chacun de ces outils peut &#234;tre activ&#233; ou non par l\'utilisateur sur [l
 
 Les cat&#233;gories disponibles sont : Administration, Am&#233;liorations typographiques, Raccourcis typographiques, Affichage public, Balises, filtres, crit&#232;res.
 
-D&#233;couvrez dans ce plugin vos outils favoris : {Exposants typographiques}, {Guillemets typographiques}, {Belles puces}, {Un sommaire pour vos articles}, {Smileys}, {Supprime le num&#233;ro}, {Belles URLs}, {SPIP et les liens... externes}, {Pas de forums anonymes}, {D&#233;coupe en pages et onglets}, etc., etc.
+D&#233;couvrez dans ce plugin vos outils favoris : {Supprime le num&#233;ro}, {Format des URLs}, {Exposants typographiques}, {Guillemets typographiques}, {Belles puces}, {Lutte contre le SPAM}, {Mailcrypt}, {Belles URLs}, {SPIP et les liens... externes}, {Smileys}, {Un sommaire pour vos articles}, {D&#233;coupe en pages et onglets}, etc., etc.
 
 N\'h&#233;sitez pas &#224; consulter les articles de documentation du plugin publi&#233;s sur : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilit&#233; : SPIP toutes versions 1.9x',
+Compatibilit&#233; : SPIP v1.9x et v2.0',
 
 	// S
 	'smileys_dispos' => 'Frimousses disponibles :',
