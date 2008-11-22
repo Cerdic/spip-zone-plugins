@@ -94,15 +94,17 @@ function decouper_en_pages_rempl($texte, $pagination_seule=false) {
 		return join("<hr/>", $pages);
 */
 
-	// page demandee
-	$page = cs_safebalises($pages[$artpage-1]);
-	if (isset($_GET['decoupe_recherche'])) {
-		include_spip('inc/surligne');
-		$page = surligner_mots($page, $_GET['decoupe_recherche']);
-	}
-	decoupe_notes_orphelines($page);
 	// si la balise #CS_DECOUPE est utilisee on renvoie le texte sans pagination
-	if (!$pagination_seule && defined('_decoupe_BALISE')) return $sommaire.$page;
+	if (!$pagination_seule) {
+		// page demandee
+		$page = cs_safebalises($pages[$artpage-1]);
+		if (isset($_GET['decoupe_recherche'])) {
+			include_spip('inc/surligne');
+			$page = surligner_mots($page, $_GET['decoupe_recherche']);
+		}
+		decoupe_notes_orphelines($page);
+		if (defined('_decoupe_BALISE')) return $sommaire.$page;
+	}
 
 	$self = nettoyer_uri();//self();//$GLOBALS['REQUEST_URI'];
 
@@ -130,6 +132,7 @@ function decouper_en_pages_rempl($texte, $pagination_seule=false) {
 		$pagination = "<div id='decoupe_balise$id_decoupe' class='pagination decoupe_balise'>\n$pagination\n</div>\n";
 		return $pagination;
 	}
+	// ici $pagination_seule est false, $page est definie
 	$pagination1 = "<div id='decoupe_haut$id_decoupe' class='pagination decoupe_haut'>\n$pagination\n</div>\n";
 	$pagination2 = "<div id='decoupe_bas$id_decoupe' class='pagination decoupe_bas'>\n$pagination\n</div>\n";
 	$id_decoupe++;
@@ -142,11 +145,11 @@ function decoupe_notes_orphelines(&$texte) {
 	$notes = $GLOBALS['les_notes'];
 /*	if(function_exists('tester_variable')) tester_variable('ouvre_note', '['); // tester_variable() depreciee sous SPIP 2.0
 	else*/ if (!isset($GLOBALS['ouvre_note'])) $GLOBALS['ouvre_note'] = '[';
-	$ouvre = preg_quote($GLOBALS['ouvre_note']);
-	$appel = "<p[^>]*>$ouvre<a [^>]*name=\"nb([0-9]+)\" class=\"spip_note\" [^>]+>[^<]+</a>.*?</p>";
-	preg_match_all(",$appel,", $GLOBALS['les_notes'], $tableau);
+	$ouvre = preg_quote($GLOBALS['ouvre_note'],',');
+	$appel = ",<p[^>]*>$ouvre<a [^>]*(?:name|id)=[\"']nb([0-9]+)[\"'] class=[\"']spip_note[\"'] [^>]+>[^<]+</a>.*?</p>,";
+	preg_match_all($appel, $GLOBALS['les_notes'], $tableau);
 	for($i=0;$i<count($tableau[0]);$i++) {
-		if (!preg_match(",<a href=\"#nb{$tableau[1][$i]}\",",$texte)) 
+		if (!preg_match(",<a href=[\"']#nb{$tableau[1][$i]}[\"'],",$texte)) 
 			$notes = str_replace($tableau[0][$i], '', $notes);
 	}
 	$GLOBALS['les_notes'] = trim($notes);
