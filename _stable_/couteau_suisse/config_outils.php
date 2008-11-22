@@ -1034,6 +1034,7 @@ add_outil( array(
 ));
 
 // le plugin moderation moderee dans le couteau suisse
+include_spip('inc/charsets');
 add_outil( array(
 	'id' => 'moderation_moderee',
 	'auteur' => 'Yohann(potter64)',
