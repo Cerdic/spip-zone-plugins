@@ -10,7 +10,7 @@
  */
 if (!function_exists('lire_config')) {
   $options_palette = array(
-    'palette_public' => 'on', // la valeur 'on' active Palette pour le site public
+    'palette_public' => '', // la valeur 'on' active Palette pour le site public
     'palette_ecrire' => 'on'  // la valeur 'on' active Palette pour l'espace privÃ© 
     );
   $GLOBALS['palette'] = serialize($options_palette);
