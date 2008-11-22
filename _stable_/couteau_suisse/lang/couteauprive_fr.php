@@ -226,7 +226,7 @@ Techniquement, cet outil a pour effet :
 - de d&eacute;sactiver le crit&egrave;re <code>{lang_select}</code> automatique sur les objets classiques (articles, br&egrave;ves, rubriques etc ... ).
 
 Les blocs multi s\'affichent alors toujours dans la langue demand&eacute;e par le visiteur.',
-	'forcer_langue:nom' => 'Forcer la langue',
+	'forcer_langue:nom' => 'Force la langue',
 	'format_spip' => 'Les articles au format SPIP',
 	'forum_lgrmaxi:description' => 'Par d&eacute;faut les messages de forum ne sont pas limit&eacute;s en taille. Si cet outil est activ&eacute;, un message d\'erreur s\'affichera lorsque quelqu\'un voudra poster un message  d\'une taille sup&eacute;rieure &agrave; la valeur sp&eacute;cifi&eacute;e, et le message sera refus&eacute;. Une valeur vide ou &eacute;gale &agrave; 0 signifie n&eacute;anmoins qu\'aucune limite ne s\'applique.[[%forum_lgrmaxi%]]',
 	'forum_lgrmaxi:nom' => 'Taille des forums',
