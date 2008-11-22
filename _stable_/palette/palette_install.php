@@ -7,9 +7,9 @@ function palette_install($action){
 		case 'install':
 			
 			if (function_exists('ecrire_config')){
-				if(!lire_config('palette/palette_public'))
+				if(is_null(lire_config('palette/palette_public')))
 					ecrire_config('palette/palette_public','');
-				if(!lire_config('palette/palette_ecrire'))
+				if(is_null(lire_config('palette/palette_ecrire')))
 					ecrire_config('palette/palette_ecrire','on');
 				}
 			break;
