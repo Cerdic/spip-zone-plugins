@@ -1063,6 +1063,11 @@ add_variable( array(
 	'code:%s' => "define('_MOD_MOD_6forum',%s);",
 ));
 
+add_outil( array(
+	'id' => 'titre_parent',
+	'categorie' => 'spip',
+));
+
 // Ajout des outils personnalises
 if(isset($GLOBALS['mes_outils']))
 	foreach($GLOBALS['mes_outils'] as $id=>$outil) {
