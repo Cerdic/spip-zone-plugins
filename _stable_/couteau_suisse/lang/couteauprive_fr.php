@@ -5,6 +5,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	'titre_parent:nom' => "Balise #TITRE_PARENT",
+	'titre_parent:description' => "Au sein d'une boucle, il est courant de vouloir afficher le titre du parent de l'objet en cours. Traditionnellement, il suffirait d'utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT all&eacute;gera l'&eacute;criture de vos squelettes. Le r&eacute;sultat renvoy&eacute; est : le titre du groupe d'un mot-cl&eacute; ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, br&egrave;ve, etc.).
+
+Note : le traitement SPIP de cette nouvelle balise est similaire &agrave; celui de #TITRE.",
+
 	// 2
 	'2pts_non' => '&nbsp;:&nbsp;non',
 	'2pts_oui' => '&nbsp;:&nbsp;oui',
@@ -214,8 +219,14 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'flock:description' => 'D&eacute;sactive le syst&egrave;me de verrouillage de fichiers en neutralisant la fonction PHP {flock()}. Certains h&eacute;bergements posent en effet des probl&egrave;mes graves suite &agrave; un syst&egrave;me de fichiers inadapt&eacute; ou &agrave; un manque de synchronisation. N\'activez pas cet outil si votre site fonctionne normalement.',
 	'flock:nom' => 'Pas de verrouillage de fichiers',
 	'fonds' => 'Fonds :',
-	'forcer_langue:description' => 'Force le contexte de langue pour les jeux de squelettes multilingues disposant d\'un formulaire ou d\'un menu de langues sachant g&eacute;rer le cookie de langues.',
-	'forcer_langue:nom' => 'Forcer langue',
+	'forcer_langue:description' => 'Force le contexte de langue pour les jeux de squelettes multilingues disposant d\'un formulaire ou d\'un menu de langues sachant g&eacute;rer le cookie de langues.
+
+Techniquement, cet outil a pour effet :
+- de d&eacute;sactiver la recherche du squelette en fonction de la langue de l\'objet,
+- de d&eacute;sactiver le crit&egrave;re <code>{lang_select}</code> automatique sur les objets classiques (articles, br&egrave;ves, rubriques etc ... ).
+
+Les blocs multi s\'affichent alors toujours dans la langue demand&eacute;e par le visiteur.',
+	'forcer_langue:nom' => 'Forcer la langue',
 	'format_spip' => 'Les articles au format SPIP',
 	'forum_lgrmaxi:description' => 'Par d&eacute;faut les messages de forum ne sont pas limit&eacute;s en taille. Si cet outil est activ&eacute;, un message d\'erreur s\'affichera lorsque quelqu\'un voudra poster un message  d\'une taille sup&eacute;rieure &agrave; la valeur sp&eacute;cifi&eacute;e, et le message sera refus&eacute;. Une valeur vide ou &eacute;gale &agrave; 0 signifie n&eacute;anmoins qu\'aucune limite ne s\'applique.[[%forum_lgrmaxi%]]',
 	'forum_lgrmaxi:nom' => 'Taille des forums',
