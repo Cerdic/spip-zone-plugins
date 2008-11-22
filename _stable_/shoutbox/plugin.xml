@@ -1,22 +1,12 @@
 <plugin>
-        <nom>Shoutbox</nom>
-        <version>
-          0.2
-        </version>
-
-		<auteur>Fil</auteur>
-
-        <etat>
-          test
-        </etat>
-        <prefix>shoutbox</prefix>
-        <description>
-        Chaque objet du site peut avoir sa shoutbox, qui permet &#224; tout visiteur de laisser un commentaire rapide. Balise <code>#SHOUTBOX</code>, ou <code>#SHOUTBOX{article,#ID_ARTICLE}</code>
-        </description>
-
+	<nom>Shoutbox</nom>
+	<version>0.2</version>
+	<auteur>Fil</auteur>
+	<etat>test</etat>
+	<prefix>shoutbox</prefix>
+	<description>Chaque objet du site peut avoir sa shoutbox, qui permet &#224; tout visiteur de laisser un commentaire rapide. Balise &lt;code&gt;#SHOUTBOX&lt;/code&gt;, ou &lt;code&gt;#SHOUTBOX{article,#ID_ARTICLE}&lt;/code&gt;</description>
 	<icon>shoutbox.png</icon>
-
 	<version_base>0.1</version_base>
 	<install>base/shoutbox_upgrade.php</install>
-
+	<necessite id='SPIP' version='[2.0 beta;]' />
 </plugin>
