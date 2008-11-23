@@ -52,28 +52,28 @@ function inc_couleurs_dist($choix=NULL)
 		),
 //  Gris
 5 => array (
-		"couleur_foncee" => "#76d7d2",
+		"couleur_foncee" => "#6ec8c3",
 		"couleur_claire" => "#c1fcf9",
 		"couleur_lien" => "#6C629F",
 		"couleur_lien_off" => "#272339"
 		),
 //  Gris
 6 => array (
-		"couleur_foncee" => "#77da91",
+		"couleur_foncee" => "#72d08a",
 		"couleur_claire" => "#c1fed1",
 		"couleur_lien" => "#68899F",
 		"couleur_lien_off" => "#253139"
 		),
 //  Gris
 7 => array (
-		"couleur_foncee" => "#b8e369",
+		"couleur_foncee" => "#a2c85d",
 		"couleur_claire" => "#e6fdbc",
 		"couleur_lien" => "#689F97",
 		"couleur_lien_off" => "#253936"
 		),
 //  Bleu truquoise
 8 => array (
-		"couleur_foncee" => "#d4d386",
+		"couleur_foncee" => "#c2c17b",
 		"couleur_claire" => "#fffda2",
 		"couleur_lien" => "#9F765E",
 		"couleur_lien_off" => "#392A22"
