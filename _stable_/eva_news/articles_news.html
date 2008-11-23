@@ -1,0 +1,29 @@
+<div class="bloc">
+	<h3 class="titre">#CONFIG{eva_news/titre}</h3>
+<div align=left id="mynewsdis"><div class="news_border">
+<div id="showhere" class="news_show" ></div>
+</div>
+<div class="buttondiv" id="news_button">
+<img src=#EVAL{_DIR_PLUGIN_EVANEWS}images/prev.gif align="absmiddle" id="news_prev">
+<img src=#EVAL{_DIR_PLUGIN_EVANEWS}images/pause.gif align="absmiddle" id="news_pause">
+<img src=#EVAL{_DIR_PLUGIN_EVANEWS}images/next.gif align="absmiddle" id="news_next">
+</div>
+<div class="news_mark"><div id="news_display"></div>
+</div></div>
+<br><ul>
+[(#REM) Evenements du moment]
+<div id="mynews">
+	<B_evenements>
+			<BOUCLE_evenements(ARTICLES){titre_mot=#CONFIG{eva_news/mot}}>
+			<!-- <img src="eva/images/agenda.jpg" width="57" height="71" border="0" alt="" align="left"> -->						
+			<div id="news#ID_ARTICLE" class="news_style" rel="#TITRE" >						
+				[<li>(#LOGO_ARTICLE|center||image_reduire{60,60})</li>]
+				[<li><a class="nicetitle" href="#URL_ARTICLE" title="#INTRODUCTION">
+				(#TITRE|supprimer_numero)</a></li>]
+				[<li>(#INTRODUCTION|couper{100})</li>]
+			</div>
+			</BOUCLE_evenements>
+	</B_evenements>
+</div>
+</ul>
+</div>

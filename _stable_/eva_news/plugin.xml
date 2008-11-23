@@ -1,0 +1,42 @@
+<plugin>
+    <nom>EVA_NEWS : Bloc de news avec d&eacute;filement</nom>
+    <auteur>Samuel "PoongalOO" [->sam@poongaloo.org]</auteur>
+    <version>0.1</version>
+    <etat>test</etat>
+    <description>
+    {{Articles sous forme de news avec d&eacute;filement automatique}}<br />
+    - Publier une s&eacute;rie d'articles dans un bloc avec des effets<br />
+    - Liste des effets possibles : sans effet, fade out/in, slide up/down, left/right<br />
+    - Temporisation r&eacute;glable<br /><br />
+	 
+	 {{Utilisation :}}<br/>
+	 {Avec des squelettes autres que eva-web 4 :}<br />
+	 Vous devez ins&eacute;rer la ligne <code>&lt;INCLURE {fond=articles_news}{ajax}&gt;</code> dans votre squelette &agrave; l'endroit où doit apparaître le bloc de news<br/><br />
+	 {Avec eva-web 4 :}<br />
+	 Rendez-vous dans l'onglet "structure" du plugin eva-habillage.<br />
+	 Dans le deuxi&egrave;me bloc intitul&eacute; "Choisir la position des blocs dans les pages",
+	 allez &agrave; la ligne "Ins&eacute;rer un squelette personnel de type bloc dans une des pages...".<br />
+	 A l'&eacute;tape 2, dans la zone de texte "Nom du squelette", tapez "articles_news", puis validez.<br /><br/>
+	 
+	 {{Configuration :}}<br/>
+	 Cliquez [ICI->?exec=cfg&amp;cfg=eva_news] pour configurer le comportement d'eva_news.<br/>
+	 <br/>
+    Bas&eacute; sur [EASYNEWS->http://www.ezjquery.com/cgi-bin/webapp.rb?r=access#] 
+    </description>
+    <lien>http://eva-web.edres74.net</lien>
+    
+    <prefix>evanews</prefix>
+	
+	<necessite id="cfg" version="[1.10.3;]" />
+	
+	<bouton id='eva_news' parent='configuration'>
+      <icone>img_pack/evanews.png</icone>
+      <titre>eva news</titre>
+  </bouton>
+    
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+	  
+</plugin>

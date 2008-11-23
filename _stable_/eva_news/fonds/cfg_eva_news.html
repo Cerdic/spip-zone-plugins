@@ -1,0 +1,44 @@
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+[(#REM) descriptif=
+<h4>Param&egrave;trage du bloc de news </h4>
+Ici vous pouvez choisir le titre du bloc, s&eacute;lectionner un effet et r&eacute;gler la vitesse de cet effet.<br />
+<br /><a href="http://eva-web.edres74.net/spip.php?rubrique4" class="spip_out">Documentation officielle</a>
+]
+
+[(#REM) titre= Param&egrave;trage d'eva_news]
+
+<fieldset><legend>Eva news</legend>
+<label>Titre du bloc : </label><input type="text" name="titre" value="#ENV{titre,evenements}" /><br/><br/>
+
+<label>Choisir un effet : </label>
+<select name="effet">
+	<option value="#ENV{effet,0}">FadeIn et Out</option>
+	<option value="#ENV{effet,1}">Glissement de haut en bas</option>
+	<option value="#ENV{effet,2}">De gauche à droite</option>
+</select>
+<br/><br/>
+
+<label>Vitesse : </label><input type="text" name="vitesse" value="#ENV{vitesse,600}" /><br /><br />
+
+<label>Durée de pause entre chaque articles : </label><input type="text" name="pausevitesse" value="#ENV{pausevitesse,6000}" /><br /><br />
+
+<label>Mot cl&eacute; associ&eacute; : </label><input type="text" name="mot" value="#ENV{mot,evenement}" /><br />
+
+</fieldset>
+
+<input type="submit" name="_cfg_ok" value="<:valider:>" />
+
+<br /><br />
+</form>
+
+<form method="post" action="#URL_SITE_SPIP/">
+<input type="submit" value="<:page_publique:>" />
+</form>
+<br />
+<form method="post" action="?exec=eva_news">
+<input type="submit" value="Retour à la page du plugin" />
+</form>
+
+#CFG_ARBO{eva_news}
