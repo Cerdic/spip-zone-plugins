@@ -13,10 +13,10 @@
 /*                                                                                        */
 /* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but specifique. Reportez-vous à la Licence Publique Generale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous ï¿½ la Licence Publique Generale GNU  */
+/* pour plus de dï¿½tails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Generale GNU                    */
+/* Vous devez avoir reï¿½u une copie de la Licence Publique Generale GNU                    */
 /* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
@@ -27,12 +27,12 @@
 // $LastChangedDate$
 
 /*
-	Fonctions consacrées au traitement du contenu du courrier et tampon :
+	Fonctions consacrï¿½es au traitement du contenu du courrier et tampon :
 	- filtres, convertisseurs texte, charset, etc.
 	
 	Toutes les fonctions ici ont un nom commencant pas 'spiplistes_courrier'
 	
-	Voir base/spiplistes_upgrade.php pour définitions et descriptions des tables
+	Voir base/spiplistes_upgrade.php pour dï¿½finitions et descriptions des tables
 	
 	
 */
@@ -56,7 +56,7 @@ function spiplistes_courrier_propre($texte){
 	$texte = propre($texte); // pb: enleve aussi <style>...  
 	$texte = spiplistes_courrier_propre_bloog($texte); //nettoyer les spip class truc en trop
 	$texte = ereg_replace("__STYLE__", $style_str, $texte);
-	//les liens avec double début #URL_SITE_SPIP/#URL_ARTICLE
+	//les liens avec double debut #URL_SITE_SPIP/#URL_ARTICLE
 	$texte = ereg_replace($GLOBALS['meta']['adresse_site']."/".$GLOBALS['meta']['adresse_site'], $GLOBALS['meta']['adresse_site'], $texte);
 	$texte = liens_absolus($texte);
 	
@@ -125,7 +125,7 @@ function spiplistes_courrier_propre_bloog($texte) {
 
 /****
  * titre : spiplistes_courrier_version_texte
- * d'après Clever Mail (-> NHoizey), mais en mieux.
+ * d'aprï¿½s Clever Mail (-> NHoizey), mais en mieux.
 ****/
 
 function spiplistes_courrier_version_texte($in) {
@@ -255,7 +255,7 @@ spiplistes_log("API: remplir courrier: #$id_courrier, liste: #$id_liste, auteur:
 		$sql_valeurs = "";
 	
 		if($id_liste > 0) {
-			// prendre la liste des abonnés à cette liste
+			// prendre la liste des abonnï¿½s ï¿½ cette liste
 			$ids_abos = spiplistes_listes_liste_abo_ids($id_liste);
 			if(count($ids_abos)) {
 				$sql_where_q = "(".implode(",", array_map("sql_quote", $ids_abos)).")";
@@ -313,6 +313,13 @@ spiplistes_log("ERR: spiplistes_courrier_remplir_queue_envois($id_courrier, $id_
 }
 
 //CP-20080509: upadte sql sur un courrier
+/*
+ * Modifier un courrier
+ * @return true ou false
+ * @param $id_courrier 
+ * @param $sql_set_array les valeurs Ã  modifier. ex.: array('col1' => 'val1')
+ * @param $quote si true, les valeurs seront quote' par sql_updateq
+ */
 function spiplistes_courrier_modifier ($id_courrier, $sql_set_array, $quote = true) {
 	$id_courrier = intval($id_courrier);
 	$sql_update = $quote ? "sql_updateq" : "sql_update";
@@ -346,7 +353,7 @@ function spiplistes_courrier_supprimer_queue_envois ($sql_where_key, $sql_where_
 				$result = sql_delete("spip_auteurs_courriers"
 					, "id_courrier IN (SELECT id_courrier FROM spip_courriers WHERE $sql_where)");	
 			} else {
-				// Sur les précieux conseils de MM :
+				// Sur les prï¿½cieux conseils de MM :
 				// passer la requete en 2 etapes pour assurer portabilite sql
 				$selection =
 					sql_select("id_courrier", "spip_courriers", $sql_where,'','','','','',false);
@@ -393,5 +400,32 @@ function spiplistes_courriers_total_abonnes ($id_courrier = 0) {
 		)
 	);
 }
-//
+
+//CP-20081124
+/*
+ * @return les pieds pour les courriers
+ * @param $lang Object
+ */
+function spiplistes_courriers_pieds ($lang, $defaut = 'piedmail') {
+	static $pieds;
+	if($pieds === null) {
+		$contexte_pied = array('lang'=>$lang);
+		// chercher dans l'ancien repertoire (SPIP-Listes 192)
+		if(find_in_path("modeles/$defaut.html")) {
+			$pied_html = recuperer_fond("modeles/$defaut", $contexte_pied);
+		}
+		// les pieds sont maintenant rangÃ©s dans patrons/pieds_courriers/
+		else {
+			$pied_html = recuperer_fond(_SPIPLISTES_PATRONS_PIED_DIR.$defaut, $contexte_pied);
+		}
+		$pied_texte = 
+			(find_in_path(_SPIPLISTES_PATRONS_PIED_DIR.$defaut.'_texte.html'))
+			? recuperer_fond(_SPIPLISTES_PATRONS_PIED_DIR.$defaut.'_texte', $contexte_pied)
+			: spiplistes_courrier_version_texte($pied_html)
+			;
+		$pieds = array($pied_html, $pied_texte);
+	}
+	return($pieds);
+}
+
 ?>

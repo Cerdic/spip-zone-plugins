@@ -29,6 +29,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/filtres');
 include_spip('inc/spiplistes_api_globales');
 
 // adapte de abomailman ()
@@ -75,12 +76,11 @@ function exec_spiplistes_courrier_previsu () {
 		, 'avec_intro', 'message_intro'
 		, 'avec_patron', 'patron', 'patron_pos'
 		, 'avec_sommaire'
-		, 'titre', 'message'
+		, 'titre', 'message' 
 		, 'Confirmer', 'date'
 		, 'lire_base', 'format', 'plein_ecran'
 		, 'date_sommaire'
 	);
-
 	foreach(array_merge($str_values, $int_values) as $key) {
 		$$key = _request($key);
 //spiplistes_log("$key :-: ".$$key);
@@ -102,7 +102,13 @@ function exec_spiplistes_courrier_previsu () {
 		: ""
 		;
 
-	$pied_page = ($id_liste) ? spiplistes_pied_de_page_liste($id_liste, $lang) : "";
+	if($id_liste) {
+		$pied_html = spiplistes_pied_de_page_liste($id_liste, $lang);
+		$pied_texte = spiplistes_courrier_version_texte($pied_html);
+	}
+	else {
+		list($pied_html, $pied_texte) = spiplistes_courriers_pieds ($lang);
+	}
 	
 	$texte_editeur =
 		(spiplistes_pref_lire('opt_ajout_tampon_editeur') == 'oui')
@@ -110,12 +116,11 @@ function exec_spiplistes_courrier_previsu () {
 		: ""
 		;
 	
-	$texte_intro = $texte_patron = $texte_sommaire = "";
+	$texte_intro = $texte_patron = $sommaire_html = "";
 	
-	if($lire_base) {
+	if($lire_base) { 
 		// prendre le courrier enregistre dans la base
 		$sql_select = 'texte,titre' . (($format=='texte') ? ',message_texte' : '');
-		
 		if(
 			$id_courrier 
 			&& ($row = sql_fetsel($sql_select, "spip_courriers", "id_courrier=".sql_quote($id_courrier), "", "", 1))
@@ -129,7 +134,7 @@ function exec_spiplistes_courrier_previsu () {
 				$texte_html = ""
 					. $texte_lien_courrier
 					. $texte
-					. $pied_page
+					. $pied_html
 					. $texte_editeur
 					;
 					
@@ -143,7 +148,10 @@ function exec_spiplistes_courrier_previsu () {
 					$message_texte = 
 						empty($message_texte) 
 						? spiplistes_courrier_version_texte($texte_html) 
-						: spiplistes_courrier_version_texte($texte_lien_courrier).$message_texte.spiplistes_courrier_version_texte($pied_page).spiplistes_courrier_version_texte($texte_editeur)
+						: spiplistes_courrier_version_texte($texte_lien_courrier)
+							. spiplistes_courrier_version_texte($message_texte)
+							. $pied_texte
+							. spiplistes_courrier_version_texte($texte_editeur)
 						;
 					echo($message_texte);
 					exit(0);
@@ -172,16 +180,23 @@ function exec_spiplistes_courrier_previsu () {
 			echo(_T('spiplistes:Erreur_courrier_introuvable'));
 		}
 	}
-	else {
 	
+	//////////////////////////////////////////////////
+	// si nouveau courrier (pas dans la base), generer un appercu
+	else {
+		
+		$intro_html = $intro_texte = 
+			$sommaire_html = $sommaire_texte = "";
+		
 		if($avec_intro == 'oui') {
-		
-			$message_intro = "<div>".propre($message_intro)."</div>\n";
-		
-		} // end if($avec_intro == 'oui')
+			$ii = propre($message_intro);
+			$intro_html = "<div>$ii</div>\n";
+			$intro_texte = spiplistes_courrier_version_texte($ii);
+		} 
 
 		if($avec_patron == 'oui') {
 			// generer le contenu (editeur)
+
 			include_spip('public/assembler');	
 			$contexte_template = array(
 				'date' => trim ($date)
@@ -190,30 +205,38 @@ function exec_spiplistes_courrier_previsu () {
 				, 'patron' => $patron
 				, 'lang' => $lang
 				, 'sujet' => $titre
-				, 'message' => $message 
+				, 'message' => $message
 			);
 			
-			if (find_in_path('patrons/'.$patron.'_texte.html')){
-				$patron_version_texte = true ;
-				$message_texte =  recuperer_fond('patrons/'.$patron.'_texte', $contexte_template);
-			}
-		
-
 			// Il faut utiliser recuperer_page et non recuperer_fond car sinon les url des articles
 			// sont sous forme privee : spip.php?action=redirect&.... horrible !
 			// pour utiliser recuperer_fond,il faudrait etre ici dans un script action
 			//	$texte_patron = recuperer_fond('patrons/'.$template, $contexte_template);
 	
-			$titre = $titre_patron = _T('spiplistes:lettre_info')." ".$nomsite;
-			$texte = $texte_patron = recuperer_fond('patrons/'.$patron, $contexte_template);
-		
+			$titre_html = _T('spiplistes:lettre_info')." ".$nomsite;
+			$titre_texte = spiplistes_courrier_version_texte($titre_html) . "\n";
+
+			$message_html = recuperer_fond('patrons/'.$patron, $contexte_template);
+			$message_texte = 
+				(find_in_path('patrons/'.$patron.'_texte.html'))
+				? recuperer_fond('patrons/'.$patron.'_texte', $contexte_template) . "\n"
+				: spiplistes_courrier_version_texte($message_html) . "\n"
+				;
 		} // end if($avec_patron == 'oui')
+
+		else {
+			$titre_html = propre($titre);
+			$message_html = propre($message);
+			$titre_texte = spiplistes_courrier_version_texte($titre_html) . "\n";
+			$message_texte = spiplistes_courrier_version_texte($message_html) . "\n";
+		}
 		
 		if($avec_sommaire == 'oui') {
 
 			if($id_rubrique > 0) {
-				
-				$sql_where = array("id_rubrique=".sql_quote($id_rubrique));
+
+				$sql_where = array("id_rubrique=".sql_quote($id_rubrique)
+					, "statut=".sql_quote('publie'));
 				
 				if($date_sommaire == 'oui') {
 					$sql_where[] = "date >= " . sql_quote($date);
@@ -223,11 +246,10 @@ function exec_spiplistes_courrier_previsu () {
 					, $sql_where
 					)) {
 					while($row = sql_fetch($sql_result)) {
-						$texte_sommaire .= "<li> <a href='"
-							. generer_url_article($row['id_article'])
-							. "'>"
-							. typo($row['titre'])
-							. "</a></li>\n";
+						$url = generer_url_article($row['id_article']);
+						$ii = typo($row['titre']);
+						$sommaire_html .= "<li> <a href='" . $url . "'>" . $ii . "</a></li>\n";
+						$sommaire_texte .= " - " . textebrut($ii) . "\n   " . $url . "\n";
 					}
 				}
 			}
@@ -235,24 +257,32 @@ function exec_spiplistes_courrier_previsu () {
 			if($id_mot > 0) {
 				if($sql_result = sql_select("a.titre,a.id_article"
 					, "spip_articles AS a LEFT JOIN spip_mots_articles AS m ON a.id_article=m.id_article"
-					, "m.id_mot=".sql_quote($id_mot)." AND a.date >= " . sql_quote($sql_date)
+					, array(
+						"a.statut=".sql_quote('publie')
+						, "m.id_mot=".sql_quote($id_mot)
+						, "a.date >= " . sql_quote($sql_date)
+						)
 					)) {
 					while($row = sql_fetch($sql_result)) {
-						$texte_sommaire .= "<li> <a href='"
-							. generer_url_article($row['id_article'])
-							. "'>"
-							. typo($row['titre'])
-							. "</a></li>\n";
+						$ii = typo($row['titre']);
+						$url = generer_url_article($row['id_article']);
+						$sommaire_html .= "<li> <a href='" . $url . "'> " . $ii . "</a></li>\n";
+						$sommaire_texte .= " - " . textebrut($ii) . "\n   " . $url . "\n";
 					}
 				}
 			}
 			
-			if(!empty($texte_sommaire)) {
-				$texte_sommaire = "<ul>" . $texte_sommaire . "</ul>\n";
-				$texte = 
+			if(!empty($sommaire_html)) {
+				$sommaire_html = "<ul>" . $sommaire_html . "</ul>\n";
+				$message_html = 
 					($patron_pos == "avant")
-					? $texte . $texte_sommaire
-					: $texte_sommaire . $texte
+					? $message_html . $sommaire_html
+					: $sommaire_html . $message_html
+					;
+				$message_texte = 
+					($patron_pos == "avant")
+					? $message_texte . "\n" . $sommaire_texte
+					: $sommaire_texte . "\n" . $message_texte
 					;
 			}
 		
@@ -262,17 +292,39 @@ function exec_spiplistes_courrier_previsu () {
 			? generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,"id_courrier=$id_courrier")
 			: generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER)
 			;
-	
-		$contexte_pied = array('lang'=>$lang);
-		$texte_pied = recuperer_fond('modeles/piedmail', $contexte_pied);
 		
-		$texte = $message_intro . $texte;
+		$message_html = liens_absolus($intro_html . $message_html);
+		$message_texte = liens_absolus($intro_texte . $message_texte);
 		
 		$page_result = ""
 			// boite courrier au format html
 			. debut_cadre_couleur('', true)
 			. "<form id='choppe_patron-1' action='$form_action' method='post' name='choppe_patron-1'>\n"
-			. _T('spiplistes:version_html')
+			. "<div id='previsu-html' class='switch-previsu'>\n"
+			. _T('spiplistes:version_html') 
+				. " / " . "<a href='javascript:jQuery(this).switch_previsu()'>" 
+				. _T('spiplistes:version_texte') . "</a>\n"
+			. "<div class='previsu-content'>\n"
+			. $message_html
+			. $message_erreur
+			. $pied_html
+			. $texte_editeur
+			. "</div>\n"
+			. "</div>\n" // id='previsu-html
+			. "<div id='previsu-texte' class='switch-previsu' style='display:none;'>\n"
+			. "<a href='javascript:jQuery(this).switch_previsu()'>" . _T('spiplistes:version_html') . "</a>\n"
+				. " / " 
+				. _T('spiplistes:version_texte') 
+			. "<div class='previsu-content'>\n"
+			. "<pre>"
+			. $message_texte
+			. $message_erreur
+			. $pied_texte
+			. $texte_editeur
+			. "</pre>"
+			. "</div>\n"
+			. "</div>\n" // id='previsu-texte
+			. "<p style='text-align:right;margin-bottom:0;'>"
 			. "<input type='hidden' name='modifier_message' value='oui' />\n"
 			.	(
 					($id_courrier)
@@ -280,21 +332,17 @@ function exec_spiplistes_courrier_previsu () {
 					:	"<input type='hidden' name='new' value='oui' />\n"
 				)
 			. "<input type='hidden' name='titre' value=\"".htmlspecialchars($titre)."\">\n"
-			. "<input type='hidden' name='texte' value=\"".htmlspecialchars($texte)."\">\n"
+			. "<input type='hidden' name='message' value=\"".htmlspecialchars($message_html)."\">\n"
+			. "<input type='hidden' name='message_texte' value=\"".htmlspecialchars($message_texte)."\">\n"
 			. "<input type='hidden' name='date' value='$date'>\n"
-			. "<div style='background-color:#fff;border:1px solid #000;overflow:scroll;'>\n"
-			. liens_absolus($texte)
-			. $message_erreur
-			. $texte_pied
-			. $texte_editeur
-			. "</div>\n"
-			. "<p style='text-align:right;margin-bottom:0;'><input type='submit' name='btn_courrier_valider' value='"._T('bouton_valider')."' class='fondo' /></p>\n"
+			. "<input type='submit' name='btn_courrier_valider' value='"._T('bouton_valider')."' class='fondo' /></p>\n"
 			. "</form>\n"
 			. fin_cadre_couleur(true)
 			. "<br />\n"
 			;
 		echo($page_result);
 	}
+	exit(0);
 }	
 
 /******************************************************************************************/

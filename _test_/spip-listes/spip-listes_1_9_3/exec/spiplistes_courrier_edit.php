@@ -62,7 +62,7 @@ function exec_spiplistes_courrier_edit(){
 	if($id_courrier > 0) {
 	///////////////////////////
 	// Edition /modification d'un courrier
-		$sql_select_array = array('titre','texte','type','statut','id_auteur');
+		$sql_select_array = array('titre','texte','message_texte','type','statut','id_auteur');
 		if($row = spiplistes_courriers_premier($id_courrier, $sql_select_array)) {
 			foreach($sql_select_array as $key) {
 				$$key = $row[$key];
@@ -294,6 +294,7 @@ function exec_spiplistes_courrier_edit(){
 				, array('titre_bouton'=>_T('spiplistes:generer_Apercu'), 'titre_champ_texte'=>_T('spiplistes:texte_courrier'))
 				)
 			. "</p>\n"
+		. "<p class='verdana2'>\n" ._T('spiplistes:calcul_patron_attention') .  "</p>\n"
 		. spiplistes_form_bouton_valider ('Valider', _T('spiplistes:generer_Apercu'))
 		. fin_block() // fin_block_invisible
 		. fin_cadre_relief(true)
@@ -304,8 +305,8 @@ function exec_spiplistes_courrier_edit(){
 	// bloc du courrier (titre, texte), toujours visible
 	$page_result .= ""
 		. "<label for='texte_courrier'>"._T('spiplistes:texte_courrier')."</label>\n"
-		. afficher_barre('document.formulaire_courrier_edit.texte')
-		. "<textarea id='texte_courrier' name='texte' ".$GLOBALS['browser_caret']." class='formo' rows='20' cols='40' wrap=soft>\n"
+		. afficher_barre('document.formulaire_courrier_edit.message')
+		. "<textarea id='texte_courrier' name='message' ".$GLOBALS['browser_caret']." class='formo' rows='20' cols='40' wrap=soft>\n"
 		. $texte
 		. "</textarea>\n"
 		. (!$id_courrier ? "<input type='hidden' name='new' value=\"oui\" />\n" : "")

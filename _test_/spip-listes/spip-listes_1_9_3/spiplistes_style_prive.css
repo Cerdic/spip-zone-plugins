@@ -36,6 +36,7 @@
 .spiplistes .supprimer_cet_abo {background: url() no-repeat center;}
 .spiplistes .supprimer_cet_abo a {display:block;}
 .spiplistes .supprimer_cet_abo span {display:none}
+.spiplistes .previsu-content {background-color:#fff;border:1px solid #000;overflow:auto;width:500px;height:40em;}
 #spiplistes_l_recherche img {margin:0;border:0;float:left;width:26px;height:20px;display:block}
 table.spiplistes-abos {	border:1px solid gray }
 table.spiplistes-abos tr.onglets { border-bottom: 10px solid #ccc;line-height:1.8em;margin-bottom:1em;padding:1em }

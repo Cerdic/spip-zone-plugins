@@ -27,7 +27,7 @@ jQuery(document).ready(function(){
 		}
 		else {
 		// c'est le bouton de previsu qui valide
-			var data = jQuery('input[@type=checkbox][@checked],input[@type=radio][@checked],select,textarea',this).serialize();
+			var data = jQuery('input[@name=titre],input[@name=id_courrier],input[@type=checkbox][@checked],input[@type=radio][@checked],select,textarea',this).serialize();
 			jQuery.ajax({ type: "POST", 
 						url: "./?exec=spiplistes_courrier_previsu", 
 						data: data, 
@@ -65,4 +65,11 @@ jQuery(document).ready(function(){
 			jQuery(this).val('non');
 		}
 	});
+	
+	jQuery.fn.extend({
+		switch_previsu: function() {
+			jQuery(".switch-previsu").toggle();
+		}
+	});
+
 });

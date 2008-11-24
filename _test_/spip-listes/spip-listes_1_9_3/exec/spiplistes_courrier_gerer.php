@@ -59,7 +59,7 @@ function exec_spiplistes_courrier_gerer () {
 	foreach(array(
 		'type'
 		, 'id_courrier'
-		, 'btn_courrier_valider', 'titre', 'texte' // (formulaire edition) _SPIPLISTES_EXEC_COURRIER_EDIT
+		, 'btn_courrier_valider', 'titre', 'message', 'message_texte' // (formulaire edition) _SPIPLISTES_EXEC_COURRIER_EDIT
 		, 'new' // idem
 		, 'btn_changer_destination', 'radio_destination', 'email_test', 'id_liste' // (formulaire local) destinataire
 		, 'change_statut' // (formulaire spiplistes_boite_autocron) 'publie' pour annuler envoi par boite autocron
@@ -71,10 +71,11 @@ function exec_spiplistes_courrier_gerer () {
 	foreach(array('id_courrier', 'id_liste', 'btn_dupliquer_courrier') as $key) {
 		$$key = intval($$key);
 	}
-	foreach(array('email_test','titre','texte') as $key) {
+	foreach(array('email_test','titre','message','message_texte') as $key) {
 		$$key = trim($$key);
 	}
-			
+	$texte = $message;
+
 	$page_result = $message_erreur = $str_destinataire =
 		$boite_confirme_envoi = "";
 
@@ -106,13 +107,15 @@ function exec_spiplistes_courrier_gerer () {
 				if($row = sql_fetsel('titre,texte', 'spip_courriers', "id_courrier=".sql_quote($id_courrier),'','',1)) {
 					$titre = typo($row['titre']);
 					$texte = typo($row['texte']);
+					$texte = typo($row['message_texte']);
 					$str_log = "id_courrier #$id_courrier";
 					$statut = _SPIPLISTES_COURRIER_STATUT_REDAC;
 					$type = _SPIPLISTES_COURRIER_TYPE_NEWSLETTER;
 					$id_courrier = sql_insert(
 						'spip_courriers'
-						, "(titre,texte,date,statut,type,id_auteur)"
-						, "(".sql_quote($titre).",".sql_quote($texte).",NOW(),".sql_quote($statut).",".sql_quote($type).",".sql_quote($connect_id_auteur).")"
+						, "(titre,texte,message_texte,date,statut,type,id_auteur)"
+						, "(".sql_quote($titre).",".sql_quote($texte).",".sql_quote($message_texte)
+							.",NOW(),".sql_quote($statut).",".sql_quote($type).",".sql_quote($connect_id_auteur).")"
 					);
 					spiplistes_log("$str_log DUPLICATED TO #$id_courrier BY ID_AUTEUR #$connect_id_auteur");
 				}
@@ -199,13 +202,12 @@ function exec_spiplistes_courrier_gerer () {
 			else if($btn_courrier_valider) {
 				// retour editeur local
 				if(!empty($titre)) {
-					spiplistes_courrier_modifier(
-						$id_courrier
-						, array(
+					$sql_set = array(
 							  'titre' => $titre
 							, 'texte' => $texte
-						)
-					);
+							, 'message_texte' => $message_texte
+						);
+					spiplistes_courrier_modifier($id_courrier, $sql_set);
 				}
 				else {
 					$message_erreur .= spiplistes_boite_alerte (_T('spiplistes:Erreur_courrier_titre_vide'), true);
@@ -234,8 +236,9 @@ function exec_spiplistes_courrier_gerer () {
 			$type = _SPIPLISTES_COURRIER_TYPE_NEWSLETTER;
 			$id_courrier = sql_insert(
 				'spip_courriers'
-				, "(titre,texte,date,statut,type,id_auteur)"
-				, "(".sql_quote($titre).",".sql_quote($texte).",NOW(),".sql_quote($statut).",".sql_quote($type).",".sql_quote($connect_id_auteur).")"
+				, "(titre,texte,message_texte,date,statut,type,id_auteur)"
+				, "(".sql_quote($titre).",".sql_quote($texte).",".sql_quote($message_texte)
+					.",NOW(),".sql_quote($statut).",".sql_quote($type).",".sql_quote($connect_id_auteur).")"
 			);
 		}
 		else {
@@ -567,7 +570,7 @@ function exec_spiplistes_courrier_gerer () {
 			. _T('spiplistes:version_texte')
 			. "&nbsp;<a href='"
 				. generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE,"id_courrier=$id_courrier&id_liste=$id_liste&lire_base=oui&format=texte&plein_ecran=oui")
-				."' title='"._T('spiplistes:Apercu_plein_ecran')." ($alt_message_texte)' target='_blank'>\n"
+				."' title='"._T('spiplistes:Apercu_plein_ecran')."' target='_blank'>\n"
 			. spiplistes_icone_oeil() . "</a><br />\n"
 			. "<textarea readonly='readonly' name='texte' rows='".(($spip_ecran == "large") ? 28 : 20)."' class='formo' cols='40' wrap='soft'>"
 			. spiplistes_courrier_version_texte(propre($message_texte))

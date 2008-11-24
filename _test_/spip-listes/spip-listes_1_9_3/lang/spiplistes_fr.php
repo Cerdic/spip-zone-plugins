@@ -119,8 +119,10 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 	Svp, veuillez confirmer votre demande."
 
 //C
-, 'calcul_patron' => 'Calcul avec le patron version texte',
-'calcul_html' => 'Calcul depuis la version HTML du message',
+, 'calcul_patron' => 'Calcul avec le patron version texte'
+, 'calcul_patron_attention' => "Certains patrons ins&egrave;rent dans leur r&eacute;sultat le texte ci-dessous (Texte du courrier). 
+	Si vous faites une mise &agrave; jour de votre courrier, pensez &agrave; vider cette boîte avant de g&eacute;n&eacute;rer le contenu."
+, 'calcul_html' => 'Calcul depuis la version HTML du message',
 'Cette_liste_est' => 'Cette liste est',
 'charger_patron' => 'Choisir un patron pour le courrier',
 'charger_le_patron' => 'G&eacute;n&eacute;rer le courrier',
