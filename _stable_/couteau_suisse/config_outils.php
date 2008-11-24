@@ -118,6 +118,8 @@ add_outil( array(
 	'traitement:TITRE:pre_typo' => 'supprimer_numero',
 	// inserer : $table_des_traitements['NOM'][]= 'typo(supprimer_numero(%s))';
 	'traitement:NOM:pre_typo' => 'supprimer_numero',
+	// inserer : $table_des_traitements['TYPE']['mots']= 'typo(supprimer_numero(%s))';
+	'traitement:TYPE/mots:pre_typo' => 'supprimer_numero',
 	'categorie' => 'public',
 ));
 
