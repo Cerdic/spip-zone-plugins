@@ -5,6 +5,7 @@
 
 
 TO-DO:
+. Retablir <patron>_texte. Voir http://archives.rezo.net/spip-zone.mbox/200811.mbox/browser
 . sous SPIP 2, spiplistes_courrier_edit, generer courrier, le sélecteur de langue est vide.
 . sous SPIP 1.9.2|2, spiplistes_courrier_edit, generer courrier ne fonctionne pas. Revoir egalement la selection de la date d'envoi
 . ?exec=spiplistes_listes_toutes preciser les listes sans patron
