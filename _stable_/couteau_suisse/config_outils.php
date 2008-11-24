@@ -1069,6 +1069,7 @@ add_variable( array(
 add_outil( array(
 	'id' => 'titre_parent',
 	'categorie' => 'spip',
+	'contrib' => 2900,
 ));
 
 add_outil( array(
