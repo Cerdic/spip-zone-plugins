@@ -485,14 +485,13 @@ if (!window.jQuery) document.write('".addslashes(propre('<p>'._T('couteauprive:e
 	if(isset($GLOBALS['cs_installer'])) foreach(array_keys($GLOBALS['cs_installer']) as $pack)
 		$aide .= "\n_ " . _T('couteauprive:pack_du', array('pack'=>"{[{$pack}|"._T('couteauprive:pack_installe').'->' . generer_url_ecrire($exec,'cmd=install&pack='.urlencode($pack)) . ']}'));
 	// si le plugin est installe par procedure automatique, on permet la mise a jour directe (SPIP >= 2.0)
-	$form_update = preg_match(',/auto/couteau_suisse/$,',_DIR_PLUGIN_COUTEAU_SUISSE)?
+	$form_update = preg_match(',plugins/auto/couteau_suisse/$,',_DIR_PLUGIN_COUTEAU_SUISSE)?
 		"<input type='hidden' name='url_zip_plugin' value='http://files.spip.org/spip-zone/couteau_suisse.zip' />"
 		. "<br/><div class='cs_sobre'><input type='submit' value='&bull; " . attribut_html(_T('couteauprive:version_update')) . "' class='cs_sobre' title='" . attribut_html(_T('couteauprive:version_update_title')) . "'/></div>"
 		:"";
 	// un lien si le plugin plugin "Telechargeur" est present (SPIP < 2.0)
-	$form_update = (!strlen($form_update) && defined('_DIR_PLUGIN_CHARGEUR'))?
-		"<br/>&bull; <a title='" . attribut_html(_T('couteauprive:version_update_chargeur_title')) . "' href='../spip.php?action=charger&plugin=couteau_suisse&url_retour=".urlencode(generer_url_ecrire('admin_couteau_suisse'))."'>"._T('couteauprive:version_update_chargeur').'</a>'
-		:"";
+	if(!strlen($form_update) && defined('_DIR_PLUGIN_CHARGEUR'))
+		$form_update = "<br/>&bull; <a title='" . attribut_html(_T('couteauprive:version_update_chargeur_title')) . "' href='../spip.php?action=charger&plugin=couteau_suisse&url_retour=".urlencode(generer_url_ecrire('admin_couteau_suisse'))."'>"._T('couteauprive:version_update_chargeur').'</a>';
 	// compilation du bandeau gauche
 	$aide =	_T('couteauprive:help2', array(
 			'version' => $cs_version.$cs_revision.'<br/>'.
