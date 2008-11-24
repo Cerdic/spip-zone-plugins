@@ -9,15 +9,15 @@
 /**
  * Parametre de configuration de la corbeille.
  * 
- * "nom de l'objet spip" => array ("statut" => nom du statut dans la base de données (bdd),
- * 									"titre" => nom du champ retourné dans le listing,
+ * "nom de l'objet spip" => array ("statut" => nom du statut dans la base de donnees (bdd),
+ * 									"titre" => nom du champ retourne dans le listing,
  * 									"table" => nom de la table spip dans la bdd,
  * 									"id" => clef primaire dans la table,
- * 									"temps" => aucune idée à quoi ça peut servir,
- * 									"page_voir" => parametres pour voir le détail d'un objet
+ * 									"temps" => aucune idee a quoi ça peut servir,
+ * 									"page_voir" => parametres pour voir le detail d'un objet
  * 									"libelle" => texte long dans la partie droite de l'affichage,
  * 									"libelle_court" => texte court dans le menu gauche,
- * 									"tablelie"  => tableau des tables spip à vider en meme temps    )  
+ * 									"tableliee"  => tableau des tables spip à vider en meme temps    )  
  * 
  * @param string $table
  * @return array
@@ -76,7 +76,7 @@ function corbeille_table_infos($table){
  *
  * @param nom $table
  * @param tableau $ids
- * @return neant
+ * @return $ids trouves (sinon false)
  */
 function corbeille_vider($table, $ids=array()) {
 	include_spip('base/abstract_sql');
@@ -95,9 +95,9 @@ function corbeille_vider($table, $ids=array()) {
 	if (!$statut)
 		return false;
 
-	//determine les index des elements a supprimer
+	// determine les index des elements a supprimer
 	if ($ids===-1) {
-		//recupere les identifiants des objets  supprimer
+		// recupere les identifiants des objets a supprimer
 		$ids = array_map('reset',sql_allfetsel($id_table,$table_sql,'statut='.sql_quote($statut)));
 	}
 	else {
@@ -108,16 +108,16 @@ function corbeille_vider($table, $ids=array()) {
 		return false;
 		
 
-	//supprime les elements definis par la liste des index
+	// supprime les elements definis par la liste des index
 	sql_delete($table_sql,sql_in($id_table,$ids));
-	//suppresion des elements lies
+	// suppresion des elements lies
 	if ($table_liee=$corbeille_param['tableliee']) {
 		$trouver_table = charger_fonction('trouver_table','base');
 		foreach($table_liee as $unetable) {
 			$desc = $trouver_table($unetable);
-			if (isset($desc['fields'][$id_table]))
+			if (isset($desc['field'][$id_table]))
 				sql_delete($unetable,sql_in($id_table,$ids));
-			elseif(isset($desc['fields']['id_objet']) AND isset($desc['fields']['objet']))
+			elseif(isset($desc['field']['id_objet']) AND isset($desc['field']['objet']))
 				sql_delete($unetable,sql_in('id_objet',$ids)." AND objet=".sql_quote($type));		
 		}
 	}
