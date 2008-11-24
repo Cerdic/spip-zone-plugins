@@ -153,4 +153,17 @@ function cs_log($variable, $prefixe='', $stat='') {
 	if (defined('_CS_REPORTALL')) echo '<br/>',htmlentities($variable);
 }
 
+// Dates
+function cs_date() {
+	return date(_T('couteau:date_court', array('jour'=>'d', 'mois'=>'m', 'annee'=>'y')));
+}
+function cs_date_long($numdate) {
+	$date_array = recup_date($numdate);
+	if (!$date_array) return '?';
+	list($annee, $mois, $jour, $heures, $minutes, $sec) = $date_array;
+	if(!defined('_SPIP19300')) list($heures, $minutes) =array(heures($numdate), minutes($numdate));
+	return _T('couteau:stats_date', array('jour'=>$jour, 'mois'=>$mois, 'annee'=>substr($annee,2), 'h'=>$heures, 'm'=>$minutes, 's'=>$sec));
+}
+
+
 ?>

@@ -102,21 +102,13 @@ function cs_listeulli($res) {
 	return "<p><ul style='list-style-type:none; padding:0;margin:0;'>$li".join("</li>$li", $res).'</li></ul></p>';
 }
 
-function cs_date($numdate) {
-	$date_array = recup_date($numdate);
-	if (!$date_array) return '?';
-	list($annee, $mois, $jour, $heures, $minutes, $sec) = $date_array;
-	if(!defined('_SPIP19300')) list($heures, $minutes) =array(heures($numdate), minutes($numdate));
-	return _T('couteau:stats_date', array('jour'=>$jour, 'mois'=>$mois, 'annee'=>substr($annee,2), 'h'=>$heures, 'm'=>$minutes, 's'=>$sec));
-}
-
 function cs_derniers_connectes($fetch){ 
 	$query = spip_query("SELECT id_auteur,nom,statut,en_ligne FROM spip_auteurs ORDER BY en_ligne DESC LIMIT 10"); 
 	$res = array(); 
     while ($row = $fetch($query)) $res[]=_T('couteau:stats_auteur', array(
 		'icon' => '<a href="'.generer_url_ecrire("auteurs","statut=" . $row['statut']).'">' . bonhomme_statut($row) . '</a>',
 		'nom' => cs_lien(generer_url_ecrire("auteur_infos","id_auteur=$row[id_auteur]"), $row['nom']),
-		'date' => cs_date($row['en_ligne'])
+		'date' => cs_date_long($row['en_ligne'])
 	));
 	return cs_listeulli($res);
 } 
@@ -127,7 +119,7 @@ function cs_non_confirmes($fetch){
     while ($row = $fetch($query)) $res[]=_T('couteau:stats_auteur', array(
 		'icon' => http_img_pack("aide.gif", '', '', _T('couteau:attente_confirmation')),
 		'nom' => cs_lien(generer_url_ecrire("auteur_infos","id_auteur=$row[id_auteur]"), $row['nom']),
-		'date' => cs_date($row['maj'])
+		'date' => cs_date_long($row['maj'])
 	)); 
 	return cs_listeulli($res);
 } 

@@ -258,11 +258,12 @@ function cs_sauve_configuration() {
 		. "\n// Variables actives\n\$variables_actives =\n\t'" . join('|', $variables) . "';\n"
 		. "\n// Valeurs validees en metas\n\$valeurs_validees = array(\n" . join(",\n", $metas) . "\n);\n";
 
-$sauve .= $temp = "\n######## PACK ACTUEL DE CONFIGURATION DU COUTEAU SUISSE #########\n"
-	. "\n// Attention, les surcharges sur les define() ou les globales ne sont pas specifiees ici\n"
-	. "\$GLOBALS['cs_installer']['"._T('couteauprive:pack')."'] = array(\n\n\t// Installation des outils par defaut\n"
-	. "\t'outils' =>\n\t\t'".join('|', $actifs)."',\n"
-	. "\n\t// Installation des variables par defaut\n"
+include_spip('inc/charset');
+$sauve .= $temp = "\n######## "._T('couteauprive:pack_actuel_titre')." #########\n\n// "
+	. unicode2charset(html2unicode(_T('couteauprive:pack_actuel_avert')."\n\n"
+		. "\$GLOBALS['cs_installer']['"._T('couteauprive:pack_actuel', array('date'=>cs_date()))."'] = array(\n\n\t// "._T('couteauprive:pack_outils_defaut')."\n"
+		. "\t'outils' =>\n\t\t'".join(",\n\t\t", $actifs)."',\n"
+		. "\n\t// "._T('couteauprive:pack_variables_defaut')."\n"))
 	. "\t'variables' => array(\n\t" . join(",\n\t", $metas_actifs) . "\n\t)\n);\n";
 
 	ecrire_fichier(_DIR_CS_TMP.'config.php', '<'."?php\n// Configuration de controle pour le plugin 'Couteau Suisse'\n\n$sauve?".'>');
@@ -345,7 +346,8 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 	if (count($temp_jq))
 		$temp_js[] = "if (window.jQuery) jQuery(document).ready(function(){\n\t".join("\n\t", $temp_jq)."\n});";
 	if (count($temp_js)) {
-		$temp = array("<script type=\"text/javascript\"><!--\n".compacte_js(join("\n", $temp_js))."\n// --></script>\n");
+		$temp = array("<script type=\"text/javascript\"><!--\nvar cs_prive=window.location.pathname.match(/\\/ecrire\\/\$/)!=null;\n"
+			.compacte_js(join("\n", $temp_js))."\n// --></script>\n");
 		$cs_metas_pipelines['header'] = is_array($cs_metas_pipelines['header'])?array_merge($temp, $cs_metas_pipelines['header']):$temp;
 	}
 	// mise en code des traitements trouves
@@ -418,8 +420,8 @@ cs_log(" -- fichier $fo present. Inclusion " . ($ok?" trouvee".($ecriture?" et r
 		$fo = defined('_SPIP19100')?_DIR_RESTREINT.'mes_options.php':_DIR_RACINE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php';
 	// creation
 	if($activer) {
-		if($ecriture) ecrire_fichier($fo, '<?'."php\n".$inclusion."\n\n?>");
-cs_log(" -- fichier $fo absent. Fichier '$f' et inclusion ".(!$ecriture?"non ":"")."crees");
+		if($ecriture) $ok=ecrire_fichier($fo, '<?'."php\n".$inclusion."\n\n?".'>');
+cs_log(" -- fichier $fo absent. Fichier '$fo' et inclusion ".((!$ecriture || !$ok)?"non ":"")."crees");
 	}
 }
 

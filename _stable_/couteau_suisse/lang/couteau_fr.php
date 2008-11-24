@@ -63,6 +63,7 @@ Compatibilit&#233; : SPIP v1.9x et v2.0',
 	'sommaire_titre' => 'Sommaire',
 	'stats_auteur' => '@icon@ @nom@, le&nbsp;@date@',
 	'stats_date' => '@jour@/@mois@/@annee@&nbsp;&agrave;&nbsp;@h@h@m@',
+	'date_court' => '@jour@/@mois@/@annee@',
 
 	// T
 	'texte_formatspip' => 'TEXTE ORIGINAL AU FORMAT SPIP',

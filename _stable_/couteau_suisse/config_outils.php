@@ -669,7 +669,7 @@ add_outil( array(
 	'contrib'	=> 2443,
 	'jquery'	=> 'oui',
 	'code:options' => "%%radio_target_blank3%%\n%%url_glossaire_externe2%%",
-	'code:jq_init' => 'if (%%radio_target_blank3%%) { jQuery("a.spip_out,a.spip_url,a.spip_glossaire",this).attr("target", "_blank"); }',
+	'code:jq_init' => 'if (%%radio_target_blank3%%) { if(!cs_prive) jQuery("a.spip_out,a.spip_url,a.spip_glossaire",this).attr("target", "_blank"); }',
 ));
 
 //-----------------------------------------------------------------------------//
@@ -912,6 +912,7 @@ add_outil( array(
 		. ') no-repeat scroll 0.1em center; padding-left:12px; text-decoration:none;}',
 	'traitement:EMAIL' => 'mailcrypt',
 )); 
+
 
 // attention : liens_en_clair doit etre place apres tous les outils traitant des liens
 add_outil( array(

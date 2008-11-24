@@ -45,8 +45,10 @@ function cs_description_pack() {
 	if(!isset($GLOBALS['cs_pack_actuel'])) return '';
 	return debut_cadre_relief('', true)
 		. "<h3 class='titrem'><img src='"._DIR_IMG_PACK."puce-verte.gif' width='9' height='9' alt='-' />&nbsp;" . _T('couteauprive:pack_titre') . '</h3>'
-		. propre(_T('couteauprive:pack_descrip') . "\n\n" . _T('couteauprive:contrib', array('url'=>'[->'._URL_CONTRIB.'2552]')))
-		. '<br/><textarea rows=30 cols=200 style="width:520px; font-size:90%;">'.htmlentities($GLOBALS[cs_pack_actuel], ENT_QUOTES, $GLOBALS['meta']['charset']).'</textarea>'
+		. ((strlen($temp = cs_action_rapide('pack')))?"<div class='cs_action_rapide' id='cs_action_rapide'>$temp</div>":'')
+		. propre(_T('couteauprive:pack_descrip', array('pack'=> _T('couteauprive:pack_actuel', array('date'=>cs_date()))))
+		. "\n\n" . _T('couteauprive:contrib', array('url'=>'[->'._URL_CONTRIB.'2552]')))
+		. '<br/><textarea rows=40 cols=500 style="width:100%; font-size:90%;">'.htmlentities($GLOBALS[cs_pack_actuel], ENT_QUOTES, $GLOBALS['meta']['charset']).'</textarea>'
 		. fin_cadre_relief(true);
 }
 

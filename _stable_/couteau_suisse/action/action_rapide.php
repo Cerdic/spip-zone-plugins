@@ -30,6 +30,11 @@ cs_log("INIT : action_action_rapide_dist() - Une action rapide a ete demandee !"
 
 	switch ($arg) {
 
+	// pour inserer un pack de config dans config/mes_options.php
+	case 'sauve_pack':
+		include_spip('outils/pack_action_rapide');
+		action_rapide_sauve_pack();
+		break;
 	// pour purger le cache de SPIP...
 	case 'cache':
 		include_spip('action/purger');

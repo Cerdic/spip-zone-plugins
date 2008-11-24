@@ -392,7 +392,7 @@ verif_plugin();
 		$pack = &$GLOBALS['cs_installer'][$_GET['pack']];
 		effacer_meta('tweaks_actifs');
 		$metas_outils = array();
-		foreach(explode('|', $pack['outils']) as $o) $metas_outils[trim($o)]['actif'] = 1;
+		foreach(preg_split('%\s*[,|]\s*%', $pack['outils']) as $o) $metas_outils[trim($o)]['actif'] = 1;
 		if(isset($pack['variables'])) foreach($pack['variables'] as $i=>$v) $metas_vars[$i] = $v;
 		ecrire_meta('tweaks_actifs', serialize($metas_outils));
 		ecrire_meta('tweaks_variables', serialize($metas_vars));

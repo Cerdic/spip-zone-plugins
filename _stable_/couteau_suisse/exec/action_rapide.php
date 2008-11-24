@@ -31,6 +31,8 @@ function exec_action_rapide_dist() {
 
 	switch ($arg) {
 
+	// pour gerer les packs de configuration...
+	case 'sauve_pack':
 	// outil "spip_cache" : purger le cache
 	case 'purger_cache':
 	// forms[0] : tout purger (cas SPIP < 2.0)
