@@ -428,4 +428,28 @@ function spiplistes_courriers_pieds ($lang, $defaut = 'piedmail') {
 	return($pieds);
 }
 
+/*
+ * CP-20081124
+ * Assembler/calculer un patron
+ * @return le resultat html et texte seul dans un tableau
+ * @param $patron nom du patron
+ * @param $contexte 
+ */
+function spiplistes_courriers_assembler_patron ($patron, $contexte) {
+	static $messages;
+	if($messages === null) {
+		include_spip('public/assembler');
+		$patron = "patrons/".$patron;
+		$message_html = recuperer_fond($patron, $contexte);
+		$patron .= '_texte';
+		$message_texte = 
+			(find_in_path($patron.'.html'))
+			? recuperer_fond($patron, $contexte) . "\n"
+			: spiplistes_courrier_version_texte($message_html) . "\n"
+			;
+		$messages = array($message_html, $message_texte);
+	}
+	return($messages);
+}
+
 ?>

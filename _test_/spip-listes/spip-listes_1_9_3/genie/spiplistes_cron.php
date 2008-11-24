@@ -183,10 +183,10 @@ spiplistes_log($prefix_log."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_D
 			/////////////////////////////
 			// preparation du courrier a placer dans le panier (spip_courriers)
 			// en cas de periode, la date est dans le passe pour avoir les elements publies depuis cette date
-			include_spip('public/assembler');
-			$contexte_patron = array('date' => $dernier_envoi, 'patron'=>$patron, 'lang'=>$lang);
-			$texte = recuperer_fond('patrons/'.$patron, $contexte_patron);
 			$titre = ($titre_message =="") ? $titre._T('spiplistes:_de_').$GLOBALS['meta']['nom_site'] : $titre_message;
+
+			list($texte, $message_texte) = spiplistes_courriers_assembler_patron ($patron
+				, array('date' => $dernier_envoi, 'patron'=>$patron, 'lang'=>$lang));
 			
 //spiplistes_log($prefix_log."Titre => $titre", _SPIPLISTES_LOG_DEBUG);
 	
@@ -217,7 +217,8 @@ spiplistes_log($prefix_log."envoi mail nouveautes : courrier vide", _SPIPLISTES_
 						,id_liste
 						,date_debut_envoi
 						,date_fin_envoi
-						,texte"
+						,texte
+						,message_texte"
 					. ")"
 				, 	"("
 					. sql_quote($titre)
@@ -229,6 +230,7 @@ spiplistes_log($prefix_log."envoi mail nouveautes : courrier vide", _SPIPLISTES_
 					. ",".$date_debut_envoi
 					. ",".$date_fin_envoi
 					. ",".sql_quote($texte)
+					. ",".sql_quote($message_texte)
 					. ")"
 			);
 
