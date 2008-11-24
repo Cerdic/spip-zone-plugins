@@ -13,6 +13,7 @@
 	<lien></lien> <!-- URI de documentation -->
 	<licence>GPL 3</licence>
 	<prefix>pb_selection</prefix>
+	<install>base/pb_selection_install.php</install>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/pb_selection_install.php</inclure>

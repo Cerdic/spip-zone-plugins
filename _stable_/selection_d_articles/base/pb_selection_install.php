@@ -6,28 +6,30 @@
 
 function pb_selection_declarer_tables_principales($tables_principales){
 
-		global $tables_principales;
+	global $tables_principales;
 	
-		$version_base = 0.3;
-		$current_version = 0.0;
-		
 
-		$spip_pb_selection = array(
-			"id_rubrique" 	=> "bigint(21) NOT NULL",
-			"id_article" 	=> "bigint(21) NOT NULL",
-			"ordre" 	=> "bigint(21) NOT NULL",
-			"maj" 		=> "TIMESTAMP");
-		
-		$spip_pb_selection_key = array(
-			"PRIMARY KEY" 	=> "id_rubrique, id_article"
-			);
-		
-		$tables_principales['spip_pb_selection'] = array(
-			'field' => &$spip_pb_selection,
-			'key' => &$spip_pb_selection_key);
+	$spip_pb_selection = array(
+		"id_rubrique" 	=> "bigint(21) NOT NULL",
+		"id_article" 	=> "bigint(21) NOT NULL",
+		"ordre" 	=> "bigint(21) NOT NULL",
+		"maj" 		=> "TIMESTAMP");
+	
+	$spip_pb_selection_key = array(
+		"PRIMARY KEY" 	=> "id_rubrique, id_article"
+		);
+	
+	$tables_principales['spip_pb_selection'] = array(
+		'field' => &$spip_pb_selection,
+		'key' => &$spip_pb_selection_key);
+
+	// Bizarre: il faut encore demander a creer la base?
+	include_spip('base/create');
+	include_spip('base/abstract_sql');
+	creer_base();
 	
 	
-		return $tables_principales;
+	return $tables_principales;
 	
 	}
 
