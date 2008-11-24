@@ -80,4 +80,20 @@ function exec_cs_boite_rss_dist() {
 	
 	ajax_retour($p);
 }
+
+/**
+ * recupere le resultat du calcul d'une compilation de code de squelette (marcimat)
+ * $coucou = $this->recuperer_code('[(#AUTORISER{ok}|oui)coucou]');
+ */
+/*
+function recuperer_code($code, $contexte=array(), $options = array(), $connect=''){
+	$ext = '.html';
+	$nom = md5($code);
+	$fond = _DIR_CODE . $nom;
+	$base = $fond . $ext;
+	if (!file_exists($base) OR $GLOBALS['var_mode']=='recalcul')
+		ecrire_fichier($base, $code);
+	return recuperer_fond($fond, $contexte, $options, $connect);
+}
+*/
 ?>

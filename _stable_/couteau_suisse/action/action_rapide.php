@@ -30,6 +30,11 @@ cs_log("INIT : action_action_rapide_dist() - Une action rapide a ete demandee !"
 
 	switch ($arg) {
 
+	// purger la corbeille
+	case 'corbeille':
+		include_spip('outils/corbeille_action_rapide');
+		action_rapide_purge_corbeille();
+		break;
 	// pour inserer un pack de config dans config/mes_options.php
 	case 'sauve_pack':
 		include_spip('outils/pack_action_rapide');

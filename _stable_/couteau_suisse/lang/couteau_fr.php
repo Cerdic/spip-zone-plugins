@@ -35,6 +35,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'objet_mots' => 'Mots',
 	'objet_rubrique' => 'Rubrique',
 	'objet_rubriques' => 'Rubriques',
+	'objet_petitions' => 'P&eacute;titions',
+	'objet_petition' => 'P&eacute;tition',
 	'objet_syndic' => 'Site',
 	'objet_syndics' => 'Sites',
 
