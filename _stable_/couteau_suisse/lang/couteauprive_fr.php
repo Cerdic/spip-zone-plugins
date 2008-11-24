@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_parent:nom' => "Balise #TITRE_PARENT",
 	'titre_parent:description' => "Au sein d'une boucle, il est courant de vouloir afficher le titre du parent de l'objet en cours. Traditionnellement, il suffirait d'utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT all&eacute;gera l'&eacute;criture de vos squelettes. Le r&eacute;sultat renvoy&eacute; est : le titre du groupe d'un mot-cl&eacute; ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, br&egrave;ve, etc.).
 
-Note : le traitement SPIP de cette nouvelle balise est similaire &agrave; celui de #TITRE.",
+Notez : Pour les mots-cl&eacute;s, un alias de #TITRE_PARENT est #TITRE_GROUPE. Le traitement SPIP de ces nouvelles balises est similaire &agrave; celui de #TITRE.",
 
 	// 2
 	'2pts_non' => '&nbsp;:&nbsp;non',
@@ -435,7 +435,7 @@ _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<htm
 	'pack_nb_un' => 'Il y a actuellement un &laquo;&nbsp;pack de configuration&nbsp;&raquo; disponible',
 	'pack_nb_zero' => 'Il n\'y a pas de &laquo;&nbsp;pack de configuration&nbsp;&raquo; disponible actuellement.',
 	'pack_sauver' => 'Sauver la configuration actuelle',
-	'pack_sauver_descrip' => 'Le bouton ci-dessous vous permet d\'ins&eacute;rer directement dans votre fichier <b>@file@</b> les param&egrave;tres n&eacute;cessaires pour ajouter un &laquo;&nbsp;pack de configuration&nbsp;&raquo; dans le menu de gauche. Ceci vous permettra ult&eacute;rieurement de reconfigurer en un clic votre Couteau Suisse dans l\'&eacute;tat où il est actuellement.',
+	'pack_sauver_descrip' => 'Le bouton ci-dessous vous permet d\'ins&eacute;rer directement dans votre fichier <b>@file@</b> les param&egrave;tres n&eacute;cessaires pour ajouter un &laquo;&nbsp;pack de configuration&nbsp;&raquo; dans le menu de gauche. Ceci vous permettra ult&eacute;rieurement de reconfigurer en un clic votre Couteau Suisse dans l\'&eacute;tat o&ugrave; il est actuellement.',
 	'pack_alt' => 'Voir les param&egrave;tres de configuration en cours',
 	'pack_descrip' => 'Votre &laquo;&nbsp;Pack de configuration actuelle&nbsp;&raquo; rassemble l\'ensemble des param&egrave;tres de configuration en cours concernant le Couteau Suisse : l\'activation des outils et la valeur de leurs &eacute;ventuelles variables.
 
