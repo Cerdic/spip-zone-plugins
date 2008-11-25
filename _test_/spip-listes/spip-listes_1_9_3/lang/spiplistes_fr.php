@@ -419,11 +419,12 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'nb_abos' => "qt.",
 
 //P
-'pas_abonne_en_ce_moment' => "n'est pas abonn�",
-'par_date' => 'Par date d\'inscription',
+'pas_abonne_en_ce_moment' => "n'est pas abonn&eacute;"
+, 'par_date' => 'Par date d\'inscription',
 'patron_disponibles' => 'Patrons disponibles',
-'Patrons' => 'Patrons',
-'pas_sur' => '<p>Si vous n\'&ecirc;tes pas s&ucirc;r, choisissez la fonction mail de PHP.</p>',
+'Patrons' => 'Patrons'
+, 'patron_' => "Patron : "
+, 'pas_sur' => '<p>Si vous n\'&ecirc;tes pas s&ucirc;r, choisissez la fonction mail de PHP.</p>',
 'photos' => 'Photos',
 'php_mail' => 'Utiliser la fonction mail() de PHP',
 'poster' => 'Poster un Message',
@@ -443,9 +444,10 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , 'Patron_du_tampon' => "Patron du tampon ",
 'Patron_de_pied_' => "Patron de pied ",
 'Patron_grand_' => "Grand patron ",
-'Pas_adresse_email' => "Pas d&acute;adresse email",
-'Patron_manquant' => "Vous devez appliquer un grand patron avant de param&eacute;trer l'envoi de cette 
+'Pas_adresse_email' => "Pas d&acute;adresse email"
+, 'patron_manquant_message' => "Vous devez appliquer un grand patron avant de param&eacute;trer l'envoi de cette 
 liste."
+, 'liste_sans_patron' => "Liste sans patron."
 , 'personnaliser_le_courrier' => "Personnaliser le courrier"
 , 'personnaliser_le_courrier_desc' => 
 	"Vous pouvez personnaliser le courrier pour chaque abonn&eacute; en ins&eacute;rant 

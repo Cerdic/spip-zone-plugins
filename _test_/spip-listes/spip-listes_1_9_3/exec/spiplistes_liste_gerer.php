@@ -628,7 +628,7 @@ function exec_spiplistes_liste_gerer () {
 			. spiplistes_plugin_aide(_SPIPLISTES_EXEC_AIDE, "temporiser"))
 		;
 	if(empty($patron)) {
-		$page_result .= spiplistes_boite_alerte(_T('spiplistes:Patron_manquant'), true);
+		$page_result .= spiplistes_boite_alerte(_T('spiplistes:patron_manquant_message'), true);
 	}
 	$page_result .= ""
 		. $boite_pour_confirmer_envoi_maintenant

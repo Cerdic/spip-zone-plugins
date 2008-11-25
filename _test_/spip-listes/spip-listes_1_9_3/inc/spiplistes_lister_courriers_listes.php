@@ -183,7 +183,12 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 					$en_liste .=
 						" <span style='font-size:100%;color:#666666' dir='ltr'>\n"
 						. "<span class='spiplistes-legend-stitre'>".spiplistes_nb_abonnes_liste_str_get($id_row)."</span>"
-						. (!empty($patron) ? "<br />Patron : <strong>".$patron."</strong>" : "")
+						. "<br />"
+						. (
+							empty($patron) 
+							? "<span class='texte-alerte'>" . _T('spiplistes:liste_sans_patron') . "</span>"
+							: _T('spiplistes:patron_') . " <strong>".$patron."</strong>" 
+						  )
 						. ((!empty($date) && ($date!=_SPIPLISTES_ZERO_TIME_DATE)) ? "<br />"
 						. _T('spiplistes:Prochain_envoi_') . ": <strong>".affdate_heure($date)."</strong>" : "")
 						. "</span>\n"
