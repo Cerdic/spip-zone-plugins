@@ -1070,6 +1070,15 @@ add_outil( array(
 	'id' => 'titre_parent',
 	'categorie' => 'spip',
 	'contrib' => 2900,
+	'code:options' => '%%titres_etendus%%',
+));
+add_variable( array(
+	'nom' => 'titres_etendus',
+	'check' => 'couteauprive:titres_etendus',
+	'format' => _format_NOMBRE,
+	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
+	'defaut' => 0,
+	'code:%s' => "define('_PARENTS_ETENDUS',%s);",
 ));
 
 add_outil( array(
