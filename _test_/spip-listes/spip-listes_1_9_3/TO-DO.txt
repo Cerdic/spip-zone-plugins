@@ -7,8 +7,6 @@
 TO-DO:
 . sous SPIP 2, spiplistes_courrier_edit, generer courrier, le sélecteur de langue est vide.
 . ?exec=spiplistes_listes_toutes preciser les listes sans patron
-. ?exec=spiplistes_courrier_gerer, previsu texte seul n'apparait pas sous IE6
-. ?exec=spiplistes_liste_gerer, plier/déplier programmer envoi auto semble ne pas fonctionner sous IE6
 . revoir squelette format texte d'envoi (manque retour chariot, titre supprimer_numero, etc...)
 . verifier envoi du test. Il doit etre au format HTML suivi d'un autre au format Texte. Test au 24/06/2008, seule la version texte est envoyee.
 . terminer la compat svn (fouiller!) CP20080609
