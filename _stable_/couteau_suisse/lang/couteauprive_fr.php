@@ -21,7 +21,7 @@ Notez : Pour les mots-cl&eacute;s, un alias de #TITRE_PARENT est #TITRE_GROUPE. 
 
 @puce@ Si vous &ecirc;tes sous SPIP 2.0, alors vous avez ici &agrave; votre disposition tout un ensemble de balises #TITRE_XXX qui pourront vous donner le titre de l'objet 'xxx', &agrave; condition que le champ 'id_xxx' soit pr&eacute;sent dans la table en cours (#ID_XXX utilisable dans la boucle en cours).
 
-Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du secteur dans lequel est plac&eacute; l'article en cours, puisque l'identifiant #ID_SECTEUR (ou le champ 'id_secteur') est disponible dans ce cas.[[%titres_etendus%]].",
+Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du secteur dans lequel est plac&eacute; l'article en cours, puisque l'identifiant #ID_SECTEUR (ou le champ 'id_secteur') est disponible dans ce cas.[[%titres_etendus%]]",
 	'label:titres_etendus' => 'Activer l\'utilisation &eacute;tendue des balises #TITRE_XXX&nbsp;:',
 
 	// 2
