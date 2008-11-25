@@ -16,14 +16,18 @@ function titre_groupe($id_mot, $table='groupes_mots', $id='id_groupe') {
 // filtre 'titre_id'
 // Renvoie le titre trouve dans la $table_parent, la ou $champ = $id
 function cs_titre_id($id, $table_parent='rubriques', $champ='id_rubrique') {
-	// Utiliser la bonne fonction de recherche sql (fetch) selon la version de SPIP
-	$fetch = function_exists('sql_fetch') ? 'sql_fetch' : 'spip_fetch_array';
 	// retour nul si pas de parent a priori
 	if(!$id) return '';
-	// donc, requete !
-	if($r = spip_query("SELECT titre FROM spip_$table_parent WHERE $champ=$id"))
-		// s'il existe un champ, on le retourne
-		if($row = $fetch($r)) return $row['titre'];
+	// Utiliser la bonne requete en fonction de la version de SPIP
+	if(function_exists('sql_getfetsel')) {
+		// SPIP 2.0
+		if($titre = sql_getfetsel('titre', "spip_$table_parent", " $champ=$id"))
+			return $titre;
+	} else {
+		if($r = spip_query("SELECT titre FROM spip_$table_parent WHERE $champ=$id"))
+			// s'il existe un champ, on le retourne
+			if($row = spip_fetch_array($r)) return $row['titre'];
+	}
 	// sinon, rien !
 	return '';
 }
