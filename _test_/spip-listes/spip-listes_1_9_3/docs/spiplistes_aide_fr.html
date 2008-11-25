@@ -30,7 +30,7 @@ h1 span {
 	font-style: normal;
 	font-weight: normal;
 }
-p {
+p ,table {
 	margin:0.5em 4em;
 	padding:0;
 }
@@ -264,6 +264,7 @@ img {
    2008, qui est un lundi.</p>
 <p>Si le bouton <strong>Envoyer maintenant</strong> est gris&eacute;, c'est que 
    la liste ne contient aucun abonn&eacute;.</p>
+   
 <h2><a name="testeremail" id="testeremail"></a>Tester l'envoi du courrier</h2>
 <p>Lorsque vous avez termin&eacute; la r&eacute;daction de votre courrier, vous 
    pouvez l'envoyer en test &agrave; un correspond ou vous-m&ecirc;me, en compl&eacute;tant 
@@ -400,6 +401,67 @@ img {
 morceau de squelette, proche de la noisette.</p>
 <p>Corps de votre message ou pied de page, ce patron doit se trouver dans
 le r&eacute;pertoire des patrons. </p>
+<p>Les diff&eacute;rents dossiers
+dans le r&eacute;pertoire du plugin :</p>
+<table border="1" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td style="border: 1px solid gray; padding: 1ex; width: 30%;">
+patrons/
+</td>
+<td style="border: 1px solid gray; padding: 1ex; width: 30%;">
+Placez
+dans ce r&eacute;pertoire les principaux patrons, ceux du corps de
+votre message
+</td>
+<td style="border: 1px solid gray; padding: 1ex; width: 30%;">
+Le
+patron choisi sera appliqu&eacute; &agrave; la liste de
+diffusion.
+</td>
+</tr>
+<tr>
+<td style="border: 1px solid gray; padding: 1ex; width: 30%;">
+patrons/lien_en_tete_courriers/
+</td>
+<td style="border: 1px solid gray; padding: 1ex; width: 30%;">
+Patrons
+des en-t&ecirc;tes de messages. En g&eacute;n&eacute;ral,
+un patron plac&eacute; ici contient un lien sur le message
+permettant au lecteur de consulter le message directement sur le site.
+</td>
+<td rowspan="2" style="border: 1px solid gray; padding: 1ex; width: 30%;">
+L&#8217;administrateur
+du site doit activer ces fonctionnalit&eacute;s via le menu de
+configuration.<br />
+Le patron choisi sera appliqu&eacute; &agrave; tous les
+courriers sortants au moment de l&#8217;envoi.
+</td>
+</tr>
+<tr>
+<td style="border: 1px solid gray; padding: 1ex; width: 30%;">
+patrons/tampons_courriers/
+</td>
+<td style="border: 1px solid gray; padding: 1ex; width: 30%;">
+Le tampon des courriers est appliqu&eacute; en fin de message.
+</td>
+</tr>
+<tr>
+<td style="border: 1px solid gray; padding: 1ex; width: 30%;">
+patrons/pieds_courriers/
+</td>
+<td style="border: 1px solid gray; padding: 1ex; width: 30%;">
+Ce
+patron est plac&eacute; en fin de votre message. Il apparaitra
+avant le tampon si ce dernier est activ&eacute;. </td>
+<td style="border: 1px solid gray; padding: 1ex; width: 30%;">
+Le
+patron choisi sera appliqu&eacute; &agrave; la liste de
+diffusion.
+</td>
+</tr>
+</tbody>
+</table>
 <p>Il est possible d'adapter un patron au format de r&eacute;ception
 'texte seul'. Le plus simple dans ce cas est de cr&eacute;er dans
 votre&nbsp;r&eacute;pertoire de squelettes un dossier "patrons"
@@ -433,9 +495,9 @@ squelettes, renommez ce patron "nouveautes_texte.html" et adaptez-le
       sur la zone</a> ;</li>
    <li><a href="http://www.spip-contrib.net/SPIP-Listes">La page consacr&eacute;e 
       &agrave; SPIP-Listes sur SPIP-contrib</a> ;</li>
-	<li><a href="http://www.spip-contrib.net/Premier-courrier-sur-SPIP-Listes">Envoyer mon premier courrier sur SPIP-Listes</strong> 
+	<li><a href="http://www.spip-contrib.net/Premier-courrier-sur-SPIP-Listes">Envoyer mon premier courrier sur <strong>@spiplistes_name@</strong> 
       sur SPIP-contrib</a> ;</li>
-	<li><a href="http://www.spip-contrib.net/Comment-ca-marche">SPIP-Listes, comment &ccedil;a marche</strong> 
+	<li><a href="http://www.spip-contrib.net/Comment-ca-marche"><strong>@spiplistes_name@</strong>, comment &ccedil;a marche 
       sur SPIP-contrib</a> ;</li>
    <li><a href="http://www.spip.net/fr">Le site SPIP, outil de gestion de contenu 
       (CMS)</a> ;</li>
