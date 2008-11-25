@@ -140,7 +140,7 @@ function exec_spiplistes_courrier_previsu () {
 					
 				if($format=="texte") {
 				
-					header("Content-Type: text/plain ; charset=$charset");
+					header("Content-Type: text/plain; charset=$charset");
 					
 					// forcer IE a afficher en ligne. 
 					header("Content-Disposition: inline; filename=spiplistes-previsu.txt");
