@@ -13,11 +13,11 @@
  * 									"titre" => nom du champ retourne dans le listing,
  * 									"table" => nom de la table spip dans la bdd,
  * 									"id" => clef primaire dans la table,
- * 									"temps" => aucune idee a quoi ça peut servir,
+ * 									"temps" => aucune idee a quoi ca peut servir,
  * 									"page_voir" => parametres pour voir le detail d'un objet
  * 									"libelle" => texte long dans la partie droite de l'affichage,
  * 									"libelle_court" => texte court dans le menu gauche,
- * 									"tableliee"  => tableau des tables spip à vider en meme temps    )  
+ * 									"tableliee"  => tableau des tables spip a vider en meme temps    )  
  * 
  * @param string $table
  * @return array
@@ -56,7 +56,7 @@ function corbeille_table_infos($table){
 								"temps" => "date_time",
 								"page_voir" => array("signatures",'id_document'),
 								"libelle" => _T("corbeille:petitions_toutes"),
-								"libelle_court" => strtolower(_T('lien_petitions')),
+								"libelle_court" => ucfirst(strtolower(_T('lien_petitions'))),
 								),
 	"sites" =>			array(	"statut" => "refuse",
 								"tableliee"=> array("spip_syndic_articles","spip_mots_syndic"),
@@ -87,9 +87,10 @@ function corbeille_vider($table, $ids=array()) {
 	$type = objet_type($table);
 	$table_sql = table_objet_sql($type);
 	$id_table = id_table_objet($type);
-	$statut = $corbeille_param[$type_doc]["statut"];
-	$titre = $corbeille_param[$type_doc]["titre"];
-	$table_liee = $corbeille_param[$type_doc]["tableliee"];
+
+#	$statut = $corbeille_param[$type_doc]["statut"];
+#	$titre = $corbeille_param[$type_doc]["titre"];
+#	$table_liee = $corbeille_param[$type_doc]["tableliee"];
 	
 	$statut = $corbeille_param['statut'];
 	if (!$statut)
