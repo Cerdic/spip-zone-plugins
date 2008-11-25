@@ -27,7 +27,7 @@
 			</div>
 		</div>
 	</div>
-	&nbsp;#PUCE&nbsp;<a href="[(#EVAL{echoppe_edit_produit}|generer_url_ecrire{new=oui&ref_produit=#REF_PRODUIT&id_trad=#ID_TRAD})]" ><:echoppe:ecrire_une_traduction_de_ce_produit:></a>
+	&nbsp;#PUCE&nbsp;<a href="[(#EVAL{echoppe_edit_produit}|generer_url_ecrire{new=oui&ref_produit=#REF_PRODUIT&id_trad=#ID_TRAD&id_categorie=#ID_CATEGORIE})]" ><:echoppe:ecrire_une_traduction_de_ce_produit:></a>
 	<br />
 </div>
 </B_LesTraductions>
@@ -40,6 +40,7 @@
 		[<h1 class="produit">(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})</h1>]
 		[<em class="verdana1 spip_small">(#DESCRIPTIF)</em>]
 		[(#TEXTE|paragrapher)]
+		<div class="nettoyeur"> </div>
 	</div>
 	<BOUCLE_LesDocuments(DOCUMENTS){id_produit}>
 		[(#ID_DOCUMENT|afficher_case_document)]

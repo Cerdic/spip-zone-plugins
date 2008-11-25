@@ -5,7 +5,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_echoppe_ajouter_panier(){
 	
 	include_spip('inc/session');
-	include_spip('inc/session');
 	
 	$contexte = array();
 	$contexte['id_produit'] = _request('id_produit');
@@ -35,10 +34,22 @@ function action_echoppe_ajouter_panier(){
 			$res_maj_produit_panier = spip_query($sql_maj_produit_panier);
 			
 		}else{
-			$sql_insert_produit_panier = "INSERT INTO spip_echoppe_paniers VALUES ('', '".$contexte['id_client']."', '".$contexte['id_produit']."', '".$contexte['quantite']."', '".$contexte['configuration']."', '".$contexte['token_client']."', '".$contexte['token_panier']."', '".session_get('echoppe_statut_panier')."', '".$contexte['date_maj']."');";
+			/*$sql_insert_produit_panier = "INSERT INTO spip_echoppe_paniers VALUES ('', '".$contexte['id_client']."', '".$contexte['id_produit']."', '".$contexte['quantite']."', '".$contexte['configuration']."', '".$contexte['token_client']."', '".$contexte['token_panier']."', '".session_get('echoppe_statut_panier')."', '".$contexte['date_maj']."');";
 			//var_dump($sql_insert_produit_panier);
 			$res_insert_produit_panier = spip_query($sql_insert_produit_panier);
-			$contexte['id_panier'] = sql_insert_id($res_maj_produit_panier);
+			$contexte['id_panier'] = sql_insert_id($res_maj_produit_panier);*/
+			$panier = array(
+				'id_client' => $contexte['id_client'],
+				'id_produit' => $contexte['id_produit'],
+				'quantite' => $contexte['quantite'],
+				'configuration' => $contexte['configuration'],
+				'token_client' => $contexte['token_client'],
+				'token_panier' => $contexte['token_panier'],
+				'statut' => session_get('echoppe_statut_panier'),
+				'date_maj' => $contexte['date_maj'],
+			);
+			$contexte['id_panier'] = sql_insertq("spip_echoppe_paniers",$panier);
+			
 		}
 		
 		

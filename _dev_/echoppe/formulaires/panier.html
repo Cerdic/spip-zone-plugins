@@ -8,9 +8,9 @@
 				<th class = "panier_prix_ttc"><:echoppe:prix_ttc:></th>
 				<th class = "panier_quantite"><:echoppe:quantite:></th>
 			</tr>
-	<BOUCLE_LePanier(SPIP_ECHOPPE_PANIERS){id_panier?}{token_panier = #SESSION{echoppe_token_panier}}>
+	<BOUCLE_LePanier(ECHOPPE_PANIERS){id_panier?}{token_panier = #SESSION{echoppe_token_panier}}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{l_impair,l_paire})]">
-				<BOUCLE_LeProduit(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits){id_produit}>
+				<BOUCLE_LeProduit(ECHOPPE_PRODUITS){id_produit}>
 					<td class = "panier_titre"><a href="?page=produit2&id_produit=#ID_PRODUIT">#TITRE</a></td>
 					<td class = "panier_prix_ttc">#PRIX_TVAC&nbsp;&euro;</td>
 					<td class = "panier_quantite">

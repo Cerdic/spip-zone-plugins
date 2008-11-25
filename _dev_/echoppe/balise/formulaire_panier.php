@@ -28,7 +28,7 @@ function balise_FORMULAIRE_PANIER_dyn($id_panier, $formulaire) {
 	
 	$_sql = "SELECT id_produit FROM spip_echoppe_paniers WHERE token_panier = '".session_get('echoppe_token_panier')."';";
 	$_res = spip_query($_sql);
-	$_quantite = spip_num_rows($_res);
+	$_quantite = sql_count($_res);
 	zero_si_vide($_quantite);
 	$contexte['total_item_panier'] = $_quantite;
 	
@@ -107,7 +107,7 @@ function balise_FORMULAIRE_PANIER_dyn($id_panier, $formulaire) {
 			$new_token = md5(uniqid(rand(), true));
 			while ($test_existance_token > 0){
 				$new_token = md5(uniqid(rand(), true));
-				$test_existance_token = spip_num_rows(spip_query("SELECT id_panier FROM spip_echoppe_paniers WHERE token_panier = '".$new_token."' ;"));
+				$test_existance_token = sql_count(spip_query("SELECT id_panier FROM spip_echoppe_paniers WHERE token_panier = '".$new_token."' ;"));
 			}
 			session_set('echoppe_token_panier', $new_token );
 			
