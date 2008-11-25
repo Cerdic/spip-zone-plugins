@@ -6,12 +6,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'corbeille:nom' => "La corbeille",
-	'corbeille:description' => "SPIP supprime automatiquement les objets mis au rebuts au bout de 24 heures, en g&eacute;n&eacute;ral vers 4 heures du matin, gr&acirc;ce &agrave; une t&acirc;che &laquo;CRON&raquo; (lancement p&eacute;riodique et/ou automatique de processus pr&eacute;-programm&eacute;s). Vous pouvez ici emp&ecirc;cher ce processus afin de mieux g&eacute;rer votre corbeille.[[%arret_optimisation%]]",
+	'corbeille:description' => "SPIP supprime automatiquement les objets mis au rebuts au bout de 24 heures, en g&eacute;n&eacute;ral vers 4 heures du matin, gr&acirc;ce &agrave; une t&acirc;che &laquo;CRON&raquo; (lancement p&eacute;riodique et/ou automatique de processus pr&eacute;programm&eacute;s). Vous pouvez ici emp&ecirc;cher ce processus afin de mieux g&eacute;rer votre corbeille.[[%arret_optimisation%]]",
 	'label:arret_optimisation' => 'Emp&ecirc;cher SPIP de vider la corbeille automatiquement&nbsp;:',
 	'corbeille_objets' => "@nb@ objet(s) dans la corbeille.",
 	'corbeille_objets_lies' => "@nb_lies@ liaison(s) detect&eacute;e(s).",
 	'corbeille_objets_vide' => "Aucun objet dans la corbeille",
-	'corbeille_objets_vider' => "Supprimer les objets s&eacute;lection&eacute;s",
+	'corbeille_objets_vider' => "Supprimer les objets s&eacute;lectionn&eacute;s",
 	'corbeille_vider' => "Vider la corbeille&nbsp;:",
 
 	'titre_parent:nom' => "Balise #TITRE_PARENT",
