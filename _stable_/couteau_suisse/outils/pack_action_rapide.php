@@ -1,4 +1,4 @@
-<?
+<?php
 
 // module inclu dans la description de la "Configuration Actuelle" en page de configuration
 // ici, un bouton : "sauver la configuration actuelle"
