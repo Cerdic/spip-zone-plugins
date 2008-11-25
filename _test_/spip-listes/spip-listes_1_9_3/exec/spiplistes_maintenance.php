@@ -198,7 +198,7 @@ function exec_spiplistes_maintenance () {
 		. spiplistes_gros_titre($titre_page, '', true)
 		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $sous_rubrique)
 		. debut_gauche($rubrique, true)
-		. spiplistes_boite_meta_info(_SPIPLISTES_PREFIX, true)
+		. spiplistes_boite_meta_info(_SPIPLISTES_PREFIX)
 		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
 		. spiplistes_boite_autocron() 

@@ -469,6 +469,7 @@ liste."
 , 'retablir' => "R&eacute;tablir"
 
 //S
+, 'spiplistes' => "SPIP-Listes"
 , 'smtp' => 'Utiliser SMTP',
 'spip_ident' => 'Requiert une identification',
 'smtp_hote' => 'H&ocirc;te',

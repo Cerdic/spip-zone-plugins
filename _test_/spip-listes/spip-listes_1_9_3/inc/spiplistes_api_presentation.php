@@ -1025,12 +1025,10 @@ function spiplistes_boite_alerte ($message, $return = false) {
 }
 
  /*
-  * affiche un petit bloc info sur le plugin
-  * @return 
+  * @return un petit bloc info sur le plugin
   * @param $prefix Object
-  * @param $return Object[optional]
   */
-function spiplistes_boite_meta_info ($prefix, $return = false) {
+function spiplistes_boite_meta_info ($prefix) {
 	include_spip('inc/meta');
 	$result = false;
 	if(!empty($prefix)) {
@@ -1046,35 +1044,35 @@ function spiplistes_boite_meta_info ($prefix, $return = false) {
 				. "</div>\n"
 			: ""
 			;
-		if(isset($info['etat']) && ($info['etat']=='stable')) {
-		// en version stable, ne sort plus les infos de debug
-			foreach(array('description','lien','auteur') as $key) {
-				if(isset($info[$key]) && !isset($meta_info[$key])) {
-					$meta_info[$key] = $info[$key];
+		if(isset($info['etat']) && $info['etat']) {
+			if($info['etat'] == 'stable') {
+			// en version stable, ne sort plus les infos de debug
+				foreach(array('description','lien','auteur') as $key) {
+					if(isset($info[$key]) && !isset($meta_info[$key])) {
+						$meta_info[$key] = $info[$key];
+					}
 				}
+				$result .= spiplistes_boite_meta_info_liste($meta_info, true) // nom, etat, dir, version, description, lien, auteur
+					;
 			}
-			$result .= spiplistes_boite_meta_info_liste($meta_info, true) // nom, etat, dir, version, description, lien, auteur
-				;
+			else {
+			// un peu plus d'info en mode test et dev
+				$result .= 
+					spiplistes_boite_meta_info_liste($meta_info, true) // nom, etat, dir, version
+					. spiplistes_boite_meta_info_liste($info, ($info['etat']=='dev'))  // et tout ce qu'on a en magasin
+					;
 		}
-		else {
-		// un peu plus d'info en mode test et dev
-			$mode_dev = (isset($info['etat']) && ($info['etat']=='dev'));
-			$result .= 
-				spiplistes_boite_meta_info_liste($meta_info, true) // nom, etat, dir, version
-				. spiplistes_boite_meta_info_liste($info, $mode_dev)  // et tout ce qu'on a en magasin
-				;
 		}
 		if(!empty($result)) {
 			$result = ""
-				. debut_cadre_relief('plugin-24.gif', true, '', $prefix)
+				. debut_cadre_relief('plugin-24.gif', true, '', _T($prefix.':'.$prefix))
 				. $icon
 				. $result
 				. fin_cadre_relief(true)
 				;
 		}
 	}
-	if($return) return($result);
-	else echo($result);
+	return($result);
 } // spiplistes_boite_meta_info()
 
 /*
@@ -1087,18 +1085,29 @@ function spiplistes_boite_meta_info_liste($array, $recursive = false) {
 	global $spip_lang_left;
 	$result = "";
 	if(is_array($array)) {
-		foreach($array as $key=>$value) {
-			$sub_result = "";
-			if(is_array($value)) {
-				if($recursive) {
-					$sub_result = spiplistes_boite_meta_info_liste($value);
+		
+		$eviter = array(
+			'version' // inutile. deja affiche' en bas de page
+			, 'version_base' // idem
+			, 'nom' // deja en titre de boite
+			, 'filemtime', 'icon', 'prefix' // sans interet
+			
+		);
+		
+		foreach($array as $key => $value) { spiplistes_log($key);
+			if(!in_array($key, $eviter)) {
+				$sub_result = "";
+				if(is_array($value)) {
+					if($recursive) {
+						$sub_result = spiplistes_boite_meta_info_liste($value);
+					}
 				}
-			}
-			else {
-				$sub_result = propre($value);
-			}
-			if(!empty($sub_result)) {
-				$result .= "<li><span style='font-weight:bold;'>$key</span> : $sub_result</li>\n";
+				else {
+					$sub_result = propre($value);
+				}
+				if(!empty($sub_result)) {
+					$result .= "<li><span style='font-weight:bold;'>$key</span> : $sub_result</li>\n";
+				}
 			}
 		}
 		if(!empty($result)) {
