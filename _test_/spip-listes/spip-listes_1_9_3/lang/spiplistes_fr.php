@@ -128,7 +128,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'charger_le_patron' => 'G&eacute;n&eacute;rer le courrier',
 'choix_defini' => 'Pas de choix d&eacute;fini.\n'
 , 'Configuration' => 'Configuration'
-, 'Cliquez_ici_pour_modifier_votre_abonnement' => "Cliquez ici pour modifier votre abonnement"
+, 'Cliquez_ici_pour_modifier_votre_abonnement' => "<br />Cliquez ici pour modifier votre abonnement"
 , 'courriers' => 'Courriers',
 'chercher_un_auteur' => "Chercher un auteur",
 'Courrier_numero_:' => "Courrier num&eacute;ro :",
