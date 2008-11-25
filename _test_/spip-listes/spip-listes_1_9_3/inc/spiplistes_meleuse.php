@@ -234,7 +234,11 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 				foreach(array('objet_html', 'objet_texte', 'page_html', 'page_texte', 'pied_page_html', 'pied_page_texte'
 					, 'pied_rappel_html', 'pied_rappel_texte', 'tampon_html', 'tampon_texte') as $key) {
 					if(!empty($$key)) {
-						$$key = spiplistes_translate_2_charset($$key,$GLOBALS['meta']['spiplistes_charset_envoi']);
+						$$key = spiplistes_translate_2_charset(
+							$$key
+							, $GLOBALS['meta']['spiplistes_charset_envoi']
+							, (strpos($key, 'texte') === false)
+							);
 					}
 				}
 			}
@@ -544,6 +548,36 @@ function spiplistes_personnaliser_courrier ($corps, $id_auteur) {
 	} 
 	return($corps);
 }
+
+// traduit charset
+// complete caracteres manquants dans HTML -> ISO
+function spiplistes_translate_2_charset ($texte, $charset='AUTO', $is_html = false) {
+	
+	$texte = charset2unicode($texte);
+	$texte = unicode2charset($texte, $charset);
+	if($charset != "utf-8") {
+		$remplacements = array(
+			"&#8217;" => "'"	// quote
+			, "&#8220;" => '"' // guillemets
+			, "&#8221;" => '"' // guillemets
+			)
+			;
+		if(!$is_html) {
+			$remplacements = array_merge(
+				$remplacements
+				, array(
+					
+					 "&#159;" => "Y" // &Yuml
+					, "&#339;" => "oe"	// &oelig
+					, "&#338;" => "OE"	// &OElig
+				)
+			);
+		}
+		$texte = strtr($texte, $remplacements);
+	}
+	return($texte);
+}
+
 
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */

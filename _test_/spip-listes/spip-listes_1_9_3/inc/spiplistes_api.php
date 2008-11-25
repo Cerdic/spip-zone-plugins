@@ -598,27 +598,6 @@ function spiplistes_titre_propre($titre){
 	return($titre);
 }
 
-// traduit charset
-// complete caracteres manquants dans SPIP
-function spiplistes_translate_2_charset ($texte, $charset='AUTO') {
-	
-	$texte = charset2unicode($texte);
-	$texte = unicode2charset($texte, $charset);
-	if($charset != "utf-8") {
-		$remplacements = array(
-			"&#8217;"=>"'"	// quote
-			, "&#8220;"=>'"' // guillemets
-			, "&#8221;"=>'"' // guillemets
-			, "&#255;" => "�" // &yuml
-			, "&#159;" => "�" // &Yuml
-			, "&#339;" => "�"	// e dans o
-			)
-			;
-		$texte = strtr($texte, $remplacements);
-	}
-	return($texte);
-}
-
 // donne contenu tampon au format html (CP-20071013)
 // tampon_patron: nom du tampon (fichier, sans extension)
 function spiplistes_tampon_html_get ($tampon_patron) {
