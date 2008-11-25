@@ -140,7 +140,7 @@ function exec_spiplistes_courriers_casier () {
 	///////////////////////////
 	// initialise les variables postées par formulaire (formulaire gerer)
 	foreach(array(
-		'btn_confirmer_envoi', 'id_courrier', 'id_liste', 'id_auteur_test'
+		'btn_confirmer_envoi', 'id_courrier', 'id_liste', 'id_auteur_test', 'btn_annuler_envoi'
 		, 'statut'
 		, 'btn_supprimer_courrier'
 		, 'btn_arreter_envoi' // si valide, contient id du courrier
@@ -160,6 +160,20 @@ function exec_spiplistes_courriers_casier () {
 	$flag_modifiable = ($flag_admin || $flag_moderateur || $flag_createur);
 
 	if($flag_modifiable) {
+
+		// annuler le destinataire d'un courrier (retour de courrier_gerer)
+		// repasse le courrier en mode 'redac'
+		if($btn_annuler_envoi) {
+			spiplistes_courrier_modifier(
+				$id_courrier
+				, array(
+					'email_test' => ''
+					, 'id_liste' => 0
+					, 'total_abonnes' => 0
+					, 'statut' => _SPIPLISTES_COURRIER_STATUT_REDAC
+				)						
+			);
+		}
 
 		// confirmer l'envoi d'un courrier
 		if($btn_confirmer_envoi) {

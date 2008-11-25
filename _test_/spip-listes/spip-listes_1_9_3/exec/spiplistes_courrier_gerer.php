@@ -412,7 +412,12 @@ function exec_spiplistes_courrier_gerer () {
 					. "<input type='hidden' name='id_liste' value='$id_liste' />"
 					. "<input type='hidden' name='id_courrier' value='$id_courrier' />"
 					. "<input type='hidden' name='id_auteur_test' value='$id_auteur_test' />"
-					. "<div style='text-align:right;'><input type='submit' name='btn_confirmer_envoi' value='"._T('spiplistes:Envoyer_ce_courrier')."' class='fondo' /></div>\n"
+					. "<div style='text-align:left;'>"
+					. "<input type='submit' name='btn_annuler_envoi' value='"._T('spiplistes:annuler_envoi')."' class='fondo' style='float:left' />"
+					. "<div style='text-align:right;width:100%'>"
+					. "<input type='submit' name='btn_confirmer_envoi' value='"._T('spiplistes:Envoyer_ce_courrier')."' class='fondo' />"
+					. "</div>\n"
+					. "</div>\n"
 					. "</form>"
 					. fin_cadre_couleur(true)
 					;

@@ -71,7 +71,7 @@ Le premier champ adresse@mail est obligatoire. Les deux autres champs peuvent
 'aff_lettre_auto' => 'Lettres des nouveaut&eacute;s envoy&eacute;es',
 'alerte_edit' => 'Le formulaire ci-dessous permet de modifier le texte d\'un courrier. Vous pouvez choisir de commencer par importer un patron pour g&eacute;n&eacute;rer le contenu de votre message.',
 'alerte_modif' => '<strong>Apr&egrave;s l\'affichage de votre courrier, vous pourrez en modifier le contenu</strong>',
-'annuler_envoi' => 'Annuler l\'envoi',
+'annuler_envoi' => 'Annuler l&#39;envoi',
 'article_entier' => 'Lire l\'article entier',
 'abonnes_titre' => 'Abonn&eacute;s',
 'adresse_de_reponse' => "Adresse de r&eacute;ponse",
