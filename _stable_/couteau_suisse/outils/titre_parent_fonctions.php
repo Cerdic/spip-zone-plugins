@@ -35,7 +35,7 @@ function cs_titre_sql($table, $where) {
 		if($r = sql_getfetsel($titre, "spip_$table", $where))
 			return $r;
 	} else {
-		if($r = spip_query("SELECT $titre FROM spip_$table_parent WHERE $where"))
+		if($r = spip_query("SELECT $titre FROM spip_$table WHERE $where"))
 			// s'il existe un champ, on le retourne
 			if($row = spip_fetch_array($r)) return $row[$titre];
 	}
