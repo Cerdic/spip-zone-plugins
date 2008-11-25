@@ -93,12 +93,18 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 			// recupere la liste des listes
 			$listes = array();
 			while($row = sql_fetch($sql_result)) {
+				$texte = propre($row['texte']);
+				if(strlen($legend = textebrut($texte)) > 40) {
+					$texte = couper($texte, 40);
+				}
+				$texte = strip_tags($texte, '<strong>');
 				$listes[] = array(
 					'id_liste' => intval($row['id_liste'])
 					, 'titre' => $row['titre']
-					, 'texte' => $row['texte']
+					, 'texte' => $texte
 					, 'date' => $row['date']
 					, 'statut' => $row['statut']
+					, 'legend' => $legend
 				);
 			} // end while
 			
@@ -210,9 +216,11 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 					. "<label>\n"
 					. "<input name='abos_set[]' type='checkbox' value='$id_liste' title=\"$label\" $checked />\n"
 					. spiplistes_bullet_titre_liste('puce', $value['statut'], '', true)
+					. "<span title=\"".$value['legend']."\">\n"
 					. "<span class='titre'>".typo($value['titre'])."</span> \n"
 					. "<span class='description'>".typo($value['texte'])." </span>\n"
 					. "<span class='periodicite'>($prochain_envoi)</span>\n"
+					. "</span>\n"
 					. "</label></li>\n"
 					;
 			}
