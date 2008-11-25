@@ -229,6 +229,7 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 			$pied_rappel_html = _T('spiplistes:Cliquez_ici_pour_modifier_votre_abonnement');
 			$pied_rappel_texte = _T('spiplistes:abonnement_mail_text');
 			
+			// transcrire le contenu
 			if($GLOBALS['meta']['spiplistes_charset_envoi'] != $GLOBALS['meta']['charset']){
 				include_spip('inc/charsets');
 				foreach(array('objet_html', 'objet_texte', 'page_html', 'page_texte', 'pied_page_html', 'pied_page_texte'

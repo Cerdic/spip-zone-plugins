@@ -191,7 +191,7 @@ function exec_spiplistes_courrier_previsu () {
 		if($avec_intro == 'oui') {
 			$ii = propre($message_intro);
 			$intro_html = "<div>$ii</div>\n";
-			$intro_texte = spiplistes_courrier_version_texte($ii);
+			$intro_texte = spiplistes_courrier_version_texte($ii)."\n\n";
 		} 
 
 		if($avec_patron == 'oui') {
