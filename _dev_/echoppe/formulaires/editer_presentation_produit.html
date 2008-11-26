@@ -18,14 +18,14 @@
 					
 				</li>
 				
-				[<li class="editer_lang" >
+				[<li class="editer_lang [(#ENV**{erreurs}|table_valeur{lang}|?{'erreur',''})]" >
 					<label for="lang_produit" ><:echoppe:langue_du_produit:></label>
 					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lang})</span>]
 					(#CONFIG{langues_multilingue}|select_lang{lang,#LANG,forml})
 					
 				</li>]
 				[(#CONFIG{langues_multilingue}|=={''}|?{<input type="hidden" name="lang" value="[(#CONFIG{langue_site})]" />,''})]
-				<li class="editer_ref_produit obligatoire" >
+				<li class="editer_ref_produit obligatoire [(#ENV**{erreurs}|table_valeur{ref_produit}|?{'erreur',''})]" >
 					<label for="[(#REF_PRODUIT|?{ref_produit_fake,ref_produit})]" ><:echoppe:reference_interne:></label>
 					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ref_produit})</span>]
 					<input type="text" class="forml text" id="[(#REF_PRODUIT|?{ref_produit_fake,ref_produit})]" name="[(#REF_PRODUIT|?{ref_produit_fake,ref_produit})]" value="#REF_PRODUIT" [(#REF_PRODUIT|?{disabled="disabled",''})]/><br />

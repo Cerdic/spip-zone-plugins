@@ -25,11 +25,13 @@ function action_echoppe_modifier_stock(){
 	if ($contexte['id_depot'] == '-1' && $contexte['quantite'] <= 0) $contexte['quantite'] = 0;
 	
 	if (sql_count($sql_quantite) == 1){
-		$sql_maj_quantite = "UPDATE spip_echoppe_stocks SET quantite = '".$contexte['quantite']."' WHERE ref_produit = '".$contexte['ref_produit']."' AND id_depot = '".$contexte['id_depot']."';";
-		$res_maj_quantite = spip_query($sql_maj_quantite);
+		/*$sql_maj_quantite = "UPDATE spip_echoppe_stocks SET quantite = '".$contexte['quantite']."' WHERE ref_produit = '".$contexte['ref_produit']."' AND id_depot = '".$contexte['id_depot']."';";
+		$res_maj_quantite = spip_query($sql_maj_quantite);*/
+		sql_updateq('spip_echoppe_stocks' ,array("quantite" => $contexte['quantite']), "ref_produit = '".$contexte['ref_produit']."' AND id_depot = '".$contexte['id_depot']."'");
 	}else{
-		$sql_maj_quantite = "INSERT INTO spip_echoppe_stocks VALUES ('', '".$contexte['ref_produit']."', '', '".$contexte['id_depot']."', '".$contexte['quantite']."', NOW());";
-		$res_maj_quantite = spip_query($sql_maj_quantite);	
+		/*$sql_maj_quantite = "INSERT INTO spip_echoppe_stocks VALUES ('', '".$contexte['ref_produit']."', '', '".$contexte['id_depot']."', '".$contexte['quantite']."', NOW());";
+		$res_maj_quantite = spip_query($sql_maj_quantite);	*/
+		$res_maj_quantite = sql_insertq('spip_echoppe_stocks' , array("ref_produit" => $contexte['ref_produit'], "id_depot" => $contexte['id_depot'], "quantite" => $contexte['quantite']));
 	}
 	$contexte['redirect'] = generer_url_ecrire("echoppe_produit", "id_produit=".$contexte['id_produit'].'&onglet=stocks', "&");
 	
