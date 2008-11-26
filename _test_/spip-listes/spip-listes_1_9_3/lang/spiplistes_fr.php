@@ -58,9 +58,9 @@ Le premier champ adresse@mail est obligatoire. Les deux autres champs peuvent
 'abonner' => 's\'abonner',
 'abonnes_liste_int' => 'Abonn&eacute;s aux listes internes : ',
 'abonnes_liste_pub' => 'Abonn&eacute;s aux listes publiques : ',
-'actualiser' => 'Actualiser',
-'a_destination' => '&agrave; destination de ',
-'adresse' => 'Indiquez ici l\'adresse &agrave; utiliser pour les r&eacute;ponses de mails 
+'actualiser' => 'Actualiser'
+, 'a_destination_de_' => '&agrave; destination de '
+, 'adresse' => 'Indiquez ici l\'adresse &agrave; utiliser pour les r&eacute;ponses de mails 
 	(&agrave; d&eacute;faut, l\'adresse du webmestre sera utilis&eacute;e comme adresse de r&eacute;ponse) :',
 'adresse_envoi' => 'Adresse d\'envoi par d&eacute;faut',
 'adresses_importees' => 'Adresses import&eacute;es',
@@ -405,8 +405,6 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , 'nb_abonnes_plur' => " abonn&eacute;s"
 , 'nb_moderateur_sing' => " mod&eacute;rateur"
 , 'nb_moderateur_plur' => " mod&eacute;rateurs"
-, 'nb_destinataire_sing' => " destinataire"
-, 'nb_destinataire_plur' => " destinataires"
 , 'nbre_abonnes' => "Nombre d\'abonn&eacute;s : "
 , 'nbre_mods' => "Nombre de mod&eacute;rateurs : "
 , 'nom' => 'Nom d\'utilisateur',
@@ -497,7 +495,6 @@ liste."
 'Sans_abonnement' => "Sans abonnement"
 , 'sans_abonne' => "sans abonn&eacute;"
 , 'sans_moderateur' => "sans mod&eacute;rateur"
-, 'aucun_destinataire' => "aucun destinataire"
 , 'Supprimer_ce_contact' => "Supprimer ce contact",
 'Suppression_de' => "Suppression de"
 , 'suppression_' => "Suppression @objet@"
@@ -644,7 +641,7 @@ liste."
 'nb_abonnes' => 'Dans les listes : ',
 'nb_inscrits' => 'Dans le site :  ',
 'nb_listes' => 'Incriptions dans toutes les listes : '
-, 'Pas_de_courrier_auto_programme' => "Il n'y a pas de courrier automatique planifi&eacute; pour cette liste."
+, 'pas_denvoi_auto_programme' => "Il n'y a pas d&#39;envoi automatique planifi&eacute; pour cette liste de diffusion."
 , 'Pas_de_periodicite' => "Pas de p&eacute;riodicit&eacute;."
 , 'nouvelle_abonne' => 'L\'abonn&eacute; suivant a &eacute;t&eacute; ajout&eacute; la liste',
 
@@ -672,7 +669,6 @@ liste."
 'statut_publique' => 'Publique',
 'suivi_envois' => 'Suivi des envois',
 'supprime_contact' => 'Supprimer ce contact d&eacute;finitivement',
-'supprime_contact_base' => 'Supprimer d&eacute;finitivement de la base',
 
 'tableau_bord' => 'Tableau de bord',
 'texte' => 'Texte',
@@ -706,25 +702,8 @@ liste."
 // ====================== spip-meleuse.php3 ======================
 
 'contacts' => 'Nombre de contacts',
-'contacts_lot' => 'Contacts de ce lot',
 'editeur' => 'Editeur : ',
-'envoi_en_cours' => 'Envoi en cours',
-'envoi_tous' => 'Envoi &agrave; destination de tous les inscrits',
-'envoi_listes' => 'Envoi &agrave; destination des abonn&eacute;s &agrave; la liste : ',
-'envoi_erreur' => 'Erreur : SPIP-listes ne trouve pas de destinataire pour ce courrier',
-'email_reponse' => 'Email de r&eacute;ponse : ',
-'envoi_annule' => 'Envoi annul&eacute;',
-'envoi_fini' => 'Envois termin&eacute;s',
-'erreur_destinataire' => 'Erreur destinataire : pas d\'envoi',
-'erreur_sans_destinataire' => 'Erreur : aucun destinataire ne peut &ecirc;tre trouv&eacute; pour ce courrier',
-'erreur_mail' => 'Erreur : envoi du mail impossible (v&eacute;rifier si mail() de php est disponible)',
-
-'forcer_lot' => 'Provoquer l\'envoi du lot suivant',
-
-'non_courrier' => 'Pas / plus de courrier &agrave; envoyer',
-'non_html' => 'Votre logiciel de messagerie ne peut apparemment pas afficher correctement la version graphique (HTML) de cet e-mail',
-'sans_adresse' => 'Mail non envoy&eacute; -> Veuillez d&eacute;finir une adresse de r&eacute;ponse'
-, 'confirmer' => 'Confirmer'
+'envoi_tous' => 'Envoi &agrave; destination de tous les inscrits'
 , 'lettre_info' => 'La lettre d\'information du site'
 , 'patron_detecte' => '<p><strong>Patron d&eacute;tect&eacute; pour la version texte</strong><p>'
 , 'patron_erreur' => 'Le patron sp&eacute;cifi&eacute; ne donne pas de r&eacute;sulat avec les param&egrave;tres choisis'
@@ -732,16 +711,46 @@ liste."
 , 'listes_emails' => 'Lettres d\'information'
 , 'options' => 'radio|brut|Format :|Html,Texte,D&eacute;sabonnement|html,texte,non'
 , 'bonjour' => 'Bonjour,'
-, 'inscription_response' => 'Vous &ecirc;tes abonn&eacute; &agrave; la liste d\'information du site '
-, 'inscription_responses' => 'Vous &ecirc;tes abonn&eacute; aux listes d\'informations du site '
 , 'inscription_liste' => 'Vous avez choisi de recevoir les courriers adress&eacute;s &agrave; la liste suivante : '
 , 'inscription_listes' => 'Vous avez choisi de recevoir les courriers adress&eacute;s aux listes suivantes : '
 , 'inscription_format' => ' en format '
-, 'info_1_liste' => '1 liste'
 , 'info_liste_1' => 'liste'
-, 'info_liste_2' => 'listes'
-, 'info_1_abonne' => '1 abonn&eacute;'
-, 'info_abonnes' => 'abonn&eacute;s'
+
+
+// CP-20081126: inc/spiplistes_api_presentation.php
+, 'envoi_en_cours' => 'Envoi en cours'
+, 'nb_destinataire_sing' => " destinataire"
+, 'nb_destinataire_plur' => " destinataires"
+, 'aucun_destinataire' => "aucun destinataire"
+, '1_liste' => '@n@ liste'
+, 'n_listes' => '@n@ listes'
+
+// CP-20081126: balise/formulaire_abonnement.php
+, 'inscription_response' => 'Vous &ecirc;tes abonn&eacute; &agrave; la liste d\'information du site '
+, 'inscription_responses' => 'Vous &ecirc;tes abonn&eacute; aux listes d\'informations du site '
+
+// CP-20081126: inc/spiplistes_meleuse.php
+, 'erreur_sans_destinataire' => 'Erreur : aucun destinataire ne peut &ecirc;tre trouv&eacute; pour ce courrier'
+, 'envoi_annule' => 'Envoi annul&eacute;'
+, 'sans_adresse' => 'Mail non envoy&eacute; -> Veuillez d&eacute;finir une adresse de r&eacute;ponse'
+, 'erreur_mail' => 'Erreur : envoi du mail impossible (v&eacute;rifier si mail() de php est disponible)'
+
+// CP-20081126: exec/spiplistes_maintenance.php
+, 'abonnes' => 'abonn&eacute;s'
+, '1_abonne' => '1 abonn&eacute;'
+
+// CP-20081126: a priori, pas|plus utilise'
+, 'supprime_contact_base' => 'Supprimer d&eacute;finitivement de la base'
+, 'forcer_lot' => 'Provoquer l\'envoi du lot suivant'
+, 'erreur_destinataire' => 'Erreur destinataire : pas d\'envoi'
+, 'contacts_lot' => 'Contacts de ce lot'
+, 'envoi_fini' => 'Envois termin&eacute;s'
+, 'non_courrier' => 'Pas / plus de courrier &agrave; envoyer'
+, 'non_html' => 'Votre logiciel de messagerie ne peut apparemment pas afficher correctement la version graphique (HTML) de cet e-mail'
+, 'envoi_erreur' => 'Erreur : SPIP-Listes ne trouve pas de destinataire pour ce courrier'
+, 'email_reponse' => 'Email de r&eacute;ponse : '
+, 'envoi_listes' => 'Envoi &agrave; destination des abonn&eacute;s &agrave; la liste : '
+, 'confirmer' => 'Confirmer'
 
 );
 

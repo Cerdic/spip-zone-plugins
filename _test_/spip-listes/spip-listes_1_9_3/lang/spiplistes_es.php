@@ -45,7 +45,7 @@ Recibir&aacute;s un email para acceder a la p&aacute;gina de modificaci&oacute;n
 'abonnes_liste_int' => '<br />Inscripciones en boletines internos: ',
 'abonnes_liste_pub' => '<p>Inscripciones en boletines p&uacute;blicos: ',
 'actualiser' => 'Actualizar esta p&aacute;gina',
-'a_destination' => 'enviar a ',
+'a_destination_de_' => 'enviar a ',
 'adresse' => 'Direcci&oacute;n de correo electr&oacute;nico para responder al mensaje (por defecto, la direcci&oacute;n del/la webmestre/webmistress ser&aacute; utilizada como direcci&oacute;n de respuesta) :',
 'adresse_envoi' => 'Remitente por defecto',
 'adresses_importees' => 'Direcciones importantes',
@@ -134,7 +134,7 @@ Recibir&aacute;s un email para acceder a la p&aacute;gina de modificaci&oacute;n
 'info_nouv' => 'Tienes activado el env&iacute;o de novedades',
 'info_nouv_texte' => 'Pr&oacute;simo env&iacute;o de novedades en @proch@ d&iacute;as',
 'inscription_mail_forum' => 'Estos son tus identificadores para conectarte a @nom_site_spip@ (@adresse_site@)',
-'inscription_mail_redac' => 'Estos son tus identificadores para conectarte a @nom_site_spip@ (@adresse_site@) et l\'interface de rédaction (@adresse_site@/ecrire)',
+'inscription_mail_redac' => 'Estos son tus identificadores para conectarte a @nom_site_spip@ (@adresse_site@) et l\'interface de rï¿½daction (@adresse_site@/ecrire)',
 'inscription_visiteurs' => 'Inscripci&oacute;n s&oacute;lo como visitante',
 'inscription_redacteurs' =>'Inscripci&oacute;n como redactor(a)',
 'import_export' => 'Importar / Exportar',
@@ -326,7 +326,7 @@ Recibir&aacute;s un email para acceder a la p&aacute;gina de modificaci&oacute;n
 'nb_abonnes' => 'En los boletines: ',
 'nb_inscrits' => 'En el sitio:  ',
 'nb_listes' => 'Entre todas los boletines: ',
-'Pas_de_courrier_auto_programme' => 'No hay env&iacute;os programados para este bolet&iacute;n.',
+'pas_denvoi_auto_programme' => 'No hay env&iacute;os programados para este bolet&iacute;n.',
 'nouvelle_abonne' => 'La siguiente inscripci&oacute;n ha sido a&ntilde;adida al bolet&iacute;n',
 
 'pas_acces' => 'No tienes acceso permitido a esta p&aacute;gina.',
@@ -339,7 +339,7 @@ Recibir&aacute;s un email para acceder a la p&aacute;gina de modificaci&oacute;n
 'program' => 'Programaci&oacute;n de env&iacute;os',
 
 'reinitialiser' => 'Actualizar',
-'remplir_tout' => 'Tous les champs doivent être remplis',
+'remplir_tout' => 'Tous les champs doivent ï¿½tre remplis',
 'repartition' => 'Distribuci&oacute;n',
 'retour_link' => 'Volver',
 
@@ -433,8 +433,8 @@ Recibir&aacute;s un email para acceder a la p&aacute;gina de modificaci&oacute;n
 'inscription_listes' => 'Has seleccionado recibir los boletines informativos: ',
 'inscription_format' => ' en formato ',
 
-'info_1_liste' => '1 bolet&iacute;n informativo',
-'info_liste_2' => 'boletines informativos',
+'1_liste' => '@n@ bolet&iacute;n informativo',
+'n_listes' => '@n@ boletines informativos',
 
 'options' => 'radio|brut|Formato:|Html,Texto,No recibir novedades|html,texte,non'
 

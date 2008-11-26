@@ -152,11 +152,7 @@ function exec_spiplistes_maintenance () {
 	
 	// compter les listes
 	$nb_listes = spiplistes_listes_compter();
-	$nb_listes_desc = 
-						($nb_listes==1)
-						? _T('spiplistes:info_1_liste')
-						: "$nb_listes "._T('spiplistes:info_liste_2')
-						;
+	$nb_listes_desc = spiplistes_nb_listes_str_get ($nb_listes);
 	$listes_array = spiplistes_listes_select("id_liste,statut,titre,message_auto");
 	// listes auto (crhono) compte'es a part
 	$nb_listes_auto = 0;
@@ -171,8 +167,8 @@ function exec_spiplistes_maintenance () {
 	$nb_abonnes_formats = $nb_abonnes_formats['n'];
 	$nb_abonnes_formats_desc = 
 					($nb_abonnes_formats==1)
-					? _T('spiplistes:info_1_abonne')
-					: "$nb_abonnes_formats "._T('spiplistes:info_abonnes')
+					? _T('spiplistes:1_abonne')
+					: "$nb_abonnes_formats "._T('spiplistes:abonnes')
 					;
 
 	$maintenance_url_action = generer_url_ecrire(_SPIPLISTES_EXEC_MAINTENANCE);

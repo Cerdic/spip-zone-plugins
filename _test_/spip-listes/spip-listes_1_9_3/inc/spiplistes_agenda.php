@@ -191,7 +191,7 @@ function spiplistes_boite_agenda_contenu ($periode, $retour, $img_pack) {
 	return($result);
 }
 
-// dresser l'inventaire des listes à partir 
+// dresser l'inventaire des listes a partir 
 // d'aujourd'hui, sur $jours jours.
 function spiplistes_listes_inventaire ($jours) {
 
@@ -222,15 +222,7 @@ function spiplistes_boitelistes_planning_jour ($planning, $prefix_titre, $coef_g
 	$result = "";
 	$ii = 0;
 	foreach($planning as $liste) {
-		$titre_nb_abos = 
-			($liste['nb_abos'] > 0)
-			? spiplistes_singulier_pluriel_str_get(
-				$liste['nb_abos']
-				, _T('spiplistes:nb_destinataire_sing')
-				, _T('spiplistes:nb_destinataire_plur')
-				)
-			: _T('spiplistes:aucun_destinataire')
-			;
+		$titre_nb_abos = spiplistes_nb_destinataire_str_get($liste['nb_abos']);
 		$titre = $prefix_titre.": ".couper($liste['titre'])." ($titre_nb_abos)";
 		$height = "height:".max(_SPIPLISTES_MIN_HEIGHT_BAR, ceil($liste['nb_abos'] * $coef_graph))."px;";
 		$href = generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=".$liste['id_liste']);

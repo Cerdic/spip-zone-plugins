@@ -772,8 +772,43 @@ function spiplistes_nb_abonnes_liste_str_get ($id_liste, $nb_abos = false, $html
 	return ($result);
 }
 
-//CP-20080610
-// Nombre de moderateurs d'une liste, chaine html
+/* 
+ * CP-20081126
+ * @return Nombre de destinataires d'une liste, chaine html
+ * @param $nb 
+ */
+function spiplistes_nb_destinataire_str_get ($nb) {
+	$result = ($nb > 0)
+			? spiplistes_singulier_pluriel_str_get(
+				$nb
+				, _T('spiplistes:nb_destinataire_sing')
+				, _T('spiplistes:nb_destinataire_plur')
+				)
+			: _T('spiplistes:aucun_destinataire')
+			;
+	return($result);
+}
+
+/*
+ * CP-20081126
+ * @return Nombre de listes, chaine html
+ * @param $nb Object
+ */
+function spiplistes_nb_listes_str_get ($nb) {
+	if(!$nb) return ("");
+	$result = 
+		($nb == 1)
+		? _T('spiplistes:1_liste', array('n' => $nb))
+		: _T('spiplistes:n_listes', array('n' => $nb))
+		;
+	return($result);
+}
+
+/*
+ * CP-20080610
+ * @return Nombre de moderateurs d'une liste, chaine html
+ * @param $nb
+ */
 function spiplistes_nb_moderateurs_liste_str_get ($nb) {
 	$result = ""
 		. "("

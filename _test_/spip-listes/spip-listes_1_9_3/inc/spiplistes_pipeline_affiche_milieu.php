@@ -168,11 +168,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 				;
 			if($n = count($auteur_abos_current_list)) {
 				$result .= $n."/"
-					. spiplistes_singulier_pluriel_str_get(
-						  $nb_listes_dispo
-						, _T('spiplistes:info_liste_1')
-						, _T('spiplistes:info_liste_2')
-						)
+					. spiplistes_nb_listes_str_get ($nb_listes_dispo)
 					. ". "
 					. _T('spiplistes:format_de_reception')." : "
 						.	(

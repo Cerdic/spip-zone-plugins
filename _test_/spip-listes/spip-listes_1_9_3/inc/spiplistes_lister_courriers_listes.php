@@ -157,15 +157,7 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 				case 'courriers':
 					$nb_abo = "";
 					if(empty($email_test)) {
-						$nb_abo = 
-							($total_abonnes > 0)
-							? spiplistes_singulier_pluriel_str_get(
-								$total_abonnes
-								, _T('spiplistes:nb_destinataire_sing')
-								, _T('spiplistes:nb_destinataire_plur')
-								)
-							: _T('spiplistes:aucun_destinataire')
-							;
+						$nb_abo = spiplistes_nb_destinataire_str_get($total_abonnes);
 					}
 					else {
 						$nb_abo = _T('spiplistes:email_adresse');

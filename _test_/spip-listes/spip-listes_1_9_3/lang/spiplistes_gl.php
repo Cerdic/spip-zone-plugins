@@ -103,7 +103,7 @@ Un sa&uacute;do
 'info_nouv' => 'Tes activado o env&iacute;o de novidades',
 'info_nouv_texte' => 'Pr&oacute;ximo env&iacute;o de novidades en @proch@ d&iacute;as',
 'inscription_mail_forum' => 'Estos son os teus identificadores para conectarte a @nom_site_spip@ (@adresse_site@)',
-'inscription_mail_redac' => 'Estos son os teus identificadores para conectarte a @nom_site_spip@ (@adresse_site@) et l\'interface de rédaction (@adresse_site@/ecrire)',
+'inscription_mail_redac' => 'Estos son os teus identificadores para conectarte a @nom_site_spip@ (@adresse_site@) et l\'interface de rï¿½daction (@adresse_site@/ecrire)',
 
 'inscription_visiteurs' => 'Inscripci&oacute;n como visitante',
 
@@ -266,7 +266,7 @@ As isncripci&oacute;ns a importar deben estar nun ficheiro de texto que s&oacute
 'nb_abonnes' => 'Nas listas: ',
 'nb_inscrits' => 'No sitio:  ',
 'nb_listes' => 'Entre todas as listas: ',
-'Pas_de_courrier_auto_programme' => 'Non hai env&iacute;os programados para esta lista.',
+'pas_denvoi_auto_programme' => 'Non hai env&iacute;os programados para esta lista.',
 'nouvelle_abonne' => 'A seguinte inscripci&oacute;n foi engadida &aacute; lista',
 
 'pas_acces' => 'Non tes acceso permitido a esta p&aacute;xina.',

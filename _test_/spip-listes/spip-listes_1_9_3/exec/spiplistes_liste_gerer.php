@@ -637,7 +637,7 @@ function exec_spiplistes_liste_gerer () {
 		. "<tr><td align='$spip_lang_left' class='verdana2'>\n"
 		;
 	if ($message_auto != "oui") {
-		$page_result .= "<div class='verdana2'>"._T('spiplistes:Pas_de_courrier_auto_programme')."</div>\n";
+		$page_result .= "<div class='verdana2'>"._T('spiplistes:pas_denvoi_auto_programme')."</div>\n";
 	}
 	else {
 		$page_result .= ""

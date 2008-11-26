@@ -37,7 +37,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'abonnes_liste_int' => 'Subscribers to internal lists: ',
 'abonnes_liste_pub' => 'Subscribers to public lists: ',
 'actualiser' => 'Update',
-'a_destination' => 'to ',
+'a_destination_de_' => 'to ',
 'adresse' => 'Specify here the reply-to e-mail address (otherwise the default address of the webmaster will be used):',
 'adresse_envoi' => 'Default sender\'s address',
 'adresses_importees' => 'Imported addresses',
@@ -312,7 +312,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'nb_abonnes' => 'On the list: ',
 'nb_inscrits' => 'On the site: ',
 'nb_listes' => 'Subscribe to all lists: ',
-'Pas_de_courrier_auto_programme' => 'There is no message to send out on this list.',
+'pas_denvoi_auto_programme' => 'There is no message to send out on this list.',
 'nouvelle_abonne' => 'The following subscriber has been added to the list',
 
 'pas_acces' => 'You dont have access to this webpage.',
@@ -429,8 +429,8 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'inscription_listes' => 'You will receive the newsletters sent to the following mailing lists : ',
 'inscription_format' => ', in format ',
 
-'info_1_liste' => '1 list',
-'info_liste_2' => 'lists'
+'1_liste' => '@n@ list',
+'n_listes' => "@n@ lists"
 
 );
 
