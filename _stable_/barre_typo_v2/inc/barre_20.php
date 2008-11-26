@@ -354,7 +354,7 @@ function chainHandler(obj, handlerName, handler) {
 };
 
 $(document).ready(function(){';
-	if (!test_espace_prive()) {
+	if (test_espace_prive()) {
 		$ret .= '
 		$('.$champ.').after("<div id=\"article_preview'.$num_barre.'\"></div>");
 		$('.$champ.').before("<div id=\"article_stats'.$num_barre.'\"></div>");
