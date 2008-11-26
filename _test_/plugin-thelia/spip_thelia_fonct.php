@@ -87,6 +87,7 @@ function spip_thelia_appeler_moteur_thelia($texte)
 
 	//parsonnalisation des variables thélia
 	switch($_REQUEST['page']){
+		case 'merci' : $securise=0; $pageret=0; $reset=1; break;
 		case 'panier' : $securise=0; $pageret=1; break;
 		case 'adresse' : $securise=1; $pageret=1; break;
 		case 'cheque' : $securise=1; $pageret=1;$reset=1; break;
