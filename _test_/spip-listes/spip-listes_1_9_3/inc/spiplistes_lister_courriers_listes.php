@@ -84,7 +84,7 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 			) {
 				$clause_where.= " AND (maj NOT BETWEEN 0 AND NOW())";
 			}
-			$sql_select = "id_liste,titre,date,patron,maj ";
+			$sql_select = "id_liste,titre,date,patron,maj,periode,statut";
 			$sql_from = "spip_listes";
 			$sql_where = "statut=".sql_quote($statut)." $clause_where";
 			$sql_order = "date";
@@ -138,6 +138,7 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 					$url_row	= generer_url_ecrire($exec, 'id_liste='.$id_row);
 					$patron = $row['patron'];
 					$maj = $row['maj'];
+					$periode = $row['periode'];
 					break;
 			}
 			
@@ -172,8 +173,8 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 				case 'listes':
 					//$nb_abo = spiplistes_nb_abonnes_liste($id_row);
 					// affiche infos complementaires pour les listes
-					$en_liste .=
-						" <span style='font-size:100%;color:#666666' dir='ltr'>\n"
+					$en_liste .= ""
+						. " <span style='font-size:100%;color:#666666' dir='ltr'>\n"
 						. "<span class='spiplistes-legend-stitre'>".spiplistes_nb_abonnes_liste_str_get($id_row)."</span>"
 						. "<br />"
 						. (
@@ -181,8 +182,27 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 							? "<span class='texte-alerte'>" . _T('spiplistes:liste_sans_patron') . "</span>"
 							: _T('spiplistes:patron_') . " <strong>".$patron."</strong>" 
 						  )
-						. ((!empty($date) && ($date!=_SPIPLISTES_ZERO_TIME_DATE)) ? "<br />"
-						. _T('spiplistes:Prochain_envoi_') . ": <strong>".affdate_heure($date)."</strong>" : "")
+						 ;
+					if (!empty($date) && intval($date)) {
+						if($periode) {
+							$en_liste .= "<br />"
+								. _T('spiplistes:periodicite_tous_les_n_s'
+								, array('n' => "  <strong>".$periode."</strong>  "
+									, 's' => spiplistes_singulier_pluriel_str_get($periode, _T('spiplistes:jour'), _T('spiplistes:jours'), false)
+									)
+								)
+								;
+						}
+						else {
+							// inutile de preciser le statut, c'est dans le titre du bloc
+						}
+						$en_liste .= ""
+							. ""
+							. "<br />" . _T('spiplistes:Prochain_envoi_')
+							. " : <strong>".affdate_heure($date)."</strong>"
+							;
+					}
+					$en_liste .= ""
 						. "</span>\n"
 						;
 						break;

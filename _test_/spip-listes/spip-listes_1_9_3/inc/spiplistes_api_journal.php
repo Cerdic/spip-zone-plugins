@@ -147,7 +147,7 @@ $(document).ready(function(){
 			$('body').append(
 				'<div id=\'spiplistes-log-bg\'></div>'
 				+ '<div id=\'spiplistes-log-div\'>'
-				+ '<h1>"._T('spiplistes:titre_page_voir_journal')."<span id=\'spiplistes-log-close\'>'
+				+ '<h1>".spiplistes_journal_titre()."<span id=\'spiplistes-log-close\'>'
 						+ '<span style=\'display:none\'>X</span>'
 					+ '</span></h1>'
 				+ '<div id=\'spiplistes-log-result\' style=\'padding:1ex\'></div>'
@@ -322,6 +322,10 @@ function spiplistes_journal_lire ($logname = NULL, $logdir = NULL, $logsuf = NUL
 		;
 		
 	return($result);
+}
+
+function spiplistes_journal_titre() {
+	return(_T('spiplistes:titre_page_voir_journal'));
 }
  
 ?>

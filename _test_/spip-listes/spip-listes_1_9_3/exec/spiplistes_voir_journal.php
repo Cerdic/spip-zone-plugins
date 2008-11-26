@@ -71,7 +71,7 @@ function exec_spiplistes_voir_journal () {
 // PAGE CONTENU
 ////////////////////////////////////
 
-	$titre_page = _T('spiplistes:titre_page_voir_journal');
+	$titre_page = spiplistes_journal_titre();
 	// Permet entre autres d'ajouter les classes a la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = "voir_journal";
 	$sous_rubrique = _SPIPLISTES_PREFIX;

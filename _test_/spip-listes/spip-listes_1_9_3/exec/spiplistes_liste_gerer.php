@@ -645,7 +645,7 @@ function exec_spiplistes_liste_gerer () {
 			. "<p class='verdana2'>"._T('spiplistes:sujet_courrier_auto')."<br />\n"
 			. "<span class='spip_large'> ".$titre_message."</span></p>\n"
 			. "<p class='verdana2'>"
-			. spiplistes_items_get_item('alt', $statut)
+			. spiplistes_items_get_item('alt', $statut)."<br />\n"
 			.	(	
 					($statut == _SPIPLISTES_MONTHLY_LIST)
 					?	"<strong>" . _T('spiplistes:Liste_diffusee_le_premier_de_chaque_mois') . "</strong><br />"
@@ -653,8 +653,11 @@ function exec_spiplistes_liste_gerer () {
 				)
 			.	(
 					($periode > 0)
-					? _T('spiplistes:Periodicite_:')._T('spiplistes:Tous_les')."  <strong>".$periode."</strong>  " 
-						. spiplistes_singulier_pluriel_str_get($periode, _T('spiplistes:jour'), _T('spiplistes:jours'), false)
+					? _T('spiplistes:periodicite_tous_les_n_s'
+						, array('n' => "  <strong>".$periode."</strong>  "
+							, 's' => spiplistes_singulier_pluriel_str_get($periode, _T('spiplistes:jour'), _T('spiplistes:jours'), false)
+							)
+						)
 					: ""
 				)
 			.	(

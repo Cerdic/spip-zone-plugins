@@ -93,7 +93,7 @@
 		<BOUCLE_listes(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'} {0,(#ENV{mode_login}|?{100,0})}>
 				[(#TOTAL_BOUCLE|=={1}|?{' ',''})
 				<input type="hidden" name="list&#91;&#93;"  checked="checked" value="#ID_LISTE" />
-				<:spiplistes:abonne_une_seule_liste_publique:>: <strong>#TITRE</strong> [- <em>(#TEXTE|textebrut)</em>]
+				<:spiplistes:abonnement_seule_liste_dispo:>: <strong>#TITRE</strong> [- <em>(#TEXTE|textebrut)</em>]
 				]
 				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
 				<li>

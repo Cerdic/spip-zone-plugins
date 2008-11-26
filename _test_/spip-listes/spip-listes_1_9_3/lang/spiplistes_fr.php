@@ -34,9 +34,6 @@ Le premier champ adresse@mail est obligatoire. Les deux autres champs peuvent
 
 //A
 ,
-'abonne_une_seule_liste_publique' => "Abonnement &agrave; la seule liste disponible ",
-'abonnement_0' => 'Abonnement',
-'abonnement'=>'Vous souhaitez modifier votre abonnement &agrave; la lettre d\'information',
 'abonnement_bouton'=>'Modifier votre abonnement',
 'abonnement_cdt' => '<a href=\'http://bloog.net/spip-listes/\'>SPIP-Listes</a>' ,
 'abonnement_change_format'=>'Vous pouvez changer de format de r&eacute;ception ou vous d&eacute;sabonner : '
@@ -97,7 +94,6 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 	diffusion list&eacute;es ci-dessous. Pour recevoir &agrave; nouveau le courrier 
 	de vos listes pr&eacute;f&eacute;r&eacute;es, choisissez un format de r&eacute;ception 
 	et validez ce formulaire. "
-, 'adresse_mail_obligatoire' => "Adresse mail manquante. Abonnement impossible."
 , 'abonne_sans_format' => "Ce compte est actuellement d&eacute;sabonn&eacute;. Aucun format de courrier n'est 
 	d&eacute;fini. Il ne peut pas recevoir de courrier. D&eacute;finissez un format 
 	de r&eacute;ception pour ce compte afin de valider son abonnement."
@@ -225,8 +221,6 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Erreur_courrier_introuvable' => "Erreur: ce courrier n'existe pas.",
 'Envoi_des_courriers' => "Envoi des courriers",
 'Envoyer_ce_courrier' => "Envoyer ce courrier",
-'Exporter_une_liste_d_abonnes' => "Exporter une liste d'abonn&eacute;s",
-'Exporter_une_liste_de_non_abonnes' => "Exporter une liste de non abonn&eacute;s",
 'En_redaction' => "En r&eacute;daction",
 'En_cours' => "En cours",
 'Envoi_abandonne' => "Envoi abandonn&eacute;",
@@ -266,7 +260,6 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
    Vous pouvez &eacute;galement d&eacute;sabonner temporairement ce contact. 
    Il reste inscrit dans les listes en tant que destinataire, mais les courriers 
    ne lui seront pas envoy&eacute;s tant que vous ne lui aurez pas d&eacute;fini un format de r&eacute;ception de courriers."
-, 'forcer_les_abonnement_liste' => "Forcer les abonnements pour cette liste"
 , 'forcer_abonnement_desc' => "Vous pouvez forcer ici les abonnements &agrave; cette liste, soit pour tous 
    les membres inscrits (visiteurs, auteurs et administrateurs), soit pour tous 
    les visiteurs."
@@ -295,8 +288,6 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 ,
 
 //H
-'Historique_des_envois' => 'Historique des envois'
-,
 
 //I
 'info_auto' => 'SPIP-Listes pour spip peut envoyer r&eacute;guli&egrave;rement aux inscrits, l\'annonce des derni&egrave;res nouveaut&eacute;s du site (articles et br&egrave;ves r&eacute;cemment publi&eacute;s).',
@@ -329,7 +320,6 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'logout' => 'D&eacute;connexion',
 'lot_suivant' => 'Provoquer l\'envoi du lot suivant',
 'lieu' => 'Localisation',
-'lettre_d_information' => 'Lettre d\'information',
 'liste_des_abonnes' => "Liste des abonn&eacute;s",
 'Liste_de_destination' => "Liste de destination",
 'lien_trier_nombre' => "Trier par nombre d&acute;abonnements",
@@ -366,7 +356,8 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'message_sujet' => 'Sujet ',
 'messages' => 'Courriers',
 'Messages_automatiques' => 'Courriers automatiques programm&eacute;s',
-'messages_derniers' => 'Derniers Messages',
+
+
 'messages_forum_clos' => 'Forum d&eacute;sactiv&eacute;',
 'messages_nouveaux' => 'Nouveaux messages',
 'messages_pas_nouveaux' => 'Pas de nouveaux messages',
@@ -397,7 +388,6 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'meleuse_suspendue_info' => "L'envoi des courriers en attente d'exp&eacute;dition est suspendu.",
 'Meleuse_reactivee' => "M&egrave;leuse r&eacute;activ&eacute;e"
 , 'max_' => "Max "
-, 'mode_debug_actif' => "Mode debug actif"
 
 //n
 , 'nb_abonnes_sing' => " abonn&eacute;"
@@ -413,12 +403,10 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'nouveaux_messages' => 'Nouveaux messages',
 'Nouvelle_liste_de_diffusion' => 'Cr&eacute;er une nouvelle liste de diffusion',
 'numero' => 'N&nbsp;',
-'nb_abos' => "qt.",
+'nb_abos' => "qt."
 
 //P
-'pas_abonne_en_ce_moment' => "n'est pas abonn&eacute;"
 , 'par_date' => 'Par date d\'inscription',
-'patron_disponibles' => 'Patrons disponibles',
 'Patrons' => 'Patrons'
 , 'patron_' => "Patron : "
 , 'pas_sur' => '<p>Si vous n\'&ecirc;tes pas s&ucirc;r, choisissez la fonction mail de PHP.</p>',
@@ -428,7 +416,6 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'publie' => 'Publi&eacute; le',
 'Pas_de_liste_pour_import' => "Vous devez cr&eacute;er au moins une liste de destination afin de pouvoir importer 
 	vos abonn&eacute;s.",
-'Periodicite_:' => "P&eacute;riodicit&eacute; : ",
 'Prets_a_envoi' => "Pr&ecirc;ts &agrave; l'envoi"
 , 'Publies' => "Publi&eacute;s"
 , 'publies_auto' => "Publi&eacute;s (auto)"
@@ -445,12 +432,6 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , 'patron_manquant_message' => "Vous devez appliquer un grand patron avant de param&eacute;trer l'envoi de cette 
 liste."
 , 'liste_sans_patron' => "Liste sans patron."
-, 'personnaliser_le_courrier' => "Personnaliser le courrier"
-, 'personnaliser_le_courrier_desc' => 
-	"Vous pouvez personnaliser le courrier pour chaque abonn&eacute; en ins&eacute;rant 
-   dans votre patron les tags n&eacute;cessaires. Par exemple, pour ins&eacute;rer 
-   le nom de votre abonn&eacute; dans son courrier lors de l'envoi, placez dans 
-   votre patron _AUTEUR_NOM_ (notez le tiret bas en d&eacute;but et fin de tag)."
 , 'personnaliser_le_courrier_label' => "Activer la personnalisation du courrier"
 , 'parametrer_la_meleuse' => "Param&eacute;trer la meleuse"
 
@@ -516,7 +497,7 @@ liste."
 , 'supprimer_cet_abo' => "Supprimer cet abonné de cette liste"
 
  //T
-, 'texte_boite_en_cours' => 'SPIP-Listes envoie un courrier.<p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>',
+,
 'texte_courrier' => '<strong>Texte du courrier</strong> (HTML autoris&eacute;)',
 'texte_contenu_pied' => '<br />(Message ajout&eacute; en bas de chaque email au moment de l\'envoi)<br />',
 'texte_lettre_information' => 'Voici la lettre d\'information de ',
@@ -529,7 +510,6 @@ liste."
 , 'Trieuse_reactivee' => "Trieuse r&eacute;activ&eacute;e"
 , 'trieuse_suspendue' => "Trieuse suspendue"
 , 'trieuse_suspendue_info' => "Le traitement des listes de diffusion programm&eacute;es est suspendu."
-, 'titre_page_voir_journal' => "Journal de SPIP-Listes"
 
 //U
 
@@ -568,7 +548,6 @@ liste."
 'desabo' => 'd&eacute;sabo',
 'desabonnement' => 'D&eacute;sabonnement&nbsp;',
 'desabonnes' => 'D&eacute;sabonn&eacute;s',
-'desole' => 'D&eacute;sol&eacute;',
 'destinataire' => 'destinataire',
 'destinataires' => 'Destinataires',
 
@@ -627,7 +606,6 @@ liste."
 'Listes_diffusion_suspendue' => 'Listes de diffusion suspendues',
 'Listes_diffusion_suspendue_desc' => ' ',
 
-'mail_a_envoyer' => 'Nombre de mails &agrave; envoyer : ',
 'mail_tache_courante' => 'Mails envoy&eacute;s pour la t&acirc;che courante : ',
 'messages_auto_envoye' => 'Courriers automatiques envoy&eacute;s',
 'message_en_cours' => 'Ce courrier est en cours de r&eacute;daction',
@@ -654,7 +632,6 @@ liste."
 'plein_ecran' => "(Plein &eacute;cran)",
 'Prochain_envoi_' => "Prochain envoi ",
 
-'reinitialiser' => 'reinitialiser',
 'remplir_tout' => 'Tous les champs doivent &ecirc;tre remplis',
 'repartition' => 'R&eacute;partition',
 'retour_link' => 'Retour',
@@ -671,7 +648,6 @@ liste."
 'texte' => 'Texte',
 'toutes' => 'Tous les inscrits',
 'txt_abonnement' => '(Indiquez ici le texte pour l\'abonnement &agrave; cette liste, affich&eacute; sur le site public si la liste est active)',
-'txt_inscription' => 'Texte d\'inscription : ',
 
 'une_inscription' => 'Un abonn&eacute; trouv&eacute;',
 
@@ -682,7 +658,6 @@ liste."
 
 // ====================== inscription-listes.php3 / abonnement.php3 ======================
 
-'abo_listes' => 'Abonnement',
 'acces_refuse' => 'Vous n\'avez plus acc&egrave;s &agrave; ce site',
 
 'confirmation_format' => ' en format ',
@@ -728,12 +703,21 @@ liste."
 // base/spiplistes_upgrade.php
 // docs/spiplistes_aide_fr.html
 // exec/spiplistes_abonne_edit.php
+, 'adresse_mail_obligatoire' => "Adresse mail manquante. Abonnement impossible."
+
 // exec/spiplistes_abonnes_tous.php
 , 'repartition_abonnes' => "R&eacute;partition des abonn&eacute;s"
 
 // exec/spiplistes_aide.php
 // exec/spiplistes_autocron.php
 // exec/spiplistes_config.php
+, 'personnaliser_le_courrier' => "Personnaliser le courrier"
+, 'personnaliser_le_courrier_desc' => 
+	"Vous pouvez personnaliser le courrier pour chaque abonn&eacute; en ins&eacute;rant 
+   dans votre patron les tags n&eacute;cessaires. Par exemple, pour ins&eacute;rer 
+   le nom de votre abonn&eacute; dans son courrier lors de l'envoi, placez dans 
+   votre patron _AUTEUR_NOM_ (notez le tiret bas en d&eacute;but et fin de tag)."
+
 // exec/spiplistes_courrier_edit.php
 // exec/spiplistes_courrier_gerer.php
 , 'Erreur_Adresse_email_invalide' => 'Erreur: l\'adresse email que vous avez fournie n\'est pas valide'
@@ -741,8 +725,16 @@ liste."
 // exec/spiplistes_courrier_previsu.php
 // exec/spiplistes_courriers_casier.php
 // exec/spiplistes_import_export.php
+, 'Exporter_une_liste_d_abonnes' => "Exporter une liste d'abonn&eacute;s"
+, 'Exporter_une_liste_de_non_abonnes' => "Exporter une liste de non abonn&eacute;s"
+
 // exec/spiplistes_liste_edit.php
+, 'texte_dinsctription_' => "Texte d'inscription : "
+
 // exec/spiplistes_liste_gerer.php
+, 'forcer_les_abonnement_liste' => "Forcer les abonnements pour cette liste"
+, 'periodicite_tous_les_n_s' => "P&eacute;riodicit&eacute; : tous les @n@ @s@"
+
 // exec/spiplistes_listes_toutes.php
 // exec/spiplistes_maintenance.php
 , 'abonnes' => 'abonn&eacute;s'
@@ -757,6 +749,9 @@ liste."
 // inc/spiplistes_api_courrier.php
 // inc/spiplistes_api_globales.php
 // inc/spiplistes_api_journal.php
+, 'titre_page_voir_journal' => "Journal de SPIP-Listes"
+, 'mode_debug_actif' => "Mode debug actif"
+
 // inc/spiplistes_api_presentation.php
 , 'envoi_en_cours' => 'Envoi en cours'
 , 'nb_destinataire_sing' => " destinataire"
@@ -765,7 +760,7 @@ liste."
 , '1_liste' => '@n@ liste'
 , 'n_listes' => '@n@ listes'
 , 'utilisez_formulaire_ci_contre' => "Utilisez le formulaire ci-contre pour activer/d&eacute;activer cette option."
-
+, 'texte_boite_en_cours' => 'SPIP-Listes envoie un courrier.<p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>'
 
 // inc/spiplistes_dater_envoi.php
 // inc/spiplistes_destiner_envoi.php
@@ -792,7 +787,11 @@ liste."
 
 // formulaires, patrons, etc.
 , 'abo_1_lettre' => 'Lettre d\'information'
+, 'abonnement_seule_liste_dispo' => "Abonnement &agrave; la seule liste disponible "
+, 'abo_listes' => 'Abonnement'
+, 'abonnement_0' => 'Abonnement'
 
+///////
 // a priori, pas|plus utilise'
 , 'supprime_contact_base' => 'Supprimer d&eacute;finitivement de la base'
 , 'forcer_lot' => 'Provoquer l\'envoi du lot suivant'
@@ -813,6 +812,16 @@ liste."
 , 'patron_detecte' => '<p><strong>Patron d&eacute;tect&eacute; pour la version texte</strong><p>'
 , 'val_texte' => 'Texte'
 , 'membres_sans_messages_connecte' => 'Vous n\'avez pas de nouveaux messages'
+, 'messages_derniers' => 'Derniers Messages'
+, 'pas_abonne_en_ce_moment' => "n'est pas abonn&eacute;"
+, 'reinitialiser' => 'reinitialiser'
+, 'mail_a_envoyer' => 'Nombre de mails &agrave; envoyer : '
+, 'lettre_d_information' => 'Lettre d\'information'
+, 'desole' => 'D&eacute;sol&eacute;'
+, 'Historique_des_envois' => 'Historique des envois'
+, 'abonnement'=>'Vous souhaitez modifier votre abonnement &agrave; la lettre d\'information'
+, 'patron_disponibles' => 'Patrons disponibles'
+
 
 );
 

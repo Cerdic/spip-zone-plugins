@@ -186,7 +186,7 @@ function exec_spiplistes_liste_edit(){
 		// champ titre
 		. "<input type='text' name='titre' class='formo' value=\"$titre\" size='40' $clearonfocus />"
 		. "<br />"
-		. "<strong>"._T('spiplistes:txt_inscription')."</strong>"
+		. "<strong>"._T('spiplistes:texte_dinsctription_')."</strong>"
 		. "<br />"._T('spiplistes:txt_abonnement')
 		// boite edition texte
 		. afficher_barre('document.formulaire.texte')

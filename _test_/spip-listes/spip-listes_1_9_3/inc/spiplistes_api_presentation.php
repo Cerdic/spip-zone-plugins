@@ -1129,7 +1129,7 @@ function spiplistes_boite_meta_info_liste($array, $recursive = false) {
 			
 		);
 		
-		foreach($array as $key => $value) { spiplistes_log($key);
+		foreach($array as $key => $value) { 
 			if(!in_array($key, $eviter)) {
 				$sub_result = "";
 				if(is_array($value)) {
