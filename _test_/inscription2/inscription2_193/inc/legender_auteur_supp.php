@@ -31,14 +31,14 @@ function inc_legender_auteur_supp_dist($auteur){
 }
 // La partie affichage du formulaire...
 function legender_auteur_supp_saisir($auteur){
-	$id_auteur = $auteur['id_auteur'];
-	
+	spip_log('saisir les infos de l auteur='.$auteur);
+	$id_auteur = $auteur;
 	$corps_supp = '<li class="editer_inscription2 fieldset">';
 	$corps_supp .= '<fieldset><h3 class="legend">Inscription 2</h3>';
 	$corps_supp .= '<ul>';
 	
 	// Elaborer le formulaire
-	$var_user['b.id_auteur'] = '0';
+	$var_user['b.id_auteur'] = $auteur;
 	$var_user['a.login'] = '0';
 	foreach(lire_config('inscription2',array()) as $cle => $val){
 		if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut_nouveau'){
@@ -46,17 +46,25 @@ function legender_auteur_supp_saisir($auteur){
 			$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
 			if($cle == 'nom' or $cle == 'email' or $cle == 'login')
 				$var_user['a.'.$cle] = '0';
-			elseif(ereg("^statut_rel.*$", $cle))
+			elseif(ereg("^statut_rel.*$", $cle)){
 				$var_user['b.statut_relances'] = '1';
+				$champs[$cle] = '';
+			}
 			elseif($cle == 'pays'){
 				$var_user['c.pays'] = '1';
-				$var_user['c.id_pays as id_pays'] = '1';}
+				$var_user['c.id_pays as id_pays'] = '1';
+				$champs[$cle] = '';
+			}
 			elseif($cle == 'pays_pro'){
 				$var_user['d.pays'] = '1';
 				$var_user['d.pays as pays_pro'] = '1';
-				$var_user['d.id_pays as id_pays_pro'] = '1';}
-			else 
+				$var_user['d.id_pays as id_pays_pro'] = '1';
+				$champs[$cle] = $val;
+			}
+			else{
 				$var_user['b.'.$cle] = '1';
+				$champs[$cle] = '';
+			}
 		}elseif($cle=='newsletter' and $val != ''){
 			$aux3 = array();
 			$aux4 = array();
@@ -76,10 +84,10 @@ function legender_auteur_supp_saisir($auteur){
 		$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur","a.id_auteur= $id_auteur");
 
 	$query = sql_fetch($query);
-	if($query['id_auteur'] == NULL){
-		$id_elargi = sql_insertq("spip_auteurs_elargis",array('id_auteur'=> $id_auteur));
+	if($query == NULL){
+		$query = $champs;
 	}
-	
+
 	foreach ($query as $cle => $val){
 		if(($cle == 'id_pays') || ($cle == 'id_pays_pro') ||  ($cle == 'login') || ($cle == 'nom') || ($cle == 'email')){
 			$corps_supp .= "<input type='hidden' id='$cle' name='$cle' value='$val' />";

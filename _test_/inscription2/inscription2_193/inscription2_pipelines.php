@@ -62,7 +62,7 @@ function inscription2_editer_contenu_objet($flux){
 	if ($flux['args']['type']=='auteur') {
 		include_spip('public/assembler');
 		include_spip('inc/legender_auteur_supp');
-		$flux['args']['contexte']['inscription2'] = sql_fetsel('*','spip_auteurs_elargis','id_auteur='.sql_quote($flux['args']['contexte']['id_auteur']));
+		spip_log('editer_contenu_objet sur auteur='.$flux['args']['contexte']['id_auteur']);
 		$inscription2 = legender_auteur_supp_saisir($flux['args']['contexte']['id_auteur']);
 		$flux['data'] = preg_replace('%(<li class="editer_pgp(.*?)</li>)%is', '$1'."\n".$inscription2, $flux['data']);
 	}
@@ -73,11 +73,10 @@ function inscription2_editer_contenu_objet($flux){
 function inscription2_post_edition($flux){
 	if ($flux['args']['table']=='spip_auteurs') {
 		$id_auteur = $flux['args']['id_objet'];
+		spip_log('post_edition sur id_auteur='.$id_auteur);
 		spip_log("editer_auteur_supp_dits","inscription2");
-			global $visiteur_session;
 			spip_log("editer_auteur_supp $r");
 			$echec = array();
-		
 				foreach(lire_config('inscription2',array()) as $cle => $val){
 					if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle)){
 						$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
@@ -129,7 +128,11 @@ function inscription2_post_edition($flux){
 						}
 					}
 				}
-				sql_update("spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur",$var_user, "a.id_auteur=$id_auteur");
+				if (!sql_getfetsel('id_auteur','spip_auteurs_elargis','id_auteur='.$id_auteur)){
+					//insertion de l'id_auteur dans spip_auteurs_elargis sinon on peut pas proceder a l'update
+					$id_elargi = sql_insertq("spip_auteurs_elargis",array('id_auteur'=> $id_auteur));
+				}
+				sql_update("spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur",$var_user, "b.id_auteur=$id_auteur");
 			
 			// Notifications, gestion des revisions, reindexation...
 			pipeline('post_edition',
