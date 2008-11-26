@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Pagina @page@ : @title@',
 	'page_precedente' => 'Pagina anterioar&#259;',
 	'page_suivante' => 'Pagina urm&#259;toare',
-	'plugin_xml' => 'Reune&#351;te &icirc;ntr-un singur plugin o list&#259; de mici func&#355;ionalit&#259;&#355;i noi &#351;i utile care amelioreaz&#259; gestiunea site-ului dumneavoastr&#259; SPIP.
+	'plugin_xml' => '<MODIF>Reune&#351;te &icirc;ntr-un singur plugin o list&#259; de mici func&#355;ionalit&#259;&#355;i noi &#351;i utile care amelioreaz&#259; gestiunea site-ului dumneavoastr&#259; SPIP.
 
 Fiecare dintre aceste utilit&#259;&#355;i poate fi activat&#259; de c&#259;tre utilizator &icirc;n [pagina de administrare a plug-in-ului->./?exec=admin_couteau_suisse] &#351;i poate gestiona un anumit num&#259;r de variabile: face&#355;i Clic pe {{Configurare}}, dup&#259; aceea alege&#355;i pagina {{Cu&#355;itul Elve&#355;ian}}.
 

@@ -46,7 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Bladzijde @page@: @title@',
 	'page_precedente' => 'Vorige bladzijde',
 	'page_suivante' => 'Volgende bladzijde',
-	'plugin_xml' => 'In slechts &eacute;&eacute;n plugin verenigt een lijst van kleine nieuwe en nuttige functies die het beleid verbeteren, van uw site SPIP.
+	'plugin_xml' => '<MODIF>In slechts &eacute;&eacute;n plugin verenigt een lijst van kleine nieuwe en nuttige functies die het beleid verbeteren, van uw site SPIP.
 
 Elk van deze werktuigen kan of niet door de gebruiker op geactiveerd worden [de bladzijde van bestuur van plugin->./?exec=admin_couteau_suisse] en een aantal variabele beheren: op {{Configuratie}} klikken, vervolgens de tab kiezen {{Le Couteau Suisse}}.
 

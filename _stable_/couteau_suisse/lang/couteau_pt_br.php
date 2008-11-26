@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'P&aacute;gina @page@: @title@',
 	'page_precedente' => 'P&aacute;gina anterior',
 	'page_suivante' => 'Pr&oacute;xima p&aacute;gina',
-	'plugin_xml' => 'Re&uacute;ne, em um &uacute;nico plugin, diversas pequenas e &uacute;teis funcionalidades, que melhoram o gerenciamento do seu site SPIP.
+	'plugin_xml' => '<MODIF>Re&uacute;ne, em um &uacute;nico plugin, diversas pequenas e &uacute;teis funcionalidades, que melhoram o gerenciamento do seu site SPIP.
 
 Cada uma destas ferramentas pode ser ativada ou desativada pelo usu&aacute;rio na [p&aacute;gina de administra&ccedil;&atilde;o do plugin->./?exec=admin_couteau_suisse] e gerar um certo n&uacute;mero de vari&aacute;veis: clique em {{Configuration}}, e depois escolha a guia {{Le Couteau Suisse}}.
 

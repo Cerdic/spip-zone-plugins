@@ -46,7 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Sayfa @page@ : @title@',
 	'page_precedente' => '&Ouml;nceki sayfa',
 	'page_suivante' => 'Sonraki sayfa',
-	'plugin_xml' => 'SPIP sitenizin y&ouml;netilmesin&#351; geli&#351;tirecek bir &ccedil;ok k&uuml;&ccedil;&uuml;k ve yeni i&#351;levi tek bir eklentide toplar.
+	'plugin_xml' => '<MODIF>SPIP sitenizin y&ouml;netilmesin&#351; geli&#351;tirecek bir &ccedil;ok k&uuml;&ccedil;&uuml;k ve yeni i&#351;levi tek bir eklentide toplar.
 
 Bu aletlerden her biri kullan&#305;z&#305; taraf&#305;ndan aktive edilebilir ve pasif hale getirilebilir [eklentinin y&ouml;netim sayfas&#305;->./?exec=admin_couteau_suisse] ve bir &ccedil;ok de&#287;i&#351;ken kontrol edilebilir : cliquer sur {{Configuration}}\'a t&#305;klay&#305;n&#305;z ve {{&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;}} ba&#351;l&#305;&#287;&#305;na t&#305;klay&#305;n&#305;z.
 

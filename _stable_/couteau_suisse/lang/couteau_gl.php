@@ -46,7 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'P&aacute;xina @page@ : @title@',
 	'page_precedente' => 'P&aacute;xina anterior',
 	'page_suivante' => 'P&aacute;xina seguinte',
-	'plugin_xml' => 'Re&uacute;ne nun s&oacute; m&oacute;dulo unha lista de pequenas funcionalidades novas e &uacute;tiles que melloran a xesti&oacute;n do seu web SPIP.
+	'plugin_xml' => '<MODIF>Re&uacute;ne nun s&oacute; m&oacute;dulo unha lista de pequenas funcionalidades novas e &uacute;tiles que melloran a xesti&oacute;n do seu web SPIP.
 
 Cada unha destas ferramentas pode ser activada ou non polo usuario en  [p&aacute;xina de administraci&oacute;n do m&oacute;dulo->./?exec=admin_couteau_suisse] e xestionar un certo n&uacute;mero de variables : Premer en {{Configuraci&oacute;n}}, logo escoller a pestana {{A Navalla Su&iacute;za}}.
 

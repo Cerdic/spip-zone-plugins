@@ -7,6 +7,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// 2
+	'2pts' => '@objet@:',
+
 	// A
 	'attente_confirmation' => 'Waiting for confirmation',
 
@@ -23,13 +26,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_forum' => 'Please give your name!',
 	'non_confirmes' => 'Unconfirmed:',
 
+	// O
+	'objet_article' => 'Article',
+	'objet_articles' => 'Articles',
+	'objet_auteur' => 'Author',
+	'objet_auteurs' => 'Authors',
+	'objet_breve' => 'News item',
+	'objet_breves' => 'News items',
+	'objet_mot' => 'Keyword',
+	'objet_mots' => 'Keywords',
+	'objet_rubrique' => 'Section',
+	'objet_rubriques' => 'Sections',
+	'objet_syndic' => 'Site',
+	'objet_syndics' => 'Sites',
+
 	// P
 	'page_debut' => 'First page',
 	'page_fin' => 'Last page',
 	'page_lien' => 'Page @page@: @title@',
 	'page_precedente' => 'Previous page',
 	'page_suivante' => 'Next page',
-	'plugin_xml' => 'Gathers together in one plugin many small, useful tools to improve the management of your SPIP site.
+	'plugin_xml' => '<MODIF>Gathers together in one plugin many small, useful tools to improve the management of your SPIP site.
 
 Each tool can be ativated individually by the the user from the [plugin\'s admin page->./?exec=admin_couteau_suisse]. To set some options, click on {{Configuration}}, then choose the {{Swiss Knife}} tab.
 
@@ -53,6 +70,13 @@ Compatibility: SPIP 1.9x (all versions)',
 	'texte_formatspip' => 'ORIGINAL TEXT IN SPIP FORMAT',
 	'textes_formatspip' => 'ORIGINAL TEXTS IN SPIP FORMAT',
 	'titre' => 'Swiss Knife',
+
+	// U
+	'urls_propres_erreur' => 'This format does not take into account the URLs listed below own',
+	'urls_propres_format' => 'Thecurrent format of URLs is: {{&laquo;&nbsp;@format@&nbsp;&raquo;}}. [<span>[Configuration->@url@]</span>]',
+	'urls_propres_lien' => 'Public access link',
+	'urls_propres_objet' => '<NEW>Aqu&iacute; se listan las URLs propias guardadas en la base de datos gracias a las cuales los visitantes podr&aacute;n navegar por tu sitio web.',
+	'urls_propres_titre' => 'URLs OWN',
 
 	// V
 	'variable_vide' => '(Empty)',

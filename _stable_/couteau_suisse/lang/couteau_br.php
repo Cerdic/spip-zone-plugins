@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Pajenn @page@ : @title@',
 	'page_precedente' => 'Pajenn a-raok',
 	'page_suivante' => 'Pajenn a zeu',
-	'plugin_xml' => 'Bodet e vez ama&ntilde; ul listennad servijo&ugrave; nevez ha talbvoudus evit gwellaat mont en-dro ho lec\'hienn SPIP.
+	'plugin_xml' => '<MODIF>Bodet e vez ama&ntilde; ul listennad servijo&ugrave; nevez ha talbvoudus evit gwellaat mont en-dro ho lec\'hienn SPIP.
 
 Pep hini ouzh ar binviji-ma&ntilde; a c\'hell beza&ntilde; implijet pe get gant an implijer war [bajenn-mera&ntilde; ar plugin->./?exec=admin_couteau_suisse] ha mera&ntilde; un nebeud roado&ugrave; : klikit war {{Ardremmezi&ntilde;}}, ha dibabit an ivinenn {{Ar Gontell Suis}}.
 

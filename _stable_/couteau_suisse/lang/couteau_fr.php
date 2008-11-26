@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attente_confirmation' => 'En attente de confirmation',
 
 	// D
+	'date_court' => '@jour@/@mois@/@annee@',
 	'derniers_connectes' => 'Derniers connect&eacute;s :',
 
 	// E
@@ -33,10 +34,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'objet_breves' => 'Br&egrave;ves',
 	'objet_mot' => 'Mot',
 	'objet_mots' => 'Mots',
+	'objet_petition' => 'P&eacute;tition',
+	'objet_petitions' => 'P&eacute;titions',
 	'objet_rubrique' => 'Rubrique',
 	'objet_rubriques' => 'Rubriques',
-	'objet_petitions' => 'P&eacute;titions',
-	'objet_petition' => 'P&eacute;tition',
 	'objet_syndic' => 'Site',
 	'objet_syndics' => 'Sites',
 
@@ -65,7 +66,6 @@ Compatibilit&#233; : SPIP v1.9x et v2.0',
 	'sommaire_titre' => 'Sommaire',
 	'stats_auteur' => '@icon@ @nom@, le&nbsp;@date@',
 	'stats_date' => '@jour@/@mois@/@annee@&nbsp;&agrave;&nbsp;@h@h@m@',
-	'date_court' => '@jour@/@mois@/@annee@',
 
 	// T
 	'texte_formatspip' => 'TEXTE ORIGINAL AU FORMAT SPIP',

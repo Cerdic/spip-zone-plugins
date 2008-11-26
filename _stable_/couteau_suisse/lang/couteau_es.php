@@ -46,7 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'P&aacute;gina @page@: @title@',
 	'page_precedente' => 'P&aacute;gina anterior',
 	'page_suivante' => 'P&aacute;gina siguiente',
-	'plugin_xml' => 'Re&uacute;ne en un solo plugin une liste de peque&ntilde;as caracter&iacute;sticas nuevas y &uacute;tiles para mejorar la gesti&oacute;n de tu sitio SPIP.
+	'plugin_xml' => '<MODIF>Re&uacute;ne en un solo plugin une liste de peque&ntilde;as caracter&iacute;sticas nuevas y &uacute;tiles para mejorar la gesti&oacute;n de tu sitio SPIP.
 
 Cada herramienta puede activarse o no por el usuario en [la p&aacute;gina de administraci&oacute;n del plugin->./?exec=admin_couteau_suisse] y manejar cierto n&uacute;mero de variables: pulsa en {{Configuraci&oacute;n}}, y selecciona la pesta&ntilde;a {{La Navaja Suiza}}.
 

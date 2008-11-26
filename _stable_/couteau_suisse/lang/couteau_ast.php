@@ -46,7 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'P&aacute;xina @page@: @title@',
 	'page_precedente' => 'P&aacute;xina anterior',
 	'page_suivante' => 'P&aacute;xina siguiente',
-	'plugin_xml' => 'Xunta n\'un solu plugin una llista de peque&ntilde;es funciones nueves y ferramientes pa meyorar la xesti&oacute;n del to sitiu SPIP.
+	'plugin_xml' => '<MODIF>Xunta n\'un solu plugin una llista de peque&ntilde;es funciones nueves y ferramientes pa meyorar la xesti&oacute;n del to sitiu SPIP.
 
 Cauna d\'estes ferramientes puede activase o non pol usuariu so [la p&aacute;xina d\'alministraci&oacute;n del plugin->./?exec=admin_couteau_suisse] y manexar ciertu n&uacute;mberu de variables : picar en {{Afitamientu}}, llueu escoyer la pesta&ntilde;a {{La Navaya Suiza}}.
 
