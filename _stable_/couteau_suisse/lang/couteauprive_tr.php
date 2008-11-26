@@ -100,7 +100,7 @@ Notez : en modifiant ce deuxi&egrave;me param&egrave;tre, vous perdez alors les 
 	'code_css' => 'CSS',
 	'code_fonctions' => '&#304;&#351;levler',
 	'code_jq' => 'jQuery',
-	'code_js' => 'Javascript',
+	'code_js' => '<MODIF>Javascript',
 	'code_options' => 'Se&ccedil;enekler',
 	'code_spip_options' => '<NEW>Options SPIP',
 	'contrib' => 'Daha fazla bilgi : @url@',
@@ -181,7 +181,7 @@ _ Bu gere&ccedil; {makaleleriniz i&ccedil;in bir &ouml;zet} ile birlikte kullan&
 	'etendu' => 'Kapsam',
 
 	// F
-	'f_jQuery:description' => '{jQuery}\'nin kamusal alana kurulmas&#305;n&#305; engeller, b&ouml;ylece &laquo;makine zaman&#305;&raquo;ndan biraz ekonomi yapar. Bu ([->http://jquery.com/]) kitapl&#305;&#287;&#305; Javascript programlamada bir &ccedil;ok kolayl&#305;k getirir ve baz&#305; eklentilerde kullan&#305;labilir. SPIP, Jquery\'yi &ouml;zel alanda kullan&#305;r.
+	'f_jQuery:description' => '<MODIF>{jQuery}\'nin kamusal alana kurulmas&#305;n&#305; engeller, b&ouml;ylece &laquo;makine zaman&#305;&raquo;ndan biraz ekonomi yapar. Bu ([->http://jquery.com/]) kitapl&#305;&#287;&#305; Javascript programlamada bir &ccedil;ok kolayl&#305;k getirir ve baz&#305; eklentilerde kullan&#305;labilir. SPIP, Jquery\'yi &ouml;zel alanda kullan&#305;r.
 
 Dikkat : baz&#305; &#304;svi&ccedil;re &Ccedil;ak&#305;s&#305; gere&ccedil;leri {jQuery} fonksiyonlar&#305;na ihtiya&ccedil; duyar. ',
 	'f_jQuery:nom' => 'jQuery\'yi deaktive eder',
@@ -189,20 +189,20 @@ Dikkat : baz&#305; &#304;svi&ccedil;re &Ccedil;ak&#305;s&#305; gere&ccedil;leri 
 	'filets_sep:description' => '<NEW>Ins&egrave;re des filets de s&eacute;paration, personnalisables par des feuilles de style, dans tous les textes de SPIP.
 _ La syntaxe est : &quot;__code__&quot;, o&ugrave; &quot;code&quot; repr&eacute;sente soit le num&eacute;ro d&rsquo;identification (de 0 &agrave; 7) du filet &agrave; ins&eacute;rer en relation directe avec les styles correspondants, soit le nom d\'une image plac&eacute;e dans le dossier plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'Ay&#305;rma Filesi (Filet)',
-	'filtrer_javascript:description' => 'Makalelerde javascript kullan&#305;m&#305; i&ccedil;in 3 metod vard&#305;r :
+	'filtrer_javascript:description' => '<MODIF>Makalelerde javascript kullan&#305;m&#305; i&ccedil;in 3 metod vard&#305;r :
 - <i>jamais</i> : javascript her yerde reddedilir
 - <i>d&eacute;faut</i> : javascript &ouml;zel alanda k&#305;rm&#305;z&#305; ile belirtilir 
 - <i>toujours</i> : javascript her yerde kab&ucirc;l edilir.
 
 Dikkat : forumlarda, dilek&ccedil;elerde, payla&#351;&#305;lan ak&#305;larda ve benzerlerinde javascript\'in y&ouml;netimi <b>daima</b> g&uuml;venlidir.[[%radio_filtrer_javascript3%]]',
-	'filtrer_javascript:nom' => 'Javascript y&ouml;netimi',
+	'filtrer_javascript:nom' => '<MODIF>Javascript y&ouml;netimi',
 	'flock:description' => 'PHP fonksiyonunu n&ouml;tralize ederek {flock()} dosya kilitleme sistemini deaktive eder. Baz&#305; bar&#305;nd&#305;rma firmalar&#305; uyumsuz dosya sistemi veya senkronizasyon eksikli&#287;i y&uuml;z&uuml;nden b&uuml;y&uuml;k sorunlara yol a&ccedil;maktad&#305;r. E&#287;er siteniz normal &ccedil;al&#305;&#351;&#305;yorsa bunu aktive etmeyin.',
 	'flock:nom' => 'Dosya kilitleme yok',
 	'fonds' => 'Arka alanlar :',
-	'forcer_langue:description' => 'Dil cookie\'sini y&ouml;netmeyi bilen bir dil men&uuml;s&uuml; veya bir form i&ccedil;eren &ccedil;ok dilli iskelet tak&#305;m&#305;na sahip dile zorla',
-	'forcer_langue:nom' => 'Bu dile zorla',
+	'forcer_langue:description' => '<MODIF>Dil cookie\'sini y&ouml;netmeyi bilen bir dil men&uuml;s&uuml; veya bir form i&ccedil;eren &ccedil;ok dilli iskelet tak&#305;m&#305;na sahip dile zorla',
+	'forcer_langue:nom' => '<MODIF>Bu dile zorla',
 	'format_spip' => 'SPIP format&#305;nda makaleler',
-	'forum_lgrmaxi:description' => 'Varsay&#305;lan olarak, forum mesajlar&#305;n&#305;n boyu s&#305;n&#305;rlanmam&#305;&#351;t&#305;r. Bu gere&ccedil; aktive edildi&#287;inde, bir kullan&#305;c&#305; belirtilen boydan daha uzun bir mesaj g&ouml;ndermek istedi&#287;inde bir hata mesaj&#305; g&ouml;r&uuml;lecektir ve mesaj reddedilecektir. Bo&#351; bir de&#287;er veya S&#305;f&#305;r boyda s&#305;n&#305;r olmad&#305;&#287;&#305;n&#305; belirtir. [[%forum_lgrmaxi%]]',
+	'forum_lgrmaxi:description' => '<MODIF>Varsay&#305;lan olarak, forum mesajlar&#305;n&#305;n boyu s&#305;n&#305;rlanmam&#305;&#351;t&#305;r. Bu gere&ccedil; aktive edildi&#287;inde, bir kullan&#305;c&#305; belirtilen boydan daha uzun bir mesaj g&ouml;ndermek istedi&#287;inde bir hata mesaj&#305; g&ouml;r&uuml;lecektir ve mesaj reddedilecektir. Bo&#351; bir de&#287;er veya S&#305;f&#305;r boyda s&#305;n&#305;r olmad&#305;&#287;&#305;n&#305; belirtir. [[%forum_lgrmaxi%]]',
 	'forum_lgrmaxi:nom' => 'Forumlar&#305;n boyutu',
 
 	// G
@@ -210,7 +210,7 @@ Dikkat : forumlarda, dilek&ccedil;elerde, payla&#351;&#305;lan ak&#305;larda ve 
 	'glossaire:description' => '<MODIF>@puce@ Gestion d&rsquo;un glossaire interne li&eacute; &agrave; un ou plusieurs groupes de mots-cl&eacute;s. Inscrivez ici le nom des groupes en  les s&eacute;parant par les deux points &laquo;&nbsp;:&nbsp;&raquo;. En laissant vide la case qui  suit (ou en tapant &quot;Glossaire&quot;), c&rsquo;est le groupe &quot;Glossaire&quot; qui sera utilis&eacute;.[[%glossaire_groupes%]]@puce@ Pour chaque mot, vous avez la possibilit&#233; de choisir le nombre maximal de liens cr&#233;&#233;s dans vos textes. Toute valeur nulle ou n&#233;gative implique que tous les mots reconnus seront trait&#233;s. [[%glossaire_limite% par mot-cl&#233;]]@puce@ Deux solutions vous sont offertes pour g&#233;n&#233;rer la petite fen&ecirc;tre automatique qui apparait lors du survol de la souris. [[%glossaire_js%]]',
 	'glossaire:nom' => '&#304;&ccedil; endeks',
 	'glossaire_css' => 'CSS &ccedil;&ouml;z&uuml;m&uuml;',
-	'glossaire_js' => 'Javascript &ccedil;&ouml;z&uuml;m&uuml;',
+	'glossaire_js' => '<MODIF>Javascript &ccedil;&ouml;z&uuml;m&uuml;',
 	'guillemets:description' => 'Normal t&#305;rnak i&#351;aretlerini (") tipografik t&#305;rnak i&#351;aretleriyle de&#287;i&#351;tirir. De&#287;i&#351;tirme kullan&#305;c&#305; taraf&#305;ndan g&ouml;r&uuml;lmez ve orijinal metni etkilemez sadece g&ouml;sterilen metni etkiler.',
 	'guillemets:nom' => 'Tipografik t&#305;rnaklar',
 
@@ -230,11 +230,11 @@ _ • [T&uuml;m eklentinin|Eklentini ilk durumuna d&ouml;n&uuml;lmesi->@reset@]@in
 
 Bu logoyu tan&#305;mlamak i&ccedil;in &laquo;&nbsp;Konfig&uuml;rasyon&nbsp;&raquo; d&uuml;&#287;mesine t&#305;klayarak &laquo;&nbsp;Site konfig&uuml;rasyonu&nbsp;&raquo; sayfas&#305;na gidiniz.',
 	'icone_visiter:nom' => '&laquo;&nbsp;Ziyaret Et&nbsp;&raquo; d&uuml;&#287;mesi',
-	'insert_head:description' => '[#INSERT_HEAD->http://www.spip.net/fr_article1902.html] komutunu t&uuml;m iskeletlerde aktif hale getirir (bu komutu &lt;head&gt; ve &lt;/head&gt; aras&#305;nda i&ccedil;erseler de i&ccedil;ermeseler de). Bu se&ccedil;enek sayesinde eklentiler javascript (.js) veya stil sayfas&#305; (.css) ekleyebilirler.',
+	'insert_head:description' => '<MODIF>[#INSERT_HEAD->http://www.spip.net/fr_article1902.html] komutunu t&uuml;m iskeletlerde aktif hale getirir (bu komutu &lt;head&gt; ve &lt;/head&gt; aras&#305;nda i&ccedil;erseler de i&ccedil;ermeseler de). Bu se&ccedil;enek sayesinde eklentiler javascript (.js) veya stil sayfas&#305; (.css) ekleyebilirler.',
 	'insert_head:nom' => '#INSERT_HEAD komutu',
 	'insertions:description' => 'DiKKAT : geli&#351;tirilmekte olan gere&ccedil; !! [[%insertions%]]',
 	'insertions:nom' => 'Otomatik d&uuml;zeltmeler',
-	'introduction:description' => '<MODIF><NEW>Cette balise &agrave; placer dans les squelettes sert en g&eacute;n&eacute;ral &agrave; la une ou dans les rubriques afin de produire un r&eacute;sum&eacute; des articles, des br&egrave;ves, etc..</p>
+	'introduction:description' => '<MODIF><MODIF><NEW>Cette balise &agrave; placer dans les squelettes sert en g&eacute;n&eacute;ral &agrave; la une ou dans les rubriques afin de produire un r&eacute;sum&eacute; des articles, des br&egrave;ves, etc..</p>
 <p>{{Dikkat}} : Bu i&#351;levi aktive etmeden &ouml;nce iskeletinizde veya eklentilerinizde hi&ccedil;bir {balise_INTRODUCTION()} fonksiyonunun  olmad&#305;&#287;&#305;ndan emin olun, aksi halde derleme hatas&#305; olu&#351;acakt&#305;r.</p>
 @puce@ #INTRODUCTION komutu taraf&#305;ndan g&ouml;nderilen metnin uzunlu&#287;unu (varsay&#305;lan de&#287;ere g&ouml;re y&uuml;zde olarak) belirtebilirsiniz. Bo&#351; bir de&#287;er veya 100 de&#287;eri metni de&#287;i&#351;tirmeyecektir ve &#351;u varsay&#305;lan de&#287;erleri kullanacakt&#305;r : makaleler i&ccedil;in 500 karakter, k&#305;sa haberler i&ccedil;in 300karakter, forumlar veya ba&#351;l&#305;klar i&ccedil;in 600 karakter.
 [[%lgr_introduction%&nbsp;%]]
@@ -352,11 +352,11 @@ _ • {Yayg&#305;n} : &#351;u tipteki ba&#287;lar da de&#287;i&#351;tirilir {<html
 	'liens_orphelins:nom' => 'G&uuml;zel URL\'ler',
 
 	// M
-	'mailcrypt:description' => 'Metinlerinizde bulunan t&uuml;m ba&#287;lar&#305; maskeler ve bir Javascript ba&#287; yard&#305;m&#305;yla okuyucunun mesajla&#351;mas&#305;n&#305; aktive etme olana&#287;&#305; tan&#305;r. Bu anti-spam gereci robotlar&#305;n, forumlarda veya iskeletlerde kullan&#305;lan komutlarda a&ccedil;&#305;kta b&#305;rak&#305;lan elektronik adresleri toplamas&#305;n&#305; engellemeye &ccedil;al&#305;&#351;&#305;r.',
+	'mailcrypt:description' => '<MODIF>Metinlerinizde bulunan t&uuml;m ba&#287;lar&#305; maskeler ve bir Javascript ba&#287; yard&#305;m&#305;yla okuyucunun mesajla&#351;mas&#305;n&#305; aktive etme olana&#287;&#305; tan&#305;r. Bu anti-spam gereci robotlar&#305;n, forumlarda veya iskeletlerde kullan&#305;lan komutlarda a&ccedil;&#305;kta b&#305;rak&#305;lan elektronik adresleri toplamas&#305;n&#305; engellemeye &ccedil;al&#305;&#351;&#305;r.',
 	'mailcrypt:nom' => 'MailCrypt',
 	'message_perso' => '<NEW>Un grand merci aux traducteurs qui passeraient par ici. Pat ;-)',
 	'moderation_admins' => '<NEW>administrateurs authentifi&eacute;s',
-	'moderation_moderee:description' => '<NEW>Permet de mod&eacute;rer la mod&eacute;ration des forums pour les utilisateurs inscrits. [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
+	'moderation_moderee:description' => '<MODIF>Permet de mod&eacute;rer la mod&eacute;ration des forums pour les utilisateurs inscrits. [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
 	'moderation_moderee:nom' => '<NEW>Mod&eacute;ration mod&eacute;r&eacute;e',
 	'moderation_redacs' => '<NEW>r&eacute;dacteurs authentifi&eacute;s',
 	'moderation_visits' => '<NEW>visiteurs authentifi&eacute;s',
@@ -396,7 +396,7 @@ _ • {Yayg&#305;n} : &#351;u tipteki ba&#287;lar da de&#287;i&#351;tirilir {<html
 
 	// P
 	'pack_alt' => 'Aktif konfig&uuml;rasyonun parametrelerini g&ouml;ster',
-	'pack_descrip' => '<NEW>Votre "Pack de configuration actuelle" rassemble l\'ensemble des param&egrave;tres de configuration en cours concernant le Couteau Suisse : l\'activation des outils et la valeur de leurs &eacute;ventuelles variables.
+	'pack_descrip' => '<MODIF>Votre "Pack de configuration actuelle" rassemble l\'ensemble des param&egrave;tres de configuration en cours concernant le Couteau Suisse : l\'activation des outils et la valeur de leurs &eacute;ventuelles variables.
 
 Ce code PHP peut prendre place dans le fichier /config/mes_options.php et ajoutera un lien de r&eacute;initialisation sur cette page "du pack {Pack Actuel}". Bien s&ucirc;r il vous est possible de changer son nom ci-dessous.
 
@@ -476,7 +476,7 @@ _ &bull; {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&ea
 	'suivi_forums:description' => 'Bir makale yazar&#305;, ilintili kamusal forumda bir mesaj yay&#305;nland&#305;&#287;&#305;nda her zaman bilgilendirilir. Ama ayr&#305;ca &#351;unlar da bilgilendirilebilir : t&uuml;m forum kat&#305;l&#305;mc&#305;lar&#305; veya mesajlar&#305;n yazarlar&#305;.[[%radio_suivi_forums3%]]',
 	'suivi_forums:nom' => 'Kamusal forumlar&#305;n izlenmesi',
 	'supprimer_cadre' => 'Bu &ccedil;er&ccedil;eveyi kald&#305;r',
-	'supprimer_numero:description' => 'Supprimer_numero() SPIP fonksiyonunu iskeletlerde supprimer_numero filtresi olmasa da kamusal alandaki t&uuml;m {{ba&#351;l&#305;klara}} ve {{isimlere}} uygular.<br /> &Ccedil;ok dilli bir sitede kullan&#305;lacak c&uuml;mle yap&#305;s&#305; &#351;&ouml;yledir : <code>1. <multi>My Title[fr]Mon Titre[de]Mein Titel</multi></code>',
+	'supprimer_numero:description' => '<MODIF>Supprimer_numero() SPIP fonksiyonunu iskeletlerde supprimer_numero filtresi olmasa da kamusal alandaki t&uuml;m {{ba&#351;l&#305;klara}} ve {{isimlere}} uygular.<br /> &Ccedil;ok dilli bir sitede kullan&#305;lacak c&uuml;mle yap&#305;s&#305; &#351;&ouml;yledir : <code>1. <multi>My Title[fr]Mon Titre[de]Mein Titel</multi></code>',
 	'supprimer_numero:nom' => 'Numaray&#305; sil',
 
 	// T
@@ -566,7 +566,7 @@ B&ouml;ylece Frans&#305;zca\'da: <html>Dr, Pr, Mgr, St, Bx, m2, m3, Mn, Md, St&e
 	'url_standard' => 'standart',
 	'urls_base_total' => '<NEW>Il y a actuellement @nb@ URL(s) en base',
 	'urls_base_vide' => '<NEW>La base des URLs est vide',
-	'urls_choix_objet' => '<NEW>Edition en base de l\'URL d\'un objet sp&eacute;cifique&nbsp;:',
+	'urls_choix_objet' => '<MODIF>Edition en base de l\'URL d\'un objet sp&eacute;cifique&nbsp;:',
 	'urls_edit_erreur' => '<NEW>Le format actuel des URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) ne permet pas d\'&eacute;dition.',
 	'urls_enregistrer' => '<NEW>Enregistrer cette URL en base',
 	'urls_nouvelle' => '<MODIF>&Eacute;diter l\'URL &laquo;&nbsp;propre&nbsp;&raquo;&nbsp;:',
@@ -594,7 +594,7 @@ B&ouml;ylece Frans&#305;zca\'da: <html>Dr, Pr, Mgr, St, Bx, m2, m3, Mn, Md, St&e
 	'version_update_chargeur' => '<NEW>T&eacute;l&eacute;chargement automatique',
 	'version_update_chargeur_title' => '<NEW>T&eacute;l&eacute;charge la derni&egrave;re version du plugin gr&acirc;ce au plugin &laquo;T&eacute;l&eacute;chargeur&raquo;',
 	'version_update_title' => 'Eklentinin son s&uuml;r&uuml;m&uuml;n&uuml; indirir ve otomatik g&uuml;ncellemeyi ba&#351;lat&#305;r',
-	'verstexte:description' => '&#304;skeletleriniz i&ccedil;in, daha hafif sayfalar olu&#351;turman&#305;z&#305; sa&#287;layacak 2 filtre.
+	'verstexte:description' => '<MODIF>&#304;skeletleriniz i&ccedil;in, daha hafif sayfalar olu&#351;turman&#305;z&#305; sa&#287;layacak 2 filtre.
 _ version_texte : birka&ccedil; &ouml;nemli komut d&#305;&#351;&#305;nda bir html sayfan&#305;n metin i&ccedil;eri&#287;ini al&#305;r.
 _ version_plein_texte : bir html sayfan&#305;n t&uuml;m metin i&ccedil;eri&#287;ini al&#305;r.',
 	'verstexte:nom' => 'Metin s&uuml;r&uuml;m&uuml;',

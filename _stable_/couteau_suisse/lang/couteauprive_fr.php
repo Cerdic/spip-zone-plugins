@@ -5,25 +5,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	'corbeille:nom' => "La corbeille",
-	'corbeille:description' => "SPIP supprime automatiquement les objets mis au rebuts au bout de 24 heures, en g&eacute;n&eacute;ral vers 4 heures du matin, gr&acirc;ce &agrave; une t&acirc;che &laquo;CRON&raquo; (lancement p&eacute;riodique et/ou automatique de processus pr&eacute;programm&eacute;s). Vous pouvez ici emp&ecirc;cher ce processus afin de mieux g&eacute;rer votre corbeille.[[%arret_optimisation%]]",
-	'label:arret_optimisation' => 'Emp&ecirc;cher SPIP de vider la corbeille automatiquement&nbsp;:',
-	'corbeille_objets' => "@nb@ objet(s) dans la corbeille.",
-	'corbeille_objets_lies' => "@nb_lies@ liaison(s) detect&eacute;e(s).",
-	'corbeille_objets_vide' => "Aucun objet dans la corbeille",
-	'corbeille_objets_vider' => "Supprimer les objets s&eacute;lectionn&eacute;s",
-	'corbeille_vider' => "Vider la corbeille&nbsp;:",
-
-	'titre_parent:nom' => "Balise #TITRE_PARENT",
-	'titre_parent:description' => "Au sein d'une boucle, il est courant de vouloir afficher le titre du parent de l'objet en cours. Traditionnellement, il suffirait d'utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT all&eacute;gera l'&eacute;criture de vos squelettes. Le r&eacute;sultat renvoy&eacute; est : le titre du groupe d'un mot-cl&eacute; ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, br&egrave;ve, etc.).
-
-Notez : Pour les mots-cl&eacute;s, un alias de #TITRE_PARENT est #TITRE_GROUPE. Le traitement SPIP de ces nouvelles balises est similaire &agrave; celui de #TITRE.
-
-@puce@ Si vous &ecirc;tes sous SPIP 2.0, alors vous avez ici &agrave; votre disposition tout un ensemble de balises #TITRE_XXX qui pourront vous donner le titre de l'objet 'xxx', &agrave; condition que le champ 'id_xxx' soit pr&eacute;sent dans la table en cours (#ID_XXX utilisable dans la boucle en cours).
-
-Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du secteur dans lequel est plac&eacute; l'article en cours, puisque l'identifiant #ID_SECTEUR (ou le champ 'id_secteur') est disponible dans ce cas.[[%titres_etendus%]]",
-	'label:titres_etendus' => 'Activer l\'utilisation &eacute;tendue des balises #TITRE_XXX&nbsp;:',
-
 	// 2
 	'2pts_non' => '&nbsp;:&nbsp;non',
 	'2pts_oui' => '&nbsp;:&nbsp;oui',
@@ -131,6 +112,13 @@ Notez bien : en modifiant ce deuxi&egrave;me style, vous perdez alors les styles
 	'code_options' => 'Options',
 	'code_spip_options' => 'Options SPIP',
 	'contrib' => 'Plus d\'infos : @url@',
+	'corbeille:description' => 'SPIP supprime automatiquement les objets mis au rebuts au bout de 24 heures, en g&eacute;n&eacute;ral vers 4 heures du matin, gr&acirc;ce &agrave; une t&acirc;che &laquo;CRON&raquo; (lancement p&eacute;riodique et/ou automatique de processus pr&eacute;programm&eacute;s). Vous pouvez ici emp&ecirc;cher ce processus afin de mieux g&eacute;rer votre corbeille.[[%arret_optimisation%]]',
+	'corbeille:nom' => 'La corbeille',
+	'corbeille_objets' => '@nb@ objet(s) dans la corbeille.',
+	'corbeille_objets_lies' => '@nb_lies@ liaison(s) detect&eacute;e(s).',
+	'corbeille_objets_vide' => 'Aucun objet dans la corbeille',
+	'corbeille_objets_vider' => 'Supprimer les objets s&eacute;lectionn&eacute;s',
+	'corbeille_vider' => 'Vider la corbeille&nbsp;:',
 	'couleurs:aide' => 'Mise en couleurs : <b>[coul]texte[/coul]</b>@fond@ avec <b>coul</b> = @liste@',
 	'couleurs:description' => 'Permet d\'appliquer facilement des couleurs &agrave; tous les textes du site (articles, br&egrave;ves, titres, forum, &hellip;) en utilisant des balises en raccourcis.
 
@@ -305,6 +293,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 
 	// L
 	'label:admin_travaux' => 'Fermer le site public pour :',
+	'label:arret_optimisation' => 'Emp&ecirc;cher SPIP de vider la corbeille automatiquement&nbsp;:',
 	'label:auteurs_tout_voir' => '@_CS_CHOIX@',
 	'label:auto_sommaire' => 'Cr&eacute;ation syst&eacute;matique du sommaire :',
 	'label:balise_decoupe' => 'Activer la balise #CS_DECOUPE :',
@@ -370,6 +359,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:terminaison_urls_propres' => '<:label:terminaison_urls_page:>',
 	'label:terminaison_urls_propres_qs' => '<:label:terminaison_urls_page:>',
 	'label:titre_travaux' => 'Titre du message :',
+	'label:titres_etendus' => 'Activer l\'utilisation &eacute;tendue des balises #TITRE_XXX&nbsp;:',
 	'label:tri_articles' => 'Votre choix :',
 	'label:url_arbo_minuscules' => 'Conserver la casse des titres dans les URLs :',
 	'label:url_arbo_sep_id' => 'Caract&egrave;re de s&eacute;paration \'titre-id\' en cas de doublon :<br/>(ne pas utiliser \'/\')',
@@ -440,15 +430,8 @@ _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<htm
 
 	// P
 	'pack_actuel' => 'Pack @date@',
-	'pack_outils_defaut' =>'Installation des outils par d&eacute;faut',
-	'pack_variables_defaut' =>'Installation des variables par d&eacute;faut',
+	'pack_actuel_avert' => 'Attention, les surcharges sur les define() ou les globales ne sont pas sp&eacute;cifi&eacute;es ici',
 	'pack_actuel_titre' => 'PACK ACTUEL DE CONFIGURATION DU COUTEAU SUISSE',
-	'pack_actuel_avert' => "Attention, les surcharges sur les define() ou les globales ne sont pas sp&eacute;cifi&eacute;es ici",
-	'pack_nb_plrs' => 'Il y a actuellement @nb@ &laquo;&nbsp;packs de configuration&nbsp;&raquo; disponibles.',
-	'pack_nb_un' => 'Il y a actuellement un &laquo;&nbsp;pack de configuration&nbsp;&raquo; disponible',
-	'pack_nb_zero' => 'Il n\'y a pas de &laquo;&nbsp;pack de configuration&nbsp;&raquo; disponible actuellement.',
-	'pack_sauver' => 'Sauver la configuration actuelle',
-	'pack_sauver_descrip' => 'Le bouton ci-dessous vous permet d\'ins&eacute;rer directement dans votre fichier <b>@file@</b> les param&egrave;tres n&eacute;cessaires pour ajouter un &laquo;&nbsp;pack de configuration&nbsp;&raquo; dans le menu de gauche. Ceci vous permettra ult&eacute;rieurement de reconfigurer en un clic votre Couteau Suisse dans l\'&eacute;tat o&ugrave; il est actuellement.',
 	'pack_alt' => 'Voir les param&egrave;tres de configuration en cours',
 	'pack_descrip' => 'Votre &laquo;&nbsp;Pack de configuration actuelle&nbsp;&raquo; rassemble l\'ensemble des param&egrave;tres de configuration en cours concernant le Couteau Suisse : l\'activation des outils et la valeur de leurs &eacute;ventuelles variables.
 
@@ -457,7 +440,14 @@ Ce code PHP peut prendre place dans le fichier /config/mes_options.php et ajoute
 Si vous r&eacute;initialisez le plugin en cliquant sur un pack, le Couteau Suisse se reconfigurera automatiquement en fonction des param&egrave;tres pr&eacute;d&eacute;finis dans ce pack.',
 	'pack_du' => '&bull; du pack @pack@',
 	'pack_installe' => 'Mise en place d\'un pack de configuration',
+	'pack_nb_plrs' => 'Il y a actuellement @nb@ &laquo;&nbsp;packs de configuration&nbsp;&raquo; disponibles.',
+	'pack_nb_un' => 'Il y a actuellement un &laquo;&nbsp;pack de configuration&nbsp;&raquo; disponible',
+	'pack_nb_zero' => 'Il n\'y a pas de &laquo;&nbsp;pack de configuration&nbsp;&raquo; disponible actuellement.',
+	'pack_outils_defaut' => 'Installation des outils par d&eacute;faut',
+	'pack_sauver' => 'Sauver la configuration actuelle',
+	'pack_sauver_descrip' => 'Le bouton ci-dessous vous permet d\'ins&eacute;rer directement dans votre fichier <b>@file@</b> les param&egrave;tres n&eacute;cessaires pour ajouter un &laquo;&nbsp;pack de configuration&nbsp;&raquo; dans le menu de gauche. Ceci vous permettra ult&eacute;rieurement de reconfigurer en un clic votre Couteau Suisse dans l\'&eacute;tat o&ugrave; il est actuellement.',
 	'pack_titre' => 'Configuration Actuelle',
+	'pack_variables_defaut' => 'Installation des variables par d&eacute;faut',
 	'par_defaut' => 'Par d&eacute;faut',
 	'paragrapher2:description' => 'La fonction SPIP <code>paragrapher()</code> ins&egrave;re des balises &lt;p&gt; et &lt;/p&gt; dans tous les textes qui sont d&eacute;pourvus de paragraphes. Afin de g&eacute;rer plus finement vos styles et vos mises en page, vous avez la possibilit&eacute; d\'uniformiser l\'aspect des textes de votre site.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Paragrapher',
@@ -542,6 +532,14 @@ _ &bull; {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&ea
 
 	// T
 	'titre' => 'Le Couteau Suisse',
+	'titre_parent:description' => 'Au sein d\'une boucle, il est courant de vouloir afficher le titre du parent de l\'objet en cours. Traditionnellement, il suffirait d\'utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT all&eacute;gera l\'&eacute;criture de vos squelettes. Le r&eacute;sultat renvoy&eacute; est : le titre du groupe d\'un mot-cl&eacute; ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, br&egrave;ve, etc.).
+
+Notez : Pour les mots-cl&eacute;s, un alias de #TITRE_PARENT est #TITRE_GROUPE. Le traitement SPIP de ces nouvelles balises est similaire &agrave; celui de #TITRE.
+
+@puce@ Si vous &ecirc;tes sous SPIP 2.0, alors vous avez ici &agrave; votre disposition tout un ensemble de balises #TITRE_XXX qui pourront vous donner le titre de l\'objet \'xxx\', &agrave; condition que le champ \'id_xxx\' soit pr&eacute;sent dans la table en cours (#ID_XXX utilisable dans la boucle en cours).
+
+Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du secteur dans lequel est plac&eacute; l\'article en cours, puisque l\'identifiant #ID_SECTEUR (ou le champ \'id_secteur\') est disponible dans ce cas.[[%titres_etendus%]]',
+	'titre_parent:nom' => 'Balise #TITRE_PARENT',
 	'titre_tests' => 'Le Couteau Suisse - Page de tests&hellip;',
 	'tous' => 'Tous',
 	'toutes_couleurs' => 'Les 36 couleurs des styles css :@_CS_EXEMPLE_COULEURS@',

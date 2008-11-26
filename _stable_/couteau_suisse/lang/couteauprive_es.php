@@ -58,13 +58,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 @puce@ Marcando &laquo;si&raquo; m&aacute;s abajo, la apertura de un bloque causar&aacute; el cierre de los dem&aacute;s bloques de la p&aacute;gina, para tener solamente uno abierto cada vez.[[%bloc_unique%]]
 ',
 	'blocs:nom' => 'Bloques Desplegables',
-	'boites_privees:description' => '<MODIF>Todas las cajas descritas a continuaci&oacute;n aparecen en la parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]]
+	'boites_privees:description' => 'Todas las cajas descritas a continuaci&oacute;n aparecen en la parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]]
 - {{Las revisiones de la Navaja Suiza}}: un cuadro sobre esta p&aacute;gina de configuraci&oacute;n, que indica las &uacute;ltimas modificaciones efectuadas en el c&oacute;digo del plugin ([Fuente->@_CS_RSS_SOURCE@]).
 - {{Los art&iacute;culos en formato SPIP}} : un cuadro desplegable suplementario para tus art&iacute;culos con el fin de ver el c&oacute;digo fuente utilizado por sus autores.
 - {{Los autores en cifras}} : un cuadro suplementario en [la p&aacute;gina de los autores->./?exec=auteurs] que indica los 10 &uacute;ltimos conectados y las inscripciones no confirmadas. S&oacute;lo los administradores ven esta informaci&oacute;n.
-- {{Ver las URLs propias}} : un cuadro desplegable para cada objeto de contenido (art&iacute;culo, secci&oacute;n, autor, ...) que indica la URL propia asociada, as&iacute; como sus alias eventuales. La herramienta &laquo;&nbsp;[.->type_urls]&nbsp;&raquo; te permite la configuraci&oacute;n de las URLs.',
+- {{Ver las URLs propias}} : un cuadro desplegable para cada objeto de contenido (art&iacute;culo, secci&oacute;n, autor, ...) que indica la URL propia asociada, as&iacute; como sus alias eventuales. La herramienta &laquo;&nbsp;[.->type_urls]&nbsp;&raquo; te permite ajustar la configuraci&oacute;n de las URLs de tu sitio web.',
 	'boites_privees:nom' => 'Cajas privadas',
-	'bp_urls_propres' => '<MODIF>Ver las URLs propias',
+	'bp_urls_propres' => 'Las URLs propias',
 
 	// C
 	'cache_controle' => 'Control de la cach&eacute;',
@@ -110,7 +110,7 @@ Nota: al modificar este segundo estilo, tambi&eacute;n pierdes los estilos est&a
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Funciones',
 	'code_jq' => 'jQuery',
-	'code_js' => 'Javascript',
+	'code_js' => '<MODIF>Javascript',
 	'code_options' => 'Opciones',
 	'code_spip_options' => 'Opciones de SPIP',
 	'contrib' => 'M&aacute;s informaci&oacute;n: @url@',
@@ -155,7 +155,7 @@ El par&aacute;metro {type} puede tomar tres valores:
 	'decoration:nom' => 'Decoraci&oacute;n',
 	'decoupe:aide' => 'Bloque de pesta&ntilde;as: <b>&lt;onglets>&lt;/onglets></b><br/>Separador de p&aacute;ginas o de pesta&ntilde;as: @sep@',
 	'decoupe:aide2' => 'Alias:&nbsp;@sep@',
-	'decoupe:description' => '<MODIF>@puce@ Divide la presentaci&oacute;n p&uacute;blica de un art&iacute;culo en varias p&aacute;ginas mediante una compaginaci&oacute;n autom&aacute;tica. Simplemente sit&uacute;a en tu art&iacute;culo cuatro signos de suma consecutivos (<code>++++</code>) en el lugar donde haya que cortar.
+	'decoupe:description' => '@puce@ Divide la presentaci&oacute;n p&uacute;blica de un art&iacute;culo en varias p&aacute;ginas mediante una compaginaci&oacute;n autom&aacute;tica. Simplemente sit&uacute;a en tu art&iacute;culo cuatro signos de suma consecutivos (<code>++++</code>) en el lugar donde haya que cortar.
 
 Por omisi&oacute;n, la Navaja Suiza inserta la numeraci&oacute;n de p&aacute;gina en el encabezado y en el pie del art&iacute;culo autom&aacute;ticamente. Pero tienes la posibilidad de situar esta numeraci&oacute;n en otro lugar del esqueleto gracias a la baliza #CS_DECOUPE que puedes activar aqu&iacute;:
 [[%balise_decoupe%]]
@@ -187,7 +187,7 @@ Esta herramienta puede acoplarse con &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.',
 	'erreur:bt' => '<span style=\\"color:red;\\">Atenci&oacute;n:</span> la barra de tipograf&iacute;as (version @version@) parece antigua.<br />La Navaja Suiza es compatible con una versi&oacute;n superior o igual a @mini@.',
 	'erreur:description' => '&iexcl;falta la id en la definici&oacute;n de la herramienta!',
 	'erreur:distant' => 'el servidor externo',
-	'erreur:jquery' => '<MODIF>{{Note}} : la biblioteca {jQuery} parece estar inactiva para esta p&aacute;gina. Consulta [aqu&iacute;->http://www.spip-contrib.net//La-navaja-suiza] el p&aacute;rrafo sobre las dependencias del plugin.',
+	'erreur:jquery' => '{{Nota}}: la biblioteca {jQuery} parece estar inactiva para esta p&aacute;gina. Consulta [aqu&iacute;->http://www.spip-contrib.net//La-navaja-suiza] el p&aacute;rrafo sobre las dependencias del plugin, o recarga esta p&aacute;gina.',
 	'erreur:js' => 'Parece que ha ocurrido un error de JavaScript en esta p&aacute;gina que impide su buen funcionamiento. Intenta activar JavaScript en tu navegador o desactivar ciertos plugins de SPIP de tu sitio web.',
 	'erreur:nojs' => 'JavaScript est&aacute; desactivado en esta p&aacute;gina.',
 	'erreur:nom' => '&iexcl;Error!',
@@ -197,7 +197,7 @@ Esta herramienta puede acoplarse con &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.',
 	'etendu' => 'Extendido',
 
 	// F
-	'f_jQuery:description' => 'Impide la instalaci&oacute;n de {jQuery} en el espacio p&uacute;blico para economizar un poco de &laquo;tiempo de m&aacute;quina&raquo;. Esta biblioteca ([->http://jquery.com/]) aporta numerosas facilidades en la programaci&oacute;n con Javascript y puede utilizarse por ciertos plugins. SPIP la utiliza en su espacio privado.
+	'f_jQuery:description' => '<MODIF>Impide la instalaci&oacute;n de {jQuery} en el espacio p&uacute;blico para economizar un poco de &laquo;tiempo de m&aacute;quina&raquo;. Esta biblioteca ([->http://jquery.com/]) aporta numerosas facilidades en la programaci&oacute;n con Javascript y puede utilizarse por ciertos plugins. SPIP la utiliza en su espacio privado.
 
 Atenci&oacute;n: algunas herramientas de la Navaja Suiza necesitan las funciones de {jQuery}. ',
 	'f_jQuery:nom' => 'Desactivar jQuery',
@@ -205,32 +205,32 @@ Atenci&oacute;n: algunas herramientas de la Navaja Suiza necesitan las funciones
 	'filets_sep:description' => 'Inserta filetes de separaci&oacute;n, personalizables con hojas de estilo, en todos los textos de SPIP.
 _ La sintaxis es: "__c&oacute;digo__", donde "c&oacute;digo" representa o bien el n&uacute;mero de identificaci&oacute;n (de 0 a 7) del filete a insertar, relativo al estilo correspondiente, o el nombre de una imagen situada en la carpeta plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'Filetes de Separaci&oacute;n',
-	'filtrer_javascript:description' => 'Hay tres modos disponibles Para gestionar la inserci&oacute;n de javascript en los art&iacute;culos:
+	'filtrer_javascript:description' => '<MODIF>Hay tres modos disponibles Para gestionar la inserci&oacute;n de javascript en los art&iacute;culos:
 - <i>jamais</i>: el javascript se rechaza en todo lugar
 - <i>d&eacute;faut</i>: el javascript se marca en rojo en el espacio privado
 - <i>toujours</i>: el javascript se acepta siempre.
 
 Atenci&oacute;n: en los foros, peticiones, flujos sindicados, etc., la gesti&oacute;n de javascript es <b>siempre</b> en modo seguro.[[%radio_filtrer_javascript3%]]',
-	'filtrer_javascript:nom' => 'Gesti&oacute;n de javascript',
+	'filtrer_javascript:nom' => '<MODIF>Gesti&oacute;n de javascript',
 	'flock:description' => 'Desactiva el sistema de bloqueo de ficheros neutralizando la funci&oacute;n PHP {flock()}. Ciertos alojamientos web producen problemas graves por causa de un sistema de ficheros inadaptado por falta de sincronizaci&oacute;n. No actives esta herramienta si tu sitio funciona normalmente.',
 	'flock:nom' => 'Sin bloqueo de ficheros',
 	'fonds' => 'Fondos:',
-	'forcer_langue:description' => 'Fuerza el contexto de idioma en los juegos de esqueletos multiling&uuml;es que dispongan de un formulario o de un men&uacute; de idiomas que sepan manejar la cookie de idioma.',
-	'forcer_langue:nom' => 'Forzar idioma',
+	'forcer_langue:description' => '<MODIF>Fuerza el contexto de idioma en los juegos de esqueletos multiling&uuml;es que dispongan de un formulario o de un men&uacute; de idiomas que sepan manejar la cookie de idioma.',
+	'forcer_langue:nom' => '<MODIF>Forzar idioma',
 	'format_spip' => 'Art&iacute;culos en formato SPIP',
-	'forum_lgrmaxi:description' => 'Por omisi&oacute;n no se limita el tama&ntilde;o de los mensajes del foro. Si se activa esta herramienta, se mostrar&aacute; un mensaje de error cuando alguien quiera publicar un mensaje  de tama&ntilde;o superior al valor especificado, y se rechazar&aacute; el mensaje. Un valor en blanco o igual a 0 significa que no se aplica ning&uacute;n l&iacute;mite.[[%forum_lgrmaxi%]]',
+	'forum_lgrmaxi:description' => '<MODIF>Por omisi&oacute;n no se limita el tama&ntilde;o de los mensajes del foro. Si se activa esta herramienta, se mostrar&aacute; un mensaje de error cuando alguien quiera publicar un mensaje  de tama&ntilde;o superior al valor especificado, y se rechazar&aacute; el mensaje. Un valor en blanco o igual a 0 significa que no se aplica ning&uacute;n l&iacute;mite.[[%forum_lgrmaxi%]]',
 	'forum_lgrmaxi:nom' => 'Tama&ntilde;o de los foros',
 
 	// G
 	'glossaire:aide' => 'Un texto sin glosario: <b>@_CS_SANS_GLOSSAIRE@</b>',
-	'glossaire:description' => '<MODIF>@puce@ Gesti&oacute;n de un glosario interno ligado a uno o m&aacute;s grupos de palabras-clave. Escribe aqu&iacute; el nombre de los grupos separ&aacute;ndolos mediante dos puntos &laquo;&nbsp;:&nbsp;&raquo;. Si se deja vac&iacute;o el cuadro siguiente (o escribiendo "Glossaire"), se utilizar&aacute; el grupo "Glossaire".[[%glossaire_groupes%]]
+	'glossaire:description' => '@puce@ Gesti&oacute;n de un glosario interno ligado a uno o m&aacute;s grupos de palabras-clave. Escribe aqu&iacute; el nombre de los grupos separ&aacute;ndolos mediante dos puntos &laquo;&nbsp;:&nbsp;&raquo;. Si se deja vac&iacute;o el cuadro siguiente (o escribiendo "Glossaire"), se utilizar&aacute; el grupo "Glossaire".[[%glossaire_groupes%]]
 
 @puce@ Para cada palabra, tendr&aacute;s la posibilidad de elegir el n&uacute;mero m&aacute;ximo de enlaces creados en los textos. Cualquier valor nulo o negativo implica que se procesar&aacute;n todas las palabras reconocidas. [[%glossaire_limite% par mot-cl&eacute;]]
 
 @puce@ Se ofrecer&aacute;n dos soluciones para generar la peque&ntilde;a ventana autom&aacute;tica que aparece al pasar el rat&oacute;n por encima. [[%glossaire_js%]]',
 	'glossaire:nom' => 'Glosario interno',
 	'glossaire_css' => 'Soluci&oacute;n CSS',
-	'glossaire_js' => 'Soluci&oacute;n Javascript',
+	'glossaire_js' => '<MODIF>Soluci&oacute;n Javascript',
 	'guillemets:description' => 'Reemplaza autom&aacute;ticamente las comillas rectas (") por las comillas tipogr&aacute;ficas en el idioma de composici&oacute;n. El reemplazo, transparente para el usuario, no modifica el texto original sino s&oacute;lo su presentaci&oacute;n final.',
 	'guillemets:nom' => 'Comillas tipogr&aacute;ficas',
 
@@ -250,11 +250,11 @@ _ • [De todo el plugin|Volver al estado inicial del plugin->@reset@]@install@
 
 Para definir el logo, entra en la p&aacute;gina de &laquo;Configuraci&oacute;n de sitio&raquo; pulsando el bot&oacute;n &laquo;Configuraci&oacute;n&raquo;.',
 	'icone_visiter:nom' => 'Bot&oacute;n &laquo;Visitar&raquo;',
-	'insert_head:description' => 'Activa autom&aacute;ticamente la baliza [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] en todos los esqueletos, tengan o no esta baliza entre &lt;head&gt; y &lt;/head&gt;. Gracias a esta opci&oacute;n, los plugins podr&aacute;n insertar javascript (.js) u hojas de estilo (.css).',
+	'insert_head:description' => '<MODIF>Activa autom&aacute;ticamente la baliza [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] en todos los esqueletos, tengan o no esta baliza entre &lt;head&gt; y &lt;/head&gt;. Gracias a esta opci&oacute;n, los plugins podr&aacute;n insertar javascript (.js) u hojas de estilo (.css).',
 	'insert_head:nom' => 'Baliza #INSERT_HEAD',
 	'insertions:description' => 'ATENCI&Oacute;N : &iexcl;&iexcl;herramienta en fase de desarrollo!! [[%insertions%]]',
 	'insertions:nom' => 'Correcciones autom&aacute;ticas',
-	'introduction:description' => 'Esta baliza situada en los esqueletos se usa, en general, en portada o en las secciones para producir un resumen de los art&iacute;culos, noticias breves, etc.</p>
+	'introduction:description' => '<MODIF>Esta baliza situada en los esqueletos se usa, en general, en portada o en las secciones para producir un resumen de los art&iacute;culos, noticias breves, etc.</p>
 <p>{{Atenci&oacute;n}} : Antes de activar esta funci&oacute;n, comprueba bien que no exista ninguna otra funci&oacute;n {balise_INTRODUCTION()} en tu esqueleto o en tus plugins, porque entonces la sobrecarga producir&aacute; un error de compilaci&oacute;n.</p>
 @puce@ Puedes precisar (en porcentaje respecto al valor utilizado por omisi&oacute;n) la longitud del texto devuelto por la baliza #INTRODUCTION. Un valor nulo o igual a 100 no modifica el aspecto de la introducci&oacute;n utilizando en este caso los siguientes valores por omisi&oacute;n: 500 caracteres para los art&iacute;culos, 300 para las breves y 600 para los foros o las secciones.
 [[%lgr_introduction%&nbsp;%]]
@@ -372,11 +372,11 @@ _ • {Extendido}: se reemplazan adem&aacute;s los enlaces del tipo {<html>yo@spip
 	'liens_orphelins:nom' => 'Buenas URLs',
 
 	// M
-	'mailcrypt:description' => 'Enmascara todos los enlaces de correo presentes en los textos y los reemplaza por un enlace Javascript que permite activar igual la aplicaci&oacute;n de correo del lector. Esta herramienta antispam intenta impedir que los robots recojan las direcciones electr&oacute;nicas escritas en claro en los foros o en las balizas de tus esqueletos.',
+	'mailcrypt:description' => '<MODIF>Enmascara todos los enlaces de correo presentes en los textos y los reemplaza por un enlace Javascript que permite activar igual la aplicaci&oacute;n de correo del lector. Esta herramienta antispam intenta impedir que los robots recojan las direcciones electr&oacute;nicas escritas en claro en los foros o en las balizas de tus esqueletos.',
 	'mailcrypt:nom' => 'MailCrypt',
 	'message_perso' => 'Muchas gracias a los traductores que pasaron por aqu&iacute;. Pat ;-)',
 	'moderation_admins' => 'administradores autentificados',
-	'moderation_moderee:description' => 'Permite moderar la moderaci&oacute;n de los foros por los usuarios inscritos. [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
+	'moderation_moderee:description' => '<MODIF>Permite moderar la moderaci&oacute;n de los foros por los usuarios inscritos. [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
 	'moderation_moderee:nom' => 'Moderaci&oacute;n moderada',
 	'moderation_redacs' => 'redactores autentificados',
 	'moderation_visits' => 'visitantes autentificados',
@@ -398,7 +398,7 @@ _ • {Extendido}: se reemplazan adem&aacute;s los enlaces del tipo {<html>yo@spip
 	'outil_desactiver' => 'Desactivar',
 	'outil_desactiver_le' => 'Desactivar la herramienta',
 	'outil_inactif' => 'Herramienta inactiva',
-	'outil_intro' => '<MODIF>Esta p&aacute;gina lista las funciones que el plugin pone a tu disposici&oacute;n.<br /><br />Pulsando sobre el nombre de los &uacute;tiles de m&aacute;s abajo, los seleccionas y podr&aacute;s cambiar su estado co ayuda del bot&oacute;n central: los &uacute;tiles activados se desactivar&aacute;n y <i>viceversa</i>. Con cada clic, aparece la descripci&oacute;n bajo las listas. Las categor&iacute;as son desplegables y los &uacute;tiles se pueden ocultar. El doble-clic permite cambiar r&aacute;pidamente de herramienta.<br /><br />En la primera utilizaci&oacute;n, se recomienda activar las herramientas una a una, por si acaso apareciese alguna incompatibilidad con tu esqueleto, con SPIP o con otros plugins.<br /><br />Nota: la simple cargar de esta p&aacute;gina recompila el conjunto de herramientas de la Navaja Suiza.',
+	'outil_intro' => '<MODIF>Esta p&aacute;gina lista las funciones que el plugin pone a tu disposici&oacute;n.<br /><br />Pulsando sobre el nombre de los &uacute;tiles de m&aacute;s abajo, los seleccionas y podr&aacute;s cambiar su estado co ayuda del bot&oacute;n central: los &uacute;tiles activados se desactivar&aacute;n y <i>viceversa</i>. Con cada pulsaci&oacute;n, aparece la descripci&oacute;n bajo las listas. Las categor&iacute;as son desplegables y los &uacute;tiles se pueden ocultar. El doble-clic permite cambiar r&aacute;pidamente de herramienta.<br /><br />En la primera utilizaci&oacute;n, se recomienda activar las herramientas una a una, por si acaso apareciese alguna incompatibilidad con tu esqueleto, con SPIP o con otros plugins.<br /><br />Nota: la simple carga de esta p&aacute;gina recompila el conjunto de herramientas de la Navaja Suiza.',
 	'outil_intro_old' => 'Esta interfaz est&aacute; anticuada.<br /><br />Si encuentras problemas para utilizar la <a href=\'./?exec=admin_couteau_suisse\'>nueva interfaz</a>, no dudes en avisarnos en el foro de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
 	'outil_nb' => '@pipe@: @nb@ &uacute;til',
 	'outil_nbs' => '@pipe@ : @nb@ &uacute;tiles',
@@ -416,7 +416,7 @@ _ • {Extendido}: se reemplazan adem&aacute;s los enlaces del tipo {<html>yo@spip
 
 	// P
 	'pack_alt' => 'Ver los par&aacute;metros de configuraci&oacute;n actual',
-	'pack_descrip' => 'Tu "Pack de configuraci&oacute;n actual" reune el conjunto de par&aacute;metros de configuraci&oacute;n en actual relativos a la Navaja Suiza: la activaci&oacute;n de los &uacute;tiles y el valor de sus eventuales variables.
+	'pack_descrip' => '<MODIF>Tu "Pack de configuraci&oacute;n actual" reune el conjunto de par&aacute;metros de configuraci&oacute;n en actual relativos a la Navaja Suiza: la activaci&oacute;n de los &uacute;tiles y el valor de sus eventuales variables.
 
 Este c&oacute;digo PHP puede situarse en el fichero /config/mes_options.php y a&ntilde;adir&aacute; un enlace de reinicializaci&oacute;n en esta p&aacute;gina "del pack {Pack Actual}". Por supuesto puedes cambiar su nombre m&aacute;s arriba.
 
@@ -452,16 +452,16 @@ Si reinicializas el plugin en pulsando en un pack, la Navaja Suiza volver&aacute
 	'simpl_interface:description' => 'Desactiva el men&uacute; de cambio r&aacute;pido del estado de un art&iacute;culo al pasar sobre su icono de color. Esto resulta &uacute;til si buscas obtener una interfaz privada lo m&aacute;s sencilla posible para optimizar el rendimiento del cliente.',
 	'simpl_interface:nom' => 'Aligerar la interfaz privada',
 	'smileys:aide' => 'Smileys: @liste@',
-	'smileys:description' => '<MODIF>Inserta smileys en todos los textos donde aparezca un atajo de tipo <acronym>:-)</acronym>. Ideal para los foros.
+	'smileys:description' => '<MODIF>Inserta &laquo;smileys&raquo; en todos los textos donde aparezca un atajo de tipo <acronym>:-)</acronym>. Ideal para los foros.
 _ Hay una baliza disponible para mostrar una tabla de smileys en tus esqueletos: #SMILEYS.
-_ Dibujos : [Sylvain Michel->http://www.guaph.net/]',
+_ Dibujos: [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'Smileys',
 	'soft_scroller:description' => 'A&ntilde;ade al sitio p&uacute;blico un desplazamiento suave de la p&aacute;gina cuando el visitante hace clic en un enlace que apunta a un ancla: muy &uacute;til para evitar perderse en una p&aacute;gina compleja u en un texto muy largo...
 
 Atenci&oacute;n, para que funcione esta herramienta se necesitan p&aacute;ginas con &laquo;DOCTYPE XHTML&raquo; (&iexcl;no HTML!) y dos plugins {jQuery}: {ScrollTo} y {LocalScroll}. La Navaja Suiza puede instalarlos directamente si marcas las casillas siguientes. [[%scrollTo%]][[->%LocalScroll%]]
 @_CS_PLUGIN_JQUERY192@',
 	'soft_scroller:nom' => 'Anclas suaves',
-	'sommaire:description' => '<MODIF>Construye un sumario para el texto de tus art&iacute;culos y secciones con el fin de acceder r&aacute;pidamente a los intert&iacute;tulos (etiquetas HTML &lt;h3>Un intert&iacute;tulo&lt;/h3> o atajos de SPIP: intert&iacute;tulos de la forma: <code>{{{Un intert&iacute;tulo}}}</code>).
+	'sommaire:description' => 'Construye un sumario para el texto de tus art&iacute;culos y secciones con el fin de acceder r&aacute;pidamente a los intert&iacute;tulos (etiquetas HTML &lt;h3>Un intert&iacute;tulo&lt;/h3> o atajos de SPIP: intert&iacute;tulos de la forma: <code>{{{Un intert&iacute;tulo}}}</code>).
 
 @puce@ Aqu&iacute; puedes definir el n&uacute;mero m&aacute;ximo de caracteres tomados de los intert&iacute;tulos para construir el sumario: [[%lgr_sommaire% caracteres]]
 
@@ -503,7 +503,7 @@ _ • {Control de la cach&eacute;}: opci&oacute;n id&eacute;ntica a la anterior, c
 	'suivi_forums:description' => 'El autor de un art&iacute;culo siempre es informado cuando se publique un mensaje en el foro p&uacute;blico asociado. Pero es posible avisar adem&aacute;s: a todos los participantes en el foro, o solamente a los autores de los mensajes previos del hilo.[[%radio_suivi_forums3%]]',
 	'suivi_forums:nom' => 'Seguimiento de los foros p&uacute;blicos',
 	'supprimer_cadre' => 'Suprimir este cuadro',
-	'supprimer_numero:description' => 'Aplica la funci&oacute;n SPIP supprimer_numero() al conjunto de {{t&iacute;tulos}}  de {{nombres}} del sitio p&uacute;blico, sin que el filtro supprimer_numero est&eacute; presente en los esqueletos.<br />Esta es la sintaxis a utilizar en el caso de un sitio multiling&uuml;e: <code>1. <multi>Mi T&iacute;tulo[en]My Title[fr]Mon Titre[de]Mein Titel</multi></code>',
+	'supprimer_numero:description' => '<MODIF>Aplica la funci&oacute;n SPIP supprimer_numero() al conjunto de {{t&iacute;tulos}}  de {{nombres}} del sitio p&uacute;blico, sin que el filtro supprimer_numero est&eacute; presente en los esqueletos.<br />Esta es la sintaxis a utilizar en el caso de un sitio multiling&uuml;e: <code>1. <multi>Mi T&iacute;tulo[en]My Title[fr]Mon Titre[de]Mein Titel</multi></code>',
 	'supprimer_numero:nom' => 'Suprime el n&uacute;mero',
 
 	// T
@@ -535,7 +535,7 @@ Las propuestas siguientes se basan en la funci&oacute;n SQL \'ORDER BY\': utiliz
 	'tri_perso' => 'Ordenaci&oacute;n SQL personalizada, ORDER BY seguido por:',
 	'tri_publi' => 'Ordenar por fecha de publicaci&oacute;n (ORDER BY date DESC)',
 	'tri_titre' => 'Ordenar por t&iacute;tulo (ORDER BY 0+titre,titre)',
-	'type_urls:description' => '<MODIF>@puce@ SPIP te permite elegir entre varios tipos de URLs para crear los enlaces de acceso a las p&aacute;ginas de tu sitio:
+	'type_urls:description' => '@puce@ SPIP te permite elegir entre varios tipos de URLs para crear los enlaces de acceso a las p&aacute;ginas de tu sitio:
 
 M&aacute;s informaci&oacute;n: [->http://www.spip.net/es_article2024.html]. La utilidad &laquo;&nbsp;[.->boites_privees]&nbsp;&raquo; te permite ver en la p&aacute;gina de cada objeto SPIP la URL propia asociada.
 [[%radio_type_urls3%]]
@@ -547,31 +547,32 @@ _ Ejemplo: <code>/spip.php?article123</code>[[%terminaison_urls_page%]][[%separa
 <radio_type_urls3 valeur="html">@puce@ {{URLs &laquo;html&raquo;}}: los enlaces tienen forma de p&aacute;ginas html cl&aacute;sicas.
 _ Ejemplo: <code>/article123.html</code></radio_type_urls3>
 
-<radio_type_urls3 valeur="propres">@puce@ {{URLs &laquo;propres&raquo;}}: los enlaces se calculan mediante el t&iacute;tulo de los objetos solicitados. Los t&iacute;tulos se rodean con marcadores (_, -, +, @, etc.) en funci&oacute;n del tipo de objeto.
+<radio_type_urls3 valeur="propres">@puce@ {{URLs &laquo;propres&raquo; (propias)}}: los enlaces se calculan mediante el t&iacute;tulo de los objetos solicitados. Los t&iacute;tulos se rodean con marcadores (_, -, +, @, etc.) en funci&oacute;n del tipo de objeto.
 _ Ejemplos: <code>/Mi-titulo-de-articulo</code> o <code>/-Mi-seccion-</code> o <code>/@Mi-sitio@</code>[[%terminaison_urls_propres%]][[%debut_urls_propres%]][[%marqueurs_urls_propres%]]</radio_type_urls3>
 
-<radio_type_urls3 valeur="propres2">@puce@ {{URLs &laquo;propres2&raquo;}}: se a&ntilde;ade la extension \'.html\' a los enlaces {&laquo;propres&raquo;}.
+<radio_type_urls3 valeur="propres2">@puce@ {{URLs &laquo;propres2&raquo; (propias 2)}}: se a&ntilde;ade la extension \'.html\' a los enlaces {&laquo;propios&raquo;}.
 _ Ejemplo: <code>/Mi-titulo-de-articulo.html</code> o <code>/-Mi-seccion-.html</code>
 [[%debut_urls_propres2%]][[%marqueurs_urls_propres2%]]</radio_type_urls3>
 
-<radio_type_urls3 valeur="libres">@puce@ {{URLs &laquo;libres&raquo;}}: los enlaces son {&laquo;propres&raquo;}, pero sin marcadores separando los objetos (_, -, +, @, etc.).
+<radio_type_urls3 valeur="libres">@puce@ {{URLs &laquo;libres&raquo;}}: los enlaces son {&laquo;propios&raquo;}, pero sin marcadores separando los objetos (_, -, +, @, etc.).
 _ Ejemplo: <code>/Mi-titulo-de-articulo</code> o <code>/Mi-seccion</code>
 [[%terminaison_urls_libres%]][[%debut_urls_libres%]]</radio_type_urls3>
 
-<radio_type_urls3 valeur="arbo">@puce@ {{URLs &laquo;arborescentes&raquo;}}: los enlaces son {&laquo;propres&raquo;}, pero de tipo ramificado.
+<radio_type_urls3 valeur="arbo">@puce@ {{URLs &laquo;arborescentes&raquo;}}: los enlaces son {&laquo;propios&raquo;}, pero de tipo ramificado.
 _ Ejemplo: <code>/sector/seccion1/seccion2/Mi-titulo-de-articulo</code>
 [[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]</radio_type_urls3>
 
-<radio_type_urls3 valeur="propres-qs">@puce@ {{URLs &laquo;propres-qs&raquo;}}: este sistema funciona en "Query-String", es decir, sin utilizar .htaccess ; los enlaces son {&laquo;propres&raquo;}.
+<radio_type_urls3 valeur="propres-qs">@puce@ {{URLs &laquo;propres-qs&raquo;}}: este sistema funciona en "Query-String", es decir, sin utilizar .htaccess ; los enlaces son {&laquo;propios&raquo;}.
 _ Ejemplo: <code>/?Mi-titulo-de-articulo</code>
 [[%terminaison_urls_propres_qs%]]</radio_type_urls3>
 
-<radio_type_urls3 valeur="propres-qs">@puce@ {{URLs &laquo;propres-qs&raquo;}}: este sistema funciona en "Query-String", es decir, sin utilizar .htaccess ; los enlaces son {&laquo;propres&raquo;}.
+<radio_type_urls3 valeur="propres-qs">@puce@ {{URLs &laquo;propres-qs&raquo;}}: este sistema funciona en "Query-String", es decir, sin utilizar .htaccess ; los enlaces son {&laquo;propios&raquo;}.
 _ Ejemplo: <code>/?Mi-titulo-de-articulo</code>
 [[%terminaison_urls_propres_qs%]][[%marqueurs_urls_propres_qs%]]</radio_type_urls3>
 
 <radio_type_urls3 valeur="standard">@puce@ {{URLs &laquo;standard&raquo;}}: estos enlaces, que ya son obsoletos, se utilizaron por SPIP hasta su versi&oacute;n 1.8.
-_ Ejemplo: <code>article.php3?id_article=123</code></radio_type_urls3>
+_ Ejemplo: <code>article.php3?id_article=123</code>
+</radio_type_urls3>
 
 @puce@ Si utilizas el formato {page} de m&aacute;s arriba o si no se reconoce el objeto solicitado, te ser&aacute; posible elegir {{el script de llamada}} a SPIP. Por omisi&oacute;n, SPIP usa {spip.php}; pero {index.php} (ejemplo de formato: <code>/index.php?article123</code>) o un valor nulo (formato: <code>/?article123</code>) tambi&eacute;n funcionan. Para cualquier otro valor, te ser&aacute; absolutamente necesario crear el fichero correspondiente en la ra&iacute;z de SPIP, a imagen del que ya existe: {index.php}.
 [[%spip_script%]]',
@@ -599,10 +600,10 @@ Aqu&iacute; puedes escoger escribir como super&iacute;ndices otras abreviaturas 
 	'url_standard' => 'standard',
 	'urls_base_total' => 'Actualmente hay @nb@ URL(s) en la base',
 	'urls_base_vide' => 'La base de datos de URLs est&aacute; vac&iacute;a',
-	'urls_choix_objet' => 'Edici&oacute;n basada en la URL de un objeto espec&iacute;fico:',
+	'urls_choix_objet' => '<MODIF>Edici&oacute;n basada en la URL de un objeto espec&iacute;fico:',
 	'urls_edit_erreur' => 'El formato actual de las URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) no permite la edici&oacute;n.',
 	'urls_enregistrer' => 'Grabar esta URL en la base',
-	'urls_nouvelle' => '<MODIF>Editar la URL &laquo;propia&raquo;:',
+	'urls_nouvelle' => 'Editar la URL &laquo;propres&raquo; (propia):',
 	'urls_num_objet' => 'N&uacute;mero:',
 	'urls_purger' => 'Vaciar todo',
 	'urls_purger_tables' => 'Vaciar las tablas seleccionadas',
@@ -611,7 +612,7 @@ Aqu&iacute; puedes escoger escribir como super&iacute;ndices otras abreviaturas 
 	'urls_titre_objet' => 'T&iacute;tulo grabado:',
 	'urls_type_objet' => 'Objeto:',
 	'urls_url_calculee' => 'URL p&uacute;blica &laquo;&nbsp;@type@&nbsp;&raquo;:',
-	'urls_url_objet' => '<MODIF>URL &laquo;propia&raquo; grabada:',
+	'urls_url_objet' => 'URL &laquo;propres&raquo; (propia) grabada:',
 	'urls_valeur_vide' => '(Un valor vac&iacute;o implica la supresi&oacute;n de la URL)',
 
 	// V
@@ -627,7 +628,7 @@ Aqu&iacute; puedes escoger escribir como super&iacute;ndices otras abreviaturas 
 	'version_update_chargeur' => 'Descarga autom&aacute;tica',
 	'version_update_chargeur_title' => 'Descargar la &uacute;ltima versi&oacute;n del plugin mediante el plugin &laquo;Descargador&raquo;',
 	'version_update_title' => 'Descarga la &uacute;ltima versi&oacute;n del plugin y efect&uacute;a su actualizaci&oacute;n autom&aacute;tica',
-	'verstexte:description' => '2 filtros para tus esqueletos, que permiten producir p&aacute;ginas m&aacute;s ligeras.
+	'verstexte:description' => '<MODIF>2 filtros para tus esqueletos, que permiten producir p&aacute;ginas m&aacute;s ligeras.
 _ version_texte : extrae el texto contenido en una p&aacute;gina html excluyendo algunas balizas elementales.
 _ version_plein_texte : extrae el texto contenido en una p&aacute;gina html para mostrarlo como texto puro.',
 	'verstexte:nom' => 'Versi&oacute;n texto',
