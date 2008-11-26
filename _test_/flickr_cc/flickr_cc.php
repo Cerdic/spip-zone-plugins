@@ -7,6 +7,8 @@
 		$id_article = $vars["args"]["id_article"];
 		$data =	$vars["data"];
 		
+		$spip_lang = $_COOKIE["spip_lang_ecrire"];
+		
 		$ret = "";
 		
 		if ($exec == "articles_edit" && $id_article > 0 && autoriser('modifier','article', $id_article)) {
@@ -22,7 +24,7 @@
 			$url = _DIR_PLUGIN_FLICKR_CC."imgs/flickrcc.png";
 
 		
-			$ret .= "<div style='text-align:center; margin-top: 20px;'><a onclick=\"$('#flickr_cc').remove();$('body').scrollTop(0).css('height','100%').css('overflow','hidden').append('$div');$('#flickr_cc').load('../?page=flickr_cc&id_article=$id_article');return false;\" href=\"#\">"._T("flickr_cc:ajouter_image_flickr")."<br /><br /><img src='$url' alt='Ajouter une image Flickr CC' /></a></div>";			
+			$ret .= "<div style='text-align:center; margin-top: 20px;'><a onclick=\"$('#flickr_cc').remove();$('body').scrollTop(0).css('height','100%').css('overflow','hidden').append('$div');$('#flickr_cc').load('../?page=flickr_cc&id_article=$id_article&lang=$spip_lang');return false;\" href=\"#\">"._T("flickrcc:ajouter_image_flickr")."<br /><br /><img src='$url' alt='Ajouter une image Flickr CC' /></a></div>";			
 			
 			
 		} 
