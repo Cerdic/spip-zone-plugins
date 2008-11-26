@@ -49,22 +49,29 @@ function exec_malettre_archive(){
           	return false; 
         }
         $c = 0;
+        
+        // lecture des lettres disponibles (archives anti-chrono)
+        $lettres_path = array();
+        $output = "";
+        
         while ($myfile = $folder->read())   { 
           $entirePath  = $path."/".$myfile;          
           $ext_start = substr($myfile, 0 , 6);
-          $ext = substr($myfile, -4 , 4); 
-          $daty =  substr($myfile, 13 , 2).".".substr($myfile, 11 , 2).".".substr($myfile, 7 , 4);
-          if ($ext_start=="lettre" && $ext == "html") {          
-	            $out_file_current =  " - <a href=\"../$path_archive/$myfile\" target='_blank' />lettre du  $daty</a>";
-              $out_file_current .= " : <a href='#' onclick=\"malettref.location.href='../$path_archive/$myfile'\" style='color:green;'>voir</a>";
-              $out_file_current .= " - <a href='?exec=malettre_archive&amp;action=del&amp;f=$myfile'  onclick='return confirm(\"Etes vous sûr ?\");' style='color:red;'>effacer</a><br />\n";	            
-	            $out_file =  $out_file_current.$out_file;
+          $ext = substr($myfile, -4 , 4);
+          if ($ext_start=="lettre" && $ext == "html") {   
+              $lettres_path[] = $myfile; 
               $c++;
-          } 
-        		 
+          }         		 
         }
-         
-        echo $out_dir.$out_file;
+        
+        arsort($lettres_path);
+        foreach ($lettres_path as $k=>$lettre_path) {
+          $date_lettre =  substr($lettre_path, 13 , 2).".".substr($lettre_path, 11 , 2).".".substr($lettre_path, 7 , 4);        
+          $output .= " - <a href=\"../$path_archive/$lettre_path\" target='_blank' />lettre du  $date_lettre</a>";
+          $output .= " : <a href='#' onclick=\"malettref.location.href='../$path_archive/$lettre_path'\" style='color:green;'>voir</a>";
+          $output .= " - <a href='?exec=malettre_archive&amp;action=del&amp;f=$lettre_path'  onclick='return confirm(\"Etes vous sûr ?\");' style='color:red;'>effacer</a><br />\n";            
+  	    } 
+        echo $output;
         echo "<p><small>$c lettre(s) disponible(s)</small></p>";
         echo "<iframe width=\"750\" height=\"500\" src='' id='malettref' name='malettref'></iframe>\n";
 		}
