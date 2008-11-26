@@ -288,7 +288,7 @@ function exec_spiplistes_config () {
 				;
 		}
 	$page_result .= ""
-		. "</lu>\n"
+		. "</ul>\n"
 		. "</div>\n" // fin bloc div-ajout-tampon-editeur
 		. fin_cadre_relief(true)
 		//
