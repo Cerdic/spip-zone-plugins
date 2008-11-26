@@ -33,7 +33,7 @@ Le premier champ adresse@mail est obligatoire. Les deux autres champs peuvent
 , 'attente_validation' => "attente validation"
 
 //A
-, 'abo_1_lettre' => 'Lettre d\'information',
+,
 'abonne_une_seule_liste_publique' => "Abonnement &agrave; la seule liste disponible ",
 'abonnement_0' => 'Abonnement',
 'abonnement'=>'Vous souhaitez modifier votre abonnement &agrave; la lettre d\'information',
@@ -360,7 +360,6 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'membres_groupes' => 'Groupes d\'utilisateurs',
 'membres_profil' => 'Profil',
 'membres_messages_deconnecte' => 'Se connecter pour v&eacute;rifier ses messages priv&eacute;s',
-'membres_sans_messages_connecte' => 'Vous n\'avez pas de nouveaux messages',
 'membres_avec_messages_connecte' => 'Vous avez @nombres@ nouveau(x) message(s)',
 'message' => 'Message : ',
 'message_date' => 'Post&eacute; le ',
@@ -533,10 +532,9 @@ liste."
 , 'titre_page_voir_journal' => "Journal de SPIP-Listes"
 
 //U
-, 'Utilisez_formulaire' => "Utilisez le formulaire ci-contre pour activer/d&eacute;activer cette option.",
 
 //V
-'version_html' => '<strong>Version HTML</strong>',
+, 'version_html' => '<strong>Version HTML</strong>',
 'version_texte' => '<strong>Version texte</strong>',
 'voir' => 'voir',
 'vous_pouvez_egalement' => 'Vous pouvez &eacute;galement',
@@ -580,7 +578,7 @@ liste."
 'email_collec' => 'R&eacute;diger un courrier',
 'email_test' => 'Envoyer un email de test',
 'email_test_liste' => 'Envoyer vers une liste de diffusion',
-'email_tester' => 'Tester par email',
+
 'env_esquel' => 'Envoi programm&eacute; du patron',
 'env_maint' => 'Envoyer maintenant',
 'envoyer' => 'envoyer le mail',
@@ -660,7 +658,6 @@ liste."
 'remplir_tout' => 'Tous les champs doivent &ecirc;tre remplis',
 'repartition' => 'R&eacute;partition',
 'retour_link' => 'Retour',
-'repartition_abonnes' => "R&eacute;partition des abonn&eacute;s",
 'repartition_formats' => "R&eacute;partition des formats",
 
 'Erreur_Adresse_email_inconnue' => 'Attention, l\'adresse email de test que vous avez fournie ne correspond &agrave; aucun abonn&eacute;, <br />l\'envoi ne peut se faire, veuillez reprendre la proc&eacute;dure<br /><br />',
@@ -678,9 +675,9 @@ liste."
 
 'une_inscription' => 'Un abonn&eacute; trouv&eacute;',
 
-'val_texte' => 'Texte',
+
 'version' => 'version',
-'voir_historique' => 'Voir l\'historique des envois',
+
 
 
 // ====================== inscription-listes.php3 / abonnement.php3 ======================
@@ -694,52 +691,109 @@ liste."
 'confirmation_listes_multiples_1' => 'Vous &ecirc;tes abonn&eacute; aux listes d\'informations du site ',
 'confirmation_listes_multiples_2' => 'Vous avez choisi de recevoir les courriers adress&eacute;s aux listes suivantes :',
 
-'Erreur_Adresse_email_invalide' => 'Erreur: l\'adresse email que vous avez fournie n\'est pas valide',
-
 'infos_liste' => 'Informations sur cette liste',
 
 
 // ====================== spip-meleuse.php3 ======================
 
 'contacts' => 'Nombre de contacts',
-'editeur' => 'Editeur : ',
-'envoi_tous' => 'Envoi &agrave; destination de tous les inscrits'
+'editeur' => 'Editeur : '
 , 'lettre_info' => 'La lettre d\'information du site'
-, 'patron_detecte' => '<p><strong>Patron d&eacute;tect&eacute; pour la version texte</strong><p>'
 , 'patron_erreur' => 'Le patron sp&eacute;cifi&eacute; ne donne pas de r&eacute;sulat avec les param&egrave;tres choisis'
 , 'abonees_titre' => 'Abonn&eacute;s'
-, 'listes_emails' => 'Lettres d\'information'
 , 'options' => 'radio|brut|Format :|Html,Texte,D&eacute;sabonnement|html,texte,non'
-, 'bonjour' => 'Bonjour,'
+
+//////////////////////////////////////////////
+// CP-20081126: classement par scripts (ci-dessous)
+// action/spiplistes_agenda.php
+// action/spiplistes_changer_statut_abonne.php
+// action/spiplistes_envoi_lot.php
+// action/spiplistes_journal.php
+// action/spiplistes_lire_console.php
+// action/spiplistes_liste_des_abonnes.php
+// action/spiplistes_listes_abonner_auteur.php
+// action/spiplistes_moderateurs_gerer.php
+, 'voir_historique' => 'Voir l\'historique des envois'
+
+// action/spiplistes_supprimer_abonne.php
+// balise/formulaire_abonnement.php
+, '_en_format_' => ' en format '
 , 'inscription_liste' => 'Vous avez choisi de recevoir les courriers adress&eacute;s &agrave; la liste suivante : '
-, 'inscription_listes' => 'Vous avez choisi de recevoir les courriers adress&eacute;s aux listes suivantes : '
-, 'inscription_format' => ' en format '
-, 'info_liste_1' => 'liste'
+, 'inscription_response' => 'Vous &ecirc;tes abonn&eacute; &agrave; la liste d\'information du site '
+, 'inscription_responses' => 'Vous &ecirc;tes abonn&eacute; aux listes d\'informations du site '
 
+// balise/formulaire_modif_abonnement.php
+// base/spiplistes_init.php
+// base/spiplistes_tables.php
+// base/spiplistes_upgrade.php
+// docs/spiplistes_aide_fr.html
+// exec/spiplistes_abonne_edit.php
+// exec/spiplistes_abonnes_tous.php
+, 'repartition_abonnes' => "R&eacute;partition des abonn&eacute;s"
 
-// CP-20081126: inc/spiplistes_api_presentation.php
+// exec/spiplistes_aide.php
+// exec/spiplistes_autocron.php
+// exec/spiplistes_config.php
+// exec/spiplistes_courrier_edit.php
+// exec/spiplistes_courrier_gerer.php
+, 'Erreur_Adresse_email_invalide' => 'Erreur: l\'adresse email que vous avez fournie n\'est pas valide'
+
+// exec/spiplistes_courrier_previsu.php
+// exec/spiplistes_courriers_casier.php
+// exec/spiplistes_import_export.php
+// exec/spiplistes_liste_edit.php
+// exec/spiplistes_liste_gerer.php
+// exec/spiplistes_listes_toutes.php
+// exec/spiplistes_maintenance.php
+, 'abonnes' => 'abonn&eacute;s'
+, '1_abonne' => '1 abonn&eacute;'
+
+// exec/spiplistes_menu_navigation.php
+// exec/spiplistes_voir_journal.php
+// genie/spiplistes_cron.php
+// inc/spiplistes_agenda.php
+// inc/spiplistes_api.php
+// inc/spiplistes_api_abstract_sql.php
+// inc/spiplistes_api_courrier.php
+// inc/spiplistes_api_globales.php
+// inc/spiplistes_api_journal.php
+// inc/spiplistes_api_presentation.php
 , 'envoi_en_cours' => 'Envoi en cours'
 , 'nb_destinataire_sing' => " destinataire"
 , 'nb_destinataire_plur' => " destinataires"
 , 'aucun_destinataire' => "aucun destinataire"
 , '1_liste' => '@n@ liste'
 , 'n_listes' => '@n@ listes'
+, 'utilisez_formulaire_ci_contre' => "Utilisez le formulaire ci-contre pour activer/d&eacute;activer cette option."
 
-// CP-20081126: balise/formulaire_abonnement.php
-, 'inscription_response' => 'Vous &ecirc;tes abonn&eacute; &agrave; la liste d\'information du site '
-, 'inscription_responses' => 'Vous &ecirc;tes abonn&eacute; aux listes d\'informations du site '
 
-// CP-20081126: inc/spiplistes_meleuse.php
+// inc/spiplistes_dater_envoi.php
+// inc/spiplistes_destiner_envoi.php
+, 'email_tester' => 'Tester par email'
+
+// inc/spiplistes_import.php
+// inc/spiplistes_lister_courriers_listes.php
+// inc/spiplistes_listes_forcer_abonnement.php
+// inc/spiplistes_listes_selectionner_auteur.php
+// inc/spiplistes_mail.inc.php
+// inc/spiplistes_meleuse.php
 , 'erreur_sans_destinataire' => 'Erreur : aucun destinataire ne peut &ecirc;tre trouv&eacute; pour ce courrier'
 , 'envoi_annule' => 'Envoi annul&eacute;'
 , 'sans_adresse' => 'Mail non envoy&eacute; -> Veuillez d&eacute;finir une adresse de r&eacute;ponse'
 , 'erreur_mail' => 'Erreur : envoi du mail impossible (v&eacute;rifier si mail() de php est disponible)'
 
-// CP-20081126: exec/spiplistes_maintenance.php
-, 'abonnes' => 'abonn&eacute;s'
-, '1_abonne' => '1 abonn&eacute;'
+// inc/spiplistes_naviguer_paniers.php
+// inc/spiplistes_pipeline_I2_cfg_form.php
+// inc/spiplistes_pipeline_affiche_milieu.php
+// inc/spiplistes_pipeline_ajouter_boutons.php
+// inc/spiplistes_pipeline_ajouter_onglets.php
+// inc/spiplistes_pipeline_header_prive.php
+// inc/spiplistes_pipeline_insert_head.php
 
-// CP-20081126: a priori, pas|plus utilise'
+// formulaires, patrons, etc.
+, 'abo_1_lettre' => 'Lettre d\'information'
+
+// a priori, pas|plus utilise'
 , 'supprime_contact_base' => 'Supprimer d&eacute;finitivement de la base'
 , 'forcer_lot' => 'Provoquer l\'envoi du lot suivant'
 , 'erreur_destinataire' => 'Erreur destinataire : pas d\'envoi'
@@ -751,6 +805,14 @@ liste."
 , 'email_reponse' => 'Email de r&eacute;ponse : '
 , 'envoi_listes' => 'Envoi &agrave; destination des abonn&eacute;s &agrave; la liste : '
 , 'confirmer' => 'Confirmer'
+, 'listes_emails' => 'Lettres d\'information'
+, 'info_liste_1' => 'liste'
+//, 'bonjour' => 'Bonjour,' // deja dans SPIP
+, 'inscription_listes' => 'Vous avez choisi de recevoir les courriers adress&eacute;s aux listes suivantes : '
+, 'envoi_tous' => 'Envoi &agrave; destination de tous les inscrits'
+, 'patron_detecte' => '<p><strong>Patron d&eacute;tect&eacute; pour la version texte</strong><p>'
+, 'val_texte' => 'Texte'
+, 'membres_sans_messages_connecte' => 'Vous n\'avez pas de nouveaux messages'
 
 );
 

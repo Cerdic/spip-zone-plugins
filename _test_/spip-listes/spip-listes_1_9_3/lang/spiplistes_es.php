@@ -431,7 +431,7 @@ Recibir&aacute;s un email para acceder a la p&aacute;gina de modificaci&oacute;n
 'inscription_responses' => 'Est&aacute;s inscrit@ en los boletines ',
 'inscription_liste' => 'Has seleccionado recibir los boletines informativos: ',
 'inscription_listes' => 'Has seleccionado recibir los boletines informativos: ',
-'inscription_format' => ' en formato ',
+'_en_format_' => ' en formato ',
 
 '1_liste' => '@n@ bolet&iacute;n informativo',
 'n_listes' => '@n@ boletines informativos',

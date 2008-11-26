@@ -372,7 +372,7 @@ spiplistes_log("inscription id : ->".$row['id_auteur'], _SPIPLISTES_LOG_DEBUG);
 					$m2 = 'inscription_liste';
 				} else {
 					$m1 = 'inscription_response';
-					$m2 = 'inscription_format';
+					$m2 = '_en_format_';
 				}
 				$message .= ""
 					. "\n"._T('spiplistes:'.$m1).$nom_site_spip

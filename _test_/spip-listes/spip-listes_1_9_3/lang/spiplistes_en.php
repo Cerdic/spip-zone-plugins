@@ -427,7 +427,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'inscription_responses' => 'Your e-mail address has been added to the mailing list of ',
 'inscription_liste' => 'You will receive the newsletter sent to the following mailing list : ',
 'inscription_listes' => 'You will receive the newsletters sent to the following mailing lists : ',
-'inscription_format' => ', in format ',
+'_en_format_' => ', in format ',
 
 '1_liste' => '@n@ list',
 'n_listes' => "@n@ lists"

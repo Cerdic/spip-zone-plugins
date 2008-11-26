@@ -358,7 +358,7 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
 'inscription_responses' => 'Sie haben die Newsletter dieser Website abonniert ',
 'inscription_liste' => 'Sie haben sich f&uuml;r den Empfang von Nachrichten der folgenden Liste eingetragen: ',
 'inscription_listes' => 'Sie haben folgende Listen abonniert: ',
-'inscription_format' => ' im Format ',
+'_en_format_' => ' im Format ',
 
 );
 

@@ -428,7 +428,7 @@ e ricevere le newsletter.',
 'inscription_responses' => 'Siete abbonati alle newsletter del sito ',
 'inscription_liste' => 'Avete scelto di ricevere i messaggi indirizzati alla Newsletter seguente: ',
 'inscription_listes' => 'Avete scelto di ricevere i messaggi indirizzati alle Newsletter seguenti: ',
-'inscription_format' => ' in formato '
+'_en_format_' => ' in formato '
 
 );
 

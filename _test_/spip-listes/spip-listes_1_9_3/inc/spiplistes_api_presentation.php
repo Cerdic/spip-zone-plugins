@@ -529,7 +529,7 @@ function spiplistes_boite_autocron_form($titre, $option, $value) {
 		}
 		else {
 			$result = ""
-				. "<p class='verdana2'>"._T('spiplistes:Utilisez_formulaire')."</p>\n"
+				. "<p class='verdana2'>"._T('spiplistes:utilisez_formulaire_ci_contre')."</p>\n"
 				;
 		}
 	}

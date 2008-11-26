@@ -1,6 +1,6 @@
 <?php
 
-// inc/spiplistes_abonnes_tous.php
+// exec/spiplistes_abonnes_tous.php
 
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */

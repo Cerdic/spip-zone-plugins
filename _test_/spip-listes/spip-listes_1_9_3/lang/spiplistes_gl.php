@@ -370,7 +370,7 @@ As isncripci&oacute;ns a importar deben estar nun ficheiro de texto que s&oacute
 'inscription_responses' => 'Est&aacute;s inscrit@ nas listas de ',
 'inscription_liste' => 'Seleccionaches recibir as mensaxes da lista: ',
 'inscription_listes' => 'Seleccionaches recibir as mensaxes das listas: ',
-'inscription_format' => ' en formato ',
+'_en_format_' => ' en formato ',
 
 'options' => 'radio|brut|Formato:|Html,Texto,Non recibir novidades|html,texte,non',
 
