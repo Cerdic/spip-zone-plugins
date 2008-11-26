@@ -315,7 +315,7 @@ function exec_spiplistes_config () {
 		. _T('spiplistes:pas_sur')
 		. bouton_radio("mailer_smtp", "non", _T('spiplistes:php_mail'), $mailer_smtp == "non", "changeVisible(this.checked, 'smtp', 'none', 'block');")
 		. "<br />\n"
-		. bouton_radio("mailer_smtp", "oui", _T('spiplistes:smtp'), $mailer_smtp == "oui"
+		. bouton_radio("mailer_smtp", "oui", _T('spiplistes:utiliser_smtp'), $mailer_smtp == "oui"
 			, "changeVisible(this.checked, 'smtp', 'block', 'none');")
 		. "</div>\n"
 		//
@@ -328,7 +328,7 @@ function exec_spiplistes_config () {
 			. "<label for='smtp_sender'>"._T('spiplistes:adresse_smtp')." : </label>\n"
 			. "<input type='text' id='smtp_sender' name='smtp_sender' value=\"$smtp_sender\" class='formo' />"
 		. "</li>\n"
-		. "<li>"._T('spiplistes:spip_ident')." : "
+		. "<li>"._T('spiplistes:requiert_identification')." : "
 		. bouton_radio("smtp_identification", "oui", _T('item_oui'), ($smtp_identification == "oui"), "changeVisible(this.checked, 'smtp-auth', 'block', 'none');")
 		. "&nbsp;"
 		. bouton_radio("smtp_identification", "non", _T('item_non'), ($smtp_identification == "non"), "changeVisible(this.checked, 'smtp-auth', 'none', 'block');")."</li>\n"

@@ -87,7 +87,6 @@ function exec_spiplistes_liste_gerer () {
 	$cherche_auteur = _request('cherche_auteur');
 	$debut = _request('debut');
 
-
 	$envoyer_maintenant = ($envoyer_maintenant == 'oui');
 	
 	$boite_pour_confirmer_envoi_maintenant = 
@@ -481,7 +480,7 @@ function exec_spiplistes_liste_gerer () {
 	$sous_rubrique = "liste_gerer";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page(_T('spiplistes:spip_listes') . " - " . $titre_page, $rubrique, $sous_rubrique));
+	echo($commencer_page(_T('spiplistes:spiplistes') . " - " . $titre_page, $rubrique, $sous_rubrique));
 
 	// la gestion des listes de courriers est reservee aux admins 
 	if($connect_statut != "0minirezo") {
@@ -568,12 +567,22 @@ function exec_spiplistes_liste_gerer () {
 			)
 		. "<span class='verdana2'>". _T('spiplistes:Cette_liste_est')." : "
 		. 	spiplistes_bullet_titre_liste('puce', $statut, 'img_statut', true)."</span>\n"
+		;
+
+		$mySelMulti = " value='"._SPIPLISTES_PUBLIC_LIST."'" 
+			. (
+				(in_array($statut, spiplistes_listes_statuts_periodiques()) || ($statut == _SPIPLISTES_PUBLIC_LIST))
+				? " selected='selected'" 
+				: ""
+			  )
+			;
+	$page_result .= ""
 		.	(
 			($flag_editable)
 			? ""
 				. "<select class='verdana2 fondl' name='statut' size='1' id='change_statut'>\n"
 				. "<option" . mySel(_SPIPLISTES_PRIVATE_LIST, $statut) ." style='background-color: white'>"._T('spiplistes:statut_interne')."</option>\n"
-				. "<option" . mySel(_SPIPLISTES_PUBLIC_LIST, $statut) . " style='background-color: #B4E8C5'>"._T('spiplistes:statut_publique')."</option>\n"
+				. "<option" . $mySelMulti . " style='background-color: #B4E8C5'>"._T('spiplistes:statut_publique')."</option>\n"
 				. "<option" . mySel(_SPIPLISTES_TRASH_LIST, $statut) . " style='background:url("._DIR_IMG_PACK."rayures-sup.gif)'>"._T('texte_statut_poubelle')."</option>\n"
 				. "</select>\n"
 			: "<span class='verdana2' style='font-weight:bold;'>".spiplistes_items_get_item("alt", $statut)."</span>\n"
@@ -584,7 +593,7 @@ function exec_spiplistes_liste_gerer () {
 			? ""
 				. "<label class='verdana2' for='changer_lang'>"._T('info_multi_herit')." : </label>\n"
 				. "<select name='changer_lang'  class='fondl' id='changer_lang'>\n"
-				. liste_options_langues('changer_lang', $lang , _T('spiplistes:langue'),'', '')
+				. liste_options_langues('changer_lang', $lang , _T('spiplistes:langue_'),'', '')
 				. "</select>\n"
 			: ""
 				. "<span class='verdana2'>". _T('info_multi_herit')." : "
@@ -627,15 +636,24 @@ function exec_spiplistes_liste_gerer () {
 		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_timer.png", true, '', _T('spiplistes:messages_auto')
 			. spiplistes_plugin_aide(_SPIPLISTES_EXEC_AIDE, "temporiser"))
 		;
-	if(empty($patron)) {
-		$page_result .= spiplistes_boite_alerte(_T('spiplistes:patron_manquant_message'), true);
-	}
 	$page_result .= ""
 		. $boite_pour_confirmer_envoi_maintenant
 		. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste")."#form-programmer", true)
 		. "<table border='0' cellspacing='1' cellpadding='3' width='100%'>\n"
 		. "<tr><td align='$spip_lang_left' class='verdana2'>\n"
 		;
+	if(empty($patron)) {
+		$page_result .= ""
+			. (
+				$flag_editable
+				? spiplistes_boite_alerte(_T('spiplistes:patron_manquant_message'), true)
+				: "<p class='verdana2'>" . _T('spiplistes:liste_sans_patron') . "</p>\n"
+			  )
+			. "</td>\n"
+			. "</tr>\n"
+			. "<tr><td align='$spip_lang_left' class='verdana2'>\n"
+			;
+	}
 	if ($message_auto != "oui") {
 		$page_result .= "<div class='verdana2'>"._T('spiplistes:pas_denvoi_auto_programme')."</div>\n";
 	}
@@ -648,7 +666,7 @@ function exec_spiplistes_liste_gerer () {
 			. spiplistes_items_get_item('alt', $statut)."<br />\n"
 			.	(	
 					($statut == _SPIPLISTES_MONTHLY_LIST)
-					?	"<strong>" . _T('spiplistes:Liste_diffusee_le_premier_de_chaque_mois') . "</strong><br />"
+					?	"<strong>" . spiplistes_items_get_item("tab_t", $statut) . "</strong><br />"
 					:	""
 				)
 			.	(

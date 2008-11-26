@@ -144,9 +144,9 @@ function exec_spiplistes_liste_edit(){
 	$texte = entites_html($texte);
 	
 	$formulaire_action = 
-		($id_liste)
-		? generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER)
-		: generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")
+		($id_liste > 0)
+		? generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")
+		: generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER)
 		;
 
 	$page_result .= ""

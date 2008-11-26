@@ -190,7 +190,7 @@ function exec_spiplistes_courrier_edit(){
 	$page_result .= ""
 		// selecteur de langues
 		. "<div class='boite-generer-option'>\n"
-		. "<label class='verdana2'>"._T('spiplistes:Langue_du_courrier_').": "
+		. "<label class='verdana2'>"._T('spiplistes:Langue_du_courrier_')
 		. "<select name='lang' class='fondo'>\n"
 		. liste_options_langues('changer_lang')
 		. "</select></label>\n"

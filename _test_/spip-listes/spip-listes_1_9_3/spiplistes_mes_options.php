@@ -377,8 +377,8 @@ $spiplistes_items = array(
 		, 'icon_color' => "ff0"
 		, 'alt' => _T('spiplistes:Liste_prive')
 		, 'nav_t' => _T('spiplistes:Listes_privees')
-		, 'tab_t' => _T('spiplistes:Listes_diffusion_interne')
-		, 'desc' => _T('spiplistes:Listes_diffusion_interne_desc')
+		, 'tab_t' => _T('spiplistes:Listes_diffusion_privees')
+		, 'desc' => _T('spiplistes:Listes_diffusion_privees_desc')
 		)
 	, _SPIPLISTES_PUBLIC_LIST => array(
 		'puce' => _DIR_IMG_PACK."puce-verte.gif"
@@ -387,7 +387,7 @@ $spiplistes_items = array(
 		, 'alt' => _T('spiplistes:Liste_publique')
 		, 'nav_t' => _T('spiplistes:Listes_publiques')
 		, 'tab_t' => _T('spiplistes:Listes_diffusion_publique')
-		, 'desc' => _T('spiplistes:Listes_diffusion_publique_desc')
+		, 'desc' => _T('spiplistes:Listes_diffusion_publiques_desc')
 		)
 	, _SPIPLISTES_WEEKLY_LIST => array(
 		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-bleue.gif"
@@ -396,7 +396,7 @@ $spiplistes_items = array(
 		, 'alt' => _T('spiplistes:Liste_hebdo')
 		, 'nav_t' => _T('spiplistes:Publiques_hebdos')
 		, 'tab_t' => _T('spiplistes:Listes_diffusion_hebdo')
-		, 'desc' => _T('spiplistes:Listes_diffusion_hebdo_desc')
+		, 'desc' => _T('spiplistes:Listes_diffusion_publiques_desc')
 		)
 	, _SPIPLISTES_MONTHLY_LIST => array(
 		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-bleue.gif"
@@ -405,7 +405,7 @@ $spiplistes_items = array(
 		, 'alt' => _T('spiplistes:Liste_mensuelle')
 		, 'nav_t' => _T('spiplistes:Publiques_mensuelles')
 		, 'tab_t' => _T('spiplistes:Listes_diffusion_mensuelle')
-		, 'desc' => _T('spiplistes:Listes_diffusion_mensuelle_desc')
+		, 'desc' => _T('spiplistes:Listes_diffusion_publiques_desc')
 		)
 	, _SPIPLISTES_YEARLY_LIST => array(
 		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-bleue.gif"
@@ -414,7 +414,7 @@ $spiplistes_items = array(
 		, 'alt' => _T('spiplistes:Liste_annuelle')
 		, 'nav_t' => _T('spiplistes:Publiques_annuelles')
 		, 'tab_t' => _T('spiplistes:Listes_diffusion_annuelle')
-		, 'desc' => _T('spiplistes:Listes_diffusion_annuelle_desc')
+		, 'desc' => _T('spiplistes:Listes_diffusion_publiques_desc')
 		)
 	, _SPIPLISTES_TRASH_LIST => array(
 		'puce' => _DIR_IMG_PACK."puce-poubelle.gif"
@@ -440,7 +440,9 @@ $spiplistes_items = array(
 	$spiplistes_items[_SPIPLISTES_DAILY_LIST] = $spiplistes_items[_SPIPLISTES_PUBLIC_LIST];
 	$spiplistes_items[_SPIPLISTES_HEBDO_LIST] = $spiplistes_items[_SPIPLISTES_WEEKLY_LIST];
 	$spiplistes_items[_SPIPLISTES_MENSUEL_LIST] = $spiplistes_items[_SPIPLISTES_MONTHLY_LIST];
-
+	$spiplistes_items[_SPIPLISTES_MONTHLY_LIST]['nav_t'] = _T('spiplistes:Listes_1_du_mois');
+	$spiplistes_items[_SPIPLISTES_MONTHLY_LIST]['tab_t'] = _T('spiplistes:Liste_diffusee_le_premier_de_chaque_mois');
+	
 	$spiplistes_version = $meta['spiplistes_version'];
 	$spiplistes_base_version = $meta['spiplistes_base_version'];
 

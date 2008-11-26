@@ -160,7 +160,10 @@ function spiplistes_abonnements_auteurs_supprimer ($auteur_statut) {
 		// passer la requete en 2 etapes pour assurer portabilite sql
 		$selection =
 			sql_select("id_auteur", "spip_auteurs", $auteur_statut,'','','','','',false);
-		$result = sql_delete("spip_auteurs_listes", "id_auteur IN ($selection)");
+		$sql_result = sql_delete("spip_auteurs_listes", "id_auteur IN ($selection)");
+		if ($sql_result === false) {
+			spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+		}
 	}
 	return($result);
 }
@@ -725,6 +728,13 @@ function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $heade
 	);
 }
 
+function spiplistes_listes_statuts_periodiques () {
+	static $s;
+	if($s === null) {
+		$s = explode(";", _SPIPLISTES_LISTES_STATUTS_PERIODIQUES);
+	}
+	return($s);
+}
 
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */

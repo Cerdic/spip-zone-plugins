@@ -49,7 +49,6 @@ Le premier champ adresse@mail est obligatoire. Les deux autres champs peuvent
 	Vous pourrez alors confirmer la modification de votre abonnement.",
 'abonnement_modifie'=>'Vos modifications sont prises en compte',
 'abonnement_nouveau_format'=>'Votre format de r&eacute;ception est d&eacute;sormais : ',
-'abonnement_titre_mail'=>'Modifier votre abonnement',
 'abonnement_texte_mail'=>'Indiquez ci-dessous l\'adresse email sous laquelle vous vous &ecirc;tes pr&eacute;c&eacute;demment enregistr&eacute;. 
 	Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modification de votre abonnement.',
 'abonner' => 's\'abonner',
@@ -251,7 +250,6 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'form_forum_identifiants' => 'Confirmation',
 'form_forum_identifiant_confirm'=>'Votre abonnement est enregistr&eacute;, vous allez recevoir un mail de confirmation.',
 'format' => 'Format',
-'format2' => 'Format :',
 'format_html' => 'Format html : ',
 'format_texte' => 'Format texte : ',
 'format_de_reception' => "Format de r&eacute;ception",
@@ -278,7 +276,6 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , 'format_reception' => "Format de r&eacute;ception :"
 
 //G
-, 'Generer_le_contenu' => "G&eacute;n&eacute;rer le contenu"
 , 'generer_un_sommaire' => "G&eacute;n&eacute;rer un sommaire"
 , 'generer_patron_' => "G&eacute;n&eacute;rer le patron "
 , 'generer_patron_avant' => "avant le sommaire"
@@ -290,7 +287,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 //H
 
 //I
-'info_auto' => 'SPIP-Listes pour spip peut envoyer r&eacute;guli&egrave;rement aux inscrits, l\'annonce des derni&egrave;res nouveaut&eacute;s du site (articles et br&egrave;ves r&eacute;cemment publi&eacute;s).',
+
 'info_heberg' => 'Certains h&eacute;bergeurs d&eacute;sactivent l\'envoi automatique de mails depuis leurs serveurs. Dans ce cas, les fonctionnalit&eacute;s suivantes de SPIP-Listes pour SPIP ne fonctionneront pas',
 'info_nouv' => 'Vous avez activ&eacute; l\'envoi des nouveaut&eacute;s',
 'info_nouv_texte' => 'Prochain envoi des nouveaut&eacute;s dans @proch@ jours',
@@ -306,27 +303,19 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 , 'introduction_du_courrier_' => "Introduction &agrave; votre courrier, avant le contenu issu du site "
 , 'incorrect_ou_dupli' => " (incorrect ou dupli)"
 
-//J
-, 'jour' => 'jour',
-'jours' => 'jours',
+
+,
 
 //L
-'langue' => '<strong>Langue :</strong>&nbsp;',
-'Langue_du_courrier_' => "Langue du courrier ",
-'lire' => 'Lire',
-'listes_de_diffusion_' => "Listes de diffusion ",
+
+
 'log' => 'Logs',
 'login' => 'Connexion',
 'logout' => 'D&eacute;connexion',
-'lot_suivant' => 'Provoquer l\'envoi du lot suivant',
-'lieu' => 'Localisation',
-'liste_des_abonnes' => "Liste des abonn&eacute;s",
-'Liste_de_destination' => "Liste de destination",
-'lien_trier_nombre' => "Trier par nombre d&acute;abonnements",
+
 'Liste_prive' => "Liste priv&eacute;e",
-'Liste_publique' => "Liste publique",
-'Liste_abandonnee' => "Liste abandonn&eacute;e",
-'Liste_diffusee_le_premier_de_chaque_mois' => "Liste diffus&eacute;e le premier de chaque mois. "
+'Liste_publique' => "Liste publique"
+
 , 'log_console' => "Console"
 , 'log_details_console' => "D&eacute;tails de la console"
 , 'log_voir_destinataire' => "Lister les adresses email des destinataires dans la console lors de l'envoi."
@@ -361,8 +350,6 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'messages_forum_clos' => 'Forum d&eacute;sactiv&eacute;',
 'messages_nouveaux' => 'Nouveaux messages',
 'messages_pas_nouveaux' => 'Pas de nouveaux messages',
-'messages_non_lus_grand' => 'Pas de nouveaux messages',
-'messages_repondre' => 'Nouvelle R&eacute;ponse',
 'messages_voir_dernier' => 'Voir le dernier message',
 'methode_envoi' => 'M&eacute;thode d\'envoi'
 , 'mettre_a_jour' => '<h3>SPIP-listes va mettre &agrave; jour</h3>'
@@ -385,7 +372,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 	- d'annuler l'envoi des courriers. D&eacute;sactivez ensuite cette option pour 
 	reprendre les exp&eacute;ditions en cours. ",
 'meleuse_suspendue' => "Meleuse suspendue",
-'meleuse_suspendue_info' => "L'envoi des courriers en attente d'exp&eacute;dition est suspendu.",
+
 'Meleuse_reactivee' => "M&egrave;leuse r&eacute;activ&eacute;e"
 , 'max_' => "Max "
 
@@ -406,7 +393,8 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'nb_abos' => "qt."
 
 //P
-, 'par_date' => 'Par date d\'inscription',
+
+,
 'Patrons' => 'Patrons'
 , 'patron_' => "Patron : "
 , 'pas_sur' => '<p>Si vous n\'&ecirc;tes pas s&ucirc;r, choisissez la fonction mail de PHP.</p>',
@@ -448,8 +436,9 @@ liste."
 
 //S
 , 'spiplistes' => "SPIP-Listes"
-, 'smtp' => 'Utiliser SMTP',
-'spip_ident' => 'Requiert une identification',
+
+,
+
 'smtp_hote' => 'H&ocirc;te',
 'smtp_port' => 'Port',
 'spip_listes' => "Spip listes",
@@ -552,7 +541,6 @@ liste."
 'destinataires' => 'Destinataires',
 
 'efface' => 'a &eacute;t&eacute; effac&eacute; des listes et de la base',
-'efface_base' => 'a &eacute;t&eacute; effac&eacute; des listes et de la base',
 'email_adresse' => 'Adresse email de test',
 'email_collec' => 'R&eacute;diger un courrier',
 'email_test' => 'Envoyer un email de test',
@@ -578,33 +566,14 @@ liste."
 'importer_preciser' => '<p>Pr&eacute;cisez les listes et le format correspondant &agrave; votre import d\'abonn&eacute;s</p>',
 'inconnu' => 'n\'est plus abonn&eacute; &agrave; la liste',
 
-'liste_diff_publiques' => 'Listes de diffusion publiques<br /><i>La page du site public propose l\'inscription &agrave; ces listes.</i>',
-'liste_sans_titre' => 'Liste sans titre',
-'listes_internes' => 'Listes de diffusion internes<br /><i>Au moment de l\'envoi d\'un courrier, ces listes sont propos&eacute;es parmi les destinataires</i>',
+
+
 'listes_poubelle' => 'Vos listes de diffusion &agrave; la poubelle',
 'lock' => 'Lock actif : ',
 'Liste_numero_:' => 'Liste num&eacute;ro :'
-, 'Listes_autre' => "Autre pr&eacute;riodicit&eacute;"
-, 'Listes_autre_periode' => "Listes publiques autre pr&eacute;riodicit&eacute;"
-, 'Listes_diffusion_prive' => "Listes priv&eacute;es"
-, 'Liste_hebdo' => "Liste hebdomadaire"
-, 'Listes_diffusion_hebdo' => "Listes publiques hebdomadaires"
-, 'Listes_diffusion_hebdo_desc' => "L'abonnement &agrave; ces listes &agrave; p&eacute;riodicit&eacute; hebdomadaire 
-	est propos&eacute; sur le site public."
-, 'Liste_mensuelle' => "Liste mensuelle"
-, 'Listes_diffusion_mensuelle' => "Listes publiques mensuelles"
-, 'Listes_diffusion_mensuelle_desc' => "L'abonnement &agrave; ces listes &agrave; p&eacute;riodicit&eacute; mensuelle 
-	est propos&eacute; sur le site public."
-, 'Liste_annuelle' => "Liste annuelle"
-, 'Listes_diffusion_annuelle' => "Listes publiques annuelles"
-, 'Listes_diffusion_annuelle_desc' => "L'abonnement &agrave; ces listes &agrave; p&eacute;riodicit&eacute; annuelle 
-	est propos&eacute; sur le site public."
-, 'Listes_diffusion_publique' => 'Listes de diffusion publiques',
-'Listes_diffusion_publique_desc' => 'La page du site public propose l\'inscription &agrave; ces listes.',
-'Listes_diffusion_interne' => 'Listes de diffusion internes',
-'Listes_diffusion_interne_desc' => 'Au moment de l\'envoi d\'un courrier, ces listes sont propos&eacute;es parmi les destinataires.',
-'Listes_diffusion_suspendue' => 'Listes de diffusion suspendues',
-'Listes_diffusion_suspendue_desc' => ' ',
+
+
+,
 
 'mail_tache_courante' => 'Mails envoy&eacute;s pour la t&acirc;che courante : ',
 'messages_auto_envoye' => 'Courriers automatiques envoy&eacute;s',
@@ -639,8 +608,6 @@ liste."
 
 'Erreur_Adresse_email_inconnue' => 'Attention, l\'adresse email de test que vous avez fournie ne correspond &agrave; aucun abonn&eacute;, <br />l\'envoi ne peut se faire, veuillez reprendre la proc&eacute;dure<br /><br />',
 'squel' => 'Patron : &nbsp;',
-'statut_interne' => 'Interne',
-'statut_publique' => 'Publique',
 'suivi_envois' => 'Suivi des envois',
 'supprime_contact' => 'Supprimer ce contact d&eacute;finitivement',
 
@@ -717,10 +684,16 @@ liste."
    dans votre patron les tags n&eacute;cessaires. Par exemple, pour ins&eacute;rer 
    le nom de votre abonn&eacute; dans son courrier lors de l'envoi, placez dans 
    votre patron _AUTEUR_NOM_ (notez le tiret bas en d&eacute;but et fin de tag)."
+, 'utiliser_smtp' => 'Utiliser SMTP'
+, 'requiert_identification' => 'Requiert une identification'
 
 // exec/spiplistes_courrier_edit.php
+, 'Generer_le_contenu' => "G&eacute;n&eacute;rer le contenu"
+, 'Langue_du_courrier_' => "Langue du courrier :"
+
 // exec/spiplistes_courrier_gerer.php
 , 'Erreur_Adresse_email_invalide' => 'Erreur: l\'adresse email que vous avez fournie n\'est pas valide'
+, 'langue_' => '<strong>Langue :</strong>&nbsp;'
 
 // exec/spiplistes_courrier_previsu.php
 // exec/spiplistes_courriers_casier.php
@@ -734,6 +707,9 @@ liste."
 // exec/spiplistes_liste_gerer.php
 , 'forcer_les_abonnement_liste' => "Forcer les abonnements pour cette liste"
 , 'periodicite_tous_les_n_s' => "P&eacute;riodicit&eacute; : tous les @n@ @s@"
+, 'liste_sans_titre' => 'Liste sans titre'
+, 'statut_interne' => "Priv&eacute;"
+, 'statut_publique' => "Publique"
 
 // exec/spiplistes_listes_toutes.php
 // exec/spiplistes_maintenance.php
@@ -761,6 +737,7 @@ liste."
 , 'n_listes' => '@n@ listes'
 , 'utilisez_formulaire_ci_contre' => "Utilisez le formulaire ci-contre pour activer/d&eacute;activer cette option."
 , 'texte_boite_en_cours' => 'SPIP-Listes envoie un courrier.<p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>'
+, 'meleuse_suspendue_info' => "L'envoi des courriers en attente d'exp&eacute;dition est suspendu."
 
 // inc/spiplistes_dater_envoi.php
 // inc/spiplistes_destiner_envoi.php
@@ -770,6 +747,8 @@ liste."
 // inc/spiplistes_lister_courriers_listes.php
 // inc/spiplistes_listes_forcer_abonnement.php
 // inc/spiplistes_listes_selectionner_auteur.php
+, 'lien_trier_nombre' => "Trier par nombre d&acute;abonnements"
+
 // inc/spiplistes_mail.inc.php
 // inc/spiplistes_meleuse.php
 , 'erreur_sans_destinataire' => 'Erreur : aucun destinataire ne peut &ecirc;tre trouv&eacute; pour ce courrier'
@@ -790,6 +769,34 @@ liste."
 , 'abonnement_seule_liste_dispo' => "Abonnement &agrave; la seule liste disponible "
 , 'abo_listes' => 'Abonnement'
 , 'abonnement_0' => 'Abonnement'
+, 'abonnement_titre_mail'=>'Modifier votre abonnement'
+, 'lire' => 'Lire'
+, 'listes_de_diffusion_' => "Listes de diffusion "
+, 'jour' => 'jour'
+, 'jours' => 'jours'
+
+// tableau items *_options
+, 'Liste_de_destination' => "Liste de destination"
+, 'Listes_1_du_mois' => "Publiques, 1<sup><small>er</small></sup> du mois."
+, 'Liste_diffusee_le_premier_de_chaque_mois' => "Liste diffus&eacute;e le premier de chaque mois. "
+, 'Listes_autre' => "Autre pr&eacute;riodicit&eacute;"
+, 'Listes_autre_periode' => "Listes publiques autre pr&eacute;riodicit&eacute;"
+, 'Listes_diffusion_prive' => "Listes priv&eacute;es"
+, 'Liste_hebdo' => "Liste hebdomadaire"
+, 'Publiques_hebdos' => "Publiques, hebdomadaires"
+, 'Listes_diffusion_hebdo' => "Listes publiques hebdomadaires"
+, 'Liste_mensuelle' => "Liste mensuelle"
+, 'Publiques_mensuelles' => "Publiques, mensuelles"
+, 'Listes_diffusion_mensuelle' => "Listes publiques mensuelles"
+, 'Listes_diffusion_publiques_desc' => "L'abonnement &agrave; ces listes est propos&eacute; sur le site public."
+, 'Liste_annuelle' => "Liste annuelle"
+, 'Publiques_annuelles' => "Publiques, annuelles"
+, 'Listes_diffusion_annuelle' => "Listes publiques annuelles"
+, 'Listes_diffusion_publique' => 'Listes de diffusion publiques'
+, 'Listes_diffusion_privees' => 'Listes de diffusion priv&eacute;es'
+, 'Listes_diffusion_privees_desc' => "L'abonnement &agrave; ces listes est réserv&eacute;e aux administrateurs et auteurs du site."
+, 'Listes_diffusion_suspendue' => 'Listes de diffusion suspendues'
+, 'Listes_diffusion_suspendue_desc' => " "
 
 ///////
 // a priori, pas|plus utilise'
@@ -821,6 +828,18 @@ liste."
 , 'Historique_des_envois' => 'Historique des envois'
 , 'abonnement'=>'Vous souhaitez modifier votre abonnement &agrave; la lettre d\'information'
 , 'patron_disponibles' => 'Patrons disponibles'
+, 'liste_diff_publiques' => 'Listes de diffusion publiques<br /><i>La page du site public propose l\'inscription &agrave; ces listes.</i>'
+, 'messages_non_lus_grand' => 'Pas de nouveaux messages'
+, 'messages_repondre' => 'Nouvelle R&eacute;ponse'
+, 'Liste_abandonnee' => "Liste abandonn&eacute;e"
+, 'par_date' => 'Par date d\'inscription'
+, 'info_auto' => 'SPIP-Listes pour spip peut envoyer r&eacute;guli&egrave;rement aux inscrits, l\'annonce des derni&egrave;res nouveaut&eacute;s du site (articles et br&egrave;ves r&eacute;cemment publi&eacute;s).'
+, 'format2' => 'Format :'
+, 'liste_des_abonnes' => "Liste des abonn&eacute;s"
+, 'lieu' => 'Localisation'
+, 'efface_base' => 'a &eacute;t&eacute; effac&eacute; des listes et de la base'
+, 'lot_suivant' => 'Provoquer l\'envoi du lot suivant'
+, 'listes_internes' => 'Listes de diffusion internes<br /><i>Au moment de l\'envoi d\'un courrier, ces listes sont propos&eacute;es parmi les destinataires</i>'
 
 
 );
