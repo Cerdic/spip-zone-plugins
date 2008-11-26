@@ -28,7 +28,8 @@ function action_evenement_set($id_evenement){
 
 	$c = array();
 	foreach (array(
-		'titre', 'descriptif', 'lieu', 'id_parent'
+		'titre', 'descriptif', 'lieu', 'id_parent',
+		'inscription','places',
 	) as $champ)
 		$c[$champ] = _request($champ);
 

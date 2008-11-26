@@ -6,7 +6,7 @@
  *
  */
 
-	$GLOBALS['agenda_base_version'] = 0.20;
+	$GLOBALS['agenda_base_version'] = 0.22;
 	function agenda_verifier_base(){
 		$version_base = $GLOBALS['agenda_base_version'];
 		$current_version = 0.0;
@@ -52,7 +52,21 @@
 			if ($current_version<0.20){
 				include_spip('base/abstract_sql');
 				sql_alter("TABLE spip_rubriques ADD agenda tinyint(1) DEFAULT 0 NOT NULL");
-				#ecrire_meta('agenda_base_version',$current_version=0.20,'non');
+				ecrire_meta('agenda_base_version',$current_version=0.20,'non');
+			}
+			if ($current_version<0.21){
+				include_spip('base/abstract_sql');
+				sql_alter("TABLE spip_evenements ADD adresse text NOT NULL");
+				sql_alter("TABLE spip_evenements ADD inscription text NOT NULL");
+				sql_alter("TABLE spip_evenements ADD places text NOT NULL");
+				ecrire_meta('agenda_base_version',$current_version=0.21,'non');
+			}
+			if ($current_version<0.22){
+				include_spip('base/abstract_sql');
+				include_spip('base/create');
+				include_spip('base/aux');
+				maj_tables('spip_evenements_participants');
+				#ecrire_meta('agenda_base_version',$current_version=0.22,'non');
 			}
 		}
 	}

@@ -16,6 +16,8 @@ function agenda_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_evenements'][] = 'articles';
 	$interface['tables_jointures']['spip_mots'][]= 'mots_evenements';
 	$interface['tables_jointures']['spip_evenements'][] = 'mots_evenements';
+	$interface['tables_jointures']['spip_evenements'][] = 'evenements_participants';
+	$interface['tables_jointures']['spip_auteurs'][] = 'evenements_participants';
 
 	$interface['table_des_traitements']['LIEU'][]= 'propre(%s)';
 	
@@ -38,6 +40,9 @@ function agenda_declarer_tables_principales($tables_principales){
 			"titre"	=> "text NOT NULL",
 			"descriptif"	=> "text NOT NULL",
 			"lieu"	=> "text NOT NULL",
+			"adresse"	=> "text NOT NULL",
+			"inscription" => "tinyint(1) DEFAULT 0 NOT NULL",
+			"places" => "int(11) DEFAULT 0 NOT NULL",
 			"horaire" => "varchar(3) DEFAULT 'oui' NOT NULL",
 			"id_evenement_source"	=> "bigint(21) NOT NULL",
 			//"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
@@ -73,14 +78,23 @@ function agenda_declarer_tables_auxiliaires($tables_auxiliaires){
 	$tables_auxiliaires['spip_mots_evenements'] = array(
 		'field' => &$spip_mots_evenements,
 		'key' => &$spip_mots_evenements_key);
-		
-	global $exceptions_des_tables;
-	$exceptions_des_tables['evenements']['id_rubrique']=array('spip_articles', 'id_rubrique');
-	
-	global $table_date;
-	$table_date['evenements'] = 'date_debut';
-	// si on declare les tables dans $table_des_tables, il faut mettre le prefixe
 
+	
+	//-- Table des participants ----------------------
+	$spip_evenements_participants = array(
+			"id_evenement"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+			"id_auteur"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+			"date" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+			"reponse" => "char(3) default '?' NOT NULL", // oui, non, ?
+			);
+	
+	$spip_evenements_participants_key = array(
+			"PRIMARY KEY"	=> "id_evenement, id_auteur",
+			"KEY id_auteur"	=> "id_auteur");
+	
+	$tables_auxiliaires['spip_evenements_participants'] = array(
+		'field' => &$spip_evenements_participants,
+		'key' => &$spip_evenements_participants_key);
 
 	return $tables_auxiliaires;
 }

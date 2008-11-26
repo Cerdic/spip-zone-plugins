@@ -49,15 +49,32 @@
 			<textarea name='repetitions' id='repetitions'>#ENV{repetitions}</textarea>[
 			(#ENV{repetitions}|non)</div>]
 	    </li>
+	    <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+			<label for="descriptif"><:agenda:evenement_descriptif:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
+			]<textarea name='descriptif' rows='5' id='descriptif'>[(#ENV{descriptif})]</textarea>
+	    </li>
+	    <li class="editer_inscription[ (#ENV**{erreurs}|table_valeur{inscription}|oui)erreur]">
+		    <div class='choix'>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{inscription})</span>]
+					<input type='checkbox' class='checkbox' name='inscription' id='inscription' value="1"[ (#ENV{inscription}|oui)checked="checked"] />
+					<label for="inscription"><:agenda:label_inscription:></label>
+				</div>
+				<div class='choix'>
+				<label for="places"><:agenda:label_places:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{places})</span>]
+				<input type='text' class='text' name='places' id='places' value="[(#ENV{places})]" />
+				</div>
+	    </li>
 	    <li class="editer_lieu[ (#ENV**{erreurs}|table_valeur{lieu}|oui)erreur]">
 			<label for="lieu"><:agenda:evenement_lieu:></label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lieu})</span>]
 			<input type='text' class='text' name='lieu' id='lieu' value="[(#ENV{lieu})]" />
 	    </li>
-	    <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
-			<label for="descriptif"><:agenda:evenement_descriptif:></label>[
-			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
-			]<textarea name='descriptif' rows='5' id='descriptif'>[(#ENV{descriptif})]</textarea>
+	    <li class="editer_adresse[ (#ENV**{erreurs}|table_valeur{adresse}|oui)erreur]">
+			<label for="adresse"><:agenda:evenement_adresse:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse})</span>]
+			<textarea name='adresse' rows='3' id='adresse'>[(#ENV{adresse})]</textarea>
 	    </li>
 	    [<li class="editer_mots[ (#ENV**{erreurs}|table_valeur{mots}|oui)erreur]">
 	    <label for="mots"><:titre_page_mots_tous:></label>[
