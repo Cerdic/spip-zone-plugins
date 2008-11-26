@@ -183,7 +183,7 @@ function exec_spiplistes_maintenance () {
 	$sous_rubrique = "maintenance";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page(_T('spiplistes:spip_listes') . " - " . trim($titre_page), $rubrique, $sous_rubrique));
+	echo($commencer_page(_T('spiplistes:spiplistes') . " - " . trim($titre_page), $rubrique, $sous_rubrique));
 
 	if(!$flag_autorise) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());

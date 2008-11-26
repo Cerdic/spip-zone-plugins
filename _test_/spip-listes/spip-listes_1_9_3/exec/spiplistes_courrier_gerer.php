@@ -510,7 +510,7 @@ function exec_spiplistes_courrier_gerer () {
 	$sous_rubrique = "courrier_gerer";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page(_T('spiplistes:spip_listes') . " - " . trim($titre_page), $rubrique, $sous_rubrique));
+	echo($commencer_page(_T('spiplistes:spiplistes') . " - " . trim($titre_page), $rubrique, $sous_rubrique));
 
 	// la gestion des listes de courriers est reservee aux admins 
 	if($connect_statut != "0minirezo") {

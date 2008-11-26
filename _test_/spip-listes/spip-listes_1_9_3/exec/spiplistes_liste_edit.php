@@ -119,7 +119,7 @@ function exec_spiplistes_liste_edit(){
 	$sous_rubrique = "liste_edit";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page(_T('spiplistes:spip_listes') . " - " . $titre_page, $rubrique, $sous_rubrique));
+	echo($commencer_page(_T('spiplistes:spiplistes') . " - " . $titre_page, $rubrique, $sous_rubrique));
 
 	// la gestion des listes de courriers est reservee aux admins 
 	if(!$flag_editable) {

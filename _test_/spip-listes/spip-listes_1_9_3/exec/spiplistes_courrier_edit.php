@@ -117,7 +117,7 @@ function exec_spiplistes_courrier_edit(){
 	$sous_rubrique = "courrier_edit";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page(_T('spiplistes:spip_listes') . " - " . $titre_page, $rubrique, $sous_rubrique));
+	echo($commencer_page(_T('spiplistes:spiplistes') . " - " . $titre_page, $rubrique, $sous_rubrique));
 
 	if(!$flag_editable) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());

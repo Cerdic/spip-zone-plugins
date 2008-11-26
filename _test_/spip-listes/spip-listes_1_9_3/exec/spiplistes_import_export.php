@@ -147,7 +147,7 @@ function exec_spiplistes_import_export(){
 	$sous_rubrique = "import_export";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page(_T('spiplistes:spip_listes') . " - " . _T('spiplistes:import_export'), $rubrique, $sous_rubrique));
+	echo($commencer_page(_T('spiplistes:spiplistes') . " - " . _T('spiplistes:import_export'), $rubrique, $sous_rubrique));
 
 	// la gestion du courrier est réservée aux admins 
 	if (!$flag_autorise) {

@@ -86,7 +86,7 @@ function exec_spiplistes_listes_toutes(){
 	$sous_rubrique = "listes_toutes";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page(_T('spiplistes:spip_listes') . " - " . $titre_page, $rubrique, $sous_rubrique));
+	echo($commencer_page(_T('spiplistes:spiplistes') . " - " . $titre_page, $rubrique, $sous_rubrique));
 	
 	// la gestion des abonnes est reservee aux admins 
 	if(!$flag_editable) {

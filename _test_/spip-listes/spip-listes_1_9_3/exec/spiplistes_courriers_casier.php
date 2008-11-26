@@ -225,7 +225,7 @@ spiplistes_log("SEND id_courrier #$id_courrier TO #$id_auteur_test TEST BY id_au
 	$sous_rubrique = "courrier_casier";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page(_T('spiplistes:spip_listes') . " - " . trim($titre_page), $rubrique, $sous_rubrique));
+	echo($commencer_page(_T('spiplistes:spiplistes') . " - " . trim($titre_page), $rubrique, $sous_rubrique));
 	
 	// la gestion des courriers est réservée aux admins 
 	if($connect_statut != "0minirezo") {

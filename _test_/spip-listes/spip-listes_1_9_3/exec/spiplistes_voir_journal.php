@@ -77,7 +77,7 @@ function exec_spiplistes_voir_journal () {
 	$sous_rubrique = _SPIPLISTES_PREFIX;
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page(_T('spiplistes:spip_listes') . " - " . $titre_page, $rubrique, $sous_rubrique));
+	echo(_T('spiplistes:spiplistes') . " - " . $titre_page, $rubrique, $sous_rubrique));
 
 	if(!$autoriser) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
