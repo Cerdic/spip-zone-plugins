@@ -1,7 +1,7 @@
 <?php
 
 //integration des fonctions necessaires de SPIP 1.9.3
-if(isset($GLOBALS['spip_version']) AND version_compare($GLOBALS['spip_version'],'1.93','<'))
+if(isset($GLOBALS['spip_version']) AND version_compare($GLOBALS['spip_version'],'1.9300','<'))
 	include_spip('193_fonctions');
 
 function balise_NUAGE_dist($p) {
