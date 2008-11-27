@@ -154,7 +154,10 @@ function spiplistes_ecrire_key_in_serialized_meta ($key, $value, $meta_name) {
  * @return la version du fichier plugin.xml 
  */
 function spiplistes_real_version_get ($prefix) {
-	$r = spiplistes_real_tag_get($prefix, 'version');
+	static $r;
+	if($r === null) {
+		$r = spiplistes_real_tag_get($prefix, 'version');
+	}
 	return ($r);
 }
 
@@ -172,6 +175,7 @@ function spiplistes_current_version_get ($prefix) {
 }
 
 function spiplistes_real_tag_get ($prefix, $s) {
+	include_spip("inc/plugin");
 	$dir = spiplistes_get_meta_dir($prefix);
 	$f = _DIR_PLUGINS.$dir."/"._FILE_PLUGIN_CONFIG;
 	if(is_readable($f) && ($c = file_get_contents($f))) {

@@ -444,16 +444,22 @@ $spiplistes_items = array(
 	$spiplistes_items[_SPIPLISTES_MONTHLY_LIST]['tab_t'] = _T('spiplistes:Liste_diffusee_le_premier_de_chaque_mois');
 	
 	$spiplistes_version = $meta['spiplistes_version'];
+	$spiplistes_real_version = spiplistes_real_version_get(_SPIPLISTES_PREFIX);
 	$spiplistes_base_version = $meta['spiplistes_base_version'];
-
+	$spiplistes_real_base_version = spiplistes_real_version_base_get(_SPIPLISTES_PREFIX);
+	
 	if(
-		($spiplistes_version && (spiplistes_real_version_get(_SPIPLISTES_PREFIX) > $spiplistes_version))
+		($spiplistes_version && ($spiplistes_real_version > $spiplistes_version))
 		||
-		($spiplistes_base_version && (spiplistes_real_version_base_get(_SPIPLISTES_PREFIX) > $spiplistes_base_version))
+		($spiplistes_base_version && ($spiplistes_real_base_version > $spiplistes_base_version))
 		) {
 		// faire upgrade auto
 		include_spip('base/spiplistes_upgrade');
 		spiplistes_upgrade();
 	}
-
+spiplistes_log("version: ".$spiplistes_version . " "
+	. "real_version: ".$spiplistes_real_version . " "
+	. "base_version: ".$spiplistes_base_version . " "
+	. "real_base_version: ".$spiplistes_real_base_version
+	, _SPIPLISTES_LOG_DEBUG);
 ?>
