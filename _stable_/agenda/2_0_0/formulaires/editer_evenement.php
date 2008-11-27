@@ -11,9 +11,12 @@ include_spip('inc/editer');
 function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_article=0, $retour='', $lier_trad = 0, $config_fonc='evenements_edit_config', $row=array(), $hidden=''){
 	
 	$valeurs = formulaires_editer_objet_charger('evenement',$id_evenement,$id_article,0,$retour,$config_fonc,$row,$hidden);
-	
+
 	if (!$valeurs['id_article'])
 		$valeurs['id_article'] = $id_article;
+	$valeurs['id_parent'] = $valeurs['id_article'];
+	unset($valeurs['id_article']);
+
 	if (!$valeurs['titre'])
 		$valeurs['titre'] = sql_getfetsel('titre','spip_articles','id_article='.intval($valeurs['id_article']));
 	// fixer la date par defaut en cas de creation d'evenement
@@ -61,6 +64,9 @@ function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_art
 	
 	if ($date_debut AND $date_fin AND $date_fin<$date_debut)
 		$erreurs['date_fin'] = _L('la date de fin doit etre posterieure a la date de debut');
+	
+	if (!_request('id_parent'))
+		$erreurs['message_erreur'] = _L('Vous devez indiquer un article');
 
 	#if (!count($erreurs))
 	#	$erreurs['message_erreur'] = 'ok?';
