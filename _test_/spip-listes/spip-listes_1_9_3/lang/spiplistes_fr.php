@@ -34,7 +34,7 @@ Le premier champ adresse@mail est obligatoire. Les deux autres champs peuvent
 
 //A
 ,
-'abonnement_bouton'=>'Modifier votre abonnement',
+
 'abonnement_cdt' => '<a href=\'http://bloog.net/spip-listes/\'>SPIP-Listes</a>' ,
 'abonnement_change_format'=>'Vous pouvez changer de format de r&eacute;ception ou vous d&eacute;sabonner : '
 , 'abonnement_mail_text' => 'Pour modifier votre abonnement, veuillez vous rendre à l\'adresse suivante : '
@@ -774,6 +774,7 @@ liste."
 , 'listes_de_diffusion_' => "Listes de diffusion "
 , 'jour' => 'jour'
 , 'jours' => 'jours'
+, 'abonnement_bouton'=>'Modifier votre abonnement'
 
 // tableau items *_options
 , 'Liste_de_destination' => "Liste de destination"
