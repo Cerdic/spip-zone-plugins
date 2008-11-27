@@ -14,6 +14,7 @@ function formulaires_participer_evenement_charger_dist($id_evenement){
 	if (!$row = sql_fetsel('inscription,places','spip_evenements','id_evenement='.intval($id_evenement))
 	  OR !$row['inscription'])
 		return false;
+	$valeurs['id'] = $id_evenement;
 	
 	$valeurs['reponse'] = sql_getfetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']));
 	// si les places sont comptes, regarder si il en reste
@@ -65,8 +66,20 @@ function formulaires_participer_evenement_traiter_dist($id_evenement){
 	}
 	else
 		sql_insertq('spip_evenements_participants',array('id_evenement'=>$id_evenement,'id_auteur'=>$GLOBALS['visiteur_session']['id_auteur'],'reponse'=>$reponse));
-	
-	$message = _T('agenda:participation_prise_en_compte');
+
+	$retour = array('editable'=>true);
+	if (!$reponse = sql_getfetsel('reponse','spip_evenements_participants','id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']))
+	OR $reponse!=_request('reponse')){
+		$retour['message_erreur'] = _T('agenda:probleme_technique');
+	}
+	else {
+		if ($reponse=='oui')
+			$message = _T('agenda:participation_prise_en_compte');
+		elseif ($reponse=='?')
+			$message = _T('agenda:participation_incertaine_prise_en_compte');
+		else
+			$message = _T('agenda:absence_prise_en_compte');
+	}
 	return array('message_ok'=>$message,'editable'=>true);
 }
 

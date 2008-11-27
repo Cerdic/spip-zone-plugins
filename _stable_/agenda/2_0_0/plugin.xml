@@ -15,6 +15,10 @@
 	<install>base/agenda_upgrade.php</install>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>agenda_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/agenda_evenements.php</inclure>
 	</pipeline>
