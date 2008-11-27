@@ -2,6 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;    #securite
 
+
 // http://doc.spip.org/@balise_URL_LOGOUT
 function balise_TOTAL_ITEM_PANIER ($p) {return calculer_balise_dynamique($p,'TOTAL_ITEM_PANIER', array());
 }
