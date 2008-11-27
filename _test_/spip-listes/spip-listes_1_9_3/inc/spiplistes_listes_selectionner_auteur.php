@@ -223,7 +223,7 @@ function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut
 		$action_url = generer_action_auteur($a_script, $a_param);
 		$result = "<a href='" . $exec_url . "'"
 				. " onclick=\"return AjaxSqueeze('$action_url', '$id_dest', '$exec_url', event)\""
-				. "' title='".$title."'>".$html."</a>";
+				. " title='".$title."'>".$html."</a>";
 		return($result);
 	}
 

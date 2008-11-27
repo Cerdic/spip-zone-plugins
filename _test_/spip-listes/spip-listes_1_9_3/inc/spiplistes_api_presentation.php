@@ -259,9 +259,14 @@ function spiplistes_fin_raccourcis ($return = false) {
 function spiplistes_boite_raccourcis ($return = false) {
 	$connect_id_auteur = intval($GLOBALS['connect_id_auteur']);
 	
+	$flag_webmestre = autoriser('webmestre','','',$connect_id_auteur);
+	
 	$result = ""
+		. (($flag_webmestre) ? spiplistes_raccourci_journal_jquery() : "")
 		// Les raccourcis
 		. spiplistes_debut_raccourcis(_T('titre_cadre_raccourcis'), true, true)
+	;
+	$result .= ""
 		. "<ul class='verdana2' style='list-style: none;padding:1ex;margin:0;'>\n"
 		. "<li>"
 		. icone_horizontale(
@@ -282,7 +287,7 @@ function spiplistes_boite_raccourcis ($return = false) {
 			)
 		. "</li>\n"
 		;
-	if(autoriser('webmestre','','',$connect_id_auteur)) {
+	if($flag_webmestre) {
 		$result .= ""
 			. "<li>"
 			. icone_horizontale(

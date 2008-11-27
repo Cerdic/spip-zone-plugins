@@ -152,11 +152,11 @@ function exec_spiplistes_liste_edit(){
 	$page_result .= ""
 		. debut_cadre_formulaire("", true)
 		. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
-		. "<tr width='100%'>"
+		. "<tr>"
 		. "<td>"
 		. $gros_bouton_retour
 		. "</td>"
-		. "<td><img src='"._DIR_IMG_PACK."/rien.gif' width='10'></td>\n"
+		. "<td><img src='"._DIR_IMG_PACK."rien.gif' alt='' width='10' /></td>\n"
 		. "<td width='100%'>"
 		.	(
 				(!$id_liste)
@@ -190,7 +190,8 @@ function exec_spiplistes_liste_edit(){
 		. "<br />"._T('spiplistes:txt_abonnement')
 		// boite edition texte
 		. afficher_barre('document.formulaire.texte')
-		. "<textarea id='text_area' name='texte' ".$GLOBALS['browser_caret']." class='formo' rows='".(($spip_ecran == "large") ? 28 : 20)."' cols='40' wrap=soft>"
+		. "<textarea id='text_area' name='texte' ".$GLOBALS['browser_caret']
+			." class='formo' rows='".(($spip_ecran == "large") ? 28 : 20)."' cols='40'>\n"
 		. $texte
 		. "</textarea>\n"
 		// pied de page

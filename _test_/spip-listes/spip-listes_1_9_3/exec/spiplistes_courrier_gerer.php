@@ -328,7 +328,7 @@ function exec_spiplistes_courrier_gerer () {
 		
 		if(($statut == _SPIPLISTES_COURRIER_STATUT_REDAC) || ($statut == _SPIPLISTES_COURRIER_STATUT_READY)) {
 		// Le courrier peut-etre modifie si en preparation 
-			$gros_bouton_modifier = 
+			$gros_bouton_modifier = "<!-- bouton modifier -->\n" .
 				icone (
 					_T('spiplistes:Modifier_ce_courrier') // legende bouton
 					, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_EDIT,'id_courrier='.$id_courrier) // lien
@@ -336,7 +336,8 @@ function exec_spiplistes_courrier_gerer () {
 					, "edit.gif" // image de la fonction. Ici, le crayon
 					, '' // alignement
 					, false // pas echo, demande retour
-					)
+					) 
+					. "\n"
 				;
 		}
 		
@@ -463,8 +464,8 @@ function exec_spiplistes_courrier_gerer () {
 				break;
 			case _SPIPLISTES_COURRIER_STATUT_READY:
 				$str_statut_courrier = ""
-					. "<p class='verdana2'>"._T('spiplistes:message_presque_envoye') . "<br />"
-					. $str_destinataire . "<br />"
+					. _T('spiplistes:message_presque_envoye') . "<br />"
+					. $str_destinataire . "<br />\n"
 					;
 				break;
 			case _SPIPLISTES_COURRIER_STATUT_ENCOURS:
@@ -496,7 +497,7 @@ function exec_spiplistes_courrier_gerer () {
 					;
 		} // end switch()
 		if(!empty($str_statut_courrier)) {
-			$str_statut_courrier = "<div class='verdana2'>".$str_statut_courrier."</div>";
+			$str_statut_courrier = "<span class='verdana2'>".$str_statut_courrier."</span>";
 		}
 	} // end if()
 	
@@ -546,17 +547,17 @@ function exec_spiplistes_courrier_gerer () {
 				. $gros_bouton_arreter_envoi
 				. $gros_bouton_dupliquer
 				."</td>"
-			. "</tr>"
+			. "</tr>\n"
 			. "<tr> "
 			. "<td>"
-			. "<p class='verdana2' style='font-size:120%;color:red;font-weight:bold;'>$le_type</p>"
-			. "<p class='verdana2'>$str_statut_courrier</p>"
+			. "<p class='verdana2' style='font-size:120%;color:red;font-weight:bold;'>$le_type</p>\n"
+			. "<p class='verdana2'>$str_statut_courrier</p>\n"
 			. "</td>"
-			. "</tr>"
+			. "</tr>\n"
 			. "</table>"
 			. $boite_confirme_envoi
 			. $boite_selection_destinataire
-			. "<br />"
+			. "<br />\n"
 			//
 			// boite courrier au format html
 			. debut_cadre_couleur('', true)

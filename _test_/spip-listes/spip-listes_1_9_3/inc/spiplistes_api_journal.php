@@ -99,6 +99,15 @@ function spiplistes_raccourci_journal ($envelopper = true) {
 			;
 	}
 
+	return($result);
+}
+
+/*
+ * jQuery pour afficher le journal
+ * @return le code jQuery à placer au bon endroit
+ */
+function spiplistes_raccourci_journal_jquery () {
+
 	$action = "spiplistes_journal";
 	$action_arg = "";
 	$journal_url_action = generer_action_auteur($action, $action_arg);
@@ -277,7 +286,7 @@ $(document).ready(function(){
 }); // end $(document).ready()
 	";
 	
-	$result .= spiplistes_envelopper_script(spiplistes_compacter_script($js, 'js'), 'js');
+	$result = spiplistes_envelopper_script(spiplistes_compacter_script($js, 'js'), 'js');
 	
 	return($result);
 }

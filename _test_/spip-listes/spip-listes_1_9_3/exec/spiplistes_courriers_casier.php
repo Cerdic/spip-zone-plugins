@@ -52,9 +52,9 @@ function spiplistes_afficher_pile_messages() {
 		. "\n"
 		. "<table class='spiplistes-tab' width='100%'  border='0' cellspacing='1' cellpadding='0'>\n" 
 		. "<tr>\n"
-		. "<th>"._T('spiplistes:envoi_patron')."</td>\n"
-		. "<th>"._T('spiplistes:sur_liste')."</td>\n"
-		. "<th>"._T('spiplistes:prochain_envoi_prevu')."</td>\n"
+		. "<th>"._T('spiplistes:envoi_patron')."</th>\n"
+		. "<th>"._T('spiplistes:sur_liste')."</th>\n"
+		. "<th>"._T('spiplistes:prochain_envoi_prevu')."</th>\n"
 		. "</tr>\n"
 		;
 
