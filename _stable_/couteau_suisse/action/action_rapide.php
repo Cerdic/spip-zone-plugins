@@ -25,7 +25,7 @@ cs_log("INIT : action_action_rapide_dist() - Une action rapide a ete demandee !"
 		$arg = _request('arg');
 	}
 
-//	spip_log("action 'action_rapide' du Couteau suisse : $arg / "._request('submit'));
+spip_log("action 'action_rapide' du Couteau suisse : $arg");
 //	spip_log($_POST); spip_log($_GET);
 
 	switch ($arg) {

@@ -14,7 +14,7 @@ function corbeille_action_rapide() {
 		$objets[] = "<label><input type='checkbox' value='$table:$ids'".($nb?" checked='checked'":"")." name='$table'/>$obj[libelle_court].
 <span class='ar_edit_info'>$infos</span></label>";
 	}
-	return ajax_action_auteur('action_rapide', 'corbeille', 'admin_couteau_suisse', "arg=purger_cache&cmd=descrip&outil=corbeille#cs_action_rapide",
+	return ajax_action_auteur('action_rapide', 'corbeille', 'admin_couteau_suisse', "arg=retour_normal&cmd=descrip&outil=corbeille#cs_action_rapide",
 			"\n<div style='padding:0.4em;'><fieldset><legend>"._T('couteauprive:corbeille_vider').'</legend>'
 			. join("<br/>\n",$objets) . "<div style='text-align: right;'><input class='fondo' type='submit' value=\""
 			. attribut_html(_T('couteauprive:corbeille_objets_vider'))

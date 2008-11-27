@@ -1085,15 +1085,16 @@ add_outil( array(
 	'id' => 'corbeille',
 	'categorie' => 'admin',
 	'version-min' => '1.9300',
-	'code:options' => "if(%%arret_optimisation%% && !function_exists('genie_optimiser')) { 
-	// surcharge de la fonction d'optimisation de SPIP (inc/optimiser.php)
-	function genie_optimiser(\$t='foo'){ include_spip('optimiser','genie'); optimiser_base_une_table(); return -(mktime(2,0,0) + rand(0, 3600*4)); }\n}",
+	'code:options' => "%%arret_optimisation%%",
 ));
 add_variable( array(
 	'nom' => 'arret_optimisation',
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
 	'defaut' => 0,
+	'code:%s' => "if(!function_exists('genie_optimiser')) { 
+	// surcharge de la fonction d'optimisation de SPIP (inc/optimiser.php)
+	function genie_optimiser(\$t='foo'){ include_spip('optimiser','genie'); optimiser_base_une_table(); return -(mktime(2,0,0) + rand(0, 3600*4)); }\n}",
 ));
 
 // Ajout des outils personnalises

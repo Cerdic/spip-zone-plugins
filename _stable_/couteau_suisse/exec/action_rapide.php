@@ -31,18 +31,12 @@ function exec_action_rapide_dist() {
 
 	switch ($arg) {
 
-	// pour gerer les packs de configuration...
+	// pour gerer les packs de configuration : mode non ajax, rien a faire.
 	case 'sauve_pack':
-	// outil "spip_cache" : purger le cache
-	case 'purger_cache':
-	// forms[0] : tout purger (cas SPIP < 2.0)
-	case 'edit_urls_0': // idem edit_urls2_1
-	// forms[1] : editer un objet (cas SPIP < 2.0)
-	case 'edit_urls_1': // idem edit_urls2_1
-	// forms[0] : tout purger (cas SPIP >= 2.0)
-	case 'edit_urls2_0': // idem edit_urls2_1
-	// forms[1] : editer un objet (cas SPIP >= 2.0)
-	case 'edit_urls2_1':
+		break;
+
+	// retour normal des action rapides du couteau suisse : affichage du bloc au sein de la description d'un outil
+	case 'retour_normal':
 cs_log("INIT : exec_action_rapide_dist() - Preparation du retour par Ajax (donnees transmises par GET)");
 		$script = _request('script');
 		$outil = _request('outil');

@@ -42,9 +42,13 @@ cs_log('INIT : cout_options, '.$_SERVER['REQUEST_URI']);
 
 // on passe son chemin si un reset general est demande
 $zap = (_request('cmd')=='resetall')
+;/* //obsolete
 // idem si la page est un css ou un js (sauf si le cache est desactive)
  || (!($metas_outils['spip_cache']['actif'] && $metas_vars['radio_desactive_cache3'])
 		&& (isset($_GET['page']) && preg_match(',(\.(css|js)$|style_prive(_ie)?),', $_GET['page'])));
+*/
+//spip_log("cout_options sur '$_GET[page]', ".(preg_match(',(\.(css|js)$|style_prive(_ie)?),', $_GET['page'])?' = css/js, donc zap !!':''));
+//spip_log("URL='".self()."', zap=".($zap?'oui':'non'));
 
 // lancer maintenant les options du Couteau Suisse
 if($zap) cs_log(' FIN : cout_options sans initialisation du plugin'); else {
@@ -98,7 +102,7 @@ if($zap) cs_log(' FIN : cout_options sans initialisation du plugin'); else {
 			cs_log(" -- fichier '$f_mo' toujours introuvable !!");
 	} else cs_log(" -- pas d'inclusion de '$f_mo' ; on est deja passe par ici !?");
 
-	// si une recompilation a eu lieu avec succes...
+	// si une recompilation a eu lieu...
 	if ($GLOBALS['cs_utils']) {
 		// lancer la procedure d'installation pour chaque outil
 		cs_log(' -- cs_installe_outils...');

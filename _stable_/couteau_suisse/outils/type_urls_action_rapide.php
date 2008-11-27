@@ -18,7 +18,7 @@ function type_urls_action_rapide() {
 	$arg = defined('_SPIP19300')?'edit_urls2_':'edit_urls_';
 	foreach($fd as $i=>$f) {
 		// syntaxe : ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
-		$res .= ajax_action_auteur('action_rapide', $arg.$i, 'admin_couteau_suisse', "arg={$arg}{$i}&modif=oui&cmd=descrip&outil=type_urls#cs_action_rapide", $f, '', 'function() { jQuery(\'#ar_chercher\', this).click();}')."\n";
+		$res .= ajax_action_auteur('action_rapide', $arg.$i, 'admin_couteau_suisse', "arg=retour_normal&modif=oui&cmd=descrip&outil=type_urls#cs_action_rapide", $f, '', 'function() { jQuery(\'#ar_chercher\', this).click();}')."\n";
 	}
 	return $res;
 }
