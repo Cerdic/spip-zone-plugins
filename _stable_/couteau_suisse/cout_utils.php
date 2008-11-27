@@ -278,9 +278,7 @@ function cs_initialise_includes($count_metas_outils) {
 	// liste des traitements utilises
 	$traitements_utilises =
 	// variables temporaires
-	$temp_css = $temp_js = $temp_jq = $temp_jq_init = $temp_filtre_imprimer = array();
-	// pour la fonction inclure_page()
-	include_spip('public/assembler');
+	$temp_html = $temp_css = $temp_js = $temp_jq = $temp_jq_init = $temp_filtre_imprimer = array();
 	// inclure d'office outils/cout_fonctions.php
 	if ($temp=cs_lire_fichier_php("outils/cout_fonctions.php"))
 		$infos_fichiers['code_fonctions'][] = $temp;
@@ -307,13 +305,11 @@ function cs_initialise_includes($count_metas_outils) {
 			// recherche d'un fichier .css, .css.html et/ou .js eventuellement present dans outils/
 			if ($f=find_in_path($_css = "outils/$inc.css")) $cs_metas_pipelines['header'][] = cs_insert_header($f, 'css');
 			if ($f=find_in_path("outils/$inc.js")) $cs_metas_pipelines['header'][] = cs_insert_header($f, 'js');
-			 // en fait on peut pas car les balises vont devoir etre traitees et les traitements ne sont pas encore dispo !
-			if ($f=find_in_path("outils/$inc.css.html")) { 
-				// ici, cout_fonction.php va etre appele pour traiter les balises du css
-				$GLOBALS['cs_options']++;
-				$f = inclure_page($_css, array('fond'=>$_css));
-				$GLOBALS['cs_options']--;
-				$temp_css[] = $f['texte']; 
+			 // en fait on peut pas compiler ici car les balises vont devoir etre traitees et les traitements ne sont pas encore dispo !
+			if ($f=find_in_path("outils/$inc.css.html")) {
+				// le code est mis de cote. il sera compile plus tard au moment du pipeline grace a cs_compile_header()
+				lire_fichier($f, $ff);
+				$temp_html[] = $ff;
 			}
 			// recherche d'un code inline eventuellement propose
 			if (isset($outil['code:spip_options'])) $infos_fichiers['code_spip_options'][] = $outil['code:spip_options'];
@@ -334,6 +330,9 @@ function cs_initialise_includes($count_metas_outils) {
 	if(isset($infos_pipelines['bt_toolbox']))
 		$temp_css[] = 'span.cs_BT {background-color:#FFDDAA; font-weight:bold; border:1px outset #CCCC99; padding:0.2em 0.3em;}
 span.cs_BTg {font-size:140%; padding:0 0.3em;}';
+	// prise en compte des css.html qu'il faudra compiler plus tard
+	if (count($temp_html))
+		$temp_css[] = '<cs_html>'.join("\n", $temp_html).'</cs_html>';
 	// concatenation des css inline, js inline et filtres trouves
 	if (count($temp_css)) {
 		$temp = array("<style type=\"text/css\">\n".compacte_css(join("\n", $temp_css))."\n</style>");
@@ -350,6 +349,8 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 			.compacte_js(join("\n", $temp_js))."\n// --></script>\n");
 		$cs_metas_pipelines['header'] = is_array($cs_metas_pipelines['header'])?array_merge($temp, $cs_metas_pipelines['header']):$temp;
 	}
+	// join final...
+	$cs_metas_pipelines['header'] = join("\n", $cs_metas_pipelines['header']);
 	// mise en code des traitements trouves
 	foreach($traitements_utilises as $b=>$balise) {
 		foreach($balise as $p=>$precision) {
@@ -530,7 +531,6 @@ function cs_optimise_if($code, $root=true) {
 	}
 	return $code;
 }
-
 
 // lance la fonction d'installation de chaque outil actif, si elle existe.
 // la fonction doit etre ecrite sous la forme monoutil_installe() et placee

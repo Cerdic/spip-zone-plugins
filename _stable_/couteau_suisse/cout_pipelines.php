@@ -94,11 +94,14 @@ function couteau_suisse_header_prive($flux_){
 	$flux = '';
 	if (isset($cs_metas_pipelines['header_prive']))
 		eval($cs_metas_pipelines['header_prive']);
-	if (isset($cs_metas_pipelines['header']))
-		$flux .= join("\n", $cs_metas_pipelines['header']);
+	if (isset($cs_metas_pipelines['header'])) {
+		// si une compilation est necessaire...
+		if (strpos($cs_metas_pipelines['header'], '<cs_html>')!==false) cs_compile_header();
+		$flux .= $cs_metas_pipelines['header'];
+	}
 	$flux = strlen(trim($flux))
 		?"\n<!-- Debut header du Couteau Suisse -->\n$flux<!-- Fin header du Couteau Suisse -->\n\n"
-		:$flux =  "\n<!-- Rien dans les metas -->\n\n";
+		:$flux =  "\n<!-- Rien dans les metas du Couteau Suisse -->\n\n";
 	return $flux_.$flux;
 }
 
@@ -119,11 +122,14 @@ function couteau_suisse_insert_head($flux_){
 	$flux = '';
 	if (isset($cs_metas_pipelines['insert_head']))
 		eval($cs_metas_pipelines['insert_head']);
-	if (isset($cs_metas_pipelines['header']))
-		$flux .=  join("\n", $cs_metas_pipelines['header']);
+	if (isset($cs_metas_pipelines['header'])) {
+		// si une compilation est necessaire...
+		if (strpos($cs_metas_pipelines['header'], '<cs_html>')!==false) cs_compile_header();
+ 		$flux .= $cs_metas_pipelines['header'];
+	}
 	$flux = strlen(trim($flux))
 		?"\n<!-- Debut header du Couteau Suisse -->\n$flux<!-- Fin header du Couteau Suisse -->\n\n"
-		:$flux =  "\n<!-- Rien dans les metas -->\n\n";
+		:$flux =  "\n<!-- Rien dans les metas du Couteau Suisse -->\n\n";
 	return $flux_.$flux;
 }
 
@@ -204,6 +210,37 @@ function couteau_suisse_bt_gadgets($params) {
 	if (!isset($cs_metas_pipelines['bt_toolbox'])) return $params;
 	$params['flux'] .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['couteau_suisse']."','');", _DIR_PLUGIN_COUTEAU_SUISSE."/img/couteau-24.gif", _T('couteauprive:raccourcis_barre'), $params['help']);
 	return $params;
+}
+
+// callback pour la fonction cs_compile_pipe()
+function cs_compile_header_callback($matches) {
+cs_log(" -- compilation d'un header. Code CSS : $matches[1]");
+	return cs_recuperer_code($matches[1]);
+}
+
+// recherche et compilation par SPIP du contenu d'un fichier .html : <cs_html>contenu</cs_html>
+function cs_compile_header() {
+	global $cs_metas_pipelines;
+//cs_log(" -- recherche de compilations CSS necessaires.");
+	$cs_metas_pipelines['header'] = preg_replace_callback(',<cs_html>(.*)</cs_html>,Ums', 'cs_compile_header_callback', $cs_metas_pipelines['header']);
+	// sauvegarde en metas !
+	ecrire_meta('tweaks_pipelines', serialize($cs_metas_pipelines));
+	ecrire_metas();
+}
+
+/**
+ * recupere le resultat du calcul d'une compilation de code de squelette (marcimat)
+ * $coucou = $this->recuperer_code('[(#AUTORISER{ok}|oui)coucou]');
+ */
+function cs_recuperer_code(&$code) {//, $contexte=array(), $options = array(), $connect=''){
+	$fond = _DIR_CS_TMP . md5($code);
+	$base = $fond . '.html';
+	if (!file_exists($base) OR $GLOBALS['var_mode']=='recalcul')
+		ecrire_fichier($base, $code);
+	//return recuperer_fond($fond, $contexte, $options, $connect);
+	include_spip('public/assembler');
+	$f = inclure_page($fond, array('fond'=>$fond));
+	return $f['texte'];
 }
 
 /*
