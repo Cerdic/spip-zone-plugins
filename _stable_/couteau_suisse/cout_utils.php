@@ -350,7 +350,7 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 		$cs_metas_pipelines['header'] = is_array($cs_metas_pipelines['header'])?array_merge($temp, $cs_metas_pipelines['header']):$temp;
 	}
 	// join final...
-	$cs_metas_pipelines['header'] = join("\n", $cs_metas_pipelines['header']);
+	if(is_array($cs_metas_pipelines['header']))	$cs_metas_pipelines['header'] = join("\n", $cs_metas_pipelines['header']);
 	// mise en code des traitements trouves
 	foreach($traitements_utilises as $b=>$balise) {
 		foreach($balise as $p=>$precision) {
