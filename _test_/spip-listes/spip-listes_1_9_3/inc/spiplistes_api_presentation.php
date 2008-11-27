@@ -90,7 +90,7 @@ function spiplistes_onglets ($rubrique, $onglet) {
 			. onglet(_T('spiplistes:listes_de_diffusion_'), generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE)
 				, 'listes_toutes', $onglet
 				, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply-to-all-24.gif")
-			. onglet(_T('spiplistes:Suivi_des_abonnements'), generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE)
+			. onglet(_T('spiplistes:suivi'), generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE)
 				, 'abonnes_tous', $onglet
 				, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."addressbook-24.gif")
 			. fin_onglet()
@@ -756,17 +756,12 @@ function spiplistes_nb_abonnes_liste_str_get ($id_liste, $nb_abos = false, $html
 	$result =
 		($nb_abos)
 		?	""
-			//. "(" 
 			. spiplistes_singulier_pluriel_str_get($nb_abos, _T('spiplistes:nb_abonnes_sing'), _T('spiplistes:nb_abonnes_plur')) 
 			.	(
 				$absents 
-				? " - " . _T('spiplistes:_dont_')
-					. spiplistes_singulier_pluriel_str_get($absents, _T('spiplistes:desabonne_sing')
-						, _T('spiplistes:desabonnes_plur'))
+				? _T('spiplistes:_dont_n_sans_format_reception', array('n' => $absents))
 				: ""
 				)
-			//. ")"
-		//: "("._T('spiplistes:sans_abonne').")"
 		: _T('spiplistes:sans_abonne')
 		;
 	return ($result);
@@ -853,7 +848,7 @@ function spiplistes_terminer_page_message ($message) {
 
 // termine la page (a employer qd droits insuffisants)
 function spiplistes_terminer_page_non_autorisee ($return = true) {
-	spiplistes_terminer_page_message (_T('spiplistes:acces_a_la_page'), $return);
+	spiplistes_terminer_page_message (_T('avis_non_acces_page'), $return);
 }
 
 function spiplistes_debut_block_visible ($id="") {
@@ -1190,5 +1185,24 @@ function spiplistes_plugin_aide ($fichier_exec_aide, $aide='', $return=true) {
 	else echo($result);
 } // spiplistes_plugin_aide()
 
+/*
+ * @return date, chaine html
+ * @param $date 
+ */
+function spiplistes_affdate ($date) {
+	$result = "";
+	if($date) {
+		$proch = round((strtotime($date) - time()) / _SPIPLISTES_TIME_1_DAY);
+		$result = 
+			(
+			($proch > 1)
+			? affdate_jourcourt($date)
+			: "<strong>"._T($proch ? 'date_demain' : 'date_aujourdhui')."</strong>"
+			)
+			. "<br />".heures_minutes($date)
+			;
+	}
+	return($result);
+}
 
 ?>

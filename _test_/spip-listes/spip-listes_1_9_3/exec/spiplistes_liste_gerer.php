@@ -565,8 +565,10 @@ function exec_spiplistes_liste_gerer () {
 				. "<input type='hidden' name='id_liste' value='$id_liste' />\n"
 			: ""
 			)
-		. "<span class='verdana2'>". _T('spiplistes:Cette_liste_est')." : "
-		. 	spiplistes_bullet_titre_liste('puce', $statut, 'img_statut', true)."</span>\n"
+		. "<span class='verdana2'>"
+			. _T('spiplistes:cette_liste_est_'
+			 	, array('s' => spiplistes_bullet_titre_liste('puce', $statut, 'img_statut', true)))
+		. "</span>\n"
 		;
 
 		$mySelMulti = " value='"._SPIPLISTES_PUBLIC_LIST."'" 
@@ -687,7 +689,7 @@ function exec_spiplistes_liste_gerer () {
 			.	"<br />"
 			.	(
 				(intval($maj))
-				? _T('spiplistes:Dernier_envoi_le_:') . " <strong>" . affdate_heure($maj) . "</strong>"
+				? _T('spiplistes:Dernier_envoi_le_') . " <strong>" . affdate_heure($maj) . "</strong>"
 					.	(
 						($last =  round((time() - strtotime($maj)) / _SPIPLISTES_TIME_1_DAY))
 							? " (".spiplistes_singulier_pluriel_str_get($last, _T('spiplistes:jour'), _T('spiplistes:jours')).")"

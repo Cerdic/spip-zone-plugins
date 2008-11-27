@@ -84,7 +84,7 @@ function exec_spiplistes_abonnes_tous () {
 // PAGE CONTENU
 ////////////////////////////////////
 
-	$titre_page = _T('spiplistes:Suivi_des_abonnements');
+	$titre_page = _T('spiplistes:suivi');
 	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = _SPIPLISTES_PREFIX;
 	$sous_rubrique = "abonnes_tous";

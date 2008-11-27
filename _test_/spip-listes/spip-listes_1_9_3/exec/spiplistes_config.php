@@ -305,7 +305,7 @@ function exec_spiplistes_config () {
 		. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE), true)
 		//
 		// adresse email de retour (reply-to)
-		. debut_cadre_relief("", true, "", _T('spiplistes:adresse_envoi'))
+		. debut_cadre_relief("", true, "", _T('spiplistes:adresse_envoi_defaut'))
 		. "<input type='text' name='email_defaut' value='".$adresse_defaut."' size='30' class='forml' />\n"
 		. fin_cadre_relief(true)
 		//

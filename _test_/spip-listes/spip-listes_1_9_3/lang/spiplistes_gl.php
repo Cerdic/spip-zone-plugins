@@ -45,10 +45,10 @@ Un sa&uacute;do
 'actualiser' => 'Actualizar esta p&aacute;xina',
 'adresse' => 'Enderezo de correo electr&oacute;nico para responder &aacute; mensaxe (por defecto, o enderezo do/a webmestre/webmistress ser&aacute; empregada como enderezo de resposta) :',
 'adresses_importees' => 'Enderezos importados ***FIXME ***',
-'aff_encours' => 'Mensaxes a enviar',
+'Courriers_en_cours_denvoi' => 'Mensaxes a enviar',
 'aff_envoye' => 'Mensaxes enviadas "manualmente"',
 'aff_lettre_auto' => 'Mensaxes enviadas &aacute;s listas de forma programada',
-'aff_redac' => 'Mensaxes en curso de redacci&oacute;n',
+'Courriers_en_cours_de_redaction' => 'Mensaxes en curso de redacci&oacute;n',
 'alerte_edit' => 'Atenci&oacute;n: esta mensaxe pode ser modificada pol@s administradore(a)s, sendo recibida por todas as persoas inscritas na lista (podes seleccionala no seguinte paso).<br />Non empregues as mensaxes colectivas nada m&aacute;s que para acontecementos importantes da vida do sitio.',
 'alerte_modif' => '<b>Despois de \'visualizar a mensaje\',<br />poder&aacute;s modificar o seu contenido</b>',
 'annuler_envoi' => 'Cancelar o env&iacute;o',
@@ -173,7 +173,7 @@ Un sa&uacute;do
 'recherche' => 'Procurar',
 'revenir_haut' => 'Ir ao principio da p&aacutexina',
 'reponse' => 'Resposta &aacute; mensaxe',
-'retour' => 'Direcci&oacute;n de correo electr&oacute;nico da lista (para as respostas)',
+'adresse_mail_retour' => 'Direcci&oacute;n de correo electr&oacute;nico da lista (para as respostas)',
 
 //S
 'suivi' => 'Seguimento de inscrit@s',
@@ -190,7 +190,7 @@ Un sa&uacute;do
  //T
 'texte_boite_en_cours' => 'SPIP-Listes ten mensaxes para enviar. <p> Podes forzar o seu env&iacute;o entrando en "Revisar tareas pendentes".</p> <p>Este recadro desaparecer&aacute; cando remate o env&iacute;o.</p>',
 'texte_lettre_information' => 'Informaci&oacute;n de ',
-'Tous_les' => 'cada',
+'Tous les @s@' => 'cada @s@',
 
 //V
 'voir' => 'vista previa',

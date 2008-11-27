@@ -39,7 +39,7 @@ Riceverete una email che vi permetter&agrave; di accedere alla pagina di modific
 'actualiser' => 'Aggiorna',
 'a_destination_de_' => 'a destinazione ',
 'adresse' => 'Indicare qui l\'indirizzo da utilizzare come Reply-To (se vuoto verr&agrave; utilizzato l\'indirizzo del webmaster):',
-'adresse_envoi' => 'Indirizzo di Invio di Default',
+'adresse_envoi_defaut' => 'Indirizzo di Invio di Default',
 'adresses_importees' => 'Indirizzi importati',
 'adresse_smtp' => 'indirizzo email del <i>mittente</i> SMTP',
 'aff_redac' => 'Messaggi in corso di redazione',
@@ -109,8 +109,8 @@ Riceverete una email che vi permetter&agrave; di accedere alla pagina di modific
 'form_forum_identifiant_confirm'=>'L\'iscrizione &egrave; stata registrata. Riceverete una email di conferma.',
 'format' => 'Formato',
 'format2' => 'Formato :',
-'format_html' => 'Formato html : ',
-'format_texte' => 'Formato testo : ',
+'format_html__n' => 'Formato html : @n@',
+'format_texte__n' => 'Formato testo : @n@',
 
 //H
 'Historique_des_envois' => 'Storico degli invii',
@@ -208,7 +208,7 @@ e ricevere le newsletter.',
 'reponse' => 'In risposta al messaggio',
 'reponse_plur' => 'risposte',
 'reponse_sing' => 'risposta',
-'retour' => 'Indirizzo email del maintainer della lista (Reply-To)',
+'adresse_mail_retour' => 'Indirizzo email del maintainer della lista (Reply-To)',
 
 //S
 'smtp' => 'Utilizza SMTP',
@@ -236,7 +236,7 @@ e ricevere le newsletter.',
 'texte_contenu_pied' => '<br />(Messaggio aggiunto in fondo alle email al momento dell\'invio)<br />',
 'texte_lettre_information' => 'Questa &egrave; la newsletter di ',
 'texte_pied' => '<p><b>Testo di fondo pagina</b>',
-'Tous_les' => 'Ogni',
+'Tous les @s@' => 'Ogni @s@',
 
 //V
 'version_html' => '<b>Versione HTML</b>',

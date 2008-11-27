@@ -39,11 +39,11 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'actualiser' => 'Update',
 'a_destination_de_' => 'to ',
 'adresse' => 'Specify here the reply-to e-mail address (otherwise the default address of the webmaster will be used):',
-'adresse_envoi' => 'Default sender\'s address',
+'adresse_envoi_defaut' => 'Default sender\'s address',
 'adresses_importees' => 'Imported addresses',
 'adresse_smtp' => 'e-mail address of SMTP <i>sender</i>',
-'aff_redac' => 'Editing in progress',
-'aff_encours' => 'Sending in progress',
+'Courriers_en_cours_de_redaction' => 'Editing in progress',
+'Courriers_en_cours_denvoi' => 'Sending in progress',
 'aff_envoye' => 'Messages sent',
 'aff_lettre_auto' => 'Sent newsletters',
 'alerte_edit' => 'Note: This message can be modified by every administrator of the website and received by all subscribers. Use this newsletter only to announce special events of your website.',
@@ -110,8 +110,8 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'form_forum_identifiant_confirm'=>'Your subscription has been registered. You will receive a confirmation e-mail.',
 'format' => 'Format',
 'format2' => 'Format:',
-'format_html' => 'HTML format: ',
-'format_texte' => 'Text format: ',
+'format_html__n' => 'HTML format: @n@',
+'format_texte__n' => 'Text format: @n@',
 
 //H
 'Historique_des_envois' => 'Messages',
@@ -205,7 +205,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'reponse' => 'Reply to message',
 'reponse_plur' => 'replies',
 'reponse_sing' => 'reply',
-'retour' => 'E-mail address of the list administrator (reply-to)',
+'adresse_mail_retour' => 'E-mail address of the list administrator (reply-to)',
 
 //S
 'smtp' => 'Use SMTP',
@@ -233,7 +233,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'texte_contenu_pied' => '<br />(Message added at the bottom of each e-mail when sent)<br />',
 'texte_lettre_information' => 'This is the newsletter of',
 'texte_pied' => '<p><b>Footer text</b>',
-'Tous_les' => 'Every',
+'Tous les @s@' => 'Every @s@',
 
 //V
 'version_html' => '<b>HTML version</b>',

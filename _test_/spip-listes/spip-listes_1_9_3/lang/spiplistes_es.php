@@ -47,14 +47,13 @@ Recibir&aacute;s un email para acceder a la p&aacute;gina de modificaci&oacute;n
 'actualiser' => 'Actualizar esta p&aacute;gina',
 'a_destination_de_' => 'enviar a ',
 'adresse' => 'Direcci&oacute;n de correo electr&oacute;nico para responder al mensaje (por defecto, la direcci&oacute;n del/la webmestre/webmistress ser&aacute; utilizada como direcci&oacute;n de respuesta) :',
-'adresse_envoi' => 'Remitente por defecto',
+'adresse_envoi_defaut' => 'Remitente por defecto',
 'adresses_importees' => 'Direcciones importantes',
 'adresse_smtp' => 'direcci&oacute;n email del <i>sender</i> SMTP',
-'aff_redac' => 'Mensajes en curso de redacci&oacute;n',
-'aff_encours' => 'Mensajes a enviar',
+'Courriers_en_cours_denvoi' => 'Mensajes a enviar',
 'aff_envoye' => 'Mensajes enviados "manualmente"',
 'aff_lettre_auto' => 'Boletines informativos enviados de forma programada',
-'aff_redac' => 'Mensajes en curso de redacci&oacute;n',
+'Courriers_en_cours_de_redaction' => 'Mensajes en curso de redacci&oacute;n',
 'alerte_edit' => 'Atenci&oacute;n: este mensaje puede ser modificado por l@s administradore(a)s y lo recibir&aacute;n todas las personas inscritas para recibir el bolet&iacute;n informativo (puedes seleccionarla en el siguiente paso).<br />No utilices los mensajes colectivos nada m&aacute;s que para acontecimientos importantes de la vida del sitio.',
 'alerte_modif' => '<b>Despu&eacute;s de \'visualizar el mensaje\',<br />podr&aacute;s modificar su contenido</b>',
 'annuler_envoi' => 'Cancelar el env&iacute;o',
@@ -122,8 +121,8 @@ Recibir&aacute;s un email para acceder a la p&aacute;gina de modificaci&oacute;n
 'form_forum_identifiants' => 'Confirmaci&0acute;n',
 'format' => 'Formato',
 'format2' => 'Formato:',
-'format_html' => 'Formato html: ',
-'format_texte' => 'Formato texto: ',
+'format_html__n' => 'Formato html: @n@',
+'format_texte__n' => 'Formato texto: @n@',
 
 //H
 'Historique_des_envois' => 'Env&iacute;os',
@@ -219,7 +218,7 @@ Recibir&aacute;s un email para acceder a la p&aacute;gina de modificaci&oacute;n
 'reponse' => 'Respuesta al mensaje',
 'reponse_plur' => 'respuestas',
 'reponse_sing' => 'respuesta',
-'retour' => 'Direcci&oacute;n de correo electr&oacute;nico del bolet&iacute;n (para las respuestas)',
+'adresse_mail_retour' => 'Direcci&oacute;n de correo electr&oacute;nico del bolet&iacute;n (para las respuestas)',
 
 //S
 'smtp' => 'Utilizar SMTP',
@@ -247,7 +246,7 @@ Recibir&aacute;s un email para acceder a la p&aacute;gina de modificaci&oacute;n
 'texte_contenu_pied' => '<br />(Texto a&ntilde;adido al pie de los emails al enviarlos)<br />',
 'texte_lettre_information' => 'Informaci&oacute;n de ',
 'texte_pied' => '<p><b>Texto de pie de p&aacute;gina</b>',
-'Tous_les' => 'cada',
+'Tous les @s@' => 'cada @s@',
 
 //V
 'version_html' => '<b>Versi&oacute;n HTML</b>',

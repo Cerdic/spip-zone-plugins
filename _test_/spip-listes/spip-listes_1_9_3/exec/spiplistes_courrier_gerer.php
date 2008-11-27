@@ -487,8 +487,8 @@ function exec_spiplistes_courrier_gerer () {
 					. " </ul>"
 					. " <li>"._T('spiplistes:nbre_abonnes').$total_abonnes."</li>"
 					. " <ul>"
-					. "  <li>"._T('spiplistes:format_html').$nb_emails_html."</li>"
-					. "  <li>"._T('spiplistes:format_texte').$nb_emails_texte."</li>"
+					. "  <li>"._T('spiplistes:format_html__n', array('n' => $nb_emails_html))."</li>"
+					. "  <li>"._T('spiplistes:format_texte__n', array('n' => $nb_emails_texte))."</li>"
 					. "  <li>"._T('spiplistes:desabonnes')." : ".$nb_emails_non_envoyes."</li>"
 					. " </ul>"
 					. " <li>"._T('spiplistes:erreur_envoi').$nb_emails_echec."</li>"
@@ -522,7 +522,7 @@ function exec_spiplistes_courrier_gerer () {
 		. spiplistes_gros_titre($titre_page, '', true)
 		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $sous_rubrique)
 		. debut_gauche($rubrique, true)
-		. spiplistes_boite_info_id(_T('spiplistes:Courrier_numero_:'), $id_courrier, true)
+		. spiplistes_boite_info_id(_T('spiplistes:Courrier_numero_'), $id_courrier, true)
 		. spiplistes_naviguer_paniers_courriers(_T('spiplistes:aller_au_panier_'), true)
 		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)

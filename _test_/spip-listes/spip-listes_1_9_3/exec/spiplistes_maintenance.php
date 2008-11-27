@@ -86,7 +86,9 @@ function exec_spiplistes_maintenance () {
 						? $msg_ok 
 						: $msg_bad
 						;
-					$msg_maintenance[] = _T('spiplistes:Suppression_de')." : ".spiplistes_items_get_item('tab_t', $statut)."... : ".$msg.$msg_end;
+					$msg_maintenance[] = _T('spiplistes:Suppression_de__s',
+						array('s' => spiplistes_items_get_item('tab_t', $statut)."... : ".$msg.$msg_end)
+						);
 					spiplistes_log("DELETE courrier ID_COURRIER #$id_courrier by ID_AUTEUR #$connect_id_auteur");
 				}
 			}

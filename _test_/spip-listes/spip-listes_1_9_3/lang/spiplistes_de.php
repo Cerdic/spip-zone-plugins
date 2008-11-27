@@ -33,8 +33,8 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
 'actualiser' => 'Aktualisieren',
 'adresse' => 'Geben Sie hier die Adresse f&uuml;r Antworten (reply-to) ein (Wenn Sie keine Angabe machen, wird die Adresse des Webmasters verwendet): ',
 'adresses_importees' => 'Adressen importiert',
-'aff_redac' => 'Nachricht in Bearbeitung',
-'aff_encours' => 'Nachricht wird gesendet',
+'Courriers_en_cours_de_redaction' => 'Nachricht in Bearbeitung',
+'Courriers_en_cours_denvoi' => 'Nachricht wird gesendet',
 'aff_envoye' => 'Gesendete Nachrichten',
 'aff_lettre_auto' => 'Gesendete Newsletter',
 'aff_envoye' => 'Gesendete Nachrichten',
@@ -154,7 +154,7 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
 'recherche' => 'Suchen',
 'revenir_haut' => 'Nach oben',
 'reponse' => 'Antwort auf die Nachricht',
-'retour' => 'E-Mail Adresse des Listenverwalters (reply-to)',
+'adresse_mail_retour' => 'E-Mail Adresse des Listenverwalters (reply-to)',
 
 //S
 'suivi' => 'Abonnements verwalten',
@@ -171,7 +171,7 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
  //T
 'texte_boite_en_cours' => 'SPIP-Listes verschickt gerade eine Nachricht. <p> Sie k&ouml;nnen den Versand beschleunigen, indem Sie auf den Link klicken.</p> <p>Dieser Kasten wird nicht mehr angezeigt, wenn die Nachricht vollst&auml;ndig gesendet wurde.</p>',
 'texte_lettre_information' => 'Hier ist der Newsletter von ',
-'Tous_les' => 'Alle',
+'Tous les @s@' => 'Alle @s@',
 
 //V
 'voir' => 'ansehen',

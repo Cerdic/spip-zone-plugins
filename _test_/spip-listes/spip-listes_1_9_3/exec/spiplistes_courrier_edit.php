@@ -128,7 +128,7 @@ function exec_spiplistes_courrier_edit(){
 		. spiplistes_gros_titre($titre_page, '', true)
 		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $sous_rubrique)
 		. debut_gauche($rubrique, true)
-		. spiplistes_boite_info_id(_T('spiplistes:Courrier_numero_:'), $id_courrier, true)
+		. spiplistes_boite_info_id(_T('spiplistes:Courrier_numero_'), $id_courrier, true)
 		. spiplistes_naviguer_paniers_courriers(_T('spiplistes:aller_au_panier_'), true)
 		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
@@ -153,7 +153,7 @@ function exec_spiplistes_courrier_edit(){
 		. "</td>"
 		. "<td><img src='"._DIR_IMG_PACK."/rien.gif' width='10'></td>\n"
 		. "<td width='100%'>"
-		. ($id_courrier ? _T('spiplistes:Modifier_un_courrier_:') : _T('spiplistes:Creer_un_courrier_:') )."<br />\n"
+		. ($id_courrier ? _T('spiplistes:Modifier_un_courrier__') : _T('spiplistes:Creer_un_courrier_') )."<br />\n"
 		. spiplistes_gros_titre($titre, '', true)
 		. "</td>\n"
 		. "</tr></table>\n"

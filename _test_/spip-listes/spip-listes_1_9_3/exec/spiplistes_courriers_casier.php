@@ -64,7 +64,6 @@ function spiplistes_afficher_pile_messages() {
 			$$key = $row[$key];
 		}
 	
-		$proch = round((strtotime($date) - time()) / _SPIPLISTES_TIME_1_DAY);
 		$date_dernier = date(_T('spiplistes:format_date'), strtotime($maj)) ;
 		switch($statut) {
 			case _SPIPLISTES_HEBDO_LIST:
@@ -80,7 +79,9 @@ function spiplistes_afficher_pile_messages() {
 				break;
 			case _SPIPLISTES_DAILY_LIST:
 				if($periode) {
-					$periodicite = _T('spiplistes:Tous_les')." $periode "._T('spiplistes:jours');
+					$periodicite = _T('spiplistes:Tous_les_s'
+					, array('s' => spiplistes_singulier_pluriel_str_get($periode, _T('spiplistes:jour'), _T('spiplistes:jours')))
+					);
 				} else {
 					$periodicite = _T('spiplistes:Listes_autre');
 				}
@@ -98,12 +99,8 @@ function spiplistes_afficher_pile_messages() {
 			. "<br />".spiplistes_nb_abonnes_liste_str_get($id_liste)."."
 			. "</td>"
 			. "<td>"
-			.	(
-				($proch > 0)
-				? _T('spiplistes:dans_jours')." <strong>$proch</strong> "._T('spiplistes:jours')."</td>\n"
-				: "<strong>"._T('date_aujourdhui')."</strong></td>\n"
-				)
-			. "</tr>\n"
+			. spiplistes_affdate ($date)
+			. "</td></tr>\n"
 			;
 	} // end while
 	
