@@ -409,7 +409,6 @@ spiplistes_log($prefix_log."total_abos: $total_abonnes, en_cour: $nb_destinatair
 								}
 
 								$email_a_envoyer[$format_abo]->SetAddress($email, $nom_auteur);
-spiplistes_log("#: ".$email_a_envoyer[$format_abo]['From'], _SPIPLISTES_LOG_DEBUG);
 								// envoie le mail																
 								if(($opt_simuler_envoi == "oui") ? true : $email_a_envoyer[$format_abo]->send()) {
 									$nb_emails_envoyes++;
