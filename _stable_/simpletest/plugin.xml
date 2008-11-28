@@ -10,8 +10,9 @@
 	pour effectuer des tests unitaires,
 	ainsi qu'une API pour faciliter les tests avec SPIP.
 	</description>
+	<documentation>[->http://www.spip-contrib.net/Les-tests-unitaires]</documentation>
 	
-	<etat>dev</etat>
+	<etat>test</etat>
 	<prefix>simpletest</prefix>
   	
 	<options>simpletest_options.php</options>
