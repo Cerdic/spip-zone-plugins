@@ -5,7 +5,6 @@
 
 
 TO-DO:
-. correction du fichier lang + optimiser pour faciliter la traduction. (en cours, 20081127)
 . sous SPIP 2, spiplistes_courrier_edit, generer courrier, le sélecteur de langue est vide.
 . verifier envoi du test. Il doit etre au format HTML suivi d'un autre au format Texte. Test au 24/06/2008, seule la version texte est envoyee.
 . terminer la compat svn (fouiller!) CP20080609

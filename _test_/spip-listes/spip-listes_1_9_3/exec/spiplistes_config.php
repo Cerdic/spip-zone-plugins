@@ -242,6 +242,7 @@ function exec_spiplistes_config () {
 		. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE), true)
 		//
 		// personnaliser le courrier (reprend les données de *_auteur)
+		. "<!-- personnaliser le courrier -->\n"
 		. debut_cadre_relief("", true, "", _T('spiplistes:personnaliser_le_courrier'))
 		. "<p class='verdana2'>"._T('spiplistes:personnaliser_le_courrier_desc')."</p>"
 		. "<label class='verdana2'>"

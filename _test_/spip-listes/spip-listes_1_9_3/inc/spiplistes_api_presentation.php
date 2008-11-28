@@ -524,7 +524,7 @@ function spiplistes_boite_autocron_form($titre, $option, $value) {
 		if(_request('exec')!=_SPIPLISTES_EXEC_CONFIGURE) {
 			$result = ""
 				. "<!-- bouton annulation option -->\n"
-				. "<form name='form_$option' id='id_form_$option' method='post' action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE)."'"
+				. "<form id='id_form_$option' method='post' action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE)."'"
 					. " style='margin:0.5em 0;text-align:center;'>\n"
 				. "<input type='hidden' name='$option' id='id_$option' value='$value' />\n"
 				. "<label for='id_$option' style='display:none;'>$titre option</label>\n"
@@ -544,18 +544,21 @@ function spiplistes_boite_autocron_form($titre, $option, $value) {
 // Petite boite info pour l'autocron (CP-20071018)
 function spiplistes_boite_autocron_info ($icone = "", $return = false, $titre_boite = '', $bouton = "", $texte = "", $nom_option = "", $icone_alerte = false) {
 	$result = ""
-		. debut_cadre_couleur($icone, $return, $fonction, $titre_boite)
-		. ($icone_alerte ? "<div style='text-align:center;'><img alt='' src='$icone_alerte' border='0' /></div>" : "")
+		. debut_cadre('couleur-foncee spip-alert', $icone, $fonction, $titre_boite)
+		. ($icone_alerte ? "<div style='text-align:center;'><img alt='' src='$icone_alerte' /></div>" : "")
 		. ($texte ? "<p class='verdana2' style='margin:0;'>$texte</p>\n" : "")
 		. ($bouton ? spiplistes_boite_autocron_form($bouton, $nom_option, 'non') : "")
-		. fin_cadre_couleur($return)
+		//. fin_cadre_couleur($return)
+		. fin_cadre_couleur_foncee($return)
 		;
 	if($return) return($result);
 	else echo($result);
 }
 
-// la boite autocron apparait en backoffice sur la colone droite
-// si courrier en cours d'envoi
+/*
+ * boite info sur les simulation et les envois en cours
+ * @return la boite autocron, chaine html
+ */
 function spiplistes_boite_autocron () { 
 	@define('_SPIP_LISTE_SEND_THREADS',1);
 	

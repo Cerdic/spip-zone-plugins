@@ -9,7 +9,11 @@
 /*
 	
 	Nota: plugin.xml en cache.
-		si modif plugin.xml, il faut r�activer le plugin (config/plugin: d�sactiver/activer)
+		si modif plugin.xml, il faut reactiver le plugin (config/plugin: desactiver/activer)
+		Pas sur SPIP.2
+	Nota:
+		SPIP 2 fait automatiquement un cache des css pour l'espace prive'.
+		Penser a vider le cache ou simplement local/cache-css/ lors de modification de la feuille.
 	
 */
 
@@ -42,7 +46,7 @@ function spiplistes_header_prive ($flux) {
 		)
 	) {
 		
-		$flux .= "\n\n<!-- PLUGIN SPIPLISTES v.: ".spiplistes_real_version_get(_SPIPLISTES_PREFIX)." -->\n"
+		$flux .= "\n\n<!-- PLUGIN SPIPLISTES v.: ".spiplistes_real_version_get(_SPIPLISTES_PREFIX)." -->\n" 
 			. "<link rel='stylesheet' href='"._DIR_PLUGIN_SPIPLISTES."spiplistes_style_prive.css' type='text/css' media='all' />\n"
 			;
 
@@ -115,7 +119,7 @@ function spiplistes_header_prive ($flux) {
 		}
 
 	}
-	$flux .="<!-- / SPIPLISTES -->\n\n";
+	$flux .= "<!-- / SPIPLISTES -->\n\n";
 
 	return ($flux);
 }

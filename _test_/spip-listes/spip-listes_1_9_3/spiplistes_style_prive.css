@@ -5,6 +5,8 @@
 */
 .spiplistes fieldset { border:1px solid black; }
 .spiplistes .message-alerte { color:red; font-weight:bold; }
+.spiplistes .spip-alert {}
+.spiplistes .spip-alert .cadre-titre, .spiplistes .spip-alert .impliable {background-color:red !important; color:white}
 .spiplistes .texte-alerte { background-color:red; font-weight:bold; color:white;padding:0 1ex }
 .spiplistes .liste-moderateurs
 , .spiplistes .liste-listes { list-style: none;margin:0;padding:0;width:100%;height:auto;display:table;background:#ddd }
