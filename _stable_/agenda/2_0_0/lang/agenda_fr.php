@@ -47,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_mots_cles_association_evenements' => 'aux &eacute;v&eacute;nements',
 'info_un_evenement' => '1 &eacute;v&eacute;nement',
 'info_nombre_evenements' => '@nb@ &eacute;v&eacute;nements',
+'info_aucun_evenement' => 'Aucun &eacute;v&eacute;nement',
 'info_evenements' => '&Eacute;v&eacute;nements',
 
 'lien_retirer_evenement' => 'Supprimer',
