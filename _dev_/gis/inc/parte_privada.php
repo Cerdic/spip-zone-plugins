@@ -36,6 +36,9 @@ function gis_cambiar_coord($id,$table,$exec) {
 		else
 			spip_query("UPDATE spip_gis SET lat="._q($glat).", lonx="._q($glonx).", zoom="._q($gzoom)."  WHERE $pkey = " . _q($id));
 	}
+	if(_request('supprimer')){
+		sql_delete("spip_gis", array("$pkey = " . sql_quote($id)));
+	}
 	if ($glat!==NULL){
 		$resultMots = spip_query("SELECT * FROM spip_mots_{$table}s WHERE $pkey = ".intval($id));
 		while ($rowMot = spip_fetch_array($resultMots)) {
@@ -82,7 +85,8 @@ function gis_cambiar_coord($id,$table,$exec) {
 		<label>'._T('gis:lat').': </label><input type="text" name="lat" id="form_lat" value="'.$glat.'" size="12" />
 		<label>'._T('gis:long').': </label><input type="text" name="lonx" id="form_long" value="'.$glonx.'" size="12" />
 		<label>'._T('gis:zoom').': </label><input type="text" name="zoom" id="form_zoom" value="'.$gzoom.'" size="6" />
-		<input type="submit" name="actualizar" value="'._T("gis:boton_actualizar").'" />
+		<p></p><input type="submit" name="actualizar" value="'._T("gis:boton_actualizar").'" />
+		<input type="submit" name="supprimer" value="'._T("gis:bouton_supprimer").'" /></p>
 		</form>
 		</div>';
 	$s .= $mapa;

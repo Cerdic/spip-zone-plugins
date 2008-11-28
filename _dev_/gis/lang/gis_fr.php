@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"coord_maj" => "Coordonn&eacute;es mises &agrave; jour",
 	"cambiar" => "changer les coordonn&eacute;es",
 	"boton_actualizar" => "actualiser",
+	"bouton_supprimer" => "supprimer",
 	"default_geoloc" => "Position par defaut des cartes :",
 	
 	//elements du formulaire public
