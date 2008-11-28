@@ -27,12 +27,12 @@
 // $LastChangedDate$
 
 /*
-	Fonctions consacr�es au traitement du contenu du courrier et tampon :
+	Fonctions consacrees au traitement du contenu du courrier et tampon :
 	- filtres, convertisseurs texte, charset, etc.
 	
 	Toutes les fonctions ici ont un nom commencant pas 'spiplistes_courrier'
 	
-	Voir base/spiplistes_upgrade.php pour d�finitions et descriptions des tables
+	Voir base/spiplistes_upgrade.php pour definitions et descriptions des tables
 	
 	
 */
@@ -125,7 +125,7 @@ function spiplistes_courrier_propre_bloog($texte) {
 
 /****
  * titre : spiplistes_courrier_version_texte
- * d'apr�s Clever Mail (-> NHoizey), mais en mieux.
+ * d'apres Clever Mail (-> NHoizey), mais en mieux.
 ****/
 
 function spiplistes_courrier_version_texte($in) {
@@ -255,7 +255,7 @@ spiplistes_log("API: remplir courrier: #$id_courrier, liste: #$id_liste, auteur:
 		$sql_valeurs = "";
 	
 		if($id_liste > 0) {
-			// prendre la liste des abonn�s � cette liste
+			// prendre la liste des abonnes a cette liste
 			$ids_abos = spiplistes_listes_liste_abo_ids($id_liste);
 			if(count($ids_abos)) {
 				$sql_where_q = "(".implode(",", array_map("sql_quote", $ids_abos)).")";
@@ -353,7 +353,7 @@ function spiplistes_courrier_supprimer_queue_envois ($sql_where_key, $sql_where_
 				$result = sql_delete("spip_auteurs_courriers"
 					, "id_courrier IN (SELECT id_courrier FROM spip_courriers WHERE $sql_where)");	
 			} else {
-				// Sur les pr�cieux conseils de MM :
+				// Sur les precieux conseils de MM :
 				// passer la requete en 2 etapes pour assurer portabilite sql
 				$selection =
 					sql_select("id_courrier", "spip_courriers", $sql_where,'','','','','',false);
@@ -450,7 +450,7 @@ function spiplistes_courriers_assembler_patron ($patron, $contexte) {
 		;
 	$patron_texte = spiplistes_patron_find_in_path ($path_patron, $contexte['lang'], true);
 	$message_texte = 
-		$patron_texte
+		($patron_texte && ($patron_html != $patron_texte))
 		? recuperer_fond($patron_texte, $contexte) . "\n"
 		: spiplistes_courrier_version_texte($message_html) . "\n"
 		;

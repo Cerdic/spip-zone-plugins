@@ -188,8 +188,6 @@ spiplistes_log($prefix_log."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_D
 			list($texte, $message_texte) = spiplistes_courriers_assembler_patron ($patron
 				, array('date' => $dernier_envoi, 'patron'=>$patron, 'lang'=>$lang));
 			
-//spiplistes_log($prefix_log."Titre => $titre", _SPIPLISTES_LOG_DEBUG);
-	
 			$taille_courrier_ok = (($n = spiplistes_strlen(spiplistes_courrier_version_texte($texte))) > 10);
 spiplistes_log($prefix_log."taille courrier pour la liste $id_liste : $n", _SPIPLISTES_LOG_DEBUG);
 
@@ -254,6 +252,9 @@ spiplistes_log($prefix_log."$n job(s), appel meleuse", _SPIPLISTES_LOG_DEBUG);
 
 		include_spip('inc/spiplistes_meleuse');
 		return(spiplistes_meleuse($last_time));
+	}
+	else {
+		spiplistes_log($prefix_log."NO JOB", _SPIPLISTES_LOG_DEBUG);
 	}
 	return ($last_time); 
 } // cron_spiplistes_cron()

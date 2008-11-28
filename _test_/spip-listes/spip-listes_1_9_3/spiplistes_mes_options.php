@@ -309,7 +309,7 @@ $spiplistes_items = array(
 		, 'icon_color' => "9dba00"
 		, 'alt' => _T('spiplistes:message_en_cours')
 		, 'nav_t' => _T('spiplistes:En_cours')
-		, 'tab_t' => _T('spiplistes:aff_encours')
+		, 'tab_t' => _T('spiplistes:Courriers_en_cours_denvoi')
 		, 'desc' => null
 		)
 	, _SPIPLISTES_COURRIER_STATUT_AUTO => array(
