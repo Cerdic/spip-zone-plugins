@@ -591,7 +591,10 @@ div.pagination img { border:0pt none; margin:0pt; padding:0pt; }
 span.cs_pagination_off {color: lightgrey; font-weight: bold; text-decoration: underline;} ",
 	// construction des onglets
 	'code:jq_init' => "onglets_init.apply(this);",
-	// pour les articles et rubriques : $table_des_traitements['TEXTE']['articles']= 'cs_decoupe(propre(%s))';
+	// pour les balises #TEXTE : $table_des_traitements['TEXTE'] = 'cs_decoupe(propre(%s))';
+	'traitement:TEXTE:post_propre' => 'cs_decoupe',
+	'traitement:TEXTE:pre_propre' => 'cs_onglets',
+	// pour les articles et rubriques : $table_des_traitements['TEXTE']['articles'] = 'cs_decoupe(propre(%s))';
 	'traitement:TEXTE/articles:post_propre' => 'cs_decoupe',
 	'traitement:TEXTE/articles:pre_propre' => 'cs_onglets',
 	'traitement:TEXTE/rubriques:post_propre' => 'cs_decoupe',
