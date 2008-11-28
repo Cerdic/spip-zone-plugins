@@ -15,11 +15,14 @@ include_spip('inc/spiplistes_api_globales');
 
 		function phpMail($email, $objet, $message_html, $message_texte, $charset) {
 		
+			// c'est plutot a la meleuse de faire ce boulot
+			/*
 			$fromname = $GLOBALS['meta']['nom_site'];
 				if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
 				include_spip('inc/charsets');
 				$fromname = unicode2charset(charset2unicode($fromname),$GLOBALS['meta']['spiplistes_charset_envoi']);
 				}
+			*/
 			
 			$this->FromName    =  $fromname ; 
 			$this->CharSet	= $charset ;
@@ -70,7 +73,7 @@ include_spip('inc/spiplistes_api_globales');
 
 	/**
 	 * d'apres SPIP-Lettres : plugin de gestion de lettres d'information
-	 * inutilisé mais ca pourra peut etre servir pour emabarquer les images
+	 * inutilisï¿½ mais ca pourra peut etre servir pour emabarquer les images
 	 * Copyright (c) 2006
 	 * Agence Atypik Creations
 	 *  

@@ -187,7 +187,7 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 				}
 				
 				if(!$email_envoi = spiplistes_listes_email_emetteur($id_liste)) {
-					$str_log .= " [ERROR] ID_LISTE #id_liste or email MISSING"; 
+					$str_log .= " [ERROR] ID_LISTE #id_liste or from email MISSING"; 
 					spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_COURRIER_STATUT_ERREUR);
 					// quitte while() principal
 					break;
@@ -203,10 +203,18 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 			
 			//////////////////////////////
 			// email emetteur
-			$email_webmaster = (email_valide($GLOBALS['meta']['email_defaut'])) ? $GLOBALS['meta']['email_defaut'] : $GLOBALS['meta']['email_webmaster'];
-			$from = email_valide($email_envoi) ? $email_envoi : $email_webmaster;
-		
-			$is_from_valide = email_valide($from);         
+			
+			$from = $email_envoi;
+			if($is_from_valide = email_valide($from)) {
+				$fromname = extraire_multi($GLOBALS['meta']['nom_site']);
+				if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
+					include_spip('inc/charsets');
+					$fromname = unicode2charset(charset2unicode($fromname),$GLOBALS['meta']['spiplistes_charset_envoi']);
+				}
+				$from = $fromname." <$from>";
+			}
+spiplistes_log("email_envoi : " . $email_envoi, _SPIPLISTES_LOG_DEBUG);	
+spiplistes_log("From : " . $from, _SPIPLISTES_LOG_DEBUG);	
 		
 			////////////////////////////////////
 			// Prepare la version texte
@@ -401,7 +409,7 @@ spiplistes_log($prefix_log."total_abos: $total_abonnes, en_cour: $nb_destinatair
 								}
 
 								$email_a_envoyer[$format_abo]->SetAddress($email, $nom_auteur);
-
+spiplistes_log("#: ".$email_a_envoyer[$format_abo]['From'], _SPIPLISTES_LOG_DEBUG);
 								// envoie le mail																
 								if(($opt_simuler_envoi == "oui") ? true : $email_a_envoyer[$format_abo]->send()) {
 									$nb_emails_envoyes++;

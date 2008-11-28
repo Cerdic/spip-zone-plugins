@@ -325,16 +325,21 @@ function spiplistes_desabonner_auteur ($id_auteur) {
 function spiplistes_listes_email_emetteur ($id_liste = 0) {
 	$id_liste = intval($id_liste);
 	$result = false;
-	if(!(
-		($id_liste > 0)
-		&& ($result = 
+	if($id_liste > 0) {
+		$result = 
 			sql_getfetsel(
 				"email_envoi"
 				, "spip_listes"
 				, "id_liste=".sql_quote($id_liste)." LIMIT 1"
-			))
-	)) {
-		$result = entites_html($GLOBALS['meta']['email_webmaster']);
+			);
+		if($result === false) {
+			spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+		}
+		if(!$result) {
+			$result = (email_valide($ii = $GLOBALS['meta']['email_defaut'])) ? $ii : $GLOBALS['meta']['email_webmaster'];
+			$result = entites_html($GLOBALS['meta']['email_webmaster']);
+		}
+
 	}
 	return($result);
 }
