@@ -76,7 +76,7 @@ function exec_spiplistes_courrier_previsu () {
 		, 'avec_intro', 'message_intro'
 		, 'avec_patron', 'patron', 'patron_pos'
 		, 'avec_sommaire'
-		, 'titre', 'message' 
+		, 'titre', 'message', 'pied_patron'
 		, 'Confirmer', 'date'
 		, 'lire_base', 'format', 'plein_ecran'
 		, 'date_sommaire'
@@ -102,12 +102,14 @@ function exec_spiplistes_courrier_previsu () {
 		: ""
 		;
 
+	// si envoi a une liste, reprendre le patron de pied de la liste
 	if($id_liste) {
 		$pied_html = spiplistes_pied_de_page_liste($id_liste, $lang);
 		$pied_texte = spiplistes_courrier_version_texte($pied_html);
 	}
+	// sinon, prendre le patron de pied demandé
 	else {
-		list($pied_html, $pied_texte) = spiplistes_courriers_pieds ($lang);
+		list($pied_html, $pied_texte) = spiplistes_courriers_pieds ($lang, $pied_patron);
 	}
 	
 	$texte_editeur =

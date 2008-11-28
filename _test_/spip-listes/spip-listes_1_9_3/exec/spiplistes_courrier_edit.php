@@ -283,10 +283,19 @@ function exec_spiplistes_courrier_edit(){
 		// a partir de la date selectionnee plus haut
 		. spiplistes_form_input_item ('checkbox', 'date_sommaire', 'oui'
 			, _T('spiplistes:sommaire_date_debut'), $sommaire_date == 'oui', true, false)
-		//
 		. "</div>\n"
 		. "</div>\n"
 		; // fin generer le sommaire
+		
+		// choisir son patron de pied
+	$page_result .= ""
+		. "<div class='boite-generer-option'>\n"
+			. "<label class='verdana2'>"
+		. _T('spiplistes:avec_patron_pied__')
+		. spiplistes_boite_selection_patrons (_SPIPLISTES_PATRONS_PIED_DEFAUT, true, _SPIPLISTES_PATRONS_PIED_DIR, "pied_patron", 1)
+		. "</label>\n"
+		. "</div>\n"
+		; 
 		
 	$page_result .= ""
 		. "<p class='verdana2'>\n"
