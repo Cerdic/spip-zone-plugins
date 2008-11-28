@@ -105,7 +105,7 @@ function spip_thelia_appeler_moteur_thelia($texte)
 		case 'virement' : $securise=1; $pageret=1; $reset=1; break;
 	}
 	
-	global $page;
+	global $page, $res;
 	
 	//sauvegarde des variables qui vont être modifiées pour thélia
 	$sav_page = $page;
