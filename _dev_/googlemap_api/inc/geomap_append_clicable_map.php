@@ -32,7 +32,8 @@ function inc_geomap_append_clicable_map_dist($target_id,$target_lat_id,$target_l
 				var formMap = new GMap2(document.getElementById("'.$target_id.'"));
 				formMap.addControl(new GLargeMapControl());
 				formMap.addControl(new GMapTypeControl());
-				formMap.addControl(new mapAddressControl());
+				// dont think this is still used
+				//formMap.addControl(new mapAddressControl());
 				formMap.setCenter(new GLatLng(lat,long), '.$view_zoom.');'
 	.($Marker?'
 				point = new GPoint(long,lat);
