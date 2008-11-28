@@ -1,0 +1,41 @@
+<plugin>
+	<nom>Tickets, syst&egrave;me de suivi de bugs</nom>
+	<auteur>ARNO*</auteur>
+	<version>1.0</version>
+	<etat>stable</etat>
+	<description>
+<i>Tickets</i> est un outil de suivi de bugs directement int&eacute;gr&eacute; &agrave; l'espace priv&eacute; de SPIP. 
+Il est con&ccedil;u pour faciliter la phase de d&eacute;veloppement du site (notamment les squelettes du site public).
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix>tickets</prefix>
+	<licence>GPL v3</licence>
+	<icon>imgs/logo-bugs.png</icon>
+	<options>tickets_options.php</options>
+	<install>base/tickets_upgrade.php</install>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/tickets_install.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/tickets_install.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>tickets_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<action>droite</action>
+		<inclure>tickets_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<action>gauche</action>
+		<inclure>tickets_pipelines.php</inclure>
+	</pipeline>
+	
+</plugin>
+
