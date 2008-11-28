@@ -591,15 +591,15 @@ function exec_spiplistes_liste_gerer () {
 			)
 		. "<div style='margin:10px 0px;'>\n"
 		.	(
-			($flag_editable)
+			($flag_editable && strpos($GLOBALS['meta']['langues_multilingue'], ","))
 			? ""
 				. "<label class='verdana2' for='changer_lang'>"._T('info_multi_herit')." : </label>\n"
 				. "<select name='changer_lang'  class='fondl' id='changer_lang'>\n"
 				. liste_options_langues('changer_lang', $lang , _T('spiplistes:langue_'),'', '')
 				. "</select>\n"
 			: ""
-				. "<span class='verdana2'>". _T('info_multi_herit')." : "
-				. "<span class='verdana2' style='font-weight:bold;'>".traduire_nom_langue($lang)."</span>\n"
+				//. "<span class='verdana2'>". _T('info_multi_herit')." : "
+				//. "<span class='verdana2' style='font-weight:bold;'>".traduire_nom_langue($lang)."</span>\n"
 			)
 		. "</div>\n"
 		.	(
@@ -610,7 +610,7 @@ function exec_spiplistes_liste_gerer () {
 			)
 		. fin_cadre_relief(true)
 		;
-		
+
 		////////////////////////////
 		// Formulaire adresse email pour le reply-to
 	$page_result .= ""
