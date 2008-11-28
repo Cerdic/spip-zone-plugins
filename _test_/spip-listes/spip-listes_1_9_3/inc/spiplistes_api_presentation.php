@@ -549,7 +549,7 @@ function spiplistes_boite_autocron_info ($icone = "", $return = false, $titre_bo
 		. ($texte ? "<p class='verdana2' style='margin:0;'>$texte</p>\n" : "")
 		. ($bouton ? spiplistes_boite_autocron_form($bouton, $nom_option, 'non') : "")
 		//. fin_cadre_couleur($return)
-		. fin_cadre_couleur_foncee($return)
+		. fin_cadre($return)
 		;
 	if($return) return($result);
 	else echo($result);

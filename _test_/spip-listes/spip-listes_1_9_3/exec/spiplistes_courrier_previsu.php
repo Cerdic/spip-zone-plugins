@@ -88,7 +88,7 @@ function exec_spiplistes_courrier_previsu () {
 	foreach($int_values as $key) {
 		$$key = intval($$key);
 	}
-	
+	spiplistes_log("lang :-: ".$lang);
 	$date = format_mysql_date($annee,$mois,$jour,$heure,$minute);
 	
 	$charset = $meta['charset'];
@@ -129,7 +129,7 @@ function exec_spiplistes_courrier_previsu () {
 				$$key = propre($row[$key]);
 			}
 			
-			if($plein_ecran) {
+			//if($plein_ecran) {
 			
 				$texte_html = ""
 					. $texte_lien_courrier
@@ -173,8 +173,7 @@ function exec_spiplistes_courrier_previsu () {
 					. "</html>\n";
 				ajax_retour($texte_html);
 				exit(0);
-			} // end if plein_ecran
-			echo($texte);
+			//} // end if plein_ecran
 		}
 		else {
 			echo(_T('spiplistes:Erreur_courrier_introuvable'));
@@ -216,10 +215,16 @@ function exec_spiplistes_courrier_previsu () {
 			$titre_html = _T('spiplistes:lettre_info')." ".$nomsite;
 			$titre_texte = spiplistes_courrier_version_texte($titre_html) . "\n";
 
-			$message_html = recuperer_fond('patrons/'.$patron, $contexte_template);
+			$patron_html = spiplistes_patron_find_in_path ('patrons/'.$patron, $lang, false);
+			$message_html = 
+				$patron_html
+				? recuperer_fond($patron_html, $contexte_template)
+				: ""
+				;
+			$patron_texte = spiplistes_patron_find_in_path ('patrons/'.$patron, $lang, true);
 			$message_texte = 
-				(find_in_path('patrons/'.$patron.'_texte.html'))
-				? recuperer_fond('patrons/'.$patron.'_texte', $contexte_template) . "\n"
+				$patron_texte
+				? recuperer_fond($patron_texte, $contexte_template) . "\n"
 				: spiplistes_courrier_version_texte($message_html) . "\n"
 				;
 		} // end if($avec_patron == 'oui')

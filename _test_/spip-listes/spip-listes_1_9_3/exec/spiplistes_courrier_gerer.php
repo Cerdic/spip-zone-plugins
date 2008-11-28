@@ -578,9 +578,19 @@ function exec_spiplistes_courrier_gerer () {
 				. generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE,"id_courrier=$id_courrier&id_liste=$id_liste&lire_base=oui&format=texte&plein_ecran=oui")
 				."' title='"._T('spiplistes:Apercu_plein_ecran')."' target='_blank'>\n"
 			. spiplistes_icone_oeil() . "</a><br />\n"
+			
+			. "<iframe style='background-color:#fff;border:1px solid #000;'"
+				. " src='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE,"id_courrier=$id_courrier&format=texte&lire_base=oui")
+				."' width='100%' height='500'></iframe>\n"
+			
+			
+			
+			/*
 			. "<textarea readonly='readonly' name='texte' rows='".(($spip_ecran == "large") ? 28 : 20)."' class='formo' cols='40' wrap='soft'>"
 			. spiplistes_courrier_version_texte(propre($message_texte))
 			. "</textarea>\n"
+			*/
+			
 			. fin_cadre_couleur(true)
 			//
 			// fin de la boite
