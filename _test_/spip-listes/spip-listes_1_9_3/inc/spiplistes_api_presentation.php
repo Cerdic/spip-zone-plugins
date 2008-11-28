@@ -489,9 +489,9 @@ function spiplistes_liste_des_patrons ($chemin) {
 	$result = array();
 	foreach($liste_patrons as $key => $value) {
 		if (
-			!ereg("_[a-z][a-z].html$", $value)
-			&& !ereg("_texte.html$", $value)
-			&& !ereg("_[a-z][a-z]_texte.html$", $value)
+			!preg_match("=\.[a-z][a-z]\.html$=", $value)
+			&& !preg_match("=_texte\.html$=", $value)
+			&& !preg_match("=_texte\.[a-z][a-z]\.html$=", $value)
 			) {
 			$result[] = basename($value, ".html");
 		}

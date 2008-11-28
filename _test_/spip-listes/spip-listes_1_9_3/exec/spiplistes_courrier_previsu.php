@@ -88,7 +88,7 @@ function exec_spiplistes_courrier_previsu () {
 	foreach($int_values as $key) {
 		$$key = intval($$key);
 	}
-	spiplistes_log("lang :-: ".$lang);
+
 	$date = format_mysql_date($annee,$mois,$jour,$heure,$minute);
 	
 	$charset = $meta['charset'];
@@ -207,26 +207,11 @@ function exec_spiplistes_courrier_previsu () {
 				, 'message' => $message
 			);
 			
-			// Il faut utiliser recuperer_page et non recuperer_fond car sinon les url des articles
-			// sont sous forme privee : spip.php?action=redirect&.... horrible !
-			// pour utiliser recuperer_fond,il faudrait etre ici dans un script action
-			//	$texte_patron = recuperer_fond('patrons/'.$template, $contexte_template);
-	
 			$titre_html = _T('spiplistes:lettre_info')." ".$nomsite;
 			$titre_texte = spiplistes_courrier_version_texte($titre_html) . "\n";
 
-			$patron_html = spiplistes_patron_find_in_path ('patrons/'.$patron, $lang, false);
-			$message_html = 
-				$patron_html
-				? recuperer_fond($patron_html, $contexte_template)
-				: ""
-				;
-			$patron_texte = spiplistes_patron_find_in_path ('patrons/'.$patron, $lang, true);
-			$message_texte = 
-				$patron_texte
-				? recuperer_fond($patron_texte, $contexte_template) . "\n"
-				: spiplistes_courrier_version_texte($message_html) . "\n"
-				;
+			list($message_html, $message_texte) = spiplistes_courriers_assembler_patron ($patron, $contexte_template);
+				
 		} // end if($avec_patron == 'oui')
 
 		else {

@@ -13,10 +13,10 @@
 /*                                                                                        */
 /* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but specifique. Reportez-vous � la Licence Publique Generale GNU  */
-/* pour plus de d�tails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir re�u une copie de la Licence Publique Generale GNU                    */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
 /* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
@@ -436,20 +436,56 @@ function spiplistes_courriers_pieds ($lang, $defaut = 'piedmail') {
  * @param $contexte 
  */
 function spiplistes_courriers_assembler_patron ($patron, $contexte) {
-	static $messages;
-	if($messages === null) {
-		include_spip('public/assembler');
-		$patron = "patrons/".$patron;
-		$message_html = recuperer_fond($patron, $contexte);
-		$patron .= '_texte';
-		$message_texte = 
-			(find_in_path($patron.'.html'))
-			? recuperer_fond($patron, $contexte) . "\n"
-			: spiplistes_courrier_version_texte($message_html) . "\n"
-			;
-		$messages = array($message_html, $message_texte);
-	}
+	
+	include_spip('public/assembler');
+	
+	$path_patron = _SPIPLISTES_PATRONS_DIR . $patron;
+	
+	$patron_html = spiplistes_patron_find_in_path ($path_patron, $contexte['lang'], false);
+
+	$message_html = 
+		$patron_html
+		? recuperer_fond($patron_html, $contexte)
+		: ""
+		;
+	$patron_texte = spiplistes_patron_find_in_path ($path_patron, $contexte['lang'], true);
+	$message_texte = 
+		$patron_texte
+		? recuperer_fond($patron_texte, $contexte) . "\n"
+		: spiplistes_courrier_version_texte($message_html) . "\n"
+		;
+
+	$messages = array($message_html, $message_texte);
+
 	return($messages);
 }
+
+/*
+ * CP-20081128
+ * Recherche les différentes versions de patron possibles
+ * <patron>._texte.en patron texte anglais
+ * <patron>._texte patron texte generique
+ * <patron>.en patron anglais
+ * <patron> patron generique
+ * @return string le chemin du patron si patron trouve' ou FALSE si non trouve'
+ * @param $path_patron string
+ * @param $lang string
+ * @param $chercher_texte bool si TRUE, chercher la version texte du patron
+ */
+function spiplistes_patron_find_in_path ($path_patron, $lang, $chercher_texte = false) {
+	static $t = "_texte", $h = ".html";
+	
+	if(
+		$chercher_texte 
+		&& (find_in_path($path_patron . $t . "." . $lang . $h) || find_in_path($path_patron . $t . $h))
+	) {
+		return($path_patron . $t);
+	}
+	else if(find_in_path($path_patron . "." . $lang . $h) || find_in_path($path_patron . $h)) {
+		return($path_patron);
+	}
+	return(false);
+}
+
 
 ?>

@@ -190,8 +190,9 @@ spiplistes_log($prefix_log."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_D
 			
 //spiplistes_log($prefix_log."Titre => $titre", _SPIPLISTES_LOG_DEBUG);
 	
-			$taille_courrier_ok = (spiplistes_strlen(spiplistes_courrier_version_texte($texte)) > 10);
-	
+			$taille_courrier_ok = (($n = spiplistes_strlen(spiplistes_courrier_version_texte($texte))) > 10);
+spiplistes_log($prefix_log."taille courrier pour la liste $id_liste : $n", _SPIPLISTES_LOG_DEBUG);
+
 			if($taille_courrier_ok) {
 				include_spip('inc/filtres');
 				$texte = liens_absolus($texte);
