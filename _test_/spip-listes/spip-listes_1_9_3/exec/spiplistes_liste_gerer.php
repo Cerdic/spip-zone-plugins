@@ -663,7 +663,7 @@ function exec_spiplistes_liste_gerer () {
 		$page_result .= ""
 			// petite ligne d'info si envoi programme
 			. "<p class='verdana2'>"._T('spiplistes:sujet_courrier_auto')."<br />\n"
-			. "<span class='spip_large'> ".$titre_message."</span></p>\n"
+			. "<span class='spip_large'> ".extraire_multi($titre_message)."</span></p>\n"
 			. "<p class='verdana2'>"
 			. spiplistes_items_get_item('alt', $statut)."<br />\n"
 			.	(	

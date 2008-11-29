@@ -145,12 +145,13 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 			$en_liste.= ""
 				. "<tr class='tr_liste'>\n"
 				. "<td width='11' style='vertical-align:top;'>"
-				. "<img src='".spiplistes_items_get_item("puce", $statut)."' alt=\"".spiplistes_items_get_item("alt", $statut)."\" border='0' style='margin: 3px 1px 1px;' />"
+				. "<img src='".spiplistes_items_get_item("puce", $statut)."' alt=\""
+					. spiplistes_items_get_item("alt", $statut)."\" border='0' style='margin: 3px 1px 1px;' />"
 				. "</td>"
 				. "<td class='arial2'>\n"
 				. "<div>\n"
 				. "<a href=\"".$url_row."\" dir='ltr' style='display:block;'>\n"
-				. $titre
+				. extraire_multi($titre)
 				;
 			
 			switch($element) {
