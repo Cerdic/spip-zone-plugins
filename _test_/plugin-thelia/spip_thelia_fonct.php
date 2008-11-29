@@ -298,7 +298,7 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script) {
 	$texte = remplacement_sortie_thelia($texte);
 
 	//au retour de thélia, on convertit en utf8 pour SPIP
-	$texte = unicode2charset(charset2unicode($texte, 'iso-8859-1'),'utf-8');
+	if (!is_utf8($texte)) $texte = unicode2charset(charset2unicode($texte, 'iso-8859-1'),'utf-8');
 	$out .= $texte;
 	
 	//remettre le niveau d'erreur précédent
