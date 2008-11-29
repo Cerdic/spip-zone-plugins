@@ -26,13 +26,13 @@ function produits_article_update($id_article){
 	return array($id_article);
 }
 function action_produits_article(){
-	
+
 	global $auteur_session;
 	$arg = _request('arg');
 	$hash = _request('hash');
 	$id_auteur = $auteur_session['id_auteur'];
-	$redirect = str_replace("&amp;","&",urldecode(_request('redirect')));
-	if ($redirect==NULL) $redirect="";
+	$redirect = _request('redirect');
+
 	if (!include_spip("inc/securiser_action"))
 		include_spip("inc/actions");
 	if (verifier_action_auteur("produits_article-$arg",$hash,$id_auteur)==TRUE) {
@@ -43,9 +43,9 @@ function action_produits_article(){
 			//if ($redirect) $redirect = parametre_url($redirect,"id_article",$id_article);
 		}
 	}
+
 	if ($redirect)
 		redirige_par_entete(str_replace("&amp;","&",urldecode($redirect)));
-
-		
+	
 }
 ?>

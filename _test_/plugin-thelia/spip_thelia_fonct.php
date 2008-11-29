@@ -273,7 +273,7 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script) {
 
 	$out .= debut_block_invisible('produitsarticle');
 	
-	$link = generer_action_auteur('produits_article',"$id_article",_DIR_RESTREINT_ABS.($retour?(str_replace('&amp;','&',$retour)):generer_url_ecrire('articles&id_article='.$id_article,"",false,true)));
+	$link = generer_action_auteur('produits_article',"$id_article",$retour?(str_replace('&amp;','&',$retour)):generer_url_ecrire('articles','id_article='.$id_article));
 	$out .= "<form method='POST' action='$link'>\n";
 	$out .= form_hidden($link);
 	
