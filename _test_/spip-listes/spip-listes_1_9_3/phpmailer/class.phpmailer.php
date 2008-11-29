@@ -798,6 +798,10 @@ class PHPMailer
         $result .= sprintf("Message-ID: <%s@%s>%s", $uniq_id, $this->ServerHostname(), $this->LE);
         $result .= $this->HeaderLine("X-Priority", $this->Priority);
         $result .= $this->HeaderLine("X-Mailer", "PHPMailer [version " . $this->Version . "]");
+		
+		// CP-20081129, signer l'enveloppe
+        $result .= $this->HeaderLine("X-Generator", "SPIP-Listes");
+		
         
         if($this->ConfirmReadingTo != "")
         {

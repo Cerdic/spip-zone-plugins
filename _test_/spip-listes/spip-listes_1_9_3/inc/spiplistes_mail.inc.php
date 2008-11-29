@@ -15,6 +15,7 @@ include_spip('inc/spiplistes_api_globales');
 
 		function phpMail($email, $objet, $message_html, $message_texte, $charset) {
 		
+			// CP-20081129
 			// c'est plutot a la meleuse de faire ce boulot
 			/*
 			$fromname = $GLOBALS['meta']['nom_site'];
@@ -73,7 +74,7 @@ include_spip('inc/spiplistes_api_globales');
 
 	/**
 	 * d'apres SPIP-Lettres : plugin de gestion de lettres d'information
-	 * inutilis� mais ca pourra peut etre servir pour emabarquer les images
+	 * inutilise' mais ca pourra peut etre servir pour emabarquer les images
 	 * Copyright (c) 2006
 	 * Agence Atypik Creations
 	 *  
