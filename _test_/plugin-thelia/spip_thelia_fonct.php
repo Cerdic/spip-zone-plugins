@@ -7,6 +7,7 @@ function spip_thelia_supprimer_balises_thelia($texte) {
 	return $texte;
 
 }
+
 function spip_thelia_demarrer_session_thelia () {
 	global $page;
 	
@@ -25,6 +26,7 @@ function spip_thelia_demarrer_session_thelia () {
 	ini_set("url_rewriter.tags","a=href,area=href,frame=src,iframe=src,input=src");
 	session_start();
 }
+
 function spip_thelia_header_prive($flux) {
 	
 	//si une boite de sélection spip/thélia sera affichée sur la page, il faut démarrer préalablement une session thélia
@@ -59,8 +61,7 @@ function spip_thelia_insert_head($flux) {
 	return $flux;
 }
 
-function spip_thelia_appeler_moteur_thelia($texte)
-{
+function spip_thelia_appeler_moteur_thelia($texte) {
 	include_spip('inc/charsets');
 
 	//récupérer la version de thélia : valeurs possibles :
@@ -186,8 +187,7 @@ function spip_thelia_appeler_moteur_thelia($texte)
 	return ($texte);	
 }
 
-function remplacement_sortie_thelia($in_thelia)
-{
+function remplacement_sortie_thelia($in_thelia) {
     	//renommage action en thelia_action. méthode provisoire à revoir.
 	$in_thelia = str_replace("adresse.php?action", "adresse.php?thelia_action", $in_thelia);
 	$in_thelia = str_replace("cheque.php?action", "cheque.php?thelia_action", $in_thelia);
@@ -212,7 +212,8 @@ function remplacement_sortie_thelia($in_thelia)
 
 	return $in_thelia;
 }
-function spip_thelia_ajouter_boutons($boutons_admin){
+
+function spip_thelia_ajouter_boutons($boutons_admin) {
 	// si on est admin
 	if ($GLOBALS['connect_statut'] == "0minirezo") {
 	  	// on voit le bouton dans la barre "naviguer"
@@ -221,6 +222,7 @@ function spip_thelia_ajouter_boutons($boutons_admin){
 	}
 	return $boutons_admin;
 }
+
 function spip_thelia_affiche_milieu($flux) {
 	$exec =  $flux['args']['exec'];
 	$id_article= $_REQUEST['id_article'];
@@ -237,13 +239,16 @@ function spip_thelia_affiche_milieu($flux) {
 	}
 	return $flux;
 }
+
 function spip_thelia_article_editable($id_article){
 	return autoriser('modifier','article',$id_article);
 }
-function spip_thelia_rubrique_editable($id_rubrique){
+
+function spip_thelia_rubrique_editable($id_rubrique) {
 	return autoriser('modifier','rubrique',$id_rubrique);
 }
-function spip_thelia_formulaire_article($id_article, $flag_editable, $script){
+
+function spip_thelia_formulaire_article($id_article, $flag_editable, $script) {
 
   	global $spip_lang_right;
  	include_spip("inc/presentation");
@@ -261,7 +266,7 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script){
 		else
 			$bouton = bouton_block_invisible("produitsarticle");
 	}
-	
+
 	$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_SPIP_THELIA."/img_pack/logo_thelia_petit.png", true, "", $bouton._T('spipthelia:produits_associes_article'));
 
 	$out .= debut_block_invisible('produitsarticle');
@@ -279,7 +284,7 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script){
 	$sav_error_reporting = error_reporting(E_ERROR);
 	
 	//on bloque la sortie vers le navigateur le temps d'y faire quelques substitutions	
-	$res = recuperer_fond("fonds/produits_associes_article","id_article=".$id_article);
+	$res = recuperer_fond("fonds/produits_associes_article",array("id_article" => $id_article));
 	$res = str_replace("THELIA-", "#", $res);
 	
 	//avant d'envoyer à thélia, on convertie en iso pour thélia
@@ -308,7 +313,7 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script){
 	return $out;
 }
 
-function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script){
+function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script) {
 
   	global $spip_lang_right;
  	include_spip("inc/presentation");
@@ -343,7 +348,7 @@ function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script){
 	$sav_error_reporting = error_reporting(E_ERROR);
 	
 	//on bloque la sortie vers le navigateur le temps d'y faire quelques substitutions	
-	$res = recuperer_fond("fonds/produits_associes_rubrique","id_rubrique=".$id_rubrique);
+	$res = recuperer_fond("fonds/produits_associes_rubrique",array("id_rubrique" => $id_rubrique));
 	$res = str_replace("THELIA-", "#", $res);
 	
 	//avant d'envoyer à thélia, on convertie en iso pour thélia
