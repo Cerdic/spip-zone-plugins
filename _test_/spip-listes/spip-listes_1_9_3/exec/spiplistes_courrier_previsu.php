@@ -93,15 +93,23 @@ function exec_spiplistes_courrier_previsu () {
 	
 	$charset = $meta['charset'];
 	
-	$texte_lien_courrier =
-		(spiplistes_pref_lire('opt_lien_en_tete_courrier') == 'oui')
+	if(spiplistes_pref_lire('opt_lien_en_tete_courrier') == 'oui' && $id_courrier) {
+		$lien_patron = spiplistes_pref_lire('lien_patron'); 
+		list($lien_html, $lien_texte) = spiplistes_courriers_assembler_patron (
+			_SPIPLISTES_PATRONS_TETE_DIR . $lien_patron
+			, array('url_courrier' => generer_url_public('courrier', "id_courrier=$id_courrier"), 'lang'=>$lang));
+	}
+	else {
+		$lien_html = $lien_texte = "";
+	}
+	/*
 		? spiplistes_lien_courrier_html_get(
 			spiplistes_pref_lire('lien_patron')
 			, generer_url_public('courrier', "id_courrier=$id_courrier")
 			)
 		: ""
 		;
-
+*/
 	// si envoi a une liste, reprendre le patron de pied de la liste
 	if($id_liste) {
 		$pied_html = spiplistes_pied_de_page_liste($id_liste, $lang);
@@ -134,7 +142,7 @@ function exec_spiplistes_courrier_previsu () {
 			//if($plein_ecran) {
 			
 				$texte_html = ""
-					. $texte_lien_courrier
+					. $lien_html
 					. $texte
 					. $pied_html
 					. $texte_editeur
@@ -150,7 +158,7 @@ function exec_spiplistes_courrier_previsu () {
 					$message_texte = 
 						empty($message_texte) 
 						? spiplistes_courrier_version_texte($texte_html) 
-						: spiplistes_courrier_version_texte($texte_lien_courrier)
+						: spiplistes_courrier_version_texte($lien_texte)
 							. spiplistes_courrier_version_texte($message_texte)
 							. $pied_texte
 							. spiplistes_courrier_version_texte($texte_editeur)
@@ -212,7 +220,9 @@ function exec_spiplistes_courrier_previsu () {
 			$titre_html = _T('spiplistes:lettre_info')." ".$nomsite;
 			$titre_texte = spiplistes_courrier_version_texte($titre_html) . "\n";
 
-			list($message_html, $message_texte) = spiplistes_courriers_assembler_patron ($patron, $contexte_template);
+			list($message_html, $message_texte) = spiplistes_courriers_assembler_patron (
+				_SPIPLISTES_PATRONS_DIR . $patron
+				, $contexte_template);
 				
 		} // end if($avec_patron == 'oui')
 

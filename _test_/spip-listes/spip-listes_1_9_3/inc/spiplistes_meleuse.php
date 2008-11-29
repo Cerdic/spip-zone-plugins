@@ -185,13 +185,6 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 				if($lang != '') {
 					$GLOBALS['spip_lang'] = $lang;
 				}
-				
-				if(!$email_envoi = spiplistes_listes_email_emetteur($id_liste)) {
-					$str_log .= " [ERROR] ID_LISTE #id_liste or from email MISSING"; 
-					spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_COURRIER_STATUT_ERREUR);
-					// quitte while() principal
-					break;
-				}
 			}
 			else {
 				// erreur dans un script d'appel ? Ou url ? Ou base erreur ?
@@ -204,8 +197,14 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 			//////////////////////////////
 			// email emetteur
 			
+			if(!$email_envoi = spiplistes_listes_email_emetteur($id_liste)) {
+				$str_log .= " [ERROR] ID_LISTE #id_liste or from email MISSING"; 
+				spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_COURRIER_STATUT_ERREUR);
+				// quitte while() principal
+				break;
+			}
 			$from = $email_envoi;
-			if($is_from_valide = email_valide($from)) {
+			if($from_valide = email_valide($from)) {
 				$fromname = extraire_multi($GLOBALS['meta']['nom_site']);
 				if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
 					include_spip('inc/charsets');
@@ -213,8 +212,8 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 				}
 				$from = $fromname." <$from>";
 			}
-spiplistes_log("email_envoi : " . $email_envoi, _SPIPLISTES_LOG_DEBUG);	
-spiplistes_log("From : " . $from, _SPIPLISTES_LOG_DEBUG);	
+//spiplistes_log("email_envoi : " . $email_envoi, _SPIPLISTES_LOG_DEBUG);	
+//spiplistes_log("From : " . $from, _SPIPLISTES_LOG_DEBUG);	
 		
 			////////////////////////////////////
 			// Prepare la version texte
@@ -228,11 +227,16 @@ spiplistes_log("From : " . $from, _SPIPLISTES_LOG_DEBUG);
 				($opt_lien_en_tete_courrier == 'oui') 
 				&& !empty($lien_patron)
 			) {
+				/*
 				$url_courrier = generer_url_public('courrier', "id_courrier=$id_courrier");
 				$lien_courrier_html = spiplistes_lien_courrier_html_get($lien_patron, $url_courrier);
 				$lien_courrier_texte = spiplistes_lien_courrier_texte_get($lien_patron, $lien_courrier_html, $url_courrier);
-				$page_html = $lien_courrier_html . $page_html;
-				$page_texte = $lien_courrier_texte . $page_texte;
+				*/
+				list($lien_html, $lien_texte) = spiplistes_courriers_assembler_patron (
+					_SPIPLISTES_PATRONS_TETE_DIR . $lien_patron
+					, array('url_courrier' => generer_url_public('courrier', "id_courrier=$id_courrier"), 'lang'=>$lang));
+				$page_html = $lien_html . $page_html;
+				$page_texte = $lien_texte . $page_texte;
 			}
 
 			////////////////////////////////////
@@ -371,7 +375,7 @@ spiplistes_log($prefix_log."total_abos: $total_abonnes, en_cour: $nb_destinatair
 							$cookie = creer_uniqid();
 							spiplistes_auteurs_cookie_oubli_updateq($cookie, $email);
 		
-							if($is_from_valide) {
+							if($from_valide) {
 								$_url = generer_url_public('abonnement','d='.$cookie);
 								
 								if($opt_personnaliser_courrier == 'oui') {

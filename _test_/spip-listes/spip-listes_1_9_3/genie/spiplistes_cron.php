@@ -185,15 +185,16 @@ spiplistes_log($prefix_log."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_D
 			// en cas de periode, la date est dans le passe pour avoir les elements publies depuis cette date
 			$titre = ($titre_message =="") ? $titre._T('spiplistes:_de_').$GLOBALS['meta']['nom_site'] : $titre_message;
 
-			list($texte, $message_texte) = spiplistes_courriers_assembler_patron ($patron
+			list($courrier_html, $courrier_texte) = spiplistes_courriers_assembler_patron (
+				_SPIPLISTES_PATRONS_DIR . $patron
 				, array('date' => $dernier_envoi, 'patron'=>$patron, 'lang'=>$lang));
 			
-			$taille_courrier_ok = (($n = spiplistes_strlen(spiplistes_courrier_version_texte($texte))) > 10);
+			$taille_courrier_ok = (($n = spiplistes_strlen(spiplistes_courrier_version_texte($courrier_html))) > 10);
 spiplistes_log($prefix_log."taille courrier pour la liste $id_liste : $n", _SPIPLISTES_LOG_DEBUG);
 
 			if($taille_courrier_ok) {
 				include_spip('inc/filtres');
-				$texte = liens_absolus($texte);
+				$courrier_html = liens_absolus($courrier_html);
 				$date_debut_envoi = $date_fin_envoi = "''";
 				$statut = _SPIPLISTES_COURRIER_STATUT_ENCOURS;
 			}
@@ -228,8 +229,8 @@ spiplistes_log($prefix_log."envoi mail nouveautes : courrier vide", _SPIPLISTES_
 					. ",".sql_quote($id_liste)
 					. ",".$date_debut_envoi
 					. ",".$date_fin_envoi
-					. ",".sql_quote($texte)
-					. ",".sql_quote($message_texte)
+					. ",".sql_quote($courrier_html)
+					. ",".sql_quote($courrier_texte)
 					. ")"
 			);
 

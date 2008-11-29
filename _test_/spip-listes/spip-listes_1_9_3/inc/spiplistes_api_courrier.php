@@ -435,11 +435,11 @@ function spiplistes_courriers_pieds ($lang, $defaut = 'piedmail') {
  * @param $patron nom du patron
  * @param $contexte 
  */
-function spiplistes_courriers_assembler_patron ($patron, $contexte) {
+function spiplistes_courriers_assembler_patron ($path_patron, $contexte) {
 	
 	include_spip('public/assembler');
 	
-	$path_patron = _SPIPLISTES_PATRONS_DIR . $patron;
+	//$path_patron = _SPIPLISTES_PATRONS_DIR . $patron;
 	
 	$patron_html = spiplistes_patron_find_in_path ($path_patron, $contexte['lang'], false);
 

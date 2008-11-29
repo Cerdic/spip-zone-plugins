@@ -429,7 +429,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 // inc/spiplistes_meleuse.php
 , 'erreur_sans_destinataire' => 'Erreur : aucun destinataire ne peut &ecirc;tre trouv&eacute; pour ce courrier'
 , 'envoi_annule' => 'Envoi annul&eacute;'
-, 'sans_adresse' => 'Mail non envoy&eacute; -> Veuillez d&eacute;finir une adresse de r&eacute;ponse'
+, 'sans_adresse' => ' Mail non envoy&eacute; -> Veuillez d&eacute;finir une adresse de r&eacute;ponse'
 , 'erreur_mail' => 'Erreur : envoi du mail impossible (v&eacute;rifier si mail() de php est disponible)'
 , 'abonnement_mail_text' => "Pour modifier votre abonnement, veuillez vous rendre à l'adresse suivante : "
 , 'msg_abonne_sans_format' => "format de reception manquant"

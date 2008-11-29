@@ -335,11 +335,10 @@ function spiplistes_listes_email_emetteur ($id_liste = 0) {
 		if($result === false) {
 			spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
 		}
-		if(!$result) {
-			$result = (email_valide($ii = $GLOBALS['meta']['email_defaut'])) ? $ii : $GLOBALS['meta']['email_webmaster'];
-			$result = entites_html($GLOBALS['meta']['email_webmaster']);
-		}
-
+	}
+	if(!$result) {
+		$result = (email_valide($ii = $GLOBALS['meta']['email_defaut'])) ? $ii : $GLOBALS['meta']['email_webmaster'];
+		$result = entites_html($GLOBALS['meta']['email_webmaster']);
 	}
 	return($result);
 }
