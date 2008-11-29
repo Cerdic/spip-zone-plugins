@@ -118,7 +118,6 @@ function exec_spiplistes_abonnes_tous () {
 	}
 
 	$page_result .= ""
-		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
 		. spiplistes_boite_autocron()
 		. spiplistes_boite_info_spiplistes(true)
