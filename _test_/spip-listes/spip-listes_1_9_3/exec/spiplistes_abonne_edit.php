@@ -158,9 +158,7 @@ function exec_spiplistes_abonne_edit () {
 		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $sous_rubrique)
 		. debut_gauche($rubrique, true)
 		. spiplistes_boite_info_id(_T('titre_cadre_numero_auteur'), $id_auteur, true, 'id_auteur')
-		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
-		. spiplistes_boite_info_spiplistes(true)
 		. debut_droite($rubrique, true)
 		;
 	
