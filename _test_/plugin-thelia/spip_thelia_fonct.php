@@ -265,16 +265,17 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script) {
 	}
 
 	$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_SPIP_THELIA."/img_pack/logo_thelia_petit.png", true, "", $bouton);
+	
+	//
+	// Afficher les produits associes
+	//
+	$out .= afficher_produits_objet('article',$id_article);
 
 	$out .= debut_block_invisible('produitsarticle');
 	
 	$link = generer_action_auteur('produits_article',"$id_article",_DIR_RESTREINT_ABS.($retour?(str_replace('&amp;','&',$retour)):generer_url_ecrire('articles&id_article='.$id_article,"",false,true)));
 	$out .= "<form method='POST' action='$link'>\n";
 	$out .= form_hidden($link);
-	
-	//
-	// Afficher les produits associes
-	//
 	
 	//masquer provisoirement les warning de session de Thélia en attendant une correction
 	//Thélia retourne des warning de session (headers already sent) car elle démarre trop tard, mais on ne l'utilise pas, on se contente de lister les produits
@@ -337,15 +338,17 @@ function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script) 
 	}
 
 	$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_SPIP_THELIA."/img_pack/logo_thelia_petit.png", true, "", $bouton);
+
+	//
+	// Afficher les produits associes
+	//
+	$out .= afficher_produits_objet('rubrique',$id_rubrique);
+	
 	$out .= debut_block_invisible('produitsrubrique');
 	
 	$link = generer_action_auteur('produits_rubrique',"$id_rubrique",_DIR_RESTREINT_ABS.($retour?(str_replace('&amp;','&',$retour)):generer_url_ecrire('naviguer&id_rubrique='.$id_rubrique,"",false,true)));
 	$out .= "<form method='POST' action='$link'>\n";
 	$out .= form_hidden($link);
-	
-	//
-	// Afficher les produits associes
-	//
 	
 	//masquer provisoirement les warning de session de Thélia en attendant une correction
 	//Thélia retourne des warning de session (headers already sent) car elle démarre trop tard, mais on ne l'utilise pas, on se contente de lister les produits
@@ -379,4 +382,42 @@ function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script) 
 	$out .= "</div><br/>";
 	return $out;
 }
+
+function afficher_produits_objet($type, $id) {
+
+	if (!preg_match(',^[a-z]*$,',$type)) return '';
+
+	$result = determiner_produits_objet($type,$id);
+	if (!spip_num_rows($result)) return '';
+
+	$table = array();
+
+	while ($row = spip_fetch_array($result)) {
+		$vals = array();
+		if (!is_utf8($row['titre'])) $row['titre'] = unicode2charset(charset2unicode($row['titre'], 'iso-8859-1'),'utf-8');
+		$vals[] = $row['titre'];
+		$table[] = $vals;
+	}
+
+	$largeurs = array('14', '', '', '', '', '');
+	$styles = array('arial11', 'arial2', 'arial11', 'arial11', 'arial11', 'arial1');
+
+	$t = afficher_liste($largeurs, $table, $styles);
+	if ($spip_display != 4)
+		$t = $tranches
+			. "<table width='100%' cellpadding='3' cellspacing='0' border='0'>"
+			. $t
+			. "</table>";
+	return "<div class='liste'>$t</div>\n";
+}
+
+function determiner_produits_objet($type, $id) {
+	$les_produits = array();
+	if (!preg_match(',^[a-z]*$,',$type)) return $les_produits;
+
+	$result = spip_query("SELECT id_produit,titre FROM spip_produits_{$type}s JOIN produitdesc ON produitdesc.id = spip_produits_{$type}s.id_produit WHERE id_{$type}="._q($id));
+
+	return $result;
+}
+
 ?>
