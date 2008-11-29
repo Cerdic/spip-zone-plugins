@@ -395,7 +395,16 @@ function afficher_produits_objet($type, $id) {
 	while ($row = spip_fetch_array($result)) {
 		$vals = array();
 		if (!is_utf8($row['titre'])) $row['titre'] = unicode2charset(charset2unicode($row['titre'], 'iso-8859-1'),'utf-8');
-		$vals[] = $row['titre'];
+		
+		$puce = ($row['ligne'])?find_in_path('images/puce-verte.gif'):find_in_path('images/puce-orange.gif');
+		$etat = ($row['ligne'])?_T('spipthelia:produit_en_ligne'):_T('spipthelia:produit_non_publie');
+		$url = generer_url_ecrire('spip_thelia_catalogue','thelia_url='.urlencode('produit_modifier.php?ref='.$row['ref']));
+		$link = "<a class='product_details' href='%s' target='_blank'>%s</a>";
+				
+		$vals[] = sprintf($link,$url,"<img src='$puce' alt='$etat'/>");
+		$vals[] = sprintf($link,$url,$row['titre']);
+		$vals[] = sprintf(number_format($row['prix'],2));
+		
 		$table[] = $vals;
 	}
 
@@ -415,7 +424,11 @@ function determiner_produits_objet($type, $id) {
 	$les_produits = array();
 	if (!preg_match(',^[a-z]*$,',$type)) return $les_produits;
 
-	$result = spip_query("SELECT id_produit,titre FROM spip_produits_{$type}s JOIN produitdesc ON produitdesc.id = spip_produits_{$type}s.id_produit WHERE id_{$type}="._q($id));
+	$result = spip_query("SELECT titre,ref,prix,ligne 
+		FROM spip_produits_{$type}s 
+		JOIN produit ON produit.id = spip_produits_{$type}s.id_produit 
+		JOIN produitdesc ON produitdesc.id = spip_produits_{$type}s.id_produit 
+		WHERE id_{$type}="._q($id));
 
 	return $result;
 }

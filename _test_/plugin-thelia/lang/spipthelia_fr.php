@@ -135,7 +135,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'paiement_desactive' => 'Le paiement est temporairement d&eacute;sactiv&eacute; sur ce site. Nous vous invitons &agrave; r&eacute;&eacute;ssayer ult&eacute;rieurement',
 'actualiser' => 'Actualiser',
 'pas_de_commande' => 'Vous n\'avez pas de commande enregistr&eacute;es ou en cours',
-'prix' => 'prix'
+'prix' => 'prix',
+'produit_en_ligne' => 'Produit en ligne',
+'produit_non_publie' => 'Produit non publi&eacute;'
 
 
 
