@@ -39,8 +39,15 @@ define("_DIR_PLUGIN_SPIPLISTES_IMG_PACK", _DIR_PLUGIN_SPIPLISTES."img_pack/");
 define("_SPIPLISTES_PATRONS_DIR", "patrons/");
 define("_SPIPLISTES_PATRONS_TETE_DIR", _SPIPLISTES_PATRONS_DIR."lien_en_tete_courriers/");
 define("_SPIPLISTES_PATRONS_PIED_DIR", _SPIPLISTES_PATRONS_DIR."pieds_courriers/");
-define("_SPIPLISTES_PATRONS_PIED_DEFAUT", _SPIPLISTES_PATRONS_PIED_DIR."piedmail");
+define("_SPIPLISTES_PATRON_PIED_DEFAUT", "piedmail");
+define("_SPIPLISTES_PATRON_PIED_IGNORE", "aucun");
+define("_SPIPLISTES_PATRONS_PIED_DEFAUT", _SPIPLISTES_PATRONS_PIED_DIR._SPIPLISTES_PATRON_PIED_DEFAUT);
 define("_SPIPLISTES_PATRONS_TAMPON_DIR", _SPIPLISTES_PATRONS_DIR."tampons_courriers/");
+
+// au dela de cette taille, le contenu du champ est considéré
+// comme le contenu du patron
+// (compat anciennes versions de SPIP-Listes)
+define("_SPIPLISTES_PATRON_FILENAMEMAX", 30);
 
 define("_SPIPLISTES_RUBRIQUE", "messagerie");
 

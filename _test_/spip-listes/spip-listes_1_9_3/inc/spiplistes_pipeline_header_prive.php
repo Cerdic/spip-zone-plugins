@@ -52,6 +52,7 @@ function spiplistes_header_prive ($flux) {
 
 		switch($exec) {
 			case _SPIPLISTES_EXEC_COURRIER_EDIT:
+			case _SPIPLISTES_EXEC_COURRIER_GERER:
 				$flux .= ""
 					. "<script type=\"text/javascript\" src=\"" ._DIR_PLUGIN_SPIPLISTES . "javascript/spiplistes_courrier_edit.js\"></script>\n"
 /*

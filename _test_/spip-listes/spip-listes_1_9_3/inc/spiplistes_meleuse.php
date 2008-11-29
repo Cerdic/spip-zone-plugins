@@ -163,8 +163,6 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 				$nb_emails['html'] = 0
 				;
 			
-			$pied_page_html = "" ;
-			
 			$str_log .= " id_courrier #$id_courrier"; 
 			
 			//////////////////////////
@@ -178,12 +176,29 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 				$total_abonnes = spiplistes_listes_nb_abonnes_compter($id_liste);
 				$str_log .= " TO id_liste #$id_liste ($total_abonnes users)"; 
 	
-				$pied_page_html = spiplistes_pied_de_page_liste($id_liste);
-
 				$lang = spiplistes_listes_langue($id_liste);
 
 				if($lang != '') {
 					$GLOBALS['spip_lang'] = $lang;
+				}
+				
+				$contexte = array('lang' => $lang);
+				
+				$pied_patron = spiplistes_listes_pied_patron($id_liste);
+				if(!$pied_patron) {
+					$pied_patron = _SPIPLISTES_PATRON_PIED_DEFAUT;
+				}
+				if(strlen($pied_patron) > _SPIPLISTES_PATRON_FILENAMEMAX) {
+					// rester compatible avec les anciennes version de SIP-Listes
+					// qui stoquaient le patron assemble' en base
+					$pied_texte = spiplistes_courrier_version_texte($pied_html = $pied_patron);
+				}
+				else {
+					list($pied_html, $pied_texte) = spiplistes_courriers_assembler_patron (
+						_SPIPLISTES_PATRONS_PIED_DIR . $pied_patron
+						, $contexte
+						, ($pied_patron == _SPIPLISTES_PATRON_PIED_IGNORE)
+						);
 				}
 			}
 			else {
@@ -219,7 +234,6 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 			// Prepare la version texte
 			$objet_texte = spiplistes_courrier_version_texte($objet_html);
 			$page_texte = ($message_texte !='') ? $message_texte : spiplistes_courrier_version_texte($page_html);
-			$pied_page_texte = spiplistes_courrier_version_texte($pied_page_html);
 			
 			////////////////////////////////////
 			// Ajoute lien tete de courrier
@@ -247,7 +261,7 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 			// transcrire le contenu
 			if($GLOBALS['meta']['spiplistes_charset_envoi'] != $GLOBALS['meta']['charset']){
 				include_spip('inc/charsets');
-				foreach(array('objet_html', 'objet_texte', 'page_html', 'page_texte', 'pied_page_html', 'pied_page_texte'
+				foreach(array('objet_html', 'objet_texte', 'page_html', 'page_texte', 'pied_html', 'pied_texte'
 					, 'pied_rappel_html', 'pied_rappel_texte', 'tampon_html', 'tampon_texte') as $key) {
 					if(!empty($$key)) {
 						$$key = spiplistes_translate_2_charset(
@@ -260,7 +274,7 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 			}
 			
 			// corrige les liens relatifs (celui de texte a deja ete corrige par la trieuse (cron)
-			foreach(array('pied_page_html', 'pied_page_texte'
+			foreach(array('pied_html', 'pied_texte'
 				, 'pied_rappel_html', 'pied_rappel_texte', 'tampon_html', 'tampon_texte') as $key) {
 				if(!empty($$key)) {
 					$$key = liens_absolus($$key);
@@ -390,14 +404,14 @@ spiplistes_log($prefix_log."total_abos: $total_abonnes, en_cour: $nb_destinatair
 										$email_a_envoyer[$format_abo]->Body =
 											"<html>\n\n<body>\n\n"
 											. $page_html
-											. $pied_page_html
+											. $pied_html
 											. "<a href=\"$_url\">".$pied_rappel_html."</a>\n\n</body></html>"
 											. $tampon_html
 											;
 										/* la version alternative texte */
 										$email_a_envoyer[$format_abo]->AltBody = 
 											$page_texte ."\n\n"
-											. $pied_page_texte
+											. $pied_texte
 											. str_replace("&amp;", "&", $pied_rappel_texte). " " . $_url."\n\n"
 											. $tampon_texte
 											;
@@ -405,7 +419,7 @@ spiplistes_log($prefix_log."total_abos: $total_abonnes, en_cour: $nb_destinatair
 									case 'texte':
 										$email_a_envoyer[$format_abo]->Body =
 											$page_texte ."\n\n"
-											. $pied_page_texte
+											. $pied_texte
 											. str_replace("&amp;", "&", $pied_rappel_texte). " " . $_url."\n\n"
 											. $tampon_texte
 											;

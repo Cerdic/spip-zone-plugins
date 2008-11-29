@@ -96,7 +96,9 @@ function exec_spiplistes_liste_edit(){
 	}
 
 	// construit le pied
-	$pied_page = spiplistes_pied_de_page_liste($id_liste, $lang);
+	// a partir de 2.0049, le patron de pied est construit par la meleuse
+	// afin de permettre _texte et multilingue
+	//$pied_page = spiplistes_pied_de_page_liste($id_liste, $lang);
 
 	$gros_bouton_retour = icone(
 		_T('spiplistes:retour_link')
@@ -133,10 +135,8 @@ function exec_spiplistes_liste_edit(){
 		. debut_gauche($rubrique, true)
 		. spiplistes_boite_info_id(_T('spiplistes:liste_numero'), $id_liste, true)
 		. spiplistes_naviguer_paniers_listes(_T('spiplistes:aller_aux_listes_'), true)
-		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
 		//. spiplistes_boite_autocron() // ne pas gener l'edition
-		. spiplistes_boite_info_spiplistes(true)
 		. debut_droite($rubrique, true)
 		;
 
@@ -195,11 +195,12 @@ function exec_spiplistes_liste_edit(){
 		. $texte
 		. "</textarea>\n"
 		// pied de page
-		. _T('spiplistes:texte_pied')
-		. _T('spiplistes:texte_contenu_pied')
-		. "<div style='background-color:#fff'>"
-		. $pied_page
-		. "</div>"
+		// inutile de l'afficher, on a pas encore le contexte (lang)
+		//. _T('spiplistes:texte_pied')
+		//. _T('spiplistes:texte_contenu_pied')
+		//. "<div style='background-color:#fff'>"
+		//. $pied_page
+		//. "</div>"
 		. "<p align='right' class='verdana2'>"
 		. "<input class='fondo' type='submit' name='btn_liste_edit' value='"._T('bouton_valider')."' />"
 		. "</p>"

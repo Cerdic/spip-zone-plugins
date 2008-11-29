@@ -80,6 +80,7 @@ function exec_spiplistes_courrier_previsu () {
 		, 'Confirmer', 'date'
 		, 'lire_base', 'format', 'plein_ecran'
 		, 'date_sommaire'
+		, 'oeil_html', 'oeil_texte'
 	);
 	foreach(array_merge($str_values, $int_values) as $key) {
 		$$key = _request($key);
@@ -92,34 +93,37 @@ function exec_spiplistes_courrier_previsu () {
 	$date = format_mysql_date($annee,$mois,$jour,$heure,$minute);
 	
 	$charset = $meta['charset'];
-	
-	if(spiplistes_pref_lire('opt_lien_en_tete_courrier') == 'oui' && $id_courrier) {
-		$lien_patron = spiplistes_pref_lire('lien_patron'); 
-		list($lien_html, $lien_texte) = spiplistes_courriers_assembler_patron (
-			_SPIPLISTES_PATRONS_TETE_DIR . $lien_patron
-			, array('url_courrier' => generer_url_public('courrier', "id_courrier=$id_courrier"), 'lang'=>$lang));
-	}
-	else {
-		$lien_html = $lien_texte = "";
-	}
-	/*
-		? spiplistes_lien_courrier_html_get(
-			spiplistes_pref_lire('lien_patron')
-			, generer_url_public('courrier', "id_courrier=$id_courrier")
-			)
-		: ""
-		;
-*/
+
+	$contexte = array(
+			'url_courrier' => generer_url_public('courrier', "id_courrier=$id_courrier")
+			, 'lang' => $lang
+			);
+
+	list($lien_html, $lien_texte) = spiplistes_courriers_assembler_patron (
+		_SPIPLISTES_PATRONS_TETE_DIR . spiplistes_pref_lire('lien_patron')
+		, $contexte
+		, (spiplistes_pref_lire('opt_lien_en_tete_courrier') != 'oui' || !$id_courrier)
+		);
+
 	// si envoi a une liste, reprendre le patron de pied de la liste
-	if($id_liste) {
-		$pied_html = spiplistes_pied_de_page_liste($id_liste, $lang);
-		$pied_texte = spiplistes_courrier_version_texte($pied_html);
+	$pied_patron = 
+		($id_liste) 
+		? spiplistes_listes_pied_patron($id_liste) 
+		: ($pied_patron ? $pied_patron : _SPIPLISTES_PATRON_PIED_DEFAUT)
+		;
+	if(strlen($pied_patron) > _SPIPLISTES_PATRON_FILENAMEMAX) {
+		// rester compatible avec les anciennes version de SIP-Listes
+		// qui stoquaient le patron assemble' en base
+		$pied_texte = spiplistes_courrier_version_texte($pied_html = $pied_patron);
 	}
-	// sinon, prendre le patron de pied demandé
 	else {
-		list($pied_html, $pied_texte) = spiplistes_courriers_pieds ($lang, $pied_patron);
+		list($pied_html, $pied_texte) = spiplistes_courriers_assembler_patron (
+			_SPIPLISTES_PATRONS_PIED_DIR . $pied_patron
+			, $contexte
+			, ($pied_patron == _SPIPLISTES_PATRON_PIED_IGNORE)
+			);
 	}
-	
+				
 	$texte_editeur =
 		(spiplistes_pref_lire('opt_ajout_tampon_editeur') == 'oui')
 		? spiplistes_tampon_html_get(spiplistes_pref_lire('tampon_patron'))
@@ -312,7 +316,7 @@ function exec_spiplistes_courrier_previsu () {
 			. $pied_html
 			. $texte_editeur
 			. "</div>\n"
-			. "</div>\n" // id='previsu-html
+			. "</div>\n" // fin id='previsu-html
 			. "<div id='previsu-texte' class='switch-previsu' style='display:none;'>\n"
 			. "<a href='javascript:jQuery(this).switch_previsu()'>" . _T('spiplistes:version_html') . "</a>\n"
 				. " / " 
@@ -325,7 +329,7 @@ function exec_spiplistes_courrier_previsu () {
 			. $texte_editeur
 			. "</pre>"
 			. "</div>\n"
-			. "</div>\n" // id='previsu-texte
+			. "</div>\n" // fin id='previsu-texte
 			. "<p style='text-align:right;margin-bottom:0;'>"
 			. "<input type='hidden' name='modifier_message' value='oui' />\n"
 			.	(

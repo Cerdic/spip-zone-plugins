@@ -373,6 +373,17 @@ function spiplistes_courriers_en_queue_compter ($sql_whereq = "") {
 	return(spiplistes_sql_compter("spip_auteurs_courriers", $sql_whereq));
 }
 
+/*
+ * @return le nom du patron de pied
+ * @param $id_liste int
+ */
+function spiplistes_listes_pied_patron ($id_liste) {
+	if ($result = sql_getfetsel('pied_page', 'spip_listes', "id_liste=".sql_quote($id_liste), '','',1) === false) {
+		spiplistes_sqlerror_log();
+	}
+	return($result);
+}
+
 // CP-20080510
 function spiplistes_courriers_en_queue_modifier ($array_set, $sql_whereq) {
 	return(
@@ -640,7 +651,7 @@ function spiplistes_lien_courrier_texte_get ($lien_patron, $lien_html, $url_cour
 	return($result);
 }
 
-function spiplistes_pied_de_page_liste($id_liste = 0, $lang = false) {
+function spiplistes_pied_de_page_liste ($id_liste = 0, $lang = false) {
 	$result = false;
 	if(!$lang) {
 		$lang = $GLOBALS['spip_lang'];

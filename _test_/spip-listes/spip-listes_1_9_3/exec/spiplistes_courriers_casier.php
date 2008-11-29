@@ -235,7 +235,6 @@ spiplistes_log("SEND id_courrier #$id_courrier TO #$id_auteur_test TEST BY id_au
 		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $sous_rubrique)
 		. debut_gauche($rubrique, true)
 		. spiplistes_naviguer_paniers_courriers(_T('spiplistes:aller_au_panier_'), true)
-		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
 		. spiplistes_boite_autocron()
 		. spiplistes_boite_info_spiplistes(true)

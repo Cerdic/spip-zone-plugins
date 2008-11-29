@@ -197,7 +197,6 @@ function exec_spiplistes_maintenance () {
 		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $sous_rubrique)
 		. debut_gauche($rubrique, true)
 		. spiplistes_boite_meta_info(_SPIPLISTES_PREFIX)
-		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
 		. spiplistes_boite_autocron() 
 		. spiplistes_boite_info_spiplistes(true)

@@ -525,17 +525,16 @@ function exec_spiplistes_courrier_gerer () {
 		. debut_gauche($rubrique, true)
 		. spiplistes_boite_info_id(_T('spiplistes:Courrier_numero_'), $id_courrier, true)
 		. spiplistes_naviguer_paniers_courriers(_T('spiplistes:aller_au_panier_'), true)
-		. creer_colonne_droite($rubrique, true)
+		//. creer_colonne_droite($rubrique, true)  // debut_gauche() s'en occupe
 		. spiplistes_boite_raccourcis(true)
 		. spiplistes_boite_autocron()
-		. spiplistes_boite_info_spiplistes(true)
 		. debut_droite($rubrique, true)
 		;
 		
 	if($id_courrier > 0) {
 	/////////////////////
 	// construction du ventre
-		$page_result .= ""
+		$page_result .= "\n<!-- construction du ventre -->\n"
 			. $message_erreur
 			. debut_cadre_relief(spiplistes_items_get_item('icon', $statut), true)
 			. "<table width='100%'  border='0' cellspacing='0' cellpadding='0'>"
@@ -558,40 +557,51 @@ function exec_spiplistes_courrier_gerer () {
 			. $boite_confirme_envoi
 			. $boite_selection_destinataire
 			. "<br />\n"
-			//
-			// boite courrier au format html
-			. debut_cadre_couleur('', true)
-			. _T('spiplistes:version_html')
-			. "&nbsp;<a href='"
-				. generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE,"id_courrier=$id_courrier&id_liste=$id_liste&lire_base=oui&plein_ecran=oui")
+			;
+
+		function spiplistes_generer_oeil ($params) {
+			return(
+				"&nbsp;<a href='"
+				. generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE, $params)
 				. "' title='"._T('spiplistes:Apercu_plein_ecran')."' target='_blank'>\n"
-			. spiplistes_icone_oeil() . "</a><br />\n"
-			. "<iframe style='background-color:#fff;border:1px solid #000;'"
-				. " src='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE,"id_courrier=$id_courrier&lire_base=oui")
-				."' width='100%' height='500'></iframe>\n"
-			. fin_cadre_couleur(true)
-			//
-			// boite courrier au format texte seul
+				. spiplistes_icone_oeil() . "</a>"
+			);
+		}
+
+		// previsu
+		$params = "id_courrier=$id_courrier&id_liste=$id_liste";
+		$oeil_html = spiplistes_generer_oeil($params. "&lire_base=oui&plein_ecran=oui");
+		$oeil_texte = spiplistes_generer_oeil($params . "&lire_base=oui&plein_ecran=oui&format=texte");
+			
+		$page_result .= ""
 			. debut_cadre_couleur('', true)
-			. _T('spiplistes:version_texte')
-			. "&nbsp;<a href='"
-				. generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE,"id_courrier=$id_courrier&id_liste=$id_liste&lire_base=oui&format=texte&plein_ecran=oui")
-				."' title='"._T('spiplistes:Apercu_plein_ecran')."' target='_blank'>\n"
-			. spiplistes_icone_oeil() . "</a><br />\n"
-			
-			. "<iframe style='background-color:#fff;border:1px solid #000;'"
-				. " src='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE,"id_courrier=$id_courrier&format=texte&lire_base=oui")
+			. "<form id='choppe_patron-1' action='$form_action' method='post' name='choppe_patron-1'>\n"
+			. "<div id='previsu-html' class='switch-previsu'>\n"
+			. _T('spiplistes:version_html') . $oeil_html
+				. " / " . "<a href='javascript:jQuery(this).switch_previsu()'>" 
+				. _T('spiplistes:version_texte') . $oeil_texte
+			. "<div>\n"
+			. "<iframe class='previsu-edit'"
+				. " src='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE, $params . "&lire_base=oui")
+				. "' width='100%' height='500'></iframe>\n"
+			. "</div>\n"
+			. "</div>\n" // fin id='previsu-html
+			. "<div id='previsu-texte' class='switch-previsu' style='display:none;'>\n"
+			. "<a href='javascript:jQuery(this).switch_previsu()'>" . _T('spiplistes:version_html') . "</a>\n"
+				. $oeil_html
+				. " / " 
+				. _T('spiplistes:version_texte') . "</a> $oeil_texte\n"
+			. "<div>\n"
+			//. "<pre>"
+			. "<iframe class='previsu-edit'"
+				. " src='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE, $params . "&format=texte&lire_base=oui")
 				."' width='100%' height='500'></iframe>\n"
-			
-			
-			
-			/*
-			. "<textarea readonly='readonly' name='texte' rows='".(($spip_ecran == "large") ? 28 : 20)."' class='formo' cols='40' wrap='soft'>"
-			. spiplistes_courrier_version_texte(propre($message_texte))
-			. "</textarea>\n"
-			*/
-			
+			//. "</pre>"
+			. "</div>\n"
+			. "</div>\n" // fin id='previsu-texte
+			. "</form>\n"
 			. fin_cadre_couleur(true)
+			
 			//
 			// fin de la boite
 			. fin_cadre_relief(true)
@@ -616,7 +626,7 @@ function exec_spiplistes_courrier_gerer () {
 } // end function exec_spiplistes_courrier_gerer ()
 
 function spiplistes_icone_oeil () {
-	return("<img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."oeil-16.png' alt='' width:'16' height='16' border='0' />");
+	return("<img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."oeil-16.png' alt='' width='16' height='16' border='0' />");
 }
 
 /* retourne l'id auteur depuis l'email */

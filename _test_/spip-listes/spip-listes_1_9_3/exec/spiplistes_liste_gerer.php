@@ -107,7 +107,7 @@ function exec_spiplistes_liste_gerer () {
 				$titre = _T('spiplistes:liste_sans_titre');
 			}
 			
-			$pied_page = spiplistes_pied_de_page_liste(0, $GLOBALS['spip_lang']);
+			$pied_page = _SPIPLISTES_PATRON_PIED_DEFAUT;
 			
 			$id_liste = spiplistes_listes_liste_creer(_SPIPLISTES_PRIVATE_LIST, $GLOBALS['spip_lang']
 				, $titre, $texte, $pied_page);
@@ -151,14 +151,17 @@ function exec_spiplistes_liste_gerer () {
 			}
 			
 			// Modifier le grand patron ?
+			// a partir de 2.0049, le patron de pied est construit par la meleuse
+			// afin de permettre _texte et multilingue
 			if($btn_grand_patron && $patron) {
 				$sql_champs['patron'] = $patron;
 			}
 			
 			// Modifier patron de pied ?
 			if($btn_patron_pied && $patron) {
-				$pied_page = spiplistes_pied_page_html_get($patron);
-				$sql_champs['pied_page'] = $pied_page;
+				//$pied_page = spiplistes_pied_page_html_get($patron);
+				//$sql_champs['pied_page'] = $pied_page;
+				$sql_champs['pied_page'] = $patron;
 			}
 			
 			// Modifier diffusion ?
@@ -497,15 +500,15 @@ function exec_spiplistes_liste_gerer () {
 		. spiplistes_boite_patron($flag_editable, $id_liste, _SPIPLISTES_EXEC_LISTE_GERER, 'btn_grand_patron'
 			, _SPIPLISTES_PATRONS_DIR, _T('spiplistes:Patron_grand_')
 			, ($patron ? $patron : "")
-			, $patron, true)
+			, $patron)
 		. spiplistes_boite_patron($flag_editable, $id_liste, _SPIPLISTES_EXEC_LISTE_GERER, 'btn_patron_pied'
 			, _SPIPLISTES_PATRONS_PIED_DIR, _T('spiplistes:Patron_de_pied_')
-			, (($ii = strlen($pied_page)) ? _T('taille_octets',array('taille'=>$ii)) : "")
-			, ($ii==0), true)
-		. creer_colonne_droite($rubrique, true)
+			, ((($ii = strlen($pied_page)) > _SPIPLISTES_PATRON_FILENAMEMAX) 
+				? _T('taille_octets',array('taille'=>$ii)) . _T('spiplistes:conseil_regenerer_pied')
+				: $pied_page)
+			, $pied_page)
 		. spiplistes_boite_raccourcis(true)
 		. spiplistes_boite_autocron()
-		. spiplistes_boite_info_spiplistes(true)
 		. debut_droite($rubrique, true)
 		. $message_erreur
 		;
@@ -1056,6 +1059,70 @@ if(!function_exists("html_entity_decode")) {
 		$trans_tbl = array_flip ($trans_tbl);
 		return strtr ($string, $trans_tbl);
 	}
+}
+
+/*
+ * From SPIP-Listes-V: CP:20070923. Boite de selection de patrons
+ * @return string boite de patrons
+ * @param $flag_editable bool
+ * @param $id_liste int
+ * @param $exec_retour string
+ * @param $nom_bouton_valider string nom du <select>
+ * @param $chemin_patrons string
+ * @param $titre_boite string
+ * @param $msg_patron string message ou nom du patron
+ * @param $patron string patron actuel pour selected
+ */
+function spiplistes_boite_patron ($flag_editable, $id_liste
+	, $exec_retour, $nom_bouton_valider, $chemin_patrons, $titre_boite = ""
+	, $msg_patron = false, $patron = "") {
+	// bloc selection patron
+	$result = ""
+		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."patron-24.png", true)
+		. "<div class='verdana1' style='text-align: center;'>\n"
+		;
+	$titre_boite = "<strong>$titre_boite</strong>\n";
+	
+	if($flag_editable) {
+	// inclusion du script de gestion des layers de SPIP
+		if(($patron === true) || (is_string($patron) && empty($patron))) {
+			$result  .= ""
+				. spiplistes_bouton_block_depliable ($titre_boite, true, md5($nom_bouton_valider))
+				. (spiplistes_spip_est_inferieur_193() ? $titre_boite : "")
+				. spiplistes_debut_block_visible(md5($nom_bouton_valider))
+				;
+		}
+		else {
+			$result  .= ""
+				. spiplistes_bouton_block_depliable ($titre_boite, false, md5($nom_bouton_valider))
+				. (spiplistes_spip_est_inferieur_193() ? $titre_boite : "")
+				. spiplistes_debut_block_invisible(md5($nom_bouton_valider))
+				;
+		}
+	}
+	else {
+		$result  .= $titre_boite;
+	}
+	if($flag_editable) {
+		$result .= "\n"
+			. "<form action='".generer_url_ecrire($exec_retour, "id_liste=$id_liste")."' method='post' style='margin:1ex;'>\n"
+			. spiplistes_boite_selection_patrons ($patron, true, $chemin_patrons)
+			. "<div style='margin-top:1em;text-align:right;'><input type='submit' name='$nom_bouton_valider' value='"._T('bouton_valider')."' class='fondo' /></div>\n"
+			. "</form>\n"
+			. fin_block()
+			;
+	}
+	else {
+	}
+	$result .= "\n"
+		. "<div style='text-align:center'>\n"
+		. ($msg_patron ? $msg_patron : "<span style='color:gray;'>&lt;"._T('spiplistes:aucun')."&gt;</span>\n")
+		. "</div>\n"
+		. "</div>\n"
+		. fin_cadre_relief(true);
+		;
+
+	return($result);
 }
 
 

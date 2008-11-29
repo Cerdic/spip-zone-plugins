@@ -199,7 +199,6 @@ function exec_spiplistes_config () {
 		. barre_onglets($rubrique, _SPIPLISTES_PREFIX)
 		. debut_gauche($rubrique, true)
 		. spiplistes_boite_meta_info(_SPIPLISTES_PREFIX)
-		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
 		. spiplistes_boite_autocron()
 		. spiplistes_boite_info_spiplistes(true)

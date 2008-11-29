@@ -130,10 +130,8 @@ function exec_spiplistes_courrier_edit(){
 		. debut_gauche($rubrique, true)
 		. spiplistes_boite_info_id(_T('spiplistes:Courrier_numero_'), $id_courrier, true)
 		. spiplistes_naviguer_paniers_courriers(_T('spiplistes:aller_au_panier_'), true)
-		. creer_colonne_droite($rubrique, true)
 		. spiplistes_boite_raccourcis(true)
 		//. spiplistes_boite_autocron() // ne pas gener l'edition
-		. spiplistes_boite_info_spiplistes(true)
 		. debut_droite($rubrique, true)
 		;
 

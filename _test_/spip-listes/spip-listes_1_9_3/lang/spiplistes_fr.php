@@ -318,6 +318,9 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'Pas_de_periodicite' => "Pas de p&eacute;riodicit&eacute;."
 , 'prog_env' => 'Programmer un envoi automatique'
 , 'prog_env_non' => 'Ne pas programmer d\'envoi'
+, 'conseil_regenerer_pied' => "<br />Ce patron est issu d'une ancienne version de SPIP-Listes.<br />
+	Conseil: s&eacute;lectionnez &agrave; nouveau le patron de pied pour prendre en compte le multilinguisme 
+	et/ou la version &#39;texte seul&#39; du patron."
 
 // exec/spiplistes_listes_toutes.php
 // exec/spiplistes_maintenance.php

@@ -1,5 +1,5 @@
 // spiplistes_courrier_previsu.js
-// utilisé par _SPIPLISTES_EXEC_COURRIER_REDAC
+// utilise par _SPIPLISTES_EXEC_COURRIER_EDIT et _SPIPLISTES_EXEC_COURRIER_GERER
 
 // $LastChangedRevision: 15830 $
 // $LastChangedBy: paladin@quesaco.org $

@@ -64,7 +64,7 @@ function spiplistes_items_get_item($item, $statut) {
 	}
 }
 
-function spiplistes_gros_titre($titre, $ze_logo='', $return = false) {
+function spiplistes_gros_titre ($titre, $ze_logo='', $return = false) {
 	if(!spiplistes_spip_est_inferieur_193()) {
 		$ze_logo = ""; // semble ne plus etre utilise dans exec/*
 	}
@@ -387,62 +387,6 @@ function spiplistes_boite_selection_patrons ($patron="", $return=false, $chemin=
 		}
 	}
 	$result  .= "</select>\n";
-
-	if($return) return($result);
-	else echo($result);
-}
-
-
-
-// From SPIP-Listes-V: CP:20070923
-function spiplistes_boite_patron ($flag_editable, $id_liste
-	, $exec_retour, $nom_bouton_valider, $chemin_patrons, $titre_boite = ""
-	, $msg_patron = false, $patron = "", $return = false) {
-	// bloc selection patron
-	$result = ""
-		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."patron-24.png", true)
-		. "<div class='verdana1' style='text-align: center;'>\n"
-		;
-	$titre_boite = "<strong>$titre_boite</strong>\n";
-	
-	if($flag_editable) {
-	// inclusion du script de gestion des layers de SPIP
-		if(($patron === true) || (is_string($patron) && empty($patron))) {
-			$result  .= ""
-				. spiplistes_bouton_block_depliable ($titre_boite, true, md5($nom_bouton_valider))
-				. (spiplistes_spip_est_inferieur_193() ? $titre_boite : "")
-				. spiplistes_debut_block_visible(md5($nom_bouton_valider))
-				;
-		}
-		else {
-			$result  .= ""
-				. spiplistes_bouton_block_depliable ($titre_boite, false, md5($nom_bouton_valider))
-				. (spiplistes_spip_est_inferieur_193() ? $titre_boite : "")
-				. spiplistes_debut_block_invisible(md5($nom_bouton_valider))
-				;
-		}
-	}
-	else {
-		$result  .= $titre_boite;
-	}
-	if($flag_editable) {
-		$result .= "\n"
-			. "<form action='".generer_url_ecrire($exec_retour, "id_liste=$id_liste")."' method='post' style='margin:1ex;'>\n"
-			. spiplistes_boite_selection_patrons ($patron, true, $chemin_patrons)
-			. "<div style='margin-top:1em;text-align:right;'><input type='submit' name='$nom_bouton_valider' value='"._T('bouton_valider')."' class='fondo' /></div>\n"
-			. "</form>\n"
-			. fin_block()
-			;
-	}
-	else {
-	}
-	$result .= "\n"
-		. "<div style='text-align:center'>\n"
-		. ($msg_patron ? $msg_patron : "<span style='color:gray;'>&lt;"._T('spiplistes:aucun')."&gt;</span>\n")
-		. "</div>\n"
-		. "</div>\n"
-		. fin_cadre_relief(true);
-		;
 
 	if($return) return($result);
 	else echo($result);
