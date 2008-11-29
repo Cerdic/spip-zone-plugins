@@ -5,7 +5,6 @@ function spip_thelia_supprimer_balises_thelia($texte) {
 	//suppression des balises thelia
 	$texte = str_replace("THELIA-", "DUMMY-", $texte);
 	return $texte;
-
 }
 
 function spip_thelia_demarrer_session_thelia () {
@@ -15,7 +14,6 @@ function spip_thelia_demarrer_session_thelia () {
 	$sav_page = $page;
 	$sav_session_navig_lang = $_SESSION['navig']->lang;
 	
-
 	//conflit sur la variable $page. 
 	$page = new stdclass;
 	$page = "";
@@ -27,8 +25,7 @@ function spip_thelia_demarrer_session_thelia () {
 	session_start();
 }
 
-function spip_thelia_header_prive($flux) {
-	
+function spip_thelia_header_prive($flux) {	
 	//si une boite de sélection spip/thélia sera affichée sur la page, il faut démarrer préalablement une session thélia
 	$exec =  $_REQUEST['exec'];
 	$id_article= $_REQUEST['id_article'];
@@ -105,19 +102,16 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 		case 'regret' : $pageret=1; break;	
 		case 'virement' : $securise=1; $pageret=1; $reset=1; break;
 	}
-	
+
 	global $page, $res;
-	
+
 	//sauvegarde des variables qui vont être modifiées pour thélia
 	$sav_page = $page;
 	$sav_session_navig_lang = $_SESSION['navig']->lang;
-	
 
 	//conflit sur la variable $page. 
 	$page = new stdclass;
 	$page = "";
-	
-	
 
 	include_once("classes/Navigation.class.php");
 	
@@ -133,7 +127,6 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 	//concordance des langues entre spip et thélia 
 	//modifiez éventuellement la liste si vous avez ajouté de nouvelles langues dans Thélia
 	
-
 	switch($_REQUEST['lang']) {
 		case 'fr' : $_REQUEST['lang'] = 1; break;
 		case 'en' : $_REQUEST['lang'] = 2; break;
@@ -146,7 +139,6 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 	$_REQUEST['page'] = $_REQUEST['page_thelia'];
 	if (isset($_REQUEST['thelia_article']))
 		$_REQUEST['article'] = $_REQUEST['thelia_article'];
-	
 	
 	//on prépare le flux à envoyer au moteur thélia
 	$res = $texte;
@@ -173,12 +165,10 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 	//au retour de thélia, on convertie en utf8 pour SPIP
 	$texte = unicode2charset(charset2unicode($texte, 'iso-8859-1'),'utf-8');
 	
-
 	//on restaure les variables session et request modifiées pour les plugins suivants sur affichage final
 	$page = $sav_page;
 	$_SESSION['navig']->lang = $sav_session_navig_lang;
 	
-
 	//restauration des variables $_REQUEST en utf-8 pour SPIP
 	foreach ($sauvegarde_request as $clef => $valeur) {
                 $_REQUEST[$clef]=$valeur;
@@ -188,7 +178,7 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 }
 
 function remplacement_sortie_thelia($in_thelia) {
-    	//renommage action en thelia_action. méthode provisoire à revoir.
+	//renommage action en thelia_action. méthode provisoire à revoir.
 	$in_thelia = str_replace("adresse.php?action", "adresse.php?thelia_action", $in_thelia);
 	$in_thelia = str_replace("cheque.php?action", "cheque.php?thelia_action", $in_thelia);
 	$in_thelia = str_replace("commande.php?action", "commande.php?thelia_action", $in_thelia);
@@ -250,7 +240,7 @@ function spip_thelia_rubrique_editable($id_rubrique) {
 
 function spip_thelia_formulaire_article($id_article, $flag_editable, $script) {
 
-  	global $spip_lang_right;
+	global $spip_lang_right;
  	include_spip("inc/presentation");
 	include_spip('public/assembler');
 	include_spip('inc/charsets');
@@ -260,14 +250,21 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script) {
 
 	$out = "<div id='editer_produit-$id_article'>";
 	$out .= "<a name='produit'></a>";
-	if ($flag_editable) {
+	if (function_exists('bouton_block_depliable')) {  // SPIP2.0
+		if ($flag_editable) {
+			if (_request('edit')||_request('neweven'))
+				$bouton = bouton_block_depliable(_T('spipthelia:produits_associes_article'),true,"produitsarticle");
+			else
+				$bouton = bouton_block_depliable(_T('spipthelia:produits_associes_article'),false,"produitsarticle");
+		}
+	} else {
 		if (_request('edit')||_request('neweven'))
-			$bouton = bouton_block_visible("produitsarticle");
+			$bouton = bouton_block_visible("produitsarticle")._T('spipthelia:produits_associes_article');
 		else
-			$bouton = bouton_block_invisible("produitsarticle");
+			$bouton = bouton_block_invisible("produitsarticle")._T('spipthelia:produits_associes_article');		
 	}
 
-	$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_SPIP_THELIA."/img_pack/logo_thelia_petit.png", true, "", $bouton._T('spipthelia:produits_associes_article'));
+	$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_SPIP_THELIA."/img_pack/logo_thelia_petit.png", true, "", $bouton);
 
 	$out .= debut_block_invisible('produitsarticle');
 	
@@ -325,14 +322,21 @@ function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script) 
 
 	$out = "<div id='editer_produit-$id_rubrique'>";
 	$out .= "<a name='produit'></a>";
-	if ($flag_editable) {
+	if (function_exists('bouton_block_depliable')) { // SPIP2.0
+		if ($flag_editable) {
+			if (_request('edit')||_request('neweven'))
+				$bouton = bouton_block_depliable(_T('spipthelia:produits_associes_rubrique'),true,"produitsrubrique");
+			else
+				$bouton = bouton_block_depliable(_T('spipthelia:produits_associes_rubrique'),false,"produitsrubrique");
+		}
+	} else {
 		if (_request('edit')||_request('neweven'))
-			$bouton = bouton_block_visible("produitsrubrique");
+			$bouton = bouton_block_visible("produitsrubrique")._T('spipthelia:produits_associes_rubrique');
 		else
-			$bouton = bouton_block_invisible("produitsrubrique");
+			$bouton = bouton_block_invisible("produitsrubrique")._T('spipthelia:produits_associes_rubrique');		
 	}
-	
-	$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_SPIP_THELIA."/img_pack/logo_thelia_petit.png", true, "", $bouton._T('spipthelia:produits_associes_rubrique'));
+
+	$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_SPIP_THELIA."/img_pack/logo_thelia_petit.png", true, "", $bouton);
 	$out .= debut_block_invisible('produitsrubrique');
 	
 	$link = generer_action_auteur('produits_rubrique',"$id_rubrique",_DIR_RESTREINT_ABS.($retour?(str_replace('&amp;','&',$retour)):generer_url_ecrire('naviguer&id_rubrique='.$id_rubrique,"",false,true)));
@@ -362,7 +366,7 @@ function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script) 
 	$texte = remplacement_sortie_thelia($texte);
 
 	//au retour de thélia, on convertit en utf8 pour SPIP
-	$texte = unicode2charset(charset2unicode($texte, 'iso-8859-1'),'utf-8');
+	if (!is_utf8($texte)) $texte = unicode2charset(charset2unicode($texte, 'iso-8859-1'),'utf-8');
 	$out .= $texte;
 
 	//remettre le niveau d'erreur précédent
