@@ -491,5 +491,56 @@ function spiplistes_patron_find_in_path ($path_patron, $lang, $chercher_texte = 
 	return(false);
 }
 
+/*
+ * CP-20081130
+ * Calculer une balise a-la-SPIP pour le titre d'un courrier.
+ * Pour le moment, uniquement #DATE et 2 filtres sont autorises 
+ * @return le titre calcule'
+ * @param $titre string
+ */
+function spiplistes_calculer_balise_titre ($titre) {
+
+	// longue comme un jour sans pain 
+	$pattern = "=((?P<a>\[)?(?P<texte_avant>[^(\[]*)(?P<b>\()?\s*(?P<balise>#DATE)(?P<filtres>(\s*\|\s*\w+\s*{?\s*\'?\w+\'?\s*}?)*)\s*(?P<c>\))?(?P<texte_apres>[^(\]]*)(?P<d>\])?)=";
+	
+	if (preg_match($pattern, $titre, $match)) {
+		
+		if($match['balise'] == "#DATE") {
+			
+			$date = date('Y-m-d H:i:s');
+			
+			$texte_avant = isset($match['texte_avant']) ? $match['texte_avant'] : "";
+			$texte_apres = isset($match['texte_apres']) ? $match['texte_apres'] : "";
+
+			$envelop = "";
+			foreach(array('a', 'b', 'c', 'd') as $ii) {
+				$envelop .= (isset($match[$ii])) ? $match[$ii] : "";
+			}
+			
+			if($envelop == "[()]") {
+				$filtres = explode('|', $match['filtres']);
+				foreach($filtres as $filtre) {
+					$filtre = trim($filtre);
+					if(preg_match("=(\w+)\s*(\{)?\s*(\'?\w*\'?)?\s*(\})?=", $filtre, $match)) {
+						switch($match[1]) {
+							case 'affdate':
+								$v = $match[3];
+								$v = preg_replace("=[^dDjlNSwzWFmMntLoYyaABgGhHiseIOPTZcrU\: \-]=", "", $v);
+								$date = date($v);
+								break;
+							case 'plus':
+								$v = intval($match[3]);
+								$date += $v;
+								break;
+						}
+					}
+				}
+			}
+			
+			$titre = preg_replace($pattern, $texte_avant.$date.$texte_apres, $titre);
+		}
+	}
+	return($titre);
+}
 
 ?>
