@@ -50,17 +50,6 @@ function legender_auteur_supp_saisir($auteur){
 				$var_user['b.statut_relances'] = '1';
 				$champs[$cle] = '';
 			}
-			elseif($cle == 'pays'){
-				$var_user['c.pays'] = '1';
-				$var_user['c.id_pays as id_pays'] = '1';
-				$champs[$cle] = '';
-			}
-			elseif($cle == 'pays_pro'){
-				$var_user['d.pays'] = '1';
-				$var_user['d.pays as pays_pro'] = '1';
-				$var_user['d.id_pays as id_pays_pro'] = '1';
-				$champs[$cle] = $val;
-			}
 			else{
 				$var_user['b.'.$cle] = '1';
 				$champs[$cle] = '';
@@ -76,11 +65,6 @@ function legender_auteur_supp_saisir($auteur){
 				$aux4[] = $q;
 		}
 	}
-	if($var_user['c.pays'] && $var_user['d.pays'])
-		$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_geo_pays c on b.pays=c.id_pays left join spip_geo_pays d on b.pays_pro=d.id_pays","a.id_auteur= $id_auteur");
-	elseif($var_user['c.pays'])
-		$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_geo_pays c on b.pays=c.id_pays","a.id_auteur= $id_auteur");
-	else
 		$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur","a.id_auteur= $id_auteur");
 
 	$query = sql_fetch($query);
@@ -89,31 +73,7 @@ function legender_auteur_supp_saisir($auteur){
 	}
 
 	foreach ($query as $cle => $val){
-		if(($cle == 'id_pays') || ($cle == 'id_pays_pro') ||  ($cle == 'login') || ($cle == 'nom') || ($cle == 'email')){
-		}
-		elseif($cle == 'pays'){
-			$corps_supp .= "<li><label>"._T('inscription2:'.$cle)."</label>"
-				. "<select name='$cle' id='$cle' class='text' style='width:auto'>"
-				. "<option value=''>"._T('inscription2:pays')."</option>";
-			include(_DIR_PLUGIN_INSCRIPTION2."/inc/pays.php");
-			foreach($liste_pays as $cle => $val){
-				if ($cle == $query['id_pays'])
-					$corps_supp .= "<option value='$cle' selected='selected'>$val</option>";
-				else 
-					$corps_supp .= "<option value='$cle'>$val</option>";
-			}$corps_supp .= "</select></li>";
-		}
-		elseif($cle == 'pays_pro'){
-			$corps_supp .= "<li><label>"._T('inscription2:'.$cle)."</label>"
-				. "<select name='$cle' id='$cle' class='text' style='width:auto'>"
-				. "<option value=''>"._T('inscription2:pays')."</option>";
-			include(_DIR_PLUGIN_INSCRIPTION2."/inc/pays.php");
-			foreach($liste_pays as $cle=> $val){
-				if ($cle == $query['id_pays_pro'])
-					$corps_supp .= "<option value='$cle' selected='selected'>$val</option>";
-				else 
-					$corps_supp .= "<option value='$cle'>$val</option>";
-			}$corps_supp .= "</select></li>";
+		if(($cle == 'login') || ($cle == 'nom') || ($cle == 'email')){
 		}
 		elseif ($cle == 'latitude'){
 			if ($geomap_append_moveend_map = charger_fonction('geomap_append_clicable_map','inc',true)){
@@ -123,9 +83,14 @@ function legender_auteur_supp_saisir($auteur){
 			$corps_supp .= "<li><label>"._T('inscription2:'.$cle)."</label>"
 			. "<input type='text' id='$cle' name='$cle' class='text' value='$val' /></li>";
 		}
-		elseif($cle!= 'id_auteur' and $cle != 'statut_nouveau')
-		$corps_supp .= "<li><label>"._T('inscription2:'.$cle)."</label>"
-		. "<input type='text' id='$cle' name='$cle' class='text' value='".typo($val)."' /></li>"; 
+		elseif($cle!= 'id_auteur' and $cle != 'statut_nouveau'){
+			if(find_in_path('prive/inscription2_champs_'.$cle.'.html')){
+				$corps_supp .= recuperer_fond('prive/inscription2_champs_'.$cle,array('cle'=>$cle,'val'=>$val));
+			}else{
+				$corps_supp .= "<li><label>"._T('inscription2:'.$cle)."</label>"
+				. "<input type='text' id='$cle' name='$cle' class='text' value='".$val."' /></li>";
+			}
+		}
 	}
 	if($news){
 		if ($aux4){
