@@ -5,6 +5,7 @@
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
 #  Infos : http://www.spip-contrib.net/?article2166   #
 #-----------------------------------------------------#
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/texte');
 include_spip('inc/layer');
@@ -16,15 +17,19 @@ function cs_compat_boite($b) {if(defined('_SPIP19200')) echo $b('', true); else 
 
 function cs_admin_styles_et_js($cs_version) {
 	global $afficher_outil;
-	$a = defined('_SPIP19100')||defined('_SPIP19200')
-		?'div.cadre-info a { background:none; padding:0; border:0; } div.cadre-info { margin-bottom:1em; }'
-		:'';
+	$a = !defined('_SPIP19300')
+		// SPIP 1.9x
+		?'div.cadre-info a { background:none; padding:0; border:0; }
+div.cadre-info { margin-bottom:1em; }
+div.cadre-padding form{ padding:0; margin:0; }
+div.cadre-padding .titrem { background-color:#EEEEEE; color:#000000; }'
+		// SPIP 2.0
+		:'div.cadre_padding form { padding:0; margin:0; }';
 	echo <<<EOF
 <style type='text/css'>$a
 
 .cs_hidden { display:none; }
-div.cadre-padding form{ padding:0; margin:0; }
-div.cadre_padding form{	padding:0; margin:0; }
+
 div.cs-cadre{ padding:0.5em; margin:1px; width=100%; border:1px solid #666666; }
 div.cs-cadre h3 { margin:0.2em 0; border-bottom:1px solid #666666; }
 div.cs_infos { overflow:hidden; }
@@ -175,6 +180,9 @@ if (window.jQuery) jQuery(function(){
 	if (jQuery.browser.mozilla) jQuery('input.cs_sobre').css('margin-left','-3px');
 	
 	jQuery('div.sous_liste').each(cs_Categorie2);
+	if (window.location.search.match(/cmd=pack/)!=null) 
+		jQuery(\"div.cs_aide a[@href*='cmd=pack']\")
+			.click( function() { window.location.reload(true); return false; });
 
 	jQuery('div.cs_liste script').remove();
 	// clic sur un titre de categorie
@@ -516,7 +524,7 @@ if (!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p
 			'install' => $aide
 	));
 	if(function_exists('redirige_action_post')) $aide = redirige_action_post('charger_plugin', '', '', '', $aide); // SPIP >= 2.0
-	$aide = _T('couteauprive:help')."\n\n".$aide;
+	$aide = '<div class="cs_aide">'._T('couteauprive:help')."\n\n$aide</div>";
 	echo debut_boite_info(true), propre($aide), fin_boite_info(true);
 	$aide = cs_aide_raccourcis();
 	if(strlen($aide))
