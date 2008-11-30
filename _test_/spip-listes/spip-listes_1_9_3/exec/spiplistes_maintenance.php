@@ -150,30 +150,31 @@ function exec_spiplistes_maintenance () {
 			$msg_maintenance[] = _T('spiplistes:suppression_', $objet)." : ".$msg.$msg_end;
 			spiplistes_log("DELETE formats "._SPIPLISTES_FORMATS_ALLOWED." by ID_AUTEUR #$connect_id_auteur");
 		}
-	}
 	
-	// compter les listes
-	$nb_listes = spiplistes_listes_compter();
-	$nb_listes_desc = spiplistes_nb_listes_str_get ($nb_listes);
-	$listes_array = spiplistes_listes_select("id_liste,statut,titre,message_auto");
-	// listes auto (crhono) compte'es a part
-	$nb_listes_auto = 0;
-	foreach($listes_array as $row) {
-		if($row['message_auto']=='oui') {
-			$nb_listes_auto++;
+		// compter les listes
+		$nb_listes = spiplistes_listes_compter();
+		$nb_listes_desc = spiplistes_nb_listes_str_get ($nb_listes);
+		$listes_array = spiplistes_listes_select("id_liste,statut,titre,message_auto");
+		// listes auto (crhono) compte'es a part
+		$nb_listes_auto = 0;
+		foreach($listes_array as $row) {
+			if($row['message_auto']=='oui') {
+				$nb_listes_auto++;
+			}
 		}
-	}
+		
+		// compter les formats (les abonnes ayant de'fini un format)
+		$nb_abonnes_formats = sql_fetsel("COUNT(id) as n", "spip_auteurs_elargis", $sql_formats_where);
+		$nb_abonnes_formats = $nb_abonnes_formats['n'];
+		$nb_abonnes_formats_desc = 
+						($nb_abonnes_formats==1)
+						? _T('spiplistes:1_abonne')
+						: "$nb_abonnes_formats "._T('spiplistes:abonnes')
+						;
 	
-	// compter les formats (les abonnes ayant de'fini un format)
-	$nb_abonnes_formats = sql_fetsel("COUNT(id) as n", "spip_auteurs_elargis", $sql_formats_where);
-	$nb_abonnes_formats = $nb_abonnes_formats['n'];
-	$nb_abonnes_formats_desc = 
-					($nb_abonnes_formats==1)
-					? _T('spiplistes:1_abonne')
-					: "$nb_abonnes_formats "._T('spiplistes:abonnes')
-					;
-
-	$maintenance_url_action = generer_url_ecrire(_SPIPLISTES_EXEC_MAINTENANCE);
+		$maintenance_url_action = generer_url_ecrire(_SPIPLISTES_EXEC_MAINTENANCE);
+		
+	}
 	
 ////////////////////////////////////
 // PAGE CONTENU
