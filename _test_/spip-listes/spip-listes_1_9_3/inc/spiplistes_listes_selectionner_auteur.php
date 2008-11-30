@@ -170,7 +170,7 @@ function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut
 	
 	$sql_result = sql_select($sql_select, $sql_from, $sql_where, $sql_group, $sql_order, $debut . ',' . _SPIPLISTES_LIGNES_PAR_PAGE);
 	if ($sql_result === false) {
-		spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+		spiplistes_sqlerror_log("listes_boite_abonnes");
 	}
 
 	$auteurs = array();
@@ -200,7 +200,7 @@ function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut
 			, array("l")
 			);
 		if($result === false) {
-				spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+				spiplistes_sqlerror_log("listes_boite_abonnes");
 		} 
 		else {
 			$count = 0;
@@ -674,7 +674,7 @@ function spiplistes_listes_selectionner_elligibles (
 			$select_abo = spiplistes_elligibles_select ($elligibles, $nb_elligibles, $type_ajout) . $btn_ajouter;
 		}
 		else {
-			spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+			spiplistes_sqlerror_log("listes_selectionner_elligibles");
 		}
 		
 	}

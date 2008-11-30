@@ -78,7 +78,7 @@ function spiplistes_listes_forcer_abonnement ($id_liste, $statut, $forcer_format
 						, $sql_values
 						);
 					if($sql_result === false) {
-						spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+						spiplistes_sqlerror_log("listes_forcer_abonnement");
 						return(false);
 					}
 					else {
@@ -95,7 +95,7 @@ function spiplistes_listes_forcer_abonnement ($id_liste, $statut, $forcer_format
 											WHERE l.id_auteur = e.id_auteur)
 								";
 							if(sql_query($sql_insert) === false) {
-								spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+								spiplistes_sqlerror_log("listes_forcer_abonnement");
 							}
 							else {
 								spiplistes_log("RECEPT. FORMAT MODIFIED FOR ID_LISTE #$id_liste BY ID_AUTEUR #$connect_id_auteur");

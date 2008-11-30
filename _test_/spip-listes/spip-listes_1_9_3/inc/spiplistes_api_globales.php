@@ -226,8 +226,9 @@ function spiplistes_current_version_base_get ($prefix) {
 	return($vb);
 }
 
-function spiplistes_sqlerror_log () {
-	spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+function spiplistes_sqlerror_log ($trace = "") {
+	if($trace) $trace = " ($trace) ";
+	spiplistes_log("DB ERROR".$trace.": [" . sql_errno() . "] " . sql_error());
 }
 
 

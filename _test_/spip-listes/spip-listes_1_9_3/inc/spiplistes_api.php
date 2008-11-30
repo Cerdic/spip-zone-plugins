@@ -162,7 +162,7 @@ function spiplistes_abonnements_auteurs_supprimer ($auteur_statut) {
 			sql_select("id_auteur", "spip_auteurs", $auteur_statut,'','','','','',false);
 		$sql_result = sql_delete("spip_auteurs_listes", "id_auteur IN ($selection)");
 		if ($sql_result === false) {
-			spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+			spiplistes_sqlerror_log("abonnements_auteurs_supprimer");
 		}
 	}
 	return($result);
@@ -200,7 +200,7 @@ function spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste) {
 		}
 		if(!empty($sql_where)) {
 			if(($result = sql_delete($sql_table, $sql_where)) === false) {
-				spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+				spiplistes_sqlerror_log("abonnements_auteur_desabonner");
 			}
 		}
 	}
@@ -303,7 +303,7 @@ function spiplistes_listes_nb_abonnes_compter ($id_liste = 0, $preciser = false)
 			, "id_auteur IN (".$selection.")"
 			, "`spip_listes_format`");
 		if( $sql_result === false) {
-			spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+			spiplistes_sqlerror_log("listes_nb_abonnes_compter");
 		}
 		$formats = array('html' => 0, 'texte' => 0);
 		$keys = array_keys($formats);
@@ -333,7 +333,7 @@ function spiplistes_listes_email_emetteur ($id_liste = 0) {
 				, "id_liste=".sql_quote($id_liste)." LIMIT 1"
 			);
 		if($result === false) {
-			spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+			spiplistes_sqlerror_log("listes_email_emetteur");
 		}
 	}
 	if(!$result) {
@@ -379,7 +379,7 @@ function spiplistes_courriers_en_queue_compter ($sql_whereq = "") {
  */
 function spiplistes_listes_pied_patron ($id_liste) {
 	if ($result = sql_getfetsel('pied_page', 'spip_listes', "id_liste=".sql_quote($id_liste), '','',1) === false) {
-		spiplistes_sqlerror_log();
+		spiplistes_sqlerror_log("listes_pied_patron");
 	}
 	return($result);
 }
@@ -398,7 +398,7 @@ function spiplistes_courriers_en_queue_modifier ($array_set, $sql_whereq) {
 // CP-20080510
 function spiplistes_courriers_en_queue_supprimer ($sql_whereq) {
 	if(($result = sql_delete('spip_auteurs_courriers', $sql_whereq)) === false) {
-		spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+		spiplistes_sqlerror_log("courriers_en_queue_supprimer");
 	}
 	return($result);
 }
@@ -430,7 +430,7 @@ function spiplistes_format_abo_suspendre ($id_auteur) {
 function spiplistes_format_abo_supprimer ($id_auteur) {
 	if(($id_auteur = intval($id_auteur)) > 0) {
 		if(($result = sql_delete("spip_auteurs_elargis", "id_auteur=".sql_quote($id_auteur))) === false) {
-			spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+			spiplistes_sqlerror_log("format_abo_supprimer");
 		}
 	}
 	return($result);
@@ -523,10 +523,10 @@ function spiplistes_mod_listes_supprimer ($id_auteur, $id_liste) {
 	$id_liste = intval($id_liste);
 	$sql_where[] = "id_liste=".sql_quote($id_liste);
 	if($result = sql_delete('spip_auteurs_mod_listes', $sql_where)) {
-		spiplistes_log("DELETE moderator #$id_auteur FROM ".$str_log);
+		spiplistes_log("DELETE moderator #$id_auteur FROM ".$id_liste);
 	}
-	else if($sql_result == false) {
-		spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+	else if($sql_result === false) {
+		spiplistes_sqlerror_log("mod_listes_supprimer");
 	}
 	return($result);
 }
@@ -543,8 +543,8 @@ function spiplistes_mod_listes_ajouter ($id_auteur, $id_liste) {
 		) {
 		spiplistes_log("ADD moderator #$id_auteur TO ".$str_log);
 	}
-	else if($sql_result == false) {
-		spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+	else if($sql_result === false) {
+		spiplistes_sqlerror_log("mod_listes_ajouter");
 	}
 	return($result);
 }
@@ -565,8 +565,8 @@ function spiplistes_mod_listes_id_auteur ($id_auteur) {
 			$result[] = $row['id_liste'];
 		}
 	}
-	else if($sql_result == false) {
-		spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+	else if($sql_result === false) {
+		spiplistes_sqlerror_log("mod_listes_id_auteur");
 	}
 	return($result);
 }
@@ -713,7 +713,7 @@ function spiplistes_auteurs_auteur_delete ($sql_where) {
 					, array('statut' => sql_quote('5poubelle'))
 					, $sql_where . " LIMIT 1"
 				)) === false) {
-		spiplistes_log("DATABASE ERROR: [" . sql_errno() . "] " . sql_error());
+		spiplistes_sqlerror_log("auteurs_auteur_delete");
 	}
 	return($result);
 }
