@@ -25,7 +25,7 @@ function inc_geomap_script_init_dist(){
 	}
 	$out = '
 	<script type="text/javascript" src="'.$geomap.'"></script>
-	<script type="application/javascript">'.$gmap_script.'</script>';
+	<script type="application/javascript">/*<![CDATA[*/ '.$gmap_script.' /*]]>*/</script>';
 	
 	if (function_exists('lire_config') && lire_config("geomap/custom_control") != 'non'){
 		$out .= '<script type="application/javascript" src="'._DIR_PLUGIN_GEOMAP.'js/customControls.js"></script>';
