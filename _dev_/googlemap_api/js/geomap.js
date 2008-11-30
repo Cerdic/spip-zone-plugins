@@ -77,11 +77,11 @@ function agregarMarcador (xmlItem, idmap, minZoom, maxZoom) {
 		
 		//creamos un icono para o marcador
 		var icono_categoria = new GIcon();
-		icono_categoria.image = (icon != "" ? icon : URLbase + "/img_pack/correxir.png");
-		icono_categoria.shadow = URLbase + "/img_pack/shadow.png";
-		icono_categoria.iconSize = new GSize(20, 34);
+		icono_categoria.image = (icon != "" ? icon : MarkerImgBase);
+		icono_categoria.shadow = URLbase + "img_pack/shadow.png";
+		icono_categoria.iconSize = new GSize(MarkerBaseWidth, MarkerBaseHeight);
 		icono_categoria.shadowSize = new GSize(37, 34);	
-		icono_categoria.iconAnchor = new GPoint(10, 34);
+		icono_categoria.iconAnchor = new GPoint((MarkerBaseWidth/2), MarkerBaseHeight);
 		icono_categoria.infoWindowAnchor = new GPoint(5, 1);
 			
 		// creamos el marcador con los datos almacenados en las variables
