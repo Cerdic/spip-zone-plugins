@@ -519,15 +519,17 @@ function exec_spiplistes_courrier_gerer () {
 	}
 	
 	$page_result = ""
-		. "<br /><br />\n"
+		. "<br /><br /><br />\n"
 		. spiplistes_gros_titre($titre_page, '', true)
-		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $sous_rubrique)
+		. barre_onglets($rubrique, $sous_rubrique)
 		. debut_gauche($rubrique, true)
 		. spiplistes_boite_info_id(_T('spiplistes:Courrier_numero_'), $id_courrier, true)
 		. spiplistes_naviguer_paniers_courriers(_T('spiplistes:aller_au_panier_'), true)
-		//. creer_colonne_droite($rubrique, true)  // debut_gauche() s'en occupe
+		. pipeline('affiche_gauche', array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
+		//. creer_colonne_droite($rubrique, true)  // spiplistes_boite_raccourcis() s'en occupe
 		. spiplistes_boite_raccourcis(true)
 		. spiplistes_boite_autocron()
+		. pipeline('affiche_droite', array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
 		. debut_droite($rubrique, true)
 		;
 		
@@ -621,7 +623,9 @@ function exec_spiplistes_courrier_gerer () {
 	
 	// GERER COURRIER: FIN DE PAGE
 	
-	echo spiplistes_html_signature(_SPIPLISTES_PREFIX), fin_gauche(), fin_page();
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
+		, spiplistes_html_signature(_SPIPLISTES_PREFIX)
+		, fin_gauche(), fin_page();
 
 } // end function exec_spiplistes_courrier_gerer ()
 

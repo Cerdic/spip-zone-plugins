@@ -72,9 +72,9 @@ function exec_spiplistes_voir_journal () {
 ////////////////////////////////////
 
 	$titre_page = spiplistes_journal_titre();
-	// Permet entre autres d'ajouter les classes a la page : <body class='$rubrique $sous_rubrique'>
-	$rubrique = "voir_journal";
-	$sous_rubrique = _SPIPLISTES_PREFIX;
+	// Permet entre autres d'ajouter les classes a' la page : <body class='$rubrique $sous_rubrique'>
+	$rubrique = _SPIPLISTES_PREFIX;
+	$sous_rubrique =  "voir_journal";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo($commencer_page(_T('spiplistes:spiplistes') . " - " . trim($titre_page), $rubrique, $sous_rubrique));
@@ -84,15 +84,18 @@ function exec_spiplistes_voir_journal () {
 	}
 
 	$page_result = ""
-		. "<br /><br />\n"
+		. "<br /><br /><br />\n"
 		. spiplistes_gros_titre($titre_page, '', true)
-		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $sous_rubrique)
+		. barre_onglets($rubrique, $sous_rubrique)
 		. debut_gauche($rubrique, true)
 		. spiplistes_boite_meta_info(_SPIPLISTES_PREFIX)
 		. $message_gauche
+		. pipeline('affiche_gauche', array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
+		//. creer_colonne_droite($rubrique, true)  // spiplistes_boite_raccourcis() s'en occupe
 		. spiplistes_boite_raccourcis(true)
 		. spiplistes_boite_autocron() // ne pas gener l'edition
 		. spiplistes_boite_info_spiplistes(true)
+		. pipeline('affiche_droite', array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
 		. debut_droite($rubrique, true)
 		;
 	
@@ -105,7 +108,11 @@ function exec_spiplistes_voir_journal () {
 		
 	// Fin de la page
 	echo($page_result);
-	echo spiplistes_html_signature(_SPIPLISTES_PREFIX), fin_gauche(), fin_page();
+
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
+		, spiplistes_html_signature(_SPIPLISTES_PREFIX)
+		, fin_gauche(), fin_page();
+
 }
 
 ?>

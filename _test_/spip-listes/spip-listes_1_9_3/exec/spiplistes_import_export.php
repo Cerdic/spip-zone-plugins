@@ -142,7 +142,7 @@ function exec_spiplistes_import_export(){
 ////////////////////////////////////
 
 	$titre_page = _T('spiplistes:listes_de_diffusion_');
-	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
+	// Permet entre autres d'ajouter les classes a' la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = _SPIPLISTES_PREFIX;
 	$sous_rubrique = "import_export";
 
@@ -155,12 +155,15 @@ function exec_spiplistes_import_export(){
 	}       
 
 	$page_result = ""
-		. "<br /><br />\n"
+		. "<br /><br /><br />\n"
 		. spiplistes_gros_titre($titre_page, '', true)
-		. spiplistes_onglets(_SPIPLISTES_RUBRIQUE, $sous_rubrique)
+		. barre_onglets($rubrique, $sous_rubrique)
 		. debut_gauche($rubrique, true)
-		. creer_colonne_droite($rubrique, true)
+		. pipeline('affiche_gauche', array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
+		//. creer_colonne_droite($rubrique, true)  // spiplistes_boite_raccourcis() s'en occupe
 		. spiplistes_boite_raccourcis(true)
+		. spiplistes_boite_autocron()
+		. pipeline('affiche_droite', array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
 		. debut_droite($rubrique, true)
 		;
 	
@@ -350,7 +353,9 @@ function exec_spiplistes_import_export(){
 
 	echo($page_result);
 	
-	echo spiplistes_html_signature(_SPIPLISTES_PREFIX), fin_gauche(), fin_page();
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
+		, spiplistes_html_signature(_SPIPLISTES_PREFIX)
+		, fin_gauche(), fin_page();
 }
 
 function spiplistes_fieldset_separateur ($sep)  {
