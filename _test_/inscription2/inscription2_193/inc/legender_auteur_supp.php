@@ -90,7 +90,6 @@ function legender_auteur_supp_saisir($auteur){
 
 	foreach ($query as $cle => $val){
 		if(($cle == 'id_pays') || ($cle == 'id_pays_pro') ||  ($cle == 'login') || ($cle == 'nom') || ($cle == 'email')){
-			$corps_supp .= "<input type='hidden' id='$cle' name='$cle' value='$val' />";
 		}
 		elseif($cle == 'pays'){
 			$corps_supp .= "<li><label>"._T('inscription2:'.$cle)."</label>"
@@ -99,7 +98,7 @@ function legender_auteur_supp_saisir($auteur){
 			include(_DIR_PLUGIN_INSCRIPTION2."/inc/pays.php");
 			foreach($liste_pays as $cle => $val){
 				if ($cle == $query['id_pays'])
-					$corps_supp .= "<option value='$cle' selected>$val</option>";
+					$corps_supp .= "<option value='$cle' selected='selected'>$val</option>";
 				else 
 					$corps_supp .= "<option value='$cle'>$val</option>";
 			}$corps_supp .= "</select></li>";
@@ -111,14 +110,14 @@ function legender_auteur_supp_saisir($auteur){
 			include(_DIR_PLUGIN_INSCRIPTION2."/inc/pays.php");
 			foreach($liste_pays as $cle=> $val){
 				if ($cle == $query['id_pays_pro'])
-					$corps_supp .= "<option value='$cle' selected>$val</option>";
+					$corps_supp .= "<option value='$cle' selected='selected'>$val</option>";
 				else 
 					$corps_supp .= "<option value='$cle'>$val</option>";
 			}$corps_supp .= "</select></li>";
 		}
 		elseif ($cle == 'latitude'){
 			if ($geomap_append_moveend_map = charger_fonction('geomap_append_clicable_map','inc',true)){
-				$corps_supp .= "<br /><div class='geomap' id='map' style='width:100%;height:350px'> </div><br />";
+				$corps_supp .= "<li><div class='geomap' id='map' style='width:100%;height:350px'> </div></li>";
 				$corps_supp .= $geomap_append_moveend_map("map",'latitude','longitude',$query['latitude'],$query['longitude'], NULL,NULL,true);
 			}
 			$corps_supp .= "<li><label>"._T('inscription2:'.$cle)."</label>"
@@ -126,7 +125,7 @@ function legender_auteur_supp_saisir($auteur){
 		}
 		elseif($cle!= 'id_auteur' and $cle != 'statut_nouveau')
 		$corps_supp .= "<li><label>"._T('inscription2:'.$cle)."</label>"
-		. "<input type='text' id='$cle' name='$cle' class='text' value='".typo($val)."' /><li>"; 
+		. "<input type='text' id='$cle' name='$cle' class='text' value='".typo($val)."' /></li>"; 
 	}
 	if($news){
 		if ($aux4){
@@ -203,7 +202,7 @@ function legender_auteur_supp_voir($auteur)
 	foreach ($query as $cle => $val){
 		if(($cle == 'id_auteur') || ($cle == 'login') || ($cle == 'nom') || ($cle == 'email') || ($cle == 'id_pays') || ($cle == 'id_pays_pro'))
 			continue;
-		elseif (strlen($val) >= 1){ $res .= "<p><strong>"._T('inscription2:'.$cle)." : </strong>" . $val . "</p>"; }
+		elseif (strlen($val) >= 1){ $res .= "<p><strong>"._T('inscription2:'.$cle)." : </strong>" . typo($val) . "</p>"; }
 	}
 	if($aux4 and $aux3){
 		$res .= "<strong>"._T('inscription2:newsletter')."</strong><br />"
