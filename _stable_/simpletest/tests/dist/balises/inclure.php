@@ -96,11 +96,9 @@ class Test_inclure_inline extends SpipTest{
 			'<INCLURE{fond=carabistouille/de/tripoli/absente}/>ok',
 			'#CACHE{0}[(#INCLURE{fond=carabistouille/de/montignac/absente}|non)ok]',
 		) as $code) {
-			$infos = $this->recuperer_infos_code($code);
-			#$this->dump($infos);
 			// non loggue, on ne doit pas voir d'erreur...
 			$browser = &new SimpleBrowser();
-			$browser->get($f=$this->generer_url_test($infos['fond']));
+			$browser->get($f=$this->urlTestCode($code));
 			# $this->dump($f);
 			$this->assertEqual($browser->getResponseCode(), 200);
 			$this->assertOk($browser->getContent());

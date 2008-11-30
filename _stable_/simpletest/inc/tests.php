@@ -27,7 +27,6 @@ class SpipTest extends UnitTestCase {
 	
 	function SpipTest($name = false) {
 		chdir(_CHDIR);
-		
 	    if (!$name) {
             $name = get_class($this);
         }
@@ -411,7 +410,7 @@ class SpipTestSuite extends TestSuite {
 	function SpipTestSuite($name = false){
 		chdir(_CHDIR);
 	    if (!$name) {
-            $name = get_class($name);
+            $name = get_class($this);
         }
 		$this->TestSuite($name);
 	}
@@ -476,6 +475,7 @@ class SpipHtmlReporter extends HtmlReporter {
      *    @access public
      */
     function paintHeader($test_name) {
+		chdir(_CHDIR); // va savoir Charles... des fois il le perd en route ?
 		include_spip('inc/filtres_mini');
         $this->sendNoCacheHeaders();
         print "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">";
@@ -631,7 +631,7 @@ class SpipHtmlReporter extends HtmlReporter {
 class SpipMiniHtmlReporter extends SpipHtmlReporter {
 	function SpipMiniHtmlReporter($charset='UTF-8') {
 		chdir(_CHDIR);
-        $this->SpipHtmlReporter($charset);	
+        $this->SpipHtmlReporter($charset);
 	}
 	
 
@@ -715,6 +715,75 @@ class SpipTextReporter extends TextReporter {
         }
     }
 }
+
+
+class SqueletteTest{
+	var $title = "";
+	var $head = "";
+	var $body = "";
+	
+	/**
+	 * Constructeur
+	 * @param string $title		Donne un titre a la page
+	 */
+	function SqueletteTest($title = ""){
+		$this->setTitle($title ? $title : "Squelette de test");
+	}
+	
+	/**
+	 * Change le title
+	 * @param string $title		Donne un titre a la page
+	 * @return null
+	 */
+	function setTitle($title){
+		$this->title = $title;
+	}
+	
+	/**
+	 * Ajoute insert Head
+	 * @return null
+	 */
+	function addInsertHead(){
+		$this->head = "\n#INSERT_HEAD\n" . $this->head;
+	}
+	
+	/**
+	 * Ajoute dans head
+	 * @return null
+	 */
+	function addToHead($content){
+		$this->head .= "\n" . $content;
+	}	
+	
+	/**
+	 * Ajoute dans body
+	 * @return null
+	 */
+	function addToBody($content){
+		$this->body .= "\n" . $content;
+	}
+		
+	/**
+	 * Retourne le code du squelette
+	 */
+	function code(){
+		$code = '
+			<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+			<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+			<head>
+			<title>'. $this->title . '</title>
+			' . $this->head . '
+			</head>
+			<body class="page_test">
+			' . $this->body . '
+			</body>
+			</html>		
+		';
+		return $code;
+	}
+}
+
+
 
 
 // si provient de la base des tests de spip,
