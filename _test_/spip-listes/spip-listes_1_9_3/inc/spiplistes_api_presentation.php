@@ -73,32 +73,6 @@ function spiplistes_gros_titre ($titre, $ze_logo='', $return = false) {
 	if($return) return($r);
 }
 
-/*
-	Les onglets dans la rubrique Edition (naviguer)
-*/
-function spiplistes_onglets ($rubrique, $onglet) {
-
-	$result = "";
-	
-	if ($rubrique == _SPIPLISTES_RUBRIQUE){
-		$result = ""
-			. "<br />"
-			. debut_onglet()
-			. onglet(_T('spiplistes:casier_a_courriers'), generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE)
-				, 'courrier_casier', $onglet
-				, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_hyperlink-mail-and-news-24.gif")
-			. onglet(_T('spiplistes:listes_de_diffusion_'), generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE)
-				, 'listes_toutes', $onglet
-				, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply-to-all-24.gif")
-			. onglet(_T('spiplistes:suivi'), generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE)
-				, 'abonnes_tous', $onglet
-				, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."addressbook-24.gif")
-			. fin_onglet()
-		;
-	}
-	return($result);
-} // end spiplistes_onglets()
-
 // CP:20080322 :
 function spiplistes_get_icone_auteur ($statut) {
 	switch($statut) {
@@ -488,12 +462,13 @@ function spiplistes_boite_autocron_form($titre, $option, $value) {
 // Petite boite info pour l'autocron (CP-20071018)
 function spiplistes_boite_autocron_info ($icone = "", $return = false, $titre_boite = '', $bouton = "", $texte = "", $nom_option = "", $icone_alerte = false) {
 	$result = ""
-		. debut_cadre('couleur-foncee spip-alert', $icone, $fonction, $titre_boite)
+		. "<div class='spip-alert'>\n"
+		. debut_cadre_couleur_foncee($icone, true, '', $titre_boite)
 		. ($icone_alerte ? "<div style='text-align:center;'><img alt='' src='$icone_alerte' /></div>" : "")
 		. ($texte ? "<p class='verdana2' style='margin:0;'>$texte</p>\n" : "")
 		. ($bouton ? spiplistes_boite_autocron_form($bouton, $nom_option, 'non') : "")
-		//. fin_cadre_couleur($return)
-		. fin_cadre($return)
+		. fin_cadre_couleur(true)
+		. "</div>\n"
 		;
 	if($return) return($result);
 	else echo($result);
