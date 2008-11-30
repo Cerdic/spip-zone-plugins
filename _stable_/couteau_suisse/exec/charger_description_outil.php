@@ -21,6 +21,8 @@ cs_log("INIT : exec_charger_description_outil_dist() - Preparation du retour par
 		exit;
 	}
 	if ($outil_id=_request('outil')) {
+		include_spip('inc/headers');
+		http_no_cache();
 		include_spip('inc/cs_outils');
 		echo '<div id="cs_infos" class="cs_infos">'.description_outil2($outil_id).'</div>';
 	}
