@@ -183,6 +183,14 @@ if (window.jQuery) jQuery(function(){
 	if (window.location.search.match(/cmd=pack/)!=null) 
 		jQuery(\"div.cs_aide a[@href*='cmd=pack']\")
 			.click( function() { window.location.reload(true); return false; });
+	jQuery(\"div.cs_aide a[@href*='cmd=install']\").click( function() { 
+		msg=\"".unicode_to_javascript(addslashes(html2unicode(_T('couteauprive:pack_installer'))))."\";
+		return window.confirm(msg.replace(/@pack@/,jQuery(this).text())); 
+	});
+	jQuery(\"div.cs_aide a[@href*='cmd=resetall']\").click( function() { 
+		msg=\"".unicode_to_javascript(addslashes(html2unicode(_T('couteauprive:cs_reset'))))."\";
+		return window.confirm(msg); 
+	});
 
 	jQuery('div.cs_liste script').remove();
 	// clic sur un titre de categorie
