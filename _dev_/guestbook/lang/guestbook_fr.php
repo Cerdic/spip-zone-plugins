@@ -11,8 +11,8 @@
 	 **/
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 // C
-	'creation_des_tables_mysql' => 'Création des tables MySQL',
-	'creer_tables_mysql' => 'Créer les tables MySQL',
+	'creation_des_tables_mysql' => 'Cr&acute;ation des tables MySQL',
+	'creer_tables_mysql' => 'Cr&eacute;er les tables MySQL',
 	'confirm' => 'Confirmer !',
 // D
 	'date' => '<td>Date</td>',
@@ -20,27 +20,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // E
 	'email' => 'E-mail',
 // I
-	'installhd' => 'Vos nouvelles tables sont créées !',
+	'installhd' => 'Vos nouvelles tables sont cr&eacute;&eacute;es !',
 // L
 	'livre_dor' => 'Livre d\'or',
 	'lelivre' => 'Le livre d\'or',
-	"avertdestroy" => "La suppression des tables supprimera toutes les données du livre d'or<br />",
+	"avertdestroy" => "La suppression des tables supprimera toutes les donn&eacute;es du livre d'or<br />",
 // M
-	"mercivp" => "Merci de votre participation! Le message apparaitra dès que le webmaster aura répondu.",
+	"mercivp" => "Merci de votre participation! Le message apparaitra dès que le webmaster aura r&eacute;pondu.",
 // N
 	'numero' => "<td>N&deg;</td>";
 	'note' => 'Note sur 10',
 	'nom' => '<td>Nom</td>',
 // R
 	"repondre" => "<td>R&eacute;pondre</td>",
-	"repondremdl" => "Répondre aux messages du livre d'or",
-	"rienmis" => "Vous n'avez pas défini le nom ou le contenu du message. Veuillez rééssayer.",
+	"repondremdl" => "R&eacute;pondre aux messages du livre d'or",
+	"rienmis" => "Vous n'avez pas d&eacute;fini le nom ou le contenu du message. Veuillez r&eacute;&eacute;ssayer.",
 // T
 	'message' => 'Votre message',
 	'texte' => '<td>Texte</td>',
 // V
 	'valider' => 'Valider',
-	"pascoch" => "Vous n'avez rien coché !",
+	"pascoch" => "Vous n'avez rien coch&eacute; !",
 	'ville' => 'Ville',
 // Z
 	'Z' => 'ZZzZZzzz'

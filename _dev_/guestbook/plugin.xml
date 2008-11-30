@@ -16,8 +16,7 @@
 	</etat>
 	<description>
 		Un Livre d'or pour votre site Spip. Ce livre d'or fonctionne avec une table &#13;
-		diff&eacute;rente des tables de SPIP, ce qui en fais un syst&egrave;me &agrave; part. &#13;
-		Par contre il fonctionne avec les tables de SPIP
+		diff&eacute;rente des tables de SPIP, ce qui en fais un syst&egrave;me &agrave; part. &#13;.
 	</description>
 	<install>
 		base/guestbook_install.php
