@@ -219,59 +219,75 @@ function finir_url_libre_dist($url, $opt = array(
 }
 
 // http://doc.spip.org/@generer_url_article
+if (!function_exists('generer_url_article')) {
 function generer_url_article($id_article, $args='', $ancre='') {
 	return _generer_url_libre('article', $id_article, '',
 				array('args' => $args, 'ancre' => $ancre,
 				 'def' =>  get_spip_script('./')."?page=article&id_article=$id_article"));
 }
+}
 
 // http://doc.spip.org/@generer_url_rubrique
+if (!function_exists('generer_url_rubrique')) {
 function generer_url_rubrique($id_rubrique, $args='', $ancre='') {
 	return _generer_url_libre('rubrique', $id_rubrique, '-',
 				array('args' => $args, 'ancre' => $ancre,
 				 'def' =>  get_spip_script('./')."?page=rubrique&id_rubrique=$id_rubrique"));
 }
+}
 
 // http://doc.spip.org/@generer_url_breve
+if (!function_exists('generer_url_breve')) {
 function generer_url_breve($id_breve, $args='', $ancre='') {
 	return _generer_url_libre('breve', $id_breve, '+',
 				array('args' => $args, 'ancre' => $ancre,
 				 'def' =>  get_spip_script('./')."?page=breve&id_breve=$id_breve"));
 }
+}
 
 // C'est special pour les forums, generer_url_forum_dist()
 // retourne generer_url_xxx($id)."#forum$id_forum"
 // http://doc.spip.org/@generer_url_forum
+if (!function_exists('generer_url_forum')) {
 function generer_url_forum($id_forum, $args='', $ancre='', $show_thread=false) {
 	include_spip('inc/forum');
 	return generer_url_forum_dist($id_forum, $show_thread);
 }
+}
 
 // http://doc.spip.org/@generer_url_mot
+if (!function_exists('generer_url_mot')) {
 function generer_url_mot($id_mot, $args='', $ancre='') {
 	return _generer_url_libre('mot', $id_mot, '+-',
 				array('args' => $args, 'ancre' => $ancre,
 				 'def' =>  get_spip_script('./')."?page=mot&id_mot=$id_mot"));
 }
+}
 
 // http://doc.spip.org/@generer_url_auteur
+if (!function_exists('generer_url_auteur')) {
 function generer_url_auteur($id_auteur, $args='', $ancre='') {
 	return _generer_url_libre('auteur', $id_auteur, '_',
 				array('args' => $args, 'ancre' => $ancre,
 				 'def' =>  get_spip_script('./')."?page=auteur&id_auteur=$id_auteur"));
 }
+}
 
 // http://doc.spip.org/@generer_url_site
+if (!function_exists('generer_url_site')) {
 function generer_url_site($id_syndic, $args='', $ancre='') {
 	return _generer_url_libre('site', $id_syndic, '@',
 				array('args' => $args, 'ancre' => $ancre,
 				 'def' =>  get_spip_script('./')."?page=site&id_syndic=$id_syndic"));
 }
+}
 
 // http://doc.spip.org/@generer_url_document
+if (!function_exists('generer_url_document')) {
 function generer_url_document($id_document, $args='', $ancre='') {
 	include_spip('inc/documents');
 	return generer_url_document_dist($id_document, $args, $ancre);
+}
 }
 
 ?>
