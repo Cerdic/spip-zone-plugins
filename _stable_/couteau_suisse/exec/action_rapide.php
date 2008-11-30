@@ -65,9 +65,10 @@ cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour()
 		$r = spip_query($r0);
 		if ($r AND $r = spip_fetch_array($r)) $url_2 = $r['url_propre'];
 		// url propre en base || titre || url complete || type d'URLs || URL recalculee
+		include_spip('inc/charsets');
 		echo _request('format')=='iframe'
 			?"<span style='font-family:Verdana,Arial,Sans,sans-serif; font-size:10px;'>[<a href='../$url' title='$url' target='_blank'>"._T('couteau:urls_propres_lien').'</a>]</span>'
-			:$url_1.'||'.$titre.'||'.$url.'||'.$type_urls.'||'.$url_2;
+			:$url_1.'||'.charset2unicode($titre).'||'.$url.'||'.$type_urls.'||'.$url_2;
 		break;
 	// renvoie les caracteristiques URLs d'un objet (cas SPIP >= 2.0)
 	case 'type_urls_spip2':
@@ -93,8 +94,9 @@ cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour()
 			// si l'URL n'etait pas presente en base, maintenant elle l'est !
 			?sql_fetsel("url", "spip_urls", "id_objet=$id_objet AND type='$type'", '', 'date DESC', 1)
 			:array('url'=>$url2);
+		include_spip('inc/charsets');
 		// url propre en base || titre || url complete || type d'URLs || URL recalculee
-		echo $url2.'||'.$row[trim($champ_titre)].'||'.$url.'||'.$type_urls.'||'.$row2['url'];
+		echo $url2.'||'.charset2unicode($row[trim($champ_titre)]).'||'.$url.'||'.$type_urls.'||'.$row2['url'];
 		break;
 
 	}
