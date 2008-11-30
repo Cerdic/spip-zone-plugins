@@ -7,13 +7,12 @@
 #-----------------------------------------------------#
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// compatibilite spip 1.9
-if(!function_exists(ajax_retour)) { 
+// compatibilite pour SPIP 1.91
+if(defined('_SPIP19100')) {
 	function ajax_retour($corps) {
 		$c = $GLOBALS['meta']["charset"];
 		header('Content-Type: text/html; charset='. $c);
-		$c = '<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n";
-		echo $c, $corps;
+		echo '<' . "?xml version='1.0' encoding='$c'?" . ">\n$corps";
 		exit;
 	}
 }

@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'acces_admin' => 'Acc&egrave;s administrateurs :',
 	'action_rapide' => 'Action rapide, uniquement si vous savez ce que vous faites !',
+	'action_rapide_non' => 'Action rapide, disponible une fois cet outil activ&eacute; :',
 	'attente' => 'Attente...',
 	'auteur_forum:description' => 'Incite tous les auteurs de messages publics &agrave; remplir (d\'au moins d\'une lettre !) le champ &laquo;@_CS_FORUM_NOM@&raquo; afin d\'&eacute;viter les contributions totalement anonymes.',
 	'auteur_forum:nom' => 'Pas de forums anonymes',

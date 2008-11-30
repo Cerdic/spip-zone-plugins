@@ -85,7 +85,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=hide&outil='.$outil_id).'" title="' . _T('couteauprive:outil_cacher') . '">' . _T('couteauprive:outil_cacher') . '</a>&nbsp;|&nbsp;';
 	$act = $actif?'des':'';
 	$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=toggle&outil='.$outil_id).'" title="'._T("couteauprive:outil_{$act}activer_le").'">'._T("couteauprive:outil_{$act}activer")."</a></div>";
-	if(strlen($temp = cs_action_rapide($outil_id))) $s .= "<div class='cs_action_rapide' id='cs_action_rapide'>$temp</div>";
+	if(strlen($temp = cs_action_rapide($outil_id, $actif))) $s .= "<div class='cs_action_rapide' id='cs_action_rapide'>$temp</div>";
 	include_spip('inc/texte');
 	$s .= propre($descrip);
 
@@ -119,20 +119,15 @@ function liste_outils() {
 		foreach(array('s_actifs', 's_inactifs') as $temp) {
 			sort(${$temp});
 			$reset=_request('cmd')=='resetjs'?"\ncs_EffaceCookie('sous_liste_$id');":'';
-			$titre = "<script type=\"text/javascript\"><!--$reset
-document.write('<span class=\"light'+cs_Titre('sous_liste_$id')+'\">');
-//--></script><noscript><span class='light cs_hidden'></noscript>" 
-				." (".count(${$temp}).")</span>";
+			$titre = "<span class='light cs_hidden'> (".count(${$temp}).")</span>";
 			preg_match(',([0-9]+)\.?\s*(.*),', _T('couteauprive:'.$c), $reg);
 			$titre = "<div class='titrem categorie'>$reg[2]$titre</div>";
 			$href = generer_url_ecrire(_request('exec'),"cmd=descrip&outil=");
 			foreach(${$temp} as $j=>$v)
-				${$temp}[$j] = preg_replace(',^(.*)\|(.*)\|(.*)$,', '<a class="cs_href" id="href_$3" name="$3" href="'.$href.'$3">$1</a>', $v);
+				${$temp}[$j] = preg_replace(',^(.*)\|(.*)\|(.*)$,', '<a class="cs_href" id="$3" href="'.$href.'$3">$1</a>', $v);
 			${$temp} = join("<br/>\n", ${$temp});
 			if (strlen(${$temp})) ${'result'.$temp} .= $titre
-				. "<script type=\"text/javascript\"><!--
-document.write('<div id=\"sous_liste_$id\" class=\"'+cs_Categorie('sous_liste_$id')+'\">');
-//--></script><noscript><div id=\"sous_liste_$id\"></noscript>" . ${$temp} . '</div>';
+				. "<div id='sous_liste_$id' class='sous_liste'>" . ${$temp} . '</div>';
 			$id++;
 		}
 	}
@@ -142,7 +137,7 @@ document.write('<div id=\"sous_liste_$id\" class=\"'+cs_Categorie('sous_liste_$i
 	. '<div class="cs_liste cs_inactifs">' . $fieldset . 'red;">' . _T('couteauprive:outils_inactifs') . '</legend>'
 	. $results_inactifs . '</fieldset></div>'
 	. '<form id="csform" name="csform" method="post" action="'.generer_url_ecrire(_request('exec'),"cmd=toggle").'">'
-	. '<input type="hidden" value="test" name="cs_selection" id="cs_selection"/>'
+	. '<input type="hidden" value="test" name="cs_selection" id="cs_selection" />'
 	. '<div class="cs_toggle"><div style="display:none;">'
 	. '<a id="cs_toggle_a" title="'._T('couteauprive:outils_permuter_gras1').'" href="'.generer_url_ecrire(_request('exec'),"cmd=toggle").'">'
 	. '<img alt="<->" src="'.find_in_path('img/permute.gif').'"/></a>'
@@ -182,17 +177,21 @@ function detail_outil($outil_id) {
 }
 
 // renvoie les boutons eventuels d'action rapide
-function cs_action_rapide($outil_id) {
+function cs_action_rapide($outil_id, $actif=true) {
 	include_spip('inc/texte');
 	$f = "{$outil_id}_action_rapide";
 	include_spip("outils/$f");
 	if(!function_exists($f)) return '';
 	$f = trim($f());
 	if(strlen($f)) {
-		$mem = $GLOBALS['toujours_paragrapher'];
-		$GLOBALS['toujours_paragrapher'] = false;
-		$info = '<strong>' . definir_puce() . '&nbsp;' . propre(_T('couteauprive:action_rapide')) . "</strong>";
-		$GLOBALS['toujours_paragrapher'] = $mem;
+		// si inactif...
+		if(!$actif) {
+			if (preg_match_all(',<legend[^>]*>(.*?):?\s*</legend>,', $f, $regs))
+				// on ne conserve que les <legend>
+				$f = '<ul><li>' . join("</li><li>", $regs[1]) . '</li></ul>';
+				// on ne conserve que les value
+		}
+		$info = '<strong>' . definir_puce() . '&nbsp;' . _T('couteauprive:action_rapide'.($actif?'':'_non')) . "</strong>";
 		return "<div>$info</div><div>$f</div>";
 	}
 	return '';

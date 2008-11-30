@@ -27,7 +27,7 @@ switch($contexte) {
 
 	// contexte general lie au descriptions d'outils
 	case 'description_outils':
-		define('_VAR_OUTIL', cs_code_echappement("<!--  VAR-OUTIL -->\n", 'OUTIL'));
+		define('_VAR_OUTIL', '@@CS_VAR_OUTIL@@');
 		@define('_CS_CHOIX', _T('couteauprive:votre_choix'));
 		@define('_CS_ASTER', '<sup>(*)</sup>');
 		@define('_CS_PLUGIN_JQUERY192', defined('_SPIP19300')?'':_T('couteauprive:detail_jquery3'));

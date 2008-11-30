@@ -41,6 +41,8 @@ div.cs_infos div.cs_bouton { margin-top: 0; text-align: right; }
 div.cs_infos div.cs_modif_ok { font-weight:bold; color:green; margin:0.4em; text-align:center; }
 div.cs_infos div.cs_menu_outil { text-align:right; font-size:85%; margin-bottom:0.8em; }
 div.cs_infos div.cs_details_outil { font-size:85%; margin-top:0.8em; border-top:solid 1px; }
+div.cs_infos fieldset ul { margin:0; padding:0; }
+div.cs_infos fieldset ul li { list-style:none; display:inline; }
 
 div.cs_action_rapide { border:1px dotted; margin-bottom:1em; padding-bottom:0.4em; background-color:#F0EEEE; }
 div.cs_action_rapide select.ar_select { width:auto; display:inline; }
@@ -127,7 +129,7 @@ var cs_selected, cs_descripted;
 function set_selected() {
 	cs_selected = new Array();
 	jQuery('a.outil_on').each( function(i){
-		cs_selected[i] = this.name;
+		cs_selected[i] = this.id;
 	});
 	if(cs_selected.length) {
 			jQuery('div.cs_toggle div').show();
@@ -154,15 +156,16 @@ function outils_toggle() {
 
 // clic sur un outil
 function cs_href_click(this_) {
+	var this_id = this_.id.replace(/^href_/,'');
 	// on s'en va si l'outil est deja affiche
-	if(cs_descripted==this_.name) return false;
-	cs_descripted=this_.name;
+	if(cs_descripted==this_id) return false;
+	cs_descripted=this_id;
 	// on charge la nouvelle description
 	jQuery('#cs_infos')
 		.css('opacity', '0.5')
 		.parent()
 		.prepend(ajax_image_searching)
-		.load('".generer_url_ecrire('charger_description_outil', 'source='._request('exec').'&outil=', '\\x26')."'+this_.name);
+		.load('".generer_url_ecrire('charger_description_outil', 'source='._request('exec').'&outil=', '\\x26')."'+this_id);
 	// annulation du clic
 	return false;
 }
@@ -170,6 +173,8 @@ function cs_href_click(this_) {
 if (window.jQuery) jQuery(function(){
 	// decalage a supprimer sur FF2
 	if (jQuery.browser.mozilla) jQuery('input.cs_sobre').css('margin-left','-3px');
+	
+	jQuery('div.sous_liste').each(cs_Categorie2);
 
 	jQuery('div.cs_liste script').remove();
 	// clic sur un titre de categorie
@@ -238,7 +243,7 @@ if (window.jQuery) jQuery(function(){
 		return false;
 	});
 
-	// masquage/demasquage des blocs <variable></variable> liees a des checkbox
+	// masquage/demasquage des blocs <variable> liees a des checkbox
 	input_init.apply(document);
 
 	// verifier la version du CS
@@ -248,14 +253,19 @@ if (window.jQuery) jQuery(function(){
 
 });
 
-// masquage/demasquage des blocs <variable></variable> liees a des checkbox
+// masquage/demasquage des blocs <variable> liees a des checkbox
 // compatibilite Ajax : ajouter this dans jQuery()
 var input_init=function(){
-	jQuery('.cs_input_checkbox', this).change( function() {
-		jQuery('.groupe_'+this.name).addClass('cs_hidden');
-		jQuery('.valeur_'+this.name+'_'+this.value).removeClass('cs_hidden');
-	});
-	jQuery('input.cs_input_checkbox:checked',this).change();
+	// outil actif
+	jQuery('.cs_input_checkbox', this).not('.cs_done').addClass('cs_done').click(bloc_variables);
+	jQuery('input.cs_input_checkbox:checked',this).each(bloc_variables);
+	// outil inactif
+	jQuery('.cs_hidden_checkbox', this).not('.cs_done').addClass('cs_done').each(bloc_variables);
+}
+function bloc_variables(index, domElement) {
+//alert(this.name+' - '+this.value);
+	jQuery('.groupe_'+this.name).addClass('cs_hidden');
+	jQuery('.valeur_'+this.name+'_'+this.value).removeClass('cs_hidden');
 }
 if(typeof onAjaxLoad=='function') onAjaxLoad(input_init);
 
@@ -300,13 +310,13 @@ function cs_EffaceCookie(nom){
 	cs_EcrireCookie(nom,null,date); 
 }
 
-function cs_Categorie(nom){
-	c=cs_LireCookie(nom);
-	return (window.jQuery && (c===null || c=='+cs_hidden'))?'cs_hidden':'';
-}
-function cs_Titre(nom){
-	c=cs_LireCookie(nom);
-	return (window.jQuery && (c===null || c=='+cs_hidden'))?'':' cs_hidden';
+function cs_Categorie2(i,e){
+	var c=cs_LireCookie(this.id);
+	if(c===null || c=='+cs_hidden') {
+		var j=jQuery(this);
+		j.addClass('cs_hidden');
+		j.prev().children('span.light').removeClass('cs_hidden');
+	}
 }
 
 //--></script>";
@@ -472,7 +482,7 @@ if($resultat['Type']!='text') echo "<p style=\"color:red;\">Attention : votre ba
 $mini = '2.5.3';
 if (strlen($bt_version) and (version_compare($bt_version,$mini,'<'))) echo "<p>"._T('couteauprive:erreur:bt', array('version'=>$bt_version, 'mini'=>$mini))."</p>";
 echo "<script type=\"text/javascript\"><!-- 
-if (!window.jQuery) document.write('".addslashes(propre('<p>'._T('couteauprive:erreur:jquery').'</p>'))."');
+if (!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p>'._T('couteauprive:erreur:jquery').'</p>')))."');
 //--></script>";
 	echo '</div>';
 
@@ -487,7 +497,7 @@ if (!window.jQuery) document.write('".addslashes(propre('<p>'._T('couteauprive:e
 	// si le plugin est installe par procedure automatique, on permet la mise a jour directe (SPIP >= 2.0)
 	$form_update = preg_match(',plugins/auto/couteau_suisse/$,',_DIR_PLUGIN_COUTEAU_SUISSE)?
 		"<input type='hidden' name='url_zip_plugin' value='http://files.spip.org/spip-zone/couteau_suisse.zip' />"
-		. "<br/><div class='cs_sobre'><input type='submit' value='&bull; " . attribut_html(_T('couteauprive:version_update')) . "' class='cs_sobre' title='" . attribut_html(_T('couteauprive:version_update_title')) . "'/></div>"
+		. "<br/><div class='cs_sobre'><input type='submit' value='&bull; " . attribut_html(_T('couteauprive:version_update')) . "' class='cs_sobre' title='" . attribut_html(_T('couteauprive:version_update_title')) . "' /></div>"
 		:"";
 	// un lien si le plugin plugin "Telechargeur" est present (SPIP < 2.0)
 	if(!strlen($form_update) && defined('_DIR_PLUGIN_CHARGEUR'))
@@ -533,9 +543,9 @@ if (!window.jQuery) document.write('".addslashes(propre('<p>'._T('couteauprive:e
 		$cmd=='pack'?cs_description_pack():description_outil2($afficher_outil),
 		'</div><script type="text/javascript"><!--
 var cs_descripted = "', $afficher_outil, '";
-document.write("<style>#csjs{display:none;}</style>");
+document.write("<style type=\'text/css\'>#csjs{display:none;}<\/style>");
 //--></script><div id="csjs" style="color:red;"><br/>', _T('couteauprive:erreur:js'),'</div>
-<noscript><style>#csjs{display:none;}</style><div style="color:red;"><br/>', _T('couteauprive:erreur:nojs'),
+<noscript><style type="text/css">#csjs{display:none;}</style><div style="color:red;"><br/>', _T('couteauprive:erreur:nojs'),
 $_GET['modif']=='oui'?'<br/>'._T('couteauprive:vars_modifiees').'.':'','</div></noscript>',
 		'</div>',
 		"</td></tr></table>\n",
