@@ -128,6 +128,14 @@ div.cs_sobre, input.cs_sobre {
 </style>
 EOF;
 	$force = in_array(_request('var_mode'), array('calcul', 'recalcul'));
+	$spip191 = !defined('_SPIP19100')?'':
+"	// cadeau pour SPIP 1.91 !
+	jQuery(\"div.cs_aide a\").each( function() {
+		var t=jQuery(this).text();
+		var ar=t.split(/\|/);
+		if (ar.length==2)
+			jQuery(this).attr('title', ar[1]).html(ar[0]);
+	});";
 	echo "<script type=\"text/javascript\"><!--
 
 var cs_selected, cs_descripted;
@@ -191,6 +199,7 @@ if (window.jQuery) jQuery(function(){
 		msg=\"".unicode_to_javascript(addslashes(html2unicode(_T('couteauprive:cs_reset'))))."\";
 		return window.confirm(msg); 
 	});
+$spip191
 
 	jQuery('div.cs_liste script').remove();
 	// clic sur un titre de categorie
@@ -526,6 +535,7 @@ if (!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p
 		. $form_update
 		. '<br/>&bull;&nbsp;['._T('couteauprive:pack_titre') . '|' . _T('couteauprive:pack_alt') . '->' . generer_url_ecrire($exec,'cmd=pack#cs_infos') . "]\n\n"
 		. _T('couteauprive:help3', array(
+
 			'reset' => generer_url_ecrire($exec,'cmd=resetall'),
 			'hide' => generer_url_ecrire($exec,'cmd=showall'),
 			'contribs' => join('', $contribs),
