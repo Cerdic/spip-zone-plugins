@@ -43,165 +43,172 @@ function exec_spiplistes_config () {
 		, $couleur_foncee
 		, $spip_lang_right
 		;
-
-	$keys_complement_courrier = array(
-		'opt_personnaliser_courrier'
-		, 'opt_lien_en_tete_courrier', 'lien_patron'
-		, 'opt_ajout_tampon_editeur', 'tampon_patron'
-		);
-	$keys_complement_courrier = array_merge($keys_complement_courrier, $_tampon_cles = explode(",", _SPIPLISTES_TAMPON_CLES));
-	$tampon_labels = array_flip($_tampon_cles);
-	foreach($tampon_labels as $key=>$value) {
-		$tampon_labels[$key] = _T('spiplistes:'.$key);
-	}
-
-	$keys_param_valider = array(
-		'email_defaut'
-		, 'smtp_server'
-		, 'smtp_login'
-		, 'smtp_pass'
-		, 'smtp_port'
-		, 'mailer_smtp'
-		, 'smtp_identification'
-		, 'smtp_sender'
-		, 'spiplistes_lots'
-		, 'spiplistes_charset_envoi'
-		);
-	
-	$keys_opts_param_valider = array(
-		'opt_simuler_envoi' // demande à la méleuse de simuler l'envoi du courrier
-		, 'opt_suspendre_trieuse' // suspendre la trieuse. Les listes restent en attente
-		, 'opt_suspendre_meleuse' // suspendre les envois de courriers
-		);
-			
-	$keys_console_syslog = array(
-		'opt_console_syslog' // permet d'envoyer le journal sur syslog
-		, 'opt_log_voir_destinataire' // ecrire adresse mail des destinataires dans les journaux
-		);
-			
-	// initialise les variables postées par le formulaire
-	foreach(array_merge(
-		array(
-			'abonnement_valider', 'abonnement_config', 'param_reinitialise'
-			, 'btn_complement_courrier'
-			, 'btn_param_valider'
-			, 'btn_console_syslog'
-			, 'voir_logs'
-		)
-		, $keys_complement_courrier
-		, $keys_param_valider
-		, $keys_opts_param_valider
-		, $keys_console_syslog
-		) as $key) {
-		$$key = _request($key);
-	}
-
-	$doit_ecrire_metas = false;
-	$str_log = "";
-	if(!isset($GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES])) {
-		$GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES] = array();
-	}
-	
-	if($abonnement_valider && $abonnement_config) {
-		ecrire_meta('abonnement_config', $abonnement_config);
-		$doit_ecrire_metas = true;
-		$str_log .= "abonnement_config = $abonnement_config, ";
-	}
-
-	if($btn_complement_courrier) {
-		foreach($keys_complement_courrier as $key) {
-			spiplistes_ecrire_key_in_serialized_meta(
-				$key
-				, (!empty($$key) ? $$key : 'non')
-				, _SPIPLISTES_META_PREFERENCES
-				);
-			$str_log .= $key." = ".$$key.", ";
-		}
-		$doit_ecrire_metas = true;
-	}
-	
-	if($btn_param_valider) {
-		foreach($keys_param_valider as $key) {
-			if(($key != 'email_defaut') || email_valide($email_defaut)) {
-				$str_log .= $key." = ".$$key.", ";
-				ecrire_meta($key, $$key);
-			}
-		}
-		foreach($keys_opts_param_valider as $key) {
-			$$key = (!empty($$key)) ? $$key : 'non';
-			spiplistes_ecrire_key_in_serialized_meta ($key, $$key, _SPIPLISTES_META_PREFERENCES);
-			$str_log .= $key." = ".$$key.", ";
-		}
-		$doit_ecrire_metas = true;
-	}
 		
-	if($btn_console_syslog) {
-		if(!spiplistes_in_private_ip_adresses()) {
+	$flag_editable = (($connect_statut == "0minirezo") && ($connect_toutes_rubriques));
+
+	if($flag_editable) {
+		$keys_complement_courrier = array(
+			'opt_personnaliser_courrier'
+			, 'opt_lien_en_tete_courrier', 'lien_patron'
+			, 'opt_ajout_tampon_editeur', 'tampon_patron'
+			);
+		$keys_complement_courrier = array_merge($keys_complement_courrier, $_tampon_cles = explode(",", _SPIPLISTES_TAMPON_CLES));
+		$tampon_labels = array_flip($_tampon_cles);
+		foreach($tampon_labels as $key=>$value) {
+			$tampon_labels[$key] = _T('spiplistes:'.$key);
 		}
-		foreach($keys_console_syslog as $key) {
-			if($key == $opt_log_voir_destinataire) {
-				$opt_log_voir_destinataire = (!empty($$key)) ? $$key : 'non';
+	
+		$keys_param_valider = array(
+			'email_defaut'
+			, 'smtp_server'
+			, 'smtp_login'
+			, 'smtp_pass'
+			, 'smtp_port'
+			, 'mailer_smtp'
+			, 'smtp_identification'
+			, 'smtp_sender'
+			, 'spiplistes_lots'
+			, 'spiplistes_charset_envoi'
+			);
+		
+		$keys_opts_param_valider = array(
+			'opt_simuler_envoi' // demande à la méleuse de simuler l'envoi du courrier
+			, 'opt_suspendre_trieuse' // suspendre la trieuse. Les listes restent en attente
+			, 'opt_suspendre_meleuse' // suspendre les envois de courriers
+			);
+				
+		$keys_console_syslog = array(
+			'opt_console_syslog' // permet d'envoyer le journal sur syslog
+			, 'opt_log_voir_destinataire' // ecrire adresse mail des destinataires dans les journaux
+			);
+				
+		// initialise les variables postées par le formulaire
+		foreach(array_merge(
+			array(
+				'abonnement_valider', 'abonnement_config', 'param_reinitialise'
+				, 'btn_complement_courrier'
+				, 'btn_param_valider'
+				, 'btn_console_syslog'
+				, 'voir_logs'
+			)
+			, $keys_complement_courrier
+			, $keys_param_valider
+			, $keys_opts_param_valider
+			, $keys_console_syslog
+			) as $key) {
+			$$key = _request($key);
+		}
+	
+		$doit_ecrire_metas = false;
+		$str_log = "";
+		if(!isset($GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES])) {
+			$GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES] = array();
+		}
+		
+		if($abonnement_valider && $abonnement_config) {
+			ecrire_meta('abonnement_config', $abonnement_config);
+			$doit_ecrire_metas = true;
+			$str_log .= "abonnement_config = $abonnement_config, ";
+		}
+	
+		if($btn_complement_courrier) {
+			foreach($keys_complement_courrier as $key) {
+				spiplistes_ecrire_key_in_serialized_meta(
+					$key
+					, (!empty($$key) ? $$key : 'non')
+					, _SPIPLISTES_META_PREFERENCES
+					);
+				$str_log .= $key." = ".$$key.", ";
 			}
-			if(
-				// si pas sur réseau privé et option syslog validé,
-				// retire l'option syslog (cas de copie de base du LAN sur celle du WAN)
-				($key == 'opt_console_syslog')
-				&& !spiplistes_in_private_ip_adresses()
-			) {
-				$$key = 'non';
-			} else {
+			$doit_ecrire_metas = true;
+		}
+		
+		if($btn_param_valider) {
+			foreach($keys_param_valider as $key) {
+				if(($key != 'email_defaut') || email_valide($email_defaut)) {
+					$str_log .= $key." = ".$$key.", ";
+					ecrire_meta($key, $$key);
+				}
+			}
+			foreach($keys_opts_param_valider as $key) {
 				$$key = (!empty($$key)) ? $$key : 'non';
+				spiplistes_ecrire_key_in_serialized_meta ($key, $$key, _SPIPLISTES_META_PREFERENCES);
+				$str_log .= $key." = ".$$key.", ";
 			}
-			spiplistes_ecrire_key_in_serialized_meta($key, $$key, _SPIPLISTES_META_PREFERENCES);
-			$str_log .= $key." = ".$$key.", ";
+			$doit_ecrire_metas = true;
 		}
-		$doit_ecrire_metas = true;
+			
+		if($btn_console_syslog) {
+			if(!spiplistes_in_private_ip_adresses()) {
+			}
+			foreach($keys_console_syslog as $key) {
+				if($key == $opt_log_voir_destinataire) {
+					$opt_log_voir_destinataire = (!empty($$key)) ? $$key : 'non';
+				}
+				if(
+					// si pas sur réseau privé et option syslog validé,
+					// retire l'option syslog (cas de copie de base du LAN sur celle du WAN)
+					($key == 'opt_console_syslog')
+					&& !spiplistes_in_private_ip_adresses()
+				) {
+					$$key = 'non';
+				} else {
+					$$key = (!empty($$key)) ? $$key : 'non';
+				}
+				spiplistes_ecrire_key_in_serialized_meta($key, $$key, _SPIPLISTES_META_PREFERENCES);
+				$str_log .= $key." = ".$$key.", ";
+			}
+			$doit_ecrire_metas = true;
+		}
+		
+		if($doit_ecrire_metas) {
+			// recharge les metas en cache 
+			spiplistes_ecrire_metas();
+		}
+		
+		if(!empty($str_log)) {
+			$str_log = rtrim($str_log, ", ");
+			spiplistes_log("CONFIGURE id_auteur #$connect_id_auteur : ".$str_log);
+		}
+	
+		// Paramétrages des envois
+		$adresse_defaut = (email_valide($GLOBALS['meta']['email_defaut'])) ? $GLOBALS['meta']['email_defaut'] : $GLOBALS['meta']['email_webmaster'];
+		$smtp_identification = (isset($GLOBALS['meta']['smtp_identification']) && ($GLOBALS['meta']['smtp_identification']=='oui')) ? "oui" : "non";
+		$mailer_smtp = (isset($GLOBALS['meta']['mailer_smtp']) && ($GLOBALS['meta']['mailer_smtp']=='oui')) ? "oui" : "non";
+		$smtp_port = (isset($GLOBALS['meta']['smtp_port']) && (!empty($GLOBALS['meta']['smtp_port']))) ? $GLOBALS['meta']['smtp_port'] : "25";
+		$smtp_server = (isset($GLOBALS['meta']['smtp_server']) && (!empty($GLOBALS['meta']['smtp_server']))) ? $GLOBALS['meta']['smtp_server'] : "localhost";
+		$smtp_sender = (email_valide($GLOBALS['meta']['smtp_sender'])) ? $GLOBALS['meta']['smtp_sender'] : $GLOBALS['meta']['email_webmaster'];
 	}
 	
-	if($doit_ecrire_metas) {
-		// recharge les metas en cache 
-		spiplistes_ecrire_metas();
-	}
-	
-	if(!empty($str_log)) {
-		$str_log = rtrim($str_log, ", ");
-		spiplistes_log("CONFIGURE id_auteur #$connect_id_auteur : ".$str_log);
-	}
-
-	// Paramétrages des envois
-	$adresse_defaut = (email_valide($GLOBALS['meta']['email_defaut'])) ? $GLOBALS['meta']['email_defaut'] : $GLOBALS['meta']['email_webmaster'];
-	$smtp_identification = (isset($GLOBALS['meta']['smtp_identification']) && ($GLOBALS['meta']['smtp_identification']=='oui')) ? "oui" : "non";
-	$mailer_smtp = (isset($GLOBALS['meta']['mailer_smtp']) && ($GLOBALS['meta']['mailer_smtp']=='oui')) ? "oui" : "non";
-	$smtp_port = (isset($GLOBALS['meta']['smtp_port']) && (!empty($GLOBALS['meta']['smtp_port']))) ? $GLOBALS['meta']['smtp_port'] : "25";
-	$smtp_server = (isset($GLOBALS['meta']['smtp_server']) && (!empty($GLOBALS['meta']['smtp_server']))) ? $GLOBALS['meta']['smtp_server'] : "localhost";
-	$smtp_sender = (email_valide($GLOBALS['meta']['smtp_sender'])) ? $GLOBALS['meta']['smtp_sender'] : $GLOBALS['meta']['email_webmaster'];
-
 ////////////////////////////////////
 // PAGE CONTENU
 ////////////////////////////////////
 
-	$titre_page = _T('spiplistes:spip_listes');
-	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
-	$rubrique = "configuration";
+	$titre_page = _T('icone_configuration_site');
+	// Permet entre autres d'ajouter les classes a' la page : <body class='$rubrique $sous_rubrique'>
+	$rubrique = 'configuration';
 	$sous_rubrique = _SPIPLISTES_PREFIX;
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page($titre_page, $rubrique, $sous_rubrique));
+	echo($commencer_page(_T('spiplistes:spiplistes') . " - " . $titre_page, $rubrique, $sous_rubrique));
 	
 	// la configuration spiplistes est réservée aux supers-admins 
-	if(!(($connect_statut == "0minirezo") && ($connect_toutes_rubriques))) {
+	if(!$flag_editable) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 
 	$page_result = ""
 		. "<br /><br /><br />\n"
 		. spiplistes_gros_titre(_T('titre_page_config_contenu'), '', true)
-		. barre_onglets($rubrique, _SPIPLISTES_PREFIX)
+		. barre_onglets($rubrique, $sous_rubrique)
 		. debut_gauche($rubrique, true)
 		. spiplistes_boite_meta_info(_SPIPLISTES_PREFIX)
+		. pipeline('affiche_gauche', array('args'=>array('exec'=>'spiplistes_config'),'data'=>''))
+		//. creer_colonne_droite($rubrique, true)  // spiplistes_boite_raccourcis() s'en occupe
 		. spiplistes_boite_raccourcis(true)
 		. spiplistes_boite_autocron()
 		. spiplistes_boite_info_spiplistes(true)
+		. pipeline('affiche_droite', array('args'=>array('exec'=>'spiplistes_config'),'data'=>''))
 		. debut_droite($rubrique, true)
 		;
 
@@ -261,8 +268,9 @@ function exec_spiplistes_config () {
 		//
 		// lien courrier: boite de sélection
 		. "<div id='div-lien-en-tete-courrier' style='".(!$opt_lien_en_tete_courrier ? "display:none;" : "")."margin-top:1em;'>"
-   	. "<label class='verdana2' style='padding-left:2ex;' for='lien_patron'>"._T('spiplistes:Patron_du_lien').":</label>\n"
+   	. "<label class='verdana2' style='padding-left:2ex;'>"._T('spiplistes:Patron_du_lien').":\n"
 		. spiplistes_boite_selection_patrons($lien_patron, true, _SPIPLISTES_PATRONS_TETE_DIR, "lien_patron", 1)
+		. "</label>\n"
 		. "</div>\n" // fin bloc div-lien-en-tete-courrier
 		. fin_cadre_relief(true)
 		//
@@ -277,8 +285,9 @@ function exec_spiplistes_config () {
 		// coordonnées editeur: bloc coordonnes_editeur
 		. "<div id='div-ajout-tampon-editeur' style='".(!$opt_ajout_tampon_editeur ? "display:none;" : "")."margin-top:1em;'>"
 		// tampon sélecteur
-   	. "<label class='verdana2' style='padding-left:2ex;' for='tampon_patron'>"._T('spiplistes:Patron_du_tampon').":</label>\n"
+   	. "<label class='verdana2' style='padding-left:2ex;'>"._T('spiplistes:Patron_du_tampon').":\n"
 		. spiplistes_boite_selection_patrons($tampon_patron, true, _SPIPLISTES_PATRONS_TAMPON_DIR, "tampon_patron", 1)
+		. "</label>"
 		. "<ul class='verdana2' style='list-style:none;padding-left:2ex;'>\n"
 		;
 		foreach($_tampon_cles as $key) {
@@ -320,8 +329,7 @@ function exec_spiplistes_config () {
 		. "</div>\n"
 		//
 		// si 'smtp', affiche bloc de paramétrage
-		. "<div id='smtp' style='display:".(($mailer_smtp == "oui") ? "block;" : "none;")."'>\n"
-		. "<ul class='verdana2' style='list-style: none;'>\n"
+		. "<ul id='smtp' class='verdana2' style='list-style: none;display:".(($mailer_smtp == "oui") ? "block" : "none")."'>\n"
 		. "<li>"._T('spiplistes:smtp_hote')." : <input type='text' name='smtp_server' value='$smtp_server' size='30' class='forml' /></li>\n"
 		. "<li>"._T('spiplistes:smtp_port')." : <input type='text' name='smtp_port' value='$smtp_port' size='4' class='fondl' /></li>\n"
 		. "<li>"
@@ -332,8 +340,8 @@ function exec_spiplistes_config () {
 		. bouton_radio("smtp_identification", "oui", _T('item_oui'), ($smtp_identification == "oui"), "changeVisible(this.checked, 'smtp-auth', 'block', 'none');")
 		. "&nbsp;"
 		. bouton_radio("smtp_identification", "non", _T('item_non'), ($smtp_identification == "non"), "changeVisible(this.checked, 'smtp-auth', 'none', 'block');")."</li>\n"
-		. "<div id='smtp-auth' style='display:".(($smtp_identification == "oui") ? "block;" : "none;" )."'>\n"
-		. "<ul class='verdana2' style='list-style: none;'>\n"
+		. "</ul>\n"
+		. "<ul id='smtp-auth' class='verdana2' style='list-style:none;display:".(($smtp_identification == "oui") ? "block" : "none" )."'>\n"
 		. "<li>"
 			. "<label for='smtp_login'>"._T('item_login')." : </label>\n"
 			. "<input type='text' id='smtp_login' name='smtp_login' value='".$GLOBALS['meta']['smtp_login']."' size='30' class='fondl' />\n"
@@ -343,8 +351,6 @@ function exec_spiplistes_config () {
 			. "<input type='password' id='smtp_pass' name='smtp_pass' value='".$GLOBALS['meta']['smtp_pass']."' size='30' class='fondl' />\n"
 		. "</li>\n"
 		. "</ul>\n"
-		. "</div>\n"
-		. "</div>\n"
 		. fin_cadre_relief(true)
 		//
 		// le nombre de lots d'envois
@@ -441,7 +447,11 @@ function exec_spiplistes_config () {
 	
 	// Fin de la page
 	echo($page_result);
-	echo spiplistes_html_signature(_SPIPLISTES_PREFIX), fin_gauche(), fin_page();
+
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
+		, spiplistes_html_signature(_SPIPLISTES_PREFIX)
+		, fin_gauche(), fin_page();
+	
 	
 } // exec_config()
 
