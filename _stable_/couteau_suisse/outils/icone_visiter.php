@@ -5,18 +5,18 @@ global $spip_lang_left,$spip_lang_right;
 	if ($r = $chercher_logo(0, 'id_syndic', 'on'))  {
 		list($fid, $dir, $nom, $format) = $r;
 		// pour javascript...
-		$fid = str_replace('/', '\/', $fid);
 		include_spip('inc/filtres_images');
 		if(defined('_SPIP19300')) {
-			$r = image_reduire("<img src='$fid' alt='' style='margin:0;' \\/>", 46, 46);
-			$r = "<span style='height:48px; margin:0;'>$r<\\/span>";
+			$r = image_reduire("<img src='$fid' alt='' style='margin:0;' />", 46, 46);
+			$r = "<span style='height:48px; margin:0;'>$r</span>";
 			$q = 'span.icon_fond:last';
 		} else {
-			$r = image_reduire("<img src='$fid' alt='' style='margin:0;' \\/>", 48, 48);
-			$r = addslashes("<span style='height:48px; margin:4px;'>$r<\\/span>");
+			$r = image_reduire("<img src='$fid' alt='' style='margin:0;' />", 48, 48);
+			$r = addslashes("<span style='height:48px; margin:4px;'>$r</span>");
 			$q = 'img[@src*=visiter]';
 		}
 	} else return $flux;
+	$r = str_replace('/', '\/', $r);
 	return $flux. <<<JAVASCRIPT
 <script type="text/javascript"><!--
 // des que le DOM est pret...
