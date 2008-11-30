@@ -7,15 +7,25 @@ function Nyro_insert_head($flux){
 		$config = array();
 	$config = array_merge(array(
 		'traiter_toutes_images' => 'oui',
+		'installer_diapo_auto' => 'oui',
 		'selecteur_galerie' => '#documents_portfolio .nyroceros',
 		'selecteur_commun' => '.nyroceros',
 		'bgcolor' => '#000000',
 		'preload' => 'oui'
 	), $config);
 
+	
+
+	
 	$flux .='
 <script src="'.url_absolue(find_in_path('js/jquery.nyroModal-1.3.0.js')).'" type="text/javascript"></script>
-<script src="'.url_absolue(find_in_path('js/nyromodal.js')).'" type="text/javascript"></script>
+<script src="'.url_absolue(find_in_path('js/nyromodal.js')).'" type="text/javascript"></script>';
+	
+	if ($config['installer_diapo_auto'] == 'oui'){
+$flux .='<script src="'.url_absolue(find_in_path('js/nyrodiapo.js')).'" type="text/javascript"></script>';
+	}	
+	
+	$flux .='
 <script type="text/javascript">/* <![CDATA[ */
 var nyro_traiter_toutes_images='.($config['traiter_toutes_images'] == 'oui'?'true':'false').';
 var nyro_bgcolor="'.$config['bgcolor'].'";

@@ -13,18 +13,18 @@
 
 	<ul>
 		<li class="editer_nyroceros_selecteur_commun[ (#ENV**{erreurs}|table_valeur{selecteur_commun}|oui)erreur]">
-			<label for="_nyro_selecteur_commun"><:nyroceros:cfg_lbl_selecteur_commun:></label>
+			<label for="nyro_selecteur_commun"><:nyroceros:cfg_lbl_selecteur_commun:></label>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{selecteur_commun})</span>]
 			<p class="explication"><:nyroceros:cfg_inf_selecteur_commun:></p>
-			<input type="text" name="selecteur_commun" class="text" id="_nyro_selecteur_commun" size="60"
+			<input type="text" name="selecteur_commun" class="text" id="nyro_selecteur_commun" size="60"
 				value="#ENV{selecteur_commun, .nyroceros}" />
 		</li>
 		
 		<li class="editer_nyroceros_selecteur_galerie[ (#ENV**{erreurs}|table_valeur{selecteur_galerie}|oui)erreur]">
-			<label for="_nyro_selecteur_galerie"><:nyroceros:cfg_lbl_selecteur_galerie:></label>
+			<label for="nyro_selecteur_galerie"><:nyroceros:cfg_lbl_selecteur_galerie:></label>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{selecteur_galerie})</span>]
 			<p class="explication"><:nyroceros:cfg_inf_selecteur_galerie:></p>
-			<input type="text" name="selecteur_galerie" class="text" id="_nyro_selecteur_galerie" size="60"
+			<input type="text" name="selecteur_galerie" class="text" id="nyro_selecteur_galerie" size="60"
 				value="#ENV{selecteur_galerie, #documents_portfolio .nyroceros}" />	
 		</li>
 
@@ -32,12 +32,25 @@
 			<label><:nyroceros:cfg_lbl_traiter_toutes_images:></label>
 			<p class="explication"><:nyroceros:cfg_inf_traiter_toutes_images:></p>
 			<div class="choix">
-				<input type="radio" name="traiter_toutes_images" class="radio" id="_nyro_traiter_images_on" value="oui" [(#ENV{traiter_toutes_images,oui}|=={oui}|oui) checked="checked"] />
-				<label for='_nyro_traiter_images_on'><:oui:></label>
+				<input type="radio" name="traiter_toutes_images" class="radio" id="nyro_traiter_images_on" value="oui" [(#ENV{traiter_toutes_images,oui}|=={oui}|oui) checked="checked"] />
+				<label for='nyro_traiter_images_on'><:oui:></label>
 			</div>
 			<div class="choix">
-				<input type="radio" name="traiter_toutes_images" class="radio" id="_nyro_traiter_images_off" value="non" [(#ENV{traiter_toutes_images,oui}|=={non}|oui) checked="checked"] />
-				<label for='_nyro_traiter_images_off'><:non:></label>
+				<input type="radio" name="traiter_toutes_images" class="radio" id="nyro_traiter_images_off" value="non" [(#ENV{traiter_toutes_images,oui}|=={non}|oui) checked="checked"] />
+				<label for='nyro_traiter_images_off'><:non:></label>
+			</div>
+		</li>
+		
+		<li class="editer_nyroceros_installer_diapo_auto[ (#ENV**{erreurs}|table_valeur{installer_diapo_auto}|oui)erreur]">
+			<label><:nyroceros:cfg_lbl_installer_diapo_auto:></label>
+			<p class="explication"><:nyroceros:cfg_inf_installer_diapo_auto:></p>
+			<div class="choix">
+				<input type="radio" name="installer_diapo_auto" class="radio" id="nyro_installer_diapo_auto_on" value="oui" [(#ENV{installer_diapo_auto,oui}|=={oui}|oui) checked="checked"] />
+				<label for='nyro_installer_diapo_auto_on'><:oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="installer_diapo_auto" class="radio" id="nyro_installer_diapo_auto_off" value="non" [(#ENV{installer_diapo_auto,oui}|=={non}|oui) checked="checked"] />
+				<label for='nyro_installer_diapo_auto_off'><:non:></label>
 			</div>
 		</li>
 
@@ -45,21 +58,21 @@
 			<label><:nyroceros:cfg_lbl_preload:></label>
 			<p class="explication"><:nyroceros:cfg_inf_preload:></p>
 			<div class="choix">
-				<input type="radio" name="preload" class="radio" id="_nyro_preload_on" value="oui" [(#ENV{preload,oui}|=={oui}|oui) checked="checked"] />
-				<label for='_nyro_preload_on'><:oui:></label>
+				<input type="radio" name="preload" class="radio" id="nyro_preload_on" value="oui" [(#ENV{preload,oui}|=={oui}|oui) checked="checked"] />
+				<label for='nyro_preload_on'><:oui:></label>
 			</div>
 			<div class="choix">
-				<input type="radio" name="preload" class="radio" id="_nyro_preload_off" value="non" [(#ENV{preload,oui}|=={non}|oui) checked="checked"] />
-				<label for='_nyro_preload_off'><:non:></label>
+				<input type="radio" name="preload" class="radio" id="nyro_preload_off" value="non" [(#ENV{preload,oui}|=={non}|oui) checked="checked"] />
+				<label for='nyro_preload_off'><:non:></label>
 			</div>
 		</li>
 		
 		<li class="editer_nyroceros_bgcolor[ (#ENV**{erreurs}|table_valeur{bgcolor}|oui)erreur]">
-			<label for='_nyro_bgcolor'><:nyroceros:cfg_lbl_bgcolor:></label>
+			<label for='nyro_bgcolor'><:nyroceros:cfg_lbl_bgcolor:></label>
 			<p class="explication"><:nyroceros:cfg_inf_bgcolor:></p>
 			<div class="choix">
 				<input type="text" name="bgcolor" class="palette"
-				id="_nyro_bgcolor" size="8" value="#ENV{bgcolor,#000000}"
+				id="nyro_bgcolor" size="8" value="#ENV{bgcolor,#000000}"
 				style="background-color:#ENV{bgcolor,#000000}; color:#[(#ENV{bgcolor,#000000}|couleur_inverser|couleur_extreme)];"
 				/>
 			</div>
