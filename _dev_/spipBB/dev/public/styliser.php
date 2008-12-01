@@ -74,7 +74,7 @@ function public_styliser($fond, $id_rubrique, $lang='', $connect='', $ext='html'
 		if ( is_array($spipbb_meta)
 		  AND ($fond=="article" OR $fond=="rubrique")
 		  AND $id_rubrique>0 ) {
-			spipbb_log("id_rub:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['id_secteur'],3,"p_s");
+			spipbb_log("id_rub1:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['id_secteur'],3,"p_s");
 
 			if (empty($spipbb_meta['squelette_filforum']) OR empty($spipbb_meta['squelette_groupeforum']) ) spipbb_init_metas($id_rubrique);
 			$id_rub = $id_rubrique;
@@ -89,9 +89,10 @@ function public_styliser($fond, $id_rubrique, $lang='', $connect='', $ext='html'
 				}
 				$squel=find_in_path("$sq.$ext");
 				if ( $squel ) $squelette = substr($squel, 0, - strlen(".$ext"));
-			}
+				spipbb_log("id_fin:".$id_rubrique.":squel:".$squel.":nom:$sq.$ext",3,"p_s");
+			} else spipbb_log("id_rub2:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['id_secteur'],3,"p_s");
 		}
-		else spipbb_log("id_rub:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['id_secteur'],3,"p_s2") ;
+		else spipbb_log("id_rub3:".$id_rubrique.":sq:".$fond.":meta:".$spipbb_meta['id_secteur'].":conf:".$spipbb_meta['configure'].":sql:".$spipbb_meta['config_squelette'],3,"p_s2") ;
 	}
 
 	// traitement normal
@@ -124,7 +125,8 @@ function public_styliser($fond, $id_rubrique, $lang='', $connect='', $ext='html'
 		if (@file_exists("$f.$ext"))
 			$squelette = $f;
 	}
-
+	
+	spipbb_log("return:$squelette, $ext, $ext, $squelette.$ext",3);
 	return array($squelette, $ext, $ext, "$squelette.$ext");
 } // public_styliser
 
