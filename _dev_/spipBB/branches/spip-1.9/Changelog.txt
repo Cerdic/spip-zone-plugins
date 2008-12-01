@@ -1,5 +1,10 @@
 ﻿2008-09-21  chryjs  <chryjs!@!free!.!fr>
 
+ * 0.6.1.3 Correction pour c_liste_messages fin de boucle pas applicable en 1.9 cf report : http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=860
+
+
+2008-09-21  chryjs  <chryjs!@!free!.!fr>
+
  * 0.6.1.2 Parametres pour le formulaire de tri
 
 2008-09-19  chryjs  <chryjs!@!free!.!fr>
