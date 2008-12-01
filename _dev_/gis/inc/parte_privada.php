@@ -21,6 +21,7 @@ function gis_cambiar_coord($id,$table,$exec) {
 	$gzoom = NULL;
 	$gicon = NULL;
 	$mapa = "";
+	$api_carte = lire_config('gis/api_carte');
 	$result= spip_query("SELECT * FROM spip_gis WHERE $pkey = " . intval($id));
 	if ($row = spip_fetch_array($result)){
 		$glat = $row['lat'];
@@ -51,7 +52,7 @@ function gis_cambiar_coord($id,$table,$exec) {
 				}
 			}
 		}
-		if ($api_carte = lire_config('gis/api_carte')) {
+		if ($api_carte) {
 			$gis_append_view_map = charger_fonction($api_carte.'_append_view_map','inc');
 			$mapa = '<div id="viewMap" name="viewMap" style="width: 470px; height: 100px; border:1px solid #000"></div>';
 		  	$mapa .= $gis_append_view_map('viewMap',$glat,$glonx,$zoom,array(array('lonx'=>$glonx,'lat'=>$glat)),$gicon);
