@@ -19,11 +19,11 @@
 				<label for="articles_entiers"><:spipclear:sommaire_articles_entiers:></label>
 			</div>
 		</li>
-		<li class="editer_secteur">#SET{secteurs,#CONFIG{spipclear/secteurs,#ARRAY{0,1}}}
+		<li class="editer_secteur">#SET{secteurs,#CONFIG{spipclear/secteurs,#ARRAY{0,0}}}
 			<label><:spipclear:secteurs_spipclear:></label>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{secteurs})</span>]
 			<select name="secteurs[]" multiple="multiple" size="9">
-				<option value=""><:spipclear:secteur_spipclear_aucun:></option>
+				<option value=""[ (#ENV{secteurs}|!={''}|?{'',' selected="selected"'})]><:spipclear:secteur_spipclear_tous:></option>
 				<BOUCLE_racine(RUBRIQUES){racine}{tout}>
 				<option value="#ID_SECTEUR"[ (#ID_SECTEUR|in_array{#GET{secteurs}}|?{' selected="selected"'})]>#TITRE</option>
 				</BOUCLE_racine>

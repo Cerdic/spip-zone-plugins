@@ -88,7 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //S
 'secteurs_spipclear' => 'Secteurs SpipClear',
-'secteur_spipclear_aucun' => 'Aucun',
+'secteur_spipclear_tous' => 'Tous',
 'selection' => '&agrave; retenir',
 'site_comment' => 'site',
 'syndication' => 'Syndication',
