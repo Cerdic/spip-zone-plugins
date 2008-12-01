@@ -9,7 +9,7 @@
 
 # requis
 if (!defined('_INC_SPIPBB_COMMON')) include_spip('inc/spipbb_common');
-//include_spip('inc/traiter_imagerie');
+include_spip('inc/traiter_imagerie');
 //include_spip('inc/spipbb_notifications');
 //include_spip('inc/spipbb_inc_formpost'); // tout_de_selectionner
 
