@@ -18,7 +18,7 @@ function geomap_affichage_final($flux){
     if ((strpos($flux, '<div id="map') == true) or (strpos($flux, '<div id="formMap') == true) or (strpos($flux, "<div id='map") == true) && (lire_config('geomap/cle_api'))){
 		$incHead = '';
 		$geomap_script_init = charger_fonction('geomap_script_init','inc');
-		$flux .= $geomap_script_init();
+		$incHead .= $geomap_script_init();
         return substr_replace($flux, $incHead, strpos($flux, '</head>'), 0);
     } else {
 		return $flux;
