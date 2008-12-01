@@ -1,10 +1,10 @@
 #CACHE{0}
 [(#EVAL{''}|debut_gauche{true})]
-[(#PLUGIN{ABONNEMENT}|?{' ',''})
+[(#PLUGIN{ABONNEMENT}|oui)
 		#INCLURE{fond=inc/menu_abonnement}	
 ]
 
-[(#PLUGIN{ABONNEMENT}|?{'',' '})
+[(#PLUGIN{ABONNEMENT}|non)
 #INCLURE{fond=prive/menu_inscription2}	
 ]
 
