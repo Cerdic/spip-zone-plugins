@@ -125,6 +125,10 @@ function spipbb_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['visites_forums'][] = 'forums';
 	$interface['tables_jointures']['auteurs_spipbb'][] = 'auteurs';
 
+	// definir les noms raccourcis pour les <BOUCLE_(VISITES_FORUMS) ...
+	$interface['table_des_tables']['visites_forums'] = 'visites_forums';
+
+	
 	return $interface;
 } // declarer_tables_interfaces
 
