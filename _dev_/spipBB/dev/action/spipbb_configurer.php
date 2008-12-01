@@ -210,14 +210,10 @@ function spipbb_appliquer_modifs_config($arg='') {
 
 	$reconf=false;
 	$spipbb_metas=@unserialize($GLOBALS['meta']['spipbb']);
-
-	
 	
 	foreach(spipbb_liste_metas() as $i=>$v) {
-echo "\n<br>debug $i => $v 	-> "._request($i)." ";
 		if ( (($x=_request($i))!==NULL) AND $x<>$spipbb_metas[$i] ) {
 			$reconf=true;
-echo "reconf";			
 			// cas particuliers ?
 			switch ($i) {
 			
@@ -246,12 +242,10 @@ echo "reconf";
 	# on creer l_entree dans spipbb metas
 	foreach ($champs_optionnels as $champ_a_valider) {
 		$champ_a_valider=strtolower($champ_a_valider);
-echo "\n<br>debug2 $champ_a_valider => " .$spipbb_metas['affiche_'.$champ_a_valider]." 	-> "._request('affiche_'.$champ_a_valider)." ";
 
 		if (($affiche_champ = _request('affiche_'.$champ_a_valider))
 			and $affiche_champ!=$spipbb_metas['affiche_'.$champ_a_valider]) {
 			$spipbb_metas['affiche_'.$champ_a_valider]=$affiche_champ;
-echo "reconf 2";			
 			$reconf=true;
 		}
 	}
@@ -325,8 +319,10 @@ echo "reconf 2";
 		if (!$lang) $lang=$GLOBALS['meta']['langue_site'];
 		include_spip('inc/rubriques');
 		$id_secteur=creer_rubrique_nommee(_T('spipbb:forums_spipbb')); // inc/rubriques
+		sql_updateq('spip_rubriques',array('statut'=>'publie'),"id_rubrique=$id_secteur");
 		$spipbb_metas['id_secteur'] = $id_secteur;
 		$id_categorie=creer_rubrique_nommee(_T('spipbb:forums_categories'),$id_secteur);
+		sql_updateq('spip_rubriques',array('statut'=>'publie'),"id_rubrique=$id_categorie");
 		$id_forum = sql_insertq("spip_articles", array(
 							'titre' => _T('spipbb:forums_titre'),
 							'id_rubrique' => $id_categorie,
@@ -345,7 +341,6 @@ echo "reconf 2";
 		suivre_invalideur("id='id_article/$id_forum'");
 
 		$reconf=true;
-echo "lang $lang id_sect $id_secteur categorie $id_categorie art_forum $id_forum";		
 	}
 	
 	// demande de creation d'un group de mots cles preconfigure
@@ -354,7 +349,6 @@ echo "lang $lang id_sect $id_secteur categorie $id_categorie art_forum $id_forum
 //		AND ( $spipbb_metas['config_groupe_mots']!='oui' OR $spipbb_metas['config_mot_cles']!='oui') 
 		) 
 	{
-echo "<br>\n config mots";
 		// on cherche s'il n'existe pas deja
 		$row = sql_fetsel('id_groupe','spip_groupes_mots', "titre = 'spipbb'" ,'','','1');
 		if (!$row) { // Celui la n'existe pas
@@ -369,7 +363,6 @@ echo "<br>\n config mots";
 					'forum' => 'oui' )
 						);
 			$row['id_groupe'] = $id_groupe;
-echo "insert grp $id_groupe";
 			}
 		$spipbb_metas['id_groupe_mot'] = $row['id_groupe'];
 		$spipbb_metas['config_groupe_mots']='oui';
@@ -382,11 +375,11 @@ echo "insert grp $id_groupe";
 	}
 	
 	if ($reconf) {
-echo "\n<br>on reconfig";	
+		// controles dans save_metas		
+		// sauvegarde
 		$GLOBALS['spipbb']=$spipbb_metas;
 		spipbb_save_metas();
 	}
-//die("conf");
 } // appliquer_modifs_config
 
 ?>
