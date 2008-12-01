@@ -39,8 +39,8 @@ function balise_TOTAL_AUTEURS_EN_LIGNE_stat($args, $filtres) {
 	return $args;
 }
 
-function balise_TOTAL_AUTEURS_EN_LIGNE_dyn($delais='5 MINUTE') {
-	if (empty($delais)) $delais='5 MINUTE';
+function balise_TOTAL_AUTEURS_EN_LIGNE_dyn($delais='30 MINUTE') {
+	if (empty($delais)) $delais='30 MINUTE';
 
 	$o = sql_fetsel('COUNT(*) AS total','spip_auteurs',"en_ligne>= DATE_SUB(NOW(), INTERVAL ".$delais." )");
 	return is_array($o) ? $o['total'] : 0 ;
