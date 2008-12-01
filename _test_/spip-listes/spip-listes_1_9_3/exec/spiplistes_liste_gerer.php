@@ -537,7 +537,9 @@ function exec_spiplistes_liste_gerer () {
 		. debut_cadre_relief("", true)
 		. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>\n"
 		. "<tr><td valign='top'>\n"
-		. spiplistes_gros_titre(spiplistes_bullet_titre_liste('puce', $statut, '', true)." ".$titre, '', true)
+		. spiplistes_gros_titre(spiplistes_bullet_titre_liste('puce', $statut, '', true)." "
+			. spiplistes_calculer_balise_titre(extraire_multi($titre))
+			, '', true)
 		. "</td>"
 		. "<td rowspan='2'>"
 		// le gros bouton modifier si besoin

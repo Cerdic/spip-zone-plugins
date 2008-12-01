@@ -148,7 +148,7 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 			foreach(array('id_courrier','id_liste','total_abonnes') as $key) {
 				$$key = intval($$key);
 			}
-			$objet_html = filtrer_entites(typo(spiplistes_calculer_balise_titre($titre)));
+			$objet_html = filtrer_entites(typo(spiplistes_calculer_balise_titre(extraire_multi($titre))));
 			$page_html = stripslashes($texte);
 			$message_texte = stripslashes($message_texte);
 			

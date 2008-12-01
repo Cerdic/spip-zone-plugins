@@ -151,7 +151,7 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 				. "<td class='arial2'>\n"
 				. "<div>\n"
 				. "<a href=\"".$url_row."\" dir='ltr' style='display:block;'>\n"
-				. extraire_multi($titre)
+				. spiplistes_calculer_balise_titre(extraire_multi($titre))
 				;
 			
 			switch($element) {

@@ -103,7 +103,8 @@ function spiplistes_destiner_envoi (
 							)
 							;
 						$masque .= "<option value='" . $row['id_liste'] . "' $checked >" 
-							. $row['titre'] . " (" . $nb_abos . ")</option>\n";
+							. spiplistes_calculer_balise_titre(extraire_multi($row['titre'])) 
+							. " (" . $nb_abos . ")</option>\n";
 					}
 				}
 				$masque .= ""
