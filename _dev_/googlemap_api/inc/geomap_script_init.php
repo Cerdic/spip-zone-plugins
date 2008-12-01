@@ -16,7 +16,7 @@ function inc_geomap_script_init_dist(){
 	$deja_insere = true;
 	$config = lire_config('geomap/cle_api','');
 	$version = lire_config('geomap/api_version',2);
-	$geomap = compacte_js(find_in_path('js/geomap.js'));
+	$geomap = find_in_path('js/geomap.js');
 	if($GLOBALS['meta']['charset'] == 'utf-8'){
 		spip_log("$version","bb");
 		$gmap_script = compacte_js(utf8_encode(recuperer_page('http://maps.google.com/maps?file=api&v='.$version.'&key='.$config.'&hl='.$GLOBALS['spip_lang'])));
