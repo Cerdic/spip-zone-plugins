@@ -11,24 +11,19 @@
  
 function inc_openlayer_append_view_map_dist($target_id,$view_lat,$view_long,$view_zoom=NULL,$Markers = NULL,$view_icon = NULL){
 	if (!strlen($view_lat) OR !is_numeric($view_lat)){
-		$view_lat = isset($GLOBALS['meta']['gis_default_lat'])?$GLOBALS['meta']['gis_default_lat']:'42.7631'; 
-		if (!strlen($view_lat) OR !is_numeric($view_lat)) $view_lat='42.7631';
+		$view_lat = lire_config('openlayer/latitude',0);
 	}
 	if (!strlen($view_long) OR !is_numeric($view_long)){
-		$view_long = isset($GLOBALS['meta']['gis_default_lonx'])?$GLOBALS['meta']['gis_default_lonx']:'-7.9321'; 
-		if (!strlen($view_long) OR !is_numeric($view_long)) $view_long='-7.9321';
+		$view_long = lire_config('openlayer/longitude',0);
 	}
 	if (!strlen($view_zoom) OR !is_numeric($view_zoom)){
-		$view_zoom = isset($GLOBALS['meta']['gis_default_zoom'])?$GLOBALS['meta']['gis_default_zoom']:'8'; 
-		if (!strlen($view_zoom) OR !is_numeric($view_zoom)) $view_zoom='8';
+		$view_zoom = lire_config('openlayer/zoom',0);
 	}
 	if (!strlen($map_wms_name)){
-		$map_wms_name = isset($GLOBALS['meta']['openlayer_wmsname'])?$GLOBALS['meta']['openlayer_wmsname']:'OpenLayers WMS'; 
-		if (!strlen($map_wms_name)) $map_wms_name='OpenLayers WMS';
+		$map_wms_name = lire_config('openlayer/nom_serveur_openlayer','OpenLayers WMS');
 	}
 	if (!strlen($map_wms_url)){
-		$map_wms_url = isset($GLOBALS['meta']['openlayer_wmsurl'])?$GLOBALS['meta']['openlayer_wmsurl']:'http://labs.metacarta.com/wms/vmap0'; 
-		if (!strlen($map_wms_url)) $map_wms_url='http://labs.metacarta.com/wms/vmap0';
+		$map_wms_url = lire_config('openlayer/url_script_openlayer','http://labs.metacarta.com/wms/vmap0');
 	}
 	$out = '
 	<script type="text/javascript">
