@@ -6,14 +6,22 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	'api_version' => 'Version de l\'API',
 	'clave_engadida' => 'Clef ajout&eacute;e: ',
+	'cle' => 'Cl&eacute;',
+	'configuration' => 'Configuration',
 	'conseguir' => '(obtenir)',
 	'default_geoloc' => 'Position par d&eacute;faut des cartes :',
 	'desactiver_custom_control' => 'D&eacute;sactiver custom_control.js',
+	'explication_api_version' => 'API Version <a href="http://code.google.com/apis/maps/documentation/index.html#API_Updates" target="_blank">info</a>:',
+	'explication_cle' => 'Google Map API Key : <a href="http://www.google.com/apis/maps/signup.html" target="_blank" >Obtenir une cl&eacute;</a>',
 	'explication_custom_control' => 'D&eacute;sactiver les contr&ocirc;les personnalis&eacute;s :',
-	'configuration' => 'Configuration',
+	'latitude' => 'Latitude',
+	'longitude' => 'Longitude',
 	'miseajour' => 'Mise &agrave; jour',
-	'pages_public' => 'Pages publiques'
+	'pages_public' => 'Pages publiques',
+	'rechercher' => 'Rechercher',
+	'zoom' => 'Zoom'
 );
 
 ?>

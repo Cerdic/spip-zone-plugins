@@ -11,16 +11,13 @@
 
 function inc_geomap_append_clicable_map_dist($target_id,$target_lat_id,$target_long_id,$view_lat,$view_long, $target_zoom_id=NULL,$view_zoom=NULL,$Marker = false){
 	if (!strlen($view_lat) OR !is_numeric($view_lat)){
-		$view_lat = isset($GLOBALS['meta']['gis_default_lat'])?$GLOBALS['meta']['gis_default_lat']:'42.7631'; 
-		if (!strlen($view_lat) OR !is_numeric($view_lat)) $view_lat='42.7631';
+		$view_lat = lire_config('geomap/latitude',0);
 	}
 	if (!strlen($view_long) OR !is_numeric($view_long)){
-		$view_long = isset($GLOBALS['meta']['gis_default_lonx'])?$GLOBALS['meta']['gis_default_lonx']:'-7.9321'; 
-		if (!strlen($view_long) OR !is_numeric($view_long)) $view_long='-7.9321';
+		$view_long = lire_config('geomap/longitude',0);
 	}
 	if (!strlen($view_zoom) OR !is_numeric($view_zoom)){
-		$view_zoom = isset($GLOBALS['meta']['gis_default_zoom'])?$GLOBALS['meta']['gis_default_zoom']:'8'; 
-		if (!strlen($view_zoom) OR !is_numeric($view_zoom)) $view_zoom='8';
+		$view_zoom = lire_config('geomap/zoom',0);
 	}
 	$out = '
 	<script type="text/javascript">

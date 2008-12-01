@@ -11,6 +11,26 @@
 	
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
+/* inserer les scripts dans le prive */
+
+function geomap_insert_head_prive($flux){
+	if (lire_config('geomap/cle_api')){
+		$geomap_script_init = charger_fonction('geomap_script_init','inc');
+		$flux .= $geomap_script_init();
+
+		if ((_request('exec')=='articles' || _request('exec')=='naviguer')){
+			$flux .= '
+			<script type="text/javascript">
+				jQuery(document).ready(function() {
+					jQuery(\'#cadroFormulario\').hide()
+				});
+			</script>';
+		}
+	}
+	return $flux;
+}
+
 function geomap_I2_cfg_form($flux) {
 	$flux .= recuperer_fond('fonds/inscription2_geoloc');
 	return ($flux);
