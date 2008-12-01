@@ -5,3 +5,5 @@ function geomap_cache_map($script){
 		$script = str_replace($regs[0],generer_url_public('mapfiles.js','map='.$regs[1].".js",true),$script);
 	return $script;
 }
+
+?>
