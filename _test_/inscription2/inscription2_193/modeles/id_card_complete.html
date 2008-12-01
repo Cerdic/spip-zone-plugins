@@ -1,9 +1,16 @@
 <BOUCLE_AUTEUR(AUTEURS_ELARGIS auteurs){tout}{id_auteur}>
+<a href="#URL_ACTION_AUTEUR{'hcard2vcard',http://sosfaim.arscenic.org/#SELF,#SELF}" title="<:outils_microformats:download_hcard:>"><img src="[(#CHEMIN{images/icon-hcard-download.png})]" alt="hcard icon" /></a>
 <div class="vcard">
 	[<div class="Buddy" style="float:right">
 		<a href="#URL_SITE"><img src="(#LOGO_AUTEUR||image_reduire{48,48}|extraire_attribut{src})" title="#NOM" class="logo" height="48" width="48"></a>
 	</div>]
-	<strong><a href="#URL_AUTEUR" class="spip_in" title="#NOM"><span class="fn">[(#NOM_FAMILLE|?{' ',#NOM})<strong><span class="fn"><span class="given-name #EDIT{prenom}">#PRENOM</span> <span class="family-name widget #EDIT{nom_famille}" >#NOM_FAMILLE</span></span></strong>]</span></a></strong>
+	<h3>
+		<a href="#URL_AUTEUR" class="spip_in" title="#NOM">
+			<span class="fn">[(#NOM_FAMILLE|?{' ',#NOM})
+				[<span class="given-name #EDIT{prenom}">(#PRENOM)</span>] [<span class="family-name widget #EDIT{nom_famille}" >(#NOM_FAMILLE)</span>]
+			]</span>
+		</a>
+	</h3>
 	
 	[(#REM) Un test pour voir si on a au moins un champs d'adresse]
 	[(#ADRESSE|?{#SET{adresse,ok},' '})
@@ -29,13 +36,11 @@
 	[(#TELEPHONE|?{#SET{telephone_perso,ok},' '})
 	[(#FAX|?{#SET{telephone_perso,ok},' '})
 	[(#MOBILE|?{#SET{telephone_perso,ok},#SET{telephone_perso,pasok}})]]]
-	[(#GET{telephone_perso}|=={ok}|oui)<p>
-		<span class="tel">]
-			[<span class="type" style="display:none">home</span><:inscription2:tel:> <span class="value #EDIT{telephone}">(#TELEPHONE)</span><br />]
-			[<span class="type" style="display:none">fax</span><:inscription2:fax:> : <span class="value #EDIT{fax}">(#FAX)</span><br />]
-			[<span class="type" style="display:none">cell</span><:inscription2:mobile:> : <span class="value #EDIT{mobile}">(#MOBILE)</span>]
-		[(#GET{telephone_perso}|=={ok}|oui)</span>
-	</p>]
+	[(#GET{telephone_perso}|=={ok}|oui)<p>]
+			[<span class="tel"><span class="type" style="display:none">Work</span><:inscription2:tel:> : <span class="value #EDIT{telephone}">(#TELEPHONE)</span></span><br />]
+			[<span class="tel"><span class="type" style="display:none">Fax</span><:inscription2:fax:> : <span class="value #EDIT{fax}">(#FAX)</span></span><br />]
+			[<span class="tel"><span class="type" style="display:none">cell</span><:inscription2:mobile:> : <span class="value #EDIT{mobile}">(#MOBILE)</span></span>]
+	[(#GET{telephone_perso}|=={ok}|oui)</p>]
 	
 	[<p><:inscription2:website:> : <span class="#EDIT{hyperlien}"><a href="#URL_SITE" class="url" rel="me">(#NOM_SITE)</a></span></p>]
 	
