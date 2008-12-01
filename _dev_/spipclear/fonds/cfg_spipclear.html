@@ -15,6 +15,10 @@
 			<label>Sommaire</label>
 			<p class="explication"><:spipclear:look_sommaire:></p>
 			<div class="choix">
+				<input type="checkbox" name="sommaire_spipclear" id="sommaire_spipclear"[ (#ENV{sommaire_spipclear}|=={on}|?{checked="checked",''})] />
+				<label for="sommaire_spipclear"><:spipclear:sommaire_spipclear:></label>
+			</div>
+			<div class="choix">
 				<input type="checkbox" name="articles_entiers" id="articles_entiers"[ (#ENV{articles_entiers}|=={on}|?{checked="checked",''})] />
 				<label for="articles_entiers"><:spipclear:sommaire_articles_entiers:></label>
 			</div>

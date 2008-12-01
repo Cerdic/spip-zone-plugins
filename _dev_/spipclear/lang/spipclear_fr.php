@@ -94,6 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'syndication' => 'Syndication',
 'selectionner_theme' => 'Cliquez pour s&eacute;lectionner ce th&ecirc;me',
 'sommaire_articles_entiers' => 'Afficher les articles en entier (par d&eacute;faut, seule une introduction est affich&eacute;e)',
+'sommaire_spipclear' => 'Appliquer SpipClear sur la page d\'accueil du site.',
 
 //T
 'tag' => 'Tag',
