@@ -83,10 +83,9 @@
 					<//B_auteurpa>
 				</td>
 				<td class="nbr_post">
-					<?php $tot_visites=0; ?>
-					<BOUCLE_vues_a(VISITES_FORUMS){id_forum}><?php $tot_visites+=#VISITES;
-					?></BOUCLE_vues_a>
-					<?php echo $tot_visites; ?>
+					[(#SET{tot_visites,0})]
+					<BOUCLE_vues_a(VISITES_FORUMS){id_forum}>[(#SET{tot_visites,#GET{'tot_visites'}|plus{#VISITES}})]</BOUCLE_vues_a>
+					[(#GET{'tot_visites'})]
 				</td>
 				<td class="dernier_msg">
 					<BOUCLE_dernier_message01(FORUMS){id_thread}{plat}{!par date}{0,1}>
@@ -139,10 +138,9 @@
 					<//B_auteurpp>
 				</td>
 				<td class="nbr_post">
-					<?php $tot_visites=0; ?>
-					<BOUCLE_vues_p(VISITES_FORUMS){id_forum}><?php $tot_visites+=#VISITES;
-					?></BOUCLE_vues_p>
-					<?php echo $tot_visites; ?>
+					[(#SET{tot_visites,0})]
+					<BOUCLE_vues_p(VISITES_FORUMS){id_forum}>[(#SET{tot_visites,#GET{'tot_visites'}|plus{#VISITES}})]</BOUCLE_vues_p>
+					[(#GET{'tot_visites'})]
 				</td>
 				<td class="dernier_msg">
 					<BOUCLE_dernier_message02(FORUMS){id_thread}{plat}{!par date}{0,1}>
@@ -215,10 +213,9 @@
 					<//B_auteurp>
 				</td>
 				<td class="nbr_post">
-					<?php $tot_visites=0; ?>
-					<BOUCLE_vues(VISITES_FORUMS){id_forum}><?php $tot_visites+=#VISITES;
-					?></BOUCLE_vues></B_vues>
-					<?php echo $tot_visites; ?>
+					[(#SET{tot_visites,0})]
+					<BOUCLE_vues(VISITES_FORUMS){id_forum}>[(#SET{tot_visites,#GET{'tot_visites'}|plus{#VISITES}})]</BOUCLE_vues>
+					[(#GET{'tot_visites'})]
 				</td>
 				<td class="dernier_msg">
 					<BOUCLE_dernier_message(FORUMS){id_thread}{plat}{!par date}{0,1}>
