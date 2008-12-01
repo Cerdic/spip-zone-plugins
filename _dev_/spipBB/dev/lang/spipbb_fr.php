@@ -225,7 +225,7 @@ Consultez la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB
 	'forum_ouvrir' => 'Ouvrir ce Forum',
 	'forums_categories' => 'Divers',
 	'forums_spipbb' => 'Forums SpipBB',
-	'forums_titre' => 'Mon premier forum cr&eacute;&eacute;',
+	'forums_titre' => 'Mon premier forum créé',
 	'fromphpbb_erreur_db_phpbb_config' => 'Impossible de lire la configuration dans la base phpBB',
 	'fromphpbb_migre_categories' => 'Import des cat&eacute;gories',
 	'fromphpbb_migre_categories_dans_rub_dpt' => 'Implantation des forums dans la rubrique&nbsp;:',
