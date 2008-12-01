@@ -28,8 +28,7 @@ function Inscription2_affiche_milieu($flux){
 }
 
 function Inscription2_header_prive($flux){
-	if ((_request('exec')=='ajouter_adherent') || (_request('exec')=='inscription2_adherents')){
-		$flux .= "<link rel='stylesheet' href='".direction_css(_DIR_PLUGIN_INSCRIPTION2."css/inscription2.css")."' type='text/css' media='all' />\n";
+	if ((_request('exec')=='ajouter_adherent') || (_request('exec')=='inscription2_adherents'))
 		$flux .= "<script type='text/javascript' src='".find_in_path('lib/jquery-validate/jquery.validate.pack.js')."'></script>\n";
 		$flux .= "<script type='text/javascript' src='"._DIR_PLUGIN_INSCRIPTION2."javascript/md5_inscription2.js'></script>\n";
 	}
