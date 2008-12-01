@@ -12,7 +12,7 @@
  * @param unknown_type $id_auteur
  * @return unknown
  */
-function formulaires_editer_kaltura_charger_dist($objet='', $id_objet=0, $redirect='', $kshow_id=null){
+function formulaires_editer_kaltura_charger_dist($objets='', $redirect='', $kshow_id=null){
 	include_spip('inc/kaltura');
 	$id_auteur=$GLOBALS['visiteur_session']['id_auteur'];
 	if (!$kshow_id){
@@ -39,7 +39,7 @@ function formulaires_editer_kaltura_charger_dist($objet='', $id_objet=0, $redire
  * @param unknown_type $kshow_id
  * @param unknown_type $id_auteur
  */
-function formulaires_editer_kaltura_verifier_dist($objet='', $id_objet=0, $redirect='', $kshow_id=null){
+function formulaires_editer_kaltura_verifier_dist($objets='', $redirect='', $kshow_id=null){
 	if (_request('resetks'))
 		$erreurs['message_ok']=_T('kaltura:nouvelle_video');
 	else {
@@ -55,7 +55,7 @@ function formulaires_editer_kaltura_verifier_dist($objet='', $id_objet=0, $redir
 	return $erreurs;
 }
 
-function formulaires_editer_kaltura_traiter_dist($objet='', $id_objet=0, $redirect='', $kshow_id=null){
+function formulaires_editer_kaltura_traiter_dist($objets='', $redirect='', $kshow_id=null){
 	include_spip('inc/kaltura');
 	include_spip('base/abstract_sql');
 	
@@ -76,12 +76,16 @@ function formulaires_editer_kaltura_traiter_dist($objet='', $id_objet=0, $redire
 		"titre" => _T("kaltura:video_de_nom",array('nom'=>$GLOBALS['visiteur_session']['nom'])),
 	);
 	$id_document = sql_insertq('spip_documents',$ins);
-	if ($id_document AND $objet AND $id_objet){
-		sql_insertq('spip_documents_liens',array('id_document'=>$id_document,'objet'=>$objet,'id_objet'=>$id_objet));
+	include_spip('inc/invalideur');
+	if ($id_document AND is_array($objets)){
+		foreach($objets as $objet=>$id_objet){
+			if (intval($id_objet)){
+				sql_insertq('spip_documents_liens',array('id_document'=>$id_document,'objet'=>$objet,'id_objet'=>$id_objet));
+				suivre_invalideur("$objet/$id_objet");
+			}
+		}
 	}
 	
-	include_spip('inc/invalideur');
-	suivre_invalideur("$objet/$id_objet");
 	
 	// virer le kshow_id de la
 	session_set('kshow_id',null);
