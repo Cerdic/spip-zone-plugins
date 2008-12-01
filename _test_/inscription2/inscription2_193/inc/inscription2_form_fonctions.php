@@ -7,19 +7,17 @@ function inscription2_champs_formulaire() {
 	//charge les valeurs de chaque champs proposés dans le formulaire   
 	foreach (lire_config('inscription2/') as $clef => $valeur) {
 		/* Il faut retrouver les noms des champ, 
-		* par défaut inscription2 propose pour chaque champ le cas champ_obligatoire
-		*  On retrouve donc les chaines de type champ_obligatoire
-		*  Ensuite on verifie que le champ est proposé dans le formulaire
-		*  Remplissage de $valeurs[]
-		*/
+		 * par défaut inscription2 propose pour chaque champ le cas champ_obligatoire
+		 *  On retrouve donc les chaines de type champ_obligatoire
+		 *  Ensuite on verifie que le champ est proposé dans le formulaire
+		 *  Remplissage de $valeurs[]
+		 */
 		//decoupe la clef sous le forme $resultat[0] = $resultat[1] ."_obligatoire"
 		//?: permet de rechercher la chaine sans etre retournée dans les résultats
 		preg_match('/^(.*)(?:_obligatoire)/i', $clef, $resultat);
 	
 		if ((!empty($resultat[1])) && (lire_config('inscription2/'.$resultat[1]) == 'on')) {
 			$valeurs[] = $resultat[1];
-			$valeur = _request($resultat[1]);
-			$valeurs[$resultat[1]] = $valeur;
 		}
 	}
 	return $valeurs;
@@ -60,7 +58,7 @@ function inscription2_valide_numero($numero){
 			return;
 		}
 		else{
-			return _T('inscription2:numero_tva_valide');
+			return _T('inscription2:numero_valide');
 		}
 	}
 }
