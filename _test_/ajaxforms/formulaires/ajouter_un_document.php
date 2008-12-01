@@ -2,16 +2,17 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formulaires_ajouter_un_document_charger_dist($objet, $id_objet){
+function formulaires_ajouter_un_document_charger_dist($objet, $id_objet, $mode='choix'){
 	$res = array(
 		'editable' => ' ',
 		'objet'=>$objet,
 		'id_objet'=>$id_objet,
 		'fichier'=>'',
 		'titre'=>'',
-		'descriptif'=>''
+		'descriptif'=>'',
+		'mode'=>$mode
 	);
-	
+
 	// si l'on vien juste de poster le formlaire et qu'il a ete valide
 	// on veut pouvoir recommencer a poster 
 	// on ne prend du coup pas les anciennes valeurs dans l'environnement
@@ -22,7 +23,7 @@ function formulaires_ajouter_un_document_charger_dist($objet, $id_objet){
 	return $res;
 }
 
-function formulaires_ajouter_un_document_verifier_dist($objet, $id_objet){
+function formulaires_ajouter_un_document_verifier_dist($objet, $id_objet, $mode='choix'){
 	$erreurs = array();	
 	
 	if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
@@ -42,18 +43,17 @@ function formulaires_ajouter_un_document_verifier_dist($objet, $id_objet){
  * - les documents distants
  * - les autres modes de documents ('choix' par defaut)
  */
-function formulaires_ajouter_un_document_traiter_dist($objet, $id_objet){
+function formulaires_ajouter_un_document_traiter_dist($objet, $id_objet, $mode='choix'){
 	$res = array('editable'=>' ', 'message_ok'=>'');
 
 	// parametres de ajouter_documents()
-	$mode='choix';
 	$id_document = ''; // parent des vignettes - inutile ici
 	$actifs = array(); // seront ajoutes les fichiers actifs dans le tableau - inutile ici...
 	
 	if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
 	
 	include_spip('inc/ajaxform_documents');
-	$id = ajaxform_creer_document($_FILES['fichier']);
+	$id = ajaxform_creer_document($_FILES['fichier'],$objet,$id_objet,$mode);
 	
 	if ($id) {
 		// signaler que l'on vient de soumettre le formulaire
@@ -66,9 +66,9 @@ function formulaires_ajouter_un_document_traiter_dist($objet, $id_objet){
 		
 		ajaxform_modifier_document($id, array('titre','descriptif'));
 		
-		if ($objet AND intval($id_objet))
-			sql_insertq('spip_documents_liens',array('id_document'=>$id,'objet'=>$objet,'id_objet'=>$id_objet));
-
+		include_spip('inc/invalideur');
+		suivre_invalideur("$objet/$id_objet");
+		
 	} else {
 		$res['message_erreur'] = _T('ajaxform:erreur_ajout_document');
 	}

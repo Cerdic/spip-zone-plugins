@@ -9,12 +9,12 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <ul>
 	    <li class="editer_fichier [ (#ENV**{erreurs}|table_valeur{fichier}|oui)erreur]">
-				<label for="fichier_#ENV{objet}_#ENV{id_objet}"><:bouton_ajouter_image_document:></label>[
+				<label for="fichier_#ENV{objet}_#ENV{id_objet}">[(#ENV{mode}|=={image}|?{<:bouton_ajouter_image:>,<:bouton_ajouter_image_document:>})]</label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>
 				]<input type='file' class='file' name='fichier' size="15" id='fichier_#ENV{objet}_#ENV{id_objet}' value="" />
 	    </li>
 	    <li class="editer_titre [ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
-				<label for="titre_#ENV{objet}_#ENV{id_objet}"><:entree_titre_document:></label>[
+				<label for="titre_#ENV{objet}_#ENV{id_objet}">[(#ENV{mode}|=={image}|?{<:entree_titre_image:>,<:entree_titre_document:>})]</label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
 				]<input type='text' class='text' name='titre' id='titre_#ENV{objet}_#ENV{id_objet}' value="#ENV**{titre}" />
 	    </li>

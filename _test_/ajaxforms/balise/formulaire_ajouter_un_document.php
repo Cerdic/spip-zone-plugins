@@ -26,13 +26,13 @@ function balise_FORMULAIRE_AJOUTER_UN_DOCUMENT_stat($args,$filtres) {
 	// pas dans une boucle ? 
 	// on ajoutera le document sans le lier a un objet particulier.
 	if ($objet == 'balise_hors_boucle') {
-		$objet = '';
-		$id_objet = '';
-	} else {		
+		$args[0] = '';
+		$args[1] = '';
+	} else {
 		// rien a faire, c'est bien un type qu'on veut, pas une table !
-		//$objet = table_objet($objet);
+		//$args[0] = table_objet($objet);
 	}
-	return array($objet, $id_objet);
+	return $args;
 }
 
 ?>
