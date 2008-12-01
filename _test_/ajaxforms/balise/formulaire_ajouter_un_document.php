@@ -29,7 +29,8 @@ function balise_FORMULAIRE_AJOUTER_UN_DOCUMENT_stat($args,$filtres) {
 		$objet = '';
 		$id_objet = '';
 	} else {		
-		$objet = table_objet($objet);
+		// rien a faire, c'est bien un type qu'on veut, pas une table !
+		//$objet = table_objet($objet);
 	}
 	return array($objet, $id_objet);
 }
