@@ -64,32 +64,13 @@ function gis_insertar_maparticle($flux){
 
 
 // --------------------------------
-// inserta no head da parte PRIVADA
-// --------------------------------
-function gis_insertar_head($flux){
-	if ((isset($GLOBALS['meta']['gis_map']))&&($GLOBALS['meta']['gis_map']!='no')&&(strpos($GLOBALS['meta']['plugin'] , strtoupper($GLOBALS['meta']['gis_map'])))) {
-		$gis_script_init = charger_fonction($GLOBALS['meta']['gis_map'].'_script_init','inc');
-		$flux .= $gis_script_init();
-	}
-	if ((_request('exec')=='articles' || _request('exec')=='naviguer'))
-		$flux .= '
-		<script type="text/javascript">
-			jQuery(document).ready(function() {
-				jQuery(\'#cadroFormulario\').hide()
-			});
-		</script>';
-	return $flux;
-}
-
-// --------------------------------
 // inserta no head da parte PUBLICA
 // --------------------------------
 function gis_affichage_final($flux){
 
     if ((strpos($flux, '<div id="map') == true) or (strpos($flux, '<div id="formMap') == true) or (strpos($flux, "<div id='map") == true)){
 		$incHead = '';
-		if ((isset($GLOBALS['meta']['gis_map']))&&($GLOBALS['meta']['gis_map']!='no')&&(strpos($GLOBALS['meta']['plugin'] , strtoupper($GLOBALS['meta']['gis_map'])))) {
-			$gis_public_script_init = charger_fonction($GLOBALS['meta']['gis_map'].'_public_script_init','inc');
+		if (function_exists('lire_config') && lire_config('gis/api_carte')) {
 			if (function_exists('lire_config') && lire_config("gis/swfobject") != 'non')
 				$incHead .= '<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/swfobject.js"></script>';
 			$incHead .= $gis_public_script_init();
