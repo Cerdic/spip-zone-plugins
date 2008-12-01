@@ -631,8 +631,13 @@ add_outil( array(
 	'id' => 'sommaire',
 	'contrib'	=> 2378,
 	'code:options' => "define('_sommaire_REM', '<span class=\'_foosommaire\'></span>');\ndefine('_CS_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_CS_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%%%auto_sommaire%%%%balise_sommaire%%",
-	// s'il y a un sommaire, on cache la navigation haute sur les pages
-	'code:jq' => 'if(jQuery("div.cs_sommaire").length) jQuery("div.decoupe_haut").css("display", "none");',
+	'code:jq' => 'if(jQuery("div.cs_sommaire").length) {
+		// s\'il y a un sommaire, on cache la navigation haute sur les pages
+		jQuery("div.decoupe_haut").css("display", "none");
+		// utilisation des cookies pour conserver l\'etat du sommaire si on quitte la page
+		jQuery.getScript("'.url_absolue(find_in_path('javascript/jquery.cookie.js')).'", cs_sommaire_cookie);
+	}',
+	'code:jq_init' => 'cs_sommaire_init.apply(this);',
 	// inserer : $table_des_traitements['TEXTE']['article']= 'sommaire_d_article(propre(%s))';
 	'traitement:TEXTE/articles:post_propre' => 'sommaire_d_article',
 	'traitement:TEXTE/rubriques:post_propre' => 'sommaire_d_article',

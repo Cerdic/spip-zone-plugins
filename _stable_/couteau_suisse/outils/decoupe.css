@@ -82,7 +82,7 @@ div.onglets_bloc .onglets_contenu {
 	z-index:10;
 	position:relative;
 	top:-3px;
-	padding:10px;
+	padding:0.6em;
 }
 
 div.onglets_bloc .onglets_contenu.selected {

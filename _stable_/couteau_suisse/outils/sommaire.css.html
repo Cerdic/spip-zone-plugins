@@ -9,9 +9,8 @@ div.cs_sommaire {
 	text-align:left;
 }
 
-[(#EVAL{defined('_SPIP19100')}|?{#SET{path,img_pack/spip_out.gif},#SET{path,images/spip_out.gif}})]
 a.sommaire_ancre {
-	background:transparent url([(#CHEMIN{#GET{path}}|url_absolue)]) no-repeat scroll left center;
+	background:transparent url([(#EVAL{_DIR_IMG_PACK}|url_absolue)]spip_out.gif) no-repeat scroll left center;
 	padding-left:10px;
 	text-decoration:none;
 }
@@ -56,3 +55,16 @@ div.cs_sommaire ul{
 	list-style-position: outside;
 	list-style-type: none;
 }
+
+div.cs_sommaire_titre_avec_fond, div.cs_sommaire_titre_sans_fond {
+	background:transparent url([(#EVAL{_DIR_IMG_PACK}|url_absolue)]deplierbas.gif) no-repeat scroll right center;
+	cursor:pointer;
+	padding-right:18px;
+}
+
+div.cs_sommaire_replie {
+	background:transparent url([(#EVAL{_DIR_IMG_PACK}|url_absolue)]deplierhaut_rtl.gif) no-repeat scroll right center;
+	border:none;
+}
+
+.cs_sommaire_invisible{ display:none; }

@@ -500,7 +500,7 @@ _ &bull; Uniquement pour les articles contenant la balise <code>@_CS_AVEC_SOMMAI
 [[%balise_sommaire%]]
 
 Ce sommaire peut &ecirc;tre coupl&eacute; avec : &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
-	'sommaire:nom' => 'Un sommaire pour vos articles',
+	'sommaire:nom' => 'Un sommaire automatique',
 	'sommaire_avec' => 'Un texte avec sommaire&nbsp;: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un texte sans sommaire&nbsp;: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises &lt;a>&lt;/a> sont interdits.
