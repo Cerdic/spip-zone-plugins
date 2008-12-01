@@ -7,7 +7,7 @@ Mise en plugin pour SPIP 1.92x : Patrice Vanneufvile
 _ Librairie javascript : John Resig pour [jquery.js->http://jquery.com]
 	</auteur>
 	<version>
-	1.0.0
+	1.1.0
 	</version>
 	<etat>
 	stable
@@ -17,7 +17,7 @@ D&eacute;sactive l'ancienne librairie {jQuery} distribu&eacute;e avec SPIP 1.92x
 
 Ce plugin vous permet donc de b&eacute;n&eacute;ficier d'une version r&eacute;cente de {jQuery} pour vos squelettes, tout en gardant en partie priv&eacute;e la version originale.
 
-Ajout au passage du pipeline {jquery_plugins} et des plugins {jquery.form} et {ajaxCallback}. {{Important}} : ce plugin ne concerne que les version 1.92x de SPIP.
+Ajout au passage du pipeline {jquery_plugins} et des plugins {jquery.form}, {jquery.cookie} et {ajaxCallback}. {{Important}} : ce plugin ne concerne que les version 1.92x de SPIP.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix>
