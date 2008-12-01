@@ -171,13 +171,25 @@ function spiplistes_abonnements_auteurs_supprimer ($auteur_statut) {
 // CP-20080330 : renvoie la liste des abonnements pour id_auteur
 function spiplistes_abonnements_listes_auteur ($id_auteur, $avec_titre = false) {
 	$result = array();
-	$sql_select = "id_liste".($avec_titre ? ",titre" : "");
-	$sql_result = sql_select ($sql_select
-		, "spip_auteurs_listes"
-		, "id_auteur=".sql_quote($id_auteur)
-	);
+	$sql_select = array("abo.id_liste");
+	$sql_from = array("spip_auteurs_listes AS abo");
+	$sql_where = array();
+	if($avec_titre) {
+		$sql_select[] = "list.titre";
+		$sql_from[] = "spip_listes AS list";
+		$sql_where[] = "abo.id_liste=list.id_liste";
+	}
+	$sql_where[] = "id_auteur=".sql_quote($id_auteur);
+	$sql_result = sql_select (
+		$sql_select
+		, $sql_from
+		, $sql_where
+		);
+	if ($sql_result === false) {
+		spiplistes_sqlerror_log("spiplistes_abonnements_listes_auteur");
+	}
 	while ($row = sql_fetch($sql_result)) {
-		$result[] = $row['id_liste'];
+		$result[$row['id_liste']] = $row['titre'];
 	}
 	return($result);
 }

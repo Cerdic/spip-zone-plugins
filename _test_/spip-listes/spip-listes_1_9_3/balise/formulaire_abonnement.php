@@ -232,7 +232,7 @@ function spiplistes_formulaire_inscription ($mail_inscription_, $type, $acces_me
 		
 	if($mail_valide && $nom_inscription_) {
 	
-spiplistes_log("### : ->".$mail_inscription_, _SPIPLISTES_LOG_DEBUG);
+spiplistes_log("mail inscription : ->".$mail_inscription_, _SPIPLISTES_LOG_DEBUG);
 
 		// si l'abonne existe deja.
 		if($row = sql_fetch(
@@ -313,7 +313,7 @@ spiplistes_log("message:".$message, _SPIPLISTES_LOG_DEBUG);
 				}
 				else {
 					// n'existe pas, creation du compte ...
-					$id_abo = 
+					$id_auteur = $id_abo = 
 						// en SPIP 192 & 193, renvoie insert_id
 						spiplistes_auteurs_auteur_insertq(
 							array(
@@ -341,6 +341,7 @@ spiplistes_log("message:".$message, _SPIPLISTES_LOG_DEBUG);
 			 			)
 					)
 			) {
+				$id_auteur = $row['id_auteur'];
 spiplistes_log("inscription id : ->".$row['id_auteur'], _SPIPLISTES_LOG_DEBUG);
 				spiplistes_abonnements_ajouter(intval($row['id_auteur']), $listes_demande);
 			}
@@ -357,13 +358,12 @@ spiplistes_log("inscription id : ->".$row['id_auteur'], _SPIPLISTES_LOG_DEBUG);
 			}
 			else if($type_abo=="texte" || $type_abo=="html")  {
 				// prepare le message a envoyer par mail
-				
 				$listes_abonnements = spiplistes_abonnements_listes_auteur($id_auteur, true);
 				$message_list = '' ;
 				$nb = count($listes_abonnements);
 				foreach($listes_abonnements as $liste) {
 					$message_list .= "\n- ".$liste['titre'];
-				}
+			}
 				if($nb > 1) {
 					$m1 = 'inscription_responses';
 					$m2 = 'inscription_liste';
