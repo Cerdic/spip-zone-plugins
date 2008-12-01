@@ -4,6 +4,10 @@
  * correction des liens vers ancien site
  * meilleure conformité avec le noyau SPIP
  * bouton d'automatisation de la configuration
+ * 0.5.2.1 Quelques corrections dans l'initialisation des rubriques avec le bouton de creation automatique
+ * Correction des squelettes
+ * Auteurs en lignes plus proche du realisme
+
  
 
 2008-09-21  chryjs  <chryjs!@!free!.!fr>
