@@ -29,7 +29,7 @@ function spiplistes_ajouter_onglets ($flux) {
 		, $connect_toutes_rubriques
 		;
 
-	// seuls les super-admins ont acces au bouton
+	// seul les webmestres ont acces au bouton de configuration
 	if(
 			$connect_statut 
 		&& $connect_toutes_rubriques
@@ -43,6 +43,15 @@ function spiplistes_ajouter_onglets ($flux) {
 					)
 					;
 				break;
+			}
+	}
+	
+	// tous les administrateurs restreints peuvent gerer les listes de diffusion
+	// Leur donner accees a tous les boutons dans "Editer"
+	if(
+		$connect_statut == '0minirezo'
+	) {
+			switch($flux['args']) {
 			case 'spiplistes':
 				$flux['data']['courriers_casier'] = new Bouton( 
 					_DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_hyperlink-mail-and-news-24.gif"
