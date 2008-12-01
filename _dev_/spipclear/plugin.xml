@@ -12,6 +12,6 @@ Il est n&eacute;cessaire de cr&eacute;er, a minima, les pages sommaire, article-
 	</description>
 	<lien>http://www.spip-contrib.net/Spip-Clear</lien>
 	<fonctions>spipclear_fonctions.php</fonctions>
-	<necessite id="CFG" version="[1.0;]" />
+	<necessite id="cfg" version="[1.10.4;]" />
 	<necessite id="CalendrierMini" version="[0.3;]" />
 </plugin>
