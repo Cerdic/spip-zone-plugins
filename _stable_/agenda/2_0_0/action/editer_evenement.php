@@ -295,11 +295,13 @@ function agenda_action_supprime_evenement($id_article,$supp_evenement){
 	$id_evenement = sql_getfetsel("id_evenement", "spip_evenements", array(
 		"id_article=" . intval($id_article),
 		"id_evenement=" . intval($supp_evenement)));
-	if ($id_evenement == $supp_evenement){
+	if (intval($id_evenement) AND $id_evenement == $supp_evenement){
 		sql_delete("spip_mots_evenements", "id_evenement=".intval($id_evenement));
 		sql_delete("spip_evenements", "id_evenement=".intval($id_evenement));
 	}
 	agenda_action_supprime_repetitions($id_evenement);
+	include_spip('inc/invalideur');
+	suivre_invalideur("article/$id_article");
 	$id_evenement = 0;
 	return $id_evenement;
 }
