@@ -65,6 +65,10 @@ function formulaires_ajouter_un_document_traiter_dist($objet, $id_objet){
 		$res['message_ok'] = _T('ajaxform:document_ajoute');
 		
 		ajaxform_modifier_document($id, array('titre','descriptif'));
+		
+		if ($objet AND intval($id_objet))
+			sql_insertq('spip_documents_liens',array('id_document'=>$id,'objet'=>$objet,'id_objet'=>$id_objet));
+
 	} else {
 		$res['message_erreur'] = _T('ajaxform:erreur_ajout_document');
 	}
