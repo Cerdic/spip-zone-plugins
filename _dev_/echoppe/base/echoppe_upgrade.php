@@ -46,17 +46,17 @@ function echoppe_upgrade($nom_meta_base_version,$version_cible){
 	echo 'Echoppe install&eacute;e : '.$GLOBALS['meta'][$nom_meta_base_version].'<br />';
 	echo 'Echoppe local : '.$version_cible.'<br />';
 	
-	if ($version_echoppe_locale != $GLOBALS['meta'][$nom_meta_base_version]){
+	if ($version_cible != $GLOBALS['meta'][$nom_meta_base_version]){
 		
-		include_spip('base/tables_principales');
-		include_spip('base/tables_auxiliaires');
-		include_spip('base/tables_interfaces');		
 		include_spip('base/echoppe_patch_upgrade');		
 		
 		
 		
-		if (!isset($GLOBALS['meta'][$nom_meta_base_version]) ){
+		if ($GLOBALS['meta'][$nom_meta_base_version] == Null ){
 			include_spip('base/create');
+			include_spip('base/tables_principales');
+			include_spip('base/tables_auxiliaires');
+			include_spip('base/tables_interfaces');	
 			include_spip('base/abstract_sql');
 		 	creer_base();
 		 	ecrire_meta($nom_meta_base_version,$version_echoppe_locale=$version_cible,'non');

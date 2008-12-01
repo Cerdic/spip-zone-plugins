@@ -2,19 +2,19 @@
 <B_CatsALaRacine>
 	<div class="gauche" >
 	<BOUCLE_CatsALaRacine(ECHOPPE_CATEGORIES){id_parent = 0}{1/2}>
-			<div class="enfants">
-				<div class="cadre cadre-sous_rub" style="margin-top: 20px;">
-					<img src="#CHEMIN{images/categorie-24.png}" alt="" class="cadre-icone" />
-					<div class="titrem impliable">
-						<a class="titremancre"></a> 
-						<span dir="ltr"><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">[(#TITRE|sinon{<em><:sans_titre:></em>})]</a></span>
-					</div>
-					<div class="cadre_padding">
-						<div style="clear: both;">[(#DESCRIPTIF)]</div>
-						<div class="nettoyeur"></div>
-					</div>
+		<div class="enfants">
+			<div class="cadre cadre-sous_rub" style="margin-top: 20px;">
+				<img src="#CHEMIN{images/categorie-24.png}" alt="" class="cadre-icone" />
+				<div class="titrem impliable">
+					<a class="titremancre"></a> 
+					<span dir="ltr"><a href="[(#EVAL{echoppe_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]">[(#TITRE|sinon{<em><:sans_titre:></em>})]</a></span>
+				</div>
+				<div class="cadre_padding">
+					<div style="clear: both;">[(#DESCRIPTIF)]</div>
+					<div class="nettoyeur"></div>
 				</div>
 			</div>
+		</div>
 	</BOUCLE_CatsALaRacine>
 	</div>
 		<B_CatsALaRacine2>
