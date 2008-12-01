@@ -51,8 +51,8 @@ function gis_cambiar_coord($id,$table,$exec) {
 				}
 			}
 		}
-		if ((isset($GLOBALS['meta']['gis_map']))&&($GLOBALS['meta']['gis_map']!='no')&&(strpos($GLOBALS['meta']['plugin'] , strtoupper($GLOBALS['meta']['gis_map'])))) {
-			$gis_append_view_map = charger_fonction($GLOBALS['meta']['gis_map'].'_append_view_map','inc');
+		if ($api_carte = lire_config('gis/api_carte')) {
+			$gis_append_view_map = charger_fonction($api_carte.'_append_view_map','inc');
 			$mapa = '<div id="viewMap" name="viewMap" style="width: 470px; height: 100px; border:1px solid #000"></div>';
 		  	$mapa .= $gis_append_view_map('viewMap',$glat,$glonx,$zoom,array(array('lonx'=>$glonx,'lat'=>$glat)),$gicon);
 		} else {
@@ -72,8 +72,8 @@ function gis_cambiar_coord($id,$table,$exec) {
 	$s .= debut_block_visible("ajouter_form");
 	$s .= '<div id="cadroFormulario" style="border:1px solid #000">';
 	
-	if ((isset($GLOBALS['meta']['gis_map']))&&($GLOBALS['meta']['gis_map']!='no')&&(strpos($GLOBALS['meta']['plugin'] , strtoupper($GLOBALS['meta']['gis_map'])))) {
-		$gis_append_clicable_map = charger_fonction($GLOBALS['meta']['gis_map'].'_append_clicable_map','inc');
+	if ($api_carte) {
+		$gis_append_clicable_map = charger_fonction($api_carte.'_append_clicable_map','inc');
 		$s .= '<div id="formMap" name="formMap" style="width: 470px; height: 350px"></div>';
 		$s .= $gis_append_clicable_map('formMap','form_lat','form_long',$glat,$glonx,'form_zoom',$gzoom,$row?true:false);
 	} else {
@@ -126,8 +126,8 @@ function gis_mots($id_mot) {
 	$s .= debut_block_visible("ajouter_form");
 	$s .= '<div id="cadroFormulario" style="border:1px solid #000">';
 	
-	if ((isset($GLOBALS['meta']['gis_map']))&&($GLOBALS['meta']['gis_map']!='no')&&(strpos($GLOBALS['meta']['plugin'] , strtoupper($GLOBALS['meta']['gis_map'])))) {
-		$gis_append_mini_map = charger_fonction($GLOBALS['meta']['gis_map'].'_append_mini_map','inc');
+	if ($api_carte = lire_config('gis/api_carte')) {
+		$gis_append_mini_map = charger_fonction($api_carte.'_append_mini_map','inc');
 		$s .= '<div id="formMap" name="formMap" style="width: 180px; height: 180px;overflow:hidden;"></div>';
 		$s .= $gis_append_mini_map('formMap','form_lat','form_long',$glat,$glonx,'form_zoom',$gzoom,$row?true:false);
 	} else {

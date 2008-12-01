@@ -11,15 +11,6 @@
 
 include_spip('exec/gis');
 
-function gis_ajouterBoutons($boutons_admin) {
-	// si eres administrador
-	if (autoriser('administrer','gis')) {
-    // vese o boton na barra de "configuracion"
-	    $boutons_admin['configuration']->sousmenu['gis_config']= new Bouton(
-		    _DIR_PLUGIN_GIS.'img_pack/correxir.png', _T('gis:configuration'));
-	}
-	return $boutons_admin;
-}
 
 function gis_gismot($flux){
 	if (_request('exec')=='mots_edit'){

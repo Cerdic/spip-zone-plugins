@@ -61,11 +61,7 @@ _ Configuration: [->/ecrire/?exec=cfg&amp;cfg=gis]
 		<action>gismot</action>
 		<inclure>gis_pipeline.php</inclure>
 	</pipeline>
-	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouterBoutons</action>
-		<inclure>gis_pipeline.php</inclure>
-	</pipeline>
 	<necessite id='geomap' version='[0.2;]' />
+	<necessite id='cfg' version='[1.10.4;]' />
 	<chemin dir='' />
 </plugin>

@@ -8,6 +8,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	//elements du formulaire CFG
 	
+	"api_carte" => "API des cartes",
+	"api_carte_geomap" => "API Google Maps",
+	"api_carte_openlayer" => "API Open Layers",
 	"explication_pages_prive" => "Choisissez les rubriques dans lesquelles le plugin sera disponible.",
 	"explication_swfobject" => "D&eacute;sactiver l'insertion du script swf_object dans les pages publiques (si vous n'utilisez pas le lecteur de son dans les infobulles).",
 	"desactiver_swfobject" => "D&eacute;sactiver swf_object",
