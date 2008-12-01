@@ -33,5 +33,10 @@ _ Help to use the API in several plugins (Gis, Geoforms...).
 	<action>insert_head_prive</action>
 	<inclure>geomap_pipeline.php</inclure>
 </pipeline>
+<pipeline>
+	<nom>affichage_final</nom>
+	<action>affichage_final</action>
+	<inclure>geomap_pipeline.php</inclure>
+</pipeline>
 <necessite id='cfg' version='[1.10.4;]' />
 </plugin>
