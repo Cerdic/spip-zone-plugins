@@ -183,8 +183,35 @@ function spipbb_admin_configuration() {
 	$res = recuperer_fond("prive/spipbb_admin_configuration",$contexte) ;
 	spipbb_log('END',3,"spipbb_configuration()");
 
-	return $res;
+	//il faudra forcer le rechargement de cette partie (ou utiliser de quoi cacher dynamiquement
+	$configure_spipbb = charger_fonction('spipbb', 'configuration');
+	$res = $configure_spipbb();
+		
+	$etat_spipbb = $GLOBALS['spipbb']['configure'];
+	if ($etat_spipbb == "oui") 
+	{
+		$res .= "<div id='etat-spipbb' style='display:block;'>"; // id defini dans configuration/spipbb
+	} else
+	{
+		$res .= "<div id='etat-spipbb' style='display:none;'>"; // id defini dans configuration/spipbb
+	}
 
+		$configure_id_secteur_spipbb = charger_fonction('spipbb_rubriques', 'configuration');
+		$res .= $configure_id_secteur_spipbb();
+		$configure_mots_spipbb = charger_fonction('spipbb_mots_cles','configuration');
+		$res .= $configure_mots_spipbb();		
+		$configure_squelettes = charger_fonction('spipbb_squelettes','configuration');
+		$res .= $configure_squelettes();		
+		$configure_affichage = charger_fonction('spipbb_affichage','configuration');
+		$res .= $configure_affichage();		
+		$configure_support_auteurs = charger_fonction('spipbb_support_auteurs','configuration');
+		$res .= $configure_support_auteurs();		
+		$configure_champs_supp = charger_fonction('spipbb_champs_supp','configuration');
+		$res .= $configure_champs_supp();		
+		
+		$res .= "</div>";
+
+	return $res;
 } // spipbb_admin_configuration
 
 

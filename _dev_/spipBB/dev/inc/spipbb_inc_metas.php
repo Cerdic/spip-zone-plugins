@@ -131,6 +131,59 @@ function spipbb_init_metas()
 } // spipbb_init_metas
 
 //----------------------------------------------------------------------------
+// [fr] Liste des metas utilises avec valeur par defaut
+// [en] metas used and their default values
+//----------------------------------------------------------------------------
+function spipbb_liste_metas()
+{
+	return array(
+	'configure' 				=> 'non',
+	'version' 					=> $GLOBALS['spipbb_plug_version'],
+	'id_secteur' 				=> 0,
+	'config_id_secteur' 		=> 'non',
+	'squelette_groupeforum' 	=> 'groupeforum',
+	'squelette_filforum' 		=> 'filforum',
+	'config_squelette'			=> 'non',
+	'id_groupe_mot'				=> 0,
+	'config_groupe_mots' 		=> 'non',
+	'id_mot_ferme' 				=> 0,
+	'id_mot_annonce'			=> 0,
+	'id_mot_postit' 			=> 0,
+	'config_mot_cles' 			=> 'non',
+	'support_auteurs' 			=> 'extra',
+	'table_support'				=> '',
+	'affiche_date_crea_spipbb'	=> 'oui',
+	'affiche_avatar'			=> 'oui',
+	'affiche_annuaire_forum'	=> 'oui',
+	'affiche_refus_suivi_thread'=> 'oui',
+	'fixlimit' 					=> 30,
+	'lockmaint' 				=> 600,
+	'affiche_bouton_abus' 		=> 'non',
+	'affiche_bouton_rss' 		=> 'un',
+	'affiche_avatar' 			=> 'oui',
+	'taille_avatar_suj' 		=> 50,
+	'taille_avatar_cont' 		=> 80,
+	'taille_avatar_prof' 		=> 80,
+	'affiche_bouton_abus' 		=> 'non',
+	'affiche_bouton_rss' 		=> 'un',
+	'affiche_membre_defaut' 	=> 'non',
+	'log_level' 				=> _SPIPBB_LOG_LEVEL,
+	'derniere_verif'			=>  0,
+	'version_distant'			=> '0',
+	'config_spam_words'			=> 'non',
+	'sw_nb_spam_ban'			=> 3,
+	'sw_ban_ip'					=> 'non',
+	'sw_admin_can_spam'			=> 'non',
+	'sw_modo_can_spam'			=> 'non',
+	'sw_send_pm_warning'		=> 'non',
+	'sw_warning_from_admin'		=> 1,
+	'sw_warning_pm_titre'		=> _T('spipbb:sw_pm_spam_warning_titre'),
+	'sw_warning_pm_message' 	=> _T('spipbb:sw_pm_spam_warning_message'),
+	);
+} // spipbb_liste_metas
+
+
+//----------------------------------------------------------------------------
 // Importe les metas de GAFOSPIP s'ils existent, retourne un tableau
 //----------------------------------------------------------------------------
 function spipbb_import_gafospip_metas()
@@ -192,7 +245,7 @@ function spipbb_delete_metas()
 		effacer_meta('spipbb_fromphpbb'); // requis si la migration n est pas finie
 		if (defined('_INC_SPIPBB_192')) ecrire_metas(); // Code 192
 		unset($GLOBALS['meta']['spipbb']);
-		spipbb_log('OK',3,'inc/spipbb.php : delete_metas');
+		spipbb_log('OK inc/spipbb_inc_metas : delete_metas',3,'spipbb_delete_metas');
 	}
 } // spipbb_delete_metas
 
@@ -214,7 +267,6 @@ function spipbb_save_metas()
 
 	include_spip('inc/meta');
 	ecrire_meta('spipbb', serialize($GLOBALS['spipbb']));
-	if (defined('_INC_SPIPBB_192')) ecrire_metas(); // Code 192
 	$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
 	spipbb_log('OK '.$GLOBALS['meta']['spipbb'],3,"spipbb_save_metas");
 } // spipbb_save_metas
@@ -236,6 +288,27 @@ function spipbb_upgrade_metas($installed_version='',$version_code='') {
 
 	spipbb_log("OK from:$installed_version:to:$version_code",3,"spipbb_upgrade_metas");
 } // spipbb_upgrade_metas
+
+//----------------------------------------------------------------------------
+// [fr] Cree le mot cle donne dans le groupe donne et retourne son id_mot
+//----------------------------------------------------------------------------
+function spipbb_init_mot_cle($mot,$id_groupe)
+{
+echo "\n<br>call $mot $id_groupe";
+	if (empty($mot) OR empty($id_groupe)) return 0;
+	$groupe_mot = sql_fetsel ("titre","spip_groupes_mots",array("id_groupe"=>$id_groupe));
+	$res = sql_fetsel('id_mot','spip_mots',"titre='$mot'");
+	if (!$res) {
+		$id_mot = sql_insertq("spip_mots",array(
+				'titre'=>$mot,
+				'id_groupe'=>$id_groupe,
+				'descriptif'=> _T('spipbb:mot_'.$mot),
+				'type' => $groupe_mot['titre'])
+			);
+echo "insert mot $mot ret $id_mot <br>\n";			
+	} else $id_mot = $res['id_mot'];
+	return $id_mot;
+} // spipbb_init_mot_cle
 
 
 ?>

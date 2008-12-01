@@ -107,7 +107,15 @@ function spipbb_check_plugins_config() {
 //----------------------------------------------------------------------------
 function spipbb_check_tables()
 {
-	global $tables_spipbb,$tables_principales;
+// Nouvelle façon de gérer la base. On stocke ici les informations.
+// cf inc/interfaces.php
+$tables_spipbb = array( 'spip_visites_forums', 'spip_auteurs_spipbb', 'spip_spam_words', 'spip_spam_words_log', 'spip_ban_liste' );
+
+include_spip('base/serial');
+include_spip('base/auxiliaires');
+
+
+	global $tables_principales;
 	include_spip('base/spipbb');
 	reset($tables_spipbb);
 	//$res=array();

@@ -28,6 +28,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/spipbb_common');
 spipbb_log('included',2,__FILE__);
+include_spip('inc/spipbb_inc_metas');
 
 function action_spipbb_configurer() {
 
@@ -35,13 +36,13 @@ function action_spipbb_configurer() {
 	$arg = $securiser_action();
 	$r = rawurldecode(_request('redirect'));
 	$r = parametre_url($r, 'configuration', $arg,"&");
-	appliquer_modifs_config($arg);
+	spipbb_appliquer_modifs_config($arg);
 	redirige_par_entete($r);
 } // action_spipbb_configurer
 
-function appliquer_modifs_config($params='') {
-	// $params peut == spipbb_ban_email
-	if ( $liste_user=_request('ban_user') ) {
+function spipbb_appliquer_modifs_config($arg='') {
+
+	if ( ($liste_user=_request('ban_user'))!==NULL ) {
 		if ( $liste_user AND is_array($liste_user) ) {
 			$liste_id=join(",",$liste_user);
 			// construction de  INSERT INTO spip_ban_liste ( ban_login ) (SELECT login from spip_auteurs)
@@ -52,7 +53,7 @@ function appliquer_modifs_config($params='') {
 		}
 	}
 
-	if ( $liste_unban=_request('unban_user') ) {
+	if ( ($liste_unban=_request('unban_user'))!==NULL ) {
 		if ( $liste_unban AND is_array($liste_unban) ) {
 			$ban_id=join(",",$liste_unban);
 			// c: 10/2/8 compat pg_sql
@@ -155,7 +156,7 @@ function appliquer_modifs_config($params='') {
 		} // if $adresse
 	}
 
-	if ( $liste_unban=_request('unban_ip') ) {
+	if ( ($liste_unban=_request('unban_ip'))!==NULL ) {
 		if ( $liste_unban AND is_array($liste_unban) ) {
 			$liste_id=join(",",$liste_unban);
 			// c: 10/2/8 compat pg_sql
@@ -196,7 +197,7 @@ function appliquer_modifs_config($params='') {
 		} // if $adresse
 	}
 
-	if ( $liste_unban=_request('unban_email') ) {
+	if ( ($liste_unban=_request('unban_email'))!==NULL ) {
 		if ( $liste_unban AND is_array($liste_unban) ) {
 			$liste_id=join(",",$liste_unban);
 			// c: 10/2/8 compat pg_sql
@@ -207,6 +208,185 @@ function appliquer_modifs_config($params='') {
 		}
 	}
 
+	$reconf=false;
+	$spipbb_metas=@unserialize($GLOBALS['meta']['spipbb']);
+
+	
+	
+	foreach(spipbb_liste_metas() as $i=>$v) {
+echo "\n<br>debug $i => $v 	-> "._request($i)." ";
+		if ( (($x=_request($i))!==NULL) AND $x<>$spipbb_metas[$i] ) {
+			$reconf=true;
+echo "reconf";			
+			// cas particuliers ?
+			switch ($i) {
+			
+			case 'id_groupe_mot' :
+				// creer un traitement de controle
+			default :
+				$spipbb_metas[$i]=$x;			
+			} // switch
+		} // if modif
+	} // foreach
+
+	// champs supplémentaires pour les avatars & co
+
+	# Proposer choix affichage (oui/non) des champs suppl. dans la config
+	#
+	$champs_requis = array('date_crea_spipbb','avatar','annuaire_forum','refus_suivi_thread');
+	$champs_definis = array();
+	# on collecte les champs declares dans globale champs_sap_spipbb
+	if (is_array($GLOBALS['champs_sap_spipbb'])) {
+		foreach ($GLOBALS['champs_sap_spipbb'] as $champ => $params) {
+			$champs_definis[]=$champ;
+		}
+	}
+	# on compile par diff. cette liste
+	$champs_optionnels = array_diff($champs_definis,$champs_requis);
+	# on creer l_entree dans spipbb metas
+	foreach ($champs_optionnels as $champ_a_valider) {
+		$champ_a_valider=strtolower($champ_a_valider);
+echo "\n<br>debug2 $champ_a_valider => " .$spipbb_metas['affiche_'.$champ_a_valider]." 	-> "._request('affiche_'.$champ_a_valider)." ";
+
+		if (($affiche_champ = _request('affiche_'.$champ_a_valider))
+			and $affiche_champ!=$spipbb_metas['affiche_'.$champ_a_valider]) {
+			$spipbb_metas['affiche_'.$champ_a_valider]=$affiche_champ;
+echo "reconf 2";			
+			$reconf=true;
+		}
+	}
+	
+	// voir si cette partie ne doit pas etre dans un configurer-particulier
+	
+	# scoty gaf_ecrireinstall 16/11/07 :
+	# gestion du support de champs supp. sur : extra ou table
+	# Cette table ($table_support) :
+	# (cree par autre plugin ou spip_auteurs apres tout ??!! ou sur spipbb ??? )
+	# sert de stockage des champs supplementaires auteurs,
+	# certains sont requis par spipbb, d_autres sont optionnels
+	# pour la fiche "profil" des visiteurs (et tous auteurs spip !)
+
+	$support_auteurs = _request('support_auteurs');
+	$table_support = _request('table_support');
+
+	if ( !empty($support_auteurs)
+		AND ( ($support_auteurs!=$spipbb_metas['support_auteurs']) // soit on modifie le support
+			OR (!empty($table_support)
+				AND ($support_auteurs=='table')
+				AND ($table_support!=$spipbb_metas['table_support'])) ) ) // soit on modifie la table et c'est en base
+	{
+
+		if($support_auteurs=='table' AND $table_support) {
+			# verif si "table_support" existe + liste champs existants (oui/non)
+			$chps_exists = montre_table_support($table_support);
+			# table existe !
+			if(is_array($chps_exists)) {
+				$t_creer_chps=array();
+				foreach($chps_exists as $k => $v) {
+					if($v=='non') {
+						$t_creer_chps[]=$k;
+					}
+				}
+				# si tous les champs supp. sont pas presents
+				# on les ajoute a "table_support"
+				if(count($t_creer_chps)) {
+					support_ajout_champs($table_support,$t_creer_chps);
+					# + recherche et transfert des extras (si existent)
+					# vers "table_support".
+					# Permet un passage gestion "extra" a "table"
+					support_maj_extras($table_support,$t_creer_chps);
+				}
+			}
+			else {
+				# le choix de "table" est invalide
+				# puisque table_support n_existe pas !
+				# donc on repasse sur extra !
+				$support_auteurs=='extra';
+				$table_support = "";
+			}
+		}
+		else {
+			# on est en "extra", alors on nettoie $table_support au cas zou !
+			$table_support = "";
+		}
+
+		$spipbb_metas['support_auteurs'] = $support_auteurs;
+		$spipbb_metas['table_support'] = $table_support;
+		$reconf=true;
+	}
+
+	// demande de creation d'un secteur contenant un forum spipbb preconfigure
+	if ($arg=="spipbb_rubriques" AND _request('spipbbrub_now') AND empty($spipbb_metas['id_secteur']) ) 
+	{
+	//		if (autoriser('publierdans', 'rubrique', $id_rubrique))  ??
+
+		lang_select($GLOBALS['visiteur_session']['lang']);
+		$lang = $GLOBALS['spip_lang'];
+		if (!$lang) $lang=$GLOBALS['meta']['langue_site'];
+		include_spip('inc/rubriques');
+		$id_secteur=creer_rubrique_nommee(_T('spipbb:forums_spipbb')); // inc/rubriques
+		$spipbb_metas['id_secteur'] = $id_secteur;
+		$id_categorie=creer_rubrique_nommee(_T('spipbb:forums_categories'),$id_secteur);
+		$id_forum = sql_insertq("spip_articles", array(
+							'titre' => _T('spipbb:forums_titre'),
+							'id_rubrique' => $id_categorie,
+							'id_secteur' =>  $id_secteur,
+							'date' => 'NOW()',
+							'accepter_forum' => 'oui',
+							'statut' => 'publie',
+							'lang' => $lang)
+					);
+		// controler si le serveur n'a pas renvoye une erreur
+		if ($id_forum > 0) 
+			sql_insertq('spip_auteurs_articles', array('id_auteur' => $GLOBALS['visiteur_session']['id_auteur'], 'id_article' => $id_forum));;
+
+		// Invalider les caches
+		include_spip('inc/invalideur');
+		suivre_invalideur("id='id_article/$id_forum'");
+
+		$reconf=true;
+echo "lang $lang id_sect $id_secteur categorie $id_categorie art_forum $id_forum";		
+	}
+	
+	// demande de creation d'un group de mots cles preconfigure
+	if ($arg=="spipbb_mots_cles" 
+		AND _request('spipbbmots_now') 
+//		AND ( $spipbb_metas['config_groupe_mots']!='oui' OR $spipbb_metas['config_mot_cles']!='oui') 
+		) 
+	{
+echo "<br>\n config mots";
+		// on cherche s'il n'existe pas deja
+		$row = sql_fetsel('id_groupe','spip_groupes_mots', "titre = 'spipbb'" ,'','','1');
+		if (!$row) { // Celui la n'existe pas
+			$id_groupe = sql_insertq("spip_groupes_mots",array(
+					'titre' => 'spipbb',
+					'descriptif' => _T('spipbb:mot_groupe_moderation'),
+					'tables_liees' => 'articles,rubriques,forum',
+					'unseul' =>'non',
+					'obligatoire' => 'non',
+					'minirezo' => 'oui',
+					'comite' => 'oui',
+					'forum' => 'oui' )
+						);
+			$row['id_groupe'] = $id_groupe;
+echo "insert grp $id_groupe";
+			}
+		$spipbb_metas['id_groupe_mot'] = $row['id_groupe'];
+		$spipbb_metas['config_groupe_mots']='oui';
+		// on cree les mots cles associes
+		$spipbb_metas['id_mot_ferme'] = spipbb_init_mot_cle("ferme",$spipbb_metas['id_groupe_mot']);
+		$spipbb_metas['id_mot_annonce'] = spipbb_init_mot_cle("annonce",$spipbb_metas['id_groupe_mot']);
+		$spipbb_metas['id_mot_postit'] = spipbb_init_mot_cle("postit",$spipbb_metas['id_groupe_mot']);
+		$spipbb_metas['config_mot_cles']='oui';
+		$reconf=true;
+	}
+	
+	if ($reconf) {
+echo "\n<br>on reconfig";	
+		$GLOBALS['spipbb']=$spipbb_metas;
+		spipbb_save_metas();
+	}
+//die("conf");
 } // appliquer_modifs_config
 
 ?>

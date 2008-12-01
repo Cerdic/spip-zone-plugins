@@ -22,21 +22,19 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 if (defined("_BASE_SPIPBB")) return; else define("_BASE_SPIPBB", true);
-if (!defined('_INC_SPIPBB_COMMON')) include_spip("inc/spipbb_common");
-spipbb_log('included',2,__FILE__);
+include_spip('inc/spipbb_common'); //if (!defined("_INC_SPIPBB_COMMON")) die("bye");
+//spipbb_log('included',2,__FILE__);
 //
 // Structure des tables
 //
 
-global $tables_principales;
-global $tables_auxiliaires;
-global $tables_spipbb;
-
-// cf inc/interfaces.php
-
-$tables_spipbb = array( 'spip_visites_forums', 'spip_auteurs_spipbb', 'spip_spam_words', 'spip_spam_words_log', 'spip_ban_liste' );
+// maintenant dans spipbb_common
+//$tables_spipbb = array( 'spip_visites_forums', 'spip_auteurs_spipbb', 'spip_spam_words', 'spip_spam_words_log', 'spip_ban_liste' );
 
 // suivi des visites (sur la base de spip_visites_articles)
+
+function spipbb_declarer_tables_principales($tables_principales){
+
 
 $spip_visites_forums = array(
 	"date"		=> "date NOT NULL",
@@ -48,8 +46,6 @@ $spip_visites_forums = array(
 $spip_visites_forums_key = array(
 	'PRIMARY KEY'	=> "date,id_forum"
 	); //(`date`,`id_forum`)
-
-// spip_referers_forums ?
 
 $tables_principales['spip_visites_forums'] = array(
 	'field' => &$spip_visites_forums,
@@ -115,24 +111,30 @@ $tables_principales['spip_ban_liste'] = array(
 		'field' => &$spip_ban_liste,
 		'key' => &$spip_ban_liste_key );
 
-//-- Relations ----------------------------------------------------
-global $tables_jointures;
-$tables_jointures['visites_forums'][] = 'forums';
-$tables_jointures['auteurs_spipbb'][] = 'auteurs';
+	return $tables_principales;
+} // declarer_tables_principales
 
+function spipbb_declarer_tables_auxiliaires($tables_auxiliaires){
+	return $tables_auxiliaires;
+} // declarer_tables_auxiliaires
+
+//-- Relations ----------------------------------------------------
+function spipbb_declarer_tables_interfaces($interface){
+
+	//global $tables_jointures;
+	$interface['tables_jointures']['visites_forums'][] = 'forums';
+	$interface['tables_jointures']['auteurs_spipbb'][] = 'auteurs';
+
+	return $interface;
+} // declarer_tables_interfaces
+
+/*
 global $table_des_tables;
 $table_des_tables['visites_forums'] = 'visites_forums';
 $table_des_tables['auteurs_spipbb'] = 'auteurs_spipbb';
 $table_des_tables['spam_words'] = 'spam_words';
 $table_des_tables['spam_words_log'] = 'spam_words_log';
 $table_des_tables['ban_liste'] = 'ban_liste';
-
-// c: 27/12/7 corrige le bug auteurs_rubriques table SQL inconnue en 1.9.2
-// je ne suis pas sûr que ce soit très bien de faire cela...
-if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_TABLE_AUTRUB,'<')) {
-	$table_des_tables['auteurs_rubriques'] = 'auteurs_rubriques';
-}
-
-//$table_date['articles']='date';
+*/
 
 ?>

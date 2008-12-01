@@ -24,7 +24,7 @@
 
 $table_des_traitements['TITRE'][]= 'supprimer_numero(typo(%s))';
 
-include_spip('base/spipbb'); // requis pour la mutualisation et les boucles avec les tables additionnelles
+//include_spip('base/spipbb'); // requis pour la mutualisation et les boucles avec les tables additionnelles
 
 #
 # inclus def de champs (voir ci-apres !)

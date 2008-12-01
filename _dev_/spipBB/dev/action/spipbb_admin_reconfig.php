@@ -455,23 +455,6 @@ function nettoyer_ante_jointures($mots_preced, $mots_base) {
 }
 
 
-//----------------------------------------------------------------------------
-// [fr] Cree le mot cle donne dans le groupe donne et retourne son id_mot
-//----------------------------------------------------------------------------
-function spipbb_init_mot_cle($mot,$groupe)
-{
-	if (empty($mot) OR empty($groupe)) return 0;
-	$groupe_mot = sql_fetsel ("titre","spip_groupes_mots",array("id_groupe"=>$groupe));
-	$id_mot = sql_insertq("spip_mots",array(
-				'titre'=>$mot,
-				'id_groupe'=>$groupe,
-				'descriptif'=> _T('spipbb:mot_'.$mot),
-				'type' => $groupe_mot['titre'])
-			);
-	return $id_mot;
-} // spipbb_init_mot_cle
-
-
 // ------------------------------------------------------------------------------
 # generer tableau des champs profils dans sap si existent
 // ------------------------------------------------------------------------------
