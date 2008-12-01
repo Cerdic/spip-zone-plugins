@@ -33,5 +33,6 @@
 		<action>insert_head</action>
 		<inclure>openlayer_pipeline.php</inclure>
 	</pipeline>
- 
+
+	<necessite id='cfg' version='[1.10.4;]' />
 </plugin>
