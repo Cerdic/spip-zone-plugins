@@ -31,6 +31,7 @@ include_spip('base/spipbb'); // requis pour la mutualisation et les boucles avec
 #
 include_spip('base/sap_spipbb');
 
+include_spip('inc/statvisites'); // probleme de cron en 1.9.2
 
 # h. GAF
 # definir repertoire des smileys ;
