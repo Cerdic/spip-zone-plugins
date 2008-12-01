@@ -28,7 +28,7 @@ function Inscription2_affiche_milieu($flux){
 }
 
 function Inscription2_header_prive($flux){
-	if ((_request('exec')=='ajouter_adherent') || (_request('exec')=='inscription2_adherents'))
+	if ((_request('exec')=='ajouter_adherent') || (_request('exec')=='inscription2_adherents')){
 		$flux .= "<script type='text/javascript' src='".find_in_path('lib/jquery-validate/jquery.validate.pack.js')."'></script>\n";
 		$flux .= "<script type='text/javascript' src='"._DIR_PLUGIN_INSCRIPTION2."javascript/md5_inscription2.js'></script>\n";
 	}
@@ -49,7 +49,6 @@ function inscription2_preparer_page($page) {
 
 	$incHead = <<<EOS
 <script type='text/javascript' src='$jqueryvalidate'></script>
-<link rel="stylesheet" href="$css" type="text/css" media="all" />
 EOS;
 	return substr_replace($page, $incHead, strpos($page, '</head>'), 0);
 }

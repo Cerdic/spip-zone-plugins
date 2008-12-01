@@ -65,7 +65,8 @@ function legender_auteur_supp_saisir($auteur){
 				$aux4[] = $q;
 		}
 	}
-		$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur","a.id_auteur= $id_auteur");
+	
+	$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur","a.id_auteur= $id_auteur");
 
 	$query = sql_fetch($query);
 	if($query == NULL){
@@ -77,8 +78,9 @@ function legender_auteur_supp_saisir($auteur){
 		}
 		elseif ($cle == 'latitude'){
 			if ($geomap_append_moveend_map = charger_fonction('geomap_append_clicable_map','inc',true)){
-				$corps_supp .= "<li><div class='geomap' id='map' style='width:100%;height:350px'> </div></li>";
+				$corps_supp .= "<li><div class='geomap' id='map' style='width:100%;height:350px'> </div>";
 				$corps_supp .= $geomap_append_moveend_map("map",'latitude','longitude',$query['latitude'],$query['longitude'], NULL,NULL,true);
+				$corps_supp .= "</li>";
 			}
 			$corps_supp .= "<li><label>"._T('inscription2:'.$cle)."</label>"
 			. "<input type='text' id='$cle' name='$cle' class='text' value='$val' /></li>";
@@ -87,7 +89,7 @@ function legender_auteur_supp_saisir($auteur){
 			if(find_in_path('prive/inscription2_champs_'.$cle.'.html')){
 				$corps_supp .= recuperer_fond('prive/inscription2_champs_'.$cle,array('cle'=>$cle,'val'=>$val));
 			}else{
-				$corps_supp .= "<li><label>"._T('inscription2:'.$cle)."</label>"
+				$corps_supp .= "\n<li><label>"._T('inscription2:'.$cle)."</label>"
 				. "<input type='text' id='$cle' name='$cle' class='text' value='".$val."' /></li>";
 			}
 		}
@@ -105,7 +107,7 @@ function legender_auteur_supp_saisir($auteur){
 		$corps_supp .= "</select><br/><a onclick=\"$('#news').find('option').attr('selected', false);\">"._T('inscription2:deselect_listes')."</a> </small><br /></td></tr>";
 		}
 	}
-		$corps_supp .= "\n</li></ul>";
+		$corps_supp .= "\n</ul>";
 		$corps_supp .= "\n</fieldset></li>";
 	return $corps_supp;
 }
@@ -129,12 +131,6 @@ function legender_auteur_supp_voir($auteur)
 				$var_user['a.'.$cle] = '0';
 			elseif(ereg("^statut_rel.*$", $cle))
 				$var_user['b.statut_relances'] = '1';
-			elseif($cle == 'pays'){
-				$var_user['c.pays'] = '1';
-			}
-			elseif($cle == 'pays_pro'){
-				$var_user['d.pays'] = '1';
-				$var_user['d.pays as pays_pro'] = '1';}
 			else 
 				$var_user['b.'.$cle] = '1';
 		}
@@ -149,14 +145,7 @@ function legender_auteur_supp_voir($auteur)
 				$aux4[] = $q;
 		}
 	}
-	if($var_user['c.pays'] && $var_user['d.pays'])
-		$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_geo_pays c on b.pays=c.id_pays left join spip_geo_pays d on b.pays_pro=d.id_pays","a.id_auteur= $id_auteur");
-
-	elseif($var_user['c.pays'])
-		$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_geo_pays c on b.pays=c.id_pays","a.id_auteur= $id_auteur");
-
-	else
-		$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur","a.id_auteur= $id_auteur");
+	$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur","a.id_auteur= $id_auteur");
 
 	$query = sql_fetch($query);
 	
@@ -167,7 +156,13 @@ function legender_auteur_supp_voir($auteur)
 	foreach ($query as $cle => $val){
 		if(($cle == 'id_auteur') || ($cle == 'login') || ($cle == 'nom') || ($cle == 'email') || ($cle == 'id_pays') || ($cle == 'id_pays_pro'))
 			continue;
-		elseif (strlen($val) >= 1){ $res .= "<p><strong>"._T('inscription2:'.$cle)." : </strong>" . typo($val) . "</p>"; }
+		elseif (strlen($val) >= 1){
+			if(find_in_path('prive/inscription2_vue_'.$cle.'.html')){
+				$res .= recuperer_fond('prive/inscription2_vue_'.$cle,array('cle'=>$cle,'val'=>$val));
+			}else{
+				$res .= "<p><strong>"._T('inscription2:'.$cle)." : </strong>" . typo($val) . "</p>";	
+			}
+		}
 	}
 	if($aux4 and $aux3){
 		$res .= "<strong>"._T('inscription2:newsletter')."</strong><br />"
