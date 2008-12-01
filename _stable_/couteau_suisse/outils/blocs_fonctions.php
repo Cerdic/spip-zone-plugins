@@ -12,6 +12,8 @@ Mon bloc depliable        / qui est aussi l'emplacement pour l'Ajax si le fragme
 
 */
 
+@define('_BLOC_TITRE_H', 'h4');
+
 // Un bloc titre numerote : #BLOC_TITRE_NUM{numero} ou #BLOC_TITRE_NUM{numero, fragment}
 function balise_BLOC_TITRE_NUM($p) {
 	// statut binaire : bit1=ajax bit2=titre bit3=resume bit4=debut
@@ -27,7 +29,7 @@ function balise_BLOC_TITRE_NUM($p) {
 	$numero = interprete_argument_balise(1, $p);
 	$numero = $numero===NULL?"''":"bloc_is_num($numero)";
 	
- 	$p->code=" '<div class=\"cs_blocs'.$numero.'\"><h4 class=\"blocs_titre blocs_replie $ajax\"><a href=\"'.".$fragment.".'\">' ";
+ 	$p->code=" '<div class=\"cs_blocs'.$numero.'\"><"._BLOC_TITRE_H." class=\"blocs_titre blocs_replie $ajax\"><a href=\"'.".$fragment.".'\">' ";
 	return $p;
 }
 
@@ -43,7 +45,7 @@ function balise_BLOC_TITRE($p) {
 		$ajax="";
 		$bloc_stade[]=1;
 	}
-	$p->code=" '<div class=\"cs_blocs\"><h4 class=\"blocs_titre blocs_replie $ajax\"><a href=\"'.".$fragment.".'\">' ";
+	$p->code=" '<div class=\"cs_blocs\"><"._BLOC_TITRE_H." class=\"blocs_titre blocs_replie $ajax\"><a href=\"'.".$fragment.".'\">' ";
 	return $p;
 }
 
@@ -54,7 +56,7 @@ function balise_BLOC_RESUME($p) {
 	
 	if($stade<1 || $stade>2)
 		die("erreur de compilation #BLOC_RESUME sans #BLOC_TITRE_($stade)");
-	$p->code = "'</a></h4><div class=\"blocs_resume\">'";
+	$p->code = "'</a></"._BLOC_TITRE_H."><div class=\"blocs_resume\">'";
 	$bloc_stade[$k]=3;	/* 3 = resume */
 	
 	return $p;
@@ -71,7 +73,7 @@ function balise_BLOC_DEBUT($p) {
 		if($stade<1 || $stade>2)
 					/* on DOIT arriver de titre */
 			die("erreur de compilation #BLOC_DEBUT sans #BLOC_TITRE_($stade)");
-		$p->code = "'</a></h4><div class=\"blocs_invisible blocs_destination\">'";
+		$p->code = "'</a></"._BLOC_TITRE_H."><div class=\"blocs_invisible blocs_destination\">'";
 		}
 	$bloc_stade[$k]=4; /* 4=debut */
 	return $p;
