@@ -207,13 +207,13 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 	}
     
     if (!$new) {    
-        $message = _T('inscription2:profile_modifie_ok');
+        $message = _T('inscription2:profil_modifie_ok');
     } else {
 		$envoyer_inscription = charger_fonction('envoyer_inscription2','inc');
 		$envoyer_inscription($id_auteur);
 		$message = _T('inscription2:formulaire_inscription_ok');
     }
-    return array('editable'=>"false",'message' => $message);
+    return array('editable'=>false,'message' => $message);
 }
 
 // http://doc.spip.org/@test_login
