@@ -49,6 +49,23 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 	
 	//initialise le tableau des erreurs
 	$erreurs = array();
+    //initilise le tableau de valeurs $champs => $valeur
+    $valeurs = array();	
+    
+	//récupere la liste des champs possible
+	$champs = inscription2_champs_formulaire();	
+
+    //gere la correspondance champs -> _request(champs)
+	foreach(inscription2_champs_formulaire() as $clef => $valeur) {
+		$valeurs[$valeur] = _request($valeur);  
+	}		
+		
+	//verifier les champs obligatoires
+	foreach ($valeurs  as $champs => $valeur) {
+		if ((lire_config('inscription2/'.$champs.'_obligatoire') == 'on') && empty($valeur)) {
+			$erreurs[$champs] = _T('inscription2:champ_obligatoire');
+		}
+	}
 				
 	//messages d'erreur au cas par cas
 	//vérifier les champs obligatoire
@@ -86,13 +103,7 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 					$erreurs[$champs] = $erreur;
 				}
 				
-			}
-			
-			//si clef obligatoire, obligatoire activé et _request() vide alors erreur
-			if (!$erreurs[$champs] && (lire_config('inscription2/'.$champs.'_obligatoire') == 'on') && !_request($champs)) {
-				spip_log("erreur sur $champs","inscription2");
-				$erreurs[$champs] = _T('inscription2:champ_obligatoire');
-			}
+			}			
 		}
 	}
 
