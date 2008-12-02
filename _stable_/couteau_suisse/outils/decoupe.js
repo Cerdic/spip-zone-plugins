@@ -4,7 +4,7 @@ var onglet_actif = 0;
 function onglets_init() {
   var cs_bloc = jQuery('div.onglets_bloc_initial', this);
   if(cs_bloc.length) {
-	cs_bloc.prepend('<div class="onglets_liste"></div>').end()
+	cs_bloc.prepend('<div class="onglets_liste"></div>')
 		.children('.onglets_contenu').each(function(i) {
 			this.id = 'onglets_contenu_' + i;
 			jQuery(this).parent().children('.onglets_liste').append(
