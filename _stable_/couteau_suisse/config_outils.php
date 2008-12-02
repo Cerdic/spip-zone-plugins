@@ -635,7 +635,8 @@ add_outil( array(
 		// s\'il y a un sommaire, on cache la navigation haute sur les pages
 		jQuery("div.decoupe_haut").css("display", "none");
 		// utilisation des cookies pour conserver l\'etat du sommaire si on quitte la page
-		jQuery.getScript("'.url_absolue(find_in_path('javascript/jquery.cookie.js')).'", cs_sommaire_cookie);
+		if(jcookie="'.url_absolue(find_in_path('javascript/jquery.cookie.js')).'")
+			jQuery.getScript(jcookie, cs_sommaire_cookie);
 	}',
 	'code:jq_init' => 'cs_sommaire_init.apply(this);',
 	// inserer : $table_des_traitements['TEXTE']['article']= 'sommaire_d_article(propre(%s))';
@@ -911,13 +912,12 @@ add_outil( array(
 	'jquery'	=> 'oui',
 	'pipelinecode:post_propre' => "if(strpos(\$flux, '@')!==false) \$flux=cs_echappe_balises('', 'mailcrypt', \$flux);",
 	'code:js' => "function lancerlien(a,b){ x='ma'+'ilto'+':'+a+'@'+b; return x; }",
-	// function jQuery pour corriger le title qui a ete protege
-	'code:jq' => "jQuery.fn.cs_title = function() {
-		var t = this.length?this.attr('title'):null;
-		return typeof t=='string'?this.attr('title',t.replace(/\.\..t\.\./,'[\x40]')):this; };",
 	// jQuery pour remplacer l'arobase image par l'arobase texte
+	// ... puis arranger un peu le title qui a ete protege
 	'code:jq_init' => "jQuery('span.spancrypt', this).attr('class','cryptOK').html('&#6'+'4;');
-	jQuery(\"a[@title*='..']\", this).cs_title();",
+	jQuery(\"a[@title*='..']\", this).each(function () {
+		this.title = this.title.replace(/\.\..t\.\./,'[@]');
+	});",
 	'code:css' => 'span.spancrypt {background:transparent url(' . url_absolue(find_in_path('img/mailcrypt/leure.gif'))
 		. ') no-repeat scroll 0.1em center; padding-left:12px; text-decoration:none;}',
 	'traitement:EMAIL' => 'mailcrypt',
