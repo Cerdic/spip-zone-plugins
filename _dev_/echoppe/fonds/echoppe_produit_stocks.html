@@ -1,7 +1,7 @@
 #CACHE{0}
 <div class="cadre-formulaire">
 	<h3><:echoppe:etat_des_stocks:></h3>[(#SET{total_stock,0})]
-	<strong><:echoppe:stock_total:>&nbsp;:&nbsp;<BOUCLE_LeTotal(ECHOPPE_STOCKS){ref_produit=#REF_PRODUIT}>[(#SET{total_stock,#GET{total_stock}|plus{#QUANTITE}})]</BOUCLE_LeTotal>[(#GET{total_stock})]</strong><br />
+	<strong><:echoppe:stock_total:>&nbsp;:&nbsp;#TOTAL_STOCK</strong><br />
 	<form action="[(#EVAL{echoppe_modifier_stock}|generer_url_action{onglet=stocks})]" method="post" >
 		<input type="hidden" name="ref_produit" value="#REF_PRODUIT" />
 		<input type="hidden" name="id_produit" value="#ID_PRODUIT" />
