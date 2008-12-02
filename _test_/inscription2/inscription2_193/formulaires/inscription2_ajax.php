@@ -95,28 +95,17 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 	    }
 	}
 	
-	//vérifier les champs obligatoire
-	foreach (lire_config('inscription2/') as $clef => $valeur) {
-		$champs = ereg_replace("_(obligatoire|fiche|table|mod)", "", $clef);
-		
-		if ($champs && $valeur == 'on'){		
-			//pipeline pour la verifications des donnees de plugins tiers
-				$erreur = pipeline('i2_validation_formulaire',
-					array(
-						'args' => array(
-							'champs' => $champs,
-							'valeur' => _request($champs)
-						),
-					'data' => null
-					)
-				);
-				if($erreur){
-					$erreurs[$champs] = $erreur;
-				}
-				
-		}
-	}
-
+	   
+	//Offrir aux autres plugins de vérifier les données
+	$erreurs_plugin = pipeline('i2_validation_formulaire',
+		array(
+			'args' => array(
+			    'champs' => $valeurs
+			),
+		'data' => null
+		)
+	);    	
+	
 	//verifier que l'auteur a bien des droits d'edition
 	if (is_numeric($id_auteur)) {
 		include_spip('inc/autoriser');
