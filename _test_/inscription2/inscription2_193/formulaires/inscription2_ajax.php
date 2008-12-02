@@ -68,19 +68,28 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 	}
 				
 	//messages d'erreur au cas par cas
+
+	//Vérification Code Postal
+	// liste des champs de type code postal
+	$champs_code_postal = array('code_postal','code_postal_pro');
+	
+	// vérification des champs saisis
+	foreach($champs_code_postal as $champs) {
+	    if(lire_config('inscription2/'.$champs)== 'on') {
+	        $erreur = inscription2_valide_cp($valeurs[$champs]);
+	        if($erreur){
+		        $erreurs[$champs] = $erreur;
+	        }		
+	    }
+	}
+	
+	
 	//vérifier les champs obligatoire
 	foreach (lire_config('inscription2/') as $clef => $valeur) {
 		$champs = ereg_replace("_(obligatoire|fiche|table|mod)", "", $clef);
 		
 		if ($champs && $valeur == 'on'){
-			if(preg_match('/^code_postal/', $champs)){
-				$cp = _request($champs);
-				$erreur = inscription2_valide_cp($cp);
-				if($erreur){
-					$erreurs[$champs] = $erreur;
-				}
-			}
-			else if((preg_match('/^telephone/', $champs))||(preg_match('/^fax/', $champs))||(preg_match('/^mobile/', $champs))){
+            if((preg_match('/^telephone/', $champs))||(preg_match('/^fax/', $champs))||(preg_match('/^mobile/', $champs))){
 				$numero = _request($champs);
 				$erreur = inscription2_valide_numero($numero);
 				if($erreur){
