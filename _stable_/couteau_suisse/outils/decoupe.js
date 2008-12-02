@@ -2,10 +2,10 @@ var onglet_actif = 0;
 
 // compatibilite Ajax : ajouter "this" a "jQuery" pour mieux localiser les actions 
 function onglets_init() {
-  if(jQuery('div.onglets_bloc_initial', this).length) {
-	bloc = jQuery('div.onglets_bloc_initial', this);
-	bloc.prepend('<div class="onglets_liste"></div>');
-	bloc.children('.onglets_contenu').each(function(i) {
+  var cs_bloc = jQuery('div.onglets_bloc_initial', this);
+  if(cs_bloc.length) {
+	cs_bloc.prepend('<div class="onglets_liste"></div>').end()
+		.children('.onglets_contenu').each(function(i) {
 			this.id = 'onglets_contenu_' + i;
 			jQuery(this).parent().children('.onglets_liste').append(
 				'<h2 id="'+'onglets_titre_' + i + '" class="onglets_titre">' + this.firstChild.innerHTML + '</h2>'
@@ -23,14 +23,15 @@ function onglets_init() {
 			jQuery(this).removeClass('hover')
 		}
 	);
-	bloc.attr('class','onglets_bloc').each(function(i) {this.id = 'ongl_'+i;});
+	jQuery('div.onglets_bloc_initial', this)
+		.attr('class','onglets_bloc').each(function(i) {this.id = 'ongl_'+i;});
 	// clic du titre...
 	jQuery('h2.onglets_titre', this).click(function(e) {
 		var contenu = '#' + this.id;
 		contenu = contenu.replace(/titre/,'contenu');
 		var bloc = jQuery(this).parent().parent();
-		bloc.children('.selected').removeClass('selected');
-		bloc.children('.onglets_liste').children('.selected').removeClass('selected');
+		bloc.children('.selected').removeClass('selected').end()
+			.children('.onglets_liste').children('.selected').removeClass('selected');
 		jQuery(contenu).addClass('selected');
 		jQuery(this).addClass('selected');
 		return false;
