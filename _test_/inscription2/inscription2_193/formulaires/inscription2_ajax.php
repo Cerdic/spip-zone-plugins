@@ -67,10 +67,8 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 		}
 	}
 				
-	//messages d'erreur au cas par cas
-
-	//Vérification Code Postal
-	// liste des champs de type code postal
+	//messages d'erreur au cas par cas (CODE POSTAL)
+    //liste des champs de type code postal
 	$champs_code_postal = array('code_postal','code_postal_pro');
 	
 	// vérification des champs saisis
@@ -81,24 +79,28 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 		        $erreurs[$champs] = $erreur;
 	        }		
 	    }
-	}
+	}	
+
+	//messages d'erreur au cas par cas (TELEPHONE)
+	//liste des champs de type téléphone
+	$champs_telephone = array('telephone','fax','mobile','telephone_pro','fax_pro','mobile_pro');
 	
+	// vérification des champs saisis
+	foreach($champs_telephone as $champs) {
+	    if(lire_config('inscription2/'.$champs)== 'on') {
+	        $erreur = inscription2_valide_numero($valeurs[$champs]);
+	        if($erreur){
+		        $erreurs[$champs] .= $erreur;
+	        }		
+	    }
+	}
 	
 	//vérifier les champs obligatoire
 	foreach (lire_config('inscription2/') as $clef => $valeur) {
 		$champs = ereg_replace("_(obligatoire|fiche|table|mod)", "", $clef);
 		
-		if ($champs && $valeur == 'on'){
-            if((preg_match('/^telephone/', $champs))||(preg_match('/^fax/', $champs))||(preg_match('/^mobile/', $champs))){
-				$numero = _request($champs);
-				$erreur = inscription2_valide_numero($numero);
-				if($erreur){
-					$erreurs[$champs] = $erreur;
-				}
-			}
-			
+		if ($champs && $valeur == 'on'){		
 			//pipeline pour la verifications des donnees de plugins tiers
-			else {
 				$erreur = pipeline('i2_validation_formulaire',
 					array(
 						'args' => array(
@@ -112,7 +114,6 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 					$erreurs[$champs] = $erreur;
 				}
 				
-			}			
 		}
 	}
 
