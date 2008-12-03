@@ -79,7 +79,13 @@ function inc_couleurs_dist($choix=NULL)
 	    '&couleur_foncee=' .
 	    substr($couleurs_spip[$choix]['couleur_foncee'],1);
 	} else {
-		if (is_array($choix)) return $couleurs_spip = $choix;
+		if (is_array($choix)) {
+			if ($ajouter) {
+				return $couleurs_spip = array_merge($couleurs_spip, $choix);
+			} else {
+				return $couleurs_spip = $choix;
+			}
+		}
 
 		$evt = '
 onmouseover="changestyle(\'bandeauinterface\');"
