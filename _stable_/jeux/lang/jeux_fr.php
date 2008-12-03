@@ -51,7 +51,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // espace prive
 
-'jeux_' 	=> 'Jeux :',
+'jeux'		=> 'Jeux',
+'jeux_' 	=> 'Jeux&nbsp;:',
 'jeu_numero' 	=> 'Jeu num&eacute;ro @id@ (@nom@)',
 'jeu_numero_court' 	=> 'ID',
 'jeu_type'	=> 'Type',
@@ -86,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'gerer_resultats'	=> 'G&eacute;rer les r&eacute;sultats',
 'gerer_ses_resultats'	=> 'G&eacute;rer ses r&eacute;sultats',
 'voir_resultats'	=> 'Voir les r&eacute;sultats',
-'enregistrer_resultat' => 'Enregistrer les r&eacute;sultats ?',
+'enregistrer_resultat' => 'Enregistrer les r&eacute;sultats&nbsp;?',
 'gerer_resultats_jeu' => 'G&eacute;rer les r&eacute;sultats du jeu num&eacute;ro @id@ (@nom@)',
 'aucun_resultat' => 'Aucun r&eacute;sultat',
 
@@ -98,14 +99,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'explication_supprimer_jeu'=> 'Cette commande efface <i>tous</i> les r&eacute;sultats du jeu&hellip;',
 'explication_supprimer_auteur'=> 'Cette commande efface <i>tous</i> les r&eacute;sultats de l&#8217;auteur&hellip;',
 'confirmation' => 'Confirmation',
-'confirmation_supprimer_tout' => '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir effacer TOUS les r&eacute;sultats ?',
-'confirmation_supprimer_jeu' => '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir effacer TOUS les r&eacute;sultats du jeu ?',
-'confirmation_supprimer_auteur' => '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir effacer TOUS les r&eacute;sultats de l&#8217;auteur ?',
+'confirmation_supprimer_tout' => '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir effacer TOUS les r&eacute;sultats&nbsp;?',
+'confirmation_supprimer_jeu' => '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir effacer TOUS les r&eacute;sultats du jeu&nbsp;?',
+'confirmation_supprimer_auteur' => '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir effacer TOUS les r&eacute;sultats de l&#8217;auteur&nbsp;?',
 'gerer_resultats_auteur'	=> 'G&eacute;rer les r&eacute;sultats de @nom@',
 'infos_auteur'				=> 'Informations',
 'gerer_resultats_tout' 		=> 'G&eacute;rer les r&eacute;sultats de tous les jeux',
-'jeux'						=> 'Jeux',
-'ecraser_resultat'			=> 'Ecraser les r&eacute;sultats ?',
+'ecraser_resultat'			=> 'Ecraser les r&eacute;sultats&nbsp;?',
 'dernier_resultat'			=> 'Garder le dernier r&eacute;sultat',
 'meilleur_resultat'			=> 'Garder le meilleur r&eacute;sultat',
 'configurer_jeux'			=> 'Configurer le plugin Jeux',
@@ -124,13 +124,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'explication_compacter_tout'=>"Cette commande  efface <i>tous</i> les r&eacute;sultats des diff&eacute;rents jeux, sauf le dernier pour chaque couple jeu/auteur",
 'explication_compacter_jeu'=>"Cette commande  efface <i>tous</i> les r&eacute;sultats de ce jeu, sauf le dernier pour chaque auteur",
 'explication_compacter_auteur'=>"Cette commande  efface <i>tous</i> les r&eacute;sultats de cet auteur, sauf le dernier pour chaque jeu",
-'confirmation_compacter_tout' 	=> '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir compacter TOUS les r&eacute;sultats ?',
-'confirmation_compacter_auteur' 	=> '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir compacter les r&eacute;sultats de cet auteur ?',
-'confirmation_compacter_jeu' 	=> '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir compacter les r&eacute;sultats de ce jeu ?',
+'confirmation_compacter_tout' 	=> '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir compacter TOUS les r&eacute;sultats&nbsp;?',
+'confirmation_compacter_auteur' 	=> '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir compacter les r&eacute;sultats de cet auteur&nbsp;?',
+'confirmation_compacter_jeu' 	=> '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir compacter les r&eacute;sultats de ce jeu&nbsp;?',
 'compacter_confirmer'			=> 'Confirmer le compactage de ces r&eacute;sultats',
-'statut_jeu'					=>'Statut du jeu : '
+'statut_jeu'					=>'Statut du jeu&nbsp;: ',
 
-
+'doc_jeux' => 'Documentation générale',
+'doc_scores' => 'Documentation sur les scores',
 
 );
 
