@@ -70,8 +70,8 @@ div.table_page { margin-top: 1em; }
 	margin: 0; 
 	padding: 0; 
 }
-#chemin li em { display: none; }
-#chemin li a { color: white;  }
+#chemin li em { }
+#chemin li a { }
 #chemin ul, #chemin li, #chemin li .bloc {  
 	margin: 0; 
 	padding: 0; 
@@ -80,24 +80,9 @@ div.table_page { margin-top: 1em; }
 	list-style-type: none;
 	display: inline; 
 }
-#chemin li .bloc {	
-	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer)], center [(#GET{left})] no-repeat })]
-	padding: 2px;	
-	padding-bottom: 4px;
-	padding-#GET{left}: 10px;	
-	padding-#GET{right}: 12px;	
-	margin-#GET{left}: -5px;
-	display: -moz-inline-box; 
-	display: inline-block; 
-}
-#chemin li .bloc:hover {
-	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer|couleur_foncer)], center [(#GET{left})] no-repeat })]
-}
-
-#chemin li li .bloc { 
-	margin-top: 2px; 
-	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], center [(#GET{left})] no-repeat })]
-}
+#chemin li .bloc {}
+#chemin li .bloc:hover {}
+#chemin li li .bloc {}
 #chemin .aide {margin-top: 3px; margin-bottom: 15px;}
 
 h1 { color: #GET{foncee}; font-size:large; font-family: Arial, Sans, sans-serif; margin: 0.5em 0 0.25em 0; }
