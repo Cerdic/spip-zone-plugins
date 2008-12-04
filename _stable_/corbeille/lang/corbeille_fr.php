@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
   // E
  	'ecrit' => " a &eacute;crit :",
-	'effacer' => "Effacer la selection",
+	'effacer' => "Effacer la s&eacute;lection",
 	'effacer_tout' => 'Tout effacer',
  	'erreur' => " : erreur !",
  	'elements_supprimes' => '@ids@ ont &eacute;t&eacute; supprim&eacute;s de la corbeille',

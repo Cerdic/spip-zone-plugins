@@ -25,13 +25,19 @@ function exec_corbeille_dist(){
 	
 	
 	echo formulaire_recherche('corbeille');
-	// recuperer toutes les noisette d'admin existante 
-	$liste = preg_files(_DIR_PLUGIN_CORBEILLE."prive/listes/","/corbeille_([^.]*)[.]html");
-	
+	// recuperer toutes les noisettes d'admin existantes
+/*	$liste = preg_files(_DIR_PLUGIN_CORBEILLE."prive/listes/","/corbeille_([^.]*)[.]html");
 	foreach ($liste as $noisette) {
 		if (preg_match(',^corbeille_([^.]*)$,',basename($noisette,'.html'),$regs)){
 			$table = $regs[1];
 			echo recuperer_fond("prive/inc-corbeille",array_merge($_GET,array('table'=>$table)));
+		}
+	}*/
+	include_spip('action/corbeille_vider');
+	$liste = corbeille_table_infos();
+	foreach ($liste as $table) {
+		if ($noisette = find_in_path('prive/listes/corbeille_'.$table.'.html')){
+			echo recuperer_fond("prive/inc-corbeille", array_merge($_GET, array('table'=>$table)));
 		}
 	}
 	

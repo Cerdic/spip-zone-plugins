@@ -7,23 +7,42 @@
  */
 
 /**
- * Parametre de configuration de la corbeille.
+ * Parametres de configuration personnalisables/surchargeables de la corbeille :
+ * global $corbeille_params;
  * 
- * "nom de l'objet spip" => array ("statut" => nom du statut dans la base de donnees (bdd),
- * 									"titre" => nom du champ retourne dans le listing,
- * 									"table" => nom de la table spip dans la bdd,
- * 									"id" => clef primaire dans la table,
- * 									"temps" => aucune idee a quoi ca peut servir,
- * 									"page_voir" => parametres pour voir le detail d'un objet
- * 									"libelle" => texte long dans la partie droite de l'affichage,
- * 									"libelle_court" => texte court dans le menu gauche,
- * 									"tableliee"  => tableau des tables spip a vider en meme temps    )  
+ * $corbeille_params["nom de l'objet SPIP"] = array (
+ * 			[voir la structure ci-dessous] 
+ * );
+ * 
+ * la fonction corbeille_table_infos($objet) renverra :
+ *		- si $objet==-1, la liste des objets renseignes
+ * 		- sinon, la globale $corbeille_params[$objet] si elle existe
+ * 		- sinon, la valeur par defaut $param[$objet] si elle existe
+ * 		- sinon, false
+ * 
+ * "nom de l'objet spip" => array (
+ * 			"statut" => nom du statut dans la base de donnees (bdd),
+ * 			"titre" => nom du champ retourne dans le listing,
+ * 			"table" => nom de la table spip dans la bdd,
+ * 			"id" => clef primaire dans la table,
+ * 			"temps" => aucune idee a quoi ca peut servir,
+ * 			"page_voir" => parametres pour voir le detail d'un objet
+ * 			"libelle" => texte long dans la partie droite de l'affichage,
+ * 			"libelle_court" => texte court dans le menu gauche,
+ * 			"tableliee"  => tableau des tables spip a vider en meme temps 
+ * )
  * 
  * @param string $table
  * @return array
  */
-function corbeille_table_infos($table){
-	$corbeille_param = array (
+function corbeille_table_infos($table=-1){
+	global $corbeille_params;
+	if (!is_array($corbeille_params))
+		$corbeille_params = array();
+	if (isset($corbeille_params[$table]))
+		return $corbeille_params[$table];
+
+	$param = array (
 	"articles"=>	 	array(	"statut" => "poubelle",
 								"tableliee"=> array("spip_auteurs_articles","spip_documents_liens","spip_mots_articles","spip_signatures","spip_versions","spip_versions_fragments","spip_forum"),
 								"temps" => "date",
@@ -59,6 +78,7 @@ function corbeille_table_infos($table){
 								"libelle_court" => ucfirst(strtolower(_T('lien_petitions'))),
 								),
 	"sites" =>			array(	"statut" => "refuse",
+								"table" => "syndic",
 								"tableliee"=> array("spip_syndic_articles","spip_mots_syndic"),
 								"temps" => "maj",
 								"page_voir" => array("sites",'id_syndic'),
@@ -66,8 +86,10 @@ function corbeille_table_infos($table){
 								"libelle_court" => _T('titre_syndication')
 								)	,
 	);
-	if (isset($corbeille_param[$table]))
-		return $corbeille_param[$table];
+	if (isset($param[$table]))
+		return $param[$table];
+	if ($table==-1) 
+		return array_merge(array_keys($corbeille_params), array_keys($param));
 	return false;
 }
 
@@ -80,19 +102,15 @@ function corbeille_table_infos($table){
  */
 function corbeille_vider($table, $ids=array()) {
 	include_spip('base/abstract_sql');
-	$corbeille_param = corbeille_table_infos($table);
-	if (isset($corbeille_param['table']))
-		$table = $corbeille_param['table'];
+	$params = corbeille_table_infos($table);
+	if (isset($params['table']))
+		$table = $params['table'];
 	
 	$type = objet_type($table);
-	$table_sql = table_objet_sql($type);
-	$id_table = id_table_objet($type);
+	$table_sql = 'spip_' . $table; // table_objet_sql($type) buggue car le pluriel de 'jeu' est 'jeux' et non 'jeus'
+	$id_table = isset($params['id'])?$params['id']:id_table_objet($type);
 
-#	$statut = $corbeille_param[$type_doc]["statut"];
-#	$titre = $corbeille_param[$type_doc]["titre"];
-#	$table_liee = $corbeille_param[$type_doc]["tableliee"];
-	
-	$statut = $corbeille_param['statut'];
+	$statut = $params['statut'];
 	if (!$statut)
 		return false;
 
@@ -112,7 +130,7 @@ function corbeille_vider($table, $ids=array()) {
 	// supprime les elements definis par la liste des index
 	sql_delete($table_sql,sql_in($id_table,$ids));
 	// suppresion des elements lies
-	if ($table_liee=$corbeille_param['tableliee']) {
+	if ($table_liee=$params['tableliee']) {
 		$trouver_table = charger_fonction('trouver_table','base');
 		foreach($table_liee as $unetable) {
 			$desc = $trouver_table($unetable);
