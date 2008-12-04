@@ -50,28 +50,30 @@
 				chaine = chaine + ",7";
 			}
 			if ($("#license1").is(":checked")) {
-						chaine = chaine + ",4,5";
+				chaine = chaine + ",4,5";
+
+
+
 
 				if ($("#license2").is(":checked")) {
-				
 					if ($("#license4").is(":checked")) {
-						// Commercial et non-commercial // Deriv et non-deriv
-						chaine = chaine + ",1,2,3,6";
+						// Commercial // Deriv
+						chaine = chaine + "";
 					
 					} else {
-						// Commercial et non-commercial // Deriv
-						chaine = chaine + ",1,2";
+						// Commercial // non deriv
+						chaine = chaine + ",6";
 					
 					}
 				
 
 				} else {
 					if ($("#license4").is(":checked")) {
-						// Commercial // Deriv et non-deriv
-						chaine = chaine + ",6";
+						// Commercial et non commercial //  deriv
+						chaine = chaine + ",2,1";
 					} else {
-						// Commercial // Deriv
-						chaine = chaine + "";
+						// Commercial et non commercial // Deriv et non
+						chaine = chaine + ",2,1,6,3";
 					}
 				}
 			
