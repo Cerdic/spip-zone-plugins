@@ -169,7 +169,7 @@ function cs_urls_propres_descrip($type, $id) {
 		)). "\n\n"
 		. $format . "\n\n"
 		. '|{{'. _T('couteau:2pts', array(
-			'objet'=>strtoupper(unicode2charset(html2unicode(_T('couteau:objet_'.$type)))).' '.$id
+			'objet'=>strtoupper(filtrer_entites(_T('couteau:objet_'.$type))).' '.$id
 		))."}}|\n"
 		. "|$res|\n"
 		. (strlen($url)

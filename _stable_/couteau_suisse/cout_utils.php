@@ -260,8 +260,8 @@ function cs_sauve_configuration() {
 
 include_spip('inc/charset');
 $sauve .= $temp = "\n######## "._T('couteauprive:pack_actuel_titre')." #########\n\n// "
-	. unicode2charset(html2unicode(_T('couteauprive:pack_actuel_avert')."\n\n"
-		. "\$GLOBALS['cs_installer']['"._T('couteauprive:pack_actuel', array('date'=>cs_date()))."'] = array(\n\n\t// "._T('couteauprive:pack_outils_defaut')."\n"
+	. filtrer_entites(_T('couteauprive:pack_actuel_avert')."\n\n"
+		. "\$GLOBALS['cs_installer']['"._T('couteauprive:pack_actuel', array('date'=>cs_date())."'] = array(\n\n\t// "._T('couteauprive:pack_outils_defaut')."\n"
 		. "\t'outils' =>\n\t\t'".join(",\n\t\t", $actifs)."',\n"
 		. "\n\t// "._T('couteauprive:pack_variables_defaut')."\n"))
 	. "\t'variables' => array(\n\t" . join(",\n\t", $metas_actifs) . "\n\t)\n);\n";

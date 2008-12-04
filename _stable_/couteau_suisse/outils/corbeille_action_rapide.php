@@ -68,13 +68,14 @@ function cs_corbeille_table_infos($table=false) {
 				"libelle_court" => _T('couteau:objet_petitions'),
 				),
 			"sites" => array( "statut" => "refuse",
+				"table" => "syndic",
 				"tableliee"=> array("spip_syndic_articles","spip_mots_syndic"),
 				"temps" => "maj",
 				"page_voir" => array("sites",'id_syndic'),
 				"libelle_court" => _T('couteau:objet_syndics')
 				)	,
 		);
-		if(is_array($corbeille_params)) $params = array_merge($corbeille_params, $params);
+		if(is_array($corbeille_params)) $params = array_merge($params, $corbeille_params);
 	}
 	if(!$table) return $params;
 	if(isset($params[$table])) return $params[$table];
@@ -94,10 +95,10 @@ function cs_corbeille_gerer($table, $ids=array(), $vider=false) {
 	if (isset($params['table'])) $table = $params['table'];
 	include_spip('base/abstract_sql');
 	$type = objet_type($table);
-	$table_sql = table_objet_sql($type);
-	$id_table = id_table_objet($type);
+	$table_sql = 'spip_' . $table; // table_objet_sql($type) buggue car le pluriel de 'jeu' est 'jeux' et non 'jeus'
+	$id_table = isset($params['id'])?$params['id']:id_table_objet($type);
 	if (!$params['statut']) return false;
-
+//echo "$type - $table_sql - $id_table - ",table_objet_sql($type),'<hr>';
 	// determine les index des elements a supprimer
 	$ids = $ids===-1
 		?array_map('reset',sql_allfetsel($id_table,$table_sql,'statut='.sql_quote($params['statut'])))
