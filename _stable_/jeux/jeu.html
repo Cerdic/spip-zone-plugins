@@ -12,8 +12,8 @@
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
 
-	<h1 class="entry-title">[(#REM|sinon{<:jeux:jeu_court:>}|replace{@id@,#ID_JEU}|replace{@nom@,#TITRE_PUBLIC|sinon{<:info_sans_titre_2:>}})]</h1>
-	[<p class="soustitre">(#TYPE_JEU)</p>]
+	<h1 class="entry-title">[(#REM|sinon{<:jeux:jeu_court:>}|replace{@id@,#ID_JEU}|replace{@nom@,#TYPE_JEU})]</h1>
+	<p class="soustitre">[(#TITRE_PUBLIC|sinon{<:info_sans_titre:>})]</p>
 	[<div id="jeu-#ID_JEU" class="#EDIT{contenu} ajax">(#CONTENU|image_reduire{500,0})</div>]
 
 	[(#REM) Pied de page ]
