@@ -32,10 +32,10 @@
  font-size:90%;
  color:#3F5264;
  border:1px solid #F78C54;
- padding:3px; 
- margin:3px; 
+ padding:0.4em; 
+ margin:0.4em;
  background-color:#FFEADE;
- width:100%;
+/* width:100%; */
 }
 
 .jeux_titre{ 
@@ -170,19 +170,21 @@ table.jeux_grille td{
 }
 
 /* Deplier / Replier */
-.jeux_global .titrem { 
-	display:inline;
-/*	display:block; background-color:#eee; */
-	padding-top:6px; padding-bottom:4px;
+.jeux_deplie { 
+	display:block;
+	background-image:url([(#EVAL{_DIR_IMG_PACK}|url_absolue)]deplierbas.gif);
 	background-repeat:no-repeat;
-	background-position:[(#ENV{ltr}|choixsiegal{left,left,right})] 0.6em;
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]:14px;
+	background-position:left center;
+	padding-left:15px;
+	margin:1em auto 0;
 	cursor:pointer;
 }
-.jeux_global .replie { background-image:url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierhaut[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif); }
-.jeux_global .deplie { background-image:url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierbas.gif); }
-.jeux_global .impliable {}
-.jeux_global .bloc_depliable.replie { display:none; }
-.jeux_global .bloc_depliable.deplie { display:block; background:none; }
+.jeux_replie { 
+	background-image:url([(#EVAL{_DIR_IMG_PACK}|url_absolue)]deplierhaut.gif); 
+}
+.jeux_deplie_contenu {
+	border:dotted thin gray;
+	margin:0pt 15px 1em;
+}
 
 .jeux_rem { display:none; }

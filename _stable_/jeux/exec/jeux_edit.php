@@ -39,7 +39,7 @@ function exec_jeux_edit(){
 	
 	if ($id_jeu)
 		echo icone_horizontale(_T('jeux:retourner_jeu'),generer_url_ecrire('jeux_voir','id_jeu='.$id_jeu),find_in_path('img/jeu-loupe.png'),'',false);
-	echo icone_horizontale(_T('jeux:jeux_tous'),generer_url_ecrire('jeux_tous'),find_in_path('img/jeux-tous.png'),'',false),
+	echo icone_horizontale(_T('jeux:liste_jeux'),generer_url_ecrire('jeux_tous'),find_in_path('img/jeux-tous.png'),'',false),
 		fin_boite_info(true);
 
 	

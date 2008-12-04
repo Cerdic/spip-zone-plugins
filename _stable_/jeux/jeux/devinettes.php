@@ -68,7 +68,7 @@ function devinettes_reponse($texte, $id) {
  if (function_exists('image_graver')) $image = filtrer('image_graver', $image);
  $image = inserer_attribut($image, 'align', 'right', false, true);
  $image = aligner_droite(inserer_attribut($image, 'class', 'no_image_filtrer', false, true));
- $texte = jeux_block_invisible($id, _T('jeux:reponse'), $image);
+ $texte = jeux_block_depliable(_T('jeux:reponse'), $image);
  return $texte?"<div class=\"devinettes_reponse\">$texte</div>":'';
 }
 

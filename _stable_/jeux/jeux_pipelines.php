@@ -26,8 +26,8 @@ function jeux_pre($chaine, $indexJeux){
 	$liste = jeux_liste_des_jeux($chaine, $indexJeux);
 	// calcul des fichiers necessaires pour le header
 	if(count($liste)) {
-		// on oblige qd meme jeux.css et layer.js si un jeu est detecte
-		$header = jeux_stylesheet_html('jeux') ."\n". jeux_javascript('layer') . "\n";
+		// on oblige qd meme jeux.css et jeux.js si un jeu est detecte
+		$header = jeux_stylesheet_html('jeux') ."\n". jeux_javascript('jeux') . "\n";
 		// css et js des jeux detectes
 		foreach($liste as $jeu) $header .= jeux_stylesheet($jeu) . "\n";
 		foreach($liste as $jeu) $header .= jeux_javascript($jeu) . "\n";
@@ -146,31 +146,27 @@ function jeux_taches_generales_cron($taches_generales){
 	return $taches_generales;
 }
 
-function cron_jeux_cron($t,$attente=86400){
-
+function cron_jeux_cron($t, $attente=86400){
 	$date = date("YmdHis", time() - $attente);
 	include_spip('inc/utils');
-	
 	$sup = '(';
 	$i = 0;
 	$requete = spip_query("SELECT id_jeu from spip_jeux WHERE statut='poubelle' and 'date'<".$date);
-	
-	while ($ligne =spip_fetch_array($requete)){	
-
-		$sup .=($i==0) ?'':',';
-		$sup .=$ligne['id_jeu'];
+	while ($ligne = spip_fetch_array($requete)){	
+		$sup .= $i?',':'';
+		$sup .= $ligne['id_jeu'];
 		$i++;
 	}
-	$sup.=(')');
+	$sup .= ')';
 	if ($sup!='()') {
 		spip_query('DELETE FROM spip_jeux WHERE `id_jeu` IN '.$sup);
 		spip_query('DELETE FROM spip_jeux_resultats WHERE `id_jeu` IN '.$sup);
 		spip_log('suppression jeux poubelle'.$sup);
-		}
-	
 	}
+	
+}
 
-// en 1.9.3 c'est genie_ et pas cron_
+// SPIP >= 2.0 : c'est genie_ et pas cron_
 function genie_jeux_cron($time) {
 	return cron_jeux_cron($time);
 }

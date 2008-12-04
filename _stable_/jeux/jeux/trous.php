@@ -57,7 +57,8 @@ function trous_inserer_le_trou($indexJeux, $indexTrou, $size, $corriger) {
   // Initialisation du code a retourner
   $nomVarSelect = "var{$indexJeux}_T{$indexTrou}";
   $mots = $propositionsTROUS[$indexTrou];
-  $prop = strtolower($_POST[$nomVarSelect] = trim($_POST[$nomVarSelect]));						  // function TrackFocus(BoxNumber){CurrentWord = BoxNumber;}
+  $temp = $_POST[$nomVarSelect] = trim($_POST[$nomVarSelect]);
+  $prop = init_mb_string()?mb_strtolower($temp,$GLOBALS['meta']['charset']):strtolower($temp);		  // function TrackFocus(BoxNumber){CurrentWord = BoxNumber;}
   $codeHTML = " <input name=\"$nomVarSelect\" class=\"jeux_input trous\" size=\"$size\"  type=\"text\"" //onfocus=\"TrackFocus('$nomVarSelect')\"
 	  . ($prop?" value=\"{$_POST[$nomVarSelect]}\"":'') . "> "
 	 ;// . " (".join('|', $mots).")";
@@ -91,14 +92,13 @@ function trous_afficher_indices($indexJeux) {
  global $propositionsTROUS;
  foreach ($propositionsTROUS as $prop) $indices[] = $prop[0];
  shuffle($indices);
- return '<br/>'.jeux_block_invisible('trous_indices_'.$indexJeux, _T('jeux:indices'), '<center>'.join(' -&nbsp;', $indices).'</center>');
+ return '<br/>'.jeux_block_depliable(_T('jeux:indices'), '<center>'.charset2unicode(join(' -&nbsp;', $indices)).'</center>');
 }
 
 function jeux_trous($texte, $indexJeux) {
   global $propositionsTROUS, $scoreTROUS;
   $titre = $html = false;
   $indexTrou = $scoreTROUS = 0;
-  jeux_block_init();
 
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('trous', $texte); 

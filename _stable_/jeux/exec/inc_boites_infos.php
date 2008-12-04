@@ -72,13 +72,14 @@ function boite_infos_auteur($id_auteur, $type_jeu) {
 	echo fin_boite_info(true);
 }
 
-function boite_infos_jeu($id_jeu, $type_jeu) {
+function boite_infos_jeu($id_jeu, $type_jeu, $statut='') {
 	echo debut_boite_info(true);
 	$nb_res = sql_countsel('spip_jeux_resultats', 'id_jeu='.$id_jeu);
 	$type_jeu = _T('jeux:jeu_court',array('id'=>$id_jeu,'nom'=>$type_jeu));
 	echo "<strong>$type_jeu</strong><br />",
-		(_request('exec')=='jeux_voir'?'':
-			icone_horizontale(_T('jeux:voir_jeu'),generer_url_ecrire('jeux_voir','id_jeu='.$id_jeu),find_in_path('img/jeu-loupe.png'),'',false) ),
+		(_request('exec')=='jeux_voir'
+			?($statut=='publie'?icone_horizontale(_T('voir_en_ligne'),generer_url_public('jeu', "id_jeu=$id_jeu&var_mode=calcul"),'racine-24.gif','',false):'')
+			:icone_horizontale(_T('jeux:voir_jeu'),generer_url_ecrire('jeux_voir','id_jeu='.$id_jeu),find_in_path('img/jeu-loupe.png'),'',false) ),
 		(_request('exec')=='jeux_edit'?'':
 			icone_horizontale(_T('jeux:modifier_ce_jeu'),generer_url_ecrire('jeux_edit','id_jeu='.$id_jeu),find_in_path('img/jeu-crayon.png'),'',false) ),
 		( (_request('exec')=='jeux_resultats_jeu') || !$nb_res?'':
@@ -98,7 +99,7 @@ function boite_infos_accueil() {
 		icone_horizontale(_T('jeux:nouveau_jeu'),generer_url_ecrire('jeux_edit','nouveau=oui'),find_in_path('img/jeu-nouveau.png'),'',false) ),
 		// 'liste des jeux' sur les pages hors 'jeux_tous'
 		( _request('exec')=='jeux_tous'?'':
-		icone_horizontale(_T('jeux:jeux_tous'),generer_url_ecrire('jeux_tous'),find_in_path('img/jeux-tous.png'),'',false) );
+		icone_horizontale(_T('jeux:liste_jeux'),generer_url_ecrire('jeux_tous'),find_in_path('img/jeux-tous.png'),'',false) );
 		// 'gerer les resultats' sur les pages hors 'jeux_gerer_resultats' si 1 jeu au moins est present
 		if (autoriser('gererresultats')){
 		( (_request('exec')=='jeux_gerer_resultats') || !$nb_res?'':
@@ -123,7 +124,7 @@ function boite_infos_jeux_tous() {
 function boite_info_jeux_edit(){
 	return debut_cadre_relief(find_in_path('img/jeu-voir.png'),true,'',_T('jeux:inserer_jeu'))
 	. "<div>"._T('jeux:inserer_jeu_explication')."</div>"
-	. icone_horizontale(_T('jeux:jeux_tous'),generer_url_ecrire('jeux_tous'),find_in_path('img/jeux-tous.png'),'','',false)
+	. icone_horizontale(_T('jeux:liste_jeux'),generer_url_ecrire('jeux_tous'),find_in_path('img/jeux-tous.png'),'','',false)
 	. icone_horizontale(_T('jeux:nouveau_jeu'),generer_url_ecrire('jeux_edit','nouveau=oui'),find_in_path('img/jeu-nouveau.png'),'','',false)
 	. fin_cadre_relief(true);
 }

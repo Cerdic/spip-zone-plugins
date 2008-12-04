@@ -66,8 +66,32 @@ $GLOBALS['cs_introduire'][] = 'pas_de_balise_jeux';
 
 // ajoute un identifiant dans le formulaire, correspondant au jeu
 function ajoute_id_jeu($texte, $id_jeu) {
-	$texte = str_replace('</form>', "<input type='hidden' name='id_jeu' value='".$id_jeu."'/>\n</form>", $texte);
+	$texte = str_replace('</form>', "<input type='hidden' name='id_jeu' value='".$id_jeu."' />\n</form>", $texte);
 	return $texte;
-;}
+}
+
+// renvoie le titre du jeu que l'on peut trouver grace au separateur [titre]
+function titre_jeu($texte) {
+	include_spip('jeux_utils');
+	return jeux_trouver_titre_public($texte);
+}
+
+function balise_TITRE_PUBLIC_dist($p) {
+	$texte = champ_sql('contenu', $p);
+	$p->code = "titre_jeu($texte)";
+	return $p;
+}
+function balise_CONTENU_dist($p) {
+	$id = champ_sql('id_jeu', $p);
+	$texte = champ_sql('contenu', $p);
+	$p->code = "ajoute_id_jeu($texte, $id)";
+	return $p;
+}
+
+include_spip('public/interfaces');
+global $table_des_traitements;
+// TITRE_PUBLIC est un TITRE :
+if (!isset($table_des_traitements['TITRE_PUBLIC']))
+	$table_des_traitements['TITRE_PUBLIC'] = $table_des_traitements['TITRE'];
 
 ?>

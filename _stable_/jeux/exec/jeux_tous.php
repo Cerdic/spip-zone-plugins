@@ -8,7 +8,7 @@ function exec_jeux_tous(){
 	$par = _request('par');
 	($par =='') ? $par='date' : $par = $par;
 
-	jeux_debut_page(_T("jeux:jeux_tous"));
+	jeux_debut_page(_T("jeux:liste_jeux"));
 
 	jeux_compat_boite('debut_gauche');
 	boite_infos_accueil();
@@ -17,7 +17,7 @@ function exec_jeux_tous(){
 	jeux_compat_boite('debut_droite');
 	debut_cadre_relief();
 	
-	echo gros_titre(_T("jeux:jeux_tous"), '', false);
+	echo gros_titre(_T("jeux:liste_jeux"), '', false);
 	
 	include_spip('public/assembler');
 	debut_cadre('liste');

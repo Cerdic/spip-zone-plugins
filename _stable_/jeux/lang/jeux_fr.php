@@ -54,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'jeux'		=> 'Jeux',
 'jeux_' 	=> 'Jeux&nbsp;:',
 'jeu_numero' 	=> 'Jeu num&eacute;ro @id@ (@nom@)',
+'jeu_court'	=> 'Jeu n&deg;@id@ (@nom@)',
 'jeu_numero_court' 	=> 'ID',
 'jeu_type'	=> 'Type',
 'jeu_titre'	=> 'Titre',
@@ -62,10 +63,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveau_jeu'	=> 'Nouveau jeu',
 'explication_jeu'=> 'Le titre priv&eacute; sert simplement &agrave; identifier le jeu en partie priv&eacute;e.<br /><br />Le contenu du jeu doit suivre la syntaxe d&eacute;crite dans <a href="http://www.spip-contrib.net/Des-jeux-dans-vos-articles">la&nbsp;documentation</a> du plugin.<br /><br />Ici, les balises &lt;jeux> et &lt;/jeux> sont inutiles.',
 'modifier_jeu'	=> 'Modifier le jeu num&eacute;ro @id@ (@nom@)',
-'jeu_court'	=> 'Jeu n&deg;@id@ (@nom@)',
 'modifier_ce_jeu'	=> 'Modifier ce jeu',
 'voir_jeu'			=> 'Voir le jeu',
-'jeux_tous'			=> 'Liste des jeux',
+'liste_jeux'			=> 'Liste des jeux',
 'retourner_jeu'		=> 'Retourner au jeu',
 'jeu_titre_prive'	=> 'Titre priv&eacute;',
 'jeu_titre_public'	=> 'Titre public',
@@ -132,6 +132,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'doc_jeux' => 'Documentation générale',
 'doc_scores' => 'Documentation sur les scores',
+
+// Corbeille
+  'jeux_corbeille_tous' => "@nb@ jeux dans la corbeille",
+  'jeux_corbeille_un' => "1 jeu dans la corbeille",
+  'jeux_tous' => 'Tous les jeux',
 
 );
 

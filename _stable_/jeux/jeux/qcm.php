@@ -150,7 +150,8 @@ function qcm_un_trou($nomVarSelect, $indexQCM) {
   global $qcms;
   if (($sizeInput = intval(jeux_config('trou')))==0)
 	foreach($qcms[$indexQCM]['propositions'] as $mot) $sizeInput = max($sizeInput, strlen($mot));
-  $prop = strtolower($_POST[$nomVarSelect] = trim($_POST[$nomVarSelect]));
+  $temp = $_POST[$nomVarSelect] = trim($_POST[$nomVarSelect]);
+  $prop = init_mb_string()?mb_strtolower($temp,$GLOBALS['meta']['charset']):strtolower($temp);
   return " &nbsp; &nbsp; &nbsp;<input name=\"$nomVarSelect\" class=\"jeux_input qcm_input\" size=\"$sizeInput\" type=\"text\"> ";
 }
 
@@ -165,6 +166,7 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
   $trou = $qcms[$indexQCM]['nbpropositions']==1;
   $qrm = $qcms[$indexQCM]['qrm'];
   $nbcol = jeux_config('colonnes');
+  $lower = init_mb_string()?'mb_strtolower':'strtolower';
 
   // affichage des points dans la question
   if ($gestionPoints) {
@@ -223,7 +225,8 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 				 .'</div>';
 
 			// bonne reponse
-			$bonneReponse = ($trou && in_array(strtolower($reponse), $qcms[$indexQCM]['propositions']))
+			$lower = init_mb_string()?mb_strtolower($reponse,$GLOBALS['meta']['charset']):strtolower($reponse);
+			$bonneReponse = ($trou && in_array($lower, $qcms[$indexQCM]['propositions']))
 				|| ($qcms[$indexQCM]['bonnesreponses'][$reponse]==1);
 	
 			// si ce n'est pas un trou, on donne les points de la reponse quoiqu'il arrive

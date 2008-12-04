@@ -101,10 +101,10 @@ function jeux_liste_mots($texte) {
 		return array_unique($split2);
 }
 function jeux_liste_mots_maj($texte) {
-	return jeux_liste_mots(strtoupper($texte));
+	return jeux_liste_mots(init_mb_string()?mb_strtoupper($texte,$GLOBALS['meta']['charset']):strtoupper($texte));
 }
 function jeux_liste_mots_min($texte) {
-	return jeux_liste_mots(strtolower($texte));
+	return jeux_liste_mots(init_mb_string()?mb_strtolower($texte,$GLOBALS['meta']['charset']):strtolower($texte));
 }
 
 // retourne la boite de score
@@ -198,20 +198,10 @@ function jeux_javascript($b) {
  return $f?'<script type="text/javascript" src="'.$f.'"></script>'."\n":'';
 }
 
-// deux fonctions qui utilisent inc/layer.php
-function jeux_block_init() {
-  global $spip_version_code;
-  if (defined('_SPIP19100')) { $temp = _DIR_IMG_PACK; define(_DIR_IMG_PACK, 'ecrire/'._DIR_IMG_PACK);	}	// compatibilite avec 1.9.1
-  include_spip('inc/layer');
-   if (defined('_SPIP19100')) define(_DIR_IMG_PACK, $temp);		// compatibilite avec 1.9.1
-}
-function jeux_block_invisible($id, $texte, $block) {
+// pour obtenir un bloc depliable
+function jeux_block_depliable($texte, $block) {
  if (!strlen($texte)) return '';
- if(function_exists('bouton_block_depliable'))						// fonction introduite en 1.93
- 	return bouton_block_depliable($texte, false, $id).debut_block_depliable(false, $id).$block.fin_block();
- else return defined('_SPIP19100')?				// compatibilite avec 1.9.1
-	bouton_block_visible($id).$texte.debut_block_visible($id).$block.fin_block()
-	:bouton_block_invisible($id).$texte.debut_block_invisible($id).$block.fin_block();
+ return "<div class='jeux_deplie jeux_replie'>$texte</div><div class='jeux_deplie_contenu jeux_invisible'>$block</div>";
 }
 
 // deux fonctions qui encadrent un jeu dans un formulaire

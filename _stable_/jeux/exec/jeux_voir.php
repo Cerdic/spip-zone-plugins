@@ -32,7 +32,7 @@ function exec_jeux_voir(){
 			
 	jeux_compat_boite('debut_gauche');
 	
-	boite_infos_jeu($id_jeu, $type_jeu);
+	boite_infos_jeu($id_jeu, $type_jeu, $statut);
 	boite_infos_accueil();
 	
 	debut_cadre_relief();
@@ -53,8 +53,8 @@ function exec_jeux_voir(){
 			$statut=_request('statut_modif');
 		}
 		gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$type_jeu)),puce_statut($statut, " style='vertical-align: center'"), '', false);
-		echo propre("<div style='font-weight:bold'>$titre_prive</div>");
-		if($titre_public) echo propre("<div style='font-weight:bold'>$titre_public</div>");
+		echo propre("<div style='font-weight:bold; margin-bottom:0.6em;'>$titre_prive</div>");
+		if($titre_public) echo propre("<div style='font-weight:bold; margin-bottom:0.5em;'>$titre_public</div>");
 
 		debut_cadre_relief();
 		echo "<form method='post' name='statut_edit'>\n";

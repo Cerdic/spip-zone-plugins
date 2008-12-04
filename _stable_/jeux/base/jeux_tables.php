@@ -50,4 +50,15 @@ $tables_principales['spip_jeux_resultats'] =
 global $table_des_traitements;
 $table_des_traitements['CONTENU'][]= 'propre(%s)';
 
+// Declarations pour la corbeille (plugin Corbeille, ou Couteau Suisse)
+global $corbeille_params;
+$corbeille_params['jeux'] = array (
+	"statut" => 'poubelle',
+	"table" => 'jeux',
+	"id"	=> 'id_jeu',
+	"tableliee"=> array('spip_jeux_resultats'),
+	"temps" => 'date',
+	"libelle" => _T('jeux:jeux_tous'),
+	"libelle_court" => _T('jeux:jeux')
+);
 ?>
