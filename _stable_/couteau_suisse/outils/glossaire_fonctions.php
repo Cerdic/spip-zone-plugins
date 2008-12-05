@@ -84,13 +84,13 @@ function cs_rempl_glossaire($texte) {
 		return str_replace(_CS_SANS_GLOSSAIRE, '', $texte);
 	// mise en static de la table des mots pour eviter d'interrroger la base a chaque fois
 	// attention aux besoins de memoire...
-	static $glossaire_array;
+	static $glossaire_array = null;
 	if(!isset($glossaire_array)) {
 		$glossaire_array = array();
 		// compatibilite SPIP 1.92
 		$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array';
 		$query = spip_query(_GLOSSAIRE_QUERY);
-		while($glossaire_array[] = $fetch($query));
+		while($r = $fetch($query)) $glossaire_array[] = $r;
 	}
 	$limit = defined('_GLOSSAIRE_LIMITE')?_GLOSSAIRE_LIMITE:-1;
 	// protection des liens SPIP
