@@ -52,6 +52,7 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 	, $exec, $id_auteur=0, $pas=10, $return=true) {
 
 	include_spip('inc/spiplistes_api');
+	include_spip('inc/spiplistes_api_courrier'); 
 
 	$position = intval($_GET[$nom_position]);
 	$pas = intval($pas);

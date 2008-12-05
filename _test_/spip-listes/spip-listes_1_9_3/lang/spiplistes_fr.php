@@ -500,6 +500,8 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'inconnu' => 'n\'est plus abonn&eacute; &agrave; la liste'
 , 'infos_liste' => 'Informations sur cette liste'
 , 'editeur' => 'Editeur : '
+, 'html_description' => " Texte enrichi (caract&egrave;res en gras ou en italique, parfois accompagn&eacute; d&#39;images)"
+, 'texte_brut' => "Texte brut"
 
 // tableau items *_options
 , 'Liste_de_destination' => "Liste de destination"

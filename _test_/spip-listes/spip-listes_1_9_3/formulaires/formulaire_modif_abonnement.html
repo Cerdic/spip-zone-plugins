@@ -8,7 +8,7 @@
 
 ][(#REM)
 	________________________
-	Message de confirmation (si présent)
+	Message de confirmation (si present)
 	
 ][(#ENV*{message_formulaire})]
 
@@ -66,9 +66,9 @@
 			<div style="text-align: left;"> 
 				<strong><:spiplistes:format_de_reception:> :</strong><br /> 
 				<input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{'checked=checked',''})]  type="radio" id='fslhtml' />
-				<label for='fslhtml'><:spiplistes:html:></label><br /> 
+				<label for='fslhtml'><:spiplistes:html:><:spiplistes:html_description:></label><br /> 
 				<input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{'checked=checked',''})] type="radio" id='fsltexte' />
-				<label for='fsltexte'><:spiplistes:texte:></label><br /> 
+				<label for='fsltexte'><:spiplistes:texte_brut:></label><br /> 
 				<input name="suppl_abo" [(#ENV{format}|=={non}|?{'checked=checked',''})] value="non" type="radio" id='fslnon' />
 				<label for='fslnon'><:spiplistes:desabonnement:></label><br /> 
 			</div> 
