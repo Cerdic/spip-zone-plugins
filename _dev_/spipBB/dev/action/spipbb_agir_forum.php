@@ -70,7 +70,7 @@ function action_spipbb_agir_forum() {
 		$spipbb_meta=@unserialize($GLOBALS['meta']['spipbb']);
 		$result = sql_select("*", "spip_mots_forum", array("id_forum=$id_forum","id_mot=".$spipbb_meta['id_mot_ferme']) );
 		if ($rowo = sql_fetch($result)) {
-			$reqd=sql_query("DELETE from spip_mots_forum WHERE id_forum=$id_forum AND id_mot=".$spipbb_meta['id_mot_ferme']);
+			$reqd=sql_delete("spip_mots_forum","id_forum=$id_forum AND id_mot=".$spipbb_meta['id_mot_ferme']);
 		} else {
 			spipbb_log("clef non trouvee ouvrir : $id_forum AND id_mot=".$spipbb_meta['id_mot_ferme'],3,"action_spipbb_agir_forum");
 		}

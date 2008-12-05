@@ -32,10 +32,11 @@ function action_spipbb_editer_infos() {
 		}
 	}
 	
-	$set='';
+	$champs_update=array();
+
 	foreach($traiter_chps as $k => $v) {
 		if($k=="date_crea_spipbb" && $v=='') {
-			$set.= ",".$k."=NOW()";
+			$champs_update[$k]="NOW()";
 		}
 		# h.10/11 .. tempo : ne pas traiter !
 		# ulterieurement : prepa tableau idem modele/form_profil .. .html
@@ -45,22 +46,22 @@ function action_spipbb_editer_infos() {
 		}
 		*/
 		else {
-			$set.= ",".$k."="._q($v);
+			$champs_update[$k]=_q($v);
 		}
 	}
 	$set=substr($set,1);
 	if(strlen($set)>0) { $sep = ","; }
 	
 	if($nouv_inscrit) {
-		spip_query("INSERT INTO spip_".$table_support." SET id_auteur=".$id_auteur." ".$sep.$set);
+		@sql_insertq("spip_".$table_support, array_merge(array(id_auteur=>$id_auteur),$champs_update) );
 	}
 	else {
-		spip_query("UPDATE spip_".$table_support." SET $set WHERE id_auteur=".$id_auteur);	
+		@sql_updateq("spip_".$table_support, 
+					$champs_update,
+					"id_auteur=".$id_auteur);
 	}
 
-	
 	redirige_par_entete($redirect);
 }
-
 
 ?>

@@ -219,7 +219,6 @@ function bouton_formulaire_annonce($id_sujet, $mode, $src_img) {
 	echo "<input type='hidden' name='mode' value='".$mode."' />\n";
 	echo "<input type='image' src='".$src_img."' title='"._T('spipbb:fil_annonce_'.$mode)."' />\n";
 	echo "</form></div>\n";
-
 }
 
 // appel exec/spipbb_forum.php
@@ -275,7 +274,7 @@ function url_post_tranche($id_post, $id_sujet, $compt_rang="") {
 		$url_post = generer_url_ecrire("spipbb_sujet","id_sujet=".$id_sujet);
 	}
 	else {
-		$nbr_id=sql_count(spip_query("SELECT id_forum FROM spip_forum WHERE id_thread=$id_sujet"));
+		$nbr_id=sql_count(sql_select("id_forum","spip_forum","id_thread=$id_sujet"));
 		if ($nbr_id<=$fixlimit)
 			{ $url_post = generer_url_ecrire("spipbb_sujet", "&id_sujet=".$id_sujet."#".$id_post); }
 		else {
@@ -362,9 +361,9 @@ function bouton_deplace_sujet($id_forum, $id_sujet) {
 //
 function branche_rubriques($id) {
 	$liste = array();
-	$res = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=$id");
+	$res = sql_select("id_rubrique","spip_rubriques","id_parent=$id");
 	if(sql_count($res)) {
-		while($row=spip_fetch_array($res)) {
+		while($row=sql_fetch($res)) {
 			$liste[]=$row['id_rubrique'];
 		}
 		foreach($liste as $ids) {
@@ -383,8 +382,8 @@ function branche_articles($id) {
 	// lister articles
 	$listart = array();
 	foreach($a as $r) {
-		$ra = spip_query("SELECT id_article FROM spip_articles WHERE id_rubrique=$r");
-		while($row=spip_fetch_array($ra)) {
+		$ra = sql_select("id_article","spip_articles","id_rubrique=$r");
+		while($row=sql_fetch($ra)) {
 			$listart[]=$row['id_article'];
 		}
 	}

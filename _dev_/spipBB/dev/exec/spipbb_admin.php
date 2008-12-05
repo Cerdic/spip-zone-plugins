@@ -173,34 +173,15 @@ function exec_spipbb_admin() {
 
 			if($row['statut']=='publie') {
 				// nbre total de sujets de ce $id_forum
-				/* c: 7/2/8 compatibilite pg_sql
-				$req_sujet= "SELECT id_forum FROM spip_forum
-							WHERE id_article='$id_forum'
-							AND id_parent=0 AND statut IN ('publie', 'off', 'prop')
-							";
-				$res_sujet = sql_query($req_sujet);*/
 				$res_sujet = sql_select("id_forum","spip_forum","id_article='$id_forum' AND id_parent=0 AND statut IN ('publie', 'off', 'prop')");
 
 				$nbr_sujet=sql_count($res_sujet);
 
 				// nombre total de posts de ce $id_forum
-				/* c: 7/2/8 compatibilite pg_sql
-				$req_post= "SELECT id_forum FROM spip_forum
-							WHERE id_article='$id_forum' AND statut IN ('publie', 'off', 'prop')
-							";
-				$res_post = sql_query($req_post);
-				*/
 				$res_post = sql_select("id_forum","spip_forum","id_article='$id_forum' AND statut IN ('publie', 'off', 'prop')");
 				$nbr_post=sql_count($res_post);
 
 				// dernier post
-				/* c: 7/2/8 compatibilite pg_sql
-				$req_date = "SELECT id_forum, id_thread, DATE_FORMAT(date_heure, '%d/%m/%Y %H:%i') AS dateur
-							FROM spip_forum
-							WHERE id_article=$id_forum AND statut IN ('publie', 'off', 'prop')
-							ORDER BY date_heure DESC LIMIT 0, 1";
-				$res_date = sql_query($req_date);
-				*/
 				$res_date = sql_select(array("id_forum","id_thread","DATE_FORMAT(date_heure, '%d/%m/%Y %H:%i') AS dateur"), // rows
 										"spip_forum", // from
 										"id_article=$id_forum AND statut IN ('publie', 'off', 'prop')", // where

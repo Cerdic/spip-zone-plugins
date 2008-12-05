@@ -76,21 +76,20 @@ function exec_spipbb_affecter_affiche() {
 
 
 	// cherche message du thread a deplacer
-	$req=spip_query("SELECT id_forum FROM spip_forum 
-					WHERE id_thread=$id_sujet AND id_article=$id_art_orig");
+	$req=sql_select("id_forum",
+					"spip_forum",
+					"id_thread=$id_sujet AND id_article=$id_art_orig");
 
-	while ($row=spip_fetch_array($req)) {
+	while ($row=sql_fetch($req)) {
 		$idf = $row['id_forum'];
-		spip_query("UPDATE spip_forum SET id_article = $id_art_new WHERE id_forum=$idf");
+		@sql_update("spip_forum",array('id_article' => $id_art_new),"id_forum=$idf");
 	}
 
 	// recupere info pour affichage
-	$rqo=spip_query("SELECT titre FROM spip_articles WHERE id_article=$id_art_orig");
-	$ro=spip_fetch_array($rqo);
+	$ro=sql_fetsel("titre","spip_articles","id_article=$id_art_orig");
 	$titre_orig = $ro['titre'];
 
-	$rqn=spip_query("SELECT titre FROM spip_articles WHERE id_article=$id_art_new");
-	$rn=spip_fetch_array($rqn);
+	$rn=sql_fetsel("titre","spip_articles","id_article=$id_art_new");
 	$titre_new = $rn['titre'];
 
 	debut_cadre_relief("");

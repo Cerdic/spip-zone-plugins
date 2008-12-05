@@ -25,22 +25,26 @@ spipbb_log('included',2,__FILE__);
 #
 function action_spipbb_action() {
 
-	global $action, $arg, $hash, $id_auteur;
-	include_spip('inc/securiser_action');
-	if (!verifier_action_auteur("$action-$arg", $hash, $id_auteur)) {
-		include_spip('inc/minipres');
-		minipres(_T('info_acces_interdit'));
-	}
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
+	$redirect = rawurldecode(_request('redirect'));
 
 	preg_match('/^(\w+)\W(.*)$/', $arg, $r);
+	/* $r = Array 
+		0 -> action-id
+		1 -> action
+		2 -> idforum
+	*/
 	$var_nom = 'action_spipbb_action_' . $r[1];
 	if (function_exists($var_nom)) {
-		spipbb_log("$var_nom $r[2]",3,"A_a_s_a");
+		spipbb_log("action: $var_nom $r[2]",3,"A_a_s_a");
 		$var_nom($r[2]);
 	}
 	else {
-		spipbb_log("action $action: $arg incompris",3,"A_a_s_a");
+		spipbb_log("action: $action: $arg incompris",3,"A_a_s_a");
 	}
+
+	redirige_par_entete($redirect);	
 } // action_spipbb_action
 
 
@@ -48,42 +52,33 @@ function action_spipbb_action() {
 // lier le sujet au mot "annonce"
 //
 function action_spipbb_action_sujetannonce($arg) {
-	global $redirect;
-	global $id_mot_annonce, $mode;
+	$id_mot_annonce=_request('id_mot_annonce');
+	$mode=_request('mode');
 	$arg = intval($arg); // id_sujet
-
+	spipbb_log("action_spipbb_action_sujetannonce: $id_mot_annonce, $arg, $mode",3,"a_s_a_sua");
+	
 	if ($mode=="annonce") {
-		// c: 10/2/8 compat pg_sql
-		//sql_query("INSERT INTO spip_mots_forum (id_mot,id_forum) VALUES ('$id_mot_annonce','$arg')");
-		sql_insertq("spip_mots_forum",array('id_mot'=> $id_mot_annonce,'id_forum'=>'$arg'));
+		@sql_insertq("spip_mots_forum",array('id_mot'=> $id_mot_annonce,'id_forum'=>$arg));
 	}
 	elseif ($mode=="desannonce") {
-		// c: 10/2/8 compat pg_sql
-		//sql_query("DELETE FROM spip_mots_forum WHERE id_mot=$id_mot_annonce AND id_forum=$arg");
-		sql_delete("spip_mots_forum","id_mot=$id_mot_annonce AND id_forum=$arg");
+		@sql_delete("spip_mots_forum","id_mot=$id_mot_annonce AND id_forum=$arg");
 	}
-	redirige_par_entete(rawurldecode($redirect));
 }
 
 #
 # lier le forum au mot "annonce"
 #
 function action_spipbb_action_forumannonce($arg) {
-	global $redirect;
-	global $id_mot_annonce, $mode;
+	$id_mot_annonce=_request('id_mot_annonce');
+	$mode=_request('mode');
 	$arg = intval($arg); // id_article
 
 	if ($mode=="annonce") {
-		// c: 10/2/8 compat pg_sql
-		//sql_query("INSERT INTO spip_mots_articles (id_mot,id_article) VALUES ('$id_mot_annonce','$arg')");
 		sql_insertq("spip_mots_articles",array('id_mot'=> $id_mot_annonce,'id_article'=>$arg));
 	}
 	elseif ($mode=="desannonce") {
-		// c: 10/2/8 compat pg_sql
-		//sql_query("DELETE FROM spip_mots_articles WHERE id_mot=$id_mot_annonce AND id_article=$arg");
 		sql_delete("spip_mots_articles","id_mot=$id_mot_annonce AND id_article=$arg");
 	}
-	redirige_par_entete(rawurldecode($redirect));
 }
 
 
@@ -94,8 +89,8 @@ function action_spipbb_action_forumannonce($arg) {
 function action_spipbb_action_fermelibere($arg) {
 	if(!function_exists('verif_article_ferme')) include_spip("inc/spipbb_util");
 
-	global $redirect;
-	global $mode, $id_mot_ferme;
+	$id_mot_ferme=_request('id_mot_ferme');
+	$mode=_request('mode');
 	$arg = intval($arg); // id_article
 
 	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
@@ -103,8 +98,6 @@ function action_spipbb_action_fermelibere($arg) {
 	$f_gafart = _DIR_SESSIONS."spipbbart_$arg-$id_auteur.lck";
 
 	if($mode=="ferme" OR $deja_ferme=='') {
-		// c: 10/2/8 compat pg_sql
-		//sql_query("INSERT INTO spip_mots_articles (id_mot,id_article) VALUES ('$id_mot_ferme','$arg')");
 		sql_insertq("spip_mots_articles",array('id_mot'=> $id_mot_ferme,'id_article'=>$arg));
 	}
 	if($mode=="maintenance")
@@ -113,8 +106,6 @@ function action_spipbb_action_fermelibere($arg) {
 
 
 	if($mode=="libere") {
-		// c: 10/2/8 compat pg_sql
-		//sql_query("DELETE FROM spip_mots_articles WHERE id_mot=$id_mot_ferme AND id_article=$arg");
 		sql_delete("spip_mots_articles","id_mot=$id_mot_ferme AND id_article=$arg");
 	}
 	if($mode=="libere_maintenance")
@@ -124,7 +115,6 @@ function action_spipbb_action_fermelibere($arg) {
 			unlink($f_gafart);
 		}
 
-	redirige_par_entete(rawurldecode($redirect));
 }
 
 // fermer liberer sujet
@@ -132,22 +122,17 @@ function action_spipbb_action_ferlibsujet($arg) {
 
 	#include_spip("inc/spipbb_presentation");
 
-	global $redirect;
-	global $mode, $id_mot_ferme;
+	$id_mot_ferme=_request('id_mot_ferme');
+	$mode=_request('mode');
 	$arg = intval($arg); // id_sujet
 
 	if($mode=="ferme" OR $deja_ferme=='') {
-		// c: 10/2/8 compat pg_sql
-		//sql_query("INSERT INTO spip_mots_forum (id_mot,id_forum) VALUES ('$id_mot_ferme','$arg')");
 		sql_insertq("spip_mots_forum",array('id_mot'=> $id_mot_ferme,'id_forum'=> $arg));
 	}
 
 	if($mode=="libere") {
-		// c: 10/2/8 compat pg_sql
-		//sql_query("DELETE FROM spip_mots_forum WHERE id_mot=$id_mot_ferme AND id_forum=$arg");
 		sql_delete("spip_mots_forum","id_mot=$id_mot_ferme AND id_forum=$arg");
 	}
 
-	redirige_par_entete(rawurldecode($redirect));
 }
 ?>

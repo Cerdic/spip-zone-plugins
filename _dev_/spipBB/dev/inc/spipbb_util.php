@@ -72,7 +72,8 @@ function spipbb_renumerote()
 	$result = sql_select("id_rubrique, titre", "spip_rubriques", array(
 			"id_secteur='".$id_secteur."'",
 			"id_rubrique!='".$id_secteur."'" ),	// array where
-			'', array('titre') );
+			'', 
+			'titre');
 	$numero = 10;
 	while ( $row = sql_fetch($result) )
 	{
@@ -148,7 +149,7 @@ function affiche_metas_spipbb($var) {
 function verif_article_ferme($id_article=0,$id_mot_ferme=0) {
 	if (empty($id_article) or empty($id_mot)) return;
 	$rf="";
-	$res=sql_query("SELECT * FROM spip_mots_articles WHERE id_mot=$id_mot_ferme AND id_article=$id_article");
+	$res=sql_select("*","spip_mots_articles","id_mot=$id_mot_ferme AND id_article=$id_article");
 	if ($row=sql_count($res)) {
 		$rf ="ferme";
 		if ($ds = @opendir(_DIR_SESSIONS)) {
@@ -168,7 +169,7 @@ function verif_article_ferme($id_article=0,$id_mot_ferme=0) {
 // sujet est-il ferme ?
 //
 function verif_sujet_ferme($id_sujet,$id_mot_ferme) {
-	$res=spip_query("SELECT * FROM spip_mots_forum WHERE id_mot=$id_mot_ferme AND id_forum=$id_sujet");
+	$res=sql_select("*","spip_mots_forum","id_mot=$id_mot_ferme AND id_forum=$id_sujet");
 	if ($row=sql_count($res)) { $rf ="ferme"; }
 	return $rf;
 }
@@ -191,8 +192,7 @@ function auth_deplace_connecte() {
 // verif si sujet de type "annonce" (lier a ce mot)
 //
 function verif_sujet_annonce($id_sujet) {
-	$req=spip_query("SELECT id_forum FROM spip_mots_forum
-					WHERE id_mot=".$GLOBALS['spipbb']['id_mot_annonce']." AND id_forum=$id_sujet");
+	$req=sql_select("id_forum","spip_mots_forum","id_mot=".$GLOBALS['spipbb']['id_mot_annonce']." AND id_forum=$id_sujet");
 	$res=sql_count($req);
 	if($res) { return true; }
 }
@@ -200,13 +200,11 @@ function verif_sujet_annonce($id_sujet) {
 # verif si forum de type "annonce" (lier a ce mot)
 #
 function verif_forum_annonce($id_article) {
-	$req=spip_query("SELECT id_article FROM spip_mots_articles
-					WHERE id_mot=".$GLOBALS['spipbb']['id_mot_annonce']." AND id_article=$id_article");
+	$req=sql_select("id_article","spip_mots_articles","id_mot=".$GLOBALS['spipbb']['id_mot_annonce']." AND id_article=$id_article");
 	if(sql_count($req)) {
 		return true;
 	}
 }
-
 
 //
 // calcul/affiche : tranches ... pagination

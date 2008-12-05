@@ -202,8 +202,6 @@ function spipbb_delete_tables()
 	$liste="";
 	while ( list($key,$val) = each($tables_spipbb) )
 	{
-		// c: 10/2/8 compat multibases
-		//$res=sql_query("DROP TABLE IF EXISTS $val ");
 		$res=sql_drop_table($val,true); // true => if exists
 		$liste.="$val ";
 	}

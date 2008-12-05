@@ -382,10 +382,10 @@ function action_spipbb_admin_reconfig()
 
 				# cherche mot "annonce" et "ferme" dans ce groupe
 				foreach($mots_base as $m) {
-					$q = spip_query("SELECT id_mot FROM spip_mots
-									WHERE titre="._q($m)."
-									AND id_groupe="._q($id_groupe_preced));
-					if($row = spip_fetch_array($q)) {
+					$q = sql_select("id_mot",
+									"spip_mots",
+									"titre="._q($m)." AND id_groupe="._q($id_groupe_preced) );
+					if($row = sql_fetch($q)) {
 						$mots_preced[$m] = $row['id_mot'];
 					}
 				}
@@ -419,21 +419,17 @@ function recreer_jointures_mots($id_mot_annonce, $id_mot_ferme, $mots_preced, $m
 		$id_nouv = ($m=="annonce")?$id_mot_annonce:$id_mot_ferme;
 		if($mots_preced[$m]!=0) {
 			# recup jointure mot - articles
-			$qa = spip_query("SELECT id_article FROM spip_mots_articles
-								WHERE id_mot="._q($mots_preced[$m]));
-			while ($ra = spip_fetch_array($qa)) {
+			$qa = sql_select("id_article","spip_mots_articles","id_mot="._q($mots_preced[$m]));
+			while ($ra = sql_fetch($qa)) {
 				$id_art = $ra['id_article'];
-				spip_query("INSERT INTO spip_mots_articles (id_mot,id_article)
-							VALUES ('$id_nouv','$id_art')");
+				@sql_insertq("spip_mots_articles",array('id_mot'=> $id_nouv, 'id_article'=> $id_art) );
 			}
 
 			# recup jointure mot - posts
-			$qf = spip_query("SELECT id_forum FROM spip_mots_forum
-								WHERE id_mot="._q($mots_preced[$m]));
-			while ($rf=spip_fetch_array($qf)) {
+			$qf = sql_select("id_forum","spip_mots_forum","id_mot="._q($mots_preced[$m]));
+			while ($rf=sql_fetch($qf)) {
 				$id_post = $rf['id_forum'];
-				spip_query("INSERT INTO spip_mots_forum (id_mot,id_forum)
-							VALUES ('$id_nouv','$id_post')");
+					@sql_insertq("spip_mots_forum",array( 'id_mot'=>$id_nouv, 'id_forum'=>$id_post) );
 			}
 		}
 	}
@@ -445,11 +441,10 @@ function nettoyer_ante_jointures($mots_preced, $mots_base) {
 	foreach($mots_base as $m) {
 		if($mots_preced[$m]!=0) {
 			# erase - articles
-			$qa = spip_query("DELETE FROM spip_mots_articles
-								WHERE id_mot="._q($mots_preced[$m]));
+			$qa = sql_delete("spip_mots_articles","id_mot="._q($mots_preced[$m]));
 			# erase - posts
-			$qf = spip_query("SELECT id_forum FROM spip_mots_forum
-								WHERE id_mot="._q($mots_preced[$m]));
+			// c: 6/12/8 select ???
+			$qf = sql_select("id_forum","spip_mots_forum","id_mot="._q($mots_preced[$m]));
 		}
 	}
 }
@@ -492,11 +487,9 @@ function support_ajout_champs($table_support,$creer_champs) {
 
 	$nomtable = "spip_".$table_support;
 	foreach($creer_champs as $chp) {
-			#recup def des champs (dans base/sap_spipbb.php)
-			$def = $GLOBALS['champs_sap_spipbb'][$chp]['sql'];
-			// c: 10/2/8 compat pg_sql
-			//sql_query("ALTER TABLE $nomtable ADD $chp $def");
-			sql_alter("TABLE $nomtable ADD $chp $def");
+		#recup def des champs (dans base/sap_spipbb.php)
+		$def = $GLOBALS['champs_sap_spipbb'][$chp]['sql'];
+		sql_alter("TABLE $nomtable ADD $chp $def");
 	}
 } // support_ajout_champs
 
@@ -506,7 +499,6 @@ function support_ajout_champs($table_support,$creer_champs) {
 // ------------------------------------------------------------------------------
 function support_maj_extras($table_support,$maj_chps) {
 	# recolte extras des auteurs pour les champs suppl.
-	//$r = spip_query("SELECT id_auteur, extra FROM spip_auteurs");
 	$r = sql_select("id_auteur, extra","spip_auteurs");
 	while($sr = sql_fetch($r)) {
 		$extras = unserialize($sr['extra']);
@@ -524,22 +516,13 @@ function support_maj_extras($table_support,$maj_chps) {
 		//$set=substr($set,1);
 		//if(strlen($set)>0) { $sep = ","; }
 
-		//$q = spip_query("SELECT id_auteur FROM spip_$table_support
-		//					WHERE id_auteur=".$sr['id_auteur']);
 		$q = sql_select("id_auteur","spip_$table_support","id_auteur=".$sr['id_auteur']);
-		if($sq=sql_fetch($q)) {
+		if ($sq=sql_fetch($q)) {
 			if($set!='') {
-				// c: 10/2/8 compat pg_sql
-				//sql_query("UPDATE spip_$table_support
-				//			SET $set WHERE id_auteur=".$sr['id_auteur']);
 				sql_updateq("spip_$table_support",$set,"id_auteur=".$sr['id_auteur']);
-
 			}
 		}
 		else {
-			// c: 10/2/8 compat pg_sql
-			//sql_query("INSERT INTO spip_$table_support
-			//			SET id_auteur=".$sr['id_auteur']." ".$sep.$set);
 			sql_insertq("spip_$table_support",array_merge(array('id_auteur'=>$sr['id_auteur']),$set) );
 		}
 	}

@@ -84,21 +84,10 @@ function enfant_rubfo($collection){
 		$ifond = $ifond ^ 1;
 		$coul_ligne = ($ifond) ? $couleur_claire : '#ffffff';
 
-		/*
-		// gafospip . trouver rubrique secteur (hotel) des forums,
-		// si unique secteur forums -> usage mot : rub_gaforum
-		$rq_gaf =	"SELECT smr.id_rubrique
-					FROM spip_mots_rubriques smr
-					LEFT JOIN spip_rubriques sr ON sr.id_rubrique = smr.id_rubrique
-					WHERE sr.id_rubrique=$id_rubrique AND smr.id_mot = ".$GLOBALS['id_mot_rub_gaf'];
-		$rs_gaf = sql_query($rq_gaf);
-		if(sql_count($rs_gaf)) { $icone_secteur = _DIR_IMG_GAF."gaf_ico-24.gif"; }
-		*/
 		if($id_rubrique == $GLOBALS['spipbb']['id_secteur']) {
 			$icone_secteur = _DIR_IMG_SPIPBB."spipbb-24.png";
 		}
 		else { $icone_secteur = "secteur-24.gif"; }
-		//
 
 		$les_sous_enfants = sous_enfant_rubfo($id_rubrique);
 

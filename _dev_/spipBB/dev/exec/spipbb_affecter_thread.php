@@ -69,12 +69,10 @@ function exec_spipbb_affecter_thread()
 		exit;
 	}
 
-
 	// details du sujet à déplacer
-	$req = "SELECT *, DATE_FORMAT(date_heure, '%d/%m/%Y %H:%i') AS dateur_sujet 
-			FROM spip_forum WHERE id_forum=$id_sujet";
-	$res = spip_query($req);
-	$row = spip_fetch_array($res);
+	$row = sql_fetsel("titre, auteur, statut, DATE_FORMAT(date_heure, '%d/%m/%Y %H:%i') AS dateur_sujet",
+					"spip_forum",
+					"id_forum=$id_sujet");
 	$titre_sujet = $row['titre'];
 	$auteur_sujet = $row['auteur'];
 	$date_sujet = $row['dateur_sujet'];
@@ -86,11 +84,9 @@ function exec_spipbb_affecter_thread()
 	}
 
 	// nbre de posts reponses de ce sujet
-	$req_post= "SELECT COUNT(*) as cnt FROM spip_forum 
-				WHERE id_thread='$id_sujet' AND statut IN ('publie', 'off', 'prop') 
-				AND id_parent!='0'"; 
-	$res_post = spip_query($req_post);
-	$row = spip_fetch_array($res_post);
+	$row = spip_fetsel("COUNT(*) as cnt",
+						"spip_forum",
+						"id_thread='$id_sujet' AND statut IN ('publie', 'off', 'prop') AND id_parent!='0'");
 	$nbr_post = $row['cnt'];
 
 	$coul_sujet = $couleur_claire;
@@ -125,15 +121,14 @@ function exec_spipbb_affecter_thread()
 	// toute la hierarchie du(es) secteur(s)
 
 	// trouver rubrique secteur (hotel) des forums
-	$res_rs = spip_query("SELECT smr.id_rubrique, sr.titre, sr.descriptif 
-				FROM spip_mots_rubriques smr 
-				LEFT JOIN spip_rubriques sr ON sr.id_rubrique = smr.id_rubrique 
-				WHERE smr.id_mot = ".$GLOBALS['spipbb']['id_secteur']);
+	$res_rs = sql_select("smr.id_rubrique, sr.titre, sr.descriptif",
+						"spip_mots_rubriques smr LEFT JOIN spip_rubriques sr ON sr.id_rubrique = smr.id_rubrique",
+						"smr.id_mot = ".$GLOBALS['spipbb']['id_secteur'] );
 
 	echo "<div class='verdana3' style='padding:4px;'><b>"._T('gaf:forum_selection')."</b></div>";
 	echo "<form action='".generer_url_ecrire("spipbb_affecter_affiche")."' method='post'>";
 
-	while ($row=spip_fetch_array($res_rs)) {
+	while ($row=sql_fetch($res_rs)) {
 		$id_hotel = $row['id_rubrique'];
 		$titre_hotel = $row['titre'];
 		$rang_rub=0;

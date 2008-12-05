@@ -160,20 +160,6 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 
 		if(empty($echec)) {
 			#  maj spip
-			// c: 10/2/8 compat multibases
-			/*
-			sql_query("UPDATE spip_auteurs SET $query_pass
-				nom="._q($auteur['nom']).",
-				login="._q($auteur['login']).",
-				bio="._q($auteur_bio).",
-				email="._q($auteur_email).",
-				nom_site="._q($auteur_nom_site).",
-				url_site="._q($auteur_url_site).",
-				pgp="._q($auteur_pgp).",
-				statut="._q($auteur['statut'])."
-				$add_extra
-				WHERE id_auteur=".$auteur['id_auteur']);
-				*/
 			// c: 15/4/8 : 1 on a aucune raison de MAJ le nom donc on zappe
 			// de plus sql_updateq => pas besoin de _q car quote fait par spip_xx_cite
 			@sql_updateq("spip_auteurs",array_merge($query_pass,array(
@@ -200,16 +186,10 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 						$set[$k]=$v; // c: 15/4/8 pas de _q avec updateq et insertq
 					}
 				}
-				//$set=substr($set,1);
-				//if(strlen($set)>0) { $sep = ","; }
 				if($nouveau) {
-					// c: 10/2/8 compat multibases
-					//sql_query("INSERT INTO spip_".$table_support." SET id_auteur=".$auteur['id_auteur']." ".$sep.$set);
 					@sql_insertq("spip_".$table_support,array_merge(array("id_auteur"=>$auteur['id_auteur']),$set));
 				}
 				else {
-					// c: 10/2/8 compat multibases
-					//sql_query("UPDATE spip_".$table_support." SET $set WHERE id_auteur=".$auteur['id_auteur']);
 					@sql_updateq("spip_".$table_support, $set, "id_auteur=".$auteur['id_auteur']);
 				}
 			}

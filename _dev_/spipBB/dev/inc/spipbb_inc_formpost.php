@@ -29,8 +29,7 @@ function barre_forum_inspipbb($texte) {
 	if (!$premiere_passe = _request('previsu')) {
 		if(_request('citer')) {
 			$id_citation = intval(_request('citer'));
-		    $result = spip_query("SELECT auteur, texte FROM spip_forum WHERE id_forum=".$id_citation);
-		    $row = spip_fetch_array($result);
+		    $row = sql_fetsel("auteur, texte","spip_forum","id_forum=".$id_citation);
 		    $aut_cite = $row['auteur']?$row['auteur']:_T('gaf:anonyme');
 		    $text_cite=$row['texte'];
 			# ajout de la citation
@@ -60,19 +59,17 @@ global 	$previsu, $forum, $sujet,
 if(!$sujet) $sujet='0';
 
 if($forum && $sujet=='0')
-		{
-		$res=spip_query("SELECT titre FROM spip_articles WHERE id_article=$forum");
-		$row=spip_fetch_array($res);
+	{
+		$row=sql_fetsel("titre","spip_articles","id_article=$forum");
 		$titre_forum = $row['titre'];
 		$text_intro = _T('gaf:sujet_ajout').typo($titre_forum);
-		}
+	}
 else
-		{
-		$res=spip_query("SELECT titre FROM spip_forum WHERE id_forum=$sujet");
-		$row=spip_fetch_array($res);
+	{
+		$row=sql_fetsel("titre","spip_forum","id_forum=$sujet");
 		$titre_sujet = $row['titre'];
 		$text_intro = _T('gaf:texte_repondre').typo($titre_sujet);
-		}
+	}
 
 	// auteur (bloque sur sessions -> pas de modif !!)
 	$auteur = $GLOBALS['auteur_session']['nom'];
@@ -122,6 +119,7 @@ if($previsu=='1')
 	// ... ( ... ) ... voir formulaires/inc-forumlaire_forum.php3
 	//
 	// Le lock est leve au moment de l'insertion en base .. function enregistre_post_gaf
+	include_spip('inc/flock');
 	
 		$alea = preg_replace('/[^0-9]/', '', $alea);
 		if(!$alea OR !@file_exists(_DIR_SESSIONS."forum_$alea.lck")) {
@@ -137,7 +135,7 @@ if($previsu=='1')
 			while (($file = @readdir($dh)) !== false)
 				if (preg_match('/^forum_([0-9]+)\.lck$/', $file)
 				AND (time()-@filemtime(_DIR_SESSIONS.$file) > 4*3600))
-					@unlink(_DIR_SESSIONS.$file);
+					@spip_unlink(_DIR_SESSIONS.$file);
 
 	// hash gaf
 		if(!$hash)
@@ -299,7 +297,7 @@ function enregistre_post_spipbb() {
 	// premier insert du message dans la base
 	//
 	# id_thread oblige INSERT puis UPDATE. ??
-	$id_message = spip_abstract_insert('spip_forum', '(date_heure)', '(NOW())');
+	$id_message = @sql_insertq('spip_forum', array('date_heure'=>'NOW()'));
 
 	if ($sujet) { $id_thread =  $sujet; }
 	else { $id_thread = $id_message; } 
@@ -309,33 +307,31 @@ function enregistre_post_spipbb() {
 	//
 	// màj bdd
 	//
-	spip_query("UPDATE spip_forum
-	SET id_parent = $sujet,
-	id_rubrique = $id_rubrique,
-	id_article = $forum,
-	id_breve = $id_breve,
-	id_syndic = $id_syndic,
-	id_auteur = $id_auteur,
-	id_thread = $id_thread,
-	date_heure = NOW(),
-	titre = '".addslashes(corriger_caracteres($titre))."',
-	texte = '".addslashes(corriger_caracteres($texte))."',
-	nom_site = '".addslashes(corriger_caracteres($nom_site_forum))."',
-	url_site = '".addslashes(corriger_caracteres($url_site))."',
-	auteur = '".addslashes(corriger_caracteres($auteur))."',
-	email_auteur = '".addslashes(corriger_caracteres($email_auteur))."',
-	ip = '".$_SERVER['REMOTE_ADDR']."',
-	statut = '$statut'
-	WHERE id_forum = $id_message
-	");
+	@sql_updateq("spip_forum", array(
+					'id_parent' => $sujet,
+					'id_rubrique' => $id_rubrique,
+					'id_article' => $forum,
+					'id_breve' => $id_breve,
+					'id_syndic' => $id_syndic,
+					'id_auteur' => $id_auteur,
+					'id_thread' => $id_thread,
+					'date_heure' => 'NOW()',
+					'titre' => addslashes(corriger_caracteres($titre)),
+					'texte' => addslashes(corriger_caracteres($texte)),
+					'nom_site' => addslashes(corriger_caracteres($nom_site_forum)),
+					'url_site' => addslashes(corriger_caracteres($url_site)),
+					'auteur' => addslashes(corriger_caracteres($auteur)),
+					'email_auteur' => addslashes(corriger_caracteres($email_auteur)),
+					'ip' => $_SERVER['REMOTE_ADDR'],
+					'statut' => $statut),
+				"id_forum = $id_message" //where
+			);
 	
 	spipbb_log('nouveau post: '.$id_thread,3,"e_p_s");
-
 	
 	// Notification
 	if ($notifications = charger_fonction('notifications', 'inc'))
 		$notifications('forumposte', $id_message);
-
 
 	//
 	// INVALIDATION DES CACHES LIES AUX FORUMS, modifié gaf
@@ -345,7 +341,6 @@ function enregistre_post_spipbb() {
 		
 		suivre_invalideur ("id='id_forum/" . calcul_index_forum($forum, $id_breve, $id_rubrique, $id_syndic) . "'");
 	}
-
 }
 
 function tout_de_selectionner($nomformulaire='') {

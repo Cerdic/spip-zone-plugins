@@ -60,9 +60,6 @@ function formulaire_spipbb_auteur_infos($id_auteur=0) {
 	$select=array();// c: 10/2/8 compat multibases
 
 	# statut de cet id_auteur
-	// c: 10/2/8 compat multibases
-	//$qa=sql_query("SELECT statut FROM spip_auteurs WHERE id_auteur=$id_auteur");
-	//$ra=sql_fetch($qa);
 
 	$ra=sql_fetsel("statut","spip_auteurs","id_auteur=$id_auteur");
 	$aut_statut=$ra['statut'];
@@ -76,12 +73,7 @@ function formulaire_spipbb_auteur_infos($id_auteur=0) {
 	}
 
 	if ($type_support=="table") {
-		// c: 10/2/8 compat multibases
-		//$select=substr($select,1);
-		//$q=sql_query("SELECT $select FROM spip_$table_support WHERE id_auteur=$id_auteur");
-		//$r=sql_fetch($q);
 		$r=sql_fetsel($select,"spip_$table_support","id_auteur=$id_auteur");
-
 	}
 
 	# cas nouv. inscrit

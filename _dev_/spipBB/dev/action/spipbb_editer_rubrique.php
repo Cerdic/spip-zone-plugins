@@ -42,10 +42,11 @@ function action_spipbb_editer_rubrique_dist() {
 // http://doc.spip.org/@insert_rubrique
 function insert_rubrique($id_parent) {
 	include_spip('base/abstract_sql');
-	return spip_abstract_insert("spip_rubriques",
-		"(titre, id_parent)",
-		"('"._T('item_nouvelle_rubrique')."', ".intval($id_parent).")"
-	);
+	return @sql_insertq("spip_rubriques", array(
+							'titre' => _T('item_nouvelle_rubrique'),
+							'id_parent' => intval($id_parent)
+							)
+					);
 }
 
 // Enregistrer certaines modifications d'une rubrique
@@ -78,7 +79,7 @@ function revisions_rubriques($id_rubrique, $c=false) {
 	AND $id_parent != $id_rubrique // au fou
 	) {
 		$id_parent = intval($id_parent);
-		$s = spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique=".intval($id_rubrique)));
+		$s = sql_fetsel("id_parent","spip_rubriques","id_rubrique=".intval($id_rubrique));
 		$old_parent = $s['id_parent'];
 
 		if ($id_parent != $old_parent
@@ -96,9 +97,9 @@ function revisions_rubriques($id_rubrique, $c=false) {
 	// breves en question
 	if ($champs['id_parent']
 	AND _request('confirme_deplace', $c) == 'oui') {
-		$id_secteur = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_parent"));
+		$id_secteur = sql_fetsel("id_secteur","spip_rubriques","id_rubrique=$id_parent");
 		if ($id_secteur= $id_secteur['id_secteur'])
-			spip_query("UPDATE spip_breves SET id_rubrique=$id_secteur WHERE id_rubrique=$id_rubrique");
+			@sql_updateq("spip_breves",array('id_rubrique'=>$id_secteur),"id_rubrique=$id_rubrique");
 	}
 
 	// recuperer les extras
@@ -122,11 +123,11 @@ function revisions_rubriques($id_rubrique, $c=false) {
 
 	$update = array();
 	foreach ($champs as $champ => $val)
-		$update[] = $champ . '=' . _q($val);
+		$update[$champ] = _q($val);
 
 	if (!count($update)) return;
 
-	spip_query("UPDATE spip_rubriques SET ".join(', ', $update)." WHERE id_rubrique=$id_rubrique");
+	@sql_updateq("spip_rubriques", $update, "id_rubrique=$id_rubrique");
 
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 		include_spip("inc/indexation");

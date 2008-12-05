@@ -68,15 +68,12 @@ function exec_spipbb_admin_fromphorum()
 		if ($connect_id_rubrique)
 			$row['id_rubrique'] = $id_rubrique = $connect_id_rubrique[0];
 		else {
-			//$r = sql_query("SELECT id_rubrique FROM spip_rubriques ORDER BY id_rubrique DESC LIMIT 1");
-			//$row_rub = sql_fetch($r);
 			$row_rub = sql_fetsel('id_rubrique','spip_rubriques','','',array('id_rubriques DESC'),'0,1');
 			$row['id_rubrique'] = $id_rubrique = $row_rub['id_rubrique'];
 		}
 		if (!autoriser('creerarticledans','rubrique',$row['id_rubrique'] )){
 			// [fr] manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
 			// [en] too bad , this rubrique is not allowed, we look for the first allowed sector
-			//$res = sql_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0");
 			$res = sql_select('id_rubrique','spip_rubriques',array('id_parent=0'));
 			while (!autoriser('creerarticledans','rubrique',$row['id_rubrique'] ) && $row_rub = sql_fetch($res)){
 				$row['id_rubrique'] = $row_rub['id_rubrique'];
@@ -85,8 +82,6 @@ function exec_spipbb_admin_fromphorum()
 	}
 	// [fr] recuperer les donnees du secteur
 	// [en] load the sector datas
-	//$r = sql_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
-	//$row_rub = sql_fetch($r);
 	$row_rub = sql_fetsel('id_secteur','spip_rubriques',array("id_rubrique=".$GLOBALS['spipbb']['id_secteur']));
 	$row['id_secteur'] = $row_rub['id_secteur'];
 	$id_rubrique = $row['id_rubrique'];

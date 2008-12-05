@@ -53,43 +53,27 @@ function exec_spipbb_inscrits() {
 		$list_id_del=sql_in('id_auteur',$sel_membre);
 		switch(_request('supprmess')) {
 		case 'nom' : // detacher les messages des auteurs a supprimer
-			// c: 7/2/8 compat multibases
-			//$forumq=sql_query("UPDATE spip_forums SET id_auteur=0 WHERE ($list_id_del)");
 			@sql_updateq("spip_forums", "id_auteur=0", $list_id_del);
 			break;
 		case 'anonymes' : // detacher et rendre anonyme tous les messages de tous les auteurs a supprimer
-			// c: 7/2/8 compat pg_sql
-			//$forumq=sql_query("UPDATE spip_forums SET id_auteur=0,auteur='Anonyme' WHERE ($list_id_del)");
 			@sql_updateq("spip_forums","id_auteur=0,auteur='Anonyme'",$list_id_del);
 			break;
 		case 'tous' : // effacer tous les messages de tous les auteurs a supprimer
 			// il faut traiter les messages principaux séparément des threads
-			// c: 7/2/8 compat pg_sql
-			//$req = sql_query ("SELECT id_forum FROM spip_forums WHERE ($list_id_del) AND id_parent=0");
 			$req = sql_select("id_forum","spip_forums","$list_id_del AND id_parent=0");
 			while ( $row = sql_fetch($req) ) {
-				// c: 7/2/8 compat pg_sql
-				//$req_fils = sql_query ("SELECT id_forum FROM spip_forums WHERE id_parent=".$row['id_forum']." ORDER BY id_forum LIMIT 0,1" );
 				$req_fils = sql_select("id_forum","spip_forums","id_parent=".$row['id_forum'],"",array("id_forum"),"0,1" );
 				if ( $row_fils=sql_fetch($req_fils) ) {
 					// on decale le premier enfant comme nouveau pere
-					// c: 7/2/8 compat pg_sql
-					//$upd_fils = sql_query ("UPDATE spip_forums SET id_parent=0 WHERE id_forum=".$row_fils['id_forum']);
 					@sql_updateq("spip_forums",array('id_parent'=>0),"id_forum=".$row_fils['id_forum']);
 					// on lui rattache les eventuels autres enfants
-					// c: 7/2/8 compat pg_sql
-					//$upd_thread = sql_query ("UPDATE spip_forums SET id_parent=".$row_fils['id_forum']." WHERE id_parent=".$row['id_forum']);
 					@sql_updateq("spip_forums",array('id_parent'=>$row_fils['id_forum']),"id_parent=".$row['id_forum']);
 				}
 			}
 			// maintenant on peut tout effacer
-			// c: 7/2/8 compat pg_sql
-			//$forumq=sql_query("UPDATE spip_forums SET statut='5poubelle' WHERE ($list_id_del)");
 			@sql_updateq("spip_forums",array('statut'=>'5poubelle'),$list_id_del);
 			break;
 		} // switch traitement des messages dans les forums
-		// c: 7/2/8 compat pg_sql
-		//$delq=sql_query("UPDATE spip_auteurs SET statut='5poubelle' WHERE ($list_id_del)");
 		@sql_updateq("spip_auteurs",array('statut'=>'5poubelle'),$list_id_del);
 	}
 
@@ -122,20 +106,6 @@ function exec_spipbb_inscrits() {
 	// c: 18/12/7 c'est surement une optimisation mais je doute que ce soit standard tous SQL confondus...
 	// La magie du LEFT JOIN pour calculer le nombre de messages et ne pas masquer un membre qui n'aurait jamais poste !!!
 	$types_query=sql_in('A.statut',$sel_type);
-	/* c: 7/2/8 compat pg_sql
-	$q=sql_query("SELECT SQL_CALC_FOUND_ROWS A.id_auteur, A.nom, A.email, A.statut, count(F.id_forum) as nb_mes "
-					." FROM spip_auteurs AS A "
-					." LEFT JOIN spip_forum AS F ON (A.id_auteur=F.id_auteur) "
-//					." WHERE ( A.statut='6forum' OR A.statut='nouveau' ) "
-					." WHERE ( $types_query ) "
-					." GROUP BY A.id_auteur "
-					." ORDER BY A.$odb "
-					." LIMIT $dl,$fixlimit");
-					# recup nombre total d'entree
-	$nl= sql_query("SELECT FOUND_ROWS()");
-	$r_found = @spip_fetch_array($nl);
-	$nligne=$r_found['FOUND_ROWS()'];
-	*/
 
 	$r_found=sql_fetsel("COUNT(*) AS total",
 					"spip_auteurs AS A LEFT JOIN spip_forum AS F ON (A.id_auteur=F.id_auteur) ",

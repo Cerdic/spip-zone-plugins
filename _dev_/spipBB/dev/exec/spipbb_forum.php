@@ -55,17 +55,15 @@ function exec_spipbb_forum() {
 	# prepa info forum(article)
 	#
 	if($id_article) {
-		$req_af = "SELECT id_article, titre, descriptif, id_rubrique, accepter_forum, statut 
-					FROM spip_articles 
-					WHERE id_article = $id_article";
-		$res_af = spip_query($req_af);
-		$row=spip_fetch_array($res_af);
-			$id_forum = $row['id_article'];
-			$desc_forum = $row['descriptif'];
-			$id_salon=$row['id_rubrique'];
-			$accepter_forum = $row['accepter_forum'];
-			$statut_article = $row['statut'];
-			
+		$row=sql_fetsel("id_article, titre, descriptif, id_rubrique, accepter_forum, statut",
+					"spip_articles",
+					"id_article = $id_article");
+		$id_forum = $row['id_article'];
+		$desc_forum = $row['descriptif'];
+		$id_salon = $row['id_rubrique'];
+		$accepter_forum = $row['accepter_forum'];
+		$statut_article = $row['statut'];
+		
 		# si crea article, our premiere passe, renumerote !
 		if(recuperer_numero($row['titre'])=='') {
 			spipbb_renumerote();
@@ -197,25 +195,33 @@ function exec_spipbb_forum() {
 	// recup $vl (tranche) fixe LIMIT : $dl
 	$dl=($vl+0);
 		
-	// requete sujets
-	$res_sujet = spip_query(
-		"SELECT SQL_CALC_FOUND_ROWS sujet.id_forum, sujet.*, 
-		date_format(sujet.date_heure,'%d/%m/%Y %H:%i') AS date_sujet, 
-		max(post.date_heure) AS date_post 
-		FROM spip_forum AS sujet, spip_forum AS post 
-		WHERE sujet.id_article='$id_article' 
+	// récup nombre total d'entrée de $req_sujet (mysql 4.0.0 mini)
+	// c: 5/12/8 : malheureusement ce n'est pas standard SQL donc on perd cette faculte
+	$nligne = @sql_fetsel("COUNT(*) AS total", // select
+		"spip_forum AS sujet, spip_forum AS post", // FROM
+		"sujet.id_article='$id_article' 
 		AND sujet.id_parent='0' 
 		AND sujet.statut IN ('publie', 'off', 'prop') 
-		AND post.id_thread=sujet.id_forum 
-		GROUP BY id_thread 
-		ORDER BY date_post DESC 
-		LIMIT $dl,$fixlimit"
+		AND post.id_thread=sujet.id_forum", //  Where
+		"id_thread", // Groupby
+		"date_post DESC", // Order by
+		"$dl,$fixlimit" // limit
 		);
 
-
-	// récup nombre total d'entrée de $req_sujet (mysql 4.0.0 mini)
-	$nl= spip_query("SELECT FOUND_ROWS()");
-	$nligne = @spip_fetch_array($nl);
+	// requete sujets
+	$res_sujet = sql_select(
+		"sujet.id_forum, sujet.*, 
+		date_format(sujet.date_heure,'%d/%m/%Y %H:%i') AS date_sujet, 
+		max(post.date_heure) AS date_post", // select
+		"spip_forum AS sujet, spip_forum AS post", // FROM
+		"sujet.id_article='$id_article' 
+		AND sujet.id_parent='0' 
+		AND sujet.statut IN ('publie', 'off', 'prop') 
+		AND post.id_thread=sujet.id_forum", //  Where
+		"id_thread", // Groupby
+		"date_post DESC", // Order by
+		"$dl,$fixlimit" // limit
+		);
 
 	// valeur de tranche affichée	
 	$tranche_encours = $dl+1;
@@ -224,10 +230,10 @@ function exec_spipbb_forum() {
 	$retour_gaf_local = generer_url_ecrire("spipbb_forum", "id_article=".$id_article);		
 
 	// afficher les tranches
-	if ($nligne['FOUND_ROWS()']>$fixlimit)
+	if ($nligne['total']>$fixlimit)
 		{
 		echo "<div align='center' class='iconeoff' style='margin:2px;'><span class='verdana2'><b>";
-		tranches_liste_forum($tranche_encours, $retour_gaf_local,$nligne['FOUND_ROWS()']);
+		tranches_liste_forum($tranche_encours, $retour_gaf_local,$nligne['total']);
 		echo "</b></span></div>";
 		}
 
@@ -236,7 +242,8 @@ function exec_spipbb_forum() {
 	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='600'><tr><td>\n";
 	debut_cadre_formulaire("");
 
-	while ($row=spip_fetch_array($res_sujet)) {
+	while ($row=sql_fetch($res_sujet)) 
+	{
 		$id_sujet = $row['id_forum'];
 		$titre_sujet = $row['titre'];
 		$aut_sujet = typo($row['auteur']);
@@ -254,20 +261,19 @@ function exec_spipbb_forum() {
 		$sujet_ferme = verif_sujet_ferme($id_sujet, $GLOBALS['spipbb']['id_mot_ferme']);
 		
 		// les posts reponses de ce sujet
-		$req_post= "SELECT id_forum, titre, auteur, 
-					date_format(date_heure,'%d/%m/%Y %H:%i') AS date_post
-					FROM spip_forum 
-					WHERE id_thread='$id_sujet' AND statut IN ('publie', 'off', 'prop') 
-					AND id_parent!='0'"; 
-		$res_post = spip_query($req_post);
-		$nbr_post=spip_num_rows($res_post);
+		$res_post = spip_select("id_forum, titre, auteur, 
+					date_format(date_heure,'%d/%m/%Y %H:%i') AS date_post",
+					"spip_forum",
+					"id_thread='$id_sujet' AND statut IN ('publie', 'off', 'prop') AND id_parent!='0'");
+		$nbr_post = sql_count($res_post);
 		
 		// le dernier post de ce sujet
-		$req_date = "SELECT id_forum, date_heure, auteur FROM spip_forum
-					WHERE id_thread=$id_sujet AND statut IN ('publie', 'off', 'prop') 
-					ORDER BY date_heure DESC LIMIT 0,1";
-		$res_date = spip_query($req_date);
-		$row = spip_fetch_array($res_date);
+		$res_date = sql_select("id_forum, date_heure, auteur","spip_forum",
+					"id_thread=$id_sujet AND statut IN ('publie', 'off', 'prop')",
+					"", // groupby
+					"date_heure DESC",
+					"0,1");
+		$row = sql_fetch($res_date);
 		$id_post_der = $row['id_forum'];
 		$der_date = date_relative($row['date_heure']);
 		$aut_post = typo($row['auteur']);
@@ -315,7 +321,7 @@ function exec_spipbb_forum() {
 		$i=0;
 		$compt_rang=2;
 		// lignes ...
-		while ($row=spip_fetch_array($res_post)) {
+		while ($row=sql_fetch($res_post)) {
 			$retrait = $i*5;
 			$url_post = url_post_tranche($row['id_forum'], $id_sujet, $compt_rang);
 			echo "<tr><td valign='top' colspan='2' class='verdana2'>\n";
@@ -334,20 +340,18 @@ function exec_spipbb_forum() {
 		echo "</table>\n";
 		fin_bloc();
 	}
-	if(!spip_num_rows($res_sujet)) {
+	if (!sql_count($res_sujet)) {
 		echo _T('gaf:aucun_sujet_dans_forum');
 	}
 	fin_cadre_formulaire();	
 	echo "</td></tr></table>";
 
 	// afficher les tranches
-	if ($nligne['FOUND_ROWS()']>$fixlimit) {
+	if ($nligne['total']>$fixlimit) {
 		echo "<div align='center' class='iconeoff' style='margin:2px;'><span class='verdana2'><b>\n";
-		tranches_liste_forum($tranche_encours, $retour_gaf_local,$nligne['FOUND_ROWS()']);
+		tranches_liste_forum($tranche_encours, $retour_gaf_local,$nligne['total']);
 		echo "</b></span></div>\n";
 	}
-
-
 
 	# pied page exec
 	bouton_retour_haut();

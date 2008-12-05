@@ -167,11 +167,6 @@ function bloc_hierarchie($id_rubrique, $id_article, $parents='') {
 	spipbb_log("entree idrub:$id_rubrique:idart:$id_article:prt:$parents:idrubc:$id_rub_courant:idartc:$id_art_courant:",1,"bloc_hierarchie");
 
 	if (!empty($id_article)) {
-		/* c: 7/2/8 compatibilite pg_sql
-		$result=sql_query("SELECT id_article, id_rubrique, titre
-							FROM spip_articles
-							WHERE id_article=$id_article");
-		*/
 		$result=sql_select(array("id_article","id_rubrique","titre"),"spip_articles","id_article=$id_article");
 		while($row = sql_fetch($result))
 			{
@@ -192,12 +187,7 @@ function bloc_hierarchie($id_rubrique, $id_article, $parents='') {
 	}
 	elseif(!empty($id_rubrique)) {
 
-		$query = "SELECT id_rubrique, id_parent, titre, lang
-				FROM spip_rubriques
-				WHERE id_rubrique=$id_rubrique";
-		// c: 7/2/8 compatibilite pg_sql
-		// $result = sql_query($query);
-		$result = sql_select(array("id_rubrique","id_parent","titre","lang"),"spip_rubriques","id_rubrique=$id_rubrique");
+		$result = sql_select("id_rubrique,id_parent,titre,lang","spip_rubriques","id_rubrique=$id_rubrique");
 		while ($row = sql_fetch($result)) {
 
 			$id_rubrique = $row['id_rubrique'];
@@ -245,12 +235,6 @@ function rubriques_admin_restreint($connect_id_auteur) {
 	$aff = "<br />";
 	$aff.= debut_cadre_relief("../"._DIR_IMG_SPIPBB."spipbb-24.gif", true, '',_T('moderation'));
 
-	/* c: 7/2/8 compatibilite pg_sql
-	$q = sql_query("SELECT R.id_rubrique, R.titre, R.descriptif
-					FROM spip_rubriques AS R, spip_auteurs_rubriques AS A
-					WHERE A.id_auteur=$connect_id_auteur AND A.id_rubrique=R.id_rubrique
-					ORDER BY titre");
-	*/
 	$q = sql_select(array("R.id_rubrique","R.titre","R.descriptif"), // rows
 					array("spip_rubriques AS R","spip_auteurs_rubriques AS A"), // from
 					"A.id_auteur=$connect_id_auteur AND A.id_rubrique=R.id_rubrique", // where
@@ -276,16 +260,9 @@ function rubriques_admin_restreint($connect_id_auteur) {
 // ------------------------------------------------------------------------------
 function posts_proposes_attente_moderation() {
 	spipbb_log("entree",1,"posts_proposes_attente_moderation");
-	/* c: 7/2/8 compatibilite pg_sql
-	$result = sql_query ("SELECT SQL_CALC_FOUND_ROWS id_forum, titre, id_thread
-							FROM spip_forum WHERE statut='prop'
-							ORDER BY date_heure LIMIT 0,10");
-	*/
-	$compte = sql_fetsel("COUNT(*) AS total", "spip_forum", "statut='prop'", "", "", "0,10");
 
-	// récup nombre total d'entrées de $result (mysql 4.0.0 mini)
-	//$ttligne= sql_query("SELECT FOUND_ROWS()");
-	//list($nbrprop) = @spip_fetch_array($ttligne);
+	// récup nombre total d'entrées de $result
+	$compte = sql_fetsel("COUNT(*) AS total", "spip_forum", "statut='prop'", "", "", "0,10");
 	if (isset($compte['total'])) $nbrprop=$compte['total'];
 		else $nbrprop=0;
 
@@ -328,20 +305,12 @@ function liste_moderateurs($modos,$id_salon="",$id_art="") {
 
 	# sur page sujet, recherche rub de art (du thread en cours) + auteurs
 	if (empty($id_salon) and !empty($id_art)) {
-		/* c: 7/2/8 compatibilite pg_sql
-		$r_s = sql_query("SELECT id_rubrique FROM spip_articles WHERE id_article=$id_art");
-		*/
 		$r_s = sql_select("id_rubrique","spip_articles","id_article=$id_art");
 		if(sql_count($r_s)) {
 			$row=sql_fetch($r_s);
 			$id_salon = $row['id_rubrique'];
 		}
 		#auteurs article
-		/* c: 7/2/8 compatibilite pg_sql
-		$result = sql_query("SELECT a.id_auteur, a.nom, a.statut
-							FROM spip_auteurs as a, spip_auteurs_articles as b
-							WHERE a.id_auteur=b.id_auteur AND b.id_article=$id_art");
-		*/
 		$result = sql_select(array("a.id_auteur","a.nom","a.statut"), // rows
 							array("spip_auteurs as a","spip_auteurs_articles as b"), // from
 							"a.id_auteur=b.id_auteur AND b.id_article=$id_art"); // where
@@ -360,13 +329,8 @@ function liste_moderateurs($modos,$id_salon="",$id_art="") {
 
 	# admins rubrique
 	if ($id_salon) {
-		/* c: 7/2/8 compatibilite pg_sql
-		$res = sql_query("SELECT DISTINCT A.nom, A.id_auteur, A.statut
-							FROM  spip_auteurs AS A, spip_auteurs_rubriques AS B
-							WHERE $where_modos A.id_auteur=B.id_auteur AND id_rubrique=$id_salon");
-		*/
-		$res = sql_select(array("DISTINCT A.nom","A.id_auteur","A.statut"), // rows
-						array("spip_auteurs AS A","spip_auteurs_rubriques AS B"), // from
+		$res = sql_select("DISTINCT A.nom, A.id_auteur, A.statut", // rows
+						"spip_auteurs AS A, spip_auteurs_rubriques AS B", // from
 						"A.id_auteur=B.id_auteur AND id_rubrique=$id_salon"); //where
 		if (sql_count($res)) { // c: 18/12/7 count un peu inutile car le while fait quasi le meme test
 			while ($row = sql_fetch($res)) {
@@ -400,15 +364,8 @@ function alerte_maintenance() {
 				$datime=date("d/m/y H:i",@filemtime(_DIR_SESSIONS.$file));
 				$art_mt=$match[1];
 				$aut_mt=$match[2];
-				/* c: 7/2/8 compatibilite pg_sql
-				$req=sql_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$aut_mt");
-				$row=sql_fetch($req);
-				*/
+
 				$row = sql_fetsel("nom","spip_auteurs","id_auteur=$aut_mt");
-				/* c: 7/2/8 compatibilite pg_sql
-				$req2=sql_query("SELECT titre FROM spip_articles WHERE id_article=$art_mt");
-				$row2=sql_fetch($req2);
-				*/
 				$row2 = sql_fetsel("titre","spip_articles","id_article=$art_mt");
 
 				$aff = "<br />"

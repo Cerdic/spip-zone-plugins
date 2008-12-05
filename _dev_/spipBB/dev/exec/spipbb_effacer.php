@@ -81,19 +81,16 @@ function exec_spipbb_effacer() {
 		}
 		else {
 			foreach($tbl_eraze as $id)
-				{ $req = spip_query("DELETE FROM spip_forum WHERE id_forum=$id and statut='off'"); }
+				{ $req = sql_delete("spip_forum","id_forum=$id and statut='off'"); }
 			echo "<div class='verdana3'>".$nbr_eraze._T('spipbb:posts_effaces')."</div>";
 		}
 		fin_cadre_relief();
 	}
 
-	// c: 10/2/8 compat multibases
-	/*
-	$res=sql_query("SELECT id_forum, id_parent, titre, id_thread, COUNT(id_forum) as total_post
-					FROM spip_forum WHERE statut = 'off' GROUP BY id_thread ");
-					*/
-	$res=sql_select(array("id_forum","id_parent","titre","id_thread","COUNT(id_forum) as total_post"),
-					"spip_forum","statut = 'off'","id_thread");
+	$res=sql_select("id_forum,id_parent,titre,id_thread,COUNT(id_forum) as total_post",
+					"spip_forum",
+					"statut = 'off'",
+					"id_thread");
 
 	debut_cadre_relief("");
 	echo "<form action='".generer_url_ecrire("spipbb_effacer")."' method='post' name='formeffacer'>\n";
@@ -129,12 +126,8 @@ function exec_spipbb_effacer() {
 		echo "<input type='checkbox' name='eraze[]' value='".$id_post."'>";
 		echo "</td></tr>\n";
 		if ($total_post>'1') {
-			// c: 10/2/8 compat multibases
-			/*
-			$res2=sql_query("SELECT id_forum, titre FROM spip_forum
-							WHERE id_thread=$id_thread AND statut='off' AND id_forum!=$id_post");
-							*/
-			$res2=sql_select(array("id_forum","titre"),"spip_forum",
+			$res2=sql_select("id_forum,titre",
+							"spip_forum",
 							"id_thread=$id_thread AND statut='off' AND id_forum!=$id_post");
 
 			if($id_parent=='0')

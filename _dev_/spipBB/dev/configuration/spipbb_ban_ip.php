@@ -44,8 +44,6 @@ function configuration_spipbb_ban_ip_dist() {
 	$res .= debut_cadre_relief("", true, "", "<label for='unban_ip'>"._T('spipbb:admin_unban_ip_info')."</label>")
 		. "<select name='unban_ip[]' id='unban_ip' multiple='multiple' size='5' class='forml'>";
 
-	// c: 10/2/8 compat multibases
-	//$query=sql_query("SELECT id_ban,ban_ip FROM spip_ban_liste WHERE ban_ip IS NOT NULL ");
 	$query=sql_select(array("id_ban","ban_ip"),"spip_ban_liste","ban_ip IS NOT NULL");
 	if ( sql_count($query) ) {
 		while ($row = sql_fetch($query)) {

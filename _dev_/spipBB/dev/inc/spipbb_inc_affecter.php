@@ -16,10 +16,10 @@ spipbb_log("included",3,__FILE__);
 function bb_article($id_rubrique, $rang_rub, $id_art) {
 global $couleur_claire;
 
-$req=spip_query("SELECT id_article, id_rubrique, titre FROM spip_articles WHERE id_rubrique=$id_rubrique");
-$nbr_rep=spip_num_rows($req);
+$req=sql_select("id_article, id_rubrique, titre","spip_articles","id_rubrique=$id_rubrique");
+$nbr_rep=sql_count($req);
 	if($nbr_rep > 0) {
-		while ($row=spip_fetch_array($req)) {
+		while ($row=sql_fetch($req)) {
 			$id_article=$row['id_article'];
 			$id_rubrique=$row['id_rubrique'];
 			$titre=$row['titre'];
@@ -53,8 +53,8 @@ $nbr_rep=spip_num_rows($req);
 //
 function grand_ma($id_rubrique, $rang_rub, $id_art) {
 
-$req=spip_query("SELECT id_rubrique, titre FROM spip_rubriques WHERE id_parent=$id_rubrique");
-	while ($row=spip_fetch_array($req)) 	{
+$req=sql_select("id_rubrique, titre","spip_rubriques","id_parent=$id_rubrique");
+	while ($row=sql_fetch($req)) 	{
 		$id_rubrique=$row['id_rubrique'];
 		$titre=$row['titre'];
 		$rang_rub++;

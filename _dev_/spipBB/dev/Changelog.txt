@@ -1,6 +1,8 @@
 ﻿2008-12-05  chryjs  <chryjs!@!free!.!fr>
 
  * Report du Bug corrigé par cf 24961 : http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=876#forum878
+ * 0.5.2.2 : Correction du bug sur action gestion du forum (interface privee) : cf http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=827
+ * correction des requetes sql : adapatation de celles qui utilisaient l'ancienne interface
  
 
 2008-12-01  chryjs  <chryjs!@!free!.!fr>

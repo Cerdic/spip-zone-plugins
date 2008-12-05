@@ -127,14 +127,6 @@ function spipbb_donnees_auteur($id) {
 		$left_join = "LEFT JOIN spip_$table_support AS sap ON sa.id_auteur = sap.id_auteur ";
 	}
 
-	// c: 10/2/8 compat multibases
-	/*
-	$result = sql_query("SELECT sa.id_auteur, sa.statut, sa.nom, sa.login, sa.source, sa.extra
-						$chps_sup
-						FROM spip_auteurs AS sa
-						$left_join
-						WHERE sa.id_auteur=$id");
-	*/
 	$result = sql_select(array_merge(array("sa.id_auteur","sa.statut","sa.nom","sa.login","sa.source","sa.extra"),$chps_sup),
 						"spip_auteurs AS sa $left_join",
 						"sa.id_auteur=$id");

@@ -44,8 +44,6 @@ function configuration_spipbb_ban_email_dist() {
 	$res .= debut_cadre_relief("", true, "", "<label for='unban_email'>"._T('spipbb:admin_unban_email_info')."</label>")
 		. "<select name='unban_email[]' id='unban_email' multiple='multiple' size='5' class='forml'>";
 
-	// c: 10/2/8 compat multibases
-	//$query=sql_query("SELECT id_ban,ban_email FROM spip_ban_liste WHERE ban_email IS NOT NULL ");
 	$query=sql_select(array("id_ban","ban_email"),"spip_ban_liste","ban_email IS NOT NULL");
 	if ( sql_count($query) ) {
 		while ($row = sql_fetch($query)) {

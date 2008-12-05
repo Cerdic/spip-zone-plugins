@@ -56,17 +56,15 @@ function exec_spipbb_sujet() {
 	#
 	# sujet origine
 	if($id_sujet) {
-		$req_afs = "SELECT id_article, statut, titre FROM spip_forum WHERE id_forum=$id_sujet";
-		$res_afs = spip_query($req_afs);
-		$row=spip_fetch_array($res_afs);
+		$row=sql_fetsel("id_article, statut, titre","spip_forum","id_forum=$id_sujet");
 		$statut_sujet = $row['statut'];
 		$id_art=$row['id_article'];
 		$titre_sujet=$row['titre'];
 	}
 
 	# recup de id_rubrique pour 'droits' sur bouton_ecrire_post.
-	$resrub=spip_query("SELECT id_rubrique FROM spip_articles WHERE id_article=$id_art");
-	$rowrub=spip_fetch_array($resrub);
+
+	$rowrub=sql_fetsel("id_rubrique","spip_articles","id_article=$id_art");
 	$id_rubrique=$rowrub['id_rubrique'];
 
 	# verif si Forum conteneur (article) est fermé ?
@@ -89,14 +87,6 @@ function exec_spipbb_sujet() {
 	// requete des posts
 	//
 
-/* c: 7/2/8 compat pg_sql
-	$req_post =	"SELECT SQL_CALC_FOUND_ROWS *,
-				DATE_FORMAT(date_heure, '%d/%m/%Y %H:%i') AS dateur_post
-				FROM spip_forum
-				WHERE id_thread=$id_sujet AND statut IN ('publie', 'off', 'prop')
-				ORDER BY date_heure LIMIT $dl,$fixlimit";
-	$res_post = spip_query($req_post);
-*/
 	$res_post = sql_select("*,DATE_FORMAT(date_heure, '%d/%m/%Y %H:%i') AS dateur_post",
 							"spip_forum",
 							"id_thread=$id_sujet AND statut IN ('publie', 'off', 'prop')",
@@ -109,9 +99,6 @@ function exec_spipbb_sujet() {
 	#
 	// récup nombre total d'entrée de req_post
 	$nligne = sql_fetsel("COUNT(*) AS total","spip_forum","id_thread=$id_sujet AND statut IN ('publie', 'off', 'prop')","","","$dl,$fixlimit");
-
-	//$nl = spip_query("SELECT FOUND_ROWS()");
-	//$nligne = @spip_fetch_array($nl);
 
 	// valeur de tranche affichée
 	$tranche_encours = $dl+1;
@@ -368,9 +355,9 @@ function exec_spipbb_sujet() {
 	#
 	# afficher les tranches
 	#
-		if ($nligne['FOUND_ROWS()']>$fixlimit) {
+		if ($nligne['total']>$fixlimit) {
 			echo "<div align='center' class='iconeoff' style='margin:2px;'><span class='verdana2'><b>";
-			tranches_liste_forum($tranche_encours, $retour_gaf_local, $nligne['FOUND_ROWS()']);
+			tranches_liste_forum($tranche_encours, $retour_gaf_local, $nligne['total']);
 			echo "</b></span></div>";
 		}
 
