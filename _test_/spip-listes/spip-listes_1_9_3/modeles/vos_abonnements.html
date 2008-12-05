@@ -25,7 +25,7 @@ CP-20081205
 			<:spiplistes:vous_etes_abonne_a_la_liste_:> })]
 		<ul class='spiplistes-mesabos'>
 		</B_compter>
-    <BOUCLE_meslistes(AUTEURS_LISTES spip_listes){id_auteur=#SESSION{id_auteur}}>
+	    <BOUCLE_meslistes(AUTEURS_LISTES spip_listes){id_auteur=#EVAL{$GLOBALS['auteur_session']['id_auteur']}}>
              <li>#TITRE</li>
     </BOUCLE_meslistes>
 	</ul>
