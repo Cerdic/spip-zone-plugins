@@ -1,4 +1,9 @@
-﻿2008-12-01  chryjs  <chryjs!@!free!.!fr>
+﻿2008-12-05  chryjs  <chryjs!@!free!.!fr>
+
+ * Report du Bug corrigé par cf 24961 : http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=876#forum878
+ 
+
+2008-12-01  chryjs  <chryjs!@!free!.!fr>
 
  * 0.5.2.0 Evolution de l'interface de configuration sur modèle Spip avec Ajax
  * correction des liens vers ancien site

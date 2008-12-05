@@ -74,6 +74,7 @@ function exec_spipbb_forum() {
 	}
 
 	# verif Forum ferme/ferme maintenance
+	if(!function_exists('verif_article_ferme')) include_spip("inc/spipbb_util");
 	$art_ferme = verif_article_ferme($id_forum, $GLOBALS['spipbb']['id_mot_ferme']);
 
 	# verif Forum type "annonce" ?
@@ -249,6 +250,7 @@ function exec_spipbb_forum() {
 		$annonce = verif_sujet_annonce($id_sujet);
 		
 		// verif si Sujet est ferme ?
+		if(!function_exists('verif_sujet_ferme')) include_spip("inc/spipbb_util");
 		$sujet_ferme = verif_sujet_ferme($id_sujet, $GLOBALS['spipbb']['id_mot_ferme']);
 		
 		// les posts reponses de ce sujet
