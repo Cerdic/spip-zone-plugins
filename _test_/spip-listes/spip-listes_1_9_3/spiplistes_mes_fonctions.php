@@ -24,6 +24,25 @@ function boucle_LISTES($id_boucle, &$boucles) {
 	return (calculer_boucle($id_boucle, $boucles));
 }
 
+//
+// <BOUCLE(AUTEURS_LISTES)>
+//
+if(spiplistes_spip_est_inferieur_193()) {
+	function boucle_AUTEURS_LISTES($id_boucle, &$boucles) {
+		global $table_des_tables;
+		$boucle = &$boucles[$id_boucle];
+		$type = $boucle->type_requete; 
+		$id_table = $table_des_tables[$type];
+		if (!$id_table)
+		//      table hors SPIP
+			$boucle->from[$type] =  $type;
+		else {
+		// les tables declarees par spip ont un prefixe et un surnom
+			$boucle->from[$id_table] =  'spip_' . $type ;
+		}
+		return (calculer_boucle($id_boucle, $boucles));
+	}
+}
 
 //
 // <BOUCLE(COURRIERS)>

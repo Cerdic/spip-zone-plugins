@@ -41,6 +41,7 @@ include_spip('inc/spiplistes_api_globales');
 	//$table_des_tables['abonnes'] = 'abonnes';
 	$table_des_tables['courriers'] = 'courriers';
 	$table_des_tables['listes'] = 'listes';
+	$table_des_tables['auteurs_listes'] = 'auteurs_listes';
 
 	$spip_auteurs_courriers = array(
 						"id_auteur"		=> "bigint(21) NOT NULL default '0'",
