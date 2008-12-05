@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2008                                                *
+ *  Copyright (c) 2001-2007                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -11,13 +11,6 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
-// compatibilite pour avant 1.9.3
-if (!function_exists('test_espace_prive')) {
-	function test_espace_prive() {
-		return defined('_DIR_RESTREINT') ? !_DIR_RESTREINT : false;
-	}
-}
 
 define('_DIR_BTV2_IMG', _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/');
 
@@ -32,7 +25,7 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 		."\" tabindex='1000'\ntitle=\""
 		. $a
 		."\"" 
-		  .(test_espace_prive() ? '' :  ("\nonmouseover=\"helpline('"
+		  .(!_DIR_RESTREINT ? '' :  ("\nonmouseover=\"helpline('"
 		  .addslashes(str_replace('&#39;',"'",$a))
 		  ."',$champhelp)\"\nonmouseout=\"helpline('"
 					 .attribut_html(_T('barre_aide')))
@@ -245,7 +238,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	if (!$lang) $lang = $spip_lang;
 	$num_barre++;
 	$champhelp = "document.getElementById('barre_$num_barre')";
-	$ecrire = test_espace_prive();
+	$ecrire = !_DIR_RESTREINT;
 	$crayons = _request('action')=='crayons_html';
 	// le champ est passe sous la forme document.formulaire.champ ou sous la forme document.getElementsByName('champ')[0]
 	if(preg_match(",(document\.formulaire\.(\w+)|document\.getElementsByName\('(\w+)'\)),", $champ, $reg))
