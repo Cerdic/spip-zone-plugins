@@ -126,8 +126,10 @@ function exec_spiplistes_config () {
 		if($btn_param_valider) {
 			foreach($keys_param_valider as $key) {
 				if(($key != 'email_defaut') || email_valide($email_defaut)) {
-					$str_log .= $key." = ".$$key.", ";
-					ecrire_meta($key, $$key);
+					$str_log .= $key." = " 
+						. (($key == 'smtp_pass') ? str_repeat("*", strlen($$key)) : $$key)
+						. ", ";
+					ecrire_meta($key, trim($$key));
 				}
 			}
 			foreach($keys_opts_param_valider as $key) {

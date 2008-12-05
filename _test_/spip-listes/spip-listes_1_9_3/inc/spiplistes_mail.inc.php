@@ -32,7 +32,8 @@ include_spip('inc/spiplistes_api_globales');
 			$this->AddAddress($email); 
 			
 			if ($smtp_sender =  $GLOBALS['meta']['smtp_sender']) {
-				$this->Sender = $GLOBALS['meta']['spip_lettres_smtp_sender'];
+				//$this->Sender = $GLOBALS['meta']['spip_lettres_smtp_sender'];
+				$this->Sender = $GLOBALS['meta']['smtp_sender'];
 			}
 			
 			$envoi_par_smtp =  $GLOBALS['meta']['mailer_smtp'] ;

@@ -179,7 +179,7 @@ function spiplistes_abonnements_listes_auteur ($id_auteur, $avec_titre = false) 
 		$sql_from[] = "spip_listes AS list";
 		$sql_where[] = "abo.id_liste=list.id_liste";
 	}
-	$sql_where[] = "id_auteur=".sql_quote($id_auteur);
+	$sql_where[] = "abo.id_auteur=".sql_quote($id_auteur);
 	$sql_result = sql_select (
 		$sql_select
 		, $sql_from
