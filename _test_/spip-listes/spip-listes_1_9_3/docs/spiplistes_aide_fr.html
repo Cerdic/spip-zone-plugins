@@ -85,6 +85,7 @@ img {
    <li><a href="#forcerabos">Forcer tous les abonnements</a></li>
    <li><a href="#confirmerformatreception">Confirmer le format de r&eacute;ception</a></li>
    <li><a href="#persopatron">Personnaliser un patron</a></li>
+   <li><a href="#persotitre">Un num&eacute;ro dans le sujet de votre message</a></li>
    <li><a href="#desactiverv">D&eacute;sactiver <strong>@spiplistes_name@</strong></a></li>
    <li><a href="#desinstallerv">D&eacute;sinstaller <strong>@spiplistes_name@</strong></a></li>
    <li><a href="#liens">Liens compl&eacute;mentaires</a></li>
@@ -474,7 +475,27 @@ squelettes, renommez ce patron "nouveautes_texte.html" et adaptez-le
 &agrave; ce format 'texte seul' (retirez tous les
 &eacute;l&eacute;ments HTML, etc.).</p>
 
-  
+
+<h2><a name="persotitre" id="persotitre"></a>Un num&eacute;ro dans le sujet de votre message</h2>
+Si vous d&eacute;sirez faire figurer un num&eacute;ro dans le
+titre de votre message (par exemple: Courrier de mon association
+n&deg; 24), il est possible d'ins&eacute;rer une balise
+'a-la-SPIP' dans le champ sujet. Cette pseudo balise est
+calcul&eacute;e lors de l'envoi de la liste de diffusion.<br />
+<br />
+Exemple :<br />
+Pour un courrier dont le num&eacute;ro correspond au
+num&eacute;ro de la semaine dans l'ann&eacute;e :<br />
+<br />
+<pre>Courrier de la semaine [(#DATE|affdate{'W'})]</pre>
+<br />
+Vous pouvez incr&eacute;menter ce num&eacute;ro via le filtre
+'plus'. Par exemple pour ajouter 100 au num&eacute;ro de la semaine
+:<br />
+<br />
+<pre>Courrier de la semaine [(#DATE|affdate{'W'}|plus{100})]</pre>
+
+
 <h2><a name="desinstallerv" id="desinstallerv"></a>D&eacute;sinstaller <strong>@spiplistes_name@</strong></h2>
 <p>Pour d&eacute;sinstaller <strong>@spiplistes_name@</strong>, rendez-vous dans 
    l'interface de gestion des plugins et cliquez sur l'ic&ocirc;ne spip-pack (carton 
