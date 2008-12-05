@@ -92,8 +92,7 @@ function action_spipbb_action_forumannonce($arg) {
 // faut-il faire apparaitre dans les logs (hash calculer action auteur) ?? ??
 
 function action_spipbb_action_fermelibere($arg) {
-	if(!function_exists('verif_article_ferme'))
-		include_spip("inc/spipbb_presentation");
+	if(!function_exists('verif_article_ferme')) include_spip("inc/spipbb_util");
 
 	global $redirect;
 	global $mode, $id_mot_ferme;

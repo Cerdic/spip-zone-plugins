@@ -233,6 +233,7 @@ function exec_spipbb_admin() {
 
 			$ouvrir_forum = generer_url_ecrire("spipbb_forum", "id_article=".$id_forum);
 
+			if(!function_exists('verif_article_ferme')) include_spip("inc/spipbb_util");
 			$art_ferme = verif_article_ferme($id_forum, $GLOBALS['spipbb']['id_mot_ferme']);
 
 			$ifond = $ifond ^ 1;

@@ -70,9 +70,11 @@ function exec_spipbb_sujet() {
 	$id_rubrique=$rowrub['id_rubrique'];
 
 	# verif si Forum conteneur (article) est fermé ?
+	if(!function_exists('verif_article_ferme')) include_spip("inc/spipbb_util");
 	$art_ferme = verif_article_ferme($id_art, $GLOBALS['spipbb']['id_mot_ferme']);
 
 	# verif si Sujet est ferme ?
+	if(!function_exists('verif_sujet_ferme')) include_spip("inc/spipbb_util");
 	$sujet_ferme = verif_sujet_ferme($id_sujet, $GLOBALS['spipbb']['id_mot_ferme']);
 
 	# sujet, type "annonce" ?
