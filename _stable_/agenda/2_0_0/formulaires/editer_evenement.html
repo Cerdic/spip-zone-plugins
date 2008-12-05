@@ -23,21 +23,18 @@
 				onclick="if (this.checked==false) { $('span.afficher_horaire').show();} else {$('span.afficher_horaire').hide();}" />
 	    </li>
 	    <li class="editer_date_debut_fin[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur][ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
-			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span>]
-			<label for="date_debut"><:agenda:evenement_date_du:></label><input type='text' class='text date' name='date_debut' id='date_debut' value="[(#ENV{date_debut})]" />
+			[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span>][
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>
+			]<label for="date_debut"><:agenda:evenement_date_de:></label><input type='text' class='text date' name='date_debut' id='date_debut' value="[(#ENV{date_debut})]" />
 			<span class='afficher_horaire'>
 			<label for='heure_debut' class='heure'><:agenda:evenement_date_a_immediat:></label>
-			<input type='text' class='text heure' name='heure_debut' id='heure_debut' value="[(#ENV{heure_debut})]" />
-			</span>
-			</li>
-	    <li class="editer_date_debut_fin[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur][ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
-			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>]
-			<label for="date_fin" class='date_fin'><:agenda:evenement_date_au:></label>
-			<input type='text' class='text date' name='date_fin' id='date_fin' value="[(#ENV{date_fin})]" />
-			<span class='afficher_horaire'>
-			<label for='heure_fin' class='heure'><:agenda:evenement_date_a_immediat:></label>
-			<input type='text' class='text heure' name='heure_fin' id='heure_fin' value="[(#ENV{heure_fin})]" />
-			</span>
+			<input type='text' class='text heure' name='heure_debut' id='heure_debut' value="[(#ENV{heure_debut})]" 
+			/></span>
+			<label for="date_fin" class='date_fin'><:agenda:evenement_date_a:></label>
+			<span class='afficher_horaire'><label for='heure_fin' class='heure'><:agenda:evenement_date_a_immediat:></label>
+			<input type='text' class='text heure' name='heure_fin' id='heure_fin' value="[(#ENV{heure_fin})]" 
+			/></span><input type='text' class='text date' name='date_fin' id='date_fin' value="[(#ENV{date_fin})]" />
 	    </li>
 	    </ul>
 	    </fieldset></li>
