@@ -187,15 +187,20 @@ function exec_spiplistes_courrier_edit(){
 		// 
 		. "<div id='ajax-loader' align='right'><img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."ajax_indicator.gif' alt='' /></div>\n"
 		;
-		
+	
+	if(strpos($GLOBALS['meta']['langues_multilingue'], ",") !== false) {
+		$page_result .= "" 
+			// selecteur de langues
+			. "<div class='boite-generer-option'>\n"
+			. "<label class='verdana2'>"._T('spiplistes:Langue_du_courrier_')
+			. "<select name='lang' class='fondo'>\n"
+			. liste_options_langues('changer_lang')
+			. "</select></label>\n"
+			. "</div>\n"
+			;
+	}
+	
 	$page_result .= ""
-		// selecteur de langues
-		. "<div class='boite-generer-option'>\n"
-		. "<label class='verdana2'>"._T('spiplistes:Langue_du_courrier_')
-		. "<select name='lang' class='fondo'>\n"
-		. liste_options_langues('changer_lang')
-		. "</select></label>\n"
-		. "</div>\n"
 		// Prendre en compte a partir de quelle date ?
 		. spiplistes_dater_envoi(
 			'courrier', $id_courrier, $statut
