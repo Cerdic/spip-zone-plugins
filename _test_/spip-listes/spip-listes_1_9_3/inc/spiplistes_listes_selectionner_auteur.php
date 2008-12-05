@@ -112,7 +112,7 @@ function spiplistes_listes_auteurs_elligibles ($id_liste, $statut_liste = '', $f
  * @param $statut_liste staut ou false
  * @param $tri string: 'statut', 'nom', ou 'nombre' (qte)
  * @param $debut id_auteur du premier affiche
- * @param $script_retour Object
+ * @param $script_retour string
  */
 function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut, $script_retour) {
 
@@ -222,7 +222,7 @@ function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut
 		$exec_url = generer_url_ecrire($r_script, $r_param);
 		$action_url = generer_action_auteur($a_script, $a_param);
 		$result = "<a href='" . $exec_url . "'"
-				. " onclick=\"return AjaxSqueeze('$action_url', '$id_dest', '$exec_url', event)\""
+				. " onclick=\"javascript:return AjaxSqueeze('$action_url', '$id_dest', '$exec_url', event)\""
 				. " title='".$title."'>".$html."</a>";
 		return($result);
 	}
@@ -345,7 +345,8 @@ function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut
 				// sinon, ajax animera la boite des abos
 				$action_url = generer_action_auteur(_SPIPLISTES_ACTION_LISTE_ABONNES
 					, $id_liste." ".$j." ".$tri);
-				$action_url = parametre_url($action_url, "redirect=$script_retour");
+//				$action_url = parametre_url($action_url, "redirect=$script_retour");
+
 				$result .= 
 					"<a href='"
 						. parametre_url($exec_url, 'redirect', $script_retour)
