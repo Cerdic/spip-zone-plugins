@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'basique' => 'B&agrave;sic',
 	'blocs:aide' => 'Blocs Desplegables: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (&agrave;lies: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) i <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF>Us permet crear blocs que, amb el t&iacute;tol clicable, els pot tornar visibles o invisibles.
+	'blocs:description' => 'Us permet crear blocs que, amb el t&iacute;tol clicable, els pot tornar visibles o invisibles.
 
 @puce@ {{En els textos SPIP}}: els redactors tenen disponibles les noves etiquetes &lt;bloc&gt; (o &lt;invisible&gt;) i &lt;visible&gt; per utilitzar en el seus textos d\'aquesta manera: 
 
@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  El meu bloc desplegable (que contindr&agrave; el URL al que apunta si &eacute;s necessari)
  #BLOC_FIN</code></quote>
  
-',
+@puce@ Marcant amb una creu &laquo;si&raquo; m&eacute;s avall, l\'obertura d\'un bloc provocar&agrave; el tancament de tots els altres blocs de la p&agrave;gina, per tal de tenir-ne nom&eacute;s un d\'obert a la vegada.[[%bloc_unique%]]',
 	'blocs:nom' => 'Blocs Desplegables',
 	'boites_privees:description' => 'Tots els quadres descrits m&eacute;s avall apareixen a la part privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]]
 - {{Les revisions del Ganivet Su&iacute;s}} : un quadre a la p&agrave;gina actual de configuraci&oacute;, indicant les &uacute;ltimes modificacions aportades al codi del plugin ([Source->@_CS_RSS_SOURCE@]).
@@ -110,10 +110,17 @@ Anoteu: modificant aquest segon estil, tamb&eacute; perdeu els estils est&agrave
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Funcions',
 	'code_jq' => 'jQuery',
-	'code_js' => '<MODIF>Javascript',
+	'code_js' => 'JavaScript',
 	'code_options' => 'Opcions',
 	'code_spip_options' => 'Opcions SPIP',
 	'contrib' => 'M&eacute;s informacions: @url@',
+	'corbeille:description' => 'SPIP suprimeix autom&agrave;ticament els objectes llen&ccedil;ats a la paperera les &uacute;ltimes 24 hores, en general des de les 4 de la matinada, gr&agrave;cies a una tasca &laquo;CRON&raquo; (llan&ccedil;ament peri&ograve;dic i/o autom&agrave;tic dels processos programats pr&egrave;viament). Aqu&iacute; podeu impedir aquest proc&eacute;s per tal de gestionar millor la vostra paperera. [[%arret_optimisation%]]',
+	'corbeille:nom' => 'La paperera',
+	'corbeille_objets' => '@nb@ objecte(s) a la paperera. ',
+	'corbeille_objets_lies' => '@nb_lies@ enlla&ccedil;(os) detectat(s).',
+	'corbeille_objets_vide' => 'Cap objecte a la paperera',
+	'corbeille_objets_vider' => 'Suprimir els objectes seleccionats',
+	'corbeille_vider' => 'Buidar la paperera:',
 	'couleurs:aide' => 'Acolorir el text: <b>[coul]text[/coul]</b>@fond@ amb <b>coul</b> = @liste@',
 	'couleurs:description' => 'Permet aplicar f&agrave;cilment colors a tots els textos del lloc (articles, breus, t&iacute;tols, f&ograve;rum, …) utilitzant etiquetes en dreceres.
 
@@ -197,7 +204,7 @@ Aquesta eina es pot acompanyar amb &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.',
 	'etendu' => 'Est&egrave;s',
 
 	// F
-	'f_jQuery:description' => '<MODIF>Impedeix la instal&middot;laci&oacute; de {jQuery} a la part p&uacute;blica per tal d\'economitzar una mica de &laquo;temps m&agrave;quina&raquo;. Aquesta llibreria ([->http://jquery.com/]) aporta nombroses comoditats a la programaci&oacute; de Javascript i pot ser utilitzat per certs plugins. SPIP l\'utilitza a la seva part privada.
+	'f_jQuery:description' => 'Impedeix la instal&middot;laci&oacute; de {jQuery} a la part p&uacute;blica per tal d\'economitzar una mica de &laquo;temps m&agrave;quina&raquo;. Aquesta llibreria ([->http://jquery.com/]) aporta nombroses comoditats a la programaci&oacute; de JavaScript i pot ser utilitzada per certs plugins. SPIP l\'utilitza a la seva part privada.
 
 Atenci&oacute;: certes eines del Ganivet Su&iacute;s necessiten les funcions de {jQuery}. ',
 	'f_jQuery:nom' => 'Desactiva jQuery',
@@ -205,20 +212,26 @@ Atenci&oacute;: certes eines del Ganivet Su&iacute;s necessiten les funcions de 
 	'filets_sep:description' => 'Insereix l&iacute;nies de separaci&oacute;, que es poden personalitzar per fulls d\'estil, a tots els textos d\'SPIP.
 _ La sintaxi &eacute;s: "__code__", o "code" representa o b&eacute; el n&uacute;mero d\'identificaci&oacute; (de 0 a 7) de la l&iacute;nia a inserir en relaci&oacute; directa amb els estils corresponents, o b&eacute; el nom d\'una imatge situada a dins de la carpeta plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'L&iacute;nies de Separaci&oacute;',
-	'filtrer_javascript:description' => '<MODIF>Per gestionar la inserci&oacute; de javascript a dins dels articles, podem fer-ho de tres maneres:
-- <i>mai</i> : el javascript &eacute;s rebutjat a tot arreu
-- <i>defecte</i> : el javascript s\'assenyala en vermell a l\'espai privat
-- <i>sempre</i> : el javascript s\'accepta a tot arreu.
+	'filtrer_javascript:description' => 'Per gestionar la inserci&oacute; de JavaScript a dins dels articles, podem fer-ho de tres maneres:
+- <i>mai</i> : el JavaScript &eacute;s rebutjat a tot arreu
+- <i>defecte</i> : el JavaScript s\'assenyala en vermell a l\'espai privat
+- <i>sempre</i> : el JavaScript s\'accepta a tot arreu.
 
-Atenci&oacute;: a dins dels f&ograve;rums, peticions, flux sindicats, etc., la gesti&oacute; del javascript &eacute;s <b>sempre</b> segura.[[%radio_filtrer_javascript3%]]',
-	'filtrer_javascript:nom' => '<MODIF>Gesti&oacute; del javascript',
+Atenci&oacute;: a dins dels f&ograve;rums, peticions, flux sindicats, etc., la gesti&oacute; del JavaScript &eacute;s <b>sempre</b> segura.[[%radio_filtrer_javascript3%]]',
+	'filtrer_javascript:nom' => 'Gesti&oacute; del JavaScript',
 	'flock:description' => 'Desactiva el sistema bloqueig de fitxers neutralitzant la funci&oacute; PHP {flock()}. Alguns hostatjadors posen problemes greus fruit d\'un sistema de fitxers inadaptat o a una manca de sincronitzaci&oacute;. No activeu aquesta eina si el vostre lloc funciona normalment. ',
 	'flock:nom' => 'Cap bloqueig de fitxers',
 	'fonds' => 'Fons:',
-	'forcer_langue:description' => '<MODIF>Imposa el context de llengua pels jocs d\'esquelets multiling&uuml;es que disposen d\'un formulari o d\'un men&uacute; de lleng&uuml;es que sap gestionar la galeta de llengua. ',
-	'forcer_langue:nom' => '<MODIF>Imposar llengua',
+	'forcer_langue:description' => 'Imposa el context de llengua pels jocs d\'esquelets multiling&uuml;es que disposen d\'un formulari o d\'un men&uacute; de lleng&uuml;es que sap gestionar la galeta de lleng&uuml;es.
+
+T&egrave;cnicament, aquesta eina t&eacute; com efecte:
+- desactivar la cerca del esquelet en funci&oacute; de la llengua de l\'objecte,
+- desactivar el criteri <code>{lang_select}</code> autom&agrave;tic en els objectes cl&agrave;ssics (articles, breus, seccions... ).
+
+Aleshores, els blocs multi es mostren sempre en la llengua demanada pel visitant.',
+	'forcer_langue:nom' => 'Imposa la llengua',
 	'format_spip' => 'Els articles en format SPIP',
-	'forum_lgrmaxi:description' => '<MODIF>Per defecte, els missatges de f&ograve;rum no tenen l&iacute;mits de mida. Si aquesta eina est&agrave; activada, es mostrar&agrave; un missatge d\'error quan alg&uacute; vulgui enviar un missatge d\'una mida superior al valor especificat, i el missatge es rebutjar&agrave;. Un valor buit o igual a 0 significa, no obstant, que no s\'aplica cap l&iacute;mit.[[%forum_lgrmaxi%]]',
+	'forum_lgrmaxi:description' => 'Per defecte, els missatges de f&ograve;rum no tenen l&iacute;mits de mida. Si aquesta eina est&agrave; activada, es mostrar&agrave; un missatge d\'error quan alg&uacute; vulgui enviar un missatge d\'una mida superior al valor especificat, i el missatge es rebutjar&agrave;. Un valor buit o igual a 0 significa, no obstant, que no s\'aplica cap l&iacute;mit.[[%forum_lgrmaxi%]]',
 	'forum_lgrmaxi:nom' => 'Mida dels f&ograve;rums',
 
 	// G
@@ -230,15 +243,12 @@ Atenci&oacute;: a dins dels f&ograve;rums, peticions, flux sindicats, etc., la g
 @puce@ S\'ofereixen dues solucions per gestionar la petita finestra autom&agrave;tica que apareix quan hi passes per sobre el ratol&iacute;.  [[%glossaire_js%]]',
 	'glossaire:nom' => 'Glossari intern',
 	'glossaire_css' => 'Soluci&oacute; CSS',
-	'glossaire_js' => '<MODIF>Soluci&oacute; Javascript',
+	'glossaire_js' => 'Soluci&oacute; JavaScript',
 	'guillemets:description' => 'Substitueix autom&agrave;ticament les cometes (") per les cometes tipogr&agrave;fiques de la llengua de composici&oacute;. La substituci&oacute;, transparent per l\'usuari, no modifica el text original sin&oacute; nom&eacute;s la seva publicaci&oacute; final. ',
 	'guillemets:nom' => 'Cometes tipogr&agrave;fiques',
 
 	// H
 	'help' => '{{Aquesta p&agrave;gina nom&eacute;s &eacute;s accessible pels responsables del lloc.}}<p>Permet la configuraci&oacute; de les diferents funcions suplement&agrave;ries aportades pel plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.',
-	'help0' => '{{Aquesta p&agrave;gina &eacute;s nom&eacute;s accessible als responsables del lloc.}}<p>Permet accedir a les diferents funcions suplement&agrave;ries aportades pel plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p><p>Enlla&ccedil; de documentaci&oacute;:<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]</p><p>Reiniciaci&oacute;:
-_ • [De tot el plugin->@reset@]
-</p>',
 	'help2' => 'Versi&oacute; local: @version@',
 	'help3' => '<p>Enlla&ccedil;os de documentaci&oacute;:<br/>•[Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reiniciacions:
 _ • [Eines amagades|Tornar a l\'aparen&ccedil;a inicial d\'aquesta p&agrave;gina->@hide@]
@@ -250,17 +260,17 @@ _ • [De tot el plugin|Tornar a l\'estat inicial del plugin->@reset@]@install@
 
 Per definir aquest logotip, dirigiu-vos a la p&agrave;gina &laquo;&nbsp;Configuraci&oacute; del lloc&nbsp;&raquo; fent un clic damunt del bot&oacute; &laquo;&nbsp;Configuraci&oacute;&nbsp;&raquo;.',
 	'icone_visiter:nom' => 'Bot&oacute; &laquo;&nbsp;Visitar&nbsp;&raquo;',
-	'insert_head:description' => '<MODIF>Activa autom&agrave;ticament l\'etiqueta [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] a tots els esquelets, tinguin o no aquesta etiqueta entre &lt;head&gt; i &lt;/head&gt;. Gr&agrave;cies a aquesta opci&oacute;, els plugins podran inserir javascript (.js) o fulls d\'estil (.css).',
+	'insert_head:description' => 'Activa autom&agrave;ticament l\'etiqueta [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] a tots els esquelets, tinguin o no aquesta etiqueta entre &lt;head&gt; i &lt;/head&gt;. Gr&agrave;cies a aquesta opci&oacute;, els plugins podran inserir JavaScript (.js) o fulls d\'estil (.css).',
 	'insert_head:nom' => 'Etiqueta #INSERT_HEAD',
 	'insertions:description' => 'ATENCI&Oacute;: eina en curs de desenvolupament!! [[%insertions%]]',
 	'insertions:nom' => 'Correccions autom&agrave;tiques',
-	'introduction:description' => '<MODIF>Aquesta etiqueta que cal posar a dins dels esquelets serveix, en general a la p&agrave;gina principal o a les seccions, per fer un resum dels articles, de les notes breus, etc..</p>
+	'introduction:description' => 'Aquesta etiqueta que cal posar a dins dels esquelets serveix, en general a la p&agrave;gina principal o a les seccions, per fer un resum dels articles, de les notes breus, etc..</p>
 <p>{{Atenci&oacute;}}: Abans d\'activar aquesta funcionalitat, verifiqueu b&eacute; que no existeix ja cap funci&oacute; {balise_INTRODUCTION()} al vostre esquelet o als vostres plugins. La sobrec&agrave;rrega produ&iuml;ra un error de compilaci&oacute;.</p>
-@puce@ Podeu precisar (en percentatge en relaci&oacute; al valor utilitzat per defecte) la llargada del text a retornar per l\'etiqueta #INTRODUCTION. Cap valor o igual a 100 no modifica l\'aspecte de la introducci&oacute; i utilitza, per tant, els valors per defecte seg&uuml;ents: 500 car&agrave;cters pels articles, 300 per les notes breus i 600 pels f&ograve;rums i les seccions.
+@puce@ Podeu precisar (en percentatge per relaci&oacute; al valor utilitzat per defecte) la llargada del text a retornar per l\'etiqueta #INTRODUCTION. Cap valor o igual a 100 no modifica l\'aspecte de la introducci&oacute; i utilitza, per tant, els valors per defecte seg&uuml;ents: 500 car&agrave;cters pels articles, 300 per les notes breus i 600 pels f&ograve;rums i les seccions.
 [[%lgr_introduction%&nbsp;%]]
 @puce@ Per defecte, els punts de continuaci&oacute; afegits al resultat de l\'etiqueta #INTRODUCTION si el text &eacute;s massa llarg s&oacute;n: <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Aqu&iacute; podeu precisar la vostra pr&ograve;pia cadena de car&agrave;cters que indiqui al lector que el text tallat t&eacute; una continuaci&oacute;.
 [[%suite_introduction%]]
-@puce@ Si l\'etiqueta #INTRODUCTION es fa servir per resumir un article, llavors el Ganivet Su&iacute;s pot fabricar un enlla&ccedil; al damunt dels punts de continuaci&oacute; definits m&eacute;s amunt per tal portar al lector cap al text original. Per exemple: &laquo;Llegir la continuaci&oacute; de l\'article…&raquo;
+@puce@ Si l\'etiqueta #INTRODUCTION es fa servir per resumir un article, llavors el Ganivet Su&iacute;s pot fabricar un hipervincle al damunt dels punts de continuaci&oacute; definits m&eacute;s amunt per tal portar al lector cap al text original. Per exemple: &laquo;Llegir la continuaci&oacute; de l\'article…&raquo;
 [[%lien_introduction%]]
 ',
 	'introduction:nom' => 'Etiqueta #INTRODUCTION',
@@ -282,6 +292,7 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 
 	// L
 	'label:admin_travaux' => 'Tancar el lloc p&uacute;blic per:',
+	'label:arret_optimisation' => 'Impedir que SPIP buidi la paperera autom&agrave;ticament:',
 	'label:auteurs_tout_voir' => '@_CS_CHOIX@',
 	'label:auto_sommaire' => 'Creaci&oacute; sistem&agrave;tica del sumari:',
 	'label:balise_decoupe' => 'Activar l\'etiqueta #CS_DECOUPE :',
@@ -347,6 +358,7 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'label:terminaison_urls_propres' => '<:label:terminaison_urls_page:>',
 	'label:terminaison_urls_propres_qs' => '<:label:terminaison_urls_page:>',
 	'label:titre_travaux' => 'T&iacute;tol del missatge:',
+	'label:titres_etendus' => 'Activar la utilitzaci&oacute; &agrave;mplia d\'etiquetes #TITRE_XXX&nbsp;:',
 	'label:tri_articles' => 'La vostra elecci&oacute;:',
 	'label:url_arbo_minuscules' => 'Conservar els tipus dels t&iacute;tols en els URLs:',
 	'label:url_arbo_sep_id' => 'Car&agrave;cter de separaci&oacute; \'titre-id\' en cas de doublon :<br/>(no utilitzar \'/\')',
@@ -372,11 +384,12 @@ _ • {Extens}: s&oacute;n substitu&iuml;ts a m&eacute;s els enlla&ccedil;os del t
 	'liens_orphelins:nom' => 'URLs bonics',
 
 	// M
-	'mailcrypt:description' => '<MODIF>Amaga tots els enlla&ccedil;os de correus presents als vostres textos substituint-los per un enlla&ccedil; Javascript que permet malgrat tot activar la missatgeria del lector. Aquesta eina antispam impedeix que els robots recullin les adreces electr&ograve;niques deixades visibles als f&ograve;rums o a les etiquetes dels vostres esquelets.',
+	'mailcrypt:description' => 'Amaga tots els enlla&ccedil;os de correus presents als vostres textos substituint-los per un enlla&ccedil; JavaScript que permet malgrat tot activar la missatgeria del lector. Aquesta eina antispam impedeix que els robots recullin les adreces electr&ograve;niques deixades visibles als f&ograve;rums o a les etiquetes dels vostres esquelets.',
 	'mailcrypt:nom' => 'MailCrypt',
 	'message_perso' => 'Moltes gr&agrave;cies als traductors que passaran per aqu&iacute;. Pat ;-)',
 	'moderation_admins' => 'administradors autenticats',
-	'moderation_moderee:description' => '<MODIF>Permet moderar la moderaci&oacute; dels f&ograve;rums pels usuaris inscrits. [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
+	'moderation_message' => 'Aquest f&ograve;rum est&agrave; moderat a priori: la vostra contribuci&oacute; no apareixer&agrave; fins que hagi estat validada per un administrador del lloc, excepte si esteu identificats i autoritzats per publicar-hi directament.',
+	'moderation_moderee:description' => 'Permet moderar la moderaci&oacute; dels f&ograve;rums p&uacute;blics <b>configurats a priori</b> pels usuaris inscrits. <br />Exemple : Jo s&oacute;c el webmestre del meu lloc, i jo responc un missatge d\'un usuari, per qu&egrave; he de validar el meu propi missatge? Moderaci&oacute; moderada ho fa per mi! [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
 	'moderation_moderee:nom' => 'Moderaci&oacute; moderada ',
 	'moderation_redacs' => 'redactors autenticats',
 	'moderation_visits' => 'visitants autenticats',
@@ -398,7 +411,7 @@ _ • {Extens}: s&oacute;n substitu&iuml;ts a m&eacute;s els enlla&ccedil;os del t
 	'outil_desactiver' => 'Desactivar',
 	'outil_desactiver_le' => 'Desactivar l\'eina',
 	'outil_inactif' => 'Eina inactiva',
-	'outil_intro' => '<MODIF>Aquesta p&agrave;gina llista les funcionalitats del plugin que teniu disponibles.<br /><br />Fent un clic damunt del nom de les eines que hi ha m&eacute;s avall, seleccioneu aquells als que podreu canviar l\'estat amb l\'ajuda del bot&oacute; central: les eines activades es desactivaran i <i>viceversa</i>. A cada clic, la descripci&oacute; apareix a sota de les llistes. Les categories s&oacute;n plegables i les eines es poden amagar.  El doble-clic permet de canviar r&agrave;pidament una eina.<br /><br />Quan s\'usa per primer cop, &eacute;s recomanable activar les eina una a una, per si apareixen algunes incompatibilitats amb el vostre esquelet, amb SPIP o amb altres plugins.<br /><br />Nota: la simple c&agrave;rrega d\'aquesta p&agrave;gina torna a compilar el conjunt d\'eines del Ganivet Su&iacute;s.',
+	'outil_intro' => 'Aquesta p&agrave;gina llista les funcionalitats del plugin que teniu disponibles.<br /><br />Fent un clic damunt del nom de les eines que hi ha m&eacute;s avall, seleccioneu aquells als que podreu canviar l\'estat amb l\'ajuda del bot&oacute; central: les eines activades es desactivaran i <i>viceversa</i>. A cada clic, la descripci&oacute; apareix a sota de les llistes. Les categories s&oacute;n plegables i les eines es poden amagar.  El doble-clic permet de canviar l\'ordre r&agrave;pidament d\'una eina.<br /><br />Quan s\'usa per primer cop, &eacute;s recomanable activar les eines una a una, per si apareixen algunes incompatibilitats amb el vostre esquelet, amb SPIP o amb altres plugins.<br /><br />Nota: la simple c&agrave;rrega d\'aquesta p&agrave;gina torna a compilar el conjunt d\'eines del Ganivet Su&iacute;s.',
 	'outil_intro_old' => 'Aquesta interf&iacute;cie &eacute;s antiga.<br /><br />Si trobeu problemes en l\'&uacute;s de la <a href=\'./?exec=admin_couteau_suisse\'>nova interf&iacute;cie</a>, no dubteu de dir-nos-ho al f&ograve;rum de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
 	'outil_nb' => '@pipe@: @nb@ eina',
 	'outil_nbs' => '@pipe@: @nb@ eines',
@@ -415,15 +428,25 @@ _ • {Extens}: s&oacute;n substitu&iuml;ts a m&eacute;s els enlla&ccedil;os del t
 	'outils_selectiontous' => 'TOTS',
 
 	// P
+	'pack_actuel' => 'Paquet @date@',
+	'pack_actuel_avert' => 'Atenci&oacute;, les sobrec&agrave;rregues pels  define() o els globales no s\'especifiquen aqu&iacute;',
+	'pack_actuel_titre' => 'PAQUET ACTUAL DE CONFIGURACI&Oacute; DEL GANIVET SU&Iacute;S',
 	'pack_alt' => 'Veure els par&agrave;metres de configuraci&oacute; en curs',
-	'pack_descrip' => '<MODIF>El vostre "Pack de configuraci&oacute; actual" reuneix el conjunt dels par&agrave;metres de configuraci&oacute; en curs pel que fa al Ganivet Su&iacute;s: l\'activaci&oacute; d\'eines i el valor de les seves eventuals variables.
+	'pack_descrip' => '<MODIF>>El vostre "Pack de configuraci&oacute; actual" reuneix el conjunt dels par&agrave;metres de configuraci&oacute; en curs pel que fa al Ganivet Su&iacute;s: l\'activaci&oacute; d\'eines i el valor de les seves eventuals variables.
 
-Aquest codi PHP pot estar situat a dins del fitxer /config/mes_options.php i afegir&agrave; un enlla&ccedil; de reiniciar a aquesta p&agrave;gina "del pack {Pack Actual}". Evidentment, podreu canviar el seu nom m&eacute;s avall.
+Aquest codi PHP pot estar situat a dins del fitxer /config/mes_options.php i afegir&agrave; un enlla&ccedil; de reiniciar a aquesta p&agrave;gina del pack &laquo;&nbsp;{@pack@}&nbsp;&raquo;. Evidentment, podreu canviar el seu nom.
 
-Si torneu a iniciar el plugin fent un clic sobre un pack, el Ganivet Su&iacute;s es tornar&agrave; a configurar autom&agrave;ticament en funci&oacute; dels par&agrave;metres predefinits al pack.',
+Si torneu a iniciar el plugin fent un clic sobre un pack, el Ganivet Su&iacute;s es tornar&agrave; a configurar autom&agrave;ticament en funci&oacute; dels par&agrave;metres predefinits en aquest pack.',
 	'pack_du' => '• del pack @pack@',
 	'pack_installe' => 'Instal&middot;laci&oacute; d\'un pack de configuraci&oacute;',
+	'pack_nb_plrs' => 'Actualment hi ha @nb@ &laquo;paquets de configuraci&oacute;&raquo; disponibles.',
+	'pack_nb_un' => 'Actualment hi ha un &laquo;paquet de configuraci&oacute;&raquo; disponible',
+	'pack_nb_zero' => 'No hi ha cap &laquo;paquet de configuraci&oacute;&raquo; disponible actualment.',
+	'pack_outils_defaut' => 'Instal&middot;laci&oacute; d\'eines per defecte',
+	'pack_sauver' => 'Salvar la configuraci&oacute; actual',
+	'pack_sauver_descrip' => 'El bot&oacute; que hi ha m&eacute;s avall us permet inserir directament en el vostre fitxer <b>@file@</b> els par&agrave;metres necessaris per afegir un &laquo;paquet de configuraci&oacute;&raquo; al men&uacute; de l\'esquerre. Aix&ograve; us permetr&agrave; posteriorment tornar a configurar en un clic el vostre Ganivet Su&iacute;s en l\'estat en qu&egrave; es troba actualment. ',
 	'pack_titre' => 'Configuraci&oacute; Actual',
+	'pack_variables_defaut' => 'Instal&middot;laci&oacute; de variables per defecte',
 	'par_defaut' => 'Per defecte',
 	'paragrapher2:description' => 'La funci&oacute; SPIP <code>paragrapher()</code> insereix etiquetes &lt;p&gt; i &lt;/p&gt; a tots els textos que estan desprove&iuml;ts de par&agrave;grafs. Per tal de gestionar m&eacute;s finament els vostres estils i les vostres compaginacions, teniu la possibilitat d\'uniformitzar l\'aspecte dels textos del vostre lloc.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Par&agrave;graf',
@@ -452,7 +475,7 @@ Si torneu a iniciar el plugin fent un clic sobre un pack, el Ganivet Su&iacute;s
 	'simpl_interface:description' => 'Desactiva el men&uacute; de canvi r&agrave;pid de l\'estat d\'un article passant pel damunt del seu car&agrave;cter acolorit. Aix&ograve; &eacute;s &uacute;til si busqueu obtenir una interf&iacute;cie privada el m&eacute;s simple possible per tal d\'optimitzar les prestacions del client. ',
 	'simpl_interface:nom' => 'Alleugeriment de la interf&iacute;cie privada',
 	'smileys:aide' => 'Emoticones: @liste@',
-	'smileys:description' => '<MODIF>Insereix emoticones en tots els textos on apareix una drecera del tipus <acronym>:-)</acronym>. Ideal pels f&ograve;rums.
+	'smileys:description' => 'Insereix emoticones en tots els textos on apareix una drecera del tipus <acronym>:-)</acronym>. Ideal pels f&ograve;rums.
 _ Hi ha una etiqueta per mostrar una taula d\'emoticones als vostres esquelets: #SMILEYS.
 _ Dibuixos: [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'Emoticones',
@@ -475,7 +498,7 @@ _ • Nom&eacute;s pels articles que continguin l\'etiqueta <code>@_CS_AVEC_SOMMAI
 [[%balise_sommaire%]]
 
 Aquest sumari pot ser acoblat amb: &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
-	'sommaire:nom' => 'Un sumari pels vostres articles',
+	'sommaire:nom' => '<MODIF>Un sumari pels vostres articles',
 	'sommaire_avec' => 'Un text amb sumari:  <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un text sense sumari: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'spam:description' => 'Intenta lluitar contra els enviaments de missatges autom&agrave;tics i malevolents a la part p&uacute;blica. Algunes paraules i les etiquetes &lt;a>&lt;/a> estan prohibides.
@@ -503,11 +526,19 @@ _ • {Control de la mem&ograve;ria cau}: opci&oacute; id&egrave;ntica a l\'anteri
 	'suivi_forums:description' => 'Un autor d\'un article est&agrave; sempre informat quan es publica un missatge al f&ograve;rum que aquest t&eacute; associat. Per&ograve;, a m&eacute;s, tamb&eacute; es possible advertir a: tots els participants al f&ograve;rum o nom&eacute;s als autors dels missatges en endavant.[[%radio_suivi_forums3%]]',
 	'suivi_forums:nom' => 'Seguiment dels f&ograve;rums p&uacute;blics',
 	'supprimer_cadre' => 'Suprimir aquest quadre',
-	'supprimer_numero:description' => '<MODIF>Aplica la funci&oacute; SPIP supprimer_numero() al conjunt dels {{t&iacute;tols}} i dels {{noms}} del lloc p&uacute;blic, sense que el filtre supprimer_numero estigui present als esquelets.<br />Heus aqu&iacute; la sintaxis que cal utilitzar en el marc d\'un lloc multilingue : <code>1. <multi>My Title[fr]Mon Titre[de]Mein Titel</multi></code>',
+	'supprimer_numero:description' => 'Aplica la funci&oacute; SPIP supprimer_numero() al conjunt dels {{t&iacute;tols}}, dels {{noms}} i dels {{tipus}} (de paraules-clau) del lloc p&uacute;blic, sense que el filtre supprimer_numero estigui present als esquelets.<br />Heus aqu&iacute; la sintaxis que cal utilitzar en el marc d\'un lloc multilingue : <code>1. <multi>My Title[fr]Mon Titre[de]El Meu T&iacute;tol</multi></code>',
 	'supprimer_numero:nom' => 'Suprimeix el n&uacute;mero',
 
 	// T
 	'titre' => 'El Ganivet Su&iacute;s',
+	'titre_parent:description' => 'Al si d\'un bucle, &eacute;s corrent voler mostrar el t&iacute;tol del parent de l\'objecte en curs. Tradicionalment, n\'hi hauria prou utilitzant un segon bucle, per&ograve; aquesta nova etiqueta  #TITRE_PARENT alleugerar&agrave; l\'escriptura dels vostres esquelets. El resultat que torna &eacute;s: el t&iacute;tol del grup d\'una paraula clau o el de la secci&oacute; parenta (si existeix) de qualsevol altre objecte (article, secci&oacute;, breu, etc.).
+
+Anoteu: Per les paraules clau, un &agrave;lies de #TITRE_PARENT &eacute;s #TITRE_GROUPE. El tractament SPIP d\'aquestes noves etiquetes &eacute;s similar al de #TITRE.
+
+@puce@ Si treballeu sota SPIP 2.0, teniu aqu&iacute;, a la vostra disposici&oacute;, tot un conjunt d\'etiquetes #TITRE_XXX que podran donar-vos el t&iacute;tol de l\'objecte \'xxx\', a condici&oacute; que el camp \'id_xxx\' estigui present a la taula en curs (#ID_XXX utilitzable en el bucle en curs).
+
+Per exemple, en un bucle sobre (ARTICLES), #TITRE_SECTEUR donar&agrave; el t&iacute;tol del sector en el que es troba l\'article en curs, ja que l\'identificador #ID_SECTEUR (o el camp \'id_secteur\') est&agrave; disponible en aquest cas.[[%titres_etendus%]]',
+	'titre_parent:nom' => 'Etiqueta #TITRE_PARENT',
 	'titre_tests' => 'El Ganivet Su&iacute;s - P&agrave;gina de proves…',
 	'tous' => 'Tots',
 	'toutes_couleurs' => 'Els 36 colors dels estils CSS :@_CS_EXEMPLE_COULEURS@',
@@ -600,7 +631,7 @@ Podeu escollir aqu&iacute; de posar en exponent algunes dreceres suplement&agrav
 	'url_standard' => 'est&agrave;ndard',
 	'urls_base_total' => 'Actualment hi ha @nb@ URL(s) a la base',
 	'urls_base_vide' => 'La base dels URLs est&agrave; buida',
-	'urls_choix_objet' => '<MODIF>Edici&oacute; a la base del URL d\'un objecte espec&iacute;fic:',
+	'urls_choix_objet' => 'Edici&oacute; en la base del URL d\'un objecte espec&iacute;fic:',
 	'urls_edit_erreur' => 'El format actual dels URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) no permet l\'edici&oacute;.',
 	'urls_enregistrer' => 'Enregistrar aquest URL a la base',
 	'urls_nouvelle' => 'Editar el URL &laquo;propis&raquo;:',
@@ -628,9 +659,9 @@ Podeu escollir aqu&iacute; de posar en exponent algunes dreceres suplement&agrav
 	'version_update_chargeur' => 'Desc&agrave;rrega autom&agrave;tica',
 	'version_update_chargeur_title' => 'Descarrega la darrera versi&oacute; del plugin gr&agrave;cies al plugin &laquo;Descarregador&raquo;',
 	'version_update_title' => 'Descarrega l\'&uacute;ltima versi&oacute; del plugin i comen&ccedil;ar la seva actualitzaci&oacute; autom&agrave;tica',
-	'verstexte:description' => '<MODIF>2 filtres pels vostres esquelets, permetent produir p&agrave;gines m&eacute;s lleugeres.
+	'verstexte:description' => '2 filtres pels vostres esquelets, permetent produir p&agrave;gines m&eacute;s lleugeres.
 _ version_texte: extreu el contingut text d\'una p&agrave;gina html excepte algunes etiquetes elementals.
-_ version_plein_texte : extreu el contingut text d\'una p&agrave;gina html per retornar text complet. ',
+_ version_plein_texte : extreu el contingut text d\'una p&agrave;gina html per retornar text brut. ',
 	'verstexte:nom' => 'Versi&oacute; text',
 	'visiteurs_connectes:description' => 'Ofereix una petita eina pel vostre esquelet que mostra el n&uacute;mero de visitants que hi ha connectats al vostre lloc p&uacute;blic.
 

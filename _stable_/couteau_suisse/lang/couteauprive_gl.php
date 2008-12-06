@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'basique' => 'B&aacute;sica',
 	'blocs:aide' => 'Bloques despregables : <b>&lt;bloque&gt;&lt;/bloque&gt;</b> (alias : <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) e <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF>Perm&iacute;telle crear bloques nos que o t&iacute;tulo &eacute; activo e pode facelos visibles ou invisibles.
+	'blocs:description' => 'Perm&iacute;telle crear bloques nos que o t&iacute;tulo &eacute; activo e pode facelos visibles ou invisibles.
 
 @puce@ {{Nos textos SPIP}} : os redactores te&ntilde;en a disposici&oacute;n as novas balizas &lt;bloque&gt; (ou &lt;invisible&gt;) e &lt;visible&gt; para utilizar nos seus textos, coma no caso : 
 
@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  O meu bloque despregable (que conter&aacute; o enderezo URL punteado se for necesario)
  #BLOC_FIN</code></quote>
  
-@puce@ Marcando &laquo;si&raquo;, a apertura dun bloque provocar&aacute; o cerradode todos os outros bloques da p&aacute;xina, co fin de non ter m&aacute;is ca un aberto &aacute; vez.[[%bloc_unique%]]
+@puce@ Marcando &laquo;si&raquo;, a apertura dun bloque provocar&aacute; o cerre de todos os outros bloques da p&aacute;xina, co fin de non ter m&aacute;is ca un aberto &aacute; vez.[[%bloc_unique%]]
 ',
 	'blocs:nom' => 'Bloques despregables',
 	'boites_privees:description' => 'Todas as funcionalidades abaixo descritas aparecen na parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]]
@@ -112,10 +112,17 @@ Ollo : modificando este segundo par&aacute;metro, p&eacute;rdense os estilos est
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Funci&oacute;ns',
 	'code_jq' => 'jQuery',
-	'code_js' => '<MODIF>Javascript',
+	'code_js' => 'Javascript',
 	'code_options' => 'Opci&oacute;ns',
 	'code_spip_options' => 'Opci&oacute;ns de SPIP',
 	'contrib' => 'M&aacute;is informaci&oacute;n: @url@',
+	'corbeille:description' => 'SPIP suprime automaticamente os obxectos rexeitados logo de 24 horas, en xeral a iso das 4 horas da ma&ntilde;&aacute;, grazas a unha tarefa &laquo;CRON&raquo; (lanzemento peri&oacute;dico e/ou autom&aacute;tico de procesos preprogramados). Pode impedir desde aqu&iacute; ese proceso co fin de xestionar mellor a s&uacute;a papeleira.[[%arret_optimisation%]]',
+	'corbeille:nom' => 'A papeleira',
+	'corbeille_objets' => '@nb@ obxeto(s) na papeleira.',
+	'corbeille_objets_lies' => '@nb_lies@ ligaz&oacute;n(s) detectada(s).',
+	'corbeille_objets_vide' => 'Non hai ning&uacute;n obxecto na papeleira',
+	'corbeille_objets_vider' => 'Suprimir os obxectos seleccionados',
+	'corbeille_vider' => 'Baleirar a papeleira&nbsp;:',
 	'couleurs:aide' => 'Colorear : <b>[coul]texte[/coul]</b>@fond@ con <b>coul</b> = @liste@',
 	'couleurs:description' => 'Permite aplicar doadamente cores a todos os textos do web (artigos, breves, t&iacute;tulos, foro, …) usando balizas en atallos.
 
@@ -199,7 +206,7 @@ _ Esta utilidade pode ser emparellada con &laquo;&nbsp;[.->sommaire]&nbsp;&raquo
 	'etendu' => 'Estendido',
 
 	// F
-	'f_jQuery:description' => '<MODIF>Impide a instalaci&oacute;n de {jQuery} na parte p&uacute;blica co fin de economizar un pouco de &laquo;tempo m&aacute;quina&raquo;. Esta librar&iacute;a ([->http://jquery.com/]) achega numerosas comodidades na programaci&oacute;n de Javascript e poder ser usada por certos m&oacute;dulos. SPIP usa dela na &aacute;rea privada.
+	'f_jQuery:description' => 'Impide a instalaci&oacute;n de {jQuery} na parte p&uacute;blica co fin de economizar un pouco de &laquo;tempo m&aacute;quina&raquo;. Esta librar&iacute;a ([->http://jquery.com/]) achega numerosas comodidades na programaci&oacute;n de Javascript e pode ser usada por certos m&oacute;dulos. SPIP usa dela na &aacute;rea privada.
 
 Aviso : alg&uacute;nhas ferramentas de A Navalla Su&iacute;za necesitan as funci&oacute;ns de {jQuery}. ',
 	'f_jQuery:nom' => 'Desactiva jQuery',
@@ -207,20 +214,25 @@ Aviso : alg&uacute;nhas ferramentas de A Navalla Su&iacute;za necesitan as funci
 	'filets_sep:description' => 'Insire filetes de separaci&oacute;n, personalizables mediante as follas de estilo, en todos os textos de SPIP.
 _ A sintaxe &eacute; : "__code__", ou "code" representa ben o n&uacute;mero de identificaci&oacute;n (de 0 &agrave; 7) do filete inserible en relaci&oacute;n directa cos estilos correspondentes, ben o nome dunha imaxe situada no cartafol plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'Filetes de separaci&oacute;n',
-	'filtrer_javascript:description' => '<MODIF>Para xerar a inserci&oacute;n de javascript nos artigos, son tres os modos :
-- <i>nunca</i> : o javascript &eacute; rexeitado en todas partes
-- <i>predeterminado</i> : o javascript m&aacute;rcase en vermello na zona privada
-- <i>sempre</i> : o javascript &eacute; aceptado por todas as partes.
+	'filtrer_javascript:description' => 'Para xerar a inserci&oacute;n de Javascript nos artigos, son tres os modos :
+- <i>nunca</i> : o Javascript &eacute; rexeitado en todas partes
+- <i>predeterminado</i> : o Javascript m&aacute;rcase en vermello na zona privada
+- <i>sempre</i> : o Javascript &eacute; aceptado en todas as partes.
 
-Aviso : nos foros, petici&oacute;ns, fluxos afiliados, etc., a xesti&oacute;n do javascript &eacute; <b>sempre</b> securizada.[[%radio_filtrer_javascript3%]]',
-	'filtrer_javascript:nom' => '<MODIF>Xesti&oacute;n do javascript',
+Aviso : nos foros, pedimentos, fluxos afiliados, etc., a xesti&oacute;n do Javascript est&aacute; <b>sempre</b> securizada.[[%radio_filtrer_javascript3%]]',
+	'filtrer_javascript:nom' => 'Xesti&oacute;n do Javascript',
 	'flock:description' => 'Desactiva o bloqueo de ficheiros neutralizando a funci&oacute;n PHP {flock()}. Alg&uacute;s aloxadores dan de feito problemas graves sexa por un sistema de ficheiros inadaptados ou sexa por unha falta de sincronizaci&oacute;n. Non active esta utilidade  se este funciona normalmente.',
 	'flock:nom' => 'Non bloquear os ficheiros',
 	'fonds' => 'Fondos :',
-	'forcer_langue:description' => '<MODIF>Forza o contexto de lingua para os xogos de esqueletos multiling&uuml;es que dispo&ntilde;en dun formulario ou dun men&uacute; de linguas que saiban xera a cookie de linguas.',
-	'forcer_langue:nom' => '<MODIF>Forzar lingua',
+	'forcer_langue:description' => 'Forza o contexto de lingua para os xogos de esqueletos multiling&uuml;es que dispo&ntilde;en dun formulario ou dun men&uacute; de linguas que saiban xerar a cookie de linguas.
+
+Tecnicamente, esta utilidade ten como efecto:
+- desactivar a busca do esqueleto en funci&oacute;n da lingua do obxecto,
+- desactivar o criterio <code> {lang_select}</code> autom&aacute;tico sobre os obxectos cl&aacute;sicos (artigos, breves, secci&oacute;ns, etc.)
+Os bloques multi m&oacute;stranse ent&oacute;n sempre na lingua demandada polo visitante.',
+	'forcer_langue:nom' => 'Forzar a lingua',
 	'format_spip' => 'Artigos en formato SPIP',
-	'forum_lgrmaxi:description' => '<MODIF>De modo predeterminado as mensaxes de foros non se limitan en tama&ntilde;o. De activar esta ferramenta, unha mensaxe de erro mostrarase cando algu&eacute;n queira introducir unha mensaxe de tama&ntilde;o superior ao especificado, e a mensaxe, e a mensaxe ser&aacute; rexeitada. Un valor baleiro ou igual a  0 significa no entanto que ning&uacute;n l&iacute;mite se aplica.[[%forum_lgrmaxi%]]',
+	'forum_lgrmaxi:description' => 'De modo predeterminado as mensaxes de foros non se limitan en tama&ntilde;o. De activar esta ferramenta, unha mensaxe de erro mostrarase cando algu&eacute;n queira introducir unha mensaxe de tama&ntilde;o superior ao especificado, e a mensaxe ser&aacute; rexeitada. Un valor baleiro ou igual a  0 significa no entanto que non se lle aplica ning&uacute;n l&iacute;mite.[[%forum_lgrmaxi%]]',
 	'forum_lgrmaxi:nom' => 'Tama&ntilde;o dos foros',
 
 	// G
@@ -232,15 +244,12 @@ Aviso : nos foros, petici&oacute;ns, fluxos afiliados, etc., a xesti&oacute;n do
 @puce@ D&uacute;as soluci&oacute;ns se ofrecen para xerar a pequena xanela autom&aacute;tica que aparece cando se sobrevoa &aacute; ocorrencia. [[%glossaire_js%]]',
 	'glossaire:nom' => 'Glosario interno',
 	'glossaire_css' => 'Soluci&oacute;n CSS',
-	'glossaire_js' => '<MODIF>Soluci&oacute;n Javascript',
+	'glossaire_js' => 'Soluci&oacute;n Javascript',
 	'guillemets:description' => 'Substituci&oacute;n autom&aacute;tica das comas dereitas (") polas tipogr&aacute;ficas da lingua de composici&oacute;n. A substituci&oacute;n, transparente para o usuario, non modifica o texto orixinal sen&oacute;n que soamente cambia a presentaci&oacute;n final.',
 	'guillemets:nom' => 'V&iacute;rgulas tipogr&aacute;ficas',
 
 	// H
 	'help' => '{{Esta p&aacute;xina s&oacute; &eacute; accesible para o responsable do web.}}<p>D&aacute; acceso &aacute;s diferentes funci&oacute;ns suplementarias achegadas polo m&oacute;dulo &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.',
-	'help0' => '{{Esta p&aacute;xina s&oacute; &eacute; acces&iacute;bel para os respons&aacute;beis do web.}}<p>D&aacute; acceso a diferentes funci&oacute;ns suplementarias achegadas polo m&oacute;dulo &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p><p>Ligaz&oacute;n de documentaci&oacute;n :<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]</p><p>Reinicializaci&oacute;n:
-_ • [De todo o m&oacute;dulo->@reset@]
-</p>',
 	'help2' => 'Versi&oacute;n local: @version@',
 	'help3' => '<p>Ligaz&oacute;ns de documentaci&oacute;n:<br/>• [A&nbsp;Navalla&nbsp;Suiza->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reinicios:
 _ • [Ferramentas cacheadas|Volver &aacute; apariencia inicial desta p&aacute;xina->@hide@]
@@ -252,17 +261,17 @@ _ • [De todo o m&oacute;dulo|Volver ao estado inicial do m&oacute;dulo->@reset@]
 
 Para definir o logo, vaia &aacute; p&aacute;xina &laquo;&nbsp;Configuraci&oacute;n do web&nbsp;&raquo; premendo sobre o bot&oacute;n &laquo;&nbsp;Configuraci&oacute;n&nbsp;&raquo;.',
 	'icone_visiter:nom' => 'Bot&oacute;n &laquo;&nbsp;Visitar&nbsp;&raquo;',
-	'insert_head:description' => '<MODIF>Activa automaticamente a baliza [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] en todos os esqueletos, que te&ntilde;an ou non esta baliza entre &lt;head&gt; e &lt;/head&gt;. Merc&eacute; a esta opci&oacute;n, os plugins poder&aacute;n inserir javascript (.js) ou follas de estilo (.css).',
+	'insert_head:description' => 'Activa automaticamente a baliza [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] en todos os esqueletos, que te&ntilde;an ou non esta baliza entre &lt;head&gt; e &lt;/head&gt;. Merc&eacute; a esta opci&oacute;n, os plugins poder&aacute;n inserir javascript (.js) ou follas de estilo (.css).',
 	'insert_head:nom' => 'Baliza #INSERT_HEAD',
 	'insertions:description' => 'AVISO : ferramenta en proceso de desenvolvemento !! [[%insertions%]]',
 	'insertions:nom' => 'Correcci&oacute;ns autom&aacute;ticas',
-	'introduction:description' => '<MODIF>Esta baliza situable nos esqueletos serve xeralmente para unha &uacute;ltima hora ou nas secci&oacute;ns co fin de producir un resumo de artigos, de breves, etc..</p>
+	'introduction:description' => 'Esta baliza situable nos esqueletos serve xeralmente para unha &uacute;ltima hora ou nas secci&oacute;ns co fin de producir un resumo de artigos, de breves, etc.</p>
 <p>{{Aviso}} : Antes de activar esta funcionalidade, comprobe ben que ningunha funci&oacute;n {balise_INTRODUCTION()} exista xa no seu esqueleto ou nos m&oacute;dulos, a sobrecarga producir&iacute;a un erro de compilaci&oacute;n.</p>
 @puce@ Pode precisar (porcentualmente en relaci&oacute;n co valor usado de modo predeterminado) a lonxitude do texto reeenviado pola baliza #INTRODUCTION. Un valor nulo ou igual a 100 non modifica o aspecto da introduci&oacute;n e usa daquela os valores predeterminados seguintes : 500 caracteres para os artigos, 300 para as breves e 600 para os foros ou as secci&oacute;ns.
 [[%lgr_introduction%&nbsp;%]]
 @puce@ De modo predeterminado, os puntos suspensivos engadidos ao resultado da baliza #INTRODUCTION se o texto &eacute; demasiado longo son : <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Pode precisar aqu&iacute; a s&uacute;a propia cadea de caracteres que indiquen ao lector que o texto truncado ten unha continuidade.
 [[%suite_introduction%]]
-@puce@ Se a baliza #INTRODUCTION se emprega para resumir un artigo, ent&oacute;n A Navalla Su&iacute;za pode fabricar unha ligaz&oacute;n sobre eses puntos suspensivos definidos a seguir co fin de levar o lector ao texto orixinal. Por exemplo : &laquo;Ler a continuidade deste artigo…&raquo;
+@puce@ Se a baliza #INTRODUCTION se emprega para resumir un artigo, ent&oacute;n A Navalla Su&iacute;za pode crear unha ligaz&oacute;n sobre eses puntos suspensivos definidos co fin de levar o lector ao texto orixinal. Por exemplo : &laquo;Ler a continuidade deste artigo…&raquo;
 [[%lien_introduction%]]
 ',
 	'introduction:nom' => 'Baliza #INTRODUCTION',
@@ -284,6 +293,7 @@ Atenci&oacute;n, esta ferramenta, precisa para funcionar do m&oacute;dulo {jQuer
 
 	// L
 	'label:admin_travaux' => 'Pechar o web para :',
+	'label:arret_optimisation' => 'Impedir que SPIP baleire a papeleira automaticamente&nbsp;:',
 	'label:auteurs_tout_voir' => '@_CS_CHOIX@',
 	'label:auto_sommaire' => 'Creaci&oacute;n sistem&aacute;tica de sumario :',
 	'label:balise_decoupe' => 'Activar a baliza #CS_DECOUPE :',
@@ -349,6 +359,7 @@ Atenci&oacute;n, esta ferramenta, precisa para funcionar do m&oacute;dulo {jQuer
 	'label:terminaison_urls_propres' => '<:label:terminaison_urls_page:>',
 	'label:terminaison_urls_propres_qs' => '<:label:terminaison_urls_page:>',
 	'label:titre_travaux' => 'T&iacute;tulo da mensaxe :',
+	'label:titres_etendus' => 'Activr a utilizaci&oacute;n estendida das balizas #TITRE_XXX&nbsp;:',
 	'label:tri_articles' => 'A s&uacute;a elecci&oacute;n :',
 	'label:url_arbo_minuscules' => 'Conservar a altura tipogr&aacute;fica dos t&iacute;tulos nos URL :',
 	'label:url_arbo_sep_id' => 'Car&aacute;cter de separaci&oacute;n \'titulo-id\' para o caso de repetici&oacute;n (doublon) :<br/>(non empregue \'/\')',
@@ -374,11 +385,12 @@ _ • {Estendido} : son substitu&iacute;das ademais as ligaz&oacute;ns do tipo {<h
 	'liens_orphelins:nom' => 'URL fermosas',
 
 	// M
-	'mailcrypt:description' => '<MODIF>Oculta todas as ligaz&oacute;ns de correo presentes nos seus textos e substit&uacute;eos por unha ligaz&oacute;n Javascript que permite activara a aplicaci&oacute;n de correo do lector. Esta ferramenta antispam tenta impedir os robots de colleita de enderezos electr&oacute;nicos deixados en claro nos foros ou nas balizas dos seus esqueletos.',
+	'mailcrypt:description' => 'Oculta todas as ligaz&oacute;ns de correo presentes nos seus textos e substit&uacute;eos por unha ligaz&oacute;n Javascript que permite activar o programa de correo do lector. Esta ferramenta antispam tenta impedir os robots de colleita de enderezos electr&oacute;nicos deixados en claro nos foros ou nas balizas dos seus esqueletos.',
 	'mailcrypt:nom' => 'MailCrypt',
 	'message_perso' => 'Un profundo reco&ntilde;ecemento para os tradutores que pasaran por aqu&iacute;. Pat ;-)',
 	'moderation_admins' => 'administradores autenticados',
-	'moderation_moderee:description' => '<MODIF>Permite moderar a moderaci&oacute;n dos foros para os usuarios inscritos. [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
+	'moderation_message' => 'Este foro est&aacute; moderado a priori&nbsp;: o seu comentario non aparecer&aacute; ata que sexa validada por un administrador do web, salvante o caso de que vostede xa estea identificado e autorizado para publicar comentarios directamente.',
+	'moderation_moderee:description' => 'Permite moderar a moderaci&oacute;n dos foros p&uacute;blicos <b>configurados a priori</b> para os usuarios inscritos.<br/> Exemplo: Eu son o webm&aacute;ster do meu web, e respondo a unha mensaxe dunha persoa, por qu&eacute; debo validar a mi&ntilde;a propia mensaxe ?Moderaci&oacute;n moderada faino por min. [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
 	'moderation_moderee:nom' => 'Moderaci&oacute;n moderada',
 	'moderation_redacs' => 'redactores autenticados',
 	'moderation_visits' => 'visitantes autenticados',
@@ -400,7 +412,7 @@ _ • {Estendido} : son substitu&iacute;das ademais as ligaz&oacute;ns do tipo {<h
 	'outil_desactiver' => 'Desactivar',
 	'outil_desactiver_le' => 'Desactivar a ferramenta',
 	'outil_inactif' => 'Utilidade inactiva',
-	'outil_intro' => '<MODIF>Esta p&aacute;xina lista as caracter&iacute;sticas do m&oacute;dulo postas &aacute; s&uacute;a disposici&oacute;n. <br /> <br /> Ao premer sobre o nome das ferramentas que aparecen a seguir, seleccione, as que pode cambiar o estado usando o bot&oacute;n central: as ferramentas activadas ser&aacute;n desactivadas e <i> viceversa </ i>. Con cada clic, a descrici&oacute;n aparece a seguir das listas. As categor&iacute;as son pregables e as ferramentas p&oacute;dense ocultar. O dobre clic permite trocar rapidamente unha ferramenta. <br /> <br /> Nun primeiro uso, recom&eacute;ndase activar as ferramentas unha por unha, no caso de apareceren certas incompatibilidades co seu esqueleto, con SPIP ou con outros m&oacute;dulos. <br /> <br /> Nota: a simple carga desta p&aacute;xina compila o conxunto das ferramentas da Navalla Su&iacute;za .',
+	'outil_intro' => 'Esta p&aacute;xina lista as caracter&iacute;sticas do m&oacute;dulo postas &aacute; s&uacute;a disposici&oacute;n. <br /> <br /> Ao premer sobre o nome das ferramentas que aparecen a seguir, seleccione, as que pode cambiar o estado usando o bot&oacute;n central: as ferramentas activadas ser&aacute;n desactivadas e <i> viceversa </ i>. Con cada clic, a descrici&oacute;n aparece a seguir das listas. As categor&iacute;as son pregables e as ferramentas p&oacute;dense ocultar. O dobre clic permite trocar rapidamente unha ferramenta. <br /> <br /> Nun primeiro uso, recom&eacute;ndase activar as ferramentas unha por unha, no caso de apareceren certas incompatibilidades co seu esqueleto, con SPIP ou con outros m&oacute;dulos. <br /> <br /> Nota: a simple carga desta p&aacute;xina compila o conxunto das ferramentas da Navalla Su&iacute;za .',
 	'outil_intro_old' => 'Esta interface &eacute; antiga.<br /><br />Se vostede encontra problema coa utilizaci&oacute;n da <a href=\'./?exec=admin_couteau_suisse\'>nova     interface</a>, non dubide en fac&eacute;rnolo saber no foro <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
 	'outil_nb' => '@pipe@ : @nb@ ferramenta',
 	'outil_nbs' => '@pipe@ : @nb@ ferramentas',
@@ -417,15 +429,25 @@ _ • {Estendido} : son substitu&iacute;das ademais as ligaz&oacute;ns do tipo {<h
 	'outils_selectiontous' => 'TODOS',
 
 	// P
+	'pack_actuel' => 'Paquete @date@',
+	'pack_actuel_avert' => 'Aviso, as sobreescrituras sobre os define() ou as globais non est&aacute;n especificadas aqu&iacute;',
+	'pack_actuel_titre' => 'PAQUETE ACTUAL DE CONFIGURACI&Oacute;N DA NAVALLA SU&Iacute;ZA',
 	'pack_alt' => 'Ver os par&aacute;metros de configuraci&oacute;n en curso',
-	'pack_descrip' => '<MODIF>O seu "Pack de configuraci&oacute;n actual" recolle o conxunto dos par&aacute;metros de configuraci&oacute;n relativos &aacute; Navalla Su&iacute;za: a activaci&oacute;n de ferramentas e o valor das s&uacute;as eventuais variables.
+	'pack_descrip' => '<MODIF>O seu "Paquete de configuraci&oacute;n actual" recolle o conxunto dos par&aacute;metros de configuraci&oacute;n presentes relativos &aacute; Navalla Su&iacute;za: a activaci&oacute;n de ferramentas e o valor das s&uacute;as eventuais variables.
 
-Este c&oacute;digo PHP pode po&ntilde;erase no ficheiror /config/mes_options.php e engadir&aacute; unha ligaz&oacute;n de reinicializaci&oacute;n sobre esta p&aacute;xina "do paquete {Pack Actuel}". Desde logo p&oacute;delle cambiar o nome a seguir.
+Este c&oacute;digo PHP pode po&ntilde;erase no ficheiro /config/mes_options.php e engadir&aacute; unha ligaz&oacute;n de reinicializaci&oacute;n sobre esta p&aacute;xina "do paquete &laquo;&nbsp;{@pack@}&nbsp;&raquo;. Desde logo p&oacute;delle cambiar ese nome.
 
-De reinicializar o m&oacute;dulo premendo sobre un paquete, a Navalla Su&iacute;za reconfigurarase automaticamente en funci&oacute;n dos par&aacute;metros predeterminado no paquete.',
+De reinicializar o m&oacute;dulo premendo sobre un paquete, a Navalla Su&iacute;za reconfigurarase automaticamente en funci&oacute;n dos par&aacute;metros predeterminados no paquete.',
 	'pack_du' => '• do paquete @pack@',
 	'pack_installe' => 'Actualizaci&oacute;n dun paquete de configuraci&oacute;n',
+	'pack_nb_plrs' => 'Hai actualmente @nb@ &laquo;&nbsp;paquetes de configuraci&oacute;n&nbsp;&raquo; dispo&ntilde;&iacute;beis.',
+	'pack_nb_un' => 'Hai actualmente un &laquo;&nbsp;paquete de configuraci&oacute;n&nbsp;&raquo; dispo&ntilde;ible',
+	'pack_nb_zero' => 'Non hai ning&uacute;n &laquo;&nbsp;paquete de configuraci&oacute;n&nbsp;&raquo; dispo&ntilde;ible actualmente.',
+	'pack_outils_defaut' => 'Instalaci&oacute;ns das ferramentas predeterminadas',
+	'pack_sauver' => 'Gardar a configuraci&oacute;n actual',
+	'pack_sauver_descrip' => 'O bot&oacute;n seguinte perm&iacute;telle inserir directamente no seu ficheiro <b>@file@</b> os par&aacute;metros necesarios para engadir un &laquo;&nbsp;paquete de configuraci&oacute;n&nbsp;&raquo; no men&uacute; da esquerda. Isto permitiravos ulteriormente reconfigurar nun clic A Navalla Su&iacute;za no estado en que est&aacute; actualmente.',
 	'pack_titre' => 'Configuraci&oacute;n actual',
+	'pack_variables_defaut' => 'Instalaci&oacute;n das variables predeterminadas',
 	'par_defaut' => 'Predeterminado',
 	'paragrapher2:description' => 'A funci&oacute;n SPIP <code>paragrapher()</code> insere balizas &lt;p&gt; e &lt;/p&gt; en todos os textos que son que est&aacute;n desprovistos de par&aacute;grafos. Co fin de xerar m&aacute;is finamente os seus estilos e os dese&ntilde;os, ten a posibilidade de uniformizar o aspecto dos textos do seu  web.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Paragrafar',
@@ -454,7 +476,7 @@ De reinicializar o m&oacute;dulo premendo sobre un paquete, a Navalla Su&iacute;
 	'simpl_interface:description' => 'Desactive o cambio r&aacute;pido de estado dun artigo sobrevoando a s&uacute;a vi&ntilde;eta de cor. Iso &eacute; &uacute;til se vostede procura obter unha  interface privada o m&aacute;is limpa co fin de optimizar o rendemento do lado do cliente.',
 	'simpl_interface:nom' => 'Alixeiramento da interfacer privada',
 	'smileys:aide' => 'Riso&ntilde;os : @liste@',
-	'smileys:description' => '<MODIF>Inserir riso&ntilde;os en todos os textos onde aparece un atallo de estilo <acronym>:-)</acronym>. Ideal para os foros.
+	'smileys:description' => 'Inserir riso&ntilde;os en todos os textos onde aparece un atallo do tipo <acronym>:-)</acronym>. Ideal para os foros.
 _ Est&aacute; dispo&ntilde;ible unha baliza para mostrar unha t&aacute;boa de riso&ntilde;os nos seus esqueletos : #SMILEYS.
 _ Dese&ntilde;os : [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'Riso&ntilde;os',
@@ -477,7 +499,7 @@ _ • Unicamente para os artigos que conte&ntilde;an a baliza <code>@_CS_AVEC_SOMM
 [[%balise_sommaire%]]
 
 Este sumario pode ser aparellado con : &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
-	'sommaire:nom' => 'Un sumario para os seus artigos',
+	'sommaire:nom' => '<MODIF>Un sumario para os seus artigos',
 	'sommaire_avec' => 'Un artigo con sumario&nbsp;: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un artigo sen sumario&nbsp;: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'spam:description' => 'Tenta loitar contra os env&iacute;os de mensaxes autom&aacute;ticas e impertinentes na parte p&uacute;blica. Algunhas palabras e as balizas &lt;a>&lt;/a> est&aacute;n prohibidas.
@@ -505,11 +527,19 @@ _ • {Control da cach&eacute;} : opci&oacute;n id&eacute;ntica &aacute; precedent
 	'suivi_forums:description' => 'Un autor de artigo ser&aacute; sempre informado cando apareza unha mensaxe no foro p&uacute;blico asociado. Tam&eacute;n &eacute; posible adverter ademais : todoso os participantes no foro ou soamente os autores de mensaxes en fluxo ascendente.[[%radio_suivi_forums3%]]',
 	'suivi_forums:nom' => 'Seguimento dos foros p&uacute;blicos',
 	'supprimer_cadre' => 'Suprimir este cadro',
-	'supprimer_numero:description' => '<MODIF>Aplique a funci&oacute;n SPIP supprimer_numero() ao conxunto dos {{t&iacute;tulos}} e dos {{nomes}} do web p&uacute;blico, sen que o filtro supprimer_numero estea presente nos esqueletos.<br />Velaqu&iacute; a sintaxe que se vai usar no cadro dun web multiling&uuml;e : <code>1. <multi>O Meu T&iacute;tulo[fr]Mon Titre[de]Mein Titel</multi></code>',
+	'supprimer_numero:description' => 'Aplica a funci&oacute;n SPIP supprimer_numero() ao conxunto dos {{t&iacute;tulos}} e dos {{nomes}} do web p&uacute;blico, sen que o filtro supprimer_numero estea presente nos esqueletos.<br />Velaqu&iacute; a sintaxe que se vai usar no cadro dun web multiling&uuml;e : <code>1. <multi>O Meu T&iacute;tulo[fr]Mon Titre[de]Mein Titel</multi></code>',
 	'supprimer_numero:nom' => 'Suprime o n&uacute;mero',
 
 	// T
 	'titre' => 'A Navalla Su&iacute;za',
+	'titre_parent:description' => 'No interior dun bucle, &eacute; frecuente querer mostrar o t&iacute;tulo do pai do obxecto en curso. Tradicionalmente, cumpr&iacute;a utilizar un segundo bucle, mais esta nova baliza #TITRE_PARENT alixeirar&aacute; a escrita dos seus esqueletes. O resultado devolto &eacute; este : o t&iacute;tulo dun grupo de palabras clave ou o da secci&oacute;n pai (de existir) de calquera outro obxecto (artigo, secci&oacute;n, breve, breve, etc.).
+
+Note que : para as palabras clave, un alias de #TITRE_PARENT &eacute;  #TITRE_GROUPE. O tratamento de SPIP destas novas balizas &eacute; semellante a aquel de #TITRE.
+
+@puce@ De estar con SPIP 2.0, tam&eacute;n ten &aacute; s&uacute;a disposici&oacute;n todo un conxunto de balizas #TITRE_XXX que poder&aacute;n darvos o t&iacute;tulo do obxecto \'xxx\', coa condici&oacute;n de que o campo \'id_xxx\' estea presente na t&aacute;boa en curso (#ID_XXX utilizable no bucle en curso).
+
+Por exemplo, nun bucle sobre  (ARTICLES), #TITRE_SECTEUR devolver&aacute; o t&iacute;tulo da secci&oacute;n na que estea situado o artigo en curso, xa que o identificador #ID_SECTEUR (de a&iacute; o campo \'id_secteur\') est&aacute; dispo&ntilde;ible neste caso.[[%titres_etendus%]]',
+	'titre_parent:nom' => 'Baliza #TITRE_PARENT',
 	'titre_tests' => 'A Navalla Su&iacute;za - P&aacute;xina de tests…',
 	'tous' => 'Todos',
 	'toutes_couleurs' => 'As 36 cores dos estilos css :@_CS_EXEMPLE_COULEURS@',
@@ -600,7 +630,7 @@ Escolla aqu&iacute; se quere po&ntilde;er en super&iacute;ndice certos atallos s
 	'url_standard' => 'est&aacute;ndar',
 	'urls_base_total' => 'Hai actualmente @nb@ URL na base',
 	'urls_base_vide' => 'A base dos URL est&aacute; baleira',
-	'urls_choix_objet' => '<MODIF>Edici&oacute;n con base no URL dun obxecto espec&iacute;fico&nbsp;:',
+	'urls_choix_objet' => 'Edici&oacute;n con base no URL dun obxecto espec&iacute;fico&nbsp;:',
 	'urls_edit_erreur' => 'O formato actual dos URL (&laquo;&nbsp;@type@&nbsp;&raquo;) non permite a edici&oacute;n.',
 	'urls_enregistrer' => 'Rexistrar esta URL na base',
 	'urls_nouvelle' => 'Editar o URL &laquo;&nbsp;propias&nbsp;&raquo;&nbsp;:',
@@ -628,8 +658,8 @@ Escolla aqu&iacute; se quere po&ntilde;er en super&iacute;ndice certos atallos s
 	'version_update_chargeur' => 'Descarga autom&aacute;tica',
 	'version_update_chargeur_title' => 'Descarga a &uacute;ltima versi&oacute;n do plugin grazas ao &laquo;T&eacute;l&eacute;chargeur&raquo;',
 	'version_update_title' => 'Descarga a &uacute;ltima versi&oacute;n do m&oacute;dulo e lanza a s&uacute;a posta ao d&iacute;a autom&aacute;tica',
-	'verstexte:description' => '<MODIF>2 filtros para os seus esqueletos, que permiten producir p&aacute;xinas m&aacute;is lixeiras.
-_ version_texte : extrae o contido de texto dunha p&aacute;xina html coa exclusi&oacute;n dalgunhas balizas elementares.
+	'verstexte:description' => 'Dous filtros para os seus esqueletos que permiten producir p&aacute;xinas m&aacute;is lixeiras.
+_ version_texte : extrae o contido de texto dunha p&aacute;xina html tras  exclu&iacute;r algunhas balizas elementares.
 _ version_plein_texte : extrae o contido de texto dunha p&aacute;xina html para manter o texto pleno.',
 	'verstexte:nom' => 'Versi&oacute;n de texto',
 	'visiteurs_connectes:description' => 'Ofrece un elemento para o seu esqueleto que mostra o n&uacute;mero de visitantes conectados ao web p&uacute;blico.

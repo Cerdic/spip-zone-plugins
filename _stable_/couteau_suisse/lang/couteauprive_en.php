@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'basique' => 'Basic',
 	'blocs:aide' => 'Folding blocks: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) and <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF><MODIF>Allows you to create blocks which show/hide when you click on the title.
+	'blocs:description' => 'Allows you to create blocks which show/hide when you click on the title.
 
 @puce@ {{In SPIP texts}}: authors can use the tags &lt;bloc&gt; (or &lt;invisible&gt;) and &lt;visible&gt; in this way: 
 
@@ -55,15 +55,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  My collapsible block (which can be loaded by an AJAX URL, if needed)
  #BLOC_FIN</code></quote>
 
-@puce@ En cochant &laquo;oui&raquo; ci-dessous, l\'ouverture d\'un bloc provoquera la fermeture de tous les autres blocs de la page, afin d\'en avoir qu\'un seul ouvert &agrave; la fois.[[%bloc_unique%]]
-',
+@puce@ If you tick "yes" below, opening one block will cause all other blocks on the page to close. i.e. only one block is open at a time.[[%bloc_unique%]]',
 	'blocs:nom' => 'Folding Blocks',
-	'boites_privees:description' => '<MODIF>All the boxes described below appear in the editing area.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]]
+	'boites_privees:description' => 'All the boxes described below appear in the editing area.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]]
 - {{Swiss Knife updates}}: a box on this configuration page showing the last changes made to the code of the plugin ([Source->@_CS_RSS_SOURCE@]).
 - {{Articles in SPIP format}}: an extra folding box for your articles showing the source code used by their authors.
-- {{Author stats}}: an extra box on [the authors\' page->./?exec=auteurs] showing the last 10 connected authors and unconfirmed registrations. Only administrators can view this information.',
+- {{Author stats}}: an extra box on [the authors\' page->./?exec=auteurs] showing the last 10 connected authors and unconfirmed registrations. Only administrators can view this information.
+- {{Clean URLs}}: a box for each objet type (article, section, author, ...) showing the clean URL associated with it and any existing aliases. The tool &laquo;&nbsp;[.->type_urls]&nbsp;&raquo; makes possible a fine adjustment of the site\'s URLs.',
 	'boites_privees:nom' => 'Private boxes',
-	'bp_urls_propres' => '<MODIF>See clean URLs',
+	'bp_urls_propres' => 'See clean URLs',
 
 	// C
 	'cache_controle' => 'Cache control',
@@ -103,10 +103,17 @@ N.B.: by changing the second parameter you will lose any standard styles associa
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Functions',
 	'code_jq' => 'jQuery',
-	'code_js' => '<MODIF>Javascript',
+	'code_js' => 'JavaScript',
 	'code_options' => 'Options',
 	'code_spip_options' => 'SPIP options',
 	'contrib' => 'More information: @url@',
+	'corbeille:description' => '<NEW>SPIP suprime autom&aacute;ticamente los objetos tirados a la basura en un plazo de 24 horas, en general hacia las 4 de la madrugada, gracias a una tarea &laquo;CRON&raquo; (lanzamiento peri&oacute;dico y/o autom&aacute;tico de procesos preprogramados). Aqu&iacute; puedes impedir ese proceso para gestionar mejor la papelera.[[%arret_optimisation%]]',
+	'corbeille:nom' => 'Wastebin',
+	'corbeille_objets' => '@nb@ object(s) in the wastebin.',
+	'corbeille_objets_lies' => '@nb_lies@ connection(s) detected.',
+	'corbeille_objets_vide' => 'No object in the wastebin',
+	'corbeille_objets_vider' => 'Delete the selected objects',
+	'corbeille_vider' => 'Empty the wastebin:',
 	'couleurs:aide' => 'Text colouring: <b>[coul]text[/coul]</b>@fond@ with <b>coul</b> = @liste@',
 	'couleurs:description' => 'Provide shortcuts to add colours in any text of the site (articles, news items, titles, forums, ...)
 
@@ -148,7 +155,7 @@ The parameter {type} above can be one of three values:
 	'decoration:nom' => 'Decoration',
 	'decoupe:aide' => 'Tabbed block: <b>&lt;onglets>&lt;/onglets></b><br/>Page or tab separator: @sep@',
 	'decoupe:aide2' => 'Alias:&nbsp;@sep@',
-	'decoupe:description' => '<MODIF>@puce@ Divides the display of an article into pages using automatic page numbering. Simply place four consecutive + signes (<code>++++</code>) where you wish a page break to occur.
+	'decoupe:description' => '@puce@ Divides the display of an article into pages using automatic page numbering. Simply place four consecutive + signes (<code>++++</code>) where you wish a page break to occur.
 
 By default, the Swiss Knife inserts the pagination links at the top and bottom of the page. But you can place the links elsewhere in your template by using the #CS_DECOUPE tag, which you can activate here:
 [[%balise_decoupe%]]
@@ -157,7 +164,7 @@ By default, the Swiss Knife inserts the pagination links at the top and bottom o
 
 In templates you can use the tags #ONGLETS_DEBUT, #ONGLETS_TITRE and #ONGLETS_FIN.
 
-This tool may be combined with {A summary for your articles}.',
+This tool may be combined with "[.->sommaire]".',
 	'decoupe:nom' => 'Division in pages and tabs',
 	'desactiver_flash:description' => 'Deletes the flash objects from your site and replaces them by the associated alternative content.',
 	'desactiver_flash:nom' => 'Deactivate flash objects',
@@ -180,7 +187,7 @@ This tool may be combined with {A summary for your articles}.',
 	'erreur:bt' => '<span style=\\"color:red;\\">Warning:</span> the typographical bar appears to be an old version (@version@).<br />The Swiss Knife is compatible only with version @mini@ or newer.',
 	'erreur:description' => 'missing id in the tool\'s definition!',
 	'erreur:distant' => 'The distant server',
-	'erreur:jquery' => '<MODIF>{{N.B.}} : {jQuery} does not appear to be active for this page. Please consult the paragraph about the plugin\'s required libraries [in this article->http://www.spip-contrib.net/?article2166].',
+	'erreur:jquery' => '{{N.B.}} : {jQuery} does not appear to be active for this page. Please consult the paragraph about the plugin\'s required libraries [in this article->http://www.spip-contrib.net/?article2166] or reload this page.',
 	'erreur:js' => 'A Javascript error appears to have occurred on this page, hindering its action. Please activate Javascript in your browser, or try deactivating some SPIP plugins which may be causing interference.',
 	'erreur:nojs' => 'Javascript has been deactivated on this page.',
 	'erreur:nom' => 'Error!',
@@ -190,7 +197,7 @@ This tool may be combined with {A summary for your articles}.',
 	'etendu' => 'Expanded',
 
 	// F
-	'f_jQuery:description' => '<MODIF>Prevents the installation of {jQuery} on th epublic site in order to economise some "machine resources". The jQuery library ([->http://jquery.com/]) is useful in Javascript programming and many plugins use it. SPIP uses it in the editing interface.
+	'f_jQuery:description' => 'Prevents the installation of {jQuery} on the public site in order to economise some "machine resources". The jQuery library ([->http://jquery.com/]) is useful in Javascript programming and many plugins use it. SPIP uses it in the editing interface.
 
 N.B: some Swiss Knife tools require {jQuery} to be installed. ',
 	'f_jQuery:nom' => 'Deactivate jQuery',
@@ -198,18 +205,18 @@ N.B: some Swiss Knife tools require {jQuery} to be installed. ',
 	'filets_sep:description' => 'Inserts separating lines for any SPIP texts which can be customised with a stylesheet.
 _ The syntax is: "__code__", where "code" is either the identifying number (from 0 to 7) of the line to insert and which is linked to the corresponding style, or the name of an image in the plugins/couteau_suisse/img/filets directory.',
 	'filets_sep:nom' => 'Dividing lines',
-	'filtrer_javascript:description' => '<MODIF>Three modes are available for controlling Javascript inserted directly in the text of articles:
-- <i>never</i>: Javascript is prohibited everywhere
+	'filtrer_javascript:description' => 'Three modes are available for controlling JavaScript inserted directly in the text of articles:
+- <i>never</i>: JavaScript is prohibited everywhere
 - <i>default</i>: the presence of Javascript is highlighted in red in the editing interface
-- <i>always</i>: Javascript is always accepted.
+- <i>always</i>: JavaScript is always accepted.
 
-N.B.: in forums, petitions, RSS feeds, etc., Javascript is <b>always</b> made secure.[[%radio_filtrer_javascript3%]]',
-	'filtrer_javascript:nom' => '<MODIF>Javascript management',
+N.B.: in forums, petitions, RSS feeds, etc., JavaScript is <b>always</b> made secure.[[%radio_filtrer_javascript3%]]',
+	'filtrer_javascript:nom' => 'JavaScript management',
 	'flock:description' => 'Deactivates the file-locking system which uses the PHP {flock()} function. Some web-hoting environments are unable to work with this function. Do not activate this tool if your site is functioning normally.',
 	'flock:nom' => 'Files are not locked',
 	'fonds' => 'Backgrounds:',
 	'forcer_langue:description' => '<MODIF>Forces the language context for multiligual templates which have a language menu able to manage the language cookie.',
-	'forcer_langue:nom' => '<MODIF>Force language',
+	'forcer_langue:nom' => 'Force language',
 	'format_spip' => 'Articles in SPIP format',
 	'forum_lgrmaxi:description' => '<MODIF>By default forum messages are not limited in size. If this tool is activated, an error message is shown each time someone tries to post a message larger than the size given, and the message is refused. An empty value (or 0) means that no limit will be imposed.[[%forum_lgrmaxi%]]',
 	'forum_lgrmaxi:nom' => 'Size of forums',
@@ -219,15 +226,12 @@ N.B.: in forums, petitions, RSS feeds, etc., Javascript is <b>always</b> made se
 	'glossaire:description' => '<MODIF>@puce@ Use one or several groups of keywords to manage an internal glossary. Enter the names of the groups here, separating them by  colons (:). If you leave the box empty (or enter "Glossaire"), it is the "Glossaire" group which will be used.[[%glossaire_groupes%]]@puce@ You can indicate the maximum number of links to create in a text for each word. A null or negative value will mean that all instances of the words will be treated. [[%glossaire_limite% par mot-cl&eacute;]]@puce@ There is a choice of two options for generating the small window which appears on the mouseover. [[%glossaire_js%]]',
 	'glossaire:nom' => 'Internal glossary',
 	'glossaire_css' => 'CSS solution',
-	'glossaire_js' => '<MODIF>Javascript solution',
+	'glossaire_js' => 'JavaScript solution',
 	'guillemets:description' => 'Automatically replaces straight inverted commas (") by curly ones, using the correct ones for the current language. The replacement does not change the text stored in the database, but only the display on the screen.',
 	'guillemets:nom' => 'Curly inverted commas',
 
 	// H
 	'help' => '{{This page is only accessible to main site administrators.}} It gives access to the configuration of some additional functions of the {{Swiss Knife}}.',
-	'help0' => '{{This page is only accessible to main site administrators.}}<p>It gives access to additional functions of  &laquo;{{The&nbsp;Swiss&nbsp;Knife}}&raquo;.</p><p>Documentation link:<br/>• [The&nbsp;Swiss&nbsp;Knife->http://www.spip-contrib.net/?article2166]</p><p>Reset :
-_ • [the whole plugin->@reset@]
-</p>',
 	'help2' => 'Local version: @version@',
 	'help3' => '<p>Documentation links:<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Resets :
 _ • [Hidden tools|Return to the original appearance of this page->@hide@]
@@ -272,6 +276,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 
 	// L
 	'label:admin_travaux' => 'Close the public site for:',
+	'label:arret_optimisation' => 'Stop SPIP from emptying the wastebin automatically:',
 	'label:auteurs_tout_voir' => '@_CS_CHOIX@',
 	'label:auto_sommaire' => 'Systematic creation of a summary:',
 	'label:balise_decoupe' => 'Activate the #CS_DECOUPE tag:',
@@ -280,7 +285,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:couleurs_fonds' => 'Allow backgrounds:',
 	'label:cs_rss' => 'Activate:',
 	'label:debut_urls_libres' => '<:label:debut_urls_propres:>',
-	'label:debut_urls_propres' => '<MODIF>Beginning of the URLa:',
+	'label:debut_urls_propres' => 'Beginning of the URLs:',
 	'label:debut_urls_propres2' => '<:label:debut_urls_propres:>',
 	'label:decoration_styles' => 'Your personalised style tags:',
 	'label:derniere_modif_invalide' => 'Refresh immediately after a modification:',
@@ -288,7 +293,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:dossier_squelettes' => 'Directory(ies) to use:',
 	'label:duree_cache' => 'Duration of local cache:',
 	'label:duree_cache_mutu' => 'Duration of mutualised cache:',
-	'label:expo_bofbof' => '<NEW>Escritura como exponentes para: <html>St(e)(s), Bx, Bd(s) y Fb(s)</html>',
+	'label:expo_bofbof' => 'Place in superscript: <html>St(e)(s), Bx, Bd(s) et Fb(s)</html>',
 	'label:forum_lgrmaxi' => 'Value (in characters):',
 	'label:glossaire_groupes' => 'Group(s) used:',
 	'label:glossaire_js' => 'Technique used:',
@@ -302,7 +307,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:liens_interrogation' => 'Protect URLs:',
 	'label:liens_orphelins' => 'Clickable links:',
 	'label:log_couteau_suisse' => 'Activate:',
-	'label:marqueurs_urls_propres' => '<NEW>A&ntilde;adir los marcadores que separan los objetos (SPIP>=2.0) :<br/>(ej. : &laquo;&nbsp;-&nbsp;&raquo; para -Mi-secci&oacute;n-, &laquo;&nbsp;@&nbsp;&raquo; para @Mi-sitio@) ',
+	'label:marqueurs_urls_propres' => 'Add markers to distinguish between objects (SPIP>=2.0) :<br/>(e.g.. : "&nbsp;-&nbsp;" for -My-section-, "&nbsp;@&nbsp;" for @My-site@) ',
 	'label:marqueurs_urls_propres2' => '<:label:marqueurs_urls_propres:>',
 	'label:marqueurs_urls_propres_qs' => '<:label:marqueurs_urls_propres:>',
 	'label:max_auteurs_page' => 'Authors per page:',
@@ -311,7 +316,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:paragrapher' => 'Always insert paragraphs:',
 	'label:puce' => 'Public bullet &laquo;<html>-</html>&raquo;:',
 	'label:quota_cache' => 'Quota value',
-	'label:racc_g1' => '<NEW>Entrada y salida del cambio a &laquo;<html>{{negrita}}</html>&raquo;:',
+	'label:racc_g1' => 'Beginning and end of "<html>{{bolded text}}</html>":',
 	'label:racc_h1' => 'Beginning and end of a &laquo;<html>{{{subtitle}}}</html>&raquo;:',
 	'label:racc_hr' => 'Horizontal line (<html>----</html>) :',
 	'label:racc_i1' => 'Beginning and end of &laquo;<html>{italics}</html>&raquo;:',
@@ -333,10 +338,11 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:suite_introduction' => 'Follow-on dots',
 	'label:terminaison_urls_arbo' => '<:label:terminaison_urls_page:>',
 	'label:terminaison_urls_libres' => '<:label:terminaison_urls_page:>',
-	'label:terminaison_urls_page' => '<MODIF>URL endings (e.g.: .html):',
+	'label:terminaison_urls_page' => 'URL endings (e.g.: .html):',
 	'label:terminaison_urls_propres' => '<:label:terminaison_urls_page:>',
 	'label:terminaison_urls_propres_qs' => '<:label:terminaison_urls_page:>',
 	'label:titre_travaux' => 'Message title:',
+	'label:titres_etendus' => 'Activate the extended use of the tags #TITRE_XXX:',
 	'label:tri_articles' => 'Your choice:',
 	'label:url_arbo_minuscules' => 'Preserve the case of titles in URLs:',
 	'label:url_arbo_sep_id' => 'Separation character \'title-id\', used in the event of homonyms:<br/>(do not use \'/\')',
@@ -362,11 +368,12 @@ _ • {Extended}: additionally links such as these are also replaced:  {<html>me@s
 	'liens_orphelins:nom' => 'Fine URLs',
 
 	// M
-	'mailcrypt:description' => '<MODIF>Hides all the email links in your textes and replaces them with a Javascript link which activates the visitor\'s email programme when the link is clicked. This antispam tool attempts to prevent web robots from collecting email addresses which have been placed in forums or in the text displayed by the tags in your templates.',
+	'mailcrypt:description' => 'Hides all the email links in your textes and replaces them with a Javascript link which activates the visitor\'s email programme when the link is clicked. This antispam tool attempts to prevent web robots from collecting email addresses which have been placed in forums or in the text displayed by the tags in your templates.',
 	'mailcrypt:nom' => 'MailCrypt',
 	'message_perso' => 'oh!',
 	'moderation_admins' => 'authenticated administrators',
-	'moderation_moderee:description' => '<MODIF>Permite moderar la moderaci&oacute;n de los foros por los usuarios inscritos. [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
+	'moderation_message' => '<NEW>Este foro est&aacute; moderado a priori: tu contribuci&oacute;n no aparecer&aacute; hasta que haya sido validada por un administrador del sitio, salvo si te has identificado y est&aacute;s autorizado a escribir directamente.',
+	'moderation_moderee:description' => '<NEW>Permite moderar la moderaci&oacute;n de los foros p&uacute;blicos <b>configurados a priori</b> por los usuarios inscritos.<br />Por ejemplo: Si soy el webmaster de mi sitio, y respondo al mensaje de un usuario, &iquest;por qu&eacute; debo validar mi propio mensaje? &iexcl;Moderaci&oacute;n moderada lo hace para m&iacute;!  [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
 	'moderation_moderee:nom' => '<NEW>Moderaci&oacute;n moderada',
 	'moderation_redacs' => 'authenticated authors',
 	'moderation_visits' => 'Visitors authenticated',
@@ -405,15 +412,25 @@ _ • {Extended}: additionally links such as these are also replaced:  {<html>me@s
 	'outils_selectiontous' => 'ALL',
 
 	// P
+	'pack_actuel' => 'Pack @date@',
+	'pack_actuel_avert' => '<NEW>Atenci&oacute;n, las sobrecargas para los define() o los globales no se especifican aqu&iacute;',
+	'pack_actuel_titre' => 'UP-TO-DATE CONFIGURATION PACK OF THE SWISS KNIFE',
 	'pack_alt' => 'See the current configuration parameters',
 	'pack_descrip' => '<MODIF>Your "Current configuration pack" brings together all the parameters activated for the Swiss Knife plugin. It remembers both whether a tool is activated or not and, if so, what options have been chosen.
 
-This PHP code may be placed in the /config/mes_options.php file. It will place a reset link on the page of the "pack {Current Pack}". Of course, you can change its name below.
+This PHP code may be placed in the /config/mes_options.php file. It will place a reset link on the page of the "pack {@pack@}". Of course, you can change its name below.
 
 If you reset the plugin by clicking on a pack, the Swiss Knife will reconfigure itself according to the values defined in that pack.',
 	'pack_du' => '• of the pack @pack@',
 	'pack_installe' => 'Installation of a configuration pack',
+	'pack_nb_plrs' => 'At the moment there are @nb@ "configuration packs" available.',
+	'pack_nb_un' => 'A "configuration pack" is currently available.',
+	'pack_nb_zero' => 'No "configuration pack" is currently available.',
+	'pack_outils_defaut' => 'Installation of the default tools',
+	'pack_sauver' => 'Save the current configuration',
+	'pack_sauver_descrip' => '<NEW>El bot&oacute;n de m&aacute;s abajo permite insertar directamente en el archivo <b>@file@</b> los par&aacute;metros necesarios para a&ntilde;adir un &laquo;paquete de configuraci&oacute;n&nbsp;&raquo; en el men&uacute; de la izquierda. Esto te permitir&aacute; despu&eacute;s devolver con un clic la Navaja Suiza al estado de configuraci&oacute;n en que est&aacute; actualmente.',
 	'pack_titre' => 'Current configuration',
+	'pack_variables_defaut' => 'Installation of the default variables',
 	'par_defaut' => 'By default',
 	'paragrapher2:description' => 'The SPIP function <code>paragrapher()</code> inserts the tags &lt;p&gt; and &lt;/p&gt; around all texts which do not have paragraphs. In order to have a finer control over your styles and layout, you can give a uniform look to your texts throughout the site.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Insert paragraphs',
@@ -429,7 +446,7 @@ If you reset the plugin by clicking on a pack, the Swiss Knife will reconfigure 
 	'rss_attente' => 'Awaiting RSS...',
 	'rss_desactiver' => 'Deactivate &laquo;Swiss Knife updates&raquo;',
 	'rss_edition' => 'RSS feed updated:',
-	'rss_source' => '<NEW>Origen RSS',
+	'rss_source' => 'RSS source',
 	'rss_titre' => 'Development of the &laquo;The Swiss Knife&raquo;:',
 	'rss_var' => 'Swiss Knife updates',
 
@@ -442,13 +459,13 @@ If you reset the plugin by clicking on a pack, the Swiss Knife will reconfigure 
 	'simpl_interface:description' => 'Deactivates the pop-up menu for changing article status which shows onmouseover on the coloured status bullets. This can be useful if you wish to have an editing interface which is as simple as possible for the users.',
 	'simpl_interface:nom' => 'Simplification of the editing interface',
 	'smileys:aide' => 'Smileys: @liste@',
-	'smileys:description' => '<MODIF>Inserts smileys in texts containing a shortcut in this form <acronym>:-)</acronym>. Ideal for forums.
+	'smileys:description' => 'Inserts smileys in texts containing a shortcut in this form <acronym>:-)</acronym>. Ideal for forums.
 _ A tag is available for displaying a table of smileys in templates: #SMILEYS.
 _ Images : [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'Smileys',
-	'soft_scroller:description' => '<MODIF>Gives a slow scroll effect when a visitor clicks on a link with an anchor tag. This helps the visitor to know where they are in a long text.
+	'soft_scroller:description' => 'Gives a slow scroll effect when a visitor clicks on a link with an anchor tag. This helps the visitor to know where they are in a long text.
 
-N.B. In order to work, this tool requires two {jQuery} plugins: {ScrollTo} et {LocalScroll}. The Swiss Knife can install them itself if you check the following two boxes. [[%scrollTo%]][[->%LocalScroll%]]
+N.B. In order to work, this tool needs to be used in &laquo;DOCTYPE XHTML&raquo; pages (not HTML!). It also requires two {jQuery} plugins: {ScrollTo} et {LocalScroll}. The Swiss Knife can install them itself if you check the following two boxes. [[%scrollTo%]][[->%LocalScroll%]]
 @_CS_PLUGIN_JQUERY192@',
 	'soft_scroller:nom' => 'Soft anchors',
 	'sommaire:description' => 'Builds a summary of your articles in order to access the main headings quickly (HTML tags &lt;h3>A Subtitle&lt;/h3> or SPIP subtitle shortcuts in the form: <code>{{{My subtitle}}}</code>).
@@ -465,8 +482,8 @@ _ • Only for articles containing the <code>@_CS_AVEC_SOMMAIRE@</code> tag.
 [[%balise_sommaire%]]
 
 The summary can be used in conjunction with : {[.->decoupe]}.',
-	'sommaire:nom' => 'A summary for your articles',
-	'sommaire_avec' => '<MODIF>An article with summary: <b>@_CS_AVEC_SOMMAIRE@</b>',
+	'sommaire:nom' => '<MODIF>A summary for your articles',
+	'sommaire_avec' => 'An article with summary: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'An article without summary: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'spam:description' => 'Attempts to fight against the sending of abusive and automatic messages through forms on the public site. Some words and the tags  &lt;a>&lt;/a> are prohibited.
 
@@ -492,6 +509,14 @@ _ • {Control de la cach&eacute;}: opci&oacute;n id&eacute;ntica a la anterior, c
 
 	// T
 	'titre' => 'The Swiss Knife',
+	'titre_parent:description' => '<NEW>En el interior de un bucle, es habitual que se quiera mostrar el t&iacute;tulo del padre del objeto en curso. Tradicionalmente, bastaba utilizar un segundo bucle, pero esta nueva baliza #TITRE_PARENT aligerar&aacute; la escritura de tus esqueletos. El resultado devuelto es: el t&iacute;tulo del grupo de una palabra-clave o el de la secci&oacute;n padre (si existe) de cualquier otro objeto (art&iacute;culo, secci&oacute;n, breve, etc.).
+
+Nota: Para las palabras-clave, un alias de #TITRE_PARENT es #TITRE_GROUPE. El tratamiento por SPIP de estas balizas nuevas es similar al de #TITRE.
+
+@puce@ Si utilizas SPIP 2.0, aqu&iacute; tienes disponible todo un conjunto de balizas #TITRE_XXX que podr&aacute;n devolver el t&iacute;tulo del objeto \'xxx\', a condici&oacute;n de que el campo \'id_xxx\' est&eacute; presente en la tabla en curso (#ID_XXX utilizable en el bucle en curso).
+
+Por ejemplo, en un bucle sobre (ARTICLES), #TITRE_SECTEUR devolver&aacute; el t&iacute;tulo del sector en el que est&aacute; situado el art&iacute;culo en curso, pues el identificador #ID_SECTEUR (o el campo \'id_secteur\') est&aacute; disponible en ese caso.[[%titres_etendus%]]',
+	'titre_parent:nom' => '<NEW>Baliza #TITRE_PARENT',
 	'titre_tests' => 'The Swiss Knife - Test page',
 	'tous' => 'All',
 	'toutes_couleurs' => 'The 36 colours in CSS styles: @_CS_EXEMPLE_COULEURS@',
@@ -565,13 +590,13 @@ The following expressions are also handled: <html>Dr, Pr, Mgr, St, Bx, m2, m3, M
 	'urls_edit_erreur' => '<NEW>El formato actual de las URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) no permite la edici&oacute;n.',
 	'urls_enregistrer' => '<NEW>Grabar esta URL en la base',
 	'urls_nouvelle' => '<MODIF>&Eacute;diter l\'URL &laquo;&nbsp;propres&nbsp;&raquo;&nbsp;:',
-	'urls_num_objet' => '<NEW>N&uacute;mero:',
-	'urls_purger' => '<NEW>Vaciar todo',
-	'urls_purger_tables' => '<NEW>Vaciar las tablas seleccionadas',
-	'urls_purger_tout' => '<NEW>Reinicializar las URLs guardadas en la base:',
-	'urls_rechercher' => '<NEW>Buscar este objeto en la base',
+	'urls_num_objet' => 'Number:',
+	'urls_purger' => '<MODIF>Erase all',
+	'urls_purger_tables' => 'empty tables selected',
+	'urls_purger_tout' => '<MODIF>Reset the URLs stored in the database:',
+	'urls_rechercher' => 'Find this object in the database',
 	'urls_titre_objet' => '<NEW>T&iacute;tulo grabado:',
-	'urls_type_objet' => '<NEW>Objeto:',
+	'urls_type_objet' => '<MODF>Order:',
 	'urls_url_calculee' => 'URL PUBLIC  &laquo;&nbsp;@type@&nbsp;&raquo;:',
 	'urls_url_objet' => '<MODIF>URL &laquo;&nbsp;propres&nbsp;&raquo; enregistr&eacute;e&nbsp;:',
 	'urls_valeur_vide' => '<NEW>(Un valor vac&iacute;o implica la supresi&oacute;n de la URL)',

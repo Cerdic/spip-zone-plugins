@@ -34,9 +34,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'basique' => 'Basique',
 	'blocs:aide' => 'Blocs D&eacute;pliables : <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias : <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) et <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF>Te permet  de cr&eacute;er des blocs dont le titre cliquable peut les rendre visibles ou invisibles.
+	'blocs:description' => 'Te permet  de cr&eacute;er des blocs dont le titre cliquable peut les rendre visibles ou invisibles.
 
-@puce@ {{Dans les textes SPIP}} : les r&eacute;dacteurs ont &agrave; disposition les nouvelles balises &lt;bloc&gt; (ou &lt;invisible&gt;) et &lt;visible&gt; &agrave; utiliser dans leurs textes comme ceci : 
+@puce@ {{Dans les textes SPIP}} : les r&eacute;dacteurs ont &agrave; disposition les  nouvelles balises &lt;bloc&gt; (ou &lt;invisible&gt;) et &lt;visible&gt; &agrave; utiliser dans leurs textes comme ceci : 
 
 <quote><code>
 <bloc>
@@ -49,14 +49,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 @puce@ {{Dans les squelettes}} : tu as &agrave; ta disposition les  nouvelles balises #BLOC_TITRE, #BLOC_DEBUT et #BLOC_FIN &agrave; utiliser comme ceci : 
 <quote><code> #BLOC_TITRE ou #BLOC_TITRE{mon_URL}
  Mon titre
- #BLOC_RESUME   (facultatif)
+ #BLOC_RESUME    (facultatif)
  une version re\'sume\'e du bloc suivant
  #BLOC_DEBUT
  Mon bloc de\'pliable (qui contiendra l\'URL pointe\'e si ne\'ce\'ssaire)
  #BLOC_FIN</code></quote>
- 
-@puce@ En cochant &laquo;oui&raquo; ci-dessous, l\'ouverture d\'un bloc provoquera la fermeture de tous les autres blocs de la page, afin d\'en avoir qu\'un seul ouvert &agrave; la fois.[[%bloc_unique%]]
-',
+
+@puce@ En cochant &laquo;oui&raquo; ci-dessous, l\'ouverture d\'un bloc provoquera la fermeture de tous les autres blocs de la page, afin d\'en avoir qu\'un seul ouvert &agrave; la fois.[[%bloc_unique%]]',
 	'blocs:nom' => 'Blocs D&eacute;pliables',
 	'boites_privees:description' => 'Toutes les bo&icirc;tes d&eacute;crites ci-dessous apparaissent dans la partie priv&eacute;e.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]]
 - {{Les r&eacute;visions du Couteau Suisse}} : un cadre sur la pr&eacute;sente page de configuration, indiquant les derni&egrave;res modifications apport&eacute;es au code du plugin ([Source->@_CS_RSS_SOURCE@]).
@@ -111,10 +110,17 @@ Note bien : en modifiant ce deuxi&egrave;me style, tu perds alors les styles sta
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Fonctions',
 	'code_jq' => 'jQuery',
-	'code_js' => '<MODIF>Javascript',
+	'code_js' => 'JavaScript',
 	'code_options' => 'Options',
 	'code_spip_options' => 'Options SPIP',
 	'contrib' => 'Plus d\'infos : @url@',
+	'corbeille:description' => 'SPIP supprime automatiquement les objets mis au rebuts au bout de 24 heures, en g&eacute;n&eacute;ral vers 4 heures du matin, gr&acirc;ce &agrave; une t&acirc;che &laquo;CRON&raquo; (lancement p&eacute;riodique et/ou automatique de processus pr&eacute;programm&eacute;s). Tu peux ici emp&ecirc;cher ce processus afin de mieux g&eacute;rer ta corbeille.[[%arret_optimisation%]]',
+	'corbeille:nom' => 'La corbeille',
+	'corbeille_objets' => '@nb@ objet(s) dans la corbeille.',
+	'corbeille_objets_lies' => '@nb_lies@ liaison(s) detect&eacute;e(s).',
+	'corbeille_objets_vide' => 'Aucun objet dans la corbeille',
+	'corbeille_objets_vider' => 'Supprimer les objets s&eacute;lectionn&eacute;s',
+	'corbeille_vider' => 'Vider la corbeille&nbsp;:',
 	'couleurs:aide' => 'Mise en couleurs : <b>[coul]texte[/coul]</b>@fond@ avec <b>coul</b> = @liste@',
 	'couleurs:description' => 'Permet d\'appliquer facilement des couleurs &agrave; tous les textes du site (articles, br&egrave;ves, titres, forum, …) en utilisant des balises en raccourcis.
 
@@ -198,7 +204,7 @@ Cet outil peut &ecirc;tre coupl&eacute; avec  &laquo;&nbsp;[.->sommaire]&nbsp;&r
 	'etendu' => '&Eacute;tendu',
 
 	// F
-	'f_jQuery:description' => '<MODIF>Emp&ecirc;che l\'installation de {jQuery} dans la partie publique afin d\'&eacute;conomiser un peu de &laquo;temps machine&raquo;. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de Javascript et peut &ecirc;tre utilis&eacute;e par certains plugins. SPIP l\'utilise dans sa partie priv&eacute;e.
+	'f_jQuery:description' => 'Emp&ecirc;che l\'installation de {jQuery} dans la partie publique afin d\'&eacute;conomiser un peu de &laquo;temps machine&raquo;. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de JavaScript et peut &ecirc;tre utilis&eacute;e par certains plugins. SPIP l\'utilise dans sa partie priv&eacute;e.
 
 Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions de {jQuery}. ',
 	'f_jQuery:nom' => 'D&eacute;sactive jQuery',
@@ -206,20 +212,26 @@ Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions d
 	'filets_sep:description' => 'Ins&egrave;re des filets de s&eacute;paration, personnalisables par des feuilles de style, dans tous les textes de SPIP.
 _ La syntaxe est : "__code__", o&ugrave; "code" repr&eacute;sente soit le num&eacute;ro d’identification (de 0 &agrave; 7) du filet &agrave; ins&eacute;rer en relation directe avec les styles correspondants, soit le nom d\'une image plac&eacute;e dans le dossier plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'Filets de S&eacute;paration',
-	'filtrer_javascript:description' => '<MODIF>Pour g&eacute;rer l\'insertion de javascript dans les articles, trois modes sont disponibles :
-- <i>jamais</i> : le javascript est refus&eacute; partout
-- <i>d&eacute;faut</i> : le javascript est signal&eacute; en rouge dans l\'espace priv&eacute;
-- <i>toujours</i> : le javascript est accept&eacute; partout.
+	'filtrer_javascript:description' => 'Pour g&eacute;rer l\'insertion de JavaScript dans les articles, trois modes sont disponibles :
+- <i>jamais</i> : le JavaScript est refus&eacute; partout
+- <i>d&eacute;faut</i> : le JavaScript est signal&eacute; en rouge dans l\'espace priv&eacute;
+- <i>toujours</i> : le JavaScript est accept&eacute; partout.
 
-Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la gestion du javascript est <b>toujours</b> s&eacute;curis&eacute;e.[[%radio_filtrer_javascript3%]]',
-	'filtrer_javascript:nom' => '<MODIF>Gestion du javascript',
+Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la gestion du JavaScript est <b>toujours</b> s&eacute;curis&eacute;e.[[%radio_filtrer_javascript3%]]',
+	'filtrer_javascript:nom' => 'Gestion du JavaScript ',
 	'flock:description' => 'D&eacute;sactive le syst&egrave;me de verrouillage de fichiers en neutralisant la fonction PHP {flock()}. Certains h&eacute;bergements posent en effet des probl&egrave;mes graves suite &agrave; un syst&egrave;me de fichiers inadapt&eacute; ou &agrave; un manque de synchronisation. N\'active pas cet outil si ton site fonctionne normalement.',
 	'flock:nom' => 'Pas de verrouillage de fichiers',
 	'fonds' => 'Fonds :',
-	'forcer_langue:description' => '<MODIF>Force le contexte de langue pour les jeux de squelettes multilingues disposant d\'un formulaire ou d\'un menu de langues sachant g&eacute;rer le cookie de langues.',
-	'forcer_langue:nom' => '<MODIF>Forcer langue',
+	'forcer_langue:description' => 'Force le contexte de langue pour les jeux de squelettes multilingues disposant d\'un formulaire ou d\'un menu de langues sachant g&eacute;rer le cookie de langues.
+
+Techniquement, cet outil a pour effet :
+- de d&eacute;sactiver la recherche du squelette en fonction de la langue de l\'objet,
+- de d&eacute;sactiver le crit&egrave;re <code>{lang_select}</code> automatique sur les objets classiques (articles, br&egrave;ves, rubriques etc ... ).
+
+Les blocs multi s\'affichent alors toujours dans la langue demand&eacute;e par le visiteur.',
+	'forcer_langue:nom' => 'Force la langue',
 	'format_spip' => 'Les articles au format SPIP',
-	'forum_lgrmaxi:description' => '<MODIF>Par d&eacute;faut les messages de forum ne sont pas limit&eacute;s en taille. Si cet outil est activ&eacute;, un message d\'erreur s\'affichera lorsque quelqu\'un voudra poster un message  d\'une taille sup&eacute;rieure &agrave; la valeur sp&eacute;cifi&eacute;e, et le message sera refus&eacute;. Une valeur vide ou &eacute;gale &agrave; 0 signifie n&eacute;anmoins qu\'aucune limite ne s\'applique.[[%forum_lgrmaxi%]]',
+	'forum_lgrmaxi:description' => 'Par d&eacute;faut les messages de forum ne sont pas limit&eacute;s en taille. Si cet outil est activ&eacute;, un message d\'erreur s\'affichera lorsque quelqu\'un voudra poster un message  d\'une taille sup&eacute;rieure &agrave; la valeur sp&eacute;cifi&eacute;e, et le message sera refus&eacute;. Une valeur vide ou &eacute;gale &agrave; 0 signifie n&eacute;anmoins qu\'aucune limite ne s\'applique.[[%forum_lgrmaxi%]]',
 	'forum_lgrmaxi:nom' => 'Taille des forums',
 
 	// G
@@ -231,15 +243,12 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 @puce@ Deux solutions te sont offertes pour g&eacute;n&eacute;rer la petite fen&ecirc;tre automatique qui appara&icirc;t lors du survol de la souris. [[%glossaire_js%]]',
 	'glossaire:nom' => 'Glossaire interne',
 	'glossaire_css' => 'Solution CSS',
-	'glossaire_js' => '<MODIF>Solution Javascript',
+	'glossaire_js' => 'Solution JavaScript',
 	'guillemets:description' => 'Remplace automatiquement les guillemets droits (") par les guillemets typographiques de la langue de composition. Le remplacement, transparent pour l\'utilisateur, ne modifie pas le texte original mais seulement l\'affichage final.',
 	'guillemets:nom' => 'Guillemets typographiques',
 
 	// H
 	'help' => '{{Cette page est uniquement accessible aux responsables du site.}} Elle permet la configuration des diff&eacute;rentes fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.',
-	'help0' => '{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p><p>Lien de documentation :<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]</p><p>R&eacute;initialisation :
-_ • [De tout le plugin->@reset@]
-</p>',
 	'help2' => 'Version locale : @version@',
 	'help3' => '<p>Liens de documentation :<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
 _ • [Des outils cach&eacute;s|Revenir &agrave; l\'apparence initiale de cette page->@hide@]
@@ -251,7 +260,7 @@ _ • [De tout le plugin|Revenir &agrave; l\'&eacute;tat initial du plugin->@reset
 
 Pour d&eacute;finir ce logo, vas sur la page &laquo;&nbsp;Configuration du site&nbsp;&raquo; en cliquant sur le bouton &laquo;&nbsp;Configuration&nbsp;&raquo;.',
 	'icone_visiter:nom' => 'Bouton &laquo;&nbsp;Visiter&nbsp;&raquo;',
-	'insert_head:description' => '<MODIF>Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Gr&acirc;ce &agrave; cette option, les plugins pourront ins&eacute;rer du javascript (.js) ou des feuilles de style (.css).',
+	'insert_head:description' => 'Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Gr&acirc;ce &agrave; cette option, les plugins pourront ins&eacute;rer du JavaScript (.js) ou des feuilles de style (.css).',
 	'insert_head:nom' => 'Balise #INSERT_HEAD',
 	'insertions:description' => 'ATTENTION : outil en cours de d&eacute;veloppement !! [[%insertions%]]',
 	'insertions:nom' => 'Corrections automatiques',
@@ -283,6 +292,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 
 	// L
 	'label:admin_travaux' => 'Fermer le site public pour :',
+	'label:arret_optimisation' => 'Emp&ecirc;cher SPIP de vider la corbeille automatiquement&nbsp;:',
 	'label:auteurs_tout_voir' => '@_CS_CHOIX@',
 	'label:auto_sommaire' => 'Cr&eacute;ation syst&eacute;matique du sommaire :',
 	'label:balise_decoupe' => 'Activer la balise #CS_DECOUPE :',
@@ -348,6 +358,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:terminaison_urls_propres' => '<:label:terminaison_urls_page:>',
 	'label:terminaison_urls_propres_qs' => '<:label:terminaison_urls_page:>',
 	'label:titre_travaux' => 'Titre du message :',
+	'label:titres_etendus' => 'Activer l\'utilisation &eacute;tendue des balises #TITRE_XXX&nbsp;:',
 	'label:tri_articles' => 'Ton choix :',
 	'label:url_arbo_minuscules' => 'Conserver la casse des titres dans les URLs :',
 	'label:url_arbo_sep_id' => 'Caract&egrave;re de s&eacute;paration \'titre-id\' en cas de doublon :<br/>(ne pas utiliser \'/\')',
@@ -373,11 +384,12 @@ _ • {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi
 	'liens_orphelins:nom' => 'Belles URLs',
 
 	// M
-	'mailcrypt:description' => '<MODIF>Masque tous les liens de courriels pr&eacute;sents dans tes textes en les rempla&ccedil;ant par un lien Javascript permettant quand m&ecirc;me d\'activer la messagerie du lecteur. Cet outil antispam tente d\'emp&ecirc;cher les robots de collecter les adresses &eacute;lectroniques laiss&eacute;es en clair dans les forums ou dans les balises de tes squelettes.',
+	'mailcrypt:description' => 'Masque tous les liens de courriels pr&eacute;sents dans tes textes en les rempla&ccedil;ant par un lien JavaScript permettant quand m&ecirc;me d\'activer la messagerie du lecteur. Cet outil antispam tente d\'emp&ecirc;cher les robots de collecter les adresses &eacute;lectroniques laiss&eacute;es en clair dans les forums ou dans les balises de tes squelettes.',
 	'mailcrypt:nom' => 'MailCrypt',
 	'message_perso' => 'Un grand merci aux traducteurs qui passeraient par ici. Pat ;-)',
 	'moderation_admins' => 'administrateurs authentifi&eacute;s',
-	'moderation_moderee:description' => '<MODIF>Permet de mod&eacute;rer la mod&eacute;ration des forums pour les utilisateurs inscrits. [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
+	'moderation_message' => 'Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: ta contribution n\'appara&icirc;tra qu\'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site, sauf si tu es identifi&eacute; et autoris&eacute; &agrave; poster directement.',
+	'moderation_moderee:description' => 'Permet de mod&eacute;rer la mod&eacute;ration des forums publics <b>configur&eacute;s &agrave; priori</b> pour les utilisateurs inscrits.<br />Exemple : Je suis le webmestre de mon site, et je r&eacute;ponds &agrave; un message d\'un utilisateur, pourquoi devoir valider mon propre message ? Mod&eacute;ration mod&eacute;r&eacute;e le fait pour moi ! [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
 	'moderation_moderee:nom' => 'Mod&eacute;ration mod&eacute;r&eacute;e',
 	'moderation_redacs' => 'r&eacute;dacteurs authentifi&eacute;s',
 	'moderation_visits' => 'visiteurs authentifi&eacute;s',
@@ -416,15 +428,25 @@ _ • {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi
 	'outils_selectiontous' => 'TOUS',
 
 	// P
+	'pack_actuel' => 'Pack @date@',
+	'pack_actuel_avert' => 'Attention, les surcharges sur les define() ou les globales ne sont pas sp&eacute;cifi&eacute;es ici',
+	'pack_actuel_titre' => 'PACK ACTUEL DE CONFIGURATION DU COUTEAU SUISSE',
 	'pack_alt' => 'Voir les param&egrave;tres de configuration en cours',
-	'pack_descrip' => '<MODIF>Ton "Pack de configuration actuelle" rassemble l\'ensemble des param&egrave;tres de configuration en cours concernant le Couteau Suisse : l\'activation des outils et la valeur de leurs &eacute;ventuelles variables.
+	'pack_descrip' => '<MODIF><MODIF>Ton &laquo;&nbsp;Pack de configuration actuelle&nbsp;&raquo; rassemble l\'ensemble des param&egrave;tres de configuration en cours concernant le Couteau Suisse : l\'activation des outils et la valeur de leurs &eacute;ventuelles variables.
 
-Ce code PHP peut prendre place dans le fichier /config/mes_options.php et ajoutera un lien de r&eacute;initialisation sur cette page "du pack {Pack Actuel}". Bien s&ucirc;r il t\'est possible de changer son nom ci-dessous.
+Ce code PHP peut prendre place dans le fichier /config/mes_options.php et ajoutera un lien de r&eacute;initialisation sur cette page "du pack &laquo;&nbsp;{@pack@}&nbsp;&raquo;.  Bien s&ucirc;r il t\'est possible de changer son nom.
 
-Si tu r&eacute;initialises le plugin en cliquant sur un pack, le Couteau Suisse se reconfigurera automatiquement en fonction des param&egrave;tres pr&eacute;d&eacute;finis dans le pack.',
+Si tu r&eacute;initialises le plugin en cliquant sur un pack, le Couteau Suisse se reconfigurera automatiquement en fonction des param&egrave;tres pr&eacute;d&eacute;finis dans ce pack.',
 	'pack_du' => '• du pack @pack@',
 	'pack_installe' => 'Mise en place d\'un pack de configuration',
+	'pack_nb_plrs' => 'Il y a actuellement @nb@ &laquo;&nbsp;packs de configuration&nbsp;&raquo; disponibles.',
+	'pack_nb_un' => 'Il y a actuellement un &laquo;&nbsp;pack de configuration&nbsp;&raquo; disponible',
+	'pack_nb_zero' => 'Il n\'y a pas de &laquo;&nbsp;pack de configuration&nbsp;&raquo; disponible actuellement.',
+	'pack_outils_defaut' => 'Installation des outils par d&eacute;faut',
+	'pack_sauver' => 'Sauver la configuration actuelle',
+	'pack_sauver_descrip' => '<NEW>Le bouton ci-dessous vous permet d\'ins&eacute;rer directement dans votre fichier <b>@file@</b> les param&egrave;tres n&eacute;cessaires pour ajouter un &laquo;&nbsp;pack de configuration&nbsp;&raquo; dans le menu de gauche. Ceci vous permettra ult&eacute;rieurement de reconfigurer en un clic votre Couteau Suisse dans l\'&eacute;tat o&ugrave; il est actuellement.',
 	'pack_titre' => 'Configuration Actuelle',
+	'pack_variables_defaut' => 'Installation des variables par d&eacute;faut',
 	'par_defaut' => 'Par d&eacute;faut',
 	'paragrapher2:description' => 'La fonction SPIP <code>paragrapher()</code> ins&egrave;re des balises &lt;p&gt; et &lt;/p&gt; dans tous les textes qui sont d&eacute;pourvus de paragraphes. Afin de g&eacute;rer plus finement tes styles et vos mises en page, tu as la possibilit&eacute; d\'uniformiser l\'aspect des textes de ton site.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Paragrapher',
@@ -453,7 +475,7 @@ Si tu r&eacute;initialises le plugin en cliquant sur un pack, le Couteau Suisse 
 	'simpl_interface:description' => 'D&eacute;sactive le menu de changement rapide de statut d\'un article au survol de sa puce color&eacute;e. Cela est utile si tu cherches &agrave; obtenir une interface priv&eacute;e la plus d&eacute;pouill&eacute;e possible afin d\'optimiser les performances client.',
 	'simpl_interface:nom' => 'All&egrave;gement de l\'interface priv&eacute;e',
 	'smileys:aide' => 'Smileys : @liste@',
-	'smileys:description' => '<MODIF>Ins&egrave;re des smileys dans tous les textes o&ugrave; appara&icirc;t un raccourci du genre <acronym>:-)</acronym>. Id&eacute;al pour les  forums.
+	'smileys:description' => 'Ins&egrave;re des smileys dans tous les textes o&ugrave; appara&icirc;t un raccourci du genre <acronym>:-)</acronym>. Id&eacute;al pour les  forums.
 _ Une balise est disponible pour afficher un tableau de smileys dans tes squelettes : #SMILEYS.
 _ Dessins : [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'Smileys',
@@ -476,7 +498,7 @@ _ • Uniquement pour les articles contenant la balise <code>@_CS_AVEC_SOMMAIRE@</
 [[%balise_sommaire%]]
 
 Ce sommaire peut &ecirc;tre coupl&eacute; avec&nbsp;: &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
-	'sommaire:nom' => 'Un sommaire pour vos articles',
+	'sommaire:nom' => '<MODIF>Un sommaire pour vos articles',
 	'sommaire_avec' => 'Un texte avec sommaire&nbsp;: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un texte sans sommaire&nbsp;: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises &lt;a>&lt;/a> sont interdits.
@@ -504,11 +526,19 @@ _ • {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&eacute;
 	'suivi_forums:description' => 'Un auteur d\'article est toujours inform&eacute; lorsqu\'un message est publi&eacute; dans le forum public associ&eacute;. Mais il est aussi possible d\'avertir en plus : tous les participants au forum ou seulement les auteurs de messages en amont.[[%radio_suivi_forums3%]]',
 	'suivi_forums:nom' => 'Suivi des forums publics',
 	'supprimer_cadre' => 'Supprimer ce cadre',
-	'supprimer_numero:description' => '<MODIF>Applique la fonction SPIP supprimer_numero() &agrave; l\'ensemble des {{titres}} et des {{noms}} du site public, sans que le filtre supprimer_numero soit pr&eacute;sent dans les squelettes.<br />Voici la syntaxe &agrave; utiliser dans le cadre d\'un site multilingue : <code>1. <multi>My Title[fr]Mon Titre[de]Mein Titel</multi></code>',
+	'supprimer_numero:description' => 'Applique la fonction SPIP supprimer_numero() &agrave; l\'ensemble des {{titres}}, des {{noms}} et des {{types}} (de mots-cl&eacute;s) du site public, sans que le filtre supprimer_numero soit pr&eacute;sent dans les squelettes.<br />Voici la syntaxe &agrave; utiliser dans le cadre d\'un site multilingue : <code>1. <multi>My Title[fr]Mon Titre[de]Mein Titel</multi></code>',
 	'supprimer_numero:nom' => 'Supprime le num&eacute;ro',
 
 	// T
 	'titre' => 'Le Couteau Suisse',
+	'titre_parent:description' => '<NEW>Au sein d\'une boucle, il est courant de vouloir afficher le titre du parent de l\'objet en cours. Traditionnellement, il suffirait d\'utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT all&eacute;gera l\'&eacute;criture de tes squelettes. Le r&eacute;sultat renvoy&eacute; est : le titre du groupe d\'un mot-cl&eacute; ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, br&egrave;ve, etc.).
+
+Note : Pour les mots-cl&eacute;s, un alias de #TITRE_PARENT est #TITRE_GROUPE. Le traitement SPIP de ces nouvelles balises est similaire &agrave; celui de #TITRE.
+
+@puce@ Si tu es sous SPIP 2.0, alors tu as ici &agrave; ta disposition tout un ensemble de balises #TITRE_XXX qui pourront te donner le titre de l\'objet \'xxx\', &agrave; condition que le champ \'id_xxx\' soit pr&eacute;sent dans la table en cours (#ID_XXX utilisable dans la boucle en cours).
+
+Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du secteur dans lequel est plac&eacute; l\'article en cours, puisque l\'identifiant #ID_SECTEUR (ou le champ \'id_secteur\') est disponible dans ce cas.[[%titres_etendus%]]',
+	'titre_parent:nom' => 'Balise #TITRE_PARENT',
 	'titre_tests' => 'Le Couteau Suisse - Page de tests…',
 	'tous' => 'Tous',
 	'toutes_couleurs' => 'Les 36 couleurs des styles css :@_CS_EXEMPLE_COULEURS@',
@@ -601,7 +631,7 @@ Choisis ici de mettre en exposant certains raccourcis suppl&eacute;mentaires, ma
 	'url_standard' => 'standard',
 	'urls_base_total' => 'Il y a actuellement @nb@ URL(s) en base',
 	'urls_base_vide' => 'La base des URLs est vide',
-	'urls_choix_objet' => '<MODIF>&Eacute;dition en base de l\'URL d\'un objet sp&eacute;cifique&nbsp;:',
+	'urls_choix_objet' => '&Eacute;dition en base de l\'URL d\'un objet sp&eacute;cifique&nbsp;:',
 	'urls_edit_erreur' => 'Le format actuel des URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) ne permet pas d\'&eacute;dition.',
 	'urls_enregistrer' => 'Enregistrer cette URL en base',
 	'urls_nouvelle' => '&Eacute;diter l\'URL &laquo;&nbsp;propres&nbsp;&raquo;&nbsp;:',
@@ -629,9 +659,9 @@ Choisis ici de mettre en exposant certains raccourcis suppl&eacute;mentaires, ma
 	'version_update_chargeur' => 'T&eacute;l&eacute;chargement automatique',
 	'version_update_chargeur_title' => 'T&eacute;l&eacute;charge la derni&egrave;re version du plugin gr&acirc;ce au plugin &laquo;T&eacute;l&eacute;chargeur&raquo;',
 	'version_update_title' => 'T&eacute;l&eacute;charge la derni&egrave;re version du plugin et lance sa mise &agrave; jour automatique',
-	'verstexte:description' => '<MODIF>2 filtres pour tes squelettes, permettant de produire des pages plus l&eacute;g&egrave;res.
+	'verstexte:description' => '2 filtres pour tes squelettes, permettant de produire des pages plus l&eacute;g&egrave;res.
 _ version_texte : extrait le contenu texte d\'une page html &agrave; l\'exclusion de quelques balises &eacute;l&eacute;mentaires.
-_ version_plein_texte : extrait le contenu texte d\'une page html pour rendre du texte plein.',
+_ version_plein_texte : extrait le contenu texte d\'une page html pour rendre du texte brut.',
 	'verstexte:nom' => 'Version texte',
 	'visiteurs_connectes:description' => 'Offre une noisette pour ton squelette qui affiche le nombre de visiteurs connect&eacute;s sur le site public.
 

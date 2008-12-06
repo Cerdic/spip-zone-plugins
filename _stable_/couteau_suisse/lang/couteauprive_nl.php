@@ -18,8 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'acces_admin' => 'Toegang beheerders :',
-	'action_rapide' => '<NEW>Action rapide, uniquement si vous savez ce que vous faites !',
-	'attente' => '<NEW>Attente...',
+	'action_rapide' => 'Snelle actie, alleen als u weet wat u doet !',
+	'attente' => 'Wachten...',
 	'auteur_forum:description' => 'Zet alle auteurs van openbare berichten ertoe aan om te vullen (van minstens van een brief!) het veld &laquo;@_CS_FORUM_NOM@&raquo; teneinde de volkomen onbekende bijdragen te vermijden.',
 	'auteur_forum:nom' => 'Geen onbekende forums',
 	'auteurs:description' => '<MODIF>Dit werktuig configureert de schijn van [de bladzijde van de auteurs ->./?exec=auteurs], gedeeltelijk particulier.
@@ -60,13 +60,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 - {{De artikelen aan het SPIP formaat}} : een aanvullend opvouwbaar kader voor uw artikelen teneinde de code bron te kennen die door hun auteurs wordt gebruikt.
 - {{De auteurs in stat}} : een kader aanvullend op [de bladzijde van de auteurs->./?exec=auteurs] die de 10 aangesloten laatsten en de niet bevestigde inschrijvingen aangeven. Enkel de beheerders zien deze informatie.',
 	'boites_privees:nom' => 'Particuliere dozen',
-	'bp_urls_propres' => '<MODIF>Les URLs propres',
+	'bp_urls_propres' => 'Eigen URLs ',
 
 	// C
-	'cache_controle' => '<NEW>Contr&ocirc;le du cache',
-	'cache_nornal' => '<NEW>Usage normal',
-	'cache_permanent' => '<NEW>Cache permanent',
-	'cache_sans' => '<NEW>Pas de cache',
+	'cache_controle' => 'Controle van het dekblad',
+	'cache_nornal' => 'Normaal gebruik',
+	'cache_permanent' => 'Permanent dekblad',
+	'cache_sans' => 'Geen dekblad',
 	'categ:admin' => '1. Administratie',
 	'categ:divers' => '60. Diversen',
 	'categ:interface' => '10. Interface priv&eacute;e',
@@ -100,10 +100,17 @@ Merkt op: door deze tweede parameter te wijzigen, verliest u dan de standaardsti
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Functies',
 	'code_jq' => 'jQuery',
-	'code_js' => '<MODIF>Javascript',
+	'code_js' => 'Javascript',
 	'code_options' => 'Opties',
-	'code_spip_options' => '<NEW>Options SPIP',
+	'code_spip_options' => 'Opties SPIP',
 	'contrib' => 'Meer infos : @url@',
+	'corbeille:description' => '<NEW>SPIP supprime automatiquement les objets mis au rebuts au bout de 24 heures, en g&eacute;n&eacute;ral vers 4 heures du matin, gr&acirc;ce &agrave; une t&acirc;che &laquo;CRON&raquo; (lancement p&eacute;riodique et/ou automatique de processus pr&eacute;programm&eacute;s). Vous pouvez ici emp&ecirc;cher ce processus afin de mieux g&eacute;rer votre corbeille.[[%arret_optimisation%]]',
+	'corbeille:nom' => 'Het mandje',
+	'corbeille_objets' => '<NEW>@nb@ objet(s) dans la corbeille.',
+	'corbeille_objets_lies' => '<NEW>@nb_lies@ liaison(s) detect&eacute;e(s).',
+	'corbeille_objets_vide' => '<NEW>Aucun objet dans la corbeille',
+	'corbeille_objets_vider' => '<NEW>Supprimer les objets s&eacute;lectionn&eacute;s',
+	'corbeille_vider' => 'Het mandje legen&nbsp;:',
 	'couleurs:aide' => 'Inzet in kleuren: <b>[coul]tekst[/coul] </b>@fond@ met <b>coul</b> = @liste@',
 	'couleurs:description' => 'Maakt het mogelijk om kleuren gemakkelijk toe te passen op alle teksten van de plaats (artikelen, kort, titels, forum,…) door bakens in kortere wegen te gebruiken.
 
@@ -122,10 +129,10 @@ Idem om de bodem te veranderen, als de keuze hieronder het toelaat:@_CS_EXEMPLE_
 [[%spip_options_on%]]
 
 @puce@ {{Requ&ecirc;tes externes.}} Le Couteau Suisse v&eacute;rifie r&eacute;guli&egrave;rement l\'existence d\'une version plus r&eacute;cente de son code et informe sur sa page de configuration d\'une mise &agrave; jour &eacute;ventuellement disponible. Si les requ&ecirc;tes externes de votre serveur posent des probl&egrave;mes, alors cochez la case suivante.[[%distant_off%]]',
-	'cs_comportement:nom' => '<NEW>Comportements du Couteau Suisse',
-	'cs_distant_off' => '<NEW>Les v&eacute;rifications de versions distantes',
-	'cs_log_couteau_suisse' => '<NEW>Les logs d&eacute;taill&eacute;s du Couteau Suisse',
-	'cs_spip_options_on' => '<NEW>Les options SPIP dans &laquo;@_CS_FILE_OPTIONS@&raquo;',
+	'cs_comportement:nom' => 'Gedrag van het Zwitserland Mes',
+	'cs_distant_off' => 'De verificaties van verwijderde versies',
+	'cs_log_couteau_suisse' => 'Uitvoerige logs van het Zwitserland Mes',
+	'cs_spip_options_on' => 'De SPIP opties in &laquo;@_CS_FILE_OPTIONS@&raquo;',
 
 	// D
 	'decoration:aide' => 'Versiering&nbsp;: <b>&lt;balise&gt;test&lt;/balise&gt;</b>, met <b>balise</b> = @liste@',
@@ -225,9 +232,6 @@ Opgelet: in de forums, petities, georganiseerde stromen, enz., het beleid van ja
 _ • [Verborgen werktuigen|Aan de eerste schijn van deze bladzijde terugkomen->@hide@]
 _ • [Van hele plugin|Aan de eerste stand van plugin terugkomen->@reset@]@install@
 </p>',
-	'help0' => '<NEW>{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p><p>Lien de documentation :<br/>&bull; [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]</p><p>R&eacute;initialisation :
-_ &bull; [De tout le plugin->@reset@]
-</p>',
 	'help2' => '<NEW>Version locale : @version@',
 	'help3' => '<NEW><p>Liens de documentation :<br/>&bull; [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
 _ &bull; [Des outils cach&eacute;s|Revenir &agrave; l\'apparence initiale de cette page->@hide@]
@@ -271,6 +275,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 
 	// L
 	'label:admin_travaux' => 'De openbare site sluiten voor :',
+	'label:arret_optimisation' => '<NEW>Emp&ecirc;cher SPIP de vider la corbeille automatiquement&nbsp;:',
 	'label:auteurs_tout_voir' => '@_CS_CHOIX@',
 	'label:auto_sommaire' => 'Systematische oprichting van het overzicht :',
 	'label:balise_decoupe' => '<NEW>Activer la balise #CS_DECOUPE :',
@@ -336,6 +341,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:terminaison_urls_propres' => '<:label:terminaison_urls_page:>',
 	'label:terminaison_urls_propres_qs' => '<:label:terminaison_urls_page:>',
 	'label:titre_travaux' => 'Titel van het bericht :',
+	'label:titres_etendus' => '<NEW>Activer l\'utilisation &eacute;tendue des balises #TITRE_XXX&nbsp;:',
 	'label:tri_articles' => 'Uw keus :',
 	'label:url_arbo_minuscules' => 'Het breken van de titels in URLs behouden :',
 	'label:url_arbo_sep_id' => 'Het scheidingskarakter \'titel-idem\' in geval van doublon: <br/>(niet gebruiken \'/\')',
@@ -365,6 +371,7 @@ _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<htm
 	'mailcrypt:nom' => 'MailCrypt',
 	'message_perso' => '<NEW>Un grand merci aux traducteurs qui passeraient par ici. Pat ;-)',
 	'moderation_admins' => '<NEW>administrateurs authentifi&eacute;s',
+	'moderation_message' => '<NEW>Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n\'appara&icirc;tra qu\'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site, sauf si vous &ecirc;tes identifi&eacute; et autoris&eacute; &agrave; poster directement.',
 	'moderation_moderee:description' => '<MODIF>Permet de mod&eacute;rer la mod&eacute;ration des forums pour les utilisateurs inscrits. [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
 	'moderation_moderee:nom' => '<NEW>Mod&eacute;ration mod&eacute;r&eacute;e',
 	'moderation_redacs' => '<NEW>r&eacute;dacteurs authentifi&eacute;s',
@@ -404,6 +411,9 @@ _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<htm
 	'outils_selectiontous' => 'IEDEREEN',
 
 	// P
+	'pack_actuel' => '<NEW>Pack @date@',
+	'pack_actuel_avert' => '<NEW>Attention, les surcharges sur les define() ou les globales ne sont pas sp&eacute;cifi&eacute;es ici',
+	'pack_actuel_titre' => '<NEW>PACK ACTUEL DE CONFIGURATION DU COUTEAU SUISSE',
 	'pack_alt' => 'Zie de lopende parameters van configuratie',
 	'pack_descrip' => '<MODIF>Uw &#132;huidige configuratie Pakijs&#147; verzamelt het geheel van de lopende configuratie parameters betreffende van het Mes Zwitserland: de activering van de werktuigen en de waarde van hun eventuele variabele.
 
@@ -412,7 +422,14 @@ Deze PHP code kan plaats in het bestand /config/mes_options.php nemen en zal een
 Als u plugin r&eacute;initialiserd door op een pakijs te klikken, reconfiguratie van het Zwitserland mes  automatisch in functie van het pakijs voor bepaald parameters.',
 	'pack_du' => '• van het pakijs @pack@',
 	'pack_installe' => 'Het invoeren van een configuratie pakijs',
+	'pack_nb_plrs' => '<NEW>Il y a actuellement @nb@ &laquo;&nbsp;packs de configuration&nbsp;&raquo; disponibles.',
+	'pack_nb_un' => 'Er is een &laquo;&nbsp;configuration pack&nbsp;&raquo; momenteel beschikbaar',
+	'pack_nb_zero' => 'Er is geen &laquo;&nbsp;configuration pack&nbsp;&raquo; momenteel beschikbaar.',
+	'pack_outils_defaut' => '<NEW>Installation des outils par d&eacute;faut',
+	'pack_sauver' => '<NEW>Sauver la configuration actuelle',
+	'pack_sauver_descrip' => '<NEW>Le bouton ci-dessous vous permet d\'ins&eacute;rer directement dans votre fichier <b>@file@</b> les param&egrave;tres n&eacute;cessaires pour ajouter un &laquo;&nbsp;pack de configuration&nbsp;&raquo; dans le menu de gauche. Ceci vous permettra ult&eacute;rieurement de reconfigurer en un clic votre Couteau Suisse dans l\'&eacute;tat o&ugrave; il est actuellement.',
 	'pack_titre' => 'Huidige configuratie',
+	'pack_variables_defaut' => '<NEW>Installation des variables par d&eacute;faut',
 	'par_defaut' => 'Per gebrek',
 	'paragrapher2:description' => 'De <code>paragrapher()</code> SPIP functie neemt bakens &lt;p&gt; en &lt;/p&gt; in alle teksten die zonder paragrafen zijn. Teneinde fijner uw stijlen en uw opmaak te beheren, hebt u de mogelijkheid om het aspect van de teksten van uw site uniform te maken.',
 	'paragrapher2:nom' => 'Paragraaf',
@@ -464,7 +481,7 @@ _ • Uniquement pour les articles contenant la balise <code>@_CS_AVEC_SOMMAIRE@</
 [[%balise_sommaire%]]
 
 Ce sommaire peut &ecirc;tre coupl&eacute; avec : &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
-	'sommaire:nom' => 'Een overzicht voor uw artikelen',
+	'sommaire:nom' => '<MODIF>Een overzicht voor uw artikelen',
 	'sommaire_avec' => 'Een artikel met overzicht&nbsp;: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Een artikel zonder overzicht&nbsp;: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'spam:description' => '<NEW>Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises &lt;a>&lt;/a> sont interdits.
@@ -491,6 +508,14 @@ _ &bull; {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&ea
 
 	// T
 	'titre' => 'Het Zwitserland Mes',
+	'titre_parent:description' => '<NEW>Au sein d\'une boucle, il est courant de vouloir afficher le titre du parent de l\'objet en cours. Traditionnellement, il suffirait d\'utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT all&eacute;gera l\'&eacute;criture de vos squelettes. Le r&eacute;sultat renvoy&eacute; est : le titre du groupe d\'un mot-cl&eacute; ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, br&egrave;ve, etc.).
+
+Notez : Pour les mots-cl&eacute;s, un alias de #TITRE_PARENT est #TITRE_GROUPE. Le traitement SPIP de ces nouvelles balises est similaire &agrave; celui de #TITRE.
+
+@puce@ Si vous &ecirc;tes sous SPIP 2.0, alors vous avez ici &agrave; votre disposition tout un ensemble de balises #TITRE_XXX qui pourront vous donner le titre de l\'objet \'xxx\', &agrave; condition que le champ \'id_xxx\' soit pr&eacute;sent dans la table en cours (#ID_XXX utilisable dans la boucle en cours).
+
+Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du secteur dans lequel est plac&eacute; l\'article en cours, puisque l\'identifiant #ID_SECTEUR (ou le champ \'id_secteur\') est disponible dans ce cas.[[%titres_etendus%]]',
+	'titre_parent:nom' => '<NEW>Balise #TITRE_PARENT',
 	'titre_tests' => 'Het Zwitserland Mes - Tests Bladzijde…',
 	'tous' => 'Iedereen',
 	'toutes_couleurs' => 'De 36 kleuren van de css stijlen :@_CS_EXEMPLE_COULEURS@',
@@ -615,21 +640,21 @@ Choisissez ici de mettre en exposant certains raccourcis suppl&eacute;mentaires,
 _ de tekst_versie : uitgetrokken de inhoud tekst van een HTML bladzijde met uitsluiting van enkele elementaire bakens.
 _ volle_tekst_versie : uitgetrokken de inhoud tekst van een HTML bladzijde om van de volle tekst terug te geven.',
 	'verstexte:nom' => 'Tekst versie',
-	'visiteurs_connectes:description' => '<NEW>Offre une noisette pour votre squelette qui affiche le nombre de visiteurs connect&eacute;s sur le site public.
+	'visiteurs_connectes:description' => 'Aanbod een hazelnoot voor uw skelet dat het aantal bezoekers te kennen geeft die op de openbare plaats worden aangesloten.
 
 Ajoutez simplement <code><INCLURE{fond=fonds/visiteurs_connectes}></code> dans vos pages.',
-	'visiteurs_connectes:nom' => '<NEW>Visiteurs connect&eacute;s',
-	'voir' => '<NEW>Voir : @voir@',
+	'visiteurs_connectes:nom' => 'Aangesloten bezoekers',
+	'voir' => 'Zie : @voir@',
 	'votre_choix' => 'Uw keus :',
 
 	// W
-	'webmestres:description' => '<NEW>Un {{webmestre}} au sens SPIP est un {{administrateur}} ayant acc&egrave;s &agrave; l\'espace FTP. Par d&eacute;faut et &agrave; partir de SPIP 2.0, il est l’administrateur <code>id_auteur=1</code> du site. Les webmestres ici d&eacute;finis ont le privil&egrave;ge de ne plus &ecirc;tre oblig&eacute;s de passer par FTP pour valider les op&eacute;rations sensibles du site, comme la mise &agrave; jour de la base de donn&eacute;es ou la restauration d&rsquo;un dump.
+	'webmestres:description' => 'Een SPIP {{webmestre}} is een {{beheerder}} hebben toegang aan ruimte FTP. Bij verstek en vanaf SPIP 2.0, is hij de beheerder <code>id_auteur=1</code> van de site. Hier bepaalde webmestres hebben het voorrecht om niet meer om door FTP verplicht te worden voorbij te gaan om de belangrijke verrichtingen van de plaats te valideren, zoals de update van de database of de restauratie van een dump.
 
-Webmestre(s) actuel(s) : {@_CS_LISTE_WEBMESTRES@}.
-_ Administrateur(s) &eacute;ligible(s) : {@_CS_LISTE_ADMINS@}.
+Huidige Webmestre : {@_CS_LISTE_WEBMESTRES@}.
+_ In aanmerking komende beheerder : {@_CS_LISTE_ADMINS@}.
 
-En tant que webmestre vous-m&ecirc;me, vous avez ici les droits de modifier cette liste d\'ids -- s&eacute;par&eacute;s par les deux points &laquo;&nbsp;:&nbsp;&raquo; s\'ils sont plusieurs. Exemple : &laquo;1:5:6&raquo;.[[%webmestres%]]',
-	'webmestres:nom' => '<NEW>Liste des webmestres',
+Als webmestre zelf, hebt u hier de rechten om deze lijst van ids te wijzigen  gescheiden door beide punten &laquo;&nbsp;:&nbsp;&raquo; als zij verschillende zijn. Exemple : &laquo;1:5:6&raquo;.[[%webmestres%]]',
+	'webmestres:nom' => 'Webmestres lijst',
 
 	// X
 	'xml:description' => 'Actief validateur xml voor de openbare ruimte zoals hij in  [documentatie->http://www.spip.net/en_article3582.html]  wordt beschreven. Een knoop getiteld &laquo;&nbsp;Analyse XML&nbsp;&raquo; wordt aan de andere knopen van bestuur toegevoegd.',

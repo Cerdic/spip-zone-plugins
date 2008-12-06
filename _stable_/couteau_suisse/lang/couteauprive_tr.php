@@ -216,9 +216,6 @@ Dikkat : forumlarda, dilek&ccedil;elerde, payla&#351;&#305;lan ak&#305;larda ve 
 
 	// H
 	'help' => '{{Bu sayfa yaln&#305;z site sorumlular&#305;n&#305;n eri&#351;imine a&ccedil;&#305;kt&#305;r.}} &laquo;{{&#304;svi&ccedil;re&nbsp;&Ccedil;ak&#305;s&#305;}}&raquo; eklentisinin getirdi&#287;i farkl&#305; bir &ccedil;ok ek i&#351;levin d&uuml;zenlenmesine izin verir .',
-	'help0' => '{{Bu sayfa sadece site sorumlusunun eri&#351;imine a&ccedil;&#305;kt&#305;r.}}<p>&laquo;{{&#304;svi&ccedil;re&nbsp;&Ccedil;ak&#305;s&#305;}}&raquo; eklentisinin fonksiyonlar&#305;na eri&#351;im olana&#287;&#305; tan&#305;r.</p><p>Belgeleme ba&#287;lant&#305;s&#305; :<br/>• [&#304;svi&ccedil;re&nbsp;&Ccedil;ak&#305;s&#305;->http://www.spip-contrib.net/?article2166]</p><p>S&#305;f&#305;rlama (Yeniden ba&#351;latma) :
-_ • [T&uuml;m eklentiyi ba&#351;tan->@reset@]
-</p>',
 	'help2' => 'Yerel s&uuml;r&uuml;m : @version@',
 	'help3' => 'Belgelendirme ba&#287;lant&#305;lar&#305; :<br/>• [&#304;svi&ccedil;re&nbsp;&Ccedil;ak&#305;s&#305;->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Yeniden ba&#351;lat&#305;lmas&#305; :
 _ • [Gizli gere&ccedil;lerin|Bu sayfan&#305;n ilk g&ouml;r&uuml;n&uuml;m&uuml;ne d&ouml;n&uuml;lmesi->@hide@]
@@ -454,7 +451,7 @@ _ • Uniquement pour les articles contenant la balise <code>[sommaire]</code>.
 [[%balise_sommaire%]]
 
 Ce sommaire peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe en pages et onglets}.',
-	'sommaire:nom' => 'Makaleleriniz i&ccedil;in bir &ouml;zet',
+	'sommaire:nom' => '<MODIF>Makaleleriniz i&ccedil;in bir &ouml;zet',
 	'sommaire_avec' => '<MODIF>&Ouml;zet i&ccedil;eren bir makale&nbsp;: <b>@racc@</b>',
 	'sommaire_sans' => '<MODIF>&Ouml;zetsiz bir makale&nbsp;: <b>@racc@</b>',
 	'spam:description' => 'Kamusal b&ouml;l&uuml;mde otomatik veya k&ouml;t&uuml; niyetli mesaj g&ouml;nderilmesine engel olmaya &ccedil;al&#305;&#351;&#305;r. Baz&#305; s&ouml;zc&uuml;kler ve &lt;a>&lt;/a> komutlar&#305; yasakt&#305;r.

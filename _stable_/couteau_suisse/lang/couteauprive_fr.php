@@ -141,9 +141,8 @@ Idem pour changer le fond, si l\'option ci-dessous le permet :@_CS_EXEMPLE_COULE
 	'cs_comportement:nom' => 'Comportements du Couteau Suisse',
 	'cs_distant_off' => 'Les v&eacute;rifications de versions distantes',
 	'cs_log_couteau_suisse' => 'Les logs d&eacute;taill&eacute;s du Couteau Suisse',
-	'cs_spip_options_on' => 'Les options SPIP dans &laquo;@_CS_FILE_OPTIONS@&raquo;',
 	'cs_reset' => '&Ecirc;tes-vous s&ucirc;r de vouloir r&eacute;initialiser totalement le Couteau Suisse ?',
-
+	'cs_spip_options_on' => 'Les options SPIP dans &laquo;@_CS_FILE_OPTIONS@&raquo;',
 
 	// D
 	'decoration:aide' => 'D&eacute;coration&nbsp;: <b>&lt;balise&gt;test&lt;/balise&gt;</b>, avec <b>balise</b> = @liste@',
