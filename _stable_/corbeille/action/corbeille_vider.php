@@ -22,13 +22,7 @@
  * 
  * "nom de l'objet spip" => array (
  * 			"statut" => nom du statut dans la base de donnees (bdd),
- * 			"titre" => nom du champ retourne dans le listing,
- * 			"table" => nom de la table spip dans la bdd,
- * 			"id" => clef primaire dans la table,
- * 			"temps" => aucune idee a quoi ca peut servir,
- * 			"page_voir" => parametres pour voir le detail d'un objet
- * 			"libelle" => texte long dans la partie droite de l'affichage,
- * 			"libelle_court" => texte court dans le menu gauche,
+ * 			"table" => nom eventuel de la table, pour definir plusieurs noisettes avec une meme table mais des statuts differents
  * 			"tableliee"  => tableau des tables spip a vider en meme temps 
  * )
  * 
@@ -45,45 +39,21 @@ function corbeille_table_infos($table=-1){
 	$param = array (
 	"articles"=>	 	array(	"statut" => "poubelle",
 								"tableliee"=> array("spip_auteurs_articles","spip_documents_liens","spip_mots_articles","spip_signatures","spip_versions","spip_versions_fragments","spip_forum"),
-								"temps" => "date",
-								"libelle" => _T("corbeille:articles_tous"),
-								"libelle_court" => _T('icone_articles')
 								),
 	"auteurs" =>		array(	"statut" => "5poubelle",
-								"temps" => "maj",
-								"libelle" => _T("corbeille:auteurs_tous"),
-								"libelle_court" => _T('icone_auteurs')
 								),					
 	"breves"=>	 		array(	"statut" => "refuse", 
-								"temps" => "date_heure",
-								"libelle" => _T("corbeille:breves_toutes"),
-								"libelle_court" => _T('icone_breves')
 								),
 	"forums_publics"=>	array(	"statut" => "off",
 								"table"=>"forum",
-								"temps" => "date_heure",
-								"libelle" => _T("corbeille:messages_tous_pub"),
-								"libelle_court" => _T('titre_forum')
 								),
 	"forums_prives"=>	array(	"statut" => "privoff",
 								"table"=>"forum",
-								"temps" => "date_heure",
-								"libelle" => _T("corbeille:messages_tous_pri"),
-								"libelle_court" => _T('icone_forum_administrateur')
 								),
 	"signatures"=> 		array(	"statut" => "poubelle", 
-								"temps" => "date_time",
-								"page_voir" => array("signatures",'id_document'),
-								"libelle" => _T("corbeille:petitions_toutes"),
-								"libelle_court" => ucfirst(strtolower(_T('lien_petitions'))),
 								),
 	"sites" =>			array(	"statut" => "refuse",
-								"table" => "syndic",
 								"tableliee"=> array("spip_syndic_articles","spip_mots_syndic"),
-								"temps" => "maj",
-								"page_voir" => array("sites",'id_syndic'),
-								"libelle" => _T("corbeille:syndic_tous"),
-								"libelle_court" => _T('titre_syndication')
 								)	,
 	);
 	if (isset($param[$table]))
@@ -107,8 +77,8 @@ function corbeille_vider($table, $ids=array()) {
 		$table = $params['table'];
 	
 	$type = objet_type($table);
-	$table_sql = 'spip_' . $table; // table_objet_sql($type) buggue car le pluriel de 'jeu' est 'jeux' et non 'jeus'
-	$id_table = isset($params['id'])?$params['id']:id_table_objet($type);
+	$table_sql = table_objet_sql($type);
+	$id_table = id_table_objet($type);
 
 	$statut = $params['statut'];
 	if (!$statut)
