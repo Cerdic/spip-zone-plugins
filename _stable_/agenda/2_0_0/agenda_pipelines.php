@@ -12,17 +12,6 @@ function agenda_ajouter_onglets($flux) {
 	return $flux;
 }
 
-/**
- * Ajouter une css dans l'espace prive
- *
- * @param unknown_type $flux
- * @return unknown
- */
-function agenda_header_prive($flux) {
-	$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('img_pack/datePicker.css').'" media="screen" />'."\n";
-	return $flux;
-}
-
 // Calcul d'une hierarchie
 // (liste des id_rubrique contenants une rubrique donnee)
 function calcul_hierarchie_in($id) {
