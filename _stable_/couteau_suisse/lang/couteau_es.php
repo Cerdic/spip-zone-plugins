@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attente_confirmation' => 'En espera de confirmaci&oacute;n',
 
 	// D
+	'date_court' => '@jour@/@mois@/@annee@',
 	'derniers_connectes' => '&Uacute;ltimos conectados:',
 
 	// E
@@ -35,6 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'objet_breves' => 'Breves',
 	'objet_mot' => 'Palabra',
 	'objet_mots' => 'Palabras',
+	'objet_petition' => 'Peticiones',
+	'objet_petitions' => 'Peticiones',
 	'objet_rubrique' => 'Secci&oacute;n',
 	'objet_rubriques' => 'Secciones',
 	'objet_syndic' => 'Sitio',
@@ -46,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'P&aacute;gina @page@: @title@',
 	'page_precedente' => 'P&aacute;gina anterior',
 	'page_suivante' => 'P&aacute;gina siguiente',
-	'plugin_xml' => '<MODIF>Re&uacute;ne en un solo plugin une liste de peque&ntilde;as caracter&iacute;sticas nuevas y &uacute;tiles para mejorar la gesti&oacute;n de tu sitio SPIP.
+	'plugin_xml' => '<MODIF>Re&uacute;ne en un solo plugin una lista de peque&ntilde;as caracter&iacute;sticas nuevas y &uacute;tiles para mejorar la gesti&oacute;n de tu sitio SPIP.
 
 Cada herramienta puede activarse o no por el usuario en [la p&aacute;gina de administraci&oacute;n del plugin->./?exec=admin_couteau_suisse] y manejar cierto n&uacute;mero de variables: pulsa en {{Configuraci&oacute;n}}, y selecciona la pesta&ntilde;a {{La Navaja Suiza}}.
 
@@ -56,7 +59,7 @@ Encuentra en este plugin tus herramientas favoritas: {Exponentes tipogr&aacute;f
 
 No dudes en consultar los art&iacute;culos de documentaci&oacute;n del plugin publicados en: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilidad: todas las versiones 1.9x de SPIP',
+Compatibilidad: SPIP v1.9x y v2.0',
 
 	// S
 	'smileys_dispos' => 'Caritas disponibles:',

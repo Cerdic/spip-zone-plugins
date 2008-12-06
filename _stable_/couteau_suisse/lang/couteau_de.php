@@ -7,10 +7,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// 2
+	'2pts' => '@objet@&nbsp;:',
+
 	// A
 	'attente_confirmation' => 'Auf Best&auml;tigung warten',
 
 	// D
+	'date_court' => '@jour@/@mois@/@annee@',
 	'derniers_connectes' => 'Letzte Verbindungen:',
 
 	// E
@@ -23,23 +27,39 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_forum' => 'Danke, dass Sie Ihren Namen angegeben haben!',
 	'non_confirmes' => 'Nicht best&auml;tigt:',
 
+	// O
+	'objet_article' => 'Artikel',
+	'objet_articles' => 'Artikel',
+	'objet_auteur' => 'Autor',
+	'objet_auteurs' => 'Autoren',
+	'objet_breve' => 'Meldung',
+	'objet_breves' => 'Meldungen',
+	'objet_mot' => 'Schlagwort',
+	'objet_mots' => 'Schlagworte',
+	'objet_petition' => 'Petition',
+	'objet_petitions' => 'Petitionen',
+	'objet_rubrique' => 'Rubrik',
+	'objet_rubriques' => 'Rubriken',
+	'objet_syndic' => 'Website',
+	'objet_syndics' => 'Websites',
+
 	// P
 	'page_debut' => 'Erste Seite',
 	'page_fin' => 'Letzte Seite',
 	'page_lien' => 'Seite @page@: @title@',
 	'page_precedente' => 'Vorige Seite',
 	'page_suivante' => 'N&auml;chste Seite',
-	'plugin_xml' => '<MODIF>Zusammenfassung einiger Zusatzfunktionen f&uuml;r eine bessere Verwaltung Ihrer SPIP Website.
+	'plugin_xml' => 'Zusammenfassung einiger Zusatzfunktionen f&uuml;r eine bessere Verwaltung Ihrer SPIP Website.
 
-Jedes dieser Werkzeuge kann vom Administrator auf der |Seite zur Verwaltung des Plugins->./?exec=admin_couteau_suisse] aktiviert oder abgeschaltet und konfiguriert werden: Klicken Sie auf {{Konfiguration}}, und w&auml;hlen Sie dann {{Le Couteau Suisse}}.
+Jedes dieser Werkzeuge kann vom Administrator auf der |Seite zur Verwaltung des Plugins->./?exec=admin_couteau_suisse] aktiviert oder abgeschaltet und konfiguriert werden: Klicken Sie auf {{Konfiguration}}, und w&auml;hlen Sie dann {{Schweizer Taschenmesser}}.
 
 Sie k&ouml;nnen folgende Einstellungen vornehmen: Verwaltung, typografische Verbesserungen, typografische K&uuml;rzel, Anzeigeoptionen der Website, SPIP-Tags, Filter, Kriterien.
 
-W&auml;hlen Sie die f&uuml;r Sie wichtigsten Funktionen: {Typografische Hervorhebungen}, {typografische Anf&uuml;hrungszeichen}, {sch&ouml;ne Listen-Punkte}, {Inhaltsverzeichnis f&uuml;r Artikel}, {Smileys}, {Nummern entferneno}, {&auml;sthetische URLs}, {SPIP und externe Links}, {keine anonymen Foren}, {Aufteilung in Seiten und Reiter}, etc., etc.
+W&auml;hlen Sie die f&uuml;r Sie wichtigsten Funktionen: {Ziffern entfernen}, {Typ der URLs}, {typografische Hochstellungen}, {typografische Anf&uuml;hrungszeichen}, {sch&ouml;ne Listen-Punkte}, {SPAM Bek&auml;mpfung}, {MailCrypt}, {&auml;sthetische URLs},  {SPIP und externe Links}, {Smileys}, {Inhaltsverzeichnis f&uuml;r Artikel},  {Aufteilung in Seiten und Reiter}, etc. pp.
 
 Bitte lesen Sie auch die Artikel auf : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Kompatibel mit: SPIP 1.9x',
+Kompatibel mit: SPIP 1.9x und v2.0',
 
 	// S
 	'smileys_dispos' => 'Verf&uuml;gbare Smileys:',
@@ -53,6 +73,13 @@ Kompatibel mit: SPIP 1.9x',
 	'texte_formatspip' => 'ORIGINALTEXT IM SPIP-FORMAT',
 	'textes_formatspip' => 'ORIGINALTEXTE IM SPIP-FORMAT',
 	'titre' => 'Schweizer Taschenmesser',
+
+	// U
+	'urls_propres_erreur' => 'Dieses Format ber&uuml;cksichtigt die angepassten URLs weiter unten nicht.',
+	'urls_propres_format' => 'Das Format der URLs ist: {{&laquo;&nbsp;@format@&nbsp;&raquo;}}. [<span>[Konfiguration->@url@]</span>]',
+	'urls_propres_lien' => '&Ouml;ffentlicher Zugangslink',
+	'urls_propres_objet' => 'Mit diesen in der Datenbank gespeicherten URLs k&ouml;nnen die Besucher Ihre Website ansteuern.',
+	'urls_propres_titre' => 'ANGEPASSTE URLS',
 
 	// V
 	'variable_vide' => '(Leer)',

@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attente_confirmation' => 'N\'espera de confirmaci&oacute;n',
 
 	// D
+	'date_court' => '@jour@/@mois@/@annee@',
 	'derniers_connectes' => 'Caberos coneut&aacute;os:',
 
 	// E
@@ -35,6 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'objet_breves' => 'Breves',
 	'objet_mot' => 'Pallabra',
 	'objet_mots' => 'Pallabres',
+	'objet_petition' => 'Solicit&uacute;',
+	'objet_petitions' => 'Solicitudes',
 	'objet_rubrique' => 'Estaya',
 	'objet_rubriques' => 'Estayes',
 	'objet_syndic' => 'Sitiu',
@@ -46,17 +49,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'P&aacute;xina @page@: @title@',
 	'page_precedente' => 'P&aacute;xina anterior',
 	'page_suivante' => 'P&aacute;xina siguiente',
-	'plugin_xml' => '<MODIF>Xunta n\'un solu plugin una llista de peque&ntilde;es funciones nueves y ferramientes pa meyorar la xesti&oacute;n del to sitiu SPIP.
+	'plugin_xml' => 'Xunta nun solu plugin una llista de peque&ntilde;es funciones nueves y ferramientes pa meyorar la xesti&oacute;n del to sitiu SPIP.
 
-Cauna d\'estes ferramientes puede activase o non pol usuariu so [la p&aacute;xina d\'alministraci&oacute;n del plugin->./?exec=admin_couteau_suisse] y manexar ciertu n&uacute;mberu de variables : picar en {{Afitamientu}}, llueu escoyer la pesta&ntilde;a {{La Navaya Suiza}}.
+Cauna d\'estes ferramientes puede activase o non pol usuariu so [la p&aacute;xina d\'alministraci&oacute;n del plugin->./?exec=admin_couteau_suisse] y xestionar ciertu n&uacute;mberu de variables: calcar en {{Configuraci&oacute;n}}, llueu escoyer la lling&uuml;eta {{La Navaya Suiza}}.
 
 Les categor&iacute;es disponibles son: Alministraci&oacute;n, Meyores tipogr&aacute;fiques, Atayos tipogr&aacute;ficos, Aspeutu p&uacute;blicu, Balices, filtros, criterios.
 
-Descubre nesti plugin les tos ferramientes favorites: {Esponentes tipogr&aacute;ficos}, {Comilles tipogr&aacute;fiques}, {Marques de llista guapes}, {Un sumariu pa los tos art&iacute;culos}, {Caruques}, {Suprimir el n&uacute;mberu}, {URLs guapes}, {SPIP y los enllaces... esternos}, {Ensin foros an&oacute;nimos}, {Divide en p&aacute;xines y pesta&ntilde;es}, etc., etc.
+Descubre nesti plugin les tos ferramientes favorites: {Suprime\'l n&uacute;mberu}, {Formatu de les URLs}, {Esponentes tipogr&aacute;ficos}, {Comines tipogr&aacute;fiques}, {Marques de llista guapes}, {Llucha escontra la Puxarra}, {Mailcrypt}, {URLs guapes}, {SPIP y los enllaces... esternos}, {Caruques}, {Un sumariu pa los tos art&iacute;culos}, {Divide en p&aacute;xines y lling&uuml;etes}, etc., etc.
 
 Si quies consultar los art&iacute;culos de la documentaci&oacute;n del plugin, tan espublizaos en: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilid&aacute;: SPIP toes les versiones 1.9x',
+Compatibilid&aacute;: SPIP v1.9x y v2.0',
 
 	// S
 	'smileys_dispos' => 'Caruques disponibles:',

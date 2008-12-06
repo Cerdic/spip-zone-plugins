@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attente_confirmation' => 'Esperant confirmaci&oacute;',
 
 	// D
+	'date_court' => '@jour@/@mois@/@annee@',
 	'derniers_connectes' => 'Darrers connectats:',
 
 	// E
@@ -35,6 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'objet_breves' => 'Breus',
 	'objet_mot' => 'Paraula',
 	'objet_mots' => 'Paraules',
+	'objet_petition' => 'Petici&oacute;',
+	'objet_petitions' => 'Peticions',
 	'objet_rubrique' => 'Secci&oacute;',
 	'objet_rubriques' => 'Seccions',
 	'objet_syndic' => 'Lloc',
@@ -46,17 +49,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'P&agrave;gina @page@ : @title@',
 	'page_precedente' => 'P&agrave;gina enrere',
 	'page_suivante' => 'P&aacute;gina endavant',
-	'plugin_xml' => '<MODIF>Reuneix en un sol plugin una llista de petites noves funcionalitats i utilitats que milloren la gesti&oacute; del vostre lloc SPIP.
+	'plugin_xml' => 'Reuneix en un sol plugin una llista de petites noves funcionalitats i utilitats que milloren la gesti&oacute; del vostre lloc SPIP.
 
-L\'usuari pot activar, o no, cadascuna d\'aquestes utilitats [la p&agrave;gina d\'administraci&oacute; del plugin->./?exec=admin_couteau_suisse] i gestoinar un cert nombre de variables: fer un clic a {{Configuraci&oacute;}}, despr&eacute;s escollir la pestanya {{El Ganivet Su&iacute;s}}.
+Cadascuna d\'aquestes eines es pot activar o no per l\'usuari a [la p&agrave;gina d\'administraci&oacute; del plugin->./?exec=admin_couteau_suisse] i gestionar un cert nombre de variables: fer un clic a {{Configuraci&oacute;}}, despr&eacute;s escollir la pestanya {{El Ganivet Su&iacute;s}}.
 
-Les categories disponibles s&oacute;n: Administraci&oacute;, Millores tipogr&agrave;fiques, Dreceres tipogr&agrave;fiques, Presentaci&oacute; p&uacute;blica, Etiquetes, Filtres, Criteris.
+Les categories disponibles s&oacute;n: Administraci&oacute;, Millores tipogr&agrave;fiques, Dreceres tipogr&agrave;fiques, Presentaci&oacute; p&uacute;blica, Etiquetes, filtres, criteris.
 
-Descobriu en aquest plugin les vostres utilitats favorites: {Expositors tipogr&agrave;fics}, {Cometes tipogr&agrave;fiques}, {Bonics s&iacute;mbols}, {Un sumari pels vostres articles}, {Emoticones}, {Suprimir el n&uacute;mero}, {Bonics URLs}, {SPIP i els enlla&ccedil;os... externs}, {No F&ograve;rums an&ograve;mins}, {Divisi&oacute; en p&agrave;gines i pestanyes}, etc., etc.
+Descobriu en aquest plugin les vostres eines utilitats favorites: {Suprimir el n&uacute;mero}, {Format dels URLs}, {Exponents tipogr&agrave;fics}, {Cometes tipogr&agrave;fiques}, {Bonics s&iacute;mbols gr&agrave;fics}, {Lluita contra l\'SPAM}, {Encriptaci&oacute; del correu electr&ograve;nic}, {Belles URLs}, {SPIP i els enlla&ccedil;os... externs}, {Emoticones}, {Un sumari pels vostres articles}, {Tallar en p&agrave;gines i pestanyes}, etc., etc.
 
 No dubteu a consultar els articles de la documentaci&oacute; del plugin publicats a: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilitat: SPIP totes les versions 1.9x',
+Compatibilitat: SPIP v1.9x i v2.0',
 
 	// S
 	'smileys_dispos' => 'Cares atractives disponibles:',
