@@ -48,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb' => 'Activaci&oacute; d\'SpipBB',
 	'admin_config_spipbb_info' => 'Feu clic damunt de Si per activar SpipBB',
 	'admin_config_tables' => 'Configuraci&oacute; de les taules d\'SpipBB',
-	'admin_config_tables_erreur' => 'Problema amb les taules d\'SpipBB: @tables_erreur@ s&oacute;n incorrectes (les taules @tables_ok@ semblen correctes).
+	'admin_config_tables_erreur' => '<MODIF>Problema amb les taules d\'SpipBB: @tables_erreur@ s&oacute;n incorrectes (les taules @tables_ok@ semblen correctes).
 Consulteu la [documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] o el [suport a spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
 	'admin_config_tables_ok' => 'Les taules d\'SpipBB estan instal&middot;lades correctament (@tables_ok@)',
 	'admin_date_ouverture' => 'Data d\'obertura',
@@ -343,7 +343,7 @@ _ Un post-it est&agrave; situat a sota dels anuncis, abans dels missatges ordina
 	'pagine_sujet_s' => 'assumptes',
 	'par_' => 'per ',
 	'plugin_auteur' => 'La SpipBB Team: [veure la llista de col&middot;laboradors a Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
-	'plugin_description' => 'El plugin SpipBB permet:
+	'plugin_description' => '<MODIF>El plugin SpipBB permet:
 -* Gestionar de manera centralitzada els f&ograve;rums d\'SPIP (interf&iacute;cie privada),
 -* Utilitzar un sector com a base d\'un grup de f&ograve;rums com els &laquo;Bulletin Board&raquo; tals com phpBB. En aquest sector, les subseccions s&oacute;n grups de f&ograve;rums, els articles f&ograve;rums, cada missatge al f&ograve;rum d\'un article hi inicia una cadena.
 
@@ -397,7 +397,7 @@ nbr_post@ missatge(s). Esborrats amb ell!\\n',
 	'secteur_forum' => 'ARREL',
 	'selection_efface' => 'Esborrar la selecci&oacute;...',
 	'selection_tri_dpt' => 'Seleccionar el m&egrave;tode d\'ordenaci&oacute;:',
-	'sign_admin' => '{{Aquesta p&agrave;gina nom&eacute;s est&agrave; disponible pels responsables del lloc.}}<p>D&oacute;na acc&eacute;s a la configuraci&oacute; del plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; aix&iacute; com a la gesti&oacute; dels f&ograve;rums del lloc Web.</p><p>Versi&oacute;: @version@ @distant@</p><p>Consulteu:
+	'sign_admin' => '<MODIF>{{Aquesta p&agrave;gina nom&eacute;s est&agrave; disponible pels responsables del lloc.}}<p>D&oacute;na acc&eacute;s a la configuraci&oacute; del plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; aix&iacute; com a la gesti&oacute; dels f&ograve;rums del lloc Web.</p><p>Versi&oacute;: @version@ @distant@</p><p>Consulteu:
 _ • [La documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/?article2460]
 _ • [L\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />La versi&oacute; m&eacute;s recent disponible: @version@',
@@ -450,7 +450,7 @@ _ • [L\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.spip-zone.info/spi
 	'sw_spam_words_action' => 'A partir d\'aquesta p&agrave;gina, podeu afegir, editar i suprimir paraules associades al correu brossa. El car&agrave;cter (*) s\'accepta a dins de la paraula. Per exemple: {{*tes*}} capturar&agrave; {detestable}, {{tes*}} capturar&agrave; {testar}, {{*tes}} capturar&agrave; {portes}.',
 	'sw_spam_words_mass_add' => 'Copiar-enganxar o introduir les vostres paraules a aquesta zona. Separar cada paraula per una coma, dos punts o un punt i apart. ',
 	'sw_spam_words_titre' => 'Filtratge de paraules',
-	'sw_spam_words_url_add' => 'Introduir el URL d\'un fitxer que contingui una llista de paraules formatada com m&eacute;s avall. Exemple: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
+	'sw_spam_words_url_add' => '<MODIF>Introduir el URL d\'un fitxer que contingui una llista de paraules formatada com m&eacute;s avall. Exemple: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
 	'sw_warning_from_admin' => 'Escollir l\'admin autor del missatge enviat',
 	'sw_warning_pm_message' => 'Text del missatge privat',
 	'sw_warning_pm_titre' => 'Assumpte del missatge privat',

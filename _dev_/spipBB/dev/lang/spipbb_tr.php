@@ -48,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb' => 'SpipBB aktivasyonu',
 	'admin_config_spipbb_info' => 'SpipBB\'yi aktive etmek i&ccedil;in Evet\'e t&#305;klay&#305;n',
 	'admin_config_tables' => 'SpipBB tablolar&#305; konfig&uuml;rasyonu',
-	'admin_config_tables_erreur' => 'SpipBB tablolar&#305;nda sorun var : @tables_erreur@ hatal&#305; (@tables_ok@ tablolar&#305; do&#287;ru g&ouml;r&uuml;n&uuml;yor).
+	'admin_config_tables_erreur' => '<MODIF>SpipBB tablolar&#305;nda sorun var : @tables_erreur@ hatal&#305; (@tables_ok@ tablolar&#305; do&#287;ru g&ouml;r&uuml;n&uuml;yor).
 Bkz [Spip-Contrib ile ilgili belgeler->http://www.spip-contrib.net/SpipBB-le-forum] veya [spipbb.spip-zone ile ilgili belgeler->http://spipbb.spip-zone.info/spip.php?article11]',
 	'admin_config_tables_ok' => 'SpipBB tablolar&#305; d&uuml;zg&uuml;n bi&ccedil;imde kuruldu (@tables_ok@)',
 	'admin_date_ouverture' => 'A&ccedil;&#305;l&#305;&#351; tarihi',
@@ -343,7 +343,7 @@ _ Duyurular&#305;n alt&#305;nda, basit mesajlardan &ouml;nce bir postit vard&#30
 	'pagine_sujet_s' => ' konu',
 	'par_' => '--> ',
 	'plugin_auteur' => 'SpipBB Tak&#305;m&#305; : [kat&#305;l&#305;mc&#305;lar&#305;n listesini g&ouml;rmek i&ccedil;in Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
-	'plugin_description' => 'SpipBB eklentisi &#351;unlar&#305; sa&#287;lar :
+	'plugin_description' => '<MODIF>SpipBB eklentisi &#351;unlar&#305; sa&#287;lar :
 -* SPIP forumlar&#305;n&#305; tek merkezden y&ouml;netmek (&ouml;zel aray&uuml;z),
 -* Bir sekt&ouml;r&uuml; forumlar grubu veritaban&#305; olarak phpBB benzeri &laquo;Bulletin Board&raquo; gibi kullanmak. Bu sekt&ouml;rde; alt ba&#351;l&#305;klar forum gruplar&#305; ve forum makaleleridir. Bir makalenin forumuna yaz&#305;lan her yeni mesaj orada bir "thread" ba&#351;lat&#305;r.
 
@@ -393,7 +393,7 @@ nbr_post@ mesaj i&ccedil;erir. Bu mesajlar da konuyla birlikte silinecektir&nbsp
 	'secteur_forum' => 'K&Ouml;K D&#304;Z&#304;N',
 	'selection_efface' => 'Se&ccedil;imi sil ...',
 	'selection_tri_dpt' => 'S&#305;ralama y&ouml;ntemini se&ccedil;&nbsp;:',
-	'sign_admin' => '{{Bu sayfa sadece site sorumlular&#305;n&#305;n eri&#351;imine a&ccedil;&#305;kt&#305;r.}}<p>Eklentinin konfig&uuml;rasyonuna eri&#351;in hakk&#305; verir &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; ayr&#305;ca sitenin forumlar&#305;n&#305;n y&ouml;netimine olanak tan&#305;r. </p><p>S&uuml;r&uuml;m : @version@ @distant@</p><p>Bkz&nbsp;:
+	'sign_admin' => '<MODIF>{{Bu sayfa sadece site sorumlular&#305;n&#305;n eri&#351;imine a&ccedil;&#305;kt&#305;r.}}<p>Eklentinin konfig&uuml;rasyonuna eri&#351;in hakk&#305; verir &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; ayr&#305;ca sitenin forumlar&#305;n&#305;n y&ouml;netimine olanak tan&#305;r. </p><p>S&uuml;r&uuml;m : @version@ @distant@</p><p>Bkz&nbsp;:
 _ • [Spip-Contrib\'deki belgeler->http://www.spip-contrib.net/?article2460]
 _ • [spipbb.spip-zone.info yard&#305;m dosyalar&#305;->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Daha yeni bir s&uuml;r&uuml;m mevcut&nbsp;: @version@',
@@ -446,7 +446,7 @@ _ • [eklenti->@plugin@]</p>',
 	'sw_spam_words_action' => 'Bu sayfadan itibaren, spam\'le ilintili s&ouml;zc&uuml;kleri ekleyebilir, d&uuml;zenleyebilir ve silebilirsiniz. Y&#305;ld&#305;z (*) karakterini kullanabilirsiniz. &Ouml;rnek&nbsp;: {{*as*}} {masa}, {{as*}} {ask&#305;}, {{*as}} {makas} s&ouml;zc&uuml;klerini yakalayacakt&#305;r.',
 	'sw_spam_words_mass_add' => 'Bu alana s&ouml;zc&uuml;kleri yaz&#305;n veya kopyalay&#305;n. S&ouml;zc&uuml;kleri birbirlerinden virg&uuml;lle veya iki nokta &uuml;st&uuml;ste ile veya sat&#305;r ba&#351;&#305; (Enter) ile ay&#305;r&#305;n.',
 	'sw_spam_words_titre' => 'S&ouml;zc&uuml;k filtreleme',
-	'sw_spam_words_url_add' => 'Yukar&#305;daki gibi formatlanm&#305;&#351; s&ouml;zc&uuml;kleri i&ccedil;eren bir dosyan&#305;n URL\'sini girin. &Ouml;rnek&nbsp;: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
+	'sw_spam_words_url_add' => '<MODIF>Yukar&#305;daki gibi formatlanm&#305;&#351; s&ouml;zc&uuml;kleri i&ccedil;eren bir dosyan&#305;n URL\'sini girin. &Ouml;rnek&nbsp;: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
 	'sw_warning_from_admin' => 'G&ouml;nderilen mesaj&#305;n y&ouml;netici yazar&#305;n&#305; se&ccedil;iniz',
 	'sw_warning_pm_message' => '&Ouml;zel mesaj&#305;n metni',
 	'sw_warning_pm_titre' => '&Ouml;zel mesaj&#305;n konusu',

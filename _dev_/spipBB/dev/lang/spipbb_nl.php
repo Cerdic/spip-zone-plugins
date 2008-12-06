@@ -48,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb' => 'Activering van SpipBB',
 	'admin_config_spipbb_info' => 'Op Jawoord klikken om SpipBB te activeren',
 	'admin_config_tables' => 'Configuratie van de tafels van SpipBB',
-	'admin_config_tables_erreur' => 'Het probleem met de tafels van SpipBB: @tables_erreur@ zijn incorrect (de tafels @tables_ok@ lijken juist). 
+	'admin_config_tables_erreur' => '<MODIF>Het probleem met de tafels van SpipBB: @tables_erreur@ zijn incorrect (de tafels @tables_ok@ lijken juist). 
 Raadpleegt [documentatie over Spip-Contrib-> http://www.spip-contrib.net/SpipBB-le-forum] of het [steun op spipbb.spip-zone -> http://spipbb.spip-zone.info/spip.php?article11]',
 	'admin_config_tables_ok' => 'De tafels van SpipBB worden juist geplaatst (@tables_ok@)',
 	'admin_date_ouverture' => 'Openingsdatum',
@@ -343,7 +343,7 @@ _ Wordt een postit onder de aankondigingen, voor de gewone berichten geplaatst. 
 	'pagine_sujet_s' => 'onderwerpen',
 	'par_' => 'door',
 	'plugin_auteur' => 'SpipBB Team: [zie de lijst van contributoren op Spip-contrib-> http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
-	'plugin_description' => 'Plugin SpipBB laat toe:
+	'plugin_description' => '<MODIF>Plugin SpipBB laat toe:
 -* Om op gecentraliseerde wijze de forums van SPIP (particuliere interface),
  te beheren-* Om een sector als basis van een groep forums zoals &#132;het Bulletin Board&#147; zoals phpBB te gebruiken. In deze sector, zijn sous-rubriques groepen forums, de artikelen van de forums, elk bericht in het forum van een artikel start er een thread. 
 
@@ -422,7 +422,7 @@ nbr_post@ bericht(en). Uitgewist met hem&nbsp;!\\n',
 	'secteur_forum' => 'HOOFD SECTORE',
 	'selection_efface' => 'De selectie uitwissen ...',
 	'selection_tri_dpt' => 'Sorteren methode selecteren&nbsp;:',
-	'sign_admin' => '{{Deze bladzijde is alleen toegankelijk voor de verantwoordelijken voor de site.}}<p>Zij geeft toegang tot de plugin configuratie &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; alsmede aan het beleid van de site forums.</p><p>Version : @version@ @distant@</p><p>Raadpleegt&nbsp;:
+	'sign_admin' => '<MODIF>{{Deze bladzijde is alleen toegankelijk voor de verantwoordelijken voor de site.}}<p>Zij geeft toegang tot de plugin configuratie &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; alsmede aan het beleid van de site forums.</p><p>Version : @version@ @distant@</p><p>Raadpleegt&nbsp;:
 _ • [De documentatie om Spip-Contrib->http://www.spip-contrib.net/?article2460]
 _ • [De hulp en zurige steun spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Beschikbare recentere versie&nbsp;: @version@',
@@ -475,7 +475,7 @@ _ • [van hele plugin->@plugin@]</p>',
 	'sw_spam_words_action' => 'Vanaf deze bladzijde, kunt u, woorden toevoegen uitgeven en afschaffen die met spam worden verenigd. Het karakter (*) wordt in het woord aanvaard. Bijvoorbeeld&nbsp;: {{*tes*}} nemen {afschuwelijk}, {{tes*}} nemen {testen}, {{*tes}} nemen {deur}',
 	'sw_spam_words_mass_add' => 'Kopi&euml;ren-plakken of grijpen uw woorden in deze zone. Elk woord door een komma, twee punten of een terugkeer naar de lijn scheiden.',
 	'sw_spam_words_titre' => 'Filtrering van woorden',
-	'sw_spam_words_url_add' => 'Hierboven URL van een bestand met een lijst van woorden grijpen die wordt geformatteerd, als. Het voorbeeld&nbsp;: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
+	'sw_spam_words_url_add' => '<MODIF>Hierboven URL van een bestand met een lijst van woorden grijpen die wordt geformatteerd, als. Het voorbeeld&nbsp;: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
 	'sw_warning_from_admin' => 'Admin auteur van het verzonden bericht kiezen',
 	'sw_warning_pm_message' => 'Tekst van het bericht particulier',
 	'sw_warning_pm_titre' => 'Onderwerp van het particuliere bericht',

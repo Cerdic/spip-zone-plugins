@@ -48,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb' => 'Activaci&oacute;n de SpipBB',
 	'admin_config_spipbb_info' => 'Premer sobre Si para activar SpipBB',
 	'admin_config_tables' => 'Configuraci&oacute;n das t&aacute;boas de SpipBB',
-	'admin_config_tables_erreur' => 'Problema coas t&aacute;boas de SpipBB : @tables_erreur@ est&aacute;n incorrectas (as t&aacute;boas @tables_ok@ parecen correctas).
+	'admin_config_tables_erreur' => '<MODIF>Problema coas t&aacute;boas de SpipBB : @tables_erreur@ est&aacute;n incorrectas (as t&aacute;boas @tables_ok@ parecen correctas).
 Consulte a [documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] ou a [axuda en spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
 	'admin_config_tables_ok' => 'As t&aacute;boas de SpipBB foron correctamente instaladas (@tables_ok@)',
 	'admin_date_ouverture' => 'Data de apertura',
@@ -343,7 +343,7 @@ _ Un destacado sit&uacute;ase por baixo dos anuncios, antes das mensaxes ordinar
 	'pagine_sujet_s' => ' asuntos',
 	'par_' => 'por',
 	'plugin_auteur' => 'O equipo SpipBB : [ver a lista de contribuidores en Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
-	'plugin_description' => 'O m&oacute;dulos SpipBB permite :
+	'plugin_description' => '<MODIF>O m&oacute;dulos SpipBB permite :
 -* Xestionar de forma centralizada os foros d SPIP (interface privada),
 -* Usar un sector como base dun grupo de de foros de tipo &laquo;Bulletin Board&raquo; como phpBB. Neste sector, as secci&oacute;ns son grupos de foros, os artigos son os foros, cada mensaxe dentro do foro dun artigo comeza un f&iacute;o.
 
@@ -417,7 +417,7 @@ nbr_post@ mensaxe(s). Borradas con el&nbsp;!\\n',
 	'secteur_forum' => 'RA&Iacute;Z',
 	'selection_efface' => 'Borrar a selecci&oacute;n ...',
 	'selection_tri_dpt' => 'Seleccionar o m&eacute;todo de sa&iacute;da&nbsp;:',
-	'sign_admin' => '{{Esta p&aacute;xina &eacute; unicamente accesible para os responsables do web.}}<p>Proporciona acceso &aacute; configuraci&oacute;n do m&oacute;dulo &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; as&iacute; como &aacute; xesti&oacute;n dos foros do web.</p><p>Versi&oacute;n : @version@ @distant@</p><p>Consulte&nbsp;:
+	'sign_admin' => '<MODIF>{{Esta p&aacute;xina &eacute; unicamente accesible para os responsables do web.}}<p>Proporciona acceso &aacute; configuraci&oacute;n do m&oacute;dulo &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; as&iacute; como &aacute; xesti&oacute;n dos foros do web.</p><p>Versi&oacute;n : @version@ @distant@</p><p>Consulte&nbsp;:
 _ • [A documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/?article2460]
 _ • [A axuda en spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Versi&oacute;n m&aacute;is recente dispo&ntilde;&iacute;bel&nbsp;: @version@',
@@ -470,7 +470,7 @@ _ • [de todo o m&oacute;dulo->@plugin@]</p>',
 	'sw_spam_words_action' => 'A partir desta p&aacute;xina, pode engadir, editar e suprimir palabras asociadas ao spam. O car&aacute;cter (*) ac&eacute;ptase na palabra. Por exemplo&nbsp;: {{*tes*}} capturar&aacute; {detestable}, {{tes*}} capturar&aacute; {testear}, {{*tes}} capturar&aacute; {portes}.',
 	'sw_spam_words_mass_add' => 'Copiar-pegar ou escoller as s&uacute;a palabras nesta zona. Separe cada palabra por unha  v&iacute;rgula, dous puntos ou un retorno de li&ntilde;a.',
 	'sw_spam_words_titre' => 'Filtrado de palabras',
-	'sw_spam_words_url_add' => 'Escoller a URL dun ficheiro que conte&ntilde;a unha listaxe de palabras formatada da seguinte maneira. Exemplo&nbsp;: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
+	'sw_spam_words_url_add' => '<MODIF>Escoller a URL dun ficheiro que conte&ntilde;a unha listaxe de palabras formatada da seguinte maneira. Exemplo&nbsp;: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
 	'sw_warning_from_admin' => 'Escoller o admini autor da mensaxe enviada',
 	'sw_warning_pm_message' => 'Texto da mensaxe privada',
 	'sw_warning_pm_titre' => 'Asunto da mensaxe privada',

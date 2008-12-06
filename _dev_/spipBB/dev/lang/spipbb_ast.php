@@ -48,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb' => 'Aniciu de SpipBB',
 	'admin_config_spipbb_info' => 'Calcar enriba de S&iacute; pa aniciar SpipBB',
 	'admin_config_tables' => 'Configuraci&oacute;n de les tables de SpipBB',
-	'admin_config_tables_erreur' => 'Problema coles tables de SpipBB: @tables_erreur@ son incorreutes (les tables @tables_ok@ paecen correutes).
+	'admin_config_tables_erreur' => '<MODIF>Problema coles tables de SpipBB: @tables_erreur@ son incorreutes (les tables @tables_ok@ paecen correutes).
 Consulta la [documentaci&oacute;n de Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] o los [gabitos de spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
 	'admin_config_tables_ok' => 'Les tables de SpipBB instal&aacute;ronse correutamente (@tables_ok@)',
 	'admin_date_ouverture' => 'Fecha d\'apertura',
@@ -202,8 +202,8 @@ Consulta la [documentaci&oacute;n de Spip-Contrib->http://www.spip-contrib.net/S
 	'extra_numero_icq' => 'Contautos chat (ICQ)',
 	'extra_refus_suivi_thread' => '(refugar siguimientu) &iexcl;Nun modificar!',
 	'extra_refus_suivi_thread_info' => 'Llista de los filos pa los que ya nun se quier recibir notificaci&oacute;n',
-	'extra_signature_saisie_texte' => '<NEW>Saisir ici le texte de votre signature',
-	'extra_signature_saisie_texte_info' => '<NEW>Court texte de signature des messages',
+	'extra_signature_saisie_texte' => 'Iguar equ&iacute; el testu de la to robla',
+	'extra_signature_saisie_texte_info' => 'Testu curtiu pa roblar los tos mensaxes',
 	'extra_visible_annuaire' => 'Apaecer na llista de Apunt&aacute;os (p&uacute;blica)',
 	'extra_visible_annuaire_info' => 'Permite refugar l\'apaecer na gu&iacute;a de los apunt&aacute;os na zona p&uacute;blica',
 
@@ -221,214 +221,215 @@ Consulta la [documentaci&oacute;n de Spip-Contrib->http://www.spip-contrib.net/S
 	'forum_ferme_texte' => 'Esti foru ta pesll&aacute;u. Ya nun se pue escribir.',
 	'forum_maintenance' => 'Esti foru ta pesll&aacute;u por mantenimientu',
 	'forum_ouvrir' => 'Abrir esti Foru',
-	'fromphpbb_erreur_db_phpbb_config' => '<NEW>Impossible de lire la configuration dans la base phpBB',
-	'fromphpbb_migre_categories' => '<NEW>Import des cat&eacute;gories',
-	'fromphpbb_migre_categories_dans_rub_dpt' => '<NEW>Implantation des forums dans la rubrique&nbsp;:',
-	'fromphpbb_migre_categories_forum' => '<NEW>Forum',
-	'fromphpbb_migre_categories_groupe' => '<NEW>Groupe',
-	'fromphpbb_migre_categories_impossible' => '<NEW>Impossible de r&eacute;cup&eacute;rer les cat&eacute;gories',
-	'fromphpbb_migre_categories_kw_ann_dpt' => '<NEW>Les annonces recevront le mot-clef&nbsp;:',
-	'fromphpbb_migre_categories_kw_ferme_dpt' => '<NEW>Les sujets clos recevront le mot-clef&nbsp;:',
-	'fromphpbb_migre_categories_kw_postit_dpt' => '<NEW>Les post its recevront le mot-clef&nbsp;:',
-	'fromphpbb_migre_existe_dpt' => '<NEW>existe&nbsp;:',
-	'fromphpbb_migre_thread' => '<NEW>Import des topics et des posts',
-	'fromphpbb_migre_thread_ajout' => '<NEW>Ajout thread',
-	'fromphpbb_migre_thread_annonce' => '<NEW>Annonce',
-	'fromphpbb_migre_thread_existe_dpt' => '<NEW>Forum existe&nbsp;:',
-	'fromphpbb_migre_thread_ferme' => '<NEW>Ferm&eacute;',
-	'fromphpbb_migre_thread_impossible_dpt' => '<NEW>Impossible de r&eacute;cup&eacute;rer les posts&nbsp;:',
-	'fromphpbb_migre_thread_postit' => '<NEW>Post-it',
-	'fromphpbb_migre_thread_total_dpt' => '<NEW>Nombre total de topics et de posts ajout&eacute;s&nbsp;:',
-	'fromphpbb_migre_utilisateurs' => '<NEW>Import des utilisateurs',
-	'fromphpbb_migre_utilisateurs_admin_restreint_add' => '<NEW>Ajout admin restreint',
-	'fromphpbb_migre_utilisateurs_admin_restreint_already' => '<NEW>Deja admin restreint',
-	'fromphpbb_migre_utilisateurs_impossible' => '<NEW>Impossible de r&eacute;cup&eacute;rer les utilisateurs',
-	'fromphpbb_migre_utilisateurs_total_dpt' => '<NEW>Nombre total d\'utilisateurs ajout&eacute;s&nbsp;:',
+	'fromphpbb_erreur_db_phpbb_config' => 'Ye imposible lleer la configuraci&oacute;n na base phpBB',
+	'fromphpbb_migre_categories' => 'Importaci&oacute;n de les categor&iacute;es',
+	'fromphpbb_migre_categories_dans_rub_dpt' => 'Amestamientu de los foros na estaya:',
+	'fromphpbb_migre_categories_forum' => 'Foru',
+	'fromphpbb_migre_categories_groupe' => 'Grupu',
+	'fromphpbb_migre_categories_impossible' => 'Ye imposible recuperar les categor&iacute;es',
+	'fromphpbb_migre_categories_kw_ann_dpt' => 'Los anuncios recibir&aacute;n la pallabra-clave:',
+	'fromphpbb_migre_categories_kw_ferme_dpt' => 'Los asuntos pesllaos recibir&aacute;n la pallabra-clave:',
+	'fromphpbb_migre_categories_kw_postit_dpt' => 'Los apegadizos recibir&aacute;n la pallabra-clave:',
+	'fromphpbb_migre_existe_dpt' => 'esiste:',
+	'fromphpbb_migre_thread' => 'Importaci&oacute;n de los asuntos y los mensaxes',
+	'fromphpbb_migre_thread_ajout' => 'Amestar filu',
+	'fromphpbb_migre_thread_annonce' => 'Anunciu',
+	'fromphpbb_migre_thread_existe_dpt' => 'Foru esistente:',
+	'fromphpbb_migre_thread_ferme' => 'Pesll&aacute;o',
+	'fromphpbb_migre_thread_impossible_dpt' => 'Ye imposible recuperar los mensaxes:',
+	'fromphpbb_migre_thread_postit' => 'Apegadizu',
+	'fromphpbb_migre_thread_total_dpt' => 'N&uacute;mberu total d\'asuntos y de mensaxes amestaos:',
+	'fromphpbb_migre_utilisateurs' => 'Importaci&oacute;n de los usuarios',
+	'fromphpbb_migre_utilisateurs_admin_restreint_add' => 'Amestar almin restrinx&iacute;os',
+	'fromphpbb_migre_utilisateurs_admin_restreint_already' => 'Ya ye almin restrinx&iacute;u',
+	'fromphpbb_migre_utilisateurs_impossible' => 'Nun ye posible recuperar los usuarios',
+	'fromphpbb_migre_utilisateurs_total_dpt' => 'N&uacute;mberu total d\'usuarios amestaos:',
 
 	// H
 	'haut_page' => 'Entamu de p&aacute;xina',
 
 	// I
 	'icone_ferme' => 'Pesllar',
-	'import_base' => '<NEW>Nom de la base&nbsp;:',
-	'import_choix_test' => '<NEW>R&eacute;aliser un import de test (choix par d&eacute;faut)&nbsp;:',
-	'import_choix_test_titre' => '<NEW>Import &agrave; blanc ou r&eacute;el',
-	'import_erreur_db' => '<NEW>Impossible de se connecter &agrave; la base @nom_base@',
-	'import_erreur_db_config' => '<NEW>Impossible de lire la configuration dans la base @nom_base@',
-	'import_erreur_db_rappel_connexion' => '<NEW>Impossible de se reconnecter &agrave; la base @nom_base@',
-	'import_erreur_db_spip' => '<NEW>Impossible de se connecter &agrave; la base SPIP',
-	'import_erreur_forums' => '<NEW>Impossible de recuperer les forums',
-	'import_fichier' => '<NEW>Fichier de configuration @nom_base@ trouv&eacute;&nbsp;:',
-	'import_host' => '<NEW>Nom/adresse du serveur',
-	'import_login' => '<NEW>Identifiant&nbsp;:',
-	'import_parametres_base' => '<NEW>Choisissez soit le chemin vers le fichier de configuration de @nom_base@, soit de renseigner les param&egrave;tres d\'acc&egrave;s &agrave; la base contenant les forums de @nom_base@&nbsp;:',
-	'import_parametres_rubrique' => '<NEW>Choisissez la rubrique dans laquelle seront import&eacute;s les forums de @nom_base@',
-	'import_parametres_titre' => '<NEW>Informations sur la base @nom_base@',
-	'import_password' => '<NEW>Mot de passe&nbsp;:',
-	'import_prefix' => '<NEW>Pr&eacute;fixe des tables&nbsp;:',
-	'import_racine' => '<NEW>Chemin vers @nom_base@ (avatars)&nbsp;:',
-	'import_table' => '<NEW>Table de configuration @nom_base@ trouv&eacute;e&nbsp;:',
-	'import_titre' => '<NEW>Import d\'un forum @nom_base@',
-	'import_titre_etape' => '<NEW>Import d\'un forum  @nom_base@ - &eacute;tape',
+	'import_base' => 'Nome de la base:',
+	'import_choix_test' => 'Facer una importaci&oacute;n de preba (escoyeta predeterminada):',
+	'import_choix_test_titre' => 'Importaci&oacute;n de preba o real',
+	'import_erreur_db' => 'Nun ye posible la conex&oacute;n cola base @nom_base@',
+	'import_erreur_db_config' => 'Nun ye posible lleer la configuraci&oacute;n na base @nom_base@',
+	'import_erreur_db_rappel_connexion' => 'Nun ye posible la reconex&oacute;n cola base @nom_base@',
+	'import_erreur_db_spip' => 'Nun ye posible la conex&oacute;n cola base SPIP',
+	'import_erreur_forums' => 'Ye imposible recuperar los foros',
+	'import_fichier' => 'Alcontr&oacute;se l\'archivu de configuraci&oacute;n de @nom_base@:',
+	'import_host' => 'Nome/se&ntilde;es del sirvidor',
+	'import_login' => 'Identificador:',
+	'import_parametres_base' => 'Escueye ente conse&ntilde;ar el cam&iacute;n a l\'archivu de configuraci&oacute;n de @nom_base@, o escribir los par&aacute;metros d\'accesu a la base que contien los foros de @nom_base@:',
+	'import_parametres_rubrique' => 'Escueye la estaya na que van importase los foros de @nom_base@',
+	'import_parametres_titre' => 'Informaci&oacute;n de la base @nom_base@',
+	'import_password' => 'Contrase&ntilde;a:',
+	'import_prefix' => 'Prefixu de les tables:',
+	'import_racine' => 'Cam&iacute;n a @nom_base@ (avatares):',
+	'import_table' => 'Alcontrose la tabla de configuraci&oacute;n @nom_base@:',
+	'import_titre' => 'Importaci&oacute;n d\'un foru @nom_base@',
+	'import_titre_etape' => 'Importaci&oacute;n d\'un foru  @nom_base@ - etapa',
 	'info' => 'Informaci&oacute;n',
-	'info_annonce_ferme' => '<NEW>Etat Annonce / Fermer',
-	'info_confirmer_passe' => '<NEW>Confirmer ce nouveau mot de passe&nbsp;:',
-	'info_ferme' => '<NEW>Etat Ferm&eacute;',
-	'info_inscription_invalide' => '<NEW>Inscription impossible',
-	'info_plus_cinq_car' => '<NEW>plus de 5 caract&egrave;res',
-	'infos_refus_suivi_sujet' => '<NEW>Ne plus suivre les sujets',
-	'infos_suivi_forum_par_inscription' => '<NEW>Suivi du forum par inscription',
-	'inscription' => '<NEW>Inscription',
-	'inscrit_le' => '<NEW>Inscrit le',
-	'inscrit_le_dpt' => '<NEW>Inscrit le :',
-	'inscrit_s' => '<NEW>Inscrits',
-	'ip_adresse_autres' => '<NEW>Autres adresses IP &agrave; partir desquelles cet auteur a post&eacute;',
-	'ip_adresse_membres' => '<NEW>Membres ayant post&eacute; de cette adresse IP',
-	'ip_adresse_post' => '<NEW>Adresse IP de ce message',
-	'ip_informations' => '<NEW>Informations sur une adresse IP et un auteur',
+	'info_annonce_ferme' => 'Est&aacute;u Anunciu / Pesllar',
+	'info_confirmer_passe' => 'Confirmar esta contrase&ntilde;a nueva:',
+	'info_ferme' => 'Est&aacute;u Pesllao',
+	'info_inscription_invalide' => 'Inscripci&oacute;n imposible',
+	'info_plus_cinq_car' => 'm&aacute;s de 5 carauteres',
+	'infos_refus_suivi_sujet' => 'Dexar de siguir los asuntos',
+	'infos_suivi_forum_par_inscription' => 'Siguimientu del foru por inscripci&oacute;n',
+	'inscription' => 'Inscripci&oacute;n',
+	'inscrit_le' => 'Inscritu el',
+	'inscrit_le_dpt' => 'Inscritu el:',
+	'inscrit_s' => 'Inscritos',
+	'ip_adresse_autres' => 'Otres se&ntilde;es IP dende les que mando mensaxes esti autor',
+	'ip_adresse_membres' => 'Miembros que mandaron mensaxes dende estes se&ntilde;es IP',
+	'ip_adresse_post' => 'Se&ntilde;es IP d\'esti mensaxe',
+	'ip_informations' => 'Informaci&oacute;n tocante a unes se&ntilde;es IP y un autor',
 
 	// L
 	'le' => 'El',
-	'liste_des_messages' => '<NEW>Liste des messages',
-	'liste_inscrits' => '<NEW>Liste des membres',
-	'login' => '<NEW>Connexion',
+	'liste_des_messages' => 'Llista de mensaxes',
+	'liste_inscrits' => 'Llista de los miembros',
+	'login' => 'Conex&oacute;n',
 
 	// M
-	'maintenance' => '<NEW>Maintenance',
-	'maintenance_fermer' => '<NEW>a ferm&eacute; l\'article/forum :',
-	'maintenance_pour' => '<NEW>pour MAINTENANCE.',
-	'membres_en_ligne' => '<NEW>membres en ligne',
-	'membres_inscrits' => '<NEW>membres inscrits',
-	'membres_les_plus_actifs' => '<NEW>Membres les plus actifs',
+	'maintenance' => 'Mantenimientu',
+	'maintenance_fermer' => 'pesll&oacute; l\'art&iacute;culu/foru:',
+	'maintenance_pour' => 'por MANTENIMIENTU.',
+	'membres_en_ligne' => 'miembros en llinia',
+	'membres_inscrits' => 'miembros apuntaos',
+	'membres_les_plus_actifs' => 'Miembros m&aacute;s activos',
 	'message' => 'Mensaxe',
 	'message_s' => 'Mensaxes',
 	'message_s_dpt' => 'Mensaxes&nbsp;: ',
 	'messages' => 'Respuestes',
-	'messages_anonymes' => '<NEW>rendre anonymes',
-	'messages_derniers' => '<NEW>Derniers Messages',
-	'messages_laisser_nom' => '<NEW>laisser le nom',
-	'messages_supprimer_titre_dpt' => '<NEW>Pour les messages&nbsp;:',
-	'messages_supprimer_tous' => '<NEW>les supprimer',
-	'messages_voir_dernier' => '<NEW>Voir le dernier message',
-	'messages_voir_dernier_s' => '<NEW>Voir les derniers messages',
+	'messages_anonymes' => 'facer an&oacute;nimos',
+	'messages_derniers' => 'Caberos Mensaxes',
+	'messages_laisser_nom' => 'dexar el nome',
+	'messages_supprimer_titre_dpt' => 'Pa los mensaxes:',
+	'messages_supprimer_tous' => 'desanicialos',
+	'messages_voir_dernier' => 'Ver el mensaxe caberu',
+	'messages_voir_dernier_s' => 'Ver los caberos mensaxes',
 	'moderateur' => 'Llendador',
 	'moderateur_dpt' => 'Llendador&nbsp;: ',
 	'moderateurs' => 'Llendador(es)',
 	'moderateurs_dpt' => 'Llendadores&nbsp;: ',
-	'modif_parametre' => '<NEW>Modifiez vos param&egrave;tres',
-	'mot_annonce' => '<NEW>Annonce
-_ Une annonce est situ&eacute;e en t&ecirc;te de forum sur toutes les pages.',
-	'mot_ferme' => '<NEW>Ferm&eacute;
--* Lorsqu\'un article-forum a ce mot-clef, seul les mod&eacute;rateurs peuvent y ajouter des messages.
--* Lorsqu\'un sujet de forum est ferm&ecute;, seuls les mod&eacute;rateurs peuvent y ajouter des r&eacute;ponses.',
-	'mot_groupe_moderation' => '<NEW>Goupe de mot-clefs utilis&eacute; pour la mod&eacute;ration de SpipBB',
-	'mot_postit' => '<NEW>Postit
-_ Un postit est situé en dessous des annonces, avant les messages ordinaires. Il n\'appara&icirc;t qu\'une seule fois dans la liste.',
+	'modif_parametre' => 'Modifica tos par&aacute;metros',
+	'mot_annonce' => 'Anunciu
+_ Un anunciu ponse en cabeza del foru en toes les p&aacute;xines.',
+	'mot_ferme' => 'Pesllao
+-* Si un art&iacute;culu-foru tien esta pallabra-clave, s&oacute;lo los llendadores pueden amesta-y mensaxes.
+-* Cuando l\'asuntu del foru ta pesllau, s&oacute;lo los llendadores pueden amesta-y respuestes.',
+	'mot_groupe_moderation' => 'Grupu de pallabres-clave utiliz&aacute;es pa llendar SpipBB',
+	'mot_postit' => 'Apegadizu
+_ Un mensaxe apegadizu ta embaxo de los anuncios, enantes de los mensaxes ordinarios. Nun apaez m&aacute;s que una sola vegada na llista.',
 
 	// N
-	'no_message' => '<NEW>Aucun sujet ou message ne correspond &agrave; vos crit&egrave;res de recherche',
-	'nom_util' => '<NEW>Nom d\'utilisateur',
+	'no_message' => 'Deng&uacute;n asuntu o mensaxe nun correspuende colos criterios guetaos',
+	'nom_util' => 'Nome d\'usuariu',
 	'non' => 'Non',
 
 	// O
-	'ordre_croissant' => '<NEW>Croissant',
-	'ordre_decroissant' => '<NEW>D&eacute;croissant',
-	'ordre_dpt' => '<NEW>Ordre&nbsp;:',
+	'ordre_croissant' => 'Creciente',
+	'ordre_decroissant' => 'Menguante',
+	'ordre_dpt' => 'Orde:',
 	'oui' => 'Si',
 
 	// P
-	'pagine_page_' => '<NEW> .. page ',
-	'pagine_post_' => '<NEW> r&eacute;ponse',
-	'pagine_post_s' => '<NEW> r&eacute;ponses',
-	'pagine_sujet_s' => '<NEW> sujets',
-	'par_' => '<NEW>par ',
-	'plugin_auteur' => '<NEW>La SpipBB Team : [voir la liste des contributeurs sur Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
-	'plugin_description' => '<NEW>Le plugin SpipBB permet :
--* De g&eacute;rer de fa&ccedil;on centralis&eacute;e les forums de SPIP (interface priv&eacute;e),
--* D\'utiliser un secteur comme base d\'un groupe de forums comme les &laquo;Bulletin Board&raquo; tels que phpBB. Dans ce secteur, les sous-rubriques sont des groupes de forums, les articles des forums, chaque message dans le forum d\'un article y d&eacute;marre un thread.
+	'pagine_page_' => ' .. p&aacute;xina ',
+	'pagine_post_' => ' respuesta',
+	'pagine_post_s' => ' respuestes',
+	'pagine_sujet_s' => ' asuntos',
+	'par_' => 'por ',
+	'plugin_auteur' => 'L\'Equipu SpipBB: [ver la llista de collaboradores en Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
+	'plugin_description' => '<MODIF>El plugin SpipBB permite:
+-* Xestionar de mou centraliz&aacute;u los foros de SPIP (interfaz privada),
+-*Utilizar una estaya como base d\'un grupu de foros como los &laquo;Bulletin Board&raquo; asemey&aacute;os a phpBB. Nesa estaya, les so-estayes son grupos de foros, los art&iacute;culos son foros, y cada mensaxe nel foru d\'un art&iacute;culu entama un filu.
 
-{{Consultez :}}
--* &bull;[l\'aide et support sur spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
--* &bull;[La documentation sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+{{Consulta:}}
+-* •[l\'aida y sofitu en spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
+-* •[La documentaci&oacute;n en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
-_ {{Plugin spipbb en cours de developpement. Vous l\'utilisez &agrave; vos risques et p&eacute;rils}}
+_ {{El plugin spipbb ta en procesu de desendolcu. Util&iacute;ceslu pola to cuenta y riesgu}}
 
-_ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]',
-	'plugin_licence' => '<NEW>Distribu&eacute; sous licence GPL',
-	'plugin_lien' => '<NEW>[Consulter la documentation du plugin sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
-	'plugin_mauvaise_version' => '<NEW>Cette version du plugin n\'est pas compatible avec votre version de SPIP !',
-	'plugin_nom' => '<NEW>SpipBB : Gestion des forums de SPIP',
-	'post_aucun_pt' => '<NEW>aucun&nbsp;!',
-	'post_efface_lui' => '<NEW>Ce sujet comprend @$nbr_post@ message(s). Effac&eacute;s avec lui&nbsp;!\\n',
-	'post_ip' => '<NEW>Messages post&eacute; &agrave; partie de l\'adresse IP',
-	'post_propose' => '<NEW>Message propos&eacute;',
-	'post_rejete' => '<NEW>Message rejet&eacute;',
-	'post_titre' => '<NEW>&nbsp;:::&nbsp;Titre : ',
-	'post_verifier_sujet' => '<NEW>V&eacute;rifier ce sujet',
-	'poste_valide' => '<NEW>Post(s) &agrave; valider ...',
-	'poster_date_' => '<NEW>Post&eacute; le : ',
-	'poster_message' => '<NEW>Poster un message',
-	'postit' => '<NEW>Postit',
-	'postit_dpt' => '<NEW>Postit&nbsp;: ',
-	'posts_effaces' => '<NEW>Messages effac&eacute;s&nbsp;!',
-	'posts_refuses' => '<NEW>Messages refus&eacute;s, &agrave; effacer&nbsp;!',
-	'previsualisation' => '<NEW>Pr&eacute;visualisation',
-	'profil' => '<NEW>Profil',
+_ [Accesu al tableru d\'alministraci&oacute;n-> .?exec=spipbb_configuration]',
+	'plugin_licence' => 'Distribuy&iacute;u embaxo la llicencia GPL',
+	'plugin_lien' => '[Consultar la documentaci&oacute;n del plugin en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
+	'plugin_mauvaise_version' => '&iexcl;Esta versi&oacute;n del plugin nun ye compatible cola to versi&oacute;n de SPIP!',
+	'plugin_nom' => 'SpipBB: Xesti&oacute;n de los foros de SPIP',
+	'post_aucun_pt' => '&iexcl;deng&uacute;n!',
+	'post_efface_lui' => 'Esti asuntu comprende @
+nbr_post@ mensaxe(s). &iexcl;Desaniciar&aacute;nse con &eacute;l!\\n',
+	'post_ip' => 'Mensaxes unvi&aacute;os dende les se&ntilde;es IP',
+	'post_propose' => 'Mensaxe propuestu',
+	'post_rejete' => 'Mensaxe refug&aacute;u',
+	'post_titre' => '&nbsp;:::&nbsp;T&iacute;tulu: ',
+	'post_verifier_sujet' => 'Verificar esti asuntu',
+	'poste_valide' => 'Mensaxe(s) a validar ...',
+	'poster_date_' => 'Unvi&aacute;u el: ',
+	'poster_message' => 'Unviar un mensaxe',
+	'postit' => 'Apegadizu',
+	'postit_dpt' => 'Apegadizu: ',
+	'posts_effaces' => '&iexcl;Mensaxes desaniciaos!',
+	'posts_refuses' => '&iexcl;Mensaxes refugaos, a desaniciar!',
+	'previsualisation' => 'Previsualizaci&oacute;n',
+	'profil' => 'Perfil',
 
 	// R
-	'raison_clic' => '<NEW>cliquez ici',
-	'raison_texte' => '<NEW>Pour en connaitre la raison',
-	'recherche' => '<NEW>Recherche',
-	'recherche_elargie' => '<NEW>Recherche &eacute;largie',
-	'redige_post' => '<NEW>Ecrire message',
-	'reglement' => '<NEW><p>Les administrateurs et mod&eacute;rateurs de ce forum s\'efforceront de supprimer
-				ou &eacute;diter tous les messages &agrave; caract&egrave;re r&eacute;pr&eacute;hensible
-				aussi rapidement que possible. Toutefois, il leur est impossible de passer en revue tous
-				les messages. Vous admettez donc que tous les messages post&eacute;s sur ces forums
-				expriment la vue et opinion de leurs auteurs respectifs, et non pas des administrateurs,
-				ou mod&eacute;rateurs, ou webmestres (except&eacute; les messages post&eacute;s par
-				eux-m&ecirc;me) et par cons&eacute;quent ne peuvent pas &ecirc;tre tenus pour responsables.</p>
-				<p>Vous consentez &agrave; ne pas poster de messages injurieux, obsc&egrave;nes,
-				vulgaires, diffamatoires, mena&ccedil;ants, sexuels ou tout autre message qui violerait
-				les lois applicables. Le faire peut vous conduire &agrave; &ecirc;tre banni
-				imm&eacute;diatement de fa&ccedil;on permanente (et votre fournisseur d\'acc&egrave;s
-				&agrave; internet en sera inform&eacute;). L\'adresse IP de chaque message est
-				enregistr&eacute;e afin d\'aider &agrave; faire respecter ces conditions.
-				Vous &ecirc;tes d\'accord sur le fait que le webmestre, l\'administrateur
-				et les mod&eacute;rateurs de ce forum ont le droit de supprimer, &eacute;diter,
-				d&eacute;placer ou verrouiller n\'importe quel sujet de discussion &agrave; tout moment.
-				En tant qu\'utilisateur, vous &ecirc;tes d\'accord sur le fait que toutes les informations
-				que vous donnerez ci-apr&egrave;s seront stock&eacute;es dans une base de donn&eacute;es.
-				Cependant, ces informations ne seront divulgu&eacute;es &agrave; aucune tierce personne
-				ou soci&eacute;t&eacute; sans votre accord. Le webmestre, l\'administrateur,
-				et les mod&eacute;rateurs ne peuvent pas &ecirc;tre tenus pour responsables si une
-				tentative de piratage informatique conduit &agrave; l\'acc&egrave;s de ces donn&eacute;es.</p>
-				<p>Ce forum utilise les cookies pour stocker des informations sur votre ordinateur.
-				Ces cookies ne contiendront aucune information que vous aurez entr&eacute; ci-apr&egrave;s,
-				ils servent uniquement &agrave; am&eacute;liorer le confort d\'utilisation.
-				L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;tails
-				de votre enregistrement ainsi que votre mot de passe (et aussi pour vous envoyer un nouveau
-				mot de passe dans la cas o&ugrave; vous l\'oublieriez).</p>
-				<p>En vous enregistrant, vous vous portez garant du fait d\'&ecirc;tre en accord avec le
-				r&egrave;glement ci-dessus.</p>',
-	'repondre' => '<NEW>R&eacute;pondre',
-	'reponse_s_' => '<NEW>R&eacute;ponses',
-	'resultat_s_pour_' => '<NEW> r&eacute;sultats pour ',
-	'retour_forum' => '<NEW>Retour &agrave; l\'accueil du forum',
+	'raison_clic' => 'calca equ&iacute;',
+	'raison_texte' => 'Pa saber la raz&oacute;n',
+	'recherche' => 'Gueta',
+	'recherche_elargie' => 'Gueta estendida',
+	'redige_post' => 'Escribir mensaxe',
+	'reglement' => '<p>Los alministradores y llendadores d\'esti foru van enfotase en desaniciar
+    o iguar toos los mensaxes de calter da&ntilde;ible
+    tan apriesa como seya posible. Sicas&iacute;, pa ellos ye imposible revisar toos
+    los mensaxes. Poro, almites que toos los mensaxes unviaos a estos foros
+    amuesen les opiniones de los respeutivos autores, y non les de los alministradores,
+    o llendadores, o webmasters (esceuto los mensaxes unviaos por
+    ellos mesmos) y darr&eacute;u d\'esto nun pueden considerase responsables d\'ellos.</p>
+    <p>Aceutes que nun vas unviar mensaxes de calter inxuriosu, obscenu,
+    vulgar, bilordiosu, amenazante, sexual o mensaxes de toa triba que violen
+    les lleis aplicables. Facelo pue llevate a quedar torg&aacute;u
+    dafechu de mou permanente (y va informase al fornidor d\'accesu
+    a internet). Les se&ntilde;es IP de cada mensaxe queden
+    rexistr&aacute;es col env&iacute;s de facer que estes condiciones se respeten.
+    Das el to acuerdu col fechu que\'l webmaster, l\'alministrador
+    y los llendadores d\'esti foru tienen drechu a desaniciar, iguar,
+    mover o pesllar cualisquier asuntu en discutiniu en tou momentu.
+    Como usuariu, das consentimientu al fechu de que toa la informaci&oacute;n
+    que conse&ntilde;es darr&eacute;u va guardase nuna base de datos.
+    Sicas&iacute;, esa informaci&oacute;n nun va divulgase a denguna tercera persona
+    o socieda ensin el to alcuerdu. El webmaster, l\'alministrador,
+    y los moderadores nun pueden considerase responsables si una
+    tentativa de pirateu inform&aacute;ticu llevare a l\'accesu a estos datos.</p>
+    <p>Esti foru utiliza les cookies pa guardar informaci&oacute;n nel to ordenador.
+    Estes cookies nun contendr&aacute;n informaci&oacute;n denguna de les que conse&ntilde;es darr&eacute;u,
+    sirven nam&aacute;i pa meyorar la comodid&aacute; d\'utilizaci&oacute;n.
+    Les se&ntilde;es d\'e-mail &uacute;sense unicamente col fin de confirmar los detais
+    del to rexistru lo mesmo que la contrase&ntilde;a (y am&aacute;s pa unviate una nueva
+    contrase&ntilde;a nel casu que la escaezas).</p>
+    <p>Al rexistrate, reconoces tar d\'alcuerdu col
+    reglamentu de m&aacute;s enriba.</p>',
+	'repondre' => 'Responder',
+	'reponse_s_' => 'Respuestes',
+	'resultat_s_pour_' => ' resultaos por ',
+	'retour_forum' => 'Tornar a l\'entamu del foru',
 
 	// S
-	's_abonner_a' => '<NEW>RSS . S\'abonner &agrave; : ',
-	'secteur_forum' => '<NEW>RACINE',
-	'selection_efface' => '<NEW>Effacer la s&eacute;lection .. ',
-	'selection_tri_dpt' => '<NEW>S&eacute;lectionner la m&eacute;thode de tri&nbsp;:',
-	'sign_admin' => '<NEW>{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s &agrave; la configuration du plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; ainsi qu\'&agrave; la gestion des forums du site.</p><p>Version : @version@ @distant@</p><p>Consultez&nbsp;:
-_ &bull; [La documentation sur Spip-Contrib->http://www.spip-contrib.net/?article2460]
-_ &bull; [L\'aide et support sur spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
-	'sign_maj' => '<NEW><br />Version plus r&eacute;cente disponible&nbsp;: @version@',
-	'sign_ok' => '<NEW>&agrave; jour.',
-	'sign_reinit' => '<NEW><p>R&eacute;-initialisation&nbsp;:
-_ &bull; [de tout le plugin->@plugin@]</p>',
-	'sign_tempo' => '<NEW>R&eacute;alis&eacute; avec <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
+	's_abonner_a' => 'RSS . Soscribise a: ',
+	'secteur_forum' => 'RAIZ',
+	'selection_efface' => 'Desaniciar la seleici&oacute;n... ',
+	'selection_tri_dpt' => 'Seleicionar la m&eacute;todu d\'ordenaci&oacute;n:',
+	'sign_admin' => '<MODIF>{{Esta p&aacute;xina &uacute;nicamente ye accesible pa los responsables del sitiu.}}<p>Da accesu a la configuraci&oacute;n del plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; igual que a la xesti&oacute;n de los foros del sitiu.</p><p>Versi&oacute;n : @version@ @distant@</p><p>Consulta:
+_ • [La documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/?article2460]
+_ • [L\'aida y sofitu en spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
+	'sign_maj' => '<br />Versi&oacute;n m&aacute;s reciente disponible: @version@',
+	'sign_ok' => 'actualizao.',
+	'sign_reinit' => '<p>Reinicializaci&oacute;n:
+_ • [de tou el plugin->@plugin@]</p>',
+	'sign_tempo' => 'Fecho con <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'signature' => 'Robla',
 	'sinscrire' => 'Apuntase',
 	'site_propose' => 'Sitiu propuestu por @auteur_post@',
@@ -459,41 +460,41 @@ _ &bull; [de tout le plugin->@plugin@]</p>',
 	'sw_ban_ip_titre' => 'Torgar la IP al mesmu tiempu',
 	'sw_config_exceptions' => 'Puedes activar esceiciones pa los usuarios privilexaos equ&iacute;. Estos van poder espublizar lo mesmo usando pallabres torg&aacute;es.',
 	'sw_config_exceptions_titre' => 'Xesti&oacute;n de les esceiciones',
-	'sw_config_generale' => '<NEW>Configuration actuelle du filtrage :',
-	'sw_config_generale_titre' => '<NEW>Configuration g&eacute;n&eacute;rale du filtrage du spam',
-	'sw_config_warning' => '<NEW>Vous pouvez choisir le texte du MP envoy&eacute; si vous activez cette option (maxi 255 caract&egrave;res).',
-	'sw_config_warning_titre' => '<NEW>Configuration des avertissements par message priv&eacute;',
-	'sw_disable_sw_titre' => '<NEW><strong>Active le filtrage</strong><br />Si vous devez vous passer du filtrage,<br />cliquez sur Non',
-	'sw_modo_can_spam' => '<NEW>Les mod&eacute;rateurs sont autoris&eacute;s',
-	'sw_nb_spam_ban_titre' => '<NEW>Nombre de spams avant banissement',
-	'sw_pm_spam_warning_message' => '<NEW>Ceci est un avertissement. Vous avez essay&eacute; de poster un message analys&eacute; comme du spam sur ce site web. Merci d\'&eacute;viter de recommencer.',
-	'sw_pm_spam_warning_titre' => '<NEW>Attention.',
-	'sw_send_pm_warning' => '<NEW><strong>Envoie un MP &agrave; l\'utilisateur</strong><br />lorsqu\'il poste un message avec un mot interdit',
+	'sw_config_generale' => 'Configuraci&oacute;n actual del filtrau:',
+	'sw_config_generale_titre' => 'Configuraci&oacute;n xeneral del filtrau de puxarra',
+	'sw_config_warning' => 'Puedes escoyer el testu del MP unvi&aacute;u si actives esti axuste (maxi 255 caraut&eacute;res).',
+	'sw_config_warning_titre' => 'Configuraci&oacute;n de los avisos per mensaxe priv&aacute;u',
+	'sw_disable_sw_titre' => '<strong>Activa el filtr&aacute;u</strong><br />Si tienes que quedar fuera del filtr&aacute;u,<br />calca Non',
+	'sw_modo_can_spam' => 'Los llendadores tan autorizaos',
+	'sw_nb_spam_ban_titre' => 'N&uacute;mberu de puxarres enantes de la torga',
+	'sw_pm_spam_warning_message' => 'Esti ye un avisu. Vienes de tentar espublizar un mensaxe analiz&aacute;u como puxarra nesti sitiu web. Encament&aacute;moste que evites facelo otra vegada.',
+	'sw_pm_spam_warning_titre' => 'Atenci&oacute;n.',
+	'sw_send_pm_warning' => '<strong>Unv&iacute;a un MP a l\'usuariu</strong><br />cuando mande un mensaxe con una pallabra torgada',
 	'sw_spam_forum_titre' => 'Xesti&oacute;n de los mensaxes de puxarra',
 	'sw_spam_titre' => 'Filtr&aacute;u de puxarra',
 	'sw_spam_words_action' => 'Dende esta p&aacute;xina, puedes amestar, iguar y desaniciar pallabress asoci&aacute;es cola puxarra. El carauter (*) almitese na pallabra. Por exemplu: {{*tes*}} capturar&aacute; {detestable}, {{tes*}} capturar&aacute; {testu}, {{*tes}} capturar&aacute; {puertes}.',
 	'sw_spam_words_mass_add' => 'Copia-pega o igua les pallabres nesta zona. Separtar cada pallabra con una coma, dos puntos o un retornu de llinia.',
 	'sw_spam_words_titre' => 'Filtr&aacute;u de pallabres',
-	'sw_spam_words_url_add' => 'Amestar l\'URL d\'un ficheru que contenga una llista de pallabres formateada como embaxo. Exemplu: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
-	'sw_warning_from_admin' => '<NEW>Choisir l\'admin auteur du message envoy&eacute;',
-	'sw_warning_pm_message' => '<NEW>Texte du message priv&eacute;',
-	'sw_warning_pm_titre' => '<NEW>Sujet du message priv&eacute;',
-	'sw_word' => '<NEW>Mot',
+	'sw_spam_words_url_add' => '<MODIF>Amestar l\'URL d\'un ficheru que contenga una llista de pallabres formateada como embaxo. Exemplu: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
+	'sw_warning_from_admin' => 'Escoyer l\'almin autor del mensaxe unvi&aacute;u',
+	'sw_warning_pm_message' => 'Testu del mensaxe priv&aacute;u',
+	'sw_warning_pm_titre' => 'Asuntu del mensaxe priv&aacute;u',
+	'sw_word' => 'Pallabra',
 
 	// T
 	'title_ferme' => 'Zarrar el foru/art&iacute;culu',
 	'title_libere' => 'Abrir de nuevu el foru/art&iacute;culu',
 	'title_libere_maintenance' => 'Soltar la pesllera de Mantenimientu',
 	'title_maintenance' => 'Pesllar el foru/art&iacute;culu por Mantenimientu',
-	'title_sujet_ferme' => '<NEW>Fermer ce sujet',
-	'title_sujet_libere' => '<NEW>R&eacute;ouvrir ce sujet',
+	'title_sujet_ferme' => 'Pesllar esti asuntu',
+	'title_sujet_libere' => 'Reabrir esti asuntu',
 	'titre_spipbb' => 'SpipBB',
-	'total_membres' => '<NEW>Nous avons un total de ',
-	'total_messages_membres' => '<NEW>Nos membres ont post&eacute; un total de ',
-	'tous' => '<NEW>Tous',
-	'tous_forums' => '<NEW>Tous les forums',
-	'trier' => '<NEW>Trier',
-	'trouver_messages_auteur_dpt' => '<NEW>Trouver tous les messages de :',
+	'total_membres' => 'Tenemos un total de ',
+	'total_messages_membres' => 'Los miembros unviaron un total de ',
+	'tous' => 'Toos',
+	'tous_forums' => 'Toos los foros',
+	'trier' => 'Ordenar',
+	'trouver_messages_auteur_dpt' => 'Alcontrar toos los mensaxes de:',
 
 	// V
 	'visible_annuaire_forum' => 'Apaecer na Llista de Apunt&aacute;os',
