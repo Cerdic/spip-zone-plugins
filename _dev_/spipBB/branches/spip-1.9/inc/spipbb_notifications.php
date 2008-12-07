@@ -154,6 +154,82 @@ function notifications_forumvalide($quoi, $id_forum) {
 
 }
 
+// http://doc.spip.org/@notifications_forumposte_dist
+function notifications_forumposte($quoi, $id_forum) {
+	$s = spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum));
+	if (!$t = spip_fetch_array($s))
+		return;
+
+	include_spip('inc/texte');
+	include_spip('inc/filtres');
+	include_spip('inc/mail');
+	include_spip('inc/autoriser');
+
+
+	// Qui va-t-on prevenir ?
+	$tous = array();
+
+	// 1. Les auteurs de l'article (si c'est un article), mais
+	// seulement s'ils ont le droit de le moderer (les autres seront
+	// avertis par la notifications_forumvalide).
+	if ($t['id_article']) {
+		// est on dans spipbb
+		$u = sql_fetsel("id_secteur","spip_articles","id_article=".sql_quote($t['id_article']));
+		if (@$u['id_secteur'] AND $u['id_secteur']!=$GLOBALS['spipbb']['id_secteur']) {
+			// si on n'est pas dans le secteur de spipbb on passe au traitement par defaut de la dist
+			spipbb_log("appel de notifications_forumposte_dist :".$u['id_secteur'].":".$GLOBALS['spipbb']['id_secteur'],3,__FILE__);
+			include _DIR_RESTREINT.'inc/notifications.php';
+			return notifications_forumposte_dist($quoi, $id_forum);
+		}
+		else {
+			$t['id_secteur']=$u['id_secteur'];
+		}
+	
+	
+		if ($GLOBALS['meta']['prevenir_auteurs'] == 'oui') {
+		$result = spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
+
+		while ($qui = spip_fetch_array($result)) {
+			if (autoriser('modererforum', 'article', $t['id_article'], $qui['id_auteur']))
+				$tous[] = $qui['email'];
+		}
+		
+		}
+	}
+
+	// 2. Les moderateurs definis par mes_options
+	// TODO: a passer en meta
+	// define('_MODERATEURS_FORUM', 'email1,email2,email3');
+	if (defined('_MODERATEURS_FORUM'))
+	foreach (explode(',', _SPIP_MODERATEURS_FORUM) as $m) {
+		$tous[] = $m;
+	}
+
+
+	// Nettoyer le tableau
+	// Ne pas ecrire au posteur du message !
+	$destinataires = array();
+	foreach ($tous as $m) {
+		if ($m = email_valide($m)
+		AND $m != trim($t['email_auteur']))
+			$destinataires[$m]++;
+	}
+
+	//
+	// Envoyer les emails
+	//
+	foreach (array_keys($destinataires) as $email) {
+		$msg = email_notification_forum_spipbb($t, $email);
+		envoyer_mail($email, $msg['subject'], $msg['body']);
+	}
+
+	// Notifier les autres si le forum est valide
+	if ($t['statut'] == 'publie') {
+		$notifications = charger_fonction('notifications', 'inc');
+		$notifications('forumvalide', $id_forum);
+	}
+}
+
 function generer_url_forum_spipbb($id_forum) {
 	spipbb_log('generer_url_forum_spipbb :'.$id_forum.":",3,__FILE__);
 	if (!function_exists('get_spip_script')) include_spip('inc/utils');
