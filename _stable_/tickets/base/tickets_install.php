@@ -1,5 +1,6 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function tickets_declarer_tables_principales($tables_principales){	
 
@@ -15,7 +16,11 @@ function tickets_declarer_tables_principales($tables_principales){
 			"statut"	=> "varchar(10) DEFAULT '0' NOT NULL",
 			"id_auteur"	=> "bigint(21) NOT NULL",
 			"id_assigne"	=> "bigint(21) NOT NULL",
-			"exemple"	=> "VARCHAR(255) DEFAULT '' NOT NULL",
+			"exemple"	=> "varchar(255) DEFAULT '' NOT NULL",
+			"projet"	=> "varchar(60) DEFAULT '' NOT NULL",
+			"composant"	=> "varchar(40) DEFAULT '' NOT NULL",
+			"version"	=> "varchar(10) DEFAULT '' NOT NULL",
+			"jalon"	=> "varchar(10) DEFAULT '' NOT NULL",
 			"maj"	=> "TIMESTAMP"
 			);
 	
@@ -48,9 +53,6 @@ function tickets_declarer_tables_principales($tables_principales){
 	$tables_principales['spip_tickets_forum'] = array(
 		'field' => &$spip_tickets_forum,
 		'key' => &$spip_tickets_forum_key);
-
-
-
 
 	return $tables_principales;
 }
