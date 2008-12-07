@@ -37,24 +37,31 @@ function corbeille_table_infos($table=-1){
 		return $corbeille_params[$table];
 
 	$param = array (
-	"articles"=>	 	array(	"statut" => "poubelle",
-								"tableliee"=> array("spip_auteurs_articles","spip_documents_liens","spip_mots_articles","spip_signatures","spip_versions","spip_versions_fragments","spip_forum"),
-								),
-	"auteurs" =>		array(	"statut" => "5poubelle",
-								),					
-	"breves"=>	 		array(	"statut" => "refuse", 
-								),
-	"forums_publics"=>	array(	"statut" => "off",
-								"table"=>"forum",
-								),
-	"forums_prives"=>	array(	"statut" => "privoff",
-								"table"=>"forum",
-								),
-	"signatures"=> 		array(	"statut" => "poubelle", 
-								),
-	"sites" =>			array(	"statut" => "refuse",
-								"tableliee"=> array("spip_syndic_articles","spip_mots_syndic"),
-								)	,
+		"articles" => array(
+			"statut" => "poubelle",
+			"tableliee"=> array("spip_auteurs_articles","spip_documents_liens","spip_mots_articles","spip_signatures","spip_versions","spip_versions_fragments","spip_forum"),
+		),
+		"auteurs" => array(
+			"statut" => "5poubelle",
+		),					
+		"breves"=> array(
+			"statut" => "refuse", 
+		),
+		"forums_publics" => array(
+			"statut" => "off",
+			"table"=>"forum",
+		),
+		"forums_prives" => array(
+			"statut" => "privoff",
+			"table"=>"forum",
+		),
+		"signatures"=> array(
+			"statut" => "poubelle", 
+		),
+		"sites" => array(
+			"statut" => "refuse",
+			"tableliee"=> array("spip_syndic_articles","spip_mots_syndic"),
+		),
 	);
 	if (isset($param[$table]))
 		return $param[$table];
