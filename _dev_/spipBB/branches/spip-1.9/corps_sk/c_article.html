@@ -95,7 +95,7 @@
 						[(#REM) c.23/12/7 on passe par la page profile]
 						<BOUCLE_auteurpar(AUTEURS){id_auteur}{tout}>
 							<a
-							[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
+							[(#SPIPBB{annuaire_forum}|!={'non'}|?{' ',''})
 							 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{id_article,#ID_ARTICLE})]"
 							]
 							>#NOM</a>
@@ -150,7 +150,7 @@
 						[(#REM) c.23/12/7 on passe par la page profile]
 						<BOUCLE_auteurparp(AUTEURS){id_auteur}{tout}>
 							<a
-							[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
+							[(#SPIPBB{annuaire_forum}|!={'non'}|?{' ',''})
 							 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{id_article,#ID_ARTICLE})]"
 							]
 							>#NOM</a>
@@ -203,7 +203,7 @@
 					<B_auteurp>[(#REM) c.23/12/7 on passe par la page profile]
 					<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
 						<a
-						[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
+						[(#SPIPBB{annuaire_forum}|!={'non'}|?{' ',''})
 						 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{id_article,#ID_ARTICLE})]"
 						]
 						>#NOM</a>
@@ -223,7 +223,7 @@
 						<:spipbb:par_:>[(#REM) c.23/12/7 on passe par la page profile]
 						<BOUCLE_auteurpr(AUTEURS){id_auteur}{tout}>
 							<a
-							[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
+							[(#SPIPBB{annuaire_forum}|!={'non'}|?{' ',''})
 							 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{id_article,#ID_ARTICLE})]"
 							]
 							>#NOM</a>

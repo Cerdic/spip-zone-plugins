@@ -38,7 +38,7 @@
 				[(#REM) c.23/12/7 on passe par la page profile]
 				<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
 					<a
-					[(#SPIPBB{annuaire_forum}|=={'oui'}|?{' ',''})
+					[(#SPIPBB{annuaire_forum}|!={'non'}|?{' ',''})
 					 href="[(#URL_PAGE{profile}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]"
 					]
 					>#NOM</a>
