@@ -87,7 +87,7 @@ function notifications_forumvalide($quoi, $id_forum) {
 #### hack gafospip 0.6
 # _SUIVI_FORUM_THREAD => reactive par gafospip (gaf_mesoptions) !
 #
-	include_spip('inc/spipbb_auteur_infos'); // c: 18/12/7 necessaire ?
+	if (!function_exists('spipbb_donnees_auteur')) include_spip('inc/traiter_imagerie'); // c: 18/12/7 necessaire ?
 
 	if (defined('_SUIVI_FORUM_THREAD') AND (_SUIVI_FORUM_THREAD==true) ) {
 		$infos=array();
@@ -101,7 +101,7 @@ function notifications_forumvalide($quoi, $id_forum) {
 			}
 
 			# participant au thread refuse de suivre ?
-			$infos = spipbb_auteur_infos($r['id_auteur']); // c: 18/12/7 remplace gaf_auteur_infos
+			$infos = spipbb_donnees_auteur($r['id_auteur']); // c: 18/12/7 remplace gaf_auteur_infos
 
 			if($infos['refus_suivi_thread'] && $infos['refus_suivi_thread']!='') {
 				$refus=explode(",",$infos['refus_suivi_thread']);
@@ -235,7 +235,8 @@ function email_notification_forum_spipbb ($t, $email) {
 		. url_absolue($url)
 		. "\n\n\n** ".textebrut(typo($t['titre']))
 		."\n\n* ".textebrut(propre($t['texte']))
-		. "\n\n".$t['nom_site']."\n".$t['url_site']."\n";
+		. "\n\n".$t['nom_site']."\n".$t['url_site']."\n"
+		. "\n\n SpipBB ".$GLOBALS['spipbb']['version'];
 
 	if ($l)
 		lang_select();

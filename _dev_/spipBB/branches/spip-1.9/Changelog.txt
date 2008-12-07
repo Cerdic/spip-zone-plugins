@@ -1,4 +1,9 @@
-﻿2008-12-05  chryjs  <chryjs!@!free!.!fr>
+﻿2008-12-07  chryjs  <chryjs!@!free!.!fr>
+ 
+ * 0.6.1.5 Report des corrections apportées dans la 0.5.2.6 : notifications SpipBB pour les forums
+ 
+2008-12-05  chryjs  <chryjs!@!free!.!fr>
+
  * Correction du bug sur spipbb_action.php : cf http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=876 appel à une fonction inconnue
 
 2008-12-01  chryjs  <chryjs!@!free!.!fr>
