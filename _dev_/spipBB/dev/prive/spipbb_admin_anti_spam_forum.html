@@ -42,8 +42,10 @@
 		<a title="IP: #IP"><span>#IP</span>&nbsp;</a>
 	</td>
 	<td class='verdana2'>
-		<a href='<?php echo generer_action_auteur('instituer_forum',"#ID_FORUM-off","ecrire/[(#SELF|url_decode)]") ; ?>'><:supprimer_message:></a><br />
-		<a href='<?php echo generer_action_auteur('instituer_forum',"#ID_FORUM-publie","ecrire/[(#SELF|url_decode)]") ; ?>'><:valider_message:></a>
+		[(#REM) c: 7/12/8 correction de <php echo generer_action_auteur('instituer_forum',"#ID_FORUM-off","ecrire/[(#SELF|url_decode)]") ; > ]
+		[<a href='(#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-off,#URL_ECRIRE{spipbb_admin_anti_spam_forum}})'><:supprimer_message:></a><br />]
+		[(#REM) et de < echo generer_action_auteur('instituer_forum',"#ID_FORUM-publie","ecrire/[(#SELF|url_decode)]") ; >]
+		[<a href='(#URL_ACTION_AUTEUR{instituer_forum,#ID_FORUM-publie,#URL_ECRIRE{spipbb_admin_anti_spam_forum}})'><:valider_message:></a>]
 	</td>
 </tr>
 </BOUCLE_messages>

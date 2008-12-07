@@ -20,23 +20,21 @@
 		<tbody[ id="salon(#ID_RUBRIQUE)"]>
 		<tr class="salon">
 			<td colspan="3" class='verdana2'>[<h2><a 
-				href="<?php echo generer_url_ecrire('rubriques_edit',"id_rubrique=#ID_RUBRIQUE"); ?>"
+				href="#URL_ECRIRE{rubriques_edit,id_rubrique=#ID_RUBRIQUE}"
 				title='<:spipbb:admin_form_editer:>'>(#TITRE)</a></h2>]</td>
 			<td class='verdana2'>
-				<a href="<?php echo generer_url_ecrire('rubriques_edit',"id_rubrique=#ID_RUBRIQUE"); ?>"
+				<a href="#URL_ECRIRE{rubriques_edit,id_rubrique=#ID_RUBRIQUE}"
 				title='<:spipbb:admin_form_editer:>'><:spipbb:admin_form_editer:></a>
 			</td>
-			<td class='verdana2'><a href='<?php echo
-			generer_action_auteur('spipbb_move',"rubrique-#ID_RUBRIQUE-up","ecrire/[(#SELF|urldecode)]");
-			?>'><:spipbb:admin_form_monter:></a><br /><a href='<?php echo
-			generer_action_auteur('spipbb_move',"rubrique-#ID_RUBRIQUE-down","ecrire/[(#SELF|urldecode)]");
-			?>'><:spipbb:admin_form_descendre:></a></td>
+			<td class='verdana2'>
+			[<a href='(#URL_ACTION_AUTEUR{spipbb_move,rubrique-#ID_RUBRIQUE-up,#URL_ECRIRE{spipbb_admin_ecrire_gestion_forums}})'><:spipbb:admin_form_monter:></a><br />]
+			[<a href='(#URL_ACTION_AUTEUR{spipbb_move,rubrique-#ID_RUBRIQUE-down,#URL_ECRIRE{spipbb_admin_ecrire_gestion_forums}})'><:spipbb:admin_form_descendre:></a>]
+			</td>
 		</tr>
 		<BOUCLE_forums(ARTICLES){id_rubrique}{par num titre}>
 		<tr class="forumligne">
 			<td class='verdana2'>
-				[<h3><a href="<?php echo generer_url_ecrire('articles_edit',"id_article=#ID_ARTICLE"); 
-				?>">(#TITRE)</a></h3>]
+				[<h3><a href="#URL_ECRIRE{articles_edit,id_article=#ID_ARTICLE}">(#TITRE)</a></h3>]
 				[<p>(#INTRODUCTION)</p>]
 			</td>
 			<BOUCLE_sujets(FORUMS){id_article}{doublons sujets}></BOUCLE_sujets>
@@ -45,27 +43,21 @@
 			<BOUCLE_messages(FORUMS){id_article}{plat}{doublons sujets}></BOUCLE_messages>
 			<td class='verdana2'>#TOTAL_BOUCLE</td>
 			<//B_messages>
-			<td class='verdana2'><a href="<?php echo generer_url_ecrire('articles_edit',"id_article=#ID_ARTICLE"); 
-				?>"><:spipbb:admin_form_editer:></a></td>
-			<td class='verdana2'"><a href='<?php echo 
-			generer_action_auteur('spipbb_move',"article-#ID_ARTICLE-up","ecrire/[(#SELF|urldecode)]") ;
- 			?>'><:spipbb:admin_form_monter:></a><br /><a href='<?php echo
-			generer_action_auteur('spipbb_move',"article-#ID_ARTICLE-up","ecrire/[(#SELF|urldecode)]") ;
-			?>'><:spipbb:admin_form_descendre:></a></td>
+			<td class='verdana2'><a href="#URL_ECRIRE{articles_edit,id_article=#ID_ARTICLE}"><:spipbb:admin_form_editer:></a></td>
+			<td class='verdana2'>
+			[<a href='(#URL_ACTION_AUTEUR{spipbb_move,article-#ID_ARTICLE-up,#URL_ECRIRE{spipbb_admin_ecrire_gestion_forums}})'><:spipbb:admin_form_monter:></a><br />]
+			[<a href='(#URL_ACTION_AUTEUR{spipbb_move,article-#ID_ARTICLE-up,#URL_ECRIRE{spipbb_admin_ecrire_gestion_forums}})'><:spipbb:admin_form_descendre:></a>]
+			</td>
 		</tr>
 		</BOUCLE_forums>
 		<tr>
-			<td colspan='6' class='verdana2'><a href="<?php echo 
-				generer_url_ecrire('articles_edit',"new=oui&id_rubrique=#ID_RUBRIQUE");
-				?>"><:spipbb:admin_form_creer_forum:></a></td>
+			<td colspan='6' class='verdana2'><a href="#URL_ECRIRE{articles_edit,new=oui&id_rubrique=#ID_RUBRIQUE}"><:spipbb:admin_form_creer_forum:></a></td>
 		</tr>
 		</tbody>
 	</BOUCLE_categories>
 		<tbody>
 		<tr>
-			<td colspan='6' class='verdana2'><a href="<?php echo
-				generer_url_ecrire('rubriques_edit',"new=oui&id_parent=#ID_SECTEUR");
-				?>"><:spipbb:admin_form_creer_categorie:></a></td>
+			<td colspan='6' class='verdana2'><a href="#URL_ECRIRE{rubriques_edit,new=oui&id_parent=#ID_SECTEUR}"><:spipbb:admin_form_creer_categorie:></a></td>
 		</tr>
 		</tbody>
 	</B_categories>
@@ -81,9 +73,7 @@
 		</thead>
 		<tbody>
 		<tr>
-			<td colspan='6' class='verdana2'><a href="<?php echo
-				generer_url_ecrire('rubriques_edit',"new=oui&id_parent=#ID_SECTEUR");
-				?>"><:spipbb:admin_form_creer_categorie:></a></td>
+			<td colspan='6' class='verdana2'><a href="#URL_ECRIRE{rubriques_edit,new=oui&id_parent=#ID_SECTEUR}"><:spipbb:admin_form_creer_categorie:></a></td>
 		</tr>
 		</tbody>
 	</table>
@@ -92,6 +82,6 @@
 	</B_categories>
 </BOUCLE_rubrique_principale>
 </B_rubrique_principale>
-<a href="<?php echo generer_url_ecrire('articles_edit',"new=oui&id_rubrique=#ID_RUBRIQUE"); ?>"><:spipbb:admin_form_creer_forum:></a>
+<a href="#URL_ECRIRE{articles_edit,new=oui&id_rubrique=#ID_RUBRIQUE}"><:spipbb:admin_form_creer_forum:></a>
 <//B_rubrique_principale>
 [(#REM|sinon{1}|fin_cadre_trait_couleur)]
