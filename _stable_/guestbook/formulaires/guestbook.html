@@ -1,8 +1,9 @@
 #CACHE{200} 
 <div class="formulaire_guestbook ajax">
+<form action='#SELF' method='post'>
 	#ACTION_FORMULAIRE{#SELF}
 	<fieldset class="spip_encadrer"> 
-<legend><:livre:livre_dor:></legend>
+<legend><:guestbook:livre_dor:></legend>
   <table width="76%" border="0" cellspacing="0" cellpadding="2">
     <tr> 
       <td colspan="2">Ajouter un message dans le livre d'or</td>
@@ -29,9 +30,13 @@
     </tr>
     <tr> 
       <td>&nbsp;</td>
-      <td><input type="submit" name="Submit" value="Envoyer"></td>
+      <td><input type="submit" name="ok" value="Envoyer"></td>
     </tr>
   </table></fieldset>
 </form>
+
+[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+[<span class='erreur'>(#ENV**{erreurs}|table_valeur{annee})</span>]
+[<p class="formulaire_message">(#ENV*{message_erreur})</p>]
+
 </div>
-]

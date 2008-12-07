@@ -3,8 +3,7 @@
 	 * GuestBook
 	 *
 	 * Copyright (c) 2008
-	 * Bernard Blazin  http://www.libertyweb.info & Yohann Prigent (potter64)
-	 * http://www.plugandspip.com 
+	 * Yohann Prigent (potter64) repris des travaux de Bernard Blazin (http://www.plugandspip.com )
 	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	 * Pour plus de details voir le fichier COPYING.txt.
 	 *  
@@ -28,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // M
 	"mercivp" => "Merci de votre participation! Le message apparaitra dès que le webmaster aura r&eacute;pondu.",
 // N
-	'numero' => "<td>N&deg;</td>";
+	'numero' => "<td>N&deg;</td>",
 	'note' => 'Note sur 10',
 	'nom' => '<td>Nom</td>',
 // R
