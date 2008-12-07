@@ -23,7 +23,7 @@ spipbb_log("included",3,__FILE__);
 // suivre si le forum est valide directement ('pos' ou 'abo')
 
 // Initialise les notifications "a la SpipBB"
-function notifications_chargespipbb($x) {
+function spipbb_chargespipbb($x) {
 	// c'est ici qu'il faut mettre les initialisations eventuelles
 	if (!is_array($GLOBALS['spipbb'])) $GLOBALS['spipbb']=@unserialize($GLOBALS['meta']['spipbb']);
     return $x;
@@ -160,6 +160,79 @@ function notifications_forumvalide($quoi, $id_forum) {
 	}
 
 }
+
+// http://doc.spip.org/@notifications_forumposte_dist
+function notifications_forumposte($quoi, $id_forum) {
+	$t = sql_fetsel("*", "spip_forum", "id_forum=".sql_quote($id_forum));
+	if (!$t) return;
+	$id_article = $t['id_article'];
+
+	include_spip('inc/texte');
+	include_spip('inc/filtres');
+	include_spip('inc/autoriser');
+
+	// Qui va-t-on prevenir ?
+	$tous = array();
+
+	// 1. Les auteurs de l'article (si c'est un article), mais
+	// seulement s'ils ont le droit de le moderer (les autres seront
+	// avertis par la notifications_forumvalide).
+	if ($id_article) {
+	
+	
+		/* Cette partie sert à savoir si c'est un forum géré par SpipBB */
+		$u = sql_fetsel("id_secteur","spip_articles","id_article=".sql_quote($id_article));
+		if (@$u['id_secteur'] AND $u['id_secteur']!=$GLOBALS['spipbb']['id_secteur']) {
+			// si on n'est pas dans le secteur de spipbb on passe au traitement par defaut de la dist
+			spipbb_log("appel de notifications_forumposte_dist :".$u['id_secteur'].":".$GLOBALS['spipbb']['id_secteur'],3,__FILE__);
+			include _DIR_RESTREINT.'inc/notifications.php';
+			return notifications_forumposte_dist($quoi, $id_forum);
+		}
+		else {
+			$t['id_secteur']=$u['id_secteur'];
+		}
+		/* fin du controle */
+		
+		$s = sql_getfetsel('accepter_forum','spip_articles',"id_article=" . $id_article);
+		if (!$s)  $s = substr($GLOBALS['meta']["forums_publics"],0,3);
+
+		if (strpos(@$GLOBALS['meta']['prevenir_auteurs'],",$s,")!==false
+		OR @$GLOBALS['meta']['prevenir_auteurs'] === 'oui') // compat
+		  {
+			$result = sql_select("auteurs.id_auteur, auteurs.email", "spip_auteurs AS auteurs, spip_auteurs_articles AS lien", "lien.id_article=".sql_quote($id_article)." AND auteurs.id_auteur=lien.id_auteur");
+
+			while ($qui = sql_fetch($result)) {
+			  if (autoriser('modererforum', 'article', $id_article, $qui['id_auteur']))
+				$tous[] = $qui['email'];
+			}
+		  }
+	}
+
+	// Nettoyer le tableau
+	// Ne pas ecrire au posteur du message !
+	$destinataires = array();
+	foreach ($tous as $m) {
+		if ($m = email_valide($m)
+		AND $m != trim($t['email_auteur']))
+			$destinataires[$m]++;
+	}
+
+	//
+	// Envoyer les emails
+	//
+	$envoyer_mail = charger_fonction('envoyer_mail','inc');
+	foreach (array_keys($destinataires) as $email) {
+		$msg = email_notification_forum_spipbb($t, $email);
+		$envoyer_mail($email, $msg['subject'], $msg['body']);
+	}
+
+	// Notifier les autres si le forum est valide
+	if ($t['statut'] == 'publie') {
+		$notifications = charger_fonction('notifications', 'inc');
+		$notifications('forumvalide', $id_forum);
+	}
+}
+
 
 function generer_url_forum_spipbb($id_forum) {
 	spipbb_log('generer_url_forum_spipbb :'.$id_forum.":",3,__FILE__);
