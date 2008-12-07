@@ -31,7 +31,15 @@ function balise_FORMULAIRE_TRI_PROFIL ($p) {
 
 function balise_FORMULAIRE_TRI_PROFIL_dyn($id_rubrique) {
 	spipbb_log('dyn',2,__FILE__);
-
+	if (lire_config('spipbb/affiche_membre_defaut')=='oui')
+	return array("formulaires/tri_profil_complet", 0,
+			array('mode' => _request('mode'),
+				'ordre_tri' => _request('ordre_tri'),
+				'id_rubrique' => $id_rubrique,
+				'self' => self()
+			)
+		);
+	else
 	return array("formulaires/tri_profil", 0,
 			array('mode' => _request('mode'),
 				'ordre_tri' => _request('ordre_tri'),
