@@ -38,7 +38,7 @@
 
 	<!-- lien liste membres -->
 	<li class="membre">
-		<a href="[(#URL_PAGE{membres_liste}|parametre_url{id_rubrique,#GET{sector}})]">
+		<a href="[(#URL_PAGE{membres_liste}|parametre_url{id_rubrique,#GET{sector}}|parametre_url{lang,#ENV{lang}})]">
 		<:spipbb:liste_inscrits:>
 		</a>
 	</li>
