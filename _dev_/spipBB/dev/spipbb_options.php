@@ -101,7 +101,7 @@ function test_inscription($mode, $mail, $nom, $id=0)
 # Fonction redeclaree dans inc/spipbb_notifications.php
 # Tous les participants d'un thread recoivent les nouveaux messages,
 # sauf sur threads refuses (voir profil -> refus_suivi_thread)
-#
+# Les deux sont exclusifs mutuellement, le premier est prioritaire
 
 define('_SUIVI_FORUM_THREAD', true);
 #define('_SUIVI_FORUMS_REPONSES', true);

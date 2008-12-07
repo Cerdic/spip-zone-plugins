@@ -7,6 +7,10 @@
  * 0.5.2.5 : Suite à l'optimisation sur la liste des membres on avait perdu une partie des fonctionnalites... 
  * cf bug : http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=886 , correction apporte par un second formulaire séparé pour garder l'optimisation et en conservant les deux modes de gestion
  * Correction du total de la liste des membres (mauvais calcul)
+ * 0.5.2.6 : Les notifications revues par Spipbb ne fonctionnaient plus depuis longtemps. Cf Bug : http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=886
+ * Mise à jour de la notification spipbb et correction des appels + passage en pipeline ( suppression de spipbb_fonctions )
+ * Correction de l'URL pour voir le sujet d'un forum SpipBB. Devrait être pris en compte dorenavant.
+ 
 
 2008-12-05  chryjs  <chryjs!@!free!.!fr>
 

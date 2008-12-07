@@ -1,5 +1,5 @@
 <plugin>
-	<version>0.5.2.5</version>
+	<version>0.5.2.6</version>
 	<nom>
 		<multi>
 			[en]SpipBB: Management of SPIP SVN forums
@@ -169,7 +169,14 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]
 		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/spipbb.php</inclure>
 	</pipeline>
-	
+	<!-- chargement des notifications facon spipbb -->
+	<pipeline>
+		<nom>notifications</nom>
+		<!-- action vide pour provoquer l'inclusion de inc/spipbb_notifications.php -->
+		<action>chargespipbb</action>
+		<inclure>inc/spipbb_notifications.php</inclure>
+	</pipeline>
+
 	<chemin dir='' />
 	<necessite id="cfg" version="[1.0.0;]" />
 </plugin>

@@ -4,6 +4,7 @@ Todo-list pour spipbb
 Interface Privée - Administration générale :
 -* 0.5 Activation des mots clés. Il y a plein de choses à dire et à faire dans ce domaine prévus pour la 0.4 . En attendant, même si les mots clés nécessaires n'ont pas été créés lors de l'installation on peut le faire faire automatiquement à spipBB en effet le formulaire (Configuration) permet de saisir le nom du groupe (spipbb par défaut) de mots clés. Si vous validez (bouton juste en dessous), il créé le groupe de mots clés tout seul :-)
 -* 0.5 Contrôle du spam : les mots pics ou conn* par exemple ont un spectre trop large : soit modifier la regexp (et ne prendre que des mots) soit utiliser un calcul sur la répétition (minimum de tant de mots marqués pour assimiler à du spam)
+-* 0.5 Notifications : controle de la cohérence entre define _SUIVI_FORUMS et les metas de notification
 
 Interface Privée - Membres:
 -* 0.5 Meilleure gestion des champs extras cf http://www.spip-contrib.net/Plugin-SpipBB#forum400496

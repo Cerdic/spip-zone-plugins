@@ -109,7 +109,9 @@ function spipbb_affiche_milieu($flux) {
 	$exec =  $flux['args']['exec'];
 	if ($exec=='auteur_infos'){
 		$id_auteur = $flux['args']['id_auteur'];
-		if(lire_config("spipbb/support_auteurs")=="table") {
+		// c 7/12/8 plus d'extras donc... sauf si plugin extras ???
+		//if(lire_config("spipbb/support_auteurs")=="table") 
+		{
 			include_spip('inc/spipbb_auteur_infos');
 			$flux['data'].= spipbb_auteur_infos($id_auteur);
 		}
