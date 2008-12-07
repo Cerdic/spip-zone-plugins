@@ -88,7 +88,10 @@ Afin d'&#233;viter les mauvaises surprises de pr&#233;sentation (comme l'afficha
 		<inclure>jeux_pipelines.php</inclure>
 		<nom>taches_generales_cron</nom>
 	</pipeline>
-
+	<pipeline>
+		<inclure>jeux_pipelines.php</inclure>
+		<nom>declarer_tables_objets_surnoms</nom>
+	</pipeline>
 
 	<install>base/jeux_upgrade.php</install>
 </plugin>

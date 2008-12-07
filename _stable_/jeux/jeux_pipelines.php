@@ -128,47 +128,56 @@ function jeux_affichage_final($flux) {
 
 function jeux_affiche_droite($flux){
 	if (in_array($flux['args']['exec'],array('articles_edit','breves_edit','rubriques_edit','mots_edit'))){
-	include_spip('exec/inc_boites_infos');	
-	$flux['data'] .= boite_info_jeux_edit();
+		include_spip('exec/inc_boites_infos');
+		$flux['data'] .= boite_info_jeux_edit();
 	}
 	
 	if (in_array($flux['args']['exec'],array('auteur_infos'))){
-	include_spip('exec/inc_boites_infos');			
-	$flux['data'] .= boite_infos_spip_auteur($flux['args']['id_auteur']);  
-	
+		include_spip('exec/inc_boites_infos');			
+		$flux['data'] .= boite_infos_spip_auteur($flux['args']['id_auteur']);  
 	}
-	
 	return $flux;
 }
 
 function jeux_taches_generales_cron($taches_generales){
-	$taches_generales['jeux_cron'] = 60 * 20; // 20 minutes
+	$taches_generales['jeux_nettoyer_base'] = 3600*48;
 	return $taches_generales;
 }
 
-function cron_jeux_cron($t, $attente=86400){
+// compatibilite SPIP < 2.0
+function cron_jeux_nettoyer_base($t, $attente=86400){
 	$date = date("YmdHis", time() - $attente);
 	include_spip('inc/utils');
-	$sup = '(';
+	$sup = array();
 	$i = 0;
 	$requete = spip_query("SELECT id_jeu from spip_jeux WHERE statut='poubelle' and 'date'<".$date);
-	while ($ligne = spip_fetch_array($requete)){	
-		$sup .= $i?',':'';
-		$sup .= $ligne['id_jeu'];
-		$i++;
-	}
-	$sup .= ')';
-	if ($sup!='()') {
+	while ($ligne = spip_fetch_array($requete))
+		$sup[] = $ligne['id_jeu'];
+	if (count($sup)) {
+		$sup = '('.join(',',$sup).')';
 		spip_query('DELETE FROM spip_jeux WHERE `id_jeu` IN '.$sup);
 		spip_query('DELETE FROM spip_jeux_resultats WHERE `id_jeu` IN '.$sup);
-		spip_log('suppression jeux poubelle'.$sup);
+		spip_log('Le plugin Jeux vide la poubelle WHERE `id_jeu` IN '.$sup);
 	}
-	
 }
 
 // SPIP >= 2.0 : c'est genie_ et pas cron_
-function genie_jeux_cron($time) {
-	return cron_jeux_cron($time);
+function genie_jeux_nettoyer_base($t) {
+	// plugins Corbeille ou Couteau Suisse : pas d'optimisation automatique
+	if(defined('_DIR_PLUGIN_CORBEILLE') || defined('_CORBEILLE_SANS_OPTIM')) return;
+	$sel = sql_select('id_jeu', 'spip_jeux', "statut='poubelle'");
+	while ($r = sql_fetch($sel)) $ids[] = $r['id_jeu'];
+	if (count($ids)) {
+		sql_delete('spip_jeux', sql_in('id_jeu', $ids));
+		sql_delete('spip_jeux_resultats', sql_in('id_jeu', $ids));
+		spip_log('Le plugin Jeux vide la poubelle WHERE `id_jeu` IN '.join(',',$ids));
+	}
+}
+
+// SPIP >=2.0 : association type objet/table
+function jeux_declarer_tables_objets_surnoms($surnoms) {
+	$surnoms['jeu'] = 'jeux';
+	return $surnoms;
 }
 
 ?>

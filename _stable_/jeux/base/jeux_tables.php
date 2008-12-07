@@ -54,11 +54,7 @@ $table_des_traitements['CONTENU'][]= 'propre(%s)';
 global $corbeille_params;
 $corbeille_params['jeux'] = array (
 	"statut" => 'poubelle',
-	"table" => 'jeux',
-	"id"	=> 'id_jeu',
 	"tableliee"=> array('spip_jeux_resultats'),
-	"temps" => 'date',
-	"libelle" => _T('jeux:jeux_tous'),
-	"libelle_court" => _T('jeux:jeux')
+	"libelle" => 'jeux:jeux',
 );
 ?>
