@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attente_confirmation' => 'Waiting for confirmation',
 
 	// D
+	'date_court' => '@jour@/@mois@/@annee@',
 	'derniers_connectes' => 'Last connected:',
 
 	// E
@@ -35,6 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'objet_breves' => 'News items',
 	'objet_mot' => 'Keyword',
 	'objet_mots' => 'Keywords',
+	'objet_petition' => 'Petition',
+	'objet_petitions' => 'Petitions',
 	'objet_rubrique' => 'Section',
 	'objet_rubriques' => 'Sections',
 	'objet_syndic' => 'Site',
@@ -46,17 +49,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Page @page@: @title@',
 	'page_precedente' => 'Previous page',
 	'page_suivante' => 'Next page',
-	'plugin_xml' => '<MODIF>Gathers together in one plugin many small, useful tools to improve the management of your SPIP site.
+	'plugin_xml' => 'Gathers together in one plugin a list of small, useful tools to improve the management of your SPIP site.
 
 Each tool can be ativated individually by the the user from the [plugin\'s admin page->./?exec=admin_couteau_suisse]. To set some options, click on {{Configuration}}, then choose the {{Swiss Knife}} tab.
 
-Available categories are: Administration, Typographical improvements, Typographical shortcuts, Display on the public site, Tags, Filters, Criteria..
+Available categories are: Administration, Typographical improvements, Typographical shortcuts, Display on the public site, Tags, Filters, Criteria.
 
-Find your favourite tools in this plugin: {Superscript}, {Curly inverted commas}, {Beautiful bullets}, {A summary for your articles}, {Smileys}, {Delete the number}, {Fine URLs}, {SPIP and external links}, {No anonymous forums}, {Division in pages and tab}, etc., etc.
+Find your favourite tools in this plugin: {Delete the number}, {URL formats},{Superscript}, {Curly inverted commas}, {Beautiful bullets}, {Fight against SPAM}, {Mailcrypt}, {Fine URLs}, {SPIP and external links}, {Smileys}, {A summary for your articles}, {Division in pages and tabs}, etc., etc.
 
 See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibility: SPIP 1.9x (all versions)',
+Compatibility: SPIP 1.9x and v2.0',
 
 	// S
 	'smileys_dispos' => 'Available smileys:',
@@ -75,7 +78,7 @@ Compatibility: SPIP 1.9x (all versions)',
 	'urls_propres_erreur' => 'This format does not take into account the URLs listed below own',
 	'urls_propres_format' => 'Thecurrent format of URLs is: {{&laquo;&nbsp;@format@&nbsp;&raquo;}}. [<span>[Configuration->@url@]</span>]',
 	'urls_propres_lien' => 'Public access link',
-	'urls_propres_objet' => '<NEW>Aqu&iacute; se listan las URLs propias guardadas en la base de datos gracias a las cuales los visitantes podr&aacute;n navegar por tu sitio web.',
+	'urls_propres_objet' => 'Here is the list of the clean URLs stored in the database which visitors can use to explore your site.',
 	'urls_propres_titre' => 'URLs OWN',
 
 	// V
