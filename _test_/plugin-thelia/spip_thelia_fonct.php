@@ -398,7 +398,7 @@ function afficher_produits_objet($type, $id) {
 		
 		$puce = ($row['ligne'])?find_in_path('images/puce-verte.gif'):find_in_path('images/puce-orange.gif');
 		$etat = ($row['ligne'])?_T('spipthelia:produit_en_ligne'):_T('spipthelia:produit_non_publie');
-		$url = generer_url_ecrire('spip_thelia_catalogue','thelia_url='.urlencode('produit_modifier.php?ref='.$row['ref']));
+		$url = generer_url_ecrire('spip_thelia_catalogue','thelia_url='.urlencode('produit_modifier.php?ref='.$row['ref'].'&rubrique='.$row['rubrique']));
 		$link = "<a class='product_details' href='%s' target='_blank'>%s</a>";
 				
 		$vals[] = sprintf($link,$url,"<img src='$puce' alt='$etat'/>");
@@ -424,7 +424,7 @@ function determiner_produits_objet($type, $id) {
 	$les_produits = array();
 	if (!preg_match(',^[a-z]*$,',$type)) return $les_produits;
 
-	$result = spip_query("SELECT titre,ref,prix,ligne 
+	$result = spip_query("SELECT titre,ref,prix,ligne,rubrique 
 		FROM spip_produits_{$type}s 
 		JOIN produit ON produit.id = spip_produits_{$type}s.id_produit 
 		JOIN produitdesc ON produitdesc.id = spip_produits_{$type}s.id_produit 
