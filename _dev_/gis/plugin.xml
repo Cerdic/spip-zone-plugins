@@ -53,7 +53,7 @@ _ Configuration: [->/ecrire/?exec=cfg&amp;cfg=gis]
 	</pipeline>
 	<pipeline>
 		<nom>affiche_milieu</nom>
-		<action>insertar_maparticle</action>
+		<action>insertar_map</action>
 		<inclure>gis_pipeline.php</inclure>
 	</pipeline>
 	<pipeline>

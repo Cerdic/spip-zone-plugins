@@ -10,7 +10,7 @@ Choisissez dans quelles rubriques activer le plugin.
 <form method="post"><div>
 	[(#ENV{_cfg_}|form_hidden)]
 	<ul>
-	#SET{wichrub,#CONFIG{gis/rubriques_gis,#ARRAY}}
+	#SET{wichrub,#CONFIG{gis/rubriques_gis,#ARRAY{0,0}}}
 		<li class="editer_api_carte_gis">
 			<label><:gis:api_carte:></label>
 			<div class="choix">
@@ -26,7 +26,7 @@ Choisissez dans quelles rubriques activer le plugin.
 			<label for="rubriques_gis"><:gis:pages_prive:></label>
 			<p class="explications"><:gis:explication_pages_prive:></p>
 			<select name="rubriques_gis[]" multiple="multiple" size="9">
-				<option value=""[ (#GET{wichrub}|?{'',' '})selected="selected"]>Toutes</option>
+				<option value=""[ (#EVAL{0}|in_array{#GET{wichrub}}|?{' selected="selected"'})]>Toutes</option>
 				<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}{tout}>
 				<option value="#ID_RUBRIQUE"[ (#ID_RUBRIQUE|in_array{#GET{wichrub}}|?{' selected="selected"'})]>
 				Secteur #ID_RUBRIQUE : #TITRE
