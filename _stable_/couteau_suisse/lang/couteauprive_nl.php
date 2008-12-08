@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'acces_admin' => 'Toegang beheerders :',
 	'action_rapide' => 'Snelle actie, alleen als u weet wat u doet !',
+	'action_rapide_non' => 'Vlugge actie, ter beschikking eens dat het instrument is geactiveerd',
 	'attente' => 'Wachten...',
 	'auteur_forum:description' => 'Zet alle auteurs van openbare berichten ertoe aan om te vullen (van minstens van een brief!) het veld &laquo;@_CS_FORUM_NOM@&raquo; teneinde de volkomen onbekende bijdragen te vermijden.',
 	'auteur_forum:nom' => 'Geen onbekende forums',
@@ -103,13 +104,13 @@ Merkt op: door deze tweede parameter te wijzigen, verliest u dan de standaardsti
 	'code_js' => 'Javascript',
 	'code_options' => 'Opties',
 	'code_spip_options' => 'Opties SPIP',
-	'contrib' => 'Meer infos : @url@',
-	'corbeille:description' => '<NEW>SPIP supprime automatiquement les objets mis au rebuts au bout de 24 heures, en g&eacute;n&eacute;ral vers 4 heures du matin, gr&acirc;ce &agrave; une t&acirc;che &laquo;CRON&raquo; (lancement p&eacute;riodique et/ou automatique de processus pr&eacute;programm&eacute;s). Vous pouvez ici emp&ecirc;cher ce processus afin de mieux g&eacute;rer votre corbeille.[[%arret_optimisation%]]',
+	'contrib' => 'Meer info : @url@',
+	'corbeille:description' => '<NEW>SPIP verwijdert automatisch de objecten mis au rebuts na 24 uren, en dit meestal rond 4 u \'s morgens, dit dank zij &laquo;CRON&raquo; (een periodieke en/of een automatische lancering van het voorgeprogrammeerde proces). Hier kunt u het proces verhinderen zodanig dat u beter vat hebt op het beheer van het mandje.[[%arret_optimisation%]]',
 	'corbeille:nom' => 'Het mandje',
-	'corbeille_objets' => '<NEW>@nb@ objet(s) dans la corbeille.',
-	'corbeille_objets_lies' => '<NEW>@nb_lies@ liaison(s) detect&eacute;e(s).',
-	'corbeille_objets_vide' => '<NEW>Aucun objet dans la corbeille',
-	'corbeille_objets_vider' => '<NEW>Supprimer les objets s&eacute;lectionn&eacute;s',
+	'corbeille_objets' => '@nb@ onderwerp(en) in het mandje.',
+	'corbeille_objets_lies' => '@nb_lies@ ontdekte(n) verbinding.',
+	'corbeille_objets_vide' => 'Geen enkel onderwerp in het mandje',
+	'corbeille_objets_vider' => 'De geselecteerde onderwerpen afschaffen',
 	'corbeille_vider' => 'Het mandje legen&nbsp;:',
 	'couleurs:aide' => 'Inzet in kleuren: <b>[coul]tekst[/coul] </b>@fond@ met <b>coul</b> = @liste@',
 	'couleurs:description' => 'Maakt het mogelijk om kleuren gemakkelijk toe te passen op alle teksten van de plaats (artikelen, kort, titels, forum,…) door bakens in kortere wegen te gebruiken.
@@ -123,15 +124,16 @@ Idem om de bodem te veranderen, als de keuze hieronder het toelaat:@_CS_EXEMPLE_
 @_CS_ASTER@Het formaat van deze verpersoonlijkte bakens moet bestaande kleuren op een lijst zetten of paren &laquo;balise=couleur&raquo;, bepalen, alles die door komma\'s wordt gescheiden. Voorbeelden. Exemples : &laquo;gris, rouge&raquo;, &laquo;faible=jaune, fort=rouge&raquo;, &laquo;bas=#99CC11, haut=brown&raquo; of nog &laquo;gris=#DDDDCC, rouge=#EE3300&raquo;. Voor de eerste en het laatste voorbeeld, zijn de toegelaten bakens : <code>[gris]</code> en <code>[rouge]</code> (<code>[fond gris]</code> en <code>[fond rouge]</code> als de middelen toegestaan zijn).',
 	'couleurs:nom' => 'Erg in kleuren',
 	'couleurs_fonds' => ', <b>[fond&nbsp;coul]text[/coul]</b>, <b>[bg&nbsp;coul]text[/coul]</b>',
-	'cs_comportement:description' => '<NEW>@puce@ {{Logs.}} Obtenez de nombreux renseignements &agrave; propos du fonctionnement du Couteau Suisse dans les fichiers {spip.log} que l\'on peut trouver dans le r&eacute;pertoire : {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
+	'cs_comportement:description' => '<NEW>@puce@ {{Logs.}}Vele inlichtingen zijn te verkrijgen rond de plug in \'Couteau Suisse (Zwitsers mesje)\' in de folders {spip.log} dat U kunt vinden in het repertoire: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
 
-@puce@ {{Options SPIP.}} SPIP ordonne les plugins dans un ordre sp&eacute;cifique. Afin d\'&ecirc;tre s&ucirc;r que le Couteau Suisse soit en t&ecirc;te et g&egrave;re en amont certaines options de SPIP, alors cochez l\'option suivante. Si les droits de votre serveur le permettent, le fichier {@_CS_FILE_OPTIONS@} sera automatiquement modifi&eacute; pour inclure le fichier {@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php}.
+@puce@ {{Options SPIP.}} SPIP zet de  plugins in een specifieke orde. Om zeker te zijn dat \'le Couteau Suisse\' in het begin staat en zo enkele SPIP opties automatisch be&iuml;nvloedt, moet u de volgende optie aanvinken. Indien de rechten van u server het toestaan, zal de folder {@_CS_FILE_OPTIONS@} automatisch gemodifieerd worden en de volgende folder insluiten {@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php}.
 [[%spip_options_on%]]
 
-@puce@ {{Requ&ecirc;tes externes.}} Le Couteau Suisse v&eacute;rifie r&eacute;guli&egrave;rement l\'existence d\'une version plus r&eacute;cente de son code et informe sur sa page de configuration d\'une mise &agrave; jour &eacute;ventuellement disponible. Si les requ&ecirc;tes externes de votre serveur posent des probl&egrave;mes, alors cochez la case suivante.[[%distant_off%]]',
+@puce@ {{Requ&ecirc;tes externes.}} \'Le Couteau Suisse\' verifieert regelmatig het bestaan van een meer recente versie en geeft de informatie door waar een nieuwe versie ter beschikking is. Indien dit een probleem vertoond bij u server probeer dan de volgende link.[[%distant_off%]]',
 	'cs_comportement:nom' => 'Gedrag van het Zwitserland Mes',
 	'cs_distant_off' => 'De verificaties van verwijderde versies',
 	'cs_log_couteau_suisse' => 'Uitvoerige logs van het Zwitserland Mes',
+	'cs_reset' => 'Bent u zeker r&eacute;initialiser volkomen het Zwitserland Mes te willen?',
 	'cs_spip_options_on' => 'De SPIP opties in &laquo;@_CS_FILE_OPTIONS@&raquo;',
 
 	// D
@@ -208,7 +210,7 @@ _ De syntaxis is : "__code__", waar &#132;de code&#147; vertegenwoordigt ofwel h
 - <i>nog steeds</i>: javascript wordt overal aanvaard.
 
 Opgelet: in de forums, petities, georganiseerde stromen, enz., het beleid van javascript wordt <b>altijd</b> veiliggesteld.[[%radio_filtrer_javascript3%]]',
-	'filtrer_javascript:nom' => '<MODIF>Beleid van javascript',
+	'filtrer_javascript:nom' => 'Beleid van JavaScript',
 	'flock:description' => 'D&eacute;sactiveren het systeem van grendeling van bestanden door de functie PHP {flock()} te neutraliseren. Bepaalde onderdak geeft immers ernstige problemen ten gevolge van een onaangepast systeem van bestanden of een gebrek aan synchronisatie. Activeert niet dit werktuig als uw plaats normaal werkt.',
 	'flock:nom' => 'Geen grendeling van bestanden',
 	'fonds' => 'Bodem :',
@@ -265,7 +267,7 @@ _ Voyez le r&eacute;sultat sur cette page : [->http://www.malsup.com/jquery/corn
 Listez ci-dessous les objets de votre squelette &agrave; arrondir en utilisant la syntaxe CSS (.class, #id, etc. ). Utilisez le le signe &laquo;&nbsp;=&nbsp;&raquo; pour sp&eacute;cifier la commande jQuery &agrave; utiliser et un double slash (&laquo;&nbsp;//&nbsp;&raquo;) pour les commentaires. En absence du signe &eacute;gal, des coins ronds seront appliqu&eacute;s (&eacute;quivalent &agrave; : <code>.ma_classe = .corner()</code>).[[%jcorner_classes%]]
 
 Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corners}. Le Couteau Suisse peut l\'installer directement si vous cochez la case suivante. [[%jcorner_plugin%]]',
-	'jcorner:nom' => '<NEW>Jolis Coins',
+	'jcorner:nom' => 'Mooie Hoeken',
 	'jcorner_plugin' => '<NEW>&laquo;&nbsp;Round Corners plugin&nbsp;&raquo;',
 	'jq_localScroll' => '<NEW>jQuery.LocalScroll ([d&eacute;mo->http://demos.flesler.com/jquery/localScroll/])',
 	'jq_scrollTo' => '<NEW>jQuery.ScrollTo ([d&eacute;mo->http://demos.flesler.com/jquery/scrollTo/])',

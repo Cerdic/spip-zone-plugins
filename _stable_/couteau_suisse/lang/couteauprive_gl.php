@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'acces_admin' => 'Acceso de administraci&oacute;n :',
 	'action_rapide' => 'Acci&oacute;n r&aacute;pida, unicamente se sabe do que fai!',
+	'action_rapide_non' => 'Acci&oacute;n r&aacute;pida, dispo&ntilde;ible tras a activaci&oacute;n desta utilidade :',
 	'attente' => 'En espera...',
 	'auteur_forum:description' => 'Invite a todos os autores a cubri (cando menos cunha letra!) o campo &laquo;@_CS_FORUM_NOM@&raquo; co fin de evitar as contribuci&oacute;ns totalmente an&oacute;nimas.',
 	'auteur_forum:nom' => 'Non haber&aacute; foros an&oacute;nimos',
@@ -144,6 +145,7 @@ Idem para trocar o fondo, se a opci&oacute;n seguinte o permite :@_CS_EXEMPLE_CO
 	'cs_comportement:nom' => 'Comportamentos da Navalla Su&iacute;za',
 	'cs_distant_off' => 'Comprobaci&oacute;n de versi&oacute;ns distantes',
 	'cs_log_couteau_suisse' => 'Os logs detallados da Navalla Su&iacute;za',
+	'cs_reset' => 'Est&aacute; seguro de querer reiniciar totalmente a Navalla Su&iacute;za?',
 	'cs_spip_options_on' => 'As opci&oacute;ns SPIP en &laquo;@_CS_FILE_OPTIONS@&raquo;',
 
 	// D
@@ -433,13 +435,14 @@ _ • {Estendido} : son substitu&iacute;das ademais as ligaz&oacute;ns do tipo {<h
 	'pack_actuel_avert' => 'Aviso, as sobreescrituras sobre os define() ou as globais non est&aacute;n especificadas aqu&iacute;',
 	'pack_actuel_titre' => 'PAQUETE ACTUAL DE CONFIGURACI&Oacute;N DA NAVALLA SU&Iacute;ZA',
 	'pack_alt' => 'Ver os par&aacute;metros de configuraci&oacute;n en curso',
-	'pack_descrip' => '<MODIF>O seu "Paquete de configuraci&oacute;n actual" recolle o conxunto dos par&aacute;metros de configuraci&oacute;n presentes relativos &aacute; Navalla Su&iacute;za: a activaci&oacute;n de ferramentas e o valor das s&uacute;as eventuais variables.
+	'pack_descrip' => 'O seu &laquo;&nbsp;Paquete de configuraci&oacute;n actual"&nbsp;&raquo; recolle o conxunto dos par&aacute;metros de configuraci&oacute;n presentes relativos &aacute; Navalla Su&iacute;za: a activaci&oacute;n de ferramentas e o valor das s&uacute;as eventuais variables.
 
-Este c&oacute;digo PHP pode po&ntilde;erase no ficheiro /config/mes_options.php e engadir&aacute; unha ligaz&oacute;n de reinicializaci&oacute;n sobre esta p&aacute;xina "do paquete &laquo;&nbsp;{@pack@}&nbsp;&raquo;. Desde logo p&oacute;delle cambiar ese nome.
+Se os permisos de escritura o permiten, oc&oacute;digo PHP seguinte poder&aacute; po&ntilde;erse no ficheiro {{/config/mes_options.php}} e engadir&aacute; unha ligaz&oacute;n de reiniciaci&oacute;n sobre esta p&aacute;xina "do paquete &laquo;&nbsp;{@pack@}&nbsp;&raquo;. Desde logo p&oacute;delle cambiar ese nome.
 
-De reinicializar o m&oacute;dulo premendo sobre un paquete, a Navalla Su&iacute;za reconfigurarase automaticamente en funci&oacute;n dos par&aacute;metros predeterminados no paquete.',
+De reiniciar o m&oacute;dulo premendo sobre un paquete, a Navalla Su&iacute;za reconfigurarase automaticamente en funci&oacute;n dos par&aacute;metros predeterminados no paquete.',
 	'pack_du' => '• do paquete @pack@',
 	'pack_installe' => 'Actualizaci&oacute;n dun paquete de configuraci&oacute;n',
+	'pack_installer' => 'Est&aacute; seguro de querer reiniciar a Navalla Su&iacute;za e instalar o paquete &laquo;&nbsp;@pack@&nbsp;&raquo; ?',
 	'pack_nb_plrs' => 'Hai actualmente @nb@ &laquo;&nbsp;paquetes de configuraci&oacute;n&nbsp;&raquo; dispo&ntilde;&iacute;beis.',
 	'pack_nb_un' => 'Hai actualmente un &laquo;&nbsp;paquete de configuraci&oacute;n&nbsp;&raquo; dispo&ntilde;ible',
 	'pack_nb_zero' => 'Non hai ning&uacute;n &laquo;&nbsp;paquete de configuraci&oacute;n&nbsp;&raquo; dispo&ntilde;ible actualmente.',
@@ -499,7 +502,7 @@ _ • Unicamente para os artigos que conte&ntilde;an a baliza <code>@_CS_AVEC_SOMM
 [[%balise_sommaire%]]
 
 Este sumario pode ser aparellado con : &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
-	'sommaire:nom' => '<MODIF>Un sumario para os seus artigos',
+	'sommaire:nom' => 'Un sumario autom&aacute;tico',
 	'sommaire_avec' => 'Un artigo con sumario&nbsp;: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un artigo sen sumario&nbsp;: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'spam:description' => 'Tenta loitar contra os env&iacute;os de mensaxes autom&aacute;ticas e impertinentes na parte p&uacute;blica. Algunhas palabras e as balizas &lt;a>&lt;/a> est&aacute;n prohibidas.

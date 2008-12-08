@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'acces_admin' => 'Administrators\' access:',
 	'action_rapide' => 'Rapid action, only if you know what you are doing!',
+	'action_rapide_non' => 'Rapid action, available when this tool is activated:',
 	'attente' => 'Waiting...',
 	'auteur_forum:description' => 'Request all authors of public messages to fill in (with at least one letter!) the field "@_CS_FORUM_NOM@" in order to avoid completely anonymous messages.',
 	'auteur_forum:nom' => 'No anonymous forums',
@@ -86,19 +87,26 @@ _ This tool will replace the shortcuts by the images of the same name found in t
 	'class_spip:description2' => '@puce@ {{SPIP shortcuts}}.
 
 Here you can define some SPIP shortcuts. An empty value is equivalent to using the default.[[%racc_hr%]][[%puce%]]',
-	'class_spip:description3' => '<MODIF>
+	'class_spip:description3' => '
+
+{N.B. If the tool "[.->pucesli]" is active, then the replacing of the hyphen "-" will no longer take place; a list &lt;ul>&lt;li> will be used instead.}
 
 SPIP normally uses the &lt;h3&gt; tag for subtitles. Here you can choose a different tag: [[%racc_h1%]][[->%racc_h2%]]',
-	'class_spip:description4' => '<MODIF>
+	'class_spip:description4' => '
+
+SPIP normally uses &lt;strong> for marking boldface type. But &lt;b> could also be used. You can choose: [[%racc_g1%]][[->%racc_g2%]]
 
 SPIP normally uses &lt;i> for marking italics. But &lt;em> could also be used. You can choose: [[%racc_i1%]][[->%racc_i2%]]
-N.B.: if you change the tag used for italics, style {{2.}} above will not be applied.
 
-@puce@ {{SPIP styles}}. Up to version 1.92 of SPIP, typographical shortcuts produced HTML tags all marked with the class "spip". For exeample, <code><p class="spip"></code>. Here you can define the style of these tags to link them to your stylesheet. An empty box means that no particular style will be applied.<blockquote style=\'margin:0 2em;\'>
-_ {{1.}} Tags &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; and the lists (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[%style_p%]]
-_ {{2.}} Tags &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; and &lt;blockquote&gt; :[[%style_h%]]
+@puce@ {{SPIP styles}}. Up to version 1.92 of SPIP, typographical shortcuts produced HTML tags all marked with the class "spip". For exeample, <code><p class="spip"></code>. Here you can define the style of these tags to link them to your stylesheet. An empty box means that no particular style will be applied.
 
-N.B.: by changing the second parameter you will lose any standard styles associated with these tags.</blockquote>',
+{N.B. If any shortcuts above (horizontal line, subtitle, italics, bold) have been modified, then the styles below will not be applied.}
+
+<q1>
+_ {{1.}} Tags &lt;p&gt;, &lt;i&gt;, &lt;strong&gt;: [[%style_p%]]
+_ {{2.}} Tags &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt;, &lt;blockquote&gt; and the lists (&lt;ol&gt;, &lt;ul&gt;, etc.):[[%style_h%]]
+
+N.B.: by changing the second parameter you will lose any standard styles associated with these tags.</q1>',
 	'class_spip:nom' => 'SPIP and its shortcuts...',
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Functions',
@@ -135,6 +143,7 @@ In the same way, to change the font if the following option allows:@_CS_EXEMPLE_
 	'cs_comportement:nom' => 'Behaviour of the Swiss Knife',
 	'cs_distant_off' => 'Checks of remote versions',
 	'cs_log_couteau_suisse' => 'Detailed logs of the Swiss Knife',
+	'cs_reset' => 'Are you sure you wish to completely reset the Swiss Knife?',
 	'cs_spip_options_on' => 'SPIP options in "@_CS_FILE_OPTIONS@"',
 
 	// D
@@ -215,10 +224,16 @@ N.B.: in forums, petitions, RSS feeds, etc., JavaScript is <b>always</b> made se
 	'flock:description' => 'Deactivates the file-locking system which uses the PHP {flock()} function. Some web-hoting environments are unable to work with this function. Do not activate this tool if your site is functioning normally.',
 	'flock:nom' => 'Files are not locked',
 	'fonds' => 'Backgrounds:',
-	'forcer_langue:description' => '<MODIF>Forces the language context for multiligual templates which have a language menu able to manage the language cookie.',
+	'forcer_langue:description' => 'Forces the language context for multiligual templates which have a language menu able to manage the language cookie.
+
+Technically, this tool does this:
+- deactivates the choice of template according to the object\'s language.
+- deactivates the automatic <code>{lang_select}</code> criterion on SPIP objects (articles, news items, sections, etc.).
+
+Thus multi blocks are always displayed in the language requested by the visitor.',
 	'forcer_langue:nom' => 'Force language',
 	'format_spip' => 'Articles in SPIP format',
-	'forum_lgrmaxi:description' => '<MODIF>By default forum messages are not limited in size. If this tool is activated, an error message is shown each time someone tries to post a message larger than the size given, and the message is refused. An empty value (or 0) means that no limit will be imposed.[[%forum_lgrmaxi%]]',
+	'forum_lgrmaxi:description' => 'By default forum messages are not limited in size. If this tool is activated, an error message is shown each time someone tries to post a message larger than the size given, and the message is refused. An empty value (or 0) means that no limit will be imposed.[[%forum_lgrmaxi%]]',
 	'forum_lgrmaxi:nom' => 'Size of forums',
 
 	// G
@@ -243,18 +258,17 @@ _ • [Whole plugin|Reset to the original state of the plugin->@reset@]@install@
 
 To set this logo, go to the page "Site configuration" by clicking the "Configuration" button.',
 	'icone_visiter:nom' => '"Visit" button',
-	'insert_head:description' => '<MODIF>Activate the tag [#INSERT_HEAD->http://www.spip.net/en_article2421.html] in all templates, whether or not this tag is present between &lt;head&gt; et &lt;/head&gt;. This option can be used to allow plugins to insert javascript code (.js) or stylesheets (.css).',
+	'insert_head:description' => 'Activate the tag [#INSERT_HEAD->http://www.spip.net/en_article2421.html] in all templates, whether or not this tag is present between &lt;head&gt; et &lt;/head&gt;. This option can be used to allow plugins to insert javascript code (.js) or stylesheets (.css).',
 	'insert_head:nom' => '#INSERT_HEAD tag',
 	'insertions:description' => 'N.B.: tool in development!! [[%insertions%]]',
 	'insertions:nom' => 'Auto-correct',
-	'introduction:description' => '<MODIF>This tag can be used in templates to generate short summaries of articles, new items, etc.</p>
+	'introduction:description' => 'This tag can be used in templates to generate short summaries of articles, new items, etc.</p>
 <p>{{Beware}} : If you have another plugin defining the fonction {balise_INTRODUCTION()} or you have defined it in your templates, you will get a compilation error.</p>
 @puce@ You can specify (as a percentage of the default value) the length of the text generated by the tag #INTRODUCTION. A null value, or a value equal to 100 will not modify anything and return the defaults: 500 characters for the articles, 300 for the news items and 600 for forums and sections.
 [[%lgr_introduction%&nbsp;%]]
 @puce@ By default, if the text is too long, #INTRODUCTION will end with 3 dots: <html>&laquo;&amp;nbsp;(…)&raquo;</html>. You can change this to a customized string which shows that there is more text available.
 [[%suite_introduction%]]
 @puce@ If the #INTRODUCTION tag is used to give a summary of an article, the Swiss Knife can generate a link to the article on the 3 dots or string marking that there is more text available. For example : &laquo;Read the rest of the article…&raquo;
-
 [[%lien_introduction%]]
 ',
 	'introduction:nom' => '#INTRODUCTION tag',
@@ -374,7 +388,7 @@ _ • {Extended}: additionally links such as these are also replaced:  {<html>me@s
 	'moderation_admins' => 'authenticated administrators',
 	'moderation_message' => '<NEW>Este foro est&aacute; moderado a priori: tu contribuci&oacute;n no aparecer&aacute; hasta que haya sido validada por un administrador del sitio, salvo si te has identificado y est&aacute;s autorizado a escribir directamente.',
 	'moderation_moderee:description' => '<NEW>Permite moderar la moderaci&oacute;n de los foros p&uacute;blicos <b>configurados a priori</b> por los usuarios inscritos.<br />Por ejemplo: Si soy el webmaster de mi sitio, y respondo al mensaje de un usuario, &iquest;por qu&eacute; debo validar mi propio mensaje? &iexcl;Moderaci&oacute;n moderada lo hace para m&iacute;!  [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
-	'moderation_moderee:nom' => '<NEW>Moderaci&oacute;n moderada',
+	'moderation_moderee:nom' => 'Moderate moderation',
 	'moderation_redacs' => 'authenticated authors',
 	'moderation_visits' => 'Visitors authenticated',
 	'modifier_vars' => 'Change these @nb@ parameters',
@@ -416,13 +430,14 @@ _ • {Extended}: additionally links such as these are also replaced:  {<html>me@s
 	'pack_actuel_avert' => '<NEW>Atenci&oacute;n, las sobrecargas para los define() o los globales no se especifican aqu&iacute;',
 	'pack_actuel_titre' => 'UP-TO-DATE CONFIGURATION PACK OF THE SWISS KNIFE',
 	'pack_alt' => 'See the current configuration parameters',
-	'pack_descrip' => '<MODIF>Your "Current configuration pack" brings together all the parameters activated for the Swiss Knife plugin. It remembers both whether a tool is activated or not and, if so, what options have been chosen.
+	'pack_descrip' => 'Your "Current configuration pack" brings together all the parameters activated for the Swiss Knife plugin. It remembers both whether a tool is activated or not and, if so, what options have been chosen.
 
 This PHP code may be placed in the /config/mes_options.php file. It will place a reset link on the page of the "pack {@pack@}". Of course, you can change its name below.
 
 If you reset the plugin by clicking on a pack, the Swiss Knife will reconfigure itself according to the values defined in that pack.',
 	'pack_du' => '• of the pack @pack@',
 	'pack_installe' => 'Installation of a configuration pack',
+	'pack_installer' => 'Are you sure you want to re-initialise the Swiss Knife and install the &laquo;&nbsp;@pack@&nbsp;&raquo; pack?',
 	'pack_nb_plrs' => 'At the moment there are @nb@ "configuration packs" available.',
 	'pack_nb_un' => 'A "configuration pack" is currently available.',
 	'pack_nb_zero' => 'No "configuration pack" is currently available.',
@@ -482,7 +497,7 @@ _ • Only for articles containing the <code>@_CS_AVEC_SOMMAIRE@</code> tag.
 [[%balise_sommaire%]]
 
 The summary can be used in conjunction with : {[.->decoupe]}.',
-	'sommaire:nom' => '<MODIF>A summary for your articles',
+	'sommaire:nom' => 'An automatic summary',
 	'sommaire_avec' => 'An article with summary: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'An article without summary: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'spam:description' => 'Attempts to fight against the sending of abusive and automatic messages through forms on the public site. Some words and the tags  &lt;a>&lt;/a> are prohibited.
@@ -504,7 +519,7 @@ _ • {Control de la cach&eacute;}: opci&oacute;n id&eacute;ntica a la anterior, c
 	'suivi_forums:description' => 'The author of an article is always informed when a message is posted in the article\'s public forum. It is also possible to inform others: either all the forum\'s participants, or  just all the authors of messages higher in the thread.[[%radio_suivi_forums3%]]',
 	'suivi_forums:nom' => 'Overview of the public forums',
 	'supprimer_cadre' => 'Delete this frame',
-	'supprimer_numero:description' => '<MODIF>Applies the supprimer_numero() SPIP function to all {{titles}} et des {{names}} of the public site, without needing the filter to be present in the templates.<br />For a multilingual site, follow this syntax: <code>1. <multi>My Title[fr]Mon Titre[de]Mein Titel</multi></code>',
+	'supprimer_numero:description' => 'Applies the supprimer_numero() SPIP function to all {{titles}}, {{names}} and {{types}} (of keywords) of the public site, without needing the filter to be present in the templates.<br />For a multilingual site, follow this syntax: <code>1. <multi>My Title[fr]Mon Titre[de]Mein Titel</multi></code>',
 	'supprimer_numero:nom' => 'Delete the number',
 
 	// T
@@ -565,11 +580,13 @@ More information: [->http://www.spip.net/en_article3588.html]
 @puce@ {{Only if you are using the type {arborescentes} describes aboves}}, you can customise the format:</p>
 [[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]',
 	'type_urls:nom' => 'Format of URLs',
-	'typo_exposants:description' => '<MODIF>{{Text in French}}: improves the typographical rendering of common abbreviations by adding superscript where necessary (thus, {<acronym>Mme</acronym>} becomes {M<sup>me</sup>}). Common errors corrected:  ({<acronym>2&egrave;me</acronym>} and  {<acronym>2me</acronym>}, for example, become {2<sup>e</sup>}, the only correct abbreviation).
+	'typo_exposants:description' => '{{Text in French}}: improves the typographical rendering of common abbreviations by adding superscript where necessary (thus, {<acronym>Mme</acronym>} becomes {M<sup>me</sup>}). Common errors corrected:  ({<acronym>2&egrave;me</acronym>} and  {<acronym>2me</acronym>}, for example, become {2<sup>e</sup>}, the only correct abbreviation).
 
 The rendered abbreviations correspond to those of the Imprimerie nationale given in the {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, Presses de l\'Imprimerie nationale, Paris, 2002).
 
 The following expressions are also handled: <html>Dr, Pr, Mgr, St, Bx, m2, m3, Mn, Md, St&eacute;, &Eacute;ts, Vve, bd, Cie, 1o, 2o, etc.</html>
+
+You can also choose here to use superscript for some other abbreviations, despite the negative opinion of the Imprimerie nationale:[[%expo_bofbof%]]
 
 {{English text}}: the suffixes of ordinal numbers are placed in superscript: <html>1st, 2nd</html>, etc.',
 	'typo_exposants:nom' => 'Superscript',
@@ -584,8 +601,8 @@ The following expressions are also handled: <html>Dr, Pr, Mgr, St, Bx, m2, m3, M
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'standard',
-	'urls_base_total' => '<NEW>Actualmente hay @nb@ URL(s) en la base',
-	'urls_base_vide' => '<NEW>La base de datos de URLs est&aacute; vac&iacute;a',
+	'urls_base_total' => 'There are currently @nb@ URL(s) in the database',
+	'urls_base_vide' => 'The URL database is empty',
 	'urls_choix_objet' => '<MODIF>Edici&oacute;n basada en la URL de un objeto espec&iacute;fico:',
 	'urls_edit_erreur' => '<NEW>El formato actual de las URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) no permite la edici&oacute;n.',
 	'urls_enregistrer' => '<NEW>Grabar esta URL en la base',
@@ -593,13 +610,13 @@ The following expressions are also handled: <html>Dr, Pr, Mgr, St, Bx, m2, m3, M
 	'urls_num_objet' => 'Number:',
 	'urls_purger' => '<MODIF>Erase all',
 	'urls_purger_tables' => 'empty tables selected',
-	'urls_purger_tout' => '<MODIF>Reset the URLs stored in the database:',
+	'urls_purger_tout' => 'Reset the URLs stored in the database:',
 	'urls_rechercher' => 'Find this object in the database',
 	'urls_titre_objet' => '<NEW>T&iacute;tulo grabado:',
 	'urls_type_objet' => '<MODF>Order:',
 	'urls_url_calculee' => 'URL PUBLIC  &laquo;&nbsp;@type@&nbsp;&raquo;:',
 	'urls_url_objet' => '<MODIF>URL &laquo;&nbsp;propres&nbsp;&raquo; enregistr&eacute;e&nbsp;:',
-	'urls_valeur_vide' => '<NEW>(Un valor vac&iacute;o implica la supresi&oacute;n de la URL)',
+	'urls_valeur_vide' => '(An empty value implies the removal of the URL)',
 
 	// V
 	'validez_page' => 'To access modifications:',
@@ -611,8 +628,8 @@ The following expressions are also handled: <html>Dr, Pr, Mgr, St, Bx, m2, m3, M
 	'version_nouvelle' => 'New version: @version@',
 	'version_revision' => 'version: @revision@',
 	'version_update' => 'Automatic update',
-	'version_update_chargeur' => '<NEW>Descarga autom&aacute;tica',
-	'version_update_chargeur_title' => '<NEW>Descargar la &uacute;ltima versi&oacute;n del plugin mediante el plugin &laquo;Descargador&raquo;',
+	'version_update_chargeur' => 'Automatic download',
+	'version_update_chargeur_title' => 'Download the latest version of the plugin using the plugin &laquo;Downloader&raquo;',
 	'version_update_title' => 'Downloads the latest version of the plugin and updates it automatically.',
 	'verstexte:description' => '<MODIF>2 filters for your templates which make it possible to produce lighter pages.
 _ version_texte : extracts the text content of an HTML page (includes only a few very basic tags).

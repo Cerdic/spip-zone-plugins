@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'acces_admin' => 'Acc&egrave;s administrateurs :',
 	'action_rapide' => 'Action rapide, uniquement si tu sais ce que tu fais !',
+	'action_rapide_non' => 'Action rapide, disponible une fois cet outil activ&eacute; :',
 	'attente' => 'Attente...',
 	'auteur_forum:description' => 'Incite tous les auteurs de messages publics &agrave; remplir (d\'au moins d\'une lettre !) le champ &laquo;@_CS_FORUM_NOM@&raquo; afin d\'&eacute;viter les contributions totalement anonymes.',
 	'auteur_forum:nom' => 'Pas de forums anonymes',
@@ -142,6 +143,7 @@ Idem pour changer le fond, si l\'option ci-dessous le permet :@_CS_EXEMPLE_COULE
 	'cs_comportement:nom' => 'Comportements du Couteau Suisse',
 	'cs_distant_off' => 'Les v&eacute;rifications de versions distantes',
 	'cs_log_couteau_suisse' => 'Les logs d&eacute;taill&eacute;s du Couteau Suisse',
+	'cs_reset' => 'Es-tu s&ucirc;r de vouloir r&eacute;initialiser totalement le Couteau Suisse ?',
 	'cs_spip_options_on' => 'Les options SPIP dans &laquo;@_CS_FILE_OPTIONS@&raquo;',
 
 	// D
@@ -264,7 +266,7 @@ Pour d&eacute;finir ce logo, vas sur la page &laquo;&nbsp;Configuration du site&
 	'insert_head:nom' => 'Balise #INSERT_HEAD',
 	'insertions:description' => 'ATTENTION : outil en cours de d&eacute;veloppement !! [[%insertions%]]',
 	'insertions:nom' => 'Corrections automatiques',
-	'introduction:description' => '<MODIF>Cette balise &agrave; placer dans les squelettes sert en g&eacute;n&eacute;ral &agrave; la une ou dans les rubriques afin de produire un r&eacute;sum&eacute; des articles, des br&egrave;ves, etc..</p>
+	'introduction:description' => 'Cette balise &agrave; placer dans les squelettes sert en g&eacute;n&eacute;ral &agrave; la une ou dans les rubriques afin de produire un r&eacute;sum&eacute; des articles, des br&egrave;ves, etc..</p>
 <p>{{Attention}} : Avant d\'activer cette fonctionnalit&eacute;, v&eacute;rifie bien qu\'aucune fonction {balise_INTRODUCTION()} n\'existe d&eacute;j&agrave; dans ton squelette ou tes plugins, la surcharge produirait alors une erreur de compilation.</p>
 @puce@ Tu peux pr&eacute;ciser (en pourcentage par rapport &agrave; la valeur utilis&eacute;e par d&eacute;faut) la longueur du texte renvoy&eacute; par balise #INTRODUCTION. Une valeur nulle ou &eacute;gale &agrave; 100 ne modifie pas l\'aspect de l\'introduction et utilise donc les valeurs par d&eacute;faut suivantes : 500 caract&egrave;res pour les articles, 300 pour les br&egrave;ves et 600 pour les forums ou les rubriques.
 [[%lgr_introduction%&nbsp;%]]
@@ -411,7 +413,7 @@ _ • {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi
 	'outil_desactiver' => 'D&eacute;sactiver',
 	'outil_desactiver_le' => 'D&eacute;sactiver l\'outil',
 	'outil_inactif' => 'Outil inactif',
-	'outil_intro' => '<MODIF>Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; ta disposition.<br /><br />En cliquant sur le nom des outils ci-dessous, tu s&eacute;lectionnes ceux dont tu pourras permuter l\'&eacute;tat &agrave; l\'aide du bouton central : les outils activ&eacute;s seront d&eacute;sactiv&eacute;s et <i>vice versa</i>. &Agrave; chaque clic, la description appara&icirc;t au-dessous des listes. Les cat&eacute;gories sont repliables et les outils peuvent &ecirc;tre cach&eacute;s. Le double-clic permet de permuter rapidement un outil.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d\'activer les outils un par un, au cas o&ugrave; appara&icirc;traient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d\'autres plugins.<br /><br />Note : le simple chargement de cette page recompile l\'ensemble des outils du Couteau Suisse.',
+	'outil_intro' => 'Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; ta disposition.<br /><br />En cliquant sur le nom des outils ci-dessous, tu s&eacute;lectionnes ceux dont tu pourras permuter l\'&eacute;tat &agrave; l\'aide du bouton central : les outils activ&eacute;s seront d&eacute;sactiv&eacute;s et <i>vice versa</i>. &Agrave; chaque clic, la description appara&icirc;t au-dessous des listes. Les cat&eacute;gories sont repliables et les outils peuvent &ecirc;tre cach&eacute;s. Le double-clic permet de permuter rapidement un outil.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d\'activer les outils un par un, au cas o&ugrave; appara&icirc;traient certaines incompatibilit&eacute;s avec ton squelette, avec SPIP ou avec d\'autres plugins.<br /><br />Note : le simple chargement de cette page recompile l\'ensemble des outils du Couteau Suisse.',
 	'outil_intro_old' => 'Cette interface est ancienne.<br /><br />Si tu rencontres des probl&egrave;mes dans l\'utilisation de la <a href=\'./?exec=admin_couteau_suisse\'>nouvelle interface</a>, n\'h&eacute;site pas &agrave; nous en faire part sur le forum de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
 	'outil_nb' => '@pipe@ : @nb@ outil',
 	'outil_nbs' => '@pipe@ : @nb@ outils',
@@ -432,19 +434,20 @@ _ • {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi
 	'pack_actuel_avert' => 'Attention, les surcharges sur les define() ou les globales ne sont pas sp&eacute;cifi&eacute;es ici',
 	'pack_actuel_titre' => 'PACK ACTUEL DE CONFIGURATION DU COUTEAU SUISSE',
 	'pack_alt' => 'Voir les param&egrave;tres de configuration en cours',
-	'pack_descrip' => '<MODIF><MODIF>Ton &laquo;&nbsp;Pack de configuration actuelle&nbsp;&raquo; rassemble l\'ensemble des param&egrave;tres de configuration en cours concernant le Couteau Suisse : l\'activation des outils et la valeur de leurs &eacute;ventuelles variables.
+	'pack_descrip' => 'Ton &laquo;&nbsp;Pack de configuration actuelle&nbsp;&raquo; rassemble l\'ensemble des param&egrave;tres de configuration en cours concernant le Couteau Suisse : l\'activation des outils et la valeur de leurs &eacute;ventuelles variables.
 
-Ce code PHP peut prendre place dans le fichier /config/mes_options.php et ajoutera un lien de r&eacute;initialisation sur cette page "du pack &laquo;&nbsp;{@pack@}&nbsp;&raquo;.  Bien s&ucirc;r il t\'est possible de changer son nom.
+Si les droits d\'&eacute;criture le permettent, le code PHP ci-dessous pourra prendre place dans le fichier /config/mes_options.php et ajoutera un lien de r&eacute;initialisation sur cette page "du pack &laquo;&nbsp;{@pack@}&nbsp;&raquo;.  Bien s&ucirc;r il t\'est possible de changer son nom.
 
 Si tu r&eacute;initialises le plugin en cliquant sur un pack, le Couteau Suisse se reconfigurera automatiquement en fonction des param&egrave;tres pr&eacute;d&eacute;finis dans ce pack.',
 	'pack_du' => '• du pack @pack@',
 	'pack_installe' => 'Mise en place d\'un pack de configuration',
+	'pack_installer' => 'Es-tu s&ucirc;r de vouloir r&eacute;initialiser le Couteau Suisse et installer le pack &laquo;&nbsp;@pack@&nbsp;&raquo; ?',
 	'pack_nb_plrs' => 'Il y a actuellement @nb@ &laquo;&nbsp;packs de configuration&nbsp;&raquo; disponibles.',
 	'pack_nb_un' => 'Il y a actuellement un &laquo;&nbsp;pack de configuration&nbsp;&raquo; disponible',
 	'pack_nb_zero' => 'Il n\'y a pas de &laquo;&nbsp;pack de configuration&nbsp;&raquo; disponible actuellement.',
 	'pack_outils_defaut' => 'Installation des outils par d&eacute;faut',
 	'pack_sauver' => 'Sauver la configuration actuelle',
-	'pack_sauver_descrip' => '<NEW>Le bouton ci-dessous vous permet d\'ins&eacute;rer directement dans votre fichier <b>@file@</b> les param&egrave;tres n&eacute;cessaires pour ajouter un &laquo;&nbsp;pack de configuration&nbsp;&raquo; dans le menu de gauche. Ceci vous permettra ult&eacute;rieurement de reconfigurer en un clic votre Couteau Suisse dans l\'&eacute;tat o&ugrave; il est actuellement.',
+	'pack_sauver_descrip' => 'Le bouton ci-dessous te permet d\'ins&eacute;rer directement dans ton fichier <b>@file@</b> les param&egrave;tres n&eacute;cessaires pour ajouter un &laquo;&nbsp;pack de configuration&nbsp;&raquo; dans le menu de gauche. Ceci te permettra ult&eacute;rieurement de reconfigurer en un clic votre Couteau Suisse dans l\'&eacute;tat o&ugrave; il est actuellement.',
 	'pack_titre' => 'Configuration Actuelle',
 	'pack_variables_defaut' => 'Installation des variables par d&eacute;faut',
 	'par_defaut' => 'Par d&eacute;faut',
@@ -498,7 +501,7 @@ _ • Uniquement pour les articles contenant la balise <code>@_CS_AVEC_SOMMAIRE@</
 [[%balise_sommaire%]]
 
 Ce sommaire peut &ecirc;tre coupl&eacute; avec&nbsp;: &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
-	'sommaire:nom' => '<MODIF>Un sommaire pour vos articles',
+	'sommaire:nom' => 'Un sommaire pour vos articles',
 	'sommaire_avec' => 'Un texte avec sommaire&nbsp;: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un texte sans sommaire&nbsp;: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises &lt;a>&lt;/a> sont interdits.
@@ -531,11 +534,11 @@ _ • {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&eacute;
 
 	// T
 	'titre' => 'Le Couteau Suisse',
-	'titre_parent:description' => '<NEW>Au sein d\'une boucle, il est courant de vouloir afficher le titre du parent de l\'objet en cours. Traditionnellement, il suffirait d\'utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT all&eacute;gera l\'&eacute;criture de tes squelettes. Le r&eacute;sultat renvoy&eacute; est : le titre du groupe d\'un mot-cl&eacute; ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, br&egrave;ve, etc.).
+	'titre_parent:description' => 'Au sein d\'une boucle, il est courant de vouloir afficher le titre du parent de l\'objet en cours. Traditionnellement, il suffirait d\'utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT all&eacute;gera l\'&eacute;criture de tes squelettes. Le r&eacute;sultat renvoy&eacute; est : le titre du groupe d\'un mot-cl&eacute; ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, br&egrave;ve, etc.).
 
 Note : Pour les mots-cl&eacute;s, un alias de #TITRE_PARENT est #TITRE_GROUPE. Le traitement SPIP de ces nouvelles balises est similaire &agrave; celui de #TITRE.
 
-@puce@ Si tu es sous SPIP 2.0, alors tu as ici &agrave; ta disposition tout un ensemble de balises #TITRE_XXX qui pourront te donner le titre de l\'objet \'xxx\', &agrave; condition que le champ \'id_xxx\' soit pr&eacute;sent dans la table en cours (#ID_XXX utilisable dans la boucle en cours).
+@puce@ Si tu es sous SPIP 2.0, alors tu as  ici &agrave; ta disposition tout un ensemble de balises #TITRE_XXX qui pourront te donner le titre de l\'objet \'xxx\', &agrave; condition que le champ \'id_xxx\' soit pr&eacute;sent dans la table en cours (#ID_XXX utilisable dans la boucle en cours).
 
 Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du secteur dans lequel est plac&eacute; l\'article en cours, puisque l\'identifiant #ID_SECTEUR (ou le champ \'id_secteur\') est disponible dans ce cas.[[%titres_etendus%]]',
 	'titre_parent:nom' => 'Balise #TITRE_PARENT',

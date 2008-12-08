@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'acces_admin' => 'Acc&eacute;s administradors:',
 	'action_rapide' => 'Acci&oacute; r&agrave;pida, nom&eacute;s si sabeu qu&egrave; us feu! ',
+	'action_rapide_non' => 'Acci&oacute; r&agrave;pida, disponible un cop aquesta eina siga activada :',
 	'attente' => 'Espera...',
 	'auteur_forum:description' => 'Incita a tots els autors de missatges p&uacute;blics a omplir (amb una lletra com a m&iacute;nim!) el camp &laquo;@_CS_FORUM_NOM@&raquo; per tal d\'evitar les contribucions totalment an&ograve;nimes.',
 	'auteur_forum:nom' => 'No als f&ograve;rums an&ograve;nims',
@@ -142,6 +143,7 @@ Dos exemples id&egrave;ntics per canviar el color del text:@_CS_EXEMPLE_COULEURS
 	'cs_comportement:nom' => 'Comportaments del Ganivet Su&iacute;s',
 	'cs_distant_off' => 'Les verificacions de versions distants',
 	'cs_log_couteau_suisse' => 'Els logs detallats del Ganivet Su&iacute;s',
+	'cs_reset' => 'Est&agrave; segur de voler reinicialitzar totalment el Gavinet Su&iacute;s?',
 	'cs_spip_options_on' => 'Les opcions SPIP a &laquo;@_CS_FILE_OPTIONS@&raquo;',
 
 	// D
@@ -432,13 +434,14 @@ _ • {Extens}: s&oacute;n substitu&iuml;ts a m&eacute;s els enlla&ccedil;os del t
 	'pack_actuel_avert' => 'Atenci&oacute;, les sobrec&agrave;rregues pels  define() o els globales no s\'especifiquen aqu&iacute;',
 	'pack_actuel_titre' => 'PAQUET ACTUAL DE CONFIGURACI&Oacute; DEL GANIVET SU&Iacute;S',
 	'pack_alt' => 'Veure els par&agrave;metres de configuraci&oacute; en curs',
-	'pack_descrip' => '<MODIF>>El vostre "Pack de configuraci&oacute; actual" reuneix el conjunt dels par&agrave;metres de configuraci&oacute; en curs pel que fa al Ganivet Su&iacute;s: l\'activaci&oacute; d\'eines i el valor de les seves eventuals variables.
+	'pack_descrip' => 'El vostre &laquo;Pack de configuraci&oacute; actual&raquo; reuneix el conjunt dels par&agrave;metres de configuraci&oacute; en curs pel que fa al Ganivet Su&iacute;s: l\'activaci&oacute; d\'eines i el valor de les seves eventuals variables.
 
-Aquest codi PHP pot estar situat a dins del fitxer /config/mes_options.php i afegir&agrave; un enlla&ccedil; de reiniciar a aquesta p&agrave;gina del pack &laquo;&nbsp;{@pack@}&nbsp;&raquo;. Evidentment, podreu canviar el seu nom.
+Si els drets d\'escriptura ho permeten, el codi PHP que hi ha m&eacute;s avall es podr&agrave; situar a dins del fitxer {{/config/mes_options.php}} i afegir&agrave; un enlla&ccedil; de tornar a carregar en aquesta p&agrave;gina del pack &laquo;&nbsp;{@pack@}&nbsp;&raquo;. Evidentment, podreu canviar el seu nom.
 
-Si torneu a iniciar el plugin fent un clic sobre un pack, el Ganivet Su&iacute;s es tornar&agrave; a configurar autom&agrave;ticament en funci&oacute; dels par&agrave;metres predefinits en aquest pack.',
+Si torneu a carregar el plugin fent un clic sobre un pack, el Ganivet Su&iacute;s es tornar&agrave; a configurar autom&agrave;ticament en funci&oacute; dels par&agrave;metres definits pr&egrave;viament en aquest pack.',
 	'pack_du' => '• del pack @pack@',
 	'pack_installe' => 'Instal&middot;laci&oacute; d\'un pack de configuraci&oacute;',
+	'pack_installer' => 'Est&agrave; segur de voler reinicialitzar el Gavinet Su&iacute;s i d\'instal&middot;lar el pack &laquo;&nbsp;@pack@&nbsp;&raquo; ?',
 	'pack_nb_plrs' => 'Actualment hi ha @nb@ &laquo;paquets de configuraci&oacute;&raquo; disponibles.',
 	'pack_nb_un' => 'Actualment hi ha un &laquo;paquet de configuraci&oacute;&raquo; disponible',
 	'pack_nb_zero' => 'No hi ha cap &laquo;paquet de configuraci&oacute;&raquo; disponible actualment.',
@@ -498,7 +501,7 @@ _ • Nom&eacute;s pels articles que continguin l\'etiqueta <code>@_CS_AVEC_SOMMAI
 [[%balise_sommaire%]]
 
 Aquest sumari pot ser acoblat amb: &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
-	'sommaire:nom' => '<MODIF>Un sumari pels vostres articles',
+	'sommaire:nom' => 'Un sumari autom&agrave;tic',
 	'sommaire_avec' => 'Un text amb sumari:  <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un text sense sumari: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'spam:description' => 'Intenta lluitar contra els enviaments de missatges autom&agrave;tics i malevolents a la part p&uacute;blica. Algunes paraules i les etiquetes &lt;a>&lt;/a> estan prohibides.
@@ -508,9 +511,9 @@ Llisteu aqu&iacute; les seq&uuml;&egrave;ncies prohibides @_CS_ASTER@ separant-l
 	'spam:nom' => 'Lluita contra l\'SPAM',
 	'spip_cache:description' => '@puce@ La mem&ograve;ria cau ocupa un cert espai de disc i SPIP pot limitar-me la import&agrave;ncia. Un valor buit o igual a 0 significa que no s\'aplica cap quota.[[%quota_cache% Mo]]
 
-@puce@ Lorsqu\'une modification du contenu du site est faite, SPIP invalide imm&eacute;diatement le cache sans attendre le calcul p&eacute;riodique suivant. Si votre site a des probl&egrave;mes de performance face &agrave; une charge tr&egrave;s &eacute;lev&eacute;e, vous pouvez cocher &laquo;&nbsp;non&nbsp;&raquo; &agrave; cette option.[[%derniere_modif_invalide%]]
+@puce@ Quan s\'ha fet una modificaci&oacute; del lloc, SPIP invalida immediatament la mem&ograve;ria cau sense esperar el c&agrave;lcul peri&ograve;dic seg&uuml;ent. Si el vostre lloc t&eacute; problemes de presentaci&oacute; com a conseq&uuml;&egrave;ncia d\'una c&agrave;rrega molt elevada, podeu marcar &laquo;&nbsp;non&nbsp;&raquo; en aquesta opci&oacute;. [[%derniere_modif_invalide%]]
 
-@puce@ Si l\'etiqueta #CACHE no es troba als vostres esquelets locals, SPIP considera per defecte que la mem&ograve;ria cau d\'una p&agrave;gina t&eacute; validesa de 24 hores abans de tornar a ser calculada. Per tal de gestionar millor la c&agrave;rrega del vostre servidor, podeu modificar aqu&iacute; aquest valor.[[%duree_cache% heures]]
+@puce@ Si l\'etiqueta #CACHE no es troba als vostres esquelets locals, SPIP considera per defecte que la mem&ograve;ria cau d\'una p&agrave;gina t&eacute; una validesa de 24 hores abans de tornar-la a calcular. Per tal de gestionar millor la c&agrave;rrega del vostre servidor, podeu modificar aqu&iacute; aquest valor.[[%duree_cache% heures]]
 
 @puce@ Si teniu diversos llocs mutualitzats, podeu especificar aqu&iacute; el valor per defecte que es tindr&agrave; en compte per tots els llocs locals (SPIP 2.0 mini).[[%duree_cache_mutu% heures]]',
 	'spip_cache:description1' => '@puce@ Per defecte, SPIP calcula totes les p&agrave;gines p&uacute;bliques i les col&middot;loca a la mem&ograve;ria cau per tal d\'accelerar-ne la consulta. Desactivar temporalment la mem&ograve;ria cau pot ajudar al desenvolupament del lloc Web. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]',

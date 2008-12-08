@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'acces_admin' => 'Acceso de administradores:',
 	'action_rapide' => 'Acci&oacute;n r&aacute;pida, &iexcl;s&oacute;lo si sabes lo que haces!',
+	'action_rapide_non' => 'Acci&oacute;n r&aacute;pida, disponible una vez activada esta herramienta:',
 	'attente' => 'Espera...',
 	'auteur_forum:description' => 'Pide a todos los autores de mensajes p&uacute;blicos que rellenen (&iexcl;al menos con una letra!) el campo &laquo;@_CS_FORUM_NOM@&raquo; para evitar las contribuciones completamente an&oacute;nimas.',
 	'auteur_forum:nom' => 'Sin foros an&oacute;nimos',
@@ -141,6 +142,7 @@ Lo mismo para cambiar el fondo, si la opci&oacute;n de abajo lo permite:@_CS_EXE
 	'cs_comportement:nom' => 'Comportamiento de la Navaja Suiza',
 	'cs_distant_off' => 'Las comprobaciones de versiones externas',
 	'cs_log_couteau_suisse' => 'Los registros detallados de la Navaja Suiza',
+	'cs_reset' => '&iquest;Confirmas que deseas reinicializar totalmente la Navaja Suiza?',
 	'cs_spip_options_on' => 'Las opciones de SPIP en &laquo;@_CS_FILE_OPTIONS@&raquo;',
 
 	// D
@@ -431,13 +433,14 @@ _ • {Extendido}: se reemplazan adem&aacute;s los enlaces del tipo {<html>yo@spip
 	'pack_actuel_avert' => 'Atenci&oacute;n, las sobrecargas para los define() o los globales no se especifican aqu&iacute;',
 	'pack_actuel_titre' => 'PAQUETE ACTUAL DE CONFIGURACI&Oacute;N DE LA NAVAJA SUIZA',
 	'pack_alt' => 'Ver los par&aacute;metros de configuraci&oacute;n actual',
-	'pack_descrip' => '<MODIF>Tu &laquo;Paquete de configuraci&oacute;n actual&raquo; re&uacute;ne el conjunto de par&aacute;metros de configuraci&oacute;n actuales relativos a la Navaja Suiza: la activaci&oacute;n de los &uacute;tiles y el valor de sus eventuales variables.
+	'pack_descrip' => 'Tu &laquo;Paquete de configuraci&oacute;n actual&raquo; re&uacute;ne el conjunto de par&aacute;metros de configuraci&oacute;n actuales relativos a la Navaja Suiza: la activaci&oacute;n de los &uacute;tiles y el valor de sus eventuales variables.
 
-Este c&oacute;digo PHP puede situarse en el archivo /config/mes_options.php y a&ntilde;adir&aacute; un enlace de reinicializaci&oacute;n en esta p&aacute;gina del paquete &laquo;{@pack@}&raquo;. Por supuesto puedes cambiarle el nombre.
+Si los permisos de escritura lo permiten, este c&oacute;digo PHP puede situarse en el archivo {{/config/mes_options.php}} y a&ntilde;adir un enlace de reinicializaci&oacute;n en esta p&aacute;gina del paquete &laquo;{@pack@}&raquo;. Por supuesto puedes cambiarle el nombre.
 
 Si reinicializas el plugin pulsando en un paquete, la Navaja Suiza volver&aacute; a configurarse autom&aacute;ticamente en funci&oacute;n de los par&aacute;metros predefinidos en ese paquete.',
 	'pack_du' => '• del pack @pack@',
 	'pack_installe' => 'Colocaci&oacute;n de un pack de configuraci&oacute;n',
+	'pack_installer' => '&iquest;Confirmas que deseas reinicializar la Navaja Suiza e instalar el paquete &laquo;&nbsp;@pack@&nbsp;&raquo;?',
 	'pack_nb_plrs' => 'Actualmente hay @nb@ &laquo;paquetes de configuraci&oacute;n&raquo; disponibles.',
 	'pack_nb_un' => 'Actualmente hay un &laquo;paquete de configuraci&oacute;n&raquo; disponible',
 	'pack_nb_zero' => 'No hay ning&uacute;n &laquo;paquete de configuraci&oacute;n&raquo; disponible actualmente.',
@@ -497,7 +500,7 @@ _ • &Uacute;nicamente para los art&iacute;culos que contengan la baliza <code>@_
 [[%balise_sommaire%]]
 
 Este sumario puede combinarse con: &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
-	'sommaire:nom' => '<MODIF>Un sumario para tus art&iacute;culos',
+	'sommaire:nom' => 'Un sumario autom&aacute;tico',
 	'sommaire_avec' => 'Un texto con sumario: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un texto sin sumario: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'spam:description' => 'Intenta luchar contra los env&iacute;os de mensajes autom&aacute;ticos y malintencionados en la parte p&uacute;blica. Ciertas palabras y las etiquetas &lt;a>&lt;/a> est&aacute;n prohibidas.
