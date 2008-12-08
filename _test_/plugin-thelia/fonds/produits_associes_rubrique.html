@@ -106,18 +106,21 @@
 </ul>
 <script type="text/javascript">
 	$(document).ready(function(){
+		
+		$('.produits-rubriques li ul').before("<span class='deplier-liste' style='cursor:pointer; color: #F60; font-size: .9em;'>[+]</span>");
+		
+		$('.produits-rubriques li ul').hide();
+		
 		<BOUCLE_associationsrubriquesthelia(RUBRIQUESTHELIA_RUBRIQUES){id_rubrique}>
-			//test
 			$('#rubriquethelia-#ID_RUBRIQUETHELIA').attr('checked', 'checked');
+			$('#rubriquethelia-#ID_RUBRIQUETHELIA').parents('ul').show().prev().html('[-]');
 		</BOUCLE_associationsrubriquesthelia>
 	
 		<BOUCLE_associationsrubriques(PRODUITS_RUBRIQUES){id_rubrique}>
 			$('#produit-#ID_PRODUIT').attr('checked', 'checked');
+			$('#produit-#ID_PRODUIT').parents('ul').show().prev().html('[-]');
 		</BOUCLE_associationsrubriques>
 
-		$('.produits-rubriques li ul').before("<span class='deplier-liste' style='cursor:pointer; color: #F60; font-size: .9em;'>[+]</span>");
-		
-		$('.produits-rubriques li ul').hide();
 		$('.produits-rubriques li span').toggle(function(){
 			$(this).next().show();
 			$(this).html('[-]');
