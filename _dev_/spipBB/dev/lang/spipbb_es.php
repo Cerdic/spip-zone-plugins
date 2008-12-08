@@ -48,8 +48,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb' => 'Activaci&oacute;n de SpipBB',
 	'admin_config_spipbb_info' => 'Pulsa en S&iacute; para activar SpipBB',
 	'admin_config_tables' => 'Configuraci&oacute;n de las tablas de SpipBB',
-	'admin_config_tables_erreur' => '<MODIF>Problema con las tablas de SpipBB: @tables_erreur@ son incorrectas (las tablas @tables_ok@ parecen correctas).
- Consulta la [documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] o el [soporte de spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
+	'admin_config_tables_erreur' => 'Problema con las tablas de SpipBB: @tables_erreur@ son incorrectas (las tablas @tables_ok@ parecen correctas).
+Consulta la [documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] o el [soporte de spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]',
 	'admin_config_tables_ok' => 'Las tablas de SpipBB se han instalado correctamente (@tables_ok@)',
 	'admin_date_ouverture' => 'Fecha de apertura',
 	'admin_debug_log' => 'Fichero de registro @log_name@',
@@ -135,9 +135,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champs_obligatoires' => 'Los campos marcados con un * son obligatorios.',
 	'chercher' => 'Buscar',
 	'choix_mots_annonce' => 'Hacer un anuncio',
+	'choix_mots_creation' => 'Si deseas crear <strong>autom&aacute;ticamente</strong> las palabras-clave dedicadas a SpipBB, pulsa este bot&oacute;n. Estas palabras-clave pueden modificarse o suprimirse posteriormente...',
+	'choix_mots_creation_submit' => 'Auto-configuraci&oacute;n de las palabras-clave',
 	'choix_mots_ferme' => 'Para cerrar un hilo',
 	'choix_mots_postit' => 'Transformar en postit',
 	'choix_mots_selection' => 'El grupo de palabras debe contener tres palabras-clave. Normalmente, el plugin las habr&aacute; creado durante su instalaci&oacute;n. SpipBB utiliza en general las palabras {ferme}, {annonce} y {postit}, pero puedes elegir otras.',
+	'choix_rubrique_creation' => 'Si deseas crear <strong>autom&aacute;ticamente</strong> el sector que contenga los foros de SpipBB y un primer foro vac&iacute;o, pulsa este bot&oacute;n. Este foro y la jerarqu&iacute;a creada pueden modificarse o suprimirse posteriormente...',
+	'choix_rubrique_creation_submit' => 'Auto-configuraci&oacute;n del sector',
 	'choix_rubrique_selection' => 'Seleccionar un sector que servir&aacute; de base para tus foros. Desde ah&iacute;, cada subsecci&oacute;n ser&aacute; un grupo de foros, y cada art&iacute;culo publicado abrir&aacute; un foro.',
 	'choix_squelettes' => 'Puedes elegir otros, &iexcl;pero deben existir los ficheros que reemplacen a groupeforum.html y filforum.html!',
 	'citer' => 'Citar',
@@ -221,6 +225,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_ferme_texte' => 'Este foro est&amp;aacute; desactivado. Ya no puedes contribuir.',
 	'forum_maintenance' => 'Este foro est&aacute; cerrado por mantenimiento',
 	'forum_ouvrir' => 'Abrir este Foro',
+	'forums_categories' => 'Varios',
+	'forums_spipbb' => 'Foros SpipBB',
+	'forums_titre' => 'Mi primer foro creado',
 	'fromphpbb_erreur_db_phpbb_config' => 'No es posible leer la configuraci&oacute;n en la base phpBB',
 	'fromphpbb_migre_categories' => 'Importaci&oacute;n de las categor&iacute;as',
 	'fromphpbb_migre_categories_dans_rub_dpt' => 'Implantaci&oacute;n de los foros en la secci&oacute;n:',
@@ -343,12 +350,12 @@ _ Un postit est&aacute; situado bajo los anuncios, antes de los mensajes ordinar
 	'pagine_sujet_s' => ' asuntos',
 	'par_' => 'por ',
 	'plugin_auteur' => 'El Equipo SpipBB: [ver la lista de colaboradores en Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
-	'plugin_description' => '<MODIF>El plugin SpipBB permite:
+	'plugin_description' => 'El plugin SpipBB permite:
 -* Gestionar de modo centralizado los foros de SPIP (interfaz privada),
--* Utilizar un sector como base de un grupo de foros como los &laquo;Bulletin Board&raquo; parecidos a phpBB. En ese sector, las subsecciones son grupos de foros; los art&iacute;culos son foros, y cada mensaje del foro de un art&iacute;culo lanza un hilo.
+-* Utilizar un sector como base de un grupo de foros como los &laquo;Bulletin Board&raquo; parecidos a phpBB. En ese sector, las subsecciones son grupos de foros; los art&iacute;culos son foros, y cada mensaje del foro de un art&iacute;culo inicia un hilo de discusi&oacute;n.
 
 {{Consulta:}}
--* •[la ayuda y soporte en spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
+-* •[la ayuda y soporte en spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
 -* •[La documentaci&oacute;n en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
 _ {{Plugin spipbb en fase de desarrollo. T&uacute; asumes el riesgo si lo utilizas}}
@@ -399,9 +406,9 @@ nbr_post@ mensaje(s). &iexcl;Borrados con &eacute;l!\\n',
 	'secteur_forum' => 'RA&Iacute;Z',
 	'selection_efface' => 'Borrar la selecci&oacute;n ...',
 	'selection_tri_dpt' => 'Seleccionar el m&eacute;todo de ordenaci&oacute;n:',
-	'sign_admin' => '<MODIF>{{Esta p&aacute;gina es accesible &uacute;nicamente para los responsables del sitio.}}<p>Da acceso a la configuraci&oacute;n del plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; igual que a la gesti&oacute;n de los foros del sitio.</p><p>Versi&oacute;n: @version@ @distant@</p><p>Consulta:
+	'sign_admin' => '{{Esta p&aacute;gina es accesible &uacute;nicamente para los responsables del sitio.}}<p>Da acceso a la configuraci&oacute;n del plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; igual que a la gesti&oacute;n de los foros del sitio.</p><p>Versi&oacute;n: @version@ @distant@</p><p>Consulta:
 _ • [La documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/?article2460]
-_ • [La ayuda y soporte en spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
+_ • [La ayuda y soporte en spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Hay disponible una versi&oacute;n m&aacute;s reciente: @version@',
 	'sign_ok' => 'al d&iacute;a.',
 	'sign_reinit' => '<p>Reinicializaci&oacute;n:
@@ -431,6 +438,8 @@ _ • [de todo el plugin->@plugin@]</p>',
 	'sujet_valide' => 'Asunto por validar',
 	'sujets' => 'Asuntos',
 	'sujets_aucun' => 'De momento no se ha tratado ning&uacute;n asunto en este foro',
+	'support_extra_normal' => 'extra',
+	'support_extra_table' => 'tabla',
 	'supprimer' => 'Suprimir',
 	'sw_admin_can_spam' => 'Los administradores est&aacute;n autorizados',
 	'sw_admin_no_spam' => 'No hay spam',
@@ -452,7 +461,7 @@ _ • [de todo el plugin->@plugin@]</p>',
 	'sw_spam_words_action' => 'Desde esta p&aacute;gina, podr&aacute;s a&ntilde;adir, editar y suprimir palabras asociadas con el spam. El caracter (*) se acepta en la palabra. Por ejemplo: {{*tes*}} capturar&aacute; {detestable}, {{tes*}} capturar&aacute; {tesis}, {{*tes}} capturar&aacute; {deportes}.',
 	'sw_spam_words_mass_add' => 'Copia y pega o edita tus palabras en esta zona. Separa unas palabras de otras mediante una coma, dos puntos o un retorno de l&iacute;nea.',
 	'sw_spam_words_titre' => 'Filtrado de palabras',
-	'sw_spam_words_url_add' => '<MODIF>Editar la URL de un archivo que contenga una lista de palabras formateada como esta. Ejemplo: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
+	'sw_spam_words_url_add' => 'Editar la URL de un archivo que contenga una lista de palabras formateada como esta. Ejemplo: http://spipbb.free.fr/IMG/csv/spamwordlist.csv .',
 	'sw_warning_from_admin' => 'Elegir qu&eacute; admin ser&aacute; autor del mensaje enviado',
 	'sw_warning_pm_message' => 'Texto del mensaje privado',
 	'sw_warning_pm_titre' => 'Asunto del mensaje privado',

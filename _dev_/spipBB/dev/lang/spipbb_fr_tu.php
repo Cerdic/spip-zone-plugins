@@ -48,8 +48,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb' => 'Activation de SpipBB',
 	'admin_config_spipbb_info' => 'Cliquer sur Oui pour activer SpipBB',
 	'admin_config_tables' => 'Configuration des tables de SpipBB',
-	'admin_config_tables_erreur' => '<MODIF>Probl&egrave;me avec les tables de SpipBB : @tables_erreur@ sont incorrectes (les tables @tables_ok@ semblent correctes).
-Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] ou le [support sur spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
+	'admin_config_tables_erreur' => 'Probl&egrave;me avec les tables de SpipBB : @tables_erreur@ sont incorrectes (les tables @tables_ok@ semblent correctes).
+Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] ou le [support sur spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]',
 	'admin_config_tables_ok' => 'Table de SpipBB correctement install&eacute;e',
 	'admin_date_ouverture' => 'Date d\'ouverture',
 	'admin_debug_log' => 'Fichier de log @log_name@',
@@ -135,9 +135,13 @@ Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'champs_obligatoires' => 'Les champs marqu&eacute;s d\'une * sont obligatoires.',
 	'chercher' => 'Chercher',
 	'choix_mots_annonce' => 'Faire une annonce',
+	'choix_mots_creation' => 'Si tu veux cr&eacute;er <strong>automatiquement</strong> les mot-cl&eacute;s d&eacute;di&eacute;s &agrave; SpipBB, appuye sur ce bouton. Ces mot-clefs peuvent &ecirc;tre modifi&eacute;s ou supprim&eacute;s ult&eacute;rieurement...',
+	'choix_mots_creation_submit' => 'Configuration auto des mots-clefs',
 	'choix_mots_ferme' => 'Pour fermer un fil',
 	'choix_mots_postit' => 'Mettre en post-it',
 	'choix_mots_selection' => 'Le groupe de mot doit contenir trois mot-clefs. Normalement, le plugin les a cr&eacute;&eacute; au moment de son installation. SpipBB utilise en g&eacute;n&eacute;ral les mots {ferme}, {annonce} et {postit}, mais tu peux en choisir d\'autres.',
+	'choix_rubrique_creation' => 'Si tu veux cr&eacute;er <strong>automatiquement</strong> le secteur contenant les forums SpipBB et un premier forum vide, appuye sur ce bouton. Ce forum et la hi&eacute;rarchie cr&eacute;&eacute;s peuvent &ecirc;tre modifi&eacute;s ou supprim&eacute;s ult&eacute;rieurement...',
+	'choix_rubrique_creation_submit' => 'Configuration auto du secteur',
 	'choix_rubrique_selection' => 'S&eacute;lectionne un secteur qui sera la base de tes forums. Chaque sous-rubrique de ce secteur sera un groupe de forums, chaque article publi&eacute; ouvrira un forum.',
 	'choix_squelettes' => 'Tu peux en choisir d\'autres, mais les fichiers qui remplacent groupeforum.html et filforum.html doivent exister !',
 	'citer' => 'Citer',
@@ -221,6 +225,9 @@ Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'forum_ferme_texte' => 'Ce forum est ferm&eacute;. Tu ne peux plus y poster.',
 	'forum_maintenance' => 'Ce forum est ferm&eacute; pour maintenance',
 	'forum_ouvrir' => 'Ouvrir ce Forum',
+	'forums_categories' => 'Divers',
+	'forums_spipbb' => 'Forums SpipBB',
+	'forums_titre' => 'Mon premier forum cr&eacute;&eacute;',
 	'fromphpbb_erreur_db_phpbb_config' => 'Impossible de lire la configuration dans la base phpBB',
 	'fromphpbb_migre_categories' => 'Import des cat&eacute;gories',
 	'fromphpbb_migre_categories_dans_rub_dpt' => 'Implantation des forums dans la rubrique&nbsp;:',
@@ -343,15 +350,15 @@ _ Une annonce est situ&eacute;e en t&ecirc;te de forum sur toutes les pages.',
 	'pagine_sujet_s' => ' sujets',
 	'par_' => 'par ',
 	'plugin_auteur' => 'La SpipBB Team : [voir la liste des contributeurs sur Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
-	'plugin_description' => '<MODIF>Le plugin SpipBB permet :
+	'plugin_description' => 'Le plugin SpipBB permet :
 -* De g&eacute;rer de fa&ccedil;on centralis&eacute;e les forums de SPIP (interface priv&eacute;e),
 -* D\'utiliser un secteur comme base d\'un groupe de forums comme les &laquo;Bulletin Board&raquo; tels que phpBB. Dans ce secteur, les sous-rubriques sont des groupes de forums, les articles des forums, chaque message dans le forum d\'un article y d&eacute;marre un thread.
 
 {{Consulte :}}
--* •[l\'aide et support sur spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
+-* •[l\'aide et support sur spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
 -* •[La documentation sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
-_ {{Plugin spipbb en cours de d&eacute;veloppement. Tu l\'utilises &agrave; vos risques et p&eacute;rils}}
+_ {{Plugin spipbb en cours de d&eacute;veloppement. Tu l\'utilises &agrave; tes risques et p&eacute;rils}}
 
 _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribu&eacute; sous licence GPL',
@@ -420,9 +427,9 @@ nbr_post@ message(s). Effac&eacute;s avec lui&nbsp;!\\n',
 	'secteur_forum' => 'RACINE',
 	'selection_efface' => 'Effacer la s&eacute;lection ..',
 	'selection_tri_dpt' => 'S&eacute;lectionner la m&eacute;thode de tri&nbsp;:',
-	'sign_admin' => '<MODIF>{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s &agrave; la configuration du plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; ainsi qu\'&agrave; la gestion des forums du site.</p><p>Version : @version@ @distant@</p><p>Consulte&nbsp;:
+	'sign_admin' => '{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s &agrave; la configuration du plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; ainsi qu\'&agrave; la gestion des forums du site.</p><p>Version : @version@ @distant@</p><p>Consulte&nbsp;:
 _ • [La documentation sur Spip-Contrib->http://www.spip-contrib.net/?article2460]
-_ • [L\'aide et support sur spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
+_ • [L\'aide et support sur spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Version plus r&eacute;cente disponible&nbsp;: @version@',
 	'sign_ok' => '&agrave; jour.',
 	'sign_reinit' => '<p>R&eacute;-initialisation&nbsp;:
@@ -452,6 +459,8 @@ _ • [de tout le plugin->@plugin@]</p>',
 	'sujet_valide' => 'Sujet &agrave; valider',
 	'sujets' => 'Sujets',
 	'sujets_aucun' => 'Pas de sujet dans ce forum pour l\'instant',
+	'support_extra_normal' => 'extra',
+	'support_extra_table' => 'table',
 	'supprimer' => 'Supprimer',
 	'sw_admin_can_spam' => 'Les admins sont autoris&eacute;s',
 	'sw_admin_no_spam' => 'Pas de spam',
@@ -473,7 +482,7 @@ _ • [de tout le plugin->@plugin@]</p>',
 	'sw_spam_words_action' => 'A partir de cette page, tu peux ajouter, &eacute;diter et supprimer des mots associ&eacute;s &agrave; du spam. Le caract&egrave;re (*) est accept&eacute; dans le mot. Par exemple&nbsp;: {{*tes*}} capturera {d&eacute;testable}, {{tes*}} capturera {tester}, {{*tes}} capturera {portes}.',
 	'sw_spam_words_mass_add' => 'Copier-coller ou saisir tes mots dans cette zone. S&eacute;parer chaque mot par une virgule, deux points ou un retour &agrave; la ligne.',
 	'sw_spam_words_titre' => 'Filtrage de mots',
-	'sw_spam_words_url_add' => '<MODIF>Saisir l\'URL d\'un fichier contenant une liste de mots format&eacute;e comme ci-dessus. Exemple&nbsp;: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
+	'sw_spam_words_url_add' => 'Saisir l\'URL d\'un fichier contenant une liste de mots format&eacute;e comme ci-dessus. Exemple&nbsp;: http://spipbb.free.fr/IMG/csv/spamwordlist.csv .',
 	'sw_warning_from_admin' => 'Choisir l\'admin auteur du message envoy&eacute;',
 	'sw_warning_pm_message' => 'Texte du message priv&eacute;',
 	'sw_warning_pm_titre' => 'Sujet du message priv&eacute;',

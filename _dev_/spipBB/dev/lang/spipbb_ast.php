@@ -48,8 +48,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb' => 'Aniciu de SpipBB',
 	'admin_config_spipbb_info' => 'Calcar enriba de S&iacute; pa aniciar SpipBB',
 	'admin_config_tables' => 'Configuraci&oacute;n de les tables de SpipBB',
-	'admin_config_tables_erreur' => '<MODIF>Problema coles tables de SpipBB: @tables_erreur@ son incorreutes (les tables @tables_ok@ paecen correutes).
-Consulta la [documentaci&oacute;n de Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] o los [gabitos de spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
+	'admin_config_tables_erreur' => 'Problema coles tables de SpipBB: @tables_erreur@ son incorreutes (les tables @tables_ok@ paecen correutes).
+Consulta la [documentaci&oacute;n de Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] o el [sofitu de spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]',
 	'admin_config_tables_ok' => 'Les tables de SpipBB instal&aacute;ronse correutamente (@tables_ok@)',
 	'admin_date_ouverture' => 'Fecha d\'apertura',
 	'admin_debug_log' => 'Archivu de rexistru @log_name@',
@@ -135,9 +135,13 @@ Consulta la [documentaci&oacute;n de Spip-Contrib->http://www.spip-contrib.net/S
 	'champs_obligatoires' => 'Los campos marc&aacute;os con un * son obligatorios.',
 	'chercher' => 'Restolar',
 	'choix_mots_annonce' => 'Facer un anunciu',
+	'choix_mots_creation' => 'Si quies crear <strong>autom&aacute;ticamente</strong> les pallabres-clave dedicaes a SpipBB, calca nesti bot&oacute;n. Estes pallabres-clave pueden cambease o desaniciase llu&eacute;u...',
+	'choix_mots_creation_submit' => 'Auto-axuste de les pallabres-clave',
 	'choix_mots_ferme' => 'Pa zarrar un filu',
 	'choix_mots_postit' => 'Facer apegadizu',
 	'choix_mots_selection' => 'El grupu de pallabres debe contener tres pallabres-clave. Normalmente, el plugin cr&eacute;ales nel momentu de instalase. SpipBB utiliza en xeneral les pallabres {ferme}, {annonce} y {postit}, pero puedes escoyer otres.',
+	'choix_rubrique_creation' => 'Si quies crear <strong>autom&aacute;ticamente</strong> el sector que contenga los foros de SpipBB y un primer foru vac&iacute;u, calca nesti bot&oacute;n. Esti foru y la xerarqu&iacute;a que se crea pueden cambease o desaniciase llu&eacute;u...',
+	'choix_rubrique_creation_submit' => 'Auto axuste del sector',
 	'choix_rubrique_selection' => 'Escoyer un sector que ser&aacute; la base de los foros. Dientro d\'el, cada so-estaya ser&aacute; un grupu de foros, y cada art&iacute;culu espubliz&aacute;u abrir&aacute; un foru.',
 	'choix_squelettes' => 'Puedes escoyer otres, pero &iexcl;los archivos que reemplacen groupeforum.html y filforum.html deben existir!',
 	'citer' => 'Citar',
@@ -221,6 +225,9 @@ Consulta la [documentaci&oacute;n de Spip-Contrib->http://www.spip-contrib.net/S
 	'forum_ferme_texte' => 'Esti foru ta pesll&aacute;u. Ya nun se pue escribir.',
 	'forum_maintenance' => 'Esti foru ta pesll&aacute;u por mantenimientu',
 	'forum_ouvrir' => 'Abrir esti Foru',
+	'forums_categories' => 'Varios',
+	'forums_spipbb' => 'Foros SpipBB',
+	'forums_titre' => 'El primer foru que fice',
 	'fromphpbb_erreur_db_phpbb_config' => 'Ye imposible lleer la configuraci&oacute;n na base phpBB',
 	'fromphpbb_migre_categories' => 'Importaci&oacute;n de les categor&iacute;es',
 	'fromphpbb_migre_categories_dans_rub_dpt' => 'Amestamientu de los foros na estaya:',
@@ -343,12 +350,12 @@ _ Un mensaxe apegadizu ta embaxo de los anuncios, enantes de los mensaxes ordina
 	'pagine_sujet_s' => ' asuntos',
 	'par_' => 'por ',
 	'plugin_auteur' => 'L\'Equipu SpipBB: [ver la llista de collaboradores en Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
-	'plugin_description' => '<MODIF>El plugin SpipBB permite:
+	'plugin_description' => 'El plugin SpipBB permite:
 -* Xestionar de mou centraliz&aacute;u los foros de SPIP (interfaz privada),
--*Utilizar una estaya como base d\'un grupu de foros como los &laquo;Bulletin Board&raquo; asemey&aacute;os a phpBB. Nesa estaya, les so-estayes son grupos de foros, los art&iacute;culos son foros, y cada mensaxe nel foru d\'un art&iacute;culu entama un filu.
+-*Utilizar una estaya como base d\'un grupu de foros como los &laquo;Bulletin Board&raquo; asemey&aacute;os a phpBB. Nesa estaya, les so-estayes son grupos de foros, los art&iacute;culos son foros, y cada mensaxe nel foru d\'un art&iacute;culu entama un filu de discutiniu.
 
 {{Consulta:}}
--* •[l\'aida y sofitu en spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
+-* •[l\'aida y sofitu en spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
 -* •[La documentaci&oacute;n en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
 _ {{El plugin spipbb ta en procesu de desendolcu. Util&iacute;ceslu pola to cuenta y riesgu}}
@@ -422,9 +429,9 @@ nbr_post@ mensaxe(s). &iexcl;Desaniciar&aacute;nse con &eacute;l!\\n',
 	'secteur_forum' => 'RAIZ',
 	'selection_efface' => 'Desaniciar la seleici&oacute;n... ',
 	'selection_tri_dpt' => 'Seleicionar la m&eacute;todu d\'ordenaci&oacute;n:',
-	'sign_admin' => '<MODIF>{{Esta p&aacute;xina &uacute;nicamente ye accesible pa los responsables del sitiu.}}<p>Da accesu a la configuraci&oacute;n del plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; igual que a la xesti&oacute;n de los foros del sitiu.</p><p>Versi&oacute;n : @version@ @distant@</p><p>Consulta:
+	'sign_admin' => '{{Esta p&aacute;xina &uacute;nicamente ye accesible pa los responsables del sitiu.}}<p>Da accesu a la configuraci&oacute;n del plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; igual que a la xesti&oacute;n de los foros del sitiu.</p><p>Versi&oacute;n: @version@ @distant@</p><p>Consulta:
 _ • [La documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/?article2460]
-_ • [L\'aida y sofitu en spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
+_ • [L\'aida y sofitu en spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Versi&oacute;n m&aacute;s reciente disponible: @version@',
 	'sign_ok' => 'actualizao.',
 	'sign_reinit' => '<p>Reinicializaci&oacute;n:
@@ -454,6 +461,8 @@ _ • [de tou el plugin->@plugin@]</p>',
 	'sujet_valide' => 'Asuntu por validar',
 	'sujets' => 'Asuntos',
 	'sujets_aucun' => 'Ensin asuntos de momentu nesti foru',
+	'support_extra_normal' => 'estra',
+	'support_extra_table' => 'tabla',
 	'supprimer' => 'Desaniciar',
 	'sw_admin_can_spam' => 'Los almins tan autorizaos',
 	'sw_admin_no_spam' => 'Ensin puxarra',
@@ -475,7 +484,7 @@ _ • [de tou el plugin->@plugin@]</p>',
 	'sw_spam_words_action' => 'Dende esta p&aacute;xina, puedes amestar, iguar y desaniciar pallabress asoci&aacute;es cola puxarra. El carauter (*) almitese na pallabra. Por exemplu: {{*tes*}} capturar&aacute; {detestable}, {{tes*}} capturar&aacute; {testu}, {{*tes}} capturar&aacute; {puertes}.',
 	'sw_spam_words_mass_add' => 'Copia-pega o igua les pallabres nesta zona. Separtar cada pallabra con una coma, dos puntos o un retornu de llinia.',
 	'sw_spam_words_titre' => 'Filtr&aacute;u de pallabres',
-	'sw_spam_words_url_add' => '<MODIF>Amestar l\'URL d\'un ficheru que contenga una llista de pallabres formateada como embaxo. Exemplu: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
+	'sw_spam_words_url_add' => 'Amestar l\'URL d\'un ficheru que contenga una llista de pallabres formateada como embaxo. Exemplu: http://spipbb.free.fr/IMG/csv/spamwordlist.csv .',
 	'sw_warning_from_admin' => 'Escoyer l\'almin autor del mensaxe unvi&aacute;u',
 	'sw_warning_pm_message' => 'Testu del mensaxe priv&aacute;u',
 	'sw_warning_pm_titre' => 'Asuntu del mensaxe priv&aacute;u',
