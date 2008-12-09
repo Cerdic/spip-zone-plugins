@@ -1,0 +1,30 @@
+<plugin>
+	<nom>Porte plume - Une barre d'outil pour bien &eacute;crire</nom>
+	<auteur>
+	Matthieu Marcillaud [magraine.net->http://magraine.net]
+	</auteur>
+	<licence>GNU/GLP</licence>
+	<version>0.5</version>
+	<description>
+	«Porte plume» est une barre d'outil g&eacute;niale pour SPIP qui 
+	utilise la librairie javascript [MarkItUp->http://markitup.jaysalvat.com/home/]
+	
+	Utilise les icones [FamFamFam->http://www.famfamfam.com/]
+	</description>
+	
+	<etat>test</etat>
+	<prefix>porte_plume</prefix>
+  	
+	<options>porte_plume_options.php</options>
+	<fonctions>inc/barre_outils.php</fonctions>
+	
+ 	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>porte_plume_pipelines.php</inclure>
+	</pipeline>
+ 	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
+		<inclure>porte_plume_pipelines.php</inclure>
+	</pipeline>
+</plugin>
