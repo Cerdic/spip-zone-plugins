@@ -27,7 +27,7 @@ function porte_plume_creer_json_markitup(){
 	// 2 prechargement
 	// charge des nouveaux boutons au besoin
 	// exemples : 
-	//		$barre = &$flux['data']['spip'];
+	//		$barre = &$flux['spip'];
 	//  	$barre->ajouterApres('bold',array(params));
 	//  	$barre->ajouterAvant('bold',array(params));		
 	// 
@@ -40,7 +40,7 @@ function porte_plume_creer_json_markitup(){
 	// 3 chargement
 	// 		permet de cacher ou afficher certains boutons au besoin
 	// 		exemples :
-	//		$barre = &$flux['data']['spip'];
+	//		$barre = &$flux['spip'];
 	//  	$barre->afficher('bold');
 	//  	$barre->cacher('bold');
 	//
