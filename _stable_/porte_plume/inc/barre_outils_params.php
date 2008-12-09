@@ -48,7 +48,7 @@ function barre_outils_spip(){
 			array(
 				"id"        => 'italic',
 				"name"      => _T('barre_outils:barre_italic'), 
-				"key"       => "B", 
+				"key"       => "I", 
 				"className" => "outil_italic", 
 				"openWith" => "{", 
 				"closeWith" => "}",
