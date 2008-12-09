@@ -59,6 +59,32 @@ function inc_compat_cfg_dist($quoi = NULL) {
 
 function compat_cfg_defs_dist() {
 	$defs = array(
+		
+		'et' => 
+			'($code, $arg) {
+				return ((($code) AND ($arg)) ?\' \' :\'\');
+			}',
+		
+		'ou' => 
+			'($code, $arg) {
+				return ((($code) OR ($arg)) ?\' \' :\'\');
+			}',
+		
+		'xou' => 
+			'($code, $arg) {
+				return ((($code) XOR ($arg)) ?\' \' :\'\');
+			}',
+		
+		'non' => 
+			'($code) {
+				return (($code) ?\'\' :\' \');
+			}',
+			
+		'oui' => 
+			'($code) {
+				return (($code) ?\' \' :\'\');
+			}',
+		
 		'sql_fetch' => 
 			'(
 				$res, 
