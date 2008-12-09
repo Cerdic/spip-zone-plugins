@@ -378,13 +378,11 @@ function barre_outils_spip(){
 	'functions'         => "
 				// remplce ou cree -* ou -** ou -# ou -##
 				function outil_liste(h, c) {
-					if (s = h.selection) {
-						if (r = s.match(/^-([*#]+) (.*)\$/)) {
-							r[1] = r[1].replace(/[#*]/g, c);
-							s = '-'+r[1]+' '+r[2];
-						} else {
-							s = '-' + c + ' '+s;
-						}
+					if ((s = h.selection) && (r = s.match(/^-([*#]+) (.*)\$/)))	 {
+						r[1] = r[1].replace(/[#*]/g, c);
+						s = '-'+r[1]+' '+r[2];
+					} else {
+						s = '-' + c + ' '+s;
 					}
 					return s;
 				}

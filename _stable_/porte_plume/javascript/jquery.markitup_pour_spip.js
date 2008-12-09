@@ -410,7 +410,7 @@
 				$.extend(hash, { line:1 });
 
 				// insertion forcee en multiligne ou ctrl+click
-				if ((button.forceMultiline === true)
+				if ((button.forceMultiline === true && selection.length)
 				|| (ctrlKey === true && shiftKey === true)) {
 					lines = selection.xSplit(/\r?\n/);
 					for (j = 0, n = lines.length, i = 0; i < n; i++) {
@@ -436,6 +436,7 @@
 					len -= fixIeBug(string.block);
 				} else {
 					string = build(selection);
+					console.log(string);
 					start = caretPosition + string.block.length ;
 					len = 0;
 					start -= fixIeBug(string.block);
