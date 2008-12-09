@@ -436,7 +436,6 @@
 					len -= fixIeBug(string.block);
 				} else {
 					string = build(selection);
-					console.log(string);
 					start = caretPosition + string.block.length ;
 					len = 0;
 					start -= fixIeBug(string.block);
