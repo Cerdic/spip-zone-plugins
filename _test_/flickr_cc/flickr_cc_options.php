@@ -27,13 +27,15 @@ function flickr_ajouter ($id_image, $id_article) {
 		$image = $regs[3];
 	}
 		
-	/* En largeur 1024, ca devrait suffir pour des images...
+	/* 
+		* En largeur 1024, ca devrait suffir pour des images...
+		* Mais si l'on veut recuperer les EXIF et passer l'image en document, mieux vaut l'original...
+	*/
 	if (ereg("label=\"Original\" width=\"([0-9]+)\" height=\"([0-9]+)\" source=\"([^\"]*)\"", $contenu, $regs)) {
 		$largeur = $regs[1];
 		$hauteur = $regs[2];
 		$image = $regs[3];
 	}
-	*/
 		
 	echo $image;
 	echo " - $largeur x $hauteur";
