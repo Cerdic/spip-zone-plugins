@@ -1,0 +1,12 @@
+<plugin>
+	<nom>Interface adoucie</nom>
+	<auteur>	<!-- Auteur du plugin -->
+		ARNO*
+	</auteur>
+	<licence>GPL 3 - &#169; 2006-2008</licence>
+	<version>1.0</version>
+	<etat>stable</etat>
+	<description>Une variante de l'interface, subtilement moins contrastr&eacute;e.</description>
+ 	<necessite id='SPIP' version='[2.0.0 dev;]' />
+	<prefix>interface_adoucie</prefix>
+</plugin>
