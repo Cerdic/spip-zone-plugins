@@ -131,10 +131,10 @@ class Barre_outils{
 	 * @param string $lieu : lieu d'affectation des parametres (dedans, avant, apres)
 	 * @param false/array $tableau : tableau ou chercher les elements (sert pour la recursion)
 	 */
-	function affecter($identifiant, $params=array(), $lieu='dedans', $tableau=false){
+	function affecter($identifiant, $params=array(), $lieu='dedans', &$tableau){
 		static $cle_de_recherche = 'id'; // ou className ?
 		
-		if ($tableau === false)
+		if ($tableau === null)
 			$tableau = &$this->markupSet;
 			
 		if (!in_array($lieu, array('dedans','avant','apres'))) 
@@ -172,7 +172,7 @@ class Barre_outils{
 		// recursivons sinon !
 		foreach ($tableau as $i=>$v){
 			foreach ($v as $m=>$n) {
-				if (is_array($n) AND ($r = $this->affecter($identifiant, $params, $lieu, &$tableau[$i][$m]))) 
+				if (is_array($n) AND ($r = $this->affecter($identifiant, $params, $lieu, $tableau[$i][$m]))) 
 					return $r;
 			}
 		}
@@ -188,11 +188,11 @@ class Barre_outils{
 	 *                     si vide, tous les identifiants seront modifies
 	 * @param false/array $tableau : tableau ou chercher les elements (sert pour la recursion)
 	 */
-	function affecter_a_tous($params=array(), $ids=array(), $tableau=false){
+	function affecter_a_tous($params=array(), $ids=array(), &$tableau){
 		if (!$params)
 			return false;
 		
-		if ($tableau === false)
+		if ($tableau === null)
 			$tableau = &$this->markupSet;
 
 		$params = $this->verif_params('divers', $params);
@@ -204,7 +204,7 @@ class Barre_outils{
 			}
 			// recursion si sous-menu
 			if (isset($tableau[$i]['dropMenu'])) {
-				$this->affecter_a_tous($params, $ids, &$tableau[$i]['dropMenu']);
+				$this->affecter_a_tous($params, $ids, $tableau[$i]['dropMenu']);
 			}
 		}
 		return true;
@@ -315,8 +315,8 @@ class Barre_outils{
 	 * 
 	 * @param false/array $tableau : tableau a analyser (sert pour la recursion)
 	 */
-	function enlever_elements_non_affiches($tableau = false){
-		if ($tableau === false)
+	function enlever_elements_non_affiches(&$tableau){
+		if ($tableau === null)
 			$tableau = &$this->markupSet;
 		
 		foreach ($tableau as $p=>$v){
@@ -328,7 +328,7 @@ class Barre_outils{
 			// sinon, on lance une recursion sur les sous-menus
 			else {
 				if (isset($v['dropMenu']) and is_array($v['dropMenu'])) {
-					$this->enlever_elements_non_affiches(&$tableau[$p]['dropMenu']);
+					$this->enlever_elements_non_affiches($tableau[$p]['dropMenu']);
 					// si le sous-menu est vide, on enleve l'icone
 					if (!$tableau[$p]['dropMenu']) {
 						unset($tableau[$p]);
