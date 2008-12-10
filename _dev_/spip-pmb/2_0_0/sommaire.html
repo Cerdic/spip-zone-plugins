@@ -53,7 +53,7 @@
 			<ul>
 			<BOUCLE_syndic_pmb(SYNDIC_ARTICLES_PMB){pmb_photo_src!=""} {par hasard} {0,2}>
 				[(#SET{notice, [(#PMB_ID_NOTICE|pmb_notice_extraire{#CONFIG{spip_pmb/url}})]})]
-								<li class="hentry[ (#LOGO_SITE_SPIP||inserer_attribut{src,[(#PMB_PHOTO_SRC)]}|inserer_attribut{width,}|inserer_attribut{height,}|image_reduire{90,130}|extraire_attribut{src}|match{doc_numphp}|?{'','avec-logo'})][ (#GET{nb_revues}|=={1}|?{'premier',''})]">
+								<li class="hentry[ (#COMPTEUR_BOUCLE|=={1}|?{'premier',''})]">
 							
 								<div class="logo-encart"><a href="#URL_PAGE{notice_display,id=#PMB_ID_NOTICE&amp;seule=1}">[(#REM|?{'','<img />'}|inserer_attribut{class,spip_logos}|inserer_attribut{src,[(#GET{notice}|pmb_notice_champ{'logo_src'}|copie_locale)]}image_reduire{130,0})]</a></div>
 								<h3 class="entry-title"><a href="#URL_PAGE{notice_display,id=#PMB_ID_NOTICE&amp;seule=1}"[ title="(#NOM_SITE|texte_backend)"]>[(#TITRE|couper{30,'...'})]</a></h3> 

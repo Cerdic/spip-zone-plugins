@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pmb_login' => 'Identifiant',
 'pmb_motdepasse' => 'Mot de passe',
 'mon_compte' => 'Mon compte',
-'message_compte_lecteur' => 'Prochainement une int\351gration compl\350te\nde votre compte lecteur sur ce site. \n\nEn attendant, vous allez \352tre redirig\351s vers l\'interface de pmb.'
+'message_compte_lecteur' => 'Prochainement, vous disposerez d\'une int\351gration compl\350te\nde votre compte lecteur sur ce site. \n\nEn attendant, vous allez \352tre redirig\351s vers l\'interface de pmb.',
+'message_recherche_avancee' => 'Prochainement, vous disposerez d\'une int\351gration compl\350te\nde la recherche avanc\351e sur ce site. \n\nEn attendant, vous allez \352tre redirig\351s vers l\'interface de pmb.'
 );
 ?>

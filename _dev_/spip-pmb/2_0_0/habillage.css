@@ -251,7 +251,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .articles ul { border: none; margin-bottom: 1em; }
 .articles ul li { clear: both; padding: 1.2em 0; padding-left: 0; border: none; background-image: url(bordure-gris.gif); background-repeat: repeat-x; background-position: top left;}
 .articles ul li h3 { margin: 0.30em 0; text-transform: uppercase; font-family: Arial, sans-serif; font-size: 1em;}
-.articles .logo-encart { float: left; clear: left; height: 11em; }
+.articles .logo-encart { float: left; clear: left; }
 .articles .spip_logos { margin: 0; margin-bottom: .5em; margin-right: 1em; margin-left: 1em; }
 .articles .premier .spip_logos { margin-left: 0; }
 .articles ul li .enclosures { float: right; text-align: right; max-width: 60%; margin: 0; }
@@ -288,6 +288,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .page_sommaire .articles ul li.avec-photo { width: 45%; }
 .page_sommaire .articles ul li div, .page_sommaire .articles ul li a.lire-la-suite, .page_actualites .articles ul li a.lire-la-suite, .page_nouveautes .articles ul li a.lire-la-suite, .page_sommaire .articles ul li small, .page_sommaire .articles ul li h3 { display: block;  margin-left: 1em; margin-right: 1em; }
 .page_sommaire .articles ul li.premier div, .page_sommaire .articles ul li.premier a.lire-la-suite, .page_sommaire .articles ul li.premier small, .page_sommaire .articles ul li.premier h3, .page_sommaire .articles ul li.avec-photo small { display: block; margin-left: 0; }
+.page_sommaire .articles ul li .logo_encart { margin-bottom: 1em; }
 
 .page_sommaire .nouveautes ul li, .page_sommaire .nouveautes ul li.premier, .page_sommaire .nouveautes ul li.avec-photo  { width: 48%; height: auto;}
 

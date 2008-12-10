@@ -18,8 +18,8 @@ function pmb_transformer_nav_bar($nav_bar) {
 }
 
 
-function pmb_charger_page ($url_base, $file) {
-	$resultat_recherche_locale = copie_locale($url_base.$file,'force');
+function pmb_charger_page ($url_base, $file, $mode='auto') {
+	$resultat_recherche_locale = copie_locale($url_base.$file,$mode);
 	if($resultat_recherche_locale != false) {
 		$resultat_recherche_html = unicode2charset(charset2unicode(file_get_contents($resultat_recherche_locale), 'iso-8859-1'),'utf-8');
 		
@@ -37,10 +37,10 @@ function pmb_charger_page ($url_base, $file) {
 
 }
 
-function pmb_accueil_extraire($url_base) {
+function pmb_accueil_extraire($url_base, $mode='auto') {
 	$tableau_resultat = Array();
 	
-	if ($htmldom = pmb_charger_page($url_base, "index.php")) {
+	if ($htmldom = pmb_charger_page($url_base, "index.php",$mode)) {
 			$resultats_recherche = $htmldom->find('#location-container td');
 			$i=0;
 			foreach($resultats_recherche as $res) {
@@ -53,10 +53,10 @@ function pmb_accueil_extraire($url_base) {
 
 }
 
-function pmb_section_extraire($id_section, $id, $url_base, $pmb_page=1) {
+function pmb_section_extraire($id_section, $id, $url_base, $pmb_page=1, $mode='auto') {
 	$tableau_resultat = Array();
 	
-	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=section_see&page=".$pmb_page."&location=".$id_section."&id=".$id)) {
+	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=section_see&page=".$pmb_page."&location=".$id_section."&id=".$id,$mode)) {
 			$tableau_resultat[0] = Array();
 			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
 			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
@@ -74,10 +74,10 @@ function pmb_section_extraire($id_section, $id, $url_base, $pmb_page=1) {
 
 }
 
-function pmb_serie_extraire($id_serie, $url_base, $pmb_page=1) {
+function pmb_serie_extraire($id_serie, $url_base, $pmb_page=1, $mode='auto') {
 	$tableau_resultat = Array();
 	
-	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=serie_see&page=".$pmb_page."&id=".$id_serie)) {
+	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=serie_see&page=".$pmb_page."&id=".$id_serie,$mode)) {
 			$tableau_resultat[0] = Array();
 			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
 			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
@@ -96,10 +96,10 @@ function pmb_serie_extraire($id_serie, $url_base, $pmb_page=1) {
 
 }
 
-function pmb_collection_extraire($id_collection, $url_base, $pmb_page=1) {
+function pmb_collection_extraire($id_collection, $url_base, $pmb_page=1, $mode='auto') {
 	$tableau_resultat = Array();
 	
-	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=coll_see&page=".$pmb_page."&id=".$id_collection)) {
+	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=coll_see&page=".$pmb_page."&id=".$id_collection,$mode)) {
 			$tableau_resultat[0] = Array();
 			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
 			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
@@ -119,10 +119,10 @@ function pmb_collection_extraire($id_collection, $url_base, $pmb_page=1) {
 
 }
 
-function pmb_editeur_extraire($id_editeur, $url_base, $pmb_page=1) {
+function pmb_editeur_extraire($id_editeur, $url_base, $pmb_page=1, $mode='auto') {
 	$tableau_resultat = Array();
 	
-	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=publisher_see&page=".$pmb_page."&id=".$id_editeur)) {
+	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=publisher_see&page=".$pmb_page."&id=".$id_editeur,$mode)) {
 			$tableau_resultat[0] = Array();
 			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
 			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
@@ -147,10 +147,10 @@ function pmb_editeur_extraire($id_editeur, $url_base, $pmb_page=1) {
 
 }
 
-function pmb_auteur_extraire($id_auteur, $url_base, $pmb_page=1) {
+function pmb_auteur_extraire($id_auteur, $url_base, $pmb_page=1, $mode='auto') {
 	$tableau_resultat = Array();
 	
-	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=author_see&page=".$pmb_page."&id=".$id_auteur)) {
+	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=author_see&page=".$pmb_page."&id=".$id_auteur,$mode)) {
 			$tableau_resultat[0] = Array();
 			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
 			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
@@ -169,7 +169,7 @@ function pmb_auteur_extraire($id_auteur, $url_base, $pmb_page=1) {
 
 }
 
-function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS='', $look_ALL='', $look_AUTHOR='', $look_PUBLISHER='', $look_COLLECTION='', $look_SUBCOLLECTION='', $look_CATEGORY='', $look_INDEXINT='', $look_KEYWORDS='', $look_TITLE='', $look_ABSTRACT='', $surligne='', $typdoc='', $ok='') {
+function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS='', $look_ALL='', $look_AUTHOR='', $look_PUBLISHER='', $look_COLLECTION='', $look_SUBCOLLECTION='', $look_CATEGORY='', $look_INDEXINT='', $look_KEYWORDS='', $look_TITLE='', $look_ABSTRACT='', $surligne='', $typdoc='', $ok='',$mode='auto') {
 	$tableau_resultat = Array();
 	$url_page = "index.php?lvl=search_result";
 	if ($surligne) $url_page.="&surligne=".$surligne;
@@ -187,7 +187,7 @@ function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS='', $lo
 	if ($recherche) $url_page.="&user_query=".$recherche;
 
 
-	if ($htmldom = pmb_charger_page($url_base, $url_page)) {
+	if ($htmldom = pmb_charger_page($url_base, $url_page,$mode)) {
 			$tableau_resultat[0] = Array();
 			$tableau_resultatt[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
 			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
@@ -237,9 +237,9 @@ function pmb_parser_notice ($localdom, &$tresultat) {
 }
 
 // retourne un tableau associatif contenant tous les champs d'une notice 
-function pmb_notice_extraire ($id_notice, $url_base) {
+function pmb_notice_extraire ($id_notice, $url_base, $mode='auto') {
 	$tableau_resultat = Array();
-	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=notice_display&seule=1&id=".$id_notice)) {
+	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=notice_display&seule=1&id=".$id_notice, $mode)) {
 		 pmb_parser_notice($htmldom->find('.child',0), $tableau_resultat);	
 	}
 	return $tableau_resultat;
