@@ -16,36 +16,32 @@ function appliquer_selecteur_cherche_mot(input, url_source) {
 	// chercher l'input de saisie
 	var input = jQuery(input);
 
-	// ne pas reappliquer si on vient seulement de charger les suggestions
-	if (!input || input.autoCFG) return;
+	// ne pas appliquer pour rien
+	if (!input) return;
 
 	// attacher l'autocompleter
 	jQuery(input)
-		.Autocomplete({
-			'source': url_source,
-			'delay': 200,
-			'autofill': false,
-			'helperClass': "autocompleter",
-			'selectClass': "selectAutocompleter",
-			'minchars': 2,
-			'mustMatch': true,
-			'inputWidth': true,
-			'cacheLength': 20,
-			'multiple' : true,
-			'multipleSeparator' : " ",
-			'fx' : {type: "fade", duration: 400},
-			'onShow' :
-				function(suggestionBox, suggestionIframe) {
-					
+		.autocomplete(
+			url_source,
+			{
+				'delay': 200,
+				'autofill': false,
+				'helperClass': 'autocompleter',
+				'selectClass': 'selectAutocompleter',
+				'minChars': 1,
+				'matchCase': true,
+				'inputWidth': true,
+				'cacheLength': 20,
+				'multiple' : true,
+				'multipleSeparator' : " ",
+				'formatResult': function(row){
+					return jointags(row);
 				},
-			'onSelect':
-				function(li) {
-					if (li.id > 0) {
-						jQuery(input)
-							.end();
-					}
-					input.keydown();
-				}
+				'fx' : {type: "fade", duration: 400}
+			}
+		)
+		.result(function(event, row, formatted){
+			input.keyup();
 		});
 	jQuery('.autocompleter, .selectAutocompleter').css('opacity',0.7);
 	

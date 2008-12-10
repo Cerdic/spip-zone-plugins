@@ -1,20 +1,13 @@
-#CACHE{0}
-
 [(#REM) S'il y a proposition du login, il y a donc erreur d'autorisation et on affiche erreur et login]
 [(#ENV*{proposer_login}|?{' '})
-<div class="formulaire_spip formulaire_etiquettes"  id="form-etiquettes-#ENV{groupe}-#ENV{type_objet}-#ENV{id_objet}">
-	<form action="#ENV{self}#form-etiquettes-#ENV{groupe}-#ENV{type_objet}-#ENV{id_objet}" method="post">
-		<fieldset>
-			<legend>[(#ENV*{remplacer}|?{<:etiquettes:modifier_etiquettes:>,<:etiquettes:ajouter_etiquettes:>})]</legend>
-			[<p class="reponse_formulaire">
-				(#ENV*{message_erreur})
-				[(#REM) Si la personne est déjà connectée mais avec un compte non-autorisé, on propose la déconnexion]
-				[(#SESSION{id_auteur}|?{' ',''})
-					<br /><a href="#URL_LOGOUT"><:etiquettes:se_deconnecter:></a>
-				]
-			</p>]
-		</fieldset>
-	</form>
+<div class="formulaire_spip formulaire_etiquettes"  id="form_etiquettes_#ENV{identifiant}">
+	[<p class="reponse_formulaire reponse_formulaire_erreur">
+		(#ENV*{message_erreur})
+		[(#REM) Si la personne est déjà connectée mais avec un compte non-autorisé, on propose la déconnexion]
+		[(#SESSION{id_auteur}|?{' ',''})
+			<br /><a href="#URL_LOGOUT"><:etiquettes:se_deconnecter:></a>
+		]
+	</p>]
 	#LOGIN_PUBLIC
 </div>
 ]
@@ -22,86 +15,88 @@
 [(#REM) S'il n'y a pas d'erreur d'autorisation on affiche le formulaire ]
 [(#ENV*{erreur_autorisation}|?{'',' '})
 
-[(#REM) Si on ne veut que le champ ]
+[(#REM) Si on ne veut pas que le champ ]
 [(#ENV*{uniquement_champ}|?{'', ' '})
-<div class="formulaire_spip formulaire_etiquettes"  id="form-etiquettes-#ENV{groupe}-#ENV{type_objet}-#ENV{id_objet}">
+<div class="formulaire_spip formulaire_etiquettes"  id="form_etiquettes_#ENV{identifiant}">
 	
-	<form action="#ENV{self}#form-etiquettes-#ENV{groupe}-#ENV{type_objet}-#ENV{id_objet}" method="post">
+	[<p class="reponse_formulaire reponse_formulaire_erreur">
+		(#ENV*{message_erreur})
+	</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">
+		(#ENV*{message_ok})
+	</p>]
+	
+	<form action="#ENV{action}" method="post"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
 		<fieldset>
 			
 			<legend>[(#ENV*{remplacer}|?{<:etiquettes:modifier_etiquettes:>,<:etiquettes:ajouter_etiquettes:>})]</legend>
 			
-			[<p class="reponse_formulaire">
-				(#ENV*{message_erreur})
-			</p>]
-			[<p class="reponse_formulaire">
-				(#ENV*{message_ok})
-			</p>]
-			
 ]
 			
 			[(#REM) S'il y a la liste on masque le input ]
-			<p[ (#ENV{aide_liste}|?{style="display:none;"})]>
-				<input type="text" class="forml"
-					id="etiquettes-#ENV{groupe}[-(#ENV{type_objet})][-(#ENV{id_objet})]"
-					name="[(#ENV{nom_champ}|sinon{etiquettes-[(#ENV{groupe})][-(#ENV{type_objet})][-(#ENV{id_objet})]})]"
+			<ul class="etiquettes"[ (#ENV{aide_liste}|?{style="display:none;"})]>
+			<li>
+				<input type="text" class="text"
+					id="etiquettes_#ENV{identifiant}"
+					name="[(#ENV{name}|sinon{etiquettes_#ENV{identifiant}})]"
 					value="#ENV*{etiquettes}"
 				/>
-				<label for="etiquettes-#ENV{groupe}[-(#ENV{type_objet})][-(#ENV{id_objet})]">
+				<label for="etiquettes_#ENV{identifiant}">
 					<:etiquettes:explication:>
 				</label>
-			</p>
+			</li>
+			</ul>
 			
 			[(#REM) Si on est dans un crayon on ajoute la bonne classe ]
 			<script type="text/javascript">
 			<!--
-			function crayon_etiquettes_#ENV{groupe}[_(#ENV{type_objet})][_(#ENV{id_objet})](){
-				var input = $('#etiquettes-#ENV{groupe}[-(#ENV{type_objet})][-(#ENV{id_objet})]');
+			var crayon_etiquettes_#ENV{identifiant} = function(){
+				var input = $('#etiquettes_#ENV{identifiant}');
 				var crayon = input.parents('.crayon-html');
 				if (crayon.length > 0)
 					input
 						.addClass("crayon-active");
 			}
 			$(function(){
-				setTimeout("crayon_etiquettes_#ENV{groupe}[_(#ENV{type_objet})][_(#ENV{id_objet})]()", 100);
+				setTimeout(crayon_etiquettes_#ENV{identifiant}, 100);
 			});
 			// -->
 			</script>
 			
-			[(#ENV{aide_ajax}|?{' '})
+			[(#ENV{aide_autocompletion}|?{' '})
 				<script  type="text/javascript">
 				<!--
-				var appliquer_selecteur_#ENV{groupe}[_(#ENV{type_objet})][_(#ENV{id_objet})] = function(){
+				var appliquer_selecteur_#ENV{identifiant} = function(){
 					appliquer_selecteur_cherche_mot(
-						'#etiquettes-#ENV{groupe}[-(#ENV{type_objet})][-(#ENV{id_objet})]',
-						'[(#URL_PAGE{etiquettes_selecteur}|parametre_url{groupe,#ENV{groupe},&})]'
+						'#etiquettes_#ENV{identifiant}',
+						'[(#URL_PAGE{etiquettes_selecteur}|parametre_url{groupe,#ENV{groupe},"&"})]'
 					);
 				}
-				jQuery(document).ready(appliquer_selecteur_#ENV{groupe}[_(#ENV{type_objet})][_(#ENV{id_objet})]);
-				onAjaxLoad(function(){setTimeout(appliquer_selecteur_#ENV{groupe}[_(#ENV{type_objet})][_(#ENV{id_objet})], 200);});
+				jQuery(document).ready(appliquer_selecteur_#ENV{identifiant});
 				// -->
 				</script>
 			]
 			
 			[(#ENV{aide_nuage}|?{' '})
-				<INCLURE{fond=fonds/etiquettes_aide_nuage}{type=#ENV{groupe}}{type_objet}{id_objet}>
+				<INCLURE{fond=fonds/etiquettes_aide_nuage}{type=#ENV{groupe}}{type_objet}{id_objet}{identifiant}>
 			]
 			
 			[(#ENV{aide_liste}|?{' '})
-				<INCLURE{fond=fonds/etiquettes_aide_liste}{type=#ENV{groupe}}{type_objet}{id_objet}>
+				<INCLURE{fond=fonds/etiquettes_aide_liste}{type=#ENV{groupe}}{type_objet}{id_objet}{identifiant}>
 			]
 			
-[(#REM) Si on ne veut que le champ ]
+[(#REM) Si on ne veut pas que le champ ]
 [(#ENV*{uniquement_champ}|?{'', ' '})			
-			<p class="spip_bouton">
-				<input type="submit"
-					name="valider_etiquettes-#ENV{groupe}-#ENV{type_objet}-#ENV{id_objet}"
+			<p class="boutons">
+				<input type="submit" class="submit"
+					name="valider_etiquettes_#ENV{identifiant}"
 					value="<:bouton_valider:>"
 				/>
 			</p>
 		
 		</fieldset>
-	</form>
+	</div></form>
 	
 </div>
 ]

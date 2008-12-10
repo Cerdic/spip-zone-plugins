@@ -7,9 +7,15 @@
 #  Documentation : http://www.spip-contrib.net/Plugin-Etiquettes  #
 #-----------------------------------------------------------------#
 
-if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) @define('_SPIP19300', 1);
-if (version_compare($GLOBALS['spip_version_code'],'1.9200','>=')) @define('_SPIP19200', 1);
-else @define('_SPIP19100', 1);
+function etiquettes_produire_id($groupe, $type_objet, $id_objet){
+
+	$elements = compact("groupe", "type_objet", "id_objet");
+	$operations = create_function('$e', 'return str_replace(" ", "_", preg_replace(",([^[:cntrl:][:alnum:]_]|[[:space:]])+,u", " ", translitteration(corriger_caracteres(strtolower(supprimer_tags(supprimer_numero($e)))))));');
+	
+	$elements = array_map($operations, $elements);
+	return join('_', $elements);
+
+}
 
 function valeur_champ_tags($table, $id, $champ) {
 	

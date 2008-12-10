@@ -7,8 +7,6 @@
 #  Documentation : http://www.spip-contrib.net/Plugin-Etiquettes                                       #
 #                                                                                                      #
 #  Définition de la balise #FORMULAIRE_ETIQUETTES                                                      #
-#  Rappel d'utilisation :                                                                              #
-#  #FORMULAIRE_ETIQUETTES{groupe_de_mots?, remplacer?, type-id?, forcer_aide?, proposer_login?} #
 #------------------------------------------------------------------------------------------------------#
 
 // Sécurité
@@ -29,63 +27,31 @@ function balise_FORMULAIRE_ETIQUETTES($p) {
 
 function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 	
+    include_spip('base/connect_sql');
     global $tables_jointures;
+    
+	// Liste des paramètres autorisés
+	$params_ok = array('groupe', 'name', 'aide', 'proposer_login', 'remplacer', 'objet', 'uniquement_champ');
 	
-	// initialisation du groupe de mots-clés
-		$groupe = $args[2] ? $args[2] : "tags";
+	// On enlève de la liste des arguments ce qui a été récupéré
+	$type_objet = array_shift($args);
+	$id_objet = array_shift($args);
 	
-		// On récupère l'id du groupe de mots
-		$reponse = sql_fetsel(
-			'id_groupe',
-			'spip_groupes_mots',
-			'titre='.sql_quote($groupe)
-		);
-	
-		// Si c'est un bon numéro on le garde
-		if (intval($reponse['id_groupe']) > 0)
-			$id_groupe = intval($reponse['id_groupe']);
-		// Sinon il faut créer le groupe
-		else
-			$id_groupe = sql_insertq(
-				'spip_groupes_mots',
-				array(
-					'titre' => $groupe, 
-					'minirezo' => 'oui',
-				)
-			);
-	
-	// initialisation du mode d'ajout des mots-clés
-		// si on met rien ou n'importe quoi ça donne true
-		// donc en mode "remplacer"
-		$remplacer = !(strtolower($args[3]) == "false");
-	
-	// initialisation de la proposition de login en cas de mauvaise autorisation
-		// si on met rien ou n'importe quoi, ça donne false
-		// donc renvoie du vide si pas autorisé
-		$proposer_login = (strtolower($args[6]) == "true");
-	
-	// initialisation du type d'aide
-		$aide = strtolower($args[5]);
-		if (!strlen($aide) OR !in_array($aide, array("nuage", "ajax", "liste", "aucun", "aucune", "rien"))){
-			$aide_nuage = true;
-			$aide_ajax = true;
-			$aide_liste = false;
+	// On considère que tout le reste doit être de la forme : param=valeur
+	$variables = array();
+	foreach ($args as $couple){
+		if (($pos = strpos($couple, "=")) !== FALSE and in_array(($param = substr($couple, 0, $pos)), $params_ok)){
+			$valeur = substr($couple, $pos+1);
+			$variables["$param"] = $valeur;
 		}
-		else{
-			$aide_nuage = ($aide == "nuage");
-			$aide_ajax = ($aide == "ajax");
-			$aide_liste = ($aide == "liste");
-		}
-		// on teste ensuite si les plugins sont bien présents
-		$aide_nuage &= defined('_DIR_PLUGIN_NUAGE');
-		$aide_ajax &= defined('_DIR_PLUGIN_SELECTEURGENERIQUE');
+	}
+	extract($variables);
 	
 	// initialisation de l'objet à lier
-		if ($args[4]){
+		if (isset($objet)){
 			// ici on a mis explicitement un objet
-			$objet = preg_replace("/^(.*)-([0-9]+)$/","$1@$2",$args[4]);
 			// si c'est mal formé on s'arrête
-			if ($objet == $args[4])
+			if (preg_match("/^(.*)-([0-9]+)$/", $objet, $captures) == 0){
 				return erreur_squelette(
 					_T('etiquettes:zbug_objet_mal_forme',
 						array (
@@ -93,15 +59,17 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 							'objet' => $objet
 						)
 					), '');
-			list($type_objet, $id_objet) = explode('@', $objet);
+			}
+			else{
+				$type_objet = $captures[1];
+				$id_objet = $captures[2];
+			}
 			
 			// on précise
 			$id_objet = intval($id_objet);
 			$type_objet = strtolower($type_objet);
-			include_spip('base/connect_sql');
 			$type_objet = preg_replace(',^spip_|s$,', '', $type_objet);
-			$type_objet = table_objet_sql($type_objet);
-			$type_objet = preg_replace(',^spip_,', '', $type_objet);
+			$type_objet = table_objet($type_objet);
 			$cle_objet = id_table_objet($type_objet);
 			
 			// il faut vérifier s'il existe bien cet objet
@@ -121,9 +89,6 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 					), '');
 		}else{
 			// sinon on prend du contexte
-			include_spip('base/connect_sql');
-			$type_objet = $args[0];
-			$id_objet = intval($args[1]);
 			$cle_objet = id_table_objet($type_objet);
 			
 			// mais on vérifie si la balise est effectivement dans un contexte
@@ -145,123 +110,71 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 						'type' => $type_objet,
 					)
 				), '');
-    
-    return $args = array($groupe, $id_groupe, $aide_nuage, $aide_ajax, $aide_liste, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login);
 	
-}
-
-function balise_FORMULAIRE_ETIQUETTES_dyn($groupe, $id_groupe, $aide_nuage, $aide_ajax, $aide_liste, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login) {
+	// initialisation du groupe de mots-clés
+		if (!isset($groupe))
+			$groupe = 'tags';
 	
-	global $tables_jointures;
+		// On récupère l'id du groupe de mots
+		$reponse = sql_fetsel(
+			'id_groupe',
+			'spip_groupes_mots',
+			'titre='.sql_quote($groupe)
+		);
 	
-	include_spip('inc/autoriser');
-	include_spip('inc/filtres');
-	
-	// Les paramètres ont tous déjà été testés
-	// Maintenant on teste si la personne a le droit d'ajouter des mots-clés au groupe choisi
-	// ET si elle a le droit de modifier l'objet choisi
-	// On ne va pas plus loin si pas d'autorisation
-	if($aut1 = !autoriser('modifier', 'groupemots', $id_groupe, $GLOBALS['auteur_session'])
-		OR $aut2 = !autoriser('modifier', preg_replace(',s$,','',$type_objet), $id_objet, $GLOBALS['auteur_session'])
-	){
-		$erreur_autorisation = true;
-		$proposer_login &= true;
-		$message_erreur = _T('etiquettes:pas_le_droit');
-	}
-	else{
-		
-		$erreur_autorisation = false;
-		$proposer_login &= false;
-		
-		// si on vient du formulaire validé on le traite
-		if (_request("valider_etiquettes-$groupe-$type_objet-$id_objet")){
-			
-			// On récupère les tags
-			$etiquettes = trim(_request("etiquettes-$groupe-$type_objet-$id_objet"));
-			// On utilise la tag-machine avec les millions de paramètres
-			include_spip('inc/tag-machine');
-			ajouter_liste_mots($etiquettes,$id_objet,$groupe,$type_objet,$cle_objet,$remplacer);
-			
-			// Si on a modifié, on renvoie la liste tel quel, ça évite une requête pour rien
-			if ($remplacer)
-				$etiquettes = entites_html($etiquettes);
-			// Sinon c'est un formulaire d'ajout donc il apparaît toujours vide
-			else $etiquettes = "";
-			
-			// On dit qu'il faut recalculer tout vu qu'on a changé
-			include_spip ("inc/invalideur");
-			suivre_invalideur("1");
-			
-			$test = self('&');
-			spip_log("$test","bb");
-			
-			// Relance la page
-			include_spip('inc/headers');
-			redirige_par_entete(
-				self('&')
+		// Si c'est un bon numéro on le garde
+		if (intval($reponse['id_groupe']) > 0)
+			$id_groupe = intval($reponse['id_groupe']);
+		// Sinon il faut créer le groupe
+		else
+			$id_groupe = sql_insertq(
+				'spip_groupes_mots',
+				array(
+					'titre' => $groupe, 
+					'minirezo' => 'oui',
+					'unseul' => 'non',
+					'obligatoire' => 'non',
+					'table_liees' => 'articles'
+				)
 			);
-			
+	
+	// initialisation du mode d'ajout des mots-clés
+		// si on met rien ou n'importe quoi ça donne true
+		// donc en mode "remplacer"
+		$remplacer = !(strtolower($remplacer) == "false");
+	
+	// initialisation de la proposition de login en cas de mauvaise autorisation
+		// si on met rien ou n'importe quoi, ça donne false
+		// donc renvoie du vide si pas autorisé
+		$proposer_login = (strtolower($proposer_login) == "true");
+	
+	// initialisation du type d'aide
+		$aide = strtolower($aide);
+		if (!strlen($aide) OR !in_array($aide, array("nuage", "autocompletion", "liste", "aucun", "aucune", "rien"))){
+			$aide_nuage = true;
+			$aide_autocompletion = true;
+			$aide_liste = false;
 		}
 		else{
-			
-			// Pour l'ajout c'est vide
-			$etiquettes = "";
-			
-			// Mais si on modifie, le champ est rempli avec les tags liés à l'objet
-			if ($remplacer){
-				
-				$reponse = sql_select(
-					'mots.titre',
-					array('mots' => 'spip_mots', 'liaison' => 'spip_mots_'.$type_objet),
-					array(
-						array('=', 'mots.type', sql_quote($groupe)),
-						array('=', 'liaison.'.$cle_objet, $id_objet),
-						array('=', 'mots.id_mot', 'liaison.id_mot')
-					),
-					"",
-					"mots.titre"
-				);
-				while ($mot = sql_fetch($reponse)){
-				
-					// S'il y a des espaces ou virgules on entoure de guillemets
-					if (strcspn($mot['titre'], ' ,"') != strlen($mot['titre']))
-						$etiquettes .= " &quot;".entites_html($mot['titre'])."&quot;";
-					// Sinon on renvoie tel quel
-					else
-						$etiquettes .= " ".entites_html($mot['titre']);
-					// Enfin en vire les éventuels espaces en trop
-					$etiquettes = trim($etiquettes);
-				
-				}
-				
-			}
-			
+			$aide_nuage = ($aide == "nuage");
+			$aide_autocompletion = ($aide == "autocompletion");
+			$aide_liste = ($aide == "liste");
 		}
-		
-	}
+		// on teste ensuite si les plugins sont bien présents
+		$aide_nuage &= defined('_DIR_PLUGIN_NUAGE');
+		$aide_autocompletion &= defined('_DIR_PLUGIN_SELECTEURGENERIQUE');
 	
-	// On provoque enfin l'affichage
-    return array(
-        'formulaires/etiquettes', 
-        0, 
-        array(
-        	'self' => str_replace('&amp;', '&', self()),
-        	'message_ok' => $message_ok,
-			'message_erreur' => $message_erreur,
-			'erreur_autorisation' => $erreur_autorisation,
-			'proposer_login' => $proposer_login, 
-			'groupe' => $groupe,
-			'aide_nuage' => $aide_nuage,
-			'aide_ajax' => $aide_ajax,
-			'aide_liste' => $aide_liste,
-			'remplacer' => $remplacer,
-			'type_objet' => $type_objet,
-			'cle_objet' => $cle_objet,
-			'id_objet' => $id_objet,
-			'etiquettes' => $etiquettes
-        )
-    );
+	// initialisation du mode généré : tout le formulaire ou que le champ
+		// si on met rien ou n'importe quoi, ça donne false
+		// donc le formulaire complet
+		$uniquement_champ = (strtolower($uniquement_champ) == "true");
+	
+	// initialisation du nom du champ le cas échéant
+		if (!isset($name)) $name = false;
+		if (!$uniquement_champ) $name = false;
     
+    return array($groupe, $id_groupe, $name, $aide_nuage, $aide_autocompletion, $aide_liste, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login, $uniquement_champ);
+	
 }
 
 ?>

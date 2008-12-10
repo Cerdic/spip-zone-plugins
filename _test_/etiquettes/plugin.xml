@@ -6,7 +6,7 @@
  		RastaPopoulos - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version> <!-- Version du plugin -->
-		0.2
+		0.5
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 		test
@@ -19,11 +19,8 @@ Il propose donc une balise avec param&egrave;tres qui va g&eacute;n&eacute;rer u
 _ (si vous avez le plugin Nuage)
 -* * Une liste d&eacute;roulante qui s'actualise en fonction de ce que vous tapez
 _ (si vous avez le plugin S&eacute;lecteur g&eacute;n&eacute;rique)
+-* * Une liste à cliquer (sur les mêmes principes que les cases à cocher)
 -* * Aucune aide
-
-Il existe deux versions de la balise : une qui va g&eacute;n&eacute;rer un formulaire complet avec le bouton d'envoi et le traitement de ce formulaire ; et une qui ne va g&eacute;n&eacute;rer que la portion de HTML du champ texte et de l'aide, afin que vous puissiez l'ins&eacute;rer dans un de vos formulaires personnels.
-
-Dans ce second cas, ce sera alors &agrave; vous de traiter le r&eacute;sultat du champ texte. Il vous faudra donc conna&icirc;ttre le plugin Tag-Machine.
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-Etiquettes</lien> <!-- URI de documentation -->
 	<prefix> 

@@ -14,7 +14,7 @@ function etiquettes_vue_tags($rien, $type_objet, $id_objet){
 		'mots.id_mot, mots.titre',
 		array('mots' => 'spip_mots', 'liaison' => 'spip_mots_'.$type_objet),
 		array(
-			array('=', 'mots.type', _q('tags')),
+			//array('=', 'mots.type', _q('tags')),
 			array('=', 'liaison.'.$cle_objet, $id_objet),
 			array('=', 'mots.id_mot', 'liaison.id_mot')
 		),
@@ -25,11 +25,11 @@ function etiquettes_vue_tags($rien, $type_objet, $id_objet){
 	$liste_ul = "";
 	while ($mot = sql_fetch($reponse)){
 
-		$liste_ul .= "<li><a href=\"".generer_url_mot($mot['id_mot'])."\" rel=\"tag\">".$mot['titre']."</a></li>\n";
+		$liste_ul .= "<li><a href=\"".generer_url_entite($mot['id_mot'], 'mot')."\" rel=\"tag\">".$mot['titre']."</a></li>\n";
 
 	}
 	if ($liste_ul)
-		$liste_ul = "<h2>"._T('mots_clefs')."</h2>\n<ul>\n".$liste_ul."</ul>";
+		$liste_ul = "<h2>"._T('public:mots_clefs')."</h2>\n<ul>\n".$liste_ul."</ul>";
 
 	return $liste_ul;
 	
