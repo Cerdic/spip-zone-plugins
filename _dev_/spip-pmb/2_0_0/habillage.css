@@ -53,7 +53,7 @@ table.spip { border: none; width: 100%; } /*Cf.: spip_style.css*/
 /*  ------------------------------------------
 /*  Disposition a l'ecran des blocs principaux
 /*  ------------------------------------------ */
-body { background: #ccc; margin: 0; padding: 0; text-align: center; }
+body { background: white; margin: 0; padding: 0; text-align: center; }
 
 #page { position: relative; width: 950px; margin: 0 auto; text-align: left; background-color: #e6e8d5; background-image: url(bg-logo.png); background-repeat: no-repeat; background-position: bottom left; }
 
@@ -80,7 +80,7 @@ body { background: #ccc; margin: 0; padding: 0; text-align: center; }
 #navigation { position: relative; float: right; width: 220px; margin-top: .5em; overflow: hidden; background-image: url(bordure-gris.gif); background-repeat: repeat-y; background-position: top left; }
 #extra { float: right; clear: right; width: 30%; margin-top: 1em; overflow: hidden; }
 
-#pied { clear: both; width: 100%; margin: 0; padding: 0.40em 0; text-align: left; font-size: 0.80em; color: #000; background: #ccc; height: 2em; padding-top: 1em; }
+#pied { clear: both; width: 100%; margin: 0; padding: 0.40em 0; text-align: left; font-size: 0.80em; color: #000; background: white; height: 2em; padding-top: 1em; }
 #pied a {color: #000; }
 #pied img { vertical-align: middle; }
 
@@ -230,7 +230,7 @@ ul .forum-chapo { border: 0; margin: 0; padding: 3px 6px 2px 6px; }
 .rubriques ul li li li { padding-right: 0; padding-left: 1em; font-size: 1.1em; }
 
 /* Recherche */
-.recherche { background: #999966; padding-bottom: 0; }
+.recherche { background: #333300; padding-bottom: 0; }
 .recherche h2 { color: white; padding: .5em; background-image: url(bordure-vert-fonce.gif); background-repeat: repeat-x; background-position: bottom left; }
 .recherche .formulaire_recherche { background: none; }
 .recherche .formulaire_recherche input.text { width: 9em; margin-left: .5em;}

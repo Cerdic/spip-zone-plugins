@@ -19,7 +19,7 @@ function pmb_transformer_nav_bar($nav_bar) {
 
 
 function pmb_charger_page ($url_base, $file) {
-	$resultat_recherche_locale = copie_locale($url_base.$file,'auto');
+	$resultat_recherche_locale = copie_locale($url_base.$file,'force');
 	if($resultat_recherche_locale != false) {
 		$resultat_recherche_html = unicode2charset(charset2unicode(file_get_contents($resultat_recherche_locale), 'iso-8859-1'),'utf-8');
 		
