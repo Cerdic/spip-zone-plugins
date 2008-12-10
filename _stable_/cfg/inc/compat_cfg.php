@@ -60,6 +60,12 @@ function inc_compat_cfg_dist($quoi = NULL) {
 function compat_cfg_defs_dist() {
 	$defs = array(
 		
+		'push' => 
+			'($array, $val) {
+				if($array == \'\' OR !array_push($array, $val)) return \'\';
+				return $array;
+			}',
+			
 		'et' => 
 			'($code, $arg) {
 				return ((($code) AND ($arg)) ?\' \' :\'\');

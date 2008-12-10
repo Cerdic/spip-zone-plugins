@@ -1,5 +1,6 @@
 v1.10.5 (09 12 2008)
   * ajout des filtres et, ou, xou, non, oui pour compat 1.9.2
+  * ajout du filtre push pour compat 1.9.2
   
 v1.10.3 (14 09 2008)
   * ne pas prendre le traiter() de CFG si c'est un formulaire CVT normal !
