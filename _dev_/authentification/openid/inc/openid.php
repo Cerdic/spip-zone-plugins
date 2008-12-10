@@ -185,8 +185,9 @@ function terminer_authentification_openid($cible){
 		// identification dans SPIP
 		// (charge inc/auth_openid)
 		openid_log("Verification de l'identite '$openid' dans SPIP", 2);
-		$identifier_login = charger_fonction('identifier_login','inc');
-		if (!$ok = $identifier_login($openid, "")){ // pas de mot de passe
+
+		include_spip('formulaires/login');
+		if (!$ok = $auteur = verifier_login($openid, "")){ // pas de mot de passe
 			// c'est ici que l'on peut ajouter un utilisateur inconnu dans SPIP
 			// en plus, on connait (si la personne l'a autorise) son nom et email
 			// en plus du login
@@ -237,6 +238,16 @@ function terminer_authentification_openid($cible){
 		if ($ok) {
 			openid_log("Utilisateur '$openid' connu dans SPIP, on l'authentifie", 3);
 			
+			// creer la session
+				$session = charger_fonction('session', 'inc');
+				$session($auteur);
+				$p = ($auteur['prefs']) ? unserialize($auteur['prefs']) : array();
+				$p['cnx'] = ($session_remember == 'oui') ? 'perma' : '';
+				$p = array('prefs' => serialize($prefs));
+				sql_updateq('spip_auteurs', $p, "id_auteur=" . $auteur['id_auteur']);
+				//  bloquer ici le visiteur qui tente d'abuser de ses droits
+				verifier_visiteur();			
+			
 			## Cette partie est identique
 			## a formulaire_login_traiter
 			#$auth = charger_fonction('auth','inc');
@@ -250,7 +261,13 @@ function terminer_authentification_openid($cible){
 			if ($cible) {
 				$cible = parametre_url($cible, 'var_login', '', '&');
 			} 
-	
+			
+			// transformer la cible absolue en cible relative
+			// pour pas echouer quand la meta adresse_site est foireuse
+			if (strncmp($cible,$u = url_de_base(),strlen($u))==0){
+				$cible = "./".substr($cible,strlen($u));
+			}
+		
 			// Si on est admin, poser le cookie de correspondance
 			if ($GLOBALS['auteur_session']['statut'] == '0minirezo') {
 				include_spip('inc/cookie');

@@ -1,3 +1,6 @@
+0.8.8 (10 12 2008)
+- Suivre le core (http://trac.rezo.net/trac/spip/changeset/13435)
+
 0.8.7 (08 11 2008)
 - Ne pas inscrire un openid si les donnees requises ne sont pas transmises
 

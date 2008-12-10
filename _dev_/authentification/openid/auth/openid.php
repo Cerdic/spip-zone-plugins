@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Authentifie via OPENID et retourne la ligne SQL decrivant l'utilisateur si ok
 
 // http://doc.spip.org/@inc_auth_ldap_dist
-function inc_auth_openid_dist ($login) {
+function auth_openid_dist ($login) {
 
 	if (!$login) return false;
 
