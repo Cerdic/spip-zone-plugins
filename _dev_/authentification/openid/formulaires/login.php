@@ -159,6 +159,7 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 	else {
 		
 		#openid# tester le login openid
+		$erreurs_openid = "";
 		if (is_openid($session_login)) {
 			// * Si quelqu'un possede effectivement cet openid,
 			// on demande l'authentification
@@ -170,7 +171,7 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 				// * S'il l'openid n'existe pas, on est de retour ici, et on continue
 				// pour d'autres methodes d'identification
 				include_spip('inc/openid');
-				demander_authentification_openid($session_login, $cible);
+				$erreurs_openid = demander_authentification_openid($session_login, $cible);
 				// potentiellement, on arrive ici avec une erreur si l'openid donne n'existe pas
 			}
 		}
@@ -179,7 +180,7 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 		include_spip('inc/cookie');
 		spip_setcookie("spip_admin", "", time() - 3600);
 		return array('message_erreur' =>
-			_T('login_identifiant_inconnu',
+			_T('login_identifiant_inconnu' . ($erreurs_openid ? "<br />" . $erreurs_openid:""),
 			array('login' => htmlspecialchars($session_login))));
 	}
 	$auteur = verifier_login($login, $session_password, $session_md5pass, $session_md5next);
