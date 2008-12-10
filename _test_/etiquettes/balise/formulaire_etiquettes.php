@@ -47,11 +47,21 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 	}
 	extract($variables);
 	
+	// initialisation du mode généré : tout le formulaire ou que le champ
+		// si on met rien ou n'importe quoi, ça donne false
+		// donc le formulaire complet
+		$uniquement_champ = (strtolower($uniquement_champ) == "true");
+	
+	
 	// initialisation de l'objet à lier
 		if (isset($objet)){
+			// on peut mettre "aucun" si c'est uniquement le champ
+			if ($uniquement_champ and $objet == 'aucun'){
+				$type_objet = $id_objet = false;
+			}
 			// ici on a mis explicitement un objet
 			// si c'est mal formé on s'arrête
-			if (preg_match("/^(.*)-([0-9]+)$/", $objet, $captures) == 0){
+			elseif (preg_match("/^(.*)-([0-9]+)$/", $objet, $captures) == 0){
 				return erreur_squelette(
 					_T('etiquettes:zbug_objet_mal_forme',
 						array (
@@ -163,11 +173,6 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 		// on teste ensuite si les plugins sont bien présents
 		$aide_nuage &= defined('_DIR_PLUGIN_NUAGE');
 		$aide_autocompletion &= defined('_DIR_PLUGIN_SELECTEURGENERIQUE');
-	
-	// initialisation du mode généré : tout le formulaire ou que le champ
-		// si on met rien ou n'importe quoi, ça donne false
-		// donc le formulaire complet
-		$uniquement_champ = (strtolower($uniquement_champ) == "true");
 	
 	// initialisation du nom du champ le cas échéant
 		if (!isset($name)) $name = false;

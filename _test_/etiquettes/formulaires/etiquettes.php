@@ -40,7 +40,7 @@ function formulaires_etiquettes_charger_dist($groupe, $id_groupe, $name, $aide_n
 		$etiquettes = "";
 		
 		// Mais si on modifie, le champ est rempli avec les tags liés à l'objet
-		if ($remplacer){
+		if ($remplacer and $type_objet and $id_objet){
 		
 			$reponse = sql_select(
 				'mots.titre',
