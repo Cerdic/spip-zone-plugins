@@ -131,7 +131,7 @@ class Barre_outils{
 	 * @param string $lieu : lieu d'affectation des parametres (dedans, avant, apres)
 	 * @param false/array $tableau : tableau ou chercher les elements (sert pour la recursion)
 	 */
-	function affecter($identifiant, $params=array(), $lieu='dedans', &$tableau){
+	function affecter(&$tableau, $identifiant, $params=array(), $lieu='dedans'){
 		static $cle_de_recherche = 'id'; // ou className ?
 		
 		if ($tableau === null)
@@ -172,7 +172,7 @@ class Barre_outils{
 		// recursivons sinon !
 		foreach ($tableau as $i=>$v){
 			foreach ($v as $m=>$n) {
-				if (is_array($n) AND ($r = $this->affecter($identifiant, $params, $lieu, $tableau[$i][$m]))) 
+				if (is_array($n) AND ($r = $this->affecter($tableau[$i][$m], $identifiant, $params, $lieu))) 
 					return $r;
 			}
 		}
@@ -188,7 +188,7 @@ class Barre_outils{
 	 *                     si vide, tous les identifiants seront modifies
 	 * @param false/array $tableau : tableau ou chercher les elements (sert pour la recursion)
 	 */
-	function affecter_a_tous($params=array(), $ids=array(), &$tableau){
+	function affecter_a_tous(&$tableau, $params=array(), $ids=array()){
 		if (!$params)
 			return false;
 		
@@ -204,7 +204,7 @@ class Barre_outils{
 			}
 			// recursion si sous-menu
 			if (isset($tableau[$i]['dropMenu'])) {
-				$this->affecter_a_tous($params, $ids, $tableau[$i]['dropMenu']);
+				$this->affecter_a_tous($tableau[$i]['dropMenu'], $params, $ids);
 			}
 		}
 		return true;
@@ -224,10 +224,10 @@ class Barre_outils{
 		if (!$identifiant) return false;
 			
 		if (is_string($identifiant)) {
-			return $this->affecter($identifiant, $params);
+			return $this->affecter($this->markupSet, $identifiant, $params);
 		}
 		elseif (is_array($identifiant)) {
-			return $this->affecter_a_tous($params, $identifiant);
+			return $this->affecter_a_tous($this->markupSet, $params, $identifiant);
 		}
 		return false;		
 	}
@@ -239,7 +239,7 @@ class Barre_outils{
 	 * @return mixed
 	 */
 	function get($identifiant) {
-		if ($a = $this->affecter($identifiant)) {
+		if ($a = $this->affecter($this->markupSet, $identifiant)) {
 			return $a;
 		}
 		return false;		
@@ -275,7 +275,7 @@ class Barre_outils{
 	 * @return true/false
 	 */
 	function afficherTout(){
-		return $this->affecter_a_tous(array('display'=>true));
+		return $this->affecter_a_tous($this->markupSet, array('display'=>true));
 	}
 	
 	/**
@@ -285,7 +285,7 @@ class Barre_outils{
 	 * @return true/false
 	 */
 	function cacherTout(){
-		return $this->affecter_a_tous(array('display'=>false));
+		return $this->affecter_a_tous($this->markupSet, array('display'=>false));
 	}
 	
 
@@ -296,7 +296,7 @@ class Barre_outils{
 	 * @param array $params : parametres de l'ajout
 	 */
 	function ajouterAvant($identifiant, $params){
-		return $this->affecter($identifiant, $params, 'avant');
+		return $this->affecter($this->markupSet, $identifiant, $params, 'avant');
 	}
 	
 	/**
@@ -306,7 +306,7 @@ class Barre_outils{
 	 * @param array $params : parametres de l'ajout
 	 */
 	function ajouterApres($identifiant, $params){
-		return $this->affecter($identifiant, $params, 'apres');
+		return $this->affecter($this->markupSet, $identifiant, $params, 'apres');
 		
 	}	
 	
@@ -379,7 +379,7 @@ class Barre_outils{
 		$type = $barre->nameSpace;
 		$fonctions = $barre->functions;
 		
-		$barre->enlever_elements_non_affiches();
+		$barre->enlever_elements_non_affiches($this->markupSet);
 		$barre->enlever_parametres_inutiles();
 		
 		$json = Barre_outils::json_export($barre);
