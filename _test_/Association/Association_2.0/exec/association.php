@@ -20,24 +20,27 @@
 		include_spip ('inc/acces_page');	
 		
 		$url_edit_adherent = generer_url_ecrire('edit_adherent');
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:association'), "naviguer", "association");
+		  $commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('asso:association')) ;
+		//debut_page(_T('asso:association'), "naviguer", "association");
 		
 		association_onglets();
 		
-		debut_gauche();
+		echo debut_gauche("",true);
 		
-		debut_boite_info();
+		echo debut_boite_info(true);
 		echo propre(_T('asso:info_doc'));  	
+		echo fin_boite_info(true);
 		
-		fin_boite_info();
+		$res=icone_horizontale(_L('asso:Profil de l\'association'), '?exec=cfg&cfg=association', '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ecole.gif', 'rien.gif',false);
+			$res.=icone_horizontale(_L('asso:Cat&eacute;gories de cotisations'), generer_url_ecrire("categories"), '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/calculatrice.gif', '',false);
+	$res.=icone_horizontale(_L('asso:plan_comptable'), generer_url_ecrire("plan"), '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/EuroOff.gif', '',false);	
+	echo bloc_des_raccourcis($res);
 		
+		echo debut_droite("",true);	
 		
-		creer_colonne_droite();
-		debut_droite();	
-		
-		debut_cadre_formulaire();
-		gros_titre(_T('asso:votre_asso'));
+		echo debut_cadre_formulaire("",true);
+		echo gros_titre(_T('asso:votre_asso'),'',false);
 		echo '<br>';		
 		echo '<strong>'.lire_config('association/nom').'</strong><br>';
 		echo lire_config('association/rue').'<br>';
@@ -48,15 +51,15 @@
 		echo lire_config('association/siret').'<br>';
 		echo lire_config('association/declaration').'<br>';
 		echo lire_config('association/prefet').'<br>';
-		fin_cadre_formulaire();
+		fin_cadre_formulaire(true);
 		
-
+		/* Provisoirement supprimé en attendant 1.9.3
 		
 		echo '<br />';
-		gros_titre(_T('asso:votre_equipe'));		
+		echo gros_titre(_T('asso:votre_equipe'),'',false);		
 		echo '<br />';	
-	
-		debut_cadre_relief();
+		
+		echo debut_cadre_relief(true);
 		
 		echo '<table border=0 cellpadding=2 cellspacing=0 width="100%" class="arial2" style="border: 1px solid #aaaaaa;">';
 		echo '<tr bgcolor="#DBE1C5">';
@@ -67,7 +70,7 @@
 		echo '<td><strong>T&eacute;l&eacute;phone</strong></td>';
 		echo '</tr>';
 		$query = spip_query("SELECT * FROM spip_asso_adherents INNER JOIN spip_auteurs ON spip_auteurs_elargis.id_auteur=spip_auteurs.id_auteur WHERE fonction != '' AND statut_relance != 'sorti' ORDER BY nom_famille ");
-		while ($data = spip_mysql_fetch($query)) {	
+		while ($data = @mysql_fetch_assoc($query)) {	
 			$id_auteur=$data['id_auteur'];
 			echo '<tr style="background-color: #EEEEEE;">';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;"><a href="'.generer_url_ecrire('auteur_infos',"id_auteur=$id_auteur").'" title="Modifier l\'administrateur">'.$data['nom'].' '.$data['prenom'].'</a></td>';
@@ -77,12 +80,13 @@
 			echo '<td class="arial1" style="border-top: 1px solid #CCCCCC;">'.$data['telephone'].'</td>';
 			echo '</tr>';
 		}				
-		echo '</table>';
+		echo '</table>';*/
 		
 		fin_cadre_relief();	
 		
 		
-		echo fin_gauche(),fin_page();
+		
+		 echo fin_gauche(), fin_page();
 		
 		//Petite routine pour mettre à jour les statuts de cotisation "échu"
 		spip_query("UPDATE spip_auteurs_elargis SET statut_interne='echu'  WHERE statut_interne = 'ok' AND validite < CURRENT_DATE() ");
