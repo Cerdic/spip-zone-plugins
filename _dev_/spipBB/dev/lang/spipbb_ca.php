@@ -347,6 +347,7 @@ _ Un post-it est&agrave; situat a sota dels anuncis, abans dels missatges ordina
 	'pagine_page_' => ' .. p&agrave;gina',
 	'pagine_post_' => 'resposta',
 	'pagine_post_s' => 'respostes',
+	'pagine_sujet_' => ' assumpte',
 	'pagine_sujet_s' => 'assumptes',
 	'par_' => 'per ',
 	'plugin_auteur' => 'La SpipBB Team: [veure la llista de col&middot;laboradors a Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',

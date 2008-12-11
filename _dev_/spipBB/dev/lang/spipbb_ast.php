@@ -347,6 +347,7 @@ _ Un mensaxe apegadizu ta embaxo de los anuncios, enantes de los mensaxes ordina
 	'pagine_page_' => ' .. p&aacute;xina ',
 	'pagine_post_' => ' respuesta',
 	'pagine_post_s' => ' respuestes',
+	'pagine_sujet_' => ' asuntu',
 	'pagine_sujet_s' => ' asuntos',
 	'par_' => 'por ',
 	'plugin_auteur' => 'L\'Equipu SpipBB: [ver la llista de collaboradores en Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',

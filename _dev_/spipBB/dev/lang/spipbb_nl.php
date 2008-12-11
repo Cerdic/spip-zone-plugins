@@ -347,6 +347,7 @@ _ Wordt een postit onder de aankondigingen, voor de gewone berichten geplaatst. 
 	'pagine_page_' => ' .. bladzijde ',
 	'pagine_post_' => ' antwoord',
 	'pagine_post_s' => ' antwoorden',
+	'pagine_sujet_' => ' onderwerp',
 	'pagine_sujet_s' => 'onderwerpen',
 	'par_' => 'door',
 	'plugin_auteur' => 'SpipBB Team: [zie de lijst van contributoren op Spip-contrib-> http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',

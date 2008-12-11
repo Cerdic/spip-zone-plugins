@@ -347,6 +347,7 @@ _ Un postit est&aacute; situado bajo los anuncios, antes de los mensajes ordinar
 	'pagine_page_' => ' .. p&aacute;gina ',
 	'pagine_post_' => ' respuesta',
 	'pagine_post_s' => ' respuestas',
+	'pagine_sujet_' => ' asunto',
 	'pagine_sujet_s' => ' asuntos',
 	'par_' => 'por ',
 	'plugin_auteur' => 'El Equipo SpipBB: [ver la lista de colaboradores en Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
