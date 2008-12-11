@@ -4,9 +4,9 @@
 		ARNO*
 	</auteur>
 	<licence>GPL 3 - &#169; 2006-2008</licence>
-	<version>1.0</version>
+	<version>1.1</version>
 	<etat>stable</etat>
-	<description>Une variante de l'interface priv&eacute;e, subtilement moins contrastr&eacute;e. Le plugin intervient en modifiant les feuilles de style de l'espace priv&eacute;.</description>
+	<description>Une &eacute;volution de l'interface priv&eacute;e, subtilement moins contrastr&eacute;e. Le plugin intervient en modifiant les feuilles de style de l'espace priv&eacute;.</description>
  	<necessite id='SPIP' version='[2.0.0 dev;]' />
 	<prefix>interface_adoucie</prefix>
 </plugin>
