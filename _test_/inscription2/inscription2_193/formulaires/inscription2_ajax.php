@@ -38,6 +38,13 @@ function formulaires_inscription2_ajax_charger_dist($id_auteur = NULL){
 		);
 
 		$champs = $auteur;
+	} else {	
+	    //si on est en mode création et que l'utilisateur a saisi ses valeurs on les prends en compte
+	    foreach($champs as $clef =>$valeurs) {
+            if (_request($valeurs)) {
+                $champs[$valeurs] = _request($valeurs);
+            }
+	    }		
 	}
 	return $champs;
 }
