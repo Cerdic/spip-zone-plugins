@@ -14,8 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attente_confirmation' => 'In wachten van bevestiging',
 
 	// D
-	'date_court' => 'jour@/@mois@/@annee@',
-	'derniers_connectes' => 'Aangesloten laatsten :',
+	'date_court' => '@jour@/@mois@/@annee@',
+	'derniers_connectes' => 'Laatsten aangesloten:',
 
 	// E
 	'explique_spam' => 'Opgelet: u hebt bakens, verboden karakters of woorden gebruikt. <br /><br /> Terug komen !',
