@@ -302,23 +302,35 @@ padding-top:10px;
 	padding-#GET{left}: 5px;
 	padding-#GET{right}: 5px;
 	font-family: verdana, arial, helvetica, sans;
-	color: white;
+	color: #[(#GET{foncee}|couleur_foncer)];
 	font-weight: bold;
 	font-size: 95%;
 	line-height: 11px;
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], bottom [(#GET{left})] no-repeat })]
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_claire}|couleur_eclaircir)], bottom [(#GET{left})] no-repeat })]
 }
 
 .formulaire_spip fieldset p.explication {
 	margin-left: 10px;
-	border: 1px solid #GET{claire};
 }
 .formulaire_spip fieldset li p.explication {
 	margin-left: 0px;
 	margin-right: 0px;
 }
 
-.formulaire_spip li.fieldset.editer_liens_sites {
+.formulaire_spip fieldset li {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.formulaire_spip fieldset li label {
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_bg{dddddd, center [(#GET{right})] no-repeat })]
+	color: #444444;
+}
+.formulaire_spip fieldset li input.text, .formulaire_spip fieldset li textarea.textarea {
+	border: 1px solid #aaaaaa;
+}
+
+.formulaire_editer_article li.fieldset.editer_liens_sites {
 	border-bottom: 1px solid [(#GET{foncee})];
 }
 
