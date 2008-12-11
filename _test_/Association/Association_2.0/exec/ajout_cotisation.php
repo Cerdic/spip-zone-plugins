@@ -11,6 +11,7 @@
 	**/
 	
 	include_spip('inc/presentation');
+	
 	include_spip ('inc/navigation_modules');
 
 	function exec_ajout_cotisation(){
@@ -18,12 +19,12 @@
 		
 		include_spip('inc/acces_page');
 		
-		$url_faire_cotisations = generer_url_ecrire('faire_cotisations');
+		$url_action_cotisations = generer_url_ecrire('action_cotisations');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		$id_auteur=$_GET['id'];
 		$query = spip_query( "SELECT * FROM spip_auteurs_elargis  WHERE id_auteur='$id_auteur' " );
-		/*while($data = spip_fetch_array($query)) {
+		while($data = spip_fetch_array($query)) {
 			$nom_famille=$data['nom_famille'];
 			$prenom=$data['prenom'];
 			$categorie=$data['categorie'];
@@ -31,27 +32,28 @@
 			$split = split("-",$validite); 
 			$annee = $split[0]; 
 			$mois = $split[1]; 
-			$jour = $split[2]; */
-			$commencer_page = charger_fonction('commencer_page', 'inc');
-			echo $commencer_page(_T('Ajout de cotisation'), "", "");
+			$jour = $split[2]; 
 			
+			//debut_page(_T('Ajout de cotisation'), "", "");
+			 $commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('Ajout de cotisation')) ;
 			association_onglets();
 			
-			debut_gauche();
+			echo debut_gauche("",true);
 			
-			debut_boite_info();
+			echo debut_boite_info(true);
 				
 			echo '<p>';
 			echo 'Adh&eacute;rent :<strong>'.$nom_famille.' '.$prenom.'</strong><br />';
 			echo 'Cat&eacute;gorie :<strong>'.$categorie.'</strong></p>';
 			association_date_du_jour();	
-			fin_boite_info();
+			echo fin_boite_info(true);
 			
-			debut_droite();
-			/*
-			debut_cadre_relief(  "", false, "", $titre = _T('asso:Nouvelle cotisation'));
+			echo debut_droite("",true);
 			
-			echo '<form faire="'.$url_faire_cotisations.'" method="POST">';
+			echo debut_cadre_relief(  "", false, "", $titre = _T('asso:Nouvelle cotisation'));
+			
+			echo '<form action="'.$url_action_cotisations.'" method="POST">';
 			echo '<label for="date"><strong>'._T('asso:Date du paiement (AAAA-MM-JJ)').' :</strong></label>';
 			echo '<input name="date" type="text" value="'.date('Y-m-d').'" id="date" class="formo" />';
 			echo '<label for="montant"><strong>'._T('asso:Montant paye (en euros)').' :</strong></label>';
@@ -78,18 +80,18 @@
 			echo '<input type="hidden" name="nom_famille" value_famille="'.$nom_famille.'">';
 			echo '<input type="hidden" name="prenom" value="'.$prenom.'">';
 			echo '<input type="hidden" name="categorie" value="'.$categorie.'">';
-			echo '<input type="hidden" name="faire" value="ajoute">';
-		}*/
+			echo '<input type="hidden" name="agir" value="ajoute">';
+		}
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
 		
 		echo '<div style="float:right;"><input name="submit" type="submit" value="';
-		if ( isset($faire)) {echo _T('asso:bouton_'.$faire);}
+		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo" /></div>';
 		echo '</form>';
 		echo '</fieldset>';
 		
-		fin_cadre_relief();  
-		fin_page();
+		echo fin_cadre_relief(true);  
+		//fin_page();
 	}
 ?>

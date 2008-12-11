@@ -18,7 +18,7 @@
 		
 		include_spip('inc/acces_page');
 		
-		$url_faire_adherents=generer_url_ecrire('faire_adherents');
+		$url_action_adherents=generer_url_ecrire('action_adherents');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		$id_auteur= $_GET['id'];
@@ -34,34 +34,35 @@
 			$validite=$data['validite'];
 			$commentaire=$data['commentaire'];
 		}
-		$faire='modifie';
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association'), "", "");
+		$action='modifie';
+		 $commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
+		
 		
 		include_spip ('inc/navigation');
 		
 		association_onglets();
 		
-		debut_gauche();
+		echo debut_gauche("",true);
 		
-		debut_boite_info();
-		echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:adherent_libelle_numero').'<br />';
+		echo debut_boite_info(true);
+		echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.propre(_T('asso:adherent_libelle_numero')).'<br />';
 		echo '<span class="spip_xx-large">';
-		if($indexation=="id_asso"){echo $id_asso;} else {echo $id_adherent;}
+		if($indexation=="id_asso"){echo $id_asso;} else {echo $id_auteur;}
 		echo '</span></div>';
 		echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.$nom_famille.' '.$prenom.'</div>';
 		echo '<br /><div>'.association_date_du_jour().'</div>';	
-		fin_boite_info();
+		echo fin_boite_info(true);
 		
 		
-		$res = icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
-		echo bloc_des_raccourcis($res);
-		creer_colonne_droite();
-		debut_droite();
+		$res=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
+		echo bloc_des_raccourcis ($res);
 		
-		debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_modifier_membre'));
+		echo debut_droite("",true);
 		
-		echo '<form action="'.$url_faire_adherents.'" method="post">';	
+		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_modifier_membre'));
+		
+		echo '<form action="'.$url_action_adherents.'" method="post">';	
 		if (lire_config('association/indexation')=="id_asso"){
 			echo '<label for="id_asso"><strong>N&deg; d\'adh&eacute;rent :</strong></label>';
 			echo '<input name="id_asso" value="'.$id_asso.'" type="text" id="id_asso" class="formo" />';
@@ -88,18 +89,17 @@
 		echo '<label for="commentaire"><strong>'._T('asso:adherent_libelle_remarques').' :</strong></label>';
 		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';		
 		echo '<input name="id" type="hidden" value="'.$id_auteur.'" >';		
-		echo '<input name="faire" type="hidden" value="'.$faire.'">';
+		echo '<input name="agir" type="hidden" value="'.$action.'">';
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
 		
 		echo '<div style="float:right;">';
-		echo '<input name="submit" type="submit" value="';
-		if ( isset($faire)) {echo _T('asso:bouton_'.$faire);}
+		echo '<input name="bouton" type="submit" value="';
+		if ( isset($action)) {echo  _T('asso:bouton_'.$action);}
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo" /></div>';
 		echo '</form>';
-		
 		fin_cadre_relief();
-		echo fin_gauche(),fin_page();
+		fin_page();
 	}
 ?>
 
