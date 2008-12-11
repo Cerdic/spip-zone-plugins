@@ -9,13 +9,12 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-
+	
 	include_spip('inc/navigation_modules');
-	include_spip('inc/presentation');
 	
 	function exec_adherents() {
 		
-		//global $connect_statut, $connect_toutes_rubriques, $table_prefix;
+		global $connect_statut, $connect_toutes_rubriques, $table_prefix;
 		
 		include_spip ('inc/acces_page');
 		
@@ -24,16 +23,17 @@
 		$url_editer_auteur = generer_url_ecrire('auteur_infos');
 		$url_edit_adherent = generer_url_ecrire('edit_adherent');
 		$url_voir_adherent = generer_url_ecrire('voir_adherent');
-		$url_faire_adherents = generer_url_ecrire('faire_adherents');
+		$url_action_adherents = generer_url_ecrire('action_adherents');
 		$url_edit_relances=generer_url_ecrire('edit_relances');
 		$url_pdf_adherents = generer_url_ecrire('pdf_adherents');
 		$indexation = lire_config('association/indexation');
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association'), "", "");
 		
+		//debut_page(_T('asso:titre_gestion_pour_association'), "", "");
+		 $commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('asso:association')) ;
 		association_onglets();
 		
-		debut_gauche();
+		echo debut_gauche("",true);
 		
 		if ( isset ($_REQUEST['filtre'] )) { $filtre = $_REQUEST['filtre']; }
 		else { $filtre = 'defaut'; }
@@ -48,7 +48,7 @@
 			case "tous": $critere="statut_interne LIKE '%'";break;	
 		}			
 		
-		debut_boite_info();
+		echo debut_boite_info(true);
 		echo association_date_du_jour();	
 		echo '<p>'._T('asso:adherent_liste_legende').'</p>'; 
 		
@@ -58,24 +58,24 @@
 		$nombre=0;
 		foreach (array(ok,echu,relance,prospect) as $statut) {
 			$query=spip_query("SELECT * FROM spip_auteurs_elargis WHERE statut_interne='$statut'");
-			$nombre=spip_num_rows($query);
+			$nombre=sql_count($query);
 			echo '<div style="float:right;text_align:right">'.$nombre.'</div>';
 			echo '<div>'._T('asso:adherent_liste_nombre_'.$statut).'</div>';
 			$nombre_total += $nombre;
 		}		
 		echo '<div style="float:right;text_align:right">'.$nombre_total.'</div>';
 		echo '<div>'._T('asso:adherent_liste_nombre_total').'</div>';
-		fin_boite_info();	
+		echo fin_boite_info(true);	
 		
-		//debut_raccourcis_sup();
-		$res= icone_horizontale(_T('asso:menu2_titre_relances_cotisations'), $url_edit_relances,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ico_panier.png','rien.gif',false ); 
-		$res .= icone_horizontale(_T('asso:bouton_impression'), $url_pdf_adherents.'&filtre='.$filtre,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/print-24.png','rien.gif',false ); 
-		//fin_raccourcis_sup();
-		echo bloc_des_raccourcis($res);
-		creer_colonne_droite();
-		debut_droite();
 		
-		debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_liste_actifs'));		
+		$res=icone_horizontale(_T('asso:menu2_titre_relances_cotisations'), $url_edit_relances,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ico_panier.png','rien.gif',false );
+			echo bloc_des_raccourcis($res); 
+		$res=icone_horizontale(_T('asso:bouton_impression'), $url_pdf_adherents.'&filtre='.$filtre,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/print-24.png','rien.gif',false ); 
+			echo bloc_des_raccourcis($res);
+		
+		echo debut_droite("",true);
+		
+		echo debut_cadre_relief(  "", true, "", $titre = _T('asso:adherent_titre_liste_actifs'));		
 		
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2'>\n";
 		echo "<tr>";
@@ -86,7 +86,7 @@
 		$lettre=$_GET['lettre'];
 		if ( empty ( $lettre ) ) { $lettre = "%"; }
 		
-		$query = spip_query ( "SELECT upper( substring( nom_famille, 1, 1 ) )  AS init FROM spip_auteurs_elargis GROUP BY init ORDER by nom_famille, id ");
+		$query = spip_query ( "SELECT upper( substring( nom_famille, 1, 1 ) )  AS init FROM spip_auteurs_elargis GROUP BY init ORDER by nom_famille, id_auteur ");
 		
 		while ($data = spip_fetch_array($query)) {
 			if($data['init']==$lettre) {
@@ -109,7 +109,7 @@
 			if ($indexation=="id_asso") { $critere="id_asso='$id'"; }
 		}
 		
-		echo '<form method="post" faire="'.$url_adherent.'">';
+		echo '<form method="post" action="'.$url_adherent.'">';
 		echo '<input type="text" name="id"  class="fondl" style="padding:0.5px" onfocus=\'this.value=""\' size="10" ';
 		if ($indexation=='id_asso') { echo ' value="'._T('asso:adherent_libelle_id_asso').'" '; }
 		else { echo ' value="'._T('asso:adherent_libelle_id_adherent').'" ';}
@@ -119,7 +119,7 @@
 		echo '<td style="text-align:right;">';
 		
 		//Filtre statut
-		echo '<form method="post" faire="'.$url_adherent.'">';
+		echo '<form method="post" action="'.$url_adherent.'">';
 		echo '<input type="hidden" name="lettre" value="'.$lettre.'">';
 		echo '<select name ="filtre" class="fondl" onchange="form.submit()">';
 		foreach (array(defaut,ok,echu,relance,sorti,prospect) as $statut) {
@@ -134,7 +134,7 @@
 		echo '</table>';
 		
 		//Affichage de la liste
-		echo '<form method="post" faire="'.$url_faire_adherents.'">';
+		echo '<form method="post" action="'.$url_action_adherents.'">';
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo '<tr bgcolor="#DBE1C5">';
 		echo '<td><strong>';
@@ -146,7 +146,7 @@
 		echo '<td><strong>'._T('asso:adherent_libelle_prenom').'</strong></td>';
 		echo '<td><strong>'._T('asso:adherent_libelle_categorie').'</strong></td>';
 		echo '<td><strong>'._T('asso:adherent_libelle_validite').'</strong></td>';
-		echo '<td colspan="4" style="text-align:center;"><strong>'._T('asso:adherent_entete_faire').'</strong></td>';
+		echo '<td colspan="4" style="text-align:center;"><strong>'._T('asso:adherent_entete_action').'</strong></td>';
 		echo '<td><strong>'._T('asso:adherent_entete_supprimer_abrev').'</strong></td>';
 		echo '</tr>';
 		
@@ -222,7 +222,7 @@
 		echo '<td>';
 		if (!empty($lettre)) {"AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";}
 		$query = spip_query( "SELECT * FROM spip_auteurs_elargis WHERE $critere ".$critere2);
-		$nombre_selection=spip_num_rows($query);
+		$nombre_selection=sql_count($query);
 		$pages=intval($nombre_selection/$max_par_page) + 1;
 		
 		if ($pages != 1)	{
@@ -243,9 +243,7 @@
 		echo '</table>';
 		echo '</form>';
 		
-		fin_cadre_relief();  
-		echo fin_gauche();
-		echo fin_page();
-		
+		echo fin_cadre_relief(true);  
+		 echo fin_gauche(), fin_page();
 	}
 ?>
