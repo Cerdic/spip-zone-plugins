@@ -19,7 +19,7 @@ Ce plugin permet de créer des pages d'articles qui ne sont reliées à aucune h
 
 Cela permet notamment de créer des pages de notice légale, d'à-propos, de contact, etc.
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Pages</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Plugin-Pages-uniques</lien> <!-- URI de documentation -->
 	<prefix> 
 		pages
 	</prefix>
