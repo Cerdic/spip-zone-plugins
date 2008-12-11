@@ -21,15 +21,10 @@ function exec_mutualisation_dist() {
 	if (!file_exists(_DIR_IMG.'mutualiser.png'))
 		@copy(find_in_path('mutualiser.png'), _DIR_IMG.'mutualiser.png');
 
-	$titre = '<img style="float:left;" src="'
-		. _DIR_IMG.'mutualiser.png'
-		. '" alt="" />';
-	$titre .= _L(count($sites).' '.'sites mutualis&#233;s');
+	$titre .= _L(count($sites).' '.'sites mutualis&#233;s <em>('._T('version')
+		. ' ' . $GLOBALS['spip_version_base'].')</em>');
 
 	$page = '';
-	
-	$page .= '<div style="text-align:right">'._T('version')
-		. ' ' . $GLOBALS['spip_version_base'].'</div>';
 
 
 	$page .= "<table style='clear:both;'>
@@ -69,25 +64,29 @@ function exec_mutualisation_dist() {
 			// Pour cela, on cree un bouton avec un secret, que mutualiser.php
 			// va intercepter (pas terrible ?)
 			$erreur = test_upgrade_site($meta);
-			$version_installee = ' ('.$meta['version_installee'].')';
+			$version_installee = ' <em><small>'.$meta['version_installee'].'</small></em>';
 		}
 		else {
 			$url = 'http://'.$v.'/';
-			$erreur = ' (<span class="erreur">erreur!</span>)';
+			$erreur = ' <em><small><span class="erreur">Erreur&nbsp;!</span></small></em>';
 			$plugins = '-';
 		}
 		$page .= "<tr class='tr". $nsite % 2 ."'"
 			. " style='background-image: url(${url}spip.php?action=cron&amp;renouvelle_alea=yo);'>
-			<td>$v$version_installee$erreur</td>
+			<td style='text-align:right;'>$v$erreur$version_installee</td>
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire</a></td>
-			<td><a href='${url}ecrire/index.php?exec=statistiques_visites'>${stats}</a></td>
+			<td style='text-align:right;'><a href='${url}ecrire/index.php?exec=statistiques_visites'>${stats}</a></td>
 			<td><a href='${url}ecrire/index.php?exec=admin_plugin'>${plugins}</a></td>
-			<td>".date_creation_repertoire_site($v)."</td>
+			<td style='text-align:right;'>".date_creation_repertoire_site($v)."</td>
 			</tr>\n";
 		$nsite++;
 	}
 	$page .= "</tbody></table>";
+	
+	$page .= '<div style="text-align:center;"><img src="'
+		. _DIR_IMG.'mutualiser.png'
+		. '" alt="" /></div>';
 
 	$page = minipres($titre, $page);
 	
@@ -99,13 +98,17 @@ function exec_mutualisation_dist() {
 		.tr0 {background-color:#ddded5}
 		thead tr {font-weight:bold;background-color:#333;color:#fff;}
 		td {text-align:left;border-left: 1px solid #ccc;}
-		#minipres{width:50em;}
-		.upgrade {text-align: center; padding:1em .5em;}
+		td em {color:#aaa;}
+		#minipres{width:auto;}
+		.upgrade {text-align: center; padding:0 .5em; display:inline;}
+		.upgrade div {display:inline;}
 		.upgrade input { border: 2px solid red;color:red; background-color:#fff; font-weight:bold;}
 		.erreur {color:red;font-weight:bold;}
 		</style>
 		</head>
 		', $page);
+		
+
 
 	echo $page;
 }
