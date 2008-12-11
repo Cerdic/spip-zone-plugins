@@ -1,0 +1,12 @@
+<plugin>
+  <nom>SPIP Bonux - couleurs</nom>
+  <auteur>Cedric Morin, Mathieu Marcillaud, romy.tetue.net</auteur>
+  <icon>img_pack/spip-bonux.png</icon>
+  <licence>(c) 2008 GPL</licence>
+  <version>1.2</version>
+  <etat>stable</etat>
+  <description>Les couleurs de SPIP-Bonux, mais sans &ecirc;tre oblig&eacute; de changer l'interface et de charger de fonctions suppl&eacute;mentaires.</description>
+  <lien>http://www.spip-contrib.net/SPIP-Bonux</lien>
+  <prefix>spip_bonux_couleurs</prefix>
+  <necessite id='SPIP' version='[2.0.0 dev;]' />
+</plugin>
