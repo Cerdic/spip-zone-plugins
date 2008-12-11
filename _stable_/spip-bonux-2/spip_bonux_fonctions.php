@@ -7,6 +7,7 @@
  * 
  */
 
+define('_BONUX_CSS_MD5_FORMULAIRES','a2d73f0c930b01341d8a3d3f38b5ec54');
 /**
  * une fonction pour generer des menus avec liens
  * ou un span lorsque l'item est selectionne
