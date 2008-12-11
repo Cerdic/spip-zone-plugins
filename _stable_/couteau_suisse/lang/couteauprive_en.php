@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 @puce@ If you tick "yes" below, opening one block will cause all other blocks on the page to close. i.e. only one block is open at a time.[[%bloc_unique%]]',
 	'blocs:nom' => 'Folding Blocks',
-	'boites_privees:description' => 'All the boxes described below appear in the editing area.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]]
+	'boites_privees:description' => '<MODIF>All the boxes described below appear in the editing area.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]]
 - {{Swiss Knife updates}}: a box on this configuration page showing the last changes made to the code of the plugin ([Source->@_CS_RSS_SOURCE@]).
 - {{Articles in SPIP format}}: an extra folding box for your articles showing the source code used by their authors.
 - {{Author stats}}: an extra box on [the authors\' page->./?exec=auteurs] showing the last 10 connected authors and unconfirmed registrations. Only administrators can view this information.
@@ -115,7 +115,7 @@ N.B.: by changing the second parameter you will lose any standard styles associa
 	'code_options' => 'Options',
 	'code_spip_options' => 'SPIP options',
 	'contrib' => 'More information: @url@',
-	'corbeille:description' => '<NEW>SPIP suprime autom&aacute;ticamente los objetos tirados a la basura en un plazo de 24 horas, en general hacia las 4 de la madrugada, gracias a una tarea &laquo;CRON&raquo; (lanzamiento peri&oacute;dico y/o autom&aacute;tico de procesos preprogramados). Aqu&iacute; puedes impedir ese proceso para gestionar mejor la papelera.[[%arret_optimisation%]]',
+	'corbeille:description' => 'SPIP automatically deletes objets which have been put in the dustbin after one day. This is done by a "Cron" job, usually at 4 am. Here, you can block this process taking place in order to regulate the dustbin emptying yourself. [[%arret_optimisation%]]',
 	'corbeille:nom' => 'Wastebin',
 	'corbeille_objets' => '@nb@ object(s) in the wastebin.',
 	'corbeille_objets_lies' => '@nb_lies@ connection(s) detected.',
@@ -134,12 +134,12 @@ In the same way, to change the font if the following option allows:@_CS_EXEMPLE_
 @_CS_ASTER@The format of this personalised tags have to be of existing colours or define pairs &laquo;tag=colour&raquo;, separated by comas. Examples : &laquo;grey, red&raquo;, &laquo;smooth=yellow, strong=red&raquo;, &laquo;low=#99CC11, high=brown&raquo; but also &laquo;grey=#DDDDCC, red=#EE3300&raquo;. For the first and last example, the allowed tags are: <code>[grey]</code> et <code>[red]</code> (<code>[fond grey]</code> et <code>[fond red]</code> if the backgrounds are allowed).',
 	'couleurs:nom' => 'Coloured text',
 	'couleurs_fonds' => ', <b>[fond&nbsp;coul]text[/coul]</b>, <b>[bg&nbsp;coul]text[/coul]</b>',
-	'cs_comportement:description' => '<NEW>@puce@ {{Logs.}} Obtener abundante informaci&oacute;n sobre el funcionamiento de la Navaja Suiza en los archivos {spip.log} que se pueden encontrar en el directorio: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
+	'cs_comportement:description' => '@puce@ {{Logs.}} Record a lot of information about the working of the Swiss Knife in the {spip.log} files which can be found in this directory: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
 
-@puce@ {{Opciones de SPIP.}} SPIP ordena los plugins en un orden determinado. Para asegurarse de que la Navaja Suiza sea el primero y gestione desde el principio ciertas opciones de SPIP, marca la opci&oacute;n siguiente. Si los permisos de tu servidor lo permiten, se modificar&aacute; autom&aacute;ticamente el archivo {@_CS_FILE_OPTIONS@} para incluir el archivo {@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php}.
+@puce@ {{SPIP options.}} SPIP places plugins in order. To be sure that the Swiss Knife is at the head and is thus able to control certain SPIP options, check the following option. If the permissions on your server allow it, the file {@_CS_FILE_OPTIONS@} will be modified to include {@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php}.
 [[%spip_options_on%]]
 
-@puce@ {{Consultas externas.}} La Navaja Suiza verifica regularmente la existencia de una versi&oacute;n m&aacute;s reciente de su c&oacute;digo e informa en su p&aacute;gina de configuraci&oacute;n de una actualizaci&oacute;n que est&eacute; disponible. Si las consultas externas de tu servidor causan problemas, marca la casilla siguiente.[[%distant_off%]]',
+@puce@ {{External requests.}} The Swiss Knife checks regularly for new versions of the plugin and shows available updates on its configuration page. If the external requests involved do not work from your server, check this box to turn this off.[[%distant_off%]]',
 	'cs_comportement:nom' => 'Behaviour of the Swiss Knife',
 	'cs_distant_off' => 'Checks of remote versions',
 	'cs_log_couteau_suisse' => 'Detailed logs of the Swiss Knife',
@@ -386,8 +386,8 @@ _ • {Extended}: additionally links such as these are also replaced:  {<html>me@s
 	'mailcrypt:nom' => 'MailCrypt',
 	'message_perso' => 'oh!',
 	'moderation_admins' => 'authenticated administrators',
-	'moderation_message' => '<NEW>Este foro est&aacute; moderado a priori: tu contribuci&oacute;n no aparecer&aacute; hasta que haya sido validada por un administrador del sitio, salvo si te has identificado y est&aacute;s autorizado a escribir directamente.',
-	'moderation_moderee:description' => '<NEW>Permite moderar la moderaci&oacute;n de los foros p&uacute;blicos <b>configurados a priori</b> por los usuarios inscritos.<br />Por ejemplo: Si soy el webmaster de mi sitio, y respondo al mensaje de un usuario, &iquest;por qu&eacute; debo validar mi propio mensaje? &iexcl;Moderaci&oacute;n moderada lo hace para m&iacute;!  [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
+	'moderation_message' => '<NEW>Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n\'appara&icirc;tra qu\'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site, sauf si vous &ecirc;tes identifi&eacute; et autoris&eacute; &agrave; poster directement.',
+	'moderation_moderee:description' => '<NEW>Permet de mod&eacute;rer la mod&eacute;ration des forums publics <b>configur&eacute;s &agrave; priori</b> pour les utilisateurs inscrits.<br />Exemple : Je suis le webmestre de mon site, et je r&eacute;ponds &agrave; un message d\'un utilisateur, pourquoi devoir valider mon propre message ? Mod&eacute;ration mod&eacute;r&eacute;e le fait pour moi ! [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
 	'moderation_moderee:nom' => 'Moderate moderation',
 	'moderation_redacs' => 'authenticated authors',
 	'moderation_visits' => 'Visitors authenticated',
@@ -427,7 +427,7 @@ _ • {Extended}: additionally links such as these are also replaced:  {<html>me@s
 
 	// P
 	'pack_actuel' => 'Pack @date@',
-	'pack_actuel_avert' => '<NEW>Atenci&oacute;n, las sobrecargas para los define() o los globales no se especifican aqu&iacute;',
+	'pack_actuel_avert' => 'Warning: the overrides of globals and of "define()" are not specified here',
 	'pack_actuel_titre' => 'UP-TO-DATE CONFIGURATION PACK OF THE SWISS KNIFE',
 	'pack_alt' => 'See the current configuration parameters',
 	'pack_descrip' => 'Your "Current configuration pack" brings together all the parameters activated for the Swiss Knife plugin. It remembers both whether a tool is activated or not and, if so, what options have been chosen.
@@ -443,7 +443,7 @@ If you reset the plugin by clicking on a pack, the Swiss Knife will reconfigure 
 	'pack_nb_zero' => 'No "configuration pack" is currently available.',
 	'pack_outils_defaut' => 'Installation of the default tools',
 	'pack_sauver' => 'Save the current configuration',
-	'pack_sauver_descrip' => '<NEW>El bot&oacute;n de m&aacute;s abajo permite insertar directamente en el archivo <b>@file@</b> los par&aacute;metros necesarios para a&ntilde;adir un &laquo;paquete de configuraci&oacute;n&nbsp;&raquo; en el men&uacute; de la izquierda. Esto te permitir&aacute; despu&eacute;s devolver con un clic la Navaja Suiza al estado de configuraci&oacute;n en que est&aacute; actualmente.',
+	'pack_sauver_descrip' => '<NEW>Le bouton ci-dessous vous permet d\'ins&eacute;rer directement dans votre fichier <b>@file@</b> les param&egrave;tres n&eacute;cessaires pour ajouter un &laquo;&nbsp;pack de configuration&nbsp;&raquo; dans le menu de gauche. Ceci vous permettra ult&eacute;rieurement de reconfigurer en un clic votre Couteau Suisse dans l\'&eacute;tat o&ugrave; il est actuellement.',
 	'pack_titre' => 'Current configuration',
 	'pack_variables_defaut' => 'Installation of the default variables',
 	'par_defaut' => 'By default',
@@ -506,12 +506,12 @@ List here the sequences you wish to prohibit@_CS_ASTER@ separating them with spa
 @_CS_ASTER@To specify a whole word, place it in brackets. Expressions containing spaces should be placed with inverted commas.',
 	'spam:nom' => 'Fight against SPAM',
 	'spip_cache:description' => '<MODIF>@puce@ By default, SPIP calculates all the public pages and caches them in order to accelerate their display. It can be useful, when developing the site to disable the cache temporarily, in order to see the effect of changes immediately.[[%radio_desactive_cache3%]]@puce@ The cache occupies disk space and SPIP can limit the amount of space taken up. Leaving empty or putting 0 means that no limit will be applied.[[%quota_cache% Mo]]@puce@ When the site\'s contents are changed, SPIP immediately invalidates the cache without waiting for the next periodic recalculation. If your site experiences performance problems because of the load of repeated recalculations, you can choose "no" for this option.[[%derniere_modif_invalide%]]@puce@ If the #CACHE tag is not found in a template then by default SPIP caches a page for 24 hours before recalculating it. You can modify this default here.[[%duree_cache% heures]]@puce@ If you are running several mutualised sites, you can specify here the default value for all the local sites (SPIP 1.93).[[%duree_cache_mutu% heures]]',
-	'spip_cache:description1' => '<NEW>@puce@ Por omisi&oacute;n, SPIP calcula todas las p&aacute;ginas p&uacute;blicas y las sit&uacute;a en la cach&eacute; para acelerar la consulta. Desactivar temporalmente la cach&eacute; puede ayudar durante el desarrollo del sitio. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]',
-	'spip_cache:description2' => '<NEW>@puce@ Cuatro opciones para orientar el funcionamiento de la cach&eacute; de SPIP: <q1>
-_ • {Uso normal}: SPIP calcula todas las p&aacute;ginas p&uacute;blicas y las pone en la cach&eacute; para acelerar la consulta. Tras un cierto intervalo, la cach&eacute; se recalcula y se guarda.
-_ • {Cach&eacute; permanente}: los intervalos de invalidaci&oacute;n de la cach&eacute; se ignoran.
-_ • {Sin cach&eacute;}: desactivar temporalmente la cach&eacute; puede ayudar mientras se desarrolla el sitio. Aqu&iacute;, no se guarda nada en el disco.
-_ • {Control de la cach&eacute;}: opci&oacute;n id&eacute;ntica a la anterior, con escritura en el disco de todos los resultados para poder controlarlos si hace falta.</q1>[[%radio_desactive_cache4%]]',
+	'spip_cache:description1' => '<NEW>@puce@ Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]',
+	'spip_cache:description2' => '<NEW>@puce@ Quatre options pour orienter le fonctionnement du cache de SPIP : <q1>
+_ • {Usage normal} : SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. Apr&egrave;s un certain d&eacute;lai, le cache est recalcul&eacute; et stock&eacute;.
+_ • {Cache permanent} : les d&eacute;lais d\'invalidation du cache sont ignor&eacute;s.
+_ • {Pas de cache} : d&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. Ici, rien n\'est stock&eacute; sur le disque.
+_ • {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&eacute;dente, avec une &eacute;criture sur le disque de tous les r&eacute;sultats afin de pouvoir &eacute;ventuellement les contr&ocirc;ler.</q1>[[%radio_desactive_cache4%]]',
 	'spip_cache:nom' => 'SPIP and the cache',
 	'stat_auteurs' => 'Authors in statistics',
 	'statuts_spip' => 'Only the following SPIP status:',
@@ -524,14 +524,14 @@ _ • {Control de la cach&eacute;}: opci&oacute;n id&eacute;ntica a la anterior, c
 
 	// T
 	'titre' => 'The Swiss Knife',
-	'titre_parent:description' => '<NEW>En el interior de un bucle, es habitual que se quiera mostrar el t&iacute;tulo del padre del objeto en curso. Tradicionalmente, bastaba utilizar un segundo bucle, pero esta nueva baliza #TITRE_PARENT aligerar&aacute; la escritura de tus esqueletos. El resultado devuelto es: el t&iacute;tulo del grupo de una palabra-clave o el de la secci&oacute;n padre (si existe) de cualquier otro objeto (art&iacute;culo, secci&oacute;n, breve, etc.).
+	'titre_parent:description' => '<NEW>Au sein d\'une boucle, il est courant de vouloir afficher le titre du parent de l\'objet en cours. Traditionnellement, il suffirait d\'utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT all&eacute;gera l\'&eacute;criture de vos squelettes. Le r&eacute;sultat renvoy&eacute; est : le titre du groupe d\'un mot-cl&eacute; ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, br&egrave;ve, etc.).
 
-Nota: Para las palabras-clave, un alias de #TITRE_PARENT es #TITRE_GROUPE. El tratamiento por SPIP de estas balizas nuevas es similar al de #TITRE.
+Notez : Pour les mots-cl&eacute;s, un alias de #TITRE_PARENT est #TITRE_GROUPE. Le traitement SPIP de ces nouvelles balises est similaire &agrave; celui de #TITRE.
 
-@puce@ Si utilizas SPIP 2.0, aqu&iacute; tienes disponible todo un conjunto de balizas #TITRE_XXX que podr&aacute;n devolver el t&iacute;tulo del objeto \'xxx\', a condici&oacute;n de que el campo \'id_xxx\' est&eacute; presente en la tabla en curso (#ID_XXX utilizable en el bucle en curso).
+@puce@ Si vous &ecirc;tes sous SPIP 2.0, alors vous avez ici &agrave; votre disposition tout un ensemble de balises #TITRE_XXX qui pourront vous donner le titre de l\'objet \'xxx\', &agrave; condition que le champ \'id_xxx\' soit pr&eacute;sent dans la table en cours (#ID_XXX utilisable dans la boucle en cours).
 
-Por ejemplo, en un bucle sobre (ARTICLES), #TITRE_SECTEUR devolver&aacute; el t&iacute;tulo del sector en el que est&aacute; situado el art&iacute;culo en curso, pues el identificador #ID_SECTEUR (o el campo \'id_secteur\') est&aacute; disponible en ese caso.[[%titres_etendus%]]',
-	'titre_parent:nom' => '<NEW>Baliza #TITRE_PARENT',
+Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du secteur dans lequel est plac&eacute; l\'article en cours, puisque l\'identifiant #ID_SECTEUR (ou le champ \'id_secteur\') est disponible dans ce cas.[[%titres_etendus%]]',
+	'titre_parent:nom' => '#TITRE_PARENT tag',
 	'titre_tests' => 'The Swiss Knife - Test page',
 	'tous' => 'All',
 	'toutes_couleurs' => 'The 36 colours in CSS styles: @_CS_EXEMPLE_COULEURS@',
@@ -603,19 +603,19 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'url_standard' => 'standard',
 	'urls_base_total' => 'There are currently @nb@ URL(s) in the database',
 	'urls_base_vide' => 'The URL database is empty',
-	'urls_choix_objet' => '<MODIF>Edici&oacute;n basada en la URL de un objeto espec&iacute;fico:',
-	'urls_edit_erreur' => '<NEW>El formato actual de las URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) no permite la edici&oacute;n.',
-	'urls_enregistrer' => '<NEW>Grabar esta URL en la base',
-	'urls_nouvelle' => '<MODIF>&Eacute;diter l\'URL &laquo;&nbsp;propres&nbsp;&raquo;&nbsp;:',
+	'urls_choix_objet' => 'Edit the URL of a specific object in the database:',
+	'urls_edit_erreur' => 'The current URL format ("@type@") does not permit editing.',
+	'urls_enregistrer' => 'Write this URL to the database',
+	'urls_nouvelle' => 'Edit the "clean" URL',
 	'urls_num_objet' => 'Number:',
-	'urls_purger' => '<MODIF>Erase all',
+	'urls_purger' => 'Empty all',
 	'urls_purger_tables' => 'empty tables selected',
 	'urls_purger_tout' => 'Reset the URLs stored in the database:',
 	'urls_rechercher' => 'Find this object in the database',
-	'urls_titre_objet' => '<NEW>T&iacute;tulo grabado:',
+	'urls_titre_objet' => 'Saved title:',
 	'urls_type_objet' => '<MODF>Order:',
 	'urls_url_calculee' => 'URL PUBLIC  &laquo;&nbsp;@type@&nbsp;&raquo;:',
-	'urls_url_objet' => '<MODIF>URL &laquo;&nbsp;propres&nbsp;&raquo; enregistr&eacute;e&nbsp;:',
+	'urls_url_objet' => 'Saved "clean" URL:',
 	'urls_valeur_vide' => '(An empty value implies the removal of the URL)',
 
 	// V
@@ -624,16 +624,16 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'vars_modifiees' => 'The data has been modified',
 	'version_a_jour' => 'Your version is up to date.',
 	'version_distante' => 'Distant version...',
-	'version_distante_off' => '<NEW>Comprobaci&oacute;n externa desactivada',
+	'version_distante_off' => 'REmote checking deactivated',
 	'version_nouvelle' => 'New version: @version@',
 	'version_revision' => 'version: @revision@',
 	'version_update' => 'Automatic update',
 	'version_update_chargeur' => 'Automatic download',
 	'version_update_chargeur_title' => 'Download the latest version of the plugin using the plugin &laquo;Downloader&raquo;',
 	'version_update_title' => 'Downloads the latest version of the plugin and updates it automatically.',
-	'verstexte:description' => '<MODIF>2 filters for your templates which make it possible to produce lighter pages.
-_ version_texte : extracts the text content of an HTML page (includes only a few very basic tags).
-_ version_plein_texte : extracts the text content from an html to render full text.',
+	'verstexte:description' => '2 filters for your templates which make it possible to produce lighter pages.
+_ version_texte : extracts the text content of an HTML page, excluding some basic tags.
+_ version_plein_texte : extracts the full text content from an html page.',
 	'verstexte:nom' => 'Text version',
 	'visiteurs_connectes:description' => 'Creates an HTML fragment for your templates which displays on the public site the number of vistors logged in.
 
@@ -643,12 +643,12 @@ Simply add <code><INCLURE{fond=fonds/visiteurs_connectes}></code> in the templat
 	'votre_choix' => 'Your choice:',
 
 	// W
-	'webmestres:description' => '<NEW>Un {{webmaster}} en el sentido de SPIP es un {{administrador}} que tiene acceso al espacio FTP. Por omisi&oacute;n, y a partir de SPIP 2.0, el administrador es el <code>id_auteur=1</code> del sitio. Los webmasters definidos aqu&iacute; tienen el privilegio de no estar obligados a pasar por el FTP para validar las operaciones delicadas del sitio, como la actualizaci&oacute;n de la base de datos o la restauraci&oacute;n de un volcado.
+	'webmestres:description' => '<NEW>Un {{webmestre}} au sens SPIP est un {{administrateur}} ayant acc&egrave;s &agrave; l\'espace FTP. Par d&eacute;faut et &agrave; partir de SPIP 2.0, il est l’administrateur <code>id_auteur=1</code> du site. Les webmestres ici d&eacute;finis ont le privil&egrave;ge de ne plus &ecirc;tre oblig&eacute;s de passer par FTP pour valider les op&eacute;rations sensibles du site, comme la mise &agrave; jour de la base de donn&eacute;es ou la restauration d’un dump.
 
-Webmaster(s) actual(es): {@_CS_LISTE_WEBMESTRES@}.
-_ Administrador(es) elegible(s): {@_CS_LISTE_ADMINS@}.
+Webmestre(s) actuel(s) : {@_CS_LISTE_WEBMESTRES@}.
+_ Administrateur(s) &eacute;ligible(s) : {@_CS_LISTE_ADMINS@}.
 
-Al ser webmaster tu mismo, aqu&iacute; tienes permisos para modificar esta lista de ids -- separadas por dos puntos &laquo;&nbsp;:&nbsp;&raquo; si son varias. Ejemplo: &laquo;1:5:6&raquo;.[[%webmestres%]]',
+En tant que webmestre vous-m&ecirc;me, vous avez ici les droits de modifier cette liste d\'ids -- s&eacute;par&eacute;s par les deux points &laquo;&nbsp;:&nbsp;&raquo; s\'ils sont plusieurs. Exemple : &laquo;1:5:6&raquo;.[[%webmestres%]]',
 	'webmestres:nom' => 'list of webmasters',
 
 	// X

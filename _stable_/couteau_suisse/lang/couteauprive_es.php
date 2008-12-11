@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  
 @puce@ Marcando &laquo;si&raquo; m&aacute;s abajo, la apertura de un bloque causar&aacute; el cierre de los dem&aacute;s bloques de la p&aacute;gina, para tener solamente uno abierto cada vez.[[%bloc_unique%]]',
 	'blocs:nom' => 'Bloques Desplegables',
-	'boites_privees:description' => 'Todas las cajas descritas a continuaci&oacute;n aparecen en la parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]]
+	'boites_privees:description' => '<MODIF>Todas las cajas descritas a continuaci&oacute;n aparecen en la parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]]
 - {{Las revisiones de la Navaja Suiza}}: un cuadro sobre esta p&aacute;gina de configuraci&oacute;n, que indica las &uacute;ltimas modificaciones efectuadas en el c&oacute;digo del plugin ([Fuente->@_CS_RSS_SOURCE@]).
 - {{Los art&iacute;culos en formato SPIP}} : un cuadro desplegable suplementario para tus art&iacute;culos con el fin de ver el c&oacute;digo fuente utilizado por sus autores.
 - {{Los autores en cifras}} : un cuadro suplementario en [la p&aacute;gina de los autores->./?exec=auteurs] que indica los 10 &uacute;ltimos conectados y las inscripciones no confirmadas. S&oacute;lo los administradores ven esta informaci&oacute;n.

@@ -59,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 @puce@ Marcando &laquo;si&raquo;, a apertura dun bloque provocar&aacute; o cerre de todos os outros bloques da p&aacute;xina, co fin de non ter m&aacute;is ca un aberto &aacute; vez.[[%bloc_unique%]]
 ',
 	'blocs:nom' => 'Bloques despregables',
-	'boites_privees:description' => 'Todas as funcionalidades abaixo descritas aparecen na parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]]
+	'boites_privees:description' => '<MODIF>Todas as funcionalidades abaixo descritas aparecen na parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]]
 [[->%bp_urls_propres%]]
 - {{As revisi&oacute;ns da Navalla Su&iacute;za}} : un cadre sobre a presente p&aacute;xina de configuraci&oacute;n, indicando as &uacute;ltimas modificaci&oacute;ns achegadas ao c&oacute;digo do m&oacute;dulo ([Source->@_CS_RSS_SOURCE@]).
 - {{Os artigos en formato SPIP}} : un cadro repregable suplementario para os seus artigos co fin co fin de co&ntilde;ecer o  c&oacute;digo fonte usado polos seus autores.

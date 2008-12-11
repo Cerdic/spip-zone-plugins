@@ -23,9 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attente' => 'Wachten...',
 	'auteur_forum:description' => 'Zet alle auteurs van openbare berichten ertoe aan om te vullen (van minstens van een brief!) het veld &laquo;@_CS_FORUM_NOM@&raquo; teneinde de volkomen onbekende bijdragen te vermijden.',
 	'auteur_forum:nom' => 'Geen onbekende forums',
-	'auteurs:description' => '<MODIF>Dit werktuig configureert de schijn van [de bladzijde van de auteurs ->./?exec=auteurs], gedeeltelijk particulier.
+	'auteurs:description' => 'Dit werktuig configureert de schijn van [de bladzijde van de auteurs ->./?exec=auteurs], gedeeltelijk particulier.
 
-@puce@ Bepaalt hier het maximumaantal auteurs die op het centrale kader van de bladzijde van de auteurs moeten aangegeven worden. Verder is een paginering opgesteld.[[%max_auteurs_page%]]
+@puce@ Bepaal hier het maximum aantal auteurs die op het centrale kader van de bladzijde van de auteurs moeten aangegeven worden. Verder is een paginering opgesteld.[[%max_auteurs_page%]]
 
 @puce@ Welke statuten van auteurs kunnen op deze bladzijde op een lijst gezet worden ?
 [[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]',
@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'basique' => 'Fundamenteel',
 	'blocs:aide' => 'Openvouwen blokken : <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias : <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) et <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF>Laat u toe om blokken te cre&euml;ren waarvan de titel cliquable ze zichtbaar of onzichtbaar kan maken.
+	'blocs:description' => 'Laat u toe om blokken te cre&euml;ren waarvan de titel cliquable ze zichtbaar of onzichtbaar kan maken.
 
 @puce@ {{In de SPIP teksten}} : de redacteuren hebben ter beschikking de nieuwe bakens &lt;bloc&gt; (om &lt;invisible&gt;) en &lt;visible&gt; om bij hun teksten zoals dit te gebruiken : 
 
@@ -54,12 +54,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  #BLOC_DEBUT
  Mijn openvouwen blok (wie URL gemarkeerd indien noodzakelijk zal bevatten)
  #BLOC_FIN</code></quote>
-',
+
+@puce@ Door &#132;jawoord&#147; aan te strepen hieronder, zal de opening van een blok de sluiting van alle andere blokken van de bladzijde, veroorzaken teneinde te hebben erover dan slechts &eacute;&eacute;n tegelijkertijd geopend.[[%bloc_unique%]]',
 	'blocs:nom' => 'Openvouwen Blokken',
 	'boites_privees:description' => '<MODIF>Alle beschreven dozen hieronder komen in het particuliere deel voor.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]]
-- {{De revisies van het Zwitserland Mes}} : een kader op deze bladzijde van configuratie, dat op de laatste wijzigingen wijst die aan de code van plugin worden aangebracht ([Source->@_CS_RSS_SOURCE@]).
-- {{De artikelen aan het SPIP formaat}} : een aanvullend opvouwbaar kader voor uw artikelen teneinde de code bron te kennen die door hun auteurs wordt gebruikt.
-- {{De auteurs in stat}} : een kader aanvullend op [de bladzijde van de auteurs->./?exec=auteurs] die de 10 aangesloten laatsten en de niet bevestigde inschrijvingen aangeven. Enkel de beheerders zien deze informatie.',
+- {{De revisies van het Zwitserse Mes}} : een kader op deze bladzijde van configuratie, laatste wijzigingen aangebracht aan de code van plugin  ([Source->@_CS_RSS_SOURCE@]).
+- {{De artikelen aan het SPIP formaat}} : een aanvullend opvouwbaar kader voor uw artikelen ten einde de code bron te kennen die door hun auteurs wordt gebruikt.
+- {{De auteurs in stat}} : een kader aanvullend op [de bladzijde van de auteurs->./?exec=auteurs] wijst op de  10 laatst aangeslotenen en de niet bevestigde inschrijvingen. Enkel de beheerders zien deze informatie.
+- {{URLs eigen}}: een kader d&eacute;pliable voor elk onderwerp van inhoud (artikel, rubriek, auteur,…) aangevend URL eigen verenigd alsmede van hen alias eventueel. Het werktuig &#132;&nbsp; [. - >type_urls] &nbsp;&#147; laat u een fijne configuratie van URLs van uw plaats toe.',
 	'boites_privees:nom' => 'Particuliere dozen',
 	'bp_urls_propres' => 'Eigen URLs ',
 
@@ -86,17 +88,18 @@ _ Dit werktuig vervangt deze link door de beelden van dezelfde naam die hij in d
 U kunt hier bepaalde kortere wegen van SPIP bepalen. Een lege waarde staat gelijk om de waarde per gebrek te gebruiken.[[%racc_hr%]][[%puce%]]',
 	'class_spip:description3' => '<MODIF>
 
-SPIP gebruikt gewoonlijk het baken &lt;h3&gt; voor intertitres. Kiest hier een andere vervanging :[[%racc_h1%]][[->%racc_h2%]]',
+SPIP gebruikt gewoonlijk het baken &lt;h3&gt; voor intertitres. Kies hier een andere vervanging :[[%racc_h1%]][[->%racc_h2%]]',
 	'class_spip:description4' => '<MODIF>
 
-SPIP heeft verkozen om het baken &lt;i> te gebruiken om italiques over te schrijven. Maar &lt;em> had eveneens kunnen passen. Aan u te zien :[[%racc_i1%]][[->%racc_i2%]]
-Merkt op: door de vervanging van de kortere wegen van italiques te wijzigen, de stijl {{2.}} hierboven zal gespecificeerd niet toegepast zijn.
+SPIP heeft verkozen om het baken &lt;strong> te gebruiken om vette letters te schrijven. Maar &lt;b> had eveneens kunnen passen. Aan u om te beslissen :[[%racc_g1%]][[->%racc_g2%]]
 
-@puce@ {{De stijlen van SPIP}}. Tot de versie 1.92 van SPIP, produceerden de typografische kortere wegen bakens systematisch van de stijl "spip". Par voorbeeld : <code><p class="spip"></code>. U kunt hier de stijl van deze bakens bepalen in functie van uw bladen van stijl. Een leeg hokje betekent dat geen enkele bijzondere stijl zal toegepast zijn.<blockquote style=\'margin:0 2em;\'>
+SPIP heeft gekozen om &lt;i> te gebruiken om italiques te schrijven. Maar &lt;em> zou ook gekunt hebben, met of zonder stijl.Aan u om te beslissen[[%racc_i1%]][[->%racc_i2%]]
+
+@puce@ {{De stijlen van SPIP}}. Tot de versie 1.92 van SPIP, produceerden de typografische kortere wegen bakens systematisch van de stijl "spip". Bijvoorbeeld : <code><p class="spip"></code>. U kunt hier de stijl van deze bakens bepalen in functie van uw bladen van stijl. Een leeg hokje betekent dat geen enkele bijzondere stijl zal toegepast zijn.<blockquote style=\'margin:0 2em;\'>
 _ {{1.}} Bakens &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; en de lijsten (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[%style_p%]]
 _ {{2.}} Bakens &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; et &lt;blockquote&gt; :[[%style_h%]]
 
-Merkt op: door deze tweede parameter te wijzigen, verliest u dan de standaardstijlen die met deze bakens worden verenigd.</blockquote>',
+Opgelet: door deze tweede parameter te wijzigen, verliest u dan de standaardstijlen die met deze bakens worden verenigd.</blockquote>',
 	'class_spip:nom' => 'SPIP en zijn kortere wegen…',
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Functies',
@@ -105,7 +108,7 @@ Merkt op: door deze tweede parameter te wijzigen, verliest u dan de standaardsti
 	'code_options' => 'Opties',
 	'code_spip_options' => 'Opties SPIP',
 	'contrib' => 'Meer info : @url@',
-	'corbeille:description' => '<NEW>SPIP verwijdert automatisch de objecten mis au rebuts na 24 uren, en dit meestal rond 4 u \'s morgens, dit dank zij &laquo;CRON&raquo; (een periodieke en/of een automatische lancering van het voorgeprogrammeerde proces). Hier kunt u het proces verhinderen zodanig dat u beter vat hebt op het beheer van het mandje.[[%arret_optimisation%]]',
+	'corbeille:description' => '<MODIF>SPIP verwijdert automatisch de objecten mis au rebuts na 24 uren, en dit meestal rond 4u \'s morgens, dit dankzij &laquo;CRON&raquo; (een periodieke en/of een automatische lancering van het voorgeprogrammeerde proces). Hier kunt u het proces verhinderen zodanig dat u beter vat hebt op het beheer van prullenmand.[[%arret_optimisation%]]',
 	'corbeille:nom' => 'Het mandje',
 	'corbeille_objets' => '@nb@ onderwerp(en) in het mandje.',
 	'corbeille_objets_lies' => '@nb_lies@ ontdekte(n) verbinding.',
@@ -124,12 +127,12 @@ Idem om de bodem te veranderen, als de keuze hieronder het toelaat:@_CS_EXEMPLE_
 @_CS_ASTER@Het formaat van deze verpersoonlijkte bakens moet bestaande kleuren op een lijst zetten of paren &laquo;balise=couleur&raquo;, bepalen, alles die door komma\'s wordt gescheiden. Voorbeelden. Exemples : &laquo;gris, rouge&raquo;, &laquo;faible=jaune, fort=rouge&raquo;, &laquo;bas=#99CC11, haut=brown&raquo; of nog &laquo;gris=#DDDDCC, rouge=#EE3300&raquo;. Voor de eerste en het laatste voorbeeld, zijn de toegelaten bakens : <code>[gris]</code> en <code>[rouge]</code> (<code>[fond gris]</code> en <code>[fond rouge]</code> als de middelen toegestaan zijn).',
 	'couleurs:nom' => 'Erg in kleuren',
 	'couleurs_fonds' => ', <b>[fond&nbsp;coul]text[/coul]</b>, <b>[bg&nbsp;coul]text[/coul]</b>',
-	'cs_comportement:description' => '<NEW>@puce@ {{Logs.}}Vele inlichtingen zijn te verkrijgen rond de plug in \'Couteau Suisse (Zwitsers mesje)\' in de folders {spip.log} dat U kunt vinden in het repertoire: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
+	'cs_comportement:description' => '<MODIF>@puce@ {{Logs.}}Vele inlichtingen zijn te verkrijgen over de plugin \'Couteau Suisse (Zwitsers mesje)\' in de folders {spip.log} deze kunt U vinden in het repertoire: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
 
-@puce@ {{Options SPIP.}} SPIP zet de  plugins in een specifieke orde. Om zeker te zijn dat \'le Couteau Suisse\' in het begin staat en zo enkele SPIP opties automatisch be&iuml;nvloedt, moet u de volgende optie aanvinken. Indien de rechten van u server het toestaan, zal de folder {@_CS_FILE_OPTIONS@} automatisch gemodifieerd worden en de volgende folder insluiten {@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php}.
+@puce@{{Options SPIP.}} SPIP zet de  plugins in een specifieke orde. Om zeker te zijn dat \'le Couteau Suisse\' in het begin staat en zo enkele SPIP opties automatisch be&iuml;nvloedt, moet u de volgende optie aanvinken. Indien de rechten van u server het toestaan, zal de folder{@_CS_FILE_OPTIONS@} automatisch gemodifieerd worden en de volgende folder insluiten {@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php}.
 [[%spip_options_on%]]
 
-@puce@ {{Requ&ecirc;tes externes.}} \'Le Couteau Suisse\' verifieert regelmatig het bestaan van een meer recente versie en geeft de informatie door waar een nieuwe versie ter beschikking is. Indien dit een probleem vertoond bij u server probeer dan de volgende link.[[%distant_off%]]',
+@puce@ {{Requ&ecirc;tes externes.}} \'Le Couteau Suisse\' verifieert regelmatig het bestaan van een recentere versie en geeft de informatie door waar deze  ter beschikking is. Indien dit een probleem vertoont bij u server probeer dan de volgende link.[[%distant_off%]]',
 	'cs_comportement:nom' => 'Gedrag van het Zwitserland Mes',
 	'cs_distant_off' => 'De verificaties van verwijderde versies',
 	'cs_log_couteau_suisse' => 'Uitvoerige logs van het Zwitserland Mes',
@@ -138,17 +141,17 @@ Idem om de bodem te veranderen, als de keuze hieronder het toelaat:@_CS_EXEMPLE_
 
 	// D
 	'decoration:aide' => 'Versiering&nbsp;: <b>&lt;balise&gt;test&lt;/balise&gt;</b>, met <b>balise</b> = @liste@',
-	'decoration:description' => '<NEW>De nouveaux styles param&eacute;trables dans vos textes et accessibles gr&acirc;ce &agrave; des balises &agrave; chevrons. Exemple : 
-&lt;mabalise&gt;texte&lt;/mabalise&gt; ou : &lt;mabalise/&gt;.<br />D&eacute;finissez ci-dessous les styles CSS dont vous avez besoin, une balise par ligne, selon les syntaxes suivantes :
+	'decoration:description' => '<MODIF>Nieuwe lettertype zijn te parametreren in u teksten en toegankelijk dankzij des balises &agrave; chevrons. Voorbeeld : 
+&lt;mabalise&gt;texte&lt;/mabalise&gt; ou : &lt;mabalise/&gt;.<br />Definier hieronder de CSS die u nodig heeft, une balise per lijn, zoals de hierna volgende syntaxes  :
 - {type.mabalise = mon style CSS}
 - {type.mabalise.class = ma classe CSS}
 - {type.mabalise.lang = ma langue (ex : fr)}
 - {unalias = mabalise}
 
-Le param&egrave;tre {type} ci-dessus peut prendre trois valeurs :
-- {span} : balise &agrave; l\'int&eacute;rieur d\'un paragraphe (type Inline)
-- {div} : balise cr&eacute;ant un nouveau paragraphe (type Block)
-- {auto} : balise d&eacute;termin&eacute;e automatiquement par le plugin
+De parameter {type} hieronder kan drie verschillende waarden:
+- {span} : balise binnenin een paragraaf(type Inline)
+- {div} : balise die een nieuwe paragraaf cre&euml;rt (type Block)
+- {auto} : balise automatisch gedetermineerd door de plugin 
 
 [[%decoration_styles%]]',
 	'decoration:nom' => 'Versiering',
@@ -172,7 +175,7 @@ Cet outil peut &ecirc;tre coupl&eacute; avec &laquo;&nbsp;[.->sommaire]&nbsp;&ra
 	'detail_inline' => 'Code inline :',
 	'detail_jquery1' => '{{Aandacht}}: dit werktuig maakt plugin {jQuery} het noodzakelijk om met deze versie van SPIP te werken.',
 	'detail_jquery2' => 'Dit werktuig vereist de boekhandel {jQuery}.',
-	'detail_jquery3' => '<NEW>{{Attention}} : cet outil n&eacute;cessite le plugin [jQuery pour SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] pour fonctionner correctement avec cette version de SPIP.',
+	'detail_jquery3' => '<MODIF>{{Attention}} : deze tool heeft een andere plugin nodig[jQuery pour SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip]om efficient te functioneren met deze spip versie.',
 	'detail_pipelines' => 'Pijpleidingen :',
 	'detail_traitements' => 'Behandelingen :',
 	'dossier_squelettes:description' => 'Wijzigt het dossier van het gebruikte skelet. Bijvoorbeeld: &#132;skeletten/mijnskelet&#147;. U kunt verschillende dossiers inschrijven door ze te scheiden door beide punten <html> &laquo;&nbsp;:&nbsp;&raquo;</html>. Door leegte te laten het hokje dat (of door "dist" te typen) volgt, is het originele skelet dat "dist" door SPIP wordt geleverd, dat zal gebruikt worden. [[%dossier_squelettes%]]',
@@ -183,10 +186,10 @@ Cet outil peut &ecirc;tre coupl&eacute; avec &laquo;&nbsp;[.->sommaire]&nbsp;&ra
 	'en_travaux:description' => 'Maakt het mogelijk om een aan de persoonlijke behoeften aanpasbaar bericht te kennen te geven gedurende een fase van onderhoud op de hele openbare site.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]]',
 	'en_travaux:nom' => 'Site in werkzaamheden',
-	'erreur:bt' => '<NEW><span style=\\"color:red;\\">Attention :</span> la barre typographique (version @version@) semble ancienne.<br />Le Couteau Suisse est compatible avec une version sup&eacute;rieure ou &eacute;gale &agrave; @mini@.',
+	'erreur:bt' => '<MODIF><span style=\\"color:red;\\">Attention :</span> la barre typographique (version @version@) schijnt oud.<br />Het Zwitsers mes  (Couteau Suisse)stemt overeen met een hogere versie of gelijk aan @mini@.',
 	'erreur:description' => 'id gebrek hebbend aan in de definitie van het werktuig !',
 	'erreur:distant' => 'de verwijderde server',
-	'erreur:jquery' => '<MODIF>{{Note}} : la librairie {jQuery} semble inactive sur cette page. Veuillez consulter [ici->http://www.spip-contrib.net/?article2166] le paragraphe sur les d&eacute;pendances du plugin ou recharger cette page.',
+	'erreur:jquery' => '<MODIF>{{Note}} : de bibliotheek {jQuery} schijnt inactief op deze pagina. Consulteer:[ici->http://www.spip-contrib.net/?article2166] de paragraaf op de \'d&eacute;pendances\' van de plugin of  herlaad deze pagina.',
 	'erreur:js' => 'Een fout JavaScript schijnt op deze bladzijde voorgekomen zijn en verhindert zijn goede werking. Gelieve JavaScript op uw navigator activeren om af-activeren sommige plugins SPIP van uw site.',
 	'erreur:nojs' => 'JavaScript wordt op deze bladzijde af-activeerd.',
 	'erreur:nom' => 'Fout !',
@@ -196,9 +199,9 @@ Cet outil peut &ecirc;tre coupl&eacute; avec &laquo;&nbsp;[.->sommaire]&nbsp;&ra
 	'etendu' => 'Uitgestrekt',
 
 	// F
-	'f_jQuery:description' => '<MODIF>Verhindert de installatie van {jQuery} in het openbare deel teneinde e&eacute;conmiser een beetje van &#132;tijd bekokstooft&#147;. Deze boekhandel ([- > http://jquery.com/]) brengt talrijke gerief in de programmering van Javascript en kan door bepaalde plugins gebruikt worden. SPIP gebruikt het bij zijn deel priv&eacute;e.
+	'f_jQuery:description' => '<MODIF>Verhindert de installatie van {jQuery} in het openbare deel teneinde economischer te werk te gaan en tijd te besparen. Deze bibliotheek ([- > http://jquery.com/]) brengt talrijke mogelijkheden in de programmering van Javascript en kan door bepaalde plugins gebruikt worden. SPIP gebruikt het in het priv&eacute; gedeelte.
 
-Opgelet: bepaalde werktuigen van het Zwitserland Mes vereisen de functies van {jQuery}.',
+Opgelet: bepaalde werktuigen van het Zwitserse Mes (couteau suisse) vereisen de functies van {jQuery}.',
 	'f_jQuery:nom' => 'Inactieve jQuery.',
 	'filets_sep:aide' => 'Scheidingsnetten&nbsp;: <b>__i__</b> waar <b>i</b> is een aantal.<br />Andere beschikbare netten : @liste@',
 	'filets_sep:description' => 'Neemt scheidingsnetten op, aan de persoonlijke behoeften aanpasbaar door bladen van stijl, in alle teksten van SPIP.
@@ -206,10 +209,10 @@ _ De syntaxis is : "__code__", waar &#132;de code&#147; vertegenwoordigt ofwel h
 	'filets_sep:nom' => 'Scheidingsnetten',
 	'filtrer_javascript:description' => '<MODIF>Om javascript in de artikelen te beheren, zijn drie manieren beschikbaar :
 - <i>nooit</i>: javascript wordt overal geweigerd
-- <i>het gebrek</i>: javascript is in rood in de particuliere ruimte aangeduid
+- <i>het gebrek</i>: javascript is in rood in de priv&eacute; ruimte aangeduid
 - <i>nog steeds</i>: javascript wordt overal aanvaard.
 
-Opgelet: in de forums, petities, georganiseerde stromen, enz., het beleid van javascript wordt <b>altijd</b> veiliggesteld.[[%radio_filtrer_javascript3%]]',
+Opgelet: in de forums, petities, georganiseerde stromen, enz., het beleid van javascript wordt <b>altijd</b> veilig gesteld.[[%radio_filtrer_javascript3%]]',
 	'filtrer_javascript:nom' => 'Beleid van JavaScript',
 	'flock:description' => 'D&eacute;sactiveren het systeem van grendeling van bestanden door de functie PHP {flock()} te neutraliseren. Bepaalde onderdak geeft immers ernstige problemen ten gevolge van een onaangepast systeem van bestanden of een gebrek aan synchronisatie. Activeert niet dit werktuig als uw plaats normaal werkt.',
 	'flock:nom' => 'Geen grendeling van bestanden',
@@ -221,7 +224,7 @@ Opgelet: in de forums, petities, georganiseerde stromen, enz., het beleid van ja
 	'forum_lgrmaxi:nom' => 'Omvang van de forums',
 
 	// G
-	'glossaire:aide' => '<NEW>Un texte sans glossaire : <b>@_CS_SANS_GLOSSAIRE@</b>',
+	'glossaire:aide' => '<MODIF>Een tekst zonder verklarende woordenlijst (glossarium) : <b>@_CS_SANS_GLOSSAIRE@</b>',
 	'glossaire:description' => '<MODIF>@puce@ Beleid van een intern glossarium in verband met &eacute;&eacute;n of meer groepen sleutelwoorden. Schrijft hier de naam van de groepen in door ze te scheiden door beide punten &laquo;&nbsp;:&nbsp;&raquo;. Door leegte te laten het hokje dat (of door "Glossarium" te typen) volgt, is het de groep "Glossarium" die zal gebruikt worden.[[%glossaire_groupes%]]@puce@ Voor elk woord, hebt u de mogelijkheid om het maximumaantal band te kiezen die in uw teksten wordt gecre&euml;erd. Elke nul of negatieve waarde impliceert dat alle erkende woorden zullen behandeld worden. [[%glossaire_limite% per sleutelwoord]]@puce@ worden Twee oplossingen u aangeboden om het kleine automatische venster te cre&euml;ren dat bij het overzicht van de muis blijkt.[[%glossaire_js%]]',
 	'glossaire:nom' => 'Intern glossarium',
 	'glossaire_css' => 'Oplossing CSS',

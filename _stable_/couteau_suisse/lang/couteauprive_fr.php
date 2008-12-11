@@ -63,8 +63,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 - {{Les URLs propres}} : un cadre d&eacute;pliable pour chaque objet de contenu (article, rubrique, auteur, ...) indiquant l\'URL propre associ&eacute;e ainsi que leurs alias &eacute;ventuels. L\'outil &laquo;&nbsp;[.->type_urls]&nbsp;&raquo; vous permet une configuration fine des URLs de votre site.
 - {{Les tris d\'auteurs}} : un cadre d&eacute;pliable pour les articles contenant plus d\'un auteur et permettant simplement d\'en ajuster l\'ordre d\'affichage.',
 	'boites_privees:nom' => 'Bo&icirc;tes priv&eacute;es',
-	'bp_urls_propres' => 'Les URLs propres',
 	'bp_tri_auteurs' => 'Les tris d\'auteurs',
+	'bp_urls_propres' => 'Les URLs propres',
 
 	// C
 	'cache_controle' => 'Contr&ocirc;le du cache',
