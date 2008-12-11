@@ -393,11 +393,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 
 	// cette valeur par defaut n'est pas definie sous SPIP 1.92
 	@define('_ID_WEBMESTRES', 1);
-	if (!cout_autoriser()) {
-		include_spip('inc/minipres');
-		echo defined('_SPIP19100')?minipres( _T('avis_non_acces_page')):minipres();
-		exit;
-	}
+	cs_minipres();
 	$cmd = _request('cmd');
 	$exec = _request('exec');
 

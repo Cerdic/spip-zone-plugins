@@ -27,11 +27,7 @@ if(defined('_SPIP19100') && !function_exists('spip_xml_load')) {
 }
 
 function exec_cs_boite_rss_dist() {
-	if (!cout_autoriser()) {
-		include_spip('inc/minipres');
-		echo defined('_SPIP19100')?minipres( _T('avis_non_acces_page')):minipres();
-		exit;
-	}
+	cs_minipres();
 	include_spip('cout_define');
 	cout_define('distant');
 	$p = '';

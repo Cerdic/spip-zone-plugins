@@ -20,16 +20,24 @@ if(!function_exists(ajax_retour)) {
 
 function exec_action_rapide_dist() {
 	global $type_urls;
-	if (!cout_autoriser()) {
-		include_spip('inc/minipres');
-		echo defined('_SPIP19100')?minipres( _T('avis_non_acces_page')):minipres();
-		exit;
-	}
+	cs_minipres();
 	$arg = _request('arg');
 //	spip_log("exec 'action_rapide' du Couteau suisse : $arg / "._request('submit'));
 //	spip_log($_POST); spip_log($_GET);
 
 	switch ($arg) {
+	// formulaires en partie privee
+	case 'boites_privees':
+cs_log("INIT : exec_action_rapide_dist() - Preparation du retour par Ajax (donnees transmises par GET)");
+		$script = _request('script');
+cs_log(" -- fonction = $fct - script = $script - arg = $arg");
+		cs_minipres(!preg_match('/^\w+$/', $script));
+		$fct = 'action_rapide_'._request('fct');
+		include_spip('outils/boites_privees');
+		$res = function_exists($fct)?$fct():'';
+cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour() pour afficher le formulaire de la boite privee");	
+		ajax_retour($res);
+		break;
 
 	// pour gerer les packs de configuration : mode non ajax, rien a faire.
 	case 'sauve_pack':
@@ -41,7 +49,7 @@ cs_log("INIT : exec_action_rapide_dist() - Preparation du retour par Ajax (donne
 		$script = _request('script');
 		$outil = _request('outil');
 cs_log(" -- outil = $outil - script = $script - arg = $arg");
-		if (!preg_match('/^\w+$/', $script)) { echo minipres(); exit; }
+		cs_minipres(!preg_match('/^\w+$/', $script));
 		include_spip('inc/cs_outils');
 		$res = cs_action_rapide($outil);
 cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour() pour afficher la ligne de configuration de l'outil");	

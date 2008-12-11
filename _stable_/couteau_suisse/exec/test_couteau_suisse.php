@@ -19,11 +19,7 @@ function exec_test_couteau_suisse() {
 cs_log("D&eacute;but : exec_test_couteau_suisse()");
 	global $connect_statut, $connect_toutes_rubriques;
 
-	if (!cout_autoriser()) {
-		include_spip('inc/minipres');
-		echo defined('_SPIP19100')?minipres( _T('avis_non_acces_page')):minipres();
-		exit;
-	}
+	cs_minipres();
 
 	// initialisation generale forcee : recuperation de $outils;
 	cs_initialisation(true);

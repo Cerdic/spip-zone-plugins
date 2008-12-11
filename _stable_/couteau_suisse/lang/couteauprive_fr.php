@@ -56,13 +56,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 @puce@ En cochant &laquo;oui&raquo; ci-dessous, l\'ouverture d\'un bloc provoquera la fermeture de tous les autres blocs de la page, afin d\'en avoir qu\'un seul ouvert &agrave; la fois.[[%bloc_unique%]]',
 	'blocs:nom' => 'Blocs D&eacute;pliables',
-	'boites_privees:description' => 'Toutes les bo&icirc;tes d&eacute;crites ci-dessous apparaissent dans la partie priv&eacute;e.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]]
+	'boites_privees:description' => 'Toutes les bo&icirc;tes d&eacute;crites ci-dessous apparaissent ici ou l&agrave; dans la partie priv&eacute;e.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Les r&eacute;visions du Couteau Suisse}} : un cadre sur la pr&eacute;sente page de configuration, indiquant les derni&egrave;res modifications apport&eacute;es au code du plugin ([Source->@_CS_RSS_SOURCE@]).
 - {{Les articles au format SPIP}} : un cadre repliable suppl&eacute;mentaire pour vos articles afin de conna&icirc;tre le code source utilis&eacute; par leurs auteurs.
 - {{Les auteurs en stat}} : un cadre suppl&eacute;mentaire sur [la page des auteurs->./?exec=auteurs] indiquant les 10 derniers connect&eacute;s et les inscriptions non confirm&eacute;es. Seuls les administrateurs voient ces informations.
-- {{Les URLs propres}} : un cadre d&eacute;pliable pour chaque objet de contenu (article, rubrique, auteur, ...) indiquant l\'URL propre associ&eacute;e ainsi que leurs alias &eacute;ventuels. L\'outil &laquo;&nbsp;[.->type_urls]&nbsp;&raquo; vous permet une configuration fine des URLs de votre site.',
+- {{Les URLs propres}} : un cadre d&eacute;pliable pour chaque objet de contenu (article, rubrique, auteur, ...) indiquant l\'URL propre associ&eacute;e ainsi que leurs alias &eacute;ventuels. L\'outil &laquo;&nbsp;[.->type_urls]&nbsp;&raquo; vous permet une configuration fine des URLs de votre site.
+- {{Les tris d\'auteurs}} : un cadre d&eacute;pliable pour les articles contenant plus d\'un auteur et permettant simplement d\'en ajuster l\'ordre d\'affichage.',
 	'boites_privees:nom' => 'Bo&icirc;tes priv&eacute;es',
 	'bp_urls_propres' => 'Les URLs propres',
+	'bp_tri_auteurs' => 'Les tris d\'auteurs',
 
 	// C
 	'cache_controle' => 'Contr&ocirc;le du cache',

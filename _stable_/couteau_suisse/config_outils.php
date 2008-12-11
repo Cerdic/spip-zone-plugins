@@ -482,6 +482,12 @@ add_outil( array(
 ));
 
 add_variable( array(
+	'nom' => 'bp_tri_auteurs',
+	'check' => 'couteauprive:bp_tri_auteurs',
+	'defaut' => 1,
+	'code:%s' => "define('boites_privees_TRI_AUTEURS', %s);\n",
+));
+add_variable( array(
 	'nom' => 'bp_urls_propres',
 	'check' => 'couteauprive:bp_urls_propres',
 	'defaut' => 1,
@@ -509,7 +515,7 @@ add_outil( array(
 	'id' => 'boites_privees',
 	'auteur'=>'Pat, Joseph LARMARANGE (format SPIP)',
 	'contrib' => 2564,
-	'code:options' => "%%cs_rss%%%%format_spip%%%%stat_auteurs%%%%bp_urls_propres%%",
+	'code:options' => "%%cs_rss%%%%format_spip%%%%stat_auteurs%%%%bp_urls_propres%%%%bp_tri_auteurs%%",
 	'categorie' => 'interface',
 	'pipeline:affiche_milieu' => 'boites_privees_affiche_milieu',
 	'pipeline:affiche_droite' => 'boites_privees_affiche_droite',
@@ -1100,7 +1106,8 @@ add_variable( array(
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
 	'defaut' => 0,
-	'code:%s' => "if(!function_exists('genie_optimiser')) { 
+	'code:%s' => "define('_CORBEILLE_SANS_OPTIM', 1);
+if(!function_exists('genie_optimiser')) { 
 	// surcharge de la fonction d'optimisation de SPIP (inc/optimiser.php)
 	function genie_optimiser(\$t='foo'){ include_spip('optimiser','genie'); optimiser_base_une_table(); return -(mktime(2,0,0) + rand(0, 3600*4)); }\n}",
 ));

@@ -22,7 +22,7 @@ cs_log("INIT : exec_description_outil_dist() - Preparation du retour par Ajax (d
 	$script = _request('script');
 	$outil = _request('outil');
 cs_log(" -- outil = $outil - script = $script");
-	if (!preg_match('/^\w+$/', $script)) { echo minipres(); exit;	}
+	cs_minipres(!preg_match('/^\w+$/', $script));
 	// ici on commence l'initialisation de tous les outils
 	global $outils, $metas_vars, $metas_outils;
 	include_spip('cout_utils');

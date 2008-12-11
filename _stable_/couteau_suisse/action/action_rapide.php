@@ -30,15 +30,21 @@ spip_log("action 'action_rapide' du Couteau suisse : $arg");
 
 	switch ($arg) {
 
-	// purger la corbeille
-	case 'corbeille':
-		include_spip('outils/corbeille_action_rapide');
-		action_rapide_purge_corbeille();
-		break;
 	// pour inserer un pack de config dans config/mes_options.php
 	case 'sauve_pack':
 		include_spip('outils/pack_action_rapide');
 		action_rapide_sauve_pack();
+		break;
+	// boite privee : tri les auteurs d'un article
+	case 'tri_auteurs':
+		include_spip('outils/boites_privees');
+		action_rapide_tri_auteurs(_request('bp_article'), abs(_request('bp_auteur')), _request('bp_auteur')>0);
+		break;
+
+	// purger la corbeille
+	case 'corbeille':
+		include_spip('outils/corbeille_action_rapide');
+		action_rapide_purge_corbeille();
 		break;
 	// pour purger le cache de SPIP...
 	case 'cache':

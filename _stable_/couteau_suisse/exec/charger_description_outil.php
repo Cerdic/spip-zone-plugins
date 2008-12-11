@@ -15,11 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_charger_description_outil_dist() {
 cs_log("INIT : exec_charger_description_outil_dist() - Preparation du retour par Ajax sur div#cs_infos");
 
-	if (!cout_autoriser()) {
-		include_spip('inc/minipres');
-		echo minipres();
-		exit;
-	}
+	cs_minipres();
 	if ($outil_id=_request('outil')) {
 		include_spip('inc/headers');
 		http_no_cache();
