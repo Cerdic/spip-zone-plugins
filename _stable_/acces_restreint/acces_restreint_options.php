@@ -35,8 +35,8 @@ if (test_espace_prive()
   OR !lire_fichier($f,$contenu)
   OR md5($contenu)!==_BONUX_CSS_MD5_FORMULAIRES){
   	include_spip('inc/plugin');
-  	ecrire_plugin_actifs(array('AGENDA'=>substr(rtrim(_DIR_PLUGIN_AGENDA,'/'),strlen(_DIR_PLUGINS))),false,'enleve');
-  	ecrire_meta('plugin_erreur_activation','Agenda necessite le vrai SPIP-Bonux');
+  	ecrire_plugin_actifs(array('ACCESRESTREINT'=>substr(rtrim(_DIR_PLUGIN_ACCESRESTREINT,'/'),strlen(_DIR_PLUGINS))),false,'enleve');
+  	ecrire_meta('plugin_erreur_activation','Acces rezstreint 3.0 necessite le vrai SPIP-Bonux');
   	//die('echec:'.md5($contenu).":"._BONUX_CSS_MD5_FORMULAIRES);	
   }
 }
