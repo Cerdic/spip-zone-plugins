@@ -11,7 +11,7 @@ function corbeille_action_rapide() {
 		$infos = 
 			($nb?_T('couteauprive:corbeille_objets', array('nb'=>$nb)):_T('couteauprive:corbeille_objets_vide'))
 			.($nb_lies>0?' '._T('couteauprive:corbeille_objets_lies', array('nb_lies'=>$nb_lies)):'');
-		$objets[] = "<label><input type='checkbox' value='$table:$ids'".($nb?" checked='checked'":"")." name='$table'/>$obj[libelle_court].
+		$objets[] = "<label><input type='checkbox' value='$table:$ids'".($nb?" checked='checked'":"")." name='$table'/>"._T($obj[libelle]).".
 <span class='ar_edit_info'>$infos</span></label>";
 	}
 	return ajax_action_auteur('action_rapide', 'corbeille', 'admin_couteau_suisse', "arg=retour_normal&cmd=descrip&outil=corbeille#cs_action_rapide",
@@ -23,15 +23,9 @@ function corbeille_action_rapide() {
 
 // pour ajouter des tables dans la corbeille, utiliser le tableau : global $corbeille_params['nvelle_table_SPIP'];
 /*
- "nvelle_table_SPIP" => array (
 	"statut" => nom du statut dans la base de donnees (bdd),
-	"titre" => nom du champ retourne dans le listing,
-	"table" => nom de la table spip dans la bdd,
-	"id" => clef primaire dans la table,
-	"temps" => aucune idee a quoi ça peut servir,
-	"page_voir" => parametres pour voir le detail d'un objet
-	"libelle" => texte long dans la partie droite de l'affichage,
-	"libelle_court" => texte court dans le menu gauche,
+	"table" => nom eventuel de la table, pour definir plusieurs noisettes avec une meme table mais des statuts differents,
+	"libelle" => libelle court,
 	"tableliee"  => tableau des tables spip à vider en meme temps    ) 
 */
 function cs_corbeille_table_infos($table=false) {
@@ -41,39 +35,30 @@ function cs_corbeille_table_infos($table=false) {
 		$params = array (
 			"articles" => array( "statut" => "poubelle",
 				"tableliee"=> array("spip_auteurs_articles","spip_documents_liens","spip_mots_articles","spip_signatures","spip_versions","spip_versions_fragments","spip_forum"),
-				"temps" => "date",
-				"libelle_court" => _T('icone_articles')
-				),
+				"libelle" => 'icone_articles',
+			),
 			"auteurs" => array( "statut" => "5poubelle",
 				"temps" => "maj",
-				"libelle_court" => _T('icone_auteurs')
-				),					
+				"libelle" => 'icone_auteurs',
+			),					
 			"breves" => array( "statut" => "refuse", 
-				"temps" => "date_heure",
-				"libelle_court" => _T('icone_breves')
-				),
+				"libelle" => 'icone_breves',
+			),
 			"forums_publics" => array( "statut" => "off",
 				"table"=>"forum",
-				"temps" => "date_heure",
-				"libelle_court" => _T('titre_forum')
-				),
+				"libelle" => 'titre_forum',
+			),
 			"forums_prives" => array( "statut" => "privoff",
 				"table"=>"forum",
-				"temps" => "date_heure",
-				"libelle_court" => _T('icone_forum_administrateur')
-				),
+				"libelle" => 'icone_forum_administrateur',
+			),
 			"signatures" => array( "statut" => "poubelle", 
-				"temps" => "date_time",
-				"page_voir" => array("signatures",'id_document'),
-				"libelle_court" => _T('couteau:objet_petitions'),
-				),
+				"libelle" => 'couteau:objet_petitions',
+			),
 			"sites" => array( "statut" => "refuse",
-				"table" => "syndic",
 				"tableliee"=> array("spip_syndic_articles","spip_mots_syndic"),
-				"temps" => "maj",
-				"page_voir" => array("sites",'id_syndic'),
-				"libelle_court" => _T('couteau:objet_syndics')
-				)	,
+				"libelle" => 'couteau:objet_syndics',
+			),
 		);
 		if(is_array($corbeille_params)) $params = array_merge($params, $corbeille_params);
 	}
@@ -95,8 +80,8 @@ function cs_corbeille_gerer($table, $ids=array(), $vider=false) {
 	if (isset($params['table'])) $table = $params['table'];
 	include_spip('base/abstract_sql');
 	$type = objet_type($table);
-	$table_sql = 'spip_' . $table; // table_objet_sql($type) buggue car le pluriel de 'jeu' est 'jeux' et non 'jeus'
-	$id_table = isset($params['id'])?$params['id']:id_table_objet($type);
+	$table_sql = table_objet_sql($type);
+	$id_table = id_table_objet($type);
 	if (!$params['statut']) return false;
 //echo "$type - $table_sql - $id_table - ",table_objet_sql($type),'<hr>';
 	// determine les index des elements a supprimer
