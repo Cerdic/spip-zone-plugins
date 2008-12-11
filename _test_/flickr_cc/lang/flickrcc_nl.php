@@ -18,14 +18,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'fermer' => 'Sluiten',
-	'flickr_cc_explication' => '<NEW><p>Recherchez des images en Creative Commons sur Flickr en indiquant les termes de la recherche ci-dessus. Pr&eacute;cisez &eacute;ventuellement les natures de licences auxquelles sont soumises les images.</p>
-<p>Cliquez sur la (ou les) images(s) choisie(s) parmi les r&eacute;sultats de la recherche&nbsp;: elle est imm&eacute;diatement associ&eacute;e &agrave; votre article. Cliquez sur le nom de l\'auteur pour acc&eacute;der &agrave; la page Flickr de cette image.</p>
-<p>Ces images sont mises &agrave; disposition par leurs auteurs respectifs&nbsp;: pour respecter leurs droits et leur travail,</p>
-<ul><li>ne supprimez pas la mention de l\'auteur et le lien vers leur page Flickr&nbsp;;</li>
-<li>respectez rigoureusement la licence Creative Commons associ&eacute;e &agrave; chaque image (en particulier, n\'utilisez pas une image dans un cadre commercial si la licence de l\'autorise pas&nbsp;;</li>
-<li>si l\'auteur de l\'image vous le demande, vous devez retirer l\'image de votre site dans un d&eacute;lai de 24 heures.</li>
+	'flickr_cc_explication' => '<p>Beoogt beelden in Creatieve Commons op Flickr door de termen van het onderzoek hierboven aan te geven. Geeft eventueel de aard van vergunningen aan waaraan de beelden worden voorgelegd.</p>
+<p>Klikt op (of ze) de beelden gekozen onder de resultaten van het onderzoek &nbsp;: zij wordt onmiddellijk verenigd met uw artikel. Klikt op de naam van de auteur om op de bladzijde Flickr van dit beeld te bereiken.</p>
+<p>Deze beelden worden ter beschikking gesteld door hun respectieve auteurs&nbsp;: om hun rechten en hun werk te eerbiedigen, </p>
+<ul><li>schaft de vermelding van de auteur en de band naar hun bladzijde Flickr niet af&nbsp;;</li>
+<li>eerbiedigt streng de Creatieve vergunning Commons die met elk beeld wordt verenigd (in het bijzonder, gebruikt geen beeld in een commercieel kader als de vergunning van niet toestaat&nbsp;;</li>
+<li>als de auteur van het beeld u het vraagt, moet u het beeld van uw plaats terugtrekken binnen 24 uur.</li>
 </ul>
-<p>Ce produit utilise l&rsquo;API Flickr mais n&rsquo;est ni soutenu, ni certifi&eacute; par Flickr.</p>',
+<p>Dit product gebruikt API Flickr maar is noch aanhoudend, noch gewaarborgd door Flickr.</p>',
 
 	// R
 	'rechercher_flickr' => 'Op Flickr zoeken naar',
