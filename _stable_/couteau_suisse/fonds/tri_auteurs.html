@@ -7,7 +7,7 @@
 <BOUCLE_aut1(AUTEURS){id_article}{doublons}> </BOUCLE_aut1>
 #SET{nb,#TOTAL_BOUCLE|plus{1}}
 #SET{val,javascript:document.getElementsByName('bp_auteur')[0].value}
-<BOUCLE_art(ARTICLES){id_article}>
+<BOUCLE_art(ARTICLES){id_article}{statut!='poubelle'}>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" style="text-align:left">
 	<BOUCLE_aut2(AUTEURS){id_article}>
 	<tr bgcolor="[(#COMPTEUR_BOUCLE|alterner{'#FFFFEE','#E5EFF8'})]" >

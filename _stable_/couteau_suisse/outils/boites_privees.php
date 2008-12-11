@@ -134,7 +134,7 @@ function cs_urls_propres($type, $id) {
 	// SPIP < 2.0
 	if(!defined('_SPIP19300')) return debut_cadre_relief(find_in_path('img/couteau-24.gif'), true)
 		. "<div class='verdana1' style='text-align: left;'>"
-		. block_parfois_visible('bp', '<b>'._T('couteau:urls_propres_titre').'</b>', cs_urls_propres_descrip($type, $id), 'text-align: center;')
+		. block_parfois_visible('bp_urls', '<b>'._T('couteau:urls_propres_titre').'</b>', cs_urls_propres_descrip($type, $id), 'text-align: center;')
 		. "</div>"
 		. fin_cadre_relief(true);
 	// SPIP >= 2.0
@@ -209,22 +209,25 @@ spip_log("action_rapide_tri_auteurs : $id_article, $id_auteur, $monter");
 		return;
 	 }
 	$id = $id_article?$id_article:_request('id_article');
+	include_spip('public/assembler'); // pour recuperer_fond(), SPIP < 2.0
+	$texte = trim(recuperer_fond('fonds/tri_auteurs', array('id_article'=>$id)));
 	// syntaxe : ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
-	$texte = ajax_action_auteur('action_rapide', 'tri_auteurs', 'articles', "arg=boites_privees&fct=tri_auteurs&id_article=$id#bp_tri_auteurs_corps",
-			recuperer_fond('fonds/tri_auteurs', array('id_article'=>$id)));
+	if(strlen($texte))
+		$texte = ajax_action_auteur('action_rapide', 'tri_auteurs', 'articles', "arg=boites_privees&fct=tri_auteurs&id_article=$id#bp_tri_auteurs_corps", $texte);
 	// si appel exec...
 	if(!$id_article) return $texte;
 	// ici, 1er affichage !
+	if(!strlen($texte)) return '';
 	// SPIP < 2.0
 	if(!defined('_SPIP19300')) return debut_cadre_relief(find_in_path('img/couteau-24.gif'), true)
 		. "<div class='verdana1' style='text-align: left;'>"
-		. block_parfois_visible('bp', '<b>'._T('couteau:tri_auteurs').'</b>', cs_tri_auteurs_corps($id_article), 'text-align: center;')
+		. block_parfois_visible('bp_ta', '<b>'._T('couteau:tri_auteurs').'</b>', "<div id='bp_tri_auteurs_corps'>$texte</div>", 'text-align: center;')
 		. "</div>"
 		. fin_cadre_relief(true);
 	// SPIP >= 2.0
 	return cadre_depliable(find_in_path('img/couteau-24.gif'),
 		'<b>'._T('couteau:tri_auteurs').'</b>',
-		true,	// true = deplie
+		false,	// true = deplie
 		"<div id='bp_tri_auteurs_corps'>$texte</div>",
 		'bp_tri_auteurs');
 }
