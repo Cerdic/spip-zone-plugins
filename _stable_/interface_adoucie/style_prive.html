@@ -524,20 +524,35 @@ div.titrem a.titremancre {padding:15px 0 0 16px;background-position: [(#GET{left
 .dater, .dater .titrem,	.editer_mot .titrem, .editer_auteurs .titrem,  .cadre-e .titrem  { background-color: #GET{claire}; }
 .dater .hover, .editer_mot .hover, .editer_auteurs .hover { background-color: #GET{foncee}; }
 
-.mots_tous #contenu .titrem.impliable { background-color: #GET{claire}; }
+.mots_tous #contenu .titrem.impliable {
+	background-color: white;
+	padding-bottom: 10px;
+	color: #444444;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#GET{claire})], bottom [(#GET{left})] no-repeat })]
+}
 .configuration #contenu .cadre .titrem { background-color:#eee; }
 .configuration #contenu .titrem.hover { background-color: #GET{claire}; }
+.configuration #contenu .cadre-trait-couleur { border: 1px solid #bbb; }
 .configuration #contenu .cadre-trait-couleur .titrem { background-color: #GET{foncee};color: #fff; }
-.configuration #contenu .cadre-trait-couleur .cadre_padding .titrem { background-color: #eee;color: #000; }
+.configuration #contenu .cadre-couleur .cadre_padding .titrem,
+.configuration #contenu .cadre-trait-couleur .cadre_padding .titrem { 
+	background-color: white;
+	padding-bottom: 10px;
+	color: #444444;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{eeeeee, bottom [(#GET{left})] no-repeat })]
+}
 .configuration #contenu .cadre-couleur .titrem { background-color: #GET{claire}; }
-.configuration #contenu .cadre-couleur .cadre_padding .titrem { background-color:#eee; }
 .cadre-liste .titrem { background-color: #fff; }
 .cadre-liste .titrem.hover { background-color: #GET{claire}}
 .cadre-liste .tr_liste .titrem { background-color:#eee; }
 .cadre-couleur .titrem { background-color: #fff; }
 
 .joindre .titrem, #navigation .joindre .titrem { background-color: #GET{claire}; }
-.accueil #navigation .titrem { background-color: #GET{claire}; }
+.accueil #navigation .titrem { 
+	background-color: white;
+	padding-bottom: 10px;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#GET{claire})], bottom [(#GET{left})] no-repeat })]
+}
 
 #navigation .titrem, #extra .titrem {text-align: center; }
 #navigation .titrem, #extra .titrem { background-color: #fff; }
