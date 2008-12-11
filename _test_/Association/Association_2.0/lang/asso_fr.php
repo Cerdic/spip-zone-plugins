@@ -391,7 +391,7 @@ Commentaire: @commentaire@
 		
 		#Libelle
 			'plan_libelle_comptes_actifs' => 'Comptes actifs',
-			'plan_libelle_comptes_desactives' => 'Comptes d&eacute;csactiv&eacute;s',
+			'plan_libelle_comptes_desactives' => 'Comptes d&eacute;sactiv&eacute;s',
 			'plan_libelle_oui' => 'oui',
 			'plan_libelle_non' => 'non',
 	);
