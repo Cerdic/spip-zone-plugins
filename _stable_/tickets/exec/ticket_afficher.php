@@ -66,11 +66,14 @@ function exec_ticket_afficher () {
 		$id_ticket = _request("modifier_statut_ticket");
 		$id_assigne = _request("id_assigne");
 		$statut = _request("statut");
+		$ancien_statut = _request("ancien_statut");
 
 		$query = sql_query("SELECT * FROM spip_tickets WHERE id_ticket = $id_ticket");
 		if ($row = sql_fetch($query)) {
 			$old_auteur = $row["id_auteur"];
 			$old_assigne = $row["id_assigne"];
+			$titre = $row["titre"];
+			$texte = $row["texte"];
 		}
 		if ($connect_statut == "0minirezo" OR $old_auteur == $connect_id_auteur OR $old_assigne == $connect_id_auteur) {
 
@@ -78,6 +81,31 @@ function exec_ticket_afficher () {
 				sql_updateq("spip_tickets", 
 					array("id_assigne" => $id_assigne, "statut" => $statut), 
 					"id_ticket = '$id_ticket'");
+					
+					
+					
+			// Envoyer mail annoncant le bug
+			if ($statut != $ancien_statut AND $statut!="redac") {
+				$nom_site = $GLOBALS["meta"]["nom_site"];
+				$url_site = $GLOBALS["meta"]["adresse_site"];
+				$url_ticket = "$url_site/ecrire/?exec=ticket_afficher&id_ticket=$id_ticket";
+				$from = $GLOBALS["meta"]["email_webmaster"];
+				$titre = trim($titre);
+				$titre_message = "[Ticket - $nom_site] $titre - statut:".tickets_texte_statut($statut); 
+				$header = "From: ". $nom_site . " <" . $from . ">\r\n";
+				$message = "$titre_message\n
+------------------------------------------\n
+Ceci est un message automatique : n'y repondez pas.\n\n
+$texte\n\n
+$url_ticket";
+				
+				$query_auteurs = sql_query("SELECT email FROM spip_auteurs WHERE (statut='0minirezo' OR statut='1comite') AND email LIKE '%@%' ");
+				while ($row_auteur = sql_fetch($query_auteurs)) {
+					$recipient = $row_auteur["email"];
+					mail($recipient, $titre_message, $message, $header);
+					
+				}
+			}
 		}			
 	}
 

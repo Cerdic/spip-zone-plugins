@@ -2,7 +2,7 @@
 	<nom>Tickets, syst&egrave;me de suivi de bugs</nom>
 	<auteur>ARNO*</auteur>
 	<version>1.1</version>
-	<version_base>0.2</version_base>
+	<version_base>0.5</version_base>
 	<etat>stable</etat>
 	<description>
 <i>Tickets</i> est un outil de suivi de bugs directement int&eacute;gr&eacute; &agrave; l'espace priv&eacute; de SPIP. 

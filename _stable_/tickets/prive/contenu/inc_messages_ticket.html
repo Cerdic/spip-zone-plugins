@@ -1,0 +1,29 @@
+<B_messages>
+<div class="cadre cadre-liste">
+	<div class="titrem">Les derniers messages</div>
+	[<div class="arial1 tranches">(#PAGINATION)</div>]
+	<table width="100%" cellpadding="2" cellspacing="0" border="0">
+	<tbody>
+	<BOUCLE_messages(TICKETS_FORUM TICKETS){pagination 10}>
+	<tr class="tr_liste">
+	
+	<td class="arial2">	[(#TEXTE|couper{50,'...'})]</td>
+	
+	<td class="arial0">
+	<BOUCLE_ticket(TICKETS){id_ticket}>
+	<a href="?exec=ticket_afficher&amp;id_ticket=#ID_TICKET">#TITRE</a>
+	</BOUCLE_ticket>
+	</td>
+	
+	<td class="arial0">
+		<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+		<a href="?exec=auteur_infos&id_auteur=#ID_AUTEUR">#NOM</a>
+		</BOUCLE_auteur>
+	</td>
+	<td class="arial0">[(#DATE|affdate_court)]</td>
+	
+	</tr>
+	</BOUCLE_messages>
+	</tbody></table>
+	</div>
+</B_messages>

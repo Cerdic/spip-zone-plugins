@@ -1,13 +1,12 @@
 [(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
 #CACHE{0}
 <B_principale>
-<div class="cadre cadre-liste" style="margin-top: 20px;">
-[<img src="(#CHEMIN{imgs/bugs.png})" class="cadre-icone" alt="" style="width: 24px; height: 24px;">]
+<div class="cadre cadre-liste">
 <div class="titrem">#ENV{titre}</div>
 [<div class="arial1 tranches">(#PAGINATION)</div>]
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
 <tbody>
-<BOUCLE_principale(SPIP_TICKETS){par date}{inverse}{pagination 20}{id_auteur?=#ENV{id_auteur}}{id_assigne?=#ENV{id_assigne}}{statut?=#ENV{statut}}>
+<BOUCLE_principale(TICKETS){par date}{inverse}{pagination 10}{id_auteur?=#ENV{id_auteur}}{id_assigne?=#ENV{id_assigne}}{statut?=#ENV{statut}}>
 <tr class="tr_liste">
 	
 	<td style="width: 10px;">[(#STATUT|tickets_bouton_statut)]</td>

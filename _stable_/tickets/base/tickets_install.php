@@ -57,5 +57,19 @@ function tickets_declarer_tables_principales($tables_principales){
 	return $tables_principales;
 }
 
+function tickets_declarer_tables_interfaces($interface){
+
+	// 'spip_' dans l'index de $tables_principales
+	$interface['table_des_tables']['tickets']='tickets';
+	$interface['table_des_tables']['tickets_forum']='tickets_forum';
+	
+	$interface['tables_jointures']['spip_tickets_forum'][] = 'tickets';
+
+
+	return $interface;
+
+
+}
+
 
 ?>

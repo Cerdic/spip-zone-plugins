@@ -1,7 +1,6 @@
 <?php
 include_spip('inc/meta');
 include_spip('base/create');
-include_spip('inc/vieilles_defs');
 
 function tickets_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = "0.0";

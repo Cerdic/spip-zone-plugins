@@ -27,6 +27,12 @@ function liste_tickets() {
 			$ret .= icone_inline(_L('Créer un nouveau ticket'), generer_url_ecrire("ticket_editer","id_ticket=new"), _DIR_PLUGIN_TICKETS."imgs/bugs.png", "creer.gif", $align);
 
 			$ret .= "<div class='nettoyeur'></div>";
+
+
+			$contexte = array();
+			$page = recuperer_fond("prive/contenu/inc_messages_ticket", $contexte);
+			$ret .= $page;
+
 			
 			$contexte = array("titre"=>"Tous les tickets r&eacute;solus", "statut"=>"resolu");
 			$page = recuperer_fond("prive/contenu/inc_liste_tickets", $contexte);
