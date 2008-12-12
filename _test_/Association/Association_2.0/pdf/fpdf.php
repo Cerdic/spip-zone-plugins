@@ -199,7 +199,7 @@ function FPDF($orientation='P',$unit='mm',$format='A4') {
 		$this->rMargin=$right;
 	}
 
-	function SetLeftMargin($margin 
+	function SetLeftMargin($margin) { 
 		//Set left margin
 		$this->lMargin=$margin;
 		if($this->page>0 && $this->x<$margin)
