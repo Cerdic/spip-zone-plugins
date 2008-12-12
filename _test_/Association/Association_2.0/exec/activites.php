@@ -19,23 +19,24 @@
 		
 		$url_articles = generer_url_ecrire('articles');
 		$url_activites = generer_url_ecrire('activites');
-		$url_ajout_activite = generer_url_ecrire('edit_activite','action=ajoute');
-		$url_edit_activites = generer_url_ecrire('edit_activite','action=modifie');
+		$url_ajout_activite = generer_url_ecrire('edit_activite','agir=ajoute');
+		$url_edit_activites = generer_url_ecrire('edit_activite','agir=modifie');
 		$url_voir_activites = generer_url_ecrire('voir_activites');
+		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association'), "", "");
+		echo $commencer_page(_T('Gestion pour Association')) ;
 		
 		association_onglets();
 		
-		debut_gauche();
+		echo debut_gauche("",true);
 		
-		debut_boite_info();
+		echo debut_boite_info(true);
 		echo association_date_du_jour();	
-		fin_boite_info();
+		echo fin_boite_info(true);
 		
-		debut_droite();
+		echo debut_droite("",true);
 		
-		debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_toutes_activites'));
+		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_toutes_activites'));
 		
 		// FILTRES
 		if ( isset($_REQUEST['mot']) ) { $mot = $_REQUEST['mot']; } 
@@ -112,7 +113,7 @@
 		//SOUS-PAGINATION
 		echo '<td>';
 		$query = spip_query("SELECT * FROM ".$table_prefix."_asso_comptes WHERE date_format( date, '%Y' ) = $annee AND imputation like '$imputation' ");
-		$nombre_selection=spip_num_rows($query);
+		$nombre_selection=sql_count($query);
 		$pages=intval($nombre_selection/$max_par_page) + 1;
 		
 		if ($pages == 1) { echo ''; }
@@ -127,7 +128,7 @@
 		echo '</table>';
 		
 		fin_cadre_relief();  
-		echo fin_gauche(),fin_page();
+		 echo fin_gauche(),fin_page(); 
 	}
 ?>
 

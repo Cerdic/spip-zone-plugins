@@ -9,20 +9,19 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 	
 	function exec_edit_activite(){
 		global $connect_statut, $connect_toutes_rubriques;
-	
+		
 		include_spip('inc/acces_page');
 		
-		$url_faire_activites = generer_url_ecrire('faire_activites');
+		$url_action_activites = generer_url_ecrire('action_activites');
 		$url_retour = $_SERVER["HTTP_REFERER"];
 		
-		$faire=$_REQUEST['faire'];
-		if($faire=='ajoute'){$id_evenement=$_REQUEST['id'];}
+		$action=$_REQUEST['agir'];
+		if($action=='ajoute'){$id_evenement=$_REQUEST['id'];}
 		else {$id_activite=$_REQUEST['id'];}	
 		
 		$query = spip_query ("SELECT * FROM spip_asso_activites WHERE id_activite='$id_activite' ");
@@ -48,32 +47,31 @@
 			$date_debut=$data['date_debut'];
 			$lieu=$data['lieu'];
 		}
-		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:activite_titre_mise_a_jour_inscriptions'));
+		echo $commencer_page(_T('asso:activite_titre_mise_a_jour_inscriptions')) ;
+		
 		
 		association_onglets();
 		
-		debut_gauche();
+		echo debut_gauche("",true);
 		
-		debut_boite_info();
+		echo debut_boite_info(true);
 		echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">Activit&eacute; n&deg;<br />';
 		echo '<span class="spip_xx-large">';
 		{echo $id_evenement;}
 		echo '</span></div>';
 		echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.$titre.'</div>';
 		echo '<br /><div>'.association_date_du_jour().'</div>';		
-		fin_boite_info();	
+		echo fin_boite_info(true);	
 		
 		
-		$res = icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
-		
+		$res=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
 		echo bloc_des_raccourcis($res);
-		creer_colonne_droite();
-		debut_droite();
-		debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_mise_a_jour_inscriptions'));
 		
-		echo '<form method="post" action="'.$url_faire_activites.'">';
+		echo debut_droite("",true);
+		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_mise_a_jour_inscriptions'));
+		
+		echo '<form method="post" action="'.$url_action_activites.'">';
 		echo '<label for="date"><strong>'._T('asso:activite_libelle_date').' (AAAA-MM-JJ) :</strong></label>';
 		echo '<input name="date" type="text" value="'.$date.'" id="date" class="formo" />';
 		echo '<label for="nom"><strong>'._T('asso:activite_libelle_nomcomplet').' :</strong></label>';
@@ -100,19 +98,19 @@
 		echo ' id="statut" /><br />';
 		echo '<label for="commentaire"><strong>'._T('asso:activite_libelle_commentaires').' :</strong></label>';
 		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';
-		echo '<input name="faire" type="hidden" value="'.$faire.'">';
+		echo '<input name="agir" type="hidden" value="'.$action.'">';
 		echo '<input name="id_evenement" type="hidden" value="'.$id_evenement.'">';
 		echo '<input name="id_activite" type="hidden" value="'.$id_activite.'">';
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
 		
 		echo '<div style="float:right;">';
 		echo '<input name="submit" type="submit" value="';
-		if ( isset($faire)) {echo _T('asso:bouton_'.$faire);}
+		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo" /></div>';
 		echo '</form>';
 		
 		fin_cadre_relief();  
-		echo fin_gauche(),fin_page();
+		 echo fin_gauche(),fin_page(); 
 	}  
 ?>
