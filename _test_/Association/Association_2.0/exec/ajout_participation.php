@@ -9,7 +9,6 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	include_spip('inc/defs_supprimees');
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 
@@ -18,26 +17,27 @@
 		
 		include_spip ('inc/acces_page');
 		
-		$url_faire_activites=generer_url_ecrire('faire_activites');
+		$url_action_activites=generer_url_ecrire('action_activites');
 		$url_retour = $_SERVER["HTTP_REFERER"];
+		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo commencer_page(_T('asso:titre_gestion_pour_association'), "", "");
+		echo $commencer_page(_T('Gestion pour Association')) ;
 		
 		association_onglets();
 		
-		debut_gauche();
+		echo debut_gauche("",true);
 		
-		debut_boite_info();
+		echo debut_boite_info(true);
 		echo association_date_du_jour();	
-		fin_boite_info();	
+		echo fin_boite_info(true);	
 		
-		debut_raccourcis_sup();
-		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
-		fin_raccourcis_sup();
 		
-		debut_droite();
+		$res=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
+		echo bloc_des_raccourcis($res);
 		
-		debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_ajouter_inscriptions'));
+		echo debut_droite("",true);
+		
+		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_ajouter_inscriptions'));
 		
 		$id_activite=preg_replace("/[^0-9]/","",$_GET['id']);
 		
@@ -52,7 +52,7 @@
 			$commentaire=$data['commentaire'];
 		}
 		
-		echo '<form faire="'.$url_faire_activites.'" method="POST">';
+		echo '<form action="'.$url_action_activites.'" method="POST">';
 		echo '<label for="nom"><strong>'._T('asso:activite_libelle_nomcomplet').' :</strong></label>';
 		echo '<input name="nom"  type="text" size="40" value="'.$nom.'" id="nom" class="formo" />';
 		echo '<label for="id_membre"><strong>'._T('asso:activite_libelle_adherent').' :</strong></label>';
@@ -79,7 +79,7 @@
 		echo '<label for="commentaire"><strong>'._T('asso:activite_libelle_commentaires').' :</strong></label>';
 		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';
 		
-		echo '<input name="faire" type="hidden" value="paie">';
+		echo '<input name="action" type="hidden" value="paie">';
 		echo '<input name="id_activite" type="hidden" value="'.$id_activite.'">';
 		echo '<input name="id_evenement" type="hidden" value="'.$id_evenement.'">';
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
@@ -89,7 +89,7 @@
 		echo '</form>';
 
 		fin_cadre_relief();  
-		fin_page();
+		echo fin_gauche(), fin_page();
 	}
 
 ?>
