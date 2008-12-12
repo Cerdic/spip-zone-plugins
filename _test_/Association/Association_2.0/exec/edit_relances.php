@@ -9,17 +9,17 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	
-	
+	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 	
 	function exec_edit_relances(){
 		global $connect_statut, $connect_toutes_rubriques;
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('Gestion pour Association'), "", "");
 		
+		//debut_page(_T('Gestion pour Association'), "", "");
+		 $commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('Gestion pour Association')) ;
 		$url_asso = generer_url_ecrire('association');
-		$url_faire_relances = generer_url_ecrire('faire_relances','faire=confirm');
+		$url_action_relances = generer_url_ecrire('action_relances','agir=confirm');
 		$url_edit_relances = generer_url_ecrire('edit_relances');
 		$url_edit_labels = generer_url_ecrire('edit_labels');
 		$indexation = lire_config('association/indexation');
@@ -27,25 +27,23 @@
 		
 		association_onglets();
 		
-		debut_gauche();
+		echo debut_gauche("",true);
 		
-		debut_boite_info();
+		echo debut_boite_info(true);
 		echo association_date_du_jour();	
-		fin_boite_info();
+		echo fin_boite_info(true);
 		
 		
-		$res = icone_horizontale(_T('asso:bouton_impression'), $url_edit_labels, _DIR_PLUGIN_ASSOCIATION."/img_pack/print-24.png","rien.gif",false);	
-		$res .= icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
-		echo bloc_des_raccourcis($res);
-		creer_colonne_droite();
-		debut_droite();
-
+		$res=icone_horizontale(_T('asso:bouton_impression'), $url_edit_labels, _DIR_PLUGIN_ASSOCIATION."/img_pack/print-24.png","rien.gif",false);
+			
+		$res.=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
+		 echo bloc_des_raccourcis($res);
 		
-		
+		echo debut_droite("",true);
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('Tous les membres &agrave; relancer'));
 		
-		echo '<form method="post" action="'.$url_faire_relances.'">';
+		echo '<form method="post" action="'.$url_action_relances.'">';
 		
 		//MESSAGE
 		echo '<fieldset>';
@@ -91,6 +89,7 @@
 		while ($data = spip_fetch_array($query)) {
 			$id_auteur=$data['id_auteur'];
 			$email=$data["email"];
+			//$statut_interne=$data['statut_interne'];
 			switch($data['statut_interne']) {
 				case "echu": $class= "impair"; break;
 				case "ok": $class="valide"; break;
@@ -117,12 +116,12 @@
 		echo '</table>';
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
 		echo '<div style="float:right;"><input name="submit" type="submit" value="';
-		if ( isset($faire)) {echo _T('asso:bouton_'.$faire);}
+		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo" /></div>';
 		echo '</form>';	
 		
 		fin_cadre_relief();  
-		echo fin_gauche(),fin_page();
+		  echo fin_gauche(),fin_page(); 
 	}
 ?>

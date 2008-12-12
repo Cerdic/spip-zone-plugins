@@ -18,10 +18,10 @@
 		
 		include_spip ('inc/acces_page');
 		
-		$url_faire_dons = generer_url_ecrire('faire_dons');
+		$url_action_dons = generer_url_ecrire('action_dons');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
-		$faire=$_REQUEST['faire'];
+		$action=$_REQUEST['agir'];
 		$id_don= $_REQUEST['id'];		
 		
 		$query = spip_query (" SELECT * FROM spip_asso_dons WHERE id_don=$id_don ");
@@ -37,31 +37,29 @@
 			$commentaire=$data['commentaire'];
 		}
 		
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page();
+		  $commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('asso:association')) ;
 		
 		association_onglets();
 		
-		debut_gauche();
+		echo debut_gauche("",true);
 		
-		debut_boite_info();
+		echo debut_boite_info(true);
 		echo '<div style="font-weight: bold; text-align: center;" class="verdana1 spip_xx-small">DON<br><span class="spip_xx-large">'.$id_don.'</span></div>';
 		print association_date_du_jour();
-		fin_boite_info();
-		
-	
-		$res = icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
-		echo bloc_des_raccourcis($res);
-		creer_colonne_droite();
-		debut_droite();
+		echo fin_boite_info(true);
 		
 		
+		$res= icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
+		echo bloc_des_raccourcis ($res);
+		
+		echo debut_droite("", true);
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('Mise &agrave; jour des dons'));
 		
-		echo '<form method="post" action="'.$url_faire_dons.'">';
+		echo '<form method="post" action="'.$url_action_dons.'">';
 		echo '<input name="id" type="hidden" value="'.$id_don.'">';
-		echo '<input name="faire" type="hidden" value="'.$faire.'">';
+		echo '<input name="agir" type="hidden" value="'.$action.'">';
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
 		
 		echo '<label for="date_don"><strong>Date (AAAA-MM-JJ) :</strong></label>';
@@ -91,12 +89,12 @@
 		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';
 		
 		echo '<div style="float:right;"><input name="submit" type="submit" value="';
-		if ( isset($faire)) {echo _T('asso:bouton_'.$faire);}
+		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo" /></div>';
 		echo '</form>';
 		
 		fin_cadre_relief();  
-		echo fin_gauche(),fin_page();
+		fin_page();
 	}  
 ?>
