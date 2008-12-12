@@ -19,7 +19,7 @@
 		include_spip ('inc/acces_page');
 		
 		$url_asso = generer_url_ecrire('association');
-		$url_action_dons = generer_url_ecrire('agir_dons');
+		$url_action_dons = generer_url_ecrire('action_dons');
 		$url_retour=$_POST['url_retour'];
 		
 		$id_don = $_REQUEST['id'];		
@@ -65,19 +65,19 @@
 		echo $commencer_page(_T('Gestion pour Association')) ;
 			association_onglets();
 			
-			debut_gauche();
+			echo debut_gauche("",true);
 			
-			debut_boite_info();
+			echo debut_boite_info(true);
 			echo association_date_du_jour();	
-			fin_boite_info();
+			echo fin_boite_info(true);
 			
-			debut_raccourcis();
-			icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
-			fin_raccourcis();
 			
-			debut_droite();
+			$res=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
+			echo bloc_des_raccourcis($res);
 			
-			debut_cadre_relief(  "", false, "", $titre = _T('Action sur les dons'));
+			echo debut_droite("", true);
+			
+			echo debut_cadre_relief(  "", false, "", $titre = _T('Action sur les dons'));
 			echo '<div align="center">';
 			echo '<p><strong>Vous vous appr&ecirc;tez &agrave; effacer un don !</strong></p>';
 			echo '<form action="'.$url_action_dons.'" method="post">';

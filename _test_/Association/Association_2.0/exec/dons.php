@@ -83,7 +83,7 @@
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['colis'].'</td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.number_format($data['valeur'], 2, ',', ' ').'&nbsp;&euro;</td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['contrepartie'].'</td>';
-			echo '<td  class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_dons.'&action=supprime&id='.$data['id_don'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="Supprimer le don"></a></td>';
+			echo '<td  class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_dons.'&agir=supprime&id='.$data['id_don'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="Supprimer le don"></a></td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_don.'&id='.$data['id_don'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="Mettre &agrave; jour le don"></a>';
 			echo '</tr>';
 		}
