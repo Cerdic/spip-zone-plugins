@@ -1,14 +1,7 @@
 <?php
 // ---------------------------------------------------------
 //  Ma lettre - archives
-//
-//  version:  0.86
-//  date:     2007.02.22
-//  author:   erational <http://www.erational.org>
-//  licence:  GPL
 // ---------------------------------------------------------
-
-// TODO passer en trad
 
 include(dirname(__FILE__).'/../inc_malettre.php');
 
@@ -41,13 +34,13 @@ function exec_malettre_archive(){
     	  debut_page(_T('malettre:ma_lettre'));	  	
         debut_gauche();    
         debut_boite_info();
-        echo "<p><a href='?exec=malettre'>Ecrire une lettre</a></p>"; 
+        echo "<p><a href='?exec=malettre'>"._T('malettre:ecrire_nouvelle')."</a></p>";
         fin_boite_info();
         
         debut_droite();	        
-        echo "<h3>Archives</h3>";        
+        echo "<h3>"._T('malettre:archives')."</h3>";        
           if (!$folder = dir($path))   {
-            echo "error: can not read folder";
+            echo _T('malettre:erreur_lecture');
           	return false; 
         }
         $c = 0;
@@ -69,12 +62,12 @@ function exec_malettre_archive(){
         arsort($lettres_path);
         foreach ($lettres_path as $k=>$lettre_path) {
           $date_lettre =  substr($lettre_path, 13 , 2).".".substr($lettre_path, 11 , 2).".".substr($lettre_path, 7 , 4);        
-          $output .= " - <a href=\"../$path_archive/$lettre_path\" target='_blank' />lettre du  $date_lettre</a>";
-          $output .= " : <a href='#' onclick=\"malettref.location.href='../$path_archive/$lettre_path'\" style='color:green;'>voir</a>";
-          $output .= " - <a href='?exec=malettre_archive&amp;action=del&amp;f=$lettre_path'  onclick='return confirm(\"Etes vous sûr ?\");' style='color:red;'>effacer</a><br />\n";            
+          $output .= " - <a href=\"../$path_archive/$lettre_path\" target='_blank' />"._T('malettre:lettre_du')."  $date_lettre</a>";
+          $output .= " : <a href='#' onclick=\"malettref.location.href='../$path_archive/$lettre_path'\" style='color:green;'>"._T('malettre:voir')."</a>";
+          $output .= " - <a href='?exec=malettre_archive&amp;action=del&amp;f=$lettre_path'  onclick='return confirm(\""._T('malettre:effacer_confirm')."\");' style='color:red;'>"._T('malettre:effacer')."</a><br />\n";            
   	    } 
         echo $output;
-        echo "<p><small>$c lettre(s) disponible(s)</small></p>";
+        echo "<p><small>$c "._T('malettre:lettres_dispo')."</small></p>";
         echo "<iframe width=\"750\" height=\"500\" src='' id='malettref' name='malettref'></iframe>\n";
 		}
 		//--				

@@ -5,6 +5,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
   // A
+  'archives' => 'Archives',
   'archives_gerer' => 'G&eacute;rer les archives',
   'archives_placer' => 'Lettre plac&eacute;e en archive',
   'autre' => 'Autre :',
@@ -33,15 +34,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'erreur_ecriture_stockage' => 'R&eacutepertoire de stockage de la lettre impossible &agrave; cr&eacute;er',
   'erreur_envoi' => 'Erreur lors de l\'envoi du mail',
   'erreur_no_dest' => 'Erreur: aucun destinataire',
+  'erreur_lecture' => 'Erreur: impossible de lire le dossier',
   'expediteur' => 'Exp&eacute;diteur',
   'email_seulement' => "email seulement",
   'envoi' => 'Envoi',
+  'effacer' => 'Effacer',
+  'effacer_confirm' => 'Etes vous sur de vouloir effacer cette lettre ?',
   
   // I 
   'info' => 'Cette page permet de cr&eacute;er une lettre sur mesure en choisissant vos articles.',
   
   // L  
   'lang_toute' => 'toutes les langues',
+  'lettres_dispo' => 'lettre(s) disponible(s)',
+  'lettre_du' => 'lettre du',
+  'lettre_txt_auto' => 'Ceci est une message automatique - ne pas repondre',
+  'lettre_txt_titre' => 'LETTRE D\'INFORMATION DE',
+  'lettre_txt_html_dispo' => 'La version HTML de cette lettre est disponible en ligne: ',
+  'lettre_txt_unsub' => 'Modifier son abonnement: ',
+  'lettre_html_unsub' => 'se d&eacute;sinscrire de la lettre',
 
   // M
   'ma_lettre'=>'Ma lettre',
@@ -52,7 +63,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   
   // V
   'version_html' => 'Version HTML',
-  'version_txt' => 'Version Texte'
+  'version_txt' => 'Version Texte',
+  'voir' => 'voir'
 
 );
 
