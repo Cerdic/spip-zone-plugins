@@ -144,7 +144,7 @@
 	);
 
 	//-- Table PRETS ------------------------------------------
-	$spip_asso_ressources = array(
+	$spip_asso_prets = array(
 		"id_pret"				=> "bigint(20) NOT NULL auto_increment",
 		"date_sortie" 			=> "date NOT NULL default '0000-00-00'",
 		"duree"					=> "int(11) NOT NULL default '0'",
@@ -155,7 +155,7 @@
 		"commentaire_retour" 	=> "text NOT NULL",
 		"maj" 					=> "timestamp(14) NOT NULL"
 	);		
-	$spip_asso_ressources_key = array(
+	$spip_asso_prets_key = array(
 		"PRIMARY KEY" => "id_pret"
 	);
 	$tables_principales['spip_asso_prets'] = array(
