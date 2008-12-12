@@ -8,6 +8,8 @@
 //  licence:  GPL
 // ---------------------------------------------------------
 
+// TODO passer en trad
+
 include(dirname(__FILE__).'/../inc_malettre.php');
 
 

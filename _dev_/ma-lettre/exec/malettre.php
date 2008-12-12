@@ -2,13 +2,10 @@
 // ---------------------------------------------------------
 //  Ma lettre
 //
-//  version:  0.90 
+//  version:  0.91 
 //  author:   erational <http://www.erational.org>
 //  licence:  GPL
 // ---------------------------------------------------------
-
-//  TODO:
-//  - multilinguisme
 
 
 include(dirname(__FILE__).'/../inc_malettre.php');
@@ -80,11 +77,11 @@ function exec_malettre(){
 
     debut_gauche();
     echo debut_boite_info();
-    echo "Cette page permet de cr&eacute;er une lettre sur mesure en choisissant vos articles. <br/><br/>";
-    echo "<p><a href='?exec=malettre'>Ecrire une lettre</a></p>";
-    echo "<p><a href='?exec=malettre&amp;action=letter_compose&amp;option=load'>Charger la derni&egrave;re lettre</a></p>";
-    echo "<p><a href='?exec=malettre_archive'>G&eacute;rer les archives</a></p>";
-    if (function_exists(lire_config)) echo "<p><a href='?exec=cfg&cfg=malettre'>Configurer</a></p>";  
+    echo "<p>"._T('malettre:info')."</p>";
+    echo "<p><a href='?exec=malettre'>"._T('malettre:ecrire_nouvelle')."</a></p>";
+    echo "<p><a href='?exec=malettre&amp;action=letter_compose&amp;option=load'>"._T('malettre:charger_derniere')."</a></p>";
+    echo "<p><a href='?exec=malettre_archive'>"._T('malettre:archives_gerer')."</a></p>";
+    if (function_exists(lire_config)) echo "<p><a href='?exec=cfg&cfg=malettre'>"._T('malettre:config')."</a></p>";  
     echo fin_boite_info();
     
     echo debut_droite();
@@ -165,7 +162,7 @@ function exec_malettre(){
       							fclose($handle);  							
                 } else {
                     $errorFlag = true;
-                    echo "<strong>erreur:</strong> impossible de cr&eacute;er la lettre au format HTML, v&eacute;rifier le param&egrave;tre chemin d'acc&egrave;s ($path.$path_archive) et les droits en &eacute;criture (chmod 777)";
+                    echo _T('malettre:erreur_ecriture')."($path.$path_archive)";
     						}							
       							
       					// VERSION TXT		
@@ -199,8 +196,8 @@ function exec_malettre(){
         							fclose($handle);
       						  } else {
                       $errorFlag = true;
-                      echo "<strong>erreur:</strong> impossible de cr&eacute;er la lettre au format texte, v&eacute;rifier le param&egrave;tre chemin d'acc&egrave;s ($path.$path_archive) et les droits en &eacute;criture (chmod 777)";
-    						    }	
+                      echo _T('malettre:erreur_ecriture')."($path.$path_archive)";
+                    }	
     						}
     				}  // fin examen requete		
     				
@@ -209,29 +206,29 @@ function exec_malettre(){
 					  if (!$errorFlag) {
 						  echo "<form method='post' action='?exec=malettre'><fieldset>\n";  
 						  echo "<input type='hidden' name='action' value='letter_send' />\n";
-              echo "<h4>Exp&eacute;diteur</h4>\n";
+              echo "<h4>"._T('malettre:expediteur')."</h4>\n";
               echo "<select name='expediteur'>\n";
 							foreach ($expediteurs as $expediteur=>$val){
                   echo "<option value=\"$expediteur\" />".htmlentities($expediteur)." &lt;".htmlentities($val)."&gt;</option>";
               } 
               echo "</select>\n";   
-              echo "<br />autre: <input type='text' name='expediteur_more' /> (email seulement)\n";  
+              echo "<br />"._T('malettre:autre')." <input type='text' name='expediteur_more' />("._T('malettre:email_seulement').")\n" ;  
                    
-             	echo "<h4>Destinataires</h4>\n";
+             	echo "<h4>"._T('malettre:destinataires')."</h4>\n";
 							foreach ($adresses as $adresse=>$val){
                   echo "<input type='checkbox' value=\"$val\"' name='desti[]' />$adresse &lt;$val&gt;<br />";
               }
-              echo "autre: <input type='text' name='desti_more' /> (email seulement)<br /><br />\n";
+              echo "autre: <input type='text' name='desti_more' /> ("._T('malettre:email_seulement').")<br /><br />\n";
 
               echo "<input type='submit' name='sub' value='Envoyer la lettre' /> \n";
               echo "<input type='button' name='sub' value='Ecrire une nouvelle lettre' onclick=\"javascript:document.location.href='?exec=malettre'\"  /> ";
               
-							echo "<h4>Apercu</h4>\n";
+							echo "<h4>"._T('malettre:apercu')."</h4>\n";
 							echo "Sujet: <input type='text' size='55' name='lettre_title' value=\"".$lettre_title."\" /><br />\n";
               echo "<iframe width=\"750\" height=\"500\" src=\"$path_archive_full/.malettre.html?nocache=".time()."\"></iframe>\n";
-							echo "<h4>Version HTML</h4>\n";
+							echo "<h4>"._T('malettre:version_html')."</h4>\n";
 							echo "<textarea cols='70' rows='20'>$sourceHTML</textarea>";
-							echo "<h4>Version Texte</h4>\n";
+							echo "<h4>"._T('malettre:version_txt')."</h4>\n";
 							echo "<textarea cols='70' rows='20'>$sourceTXT</textarea>";
 							echo "</fieldset></form>\n";
 						} 					
@@ -245,7 +242,7 @@ function exec_malettre(){
 		        // titre 
 		        $lettre_title = trim(strip_tags(_request('lettre_title'))); 
             $lettre_title = str_replace("\"","'", $lettre_title);  
-            if ($lettre_title == "") {
+            if ($lettre_title == "") {  // à supprimer ou integrer ou multilingue ?
               $months=array(1=>'Janvier', 2=>'Fevrier', 3=>'Mars', 4=>'Avril', 5=>'Mai', 6=>'Juin', 7=>'Juillet', 8=>'Aout', 9=>'Septembre', 10=>'Octobre', 11=>'Novembre', 12=>'Decembre');
               $today = getdate(mktime()-(24*3600));
               $sujet = "Les nouveautes de ".$months[$today[mon]]." ".date("Y");
@@ -295,7 +292,7 @@ function exec_malettre(){
             $desti_more = _request('desti_more'); 
             if ($desti_more!="") $desti[] = $desti_more;
             
-            echo "<h3>Envoi <i style='color:#999;'>$sujet</i></h3>\n";
+            echo "<h3>"._T('malettre:envoi')." <i style='color:#999;'>$sujet</i></h3>\n";
             echo "<div style='border:1px solid;background:#eee;margin:10px 0;padding:10px;font-family:arial,sans-serif;font-size:0.9em;'>";
                        
             if (is_array($desti)) {
@@ -316,17 +313,17 @@ function exec_malettre(){
                 $mail->AltBody  =  $recup_txt;
                              
                 if(!$mail->Send()) {
-                    $msg = "<div style='color:red'><strong>$adresse</strong> - Erreur lors de l'envoi du mail</div>";  
+                    $msg = "<div style='color:red'><strong>$adresse</strong> - "._T('malettre:erreur_envoi')."</div>";  
                     $msg .="Mailer Error: " . $mail->ErrorInfo; 
                     $success_flag = false;
                 } else {  
-                    $msg = "<div style='color:green'><strong>$adresse</strong> - <span style='color:green'>Lettre bien envoy&eacute;e !</span></div>";         
+                    $msg = "<div style='color:green'><strong>$adresse</strong> - <span style='color:green'>"._T('malettre:succes_envoi')."</span></div>";         
                 }
                  
                 echo $msg;
               }
             } else {
-              echo "<div style='color:red'>Erreur: aucun destinataire</div>";
+              echo "<div style='color:red'>"._T('malettre:erreur_no_dest')."</div>";
             }
             echo "</div>";
             
@@ -335,11 +332,11 @@ function exec_malettre(){
             $f_archive=fopen($lettre_archive,"w");
             fwrite($f_archive,$recup); 
             fclose($f_archive);
-            echo "<div style=\"margin:15px 0;\">Lettre plac&eacute;e en archive (<a href='$url_lettre_archive' target='_blank'>consulter</a>)</div>";
+            echo "<div style=\"margin:15px 0;\">"._T('malettre:archives_placer')."(<a href='$url_lettre_archive' target='_blank'>"._T('malettre:consulter')."</a>)</div>";
                       
            
             
-            echo "<p><a href='?exec=malettre'>Ecrire une nouvelle lettre</a></p>\n";
+            echo "<p><a href='?exec=malettre'>"._T('malettre:ecrire_nouvelle2')."</a></p>\n";
             
     } else {	//
 	            // pas d'action: affichage des articles pour composition de la lettre
@@ -348,26 +345,48 @@ function exec_malettre(){
 	            // verif si repertoire stockage dispo
 	            if (!is_dir($path_archive_full)) {                                     
                    if (!mkdir ($path_archive_full, 0777)) // on essaie de le creer  
-                        echo "<div style='color:red;padding:5px;border:1px solid red;>R&eacutepertoire de stockage de la lettre ($path_archive_full) impossible &agrave; cr&eacute;er</div>"; 
+                        echo "<div style='color:red;padding:5px;border:1px solid red;>"._T('malettre:erreur_ecrire_stockage')."($path_archive_full)</div>"; 
               }
-                
-              $requete = "SELECT $id, $titre FROM $table WHERE statut like '$statut' ORDER BY $temps DESC LIMIT 0,50";
+                            
+              $lang_select = _request('lang_select');
+              if ($lang_select!="") $cond_lang_sql = "AND lang='$lang_select'";
+                              else  $cond_lang_sql = "";
+              $requete = "SELECT $id, $titre FROM $table WHERE statut like '$statut'  $cond_lang_sql ORDER BY $temps DESC LIMIT 0,50";
               $result=spip_query($requete);
                                       
               if (spip_num_rows($result) == 0) {
-							                    echo "aucun";
+							  echo "aucun article disponible";
               } else {	                							
                 echo "<form method='post' action='?exec=malettre'>"; 
                 echo "<input type='hidden' name='action' value='letter_compose' />";
-								echo "<fieldset>\n";
-								echo "Sujet du mail :<i>(format spip non support&eacute;)</i><br />\n";
+                echo "<input type='hidden' name='lang_select' value='$lang_select' />";
+                echo "<fieldset>\n";
+                
+              
+              if($GLOBALS['meta']['multi_rubriques']=="oui" || $GLOBALS['meta']['multi_articles']=="oui")
+      				      $active_langs = explode(",",$GLOBALS['meta']['langues_multilingue']);
+      			  else	$active_langs = "";
+      				
+      				 if (is_array($active_langs)) {
+      				       echo _T('malettre:choix_lang');
+                     foreach($active_langs as $k=>$active_lang) {
+                        if ($lang_select==$active_lang) echo "<strong>[$active_lang]</strong> ";  
+                                         else echo "<a href='?exec=malettre&amp;lang_select=$active_lang'>[$active_lang]</a> ";
+                        
+                     }
+                     if ($lang_select=="") echo "<strong>["._T('malettre:lang_toute')."]</strong> ";             
+                                     else  echo "<a href='?exec=malettre'>["._T('malettre:lang_toute')."]</a>";
+               }
+      				
+                
+								
+								echo "<br /><br />"._T('malettre:compose_sujet')." :<i>("._T('malettre:compose_non_spip').")</i><br />\n";
 								echo "<input type='text' size='55' name='lettre_title' /><br />\n";
-								echo "<br />Texte d'introduction  - <a href='$page_edit$id_article_edito'>&eacute;diter ce texte</a><br />\n";
+								echo "<br />"._T('malettre:compose_contenu')." - <a href='$page_edit$id_article_edito'>"._T('malettre:compose_edito')."</a><br />\n";
 								echo "<iframe width='600' height='500' src='$path_url/spip.php?page=malettre_edito&amp;id_article=$id_article_edito'></iframe>\n";
 								echo $stro;								
 							
-								echo "<br />Choisissez les articles que vous vous publier dans la lettre\n";
-								echo "<br />en cochant ...\n";
+								echo "<br />"._T('malettre:compose_cochant');
                 echo "<table class='spip' style='width:100%;border:0;'>";
                         
                                 //affichage des 50 documents 
@@ -389,11 +408,11 @@ function exec_malettre(){
                                         echo "</tr>\n";
                                 }
 								
-								echo "<tr><td>ET / OU <br />indiquer les num&eacute;ros des articles &agrave; publier s&eacute;par&eacute;s par une virgule<br />";
+								echo "<tr><td>"._T('malettre:compose_liste')."<br />";
 								echo "<textarea rows='15' cols='50' id='art_csv' name='art_csv'></textarea></td></tr>";
 								
                                 
-                echo "</table><br /><input type=submit value='Ajouter &agrave; la lettre' />\n";
+                echo "</table><br /><input type='submit' value='"._T('malettre:compose_submit')."' />\n";
 								echo "</fieldset>\n";
 								echo "</form>\n\n";
               }
