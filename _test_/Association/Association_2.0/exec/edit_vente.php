@@ -17,7 +17,7 @@
 		
 		include_spip ('inc/acces_page');
 		
-		$url_action_ventes = generer_url_ecrire('action_ventes');
+		$url_agir_ventes = generer_url_ecrire('agir_ventes');
 		
 		$action=$_REQUEST['agir'];
 		$id_vente= $_REQUEST['id'];		
@@ -63,7 +63,7 @@
 		
 		echo debut_cadre_relief(  "", false, "", $titre = _T('Mise &agrave; jour des ventes').' '.$action);
 		
-		echo '<form method="post" action="'.$url_action_ventes.'">';	
+		echo '<form method="post" action="'.$url_agir_ventes.'">';	
 		echo '<label for="date_vente"><strong>Date (AAAA-MM-JJ) :</strong></label>';
 		echo '<input name="date_vente" type="text" value="'.$date_vente.'" id="date_vente" class="formo" />';
 		echo '<label for="article"><strong>Article :</strong></label>';

@@ -16,7 +16,7 @@
 		global $connect_statut, $connect_toutes_rubriques;
 		
 		include_spip ('inc/acces_page');
-		$url_retour = generer_url_ecrire('ventes');
+		
 		$url_asso = generer_url_ecrire('association');
 		$url_ventes = generer_url_ecrire('ventes');
 		$url_agir_ventes = generer_url_ecrire('agir_ventes');
@@ -114,7 +114,7 @@
 		echo '<table width="100%">';
 		echo '<tr>';
 		echo '<td  style="text-align:right;">';
-		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'"><input type="submit" name="Submit" value="'._T('asso:bouton_supprimer').'" class="fondo">';
+		echo '<input type="submit" name="Submit" value="'._T('asso:bouton_supprimer').'" class="fondo">';
 		echo '</table>';
 		echo '</form>';
 		
