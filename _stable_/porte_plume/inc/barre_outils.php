@@ -308,8 +308,20 @@ class Barre_outils{
 	function ajouterApres($identifiant, $params){
 		return $this->affecter($this->markupSet, $identifiant, $params, 'apres');
 		
-	}	
-	
+	}
+		
+	/**
+	 * ajouter une fonction js pour etre utilises dans les boutons
+	 * 
+	 * @param string $fonction : code de la fonction js
+	 * @return null
+	 */
+	function ajouterFonction($fonction){
+		if (false === strpos($this->functions, $fonction)){
+			$this->functions .= "\n" . $fonction . "\n";
+		}
+	}
+		
 	/**
 	 * Supprimer les elements non affiches (display:false)
 	 * 

@@ -318,6 +318,13 @@ class Test_barre_outil_markitup extends SpipTest{
 		// mais uniquement en fin du fichier json
 		$this->assertPattern('/function dido\(/', $json);		
 	}
+	
+	function testAjouterFonctions(){
+		$b = new Barre_outils($this->baseParamsBarre);
+		$b->Ajouterfonction("function dido(){}");
+		$this->assertPattern('/function dido\(/', $b->fonctions);		
+	}
+	
 	/*	
 	function squeletteTest(){
 		$sq = new SqueletteTest("SimpleTest");
