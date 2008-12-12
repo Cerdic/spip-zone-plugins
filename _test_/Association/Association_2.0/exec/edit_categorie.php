@@ -25,9 +25,9 @@
 		$url_vente = generer_url_ecrire('ventes');
 		$url_banque = generer_url_ecrire('banque');
 		$url_delete = generer_url_ecrire('delete_membre');
-		$url_faire_categorie=generer_url_ecrire('faire_categorie');
+		$url_action_categorie=generer_url_ecrire('action_categorie');
 		
-		$faire=$_REQUEST['faire'];
+		$action=$_REQUEST['agir'];
 		$id=$_REQUEST['id'];
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
@@ -40,26 +40,27 @@
 			$cotisation=$data['cotisation'];
 			$commentaires=$data["commentaires"];
 		}		
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('Cat&eacute;gories de cotisation'), "", "");
 		
+		//debut_page(_T(), "", "");
+		 $commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('Cat&eacute;gories de cotisation')) ;
 		association_onglets();
 		
-		debut_gauche();
+		echo debut_gauche("",true);
 		
-		debut_boite_info();
+		echo debut_boite_info(true);
 		echo association_date_du_jour();	
-		fin_boite_info();	
+		echo fin_boite_info(true);	
 		
 		
-		$res = icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
+		$res=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
 		echo bloc_des_raccourcis($res);
-		creer_colonne_droite();
-		debut_droite();
 		
-		debut_cadre_relief(  "", false, "", $titre = _T('Cat&eacute;gories de cotisation'));
+		echo debut_droite("",true);
 		
-		echo '<form action="'.$url_faire_categorie.'" method="post">';	
+		echo debut_cadre_relief(  "", false, "", $titre = _T('Cat&eacute;gories de cotisation'));
+		
+		echo '<form action="'.$url_action_categorie.'" method="post">';	
 		echo '<label for="valeur"><strong>Cat&eacute;gorie :</strong></label>';
 		echo '<input name="valeur" type="text" value="'.$valeur.'" id="valeur" class="formo" />';
 		echo '<label for="libelle"><strong>Libell&eacute; complet :</strong></label>';
@@ -71,18 +72,18 @@
 		echo '<label for="commentaires"><strong>Commentaires :</strong></label>';
 		echo '<textarea name="commentaires" id="commentaires" class="formo" />'.$commentaires.'</textarea>';
 		
-		echo '<input type="hidden" name="faire" value="'.$faire.'" />';
+		echo '<input type="hidden" name="agir" value="'.$action.'" />';
 		echo '<input name="id" type="hidden" value="'.$id_categorie.'" />';
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'" />';
 				
 		echo '<div style="float:right;">';
 		echo '<input name="submit" type="submit" value="';
-		if ( isset($faire)) {echo _T('asso:bouton_'.$faire);}
+		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo" /></div>';
 		echo '</form>';
 		
-		fin_cadre_relief();  
-		echo fin_gauche(),fin_page();
+		echo fin_cadre_relief(true);  
+		fin_page();
 	}
 ?>

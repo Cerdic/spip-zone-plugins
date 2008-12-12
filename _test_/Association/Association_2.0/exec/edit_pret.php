@@ -18,11 +18,11 @@
 		
 		include_spip ('inc/acces_page');
 		
-		$url_faire_prets=generer_url_ecrire('faire_prets');
+		$url_action_prets=generer_url_ecrire('action_prets');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
-		$faire=$_REQUEST['faire'];
-		if ($faire=="ajoute"){$id_ressource=$_REQUEST['id'];}
+		$action=$_REQUEST['action'];
+		if ($action=="ajoute"){$id_ressource=$_REQUEST['id'];}
 		else {$id_pret=$_REQUEST['id'];}
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
@@ -36,8 +36,8 @@
 			$commentaire_sortie=$data['commentaire_sortie'];
 			$commentaire_retour=$data['commentaire_retour'];
 		}	
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:prets_titre_edition_prets'), "", "");		
+		
+		debut_page(_T('asso:prets_titre_edition_prets'), "", "");		
 		
 		association_onglets();
 		
@@ -55,10 +55,10 @@
 		}
 		fin_boite_info();
 		
+		debut_raccourcis();
+		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
+		fin_raccourcis();
 		
-		$res = icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
-		echo bloc_des_raccourcis($res);
-		creer_colonne_droite();
 		debut_droite();
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:prets_titre_edition_prets'));
@@ -75,12 +75,12 @@
 			$montant=$data['recette'];
 		}
 		
-		if( $faire=="ajoute" ){ 
+		if( $action=="ajoute" ){ 
 			$montant=$pu; 
 			$date_sortie=date('Y-m-d');
 		} 
 		
-		echo '<form action="'.$url_faire_prets.'" method="post">';			
+		echo '<form action="'.$url_action_prets.'" method="post">';			
 		
 		// Cadre Réservation
 		echo '<fieldset>';
@@ -120,15 +120,15 @@
 		echo '<input name="id" type="hidden" value="'.$id_pret.'" />';
 		echo '<input name="id_ressource" type="hidden" value="'.$id_ressource.'" />';		
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
-		echo '<input name="faire" type="hidden" value="'.$faire.'">';
+		echo '<input name="action" type="hidden" value="'.$action.'">';
 		
 		echo '<div style="float:right;"><input name="submit" type="submit" value="';
-		if ( isset($faire)) {echo _T('asso:bouton_'.$faire);}
+		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo" /></div>';
 		echo '</form>';	
 		
 		fin_cadre_relief();  
-		echo fin_gauche(),fin_page();
+		fin_page();
 	}
 ?>

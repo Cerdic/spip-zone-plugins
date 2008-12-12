@@ -9,7 +9,7 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	
+
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 	
@@ -20,7 +20,7 @@
 		
 		$url_edit_compte = generer_url_ecrire('edit_compte');
 		$url_edit_activite = generer_url_ecrire('edit_activite');
-		$url_edit_pret = generer_url_ecrire('edit_pret','faire=modifie');
+		$url_edit_pret = generer_url_ecrire('edit_pret','action=modifie');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		$id_auteur= $_GET['id'];
@@ -32,30 +32,28 @@
 			$prenom=$data['prenom'];
 			$validite=$data['validite'];
 		}
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:titre_gestion_pour_association'), "", "");
+		  $commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
+		//debut_page(_T(), "", "");
 		
 		association_onglets();
 		
-		debut_gauche();
+		echo debut_gauche("",true);
 		
-		debut_boite_info();
-		echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:adherent_libelle_numero').'<br />';
+		echo debut_boite_info(true);
+		echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.propre(_T('asso:adherent_libelle_numero')).'<br />';
 		echo '<span class="spip_xx-large">';
 		if($indexation=="id_asso"){echo $id_asso;} else {echo $id_auteur;}
 		echo '</span></div>';
 		echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.$nom_famille.' '.$prenom.'</div>';
 		echo '<br /><div style="text-align:center;">'.association_date_du_jour().'</div>';	
-		fin_boite_info();
+		 echo fin_boite_info(true);
 		
 		
-		$res = icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
+		$res=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
 		echo bloc_des_raccourcis($res);
-		creer_colonne_droite();
-		debut_droite();
-
 		
-		debut_droite();
+		echo debut_droite("",true);
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_historique_membre'));
 		
@@ -183,8 +181,8 @@
 			echo '</fieldset>';
 		}
 		
-		fin_cadre_relief();
-		echo fin_gauche(),fin_page();
+		echo fin_cadre_relief(true);
+		 echo fin_gauche(), fin_page();
 	} 
 ?>
 

@@ -99,7 +99,7 @@
 		echo '" class="fondo" /></div>';
 		echo '</form>';
 		fin_cadre_relief();
-		fin_page();
+		  echo fin_gauche(),fin_page(); 
 	}
 ?>
 
