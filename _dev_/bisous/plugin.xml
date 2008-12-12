@@ -11,6 +11,9 @@
 	<version> <!-- Version du plugin -->
 		0.1
 	</version>
+	<version_base>
+		0.1
+	</version_base>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 		dev
 	</etat>
@@ -27,6 +30,9 @@ Vous &ecirc;tes content ? Il vous faut des bisous !
 		images/amour.png
 	</icon>
 	
+	<install>
+		base/bisous_installation.php
+	</install>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/bisous_tables.php</inclure>
