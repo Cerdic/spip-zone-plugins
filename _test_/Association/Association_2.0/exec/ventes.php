@@ -11,29 +11,29 @@
 	**/
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
-	
 
 	function exec_ventes(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
 		include_spip ('inc/acces_page');
-		
+		$url_retour = generer_url_ecrire('ventes');
 		$url_asso = generer_url_ecrire('association');
 		$url_ventes = generer_url_ecrire('ventes');
-		$url_faire_ventes = generer_url_ecrire('faire_ventes');
-		$url_edit_vente=generer_url_ecrire('edit_vente','faire=modifie');
-		$url_ajout_vente=generer_url_ecrire('edit_vente','faire=ajoute');
+		$url_agir_ventes = generer_url_ecrire('agir_ventes');
+		$url_edit_vente=generer_url_ecrire('edit_vente','agir=modifie');
+		$url_ajout_vente=generer_url_ecrire('edit_vente','agir=ajoute');
 		
 		$annee=$_GET['annee'];
 		if(empty($annee)){$annee = date('Y');}
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('Gestion pour  Association'), "", "");
+		
+		  $commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('Gestion pour Association')) ;
 		
 		association_onglets();
 		
-		debut_gauche();
+		echo debut_gauche("",true);
 		
-		debut_boite_info();
+		echo debut_boite_info(true);
 		echo association_date_du_jour();
 		echo '<p>En rose : Vente enregistr&eacute;e<br />En bleu : Vente exp&eacute;di&eacute;e</p>'; 
 		
@@ -54,14 +54,13 @@
 			echo '</tr>';
 			echo '</table>';
 		}		
-		fin_boite_info();
+		echo fin_boite_info(true);
 		
-		$res = icone_horizontale(_T('Ajouter une vente'), $url_ajout_vente, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/panier_in.gif','rien.gif',false );
+	
+		$res=icone_horizontale(_T('Ajouter une vente'), $url_ajout_vente, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/panier_in.gif','rien.gif',false);
 		echo bloc_des_raccourcis($res);
 		
-		
-		creer_colonne_droite();
-		debut_droite();
+		echo debut_droite("",true);
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('Toutes les ventes'));
 		
@@ -79,7 +78,7 @@
 		echo '</table>';
 		
 		//TABLEAU
-		echo '<form faire="'.$url_faire_ventes.'" method="POST">';
+		echo '<form action="'.$url_agir_ventes.'" method="POST">';
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo '<tr bgcolor="#DBE1C5">';
 		echo '<td style="text-align:right"><strong>ID</strong></td>';
@@ -115,13 +114,11 @@
 		echo '<table width="100%">';
 		echo '<tr>';
 		echo '<td  style="text-align:right;">';
-		echo '<input type="submit" name="Submit" value="'._T('asso:bouton_supprimer').'" class="fondo">';
+		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'"><input type="submit" name="Submit" value="'._T('asso:bouton_supprimer').'" class="fondo">';
 		echo '</table>';
 		echo '</form>';
 		
 		fin_cadre_relief();  
-		
-		
-		echo fin_gauche(), fin_page();
+		 echo fin_gauche(),fin_page(); 
 	}
 ?>
