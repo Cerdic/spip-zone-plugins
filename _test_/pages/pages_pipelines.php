@@ -9,8 +9,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// Modifier le HTML du formulaire pour enlever la sélection du rubrique
-// et ajouter le champ page à la place
+// Change l'entête du formulaire des articles pour montrer que c'est une page
 function pages_affiche_milieu_ajouter_page($flux){
 
 	if ($flux['args']['exec'] == 'articles_edit'){
@@ -62,7 +61,6 @@ function pages_formulaire_charger($flux){
 		if (_request('type') == 'page' or $flux['data']['page']){
 		
 			$flux['data']['type'] = 'page';
-			//echo "<pre>"; var_dump($flux); echo "</pre>"; exit;
 		
 		}
 	
@@ -76,8 +74,10 @@ function pages_formulaire_charger($flux){
 // Vérifier que la page n'est pas vide
 function pages_formulaire_verifier($flux){
 
+	// Si on est dans l'édition d'un article
 	if (is_array($flux) and $flux['args']['form'] == 'editer_article'){
 	
+		// Si on est dans un article de type page mais que le champ "page" est vide
 		if (_request('type') == 'page' and !_request('page'))
 			$flux['data']['page'] .= _T('info_obligatoire');
 	
@@ -100,8 +100,8 @@ function pages_editer_contenu_objet($flux){
 		// On cherche et remplace l'édition de la rubrique
 		$cherche = "/<li[^>]*class=('|\")editer_parent.*?<\/li>/is";
 		$remplace = '<li class="editer_page obligatoire'.($erreurs['page'] ? ' erreur' : '').'">';
-		$remplace .= '<input type="hidden" name="id_parent" value="'.$args['contexte']['id_rubrique'].'" />';
-		$remplace .= '<input type="hidden" name="id_rubrique" value="'.$args['contexte']['id_rubrique'].'" />';
+		$remplace .= '<input type="hidden" name="id_parent" value="'.$args['contexte']['id_parent'].'" />';
+		$remplace .= '<input type="hidden" name="id_rubrique" value="'.$args['contexte']['id_parent'].'" />';
 		$remplace .= '<input type="hidden" name="type" value="page" />';
     	$remplace .= '<label for="id_page">'._T('pages:titre_page').'</label>';
     	if ($erreurs['page'])

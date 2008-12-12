@@ -9,7 +9,4 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// On inclu la définition du champ supplémentaire
-find_in_path('pages_tables.php', 'base/', true);
-
 ?>
