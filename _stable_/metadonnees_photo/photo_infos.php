@@ -7,15 +7,20 @@ function photo_infos_pave($args) {
 		$data = $args["data"];
 		$id_document = $args["args"]["id"];		
 			
-		$query = sql_query("SELECT fichier FROM spip_documents WHERE id_document=$id_document AND extension='jpg'");
+			
+		include_spip("base/abstract_sql");
+			
+			
+		$query = sql_select("fichier", "spip_documents", "id_document=$id_document AND extension='jpg'");
+
 		if ($row = sql_fetch($query)) {
 			$fichier = _DIR_IMG.$row["fichier"];
 			
 			include_spip("inc/utils");
 			$contexte = array('fichier'=>$fichier);
 
-			$p = evaluer_fond("pave_exif", $contexte);
-			$ret .= $p["texte"];
+			$page = recuperer_fond("pave_exif", $contexte);
+			$ret .= $page;
 		}
 		
 		
