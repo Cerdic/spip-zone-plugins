@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	/**
 	* Plugin Association
 	*
@@ -9,7 +9,6 @@
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
 	**/
-	
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
 
@@ -19,31 +18,29 @@
 		include_spip ('inc/acces_page');
 		
 		$url_asso = generer_url_ecrire('association');
-		$url_faire_labels = generer_url_ecrire('faire_labels');
+		$url_action_labels = generer_url_ecrire('action_labels');
 		$url_edit_relances = generer_url_ecrire('edit_relances');		
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		$indexation = lire_config('association/indexation');
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('Gestion pour Association'), "", "");
+		echo $commencer_page(_T('Gestion pour Association')) ;
 		
 		association_onglets();
 		
-		debut_gauche();
+		echo debut_gauche("",true);
 		
-		debut_boite_info();
+		echo debut_boite_info(true);
 		echo association_date_du_jour();	
-		fin_boite_info();	
+		echo fin_boite_info(true);	
 		
 		
-		$res = icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
+		$res=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
 		echo bloc_des_raccourcis($res);
-		creer_colonne_droite();
-		debut_droite();
 		
+		echo debut_droite("",true);
 		
-		
-		debut_cadre_relief(  "", false, "", $titre = _T('Toutes les &eacute;tiquettes &agrave; g&eacute;n&eacute;rer'));
+		echo debut_cadre_relief(  "", false, "", $titre = _T('Toutes les &eacute;tiquettes &agrave; g&eacute;n&eacute;rer'));
 		
 		$statut_interne= "ok";
 		if ( isset ($_POST['statut_interne'] )) { $statut_interne = $_POST['statut_interne']; } 
@@ -51,7 +48,7 @@
 		echo '<tr>';
 		// Menu de sélection
 		echo '<td style="text-align:right;">';
-		echo '<form method="post" faire="#">';
+		echo '<form method="post" action="#">';
 		echo '<input type="hidden" name="lettre" value="'.$lettre.'">';
 		echo '<select name ="statut_interne" class="fondl" onchange="form.submit()">';
 		foreach (array(ok,echu,relance,sorti,lire_config('inscription2/statut_interne')) as $var) {
@@ -64,7 +61,7 @@
 		echo '</td></tr>';
 		echo '</table>';
 		
-		echo '<form method="post" action="'.$url_faire_labels.'">';
+		echo '<form method="post" action="'.$url_action_labels.'">';
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo '<tr bgcolor="#DBE1C5">';
 		echo '<td><strong>';
@@ -110,6 +107,6 @@
 		echo '</form>';
 		
 		fin_cadre_relief();  
-		echo fin_gauche(),fin_page();
+		echo fin_gauche(), fin_page();
 	}
 ?>
