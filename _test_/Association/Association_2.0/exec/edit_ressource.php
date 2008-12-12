@@ -18,29 +18,28 @@
 		
 		include_spip ('inc/acces_page');
 		
-		$url_faire_ressources=generer_url_ecrire('faire_ressources');
+		$url_action_ressources=generer_url_ecrire('action_ressources');
 		$url_retour = $_SERVER['HTTP_REFERER'];
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:ressources_titre_edition_ressources'), "", "");		
 		
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('asso:ressources_titre_edition_ressources')) ;
 		association_onglets();
 		
-		debut_gauche();
+		echo debut_gauche("",true);
 		
-		debut_boite_info();
-		echo '<p></p>';
-		fin_boite_info();
+		echo debut_boite_info(true);
+		echo '<p>Gestion des emprunts et des pr&ecirc;ts</p>';
+		echo fin_boite_info(true);
 		
 		
-		$res = icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-png","rien.gif",false);	
+		$res=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-png","rien.gif",false);	
 		echo bloc_des_raccourcis($res);
-		creer_colonne_droite();
-		debut_droite();
-
 		
-		debut_cadre_relief(  "", false, "", $titre = _T('asso:ressources_titre_edition_ressources'));
+		echo debut_droite("",true);
 		
-		$faire=$_REQUEST['faire'];
+		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:ressources_titre_edition_ressources'));
+		
+		$action=$_REQUEST['agir'];
 		$id=$_REQUEST['id'];
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
@@ -55,7 +54,7 @@
 			$statut=$data['statut'];
 			$commentaire=$data["commentaire"];
 		}		
-		echo '<form action="'.$url_faire_ressources.'&faire='.$faire.'" method="post">';	
+		echo '<form action="'.$url_action_ressources.'&agir='.$action.'" method="post">';	
 		echo '<input name="id" type="hidden" value="'.$id_ressource.'" />';
 		echo '<label for="code"><strong>'._T('asso:ressources_libelle_code').' :</strong></label>';
 		echo '<input name="code" type="text" value="'.$code.'" id="code" class="formo" />';
@@ -74,14 +73,14 @@
 		echo '<br /><label for="commentaire"><strong>'._T('asso:ressources_libelle_commentaires').' :</strong></label>';
 		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';
 		echo '<div style="float:right;"><input name="submit" type="submit" value="';
-		if ( isset($faire)) {echo _T('asso:bouton_'.$faire);}
+		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo" />
 		<input name="url_retour" type="hidden" value="'.$url_retour.'">
-		<input name="faire" type="hidden" value="'.$faire.'"></div>';
+		<input name="agir" type="hidden" value="'.$action.'"></div>';
 		echo '</form>';
 		
 		fin_cadre_relief();  
-		echo fin_gauche(),fin_page();
+		echo fin_gauche(), fin_page();
 	}
 ?>

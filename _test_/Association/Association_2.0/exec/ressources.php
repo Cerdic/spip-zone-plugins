@@ -19,30 +19,29 @@
 		include_spip ('inc/acces_page');
 		
 		$url_ressources = generer_url_ecrire('ressources');
-		$url_ajout_ressource=generer_url_ecrire('edit_ressource','faire=ajoute');
-		$url_edit_ressource=generer_url_ecrire('edit_ressource','faire=modifie');
-		$url_faire_ressources=generer_url_ecrire('faire_ressources');
+		$url_ajout_ressource=generer_url_ecrire('edit_ressource','agir=ajoute');
+		$url_edit_ressource=generer_url_ecrire('edit_ressource','agir=modifie');
+		$url_action_ressources=generer_url_ecrire('action_ressources');
 		$url_prets=generer_url_ecrire('prets');
+		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('asso:ressources_titre_liste_ressources'), "", "");
+		echo $commencer_page(_T('asso:ressources_titre_liste_ressources')) ;
+		
 		
 		association_onglets();
 		
-		debut_gauche();
+		echo debut_gauche("",true);
 		
-		echo debut_boite_info();
+		echo debut_boite_info(true);
 		echo '<p>'._T('asso:ressources_info').'</p>';
-		fin_boite_info();
+		echo fin_boite_info(true);
 		
 		
-		$res = icone_horizontale(_T('asso:ressources_nav_ajouter'), $url_ajout_ressource,'../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','creer.gif', false );
+		$res=icone_horizontale(_T('asso:ressources_nav_ajouter'), $url_ajout_ressource,'../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','creer.gif',false );
 		echo bloc_des_raccourcis($res);
-				
-		creer_colonne_droite();
-		debut_droite();
 		
-		
-		debut_cadre_relief(  "", false, "", $titre = _T('asso:ressources_titre_liste_ressources'));
+		echo debut_droite("",true);
+		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:ressources_titre_liste_ressources'));
 		
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo "<tr bgcolor='#DBE1C5'>";
@@ -50,7 +49,7 @@
 		echo '<td><strong>'._T('asso:ressources_entete_intitule').'</strong></td>';
 		echo '<td><strong>'._T('asso:ressources_entete_code').'</strong></td>';
 		echo '<td><strong>'._T('asso:ressources_entete_montant').'</strong></td>';
-		echo '<td colspan="3" style="text-align:center;"><strong>'._T('asso:entete_faire').'</strong></td>';
+		echo '<td colspan="3" style="text-align:center;"><strong>'._T('asso:entete_action').'</strong></td>';
 		echo'  </tr>';
 		$query = spip_query ( "SELECT * FROM spip_asso_ressources ORDER BY id_ressource" ) ;
 		while ($data = spip_fetch_array($query)) {
@@ -67,7 +66,7 @@
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['code'].'</td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.number_format($data['pu'], 2, ',', ' ').'</td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_prets.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.gif" title="'._T('asso:prets_nav_gerer').'"></a></td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_faire_ressources.'&faire=supprime&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="'._T('asso:ressources_nav_supprimer').'"></a></td>';
+			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_ressources.'&agir=supprime&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="'._T('asso:ressources_nav_supprimer').'"></a></td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_ressource.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:ressources_nav_editer').'"></a></td>';
 			echo'  </tr>';
 		}     
