@@ -18,10 +18,9 @@ function malettre_ajouterBoutons($boutons_admin) {
 
 //
 // functions
-function malettre_get_contents($patron,$id_article=0) {
+function malettre_get_contents($patron,$id_article=0,$lang='fr') {
   // inspi: spip-listes: exec/import_patron.php (merci booz)  
   $date = date('Y-m-d');
-  $lang = $GLOBALS['spip_lang'];
   
 	$contexte_patron = array('date' => $date,'patron'=>$patron,'lang'=>$lang, 'id_article'=>$id_article);
 	//$texte_patron =  recuperer_fond($patron, $contexte_patron); 	

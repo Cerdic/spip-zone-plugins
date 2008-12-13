@@ -53,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'lettre_txt_html_dispo' => 'La version HTML de cette lettre est disponible en ligne: ',
   'lettre_txt_unsub' => 'Modifier son abonnement: ',
   'lettre_html_unsub' => 'se d&eacute;sinscrire de la lettre',
+  'lien' => 'Lien',
 
   // M
   'ma_lettre'=>'Ma lettre',
@@ -64,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   // V
   'version_html' => 'Version HTML',
   'version_txt' => 'Version Texte',
-  'voir' => 'voir'
+  'voir' => 'Voir'
 
 );
 

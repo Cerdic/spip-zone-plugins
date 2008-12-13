@@ -128,16 +128,28 @@ function exec_malettre(){
     						$lettre_title = trim(strip_tags(_request('lettre_title'))); 
                 $lettre_title = str_replace("\"","'", $lettre_title);
                 
+                $lang = _request('lang_select');
+                if ($lang=="")  
+                          $lang = $GLOBALS['meta']['langue_site'];
+                
                             
-      					// VERSION HTML
+      					// VERSION HTML & TXT
       					$sourceHTML = "";
-								$sourceHTML .= malettre_get_contents("malettre_header");                   // head
-                $sourceHTML .= malettre_get_contents("malettre_edito", $id_article_edito); // edito
+      					$sourceTXT  = "";
+      					
+								$sourceHTML .= malettre_get_contents("malettre_header",0,$lang);                 // header
+								$sourceTXT  .= malettre_get_contents("malettre_txt_header",0,$lang);             
+								
+                $sourceHTML .= malettre_get_contents("malettre_edito", $id_article_edito,$lang); // edito
+                $sourceTXT  .= malettre_get_contents("malettre_txt_edito", $id_article_edito,$lang);
+                
     						    
                 // radio button
                 if (strlen($add)>0) {   
-      							foreach ($add as $value)
-      								    $sourceHTML .= malettre_get_contents("malettre_item", $value);
+      							foreach ($add as $value) {
+      								    $sourceHTML .= malettre_get_contents("malettre_item",$value,$lang);
+      								    $sourceTXT  .= malettre_get_contents("malettre_txt_item",$value,$lang);
+      							}
       					}  							
       							
                 // csv							
@@ -146,61 +158,41 @@ function exec_malettre(){
       					if (strlen($csv)>0) {							  
       							foreach ($csv as $value2) {								
         						$value = trim($value2);								
-          						if ($value!="") 	
-              								$sourceHTML .= malettre_get_contents("malettre_item",$value);
+          						if ($value!="") 	{
+              								$sourceHTML .= malettre_get_contents("malettre_item",$value,$lang);
+              								$sourceTXT  .= malettre_get_contents("malettre_txt_item",$value,$lang);
+              				}
         						}
       					}					
-    						$sourceHTML .= malettre_get_contents("malettre_footer");                             // foot
+    						$sourceHTML .= malettre_get_contents("malettre_footer",0,$lang);                 // foot
+    						$sourceTXT  .= malettre_get_contents("malettre_txt_footer",0,$lang); 
       							
       					// ecriture fichier       											
-    						if ($handle = fopen($path_archive_full."/.malettre.html", w)) {						    
+    						if ($handle = fopen($path_archive_full."/.malettre.html", w)) { 						    
       							fwrite($handle, $sourceHTML);					
-      							fclose($handle);  							
-                } else {
-                    $errorFlag = true;
-                    echo _T('malettre:erreur_ecriture')."($path.$path_archive)";
-    						}							
-      							
-      					// VERSION TXT		
-    						if (!$errorFlag) {               
-                    $sourceTXT = "";
-                                 
-        						// head	     			
-        						$sourceTXT = malettre_get_contents("malettre_txt_header");               			
-                    $sourceTXT .= malettre_get_contents("malettre_txt_edito",$id_article_edito);     // edito         			
-        							
-        						// radio button
-        						if (strlen($add)>0) {
-        								foreach ($add as $value) 
-        								  $sourceTXT .=  malettre_get_contents("malettre_txt_item",$value); 
-        						}
-      							
-        						// csv							
-        						if (strlen($csv)>0) {							  
-        								foreach ($csv as $value2) {								
-        								$value = trim($value2);								
-        								if ($value!="") 	
-            								$sourceTXT .=  malettre_get_contents("malettre_txt_item",$value);                 
-                        }
-        						}
-        						
-                    // foot
-        						$sourceTXT .= malettre_get_contents("malettre_txt_footer"); 
-        				
+      							fclose($handle); 
+                    
                     if ($handle = fopen($path_archive_full."/.malettre_txt.html", w)) { 			
         							fwrite($handle, $sourceTXT);					
         							fclose($handle);
       						  } else {
                       $errorFlag = true;
                       echo _T('malettre:erreur_ecriture')."($path.$path_archive)";
-                    }	
-    						}
+                    }	                     							
+                } else {
+                    $errorFlag = true;
+                    echo _T('malettre:erreur_ecriture')."($path.$path_archive)";                    
+    						}							
+        				
+
+    						
     				}  // fin examen requete		
     				
 							
 					  // affichage ?
 					  if (!$errorFlag) {
-						  echo "<form method='post' action='?exec=malettre'><fieldset>\n";  
+						  echo "<form method='post' action='?exec=malettre'><fieldset>\n"; 
+              echo "<input type='hidden' name='lang_select' value='$lang' />"; 
 						  echo "<input type='hidden' name='action' value='letter_send' />\n";
               echo "<h4>"._T('malettre:expediteur')."</h4>\n";
               echo "<select name='expediteur'>\n";
@@ -246,9 +238,9 @@ function exec_malettre(){
               $sujet = $lettre_title;
             }
             
-            // hash
-            $lettre_hash = substr(md5(time()),0,7);
-            $url_lettre_archive = "$path_url/$path_archive/lettre_".date("Ymd")."_$lettre_hash.html";
+            // hash            
+            $lettre_hash = substr(md5(time()),0,5);
+            $url_lettre_archive = "$path_url/$path_archive/lettre_".date("Ymd")."_".$lettre_hash."_"._request('lang_select').".html";
             
             // recup contenu HTML
             $texte = $path_archive_full."/.malettre.html";
@@ -324,7 +316,7 @@ function exec_malettre(){
             echo "</div>";
             
             // archivage de la lettre en dur
-            $lettre_archive = "$path_archive_full/lettre_".date("Ymd")."_$lettre_hash.html";
+            $lettre_archive = "$path_archive_full/lettre_".date("Ymd")."_".$lettre_hash."_"._request('lang_select').".html";
             $f_archive=fopen($lettre_archive,"w");
             fwrite($f_archive,$recup); 
             fclose($f_archive);

@@ -60,12 +60,24 @@ function exec_malettre_archive(){
         }
         
         arsort($lettres_path);
+        $output = "<table style='font-family:arial;font-size:0.9em;'>";
         foreach ($lettres_path as $k=>$lettre_path) {
-          $date_lettre =  substr($lettre_path, 13 , 2).".".substr($lettre_path, 11 , 2).".".substr($lettre_path, 7 , 4);        
-          $output .= " - <a href=\"../$path_archive/$lettre_path\" target='_blank' />"._T('malettre:lettre_du')."  $date_lettre</a>";
-          $output .= " : <a href='#' onclick=\"malettref.location.href='../$path_archive/$lettre_path'\" style='color:green;'>"._T('malettre:voir')."</a>";
-          $output .= " - <a href='?exec=malettre_archive&amp;action=del&amp;f=$lettre_path'  onclick='return confirm(\""._T('malettre:effacer_confirm')."\");' style='color:red;'>"._T('malettre:effacer')."</a><br />\n";            
+          $date_lettre =  substr($lettre_path, 13 , 2).".".substr($lettre_path, 11 , 2).".".substr($lettre_path, 7 , 4);
+          if (substr($lettre_path,-8,1)=="_")  // retro compat 
+                $lang = "[".substr($lettre_path,-7,2)."]";  
+           else $lang = "";
+          
+          $output .= "<tr>";
+          $output .= "<td><small>$lang</small></td>";
+          $output .= "<td>"._T('malettre:lettre_du')."  $date_lettre</td>";
+          $output .= "<td><a href='#' onclick=\"malettref.location.href='../$path_archive/$lettre_path'\" style='color:green;'>"._T('malettre:voir')."</a></td>";
+          $output .= "<td><a href='../$path_archive/$lettre_path' target='_blank' style='color:green;'>"._T('malettre:lien')."</a></td>";
+          $output .= "<td><a href='?exec=malettre_archive&amp;action=del&amp;f=$lettre_path'  onclick='return confirm(\""._T('malettre:effacer_confirm')."\");' style='color:red;'>"._T('malettre:effacer')."</a></td>";
+          $output .= "</tr>";
+
+          
   	    } 
+  	    $output  .= "</table>";
         echo $output;
         echo "<p><small>$c "._T('malettre:lettres_dispo')."</small></p>";
         echo "<iframe width=\"750\" height=\"500\" src='' id='malettref' name='malettref'></iframe>\n";
