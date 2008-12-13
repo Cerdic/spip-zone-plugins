@@ -42,9 +42,10 @@ function tickets_droite ($flux) {
 		$data = $flux["data"];
 		
 		$ret = afficher_les_tickets();
+
+		$flux["data"] = $data.$ret;
 			
 	}
-	$flux["data"] = $data.$ret;
 	return $flux;
 }
 
@@ -56,9 +57,9 @@ function tickets_gauche ($flux) {
 		$data = $flux["data"];
 		
 		$ret = afficher_les_tickets();
+		$flux["data"] = $data.$ret;
 			
 	}
-	$flux["data"] = $data.$ret;
 	return $flux;
 }
 
