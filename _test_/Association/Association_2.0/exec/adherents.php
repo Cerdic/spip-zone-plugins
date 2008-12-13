@@ -17,7 +17,7 @@
 		global $connect_statut, $connect_toutes_rubriques, $table_prefix;
 		
 		include_spip ('inc/acces_page');
-		
+		$url_association = generer_url_ecrire('association');
 		$url_adherents = generer_url_ecrire('adherents');
 		$url_ajout_cotisation = generer_url_ecrire('ajout_cotisation');
 		$url_editer_auteur = generer_url_ecrire('auteur_infos');
@@ -70,6 +70,7 @@
 		
 		$res=icone_horizontale(_T('asso:menu2_titre_relances_cotisations'), $url_edit_relances,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ico_panier.png','rien.gif',false );
 		$res.=icone_horizontale(_T('asso:bouton_impression'), $url_pdf_adherents.'&filtre='.$filtre,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/print-24.png','rien.gif',false ); 
+		$res.=icone_horizontale(_T('Param&egrave;tres'), $url_association.'&filtre='.$filtre,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/annonce.gif','rien.gif',false ); 
 			echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);
@@ -173,9 +174,9 @@
 			echo '</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ="'.$class.'">';
 			
-			if ( !empty ($data['id_auteur'])) {
-				echo'<img src="/IMG/auton'.$data['id_auteur'].'.jpg" alt="&nbsp;" width="60" height= "60" title="'.$data["nom_famille"].' '.$data["prenom"].'">';
-			}
+			//if ( !empty ($data['id_auteur'])) {
+				echo '<img src="../IMG/auton'.$data['id_auteur'].'.jpg" alt="&nbsp;" width="60"  title="'.$data["nom_famille"].' '.$data["prenom"].'">';
+			//}
 			echo '</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
 			if (empty($data["email"])) { 

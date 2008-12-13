@@ -53,7 +53,7 @@
 		echo lire_config('association/prefet').'<br>';
 		fin_cadre_formulaire(true);
 		
-		/* Provisoirement supprimé en attendant 1.9.3
+		/* Provisoirement supprimé en attendant 1.9.3*/
 		
 		echo '<br />';
 		echo gros_titre(_T('asso:votre_equipe'),'',false);		
@@ -69,18 +69,20 @@
 		echo '<td><strong>Portable</strong></td>';
 		echo '<td><strong>T&eacute;l&eacute;phone</strong></td>';
 		echo '</tr>';
-		$query = spip_query("SELECT * FROM spip_asso_adherents INNER JOIN spip_auteurs ON spip_auteurs_elargis.id_auteur=spip_auteurs.id_auteur WHERE fonction != '' AND statut_relance != 'sorti' ORDER BY nom_famille ");
-		while ($data = @mysql_fetch_assoc($query)) {	
+		$query ="SELECT * FROM spip_auteurs_elargis INNER JOIN spip_auteurs ON spip_auteurs_elargis.id_auteur=spip_auteurs.id_auteur WHERE fonction !='' AND statut_interne != 'sorti' ORDER BY nom_famille ";
+		$val = spip_query (${query}) ;
+  while ($data = sql_fetch($val))
+    {	
 			$id_auteur=$data['id_auteur'];
 			echo '<tr style="background-color: #EEEEEE;">';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;"><a href="'.generer_url_ecrire('auteur_infos',"id_auteur=$id_auteur").'" title="Modifier l\'administrateur">'.$data['nom'].' '.$data['prenom'].'</a></td>';
+			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;"><a href="'.generer_url_ecrire('auteur_infos',"id_auteur=$id_auteur").'" title="Modifier l\'administrateur">'.$data['nom'].' </a></td>';
 			echo '<td class="arial1" style="border-top: 1px solid #CCCCCC;"><a href="mailto:'.$data['email'].'"title="Envoyer un email">email</a></td>';
 			echo '<td class="arial1" style="border-top: 1px solid #CCCCCC;">'.$data['fonction'].'</td>';
 			echo '<td class="arial1" style="border-top: 1px solid #CCCCCC;">'.$data['mobile'].'</td>';
 			echo '<td class="arial1" style="border-top: 1px solid #CCCCCC;">'.$data['telephone'].'</td>';
 			echo '</tr>';
 		}				
-		echo '</table>';*/
+		echo '</table>';
 		
 		fin_cadre_relief();	
 		

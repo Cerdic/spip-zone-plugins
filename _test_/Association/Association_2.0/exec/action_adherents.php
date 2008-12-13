@@ -18,21 +18,22 @@
 		
 		include_spip('inc/acces_page');
 		
-		$id_auteur=_request('id');
+		$id_auteur=$_POST['id'];
 		if (lire_config('association/indexation')=="id_asso"){ $id_asso=$_POST['id_asso'];}
-		$categorie=_request('categorie');
-		$validite=_request('validite');
-		$commentaire=_request('commentaire');
-		$statut_interne=_request('statut_interne');
+		$categorie=$_POST['categorie'];
+		$validite=$_POST['validite'];
+		$commentaire=$_POST['commentaire'];
+		$statut_interne=$_POST['statut_interne'];
 		$action=$_POST['agir'];
-		$url_retour=_request('url_retour');
+		$url_retour=$_POST['url_retour'];
 	
 		//MODIFICATION ADHERENT
 		
-		if ($action=="modifie") {		
-			spip_query("UPDATE spip_auteurs_elargis SET id_asso="._q($id_asso).", commentaire="._q($commentaire).", validite="._q($validite).", categorie="._q($categorie).", statut_interne="._q($statut_interne)." WHERE id_auteur="._q($id_auteur) );
+		if ($action=="modifie") {
+			spip_query("UPDATE spip_auteurs_elargis SET id_asso="._q($id_asso).", commentaire="._q($commentaire).", validite="._q($validite).", categorie="._q($categorie).", statut_interne="._q($statut_interne)." WHERE id_auteur="._q($id_auteur ));
 			header ('location:'.$url_retour);
 			exit;
+			
 			
 		}
 		
@@ -81,7 +82,7 @@
 			echo '<table>';
 			echo '</p>';
 			fin_cadre_relief();
-			fin_page();
+			  echo fin_gauche(),fin_page(); 
 			exit;
 		}
 		
