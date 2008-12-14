@@ -24,7 +24,9 @@
 
 $table_des_traitements['TITRE'][]= 'supprimer_numero(typo(%s))';
 
-//include_spip('base/spipbb'); // requis pour la mutualisation et les boucles avec les tables additionnelles
+// c: 14/12/8 retour a spip_log suite a l'introduction de la constante _MAX_LOG dans
+// http://trac.rezo.net/trac/spip/changeset/13438
+define('_MAX_LOG',1000); // Ca devrait suffire comme nombre de lignes
 
 #
 # inclus def de champs (voir ci-apres !)

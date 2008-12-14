@@ -97,42 +97,10 @@ function spipbb_log($message='',$log_level=1,$obsolete_prefix="") {
 		}
 		else $message=$obsolete_prefix.":".$message;
 
-		// c: 23/2/8 on ne peut pas utiliser spip_log suite a sa limitation arbitraire a 100 ...
-		//spip_log($message,'spipbb');
-		$logname = 'spipbb';
-
-		$pid = '(pid '.@getmypid().')';
-
-		// accepter spip_log( Array )
-		if (!is_string($message)) $message = var_export($message, true);
-
-		$message = date("M d H:i:s").' '.$GLOBALS['ip'].' '.$pid.' '
-			.preg_replace("/\n*$/", "\n", $message);
-
-		$logfile = _DIR_TMP . $logname . '.log';
-		if (@is_readable($logfile)
-		AND (!$s = @filesize($logfile) OR $s > 10*1024)) {
-			$rotate = true;
-			$message .= "[-- rotate --]\n";
-		} else $rotate = '';
-		$f = @fopen($logfile, "ab");
-		if ($f) {
-			fputs($f, htmlspecialchars($message));
-			fclose($f);
-		}
-		if ($rotate) {
-			@unlink($logfile.'.9');
-			@rename($logfile.'.8',$logfile.'.9');
-			@rename($logfile.'.7',$logfile.'.8');
-			@rename($logfile.'.6',$logfile.'.7');
-			@rename($logfile.'.5',$logfile.'.6');
-			@rename($logfile.'.4',$logfile.'.5');
-			@rename($logfile.'.3',$logfile.'.4');
-			@rename($logfile.'.2',$logfile.'.3');
-			@rename($logfile.'.1',$logfile.'.2');
-			@rename($logfile,$logfile.'.1');
-		}
-		// doit on dupliquer dans le log general ? inutile...
+		
+		// c: 14/12/8 retour a spip_log suite a l'introduction de la constante _MAX_LOG dans
+		// http://trac.rezo.net/trac/spip/changeset/13438
+		spip_log($message,'spipbb');
 
 	} // should we log ?
 
