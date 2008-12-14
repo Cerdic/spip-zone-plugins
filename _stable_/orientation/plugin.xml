@@ -27,4 +27,6 @@ Le plugin orientation ajoute les crit&#232;res <code>{portrait}</code>, <code>{c
 	</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

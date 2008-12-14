@@ -39,4 +39,6 @@ Les balises utilses sont #XPATH, #NOEUD, #ATTRIBUTS (sur laquelle on utilisera l
 	xml
 	</prefix>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

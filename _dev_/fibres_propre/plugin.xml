@@ -26,4 +26,5 @@
 		<nom>pre_propre</nom>
 		<inclure>fibres_propre.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

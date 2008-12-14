@@ -24,4 +24,7 @@ _ {{Necessite les plugin forms&amp;tables et sms}}
 		<nom>taches_generales_cron</nom>
 	</pipeline>
 	<chemin dir='' />
+	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="forms" version="[0.11;]" />
+	<necessite id="sms" version="[0.2;]" />
 </plugin>

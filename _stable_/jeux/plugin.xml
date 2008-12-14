@@ -94,4 +94,5 @@ Afin d'&#233;viter les mauvaises surprises de pr&#233;sentation (comme l'afficha
 	</pipeline>
 
 	<install>base/jeux_upgrade.php</install>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

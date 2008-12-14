@@ -10,5 +10,6 @@
 	</description>
 	<fonctions>calendrier_fonctions.php</fonctions>
 	<lien>http://www.spip-contrib.net/Gestion-de-dates-et-calendriers</lien>
+	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id="CFG" version="[1.0;]" />
 </plugin>

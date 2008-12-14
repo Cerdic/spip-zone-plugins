@@ -23,6 +23,7 @@ Affiche un lecteur d images en javascript<br/>
 	<prefix>
 Smoothgallery
 	</prefix>
+	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id='cfg' version='[1.0.4;]' />
 
 

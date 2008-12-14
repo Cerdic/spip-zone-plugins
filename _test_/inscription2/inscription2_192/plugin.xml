@@ -19,6 +19,7 @@
 	<prefix>
 		  Inscription2
 	</prefix>
+	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id='cfg' version='[1.5.0;]' />
 	<install>base/inscription2_installer.php</install>
 	<options>

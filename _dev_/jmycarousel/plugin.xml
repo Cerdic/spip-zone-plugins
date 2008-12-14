@@ -13,5 +13,6 @@
 	<action>insert_head</action>
 	<inclure>jmycarousel.php</inclure>
 </pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>
 

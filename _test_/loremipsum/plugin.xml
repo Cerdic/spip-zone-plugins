@@ -42,4 +42,6 @@ If you don't set this, paragraphs will be use by default.
 		<action>insert_head</action>
 		<inclure>head.php</inclure>
 	</pipeline>
+
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

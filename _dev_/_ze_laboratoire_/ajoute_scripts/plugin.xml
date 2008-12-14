@@ -27,4 +27,5 @@
 	<prefix>
 	Ajoute_script
 	</prefix>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

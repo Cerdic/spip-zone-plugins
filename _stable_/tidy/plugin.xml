@@ -24,9 +24,10 @@ _ <code>define('_TIDY_COMMAND', 'tidy');</code>
 	<options>
 	options.php
 	</options>
-<pipeline>
-	<nom>affichage_final</nom>
-	<action>appliquer</action>
-	<inclure>options.php</inclure>
-</pipeline>	
+	<pipeline>
+		<nom>affichage_final</nom>
+		<action>appliquer</action>
+		<inclure>options.php</inclure>
+	</pipeline>	
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

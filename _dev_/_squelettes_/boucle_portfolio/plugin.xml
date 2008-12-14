@@ -24,4 +24,5 @@ _ S'utilise par un {&lt;INCLURE{fond=inc-portfolio}{id_article}{nb_vignettes=5}{
   	<nom>insert_head</nom>
   	<inclure>boucleportfolio_fonctions.php</inclure>
   </pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

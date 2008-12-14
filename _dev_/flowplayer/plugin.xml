@@ -1,7 +1,47 @@
-<plugin>	<nom><multi>		[en] FlowPlayer is a opensource Flash video player		[fr]FlowPlayer est un lecteur flash pour le web opensource	</multi></nom>	<auteur>Alexmacapple, b_b, Kent1, Marcimat_ &#169; 2008 - Distribu&#233; sous licence GNU/LGPL pour la partie spip_ Utilisation [swfobject.js->http://blog.deconcept.com/swfobject/] pour faciliter l&rsquo;inclusion des contenus Flash._ Flowplayer, lecteur de Anssi Piirainen [->http://flowplayer.org/]</auteur>	<version>	0.1	</version>	<etat>	dev	</etat>	<icon>	css/_img/flowplayer.gif	</icon>	<description><multi>[en]This plugin [...]. [fr]Ce plugin fournit un modele pour inserer des videos .flv ou .swf ou images .jpg dans le lecteur flash multimedia flowplayer, avec une playliste xml. La licence de ce lecteur est GPL	</multi></description>	<lien>
+<plugin>
+	<nom><multi>
+		[en] FlowPlayer is a opensource Flash video player
+		[fr]FlowPlayer est un lecteur flash pour le web opensource
+	</multi></nom>
+	<auteur>Alexmacapple, b_b, Kent1, Marcimat
+_ &#169; 2008 - Distribu&#233; sous licence GNU/LGPL pour la partie spip
+_ Utilisation [swfobject.js->http://blog.deconcept.com/swfobject/] pour faciliter l&rsquo;inclusion des contenus Flash.
+_ Flowplayer, lecteur de Anssi Piirainen [->http://flowplayer.org/]
+</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<icon>
+	css/_img/flowplayer.gif	</icon>
+	<description><multi>
+[en]This plugin [...]. 
+
+[fr]Ce plugin fournit un modele pour inserer des videos .flv ou .swf ou images .jpg dans le lecteur flash multimedia flowplayer, avec une playliste xml. 
+La licence de ce lecteur est GPL
+	</multi></description>
+	<lien>
 [{{Exemples et doc provisoire en ligne}} : ->http://alexmacapple.dyndns.org/gisiesvn/spip.php?rubrique2]
 	</lien>
 	 <fonctions>
 	  flowplayer_fonctions.php
   </fonctions>
-	<prefix>	flowplayer</prefix><pipeline>	<nom>insert_head</nom>	<action>insert_head</action>	<inclure>flowplayer_fonctions.php</inclure></pipeline><pipeline>	<nom>affichage_final</nom>	<action>affichage_final</action>	<inclure>flowplayer_fonctions.php</inclure></pipeline></plugin>
+	<prefix>
+	flowplayer
+</prefix>
+
+<pipeline>
+	<nom>insert_head</nom>
+	<action>insert_head</action>
+	<inclure>flowplayer_fonctions.php</inclure>
+</pipeline>
+
+<pipeline>
+	<nom>affichage_final</nom>
+	<action>affichage_final</action>
+	<inclure>flowplayer_fonctions.php</inclure>
+</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
+</plugin>

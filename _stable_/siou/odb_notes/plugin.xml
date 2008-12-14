@@ -12,4 +12,5 @@
       <action>ajouterBoutons</action>
       <inclure>inc-odb_notes.php</inclure>
    </pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

@@ -18,6 +18,7 @@
 	</description>
 	<lien>http://spip-contrib.net/spip.php?article2733</lien>
   <icon>aff_zone.png</icon>
+	<necessite id="SPIP" version="[1.9.2;]" />
   <necessite id="cfg" version="[1.7.5;]" />
   <options>aff_zone_options.php</options><!-- gere l'appel de base/aff_zone_tables.php -->
   <fonctions>aff_zone_fonctions.php</fonctions>

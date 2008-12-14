@@ -68,4 +68,5 @@
     <nom>affiche_milieu</nom>
     <inclure>jsMath.php</inclure>
   </pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

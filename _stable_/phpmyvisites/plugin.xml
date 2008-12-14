@@ -41,4 +41,5 @@ _ &#169; 2006 - GPL
 		<inclure>phpmv_fonctions.php</inclure>
 	</pipeline>
 	<chemin dir='' />
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

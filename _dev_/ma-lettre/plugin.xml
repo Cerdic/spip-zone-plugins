@@ -40,4 +40,6 @@ _ &copy; 2006-2009 - Distribu&eacute; sous licence GNU/GPL v.3
 		<inclure>inc_malettre.php</inclure>
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

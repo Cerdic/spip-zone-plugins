@@ -34,4 +34,5 @@ _ Avec le soutient de [Media-Animation->http://www.media-animation.be]
 		<action>ajouter_boutons</action>
 		<inclure>boutique_pipelines_admin.php</inclure>
 	</pipeline>	
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

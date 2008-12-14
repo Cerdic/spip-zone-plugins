@@ -31,4 +31,5 @@
         <action>AjouterBoutons</action>
 		<inclure>eva_jclic_pipeline.php</inclure>
     </pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

@@ -30,4 +30,5 @@
 		<action>header_prive</action>		
 		<inclure>bannieres_fonctions.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

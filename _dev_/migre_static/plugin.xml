@@ -41,6 +41,7 @@ _ and if cfg plugin is installed: [Configuration->.?exec=cfg&amp;cfg=migrestatic
 		<inclure>migre_static_pipelines.php</inclure>
 	</pipeline>
 
+	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id="cfg" version="[1.0.0;]" />
 	<chemin dir='' />
 

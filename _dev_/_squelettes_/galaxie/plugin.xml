@@ -19,4 +19,6 @@ _ Necessite le plugin mnoGoSearch et un serveur de recherche mnoGoSearch
 	<prefix> 
 	galaxie
 	</prefix>
+	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="mnoGoSearch" version="[0.1;]" />
 </plugin>

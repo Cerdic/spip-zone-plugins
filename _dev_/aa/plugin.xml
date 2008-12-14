@@ -36,6 +36,7 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
         		<nom>ajouter_boutons</nom>
             <inclure>aa_pipelines.php</inclure>
         </pipeline>	
+	<necessite id="SPIP" version="[1.9.2;]" />
 				<necessite id="cfg" version="[1.0.0;]" />
 				<chemin dir='' />
 </plugin>

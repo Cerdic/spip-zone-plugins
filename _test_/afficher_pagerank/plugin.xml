@@ -18,5 +18,6 @@
 		<inclure>pb_pagerank.php</inclure>
 	</pipeline>
 
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>
 

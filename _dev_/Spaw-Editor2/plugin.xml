@@ -31,4 +31,5 @@ Nécessite le plugin "chargeur" pour importer l'archive de l'éditeur SPAW Edito
 		<action>pre_propre</action>
 		<inclure>spaw2_pre_propre.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

@@ -21,4 +21,5 @@
     <action>pre_typo</action>
     <inclure>bellespuces.php</inclure>
   </pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

@@ -28,4 +28,5 @@
 	  tag-machine
 	</prefix>
 	<!--rien d'autre, on fournit juste un inc-->
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

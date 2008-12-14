@@ -49,6 +49,7 @@
         		<nom>ajouter_boutons</nom>
             <inclure>inc_saveauto.php</inclure>
         </pipeline>	
+	<necessite id="SPIP" version="[1.9.2;]" />
 				<necessite id="cfg" version="[1.0.0;]" />
 				<chemin dir='' type='prive' />
 

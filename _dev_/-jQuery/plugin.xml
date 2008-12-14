@@ -27,4 +27,5 @@ _ NE PAS UTILISER A PARTIR DE SPIP 1.9.2 (la librairie est int&#233;gr&#233;e da
 		<nom>header_prive</nom>
 		<action>insert_head</action>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;1.9.2)" />
 </plugin>

@@ -13,4 +13,6 @@ _ N&#233;cessite SPIP 1.9.2
 		<nom>affiche_milieu</nom>
 		<inclure>smtp_config_fonctions.php</inclure>
 	</pipeline>
+
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

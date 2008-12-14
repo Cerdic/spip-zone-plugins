@@ -17,6 +17,7 @@
 	<prefix>
 	FormulaireArticle
 	</prefix>
+	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id='cfg' version='[1.0.6;]' />
 	<necessite id='Autorite' version='[0.9;]' />
 	<chemin dir='' />

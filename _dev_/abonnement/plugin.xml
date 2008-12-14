@@ -30,6 +30,7 @@
 		<inclure>abonnement_pipeline.php</inclure>
 	</pipeline>
 	<chemin dir='' />
+	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id="inscription2" version="[0.2;]" />
 	<necessite id="spiplistes" version="[1.9;]" /> 
 </plugin>

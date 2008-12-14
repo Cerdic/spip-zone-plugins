@@ -41,9 +41,10 @@
 		<inclure>abomailmans_interface.php</inclure>
 	</pipeline>
 
-<pipeline>
+	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>abomailmans_interface.php</inclure>
 	</pipeline>
 
-	</plugin>
+	<necessite id="SPIP" version="[1.9.2;]" />
+</plugin>

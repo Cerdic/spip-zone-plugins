@@ -9,4 +9,5 @@
 	<install>base/profil_etendu_upgrade.php</install>
 	<options>profil_etendu_options.php</options>
 	<fonctions>profil_etendu_fonctions.php</fonctions>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

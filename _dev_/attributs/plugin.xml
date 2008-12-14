@@ -53,4 +53,5 @@ Les attributs sont un doublement des mots-cl&eacute;s afin d'&eacute;viter d'avo
 	</pipeline>
 
 	<chemin dir='' />
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

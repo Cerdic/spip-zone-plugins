@@ -32,4 +32,5 @@ _ &#169; 2006 - Distribu&eacute; sous licence GPL
 		<inclure>blockreferer_pipeline.php</inclure>
 	</pipeline>
 	<install>base/blockreferer_upgrade.php</install>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

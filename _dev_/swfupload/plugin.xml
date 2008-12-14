@@ -18,4 +18,5 @@ _ si vous avez cfg: [configuration->index.php?exec=cfg&amp;cfg=swfupload]
 		<nom>header_prive</nom>
 		<inclure>swfupload_pipelines.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

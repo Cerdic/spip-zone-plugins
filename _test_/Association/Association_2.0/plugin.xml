@@ -45,4 +45,5 @@ _ Ce plugin n&eacute;cessite l'installation des plugin cfg et Inscription2
 		<inclure>association_fonctions.php</inclure>
 	</pipeline>
 	
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

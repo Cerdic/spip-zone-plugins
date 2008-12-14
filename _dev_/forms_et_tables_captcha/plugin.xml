@@ -8,11 +8,13 @@
 	Ajout d'un captcha pour le plugin Forms et tables
 	Cliquez ici pour configurer [ecrire/?exec=cfg&amp;cfg=ftcaptcha->./?exec=cfg&amp;cfg=ftcaptcha]
         Adaptation de [->http://www.atelierphp5.com/un-captcha-accessible.html]
+				(voir aussi [->http://www.yoyodesign.org/doc/w3c/turingtest-20051123/])
 	</description>
 	<lien>http://</lien>
 	<prefix>ftcaptcha</prefix>
 	<install>base/ftcaptcha_install.php</install>
-	<necessite id='forms' version='[0.000;]' />
+	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id='forms' version='[0.1;]' />
 	<chemin dir='' />
 	<pipeline>
 		<nom>forms_types_champs</nom>

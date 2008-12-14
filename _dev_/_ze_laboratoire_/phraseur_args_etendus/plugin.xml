@@ -19,4 +19,5 @@ _ 	EX : <code>#SET{val,[before(#ENV{test,0}|filter)after]}</code>
   <prefix>
   phraseur_args_etendus
   </prefix>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

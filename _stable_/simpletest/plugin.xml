@@ -16,4 +16,5 @@
 	<prefix>simpletest</prefix>
   	
 	<options>simpletest_options.php</options>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

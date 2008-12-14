@@ -40,6 +40,7 @@
 
     <!-- précise les dependances vis-a-vis de d'autres plugins -->
     <necessite id="cfg" version="[1.0.4;]" />
+	<necessite id="SPIP" version="[1.9.2;]" />
 
     <!-- mes fonctions -->
 	<fonctions>thumbsites_fonctions.php</fonctions>

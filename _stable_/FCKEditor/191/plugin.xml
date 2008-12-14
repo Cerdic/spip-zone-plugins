@@ -46,4 +46,5 @@ De même, si vous voulez utiliser geshi vous devez l'ajouter dans le r&#233;pert
 		<inclure>fckeditor2_pipelines.php</inclure>
 	</pipeline>
 	
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

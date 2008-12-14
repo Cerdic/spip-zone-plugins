@@ -30,4 +30,5 @@ _ &#169; 2005-2007 - Distribu&#233; sous licence GPL
 		<action>ajouterBoutons</action>
 		<inclure>mass_import_pipelines.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

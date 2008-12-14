@@ -30,4 +30,5 @@ _ &#169; 2006 - Distribu&#233; sous licence GNU/GPL
 	</prefix>
 	<options>
 	</options>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

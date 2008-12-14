@@ -26,4 +26,5 @@ _ &#169; 2006 - Distribu&eacute; sous licence GPL
 		<action>ajouter_boutons</action>
 		<inclure>edittable_admin.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

@@ -43,6 +43,7 @@
 		<inclure>pb_charts_actions.php</inclure>
 	</pipeline>
 
+	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id="lib:charts" src="http://www.maani.us/xml_charts/charts.zip" />
 </plugin>
 

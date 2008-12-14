@@ -25,4 +25,5 @@ Ce plugin fournit des modeles produisant des diaporamas en jquery innerfade
 	<prefix>
 	innerfade
 	</prefix>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

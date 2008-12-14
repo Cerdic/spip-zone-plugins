@@ -34,4 +34,5 @@ afin d'&#234;tre sauvegard&#233;es automatiquement par le plugin Super_Dump
 		<inclure>csvimport_boutons.php</inclure>
 	</pipeline>
 	<chemin dir='' type='prive' />
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

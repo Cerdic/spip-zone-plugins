@@ -21,4 +21,5 @@ _ &#169; 2008 - GPL
 		<inclure>woopra_options.php</inclure>
 	</pipeline>
 	<chemin dir='' />
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

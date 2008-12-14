@@ -17,6 +17,7 @@ Un plugin pour les developeurs de plugin
 	</description>
 	<icon>images/develop.png</icon>
 	<prefix>develop</prefix>
+	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id='cfg' version='[1.0.6;]' />
 	<necessite id='Inscription2' version='[0.2;]' />
 	<install>base/develop_upgrade.php</install>

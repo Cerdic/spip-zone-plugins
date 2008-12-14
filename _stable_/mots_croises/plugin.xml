@@ -54,4 +54,5 @@ _ Il n&#233;cessite l'activation du plugin {{jQuery}} ou une version de spip sup
 		<inclure>mots_croises_pipelines.php</inclure>
 		<action>header_prive</action>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

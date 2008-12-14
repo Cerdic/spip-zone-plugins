@@ -24,7 +24,7 @@ Le code est bas&eacute; sur [TJPZoom->http://valid.tjp.hu/tjpzoom/] par J&agrave
 
 Le plugin ne marche qu'avec les squelettes utilisant la balise <code>#INSERT_HEAD</code>
 
-Si vous utilisez SPIP 1.9.2, il faut t&eacute;l&eacute;charger la librairie javascript [TJPZoom->http://valid.tjp.hu/tjpzoom/tjpzoom.zip] et placer le contenu de l'archive dans un r&eacute;pertoire {tjpzoom} dans votre r&eacute;pertoire {squelette}. Si vous avec SPIP 2, cela sera fait automatiquement pour vous.
+Si vous utilisez SPIP 1.9.2, il faut t&eacute;l&eacute;charger la biblioth&egrave;que javascript [TJPZoom->http://valid.tjp.hu/tjpzoom/tjpzoom.zip] et placer le contenu de l'archive dans un r&eacute;pertoire {tjpzoom} dans votre r&eacute;pertoire {squelette}. Si vous avec SPIP 2, cela sera fait automatiquement pour vous.
 	</description>
 	<lien>http://www.spip-contrib.net/Une-loupe-pour-vos-vignette</lien>
 	<prefix> 
@@ -42,6 +42,7 @@ Si vous utilisez SPIP 1.9.2, il faut t&eacute;l&eacute;charger la librairie java
 	</pipeline>
 
 
+	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id='CFG' version='[1.10.3;]' />
 	<necessite id="lib:tjpzoom" src="http://valid.tjp.hu/tjpzoom/tjpzoom.zip" />
 </plugin>

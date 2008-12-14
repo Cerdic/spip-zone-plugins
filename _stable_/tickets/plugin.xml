@@ -38,5 +38,6 @@ Il est con&ccedil;u pour faciliter la phase de d&eacute;veloppement du site (not
 		<inclure>tickets_pipelines.php</inclure>
 	</pipeline>
 	
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>
 

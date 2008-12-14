@@ -29,4 +29,5 @@ _ http://www.spip-contrib.net/Des-mots-clefs-partout
 		<action>insert_head</action>
  		<inclure>head.php</inclure>
 	</pipeline>
-	</plugin>
+	<necessite id="SPIP" version="[1.9.2;]" />
+</plugin>

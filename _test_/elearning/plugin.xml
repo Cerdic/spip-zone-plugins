@@ -38,6 +38,7 @@ _ En plus d'avoir ses cours en ligne, on peut donc faire des tests notés, voir 
 	</pipeline>
 	
 	<!-- Le e-learning dans SPIP nécessite les plugins suivant -->
+	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id='cfg' version="[1.10.3;]" />
 	<necessite id='AccesRestreint' version="[0.3;]" />
 	<necessite id='bigbrother' version="[0.3;]" />

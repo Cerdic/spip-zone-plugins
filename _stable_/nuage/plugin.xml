@@ -13,4 +13,5 @@
 		<inclure>nuage_pipelines_public.php</inclure>
 	</pipeline>
 	<noisette>modeles/nuage.html</noisette>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

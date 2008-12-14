@@ -48,4 +48,5 @@
 		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/dw2_tables.php</inclure>
 	</pipeline>	
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

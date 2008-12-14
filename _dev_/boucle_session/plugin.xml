@@ -17,4 +17,5 @@
 	<fonctions>boucleSession.php</fonctions>
 	<options>boucleSessionOptions.php</options>
 	<prefix>boucleSession</prefix>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

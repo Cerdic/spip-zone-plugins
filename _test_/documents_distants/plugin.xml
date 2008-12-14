@@ -32,4 +32,5 @@ _ &#169; 2007 - Licence GPL
 		<inclure>documents_distants_pipelines.php</inclure>
 		<action>affiche_gauche</action>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

@@ -13,4 +13,5 @@
 		<nom>boussole</nom> 
 		<inclure>party_pipelines.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

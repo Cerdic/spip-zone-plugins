@@ -32,6 +32,7 @@ _ &#169; 2006,2007 - Licence GPL
 		<action>ajouter</action>
 		<inclure>glossaire_filtres.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id="forms" version="[0.301;]" />
 	<chemin dir=''  />
 </plugin>

@@ -41,4 +41,5 @@ _ tutorial ici sur [maani.us->http://maani.us/xml_charts/index.php?menu=Tutorial
 		<nom>ajouter_boutons</nom>
 		<inclure>charts_boutons.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

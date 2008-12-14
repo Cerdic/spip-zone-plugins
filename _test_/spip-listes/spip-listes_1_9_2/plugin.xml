@@ -19,4 +19,5 @@
 		<nom>taches_generales_cron</nom>
 	</pipeline>
 	<chemin dir='' />
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

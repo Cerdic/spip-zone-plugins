@@ -8,4 +8,5 @@
 	<prefix>docbr</prefix>
 	<fonctions>docb_functions.php</fonctions>
 	<install>base/docbr_upgrade.php</install>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

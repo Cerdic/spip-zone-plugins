@@ -86,5 +86,6 @@
 		<nom>affiche_milieu</nom>
 		<inclure>forms_pipeline.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[;1.925)" />
+<!--	<necessite id="SPIP" version="[;1.925)" /> -->
+	<necessite id="SPIP" version="[1.9.2;1.9.2)" />
 </plugin>

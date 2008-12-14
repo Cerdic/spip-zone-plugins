@@ -33,6 +33,7 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 	cfg_exemples
 	</prefix>
 	<chemin dir='' />
+	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id='cfg' version='[1.4;]' />
 
 </plugin>

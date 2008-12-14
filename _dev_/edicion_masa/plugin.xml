@@ -32,4 +32,5 @@
 
 
 	<chemin dir='' type='prive' />
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

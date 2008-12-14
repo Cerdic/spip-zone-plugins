@@ -47,5 +47,6 @@
 		<action>OP_squelette</action>
 		<inclure>op_fonctions.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id='cfg' version='[1.3.7;]' />
 </plugin>

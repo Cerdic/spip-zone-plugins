@@ -38,4 +38,5 @@ _ CopyLeft - 2006
 	<prefix> 
 	enviar_email
 	</prefix>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

@@ -24,4 +24,5 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 		<inclure>spongespip_pipe.php</inclure>
 		</pipeline>
 	<chemin dir='' />
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

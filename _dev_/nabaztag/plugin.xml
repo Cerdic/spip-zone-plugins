@@ -26,4 +26,5 @@
 		<nom>insert_head</nom>
 		<inclure>head.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

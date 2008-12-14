@@ -41,4 +41,6 @@ Pour apporter la technologie de crayons &agrave; spip-listes
 		<inclure>tetecrayons.php</inclure>
 	</pipeline -->
 	<chemin dir='' />
+
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

@@ -25,8 +25,10 @@ Formulaires disponibles:
 
 Les autres formulaires &#224; venir bient&#244;t ....
 
-{{Avertissement:}} Utiliser les captchas limite l'accessibilt&eacute; de votre site
+{{Avertissement:}} Utiliser les captchas limite l'accessibilt&eacute; de votre site http://www.yoyodesign.org/doc/w3c/turingtest-20051123/
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-Captcha2</lien> <!-- URI de documentation -->
 	<prefix>captcha2</prefix>
+
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

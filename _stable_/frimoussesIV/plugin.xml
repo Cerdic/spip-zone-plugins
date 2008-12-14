@@ -27,4 +27,5 @@
 		<nom>pre_propre</nom>
 		<inclure>plug_smileys.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

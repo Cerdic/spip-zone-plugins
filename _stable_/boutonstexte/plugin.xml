@@ -31,4 +31,5 @@ _ <multi>[fr]ATTENTION: Necessite jQuery et la balise <code>#INSERT_HEAD</code> 
 	  <inclure>boutonstexte_pipelines.php</inclure>
   </pipeline>
   <chemin dir='' />
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

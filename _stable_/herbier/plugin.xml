@@ -12,4 +12,5 @@
 		<nom>boussole</nom> 
 		<inclure>herbier_pipelines.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

@@ -41,5 +41,6 @@ walma
     	<nom>insert_walma</nom>
 	<action>insert_walma</action>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>
 

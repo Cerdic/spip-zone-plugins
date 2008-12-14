@@ -22,4 +22,6 @@ _ Ce plugin illustre le mecanisme de personalisation des squelettes de formulair
 	ecard
 	</prefix>
 	<chemin dir='' />
+	<necessite id="SPIP" version="[1.9.2;]" />
+	<utilise id="forms" version="[0.10;]" />
 </plugin>

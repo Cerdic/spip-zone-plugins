@@ -19,6 +19,6 @@
   		<inclure>recommandations_redacteurs_pipelines.php</inclure>
  	</pipeline>
 	<icon>img_pack/logo_recommandations_redacteurs.png</icon>
+	<necessite id="SPIP" version="[1.9.2;]" />
  	<necessite id="CFG" version="[1.0;]" />
-	<necessite id='spip' version='[1.92;]' />
 </plugin>

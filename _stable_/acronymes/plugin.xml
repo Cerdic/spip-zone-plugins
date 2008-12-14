@@ -49,6 +49,7 @@ _ &#169; 2006 - Licence GPL
 		<action>config</action>
 		<inclure>acronymes_config.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id="forms" version="[0.301;]" />
 	<chemin dir='' />
 </plugin>

@@ -3,4 +3,5 @@
 	<version>0.1</version>
 	<etat>experimental</etat>
 	<prefix>gne</prefix>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

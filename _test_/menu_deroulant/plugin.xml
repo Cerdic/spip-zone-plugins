@@ -25,4 +25,5 @@
   	<nom>insert_head</nom>
   	<inclure>menuder_fonctions.php</inclure>
   </pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

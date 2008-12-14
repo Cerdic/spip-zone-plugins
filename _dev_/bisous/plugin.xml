@@ -41,4 +41,5 @@ Vous &ecirc;tes content ? Il vous faut des bisous !
 		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/bisous_tables.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

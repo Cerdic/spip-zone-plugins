@@ -18,6 +18,7 @@
 	<prefix>
 	creer_admin_rubrique
 	</prefix>
+	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id='cfg' version='[1.0.6;]' />
 	<chemin dir='' />
 </plugin>

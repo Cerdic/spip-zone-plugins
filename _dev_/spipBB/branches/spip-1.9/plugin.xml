@@ -157,5 +157,6 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]
 		<inclure>spipbb_pipelines.php</inclure>
 	</pipeline>
 	<chemin dir='' />
-	<necessite id="cfg" version="[1.0.0;]" />
+	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="cfg" version="[1.0;]" />
 </plugin>

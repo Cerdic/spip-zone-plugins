@@ -17,7 +17,7 @@
 	<etat>stable</etat>
 
 	<description><strong>Livre d'or</strong> (Lido)<br />
-		<strong>LiDo</strong> est principalement un formulaire de saisie pour l’espace public. 
+		<strong>LiDo</strong> est principalement un formulaire de saisie pour l'espace public. 
 		Ce formulaire propose au visiteur de laisser quelques mots sur le Livre d’or, 
 		optionnellement de signer son commentaire.</description>
 
@@ -40,4 +40,5 @@
 		<inclure>inc/lido_pipeline_ajouter_onglets.php</inclure>
 	</pipeline>
 
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

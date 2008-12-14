@@ -26,4 +26,5 @@ _ voir aussi le fichier README.txt
 	walma
 	</prefix>
  
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

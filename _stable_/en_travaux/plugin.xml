@@ -52,4 +52,6 @@ _ &#169; 2006 - Distribuito sotto Licenza GPL
 		<inclure>en_travaux.php</inclure>
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la fonction portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

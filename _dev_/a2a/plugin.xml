@@ -24,6 +24,7 @@
     <install>base/a2a_upgrade.php</install>
 
 	<!-- Dependances : CFG afin d'avoir les fonctions sql_* en 1.9.2 -->
+	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id="cfg" version="[1.7.5;]" />
 	
     <!--pipeline, surcharge de fonction à des moments précis de la génération d'une page spip -->

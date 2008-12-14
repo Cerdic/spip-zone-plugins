@@ -65,4 +65,6 @@ _ <a href="?exec=player_admin">configurer le plugin</a> ||
 		<inclure>inc/player_pipeline_affiche_milieu.php</inclure>
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la fonction portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

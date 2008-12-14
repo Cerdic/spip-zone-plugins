@@ -59,4 +59,5 @@ permet de s&eacute;lectionner par type technique
 	<install>base/mots_techniques_install.php</install>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<chemin dir='' />
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

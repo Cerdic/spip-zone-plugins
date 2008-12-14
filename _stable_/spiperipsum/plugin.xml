@@ -19,4 +19,5 @@ L'affichage des lectures se fait principalement via l'utilisation d'un mod&egrav
 	<icon>spiperipsum-64.png</icon>
 	<fonctions>spiperipsum_fonctions.php</fonctions>
 	<options>spiperipsum_options.php</options>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

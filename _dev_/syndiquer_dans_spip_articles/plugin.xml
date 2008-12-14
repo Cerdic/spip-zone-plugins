@@ -20,4 +20,5 @@
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix>syndiquer_dans_spip_articles</prefix>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

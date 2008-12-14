@@ -33,4 +33,5 @@ _ N&#233;cessite les fonctions php-xml et le binaire tidy.
 		<action>to_Atom</action>
 		<inclure>hatom2atom.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

@@ -23,4 +23,5 @@ _ &#169; 2006 - Distribu&eacute; sous licence LGPL
 	basefiltrageip
   </prefix>	
     <install>base/basefiltrageip_upgrade.php</install>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

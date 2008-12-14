@@ -35,4 +35,5 @@ _ Activez ce plugin et g&#233;rez les th&#232;mes dans le menu {{Configuration}}
    <nom>insert_head</nom>
       <inclure>sktheme_head.php</inclure>
  </pipeline>
- </plugin>
+	<necessite id="SPIP" version="[1.9.2;]" />
+</plugin>

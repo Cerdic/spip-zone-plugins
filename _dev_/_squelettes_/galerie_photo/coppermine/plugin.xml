@@ -28,4 +28,5 @@ _ [D&#233;mo->http://spiptest.africa-web.org/]
 	<options>
 	coppermine.php
 	</options>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

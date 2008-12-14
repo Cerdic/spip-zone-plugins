@@ -27,6 +27,7 @@
     
     <prefix>evanews</prefix>
 	
+	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id="cfg" version="[1.10.3;]" />
 	
 	<bouton id='eva_news' parent='configuration'>

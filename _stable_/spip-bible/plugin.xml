@@ -12,7 +12,8 @@
     stable
     </etat>
     <install>bible_fonctions.php</install>
-    <necessite id='CFG' />
+	<necessite id="SPIP" version="[1.9.2;]" />
+    <necessite id='CFG' version="[1.0;]" />
     <icon>
     bible.jpg
     </icon>

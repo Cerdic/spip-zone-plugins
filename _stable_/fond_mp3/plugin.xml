@@ -49,4 +49,5 @@
 		<inclure>inc/fmp3_pipeline_insert_head.php</inclure>
 	</pipeline>
 	
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

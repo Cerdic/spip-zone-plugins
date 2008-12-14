@@ -13,4 +13,5 @@ _ [page perso->http://philippe.auriol.free.fr/]</auteur>
  </description>
 	<lien></lien> <!-- URI de documentation -->
  <fonctions>glossaire.php</fonctions>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

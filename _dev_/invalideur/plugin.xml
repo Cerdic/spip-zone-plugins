@@ -22,4 +22,5 @@
 
 	<version_base>0.1</version_base>
 	<install>base/invalideur_install.php</install>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

@@ -63,4 +63,5 @@ Es wird von vielen Plugins verwendet, kann aber auch anderen Nutzen finden wie d
         <nom>editer_contenu_formulaire_cfg</nom>
         <inclure>cfg_pipeline.php</inclure>
     </pipeline>    
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

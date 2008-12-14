@@ -12,4 +12,5 @@ _ {{Necessite PHP 5.2.1 selon l'auteur de minify}} (teste avec succes en 5.1.6)
 	<lien>http://code.google.com/p/minify/</lien> <!-- URI de documentation -->
 	<fonctions>minify_fonctions.php</fonctions>
 	<prefix>minify</prefix>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

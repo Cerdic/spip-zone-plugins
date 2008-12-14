@@ -11,5 +11,6 @@
 	<fonctions>fonctions_session.php</fonctions>
 	<options>options_session.php</options>
 	<prefix>BaliseSession</prefix>
-	<necessite version="[;1.9262)" />
+<!--	<necessite version="[;1.9262)" /> -->
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

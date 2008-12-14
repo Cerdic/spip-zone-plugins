@@ -26,7 +26,7 @@
 	<prefix>bonbon</prefix>
 	
     <necessite id='cfg' version='[1.10.3;]' />
-    <necessite id='spip' version='[1.9.3;]' /> 
+    <necessite id='spip' version='[2.0.0 beta;]' /> 
     
     <bouton id='bonbon_admin' parent='configuration'>
         <icone>images/bonbon.png</icone>

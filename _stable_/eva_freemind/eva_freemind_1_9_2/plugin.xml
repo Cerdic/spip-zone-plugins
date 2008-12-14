@@ -25,4 +25,5 @@
     eva_freemind
     </prefix>
     <install>eva_freemind_install.php</install>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

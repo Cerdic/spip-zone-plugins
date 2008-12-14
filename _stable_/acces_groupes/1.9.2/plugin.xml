@@ -71,6 +71,7 @@ pour afficher les contenus restreints aux utilisateurs n'ayant pas acc&#232;s da
 </pipeline>
 -->
 <chemin dir='' />
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>
 
 

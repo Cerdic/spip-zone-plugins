@@ -39,4 +39,5 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 				<necessite id="cfg" version="[1.0.0;]" />
 -->
 				<chemin dir='' />
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

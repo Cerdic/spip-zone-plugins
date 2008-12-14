@@ -72,5 +72,6 @@ _ Filtro google_like
 		<nom>affiche_droite</nom>
 		<inclure>recherche_etendue_pipeline.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[;1.925)" />
+<!--	<necessite id="SPIP" version="[;1.925)" /> -->
+	<necessite id="SPIP" version="[1.9.2;1.9.2)" />
 </plugin>

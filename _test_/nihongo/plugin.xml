@@ -11,4 +11,5 @@ _ &copy; 2008 - Distribu&eacute; sous licence GNU/GPL version 3</auteur>
 </multi></description>
 	<icon>nihongo.png</icon>
 	<fonctions>nihongo_fonctions.php</fonctions>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>

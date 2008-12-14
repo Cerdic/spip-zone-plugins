@@ -36,5 +36,5 @@
         <action>AfficheGauche</action>
         <inclure>CompteurGraphique_pipeline.php</inclure>
     </pipeline>
-    <necessite id='SPIP' version='[1.9.3;)' />
+    <necessite id='SPIP' version='[2.0.0 beta;]' />
 </plugin>

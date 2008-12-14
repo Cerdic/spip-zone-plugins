@@ -8,4 +8,5 @@
 	<lien></lien> <!-- URI de documentation -->
 	<fonctions>editable.php</fonctions>
 	<prefix>editable</prefix>
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>
