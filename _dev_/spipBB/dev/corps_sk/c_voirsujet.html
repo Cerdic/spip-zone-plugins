@@ -402,10 +402,10 @@
 	&#91;<a[ href="(#URL_PAGE{spip_pass})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
 	</div>
 	]
-[(#REM) Chryjs : Balise de calcul des visites - Ne pas retirer]
-<?php
-include_once(_DIR_PLUGIN_SPIPBB."visites.php");
-?>
+	
+	[(#REM) Chryjs : Balise de calcul des visites - Ne pas retirer]
+	[(#ID_FORUM|spipbb_calc_visites)]
+	
 </BOUCLE_sujet_principal>
 </B_sujet_principal>
 <!-- fin code pour fichier voirsujet.html -->

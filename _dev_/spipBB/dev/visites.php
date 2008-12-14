@@ -80,7 +80,7 @@ if (!defined('_INC_SPIPBB_COMMON')) include_spip('inc/spipbb_common'); // pour l
 		ecrire_fichier($fichier, serialize($content));
 	}
 
-@define('_DIR_RESTREINT_ABS', 'ecrire/');
+//@define('_DIR_RESTREINT_ABS', 'ecrire/');
 //include_once _DIR_RESTREINT_ABS.'inc_version.php';
 
 //include _DIR_RESTREINT_ABS.'public.php';

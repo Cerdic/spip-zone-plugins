@@ -189,21 +189,69 @@ function is_modo($id_auteur=0,$id_article=0) {
 	if (!function_exists('autoriser')) include_spip('inc/autoriser'); // 1.9.2 surtout
 	if (autoriser('modifier','article',$id_article,intval($id_auteur))) return 'oui';
 	else return 'non';
-} //
+} // is_modo
 
+// ------------------------------------------------------------------------------
+// chryjs : 14/12/8
+// disparition du gros hack sur les visites
+// et ajout d'une fonction de calcul !
+// ------------------------------------------------------------------------------
 
-// une balise pour afficher le nombre d'inscrits qui accordent leur affichage dans la liste des membres
-function affiche_total_membres_liste(){
-	$extra = 's:14:"annuaire_forum";s:3:"oui"';
-	$total = sql_countsel("spip_auteurs", "extra LIKE '%". $extra ."%'");
-	return $total ;
-}
+function spipbb_calc_visites($id_forum=NULL) {
+	// Rejet des robots (qui sont pourtant des humains comme les autres)
+	if (preg_match(
+	',google|yahoo|msnbot|crawl|lycos|voila|slurp|jeeves|teoma,i',
+	$_SERVER['HTTP_USER_AGENT']))
+		return;
 
-function balise_TOTAL_MEMBRES_LISTE($p) {
+	// Identification du client
+	$client_id = substr(md5(
+		$GLOBALS['ip'] . $_SERVER['HTTP_USER_AGENT']
+//		. $_SERVER['HTTP_ACCEPT'] # HTTP_ACCEPT peut etre present ou non selon que l'on est dans la requete initiale, ou dans les hits associes
+		. $_SERVER['HTTP_ACCEPT_LANGUAGE']
+		. $_SERVER['HTTP_ACCEPT_ENCODING']
+	), 0,10);
 
-	$p->code = "affiche_total_membres_liste()";
-	$p->type = 'php';  
-	return $p;
-}
+	//
+	// stockage sous forme de fichier tmp/spipbb-visites
+	//
+
+	spipbb_log("calcule les stats ".$id_forum,3,__FILE__);
+
+	// 1. Chercher s'il existe deja une session pour ce numero IP.
+	$content = array();
+	$fichier = sous_repertoire(_DIR_TMP, 'spipbb-visites') . $client_id;
+	if (lire_fichier($fichier, $content)) {
+		spipbb_log("Contenu stats:".serialize($content),3,__FILE__);
+		$content = @unserialize($content);
+	}
+
+	// 2. Plafonner le nombre de hits pris en compte pour un IP (robots etc.)
+	// et ecrire la session
+	if (count($content) < 200) {
+
+	// Identification de l'element
+	// Attention il s'agit bien des $GLOBALS, regles (dans le cas des urls
+	// personnalises), par la carte d'identite de la page... ne pas utiliser
+	// _request() ici !
+		if ($id_forum)
+			$log_type = "forum";
+		else
+			$log_type = "";
+
+		if ($log_type)
+			$log_type .= "\t" . intval($GLOBALS["id_$log_type"]);
+		else    $log_type = "autre\t0";
+
+		if (isset($content[$log_type])) {
+			$content[$log_type]++;
+		}
+		else	$content[$log_type] = 1; // bienvenue au club
+
+		spipbb_log("Enregis stats:".serialize($content),3,__FILE__);
+		ecrire_fichier($fichier, serialize($content));
+	}
+
+} // spipbb_calc_visites
 
 ?>
