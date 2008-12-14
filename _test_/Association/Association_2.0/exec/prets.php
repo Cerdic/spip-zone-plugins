@@ -19,22 +19,24 @@
 		include_spip ('inc/acces_page');
 		
 		$url_prets = generer_url_ecrire('prets');
-		$url_ajout_pret=generer_url_ecrire('edit_pret','action=ajoute');
-		$url_edit_pret=generer_url_ecrire('edit_pret','action=modifie');
+		$url_ajout_pret=generer_url_ecrire('edit_pret','agir=ajoute');
+		$url_edit_pret=generer_url_ecrire('edit_pret','agir=modifie');
 		$url_action_prets=generer_url_ecrire('action_prets');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		$id_ressource=$_REQUEST['id'];
 		
 		
-		debut_page(_T('asso:prets_titre_liste_reservations'), "", "");
-		
+	
+		 $commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('asso:prets_titre_liste_reservations')) ;
 		association_onglets();
 		
-		debut_gauche();
+		echo debut_gauche("",true);
 		
-		debut_boite_info();
+		echo debut_boite_info(true);
 		$query = spip_query ( "SELECT * FROM spip_asso_ressources WHERE id_ressource='$id_ressource'" ) ;
 		while ($data = spip_fetch_array($query)) {
+		
 			$statut=$data['statut'];
 			echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:ressources_num').'<br />';
 			echo '<span class="spip_xx-large">'.$data['id_ressource'].'</span></div>';
@@ -42,17 +44,18 @@
 			echo $data['intitule'];
 			echo '</p>';
 		}
-		fin_boite_info();
+		echo fin_boite_info(true);
 		
-		debut_raccourcis();
-		if ($statut=="ok") {
-			icone_horizontale(_T('asso:prets_nav_ajouter'), $url_ajout_pret.'&id=$id_ressource', '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','creer.gif');
-		}
-		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
-		fin_raccourcis();
 		
-		debut_droite();
-		debut_cadre_relief(  "", false, "", $titre =_T('asso:prets_titre_liste_reservations'));
+		
+			if ($statut=="ok") {
+			$res=icone_horizontale(_T('asso:prets_nav_ajouter'), $url_ajout_pret.'&id="'.$id_ressource.'"', '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','creer.gif',false);
+		echo bloc_des_raccourcis($res);}
+		$res=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
+		echo bloc_des_raccourcis($res);
+		
+		echo debut_droite("",true);
+		echo debut_cadre_relief(  "", false, "", $titre =_T('asso:prets_titre_liste_reservations'));
 		
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo "<tr bgcolor='#DBE1C5'>";
@@ -85,13 +88,13 @@
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right">';
 			if ($data['date_retour']==0) { echo '&nbsp';} else {echo association_datefr($data['date_retour']);}
 			echo '</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_prets.'&action=supprime&id_pret='.$data['id_pret'].'&id_ressource='.$id_ressource.'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="'._T('asso:prets_nav_annuler').'"></a></td>';
+			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_prets.'&agir=supprime&id_pret='.$data['id_pret'].'&id_ressource='.$id_ressource.'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="'._T('asso:prets_nav_annuler').'"></a></td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_pret.'&id='.$data['id_pret'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:prets_nav_editer').'"></a></td>';
 			echo'  </tr>';
 		}     
 		echo'</table>';
 		
 		fin_cadre_relief();  
-		fin_page();
+		echo fin_gauche(), fin_page();
 	}
 ?>

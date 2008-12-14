@@ -21,7 +21,7 @@
 		$url_action_prets=generer_url_ecrire('action_prets');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
-		$action=$_REQUEST['action'];
+		$action=$_REQUEST['agir'];
 		if ($action=="ajoute"){$id_ressource=$_REQUEST['id'];}
 		else {$id_pret=$_REQUEST['id'];}
 		$url_retour = $_SERVER['HTTP_REFERER'];
@@ -36,8 +36,9 @@
 			$commentaire_sortie=$data['commentaire_sortie'];
 			$commentaire_retour=$data['commentaire_retour'];
 		}	
-		
-		debut_page(_T('asso:prets_titre_edition_prets'), "", "");		
+		 $commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('asso:prets_titre_edition_prets')) ;
+				
 		
 		association_onglets();
 		
@@ -55,9 +56,9 @@
 		}
 		fin_boite_info();
 		
-		debut_raccourcis();
-		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
-		fin_raccourcis();
+		
+		$res=icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif",false);	
+		echo bloc_des_raccourcis($res);
 		
 		debut_droite();
 		
@@ -117,10 +118,10 @@
 		echo '<textarea name="commentaire_retour" id="commentaire_retour" class="formo" />'.$commentaire_retour.'</textarea>';
 		echo '</fieldset>';
 		
-		echo '<input name="id" type="hidden" value="'.$id_pret.'" />';
-		echo '<input name="id_ressource" type="hidden" value="'.$id_ressource.'" />';		
-		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
-		echo '<input name="action" type="hidden" value="'.$action.'">';
+		echo '<input name="id" type="text" value="'.$id_pret.'" />';
+		echo '<input name="id_ressource" type="text" value="'.$id_ressource.'" />';		
+		echo '<input name="url_retour" type="text" value="'.$url_retour.'">';
+		echo '<input name="agir" type="text" value="'.$action.'">';
 		
 		echo '<div style="float:right;"><input name="submit" type="submit" value="';
 		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
