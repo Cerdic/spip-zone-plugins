@@ -11,8 +11,6 @@ include_spip('inc/minipres');
 include_spip('inc/texte');
 include_spip('inc/layer');
 
-# conversion spip 1.9.2 -- dans common maintenant
-
 function spipbb_auteur_infos($id_auteur=0) {
 	if (empty($id_auteur)) return;
 	# spip
@@ -25,20 +23,14 @@ function spipbb_auteur_infos($id_auteur=0) {
 	$aff="";
 	$aff.= "<div id='spipbb_editer_infos-$id_auteur'>";
 
-	if ($id_auteur==$connect_id_auteur){
-		$bouton = bouton_block_visible("spipbb_$id_auteur");
-		$debut_block = 'debut_block_visible';
-	}
-	else{
-		$bouton = bouton_block_invisible("spipbb_$id_auteur");
-		$debut_block = 'debut_block_invisible';
-	}
-
+	$visible = ($id_auteur==$connect_id_auteur) ;
+	
+	$bouton = bouton_block_depliable(_T("info_sans_titre"),$visible,"spipbb_$id_auteur");
 
 	#$aff.= debut_cadre_relief(_DIR_PLUGIN_GAF."img_pack/gaf_ico-24.gif",true);
 	$aff.=debut_cadre_enfonce(_DIR_PLUGIN_SPIPBB."img_pack/gaf_ico-24.gif", true, "", $bouton._T('spipbb:config_champs_auteur'));
 
-	$aff.= $debut_block("spipbb_$id_auteur",true);
+	$aff.= debut_block_depliable($visible,"spipbb_$id_auteur");
 
 	$aff.= formulaire_spipbb_auteur_infos($id_auteur);
 
