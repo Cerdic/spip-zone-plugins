@@ -397,7 +397,7 @@
 
 	[(#REM) si visiteur non identifie : form login ]
 	[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:spipbb:login:></p>]
-	#LOGIN_PUBLIC
+	[(#REM) c: 14/12/8 passage SPIP2RC1 a SPIP2.0.0 Pour le moment LOGIN_PUBLIC fait faire une boucle infinie !!!]
 	[(#SESSION{id_auteur}|=={''}|?{' ',''})
 	&#91;<a[ href="(#URL_PAGE{spip_pass})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
 	</div>
