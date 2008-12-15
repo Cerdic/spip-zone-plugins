@@ -2,7 +2,7 @@
 	<nom>Interface Th&eacute;lia</nom>
  	<version>1.26</version>
  	<prefix>spip_thelia</prefix>
- 	<auteur><br />Arnault Pachot : d&eacute;veloppent et squelettes par d&eacute;faut<br />Alain Cousin : squelettes pour multisaison<br />Claude Chadoutaud : squelettes pour beeSpip<br />Aur&eacute;lien Dumas : squelettes par d&eacute;faut</auteur>
+ 	<auteur><br />Arnault Pachot : d&eacute;veloppent et squelettes par d&eacute;faut<br />Claude Chadoutaud : squelettes pour beeSpip<br />Aur&eacute;lien Dumas : squelettes par d&eacute;faut</auteur>
  	<description>Plugin permettant d'utiliser les boucles Th&eacute;lia dans vos squelettes <br/>
 	[acc&egrave;s au panneau de configuration pour param&eacute;trer la version de Th&eacute;lia->.?exec=cfg&amp;cfg=spip_thelia] 
 	<br/>Distribu&eacute; sous licence GNU/GPL   </description>
