@@ -173,6 +173,6 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]
 
 
 	<chemin dir='' />
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[2.0.0;]" />
 	<necessite id="cfg" version="[1.0.0;]" />
 </plugin>
