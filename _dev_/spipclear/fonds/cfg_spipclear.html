@@ -59,12 +59,13 @@
 //<![CDATA[
 	jQuery(document).ready(function() {
 		[(#ENV{choix_theme}|!={1}|?{jQuery(".editer_spipclear_nom_theme").hide();})]
-		jQuery("input[@name='choix_theme']").change(function() {
-			if (jQuery("input[@name='choix_theme']:checked").val() == 1)
+		jQuery("input[@name='choix_theme']").click(function() {
+			if (jQuery("input[@name='choix_theme']:checked").val() == 1){
 				jQuery(".editer_spipclear_nom_theme").show();
+				jQuery(this).blur();
+			}
 			else
 				jQuery(".editer_spipclear_nom_theme").hide();
-			jQuery(this).blur();
 		});	
 	});
 //]]>
