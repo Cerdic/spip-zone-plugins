@@ -3,14 +3,23 @@
 // Ex :  : <BOUCLE_a(ARTICLES)>[(#ID_RUBRIQUE|titre_rubrique)]</BOUCLE_a>
 // Ex :  : <BOUCLE_b(BREVES)>[(#ID_RUBRIQUE|titre_rubrique)]</BOUCLE_b>
 // Ex :  : <BOUCLE_r(RUBRIQUES)>[(#ID_PARENT|titre_rubrique)]</BOUCLE_r>
-function titre_rubrique($id_rubrique, $table='rubriques', $id='id_rubrique') {
-	return cs_titre_id($id_rubrique, $table, $id);
-}
-
+//
 // filtre 'titre_groupe' a utiliser sur #ID_GROUPE d'un mot-clef
 // Ex :  : <BOUCLE_m(MOTS)>[(#ID_GROUPE|titre_groupe)]</BOUCLE_m>
-function titre_groupe($id_mot, $table='groupes_mots', $id='id_groupe') {
-	return cs_titre_id($id_mot, $table, $id);
+if(defined('_SPIP19300')) {
+	function filtre_titre_rubrique($id_rubrique, $table='rubriques', $id='id_rubrique') {
+		return cs_titre_id($id_rubrique, $table, $id);
+	}
+	function filtre_titre_groupe($id_mot, $table='groupes_mots', $id='id_groupe') {
+		return cs_titre_id($id_mot, $table, $id);
+	}
+} else {
+	function titre_rubrique($id_rubrique, $table='rubriques', $id='id_rubrique') {
+		return cs_titre_id($id_rubrique, $table, $id);
+	}
+	function titre_groupe($id_mot, $table='groupes_mots', $id='id_groupe') {
+		return cs_titre_id($id_mot, $table, $id);
+	}
 }
 
 // filtre 'titre_id', s'applique aux #ID_OBJET
