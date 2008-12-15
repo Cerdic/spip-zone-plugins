@@ -118,7 +118,7 @@ function getFlashVersion() {
 		var x = navigator.plugins["Shockwave Flash"];
 		if(x && x.description) {
 			var y = x.description;
-   			flashversion = y.charAt(y.indexOf('.')-1);
+   			flashversion = y.match(/\d+/)[0];
 		}
 	} else {
 		result = false;
