@@ -237,6 +237,8 @@ function spGUI(player,sp) {
     sp.setPosition(pos);
     self.lastPos = 0;
   }
+  jQuery(player).find(".track_index").html("1");
+  jQuery(player).find(".position").html("000:000");
 
   this.play = function(i) {
     jQuery(player).find(".track_index").html(i);
