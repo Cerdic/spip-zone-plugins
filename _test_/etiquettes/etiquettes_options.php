@@ -13,7 +13,7 @@ function etiquettes_produire_id($groupe, $type_objet, $id_objet){
 	$operations = create_function('$e', 'return str_replace(" ", "_", preg_replace(",([^[:cntrl:][:alnum:]_]|[[:space:]])+,u", " ", translitteration(corriger_caracteres(strtolower(supprimer_tags(supprimer_numero($e)))))));');
 	
 	$elements = array_map($operations, $elements);
-	return join('_', $elements);
+	return trim(join('_', $elements), '_');
 
 }
 
