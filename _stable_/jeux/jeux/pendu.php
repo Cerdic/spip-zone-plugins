@@ -80,8 +80,7 @@ function affiche_un_clavier($indexJeux) {
 // fonction principale 
 function jeux_pendu($texte, $indexJeux) {
   $html = false;
-  jeux_block_init();
-  
+
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('pendu', $texte);
   // configuration par defaut

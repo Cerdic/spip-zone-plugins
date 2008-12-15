@@ -75,7 +75,6 @@ function devinettes_reponse($texte, $id) {
 // fonction principale 
 function jeux_devinettes($texte, $indexJeux) {
   $html = false;
-  jeux_block_init();
   
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('devinettes', $texte);
