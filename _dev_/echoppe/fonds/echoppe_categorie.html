@@ -1,4 +1,4 @@
-<div class="fiche_objet categorie">
+<div class="fiche_objet categorie echoppe">
 	<div class="cadre_padding">
 		<div style="clear: right;">
 				<a style="float: right;" class="icone36" href="[(#EVAL{echoppe_edit_categorie}|generer_url_ecrire{id_categorie=#ID_CATEGORIE})]"><img src="[(#CHEMIN{images/categorie-24.png})]" /><span><:echoppe:editer:></span></a>
@@ -11,7 +11,7 @@
 
 <B_LesSousCategorie>
 	<strong><:echoppe:les_sous_categories:></strong>
-	<div class="gauche">
+	<div class="gauche echoppe">
 		<BOUCLE_LesSousCategorie(ECHOPPE_CATEGORIES){id_parent = #ID_CATEGORIE}{par num titre}{1/2}>
 			<div class="enfants">
 				<div class="cadre cadre-sous_rub" style="margin-top: 20px;">
@@ -30,7 +30,7 @@
 	</div>
 </B_LesSousCategorie>
 <B_LesSousCategorie2>
-	<div class="droite">
+	<div class="droite echoppe">
 		<BOUCLE_LesSousCategorie2(ECHOPPE_CATEGORIES){id_parent = #ID_CATEGORIE}{par num titre}{2/2}>
 			<div class="enfants">
 				<div class="cadre cadre-sous_rub" style="margin-top: 20px;">
@@ -51,7 +51,7 @@
 <div class="nettoyeur"> </div>
 <B_LesProduits>
 <br />
-	<div class="liste">
+	<div class="liste echoppe">
 		<div style="position: relative;">
 			<div style="position: absolute; top: -12px; left: 3px;"><img src="../plugins/echoppe/images/produit-24.png" alt=""></div>
 			<div style="border-bottom: 1px solid rgb(68, 68, 68); padding: 3px 3px 3px 30px; background-color: white; color: black;" class="verdana2"><strong><:echoppe:les_produits_de_cette_categories:></strong></div>

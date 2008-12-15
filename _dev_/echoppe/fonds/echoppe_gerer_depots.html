@@ -1,6 +1,6 @@
 [(#CHEMIN{images/go-home.png}|debut_cadre_trait_couleur{1,"",<:echoppe:gestion_des_depots:>,"",gestion_depots})]
 <B_LesDepots>
-<ul>
+<ul class="liste_depot echoppe">
 <BOUCLE_LesDepots(ECHOPPE_DEPOTS){par titre}>
 <li><a href="[(#EVAL{'echoppe_depot'}|generer_url_ecrire{id_depot=#ID_DEPOT})]">#TITRE</a></li>
 </BOUCLE_LesDepots>

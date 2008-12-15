@@ -2,21 +2,21 @@
 <h2><:echoppe:paniers_en_attente:>&nbsp;<a href="[(#EVAL{echoppe_purger_panier_temp}|generer_url_action)]"><img src="[(#CHEMIN{images/poubelle.gif})]" alt="<:echoppe:purger_les_paniers_temporaires:>" /></a></h2>
 	<B_LesPanierstemporaire>
 	[(#PAGINATION)<br />]
-	<ul>
+	<ul class="liste_panier echoppe">
 <BOUCLE_LesPanierstemporaire(ECHOPPE_PANIERS){statut = temp}{pagination}{par date}{inverse}>
-	<li>
-		<dl>
-			<dt><a href="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{token_panier=#TOKEN_PANIER, &})]">[(#DATE|affdate)]</a></dt>
-			<dd>
-			<:echoppe:id:>: [(#TOKEN_PANIER|unique)]<br />
-			<BOUCLE_leclientTemp(ECHOPPE_CLIENTS){token_client = #TOKEN_CLIENT}>
-				<BOUCLE_auteurTemp(AUTEURS_ELARGIS){id_auteur=#ID_AUTEUR}>
-				<a href="mailto:#EMAIL">#NOM_FAMILLE #PRENOM</a><br />
-				</BOUCLE_auteurTemp>
-			</BOUCLE_leclientTemp>
-			</dd>
-		</dl>
-	</li>
+		<li>
+			<dl>
+				<dt><a href="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{token_panier=#TOKEN_PANIER, &})]">[(#DATE|affdate)]</a></dt>
+				<dd>
+				<:echoppe:id:>: [(#TOKEN_PANIER|unique)]<br />
+				<BOUCLE_leclientTemp(ECHOPPE_CLIENTS){token_client = #TOKEN_CLIENT}>
+					<BOUCLE_auteurTemp(AUTEURS_ELARGIS){id_auteur=#ID_AUTEUR}>
+					<a href="mailto:#EMAIL">#NOM_FAMILLE #PRENOM</a><br />
+					</BOUCLE_auteurTemp>
+				</BOUCLE_leclientTemp>
+				</dd>
+			</dl>
+		</li>
 </BOUCLE_LesPanierstemporaire>
 	</ul>
 	[<br />(#PAGINATION)<br />]
@@ -26,7 +26,7 @@
 <h2><:echoppe:paniers_reserve:></h2>
 <B_LesPaniersreserve>
 	[(#PAGINATION)<br />]
-	<ul>
+	<ul class="liste_panier echoppe">
 <BOUCLE_LesPaniersreserve(ECHOPPE_PANIERS){statut = reserve}{pagination}{par date}{inverse}>
 	<li>
 		<dl>
@@ -50,7 +50,7 @@
 <h2><:echoppe:paniers_valide:></h2>
 <B_LesPaniersvalide>
 	[(#PAGINATION)<br />]
-	<ul>
+	<ul class="liste_panier echoppe">
 <BOUCLE_LesPaniersvalide(ECHOPPE_PANIERS){statut = valide}{pagination}{par date}{inverse}>
 	<li>
 		<dl>
@@ -74,7 +74,7 @@
 <h2><:echoppe:paniers_paye:></h2>
 <B_LesPanierspaye>
 	[(#PAGINATION)<br />]
-	<ul>
+	<ul class="liste_panier echoppe">
 <BOUCLE_LesPanierspaye(ECHOPPE_PANIERS){statut = paye}{pagination}{par date}{inverse}>
 	<li>
 		<dl>
@@ -98,7 +98,7 @@
 <h2><:echoppe:paniers_traite:></h2>
 <B_LesPanierstraite>
 	[(#PAGINATION)<br />]
-	<ul>
+	<ul class="liste_panier echoppe">
 <BOUCLE_LesPanierstraite(ECHOPPE_PANIERS){statut = traite}{pagination}{par date}{inverse}>
 	<li>
 		<dl>
@@ -123,7 +123,7 @@
 <h2><:echoppe:paniers_envoye:></h2>
 <B_LesPaniersenvoye>
 	[(#PAGINATION)<br />]
-	<ul>
+	<ul class="liste_panier echoppe">
 <BOUCLE_LesPaniersenvoye(ECHOPPE_PANIERS){statut = envoye}{pagination}{par date}{inverse}>
 	<li>
 		<dl>

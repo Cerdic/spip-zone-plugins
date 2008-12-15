@@ -1,4 +1,4 @@
-<div class="entete-formulaire">
+<div class="entete-formulaire echoppe">
 	<a class="icone36 secteur-24" href="[(#EVAL{echoppe_gerer_depots}|generer_url_ecrire)]" style="float: left;">
 	[<img width="24" height="24" alt="Retour" src="(#CHEMIN{images/go-home.png})"/>]
 	<span><:retour:></span>
@@ -6,7 +6,7 @@
 	<:echoppe:edition_d_un_depot:> :
 	[<h1>(#TITRE|sinon{#NEW|=={oui}|?{<:echoppe:nouveau_depot:>,<:echoppe:pas_de_titre:>}})</h1>]
 </div>
-<div class="formulaire_spip">
+<div class="formulaire_spip formulaire_echoppe">
 	<form action="[(#EVAL{echoppe_sauver_depot}|generer_url_action)]" method="post" >
 		<div class="echoppe_edit_produit">
 			[<input type="hidden" name="new" value="(#NEW)" />]
