@@ -75,28 +75,32 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 				$id_objet = $captures[2];
 			}
 			
-			// on précise
-			$id_objet = intval($id_objet);
-			$type_objet = strtolower($type_objet);
-			$type_objet = preg_replace(',^spip_|s$,', '', $type_objet);
-			$type_objet = table_objet($type_objet);
-			$cle_objet = id_table_objet($type_objet);
+			// on précise si ça vaut le coup
+			if ($type_objet and $id_objet){
 			
-			// il faut vérifier s'il existe bien cet objet
-			$reponse = sql_fetsel(
-				$cle_objet,
-				'spip_'.$type_objet,
-				$cle_objet.'='.$id_objet
-			);
-			if(!$reponse)
-				return erreur_squelette(
-					_T('etiquettes:zbug_objet_existe_pas',
-						array (
-							'champ' => '#FORMULAIRE_ETIQUETTES',
-							'type' => $type_objet,
-							'id' => $id_objet
-						)
-					), '');
+				$id_objet = intval($id_objet);
+				$type_objet = strtolower($type_objet);
+				$type_objet = preg_replace(',^spip_|s$,', '', $type_objet);
+				$type_objet = table_objet($type_objet);
+				$cle_objet = id_table_objet($type_objet);
+			
+				// il faut vérifier s'il existe bien cet objet
+				$reponse = sql_fetsel(
+					$cle_objet,
+					'spip_'.$type_objet,
+					$cle_objet.'='.$id_objet
+				);
+				if(!$reponse)
+					return erreur_squelette(
+						_T('etiquettes:zbug_objet_existe_pas',
+							array (
+								'champ' => '#FORMULAIRE_ETIQUETTES',
+								'type' => $type_objet,
+								'id' => $id_objet
+							)
+						), '');
+			
+			}
 		}else{
 			// sinon on prend du contexte
 			$cle_objet = id_table_objet($type_objet);
@@ -113,7 +117,7 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 	
 		// on ne peut pas continuer si le type choisi n'est pas relié à des mots-clés
 		// autrement dit, s'il n'y a pas de table mots_machin
-		if(!in_array("mots_$type_objet", $tables_jointures['spip_mots']))
+		if($type_objet and !in_array("mots_$type_objet", $tables_jointures['spip_mots']))
 			return erreur_squelette(
 				_T('etiquettes:zbug_pas_de_table_mots',
 					array (
@@ -174,7 +178,7 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 		$aide_nuage &= defined('_DIR_PLUGIN_NUAGE');
 		$aide_autocompletion &= defined('_DIR_PLUGIN_SELECTEURGENERIQUE');
 	
-	// initialisation du nom du champ le cas échéant
+	// initialisation du nom du champ seulement si on ne demande pas le formulaire complet
 		if (!isset($name)) $name = false;
 		if (!$uniquement_champ) $name = false;
     
