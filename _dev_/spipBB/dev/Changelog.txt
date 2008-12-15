@@ -1,4 +1,8 @@
-﻿2008-12-07  chryjs  <chryjs!@!free!.!fr>
+﻿2008-12-15  chryjs  <chryjs!@!free!.!fr>
+ 
+ * 0.5.2.8 Correction du bug cf http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=933 résolution : http://permalink.gmane.org/gmane.comp.web.spip.devel/51536
+
+2008-12-07  chryjs  <chryjs!@!free!.!fr>
 
  * 0.5.2.3 : Correction de bug url_decode non défini : http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=901
  * Remplacement des appels php a generer_url par les balises #URL_ECRIRE et #URL_ACTION_AUTEUR

@@ -184,7 +184,7 @@
 </B_recap>
 	[(#REM) si visiteur non identifie : form login ]
 	[(#SESSION{id_auteur}|=={''}|?{' ',''})<div class="login"><p class="login"><:spipbb:login:></p>]
-	#LOGIN_PUBLIC
+	#FORMULAIRE_LOGIN{#SELF}
 	[(#SESSION{id_auteur}|=={''}|?{' ',''})
 	&#91;<a[ href="(#URL_PAGE{spip_pass})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
 	</div>
