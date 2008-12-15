@@ -173,10 +173,13 @@
 			else { echo $data["id_auteur"];}
 			echo '</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ="'.$class.'">';
-			
-			//if ( !empty ($data['id_auteur'])) {
-				echo '<img src="../IMG/auton'.$data['id_auteur'].'.jpg" alt="&nbsp;" width="60"  title="'.$data["nom_famille"].' '.$data["prenom"].'">';
-			//}
+			$logo="../IMG/auton".$data['id_auteur'];
+			$id_auteur=$data['id_auteur'];
+			if(@file('../IMG/auton'.$id_auteur.'.jpg')!=""){
+             echo '<img src="../IMG/auton'.$data['id_auteur'].'.jpg" alt="&nbsp;" width="60"  title="'.$data["nom_famille"].' '.$data["prenom"].'">';
+            }else{
+            echo '<img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ajout.gif" alt="&nbsp;" width="10"  title="'.$data["nom_famille"].' '.$data["prenom"].'">';
+            }
 			echo '</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
 			if (empty($data["email"])) { 
