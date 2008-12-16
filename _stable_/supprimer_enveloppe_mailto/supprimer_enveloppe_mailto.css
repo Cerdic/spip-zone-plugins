@@ -1,1 +1,1 @@
-a.spip_mailto:before { content: ""; } /* liens vers un email */
+a.spip_mail:before, a.spip_mailto:before { content: ""; } /* liens vers un email */
