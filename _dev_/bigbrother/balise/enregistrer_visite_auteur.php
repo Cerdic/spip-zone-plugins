@@ -12,8 +12,7 @@ function balise_ENREGISTRER_VISITE_AUTEUR($p) {
 	
     // Si c'est pas configuré pour, on arrête
     if (lire_config('bigbrother/enregistrer_visite_article') != 'oui')
-    	return '';
-    
+    	return null;
     
     return calculer_balise_dynamique(
     	$p,

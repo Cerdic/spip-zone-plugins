@@ -4,6 +4,7 @@
 <!-- titre=<:bigbrother:configuration_titre:> -->
 <!-- icone=images/bigbrother-24.png -->
 
+<div class="formulaire_spip">
 <form method="post" action="#SELF">
 		[(#ENV{_cfg_}|form_hidden)]
 	
@@ -17,9 +18,10 @@
 			<label for="enregistrer_visite_article"><:bigbrother:configuration_enregistrer_visite_article:></label>
 		</li>
 	
-		<li>
+		<li class="boutons">
 			<input type="submit" name="_cfg_ok" value="<:oK:>" />
 			<input type="submit" name="_cfg_delete" value="<:supprimer:>" />
 		</li>
 	</ul>
 </form>
+</div>
