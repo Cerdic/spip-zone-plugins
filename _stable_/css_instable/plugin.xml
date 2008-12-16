@@ -23,5 +23,5 @@ _ attention: peut provoquer des migraines visuelles
 		<action>insert_head</action>
 		<inclure>cssinstable_pipelines_public.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

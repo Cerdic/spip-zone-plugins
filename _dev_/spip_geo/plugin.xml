@@ -31,5 +31,5 @@ _ &#169; 2007 - Distribu&eacute; sous licence GPL
 		<inclure>base/spip_geo.php</inclure>
 	</pipeline>
 	<install>base/spip_geo_upgrade.php</install>
-	<necessite id="SPIP" version='[2.0.0 dev;]' />
+	<necessite id="SPIP" version='[2.0.0;]' />
 </plugin>

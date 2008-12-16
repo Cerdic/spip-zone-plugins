@@ -30,5 +30,5 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

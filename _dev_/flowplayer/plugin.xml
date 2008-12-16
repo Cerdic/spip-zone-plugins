@@ -43,5 +43,5 @@ La licence de ce lecteur est GPL
 	<action>affichage_final</action>
 	<inclure>flowplayer_fonctions.php</inclure>
 </pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

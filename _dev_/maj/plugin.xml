@@ -38,5 +38,5 @@ _ source est detect&#233; car il s'agit d'une url commançant par svn:// ou http
 et permet le selection de l'outil appropri&#233;
 _ si SVN alors destination est obligatoire même si .
 	</description>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

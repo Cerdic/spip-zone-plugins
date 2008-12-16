@@ -6,5 +6,5 @@
 	<auteur>[Vincent Ramos->mailto:www-lansargues@kailaasa.net]</auteur>
 	<description>
 	Ce plugin est distribu&eacute; sous licence GNU/GPL</description>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

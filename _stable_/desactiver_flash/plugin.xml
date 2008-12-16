@@ -23,5 +23,5 @@ _ &#169; 2006 - Distribu&#233; sous licence GNU/GPL
 		<nom>affichage_final</nom>
 		<inclure>desactiver_flash.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

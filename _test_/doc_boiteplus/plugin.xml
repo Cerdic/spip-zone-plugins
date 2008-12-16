@@ -29,5 +29,6 @@ _ http://www.spip-contrib.net/Des-mots-clefs-partout
 		<action>insert_head</action>
  		<inclure>head.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
+	<utilise id="mots_partout" version="[0.1;]" />
 </plugin>

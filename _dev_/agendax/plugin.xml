@@ -40,5 +40,5 @@ _ Pour modifier l'apparence, vous pouvez modifier le fichier des css : agendax.c
 		<nom>insert_head</nom>
 		<inclure>agendax.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

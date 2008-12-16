@@ -10,5 +10,5 @@
         <description>
         Un exemple de plugin pour apprendre &#223; faire des balises dynamiques
         </description>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

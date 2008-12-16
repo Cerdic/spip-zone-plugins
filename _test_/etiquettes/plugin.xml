@@ -36,5 +36,5 @@ _ (si vous avez le plugin S&eacute;lecteur g&eacute;n&eacute;rique)
 		<nom>insert_head</nom>
 		<inclure>etiquettes_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

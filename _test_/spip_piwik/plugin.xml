@@ -26,6 +26,6 @@
 		<nom>insert_head</nom>
 		<inclure>head.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id='cfg' version='[1.4;]' />
 </plugin>

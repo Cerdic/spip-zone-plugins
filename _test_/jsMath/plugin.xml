@@ -1,7 +1,7 @@
 <plugin>
   <nom>jsMath</nom>
   <auteur>[Vincent Beffara->vbeffara@ens-lyon.fr]</auteur>
-  <version>3.6-1</version>
+  <version>3.6.1</version>
   <etat>test</etat>
   <description>
     Inclusion de fonctionnalit&eacute;s permettant l'utilisation de 
@@ -68,5 +68,5 @@
     <nom>affiche_milieu</nom>
     <inclure>jsMath.php</inclure>
   </pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

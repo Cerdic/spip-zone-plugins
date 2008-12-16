@@ -49,5 +49,5 @@ Copyright (c) 2007 [Casa d'Art->http://www.casadart.fr] &amp; [OpenStudio->http:
 	</pipeline>
 	
 	
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

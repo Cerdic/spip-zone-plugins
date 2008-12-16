@@ -35,5 +35,5 @@
     </pipeline>
     
     <!-- prérequis -->
-    <necessite id="SPIP" version='[2.0.0 dev;]' />
+    <necessite id="SPIP" version='[2.0.0;]' />
 </plugin>

@@ -11,5 +11,5 @@
   <fonctions>public/spip_bonux_balises.php</fonctions>
   <fonctions>spip_bonux_fonctions.php</fonctions>
   <prefix>spip_bonux</prefix>
-  <necessite id='SPIP' version='[2.0.0 dev;]' />
+  <necessite id='SPIP' version='[2.0.0;]' />
 </plugin>

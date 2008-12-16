@@ -8,5 +8,5 @@
 	Création de jeux de couleurs et sélection d'un jeu pour une utilisation dans une feuille de style CSS
 	 </description>
 	 <prefix>couleurs</prefix>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

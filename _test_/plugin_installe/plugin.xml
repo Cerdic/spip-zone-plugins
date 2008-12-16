@@ -35,5 +35,5 @@ For this test to fail when this plugin is not installed, the test is inverted. T
 	<prefix> 
 	pi
 	</prefix>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

@@ -34,7 +34,7 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 	</description>
 	<icon>images/jQuery-logo.gif</icon>
 	<prefix>jqueryp</prefix>
-	<necessite id="spip" version="[2.0 beta2;]" /> 
+	<necessite id="SPIP" version="[2.0.0;]" /> 
 	<necessite id="cfg" version="[1.2;]" /> 
     <fonctions>jqueryp_fonctions.php</fonctions>
     <options>jqueryp_options.php</options>

@@ -17,5 +17,5 @@
 		<nom>header_prive</nom>
 		<inclure>tinymce.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

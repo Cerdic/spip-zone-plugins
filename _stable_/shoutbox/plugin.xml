@@ -8,5 +8,5 @@
 	<icon>shoutbox.png</icon>
 	<version_base>0.1</version_base>
 	<install>base/shoutbox_upgrade.php</install>
-	<necessite id='SPIP' version='[2.0 beta;]' />
+	<necessite id='SPIP' version='[2.0.0;]' />
 </plugin>

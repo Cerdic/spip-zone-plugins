@@ -23,5 +23,5 @@ _ Il est bas&eacute; sur Net_SMS de Horde/PEAR
 	SMS
 	</prefix>
 	<chemin dir='' type='prive' />
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

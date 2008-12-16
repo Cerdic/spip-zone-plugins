@@ -10,5 +10,5 @@ _ &#169; 2008 - Licence GPL
 	<lien></lien> <!-- URI de documentation -->
 	<prefix>mao</prefix>
 	<pipeline><nom>affiche_milieu</nom><inclure>mao_pipelines.php</inclure></pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

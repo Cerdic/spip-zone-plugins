@@ -29,5 +29,5 @@
 
 	<fonctions>base/formulaire_upload.php</fonctions>
 
-	<necessite id='spip' version='[2.0;]' />
+	<necessite id='spip' version='[2.0.0;]' />
 </plugin>

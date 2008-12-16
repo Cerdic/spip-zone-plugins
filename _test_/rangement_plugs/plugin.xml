@@ -34,5 +34,5 @@ _ &#169; 2006 - Distribu&#233; sous licence GNU/GPL
 	<inclure>pipelines_rangement_plugs.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

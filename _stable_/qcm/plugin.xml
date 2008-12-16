@@ -43,5 +43,5 @@ D&#233;mo : [->http://www.ensemble-claudio-monteverdi.fr/article17]
   	<inclure>qcm_pipelines.php</inclure>
   </pipeline>
 
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

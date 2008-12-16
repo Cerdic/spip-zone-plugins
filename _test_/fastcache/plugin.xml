@@ -41,5 +41,5 @@
 	</icon>
 	<options>fastcache_options.php</options>
 	<fonctions>fastcache_fonctions.php</fonctions>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

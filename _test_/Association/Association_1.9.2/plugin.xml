@@ -38,5 +38,7 @@ _ Ce plugin n&eacute;cessite l'installation des plugin cfg et Inscription2
 		<action>header_prive</action>		
 		<inclure>association_fonctions.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
+	<utilise id="cfg" version="[1.0;]" />
+	<utilise id="Inscription2" version="[0.1;]" />
 </plugin>

@@ -18,5 +18,5 @@ _ Le plugin d&#233;fini deux balises :
 	<options>compteurs_opt.php</options>
 	<fonctions>compteurs.php</fonctions>
 	<prefix>compteurs</prefix>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

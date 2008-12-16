@@ -5,7 +5,7 @@ _ &#169; 2006-2007 - Distribu&#233; sous licence GNU/GPL.</auteur>
 	<lien>http://xebiaut.free.fr/?article287</lien><!-- URI de documentation -->
 	<version>2.03</version>
 	<etat>test</etat>
-	<description>Plugin permettant l’affichage d’une galerie de photo
+	<description>Plugin permettant l'affichage d'une galerie de photo
 		Pour plus d&#039;information, consulter la [Documentation->http://xebiaut.free.fr/?article287].
 	</description>
 	<prefix>album</prefix>
@@ -20,5 +20,5 @@ _ &#169; 2006-2007 - Distribu&#233; sous licence GNU/GPL.</auteur>
 		<nom>insert_head</nom>
 		<inclure>album_pipeline.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

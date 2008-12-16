@@ -25,5 +25,5 @@ ce qui permet de tester differentes valeurs, meme si je nom de dommaine n'est pa
 		<inclure>vhosts_onglets.php</inclure>
 	</pipeline>	
     <prefix>vhosts</prefix>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

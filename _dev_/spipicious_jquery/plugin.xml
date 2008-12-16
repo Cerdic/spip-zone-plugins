@@ -45,6 +45,6 @@ _ Icon from [Wolfgang Bartelme and Chris Messina->http://www.factorycity.net/pro
 	</pipeline>
 	<necessite id="SelecteurGenerique" version="[0.2;]" />
 	<necessite id='cfg' version='[1.10.1;]' />
-	<necessite id="SPIP" version='[2.0.0 dev;]' />
+	<necessite id="SPIP" version='[2.0.0;]' />
 	<chemin dir='' />
 </plugin>

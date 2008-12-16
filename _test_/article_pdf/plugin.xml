@@ -39,5 +39,5 @@ _ F&uuml;gen Sie den Tag #ARTICLE_PDF in Ihr Skelett ein um über einen Link zum 
     article_pdf
     </prefix>
 
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

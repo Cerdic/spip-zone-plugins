@@ -38,7 +38,7 @@
 		<nom>affiche_milieu</nom>
 		<inclure>grappes_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0;]" />
+	<necessite id="SPIP" version="[2.0.0;]" />
 	<necessite id="SelecteurGenerique" version="[0.2;]" />
 	<bouton id='grappes' parent="naviguer">
 		<icone>images/grappe-24.gif</icone>

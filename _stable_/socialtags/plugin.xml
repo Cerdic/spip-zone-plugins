@@ -27,6 +27,6 @@
     <icon>
     socialtags.png
     </icon>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id='cfg' version='[1.0;]' />
 </plugin>

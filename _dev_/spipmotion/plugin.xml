@@ -18,7 +18,7 @@
 	</multi>
 	</description>
 	<lien>http://kent1.sklunk.net/spip.php?article93</lien>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id='cfg' version='[1.2.0;]' />
 	<options>
 	spipmotion_options.php

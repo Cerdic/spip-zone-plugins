@@ -28,5 +28,5 @@ http://www.spip-contrib.net/Du-BBcode-dans-SPIP
 		<nom>pre_propre</nom>
 		<inclure>bbcode_propre.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

@@ -13,5 +13,5 @@ Cette fonction est aussi pr&eacute;sente dans le plugin Couteau Suisse. Si vous 
 		<nom>insert_head</nom>
 		<inclure>ancres_douces_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

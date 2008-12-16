@@ -23,5 +23,5 @@ Essayez le fichier {rainette_demo.html} pour des exemples d'utilisation et consu
 		<nom>insert_head</nom>
 		<inclure>rainette_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

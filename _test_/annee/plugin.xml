@@ -7,5 +7,5 @@
   <description>
   Juste un exemple de formulaire en CVT qui recupere des infos du contexte avec une fonction balise_stat.
   </description>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

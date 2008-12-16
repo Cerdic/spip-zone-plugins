@@ -18,6 +18,6 @@ Affichage d'un timeline des &#233;v&#233;nements du site : ?page=timeline&amp;ag
 	<prefix> 
 	timeline
 	</prefix>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 
 </plugin>

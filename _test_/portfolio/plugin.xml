@@ -31,5 +31,5 @@
 		<nom>insert_head</nom>
 		<inclure>portfolio_pipeline.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

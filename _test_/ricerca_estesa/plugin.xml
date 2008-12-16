@@ -23,5 +23,5 @@ _ Potete provare un esempio di pagina di ricerca scrivendo spip.php?page=demo_re
 	<fonctions>
 	ricerca_estesa.php
 	</fonctions>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

@@ -16,5 +16,5 @@
 	<prefix>
 	sql_arbo
 	</prefix>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

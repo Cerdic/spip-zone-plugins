@@ -13,6 +13,6 @@ Mise en service : Dans FeedBurner, d&eacute;clarez votre backend avec la variabl
 <lien>http://www.feedburner.com</lien>
 <prefix>feedburner</prefix>
 <options>feedburner_options.php</options>
-<necessite id='SPIP' version='[2.0.0 dev;]' />
+<necessite id='SPIP' version='[2.0.0;]' />
 <necessite id='cfg' version='[1.0.5;]' />
 </plugin>

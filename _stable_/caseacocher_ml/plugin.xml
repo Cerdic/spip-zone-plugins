@@ -7,5 +7,5 @@
 	<lien>http://www.spip-contrib.net/?article1385</lien> <!-- URI de documentation -->
 	<icon>caseacocher_ml.png</icon>
 	<prefix>caseacocher_ml</prefix>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

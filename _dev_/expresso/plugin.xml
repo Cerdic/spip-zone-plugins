@@ -25,5 +25,5 @@ C'est le percolateur qui ne laisse passer qu'une petite partie des requetes a Sp
 		<nom>affichage_final</nom>
 		<inclure>expresso_pipeline.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

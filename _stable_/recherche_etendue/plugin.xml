@@ -73,5 +73,5 @@ _ Filtro google_like
 		<inclure>recherche_etendue_pipeline.php</inclure>
 	</pipeline>
 <!--	<necessite id="SPIP" version="[;1.925)" /> -->
-	<necessite id="SPIP" version="[1.9.2;1.9.2)" />
+	<necessite id="SPIP" version="[1.9.0;2.0.0)" />
 </plugin>

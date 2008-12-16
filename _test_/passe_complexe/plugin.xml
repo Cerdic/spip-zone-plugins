@@ -26,6 +26,6 @@ _ [Configuration->./?exec=cfg&amp;cfg=passe_complexe]
 		<action>header_prive</action>
 		<inclure>passe_complexe_options.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id='cfg' version='[1.0.8;]' />
 </plugin>

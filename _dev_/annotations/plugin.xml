@@ -55,7 +55,7 @@
 		<action>exec_init</action>
 		<inclure>annotations_pipelines.php</inclure>	
 	</pipeline>
-	<necessite id="spip" version="[2.0.0 beta;]" />
+	<necessite id="spip" version="[2.0.0;]" />
 	<necessite id="FormulaireUpload" version="[0.1;]" />
 	
 </plugin>

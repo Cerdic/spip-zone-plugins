@@ -13,7 +13,7 @@ _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_H
 	</description>
 	<lien>http://nyromodal.nyrodev.com/indexFr.php</lien>
 	<prefix>Nyro</prefix>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 	<utilise id="cfg" version="[1.9.4;]" />
 	<utilise id="palette" version="[1.0;]" />
 	<pipeline>

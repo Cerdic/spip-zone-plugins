@@ -9,5 +9,5 @@
 	ainsi qu'une balise #TABLE_MATIERES (facultative) associ&#233;e &#224; placer, bien s&#251;r, dans une boucle ARTICLES.</description>
 	<etat>stable</etat>
 	<lien>[Documentation sur spip-contrib.net->http://www.spip-contrib.net/Table-des-Matieres]</lien>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

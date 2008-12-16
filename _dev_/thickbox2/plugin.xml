@@ -39,5 +39,5 @@ _ Il n&#233;cessite le plugin {{jQuery}} pour les versions de SPIP &lt; 1.9.2
 	 <nom>verifie_js_necessaire</nom>
 	 <inclure>head.php</inclure>
 	</pipeline>	
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

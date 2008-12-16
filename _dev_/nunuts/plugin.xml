@@ -19,5 +19,5 @@
   </description>
   <icon>images/logo_eva3_fb.png</icon>
   <prefix>nunuts</prefix>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

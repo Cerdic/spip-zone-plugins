@@ -58,6 +58,6 @@
 	<!-- D'autres pipeline sont dispo ici : http://www.spip-contrib.net/SPIP-1-9-Les-Plugin -->
 	<!-- Le parametre action est facultatif : en son absence la fonction portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>
 

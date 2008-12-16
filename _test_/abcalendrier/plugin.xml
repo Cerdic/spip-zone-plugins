@@ -110,5 +110,5 @@ _ &#169; 2007 - 2008 - Distribue sous licence GNU/GPL
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 
 	<install>base/abcalendrier_upgrade.php</install>	
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

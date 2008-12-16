@@ -40,5 +40,5 @@ _ &#169; 2005-2008 - Distribu&#233; sous licence GNU/GPL
 		<inclure>console_boutons.php</inclure>
 	</pipeline>
 	<chemin dir='' />
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

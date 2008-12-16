@@ -67,6 +67,6 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	  <inclure>SquelettesMots.php</inclure>
 	</pipeline>
 
-	<necessite id="spip" version="[2.0;]" />
+	<necessite id="spip" version="[2.0.0;]" />
 	<chemin dir='' />
 </plugin>

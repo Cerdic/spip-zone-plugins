@@ -26,5 +26,5 @@
 		<action>post_propre</action>
 		<inclure>flvplayer.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

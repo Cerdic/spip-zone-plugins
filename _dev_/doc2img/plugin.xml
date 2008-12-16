@@ -19,7 +19,7 @@
     <install>base/doc2img_install.php</install>
 
    <!-- précise les dependances vis-a-vis de d'autres plugins -->
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
    <necessite id="cfg" version="[1.0.4;]" />
 
     <!-- mes options -->

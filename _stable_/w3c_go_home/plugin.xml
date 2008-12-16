@@ -34,5 +34,5 @@
 		<titre>Valider le site</titre>
 		<url>w3c_go_home</url> <!-- facultatif, par defaut prendre l'id comme nom d'exec pour faire ?exec=xx -->
 	</bouton>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

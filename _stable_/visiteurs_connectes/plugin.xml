@@ -11,5 +11,5 @@
 	<fonctions>visiteurs_fonctions.php</fonctions>
 	<prefix>visiteurs_connectes</prefix>
 	<lien></lien><!-- URI de documentation -->	
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

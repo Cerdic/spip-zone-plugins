@@ -229,5 +229,5 @@ Compatibilidade: SPIP 1.9x/2.0
 		<nom>bt_toolbox</nom>
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

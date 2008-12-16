@@ -37,7 +37,7 @@
         <action>vip</action>
         <inclure>fonctions_mod.php</inclure>
     </pipeline>
-	<necessite id='SPIP' version='[2.0.0 dev;]' />
+	<necessite id='SPIP' version='[2.0.0;]' />
 	<bouton id='moderation' parent='forum'>
       <icone>img_pack/icone.png</icone>
       <titre>Mod&eacute;ration Mod&eacute;r&eacute;e</titre>

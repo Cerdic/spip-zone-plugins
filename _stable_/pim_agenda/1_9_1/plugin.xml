@@ -39,5 +39,6 @@ _	{{Ce plugin n&#233;cessite le plugin Widget Calendar}}
 	</pipeline>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
+	<utilise id="widget_calendar" version="[0.1;]" />
 </plugin>

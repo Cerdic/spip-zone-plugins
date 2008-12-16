@@ -9,5 +9,5 @@
 		Stocker les documents dans un systeme externe de stockage (Amazon S3)
 	</description>
 	<icon></icon>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

@@ -27,5 +27,5 @@
 		<nom>boussole</nom> 
 		<inclure>gazette_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

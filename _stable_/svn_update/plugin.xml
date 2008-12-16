@@ -28,7 +28,7 @@ _ <code>svn://zone.spip.org/spip-zone/_plugins_/_stable_/cfg plugins/cfg</code>
 	<prefix>
 	svn_update
 	</prefix>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id="cfg" version="[1.0;]"/>
 	<options>
 	    svn_update_options.php

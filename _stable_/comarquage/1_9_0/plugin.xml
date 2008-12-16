@@ -38,5 +38,5 @@ N&#233;cessite SPIP 1.9.0 minimum, compatible SPIP 1.9.1
 		<nom>taches_generales_cron</nom>
 		<inclure>comarquage_pipeline.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

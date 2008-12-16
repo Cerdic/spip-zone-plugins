@@ -20,5 +20,5 @@
 	gerer_date
 	</prefix>
 	<options>gerer_date_options.php</options>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

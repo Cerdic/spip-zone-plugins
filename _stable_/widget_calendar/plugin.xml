@@ -42,6 +42,6 @@ _ 2006 - Distribu&#233; sous licence GPL
 		<inclure>inc/calendar_init.php</inclure>
 	</pipeline>
 <!--	<necessite id="SPIP" version="[;1.925)" /> -->
-	<necessite id="SPIP" version="[1.9.2;1.9.2)" />
+	<necessite id="SPIP" version="[1.9.0;2.0.0)" />
 	<chemin dir='' type='prive' />
 </plugin>

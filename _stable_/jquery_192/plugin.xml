@@ -26,5 +26,5 @@ Ajout au passage du pipeline {jquery_plugins} et des plugins {jquery.form}, {jqu
 	<options> <!-- fichier charge a chaque hit -->
 	jquery_192_options.php
 	</options>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.2;2.0.0)" />
 </plugin>

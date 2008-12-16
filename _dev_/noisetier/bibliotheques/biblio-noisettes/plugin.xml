@@ -22,7 +22,7 @@
 	<prefix>
 	biblio-noisettes
 	</prefix>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id="noisetier" version="[0.1;]" />
 	<chemin dir='' />
 </plugin>

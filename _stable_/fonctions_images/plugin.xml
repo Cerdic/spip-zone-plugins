@@ -33,5 +33,5 @@ Une page de test permet de voir <a href="../?page=tests_fonctions_images">les fi
 	<prefix>Fonctions_images</prefix>
     <fonctions>fonctions_images_fonctions.php</fonctions>
 	<chemin dir='' />
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

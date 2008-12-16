@@ -30,5 +30,5 @@ Fournit le filtre <code>|gravatar</code>, &agrave; utiliser par exemple comme
 		<inclure>GravatarPrive.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

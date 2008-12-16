@@ -17,5 +17,5 @@ _ &#169; 2008 - Distribu&#233; sous licence GNU/LGPL
 		<action></action>
 		<inclure></inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

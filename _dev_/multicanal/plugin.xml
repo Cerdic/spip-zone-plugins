@@ -19,5 +19,5 @@ a faire : gerer une liste de user-agent/look
 	<lien></lien> <!-- URI de documentation -->
     <options>multicanal.php</options>
     <prefix>multicanal</prefix>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

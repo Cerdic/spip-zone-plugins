@@ -27,5 +27,5 @@ le droit d'updater le dossier avec subversion
 	squelup_options.php
 	</options>
 	<chemin dir='' />
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

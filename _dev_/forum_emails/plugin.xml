@@ -20,5 +20,5 @@ _ &#169; 2006 - Distribue sous licence GNU/GPL
 	<prefix> 
 	forum
 	</prefix>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

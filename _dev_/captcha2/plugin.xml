@@ -30,5 +30,5 @@ Les autres formulaires &#224; venir bient&#244;t ....
 	<lien>http://www.spip-contrib.net/Plugin-Captcha2</lien> <!-- URI de documentation -->
 	<prefix>captcha2</prefix>
 
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

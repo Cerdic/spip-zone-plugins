@@ -35,5 +35,5 @@ votre fichier {.htaccess} situé à la racine de votre site.
 		<action>header_public</action>
 		<inclure>url-propres-arbo/pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

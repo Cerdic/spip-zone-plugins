@@ -37,6 +37,6 @@ Ce plugin a &#233;t&#233; d&#233;velopp&#233; par la soci&#233;t&#233; Eledo (ht
         <inclure>exec/redacchef_pipelines.php</inclure>
  </pipeline>
 
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 
 </plugin>

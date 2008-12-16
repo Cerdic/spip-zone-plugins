@@ -19,7 +19,7 @@
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/titre_logo_install.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 	
 </plugin>
 

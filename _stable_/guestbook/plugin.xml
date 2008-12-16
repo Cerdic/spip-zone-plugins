@@ -21,7 +21,7 @@
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/guestbook_install.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version='[2.0;]' />
+	<necessite id="SPIP" version='[2.0.0;]' />
 	<bouton id='livredor' parent='forum'>
 		<icone>img_pack/livredor.png</icone>
 		<titre>Livre d'or</titre>

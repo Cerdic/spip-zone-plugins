@@ -31,5 +31,5 @@ _ les templates peuvent &ecirc;tre d&eacute;finis dans un sous dossier templates
 	<prefix> 
 	  spipodf
 	</prefix>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

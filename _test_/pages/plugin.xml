@@ -23,7 +23,7 @@ Cela permet notamment de créer des pages de notice légale, d'à-propos, de con
 	<prefix> 
 		pages
 	</prefix>
-	<necessite id='SPIP' version='[2.0.0 dev;]' /> 
+	<necessite id='SPIP' version='[2.0.0;]' /> 
 	
 	<options>pages_options.php</options>
 	<install>base/pages_installation.php</install>

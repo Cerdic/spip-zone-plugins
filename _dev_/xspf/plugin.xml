@@ -40,7 +40,7 @@ Attention, la licence de ces trois derniers lecteurs est semi-commerciale, c&rsq
 	<prefix>
 	xspf
 	</prefix>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id='cfg' version='[1.0.6;]' />
 	<utilise id='palette' version='[1.0;]' />
 	<pipeline>

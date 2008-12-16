@@ -30,5 +30,5 @@ _ &#169; 2006 - Distribu&eacute; sous licence GPL
 		<action>ajouter_onglets</action>
 		<inclure>spipdigg_admin.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

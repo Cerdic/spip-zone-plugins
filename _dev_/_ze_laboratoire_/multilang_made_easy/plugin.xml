@@ -31,5 +31,5 @@ _ &#169; 2006 - Distribu&#233; sous licence GPL
 		<nom>header_prive</nom>
 		<inclure>multilang_made_easy.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

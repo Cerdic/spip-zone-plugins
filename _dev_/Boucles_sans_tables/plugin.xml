@@ -9,5 +9,5 @@ _ details sur [spip contrib ->http://www.spip-contrib.net/boucler-sur-un-tableau
 	<lien>http://www.spip-contrib.net/boucler-sur-un-tableau-un-compteur</lien> <!-- URI de documentation -->
 	<fonctions>boucles.php</fonctions>
 	<prefix>bouclesSansTables</prefix>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

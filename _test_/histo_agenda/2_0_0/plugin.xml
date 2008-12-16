@@ -59,7 +59,7 @@ _ {{Ce plugin n&#233;cessite le plugin Agenda 0.18 ou plus}}
                 <inclure>inc/ha_pipelines.php</inclure>
         </pipeline-->
 
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id="Agenda" version="[0.18;]" />
 	<chemin dir='' />
 </plugin>

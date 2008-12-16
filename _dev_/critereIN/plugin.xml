@@ -13,5 +13,5 @@
 	<lien></lien>
 	<fonctions>critereIN.php</fonctions>
 	<prefix>critereIN</prefix>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

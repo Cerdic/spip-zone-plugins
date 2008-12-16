@@ -6,7 +6,7 @@
 	<licence>GNU/GLP</licence>
 	<version>0.4</version>
 	<description>
-	Fourni la librairie [Simple Test->http://simpletest.org/] 1.0.1 
+	Fourni la bibliotheque [Simple Test->http://simpletest.org/] 1.0.1 
 	pour effectuer des tests unitaires,
 	ainsi qu'une API pour faciliter les tests avec SPIP.
 	</description>
@@ -16,5 +16,5 @@
 	<prefix>simpletest</prefix>
   	
 	<options>simpletest_options.php</options>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

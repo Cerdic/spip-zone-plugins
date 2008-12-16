@@ -9,6 +9,6 @@
 	<etat>stable</etat>
 	<description>Ce plugin change les couleurs de l'interface et leur fait adopter des tonalit&eacute;s &laquo;Nuit&raquo;.</description>
 	<lien></lien> <!-- URI de documentation -->
- 	<necessite id='SPIP' version='[2.0.0 dev;]' />
+ 	<necessite id='SPIP' version='[2.0.0;]' />
 	<prefix>interface_nuit</prefix>
 </plugin>

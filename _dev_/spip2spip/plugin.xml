@@ -41,6 +41,6 @@ _ Si vous avez le plugin CFG [configurer les options d'import->./?exec=cfg&amp;c
 		<action>ajouter_cron</action>
 		<inclure>spip2spip.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.0;]" />
 	<utilise id="cfg" version="[1.0;]" />
 </plugin>
