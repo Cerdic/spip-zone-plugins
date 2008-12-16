@@ -55,16 +55,17 @@ function notifications_forumvalide($quoi, $id_forum) {
 		if (@$u['id_secteur'] AND $u['id_secteur']!=$GLOBALS['spipbb']['id_secteur']) {
 			// si on n'est pas dans le secteur de spipbb on passe au traitement par defaut de la dist
 			spipbb_log("appel de notifications_forumvalide_dist :".$u['id_secteur'].":".$GLOBALS['spipbb']['id_secteur'],3,__FILE__);
-			include _DIR_RESTREINT.'inc/notifications.php';
+			if (!function_exists('inc_notifications_dist')) include_once _DIR_RESTREINT.'inc/notifications.php';
 			return notifications_forumvalide_dist($quoi, $id_forum);
 		}
 		else {
+			spipbb_log("traitement spipbb :".$u['id_secteur'].":".$GLOBALS['spipbb']['id_secteur'],3,__FILE__);
 			$t['id_secteur']=$u['id_secteur'];
 		}
 	} else {
 		// ce n'est pas un forum spipbb -> traitement par defaut de la dist
 		spipbb_log("appel de notifications_forumvalide_dist : t id_article not set",3,__FILE__);
-		include _DIR_RESTREINT.'inc/notifications.php';
+		if (!function_exists('inc_notifications_dist')) include_once _DIR_RESTREINT.'inc/notifications.php';
 		return notifications_forumvalide_dist($quoi, $id_forum);
 	}
 
@@ -185,7 +186,7 @@ function notifications_forumposte($quoi, $id_forum) {
 		if (@$u['id_secteur'] AND $u['id_secteur']!=$GLOBALS['spipbb']['id_secteur']) {
 			// si on n'est pas dans le secteur de spipbb on passe au traitement par defaut de la dist
 			spipbb_log("appel de notifications_forumposte_dist :".$u['id_secteur'].":".$GLOBALS['spipbb']['id_secteur'],3,__FILE__);
-			include _DIR_RESTREINT.'inc/notifications.php';
+			if (!function_exists('inc_notifications_dist')) include_once _DIR_RESTREINT.'inc/notifications.php';
 			return notifications_forumposte_dist($quoi, $id_forum);
 		}
 		else {
@@ -309,6 +310,9 @@ function email_notification_forum_spipbb ($t, $email) {
 		: $parauteur . ' (' . $titre . ')';
 
 	// TODO: squelettiser
+	if (!function_exists('recuperer_fond')) include_spip('inc/utils');
+
+	/*
 	$corps = _T('form_forum_message_auto') . "\n\n"
 		. $forum_poste_par
 		. (($t['statut'] == 'publie') ? _T('forum_ne_repondez_pas')."\n" : '')
@@ -317,6 +321,17 @@ function email_notification_forum_spipbb ($t, $email) {
 		."\n\n* ".textebrut(propre($t['texte']))
 		. "\n\n".$t['nom_site']."\n".$t['url_site']."\n"
 		. "\n\n SpipBB ".$GLOBALS['spipbb']['version'];
+	*/
+
+	$corps = recuperer_fond("spipbb_notification_forum_email_body",
+						array(
+							'forum_poste_par' => $forum_poste_par,
+							'reponse' => (($t['statut'] == 'publie') ? _T('forum_ne_repondez_pas')."\n" : '') ,
+							'url_consultation' => url_absolue($url),
+							'titre' => textebrut(typo($t['titre'])),
+							'texte' => textebrut(propre($t['texte']))
+							) 
+						);
 
 	if ($l)
 		lang_select();

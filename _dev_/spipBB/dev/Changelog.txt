@@ -1,4 +1,9 @@
-﻿2008-12-15  chryjs  <chryjs!@!free!.!fr>
+﻿2008-12-16  chryjs  <chryjs!@!free!.!fr>
+
+ * 0.5.3.0 : Amélioration des notifications et correction de l'erreur fatale...
+ * passage en template du mail de notification
+
+2008-12-15  chryjs  <chryjs!@!free!.!fr>
  
  * 0.5.2.9 Correction du bug cf http://spipbb.free.fr/spip.php?page=voirsujet&id_forum=933 résolution : http://permalink.gmane.org/gmane.comp.web.spip.devel/51536
 

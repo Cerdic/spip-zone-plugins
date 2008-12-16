@@ -1,5 +1,5 @@
 <plugin>
-	<version>0.5.2.9</version>
+	<version>0.5.3.0</version>
 	<nom>
 		<multi>
 			[en]SpipBB: Management of SPIP SVN forums
@@ -170,7 +170,12 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]
 		<inclure>base/spipbb.php</inclure>
 	</pipeline>
 	<!-- chargement des notifications facon spipbb -->
-
+	<pipeline> 
+		<nom>notifications</nom> 
+		<!-- action vide pour provoquer l'inclusion de inc/spipbb_notifications.php --> 
+		<action>chargespipbb</action> 
+		<inclure>inc/spipbb_notifications.php</inclure> 
+	</pipeline> 
 
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0.0;]" />

@@ -1,0 +1,14 @@
+[(#REM) Formatage des messages email envoyés par notification SPIPBB ]
+<:form_forum_message_auto:>
+
+#ENV{forum_poste_par}
+#ENV{reponse}
+#ENV{url_consultation}
+
+** #ENV{titre}
+
+* #ENV{texte}
+
+--
+#NOM_SITE_SPIP #URL_SITE_SPIP
+SpipBB [(#PLUGIN{SPIPBB,version})]
