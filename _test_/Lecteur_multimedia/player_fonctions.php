@@ -26,7 +26,7 @@ function Player_head(){
 	
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'javascript/jscroller.js"></script>'."\n";
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'player_enclosure.js"></script>'."\n";
-	$flux .= '<link rel="stylesheet" href="'.find_in_path('player.css').'" type="text/css" media="projection, screen, tv" />'."\n";
+	$flux .= '<link rel="stylesheet" href="'.find_in_path('player.css').'" type="text/css" media="all" />'."\n";
 	return $flux;
 }
 
