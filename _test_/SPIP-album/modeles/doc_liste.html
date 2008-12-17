@@ -4,7 +4,7 @@
 	[(#ANCRE_PAGINATION)]
     <ul>
 <BOUCLE_bulletin(DOCUMENTS){id_article}{date<=#ENV{date}}{par date}{inverse}{pagination 10}>
-	<li><a [href="(#URL_DOCUMENT)"][ title="(#DESCRIPTIF|textebrut)"] class="spip_in">#TITRE</a> <:fsetud:du:> [(#DATE|affdate)]</li>
+	<li><a [href="(#URL_DOCUMENT)"][ title="(#DESCRIPTIF|textebrut)"] class="spip_in">#TITRE</a> <:album:du:> [(#DATE|affdate)]</li>
 </BOUCLE_bulletin>
 	</ul>
 	[<p class="pagination">(#PAGINATION)</p>]
