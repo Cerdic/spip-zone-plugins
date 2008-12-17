@@ -4,7 +4,7 @@
 	[<div class="arial1 tranches">(#PAGINATION)</div>]
 	<table width="100%" cellpadding="2" cellspacing="0" border="0">
 	<tbody>
-	<BOUCLE_messages(TICKETS_FORUM TICKETS){pagination 10}>
+	<BOUCLE_messages(TICKETS_FORUM TICKETS){pagination 10}{par date}{inverse}>
 	<tr class="tr_liste">
 	
 	<td class="arial2">	[(#TEXTE|couper{50,'...'})]</td>
