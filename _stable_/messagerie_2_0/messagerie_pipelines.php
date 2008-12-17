@@ -26,7 +26,7 @@ function messagerie_messagerie_signer_message($texte){
  * @return unknown
  */
 function messagerie_insert_head($texte){
-	$texte .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('habillage/messagerie.css').'" media="screen" />'."\n";
+	$texte .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('habillage/messagerie.css').'" media="all" />'."\n";
 	return $texte;
 }
 
