@@ -323,7 +323,7 @@ function email_notification_forum_spipbb ($t, $email) {
 		. "\n\n SpipBB ".$GLOBALS['spipbb']['version'];
 	*/
 
-	$corps = recuperer_fond("spipbb_notification_forum_email_body",
+	$corps = recuperer_fond("prive/spipbb_notification_forum_email_body",
 						array(
 							'forum_poste_par' => $forum_poste_par,
 							'reponse' => (($t['statut'] == 'publie') ? _T('forum_ne_repondez_pas')."\n" : '') ,
