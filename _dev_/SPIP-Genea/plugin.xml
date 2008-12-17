@@ -11,8 +11,8 @@ _ &#169; 2006-2008 - <multi>[fr]Distribu&#233; sous licence GNU/GPL[en]Distribut
 	<icon>img_pack/arbre-24.png</icon>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id='geographie' version='[0.1;]' />
-	<fonctions>genea_fonctions.php</fonctions>
-	<options>genea_options.php</options>
+	<fonctions>inc/genea_fonctions.php</fonctions>
+	<options>inc/genea_options.php</options>
 	<install>base/genea_install.php</install>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
