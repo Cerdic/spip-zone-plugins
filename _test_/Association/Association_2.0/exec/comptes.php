@@ -71,7 +71,7 @@
 		
 		$res=icone_horizontale(_T('Bilan'), $url_bilan, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/finances.jpg','rien.gif',false);
 		 echo bloc_des_raccourcis($res);
-		$res=icone_horizontale(_T('Ajouter une op&eacute;ration'), $url_ajout_compte, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','creer.gif',false );
+		$res=icone_horizontale(_T('Ajouter une op&eacute;ration'), $url_ajout_compte, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ajout_don.png','rien.gif',false );
 		 echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);

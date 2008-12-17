@@ -54,12 +54,12 @@
 		echo '<td style="text-align:center;"><strong>D&eacute;penses</strong></td>';
 		echo '<td style="text-align:center;"><strong>Solde</strong></td>';
 		echo '</tr>';
-		
-		$query = spip_query ("SELECT imputation, sum( recette ) AS recettes, sum( depense ) AS depenses, date_format( date, '%Y' ) AS annee, code, intitule, classe FROM spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code GROUP BY code, annee HAVING annee = $annee AND classe <> ".lire_config('association/classe_banques')." ORDER BY annee DESC");
+		$ac=lire_config('association/classe_banques'); 
+		$query = spip_query ("SELECT imputation, sum( recette ) AS recettes, sum( depense ) AS depenses, date_format( date, '%Y' ) AS annee, code, intitule, classe FROM spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code GROUP BY code, annee HAVING annee = $annee AND classe <> $annee ORDER BY annee DESC");
 		
 		while ($data = spip_fetch_array ($query)) {
 			$recettes=$data['recettes'];
-			$depenses=$data['depenses'];
+			$depenses=$data['depenses']; 
 			$soldes=$recettes - $depenses;
 			echo '<tr style="background-color: #EEEEEE;">';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['intitule'].'</td>';
@@ -92,8 +92,8 @@
 		echo '<td style="text-align:center;" colspan="2"><strong>Avoir initial</strong></td>';
 		echo '<td style="text-align:center;"><strong>Avoir actuel</strong></td>';
 		echo '</tr>';
-		
-		$query = spip_query ( "SELECT * FROM spip_asso_plan WHERE classe=".lire_config('association/classe_banques')." ORDER BY code" );
+		$clas=lire_config('association/classe_banques');
+		$query = spip_query ( "SELECT * FROM spip_asso_plan WHERE classe='$clas' ORDER BY code" );
 		
 		while ($banque = spip_fetch_array($query)) {
 			$date_solde=$banque['date_anterieure'];
