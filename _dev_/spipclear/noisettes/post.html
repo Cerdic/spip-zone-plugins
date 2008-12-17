@@ -1,6 +1,5 @@
 <BOUCLE_article(ARTICLES){id_article}>
 <div class="post">
-	[(#LOGO_ARTICLE|right|#URL_ARTICLE|liens_absolus|inserer_attribut{class,#EDIT{logo}})]
 	[<p class="surtitre #EDIT{soustitre}">(#SURTITRE)</p>]
 	<h2 class="post-title #EDIT{titre}">#TITRE</h2>
 	[<p class="soustitre #EDIT{surtitre}">(#SOUSTITRE)</p>]
@@ -17,7 +16,9 @@
 		</BOUCLE_mots>
 	</ul>
 	</B_mots>
-
+	
+	[(#LOGO_ARTICLE||image_reduire{150}|inserer_attribut{class,#EDIT{logo}}|inserer_attribut{class,logo})]
+	
 	[<div class="post-excerpt #EDIT{chapo}">
 		#DEBUT_SURLIGNE(#CHAPO)#FIN_SURLIGNE
 	</div>]

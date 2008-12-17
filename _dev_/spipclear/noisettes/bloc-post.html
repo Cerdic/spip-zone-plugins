@@ -1,5 +1,4 @@
 <BOUCLE_article(ARTICLES){id_article}>
-[(#LOGO_ARTICLE|right|#URL_ARTICLE|liens_absolus)]
 [<p class="day-date">(#DATE|affdate_long|unique)</p>]
 
 <h2 id="p#ID_ARTICLE" class="post-title"><a href="#URL_ARTICLE">#TITRE</a></h2>
@@ -18,6 +17,8 @@
 	</BOUCLE_mots>
 </ul>
 </B_mots>
+
+[(#LOGO_ARTICLE|#URL_ARTICLE|liens_absolus|image_reduire{150}|inserer_attribut{class,logo})]
 
 [(#CONFIG{spipclear/articles_entiers}|=={on}?{' ',''})
 [<div class="post-content #EDIT{texte}" lang="#LANG">
