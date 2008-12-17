@@ -4,3 +4,60 @@ div.echoppe div.formulaire_spip form ul li{
 div.echoppe div.formulaire_spip form ul label{
 	margin-left: 0px;
 }
+/**/
+UL.fil_arianne_echoppe{
+	position:relative;
+	list-style:none;
+	margin:15px auto;
+	width:740px;
+	height:20px;
+	padding:0;
+}
+UL.fil_arianne_echoppe LI{
+	list-style-type:none;
+	/*background:url('../../../prive/images/triangle.gif') center left no-repeat;*/
+	background:url('../../../prive/images/chemin-fond-left.gif') center left no-repeat;
+	padding:2px;
+	padding-bottom:4px;
+	padding-left:10px;
+	padding-right:12px;
+	display:-moz-inline-box;
+	display:inline-block;
+	float:left;
+	margin:0 0 0 -5px;
+	font-size:0.9em;
+}
+UL.fil_arianne_echoppe LI A{
+	color:#FFFFFF;
+	font-weight:bold;
+	margin:0;font-size:0.9em;
+}
+/**/
+DIV.onglets_produit{
+	height:30px;
+	margin-top:10px;
+}
+DIV.onglets_produit UL{
+	position:relative;
+	list-style:none;
+	border-bottom:1px solid #999999;
+	margin:0;
+	padding:0 0 0 10px;
+}
+DIV.onglets_produit UL LI.onglet{
+	list-style:none;
+	padding:4px;
+	display:-moz-inline-box;
+	display:inline-block;
+	font-size:0.8em;
+	border:1px solid #999999;
+	border-bottom:none;
+	margin:0;
+	background-color:#FFFFFF;
+}
+DIV.onglets_produit UL LI.selected{
+	background-color:#999999;
+}
+DIV.onglets_produit UL LI.selected A{
+	color:#FFFFFF;
+}

@@ -12,13 +12,11 @@ function echoppe_ajouter_boutons($flux){
 	return $flux;	
 }
 function echoppe_header_prive($flux){
-	$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_ECHOPPE.'css/echoppe.css'.'" type="text/css" media="all" />';
+	$flux .= '<link rel="stylesheet" href="'.find_in_path('css/echoppe.css').'" type="text/css" media="all" /> <!-- CSS Echoppe --> ';
 	return $flux;	
 }
 
 function echoppe_insert_head($flux){
-	$flux .= '<!-- Echoppe --> <script src="'._DIR_PLUGIN_ECHOPPE.'jquery.nyroModal-1.2.2.pack.js'.'" type="text/javascript"></script><script src="'._DIR_PLUGIN_ECHOPPE.'echoppe.js'.'" type="text/javascript"></script><link rel="stylesheet" href="'._DIR_PLUGIN_ECHOPPE.'css/echoppe.css'.'" type="text/css" media="all" /><link rel="stylesheet" href="'._DIR_PLUGIN_ECHOPPE.'css/nyroModal.css'.'" type="text/css" media="all" />';
-	
 	return $flux;	
 }
 
