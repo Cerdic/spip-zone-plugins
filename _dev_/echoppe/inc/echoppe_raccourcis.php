@@ -12,7 +12,7 @@ function generer_raccourcis_echoppe(){
 	$raccourcis .= "<br />";
 	$raccourcis .= icone_horizontale(_T('echoppe:gerer_les_depots'), generer_url_ecrire("echoppe_gerer_depots"), _DIR_PLUGIN_ECHOPPE."images/go-home.png","", false);
 	$raccourcis .= "<br />";
-	$raccourcis .= icone_horizontale(_T('echoppe:gerer_les_prestataire_paiement'), generer_url_ecrire("echoppe_gerer_prestataire_paiement"), _DIR_PLUGIN_ECHOPPE."images/credit_cards.png","", false);
+	$raccourcis .= icone_horizontale(_T('echoppe:gerer_les_prestataires'), generer_url_ecrire("echoppe_gerer_prestataires"), _DIR_PLUGIN_ECHOPPE."images/credit_cards.png","", false);
 	$raccourcis .= "<hr />";
 	$raccourcis .= icone_horizontale(_T('echoppe:confguration_d_echoppe'), generer_url_ecrire("cfg","cfg=echoppe",false), find_in_path('cfg-22.png'),"", false);
 	

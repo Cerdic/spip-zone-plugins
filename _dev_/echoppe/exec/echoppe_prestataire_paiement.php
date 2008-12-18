@@ -22,7 +22,7 @@ function exec_echoppe_prestataire_paiement(){
 	
 	
 	
-	if (spip_num_rows($res_le_prestataire_paiement) != 1 && $contexte['new'] != "oui"){
+	if (sql_count($res_le_prestataire_paiement) != 1 && $contexte['new'] != "oui"){
 		die(inc_commencer_page_dist(_T('echoppe:les_prestataire_paiements'), "redacteurs", "echoppe")._T('echoppe:pas_de_prestataire_paiement_ici').fin_page());
 	}
 	
