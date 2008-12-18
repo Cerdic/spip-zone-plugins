@@ -1,0 +1,20 @@
+<plugin>
+	<nom>Pr&eacute;visualisation pour les articles en cours de r&eacute;daction</nom>
+	<auteur>[Cedric Morin->http://www.yterium.net]</auteur>
+	<version>1.0</version>
+	<etat>stable</etat>
+	<licence>GPL 3 - &copy; 2008</licence>
+	<description>Activer la pr&eacute;visualisation pour les articles en cours de r&eacute;daction</description>
+	<lien></lien>
+	<prefix>previsu_redac</prefix>	
+  <icon></icon>
+  <pipeline>
+  	<nom>pre_boucle</nom>
+  	<inclure>previsu_redac_pipelines.php</inclure>
+  </pipeline>
+  <pipeline>
+  	<nom>boite_infos</nom>
+  	<inclure>previsu_redac_pipelines.php</inclure>
+  </pipeline>
+	<necessite id='SPIP' version='[2.0.0;]' />
+</plugin>
