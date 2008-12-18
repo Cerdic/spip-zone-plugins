@@ -18,9 +18,7 @@ function action_echoppe_ajouter_panier(){
 	$contexte['date_maj'] = date("Y-m-d h:i:s");
 	$contexte['message_erreur'] = "";
 	
-	$sql_test_existance_produit = "SELECT * FROM spip_echoppe_paniers WHERE id_produit = '".$contexte['id_produit']."' AND token_panier = '".$contexte['token_panier']."' AND token_client = '".$contexte['token_client']."';";
-	$res_test_existance_produit = spip_query($sql_test_existance_produit);
-	$le_produit_existant = spip_fetch_array($res_test_existance_produit);	
+	$le_produit_existant = sql_fetsel(array("*"),"spip_echoppe_paniers","id_produit = '".$contexte['id_produit']."'");
 	$contexte['id_panier'] = $le_produit_existant['id_panier'];
 	
 	$_page = lire_config('echoppe/squelette_panier','echoppe_panier');
@@ -34,10 +32,6 @@ function action_echoppe_ajouter_panier(){
 			$res_maj_produit_panier = spip_query($sql_maj_produit_panier);
 			
 		}else{
-			/*$sql_insert_produit_panier = "INSERT INTO spip_echoppe_paniers VALUES ('', '".$contexte['id_client']."', '".$contexte['id_produit']."', '".$contexte['quantite']."', '".$contexte['configuration']."', '".$contexte['token_client']."', '".$contexte['token_panier']."', '".session_get('echoppe_statut_panier')."', '".$contexte['date_maj']."');";
-			//var_dump($sql_insert_produit_panier);
-			$res_insert_produit_panier = spip_query($sql_insert_produit_panier);
-			$contexte['id_panier'] = sql_insert_id($res_maj_produit_panier);*/
 			$panier = array(
 				'id_client' => $contexte['id_client'],
 				'id_produit' => $contexte['id_produit'],
@@ -68,11 +62,9 @@ function action_echoppe_ajouter_panier(){
 	}else{
 		$contexte['message_erreur'] = _T('echoppe:votre_panier_en_en_cour_de_paiement_vous_ne_pouvez_plus_ajouter_de_produit_a_ce_stade');
 	}
-	
-	$sql_test_lien_panier_auteur = "SELECT sec.id FROM spip_echoppe_client sec WHERE token_client = '".$contexte['token_client']."' ;";
-	$res_test_lien_panier_auteur = spip_query($sql_test_lien_panier_auteur);
-	if (sql_count($res_test_lien_panier_auteur) < 1){
-		$sql_lien = "INSERT INTO spip_echoppe_client VALUES ('','".$contexte['id_auteur']."','".$contexte['token_client']."')";
+
+	if (sql_count(sql_select(array("id_auteur"),"spip_echoppe_clients","token_client = '".$contexte['token_client']."'")) <= 1){
+		$sql_lien = "INSERT INTO spip_echoppe_clients VALUES ('','".$contexte['id_auteur']."','".$contexte['token_client']."')";
 		$res_lien = spip_query($sql_lien);
 		spip_log('liaison de l\'auteur '.$contexte['id_auteur'].' au token '.$contexte['token_client'].' from ajout de produit'.$contexte['token_client'],'echoppe');
 	}

@@ -73,6 +73,7 @@ function echoppe_upgrade($nom_meta_base_version,$version_cible){
 			patch_09to10();
 			patch_10to11();
 			patch_11to12();
+			patch_13to14();
 		 	ecrire_meta($nom_meta_base_version,$version_echoppe_locale=$version_cible,'non');
 		 	
 		 	echo "MAJ Echoppe ".$GLOBALS['meta'][$nom_meta_base_version]." --> ".$version_cible." OK";
@@ -86,6 +87,7 @@ function echoppe_upgrade($nom_meta_base_version,$version_cible){
 			patch_09to10();
 			patch_10to11();	
 			patch_11to12();
+			patch_13to14();
 		 	ecrire_meta($nom_meta_base_version,$version_echoppe_locale=$version_cible,'non');	
 		 	
 		 	echo "MAJ Echoppe ".$GLOBALS['meta'][$nom_meta_base_version]." --> ".$version_cible." OK";
@@ -98,6 +100,7 @@ function echoppe_upgrade($nom_meta_base_version,$version_cible){
 			patch_09to10();	
 			patch_10to11();
 			patch_11to12();
+			patch_13to14();
 		 	ecrire_meta($nom_meta_base_version,$version_echoppe_locale=$version_cible,'non');	
 		 	
 		 	echo "MAJ Echoppe ".$GLOBALS['meta'][$nom_meta_base_version]." --> ".$version_cible." OK";
@@ -109,6 +112,7 @@ function echoppe_upgrade($nom_meta_base_version,$version_cible){
 			patch_09to10();
 			patch_10to11();
 			patch_11to12();
+			patch_13to14();
 		 	ecrire_meta($nom_meta_base_version,$version_echoppe_locale=$version_cible,'non');
 		 	
 		 	echo "MAJ Echoppe ".$GLOBALS['meta'][$nom_meta_base_version]." --> ".$version_cible." OK";
@@ -119,6 +123,7 @@ function echoppe_upgrade($nom_meta_base_version,$version_cible){
 		 	patch_09to10();
 			patch_10to11();
 			patch_11to12();
+			patch_13to14();
 		 	ecrire_meta($nom_meta_base_version,$version_echoppe_locale=$version_cible,'non');
 		 	
 		 	echo "MAJ Echoppe ".$GLOBALS['meta'][$nom_meta_base_version]." --> ".$version_cible." OK";
@@ -129,6 +134,7 @@ function echoppe_upgrade($nom_meta_base_version,$version_cible){
 			patch_10to11();
 			patch_11to12();
 			patch_12to13();
+			patch_13to14();
 		 	ecrire_meta($nom_meta_base_version,$version_echoppe_locale=$version_cible,'non');
 		 	
 		 	echo "MAJ Echoppe ".$GLOBALS['meta'][$nom_meta_base_version]." --> ".$version_cible." OK";
@@ -138,6 +144,7 @@ function echoppe_upgrade($nom_meta_base_version,$version_cible){
 		if ($GLOBALS['meta'][$nom_meta_base_version] == '0.3.1'){
 			patch_11to12();
 			patch_12to13();
+			patch_13to14();
 		 	ecrire_meta($nom_meta_base_version,$version_echoppe_locale=$version_cible,'non');
 		 	
 		 	echo "MAJ Echoppe ".$GLOBALS['meta'][$nom_meta_base_version]." --> ".$version_cible." OK";
@@ -146,6 +153,15 @@ function echoppe_upgrade($nom_meta_base_version,$version_cible){
 		
 		if ($GLOBALS['meta'][$nom_meta_base_version] == '0.3.2'){
 			patch_12to13();
+			patch_13to14();
+		 	ecrire_meta($nom_meta_base_version,$version_echoppe_locale=$version_cible,'non');
+		 	
+		 	echo "MAJ Echoppe ".$GLOBALS['meta'][$nom_meta_base_version]." --> ".$version_cible." OK";
+		 	
+		}
+		
+		if ($GLOBALS['meta'][$nom_meta_base_version] == '0.3.3'){
+			patch_13to14();
 		 	ecrire_meta($nom_meta_base_version,$version_echoppe_locale=$version_cible,'non');
 		 	
 		 	echo "MAJ Echoppe ".$GLOBALS['meta'][$nom_meta_base_version]." --> ".$version_cible." OK";

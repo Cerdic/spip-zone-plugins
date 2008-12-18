@@ -26,4 +26,10 @@ function echoppe_I2_cfg_form($flux){
 	return $flux;	
 }
 
+function echoppe_taches_generales_cron($taches_generales){
+	$jours = lire_config('echoppe/duree_de_vie_paniers_temp', 2);
+	$taches_generales['echoppe'] = 60*60*24*$jours; // par exemple toutes les 10 minutes, ne pas descendre en dessous de 30 secondes !
+	return $taches_generales;
+}
+
 ?>

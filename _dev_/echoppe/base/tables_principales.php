@@ -286,7 +286,8 @@ function echoppe_tables_principales($tables_principales){
 		"token_client"	=> "VARCHAR(40) NOT NULL",
 		"token_panier"	=> "VARCHAR(40) NOT NULL",
 		"statut"		=> "VARCHAR(10) NOT NULL",
-		"date"			=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"
+		"date"			=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+		"date_maj"		=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"
 		);
 
 
@@ -305,10 +306,10 @@ function echoppe_tables_principales($tables_principales){
 		"token_panier"	=> "token_panier"
 		);
 
-	$tables_principales['spip_echoppe_clients'] = array(
-		'field' => &$spip_clients,
-		'key' => &$spip_clients_key,
-		'join' => &$spip_clients_join
+	$tables_principales['spip_echoppe_paniers'] = array(
+		'field' => &$spip_paniers,
+		'key' => &$spip_paniers_key,
+		'join' => &$spip_paniers_join
 	);
 	
 	$spip_commentaires_paniers = array(

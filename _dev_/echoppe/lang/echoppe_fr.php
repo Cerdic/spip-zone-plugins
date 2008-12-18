@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'etat_du_produit' => '&Eacute;tat du produit',
 'euro' => '&euro;',
 'explication_du_systeme_par_virement' => 'Voici les informations n&eacute;cessaires pour effectuer le virement afin de payer votre commande. Une fois le paiement re&ccedil;u sur notre compte, nous vous en informerons par e-mail et passerons &agrave; l\'&eacute;tape d\'envoi de la commande.',
+'etat_des_stocks_du_produit' => 'Stocks',
 
 // F
 'fax_du_depot' => 'Fax',
@@ -85,7 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'fichier_pas_une_image' => 'Le fichier n\'est pas une image',
 
 // G
-'gerer_echoppe' => 'G&eacute;rer Echoppe',
+'gerer_echoppe' => 'Echoppe',
 'gerer_les_depots' => 'G&eacute;rer les d&eacute;p&ocirc;ts',
 'gerer_les_paniers' => 'G&eacute;rer les paniers',
 'gerer_les_prestataire_paiement' => 'G&eacute;rer les prestataires de paiement',
@@ -103,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ignorer_date_mise_en_vente' => 'Ignorer la date de mise en vente',
 'impossible_copier_dans'=>'Impossible de copier le fichier dans ',
 'informations_client'=>'Informations du client',
+'information_technique_du_produit'=>'Informations techniques',
 
 //J
 'jours' => 'jours',
@@ -152,6 +154,8 @@ L\'équipe de ',
 'nouveau_client_details' => 'Remplissez le formulaire ci-dessous. Les champs marqu&eacute;s d\'une * sont obligatoires.<br/>Une fois le formulaire compl&eacute;t&eacute; et envoy&eacute;, vous recevrez un email confirmant votre inscription et contenant votre mot de passe.',
 'numero_tva' => 'N&deg; de TVA',
 
+//O
+'options_du_produit' => 'Options',
 
 // P
 'panier' => 'Panier',
@@ -221,7 +225,7 @@ L\'équipe de ',
 'statut_paye' => 'pay&eacute;',
 'statut_traite' => 'trait&eacute;',
 'statut_envoye' => 'envoy&eacute;',
-
+'statistiques_du_produit' => 'Statistiques',
 
 // T
 'taux_de_tva_par_defaut' => 'Taux de T.V.A. par d&eacute;faut',

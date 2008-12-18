@@ -7,9 +7,9 @@
 		crowf00t, [Exibit.be->Exibit.be], kent1, yoann etc... &copy; 2007 - Distribu&eacute; sous licence GNU/LGPL
 	</auteur>
 	<version>
-		0.3.3
+		0.3.4
 	</version>
-	<version_base>0.3.3</version_base>
+	<version_base>0.3.4</version_base>
 	<etat>
 		dev
 	</etat>
@@ -33,6 +33,10 @@ _
 	<options>echoppe_options.php</options>
 	<fonctions>echoppe_fonctions.php</fonctions>
 	<!-- Les bouttons pour 1.9.2 -->
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>echoppe_pipeline.php</inclure>
+	</pipeline>
 	<pipeline>
 		<!-- voir la page sur doc.spip.org, pour connaitre l'ensemble des pipeline -->
 		<nom>ajouter_boutons</nom>
