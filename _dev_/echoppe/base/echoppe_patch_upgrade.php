@@ -108,6 +108,8 @@ function patch_13to14(){
 	include_spip('base/abstract_sql');
 	spip_log("Mise à jour de echoppeBD -> 0.3.4");
 	sql_alter("TABLE spip_echoppe_paniers ADD date_maj datetime DEFAULT '0000-00-00 00:00:00' NOT NULL AFTER date ;");
+	sql_alter("ALTER TABLE spip_echoppe_paniers CHANGE id_clients id_client BIGINT( 21 ) NOT NULL ,
+CHANGE token_clients token_client VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ");
 	ecrire_meta('echoppe_base_version',"0.3.4");
 	ecrire_metas();
 }
