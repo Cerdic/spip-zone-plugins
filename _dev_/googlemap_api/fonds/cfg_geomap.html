@@ -48,23 +48,30 @@
 			jQuery("#longitude").val(point.lng());
 		});
 	]
-		GEvent.addListener(formMap, 'moveend', function() {
+		// si clic sur la carte on place un marqueur
+		GEvent.addListener(formMap, 'click', function(overlay,point) {
 			formMap.clearOverlays();
-			var center = formMap.getCenter();
-			jQuery("#latitude").val(center.lat());
-			jQuery("#longitude").val(center.lng());
-			var point = new GLatLng(parseFloat(center.lat()), parseFloat(center.lng()));
-			marker = new GMarker(point,{draggable:true}); 
-			formMap.addOverlay(marker);
-			GEvent.addListener(marker, 'dragend', function(){
-				var point = marker.getPoint();
-			jQuery("#latitude").val(point.lat());
-			jQuery("#longitude").val(point.lng());
-			});
+			if(point){
+				marker = new GMarker(point,{draggable:true}); 
+				formMap.addOverlay(marker);
+				var center = marker.getPoint();
+				var zoom = formMap.getZoom();
+				jQuery("#form_lat").val(center.lat());
+				jQuery("#form_long").val(center.lng());
+				jQuery("#form_zoom").val(zoom);
+				GEvent.addListener(marker, 'dragend', function(){
+					var center = marker.getPoint();
+					jQuery("#form_lat").val(center.lat());
+					jQuery("#form_long").val(center.lng());
+				});
+			}
 		});
-
+		// si changement de zoom on centre la carte sur le marqueur
 		GEvent.addListener(formMap, 'zoomend', function(oldlevel, newlevel){
-			jQuery("#zoom").val(newlevel);}
+			jQuery("#zoom").val(newlevel);
+			var center = marker.getPoint();
+			formMap.setCenter(new GLatLng(center.lat(),center.lng()));
+			}
 		);
 		} else {
 			alert("Sorry, the Google Maps API is not compatible with this browser");
