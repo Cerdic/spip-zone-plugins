@@ -57,7 +57,7 @@
 		echo fin_boite_info(true);
 		
 	
-		$res=icone_horizontale(_T('Ajouter une vente'), $url_ajout_vente, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/panier_in.gif','rien.gif',false);
+		$res=icone_horizontale(_T('Ajouter une vente'), $url_ajout_vente, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ajout_don.png','rien.gif',false);
 		echo bloc_des_raccourcis($res);
 		
 		echo debut_droite("",true);
