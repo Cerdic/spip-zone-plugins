@@ -2,21 +2,21 @@
 
 <!-- titre=GoogleMap API-->
 <!-- descriptif=
-<h4>Configuration du plugin GoogleMap Api</h4>
+<h4><:geomap:configuration_titre:></h4>
 -->
 
 <div class="formulaire_spip formulaire_editer formulaire_cfg">
 [(#CONFIG{geomap/cle_api}|oui)
-<div id="formMap" name="formMap" style="width: 470px; height: 350px;margin:10px auto;"></div>
+<div id="formMap" style="width: 470px; height: 350px;margin:10px auto;overflow:hidden"></div>
 <form action="#" onsubmit="showAddress($('#address').attr('value')); return false">
 	<p>
-		<input size="50" name="address" id="address" value="" type="text">
-		<input value="<:geomap:rechercher:>" type="submit">
+		<input size="50" name="address" id="address" value="" type="text" />
+		<input value="<:geomap:rechercher:>" type="submit" />
 	</p>
 </form>]
 <script type="text/javascript">
 /*<![CDATA[*/
-[(#CONFIG{geomap/cle_api}|oui)
+[(#CONFIG{geomap/cle_api}|?{' '})
 	var geocoder = null;
 	var formMap = null;
 	function showAddress(address) {
@@ -79,20 +79,22 @@
 ]
 (function($){
 	$(function(){
-		$("#num_other_version").hide();
+		$("a.spip_out").attr({
+			target: "_blank"
+		})
 		$("input[@name='api_version']").click(function() {
 			if ($("#other_version").is(':checked')){
-				$("#num_other_version").show();
+				$(".num_other_version_container").show();
 				$(this).blur();
 			}
 			else
-				$("#num_other_version").hide();
+				$(".num_other_version_container").hide();
 		});
 	});
 })(jQuery);
 /*]]>*/
 </script>
-<form method="post"><div>
+<form method="post" action="#SELF"><div>
 	[(#ENV{_cfg_}|form_hidden)]
 	<ul>
 		<li class="editer_cle_api_geomap">
@@ -118,8 +120,10 @@
 			<div class="choix">
 				<input type="radio" name="api_version" class="radio" value="2." id="other_version"[ (#ENV{api_version}|match{'^2\.'}|?{'checked="checked"'})] />
 				<label for="other_version"><:geomap:other_version:></label>
+				<div style="display:[(#ENV{api_version}|match{'^2\.'}|?{'block','none'})]" class="num_other_version_container">
+					<input type="text" name="num_other_version" class="text" value="#ENV*{num_other_version}" id="num_other_version" />
+				</div>
 			</div>
-			<input type="text" name="num_other_version" class="text" value="#ENV*{num_other_version}" id="num_other_version" />
 		</li>
 		<li class="editer_latitude_geomap">
 			<label for="latitude"><:geomap:latitude:></label>
