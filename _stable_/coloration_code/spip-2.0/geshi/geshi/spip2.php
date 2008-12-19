@@ -86,15 +86,15 @@ $language_data = array (
 		'REGEXPS' => array(
 			0 => 'color: #CA5200;', // balise
 
-            10 => 'color: #222;', // debut boucle
-			11 => 'color: #527EE0;', // tables boucle
+			10 => 'color: #527EE0;', // tables boucle
+            11 => 'color: #222;', // debut boucle
             12 => 'color: #745E4B;', // criteres boucles 
             13 => 'color: #222;', // fin boucle
 						
             
 			
-			20 => 'color: #222', // inclure debut
-			21 => 'color: #527EE0;', // inclure entre parenthese
+			20 => 'color: #527EE0;', // inclure entre parenthese
+			21 => 'color: #222', // inclure debut
 			22 => 'color: #745E4B;', // inclure criteres
 			23 => 'color: #222;', // inclure fin
 			
@@ -120,22 +120,23 @@ $language_data = array (
 			GESHI_BEFORE => '',
 			GESHI_AFTER => ''
 			),
-		// debut de boucle
-		10 => array(
-			GESHI_SEARCH => REG_BOUCLE,
-			GESHI_REPLACE => '\\1',
-			GESHI_MODIFIERS => 'i',
-			GESHI_BEFORE => '',
-			GESHI_AFTER => '\\3\\4\\5'
-			),			
+
 		// table de la boucle
-		11 => array(
+		10 => array(
 			GESHI_SEARCH => REG_BOUCLE,
 			GESHI_REPLACE => '\\3',
 			GESHI_MODIFIERS => 'i',
 			GESHI_BEFORE => '\\1',
 			GESHI_AFTER => '\\4\\5'
-			),			
+			),		
+		// debut de boucle
+		11 => array(
+			GESHI_SEARCH => REG_BOUCLE,
+			GESHI_REPLACE => '\\1',
+			GESHI_MODIFIERS => 'i',
+			GESHI_BEFORE => '',
+			GESHI_AFTER => '\\3\\4\\5'
+			),	
 		// criteres de boucle
 		12 => array(
 			GESHI_SEARCH => REG_BOUCLE,
@@ -153,22 +154,22 @@ $language_data = array (
 			GESHI_AFTER => ''
 			),
 
-			
-		// inclure (debut)
-		20 => array(
-			GESHI_SEARCH => REG_INCLURE,
-			GESHI_REPLACE => '\\1',
-			GESHI_MODIFIERS => 'i',
-			GESHI_BEFORE => '',
-			GESHI_AFTER => '\\3\\4\\5'
-			),
+
 		// inclure (entre parenthese)
-		21 => array(
+		20 => array(
 			GESHI_SEARCH => REG_INCLURE,
 			GESHI_REPLACE => '\\3',
 			GESHI_MODIFIERS => 'i',
 			GESHI_BEFORE => '\\1',
 			GESHI_AFTER => '\\4\\5'
+			),			
+		// inclure (debut)
+		21 => array(
+			GESHI_SEARCH => REG_INCLURE,
+			GESHI_REPLACE => '\\1',
+			GESHI_MODIFIERS => 'i',
+			GESHI_BEFORE => '',
+			GESHI_AFTER => '\\3\\4\\5'
 			),
 		// inclure (criteres)
 		22 => array(
