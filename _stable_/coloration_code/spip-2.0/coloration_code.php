@@ -22,6 +22,21 @@ if (!defined('PLUGIN_COLORATION_CODE_TELECHARGE')) {
 	define('PLUGIN_COLORATION_CODE_TELECHARGE', true);
 }
 
+// pour utiliser des styles inline (ou des classes css)
+if (!defined('PLUGIN_COLORATION_CODE_STYLES_INLINE')) {
+	define('PLUGIN_COLORATION_CODE_STYLES_INLINE', true);
+}
+
+// pour utiliser le colorieur 'spip' ou 'spip2' si on
+// passe une class "spip" simplement.
+// note: le colorieur "spip" est celui present originellement dans le plugin
+// mais possede des regexp qui se trompaient parfois à quelques } ou > pres...
+// il est laisse pour ceux qui le preferaient neanmoins (le nouveau n'a pas les memes couleurs).
+if (!defined('PLUGIN_COLORATION_CODE_COLORIEUR_SPIP')) {
+	define('PLUGIN_COLORATION_CODE_COLORIEUR_SPIP', 'spip2');
+}
+
+
 function coloration_code_color($code, $language, $cadre='cadre') {
 
 	// Supprime le premier et le dernier retour chariot
@@ -30,6 +45,9 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 
 	$params = explode(' ', $language);
 	$language = array_shift($params);
+	
+	if ($language=='spip') $language = PLUGIN_COLORATION_CODE_COLORIEUR_SPIP;
+	
 	include_once _DIR_PLUGIN_COLORATION_CODE . '/geshi/geshi.php';
 	//
 	// Create a GeSHi object
@@ -39,7 +57,12 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 		return false;
 	}
 	global $spip_lang_right;
-
+	
+	$stylecss = "";
+	if (defined('PLUGIN_COLORATION_CODE_STYLES_INLINE') and !PLUGIN_COLORATION_CODE_STYLES_INLINE) {
+		$geshi->enable_classes();
+		$stylecss = "<style>".$geshi->get_stylesheet()."</style>";
+	}
 	
 	$code = echappe_retour($code);
 
@@ -70,7 +93,7 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 	//
 	// And echo the result!
 	//
-	$rempl = '<div class="coloration_code"><div class="spip_'.$language.' '.$cadre.'">'.$geshi->parse_code().'</div>';
+	$rempl = $stylecss . '<div class="coloration_code"><div class="spip_'.$language.' '.$cadre.'">'.$geshi->parse_code().'</div>';
 
 	if ($telecharge) {
 		$rempl .= "<div class='" . $cadre . "_download'
