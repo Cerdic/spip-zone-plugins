@@ -1,5 +1,6 @@
 <h1><:echoppe:echoppe:></h1>
 <B_CatsALaRacine>
+<div>
 	<div class="gauche echoppe" >
 	<BOUCLE_CatsALaRacine(ECHOPPE_CATEGORIES){id_parent = 0}{1/2}>
 		<div class="enfants">
@@ -36,6 +37,36 @@
 		</BOUCLE_CatsALaRacine2>
 		</div>
 		</B_CatsALaRacine2>
+		<div class="nettoyeur"> </div>
+	</div>
 	</B_CatsALaRacine>
 	<:echoppe:pas_encore_de_categorie:>
 <//B_CatsALaRacine>
+<br />
+<B_LesProduits>
+	<div class="liste echoppe ajax">
+		<div style="position: relative;">
+			<div style="position: absolute; top: -12px; left: 3px;"><img src="../plugins/echoppe/images/produit-24.png" alt=""></div>
+			<div style="border-bottom: 1px solid rgb(68, 68, 68); padding: 3px 3px 3px 30px; background-color: white; color: black;" class="verdana2"><strong><:echoppe:acces_rapide_aux_produits:></strong></div>
+		</div>
+		#PAGINATION
+		<table width="100%">
+			<tbody>
+				<BOUCLE_LesProduits(ECHOPPE_PRODUITS){par maj}{statut IN propose,prepa,publie}{pagination 10}{ajax}>
+					<tr class="tr_liste">
+						<td style="width: 11px;"><img src="[(#STATUT|=={prepa}|?{[(#CHEMIN{images/puce-blanche.gif})],''})][(#STATUT|=={propose}|?{[(#CHEMIN{images/puce-orange.gif})],''})][(#STATUT|=={publie}|?{[(#CHEMIN{images/puce-verte.gif})],''})][(#STATUT|=={poubelle}|?{[(#CHEMIN{images/puce-poubelle.gif})],''})]" alt="statut #STATUT"/></td>
+						<td class="arial2">
+							
+								<strong><a href="[(#EVAL{echoppe_produit}|generer_url_ecrire{id_produit=#ID_PRODUIT})]">[(#TITRE|sinon{<em><:echoppe:pas_de_titre:></em>})]</a></strong>[<div class="verdana1">(#DESCRIPTIF|couper{150})</div>]
+							
+						</td>
+						<td width="80px" class="arial1">&nbsp;#TOTAL_STOCK&nbsp;<:echoppe:en_stock:></td>
+						<td width="50px" class="arial1">[(#REF_PRODUIT|sinon{<em><:echoppe:pas_de_num_de_ref:></em>})]</td>
+					</tr>
+				</BOUCLE_LesProduits>
+			</tbody>
+		</table>
+		#PAGINATION
+		<div class="nettoyeur"> </div>
+	</div>
+</B_LesProduits>

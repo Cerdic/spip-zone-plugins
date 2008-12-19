@@ -25,6 +25,8 @@ function action_echoppe_sauver_produit(){
 	$prix_base_htva = _request('prix_base_htva');
 	$id_trad = _request('id_trad');
 	
+	$maj = date('Y-m-d h:i:s');
+	
 	$tva = str_replace(" ","",$tva);
 	$tva = str_replace(".","",$tva);
 	$tva = str_replace(",",".",$tva);
@@ -90,6 +92,7 @@ function action_echoppe_sauver_produit(){
 			'id_categorie' => $id_categorie,
 			'ref_produit' => $ref_produit,
 			'lang' => $lang,
+			'maj' => $maj,
 			'titre'=> $titre,
 			'descriptif'=> $descriptif,
 			'texte' => $texte,

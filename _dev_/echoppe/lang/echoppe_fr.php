@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'acces_non_autorise'=>'D&eacute;sol&eacute,<br />vous n\'avez pas le droit d\'acc&eacute;der &aacute; cette partie.',
+'acces_rapide_aux_produits' => 'Acc&eacute;s rapide aux produits',
 'adresse_du_beneficiaire' => 'Adresse du B&eacute;n&eacute;ficiaire',
 'adresse_du_depot' => 'Adresse du d&eacute;p&ocirc;t',
 'ajouter' => 'Ajouter',
