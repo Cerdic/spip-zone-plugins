@@ -89,8 +89,8 @@ $texte=preg_replace("/(\[\[)(.*?)(\]\])/","",$texte);
  return $texte;
 }
 
-function table_des_matieres ($texte,$tdm) {
- return IntertitresTdm_table_des_matieres($texte,$tdm);
+function table_des_matieres ($texte,$tdm,$url) {
+ return IntertitresTdm_table_des_matieres($texte,$tdm,$url);
 
 }
 ?>

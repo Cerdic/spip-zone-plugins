@@ -33,7 +33,7 @@
  * Petites modifications de Stéphane Deschamps
  * - prise en compte des niveaux de titres si ils sont déclarés dans mes_fonctions ou mes_options par $GLOBALS['debut_intertitre']
 */
-function IntertitresTdm_table_des_matieres($texte,$tableseule=false) {
+function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article="") {
   global $debut_intertitre, $fin_intertitre;
 
    // définition de la balise pour les titres des sections %num% sera remplacé 
@@ -170,7 +170,7 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false) {
  
        //on se rappelle du raccourcis
 	$cite[$ref] = $numeros;
-	$table .= "<li><a href=\"#$numeros\" title=\"Aller directement à  	&laquo;&nbsp;".textebrut($titre)."&nbsp;&raquo;\">$titre</a>";
+	$table .= "<li><a href=\"$url_article#$numeros\" title=\"Aller directement à  	&laquo;&nbsp;".textebrut($titre)."&nbsp;&raquo;\">$titre</a>";
 
        //on mémorise le niveau de ce titre
 	$lastlevel = strlen($level);
@@ -191,7 +191,7 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false) {
 
   //on remplace les raccourcis par les numéros des sections.
   foreach ($cite as $ref => $num) {
-	$texte = str_replace("<$ref>","<a href=\"#$num\">$num</a>",$texte);	
+	$texte = str_replace("<$ref>","<a href=\"$url_article#$num\">$num</a>",$texte);	
   }
 
   // ajout d'un div plus propre !

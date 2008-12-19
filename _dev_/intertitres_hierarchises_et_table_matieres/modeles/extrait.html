@@ -3,7 +3,7 @@
 
 
 ]
-<BOUCLE_Article(ARTICLES){id_article=#ENV{id}}>
+<BOUCLE_Article(ARTICLES){id_article=#ENV{id}}{statut==.}>
 	[(#SET{extrait,
 		[(#TEXTE*|nettoie_des_modeles|propre
 			|extrait_de_texte{#ENV{debut,0},#ENV{taille,20}})]
