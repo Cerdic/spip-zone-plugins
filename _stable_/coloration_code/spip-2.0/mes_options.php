@@ -22,9 +22,7 @@ function coloration_code_traiter($regs) {
 		$fichier = "$dossier$nom_fichier.txt";
 
 		if (!file_exists($fichier)) {
-			$handle = fopen($fichier, 'w');
-			fwrite($handle, $code);
-			fclose($handle);
+			ecrire_fichier($fichier, $code);
 		}
 	  }
 	 
