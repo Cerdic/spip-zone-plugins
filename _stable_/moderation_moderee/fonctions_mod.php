@@ -4,7 +4,7 @@ include_spip('inc/session');
 function moderation_vip($flux){
 	if ($flux['args']['table']=='spip_forum'
 		AND $flux['args']['action']=='instituer'){
-			// Pour publier direct les auteurs configurés par modération modérés
+			// Pour publier direct les auteurs configurés par modération modérée
 				global $visiteur_session;
 				if ($visiteur_session) {
 					$moderation_plug_admin=$GLOBALS['meta']["moderation_plug_admin"];
