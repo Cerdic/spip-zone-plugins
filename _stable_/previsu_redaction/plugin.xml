@@ -3,6 +3,7 @@
 	<auteur>[Cedric Morin->http://www.yterium.net]</auteur>
 	<version>1.0</version>
 	<etat>stable</etat>
+	<icon>previsu_redaction.png</icon>
 	<licence>GPL 3 - &copy; 2008</licence>
 	<description>Activer la pr&eacute;visualisation pour les articles en cours de r&eacute;daction</description>
 	<lien></lien>
