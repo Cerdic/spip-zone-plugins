@@ -167,7 +167,7 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 	spip_log('traiter','inscription2');
 	global $tables_principales;
 	
-	if(lire_config('inscription2/password') == 'on'){
+	if((lire_config('inscription2/password') == 'on') && (strlen(_request('password')))){
 		$mode = 'inscription_pass';
 	}
 	else{
@@ -221,7 +221,9 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 			$val['alea_futur'] = $alea_futur;
 			$val['low_sec'] = '';
 		}
-		$val['statut'] = lire_config('inscription2/statut_nouveau');
+		if(!is_numeric($id_auteur)){
+			$val['statut'] = lire_config('inscription2/statut_nouveau');
+		}
 	}else{
 		$val['statut'] = 'aconfirmer';
 	}
