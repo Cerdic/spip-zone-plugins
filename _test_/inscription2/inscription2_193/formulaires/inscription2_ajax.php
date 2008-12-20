@@ -36,7 +36,6 @@ function formulaires_inscription2_ajax_charger_dist($id_auteur = NULL){
 			'spip_auteurs LEFT JOIN spip_auteurs_elargis USING(id_auteur)',
 			'id_auteur ='.$id_auteur
 		);
-
 		$champs = $auteur;
 	} else {	
 	    //si on est en mode création et que l'utilisateur a saisi ses valeurs on les prends en compte
@@ -73,7 +72,30 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 			$erreurs[$champs] = _T('inscription2:champ_obligatoire');
 		}
 	}
-				
+	
+	//messages d'erreur au cas par cas (PASSWORD)
+	//vérification des champs
+	//récupéré depuis le code de SPIP
+	if(lire_config('inscription2/password') == 'on') {
+		if($p = _request('password')) {
+			if(strlen($p)){
+				if (strlen($p) < 6) {
+					$erreurs['password'] = _T('info_passe_trop_court');
+					$erreurs['message_erreur'] .= _T('info_passe_trop_court');
+				} elseif ($p != _request('password1')) {
+					$erreurs['password'] = _T('info_passes_identiques');
+					$erreurs['message_erreur'] .= _T('info_passes_identiques');
+				}
+			}else{
+				if(!is_numeric($id_auteur)){
+					// Si on est dans la modif d'id_auteur on garde l'ancien pass si rien n'est rentré
+					// donc on accepte la valeur vide
+					// dans le cas de la création d'un auteur ... le password sera nécessaire
+					$erreurs['password'] = _T('inscription2:password_obligatoire');
+				}
+			}
+		}
+	}
 	//messages d'erreur au cas par cas (CODE POSTAL)
     //liste des champs de type code postal
 	$champs_code_postal = array('code_postal','code_postal_pro');
@@ -111,7 +133,7 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 			),
 		'data' => null
 		)
-	);    	
+	);
 	
 	//verifier que l'auteur a bien des droits d'edition
 	if (is_numeric($id_auteur)) {
@@ -131,6 +153,7 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 		}
 	}
 	spip_log($erreurs,'inscription2');
+	
 	//message d'erreur generalise
 	if (count($erreurs)) {
 		spip_log("$erreurs","inscription2");
@@ -144,6 +167,13 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 	spip_log('traiter','inscription2');
 	global $tables_principales;
 	
+	if(lire_config('inscription2/password') == 'on'){
+		$mode = 'inscription_pass';
+	}
+	else{
+		$mode = 'inscription';
+	}
+	
 	/* Génerer la liste des champs à traiter
 	* champ => valeur formulaire
 	*/
@@ -154,11 +184,11 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 	
 	//Définir le login
 	if(!$valeurs['nom']){
-		if($valeur['nom_famille']||$valeur['prenom']){
-			$valeur['nom'] = $valeur['prenom'].' '.$valeur['nom_famille'];
+		if($valeurs['nom_famille']||$valeurs['prenom']){
+			$valeurs['nom'] = $valeurs['prenom'].' '.$valeurs['nom_famille'];
 		}
 		else{
-			$valeur['nom'] = strtolower(translitteration(preg_replace('/@.*/', '', $mail)));
+			$valeurs['nom'] = strtolower(translitteration(preg_replace('/@.*/', '', $valeurs['email'])));
 		}
 	}
 	if (!_request('login')) {
@@ -176,6 +206,26 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 	//extrait uniquement les données qui ont été proposées à la modification
 	$val = array_intersect_key($valeurs,$clefs);
 	
+	//Vérification du password
+	if($mode == 'inscription_pass') {
+		$new_pass = _request('password');
+		if (strlen($new_pass)) {
+			include_spip('inc/acces');
+			$htpass = generer_htpass($new_pass);
+			$alea_actuel = creer_uniqid();
+			$alea_futur = creer_uniqid();
+			$pass = md5($alea_actuel.$new_pass);
+			$val['pass'] = $pass;
+			$val['htpass'] = $htpass;
+			$val['alea_actuel'] = $alea_actuel;
+			$val['alea_futur'] = $alea_futur;
+			$val['low_sec'] = '';
+		}
+		$val['statut'] = lire_config('inscription2/statut_nouveau');
+	}else{
+		$val['statut'] = 'aconfirmer';
+	}
+	
 	//inserer les données dans spip_auteurs -- si $id_auteur mise à jour autrement nouvelle entrée
 	if (is_numeric($id_auteur)) {
 		$where = 'id_auteur = '.$id_auteur;
@@ -186,7 +236,6 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 		);
 		$new = false;
 	} else {
-		$val['statut'] = 'aconfirmer';
 		$id_auteur = sql_insertq(
 			$table,
 			$val
@@ -216,6 +265,10 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 			$where      
 		);
 	} else {
+		// Si on utilise la date de creation de la fiche
+		if(lire_config('inscription2/creation') == 'on'){
+			$val['creation'] = date("Y-m-d H:i:s",time());
+		}
 		$val['id_auteur'] = $id_auteur;
 		$id = sql_insertq(
 			$table,
@@ -223,13 +276,24 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 		);
 	}
     
-    if (!$new) {    
+    if (!$new){
         $message = _T('inscription2:profil_modifie_ok');
     } else {
 		$envoyer_inscription = charger_fonction('envoyer_inscription2','inc');
-		$envoyer_inscription($id_auteur);
+		$envoyer_inscription($id_auteur,$mode);
 		$message = _T('inscription2:formulaire_inscription_ok');
     }
+	
+	$traiter_plugin = pipeline('i2_traiter_formulaire',
+		array(
+			'args' => array(
+				'id_auteur' => $id_auteur,
+				'champs' => $val
+			),
+		'data' => null
+		)
+	);
+	
     return array('editable'=>false,'message' => $message);
 }
 

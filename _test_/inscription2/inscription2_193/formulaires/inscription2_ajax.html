@@ -6,19 +6,19 @@
 [(#ENV{editable}|oui)
     <form action='#ENV{action}' method='post'>
 		#ACTION_FORMULAIRE{#SELF}
-
+		
 		<INCLURE{fond=formulaires/inscription2_infos_connection}{env}>
         
         [(#REM) pour inserer des champs au debut du formulaire
 		Utilise pour Abonnement et association auparavant]
 
-		#PIPELINE{I2_form_debut}
+		[(#PIPELINE{i2_form_debut})]
 		
         <INCLURE{fond=formulaires/inscription2_infos_perso}{env}>
 
         <INCLURE{fond=formulaires/inscription2_infos_pro}{env}>
         
-		#PIPELINE{I2_form_fin}
+		[(#PIPELINE{i2_form_fin})]
 
         [(#CONFIG{inscription2/publication}|=={on}|oui)
         <fieldset class="info_publication">

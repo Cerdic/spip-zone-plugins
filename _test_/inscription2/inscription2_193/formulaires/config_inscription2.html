@@ -66,7 +66,7 @@
 									</tr>
 									<tr>
 										<td>
-											<input type="checkbox" name="email" checked="checked" id="email" onclick="alert('par defaut');return false;"/>
+											<input type="checkbox" name="email" checked="checked" id="email" onclick="alert('<:inscription2:par_defaut:>');return false;"/>
 											<div style="display:none;">
 												<input type="checkbox" name="email_obligatoire" checked="checked" id="email_obligatoire" />
 											</div>
@@ -79,6 +79,27 @@
 										</td>
 										<td>
 											<input type="checkbox" name="email_table" [checked="(#ENV{email_table}?{checked})"] id="email_table" />
+										</td>
+									</tr>
+									<tr>
+										<td><label><:inscription2:password:></label></td>
+									</tr>
+									<tr>
+										<td>
+											<input type="checkbox" name="password"[(#ENV{password}|=={on}|oui) checked="checked"] id="password" onclick="showoblig(this)" />
+											<div style="[(#CONFIG{inscription2/password}|=={on}|?{display: block;, display:none;})]">
+												<input type="checkbox" name="password_obligatoire" [checked="(#CONFIG{inscription2/password_obligatoire}?{checked})"] id="password_obligatoire" />
+												<span style="color:red">*</span>
+											</div>
+										</td>
+										<td>
+											<input type="checkbox" name="password_fiche_mod" onclick="enadis(this,password_fiche)" [checked="(#ENV{password_fiche_mod}?{checked})"] id="password_fiche_mod" />
+										</td>
+										<td>
+											<input type="checkbox" name="password_fiche" disabled="disabled" id="password_fiche" [disabled ="(#ENV{password_fiche_mod}?{disabled})"] />
+										</td>
+										<td>
+											<input type="checkbox" name="password_table" disabled="disabled" id="password_table" />
 										</td>
 									</tr>
 								</table>

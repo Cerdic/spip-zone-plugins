@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'fiche' => 'Fiche',
 'fiche_mod' => 'Modifiable',
 'table' => 'Table',
-'par_defaut' => 'par d&eacute;faut',
+'par_defaut' => 'Ce champs est obligatoire',
 'form_expl' => ' : Le champ sera affich&eacute; sur le formulaire INSCRIPTION2',
 'form_oblig_expl' => ' : Rendre la saisie obligatoire dans le formulaire',
 'fiche_expl'=> ' : Le champ sera visible sur la fiche d\'adh&eacute;rent',
@@ -44,6 +44,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'icone_menu_config' => 'Inscription2',
 'nom' => 'Signature',
+'password' => 'Mot de passe',
+'password_retaper' => 'Confirmez le mot de passe',
+'password_obligatoire' => 'Le mot de passe est obligatoire.',
 'nom_explication' => 'votre nom ou votre&nbsp;pseudo',
 'nom_famille' => 'Nom de famille',
 'prenom' => 'Pr&eacute;nom',
@@ -226,7 +229,7 @@ L\'&eacute;quipe de @nom_site@',
 // Formulaire CVT inscription
 'formulaire_login_deja_utilise' => 'Le login est d&eacute;ja utilis&eacute;, veuillez en choisir un autre.',
 'formulaire_remplir_obligatoires' => 'Veuillez remplir les champs obligatoires',
-'formulaire_inscription_ok' => 'Votre inscription a bien &eacute;t&eacute; pris en compte. Vous allez recevoir par courrier &eacute;lectronique vos identifiants de connexion.',
+'formulaire_inscription_ok' => 'Votre inscription a bien &eacute;t&eacute; prise en compte. Vous allez recevoir par courrier &eacute;lectronique vos identifiants de connexion.',
 
 );
 ?>

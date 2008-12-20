@@ -6,7 +6,7 @@
     
     <ul>
         [(#CONFIG{inscription2/sexe}|=={on}|oui)
-        <li class="editer_sexe[ (#CONFIG{inscription2/sexe_obligatoire}|=={on}|oui)obligatoire]">
+        <li class="editer_sexe[ (#CONFIG{inscription2/sexe_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{sexe}|oui)erreur]">
 		    <fieldset>
 			    <legend><:inscription2:civilite:></legend>
 			    <ul class="formfx">
