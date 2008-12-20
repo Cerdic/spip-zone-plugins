@@ -225,7 +225,9 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 			$val['statut'] = lire_config('inscription2/statut_nouveau');
 		}
 	}else{
-		$val['statut'] = 'aconfirmer';
+		if(!is_numeric($id_auteur)){
+			$val['statut'] = 'aconfirmer';
+		}
 	}
 	
 	//inserer les données dans spip_auteurs -- si $id_auteur mise à jour autrement nouvelle entrée
