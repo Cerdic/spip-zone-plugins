@@ -32,14 +32,19 @@
 -->
 </style>
 </head>
-<body>
+<body onLoad="javascript:if(document.getElementById('le_formulaire')) if(document.getElementById('le_formulaire').textContent=='') document.getElementById('se_deconnecter').style.display='block';">
 <div id='minipres'>
 	<h1>[(#ENV*{titre})]</h1>
 	<div id='en_travaux'>
-		[(#ENV{message}|propre)]
-		[(#ENV*{login}|!={oui}|?{' ',''})<div style="text-align:right"><a href="./ecrire" class="spip_out"><:login_espace_prive:></a></div>]
+		[(#EVAL{_en_travaux_MESSAGE}|propre)]
+		[(#ENV*{prive}|=={non}|?{' ',''})
+		[(#ENV*{form_login}|=={non}|?{' ',''})<div style="text-align:right"><a href="./ecrire" class="spip_out"><:espace_prive:></a></div>]
+		]
 	</div>
-	[(#ENV*{login}|=={oui}|?{' ',''})<div class="formulaire_spip">#LOGIN_PUBLIC</div>]
+	<div id="se_deconnecter" style="text-align:right; display:none;"><br /><a href="[(#ENV*{prive}|=={oui}|?{'../?action=logout&logout=prive','?action=logout&logout=public'})][(#ENV*{prive}|=={non}|?{'&url=',''})#SELF]" class="spip_out"><:icone_deconnecter:></a></div>
+	[(#ENV*{form_login}|=={oui}|?{' ',''})
+		<div id="le_formulaire" class="formulaire_spip">#LOGIN_PUBLIC</div>
+	]
 </div>
 </body>
 </html>

@@ -454,18 +454,25 @@ add_outil( array(
 ));
 
 add_variable( array(
+	'nom' => 'prive_travaux',
+	'format' => _format_NOMBRE,
+	'radio' => array(0 => 'couteauprive:tous', 1 => 'couteauprive:admins_seuls'),
+	'defaut' => 0,
+	'code:%s' => "define('_en_travaux_PRIVE', %s);\n",
+));
+add_variable( array(
 	'nom' => 'admin_travaux',
 	'format' => _format_NOMBRE,
 	'radio' => array(0 => 'couteauprive:tous', 1 => 'couteauprive:sauf_admin'),
 	'defaut' => 0,
-	'code' => "define('_en_travaux_ADMIN', %s);\n",
+	'code:%s' => "define('_en_travaux_ADMIN', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'message_travaux',
 	'format' => _format_CHAINE,
 	'defaut' => "_T('couteauprive:travaux_prochainement')",
 	'lignes' => 3,
-	'code' => "define('_en_travaux_MESSAGE', %s);\n",
+	'code' => "\$tr_message=%s;\n",
 ));
 add_variable( array(
 	'nom' => 'titre_travaux',
@@ -476,7 +483,7 @@ add_variable( array(
 ));
 add_outil( array(
 	'id' => 'en_travaux',
-	'code:options' => "%%message_travaux%%%%admin_travaux%%%%titre_travaux%%",
+	'code:options' => "%%message_travaux%%%%prive_travaux%%%%admin_travaux%%%%titre_travaux%%",
 	'categorie' => 'admin',
 	'auteur' => "Arnaud Ventre pour l'id&eacute;e originale",
 ));
@@ -1113,12 +1120,14 @@ if(!function_exists('genie_optimiser')) {
 ));
 
 // Ajout des outils personnalises
-if(isset($GLOBALS['mes_outils']))
+if(isset($GLOBALS['mes_outils'])) {
 	foreach($GLOBALS['mes_outils'] as $id=>$outil) {
 		$outil['id'] = $id;
 		if(strlen($outil['nom'])) $outil['nom'] = "<i>$outil[nom]</i>";
 		add_outil($outil);
 	}
+	unset($GLOBALS['mes_outils']);
+}
 
 // Idees d'ajouts :
 // http://archives.rezo.net/spip-core.mbox/
