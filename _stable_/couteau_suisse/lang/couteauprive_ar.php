@@ -146,7 +146,7 @@ _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.'
 
 	// E
 	'effaces' => '&#1605;&#1581;&#1584;&#1608;&#1601;',
-	'en_travaux:description' => '<NEW>Permet d\'afficher un message personalisable pendant une phase de maintenance sur tout le site public.
+	'en_travaux:description' => '<MODIF>Permet d\'afficher un message personalisable pendant une phase de maintenance sur tout le site public.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]]',
 	'en_travaux:nom' => '&#1605;&#1608;&#1602;&#1593; &#1602;&#1610;&#1583; &#1575;&#1604;&#1578;&#1589;&#1605;&#1610;&#1605;',
 	'erreur:description' => '&#1585;&#1602;&#1605; &#1605;&#1578;&#1587;&#1604;&#1587;&#1604; &#1594;&#1610;&#1585; &#1605;&#1608;&#1580;&#1608;&#1583; &#1601;&#1610; &#1578;&#1593;&#1585;&#1610;&#1601; &#1575;&#1604;&#1575;&#1583;&#1575;&#1577;!',

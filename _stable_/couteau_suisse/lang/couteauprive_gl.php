@@ -59,13 +59,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 @puce@ Marcando &laquo;si&raquo;, a apertura dun bloque provocar&aacute; o cerre de todos os outros bloques da p&aacute;xina, co fin de non ter m&aacute;is ca un aberto &aacute; vez.[[%bloc_unique%]]
 ',
 	'blocs:nom' => 'Bloques despregables',
-	'boites_privees:description' => '<MODIF>Todas as funcionalidades abaixo descritas aparecen na parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]]
-[[->%bp_urls_propres%]]
-- {{As revisi&oacute;ns da Navalla Su&iacute;za}} : un cadre sobre a presente p&aacute;xina de configuraci&oacute;n, indicando as &uacute;ltimas modificaci&oacute;ns achegadas ao c&oacute;digo do m&oacute;dulo ([Source->@_CS_RSS_SOURCE@]).
+	'boites_privees:description' => 'Todas as funcionalidades abaixo descritas aparecen aqu&iacute; ou na parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]]
+[[->%bp_tri_auteurs%]]
+- {{As revisi&oacute;ns da Navalla Su&iacute;za}} : un cadro sobre a presente p&aacute;xina de configuraci&oacute;n que indica as &uacute;ltimas modificaci&oacute;ns achegadas ao c&oacute;digo do m&oacute;dulo ([Source->@_CS_RSS_SOURCE@]).
 - {{Os artigos en formato SPIP}} : un cadro repregable suplementario para os seus artigos co fin co fin de co&ntilde;ecer o  c&oacute;digo fonte usado polos seus autores.
-- {{Estado de autores}} : un cadro suplementario en [a p&aacute;xina de autores->./?exec=auteurs] que indica os &uacute;ltimos 10 conectados e as inscrici&oacute;ns non confirmadas. S&oacute; os administradores ven esta informaci&oacute;n.
-- {{Ver os URL propios}} : un cadro despregable para cada obxecto de contido (artigo, secci&oacute;n, autor, ...) que indica o URL propio asociado as&iacute; como os seus alias eventuais. A ferramenta &laquo;&nbsp;[.->type_urls]&nbsp;&raquo; permite a configuraci&oacute;n fina dos URL do web.',
+- {{Estado de autores}} : un cadro suplementario en [p&aacute;xina de autores->./?exec=auteurs] que indica os &uacute;ltimos 10 conectados e as inscrici&oacute;ns non confirmadas. S&oacute; os administradores ven esta informaci&oacute;n.
+- {{Ver os URL propios}} : un cadro despregable para cada obxecto de contido (artigo, secci&oacute;n, autor, ...) que indica o URL propio asociado as&iacute; como os seus alias eventuais. A ferramenta &laquo;&nbsp;[.->type_urls]&nbsp;&raquo; permite a configuraci&oacute;n fina dos URL do web.
+- {{As ordenaci&oacute;ns de autores}} : un cadro despregable para os artigos que cont&eacute;n m&aacute;is dun autor e permite simplemente axustar a orde de presentaci&oacute;n.',
 	'boites_privees:nom' => 'Funcionalidades privadas',
+	'bp_tri_auteurs' => 'As ordenaci&oacute;ns de autores',
 	'bp_urls_propres' => 'Os URL propios',
 
 	// C
@@ -192,7 +194,7 @@ _ Esta utilidade pode ser emparellada con &laquo;&nbsp;[.->sommaire]&nbsp;&raquo
 
 	// E
 	'effaces' => 'Borrados',
-	'en_travaux:description' => 'Permite mostrar unha mensaxe personalizable durante unha fase de mantemento sobre todo o web p&uacute;blico.
+	'en_travaux:description' => '<MODIF>Permite mostrar unha mensaxe personalizable durante unha fase de mantemento sobre todo o web p&uacute;blico.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]]',
 	'en_travaux:nom' => 'Web en obras',
 	'erreur:bt' => '<span style=\\"color:red;\\">Aviso:</span> a barra tipogr&aacute;fica (version @version@) parece antiga.<br />A Navalla Su&iacute;za &eacute;  compatible cunha versi&oacute;n superior ou igual a @mini@.',

@@ -190,7 +190,7 @@ This tool may be combined with "[.->sommaire]".',
 
 	// E
 	'effaces' => 'Deleted',
-	'en_travaux:description' => 'Makes it possible to display a customised message on the public site during maintenance work.
+	'en_travaux:description' => '<MODIF>Makes it possible to display a customised message on the public site during maintenance work.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]]',
 	'en_travaux:nom' => 'Site in maintenance mode',
 	'erreur:bt' => '<span style=\\"color:red;\\">Warning:</span> the typographical bar appears to be an old version (@version@).<br />The Swiss Knife is compatible only with version @mini@ or newer.',

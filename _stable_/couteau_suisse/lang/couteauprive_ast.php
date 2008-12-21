@@ -58,12 +58,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 @puce@ Si marques &laquo;si&raquo; embaxo, l\'apertura d\'un bloque provocar&aacute; que se pesllen toos los dem&aacute;s bloques de la p&aacute;xina, col env&iacute;s de nun tener m&aacute;s que uno solu abiertu a la vez.[[%bloc_unique%]]',
 	'blocs:nom' => 'Bloques Desplegables',
-	'boites_privees:description' => '<MODIF>Toes les caxes descrites embaxo apaecen na parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]]
+	'boites_privees:description' => 'Toes les caxes descrites embaxo apaecen per dayuri na parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Les revisiones de La Navaya Suiza}}: un cuadru na presente p&aacute;xina de configuraci&oacute;n, que indica les caberes modificaciones amest&aacute;es al c&oacute;digu del plugin ([Source->@_CS_RSS_SOURCE@]).
-- {{Los art&iacute;culos en formatu SPIP}}: un cuadru plegable suplementariu pa los art&iacute;culos col env&iacute;s de saber el c&oacute;digu fonte utilizao polos autores.
+- {{Los art&iacute;culos en formatu SPIP}}: un cuadru plegable suplementariu pa los art&iacute;culos, col env&iacute;s de saber el c&oacute;digu fonte utilizao polos autores.
 - {{Estad&iacute;stiques de los autores}}: un cuadru suplementariu na [p&aacute;xina de los autores->./?exec=auteurs] que amuesa los caberos 10 coneutaos y les inscripciones nun confirm&aacute;es. S&oacute;lo los alministradores ven esta informaci&oacute;n.
-- {{Les URLs propies}}: un cuadru desplegable pa cada oxetu de conten&iacute;u (art&iacute;culu, estaya, autor, ...) que indica la URL propia asociada igual que los eventuales nomatos. La ferramienta &laquo;[.->type_urls]&raquo; te permite l\'axuste finu de les URLs del to sitiu.',
+- {{Les URLs propies}}: un cuadru desplegable pa cada oxetu de conten&iacute;u (art&iacute;culu, estaya, autor, ...) que indica la URL propia asociada igual que los eventuales nomatos. La ferramienta &laquo;[.->type_urls]&raquo; te permite l\'axuste finu de les URLs del to sitiu.
+- {{L\'orde d\'autores}}: un cuadru desplegable pa los art&iacute;culos que tengan m&aacute;s d\'un autor y que permite axustar facilmente l\'orde en que s\'amuesen.',
 	'boites_privees:nom' => 'Caxes privaes',
+	'bp_tri_auteurs' => 'Ordenaciones d\'autores',
 	'bp_urls_propres' => 'Les URLs propies',
 
 	// C
@@ -190,7 +192,7 @@ Esta ferramienta puede acoplase con &laquo;[.->sommaire]&raquo;.',
 
 	// E
 	'effaces' => 'Desaniciaos',
-	'en_travaux:description' => 'Permite amosar un mensaxe personalizable demientres una fase de mantenimientu en tou el sitiu p&uacute;blicu.
+	'en_travaux:description' => '<MODIF>Permite amosar un mensaxe personalizable demientres una fase de mantenimientu en tou el sitiu p&uacute;blicu.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]]',
 	'en_travaux:nom' => 'Sitiu n\'obres',
 	'erreur:bt' => '<span style=\\"color:red;\\">Atenci&oacute;n :</span> la barra tipogr&aacute;fica (versi&oacute;n @version@) paez antigua.<br />La Navaya Suiza ye compatible con una versi&oacute;n mayor o igual a @mini@.',
@@ -221,8 +223,8 @@ _ La syntaxe est : &quot;__code__&quot;, o&ugrave; &quot;code&quot; repr&eacute;
 
 Atenci&oacute;n: nos foros, solicitudes, fluxos sindicaos, etc., la xesti&oacute;n del JavaScript ye <b>siempre</b> en mou seguru.[[%radio_filtrer_javascript3%]]',
 	'filtrer_javascript:nom' => 'Xesti&oacute;n del JavaScript',
-	'flock:description' => '<NEW>D&eacute;sactive le syst&egrave;me de verrouillage de fichiers en neutralisant la fonction PHP {flock()}. Certains h&eacute;bergements posent en effet des probl&egrave;mes graves suite &agrave; un syst&egrave;me de fichiers inadapt&eacute; ou &agrave; un manque de synchronisation. N\'activez pas cet outil si votre site fonctionne normalement.',
-	'flock:nom' => '<NEW>Pas de verrouillage de fichiers',
+	'flock:description' => 'Desactiva el sistema de bloqu&eacute;u d\'archivos neutralizando la funci&oacute;n PHP {flock()}. Dellos agospiamientos causen problemes graves por cuenta d\'un sistema d\'archivos inadaut&aacute;u que carez de perda de sincronizaci&oacute;n. Nun actives esta ferramienta si el sitiu funciona normalmente.',
+	'flock:nom' => 'Ensin bloqu&eacute;u d\'archivos',
 	'fonds' => 'Fondos:',
 	'forcer_langue:description' => 'Fuerza el contestu de llingua pa los xuegos de cadarmes multilling&uuml;es que tengan un formulariu o un menu de lling&uuml;es que sepa xestionar la cookie de lling&uuml;es.
 
@@ -237,33 +239,33 @@ Los bloques multi s\'amuesen siempre na llingua pid&iacute;a pol visitante.',
 	'forum_lgrmaxi:nom' => 'Tama&ntilde;u de los foros',
 
 	// G
-	'glossaire:aide' => '<NEW>Un texte sans glossaire : <b>@_CS_SANS_GLOSSAIRE@</b>',
+	'glossaire:aide' => 'Testu ensin glosariu: <b>@_CS_SANS_GLOSSAIRE@</b>',
 	'glossaire:description' => '@puce@ Xesti&oacute;n d’un glosariu internu enllaz&aacute;u con un o m&aacute;s groupes de pallabres-clave. Escribe equ&iacute; el nome de los grupos separt&aacute;ndolos con dos puntos &laquo;:&raquo;. Si se dexa vac&iacute;a la caxa siguiente (o escribiendo "Glossaire"),sedr&aacute; el grupu "Glossaire" el que va utilizase.[[%glossaire_groupes%]]
 
 @puce@ Pa cada pallabra, ties la posibilid&aacute; d\'escoyer el n&uacute;mberu m&aacute;simu d\'enllaces creaos nos testos. Tou valor nulu o negativu implica que toes les pallabres reconoc&iacute;es van tratase. [[%glossaire_limite% par mot-cl&eacute;]]
 
 @puce@ Ufrense dos soluciones pa xenerar el ventanucu autom&aacute;ticu que apaez cuando pases el mur enriba la pallabra. [[%glossaire_js%]]',
-	'glossaire:nom' => '<NEW>Glossaire interne',
-	'glossaire_css' => '<NEW>Solution CSS',
+	'glossaire:nom' => 'Glosariu internu',
+	'glossaire_css' => 'Soluci&oacute;n CSS',
 	'glossaire_js' => 'Soluci&oacute;n JavaScript',
 	'guillemets:description' => 'Camuda autom&aacute;ticamente les comines dereches (") por les comines tipogr&aacute;fiques de la llingua de composici&oacute;n. El camb&eacute;u, tresparente pa l\'usuariu, nun camuda el testu orixinal sinon s&oacute;lo l\'aspeutu final.',
 	'guillemets:nom' => 'Comines tipogr&aacute;fiques',
 
 	// H
 	'help' => '{{Esta p&aacute;xina &uacute;nicamente ye accesible pa los responsables del sitiu.}}<p>Da accesu a les diferentes funciones suplementaries aport&aacute;es pol plugin &laquo;{{La&nbsp;Navaya&nbsp;Suiza}}&raquo;.',
-	'help2' => '<NEW>Version locale : @version@',
-	'help3' => '<NEW><p>Liens de documentation :<br/>&bull; [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
-_ &bull; [Des outils cach&eacute;s|Revenir &agrave; l\'apparence initiale de cette page->@hide@]
-_ &bull; [De tout le plugin|Revenir &agrave; l\'&eacute;tat initial du plugin->@reset@]@install@
+	'help2' => 'Versi&oacute;n local: @version@',
+	'help3' => '<p>Enllaces de documentaci&oacute;n :<br/>• [La&nbsp;Navaya&nbsp;Suiza->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reentamos:
+_ • [De les ferramientes tapec&iacute;es|Tornar a l\'apariencia inicial d\'esta p&aacute;xina->@hide@]
+_ • [De tol plugin|Tornar a l\'est&aacute;u inicial del plugin->@reset@]@install@
 </p>',
 
 	// I
-	'icone_visiter:description' => '<NEW>Remplace l\'image du bouton standard &laquo;&nbsp;Visiter&nbsp;&raquo; (en haut &agrave; droite sur cette page)  par le logo du site, s\'il existe.
+	'icone_visiter:description' => 'Camb&eacute;a la imaxe del bot&oacute;n est&aacute;ndar &laquo;Visitar&raquo; (enriba a la derecha d\'esta p&aacute;xina) pol logo del sitiu, si esiste.
 
-Pour d&eacute;finir ce logo, rendez-vous sur la page &laquo;&nbsp;Configuration du site&nbsp;&raquo; en cliquant sur le bouton &laquo;&nbsp;Configuration&nbsp;&raquo;.',
-	'icone_visiter:nom' => '<NEW>Bouton &laquo;&nbsp;Visiter&nbsp;&raquo;',
+Pa definir esti logo, vete a la p&aacute;xina de &laquo;Configuraci&oacute;n del sitiu&raquo; calcando nel bot&oacute;n &laquo;Configuraci&oacute;n&raquo;.',
+	'icone_visiter:nom' => 'Bot&oacute;n &laquo;Visitar&raquo;',
 	'insert_head:description' => 'Activa autom&aacute;ticamente la baliza [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] en toes les cadarmes, da igual que tengan o non esta baliza ente &lt;head&gt; y &lt;/head&gt;. Gracies a esta opci&oacute;n, los plugins podr&aacute;n enxertar JavaScript (.js) o fueyes d\'estilu (.css).',
-	'insert_head:nom' => '<NEW>Balise #INSERT_HEAD',
+	'insert_head:nom' => 'Baliza #INSERT_HEAD',
 	'insertions:description' => 'ATENCI&Oacute;N: &iexcl;&iexcl;ferramienta en cursu de desendolcu!! [[%insertions%]]',
 	'insertions:nom' => 'Correiciones autom&aacute;tiques',
 	'introduction:description' => 'Esta baliza pa amestar nes cadarmes sirve en xeneral pa la portada o pa les estayes col env&iacute;s de producir un resume de art&iacute;culos, de breves, etc...</p>
@@ -278,16 +280,16 @@ Pour d&eacute;finir ce logo, rendez-vous sur la page &laquo;&nbsp;Configuration 
 	'introduction:nom' => 'Baliza #INTRODUCTION',
 
 	// J
-	'jcorner:description' => '<NEW>&laquo;&nbsp;Jolis Coins&nbsp;&raquo; est un outil permettant de modifier facilement l\'aspect des coins de vos {{cadres color&eacute;s}} en partie publique de votre site. Tout est possible, ou presque !
-_ Voyez le r&eacute;sultat sur cette page : [->http://www.malsup.com/jquery/corner/].
+	'jcorner:description' => '&laquo;Esquines guapes&raquo; ye una ferramienta que permite cambear facilmente l\'aspeutu de les esquines de los {{cuadros coloreaos}} na parte p&uacute;blica del to sitiu. &iexcl;Too ye posible, o cuasique!
+_ Mira el result&aacute;u nesta p&aacute;xina: [->http://www.malsup.com/jquery/corner/].
 
-Listez ci-dessous les objets de votre squelette &agrave; arrondir en utilisant la syntaxe CSS (.class, #id, etc. ). Utilisez le le signe &laquo;&nbsp;=&nbsp;&raquo; pour sp&eacute;cifier la commande jQuery &agrave; utiliser et un double slash (&laquo;&nbsp;//&nbsp;&raquo;) pour les commentaires. En absence du signe &eacute;gal, des coins ronds seront appliqu&eacute;s (&eacute;quivalent &agrave; : <code>.ma_classe = .corner()</code>).[[%jcorner_classes%]]
+Llista embaxo los oxetos de la cadarma a redondiar utilizando la sintaxis CSS (.class, #id, etc. ). Utiliza el signu &laquo;=&raquo; pa especificar la orde jQuery a utilizar y una barra doble (&laquo;//&raquo;) pa los comentarios. Si nun hai signu igual, aplicaranse esquines redondes (equivalente a: <code>.mio_clase = .corner()</code>).[[%jcorner_classes%]]
 
-Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corners}. Le Couteau Suisse peut l\'installer directement si vous cochez la case suivante. [[%jcorner_plugin%]]',
-	'jcorner:nom' => '<NEW>Jolis Coins',
-	'jcorner_plugin' => '<NEW>&laquo;&nbsp;Round Corners plugin&nbsp;&raquo;',
-	'jq_localScroll' => '<NEW>jQuery.LocalScroll ([d&eacute;mo->http://demos.flesler.com/jquery/localScroll/])',
-	'jq_scrollTo' => '<NEW>jQuery.ScrollTo ([d&eacute;mo->http://demos.flesler.com/jquery/scrollTo/])',
+Atenci&oacute;n, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Round Corners}. La Navaya Suiza pue instalalu direutamente si marques el cuadru siguiente. [[%jcorner_plugin%]]',
+	'jcorner:nom' => 'Esquines Guapes',
+	'jcorner_plugin' => '&laquo;plugin Round Corners&raquo;',
+	'jq_localScroll' => 'jQuery.LocalScroll ([demo->http://demos.flesler.com/jquery/localScroll/])',
+	'jq_scrollTo' => 'jQuery.ScrollTo ([demo->http://demos.flesler.com/jquery/scrollTo/])',
 	'js_defaut' => 'Por omisi&oacute;n',
 	'js_jamais' => 'Enxam&aacute;s',
 	'js_toujours' => 'Siempre',
@@ -399,44 +401,48 @@ _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<htm
 	'modifier_vars_0' => 'Camudar esto par&aacute;metros',
 
 	// N
-	'no_IP:description' => '<NEW>D&eacute;sactive le m&eacute;canisme d\'enregistrement automatique des adresses IP des visiteurs de votre site par soucis de confidentialit&eacute; : SPIP ne conservera alors plus aucun num&eacute;ro IP, ni temporairement lors des visites (pour g&eacute;rer les statistiques ou alimenter spip.log), ni dans les forums (responsabilit&eacute;).',
-	'no_IP:nom' => '<NEW>Pas de stockage IP',
+	'no_IP:description' => 'Desactiva el mecanismu de grabaci&oacute;n autom&aacute;tica de les se&ntilde;es IP de los visitantes del sitiu pa mantener la confidencialid&aacute;: SPIP ya nun conservar&aacute; deng&uacute;n n&uacute;mberu IP, nin temporalmente durante les visites (pa remanar les estad&iacute;stiques o alimentar spip.log), nin pa los foros (responsabilid&aacute;).',
+	'no_IP:nom' => 'Ensin guardar la IP',
 	'nouveaux' => 'Nuevos',
 
 	// O
 	'orientation:description' => '<NEW>3 nouveaux crit&egrave;res pour vos squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Id&eacute;al pour le classement des photos en fonction de leur forme.',
 	'orientation:nom' => '<NEW>Orientation des images',
-	'outil_actif' => '<NEW>Outil actif',
-	'outil_activer' => '<NEW>Activer',
-	'outil_activer_le' => '<NEW>Activer l\'outil',
-	'outil_cacher' => '<NEW>Ne plus afficher',
-	'outil_desactiver' => '<NEW>D&eacute;sactiver',
-	'outil_desactiver_le' => '<NEW>D&eacute;sactiver l\'outil',
-	'outil_inactif' => '<NEW>Outil inactif',
-	'outil_intro' => '',
-	'outil_intro_old' => '<NEW>Cette interface est ancienne.<br /><br />Si vous rencontrez des probl&egrave;mes dans l\'utilisation de la <a href=\'./?exec=admin_couteau_suisse\'>nouvelle interface</a>, n\'h&eacute;sitez pas &agrave; nous en faire part sur le forum de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
-	'outil_nb' => '<NEW>@pipe@ : @nb@ outil',
-	'outil_nbs' => '<NEW>@pipe@ : @nb@ outils',
-	'outil_permuter' => '<NEW>Permuter l\'outil : &laquo; @text@ &raquo; ?',
+	'outil_actif' => 'Ferramienta activa',
+	'outil_activer' => 'Activar',
+	'outil_activer_le' => 'Activar la ferramienta',
+	'outil_cacher' => 'Nun amosar m&aacute;s',
+	'outil_desactiver' => 'Desactivar',
+	'outil_desactiver_le' => 'Desactivar la ferramienta',
+	'outil_inactif' => 'Ferramienta inactiva',
+	'outil_intro' => 'Esta p&aacute;xina llista les carauter&iacute;stiques que ufre\'l plugin.<br /><br />Calcando nel nome de les ferramientes d\'embaxo, seleiciones los que vas poder camuda-yos l\'estau con l\'aida del bot&ograve;n central: les ferramientes actives desact&iacute;vense y <i>viceversa</i>. A cada clic, apaez la descripci&oacute;n embaxo de les llistes. Les categor&iacute;es son desplegables y les ferramientes puen tapecese. El doble-clic permite cambear r&aacute;pidamente de ferramienta.<br /><br />Pal primer usu, encami&eacute;ntase activar les ferramientes una a una, por si acasu apaecen incompatibilidaes cola to cadarma, con SPIP o con otros plugins.<br /><br />Nota: la simple carga d\'esta p&aacute;xina recompila dafechu toes les ferramientes de La Navaya Suiza.',
+	'outil_intro_old' => 'Esta interfaz ye antigua.<br /><br />Si alcuentres problemes cola utilizaci&oacute;n de la <a href=\'./?exec=admin_couteau_suisse\'>interfaz nueva</a>, afal&aacute;moste a coment&aacute;noslo nel foru de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
+	'outil_nb' => '@pipe@ : @nb@ ferramienta',
+	'outil_nbs' => '@pipe@ : @nb@ ferramientes',
+	'outil_permuter' => '&iquest;Camudar la ferramienta: &laquo;@text@&raquo;?',
 	'outils_actifs' => 'Ferramientes actives:',
-	'outils_caches' => '<NEW>Outils cach&eacute;s :',
-	'outils_cliquez' => '<NEW>Cliquez sur le nom des outils ci-dessus pour afficher ici leur description.',
-	'outils_inactifs' => '<NEW>Outil inactifs :',
-	'outils_liste' => '<NEW>Liste des outils du Couteau Suisse',
-	'outils_permuter_gras1' => '<NEW>Permuter les outils en gras',
-	'outils_permuter_gras2' => '<NEW>Permuter les @nb@ outils en gras ?',
+	'outils_caches' => 'Ferramientes tapec&iacute;es:',
+	'outils_cliquez' => 'Calca nel nome de les ferramientes d\'embaxo pa amosar equ&iacute; la descripci&oacute;n.',
+	'outils_inactifs' => 'Ferramientes inactives:',
+	'outils_liste' => 'Llista de ferramientes de la Navaya Suiza',
+	'outils_permuter_gras1' => 'Camudar les ferramientes en negrines',
+	'outils_permuter_gras2' => '&iquest;Camudar les @nb@ ferramientes en negrines?',
 	'outils_resetselection' => '<NEW>R&eacute;initialiser la s&eacute;lection',
 	'outils_selectionactifs' => '<NEW>S&eacute;lectionner tous les outils actifs',
 	'outils_selectiontous' => '<NEW>TOUS',
 
 	// P
-	'pack_actuel' => '<NEW>Pack @date@',
-	'pack_actuel_avert' => '<NEW>Attention, les surcharges sur les define() ou les globales ne sont pas sp&eacute;cifi&eacute;es ici',
-	'pack_actuel_titre' => '<NEW>PACK ACTUEL DE CONFIGURATION DU COUTEAU SUISSE',
-	'pack_alt' => '<NEW>Voir les param&egrave;tres de configuration en cours',
-	'pack_descrip' => '',
-	'pack_du' => '<NEW>&bull; du pack @pack@',
-	'pack_installe' => '<NEW>Mise en place d\'un pack de configuration',
+	'pack_actuel' => 'Paquete @date@',
+	'pack_actuel_avert' => 'Atenci&oacute;n, les sobrecargues nos define() o les globales nun se conse&ntilde;en equ&iacute;',
+	'pack_actuel_titre' => 'PAQUETE DE CONFIGURACI&Oacute;N ACTUAL DE LA NAVAYA SUIZA',
+	'pack_alt' => 'Ver los par&aacute;metros de configuraci&oacute;n en cursu',
+	'pack_descrip' => 'El &laquo;Paquete de configuraci&oacute;n actual&raquo; axunta el conxuntu de par&aacute;metros de configuraci&oacute;n en cursu de La Navaya Suiza: l\'activaci&oacute;n de les ferramientes y el valor de les variables, si ye\'l casu.
+
+Si los permisos d\'escritura lo autoricen, el c&oacute;digu PHP d\'embaxo podr&aacute; amestase nel archivu {{/config/mes_options.php}} apaecer&aacute; nesta p&aacute;xina un enllaz pal reaniciu del paquete &laquo;{@pack@}&raquo;. Y ye dafechu posible camuda-y el nome.
+
+Si reanicies el plugin calcando nun paquete, la Navaya Suiza reconfigurarase autom&aacute;ticamente en funci&oacute;n de los par&aacute;metros predefinios nesti paquete.',
+	'pack_du' => '• del paquete @pack@',
+	'pack_installe' => 'Afitamientu d\'un paquete de configuraci&oacute;n',
 	'pack_installer' => '<NEW>&Ecirc;tes-vous s&ucirc;r de vouloir r&eacute;initialiser le Couteau Suisse et installer le pack &laquo;&nbsp;@pack@&nbsp;&raquo; ?',
 	'pack_nb_plrs' => '<NEW>Il y a actuellement @nb@ &laquo;&nbsp;packs de configuration&nbsp;&raquo; disponibles.',
 	'pack_nb_un' => '<NEW>Il y a actuellement un &laquo;&nbsp;pack de configuration&nbsp;&raquo; disponible',
