@@ -98,6 +98,12 @@ function description_outil_liens_callback($matches) {
 		."\" id=\"href_$matches[1]\" onclick=\"javascript:return cs_href_click(this);\">$nom</a>";
 }
 
+function cs_input_variable_callback($matches) {
+	$a = " valeur_{$matches[1]}_";
+	$tmp = str_replace('/',$a, $matches[3]);
+	return "<div class='groupe_{$matches[1]} $a$tmp'>";
+}
+
 // renvoie la description de $outil_ : toutes les %variables% ont ete remplacees par le code adequat
 function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	global $outils, $cs_variables, $metas_vars;
@@ -125,7 +131,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 
 	// recherche des blocs <variable></variable> eventuels associes pour du masquage/demasquage
 	foreach($cs_input_variable as $v) {
-		$descrip = str_replace("</$v>", '</div>', preg_replace(",<$v\s+valeur=(['\"])(.*?)\\1\s*>,", "<div class='groupe_{$v} valeur_{$v}_$2'>", $descrip));
+		$descrip = str_replace("</$v>", '</div>', preg_replace_callback(",<($v)\s+valeur=(['\"])(.*?)\\2\s*>,", 'cs_input_variable_callback', $descrip));
 	}
 	unset($cs_input_variable);
 	// remplacement des variables de format : %variable%
