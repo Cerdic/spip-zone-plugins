@@ -1,4 +1,4 @@
-<div class="formulaire_panier">
+<div id="formulaire_panier">
 	[(#MODELE{chemin_panier}{etape=0})]
 	<B_LePanier>
 		<table class="panier" summary="panier du client" border="0" cellpadding="0" cellspacing="0">
@@ -23,14 +23,14 @@
 	</BOUCLE_LePanier>
                 <tr class="titre_panier">
                 <th>Total</th>
-                <th>#TOTAL_PANIER_TVAC&nbsp;&euro; TVAC<br /><small>#TOTAL_PANIER_HTVA&nbsp;&euro; HTVA</small></td>
+                <th>#TOTAL_PANIER_TVAC&nbsp;&euro; TTC<br /><small>#TOTAL_PANIER_HTVA&nbsp;&euro; HTVA</small></td>
                 <th></th>
             </tr>
          </tbody>
 		</table>
 		<hr />
-			<a href="?page=panier_ajax" class="nyroModal" ><:echoppe:editer:></a>
-			<form action="#SELF" method="post">
+			<span class="bouton_edit"><a href="?page=panier_ajax" params="lightwindow_width=680,lightwindow_height=400" class="lightwindow"><:echoppe:editer:></a></span>
+			<form action="#SELF" method="post" id="form_valider_panier">
 				<input type="hidden" name="valider_panier" value="oui" />
 				<input type="submit" value="<:echoppe:valider_mon_panier:>" class="valider"/>
 			</form>

@@ -63,6 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'editer_categorie' => '&Eacute;diter la cat&eacute;gorie',
 'editer_version'=>'&Eacute;diter la version',
 'editer_panier'=>'&Eacute;diter mon panier',
+'editer_le_panier'=>'Panier',
 'edition_d_un_depot'=>'&Eacute;dition d\'un d&eacute;pot',
 'edition_d_un_prestataire' => '&Eacute;dition d\'un prestataire',
 'edition_de' => '&Eacute;dition de',
@@ -75,6 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'email_du_depot' => 'E-Mail',
 'email_pour_confirmation_panier' => 'Email des destinataires qui recevront les paniers valid&eacute;s',
 'en_stock' => 'en stock',
+'enregistrement_et_connexion' => 'Coordonn&eacute;es',
 'erreur_de_validation_panier_vous_devez_etre_loge' => 'Erreur de validation. Vous devez &ecirc;tre enregistr&eacute; pour valider votre panier.',
 'etat_des_stocks' => '&Eacute;tat des stocks',
 'etat_du_produit' => '&Eacute;tat du produit',
@@ -87,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'fichier_de_definition' => 'Fichier de d&eacute;finition',
 'fichier_introuvable' => 'Le fichier est introuvable',
 'fichier_pas_une_image' => 'Le fichier n\'est pas une image',
+'fin' => 'Validation commande',
 
 // G
 'gerer_echoppe' => 'Echoppe',
@@ -162,6 +165,7 @@ L\'équipe de ',
 'options_du_produit' => 'Options',
 
 // P
+'paiement' => 'Paiement',
 'panier' => 'Panier',
 'paniers_en_attente' => 'Paniers temporaires',
 'paniers_paye' => 'Paniers pay&eacute;s',
@@ -253,7 +257,7 @@ L\'équipe de ',
 
 // V
 'valider_le_panier' => 'Valider le panier',
-'valider_mon_panier' => 'Valider mon panier',
+'valider_mon_panier' => 'Valider mon panier &raquo;',
 'version_du_prestataire' => 'Vesrion du prestataire',
 'Ville_du_beneficiaire' => 'Code postal du b&eacute;n&eacute;ficiaire',
 'ville_du_depot' => 'Ville',

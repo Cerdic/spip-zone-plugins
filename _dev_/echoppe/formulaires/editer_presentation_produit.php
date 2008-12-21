@@ -21,8 +21,8 @@ function formulaires_editer_presentation_produit_charger_dist(){
 		$valeurs['id_trad'] = _request('id_trad');
 		if ($valeurs['id_trad'] > 0){
 			$valeurs['ref_produit'] = _request('ref_produit');
-			$valeurs['id_categorie'] = _request('id_categorie');
 		}
+		$valeurs['id_categorie'] = _request('id_categorie');
 	}
 
 	return $valeurs;

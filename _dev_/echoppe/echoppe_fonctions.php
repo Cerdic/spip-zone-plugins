@@ -49,14 +49,20 @@ function zero_si_vide($_var){
 	}
 	return $_var;
 }
-function calculer_url_achat($_var){
+
+function calculer_url_achat($_var,$quantite,$redirect){
 	if (isset($_var)){
 		$_page = lire_config('echoppe/squelette_panier','echoppe_panier');
-		$url_result = generer_url_public($_page,'id_produit='.$_var);
-		$url = generer_url_action('echoppe_ajouter_panier','id_produit='.$_var.'&quantite=1&achat_rapide=non');
+		$args_url = 'id_produit='.$_var;
+		$args_url .= "&quantite=".$quantite;
+		if ($redirect){
+			$args_url .= "&redirect=".$redirect;
+		}else{
+			$args_url .= "&redirect=spip.php?".$_SERVER["QUERY_STRING"];
+		}
+		$url = generer_url_action('echoppe_ajouter_panier',$args_url,"&");
 		return $url;
 	}
-	
 }
 function calculer_url_achat_rapide($_var){
 	if (isset($_var)){
@@ -117,8 +123,12 @@ function balise_LONGUEUR($p){
 	return $p;
 }
 function balise_URL_ACHAT($p){
+	$quantite = interprete_argument_balise(1,$p);
+	$redirect = interprete_argument_balise(2,$p);
+	if (!$quantite) $quantite = "1";
+	if (!$redirect) $redirect = "0";
 	$_id_produit = champ_sql('id_produit', $p);
-	$p->code = "calculer_url_achat($_id_produit)";
+	$p->code = "calculer_url_achat($_id_produit,$quantite,$redirect)";
 	return $p;
 }
 function balise_URL_ACHAT_RAPIDE($p){

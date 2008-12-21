@@ -16,15 +16,16 @@ function balise_TOTAL_ITEM_PANIER_stat ($args, $filtres) {
 // http://doc.spip.org/@balise_URL_LOGOUT_dyn
 function balise_TOTAL_ITEM_PANIER_dyn($cible) {
 
-	$_sql = "SELECT id_produit FROM spip_echoppe_paniers WHERE token_panier = '".session_get('echoppe_token_panier')."';";
-	//echo $_sql;
-	$_res = sql_query($_sql);
-	//var_dump($_res);
-	$_quantite = sql_count($_res);
-	//var_dump($_quantite);
+	$select_produit = sql_select('quantite','spip_echoppe_paniers',"token_panier = '".session_get('echoppe_token_panier')."'");
+	
+	$_quantite = 0;
+	
+	while($quantite = sql_fetch($select_produit)){
+		$_quantite = $_quantite + $quantite['quantite'];
+	}
+	
 	zero_si_vide($_quantite);
-	//var_dump($_quantite);
-	//$_quantite = "Bliiiii";
+    
     return $_quantite;
 }
 ?>
