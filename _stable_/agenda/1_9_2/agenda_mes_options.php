@@ -6,6 +6,15 @@ if (!defined('_DIR_PLUGIN_AGENDA')){
 }
 include_spip('base/agenda_evenements');
 
+// securiser l'agenda herite de la dist/
+
+if (isset($_REQUEST['partie_cal']) 
+  AND $_REQUEST['partie_cal'] !== htmlentities($_REQUEST['partie_cal']))
+	die("No thanks"); 
+if (isset($_REQUEST['echelle']) 
+  AND $_REQUEST['echelle'] !== htmlentities($_REQUEST['echelle'])) 
+	die("No thanks"); 
+
 //Pour 1.9.3: permet d'utiliser les criteres racine, meme_parent, id_parent
 $exceptions_des_tables['evenements']['id_parent']='id_evenement_source';
 
