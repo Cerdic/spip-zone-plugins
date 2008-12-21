@@ -146,6 +146,7 @@
 	//-- Table PRETS ------------------------------------------
 	$spip_asso_prets = array(
 		"id_pret"				=> "bigint(20) NOT NULL auto_increment",
+		"id_ressource"			=> "varchar(20) NOT NULL",
 		"date_sortie" 			=> "date NOT NULL default '0000-00-00'",
 		"duree"					=> "int(11) NOT NULL default '0'",
 		"date_retour" 			=> "date NOT NULL default '0000-00-00'",
