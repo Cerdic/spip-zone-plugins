@@ -41,7 +41,7 @@ function description_outil_une_variable($index, $outil, $variable, $label, &$ok_
 		}
 		$ok_actif .= '</ul>'._VAR_OUTIL;
 		$code = _T($radios[$valeur]);
-		$ok_inactif = "<input type='hidden' value=\"$code\" name=\"$variable\" class=\"cs_hidden_checkbox\" />"
+		$ok_inactif = "<input type=\"hidden\" name=\"$variable\" class=\"cs_hidden_checkbox\" value=\"$code\" />"
 			. $label . (strlen($valeur)?ucfirst($code):'&nbsp;-');
 	}
 	// ... ou une case a cocher
