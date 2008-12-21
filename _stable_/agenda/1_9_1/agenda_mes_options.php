@@ -3,6 +3,13 @@ $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FI
 define('_DIR_PLUGIN_AGENDA',(_DIR_PLUGINS.end($p)));
 include_spip('base/agenda_evenements');
 
+if (isset($_REQUEST['partie_cal'])
+  AND $_REQUEST['partie_cal'] !== htmlentities($_REQUEST['partie_cal']))
+        die("No thanks");
+if (isset($_REQUEST['echelle'])
+  AND $_REQUEST['echelle'] !== htmlentities($_REQUEST['echelle']))
+        die("No thanks");
+
 function cron_agenda_nettoyer_base($t){
 	# les evenements lies a un article inexistant
 	$res = spip_query("SELECT evenements.id_evenement,evenements.id_article
