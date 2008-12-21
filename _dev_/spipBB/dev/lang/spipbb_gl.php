@@ -347,6 +347,7 @@ _ Un destacado sit&uacute;ase por baixo dos anuncios, antes das mensaxes ordinar
 	'pagine_page_' => ' .. p&aacute;xina ',
 	'pagine_post_' => 'resposta',
 	'pagine_post_s' => 'respostas',
+	'pagine_sujet_' => 'asunto',
 	'pagine_sujet_s' => ' asuntos',
 	'par_' => 'por',
 	'plugin_auteur' => 'O equipo SpipBB : [ver a lista de contribuidores en Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
