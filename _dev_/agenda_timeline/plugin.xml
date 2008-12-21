@@ -7,7 +7,7 @@
 	[kent1.info->http://www.kent1.info]
 _ &#169; 2006 - Licence GPL
 	</auteur>
-	<lien>http://kent1.sklunk.net/spip.php?article70</lien>
+	<lien>[->http://kent1.sklunk.net/spip.php?article70] , [->http://www.spip-contrib.net/article1396.html]</lien>
 	<version>
 	0.1
 	</version>
@@ -17,7 +17,6 @@ _ &#169; 2006 - Licence GPL
 	<description>
 	Timeline pour l'Agenda Evenementiel
 _ {{Ce plugin necessite le plugin Widget Calendar et le plugin Agenda}}</description>
-	<lien>http://www.spip-contrib.net/article1396.html</lien>
 	<prefix>Agendatimeline</prefix>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id='cfg' version='[1.0.6;]' />
