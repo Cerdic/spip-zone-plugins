@@ -36,7 +36,7 @@ add_variable( array(
 	'code' => "\$GLOBALS['type_urls']=%s;\n",
 ));
 
-# Utilise par 'page' (toutes les URLs) et 'propre' 'propre2' et 'arbo' pour les objets non reconnus
+# Utilise par 'page' (toutes les URLs) et 'propre' 'propre2' 'libres' et 'arbo' pour les objets non reconnus
 # fonction d'appel dans inc/utils.php : get_spip_script()
 
 add_variable( array(
@@ -160,7 +160,14 @@ add_variable( array(
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),				
 	'defaut' => 1,
-	'code:!%s' => "define('_MARQUEUR_URL', false);"
+	'code:!%s' => "define('_MARQUEUR_URL', false);",
+));
+
+add_variable( array(
+	'nom' => 'urls_avec_id',
+	'format' => _format_NOMBRE,
+	'radio' => array(1 => 'item_oui', 0 => 'item_non'),				
+	'defaut' => 0,
 ));
 
 add_outil( array(
@@ -176,6 +183,9 @@ switch(\$GLOBALS['type_urls']) {
 	case 'propres-qs':%%terminaison_urls_propres_qs%%break;
 }",
 	'categorie' => 'admin',
+	'description' => '<:type_urls::>'
+		.(defined('_SPIP19300')?'<radio_type_urls3 valeur="propres/propres2/libres/arbo/propres-qs"><:type_urls:1:></radio_type_urls3>':''),
+	'pipelinecode:creer_chaine_url' => "if(%%urls_avec_id%%) {\$flux['data']=\$flux['data'].','.\$flux['objet']['id_objet'];}",
 ));
 
 ?>

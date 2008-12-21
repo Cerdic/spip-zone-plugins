@@ -190,6 +190,17 @@ function couteau_suisse_post_edition($flux){
 	return $flux;
 }
 
+/**********
+ * DIVERS *
+ *********/
+
+function couteau_suisse_creer_chaine_url($flux){
+	global $cs_metas_pipelines;
+	if (isset($cs_metas_pipelines['creer_chaine_url']))
+		eval($cs_metas_pipelines['creer_chaine_url']);
+	return $flux;
+}
+
 // le contenu du sous-menu est gere par les lames elles-memes
 function couteau_suisse_bt_toolbox($params) {
 	global $cs_metas_pipelines;
