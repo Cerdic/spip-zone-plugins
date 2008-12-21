@@ -150,7 +150,6 @@ function compat_cfg_defs_dist() {
 					$groupby, 
 					$orderby, 
 					$limit, 
-					$limit, 
 					$sousrequete = \'\', 
 					$having,
 					$table = \'\', 
