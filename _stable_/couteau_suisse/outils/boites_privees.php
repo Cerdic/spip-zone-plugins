@@ -13,13 +13,14 @@ if(!function_exists('block_parfois_visible')) {
 }
 // compatibilite SPIP SQL < 2.0
 if(!defined('_SPIP19300')) {
-	if(!function_exists('sql_select')) { function sql_select($s,$f,$w='',$g='',$o='',$l='') {
-		return spip_query("SELECT $s FROM $f".($w?" WHERE $w":'').($g?" GROUP BY $g":'').($o?" ORDER BY $o":'').($l?" LIMIT $l":''));
-	} }
+	include_spip('base/abstract_sql');
+	if(!function_exists('sql_select')) { function sql_select($s=array(),$f=array(),$w=array(),$g=array(),$o=array(),$l='',$h=array(),$sv='') {
+		return spip_abstract_select($s,$f,$w,$g,$o,$l,'',$h,'','',$sv); } }
 	if(!function_exists('sql_fetch')) { function sql_fetch($s) { return spip_fetch_array($s); } }
-	if(!function_exists('sql_update')) { function sql_update($t, $e, $w='') {
-		array_walk($e, create_function('&$elem','$elem = is_numeric($elem)?$elem:_q($elem);'));
-		return spip_query("UPDATE $t SET ".join(',',$e).($w?" WHERE $w":''));
+	if(!function_exists('sql_update')) { function sql_update($t, $e, $w=array()) {
+		if(!is_array($t))$t=array($t); if(!is_array($e))$e=array($e); if(!is_array($w))$w=array($w);
+		$q=$r =''; foreach($e as $i=>$v) $e[$i] = "$i=$v";
+		return spip_query("UPDATE ".join(',',$t)." SET ".join(',',$e).(empty($w)?'':" WHERE ".join(' AND ',$w)));
 	} }
 }
 
@@ -109,7 +110,7 @@ function cs_listeulli($res) {
 }
 
 function cs_derniers_connectes(){ 
-	$query = sql_select('id_auteur,nom,statut,en_ligne', 'spip_auteurs', '', '', 'en_ligne DESC', '10'); 
+	$query = sql_select('id_auteur,nom,statut,en_ligne', 'spip_auteurs', '', '', array('en_ligne DESC'), '10'); 
 	$res = array(); 
     while ($row = sql_fetch($query)) $res[]=_T('couteau:stats_auteur', array(
 		'icon' => '<a href="'.generer_url_ecrire("auteurs","statut=" . $row['statut']).'">' . bonhomme_statut($row) . '</a>',
@@ -120,7 +121,7 @@ function cs_derniers_connectes(){
 } 
 
 function cs_non_confirmes(){ 
-	$query = sql_select('id_auteur,nom,maj', 'spip_auteurs', "statut='nouveau'", '', 'maj DESC'); 
+	$query = sql_select('id_auteur,nom,maj', 'spip_auteurs', "statut='nouveau'", '', array('maj DESC')); 
 	$res = array(); 
     while ($row = sql_fetch($query)) $res[]=_T('couteau:stats_auteur', array(
 		'icon' => http_img_pack("aide.gif", '', '', _T('couteau:attente_confirmation')),
