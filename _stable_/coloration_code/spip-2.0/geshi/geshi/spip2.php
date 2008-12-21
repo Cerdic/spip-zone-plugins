@@ -44,8 +44,10 @@
  *
  ************************************************************************************/
 
-@define('REG_BOUCLE','(&lt;\/?\/?B(OUCLE)?[a-z0-9_]*)(\([^)]*\))?(.*)?(&gt;)');
+@define('REG_NOM_BOUCLE', '[a-z0-9_]*');
+@define('REG_BOUCLE','(&lt;\/?\/?B(OUCLE)?' . REG_NOM_BOUCLE . ')(\([^)]*\))?(.*)?(&gt;)');
 @define('REG_INCLURE','(&lt;\/?\/?INCLU(D|R)E)(\([^)]*\))?(.*)?(&gt;)');
+@define('REG_BALISE','(\#)(' . REG_NOM_BOUCLE . ':)?([A-Z0-9_]*)');
 
 $language_data = array (
 	'LANG_NAME' => 'XML',
@@ -84,7 +86,8 @@ $language_data = array (
 
             ),
 		'REGEXPS' => array(
-			0 => 'color: #CA5200;', // balise
+			0 => 'color: #CA5200;', // balise (#nom:TITRE)
+			1 => 'color: #e72;', // balise (#nom:TITRE)
 
 			10 => 'color: #527EE0;', // tables boucle
             11 => 'color: #222;', // debut boucle
@@ -112,13 +115,21 @@ $language_data = array (
 		),
 
 	'REGEXPS' => array(
-		// Balise
+		// Balise (#nom:TITRE)
 		0 => array(
-			GESHI_SEARCH => '(\#[a-z0-9_]*)',
-			GESHI_REPLACE => '\\1',
+			GESHI_SEARCH => REG_BALISE,
+			GESHI_REPLACE => '\\1\\2\\3',
 			GESHI_MODIFIERS => 'i',
 			GESHI_BEFORE => '',
 			GESHI_AFTER => ''
+			),
+		// Balise (nom:)
+		1 => array(
+			GESHI_SEARCH => REG_BALISE,
+			GESHI_REPLACE => '\\2',
+			GESHI_MODIFIERS => 'i',
+			GESHI_BEFORE => '\\1',
+			GESHI_AFTER => '\\3'
 			),
 
 		// table de la boucle
