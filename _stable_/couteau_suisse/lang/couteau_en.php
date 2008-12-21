@@ -73,6 +73,9 @@ Compatibility: SPIP 1.9x and v2.0',
 	'texte_formatspip' => 'ORIGINAL TEXT IN SPIP FORMAT',
 	'textes_formatspip' => 'ORIGINAL TEXTS IN SPIP FORMAT',
 	'titre' => 'Swiss Knife',
+	'tri_auteurs' => '<NEW>ORDRE DES AUTEURS',
+	'tri_descendre' => '<NEW>Descendre cet auteur',
+	'tri_monter' => '<NEW>Monter cet auteur',
 
 	// U
 	'urls_propres_erreur' => 'This format does not take into account the URLs listed below own',

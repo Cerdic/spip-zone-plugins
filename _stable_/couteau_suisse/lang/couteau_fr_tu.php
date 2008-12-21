@@ -73,6 +73,9 @@ Compatibilit&eacute; : SPIP v1.9x et v2.0',
 	'texte_formatspip' => 'TEXTE ORIGINAL AU FORMAT SPIP',
 	'textes_formatspip' => 'TEXTES ORIGINAUX AU FORMAT SPIP',
 	'titre' => 'Le Couteau Suisse',
+	'tri_auteurs' => 'ORDRE DES AUTEURS',
+	'tri_descendre' => 'Descendre cet auteur',
+	'tri_monter' => 'Monter cet auteur',
 
 	// U
 	'urls_propres_erreur' => 'Ce format ne prend pas compte les URLs propres list&eacute;es ci-dessous.',

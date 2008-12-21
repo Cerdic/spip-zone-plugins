@@ -73,6 +73,9 @@ Compatibilidade : SPIP todas as versi&oacute;ns 1.9x e v2.0',
 	'texte_formatspip' => 'TEXTO ORIXINAL EN FORMATO SPIP',
 	'textes_formatspip' => 'TEXTOS ORIXINAIS EN FORMATO SPIP',
 	'titre' => 'A navalla su&iacute;za',
+	'tri_auteurs' => 'ORDE DE AUTORES',
+	'tri_descendre' => 'Baixar este autor',
+	'tri_monter' => 'Montar este autor',
 
 	// U
 	'urls_propres_erreur' => 'Este formato non toma en conta os URL propios listados a seguir.',

@@ -73,6 +73,9 @@ Compatibilid&aacute;: SPIP v1.9x y v2.0',
 	'texte_formatspip' => 'TESTU ORIXINAL EN FORMATU SPIP',
 	'textes_formatspip' => 'TESTOS ORIXINALES EN FORMATU SPIP',
 	'titre' => 'La Navaya Suiza',
+	'tri_auteurs' => 'ORDE DE LOS AUTORES',
+	'tri_descendre' => 'Baxar esti autor',
+	'tri_monter' => 'Xubir esti autor',
 
 	// U
 	'urls_propres_erreur' => 'Esti formatu nun tien en cuenta les URLs propies llist&aacute;es embaxo.',

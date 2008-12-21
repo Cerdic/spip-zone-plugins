@@ -73,6 +73,9 @@ Compatibilitat: SPIP v1.9x i v2.0',
 	'texte_formatspip' => 'TEXT ORIGINAL EN FORMAT SPIP',
 	'textes_formatspip' => 'TEXTOS ORIGINALS EN FORMAT SPIP',
 	'titre' => 'El Ganivet Su&iacute;s',
+	'tri_auteurs' => 'ORDRE DELS AUTORS',
+	'tri_descendre' => 'Baixar aquest autor',
+	'tri_monter' => 'Pujar aquest autors',
 
 	// U
 	'urls_propres_erreur' => 'Aquest format no t&eacute; en compte els URLs propis llistats m&eacute;s avall. ',

@@ -73,6 +73,9 @@ De verenigbaarheid: SPIP iedereen betaalden 1.9x en v2.0',
 	'texte_formatspip' => 'ORIGINELE TEKST AAN HET SPIP FORMAAT',
 	'textes_formatspip' => 'ORIGINELE TEKSTEN AAN HET SPIP FORMAAT',
 	'titre' => 'Het Zwitserland Mes',
+	'tri_auteurs' => 'ORDE VAN DE AUTEURS',
+	'tri_descendre' => 'Deze auteur naar beneden gaan',
+	'tri_monter' => 'Deze auteur stijgen',
 
 	// U
 	'urls_propres_erreur' => 'Dit formaat neemt geen rekening van URL eigen hieronder op een lijst gezet.',
