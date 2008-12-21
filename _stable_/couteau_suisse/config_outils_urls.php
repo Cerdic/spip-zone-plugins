@@ -85,7 +85,7 @@ add_variable( array(
 	'format' => _format_NOMBRE,
 	'radio' => array(0 => 'item_oui', 1 => 'item_non'),				
 	'defaut' => 1,
-	'code:!%s' => "\n\$GLOBALS['url_arbo_types']=array('rubrique'=>'rubrique','article'=>'article','breve'=>'breve','mot'=>'mot','auteur'=>'auteur','site'=>'site');"
+	'code:%s' => "\n\$GLOBALS['url_arbo_types']=array('rubrique'=>'','article'=>'','breve'=>'','mot'=>'','auteur'=>'','site'=>'');",
 ));
 add_variable( array(
 	'nom' => 'url_arbo_sep_id',
