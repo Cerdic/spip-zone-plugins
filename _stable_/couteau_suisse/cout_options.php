@@ -16,8 +16,11 @@ $metas_outils = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['m
 $metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
 
 // constantes de compatibilite
-if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) @define('_SPIP19300', 1);
-if (version_compare($GLOBALS['spip_version_code'],'1.9200','>=')) @define('_SPIP19200', 1);
+if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) {	
+	@define('_SPIP19300', 1); @define('_SPIP19200', 1);
+	if (version_compare($GLOBALS['spip_version_branche'],'2.1.0','>=')) @define('_SPIP20100', 1);
+}
+elseif (version_compare($GLOBALS['spip_version_code'],'1.9200','>=')) @define('_SPIP19200', 1);
 else @define('_SPIP19100', 1);
 // chemin du fichier de fonctions
 define('_COUT_FONCTIONS_PHP', find_in_path('cout_fonctions.php'));
