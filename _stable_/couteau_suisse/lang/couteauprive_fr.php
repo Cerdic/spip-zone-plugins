@@ -652,7 +652,7 @@ Choisissez ici de mettre en exposant certains raccourcis suppl&eacute;mentaires,
 	'urls_type_objet' => 'Objet&nbsp;:',
 	'urls_url_calculee' => 'URL publique &laquo;&nbsp;@type@&nbsp;&raquo;&nbsp;:',
 	'urls_url_objet' => 'URL &laquo;&nbsp;propres&nbsp;&raquo; enregistr&eacute;e&nbsp;:',
-	'urls_valeur_vide' => '(Une valeur vide entraine la suppression de l\'URL)',
+	'urls_valeur_vide' => '(Une valeur vide entraine le recalcul de l\'URL)',
 
 	// V
 	'validez_page' => 'Pour acc&eacute;der aux modifications :',
