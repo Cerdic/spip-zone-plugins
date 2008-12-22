@@ -1,5 +1,9 @@
 <div class="menu logo" id="image-haut">
-	
+	<ul>
+	<BOUCLE_documents(DOCUMENTS){extension IN jpg,JPG}{descriptif==^diapo}{0,4}>
+	<li>[(#FICHIER|image_reduire{200,0}|image_recadre{200,150,center})]</li>
+	</BOUCLE_documents>
+	</ul>
 </div>
 <div class="menu recherche">
 	<h2><:info_rechercher:></h2>
@@ -14,8 +18,10 @@
 	on l'affiche si son parent est expose ou est la racine du site. ]
 
 [(#REM) exclure less rubriques du menu principal ]
-<BOUCLE_rubriquesmenuhaut(RUBRIQUES){titre_mot=menu_haut} {doublons}>
-</BOUCLE_rubriquesmenuhaut>
+<BOUCLE_testrubriquesmenuhaut(RUBRIQUES){titre_mot=menu_haut} {doublons}>
+</BOUCLE_testrubriquesmenuhaut>
+<BOUCLE_testrubriquesconferences(RUBRIQUES){titre_mot=conferences} {doublons}>
+</BOUCLE_testrubriquesconferences>
 
 <B_rubriques>
 <div class="menu rubriques">
@@ -47,5 +53,12 @@
 	</ul>
 </div>
 </B_rubriques>
+
+<BOUCLE_rubriquesconferences(RUBRIQUES){titre_mot=conferences}>
+<div class="menu multimedia">
+	<h2>[(#TITRE)] <a href="#URL_RUBRIQUE">[<:pmb:en_savoir_plus:>]</a></h2>
+	[(#MODELE{playliste}{site}{ajax})]
+</div>
+</BOUCLE_rubriquesconferences>
 
 
