@@ -1,5 +1,5 @@
 <plugin>
-	<nom>Association 2.0</nom>
+	<nom>Association_2</nom>
 	<auteur>												<!-- Auteur du plugin -->
 	Bernard Blazin - Fran&ccedil;ois de Montlivault 
 	</auteur>
@@ -15,7 +15,7 @@ _ Ce plugin n&eacute;cessite l'installation des plugin cfg et Inscription2
          [Documentation->http://www.spip-contrib.net/Plugin-Gestion-d-associations]
 	    [Configuration->.?exec=cfg&amp;cfg=association]
     </lien>
-    <icon>annonce.gif</icon>
+    <icon>img_pack/annonce.gif</icon>
 
     <fonctions>association_fonctions.php</fonctions>  <!-- fichier charge a chaque recalul de page (espace public) -->
 	<!--<options>association_options.php</options>-->		 <!-- fichier charge a chaque hit -->
@@ -33,6 +33,7 @@ _ Ce plugin n&eacute;cessite l'installation des plugin cfg et Inscription2
 		<inclure>inc_association.php</inclure>
 	</pipeline>
 
+	
 	<pipeline>
 		<nom>I2_cfg_form</nom>
 		<action>I2_cfg_form</action>		
@@ -45,7 +46,6 @@ _ Ce plugin n&eacute;cessite l'installation des plugin cfg et Inscription2
 		<inclure>association_fonctions.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[1.9.0;]" />
-	<utilise id="cfg" version="[1.0;]" />
-	<utilise id="Inscription2" version="[0.1;]" />
+	<necessite id="cfg" version="[1.10.1;]" />
+	<necessite id="SPIP" version="[2.0.0;]" />
 </plugin>
