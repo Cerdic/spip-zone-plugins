@@ -48,6 +48,8 @@
 @define('REG_BOUCLE','(&lt;\/?\/?B(OUCLE)?' . REG_NOM_BOUCLE . ')(\([^)]*\))?(.*)?(&gt;)');
 @define('REG_INCLURE','(&lt;\/?\/?INCLU(D|R)E)(\([^)]*\))?(.*)?(&gt;)');
 @define('REG_BALISE','(\#)(' . REG_NOM_BOUCLE . ':)?([A-Z0-9_]*)');
+@define('REG_NOM_FILTRE', '(<PIPE>[a-zA-Z_][a-zA-Z0-9_]*(::[a-zA-Z0-9_]*))');
+
 
 $language_data = array (
 	'LANG_NAME' => 'XML',
@@ -227,7 +229,7 @@ $language_data = array (
 						
 		// filtre
 		50 => array(
-			GESHI_SEARCH => '(<PIPE>[a-zA-Z_][a-zA-Z0-9_]*)',
+			GESHI_SEARCH => REG_NOM_FILTRE,
 			GESHI_REPLACE => '\\1',
 			GESHI_MODIFIERS => 'i',
 			GESHI_BEFORE => '',
