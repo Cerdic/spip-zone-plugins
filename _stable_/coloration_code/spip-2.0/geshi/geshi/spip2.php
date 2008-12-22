@@ -48,7 +48,7 @@
 @define('REG_BOUCLE','(&lt;\/?\/?B(OUCLE)?' . REG_NOM_BOUCLE . ')(\([^)]*\))?(.*)?(&gt;)');
 @define('REG_INCLURE','(&lt;\/?\/?INCLU(D|R)E)(\([^)]*\))?(.*)?(&gt;)');
 @define('REG_BALISE','(\#)(' . REG_NOM_BOUCLE . ':)?([A-Z0-9_]*)');
-@define('REG_NOM_FILTRE', '(<PIPE>[a-zA-Z_][a-zA-Z0-9_]*(::[a-zA-Z0-9_]*))');
+@define('REG_NOM_FILTRE', '(<PIPE>[a-zA-Z_][a-zA-Z0-9_]*(::[a-zA-Z0-9_]*)?)');
 
 
 $language_data = array (
