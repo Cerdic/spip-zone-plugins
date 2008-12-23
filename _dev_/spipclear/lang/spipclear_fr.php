@@ -72,7 +72,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien' => 'Lien', // Non utilise
 'liens' => 'Liens',
 'lire_la_suite' => 'Lire la suite',
-'look_sommaire' => 'Customisation de la page d\'accueil',
+'look_sommaire' => 'Personnalisation de la page d\'accueil',
+'look_navigation' => 'Personnalisation du bloc de navigation',
+
+//N
+'navigation_desactiver_calendrier' => 'Ne pas afficher le calendrier dans la navigation',
 
 //O
 'oksearch' => 'ok',
