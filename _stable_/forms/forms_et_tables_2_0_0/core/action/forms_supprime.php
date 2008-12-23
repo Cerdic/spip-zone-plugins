@@ -11,7 +11,7 @@
  *
  */
 
-function action_forms_supprime(){
+function action_forms_supprime_dist(){
 	$securiser_action = charger_fonction('securiser_action','inc');
 	$args = $securiser_action();
 

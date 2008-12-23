@@ -124,17 +124,17 @@ function Forms_supprimer_tables($type_ou_id){
 			Forms_supprimer_tables($id);
 		return;
 	}
-	$res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form));
+	$res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form=".intval($id_form));
 	while ($row = spip_fetch_array($res)){
 		spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($row['id_donnee']));
 		spip_query("DELETE FROM spip_forms_donnees_articles WHERE id_donnee="._q($row['id_donnee']));
 		spip_query("DELETE FROM spip_forms_donnees_rubriques WHERE id_donnee="._q($row['id_donnee']));
 	}
-	spip_query("DELETE FROM spip_forms_donnees WHERE id_form="._q($id_form));
-	spip_query("DELETE FROM spip_forms_champs_choix WHERE id_form="._q($id_form));
-	spip_query("DELETE FROM spip_forms_champs WHERE id_form="._q($id_form));
-	spip_query("DELETE FROM spip_forms WHERE id_form="._q($id_form));
-	spip_query("DELETE FROM spip_forms_articles WHERE id_form="._q($id_form));
+	spip_query("DELETE FROM spip_forms_donnees WHERE id_form=".intval($id_form));
+	spip_query("DELETE FROM spip_forms_champs_choix WHERE id_form=".intval($id_form));
+	spip_query("DELETE FROM spip_forms_champs WHERE id_form=".intval($id_form));
+	spip_query("DELETE FROM spip_forms WHERE id_form=".intval($id_form));
+	spip_query("DELETE FROM spip_forms_articles WHERE id_form=".intval($id_form));
 }
 
 include_spip('forms_fonctions');
@@ -201,9 +201,45 @@ function Forms_modifier_donnee($id_donnee,$c = NULL){
 function Forms_instituer_donnee($id_donnee,$statut){
 		spip_query("UPDATE spip_forms_donnees SET statut="._q($statut)." WHERE id_donnee="._q($id_donnee));
 }
-function Forms_ordonner_donnee($id_donnee,$rang){
-		include_spip("inc/forms");
-		Forms_rang_update($id_donnee,$rang);
+function Forms_ordonner_donnee($id_donnee,$rang_nouv){
+	$rang_min = $rang_max = 1;
+	// recuperer le rang et l'id_form de la donnee modifiee
+	if (!$row = sql_fetsel("id_form,rang","spip_forms_donnees","id_donnee=".intval($id_donnee))) return;
+	$rang = $row['rang'];
+	$id_form = $row['id_form'];
+
+	// recuperer le min et le max des rangs en cours
+	if ($row = sql_fetsel("min(rang) AS rang_min, max(rang) AS rang_max","spip_forms_donnees","id_form=".intval($id_form))){
+		$rang_min = $row['rang_min'];
+		$rang_max = $row['rang_max'];
+	}
+
+	// verifier si des donnees sont pas sans rang et les ramasser
+	$rows = sql_allfetsel("id_donnee, rang","spip_forms_donnees","(rang=NULL OR rang=0) AND id_form=".intval($id_form),"","id_donnee");
+	foreach($rows as $row){
+		$rang_max++;
+		sql_updateq("spip_forms_donnees",array('rang'=>$rang_max),"id_donnee=".intval($row['id_donnee']));
+	}
+	// borner le rang
+	include_spip('inc/forms');
+	if ($rang_nouv==0) $rang_nouv = Forms_rang_prochain($id_form);
+	$rang_nouv = min(max($rang_nouv,$rang_min),$rang_max);
+	if ($rang_nouv>$rang) $rang_nouv++; // il faut se decaler d'un car on est devant actuellement
+	$rang_nouv = min($rang_nouv,Forms_rang_prochain($id_form));
+
+	// incrementer tous ceux dont le rang est superieur a la cible pour faire une place
+	$ok = sql_update("spip_forms_donnees",array('rang'=>'rang+1'),"id_form=".intval($id_form)." AND rang>=".intval($rang_nouv));
+	if (!$ok) return $rang;
+	// mettre a jour le rang de l'element demande
+	$ok = sql_updateq("spip_forms_donnees",array('rang'=>$rang_nouv),"id_donnee=".intval($id_donnee));
+	if (!$ok) return $rang;
+
+	// decrementer tous ceux dont le rang est superieur a l'ancien pour recuperer la place
+	sql_update("spip_forms_donnees",array("rang"=>"rang-1"),"id_form=".intval($id_form)." AND rang>".intval($rang));
+	if (!$row = sql_fetsel("id_form,rang","spip_forms_donnees","id_donnee=".intval($id_donnee)))
+		return $rang_nouv;
+	else 
+		return $row['rang'];
 }
 
 function Forms_rechercher_donnee($recherche,$id_form=0,$champ=NULL,$sous_ensemble=NULL){
@@ -217,7 +253,7 @@ function Forms_rechercher_donnee($recherche,$id_form=0,$champ=NULL,$sous_ensembl
 	    "SELECT dc.id_donnee FROM spip_forms_donnees_champs AS dc"
 	  . ($id_form?" LEFT JOIN spip_forms_donnees AS d ON dc.id_donnee=d.id_donnee":"")
 	  . " WHERE dc.valeur LIKE "._q($recherche)
-	  . ($id_form?" AND d.id_form="._q($id_form):"")
+	  . ($id_form?" AND d.id_form=".intval($id_form):"")
 	  . ($in?" AND $in":"")
 	  . ($champ?" AND dc.champ="._q($champ):"")
 	);
@@ -292,7 +328,7 @@ function Forms_delier_donnee($id_donnee,$id_donnee_liee=0,$type_form_lie = ""){
  */
 function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$c=NULL){
 	if (!$id_parent>0){
-		if ($res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND statut!='poubelle' LIMIT 0,1")
+		if ($res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form=".intval($id_form)." AND statut!='poubelle' LIMIT 0,1")
 		  AND spip_num_rows($res)==0){
 		  // pas d'elements existants, c'est la racine, on l'insere toujours
 			if ($position=='fils_aine' OR $position=='fils_cadet'){
@@ -309,7 +345,7 @@ function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$
 		}
 	}
 	// Le parent existe toujours ?
-	$res = spip_query("SELECT * FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND id_donnee="._q($id_parent)." AND statut!='poubelle'");
+	$res = spip_query("SELECT * FROM spip_forms_donnees WHERE id_form=".intval($id_form)." AND id_donnee="._q($id_parent)." AND statut!='poubelle'");
 	if (!($rowp = spip_fetch_array($res))){
 		spip_log("Insertion impossible, le parent $id_parent n'existe plus dans table $id_form");
 		return array(0,_L("Insertion impossible, le parent $id_parent n'existe plus dans table $id_form"));
@@ -319,10 +355,10 @@ function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$
 	if ($position == 'pere'){
 		if (
 		  // Decalage de l'ensemble colateral droit
-		  spip_query("UPDATE spip_forms_donnees SET bdte=bdte+2 WHERE id_form="._q($id_form)." AND bdte>"._q($rowp['bdte'])." AND bgch<="._q($rowp['bdte']))
-		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch+2,bdte=bdte+2 WHERE id_form="._q($id_form)." AND bgch>"._q($rowp['bdte']))
+		  spip_query("UPDATE spip_forms_donnees SET bdte=bdte+2 WHERE id_form=".intval($id_form)." AND bdte>"._q($rowp['bdte'])." AND bgch<="._q($rowp['bdte']))
+		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch+2,bdte=bdte+2 WHERE id_form=".intval($id_form)." AND bgch>"._q($rowp['bdte']))
 			// Decalalage ensemble vise vers le bas
-		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch+1,bdte=bdte+1,niveau=niveau+1 WHERE id_form="._q($id_form)." AND bgch>="._q($rowp['bgch'])." AND bdte<="._q($rowp['bdte']))
+		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch+1,bdte=bdte+1,niveau=niveau+1 WHERE id_form=".intval($id_form)." AND bgch>="._q($rowp['bgch'])." AND bdte<="._q($rowp['bdte']))
 		)
 			// Insertion du nouveau pere
 			return Forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau'],'bgch'=>$rowp['bgch'],'bdte'=>$rowp['bdte']+2));
@@ -331,8 +367,8 @@ function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$
 	elseif ($position == 'grand_frere'){
 		if (
 		  // Decalage de l'ensemble colateral droit
-		  spip_query("UPDATE spip_forms_donnees SET bdte=bdte+2 WHERE id_form="._q($id_form)." AND bdte>"._q($rowp['bgch'])." AND bgch<"._q($rowp['bgch']))
-		  AND spip_query("UPDATE spip_forms_donnees SET id_form="._q($id_form)." AND bgch=bgch+2,bdte=bdte+2 WHERE bgch>="._q($rowp['bgch']))
+		  spip_query("UPDATE spip_forms_donnees SET bdte=bdte+2 WHERE id_form=".intval($id_form)." AND bdte>"._q($rowp['bgch'])." AND bgch<"._q($rowp['bgch']))
+		  AND spip_query("UPDATE spip_forms_donnees SET id_form=".intval($id_form)." AND bgch=bgch+2,bdte=bdte+2 WHERE bgch>="._q($rowp['bgch']))
 		  )
 			return Forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau'],'bgch'=>$rowp['bgch'],'bdte'=>$rowp['bgch']+1));
 	}
@@ -340,8 +376,8 @@ function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$
 	elseif ($position == 'petit_frere'){
 		if (
 		  // Decalage de l'ensemble colateral droit
-		  spip_query("UPDATE spip_forms_donnees SET bdte=bdte+2 WHERE id_form="._q($id_form)." AND bdte>"._q($rowp['bdte'])." AND bgch<"._q($rowp['bdte']))
-		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch+2,bdte=bdte+2 WHERE id_form="._q($id_form)." AND bgch>="._q($rowp['bdte']))
+		  spip_query("UPDATE spip_forms_donnees SET bdte=bdte+2 WHERE id_form=".intval($id_form)." AND bdte>"._q($rowp['bdte'])." AND bgch<"._q($rowp['bdte']))
+		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch+2,bdte=bdte+2 WHERE id_form=".intval($id_form)." AND bgch>="._q($rowp['bdte']))
 		  )
 			return Forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau'],'bgch'=>$rowp['bdte']+1,'bdte'=>$rowp['bdte']+2));
 	}
@@ -349,8 +385,8 @@ function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$
 	elseif ($position == 'fils_aine'){
 		if (
 		  // Decalage de l'ensemble colateral droit
-		  spip_query("UPDATE spip_forms_donnees SET bdte=bdte+2 WHERE id_form="._q($id_form)." AND bdte>"._q($rowp['bgch'])." AND bgch<="._q($rowp['bgch']))
-		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch+2,bdte=bdte+2 WHERE id_form="._q($id_form)." AND bgch>"._q($rowp['bgch']))
+		  spip_query("UPDATE spip_forms_donnees SET bdte=bdte+2 WHERE id_form=".intval($id_form)." AND bdte>"._q($rowp['bgch'])." AND bgch<="._q($rowp['bgch']))
+		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch+2,bdte=bdte+2 WHERE id_form=".intval($id_form)." AND bgch>"._q($rowp['bgch']))
 		  )
 			return Forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau']+1,'bgch'=>$rowp['bgch']+1,'bdte'=>$rowp['bgch']+2));
 	}
@@ -358,8 +394,8 @@ function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$
 	elseif ($position == 'fils_cadet'){
 		if (
 		  // Decalage de l'ensemble colateral droit
-		  spip_query("UPDATE spip_forms_donnees SET bdte=bdte+2 WHERE id_form="._q($id_form)." AND bdte>="._q($rowp['bdte'])." AND bgch<="._q($rowp['bdte']))
-		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch+2,bdte=bdte+2 WHERE id_form="._q($id_form)." AND bgch>"._q($rowp['bdte']))
+		  spip_query("UPDATE spip_forms_donnees SET bdte=bdte+2 WHERE id_form=".intval($id_form)." AND bdte>="._q($rowp['bdte'])." AND bgch<="._q($rowp['bdte']))
+		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch+2,bdte=bdte+2 WHERE id_form=".intval($id_form)." AND bgch>"._q($rowp['bdte']))
 		  )
 			return Forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau']+1,'bgch'=>$rowp['bdte'],'bdte'=>$rowp['bdte']+1));
 	}
@@ -367,20 +403,20 @@ function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$
 	return array(0,_L("Operation inconnue insertion en position $position dans table $id_form"));
 }
 function Forms_arbre_supprimer_donnee($id_form,$id_donnee,$recursif=true){
-	$res = spip_query("SELECT * FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND id_donnee="._q($id_donnee));
+	$res = spip_query("SELECT * FROM spip_forms_donnees WHERE id_form=".intval($id_form)." AND id_donnee="._q($id_donnee));
 	if (!($row = spip_fetch_array($res)))
 		return false;
 	if ($recursif){
 		// OUI ! tout le sous arbre doit etre supprime
 		$delta = $row['bdte']-$row['bgch']+1;
-		$res2 = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND bgch>="._q($row['bgch'])." AND bdte<="._q($row['bdte']));
+		$res2 = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form=".intval($id_form)." AND bgch>="._q($row['bgch'])." AND bdte<="._q($row['bdte']));
 		$ok = true;
 		while ($row2 = spip_fetch_array($res2))
 			$ok = $ok && Forms_supprimer_donnee($id_form,$row2['id_donnee']);
 		
 		if (
-			spip_query("UPDATE spip_forms_donnees SET bgch=bgch-$delta,bdte=bdte-$delta WHERE id_form="._q($id_form)." AND bgch>"._q($row['bdte']))
-			AND spip_query("UPDATE spip_forms_donnees SET bdte=bdte-$delta WHERE id_form="._q($id_form)." AND bdte>"._q($row['bdte'])." AND bgch<="._q($row['bdte']))
+			spip_query("UPDATE spip_forms_donnees SET bgch=bgch-$delta,bdte=bdte-$delta WHERE id_form=".intval($id_form)." AND bgch>"._q($row['bdte']))
+			AND spip_query("UPDATE spip_forms_donnees SET bdte=bdte-$delta WHERE id_form=".intval($id_form)." AND bdte>"._q($row['bdte'])." AND bgch<="._q($row['bdte']))
 			)
 			return true;
 		return false;
@@ -389,9 +425,9 @@ function Forms_arbre_supprimer_donnee($id_form,$id_donnee,$recursif=true){
 		// NON ! on ne supprime que l'element
 		if (
 		  Forms_supprimer_donnee($id_form,$id_donnee)
-		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch-1,bdte=bdte-1,niveau=niveau-1 WHERE id_form="._q($id_form)." AND bdte<"._q($row['bdte'])." AND bgch>"._q($row['bgch']))
-		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch-2,bdte=bdte-2 WHERE id_form="._q($id_form)." AND bgch>"._q($row['bdte']))
-		  AND spip_query("UPDATE spip_forms_donnees SET bdte=bdte-2 WHERE id_form="._q($id_form)." AND bdte>"._q($row['bdte'])." AND bgch<="._q($row['bdte']))
+		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch-1,bdte=bdte-1,niveau=niveau-1 WHERE id_form=".intval($id_form)." AND bdte<"._q($row['bdte'])." AND bgch>"._q($row['bgch']))
+		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch-2,bdte=bdte-2 WHERE id_form=".intval($id_form)." AND bgch>"._q($row['bdte']))
+		  AND spip_query("UPDATE spip_forms_donnees SET bdte=bdte-2 WHERE id_form=".intval($id_form)." AND bdte>"._q($row['bdte'])." AND bgch<="._q($row['bdte']))
 		  )
 			return true;
 		return false;
@@ -400,7 +436,7 @@ function Forms_arbre_supprimer_donnee($id_form,$id_donnee,$recursif=true){
 function Forms_arbre_liste_relations($id_form,$id_parent,$position="enfant"){
 	$liste = array();
 	if ($id_parent){
-		$res = spip_query("SELECT id_donnee,niveau,bgch,bdte FROM spip_forms_donnees WHERE id_donnee="._q($id_parent)." AND id_form="._q($id_form));
+		$res = spip_query("SELECT id_donnee,niveau,bgch,bdte FROM spip_forms_donnees WHERE id_donnee="._q($id_parent)." AND id_form=".intval($id_form));
 		if (!$row = spip_fetch_array($res)) return $liste;
 		$niveau = $row['niveau'];
 		$bgch = $row['bgch'];
@@ -408,7 +444,7 @@ function Forms_arbre_liste_relations($id_form,$id_parent,$position="enfant"){
 		
 		if ($position=='enfant' || $position=='branche') {
 			$res = spip_query( 
-			  "SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form)
+			  "SELECT id_donnee FROM spip_forms_donnees WHERE id_form=".intval($id_form)
 			  . " AND bgch>"._q($bgch)." AND bdte<"._q($bdte)
 			  . ($position=='enfant'?" AND niveau="._q($niveau+1):"")
 			  . " ORDER BY bgch"
@@ -416,7 +452,7 @@ function Forms_arbre_liste_relations($id_form,$id_parent,$position="enfant"){
 		}
 		elseif ($position=='grand_frere') {
 			$res = spip_query(
-			  "SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form)
+			  "SELECT id_donnee FROM spip_forms_donnees WHERE id_form=".intval($id_form)
 			  . " AND bdte<"._q($bgch)
 			  . " AND niveau="._q($niveau)
 			  . " ORDER BY bgch"
@@ -424,7 +460,7 @@ function Forms_arbre_liste_relations($id_form,$id_parent,$position="enfant"){
 		}
 		elseif ($position=='petit_frere') {
 			$res = spip_query(
-			  "SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form)
+			  "SELECT id_donnee FROM spip_forms_donnees WHERE id_form=".intval($id_form)
 			  . " AND bgch>"._q($bdte)
 			  . " AND niveau="._q($niveau)
 			  . " ORDER BY bgch"
@@ -432,7 +468,7 @@ function Forms_arbre_liste_relations($id_form,$id_parent,$position="enfant"){
 		}
 		elseif ($position=='parent' || position=='hierarchie') {
 			$res = spip_query(
-			  "SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form)
+			  "SELECT id_donnee FROM spip_forms_donnees WHERE id_form=".intval($id_form)
 			  . " AND bgch<"._q($bgch)." AND bdte>"._q($bdte)
 			  . ($position=='parent'?" AND niveau="._q($niveau-1):"")
 			  . " ORDER BY bgch"
@@ -443,7 +479,7 @@ function Forms_arbre_liste_relations($id_form,$id_parent,$position="enfant"){
 	else {
 		if ($position!='enfant' && $position!='branche') return $liste;
 		$res = spip_query(
-		  "SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form)
+		  "SELECT id_donnee FROM spip_forms_donnees WHERE id_form=".intval($id_form)
 		  . ($position=='enfant'?" AND niveau=1":"")
 		  . " ORDER BY bgch"
 		);
