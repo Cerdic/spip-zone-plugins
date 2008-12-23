@@ -11,7 +11,7 @@
  *
  */
 
-function action_forms_donnees_vide(){
+function action_forms_donnees_vide_dist(){
 	$securiser_action = charger_fonction('securiser_action','inc');
 	$args = $securiser_action();
 

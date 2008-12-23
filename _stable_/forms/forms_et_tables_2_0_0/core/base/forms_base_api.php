@@ -66,6 +66,42 @@ function Forms_liste_tables($type){
 }
 
 /**
+ * Copier une table (sa structure uniquement)
+ *
+ * @param int/string $type_ou_id
+ * @return unknown
+ */
+function Forms_copier_tables($type_ou_id){
+	if (!$duplique = intval($type_ou_id) OR !is_numeric($type_ou_id)){
+		$liste = Forms_liste_tables($type_ou_id);
+		$id_forms = array();
+		foreach($liste as $id)
+			$id_forms[] = Forms_copier_tables($id);
+		if (count($id_forms)==1) $id_forms = reset($id_forms);
+		return $id_forms;
+	}
+	include_spip('base/abstract_sql');
+	// creation
+	if ($valeurs = sql_fetsel("*","spip_forms","id_form=".intval($duplique))) {
+		$valeurs['titre'] = _T("forms:formulaires_copie",array('nom'=>$valeurs['titre']));
+		unset($valeurs['id_form']);
+		if ($id_form = sql_insertq('spip_forms',$valeurs)){
+			$rows = sql_allfetsel("*","spip_forms_champs","id_form=".intval($duplique));
+			foreach($rows as $valeurs) {
+				$valeurs['id_form'] = $id_form;
+				sql_insertq("spip_forms_champs",$valeurs);
+			}
+			$rows = sql_allfetsel("*","spip_forms_champs_choix","id_form=".intval($duplique));
+			foreach($rows as $valeurs) {
+				$valeurs['id_form'] = $id_form;
+				sql_insertq("spip_forms_champs_choix",$valeurs);
+			}
+		}
+	}
+	return $id_form;
+}
+
+/**
  * Vider une table : passer toutes ses donnees en 'poubelle'
  *
  * @param int/string $type_ou_id

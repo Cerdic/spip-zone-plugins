@@ -13,7 +13,7 @@
 include_spip('inc/forms');
 include_spip('inc/autoriser');
 
-function action_forms_donnee_supprime(){
+function action_forms_donnee_supprime_dist(){
 	$securiser_action = charger_fonction('securiser_action','inc');
 	$args = $securiser_action();
 
