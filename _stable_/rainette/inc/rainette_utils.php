@@ -184,7 +184,9 @@ function charger_infos($code_meteo='', $type_infos=''){
 		return $tableau;
 	else {
 		$tableau = unserialize($tableau);
-		return $tableau[strtolower($type_infos)];
+		$info = $tableau[strtolower($type_infos)];
+		if (!$info) $info = ucfirst($type_infos) . "(" . $code_meteo . ")";
+		return $info;
 	}
 }
 
