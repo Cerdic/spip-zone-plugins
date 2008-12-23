@@ -10,12 +10,8 @@
 	  [es]Antoine Pitrou, Cedric Morin, Renato Formato
 		</multi>
 	</auteur>
-	<version>
-	0.304
-	</version>
-	<etat>
-	dev
-	</etat>
+	<version>0.304</version>
+	<etat>dev</etat>
 	<description>
 	<multi>
 	[ar]&#1573;&#1583;&#1575;&#1585;&#1577; &#1575;&#1604;&#1575;&#1587;&#1578;&#1605;&#1575;&#1585;&#1575;&#1578; &#1608;&#1578;&#1581;&#1585;&#1610;&#1585;&#1607;&#1575;.
@@ -31,60 +27,40 @@
 	</multi>
 	</description>
 	<lien>http://zone.spip.org/trac/spip-zone/wiki/SpipForms</lien> <!-- URI de documentation -->
-	<options> <!-- fichier charge a chaque hit -->
-	forms_options.php
-	</options>
-	<fonctions> <!-- fichier charge a chaque recalul de page -->
-	forms_fonctions.php
-	</fonctions>
-	<fonctions> <!-- fichier charge a chaque recalul de page -->
-	public/forms_boucles.php
-	</fonctions>
-	<fonctions> <!-- fichier charge a chaque recalul de page -->
-	public/forms_balises.php
-	</fonctions>
-	<prefix>
-	Forms
-	</prefix>
-	<install>base/forms_upgrade.php</install>
+	<options>forms_options.php</options> <!-- fichier charge a chaque hit -->
+	<fonctions>forms_fonctions.php</fonctions>  <!-- fichier charge a chaque recalul de page -->
+	<fonctions>core/public/forms_boucles.php</fonctions>
+	<fonctions>core/public/forms_balises.php</fonctions>
+	<prefix>forms</prefix>
+	<install>core/base/forms_upgrade.php</install>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>definir_session</nom>
 	</pipeline>
 	<pipeline>
-		<nom>pre_propre</nom>
-		<action>forms_avant_propre</action>
-		<inclure>forms_filtres.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>post_propre</nom>
-		<action>forms_apres_propre</action>
-		<inclure>forms_filtres.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>forms_filtres.php</inclure>
+		<inclure>core/forms_pipeline.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>post_edition</nom>
-		<inclure>forms_filtres.php</inclure>
+		<inclure>core/forms_pipeline.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>affiche_droite</nom>
 		<action>affiche_droite</action>
-		<inclure>forms_pipeline.php</inclure>
+		<inclure>core/forms_pipeline.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
-		<inclure>forms_pipeline.php</inclure>
+		<inclure>core/forms_pipeline.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
-		<inclure>forms_pipeline.php</inclure>
+		<inclure>core/forms_pipeline.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>affiche_milieu</nom>
-		<inclure>forms_pipeline.php</inclure>
+		<inclure>core/forms_pipeline.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="(2.0.0;2.0.0)" />
 </plugin>

@@ -15,6 +15,21 @@
 		$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 		define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end($p))."/");
 	}
+	function Forms_insert_head($flux){
+		$config = unserialize(isset($GLOBALS['meta']['forms_et_tables'])?$GLOBALS['meta']['forms_et_tables']:"");
+		if (!isset($config['inserer_head']) OR $config['inserer_head']) {
+			if ($GLOBALS['spip_version_code']<1.9207) {
+				$flux .= 	"<link rel='stylesheet' href='".find_in_path('spip_forms.css')."' type='text/css' media='all' />\n";
+				$flux .= 	"<link rel='stylesheet' href='".find_in_path('donnee_voir.css')."' type='text/css' media='all' />\n";
+				$flux .= 	"<link rel='stylesheet' href='".find_in_path('donnees_tous.css')."' type='text/css' media='all' />\n";
+				$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/date_picker.css' type='text/css' media='all' />\n";
+				$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/jtip.css' type='text/css' media='all' />\n";
+			}
+			else 
+				$flux .= "<link rel='stylesheet' href='".generer_url_public('forms_styles.css')."' type='text/css' media='all' />\n";
+		}
+		return $flux;
+	}
 
 	function Forms_ajouter_boutons($boutons_admin) {
 		if ($GLOBALS['spip_version_code']<1.92)
@@ -137,6 +152,37 @@
 			if (!_request('var_noajax'))
 				$flux .= "<script src='"._DIR_PLUGIN_FORMS."javascript/donnees_edit.js' type='text/javascript'></script>";
 		}
+		return $flux;
+	}
+	
+	define('_RACCOURCI_MODELE_FORM', 
+		 '(<(form)' # <modele
+		.'\s*([0-9]*)\s*' # id
+		.'([|](?:<[^<>]*>|[^>])*)?' # |arguments (y compris des tags <...>)
+		.'>)' # fin du modele >
+		.'\s*(<\/a>)?' # eventuel </a>
+	       );
+	
+	function Forms_trouve_liens($texte){
+		$forms = array();
+		if (preg_match_all(','._RACCOURCI_MODELE_FORM.',is', $texte, $regs, PREG_SET_ORDER)){
+			foreach ($regs as $r) {
+				$id_form = $r[3];
+				$forms[$id_form] = $id_form;
+			}
+		}
+		return $forms;
+	}
+
+	function Forms_post_edition($flux){
+		if ($flux['args']['table']!='spip_articles') return $flux;
+		$id_article = intval($flux['args']['id_objet']);
+		$res = spip_query("SELECT * FROM spip_articles WHERE id_article="._q($id_article));
+		spip_query("DELETE FROM spip_forms_articles WHERE id_article=$id_article");
+		if (($row = spip_fetch_array($res))
+		 && (count($forms = Forms_trouve_liens(implode(' ',$row)))))
+			spip_query("INSERT INTO spip_forms_articles (id_article, id_form) ".
+				"VALUES ($id_article, ".join("), ($id_article, ", $forms).")");
 		return $flux;
 	}
 ?>
