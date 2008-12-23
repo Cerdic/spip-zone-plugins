@@ -1,0 +1,418 @@
+/* Feuille de style vierge comportant les principales balises d'un 
+blog realise avec dotclear - Etablie par Kozlika pour la dcTeam
+le 7 janvier 2007. 
+
+Licence : domaine public 
+
+Custom By Azork
+updated 06/04/2008
+
+*/
+
+
+/* -----------------------------------------------------------------
+	1. STRUCTURE
+	a inscrire ici ou en important une css de structure placee dans
+	le meme repertoire et appelee grace a l'instruction ci-dessous
+------------------------------------------------------------------ */
+@import url(layout.css);
+
+
+/* ------------------------------------------------------------
+	2. BALISES HTML PAR DEFAUT
+------------------------------------------------------------- */
+
+body { 
+	font: 62.5%/1.5em Arial, "Times New Roman", sans-serif;
+	background: #f5f5f5;
+	color: #333333;
+	text-align:center;
+}
+ 
+h1 { font-size:1.2em;
+	letter-spacing:0.025em;
+	}
+	
+h2 { font-size:1.15em;
+	line-height: 1.286;
+	margin-top: 1.286em;
+	margin-bottom: 1.286em;
+	letter-spacing:0;
+	}
+	
+h3 { font:bold 1.25em Georgia, serif; margin: 0 0 .5em 0; color:#708090; }
+h4 { font-size:1.15em; margin: 0 0 .5em 0; font-weight: bold; }
+h5 { font-size:.85em; }
+h6 { font-size:.85em; }
+
+p {
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+        line-height: 1.7em;
+        color: #333333;
+  }
+img { border:0; }
+sup { }
+abbr, acronym { }
+
+blockquote, q {
+	margin:1.5em;
+	display:block;
+	padding:1em;
+	border:1px solid #ddddaa;
+	background:#f3f8d4; color:#444;
+	font:normal 1.2em/1.5em Georgia, serif;
+	}
+blockquote a:link, q a:link { color:#bbbb33; text-decoration:underline; }
+
+blockquote { }
+cite { }
+
+ul { list-style-position:inside; }
+ol { list-style-position:inside; }
+dl { list-style-position:inside; }
+
+form { }
+fieldset { border: none; }
+input { }
+label { }
+
+a { }
+a:link { color:#333; text-decoration:none; outline: none; }
+a:visited { color:#333; text-decoration:none; outline: none; }
+a:hover { color:#666; text-decoration:none; outline: none; }
+a:focus { }
+a[hreflang]:after { }
+a img { border:0; }
+ 
+code, pre { background:#f3f8d4; color:#bbbb33; border:1px dashed #ddddaa; display: block; width:85%; margin: 10px auto; padding: 10px 5px; font:normal 1.2em/1.5em Monospace; overflow: hidden; }
+pre { }
+ 
+hr { }
+ 
+/* ------------------------------------------------------------
+	3. PAGE
+------------------------------------------------------------- */
+ 
+#page { border-top:1px solid #cccccc; border-bottom:1px solid #cccccc; background:#fff url(img/bg_page.png) repeat-y left top; }
+
+ 
+/* ------------------------------------------------------------
+	4. HAUT DE PAGE
+------------------------------------------------------------- */
+
+#top { background:transparent url(img/top.jpg) no-repeat left top; position:relative; }
+
+/* ------------------------------------------------------------
+	5. WRAPPER MAIN CONTENT
+------------------------------------------------------------- */
+
+#wrapper { }
+#main { font-size: 1.5em; }
+#content { }
+
+#content-info { font: .8em Verdana, sans-serif; border-top:1px solid #ebebeb; border-bottom:1px solid #ebebeb; margin:0 0 20px 0; padding:10px; }
+#content-info h2 { color:#444; font-family: Arial, Verdana, sans-serif; letter-spacing:0.05em; background: transparent url(img/content-info.png) no-repeat 0 4px; padding:5px 5px 5px 25px; text-transform:capitalize; }
+#content-info p { padding: 0 10px; line-height:1.5; letter-spacing:0.025em; }
+#content-info p a:link, #content-info p a:visited { padding-bottom: 2px; border-bottom: 1px dotted #bbbb33; }
+
+.content-inner { }
+.dc-archive .content-inner ul { border-top:1px solid #ebebeb; text-transform:capitalize; font: .8em Verdana, sans-serif; list-style: none outside; margin:5px 0; padding:10px; }
+.dc-archive .content-inner ul li { padding-right:10px; display:inline; }
+
+.dc-archive-month .content-inner h2 { display:block; word-spacing:0; letter-spacing:0.025em; border:0; background:transparent url(img/puce_e.png) no-repeat 32px 1px; font:bold .8em/1.5 Arial, sans-serif; padding:0 0 0 50px; margin:0; }
+.dc-archive-month .content-inner .day-date { font-size:.85em; background:transparent url(img/newspaper.png) no-repeat 0 50%; text-transform:capitalize; }
+.dc-archive-month .content-inner .post-info  { margin:0 0 10px 0; padding:5px 0 0 35px; }
+
+.pagination { clear: both; margin:20px 0; padding:10px; background:#eee; font:normal .7em Verdana, sans-serif; letter-spacing:0.05em; }
+.pagination a:link, .pagination a:visited { color:#222; letter-spacing:0; }
+
+#navlinks { clear: both; margin:20px 0; padding:10px; background:#eee; font:normal .7em Verdana, sans-serif; letter-spacing:0.05em; }
+#navlinks a:link, #navlinks a:visited { color:#222; letter-spacing:0; }
+
+/* ------------------------------------------------------------
+	6. BILLETS
+------------------------------------------------------------- */
+
+.post { padding:0 0 10px 0; margin:0 0 10px 0; }
+.post.first { }
+.post.odd { }
+
+.day-date { background:transparent url(img/newspaper.png) no-repeat 0 50%; color:#A9A9A9; letter-spacing:0.13em; font:.85em Arial, sans-serif; margin:0; padding:15px 0 15px 25px; text-transform:capitalize; }
+
+.post-title { border-top:1px solid #ebebeb; word-spacing:0; letter-spacing:0; font-family: Georgia, serif; color:#336666; padding:10px 0; margin:0; }
+.post-title a:link, .post-title a:visited { word-spacing:0; letter-spacing:0; color:#336666; text-decoration: none; padding:0; margin:0; }
+.post-title a:hover { color:#708090; }
+
+.dc-category .post { padding:0; margin:0; }
+.dc-category  .post-title { padding:5px 0 0 0; margin:5px 0 0 0; background:none; border:0; }
+.dc-category .post-title a:link, .dc-category .post-title a:visited { display:block; letter-spacing:0.025em; border:0; background:transparent url(img/puce_e.png) no-repeat 32px 1px; font:bold .7em/1.5 Arial, sans-serif; padding:0 0 0 50px; margin:0; }
+.dc-category .post-info { color: #999; margin:0 0 10px 0; padding:5px 0 0 35px; font-size:.7em; text-transform:capitalize; }
+
+.post-info { color: #999; margin:0 0 10px 0; padding:10px 0 0 0; font-size:.7em; text-transform:capitalize; letter-spacing: 1px; }
+.post-info a:link, .post-info a:visited { color: #999; }
+
+.post-tags { color: #bbbb33; font:.6em Verdana, sans-serif; margin:0; padding:0; }
+.post-tags li { display:inline; }
+.post-tags a:link,.post-tags a:visited { color:#708090; }
+
+.post-excerpt { font:normal .8em/1.5em Arial, Verdana, sans-serif; letter-spacing:0.025em; }
+.post-excerpt a:link, .post-excerpt a:visited { font:900 1.1em Arial, sans-serif; color:#666666; }
+.post-excerpt a:hover { color:#708090; }
+
+.post-content { font:normal .8em/1.5em Arial, Verdana, sans-serif; letter-spacing:0.025em; }
+.post-content a:link, .post-content a:visited { font:900 1.1em Arial, sans-serif; color:#666666; }
+.post-content a:hover { color:#708090; }
+
+.read-it { color:#336666; padding:5px 0;  margin:10px 0; }
+.read-it a:link,.read-it a:visited { background:transparent url(img/puce_h.png) no-repeat 0 50%; padding-left:20px; color:#336666; font:bold .8em Verdana, sans-serif; text-decoration:none; }
+.read-it a:hover { color:#708090; }
+
+.footnotes { }
+.footnotes h4 { }
+
+.post-info-co { border-top:1px solid #ebebeb; font:bold .75em Georgia, serif; padding:13px 0; }
+.post-info-co a:link, .post-info-co a:visited { color:#444444; }
+
+.comment_count { background:#f6f6f6; padding:10px; }
+.ping_count { background:#f6f6f6; padding:10px; }
+.attach_count { background:#f6f6f6; padding:10px; }
+
+#attachments { }
+#attachments h3 { padding-bottom:5px; border-bottom:2px solid #ebebeb; }
+#attachments ul { margin-bottom:10px; padding:0; font:normal .75em Verdana, sans-serif; }
+#attachments ul li { margin:0; padding:10px; }
+#attachments li.audio { }
+#attachments li.package { }
+#attachments li.text { }
+
+
+
+/* ------------------------------------------------------------
+	7. COMMENTAIRES, PINGS
+------------------------------------------------------------- */
+
+#comments { color:#000; margin:10px 0; }
+#pings { color:#000; margin:10px 0; }
+#pr { background:#eee; color:#000; padding:10px; margin:10px; }
+#comment-form { background:#f6f6f6; border:1px solid #ebebeb; color:#000; }
+
+#comments h3 { padding-bottom:5px; border-bottom:2px solid #ebebeb; }
+#pings h3 { padding-bottom:5px; border-bottom:2px solid #ebebeb; }
+#comment-form  #pr h3 { padding:0 0 5px 0; margin:0; }
+#comment-form h3 { padding:10px; }
+
+#comments dl { padding:0; margin:0; }
+#comments dt { background:#fff; padding:5px 0; margin:0; color:#999; }
+#comments dt  a:link, #comments dt  a:visited { color:#336666; }
+#comments dd { border-bottom:1px solid #ebebeb; padding:10px; margin:0 0 15px 0; font:normal .8em/1.5em Arial, Verdana, sans-serif; letter-spacing:0.025em; }
+#comments dd p { padding:0; margin:0; }
+#comments dt .comment-number { padding:5px; background:#f5f5f5; color:#336666; font:bold .9em Georgia, serif; }
+#comments dt .commentauthor { padding:5px; color:#336666; font:normal .85em/1.5em Arial, Verdana, sans-serif; text-transform:capitalize; }
+#comments dt .commentdate { padding:5px; border-bottom:1px solid #ebebeb; color:#708090; font:normal .75em/1.5em Arial, Verdana, sans-serif; }
+#comments .me { }
+#comments .first { }
+#comments .odd { }
+
+
+#pings dl { padding:0; margin:0; }
+#pings dt { background:#fff; padding:5px 0; margin:0; color:#999; }
+#pings dt  a:link, #pings dt  a:visited { color:#336666; }
+#pings dd { border-bottom:1px solid #ebebeb; padding:10px; margin:0 0 15px 0; font:normal .8em/1.5em Arial, Verdana, sans-serif; letter-spacing:0.025em; }
+#pings dd p { padding:0; margin:0; }
+#pings dt .ping-number { padding:5px; background:#f5f5f5; color:#336666; font:bold .9em Georgia, serif; }
+#pings dt .pingauthor { padding:5px; color:#336666; font:normal .85em/1.5em Arial, Verdana, sans-serif; text-transform:capitalize; }
+#pings dt .pingdate { padding:5px; border-bottom:1px solid #ebebeb; color:#708090; font:normal .75em/1.5em Arial, Verdana, sans-serif; }
+#pings .first { }
+#pings .odd { }
+#pings .me { }
+
+#pr p { padding:0; margin:0; }
+#pr dl { padding:0 0 10px 0; margin:5px 0; font:normal .8em/1.5em Arial, Verdana, sans-serif; color:#000; letter-spacing:0.025em; }
+#pr dd { padding:0; margin:0; }
+
+#comment-form fieldset { margin:0; padding:0 10px; font-size:.8em; }
+.field { margin:0; padding:5px 0; }
+.field label { display:block; width:30%; }
+.field input { font: 0.95em Arial, sans-seif; padding:3px; }
+.field textarea { font: .95em Arial, sans-serif; padding:3px; width:80%; }
+
+#comment-form input[type=submit] { }
+#comment-form input[type=reset] { }
+
+.form-help { font: 0.85em Arial, sans-seif; padding:0 10px; }
+
+#ping-url { font:normal .7em/1.5em Arial, Verdana, sans-serif; color:#708090; letter-spacing: 1px; }
+#comments-feed { }
+
+
+/* ------------------------------------------------------------
+	8. SIDEBAR
+------------------------------------------------------------- */
+
+#sidebar { border-top:1px solid #ebebeb; position:relative; font:normal 1.30em Verdana, sans-serif; }
+#blognav { }
+#blogextra { }
+
+#sidebar h2 {
+	font:bold .95em Verdana, sans-serif;
+	margin:0;
+	padding:10px 0;
+	color:#bbbb33;
+	border-bottom:1px solid #ddddaa;
+	word-spacing:0;
+	letter-spacing:0;
+	}
+#sidebar h3 {
+	font-size:.95em;
+	margin:0;
+	padding:5px 0;
+	}
+#sidebar ul { font:normal .85em Arial, sans-serif; margin:0 0 10px 0; background:transparent url(img/shadow.png) repeat-x left top; padding:10px; list-style: none outside; }
+#sidebar li { border-bottom:1px dashed #ddddaa; padding:5px 0 5px 20px; margin:0; }
+#sidebar li a:link,#sidebar li a:visited { font-weight:700; color:#666666; }
+#sidebar li a:hover { text-decoration:none; color:#708090; }
+/* boites du menu des widgets livres avec Dotclear */
+#search { margin:0 0 10px 0; padding:0; }
+#search h2 { background:transparent url(img/search.png) no-repeat 0 50%; border:0; padding:10px 0 10px 23px; margin:0; }
+#search form { padding:0; margin:0; }
+#search fieldset p { padding:0; margin:0; }
+#search input[type=text] { background:#edeff5; width:65%; color:#444444; font: 0.85em Arial, sans-seif; padding:3px; margin:0; } /* ou #search #q */
+#search input[type=submit] { color:#fff; font:bold .85em Georgia, serif; padding:3px; width:32px; height:26px; background:transparent url(img/submit.png) no-repeat left top; border:0; } /* ou #search .submit */
+
+#topnav { position:absolute; top:-219px; left:-21px; color:#fafafa; margin:0; padding:0; }
+#topnav ul { background:none; margin:0; padding:0; display:block; width:600px; }
+#topnav ul li { border:0; display:inline; float:left; margin:0; padding:0 20px 0 0; text-align:center; }
+
+.topnav-arch a:link, .topnav-arch a:visited { font:bold 1em Verdana, sans-serif; display:block; width:134px; padding-top:11px; height:26px; background:transparent url(img/topnav-arch.png) no-repeat left top; outline:none; }
+.dc-archive .topnav-arch a:link, .dc-archive .topnav-arch a:visited { font:bold 1em Verdana, sans-serif; display:block; width:134px; padding-top:11px; height:26px; background:transparent url(img/topnav-arch.png) no-repeat 0 -45px; outline:none; border-bottom:1px solid #fff; }
+.dc-archive-month .topnav-arch a:link, .dc-archive-month .topnav-arch a:visited { font:bold 1em Verdana, sans-serif; display:block; width:134px; padding-top:11px; height:26px; background:transparent url(img/topnav-arch.png) no-repeat 0 -45px; outline:none; border-bottom:1px solid #fff; }
+.topnav-arch a:hover { font:bold 1em Verdana, sans-serif; display:block; width:134px; padding-top:11px; height:26px; background:transparent url(img/topnav-arch.png) no-repeat 0 -45px; outline:none; }
+
+.topnav-home a:link, .topnav-home a:visited { font:bold 1em Verdana, sans-serif; display:block; width:134px; padding-top:11px; height:26px; background:transparent url(img/topnav-home.png) no-repeat left top; outline:none; }
+.dc-home .topnav-home a:link, .dc-home .topnav-home a:visited { font:bold 1em Verdana, sans-serif; display:block; width:134px; padding-top:11px; height:26px; background:transparent url(img/topnav-home.png) no-repeat 0 -45px; outline:none; border-bottom:1px solid #fff; }
+.topnav-home a:hover { font:bold 1em Verdana, sans-serif; display:block; width:134px; padding-top:11px; height:26px; background:transparent url(img/topnav-home.png) no-repeat 0 -45px; outline:none; }
+
+#sidebar .selected li { padding:5px 0; margin:0; }
+#sidebar .langs li { padding:5px 0; margin:0; text-transform:uppercase; }
+.categories li { background:transparent url(img/puce_a.png) no-repeat 0 50%; }
+#sidebar .syndicate li { padding:5px 0; margin:0; }
+#sidebar .lastposts li { padding:5px 0; margin:0; }
+#sidebar .lastcomments li { padding:5px 0; margin:0; }
+#sidebar .text h2 { margin-bottom:10px; }
+#sidebar .text { font:normal .95em/1.5em Arial, Verdana, sans-serif; margin-bottom:10px; }
+#sidebar .links ul { padding:0; }
+#sidebar .links li { padding:10px; }
+#sidebar .links h3 { font: bold .75em Verdana, sans-serif; border-bottom:1px solid #ebebeb; text-transform:uppercase; padding:10px 0; letter-spacing: 0.25em; }
+
+/* a completer separement ou globalement pour le sidebar et la page 
+spécifique des tags avec les differentes class des tags en fonction 
+de leur frequence - voir 9/ classes communes */
+
+
+/* ------------------------------------------------------------
+	9. FOOTER
+------------------------------------------------------------- */
+
+#footer { font-size:1em; border-top:1px solid #ccc; display:block; height:50px; padding:10px 0; margin:0; }
+#footer p { font-family: Verdana, Arial, sans-serif; color: #999; padding:10px 0; margin:0; }
+#footer p a:link, #footer p a:visited { color: #999; }
+
+
+/* ------------------------------------------------------------
+	10. CLASSES COMMUNES
+------------------------------------------------------------- */
+
+/* class sur les liens rss (on peut y placer l'icone
+feed.png a piocher dans le theme par defaut par ex.) */
+
+.feed { }
+
+/* tags dans le sidebar et dans la page les regroupant
+(exemple ici pour un nuage) */
+.dc-tags #content ul { padding:5px; margin:0; }
+.dc-tags #content ul li, .dc-tags #content ul li a:link, .dc-tags #content ul li a:visited {
+	width : auto;
+	padding-left : 0;
+	padding-right : 4px;
+	line-height : 1.5em;
+	display:inline;
+	font-family: Arial, Verdana, sans-serif;
+}
+
+.dc-tags #content ul li a:hover { color:#bbbb33; } 
+
+#sidebar .tags ul { margin:0; }
+#sidebar .tags ul li, #sidebar .tags ul li  a:link, #sidebar .tags ul li  a:visited { text-transform:capitalize; display:inline; padding:0 4px 0 0; border:0; line-height:1.5em; }
+#sidebar .tags ul li  { background:transparent url(img/puce_g.png) no-repeat 0 50%; padding-left:15px; }
+#sidebar .tags p { border-top:1px dotted #bbbb33; padding:5px; margin:0 0 10px 0; }
+#sidebar .tags p strong a:link, #sidebar .tags p strong a:visited { color:#666; font:bold .85em Verdana, sans-serif; letter-spacing:0.05em; padding:5px 0; }
+
+
+.dc-tags .tag0 { font-size: 65%; }
+.dc-tags .tag10 { font-size: 75%; }
+.dc-tags .tag20 { font-size: 75%; }
+.dc-tags .tag30 { font-size: 85%; color:#666; }
+.dc-tags .tag40 { font-size: 85%; }
+.dc-tags .tag50 { font-size: 100%; color:#222; }
+.dc-tags .tag60 { font-size: 100%; }
+.dc-tags .tag70 { font-size: 110%; }
+.dc-tags .tag80 { font-size: 125%; color:#bbbb33; }
+.dc-tags .tag90 { font-size: 130%; color:#bbbb33; }
+.dc-tags .tag100 { font-size: 135%; color:#222; }
+
+#sidebar .tags .tag0 { font-size: 100%; }
+#sidebar .tags .tag10 { font-size: 100%; }
+#sidebar .tags .tag20 { font-size: 100%; }
+#sidebar .tags .tag30 { font-size: 100%; }
+#sidebar .tags .tag40 { font-size: 100%; }
+#sidebar .tags .tag50 { font-size: 100%; }
+#sidebar .tags .tag60 { font-size: 100%; }
+#sidebar .tags .tag70 { font-size: 100%; }
+#sidebar .tags .tag80 { font-size: 100%; }
+#sidebar .tags .tag90 { font-size: 100%; }
+#sidebar .tags .tag100 { font-size: 100%; }
+
+/* messages d'erreur */
+.error {
+	font:bold .95em Verdana, sans-serif;
+	color:#bbbb33;
+	}
+.error ul {
+	padding-left : 20px;
+	}
+.error li {
+	list-style : square;
+	}
+	
+/* exemples de ceux que j'ajoute souvent */
+.left { float: left; margin-right : 1em; }
+.right { float: right; margin-left : 1em; }
+.center { margin-left : auto; margin-right : auto; }
+.left-text { text-align : left; }
+.right-text { text-align : right; }
+.center-text { text-align : center; }
+.little-text { font-size : .8em;}
+.little-upper-text { font-size : .8em; text-transform : uppercase; }
+
+
+/* ---------------------------------------------------
+  12. ET POUR FINIR NE PAS OUBLIER LES CLEARERS
+	ici ceux le plus souvent necessaires
+--------------------------------------------------- */
+.post, .post-content, .footnotes, .attachments, 
+.post-info-co, .post-tags, #comments, #footer {
+    clear:both;
+    }
+
+/* ------------------------------------------------------------
+	13. Plugins Externes
+------------------------------------------------------------- */
+
+#calendar table { font-size:.85em; display:block; margin:0 0 15px 0; padding:0; }
+#calendar table a:link, #calendar table a:visited { font-weight:900; color:#bbbb33; }
+#calendar table caption { padding:5px 0; }
+
+#contact h2 { border-top:1px solid #ddddaa; border-bottom:1px solid #ddddaa; padding:5px; }
+#contact h2 a:link, #contact h2 a:visited { font:bold .85em Verdana, sans-serif; color:#666; text-decoration:none; }
+#contact h2 a:hover { text-decoration:none; color:#708090; }
