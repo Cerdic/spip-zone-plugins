@@ -11,6 +11,19 @@
  *
  */
 
+/**
+ * fonction hack pour inserer les crayons sur un squelette morceau de page
+ *
+ * @param string $out
+ * @return string
+ */
+function forms_inserer_crayons($out){
+	$out = pipeline('affichage_final', "</head>".$out);
+	$out = str_replace("</head>","",$out);
+	return $out;
+}
+
+
 // Crayons sur les donnes
 function forms_donnee_valeur_colonne_table($table,$champs,$id_donnee){
 	include_spip("inc/forms");

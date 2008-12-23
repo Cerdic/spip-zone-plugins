@@ -14,12 +14,6 @@
 include_spip('inc/forms');
 
 
-function forms_inserer_crayons($out){
-	$out = pipeline('affichage_final', "</head>".$out);
-	$out = str_replace("</head>","",$out);
-	return $out;
-}
-
 // l'argument align n'est plus jamais fourni
 // http://doc.spip.org/@icone
 function icone_etendue($texte, $lien, $fond, $fonction="", $align="", $afficher='oui', $expose=false){
@@ -154,6 +148,8 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type){
 	if ($bouton_defaut) {
 		$out .= afficher_tables_tous_corps($type_form);
 	}
+	
+	include_spip('forms_crayons');
 	echo forms_inserer_crayons($out);
 	
 	echo fin_gauche();
@@ -249,6 +245,7 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 	$out .=  '</div>';
 	
 	$out .=  recuperer_fond($fond,$contexte);
+	include_spip('forms_crayons');
 	$out = forms_inserer_crayons($out);
 	
 	$out .=  "</td></tr></table><br />\n";
