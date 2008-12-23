@@ -64,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //L
 'label_theme_defaut' => 'Th&egrave;me par d&eacute;faut (type DotClear)', // CFG
 'label_theme_perso' => 'Th&egrave;me perso (&agrave; d&eacute;finir ci-dessous)', // CFG
-'label_nom_theme' => 'Saisissez le nom du th&egrave;me perso (correspond &agrave xxxx du sous-r&eacute;pertoire squelettes/themes/xxxx/', // CFG
+'label_nom_theme' => 'Saisissez le nom du th&egrave;me perso (correspond &agrave xxxx du sous-r&eacute;pertoire squelettes/themes/xxxx/)', // CFG
 'langue' => 'Langue', // Non utilise
 'langues' => 'Langues',
 'legend_layout' => 'Pr&eacute;sentation', // CFG
@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'trackbacks' => 'trackbacks', // Non utilise
 'trackbacks_pour_faire' => 'Pour faire un trackback sur ce billet', // Non utilise
 'trackbacks_fermes' => 'Les trackbacks pour ce billet sont ferm&eacute;s.', // Non utilise
-'themes_installes'=> '<strong>Les th&egrave;mes install&eacute;s sur ce spip</strong>: (cliquez sur un l\'icone d\'un th&egrave;me pour le s&eacute;lectionner)',
+'themes_installes'=> '<strong>Les th&egrave;mes install&eacute;s sur ce spip</strong> (cliquez sur un l\'icone d\'un th&egrave;me pour le s&eacute;lectionner)',
 
 //U
 'un_seul_mot' => 'un seul mot', // Oubli
