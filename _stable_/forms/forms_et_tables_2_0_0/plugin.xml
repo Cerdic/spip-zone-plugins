@@ -38,6 +38,10 @@
 		<nom>definir_session</nom>
 	</pipeline>
 	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>core/forms_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>core/forms_pipeline.php</inclure>
 	</pipeline>
