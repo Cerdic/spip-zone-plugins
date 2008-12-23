@@ -49,12 +49,7 @@ foreach(array(
 	) as $pipe)
 	if (!isset($GLOBALS['spip_pipeline'][$pipe])) $GLOBALS['spip_pipeline'][$pipe] = '';
 
-if (_request('action') OR _request('var_ajax') OR _request('formulaire_action')){
-	include_spip('forms_cvt');
-	traiter_formulaires_dynamiques();
-}
 
-	
 if (version_compare($GLOBALS['spip_version_code'],'1.9200','<')){
 	function inc_safehtml($t) {
 		include_spip('inc/forms_safehtml_191');
@@ -206,37 +201,6 @@ function autoriser_table_donnee_instituer_dist($faire,$type,$id_donnee,$qui,$opt
 
 function Forms_generer_url_sondage($id_form) {
 	return generer_url_public("sondage","id_form=$id_form",true);
-}
-
-
-// le cache est gerer automatiquement par le core en 1.9.3 ou avec le plugin balise session
-if (!defined('_DIR_PLUGIN_BALISESESSION') AND version_compare($GLOBALS['spip_version_code'],'1.93','<')) {
-	// test si un cookie sondage a ete pose
-	foreach($_COOKIE as $cookie=>$value){
-		if (preg_match(",".$GLOBALS['cookie_prefix']."cookie_form_([0-9]+),",$cookie,$reg)){
-			$idf = intval($reg[1]);
-			$res = spip_query("SELECT id_article,id_rubrique FROM spip_forms_articles WHERE id_form=".intval($idf));
-			while($row=spip_fetch_array($res)){
-				$ida = $row['id_article'];
-				$idr = $row['id_rubrique'];
-				if (
-							(isset($GLOBALS['article'])&&($GLOBALS['article']==$ida))
-						||(isset($GLOBALS['id_article'])&&($GLOBALS['id_article']==$ida))
-						||(isset($GLOBALS["article$ida"]))
-						||(isset($GLOBALS['contexte_inclus']['id_article'])&&($GLOBALS['contexte_inclus']['id_article']==$idr))
-						||(isset($GLOBALS['rubrique'])&&($GLOBALS['rubrique']==$idr))
-						||(isset($GLOBALS['id_rubrique'])&&($GLOBALS['id_rubrique']==$idr))
-						||(isset($GLOBALS["rubrique$idr"]))
-						||(isset($GLOBALS['contexte_inclus']['rubrique'])&&($GLOBALS['contexte_inclus']['rubrique']==$idr))
-						){
-						// un article qui utilise le form va etre rendu
-						// il faut utiliser le marquer cache pour ne pas polluer la page commune
-						$GLOBALS['marqueur'].=":sondage $idf";
-						break;
-					}
-			}
-		}
-	}
 }
 
 function Forms_definir_session($session){
