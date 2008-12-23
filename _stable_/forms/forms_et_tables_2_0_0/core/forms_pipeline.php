@@ -11,10 +11,6 @@
  *
  */
 
-	if (!defined('_DIR_PLUGIN_FORMS')){
-		$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-		define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end($p))."/");
-	}
 	function Forms_insert_head($flux){
 		$config = unserialize(isset($GLOBALS['meta']['forms_et_tables'])?$GLOBALS['meta']['forms_et_tables']:"");
 		if (!isset($config['inserer_head']) OR $config['inserer_head']) {

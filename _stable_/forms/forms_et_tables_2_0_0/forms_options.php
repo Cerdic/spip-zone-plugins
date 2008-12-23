@@ -11,14 +11,10 @@
  *
  */
 
-if (!defined('_DIR_PLUGIN_FORMS')){
-	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-	define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end($p))."/");
-}
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 if (defined('_DIR_PLUGIN_CRAYONS'))
 	include_spip('forms_crayons');
-
-if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('base/forms');
 $GLOBALS['forms_actif_exec'][] = 'donnees_edit';
@@ -49,15 +45,6 @@ foreach(array(
 	) as $pipe)
 	if (!isset($GLOBALS['spip_pipeline'][$pipe])) $GLOBALS['spip_pipeline'][$pipe] = '';
 
-
-if (version_compare($GLOBALS['spip_version_code'],'1.9200','<')){
-	function inc_safehtml($t) {
-		include_spip('inc/forms_safehtml_191');
-		if (function_exists('inc_safehtml_dist'))
-			return inc_safehtml_dist($t);
-		return $t;
-	}
-}
 
 function Forms_generer_url_sondage($id_form) {
 	return generer_url_public("sondage","id_form=$id_form",true);
