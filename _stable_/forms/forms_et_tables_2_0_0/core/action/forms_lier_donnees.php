@@ -10,8 +10,6 @@
  * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
-include_spip('inc/forms');
-include_spip('inc/autoriser');
 
 function action_forms_lier_donnees_dist(){
 	$securiser_action = charger_fonction('securiser_action','inc');
@@ -35,6 +33,7 @@ function action_forms_lier_donnees_dist(){
 	$redirect = _request('redirect');
 	if (!$redirect) $redirect = "";
 	
+	include_spip('inc/autoriser');
 	if ($faire=='ajouter'){
 		if ($id!=0 && $id_donnee_liee && ($id<0 OR autoriser('modifier',$type,$id))){
 			$champ_donnee = 'id_donnee';

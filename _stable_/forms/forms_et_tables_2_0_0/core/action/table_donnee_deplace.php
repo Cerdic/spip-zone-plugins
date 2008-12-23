@@ -6,12 +6,10 @@
  * Auteurs :
  * Antoine Pitrou
  * Cedric Morin
- * Renato
+ * Renato Formato
  * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
-include_spip('inc/forms');
-include_spip('inc/autoriser');
 
 function action_table_donnee_deplace_dist(){
 	$securiser_action = charger_fonction('securiser_action','inc');
@@ -22,6 +20,8 @@ function action_table_donnee_deplace_dist(){
 	$id_donnee = $args[1];
 	$ordre = _request('ordre');
 	$rang_nouv = 0;
+
+	include_spip('inc/autoriser');
 	// cas ou on a passe une liste d'id ordonnes
 	if ($ordre){
 		$table_sort = explode("&",$ordre);

@@ -26,12 +26,12 @@ function balise_FORMS_TEXTE_REPONDU_TITRE_dyn($valeur='',$texte='',$texte_autres
 	
 	if (!$GLOBALS['auteur_session']) return $texte_autres;
 	$id_auteur=$GLOBALS['auteur_session']['id_auteur'];
-	$q="SELECT id_donnee FROM spip_forms_donnees as donnees,spip_forms as forms " .
-	"WHERE forms.id_form=donnees.id_form " .
-	"AND forms.titre='".addslashes($valeur)."' " .
-	"AND id_auteur=".$id_auteur;
-	$r=spip_query($q);
-	if (spip_num_rows($r)>0) return $texte;
-	else return $texte_autres;
+	if (sql_countsel(
+	  "spip_forms_donnees as donnees,spip_forms as forms",
+	  "forms.id_form=donnees.id_form AND forms.titre=".sql_quote($valeur)." AND id_auteur=".intval($id_auteur))
+	  )
+		return $texte;
+	else
+		return $texte_autres;
 }
 ?>

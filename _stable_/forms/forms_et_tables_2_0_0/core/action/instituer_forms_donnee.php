@@ -6,7 +6,7 @@
  * Auteurs :
  * Antoine Pitrou
  * Cedric Morin
- * Renato
+ * Renato Formato
  * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
@@ -22,12 +22,15 @@ function action_instituer_forms_donnee_dist() {
 	if (!$statut) $statut = _request('statut_nouv'); // cas POST
 	if (!$statut) return; // impossible mais sait-on jamais
 
-	$id_donnee = intval($id_donnee);
-	sql_updateq("spip_forms_donnees","statut=".sql_quote($statut)." WHERE id_donnee=".intval($id_donnee));
+	include_spip('inc/autoriser');
+	if ($id_donnee = intval($id_donnee)
+	  AND autoriser('modifier',"donnee",$id_donnee)){
+		sql_updateq("spip_forms_donnees","statut=".sql_quote($statut)." WHERE id_donnee=".intval($id_donnee));
 		
-	if ($rang_nouv = intval(_request('rang_nouv'))){
-		include_spip("base/forms_base_api");
-		Forms_ordonner_donnee($id_donnee,$rang_nouv);
+		if ($rang_nouv = intval(_request('rang_nouv'))){
+			include_spip("base/forms_base_api");
+			Forms_ordonner_donnee($id_donnee,$rang_nouv);
+		}
 	}
 }
 

@@ -6,12 +6,10 @@
  * Auteurs :
  * Antoine Pitrou
  * Cedric Morin
- * Renato
+ * Renato Formato
  * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
-
-include_spip('inc/autoriser');
 
 function action_forms_champs_deplace_dist(){
 	$securiser_action = charger_fonction('securiser_action','inc');
@@ -21,6 +19,7 @@ function action_forms_champs_deplace_dist(){
 	$id_form = intval($args[0]);
 	$champ = $args[1];
 	$action = $args[2];
+	include_spip('inc/autoriser');
 	if (autoriser('modifier','form',$id_form)
 		// Monter / descendre un champ
 	  AND in_array($action,array('monter','descendre'))){
