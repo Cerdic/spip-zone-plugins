@@ -10,10 +10,10 @@
  * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
-include_spip('inc/forms');
+
 include_spip('inc/autoriser');
 
-function action_forms_champs_deplace(){
+function action_forms_champs_deplace_dist(){
 	$securiser_action = charger_fonction('securiser_action','inc');
 	$args = $securiser_action();
 	
