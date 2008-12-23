@@ -74,21 +74,6 @@
 		return $valeurs;
 	}
 
-	function Forms_donnees_vide($id_form){
-		include_spip('inc/autoriser');
-		// on teste si autorisation en masse
-		if (autoriser('supprimer','donnee',0,NULL,array('id_form'=>$id_form)))
-			spip_query("UPDATE spip_forms_donnees SET statut='poubelle' WHERE id_form="._q($id_form));
-		// sinon, on teste une par une
-		else {
-			$res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form));
-			while ($row = spip_fetch_array($res)){
-				if (autoriser('supprimer','donnee',$row['id_donnee'],NULL,array('id_form'=>$id_form)))
-					spip_query("UPDATE spip_forms_donnees SET statut='poubelle' WHERE id_donnee="._q($row['id_donnee']));
-			}
-		}
-	}
-
 	function forms_type_table_lier($type,$id){
 		$type_table = 'table';
 		if ($type == 'donnee' AND preg_match(",^(-?[0-9]+)-([a-z_0-9]+)-([0-9]+)$,",$id,$reg)){

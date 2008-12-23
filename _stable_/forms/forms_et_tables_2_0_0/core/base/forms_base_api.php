@@ -65,6 +65,22 @@ function Forms_liste_tables($type){
 	return $liste[$type];
 }
 
+/**
+ * Vider une table : passer toutes ses donnees en 'poubelle'
+ *
+ * @param int/string $type_ou_id
+ */
+function Forms_vider_tables($type_ou_id){
+	if (!$id_form = intval($type_ou_id) OR !is_numeric($type_ou_id)){
+		$liste = Forms_liste_tables($type_ou_id);
+		foreach($liste as $id)
+			Forms_vider_tables($id);
+		return;
+	}
+	Forms_supprimer_donnee($id_form,'tout');
+}
+
+
 function Forms_supprimer_tables($type_ou_id){
 	if (!$id_form = intval($type_ou_id) OR !is_numeric($type_ou_id)){
 		$liste = Forms_liste_tables($type_ou_id);
@@ -116,13 +132,31 @@ function Forms_creer_donnee($id_form,$c = NULL, $rang=NULL){
 	Forms_enregistrer_reponse_formulaire($id_form, $new, $erreur, $reponse, '', '' , $c, $rang);
 	return array($new,$erreur);
 }
+
+/**
+ * Supprimer une donnee (ie statut=poubelle)
+ * 
+ * @param unknown_type $id_form
+ * @param unknown_type $id_donnee
+ * @return unknown
+ */
 function Forms_supprimer_donnee($id_form,$id_donnee){
+	if (intval($id_donnee)==0 AND $id_donnee!=='tout') return false; // erreur
+	$id_donnee = intval($id_donnee);
 	include_spip('inc/autoriser');
-	if (!autoriser('supprimer','donnee',$id_donnee,NULL,array('id_form'=>$id_form)))
-		return _L("droits insuffisants pour supprimer la donnee $id_donnee");
-	spip_query("UPDATE spip_forms_donnees SET statut='poubelle',bgch=0,bdte=0,niveau=0 WHERE id_donnee="._q($id_donnee));
-	return true;
+	if (!autoriser('supprimer','donnee',$id_donnee,NULL,array('id_form'=>$id_form))){
+		if ($id_donnee) return _L("droits insuffisants pour supprimer la donnee $id_donnee");
+		$res = sql_select("id_donnee","spip_forms_donnees","id_form=".intval($id_form));
+		while ($row = sql_fetch($res)){
+			if (autoriser('supprimer','donnee',$row['id_donnee'],NULL,array('id_form'=>$id_form)))
+				sql_updateq("spip_forms_donnees",array('statut'=>'poubelle','bgch'=>0,'bdte'=>0,'niveau'=>0),"id_form=".intval($id_form)." AND id_donnee=".intval($row['id_donnee']));
+		}
+		return true;
+	}
+	$where = intval($id_donnee) ? " AND id_donnee=".intval($id_donnee) : "";
+	return sql_updateq("spip_forms_donnees",array('statut'=>'poubelle','bgch'=>0,'bdte'=>0,'niveau'=>0),"id_form=".intval($id_form).$where);
 }
+
 function Forms_modifier_donnee($id_donnee,$c = NULL){
 	include_spip('inc/forms');
 	return Forms_revision_donnee($id_donnee,$c);
