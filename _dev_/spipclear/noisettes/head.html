@@ -10,7 +10,7 @@
 	[(#SET{chemin_theme, [themes/(#CONFIG{spipclear/nom_theme})/]})]
 ]
 <!-- Theme DotClear : #CONFIG{spipclear/nom_theme} -->
-<link rel="stylesheet" type="text/css" href="[(#CHEMIN{[(#GET{chemin_theme})]style.css}|url_absolue_css)]" media="screen" />
+[<link rel="stylesheet" type="text/css" href="(#CHEMIN{[(#GET{chemin_theme})]style.css}|url_absolue_css)" media="screen" />]
 
 [<link rel="shortcut icon" href="(#CHEMIN{[(#GET{chemin_theme})]images/favicon.ico})" />]
 #INSERT_HEAD
