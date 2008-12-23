@@ -27,6 +27,7 @@
     $Treps_themes = array();
     $htm = '';
     if (is_dir($dir) AND $t = @opendir($dir)) {
+		$htm .= '<ul style="height: 350px; overflow: auto; margin: 10px 0; border: 1px solid #ccc; background: #fff;">';
         while (($rt = readdir($t)) !== false) {
             if (is_dir($dir.$rt) AND $r = @opendir($dir.$rt) AND $rt != '..') {
                 $capture = false;
@@ -37,14 +38,15 @@
                     if ($f == 'screenshot.jpg') $capture = true;
                 }
                 if ($nom_theme) {
-                    $htm .= '<div style="line-height: 52px;">';
+					$htm .= '<li style="padding-left: 10px; border-bottom: 2px solid #ccc;"><p><a id="'. $nom_theme .'" class="theme" href="#" title="'. _T(selectionner_theme) .'">'. $nom_theme .'</p>';
                     if ($capture) {
-                        $htm .= '<a href="#" class="mini_capture" title="<:spipclear:voir_capture:>"><img src="'._DIR_PLUGIN_SPIPCLEAR.'themes/'.$rt.'/screenshot.jpg" style="width: 48px; height: 42px; vertical-align: middle;" /></a> ';
+                        $htm .= '<img src="'._DIR_PLUGIN_SPIPCLEAR.'themes/'.$rt.'/screenshot.jpg" />';
                     }
-                    $htm .= '<a id="'.$nom_theme.'" class="theme" href="#" title="<:spipclear:selectionner_theme:>">'.$nom_theme.'</a></div>'."\r\n";
+                    $htm .= "</a></li>\r\n";
                 }
             }
         }
+		$htm .= '</ul>';
     }
     return $htm;
   }

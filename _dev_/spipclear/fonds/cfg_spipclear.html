@@ -48,6 +48,9 @@
 		<li class="editer_spipclear_nom_theme">
 			<p class="explication"><:spipclear:label_nom_theme:></p>
 			<input type="text" name="nom_theme" id="nom_theme" class="text" value="[(#ENV{nom_theme})]" size="32" />
+			[(#SET{chemin_theme, [themes/(#CONFIG{spipclear/nom_theme})/]})]
+			<p class="explication"><:spipclear:themes_installes:></p>
+			[(#ENV{nom_theme}|lister_themes)]
 		</li>
 	</ul>
 	<p class="boutons">
@@ -66,6 +69,10 @@
 			}
 			else
 				jQuery(".editer_spipclear_nom_theme").hide();
+		});
+		jQuery(".theme").click(function() {
+			jQuery("input[@name='nom_theme']").val($(this).attr("id"));
+			return false;
 		});	
 	});
 //]]>

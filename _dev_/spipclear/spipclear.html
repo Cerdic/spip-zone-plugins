@@ -2,15 +2,7 @@
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
-		<meta name="MSSmartTagsPreventParsing" content="TRUE" />
-		[<link rel="alternate" type="application/rss+xml" title="RSS" href="(#URL_PAGE{rss}|parametre_url{id_rubrique,#ID_SECTEUR})" />]
-		[<link rel="alternate" type="application/xml" title="Atom" href="(#URL_PAGE{atom}|parametre_url{id_rubrique,#ID_SECTEUR})" />]
-		<INCLURE{fond=noisettes/title}{env}>
-		[(#REM) Feuilles de styles de spipclear ]
-		[<link rel="stylesheet" type="text/css" href="(#URL_PAGE{spipclear.css})" media="screen" />]
-		[<link rel="shortcut icon" href="(#CHEMIN{[(#GET{chemin_theme})]images/favicon.ico})" />]
-		#INSERT_HEAD
+		<INCLURE{fond=noisettes/head}{env}>
 	</head>
 
 	<body>
