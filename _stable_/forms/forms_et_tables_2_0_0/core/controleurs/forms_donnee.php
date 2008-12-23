@@ -1,4 +1,16 @@
 <?php
+/*
+ * forms
+ * Gestion de formulaires editables dynamiques
+ *
+ * Auteurs :
+ * Antoine Pitrou
+ * Cedric Morin
+ * Renato Formato
+ * (c) 2005-2009 - Distribue sous licence GNU/GPL
+ *
+ */
+
 // un controleur qui n'utilise que php et les inputs dŽfauts
 function controleurs_forms_donnee_dist($regs) {
 	list(,$crayon,$type,$champ,$id) = $regs;

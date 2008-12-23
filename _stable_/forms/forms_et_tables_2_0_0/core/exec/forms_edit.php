@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * ??? 2005,2006 - Distribue sous licence GNU/GPL
+ * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -84,31 +84,16 @@ function contenu_boite_resume($id_form, $row, &$apercu){
 	}
 
 	$out .= "<br />";
-	if (version_compare($GLOBALS['spip_version_code'],'1.9250','>')){
-		$out .= bouton_block_depliable(_T("forms:apparence_formulaire"),true,"preview_form");
-		$out .= debut_block_depliable(true,"preview_form");
-	}
-	else {
-		$out .= "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
-		$out .= bouton_block_invisible("preview_form");
-		$out .= "<strong class='verdana3' style='text-transform: uppercase;'>"
-			._T("forms:apparence_formulaire")."</strong>";
-		$out .= "</div>\n";
-		$out .= debut_block_visible("preview_form");
-	}
+	$out .= bouton_block_depliable(_T("forms:apparence_formulaire"),true,"preview_form");
+	$out .= debut_block_depliable(true,"preview_form");
 	$out .= "<p>" . _T("forms:info_apparence") . "</p>\n";
 	$out .= "<div id='apercu'>$apercu</div>";
 	$out .= fin_block();
 
-	if ($GLOBALS['spip_version_code']<1.92)		ob_start(); // des echo direct en 1.9.1
 	$liste = afficher_articles(_T("$prefixei18n:articles_utilisant"),
 		array('FROM' => 'spip_articles AS articles, spip_forms_articles AS lien',
 		'WHERE' => "lien.id_article=articles.id_article AND id_form="._q($id_form)." AND statut!='poubelle'",
 		'ORDER BY' => "titre"));
-	if ($GLOBALS['spip_version_code']<1.92) {
-		$liste = ob_get_contents();
-		ob_end_clean();
-	}
 
 	$out .= $liste;
 
@@ -122,8 +107,7 @@ function exec_forms_edit(){
 
 	$id_form = intval(_request('id_form'));
 
-	if (!include_spip('inc/autoriser'))
-		include_spip('inc/autoriser_compat');
+	include_spip('inc/autoriser');
 	if (!autoriser('structurer','form',$id_form)) {
 		echo debut_page("&laquo; $titre &raquo;", "documents", "forms","");
 		echo _T('acces_interdit');
@@ -136,7 +120,6 @@ function exec_forms_edit(){
 	$supp_rejet = _request('supp_rejet');
 	$titre = _request('titre');
 
-	_Forms_install();
 	if ($supp_form)
 		$id_form = $supp_form;
 
@@ -315,8 +298,7 @@ function exec_forms_edit(){
 
 	echo $out;
 
-	if ($GLOBALS['spip_version_code']>=1.9203)
-		echo fin_gauche();
+	echo fin_gauche();
 	echo fin_page();
 }
 

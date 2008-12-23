@@ -1,4 +1,15 @@
 <?php
+/*
+ * forms
+ * Gestion de formulaires editables dynamiques
+ *
+ * Auteurs :
+ * Antoine Pitrou
+ * Cedric Morin
+ * Renato Formato
+ * (c) 2005-2009 - Distribue sous licence GNU/GPL
+ *
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 

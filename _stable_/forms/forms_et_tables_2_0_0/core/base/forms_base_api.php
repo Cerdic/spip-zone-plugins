@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato Formato
- * (c) 2005-2007 - Distribue sous licence GNU/GPL
+ * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
 

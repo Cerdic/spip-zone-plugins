@@ -1,4 +1,16 @@
 <?php
+/*
+ * forms
+ * Gestion de formulaires editables dynamiques
+ *
+ * Auteurs :
+ * Antoine Pitrou
+ * Cedric Morin
+ * Renato Formato
+ * (c) 2005-2009 - Distribue sous licence GNU/GPL
+ *
+ */
+
 function controleurs_forms_champ_dist($regs) {
 	list(,$crayon,$type,$champ,$id) = $regs;
 	$e = explode('-',$id);

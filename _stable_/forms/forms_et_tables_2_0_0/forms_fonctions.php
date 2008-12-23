@@ -1,5 +1,4 @@
 <?php
-
 /*
  * forms
  * Gestion de formulaires editables dynamiques
@@ -7,13 +6,11 @@
  * Auteurs :
  * Antoine Pitrou
  * Cedric Morin
- * Renato
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * Renato Formato
+ * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
 
-	if ($GLOBALS['spip_version_code']<1.92)
-		include_spip('inc/forms_compat_191');
 	include_spip('forms_filtres');
 	function forms_calcule_les_valeurs($type, $id_donnee, $champ, $id_form, $separateur=" ",$etoile=false,$traduit=true){
 		static $raw_vals,$raw_id=0;

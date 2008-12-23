@@ -7,14 +7,13 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * 2005,2006 - Distribue sous licence GNU/GPL
+ * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
 include_spip('inc/forms');
 include_spip('inc/forms_edit');
 include_spip('inc/forms_type_champs');
-if (!include_spip('inc/autoriser'))
-	include_spip('inc/autoriser_compat');
+include_spip('inc/autoriser');
 // TODO : charger la bonne langue !
 function Forms_ordonne_champs($id_form){
 	if (strlen($ordre = _request('ordre'))){

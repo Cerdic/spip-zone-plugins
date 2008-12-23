@@ -7,19 +7,9 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * 2005,2006 - Distribue sous licence GNU/GPL
+ * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
-
-	if ($GLOBALS['spip_version_code']<1.92)
-		include_spip('inc/forms_compat_191');
-
-	function _Forms_install(){
-		if ($GLOBALS['spip_version_code']<1.9204){
-			include_spip('base/forms_upgrade');
-			Forms_upgrade();
-		}
-	}
 
 	function Forms_structure($id_form, $complete = true){
 		include_spip('inc/texte'); # typo et textebrut
@@ -85,8 +75,7 @@
 	}
 
 	function Forms_donnees_vide($id_form){
-		if (!include_spip('inc/autoriser'))
-			include_spip('inc/autoriser_compat');
+		include_spip('inc/autoriser');
 		// on teste si autorisation en masse
 		if (autoriser('supprimer','donnee',0,NULL,array('id_form'=>$id_form)))
 			spip_query("UPDATE spip_forms_donnees SET statut='poubelle' WHERE id_form="._q($id_form));
@@ -384,8 +373,7 @@
 		}
 
 		// Creer un formulaire
-		if (!include_spip('inc/autoriser'))
-			include_spip('inc/autoriser_compat');
+		include_spip('inc/autoriser');
 		if (autoriser('creer','form')) {
 			$out .= "\n<br />";
 			$link = generer_url_ecrire('forms_edit',"new=oui&retour=".urlencode(self()));
@@ -393,25 +381,7 @@
 				$link, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "creer.gif", false);
 		}
 
-		if (version_compare($GLOBALS['spip_version_code'],'1.9250','>')){
-			$s .= cadre_depliable(_DIR_PLUGIN_FORMS."img_pack/form-24.png",_T("forms:article_inserer_un_formulaire"),true,$out,"ajouter_form");
-		}
-		else {
-			$s .= "\n";
-			$s .= debut_cadre_relief("../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", true);
-
-			$s .= "<div style='padding: 2px; background-color: $couleur_claire; text-align: center; color: black;'>";
-			$s .= bouton_block_invisible("ajouter_form");
-			$s .= "<strong class='verdana3' style='text-transform: uppercase;'>"
-				._T("forms:article_inserer_un_formulaire")."</strong>";
-			$s .= "</div>\n";
-
-			$s .= debut_block_invisible("ajouter_form");
-			$s .= $out;
-			$s .= fin_block();
-
-			$s .= fin_cadre_relief(true);
-		}
+		$s .= cadre_depliable(_DIR_PLUGIN_FORMS."img_pack/form-24.png",_T("forms:article_inserer_un_formulaire"),true,$out,"ajouter_form");
 
 		return $s;
 	}
@@ -585,8 +555,7 @@
 
 	function Forms_enregistrer_reponse_formulaire($id_form, &$id_donnee, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='', $c=NULL, $rang=NULL) {
 		$r = '';
-		if (!include_spip('inc/autoriser'))
-			include_spip('inc/autoriser_compat');
+		include_spip('inc/autoriser');
 
 		$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 		if (!$row = spip_fetch_array($result)) {
@@ -610,10 +579,7 @@
 			if ($id_donnee<0) $url = parametre_url($url,'id_donnee','');
 			$ok = true;
 			$confirme = false;
-			if ($GLOBALS['spip_version_code']<1.92)
-				$id = _request("deja_enregistre_$id_form");
-			else
-				$id = _request("deja_enregistre_$id_form", $c);
+			$id = _request("deja_enregistre_$id_form", $c);
 			if ($id = intval($id)){
 				$id_donnee = $id;
 				$ok = false;

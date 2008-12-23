@@ -7,14 +7,14 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato Formato
- * (c) 2005,2006 - Distribue sous licence GNU/GPL
+ * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if (defined('_DIR_PLUGIN_CRAYONS'))
-	include_spip('forms_crayons');
+	include_spip('crayons/forms_crayons');
 
 include_spip('base/forms');
 $GLOBALS['forms_actif_exec'][] = 'donnees_edit';

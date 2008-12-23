@@ -7,20 +7,18 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
 
 include_spip('inc/forms');
 include_spip("inc/presentation");
-if (!include_spip('inc/autoriser'))
-	include_spip('inc/autoriser_compat');
+include_spip('inc/autoriser');
 
 function exec_forms_reponses(){
 	global $id_form;
 	global $supp_reponse;
 	$debut = _request('debut');
-  _Forms_install();
 
 	$id_form = intval($id_form);
 
@@ -207,8 +205,7 @@ function exec_forms_reponses(){
 
 
 
-	if ($GLOBALS['spip_version_code']>=1.9203)
-		echo fin_gauche();
+	echo fin_gauche();
 	echo fin_page();
 }
 

@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
 include_spip('inc/forms');
@@ -23,8 +23,7 @@ function action_forms_telecharger(){
 	if (!include_spip("inc/securiser_action"))
 		include_spip("inc/actions");
 	if (verifier_action_auteur("forms_telecharger-$arg",$hash,$id_auteur)==TRUE) {
-		if (!include_spip('inc/autoriser'))
-			include_spip('inc/autoriser_compat');
+		include_spip('inc/autoriser');
 		if (autoriser('supprimer','form',$id_form)){
 			$id_form = intval($arg);
 			$delim = _request('delim');

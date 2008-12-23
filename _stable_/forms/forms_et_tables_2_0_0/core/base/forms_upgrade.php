@@ -6,8 +6,8 @@
  * Auteurs :
  * Antoine Pitrou
  * Cedric Morin
- * Renato
- * (c) 2005,2006 - Distribue sous licence GNU/GPL
+ * Renato Formato
+ * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
 

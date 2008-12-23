@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * 2005,2006 - Distribue sous licence GNU/GPL
+ * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
 // compatibilite trans 1.9.1-1.9.2
@@ -426,24 +426,11 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 
 		$formulaire .= "</div>";
 		$formulaire .= "</form>";
-		if (version_compare($GLOBALS['spip_version_code'],'1.9250','>')){
-			$formulaire =
-				bouton_block_depliable(typo($row['titre'])." (".typo(Forms_nom_type_champ($row['type'])).")",$visible,"champ_$champ")
-				. debut_block_depliable($visible,"champ_$champ")
-				. $formulaire
-				. fin_block();
-		}
-		else {
-			$formulaire =
-				"<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;"
-				. ($visible ? bouton_block_visible("champ_$champ") : bouton_block_invisible("champ_$champ"))
-				. "<strong id='titre_nom_$champ'>".typo($row['titre'])."</strong>"
-				. "<br /></div>"
-				. "(".typo(Forms_nom_type_champ($row['type'])).")\n"
-				. ($visible ? debut_block_visible("champ_$champ") : debut_block_invisible("champ_$champ"))
-				. $formulaire
-				. fin_block();
-		}
+		$formulaire =
+			bouton_block_depliable(typo($row['titre'])." (".typo(Forms_nom_type_champ($row['type'])).")",$visible,"champ_$champ")
+			. debut_block_depliable($visible,"champ_$champ")
+			. $formulaire
+			. fin_block();
 
 		if ($ajax && ($champ == $ajax))
 			return $formulaire;

@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
 include_spip('inc/forms');
@@ -23,8 +23,7 @@ function action_forms_donnee_supprime(){
 		include_spip("inc/actions");
 	if (verifier_action_auteur("forms_donnee_supprime-$arg",$hash,$id_auteur)==TRUE) {
 		list($id_form,$id_donnee) = explode(':',$arg);
-		if (!include_spip('inc/autoriser'))
-			include_spip('inc/autoriser_compat');
+		include_spip('inc/autoriser');
 		if (autoriser('supprimer','donnee',$id_donnee,NULL,array('id_form'=>$id_form))){
 			if ($result = spip_query("DELETE FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND id_donnee="._q($id_donnee)))
 				$result = spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));

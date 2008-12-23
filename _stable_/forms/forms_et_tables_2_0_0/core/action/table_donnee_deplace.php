@@ -7,12 +7,11 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
 include_spip('inc/forms');
-if (!include_spip('inc/autoriser'))
-	include_spip('inc/autoriser_compat');
+include_spip('inc/autoriser');
 
 function action_table_donnee_deplace(){
 	global $auteur_session;

@@ -7,13 +7,12 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato Formato
- * (c) 2005-2008 - Distribue sous licence GNU/GPL
+ * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
 
 function formulaires_forms_traiter_dist($id_form = 0, $id_article = 0, $id_donnee = 0, $id_donnee_liee = 0, $class='', $script_validation = 'valide_form', $message_confirm='forms:avis_message_confirmation',$reponse_enregistree="forms:reponse_enregistree",$forms_obligatoires=""){
-	if (!include_spip('inc/autoriser'))
-	include_spip('inc/autoriser_compat');
+	include_spip('inc/autoriser');
 	
 	$res = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 	$row = spip_fetch_array($res);

@@ -7,23 +7,12 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
 
 include_spip('inc/forms');
 
-
-if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) {
-// fonction de SPIP 1.9.2 présente dans inc/presentation, ayant disparue en 1.9.3
-	function afficher_rubriques($titre_table, $requete) {
-		global $options;
-		$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
-		$largeurs = array('12','', '');
-		$styles = array('', 'arial2', 'arial11');
-		return affiche_tranche_bandeau($requete, "rubrique-24.gif", "#999999", "white", $tmp_var, $titre_table, false, $largeurs, $styles, 'afficher_rubriques_boucle');
-	}
-}
 
 function forms_inserer_crayons($out){
 	$out = pipeline('affichage_final', "</head>".$out);
@@ -115,8 +104,7 @@ background-color:#FFFFFF;border:2px solid #666666;display:inline;margin:0pt;padd
 function afficher_tables_tous_corps($type_form, $link=NULL, $fond='fonds/tables_tous'){
 	global $spip_lang_right;
 	include_spip('public/assembler');
-	if (!include_spip('inc/autoriser'))
-		include_spip('inc/autoriser_compat');
+	include_spip('inc/autoriser');
 	$out = "";
 	$prefix = forms_prefixi18n($type_form);
 	$contexte = array('type_form'=>$type_form,'prefix'=>$prefix,'titre_liste'=>_T("$prefix:toutes_tables"),'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
@@ -139,11 +127,8 @@ function afficher_tables_tous_corps($type_form, $link=NULL, $fond='fonds/tables_
 function afficher_tables_tous($type_form, $titre_page, $titre_type){
 	global $spip_lang_right;
 	include_spip("inc/presentation");
-	if (!include_spip('inc/autoriser'))
-		include_spip('inc/autoriser_compat');
+	include_spip('inc/autoriser');
 
-	_Forms_install();
-	
 	debut_page($titre_page, "documents", "forms");
 	debut_gauche();
 	debut_boite_info();
@@ -171,16 +156,14 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type){
 	}
 	echo forms_inserer_crayons($out);
 	
-	if ($GLOBALS['spip_version_code']>=1.9203)
-		echo fin_gauche();
+	echo fin_gauche();
 	echo fin_page();
 }
 
 
 function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_page=false, $contexte = array()){
 	global $spip_lang_right,$spip_lang_left;
-	if (!include_spip('inc/autoriser'))
-		include_spip('inc/autoriser_compat');
+	include_spip('inc/autoriser');
 	include_spip('public/assembler');
 	$out = "";
 	if (!$id_form = intval($id_form)) return $out;
@@ -275,8 +258,7 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 function affichage_donnees_tous($type_form,$c=NULL){
   include_spip("inc/presentation");
   $id_form = _request('id_form', $c);
-	if (!include_spip('inc/autoriser'))
-		include_spip('inc/autoriser_compat');
+	include_spip('inc/autoriser');
 	if (!autoriser('voir','donnee',0,null,array('id_form'=>$id_form,'type_form'=>$type_form))) {
 		echo debut_page("&laquo; $titre &raquo;", "documents", "forms","");
 		echo _T('acces_interdit');
@@ -284,7 +266,6 @@ function affichage_donnees_tous($type_form,$c=NULL){
 		exit();
 	}
 
-  _Forms_install();
 	$row=spip_fetch_array(spip_query("SELECT titre FROM spip_forms WHERE id_form="._q(_request('id_form'))));
 	$titre_page = $row['titre'];
 	echo debut_page($titre_page, "documents", "forms");
@@ -295,8 +276,7 @@ function affichage_donnees_tous($type_form,$c=NULL){
 			$retour = generer_url_ecrire('tables_tous');
 	}
 	echo affichage_donnees_tous_corps($type_form,$id_form,$retour, $titre_page);
-	if ($GLOBALS['spip_version_code']>=1.9203)
-		echo fin_gauche();
+	echo fin_gauche();
 	echo fin_page();
 }
 
@@ -304,10 +284,8 @@ function affichage_donnee_edit($type_form){
 	global $spip_lang_right;
   include_spip("inc/presentation");
 	include_spip('public/assembler');
-	if (!include_spip('inc/autoriser'))
-		include_spip('inc/autoriser_compat');
+	include_spip('inc/autoriser');
 
-  _Forms_install();
 	$prefix = forms_prefixi18n($type_form);
   $icone = find_in_path("img_pack/$type_form-24.png");
   if (!$icone)
@@ -391,7 +369,6 @@ function affichage_donnee_edit($type_form){
 	
 	if ($id_donnee) {
 
-		if ($GLOBALS['spip_version_code']<1.92)		ob_start(); // des echo direct en 1.9.1
 		$liste = afficher_articles(_T("forms:info_articles_lies_donnee"),
 			array('FROM' => 'spip_articles AS articles, spip_forms_donnees_articles AS lien',
 			'WHERE' => "lien.id_article=articles.id_article AND lien.id_donnee="._q($id_donnee)." AND articles.statut!='poubelle'",
@@ -405,10 +382,6 @@ function affichage_donnee_edit($type_form){
 			array('FROM' => 'spip_auteurs AS auteurs, spip_forms_donnees_auteurs AS lien',
 			'WHERE' => "lien.id_auteur=auteurs.id_auteur AND lien.id_donnee="._q($id_donnee)." AND auteurs.statut!='poubelle'",
 			'ORDER BY' => "titre"));*/
-		if ($GLOBALS['spip_version_code']<1.92) {
-			$liste = ob_get_contents();
-			ob_end_clean();
-		}
 		echo $liste;
 	}
 
@@ -424,8 +397,7 @@ function affichage_donnee_edit($type_form){
 		self());
 	echo "<div id='forms_donnees_liantes'>$out</div>";
 	
-	if ($GLOBALS['spip_version_code']>=1.9203)
-		echo fin_gauche();
+	echo fin_gauche();
 	echo fin_page();
 }
 ?>

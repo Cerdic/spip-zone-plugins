@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * ??? 2005,2006 - Distribue sous licence GNU/GPL
+ * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -238,17 +238,6 @@ $table_des_tables['forms']='forms';
 $table_des_tables['forms_champs'] = 'forms_champs';
 $table_des_tables['forms_champs_choix'] = 'forms_champs_choix';
 $table_des_tables['forms_donnees']='forms_donnees';
-
-global $spip_version_code;
-if (version_compare($spip_version_code,'1.9250','<')){
-	$table_des_tables['forms_donnees_champs']='forms_donnees_champs';
-	$table_des_tables['forms_articles']='forms_articles';
-	$table_des_tables['forms_donnees_articles']='forms_donnees_articles';
-	$table_des_tables['forms_donnees_auteurs']='forms_donnees_auteurs';
-	$table_des_tables['forms_donnees_rubriques']='forms_donnees_rubriques';
-	$table_des_tables['documents_donnees']='documents_donnees';
-	$table_des_tables['forms_donnees_donnees']='forms_donnees_donnees';
-}
 
 global  $exceptions_des_jointures;
 $exceptions_des_jointures['type_form'] = array('spip_forms', 'type_form');

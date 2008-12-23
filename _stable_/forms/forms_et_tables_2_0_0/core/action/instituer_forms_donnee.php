@@ -1,14 +1,15 @@
 <?php
-
-/***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
- *                                                                         *
- *  Copyright (c) 2001-2006                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
-\***************************************************************************/
+/*
+ * forms
+ * Gestion de formulaires editables dynamiques
+ *
+ * Auteurs :
+ * Antoine Pitrou
+ * Cedric Morin
+ * Renato
+ * (c) 2005-2009 - Distribue sous licence GNU/GPL
+ *
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -29,8 +30,6 @@ function action_instituer_forms_donnee_dist() {
 		if (!$statut) $statut = _request('statut_nouv'); // cas POST
 		if (!$statut) return; // impossible mais sait-on jamais
 
-		if ($GLOBALS['spip_version_code']<1.92)
-			include_spip('inc/forms_compat_191');
 		$id_donnee = intval($id_donnee);
 		spip_query("UPDATE spip_forms_donnees SET statut="._q($statut)." WHERE id_donnee="._q($id_donnee));
 		

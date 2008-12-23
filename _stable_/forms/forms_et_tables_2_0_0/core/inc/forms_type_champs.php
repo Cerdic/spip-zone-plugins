@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- *  2005,2006 - Distribue sous licence GNU/GPL
+ *  2005-2009 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -112,10 +112,7 @@
 		}
 		foreach($structure as $champ=>$infos){
 			$type = $infos['type'];
-			if ($GLOBALS['spip_version_code']<1.92)
-				$val = _request($champ);
-			else
-				$val = _request($champ, $c);
+			$val = _request($champ, $c);
 			if ($type == 'fichier') $val = $_FILES[$champ]['tmp_name'];
 			// verifier la presence des champs obligatoires	dont la saisie n'est pas desactivee
 			if (($val===NULL || !strlen($val)) && ($infos['obligatoire'] == 'oui') && ($infos['saisie'] != 'non'))
@@ -141,10 +138,7 @@
 
 		foreach($structure as $champ=>$infos){
 			$type = $infos['type'];
-			if ($GLOBALS['spip_version_code']<1.92)
-				$val = _request($champ);
-			else
-				$val = _request($champ, $c);
+			$val = _request($champ, $c);
 			if ( $val!=NULL && strlen($val) ) {
 
 				// Verifier la conformite des donnees entrees
@@ -203,10 +197,7 @@
 						break;
 					case 'password':
 						if (strlen($infos['extra_info'])){
-							if ($GLOBALS['spip_version_code']<1.92)
-								$val_confirm = _request("{$champ}_confirm");
-							else
-								$val_confirm = _request("{$champ}_confirm", $c);
+							$val_confirm = _request("{$champ}_confirm", $c);
 							if ($val!=$val_confirm)
 								$erreur[$champ] = _T("info_passes_identiques");
 						}

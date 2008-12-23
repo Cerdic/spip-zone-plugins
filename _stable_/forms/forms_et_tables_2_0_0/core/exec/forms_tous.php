@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -18,8 +18,7 @@ function exec_forms_tous(){
   include_spip("inc/presentation");
 	include_spip('public/assembler');
 
-  _Forms_install();
-	
+
 	debut_page(_T("forms:tous_formulaires"), "documents", "forms");
 	debut_gauche();
 	debut_boite_info();
@@ -43,8 +42,7 @@ function exec_forms_tous(){
 	echo recuperer_fond("fonds/tables_tous",$contexte);
 	echo "<br />\n";
 
-	if (!include_spip('inc/autoriser'))
-		include_spip('inc/autoriser_compat');
+	include_spip('inc/autoriser');
 	if (autoriser('creer','form')) {
 		echo "<div style='text-align:right'>";
 		$link=generer_url_ecrire('forms_edit', 'new=oui');
@@ -53,8 +51,7 @@ function exec_forms_tous(){
 		echo "</div>";
 	}
 	
-	if ($GLOBALS['spip_version_code']>=1.9203)
-		echo fin_gauche();
+	echo fin_gauche();
 	echo fin_page();
 }
 
