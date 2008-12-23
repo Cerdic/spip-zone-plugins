@@ -11,7 +11,7 @@
 				[(#REM) Liste des produits de la rubrique ]
 
 				<ul class = "ListeProduitsPetits">
-				<THELIA_PROD type="PRODUIT" rubrique="THELIA-RUBRIQUE_ID" classement="inverse" num="12">
+				<THELIA_PROD type="PRODUIT" rubrique="#ENV{id_rubrique}" classement="inverse" num="12">
 					<li class="produitPetit">
 					<form action="#URL_PAGE{panier,lang=#LANG}" method="post" id="formAjouterTHELIA-ID" class="formulaire-produit">
 					<fieldset>
@@ -82,6 +82,7 @@
 				
 				[(#REM) Page suivante / Nombre de page / Page précdédente ]
 	
+			<THELIA_RUBRIQUE type="RUBRIQUE" id="#ENV{id_rubrique}">
 				<div id="pages">
 					<THELIA_PAGEPREC type="PAGE" rubrique="THELIA-RUBRIQUE_ID" num="12" typeaff="0" avance="precedente">
 					<a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-RUBRIQUE_ID&amp;page_thelia=THELIA-PAGE_PREC}" class="LIEN_pages"><:spipthelia:page_precedente:></a>
@@ -102,4 +103,5 @@
 					| <a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-RUBRIQUE_ID&amp;page_thelia=THELIA-PAGE_SUIV}" class="LIEN_pages"><:spipthelia:page_suivante:></a>
 					</THELIA_PAGE_SUIVANTE>
 				</div>	
+			</THELIA_RUBRIQUE>
 		
