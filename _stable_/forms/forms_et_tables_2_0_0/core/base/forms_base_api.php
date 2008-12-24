@@ -81,7 +81,10 @@ function forms_les_valeurs($id_form, $id_donnee, $champ, $separateur=",",$etoile
 	return forms_enumerer_les_valeurs_champs($id_form,$id_donnee,$champ,$separateur,$etoile,$traduit);
 }
 
-function forms_arbre_lister_relations($id_form,$id_parent,$position="enfant"){
-	return forms_arbre_liste_relations($id_form,$id_parent,$position);
+/**
+ * Depreciee, utiliser forms_arbre_lister_relations
+ */
+function forms_arbre_liste_relations($id_form,$id_parent,$position="enfant"){
+	return forms_arbre_lister_relations($id_form,$id_parent,$position);
 }
 ?>
