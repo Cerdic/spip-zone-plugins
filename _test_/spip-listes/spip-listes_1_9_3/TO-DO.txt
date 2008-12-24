@@ -5,6 +5,7 @@
 
 
 TO-DO:
+. vérifier le champ from avec apostrophe
 . semble y avoir qq conflits avec autres plug-in. Vérifier ! see: http://docs.jquery.com/Core/jQuery.noConflict
 . verifier envoi du test. Il doit etre au format HTML suivi d'un autre au format Texte. Test au 24/06/2008, seule la version texte est envoyee.
 . terminer la compat svn (fouiller!) CP20080609
