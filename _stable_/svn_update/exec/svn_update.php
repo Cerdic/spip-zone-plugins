@@ -22,7 +22,7 @@ function exec_svn_update() {
 
 
 	if ($connect_statut != '0minirezo'
-	OR !in_array($connect_id_auteur, explode(':', _SVN_UPDATE_AUTEURS))) {
+	OR !in_array($connect_id_auteur, explode(';', _SVN_UPDATE_AUTEURS))) {
 		echo _T('avis_non_acces_page');
 		fin_page();
 		exit;
