@@ -1,6 +1,6 @@
 <li>
-	<label><:inscription2:pays:></label>
-	<select name='pays' id='pays' class='text' style='width:auto'>
+	<label><:inscription2:pays_pro:></label>
+	<select name='pays_pro' id='pays_pro' class='text' style='width:auto'>
 		<option value=''><:inscription2:pays:></option>
 		<BOUCLE_pays(SPIP_GEO_PAYS){par id_pays}>
 			<option value='#ID_PAYS'[(#ID_PAYS|=={#ENV{val}}|oui) selected='selected']>#PAYS</option>
