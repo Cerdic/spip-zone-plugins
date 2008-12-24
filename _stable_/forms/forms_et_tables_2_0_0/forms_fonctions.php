@@ -44,7 +44,7 @@
 		if (!isset($prefixi18n[$type]))
 			$prefixi18n[$type] = forms_prefixi18n($type);
 		if (!isset($liste_table[$type])){
-			include_spip("base/forms_base_api");
+			include_spip("base/forms_base_api_v2");
 			$liste_table[$type] = implode(",",forms_lister_tables($type));
 		}
 		include_spip("base/abstract_sql");
