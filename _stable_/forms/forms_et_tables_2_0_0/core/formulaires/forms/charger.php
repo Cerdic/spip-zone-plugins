@@ -14,9 +14,9 @@
 function formulaires_forms_charger_dist($id_form = 0, $id_article = 0, $id_donnee = 0, $id_donnee_liee = 0, $class='', $script_validation = 'valide_form', $message_confirm='forms:avis_message_confirmation',$reponse_enregistree="forms:reponse_enregistree",$forms_obligatoires=""){
 	$valeurs = array();
 	include_spip('inc/autoriser');
+	include_spip('base/abstract_sql');
 	
-	$res = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
-	if (!$row = spip_fetch_array($res)) 
+	if (!$row = sql_fetsel("*","spip_forms","id_form=".intval($id_form)))
 		// pas de saisie, formulaire inconnu !
 		return array(false,array());
 	else {
@@ -37,7 +37,9 @@ function formulaires_forms_charger_dist($id_form = 0, $id_article = 0, $id_donne
 	
 	$id_donnee = $id_donnee?$id_donnee:intval(_request('id_donnee'));
 	
+	/* doublonne maintenant avec le pipeline formulaires_charger */
 	$valeurs = pipeline('forms_pre_remplit_formulaire',array('args'=>array('id_form'=>$id_form,'id_donne'=>$id_donnee),'data'=>$valeurs));
+	
 	$valeurs['formvisible'] = true;
 	$valeurs['affiche_sondage'] = '';
 	if (
@@ -74,23 +76,20 @@ function formulaires_forms_charger_dist($id_form = 0, $id_article = 0, $id_donne
 		include_spip('inc/forms');
 		$cookie = $_COOKIE[forms_nom_cookie_form($id_form)];
 		//On retourne les donnees si auteur ou cookie
-		$q = "SELECT donnees.id_donnee " .
-			"FROM spip_forms_donnees AS donnees " .
-			"WHERE donnees.id_form="._q($id_form)." ".
-			"AND donnees.statut='publie' AND (";
+		$where_cookie="";
 		if ($cookie) { 
-			$q.="cookie="._q($cookie). ($id_auteur?" OR id_auteur="._q($id_auteur):" AND id_auteur=0");
+			$where_cookie.="cookie="._q($cookie). ($id_auteur?" OR id_auteur=".intval($id_auteur):" AND id_auteur=0");
 		}
 		else if ($id_auteur)
-				$q.="id_auteur="._q($id_auteur);
+				$where_cookie.="id_auteur=".intval($id_auteur);
 			else
-				$q.="0=1";
+				$where_cookie.="0=1";
 		$q .= ") ";
-		//si unique, ignorer id_donnee, si pas id_donnee, ne renverra rien
-		if ($row['multiple']=='oui') 
-		  $q.="AND donnees.id_donnee="._q($id_donnee);
-		$res = spip_query($q);
-		if($row2 = spip_fetch_array($res)){
+		if($row2 = sql_fetsel("donnees.id_donnee","spip_forms_donnees AS donnees","donnees.id_form=".intval($id_form)." AND donnees.statut='publie' "
+		  ."AND ($where_cookie)"
+			//si unique, ignorer id_donnee, si pas id_donnee, ne renverra rien
+		  . ($row['multiple']=='oui'?" AND donnees.id_donnee=".intval($id_donnee):""))
+		  ){
 			if (($row['multiple']=='non') && ($row['modifiable']=='non')) return array(false,$valeurs);
 			$id_donnee=$row2['id_donnee'];
 			$valeurs = array_merge($valeurs,forms_valeurs($id_donnee,$id_form));

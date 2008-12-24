@@ -13,10 +13,10 @@
 
 function formulaires_forms_traiter_dist($id_form = 0, $id_article = 0, $id_donnee = 0, $id_donnee_liee = 0, $class='', $script_validation = 'valide_form', $message_confirm='forms:avis_message_confirmation',$reponse_enregistree="forms:reponse_enregistree",$forms_obligatoires=""){
 	include_spip('inc/autoriser');
+	$resultat = array();
 	
-	$res = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
-	$row = spip_fetch_array($res);
-	
+	$row = sql_fetsel("*","spip_forms","id_form=".intval($id_form));
+
 	if (  $row['type_form'] == 'sondage'
 	  OR  $row['modifiable']=='oui'
 	  OR  $row['multiple']=='non' ){
@@ -28,7 +28,7 @@ function formulaires_forms_traiter_dist($id_form = 0, $id_article = 0, $id_donne
 	if (!$erreur) {
 		$formok = _T($reponse_enregistree)."<span class='id_donnee' rel='$id_donnee'></span>";
 		if ($id_donnee_liee && $id_donnee){
-			spip_query("INSERT INTO spip_forms_donnees_donnees (id_donnee,id_donnee_liee) VALUES ("._q($id_donnee).","._q($id_donnee_liee).")");
+			sql_insertq("spip_forms_donnees_donnees",array("id_donnee"=>$id_donnee,"id_donnee_liee"=>$id_donnee_liee);
 		}
 		if ($reponse)
 		  $formok .= "<span class='spip_form_ok_confirmation'>"
@@ -44,22 +44,23 @@ function formulaires_forms_traiter_dist($id_form = 0, $id_article = 0, $id_donne
 		  ) ) {
 			// reinjecter id_donnee
 			set_request('id_donnee',$id_donnee);
-			$formvisible = true;
+			$resultat['editable'] = true;
 		}
 		else {
-			$formvisible = false;
+			$resultat['editable'] = false;
 		}
 		if ($message_complementaire)
 			$formok .= $message_complementaire;
 		if ($url_validation)
 			$formok .= "<img src='$url_validation' width='1' height='1' alt='validation de la saisie' />";
+		$resultat['message_ok'] = $formok;
 	}
 	else {
-		$formok = join(' ',$erreur);
-		$formvisible = true;
+		$resultat['message_erreur'] = join(' ',$erreur);
+		$resultat['editable'] = true;
 	}
-		
-	return array($formvisible,$formok);
+
+	return $resultat;
 }
 
 
