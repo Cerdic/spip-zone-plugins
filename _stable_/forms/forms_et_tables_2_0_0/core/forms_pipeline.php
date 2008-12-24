@@ -170,12 +170,16 @@
 	function forms_post_edition($flux){
 		if ($flux['args']['table']!='spip_articles') return $flux;
 		$id_article = intval($flux['args']['id_objet']);
-		$res = spip_query("SELECT * FROM spip_articles WHERE id_article="._q($id_article));
-		spip_query("DELETE FROM spip_forms_articles WHERE id_article=$id_article");
-		if (($row = spip_fetch_array($res))
-		 && (count($forms = forms_trouve_liens(implode(' ',$row)))))
-			spip_query("INSERT INTO spip_forms_articles (id_article, id_form) ".
-				"VALUES ($id_article, ".join("), ($id_article, ", $forms).")");
+		$res = sql_select("*","spip_articles","id_article=".intval($id_article));
+		sql_delete("spip_forms_articles","id_article=".intval($id_article));
+		if (($row = sql_fetch($res))
+		 && (count($forms = forms_trouve_liens(implode(' ',$row))))){
+		 	$ins = array();
+		 	foreach($forms as $id)
+		 		$ins[] = array("id_article"=>$id_article,"id_form"=>$id);
+			sql_insertq_multi("spip_forms_articles",$ins);
+		 	
+		}
 		return $flux;
 	}
 ?>
