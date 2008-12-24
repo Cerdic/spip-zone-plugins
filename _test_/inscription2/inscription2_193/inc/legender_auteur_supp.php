@@ -100,8 +100,7 @@ function legender_auteur_supp_saisir($auteur){
 }
 
 // L'affichage des infos supplémentaires...
-function legender_auteur_supp_voir($auteur)
-{	
+function legender_auteur_supp_voir($auteur){
 	$res = "<h2 class='titrem'>Inscription2</h2>";
 
 	$res .= "<div class='nettoyeur'></div>";
@@ -145,7 +144,7 @@ function legender_auteur_supp_voir($auteur)
 			continue;
 		elseif (strlen($val) >= 1){
 			if(find_in_path('prive/inscription2_vue_'.$cle.'.html')){
-				$res .= recuperer_fond('prive/inscription2_vue_'.$cle,array('cle'=>$cle,'val'=>$val));
+				$res .= recuperer_fond('prive/inscription2_vue_'.$cle,array('cle'=>$cle,'val'=>$val,'id_auteur' => $id_auteur));
 			}else{
 				$res .= "<p><strong>"._T('inscription2:'.$cle)." : </strong>" . typo($val) . "</p>";	
 			}
