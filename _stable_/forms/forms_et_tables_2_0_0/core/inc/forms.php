@@ -32,7 +32,7 @@ function forms_structure($id_form, $complete = true){
 			$structure[$champ][$k] = $v;
 		if ($complete){
 			if (($type == 'select') OR ($type == 'multiple')){
-				$rows2 = sql_allfetsel("*","spip_forms_champs_choix","id_form=".intval($id_form)." AND champ="._q($champ),"","rang");
+				$rows2 = sql_allfetsel("*","spip_forms_champs_choix","id_form=".intval($id_form)." AND champ=".sql_quote($champ),"","rang");
 				foreach($rows2 as $row2){
 					$structure[$champ]['choix'][$row2['choix']] = $c = trim(textebrut(typo($row2['titre'])));
 					$structure[$champ]['choixrev'][$c] = $row2['choix'];
@@ -69,7 +69,7 @@ function forms_valeurs($id_donnee,$id_form = NULL,$champ=NULL){
 		return $valeurs;
 
 	$selchamp = "";
-	if ($champ!==NULL) $selchamp = "d.champ="._q($champ)." AND";
+	if ($champ!==NULL) $selchamp = "d.champ=".sql_quote($champ)." AND";
 	$rows = sql_allfetsel("*","spip_forms_donnees_champs AS d JOIN spip_forms_champs AS c ON (c.champ=d.champ AND c.id_form=".intval($id_form),"$selchamp d.id_donnee=".intval($id_donnee));
 	foreach($rows as $row){
 		if ($row['type']=='multiple')
@@ -77,9 +77,7 @@ function forms_valeurs($id_donnee,$id_form = NULL,$champ=NULL){
 		elseif ($row['type']=='mot'){
 			$id_groupe = intval($row['extra_info']);
 			if (!isset($unseul[$id_groupe])){
-				$res2 = spip_query("SELECT unseul FROM spip_groupes_mots WHERE id_groupe="._q($id_groupe));
-				$row2=spip_fetch_array($res2);
-				$unseul[$id_groupe] = $row2['unseul'];
+				$unseul[$id_groupe] = sql_getfetsel("unseul","spip_groupes_mots","id_groupe=".intval($id_groupe));
 			}
 			if ($unseul[$id_groupe]=='oui')
 				$valeurs[$row['champ']]= $row['valeur'];
@@ -193,15 +191,14 @@ function forms_verif_cookie_sondage_utilise($id_form) {
 	$cookie = $_COOKIE[forms_nom_cookie_form($id_form)];
 	$where_cookie = "AND (";
 	if ($cookie) {
-		$where_cookie.="cookie="._q($cookie). ($id_auteur?" OR id_auteur="._q($id_auteur):"");
+		$where_cookie.="cookie=".sql_quote($cookie). ($id_auteur?" OR id_auteur=".intval($id_auteur):"");
 	}
 	else if ($id_auteur)
-			$where_cookie.="id_auteur="._q($id_auteur);
+			$where_cookie.="id_auteur=".intval($id_auteur);
 		else
 			return false;
 	$where_cookie .= ')';
 	//On retourne le tableau des id_donnee de l'auteur ou false
-	$res = spip_query($q);
 	$rows = sql_allfetsel("id_donnee","spip_forms_donnees","statut='publie' AND id_form=".intval($id_form)." $where_cookie");
 	if (count($rows))
 		return array_map('reset',$rows);
