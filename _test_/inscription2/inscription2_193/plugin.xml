@@ -3,7 +3,7 @@
 		Inscription2
 	</nom>
 	<auteur>
-		&copy; cmtmt2003 - 2007/2008 - Distribu&eacute; sous licence GNU/LGPL
+		&copy; cmtmt2003 - 2007/2009 - Distribu&eacute; sous licence GNU/LGPL
 	</auteur>
 	<version>
 		0.64
@@ -17,7 +17,7 @@
 	</description>
 	<icon>images/inscription2.png</icon>
 	<prefix>
-		  Inscription2
+		  inscription2
 	</prefix>
 	<install>base/inscription2_installer.php</install>
 	<options>
@@ -31,15 +31,10 @@
 		<inclure>inscription2_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>affichage_final</nom>
-		<inclure>inscription2_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouter_boutons</action>
 		<inclure>inscription2_pipelines.php</inclure>
 	</pipeline>
-
 	 <pipeline>
 		<nom>editer_contenu_objet</nom>
 		<inclure>inscription2_pipelines.php</inclure>
@@ -53,7 +48,6 @@
 		<inclure>inscription2_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="cfg" version="[1.10.1;]" />
-	<necessite id="lib:jquery-validate" src="http://plugins.jquery.com/files/jquery.validate_9.zip" />
 	<necessite id="SPIP" version='[2.0.0;]' />
 	<necessite id='spip_bonux' version='[1.2;]' />
 </plugin>
