@@ -23,12 +23,12 @@ function exec_recherche_donnees(){
 	$type_table = forms_type_table_lier($type,$id);
 	$id = intval($id);
 	// recuperer les donnees deja liees
-	list($s,$les_donnees,$nombre_donnees) = Forms_formulaire_objet_afficher_donnees($type,$id,"",$type_table);
+	list($s,$les_donnees,$nombre_donnees) = forms_formulaire_objet_afficher_donnees($type,$id,"",$type_table);
 	
 	if ($type == 'donnee')
 		$les_donnees .= (strlen($les_donnees)?",":"").$id;
 	// recuperer les donnees que l'on peut lier
-	$liste = Forms_liste_recherche_donnees($recherche,$les_donnees,$type,$type_table,30);
+	$liste = forms_liste_recherche_donnees($recherche,$les_donnees,$type,$type_table,30);
 	
 	$out = "<ajaxresponse>";
 	foreach($liste as $titre=>$donnees){

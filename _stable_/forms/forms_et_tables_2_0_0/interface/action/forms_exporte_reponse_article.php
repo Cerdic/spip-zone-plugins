@@ -30,7 +30,7 @@ function action_forms_exporte_reponse_article(){
 			$titre = _T("forms:reponse",array('id_reponse'=>$id_donnee));
 			$soustitre = $row['titre'];
 			$date = $row['date'];
-			list($lib,$values,$urls) = 	Forms_extraire_reponse($id_donnee);
+			list($lib,$values,$urls) = 	forms_extraire_reponse($id_donnee);
 			$texte = "";
 			$res = spip_query("SELECT * FROM spip_forms_champs AS forms WHERE id_form="._q($id_form)." ORDER BY rang");
 			while ($row = spip_fetch_array($res)){

@@ -12,7 +12,7 @@
  */
 
 	$GLOBALS['forms_base_version'] = 0.41;
-	function Forms_structure2table($row,$clean=false){
+	function forms_structure2table($row,$clean=false){
 		$id_form=$row[id_form];
 		// netoyer la structure precedente en table
 		if ($clean){
@@ -44,13 +44,13 @@
 			}
 		}
 	}
-	function Forms_allstructure2table($clean=false){
+	function forms_allstructure2table($clean=false){
 		$res = spip_query("SELECT * FROM spip_forms");
 		while ($row=spip_fetch_array($res))
-			Forms_structure2table($row,$clean);
+			forms_structure2table($row,$clean);
 	}
 
-	function Forms_upgrade(){
+	function forms_upgrade(){
 		$version_base = $GLOBALS['forms_base_version'];
 		$current_version = 0.0;
 		if (   (isset($GLOBALS['meta']['forms_base_version']) )
@@ -129,7 +129,7 @@
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			creer_base();
-			Forms_allstructure2table();
+			forms_allstructure2table();
 
   		spip_query("ALTER TABLE spip_forms DROP structure");
   		spip_query("ALTER TABLE spip_forms CHANGE sondage type_form VARCHAR(255) NOT NULL");
@@ -320,7 +320,7 @@
 		ecrire_metas();
 	}
 
-	function Forms_vider_tables() {
+	function forms_vider_tables() {
 		spip_query("DROP TABLE spip_forms");
 		spip_query("DROP TABLE spip_forms_champs");
 		spip_query("DROP TABLE spip_forms_champs_choix");
@@ -334,17 +334,17 @@
 		ecrire_metas();
 	}
 
-	function Forms_install($action){
+	function forms_install($action){
 		global $forms_base_version;
 		switch ($action){
 			case 'test':
 				return (isset($GLOBALS['meta']['forms_base_version']) AND ($GLOBALS['meta']['forms_base_version']>=$forms_base_version));
 				break;
 			case 'install':
-				Forms_upgrade();
+				forms_upgrade();
 				break;
 			case 'uninstall':
-				Forms_vider_tables();
+				forms_vider_tables();
 				break;
 		}
 	}

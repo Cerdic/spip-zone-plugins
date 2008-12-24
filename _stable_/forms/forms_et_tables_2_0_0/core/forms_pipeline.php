@@ -11,7 +11,7 @@
  *
  */
 
-	function Forms_insert_head($flux){
+	function forms_insert_head($flux){
 		$config = unserialize(isset($GLOBALS['meta']['forms_et_tables'])?$GLOBALS['meta']['forms_et_tables']:"");
 		if (!isset($config['inserer_head']) OR $config['inserer_head']) {
 			/*
@@ -26,7 +26,7 @@
 		return $flux;
 	}
 
-	function Forms_ajouter_boutons($boutons_admin) {
+	function forms_ajouter_boutons($boutons_admin) {
 		if (autoriser('administrer','form',0)) {
 		  // on voit le bouton dans la barre "naviguer"
 			$boutons_admin['naviguer']->sousmenu["forms_tous"]= new Bouton(
@@ -43,7 +43,7 @@
 		return $boutons_admin;
 	}
 	
-	function Forms_affiche_milieu($flux) {
+	function forms_affiche_milieu($flux) {
 		$exec =  $flux['args']['exec'];
 		$config = unserialize(isset($GLOBALS['meta']['forms_et_tables'])?$GLOBALS['meta']['forms_et_tables']:"");
 		switch ($exec){
@@ -54,7 +54,7 @@
 				if (count($liste_type)){
 					include_spip('base/forms_base_api');
 					foreach($liste_type as $type)
-						if (count(Forms_liste_tables($type))){
+						if (count(forms_liste_tables($type))){
 							$id_article = $flux['args']['id_article'];
 							$forms_lier_donnees = charger_fonction('forms_lier_donnees','inc');
 							$flux['data'] .= "<div id='forms_lier_donnees'>";
@@ -71,7 +71,7 @@
 				if (count($liste_type) && $id_rubrique){
 					include_spip('base/forms_base_api');
 					foreach($liste_type as $type)
-						if (count(Forms_liste_tables($type))){
+						if (count(forms_liste_tables($type))){
 							$forms_lier_donnees = charger_fonction('forms_lier_donnees','inc');
 							$flux['data'] .= "<div id='forms_lier_donnees'>";
 							$flux['data'] .= $forms_lier_donnees('rubrique',$id_rubrique, $exec, false, $type);
@@ -86,7 +86,7 @@
 				if (count($liste_type)){
 					include_spip('base/forms_base_api');
 					foreach($liste_type as $type)
-						if (count(Forms_liste_tables($type))){
+						if (count(forms_liste_tables($type))){
 							$id_auteur = $flux['args']['id_auteur'];
 							$forms_lier_donnees = charger_fonction('forms_lier_donnees','inc');
 							$flux['data'] .= "<div id='forms_lier_donnees'>";
@@ -99,14 +99,14 @@
 		return $flux;
 	}
 	
-	function Forms_affiche_droite($flux){
+	function forms_affiche_droite($flux){
 		if (_request('exec')=='articles_edit'){
 			include_spip('inc/forms');
-			$flux['data'] .= Forms_afficher_insertion_formulaire($flux['args']['id_article']);
+			$flux['data'] .= forms_afficher_insertion_formulaire($flux['args']['id_article']);
 		}
 		return $flux;
 	}
-	function Forms_header_prive($flux){
+	function forms_header_prive($flux){
 		if ($f=find_in_path('spip_forms_prive.css'))
 			$flux .= "<link rel='stylesheet' href='$f' type='text/css' media='all' />\n";
 		else
@@ -156,7 +156,7 @@
 		.'\s*(<\/a>)?' # eventuel </a>
 	       );
 	
-	function Forms_trouve_liens($texte){
+	function forms_trouve_liens($texte){
 		$forms = array();
 		if (preg_match_all(','._RACCOURCI_MODELE_FORM.',is', $texte, $regs, PREG_SET_ORDER)){
 			foreach ($regs as $r) {
@@ -167,13 +167,13 @@
 		return $forms;
 	}
 
-	function Forms_post_edition($flux){
+	function forms_post_edition($flux){
 		if ($flux['args']['table']!='spip_articles') return $flux;
 		$id_article = intval($flux['args']['id_objet']);
 		$res = spip_query("SELECT * FROM spip_articles WHERE id_article="._q($id_article));
 		spip_query("DELETE FROM spip_forms_articles WHERE id_article=$id_article");
 		if (($row = spip_fetch_array($res))
-		 && (count($forms = Forms_trouve_liens(implode(' ',$row)))))
+		 && (count($forms = forms_trouve_liens(implode(' ',$row)))))
 			spip_query("INSERT INTO spip_forms_articles (id_article, id_form) ".
 				"VALUES ($id_article, ".join("), ($id_article, ", $forms).")");
 		return $flux;

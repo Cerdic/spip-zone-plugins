@@ -383,7 +383,7 @@ function affichage_donnee_edit($type_form){
 	}
 
 	// donnees liantes
-	list($out,$les_donnees,$nombre_donnees) = Forms_afficher_liste_donnees_liees(
+	list($out,$les_donnees,$nombre_donnees) = forms_afficher_liste_donnees_liees(
 		"donnee_liee", 
 		$id_donnee, 
 		"donnee",

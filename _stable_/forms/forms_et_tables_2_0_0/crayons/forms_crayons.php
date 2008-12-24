@@ -30,7 +30,7 @@ function forms_donnee_valeur_colonne_table($table,$champs,$id_donnee){
 
 	$vals = array();
 	foreach($champs as $champ){
-		$valeur = Forms_valeurs($id_donnee,NULL,$champ);
+		$valeur = forms_valeurs($id_donnee,NULL,$champ);
 		if (!count($valeur))
 			$valeur = array($champ => '');
 		$vals = array_merge($vals,$valeur);
@@ -39,7 +39,7 @@ function forms_donnee_valeur_colonne_table($table,$champs,$id_donnee){
 }
 function forms_donnee_revision($id_donnee,$c=NULL){
 	include_spip('inc/forms');
-	return Forms_revision_donnee($id_donnee,$c);
+	return forms_revision_donnee($id_donnee,$c);
 }
 function forms_champ_valeur_colonne_table($table,$champ,$id){
 	$id = explode('-',$id);

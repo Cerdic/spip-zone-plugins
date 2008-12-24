@@ -11,7 +11,7 @@
  *
  */
 
-	function Forms_structure($id_form, $complete = true){
+	function forms_structure($id_form, $complete = true){
 		include_spip('inc/texte'); # typo et textebrut
 		// Preparer la table de traduction code->valeur & mise en table de la structure pour eviter des requettes
 		// a chaque ligne
@@ -42,7 +42,7 @@
 		}
 		return $structure;
 	}
-	function Forms_valeurs($id_donnee,$id_form = NULL,$champ=NULL){
+	function forms_valeurs($id_donnee,$id_form = NULL,$champ=NULL){
 		static $unseul = array();
 		$valeurs = array();
 		if ($id_form===NULL){
@@ -90,7 +90,7 @@
 		$prefixi18n = in_array($type_table,array('sondage',''))?'form':$type_table;
 		return $prefixi18n = str_replace("_","",strtolower($prefixi18n));
 	}
-	function Forms_csvimport_ajoute_table_csv($data, $id_form, $assoc_field, &$erreur, $simu = false){
+	function forms_csvimport_ajoute_table_csv($data, $id_form, $assoc_field, &$erreur, $simu = false){
 		include_spip('inc/forms_type_champs');
 		$assoc = array_flip($assoc_field);
 		$res = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form)." AND type_form NOT IN ('','sondage')");
@@ -99,7 +99,7 @@
 			return;
 		}
 
-		$structure = Forms_structure($id_form);
+		$structure = forms_structure($id_form);
 		$cle = (isset($assoc_field['id_donnee']) AND ($assoc_field['id_donnee']!='-1'))?$assoc_field['id_donnee']:false;
 		$output = "";
 		if ($data!=false){
@@ -129,7 +129,7 @@
 						  		$c[$champ][] = $choix;
 					}
 		 		}
-		 		$err = Forms_valide_champs_reponse_post($id_auteur, $id_donnee, $c , $structure);
+		 		$err = forms_valide_champs_reponse_post($id_auteur, $id_donnee, $c , $structure);
 		 		if (is_array($err) && count($err)) $erreur[$count_lignes] = $err;
 		 		else if (!$simu) {
 					if ($cle) {
@@ -175,7 +175,7 @@
 		}
 	}
 
-	function Forms_deplacer_fichier_form($source, $dest) {
+	function forms_deplacer_fichier_form($source, $dest) {
 		/* le core interdit l'upload depuis l'espace prive... pourquoi tant de haine ?
 		include_spip('inc/getdocument');
 		if ($ok = deplacer_fichier_upload($source, $dest, true))
@@ -198,7 +198,7 @@
 		return $ok;
 	}
 
-	function Forms_nommer_fichier_form($orig, $dir) {
+	function forms_nommer_fichier_form($orig, $dir) {
 		include_spip("inc/charsets");
 		include_spip("inc/filtres");
 		if (ereg("^(.*)\.([^.]+)$", $orig, $match)) {
@@ -215,7 +215,7 @@
 		return $fichier;
 	}
 
-	function Forms_type_fichier_autorise($nom_fichier) {
+	function forms_type_fichier_autorise($nom_fichier) {
 		if (ereg("\.([^.]+)$", $nom_fichier, $match)) {
 			$ext = addslashes(strtolower($match[1]));
 			switch ($ext) {
@@ -237,14 +237,14 @@
 	}
 
 	// Fonction utilitaires
-	function Forms_nom_cookie_form($id_form) {
+	function forms_nom_cookie_form($id_form) {
 		return $GLOBALS['cookie_prefix'].'cookie_form_'.$id_form;
 	}
 
-	function Forms_verif_cookie_sondage_utilise($id_form) {
+	function forms_verif_cookie_sondage_utilise($id_form) {
 		global $auteur_session;
 		$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
-		$cookie = $_COOKIE[Forms_nom_cookie_form($id_form)];
+		$cookie = $_COOKIE[forms_nom_cookie_form($id_form)];
 		$q="SELECT id_donnee FROM spip_forms_donnees " .
 			"WHERE statut='publie' AND id_form=".intval($id_form)." ";
 		$q .= "AND (";
@@ -266,7 +266,7 @@
 		else return false;
 	}
 
-	function Forms_extraire_reponse($id_donnee){
+	function forms_extraire_reponse($id_donnee){
 		// Lire les valeurs entrees
 		if (substr(spip_mysql_version(), 0, 1) == 3) {
 			$result = spip_query("SELECT * FROM spip_forms_donnees_champs  AS r, spip_forms_champs AS ch, spip_forms_donnees AS d
@@ -323,7 +323,7 @@
 	// Afficher un pave formulaires dans la colonne de gauche
 	// (edition des articles)
 
-	function Forms_afficher_insertion_formulaire($id_article) {
+	function forms_afficher_insertion_formulaire($id_article) {
 		global $connect_id_auteur, $connect_statut;
 		global $couleur_foncee, $couleur_claire, $options;
 		global $spip_lang_left, $spip_lang_right;
@@ -371,7 +371,7 @@
 		return $s;
 	}
 
-	function Forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val,&$erreur,&$ok){
+	function forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val,&$erreur,&$ok){
 		$inserts = array();
 		if ($type == 'fichier') {
 			if (($val = $_FILES[$champ]) AND ($val['tmp_name'])) {
@@ -379,8 +379,8 @@
 				$dir = sous_repertoire(_DIR_IMG, "protege");
 				$dir = sous_repertoire($dir, "form".$id_form);
 				$source = $val['tmp_name'];
-				$dest = $dir.Forms_nommer_fichier_form($val['name'], $dir);
-				if (!Forms_deplacer_fichier_form($source, $dest)) {
+				$dest = $dir.forms_nommer_fichier_form($val['name'], $dir);
+				if (!forms_deplacer_fichier_form($source, $dest)) {
 					$erreur[$champ] = _T("forms:probleme_technique_upload");
 					$ok = false;
 				}
@@ -389,7 +389,7 @@
 				}
 			}
 			// Cas de la mise a jour pour laquelle on dispose deja d'un fichier uploade !
-			elseif ( ($val=Forms_valeurs($id_donnee,$id_form,$champ)) != NULL ) {
+			elseif ( ($val=forms_valeurs($id_donnee,$id_form,$champ)) != NULL ) {
 				$inserts[] = "("._q($id_donnee).","._q($champ).","._q($val[$champ]).")";
 			}
 		}
@@ -406,8 +406,8 @@
 		return $inserts;
 	}
 
-	function Forms_modifier_reponse($id_form,$id_donnee,&$erreur, $c = NULL, $structure = NULL){
-		if (!$structure)	$structure = Forms_structure($id_form);
+	function forms_modifier_reponse($id_form,$id_donnee,&$erreur, $c = NULL, $structure = NULL){
+		if (!$structure)	$structure = forms_structure($id_form);
 		$inserts = array();
 		$champs_mod = array();
 		$valeurs = array();
@@ -442,7 +442,7 @@
 			$champs_mod[] = $champ;
 			// un plugin a pu ajouter un 'champ factice' a enregistrer, non defini dans la structure
 			$type = isset($champs[$champ]['type'])?$champs[$champ]['type']:"";
-			$ins = Forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val,$erreur,$ok);
+			$ins = forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val,$erreur,$ok);
 			$inserts = array_merge($inserts,$ins);
 		}
 		if (!count($erreur)){
@@ -470,7 +470,7 @@
 		return count($inserts);
 	}
 
-	function Forms_revision_donnee($id_donnee, $c = NULL) {
+	function forms_revision_donnee($id_donnee, $c = NULL) {
 		include_spip('base/abstract_sql');
 		$inserts = array();
 		$result = spip_query("SELECT id_form FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
@@ -478,19 +478,19 @@
 			$erreur['@'] = _T("forms:probleme_technique");
 		}
 		$id_form = $row['id_form'];
-		$structure = Forms_structure($id_form);
+		$structure = forms_structure($id_form);
 		include_spip("inc/forms_type_champs");
 
-		$erreur = Forms_valide_conformite_champs_reponse_post($id_form, $id_donnee, $c, $structure);
+		$erreur = forms_valide_conformite_champs_reponse_post($id_form, $id_donnee, $c, $structure);
 		if (!$erreur)
-			Forms_modifier_reponse($id_form,$id_donnee,$erreur, $c, $structure);
+			forms_modifier_reponse($id_form,$id_donnee,$erreur, $c, $structure);
 		if (count($erreur))
 			spip_log("erreur: ".serialize($erreur));
 
 		return $erreur;
 	}
 
-	function Forms_rang_prochain($id_form){
+	function forms_rang_prochain($id_form){
 		$rang = 1;
 		$res = spip_query("SELECT max(rang) AS rang_max FROM spip_forms_donnees WHERE id_form="._q($id_form));
 		if ($row = spip_fetch_array($res))
@@ -498,7 +498,7 @@
 		return $rang;
 	}
 
-	function Forms_enregistrer_reponse_formulaire($id_form, &$id_donnee, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='', $c=NULL, $rang=NULL) {
+	function forms_enregistrer_reponse_formulaire($id_form, &$id_donnee, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='', $c=NULL, $rang=NULL) {
 		$r = '';
 		include_spip('inc/autoriser');
 
@@ -514,7 +514,7 @@
 		$mailconfirm = '';
 
 		include_spip("inc/forms_type_champs");
-		$erreur = Forms_valide_champs_reponse_post($id_form, $id_donnee, $c);
+		$erreur = forms_valide_champs_reponse_post($id_form, $id_donnee, $c);
 
 		// Si tout est bon, enregistrer la reponse
 		if (!$erreur) {
@@ -531,7 +531,7 @@
 				$confirme = true;
 			}
 
-			$nom_cookie = Forms_nom_cookie_form($id_form);
+			$nom_cookie = forms_nom_cookie_form($id_form);
 			if (isset($_COOKIE[$nom_cookie]))
 				$cookie = $_COOKIE[$nom_cookie];
 			else {
@@ -561,7 +561,7 @@
 					spip_query("UPDATE spip_forms_donnees SET ip="._q($GLOBALS['ip']).", url="._q($url).", confirmation="._q($confirmation).", cookie="._q($cookie)." ".
 						"WHERE id_donnee="._q($id_donnee));
 				} elseif (autoriser('creer', 'donnee', 0, NULL, array('id_form'=>$id_form))){
-					if ($rang==NULL) $rang = array('rang'=>Forms_rang_prochain($id_form));
+					if ($rang==NULL) $rang = array('rang'=>forms_rang_prochain($id_form));
 					elseif(!is_array($rang)) $rang=array('rang'=>$rang);
 					spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie, "
 					  . implode(',',array_keys($rang)).") "
@@ -589,8 +589,8 @@
 
 			// Puis enregistrer les differents champs
 			if ($ok) {
-				#$inserts = Forms_insertions_reponse_post($id_form,$id_donnee,$erreur,$ok,$c);
-				if (!Forms_modifier_reponse($id_form,$id_donnee,$erreur, $c)) {
+				#$inserts = forms_insertions_reponse_post($id_form,$id_donnee,$erreur,$ok,$c);
+				if (!forms_modifier_reponse($id_form,$id_donnee,$erreur, $c)) {
 					// Reponse vide => annuler
 					$erreur['@'] = _T("forms:remplir_un_champ");
 					$row = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
@@ -627,7 +627,7 @@
 		return $r;
 	}
 
-	function Forms_generer_mail_reponse_formulaire($id_form, $id_donnee, $env){
+	function forms_generer_mail_reponse_formulaire($id_form, $id_donnee, $env){
 		if (!is_array($env)) $env=array();
 		$modele_mail_admin = 'form_reponse_email_admin';
 		$modele_mail_confirm = 'form_reponse_email_confirm';
@@ -741,7 +741,7 @@
 	}
 
 
-function Forms_obligatoire($row,$forms_obligatoires){
+function forms_obligatoire($row,$forms_obligatoires){
 	$returned=$row;
 	global $auteur_session;
 	$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
@@ -750,7 +750,7 @@ function Forms_obligatoire($row,$forms_obligatoires){
 	$i=0;
 	while ($chercher && $i<count($form_tab)){
 		$form_id=$form_tab[$i];
-		$cookie = $_COOKIE[Forms_nom_cookie_form($form_id)];
+		$cookie = $_COOKIE[forms_nom_cookie_form($form_id)];
 		$q="SELECT id_form FROM spip_forms_donnees WHERE statut='publie' AND id_form="._q($form_id)." ";
 		if ($cookie) $q.="AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).") ";
 		else
@@ -769,7 +769,7 @@ function Forms_obligatoire($row,$forms_obligatoires){
 	return $returned;
 }
 
-function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_table, $script, $bloc_id, $arg_ajax, $retour){
+function forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_table, $script, $bloc_id, $arg_ajax, $retour){
 	// article, donnee
 	// donnee, donnee_liee
 	// donnee_liee, donnee
@@ -779,7 +779,7 @@ function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_
 	if ($type_table){
 		include_spip("base/abstract_sql");
 		include_spip("base/forms_base_api");
-		$in_type_table = calcul_mysql_in('d.id_form',implode(",",Forms_liste_tables($type_table)))." AND";
+		$in_type_table = calcul_mysql_in('d.id_form',implode(",",forms_liste_tables($type_table)))." AND";
 	}
 
 	$out = "";
@@ -823,9 +823,9 @@ function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_
 	WHERE $in_type_table dl.$champ_donnee_source="._q($iid)."
 	ORDER BY d.id_form $limit");
 	while ($row = spip_fetch_array($res)){
-		list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($row[$champ_donnee_liee],true,$linkable);
+		list($id_form,$titreform,$type_form,$t) = forms_liste_decrit_donnee($row[$champ_donnee_liee],true,$linkable);
 		if (!count($t))
-			list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($row[$champ_donnee_liee], false,$linkable);
+			list($id_form,$titreform,$type_form,$t) = forms_liste_decrit_donnee($row[$champ_donnee_liee], false,$linkable);
 		if (count($t)){
 			$liste[$id_form][$row[$champ_donnee_liee]]=$t;
 			$forms[$id_form] = $titreform;
@@ -890,7 +890,7 @@ function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_
 	return array($out,$les_donnees,$nombre_donnees) ;
 }
 
-function Forms_liste_decrit_donnee($id_donnee, $specifiant=true, $linkable=true){
+function forms_liste_decrit_donnee($id_donnee, $specifiant=true, $linkable=true){
 	$t = array();$titreform="";
 	$id_form = 0;
 	$type_form = "";

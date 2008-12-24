@@ -13,7 +13,7 @@
 // compatibilite trans 1.9.1-1.9.2
 // Cadre formulaires
 // http://doc.spip.org/@debut_cadre_formulaire
-function Forms_debut_cadre_formulaire($style='', $return=false){
+function forms_debut_cadre_formulaire($style='', $return=false){
 	$x = "\n<div class='cadre-formulaire'" .
 	  (!$style ? "" : " style='$style'") .
 	   ">";
@@ -21,12 +21,12 @@ function Forms_debut_cadre_formulaire($style='', $return=false){
 }
 
 // http://doc.spip.org/@fin_cadre_formulaire
-function Forms_fin_cadre_formulaire($return=false){
+function forms_fin_cadre_formulaire($return=false){
 	if ($return) return  "</div>\n"; else echo "</div>\n";
 }
 
 
-function Forms_nouveau_champ($id_form,$type){
+function forms_nouveau_champ($id_form,$type){
 	$res = spip_query("SELECT champ FROM spip_forms_champs WHERE id_form="._q($id_form)." AND type="._q($type));
 	$n = 1;
 	$champ = $type.'_'.strval($n);
@@ -38,9 +38,9 @@ function Forms_nouveau_champ($id_form,$type){
 	$champ = $type.'_'.strval($n);
 	return $champ;
 }
-function Forms_insere_nouveau_champ($id_form,$type,$titre,$champ=""){
+function forms_insere_nouveau_champ($id_form,$type,$titre,$champ=""){
 	if (!strlen($champ))
-		$champ = Forms_nouveau_champ($id_form,$type);
+		$champ = forms_nouveau_champ($id_form,$type);
 	$rang = 0;
 	$res = spip_query("SELECT max(rang) AS rangmax FROM spip_forms_champs WHERE id_form="._q($id_form));
 	if ($row = spip_fetch_array($res))
@@ -53,7 +53,7 @@ function Forms_insere_nouveau_champ($id_form,$type,$titre,$champ=""){
 		'('._q($id_form).','._q($champ).','._q($rang).','._q($titre).','._q($type).",'non','')");
 	return $champ;
 }
-function Forms_nouveau_choix($id_form,$champ){
+function forms_nouveau_choix($id_form,$champ){
 	$n = 1;
 	$res = spip_query("SELECT choix FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
 	while ($row = spip_fetch_array($res)){
@@ -64,8 +64,8 @@ function Forms_nouveau_choix($id_form,$champ){
 	$choix = $champ.'_'.$n;
 	return $choix;
 }
-function Forms_insere_nouveau_choix($id_form,$champ,$titre){
-	$choix = Forms_nouveau_choix($id_form,$champ);
+function forms_insere_nouveau_choix($id_form,$champ,$titre){
+	$choix = forms_nouveau_choix($id_form,$champ);
 	$rang = 0;
 	$res = spip_query("SELECT max(rang) AS rangmax FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
 	if ($row = spip_fetch_array($res))
@@ -76,7 +76,7 @@ function Forms_insere_nouveau_choix($id_form,$champ,$titre){
 	return $choix;
 }
 
-function Forms_bloc_routage_mail($id_form,$email){
+function forms_bloc_routage_mail($id_form,$email){
 		$out = "";
 		// Routage facultatif des emails en fonction d'un champ select
 		$defaut = true;
@@ -131,7 +131,7 @@ function Forms_bloc_routage_mail($id_form,$email){
 		return $out;
 }
 
-function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
+function forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 	global $couleur_claire;
 
 	$id_form = $row['id_form'];
@@ -302,7 +302,7 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 		));
 }
 
-function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $redirect,$ajax=false){
+function forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $redirect,$ajax=false){
 	global $spip_lang_right,$couleur_claire,$spip_lang_left;
 	$res = spip_query("SELECT type_form FROM spip_forms WHERE id_form="._q($id_form));
 	$row = spip_fetch_array($res);
@@ -312,7 +312,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 	$out = "";
 	if (!$id_form) return $out;
 	$out .= "<p>";
-	$out .= Forms_debut_cadre_formulaire('',true);
+	$out .= forms_debut_cadre_formulaire('',true);
 	$out .= "<div class='verdana3'>";
 	$out .= "<strong>"._T("$prefixei18n:champs_formulaire")."</strong><br />\n";
 	$out .= _T("forms:info_champs_formulaire");
@@ -392,19 +392,19 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 			$formulaire .= "<label for='nom_$champ'>"._T("forms:champ_nom_bloc")."</label>&nbsp;:";
 			$formulaire .= " &nbsp;<input type='text' name='nom_champ' id='nom_$champ' value=\"".
 				entites_html($row['titre'])."\" class='fondo verdana2 $focus' size='30' /><br />\n";
-			$formulaire .= Forms_bloc_edition_champ($row, $action_link, $redirect, $id_bloc);
+			$formulaire .= forms_bloc_edition_champ($row, $action_link, $redirect, $id_bloc);
 		}
 		else if ($type=='textestatique'){
 			$formulaire .= "<label for='nom_$champ'>"._T("forms:champ_nom_texte")."</label>&nbsp;:<br/>";
 			$formulaire .= " &nbsp;<textarea name='nom_champ' id='nom_$champ'  class='verdana2 $focus' style='width:100%;height:5em;' />".
 				entites_html($row['titre'])."</textarea><br />\n";
-			$formulaire .= Forms_bloc_edition_champ($row, $action_link, $redirect, $id_bloc);
+			$formulaire .= forms_bloc_edition_champ($row, $action_link, $redirect, $id_bloc);
 		}
 		else{
 			$formulaire .= "<label for='nom_$champ'>"._T("forms:champ_nom")."</label> :";
 			$formulaire .= " &nbsp;<input type='text' name='nom_champ' id='nom_$champ' value=\"".
 				entites_html($row['titre'])."\" class='fondo verdana2 $focus' size='30' /><br />\n";
-			$formulaire .= Forms_bloc_edition_champ($row, $action_link, $redirect, $id_bloc);
+			$formulaire .= forms_bloc_edition_champ($row, $action_link, $redirect, $id_bloc);
 
 			$formulaire .= "<label for='aide_$champ'>"._T("forms:aide_contextuelle")."</label> :";
 			$formulaire .= " &nbsp;<textarea name='aide_champ' id='aide_$champ'  class='verdana2' style='width:90%;height:3em;' >".
@@ -427,7 +427,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$formulaire .= "</div>";
 		$formulaire .= "</form>";
 		$formulaire =
-			bouton_block_depliable(typo($row['titre'])." (".typo(Forms_nom_type_champ($row['type'])).")",$visible,"champ_$champ")
+			bouton_block_depliable(typo($row['titre'])." (".typo(forms_nom_type_champ($row['type'])).")",$visible,"champ_$champ")
 			. debut_block_depliable($visible,"champ_$champ")
 			. $formulaire
 			. fin_block();
@@ -471,17 +471,17 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 	$out .= _T("forms:ajouter_champ_type");
 	$out .= " \n";
 
-	$types = Forms_liste_types_champs();
+	$types = forms_liste_types_champs();
 	$out .= "<select name='ajout_champ' value='' class='fondo'>\n";
 	foreach ($types as $type) {
-		$out .= "<option value='$type'>".typo(Forms_nom_type_champ($type))."</option>\n";
+		$out .= "<option value='$type'>".typo(forms_nom_type_champ($type))."</option>\n";
 	}
 	$out .= "</select>\n";
 	$out .= " &nbsp; <input type='submit' name='valider' id='ajout_champ' value='"._T('bouton_ajouter')."' class='fondo'>";
 	$out .= "</form>\n";
 	$out .= fin_cadre_enfonce(true);
 	$out .= "</p>";
-	$out .= Forms_fin_cadre_formulaire(true);
+	$out .= forms_fin_cadre_formulaire(true);
 	$out .= "</p>";
 
 	return $out;
@@ -497,7 +497,7 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 
 	$out = "";
 	$out .= "<p>";
-	$out .= Forms_debut_cadre_formulaire('',true);
+	$out .= forms_debut_cadre_formulaire('',true);
 
 	$action_link_noredir = parametre_url($action_link,'redirect','');
 	$out .= "<div class='verdana2'>";
@@ -525,7 +525,7 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$out .= $descriptif;
 	$out .= "</textarea><br />\n";
 
-	$out .= Forms_bloc_routage_mail($id_form,$email);
+	$out .= forms_bloc_routage_mail($id_form,$email);
 
 	$out .= "<strong><label for='confirm_form'>"._T('forms:confirmer_reponse')."</label></strong> ";
 	$out .= "<br />";
@@ -640,7 +640,7 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 
 	$out .= "</form>";
 	$out .= "</div>";
-	$out .= Forms_fin_cadre_formulaire(true);
+	$out .= forms_fin_cadre_formulaire(true);
 	$out .= "</p>";
 	return $out;
 }

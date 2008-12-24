@@ -32,7 +32,7 @@ function valide_sondage()
 		if ($row = spip_fetch_array($result)) {
 			$id_form = $row['id_form'];
 			$cookie = $row['cookie'];
-			$nom_cookie = Forms_nom_cookie_form($id_form);
+			$nom_cookie = forms_nom_cookie_form($id_form);
 			// D'abord verifier que l'URL est legitime, donc que la demande a bien
 			// ete generee par SPIP
 			$hash_verif = md5("forms valide reponse sondage $id_donnee $cookie ".hash_env());
@@ -60,7 +60,7 @@ function valide_sondage()
 			$hash_verif = md5("forms confirme reponse $id_donnee $cookie ".hash_env());
 			if ($hash_verif==$hash) {
 				$env = unserialize('[(#ENV*|texte_script)]');
-				Forms_generer_mail_reponse_formulaire($id_form, $id_donnee, $env);
+				forms_generer_mail_reponse_formulaire($id_form, $id_donnee, $env);
 			}
 		}
 		$renvoyer_image = true;

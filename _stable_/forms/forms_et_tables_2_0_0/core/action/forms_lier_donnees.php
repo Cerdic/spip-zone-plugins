@@ -6,7 +6,7 @@
  * Auteurs :
  * Antoine Pitrou
  * Cedric Morin
- * Renato
+ * Renato Formato
  * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */

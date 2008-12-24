@@ -15,7 +15,7 @@
 // creation d'une table a partir de sa structure xml
 // le type est surcharge par $type
 // $unique : ne pas creer la table si une du meme type existe deja
-function Forms_creer_table($structure_xml,$type=NULL, $unique = true, $c=NULL){
+function forms_creer_table($structure_xml,$type=NULL, $unique = true, $c=NULL){
 	include_spip('inc/xml');
 
 	$xml = spip_xml_load($structure_xml);
@@ -47,12 +47,12 @@ function Forms_creer_table($structure_xml,$type=NULL, $unique = true, $c=NULL){
 	return $id_form;
 }
 
-function Forms_liste_tables($type){
+function forms_liste_tables($type){
 	static $liste = array();
 	if (is_array($type) && count($type)) {
 		$l = array();
 		foreach($type as $t)
-			$l = array_merge($l,Forms_liste_tables($t));
+			$l = array_merge($l,forms_liste_tables($t));
 		return $l;
 	}
 	if (!isset($liste[$type])){
@@ -71,12 +71,12 @@ function Forms_liste_tables($type){
  * @param int/string $type_ou_id
  * @return unknown
  */
-function Forms_copier_tables($type_ou_id){
+function forms_copier_tables($type_ou_id){
 	if (!$duplique = intval($type_ou_id) OR !is_numeric($type_ou_id)){
-		$liste = Forms_liste_tables($type_ou_id);
+		$liste = forms_liste_tables($type_ou_id);
 		$id_forms = array();
 		foreach($liste as $id)
-			$id_forms[] = Forms_copier_tables($id);
+			$id_forms[] = forms_copier_tables($id);
 		if (count($id_forms)==1) $id_forms = reset($id_forms);
 		return $id_forms;
 	}
@@ -106,22 +106,22 @@ function Forms_copier_tables($type_ou_id){
  *
  * @param int/string $type_ou_id
  */
-function Forms_vider_tables($type_ou_id){
+function forms_vider_tables($type_ou_id){
 	if (!$id_form = intval($type_ou_id) OR !is_numeric($type_ou_id)){
-		$liste = Forms_liste_tables($type_ou_id);
+		$liste = forms_liste_tables($type_ou_id);
 		foreach($liste as $id)
-			Forms_vider_tables($id);
+			forms_vider_tables($id);
 		return;
 	}
-	Forms_supprimer_donnee($id_form,'tout');
+	forms_supprimer_donnee($id_form,'tout');
 }
 
 
-function Forms_supprimer_tables($type_ou_id){
+function forms_supprimer_tables($type_ou_id){
 	if (!$id_form = intval($type_ou_id) OR !is_numeric($type_ou_id)){
-		$liste = Forms_liste_tables($type_ou_id);
+		$liste = forms_liste_tables($type_ou_id);
 		foreach($liste as $id)
-			Forms_supprimer_tables($id);
+			forms_supprimer_tables($id);
 		return;
 	}
 	$res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form=".intval($id_form));
@@ -138,7 +138,7 @@ function Forms_supprimer_tables($type_ou_id){
 }
 
 include_spip('forms_fonctions');
-function Forms_les_valeurs($id_form, $id_donnee, $champ, $separateur=",",$etoile=false, $traduit=true){
+function forms_les_valeurs($id_form, $id_donnee, $champ, $separateur=",",$etoile=false, $traduit=true){
 	if (is_array($champ))
 		foreach($champ as $k=>$ch)
 			$champ[$k] = forms_calcule_les_valeurs('forms_donnees_champs', $id_donnee, $ch, $id_form, $separateur,$etoile,$traduit);
@@ -146,9 +146,9 @@ function Forms_les_valeurs($id_form, $id_donnee, $champ, $separateur=",",$etoile
 		$champ = forms_calcule_les_valeurs('forms_donnees_champs', $id_donnee, $champ, $id_form, $separateur,$etoile,$traduit);
 	return $champ;
 }
-function Forms_creer_champ($id_form,$type,$titre,$c=NULL,$champ=""){
+function forms_creer_champ($id_form,$type,$titre,$c=NULL,$champ=""){
 	include_spip('inc/forms_edit');
-	$champ = Forms_insere_nouveau_champ($id_form,$type,$titre,$champ);
+	$champ = forms_insere_nouveau_champ($id_form,$type,$titre,$champ);
 	if ($c!==NULL){
 		include_spip('forms_crayons');
 		forms_champ_revision("$id_form-$champ",$c);
@@ -158,14 +158,14 @@ function Forms_creer_champ($id_form,$type,$titre,$c=NULL,$champ=""){
 
 /* Operation sur les donnees -------------------------------*/
 
-function Forms_creer_donnee($id_form,$c = NULL, $rang=NULL){
+function forms_creer_donnee($id_form,$c = NULL, $rang=NULL){
 	include_spip('inc/autoriser');
 	if (!autoriser('creer','donnee',0,NULL,array('id_form'=>$id_form)))
 		return array(0,_L("droits insuffisants pour creer une donnee dans table $id_form"));
 	include_spip('inc/forms');
 	$new = 0;
 	$erreur = array();
-	Forms_enregistrer_reponse_formulaire($id_form, $new, $erreur, $reponse, '', '' , $c, $rang);
+	forms_enregistrer_reponse_formulaire($id_form, $new, $erreur, $reponse, '', '' , $c, $rang);
 	return array($new,$erreur);
 }
 
@@ -176,7 +176,7 @@ function Forms_creer_donnee($id_form,$c = NULL, $rang=NULL){
  * @param unknown_type $id_donnee
  * @return unknown
  */
-function Forms_supprimer_donnee($id_form,$id_donnee){
+function forms_supprimer_donnee($id_form,$id_donnee){
 	if (intval($id_donnee)==0 AND $id_donnee!=='tout') return false; // erreur
 	$id_donnee = intval($id_donnee);
 	include_spip('inc/autoriser');
@@ -193,15 +193,15 @@ function Forms_supprimer_donnee($id_form,$id_donnee){
 	return sql_updateq("spip_forms_donnees",array('statut'=>'poubelle','bgch'=>0,'bdte'=>0,'niveau'=>0),"id_form=".intval($id_form).$where);
 }
 
-function Forms_modifier_donnee($id_donnee,$c = NULL){
+function forms_modifier_donnee($id_donnee,$c = NULL){
 	include_spip('inc/forms');
-	return Forms_revision_donnee($id_donnee,$c);
+	return forms_revision_donnee($id_donnee,$c);
 }
 
-function Forms_instituer_donnee($id_donnee,$statut){
+function forms_instituer_donnee($id_donnee,$statut){
 		spip_query("UPDATE spip_forms_donnees SET statut="._q($statut)." WHERE id_donnee="._q($id_donnee));
 }
-function Forms_ordonner_donnee($id_donnee,$rang_nouv){
+function forms_ordonner_donnee($id_donnee,$rang_nouv){
 	$rang_min = $rang_max = 1;
 	// recuperer le rang et l'id_form de la donnee modifiee
 	if (!$row = sql_fetsel("id_form,rang","spip_forms_donnees","id_donnee=".intval($id_donnee))) return;
@@ -222,10 +222,10 @@ function Forms_ordonner_donnee($id_donnee,$rang_nouv){
 	}
 	// borner le rang
 	include_spip('inc/forms');
-	if ($rang_nouv==0) $rang_nouv = Forms_rang_prochain($id_form);
+	if ($rang_nouv==0) $rang_nouv = forms_rang_prochain($id_form);
 	$rang_nouv = min(max($rang_nouv,$rang_min),$rang_max);
 	if ($rang_nouv>$rang) $rang_nouv++; // il faut se decaler d'un car on est devant actuellement
-	$rang_nouv = min($rang_nouv,Forms_rang_prochain($id_form));
+	$rang_nouv = min($rang_nouv,forms_rang_prochain($id_form));
 
 	// incrementer tous ceux dont le rang est superieur a la cible pour faire une place
 	$ok = sql_update("spip_forms_donnees",array('rang'=>'rang+1'),"id_form=".intval($id_form)." AND rang>=".intval($rang_nouv));
@@ -242,7 +242,7 @@ function Forms_ordonner_donnee($id_donnee,$rang_nouv){
 		return $row['rang'];
 }
 
-function Forms_rechercher_donnee($recherche,$id_form=0,$champ=NULL,$sous_ensemble=NULL){
+function forms_rechercher_donnee($recherche,$id_form=0,$champ=NULL,$sous_ensemble=NULL){
 	$liste = array();
 	$in = "";
 	if (is_array($sous_ensemble)){
@@ -262,10 +262,10 @@ function Forms_rechercher_donnee($recherche,$id_form=0,$champ=NULL,$sous_ensembl
 	return $liste;
 }
 
-function Forms_infos_donnee($id_donnee,$specifiant=true,$linkable=false){
-	list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($id_donnee,$specifiant,$linkable);
+function forms_infos_donnee($id_donnee,$specifiant=true,$linkable=false){
+	list($id_form,$titreform,$type_form,$t) = forms_liste_decrit_donnee($id_donnee,$specifiant,$linkable);
 	if (!count($t) && $specifiant)
-		list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($id_donnee, false,$linkable);
+		list($id_form,$titreform,$type_form,$t) = forms_liste_decrit_donnee($id_donnee, false,$linkable);
 	if (!count($t) && !$id_form) { 
 		// verifier qu'une donnee vide n'existe pas suite a enregistrement errone..
 		$res2 = spip_query("SELECT f.titre AS titreform,f.id_form,f.type_form FROM spip_forms_donnees AS d
@@ -279,14 +279,14 @@ function Forms_infos_donnee($id_donnee,$specifiant=true,$linkable=false){
 	}
 	return array($id_form,$titreform,$type_form,$t);
 }
-function Forms_decrit_donnee($id_donnee,$specifiant=true,$linkable=false){
-	list($id_form,$titreform,$type_form,$t) = Forms_infos_donnee($id_donnee,$specifiant,$linkable);
+function forms_decrit_donnee($id_donnee,$specifiant=true,$linkable=false){
+	list($id_form,$titreform,$type_form,$t) = forms_infos_donnee($id_donnee,$specifiant,$linkable);
 	return $t;
 }
 
-function Forms_donnees_liees($id_donnee,$type_form_lie){
+function forms_donnees_liees($id_donnee,$type_form_lie){
 	include_spip('base/abstract_sql');
-	$liste = Forms_liste_tables($type_form_lie);
+	$liste = forms_liste_tables($type_form_lie);
 	$in_liste = calcul_mysql_in('id_form',implode(',',$liste));
 	$res = spip_query("SELECT * FROM spip_forms_donnees_donnees WHERE id_donnee="._q($id_donnee)." OR id_donnee_liee="._q($id_donnee));
 	$valeurs = array();
@@ -298,14 +298,14 @@ function Forms_donnees_liees($id_donnee,$type_form_lie){
 	}
 	return $valeurs;
 }
-function Forms_delier_donnee($id_donnee,$id_donnee_liee=0,$type_form_lie = ""){
+function forms_delier_donnee($id_donnee,$id_donnee_liee=0,$type_form_lie = ""){
 	if ($id_donnee_liee!=0){
 		spip_query("DELETE FROM spip_forms_donnees_donnees WHERE id_donnee="._q($id_donnee)." AND id_donnee_liee="._q($id_donnee_liee));
 		spip_query("DELETE FROM spip_forms_donnees_donnees WHERE id_donnee_liee="._q($id_donnee)." AND id_donnee="._q($id_donnee_liee));
 	}
 	else {
 		include_spip('base/abstract_sql');
-		$liste = Forms_liste_tables($type_form_lie);
+		$liste = forms_liste_tables($type_form_lie);
 		$in_liste = calcul_mysql_in('id_form',implode(',',$liste));
 		$res = spip_query("SELECT * FROM spip_forms_donnees_donnees WHERE id_donnee="._q($id_donnee)." OR id_donnee_liee="._q($id_donnee));
 		while ($row = spip_fetch_array($res)){
@@ -326,7 +326,7 @@ function Forms_delier_donnee($id_donnee,$id_donnee_liee=0,$type_form_lie = ""){
  *   fils_cadet, fils_aine, grand_frere, petit_frere, pere
  * retourne un array($id_donnee,$erreur)
  */
-function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$c=NULL){
+function forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$c=NULL){
 	if (!$id_parent>0){
 		if ($res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form=".intval($id_form)." AND statut!='poubelle' LIMIT 0,1")
 		  AND spip_num_rows($res)==0){
@@ -336,7 +336,7 @@ function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$
 				return array(0,_L("Insertion impossible dans un arbre pour un fils sans pere dans table $id_form"));
 			}
 			// premiere insertion
-				return Forms_creer_donnee($id_form,$c,array('niveau'=>0,'bgch'=>1,'bdte'=>2));
+				return forms_creer_donnee($id_form,$c,array('niveau'=>0,'bgch'=>1,'bdte'=>2));
 		}
 		else {
 			// Insertion d'un collateral : il faut preciser le 'parent' !
@@ -361,7 +361,7 @@ function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$
 		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch+1,bdte=bdte+1,niveau=niveau+1 WHERE id_form=".intval($id_form)." AND bgch>="._q($rowp['bgch'])." AND bdte<="._q($rowp['bdte']))
 		)
 			// Insertion du nouveau pere
-			return Forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau'],'bgch'=>$rowp['bgch'],'bdte'=>$rowp['bdte']+2));
+			return forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau'],'bgch'=>$rowp['bgch'],'bdte'=>$rowp['bdte']+2));
 	}
 	// Insertion d'un grand frere
 	elseif ($position == 'grand_frere'){
@@ -370,7 +370,7 @@ function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$
 		  spip_query("UPDATE spip_forms_donnees SET bdte=bdte+2 WHERE id_form=".intval($id_form)." AND bdte>"._q($rowp['bgch'])." AND bgch<"._q($rowp['bgch']))
 		  AND spip_query("UPDATE spip_forms_donnees SET id_form=".intval($id_form)." AND bgch=bgch+2,bdte=bdte+2 WHERE bgch>="._q($rowp['bgch']))
 		  )
-			return Forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau'],'bgch'=>$rowp['bgch'],'bdte'=>$rowp['bgch']+1));
+			return forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau'],'bgch'=>$rowp['bgch'],'bdte'=>$rowp['bgch']+1));
 	}
 	// Insertion d'un petit frere
 	elseif ($position == 'petit_frere'){
@@ -379,7 +379,7 @@ function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$
 		  spip_query("UPDATE spip_forms_donnees SET bdte=bdte+2 WHERE id_form=".intval($id_form)." AND bdte>"._q($rowp['bdte'])." AND bgch<"._q($rowp['bdte']))
 		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch+2,bdte=bdte+2 WHERE id_form=".intval($id_form)." AND bgch>="._q($rowp['bdte']))
 		  )
-			return Forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau'],'bgch'=>$rowp['bdte']+1,'bdte'=>$rowp['bdte']+2));
+			return forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau'],'bgch'=>$rowp['bdte']+1,'bdte'=>$rowp['bdte']+2));
 	}
 	// Insertion d'un fils aine
 	elseif ($position == 'fils_aine'){
@@ -388,7 +388,7 @@ function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$
 		  spip_query("UPDATE spip_forms_donnees SET bdte=bdte+2 WHERE id_form=".intval($id_form)." AND bdte>"._q($rowp['bgch'])." AND bgch<="._q($rowp['bgch']))
 		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch+2,bdte=bdte+2 WHERE id_form=".intval($id_form)." AND bgch>"._q($rowp['bgch']))
 		  )
-			return Forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau']+1,'bgch'=>$rowp['bgch']+1,'bdte'=>$rowp['bgch']+2));
+			return forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau']+1,'bgch'=>$rowp['bgch']+1,'bdte'=>$rowp['bgch']+2));
 	}
 	// Insertion d'un fils aine
 	elseif ($position == 'fils_cadet'){
@@ -397,12 +397,12 @@ function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$
 		  spip_query("UPDATE spip_forms_donnees SET bdte=bdte+2 WHERE id_form=".intval($id_form)." AND bdte>="._q($rowp['bdte'])." AND bgch<="._q($rowp['bdte']))
 		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch+2,bdte=bdte+2 WHERE id_form=".intval($id_form)." AND bgch>"._q($rowp['bdte']))
 		  )
-			return Forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau']+1,'bgch'=>$rowp['bdte'],'bdte'=>$rowp['bdte']+1));
+			return forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau']+1,'bgch'=>$rowp['bdte'],'bdte'=>$rowp['bdte']+1));
 	}
 	spip_log("Operation inconnue insertion en position $position dans table $id_form");
 	return array(0,_L("Operation inconnue insertion en position $position dans table $id_form"));
 }
-function Forms_arbre_supprimer_donnee($id_form,$id_donnee,$recursif=true){
+function forms_arbre_supprimer_donnee($id_form,$id_donnee,$recursif=true){
 	$res = spip_query("SELECT * FROM spip_forms_donnees WHERE id_form=".intval($id_form)." AND id_donnee="._q($id_donnee));
 	if (!($row = spip_fetch_array($res)))
 		return false;
@@ -412,7 +412,7 @@ function Forms_arbre_supprimer_donnee($id_form,$id_donnee,$recursif=true){
 		$res2 = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form=".intval($id_form)." AND bgch>="._q($row['bgch'])." AND bdte<="._q($row['bdte']));
 		$ok = true;
 		while ($row2 = spip_fetch_array($res2))
-			$ok = $ok && Forms_supprimer_donnee($id_form,$row2['id_donnee']);
+			$ok = $ok && forms_supprimer_donnee($id_form,$row2['id_donnee']);
 		
 		if (
 			spip_query("UPDATE spip_forms_donnees SET bgch=bgch-$delta,bdte=bdte-$delta WHERE id_form=".intval($id_form)." AND bgch>"._q($row['bdte']))
@@ -424,7 +424,7 @@ function Forms_arbre_supprimer_donnee($id_form,$id_donnee,$recursif=true){
 	else {
 		// NON ! on ne supprime que l'element
 		if (
-		  Forms_supprimer_donnee($id_form,$id_donnee)
+		  forms_supprimer_donnee($id_form,$id_donnee)
 		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch-1,bdte=bdte-1,niveau=niveau-1 WHERE id_form=".intval($id_form)." AND bdte<"._q($row['bdte'])." AND bgch>"._q($row['bgch']))
 		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch-2,bdte=bdte-2 WHERE id_form=".intval($id_form)." AND bgch>"._q($row['bdte']))
 		  AND spip_query("UPDATE spip_forms_donnees SET bdte=bdte-2 WHERE id_form=".intval($id_form)." AND bdte>"._q($row['bdte'])." AND bgch<="._q($row['bdte']))
@@ -433,7 +433,7 @@ function Forms_arbre_supprimer_donnee($id_form,$id_donnee,$recursif=true){
 		return false;
 	}
 }
-function Forms_arbre_liste_relations($id_form,$id_parent,$position="enfant"){
+function forms_arbre_liste_relations($id_form,$id_parent,$position="enfant"){
 	$liste = array();
 	if ($id_parent){
 		$res = spip_query("SELECT id_donnee,niveau,bgch,bdte FROM spip_forms_donnees WHERE id_donnee="._q($id_parent)." AND id_form=".intval($id_form));

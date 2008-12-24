@@ -12,9 +12,9 @@
  */
 
 	$GLOBALS['forms_types_champs_etendus']=array();
-	Forms_importe_types_etendus();
+	forms_importe_types_etendus();
 
-	function Forms_importe_types_etendus(){
+	function forms_importe_types_etendus(){
 		// dans l'espace public on evite un find_in_path a chaque hit
 		if (_DIR_RESTREINT) {
 			if (isset($GLOBALS['meta']['forms_types_champs']))
@@ -52,7 +52,7 @@
 													$format[] = array('match'=>$matchr,'replace'=>$replace);
 											}
 										}
-										if (!in_array($champ,Forms_liste_types_champs()))
+										if (!in_array($champ,forms_liste_types_champs()))
 											$GLOBALS['forms_types_champs_etendus'][$champ]=array('label'=>$libelle,'match'=>$match,'formate'=>$format);
 									}
 								}
@@ -64,18 +64,18 @@
 	}
 
 
-	function Forms_liste_types_champs(){
-		$liste = array_diff(array_keys(Forms_nom_type_champ()),array(''));
+	function forms_liste_types_champs(){
+		$liste = array_diff(array_keys(forms_nom_type_champ()),array(''));
 		return $liste;
 	}
-	function Forms_type_champ_autorise($type) {
+	function forms_type_champ_autorise($type) {
 		static $t;
 		if (!$t) {
-			$t = Forms_nom_type_champ();
+			$t = forms_nom_type_champ();
 		}
 		return (strlen($type)&&isset($t[$type]));
 	}
-	function Forms_nom_type_champ($type='') {
+	function forms_nom_type_champ($type='') {
 		static $noms;
 		if (!$noms) {
 			$noms = array(
@@ -104,11 +104,11 @@
 		else return ($s = $noms[$type]) ? $s : $type;
 	}
 
-	function Forms_valide_champs_reponse_post($id_form, $id_donnee, $c = NULL, $structure = NULL){
+	function forms_valide_champs_reponse_post($id_form, $id_donnee, $c = NULL, $structure = NULL){
 		$erreur = array();
 		if (!$structure){
 			include_spip("inc/forms");
-			$structure = Forms_structure($id_form);
+			$structure = forms_structure($id_form);
 		}
 		foreach($structure as $champ=>$infos){
 			$type = $infos['type'];
@@ -118,22 +118,22 @@
 			if (($val===NULL || !strlen($val)) && ($infos['obligatoire'] == 'oui') && ($infos['saisie'] != 'non'))
 				// Cas particulier de l'upload de fichier : on ne force pas à uploader à nouveau un fichier si celui-ci est existant
 				// Cas particulier des password : on ne force pas a donner un nouveau mot de passe si existe deja
-				if (( (in_array($type,array('fichier','password'))) && ($val==NULL) && (Forms_valeurs($id_donnee,$id_form,$champ)!=NULL) ));
+				if (( (in_array($type,array('fichier','password'))) && ($val==NULL) && (forms_valeurs($id_donnee,$id_form,$champ)!=NULL) ));
 					else $erreur[$champ] = _T("forms:champ_necessaire");
 		}
 
 		$erreur = array_merge($erreur,
-			Forms_valide_conformite_champs_reponse_post($id_form, $id_donnee, $c, $structure));
+			forms_valide_conformite_champs_reponse_post($id_form, $id_donnee, $c, $structure));
 
 		return $erreur;
 	}
 
 
-	function Forms_valide_conformite_champs_reponse_post($id_form, $id_donnee, $c = NULL, $structure = NULL){
+	function forms_valide_conformite_champs_reponse_post($id_form, $id_donnee, $c = NULL, $structure = NULL){
 		$erreur = array();
 		if (!$structure){
 			include_spip("inc/forms");
-			$structure = Forms_structure($id_form);
+			$structure = forms_structure($id_form);
 		}
 
 		foreach($structure as $champ=>$infos){
@@ -180,7 +180,7 @@
 						else if ($infos['extra_info'] && $taille > ($infos['extra_info'] * 1024)) {
 						$erreur[$champ] = _T("forms:fichier_trop_gros");
 						}
-						else if (!Forms_type_fichier_autorise($_FILES[$champ]['name'])) {
+						else if (!forms_type_fichier_autorise($_FILES[$champ]['name'])) {
 							$erreur[$champ] = _T("fichier_type_interdit");
 						}
 						if ($erreur[$champ]) {

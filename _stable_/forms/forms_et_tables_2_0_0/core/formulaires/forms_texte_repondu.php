@@ -24,7 +24,7 @@ function balise_FORMS_TEXTE_REPONDU_stat($args, $filtres) {
 }
 function balise_FORMS_TEXTE_REPONDU_dyn($id_form, $texte='',$texte_autres='') {
 	include_spip('inc/forms');
-	if (Forms_verif_cookie_sondage_utilise($id_form)) return $texte;
+	if (forms_verif_cookie_sondage_utilise($id_form)) return $texte;
 	else return $texte_autres;
 }
 ?>

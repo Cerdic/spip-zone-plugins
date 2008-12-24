@@ -29,7 +29,7 @@ function action_forms_telecharger(){
 			$delim = _request('delim');
 			if ($delim == 'TAB') $delim = "\t";
 			
-			$out = Forms_formater_les_reponses($id_form, "csv", $delim, $fichiers, $filename);
+			$out = forms_formater_les_reponses($id_form, "csv", $delim, $fichiers, $filename);
 		
 			// Excel ?
 			if ($delim == ','){

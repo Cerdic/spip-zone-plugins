@@ -23,7 +23,7 @@ function csv_champ($champ) {
 	return '"'.$champ.'"';
 }
 
-function Forms_formater_ligne_csv($ligne,$delim=',') {
+function forms_formater_ligne_csv($ligne,$delim=',') {
 	$out = "";
 	foreach($ligne as $val){
 		if (is_array($val))
@@ -35,14 +35,14 @@ function Forms_formater_ligne_csv($ligne,$delim=',') {
 	return $out;
 }
 
-function Forms_formater_ligne($ligne,$format,$separateur){
-	if (function_exists($f = "Forms_formater_ligne_$format"))
+function forms_formater_ligne($ligne,$format,$separateur){
+	if (function_exists($f = "forms_formater_ligne_$format"))
 		return $f($ligne,$separateur);
 	else
-		return Forms_formater_ligne_csv($ligne,$separateur);
+		return forms_formater_ligne_csv($ligne,$separateur);
 }
 
-function Forms_formater_reponse($ligne, $valeurs, $structure,$format,$separateur) {
+function forms_formater_reponse($ligne, $valeurs, $structure,$format,$separateur) {
 	// Prendre les differents champs dans l'ordre
 	foreach ($structure as $champ => $t) {
 		if (!isset($valeurs[$champ])) {
@@ -63,14 +63,14 @@ function Forms_formater_reponse($ligne, $valeurs, $structure,$format,$separateur
 				$ligne[] = strval(join(', ', $v));
 		}
 	}
-	return Forms_formater_ligne($ligne,$format,$separateur);
+	return forms_formater_ligne($ligne,$format,$separateur);
 }
 
-function Forms_formater_les_reponses($id_form, $format, $separateur, &$fichiers, &$filename, $head=true, $traduit=true){
+function forms_formater_les_reponses($id_form, $format, $separateur, &$fichiers, &$filename, $head=true, $traduit=true){
 	//
 	// Telechargement du tableau de reponses au format CSV ou autre
 	// le support d'un autre format ne necessite que l'implementation de la fonction
-	// Forms_formater_ligne_xxx avec xxx le nom du format
+	// forms_formater_ligne_xxx avec xxx le nom du format
 	//
 	$nb_reponses = 0;
 	$row = spip_fetch_array(spip_query("SELECT COUNT(*) AS tot FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND confirmation='valide' AND statut<>'poubelle'"));
@@ -89,7 +89,7 @@ function Forms_formater_les_reponses($id_form, $format, $separateur, &$fichiers,
 	$filename = preg_replace(',[^-_\w]+,', '_', translitteration(textebrut(typo($titre))));
 
 	$s = '';
-	$structure = Forms_structure($id_form);
+	$structure = forms_structure($id_form);
 	
 	if ($head) {
 		// Une premiere ligne avec les noms de champs
@@ -111,9 +111,9 @@ function Forms_formater_les_reponses($id_form, $format, $separateur, &$fichiers,
 				}
 			}
 		}
-		$s .= Forms_formater_ligne($ligne1,$format,$separateur);
+		$s .= forms_formater_ligne($ligne1,$format,$separateur);
 		if ($traduit)
-			$s .= Forms_formater_ligne($ligne2,$format,$separateur);
+			$s .= forms_formater_ligne($ligne2,$format,$separateur);
 	}
 
 	// Ensuite les reponses
@@ -126,7 +126,7 @@ function Forms_formater_les_reponses($id_form, $format, $separateur, &$fichiers,
 	while ($row = spip_fetch_array($result)) {
 		if ($id_donnee != $row['id_donnee']) {
 			if ($id_donnee)
-				$s .= Forms_formater_reponse($ligne,$valeurs,$structure,$format,$separateur);
+				$s .= forms_formater_reponse($ligne,$valeurs,$structure,$format,$separateur);
 			$id_donnee = $row['id_donnee'];
 			$date = $row['date'];
 			$ligne = array();
@@ -156,7 +156,7 @@ function Forms_formater_les_reponses($id_form, $format, $separateur, &$fichiers,
 
 	// Ne pas oublier la derniere reponse
 	if ($id_donnee)
-		$s .= Forms_formater_reponse($ligne,$valeurs,$structure,$format,$separateur);
+		$s .= forms_formater_reponse($ligne,$valeurs,$structure,$format,$separateur);
 	return $s;
 }
 

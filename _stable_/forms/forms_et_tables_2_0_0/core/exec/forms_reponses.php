@@ -88,7 +88,7 @@ function exec_forms_reponses(){
 		echo "<br />\n";
 		debut_cadre_enfonce("statistiques-24.gif");
 		include_spip('forms_fonctions');
-		echo Forms_afficher_reponses_sondage($id_form);
+		echo forms_afficher_reponses_sondage($id_form);
 		fin_cadre_enfonce();
 	}
 
@@ -180,7 +180,7 @@ function exec_forms_reponses(){
 		
 		echo "<br />\n";
 
-		list($lib,$values,$urls) = 	Forms_extraire_reponse($id_donnee);
+		list($lib,$values,$urls) = 	forms_extraire_reponse($id_donnee);
 		
 		foreach ($lib as $champ => $titre) {
 			$s = '';

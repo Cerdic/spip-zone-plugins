@@ -104,10 +104,10 @@ function autoriser_form_donnee_modifier_dist($faire, $type, $id_donnee, $qui, $o
 	$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 	if (!$row = spip_fetch_array($result)) return false;
 	include_spip('inc/forms');
-	$dejareponse=Forms_verif_cookie_sondage_utilise($id_form);
+	$dejareponse=forms_verif_cookie_sondage_utilise($id_form);
 	global $auteur_session;
 	$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
-	$cookie = $_COOKIE[Forms_nom_cookie_form($id_form)];
+	$cookie = $_COOKIE[forms_nom_cookie_form($id_form)];
 	if (($row['modifiable'] == 'oui') && $dejareponse) {
 		$q = "SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form);
 		$q .= "AND (";
@@ -136,7 +136,7 @@ function autoriser_form_donnee_creer_dist($faire, $type, $id_donnee, $qui, $opt)
 	$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 	if (!$row = spip_fetch_array($result)) return false;
 	if ($row['multiple']=='oui') return true;
-	$dejareponse=Forms_verif_cookie_sondage_utilise($id_form);
+	$dejareponse=forms_verif_cookie_sondage_utilise($id_form);
 	if ($dejareponse) return false;
 	return true;
 }

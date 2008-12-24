@@ -134,7 +134,7 @@
 			}
 			else
 				$_qui = "\$GLOBALS['auteur_session']['id_auteur']";
-			$_cookie = "\$_COOKIE[\$cf=Forms_nom_cookie_form($_id_form)]";
+			$_cookie = "\$_COOKIE[\$cf=forms_nom_cookie_form($_id_form)]";
 
 			$boucle->where[]= array("'='","'$t.id_form'",$_id_form);
 			$boucle->where[] = "('('.(

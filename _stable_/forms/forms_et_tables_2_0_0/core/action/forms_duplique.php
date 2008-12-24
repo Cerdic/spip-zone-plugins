@@ -6,7 +6,7 @@
  * Auteurs :
  * Antoine Pitrou
  * Cedric Morin
- * Renato
+ * Renato Formato
  * (c) 2005-2009 - Distribue sous licence GNU/GPL
  *
  */
@@ -17,7 +17,7 @@ function action_forms_duplique_dist(){
 
 	if ($id_form = intval($args)){
 		include_spip('base/forms_base_api');
-		Forms_copier_tables($id_form);		
+		forms_copier_tables($id_form);		
 	}
 }
 

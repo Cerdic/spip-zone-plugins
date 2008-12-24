@@ -21,7 +21,7 @@ function formulaires_forms_verifier_dist($id_form = 0, $id_article = 0, $id_donn
 	
 		include_spip('inc/forms');
 		include_spip("inc/forms_type_champs");
-		$erreurs = Forms_valide_champs_reponse_post($id_form, $id_donnee);
+		$erreurs = forms_valide_champs_reponse_post($id_form, $id_donnee);
 	}
 
 	return $erreurs;

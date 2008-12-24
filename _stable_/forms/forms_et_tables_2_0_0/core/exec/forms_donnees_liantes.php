@@ -14,7 +14,7 @@
 function exec_forms_donnees_liantes(){
 	$id = _request("id_donnee");
 	include_spip('inc/forms');
-	list($out,$les_donnees,$nombre_donnees) = Forms_afficher_liste_donnees_liees(
+	list($out,$les_donnees,$nombre_donnees) = forms_afficher_liste_donnees_liees(
 		"donnee_liee", 
 		$id_donnee, 
 		"donnee", 

@@ -15,7 +15,7 @@ include_spip('inc/forms');
 include_spip('inc/forms_edit');
 include_spip('inc/forms_type_champs'); // gestion des types de champs
 
-function Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$retour,$prefixei18n='form'){
+function forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$retour,$prefixei18n='form'){
 	global $spip_lang_right;
 	$out = "<div class='verdana3'>";
 	if ($nb_reponses){
@@ -177,7 +177,7 @@ function exec_forms_edit(){
 	}
 	$bloc = explode("-",$bloc);
 	if ($ajax_charset && $bloc[0]=='champs') {
-		ajax_retour(Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ,$redirect,isset($bloc[2])?$bloc[2]:false));
+		ajax_retour(forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ,$redirect,isset($bloc[2])?$bloc[2]:false));
 	}
 
 
@@ -269,7 +269,7 @@ function exec_forms_edit(){
 		echo gros_titre($row['titre'],'',false);
 
 		if ($supp_form && $supp_rejet==NULL)
-			echo Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$retour,$prefixei18n);
+			echo forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$retour,$prefixei18n);
 		echo "<div id='barre_onglets'>";
 		echo debut_onglet();
 		echo onglet(_T('forms:lien_apercu'),ancre_url(self(),"resume"),'','resume');
@@ -293,7 +293,7 @@ function exec_forms_edit(){
 
 	// edition des champs ---------------------------------------------------------------
 	$out .= "<div id='champs' name='champs'>";
-	$out .= Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ,$redirect);
+	$out .= forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ,$redirect);
 	$out .= "</div>\n";
 
 	echo $out;

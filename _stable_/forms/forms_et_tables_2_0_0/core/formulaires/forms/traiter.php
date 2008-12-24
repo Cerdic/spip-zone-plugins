@@ -20,11 +20,11 @@ function formulaires_forms_traiter_dist($id_form = 0, $id_article = 0, $id_donne
 	if (  $row['type_form'] == 'sondage'
 	  OR  $row['modifiable']=='oui'
 	  OR  $row['multiple']=='non' ){
-		Forms_poser_cookie_sondage($id_form);
+		forms_poser_cookie_sondage($id_form);
 	}
 	
 	include_spip('inc/forms');
-	$url_validation = Forms_enregistrer_reponse_formulaire($id_form, $id_donnee, $erreur, $reponse, $script_validation, $id_article?"id_article=$id_article":"");
+	$url_validation = forms_enregistrer_reponse_formulaire($id_form, $id_donnee, $erreur, $reponse, $script_validation, $id_article?"id_article=$id_article":"");
 	if (!$erreur) {
 		$formok = _T($reponse_enregistree)."<span class='id_donnee' rel='$id_donnee'></span>";
 		if ($id_donnee_liee && $id_donnee){
@@ -64,7 +64,7 @@ function formulaires_forms_traiter_dist($id_form = 0, $id_article = 0, $id_donne
 
 
 // le reglage du cookie doit se faire avant l'envoi de tout HTML au client
-function Forms_poser_cookie_sondage($id_form) {
+function forms_poser_cookie_sondage($id_form) {
 	if ($id_form = intval($id_form)) {
 		$nom_cookie = $GLOBALS['cookie_prefix'].'cookie_form_'.$id_form;
 		// Ne generer un nouveau cookie que s'il n'existe pas deja

@@ -46,11 +46,11 @@ foreach(array(
 	if (!isset($GLOBALS['spip_pipeline'][$pipe])) $GLOBALS['spip_pipeline'][$pipe] = '';
 
 
-function Forms_generer_url_sondage($id_form) {
+function forms_generer_url_sondage($id_form) {
 	return generer_url_public("sondage","id_form=$id_form",true);
 }
 
-function Forms_definir_session($session){
+function forms_definir_session($session){
 	foreach($_COOKIE as $cookie=>$value){
 		if (strpos($cookie,'cookie_form_')!==FALSE)
 			$session .= "-$cookie:$value";

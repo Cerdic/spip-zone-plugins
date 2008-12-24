@@ -14,8 +14,8 @@
 	include_spip("inc/forms");
 
 	// Hack crade a cause des limitations du compilateur
-	function _Forms_afficher_reponses_sondage($id_form) {
-		return Forms_afficher_reponses_sondage($id_form);
+	function _forms_afficher_reponses_sondage($id_form) {
+		return forms_afficher_reponses_sondage($id_form);
 	}
 
 	function wrap_split($wrap){

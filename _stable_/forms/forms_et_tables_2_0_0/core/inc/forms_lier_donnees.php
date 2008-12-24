@@ -27,8 +27,8 @@ function inc_forms_lier_donnees($type, $id, $script, $deplie=false, $type_table 
 	//
 	// Afficher les donnees liees, rangees par tables
 	//
-	list($s,$les_donnees, $nombre_donnees) = Forms_formulaire_objet_afficher_donnees($type,$id,$script,$type_table);
-	$form .= Forms_formulaire_objet_chercher_donnee($type,$id,$les_donnees, $script, $type_table);
+	list($s,$les_donnees, $nombre_donnees) = forms_formulaire_objet_afficher_donnees($type,$id,$script,$type_table);
+	$form .= forms_formulaire_objet_chercher_donnee($type,$id,$les_donnees, $script, $type_table);
 	
 	$out = "";
 	$out .= "<a name='tables'></a>";
@@ -62,7 +62,7 @@ function inc_forms_lier_donnees($type, $id, $script, $deplie=false, $type_table 
 	return _request('var_ajaxcharset')?$out:("<div id='forms_lier_donnees-$id'>".$out."</div>");
 }
 
-function Forms_formulaire_objet_chercher_donnee($type,$id,$les_donnees, $script, $type_table){
+function forms_formulaire_objet_chercher_donnee($type,$id,$les_donnees, $script, $type_table){
   global $spip_lang_right,$spip_lang_left,$couleur_claire,$couleur_foncee;
 	$out = "";
 	$recherche = _request('cherche_donnee');
@@ -87,7 +87,7 @@ function Forms_formulaire_objet_chercher_donnee($type,$id,$les_donnees, $script,
 
 	if ($type == 'donnee')
 		$les_donnees .= (strlen($les_donnees)?",":"").$iid;
-	$out .= Forms_boite_selection_donnees($recherche?$recherche:((_request('ajouter')!==NULL)?"":$recherche),$les_donnees, $type, $type_table);
+	$out .= forms_boite_selection_donnees($recherche?$recherche:((_request('ajouter')!==NULL)?"":$recherche),$les_donnees, $type, $type_table);
 	
 	$script_rech = generer_url_ecrire("recherche_donnees","type=$type&id_$type=$id",true);
 	$out .= "<input type='hidden' name='autocompleteUrl' value='$script_rech' />";
@@ -118,8 +118,8 @@ function Forms_formulaire_objet_chercher_donnee($type,$id,$les_donnees, $script,
 	return $out;
 }
 
-function Forms_formulaire_objet_afficher_donnees($type,$id, $script, $type_table='table'){
-	return Forms_afficher_liste_donnees_liees(
+function forms_formulaire_objet_afficher_donnees($type,$id, $script, $type_table='table'){
+	return forms_afficher_liste_donnees_liees(
 		$type, 
 		$id, 
 		strncmp($type,"donnee",6)==0?"donnee_liee":"donnee",
@@ -130,9 +130,9 @@ function Forms_formulaire_objet_afficher_donnees($type,$id, $script, $type_table
 		self());
 }
 
-function Forms_boite_selection_donnees($recherche, $les_donnees, $type, $type_table){
+function forms_boite_selection_donnees($recherche, $les_donnees, $type, $type_table){
 	$out = "";
-	$liste_res = Forms_liste_recherche_donnees($recherche,$les_donnees,$type,$type_table);
+	$liste_res = forms_liste_recherche_donnees($recherche,$les_donnees,$type,$type_table);
 	if (count($liste_res)){
 		$nb_ligne = 0;
 		foreach($liste_res as $titre=>$donnees){
@@ -152,7 +152,7 @@ function Forms_boite_selection_donnees($recherche, $les_donnees, $type, $type_ta
 	return $out;
 }
 
-function Forms_liste_recherche_donnees($recherche,$les_donnees,$type,$type_table,$max_items=-1){
+function forms_liste_recherche_donnees($recherche,$les_donnees,$type,$type_table,$max_items=-1){
 	if (strncmp($type,'donnees',6)==0)
 		$linkable = false;
 	else 	
@@ -191,9 +191,9 @@ function Forms_liste_recherche_donnees($recherche,$les_donnees,$type,$type_table
 			}
 		}
 		while ($row = spip_fetch_array($res)){
-			list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($row['id_donnee'],true, $linkable);
+			list($id_form,$titreform,$type_form,$t) = forms_liste_decrit_donnee($row['id_donnee'],true, $linkable);
 			if (!count($t))
-				list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($row['id_donnee'],false, $linkable);
+				list($id_form,$titreform,$type_form,$t) = forms_liste_decrit_donnee($row['id_donnee'],false, $linkable);
 			if (count($t))
 				$table[$titreform][$row['id_donnee']]=$t;
 		}

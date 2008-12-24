@@ -26,7 +26,7 @@ function controleurs_forms_donnee_dist($regs) {
 	  return $f($regs,$id_form,$type_form);
 	
 	include_spip('inc/forms');
-	$valeurs = Forms_valeurs($id,$id_form,$champ);
+	$valeurs = forms_valeurs($id,$id_form,$champ);
 	# autoriser la creation de valeurs !
 	if (!count($valeurs))
 		#return array("$type $id $champ: " . _U('crayons:pas_de_valeur'), 6);

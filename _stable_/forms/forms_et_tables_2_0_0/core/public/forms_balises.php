@@ -15,7 +15,7 @@
 	function balise_RESULTATS_SONDAGE($p) {
 		$_id_form = champ_sql('id_form', $p);
 	
-		$p->code = "Forms_afficher_reponses_sondage(" . $_id_form . ")";
+		$p->code = "forms_afficher_reponses_sondage(" . $_id_form . ")";
 		$p->statut = 'html';
 		return $p;
 	}

@@ -24,14 +24,14 @@ function formulaires_forms_charger_dist($id_form = 0, $id_article = 0, $id_donne
 		$forms_obligatoires .= $row['forms_obligatoires'];
 		// substituer le formulaire obligatoire pas rempli si necessaire
 		if (strlen($forms_obligatoires)){
-			$row=Forms_obligatoire($row,$forms_obligatoires);
+			$row=forms_obligatoire($row,$forms_obligatoires);
 			$id_form=$row['id_form'];
 		}
 		$type_form = $row['type_form'];
 	}
 
 	include_spip('inc/forms');
-	$structure = Forms_structure($id_form,false);
+	$structure = forms_structure($id_form,false);
 	foreach(array_keys($structure) as $champ)
 		$valeurs[$champ] = '';
 	
@@ -65,14 +65,14 @@ function formulaires_forms_charger_dist($id_form = 0, $id_article = 0, $id_donne
 	  . "<input type='hidden' name='ajout_reponse' value='$id_form' />";
 
 	if (!_DIR_RESTREINT && $id_donnee)
-		$valeurs = array_merge($valeurs,Forms_valeurs($id_donnee,$id_form));
+		$valeurs = array_merge($valeurs,forms_valeurs($id_donnee,$id_form));
 	elseif (_DIR_RESTREINT!="" 
 	&& ( ($row['modifiable']=='oui') || ($row['multiple']=='non') )
 	){
 		global $auteur_session;
 		$id_auteur = $auteur_session['id_auteur'] ? intval($auteur_session['id_auteur']) : 0;
 		include_spip('inc/forms');
-		$cookie = $_COOKIE[Forms_nom_cookie_form($id_form)];
+		$cookie = $_COOKIE[forms_nom_cookie_form($id_form)];
 		//On retourne les donnees si auteur ou cookie
 		$q = "SELECT donnees.id_donnee " .
 			"FROM spip_forms_donnees AS donnees " .
@@ -93,13 +93,13 @@ function formulaires_forms_charger_dist($id_form = 0, $id_article = 0, $id_donne
 		if($row2 = spip_fetch_array($res)){
 			if (($row['multiple']=='non') && ($row['modifiable']=='non')) return array(false,$valeurs);
 			$id_donnee=$row2['id_donnee'];
-			$valeurs = array_merge($valeurs,Forms_valeurs($id_donnee,$id_form));
+			$valeurs = array_merge($valeurs,forms_valeurs($id_donnee,$id_form));
 		}
 	}
 
 	if ($row['type_form'] == 'sondage'){
 		include_spip('inc/forms');
-		if ((Forms_verif_cookie_sondage_utilise($id_form)==true)&&(_DIR_RESTREINT!=""))
+		if ((forms_verif_cookie_sondage_utilise($id_form)==true)&&(_DIR_RESTREINT!=""))
 			$valeurs['affiche_sondage']=' ';
 	}
 	

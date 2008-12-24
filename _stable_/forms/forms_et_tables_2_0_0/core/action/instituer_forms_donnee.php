@@ -29,7 +29,7 @@ function action_instituer_forms_donnee_dist() {
 		
 		if ($rang_nouv = intval(_request('rang_nouv'))){
 			include_spip("base/forms_base_api");
-			Forms_ordonner_donnee($id_donnee,$rang_nouv);
+			forms_ordonner_donnee($id_donnee,$rang_nouv);
 		}
 	}
 }

@@ -45,7 +45,7 @@
 			$prefixi18n[$type] = forms_prefixi18n($type);
 		if (!isset($liste_table[$type])){
 			include_spip("base/forms_base_api");
-			$liste_table[$type] = implode(",",Forms_liste_tables($type));
+			$liste_table[$type] = implode(",",forms_liste_tables($type));
 		}
 		include_spip("base/abstract_sql");
 		$in = calcul_mysql_in("d.id_form",$liste_table[$type]); 
@@ -63,7 +63,7 @@
 			//else if ($cpt==1) $out .= _T("$pre:une_reponse");
 			else {
 				while ($row = spip_fetch_array($res))
-					$out .= implode(" ",Forms_decrit_donnee($row['id_donnee_liee'])).$separateur;
+					$out .= implode(" ",forms_decrit_donnee($row['id_donnee_liee'])).$separateur;
 			}
 		}
 		else {
@@ -93,7 +93,7 @@
 		}
 		// on recupere le type du champ si pas deja fait (une seule requete par table et par champ)
 		if ($ok && !isset($structure[$id_form]))
-			$structure[$id_form] = Forms_structure($id_form, false);
+			$structure[$id_form] = forms_structure($id_form, false);
 		$rendu = 'typo';
 		if ($ok) {
 			$t = $structure[$id_form][$champ]['type'];
@@ -179,7 +179,7 @@
 	// Afficher le diagramme de resultats d'un sondage
 	//
 
-	function Forms_afficher_reponses_sondage($id_form) {
+	function forms_afficher_reponses_sondage($id_form) {
 		$r = '';
 		$id_form = intval($id_form);
 	
