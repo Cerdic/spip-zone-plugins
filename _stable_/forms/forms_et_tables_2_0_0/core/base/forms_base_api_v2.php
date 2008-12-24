@@ -240,7 +240,7 @@ function forms_supprimer_donnee($id_form,$id_donnee){
  * @return array : les erreurs eventuelles
  */
 function forms_modifier_donnee($id_donnee,$c = NULL){
-	include_spip('inc/forms');
+	include_spip('action/forms_editer_donnee');
 	return forms_revision_donnee($id_donnee,$c);
 }
 
@@ -281,7 +281,7 @@ function forms_ordonner_donnee($id_donnee,$rang_nouv){
 		sql_updateq("spip_forms_donnees",array('rang'=>$rang_max),"id_donnee=".intval($row['id_donnee']));
 	}
 	// borner le rang
-	include_spip('inc/forms');
+	include_spip('action/forms_editer_donnee');
 	if ($rang_nouv==0) $rang_nouv = forms_rang_prochain($id_form);
 	$rang_nouv = min(max($rang_nouv,$rang_min),$rang_max);
 	if ($rang_nouv>$rang) $rang_nouv++; // il faut se decaler d'un car on est devant actuellement

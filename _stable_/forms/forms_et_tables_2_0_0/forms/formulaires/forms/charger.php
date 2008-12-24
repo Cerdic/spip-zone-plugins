@@ -105,4 +105,33 @@ function formulaires_forms_charger_dist($id_form = 0, $id_article = 0, $id_donne
 	return $valeurs;
 }
 
+
+
+function forms_obligatoire($row,$forms_obligatoires){
+	$returned=$row;
+	global $auteur_session;
+	$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
+	$form_tab=explode(',',$forms_obligatoires);
+	$chercher=true;
+	$i=0;
+	while ($chercher && $i<count($form_tab)){
+		$form_id=$form_tab[$i];
+		$cookie = $_COOKIE[forms_nom_cookie_form($form_id)];
+		$q="SELECT id_form FROM spip_forms_donnees WHERE statut='publie' AND id_form="._q($form_id)." ";
+		if ($cookie) $q.="AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).") ";
+		else
+			if ($id_auteur)
+				$q.="AND id_auteur="._q($id_auteur)." ";
+			else
+				$q.="AND 0=1 ";
+		$res=spip_query($q);
+		if (!spip_fetch_array($res)){
+			$res2 = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($form_id));
+			$returned = spip_fetch_array($res2);
+			$chercher=false;
+		}
+		$i++;
+	}
+	return $returned;
+}
 ?>

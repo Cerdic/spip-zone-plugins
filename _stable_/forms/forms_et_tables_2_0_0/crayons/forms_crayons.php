@@ -38,7 +38,7 @@ function forms_donnee_valeur_colonne_table($table,$champs,$id_donnee){
 	return $vals;
 }
 function forms_donnee_revision($id_donnee,$c=NULL){
-	include_spip('inc/forms');
+	include_spip('action/forms_editer_donnee');
 	return forms_revision_donnee($id_donnee,$c);
 }
 function forms_champ_valeur_colonne_table($table,$champ,$id){

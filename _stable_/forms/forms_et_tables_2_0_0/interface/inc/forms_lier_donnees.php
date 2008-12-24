@@ -201,4 +201,17 @@ function forms_liste_recherche_donnees($recherche,$les_donnees,$type,$type_table
 	return $table;
 }
 
+function forms_type_table_lier($type,$id){
+	$type_table = 'table';
+	if ($type == 'donnee' AND preg_match(",^(-?[0-9]+)-([a-z_0-9]+)-([0-9]+)$,",$id,$reg)){
+		$id_donnee_source = $reg[1];
+		$champ = $reg[2];
+		$id_form = $reg[3];
+		$res = spip_query("SELECT extra_info FROM spip_forms_champs WHERE id_form=".intval($id_form)." AND champ="._q($champ));
+		if($row = spip_fetch_array($res))
+			$type_table = $row['extra_info'];
+	}
+	return $type_table;
+}
+	
 ?>
