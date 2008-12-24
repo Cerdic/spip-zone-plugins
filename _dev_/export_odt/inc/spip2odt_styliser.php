@@ -13,9 +13,12 @@ define('_TAGS_INLINE',
 
 // retablir les boucles et autres tags du squelette
 function inc_spip2odt_styliser($odf_dir, $contexte){
+	// pas de fond dans le contexte
+	unset($contexte['fond']);
+	
 	// lire le content
 	lire_fichier($odf_dir."content.xml",$texte);
-	
+
 	// retablir les boucles
 	$texte = preg_replace(",&lt;([/]?B(.*))&gt;,U","<\\1>",$texte);
 	
@@ -32,13 +35,13 @@ function inc_spip2odt_styliser($odf_dir, $contexte){
 
 	// ecrire le squelette et le fichier fonctions associe
 	ecrire_fichier(_DIR_TMP."content.html",$texte);
-	lire_fichier(_DIR_PLUGIN_SPIPOASIS."content_fonctions.php",$fonctions);
+	lire_fichier(_DIR_PLUGIN_SPIPODF."content_fonctions.php",$fonctions);
 	ecrire_fichier(_DIR_TMP."content_fonctions.php",$fonctions);
 	
 	// calculer le fond
 	include_spip('inc/assembler');
 	$texte = recuperer_fond(_DIR_TMP."content",$contexte);
-	
+
 	// nettoyer
 	@unlink(_DIR_TMP."content_fonctions.php");
 	@unlink(_DIR_TMP."content.html");
@@ -67,7 +70,9 @@ function spip2odt_convertir($texte,$dossier){
 	
 	$texte = preg_replace(",<br(\s*/)?>,ims","<p />",$texte);
 	// faire un heritage des <p>
+
 	$texte = spip2odt_heriter_p($texte,$dossier);
+	
 	
 	// on ajoute ici des paragraphe, donc a faire avant reparagraphage
 	$texte = spip2odt_convertir_tags_blocs($texte);
@@ -355,7 +360,6 @@ function spip2odt_reparagrapher($texte){
 	$texte = preg_replace(
 		',(<text:p\s.*)(</?(STOP P|text:h|text:list|text:list-item|table:table|table:table-column|table:table-row|table:table-cell)[>[:space:]]),UimsS',
 		"\\1</text:p>\\2", $texte);
-
 
 	// Supprimer les marqueurs "STOP P"
 	$texte = str_replace('<STOP P>', '', $texte);
