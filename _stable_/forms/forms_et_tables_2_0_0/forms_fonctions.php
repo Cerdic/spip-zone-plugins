@@ -45,7 +45,7 @@
 			$prefixi18n[$type] = forms_prefixi18n($type);
 		if (!isset($liste_table[$type])){
 			include_spip("base/forms_base_api");
-			$liste_table[$type] = implode(",",forms_liste_tables($type));
+			$liste_table[$type] = implode(",",forms_lister_tables($type));
 		}
 		include_spip("base/abstract_sql");
 		$in = calcul_mysql_in("d.id_form",$liste_table[$type]); 
@@ -62,8 +62,10 @@
 			elseif ($cpt>5) $out .= _T("$pre:nombre_reponses",array('nombre'=>$cpt));
 			//else if ($cpt==1) $out .= _T("$pre:une_reponse");
 			else {
-				while ($row = spip_fetch_array($res))
-					$out .= implode(" ",forms_decrit_donnee($row['id_donnee_liee'])).$separateur;
+				while ($row = spip_fetch_array($res)){
+					list(,,,$resume) = forms_informer_donnee($row['id_donnee_liee']);
+					$out .= implode(" ",$resume).$separateur;
+				}
 			}
 		}
 		else {

@@ -54,7 +54,7 @@
 				if (count($liste_type)){
 					include_spip('base/forms_base_api');
 					foreach($liste_type as $type)
-						if (count(forms_liste_tables($type))){
+						if (count(forms_lister_tables($type))){
 							$id_article = $flux['args']['id_article'];
 							$forms_lier_donnees = charger_fonction('forms_lier_donnees','inc');
 							$flux['data'] .= "<div id='forms_lier_donnees'>";
@@ -71,7 +71,7 @@
 				if (count($liste_type) && $id_rubrique){
 					include_spip('base/forms_base_api');
 					foreach($liste_type as $type)
-						if (count(forms_liste_tables($type))){
+						if (count(forms_lister_tables($type))){
 							$forms_lier_donnees = charger_fonction('forms_lier_donnees','inc');
 							$flux['data'] .= "<div id='forms_lier_donnees'>";
 							$flux['data'] .= $forms_lier_donnees('rubrique',$id_rubrique, $exec, false, $type);
@@ -86,7 +86,7 @@
 				if (count($liste_type)){
 					include_spip('base/forms_base_api');
 					foreach($liste_type as $type)
-						if (count(forms_liste_tables($type))){
+						if (count(forms_lister_tables($type))){
 							$id_auteur = $flux['args']['id_auteur'];
 							$forms_lier_donnees = charger_fonction('forms_lier_donnees','inc');
 							$flux['data'] .= "<div id='forms_lier_donnees'>";

@@ -33,9 +33,20 @@
 	<fonctions>core/public/forms_balises.php</fonctions>
 	<prefix>forms</prefix>
 	<install>core/base/forms_upgrade.php</install>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>definir_session</nom>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>core/base/forms.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>core/base/forms.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>core/base/forms.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>autoriser</nom>

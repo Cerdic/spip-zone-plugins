@@ -5,7 +5,7 @@
 	<ul class="spip_form_choix_multiple[ (#ENV{crayon_active,''})]">
 	<BOUCLE_choix(FORMS_CHAMPS_CHOIX){id_form}{champ}{par rang}{1/2}><li>
 	<input type='checkbox' name='#ENV{name,#CHAMP}[]' id='input-#ID_FORM-#CHOIX' value='#CHOIX'
-	[(#CHOIX|in_any{[(#ENV**{valeur}|forms_valeur{#CHAMP})], ''}|?{'checked="checked"',''})] />
+	[(#CHOIX|in_any{[(#ENV**{valeur}|table_valeur{#CHAMP})], ''}|?{'checked="checked"',''})] />
 	<label for='input-#ID_FORM-#CHOIX'>[(#TITRE|supprimer_numero)]</label></li>
 	</BOUCLE_choix>
 	</ul>
@@ -14,7 +14,7 @@
 	<ul class="spip_form_choix_multiple[ (#ENV{crayon_active,''})]">
 	<BOUCLE_choix2(FORMS_CHAMPS_CHOIX){id_form}{champ}{par rang}{2/2}><li>
 	<input type='checkbox' name='#ENV{name,#CHAMP}[]' id='input-#ID_FORM-#CHOIX' value='#CHOIX'
-	[(#CHOIX|in_any{[(#ENV**{valeur}|forms_valeur{#CHAMP})], ''}|?{'checked="checked"',''})] />
+	[(#CHOIX|in_any{[(#ENV**{valeur}|table_valeur{#CHAMP})], ''}|?{'checked="checked"',''})] />
 	<label for='input-#ID_FORM-#CHOIX'>[(#TITRE|supprimer_numero)]</label></li>
 	</BOUCLE_choix2>
 	</ul>
