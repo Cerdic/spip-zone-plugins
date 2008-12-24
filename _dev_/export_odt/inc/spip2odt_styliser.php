@@ -12,6 +12,15 @@ define('_TAGS_BLOCS_TO_P',
 define('_TAGS_INLINE',
 	'span|strong|b|em|i|code');
 
+
+define('_TAG_OOO_BREAK_P',
+	'office:text|'
+	.'text:h|'
+	.'text:list|text:list-item|'
+	.'table:table|table:table-column|table:table-row|table:table-cell|'
+	.'text:table-of-content|text:index-title|text:index-body'
+);
+
 // retablir les boucles et autres tags du squelette
 function inc_spip2odt_styliser($odf_dir, $contexte){
 	// pas de fond dans le contexte
@@ -69,9 +78,13 @@ function spip2odt_convertir($texte,$dossier){
 	//$puce = str_replace("toto","",propre("\n- toto"));
 	//$texte = str_replace($puce,"<p />* ",$texte);
 	
+	// remplacer les br par des p
 	$texte = preg_replace(",<br(\s*/)?>,ims","<p />",$texte);
+	
+	// supprimer les styles enligne (comme geshi)
+	$texte = preg_replace(",<style(\s[^>]*)?>.*</style>,Uims","",$texte);
+	
 	// faire un heritage des <p>
-
 	$texte = spip2odt_heriter_p($texte,$dossier);
 	
 	
@@ -359,12 +372,12 @@ function spip2odt_reparagrapher($texte){
 	
 	// Fermer les span (y compris sur "STOP P")
 	$texte = preg_replace(
-		',(<text:span\s.*)(</?(STOP SPAN|STOP P|office:text|text:h|text:list|text:list-item|table:table|table:table-column|table:table-row|table:table-cell)[>[:space:]]),UimsS',
+		',(<text:span\s.*)(</?(STOP SPAN|STOP P|'._TAG_OOO_BREAK_P.')[>[:space:]]),UimsS',
 		"\\1</text:span>\\2", $texte);
 
 	// Fermer les paragraphes (y compris sur "STOP P")
 	$texte = preg_replace(
-		',(<text:p\s.*)(</?(STOP P|office:text|text:h|text:list|text:list-item|table:table|table:table-column|table:table-row|table:table-cell)[>[:space:]]),UimsS',
+		',(<text:p\s.*)(</?(STOP P|'._TAG_OOO_BREAK_P.')[>[:space:]]),UimsS',
 		"\\1</text:p>\\2", $texte);
 
 	// Supprimer les marqueurs "STOP P"
