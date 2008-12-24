@@ -69,9 +69,6 @@ function inscription2_editer_contenu_objet($flux){
 function inscription2_post_edition($flux){
 	if ($flux['args']['table']=='spip_auteurs') {
 		$id_auteur = $flux['args']['id_objet'];
-		spip_log('post_edition sur id_auteur='.$id_auteur);
-		spip_log("editer_auteur_supp_dits","inscription2");
-			spip_log("editer_auteur_supp $r");
 			$echec = array();
 				foreach(lire_config('inscription2',array()) as $cle => $val){
 					if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle)){
@@ -80,48 +77,8 @@ function inscription2_post_edition($flux){
 							$var_user['a.'.$cle] = sql_quote(_request($cle));
 						elseif($cle == 'statut_nouveau'){
 						}
-						elseif(ereg("^statut_rel.*$", $cle))
-							$var_user['b.statut_relances'] =  sql_quote(_request('statut_relances'));
 						else
 							$var_user['b.'.$cle] = sql_quote(_request($cle));
-					}
-					elseif ($val!='' and $cle == 'accesrestreint'){
-						$aux = sql_select("id_zone","spip_zones_auteurs","id_auteur = $id_auteur");
-						while($q = sql_fetch($aux))
-							$acces[]=$q['id_zone'];
-						$acces_array = _request('acces');
-						if(!empty($acces) and empty($acces_array))
-							sql_delete("spip_zones_auteurs","id_auteur = $id_auteur");
-						elseif(empty($acces) and !empty($acces_array))
-							spip_query("insert into spip_zones_auteurs (id_zone, id_auteur) values (".join(", $id_auteur), (", $acces_array).", $id_auteur)");
-						elseif(!empty($acces) and !empty($acces_array)){
-							$diff1 = array_diff($acces_array, $acces);
-							$diff2 = array_diff($acces, $acces_array);
-							if (!empty($diff1))
-								spip_query("insert into spip_zones_auteurs (id_zone, id_auteur) values (".join(", $id_auteur), (", $diff1).", $id_auteur)");
-							if(!empty($diff2))
-								foreach($diff2 as $val)
-									spip_query("delete from spip_zones_auteurs where id_auteur= $id_auteur and id_zone = $val");
-						}
-					}
-					elseif ($val!='' and $cle == 'newsletter'){
-						$aux = sql_select("id_liste","spip_auteurs_listes","id_auteur = $id_auteur");
-						while($q = sql_fetch($aux))
-							$listes[]=$q['id_liste'];
-						$listes_array = _request('news');
-						if(!empty($listes) and empty($listes_array))
-							sql_delete("spip_auteurs_listes","$id_auteur");
-						elseif(empty($listes) and !empty($listes_array))
-							spip_query("insert into spip_auteurs_listes (id_liste, id_auteur) values (".join(", $id_auteur), (", $listes_array).", $id_auteur)");
-						elseif(!empty($listes) and !empty($listes_array)){
-							$diff1 = array_diff($listes_array, $listes);
-							$diff2 = array_diff($listes, $listes_array);
-							if (!empty($diff1))
-								spip_query("insert into spip_auteurs_listes (id_liste, id_auteur) values (".join(", $id_auteur), (", $diff1).", $id_auteur)");
-							if(!empty($diff2))
-								foreach($diff2 as $val)
-									sql_delete("spip_auteurs_listes","$id_auteur and id_liste = $val");
-						}
 					}
 				}
 				if (!sql_getfetsel('id_auteur','spip_auteurs_elargis','id_auteur='.$id_auteur)){
