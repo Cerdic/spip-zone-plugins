@@ -8,11 +8,6 @@
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 	<p></p>
 	<fieldset><label for="version_thelia_spip_thelia">Version de Th&eacute;lia :</label>	
-		<select name="version_thelia_spip_thelia" id="version_thelia_spip_thelia">
-			<option value="after_1_3_4" [(#CONFIG{spip_thelia/version_thelia_spip_thelia}|=={"after_1_3_4"}|?{selected="selected",})]>sup&eacute;rieure o&ugrave; &eacute;gale &agrave; 1.3.4</option>		
-			<option value="1_3_3" [(#CONFIG{spip_thelia/version_thelia_spip_thelia}|=={"1_3_3"}|?{selected="selected",})]>1.3.3</option>		
-		</select>
-
 		<br /><label for="produits_rubriques_spip_thelia">Associer des produits Th&eacute;lia aux rubriques SPIP :</label>	
 		<select name="produits_rubriques_spip_thelia" id="produits_rubriques_spip_thelia">
 			<option value="non" [(#CONFIG{spip_thelia/produits_rubriques_spip_thelia}|=={"non"}|?{selected="selected",})]>non</option>		
@@ -37,7 +32,6 @@
 			<option value="oui" [(#CONFIG{spip_thelia/rubriques_articles_spip_thelia}|=={"oui"}|?{selected="selected",})]>oui</option>		
 		</select>
 	</fieldset>
-	<p>les autres versions ne sont pas support&eacute;es</p>
 	<div>
 		<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
 		<input type="reset" value="<:reset:>" class="fondo" />

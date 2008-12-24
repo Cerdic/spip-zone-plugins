@@ -60,17 +60,6 @@ function spip_thelia_insert_head($flux) {
 
 function spip_thelia_appeler_moteur_thelia($texte) {
 	include_spip('inc/charsets');
-
-	//récupérer la version de thélia : valeurs possibles :
-	//	- supérieure ou égale à 1.3.4 = "after_1_3_4" (par défaut)  
-	//	- 1.3.3 = "1_3_3"
-
-	if (function_exists('lire_config')) {
-		$version_thelia = lire_config("spip_thelia/version_thelia_spip_thelia", "after_1_3_4");
-	} else { 
-		echo ("erreur : le plugin CFG est n'est pas install&eacute;.");
-		return $texte;
-	}
 	
 	//si pas de boucle ou de balise thélia dans la page on sort	
 	if ((strpos($texte, "THELIA-") === FALSE) && (strpos($texte, "<THELIA") == FALSE))
@@ -150,14 +139,9 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 	//on bloque la sortie vers le navigateur le temps d'y faire quelques substitutions	
 	ob_start();
 	
-	if ($version_thelia == "1_3_3") {
-		//si version = 1.3.3 : surcharge dans le plugin
-		include_once(_DIR_PLUGIN_SPIP_THELIA."moteur-thelia-1_3_3.php");
-	} else {
-		//si version >= 1.3.4 : plus de surcharge dans le plugin, on appelle directement le moteur de Thélia
-		include_once("fonctions/moteur.php");
-	}
-
+	//si version >= 1.3.4 : plus de surcharge dans le plugin, on appelle directement le moteur de Thélia
+	include_once("fonctions/moteur.php");
+	
 	$texte = ob_get_contents();
 	ob_end_clean();
 	$texte = remplacement_sortie_thelia($texte);
