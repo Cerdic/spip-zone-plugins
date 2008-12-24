@@ -55,6 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pays' => 'Country',
 'email' => 'E-Mail',
 'telephone' => 'Phone',
+'tel' => 'Tel.',
 'fax' => 'Fax',
 'mobile' => 'Mobile',
 'profession' => 'Profession',
