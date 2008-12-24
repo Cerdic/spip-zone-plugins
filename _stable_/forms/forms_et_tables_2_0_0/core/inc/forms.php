@@ -778,7 +778,7 @@ function forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_
 	$in_type_table="";
 	if ($type_table){
 		include_spip("base/abstract_sql");
-		include_spip("base/forms_base_api");
+		include_spip("base/forms_base_api_v2");
 		$in_type_table = calcul_mysql_in('d.id_form',implode(",",forms_lister_tables($type_table)))." AND";
 	}
 

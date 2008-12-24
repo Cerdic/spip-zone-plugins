@@ -52,7 +52,7 @@
 				if (isset($config['associer_donnees_articles']) AND $config['associer_donnees_articles'])
 					$liste_type = array_merge($liste_type,array('table'));
 				if (count($liste_type)){
-					include_spip('base/forms_base_api');
+					include_spip('base/forms_base_api_v2');
 					foreach($liste_type as $type)
 						if (count(forms_lister_tables($type))){
 							$id_article = $flux['args']['id_article'];
@@ -69,7 +69,7 @@
 					$liste_type = array_merge($liste_type,array('table'));
 				$id_rubrique = $flux['args']['id_rubrique'];
 				if (count($liste_type) && $id_rubrique){
-					include_spip('base/forms_base_api');
+					include_spip('base/forms_base_api_v2');
 					foreach($liste_type as $type)
 						if (count(forms_lister_tables($type))){
 							$forms_lier_donnees = charger_fonction('forms_lier_donnees','inc');
@@ -84,7 +84,7 @@
 				if (isset($config['associer_donnees_auteurs']) AND $config['associer_donnees_auteurs'])
 					$liste_type = array_merge($liste_type,array('table'));
 				if (count($liste_type)){
-					include_spip('base/forms_base_api');
+					include_spip('base/forms_base_api_v2');
 					foreach($liste_type as $type)
 						if (count(forms_lister_tables($type))){
 							$id_auteur = $flux['args']['id_auteur'];
