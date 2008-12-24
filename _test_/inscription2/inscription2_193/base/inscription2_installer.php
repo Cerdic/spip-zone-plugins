@@ -1,6 +1,6 @@
 <?php
 
-$GLOBALS['inscription2_version'] = 0.63;
+$GLOBALS['inscription2_version'] = 0.64;
 
 function inscription2_upgrade(){
 	
@@ -14,11 +14,23 @@ function inscription2_upgrade(){
 	
 	$version_base = $GLOBALS['inscription2_version'];
 	$current_version = 0.0;
+
+	//insertion des infos par defaut
+	$lala = $GLOBALS['meta']['inscription2'];
+	
+    //Certaines montées de version ont oublié de corriger la meta de I2
+    //si ce n'est pas un array alors il faut reconfigurer la meta
+	if (!is_array($lala)) {
+	    unset($lala);
+	    $GLOBALS['meta']['inscription2_version']=0.0;
+	}
+
 	
 	// Si la version installee est la derniere en date, on ne fait rien
 	if ( (isset($GLOBALS['meta']['inscription2_version']) )
 		&& (($current_version = $GLOBALS['meta']['inscription2_version'])==$version_base))
 	return;
+	
 			
 	//Si c est une nouvelle installation toute fraiche
 	if ($current_version==0.0){
@@ -43,9 +55,7 @@ function inscription2_upgrade(){
 			spip_query("ALTER TABLE $table_nom DROP INDEX id_auteur, DROP PRIMARY KEY id, ADD PRIMARY KEY (id_auteur)");
 		}
 
-		//insertion des infos par defaut
-		$lala = $GLOBALS['meta']['inscription2'];
-		
+
 		if(!$lala){
 		ecrire_meta(
 			'inscription2',
