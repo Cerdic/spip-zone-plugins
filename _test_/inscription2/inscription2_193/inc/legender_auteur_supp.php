@@ -46,10 +46,6 @@ function legender_auteur_supp_saisir($auteur){
 			$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
 			if($cle == 'nom' or $cle == 'email' or $cle == 'login')
 				$var_user['a.'.$cle] = '0';
-			elseif(ereg("^statut_rel.*$", $cle)){
-				$var_user['b.statut_relances'] = '1';
-				$champs[$cle] = '';
-			}
 			else{
 				$var_user['b.'.$cle] = '1';
 				$champs[$cle] = '';
@@ -76,18 +72,9 @@ function legender_auteur_supp_saisir($auteur){
 	foreach ($query as $cle => $val){
 		if(($cle == 'login') || ($cle == 'nom') || ($cle == 'email')){
 		}
-		elseif ($cle == 'latitude'){
-			if ($geomap_append_moveend_map = charger_fonction('geomap_append_clicable_map','inc',true)){
-				$corps_supp .= "<li><div class='geomap' id='map' style='width:100%;height:350px'> </div>";
-				$corps_supp .= $geomap_append_moveend_map("map",'latitude','longitude',$query['latitude'],$query['longitude'], NULL,NULL,true);
-				$corps_supp .= "</li>";
-			}
-			$corps_supp .= "<li><label>"._T('inscription2:'.$cle)."</label>"
-			. "<input type='text' id='$cle' name='$cle' class='text' value='$val' /></li>";
-		}
 		elseif($cle!= 'id_auteur' and $cle != 'statut_nouveau'){
 			if(find_in_path('prive/inscription2_champs_'.$cle.'.html')){
-				$corps_supp .= recuperer_fond('prive/inscription2_champs_'.$cle,array('cle'=>$cle,'val'=>$val));
+				$corps_supp .= recuperer_fond('prive/inscription2_champs_'.$cle,array('cle'=>$cle,'val'=>$val,'id_auteur' => $id_auteur));
 			}else{
 				$corps_supp .= "\n<li><label>"._T('inscription2:'.$cle)."</label>"
 				. "<input type='text' id='$cle' name='$cle' class='text' value='".$val."' /></li>";
