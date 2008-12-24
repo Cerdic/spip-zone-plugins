@@ -47,14 +47,14 @@ function action_table_donnee_deplace_dist(){
 		}
 		if ($rang_nouv)
 			if (autoriser('modifier','donnee',$id_donnee,NULL,array('id_form'=>$id_form))){
-				include_spip("base/forms_base_api");
+				include_spip("base/forms_base_api_v2");
 				forms_ordonner_donnee($id_donnee,$rang_nouv);
 			}
 	}
 	else {
 		if (autoriser('modifier','donnee',$id_donnee,NULL,array('id_form'=>$id_form))){
 			$rang_nouv = _request('rang_nouv');
-			include_spip("base/forms_base_api");
+			include_spip("base/forms_base_api_v2");
 			forms_ordonner_donnee($id_donnee,$rang_nouv);
 		}
 	}

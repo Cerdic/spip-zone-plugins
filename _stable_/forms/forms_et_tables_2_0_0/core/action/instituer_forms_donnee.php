@@ -28,7 +28,7 @@ function action_instituer_forms_donnee_dist() {
 		sql_updateq("spip_forms_donnees","statut=".sql_quote($statut)." WHERE id_donnee=".intval($id_donnee));
 		
 		if ($rang_nouv = intval(_request('rang_nouv'))){
-			include_spip("base/forms_base_api");
+			include_spip("base/forms_base_api_v2");
 			forms_ordonner_donnee($id_donnee,$rang_nouv);
 		}
 	}

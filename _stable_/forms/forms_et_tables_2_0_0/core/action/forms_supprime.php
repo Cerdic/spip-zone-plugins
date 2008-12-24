@@ -18,7 +18,7 @@ function action_forms_supprime_dist(){
 	include_spip('inc/autoriser');
 	if ($id_form = intval($args)
 	  AND autoriser('supprimer','form',$id_form)){
-  	include_spip('base/forms_base_api');
+  	include_spip('base/forms_base_api_v2');
   	forms_supprimer_tables($id_form);
 	}
 }

@@ -16,7 +16,7 @@ function action_forms_duplique_dist(){
 	$args = $securiser_action();
 
 	if ($id_form = intval($args)){
-		include_spip('base/forms_base_api');
+		include_spip('base/forms_base_api_v2');
 		forms_copier_tables($id_form);		
 	}
 }
