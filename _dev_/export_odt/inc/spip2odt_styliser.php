@@ -4,7 +4,8 @@ include_spip('inc/spipoasis');
 // XHTML - Preserver les balises-bloc : on liste ici tous les elements
 // dont on souhaite qu'ils provoquent un saut de paragraphe
 define('_TAGS_BLOCS_TO_P',
-	'pre|blockquote|'
+	'p|'
+	.'pre|blockquote|'
 	.'textarea|'
 	.'form|object|center|marquee|address|'
 	.'d[ltd]|map|button|fieldset');
@@ -319,12 +320,12 @@ function spip2odt_heriter_p($texte,$dossier){
 	for ($i=2;$i<$n;$i+=2){
 		if (strpos($split[$i],'<p ')!==FALSE){
 			// enlever le <p ouvrant
-			$split[$i] = preg_replace(",\A\s*<p [^<>]*>,ms","",$split[$i]);
+			$split[$i] = preg_replace(",\A\s*<p(\s[^<>]*)?>,ms","",$split[$i]);
 			// enlever le </p fermant
 			$split[$i] = preg_replace(",</p>\s*(</text:p(\s[^<>]*)?>),ms","\\1",$split[$i]);
 			
 			// tous les <p ouvrants sont remplaces par le <text:p parent
-			$split[$i] = preg_replace(",<p [^<>]*>,ms",$split[$i-1],$split[$i]);
+			$split[$i] = preg_replace(",<p(\s[^<>]*)?>,ms",$split[$i-1],$split[$i]);
 			// tous les </p fermants sont remplaces par </text:p>
 			$split[$i] = preg_replace(",</p>,ms",'</text:p>',$split[$i]);
 		}
@@ -334,6 +335,11 @@ function spip2odt_heriter_p($texte,$dossier){
 	return implode('',$split);
 }
 
+// Si j'ai bien compris :
+// - sert a fermer tous les paragraphes ouverts lorsqu'on rencontre 
+// une balise qui doit le fermer (table, li...)
+// - supprime les paragraphes vides
+// - corrige les paragraphes imbriques (<p><p></p></p>)
 function spip2odt_reparagrapher($texte){
 	// avant de reparagrapher, echappons les paragraphes dans les <draw:text-box><text:p>
 	$split = preg_split(',(<draw:text-box[^<>]*>.*</draw:text-box>),Uims',$texte,null,PREG_SPLIT_DELIM_CAPTURE);
@@ -349,16 +355,16 @@ function spip2odt_reparagrapher($texte){
 	// Ajouter un espace aux <p> et un "STOP P"
 	// transformer aussi les </p> existants en <p>, nettoyes ensuite
 	$texte = preg_replace(',</?text:p(\s([^<>]*))?'.'>,iS', '<STOP P><text:p \2>',$texte);
-
 	$texte = preg_replace(',</?text:span(\s([^<>]*))?'.'>,iS', '<STOP SPAN><text:span \2>',$texte);
+	
 	// Fermer les span (y compris sur "STOP P")
 	$texte = preg_replace(
-		',(<text:span\s.*)(</?(STOP SPAN|STOP P|text:h|text:list|text:list-item|table:table|table:table-column|table:table-row|table:table-cell)[>[:space:]]),UimsS',
+		',(<text:span\s.*)(</?(STOP SPAN|STOP P|office:text|text:h|text:list|text:list-item|table:table|table:table-column|table:table-row|table:table-cell)[>[:space:]]),UimsS',
 		"\\1</text:span>\\2", $texte);
 
 	// Fermer les paragraphes (y compris sur "STOP P")
 	$texte = preg_replace(
-		',(<text:p\s.*)(</?(STOP P|text:h|text:list|text:list-item|table:table|table:table-column|table:table-row|table:table-cell)[>[:space:]]),UimsS',
+		',(<text:p\s.*)(</?(STOP P|office:text|text:h|text:list|text:list-item|table:table|table:table-column|table:table-row|table:table-cell)[>[:space:]]),UimsS',
 		"\\1</text:p>\\2", $texte);
 
 	// Supprimer les marqueurs "STOP P"
@@ -370,7 +376,7 @@ function spip2odt_reparagrapher($texte){
 	// Do not delete multibyte utf character just before </p> having last byte equal to whitespace  
 	$u = ($GLOBALS['meta']['charset']=='utf-8' && test_pcre_unicode()) ? 'u':'S';
 	$texte = preg_replace(
-	',(<text:p(>|\s[^<>]*)>)\s*|\s*(</text:p[>[:space:]]),'.$u.'i', '\1\3',
+	',(<text:p(\s[^<>]*)?>)\s*|\s*(</text:p[>[:space:]]),'.$u.'i', '\1\3',
 		$texte);
 
 	// Supprimer les <p xx></p> vides
