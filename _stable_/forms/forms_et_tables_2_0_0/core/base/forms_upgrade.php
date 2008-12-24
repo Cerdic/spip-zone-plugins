@@ -342,8 +342,9 @@ function forms_upgrade($nom_meta_base_version,$version_cible){
 			echo "forms update @ 0.41<br/>";
 			ecrire_meta($nom_meta_base_version,$current_version=0.41,'non');
 		}
-
-		ecrire_metas();
+		
+		$trouver_table = charger_fonction("trouver_table","base");
+		$trouver_table(""); // raz du cache des descriptions de table
 	}
 }
 
