@@ -81,13 +81,18 @@ spiplistes_log("spiplistes_install()", _SPIPLISTES_LOG_DEBUG);
 
 function spiplistes_base_creer () {
 
-//spiplistes_log("spiplistes_base_creer() <<", _SPIPLISTES_LOG_DEBUG);
-
+	//spiplistes_log("spiplistes_base_creer() <<", _SPIPLISTES_LOG_DEBUG);
+	global $tables_principales;
+	
 	// demande a SPIP de creer les tables (base/create.php)
 	include_spip('base/create');
 	include_spip('base/abstract_sql');
 	include_spip('base/db_mysql');
 	include_spip('base/spiplistes_tables');
+	if(is_array($tables_principales['spip_auteurs_elargis'])){
+		// si la table spip_auteurs_elargis existe déjà
+		sql_alter("TABLE spip_auteurs_elargis ADD `spip_listes_format` VARCHAR(8) DEFAULT 'non' NOT NULL");
+	}
 	creer_base();
 	spiplistes_log("INSTALL: database creation");
 
