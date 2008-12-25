@@ -164,7 +164,7 @@ function exec_spiplistes_maintenance () {
 		}
 		
 		// compter les formats (les abonnes ayant de'fini un format)
-		$nb_abonnes_formats = sql_fetsel("COUNT(id) as n", "spip_auteurs_elargis", $sql_formats_where);
+		$nb_abonnes_formats = sql_fetsel("COUNT(id_auteur) as n", "spip_auteurs_elargis", $sql_formats_where);
 		$nb_abonnes_formats = $nb_abonnes_formats['n'];
 		$nb_abonnes_formats_desc = 
 						($nb_abonnes_formats==1)
