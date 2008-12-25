@@ -42,11 +42,6 @@ _ Configuration: [->/ecrire/?exec=cfg&amp;cfg=gis]
 
  <prefix>gis</prefix>
 	<pipeline>
-		<nom>header_prive</nom>
-		<action>insertar_head</action>
-		<inclure>gis_pipeline.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>affichage_final</nom>
 		<action>affichage_final</action>
 		<inclure>gis_pipeline.php</inclure>
