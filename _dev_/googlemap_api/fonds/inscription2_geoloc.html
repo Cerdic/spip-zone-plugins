@@ -6,6 +6,7 @@
 				<table>
 					<thead>
 						<tr>
+							<th class="label"> </th>
 							<th style='width:140px'><:inscription2:form:> </th>
 							<th style='width:70px'> <:inscription2:fiche_mod:> </th>
 							<th style='width:70px'> <:inscription2:fiche:> </th>
@@ -13,9 +14,9 @@
 						</tr>
 					</thead>
 					<tr>
-						<td><label><:inscription2:latitude:></label></td>
-					</tr>
-					<tr>
+						<td class="label">
+							<label for="latitude"><:inscription2:latitude:></label>
+						</td>
 						<td>
 							<input type="checkbox" name="latitude" [checked="(#CONFIG{inscription2/latitude}?{checked})"] onclick="showoblig(this)" id="latitude" />
 							<div style="[(#CONFIG{inscription2/latitude}|=={on}|?{display: block;, display:none;})]">
@@ -34,9 +35,9 @@
 						</td>
 					</tr>
 					<tr>
-						<td><label><:inscription2:longitude:></label></td>
-					</tr>
-					<tr>
+						<td class="label">
+							<label for="longitude"><:inscription2:longitude:></label>
+						</td>
 						<td>
 							<input type="checkbox" name="longitude" [checked="(#CONFIG{inscription2/longitude}?{checked})"] onclick="showoblig(this)" id="longitude" />
 							<div style="[(#CONFIG{inscription2/longitude}|=={on}|?{display: block;, display:none;})]">
