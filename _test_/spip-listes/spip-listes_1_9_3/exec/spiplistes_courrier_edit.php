@@ -271,7 +271,13 @@ function exec_spiplistes_courrier_edit(){
 		. "<select name='id_mot' id='ajouter_motcle' class='formo'>\n"
 		. "<option value=''></option>\n"
 		;
-	$rqt_gmc = sql_select (array('id_groupe','titre'), 'spip_groupes_mots', "articles=".sql_quote('oui'));
+	
+	if (version_compare($GLOBALS['spip_version_code'], '1.9300', '<')){
+		$rqt_gmc = sql_select (array('id_groupe','titre'), 'spip_groupes_mots', "articles=".sql_quote('oui'));
+	}else{
+		$rqt_gmc = sql_select (array('id_groupe','titre'), 'spip_groupes_mots', "tables_liees LIKE '%articles%'");		
+	}
+	
 	while ($row = sql_fetch($rqt_gmc)) {
 		$id_groupe = intval($row['id_groupe']);
 		$titre = $row['titre'];
