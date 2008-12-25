@@ -44,8 +44,8 @@ function legender_auteur_supp_saisir($auteur){
 		if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut_nouveau'){
 			$cle = ereg_replace("^username.*$", "login", $cle);
 			$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
-			if($cle == 'nom' or $cle == 'email' or $cle == 'login')
-				$var_user['a.'.$cle] = '0';
+			if($cle == 'nom' or $cle == 'email' or $cle == 'login' or $cle == 'password'){
+			}
 			else{
 				$var_user['b.'.$cle] = '1';
 				$champs[$cle] = '';
@@ -70,7 +70,7 @@ function legender_auteur_supp_saisir($auteur){
 	}
 
 	foreach ($query as $cle => $val){
-		if(($cle == 'login') || ($cle == 'nom') || ($cle == 'email')){
+		if(($cle == 'login') || ($cle == 'nom') || ($cle == 'email') || ($cle == 'password')){
 		}
 		elseif($cle!= 'id_auteur' and $cle != 'statut_nouveau'){
 			if(find_in_path('prive/inscription2_champs_'.$cle.'.html')){
@@ -113,8 +113,9 @@ function legender_auteur_supp_voir($auteur){
 		if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut_nouveau'){
 			$cle = ereg_replace("^username.*$", "login", $cle);
 			$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
-			if($cle == 'nom' or $cle == 'email' or $cle == 'login' or $cle == 'id_auteur')
-				$var_user['a.'.$cle] = '0';
+			if($cle == 'nom' or $cle == 'email' or $cle == 'login' or $cle == 'password' or $cle == 'id_auteur'){
+				
+			}
 			elseif(ereg("^statut_rel.*$", $cle))
 				$var_user['b.statut_relances'] = '1';
 			else 
@@ -140,7 +141,7 @@ function legender_auteur_supp_voir($auteur){
 	}
 	//Debut de l'affichage des données...
 	foreach ($query as $cle => $val){
-		if(($cle == 'id_auteur') || ($cle == 'login') || ($cle == 'nom') || ($cle == 'email') || ($cle == 'id_pays') || ($cle == 'id_pays_pro'))
+		if(($cle == 'id_auteur') || ($cle == 'login') || ($cle == 'nom') || ($cle == 'password') || ($cle == 'email') || ($cle == 'id_pays') || ($cle == 'id_pays_pro'))
 			continue;
 		elseif (strlen($val) >= 1){
 			if(find_in_path('prive/inscription2_vue_'.$cle.'.html')){
