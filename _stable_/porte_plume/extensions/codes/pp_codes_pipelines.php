@@ -12,7 +12,7 @@ function pp_codes_porte_plume_barre_pre_charger($flux){
 	$barre->ajouterApres('sepCode', array(
 				// groupe code et bouton <code>
 				"id"          => 'grpCode',
-				"name"        => _T('pp_code:outil_inserer_code'),
+				"name"        => _T('pp_codes:outil_inserer_code'),
 				"className"   => 'outil_code',
 				"openWith" => "<code>",
 				"closeWith" => "</code>",		
@@ -21,7 +21,7 @@ function pp_codes_porte_plume_barre_pre_charger($flux){
 					// bouton <cadre>
 					array(
 						"id"          => 'cadre_spip',
-						"name"        => _T('pp_code:outil_inserer_cadre_spip'),
+						"name"        => _T('pp_codes:outil_inserer_cadre_spip'),
 						"className"   => 'outil_cadre', 
 						"openWith" => "<cadre class='spip'>\n",
 						"closeWith" => "\n</cadre>",
@@ -30,7 +30,7 @@ function pp_codes_porte_plume_barre_pre_charger($flux){
 					// bouton <cadre>
 					array(
 						"id"          => 'cadre_php',
-						"name"        => _T('pp_code:outil_inserer_cadre_php'),
+						"name"        => _T('pp_codes:outil_inserer_cadre_php'),
 						"className"   => 'outil_cadre', 
 						"openWith" => "<cadre class='php'>\n",
 						"closeWith" => "\n</cadre>",
@@ -39,7 +39,7 @@ function pp_codes_porte_plume_barre_pre_charger($flux){
 					// bouton <pre>
 					array(
 						"id"          => 'pre',
-						"name"        => _T('pp_code:outil_inserer_pre'),
+						"name"        => _T('pp_codes:outil_inserer_pre'),
 						"className"   => 'outil_pre', 
 						"openWith" => "<pre>",
 						"closeWith" => "</pre>",
@@ -48,7 +48,7 @@ function pp_codes_porte_plume_barre_pre_charger($flux){
 					// bouton <var>
 					array(
 						"id"          => 'var',
-						"name"        => _T('pp_code:outil_inserer_var'),
+						"name"        => _T('pp_codes:outil_inserer_var'),
 						"className"   => 'outil_var', 
 						"openWith" => "<var>",
 						"closeWith" => "</var>",
@@ -57,7 +57,7 @@ function pp_codes_porte_plume_barre_pre_charger($flux){
 					// bouton <samp>
 					array(
 						"id"          => 'samp',
-						"name"        => _T('pp_code:outil_inserer_samp'),
+						"name"        => _T('pp_codes:outil_inserer_samp'),
 						"className"   => 'outil_samp',
 						"openWith" => "<samp>",
 						"closeWith" => "</samp>",
@@ -66,7 +66,7 @@ function pp_codes_porte_plume_barre_pre_charger($flux){
 					// bouton <kbd>
 					array(
 						"id"          => 'kbd',
-						"name"        => _T('pp_code:outil_inserer_kbd'),
+						"name"        => _T('pp_codes:outil_inserer_kbd'),
 						"className"   => 'outil_kbd',
 						"openWith" => "<kbd>",
 						"closeWith" => "</kbd>",
@@ -75,7 +75,7 @@ function pp_codes_porte_plume_barre_pre_charger($flux){
 					// Lien vers Trac 
 					array(
 						"id"          => 'lienTrac',
-						"name"        => _T('pp_code:outil_inserer_lien_trac'),
+						"name"        => _T('pp_codes:outil_inserer_lien_trac'),
 						"className"   => 'outil_lien_trac',
 						"replaceWith" => "function(h){return outil_inserer_lien_trac(h);}", 
 						"display"     => true,
