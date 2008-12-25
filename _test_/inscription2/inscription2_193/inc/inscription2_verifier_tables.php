@@ -11,7 +11,7 @@ function inc_inscription2_verifier_tables_dist(){
 	);
 	foreach(lire_config('inscription2',array()) as $clef => $val) {
 		$cle = ereg_replace("_(obligatoire|fiche|table).*", "", $clef);
-		if($cle != 'nom' and $cle != 'email' and $cle != 'username' and $cle != 'statut_nouveau' and $cle != 'statut_int'  and $cle != 'accesrestreint' and !ereg("^(categories|zone|newsletter).*$", $cle) ){
+		if($cle != 'nom'and $cle != 'login' and $cle != 'email' and $cle != 'password' and $cle != 'username' and $cle != 'statut_nouveau' and $cle != 'statut_int'  and $cle != 'accesrestreint' and !ereg("^(categories|zone|newsletter).*$", $cle) ){
 			if($cle == 'naissance' and !isset($desc['field'][$cle]) and _request($clef)!=''){
 				sql_alter("TABLE ".$table_nom." ADD ".$cle." DATE DEFAULT '0000-00-00' NOT NULL");
 				$desc['field'][$cle] = "DATE DEFAULT '0000-00-00' NOT NULL";
