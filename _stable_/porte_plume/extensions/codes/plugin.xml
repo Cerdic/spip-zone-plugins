@@ -1,0 +1,23 @@
+<plugin>
+	<nom>Extension Codes Informatiques, pour Porte Plume</nom>
+	<auteur>Matthieu Marcillaud
+_ &#169; 2007 - Distribu&#233; sous licence GPL
+	</auteur>
+	<lien></lien>
+	<version>0.1</version>
+	<etat>test</etat>
+    <description>
+Gestion de boutons pour insérer du code informatique via la barre d'édition Porte Plume.
+	</description>
+	<prefix>pp_codes</prefix>
+	<pipeline>
+		<nom>porte_plume_barre_pre_charger</nom>
+		<inclure>pp_codes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_lien_classe_vers_icone</nom>
+		<inclure>pp_codes_pipelines.php</inclure>
+	</pipeline>
+	<chemin dir='' />
+	<utilise id="poste_plume" />
+</plugin>
