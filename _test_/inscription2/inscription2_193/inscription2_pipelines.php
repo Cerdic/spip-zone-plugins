@@ -27,14 +27,6 @@ function inscription2_affiche_milieu($flux){
 	return $flux;
 }
 
-function inscription2_header_prive($flux){
-	if ((_request('exec')=='ajouter_adherent') || (_request('exec')=='inscription2_adherents')){
-		$flux .= "<script type='text/javascript' src='".find_in_path('lib/jquery-validate/jquery.validate.pack.js')."'></script>\n";
-		$flux .= "<script type='text/javascript' src='"._DIR_PLUGIN_INSCRIPTION2."javascript/md5_inscription2.js'></script>\n";
-	}
-	return $flux;
-}
-
 // ajouter les champs I2 sur le formulaire CVT editer_auteur
 function inscription2_editer_contenu_objet($flux){
 	if ($flux['args']['type']=='auteur') {
