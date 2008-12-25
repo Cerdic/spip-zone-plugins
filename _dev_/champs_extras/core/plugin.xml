@@ -1,0 +1,29 @@
+<plugin>
+	<nom>Champs Extras</nom>
+	<auteur>Matthieu Marcillaud [->magraine.net]</auteur>
+	<licence>GNU/GLP</licence>
+	<version>0.1</version>
+	<description>
+	Creer de nouveaux champs aux objets d'&eacute;dition de SPIP
+	</description>
+	<etat>dev</etat>
+	<prefix>champsextras</prefix>
+	<options>champsextras_options.php</options>
+	<necessite id="SPIP" version="[2.0;]" />
+ 	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/champsextras.php</inclure>
+	</pipeline>	
+ 	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>champsextras_pipelines.php</inclure>
+	</pipeline>	
+ 	<pipeline>
+		<nom>afficher_contenu_objet</nom>
+		<inclure>champsextras_pipelines.php</inclure>
+	</pipeline>	
+ 	<pipeline>
+		<nom>pre_edition</nom>
+		<inclure>champsextras_pipelines.php</inclure>
+	</pipeline>	
+</plugin>

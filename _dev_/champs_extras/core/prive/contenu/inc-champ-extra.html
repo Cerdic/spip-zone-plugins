@@ -1,0 +1,7 @@
+#SET{name,#ENV{champextra}}
+#SET{valeur,#ENV{#ENV{champextra}}}
+#SET{label,#ENV{#VAL{label_}|concat{#GET{name}}}|_T}
+[<div class="[(#GET{name})]">
+	<strong>[(#GET{label})]</strong>
+	(#GET{valeur})
+</div>]

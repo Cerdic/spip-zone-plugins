@@ -1,0 +1,9 @@
+#SET{name,#ENV{champextra}}
+#SET{valeur,#ENV{#ENV{champextra}}}
+#SET{label,#ENV{#VAL{label_}|concat{#GET{name}}}|_T}
+#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+<li class="editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+	<label for="#GET{name}">#GET{label}</label>
+		[<span class='erreur_message'>(#GET{erreurs})</span>]
+		<textarea name='#GET{name}'[ lang='(#LANG)'] id='#GET{name}' rows='7'>#GET{valeur}</textarea>
+</li>
