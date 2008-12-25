@@ -16,11 +16,9 @@ include_spip('inc/acces');
 include_spip('inc/action');
 
 // http://doc.spip.org/@exec_legender_auteur_dist
-function exec_legender_auteur_supp_dist()
+function exec_legender_auteur_supp_dist($id_auteur)
 {
-	global $connect_id_auteur, $spip_display;
-
-	$id_auteur = intval(_request('id_auteur'));
+	$id_auteur = $id_auteur ? $id_auteur : intval(_request('id_auteur'));
 	$nom_table = "spip_auteurs_elargis";
 	$redirect = _request('redirect');
 	$echec = _request('echec');
@@ -35,6 +33,8 @@ function exec_legender_auteur_supp_dist()
 	}
 
 	$legender_auteur_supp = charger_fonction('legender_auteur_supp', 'inc');
-	$fiche = $legender_auteur_supp($id_auteur, $auteur, $initial, $echec, $retour);
+	$fiche = $legender_auteur_supp($auteur, $new, $echec, $redirect);
+	
+	return $fiche;
 }
 ?>

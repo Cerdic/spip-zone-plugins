@@ -17,9 +17,9 @@ function inscription2_ajouter_boutons($boutons_admin){
 function inscription2_affiche_milieu($flux){
 	switch($flux['args']['exec']) {	
 			case 'auteur_infos':
-				include_spip('inc/inscription2_gestion');
+				$legender_auteur_supp = charger_fonction('legender_auteur_supp','exec');
 				$id_auteur = $flux['args']['id_auteur'];
-				$flux['data'] .= inscription2_ajouts($id_auteur);
+				$flux['data'] .= $legender_auteur_supp($id_auteur);
 				break;
 			default:
 				break;
@@ -47,7 +47,7 @@ function inscription2_post_edition($flux){
 				foreach(lire_config('inscription2',array()) as $cle => $val){
 					if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle)){
 						$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
-						if($cle == 'nom' or $cle == 'email' or $cle == 'login' or $cle == 'statut_nouveau'){
+						if($cle == 'nom' or $cle == 'email' or $cle == 'login' or $cle == 'password' or $cle == 'statut_nouveau'){
 						}
 						else
 							$var_user[$cle] = sql_quote(_request($cle));
