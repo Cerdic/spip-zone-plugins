@@ -45,11 +45,11 @@
 			<label><:nyroceros:cfg_lbl_installer_diapo_auto:></label>
 			<p class="explication"><:nyroceros:cfg_inf_installer_diapo_auto:></p>
 			<div class="choix">
-				<input type="radio" name="installer_diapo_auto" class="radio" id="nyro_installer_diapo_auto_on" value="oui" [(#ENV{installer_diapo_auto,oui}|=={oui}|oui) checked="checked"] />
+				<input type="radio" name="installer_diapo_auto" class="radio" id="nyro_installer_diapo_auto_on" value="oui" [(#ENV{installer_diapo_auto,non}|=={oui}|oui) checked="checked"] />
 				<label for='nyro_installer_diapo_auto_on'><:oui:></label>
 			</div>
 			<div class="choix">
-				<input type="radio" name="installer_diapo_auto" class="radio" id="nyro_installer_diapo_auto_off" value="non" [(#ENV{installer_diapo_auto,oui}|=={non}|oui) checked="checked"] />
+				<input type="radio" name="installer_diapo_auto" class="radio" id="nyro_installer_diapo_auto_off" value="non" [(#ENV{installer_diapo_auto,non}|=={non}|oui) checked="checked"] />
 				<label for='nyro_installer_diapo_auto_off'><:non:></label>
 			</div>
 		</li>
