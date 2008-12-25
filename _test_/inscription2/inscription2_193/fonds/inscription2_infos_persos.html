@@ -9,6 +9,7 @@
 				<table>
 					<thead>
 						<tr>
+							<th class="label"> </th>
 							<th style='width:140px'><:inscription2:form:> </th>
 							<th style='width:70px'> <:inscription2:fiche_mod:> </th>
 							<th style='width:70px'> <:inscription2:fiche:> </th>
@@ -16,9 +17,9 @@
 						</tr>
 					</thead>
 					<tr>
-						<td><label><:inscription2:nom_famille:></label></td>
-					</tr>
-					<tr>
+						<td class="label">
+							<label for="nom_famille"><:inscription2:nom_famille:></label>
+						</td>
 						<td>
 							<input type="checkbox" name="nom_famille" [checked="(#CONFIG{inscription2/nom_famille}?{checked})"] onclick="showoblig(this)" id="nom_famille" />
 							<div style="[(#CONFIG{inscription2/nom_famille}|=={on}|?{display: block;, display:none;})]">
@@ -37,9 +38,9 @@
 						</td>
 					</tr>
 					<tr>
-						<td><label><:inscription2:prenom:></label></td>
-					</tr>
-					<tr>
+						<td class="label">
+							<label for="prenom"><:inscription2:prenom:></label>
+						</td>
 						<td>
 							<input type="checkbox" name="prenom" [checked="(#CONFIG{inscription2/prenom}?{checked})"] onclick="showoblig(this)" id="prenom" />
 							<div style="[(#CONFIG{inscription2/prenom}|=={on}|?{display: block;, display:none;})]">
@@ -58,9 +59,9 @@
 						</td>
 					</tr>
 					<tr>
-						<td><label><:inscription2:login:></label></td>
-					</tr>
-					<tr>
+						<td class="label">
+							<label for="login"><:inscription2:login:></label>
+						</td>
 						<td>
 							<input type="checkbox" name="login" [checked="(#CONFIG{inscription2/login}?{checked})"] onclick="showoblig(this)" id="login" />
 							<div style="[(#CONFIG{inscription2/login}|=={on}|?{display: block;, display:none;})]">
@@ -78,10 +79,10 @@
 							<input type="checkbox" name="login_table" [checked="(#CONFIG{inscription2/login_table}?{checked})"] id="login_table" />
 						</td>
 					</tr>
-					<tr>	
-						<td><label><:inscription2:naissance:></label></td>
-					</tr>
 					<tr>
+						<td class="label">
+							<label for="naissance"><:inscription2:naissance:></label>
+						</td>
 						<td>
 							<input type="checkbox" name="naissance" [checked="(#CONFIG{inscription2/naissance}?{checked})"] onclick="showoblig(this)" id="naissance" />
 							<div style="[(#CONFIG{inscription2/naissance}|=={on}|?{display: block;, display:none;})]">
@@ -99,8 +100,10 @@
 							<input type="checkbox" name="naissance_table" [checked="(#CONFIG{inscription2/naissance_table}?{checked})"] id="naissance_table" />
 						</td>
 					</tr>
-					<tr><td><label><:inscription2:sexe:></label></td></tr>
 					<tr>
+						<td class="label">
+							<label for="sexe"><:inscription2:sexe:></label>
+						</td>
 						<td>
 							<input type="checkbox" name="sexe" [checked="(#CONFIG{inscription2/sexe}?{checked})"] onclick="showoblig(this)" id="sexe" />
 							<div style="[(#CONFIG{inscription2/sexe}|=={on}|?{display: block;, display:none;})]">
@@ -118,8 +121,10 @@
 							<input type="checkbox" name="sexe_table" [checked="(#CONFIG{inscription2/sexe_table}?{checked})"] id="sexe_table" />
 						</td>
 					</tr>
-					<tr><td><label><:inscription2:adresse:></label></td></tr>
 					<tr>
+						<td class="label">
+							<label for="adresse"><:inscription2:adresse:></label>
+						</td>
 						<td>
 							<input type="checkbox" name="adresse" [checked="(#CONFIG{inscription2/adresse}?{checked})"] onclick="showoblig(this)" id="adresse" />
 							<div style="[(#CONFIG{inscription2/adresse}|=={on}|?{display: block;, display:none;})]">
@@ -138,9 +143,9 @@
 						</td>
 					</tr>
 					<tr>
-						<td><label><:inscription2:code_postal:></label></td>
-					</tr>
-					<tr>
+						<td class="label">
+							<label for="code_postal"><:inscription2:code_postal:></label>
+						</td>
 						<td>
 							<input type="checkbox" name="code_postal" [checked="(#CONFIG{inscription2/code_postal}?{checked})"] onclick="showoblig(this)" id="code_postal" />
 							<div style="[(#CONFIG{inscription2/code_postal}|=={on}|?{display: block;, display:none;})]">
@@ -159,11 +164,9 @@
 						</td>
 					</tr>
 					<tr>
-						<td>
-							<label><:inscription2:ville:></label>
+						<td class="label">
+							<label for="ville"><:inscription2:ville:></label>
 						</td>
-					</tr>
-					<tr>
 						<td>
 							<input type="checkbox" name="ville" [checked="(#CONFIG{inscription2/ville}?{checked})"] onclick="showoblig(this)" id="ville" />
 							<div style="[(#CONFIG{inscription2/ville}|=={on}|?{display: block;, display:none;})]">
@@ -182,9 +185,9 @@
 						</td>
 					</tr>
 					<tr>
-						<td><label><:inscription2:pays:></label></td>
-					</tr>
-					<tr>
+						<td class="label">
+							<label for="pays"><:inscription2:pays:></label>
+						</td>
 						<td>
 							<input type="checkbox" name="pays" [checked="(#CONFIG{inscription2/pays}?{checked})"] onclick="showoblig(this)" id="pays" />
 							<div style="[(#CONFIG{inscription2/pays}|=={on}|?{display: block;, display:none;})]">
@@ -203,9 +206,9 @@
 						</td>
 					</tr>
 					<tr>
-						<td><label><:inscription2:telephone:></label></td>
-					</tr>
-					<tr>
+						<td class="label">
+							<label for="telephone"><:inscription2:telephone:></label>
+						</td>
 						<td>
 							<input type="checkbox" name="telephone" [checked="(#CONFIG{inscription2/telephone}?{checked})"] onclick="showoblig(this)" id="telephone" />
 							<div style="[(#CONFIG{inscription2/telephone}|=={on}|?{display: block;, display:none;})]">
@@ -224,9 +227,9 @@
 						</td>
 					</tr>
 					<tr>
-						<td><label><:inscription2:fax:></label></td>
-					</tr>
-					<tr>
+						<td class="label">
+							<label for="fax"><:inscription2:fax:></label>
+						</td>
 						<td>
 							<input type="checkbox" name="fax" [checked="(#CONFIG{inscription2/fax}?{checked})"] onclick="showoblig(this)" id="fax" />
 							<div style="[(#CONFIG{inscription2/fax}|=={on}|?{display: block;, display:none;})]">
@@ -244,8 +247,10 @@
 							<input type="checkbox" name="fax_table" [checked="(#CONFIG{inscription2/fax_table}?{checked})"] id="fax_table" />
 						</td>
 					</tr>
-					<tr><td><label><:inscription2:mobile:></label></td></tr>
 					<tr>
+						<td class="label">
+							<label for="mobile"><:inscription2:mobile:></label>
+						</td>
 						<td>
 							<input type="checkbox" name="mobile" [checked="(#CONFIG{inscription2/mobile}?{checked})"] onclick="showoblig(this)" id="mobile" />
 							<div style="[(#CONFIG{inscription2/mobile}|=={on}|?{display: block;, display:none;})]">
@@ -264,9 +269,9 @@
 						</td>
 					</tr>
 					<tr>
-						<td><label><:inscription2:commentaire:></label></td>
-					</tr>
-					<tr>
+						<td class="label">
+							<label for="commentaire"><:inscription2:commentaire:></label>
+						</td>
 						<td>
 							<input type="checkbox" name="commentaire" [checked="(#CONFIG{inscription2/commentaire}?{checked})"] onclick="showoblig(this)" id="commentaire" />
 							<div style="[(#CONFIG{inscription2/commentaire}|=={on}|?{display: block;, display:none;})]">

@@ -32,6 +32,7 @@
 								<table>
 									<thead>
 										<tr>
+											<th class="label"> </th>
 											<th style="width:140px"><:inscription2:form:></th>
 											<th style="width:70px"><:inscription2:fiche_mod:></th>
 											<th style="width:70px"><:inscription2:fiche:></th>
@@ -39,11 +40,9 @@
 										</tr>
 									</thead>
 									<tr>
-									<td>
-										<label><:inscription2:nom:></label>
-									</td>
-									</tr>
-									<tr>
+										<td class="label">
+											<label><:inscription2:nom:></label>
+										</td>
 										<td>
 											<input type="checkbox" name="nom" [checked="(#ENV{nom}?{checked})"] onclick="showoblig(this)" id="nom" />
 											<div style="[(#CONFIG{inscription2/nom}|=={on}|?{display: block;, display:none;})]">
@@ -62,9 +61,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td><label><:inscription2:email:></label></td>
-									</tr>
-									<tr>
+										<td class="label"><label><:inscription2:email:></label></td>
 										<td>
 											<input type="checkbox" name="email" checked="checked" id="email" onclick="alert('<:inscription2:par_defaut:>');return false;"/>
 											<div style="display:none;">
@@ -82,9 +79,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td><label><:inscription2:password:></label></td>
-									</tr>
-									<tr>
+										<td class="label"><label><:inscription2:password:></label></td>
 										<td>
 											<input type="checkbox" name="password"[(#ENV{password}|=={on}|oui) checked="checked"] id="password" onclick="showoblig(this)" />
 											<div style="[(#CONFIG{inscription2/password}|=={on}|?{display: block;, display:none;})]">
@@ -96,7 +91,7 @@
 											<input type="checkbox" name="password_fiche_mod" onclick="enadis(this,password_fiche)" [checked="(#ENV{password_fiche_mod}?{checked})"] id="password_fiche_mod" />
 										</td>
 										<td>
-											<input type="checkbox" name="password_fiche" disabled="disabled" id="password_fiche" [disabled ="(#ENV{password_fiche_mod}?{disabled})"] />
+											<input type="checkbox" name="password_fiche" disabled="disabled" id="password_fiche" />
 										</td>
 										<td>
 											<input type="checkbox" name="password_table" disabled="disabled" id="password_table" />
