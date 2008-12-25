@@ -50,15 +50,6 @@ function legender_auteur_supp_saisir($auteur){
 				$var_user['b.'.$cle] = '1';
 				$champs[$cle] = '';
 			}
-		}elseif($cle=='newsletter' and $val != ''){
-			$aux3 = array();
-			$aux4 = array();
-			$news = sql_select("id_liste, titre","spip_listes");
-			$listes = sql_select("id_liste","spip_auteurs_listes","id_auteur = $id");
-			while($q = sql_fetch($listes))
-				$aux3[]=$q['id_liste'];
-			while($q = sql_fetch($news))
-				$aux4[] = $q;
 		}
 	}
 	
@@ -79,19 +70,6 @@ function legender_auteur_supp_saisir($auteur){
 				$corps_supp .= "\n<li><label>"._T('inscription2:'.$cle)."</label>"
 				. "<input type='text' id='$cle' name='$cle' class='text' value='".$val."' /></li>";
 			}
-		}
-	}
-	if($news){
-		if ($aux4){
-		$corps_supp .= "<li><label>"._T('inscription2:newsletter')."</label>"
-		. "<select name='news[]' id='news' multiple>";
-		foreach($aux4 as $val){
-			if (in_array($val['id_liste'], $aux3))
-				$corps_supp .= "<option value='".$val['id_liste']."' selected>".$val['titre']."</option>";
-			else 
-				$corps_supp .= "<option value='".$val['id_liste']."'>".$val['titre']."</option>";
-		}
-		$corps_supp .= "</select><br/><a onclick=\"$('#news').find('option').attr('selected', false);\">"._T('inscription2:deselect_listes')."</a> </small><br /></td></tr>";
 		}
 	}
 		$corps_supp .= "\n</ul>";
@@ -121,16 +99,6 @@ function legender_auteur_supp_voir($auteur){
 			else 
 				$var_user['b.'.$cle] = '1';
 		}
-		elseif($cle=='newsletter' and $val != ''){
-			$aux3 = array();
-			$aux4 = array();
-			$news = sql_select("id_liste, titre","spip_listes");
-			$listes = sql_select("id_liste","spip_auteurs_listes","id_auteur = $id");
-			while($q = sql_fetch($listes))
-				$aux3[]=$q['id_liste'];
-			while($q = sql_fetch($news))
-				$aux4[] = $q;
-		}
 	}
 	$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur","a.id_auteur= $id_auteur");
 
@@ -150,15 +118,6 @@ function legender_auteur_supp_voir($auteur){
 				$res .= "<p><strong>"._T('inscription2:'.$cle)." : </strong>" . typo($val) . "</p>";	
 			}
 		}
-	}
-	if($aux4 and $aux3){
-		$res .= "<strong>"._T('inscription2:newsletter')."</strong><br />"
-		. "<ul>";
-		foreach($aux4 as $val){
-			if (in_array($val['id_liste'], $aux3))
-				$res .= "<li>".$val['titre']."</li>";
-		}
-		$res .= "</ul>";
 	}
 	$res .= "</div>\n";
 
