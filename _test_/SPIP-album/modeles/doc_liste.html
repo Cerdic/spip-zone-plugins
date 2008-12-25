@@ -1,10 +1,14 @@
 <BOUCLE_doc(ARTICLES documents_articles documents){id_document}>
+[(#REM) Recuperation des variables d'initialisation du modele]
+#SET{increment, #ENV{nbre_vignette, #CONFIG{album/nbrevignette, 10}}} [(#GET{increment}|>{10}|?{' '}) #SET{increment, 10}][(#GET{increment}|<{1}|?{' '}) #SET{increment, 1}]
+#SET{sens, #ENV{senstri, #CONFIG{album/senstri, 0}}}
+
 <div class="bulletin">
 <B_bulletin>
 	[(#ANCRE_PAGINATION)]
     <ul>
-<BOUCLE_bulletin(DOCUMENTS){id_article}{date<=#ENV{date}}{par date}{inverse}{pagination 10}>
-	<li><a [href="(#URL_DOCUMENT)"][ title="(#DESCRIPTIF|textebrut)"] class="spip_in">#TITRE</a> <:album:du:> [(#DATE|affdate)]</li>
+<BOUCLE_bulletin(DOCUMENTS){id_article}{par #ENV{partri}}{inverse #GET{sens}}{par num titre, date}{inverse #GET{sens}}{date<=#ENV{date}}{pagination #GET{increment}}>
+	<li[(#ENV{logo}|=={on}|?{' '})[ style="list-style-image:url('(#LOGO_DOCUMENT||reduire_image{12,12}|extraire_attribut{src})');"]]><a [href="(#URL_DOCUMENT)"][ title="(#DESCRIPTIF|textebrut)"] class="spip_in">#TITRE</a> <:album:du:> [(#DATE|affdate)]</li>
 </BOUCLE_bulletin>
 	</ul>
 	[<p class="pagination">(#PAGINATION)</p>]
