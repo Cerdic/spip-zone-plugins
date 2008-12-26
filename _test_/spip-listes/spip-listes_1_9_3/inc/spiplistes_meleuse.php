@@ -99,7 +99,7 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 
 	if($nb_etiquettes) {
 
-spiplistes_log($prefix_log.$nb_etiquettes." job(s), distribution...", _SPIPLISTES_LOG_DEBUG);
+		spiplistes_log($prefix_log.$nb_etiquettes." job(s), distribution...", _SPIPLISTES_LOG_DEBUG);
 		
 		// signale en log si mode simulation
 		if($opt_simuler_envoi == 'oui') {
@@ -133,10 +133,10 @@ spiplistes_log($prefix_log.$nb_etiquettes." job(s), distribution...", _SPIPLISTE
 				  $sql_courrier_select
 				, "id_courrier=".sql_quote($id_courrier)
 			);
-spiplistes_log($prefix_log."etiquette en cours pour id_courrier #$id_courrier", _SPIPLISTES_LOG_DEBUG);
+			spiplistes_log($prefix_log."etiquette en cours pour id_courrier #$id_courrier", _SPIPLISTES_LOG_DEBUG);
 		} else {
 			// un vieux bug dans une ancienne version, eradique depuis (j'espere ;-)
-spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Supprimer cette etiquette manuellement !");
+			spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Supprimer cette etiquette manuellement !");
 		}
 		
 		// boucle (sur LIMIT 1) pour pouvoir sortir par break si erreur
@@ -189,7 +189,7 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 					$pied_patron = _SPIPLISTES_PATRON_PIED_DEFAUT;
 				}
 				if(strlen($pied_patron) > _SPIPLISTES_PATRON_FILENAMEMAX) {
-					// rester compatible avec les anciennes version de SIP-Listes
+					// rester compatible avec les anciennes version de SPIP-Listes
 					// qui stoquaient le patron assemble' en base
 					$pied_texte = spiplistes_courrier_version_texte($pied_html = $pied_patron);
 				}
@@ -227,8 +227,9 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 				}
 				$from = $fromname." <$from>";
 			}
-//spiplistes_log("email_envoi : " . $email_envoi, _SPIPLISTES_LOG_DEBUG);	
-//spiplistes_log("From : " . $from, _SPIPLISTES_LOG_DEBUG);	
+			
+			//spiplistes_log("email_envoi : " . $email_envoi, _SPIPLISTES_LOG_DEBUG);	
+			//spiplistes_log("From : " . $from, _SPIPLISTES_LOG_DEBUG);	
 		
 			////////////////////////////////////
 			// Prepare la version texte
@@ -315,7 +316,7 @@ spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Suppri
 					// Traitement d'une liasse d'etiquettes
 					// un id pour ce processus (le tampon est unique par liasse)
 					$id_process = intval(substr(creer_uniqid(),0,5));
-spiplistes_log($prefix_log."PROCESS #$id_process", _SPIPLISTES_LOG_DEBUG);
+					spiplistes_log($prefix_log."PROCESS #$id_process", _SPIPLISTES_LOG_DEBUG);
 			
 					// un coup de tampon sur les etiquettes 
 					// des courriers qui vont partir
@@ -339,11 +340,11 @@ spiplistes_log($prefix_log."PROCESS #$id_process", _SPIPLISTES_LOG_DEBUG);
 				}
 					
 				$nb_destinataires = sql_count($sql_adresses_dest);
-spiplistes_log($prefix_log."nb etiquettes a traiter: $nb_destinataires", _SPIPLISTES_LOG_DEBUG);
+				spiplistes_log($prefix_log."nb etiquettes a traiter: $nb_destinataires", _SPIPLISTES_LOG_DEBUG);
 				if($nb_destinataires > 0) {
 
-spiplistes_log($prefix_log."total_abos: $total_abonnes, en_cour: $nb_destinataires, limit: $limit"
-	, _SPIPLISTES_LOG_DEBUG);
+				spiplistes_log($prefix_log."total_abos: $total_abonnes, en_cour: $nb_destinataires, limit: $limit"
+				, _SPIPLISTES_LOG_DEBUG);
 
 
 					// replacer les compteurs
@@ -465,7 +466,7 @@ spiplistes_log($prefix_log."total_abos: $total_abonnes, en_cour: $nb_destinatair
 					} // fin while
 					
 					// supprime la liasse de la queue d'envois
-spiplistes_log($prefix_log."envoi OK. Supprimer queue $id_process", _SPIPLISTES_LOG_DEBUG);
+					spiplistes_log($prefix_log."envoi OK. Supprimer queue $id_process", _SPIPLISTES_LOG_DEBUG);
 					spiplistes_courriers_en_queue_supprimer("etat=".sql_quote($id_process));
 					
 					// si c'est un test on repasse le courrier en redac
@@ -486,7 +487,7 @@ spiplistes_log($prefix_log."envoi OK. Supprimer queue $id_process", _SPIPLISTES_
 			}
 			else {
 				//aucun destinataire connu pour ce message
-//spiplistes_log($prefix_log._T('spiplistes:erreur_sans_destinataire')."---"._T('spiplistes:envoi_annule'), _SPIPLISTES_LOG_DEBUG);
+				//spiplistes_log($prefix_log._T('spiplistes:erreur_sans_destinataire')."---"._T('spiplistes:envoi_annule'), _SPIPLISTES_LOG_DEBUG);
 				spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_COURRIER_STATUT_IGNORE);
 				spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
 				$str_log .= " END #$id_courrier";
@@ -517,7 +518,7 @@ spiplistes_log($prefix_log."envoi OK. Supprimer queue $id_process", _SPIPLISTES_
 				}
 				else {
 					$statut = ($type == _SPIPLISTES_COURRIER_TYPE_NEWSLETTER) ? _SPIPLISTES_COURRIER_STATUT_PUBLIE : _SPIPLISTES_COURRIER_STATUT_AUTO;
-//spiplistes_log($prefix_log."nouveau statut $statut", _SPIPLISTES_LOG_DEBUG);
+					//spiplistes_log($prefix_log."nouveau statut $statut", _SPIPLISTES_LOG_DEBUG);
 					$sql_set_array['statut'] = sql_quote($statut);
 					$sql_set_array['date_fin_envoi'] = "NOW()";
 					$str_log .= " END #$id_courrier";
