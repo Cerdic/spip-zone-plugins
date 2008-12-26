@@ -282,10 +282,10 @@ function forms_ordonner_donnee($id_donnee,$rang_nouv){
 	}
 	// borner le rang
 	include_spip('action/forms_editer_donnee');
-	if ($rang_nouv==0) $rang_nouv = forms_rang_prochain($id_form);
+	if ($rang_nouv==0) $rang_nouv = forms_donnee_prochain_rang($id_form);
 	$rang_nouv = min(max($rang_nouv,$rang_min),$rang_max);
 	if ($rang_nouv>$rang) $rang_nouv++; // il faut se decaler d'un car on est devant actuellement
-	$rang_nouv = min($rang_nouv,forms_rang_prochain($id_form));
+	$rang_nouv = min($rang_nouv,forms_donnee_prochain_rang($id_form));
 
 	// incrementer tous ceux dont le rang est superieur a la cible pour faire une place
 	$ok = sql_update("spip_forms_donnees",array('rang'=>'rang+1'),"id_form=".intval($id_form)." AND rang>=".intval($rang_nouv));

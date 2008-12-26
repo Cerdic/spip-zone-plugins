@@ -11,20 +11,22 @@
  *
  */
 
+include_spip('base/abstract_sql');
+include_spip('inc/forms');
+
 /**
- * Insertion des donnees pour un champ
+ * Lister les insertions en base pour un champ de la donnee
  *
- * @param unknown_type $id_form
- * @param unknown_type $id_donnee
- * @param unknown_type $champ
- * @param unknown_type $type
+ * @param int $id_form
+ * @param int $id_donnee
+ * @param string $champ
+ * @param string $type
  * @param unknown_type $val
- * @param unknown_type $erreur
- * @param unknown_type $ok
- * @return unknown
+ * @param string $erreur
+ * @param bool $ok
+ * @return array
  */
-function forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val,&$erreur,&$ok){
-	$inserts = array();
+function forms_donnee_inserer_un_champ($id_form,$id_donnee,$champ,$type,$val,&$inserts,&$erreur,&$ok){
 	if ($type == 'fichier') {
 		if (($val = $_FILES[$champ]) AND ($val['tmp_name'])) {
 			// Fichier telecharge : deplacer dans IMG, stocker le chemin dans la base
@@ -37,12 +39,13 @@ function forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val
 				$ok = false;
 			}
 			else {
-				$inserts[] = "(".intval($id_donnee).","._q($champ).","._q($dest).")";
+				
+				$inserts[] = array("id_donnee"=>$id_donnee, "champ"=>$champ, "valeur"=>$dest);
 			}
 		}
 		// Cas de la mise a jour pour laquelle on dispose deja d'un fichier uploade !
 		elseif ( ($val=forms_valeurs($id_donnee,$id_form,$champ)) != NULL ) {
-			$inserts[] = "(".intval($id_donnee).","._q($champ).","._q($val[$champ]).")";
+			$inserts[] = array("id_donnee"=>$id_donnee, "champ"=>$champ, "valeur"=>$val[$champ]);
 		}
 	}
 	else if (is_array($val) OR strlen($val)) {
@@ -50,38 +53,71 @@ function forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val
 		if (is_array($val))
 			foreach ($val as $v){
 				if (strlen($v))
-					$inserts[] = "(".intval($id_donnee).","._q($champ).","._q($v).")";
+					$inserts[] = array("id_donnee"=>$id_donnee, "champ"=>$champ, "valeur"=>$v);
 			}
 		elseif (strlen($val))
-			$inserts[] = "(".intval($id_donnee).","._q($champ).","._q($val).")";
+			$inserts[] = array("id_donnee"=>$id_donnee, "champ"=>$champ, "valeur"=>$val);
 	}
 	return $inserts;
 }
 
-
-	function forms_modifier_reponse($id_form,$id_donnee,&$erreur, $c = NULL, $structure = NULL){
-		if (!$structure)	$structure = forms_structure($id_form);
-		$inserts = array();
-		$champs_mod = array();
-		$valeurs = array();
-		$champs = array();
-		foreach($structure as $champ=>$infos){
-			if (!$c){
-				if ($infos['type'] == 'fichier' AND isset($_FILES[$champ]['tmp_name']))
-					$val = $_FILES[$champ];
-				else
-					$val = _request($champ);
-			}
+/**
+ * Modifier une donnee. Renvoie le nombre de valeurs inserees pour la donnee
+ *
+ * @param int $id_form
+ * @param int $id_donnee
+ * @param array $erreur
+ * @param array $c
+ * @param array $structure
+ * @return int
+ */
+function forms_donnee_modifier($id_form,$id_donnee,&$erreur, $c = NULL, $structure = NULL){
+	if (!$structure)
+		$structure = forms_structure($id_form);
+	$inserts = array();
+	$champs_mod = array();
+	$valeurs = array();
+	$champs = array();
+	foreach($structure as $champ=>$infos){
+		if (!$c){
+			if ($infos['type'] == 'fichier' AND isset($_FILES[$champ]['tmp_name']))
+				$val = $_FILES[$champ];
 			else
-				$val = isset($c[$champ])?$c[$champ]:NULL;
-			if ($val!==NULL
-				AND (($infos['type']!=='password') OR strlen($val))){
-				$valeurs[$champ] = $val;
-				$champs[$champ] = $infos;
-			}
+				$val = _request($champ);
 		}
-		// Envoyer aux plugins
-		$valeurs = pipeline('forms_pre_edition_donnee',
+		else
+			$val = isset($c[$champ])?$c[$champ]:NULL;
+		if ($val!==NULL
+			AND (($infos['type']!=='password') OR strlen($val))){
+			$valeurs[$champ] = $val;
+			$champs[$champ] = $infos;
+		}
+	}
+	// Envoyer aux plugins
+	$valeurs = pipeline('forms_pre_edition_donnee',
+		array(
+			'args' => array(
+				'id_form' => $id_form,
+				'id_donnee' => $id_donnee,
+				'champs' => $champs
+			),
+			'data' => $valeurs
+		)
+	);
+	foreach($valeurs as $champ=>$val){
+		$champs_mod[] = $champ;
+		// un plugin a pu ajouter un 'champ factice' a enregistrer, non defini dans la structure
+		$type = isset($champs[$champ]['type'])?$champs[$champ]['type']:"";
+		forms_donnee_inserer_un_champ($id_form,$id_donnee,$champ,$type,$val,$inserts,$erreur,$ok);
+	}
+	if (!count($erreur)){
+		if (count($champs_mod))
+			sql_delete("spip_forms_donnees_champs",sql_in("champ",$champs_mod)." AND id_donnee=".intval($id_donnee));
+		if (count($inserts))
+			sql_insertq_multi("spip_forms_donnees_champs",$inserts);
+
+		// Envoyer aux plugins apres enregistrement
+		$valeurs = pipeline('forms_post_edition_donnee',
 			array(
 				'args' => array(
 					'id_form' => $id_form,
@@ -91,195 +127,192 @@ function forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val
 				'data' => $valeurs
 			)
 		);
-		foreach($valeurs as $champ=>$val){
-			$champs_mod[] = $champ;
-			// un plugin a pu ajouter un 'champ factice' a enregistrer, non defini dans la structure
-			$type = isset($champs[$champ]['type'])?$champs[$champ]['type']:"";
-			$ins = forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val,$erreur,$ok);
-			$inserts = array_merge($inserts,$ins);
+	}
+	return count($inserts);
+}
+
+/**
+ * Revision d'une donnee
+ *
+ * @param int $id_donnee
+ * @param array $c
+ * @return array
+ */
+function forms_revision_donnee($id_donnee, $c = NULL) {
+	include_spip('base/abstract_sql');
+	$inserts = array();
+	if (!$row = sql_fetsel("id_form","spip_forms_donnees","id_donnee=".intval($id_donnee))
+	 OR !$id_form = $row['id_form']
+	 OR !$structure = forms_structure($id_form)
+	 )
+		return array('message_erreur' => _T("forms:probleme_technique"));
+
+	include_spip("inc/forms_type_champs");
+	$erreur = forms_valide_conformite_champs_reponse_post($id_form, $id_donnee, $c, $structure);
+
+	if (!$erreur)
+		forms_donnee_modifier($id_form,$id_donnee,$erreur, $c, $structure);
+	if (count($erreur))
+		spip_log("erreur: ".serialize($erreur));
+
+	return $erreur;
+}
+	
+
+/**
+ * Determinier le rang de la prochaine donnee
+ *
+ * @param unknown_type $id_form
+ * @return unknown
+ */
+function forms_donnee_prochain_rang($id_form){
+	$rang = 1;
+	if ($row = sql_fetsel("max(rang) AS rang_max","spip_forms_donnees","id_form=".intval($id_form)))
+		$rang = $row['rang_max']+1;
+	return $rang;
+}
+	
+
+/**
+ * Enregistrer la saisie d'un formulaire
+ *
+ * @param int $id_form
+ * @param int $id_donnee
+ * @param array $erreur
+ * @param string $reponse
+ * @param string $script_validation
+ * @param string $script_args
+ * @param array $c
+ * @param int $rang
+ * @return string
+ */
+function forms_enregistrer_reponse_formulaire($id_form, &$id_donnee, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='', $c=NULL, $rang=NULL) {
+	$r = '';
+	if (!is_array($erreur)) $erreur = array();
+	include_spip('inc/autoriser');
+
+	if (!$row = sql_fetsel("*","spip_forms","id_form=".intval($id_form))) {
+		$erreur['message_erreur'] = _T("forms:probleme_technique");
+	}
+	$moderation = $row['moderation'];
+	// Extraction des donnees pour l'envoi des mails eventuels
+	//   accuse de reception et forward webmaster
+	$email = unserialize($row['email']);
+	$champconfirm = $row['champconfirm'];
+	$mailconfirm = '';
+
+	include_spip("inc/forms_type_champs");
+	$erreur = array_merge($erreur,
+	  forms_valide_champs_reponse_post($id_form, $id_donnee, $c));
+
+	// Si tout est bon, enregistrer la reponse
+	if (!count($erreur)) {
+		$id_auteur = isset($GLOBALS['visiteur_session']['id_auteur']) ? intval($GLOBALS['visiteur_session']['id_auteur']) : 0;
+		$url = (_DIR_RESTREINT==_DIR_RESTREINT_ABS)?parametre_url(self(),'id_form',''):_DIR_RESTREINT_ABS;
+		if ($id_donnee<0) $url = parametre_url($url,'id_donnee','');
+		$ok = true;
+		$confirme = false;
+		$id = _request("deja_enregistre_$id_form", $c);
+		if ($id = intval($id)){
+			$id_donnee = $id;
+			$ok = false;
+			$confirme = true;
 		}
-		if (!count($erreur)){
-			if (count($champs_mod)){
-				include_spip('base/abstract_sql');
-				$in_champs = calcul_mysql_in('champ',join(',',array_map('_q', $champs_mod)));
-				spip_query("DELETE FROM spip_forms_donnees_champs WHERE $in_champs AND id_donnee=".intval($id_donnee));
+
+		$nom_cookie = forms_nom_cookie_form($id_form);
+		if (isset($_COOKIE[$nom_cookie]))
+			$cookie = $_COOKIE[$nom_cookie];
+		else {
+			include_spip("inc/acces");
+			$cookie = creer_uniqid();
+		}
+		if ($row['type_form']=='sondage')
+			$confirmation = 'attente';
+		else
+			$confirmation = 'valide';
+		if ($moderation == 'posteriori')
+			$statut='publie';
+		else {
+			$statut = 'prop';
+			foreach(array('prepa','prop','publie','refuse') as $s)
+				if (autoriser(
+						'instituer',
+						(in_array($row['type_form'],array('','sondage'))?'form':$row['type_form']).'_donnee',
+						0,NULL,array('id_form'=>$id_form,'statut'=>'prepa','nouveau_statut'=>$s))){
+					$statut = $s;
+					break;
+				}
+		}
+		// D'abord creer la reponse dans la base de donnees
+		if ($ok) {
+			if ($id_donnee>0 AND autoriser('modifier', 'donnee', $id_donnee, NULL, array('id_form'=>$id_form))){
+				sql_updateq("spip_forms_donnees",
+				  array("ip"=>$GLOBALS['ip'],"url"=>$url,"confirmation"=>$confirmation,"cookie"=>$cookie),
+				  "id_donnee=".intval($id_donnee));
+			} elseif (autoriser('creer', 'donnee', 0, NULL, array('id_form'=>$id_form))){
+				if ($rang==NULL) $rang = array('rang'=>forms_donnee_prochain_rang($id_form));
+				elseif(!is_array($rang)) $rang=array('rang'=>$rang);
+				$id_donnee = sql_insertq("spip_forms_donnees",
+					array_merge(
+					 array(
+					   "id_form"=>$id_form,
+					   "id_auteur"=>$id_auteur,
+					   "date"=>"NOW()",
+					   "ip"=>$GLOBALS['ip'],
+					   "url"=>$url,
+					   "confirmation"=>$confirmation,
+					   "statut"=>$statut,
+					   "cookie"=>$cookie),
+					 $rang)
+					 );
+				# cf. GROS HACK inc/forms_tables_affichage
+				# rattrapper les documents associes a cette nouvelle donnee
+				# ils ont un id = 0-id_auteur
+				sql_updateq("spip_documents_donnees",array("id_donnee"=>$id_donnee),"id_donnee = ".(0-intval($GLOBALS['auteur_session']['id_auteur'])));
+				# cf. GROS HACK 2 balise/forms
+				# rattrapper les donnees associes a cette nouvelle donnee
+				# ils ont un id = 0-id_auteur
+				sql_updateq("spip_forms_donnees_donnees",array("id_donnee"=>$id_donnee),"id_donnee = ".(0-intval($GLOBALS['auteur_session']['id_auteur'])));
 			}
-			if (count($inserts)){
-				spip_query($q="INSERT INTO spip_forms_donnees_champs (id_donnee, champ, valeur) ".
-					"VALUES ".join(',', $inserts));
-			}
-			// Envoyer aux plugins apres enregistrement
-			$valeurs = pipeline('forms_post_edition_donnee',
-				array(
-					'args' => array(
-						'id_form' => $id_form,
-						'id_donnee' => $id_donnee,
-						'champs' => $champs
-					),
-					'data' => $valeurs
-				)
-			);
-		}
-		return count($inserts);
-	}
-
-	
-	function forms_revision_donnee($id_donnee, $c = NULL) {
-		include_spip('base/abstract_sql');
-		$inserts = array();
-		$result = spip_query("SELECT id_form FROM spip_forms_donnees WHERE id_donnee=".intval($id_donnee));
-		if (!$row = spip_fetch_array($result)) {
-			$erreur['@'] = _T("forms:probleme_technique");
-		}
-		$id_form = $row['id_form'];
-		$structure = forms_structure($id_form);
-		include_spip("inc/forms_type_champs");
-
-		$erreur = forms_valide_conformite_champs_reponse_post($id_form, $id_donnee, $c, $structure);
-		if (!$erreur)
-			forms_modifier_reponse($id_form,$id_donnee,$erreur, $c, $structure);
-		if (count($erreur))
-			spip_log("erreur: ".serialize($erreur));
-
-		return $erreur;
-	}
-	
-	
-	function forms_rang_prochain($id_form){
-		$rang = 1;
-		$res = spip_query("SELECT max(rang) AS rang_max FROM spip_forms_donnees WHERE id_form=".intval($id_form));
-		if ($row = spip_fetch_array($res))
-			$rang = $row['rang_max']+1;
-		return $rang;
-	}
-	
-
-
-	function forms_enregistrer_reponse_formulaire($id_form, &$id_donnee, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='', $c=NULL, $rang=NULL) {
-		$r = '';
-		include_spip('inc/autoriser');
-
-		$result = spip_query("SELECT * FROM spip_forms WHERE id_form=".intval($id_form));
-		if (!$row = spip_fetch_array($result)) {
-			$erreur['@'] = _T("forms:probleme_technique");
-		}
-		$moderation = $row['moderation'];
-		// Extraction des donnees pour l'envoi des mails eventuels
-		//   accuse de reception et forward webmaster
-		$email = unserialize($row['email']);
-		$champconfirm = $row['champconfirm'];
-		$mailconfirm = '';
-
-		include_spip("inc/forms_type_champs");
-		$erreur = forms_valide_champs_reponse_post($id_form, $id_donnee, $c);
-
-		// Si tout est bon, enregistrer la reponse
-		if (!$erreur) {
-			global $auteur_session;
-			$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
-			$url = (_DIR_RESTREINT==_DIR_RESTREINT_ABS)?parametre_url(self(),'id_form',''):_DIR_RESTREINT_ABS;
-			if ($id_donnee<0) $url = parametre_url($url,'id_donnee','');
-			$ok = true;
-			$confirme = false;
-			$id = _request("deja_enregistre_$id_form", $c);
-			if ($id = intval($id)){
-				$id_donnee = $id;
+			if (!($id_donnee>0)) {
+				$erreur['message_erreur'] = _T("forms:probleme_technique");
 				$ok = false;
-				$confirme = true;
 			}
-
-			$nom_cookie = forms_nom_cookie_form($id_form);
-			if (isset($_COOKIE[$nom_cookie]))
-				$cookie = $_COOKIE[$nom_cookie];
 			else {
-				include_spip("inc/acces");
-				$cookie = creer_uniqid();
-			}
-			if ($row['type_form']=='sondage')
-				$confirmation = 'attente';
-			else
-				$confirmation = 'valide';
-			if ($moderation == 'posteriori')
-				$statut='publie';
-			else {
-				$statut = 'prop';
-				foreach(array('prepa','prop','publie','refuse') as $s)
-					if (autoriser(
-							'instituer',
-							(in_array($row['type_form'],array('','sondage'))?'form':$row['type_form']).'_donnee',
-							0,NULL,array('id_form'=>$id_form,'statut'=>'prepa','nouveau_statut'=>$s))){
-						$statut = $s;
-						break;
-					}
-			}
-			// D'abord creer la reponse dans la base de donnees
-			if ($ok) {
-				if ($id_donnee>0 AND autoriser('modifier', 'donnee', $id_donnee, NULL, array('id_form'=>$id_form))){
-					spip_query("UPDATE spip_forms_donnees SET ip="._q($GLOBALS['ip']).", url="._q($url).", confirmation="._q($confirmation).", cookie="._q($cookie)." ".
-						"WHERE id_donnee=".intval($id_donnee));
-				} elseif (autoriser('creer', 'donnee', 0, NULL, array('id_form'=>$id_form))){
-					if ($rang==NULL) $rang = array('rang'=>forms_rang_prochain($id_form));
-					elseif(!is_array($rang)) $rang=array('rang'=>$rang);
-					spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie, "
-					  . implode(',',array_keys($rang)).") "
-					  .	"VALUES (".intval($id_form).","._q($id_auteur).", NOW(),"._q($GLOBALS['ip']).","
-					  . _q($url).", '$confirmation', '$statut',"._q($cookie).","
-					  . implode(',',array_map('_q',$rang)) .")");
-					$id_donnee = spip_insert_id();
-					# cf. GROS HACK inc/forms_tables_affichage
-					# rattrapper les documents associes a cette nouvelle donnee
-					# ils ont un id = 0-id_auteur
-					spip_query("UPDATE spip_documents_donnees SET id_donnee = $id_donnee WHERE id_donnee = ".(0-$GLOBALS['auteur_session']['id_auteur']));
-					# cf. GROS HACK 2 balise/forms
-					# rattrapper les documents associes a cette nouvelle donnee
-					# ils ont un id = 0-id_auteur
-					spip_query("UPDATE spip_forms_donnees_donnees SET id_donnee = $id_donnee WHERE id_donnee = ".(0-$GLOBALS['auteur_session']['id_auteur']));
-				}
-				if (!($id_donnee>0)) {
-					$erreur['@'] = _T("forms:probleme_technique");
-					$ok = false;
-				}
-				else {
-					$_GET["deja_enregistre_$id_form"] = $id_donnee;
-				}
-			}
-
-			// Puis enregistrer les differents champs
-			if ($ok) {
-				#$inserts = forms_insertions_reponse_post($id_form,$id_donnee,$erreur,$ok,$c);
-				if (!forms_modifier_reponse($id_form,$id_donnee,$erreur, $c)) {
-					// Reponse vide => annuler
-					$erreur['@'] = _T("forms:remplir_un_champ");
-					$row = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE id_donnee=".intval($id_donnee));
-					if(!$row = spip_fetch_array($row))
-						spip_query("DELETE FROM spip_forms_donnees WHERE id_donnee=".intval($id_donnee));
-					$ok = false;
-				}
-			}
-			/*if ($ok) {
-				include_spip('inc/securiser_action');
-				spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee=".intval($id_donnee));
-				spip_query("INSERT INTO spip_forms_donnees_champs (id_donnee, champ, valeur) ".
-					"VALUES ".join(',', $inserts));
-			}*/
-			if ($ok || $confirme) {
-				if ($champconfirm)
-					if ($row=spip_fetch_array(spip_query("SELECT * FROM spip_forms_donnees_champs WHERE id_donnee=".intval($id_donnee)." AND champ="._q($champconfirm))))
-						$mailconfirm = $row['valeur'];
-				if (($email) || ($mailconfirm)) {
-					include_spip("inc/session");
-					$hash = md5("forms confirme reponse $id_donnee $cookie ".hash_env());
-					$url = generer_url_public($script_validation,"mel_confirm=oui&id_donnee=$id_donnee&hash=$hash".($script_args?"&$script_args":""));
-					$r = $url;
-					if ($mailconfirm) $reponse = $mailconfirm;
-				}
-				if ($row['type_form']=='sondage') {
-					include_spip("inc/session");
-					$hash = md5("forms valide reponse sondage $id_donnee $cookie ".hash_env());
-					$url = generer_url_public($script_validation,"verif_cookie=oui&id_donnee=$id_donnee&hash=$hash".($script_args?"&$script_args":""));
-					$r = $url;
-				}
+				$_GET["deja_enregistre_$id_form"] = $id_donnee;
 			}
 		}
-		return $r;
+
+		// Puis enregistrer les differents champs
+		if ($ok) {
+			if (!forms_donnee_modifier($id_form,$id_donnee,$erreur, $c)) {
+				// Reponse vide => annuler
+				$erreur['message_erreur'] = _T("forms:remplir_un_champ");
+				if(!sql_countsel("spip_forms_donnees_champs","id_donnee=".intval($id_donnee)))
+					sql_delete("spip_forms_donnees","id_donnee=".intval($id_donnee));
+				$ok = false;
+			}
+		}
+		if ($ok || $confirme) {
+			if ($champconfirm
+			  AND $row=sql_fetsel("valeur","spip_forms_donnees_champs","id_donnee=".intval($id_donnee)." AND champ=".sql_quote($champconfirm)))
+					$mailconfirm = $row['valeur'];
+			if (($email) || ($mailconfirm)) {
+				include_spip("inc/session");
+				$hash = md5("forms confirme reponse $id_donnee $cookie ".hash_env());
+				$url = generer_url_public($script_validation,"mel_confirm=oui&id_donnee=$id_donnee&hash=$hash".($script_args?"&$script_args":""));
+				$r = $url;
+				if ($mailconfirm) $reponse = $mailconfirm;
+			}
+			if ($row['type_form']=='sondage') {
+				include_spip("inc/session");
+				$hash = md5("forms valide reponse sondage $id_donnee $cookie ".hash_env());
+				$url = generer_url_public($script_validation,"verif_cookie=oui&id_donnee=$id_donnee&hash=$hash".($script_args?"&$script_args":""));
+				$r = $url;
+			}
+		}
 	}
+	return $r;
+}
+
+?>
