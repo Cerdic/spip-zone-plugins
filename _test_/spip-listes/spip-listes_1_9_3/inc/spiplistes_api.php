@@ -397,7 +397,8 @@ function spiplistes_courriers_en_queue_compter ($sql_whereq = "") {
  * @param $id_liste int
  */
 function spiplistes_listes_pied_patron ($id_liste) {
-	if ($result = sql_getfetsel('pied_page', 'spip_listes', "id_liste=".sql_quote($id_liste), '','',1) === false) {
+	$result = sql_getfetsel('pied_page', 'spip_listes', "id_liste=".sql_quote($id_liste), '','',1);
+	if ($result === false) {
 		spiplistes_sqlerror_log("listes_pied_patron");
 	}
 	return($result);
