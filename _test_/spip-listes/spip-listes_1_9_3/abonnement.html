@@ -32,9 +32,9 @@
 			#FORMULAIRE_ABONNEMENT
 			]
 [(#REM)
-	Si (d) présent dans l'url, propose la modification de l'abonnement			
+	Si (d) present dans l'url, propose la modification de l'abonnement			
 ][(#ENV{d}|?{' ',''})
-			#FORMULAIRE_MODIF_ABONNEMENT
+			[(#SPIP_VERSION|>={2}|?{#FORMULAIRE_MODIF_ABONNEMENT2,#FORMULAIRE_MODIF_ABONNEMENT})]
 			]
 		</div>
 [(#REM) 	####################################
