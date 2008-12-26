@@ -18,8 +18,9 @@ function forms_calcule_les_valeurs($type, $id_donnee, $champ, $id_form, $separat
 	if (strncmp($champ,'joint_',6)!=0){
 		if ($raw_id!=$id_donnee){
 			$raw_vals = array();
-			$res = spip_query("SELECT champ,valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
-			while ($row = spip_fetch_array($res)) $raw_vals[$row['champ']][] = $row['valeur'];
+			$rows = sql_allfetsel("champ,valeur","spip_forms_donnees_champs","id_donnee=".intval($id_donnee));
+			foreach($rows as $row)
+				$raw_vals[$row['champ']][] = $row['valeur'];
 			$raw_id = $id_donnee;
 		}
 		if (isset($raw_vals[$champ]))
@@ -36,8 +37,7 @@ function forms_calcule_les_valeurs($type, $id_donnee, $champ, $id_form, $separat
 		static $prefixi18n = array();
 		static $liste_table = array();
 		if (!isset($type_joint[$id_form][$champ])){
-			$res = spip_query("SELECT extra_info FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ="._q($champ));
-			if ($row = spip_fetch_array($res))
+			if ($row = sql_fetsel("extra_info","spip_forms_champs","id_form=".intval($id_form)." AND champ=".sql_quote($champ)))
 				$type_joint[$id_form][$champ] = $row["extra_info"];
 			else return "";
 		}
@@ -46,24 +46,21 @@ function forms_calcule_les_valeurs($type, $id_donnee, $champ, $id_form, $separat
 			$prefixi18n[$type] = forms_prefixi18n($type);
 		if (!isset($liste_table[$type])){
 			include_spip("base/forms_base_api_v2");
-			$liste_table[$type] = implode(",",forms_lister_tables($type));
+			$liste_table[$type] = forms_lister_tables($type);
 		}
 		include_spip("base/abstract_sql");
-		$in = calcul_mysql_in("d.id_form",$liste_table[$type]); 
 		$pre = $prefixi18n[$type];
-		$res = spip_query(
-		  "SELECT id_donnee_liee 
-		  FROM spip_forms_donnees_donnees AS l
-		  JOIN spip_forms_donnees AS d ON d.id_donnee=l.id_donnee_liee
-		  WHERE $in AND l.id_donnee="._q($id_donnee));
-		$cpt = spip_num_rows($res);
+		$rows = sql_allfetsel("id_donnee_liee",
+		  "spip_forms_donnees_donnees AS l JOIN spip_forms_donnees AS d ON d.id_donnee=l.id_donnee_liee",
+		  sql_in("d.id_form",$liste_table[$type])." AND l.id_donnee=".intval($id_donnee));
+		$cpt = count($rows);
 		$out = "";
 		if (!$etoile){
 			if ($cpt==0) $out .= "";//_T("$pre:aucune_reponse");
 			elseif ($cpt>5) $out .= _T("$pre:nombre_reponses",array('nombre'=>$cpt));
 			//else if ($cpt==1) $out .= _T("$pre:une_reponse");
 			else {
-				while ($row = spip_fetch_array($res)){
+				foreach($rows as $row){
 					list(,,,$resume) = forms_informer_donnee($row['id_donnee_liee']);
 					$out .= implode(" ",$resume).$separateur;
 				}
@@ -71,7 +68,7 @@ function forms_calcule_les_valeurs($type, $id_donnee, $champ, $id_form, $separat
 		}
 		else {
 			$out .="0";
-			while ($row = spip_fetch_array($res))
+			foreach($rows as $row)
 				$out .= $separateur.$row['id_donnee_liee'];
 		}
 		return $out;
@@ -88,8 +85,7 @@ function forms_calcule_les_valeurs($type, $id_donnee, $champ, $id_form, $separat
 		$ok = $ok && in_array($type, array('forms_donnees_champs','forms_champs','forms_donnees'));
 		// on recupere la valeur du champ si pas deja la
 		if ($ok && !$valeur){
-			$res = spip_query("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champ));
-			if ($row = spip_fetch_array($res))
+			if ($row = sql_fetsel("valeur","spip_forms_donnees_champs","id_donnee=".intval($id_donnee)." AND champ=".sql_quote($champ)))
 				$valeur = $row['valeur'];
 			else
 				$ok = false;
@@ -105,8 +101,8 @@ function forms_calcule_les_valeurs($type, $id_donnee, $champ, $id_form, $separat
 				case 'select':
 				case 'multiple':
 					if (!isset($structure[$id_form][$champ]['choix'][$valeur])){
-						$res = spip_query("SELECT choix,titre FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
-						while ($row = spip_fetch_array($res))
+						$rows = sql_allfetsel("choix,titre","spip_forms_champs_choix","id_form=".intval($id_form)." AND champ=".sql_quote($champ));
+						foreach($rows as $row)
 							$structure[$id_form][$champ]['choix'][$row['choix']] = $row['titre'];
 					}
 					if (isset($structure[$id_form][$champ]['choix'][$valeur]))
@@ -114,9 +110,10 @@ function forms_calcule_les_valeurs($type, $id_donnee, $champ, $id_form, $separat
 					break;
 				case 'mot':
 					if (!isset($mots_s[$valeur])){
-						$res = spip_query("SELECT titre FROM spip_mots WHERE id_mot="._q($valeur));
-						if ($row = spip_fetch_array($res)) $mots_s[$valeur] = $row['titre'];
-						else $mots_s[$valeur] = $valeur;
+						if ($row = sql_fetsel("titre","spip_mots","id_mot=".intval($valeur)))
+							$mots_s[$valeur] = $row['titre'];
+						else
+							$mots_s[$valeur] = $valeur;
 					}
 					$valeur = $mots_s[$valeur];
 					break;
@@ -186,48 +183,44 @@ function forms_calcule_les_valeurs($type, $id_donnee, $champ, $id_form, $separat
 		$r = '';
 		$id_form = intval($id_form);
 	
-		$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
-		if (!$row = spip_fetch_array($result)) return '';
+		if (!$row = sql_fetsel("*","spip_forms","id_form=".intval($id_form))) return '';
 		$type_form = $row['type_form'];
 	
 		$r .= "<div class='spip_sondage'>\n";
 		
-		$res2 = spip_query("SELECT * FROM spip_forms_champs AS champs
-		WHERE id_form="._q($id_form)." AND type IN ('select','multiple','mot') ORDER BY champ");
+		$res2 = sql_select("*","spip_forms_champs AS champs","id_form=".intval($id_form)." AND ".sql_in("type",array('select','multiple','mot')),"","champ");
 		while ($row2 = spip_fetch_array($res2)) {
 			// On recompte le nombre total de reponses reelles 
 			// car les champs ne sont pas forcement obligatoires
-			$row3=spip_fetch_array(spip_query("SELECT COUNT(DISTINCT c.id_donnee) AS num ".
-				"FROM spip_forms_donnees AS r LEFT JOIN spip_forms_donnees_champs AS c USING (id_donnee) ".
-				"WHERE r.id_form="._q($id_form)." AND r.confirmation='valide' AND r.statut='publie' AND c.champ="._q($row2['champ'])));
+			$row3=sql_fetsel("COUNT(DISTINCT c.id_donnee) AS num",
+				"spip_forms_donnees AS r LEFT JOIN spip_forms_donnees_champs AS c ON r.id_donnee=c.id_donnee",
+				"r.id_form=".intval($id_form)." AND r.confirmation='valide' AND r.statut='publie' AND c.champ=".sql_quote($row2['champ']));
 			if (!$row3 OR !($total_reponses=$row3['num']))
 				continue;
 	
 			// Construire la liste des valeurs autorisees pour le champ
 			$liste = array();
 			if ($row2['type'] != 'mot'){
-				$res3 = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($row2['champ']));
-				while ($row3=spip_fetch_array($res3))
+				$rows3 = sql_allfetsel("choix,titre","spip_forms_champs_choix","id_form=".intval($id_form)." AND champ=".sql_quote($row2['champ']));
+				foreach($rows3 as $row3)
 					$liste[$row3['choix']] = $row3['titre'];
 			}
 			else {
 				$id_groupe = intval($row2['extra_info']);
-				$res3 = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe=$id_groupe ORDER BY titre");
-				while ($row3 = spip_fetch_array($res3))
+				$rows3 = sql_allfetsel("id_mot, titre","spip_mots","id_groupe=".intval($id_groupe),"","titre");
+				foreach($rows3 as $row3)
 					$liste[$row3['id_mot']] = $row3['titre'];
 			}
 	
 			// Nombre de reponses pour chaque valeur autorisee
-			$query = "SELECT c.valeur, COUNT(*) AS num ".
-				"FROM spip_forms_donnees AS r LEFT JOIN spip_forms_donnees_champs AS c USING (id_donnee) ".
-				"WHERE r.id_form="._q($id_form)." AND r.confirmation='valide' AND r.statut='publie' ".
-				"AND c.champ="._q($row2['champ'])." GROUP BY c.valeur";
-			$result = spip_query($query);
+			$result = sql_select("c.valeur, COUNT(*) AS num",
+				"spip_forms_donnees AS r LEFT JOIN spip_forms_donnees_champs AS c ON c.id_donnee=r.id_donnee",
+				"r.id_form=".intval($id_form)." AND r.confirmation='valide' AND r.statut='publie' AND c.champ=".sql_quote($row2['champ']),
+				"c.valeur");
 			$chiffres = array();
 			// Stocker pour regurgiter dans l'ordre
-			while ($row = spip_fetch_array($result)) {
+			while ($row = spip_fetch_array($result))
 				$chiffres[$row['valeur']] = $row['num'];
-			}
 			
 			// Afficher les resultats
 			$r .= ($t=typo($row2['titre']))?"<strong>$t :</strong>":"";
@@ -246,10 +239,7 @@ function forms_calcule_les_valeurs($type, $id_donnee, $champ, $id_form, $separat
 			$r .= "<br />\n";
 		}
 	
-		$query = "SELECT COUNT(*) AS num FROM spip_forms_donnees ".
-			"WHERE id_form="._q($id_form)." AND confirmation='valide' AND statut='publie'";
-		$result = spip_query($query);
-		list($num) = spip_fetch_array($result,SPIP_NUM);
+		$num = sql_countsel("spip_forms_donnees","id_form=".intval($id_form)." AND confirmation='valide' AND statut='publie'");
 		$r .= "<strong>"._T("forms:total_votes")." : $num</strong>";
 	
 		$r .= "</div>\n";

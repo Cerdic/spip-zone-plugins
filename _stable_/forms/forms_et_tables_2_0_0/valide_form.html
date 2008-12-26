@@ -27,9 +27,8 @@ function valide_sondage()
 	$renvoyer_image = false;
 
 	if ($verif_cookie == 'oui' AND ($id_donnee = intval($id_donnee))) {
-		$query = "SELECT * FROM spip_forms_donnees WHERE id_donnee=$id_donnee AND confirmation='attente'";
-		$result = spip_query($query);
-		if ($row = spip_fetch_array($result)) {
+		$result = sql_select("*","spip_forms_donnees","id_donnee=".intval($id_donnee)." AND confirmation='attente'");
+		if ($row = sql_fetch($result)) {
 			$id_form = $row['id_form'];
 			$cookie = $row['cookie'];
 			$nom_cookie = forms_nom_cookie_form($id_form);
@@ -39,20 +38,15 @@ function valide_sondage()
 			if ($cookie && $cookie == $_COOKIE[$nom_cookie]
 				&& ($hash_verif==$hash)) {
 				// Ensuite verifier que le cookie n'a pas deja ete utilise pour le meme formulaire
-				$query = "SELECT id_donnee FROM spip_forms_donnees ".
-					"WHERE id_form=$id_form AND id_donnee!=$id_donnee AND confirmation='valide' AND cookie='".addslashes($cookie)."'";
-				if (!spip_num_rows(spip_query($query))) {
-					$query = "UPDATE spip_forms_donnees SET confirmation='valide' WHERE id_donnee=$id_donnee";
-					spip_query($query);
+				if (!sql_countsel("spip_forms_donnees","id_form=".intval($id_form)." AND id_donnee!=".intval($id_donnee)." AND confirmation='valide' AND cookie=".sql_quote($cookie))) {
+					sql_updateq("spip_forms_donnees",array("confirmation"=>'valide'),"id_donnee=".intval($id_donnee));
 				}
 			}
 		}
 		$renvoyer_image = true;
 	}
 	else if ($mel_confirm == 'oui' AND ($id_donnee = intval($id_donnee))) {
-		$query = "SELECT * FROM spip_forms_donnees WHERE id_donnee=$id_donnee";
-		$result = spip_query($query);
-		if ($row = spip_fetch_array($result)) {
+		if ($row = sql_fetsel("*","spip_forms_donnees","id_donnee=".intval($id_donnee))) {
 			$id_form = $row['id_form'];
 			$cookie = $row['cookie'];
 			// D'abord verifier que l'URL est legitime, donc que la demande a bien
