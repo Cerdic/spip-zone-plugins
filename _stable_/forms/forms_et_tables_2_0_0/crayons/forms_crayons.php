@@ -47,8 +47,7 @@ function forms_champ_valeur_colonne_table($table,$champ,$id){
 	$form_champ = $id[1];
 	
 	if (!preg_match(',^\w+$,',$champ)
-	OR !$res = spip_query("SELECT $champ FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ IN (".implode(',',array_map('_q',$form_champ)).")")
-	OR !$row = spip_fetch_array($res))
+	 OR !$row = sql_fetsel($champ,"spip_forms_champs","id_form=".intval($id_form)." AND ".sql_in("champ",$form_champ)))
 		return false;
 
 	return $row;
@@ -60,17 +59,15 @@ function forms_champ_revision($id,$c=NULL){
 	$id_form = $id[0];
 	$form_champ = $id[1];
 
-	$set = "";
+	$set = array();
 	foreach(array('titre','obligatoire','specifiant','public','aide','html_wrap') as $champ){
 		if ($v = _request($champ,$c)){
-			$set .= ",$champ="._q($v);
+			$set[$champ]=$v;
 		}
 	}
 
-	if (strlen($set)){
-		$set = substr($set,1);
-		spip_query("UPDATE spip_forms_champs SET $set WHERE id_form="._q($id_form)." AND champ="._q($form_champ));
-	}
+	if (count($set))
+		sql_updateq("spip_forms_champs",$set,"id_form=".intval($id_form)." AND champ=".sql_quote($form_champ));
 	return true;
 }
 
@@ -78,17 +75,16 @@ function forms_champ_revision($id,$c=NULL){
 function form_revision($id,$c=NULL){
 	$id = explode('-',$id);
 	$id_form = $id[0];
-	$set = "";
+
+	$set = array();
 	foreach(array('titre','descriptif','texte','html_wrap') as $champ){
 		if ($v = _request($champ,$c)){
-			$set .= ",$champ="._q($v);
+			$set[$champ]=$v;
 		}
 	}
 
-	if (strlen($set)){
-		$set = substr($set,1);
-		spip_query("UPDATE spip_forms SET $set WHERE id_form="._q($id_form));
-	}
+	if (count($set))
+		sql_updateq("spip_forms",$set,"id_form=".intval($id_form));
 	return true;
 }
 
@@ -96,8 +92,7 @@ function form_revision($id,$c=NULL){
 // VUE
 //
 function vues_forms_donnee($type, $champ, $id_donnee, $content){
-	$res = spip_query("SELECT d.id_form,f.type_form FROM spip_forms_donnees AS d JOIN spip_forms AS f ON f.id_form=d.id_form WHERE d.id_donnee="._q($id_donnee));
-	if( !$row = spip_fetch_array($res))
+	if( !$row = sql_fetsel("d.id_form,f.type_form","spip_forms_donnees AS d JOIN spip_forms AS f ON f.id_form=d.id_form","d.id_donnee=".intval($id_donnee)))
 		return "";
 	$type_form = $row['type_form'];
 	$id_form = $row['id_form'];
@@ -115,7 +110,6 @@ function vues_forms_donnee($type, $champ, $id_donnee, $content){
 		    'lang' => $GLOBALS['spip_lang']
 		);
 		$contexte = array_merge($contexte, $content);
-		include_spip('public/assembler');
 		return recuperer_fond($fond, $contexte);
   }
 }

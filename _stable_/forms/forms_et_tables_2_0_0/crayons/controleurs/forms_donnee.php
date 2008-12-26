@@ -14,8 +14,7 @@
 // un controleur qui n'utilise que php et les inputs défauts
 function controleurs_forms_donnee_dist($regs) {
 	list(,$crayon,$type,$champ,$id) = $regs;
-	$res = spip_query("SELECT d.id_form,f.type_form FROM spip_forms_donnees AS d JOIN spip_forms AS f ON f.id_form=d.id_form WHERE d.id_donnee="._q($id));
-	if( !$row = spip_fetch_array($res))
+	if( !$row = sql_fetsel("d.id_form,f.type_form","spip_forms_donnees AS d JOIN spip_forms AS f ON f.id_form=d.id_form","d.id_donnee=".intval($id)))
 		return array("$type $id $champ: " . _U('crayons:pas_de_valeur'), 6);
 	$id_form = $row['id_form'];
 	$type_form = $row['type_form'];

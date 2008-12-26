@@ -18,8 +18,7 @@ function controleurs_forms_champ_dist($regs) {
 	$form_champ = $e[1];
 	
 	if (!preg_match(',^\w+$,',$champ)
-	OR !$res = spip_query("SELECT $champ FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ="._q($form_champ))
-	OR !$row = spip_fetch_array($res))
+	OR !$row = sql_fetsel($champ,"spip_forms_champs","id_form=".intval($id_form)." AND champ=".sql_quote($form_champ)))
 		return array("$type $id_form:$form_champ $champ: " . _U('crayons:pas_de_valeur'), 6);
 
 	$valeur = $row[$champ];
