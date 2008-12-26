@@ -40,21 +40,17 @@ function inscription2_upgrade(){
 		//definition de la table cible
 		$table_nom = "spip_auteurs_elargis";
 	
-		sql_create($table_nom,array("id_auteur"=> "bigint(21) NOT NULL default '0'"), array('PRIMARY KEY' => "id_auteur"));
-	
 		//ajout des index
 		$desc = sql_showtable($table_nom,'', false);
 		
-		if(is_array($desc) and $desc['key']['PRIMARY KEY']!='id_auteur'){
-			spip_query("ALTER TABLE ".$table_nom." DROP PRIMARY KEY");
-			if(!isset($desc['fields']['id_auteur']))
+		if(isset($desc['field']) and $desc['key']['PRIMARY KEY']!='id_auteur'){
+			if(!isset($desc['field']['id_auteur'])){
 				spip_query("ALTER TABLE ".$table_nom." ADD id_auteur INT NOT NULL PRIMARY KEY");
+			}
+			spip_query("ALTER TABLE $table_nom DROP id, DROP INDEX id_auteur, ADD PRIMARY KEY (id_auteur)");
+		}else{
+			sql_create($table_nom,array("id_auteur"=> "bigint(21) NOT NULL default '0'"), array('PRIMARY KEY' => "id_auteur"));
 		}
-		
-		if(isset($desc['key']['PRIMARY KEY id'])){
-			spip_query("ALTER TABLE $table_nom DROP INDEX id_auteur, DROP PRIMARY KEY id, ADD PRIMARY KEY (id_auteur)");
-		}
-
 
 		if(!$lala){
 		ecrire_meta(
@@ -241,7 +237,10 @@ function inscription2_upgrade(){
 	
 		//les pays
 		include(_DIR_PLUGIN_INSCRIPTION2."/inc/pays.php");
-		sql_drop_table("spip_pays");
+		$descpays = sql_showtable('spip_pays', '', false);
+		if(isset($descpays['field'])){
+			sql_drop_table("spip_pays");
+		}
 		spip_query("CREATE TABLE spip_geo_pays (id_pays SMALLINT NOT NULL AUTO_INCREMENT PRIMARY KEY, pays varchar(255) NOT NULL );");
 		spip_query("INSERT INTO spip_geo_pays (pays) VALUES (\"".join('"), ("',$liste_pays)."\")");
 		echo "Inscription2 installe @ ".$version_base;
@@ -255,10 +254,13 @@ function inscription2_upgrade(){
 		$table_pays = "spip_geo_pays";
 		$descpays = sql_showtable($table_pays, '', false);
 		
-		sql_drop_table("spip_pays");
-		spip_query("CREATE TABLE spip_geo_pays (id_pays SMALLINT NOT NULL AUTO_INCREMENT PRIMARY KEY, nom varchar(255) NOT NULL );");
+		$descpays_old = sql_showtable('spip_pays', '', false);
+		if(isset($descpays_old['field'])){
+			sql_drop_table("spip_pays");
+		}
 		
 		if(!isset($descpays['field']['pays'])){
+			spip_query("CREATE TABLE spip_geo_pays (id_pays SMALLINT NOT NULL AUTO_INCREMENT PRIMARY KEY, nom varchar(255) NOT NULL );");
 			spip_query("INSERT INTO spip_geo_pays (nom) VALUES (\"".join('"), ("',$liste_pays)."\")");
 		}
 		
@@ -304,7 +306,7 @@ function inscription2_upgrade(){
 		
 		$spip_societes_key = array('PRIMARY KEY' => 'id_societe', 'KEY id_pays' => 'id_pays');
 		
-		sql_create('spip_societes', $spip_societes,$spip_societes_key,true);
+		sql_create('spip_societes', $spip_societes, $spip_societes_key,true);
 		
 		echo "Inscription2 update @ 0.62<br/>On gere les societes aussi dans une table";
 		ecrire_meta('inscription2_version',$current_version=0.62);
@@ -332,7 +334,7 @@ function inscription2_upgrade(){
 				$desc['field'][$cle]='';
 			}
 		}
-		if (!lire_config('plugin/SPIPLISTES') && !lire_config('plugin/ECHOPPE')){
+		if (!lire_config('plugin/SPIPLISTES')){
 			sql_drop_table('spip_auteurs_elargis');
 		}
 		if(!lire_config('spip_geo_base_version')){
