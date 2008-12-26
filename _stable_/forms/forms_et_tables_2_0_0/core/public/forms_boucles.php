@@ -85,7 +85,7 @@
 			$k = count($boucle->join)+1;
 			$boucle->join[$k]= array($t,'id_donnee');
 			$boucle->from["L$k"]= 'spip_forms_donnees_champs';
-			$op = array("'LIKE'","'L$k.valeur'","_q(strpos($_quoi,'%')===false?'%'.".$_quoi.".'%':$_quoi)");
+			$op = array("'LIKE'","'L$k.valeur'","sql_quote(strpos($_quoi,'%')===false?'%'.".$_quoi.".'%':$_quoi,'".$boucle->sql_serveur."')");
 			$boucle->where[]= array("'?'",$_quoi,$op,"''");
 		}
 	}
@@ -102,7 +102,7 @@
 			$k = count($boucle->join)+1;
 			$boucle->join[$k]= array($t,'id_donnee');
 			$boucle->from["L$k"]= 'spip_forms_donnees_champs';
-			$op = array("'='", "'L$k.champ'", "_q(".$_quoi.")");
+			$op = array("'='", "'L$k.champ'", "sql_quote(".$_quoi.",'".$boucle->sql_serveur."')");
 			$boucle->where[]= array("'?'","!in_array($_quoi,array('rang','date','id_donnee','url'))",$op,"''");
 			$boucle->order[]= "(in_array($_quoi,array('rang','date','id_donnee','url'))?'$t.'.$_quoi:(strncmp($_quoi,'date_',5)==0?'STR_TO_DATE(L$k.valeur,\'%d/%m/%Y\')':'L$k.valeur'))".($not?".' DESC'":"");
 		}
@@ -139,8 +139,8 @@
 			$boucle->where[]= array("'='","'$t.id_form'",$_id_form);
 			$boucle->where[] = "('('.(
 			".($test_cookie?"isset($_cookie)":"false")."?
-			('$t.cookie='._q(\$_COOKIE[\$cf]). ($_qui?' OR $t.id_auteur='._q($_qui):''))
-			:($_qui?'$t.id_auteur='._q($_qui):'0=1')
+			('$t.cookie='.sql_quote(\$_COOKIE[\$cf],'".$boucle->sql_serveur."'). ($_qui?' OR $t.id_auteur='.sql_quote($_qui,'".$boucle->sql_serveur."'):''))
+			:($_qui?'$t.id_auteur='.sql_quote($_qui,'".$boucle->sql_serveur."'):'0=1')
 			).')')";
 		}
 	}	
@@ -191,26 +191,27 @@
 			$boucle->from["L$k"]= 'spip_forms_donnees_champs';
 			
 			$reqfiltre = calculer_requete_sql($filtre);
-			
+			$sql_serveur = $boucle->sql_serveur;
+
 			$boucle->hash .= <<<code
 	$reqfiltre
 	\$filtre = "";
 	\$res = 0;
-	while (\$row = @spip_abstract_fetch(\$result,"")){
+	while (\$row = @sql_fetch(\$result,"")){
 		if ((\$r = _request(\$row['champ']))!==NULL){
 			if (is_array(\$r)){
 				\$r = array_diff(\$r,array('')); // enlever les valeurs vides
 				if (\$row['type']=='select') \$res+=min(1,count(\$r)); // une seule valeur possible dans un select !
 				else \$res += count(\$r);
 				if (strlen(implode("",\$r))) 
-					\$filtre .= " OR (L$k.champ="._q(\$row['champ'])." AND L$k.valeur IN (".implode(',',array_map('_q',\$r))."))";
+					\$filtre .= " OR (L$k.champ=".sql_quote(\$row['champ'],'$sql_serveur')." AND ".sql_in("L$k.valeur", \$r.,"",'$sql_serveur'))";
 			}
 			elseif (strlen(\$r)){
 				\$res++;
 				if (in_array(\$row['type'],array('mot','select','multiple')))
-					\$filtre .= " OR (L$k.champ="._q(\$row['champ'])." AND L$k.valeur="._q(\$r).")";
+					\$filtre .= " OR (L$k.champ=".sql_quote(\$row['champ'],'$sql_serveur')." AND L$k.valeur=".sql_quote(\$r,'$sql_serveur').")";
 				else
-					\$filtre .= " OR (L$k.champ="._q(\$row['champ'])." AND L$k.valeur LIKE "._q(\$r).")";
+					\$filtre .= " OR (L$k.champ=".sql_quote(\$row['champ'],'$sql_serveur')." AND L$k.valeur LIKE ".sql_quote(\$r,'$sql_serveur').")";
 			}
 		}
 	}
@@ -253,7 +254,7 @@ code;
 			$reqverif = calculer_requete_sql($verif);
 			$boucle->hash = "$hash $reqverif \n$init
 
-	if (spip_abstract_count(\$result,'".$verif->sql_serveur."')==0){
+	if (sql_count(\$result,'".$verif->sql_serveur."')==0){
 	$req
 	} else";
 			

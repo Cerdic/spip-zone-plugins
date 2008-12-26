@@ -322,7 +322,7 @@ function forms_rechercher_donnee($recherche,$id_form=0,$champ=NULL,$sous_ensembl
 	  "dc.valeur LIKE ".sql_quote($recherche)
 	    . ($id_form?" AND d.id_form=".intval($id_form):"")
 	    . ($in?" AND $in":"")
-	    . ($champ?" AND dc.champ="._q($champ):"")
+	    . ($champ?" AND dc.champ=".sql_quote($champ):"")
 	  ));
 }
 
@@ -513,14 +513,14 @@ function forms_arbre_supprimer_donnee($id_form,$id_donnee,$recursif=true){
 	if ($recursif){
 		// OUI ! tout le sous arbre doit etre supprime
 		$delta = $row['bdte']-$row['bgch']+1;
-		$donnees = sql_allfetsel("id_donnee","spip_forms_donnees","id_form=".intval($id_form)." AND bgch>="._q($row['bgch'])." AND bdte<="._q($row['bdte']));
+		$donnees = sql_allfetsel("id_donnee","spip_forms_donnees","id_form=".intval($id_form)." AND bgch>=".intval($row['bgch'])." AND bdte<=".intval($row['bdte']));
 		$ok = true;
 		foreach($donnees as $row2)
 			$ok = $ok && forms_supprimer_donnee($id_form,$row2['id_donnee']);
 		
 		if (
-			sql_update("spip_forms_donnees",array("bgch"=>"bgch-$delta","bdte"=>"bdte-$delta"),"id_form=".intval($id_form)." AND bgch>"._q($row['bdte']))
-			AND sql_update("spip_forms_donnees",array("bdte"=>"bdte-$delta"),"id_form=".intval($id_form)." AND bdte>"._q($row['bdte'])." AND bgch<="._q($row['bdte']))
+			sql_update("spip_forms_donnees",array("bgch"=>"bgch-$delta","bdte"=>"bdte-$delta"),"id_form=".intval($id_form)." AND bgch>".intval($row['bdte']))
+			AND sql_update("spip_forms_donnees",array("bdte"=>"bdte-$delta"),"id_form=".intval($id_form)." AND bdte>".intval($row['bdte'])." AND bgch<=".intval($row['bdte']))
 			)
 			return $ok;
 		return false;
@@ -529,9 +529,9 @@ function forms_arbre_supprimer_donnee($id_form,$id_donnee,$recursif=true){
 		// NON ! on ne supprime que l'element
 		if (
 		  forms_supprimer_donnee($id_form,$id_donnee)
-		  AND sql_update("spip_forms_donnees",array("bgch"=>"bgch-1","bdte"=>"bdte-1","niveau"=>"niveau-1"),"id_form=".intval($id_form)." AND bdte<"._q($row['bdte'])." AND bgch>"._q($row['bgch']))
-		  AND sql_update("spip_forms_donnees",array("bgch"=>"bgch-2","bdte"=>"bdte-2"),"id_form=".intval($id_form)." AND bgch>"._q($row['bdte']))
-		  AND sql_update("spip_forms_donnees",array("bdte"=>"bdte-2"),"id_form=".intval($id_form)." AND bdte>"._q($row['bdte'])." AND bgch<="._q($row['bdte']))
+		  AND sql_update("spip_forms_donnees",array("bgch"=>"bgch-1","bdte"=>"bdte-1","niveau"=>"niveau-1"),"id_form=".intval($id_form)." AND bdte<".intval($row['bdte'])." AND bgch>".intval($row['bgch']))
+		  AND sql_update("spip_forms_donnees",array("bgch"=>"bgch-2","bdte"=>"bdte-2"),"id_form=".intval($id_form)." AND bgch>".intval($row['bdte']))
+		  AND sql_update("spip_forms_donnees",array("bdte"=>"bdte-2"),"id_form=".intval($id_form)." AND bdte>".intval($row['bdte'])." AND bgch<=".intval($row['bdte']))
 		  )
 			return true;
 		return false;

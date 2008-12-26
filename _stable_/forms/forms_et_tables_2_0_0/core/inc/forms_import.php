@@ -74,11 +74,29 @@ function forms_csvimport_ajoute_table_csv($data, $id_form, $assoc_field, &$erreu
 					$url = _DIR_RESTREINT_ABS;
 					if ($cle AND $cle_libre){
 						if (intval($id_donnee))
-							spip_abstract_insert("spip_forms_donnees","(id_donnee,id_form,date,ip,id_auteur,url,confirmation,statut,maj)","(".intval($id_donnee).",".intval($id_form).", NOW(),"._q($ip).","._q($id_auteur).","._q($url).", 'valide', 'publie', NOW() )");
+							$id_donnee = sql_insertq("spip_forms_donnees",
+							  array(
+							  "id_donnee"=>$id_donnee,
+							  "id_form"=>$id_form,
+							  "date"=>"NOW()",
+							  "ip"=>$ip,
+							  "id_auteur"=>$id_auteur,
+							  "url"=>$url,
+							  "confirmation"=>"valide",
+							  "statut"=>'publie',
+							  "maj"=>"NOW()"));
 					}
 					else
-						spip_abstract_insert("spip_forms_donnees","(id_form,date,ip,id_auteur,url,confirmation,statut,maj)","(".intval($id_form).", NOW(),"._q($ip).","._q($id_auteur).","._q($url).", 'valide', 'publie', NOW() )");
-					$id_donnee = spip_insert_id();
+						$id_donnee = sql_insertq("spip_forms_donnees",
+						  array(
+							  "id_form"=>$id_form,
+							  "date"=>"NOW()",
+							  "ip"=>$ip,
+							  "id_auteur"=>$id_auteur,
+							  "url"=>$url,
+							  "confirmation"=>"valide",
+							  "statut"=>'publie',
+							  "maj"=>"NOW()"));
 				}
 				if ($id_donnee){
 					foreach($c as $champ=>$values){
