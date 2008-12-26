@@ -65,11 +65,11 @@
 ][(#ENV{formulaire_affiche}|?{' ',''})
 			<div style="text-align: left;"> 
 				<strong><:spiplistes:format_de_reception:> :</strong><br /> 
-				<input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{'checked=checked',''})]  type="radio" id='fslhtml' />
+				<input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{'checked="checked"',''})]  type="radio" id='fslhtml' />
 				<label for='fslhtml'><:spiplistes:html:><:spiplistes:html_description:></label><br /> 
-				<input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{'checked=checked',''})] type="radio" id='fsltexte' />
+				<input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{'checked="checked"',''})] type="radio" id='fsltexte' />
 				<label for='fsltexte'><:spiplistes:texte_brut:></label><br /> 
-				<input name="suppl_abo" [(#ENV{format}|=={non}|?{'checked=checked',''})] value="non" type="radio" id='fslnon' />
+				<input name="suppl_abo" [(#ENV{format}|=={non}|?{'checked="checked"',''})] value="non" type="radio" id='fslnon' />
 				<label for='fslnon'><:spiplistes:desabonnement:></label><br /> 
 			</div> 
 			<input style="margin-top:3px" type='submit' name='Valider' value='<:spiplistes:abonnement_bouton:>' />
