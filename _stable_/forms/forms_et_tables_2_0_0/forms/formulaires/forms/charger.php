@@ -78,7 +78,7 @@ function formulaires_forms_charger_dist($id_form = 0, $id_article = 0, $id_donne
 		//On retourne les donnees si auteur ou cookie
 		$where_cookie="";
 		if ($cookie) { 
-			$where_cookie.="cookie="._q($cookie). ($id_auteur?" OR id_auteur=".intval($id_auteur):" AND id_auteur=0");
+			$where_cookie.="cookie=".sql_quote($cookie). ($id_auteur?" OR id_auteur=".intval($id_auteur):" AND id_auteur=0");
 		}
 		else if ($id_auteur)
 				$where_cookie.="id_auteur=".intval($id_auteur);
@@ -117,17 +117,16 @@ function forms_obligatoire($row,$forms_obligatoires){
 	while ($chercher && $i<count($form_tab)){
 		$form_id=$form_tab[$i];
 		$cookie = $_COOKIE[forms_nom_cookie_form($form_id)];
-		$q="SELECT id_form FROM spip_forms_donnees WHERE statut='publie' AND id_form="._q($form_id)." ";
-		if ($cookie) $q.="AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).") ";
+		$where_cookie = "";
+		if ($cookie)
+			$where_cookie="(cookie=".sql_quote($cookie)." OR id_auteur=".intval($id_auteur).")";
 		else
 			if ($id_auteur)
-				$q.="AND id_auteur="._q($id_auteur)." ";
+				$where_cookie="id_auteur=".intval($id_auteur);
 			else
-				$q.="AND 0=1 ";
-		$res=spip_query($q);
-		if (!spip_fetch_array($res)){
-			$res2 = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($form_id));
-			$returned = spip_fetch_array($res2);
+				$where_cookie="0=1";
+		if (!sql_countsel("spip_forms_donnees","statut='publie' AND id_form=".intval($form_id)." AND $where_cookie")){
+			$returned = sql_fetsel("*","spip_forms","id_form=".intval($form_id));
 			$chercher=false;
 		}
 		$i++;

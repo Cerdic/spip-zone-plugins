@@ -11,25 +11,26 @@
  *
  */
 
-	include_spip('forms_filtres');
-	function forms_calcule_les_valeurs($type, $id_donnee, $champ, $id_form, $separateur=" ",$etoile=false,$traduit=true){
-		static $raw_vals,$raw_id=0;
-		$lesvaleurs = array();
-		if (strncmp($champ,'joint_',6)!=0){
-			if ($raw_id!=$id_donnee){
-				$raw_vals = array();
-				$res = spip_query("SELECT champ,valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
-				while ($row = spip_fetch_array($res)) $raw_vals[$row['champ']][] = $row['valeur'];
-				$raw_id = $id_donnee;
-			}
-			if (isset($raw_vals[$champ]))
-				foreach($raw_vals[$champ] as $val)
-					$lesvaleurs[] = (!$traduit)?$val:forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $val, $id_form, $etoile);
-			return implode($separateur,$lesvaleurs);
+//include_spip('forms_filtres');
+function forms_calcule_les_valeurs($type, $id_donnee, $champ, $id_form, $separateur=" ",$etoile=false,$traduit=true){
+	static $raw_vals,$raw_id=0;
+	$lesvaleurs = array();
+	if (strncmp($champ,'joint_',6)!=0){
+		if ($raw_id!=$id_donnee){
+			$raw_vals = array();
+			$res = spip_query("SELECT champ,valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
+			while ($row = spip_fetch_array($res)) $raw_vals[$row['champ']][] = $row['valeur'];
+			$raw_id = $id_donnee;
 		}
-		else 
-			return forms_calcule_valeur_jointure($type, $id_donnee, $champ, $id_form, $separateur,$etoile);
+		if (isset($raw_vals[$champ]))
+			foreach($raw_vals[$champ] as $val)
+				$lesvaleurs[] = (!$traduit)?$val:forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $val, $id_form, $etoile);
+		return implode($separateur,$lesvaleurs);
 	}
+	else 
+		return forms_calcule_valeur_jointure($type, $id_donnee, $champ, $id_form, $separateur,$etoile);
+}
+	
 	function forms_calcule_valeur_jointure($type, $id_donnee, $champ, $id_form,$separateur,$etoile=false){
 		static $type_joint = array();
 		static $prefixi18n = array();
