@@ -32,8 +32,7 @@ function autoriser_donnee_dist($faire,$type,$id_donnee,$qui,$opt){
 	if (!isset($opt['id_form']) OR !isset($opt['statut'])){
 		if (!isset($opts[$id_donnee])){
 			$opts[$id_donnee] = array('id_form'=>0,'statut'=>'');
-			$res = spip_query("SELECT id_form,statut FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
-			if ($row = spip_fetch_array($res))
+			if ($row = sql_fetsel("id_form,statut","spip_forms_donnees","id_donnee=".intval($id_donnee)))
 				$opts[$id_donnee] = $row;
 			$opts[$id_donnee] = is_array($opt)?array_merge($opts[$id_donnee],$opt):$opts[$id_donnee];
 		}
@@ -42,8 +41,8 @@ function autoriser_donnee_dist($faire,$type,$id_donnee,$qui,$opt){
 	$id_form = $opt['id_form'];
 	if (!isset($opt['type_form'])){
 		if (!isset($types[$id_form])){
-			$res = spip_query("SELECT type_form FROM spip_forms WHERE id_form="._q($id_form));
-			if (!$row = spip_fetch_array($res)) return false;
+			if (!$row = sql_fetsel("type_form","spip_forms","id_form=".intval($id_form)))
+				return false;
 			$types[$id_form] = $row['type_form'];
 		}
 		$opt['type_form'] = $types[$id_form];
@@ -101,28 +100,27 @@ function autoriser_form_donnee_modifier_dist($faire, $type, $id_donnee, $qui, $o
 	if (!isset($opt['id_form']) OR !$id_form = $opt['id_form']) return false;
 	// un admin dans le back office a toujours le droit de modifier
 	if (($qui['statut'] == '0minirezo')) return true;
-	$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
-	if (!$row = spip_fetch_array($result)) return false;
+	if (!$row = sql_fetsel("*","spip_forms","id_form=".intval($id_form)))
+		return false;
 	include_spip('inc/forms');
 	$dejareponse=forms_verif_cookie_sondage_utilise($id_form);
 	global $auteur_session;
 	$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
 	$cookie = $_COOKIE[forms_nom_cookie_form($id_form)];
 	if (($row['modifiable'] == 'oui') && $dejareponse) {
-		$q = "SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form);
-		$q .= "AND (";
+		$where_cookie = "";
 		if ($cookie) { 
-			$q.="cookie="._q($cookie). ($id_auteur?" OR id_auteur="._q($id_auteur):" AND id_auteur=0");
+			$where_cookie = "(cookie=".sql_quote($cookie). ($id_auteur?" OR id_auteur=".intval($id_auteur):" AND id_auteur=0").")";
 		}
 		else if ($id_auteur)
-				$q.="id_auteur="._q($id_auteur);
+				$where_cookie = "id_auteur=".intval($id_auteur);
 			else
 				return false;
-		$q .= ')';
 		//si unique, ignorer id_donnee, si pas id_donnee, ne renverra rien
-		if ($row['multiple']=='oui' || !_DIR_RESTREINT) $q.=" AND id_donnee="._q($id_donnee);
-		$r=spip_query($q);
-		if ($r=spip_fetch_array($r)) return true;
+		if ($row['multiple']=='oui' || !_DIR_RESTREINT)
+		  $where_cookie .= " AND id_donnee=".intval($id_donnee);
+		if (sql_fetsel("id_donnee","spip_forms_donnees","id_form=".intval($id_form)." AND $where_cookie"))
+			return true;
 	}
 	return false;
 }
@@ -133,8 +131,8 @@ function autoriser_form_donnee_creer_dist($faire, $type, $id_donnee, $qui, $opt)
 	if (!isset($opt['id_form']) OR !$id_form = $opt['id_form']) return false;
 	// un admin dans le back office a toujours le droit d'inserer
 	if (($qui['statut'] == '0minirezo')) return true;
-	$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
-	if (!$row = spip_fetch_array($result)) return false;
+	if (!$row = sql_fetsel("multiple","spip_forms","id_form=".intval($id_form)))
+		return false;
 	if ($row['multiple']=='oui') return true;
 	$dejareponse=forms_verif_cookie_sondage_utilise($id_form);
 	if ($dejareponse) return false;

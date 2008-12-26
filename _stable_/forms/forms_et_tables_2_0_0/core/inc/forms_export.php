@@ -72,15 +72,12 @@ function forms_formater_les_reponses($id_form, $format, $separateur, &$fichiers,
 	// le support d'un autre format ne necessite que l'implementation de la fonction
 	// forms_formater_ligne_xxx avec xxx le nom du format
 	//
-	$nb_reponses = 0;
-	$row = spip_fetch_array(spip_query("SELECT COUNT(*) AS tot FROM spip_forms_donnees WHERE id_form=".intval($id_form)." AND confirmation='valide' AND statut<>'poubelle'"));
-	if ($row)	$nb_reponses = $row['tot'];
+	$nb_reponses = sql_countsel("spip_forms_donnees","id_form=".intval($id_form)." AND confirmation='valide' AND statut<>'poubelle'");
 
 	if (!$id_form || !autoriser('administrer','form',$id_form))
 		acces_interdit();
 
-	$result = spip_query("SELECT * FROM spip_forms WHERE id_form=".intval($id_form));
-	if ($row = spip_fetch_array($result)) {
+	if ($row = sql_fetsel("titre,descriptif,type_form","spip_forms","id_form=".intval($id_form))) {
 		$titre = $row['titre'];
 		$descriptif = $row['descriptif'];
 		$type_form = $row['type_form'];
@@ -119,11 +116,13 @@ function forms_formater_les_reponses($id_form, $format, $separateur, &$fichiers,
 	// Ensuite les reponses
 	$fichiers = array();
 	$id_donnee = 0;
-	$result = spip_query("SELECT r.id_donnee, r.date,r.url, c.champ, c.valeur ".
-		"FROM spip_forms_donnees AS r LEFT JOIN spip_forms_donnees_champs AS c USING (id_donnee) ".
-		"WHERE id_form=".intval($id_form)." AND confirmation='valide' AND statut<>'poubelle' AND c.id_donnee IS NOT NULL ".
-		"ORDER BY date, r.id_donnee");
-	while ($row = spip_fetch_array($result)) {
+	$rows = sql_allfetsel(
+	  "r.id_donnee, r.date,r.url, c.champ, c.valeur ",
+	  "spip_forms_donnees AS r LEFT JOIN spip_forms_donnees_champs AS c ON r.id_donnee=c.id_donnee",
+	  "id_form=".intval($id_form)." AND confirmation='valide' AND statut<>'poubelle' AND c.id_donnee IS NOT NULL ",
+	  "",
+		"date, r.id_donnee");
+	foreach($rows as $row) {
 		if ($id_donnee != $row['id_donnee']) {
 			if ($id_donnee)
 				$s .= forms_formater_reponse($ligne,$valeurs,$structure,$format,$separateur);

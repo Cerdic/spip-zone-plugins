@@ -14,12 +14,12 @@
 function forms_csvimport_ajoute_table_csv($data, $id_form, $assoc_field, &$erreur, $simu = false){
 	include_spip('inc/forms_type_champs');
 	$assoc = array_flip($assoc_field);
-	$res = spip_query("SELECT * FROM spip_forms WHERE id_form=".intval($id_form)." AND type_form NOT IN ('','sondage')");
-	if (!$row = spip_fetch_array($res)) {
+	if (!$row = sql_fetsel("*","spip_forms","id_form=".intval($id_form)." AND type_form NOT IN ('','sondage')")) {
 		$erreur[0][] = _L("Table introuvable");
 		return;
 	}
-
+	
+	include_spip('inc/forms');
 	$structure = forms_structure($id_form);
 	$cle = (isset($assoc_field['id_donnee']) AND ($assoc_field['id_donnee']!='-1'))?$assoc_field['id_donnee']:false;
 	$output = "";
@@ -55,16 +55,17 @@ function forms_csvimport_ajoute_table_csv($data, $id_form, $assoc_field, &$erreu
 	 		else if (!$simu) {
 				if ($cle) {
 					$id_donnee = $ligne[$cle];
-					$res = spip_query("SELECT id_form,statut FROM spip_forms_donnees WHERE id_donnee=".intval($id_donnee));
-					if ($row = spip_fetch_array($res) AND ($cle_libre = ($row['id_form']==$id_form))){
+					if ($row = sql_fetsel("id_form,statut","spip_forms_donnees","id_donnee=".intval($id_donnee))
+					  AND ($cle_libre = ($row['id_form']==$id_form))){
 						$creation = false;
-						$set = "";
+						$set = array();
 						foreach(array('date','url','ip','id_auteur') as $champ)
-							if (isset($assoc_field[$champ])) $set .= "$champ="._q($ligne[$assoc_field['date']]).", ";
-						$set.=" maj=NOW()";
+							if (isset($assoc_field[$champ]))
+								$set[$champ] = $ligne[$assoc_field['date']];
+						$set["maj"] = "NOW()";
 						if ($row['statut']=='poubelle')
-							$set .= ", statut = 'publie'";
-						spip_query("UPDATE spip_forms_donnees SET $set WHERE id_donnee=".intval($id_donnee)." AND id_form=".intval($id_form));
+							$set['statut'] = "publie";
+						sql_updateq("spip_forms_donnees",$set,"id_donnee=".intval($id_donnee)." AND id_form=".intval($id_form));
 					}
 				}
 				if ($creation){
@@ -82,11 +83,11 @@ function forms_csvimport_ajoute_table_csv($data, $id_form, $assoc_field, &$erreu
 				if ($id_donnee){
 					foreach($c as $champ=>$values){
 					  	if (!$creation)
-					  		spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee=".intval($id_donnee)." AND champ="._q($champ));
+					  		sql_delete("spip_forms_donnees_champs","id_donnee=".intval($id_donnee)." AND champ=".sql_quote($champ));
 					  	if (!is_array($values)) $values = array($values);
 					  	foreach($values as $v)
 					  		if (strlen($v))
-					  			spip_query("INSERT INTO spip_forms_donnees_champs (id_donnee,champ,valeur,maj) VALUES (".intval($id_donnee).","._q($champ).","._q($v).", NOW() )");
+					  			sql_insertq("spip_forms_donnees_champs",array("id_donnee"=>$id_donnee,"champ"=>$champ,"valeur"=>$v,"maj"=>"NOW()"));
 			 		}
 				}
 				else
