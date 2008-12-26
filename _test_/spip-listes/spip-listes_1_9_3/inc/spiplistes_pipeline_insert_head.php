@@ -23,7 +23,7 @@ function spiplistes_insert_head ($flux) {
 
 	$flux .= ""
 		. "\n\n<!-- PLUGIN SPIPLISTES v.: ".spiplistes_real_version_get(_SPIPLISTES_PREFIX)." -->\n"
-		. "<link rel='stylesheet' href='"._DIR_PLUGIN_SPIPLISTES."spiplistes_formulaire.css' type='text/css' media='all' />\n"
+		. "<link rel='stylesheet' href='".find_in_path('spiplistes_formulaire.css')."' type='text/css' media='all' />\n"
 		;
 
 	if(in_array(_request('page'), array(
@@ -32,7 +32,7 @@ function spiplistes_insert_head ($flux) {
 		)
 	) {
 		$flux .= ""
-			. "<link rel='stylesheet' href='"._DIR_PLUGIN_SPIPLISTES."spiplistes_style.css' type='text/css' media='all' />\n"
+			. "<link rel='stylesheet' href='".find_in_path('spiplistes_style.css')."' type='text/css' media='all' />\n"
 			;
 	}
 
