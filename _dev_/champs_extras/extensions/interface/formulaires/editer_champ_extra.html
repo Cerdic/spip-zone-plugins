@@ -6,25 +6,30 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_extra' value='#ENV{id_extra}' />
 		<ul>
-	  	#SET{fl,iextra}
+	  	#SET{fl,iextras}
 	  	#SET{name,champ}
+		#SET{label,#GET{fl}|concat{':label_',#GET{name}}|_T}
+		#SET{explications,#GET{fl}|concat{:caracteres_autorises_champ}|_T}
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 		#SET{obli,obligatoire}
 		#SET{disabled,#ENV{new}|non}
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	    	<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+	    	<label for="#GET{name}">#GET{label}</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<p class="explication"><:iextra:caracteres_autorises_champ:></p>
+				[<p class="explication">(#GET{explications})</p>]
 				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}"[ (#GET{disabled})disabled='disabled'] />
 				[(#GET{disabled}|oui)<input type='hidden' name='#GET{name}' value="#ENV{#GET{name}}" />]
 	    </li>
 		#SET{name,table}
+		#SET{label,#GET{fl}|concat{':label_',#GET{name}}|_T}
+		#SET{explications,''}
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 		#SET{obli,obligatoire}
 		#SET{disabled,#ENV{new}|non}
 		<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-			<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+	    	<label for="#GET{name}">#GET{label}</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				[<p class="explication">(#GET{explications})</p>]
 				<select name='#GET{name}' id='#GET{name}'[ (#GET{disabled})disabled='disabled']>
 					<BOUCLE_liste_objet(POUR){tableau #ARRAY{0,article,1,auteur,2,rubrique}}>
 					<option value='#VALEUR'[ (#ENV{#GET{name}}|=={#VALEUR}|oui)selected='selected']>[(#GET{fl}|concat{:table_,#VALEUR}|_T)]</option>
@@ -33,22 +38,28 @@
 				[(#GET{disabled}|oui)<input type='hidden' name='#GET{name}' value="#ENV{#GET{name}}" />]
 		</li>
 		#SET{name,label}
+		#SET{label,#GET{fl}|concat{':label_',#GET{name}}|_T}
+		#SET{explications,''}
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 		#SET{obli,obligatoire}
 		#SET{disabled,''}
 		<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-			<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+	    	<label for="#GET{name}">#GET{label}</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				[<p class="explication">(#GET{explications})</p>]
 				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" [ (#GET{disabled})disabled='disabled']/>
 				[(#GET{disabled}|oui)<input type='hidden' name='#GET{name}' value="#ENV{#GET{name}}" />]
 		</li>
 		#SET{name,type}
+		#SET{label,#GET{fl}|concat{':label_',#GET{name}}|_T}
+		#SET{explications,''}
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 		#SET{obli,obligatoire}
 		#SET{disabled,''}
 		<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-			<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+	    	<label for="#GET{name}">#GET{label}</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				[<p class="explication">(#GET{explications})</p>]
 				<select name='#GET{name}' id='#GET{name}'[ (#GET{disabled})disabled='disabled']>
 					<BOUCLE_liste_types(POUR){tableau #ARRAY{0,textarea,1,input}}>
 					<option value='#VALEUR'[ (#ENV{#GET{name}}|=={#VALEUR}|oui)selected='selected']>[(#GET{fl}|concat{:type_,#VALEUR}|_T)]</option>
@@ -57,12 +68,15 @@
 				[(#GET{disabled}|oui)<input type='hidden' name='#GET{name}' value="#ENV{#GET{name}}" />]
 		</li>
 		#SET{name,sql}
+		#SET{label,#GET{fl}|concat{':label_',#GET{name}}|_T}
+		#SET{explications,''}
 		#SET{obli,obligatoire}
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 		#SET{disabled,#ENV{new}|non}
 		<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-			<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+	    	<label for="#GET{name}">#GET{label}</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				[<p class="explication">(#GET{explications})</p>]
 				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}"[ (#GET{disabled})disabled='disabled']/>
 				[(#GET{disabled}|oui)<input type='hidden' name='#GET{name}' value="#ENV{#GET{name}}" />]
 		</li>

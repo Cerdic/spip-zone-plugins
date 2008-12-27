@@ -1,7 +1,7 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/champsextras');
+include_spip('inc/cextras');
 include_spip('base/postscriptum');
 	
 function postscriptum_upgrade($nom_meta_base_version,$version_cible){

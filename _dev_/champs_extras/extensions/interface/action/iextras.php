@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_iextra_dist() {
+function action_iextras_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	
@@ -20,19 +20,19 @@ function action_iextra_dist() {
 	if (!in_array($arg, array(
 		'supprimer_extra'))){
 			include_spip('inc/minipres');
-			echo minipres(_T('iextra:erreur_action',array("action"=>$arg)));
+			echo minipres(_T('iextras:erreur_action',array("action"=>$arg)));
 			exit;		
 	}
 	
 	// cas de suppression
 	if ($arg == 'supprimer_extra'){
-		include_spip('inc/iextra');
-		$extras = iextra_get_extras();
+		include_spip('inc/iextras');
+		$extras = iextras_get_extras();
 		if ($id = intval($id)) {
 			// $id a 1 de plus
 			$extra = $extras[--$id];
 			unset($extras[$id]);
-			iextra_set_extras($extras);
+			iextras_set_extras($extras);
 			
 			$table = table_objet_sql($extra['table']);
 			sql_alter("TABLE $table DROP $extra[champ]");

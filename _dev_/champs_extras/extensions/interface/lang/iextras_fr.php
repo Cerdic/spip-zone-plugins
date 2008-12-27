@@ -1,8 +1,8 @@
 <?php
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//A
-	'action_modifier' => 'Modifier',
-	'action_supprimer' => 'Supprimer',
+	'action_modifier' => 'modifier',
+	'action_supprimer' => 'supprimer',
 	//C
 	'caracteres_interdits' => 'Certains carac&egrave;res utilis&eacute;s ne conviennent pas pour ce champ.',
 	'caracteres_autorises_champ' => 'Caractères possibles : lettres sans accent, chiffres, - et _',
@@ -29,8 +29,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'table_auteur' => 'Auteurs',
 	'table_rubrique' => 'Rubriques',
 	
-	'titre_page_iextra' => 'Champs Extras',
-	'titre_iextra' => 'Champs Extras',
+	'titre_page_iextras' => 'Champs Extras',
+	'titre_iextras' => 'Champs Extras',
 	
 	'type_input'=>'Afficher une saisie input de type texte',
 	'type_textarea'=>'Afficher une saisie textarea',

@@ -2,23 +2,23 @@
 	<nom>Interface pour Champs Extras</nom>
 	<auteur>Matthieu Marcillaud [->magraine.net]</auteur>
 	<licence>GNU/GLP</licence>
-	<version>0.1</version>
+	<version>0.2</version>
+	<icon>images/iextras-64.png</icon>
 	<description>
 	Offre une interface pour g&eacute;rer des champs extras.
 	</description>
 	<etat>dev</etat>
-	<prefix>iextra</prefix>
-	<necessite id="champsextras" version="[0.1;]" />
+	<prefix>iextras</prefix>
+	<necessite id="cextras" version="[0.1;]" />
 	<necessite id="spip_bonux" version="[1.2;]" />
-	<options>iextra_options.php</options>
+	<options>iextras_options.php</options>
 	<pipeline>
 		<nom>declarer_champs_extras</nom>
-		<inclure>base/iextra.php</inclure>
+		<inclure>base/iextras.php</inclure>
 	</pipeline>
 	
-	<onglet id='interface_extra' parent='configuration'>
-		<icone>images/iextra-24.png</icone>
-		<titre>iextra:champs_extras</titre>
-		<url>iextra</url>
+	<onglet id='iextras' parent='configuration'>
+		<icone>images/iextras-24.png</icone>
+		<titre>iextras:champs_extras</titre>
 	</onglet>
 </plugin>
