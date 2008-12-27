@@ -28,8 +28,8 @@ function action_iextras_dist() {
 	if ($id_extra and ($arg == 'supprimer_extra')){
 		include_spip('inc/iextras');
 		$extras = iextras_get_extras();
-		foreach($extras as $i=>$e) {
-			if ($e->get_id() == $id_extra) {
+		foreach($extras as $i=>$extra) {
+			if ($extra->get_id() == $id_extra) {
 				extras_log("Suppression d'un champ par auteur ".$GLOBALS['auteur_session']['id_auteur'],true);
 				extras_log($extra, true);
 				
