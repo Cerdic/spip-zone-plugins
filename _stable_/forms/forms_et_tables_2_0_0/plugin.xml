@@ -33,6 +33,18 @@
 	<fonctions>core/public/forms_boucles.php</fonctions>
 	<fonctions>core/public/forms_balises.php</fonctions>
 	<prefix>forms</prefix>
+  <bouton id='forms_tous' parent='naviguer'>
+      <icone>habillage/form-24.gif</icone>
+      <titre>form:type_des_tables</titre>
+  </bouton>
+  <bouton id='sondages_tous' parent='naviguer'>
+      <icone>habillage/sondage-24.png</icone>
+      <titre>sondage:type_des_tables</titre>
+  </bouton>
+  <bouton id='tables_tous' parent='naviguer'>
+      <icone>habillage/table-24.gif</icone>
+      <titre>table:type_des_tables</titre>
+  </bouton>
 	<install>core/base/forms_upgrade.php</install>
 	<pipeline>
 		<nom>definir_session</nom>
