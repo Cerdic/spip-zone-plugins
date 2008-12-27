@@ -11,10 +11,10 @@ function iextras_declarer_champs_extras($champs=array()) {
 		include_once(dirname(__file__).'/../inc/iextras.php');
 	}
 	
+	// recuperer le tableau de champ et les ajouter.
 	$extras = iextras_get_extras();
-	foreach($extras as $e) {
-		$champs[] = new ChampExtra($e);
-	}
+	$champs = array_merge($champs, $extras);
+
 	return $champs;
 }
 ?>

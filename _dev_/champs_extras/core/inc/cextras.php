@@ -34,6 +34,15 @@ class ChampExtra{
 		}
 		$this->type = $val;	
 	}
+	
+	// transformer en tableau PHP les variable de la classe.
+	function toArray(){
+		$extra = array();
+		foreach ($this as $cle=>$val) {
+			$extra[$cle] = $val;
+		}
+		return $extra;
+	}
 }
 
 
@@ -75,6 +84,9 @@ function creer_champs_extras($champs, $nom_meta_base_version, $version_cible) {
 	}	
 }
 
+/**
+ * Supprime les champs extras (objets ChampExtra passes dans le tableau $champs)
+ */
 function vider_champs_extras($champs, $nom_meta_base_version) {
 	// on efface chaque champ trouve
 	foreach ($champs as $c){ 
@@ -83,5 +95,17 @@ function vider_champs_extras($champs, $nom_meta_base_version) {
 		}
 	}
 	effacer_meta($nom_meta_base_version);	
+}
+
+/**
+ * Log une information si l'on est en mode debug 
+ * ( define('EXTRAS_DEBUG',true); )
+ * Ou si le second parametre est true.
+ */
+function extras_log($contenu, $important=false) {
+	if ($important
+	OR (defined('EXTRAS_DEBUG') and EXTRAS_DEBUG)) {
+		spip_log($contenu,'extras');
+	}
 }
 ?>

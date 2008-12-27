@@ -34,8 +34,10 @@ function action_iextras_dist() {
 			unset($extras[$id]);
 			iextras_set_extras($extras);
 			
-			$table = table_objet_sql($extra['table']);
-			sql_alter("TABLE $table DROP $extra[champ]");
+			extras_log("Suppression d'un champ par auteur n°".$GLOBALS['auteur_session']['id_auteur'],true);
+			extras_log($extra, true);
+			$table = table_objet_sql($extra->table);
+			sql_alter("TABLE $table DROP ".$extra->champ);
 		}
 	}
 	
