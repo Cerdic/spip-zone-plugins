@@ -1,15 +1,15 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function champsextras_declarer_tables_principales($tables_principales){
+function cextras_declarer_tables_principales($tables_principales){
 	// pouvoir utiliser la class ChampExtra
-	include_spip('inc/champsextras');
+	include_spip('inc/cextras');
 	
 	// lors du renouvellement de l'alea, au demarrage de SPIP
 	// les chemins de plugins ne sont pas encore connus.
 	// il faut se mefier et charger tout de meme la fonction, sinon page blanche.
 	if (!function_exists('declarer_champs_extras')) {
-		include_once(dirname(__file__).'/../inc/champsextras.php');
+		include_once(dirname(__file__).'/../inc/cextras.php');
 	}
 	
 	// recuperer les champs crees par les plugins

@@ -2,12 +2,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // pouvoir utiliser la class ChampExtra
-include_spip('inc/champsextras');
+include_spip('inc/cextras');
 
 // Calcule des elements pour le contexte de compilation
 // des squelettes de champs extras
 // en fonction des parametres donnes dans la classe ChampExtra
-function champsextras_creer_contexte($c, $contexte_flux) {
+function cextras_creer_contexte($c, $contexte_flux) {
 	$contexte = array();
 	$contexte['champextra'] = $c->champ;
 	$contexte['label_' . $c->champ] = $c->label;
@@ -31,7 +31,7 @@ function champsextras_creer_contexte($c, $contexte_flux) {
 }
 	
 // ajouter les champs sur les formulaires CVT editer_xx
-function champsextras_editer_contenu_objet($flux){
+function cextras_editer_contenu_objet($flux){
 	
 	// recuperer les champs crees par les plugins
 	if ($champs = pipeline('declarer_champs_extras', array())) {
@@ -39,7 +39,7 @@ function champsextras_editer_contenu_objet($flux){
 			// si le champ est du meme type que le flux
 			if ($flux['args']['type']==objet_type($c->table) and $c->champ and $c->sql) {
 
-				$contexte = champsextras_creer_contexte($c, $flux['args']['contexte']);
+				$contexte = cextras_creer_contexte($c, $flux['args']['contexte']);
 
 				// calculer le bon squelette et l'ajouter
 				$extra = recuperer_fond('formulaires/inc-champ-formulaire-'.$c->type, $contexte);	
@@ -53,7 +53,7 @@ function champsextras_editer_contenu_objet($flux){
 
 
 // ajouter les champs extras soumis par les formulaire CVT editer_xx
-function champsextras_pre_edition($flux){
+function cextras_pre_edition($flux){
 	
 	// recuperer les champs crees par les plugins
 	if ($champs = pipeline('declarer_champs_extras', array())) {
@@ -72,14 +72,14 @@ function champsextras_pre_edition($flux){
 
 
 // ajouter le champ extra sur la visualisation de l'objet
-function champsextras_afficher_contenu_objet($flux){
+function cextras_afficher_contenu_objet($flux){
 	// recuperer les champs crees par les plugins
 	if ($champs = pipeline('declarer_champs_extras', array())) {
 		foreach ($champs as $c) {
 			// si le champ est du meme type que le flux
 			if ($flux['args']['type']==objet_type($c->table) and $c->champ and $c->sql) {
 	
-				$contexte = champsextras_creer_contexte($c, $flux['args']['contexte']);
+				$contexte = cextras_creer_contexte($c, $flux['args']['contexte']);
 
 				// calculer le bon squelette et l'ajouter
 				$extra = recuperer_fond('prive/contenu/inc-champ-extra', $contexte);	
