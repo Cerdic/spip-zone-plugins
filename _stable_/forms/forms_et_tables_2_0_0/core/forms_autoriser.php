@@ -12,6 +12,23 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// autorisation des boutons
+function autoriser_forms_tous_bouton($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
+	$actif = unserialize($GLOBALS['meta']['forms_et_tables']);
+	$actif = isset($actif['form_actif']) AND $actif['form_actif'];
+	return ($actif AND $qui['statut'] == '0minirezo'); // tous les admin, restreint ou non
+}
+function autoriser_sondages_tous_bouton($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
+	$actif = unserialize($GLOBALS['meta']['forms_et_tables']);
+	$actif = isset($actif['sondage_actif']) AND $actif['sondage_actif'];
+	return ($actif AND $qui['statut'] == '0minirezo'); // tous les admin, restreint ou non
+}
+function autoriser_tables_tous_bouton($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
+	$actif = unserialize($GLOBALS['meta']['forms_et_tables']);
+	$actif = isset($actif['table_actif']) AND $actif['table_actif'];
+	return ($actif AND $qui['statut'] == '0minirezo'); // tous les admin, restreint ou non
+}
+
 function autoriser_form_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	if ($type=='form' OR $type=='donnee'){
 		if ($faire=='administrer'){

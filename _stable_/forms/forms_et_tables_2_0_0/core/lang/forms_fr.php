@@ -26,6 +26,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'boite_info' => 'Cliquez sur les icones pour voir les donn&eacute;es associ&eacute;es a un formulaire, l\'editer, le dupliquer, l\'exporter, vider les donn&eacute;es ou le supprimer.',
 
 	// C
+	'cfg_activer_types_forms' => 'Selectionner les objets utilis&eacute;s',
+	'cfg_activer_form' => 'Utiliser les Formulaires',
+	'cfg_activer_sondage' => 'Utiliser les Sondages',
+	'cfg_activer_table' => 'Utiliser les Tables',
 	'cfg_activer' => 'Oui',
 	'cfg_associer_donnees' => 'Associer les donn&eacute;es des tables',
 	'cfg_associer_donnees_articles' => 'Permettre d\'associer les donnees aux articles :',

@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	<multi>[ar]&#1575;&#1604;&#1575;&#1587;&#1578;&#1605;&#1575;&#1585;&#1575;&#1578;[en]Forms[fr]Formulaires&amp;Tables[it] Forms[es] Formularios</multi> (SPIP 1.9.1+)
+	<multi>[ar]&#1575;&#1604;&#1575;&#1587;&#1578;&#1605;&#1575;&#1585;&#1575;&#1578;[en]Forms[fr]Formulaires&amp;Tables[it] Forms[es] Formularios</multi> (SPIP 2.0.0+)
 	</nom>
 	<icon>img_pack/form-24.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
@@ -90,5 +90,13 @@
 		<nom>affiche_milieu</nom>
 		<inclure>core/forms_pipeline.php</inclure>
 	</pipeline>
+	<chemin dir="" />
+	<chemin dir="core/" />
+	<chemin dir="forms/" />
+	<chemin dir="sondages/" />
+	<chemin dir="tables/" />
+	<chemin dir="crayons/" />
+	<chemin dir="snippets/" />
+	<chemin dir="interface/" />
 	<necessite id="SPIP" version="(2.0.0;2.0.0)" />
 </plugin>

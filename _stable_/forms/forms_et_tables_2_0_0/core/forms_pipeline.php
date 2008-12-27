@@ -15,9 +15,9 @@
 		$config = unserialize(isset($GLOBALS['meta']['forms_et_tables'])?$GLOBALS['meta']['forms_et_tables']:"");
 		if (!isset($config['inserer_head']) OR $config['inserer_head']) {
 			/*
-				$flux .= 	"<link rel='stylesheet' href='".find_in_path('spip_forms.css')."' type='text/css' media='all' />\n";
-				$flux .= 	"<link rel='stylesheet' href='".find_in_path('donnee_voir.css')."' type='text/css' media='all' />\n";
-				$flux .= 	"<link rel='stylesheet' href='".find_in_path('donnees_tous.css')."' type='text/css' media='all' />\n";
+				$flux .= 	"<link rel='stylesheet' href='".find_in_path('img_pack/spip_forms.css')."' type='text/css' media='all' />\n";
+				$flux .= 	"<link rel='stylesheet' href='".find_in_path('img_pack/donnee_voir.css')."' type='text/css' media='all' />\n";
+				$flux .= 	"<link rel='stylesheet' href='".find_in_path('img_pack/donnees_tous.css')."' type='text/css' media='all' />\n";
 				$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/date_picker.css' type='text/css' media='all' />\n";
 				$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/jtip.css' type='text/css' media='all' />\n";
 			*/
@@ -93,9 +93,9 @@
 		if ($f=find_in_path('spip_forms_prive.css'))
 			$flux .= "<link rel='stylesheet' href='$f' type='text/css' media='all' />\n";
 		else
-			$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."spip_forms.css' type='text/css' media='all' />\n";
-		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."donnee_voir.css' type='text/css' media='all' />\n";
-		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."donnees_tous.css' type='text/css' media='all' />\n";
+			$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/spip_forms.css' type='text/css' media='all' />\n";
+		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/donnee_voir.css' type='text/css' media='all' />\n";
+		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/donnees_tous.css' type='text/css' media='all' />\n";
 		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/date_picker.css' type='text/css' media='all' />\n";
 		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/jtip.css' type='text/css' media='all' />\n";
 		$flux .= "<script type='text/javascript'><!--\n var ajaxcharset='utf-8';\n//--></script>";
