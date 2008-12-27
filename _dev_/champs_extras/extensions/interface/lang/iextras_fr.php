@@ -1,6 +1,8 @@
 <?php
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//A
+	'action_associer' => 'g&eacute;rer ce champ',
+	'action_desassocier' => 'ne plus g&eacute;rer ce champ',
 	'action_modifier' => 'modifier',
 	'action_supprimer' => 'supprimer',
 	//C
@@ -22,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_sql' => 'D&eacute;finition SQL',
 	'label_type' => 'Type de saisie',
 	'liste_des_extras' => 'Liste des champs extras',
+	'liste_des_extras_possibles' => 'Liste des champs pr&eacute;sents non g&eacute;r&eacute;s',
 	//S
 	'supprimer_reelement' => 'Supprimer ce champ ?',
 	//T

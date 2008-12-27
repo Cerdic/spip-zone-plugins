@@ -8,6 +8,7 @@
 			<li>
 				[(#VALEUR|table_valeur{champ})]
 				| <a href="[(#URL_ECRIRE{iextras_edit}|parametre_url{id_extra,#VALEUR|table_valeur{id_extra}})]"><:iextras:action_modifier:></a>
+				| <a href="[(#URL_ACTION_AUTEUR{iextras, [desassocier_extra/(#VALEUR|table_valeur{id_extra})], #SELF})]"><:iextras:action_desassocier:></a>
 				| <a href="[(#URL_ACTION_AUTEUR{iextras, [supprimer_extra/(#VALEUR|table_valeur{id_extra})], #SELF})]" class="supprimer"><:iextras:action_supprimer:></a>
 			</li>
 		</BOUCLE_extras>
