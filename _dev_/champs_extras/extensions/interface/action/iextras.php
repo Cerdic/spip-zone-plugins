@@ -14,7 +14,7 @@ function action_iextras_dist() {
 		exit;
 	}
 	
-	list($arg, $id) = explode ('/', $arg);
+	list($arg, $id_extra) = explode ('/', $arg);
 	
 	// actions possibles
 	if (!in_array($arg, array(
@@ -25,19 +25,21 @@ function action_iextras_dist() {
 	}
 	
 	// cas de suppression
-	if ($arg == 'supprimer_extra'){
+	if ($id_extra and ($arg == 'supprimer_extra')){
 		include_spip('inc/iextras');
 		$extras = iextras_get_extras();
-		if ($id = intval($id)) {
-			// $id a 1 de plus
-			$extra = $extras[--$id];
-			unset($extras[$id]);
-			iextras_set_extras($extras);
-			
-			extras_log("Suppression d'un champ par auteur n°".$GLOBALS['auteur_session']['id_auteur'],true);
-			extras_log($extra, true);
-			$table = table_objet_sql($extra->table);
-			sql_alter("TABLE $table DROP ".$extra->champ);
+		foreach($extras as $i=>$e) {
+			if ($e->get_id() == $id_extra) {
+				extras_log("Suppression d'un champ par auteur ".$GLOBALS['auteur_session']['id_auteur'],true);
+				extras_log($extra, true);
+				
+				$table = table_objet_sql($extra->table);
+				sql_alter("TABLE $table DROP ".$extra->champ);
+				
+				unset($extras[$i]);
+				iextras_set_extras($extras);
+				break;
+			}
 		}
 	}
 	

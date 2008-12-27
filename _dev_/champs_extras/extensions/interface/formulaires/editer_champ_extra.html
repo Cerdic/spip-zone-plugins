@@ -84,7 +84,7 @@
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
-		<p class='boutons'><input type='submit' class='submit' value='[(#ENV{id_extra}|intval|?{<:bouton_modifier:>,<:bouton_ajouter:>})]' /></p>
+		<p class='boutons'><input type='submit' class='submit' value='[(#ENV{new}|?{<:bouton_ajouter:>,<:bouton_modifier:>})]' /></p>
 	</div></form>
 	</BOUCLE_si_editable>
 </div>

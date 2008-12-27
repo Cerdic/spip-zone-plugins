@@ -4,6 +4,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/iextras');
 
 function formulaires_editer_champ_extra_charger_dist($id_extra='new', $redirect=''){
+	// nouveau ?
+	$new = ($id_extra == 'new') ? ' ': '';
+	
 	// valeur par defaut
 	$valeurs = array(
 		'champ' => '',
@@ -12,17 +15,19 @@ function formulaires_editer_champ_extra_charger_dist($id_extra='new', $redirect=
 		'label' => '',
 		'sql' => "text NOT NULL DEFAULT ''",
 		'id_extra' => $id_extra,
-		'new' => intval($id_extra)?'':' ',
+		'new' => $new,
 		'redirect' => $redirect,
 	);
 	
 	// si un extra est demande (pour edition)
 	// remplir les valeurs avec infos de celui-ci
-	if (intval($id_extra)) {
+	if (!$new) {
 		$extras = iextras_get_extras();
-		// $id_extra = 1, mais l'entree reelle est 0 dans le tableau
-		if ($extra = $extras[--$id_extra]) {
-			$valeurs = array_merge($valeurs, $extra->toArray());
+		foreach($extras as $extra) {
+			if ($extra->get_id() == $id_extra) {
+				$valeurs = array_merge($valeurs, $extra->toArray());
+				break;
+			}
 		}
 	}
 	return $valeurs;
@@ -31,6 +36,9 @@ function formulaires_editer_champ_extra_charger_dist($id_extra='new', $redirect=
 
 function formulaires_editer_champ_extra_verifier_dist($id_extra='new', $redirect=''){
 	$erreurs = array();
+	
+	// nouveau ?
+	$new = ($id_extra == 'new') ? ' ': '';	
 	
 	// recuperer les valeurs postees
 	$extra = iextras_post_formulaire();
@@ -53,37 +61,42 @@ function formulaires_editer_champ_extra_verifier_dist($id_extra='new', $redirect
 	// verifier qu'un champ homonyme 
 	// n'existe pas deja sur la meme table
 	$extras = iextras_get_extras();
-	if (!intval($id_extra) 
-	// $id_extra = 1, mais l'entree reelle est 0 dans le tableau
-	OR ($extras[--$id_extra]->champ !== $champ)) { 
-		foreach ($extras as $i=>$e) {
-			if (($i !== $id_extra)
-			and ($e->champ == $champ) 
-			and ($e->table == $extra['table'])) {
-				$erreurs['champ'] = _T('iextras:champ_deja_existant');	
+	foreach ($extras as $e) {
+		if ($new OR ($e->get_id() !== $id_extra)) {
+			if (($e->champ == $champ) and ($e->table == $extra['table'])) {
+				$erreurs['champ'] = _T('iextras:champ_deja_existant');
+				break;
 			}
 		}
 	}
+
 
 	return $erreurs;
 }
 
 
 function formulaires_editer_champ_extra_traiter_dist($id_extra='new', $redirect=''){
-	
+	// nouveau ?
+	$new = ($id_extra == 'new') ? ' ': '';
+		
 	// recuperer les valeurs postees
 	$extra = iextras_post_formulaire();
 
 	// recreer le tableau de stockage des extras
 	$extras = iextras_get_extras();
-	$new = false;
-	if (intval($id_extra)) {
-		// $id_extra = 1, mais l'entree reelle est 0 dans le tableau
-		$extras[--$id_extra] = new ChampExtra($extra);
-	} else {
+
+	// ajout du champ ou modification du champ extra de meme id.
+	if ($new) {
 		$extras[] = new ChampExtra($extra);
-		$new = true;
+	} else {
+		foreach($extras as $i=>$e) {
+			if ($e->get_id() == $id_extra) {
+				$extras[$i] = new ChampExtra($extra);
+				break;
+			}
+		}		
 	}
+
 	// l'enregistrer
 	iextras_set_extras($extras);
 	
@@ -91,7 +104,7 @@ function formulaires_editer_champ_extra_traiter_dist($id_extra='new', $redirect=
 	if ($new) {
 		include_spip('base/create');
 		$table = table_objet_sql($extra['table']);
-		extras_log("Creation d'un nouveau champ par auteur n°".$GLOBALS['auteur_session']['id_auteur'],true);
+		extras_log("Creation d'un nouveau champ par auteur ".$GLOBALS['auteur_session']['id_auteur'],true);
 		extras_log($extra, true);
 		maj_tables($table);
 	}

@@ -21,11 +21,11 @@ function iextras_set_extras($extras){
 function iextras_get_extras_par_table(){
 	$extras = iextras_get_extras();
 	$tables = array();
-	foreach($extras as $i=>$e) {
+	foreach($extras as $e) {
 		if (!isset($tables[$e->table])) {
 			$tables[$e->table] = array();
 		}
-		$tables[$e->table][$i] = $e->toArray();
+		$tables[$e->table][] = $e->toArray();
 	}
 	return $tables;
 }

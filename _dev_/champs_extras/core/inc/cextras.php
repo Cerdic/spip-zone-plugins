@@ -8,6 +8,8 @@ class ChampExtra{
 	var $type = 'textarea'; // type (input/textarea)
 	var $sql = ''; // declaration sql (text NOT NULL DEFAULT '')
 	
+	var $_id = ''; // identifiant de ce champ extra
+	
 	// constructeur
 	function ChampExtra($params=array()) {
 		$this->definir($params);
@@ -25,6 +27,8 @@ class ChampExtra{
 				}
 			}
 		}
+		// calculer l'id du champ extra
+		$this->make_id();
 	}
 	
 	// declarations specifiques
@@ -35,12 +39,33 @@ class ChampExtra{
 		$this->type = $val;	
 	}
 	
-	// transformer en tableau PHP les variable de la classe.
+	// creer l'id du champ extra :
+	function make_id(){
+		// creer un hash
+		$hash = array();
+		foreach ($this as $cle=>$val) {
+			if ($cle[0]!=='_') {
+				$hash[] = $val;
+			}
+		}
+		$this->_id = substr(md5(serialize($hash)),0,6);
+	}
+	
+	// determiner un identifiant
+	function get_id(){
+		if (!$this->_id) $this->make_id();
+		return $this->_id;
+	}
+	
+	// transformer en tableau PHP les variable publiques de la classe.
 	function toArray(){
 		$extra = array();
 		foreach ($this as $cle=>$val) {
-			$extra[$cle] = $val;
+			if ($cle[0]!=='_') {
+				$extra[$cle] = $val;
+			}
 		}
+		$extra['id_extra'] = $this->get_id();
 		return $extra;
 	}
 }
