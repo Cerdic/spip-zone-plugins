@@ -140,45 +140,53 @@ function forms_upgrade($nom_meta_base_version,$version_cible){
 		}
 		// maj en version 0.16 annulee et remplacee par 0.17
 		if (version_compare($current_version,0.17,'<')){
-			// virer les tables temporaires crees manuellement sur les serveurs ou ca foirait
-			sql_drop_table("spip_forms_champs");
-			sql_drop_table("spip_forms_champs_choix");
-
-			// virer les tables vides crees lors dun creer base precedent avec spip_forms_donnees dans la definition
-			sql_drop_table("spip_forms_donnees");
-			sql_drop_table("spip_forms_donnees_champs");
-			// renommer les tables qui changent de nom, pour recuperer les donees
-			sql_alter("TABLE spip_reponses RENAME spip_forms_donnees");
-			sql_alter("TABLE spip_reponses_champs RENAME spip_forms_donnees_champs");
-			// creer toutes les nouvelles tables
-			include_spip('base/forms');
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
-			creer_base();
-			forms_allstructure2table();
-
-  		sql_alter("TABLE spip_forms DROP structure");
-  		sql_alter("TABLE spip_forms CHANGE sondage type_form VARCHAR(255) NOT NULL");
-			sql_alter("TABLE spip_forms ADD moderation VARCHAR(10) DEFAULT 'posteriori' NOT NULL AFTER texte");
-			sql_alter("TABLE spip_forms ADD public ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER moderation");
-			sql_update("spip_forms",array("public"=>"'non'")); // par securite
-			sql_update("spip_forms",array("type_form"=>"'sondage'", "public"=>"'oui'"),"type_form='public'");
-			sql_update("spip_forms",array("type_form"=>"'sondage'", "public"=>"'non'"),"type_form='prot'");
-			sql_update("spip_forms",array("type_form"=>"''", "public"=>"'non'"),"type_form='non'");
-
-			sql_alter("TABLE spip_forms_donnees CHANGE id_reponse id_donnee BIGINT( 21 ) NOT NULL AUTO_INCREMENT");
-			sql_alter("TABLE spip_forms_donnees_champs CHANGE id_reponse id_donnee BIGINT( 21 ) NOT NULL");
-			sql_alter("TABLE spip_forms_donnees_champs DROP INDEX id_reponse ,ADD INDEX id_donnee (id_donnee) ");
-
-			sql_alter("TABLE spip_forms_champs ADD specifiant ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER extra_info");
-			sql_alter("TABLE spip_forms_champs ADD public ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER specifiant");
-			sql_alter("TABLE spip_forms_champs ADD aide text AFTER public");
-			sql_alter("TABLE spip_forms_champs ADD html_wrap text AFTER aide");
-			sql_update("spip_forms_champs",array("specifiant"=>"'non'", "public"=>"'non'")); // par securite
-
-			sql_alter("TABLE spip_forms_donnees CHANGE statut confirmation VARCHAR(10) NOT NULL");
-			sql_alter("TABLE spip_forms_donnees ADD statut VARCHAR(10) NOT NULL AFTER confirmation");
-			sql_update("spip_forms_donnees",array("statut"=>"'publie'")); // par securite
+			if (sql_count(sql_select("structure","spip_forms"))){
+					// virer les tables temporaires crees manuellement sur les serveurs ou ca foirait
+					sql_drop_table("spip_forms_champs");
+					sql_drop_table("spip_forms_champs_choix");
+	
+				$trouver_table = charger_fonction("trouver_table","base");
+				$trouver_table(""); // vider le cache
+				// virer les tables vides crees lors dun creer base precedent avec spip_forms_donnees dans la definition
+				if ($trouver_table("spip_reponses") AND !sql_countsel("spip_forms_donnees")){
+					sql_drop_table("spip_forms_donnees");
+					sql_drop_table("spip_forms_donnees_champs");
+					// renommer les tables qui changent de nom, pour recuperer les donees
+					sql_alter("TABLE spip_reponses RENAME spip_forms_donnees");
+					sql_alter("TABLE spip_reponses_champs RENAME spip_forms_donnees_champs");
+				}
+				// creer toutes les nouvelles tables
+				include_spip('base/forms');
+				include_spip('base/create');
+				include_spip('base/abstract_sql');
+				creer_base();
+				forms_allstructure2table();
+	
+	  		sql_alter("TABLE spip_forms DROP structure");
+	  		sql_alter("TABLE spip_forms CHANGE sondage type_form VARCHAR(255) NOT NULL");
+				sql_alter("TABLE spip_forms ADD moderation VARCHAR(10) DEFAULT 'posteriori' NOT NULL AFTER texte");
+				sql_alter("TABLE spip_forms ADD public ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER moderation");
+				if (sql_countsel("spip_forms",sql_in("type_form","'public','prot','non'"))){
+					sql_update("spip_forms",array("public"=>"'non'")); // par securite
+					sql_update("spip_forms",array("type_form"=>"'sondage'", "public"=>"'oui'"),"type_form='public'");
+					sql_update("spip_forms",array("type_form"=>"'sondage'", "public"=>"'non'"),"type_form='prot'");
+					sql_update("spip_forms",array("type_form"=>"''", "public"=>"'non'"),"type_form='non'");
+				}
+	
+				sql_alter("TABLE spip_forms_donnees CHANGE id_reponse id_donnee BIGINT( 21 ) NOT NULL AUTO_INCREMENT");
+				sql_alter("TABLE spip_forms_donnees_champs CHANGE id_reponse id_donnee BIGINT( 21 ) NOT NULL");
+				sql_alter("TABLE spip_forms_donnees_champs DROP INDEX id_reponse ,ADD INDEX id_donnee (id_donnee) ");
+	
+				sql_alter("TABLE spip_forms_champs ADD specifiant ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER extra_info");
+				sql_alter("TABLE spip_forms_champs ADD public ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER specifiant");
+				sql_alter("TABLE spip_forms_champs ADD aide text AFTER public");
+				sql_alter("TABLE spip_forms_champs ADD html_wrap text AFTER aide");
+				sql_update("spip_forms_champs",array("specifiant"=>"'non'", "public"=>"'non'")); // par securite
+	
+				sql_alter("TABLE spip_forms_donnees CHANGE statut confirmation VARCHAR(10) NOT NULL");
+				sql_alter("TABLE spip_forms_donnees ADD statut VARCHAR(10) NOT NULL AFTER confirmation");
+				sql_update("spip_forms_donnees",array("statut"=>"'publie'")); // par securite
+			}
 			ecrire_meta($nom_meta_base_version,$current_version=0.17);
 		}
 		if (version_compare($current_version,0.18,'<')){
@@ -230,13 +238,15 @@ function forms_upgrade($nom_meta_base_version,$version_cible){
 			ecrire_meta($nom_meta_base_version,$current_version=0.23);
 		}
 		if (version_compare($current_version,0.24,'<')){
-			sql_alter("TABLE spip_forms_donnees ADD rang bigint(21) NOT NULL AFTER cookie");
-			$rows = sql_allfetsel("id_form","spip_forms");
-			foreach($rows as $row){
-				$rows2 = sql_allfetsel("id_donnee","spip_forms_donnees","id_form=".intval($row['id_form']),"","id_donnee");
-				$rang=1;
-				foreach($rows2 as $row2)
-					sql_update("spip_forms_donnees",array("rang"=>$rang++),"id_donnee=".intval($row2['id_donnee']));
+			if (!sql_select("rang","spip_forms_donnees")){
+				sql_alter("TABLE spip_forms_donnees ADD rang bigint(21) NOT NULL AFTER cookie");
+				$rows = sql_allfetsel("id_form","spip_forms");
+				foreach($rows as $row){
+					$rows2 = sql_allfetsel("id_donnee","spip_forms_donnees","id_form=".intval($row['id_form']),"","id_donnee");
+					$rang=1;
+					foreach($rows2 as $row2)
+						sql_update("spip_forms_donnees",array("rang"=>$rang++),"id_donnee=".intval($row2['id_donnee']));
+				}
 			}
 			ecrire_meta($nom_meta_base_version,$current_version=0.24,'non');
 		}
