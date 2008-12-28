@@ -464,9 +464,12 @@ $spiplistes_items = array(
 		include_spip('base/spiplistes_upgrade');
 		spiplistes_upgrade();
 	}
+/*
 spiplistes_log("version: ".$spiplistes_version . " "
 	. "real_version: ".$spiplistes_real_version . " "
 	. "base_version: ".$spiplistes_base_version . " "
 	. "real_base_version: ".$spiplistes_real_base_version
 	, _SPIPLISTES_LOG_DEBUG);
+*/
+
 ?>
