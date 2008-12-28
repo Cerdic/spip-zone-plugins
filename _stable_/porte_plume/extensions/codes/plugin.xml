@@ -7,7 +7,7 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 	<version>0.1</version>
 	<etat>test</etat>
     <description>
-Gestion de boutons pour insérer du code informatique via la barre d'édition Porte Plume.
+Gestion de boutons pour ins&#233;rer du code informatique via la barre d'&#233;dition Porte Plume.
 	</description>
 	<prefix>pp_codes</prefix>
 	<pipeline>
@@ -19,5 +19,5 @@ Gestion de boutons pour insérer du code informatique via la barre d'édition Po
 		<inclure>pp_codes_pipelines.php</inclure>
 	</pipeline>
 	<chemin dir='' />
-	<utilise id="poste_plume" />
+	<utilise id="porte_plume" />
 </plugin>
