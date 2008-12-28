@@ -201,19 +201,25 @@ function exec_spiplistes_liste_gerer () {
 					$date_depuis = $envoyer_quand;
 					$envoyer_quand = false;
 				}
-				
+				// spiplistes_log("nb vrais abos : ".spiplistes_listes_vrais_abos_compter($id_liste), _SPIPLISTES_LOG_DEBUG);
 				if($envoyer_maintenant && ($message_auto != 'non')) {
-					$boite_pour_confirmer_envoi_maintenant = ""
-						. debut_cadre_couleur('', true)
-						// formulaire de confirmation envoi
-						. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE), true)
-						. "<p style='text-align:center;font-weight:bold;' class='verdana2'>"
-						. _T('spiplistes:boite_confirmez_envoi_liste')	. "</p>"
-						. "<input type='hidden' name='id_liste' value='$id_liste' />"
-						. spiplistes_form_bouton_valider('btn_confirmer_envoi_maintenant')
-						. spiplistes_form_fin(true)
-						. fin_cadre_couleur(true)
-						;
+					if(!spiplistes_listes_vrais_abos_compter($id_liste)) {
+						$boite_pour_confirmer_envoi_maintenant .= 
+							spiplistes_boite_alerte(_T('spiplistes:boite_alerte_manque_vrais_abos'), true);
+					}
+					else {
+						$boite_pour_confirmer_envoi_maintenant = ""
+							. debut_cadre_couleur('', true)
+							// formulaire de confirmation envoi
+							. (!empty($msg_bouton) ? spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE), true) : "")
+							. "<p style='text-align:center;font-weight:bold;' class='verdana2'>"
+							. _T('spiplistes:boite_confirmez_envoi_liste') . "</p>"
+							. (!empty($msg_bouton) ? "<input type='hidden' name='id_liste' value='$id_liste' />\n" : "")
+							. spiplistes_form_bouton_valider('btn_confirmer_envoi_maintenant')
+							. (!empty($msg_bouton) ? spiplistes_form_fin(true) : "")
+							. fin_cadre_couleur(true)
+							;
+					}
 					$date_prevue = normaliser_date(time());
 				}
 

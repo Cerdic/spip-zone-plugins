@@ -248,6 +248,37 @@ function spiplistes_listes_compter ($sql_whereq = "") {
 	return(spiplistes_sql_compter("spip_listes", $sql_whereq));
 }
 
+//CP-20081228
+//Donner le nombre d'abonnés (pour une liste) 
+//qui ont un vrai format de réception (html ou texte)
+// et une adresse mail valide
+function spiplistes_listes_vrais_abos_compter ($id_liste) {
+	if($id_liste = intval($id_liste)) {
+		// SELECT COUNT(l.id_auteur) AS nb
+		// FROM spip_auteurs_listes AS l, spip_auteurs_elargis AS f, spip_auteurs AS a
+		// WHERE l.id_liste=$id_liste
+		//	AND l.id_auteur=f.id_auteur 
+		//	AND (l.id_auteur=a.id_auteur AND LENGTH(a.email) > 3)
+		//	AND (f.`spip_listes_format`='html' OR f.`spip_listes_format`='texte')
+		$sql_select = array('COUNT(l.id_auteur) AS nb');
+		$sql_from = array('spip_auteurs_listes AS l', 'spip_auteurs_elargis AS f', 'spip_auteurs AS a');
+		$sql_where = array(
+			"l.id_liste=$id_liste"
+			, "l.id_auteur=f.id_auteur"
+			, "(l.id_auteur=a.id_auteur AND LENGTH(a.email) > 3)"
+			, "(f.`spip_listes_format`='html' OR f.`spip_listes_format`='texte')"
+			);
+		$sql_result = sql_select($sql_select, $sql_from, $sql_where);
+		if($sql_result === false) {
+			spiplistes_sqlerror_log("spiplistes_listes_vrais_abos_compter()");
+		}
+		if($row = sql_fetch($sql_result)) {
+			$result = $row['nb'];
+		}
+	}
+	return($result);
+}
+
 // CP-20080501
 function spiplistes_listes_liste_modifier ($id_liste, $array_set) {
 	return(
@@ -463,24 +494,40 @@ function spiplistes_format_abo_supprimer ($id_auteur) {
 function spiplistes_format_abo_modifier ($id_auteur, $format = 'non') {
 	if($format = spiplistes_format_valide($format)) {
 		$sql_table = "spip_auteurs_elargis";
-		$sql_champs = array('`spip_listes_format`' => $format);
+		$sql_champs = array('`spip_listes_format`' => sql_quote($format));
 		if($id_auteur=='tous') {
-			$sql_where = "";
+			// appliquer le meme format a tous les abos
+			$sql_result = sql_update($sql_table, $sql_champs);
+			$action = "update";
 		}
 		else if(($id_auteur = intval($id_auteur)) > 0) {
-			if(!spiplistes_format_abo_demande($id_auteur)) {
-				$sql_champs['id_auteur'] = sql_quote($id_auteur);
-				return(sql_insertq($sql_table, $sql_champs));
-			} else {
-				$sql_where = "id_auteur=".sql_quote($id_auteur)." LIMIT 1"; 
+			if(($cur_format = spiplistes_format_abo_demande($id_auteur)) !== false) {
+				// si pas d'erreur sql
+				if(!$cur_format) {
+					// si inexistant faire un insert 
+					$sql_champs = array(
+						'id_auteur' => $id_auteur
+						, '`spip_listes_format`' => $format
+					);
+					$sql_result = sql_insertq($sql_table, $sql_champs);
+					$action = "insert";
+				} else {
+					// sinon update
+					$sql_where = "id_auteur=".sql_quote($id_auteur)." LIMIT 1"; 
+					$sql_result = sql_update($sql_table, $sql_champs, $sql_where);
+					$action = "update";
+				}
 			}
 		}
-		else {
-			return(false);
+		if($sql_result === false) {
+			spiplistes_sqlerror_log("spiplistes_format_abo_modifier() $action $id_auteur");
 		}
-		return(sql_updateq($sql_table, $sql_champs, $sql_where));
+		else {
+			$id_auteur = ($id_auteur == 'tous') ? "ALL" :  "id_auteur #$id_auteur";
+			spiplistes_log("$action format #$format to $id_auteur by id_auteur #".$GLOBALS['auteur_session']['id_auteur']);
+		}
 	}
-	return(false);
+	return($sql_result);
 }
 
 // renvoie le format d'abonnement d'un auteur
@@ -490,10 +537,20 @@ function spiplistes_format_abo_demande ($id_auteur) {
 	$sql_where = "id_auteur=".sql_quote($id_auteur);
 	if($id_auteur > 0) {
 		if(spiplistes_spip_est_inferieur_193()) {
-			$result = sql_getfetsel("`spip_listes_format`", "spip_auteurs_elargis", $sql_where);
+			$result = sql_getfetsel("`spip_listes_format`", "spip_auteurs_elargis", $sql_where, '', '', 1);
 		} else {
-			$result = sql_fetsel("`spip_listes_format`", "spip_auteurs_elargis", $sql_where);
-			$result = $result['spip_listes_format'];
+			/*
+			$result = sql_fetsel("`spip_listes_format` AS format", "spip_auteurs_elargis", $sql_where);
+			$result = $result['format'];
+			*/
+			if(($sql_result = sql_select("`spip_listes_format` AS format", "spip_auteurs_elargis", $sql_where, '', '', 1)) !== false) {
+				$row = sql_fetch($sql_result);
+				$result = $row['format'];
+				spiplistes_log("API: current format for id_auteur #$id_auteur = $result", _SPIPLISTES_LOG_DEBUG);
+			}
+			else {
+				spiplistes_sqlerror_log("spiplistes_format_abo_demande()");
+			}
 		}
 		/* Code a valider. Si ok, supprimer ci-dessus.
 		$GLOBALS['mysql_rappel_nom_base'] = false;

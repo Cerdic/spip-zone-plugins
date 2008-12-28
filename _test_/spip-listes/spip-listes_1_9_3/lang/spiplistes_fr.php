@@ -321,6 +321,10 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'conseil_regenerer_pied' => "<br />Ce patron est issu d'une ancienne version de SPIP-Listes.<br />
 	Conseil: s&eacute;lectionnez &agrave; nouveau le patron de pied pour prendre en compte le multilinguisme 
 	et/ou la version &#39;texte seul&#39; du patron."
+, 'boite_alerte_manque_vrais_abos' => "Il n&#39;y a pas d&#39;abonn&eacute;s pour cette liste de diffusion,
+	ou les abonn&eacute;s n'ont pas de format de r&eacute;ception.
+	<br />
+	Corrigez le format de r&eacute;ception pour au moins un abonn&eacute; avant de valider l'envoi."	
 
 // exec/spiplistes_listes_toutes.php
 // exec/spiplistes_maintenance.php
