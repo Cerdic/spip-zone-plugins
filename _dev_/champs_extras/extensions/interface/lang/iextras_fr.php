@@ -2,9 +2,9 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//A
 	'action_associer' => 'g&eacute;rer ce champ',
-	'action_associer_title' => 'G&eacute;rer l\'affichage de ce champ par le plugin Champs Extras',
+	'action_associer_title' => 'G&eacute;rer l\'affichage de ce champ extra',
 	'action_desassocier' => 'd&eacute;sassocier',
-	'action_desassocier_title' => 'Ne plus g&eacute;rer l\'affichage de ce champ par le plugin Champs Extras',
+	'action_desassocier_title' => 'Ne plus g&eacute;rer l\'affichage de ce champ extra',
 	'action_descendre' => 'descendre',
 	'action_descendre_title' => 'D&eacute;placer le champ d\'un rang vers le bas',
 	'action_modifier' => 'modifier',
@@ -25,6 +25,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_champ_extra' => 'Créer un nouveau champ extra',
 	'info_modifier_champ_extra' => 'Modifier champ extra',
 	'info_nouveau_champ_extra' => 'Nouveau champ extra',
+	'info_description_champ_extra' => "Cette page permet de g&eacute;rer des champs extras, 
+						c'est &agrave; dire des champs suppl&eacute;mentaires dans les tables de SPIP,
+						pris en compte dans les formulaires d'&eacute;dition.",
+	'info_description_champ_extra_creer' => "Vous pouvez cr&eacute;er de nouveaux champs qui s'afficheront alors
+						sur cette page, dans le cadre «Liste des champs extras», ainsi que dans les formulaires.",		
+	'info_description_champ_extra_presents' => "Enfin, si des champs existent d&eacute;j&agrave; dans votre base de donn&eacute;e,
+						mais ne sont pas d&eacute;clar&eacute;s (par un plugin ou un jeu de squelettes), vous
+						pouvez demander &agrave; ce plugin de les g&eacute;rer. Ces champs, s'il y en a,
+						apparaissent dans un cadre «Liste des champs pr&eacute;sents non g&eacute;r&eacute;s».",		
+						
 	//L
 	'label_champ' => 'Nom du champ',
 	'label_table' => 'Objet',

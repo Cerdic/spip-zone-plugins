@@ -28,6 +28,7 @@ function exec_iextras_dist(){
 	
 	// colonne gauche
 	echo debut_gauche('', true);
+	echo cadre_champs_extras_infos();
 	echo pipeline('affiche_gauche', array('args'=>array('exec'=>'iextras'),'data'=>''));
 	
 	// colonne droite
@@ -54,4 +55,17 @@ function exec_iextras_dist(){
 
 	echo fin_gauche(), fin_page();
 }
+
+// afficher les informations de la page
+function cadre_champs_extras_infos() {
+	$boite = pipeline ('boite_infos', array('data' => '',
+		'args' => array(
+			'type'=>'champs_extras',
+		)
+	));
+
+	if ($boite)
+		return debut_boite_info(true) . $boite . fin_boite_info(true);	
+}
+
 ?>
