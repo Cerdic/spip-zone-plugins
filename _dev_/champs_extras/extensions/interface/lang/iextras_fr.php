@@ -2,9 +2,17 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//A
 	'action_associer' => 'g&eacute;rer ce champ',
-	'action_desassocier' => 'ne plus g&eacute;rer ce champ',
+	'action_associer_title' => 'G&eacute;rer l\'affichage de ce champ par le plugin Champs Extras',
+	'action_desassocier' => 'd&eacute;sassocier',
+	'action_desassocier_title' => 'Ne plus g&eacute;rer l\'affichage de ce champ par le plugin Champs Extras',
+	'action_descendre' => 'descendre',
+	'action_descendre_title' => 'D&eacute;placer le champ d\'un rang vers le bas',
 	'action_modifier' => 'modifier',
+	'action_modifier_title' => 'Modifier les param&egrave;tres du champ extra',
+	'action_monter' => 'monter',
+	'action_monter_title' => 'Monter le champ d\'un rang vers le haut',
 	'action_supprimer' => 'supprimer',
+	'action_supprimer_title' => 'Supprimer totalement le champ de la base de donn&eacute;es',
 	//C
 	'caracteres_interdits' => 'Certains carac&egrave;res utilis&eacute;s ne conviennent pas pour ce champ.',
 	'caracteres_autorises_champ' => 'Caractères possibles : lettres sans accent, chiffres, - et _',

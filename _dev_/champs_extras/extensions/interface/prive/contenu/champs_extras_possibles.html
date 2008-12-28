@@ -7,9 +7,10 @@
 		<BOUCLE_extras(POUR){tableau #VALEUR}>
 			<li>
 				#CLE
-				| <a href="[(#URL_ACTION_AUTEUR{iextras, [associer_champ/#_tables:CLE/(#CLE)], #SELF})]"><:iextras:action_associer:></a>
-				| <a href="[(#URL_ACTION_AUTEUR{iextras, [supprimer_champ/#_tables:CLE/(#CLE)], #SELF})]" class="supprimer"><:iextras:action_supprimer:></a>
-
+				<ul class="actions">
+				<li><a href="[(#URL_ACTION_AUTEUR{iextras, [associer_champ/#_tables:CLE/(#CLE)], #SELF})]" title="<:iextras:action_associer_title|attribut_html:>"><:iextras:action_associer:></a></li>
+				<li><a href="[(#URL_ACTION_AUTEUR{iextras, [supprimer_champ/#_tables:CLE/(#CLE)], #SELF})]" class="supprimer" title="<:iextras:action_supprimer_title|attribut_html:>"><:iextras:action_supprimer:></a></li>
+				</ul>
 			</li>
 		</BOUCLE_extras>
 		</ul>

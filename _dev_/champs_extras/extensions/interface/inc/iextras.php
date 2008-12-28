@@ -29,4 +29,23 @@ function iextras_get_extras_par_table(){
 	}
 	return $tables;
 }
+
+// tableau des extras, tries par table SQL
+function iextras_get_extras_tries_par_table(){
+	$extras = iextras_get_extras();
+	$tables = $extras_tries = array();
+	foreach($extras as $e) {
+		if (!isset($tables[$e->table])) {
+			$tables[$e->table] = array();
+		}
+		$tables[$e->table][] = $e;
+	}
+	sort($tables);
+	foreach ($tables as $table) {
+		foreach ($table as $extra) {
+			$extras_tries[] = $extra;
+		}
+	}
+	return $extras_tries;
+}
 ?>

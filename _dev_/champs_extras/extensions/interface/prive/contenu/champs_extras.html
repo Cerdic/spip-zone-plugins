@@ -7,9 +7,19 @@
 		<BOUCLE_extras(POUR){tableau #VALEUR}>
 			<li>
 				[(#VALEUR|table_valeur{champ})]
-				| <a href="[(#URL_ECRIRE{iextras_edit}|parametre_url{id_extra,#VALEUR|table_valeur{id_extra}})]"><:iextras:action_modifier:></a>
-				| <a href="[(#URL_ACTION_AUTEUR{iextras, [desassocier_extra/(#VALEUR|table_valeur{id_extra})], #SELF})]"><:iextras:action_desassocier:></a>
-				| <a href="[(#URL_ACTION_AUTEUR{iextras, [supprimer_extra/(#VALEUR|table_valeur{id_extra})], #SELF})]" class="supprimer"><:iextras:action_supprimer:></a>
+				<ul class="actions">
+				[(#TOTAL_BOUCLE|>{1}|oui)
+					[(#COMPTEUR_BOUCLE|!={1}|oui)
+						<li><a href="[(#URL_ACTION_AUTEUR{iextras, [monter_extra/(#VALEUR|table_valeur{id_extra})], #SELF})]" title="<:iextras:action_monter_title|attribut_html:>"><:iextras:action_monter:></a></li>
+					]
+					[(#COMPTEUR_BOUCLE|!=={#TOTAL_BOUCLE}|oui)
+						<li><a href="[(#URL_ACTION_AUTEUR{iextras, [descendre_extra/(#VALEUR|table_valeur{id_extra})], #SELF})]" title="<:iextras:action_descendre_title|attribut_html:>"><:iextras:action_descendre:></a></li>			
+					]
+				]
+				<li><a href="[(#URL_ECRIRE{iextras_edit}|parametre_url{id_extra,#VALEUR|table_valeur{id_extra}})]" title="<:iextras:action_modifier_title|attribut_html:>"><:iextras:action_modifier:></a></li>
+				<li><a href="[(#URL_ACTION_AUTEUR{iextras, [desassocier_extra/(#VALEUR|table_valeur{id_extra})], #SELF})]" title="<:iextras:action_desassocier_title|attribut_html:>"><:iextras:action_desassocier:></a></li>
+				<li><a href="[(#URL_ACTION_AUTEUR{iextras, [supprimer_extra/(#VALEUR|table_valeur{id_extra})], #SELF})]" class="supprimer" title="<:iextras:action_supprimer_title|attribut_html:>"><:iextras:action_supprimer:></a></li>
+				</ul>
 			</li>
 		</BOUCLE_extras>
 		</ul>
