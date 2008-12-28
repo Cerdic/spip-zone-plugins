@@ -29,85 +29,112 @@ function action_iextras_dist() {
 	
 	// cas de suppression
 	if (($arg == 'supprimer_extra') and $id_extra = $id_extra_ou_table){
-		include_spip('inc/iextras');
-		$extras = iextras_get_extras();
-		foreach($extras as $i=>$extra) {
-			if ($extra->get_id() == $id_extra) {
-				extras_log("Suppression d'un champ par auteur ".$GLOBALS['auteur_session']['id_auteur'],true);
-				extras_log($extra, true);
-				
-				$table = table_objet_sql($extra->table);
-				sql_alter("TABLE $table DROP ".$extra->champ);
-				
-				unset($extras[$i]);
-				iextras_set_extras($extras);
-				break;
-			}
-		}
+		action_supprimer_champ_extra($id_extra);
+
 	}
 
 	// cas de desassociation
 	if (($arg == 'desassocier_extra') and $id_extra = $id_extra_ou_table){
-		include_spip('inc/iextras');
-		$extras = iextras_get_extras();
-		foreach($extras as $i=>$extra) {
-			if ($extra->get_id() == $id_extra) {
-				extras_log("Desassociation du champ $extra->table/$extra->champ par auteur ".$GLOBALS['auteur_session']['id_auteur'],true);
-				
-				unset($extras[$i]);
-				iextras_set_extras($extras);
-				break;
-			}
-		}
+		action_desassocier_champ_extra($id_extra);
 	}
 	
-		
 	// cas de l'association d'un champ existant
-	if (($arg == 'associer_champ') and $table = $id_extra_ou_table){
-		// recuperer la description du champ
-		include_spip('inc/cextras_gerer');
-		$champs = extras_champs_anormaux();
-		if (isset($champs[$table][$champ])) {
-			$sql = $champs[$table][$champ];
-			// creer un champ extra avec ce champ
-			$extra = new ChampExtra(array(
-				'table' => objet_type($table),
-				'champ' => $champ,
-				'label' => 'label_'.$champ,
-				'type' => 'input',
-				'sql' => $sql,
-			));
-			// penser a creer une fonction pour ajouter et supprimer un champ...
-			// ajout du champ
-			extras_log("Ajout d'un champ deja existant par auteur ".$GLOBALS['auteur_session']['id_auteur'],true);
-			extras_log($extra, true);
-			
-			$extras = iextras_get_extras();
-			$extras[] = $extra;
-			iextras_set_extras($extras);
-			
+	if (($arg == 'associer_champ') and ($table = $id_extra_ou_table) and $champ){
+		$id_extra = action_associer_champ_sql_comme_champ_extra($table, $champ);
+		if ($id_extra) {
 			// redirection vers le formulaire d'edition du champ
 			$redirect = generer_url_ecrire('iextras_edit');
-			$redirect = parametre_url($redirect,'id_extra', $extra->get_id(), '&');
+			$redirect = parametre_url($redirect,'id_extra', $id_extra, '&');
 			include_spip('inc/header');
-			redirige_par_entete($redirect);
+			redirige_par_entete($redirect);			
 		}
 	}
 
 	// cas de la suppression d'un champ existant
-	if (($arg == 'supprimer_champ') and $table = $id_extra_ou_table){
-		// recuperer les descriptions
-		// pour verifier que le champ n'est pas declare par quelqu'un
-		include_spip('inc/cextras_gerer');
-		$champs = extras_champs_anormaux();
-		if (isset($champs[$table][$champ])) {
-			// suppression
-			extras_log("Suppression du champ $table/$champ par auteur ".$GLOBALS['auteur_session']['id_auteur'],true);
-			
-			$table = table_objet_sql($table);
-			sql_alter("TABLE $table DROP ".$champ);			
-		}
+	if (($arg == 'supprimer_champ') and ($table = $id_extra_ou_table) and $champ){
+		action_supprimer_champ_sql($table, $champ);
 	}
-	
 }
+
+// suppression d'un champ extra donne
+function action_supprimer_champ_extra($id_extra) {
+	include_spip('inc/iextras');
+	$extras = iextras_get_extras();
+	foreach($extras as $i=>$extra) {
+		if ($extra->get_id() == $id_extra) {
+			extras_log("Suppression d'un champ par auteur ".$GLOBALS['auteur_session']['id_auteur'],true);
+			extras_log($extra, true);
+			
+			$table = table_objet_sql($extra->table);
+			sql_alter("TABLE $table DROP ".$extra->champ);
+			
+			unset($extras[$i]);
+			iextras_set_extras($extras);
+			break;
+		}
+	}	
+}
+
+// desassocier un champ extra 
+// (ne plus le gerer avec le plugin champ extra
+// mais ne pas le supprimer de la base de donnee)
+function action_desassocier_champ_extra($id_extra) {
+	include_spip('inc/iextras');
+	$extras = iextras_get_extras();
+	foreach($extras as $i=>$extra) {
+		if ($extra->get_id() == $id_extra) {
+			extras_log("Desassociation du champ $extra->table/$extra->champ par auteur ".$GLOBALS['auteur_session']['id_auteur'],true);
+			
+			unset($extras[$i]);
+			iextras_set_extras($extras);
+			break;
+		}
+	}	
+}
+
+// definir un champ SQL existant comme un champ extra a prendre
+// en compte par ce plugin
+function action_associer_champ_sql_comme_champ_extra($table, $champ){
+	// recuperer la description du champ
+	include_spip('inc/cextras_gerer');
+	$champs = extras_champs_anormaux();
+	if (isset($champs[$table][$champ])) {
+		$sql = $champs[$table][$champ];
+		// creer un champ extra avec ce champ
+		$extra = new ChampExtra(array(
+			'table' => objet_type($table),
+			'champ' => $champ,
+			'label' => 'label_'.$champ,
+			'type' => 'input',
+			'sql' => $sql,
+		));
+		// penser a creer une fonction pour ajouter et supprimer un champ...
+		// ajout du champ
+		extras_log("Ajout d'un champ deja existant par auteur ".$GLOBALS['auteur_session']['id_auteur'],true);
+		extras_log($extra, true);
+		
+		$extras = iextras_get_extras();
+		$extras[] = $extra;
+		iextras_set_extras($extras);
+		
+		// retourner id_extra
+		return $extra->get_id();
+	}	
+}
+
+// suppression de la base d'un champ d'une table donnee.
+function action_supprimer_champ_sql($table, $champ) {
+	// recuperer les descriptions
+	// pour verifier que le champ n'est pas declare par quelqu'un
+	include_spip('inc/cextras_gerer');
+	$champs = extras_champs_anormaux();
+	if (isset($champs[$table][$champ])) {
+		// suppression
+		extras_log("Suppression du champ $table/$champ par auteur ".$GLOBALS['auteur_session']['id_auteur'],true);
+		
+		$table = table_objet_sql($table);
+		sql_alter("TABLE $table DROP ".$champ);			
+	}
+}
+
 ?>
