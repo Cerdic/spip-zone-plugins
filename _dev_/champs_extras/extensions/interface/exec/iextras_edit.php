@@ -21,7 +21,7 @@ function exec_iextras_edit_dist(){
 	
 	// titre
 	echo "<br /><br /><br />\n"; // outch que c'est vilain !
-	echo gros_titre(_T('iextras:titre_iextras_edit'),'', false);
+	echo gros_titre(_T('iextras:titre_iextras'),'', false);
 	
 	// barre d'onglets
 	echo barre_onglets("configuration", "iextras");
