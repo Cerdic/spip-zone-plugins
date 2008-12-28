@@ -69,11 +69,6 @@ function action_iextras_dist() {
 	}
 }
 
-// tri les extras par table
-function iextras_trier_extras_par_table($extras) {
-	$new = array();
-	
-}
 
 // remonter d'un cran un champ extra
 function action_monter_champ_extra($id_extra) {
