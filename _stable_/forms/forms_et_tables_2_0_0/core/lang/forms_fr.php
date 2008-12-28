@@ -78,7 +78,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choisir_email' => 'Choisir l\'email en fonction de',
 	'confirm_supprimer_champ' => 'Etes-vous certain de vouloir supprimer le champ \'@champ@\' ?',
 	'confirm_supprimer_donnee' => 'Etes-vous certain de vouloir supprimer la donnee \'@donnee@\' ?',
-	'confirm_vider_table' => 'Etes-vous certain de vouloir vider le contenu de la table \'@table@\' ?',
 	'confirmer_champ_password' => 'Libelle si double saisie',
 	'confirmer_password' => 'Confirmation',
 	'confirmer_reponse' => 'Envoyer un mail d\'accus&eacute; de r&eacute;ception avec :',

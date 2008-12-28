@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'champs_formulaire' => 'Champs de la table',
+	'confirm_vider_table' => '&Ecirc;tes-vous certain de vouloir vider le contenu de la table \'@table@\' ?',
 
 	// F
 	'formulaire' => 'Table',
