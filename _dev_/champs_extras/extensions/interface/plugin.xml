@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Interface pour Champs Extras</nom>
 	<auteur>Matthieu Marcillaud [->magraine.net]</auteur>
-	<licence>GNU/GLP</licence>
+	<licence>GNU/GPL</licence>
 	<version>0.2</version>
 	<icon>images/iextras-64.png</icon>
 	<description>

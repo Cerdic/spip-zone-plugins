@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Post Scriptum pour Rubriques</nom>
 	<auteur>Matthieu Marcillaud [->magraine.net]</auteur>
-	<licence>GNU/GLP</licence>
+	<licence>GNU/GPL</licence>
 	<version>0.1</version>
 	<version_base>0.1</version_base>
 	<description>

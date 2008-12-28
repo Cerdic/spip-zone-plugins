@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Champs Extras</nom>
 	<auteur>Matthieu Marcillaud [->magraine.net]</auteur>
-	<licence>GNU/GLP</licence>
+	<licence>GNU/GPL</licence>
 	<version>0.2</version>
 	<description>
 	Creer de nouveaux champs aux objets d'&eacute;dition de SPIP
