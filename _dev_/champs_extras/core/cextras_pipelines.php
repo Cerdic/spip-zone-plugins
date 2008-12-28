@@ -32,7 +32,6 @@ function cextras_creer_contexte($c, $contexte_flux) {
 	
 // ajouter les champs sur les formulaires CVT editer_xx
 function cextras_editer_contenu_objet($flux){
-	
 	// recuperer les champs crees par les plugins
 	if ($champs = pipeline('declarer_champs_extras', array())) {
 		foreach ($champs as $c) {

@@ -3,6 +3,37 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/cextras');
 
+// retourne la liste des objets valides utilisables par le plugin
+// (dont on peut afficher les champs dans les formulaires)
+function cextras_objets_valides(){
+	$objets = array();
+	foreach (array('article','auteur','breve','groupe_mot','mot','rubrique','site') as $objet) {
+		$objets[$objet] = array(
+			'table' => table_objet_sql($objet), 
+			'nom' => _T('cextras:table_'.$objet),
+		);
+	}
+	return $objets;
+}
+
+// retourne la liste des types de formulaires utilisables par les champs extras
+// (crayons appelle cela des 'controleurs')
+function cextras_types_formulaires(){
+	$types = array();
+	foreach (array('input','textarea') as $type) {
+		$types[$type] = array(
+			'nom' => _T('cextras:type_'.$type),
+		);
+	}
+	return $types;
+}
+
+
+/**
+ * Cree en base les champs extras demandes lors d'une installation
+ * d'un plugin dependant
+ * $champs est un tableau d'objets ChampExtra a creer
+ */
 function creer_champs_extras($champs, $nom_meta_base_version, $version_cible) {
 	$current_version = 0.0;
 
@@ -51,6 +82,20 @@ function vider_champs_extras($champs, $nom_meta_base_version) {
  * 
  */
 
+// liste les tables et les champs que le plugin et spip savent gerer
+function extras_champs_utilisables($connect='') {
+	$tout = extras_champs_anormaux($connect);
+	$objets = cextras_objets_valides();
+	
+	$tables_utilisables = array();
+	foreach ($objets as $o){$tables_utilisables[] = $o['table'];}
+	foreach ($tout as $table=>$champs) {
+		if (!in_array($table, $tables_utilisables)) {
+			unset($tout[$table]);
+		}
+	}
+	return $tout;
+}
 
 // Liste les champs anormaux par rapport aux definitions de SPIP
 // (aucune garantie que $connect autre que la connexion principale fasse quelque chose)

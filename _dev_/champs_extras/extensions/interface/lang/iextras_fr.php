@@ -46,15 +46,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//S
 	'supprimer_reelement' => 'Supprimer ce champ ?',
 	//T
-	'table_article' => 'Articles',
-	'table_auteur' => 'Auteurs',
-	'table_rubrique' => 'Rubriques',
-	
 	'titre_page_iextras' => 'Champs Extras',
 	'titre_iextras' => 'Champs Extras',
-	
-	'type_input'=>'Afficher une saisie input de type texte',
-	'type_textarea'=>'Afficher une saisie textarea',
+
 	//V
 	'veuillez_renseigner_ce_champ' => 'Veuillez renseigner ce champ !',
 );

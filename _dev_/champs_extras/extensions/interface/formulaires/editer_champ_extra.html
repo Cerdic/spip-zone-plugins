@@ -31,8 +31,8 @@
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				[<p class="explication">(#GET{explications})</p>]
 				<select name='#GET{name}' id='#GET{name}'[ (#GET{disabled})disabled='disabled']>
-					<BOUCLE_liste_objet(POUR){tableau #ARRAY{0,article,1,auteur,2,rubrique}}>
-					<option value='#VALEUR'[ (#ENV{#GET{name}}|=={#VALEUR}|oui)selected='selected']>[(#GET{fl}|concat{:table_,#VALEUR}|_T)]</option>
+					<BOUCLE_liste_objet(POUR){tableau (#VAL|cextras_objets_valides)}>
+					<option value='#CLE'[ (#ENV{#GET{name}}|=={#CLE}|oui)selected='selected']>[(#VALEUR|table_valeur{nom})]</option>
 					</BOUCLE_liste_objet>
 				</select>
 				[(#GET{disabled}|oui)<input type='hidden' name='#GET{name}' value="#ENV{#GET{name}}" />]
@@ -61,8 +61,8 @@
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				[<p class="explication">(#GET{explications})</p>]
 				<select name='#GET{name}' id='#GET{name}'[ (#GET{disabled})disabled='disabled']>
-					<BOUCLE_liste_types(POUR){tableau #ARRAY{0,textarea,1,input}}>
-					<option value='#VALEUR'[ (#ENV{#GET{name}}|=={#VALEUR}|oui)selected='selected']>[(#GET{fl}|concat{:type_,#VALEUR}|_T)]</option>
+					<BOUCLE_liste_types(POUR){tableau (#VAL|cextras_types_formulaires)}>
+					<option value='#CLE'[ (#ENV{#GET{name}}|=={#CLE}|oui)selected='selected']>[(#VALEUR|table_valeur{nom})]</option>
 					</BOUCLE_liste_types>
 				</select>
 				[(#GET{disabled}|oui)<input type='hidden' name='#GET{name}' value="#ENV{#GET{name}}" />]

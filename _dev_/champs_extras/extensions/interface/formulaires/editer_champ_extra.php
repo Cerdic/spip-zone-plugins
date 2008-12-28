@@ -2,6 +2,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/iextras');
+include_spip('inc/cextras_gerer');
 
 function formulaires_editer_champ_extra_charger_dist($id_extra='new', $redirect=''){
 	// nouveau ?
@@ -102,6 +103,11 @@ function formulaires_editer_champ_extra_traiter_dist($id_extra='new', $redirect=
 	
 	// creer le champ s'il est nouveau :
 	if ($new) {
+		// recharger les tables principales
+		include_spip('base/serial');
+		global $tables_principales;
+		base_serial($tables_principales);
+		
 		include_spip('base/create');
 		$table = table_objet_sql($extra['table']);
 		extras_log("Creation d'un nouveau champ par auteur ".$GLOBALS['auteur_session']['id_auteur'],true);
