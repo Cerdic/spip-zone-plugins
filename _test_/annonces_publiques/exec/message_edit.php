@@ -53,7 +53,7 @@ function exec_message_edit()
 	}
 
 
-	debut_gauche();
+	echo debut_gauche('', true);
 	
 	if($type == 'normal' AND $dest) {
 		$nom = spip_fetch_array(spip_query("SELECT nom, email FROM spip_auteurs WHERE id_auteur=$dest"));
@@ -64,7 +64,7 @@ function exec_message_edit()
 		}
 	}
 
-	debut_droite();
+	echo debut_droite('', true);
 
 	$res =  "<div class='arial2'>"
 	. "<span style='color:green' class='verdana1 spip_small'><b>$le_type</b></span>";

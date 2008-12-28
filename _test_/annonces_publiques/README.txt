@@ -1,6 +1,10 @@
 README.txt
 ----------
 
+Version 1.3 - 2008-12-28
+
+-* Compatibilite SPIP 2.0.0
+
 Version 1.2 - 2008-02-15
 
 -* Rubriques => Calendriers
@@ -24,7 +28,6 @@ BUGS:
 TODO:
 -----
 
-Compatiblite SPIP 1.9.3dev
 Selection annonce publique/privee
 Mots-Cles => Categories
 Repetitions -> RRULE, EXRULE, RDATE, EXDATE (RFC iCal)

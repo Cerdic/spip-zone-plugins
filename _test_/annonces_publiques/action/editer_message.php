@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include('ecrire/action/editer_message.php');
+include('action/editer_message.php');
 
 // http://doc.spip.org/@action_editer_message_dist
 function action_editer_message() {
@@ -12,7 +12,7 @@ function action_editer_message() {
 
 	//tout pareil qu'en standard, sauf qu'on a un champ supplementaire, donc une fonction d'update differente
 	if (preg_match(',^(\d+)$,', $arg, $r))
-		action_editer_message_post_vieux_ap($arg); 
+		action_editer_message_post_vieux_ap($arg); #la fonction differente...
 	elseif (preg_match(',^-(\d+)$,', $arg, $r))
 		action_editer_message_post_supprimer($r[1]);
 	elseif (preg_match(',^(\d+)\W$,', $arg, $r))
@@ -34,17 +34,17 @@ function action_editer_message() {
 	else 	spip_log("action_editer_message_dist $arg pas compris");
 }
 
-// idem que la focntion standard mais on update le champ lieu en plus.
+// idem que la focntion standard mais on update le champ lieu et la rubrique en plus.
 function action_editer_message_post_vieux_ap($id_message)
 {
-
 	//Champs suppl. LIEU, ID_RUBRIQUE		
-	spip_query("UPDATE spip_messages SET titre=" . _q(_request('titre')) . ", texte=" . _q(_request('texte')) . ", lieu=" . _q(_request('lieu')) . ", id_rubrique=" . _q(_request('id_parent')) . " WHERE id_message='$id_message'");
+	sql_updateq('spip_messages', array('titre'=>_request('titre'), 'texte' => _request('texte'), 'lieu' => _request('lieu'), 'id_rubrique' => _request('id_parent')), "id_message=$id_message");
 
-	spip_query("UPDATE spip_messages SET rv=" . _q(_request('rv')) . " WHERE id_message='$id_message'");
+	sql_updateq('spip_messages', array('rv' => _request('rv')), "id_message=$id_message");
 
 	if (_request('jour'))
 		change_date_message($id_message, _request('heures'),_request('minutes'),_request('mois'), _request('jour'), _request('annee'), _request('heures_fin'),_request('minutes_fin'),_request('mois_fin'), _request('jour_fin'), _request('annee_fin'));
+
 }
 
 ?>
