@@ -2,13 +2,17 @@
 #SET{valeur,#ENV{#ENV{champextra}}}
 #SET{label,#ENV{#VAL{label_}|concat{#GET{name}}}|_T}
 #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+
+[(#REM) En cas de creation d'objet, # SESSION{id_auteur} est propose ]
+[(#ENV**{id}|=={new}|?{[(#SET{valeur,#SESSION{id_auteur}})]})]
+
 <li class="editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
 	<label for="#GET{name}">#GET{label}</label>
 		[<span class='erreur_message'>(#GET{erreurs})</span>]
 		<select name='#GET{name}'[ lang='(#LANG)'] id='#GET{name}'>
 			<option value="0"[
-				(#GET{valeur}|=={'0'}|?{selected='selected'})]>
-				Pas d'auteur
+				(#GET{valeur}|?{'','selected="selected"'})]>
+				- pas d'auteur -
 			</option>
 			<BOUCLE_a(AUTEURS){tous}{par statut,nom}>
 			<option value="#ID_AUTEUR"[

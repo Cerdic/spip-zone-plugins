@@ -67,9 +67,9 @@ function cextras_pre_edition($flux){
 		foreach ($champs as $c) {
 			// si le champ est du meme type que le flux
 			if ($flux['args']['table']==table_objet_sql($c->table) and $c->champ and $c->sql) {
-				if ($extra = _request($c->champ)) {
+				if (($extra = _request($c->champ)) !== null) {
 					$flux['data'][$c->champ] = corriger_caracteres($extra);
-				}				
+				}
 			}
 		}
 	}
