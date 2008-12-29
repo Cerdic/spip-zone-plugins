@@ -156,7 +156,7 @@ function action_associer_champ_sql_comme_champ_extra($table, $champ){
 			'table' => objet_type($table),
 			'champ' => $champ,
 			'label' => 'label_'.$champ,
-			'type' => 'input',
+			'type' => 'ligne',
 			'sql' => $sql,
 		));
 		// penser a creer une fonction pour ajouter et supprimer un champ...

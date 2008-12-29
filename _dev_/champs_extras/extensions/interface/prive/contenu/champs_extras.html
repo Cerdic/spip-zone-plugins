@@ -7,6 +7,8 @@
 		<BOUCLE_extras(POUR){tableau #VALEUR}>
 			<li>
 				[(#VALEUR|table_valeur{champ})]
+				[<small>&mdash; (#VALEUR|table_valeur{label})</small>]
+				[(type: <tt>(#VALEUR|table_valeur{type})</tt>)]
 				<ul class="actions">
 				[(#TOTAL_BOUCLE|>{1}|oui)
 					[(#COMPTEUR_BOUCLE|!={1}|oui)
