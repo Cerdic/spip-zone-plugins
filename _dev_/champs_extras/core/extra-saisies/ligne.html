@@ -1,9 +1,6 @@
-#SET{name,#ENV{champextra}}
-#SET{valeur,#ENV{#ENV{champextra}}}
-#SET{label,#ENV{#VAL{label_}|concat{#GET{name}}}|_T}
-#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-<li class="editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
-	<label for="#GET{name}">#GET{label}</label>
-		[<span class='erreur_message'>(#GET{erreurs})</span>]
-		<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#GET{valeur}" />
+<li class="editer_[(#ENV{champ_extra})][ (#ENV{erreur_extra}|oui)erreur]">
+	<label for="#ENV{champ_extra}">#ENV{label_extra}</label>
+		[<span class='erreur_message'>(#ENV{erreur_extra})</span>]
+		[<p class="explications">(#ENV{precisions_extra})</p>]
+		<input type='text' class='text' name='#ENV{champ_extra}' id='#ENV{champ_extra}' value="#ENV{valeur_extra}" />
 </li>

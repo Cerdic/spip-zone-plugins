@@ -39,10 +39,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_champ' => 'Nom du champ',
 	'label_table' => 'Objet',
 	'label_label' => 'Label de la saisie',
+	'label_precisions' => 'Précisions de la saisie',
 	'label_sql' => 'D&eacute;finition SQL',
 	'label_type' => 'Type de saisie',
 	'liste_des_extras' => 'Liste des champs extras',
 	'liste_des_extras_possibles' => 'Liste des champs pr&eacute;sents non g&eacute;r&eacute;s',
+	//P
+	'precisions_pour_label' => 'Peut &ecirc;tre une cha&icirc;ne de langue &laquo;plugin:chaine&raquo;.',
+	'precisions_pour_precisions' => 'Optionnellement, vous pouvez donner plus d\'informations concernant la saisie. 
+		Peut &ecirc;tre une cha&icirc;ne de langue &laquo;plugin:chaine&raquo;.',
+	
 	//S
 	'supprimer_reelement' => 'Supprimer ce champ ?',
 	//T

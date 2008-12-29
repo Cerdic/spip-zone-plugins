@@ -9,8 +9,9 @@ include_spip('inc/cextras');
 // en fonction des parametres donnes dans la classe ChampExtra
 function cextras_creer_contexte($c, $contexte_flux) {
 	$contexte = array();
-	$contexte['champextra'] = $c->champ;
-	$contexte['label_' . $c->champ] = $c->label;
+	$contexte['champ_extra'] = $c->champ;
+	$contexte['label_extra'] = _T($c->label);
+	$contexte['precisions_extra'] = _T($c->precisions);
 	
 	// retrouver la valeur du champ demande
 	$table = table_objet_sql($c->table);
@@ -25,8 +26,15 @@ function cextras_creer_contexte($c, $contexte_flux) {
 	} elseif (isset($contexte_flux['id']) and intval($contexte_flux['id'])) { // peut valoir 'new'
 		$id = $contexte_flux['id'];
 	}
+	
+	// ajouter 'erreur_extra' dans le contexte s'il y a une erreur sur le champ
+	if (isset($contexte_flux['erreurs']) 
+	and is_array($contexte_flux['erreurs'])
+	and in_array($c->champ, $contexte_flux['erreurs'])) {
+		$contexte['erreur_extra'] = $contexte_flux['erreurs'][$c->champ];
+	}
 
-	$contexte[$c->champ] = sql_getfetsel($c->champ, $table, $_id . '=' . sql_quote($id));
+	$contexte['valeur_extra'] = $contexte[$c->champ] = sql_getfetsel($c->champ, $table, $_id . '=' . sql_quote($id));
 	return array_merge($contexte_flux, $contexte);
 }
 	

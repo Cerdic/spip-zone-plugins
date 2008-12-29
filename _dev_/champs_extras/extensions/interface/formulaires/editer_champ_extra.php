@@ -14,6 +14,7 @@ function formulaires_editer_champ_extra_charger_dist($id_extra='new', $redirect=
 		'table' => '',
 		'type' => '',
 		'label' => '',
+		'precisions' => '',
 		'sql' => "text NOT NULL DEFAULT ''",
 		'id_extra' => $id_extra,
 		'new' => $new,
@@ -127,7 +128,7 @@ function formulaires_editer_champ_extra_traiter_dist($id_extra='new', $redirect=
 // recuperer les valeurs postees par le formulaire
 function iextras_post_formulaire() {
 	$extra = array();
-	foreach(array('champ', 'table', 'type', 'label', 'sql') as $c) {
+	foreach(array('champ', 'table', 'type', 'label', 'sql', 'precisions') as $c) {
 		$extra[$c] = _request($c);
 	}
 	return $extra;	
