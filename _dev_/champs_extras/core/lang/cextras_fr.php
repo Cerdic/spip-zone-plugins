@@ -10,7 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'table_rubrique' => 'Rubriques',
 	'table_site' => 'Sites',
 	
-	'type_input'=>'Afficher une saisie input de type texte',
-	'type_textarea'=>'Afficher une saisie textarea',
+	'type' => 'Afficher une saisie de type @type@'
+#	'type_input'=>'Afficher une saisie input de type texte',
+#	'type_textarea'=>'Afficher une saisie textarea',
 );
 ?>

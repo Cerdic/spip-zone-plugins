@@ -83,6 +83,9 @@ function cextras_afficher_contenu_objet($flux){
 				if (!find_in_path(
 				($f = 'prive/contenu/inc-champ-extra-'.$c->type).'.html'))
 					$f = 'prive/contenu/inc-champ-extra';
+
+var_dump($f);
+
 				$extra = recuperer_fond($f, $contexte);
 				$flux['data'] .= "\n".$extra;
 			}
