@@ -41,7 +41,15 @@ function cextras_editer_contenu_objet($flux){
 				$contexte = cextras_creer_contexte($c, $flux['args']['contexte']);
 
 				// calculer le bon squelette et l'ajouter
-				$extra = recuperer_fond('saisie/'.$c->type, $contexte);	
+				if (!find_in_path(
+				($f = 'saisie/'.$c->type).'.html')) {
+					// si on ne sait pas, on se base sur le contenu
+					// pour choisir ligne ou bloc
+					$f = strstr($contexte[$c->champ], "\n")
+						? 'saisie/bloc'
+						: 'saisie/ligne';
+				}
+				$extra = recuperer_fond($f, $contexte);
 				$flux['data'] = preg_replace('%(<!--extra-->)%is', $extra."\n".'$1', $flux['data']);
 			}
 		}
@@ -83,9 +91,6 @@ function cextras_afficher_contenu_objet($flux){
 				if (!find_in_path(
 				($f = 'prive/contenu/inc-champ-extra-'.$c->type).'.html'))
 					$f = 'prive/contenu/inc-champ-extra';
-
-var_dump($f);
-
 				$extra = recuperer_fond($f, $contexte);
 				$flux['data'] .= "\n".$extra;
 			}
