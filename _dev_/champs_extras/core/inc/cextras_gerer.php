@@ -23,7 +23,7 @@ function cextras_types_formulaires(){
 	$types = array();
 
 	foreach(_chemin() as $dir) {
-		if (@is_dir($s = $dir.'saisie/')) {
+		if (@is_dir($s = $dir.'extra-saisies/')) {
 			foreach(preg_files($s, '.*.html$') as $saisie) {
 				$type = basename($saisie,'.html');
 				$types[$type] = array(

@@ -5,7 +5,7 @@ class ChampExtra{
 	var $table = ''; // type de table ('rubrique')
 	var $champ = ''; // nom du champ ('ps')
 	var $label = ''; // label du champ, code de lanque ('monplug:mon_label')
-	var $type = 'textarea'; // type (input/textarea)
+	var $type = ''; // type (ligne/bloc/etc)
 	var $sql = ''; // declaration sql (text NOT NULL DEFAULT '')
 	
 	var $_id = ''; // identifiant de ce champ extra
@@ -32,7 +32,7 @@ class ChampExtra{
 	}
 	
 	// declarations specifiques
-	function set_type($val='textarea') {
+	function set_type($val='') {
 		$this->type = $val;
 	}
 	
