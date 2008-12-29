@@ -132,11 +132,11 @@ function exec_spipbb_effacer() {
 
 			if($id_parent=='0')
 				{
-				$nbr_post=$total_post-1;
+				$nbr_post=sql_count($res2);
 				echo "<tr class='verdana2' bgcolor='".$couleur."'><td>\n";
 				echo "<div class='verdana2' style='color:#ED4242; margin-left:30px; padding:2px;'>\n";
 				echo "<img src='"._DIR_IMG_SPIPBB."gaf_post-12.gif' align='absmiddle' />&nbsp;";
-				echo _T('spipbb:post_efface_lui');
+				echo _T('spipbb:post_efface_lui', array('nbr_post'=>$nbr_post) );
 				echo "<a href='".generer_url_ecrire("spipbb_sujet","id_sujet=".$id_post)."'>&nbsp;".
 						http_img_pack("plus.gif",'ico',"border='0' align='absmiddle'",_T('spipbb:post_verifier_sujet'));
 				echo "</a></div>\n";

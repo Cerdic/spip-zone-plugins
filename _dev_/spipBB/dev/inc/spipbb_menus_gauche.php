@@ -274,24 +274,20 @@ function posts_proposes_attente_moderation() {
 						"0,10"); // limit
 
 	$aff='';
-	if($nbrprop) {
-		$aff.= "<br />"
-			. "\n<div class='bandeau_rubriques' style='z-index: 1;'>"
-			. bandeau_titre_boite2(_T('spipbb:poste_valide'),"gaf_p_prop.gif",'','',false)
-			. "<div class='plan-articles'>";
+	if($nbrprop)
+	{
+		$aff.= debut_cadre_relief(_DIR_PLUGIN_SPIPBB."img_pack/gaf_p_prop.gif", true, '', _T('spipbb:poste_valide'));
 
 		while($row = sql_fetch($result))
-			{
-			$idprop=$row['id_forum'];
-			$titreprop=$row['titre'];
-			$idthread=$row['id_thread'];
-			$urlprop = url_post_tranche($idprop, $idthread);
-			$ico_prop = ($idprop==$idthread) ? "gaf_sujet-12.gif" : "gaf_post-12.gif" ;
-			$aff.= "<a href='".$urlprop."'>".couper($titreprop,30)."</a>\n";
-			}
+		{
+			$urlprop = url_post_tranche($row['id_forum'], $row['id_thread']);
+			$ico_prop = ($row['id_forum']==$row['id_thread']) ? "gaf_sujet-12.gif" : "gaf_post-12.gif" ;
+			$aff.= "<a href='".$urlprop."'>".couper($row['titre'],30)."</a>\n";
+		}
 
 		if($nbrprop>10) { $aff.= _T('spipbb:etplus'); }
-		$aff.= "</div></div>\n";
+		$aff.= fin_cadre_relief(true);
+
 	}
 	return $aff;
 } // posts_proposes_attente_moderation

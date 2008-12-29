@@ -1,14 +1,14 @@
 <plugin>
-	<version>0.5.3.0</version>
+	<version>0.5.3.1</version>
 	<nom>
 		<multi>
-			[en]SpipBB: Management of SPIP SVN forums
-			[ca]SpipBB: Gesti&oacute; dels f&ograve;rums d'SPIP SVN
-			[pt]SpipBB: Gest&atilde;o dos f&oacute;runs de SPIP SVN
-			[tr]SpipBB : SPIP SVN forumlar&#305;n&#305;n y&ouml;netimi
-			[nl]SpipBB: Beleid van de SPIP SVN forums
-			[gl]SpipBB : xesti&oacute;n de foros de SPIP SVN
-			[fr]SpipBB : Gestion des forums de SPIP SVN
+			[en]SpipBB: Management of SPIP 2.0 forums
+			[ca]SpipBB: Gesti&oacute; dels f&ograve;rums d'SPIP 2.0
+			[pt]SpipBB: Gest&atilde;o dos f&oacute;runs de SPIP 2.0
+			[tr]SpipBB : SPIP 2.0 forumlar&#305;n&#305;n y&ouml;netimi
+			[nl]SpipBB: Beleid van de SPIP 2.0 forums
+			[gl]SpipBB : xesti&oacute;n de foros de SPIP 2.0
+			[fr]SpipBB : Gestion des forums de SPIP 2.0
 		</multi>
 	</nom>
 	<auteur>
@@ -52,7 +52,7 @@ _ [Access to the admin panel-> .?exec=spipbb_configuration]
 -* &bull;[l'ajuda i suport a spipbb.free.fr->http://spipbb.free.fr/spip.php?article11],
 -* &bull;[La documentaci&oacute; a Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
- _ {{Plugin spipbb en curs de desenvolupament. Utilitzeu-los assumint-ne els riscs i els perills}}
+ _ {{Plugin SpipBB en curs de desenvolupament. Utilitzeu-los assumint-ne els riscs i els perills}}
 
  _ [Acc&eacute;s al panell d'administraci&oacute;-&gt; .?exec=spipbb_configuration]
 [pt]
@@ -64,9 +64,9 @@ O plugin SpipBB permite :
 -* [ a ajuda e apoio sobre spipbb.free.fr ->http://spipbb.free.fr/spip.php?article11],
 -* [ A documenta&ccedil;&atilde;o sobre Spip-contrib ->http://www.spip-contrib.net/SpipBB-le-forum].
 
-_ {{Plugin spipbb en cours de developpement. Vous l'utilisez &agrave; vos risques et p&eacute;rils}}
+{{Plugin SpipBB em fase de desenvolvimento. Utilize-o a vossos riscos e perigos}}
 
-_ [Acc&egrave;s au panneau d'administration-> .?exec=spipbb_configuration]
+_ [ Acessos ao painel de administra&amp;ccedil;&amp;atilde;o ->.?exec=spipbb_configuration]
 
 [fr]Le plugin SpipBB permet :
 -* De g&eacute;rer de fa&ccedil;on centralis&eacute;e les forums de SPIP (interface priv&eacute;e),
