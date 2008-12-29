@@ -275,6 +275,8 @@ function rubriques_admin_restreint($connect_id_auteur) {
 # contenu : les posts en attente de moderation
 // ------------------------------------------------------------------------------
 function posts_proposes_attente_moderation() {
+	global $spip_lang_left;
+
 	spipbb_log("entree",1,"posts_proposes_attente_moderation");
 	/* c: 7/2/8 compatibilite pg_sql
 	$result = sql_query ("SELECT SQL_CALC_FOUND_ROWS id_forum, titre, id_thread
