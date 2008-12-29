@@ -6,7 +6,7 @@ function postscriptum_declarer_champs_extras($champs = array()){
 		'table' => 'rubrique', // sur quelle table ?
 		'champ' => 'ps', // nom sql
 		'label' => 'info_post_scriptum', // chaine de langue 'prefix:cle'
-		'type' => 'textarea', // pour le moment, que 2 types : input ou textarea
+		'type' => 'bloc', // type de saisie
 		'sql' => "text NOT NULL DEFAULT ''", // declaration sql
 	));
 	return $champs;
