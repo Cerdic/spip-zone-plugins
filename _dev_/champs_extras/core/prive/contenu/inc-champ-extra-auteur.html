@@ -1,0 +1,9 @@
+#SET{name,#ENV{champextra}}
+#SET{valeur,#ENV{#ENV{champextra}}}
+#SET{label,#ENV{#VAL{label_}|concat{#GET{name}}}|_T}
+<div class="[(#GET{name})]">
+	<strong>[(#GET{label})]</strong>
+	<BOUCLE_a(AUTEURS){tous}{id_auteur=#GET{valeur}}>
+	#NOM
+	</BOUCLE_a>
+</div>
