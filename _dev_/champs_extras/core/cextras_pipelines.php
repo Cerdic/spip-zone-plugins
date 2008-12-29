@@ -30,7 +30,7 @@ function cextras_creer_contexte($c, $contexte_flux) {
 	// ajouter 'erreur_extra' dans le contexte s'il y a une erreur sur le champ
 	if (isset($contexte_flux['erreurs']) 
 	and is_array($contexte_flux['erreurs'])
-	and in_array($c->champ, $contexte_flux['erreurs'])) {
+	and array_key_exists($c->champ, $contexte_flux['erreurs'])) {
 		$contexte['erreur_extra'] = $contexte_flux['erreurs'][$c->champ];
 	}
 
@@ -42,12 +42,18 @@ function cextras_creer_contexte($c, $contexte_flux) {
 function cextras_editer_contenu_objet($flux){
 	// recuperer les champs crees par les plugins
 	if ($champs = pipeline('declarer_champs_extras', array())) {
-		foreach ($champs as $c) {
+		
+		// liste des champs presents pour ce formulaire pour le
+		// controle d'integrite md5 pour les conflits d'edition
+		$extras = array();
+			
+		foreach ($champs as $c) {	
 			// si le champ est du meme type que le flux
 			if ($flux['args']['type']==objet_type($c->table) and $c->champ and $c->sql) {
 
 				$contexte = cextras_creer_contexte($c, $flux['args']['contexte']);
-
+				$extras[$c->champ] = $contexte[$c->champ];
+				
 				// calculer le bon squelette et l'ajouter
 				if (!find_in_path(
 				($f = 'extra-saisies/'.$c->type).'.html')) {
@@ -60,6 +66,11 @@ function cextras_editer_contenu_objet($flux){
 				$extra = recuperer_fond($f, $contexte);
 				$flux['data'] = preg_replace('%(<!--extra-->)%is', $extra."\n".'$1', $flux['data']);
 			}
+		}
+		
+		// s'il y a des champs, creer les controles md5
+		if ($extras) {
+			$flux['data'] = preg_replace('%(<!--extra-->)%is', controles_md5($extras)."\n".'$1', $flux['data']);
 		}
 	}
 	
