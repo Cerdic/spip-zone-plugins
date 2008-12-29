@@ -16,14 +16,21 @@ function cextras_objets_valides(){
 	return $objets;
 }
 
-// retourne la liste des types de formulaires utilisables par les champs extras
+// retourne la liste des types de formulaires de saisie
+// utilisables par les champs extras
 // (crayons appelle cela des 'controleurs')
 function cextras_types_formulaires(){
 	$types = array();
-	foreach (array('input','textarea') as $type) {
-		$types[$type] = array(
-			'nom' => _T('cextras:type_'.$type),
-		);
+
+	foreach(_chemin() as $dir) {
+		if (@is_dir($s = $dir.'saisie/'))
+			foreach(preg_files($s, '.*.html$') as $saisie) {
+				$type = basename($saisie,'.html');
+				$types[$type] = array(
+					'nom' => _T('cextras:type', array('type' => $type))
+				);
+			}
+		}
 	}
 	return $types;
 }

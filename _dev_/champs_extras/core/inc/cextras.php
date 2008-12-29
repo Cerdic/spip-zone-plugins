@@ -33,10 +33,7 @@ class ChampExtra{
 	
 	// declarations specifiques
 	function set_type($val='textarea') {
-		if (!in_array($val, array('textarea','input'))) {
-			$val = 'textarea';
-		}
-		$this->type = $val;	
+		$this->type = $val;
 	}
 	
 	// creer l'id du champ extra :

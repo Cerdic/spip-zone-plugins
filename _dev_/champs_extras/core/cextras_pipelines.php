@@ -41,7 +41,7 @@ function cextras_editer_contenu_objet($flux){
 				$contexte = cextras_creer_contexte($c, $flux['args']['contexte']);
 
 				// calculer le bon squelette et l'ajouter
-				$extra = recuperer_fond('formulaires/inc-champ-formulaire-'.$c->type, $contexte);	
+				$extra = recuperer_fond('saisie/'.$c->type, $contexte);	
 				$flux['data'] = preg_replace('%(<!--extra-->)%is', $extra."\n".'$1', $flux['data']);
 			}
 		}
@@ -77,11 +77,13 @@ function cextras_afficher_contenu_objet($flux){
 		foreach ($champs as $c) {
 			// si le champ est du meme type que le flux
 			if ($flux['args']['type']==objet_type($c->table) and $c->champ and $c->sql) {
-	
 				$contexte = cextras_creer_contexte($c, $flux['args']['contexte']);
 
 				// calculer le bon squelette et l'ajouter
-				$extra = recuperer_fond('prive/contenu/inc-champ-extra', $contexte);	
+				if (!find_in_path(
+				($f = 'prive/contenu/inc-champ-extra-'.$c->type).'.html'))
+					$f = 'prive/contenu/inc-champ-extra';
+				$extra = recuperer_fond($f, $contexte);
 				$flux['data'] .= "\n".$extra;
 			}
 		}
