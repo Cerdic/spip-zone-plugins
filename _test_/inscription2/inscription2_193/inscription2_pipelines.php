@@ -15,15 +15,11 @@ function inscription2_ajouter_boutons($boutons_admin){
 }
 
 function inscription2_affiche_milieu($flux){
-	switch($flux['args']['exec']) {	
-			case 'auteur_infos':
-				$legender_auteur_supp = charger_fonction('legender_auteur_supp','exec');
-				$id_auteur = $flux['args']['id_auteur'];
-				$flux['data'] .= $legender_auteur_supp($id_auteur);
-				break;
-			default:
-				break;
-		}
+	if($flux['args']['exec'] == 'auteur_infos') {	
+		$legender_auteur_supp = charger_fonction('legender_auteur_supp','exec');
+		$id_auteur = $flux['args']['id_auteur'];
+		$flux['data'] .= $legender_auteur_supp($id_auteur);
+	}
 	return $flux;
 }
 
