@@ -8,7 +8,7 @@ include_spip('inc/cextras');
 // Calcule des elements pour le contexte de compilation
 // des squelettes de champs extras
 // en fonction des parametres donnes dans la classe ChampExtra
-function cextras_creer_contexte($c, $contexte_flux, $quete_valeur = false) {
+function cextras_creer_contexte($c, $contexte_flux) {
 	$contexte = array();
 	$contexte['champ_extra'] = $c->champ;
 	$contexte['label_extra'] = _T($c->label);
@@ -57,12 +57,11 @@ function cextra_quete_valeurs_extras($extras, $contexte){
 
 // recuperer tous les extras qui verifient le critere demande :
 // l'objet sur lequel s'applique l'extra est comparee a $nom
-function cextras_get_extras_match($nom, $func='objet_type', $prefixe='') {
+function cextras_get_extras_match($nom) {
 	$extras = array();
 	if ($champs = pipeline('declarer_champs_extras', array())) {
 		foreach ($champs as $c) {
-			if ($nom == ($prefixe . $func($c->table))
-			and $c->champ and $c->sql) {
+			if ($nom == objet_type($c->table) and $c->champ and $c->sql) {
 				$extras[] = $c;
 			}
 		}
@@ -109,7 +108,7 @@ function cextras_editer_contenu_objet($flux){
 function cextras_pre_edition($flux){
 	
 	// recuperer les champs crees par les plugins
-	if ($extras = cextras_get_extras_match($flux['args']['table'], 'table_objet_sql')) {
+	if ($extras = cextras_get_extras_match(objet_type($flux['args']['table']))) {
 		foreach ($extras as $c) {
 			if (($extra = _request($c->champ)) !== null) {
 				$flux['data'][$c->champ] = corriger_caracteres($extra);
