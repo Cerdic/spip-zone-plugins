@@ -102,7 +102,6 @@ function decouper_en_pages_rempl($texte, $pagination_seule=false) {
 			include_spip('inc/surligne');
 			$page = surligner_mots($page, $_GET['decoupe_recherche']);
 		}
-		decoupe_notes_orphelines($page);
 		if (defined('_decoupe_BALISE')) return $sommaire.$page;
 	}
 
@@ -178,7 +177,9 @@ function cs_onglets($texte){
 function cs_decoupe($texte, $pagination_seule=false){
 	// si pas de separateur, on sort
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $pagination_seule?'':$texte;
-	return cs_echappe_balises('html|code|cadre|frame|script|cite|table|jeux', 'decouper_en_pages_rempl', $texte, $pagination_seule);
+	$texte = cs_echappe_balises('html|code|cadre|frame|script|cite|table|jeux', 'decouper_en_pages_rempl', $texte, $pagination_seule);
+	if (!$pagination_seule)	decoupe_notes_orphelines($texte);
+	return $texte;
 }
 
 // Compatibilite
