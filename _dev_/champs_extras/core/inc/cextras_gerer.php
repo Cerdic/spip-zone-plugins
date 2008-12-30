@@ -162,7 +162,7 @@ function extras_tables($connect='') {
 }
 
 
-// liste les champs dispos ans la table $table de la connexion $connect
+// liste les champs dispos dans la table $table de la connexion $connect
 function extras_champs($table, $connect) {
 	$desc = sql_showtable($table, null, $connect);
 	if (is_array($desc['field'])) {

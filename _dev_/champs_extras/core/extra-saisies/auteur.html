@@ -1,7 +1,7 @@
 
 [(#REM) En cas de creation d'objet, # SESSION{id_auteur} est propose ]
 #SET{valeur,#ENV{valeur_extra}}
-[(#ENV**{id}|=={new}|oui)
+[(#ENV{action}|match{new=oui}|oui)
 	#SET{valeur,#SESSION{id_auteur}}
 ]
 
