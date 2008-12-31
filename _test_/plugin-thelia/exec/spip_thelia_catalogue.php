@@ -2,7 +2,14 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_spip_thelia_catalogue_dist()
 {
-	debut_page(_T("spip_thelia:catalogue_thelia"), "Catalogue T&eacute;lia", "Catalogue T&eacute;lia");
+	if (function_exists('debut_page')) {
+		// SPIP Version 1.9.x
+		debut_page(_T("spip_thelia:catalogue_thelia"), _T("spip_thelia:catalogue_thelia"), _T("spip_thelia:catalogue_thelia"));
+	} else {
+		// SPIP >= 2.0
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T("spip_thelia:catalogue_thelia"),_T("spip_thelia:catalogue_thelia"),_T("spip_thelia:catalogue_thelia"));
+	}
 
 	$thelia_url = '../'._THELIA_ADMIN.'/';
 	if (_request('thelia_url')) $thelia_url .= _request('thelia_url');
