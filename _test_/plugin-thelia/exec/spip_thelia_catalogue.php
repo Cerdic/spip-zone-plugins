@@ -14,7 +14,20 @@ function exec_spip_thelia_catalogue_dist()
 	$thelia_url = '../'._THELIA_ADMIN.'/';
 	if (_request('thelia_url')) $thelia_url .= _request('thelia_url');
 	
-	echo "<iframe src='$thelia_url' style='width:100%;height:600px;'></iframe>";
+	echo "<script type='text/javascript' src='".find_in_path('javascript/jquery.dimensions.min.js')."'></script>
+		<iframe src='$thelia_url' style='width:100%;height:600px;' frameborder='0' scrolling='auto' id='iFrameToAdjust' class='autoHeight'></iframe>
+		<script type='text/javascript' >
+			function autoHeight() {
+				var theFrame = jQuery('#iFrameToAdjust', parent.document.body);
+				var H = $(window).height() - jQuery('#haut-page').height() - jQuery('#page .table_page').outerHeight({ margin: true });
+				if (H>300) {
+					theFrame.height(H - 4);
+				}
+			}
+			jQuery(window)
+				.resize(autoHeight)
+				.load(autoHeight);
+		</script>";
 	echo fin_page();
 
 }
