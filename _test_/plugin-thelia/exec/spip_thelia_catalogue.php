@@ -20,8 +20,8 @@ function exec_spip_thelia_catalogue_dist()
 			function autoHeight() {
 				var theFrame = jQuery('#iFrameToAdjust', parent.document.body);
 				var H = jQuery('html').innerHeight() - jQuery('#haut-page').innerHeight() - jQuery('#page .table_page').innerHeight();
-				if (H>300) {
-					theFrame.height(H - 16);  // .table_page possede un margin-top de 13px ; les 3px sont pour l'iFrame (necessaire pour Firefox)
+				if (H>20) {
+					theFrame.height(H - 20);  // .table_page possede un margin-top de 13px ; les 7px sont pour IE (3px sontnecessaires pour Firefox)
 				}
 			}
 			jQuery(window)
