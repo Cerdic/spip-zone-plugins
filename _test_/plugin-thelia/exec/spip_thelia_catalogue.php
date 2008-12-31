@@ -15,13 +15,13 @@ function exec_spip_thelia_catalogue_dist()
 	if (_request('thelia_url')) $thelia_url .= _request('thelia_url');
 	
 	echo "<script type='text/javascript' src='".find_in_path('javascript/jquery.dimensions.min.js')."'></script>
-		<iframe src='$thelia_url' style='width:100%;height:600px;' frameborder='0' scrolling='auto' id='iFrameToAdjust' class='autoHeight'></iframe>
+		<iframe src='$thelia_url' style='width:100%;height:600px;' frameborder='0' scrolling='auto' id='iFrameToAdjust' ></iframe>
 		<script type='text/javascript' >
 			function autoHeight() {
 				var theFrame = jQuery('#iFrameToAdjust', parent.document.body);
-				var H = $(window).height() - jQuery('#haut-page').height() - jQuery('#page .table_page').outerHeight({ margin: true });
+				var H = jQuery('html').innerHeight() - jQuery('#haut-page').innerHeight() - jQuery('#page .table_page').innerHeight();
 				if (H>300) {
-					theFrame.height(H - 4);
+					theFrame.height(H - 16);  // .table_page possede un margin-top de 13px ; les 3px sont pour l'iFrame (necessaire pour Firefox)
 				}
 			}
 			jQuery(window)
