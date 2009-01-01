@@ -26,7 +26,6 @@
 	<icon>images/raper-64.png</icon>
 	
 	<options>raper_options.php</options>
-	<fonctions>raper_fonctions.php</fonctions>
 	<install>base/raper_init.php</install>
 	
 	<pipeline>
