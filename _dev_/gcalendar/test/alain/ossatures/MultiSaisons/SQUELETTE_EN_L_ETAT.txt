@@ -1,2 +1,0 @@
-Le répertoire http://zone.spip.org/trac/spip-zone/browser/_squelettes_/multisaisons
-et son contenu (le squelettes "multisaisons") sont livrés en l'état, sans aucune garantie de fonctionnement. Les contributeurs font tout leur possible pour apporter des scripts fonctionnels et exempts de bugs. Merci de signaler tout disfonctionnements.
