@@ -1,0 +1,10 @@
+
+
+// TODO.txt
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+
+- permettre de sélectionner un (ou +) administrateur restreint pour la gestion
