@@ -98,4 +98,19 @@ function filtre_explode($a,$b){return explode($b,$a);}
  */
 function filtre_implode($a,$b){return implode($b,$a);}
 
+
+/**
+ * un filtre icone mappe sur icone_inline, qui cree une icone a gauche par defaut
+ *
+ * @param unknown_type $lien
+ * @param unknown_type $texte
+ * @param unknown_type $fond
+ * @param unknown_type $align
+ * @param unknown_type $fonction
+ * @return unknown
+ */
+function filtre_icone($lien, $texte, $fond, $align="", $fonction=""){
+	return icone_inline($texte, $lien, $fond, $fonction, $align?$align:$GLOBALS['spip_lang_left']);
+}
+
 ?>
