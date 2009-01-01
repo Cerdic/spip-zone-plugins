@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'suivi_reponses' => 'Voir les donn&eacute;es',
 	'supprimer_formulaire' => 'Supprimer cette table',
+	'supprimer_reponse' => 'Supprimer cette donn&eacute;es',
 
 	// T
 	'telecharger_reponses' => 'T&eacute;l&eacute;chargez les donn&eacute;es',

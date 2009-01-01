@@ -35,6 +35,7 @@ Voulez-vous vraiment le supprimer ?',
 	// S
 	'suivi_reponses' => 'Voir les r&eacute;ponses',
 	'supprimer_formulaire' => 'Supprimer ce sondage',
+	'supprimer_reponse' => 'Supprimer cette r&eacute;ponse',
 
 	// T
 	'telecharger_reponses' => 'T&eacute;l&eacute;chargez les r&eacute;ponses',

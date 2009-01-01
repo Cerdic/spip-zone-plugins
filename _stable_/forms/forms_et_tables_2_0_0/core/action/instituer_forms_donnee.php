@@ -25,7 +25,7 @@ function action_instituer_forms_donnee_dist() {
 	include_spip('inc/autoriser');
 	if ($id_donnee = intval($id_donnee)
 	  AND autoriser('modifier',"donnee",$id_donnee)){
-		sql_updateq("spip_forms_donnees","statut=".sql_quote($statut)." WHERE id_donnee=".intval($id_donnee));
+		sql_updateq("spip_forms_donnees",array("statut"=>$statut),"id_donnee=".intval($id_donnee));
 		
 		if ($rang_nouv = intval(_request('rang_nouv'))){
 			include_spip("base/forms_base_api_v2");

@@ -192,7 +192,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer_champ' => 'Supprimer ce champ',
 	'supprimer_choix' => 'supprimer ce choix',
 	'supprimer_formulaire' => 'Supprimer ce formulaire',
-	'supprimer_reponse' => 'Supprimer cette r&eacute;ponse',
 
 	// T
 	'tables' => 'Tables',
