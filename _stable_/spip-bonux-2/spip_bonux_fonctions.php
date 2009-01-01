@@ -65,8 +65,37 @@ function affiche_un_ou_plusieurs($nb,$chaine_un,$chaine_plusieurs,$var='nb'){
 	else return _T($chaine_un);
 }
 
+/**
+ * Ajouter un timestamp a une url de fichier
+ *
+ * @param unknown_type $fichier
+ * @return unknown
+ */
 function timestamp($fichier){
 	$m = filemtime($fichier);
 	return "$fichier?$m";
 }
+
+
+
+/**
+ * filtre explode pour les squelettes permettant d'ecrire
+ * #GET{truc}|explode{-}
+ *
+ * @param strong $a
+ * @param string $b
+ * @return array
+ */
+function filtre_explode($a,$b){return explode($b,$a);}
+
+/**
+ * filtre implode pour les squelettes permettant d'ecrire
+ * #GET{truc}|implode{-}
+ *
+ * @param array $a
+ * @param string $b
+ * @return string
+ */
+function filtre_implode($a,$b){return implode($b,$a);}
+
 ?>
