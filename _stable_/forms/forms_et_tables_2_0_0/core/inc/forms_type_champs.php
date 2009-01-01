@@ -30,18 +30,18 @@
 				if (isset($t['date'])&& ($t['date']==$date) && isset($t['types']) && is_array($t['types']))
 					$GLOBALS['forms_types_champs_etendus'] = $t['types'];
 				else {
-					include_spip('inc/plugin');
+					include_spip('inc/xml');
 					$contenu = "";
 					lire_fichier ($f, $contenu);
 					$GLOBALS['forms_types_champs_etendus']=array();
-					$data = parse_plugin_xml($contenu);
+					$data = spip_xml_parse($contenu);
 					if (isset($data['types']))
 						foreach($data['types'] as $types)
 							if (isset($types['type'])) 
 								foreach($types['type'] as $type){
 									if (isset($type['field'])){
 										$champ = end($type['field']);
-										$libelle = isset($type['label'])?trim(applatit_arbre($type['label'])):$champ;
+										$libelle = isset($type['label'])?trim(spip_xml_aplatit($type['label'])):$champ;
 										$match = isset($type['match'])?trim(end($type['match'])):"";
 										$format = array();
 										if (isset($type['formate'])){

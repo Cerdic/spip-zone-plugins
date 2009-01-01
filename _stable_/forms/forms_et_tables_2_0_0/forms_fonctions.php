@@ -91,8 +91,10 @@ function forms_calcule_les_valeurs($type, $id_donnee, $champ, $id_form, $separat
 				$ok = false;
 		}
 		// on recupere le type du champ si pas deja fait (une seule requete par table et par champ)
-		if ($ok && !isset($structure[$id_form]))
+		if ($ok && !isset($structure[$id_form])){
+			include_spip('inc/forms');
 			$structure[$id_form] = forms_structure($id_form, false);
+		}
 		$rendu = 'typo';
 		if ($ok) {
 			$t = $structure[$id_form][$champ]['type'];
@@ -299,4 +301,37 @@ function forms_calcule_les_valeurs($type, $id_donnee, $champ, $id_form, $separat
 		return pipeline('forms_ajoute_styles',$texte);
 	}
 
+
+	function wrap_split($wrap){
+		$wrap_start="";
+		$wrap_end="";
+		if (preg_match(",<([^>]*)>,Ui",$wrap,$regs)){
+			array_shift($regs);
+			foreach($regs as $w){
+				if ($w{0}=='/'){
+				 //$wrap_end .= "<$w>";
+				}
+				else {
+					if ($w{strlen($w)-1}=='/')
+						$w = strlen($w)-1;
+					$wrap_start .= "<$w>";
+					$w = explode(" ",$w);
+					if (is_array($w)) $w = $w[0];
+					$wrap_end = "</$w>" . $wrap_end;
+				}
+			}
+		}
+		return array($wrap_start,$wrap_end);
+	}
+	
+	function wrap_champ($texte,$wrap){
+		if (!strlen(trim($wrap)) || !strlen(trim($texte))) return $texte;
+		if (strpos($wrap,'$1')===FALSE){
+			$wrap = wrap_split($wrap);
+			$texte = array_shift($wrap).$texte.array_shift($wrap);
+		}
+		else 
+			$texte = str_replace('$1',trim($texte),$wrap);
+		return $texte;
+	}
 ?>

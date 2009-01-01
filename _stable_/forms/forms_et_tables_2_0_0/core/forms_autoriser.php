@@ -103,8 +103,7 @@ function autoriser_donnee_dist($faire,$type,$id_donnee,$qui,$opt){
 	return $a;
 }
 function autoriser_form_donnee_voir_dist($faire, $type, $id_donnee, $qui, $opt) {
-	if (!isset($opt['id_form']) OR !$id_form = $opt['id_form']) return false;
-	// un admin dans le back office a toujours le droit de modifier
+	// un admin dans le back office a toujours le droit de voir
 	if (($qui['statut'] == '0minirezo')) return true;
 	return false;
 }

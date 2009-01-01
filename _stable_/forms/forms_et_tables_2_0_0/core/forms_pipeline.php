@@ -90,22 +90,24 @@
 		return $flux;
 	}
 	function forms_header_prive($flux){
-		if ($f=find_in_path('spip_forms_prive.css'))
+		/*if ($f=find_in_path('spip_forms_prive.css'))
 			$flux .= "<link rel='stylesheet' href='$f' type='text/css' media='all' />\n";
 		else
 			$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/spip_forms.css' type='text/css' media='all' />\n";
+			*/
 		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/donnee_voir.css' type='text/css' media='all' />\n";
-		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/donnees_tous.css' type='text/css' media='all' />\n";
-		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/date_picker.css' type='text/css' media='all' />\n";
-		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/jtip.css' type='text/css' media='all' />\n";
-		$flux .= "<script type='text/javascript'><!--\n var ajaxcharset='utf-8';\n//--></script>";
+		//$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/donnees_tous.css' type='text/css' media='all' />\n";
+		//$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/date_picker.css' type='text/css' media='all' />\n";
+		//$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/jtip.css' type='text/css' media='all' />\n";
+		//$flux .= "<script type='text/javascript'><!--\n var ajaxcharset='utf-8';\n//--></script>";
 		
-		if (in_array(_request('exec'),array('articles','donnees_edit'))){
+		/*if (in_array(_request('exec'),array('articles','donnees_edit'))){
 			$flux .= "<script src='".find_in_path('javascript/iautocompleter.js')."' type='text/javascript'></script>\n"; 
 			$flux .= "<script src='".find_in_path('javascript/interface.js')."' type='text/javascript'></script>\n"; 
 			if (!_request('var_noajax'))
 				$flux .= "<script src='"._DIR_PLUGIN_FORMS."javascript/forms_lier_donnees.js' type='text/javascript'></script>\n";
-		}
+		}*/
+		/*
 		if (_request('exec')=='forms_edit'){
 			$flux .= "<script src='"._DIR_PLUGIN_FORMS."javascript/interface.js' type='text/javascript'></script>";
 			if (!_request('var_noajax'))
@@ -121,13 +123,14 @@
 			"var forms_def_lang='".$GLOBALS["spip_lang"]."';var forms_avail_langs=[$active_langs];\n".
 			"$(forms_init_lang);\n".
 			"</script>\n";
-		}
+		}*/
+		/*
 		if (_request('exec')=='donnees_edit'){
 			$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/donnees_edit.css' type='text/css' media='all' />\n";
 			$flux .= "<script src='"._DIR_PLUGIN_FORMS."javascript/interface.js' type='text/javascript'></script>";
 			if (!_request('var_noajax'))
 				$flux .= "<script src='"._DIR_PLUGIN_FORMS."javascript/donnees_edit.js' type='text/javascript'></script>";
-		}
+		}*/
 		return $flux;
 	}
 	

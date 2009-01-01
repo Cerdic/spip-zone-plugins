@@ -1,6 +1,6 @@
 #SET{donnee,''}
 <BOUCLE_data(FORMS_DONNEES){id_donnee}>
-<span id='donnee-#ID_DONNEE' class='donnees form-#ID_FORM table-#ID_FORM'>
+<span id='donnee-#ID_DONNEE' class='donnees form-#ID_FORM table-#ID_FORM donnee-statut-#STATUT'>
 	#SET{wrap_prec,''}
 	#SET{tampon,''}
 	<BOUCLE_champs(FORMS_CHAMPS){id_form}{par rang}>
@@ -8,7 +8,7 @@
 			#SET{donnee,#GET{donnee}|concat{#GET{tampon}|wrap_champ{#GET{wrap_prec}}}}
 			#SET{wrap_prec,#HTML_WRAP} #SET{tampon,''}
 		]
-		#SET{truc,#INCLURE{fond=modeles/donnee_champ_1}{id_donnee}{champ}{id_form}}
+		#SET{truc,#INCLURE{fond=modeles/donnee_champ}{id_donnee}{champ}{id_form}}
 		#SET{tampon,#GET{tampon}|concat{#GET{truc}}	}
 	</BOUCLE_champs>
 	#SET{donnee,#GET{donnee}|concat{#GET{tampon}|wrap_champ{#GET{wrap_prec}}}}

@@ -281,7 +281,7 @@ code;
 		$boucle->from[$id_table] =  "spip_forms_champs";
 	
 		if (!isset($boucle->modificateur['tout']) && !$boucle->tout){
-			$boucle->where[]= array("'='", "'$id_table.public'", "'\"oui\"'");
+			$boucle->where[]= "test_espace_prive()?'':array('=', '$id_table.public', \"'oui'\")";
 		}
 		return calculer_boucle($id_boucle, $boucles); 
 	}
