@@ -1,0 +1,141 @@
+#CACHE{864000}
+<INCLURE{fond="header"}>
+
+
+<BOUCLE_principale(BREVES){id_breve}><head>
+
+<!-- les métas -->
+<title>[(#TITRE)]</title>
+[
+
+
+
+<meta name="Description" content='(#DESCRIPTIF|supprimer_tags|texte_script)'/>]
+<meta name="keywords" content="<BOUCLE_metadocs(DOCUMENTS){id_breve}{","}>#TITRE</BOUCLE_metadocs>"/>
+<meta name="revisit-after" content="15 days" />
+<meta http-equiv="content-type" content="text/html; charset=#CHARSET"/>
+<meta http-equiv="Content-Language" content="fr-fr" />
+
+[(#REM) les css et js peuvent changer suivant type d article ou de breve ]
+	
+<INCLURE{fond="header-css"}{date=#ENV{date}}> 	
+
+</head><body> 
+
+<div id="container">   <!-- centrage page -->
+<INCLURE{fond="entete"}{date=#ENV{date}}>  
+<div id="surcontent">  
+<BOUCLE_pour_onglet(BREVES){id_breve}>
+<INCLURE{fond="menuhoriz"}{id_rubrique}>
+</BOUCLE_pour_onglet>
+<!-- ouverture entête -->
+<div id="content">  <!-- ouverture contenu --> 
+
+<div id="colgau"> <!-- ouverture colone de gauche --> 
+  <div class="grande_boite"> <!-- ouverture grd boite texte -->
+
+<span class="logogauche"><INCLURE{fond="logo"}{id_breve}{taille=46}{date=#ENV{date}}></span>
+
+<a href="#URL_PAGE{sommaire}">Accueil</a> > <BOUCLE_plan(HIERARCHIE){id_article}{" > "}> <a href="#URL_RUBRIQUE"[ title="(#DESCRIPTIF|couper{40}|textebrut|attribut_html)"]>[(#TITRE)]</a>	
+                  </BOUCLE_plan>
+&gt; </p>                 
+[<h1>(#TITRE) 
+      </h1><br/>] 
+    [(#SOUSTITRE)<br/> 
+    ]   
+   [#DEBUT_SURLIGNE(#TEXTE|image_reduire{450,0}|lier_au_glossaire|paragrapher)#FIN_SURLIGNE] 
+     <p>  [<:logic:mise_en_ligne:>: (#DATE|nom_jour)]
+   [(#DATE|affdate)]</p>
+    
+    
+   <hr class="spacer"/>  </div> 
+  <!-- fermeture grande boite -->
+  
+
+<INCLURE{fond=inc_liste_glossaire}{id_breve}{id_rubrique}{lettre=#ENV{lettre}}>
+
+</div><!-- fermeture colone de gauche -->
+					
+
+ <div class="coldroit">  <!-- ouverture de la colone de droite --> 
+
+
+    <div class="boite"><!-- ouverture boite menu --> 
+
+        <h4 class="icone_menu">navigation</h4>  <INCLURE{fond="inc_menu_rub"}{id_rubrique}> </div><!-- fermeture boite menu -->
+
+
+    <B_meme_rubrique>
+    <div class="boite">
+      <!-- ouverture autre breves -->
+   
+  <h4 class="icone_breve">autres breves</h4><p>
+      <BOUCLE_meme_rubrique(BREVES){id_rubrique}{exclus}{par num titre}{par date}{inverse}{0,20}>
+                      <INCLURE{fond="inc_cadenas"}{id_breve}><a href="#URL_BREVE">#TITRE</a><br/>
+   
+               
+                </BOUCLE_meme_rubrique></p>
+               
+    </div></B_meme_rubrique>
+ 
+   
+ 
+</div>   <!-- fermeture colone de droite --> 
+
+
+<hr class="spacer" />
+
+<div class="discussion">
+<h4 class="icone_forum"><a href="[(#PARAMETRES_FORUM|url_reponse_forum)]" onclick="return !dspForm();">Réagissez</a></h4>
+
+
+<B_forum_archive>
+<p class="droite">
+
+
+<BOUCLE_compt_archive(FORUMS){id_breve}{par date}{inverse}{1,20}>
+</BOUCLE_compt_archive>
+<strong>[(#TOTAL_BOUCLE)] [(#TOTAL_BOUCLE|=={1}|?{<:discussion:>,<:discussions:>})&nbsp;en&nbsp;archive:]
+</strong><br/>
+</B_compt_archive>
+
+
+<BOUCLE_forum_archive(FORUMS){id_breve}{par date}{inverse}{1,20}>
+::&nbsp;<a href="[(#URL_PAGE{discussion}|parametre_url{'id_forum',#ID_FORUM})#forum#ID_FORUM]">[(#TITRE|couper{40})]</a><br/>
+</BOUCLE_forum_archive></p></B_forum_archive>
+
+<hr class="spacer" />
+
+<B_messages>
+<p class="droite">
+<BOUCLE_messages(FORUMS){id_breve}{par date}{inverse}{0,1}>
+<BOUCLE_compte_messages(FORUMS){id_thread}{plat}>
+</BOUCLE_compte_messages>
+<?php  $duree = #TOTAL_BOUCLE -1; ?>
+</B_compte_messages>
+</BOUCLE_messages>
+<a name="forum#ID_FORUM" id="forum#ID_FORUM"></a>
+</p>
+</B_messages>
+
+
+
+
+<hr class="spacer" />
+</div>[(#REM)   fermeture reponse en tete forum   ] 
+
+
+<BOUCLE_inc_messages(FORUMS){id_breve}{par date}{inverse}{0,1}>
+<INCLURE{fond="inc_discussion"}{id_rubrique}{id_breve}{id_forum}>
+</BOUCLE_inc_messages>
+</div>
+[(#REM)   fermeture contenu   ] 
+<INCLURE{fond="pieddepage"}{id_rubrique}{id_breve}{id_forum}{id_thread}>
+
+</div> [(#REM)   fermeture surcontenu   ]<br/>
+
+
+</div> [(#REM)   fermeture container   ] 
+</body>
+</html>
+</BOUCLE_principale>

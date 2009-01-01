@@ -1,0 +1,14 @@
+<BOUCLE_edito(ARTICLES){titre_mot=edito}{0,1}>
+  <div id="newsFeeder-edito" class="groupItem">
+		<div class="itemHeader">Edito - [(#TITRE|supprimer_numero)]
+    <a href="#URL_ARTICLE" class="closeEl">[-]</a></div>
+		<div class="itemContent">
+		<div   class  ="contenu">
+[(#TEXTE|couper{300})]
+<a href="#URL_ARTICLE">lire la suite... </a>
+    </div>
+	</div>
+	</div>
+</BOUCLE_edito>
+
+

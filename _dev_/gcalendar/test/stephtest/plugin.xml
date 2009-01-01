@@ -1,0 +1,22 @@
+<plugin>
+ <nom>Cotes</nom>
+ <version>0.3 - 14 octobre 2007</version>
+ <prefix>cotes</prefix>
+ <etat>experimental</etat>
+ <auteur>stephane [contact->mailto:stephane@lescorsaires.be]</auteur>
+ <description>Ce plugin est destiné à gérer la cotation d'un cours - etudiants, exercices, sur potentiellement plusieurs cours.</description>
+
+<options>options_cotes.php</options>
+<fonctions>fonctions_cotes.php</fonctions>
+  <pipeline>
+        <nom>ajouter_boutons</nom>
+        <action>ajouterBoutons</action>
+        <inclure>bouton.php</inclure>
+</pipeline>
+<pipeline>
+		<nom>header_prive</nom>
+		<action>ajouterHeaderPrive</action>
+		<inclure>cotes_header_prive.php</inclure>
+</pipeline>	
+
+</plugin>

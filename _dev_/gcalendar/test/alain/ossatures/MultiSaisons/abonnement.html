@@ -1,0 +1,114 @@
+#CACHE{0}
+<INCLURE{fond="header"}><head>
+<title>[(#ENV{type}|=={question}|?{' ',''})Authentification requise] Abonnement et gestion de votre compte</title>
+<BOUCLE_auteur(AUTEURS){id_auteur=1}>
+<meta name="Description" content="Abonnement et gestion de votre compte"/>
+<meta name="author" content="[(#NOM)]</BOUCLE_auteur>"/>
+<meta name="revisit-after" content="30 days" />
+<meta http-equiv="content-type" content="text/html; charset=#CHARSET"/>
+<meta http-equiv="Content-Language" content="fr-fr" />
+[(#REM) les css et js peuvent changer suivant type d article ou de breve ]
+<INCLURE{fond="header-css"}{date=#ENV{date}}> 	
+</head><body> 
+<div id="container">   [(#REM)   centrage page   ]
+<INCLURE{fond="entete"}{date=#ENV{date}}> 
+<div id="surcontent">  
+<INCLURE{fond="menuhoriz"}>[(#REM)   ouverture entête   ]
+<div id="content">  [(#REM)   ouverture contenu   ] 
+<div id="colgau"> [(#REM)   ouverture colone de gauche   ] 
+
+
+
+
+
+
+               
+
+<div class="grande_boite">
+[(#ENV{type}|=={question}|?{' ',''})
+
+
+
+<h4 class="icone_membre">Que souhaitez-vous faire?</h4>
+<p>Cette section est restreinte &agrave; quelques membres
+  de #NOM_SITE_SPIP.<br/>
+  [<strong><a href="(#SELF|parametre_url{type,'redac'})">Souhaitez-vous vous inscrire</a></strong> et demander au webmaster un accès à cette
+  section?]</p>
+]
+
+
+[(#ENV{type}|match{redac|visit|question}|?{' ',''})<span class="droite">#LOGIN_PUBLIC</span>
+<h4 class="icone_membre">D&eacute;j&agrave; inscrit ?</h4>
+<p>
+
+<a href="[(#URL_SITE_SPIP|parametre_url{action,pass})]" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=500, height=350'); return false;">Retrouver
+ou changer mon mot de passe.</a>
+[<br/>
+<a href="(#URL_PAGE{abonnement})">Modifier mon abonnement.</a>]
+<hr class="spacer">]
+
+[(#ENV{type}|match{redac|visit}|?{' ',''})
+<h4 class="icone_membre">Nouveau sur #NOM_SITE_SPIP ?</h4> 
+[(#FORMULAIRE_ABONNEMENT)]
+        <p class="centre">
+		Soyez assur&eacute; de la confidentialit&eacute; des donn&eacute;es vous concernant.<br/>
+        Ce site est prot&eacute;g&eacute; contre les robots spammeurs et est inscrit &agrave; la CNIL.
+</p>
+]
+
+
+
+
+[(#ENV{type}|match{redac|visit|question}|?{'',' '})
+[(#REM) si l internaute ne demande pas de statut dans l url alors il modifie son compte. On lui demande si l affichage est incorrect] 
+
+[(#FORMULAIRE_MODIF_ABONNEMENT)<hr class="spacer">]
+
+
+<h4 class="icone_article">Courrier &agrave; l'affichage incorrect?</h4>
+<p>Votre news-letter n'est pas affich&eacute;e correctement? Une mauvaise
+interpr&eacute;tation de l'encodage par un serveur, un logiciel courrier ou
+un webmail est souvent &agrave; l'origine du probl&egrave;me. Merci de 
+ [<strong><a href="(#URL_PAGE{auteur}|parametre_url{id_auteur,1})" title="Contactez votre webmaster.">d&eacute;crire
+ le probl&egrave;me &agrave; votre webmaster</a></strong>] et de choisir une
+ r&eacute;ception au format texte. </p>
+]
+</div>
+
+   
+
+
+</div>[(#REM)   fermeture colone de gauche   ]
+ <div class="coldroit">  [(#REM)   ouverture de la colone de droite   ] 
+
+
+    <div class="boite">[(#REM)   ouverture boite menu   ] 
+
+        <h4 class="icone_menu">Navigation</h4>
+      <INCLURE{fond="inc_menu_rub"}> 
+    
+    </div>[(#REM)   fermeture boite menu   ]
+
+
+[(#ENV{type}|=={question}|?{' ',''})
+  <div class="boite">
+<h4 class="icone_membre">Authentification requise</h4>
+<p>Seuls quelques membres de #NOM_SITE_SPIP ont acc&egrave;s &agrave; cette section. [<a href="(#URL_PAGE{auteur}|parametre_url{id_auteur,1})" title="Contactez votre webmaster.">
+Contacter votre webmaster</a>] après inscription pour y avoir acc&egrave;s</p>
+</div>]
+
+
+
+</div>   [(#REM)   fermeture colone de droite   ] 
+ <hr class="spacer" />
+
+
+</div>
+ [(#REM)   fermeture contenu   ] 
+<INCLURE{fond="pieddepage"}>
+
+</div> [(#REM)   fermeture surcontenu   ]<br/>
+
+</div> [(#REM)   fermeture container   ] 
+</body>
+</html>

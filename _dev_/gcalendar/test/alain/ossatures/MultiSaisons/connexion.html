@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[#NOM_SITE_SPIP] </title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET">
+<meta name="description" content="">
+<meta name="keywords" content="">
+
+[(#REM)   Ceci est la feuille de style par defaut pour les types internes a SPIP   ]
+<link rel="stylesheet" href="spip_style.css" type="text/css">
+
+[(#REM)   Les feuilles de style specifiques aux presents squelettes   ]
+<link rel="stylesheet" href="typographie.css" type="text/css">
+
+[(#REM)   media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage)   ]
+<link rel="stylesheet" href="habillage.css" type="text/css" media="print, projection, screen, tv">
+
+[(#REM)   Lien vers le backend pour navigateurs eclaires   ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="backend.php">
+
+<link rel="shortcut icon" type="image/ico" href="" />
+
+<link rel="alternate" type="text/xml" title="RSS .92" href="" />
+
+<link rel="stylesheet" href="" type="text/css" media="print, projection, screen, tv">
+</head>
+ 
+
+<body style='font-family:Verdana ,helvetica, serif;font-size:0.7em'>
+
+<div>
+
+
+		<div style=''>
+		<span style='font-weight:bold;font-size:140%;'>
+		<a href="#URL_SITE_SPIP">[#NOM_SITE_SPIP]</a>
+		<BOUCLE_mot1(MOTS){id_mot}> / #TITRE</BOUCLE_mot1>
+		<BOUCLE_mot2(SITES){id_syndic}> / #NOM_SITE</BOUCLE_mot2>
+		</span>
+		</div>
+	
+
+
+<div style="margin: 50px 0px 0px  0px">
+[(#LOGIN_PUBLIC|sommaire.php)]
+</div>
+
+
+</div>
+</body>
+</html>

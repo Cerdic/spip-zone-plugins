@@ -1,0 +1,570 @@
+#CACHE{1}
+<!--
+*****Cahier de texte pour Spip: Bonbon !
+*****Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
+*****Sous licence GPL (enfin bon, c'est bonbonware...)
+*****CopyLeft en juin 2007
+***Saisie du cahier de texte. Cette page prend des paramètres:
+Par GET:
+id_classex où x est un nombre= id du mot-clé de la classe x (il peut y avoir plusieurs classes
+classes= nombres de classes associées à ces fiches
+plusclasse= réafficher le formulaire avec un sélecteur de classe de plus
+moinsclasse= réafficher le formulaire avec un sélecteur de classe en moins
+id_matiere= id du mot-clé de la matière
+id_groupe= id du groupe
+classe_matière= quand la classe et la matière sont déterminées
+Par POST:
+date_seance= date de la séance au format d/m/Y
+contenu_seance= le texte du contenu de la séance
+date_devoirx où x est un nombre= date du devoir n°x donné lors de la séance
+contenu_devoirx où x est un nombre= contenu du devoir n°x donné lors de la séance
+devoirs= nombre de devoirs-1 liés à la séance
+plusdate= rafficher le formulaire avec un champs devoirs+date en plus.
+doc_jointx où x est un nombre= chemin vers le document joint n°x
+docs= nombre de documents joints (0-> pas de doc joint)
+ajoutdoc= s'il n'y avait pas de docs et qu'on veut en mettre un
+plusdoc= rafficher le formulaire avec un ligne de selection de doc en plus
+moinsdocs= effacer le dernier doc joint entré
+
+enregistrer_fiche= quand la fiche est validée
+modifier_fiche= quand la fiche est remplie, mais que le contenu doit être modifié
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>#NOM_SITE_SPIP: Saisie dans le cahier de texte en ligne</title>
+
+[(#REM)Inclusion du pied de page]
+<INCLURE{fond=cahier-de-texte-en-tete}>
+
+	<script type="text/javascript" src="./fckeditor/fckeditor.js"></script>
+<!-- Javascript du calendrier en pop-up-->
+	<script type="text/javascript" src="#DOSSIER_SQUELETTE/CalendarPopup.js"></script>
+	<SCRIPT LANGUAGE="JavaScript">
+//paramètres pour la fenêtre pop-up
+		var cal = new CalendarPopup();
+		cal.setMonthNames('Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre');
+		cal.setDayHeaders('D','L','M','M','J','V','S');
+		cal.setWeekStartDay(1);
+		cal.setTodayText("Aujourd'hui");
+		cal.setDisabledWeekDays(6);
+//paramètres de fckeditor
+		<!--
+        	function ReplaceAllTextareas() {
+                // replace all of the textareas
+                var allTextAreas = document.getElementsByTagName("textarea");
+                for (var i=0; i < allTextAreas.length; i++) {
+                var oFCKeditor = new FCKeditor( allTextAreas[i].name ) ;
+		oFCKeditor.BasePath = './fckeditor/';
+		oFCKeditor.Config["CustomConfigurationsPath"] = "../Cahier-de-texte-config.js"  ;
+	        oFCKeditor.ToolbarSet = 'CahierDeTexte' ;
+                oFCKeditor.ReplaceTextarea() ;
+                }
+        }
+        // -->
+	</SCRIPT>
+</head>
+<body onLoad="javascript: ReplaceAllTextareas()">
+<div id="NoMenu">
+	<div id="EntetePage">
+			<ul class="boutons">
+				<li><a href="spip.php?page=cahier-de-texte-accueil" title="Retourner à la page d'accueil du cahier de texte">Accueil du cahier de texte</a></li>
+				<li><a href="spip.php?page=cahier-de-texte-affichage&nb=20">Afficher les 20 dernières séances</a></li>
+<?php if ($auteur_session) {
+	echo '				<li><a href="spip.php?page=cahier-de-texte-saisie" title="Écrire le contenu d\'une séance et ses devoirs éventuels">Saisir une séance</a></li>';
+	echo '				<li><a href="spip.php?page=cahier-de-texte-affichage&prof='.$auteur_session['id_auteur'].'" title="Aller voir ses propres entrées du cahier de texte">Afficher ses séances</a></li>';
+}?>
+			</ul>
+[(#REM)Vérification de l'authentification]
+<?php if ($auteur_session) {
+//paramètre de session utilisés:
+	$auteur=$auteur_session['nom'];
+	$id_auteur=$auteur_session['id_auteur'];
+	echo "<p class='authentifie'>$auteur (si vous n'êtes pas $auteur, <a href=\"";
+?>#URL_LOGOUT<?php
+	echo "\" title=\"déconnexion immédiate !\">cliquez ici</a>)</p>\n";
+
+//------------------------------------------------------------
+//Dans tous les cas, on récupère les paramètres du formulaire:
+//------------------------------------------------------------
+
+//récupération des paramettres (GET et POST)
+	//echo "liste des GET\n";
+	//print_r($_GET);
+	//echo "liste des POST\n";
+	//print_r($_POST);
+	$classes=($_GET['classes']);
+	for ($count=0; $count<=$classes; $count++) {
+		$id_classe[$count]=($_GET["id_classe$count"]);
+	};//les classes ont été placées dans le tableau $id_classe[]
+	$id_groupe=($_GET["id_groupe"]);
+	$id_matiere=($_GET["id_matiere"]);
+
+	$date_seance=(stripslashes($_POST['date_seance']));
+	$contenu_seance=(stripslashes($_POST['contenu_seance']));
+	$devoirs=($_POST['devoirs']);
+	for ($count=0; $count<=$devoirs; $count++) {
+		$date_devoir[$count]=($_POST["date_devoir$count"]);
+		$contenu_devoir[$count]=(stripslashes($_POST["contenu_devoir$count"]));
+	};//les dates ont été placées dans $date_devoir[], les contenus dans $contenu_devoir[]
+	$docs=($_POST['docs']);
+	if($_POST['plusdoc']){
+		$docs++;
+	};
+	for ($count=0; $count<=$docs; $count++) {
+		$doc_joint[$count]=($_POST["doc_joint$count"]);
+	};//les chemins des docs joints ont été placés dans $doc_joint[]
+
+//boutons qui ont été pressés pour ajouter des options
+//une classe de plus ?
+	if($_GET['plusclasse']){
+		$classes++;
+	};
+//une classe de moins ? (la dernière choisie)
+	if($_GET['moinsclasse']){
+		$classes--;
+	};
+	if($_POST['plusdate']){
+		$devoirs++;
+	};
+//un devoir de plus ?
+	if($_POST['moinsdoc']){
+		$docs--;
+	};
+//Cosmétique ! (pluriels)
+	if ($docs>1) $plurdoc="s";
+	else $plurdoc="";
+
+//quelques strings bien utiles préparées à l'avance: (à partir des numéros d'id)
+	if ($_POST['enregistrer_fiche'] or $_POST['valider_fiche']) {
+?>
+[(#REM)Nom de la matière]
+<BOUCLE_DireMatiere(MOTS){type="Matières"}><?php if ('[(#ID_MOT|texte_script)]'==$id_matiere) {$matiere_titre='[(#TITRE)]';} ?></BOUCLE_DireMatiere>
+<?php for ($count=0; $count<=$classes; $count++) {?>
+[(#REM)Nom de la ou les classes]
+<BOUCLE_DireClasse(MOTS){type="Classes"}><?php if ('[(#ID_MOT|texte_script)]'==$id_classe[$count]) { $classes_titre .='[(#TITRE)]'; if (($count+1)<=$classes) $classes_titre .= ", "; } ?></BOUCLE_DireClasse>
+<?php } //fin du for count classes
+if ($id_groupe!=0) { $groupe_titre .= " (";?>
+[(#REM)Nom du groupe s'il y a... Il est encadré par une parenthèse]
+<BOUCLE_DireGroupe(MOTS){type="Sous groupes de classes"}><?php if ('[(#ID_MOT|texte_script)]'==$id_groupe) { $groupe_titre .='[(#TITRE)]'; } ?></BOUCLE_DireGroupe>
+<?php $groupe_titre .= ")"; }//fin du if id_groupe?>
+<?php
+	$titre_contenu_seance="Le $date_seance, en $matiere_titre avec les $classes_titre$groupe_titre&nbsp;:";
+	$fragment_titre_devoir=", par les $classes_titre$groupe_titre en $matiere_titre&nbsp;:";
+	$fleche="->";
+	}
+
+//------------------------------------------------
+//Si l'utilisateur a écrit une fiche puis validée
+//------------------------------------------------
+
+//Si la fiche est enregistrée (enregistrée mais non à modifier)
+	if ($_POST['enregistrer_fiche'] and !($_POST['modifier_fiche'])){
+//On l'affiche pour vérification...
+//todo: afficher avec la CSS Spip
+?>
+	<h1>Voici la fiche que vous avez remplie&nbsp;:</h1>
+			<br class="clear" />	
+	</div>
+	<div id="Contenu"><div class="bloc">
+		<div id="documents">
+			<h3 class="titre"><?php echo $titre_contenu_seance?></h3>
+			<div class="texte"><?php echo propre($contenu_seance);?></div>
+
+<?php //si il y a des devoirs
+if ($contenu_devoir[0]!="") {
+?>
+			<hr>
+			<div>
+				<h3>Devoirs des<?php echo(" $classes_titre$groupe_titre&nbsp;:")?></h3>
+<?php //Pour chaque devoir:
+ for ($count=0; $count<=$devoirs; $count++) {?>
+				<p>Pour le <?php echo $date_devoir[$count]?>&nbsp;:</p>
+				<p><?php echo propre($contenu_devoir[$count]);?></p>
+<?php } //fin du for count devoirs?>
+			</div>
+<?php } //fin du if contenu_devoir?>
+<?php //si il y a des docs joints
+if ($doc_joint[1]!="") {
+//On affiche les docs joints?>
+			<div>
+				<h2><?php echo"Document$plurdoc joint$plurdoc&nbsp;:";?></h2>
+	<?php for ($count=1; $count<=$docs; $count++) {?>
+				<p>Chemin vers le document&nbsp;<?php echo "$count&nbsp;: $doc_joint[$count]";?></p>
+	<?php } //fin du for count docs?>
+			</div>
+<?php } //fin du if doc_joint?>
+		</div>
+	<div>
+	<form name="modifier" method="post">
+<?php
+//préparation du formulaire
+//on récupère tous les paramètres et on les remet dans le formulaire en POST cachés
+		$post=$_POST;
+		while (list($key,$val)=each($post)) {
+			if ($key!="enregistrer_fiche") {
+?>
+		<input type="Hidden" <?php echo 'name="'.$key.'" value="'.addslashes($val).'"'; ?>>
+<?php			}//fin du if key
+		}//fin du while $key $val?>
+	<!--Modifier la fiche -->
+		<input type="Submit" name="modifier_fiche" value="Modifier la fiche">
+		<input type="Submit" name="valider_fiche" value="Confirmer l'enregistrement de la fiche (elle ne sera plus modifiée)">
+	</form>
+	
+<?php
+} //fin du if enregistrer ficher et pas modifier fiche
+	else {
+
+//------------------------------------------------------------------
+//L'utilisateur veut enregistrer la fiche défintivement dans la base
+//------------------------------------------------------------------
+
+	if ($_POST['valider_fiche']) {
+//quelle date est-on ?
+		$num_month= date("n");
+		$num_month=(integer) $num_month;
+		$num_annee=date("Y");
+		$num_annee=(integer) $num_annee;
+//déterminer dans quelle année scolaire on est (de sept à sept)
+		if ($num_month<9) {
+			$nom_rub_annee=($num_annee-1)."/".$num_annee;
+		} else {
+			$nom_rub_annee=$num_annee."/".($num_annee+1);
+		}
+?>
+<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}{tout}>
+[(#REM)Vérifier si il existe déjà une sous rubrique du cahier de texte pour l'année en cours]
+	<BOUCLE_Verifie_RubriqueAnnee(RUBRIQUES){id_parent}{tout}><?php if ('[(#TITRE|texte_script)]'==$nom_rub_annee) {$everything_ok=1; $id_rub_cdt='[(#ID_RUBRIQUE|texte_script)]';}
+//id_rub_cdt contient l'id de la sous-rubrique pour l'année en cours?>
+	</BOUCLE_Verifie_RubriqueAnnee>
+<?php if ($everything_ok!=1) {
+//Si la rubrique pour l'année en cours n'existe pas, on la crée !
+		$sql = "INSERT INTO spip_rubriques (titre, id_parent, descriptif , statut, date) 
+		VALUES ('".addslashes($nom_rub_annee)."','[(#_Contexte_RubriqueCDT:ID_RUBRIQUE|texte_script)]','".addslashes("Cahier de texte de l'année scolaire $nom_rub_annee\n\n{{Cette rubrique ne doit pas être renommée}}. Sinon, les enregistrements du cahier de texte de l'année en cours seront perdus")."', 'publie',NOW())";
+	
+		$result = spip_query($sql);
+		$id_rubrique=spip_insert_id();
+		$id_rub_cdt=$id_rubrique;
+		echo "la sous-rubrique $nom_rub_annee a été créée pour gérer le cahier de texte de cette année scolaire. Ne l'effacez pas, ne la renommez pas et laissez la dans la rubrique Cahier de texte !";
+	}//fin du ifnot everything_ok
+?>
+</BOUCLE_Contexte_RubriqueCDT>
+			<h1>La fiche est définitivement enregistrée&nbsp;:</h1>
+			<br class="clear" />	
+	</div>
+	<div id="Contenu"><div class="bloc">
+<?php
+
+//insertion de l'article du contenu du cours dans la base
+
+//On prépare la date:
+	$date_base_seance = date ("Y-m-d H:i:s", mktime(0,0,0,substr($date_seance,3,2),substr($date_seance,0,2),substr($date_seance,6,4)));
+
+//le contenu
+	$sql = "INSERT INTO spip_articles (titre, texte, id_rubrique, statut, date) 
+	VALUES ('".addslashes($titre_contenu_seance)."','".addslashes($contenu_seance)."','$id_rub_cdt', 'publie', '".addslashes($date_base_seance)."')";
+	
+	$result = spip_query($sql);
+	$id_contenu_seance=spip_insert_id();
+	echo ("<!--$result article n°$id_contenu_seance-->\n");
+	
+	// auteur
+	$sql = "INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES (" . $id_auteur . ", " . $id_contenu_seance . ")";
+	$result = spip_query($sql);
+	echo ("<!--auteur: $result-->\n");
+//ajout des mots-clés
+	//le mot-clé qui définit que c'est le contenu d'une séance
+	//d'abord on récupère son id:?>
+<BOUCLE_Dire_id_mot_contenu(MOTS){titre="Description de séance"}><?php $id_identif_contenu='[(#ID_MOT)]'?></BOUCLE_Dire_id_mot_contenu>
+<?php	//Puis on associe le mot à l'article
+	$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_identif_contenu . ", " . $id_contenu_seance . ")";
+		$result = spip_query($sql);
+		echo ("<!--identifiant de l'article: $result-->\n");
+	//les classes
+	for ($count=0; $count<=$classes; $count++) {
+		$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_classe[$count] . ", " . $id_contenu_seance . ")";
+		$result = spip_query($sql);
+		echo ("<!--classe: $result-->\n");
+	}
+	//le groupe éventuel:
+	if ($id_groupe!=0) {
+		$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_groupe . ", " . $id_contenu_seance . ")";
+		$result = spip_query($sql);
+		echo ("<!--groupe: $result-->\n");
+	}
+	//la matière:
+	$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_matiere . ", " . $id_contenu_seance . ")";
+	$result = spip_query($sql);
+	echo ("<!--matière: $result-->\n<p>Enregistrement de la séance</p>\n");
+
+//insertion des articles de devoirs s'il y a
+
+if ($contenu_devoir[0]!="") {
+	$liste_devoirs_contenu ="{{Devoirs donnés:}}\n\n";
+	//d'abord on récupère l'id du mot-clé qui désigne les devoirs:?>
+	<BOUCLE_Dire_id_mot_devoir(MOTS){titre="Devoirs à faire"}><?php $id_identif_devoir='[(#ID_MOT)]'?></BOUCLE_Dire_id_mot_devoir>
+	<?php
+	//Puis pour chaque devoir:
+	for ($count=0; $count<=$devoirs; $count++) {
+		//détermine la date au format de la base
+		$date_base_devoir = date ("Y-m-d H:i:s", mktime(0,0,0,substr($date_devoir[$count],3,2),substr($date_devoir[$count],0,2),substr($date_devoir[$count],6,4)));
+		//insère le devoir avec titre, contenu, date et surtout un PS qui renvoie au contenu
+		$sql = "INSERT INTO spip_articles (titre, texte, id_rubrique, statut, date, ps) 
+		VALUES ('".addslashes("Devoir à faire pour le $date_devoir[$count]$fragment_titre_devoir")."','".addslashes($contenu_devoir[$count])."','$id_rub_cdt', 'publie', '".addslashes($date_base_devoir)."','".addslashes("[Donné $titre_contenu_seance$fleche$id_contenu_seance]")."')";
+		
+		$result = spip_query($sql);
+		$id_contenu_devoir[$count]=spip_insert_id();
+		echo ("<!--$result article n°$id_contenu_devoir[$count]-->\n");
+
+		
+		//devoir n°
+		$dev_no=$count+1;
+		//préparation de la chaîne à inclure dans le contenu:
+		$liste_devoirs_contenu .= "- [Devoir n°$dev_no pour le $date_devoir[$count]$fleche$id_contenu_devoir[$count]]\n";
+		
+		// auteur
+		$sql = "INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES (" . $id_auteur . ", " . $id_contenu_devoir[$count] . ")";
+		$result = spip_query($sql);
+		echo ("<!--auteur: $result-->\n");
+		//ajout des mots-clés
+		//le mot-clé qui définit que c'est le contenu d'une séance
+		//Puis on associe le mot à l'article
+		$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_identif_devoir . ", " . $id_contenu_devoir[$count] . ")";
+			$result = spip_query($sql);
+			echo ("<!--identifiant de l'article: $result-->\n");
+		//les classes
+		for ($countc=0; $countc<=$classes; $countc++) {
+			$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_classe[$countc] . ", " . $id_contenu_devoir[$count] . ")";
+			$result = spip_query($sql);
+			echo ("<!--classe: $result-->\n");
+		}
+		//le groupe éventuel:
+		if ($id_groupe!=0) {
+			$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_groupe . ", " . $id_contenu_devoir[$count] . ")";
+			$result = spip_query($sql);
+			echo ("<!--groupe: $result-->\n");
+		}
+		//la matière:
+		$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_matiere . ", " . $id_contenu_devoir[$count] . ")";
+		$result = spip_query($sql);
+		echo ("<!--matière: $result-->\n<p>Enregistrement du devoir n°$dev_no</p>\n");
+	}//fin du for chaque devoir
+	echo ("<p>Devoirs enregistrés</p>\n");
+} //fin du if contenu_devoir
+
+//rajout des références aux devoirs dans le PS du contenu de la séance
+		$sql ="UPDATE spip_articles SET ps='".addslashes($liste_devoirs_contenu)."' WHERE id_article=$id_contenu_seance";
+		$result = spip_query($sql);
+		echo ("<!--update ps: $result-->\n");
+//le document-joint qui ne fonctionne pas !...
+if ($doc_joint[1]!="") {
+//s'il y a des docs joints:
+	for ($count=1; $count<=$docs; $count++) { ?>
+	<form method='POST' action='spip_image.php3' enctype='multipart/form-data'>
+	<input type="hidden" name="id_article" value="<?php echo($id_contenu_seance)?>" />
+	<input type="hidden" name="hash" value="01aae008aae774280e1e34a974bd26ba" />
+	<input type="hidden" name="hash_id_auteur" value="1" />
+	<input type="hidden" name="ajout_doc" value="oui" />
+	<input type="hidden" name="mode" value="document" />
+	<input type="hidden" name="type" value="article" />
+	<input type="hidden" name="redirect" value="../saisie-cahier-de-texte.php3" />
+	<input name='fichier<?php echo($count)?>' type='hidden' value='<?php echo($doc_joint[$count])?>' class='forml'>
+<?php
+	//Pour chaque doc joint
+	}?>
+	<input name='ok_post' type='Submit' VALUE='T&eacute;l&eacute;charger les pièces jointes' CLASS='fondo'>
+<?php
+}//fin if doc joint
+?>
+			<p><strong>Ne revenez pas en arrière, mais choisissez&nbsp;:</strong></p>
+			<p><a href="spip.php?page=cahier-de-texte-accueil" title="retour à l'accueil">Retourner à l'accueil</a>&nbsp;| <a href="spip.php?page=cahier-de-texte-saisie" title="Écrire le contenu d'une séance et ses devoirs éventuels">Saisir une autre fiche</a></p>
+		</div>
+	</div></div>
+
+[(#REM)Inclusion du pied de page]
+<INCLURE{fond=cahier-de-texte-pied}>
+
+</div>
+</body>
+</html>
+<?php
+break;}// Fin du if valider fiche
+
+//---------------------------------------------------
+//L'utilisateur veut remplir une fiche ou la modifier
+//---------------------------------------------------
+?>
+	<h1>Remplir une fiche du cahier de texte</h1>
+			<br class="clear" />	
+	</div>
+	<div id="Contenu"><div class="bloc"><div class="moyen-bloc">
+<?php
+if(!$_GET['classe_matiere']){
+?>
+	<!--Selecteur de classe et matière-->
+		<form name="classe_matiere" method="get">
+		<input type="hidden" name="page" value="cahier-de-texte-saisie">
+		<fieldset>
+			<legend>Classe<?php if ($classes>0) echo "s"?>&nbsp;:</legend>
+<?php //Une ou plusieurs classes
+for ($count=0; $count<=$classes; $count++) {
+?>
+			<select id="classe<?php echo $count;?>" name="id_classe<?php echo $count;?>" size="1">
+[(#REM)On extrait toutes les classes de Spip]
+<BOUCLE_ToutesLesClasses(MOTS){type="Classes"}{par titre}>
+				<option value="#ID_MOT"<?php if ($id_classe[$count]=='[(#ID_MOT|texte_script)]') echo " selected=selected";?>>#TITRE</option>
+</BOUCLE_ToutesLesClasses>
+			</select>
+<?php } //fin du for count classes
+
+//S'il y a plus d'une classe:
+
+if ($classes>0) {
+?>
+			<input type="Submit" value="Retirer une classe" name="moinsclasse">
+<?php } //fin du if classe?>
+
+			<input type="hidden" name="classes" value="<?php echo $classes;?>">
+			<input type="Submit" value="Rajouter une classe" name="plusclasse">
+			Groupe&nbsp;:<select id="groupe" name="id_groupe" size="1">
+				<option value="0">Pas de groupe</option>
+[(#REM)On extrait tous les groupes de Spip]
+<BOUCLE_ToutesLesGroupes(MOTS){type="Sous groupes de classes"}{par titre}>
+				<option value="#ID_MOT"<?php if ($id_groupe=='[(#ID_MOT|texte_script)]') echo " selected=selected";?>>#TITRE</option>
+</BOUCLE_ToutesLesGroupes>
+			</select>
+		</fieldset>
+		<fieldset>
+			<legend>Matière&nbsp;:</legend>
+			<select id="matiere" name="id_matiere" size="1">
+[(#REM)On extrait toutes les matières de Spip]
+<BOUCLE_ToutesLesMatieres(MOTS){type="Matières"}{par num titre}{par titre}>
+				<option value="#ID_MOT"<?php if ($id_matiere=='[(#ID_MOT|texte_script)]') echo " selected=selected";?>>#TITRE</option>
+</BOUCLE_ToutesLesMatieres>
+			</select>
+			</fieldset>
+			<input type="hidden" name="prof" value="<?php echo $id_auteur;?>">
+			<input type="Submit" value="Valider classe<?php if ($classes>0) echo "s"?> et matière" name="classe_matiere">
+		</form>
+<?php
+}//fin du ifnot classe-matiere
+if($_GET['classe_matiere']){
+?>
+	<div>
+	<!--Contenu de la séance-->
+		<FORM NAME="contenu" method="post">
+		<input type="hidden" name="page" value="cahier-de-texte-saisie">
+			<fieldset>
+			<legend>Contenu de la séance</legend>
+			<p>Séance du <INPUT TYPE="text" ID="date_seance" NAME="date_seance" VALUE="<?php if (!$date_seance) echo date("d/m/Y"); else echo $date_seance;?>" SIZE=12>
+			<A HREF="#"
+			onClick="cal.select(document.forms['contenu'].date_seance,'ancre-date','dd/MM/yyyy'); return false;"
+			NAME="ancre-date" ID="ancre-date" TITLE="Choisissez la date dans le calendrier">voir le calendrier</A></p>
+			<textarea id="contenu_seance" name="contenu_seance" cols="60" rows="5"><?php echo $contenu_seance;?></textarea>
+			</fieldset>
+	<!--Devoirs à faire -->
+			<fieldset>
+			<legend>Devoirs</legend>
+<?php for ($count=0; $count<=$devoirs; $count++) {
+?>
+			<p>À faire pour le <INPUT TYPE="text" ID="date_devoir<?php echo $count;?>" NAME="date_devoir<?php echo $count;?>" VALUE="<?php if (!$date_devoir[$count]) echo date("d/m/Y"); else echo $date_devoir[$count];?>" SIZE=12><A HREF="#"
+			onClick="cal.select(document.forms['contenu'].date_devoir<?php echo $count;?>,'ancre-date-devoir<?php echo $count;?>','dd/MM/yyyy'); return false;"
+			NAME="ancre-date-devoir<?php echo $count;?>" ID="ancre-date-devoir<?php echo $count;?>" TITLE="Choisissez la date dans le calendrier">voir le calendrier</A></p>
+			<textarea id="contenu_devoir<?php echo $count;?>" name="contenu_devoir<?php echo $count;?>" cols="60" rows="5"><?php echo $contenu_devoir[$count];?></textarea>
+<?php }//fin du for count devoirs?>
+			<input type="hidden" name="devoirs" value="<?php echo $devoirs;?>">
+			<input type="Submit" value="Rajouter un devoir pour une autre date" name="plusdate">
+			</fieldset>
+	<!-- Documents joints-->		
+			<fieldset>
+			<legend><?php echo"Document$plurdoc joint$plurdoc&nbsp;: (non fonctionnel actuellement !)";?></legend>
+			<input type="hidden" name="docs" value="<?php echo $docs;?>">
+<?php if (($docs and $docs>0) or $_POST['ajoutdoc']) {
+	if ($doc_joint[2] and $doc_joint[2]!="") $plurdoc_enr="s";
+	else $plurdoc_enr="";
+	if (!$_POST['ajoutdoc']) {
+?>
+			<div>
+				<p><?php echo "Document$plurdoc_enr déjà rajouté$plurdoc_enr&nbsp;:";?></p>
+				
+<?php
+		for ($count=1; $count<=$docs; $count++) {
+?>
+				<p>document&nbsp;<?php echo "$count&nbsp;: $doc_joint[$count]";?></p>	
+				<input type="Hidden" <?php echo "name=\"doc_joint$count\" value=\"$doc_joint[$count]\"";?>>
+<?php		} //fin du for count?>
+				<input type="Submit" value="Retirer un document joint" name="moinsdoc">
+			</div>
+<?php	} //fin du if not ajoutdoc?>
+			<input type="file" name="doc_joint<?php echo ($docs+1);?>" value="">
+			<input type="Submit" value="Rajouter ce document" name="plusdoc">
+<?php }//fin du if docs 
+if ((!$docs or $docs=0) and !$_POST['ajoutdoc']) {
+?>
+			<input type="Submit" value="Ajouter un document joint (non fonctionnel actuellement !)" name="ajoutdoc">
+<?php } //fin du if not $docs?>
+
+			</fieldset>
+			<br>
+	<!--validation-->
+			<input type="Submit" value="Enregistrer dans le cahier de texte" name="enregistrer_fiche">
+		</form>
+<?php }//fin du if classe-matiere?>
+<?php } // fin du if enregistrer-fiche?>
+	</div></div></div>
+
+<?php
+if($_GET['classe_matiere']) {
+?>
+[(#REM)Affichage des dernières entrées dans le cahier de texte en fonction du contexte (dans le GET)]
+
+<B_Seances>
+<div class="bloc">
+<h2>Dernières entrées du même type dans le cahier de textes&nbsp;:</h2>
+<BOUCLE_Seances(ARTICLES){titre_mot="Description de séance"}{id_mot==#ENV{id_classe0,.}}{id_mot==#ENV{id_groupe,.}}{id_mot==#ENV{id_matiere,.}}{id_auteur==#ENV{prof,.}}{!par date}{0,10}>
+		<div id="documents">
+			<h3 class="titre">#TITRE</h3>
+			<div class="texte">#TEXTE</div>
+<?php
+//Si on ne demande que les séances (donc pas les devoirs)
+	if (!($_GET['seances_seules'])) {
+?>
+			[<hr>
+			<dl class="suivants">(#PS)</dl>]
+<?php
+	} //fin du if !seances_seules
+?>
+		</div>
+</BOUCLE_Seances>
+</div>
+</B_Seances>
+<p>Pas encore d'entrées du même type dans le cahier de texte...</p>
+<//B_Seances>
+<?php
+	if (!($_POST['enregistrer_fiche'])) {
+?>
+<hr>
+[(#REM)Inclusion de la noisette de selection]
+<INCLURE{fond=cahier-de-texte-selection}>
+
+<?php 
+	}//fin du if not enregistrer_fiche
+}//fin du if classe-matiere?>	
+	</div>
+
+[(#REM)Inclusion du pied de page]
+<INCLURE{fond=cahier-de-texte-pied}>
+</div>
+
+
+  [(#REM)Fin de la zone à athentification]
+  <?php } else { ?>
+
+<h1>Cette partie est en accès restreint</h1>
+#LOGIN_PUBLIC
+
+<?php } ?>
+</body>
+</html>

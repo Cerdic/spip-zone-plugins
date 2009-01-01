@@ -1,0 +1,35 @@
+#CACHE{0}
+
+
+
+  [(#REM)   la navigation par onglets   ] 
+  <div id="menu"> 
+    <B_onglets>  
+	<ul id="nav"> 
+	<li[ class="(#ENV{sommaire})"]><a href="[(#URL_PAGE{sommaire})]">Accueil</a></li>
+      <BOUCLE_onglets(RUBRIQUES){par num titre}{type=barre_menu}{0,5}> <li [class="(#EXPOSER|oui,non)"]>
+	  <BOUCLE_titre_onglets(MOTS){id_rubrique}{type=barre_menu}{0,1}>
+	  [(#REM) Pas plus de cinq onglets pour la mise en page.] 
+          [<a href="(#URL_RUBRIQUE)">][(#LOGO_MOT)][(#TITRE)]</a>
+           </BOUCLE_titre_onglets></li> 
+		   </BOUCLE_onglets> 
+        </ul></B_onglets>
+		
+<p class="droite blanc img">
+
+
+
+<BOUCLE_connecte_ou_pas(AUTEURS){tout}{id_auteur=#SESSION{id_auteur}}>
+[(#SESSION{statut}|?{' '})<a href="[(#URL_PAGE{mon-profil})]">Mon profil</a> / <a href="[(#URL_LOGOUT)]">Quitter</a>]
+</BOUCLE_connecte_ou_pas>
+[(#CONFIG{accepter_inscriptions}|=={oui}|?{' ',''})[<a href="(#URL_PAGE{mon-profil}|parametre_url{type,redac})">]][(#CONFIG{accepter_inscriptions}|=={oui}|?{'',' '})[<a href="(#URL_PAGE{mon-profil}|parametre_url{type,visit})">]]Connexion</a>    
+<//B_connecte_ou_pas>
+ 
+
+
+</p>
+
+
+
+ [(#REM)   fermeture du menu   ]
+</div>

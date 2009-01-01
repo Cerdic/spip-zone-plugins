@@ -1,0 +1,39 @@
+#CACHE{864000}
+<h4 class="icone_forum">Smileys</h4>
+<p>(Cliquez ou recopiez)</p>
+  <?php
+$listimag=array();
+$rep1="smileys/";
+$listfich=opendir($rep1);
+while ($fich=readdir($listfich))
+{ 	if(($fich !='..') and ($fich !='.') and ($fich !='.test'))
+	{ 
+$nomfich=substr($fich,0,strrpos($fich, "."));
+$listimag[$nomfich]=$rep1.$fich;
+	}
+}
+ksort($listimag);
+reset($listimag);
+$compte=0;
+
+// changer ci-dessous le nombre de colonnes (3 par défaut) //////////
+$nbcol=3;
+
+echo "<table class=\"spip\"><tr>\n";
+while (list($nom,$chem) = each($listimag))
+{ 
+echo "
+<td class=\"centre\">
+<a href=\"javascript:emoticon(':".$nom."')\" title=\"cliquez ou recopiez\">
+<img src=\"".$chem."\" alt=\"smilley\"/><br />:".$nom."</a>
+</td>\n";
+
+$compte++; 
+	if ($compte % $nbcol == 0)
+	{
+	echo"</tr><tr>\n";}
+	}
+echo "</tr>
+</table>";
+?>
+<hr class="spacer"/>

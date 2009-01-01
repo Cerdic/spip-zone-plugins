@@ -1,0 +1,179 @@
+[(#SESSION{id_auteur}|?{'',' '})
+[(#ENV{connect}|=={yes}|?{' ',''})
+<INCLURE{fond=authentification}><?php exit; ?>]
+]
+
+
+
+#CACHE{864000}
+<INCLURE{fond="header"}><head>
+
+[(#REM)   les métas   ]<BOUCLE_author0(AUTEURS){tout}{id_auteur}>
+
+
+
+
+
+<title>Contactez [(#NOM)].</title>
+<meta name="Description" content="Contact et profil de [(#NOM)]"/>
+<meta name="keywords" content="[(#NOM)]"/>
+<meta name="author" content="[(#NOM) via #NOM_SITE_SPIP]"/>
+</BOUCLE_author0>
+
+<meta name="revisit-after" content="15 days" />
+<meta http-equiv="content-type" content="text/html; charset=#CHARSET"/>
+<meta http-equiv="Content-Language" content="fr-fr" />
+
+
+
+
+	[(#REM) les css et js peuvent changer suivant type d article ou de breve ]
+	
+
+<INCLURE{fond="header-css"}{date=#ENV{date}}> 	
+
+</head>
+
+
+<body> 
+
+
+
+<div id="container">   [(#REM)   centrage page   ]
+<INCLURE{fond="entete"}{date=#ENV{date}}>  
+<div id="surcontent">  
+<INCLURE{fond="menuhoriz"}>[(#REM)   ouverture entête   ]
+<div id="content">  [(#REM)   ouverture contenu   ] 
+<div id="colgau"> [(#REM)   ouverture colone de gauche   ] 
+
+
+
+[(#REM)   Si l internaute est connecte ou s il contact l admin principal du site   ]
+<BOUCLE_AUTEURS(AUTEURS){tous}{id_auteur}>
+[(#REM)   Vous pouvez changer le numéro de l'admin principal ou ajouter des admins]
+
+
+<div class="grande_boite"> [(#REM)   ouverture grd boite texte   ]
+<span class="logodroite"> 
+
+
+[(#REM)  Inclue logo auteur avec un max de 100 pixel  ]
+[(#SET{taille,[(#LOGO_AUTEUR||hauteur|min{100})]})] 
+<INCLURE{fond=logo}{id_auteur,#ID_AUTEUR}{taille=#GET{taille}}{date=#ENV{date}}>
+
+
+</span>
+[<h1>(#NOM)</h1>]
+[<p>(#BIO||?{#BIO,#NOM n'a pas encore &eacute;crit sa bio.})</p>]
+[<h4 class="icone_site">Site web préféré:</h4>
+<p><a href="#URL_SITE">(#NOM_SITE)</a></p>]
+
+[<h4 class="cadenas">Sécurité, clé PGP, protection:</h4><p>(#PGP)</p>]
+	  
+<?php if ($auteur_session['id_auteur']==#ID_AUTEUR) { ?>
+
+<h4 class="icone_membre">#NOM, modifiez votre profil:</h4>
+<p>Cette page affiche votre profil tel qu'il apparaît auprès des autres membres de #NOM_SITE_SPIP. 
+<br/><br/>
+[<a href="ecrire/?exec=auteur_infos&id_auteur=#SESSION{id_auteur}&initial=-1">::&nbsp;(#BIO|sinon{Renseigner ma biographie})</a><br/>]
+[<a href="ecrire/?exec=auteur_infos&id_auteur=#SESSION{id_auteur}&initial=-1">::&nbsp;(#NOM_SITE|sinon{Ajouter mon site web favori})</a><br/>]
+[<a href="ecrire/?exec=auteur_infos&id_auteur=#SESSION{id_auteur}&initial=-1">::&nbsp;(#PGP|sinon{Diffuser ma clé publique PGP})</a><br/>]
+</p>
+
+ <?php } ?>
+  
+<hr class="spacer"/>  
+    </div>
+  
+  
+<?php if ($auteur_session||#ID_AUTEUR== '1') { ?>
+  
+<div class="grande_boite">
+
+[<h4 class="icone_post">Contactez (#NOM)</h4>
+] 
+<p>
+[(#FORMULAIRE_ECRIRE_AUTEUR)]</p><hr class="spacer"/>
+</div>[(#REM)   fermeture grande boite   ]
+
+
+
+
+
+
+<?php }else{ ?>
+
+
+
+<div class="grande_boite">
+<h4 class="icone_membre">Connectez-vous!</h4>
+<p>Vous ne pouvez contacter #NOM sans &ecirc;tre connect&eacute; &agrave; #NOM_SITE_SPIP.<br/>
+[<a href="(#URL_PAGE{membre}|parametre_url{'id_auteur',#ID_AUTEUR}|parametre_url{'connect',yes})"><strong>Se&nbsp;connecter pour contacter
+#NOM.]</strong></a></p>
+<hr class="spacer"/>
+</div>
+
+
+<?php } ?>
+
+
+<div id="cel">
+<ul id="deco">
+
+
+<li>
+  <h4>Ses  articles populaires:</h4>
+<p>
+<BOUCLE_ARTICLE_AUTEUR(ARTICLES){id_auteur}{par popularite}{inverse}{0,10}>
+[::&nbsp;<a href="#URL_ARTICLE">(#TITRE)</a>&nbsp;(<?php $total_visites = "#VISITES"; 
+    echo $total_visites == 1? "1&nbsp;lecture." : "$total_visites&nbsp;lectures." ; ?>)<br/>
+]
+</BOUCLE_ARTICLE_AUTEUR>
+#NOM n'a pas encore &eacute;crit d'article.
+<//B_ARTICLE_AUTEUR>              </p>
+			</li>
+					
+					
+
+<li>
+<h4>Ses derniers messages:</h4>
+<p>
+<BOUCLE_forum(FORUMS){id_auteur}{plat}{par date}{inverse}{0,10}>
+                    [::&nbsp;<a href="[(#URL_PAGE{discussion}|parametre_url{'id_forum',#ID_FORUM})]" title="#TITRE">(#TITRE)</a><br/>]
+                    </BOUCLE_forum>
+					#NOM n'a pas encore &eacute;crit de message.
+					<//B_forum>
+			</p>
+</li>
+</ul>
+</div>
+
+</BOUCLE_AUTEURS>
+
+
+
+</div>
+[(#REM)   fermeture colone de gauche   ]
+ <div class="coldroit">  [(#REM)   ouverture de la colone de droite   ] 
+
+
+    <div class="boite">[(#REM)   ouverture boite menu   ] 
+
+        <h4 class="icone_menu">Navigation</h4>
+        <INCLURE{fond="inc_menu_rub"}> </div>[(#REM)   fermeture boite menu   ]<div class="boite"> [(#REM)   ouverture boite les membres   ] 
+<INCLURE{fond=inc_liste_membres}{lettre=#ENV{lettre}}>
+</div>
+
+
+
+[(#REM)   fermeture boite menu   ]
+</div>
+[(#REM)   fermeture colone de droite   ] 
+<hr class="spacer" />
+</div>[(#REM)   fermeture contenu   ] 
+<INCLURE{fond="pieddepage"}>
+
+</div> [(#REM)   fermeture surcontenu   ]<br/>
+</div> [(#REM)   fermeture container   ] 
+</body>
+</html>

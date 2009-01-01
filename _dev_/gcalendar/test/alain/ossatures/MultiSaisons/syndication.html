@@ -1,0 +1,228 @@
+#CACHE{864000}
+<INCLURE{fond="header"}>
+[(#REM)   ci-dessus l'include du fichier header avec un délai de 31 jours.   ]
+
+<head>
+
+[(#REM)   les métas avec dans l'ordre le titre de la page, la description pour les moteurs de recherches, les mots clés.   ]
+<title>[Profitez du contenu de (#NOM_SITE_SPIP)]</title> 
+<meta name="Description" content="[Profitez du contenu de (#NOM_SITE_SPIP)]"/>
+<meta name="Keywords" content="syndication,afficher contenu rss,fil rss,[Profitez du contenu de (#NOM_SITE_SPIP)]"/>
+<meta http-equiv="content-type"content="text/html; charset=#CHARSET"/>
+<meta http-equiv="Content-Language" content="fr-fr" />
+
+	[(#REM) les css et js peuvent changer suivant type d article ou de breve ]
+	
+
+<INCLURE{fond="header-css"}{date=#ENV{date}}> 	
+
+</head>
+
+
+<body> 
+
+<div id="container">   [(#REM)   cette div centre la page   ]
+<INCLURE{fond="entete"}{date=#ENV{date}}>  [(#REM)   include du fichier entete avec le logo   ] 
+<div id="surcontent">  [(#REM)   ouverture entête   ]
+<INCLURE{fond="menuhoriz"}> [(#REM)   le menu horizontal avec les onglets   ] 
+<div id="content">  [(#REM)   ouverture contenu   ] 
+<div id="colgau"> [(#REM)   ouverture colone de gauche   ] 
+
+
+
+
+<div id="cel"> [(#REM)   ouverture des deux cellules en haut   ] 
+<ul id="deco"> 
+<li> [(#REM)   ouverture de la premiere cellule   ]
+
+<h4>L'info du monde entier</h4>
+
+<p> Visualisez les news du monde entier: En installant un lecteur de nouvelles
+ sur votre ordinateur ou dans votre site web, vous synth&eacute;tiserez l'actualit&eacute;
+ publi&eacute;e
+ sur les sites web que vous aurez s&eacute;lectionn&eacute;.</p>
+
+		
+</li>
+
+
+ 
+<li>  [(#REM)   ouverture de la premiere cellule   ]
+<h4>Votre lecteur est install&eacute;</h4>
+
+<p>Vous poss&eacute;dez d&eacute;j&agrave; un
+  lecteur de nouvelles RSS: Internet Explorer v7, Firefox v1,
+  Thunderbird, Safari, Mozilla, ainsi que d'autres navigateurs poss&egrave;dent
+  des lecteurs de nouvelles ou de flux RSS.</p>
+
+</li>[(#REM)   fermeture des cellules   ]
+</ul>
+[(#REM)   fermeture des cellules   ]
+</div>[(#REM)   fermeture des cellules   ]
+
+
+
+ <div class="grande_boite">[(#REM)   ouverture d une grande boite    ]
+ 
+ <h4 class="icone_site">Profitez du contenu de #NOM_SITE_SPIP</h4>
+<p>
+
+
+
+<BOUCLE_rub_rss(RUBRIQUES){id_rubrique}{0,1}>
+Dans votre lecteur RSS, votre logiciel courrier RSS, votre agrégateur RSS,
+ajoutez l'adresse de news de la rubrique <span class="vert">[ "(#TITRE)"]&nbsp;</span>:<br/>
+<span class="vert">[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]</span><br/>
+Ou s&eacute;lectionnez une autre rubrique dans cette liste&nbsp;:
+
+</BOUCLE_rub_rss>
+
+Dans votre lecteur RSS,  votre logiciel courrier RSS, votre agrégateur RSS,
+ajoutez cette adresse  pour afficher les news du site entier&nbsp;:<br/>
+<span class="vert">[(#URL_PAGE{backend})]</span><br/>
+Ou s&eacute;lectionnez une rubrique dans cette liste&nbsp;:
+
+<//B_rub_rss>
+
+<form action="[(#SELF)]" method="post" name="affichage_rss_rubrique">
+     
+     <B_rubriquesracine> 
+                        <select name="id_rubrique" class="list370">
+                        
+                                <option selected="">--> Profiter du site entier</option>
+						        <BOUCLE_rubriquesracine(RUBRIQUES) {titre_mot=menu_rub} {par num titre}> 
+                                <option value="#ID_RUBRIQUE">[(#TITRE)]</option> 
+                                <B_sous_categories1>
+                                <BOUCLE_sous_categories1(RUBRIQUES) {id_parent} {par titre}> 
+                                <option value="#ID_RUBRIQUE">[&nbsp;&nbsp;-&nbsp;(#TITRE)]</option> 
+                                <B_sous_categories2> 
+                                <BOUCLE_sous_categories2(RUBRIQUES) {id_parent}  {par titre}> 
+                                <option value="#ID_RUBRIQUE">[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;(#TITRE)]</option> 
+                                <B_sous_categories3> 
+                                <BOUCLE_sous_categories3(RUBRIQUES) {id_parent}> 
+                                <option value="#ID_RUBRIQUE">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;[(#TITRE)]</option> 
+                                </BOUCLE_sous_categories3> 
+                                </B_sous_categories3> 
+                                </BOUCLE_sous_categories2> 
+                                </B_sous_categories2> 
+                                </BOUCLE_sous_categories1> 
+                                </B_sous_categories1> 
+                                </BOUCLE_rubriquesracine>								
+  			            </select>
+         </B_rubriquesracine> 
+<input type="submit" value="afficher" />
+</form>
+
+
+
+</p>    
+<hr class="spacer"/>
+
+ 
+  <h4 class="icone_post">Des javascript pour sites web</h4>
+  
+  <BOUCLE_rub_java(RUBRIQUES){id_rubrique}{0,1}>
+
+  <p>Un site web non &eacute;quip&eacute; d'agr&eacute;gateur en ligne peut aussi
+    profiter du contenu de #NOM_SITE_SPIP. Affichez les news de la rubrique[ "(#TITRE)"].
+    Insérez
+    ce Javascript entre les balises body de votre page html: 
+<form><textarea name="textfield" class="form450"><!-- A ajouter entre les balises <body> -->
+<script type="text/javascript" src="[(#URL_PAGE{distrib}|parametre_url{id_rubrique,#ID_RUBRIQUE})]">
+</script></textarea></form>
+<p>Le contenu de la rubrique apparaitra comme dans la d&eacute;monstration ci-contre.
+  Vous pouvez en modifier le style css.</p>
+
+ </BOUCLE_rub_java>
+   <p>Un site web non équipé d'agrégateur en ligne peut aussi profiter du contenu
+    de #NOM_SITE_SPIP. Insérez ce Javascript entre les balises body de votre
+    page html:
+<form><textarea name="textfield" class="form450"><!-- A ajouter entre les balises <body> -->
+<script type="text/javascript" src="[(#URL_PAGE{distrib}|parametre_url{id_rubrique,#ID_RUBRIQUE})]">
+</script></textarea></form>
+
+<p>Le contenu texte apparaitra comme dans la d&eacute;monstration ci-contre. Vous pouvez
+  en modifier le style css.</p>
+ <//B_rub_java>
+  </p>
+</div>[(#REM)   fermeture grande_boite   ]
+
+
+<div id="celbas">
+<ul id="decobas">
+<li>
+  <h4>Contenu pour webmasters</h4>
+  <p>
+ Les titres et descriptifs des articles  peuvent &ecirc;tre
+ affich&eacute;s sur votre site.  Nous gagnons
+ quelques liens, vous gagnez du contenu dynamique agr&eacute;able aux
+ internautes et aux moteurs de recherches. </p>
+
+</li>
+
+
+  <li>
+    <h4>Des fils RSS dans le site</h4>
+              <p>Surfez les rubriques du site et retrouvez les<a href="[(#URL_PAGE{backend})]"><span class="button rss">boutons</span></a>des
+                fils RSS au pied des pages. Sur le bouton, r&eacute;cup&eacute;rez l'adresse
+                du fil d'information de la rubrique, du forum ou du site entier.</p>
+  </li> 
+
+</ul>
+</div> [(#REM)   fin de cel   ]      
+
+
+       
+</div>[(#REM)   fermeture colone de gauche   ]
+		
+
+<div class="coldroit">[(#REM)   ouverture de la colone de droite   ] 
+
+
+    <div class="boite">[(#REM)   ouverture boite menu   ] 
+        <h4 class="icone_menu">Navigation</h4>
+        <INCLURE{fond="inc_menu_rub"}>
+    
+    </div>[(#REM)   fermeture boite menu   ]
+
+
+ 
+<div class="boite">
+  <h4 class="icone_stats">Démonstration:</h4>
+
+
+<BOUCLE_rub_demo(RUBRIQUES){id_rubrique}{0,1}>
+[<h4>(#TITRE)</h4>]
+
+<ul class="petite_liste">
+<BOUCLE_art_demo(ARTICLES){branche}{par num titre}{par date}{inverse}{0,5}>
+<li>[<strong><a href="#URL_ARTICLE">(#TITRE)</a></strong>][ (#DESCRIPTIF|couper{100})]</li>
+</BOUCLE_art_demo>
+</ul>
+</BOUCLE_rub_demo>
+<ul class="petite_liste">
+<BOUCLE_art_tous(ARTICLES){tous}{par date}{inverse}{0,5}>
+<li>[<strong><a href="#URL_ARTICLE">(#TITRE)</a></strong>][ (#DESCRIPTIF|couper{100})]</li>
+</BOUCLE_art_tous>
+</ul>
+
+<//B_rub_demo>
+
+</div>
+      
+ 
+
+</div>   [(#REM)   fermeture colone de droite   ] 
+
+
+<hr class="spacer" /> [(#REM)   ajoute une barre hr invisible   ] 
+</div>[(#REM)   fermeture contenu   ] 
+<INCLURE{fond="pieddepage"}> [(#REM)   le pied de page inclu avec délai   ] 
+
+</div> [(#REM)   fermeture surcontenu   ]<br/>
+
+
+</div> [(#REM)   fermeture container   ] 
+
+</body>
+</html>

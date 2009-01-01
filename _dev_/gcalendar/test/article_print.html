@@ -1,0 +1,42 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="description" content="Site National de la FNSF. Elle représente les Sourds de la FRance et milite leurs droits." />
+<meta name="keywords" content="sourd, deaf, fnsf, spip, fédération, france, surdité, handicapé, association, affilié, président, europe, communauté européenne, eud, wfd" />
+<title>[#NOM_SITE_SPIP]</title>
+<link href="#CHEMIN{include/print.css}" rel="stylesheet" media="print" >
+</head>
+<body>
+
+<div id="navheaderlogoFNSF">[(#INCLURE{fond=include/headerLogos})]</div>
+
+<div id="navprincipal">	
+	<!-- phpmyvisites -->
+<a href="http://www.phpmyvisites.net/" title="phpMyVisites | Open source web analytics" 
+onclick="window.open(this.href);return(false);"><script type="text/javascript">
+<!--
+var a_vars = Array();
+var pagename='';
+
+var phpmyvisitesSite = 1;
+var phpmyvisitesURL = "http://www.fnsf.org/phpmv2/phpmyvisites.php";
+//-->
+</script>
+<script language="javascript" src="http://www.fnsf.org/phpmv2/phpmyvisites.js" type="text/javascript"></script>
+<noscript><p>phpMyVisites | Open source web analytics
+<img src="http://www.fnsf.org/phpmv2/phpmyvisites.php" alt="Statistics" style="border:0" />
+</p></noscript></a>
+<!-- /phpmyvisites --> |
+<BOUCLE_article (ARTICLES) {id_article}>
+		Crée le [(#DATE|nom_jour)] [(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)], par [#LESAUTEURS] | <a href="#URL_SITE_SPIP"><:Accueil:></a>
+		<br /><br />
+			<h3 class ="gras">#TITRE </h3>
+		<br />
+	#TEXTE
+		
+		</BOUCLE_article>
+	</div>         
+</body>
+</html>

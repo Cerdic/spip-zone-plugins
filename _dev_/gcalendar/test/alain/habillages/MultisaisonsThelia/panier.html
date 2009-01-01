@@ -1,0 +1,128 @@
+#CACHE{7200}
+<INCLURE{fond="header"}>
+[(#REM)   ci-dessus l'include du fichier header avec un délai de 31 jours.   ]
+
+
+<head>
+<meta name="revisit-after" content="15 days" />
+<meta http-equiv="content-type" content="text/html; charset=#CHARSET"/>
+<meta http-equiv="Content-Language" content="fr-fr" />
+
+	[(#REM) les css et js peuvent changer suivant type d article ou de breve ]
+
+
+<INCLURE{fond="header-css"}{date=#ENV{date}}>
+
+</head>
+<body class="page_panier">
+
+<div id="container">   [(#REM)   cette div centre la page   ]
+<INCLURE{fond="entete"}{date=#ENV{date}}>  [(#REM)   include du fichier entete avec le logo   ]
+<div id="surcontent">  [(#REM)   ouverture entête   ]
+<INCLURE{fond="menuhoriz"}{id_rubrique}> [(#REM)   le menu horizontal avec les onglets   ]
+<div id="content">  [(#REM)   ouverture contenu   ]
+
+<div class="width25 floatLeft"> [(#REM)   ouverture colone de gauche   ]
+
+<div class="boite_cellule_gauche">[(#REM)   ouverture boite menu   ]
+        <h4 class="icone_menu">Navigation</h4>
+        <INCLURE{fond="inc_menu_rub"}>
+
+    </div>[(#REM)   fermeture boite menu   ]
+
+</div>[(#REM)   fermeture colone de gauche   ]
+
+<div class="width75 floatRight"> [(#REM)   ouverture colone droite   ]
+
+ <div class="grande_boite_cellule">[(#REM) ouverture grande boite cellule]
+ <h4><:spipthelia:mon_panier:></h4>
+
+     <table class="width100">
+  	<thead class="width16">
+	  <tr>
+    	    <th class="row_first white alignCenter width16"><strong><:spipthelia:photo_produit:></strong></th>
+    	    <th class="row_first white alignCenter width16"><strong><:spipthelia:references_produits:></strong></th>
+    	    <th class="row_first white alignCenter width16"><strong><:spipthelia:prix_unitaire:></strong></th>
+    	    <th class="row_first white alignCenter width16"><strong><:spipthelia:quantite:></strong></th>
+    	    <th class="row_first white alignCenter width16"><strong><:spipthelia:total_ttc:></strong></th>
+    	    <th class="row_first white alignCenter width16"><strong><:spipthelia:Vider:></strong></th>
+	  </tr>
+	</thead>
+
+        <tfoot class="width16">
+          <tr>
+	   <td class="width16">&nbsp;</td>
+	   <td class="width16">&nbsp;</td>
+	   <td class="width16">&nbsp;</td>
+	   <td class="row_first white alignCenter width16"><strong><:spipthelia:total_panier:></strong></td>
+    	   <td class="row_even alignCenter width16"><strong>THELIA-PANIER_TOTAL &euro;</strong></td>
+	   <td class="width16">&nbsp;</td>
+    	 </tr>
+        <tfoot>
+
+	<tbody class="width16">
+	  <THELIA_CONTENU_PANIER type="PANIER">
+
+	    <tr>
+
+	     <td class="width16">
+              <THELIA_image type="IMAGE" produit="THELIA-ID" largeur="100" num="1">
+               <img src="THELIA-IMAGE" />
+               </THELIA_image>
+             </td>
+
+	     <td class="row_old alignCenter width16"><strong>THELIA-REF<br/>THELIA-TITRE
+	       <THELIA_decval type="DECVAL" article="THELIA-ARTICLE">
+	        <br/>THELIA-DECLITITRE : THELIA-VALEUR
+	       </THELIA_decval></strong>
+	     </td>
+
+             <td class="row_even alignCenter width16"><strong>THELIA-PRIXU &euro;</strong></td>
+
+    	     <td class="row_old alignCenter width16">
+
+	     <form action="#URL_PAGE{panier, article=THELIA-ARTICLE}" method="post" name="formpanierTHELIA-ARTICLE" id="formpanierTHELIA-ARTICLE">
+               <input type="hidden" name="article" value="THELIA-ARTICLE" />
+               <input type="hidden" name="thelia_action" value="modifier" />
+               	<select name="quantite" size="1" class="zoneDeSaisie" onchange="document.formpanierTHELIA-ARTICLE.submit()">
+                  <THELIA_quantite type="QUANTITE" article="THELIA-ARTICLE" max="50">
+		   <option value="THELIA-NUM" THELIA-SELECTED>THELIA-NUM</option>
+		  </THELIA_quantite>
+		</select>
+	      </form>
+
+              </td>
+
+	      <td class="row_even alignCenter width16"><strong>THELIA-TOTAL &euro;</strong></td>
+	      <td class="row_old alignCenter width16"><strong>
+               <a href="#URL_PAGE{panier,thelia_action=supprimer&article=THELIA-ARTICLE}">
+               <:spipthelia:supprimer:></a></strong>
+              </td>
+	    </tr>
+  	 </THELIA_CONTENU_PANIER>
+        </tbody>
+
+       </table>
+
+
+				<div class="boutonMonCompteContenu">
+				<a href="#URL_PAGE{adresse}"><:spipthelia:valider_panier:></a>
+				</div>
+				<div class="boutonMonCompteContenu">
+				<a href="#URL_SITE_SPIP"><:spipthelia:retour_boutique:></a>
+				</div>
+
+</div>[(#REM) fermeture grande boite cellule]
+
+</div>[(#REM)   fermeture colone droite   ]
+
+<hr class="spacer" /> [(#REM)   ajoute une barre hr invisible   ]
+</div>[(#REM)   fermeture contenu   ]
+<INCLURE{fond="pieddepage"}> [(#REM)   le pied de page inclu avec délai   ]
+
+</div> [(#REM)   fermeture surcontenu   ]<br/>
+
+
+</div> [(#REM)   fermeture container   ]
+</body>
+</html>

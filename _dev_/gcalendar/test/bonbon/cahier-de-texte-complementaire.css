@@ -1,0 +1,71 @@
+/*-----------------------------------------
+CSS du Cahier de texte pour Spip: Bonbon !
+Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
+Sous licence GPL (enfin bon, c'est bonbonware...)
+CopyLeft en juin 2007
+-------------------------------------------*/
+
+/*Tableaux des devoirs*/
+
+table.spip {
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid #999999;
+	border-collapse:collapse;
+}
+
+table.spip caption{
+	caption-side: top; /* bottom pas pris en compte par IE */
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 3px;
+	font-weight: bold;
+	font-family: "Arial", Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size : 70%;
+}
+
+table.spip th {
+	background-color: #a6a6a6;
+	border: 2px solid black;
+}
+
+table.spip tr.row_odd {
+	background-color: #d7d7d7;
+	border: 1px solid black;
+}
+
+table.spip tr.row_even {
+	border: 1px solid black;
+}
+
+table.spip td {
+	padding: 3px;
+	text-align: left;
+	border: 1px solid #999999;
+	vertical-align: middle;
+}
+
+/*élements de pagination*/
+.avant{
+	float: left;
+}
+.apres{
+	float: right;
+}
+.on {
+	color:red;
+}
+
+.on a:hover{
+	color:darkred;
+}
+/*Trucs en plus*/
+.authentifie{
+	margin-left: 60%;
+	font-size: 50%
+}
+.moyen-bloc {
+	width: 94%;
+margin-left: 3%
+}

@@ -1,0 +1,35 @@
+#CACHE{864000}
+<div id="footer_thelia">
+<BOUCLE_ART_RSS(ARTICLES){id_article}{titre_mot==forum}{0,1}>
+<a href="[(#URL_PAGE{backend}|parametre_url{id_article,#ID_ARTICLE})]">
+<span class="droite button rss">RSS forum</span></a>
+</BOUCLE_ART_RSS>
+
+<BOUCLE_RUB_RSS(RUBRIQUES){id_rubrique}{0,1}>
+<a href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]">
+<span class="droite button rss">RSS rubrique</span></a>
+</BOUCLE_RUB_RSS>
+
+<a href="[(#URL_PAGE{backend})]">
+<span class="droite button rss">RSS site</span></a>
+<//B_RUB_RSS>
+<//B_ART_RSS>
+
+
+<BOUCLE_AGENDA_ICAL(RUBRIQUES){id_rubrique}{titre_mot==agenda}{0,1}>
+<a rel="alternate" href="[(#URL_PAGE{ical-agenda}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" title="iCal [(#TITRE|textebrut)] [(#NOM_SITE_SPIP|textebrut)]">
+<span class="droite button ical">iCal Agenda</span></a>
+</BOUCLE_AGENDA_ICAL>
+<INCLURE{fond=boutons-saisons}>
+<//B_AGENDA_ICAL>
+
+
+    <a href="http://www.spip.net/" title="<:site_realise_avec_spip:>"><img src="#CHEMIN{spip.png}" alt="SPIP" width="48" height="16" class="format_png" /></a> et <a href="http://www.thelia.fr"><img src="#CHEMIN{thelia.png}" alt="Th&eacute;lia" width="47" height="16" class="format_png" /></a>&nbsp;::&nbsp;<a href="[(#URL_PAGE{membre}|parametre_url{'id_auteur',1})]"><:logic:contact:></a>&nbsp;::&nbsp;<a href="[(#URL_PAGE{inscription})]"><:logic:newsletter:></a>&nbsp;::&nbsp;<a href="[(#URL_PAGE{plan})]">
+<:logic:plan_du_site:></a>&nbsp;::&nbsp;<a href="[(#URL_PAGE{nouveautes})]"><:logic:nouveaute:></a>&nbsp;::&nbsp;<a href="[(#URL_PAGE{recherche})]"><:logic:recherche:></a>&nbsp;::&nbsp;[<a href="(#URL_PAGE{mon-profil}|parametre_url{type,question})"><:logic:admin:></a>] <span class="cool"><a href="http://www.art-logic.info">Cr&eacute;ation site web Annecy</a></span>
+<BOUCLE_LIENS_INTERNES_BAS(ARTICLES){titre_mot==liens_internes_bas}{0,6}>
+	&nbsp;::&nbsp;<a href="#URL_ARTICLE"[title="(#DESCRIPTIF|couper{40}|textebrut|attribut_html)"]>[(#TITRE)]</a></BOUCLE_LIENS_INTERNES_BAS>
+</div>
+<p class="centre blanc gras logo_bas">
+<a href="[(#URL_PAGE{syndication})]" >Afficher le contenu dynamique RSS de #NOM_SITE_SPIP</a>
+</p>
+[(#REM)   fermeture pied de page  ]

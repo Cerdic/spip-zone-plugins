@@ -1,0 +1,32 @@
+#CACHE{864000}
+<B_rubrique_glossaire>
+<div class="grande_boite">
+<BOUCLE_rubrique_glossaire(rubriques){id_rubrique=#ID_RUBRIQUE}{titre_mot==glossaire}{0,1}>
+
+<h4 class="icone_recherche">
+<BOUCLE_comptbreves(BREVES){id_rubrique}> </BOUCLE_comptbreves>
+[(#TOTAL_BOUCLE) Définitions]
+</B_comptbreves>
+<a name="breves" id="breves"></a>
+</h4>
+
+
+<p class="interne">Glossaire:&nbsp;
+<BOUCLE_decompte(BREVES){id_rubrique}{par titre}>
+<a href="[(#SELF|parametre_url{lettre,#TITRE|translitteration|couper{1}|lettre1|unique{lien}})]">[(#TITRE|translitteration|couper{1}|lettre1|unique{titrelien})]</a>
+</BOUCLE_decompte>
+</p>
+<B_breves_liste>
+<ul class="liste_plane">
+<BOUCLE_breves_liste(BREVES){id_rubrique}{titre==^#ENV{lettre}}{pagination 20}>
+[<li><a href="#URL_BREVE" title="Lire cette définition">(#TITRE)</a></li>]
+</BOUCLE_breves_liste></ul>
+#PAGINATION
+</B_breves_liste>
+<p>Choisissez une lettre dans le glossaire technique.</p>
+<//B_breves_liste>
+
+<hr class="spacer"/>
+</BOUCLE_rubrique_glossaire>
+</div>
+</B_rubrique_glossaire>

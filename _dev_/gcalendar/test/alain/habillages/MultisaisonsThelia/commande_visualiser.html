@@ -1,0 +1,79 @@
+#CACHE{7200}
+<INCLURE{fond="header"}>
+[(#REM)   ci-dessus l'include du fichier header avec un délai de 31 jours.   ]
+
+
+<head>
+<meta name="revisit-after" content="15 days" />
+<meta http-equiv="content-type" content="text/html; charset=#CHARSET"/>
+<meta http-equiv="Content-Language" content="fr-fr" />
+
+	[(#REM) les css et js peuvent changer suivant type d article ou de breve ]
+
+
+<INCLURE{fond="header-css"}{date=#ENV{date}}>
+
+</head>
+<body class="page_panier">
+
+<div id="container">   [(#REM)   cette div centre la page   ]
+<INCLURE{fond="entete"}{date=#ENV{date}}>  [(#REM)   include du fichier entete avec le logo   ]
+<div id="surcontent">  [(#REM)   ouverture entête   ]
+<INCLURE{fond="menuhoriz"}{id_rubrique}> [(#REM)   le menu horizontal avec les onglets   ]
+<div id="content">  [(#REM)   ouverture contenu   ]
+
+<div class="width25 floatLeft"> [(#REM)   ouverture colone de gauche   ]
+
+<div class="boite_cellule_gauche">[(#REM)   ouverture boite menu   ]
+        <h4 class="icone_menu">Navigation</h4>
+        <INCLURE{fond="inc_menu_rub"}>
+
+    </div>[(#REM)   fermeture boite menu   ]
+
+</div>[(#REM)   fermeture colone de gauche   ]
+
+<div class="width75 floatRight"> [(#REM)   ouverture colone droite   ]
+
+ <div class="grande_boite_cellule">[(#REM) ouverture boite cellule]
+    <h4>Visualiser mes commandes </h4>
+
+      <table class="width100">
+
+      <thead class="width20">
+	<tr>
+	 <th class="row_first white alignCenter width20">N&deg; de la commande</th>
+    	 <th class="row_first white alignCenter width20">Date</th>
+    	 <th class="row_first white alignCenter width20">Montant</th>
+   	 <th class="row_first white alignCenter width20">Statut</th>
+   	 <th class="row_first white alignCenter width20">Voir la commande</th>
+  	</tr>
+       </thead>
+
+       <THELIA_cmd type="COMMANDE" client="THELIA-CLIENT_ID">
+       <tbody class="width20">
+       	<tr>
+    	 <td class="row_even alignCenter width20">THELIA-REF</td>
+    	 <td class="row_old alignCenter width20">THELIA-DATE</td>
+         <td class="row_even alignCenter width20">THELIA-TOTCMDPORT</td>
+   	 <td class="row_old alignCenter width20">THELIA-STATUT</td>
+   	 <td class="row_even alignCenter width20"><a href="#URL_PAGE{commande_detail,commande=THELIA-REF}">Voir la commande</a></td>
+        </tr>
+       </body>
+       </THELIA_cmd>
+     </table>
+
+
+</div>[(#REM) fermeture grande boite cellule]
+
+</div>[(#REM)   fermeture colone droite   ]
+
+<hr class="spacer" /> [(#REM)   ajoute une barre hr invisible   ]
+</div>[(#REM)   fermeture contenu   ]
+<INCLURE{fond="pieddepage"}> [(#REM)   le pied de page inclu avec délai   ]
+
+</div> [(#REM)   fermeture surcontenu   ]<br/>
+
+
+</div> [(#REM)   fermeture container   ]
+</body>
+</html>

@@ -1,0 +1,10 @@
+<plugin>
+	<nom>&#171;Bonbon !&#187; le cahier de texte pour Spip</nom>
+	<version>1.9</version>
+	<auteur>(c)2007 MARNE Bertrand (bmarne@ac-creteil.fr) Licence GNU/GPL</auteur>
+	<etat>test</etat>
+	<prefix>bonbon</prefix>
+	<lien>[&#171; Bonbon ! &#187;, un cahier de texte pour SPIP->http://www.spip-contrib.net/spip.php?id_article=2301]</lien>
+	<description>Plugin qui permet d&#39;avoir un cahier de texte qui fonctionne avec Spip. Les donn&#233;es entr&#233;es dans le cahier de texte sont des articles Spip avec des mots-cl&#233;s.</description>
+	<icon>logo-mini2-64.png</icon>
+</plugin>

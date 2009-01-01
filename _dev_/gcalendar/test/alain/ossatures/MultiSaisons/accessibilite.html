@@ -1,0 +1,79 @@
+#CACHE{864000}
+<INCLURE{fond="header"}>
+[(#REM)   ci-dessus l'include du fichier header avec un délai de 31 jours.   ]
+
+
+<head>
+
+	[(#REM) les css et js peuvent changer suivant type d article ou de breve ]
+	
+
+<INCLURE{fond="header-css"}{date=#ENV{date}}> 	
+
+</head>
+<body> 
+
+<div id="container">   [(#REM)   cette div centre la page   ]
+<INCLURE{fond="entete"}{date=#ENV{date}}>  [(#REM)   include du fichier entete avec le logo   ] 
+<div id="surcontent">  [(#REM)   ouverture entête   ]
+<INCLURE{fond="menuhoriz"}> [(#REM)   le menu horizontal avec les onglets   ] 
+<div id="content">  [(#REM)   ouverture contenu   ] 
+<div id="colgau"> [(#REM)   ouverture colone de gauche   ] 
+
+<div class="grande_boite">[(#REM) ouverture d une grande boite    ]
+<h4>Accessibilité et raccourcis clavier</h4>
+<p>
+Des raccourcis clavier sont accessible sur le site:</p>
+<ul>
+<li> s : Pour aller au contenu texte de la page ; </li>
+<li> 1 : Pour aller à la page d’accueil ; </li>
+<li> 3 : Pour aller sur le plan du site ; </li>
+<li> 4 : Pour lancer une recherche dans le site ; </li>
+<li> 6 : Vous amène à cette page d’aide. </li>
+</ul>
+
+
+<p>    
+Suivez ces instructions pour activer ces raccourcis claviers dans les principaux navigateurs:</p> 
+
+<ul>
+<li> Internet Explorer sous Windows: Touche Alt et le raccourci clavier, puis la touche entrée.</li>
+<li> Firefox sous Windows: touches Alt, Shift et le raccourci clavier.</li>
+<li> Mozilla, Netscape, K-Meleon sous Windows: Alt et le raccourci clavier.</li>
+<li> Opera 7 sous Windows et Macintosh, Linux : Maj + Echap et le raccourci clavier.</li>
+<li> MSIE Macintosh: Ctrl et le raccourci clavier, puis la touche entrée.</li>
+<li> Safari 1.2 Macintosh: Ctrl et le raccourci clavier.</li>
+<li> Mozilla, Netscape Macintosh: Ctrl et le raccourci clavier.</li>
+<li> Galeon Mozilla FireFox Linux: Alt et le raccourci clavier.</li>
+</ul>
+        
+</div>[(#REM)   fermeture grande_boite   ]
+     
+</div>[(#REM)   fermeture colone de gauche   ]
+		
+<div class="coldroit">[(#REM)   ouverture de la colone de droite   ] 
+
+
+    <div class="boite">[(#REM)   ouverture boite menu   ] 
+        <h4 class="icone_menu">Navigation</h4>
+        <INCLURE{fond="inc_menu_rub"}>
+    
+    </div>[(#REM)   fermeture boite menu   ]
+  
+
+      
+ 
+
+</div>   [(#REM)   fermeture colone de droite   ] 
+
+
+<hr class="spacer" /> [(#REM)   ajoute une barre hr invisible   ] 
+</div>[(#REM)   fermeture contenu   ] 
+<INCLURE{fond="pieddepage"}> [(#REM)   le pied de page inclu avec délai   ] 
+
+</div> [(#REM)   fermeture surcontenu   ]<br/>
+
+
+</div> [(#REM)   fermeture container   ] 
+</body>
+</html>

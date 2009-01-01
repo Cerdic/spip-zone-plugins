@@ -1,0 +1,104 @@
+<BOUCLE_laclasse(SPIP_COTES_CLASSES){id_classe}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+#INSERT_HEAD
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<title>Liste des cotes - classe #NOM</title>
+<style type="text/css"> <!-- 	
+	table {
+	font-size: 10px;
+	}
+	
+	td {
+	vertical-align: top;
+	}
+	
+	.td1 {
+	width: 20%;
+	text-align: right;
+	padding-right: 1em;
+	padding-bottom: 10px;
+	}
+	
+	.td2 {
+	padding-bottom: 10px;
+	}
+	
+	.nom {
+	font-weight: bold;
+	font-size: 12px;
+	}
+	
+	.sep {
+	border-top: 1px solid #000;
+	padding: 0.5em 0;
+	}
+	-->
+</style>
+</head>
+<body>
+<div id="general">
+
+<INCLURE{fond=bandeau}{id_article}>
+
+[(#NAVIGATION|=={general}|?{' ',''})<INCLURE{fond=navigation}{id_article}{id_rubrique}>]
+
+[(#CHEMIN_PAGE|=={general}|?{' ',''})<INCLURE{fond=chemin}{id_rubrique=0}{cettepage=Cotes}>]
+
+[(#CONTENUS|=={oui}|?{'<div id="contenus">',''})<!-- balise optionnelle contenus -->]
+
+<div id="contextes">
+[(#NAVIGATION|=={contexte}|?{' ',''})<INCLURE{fond=navigation}{id_article}{id_rubrique}>]
+<div class="listagebloc">
+<h2>Version imprimable</h2>
+<ul class="listageconteneur"><li>
+<a href="spip.php?page=recapitulatif_exercice&id_classe=#ENV{id_classe}&id_exercice=#ENV{id_exercice}">Cliquez ici</a>
+</li></ul>
+</div>
+
+<div class="listagebloc">
+<h2>Retour à la liste des exercices</h2>
+<ul class="listageconteneur"><li>
+<a href="spip.php?page=intro&id_classe=#ID_CLASSE">Cliquez ici</a>
+</li></ul>
+</div>
+
+</div>
+<div id="corps">
+[(#CHEMIN_PAGE|=={corps}|?{' ',''})<INCLURE{fond=chemin}{id_rubrique=0}{cettepage=Cotes}>]
+
+<BOUCLE_exe(SPIP_COTES_EXERCICES){id_exercice}>
+<div id="header">
+<div class="texteheader">
+<h1>#TITRE</h1>
+<div class="sursoustitre soustitre">Cotes et commentaires</div>
+</div>
+<p class="clearer_header"></p>
+</div>
+<div id="texteconteneur">
+<div class="chapeau">#DESCRIPTION</div>
+<div class="texte"></div>
+</div>
+<BOUCLE_commentgen(SPIP_COTES_MAILS){type=commentaire_general}{id=#ID_EXERCICE}><div class="texte">#CONTENU</div></BOUCLE_commentgen>
+<div class="listagebloc">
+<table class="listageconteneur">
+<BOUCLE_etu(SPIP_COTES_ETUDIANTS){id_classe}{par nom}{"<tr><td colspan='2' class='sep'></td></tr>"}>
+<tr><td class="td1"><span class="nom">#PRENOM #NOM</span><BOUCLE_cote(SPIP_COTES_COTES){id_etudiant}{id_exercice}>[<br />[(#COTE|filtre0)]/(#COTE_MAX|!={0}?{' ',''})#COTE_MAX]</td><td class="td2">[(#COMMENTAIRE|nl2br)]</BOUCLE_cote></td></tr>
+</BOUCLE_etu>
+</table>
+</BOUCLE_exe>
+</div>
+
+<div id="fin-corps"></div><!-- fin du corps -->
+
+</div>
+
+[(#CONTENUS|=={oui}|?{'</div>',''})<!-- fin de balise optionnelle contenus -->]
+
+<INCLURE{fond=footer}{id_article}>
+
+<div id="fin-page"></div>
+
+</div>
+</body>
+</html></BOUCLE_laclasse>

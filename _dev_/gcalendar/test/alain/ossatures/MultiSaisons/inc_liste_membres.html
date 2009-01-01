@@ -1,0 +1,50 @@
+#CACHE{0}
+
+
+<h4 class="icone_membre">
+<BOUCLE_comptauteurs(AUTEURS){tous}> </BOUCLE_comptauteurs>
+[(#TOTAL_BOUCLE) Membres]</B_comptauteurs>[ / (#CONFIG{accepter_inscriptions}|=={oui}|?{' ',''})[<a href="(#URL_PAGE{mon-profil}|parametre_url{type,redac})">Inscription</a>]]
+[ / (#CONFIG{accepter_inscriptions}|=={non}|?{' ',''})[<a href="(#URL_PAGE{mon-profil}|parametre_url{type,visit})">Inscription</a>]]
+<a name="membres" id="membres"></a>
+</h4>
+
+
+<ul class="legende">
+<BOUCLE_leg_mod(AUTEURS){statut=0minirezo}{tous}> </BOUCLE_leg_mod>
+[<li class="leg_mod">(#TOTAL_BOUCLE)&nbsp;administrateurs</li>
+]
+</B_leg_mod>
+
+<BOUCLE_leg_aut(AUTEURS){statut=1comite}{tous}> </BOUCLE_leg_aut>
+[<li class="leg_aut">(#TOTAL_BOUCLE)&nbsp;r&eacute;dacteurs</li>]
+</B_leg_aut>
+
+<BOUCLE_leg_vis(AUTEURS){statut=6forum}{tous}> </BOUCLE_leg_vis>
+[<li class="leg_vis">(#TOTAL_BOUCLE)&nbsp;invit&eacute;s/abonn&eacute;s</li>]
+</B_leg_vis>
+
+<BOUCLE_leg_att(AUTEURS){statut=nouveau}{tous}> </BOUCLE_leg_att>
+[<li class="leg_att">(#TOTAL_BOUCLE)&nbsp;attendus</li>
+]
+</B_leg_att>
+</ul>
+
+<p class="interne">Annuaire:
+<BOUCLE_initial_nom(AUTEURS){tous}{par nom}>[ <a href="[(#SELF|parametre_url{'debut_auteurs',''}|parametre_url{lettre,#NOM|translitteration|couper{1}|lettre1|unique{lien}})]">(#NOM|translitteration|couper{1}|lettre1|unique{titrelien})</a>]</BOUCLE_initial_nom>
+
+</p>
+
+<B_auteurs>
+#ANCRE_PAGINATION
+<ul class="membres">
+<BOUCLE_auteurs(AUTEURS){tous}{par nom}{nom==^#ENV{lettre}}{pagination 30}>
+
+
+[<li class="auteur"><a (#STATUT|=={'1comite'}|?{' ',''}) href="[(#URL_PAGE{membre}|parametre_url{id_auteur,#ID_AUTEUR})]" title="R&eacute;dacteur d'article">]
+[<li class="modo"><a (#STATUT|=={'0minirezo'}|?{' ',''}) href="[(#URL_PAGE{membre}|parametre_url{id_auteur,#ID_AUTEUR})]" title="Webmaster/modo">]
+[<li class="visiteur"><a (#STATUT|=={'6forum'}|?{' ',''}) href="[(#URL_PAGE{membre}|parametre_url{id_auteur,#ID_AUTEUR})]" title="Invit&eacute; ou visiteur">]
+[<li class="attente"><a (#STATUT|=={'nouveau'}|?{' ',''}) href="[(#URL_PAGE{membre}|parametre_url{id_auteur,#ID_AUTEUR})]" title="Compte en attente">]
+#NOM</a></li>
+</BOUCLE_auteurs>
+</ul>[<p class="centre">(#PAGINATION)</p>]
+</B_auteurs>

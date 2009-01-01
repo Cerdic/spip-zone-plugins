@@ -1,0 +1,285 @@
+#CACHE{864000}
+<INCLURE{fond="header"}>
+
+
+ <BOUCLE_principale(RUBRIQUES){id_rubrique}><head>
+
+[(#REM)   les métas   ]
+
+
+
+
+<title>[(#TITRE)]</title>
+[<meta name="Description" content="(#DESCRIPTIF|supprimer_tags|texte_script)"/>]
+<meta name="keywords" content="[(#DESCRIPTIF|supprimer_tags|texte_script)]"/>
+<meta name="revisit-after" content="15 days" />
+<meta http-equiv="content-type" content="text/html; charset=#CHARSET"/>
+<meta http-equiv="Content-Language" content="fr-fr" />
+	[(#REM) les css et js peuvent changer suivant type d article ou de breve ]
+	<INCLURE{fond="header-css"}{date=#ENV{date}}> 	
+
+
+</head><body> 
+
+<div id="container">   [(#REM)   centrage page   ]
+<INCLURE{fond="entete"}{date=#ENV{date}}> 
+<div id="surcontent">  [(#REM)   ouverture entête   ]
+<INCLURE{fond="menuhoriz"}{id_rubrique}>
+<div id="content">  [(#REM)   ouverture contenu   ] 
+ 
+ 
+<div id="colgau"> [(#REM)   ouverture colone de gauche   ] 
+  <div class="grande_boite"> [(#REM)   ouverture grd boite texte   ] 
+<p class="logogauche"><INCLURE{fond="logo"}{id_rubrique}{taille=46}{date=#ENV{date}}></p>
+<p>
+<a href="[(#URL_PAGE{sommaire})]">Accueil</a> > <BOUCLE_plan(HIERARCHIE){id_rubrique}{" > "}> <a href="#URL_RUBRIQUE"[ title="(#DESCRIPTIF|couper{40}|textebrut|attribut_html)"]>[(#TITRE)]</a>	
+                  </BOUCLE_plan>
+            </p>
+                  <h1>[(#TITRE)<br/>]</h1> 
+    [(#SOUSTITRE)<br/> 
+    ]   
+   [#DEBUT_SURLIGNE(#TEXTE|image_reduire{450,0}|lier_au_glossaire|paragrapher)#FIN_SURLIGNE]
+<hr class="spacer"/>
+<ul class="membres"><li class="modo"><a href="ecrire/?exec=controle_forum&amp;type=public" title="Acc&egrave;s priv&eacute; pour mod&eacute;rateurs">Admin:</a></li>
+<BOUCLE_admin(AUTEURS){statut=0minirezo}{par id_auteur}>
+<li class="modo"><a href="[(#URL_PAGE{membre}|parametre_url{id_auteur,#ID_AUTEUR})]" title="Contact/Profil">#NOM</a></li>
+
+</BOUCLE_admin>
+</ul></div> 
+  [(#REM)   fermeture grande boite   ]
+
+[<div class="grande_boite">(#NOTES)</div>]
+
+<div class="grande_boite">
+
+<BOUCLE_themes(ARTICLES){titre_mot = forum}{id_rubrique=#ID_RUBRIQUE}{doublons}>
+            <span class="logogauche"><a href="#URL_ARTICLE" title="Voir tous les messages"><INCLURE{fond="logo"}{id_article}{taille=46}{date=#ENV{date}}></a></span><h4><a href="#URL_ARTICLE" title="Voir tous les messages">[(#TITRE)]</a></h4>
+<p>[(#DESCRIPTIF)]</p>
+              <table class="spip">
+<tr class="row_first gras blanc">
+<td>Dernières discussions</td>
+<td>Auteur</td>
+<td>Date</td>
+<td>R&eacute;ponses</td>
+</tr>
+                 
+                  <B_discussions>
+                  <BOUCLE_discussions(FORUMS){plat}{id_article}{par date_thread}{inverse}{doublons}{0,4}>
+                          
+<tr [class="(#EVAL{[(#_discussions:COMPTEUR_BOUCLE)]}|alterner{'row_even','row_odd'})"] >
+<td>
+[<a href="[(#URL_PAGE{discussion}|parametre_url{id_forum,#ID_FORUM})]" [title="(#TITRE|couper{60})"]>(#TITRE|couper{40})</a>]
+</td>
+<td><BOUCLE_nom2(AUTEURS){tout}{id_auteur}{statut=original}>
+[<a (#STATUT|=={'1comite'}|?{' ',''}) href="[(#URL_PAGE{membre}|parametre_url{id_auteur,#ID_AUTEUR})]" title="Contact et profil de ce r&eacute;dacteur">]
+[<a (#STATUT|=={'0minirezo'}|?{' ',''}) href="[(#URL_PAGE{membre}|parametre_url{id_auteur,#ID_AUTEUR})]" title="Contact et profil de cet admin">]
+[<a (#STATUT|=={'6forum'}|?{' ',''}) href="[(#URL_PAGE{membre}|parametre_url{id_auteur,#ID_AUTEUR})]" title="Contact et profil de ce visiteur">]
+[<a (#STATUT|=={'nouveau'}|?{' ',''}) href="[(#URL_PAGE{membre}|parametre_url{id_auteur,#ID_AUTEUR})]" title="Compte en attente">]
+[(#NOM|couper{18})</a>]
+</BOUCLE_nom2>
+[(#NOM||?{#NOM|couper{18},'Anonyme'})]
+<//B_nom2></td>
+<td>
+<BOUCLE_dernier_message(FORUMS){id_thread}{plat}{par date}{inverse}{0,1}>
+[(#DATE|affdate{'d/m/Y'})<br/>]
+	[(#DATE|affdate{'H:i:s'})]
+</BOUCLE_dernier_message>	
+</td>
+<td><B_nb_forumtotal>
+<BOUCLE_nb_forumtotal(FORUMS){id_thread}{plat}{1,9999}>
+</BOUCLE_nb_forumtotal>
+#TOTAL_BOUCLE
+</B_nb_forumtotal>
+</td>
+</tr>
+
+                
+                  </BOUCLE_discussions>
+                  </B_discussions>
+				  <tr class="row_first gras blanc">
+				  <td colspan="4" >
+				  <BOUCLE_combien(FORUMS){id_article}>
+				  </BOUCLE_combien>
+				  <a href="#URL_ARTICLE">Voir les #TOTAL_BOUCLE discussions de ce forum</a>
+				  </B_combien>
+				  
+				  </td>
+				  </tr>
+          </table>
+<ul class="forum droite">
+<li>
+
+ [(#CONFIG{accepter_inscriptions}|=={oui}|?{' ',''})[<a href="(#URL_PAGE{mon-profil}|parametre_url{type,redac})"title="S'inscrire">S'inscrire</a>]]
+   [(#CONFIG{accepter_inscriptions}|=={non}|?{' ',''})[<a href="(#URL_PAGE{mon-profil}|parametre_url{type,visit})"title="S'inscrire">S'inscrire</a>]]
+   </li>
+
+<li>
+<a href="#URL_ARTICLE" title="Voir tous les messages">
+Parcourir</a></li>
+
+<li>
+[<a href="(#PARAMETRES_FORUM|url_reponse_forum)" title="Créer une discussion">Dialoguer</a>]
+
+</li>
+</ul>
+<hr class="spacer"/><br/>
+
+</BOUCLE_themes> 
+
+
+
+</div>
+
+
+
+<div id="celbas">
+<B_sous_rubriques> 
+<ul id="decobas">
+[(#REM)   Les rubriques de la branche et leurs contenus   ]
+
+   
+
+                    <BOUCLE_sous_rubriques(RUBRIQUES){id_parent}{par titre}{tout_voir}>
+<li>
+                   [<h4><a href="#URL_RUBRIQUE">(#TITRE)</a><INCLURE{fond="inc_cadenas"}{id_rubrique}></h4>] 
+                  <p><span class="minilogogauche"><a href="#URL_RUBRIQUE"><INCLURE{fond="logo"}{id_rubrique}{taille=20}{date=#ENV{date}}></a></span>
+
+                    <BOUCLE_sites2(SITES){id_rubrique}{tout_voir}>
+                  </BOUCLE_sites2><a href="#URL_RUBRIQUE">#TOTAL_BOUCLE
+ sites r&eacute;f&eacute;renc&eacute;s.</a><br/><br/></B_sites2>
+<BOUCLE_art2(ARTICLES){id_rubrique}{par date}{inverse}{0,25}{tout_voir}>
+::
+                    <BOUCLE_nouv_art23(ARTICLES){id_article}{age<7}>
+                    <span class="gras">Nouveau:</span>&nbsp;</BOUCLE_nouv_art23><a href="#URL_ARTICLE">#TITRE</a> 
+                    <INCLURE{fond="inc_cadenas"}{id_article}> <br/>
+                    </BOUCLE_art2>
+<B_sous_sous_rub>
+<BOUCLE_sous_sous_rub(RUBRIQUES){id_parent}{par titre}{tout_voir}>
+[>&nbsp;<a href="#URL_RUBRIQUE">(#TITRE)</a><INCLURE{fond="inc_cadenas"}{id_rubrique}><br/>]
+</BOUCLE_sous_sous_rub>
+</B_sous_sous_rub>
+
+
+
+</p>
+</li>
+</BOUCLE_sous_rubriques>
+</ul>
+</B_sous_rubriques>
+</div>
+
+
+[(#REM)   les articles de la rubrique   ]
+<B_articles>   
+<div class="grande_boite">
+
+#ANCRE_PAGINATION
+  
+<BOUCLE_articles(ARTICLES){id_rubrique}{par num titre, date}{inverse}{doublons}{tout_voir}{pagination}>
+ <div class="interne">
+ 
+ 
+    <BOUCLE_logo_documents(DOCUMENTS){id_article}{mode=document}{par date}{inverse}{extension IN jpg,png,gif}{0,1}>
+<span [class="(#EVAL{[(#_articles:COMPTEUR_BOUCLE)]}|alterner{'gauche','droite'}) logorond"]>
+ <BOUCLE_photocmpt(DOCUMENTS){id_article}{mode=document}{extension IN jpg,png,gif}> </BOUCLE_photocmpt>
+	[(#EVAL{' '}|concat{#TOTAL_BOUCLE,[&nbsp;(#TOTAL_BOUCLE|>{1}|?{'photos','photo'})]}|image_typo{taille=10,hauteur_ligne=0,police=police.ttf,couleur=#GET{colo}}|image_rotation{-90})]
+ </B_photocmpt>
+    <a href="#URL_ARTICLE#diapo"><INCLURE{fond="logo"}{id_article}{id_document}{taille=48}{date=#ENV{date}}></a>
+   </span>
+   </BOUCLE_logo_documents> 
+
+[(#REM)   s'il n'y a pas de jpg gif ou png alors on demande le logo de l'article et on ne compte rien  ]
+
+    <BOUCLE_logo_articles(ARTICLES){id_article}{0,1}> 
+<span [class="(#EVAL{[(#_articles:COMPTEUR_BOUCLE)]}|alterner{'gauche','droite'}) logorond"]>
+    <a href="#URL_ARTICLE#diapo">
+     	[(#LOGO_ARTICLE||?{' ',''})<INCLURE{fond="logo"}{id_article}{taille=48}{date=#ENV{date}}>]
+		[<span class="plusbas">Pas de<br/>logo<br/></span><span class="transpa">(#LOGO_ARTICLE||?{'',' '})<INCLURE{fond="logo"}{id_rubrique}{taille=48}{date=#ENV{date}}></span>]
+			</a>
+</span>
+		</BOUCLE_logo_articles>    
+    <//B_logo_documents>
+	
+	
+	
+	
+	<p>
+
+[<a href="#URL_ARTICLE">(#TITRE)</a>]&nbsp;[((#VISITES)&nbsp;[(#VISITES|>{1}|?{'lectures','lecture'}))]]&nbsp;[(#DESCRIPTIF|couper{200})]
+
+    <INCLUDE{fond="inc_cadenas"}{id_article}>  
+   
+    <BOUCLE_forum(FORUMS){id_article}{plat}></BOUCLE_forum>
+    [(#TOTAL_BOUCLE|>={1}|?{[&nbsp;<a href="#URL_ARTICLE#forum">(#TOTAL_BOUCLE)&nbsp;messages</a>&nbsp;,],''})]<//B_forum>
+    <a href="#URL_ARTICLE">Lire la suite...</a>
+</p>
+<hr class="spacer"/>
+</div>
+
+</BOUCLE_articles>
+
+
+[<div class="centre"><p>(#PAGINATION{page_precedent_suivant})</p></div>]
+</div>[(#REM) fermeture minipics   ]
+</B_articles>
+
+                     
+</div>
+[(#REM)   fermeture colone de gauche   ]
+					
+
+ <div class="coldroit">  [(#REM)   ouverture de la colone de droite   ] 
+
+
+    <div class="boite">[(#REM)   ouverture boite menu   ] 
+
+<h4 class="icone_menu">Navigation</h4>    
+      <INCLURE{fond="inc_menu_rub"}{id_rubrique}>     
+    </div>[(#REM)   fermeture boite menu   ]
+
+
+
+
+
+
+<div class="boite"> [(#REM)   ouverture boite les membres   ] 
+<INCLURE{fond=inc_liste_membres}{lettre=#ENV{lettre}}>
+</div>
+
+<div class="boite"> [(#REM)   ouverture boite derniers messages   ] 
+<h4 class="icone_post">Derniers messages</h4>
+<INCLURE{fond="inc_derniers_messages"}{self=#SELF}>
+</div>
+    
+<B_archives>
+    <div class="boite">
+      <h4 class="icone_article">A voir également</h4>
+      <BOUCLE_archives(ARTICLES){id_rubrique}{doublons}{par num titre}{par date}{inverse}{0,20}>
+              <a href="#URL_ARTICLE">[(#TITRE)]</a> 
+              <INCLURE{fond="inc_cadenas"}{delais="7*24*3600"}{id_article}> 
+              </BOUCLE_archives>
+        </div> [(#REM)   fermeture boite   ] 
+</B_archives>
+
+
+
+
+</div>   [(#REM)   fermeture colone de droite   ] 
+<hr class="spacer"/>
+
+</div> [(#REM)   fermeture contenu   ]
+<INCLURE{fond="pieddepage"}{id_rubrique}>
+</div>[(#REM)   fermeture surcontenu   ]<br/>
+
+</div> [(#REM)   fermeture container   ] 
+</body></html>
+</BOUCLE_principale>
+[(#ID_RUBRIQUE|AccesRestreint_rubrique_restreinte|?{' ',''})    
+ [(#ENV{type}|=={redac}|?{' ',''}) <INCLURE{fond=abonnement}{type=redac}>]
+  [(#ENV{type}|=={visit}|?{' ',''}) <INCLURE{fond=abonnement}{type=visit}>]
+[(#ENV{type}|match{redac|visit}|?{'',' '})<INCLURE{fond=abonnement}{type=question}>]
+  ]
+[(#ID_RUBRIQUE|AccesRestreint_rubrique_restreinte|?{'',' '})
+<INCLURE{fond=erreur-forum}>]
+<//B_principale>
+

@@ -1,0 +1,89 @@
+#CACHE{864000}
+<script type="text/javascript">
+<!-- 
+function toggle(id){
+  ul = "ul_" + id;
+  img = "img_" + id;
+  ulElement = document.getElementById(ul);
+  imgElement = document.getElementById(img);
+  if (ulElement){
+          if (ulElement.className == 'closed'){
+                  ulElement.className = "open";
+                  imgElement.src = "#CHEMIN{images/menu/opened.gif}";
+                  }else{
+                  ulElement.className = "closed";
+                  imgElement.src = "#CHEMIN{images/menu/closed.gif}"; 
+                  }
+          }
+  }
+function hierarchie (listRubriques) {
+var itemList = listRubriques;
+var restoredArray = itemList.split(",");
+var numberItem = restoredArray.length;
+for (i=0; i<numberItem; i++) {
+    currentRub = restoredArray[i]
+    ul = "ul_" + currentRub;
+    img = "img_" + currentRub;
+    ulElement = document.getElementById(ul);
+    imgElement = document.getElementById(img);
+    if (ulElement) {
+        ulElement.className = "open";
+        imgElement.src = "#CHEMIN{images/menu/opened.gif}";
+      }
+  }
+}
+-->
+</script>
+<B_selectMenu>
+<ul class="open">
+<BOUCLE_selectMenu (RUBRIQUES){racine}{par num titre}{titre_mot=menu_rub}{tout_voir}>
+
+<li id="li_#ID_RUBRIQUE">
+
+<B_virefleche><a onclick="toggle('#ID_RUBRIQUE');"><BOUCLE_virefleche(RUBRIQUES){id_parent}{0,1}><img src="#CHEMIN{images/menu/closed.gif}"  </BOUCLE_virefleche>
+id="img_#ID_RUBRIQUE" alt="[(#DESCRIPTIF|couper {20})]"/></a></B_virefleche><img src="#CHEMIN{images/menu/puceoff.gif}" alt="[(#DESCRIPTIF|couper {20})]"/><//B_virefleche>
+
+<a href="#URL_RUBRIQUE" title="[(#TITRE)]">[[(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{<strong>})](#TITRE)[(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{</strong>})]]</a> <INCLURE{fond="inc_cadenas"}{id_rubrique}>
+
+<B_secteurs>
+<ul id="ul_#ID_RUBRIQUE" [class="(#EXPOSE{open,closed})"]>
+
+    <BOUCLE_secteurs(RUBRIQUES){id_parent}{par num titre}{tout_voir}>
+    <li id="li_#ID_RUBRIQUE">
+	
+    <B_vireflechessrub><a onclick="toggle('#ID_RUBRIQUE');"><BOUCLE_vireflechessrub(RUBRIQUES){id_parent}{0,1}><img src="#CHEMIN{images/menu/closed.gif}"  </BOUCLE_vireflechessrub>
+    id="img_#ID_RUBRIQUE" alt="[(#DESCRIPTIF|couper {20})]" /></a></B_vireflechessrub><img src="#CHEMIN{images/menu/puceoff.gif}" alt="[(#DESCRIPTIF|couper {20})]"/><//B_vireflechessrub>
+
+    <a href="#URL_RUBRIQUE" title="[(#TITRE)]">[[(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{<strong>})](#TITRE)[(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{</strong>})]]</a> <INCLURE{fond="inc_cadenas"}{id_rubrique}>
+
+           <B_sousrub>
+            <ul id="ul_#ID_RUBRIQUE" [class="(#EXPOSE{open,closed})"]>
+             <BOUCLE_sousrub(RUBRIQUES){id_parent}{par num titre}{tout_voir}>
+             <li id="li_#ID_RUBRIQUE">
+             <img src="#CHEMIN{images/menu/puceoff.gif}" alt="[(#DESCRIPTIF|couper {20})]"/>
+             <a href="#URL_RUBRIQUE" title="[(#TITRE)]">[[(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{<strong>})](#TITRE)[(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{</strong>})]]</a> <INCLURE{fond="inc_cadenas"}{id_rubrique}>
+             </li>
+            </BOUCLE_sousrub>
+        </ul>
+        </B_sousrub>
+    </li>
+    </BOUCLE_secteurs>
+</ul>
+</B_secteurs>
+</li>
+</BOUCLE_selectMenu>
+</ul>
+</B_selectMenu>
+
+
+<p class="centre">[(#EVAL{defined('_DIR_PLUGIN_SPIPLISTES')}|?{' '})
+   [(#CONFIG{accepter_inscriptions}|=={oui}|?{' ',''})[<a href="(#URL_PAGE{mon-profil}|parametre_url{type,redac})">Lettres d'infos</a>&nbsp;|&nbsp;]]
+   [(#CONFIG{accepter_inscriptions}|=={non}|?{' ',''})[<a href="(#URL_PAGE{mon-profil}|parametre_url{type,visit})">Lettres d'infos</a>&nbsp;|&nbsp;]]]
+[<a href="(#URL_PAGE{nouveautes})">News</a>&nbsp;|&nbsp;][<a href="(#URL_PAGE{plan})">Plan du site</a><br/>]
+[<a href="(#URL_PAGE{kiosque})">Kiosque web</a>&nbsp;|&nbsp;]
+
+<BOUCLE_RUBRIQUE_GLOSSAIRE(RUBRIQUES){titre_mot==glossaire}{0,1}>
+<a href="#URL_RUBRIQUE"[title="(#DESCRIPTIF|couper{40}|textebrut|attribut_html)"]>[(#TITRE)]</a>&nbsp;|&nbsp;</BOUCLE_RUBRIQUE_GLOSSAIRE>
+<BOUCLE_RUBRIQUE_LIENS(RUBRIQUES){titre_mot==annuaire_home}{0,1}>
+<a href="#URL_RUBRIQUE"[title="(#DESCRIPTIF|couper{40}|textebrut|attribut_html)"]>[(#TITRE)]</a></BOUCLE_RUBRIQUE_LIENS>
+</p><INCLURE{fond=inc-recherche}>

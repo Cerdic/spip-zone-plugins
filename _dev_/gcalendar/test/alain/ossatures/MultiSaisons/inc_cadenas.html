@@ -1,0 +1,13 @@
+#CACHE{864000}
+<BOUCLE_rubrique_cadenas(RUBRIQUES){id_rubrique}>
+[(#REM) verification presence rubrique restreint ]
+</BOUCLE_rubrique_cadenas>
+[<span class="cadenas">(#ID_RUBRIQUE|AccesRestreint_rubrique_restreinte|?{' ',''})<a href="[(#URL_RUBRIQUE)]">Inscription</a></span>]
+<//B_rubrique_cadenas>
+
+
+<BOUCLE_article_cadenas(ARTICLES){id_article}>
+[(#REM) verification presence article restreint ]
+</BOUCLE_article_cadenas>
+[<span class="cadenas">(#ID_ARTICLE|AccesRestreint_article_restreint|?{' ',''})<a href="[(#URL_ARTICLE)]">Inscription</a></span>]
+<//B_article_cadenas>			

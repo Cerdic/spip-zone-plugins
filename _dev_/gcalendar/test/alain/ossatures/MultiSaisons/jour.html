@@ -1,0 +1,279 @@
+#CACHE2678400
+
+<INCLURE{fond="header"}>
+
+<BOUCLE_principale(RUBRIQUES){titre_mot=agenda}><head>
+
+[(#REM)   les métas   ]
+
+
+<title>[(#TITRE)]</title>
+[<meta name="Description" content="(#DESCRIPTIF|supprimer_tags|texte_script)"/>]
+<meta name="keywords" content="[(#DESCRIPTIF|supprimer_tags|texte_script)]"/>
+<meta name="revisit-after" content="15 days" />
+<meta http-equiv="content-type" content="text/html; charset=#CHARSET"/>
+<meta http-equiv="Content-Language" content="fr-fr" />
+
+	[(#REM) les css et js peuvent changer suivant type d article ou de breve ]
+	
+<INCLURE{fond="header-css"}{date=#ENV{date}}> 	
+
+
+</head><body> 
+
+<div id="container">   [(#REM)   centrage page   ]
+<INCLURE{fond="entete"}{date=#ENV{date}}> 
+<div id="surcontent">  [(#REM)   ouverture entête   ]
+<INCLURE{fond="menuhoriz"}{id_rubrique}>
+<div id="content">  [(#REM)   ouverture contenu   ] 
+ 
+ 
+<div id="colgau"> [(#REM)   ouverture colone de gauche   ] 
+ <BOUCLE_couleur_titre(MOTS){titre=saison}{0,1}>
+[(#ENV{date}|saison|=={printemps}|?{' ',''})#SET{'colo','9dba00'}]
+[(#ENV{date}|saison|translitteration|=={ete}|?{' ',''})#SET{'colo','5da7c5'}]
+[(#ENV{date}|saison|=={automne}|?{' ',''})#SET{'colo','cda261'}]
+[(#ENV{date}|saison|=={hiver}|?{' ',''})#SET{'colo','666666'}]
+</BOUCLE_couleur_titre>
+[(#SET{'colo','666666'})]
+<//B_couleur_titre>
+
+  <div class="grande_boite"> <span class="droite png">[(#ENV{date}|nom_jour|texte_backend|image_typo{taille=36,police=police.ttf,couleur=#GET{colo}})]</span> [(#REM)   ouverture grd boite texte   ] 
+<span class="logogauche"><INCLURE{fond="logo"}{id_rubrique}{taille=48}{date=#ENV{date}}></span>
+<a href="[(#URL_PAGE{sommaire})]">Accueil</a> > <BOUCLE_plan(HIERARCHIE){id_rubrique}{" > "}> <a href="#URL_RUBRIQUE"[ title="(#DESCRIPTIF|couper{40}|textebrut|attribut_html)"]>[(#TITRE)]</a>	
+                  </BOUCLE_plan></p>                 
+                  [<h1>(#TITRE)</h1>] 
+    [(#SOUSTITRE)<br/>]   
+    [#DEBUT_SURLIGNE(#TEXTE|image_reduire{450,0}|lier_au_glossaire|paragrapher)#FIN_SURLIGNE]
+<hr class="spacer"/></div> 
+  [(#REM)   fermeture grande boite   ]
+
+
+
+[<div class="grande_boite">(#NOTES)</div>]
+
+<div id="celbas">
+<B_sous_rubriques> 
+<ul id="decobas">
+[(#REM)   Les rubriques de la branche et leurs contenus   ]
+
+   
+
+                    <BOUCLE_sous_rubriques(RUBRIQUES){id_parent}{par titre}{tout_voir}>
+<li>
+                   [<h4><a href="#URL_RUBRIQUE">(#TITRE)</a><INCLURE{fond="inc_cadenas"}{id_rubrique}></h4>] 
+                  <p><span class="minilogogauche"><a href="#URL_RUBRIQUE"><INCLURE{fond="logo"}{id_rubrique}{taille=20}{date=#ENV{date}}></a></span>
+
+                    <BOUCLE_sites2(SITES){id_rubrique}{tout_voir}>
+                  </BOUCLE_sites2><a href="#URL_RUBRIQUE">#TOTAL_BOUCLE
+ sites r&eacute;f&eacute;renc&eacute;s.</a><br/><br/></B_sites2>
+<BOUCLE_art2(ARTICLES){id_rubrique}{par num titre}{par date}{inverse}{0,25}{tout_voir}>
+::
+                    <BOUCLE_nouv_art23(ARTICLES){id_article}{age<7}>
+                    <span class="gras">Nouveau:</span>&nbsp;</BOUCLE_nouv_art23><a href="#URL_ARTICLE">#TITRE</a> 
+                    <INCLURE{fond="inc_cadenas"}{id_article}> <br/>
+                    </BOUCLE_art2>
+<B_sous_sous_rub>
+<BOUCLE_sous_sous_rub(RUBRIQUES){id_parent}{par titre}{tout_voir}>
+[>&nbsp;<a href="#URL_RUBRIQUE">(#TITRE)</a><INCLURE{fond="inc_cadenas"}{id_rubrique}><br/>]
+</BOUCLE_sous_sous_rub>
+</B_sous_sous_rub>
+
+
+
+</p>
+</li>
+</BOUCLE_sous_rubriques>
+</ul>
+</B_sous_rubriques>
+</div>
+
+
+[(#REM)   les articles de la rubrique   ]
+   
+
+
+<div class="grande_boite">
+
+[(#EVAL{' '}|concat{"Agenda du ",#ENV{date}|affdate|texte_backend}|image_typo{taille=18,police=police.ttf,couleur=#GET{colo},largeur=450,align=center})]<br/>
+<br/>
+
+
+
+<B_evenements_jours>
+
+
+
+
+<BOUCLE_evenements_jours(EVENEMENTS){id_rubrique}{agendafull date_debut, date_fin, jour,(#ENV{date}|annee), (#ENV{date}|mois), (#ENV{date}|jour)} {statut=publie}{par date_fin}>
+
+<div class="interne<BOUCLE_class_vieux(EVENEMENTS){id_evenement}{age_fin>0}> vieux</BOUCLE_class_vieux>">
+<BOUCLE_logo_documents(DOCUMENTS){id_article}{mode=document}{par date}{inverse}{extension IN jpg,png,gif}{0,1}>
+<span class="gauche logorond">
+     <a href="[(#URL_ARTICLE|parametre_url{'date', [(#ENV{date}|affdate{'Y-m'})]})]"><INCLURE{fond="logo"}{id_article}{id_document}{taille=48}{date=#ENV{date}}></a>
+
+</span>
+   </BOUCLE_logo_documents> 
+
+[(#REM)   s'il n'y a pas de jpg gif ou png alors on demande le logo de l'article. ]
+
+    <BOUCLE_logo_articles(ARTICLES){id_article}{0,1}> 
+<span class="gauche logorond">
+    <a href="[(#URL_ARTICLE|parametre_url{'date', [(#ENV{date}|affdate{'Y-m'})]})]">
+     	[(#LOGO_ARTICLE||?{' ',''})<INCLURE{fond="logo"}{id_article}{taille=48}{date=#ENV{date}}>]
+		[<span class="plusbas">Sans<br/>images<br/></span><span class="transpa">(#LOGO_ARTICLE||?{'',' '})<INCLURE{fond="logo"}{id_rubrique}{taille=48}{date=#ENV{date}}></span>]
+			</a>
+</span>
+		</BOUCLE_logo_articles>    
+    <//B_logo_documents>
+
+<p>
+
+<strong><a href="[(#URL_ARTICLE|parametre_url{'date', [(#ENV{date}|affdate{'Y-m'})]})]">[(#TITRE|couper{120})]</a></strong>
+[&nbsp;(#DESCRIPTIF)&nbsp;]
+
+
+[(#DATE_DEBUT|affdate{'Ymd'}|=={[(#DATE_FIN|affdate{'Ymd'})]}|?{
+ Le [(#DATE_DEBUT|nom_jour)] [(#DATE_DEBUT|affdate)]
+[(#HORAIRE|=={oui}|?{
+  [(#REM) memes heures ?]
+    [(#DATE_DEBUT|=={#DATE_FIN}|?{&agrave
+[(#DATE_DEBUT|heures)]h[(#DATE_DEBUT|minutes)],''})]
+  [(#REM) pas memes heures ?]
+    [(#DATE_DEBUT|!={#DATE_FIN}|?{de
+[(#DATE_DEBUT|heures)]:[(#DATE_DEBUT|minutes)] &agrave;
+[(#DATE_FIN|heures)]:[(#DATE_FIN|minutes)],''})]
+,''})]
+,
+ Du [(#DATE_DEBUT|nom_jour)] [(#DATE_DEBUT|affdate)]
+[(#HORAIRE|=={oui}|?{&agrave; partir de
+ [(#DATE_DEBUT|heures)]H[(#DATE_DEBUT|minutes)],''})] au
+[(#DATE_FIN|nom_jour)]
+ [(#DATE_FIN|affdate)] [(#HORAIRE|=={oui}|?{jusqu'&agrave;
+ [(#DATE_FIN|heures)]H[(#DATE_FIN|minutes)],''})]  })]
+<BOUCLE_jour_passe(EVENEMENTS){id_evenement}{age_fin>0}>
+(&Eacute;v&eacute;nement pass&eacute;.)
+ </BOUCLE_jour_passe> 
+  <BOUCLE_eve_art1(GIS){id_article}>
+#SET{latitude,#LAT}
+#SET{lonxitude,#LONX}
+[(#LAT||?{' ',''}) <a href="[(#URL_PAGE{localiser}|parametre_url{'id_article',#ID_ARTICLE}|parametre_url{'zoom',13}|parametre_url{'latit',#GET{latitude}}|parametre_url{'lonxit',#GET{lonxitude}})]">
+ ][&nbsp;(#LIEU)&nbsp;][(#LAT||?{' ',''})(carte)</a>][ <strong><a href="(#URL_ARTICLE|parametre_url{'date', [(#ENV{date}|affdate{'Y-m'})]})">Lire&nbsp;la&nbsp;suite...</a></strong>]
+</BOUCLE_eve_art1>
+[&nbsp;(#LIEU)]
+<//B_eve_art1>
+</p>
+<hr class="spacer" />
+</div>
+
+
+<hr class="spacer"/>
+ </BOUCLE_evenements_jours>
+
+</B_evenements_jours>
+
+<p>Pas d'événement ce jour. Cherchez dans la grille.</p>
+
+<//B_evenements_jours>
+
+[(#CHEMIN{ajouter.html}|?{' ',''})[<h4 class="important"><a href="(#URL_PAGE{ajouter})">Vous pouvez ajouter un événement, un texte, une image...</a></h4><hr class="spacer"/>]]
+
+
+</div>
+ 
+
+
+
+
+
+<B_syndic>
+<div class="grande_boite">
+
+<h4 class="icone_site">Vu sur le web</h4><br/>
+                      <BOUCLE_syndic(SYNDICATION){id_rubrique}{par nom_site}{syndication=oui}>                      
+                    
+					  <h4>[<a href="[(#URL_PAGE{#SELF}|parametre_url{'id_syndic',#ID_SYNDIC})]" title="Toutes les news de #NOM_SITE">(#NOM_SITE)</a>]</h4>
+                      <BOUCLE_items(SYNDIC_ARTICLES){id_syndic}{par date}{inverse}{0,2}>
+                     <p>[<strong><a href="#URL_ARTICLE">(#TITRE)</a></strong><br/>]
+                      [(#DESCRIPTIF)<br/>]</p>
+                      </BOUCLE_items>
+                      </BOUCLE_syndic>
+</div>
+</B_syndic>
+
+
+</div>[(#REM)   fermeture colone de gauche   ]
+					
+
+ <div class="coldroit">  [(#REM)   ouverture de la colone de droite   ] 
+
+
+    <div class="boite"><!-- ouverture boite menu --> 
+        <h4 class="icone_menu">Navigation</h4>
+        <INCLURE{fond="inc_menu_rub"}>
+    
+    </div><!-- fermeture boite menu -->
+
+
+
+
+<div class="boite">
+ [(#CALENDRIER_MINI{#ENV{date},'date',#SELF})]
+</div>
+
+
+
+[(#REM)   ajoute des filtres seulement s il y au minimum deux evenements:]
+
+<B_filtre_moismini2>
+<div class="boite">
+<h4 class="icone_filter">Affiner l'affichage:</h4> 
+<p>
+<BOUCLE_filtre_moismini2(EVENEMENTS){id_rubrique}{agendafull date_debut, date_fin, mois,(#ENV{date}|annee), (#ENV{date}|mois)} {statut=publie}{par date_debut}{doublons mini2}{1,1}>
+<BOUCLE_filtre_mois(EVENEMENTS){id_rubrique}{agendafull date_debut, date_fin, mois,(#ENV{date}|annee), (#ENV{date}|mois)} {statut=publie}{par date_debut}{doublons even}>
+<BOUCLE_art_rub(ARTICLES){id_evenement}{doublons articleven}>
+<BOUCLE_mot_groupe(MOTS){type=statuts-agenda}{id_article}{doublons articlmots}>
+<a href="[(#URL_PAGE{filtrer}|parametre_url{filtre,#ID_MOT}|parametre_url{date,[(#ENV{date}|annee)]-[(#ENV{date}|mois)]})]"><INCLURE{fond=logo}{mot=#ID_MOT}{taille=20}{date=#ENV{date}}>
+#TITRE</a><br/>
+</BOUCLE_mot_groupe>
+</BOUCLE_art_rub>
+</BOUCLE_filtre_mois>
+</BOUCLE_filtre_moismini2>
+<strong><a href="[(#URL_RUBRIQUE|parametre_url{date,[(#ENV{date}|annee)]-[(#ENV{date}|mois)]})]">Afficher tous les
+    &eacute;v&eacute;nements[ en (#ENV{date}|nom_mois)]</a></strong>
+</p>
+</div>
+</B_filtre_moismini2><B_STATS>
+<div class="boite">
+  <h4 class="icone_stats">Stats</h4>
+<BOUCLE_STATS(RUBRIQUES){id_rubrique}{titre_mot==^(annuaire_home|partenaire|liens)$}{0,1}>
+<INCLURE{fond=inc_stats}>
+</BOUCLE_STATS>
+</div>
+</B_STATS>
+
+
+
+<B_COMMUNAUTE>
+<div class="boite">
+<BOUCLE_COMMUNAUTE(RUBRIQUES){id_rubrique}{titre_mot==^(communaute|partenaire)$}{0,1}>
+<INCLURE{fond=inc_liste_membres}{lettre=#ENV{lettre}}>
+</BOUCLE_COMMUNAUTE>
+</div>
+</B_COMMUNAUTE>
+
+</div>   [(#REM)   fermeture colone de droite   ] 
+<hr class="spacer" />
+
+</div> [(#REM)   fermeture contenu   ]
+<INCLURE{fond="pieddepage"}{id_rubrique}>
+</div>[(#REM)   fermeture surcontenu   ]<br/>
+
+</div> [(#REM)   fermeture container   ] 
+</body></html>
+</BOUCLE_principale>
+[(#ID_RUBRIQUE|AccesRestreint_rubrique_restreinte|?{' ',''})    
+<INCLURE{fond=authentification}>]
+[(#ID_RUBRIQUE|AccesRestreint_rubrique_restreinte|?{'',' '})
+<INCLURE{fond=404}>]
+<//B_principale>

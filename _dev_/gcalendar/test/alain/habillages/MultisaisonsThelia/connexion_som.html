@@ -1,0 +1,32 @@
+ <THELIA SI NON CONNECTE>
+ <h4 class="icone_identifier"><:spipthelia:mes_coordonnees:></h4>
+   <div class="formulaire_som">
+    <fieldset>
+      <legend><strong><:spipthelia:mon_compte:></strong></legend>
+      <form action="#URL_PAGE{connexion}" method="post" name="connexion" id="connexion">
+        <input type="hidden" name="thelia_action" id="thelia_action" value="connexion" />
+        <label><strong><:spipthelia:mon_email:></strong></label>
+	<input type="text" name="email" id="email" class="zoneDeSaisie" value="email..." onfocus="this.value='';" />
+        <br /><br />
+        <label><strong><:spipthelia:mon_passe:></strong></label>
+        <input type="password" name="motdepasse" class="zoneDeSaisie" value="motdepasse" value="motdepasse..." onfocus="this.value='';" />
+        <br /><br />
+        <input type="submit" value="ok" class="button" />
+        <br />
+      </form>
+     </fieldset>
+     <p class="centre">
+      [<a href="(#URL_PAGE{mdpoublie})"><strong><:spipthelia:oubli_passe:></strong></a><br />]
+      [<a href="(#URL_PAGE{creercompte})"><strong><:spipthelia:ouvrir_compte:></strong></a><br />]
+     </p>
+     </div>
+  </THELIA SI NON CONNECTE>
+  <THELIA SI CONNECTE>
+     <h4 class="icone_membre">Bonjour THELIA-CLIENT_PRENOM</h4>
+      <p class="centre">
+       [<a href="(#URL_PAGE{moncompte})"><strong><:spipthelia:mon_compte:></strong></a><br />]
+       [<a href="(#URL_PAGE{sommaire, thelia_action=deconnexion})"><strong><:spipthelia:deconnecter:></strong></a><br />]
+      </p>
+   </THELIA SI CONNECTE>
+
+

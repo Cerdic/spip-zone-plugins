@@ -1,0 +1,149 @@
+#CACHE{300}
+<!--
+*****Cahier de texte pour Spip: Bonbon !
+*****Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
+*****Sous licence GPL (enfin bon, c'est bonbonware...)
+*****CopyLeft en juin 2007
+***Affichage d'extraits du cahier de texte, cette page prend les paramètres suivants (en GET):
+classe= le nom d'une classe (attention il faut qu'il y ait identité avec le mot clé de la classe)
+groupe= le nom du groupe (attention il faut qu'il y ait identité avec le mot clé du groupe)
+matiere= le nom de la matière (attention il faut qu'il y ait identité avec le mot clé de la matière)
+prof= l'id_auteur d'un auteur (un professeur)
+date_debut=début de la période considérée (sinon c'est depuis le début de l'année en cours)
+date_debut=fin de la période considérée (sinon c'ets jusqu'en 9999, ce qui devrait suffire jusqu'au bug de l'an 10000)
+Les dates sont au format YYYY-MM-DD
+seances_seules= si c'est argument est donné alors les devoirs ne s'affichent pas.
+devoirs_seuls= si cet argument est donné, alors seuls les devoirs s'affichent.
+Si les deux arguments sont données (seances_seules et devoirs_seul rien ne s'affiche !)
+annee_scolaire= définit quelle année scolaire (sous le format XXXX%2FYYYY comme par exemple 2006%2F2007). Si ce n'est pas défini, c'est l'année scolaire la plus récente qui s'affiche. Note: %2F est un slash (/) encodé pour aller dans l'url.
+nb=nombre maxi d'entrées listées (sinon il listes les 100000000000000 entrées...)
+-->
+[
+(#REM) On se place dans le contexte de la rubrique du cahier de texte de l'année
+]
+<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}{tout}>
+	<BOUCLE_AnneeScol(RUBRIQUES){id_parent}{titre==#ENV{annee_scolaire,.}}{!par titre}{0,1}>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>#NOM_SITE_SPIP: Cahier de texte</title>
+
+[
+(#REM)Inclusion du pied de page
+]
+<INCLURE{fond=cahier-de-texte-en-tete}>
+
+</head>
+<body>
+<div id="NoMenu">
+	<div id="EntetePage">
+			<ul class="boutons">
+				<li><a href="spip.php?page=cahier-de-texte-accueil" title="Retourner à la page d'accueil du cahier de texte">Accueil du cahier de texte</a></li>
+				<li><a href="spip.php?page=cahier-de-texte-affichage&nb=20">Afficher les 20 dernieres séances</a></li>
+<?php if ($auteur_session) {
+	echo '				<li><a href="spip.php?page=cahier-de-texte-saisie" title="Écrire le contenu d\'une séance et ses devoirs éventuels">Saisir une séance</a></li>';
+	echo '				<li><a href="spip.php?page=cahier-de-texte-affichage&prof='.$auteur_session['id_auteur'].'" title="Aller voir ses propres entrées du cahier de texte">Afficher ses séances</a></li>';
+}?>
+				<li><a href="#requete" title="Faire une requête précise sur le contenu du cahier de texte">Faire une requête précise</a>
+			</ul>
+			<h1>Cahier de texte (#NOM_SITE_SPIP)</h1>
+			<br class="clear" />
+[(#ENV{seances_seules}|?{' ',''})
+			<h2>Description des séances (sans les devoirs)</h2>]
+[(#ENV{devoirs_seuls}|?{' ',''})
+		<h2>Devoirs à faire</h2>]
+		<p>[Classe de (#ENV{classe}) ][(#ENV{groupe}) ][en (#ENV{matiere}) ]<B_Prof>Professeur&nbsp;: <BOUCLE_Prof(AUTEURS){id_auteur=#ENV{prof}}>#NOM</BOUCLE_Prof></p>
+		<p>[à partir du (#ENV{date_debut}|affdate) ][jusqu'au (#ENV{date_fin}|affdate)]</p>	
+	</div>
+	<div id="Contenu">
+<?php
+//Si on ne demande pas que les devoirs, on affiche les séances
+if (!($_GET['devoirs_seuls'])) {
+?>
+<B_Seances>
+#ANCRE_PAGINATION
+<BOUCLE_Seances(ARTICLES){id_rubrique}{titre_mot="Description de séance"}{titre_mot==#ENV{classe,.}}{titre_mot==#ENV{groupe,.}}{titre_mot==#ENV{matiere,.}}{id_auteur==#ENV{prof,.}}{date>=#ENV{date_debut,.}}{date<=#ENV{date_fin,9999-12-01 03:25:02}}{pagination #ENV{nb,100000000000000}}{doublons seances}{!par date}>
+		<div id="documents">
+			<h3 class="titre">#TITRE</h3>
+			<div class="texte">#TEXTE</div>
+[
+(#REM) Si on ne demande que les séances (donc pas les devoirs)
+
+][(#ENV{seances_seules}|?{'',' '})			[<hr>
+			<div>(#PS)</div>]
+]
+		</div>
+</BOUCLE_Seances>
+<div class="apres">#PAGINATION{page_precedent_suivant}</div>
+</B_Seances>
+<?php
+} //fin du if !devoirs_seuls
+?>
+<?php
+//Si on ne demande que les devoirs, on les affiche comme un tableau (pratique !)
+if (($_GET['devoirs_seuls'])) {
+?>
+<B_Devoirs>
+#ANCRE_PAGINATION
+		<table width="100%" border=1 class="spip">
+			<tr>
+				<th>Pour le</th>
+				[(#ENV{classe}|?{'',<th>Classe</th>})]
+				[(#ENV{groupe}|?{'',<th>Groupe</th>})]
+				[(#ENV{matiere}|?{'',<th>Matière</th>})]
+				<th>Devoir</th>
+				[(#ENV{prof}|?{'',<th>Professeur</th>})]
+				<th>Donné le</th>
+			</tr>
+
+<BOUCLE_Devoirs(ARTICLES){id_rubrique}{titre_mot="Devoirs à faire"}{titre_mot==#ENV{classe,.}}{titre_mot==#ENV{groupe,.}}{titre_mot==#ENV{matiere,.}}{id_auteur==#ENV{prof,.}}{date>=#ENV{date_debut,.}}{date<=#ENV{date_fin,9999-12-01 03:25:02}}{par #ENV{tri}}{pagination #ENV{nb,100000000000000}}{doublons devoirs}{!par date}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})]">
+				<td>[(#DATE|affdate)]</td>
+				[(#ENV{classe}|?{'',<td>})]
+				<BOUCLE_classes(MOTS){id_article}{type="Classes"}{"&nbsp;- "}>[(#ENV{classe}|?{'',#TITRE})]</BOUCLE_classes>
+				[(#ENV{classe}|?{'',</td>})]
+				[(#ENV{groupe}|?{'',<td>})]
+				<BOUCLE_groupes(MOTS){id_article}{type="Sous groupes de classes"}{"&nbsp;- "}>[(#ENV{groupe}|?{'',#TITRE})]</BOUCLE_groupes>
+				[(#ENV{groupe}|?{'',</td>})]
+				[(#ENV{matiere}|?{'',<td>})]
+				<BOUCLE_matieres(MOTS){id_article}{type="Matières"}{"&nbsp;- "}>[(#ENV{matiere}|?{'',#TITRE})]</BOUCLE_matieres>
+				[(#ENV{matiere}|?{'',</td>})]
+				<td>[(#TEXTE)]</td>
+				[(#ENV{prof}|?{'',<td>})]
+				<BOUCLE_profs(AUTEURS){id_article}{"&nbsp;- "}>[(#ENV{prof}|?{'',#NOM})]</BOUCLE_profs>
+				[(#ENV{prof}|?{'',</td>})]
+				<td>
+<?php
+// selectionne juste la date dans le PS qui contient un texte plus decriptif (Donné Le DATE, en MATIERE avec les CLASSES (GROUPES))
+		$pour_le='[(#PS)]';
+		$debut=strpos ($pour_le,"e ")+1;
+		$fin=strpos ($pour_le,",")-$debut;
+		$coupe=substr($pour_le,$debut,$fin);
+		$lien=substr($pour_le,0,strpos ($pour_le,">")+1);
+		echo "				".$lien.$coupe."</a>";
+?>
+				</td>
+			</tr>
+</BOUCLE_Devoirs>
+		</table>
+<div class="apres">#PAGINATION{page_precedent_suivant}</div>
+</B_Devoirs>
+<?php
+} //fin du if devoirs_seuls
+?>
+	<br clear="All">
+	<hr>
+[(#REM)Inclusion de la noisette de selection]
+<INCLURE{fond=cahier-de-texte-selection}>
+	</div>
+
+[(#REM)Inclusion du pied de page]
+<INCLURE{fond=cahier-de-texte-pied}>
+
+
+</div>
+
+</body>
+</html>
+	</BOUCLE_AnneeScol>
+</BOUCLE_Contexte_RubriqueCDT>

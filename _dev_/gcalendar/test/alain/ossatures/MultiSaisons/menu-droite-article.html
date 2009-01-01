@@ -1,0 +1,272 @@
+[(#REM) Menu de navigation lateral]
+<BOUCLE_article_principal(ARTICLES){id_article}>
+<BOUCLE_rubencours(RUBRIQUES){id_rubrique}>
+<div id="navigation">
+
+	<div id="list1">
+	<BOUCLE_RUBPARENT(RUBRIQUES){id_enfant}>
+	<B_artmemerubtesttaille>
+		<div id="item11" class="menu_droite_boite">
+		
+		<div class="title menu-titre menu-titre#ID_SECTEUR"><:autres:> [(#_RUBPARENT:TITRE|supprimer_numero)]</div>
+		<div class="content content#ID_SECTEUR">
+		<ul>
+			<BOUCLE_artmemerubtesttaille(RUBRIQUES){id_parent}{id_rubrique != #_rubencours:ID_RUBRIQUE}{par titre}> 
+			</BOUCLE_artmemerubtesttaille>
+				[(#TOTAL_BOUCLE|>={15}|?{' ',''})<INCLURE{fond=inc-menu-droite-article-lettres}{from=#_article_principal:ID_ARTICLE}{id_rubrique}>]
+				[(#TOTAL_BOUCLE|<{15}|?{' ',''})<INCLURE{fond=inc-menu-droite-article-sslettres}{id_article}{id_rubrique}>]
+		</ul>
+		</div>
+		</div>
+	</B_artmemerubtesttaille>
+	</BOUCLE_RUBPARENT>
+
+	<BOUCLE_groupes4(GROUPES_MOTS){id_groupe=4}>
+		<B_artistes>
+		<div id="item12" class="menu_droite_boite">
+
+		<div class="title menu-titre menu-titre123">#_groupes4:TITRE</div>
+		<div class="content content123">
+		<ul>
+			<BOUCLE_artistes(MOTS) {id_rubrique}{id_groupe} {par titre}>
+				<BOUCLE_RUBMOTartiste(RUBRIQUES){titre=#TITRE*}{titre != #_article_principal:TITRE*}{tout}>
+				[(#REM) Si plusieurs articles traduits differents -> Rubrique]
+					<BOUCLE_artistesplusdunorig(ARTICLES){id_rubrique}{origine_traduction}{1,1}>
+						<li><a href="#URL_RUBRIQUE">[(#_RUBMOT1:TITRE|supprimer_numero)]</a></li>
+					</BOUCLE_artistesplusdunorig>
+						
+				[(#REM) Si plusieurs articles non-traduits differents -> Rubrique]
+					<BOUCLE_artistesplusdunsstrad(ARTICLES){id_rubrique}{id_trad=0}{1,1}>
+						<li><a href="#URL_RUBRIQUE">[(#_RUBMOT1:TITRE|supprimer_numero)]</a></li>
+					</BOUCLE_artistesplusdunsstrad>
+
+					<BOUCLE_artistesarticles(ARTICLES) {id_rubrique} {par num titre, titre}>
+
+						[(#REM) On affiche la version de l'article qui existe dans notre langue]
+						<BOUCLE_artistestraductions(ARTICLES){traduction}>
+
+							[(#REM) On ne le veut qu'une seule fois et non 1 fois par traduction]
+							<BOUCLE_artisteunique(ARTICLES){id_article}{lang}{unique}>
+								<li><a href="[(#URL_ARTICLE|parametre_url{from,#_article_principal:ID_ARTICLE})]">[(#TITRE|supprimer_numero)]</a></li>
+							</BOUCLE_artisteunique>
+
+							</B_artunique>
+							<BOUCLE_artistesmultiples(ARTICLES){id_article}{unique}>
+								<li>[(#TITRE|supprimer_numero)] |
+								<BOUCLE_tradartisteunique(ARTICLES){traduction}{' | '}>
+									<a href="[(#URL_ARTICLE|parametre_url{from,#_article_principal:ID_ARTICLE})]"[ hreflang="(#LANG|=={#ENV{lang}}|?{'', #LANG})" title="[(#LANG|traduire_nom_langue)]"]>[(#LANG|=={#ENV{lang}}|?{'', #LANG})]</a>
+								</BOUCLE_tradartisteunique>
+								</li>
+							</BOUCLE_artistesmultiples>
+							<//B_artisteunique>
+
+						</BOUCLE_artistestraductions>
+						</B_artistestraductions>
+						<//B_artistestraductions>
+
+					</BOUCLE_artistesarticles>
+					<//B_artistesplusdunsstrad>
+					<//B_artistesplusdunorig>
+				</BOUCLE_RUBMOTartiste>
+			</BOUCLE_artistes>
+		</ul>
+
+		</div>
+		</div>
+		</B_artistes>
+	</BOUCLE_groupes4>
+
+	<BOUCLE_groupes1(GROUPES_MOTS){id_groupe=1}>
+		<B_associations>
+		<div id="item13" class="menu_droite_boite">
+
+		<div class="title menu-titre menu-titre123">#_groupes1:TITRE</div>
+		<div class="content content123">
+		<ul>
+			<BOUCLE_associations(MOTS) {id_rubrique}{id_groupe}{titre != #_article_principal:TITRE*} {par titre}>
+				<BOUCLE_RUBMOT_association(RUBRIQUES){titre=#TITRE*}{titre != #_article_principal:TITRE*}{tout}>
+					<BOUCLE_associationsplusdunorig(ARTICLES){id_rubrique}{origine_traduction}{1,1}>
+						<li><a href="#URL_RUBRIQUE">[(#_RUBMOT2:TITRE|supprimer_numero)]</a></li>
+					</BOUCLE_associationsplusdunorig>
+
+					[(#REM) Si plusieurs articles non-traduits differents -> Rubrique]
+					<BOUCLE_associationsplusdunsstrad(ARTICLES){id_rubrique}{id_trad=0}{1,1}>
+						<li><a href="#URL_RUBRIQUE">[(#_RUBMOT2:TITRE|supprimer_numero)]</a></li>
+					</BOUCLE_associationsplusdunsstrad>
+
+					<BOUCLE_associationsarticles(ARTICLES) {id_rubrique} {origine_traduction}>
+
+						[(#REM) On ne le veut qu'une seule fois et non 1 fois par traduction]
+						<BOUCLE_associationunique(ARTICLES){traduction}{lang}>
+							<li><a href="[(#URL_ARTICLE|parametre_url{from,#_article_principal:ID_ARTICLE})]">[(#TITRE|supprimer_numero)]</a></li>
+						</BOUCLE_associationunique>
+
+						</B_associationunique>
+						<BOUCLE_associationsmultiples(ARTICLES){id_article}>
+							<li>[(#TITRE|supprimer_numero)] |
+							<BOUCLE_tradassociationunique(ARTICLES){traduction}{' | '}>
+								<a href="[(#URL_ARTICLE|parametre_url{from,#_article_principal:ID_ARTICLE})]"[ hreflang="(#LANG|=={#ENV{lang}}|?{'', #LANG})" title="[(#LANG|traduire_nom_langue)]"]>[(#LANG|=={#ENV{lang}}|?{'', #LANG})]</a>
+							</BOUCLE_tradassociationunique>
+							</li>
+						</BOUCLE_associationsmultiples>
+						<//B_associationunique>
+
+					</BOUCLE_associationsarticles>
+
+				<//B_associationsplusdunsstrad>
+				<//B_associationsplusdunorig>
+				</BOUCLE_RUBMOT_association>
+				</BOUCLE_associations>
+			</ul>
+
+			</div>
+			</div>
+		</B_associations>
+	</BOUCLE_groupes1>
+
+	<BOUCLE_groupes5(GROUPES_MOTS){id_groupe=5}{par titre}>
+		<B_disciplines>
+		<div id="item14" class="menu_droite_boite">
+
+		<div class="title menu-titre menu-titre120">#_groupes5:TITRE</div>
+		<div class="content content120">
+		<ul>
+		<BOUCLE_disciplines(MOTS) {id_rubrique}{id_groupe} {par titre}{titre != #_rubencours:TITRE*}>
+			<BOUCLE_RUBMOT_disciplines(RUBRIQUES){titre=#TITRE*}{titre != #_article_principal:TITRE*}{tout}>
+
+				<BOUCLE_RUBMOT_disciplines_plusdun(ARTICLES){id_rubrique}{origine_traduction}{1,1}>
+					<li><a href="#URL_RUBRIQUE">[(#_RUBMOT_disciplines:TITRE|supprimer_numero)]</a></li>
+				</BOUCLE_RUBMOT_disciplines_plusdun>
+
+				[(#REM) Si plusieurs articles non-traduits differents -> Rubrique]
+				<BOUCLE_RUBMOT_disciplines_plusdunsstrad(ARTICLES){id_rubrique}{id_trad=0}{1,1}>
+					<li><a href="#URL_RUBRIQUE">[(#_RUBMOT_disciplines:TITRE|supprimer_numero)]</a></li>
+				</BOUCLE_RUBMOT_disciplines_plusdunsstrad>
+
+				<BOUCLE_disciplinesarticles(ARTICLES) {id_rubrique} {origine_traduction}>
+
+					[(#REM) On ne le veut qu'une seule fois et non 1 fois par traduction]
+					<BOUCLE_disciplineunique(ARTICLES){traduction}{lang}>
+						<li><a href="[(#URL_ARTICLE|parametre_url{from,#_article_principal:ID_ARTICLE})]">[(#_RUBMOT_disciplines:TITRE|supprimer_numero)]</a></li>
+					</BOUCLE_disciplineunique>
+
+					</B_associationunique>
+					<BOUCLE_disciplinesmultiples(ARTICLES){id_article}>
+						<li>[(#_RUBMOT_disciplines:TITRE|supprimer_numero)] |
+						<BOUCLE_traddisciplineunique(ARTICLES){traduction}{' | '}>
+							<a href="[(#URL_ARTICLE|parametre_url{from,#_article_principal:ID_ARTICLE})]"[ hreflang="(#LANG|=={#ENV{lang}}|?{'', #LANG})" title="[(#LANG|traduire_nom_langue)]"]>[(#LANG|=={#ENV{lang}}|?{'', #LANG})]</a>
+							</BOUCLE_traddisciplineunique>
+							</li>
+					</BOUCLE_disciplinesmultiples>
+					<//B_disciplineunique>
+
+				</BOUCLE_disciplinesarticles>
+			<//B_RUBMOT_disciplines_plusdunsstrad>
+			<//B_RUBMOT_disciplines_plusdun>
+			</BOUCLE_RUBMOT_disciplines>
+		</BOUCLE_disciplines>
+		</ul>
+		</div>
+		</div>
+		</B_disciplines>
+	</BOUCLE_groupes5>
+
+	<BOUCLE_groupes3(GROUPES_MOTS){id_groupe=3}{par titre}>
+		<B_events>
+		<div id="item15" class="menu_droite_boite">
+
+		<div class="title menu-titre menu-titre8">#_groupes3:TITRE</div>
+		<div class="content content8">
+		<ul>
+		<BOUCLE_events(MOTS) {id_rubrique}{id_groupe} {par titre}{titre != #_rubencours:TITRE}>
+			<BOUCLE_RUBMOT_events(RUBRIQUES){titre=#TITRE*}{titre != #_article_principal:TITRE*}{tout}>
+			<B_RUBMOT_events_plusdun>
+				<BOUCLE_RUBMOT_events_plusdun(ARTICLES){id_rubrique}{origine_traduction}{1,1}>
+					<li><a href="#URL_RUBRIQUE">[(#_RUBMOT_events:TITRE|supprimer_numero)]</a></li>
+				</BOUCLE_RUBMOT_events_plusdun>
+
+				[(#REM) Si plusieurs articles non-traduits differents -> Rubrique]
+				<BOUCLE_RUBMOT_events_plusdunsstrad(ARTICLES){id_rubrique}{id_trad=0}{1,1}>
+					<li><a href="#URL_RUBRIQUE">[(#_RUBMOT_events:TITRE|supprimer_numero)]</a></li>
+				</BOUCLE_RUBMOT_events_plusdunsstrad>
+
+				<BOUCLE_eventsarticles(ARTICLES) {id_rubrique}{origine_traduction}>
+
+					[(#REM) On ne le veut qu'une seule fois et non 1 fois par traduction]
+					<BOUCLE_eventsunique(ARTICLES){traduction}{lang}>
+						<li><a href="[(#URL_ARTICLE|parametre_url{from,#_article_principal:ID_ARTICLE})]">[(#_RUBMOT_events:TITRE|supprimer_numero)]</a></li>
+					</BOUCLE_eventsunique>
+
+					</B_eventsunique>
+					<BOUCLE_eventsmultiples(ARTICLES){id_article}{unique}>
+						<li>[(#_RUBMOT_events:TITRE|supprimer_numero)] |
+						<BOUCLE_tradeventsunique(ARTICLES){traduction}{lang !=#ENV{lang}}{' | '}>
+							<a href="[(#URL_ARTICLE|parametre_url{from,#_article_principal:ID_ARTICLE})]"[ hreflang="(#LANG|=={#ENV{lang}}|?{'', #LANG})" title="[(#LANG|traduire_nom_langue)]"]>[(#LANG|=={#ENV{lang}}|?{'', #LANG})]</a>
+							</BOUCLE_tradeventsunique>
+							</li>
+					</BOUCLE_eventsmultiples>
+					<//B_eventsunique>
+
+				</BOUCLE_eventsarticles>
+			<//B_RUBMOT_events_plusdunsstrad>
+			<//B_RUBMOT_events_plusdun>
+			</BOUCLE_RUBMOT_events>
+		</BOUCLE_events>
+		</ul>
+		</div>
+		</div>
+		</B_events>
+	</BOUCLE_groupes3>
+
+	<BOUCLE_groupes2(GROUPES_MOTS){id_groupe=2}{par titre}>
+		<B_lieux>
+		<div id="item16" class="menu_droite_boite">
+
+		<div class="title menu-titre menu-titre120">#_groupes2:TITRE</div>
+		<div class="content content120">
+		<ul>
+		<BOUCLE_lieux(MOTS) {id_rubrique}{id_groupe} {par titre}{titre != #_rubencours:TITRE*}>
+			<BOUCLE_RUBMOT_lieux(RUBRIQUES){titre=#TITRE*}{id_rubrique != #_rubencours:ID_RUBRIQUE}>
+			<B_RUBMOT_lieux_plusdun>
+				<BOUCLE_RUBMOT_lieux_plusdun(ARTICLES){id_rubrique}{origine_traduction}{1,1}>
+					<li><a href="#URL_RUBRIQUE">[(#_RUBMOT_lieux:TITRE|supprimer_numero)]</a></li>
+				</BOUCLE_RUBMOT_lieux_plusdun>
+
+				[(#REM) Si plusieurs articles non-traduits differents -> Rubrique]
+				<BOUCLE_RUBMOT_lieux_plusdunsstrad(ARTICLES){id_rubrique}{id_trad=0}{1,1}>
+					<li><a href="#URL_RUBRIQUE">[(#_RUBMOT_lieux:TITRE|supprimer_numero)]</a></li>
+				</BOUCLE_RUBMOT_lieux_plusdunsstrad>
+
+				<BOUCLE_lieuxarticles(ARTICLES) {id_rubrique} {origine_traduction}>
+
+					[(#REM) On ne le veut qu'une seule fois et non 1 fois par traduction]
+					<BOUCLE_lieuunique(ARTICLES){traduction}{lang}>
+						<li><a href="[(#URL_ARTICLE|parametre_url{from,#_article_principal:ID_ARTICLE})]">[(#_RUBMOT_lieux:TITRE|supprimer_numero)]</a></li>
+					</BOUCLE_lieuunique>
+
+					</B_lieuunique>
+					<BOUCLE_lieuxmultiples(ARTICLES){id_article}>
+						<li>[(#_RUBMOT_lieux:TITRE|supprimer_numero)] |
+						<BOUCLE_tradlieuunique(ARTICLES){traduction}{' | '}>
+							<a href="[(#URL_ARTICLE|parametre_url{from,#_article_principal:ID_ARTICLE})]"[ hreflang="(#LANG|=={#ENV{lang}}|?{'', #LANG})" title="[(#LANG|traduire_nom_langue)]"]>[(#LANG|=={#ENV{lang}}|?{'', #LANG})]</a>
+							</BOUCLE_tradlieuunique>
+							</li>
+					</BOUCLE_lieuxmultiples>
+					<//B_lieuunique>
+
+				</BOUCLE_lieuxarticles>
+			<//B_RUBMOT_lieux_plusdunsstrad>
+			<//B_RUBMOT_lieux_plusdun>
+			</BOUCLE_RUBMOT_lieux>
+		</BOUCLE_lieux>
+		</ul>
+		</div>
+		</div>
+		</B_lieux>
+	</BOUCLE_groupes2>
+	</div>
+
+</div><!-- fin navigation -->
+
+</BOUCLE_rubencours>
+</BOUCLE_article_principal>

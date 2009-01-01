@@ -1,0 +1,247 @@
+#CACHE{0}
+<INCLURE{fond="header"}><head>
+
+[(#REM)   les métas   ] 
+
+
+<title>[(#RECHERCHE)][&nbsp;trouvé sur (#NOM_SITE_SPIP)]</title>  
+<meta name="Description" content="[(#RECHERCHE) ][sur (#NOM_SITE_SPIP)]"/> 
+<meta name="Keywords" content="trouver[,(#RECHERCHE)]"/> 
+
+[(#REM) les css et js peuvent changer suivant type d article ou de breve ]
+	
+<INCLURE{fond="header-css"}{date=#ENV{date}}> 	
+
+
+</head>
+<body> 
+<div id="container">   [(#REM)   centrage page   ]
+<INCLURE{fond="entete"}{date=#ENV{date}}> 
+<div id="surcontent">  [(#REM)   ouverture entête   ]
+<INCLURE{fond="menuhoriz"}>
+<div id="content">  [(#REM)   ouverture contenu   ] 
+<div id="colgau"> [(#REM)   ouverture colone de gauche   ] 
+
+
+
+<div id="cel">
+<ul id="deco">
+
+<li>
+[(#REM)   formulaire recherche   ]
+ 
+<h4>Lancez votre recherche</h4><form action="[(#URL_PAGE{recherche})]" method="get">
+
+   <p class="centre">  
+	
+	<input type="text" name="recherche" id="recherche" value="rechercher..." onfocus="this.value='';" />
+    <input type="submit" value="ok" class="button" />
+    <input name="page" value="recherche" type="hidden" /> <br/><br/>
+	 <label>Entrez votre recherche dans le formulaire puis validez.</label>
+  </p>
+      </form>
+</li> 
+
+ 
+[(#REM)   Indications recherche sinon liens externes Google   ]
+<li>
+<h4>A savoir</h4>
+    <p>
+    [(#RECHERCHE|?{Vous pouvez élargir votre recherche aux moteurs ci-dessous: <br/>
+    ::&nbsp;<a href="http://www.google.fr/search?hl=fr&q=#RECHERCHE&btnG=Recherche+Google&meta=">Google</a>
+    &amp;&nbsp;<a href="http://images.google.fr/images?svnum=10&um=1&hl=fr&q=#RECHERCHE&btnG=Recherche+d%27images">Google
+    Images</a><br/>
+	
+    ,"Lancez une recherche sur le moteur interne du site : 
+    Les mots de moins de quatre lettres ne sont pas indexés
+    par le moteur interne. Utilisez un seul mot pour cibler votre recherche."})]
+    </p>
+
+</li>
+
+</ul>
+</div>
+
+[(#REM)   Résultats recherche textes  ]
+<B_marecherche_textes>
+<div class="grande_boite">
+<h4 class="icone_recherche">Dans les articles :</h4>
+[(#ANCRE_PAGINATION)]
+<BOUCLE_marecherche_textes(INDEX){recherche}{!par points}{type_table IN articles} {pagination 5}>
+    <BOUCLE_articles(ARTICLES) {id_article}>
+    <p>
+    [<a href="#URL_ARTICLE"><strong>(#TITRE)</strong></a><br/>] [(#INTRODUCTION)<br/>]
+    [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)] 
+    <B_AUTEUR2>
+    par  <BOUCLE_AUTEUR2(AUTEURS){id_article}{", "}{par nom}>
+    #NOM </BOUCLE_AUTEUR2>.</B_AUTEUR2><br/>
+    </p>
+    </BOUCLE_articles>
+</BOUCLE_marecherche_textes>
+[<p class="centre gras">(#PAGINATION{page_precedent_suivant})<br/>Il y a au total #GRAND_TOTAL articles, cette page en affiche #TOTAL_BOUCLE</p>]
+</div>
+</B_marecherche_textes>
+[<div class="grande_boite"><h4 class="icone_recherche">Dans les articles :</h4>
+<p>"(#RECHERCHE)" n'a pas &eacute;t&eacute; trouv&eacute; dans les articles.</p></div>]
+<//B_marecherche_textes>
+
+
+
+
+<B_marecherche_docs>
+    [(#REM)   Résultats recherche docs ]
+    <div id="minipics">
+    <ul id="diapo">
+    <div class="grande_boite">
+    <h4 class="icone_recherche"> Dans les documents :</h4></div>
+    [(#ANCRE_PAGINATION)]
+<BOUCLE_marecherche_docs(INDEX){recherche}{!par points}{type_table IN documents} {pagination 12}>
+    <B_documents>
+        <BOUCLE_documents(DOCUMENTS){id_document}{extension==jpg|png|gif}>
+        <li class="transparent" id="a#ID_DOCUMENT">
+        [<a href="#URL_DOCUMENT" class="thickbox">(#LOGO_DOCUMENT||image_reduire{80}|image_aplatir{jpg,ffffff}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]
+        <p class="centre"><BOUCLE_liens_articles(ARTICLES){id_document}>[(#TITRE)<br/>][<a href="(#URL_ARTICLE)">Voir l'article</a>]</BOUCLE_liens_articles></p></li>
+        </BOUCLE_documents>
+    </B_documents>
+        <li class="transparent" id="a#ID_DOCUMENT">
+        [<a href="#URL_DOCUMENT">(#LOGO_DOCUMENT||image_reduire{80}|image_aplatir{jpg,ffffff}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]
+        <p class="centre"><BOUCLE_liens_articles(ARTICLES){id_document}>[(#TITRE)<br/>][<a href="(#URL_ARTICLE)">Voir l'article</a>]</BOUCLE_liens_articles></p></li>
+    <//B_documents>
+</BOUCLE_marecherche_docs>
+    </ul></div>[(#REM)   fermeture minipics   ]
+    [<div class="grande_boite"><p class="centre gras">(#PAGINATION)<br/>Il y a au total #GRAND_TOTAL documents, cette page en affiche #TOTAL_BOUCLE</p></div>]
+    </B_marecherche_docs>
+    [<div class="grande_boite">
+    <h4 class="icone_recherche">Dans les documents :</h4>
+    <p>"(#RECHERCHE)" n'a pas &eacute;t&eacute; trouv&eacute; dans les documents du site.</p></div>]
+<//B_marecherche_docs>
+
+
+
+
+
+
+<B_marecherche_forum>
+[(#REM)   Résultats recherche forums  ]
+<div class="grande_boite">
+<h4 class="icone_recherche">Dans les forums :</h4>
+[(#ANCRE_PAGINATION)]
+<BOUCLE_marecherche_forum(INDEX){recherche}{!par points}{type_table IN spip_forum} {pagination 5}>
+    <BOUCLE_forum(FORUMS){id_forum}{unique}>
+   
+    [<p><a href="[(#URL_PAGE{discussion}|parametre_url{id_forum,#ID_FORUM})]"><strong>(#TITRE|titre_forum|couper{70})</strong></a><br/>]
+    [(#TEXTE|paragrapher|norm_liens|liens_ouvrants|smileys|lignes_longues{45})</p>]
+   
+    </BOUCLE_forum>
+</BOUCLE_marecherche_forum>
+[<p class="centre gras">(#PAGINATION{page_precedent_suivant})<br/>Il y a au total #GRAND_TOTAL discussions, cette page en affiche #TOTAL_BOUCLE</p>]
+</div></B_marecherche_forum>
+[<div class="grande_boite"><h4 class="icone_recherche"> Dans les forums :</h4>
+<p>"(#RECHERCHE)" n'a pas &eacute;t&eacute; trouv&eacute; dans les forums de discussion.</p></div>]
+<//B_marecherche_forum>
+
+
+
+
+
+
+[(#REM)   Résultats recherche brèves  ]
+    <B_marecherche_breves>
+	<div class="grande_boite">
+<h4 class="icone_recherche">Dans les  brèves :</h4>
+    [(#ANCRE_PAGINATION)]
+    <BOUCLE_marecherche_breves(INDEX){recherche}{!par points}{type_table IN breves} {pagination 5}>
+        <BOUCLE_breves(BREVES){id_breve}>
+        <p>[<a href="#URL_BREVE"><strong>(#TITRE)</strong></a>] 
+        [(#INTRODUCTION|couper{60})] <br/>
+        [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] <br/></p>
+        </BOUCLE_breves>
+    </BOUCLE_marecherche_breves>
+    [<p class="centre gras">(#PAGINATION{page_precedent_suivant})<br/>Il y a au total #GRAND_TOTAL br&egrave;ves, cette page en affiche #TOTAL_BOUCLE</p>]
+   </div> </B_marecherche_breves>
+    [<div class="grande_boite">
+<h4 class="icone_recherche">Dans les  brèves :</h4>
+    <p>"(#RECHERCHE)" n'a pas &eacute;t&eacute; trouv&eacute; dans les br&egrave;ves.</p></div>]
+    <//B_marecherche_breves>
+
+
+
+
+<B_marecherche_rubriques>
+[(#REM)   Résultats recherche rubriques  ]
+<div class="grande_boite">
+<h4 class="icone_recherche">Dans les rubriques :</h4>
+ [(#ANCRE_PAGINATION)]
+<BOUCLE_marecherche_rubriques(INDEX){recherche}{!par points}{type_table IN rubriques}{pagination 5}>
+    <BOUCLE_rubriques(RUBRIQUES){id_rubrique}>
+       <p> <a href="#URL_RUBRIQUE" title="[(#TITRE)]" class="logogauche">
+    <INCLURE{fond="logo"}{id_rubrique,#ID_RUBRIQUE}{taille=46}{date=#ENV{date}}></a>     
+    [<h4><a href="#URL_RUBRIQUE" title="[(#TITRE)]">(#TITRE)</a></h4>]
+    [(#DESCRIPTIF|couper{60})]</p>
+    </BOUCLE_rubriques>   
+    <hr class="spacer" />   
+   </BOUCLE_marecherche_rubriques>
+		    [<p class="centre gras">(#PAGINATION{page_precedent_suivant})<br/>Il y a au total #GRAND_TOTAL rubriques, cette page en affiche #TOTAL_BOUCLE</p>]
+   </div> </B_marecherche_rubriques>
+	[<div class="grande_boite">
+	<h4 class="icone_recherche">Dans les rubriques :</h4>
+	<p>&quot;(#RECHERCHE)&quot; n'a pas &eacute;t&eacute; trouv&eacute; dans les
+    descriptifs et les titres des rubriques.</p></div>]
+   <//B_marecherche_rubriques>
+
+
+
+
+
+[(#REM)   Résultats recherche sites web  ] 
+<B_marecherche_sitesweb>
+<div class="grande_boite">
+   <h4 class="icone_recherche">Dans les sites web :</h4>
+    [(#ANCRE_PAGINATION)]
+    <BOUCLE_marecherche_sitesweb(INDEX){recherche}{!par points}{type_table IN spip_syndic} {pagination 5}>
+        <BOUCLE_sitesweb(SITES){id_syndic}>
+     <p>   <a href="#URL_SITE"><strong>[(#NOM_SITE)]</strong></a> [<br/>(#DESCRIPTIF|couper{60})]</p>
+        </BOUCLE_sitesweb>
+    </BOUCLE_marecherche_sitesweb>
+    [<p class="centre gras">(#PAGINATION{page_precedent_suivant})<br/>Il y a au total #GRAND_TOTAL sites, cette page en affiche #TOTAL_BOUCLE</p>]
+  </div>  </B_marecherche_sitesweb>
+    [<div class="grande_boite">
+<h4 class="icone_recherche">Dans les sites web </h4>
+    <p>"(#RECHERCHE)" n'a pas &eacute;t&eacute; trouv&eacute; dans les descriptifs des sites web partenaires.</p></div>]
+    <//B_marecherche_sitesweb>
+    
+
+
+</div>  [(#REM)   fermeture colone de gauche]
+		
+
+<div class="coldroit">[(#REM)   ouverture de la colone de droite   ] 
+
+
+    <div class="boite">[(#REM)   ouverture boite menu   ] 
+        <h4 class="icone_menu">Navigation</h4>
+        <INCLURE{fond="inc_menu_rub"}> </div>[(#REM)   fermeture boite menu   ]
+
+
+
+  
+<div class="boite">
+  <h4 class="icone_stats">Stats</h4>
+
+<INCLURE{fond="inc_stats"}>
+
+</div> 
+
+</div>   [(#REM)   fermeture colone de droite   ] 
+
+<hr class="spacer" />
+</div>[(#REM)   fermeture contenu   ] 
+<INCLURE{fond="pieddepage"}>
+
+</div> [(#REM)   fermeture surcontenu   ]<br/>
+
+
+</div> [(#REM)   fermeture container   ] 
+</body>
+</html>
+

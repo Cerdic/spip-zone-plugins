@@ -1,0 +1,20 @@
+.libelle{
+	width:170px;
+}
+
+.saisie{
+	text-align:right;
+}
+
+p.Normale{background:yellow;}
+p.fin {background:red;}
+p.Intermediaire{background:green;}
+p.Plus{background:#FF9900;}
+p.Saison{background:#CC0099;}
+p.Vietnamien{background:#33FF00;}
+
+.calendrier-titre{margin:15px;}	
+.calendrier-td{background:pink;}
+.jour_encours{background:#FFCC00;}
+.jour_dimanche{background:#b0b0b0;}	
+.calendrier-arial11{margin:0 1px}

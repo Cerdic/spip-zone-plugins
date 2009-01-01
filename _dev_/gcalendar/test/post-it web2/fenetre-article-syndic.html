@@ -1,0 +1,44 @@
+<BOUCLE_art(SYNDIC_ARTICLES){id_syndic_article} >
+<div id="window">
+	<div id="windowTop">
+		<div id="windowTopContent">[(#TITRE|supprimer_numero)]</div>
+		<img src="#CHEMIN{window_min.jpg}" id="windowMin" alt="reduire" />
+		<img src="#CHEMIN{window_max.jpg}" id="windowMax" alt="agrandir"/>
+		<img src="#CHEMIN{window_close.jpg}" id="windowClose" alt="fermer"/>
+	</div>
+	<div id="windowBottom"><div id="windowBottomContent">&nbsp;</div></div>
+	<div id="windowContent">
+    <div  class="contenu">
+          [<div class="logo">
+          [Site source :<a href="#URL_SITE">(#NOM_SITE)</a> <br /> ]
+          <a href="(#URL_ARTICLE)">Aller à l'article</a></div><br />]
+           <div class="auteurs">
+           <B_mots>
+          <h3>Mots clefs</h3>
+          <B_mots>
+          <ul>
+           <BOUCLE_mots(MOTS){id_article}{type!=Administration du site} >
+	     <li> [<a href="#URL_MOT">(#TITRE|supprimer_numero)</a>]</li>
+           </BOUCLE_mots>
+           </ul>
+           </B_mots>
+          </div>
+          <h2>[(#TITRE|supprimer_numero)]</h2>
+          [le :(#DATE)<br />]
+          [(#LESAUTEURS)<br />]
+                    <div class="alaligne"> </div>
+
+          <hr />
+
+          [<div class="chapo">(#CHAPO)</div>]
+          [<br />(#DESCRIPTIF)<br />]
+          <a href="#URL_ARTICLE">lire la suite</a>
+
+     </div>
+  </div>
+	<img src="#CHEMIN{window_resize.gif}" id="windowResize" alt="redimensionner"/>
+</div>
+</BOUCLE_art>
+
+
+

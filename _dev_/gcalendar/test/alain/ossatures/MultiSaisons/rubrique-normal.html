@@ -1,0 +1,286 @@
+#CACHE{380000}
+
+<INCLURE{fond="header"}>
+
+<BOUCLE_principale(RUBRIQUES){id_rubrique}><head>
+
+[(#REM)   les métas   ]
+
+
+
+
+<title>[(#TITRE)]</title>
+[<meta name="Description" content="(#DESCRIPTIF|supprimer_tags|texte_script)"/>]
+<meta name="keywords" content="[(#DESCRIPTIF|supprimer_tags|texte_script)]"/>
+<meta name="revisit-after" content="15 days" />
+<meta http-equiv="content-type" content="text/html; charset=#CHARSET"/>
+<meta http-equiv="Content-Language" content="fr-fr" />
+
+	[(#REM) les css et js peuvent changer suivant type d article ou de breve ]
+	<INCLURE{fond="header-css"}{date=#ENV{date}}> 	
+
+
+
+</head><body> 
+
+
+
+
+<div id="container">   [(#REM)   centrage page   ]
+<INCLURE{fond="entete"}{date=#ENV{date}}{id_rubrique}> 
+<div id="surcontent">  [(#REM)   ouverture entête   ]
+<INCLURE{fond="menuhoriz"}{id_rubrique}>
+<div id="content">  [(#REM)   ouverture contenu   ] 
+ 
+ 
+<div id="colgau"> [(#REM)   ouverture colone de gauche   ]
+
+ <BOUCLE_couleur_titre(MOTS){titre=saison}{0,1}>
+[(#ENV{date}|saison|=={printemps}|?{' ',''})#SET{'colo','9dba00'}]
+[(#ENV{date}|saison|translitteration|=={ete}|?{' ',''})#SET{'colo','5da7c5'}]
+[(#ENV{date}|saison|=={automne}|?{' ',''})#SET{'colo','cda261'}]
+[(#ENV{date}|saison|=={hiver}|?{' ',''})#SET{'colo','666666'}]
+</BOUCLE_couleur_titre>
+
+
+[(#SET{'colo','666666'})]
+<//B_couleur_titre>
+  <div class="grande_boite"> [(#REM)   ouverture grd boite texte   ] 
+<p><span class="logogauche"><INCLURE{fond="logo"}{id_rubrique}{taille=48}{date=#ENV{date}}></span>
+[<a href="(#URL_PAGE{sommaire})">Accueil</a> > ]<BOUCLE_plan(HIERARCHIE){id_rubrique}{" > "}> <a href="#URL_RUBRIQUE"[ title="(#DESCRIPTIF|couper{40}|textebrut|attribut_html)"]>[(#TITRE)]</a>	
+                  </BOUCLE_plan></p>
+                 
+   [<h1>(#TITRE)</h1><br/>]
+    [(#SOUSTITRE)<br/>]   
+   [#DEBUT_SURLIGNE(#TEXTE|image_reduire{450,0}|lier_au_glossaire|paragrapher)#FIN_SURLIGNE]
+<hr class="spacer"/>
+</div>[(#REM)   fermeture grande boite   ]
+
+
+
+[<div class="grande_boite">(#NOTES)</div>]
+
+<div id="celbas">
+<B_sous_rubriques> 
+<ul id="decobas">
+[(#REM)   Les rubriques de la branche et leurs contenus   ]
+
+   
+
+                    <BOUCLE_sous_rubriques(RUBRIQUES){id_parent}{par titre}{tout_voir}>
+<li>
+                   [<h4><a href="#URL_RUBRIQUE">(#TITRE)</a></h4>] 
+                  <p><span class="minilogogauche"><a href="#URL_RUBRIQUE"><INCLURE{fond="logo"}{id_rubrique}{taille=20}{date=#ENV{date}}></a></span>
+
+                    <BOUCLE_sites2(SITES){id_rubrique}{tout_voir}>
+                  </BOUCLE_sites2><a href="#URL_RUBRIQUE">#TOTAL_BOUCLE
+ sites r&eacute;f&eacute;renc&eacute;s.</a><br/><br/></B_sites2>
+<BOUCLE_art2(ARTICLES){id_rubrique}{par num titre}{par date}{inverse}{0,25}{tout_voir}>
+::
+                    <BOUCLE_nouv_art23(ARTICLES){id_article}{age<7}>
+                    <span class="gras">Nouveau:</span>&nbsp;</BOUCLE_nouv_art23><a href="#URL_ARTICLE">#TITRE</a> 
+                    <INCLURE{fond="inc_cadenas"}{id_article}> <br/>
+                    </BOUCLE_art2>
+<B_sous_sous_rub>
+<BOUCLE_sous_sous_rub(RUBRIQUES){id_parent}{par num titre, date}{tout_voir}>
+[>&nbsp;<a href="#URL_RUBRIQUE">(#TITRE)</a><INCLURE{fond="inc_cadenas"}{id_rubrique}><br/>]
+</BOUCLE_sous_sous_rub>
+</B_sous_sous_rub>
+</p>
+</li>
+</BOUCLE_sous_rubriques>
+</ul>
+</B_sous_rubriques>
+</div>
+
+
+[(#REM)   les articles de la rubrique   ]
+<B_articles>   
+<div class="grande_boite">
+
+#ANCRE_PAGINATION
+  
+<BOUCLE_articles(ARTICLES){id_rubrique}{par num titre, date}{inverse}{doublons}{tout_voir}{pagination}>
+ <div class="interne">
+    <BOUCLE_logo_documents(DOCUMENTS){id_article}{mode=document}{par date}{inverse}{extension IN jpg,png,gif}{0,1}>
+<span [class="(#EVAL{[(#_articles:COMPTEUR_BOUCLE)]}|alterner{'gauche','droite'}) logorond"]>
+ <BOUCLE_photocmpt(DOCUMENTS){id_article}{mode=document}{extension IN jpg,png,gif}> </BOUCLE_photocmpt>
+	[(#EVAL{' '}|concat{#TOTAL_BOUCLE,[&nbsp;(#TOTAL_BOUCLE|>{1}|?{'photos','photo'})]}|image_typo{taille=10,hauteur_ligne=0,police=police.ttf,couleur=#GET{colo}}|image_rotation{-90})]
+ </B_photocmpt>
+    <a href="#URL_ARTICLE#diapo"><INCLURE{fond="logo"}{id_article}{id_document}{taille=48}{date=#ENV{date}}></a>
+   </span>
+   </BOUCLE_logo_documents> 
+
+[(#REM)   s'il n'y a pas de jpg gif ou png alors on demande le logo de l'article et on ne compte rien  ]
+
+    <BOUCLE_logo_articles(ARTICLES){id_article}{0,1}> 
+<span [class="(#EVAL{[(#_articles:COMPTEUR_BOUCLE)]}|alterner{'gauche','droite'}) logorond"]>
+    <a href="#URL_ARTICLE#diapo">
+     	[(#LOGO_ARTICLE||?{' ',''})<INCLURE{fond="logo"}{id_article}{taille=48}{date=#ENV{date}}>]
+		[<span class="plusbas">Pas de<br/>logo<br/></span><span class="transpa">(#LOGO_ARTICLE||?{'',' '})<INCLURE{fond="logo"}{id_rubrique}{taille=48}{date=#ENV{date}}></span>]
+			</a>
+</span>
+		</BOUCLE_logo_articles>    
+    <//B_logo_documents><p>
+
+[<a href="#URL_ARTICLE">(#TITRE)</a>]&nbsp;[((#VISITES)&nbsp;[(#VISITES|>{1}|?{'lectures','lecture'}))]]&nbsp;[(#DESCRIPTIF|couper{200})]
+
+    <INCLUDE{fond="inc_cadenas"}{id_article}>  
+   
+    <BOUCLE_forum(FORUMS){id_article}{plat}></BOUCLE_forum>
+    [(#TOTAL_BOUCLE|>={1}|?{[&nbsp;<a href="#URL_ARTICLE#forum">(#TOTAL_BOUCLE)&nbsp;messages</a>&nbsp;,],''})]<//B_forum>
+    <a href="#URL_ARTICLE">Lire la suite...</a>
+</p>
+<hr class="spacer"/>
+</div>
+
+</BOUCLE_articles>
+
+
+[<div class="centre"><p>(#PAGINATION{page_precedent_suivant})</p></div>]
+</div>[(#REM) fermeture minipics   ]
+</B_articles>
+
+
+
+
+
+
+
+
+
+
+
+
+
+[(#REM) les sites syndiqués ou non  ]
+
+<B_syndic>
+<div class="grande_boite">
+#ANCRE_PAGINATION
+[(#REM) les sites syndiqués ]
+ <BOUCLE_syndic(SYNDICATION){id_rubrique}{par hasard}{pagination}>  
+  <BOUCLE_items(SYNDIC_ARTICLES){id_syndic}{par date}{inverse}{0,1}>
+  <div class="interne"><span [class="(#EVAL{[(#_syndic:COMPTEUR_BOUCLE)]}|alterner{'gauche','droite'}) logorond"]>
+[(#SET{img,http://open.thumbshots.org/image.pxf?url=#URL_SITE&ext=.jpg})]  
+[(#SET{img,[(#GET{img}|copie_locale)]})]
+[(#GET{img}|largeur|<{10}|?{'',' '})<img src="#GET{img}" width="48" height="48" alt="[(#TITRE|couper{30})]" />]
+[<span class="plusbas">Pas de<br/>capture</span><span class="transpa">(#GET{img}|largeur|<{10}|?{' ',''})<INCLURE{fond="logo"}{id_rubrique}{taille=48}{date=#ENV{date}}></span>]
+</span><p>
+   [<strong><a href="[(#URL_PAGE{kiosque}|parametre_url{'id_syndic',#ID_SYNDIC})]" title="Toutes les news de #NOM_SITE">(#NOM_SITE)</a></strong>]
+    [<a href="#URL_ARTICLE">(#TITRE)</a> ][(#DESCRIPTIF|couper{400})][<br/>Source: <a href="#URL_SOURCE">(#SOURCE)</a>]
+</p><hr class="spacer"/>
+</div>
+</BOUCLE_items>
+
+[(#REM) les sites non syndiqués ]
+<div class="interne"><span [class="(#EVAL{[(#_syndic:COMPTEUR_BOUCLE)]}|alterner{'gauche','droite'}) logorond"]>
+[(#SET{img,http://open.thumbshots.org/image.pxf?url=#URL_SITE&ext=.jpg})]  
+[(#SET{img,[(#GET{img}|copie_locale)]})]
+[(#GET{img}|largeur|<{10}|?{'',' '})<img src="#GET{img}" width="48" height="48" alt="[(#TITRE|couper{30})]" />]
+[<span class="plusbas">Pas de<br/>capture<br/></span><span class="transpa">(#GET{img}|largeur|<{10}|?{' ',''})<INCLURE{fond="logo"}{id_rubrique}{taille=48}{date=#ENV{date}}></span>]
+</span><p>
+    [<strong><a href="[(#URL_SITE)]">(#NOM_SITE)</a></strong>]
+    [(#DESCRIPTIF|couper{400})]
+</p>
+<hr class="spacer"/>
+</div>
+<//B_items>
+</BOUCLE_syndic>
+[<div class="centre"><p>(#PAGINATION)</p></div>]
+</div>
+</B_syndic>
+
+					
+
+
+
+
+
+
+
+
+
+
+
+
+
+[(#REM)   un formulaire proposer un site web   ]
+<B_formsite>
+<div class="grande_boite">
+<h4 class="icone_ajouter">Proposer un site</h4>
+<BOUCLE_formsite(MOTS){id_rubrique}{titre=liens}>
+#FORMULAIRE_SITE
+<br/>
+</BOUCLE_formsite>
+</div>
+</B_formsite>
+
+
+<INCLURE{fond=inc_liste_glossaire}{id_breve}{id_rubrique}{lettre=#ENV{lettre}}>
+</div>[(#REM)   fermeture colone de gauche   ]
+					
+
+ <div class="coldroit">  [(#REM)   ouverture de la colone de droite   ] 
+
+
+<div class="boite">[(#REM)   ouverture boite menu   ] 
+    <h4 class="icone_menu">Navigation</h4>    
+    <INCLURE{fond="inc_menu_rub"}{id_rubrique}>     
+</div>[(#REM)   fermeture boite menu   ]
+
+
+
+
+    
+<B_archives>
+    <div class="boite">
+      <h4 class="icone_article">A voir également</h4>
+      <ul class="petite_liste">
+      <BOUCLE_archives(ARTICLES){id_rubrique}{doublons}{par num titre}{par date}{inverse}{0,20}>
+      <li>
+              [<a href="#URL_ARTICLE" [title="(#DESCRIPTIF|couper{100})"]>(#TITRE)</a><br/>]
+              <INCLURE{fond="inc_cadenas"}{delais="7*24*3600"}{id_article}>
+      </li>                
+              </BOUCLE_archives>
+      </ul>        
+  </div> [(#REM)   fermeture boite   ] 
+</B_archives>
+
+<B_STATS>
+<div class="boite">
+  <h4 class="icone_stats">Stats</h4>
+<BOUCLE_STATS(RUBRIQUES){id_rubrique}{titre_mot==^(annuaire_home|partenaire|liens)$}{0,1}>
+<INCLURE{fond=inc_stats}>
+</BOUCLE_STATS>
+</div>
+</B_STATS>
+
+
+
+<B_COMMUNAUTE>
+<div class="boite">
+<BOUCLE_COMMUNAUTE(RUBRIQUES){id_rubrique}{titre_mot==^(communaute|partenaire)$}{0,1}>
+<INCLURE{fond=inc_liste_membres}{lettre=#ENV{lettre}}>
+</BOUCLE_COMMUNAUTE>
+</div>
+</B_COMMUNAUTE>
+
+</div>   [(#REM)   fermeture colone de droite   ] 
+<hr class="spacer" />
+
+</div> [(#REM)   fermeture contenu   ]
+<INCLURE{fond="pieddepage"}{id_rubrique}>
+</div>[(#REM)   fermeture surcontenu   ]<br/>
+
+</div> [(#REM)   fermeture container   ] 
+</body></html>
+</BOUCLE_principale>
+[(#ID_RUBRIQUE|AccesRestreint_rubrique_restreinte|?{' ',''})  
+ [(#ENV{type}|=={redac}|?{' ',''}) <INCLURE{fond=abonnement}{type=redac}>]
+  [(#ENV{type}|=={visit}|?{' ',''}) <INCLURE{fond=abonnement}{type=visit}>]
+[(#ENV{type}|match{redac|visit}|?{'',' '})<INCLURE{fond=abonnement}{type=question}>]
+  ]
+
+[(#ID_RUBRIQUE|AccesRestreint_rubrique_restreinte|?{'',' '})<INCLURE{fond=404}>]
+<//B_principale>

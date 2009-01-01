@@ -1,0 +1,128 @@
+#CACHE{864000}
+<INCLURE{fond="header"}>
+[(#REM)   ci-dessus l'include du fichier header avec un délai de 31 jours.   ]
+
+
+<head>
+
+	[(#REM) les css et js peuvent changer suivant type d article ou de breve ]
+	
+
+<INCLURE{fond="header-css"}{date=#ENV{date}}> 	
+
+</head>
+<body> 
+
+<div id="container">   [(#REM)   cette div centre la page   ]
+<INCLURE{fond="entete"}{date=#ENV{date}}>  [(#REM)   include du fichier entete avec le logo   ] 
+<div id="surcontent">  [(#REM)   ouverture entête   ]
+<INCLURE{fond="menuhoriz"}{id_rubrique}> [(#REM)   le menu horizontal avec les onglets   ] 
+<div id="content">  [(#REM)   ouverture contenu   ] 
+<div id="colgau"> [(#REM)   ouverture colone de gauche   ] 
+
+
+
+<div id="cel"> [(#REM)   ouverture des deux cellules en haut   ] 
+<ul id="deco"> 
+<li> [(#REM)   ouverture de la premiere cellule   ]
+
+<h4>Titre de cellule 1</h4>
+
+<p>Texte de la première cellule,<br/>
+avec des retours <br/>
+à la ligne. <br/>
+</p>
+		
+</li>
+
+
+ 
+<li>  [(#REM)   ouverture de la premiere cellule   ]
+<h4>Titre entouré de h4.</h4>
+<p>
+Texte entouré de p.                          
+</p>
+
+    
+</li>[(#REM)   fermeture des cellules   ]
+</ul>[(#REM)   fermeture des cellules   ]
+</div>[(#REM)   fermeture des cellules   ]
+
+
+
+
+
+
+ <div class="grande_boite">[(#REM)   ouverture d une grande boite    ]
+ <h4>Titre entouré de h4.</h4>
+ <p> Du texte, du contenu.</p>         
+</div>[(#REM)   fermeture grande_boite   ]
+
+
+
+
+
+<div id="celbas">
+<ul id="decobas">
+<li>
+  <h4>Titre bulle bas 1</h4>
+<p>
+           Texte premiere bulle du bas.
+</p>
+</li>
+
+
+  <li>
+    <h4>titre bulle bas 2</h4>
+              <p>
+               Encore du texte.
+</p>
+  </li> 
+</ul>
+</div> [(#REM)   fin de cel   ]      
+
+
+       
+</div>[(#REM)   fermeture colone de gauche   ]
+		
+
+<div class="coldroit">[(#REM)   ouverture de la colone de droite   ] 
+
+
+    <div class="boite">[(#REM)   ouverture boite menu   ] 
+        <h4 class="icone_menu">Navigation</h4>
+        <INCLURE{fond="inc_menu_rub"}>
+    
+    </div>[(#REM)   fermeture boite menu   ]
+
+
+
+
+
+
+
+
+  
+<div class="boite">
+  <h4 class="icone_stats">Stats</h4>
+
+<INCLURE{fond="inc_stats"}{delais=24*3600}>
+<p>On ajoute les stats en exemple sans délai</p>
+
+</div>
+      
+ 
+
+</div>   [(#REM)   fermeture colone de droite   ] 
+
+
+<hr class="spacer" /> [(#REM)   ajoute une barre hr invisible   ] 
+</div>[(#REM)   fermeture contenu   ] 
+<INCLURE{fond="pieddepage"}> [(#REM)   le pied de page inclu avec délai   ] 
+
+</div> [(#REM)   fermeture surcontenu   ]<br/>
+
+
+</div> [(#REM)   fermeture container   ] 
+</body>
+</html>

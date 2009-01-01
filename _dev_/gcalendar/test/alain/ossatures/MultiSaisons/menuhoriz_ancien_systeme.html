@@ -1,0 +1,46 @@
+#CACHE{864000}
+
+
+
+  [(#REM)   la navigation par onglets   ] 
+  <div id="menu"> 
+    <B_onglets>  
+	<ul id="nav"> 
+      <BOUCLE_onglets(RUBRIQUES){titre_mot=barre_menu}{0,1}> 
+      <BOUCLE_liens(SITES){id_rubrique}{par nom_site}{0,8}> 
+      <li id="[site(#ID_SYNDIC)]"><a href="#URL_SITE">[(#NOM_SITE)]</a></li> 
+      </BOUCLE_liens> 
+      </BOUCLE_onglets> 
+        </ul></B_onglets>
+		
+<p class="droite blanc img">
+<?php if ($auteur_session) {
+$connect_id_auteur_bis = $auteur_session['id_auteur'];
+$result_messages = spip_query("SELECT * FROM spip_messages AS messages,spip_auteurs_messages AS lien WHERE lien.id_auteur='$connect_id_auteur_bis'AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
+           $total_messages = @spip_num_rows($result_messages);
+
+           if ($total_messages == 1) {
+               while($row = @spip_fetch_array($result_messages)) {
+                   $ze_message=$row['id_message'];
+                   echo "<a href='ecrire/?exec=message&id_message=$ze_message'><img src=\"./IMG/002/mail_generic.gif\" alt=\"Votre courrier.\">&nbsp;"._T('info_nouveau_message')."</a><br/>";
+               }
+           }
+           if ($total_messages > 1) echo "<a href='ecrire/?exec=messagerie'><img src=\"IMG/002/mail_generic.gif\" alt=\"Votre courrier.\">&nbsp;"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</a><br/>";
+if ($total_messages ==0)
+
+{ ?>
+      <a href="[(#URL_PAGE{mon-profil})]">Mon profil</a>
+        <a href="[(#URL_LOGOUT)]" >Quitter</a>
+
+      <?php }} else { ?>
+         
+      <a href="[(#URL_PAGE{mon-profil})]">Connexion</a>
+ 
+<?php }?>
+
+</p>
+
+
+
+ [(#REM)   fermeture du menu   ]
+</div>

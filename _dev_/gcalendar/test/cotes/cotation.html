@@ -1,0 +1,230 @@
+<BOUCLE_laclasse(SPIP_COTES_CLASSES){id_classe=4}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+#INSERT_HEAD
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<title>Liste des cotes - classe #NOM</title>
+<style type="text/css"> <!-- 	
+	table {
+	font-size: 10px;
+	width:100%;
+	border-collapse: collapse;
+	}
+	
+	td {
+	vertical-align: top;
+	padding:3px;
+	border:1px solid #666;
+	}
+	
+	.td1 {
+	text-align: right;
+	font-weight:bold;
+	}
+	
+	.td2 {
+	padding-bottom: 10px;
+	}
+	
+	.total {
+		background-color:#ddd;
+	}
+	
+	.moyenne {
+	background-color:#eee;
+	font-weight:bold;
+	}
+	
+	.nom {
+	font-weight: bold;
+	font-size: 12px;
+	}
+	
+	.sep {
+	border-top: 1px solid #000;
+	padding: 0.5em 0;
+	}
+	
+	#lecteur {
+	padding: 3px;
+	text-align:center;
+	border-top:1px solid #333;
+	border-bottom:1px solid #333;
+	}	
+	-->
+</style>
+<script type="text/javascript">
+$(document).ready(function(){  
+	$(".titre-exercice").hide();
+	$(".shower").hover(function(){
+		original=$("#lecteur").html();
+   $("#lecteur").html($(this).children(".titre-exercice").html());
+	 },function(){
+   $("#lecteur").html(original);
+ 	});
+	
+});
+
+</script>
+
+</head>
+<body>
+<div id="general">
+
+<INCLURE{fond=bandeau}{id_article}>
+
+[(#NAVIGATION|=={general}|?{' ',''})<INCLURE{fond=navigation}{id_article}{id_rubrique}>]
+
+[(#CHEMIN_PAGE|=={general}|?{' ',''})<INCLURE{fond=chemin}{id_article}>]
+
+[(#CONTENUS|=={oui}|?{'<div id="contenus">',''})<!-- balise optionnelle contenus -->]
+
+<div id="contextes">
+[(#NAVIGATION|=={contexte}|?{' ',''})<INCLURE{fond=navigation}{id_article}{id_rubrique}>]
+<div class="listagebloc">
+<h2>Version imprimable</h2>
+<ul class="listageconteneur"><li>
+<a href="spip.php?page=cotation_print&id_classe=#ENV{id_classe}">Cliquez ici</a>
+</li></ul>
+</div>
+
+</div>
+<div id="corps">
+[(#CHEMIN_PAGE|=={corps}|?{' ',''})<INCLURE{fond=chemin}{id_article}>]
+
+
+<div id="header">
+
+<div class="texteheader">
+<h1>Tableau de cotes</h1>
+</div>
+<div class="clearer_header"></div>
+</div>
+
+
+<!-- blocs corps par defaut -->
+
+<div id="texteconteneur">
+<div class="texte">Pour la classe #NOM</div>
+</div>
+
+
+
+<?php
+if(isset($_POST['exercices'])){
+?>
+
+<table>
+<!-- entete -->
+<tr>
+<td class="td1">Nom etudiant</td>
+<BOUCLE_listeex(SPIP_COTES_EXERCICES){id_exercice IN #ENV*{exercices}}{par id_exercice}{id_classe}{titre!=""}{facteur!=0}>
+<td class="shower"><div class="pointeur">#COMPTEUR_BOUCLE</div><div class="titre-exercice">#TITRE (Facteur : #FACTEUR)</div></td>
+</BOUCLE_listeex>
+<td class="total">Total</td>
+<td class="moyenne">moyenne</td>
+</tr>
+
+<tr><td colspan="40" id="lecteur">Survolez les numeros ci-dessus pour voir les titres d'exercices</td></tr>
+
+<!-- corps de la table -->
+<BOUCLE_eachstudent(SPIP_COTES_ETUDIANTS){id_classe}{par nom}>
+<tr>
+<td class="td1">#NOM #PRENOM</td>
+<?php $total=0; $totalmax=0; $nbexerices=0; $moyenne=0; $facteurtot=0; ?>
+<BOUCLE_listeex2(SPIP_COTES_EXERCICES){id_exercice IN #ENV*{exercices}}{par id_exercice}{id_classe}{titre!=""}{facteur!=0}>
+<td class="shower">
+<BOUCLE_lacote(SPIP_COTES_COTES){id_exercice}{id_classe}{id_etudiant}>
+[(#COTE|filtre0)]/#COTE_MAX
+
+<?php
+	// controle si l'etudiant n'a pas de dispense
+	if ("#COTE" !="-1") {
+		$total=$total + (#COTE * #FACTEUR);
+		$totalmax = $totalmax + (#COTE_MAX * #FACTEUR);
+		$nbexerices++;
+		$facteurtot=$facteurtot+#FACTEUR;
+	}
+
+?>
+
+</BOUCLE_lacote>
+</td>
+</BOUCLE_listeex2>
+
+<td class="total">
+<?php
+echo $total."/".$totalmax;
+echo " (".$nbexerices." ex, fact ".$facteurtot.")";
+?>
+
+</td>
+
+
+
+<td class="moyenne">
+<?php
+echo round(($total/$totalmax)*20, 2);
+echo "/20";
+
+?>
+</td>
+</tr>
+</BOUCLE_eachstudent>
+<!-- fin de table -->
+
+</table>
+
+<div class="listageinfo">
+<strong>Legende du total :<br />
+- Ex = nombre d'exercices<br />
+- Fact pour nombre de facteurs accumulés</strong><br /><br />
+Les exercices dont la cote max est 0 ne sont pas pris en compte. Les exercices dont le facteur est 0 ne sont pas pris en compte dans la cotation.<br />
+La moyenne est arrondie à deux chiffres après la virgules.
+</div>
+
+<?php
+}
+?>
+
+<!-- formulaire -->
+
+<div class="listagebloc">
+<h2 >Paramètres</h2>
+<ul class="listageconteneur"><li>
+
+<h4 class="listagetitre">Choisir les exercices à prendre en compte</h4>
+<div class="listagetexte">
+<form action="#SELF" method="post" id="exercices">
+<input type="hidden" name="id_classe" value="4" />
+
+<input type="hidden" name="truc" value="machin" />
+
+<select name="exercices[]" size="10" multiple="true" style="width:100%" id="select_exercice">
+<BOUCLE_exercices(SPIP_COTES_EXERCICES){id_classe=4}{facteur!=0}>
+	<option value="#ID_EXERCICE">[(#TITRE)]</option>
+</BOUCLE_exercices>
+</select>
+
+<input type="submit" value="lancer" />
+</form>
+</div>
+
+</li></ul>
+
+</div>
+
+
+<div id="fin-corps"></div><!-- fin du corps -->
+
+</div>
+
+[(#CONTENUS|=={oui}|?{'</div>',''})<!-- fin de balise optionnelle contenus -->]
+
+<INCLURE{fond=footer}{id_article}>
+
+<div id="fin-page"></div>
+
+</div>
+</body>
+</html></BOUCLE_laclasse>

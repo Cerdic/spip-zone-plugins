@@ -1,0 +1,82 @@
+#CACHE{864000}
+<INCLURE{fond="header"}>
+
+<html lang="#LANG"><head>
+
+[(#REM) les css et js peuvent changer suivant type d article ou de breve ]
+	
+
+<INCLURE{fond="header-css"}{date=#ENV{date}}> 	
+
+</head><body dir="#LANG_DIR"> 
+
+<div id="container">   [(#REM)   centrage page   ]
+<INCLURE{fond="entete"}{date=#ENV{date}}>  
+<div id="surcontent">  
+<INCLURE{fond="menuhoriz"}>[(#REM)   ouverture entête   ]
+
+<div id="content">  [(#REM)   ouverture contenu   ] 
+
+<div id="colgau"> [(#REM)   ouverture colone de gauche   ] 
+
+  <div class="grande_boite">
+  <p>
+  #FORMULAIRE_ABONNEMENT 
+ 
+  </p>
+  
+
+ <hr class="spacer"/>
+   </div>
+
+
+
+</div>[(#REM)   fermeture colone de gauche   ]
+ <div class="coldroit">  [(#REM)   ouverture de la colone de droite   ] 
+
+
+    <div class="boite">[(#REM)   ouverture boite menu   ] 
+
+        <h4 class="icone_menu">Navigation</h4>
+      <INCLURE{fond="inc_menu_rub"}{delais="7*24*3600"}> </div>
+	  [(#REM)   fermeture boite menu   ]
+
+<?php $accepter_inscriptions = lire_meta("accepter_inscriptions");
+        $accepter_visiteurs = lire_meta('accepter_visiteurs');
+        $abonnement_config = $GLOBALS['meta']['abonnement_config'] ;
+        ($abonnement_config  == "membre") ? $acces_membres = "oui" : $acces_membres = "non";
+if( ($acces_membres == "oui") OR ($accepter_inscriptions =="oui")  ) { ?>
+
+<div class="boite">
+<h4>Gestion</h4><ul class="petite_liste">
+
+         [<li><a href="(#URL_PAGE{inscription})&oubli_pass=oui">Mot de passe
+             oubli&eacute;?</a></li>
+         ]
+		 [<li><a href="(#URL_PAGE{mon-profil})#profil">Modifier mon profil</a>]
+		 [<li><a href="(#URL_PAGE{mon-profil})">Passer à l'écriture</a>]
+		</ul>
+		  
+		  </div>
+		  
+		<?php }  ?>  
+		  
+		   <hr class="spacer" />
+
+</div>   
+ [(#REM)   fermeture colone de droite   ] 
+
+
+<hr class="spacer" />
+
+
+
+
+</div>[(#REM)   fermeture contenu   ] 
+<INCLURE{fond="pieddepage"}></div> [(#REM)   fermeture surcontenu   ]<br/>
+
+
+</div> [(#REM)   fermeture container   ] 
+</body>
+</html>
+

@@ -1,0 +1,6 @@
+#CACHE{2678400}
+<BOUCLE_m(MOTS){type==squelette}{titre==(normal|agenda|forum|galerie|boutique)}{id_rubrique}>
+	[(#INCLURE{fond=rubrique-#TITRE}{id_rubrique}{env}{date=#ENV{date}}{recherche}{type=#ENV{type}}{lettre=#ENV{lettre}})]
+</BOUCLE_m>
+	[(#INCLURE{fond=rubrique-normal}{id_rubrique}{env}{date=#ENV{date}}{recherche}{type=#ENV{type}}{lettre=#ENV{lettre}})]
+<//B_m>

@@ -1,0 +1,24 @@
+  <div id="newsFeeder-nouveaute" class="groupItem">
+ 		<div class="itemHeader">Nouveautés
+ 		<a href="#URL_SITE_SPIP" class="closeEl">[-]</a></div>
+		<div class="itemContent">
+		<div   class  ="contenu">
+      <ul>
+<BOUCLE_news(ARTICLES){0,3}{!par date}>
+
+
+ <li><a href="#URL_ARTICLE" [title="(#INTRODUCTION|supprimer_tags|attribut_html)"]>[(#TITRE|supprimer_numero)] </a> <br />
+
+
+[(#TEXTE|couper{100})]
+<a href="#URL_ARTICLE" [title="(#INTRODUCTION|supprimer_tags|attribut_html)"]>lire la suite... </a>
+ </li>
+
+
+</BOUCLE_news>
+      </ul>
+     </div>
+	</div>
+
+	</div>
+

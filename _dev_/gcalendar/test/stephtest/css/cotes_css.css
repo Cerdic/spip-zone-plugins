@@ -1,0 +1,144 @@
+/* css du plugin de cotes */
+
+.rempli {
+text-decoration:line-through;
+}
+
+.listageannuler {
+display:block;
+border:1px solid red;
+background-color: #fff;
+margin:0.6em 0;
+padding:2px 4px;
+color:red;
+width:13em;	
+font-size:9px;
+}
+
+.listageannuler:hover {
+color:#fff;
+background-color:red;
+
+}
+
+.listageetudiant {
+font-weight:bold;
+margin-bottom:2em;
+padding:1em;
+background-color:#fff;
+}
+
+#page {
+font-family: verdana, sans-serif;
+}
+
+.info {
+font-size: 12px;
+}
+
+.mailnom {
+font-weight: bold;
+font-size: 12px;
+}
+
+.mailmail {
+font-size: 10px;
+font-weight: normal;
+}/* css du plugin de cotes */
+
+#page {
+font-family: verdana, sans-serif;
+}
+
+.info {
+font-size: 14px;
+font-family: verdana, sans-serif;
+font-weight: bold;
+margin: 1.5em 0 0 0;
+}
+
+.mailnom {
+font-weight: bold;
+font-size: 12px;
+}
+
+.mailmail {
+font-size: 10px;
+font-weight: normal;
+}
+
+.mailcote {
+width: 9em;
+}
+
+.mailcote input {
+font-size: 11px;
+border: 0;
+padding: 2px;
+width:3em;
+}
+
+.mailcomment textarea {
+border: 0;
+padding: 2px;
+
+}
+
+.mailenvoi {
+text-align: right;
+}
+
+.table_etudiants {
+font-family: verdana, sans-serif;
+font-size: 11px;
+border-spacing: 0;
+}
+
+.table_etudiants td {
+padding: 6px;
+vertical-align: top;
+}
+
+.table_etudiants tr {
+background-color: #ccc;
+}
+
+.table_etudiants .separateur {
+height: 10px;
+background-color: transparent;
+}
+
+.mailcote {
+
+}
+
+.mailcomment {
+
+
+}
+
+.table_etudiants {
+font-family: verdana, sans-serif;
+font-size: 11px;
+border-spacing: 0;
+}
+
+.table_etudiants {
+border: 0;
+}
+
+.table_etudiants tr {
+background-color: #ccc;
+}
+
+.table_etudiants .separateur {
+height: 10px;
+background-color: transparent;
+}
+
+.message {
+border : 1px solid #66FF00;
+padding: 1em;
+font-size: 11px;
+background-color:#E5FFCB;
+}

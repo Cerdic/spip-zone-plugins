@@ -1,0 +1,27 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="description" content="Site National de la FNSF. Elle représente les Sourds de la FRance et milite leurs droits." />
+<meta name="keywords" content="sourd, deaf, fnsf, spip, fédération, france, surdité, handicapé, association, affilié, président, europe, communauté européenne, eud, wfd" />
+<title>[#NOM_SITE_SPIP]</title>
+
+<link href="#CHEMIN{include/presentation.css}" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+<!--
+.Style1 {font-size: 10px}
+-->
+</style>
+</head>
+<body>
+<img src="squelettes/FNSF/img/logofnsf_mobile.gif" width="99" height="70" />
+<div>Fédération Nationale des Sourds de France</div>
+<BOUCLE_article_list (ARTICLES){par date}{inverse}{0,5}{id_article !=10}{id_article !=11}{id_article !=12}>
+		<i>[(#DATE|affdate)] </i> : <a href="#URL_ARTICLE">#TITRE</a> 
+  <br />
+
+</BOUCLE_article_list>
+</body>
+</html>

@@ -1,0 +1,11 @@
+Ce squelette est la mise à jour du squelette de http://www.art-logic.info.
+Le squelette présent sur http://www.art-logic.info ne fonctionne que sur SPIP 1.8.3.
+Nous torturons ce squelette pour un fonctionnement sous spip 1.9.2. Avec un fonctionnememt
+correct mais un peu bugué, ce squelette peut être téléchargé sur 
+http://zone.spip.org/trac/spip-zone/browser/_squelettes_/multisaisons
+
+Nous avons besoin de votre aide pour dénicher les bugs. Un site de développement est 
+accessible sur un serveur d'évaluation à cette adresse: http://artlogic.ovh.org/
+Vous y trouverez une démonstration et une notice d'installation de ce squelette, 
+mais aussi un forum où vous pourrez nous signaler les divers bugs.
+

@@ -1,0 +1,22 @@
+- Optimisation des requêtes d'affichage: essayer de faire mon de regexp notamment sur rien quand le param n'est pas transmis dans l'URL.
+- Au dessus des fenêtres de saisie, écrire à quelles classe groupe matière correspond ce qu'on est en train de remplir !
+- Faire un affichage des scéances moins proche du look EVA mais, plus proche de ce qu'on lirait dans un cahier de texte papier.
+- pouvoir dupliquer une séance saisie à postériori
+- ne pas mettre devoir «n°1» quand il n'y en a qu'un !
+- rafraichissement plus fréquent (actuellement toutes les heures, c'est long...)?
+- écrire qu'il faut sauter une ligne pour faire un paragraphe ! (et peut-être communiquer sur les raccourcis typo ?)
+- barre typo (qui résoudrait les problêmes ci-dessus... facile à faire avec spip 1.9) ?
+- rajouter «afficher ses séances» dans «ne retournez pas en arrière, faites plutôt» ou afficher les séances sous la confirm de l'enregistrement ?
+- pouvoir éditer plusieurs classes en même temps (sans que ce soit un
+regroupement de classes)
+- quand on saisit des séances à la suites préselectionner la matière (et même la classe et le groupe ?).
+- mieux classer les résultats des devoirs et des séances (un ordre
+chronologique plus... chronologique...)
+- les pièces jointes bien sûr (facile en Spip 1.9)!
+- le retour de FCKeditor ou assimilé quand j'aurai débuggué (la barre typo étendue de Spip 1.9 serait mieux).
+- pouvoir rééditer les fiches après coup (facile avec Spip 1.9)...
+- faire une mise en forme spéciale impression.
+- rajouter une mention des emplois du temps (mention légale)
+- une page agenda...
+- des messages privés visibles depuis l'interface du CDT.
+- jquery calendar à la place de popup calendar

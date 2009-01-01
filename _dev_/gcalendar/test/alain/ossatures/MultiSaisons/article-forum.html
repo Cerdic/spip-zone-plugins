@@ -1,0 +1,251 @@
+#CACHE{864000}
+<INCLURE{fond="header"}>
+
+<BOUCLE_principale(ARTICLES){id_article}><head>
+
+[(#REM)   les métas   ]
+
+
+<title>[(#TITRE)]</title>
+[<meta name="Description" content='(#DESCRIPTIF|supprimer_tags|texte_script)'/>]
+<meta name="keywords" content="[(#CHAPO|texte_script)]<BOUCLE_metadocs(DOCUMENTS){id_article}{","}>#TITRE</BOUCLE_metadocs>"/>
+<meta name="author" content="<BOUCLE_author(AUTEURS){id_article}{","}>#NOM</BOUCLE_author>"/>
+<meta name="revisit-after" content="15 days" />
+<meta http-equiv="content-type" content="text/html; charset=#CHARSET"/>
+<meta http-equiv="Content-Language" content="fr-fr" />
+
+	[(#REM) les css et js peuvent changer suivant type d article ou de breve ]
+	
+
+<INCLURE{fond="header-css"}{date=#ENV{date}}> 	
+
+</head><body> 
+
+<div id="container">   [(#REM)   centrage page   ]
+<INCLURE{fond="entete"}{date=#ENV{date}}> 
+<div id="surcontent">  
+<INCLURE{fond="menuhoriz"}{id_rubrique}>[(#REM)   ouverture entête   ]
+<div id="content">  [(#REM)   ouverture contenu   ] 
+
+<div id="colgau"> [(#REM)   ouverture colone de gauche   ] 
+
+  <div class="grande_boite"> [(#REM)   ouverture grd boite texte   ]
+<p>
+
+
+ <span class="logogauche"><INCLURE{fond="logo"}{id_article,#ID_ARTICLE}{taille=46}{date=#ENV{date}}></span>
+
+
+<a href="[(#URL_PAGE{sommaire})]">Accueil</a> > <BOUCLE_plan(HIERARCHIE){id_article}{" > "}> <a href="#URL_RUBRIQUE"[ title="(#DESCRIPTIF|couper{40}|textebrut|attribut_html)"]>[(#TITRE)]</a>	
+                  </BOUCLE_plan>
+&gt; </p>                 
+[<h1>(#TITRE) 
+      </h1><br/>] 
+    [(#SOUSTITRE)<br/> 
+    ]   
+  
+   [#DEBUT_SURLIGNE(#TEXTE|image_reduire{450,0}|lier_au_glossaire|paragrapher)#FIN_SURLIGNE][<br/>
+    (#PS|paragrapher)]
+
+<ul class="membres"><li class="modo"><a href="ecrire/?exec=articles_forum&amp;id_article=#ID_ARTICLE" title="Acc&egrave;s priv&eacute; pour mod&eacute;rateurs">Modo:</a></li>
+<BOUCLE_admin(AUTEURS){statut=0minirezo}{par id_auteur}{doublons modo}>
+[<li class="modo"><a href="(#URL_PAGE{membre}|parametre_url{id_auteur,#ID_AUTEUR})" title="Contact et profil">#NOM</a></li>]
+</BOUCLE_admin>
+
+<BOUCLE_auteurs(AUTEURS){id_article}{doublons modo}>                
+ [<li class="modo"><a href="(#URL_PAGE{membre}|parametre_url{id_auteur,#ID_AUTEUR})"title="Contact et Profil">(#NOM)</a></li>]
+ </BOUCLE_auteurs>
+ 
+</ul>
+
+</div> [(#REM)   fermeture grande boite   ]
+
+
+
+
+
+[(#REM)   les derniers messages et discussions   ]
+<div class="grande_boite">
+
+ 
+
+<ul class="forum centre">
+<li>
+
+ [(#CONFIG{accepter_inscriptions}|=={oui}|?{' ',''})[<a href="(#URL_PAGE{mon-profil}|parametre_url{type,redac})"title="S'inscrire">S'inscrire</a>]]
+   [(#CONFIG{accepter_inscriptions}|=={non}|?{' ',''})[<a href="(#URL_PAGE{mon-profil}|parametre_url{type,visit})"title="S'inscrire">S'inscrire</a>]]
+</li>
+
+<li>
+[<a href="(#PARAMETRES_FORUM|url_reponse_forum)" title="Créer une discussion">Dialoguer</a>]
+</li>
+<li>
+<a href="#SELF&amp;var_mode=calcul" title="Rafraichir les messages">
+          Actualiser</a>
+</li>
+</ul>
+
+			
+<hr class="spacer"/>  
+			  
+<table class="spip">
+<tr class="row_first gras blanc">
+<td>Dernières discussions</td>
+<td>Auteur</td>
+<td>Date</td>
+<td>R&eacute;ponses</td>
+</tr>
+
+
+
+
+
+
+
+
+<BOUCLE_derniers(FORUMS){plat}{id_article}{par date_thread}{inverse}{doublons}{pagination 30}>
+
+<tr [class="(#EVAL{[(#_derniers:COMPTEUR_BOUCLE)]}|alterner{'row_even','row_odd'})"] >
+<td class="#EDIT{titre}">
+<a href="[(#URL_PAGE{discussion}|parametre_url{id_forum,#ID_FORUM})]"	title="">#TITRE</a>
+</td>
+<td><BOUCLE_nom3(AUTEURS){tout}{id_auteur}{statut=original}>
+[<a (#STATUT|=={'1comite'}|?{' ',''}) href="[(#URL_PAGE{membre}|parametre_url{id_auteur,#ID_AUTEUR})]" title="Contact et profil de ce r&eacute;dacteur">]
+[<a (#STATUT|=={'0minirezo'}|?{' ',''}) href="[(#URL_PAGE{membre}|parametre_url{id_auteur,#ID_AUTEUR})]" title="Contact et profil de cet admin">]
+[<a (#STATUT|=={'6forum'}|?{' ',''}) href="[(#URL_PAGE{membre}|parametre_url{id_auteur,#ID_AUTEUR})]" title="Contact et profil de ce visiteur">]
+[<a (#STATUT|=={'nouveau'}|?{' ',''}) href="[(#URL_PAGE{membre}|parametre_url{id_auteur,#ID_AUTEUR})]" title="Compte en attente">]
+[(#NOM|couper{18})</a><br/>]
+</BOUCLE_nom3>
+[(#NOM||?{#NOM|couper{18},'Anonyme'})<br/>]
+<//B_nom3></td>
+<td>
+<BOUCLE_dernier_message(FORUMS){id_thread}{plat}{par date}{inverse}{0,1}>
+[(#DATE|affdate{'d/m/Y'})]<br/>
+	[(#DATE|affdate{'H:i:s'})]
+	</BOUCLE_dernier_message>
+</td>
+<td><B_nb_forumtotal>
+<BOUCLE_nb_forumtotal(FORUMS){id_thread}{plat}>
+</BOUCLE_nb_forumtotal>
+<?php echo #TOTAL_BOUCLE -1 ?>
+</B_nb_forumtotal>
+</td>
+</tr>
+	
+
+
+</BOUCLE_derniers>
+<td colspan="4">#PAGINATION</B_derniers></td>
+
+</table>
+<hr class="spacer"/> 
+
+</div>
+
+<BOUCLE_combien_d_images(DOCUMENTS){id_article}{mode=document} {extension IN png,jpg,gif} {par num titre, date} {doublons}{1,1}>
+ [(#REM) Affiche des minipics si plus d'une image... ] 
+ 
+<B_documents_portfolio>
+<div id="minipics">
+<ul>
+#ANCRE_PAGINATION
+<BOUCLE_documents_portfolio(DOCUMENTS){id_article}{mode=document}{extension IN png,jpg,gif}{par num titre, date}{pagination 40}>
+<li class="transparent" id="a#ID_DOCUMENT">
+<a class="thickbox" href="#URL_DOCUMENT" type="#MIME_TYPE" [title="(#TITRE|couper{80}|texte_backend)"][longdesc="(#DESCRIPTIF|couper{120}|texte_backend)"]>
+
+[(#FICHIER|image_masque{carre-80.png}|image_aplatir{jpg,ffffff}|inserer_attribut{alt,#TITRE})]</a>
+</li>
+</BOUCLE_documents_portfolio>				
+</ul>
+</div>[(#REM)   fermeture minipics   ] 	
+[<div class="grande_boite"><p class="centre gras">(#PAGINATION)<br/>Il y a au total #GRAND_TOTAL photos, cette page en affiche #TOTAL_BOUCLE.</p></div>]		
+
+</B_documents_portfolio>
+
+</BOUCLE_combien_d_images>
+
+	
+ [(#REM) ... et sinon affiche une seule image ] 
+
+<B_afficher_photo_seule>
+<div class="grande_boite">
+[(#REM)   l image en grand   ]
+<div class="photo">
+<div id="exif">
+<BOUCLE_afficher_photo_seule(DOCUMENTS) {id_article} {mode=document} {extension IN png,jpg,gif} {par num titre, date}{0,1}>
+<a href="#URL_DOCUMENT" type="#MIME_TYPE" onclick="location.href='[(#URL_ARTICLE|parametre_url{id_document,#ID_DOCUMENT})]#documents_portfolio';return false;" title="[(#TITRE|couper{200}|texte_backend)]">
+[(#FICHIER|reduire_image{450,1000}|inserer_attribut{alt,#TITRE #TAILLE #LARGEUR x #HAUTEUR})]
+<span>[(#TITRE)<br />]
+[(#DESCRIPTIF)<br />]
+[(#DATE|affdate), ]
+[(#TAILLE|taille_en_octets), ][(#LARGEUR)&nbsp;x&nbsp;[(#HAUTEUR)]]
+</span>
+</a>
+</BOUCLE_afficher_photo_seule>
+</div>[(#REM)   fermeture exif   ]
+</div>[(#REM)   fermeture photo   ]
+</div>[(#REM)   fermeture grande boite photo   ]
+</B_afficher_photo_seule>
+
+
+<//B_combien_d_images>
+
+
+[(#CHEMIN{plugins/gis/inc-gis_map.html}|?{' ',''})<INCLURE{fond="inc_lien_gis"}{id_rubrique}{id_article}>]
+
+</div>[(#REM)   fermeture colone de gauche   ]
+ <div class="coldroit">  [(#REM)   ouverture de la colone de droite   ] 
+
+
+    <div class="boite">[(#REM)   ouverture boite menu   ] 
+
+        <h4 class="icone_menu">Navigation</h4>
+        <INCLURE{fond="inc_menu_rub"}{delais="7*24*3600"}{id_rubrique}{id_article}> </div>[(#REM)   fermeture boite menu   ]<div class="boite"> [(#REM)   ouverture boite les membres   ] 
+<INCLURE{fond=inc_liste_membres}{lettre=#ENV{lettre}}>
+</div>
+
+
+
+
+
+    
+ <B_meme_rubrique>
+    <div class="boite">
+      [(#REM)   ouverture autre articles   ]
+   
+  <h4 class="icone_article">Autres forums</h4>
+  <p>
+      <BOUCLE_meme_rubrique(ARTICLES){id_rubrique}{titre_mot=forum}{exclus}{par num titre}{par date}{inverse}{0,20}>
+                <a href="#URL_ARTICLE">#TITRE</a><br/>
+                <INCLURE{fond="inc_cadenas"}{delais="7*24*3600"}{id_article}> 
+               
+                </BOUCLE_meme_rubrique></p>
+               
+    </div></B_meme_rubrique>
+ <BOUCLE_retirer_doc(DOCUMENTS){id_article}{extension==jpg|gif|png}{doublons doc}>
+    [(#REM)   Boucle pour ne pas afficher les images et mp3 ici   ]
+    </BOUCLE_retirer_doc>
+     </div>
+ [(#REM)   fermeture colone de droite   ] 
+
+
+<hr class="spacer" />
+</div>
+[(#REM)   fermeture contenu   ] 
+<INCLURE{fond="pieddepage"}{id_article}>
+
+</div> [(#REM)   fermeture surcontenu   ]<br/>
+
+
+</div> [(#REM)   fermeture container   ] 
+</body>
+</html>
+</BOUCLE_principale>
+[(#ID_ARTICLE|AccesRestreint_article_restreint|?{' ',''})    
+ [(#ENV{type}|=={redac}|?{' ',''}) <INCLURE{fond=abonnement}{type=redac}>]
+  [(#ENV{type}|=={visit}|?{' ',''}) <INCLURE{fond=abonnement}{type=visit}>]
+[(#ENV{type}|match{redac|visit}|?{'',' '})<INCLURE{fond=abonnement}{type=question}>]
+  ]
+[(#ID_ARTICLE|AccesRestreint_article_restreint|?{'',' '})
+<INCLURE{fond="erreur-forum"}> ]
+<//B_principale>

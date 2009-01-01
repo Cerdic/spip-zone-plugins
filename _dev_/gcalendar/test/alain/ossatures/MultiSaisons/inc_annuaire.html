@@ -1,0 +1,30 @@
+<BOUCLE_blog(RUBRIQUES){tout}{titre_mot}{par num titre}{doublons}> 
+<div class="grison"><A HREF="#URL_RUBRIQUE"[ TITLE="(#DESCRIPTIF|textebrut|attribut_html)"]>[(#TITRE)]</A></div> 
+<br>				
+        <BOUCLE_sites1(SITES){id_rubrique}>
+        &nbsp; &nbsp &nbsp<img src="IMG/002/puce_fleche.png" width="8" height="7"> 
+        <A HREF="#URL_RUBRIQUE"[ TITLE="(#DESCRIPTIF|textebrut|attribut_html)"] target=_blank>[(#NOM_SITE)]</A> 
+        <BR />
+        </BOUCLE_sites1>
+       
+<table width="100%" border=0 cellpadding=0 cellspacing=0>
+  <tr>
+    <td class="content"> 
+      <BOUCLE_rub(RUBRIQUES){id_parent}{par num titre}{doublons}>
+      <img src="IMG/002/puce.gif" width="8" height="11"><A HREF="#URL_RUBRIQUE"[ TITLE="(#DESCRIPTIF|textebrut|attribut_html)"] class="noir">[(#TITRE)]</A> 
+      <DIV id=Layer5 
+                        style="MARGIN-TOP: 1px"> 
+						
+        <BOUCLE_sites(SITES){id_rubrique}{doublons}>
+        &nbsp; &nbsp &nbsp<img src="IMG/002/puce_fleche.png" width="8" height="7"> 
+        <A HREF="#URL_RUBRIQUE"[ TITLE="(#DESCRIPTIF|textebrut|attribut_html)"] target=_blank>[(#NOM_SITE)]</A> 
+        <BR />
+        </BOUCLE_sites>
+       
+      </DIV>
+	  <br>
+      </BOUCLE_rub>
+       </td>
+</table>
+<br>
+</BOUCLE_blog>

@@ -1,0 +1,140 @@
+#CACHE{864000}
+<?php 
+	header("HTTP/1.1 404 Not found");
+	header("Status: 404 Not found");
+?>  
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+
+
+<head>
+
+[(#REM)   les métas   ]
+<title>Message déplacé ou modéré[ sur (#NOM_SITE_SPIP)]</title> 
+<meta name="Description" content="Message déplacé ou modéré[ sur (#NOM_SITE_SPIP)]"/>
+<meta name="Keywords" content="message déplacé,message modéré[,(#RECHERCHE)]"/>
+<meta http-equiv="content-type"content="text/html; charset=#CHARSET"/>
+<meta http-equiv="Content-Language" content="fr-fr" />
+
+	[(#REM) les css et js peuvent changer suivant type d article ou de breve ]
+	
+
+[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
+<link rel="stylesheet" type="text/css" media="screen, projection, tv" href="[(#CHEMIN{css/logic.css})]" media="projection, screen, tv"/>
+<link rel="stylesheet" type="text/css" href="[(#CHEMIN{css/niftycorners.css})]" media="projection, screen, tv"/>
+<link rel="stylesheet" type="text/css" href="[(#CHEMIN{css/print.css})]" media="print" />
+	
+	[(#REM) 4 css qui changent l aspect du site suivant la saison.]
+	
+<BOUCLE_mot_saison(MOTS){titre=saison}{0,1}>
+<link rel="stylesheet" type="text/css" href="[(#CHEMIN{[css/(#ENV{date}|saison|translitteration).css]})]" media="projection, screen, tv"/>
+</BOUCLE_mot_saison>
+<link rel="stylesheet" type="text/css" href="[(#CHEMIN{css/couleurs.css})]" media="projection, screen, tv"/>
+<//B_mot_saison>
+<script type="text/javascript" src="[(#CHEMIN{nifty.js})]"></script>
+<script type="text/javascript" src="[(#CHEMIN{nifty-bloog.js})]"></script>
+
+	[(#REM) icones xml des fils des rubriques sous firefox ]
+	
+<BOUCLE_rub(RUBRIQUES){tout}{titre_mot=syndic}>
+
+<link rel="alternate" type="application/rss+xml" href="[(#URL_PAGE{backend}|parametre_url{'id_rubrique',#ID_RUBRIQUE})]" title="[(#TITRE)]" />
+</BOUCLE_rub>
+[(#REM)   enlève http:// de l'adresse du site   ]
+
+
+</head>
+<body> 
+<div id="container">   [(#REM)   centrage page   ]
+<INCLURE{fond="entete"}{date=#ENV{date}}> 
+<div id="surcontent">  [(#REM)   ouverture entête   ]
+<INCLURE{fond="menuhoriz"}>
+<div id="content">  [(#REM)   ouverture contenu   ] 
+<div id="colgau"> [(#REM)   ouverture colone de gauche   ] 
+
+<div class="grande_boite">
+<p class="centre gras">Le message a &eacute;t&eacute; d&eacute;plac&eacute; ou mod&eacute;r&eacute;.<br/>
+Utilisez le bouton RETOUR de votre navigateur<br/> 
+ou lancez une recherche dans les forums:<br/>
+<INCLURE{fond="inc-recherche"}>  
+</p>
+
+
+
+<BOUCLE_themes(ARTICLES){titre_mot = forum}{doublons}{0,8}>
+            <span class="logogauche"><a href="#URL_ARTICLE" title="Voir tous les messages"><INCLURE{fond="logo"}{id_article,#ID_ARTICLE}{taille=46}{date=#ENV{date}}></a></span><h4><a href="#URL_ARTICLE" title="Voir tous les messages">[(#TITRE)]</a></h4>
+<p>[(#DESCRIPTIF)]</p>
+              <hr class="spacer">
+</BOUCLE_themes> 
+
+
+
+</div>
+
+
+
+
+<div id="celbas">
+<ul id="decobas">
+  <li>
+    <h4>D&eacute;plac&eacute;? </h4>
+              <p>Le message peut avoir &eacute;t&eacute; d&eacute;plac&eacute; d'un
+                forum &agrave; l'autre. Utilisez le moteur [de <a href="(#URL_PAGE{recherche})">recherche
+                interne</a> ]ou surfez
+              les forums.</p>
+  </li> 
+  <li>
+  <h4>Mod&eacute;r&eacute;?</h4>
+<p>
+                Les messages futiles
+                sont mod&eacute;r&eacute;s: Publicit&eacute;s, concours, recherches
+                de cr&eacute;dules et
+                autres abus polluent les forums.</p>
+</li>
+</ul>
+</div> [(#REM)   fin de cel   ]      
+
+
+       
+</div>[(#REM)   fermeture colone de gauche   ]
+		
+
+<div class="coldroit">[(#REM)   ouverture de la colone de droite   ] 
+
+
+    <div class="boite">[(#REM)   ouverture boite menu   ] 
+        <h4 class="icone_menu">Navigation</h4>
+        <INCLURE{fond="inc_menu_rub"}{delais="7*24*3600"}> </div>[(#REM)   fermeture boite menu   ]
+	
+	<div class="boite"> [(#REM)   ouverture boite derniers messages   ] 
+<h4 class="icone_post">Derniers messages</h4>
+<INCLURE{fond="inc_derniers_messages"}{self=#SELF}>
+</div>
+
+  
+<div class="boite">
+  <h4 class="icone_stats">Stats</h4>
+
+<INCLURE{fond="inc_stats"}{delai=24*3600}>
+
+</div>
+      
+ 
+
+</div>   [(#REM)   fermeture colone de droite   ] 
+
+
+<hr class="spacer" />
+</div>[(#REM)   fermeture contenu   ] 
+<INCLURE{fond="pieddepage"}>
+
+</div> [(#REM)   fermeture surcontenu   ]<br/>
+
+
+</div> [(#REM)   fermeture container   ] 
+</body>
+</html>
+

@@ -1,0 +1,132 @@
+#CACHE{86400}
+<BOUCLE_auteur_principal(AUTEURS) {id_auteur}{lang_select=non}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#NOM|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#BIO|couper{150}|attribut_html)" />]
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_auteur">
+<div id="page">
+
+
+	
+
+	<div id="conteneur">
+    
+    		<div class="encart">
+		
+				<INCLURE{fond=inc-entete}{lang=#ENV{lang}}>
+                           
+            
+            
+				<br class="nettoyeur" />
+        	 </div><!-- fin encart -->
+
+			[(#REM) Menu de navigation laterale ]
+       		<div class="navigation">
+	    		 
+				<INCLURE{fond=inc-navigation}{lang=#ENV{lang}}{id_mot=8}>
+            </div><!-- fin navigation -->
+
+
+			[(#REM) Contenu principal]
+			<div id="contenu">
+    			<div class="gauche">    
+
+    [(#REM) Menu de navigation laterale ]
+     			   <B_miniplan>
+						<ul>
+							<BOUCLE_miniplan(RUBRIQUES) {id_parent=1} {tout} {lang_select=non}>
+							<li class="sous_menu">
+							<a class="sous_menu" href="#URL_RUBRIQUE&lang=#ENV{lang}">[(#TITRE)]</a>
+							</li>
+							</BOUCLE_miniplan>
+						</ul>
+			    </B_miniplan>
+				<br class="nettoyeur" />
+
+	[(#REM) Inclure le modele des liens de traductions ]
+	#MODELE{page_traductions}
+				<br class="nettoyeur" />
+    <div id="extra">
+
+        [(#REM) Autres auteurs ]
+        <B_auteurs>
+        <div class="menu">
+            #ANCRE_PAGINATION
+            <h2><:info_auteurs:></h2>
+            <ul>
+                <BOUCLE_auteurs(AUTEURS) {par nom} {pagination 20}>
+                <li><a href="#URL_AUTEUR"[ class="(#EXPOSE)"]>[(#NOM|couper{80})]</a></li>
+                </BOUCLE_auteurs>
+            </ul>
+            [<p class="pagination">(#PAGINATION)</p>]
+        </div>
+        </B_auteurs>
+        
+    </div><!--#extra-->
+
+
+      			 </div> <!-- fin contenu gauche-->
+     
+  			  <div class="droit">       
+        [(#REM) Fil d'Ariane ]
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/spip.php?rubrique1&lang="#ENV{lang}"><:accueil_site:></a> > <:info_auteurs:>[ > <strong class="on">(#NOM|couper{80})</strong>]</div>
+<div class="vcard">
+                    
+
+        <div class="cartouche">
+            [(#LOGO_AUTEUR||image_reduire{200,200})]
+            <h1 class="#EDIT{qui} fn">#NOM</h1>
+        </div>
+
+        [<div class="#EDIT{bio} texte note">(#BIO)</div>]
+        [<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="url org spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+</div>
+ 	
+
+        [(#REM) Articles de l'auteur ]
+        <B_articles>
+        <div class="menu articles">
+            #ANCRE_PAGINATION
+            <h2><:articles_auteur:> (#GRAND_TOTAL)</h2>
+            <ul>
+                <BOUCLE_articles(ARTICLES) {id_auteur} {par popularite}{inverse} {pagination 10}>
+                <li><a href="#URL_ARTICLE">#TITRE</a></h3></li>
+                </BOUCLE_articles>
+            </ul>
+            [<p class="pagination">(#PAGINATION)</p>]
+        </div>
+        </B_articles>
+
+        #FORMULAIRE_ECRIRE_AUTEUR
+
+        [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+
+
+
+				</div> <!-- fin contenu droit-->
+				
+            <br class="nettoyeur" />
+			</div><!-- fin contenu -->
+			
+	
+
+	</div><!-- fin conteneur -->
+
+	<br class="nettoyeur" />
+			
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+
+
+
+</div><!-- fin page -->
+</body>
+</html>
+
+</BOUCLE_auteur_principal>

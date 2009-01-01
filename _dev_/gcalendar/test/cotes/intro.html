@@ -1,0 +1,58 @@
+<BOUCLE_laclasse(SPIP_COTES_CLASSES){id_classe}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+#INSERT_HEAD
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<title>Liste des exercices de #NOM</title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+<link rel="stylesheet" type="text/css" href=".css"/>
+</head>
+<body>
+<div id="general">
+
+<INCLURE{fond=bandeau}{id_article}>
+
+[(#NAVIGATION|=={general}|?{' ',''})<INCLURE{fond=navigation}{id_article}{id_rubrique}>]
+
+[(#CHEMIN_PAGE|=={general}|?{' ',''})<INCLURE{fond=chemin}{id_article}>]
+
+[(#CONTENUS|=={oui}|?{'<div id="contenus">',''})<!-- balise optionnelle contenus -->]
+
+<div id="contextes">
+[(#NAVIGATION|=={contexte}|?{' ',''})<INCLURE{fond=navigation}{id_article}{id_rubrique}>]
+<div class="listagebloc">
+<h2>Liste des étudiants</h2>
+<ul class="listageconteneur"><li>
+<a href="spip.php?page=liste-etudiants&id_classe=#ID_CLASSE">Cliquez ici</a>
+</li></ul>
+</div>
+
+</div>
+<div id="corps">
+[(#CHEMIN_PAGE|=={corps}|?{' ',''})<INCLURE{fond=chemin}{id_article}>]
+
+<h1>Liste des exercices de la classe #NOM</h1>
+<div class="texte">#DESCRIPTIF</div>
+
+<div class="listagebloc">
+<h2>Liste des exercices</h2>
+<ul class="listageconteneur">
+<BOUCLE_liste(SPIP_COTES_EXERCICES){id_classe}{par id_exercice}><li>
+<h4 class="listagetitre"><a href="spip.php?page=recapitulatif_cotes&id_classe=#ID_CLASSE&id_exercice=#ID_EXERCICE">#TITRE</a></h4>
+<div class="listagetexte">#DESCRIPTION</div>
+</li></BOUCLE_liste>
+</ul>
+</div>
+<div id="fin-corps"></div><!-- fin du corps -->
+
+</div>
+
+[(#CONTENUS|=={oui}|?{'</div>',''})<!-- fin de balise optionnelle contenus -->]
+
+<INCLURE{fond=footer}{id_article}>
+
+<div id="fin-page"></div>
+
+</div>
+</body>
+</html></BOUCLE_laclasse>

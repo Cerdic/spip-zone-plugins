@@ -1,0 +1,231 @@
+body
+{
+	background-color: #F5F5F5;
+	margin: 0px;
+	font-size:13px;
+	text-align: justify;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+}
+
+a:link 
+  {
+  color: #7C7C6B;
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: bolder;
+  }
+a:visited 
+  {
+  color: #7C7C6B;
+  font-size: 12px;
+  text-decoration: none; 
+  font-weight: bolder;
+ 
+  }
+a:hover 
+  {
+  font-size: 12px;
+  color: #7C7C6B; 
+  text-decoration: underline; 
+  font-weight: bolder;
+  }
+a:active 
+  {
+  font-size: 12px;
+  color: #BABAAD;
+  text-decoration: underline; 
+  font-weight: bolder;
+  }
+
+.new
+{
+	color: Red;
+}
+
+#navheaderchanged
+{
+	position: absolute;
+	width: 375px;	
+	height: 20px;
+	top: 0px;
+	left:	137px;
+	background-color: #ADFF2F;
+	border-left: 1px dotted red;
+	text-align: center;
+}
+#navheaderbasic
+{
+	position: absolute;
+	width: 375px;	
+	height: 20px;
+	top: 0px;
+	left:	512px;
+	background-color: #6FBB00;
+	border-right: 1px dotted red;
+	text-align: center;
+	}
+	
+#navheaderlogoFNSF
+{
+	position: absolute;
+	width: 550px;	
+	height: 150px;
+	top: 20px;
+	left:	137px;
+	border-left: 1px dotted Red;
+	
+}
+#navheaderlogoJSF
+{
+	position: absolute;
+	width: 200px;	
+	height: 50px;
+	top: 20px;
+	left:	687px;
+	background-image: url(../img/jsf.jpg);
+	border-right: 1px dotted red;}
+	
+#navheaderlogoCFSS
+{
+	position: absolute;
+	width: 200px;	
+	height: 50px;
+	top: 70px;
+	left:	687px;
+	background-image: url(../img/cfss.jpg);
+	border-right: 1px dotted red;
+	}
+#navheaderlogoETSF
+{
+	position: absolute;
+	width: 200px;	
+	height: 50px;
+	top: 120px;
+	left:	687px;
+	background-image: url(../img/etsf.jpg);
+	border-right: 1px dotted red;
+	}
+#navheaderlive
+{
+	text-align: center;
+	position: absolute;
+	width: 550px;	
+	height: 20px;
+	top: 170px;
+	left:	137px;
+	background-color: #DBA908;
+	border-left: 1px dotted Red;
+	text-align: left;
+}
+#navheadermenu
+{
+	position: absolute;
+	width: 550px;	
+	height: 20px;
+	top: 190px;
+	left:	137px;
+	background-color: #D8D000;
+	border-left: 1px dotted Red;
+}
+#navheadersearch
+{
+	position: absolute;
+	width: 200px;	
+	height: 40px;
+	top: 170px;
+	left:	687px;
+	background-color: #D98D00;
+	border-left: 1px dotted Red;
+	border-right: 1px dotted red;}
+
+#navprincipal
+{
+	position: absolute;
+	width: 750px;
+	height: 800px;
+	top: 210px;
+	left: 137px;
+	border-left: 1px dotted Red;
+	border-right: 1px dotted red;
+	}
+#tab_infoprin
+{
+	position: absolute;
+	width: 725px;
+	height: 390px;
+	top: 230px;
+	border: 1px solid #C7C7C7;
+	left: 150px;
+	
+}
+#tab_prin_menu
+{
+	position: absolute;
+	width: 723px;
+	height: 20px;
+	top: 231px;
+	background-color: #ABB6C0;
+	left: 151px;	
+	z-index: 1;
+}	
+#tab_prin_video
+{
+	position: absolute;
+	width: 320px;
+	height: 260px;
+	top: 265px;
+	left: 155px;
+	border: 1px solid #C7C7C7;
+}
+#tab_prin_txt
+{
+	position: absolute;
+	width: 380px;
+	height: 369px;
+	top: 255px;
+	left: 485px;
+	
+}
+
+
+#navfooter
+{
+	position: absolute;
+	width: 750px;
+	height: 20px;
+	top: 1000px;
+	background-color: Green;
+	left: 137px;
+	border-left: 1px dotted Red;
+	border-right: 1px dotted red;
+	}
+
+#tab_view
+{
+	position: absolute;
+	width: 725px;
+	height: 150px;
+	top: 650px;
+	border: 1px solid #C7C7C7;
+	left: 150px;
+}
+
+#tab_infos
+{
+	position: absolute;
+	width: 350px;
+	height: 150px;
+	top: 820px;
+	left: 150px;
+	border: 1px solid #C7C7C7;
+}
+
+#tab_pub
+{
+	position: absolute;
+	width: 150px;
+	height: 150px;
+	top: 820px;
+	border: 1px solid #C7C7C7;
+	left: 550px;
+}

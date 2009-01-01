@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+#INSERT_HEAD
+<meta http-equiv="Content-Language" content="fr" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Demo SPIP  - Interface plugin for jQuery</title>
+		<script type="text/javascript" src="#CHEMIN{interface.js}"></script>
+	<link rel="stylesheet" href="#CHEMIN{interface.css}" type="text/css" media="projection, screen, tv" /></head>
+
+<body>
+
+
+<INCLURE{fond=fond}>
+<a href="#" id="windowOpen">Ouvrir</a>
+<a href="squelettes/windows.html">squelette appelant</a>
+<a href="squelettes/fond.html" >squelette du fond</a>
+<a href="squelettes/interface"> js et css</a>
+
+<BOUCLE_art(ARTICLES){id_article} >
+<div id="window">
+	<div id="windowTop">
+		<div id="windowTopContent">#TITRE</div>
+		<img src="#CHEMIN{window_min.jpg}" id="windowMin" />
+		<img src="#CHEMIN{window_max.jpg}" id="windowMax" />
+		<img src="#CHEMIN{window_close.jpg}" id="windowClose" />
+	</div>
+	<div id="windowBottom"><div id="windowBottomContent">&nbsp;</div></div>
+	<div id="windowContent">
+  #TEXTE
+	</div>
+	<img src="#CHEMIN{window_resize.gif}" id="windowResize" />
+</div>
+</BOUCLE_art>
+
+
+<script type="text/javascript">
+$(document).ready(
+	function()
+	{
+		$('#windowOpen').bind(
+			'click',
+			function() {
+				if($('#window').css('display') == 'none') {
+					$(this).TransferTo(
+						{
+							to:'window',
+							className:'transferer2', 
+							duration: 400,
+							complete: function()
+							{
+								$('#window').show();
+							}
+						}
+					);
+				}
+				this.blur();
+				return false;
+			}
+		);
+		$('#windowClose').bind(
+			'click',
+			function()
+			{
+				$('#window').TransferTo(
+					{
+						to:'windowOpen',
+						className:'transferer2', 
+						duration: 400
+					}
+				).hide();
+			}
+		);
+		$('#windowMin').bind(
+			'click',
+			function()
+			{
+				$('#windowContent').SlideToggleUp(300);
+				$('#windowBottom, #windowBottomContent').animate({height: 10}, 300);
+				$('#window').animate({height:40},300).get(0).isMinimized = true;
+				$(this).hide();
+				$('#windowResize').hide();
+				$('#windowMax').show();
+			}
+		);
+		$('#windowMax').bind(
+			'click',
+			function()
+			{
+				var windowSize = $.iUtil.getSize(document.getElementById('windowContent'));
+				$('#windowContent').SlideToggleUp(300);
+				$('#windowBottom, #windowBottomContent').animate({height: windowSize.hb + 13}, 300);
+				$('#window').animate({height:windowSize.hb+43}, 300).get(0).isMinimized = false;
+				$(this).hide();
+				$('#windowMin, #windowResize').show();
+			}
+		);
+		$('#window').Resizable(
+			{
+				minWidth: 200,
+				minHeight: 60,
+				maxWidth: 700,
+				maxHeight: 400,
+				dragHandle: '#windowTop',
+				handlers: {
+					se: '#windowResize'
+				},
+				onResize : function(size, position) {
+					$('#windowBottom, #windowBottomContent').css('height', size.height-33 + 'px');
+					var windowContentEl = $('#windowContent').css('width', size.width - 25 + 'px');
+					if (!document.getElementById('window').isMinimized) {
+						windowContentEl.css('height', size.height - 48 + 'px');
+					}
+				}
+			}
+		);
+	}
+);
+</script>
+
+<script language="javascript" type="text/javascript">
+function addLoadEvent(func) {
+   var oldonload = window.onload;
+   if (typeof window.onload != "function") {
+      window.onload = func;
+   } else {
+      window.onload = function() {
+         if (oldonload) {
+            oldonload();
+         }
+         func();
+      };
+   }
+}
+addLoadEvent(function(){
+		$('#windowOpen').click();
+
+
+});
+
+</script>
+
+
+</body>
+</html>

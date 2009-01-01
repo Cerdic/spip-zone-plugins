@@ -1,0 +1,222 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs">
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-2" />
+  <title>[#NOM_SITE_SPIP]</title>
+  <script type="text/javascript">
+  <!--
+  window.onload=montre;
+  function montre(id) {
+    var d = document.getElementById(id);
+    	for (var i = 1; i<=10; i++) {
+    		if (document.getElementById('smenu'+i)) {document.getElementById('smenu'+i).style.display='none';}
+    	}
+    if (d) {d.style.display='block';}
+  }
+  //-->
+  </script>
+  <link href="#CHEMIN{style.css}" rel="stylesheet" type="text/css" media="screen">
+<link href="#CHEMIN{include/spip_style.css}" rel="stylesheet" type="text/css" >
+<script type="text/javascript" src="#DOSSIER_SQUELETTE/functions.js"></script>
+
+ </head>
+ <body>
+ <!-- LE CONTAINER -->
+ <div id="container">
+    
+    <!-- LE HEADER 01 -->
+    <div id="header01">
+      <ul id="headerLeft">
+        <li><a id="menu1" title="Eng" accesskey="1" href="#"></a></li>
+        <li><a id="menu2" title="Fr" accesskey="2" href="#"></a></li>
+        <li><a id="menu3" title="Mal-voyants" accesskey="3" href="#"></a></li>
+        <li><a id="menu4" title="text-HTML" accesskey="4" href="#"></a></li>
+      </ul>
+      <ul id="headerRight">
+        <li><a title="Contact" accesskey="c" href="#URL_PAGE{contact}"><:Contact:></a></li>
+        <li><a title="Mobile" accesskey="m" href="#URL_PAGE{mobile}"><:Mobile:></a></li>
+        
+        <li><a title="Archives" accesskey="a" href="#URL_PAGE{archives}"><:Archives:></a></li>
+        <li><a title="Plan du site" accesskey="p" href="#URL_PAGE{plan}"><:Plan:></a></li>
+      </ul>
+    </div>
+    
+    <!-- LE HEADER 02 -->
+    <div id="header02">
+      <h1>FNSF</h1>
+      <ul>
+        <li><a id="JSF" title="JSF" accesskey="J" href="#"></a></li>
+        <li><a id="CFSS" title="CFSS" accesskey="C" href="#"></a></li>
+        <li><a id="ETSF" title="ETSF" accesskey="E" href="#"></a></li>
+      </ul>
+      <div id="infoNavAndSearch">
+      <p id="info">[(#INCLURE{fond=include/headerLive})]</p>
+      <form id="search">
+            <input type="text" />
+            <input type="submit" value="Search" />
+      </form>
+      </div>  
+    </div>
+  
+    <!-- LE MENU DEROULANT -->
+    <div id="menu">
+
+	<dl>			
+		<dt onmouseover="javascript:montre('smenu1');">Identité</dt>
+
+		<dd id="smenu1" onmouseover="javascript:montre('smenu1');" onmouseout="javascript:montre('');">
+			<ul>
+				<li><BOUCLE_css1 (ARTICLES){id_article = 1}><a href="#URL_ARTICLE">#TITRE</a></BOUCLE_css1></li>
+				<li><BOUCLE_css2 (ARTICLES){id_article = 2}><a href="#URL_ARTICLE">#TITRE</a></BOUCLE_css2></li>
+					<li><BOUCLE_css3 (ARTICLES){id_article = 3}><a href="#URL_ARTICLE">#TITRE</a></BOUCLE_css3></li>
+					<li><BOUCLE_css5 (ARTICLES){id_article = 5}><a href="#URL_ARTICLE">#TITRE</a></BOUCLE_css5></li>
+				<li><BOUCLE_css6 (ARTICLES){id_article = 6}><a href="#URL_ARTICLE">#TITRE</a></BOUCLE_css6></li>
+				<li><BOUCLE_css7 (ARTICLES){id_article = 7}><a href="#URL_ARTICLE">#TITRE</a></BOUCLE_css7></li>
+				<li><a href="#URL_PAGE{associationsaffilies}">Associations Affiliées</a></li>
+				<li><a href="#">EUD</a></li>
+				<li><a href="#">WFD</a></li>
+				<li><a href="#">Partenaires</a></li>
+			</ul>
+		</dd>
+	</dl>
+	
+	
+	<dl>	
+		<dt onmouseover="javascript:montre('smenu2');">Droits</dt>
+
+			<dd id="smenu2" onmouseover="javascript:montre('smenu2');" onmouseout="javascript:montre('');">
+			<ul>
+				<li><a href="#">Lois et décrets</a></li>
+				<li><a href="#">CTNERHI</a></li>
+				<li><a href="#">MDPH</a></li>
+				<li><a href="#">Politique</a></li>
+				<li><a href="#">CSA</a></li>
+				<li><a href="#">LCS</a></li>
+				<li><a href="#">Vie quotidienne</a></li>
+				<li><a href="#">Interprétariat</a></li>
+				<li><a href="#">Education</a></li>
+				<li><a href="#">Allocations</a></li>
+				<li><a href="#">CNCPH</a></li>
+			</ul>
+
+			</dd>
+	</dl>
+	
+	<dl>	
+		<dt onmouseover="javascript:montre('smenu3');">Actions</dt>
+			<dd id="smenu3" onmouseover="javascript:montre('smenu3');" onmouseout="javascript:montre('');">
+			<ul>
+
+				<li><a href="#">Equipes</a></li>
+				<li><a href="#">CN</a></li>
+				<li><a href="#">JSF</a></li>
+				<li><a href="#">CFSS</a></li>
+				<li><a href="#">ETSF</a></li>
+				<li><a href="#">Secteurs</a></li>
+				<li><a href="#">Délégations</a></li>
+				<li><a href="#">EUD</a></li>
+				<li><a href="#">WFD</a></li>
+				<li><a href="#">Pays francophones</a></li>
+				<li><a href="#">Projet Logo LSF</a></li>
+			</ul>
+
+			</dd>
+	</dl>
+	
+	<dl>	
+		<dt onmouseover="javascript:montre('smenu4');">Actualités</dt>
+			<dd id="smenu4" onmouseover="javascript:montre('smenu4');" onmouseout="javascript:montre('');">
+			<ul>
+
+				<li><a href="#">Flash'FNSF</a></li>
+				<li><a href="#">Flash'Droits</a></li>
+				<li><a href="#">Flash'Associations</a></li>
+				<li><a href="#">Flash'EUD</a></li>
+				<li><a href="#">Flash'WFD</a></li>
+				<li><a href="#">Divers</a></li>
+			</ul>
+			</dd>
+	</dl>
+		<dl>	
+		<dt onmouseover="javascript:montre('smenu5');">LSF</dt>
+			<dd id="smenu5" onmouseover="javascript:montre('smenu5');" onmouseout="javascript:montre('');">
+			<ul>
+
+				<li><a href="#">France</a></li>
+				<li><a href="#">Grande-bretagne</a></li>
+				<li><a href="#">Israël</a></li>
+				<li><a href="#">Japon</a></li>
+				<li><a href="#">USA</a></li>
+			</ul>
+			</dd>
+	</dl>
+		<dl>	
+		<dt onmouseover="javascript:montre('smenu6');">Culture</dt>
+			<dd id="smenu6" onmouseover="javascript:montre('smenu6');" onmouseout="javascript:montre('');">
+			<ul>
+
+				<li><a href="#">Conférences</a></li>
+				<li><a href="#">Théatres</a></li>
+				<li><a href="#">Musées</a></li>
+				<li><a href="#">Cinémas</a></li>
+				<li><a href="#">Sorties</a></li>
+				<li><a href="#">Voyages</a></li>
+			</ul>
+			</dd>
+	</dl>
+</div>
+    
+    <!-- LE CONTENU -->
+   <div id="content">
+    <div id="fond_article"><h5>
+    <BOUCLE_article_hierarchie(ARTICLES){id_article}{id_article !=10}>
+   		<BOUCLE_rubrique_hierarchie(RUBRIQUES){id_rubrique}>
+                <a href="#URL_SITE_SPIP">ACCUEIL</a>
+        	        <BOUCLE_chemin(HIERARCHIE){id_rubrique}>
+                        &gt;&gt; #TITRE
+            	    </BOUCLE_chemin>
+                			<BOUCLE_nom_article (ARTICLES) {id_article}>
+                         &gt;&gt; <b>#TITRE</b>
+                	</BOUCLE_nom_article>
+        </BOUCLE_rubrique_hierarchie>
+	</BOUCLE_article_hierarchie>
+<BOUCLE_art(ARTICLES){id_article}>
+<BOUCLE_precedent(ARTICLES){age_relatif>=0}{par date}{inverse}{1,1}>
+&nbsp; &nbsp; || &nbsp;&nbsp; précédent : <a href='#URL_ARTICLE'>#TITRE</a>
+</BOUCLE_precedent> - <BOUCLE_suivant(ARTICLES){age_relatif<0}{par date}{0,1}> 
+suivant : <a href='#URL_ARTICLE'>#TITRE</a> 
+</BOUCLE_suivant>
+</BOUCLE_art>
+</h5>
+ </div><BOUCLE_article (ARTICLES) {id_article}{id_article !=10}>
+		Crée le [(#DATE|nom_jour)] [(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)], par #LESAUTEURS 
+		<br /><br />
+			<h3 class ="gras">#TITRE </h3>
+		<br />
+		<div>
+<a href="#URL_PAGE{article_print,id_article=#ID_ARTICLE}" title="afficher une version imprimable de cet article">
+<img border="0" height="20" width="20" src='#DOSSIER_SQUELETTE/img/print.png' alt="impression" title="impression" /></a><a href="#URL_PAGE{article_pdf,id_article=#ID_ARTICLE}" title="créer un article en PDF">
+<img border="0" height="20" width="20" src='#DOSSIER_SQUELETTE/img/pdf.png' alt="pdf" title="PDF" /></a><br />
+</div><br />
+	#TEXTE
+		
+		</BOUCLE_article></div>
+     <!-- LE TABVIEW -->
+        
+
+
+	
+		
+	  <!-- LES INFOS -->
+   
+	
+	 <!-- LES SONDAGES ou LA PUB -->
+   
+	<!-- LE PIED -->
+    <div id="pied">[(#INCLURE{fond=include/footer})]</div>
+    
+ </div><!-- fermer le container -->
+ </body>
+</html>

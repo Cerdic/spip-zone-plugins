@@ -1,0 +1,274 @@
+body
+{
+	background-color: #F5F5F5;
+	margin: 0px;
+	font-size:13px;
+	text-align: justify;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	height: 100%;
+}
+.gras
+{
+	font-weight: bold;
+}
+.new
+{
+	color: Red;
+}
+.center
+{
+	text-align: center;
+}
+.petit
+{
+	font-size: 10px	
+}
+.petitcenter
+{
+	text-align: center;
+	font-size: 10px;
+}
+a:link 
+  {
+  color: Blue;
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: bolder;
+  }
+a:visited 
+  {
+  color: Blue;
+  font-size: 12px;
+  text-decoration: none; 
+  font-weight: bolder;
+ 
+  }
+a:hover 
+  {
+  font-size: 12px;
+  color: Blue; 
+  text-decoration: underline; 
+  font-weight: bolder;
+  }
+a:active 
+  {
+  font-size: 12px;
+  color: Blue;
+  text-decoration: underline; 
+  font-weight: bolder;
+  }
+
+#navheaderchanged
+{
+	position: absolute;
+	width: 375px;	
+	height: 20px;
+	top: 0px;
+	left:	137px;
+	background-color: #ADFF2F;
+	border-left: 1px dashed blue;
+	text-align: center;
+}
+#navheaderbasic
+{
+	position: absolute;
+	width: 375px;	
+	height: 20px;
+	top: 0px;
+	left:	512px;
+	background-color: #6FBB00;
+	border-right: 1px dashed blue;
+	text-align: center;
+	}
+	
+#navheaderlogoFNSF
+{
+	position: absolute;
+	width: 550px;	
+	height: 150px;
+	top: 20px;
+	left:	137px;
+	border-left: 1px dashed blue;
+}
+#navheaderlogoJSF
+{
+	position: absolute;
+	width: 200px;	
+	height: 50px;
+	top: 20px;
+	left:	687px;
+	background-image: url(../img/jsf.jpg);
+	border-right: 1px dashed blue;
+	}
+	
+#navheaderlogoCFSS
+{
+	position: absolute;
+	width: 200px;	
+	height: 50px;
+	top: 70px;
+	left:	687px;
+	background-image: url(../img/cfss.jpg);
+	border-right: 1px dashed blue;
+	}
+#navheaderlogoETSF
+{
+	position: absolute;
+	width: 200px;	
+	height: 50px;
+	top: 120px;
+	left:	687px;
+	background-image: url(../img/etsf.jpg);
+	border-right: 1px dashed blue;
+	}
+#navheaderlive
+{
+	text-align: center;
+	position: absolute;
+	width: 550px;	
+	height: 20px;
+	top: 170px;
+	left:	137px;
+	background-color: #DBA908;
+	border-left: 1px dashed blue;
+	text-align: left;
+}
+#navheadermenu
+{
+	position: absolute;
+	width: 550px;	
+	height: 20px;
+	top: 190px;
+	left:	137px;
+	background-color: #D8D000;
+	border-left: 1px dashed blue;
+}
+#navheadersearch
+{
+	position: absolute;
+	width: 200px;	
+	height: 40px;
+	top: 170px;
+	left:	687px;
+	background-color: #D98D00;
+	border-right: 1px dashed blue;
+	}
+
+#navprincipal
+{
+	position: absolute;
+	width: 750px;
+	height: 800px;
+	top: 210px;
+	left: 137px;
+	border-left: 1px dashed blue;
+	border-right: 1px dashed blue;
+	}
+.tab_infoprin
+{
+	position: absolute;
+	width: 725px;
+	height: 475px;
+	border: 1px solid #C7C7C7;
+	top: 230px;
+	left: 150px;
+}
+
+.tab_infoprinarticle
+{
+	position: absolute;
+	width: 725px;
+	
+	border: 1px solid #C7C7C7;
+	top: 230px;
+	left: 150px;
+}
+
+#tab_prin_menu
+{
+	position: absolute;
+	width: 725px;
+	height: 20px;
+	top: 231px;
+	background-color: #ABB6C0;
+	left: 151px;	
+	z-index: 1;
+}	
+.tab_prin_txt
+{
+	position: absolute;
+	width: 716px;
+	height: 100%;
+	top: 265px;
+	left: 155px;
+	}
+
+.tab_prin_video
+{
+	float: left;
+	width: 380px;
+	height: 369px;
+	border: 1px solid #C7C7C7;
+	margin: 10px;
+}
+
+.tab_prin_adobe
+{
+	width: 250px;
+	height: 50px;
+	margin: 10px;
+}
+
+#navfooter
+{
+	position: absolute;
+	width: 750px;
+	height: 20px;
+	top: 1000px;
+	background-color: Green;
+	left: 137px;
+	border-left: 1px dashed blue;
+	border-right: 1px dashed blue;
+	}
+
+#navfooterarticle
+{
+	width: 750px;
+	height: 20px;
+	background-color: Green;
+	left: 137px;
+	border-left: 1px dashed blue;
+	border-right: 1px dashed blue;
+	clear: both;
+	}
+#tab_view
+{
+	position: absolute;
+	width: 725px;
+	height: 150px;
+	top: 650px;
+	border: 1px solid #C7C7C7;
+	left: 150px;
+	margin-top: 70px;
+}
+
+#tab_infos
+{
+	position: absolute;
+	width: 350px;
+	height: 100px;
+	top: 820px;
+	left: 150px;
+	border: 1px solid #C7C7C7;
+	margin-top: 70px;
+}
+
+#tab_pub
+{
+	position: absolute;
+	width: 150px;
+	height: 150px;
+	top: 820px;
+	border: 1px solid #C7C7C7;
+	left: 550px;
+}

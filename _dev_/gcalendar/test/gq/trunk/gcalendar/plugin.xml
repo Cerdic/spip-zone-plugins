@@ -1,0 +1,13 @@
+<plugin>
+ <nom>gcalendar</nom>
+ <version>1.0.1</version>
+ <prefix>gcalendar</prefix>
+ 	<icon>
+	img_pack/logo_gc.gif
+	</icon>
+  <etat>dev</etat>
+ <auteur>Gilles Quiniou [contact->mailto:gilles@quiniou.net]
+</auteur>
+ <description>Ce plugin int&egrave;gre un agenda google calendar &agrave; spip. Il est distribu&eacute; sous licence GNU/GPL</description>
+ <necessite id='cfg' version='[1.4;]' />
+</plugin>
