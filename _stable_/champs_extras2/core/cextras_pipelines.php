@@ -5,16 +5,71 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/cextras');
 
 
+// Creer les item d'un select a partir des enum
+function cextras_enum($enum, $val='', $type='valeur', $name='') {
+	$enums = array();
+	foreach ($vals = explode("\n", $enum) as $x) {
+		list($cle, $desc) = explode(',', trim($x));
+		$enums[$cle] = _T($desc);
+	}
+
+	$val_t = explode(',', $val);
+
+	foreach($enums as $cle => $desc) {
+		switch($type) {
+			case 'valeur':
+				$enums[$cle] = 
+					($cle == $val
+					OR in_array($cle, $val_t))
+						? sinon(sinon($desc,$cle),_T('cextra:cextra_par_defaut'))
+						: '';
+				break;
+			case 'option':
+				$enums[$cle] = '<option value="'.entites_html($cle).'"'
+					. ($cle == $val
+						? " selected='selected'"
+						: ''
+					) .'> '.sinon(sinon($desc,$cle),_T('cextra:cextra_par_defaut'))
+					.'</option>'
+					."\n";
+				break;
+			case 'radio':
+				$enums[$cle] = "<span style='white-space:nowrap'><input type='radio' name='$name' id='${name}_$cle' value=\"".entites_html($cle).'"'
+					. ($cle == $val
+						? " checked='checked'"
+						: ''
+					) ."><label for='${name}_$cle' />"
+					. sinon(sinon($desc,$cle),_T('cextra:cextra_par_defaut'))
+					.'</label></span>'
+					."\n";
+				break;
+			case 'cases':
+				$enums[$cle] = "<span style='white-space:nowrap'><input type='checkbox' name='${name}[]' id='${name}_$cle' value=\"".entites_html($cle).'"'
+					. (in_array($cle, $val_t)
+						? " checked='checked'"
+						: ''
+					) ." /><label for='${name}_$cle'>"
+					. sinon(sinon($desc,$cle),_T('cextra:cextra_par_defaut'))
+					.'</label></span>'
+					."\n";
+				break;
+		}
+	}
+	
+	return trim(join("\n", $enums));
+}
+
+
 // Calcule des elements pour le contexte de compilation
 // des squelettes de champs extras
 // en fonction des parametres donnes dans la classe ChampExtra
 function cextras_creer_contexte($c, $contexte_flux) {
 	$contexte = array();
-	$contexte['champ_extra'] = $c->champ;
+	$contexte['champ_extra'] = 'extra_'.$c->champ;
 	$contexte['label_extra'] = _T($c->label);
 	$contexte['precisions_extra'] = _T($c->precisions);
 	$contexte['valeur_extra'] = $contexte_flux[$c->champ];
-	
+	$contexte['enum_extra'] = $c->enum;
 	// ajouter 'erreur_extra' dans le contexte s'il y a une erreur sur le champ
 	if (isset($contexte_flux['erreurs']) 
 	and is_array($contexte_flux['erreurs'])
@@ -85,7 +140,7 @@ function cextras_editer_contenu_objet($flux){
 			// calcule par le pipeline formulaire_charger.
 			$contexte = cextras_creer_contexte($c, $flux['args']['contexte']);
 			$extras[$c->champ] = $contexte[$c->champ];
-			
+
 			// calculer le bon squelette et l'ajouter
 			if (!find_in_path(
 			($f = 'extra-saisies/'.$c->type).'.html')) {
@@ -96,6 +151,11 @@ function cextras_editer_contenu_objet($flux){
 					: 'extra-saisies/ligne';
 			}
 			$extra = recuperer_fond($f, $contexte);
+
+			// Signaler a cextras_pre_edition que le champ est edite
+			// (cas des checkbox multiples quand on renvoie vide)
+			$extra .= '<input type="hidden" name="cextra_'.$c->champ.'" value="1" />';
+
 			$flux['data'] = preg_replace('%(<!--extra-->)%is', $extra."\n".'$1', $flux['data']);			
 		}
 	}
@@ -110,9 +170,12 @@ function cextras_pre_edition($flux){
 	// recuperer les champs crees par les plugins
 	if ($extras = cextras_get_extras_match(objet_type($flux['args']['table']))) {
 		foreach ($extras as $c) {
-			if (($extra = _request($c->champ)) !== null) {
+			if (_request('cextra_'.$c->champ)) {
+				$extra = _request('extra_'.$c->champ);
+				if (is_array($extra))
+					$extra = join(',',$extra);
 				$flux['data'][$c->champ] = corriger_caracteres($extra);
-			}			
+			}
 		}
 	}
 

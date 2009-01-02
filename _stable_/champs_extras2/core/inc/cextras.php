@@ -6,6 +6,7 @@ class ChampExtra{
 	var $champ = ''; // nom du champ ('ps')
 	var $label = ''; // label du champ, code de lanque ('monplug:mon_label')
 	var $precisions = ''; // precisions pour la saisie du champ (optionnel), code de lanque ('monplug:mon_label')
+	var $enum = ''; // liste de valeurs
 	var $type = ''; // type (ligne/bloc/etc)
 	var $sql = ''; // declaration sql (text NOT NULL DEFAULT '')
 	

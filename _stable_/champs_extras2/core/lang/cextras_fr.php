@@ -1,6 +1,9 @@
 <?php
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// C
+	'cextra_par_defaut' => 'Valeur par d&eacute;faut',
+
 	//T
 	'table_article' => 'Articles',
 	'table_auteur' => 'Auteurs',
