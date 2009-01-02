@@ -252,7 +252,11 @@ function exec_spiplistes_courrier_previsu () {
 					, $sql_where
 					)) {
 					while($row = sql_fetch($sql_result)) {
-						$url = generer_url_article($row['id_article']);
+						$url = 
+							(spiplistes_spip_est_inferieur_193())
+							? generer_url_article($row['id_article'])
+							: generer_url_entite($row['id_article'], 'article')
+							;
 						$ii = typo($row['titre']);
 						$sommaire_html .= "<li> <a href='" . $url . "'>" . $ii . "</a></li>\n";
 						$sommaire_texte .= " - " . textebrut($ii) . "\n   " . $url . "\n";
@@ -271,7 +275,11 @@ function exec_spiplistes_courrier_previsu () {
 					)) {
 					while($row = sql_fetch($sql_result)) {
 						$ii = typo($row['titre']);
-						$url = generer_url_article($row['id_article']);
+						$url = 
+							(spiplistes_spip_est_inferieur_193())
+							? generer_url_article($row['id_article'])
+							: generer_url_entite($row['id_article'], 'article')
+							;
 						$sommaire_html .= "<li> <a href='" . $url . "'> " . $ii . "</a></li>\n";
 						$sommaire_texte .= " - " . textebrut($ii) . "\n   " . $url . "\n";
 					}

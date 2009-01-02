@@ -79,6 +79,12 @@ function spiplistes_server_rezo_local () {
 }
 
 // CP-20080324
+// SPIP 1.9.2e: $spip_version_branche = null; $spip_version_affichee = '1.9.2e'; $spip_version_code = 1.9208;
+// SPIP 1.9.2f: $spip_version_branche = null; $spip_version_affichee = '1.9.2f'; $spip_version_code = 1.9208;
+// SPIP 1.9.2g: $spip_version_branche = null; $spip_version_affichee = '1.9.2g'; $spip_version_code = 1.9208;
+// SPIP 2.0.0: $spip_version_branche = "2.0.0"; $spip_version_affichee = "$spip_version_branche"; $spip_version_code = 12691;
+// SPIP 2.0.1: $spip_version_branche = "2.0.1"; $spip_version_affichee = "$spip_version_branche"; $spip_version_code = 12691;
+// SPIP 2.0.2: $spip_version_branche = "2.0.2"; $spip_version_affichee = "$spip_version_branche"; $spip_version_code = 12691;
 function spiplistes_spip_est_inferieur_193 () {
 	static $is_inf;
 	if($is_inf===NULL) {
