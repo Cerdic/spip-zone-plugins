@@ -46,10 +46,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_des_extras' => 'Liste des champs extras',
 	'liste_des_extras_possibles' => 'Liste des champs pr&eacute;sents non g&eacute;r&eacute;s',
 	//P
-	'precisions_pour_enum' => 'Certains types de champ demandent une liste des valeurs accept&eacute;es&nbsp;: indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par d&eacute;faut.',
+	'precisions_pour_enum' => 'Certains types de champ demandent une liste des valeurs accept&eacute;es&nbsp;: indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par d&eacute;faut. La description peut &ecirc;tre une cha&icirc;ne de langue.',
 	'precisions_pour_label' => 'Peut &ecirc;tre une cha&icirc;ne de langue &laquo;plugin:chaine&raquo;.',
 	'precisions_pour_precisions' => 'Optionnellement, vous pouvez donner plus d\'informations concernant la saisie. 
 		Peut &ecirc;tre une cha&icirc;ne de langue &laquo;plugin:chaine&raquo;.',
+	'precisions_pour_type' => 'Afficher une saisie de type :',
 	
 	//S
 	'supprimer_reelement' => 'Supprimer ce champ ?',

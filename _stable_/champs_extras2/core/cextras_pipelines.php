@@ -9,7 +9,7 @@ include_spip('inc/cextras');
 function cextras_enum($enum, $val='', $type='valeur', $name='') {
 	$enums = array();
 	foreach ($vals = explode("\n", $enum) as $x) {
-		list($cle, $desc) = explode(',', trim($x));
+		list($cle, $desc) = explode(',', trim($x), 2);
 		$enums[$cle] = _T($desc);
 	}
 
@@ -34,23 +34,23 @@ function cextras_enum($enum, $val='', $type='valeur', $name='') {
 					."\n";
 				break;
 			case 'radio':
-				$enums[$cle] = "<span style='white-space:nowrap'><input type='radio' name='$name' id='${name}_$cle' value=\"".entites_html($cle).'"'
+				$enums[$cle] = "<div class='choix'><input type='radio' name='$name' id='${name}_$cle' value=\"".entites_html($cle).'"'
 					. ($cle == $val
 						? " checked='checked'"
 						: ''
-					) ."><label for='${name}_$cle' />"
+					) ."><label for='${name}_$cle'>"
 					. sinon(sinon($desc,$cle),_T('cextra:cextra_par_defaut'))
-					.'</label></span>'
+					.'</label></div>'
 					."\n";
 				break;
 			case 'cases':
-				$enums[$cle] = "<span style='white-space:nowrap'><input type='checkbox' name='${name}[]' id='${name}_$cle' value=\"".entites_html($cle).'"'
+				$enums[$cle] = "<div class='choix'><input type='checkbox' name='${name}[]' id='${name}_$cle' value=\"".entites_html($cle).'"'
 					. (in_array($cle, $val_t)
 						? " checked='checked'"
 						: ''
 					) ." /><label for='${name}_$cle'>"
 					. sinon(sinon($desc,$cle),_T('cextra:cextra_par_defaut'))
-					.'</label></span>'
+					.'</label></div>'
 					."\n";
 				break;
 		}

@@ -65,7 +65,7 @@
 		</li>
 		#SET{name,type}
 		#SET{label,#GET{fl}|concat{':label_',#GET{name}}|_T}
-		#SET{explications,''}
+		#SET{explications,#GET{fl}|concat{:precisions_pour_type}|_T}
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 		#SET{obli,obligatoire}
 		#SET{disabled,''}
