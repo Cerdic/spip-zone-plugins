@@ -133,6 +133,8 @@ function extras_champs_anormaux($connect='') {
 	unset($tout);
 	if($nchamps) {
 		$tout = $nchamps;
+	} else {
+		$tout = array();
 	}
 
 	return $tout;
