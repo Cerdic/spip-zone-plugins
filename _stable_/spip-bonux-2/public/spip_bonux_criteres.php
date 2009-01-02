@@ -75,5 +75,46 @@ function critere_compteur($idb, &$boucles, $crit){
 	}
 }
 
+/**
+ * {tri [champ_par_defaut][,sens_par_defaut][,nom_variable]}
+ * champ_par_defaut : un champ de la table sql
+ * sens_par_defaut : -1 ou inverse pour decroissant, 1 ou direct pour croissant
+ * nom_variable : nom de la variable utilisee (par defaut tri_nomboucle)
+ * 
+ * {tri titre}
+ * {tri titre,inverse}
+ * {tri titre,-1}
+ * {tri titre,-1,truc}
+ * 
+ * @param unknown_type $idb
+ * @param unknown_type $boucles
+ * @param unknown_type $crit
+ */
+function critere_tri_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+
+	// definition du champ par defaut
+	$_champ_defaut = !isset($crit->param[0][0]) ? "''" : calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucle->id_parent);
+	$_sens_defaut = !isset($crit->param[1][0]) ? "1" : calculer_liste(array($crit->param[1][0]), array(), $boucles, $boucle->id_parent);
+	$_variable = !isset($crit->param[2][0]) ? "'$idb'" : calculer_liste(array($crit->param[2][0]), array(), $boucles, $boucle->id_parent);
+
+	$_tri = "((\$t=(isset(\$Pile[0]['tri'.$_variable]))?\$Pile[0]['tri'.$_variable]:$_champ_defaut)?preg_replace(',[^\w],','',\$t):'')";
+	$_sens ="((intval(\$t=(isset(\$Pile[0]['sens'.$_variable]))?\$Pile[0]['sens'.$_variable]:$_sens_defaut)==-1 OR \$t=='inverse')?-1:1)";
+
+	$boucle->modificateur['tri_champ'] = $_tri;
+	$boucle->modificateur['tri_sens'] = $_sens;
+	$boucle->modificateur['tri_nom'] = $_variable;
+	// faut il inserer un test sur l'existence de $tri parmi les champs de la table ?
+	// evite des erreurs sql, mais peut empecher des tri sur jointure ...
+	$boucle->hash .= "
+	\$senstri = '';
+	\$tri = $_tri;
+	if (\$tri){
+		\$senstri = $_sens;
+		\$senstri = (\$senstri<0)?' DESC':'';
+	};
+	";
+	$boucle->order[] = "\$tri.\$senstri";
+}
 
 ?>
