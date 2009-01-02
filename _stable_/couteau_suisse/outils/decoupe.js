@@ -38,7 +38,7 @@ function onglets_init() {
 	});
 	// clic des <a>, au cas ou...
 	jQuery('h2.onglets_titre a', this).click(function(e){
-		jQuery(this).parent().click();
+		jQuery(this).parents('h2').click();
 		if (e.stopPropagation) e.stopPropagation();
 		e.cancelBubble = true;
 		return false;
