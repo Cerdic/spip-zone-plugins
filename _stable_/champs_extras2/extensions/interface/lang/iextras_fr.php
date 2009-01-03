@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_champ' => 'Nom du champ',
 	'label_enum' => 'Liste de valeurs',
 	'label_label' => 'Label de la saisie',
+	'label_obligatoire' => 'Champ obligatoire&nbsp;?',
 	'label_precisions' => 'Pr&eacute;cisions de la saisie',
 	'label_sql' => 'D&eacute;finition SQL',
 	'label_table' => 'Objet',

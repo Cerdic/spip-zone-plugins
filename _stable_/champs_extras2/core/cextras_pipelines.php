@@ -68,6 +68,7 @@ function cextras_creer_contexte($c, $contexte_flux) {
 	$contexte['champ_extra'] = $c->champ;
 	$contexte['label_extra'] = _T($c->label);
 	$contexte['precisions_extra'] = _T($c->precisions);
+	$contexte['obligatoire_extra'] = $c->obligatoire ? 'obligatoire' : '';
 	$contexte['valeur_extra'] = $contexte_flux[$c->champ];
 	$contexte['enum_extra'] = $c->enum;
 	// ajouter 'erreur_extra' dans le contexte s'il y a une erreur sur le champ
@@ -83,22 +84,13 @@ function cextras_creer_contexte($c, $contexte_flux) {
 
 // recuperer en bdd les valeurs des champs extras
 // en une seule requete...
-function cextra_quete_valeurs_extras($extras, $contexte){
+
+function cextra_quete_valeurs_extras($extras, $type, $id){
 	
 	// nom de la table et de la cle primaire
-	$table = table_objet_sql($extras[0]->table);
-	$_id = id_table_objet($extras[0]->table);
-
-	// recuperer l'id de la cle primaire
-	// attention, l'ordre est important car les pipelines afficher et editer
-	// ne transmettent pas les memes arguments
-	if (isset($contexte[$_id])) {
-		$id = $contexte[$_id];		
-	} elseif (isset($contexte['id_objet'])) {
-		$id = $contexte['id_objet'];
-	} elseif (isset($contexte['id']) and intval($contexte['id'])) { // peut valoir 'new'
-		$id = $contexte['id'];
-	}
+	$table = table_objet_sql($type);
+	$_id = id_table_objet($type);
+	
 	// liste des champs a recuperer
 	$champs = array();
 	foreach ($extras as $e) {
@@ -134,30 +126,49 @@ function cextras_get_extras_match($nom) {
 function cextras_editer_contenu_objet($flux){
 	// recuperer les champs crees par les plugins
 	if ($extras = cextras_get_extras_match($flux['args']['type'])) {
+		
+		// les saisies a ajouter seront mises dedans.
+		$inserer_saisie = '';
+		
 		foreach ($extras as $c) {
 
-			// le contexte possede deja l'entree SQL, 
-			// calcule par le pipeline formulaire_charger.
-			$contexte = cextras_creer_contexte($c, $flux['args']['contexte']);
-			$extras[$c->champ] = $contexte[$c->champ];
+			// on affiche seulement les champs dont la saisie est autorisee 
+			$type = objet_type($c->table).'_'.$c->champ;
+			if (autoriser('modifierextra', $type, $flux['args']['id'], '', array(
+				'type' => $flux['args']['type'], 
+				'id_objet' => $flux['args']['id'], 
+				'contexte' => $flux['args']['contexte']))) 
+			{
+						
+				// le contexte possede deja l'entree SQL, 
+				// calcule par le pipeline formulaire_charger.
+				$contexte = cextras_creer_contexte($c, $flux['args']['contexte']);
+				$extras[$c->champ] = $contexte[$c->champ];
 
-			// calculer le bon squelette et l'ajouter
-			if (!find_in_path(
-			($f = 'extra-saisies/'.$c->type).'.html')) {
-				// si on ne sait pas, on se base sur le contenu
-				// pour choisir ligne ou bloc
-				$f = strstr($contexte[$c->champ], "\n")
-					? 'extra-saisies/bloc'
-					: 'extra-saisies/ligne';
-			}
-			$extra = recuperer_fond($f, $contexte);
+				// calculer le bon squelette et l'ajouter
+				if (!find_in_path(
+				($f = 'extra-saisies/'.$c->type).'.html')) {
+					// si on ne sait pas, on se base sur le contenu
+					// pour choisir ligne ou bloc
+					$f = strstr($contexte[$c->champ], "\n")
+						? 'extra-saisies/bloc'
+						: 'extra-saisies/ligne';
+				}
+				$saisie = recuperer_fond($f, $contexte);
 
-			// Signaler a cextras_pre_edition que le champ est edite
-			// (cas des checkbox multiples quand on renvoie vide
-			//  qui n'envoie rien de rien, meme pas un array vide)
-			$extra .= '<input type="hidden" name="cextra_'.$c->champ.'" value="1" />';
-
-			$flux['data'] = preg_replace('%(<!--extra-->)%is', $extra."\n".'$1', $flux['data']);			
+				// Signaler a cextras_pre_edition que le champ est edite
+				// (cas des checkbox multiples quand on renvoie vide
+				//  qui n'envoient rien de rien, meme pas un array vide)
+				$saisie .= '<input type="hidden" name="cextra_'.$c->champ.'" value="1" />';
+				
+				// ajouter la saisie.
+				$inserer_saisie .= $saisie;
+			}			
+		}
+		
+		// inserer les differentes saisies entre <ul>
+		if ($inserer_saisie) {
+			$flux['data'] = preg_replace('%(<!--extra-->)%is', '<ul>'.$inserer_saisie.'</ul>'."\n".'$1', $flux['data']);
 		}
 	}
 
@@ -190,12 +201,21 @@ function cextras_afficher_contenu_objet($flux){
 	// recuperer les champs crees par les plugins
 	if ($extras = cextras_get_extras_match($flux['args']['type'])) {
 
-		$contexte = cextra_quete_valeurs_extras($extras, $flux['args']['contexte']);
+		$contexte = cextra_quete_valeurs_extras($extras, $flux['args']['type'], $flux['args']['id_objet']);
 		$contexte = array_merge($flux['args']['contexte'], $contexte);
 
 		foreach($extras as $c) {
-				$contexte = cextras_creer_contexte($c, $contexte);
+			
+			// on affiche seulement les champs dont la vue est autorisee 
+			$type = objet_type($c->table).'_'.$c->champ;
+			if (autoriser('voirextra', $type, $flux['args']['id_objet'], '', array(
+				'type' => $flux['args']['type'], 
+				'id_objet' => $flux['args']['id_objet'], 
+				'contexte' => $contexte))) 
+			{
 				
+				$contexte = cextras_creer_contexte($c, $contexte);
+			
 				// calculer le bon squelette et l'ajouter
 				if (!find_in_path(
 				($f = 'extra-vues/'.$c->type).'.html')) {
@@ -206,10 +226,38 @@ function cextras_afficher_contenu_objet($flux){
 						: 'extra-vues/ligne';
 				}
 				$extra = recuperer_fond($f, $contexte);
-				$flux['data'] .= "\n".$extra;			
+				$flux['data'] .= "\n".$extra;
+			}		
 		}
 	}
 	return $flux;
+}
+
+// verification de la validite des champs extras
+function cextras_formulaire_verifier($flux){
+	// recuperer les champs crees par les plugins
+	$form = $flux['args']['form'];
+	// formulaire d'edition ?
+	if (strpos($form, 'editer_') !== false) {
+		$type = str_replace('editer_','',$form);
+		// des champs extras correspondent ?
+		if ($extras = cextras_get_extras_match($type)) {
+			foreach ($extras as $c) {
+				if ($c->obligatoire AND !_request($c->champ)) {
+					$flux['data'][$c->champ] = _T('info_obligatoire');
+				}
+				// ajouter une fonction de verification ici
+				// verifier_extra($c, _request($c->champ))
+			}
+		}
+	}	
+	return $flux;
+}
+
+
+// declarer les autorisations specifiques aux extras
+function cextras_autoriser(){
+	include_spip('inc/cextras_autoriser');
 }
 
 ?>

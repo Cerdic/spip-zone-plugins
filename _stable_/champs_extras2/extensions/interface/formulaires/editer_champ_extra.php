@@ -8,19 +8,13 @@ function formulaires_editer_champ_extra_charger_dist($id_extra='new', $redirect=
 	// nouveau ?
 	$new = ($id_extra == 'new') ? ' ': '';
 	
-	// valeur par defaut
-	$valeurs = array(
-		'champ' => '',
-		'table' => '',
-		'type' => '',
-		'label' => '',
-		'precisions' => '',
-		'enum' => '',
-		'sql' => "text NOT NULL DEFAULT ''",
+	// valeur par defaut (on utilise les valeurs d'un champ vide)
+	$c = new ChampExtra;
+	$valeurs = array_merge($c->toArray(), array(
 		'id_extra' => $id_extra,
 		'new' => $new,
 		'redirect' => $redirect,
-	);
+	));
 	
 	// si un extra est demande (pour edition)
 	// remplir les valeurs avec infos de celui-ci
@@ -129,7 +123,7 @@ function formulaires_editer_champ_extra_traiter_dist($id_extra='new', $redirect=
 // recuperer les valeurs postees par le formulaire
 function iextras_post_formulaire() {
 	$extra = array();
-	foreach(array('champ', 'table', 'type', 'label', 'sql', 'precisions', 'enum') as $c) {
+	foreach(array('champ', 'table', 'type', 'label', 'sql', 'precisions', 'obligatoire', 'enum') as $c) {
 		$extra[$c] = _request($c);
 	}
 	return $extra;	

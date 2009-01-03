@@ -2,7 +2,7 @@
 	<nom>Champs Extras2</nom>
 	<auteur>Matthieu Marcillaud, Fil</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.5</version>
+	<version>0.6</version>
 	<description>
 	Creer de nouveaux champs aux objets d'&eacute;dition de SPIP
 	</description>
@@ -10,6 +10,10 @@
 	<prefix>cextras</prefix>
 	<options>cextras_options.php</options>
 	<necessite id="SPIP" version="[2.0;]" />
+ 	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>cextras_pipelines.php</inclure>
+	</pipeline>	
  	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/cextras.php</inclure>
@@ -24,6 +28,10 @@
 	</pipeline>	
  	<pipeline>
 		<nom>pre_edition</nom>
+		<inclure>cextras_pipelines.php</inclure>
+	</pipeline>
+ 	<pipeline>
+		<nom>formulaire_verifier</nom>
 		<inclure>cextras_pipelines.php</inclure>
 	</pipeline>	
 </plugin>
