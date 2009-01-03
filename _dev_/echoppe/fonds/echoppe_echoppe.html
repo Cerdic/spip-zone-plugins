@@ -54,7 +54,7 @@
 		#PAGINATION
 		<table width="100%">
 			<tbody>
-				<BOUCLE_LesProduits(ECHOPPE_PRODUITS){par maj}{statut IN propose,prepa,publie}{pagination 10}>
+				<BOUCLE_LesProduits(ECHOPPE_PRODUITS){par maj}{inverse}{statut IN propose,prepa,publie}{pagination 10}>
 					<tr class="tr_liste">
 						<td style="width: 11px;"><img src="[(#STATUT|=={prepa}|?{[(#CHEMIN{images/puce-blanche.gif})],''})][(#STATUT|=={propose}|?{[(#CHEMIN{images/puce-orange.gif})],''})][(#STATUT|=={publie}|?{[(#CHEMIN{images/puce-verte.gif})],''})][(#STATUT|=={poubelle}|?{[(#CHEMIN{images/puce-poubelle.gif})],''})]" alt="statut #STATUT"/></td>
 						<td class="arial2">
