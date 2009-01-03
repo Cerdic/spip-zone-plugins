@@ -99,6 +99,8 @@ function critere_tri_dist($idb, &$boucles, $crit) {
 	$_variable = !isset($crit->param[2][0]) ? "'$idb'" : calculer_liste(array($crit->param[2][0]), array(), $boucles, $boucle->id_parent);
 
 	$_tri = "((\$t=(isset(\$Pile[0]['tri'.$_variable]))?\$Pile[0]['tri'.$_variable]:$_champ_defaut)?preg_replace(',[^\w],','',\$t):'')";
+	
+	$_sens_defaut = "(is_array(\$s=$_sens_defaut)?(isset(\$s[\$st=$_tri])?\$s[\$st]:reset(\$s)):\$s)";
 	$_sens ="((intval(\$t=(isset(\$Pile[0]['sens'.$_variable]))?\$Pile[0]['sens'.$_variable]:$_sens_defaut)==-1 OR \$t=='inverse')?-1:1)";
 
 	$boucle->modificateur['tri_champ'] = $_tri;
