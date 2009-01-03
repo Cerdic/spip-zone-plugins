@@ -21,7 +21,7 @@
 <multi>
 	[fr]
 	Ce plugin est destin&eacute; &agrave; afficher des albums web du service Google Picasa Web Album.<br />
-Il suffit de d&#39;ins&eacute;rer la balise <code> <picasa | nom_de_l_album></code> et de param&egrave;trer dans Config le nom d&#39;utilisateur Google.<br />
+Il suffit de d&#39;ins&eacute;rer la balise <code> &lt;picasa | nom_de_l_album&gt;</code> et de param&egrave;trer dans Config le nom d&#39;utilisateur Google.<br />
 D&#39;autres valeurs peuvent &ecirc;tre utilis&eacute;es telles que:<br />
 <ul>
 <li>picasa_utilisateur : pour ne pas mettre l&apos;utilisateur par d&eacute;faut.</li>
@@ -29,10 +29,10 @@ D&#39;autres valeurs peuvent &ecirc;tre utilis&eacute;es telles que:<br />
 <li>picasa_album : titre de l&apos;album (nom de la variable facultatif)</li>
 <li>picasa_authkey : pour acc&eacute;der aux albums avec cl&eacute; d&#39;authentification (rarement utilis&eacute;).</li>
 </ul>
-Exemple : <code> <picasa | nom_de_l_album | picasa_utilisateur = nom_utilisateur | picasa_nombre = 15></code>
+Exemple : <code> &lt;picasa | nom_de_l_album | picasa_utilisateur = nom_utilisateur | picasa_nombre = 15&gt;</code>
 	[en]
 	This plugin is design so as to display the Picasa Web Album Google service.<br />
-You just need to write this code inside an article <code> <picasa | album_name></code> and to setup your Google username in the plugin Config.<br />
+You just need to write this code inside an article <code> &lt;picasa | album_name&gt;</code> and to setup your Google username in the plugin Config.<br />
 Some other parameter are available like:<br />
 <ul>
 <li>picasa_utilisateur : so as to change the default Google username for this album.</li>
@@ -40,8 +40,7 @@ Some other parameter are available like:<br />
 <li>picasa_album : Picasa album title (this parameter is optional if defined previously)</li>
 <li>picasa_authkey : to show authenticated Picasa Web Album (rarely used).</li>
 </ul>
-	</en>
-Example : <code> <picasa | album_name | picasa_utilisateur = username | picasa_nombre = 15></code>
+Example : <code> &lt;picasa | album_name | picasa_utilisateur = username | picasa_nombre = 15&gt;</code>
 </multi>
 	</description>
 	<prefix>
