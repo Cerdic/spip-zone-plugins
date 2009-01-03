@@ -1,0 +1,41 @@
+[(#REM) titre=Picasa]
+
+[(#REM) icone=pwa-logo.gif]
+
+
+<!-- descriptif=
+
+<img src='#CHEMIN{pwa-fr.gif}' />
+<h4>
+Configuration du plugin Picasa
+</h4>
+Certains param&egrave;tres &agrave; modifier pour utiliser le mod&egrave;le Picasa dans les articles.<br />
+<hr>
+
+-->
+
+
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+
+<fieldset><legend>Param&egrave;trage du mod&eacute;le Picasa</legend>
+<p>
+	<label>Nom d&apos;utilisateur Google propri&eacute;taire du compte:</label>
+	<label><input type="text" name="username" value="[(#CONFIG{picasa/username}|sinon{"Entrez votre pseudo"})]" size="30" /></label>
+</p>
+<p>
+	<label><input type="checkbox" name="infopanel"[ checked="(#CONFIG{picasa/infopanel}|!={''}|?{'checked'})"] class="fondl" /> Activer la barre d&apos;information.</label>
+</p>
+<p>
+	<label><input type="checkbox" name="miniatures"[ checked="(#CONFIG{picasa/miniatures}|!={''}|?{'checked'})"] class="fondl" /> Activer la barre des miniatures.</label>
+</p>
+<p>
+	<label><input type="checkbox" name="liens"[ checked="(#CONFIG{picasa/liens}|!={''}|?{'checked'})"] class="fondl" /> Activer le lien pour afficher l&apos;image en grand. (fonction instable, &agrave; d&eacute;sactiver de pr&eacute;f&eacute;rence)</label>
+</p>
+  </fieldset>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
