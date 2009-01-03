@@ -65,7 +65,7 @@ function cextras_enum($enum, $val='', $type='valeur', $name='') {
 // en fonction des parametres donnes dans la classe ChampExtra
 function cextras_creer_contexte($c, $contexte_flux) {
 	$contexte = array();
-	$contexte['champ_extra'] = 'extra_'.$c->champ;
+	$contexte['champ_extra'] = $c->champ;
 	$contexte['label_extra'] = _T($c->label);
 	$contexte['precisions_extra'] = _T($c->precisions);
 	$contexte['valeur_extra'] = $contexte_flux[$c->champ];
@@ -153,7 +153,8 @@ function cextras_editer_contenu_objet($flux){
 			$extra = recuperer_fond($f, $contexte);
 
 			// Signaler a cextras_pre_edition que le champ est edite
-			// (cas des checkbox multiples quand on renvoie vide)
+			// (cas des checkbox multiples quand on renvoie vide
+			//  qui n'envoie rien de rien, meme pas un array vide)
 			$extra .= '<input type="hidden" name="cextra_'.$c->champ.'" value="1" />';
 
 			$flux['data'] = preg_replace('%(<!--extra-->)%is', $extra."\n".'$1', $flux['data']);			
@@ -171,7 +172,7 @@ function cextras_pre_edition($flux){
 	if ($extras = cextras_get_extras_match(objet_type($flux['args']['table']))) {
 		foreach ($extras as $c) {
 			if (_request('cextra_'.$c->champ)) {
-				$extra = _request('extra_'.$c->champ);
+				$extra = _request($c->champ);
 				if (is_array($extra))
 					$extra = join(',',$extra);
 				$flux['data'][$c->champ] = corriger_caracteres($extra);
