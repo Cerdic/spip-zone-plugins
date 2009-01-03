@@ -1,6 +1,6 @@
-[(#REM) Modèle pour l'affichage d'un album photo Picasa Web Album]
+[(#REM) Modele pour l'affichage d'un album photo Picasa Web Album]
 
-<script>
+<script type="text/javascript">
 	    var user = '[(#ENV{picasa_utilisateur}|?{#ENV{picasa_utilisateur},#CONFIG{picasa/username}})]';
 	    var album = '[(#ENV{picasa_album}|?{#ENV{picasa_album},#ENV{class}})]';
 	    var maxres = [(#ENV{picasa_nombre}|?{#ENV{picasa_nombre},0})]; // 0 - for all;
