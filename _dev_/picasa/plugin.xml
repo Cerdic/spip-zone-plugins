@@ -1,0 +1,64 @@
+<plugin>
+	<nom>
+	<multi>
+	[en]Picasa Web Album display
+	[fr]Album Photo Picasa en ligne
+	</multi>
+	</nom>
+	<auteur>
+	S&eacute;bastien Boureux<br />
+<multi>[fr] Script original d&#39;Anton Shevchuk autheur de l&#39;article "Google Picasa on your site"
+[en] Original script from Anton Shevchuk author of "Google Picasa on your site"
+</multi>
+	</auteur>
+	<version>
+	0.3
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+<multi>
+	[fr]
+	Ce plugin est destin&eacute; &agrave; afficher des albums web du service Google Picasa Web Album.<br />
+Il suffit de d&#39;ins&eacute;rer la balise <code> <picasa | nom_de_l_album></code> et de param&egrave;trer dans Config le nom d&#39;utilisateur Google.<br />
+D&#39;autres valeurs peuvent &ecirc;tre utilis&eacute;es telles que:<br />
+<ul>
+<li>picasa_utilisateur : pour ne pas mettre l&apos;utilisateur par d&eacute;faut.</li>
+<li>picasa_nombre : pour limiter l&#39;affichage aux 'n' premi&egrave;res images (0 - sans limite par d&eacute;faut)</li>
+<li>picasa_album : titre de l&apos;album (nom de la variable facultatif)</li>
+<li>picasa_authkey : pour acc&eacute;der aux albums avec cl&eacute; d&#39;authentification (rarement utilis&eacute;).</li>
+</ul>
+Exemple : <code> <picasa | nom_de_l_album | picasa_utilisateur = nom_utilisateur | picasa_nombre = 15></code>
+	[en]
+	This plugin is design so as to display the Picasa Web Album Google service.<br />
+You just need to write this code inside an article <code> <picasa | album_name></code> and to setup your Google username in the plugin Config.<br />
+Some other parameter are available like:<br />
+<ul>
+<li>picasa_utilisateur : so as to change the default Google username for this album.</li>
+<li>picasa_nombre : so as to limit the images number to display from this album (0 = no limit, set by default)</li>
+<li>picasa_album : Picasa album title (this parameter is optional if defined previously)</li>
+<li>picasa_authkey : to show authenticated Picasa Web Album (rarely used).</li>
+</ul>
+	</en>
+Example : <code> <picasa | album_name | picasa_utilisateur = username | picasa_nombre = 15></code>
+</multi>
+	</description>
+	<prefix>
+	picasa
+	</prefix>
+	<fonctions>picasa_fonctions.php</fonctions>
+	<pipeline>
+	  <nom>insert_head</nom>
+	  <inclure>picasa_fonctions.php</inclure>
+	  <action>insert_head</action>
+  </pipeline>
+  
+  <!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+        <nom>header_prive</nom>
+        <inclure>picasa_fonctions.php</inclure>
+    </pipeline>
+	
+<necessite id='CFG' version='[1.0;]' />
+</plugin>
