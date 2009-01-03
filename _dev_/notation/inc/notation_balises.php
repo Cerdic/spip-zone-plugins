@@ -8,17 +8,29 @@
 *  
 **/
 
+define('_NOTATION_AFFICHAGE_RAPIDE',1);
+
 function notation_en_etoile($nb, $id, $clicable=false){
 	include_spip('inc/notation');
 	$ret = '';
 	if ($nb>0 && $nb<=0.5) $nb=1;
 	$nb = round($nb);
-	
-	$class = $clicable ? 'auto-submit-star' : 'star';
-	$disabled = $clicable ? '' : "disabled='disabled'";
-	for ($i=1; $i<=notation_get_nb_notes(); $i++){
-		$checked = ($i==$nb) ? "checked='checked' " : "";
-		$ret .= "<input name='notation-$id' type='radio' class='$class' value='$i' $checked $disabled/>\n";
+
+	if ($clicable OR !_NOTATION_AFFICHAGE_RAPIDE){
+		$class = $clicable ? 'auto-submit-star' : 'star';
+		$disabled = $clicable ? '' : "disabled='disabled'";
+		for ($i=1; $i<=notation_get_nb_notes(); $i++){
+			$checked = ($i==$nb) ? "checked='checked' " : "";
+			$ret .= "<input name='notation-$id' type='radio' class='$class' value='$i' $checked $disabled/>\n";
+		}
+	}
+	else 
+	// eviter de generer X boutons radio inactifs remplaces par le javascript au chargement
+	{
+		for ($i=1; $i<=notation_get_nb_notes(); $i++){
+			$checked = ($i<=$nb) ? " star_on" : "";
+			$ret .= "<div class='star star_group_notation-$id star_readonly$checked'><a title='$nb'>$nb</a></div>";
+		}
 	}
 	return "<div class='notation_note'>$ret</div>";
 }
