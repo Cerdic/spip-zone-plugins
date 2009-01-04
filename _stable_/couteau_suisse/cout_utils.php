@@ -457,7 +457,6 @@ function cs_get_code_variable($variable, $valeur) {
 	} else
 		$valeur = cs_php_format($valeur, $cs_variable['format']!=_format_NOMBRE);
 	$code = '';
-spip_log("!!! $variable => $valeur");
 	foreach($cs_variable as $type=>$param) if (preg_match(',^code(:(.*))?$,', $type, $regs)) {
 		$eval = '$test = ' . (isset($regs[2])?str_replace('%s', $valeur, $regs[2]):'true') . ';';
 		$test = false;
