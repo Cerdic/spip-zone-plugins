@@ -168,10 +168,14 @@ add_variable( array(
 	'check' => 'couteauprive:urls_minuscules',
 	'defaut' => 0,
 ));
-
 add_variable( array(
 	'nom' => 'urls_avec_id',
 	'check' => 'couteauprive:urls_avec_id',
+	'defaut' => 0,
+));
+add_variable( array(
+	'nom' => 'urls_avec_id2',
+	'check' => 'couteauprive:urls_avec_id2',
 	'defaut' => 0,
 ));
 
@@ -190,7 +194,8 @@ switch(\$GLOBALS['type_urls']) {
 	'categorie' => 'admin',
 	'description' => '<:type_urls::>'
 		.(defined('_SPIP19300')?'<radio_type_urls3 valeur="propres/propres2/libres/arbo/propres-qs"><:type_urls:1:></radio_type_urls3>':''),
-	'pipelinecode:creer_chaine_url' => "if(%%urls_avec_id%%) {\$flux['data']=\$flux['data'].','.\$flux['objet']['id_objet'];}
+	'pipelinecode:creer_chaine_url' => "if(%%urls_avec_id2%%) {@define('_CS_URL_SEP','-'); \$flux['data']=\$flux['objet']['id_objet']._CS_URL_SEP.\$flux['data'];}
+if(%%urls_avec_id%%) {@define('_CS_URL_SEP',','); \$flux['data'].=_CS_URL_SEP.\$flux['objet']['id_objet'];}
 if(%%urls_minuscules%%) {\$flux['data']=strtolower(\$flux['data']);}",
 ));
 
