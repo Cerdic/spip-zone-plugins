@@ -88,6 +88,7 @@ function inc_imageflow_header_dist () {
 	// idem pour javascript
 	if($path = find_in_path($f = "imageflow/imageflow.js")) {
 		$js = compacte($path);
+		//$js = $path; // valider pour éviter la compression (pas toujours souhaitable)
 	}	
 	else {
 		$error[] = $f;
@@ -110,6 +111,49 @@ function inc_imageflow_header_dist () {
 		. $result
 		. "\n"
 		;
+
+	// CSS
+	//$slider = "imageflow/slider.png";
+	$slider = find_in_path(_DIR_IMAGEFLOW_IMAGES . $preferences_meta['slider']);
+
+	// correction du path pour le slider
+	// + position du slider pour IE
+	// + centrer le scrollbar pour IE
+	$result .= "
+<style type=\"text/css\" media=\"screen\">
+#imageflow {background-color:transparent;}
+#scrollbar-box {text-align:center}
+#scrollbar{margin:0 auto}
+#slider {background-image:url(" . $slider . ");top:0;left:0}
+#images {overflow: hidden;}
+#lightbox {text-align:center;width:512px;height:384px;margin:0 auto}
+#affichage {max-width:512px;max-height:384px;margin:0 auto;}
+.mouse-hover {cursor:pointer}
+</style>
+"
+		; 
+
+	if (
+		($preferences_meta['slideshow'] == 'oui')
+		|| (
+			($preferences_meta['active_description'] == 'oui')
+			&& ($preferences_meta['active_alert'] != 'oui')
+			)
+		)
+	{
+		$js = find_in_path($f = "javascript/imageflow_slideshow.js");
+		$result .= "<script type=\"text/javascript\" src=\"".$js."\"></script>\n
+<style type=\"text/css\" media=\"screen\">
+#lightbox {position:relative}
+#affichage {position:absolute;top:0;left:0;z-index:1024}
+#affichage_cache {}
+.affichage_legend {position:absolute;top:0;border:1px solid #000;background-color:#eee;color:#000;display:none;z-index:2000;padding:0 1ex}
+</style>
+		"
+		;
+	}
+
+
 
 	// precharger les images ?
 	if ($preferences_meta['preloader'] == 'oui') 
@@ -215,45 +259,6 @@ $(document).ready(function(){
 		";
 	}
 	
-	//$slider = "imageflow/slider.png";
-	$slider = find_in_path(_DIR_IMAGEFLOW_IMAGES . $preferences_meta['slider']);
-
-	// correction du path pour le slider
-	// + position du slider pour IE
-	// + centrer le scrollbar pour IE
-	$result .= "
-<style type=\"text/css\" media=\"screen\">
-#imageflow {background-color:transparent;}
-#scrollbar-box {text-align:center}
-#scrollbar{margin:0 auto}
-#slider {background-image:url(" . $slider . ");top:0;left:0}
-#images {overflow: hidden;}
-#lightbox {text-align:center;width:512px;height:384px;margin:0 auto}
-#affichage {max-width:512px;max-height:384px;margin:0 auto}
-.mouse-hover {cursor:pointer}
-</style>
-"
-		; 
-
-	if (
-		($preferences_meta['slideshow'] == 'oui')
-		|| (
-			($preferences_meta['active_description'] == 'oui')
-			&& ($preferences_meta['active_alert'] != 'oui')
-			)
-		)
-	{
-		$js = find_in_path($f = "javascript/imageflow_slideshow.js");
-		$result .= "<script type=\"text/javascript\" src=\"".$js."\"></script>\n
-<style type=\"text/css\" media=\"screen\">
-#lightbox {position:relative}
-#affichage {position:absolute;top:0;left:0;z-index:1024}
-#affichage_cache {}
-.affichage_legend {position:absolute;top:0;border:1px solid #000;background-color:#eee;color:#000;display:none;z-index:2000;padding:0 1ex}
-</style>
-		"
-		;
-	}
 	return ($result);
 }
 ?>
