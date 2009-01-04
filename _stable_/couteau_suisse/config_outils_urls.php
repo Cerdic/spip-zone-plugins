@@ -193,7 +193,7 @@ switch(\$GLOBALS['type_urls']) {
 }",
 	'categorie' => 'admin',
 	'description' => '<:type_urls::>'
-		.(defined('_SPIP19300')?'<radio_type_urls3 valeur="propres/propres2/libres/arbo/propres-qs"><:type_urls:1:></radio_type_urls3>':''),
+		.(defined('_SPIP19300')?'<radio_type_urls3 valeur="propres/propres2/libres/arbo/propres_qs"><:type_urls:1:></radio_type_urls3>':''),
 	'pipelinecode:creer_chaine_url' => "if(%%urls_avec_id2%%) {@define('_CS_URL_SEP','-'); \$flux['data']=\$flux['objet']['id_objet']._CS_URL_SEP.\$flux['data'];}
 if(%%urls_avec_id%%) {@define('_CS_URL_SEP',','); \$flux['data'].=_CS_URL_SEP.\$flux['objet']['id_objet'];}
 if(%%urls_minuscules%%) {\$flux['data']=strtolower(\$flux['data']);}",
