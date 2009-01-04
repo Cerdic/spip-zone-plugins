@@ -93,6 +93,7 @@ function add_outil($tableau) {
 function add_variable($tableau) {
 	global $cs_variables;
 	$nom = $tableau['nom'];
+	if(isset($tableau['check'])) $tableau['format'] = _format_NOMBRE;
 	// code '%s' par defaut si aucun code n'est defini
 	$test=false; 
 	foreach(array_keys($tableau) as $key) if($test=preg_match(',^code(:(.*))?$,', $key)) break;
@@ -102,7 +103,6 @@ function add_variable($tableau) {
 	// on fabrique ici une liste des chaines et une liste des nombres
 	if($tableau['format']==_format_NOMBRE) $cs_variables['_nombres'][] = $nom;
 		elseif($tableau['format']==_format_CHAINE) $cs_variables['_chaines'][] = $nom;
-
 }
 
 // retourne la valeur 'defaut' (format php) de la variable apres compilation du code
@@ -258,14 +258,14 @@ function cs_sauve_configuration() {
 		. "\n// Variables actives\n\$variables_actives =\n\t'" . join('|', $variables) . "';\n"
 		. "\n// Valeurs validees en metas\n\$valeurs_validees = array(\n" . join(",\n", $metas) . "\n);\n";
 
-include_spip('inc/charset');
-$sauve .= $temp = "\n######## "._T('couteauprive:pack_actuel_titre')." #########\n\n// "
-	. filtrer_entites(_T('couteauprive:pack_actuel_avert')."\n\n"
-		. "\$GLOBALS['cs_installer']['"._T('couteauprive:pack_actuel', array('date'=>cs_date()))."'] = array(\n\n\t// "
-		. _T('couteauprive:pack_outils_defaut')."\n"
-		. "\t'outils' =>\n\t\t'".join(",\n\t\t", $actifs)."',\n"
-		. "\n\t// "._T('couteauprive:pack_variables_defaut')."\n")
-	. "\t'variables' => array(\n\t" . join(",\n\t", $metas_actifs) . "\n\t)\n);\n";
+	include_spip('inc/charset');
+	$sauve .= $temp = "\n######## "._T('couteauprive:pack_actuel_titre')." #########\n\n// "
+		. filtrer_entites(_T('couteauprive:pack_actuel_avert')."\n\n"
+			. "\$GLOBALS['cs_installer']['"._T('couteauprive:pack_actuel', array('date'=>cs_date()))."'] = array(\n\n\t// "
+			. _T('couteauprive:pack_outils_defaut')."\n"
+			. "\t'outils' =>\n\t\t'".join(",\n\t\t", $actifs)."',\n"
+			. "\n\t// "._T('couteauprive:pack_variables_defaut')."\n")
+		. "\t'variables' => array(\n\t" . join(",\n\t", $metas_actifs) . "\n\t)\n);\n";
 
 	ecrire_fichier(_DIR_CS_TMP.'config.php', '<'."?php\n// Configuration de controle pour le plugin 'Couteau Suisse'\n\n$sauve?".'>');
 	if($_GET['cmd']=='pack') $GLOBALS['cs_pack_actuel'] = $temp;
@@ -457,6 +457,7 @@ function cs_get_code_variable($variable, $valeur) {
 	} else
 		$valeur = cs_php_format($valeur, $cs_variable['format']!=_format_NOMBRE);
 	$code = '';
+spip_log("!!! $variable => $valeur");
 	foreach($cs_variable as $type=>$param) if (preg_match(',^code(:(.*))?$,', $type, $regs)) {
 		$eval = '$test = ' . (isset($regs[2])?str_replace('%s', $valeur, $regs[2]):'true') . ';';
 		$test = false;

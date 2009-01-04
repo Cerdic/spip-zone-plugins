@@ -243,7 +243,7 @@ $spip191
 		return false;
 	});
 	
-	// clic surle bouton de permutation
+	// clic sur le bouton de permutation
 	jQuery('#cs_toggle_a').click( function() {
 		outils_toggle();
 		// annulation du clic
