@@ -86,9 +86,8 @@ function inc_imageflow_header_dist () {
 	}
 	
 	// idem pour javascript
-	if($path = find_in_path($f = "imageflow/imageflow.js")) {
-		$js = compacte($path);
-		//$js = $path; // valider pour éviter la compression (pas toujours souhaitable)
+	if($f = find_in_path("imageflow/imageflow.js")) {
+		$js = imageflow_inserer_js($f);
 	}	
 	else {
 		$error[] = $f;
@@ -97,7 +96,7 @@ function inc_imageflow_header_dist () {
 	if(!empty($css) && !empty($js)) {
 		$result .= ""
 			. "<link rel=\"stylesheet\" title=\"Standard\" href=\"".$css."\" type=\"text/css\" media=\"screen\" />\n"
-			. "<script type=\"text/javascript\" src=\"".$js."\"></script>\n"
+			. $js
 			;
 	}
 	foreach($error as $f) {
