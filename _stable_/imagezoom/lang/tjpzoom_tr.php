@@ -8,7 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => 'Bu sayfa b&uuml;y&uuml;tecin stilini d&uuml;zenlemeye yarar. Ki&#351;iselle&#351;tirilmi&#351; bir stil tan&#305;mlanabilir; <a href="http://plugins.spip.net/?page=article&amp;id_article=48">&ccedil;evrimi&ccedil;i makaleye bkz </a>.',
+	'descriptif' => 'Bu sayfa b&uuml;y&uuml;tecin stilini d&uuml;zenlemeye yarar. Ki&#351;iselle&#351;tirilmi&#351; bir stil tan&#305;mlanabilir; <a href="@spipnet@">&ccedil;evrimi&ccedil;i makaleye bkz </a>.',
 
 	// E
 	'example' => 'Grafik sonu&ccedil;',
