@@ -344,7 +344,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plugin_mauvaise_version' => 'Esta vers&atilde;o do plugin n&atilde;o &eacute; compat&iacute;vel com a sua vers&atilde;o de SPIP !',
 	'plugin_nom' => 'SpipBB: Gest&atilde;o dos f&oacute;runs de SPIP',
 	'post_aucun_pt' => 'nenhum&nbsp;!',
-	'post_efface_lui' => 'Este assunto compreende @
+	'post_efface_lui' => '<MODIF>Este assunto compreende @
 nbr_post@ mensagem (s). Apagados com ele&nbsp;!\\\\n',
 	'post_ip' => 'Mensagens afixadas a partir do endere&ccedil;o IP',
 	'post_propose' => 'Mensagem proposta',

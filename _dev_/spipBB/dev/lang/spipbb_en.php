@@ -358,7 +358,7 @@ _ {{The SpipBB plugin is still being developed. You use it at your own risk.}}
 	'plugin_mauvaise_version' => 'This version of the plugin cannot be used with your version of SPIP!',
 	'plugin_nom' => 'SpipBB: Management of SPIP forums',
 	'post_aucun_pt' => 'aucun&nbsp;!',
-	'post_efface_lui' => 'Ce sujet comprend @$nbr_post@ message(s). Effac&eacute;s avec lui&nbsp;!\\n',
+	'post_efface_lui' => '<MODIF>Ce sujet comprend @$nbr_post@ message(s). Effac&eacute;s avec lui&nbsp;!\\n',
 	'post_ip' => 'Posts sent from IP address',
 	'post_propose' => 'Suggested post',
 	'post_rejete' => 'Rejected post',

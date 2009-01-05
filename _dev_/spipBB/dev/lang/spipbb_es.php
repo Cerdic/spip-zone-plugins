@@ -367,7 +367,7 @@ _ [Acceso al panel de administraci&oacute;n-> .?exec=spipbb_configuration]',
 	'plugin_mauvaise_version' => '&iexcl;Esta versi&oacute;n del plugin no es compatible con la versi&oacute;n instalada de SPIP!',
 	'plugin_nom' => 'SpipBB : Gesti&oacute;n de los foros de SPIP',
 	'post_aucun_pt' => '&iexcl;ninguno!',
-	'post_efface_lui' => 'Este asunto abarca @
+	'post_efface_lui' => '<MODIF>Este asunto abarca @
 nbr_post@ mensaje(s). &iexcl;Borrados con &eacute;l!\\n',
 	'post_ip' => 'Mensajes enviados desde la direcci&oacute;n IP',
 	'post_propose' => 'Mensaje propuesto',

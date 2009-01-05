@@ -367,7 +367,7 @@ _ [Toegang tot het administratie paneel ->.?exec=spipbb_configuration]',
 	'plugin_mauvaise_version' => 'Deze plugin versie is niet verenigbaar met uw SPIP versie !',
 	'plugin_nom' => 'SpipBB: Beleid van de SPIP forums ',
 	'post_aucun_pt' => 'geen enkel&nbsp;!',
-	'post_efface_lui' => 'Dit onderwerp omvat @
+	'post_efface_lui' => '<MODIF>Dit onderwerp omvat @
 nbr_post@ bericht(en). Uitgewist met hem&nbsp;!\\n',
 	'post_ip' => 'Berichten opgesteld aan deel van het IP adres',
 	'post_propose' => 'Voorgesteld bericht',

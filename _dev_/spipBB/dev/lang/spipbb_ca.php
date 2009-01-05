@@ -367,7 +367,7 @@ _ [Acc&eacute;s al panell d\'administraci&oacute;-> .?exec=spipbb_configuration]
 	'plugin_mauvaise_version' => 'Aquesta versi&oacute; del plugin no &eacute;s compatible amb la vostra versi&oacute; d\'SPIP!',
 	'plugin_nom' => 'SpipBB: Gesti&oacute; dels f&ograve;rums d\'SPIP',
 	'post_aucun_pt' => 'cap!',
-	'post_efface_lui' => 'Aquest assumpte t&eacute; @
+	'post_efface_lui' => '<MODIF>Aquest assumpte t&eacute; @
 nbr_post@ missatge(s). Esborrats amb ell!\\n',
 	'post_ip' => 'Missatges enviats a partir de l\'adre&ccedil;a IP',
 	'post_propose' => 'Missatge proposat',

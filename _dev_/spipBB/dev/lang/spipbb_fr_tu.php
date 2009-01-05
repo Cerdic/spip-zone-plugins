@@ -367,7 +367,7 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]',
 	'plugin_mauvaise_version' => 'Cette version du plugin n\'est pas compatible avec ta version de SPIP !',
 	'plugin_nom' => 'SpipBB : Gestion des forums de SPIP',
 	'post_aucun_pt' => 'aucun&nbsp;!',
-	'post_efface_lui' => 'Ce sujet comprend @
+	'post_efface_lui' => '<MODIF>Ce sujet comprend @
 nbr_post@ message(s). Effac&eacute;s avec lui&nbsp;!\\n',
 	'post_ip' => 'Messages post&eacute; &agrave; partie de l\'adresse IP',
 	'post_propose' => 'Message propos&eacute;',
