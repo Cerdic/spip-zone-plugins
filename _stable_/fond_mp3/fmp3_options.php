@@ -59,6 +59,7 @@ if(!defined('_DIR_PLUGIN_FMP3')) {
 
 define("_DIR_FMP3_IMAGES", _DIR_PLUGIN_FMP3."images/");
 define("_FMP3_TYPEDOC", "audio/mpeg");
+define("_FMP3_JQUERY_JS", "javascript/jquery.fmp3.min.js");
 
 define("_FMP3_PREFERENCES_DEFAULT", 
 	serialize(

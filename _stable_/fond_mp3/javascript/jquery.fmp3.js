@@ -40,22 +40,24 @@ jQuery.fn.jmp3 = function(passedOptions){
 	
 	// use passed options, if they exist
 	if (passedOptions) {
-		jQuery.extend(options, passedOptions);
+		jQuery.extend(options, passedOptions); 
 	}
 	
 	// iterate through each object
-	return this.each(function(){
+	return this.each(function(){ 
 		// filename needs to be enclosed in tag (e.g. <span class='mp3'>mysong.mp3</span>)
 		var filename = options.filename + jQuery(this).html();
 		// build the player HTML
-		var mp3html = ""
+		var mp3html = "";
+		if(!jQuery.browser.msie) {
+			mp3html += ""
 			+ "<object classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000'"
 				+ " id='fmp3-object'"
 				+ " style='width:" + options.width + "px;height:" + options.height + "px'"
 				+ " codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab'>"
 			+ "<param name='movie' value='" + options.playerPath + "'"
 				+ "?"
-				+ "&file=" + options.mp3path 
+				+ "file=" + options.mp3path
 				+ "&autoStart=" + options.autoplay
 				+ "&backColor=" + options.backColor 
 				+ "&frontColor=" + options.frontColor
@@ -63,6 +65,9 @@ jQuery.fn.jmp3 = function(passedOptions){
 				+ "&showDownload=" + options.showDownload 
 				+ "&songVolume=" + options.songVolume + "' />"
 			+ "<param name='wmode' value='transparent' />"
+			;
+		}
+		mp3html += ""
 			+ "<embed wmode='transparent'"
 				+ " width='" + options.width + "'"
 				+ " height='" + options.height + "'"
@@ -70,7 +75,7 @@ jQuery.fn.jmp3 = function(passedOptions){
 				+ options.playerPath 
 				+ "?"
 				+ "showDownload=" + options.showDownload 
-				+ "&file=" + options.mp3path 
+				+ "&file=" + options.mp3path
 				+ "&autoStart=" + options.autoplay
 				+ "&backColor=" + options.backColor 
 				+ "&frontColor=" + options.frontColor
@@ -78,8 +83,12 @@ jQuery.fn.jmp3 = function(passedOptions){
 				+ "&songVolume=" + options.songVolume 
 				+ "'"
 				+ " type='application/x-shockwave-flash' pluginspage='http://www.macromedia.com/go/getflashplayer' />"
-			+ "</object>"
+				;
+		if (!jQuery.browser.msie) {
+			mp3html += ""
+				+ "</object>"
 			;
+		}
 		// don't display filename if option is set
 		if (options.showfilename == "false") { jQuery(this).html(""); }
 		jQuery(this).prepend(mp3html+"&nbsp;");

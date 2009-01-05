@@ -146,11 +146,13 @@ function balise_ILLUSTRATION_SONORE_dyn ($opt) {
 				
 				fmp3_log("balise: applique son $objet $id_objet");
 				
+				$son_dest = url_absolue($son_dest);
+				
 				/* 
 				 * bouton ecouter son 
 				 */
 				$bouton_play = fmp3_bouton_play (
-					url_absolue($son_dest)
+					  $son_dest
 					, $preferences_meta['autoStart']
 					, $preferences_meta['backColor']
 					, $preferences_meta['frontColor']

@@ -17,7 +17,7 @@ $flux .= "
 <!--[if IE]>
 <link rel='stylesheet' type='text/css' href='".url_absolue(find_in_path('css/fmp3_public_ie.css'))."' />
 <![endif]-->
-<script type='text/javascript' src='".url_absolue(find_in_path('javascript/jquery.fmp3.js'))."'></script>
+<script type='text/javascript' src='".url_absolue(find_in_path(_FMP3_JQUERY_JS))."'></script>
 <!-- / "._FMP3_PREFIX." -->
 
 ";
