@@ -27,4 +27,10 @@ function balise_FORMS_stat($args, $filtres) {
 	return $args;
 }
 
+function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_donnee_liee = 0, $class='', $script_validation = 'valide_form', $message_confirm='forms:avis_message_confirmation',$reponse_enregistree="forms:reponse_enregistree",$forms_obligatoires="") {
+	// on s'appelle pas #FORMULAIRE_FORMS, ce branchement n'est pas automatique !
+	include_spip('balise/formulaire_');
+	return balise_FORMULAIRE__dyn('forms',$id_form,$id_article,$id_donnee,$id_donnee_liee,$class,$script_validation,$message_confirm,$reponse_enregistree,$forms_obligatoires);
+}
+
 ?>
