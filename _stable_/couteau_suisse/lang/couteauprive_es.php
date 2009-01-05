@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'acces_admin' => 'Acceso de administradores:',
 	'action_rapide' => 'Acci&oacute;n r&aacute;pida, &iexcl;s&oacute;lo si sabes lo que haces!',
 	'action_rapide_non' => 'Acci&oacute;n r&aacute;pida, disponible una vez activada esta herramienta:',
+	'admins_seuls' => 'Los administradores solamente',
 	'attente' => 'Espera...',
 	'auteur_forum:description' => 'Pide a todos los autores de mensajes p&uacute;blicos que rellenen (&iexcl;al menos con una letra!) el campo &laquo;@_CS_FORUM_NOM@&raquo; para evitar las contribuciones completamente an&oacute;nimas.',
 	'auteur_forum:nom' => 'Sin foros an&oacute;nimos',
@@ -191,8 +192,8 @@ Esta herramienta puede acoplarse con &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.',
 
 	// E
 	'effaces' => 'Borrados',
-	'en_travaux:description' => '<MODIF>Permite mostrar un mensaje personalizable durante una fase de mantenimiento en todas las p&aacute;ginas p&uacute;blicas.
-[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]]',
+	'en_travaux:description' => 'Permite mostrar un mensaje personalizable durante una fase de mantenimiento en todas las p&aacute;ginas p&uacute;blicas y, eventualmente, en el espacio privado.
+[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]',
 	'en_travaux:nom' => 'Sitio en mantenimiento',
 	'erreur:bt' => '<span style=\\"color:red;\\">Atenci&oacute;n:</span> la barra de tipograf&iacute;as (version @version@) parece antigua.<br />La Navaja Suiza es compatible con una versi&oacute;n superior o igual a @mini@.',
 	'erreur:description' => '&iexcl;falta la id en la definici&oacute;n de la herramienta!',
@@ -333,6 +334,7 @@ Atenci&oacute;n, esta herramienta necesita el plugin {jQuery} : {Round Corners} 
 	'label:message_travaux' => 'Tu mensaje de mantenimiento:',
 	'label:moderation_admin' => 'Validar autom&aacute;ticamente los mensajes de los: ',
 	'label:paragrapher' => 'Siempre hacer p&aacute;rrafos:',
+	'label:prive_travaux' => 'Accesibilidad del espacio privado por:',
 	'label:puce' => 'Vi&ntilde;eta gr&aacute;fica p&uacute;blica &laquo;<html>-</html>&raquo;:',
 	'label:quota_cache' => 'Valor de la cuota de cach&eacute;:',
 	'label:racc_g1' => 'Entrada y salida del cambio a &laquo;<html>{{negrita}}</html>&raquo;:',
@@ -648,7 +650,7 @@ Aqu&iacute; puedes escoger escribir como super&iacute;ndices otras abreviaturas 
 	'urls_type_objet' => 'Objeto:',
 	'urls_url_calculee' => 'URL p&uacute;blica &laquo;&nbsp;@type@&nbsp;&raquo;:',
 	'urls_url_objet' => 'URL &laquo;propres&raquo; (propia) grabada:',
-	'urls_valeur_vide' => '(Un valor vac&iacute;o implica la supresi&oacute;n de la URL)',
+	'urls_valeur_vide' => '<MODIF>(Un valor vac&iacute;o implica la supresi&oacute;n de la URL)',
 
 	// V
 	'validez_page' => 'Para acceder a las modificaciones:',

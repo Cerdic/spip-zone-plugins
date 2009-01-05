@@ -626,7 +626,7 @@ Choisissez ici de mettre en exposant certains raccourcis suppl&eacute;mentaires,
 	'urls_type_objet' => '<NEW>Objet&nbsp;:',
 	'urls_url_calculee' => '<NEW>URL publique &laquo;&nbsp;@type@&nbsp;&raquo;&nbsp;:',
 	'urls_url_objet' => '<MODIF>URL &laquo;&nbsp;propres&nbsp;&raquo; enregistr&eacute;e&nbsp;:',
-	'urls_valeur_vide' => '<NEW>(Une valeur vide entraine la suppression de l\'URL)',
+	'urls_valeur_vide' => '<MODIF>(Une valeur vide entraine la suppression de l\'URL)',
 
 	// V
 	'validez_page' => 'Om de wijzigingen te bereiken :',

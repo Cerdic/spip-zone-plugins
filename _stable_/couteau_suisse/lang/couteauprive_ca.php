@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'acces_admin' => 'Acc&eacute;s administradors:',
 	'action_rapide' => 'Acci&oacute; r&agrave;pida, nom&eacute;s si sabeu qu&egrave; us feu! ',
 	'action_rapide_non' => 'Acci&oacute; r&agrave;pida, disponible un cop aquesta eina siga activada :',
+	'admins_seuls' => 'Nom&eacute;s els administradors',
 	'attente' => 'Espera...',
 	'auteur_forum:description' => 'Incita a tots els autors de missatges p&uacute;blics a omplir (amb una lletra com a m&iacute;nim!) el camp &laquo;@_CS_FORUM_NOM@&raquo; per tal d\'evitar les contribucions totalment an&ograve;nimes.',
 	'auteur_forum:nom' => 'No als f&ograve;rums an&ograve;nims',
@@ -191,8 +192,8 @@ Aquesta eina es pot acompanyar amb &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.',
 
 	// E
 	'effaces' => 'Esborrats',
-	'en_travaux:description' => '<MODIF>Permet mostrar un missatge personalitzat durant una fase de manteniment a tot el lloc p&uacute;blic.
-[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]]',
+	'en_travaux:description' => 'Permet mostrar un missatge personalitzat durant una fase de manteniment a tot el lloc p&uacute;blic, eventualment a la part privada.
+[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]',
 	'en_travaux:nom' => 'Lloc en manteniment',
 	'erreur:bt' => '<span style=\\"color:red;\\">Atenci&oacute;:</span> la barra tipogr&agrave;fica (version @version@) semble ancienne.<br />El Ganivet Su&iacute;s &eacute;s compatible amb una versi&oacute; superior o igual a @mini@.',
 	'erreur:description' => 'id absent en la definici&oacute; de l\'eina!',
@@ -333,6 +334,7 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'label:message_travaux' => 'El vostre missatge de manteniment:',
 	'label:moderation_admin' => 'Validar autom&agrave;ticament els missatges de: ',
 	'label:paragrapher' => 'Sempre par&agrave;grafs:',
+	'label:prive_travaux' => 'Accessibilitat de l\'espai privat per:',
 	'label:puce' => 'Car&agrave;cter p&uacute;blic &laquo;<html>-</html>&raquo; :',
 	'label:quota_cache' => 'Valor de la quota :',
 	'label:racc_g1' => 'Entrada i sortida de la posada en &laquo;<html>{{negreta}}</html>&raquo;:',
@@ -648,7 +650,7 @@ Podeu escollir aqu&iacute; de posar en exponent algunes dreceres suplement&agrav
 	'urls_type_objet' => 'Objecte:',
 	'urls_url_calculee' => 'URL p&uacute;blica &laquo;&nbsp;@type@&nbsp;&raquo;&nbsp;:',
 	'urls_url_objet' => 'URL &laquo;propis&raquo; enregistrat:',
-	'urls_valeur_vide' => 'Un valor buit provoca la supressi&oacute; del URL)',
+	'urls_valeur_vide' => '<MODIF>Un valor buit provoca la supressi&oacute; del URL)',
 
 	// V
 	'validez_page' => 'Per accedir a les modificacions:',

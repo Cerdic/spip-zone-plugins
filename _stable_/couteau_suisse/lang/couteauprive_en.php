@@ -616,7 +616,7 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'urls_type_objet' => '<MODF>Order:',
 	'urls_url_calculee' => 'URL PUBLIC  &laquo;&nbsp;@type@&nbsp;&raquo;:',
 	'urls_url_objet' => 'Saved "clean" URL:',
-	'urls_valeur_vide' => '(An empty value implies the removal of the URL)',
+	'urls_valeur_vide' => '<MODIF>(An empty value implies the removal of the URL)',
 
 	// V
 	'validez_page' => 'To access modifications:',

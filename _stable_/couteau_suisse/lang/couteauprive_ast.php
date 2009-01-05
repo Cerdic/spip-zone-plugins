@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'acces_admin' => 'Accesu alministraores:',
 	'action_rapide' => 'Aici&oacute;n r&aacute;pida, &iexcl;&uacute;nicamente si sabes lo que tas faciendo!',
 	'action_rapide_non' => 'Aici&oacute;n r&aacute;pida, disponible de magar que actives esta ferramienta:',
+	'admins_seuls' => 'Nam&aacute;i los alministradores',
 	'attente' => 'N\'espera...',
 	'auteur_forum:description' => 'Encamienta a tolos autores de mensaxes p&uacute;blicos escribir (&iexcl;polo menos una lletra!) nel campu &laquo;@_CS_FORUM_NOM@&raquo; col fin d\'evitar los mensaxes totalmente an&oacute;nimos.',
 	'auteur_forum:nom' => 'Ensin foros an&oacute;nimos',
@@ -192,8 +193,8 @@ Esta ferramienta puede acoplase con &laquo;[.->sommaire]&raquo;.',
 
 	// E
 	'effaces' => 'Desaniciaos',
-	'en_travaux:description' => '<MODIF>Permite amosar un mensaxe personalizable demientres una fase de mantenimientu en tou el sitiu p&uacute;blicu.
-[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]]',
+	'en_travaux:description' => 'Permite amosar un mensaxe personalizable, demientres una fase de mantenimientu, en tou el sitiu p&uacute;blicu y, eventualmente na parte privada.
+[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]',
 	'en_travaux:nom' => 'Sitiu n\'obres',
 	'erreur:bt' => '<span style=\\"color:red;\\">Atenci&oacute;n :</span> la barra tipogr&aacute;fica (versi&oacute;n @version@) paez antigua.<br />La Navaya Suiza ye compatible con una versi&oacute;n mayor o igual a @mini@.',
 	'erreur:description' => '&iexcl;falta la id na definici&oacute;n de la ferramienta!',
@@ -334,6 +335,7 @@ Atenci&oacute;n, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Ro
 	'label:message_travaux' => 'El mensaxe de mantenimientu:',
 	'label:moderation_admin' => 'Validar autom&aacute;ticamente los mensaxes de los: ',
 	'label:paragrapher' => 'Facer p&aacute;rrafos siempre:',
+	'label:prive_travaux' => 'Accesibilid&aacute; de l\'espaciu priv&aacute;u por:',
 	'label:puce' => '<NEW>Puce publique &laquo;<html>-</html>&raquo; :',
 	'label:quota_cache' => 'Valor de la cuota:',
 	'label:racc_g1' => 'Entrada y salida pa poner en &laquo;<html>{{negrina}}</html>&raquo;:',
@@ -406,8 +408,8 @@ _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<htm
 	'nouveaux' => 'Nuevos',
 
 	// O
-	'orientation:description' => '<NEW>3 nouveaux crit&egrave;res pour vos squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Id&eacute;al pour le classement des photos en fonction de leur forme.',
-	'orientation:nom' => '<NEW>Orientation des images',
+	'orientation:description' => '3 nuevos criterios pa les cadarmes: <code>{portrait}</code> (retratu), <code>{carre}</code> (cuadr&aacute;u) y <code>{paysage}</code> (paisaxe). Ideal pa la clasificaci&oacute;n de les fotos en funci&oacute;n de la so forma.',
+	'orientation:nom' => 'Orientaci&oacute;n de les imaxes',
 	'outil_actif' => 'Ferramienta activa',
 	'outil_activer' => 'Activar',
 	'outil_activer_le' => 'Activar la ferramienta',
@@ -443,19 +445,19 @@ Si los permisos d\'escritura lo autoricen, el c&oacute;digu PHP d\'embaxo podr&a
 Si reanicies el plugin calcando nun paquete, la Navaya Suiza reconfigurarase autom&aacute;ticamente en funci&oacute;n de los par&aacute;metros predefinios nesti paquete.',
 	'pack_du' => '• del paquete @pack@',
 	'pack_installe' => 'Afitamientu d\'un paquete de configuraci&oacute;n',
-	'pack_installer' => '<NEW>&Ecirc;tes-vous s&ucirc;r de vouloir r&eacute;initialiser le Couteau Suisse et installer le pack &laquo;&nbsp;@pack@&nbsp;&raquo; ?',
-	'pack_nb_plrs' => '<NEW>Il y a actuellement @nb@ &laquo;&nbsp;packs de configuration&nbsp;&raquo; disponibles.',
-	'pack_nb_un' => '<NEW>Il y a actuellement un &laquo;&nbsp;pack de configuration&nbsp;&raquo; disponible',
-	'pack_nb_zero' => '<NEW>Il n\'y a pas de &laquo;&nbsp;pack de configuration&nbsp;&raquo; disponible actuellement.',
-	'pack_outils_defaut' => '<NEW>Installation des outils par d&eacute;faut',
-	'pack_sauver' => '<NEW>Sauver la configuration actuelle',
-	'pack_sauver_descrip' => '<NEW>Le bouton ci-dessous vous permet d\'ins&eacute;rer directement dans votre fichier <b>@file@</b> les param&egrave;tres n&eacute;cessaires pour ajouter un &laquo;&nbsp;pack de configuration&nbsp;&raquo; dans le menu de gauche. Ceci vous permettra ult&eacute;rieurement de reconfigurer en un clic votre Couteau Suisse dans l\'&eacute;tat o&ugrave; il est actuellement.',
-	'pack_titre' => '<NEW>Configuration Actuelle',
-	'pack_variables_defaut' => '<NEW>Installation des variables par d&eacute;faut',
-	'par_defaut' => '<NEW>Par d&eacute;faut',
-	'paragrapher2:description' => '<NEW>La fonction SPIP <code>paragrapher()</code> ins&egrave;re des balises &lt;p&gt; et &lt;/p&gt; dans tous les textes qui sont d&eacute;pourvus de paragraphes. Afin de g&eacute;rer plus finement vos styles et vos mises en page, vous avez la possibilit&eacute; d\'uniformiser l\'aspect des textes de votre site.[[%paragrapher%]]',
-	'paragrapher2:nom' => '<NEW>Paragrapher',
-	'pipelines' => '<NEW>Pipelines utilis&eacute;s&nbsp;:',
+	'pack_installer' => '&iquest;Tas seguru de que quies reinicializar la Navaya Suiza e instalar el paquete &laquo;&nbsp;@pack@&nbsp;&raquo;?',
+	'pack_nb_plrs' => 'Actualmente hai @nb@ &laquo;&nbsp;paquetes de configuraci&oacute;n&nbsp;&raquo; disponibles.',
+	'pack_nb_un' => 'Actualmente hai un &laquo;&nbsp;paquete de configuraci&oacute;n&nbsp;&raquo; disponible',
+	'pack_nb_zero' => 'Nun hai deng&uacute;n &laquo;&nbsp;paquete de configuraci&oacute;n&nbsp;&raquo; disponible actualmente.',
+	'pack_outils_defaut' => 'Instalaci&oacute;n de les ferramientes por omisi&oacute;n',
+	'pack_sauver' => 'Guardar la configuraci&oacute;n actual',
+	'pack_sauver_descrip' => 'El bot&oacute;n d&eacute;mbaxo te permite enxertar direutamente nel archivu <b>@file@</b> los par&aacute;metros necesarios pa amesta-y un &laquo;&nbsp;paquete de configuraci&oacute;n&nbsp;&raquo; al men&uacute; de la izquierda. Esto va permitite posteriormente tornar nun clic la Navaya Suiza a l\'est&aacute;u nel que ta actualmente.',
+	'pack_titre' => 'Configuraci&oacute;n Actual',
+	'pack_variables_defaut' => 'Instalaci&oacute;n de les variables por omisi&oacute;n',
+	'par_defaut' => 'Por omisi&oacute;n',
+	'paragrapher2:description' => 'La funci&oacute;n de SPIP <code>paragrapher()</code> amesta-yos balices &lt;p&gt; y &lt;/p&gt; a tolos testos que nun tengan p&aacute;rrafos. A la fin d\'iguar m&aacute;s finamente los estilos y les paxinaciones, tienes la posibilid&aacute; d\'uniformizar l\'aspeutu de los testos del sitiu Web.[[%paragrapher%]]',
+	'paragrapher2:nom' => 'Amestar p&aacute;rrafos',
+	'pipelines' => 'Tuber&iacute;es (pipelines) utiliz&aacute;es:',
 	'pucesli:description' => '<NEW>Remplace les puces &laquo;-&raquo; (tiret simple) des articles par des listes not&eacute;es &laquo;-*&raquo; (traduites en HTML par : &lt;ul>&lt;li>&hellip;&lt;/li>&lt;/ul>) et dont le style peut &ecirc;tre personnalis&eacute; par css.',
 	'pucesli:nom' => '<NEW>Belles puces',
 
@@ -514,9 +516,9 @@ _ &bull; {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&ea
 	'statuts_tous' => '<NEW>Tous les statuts',
 	'suivi_forums:description' => '<NEW>Un auteur d\'article est toujours inform&eacute; lorsqu\'un message est publi&eacute; dans le forum public associ&eacute;. Mais il est aussi possible d\'avertir en plus : tous les participants au forum ou seulement les auteurs de messages en amont.[[%radio_suivi_forums3%]]',
 	'suivi_forums:nom' => '<NEW>Suivi des forums publics',
-	'supprimer_cadre' => '<NEW>Supprimer ce cadre',
+	'supprimer_cadre' => 'Desaniciar esti cuadru',
 	'supprimer_numero:description' => 'Aplica la funci&oacute;n de SPIP supprimer_numero() al conxuntu de {{t&iacute;tulos}}, de {{nomes}} y de {{tipos}} (de pallabres-clave) del sitiu p&uacute;blicu, ensin que\'l filtru supprimer_numero tea presente nes cadarmes.<br />Esta ye la sintaxis a utilizar nel contestu d\'un sitiu multill&iacute;ng&uuml;e: <code>1. <multi>My Title[fr]Mon Titre[ast]Mio T&iacute;tulu</multi></code>',
-	'supprimer_numero:nom' => '<NEW>Supprime le num&eacute;ro',
+	'supprimer_numero:nom' => 'Suprime\'l n&uacute;mberu',
 
 	// T
 	'titre' => 'La Navaya Suiza',
@@ -528,10 +530,10 @@ Notez : Pour les mots-cl&eacute;s, un alias de #TITRE_PARENT est #TITRE_GROUPE. 
 
 Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du secteur dans lequel est plac&eacute; l\'article en cours, puisque l\'identifiant #ID_SECTEUR (ou le champ \'id_secteur\') est disponible dans ce cas.[[%titres_etendus%]]',
 	'titre_parent:nom' => '<NEW>Balise #TITRE_PARENT',
-	'titre_tests' => '<NEW>Le Couteau Suisse - Page de tests&hellip;',
+	'titre_tests' => 'La Navaya Suiza - P&aacute;xina de prebes…',
 	'tous' => 'Toos',
-	'toutes_couleurs' => '<NEW>Les 36 couleurs des styles css :@_CS_EXEMPLE_COULEURS@',
-	'toutmulti:aide' => '<NEW>Blocs multilingues&nbsp;: <b><:trad:></b>',
+	'toutes_couleurs' => 'Los 36 colores de los estilos css :@_CS_EXEMPLE_COULEURS@',
+	'toutmulti:aide' => 'Bloques multilling&uuml;es: <b><:trad:></b>',
 	'toutmulti:description' => 'Del mesmu mou que ya pod&iacute;es facelo nes tos cadarmes, esta ferramienta te permite utilizar llibremente les cadenes de lling&uuml;es (de SPIP o de les cadarmes) con tolos conten&iacute;os del sitiu (art&iacute;culos, t&iacute;tulos, mensaxes, etc.) con l\'aida de l\'atayu <code><:cadena:></code>.
 
 Consulta [equ&iacute; ->http://www.spip.net/fr_article2128.html] la documentaci&oacute;n de SPIP pa esti asuntu.
@@ -541,7 +543,7 @@ Esta ferramienta acepta igualmente los argumentos amestaos con SPIP 2.0. Por exe
 La funci&oacute;n SPIP usada en PHP ye <code>_T(\'cadena\')</code> ensin argumentu, y <code>_T(\'cadena\', array(\'arg1\'=>\'un testu\', \'arg2\'=>\'otru testu\'))</code> con argumentos.
 
  Nun t\'escaezas de verificar que la clave <code>\'cadena\'</code> tea bien definida nos archivos de les lling&uuml;es.',
-	'toutmulti:nom' => '<NEW>Blocs multilingues',
+	'toutmulti:nom' => 'Bloques multilling&uuml;es',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Esti sitiu volver&aacute; a tar en llinia pronto.
 _ Agradec&eacute;moste la comprensi&oacute;n.',
@@ -551,12 +553,52 @@ _ Agradec&eacute;moste la comprensi&oacute;n.',
 Les propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL \'ORDER BY\' : n\'utilisez le tri personnalis&eacute; que si vous savez ce que vous faites (champs disponibles : {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
 [[%tri_articles%]][[->%tri_perso%]]',
 	'tri_articles:nom' => '<NEW>Tri des articles',
-	'tri_modif' => '<NEW>Tri sur la date de modification (ORDER BY date_modif DESC)',
-	'tri_perso' => '<NEW>Tri SQL personnalis&eacute;, ORDER BY suivi de :',
-	'tri_publi' => '<NEW>Tri sur la date de publication (ORDER BY date DESC)',
-	'tri_titre' => '<NEW>Tri sur le titre (ORDER BY 0+titre,titre)',
-	'type_urls:description' => '',
-	'type_urls:nom' => '<NEW>Format des URLs',
+	'tri_modif' => 'Guetar pola fecha d\'igua (ORDER BY date_modif DESC)',
+	'tri_perso' => 'Gueta SQL personalizada, ORDER BY sigu&iacute;o por:',
+	'tri_publi' => 'Guetar pola fecha d\'espublizamientu (ORDER BY date DESC)',
+	'tri_titre' => 'Guetar pol t&iacute;tulu (ORDER BY 0+titre,titre)',
+	'type_urls:description' => '@puce@ SPIP ufre una esbilla de xuegos d\'URLs pa fabricar los enllaces d\'accesu a les p&aacute;xines del sitiu Web.
+
+M&aacute;s info: [->http://www.spip.net/fr_article765.html]. La ferramienta &laquo;&nbsp;[.->boites_privees]&nbsp;&raquo; te permite ver na p&aacute;xina de cada oxetu SPIP la URL propia asociada.
+[[%radio_type_urls3%]]
+<q3>@_CS_ASTER@pa utilizar los formatos {html}, {propies}, {propies2}, {llibres} o {arborescentes}, copia l\'archivu "htaccess.txt" del direutoriu base del sitiu SPIP col nome ".htaccess" (atenci&oacute;n pa nun esborrar otros axustes que pudieras tener conse&ntilde;aos nesti archivu); si el to sitiu ta nun "sub-direutoriu", has d\'iguar tambi&eacute;n la llinia "RewriteBase" nel archivu. Les URLs definies van redirixise agora a los archivos de SPIP.</q3>
+
+<radio_type_urls3 valeur="page">@puce@ {{URLs &laquo;p&aacute;xina&raquo;}}: son los enllaces predetermin&aacute;os, que usa SPIP dende la so versi&oacute;n 1.9x.
+_ Exemplu: <code>/spip.php?article123</code>[[%terminaison_urls_page%]][[%separateur_urls_page%]]</radio_type_urls3>
+
+<radio_type_urls3 valeur="html">@puce@ {{URLs &laquo;html&raquo;}}: los enllaces tienen forma de p&aacute;xines html cl&aacute;siques.
+_ Exemplu: <code>/article123.html</code></radio_type_urls3>
+
+<radio_type_urls3 valeur="propres">@puce@ {{URLs &laquo;propies&raquo;}}: los enllaces calc&uacute;lense graciee al t&iacute;tulu de los oxetos pid&iacute;os. Les marques (_, -, +, @, etc.) cuadren los t&iacute;tulos en funci&oacute;n del tipu d\'oxetu.
+_ Exemplos : <code>/Mio-titulu-d-art&iacute;culu</code> o <code>/-Mio-estaya-</code> o <code>/@Mio-sitiu@</code>[[%terminaison_urls_propres%]][[%debut_urls_propres%]][[%marqueurs_urls_propres%]]</radio_type_urls3>
+
+<radio_type_urls3 valeur="propres2">@puce@ {{URLs &laquo;propies2&raquo;}}: la\'estensi&oacute;n \'.html\' am&eacute;stase a los enllaces {&laquo;propios&raquo;}.
+_ Exemplu: <code>/Mio-titulu-d-art&iacute;culu.html</code> o <code>/-Mio-estaya-.html</code>
+[[%debut_urls_propres2%]][[%marqueurs_urls_propres2%]]</radio_type_urls3>
+
+<radio_type_urls3 valeur="libres">@puce@ {{URLs &laquo;llibres&raquo;}}: los enllaces son {&laquo;propios&raquo;}, pero ensin marcadores pa dixebrar los oxetos (_, -, +, @, etc.).
+_ Exemplu: <code>/Mio-titulu-d-art&iacute;culu</code> o <code>/Mio-estaya</code>
+[[%terminaison_urls_libres%]][[%debut_urls_libres%]]</radio_type_urls3>
+
+<radio_type_urls3 valeur="arbo">@puce@ {{URLs &laquo;arborescentes&raquo;}}: los enllaces son {&laquo;propios&raquo;}, pero de tipu arborescente.
+_ Exemplu: <code>/sector/estaya1/estaya2/Mio-titulu-d-art&iacute;culu</code>
+[[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]</radio_type_urls3>
+
+<radio_type_urls3 valeur="propres-qs">@puce@ {{URLs &laquo;propies-qs&raquo;}}: esti sistema funciona en "Query-String", ye dicir, ensin utilizar .htaccess ; los enllaces son {&laquo;propios&raquo;}.
+_ Exemplu: <code>/?Mio-t&iacute;tulu-d-art&iacute;culu</code>
+[[%terminaison_urls_propres_qs%]]</radio_type_urls3>
+
+<radio_type_urls3 valeur="propres_qs">@puce@ {{URLs &laquo;propies_qs&raquo;}}: esti sist&egrave;ma funciona en "Query-String", esto ye, ensin utilizaci&oacute;n de .htaccess; los enllaces son {&laquo;propios&raquo;}.
+_ Exemplu: <code>/?Mio-t&iacute;tulu-d-art&iacute;culu</code>
+[[%terminaison_urls_propres_qs%]][[%marqueurs_urls_propres_qs%]]</radio_type_urls3>
+
+<radio_type_urls3 valeur="standard">@puce@ {{URLs &laquo;estandar&raquo;}}: estos enllaces agora obsoletos utiliz&aacute;bense por SPIP hasta la so versi&oacute;n 1.8.
+_ Exemplu: <code>article.php3?id_article=123</code>
+</radio_type_urls3>
+
+@puce@ Si utilizes el formatu {page} d\'embaxo o si l\'oxetu solicit&aacute;u nun se reconocer&aacute;, pero ye posible escoyer {{el script de llamada}} a SPIP. Por omisi&oacute;n, SPIP escueye {spip.php}, pero {index.php} (exemplu de formatu: <code>/index.php?article123</code>) donde un valor vac&iacute;u (formatu: <code>/?article123</code>) funciona tami&eacute;n. Pa cualquier otru valor, necesites crear dafechu l\'archivu correspondiente na raiz de SPIP, a imaxe del que ya esiste: {index.php}.
+[[%spip_script%]]',
+	'type_urls:nom' => 'Formatu de les URLs',
 	'typo_exposants:description' => '{{Testos en franc&eacute;s}}: meyora la presentaci&oacute;n tipogr&aacute;fica de les abreviatures corrientes, escribiendo como esponente los elementos necesarios (as&iacute;, {<acronym>Mme</acronym>} tresf&oacute;rmase en {M<sup>me</sup>}) y corrixendo los fallos comunes ({<acronym>2&egrave;me</acronym>} o  {<acronym>2me</acronym>}, por exemplu, cam&uacute;dense en {2<sup>e</sup>}, &uacute;nica abreviatura correuta).
 
 Les abreviatures obten&iacute;es son conformes coles de l\'Imprimerie nationale como les que s\'indiquen en el {Lexique des r&egrave;gles typographiques en usage &agrave; l\'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l\'Imprimerie nationale, Paris, 2002).
@@ -566,41 +608,41 @@ Ig&uuml;ense tambi&eacute;n les siguientes espresiones: <html>Dr, Pr, Mgr, m2, m
 Escueye equ&iacute; escribir como esponentes dellos atayos suplementarios, magar que l\'Imprimerie nationale lo tenga desaconseyao:[[%expo_bofbof%]]
 
 {{Testos n\'ingl&eacute;s}}: escr&iacute;bense como esponente los n&uacute;mberos ordinales: <html>1st, 2nd</html>, etc.',
-	'typo_exposants:nom' => '<NEW>Exposants typographiques',
+	'typo_exposants:nom' => 'Esponentes tipogr&aacute;ficos',
 
 	// U
-	'url_arbo' => '<NEW>arborescentes@_CS_ASTER@',
-	'url_html' => '<NEW>html@_CS_ASTER@',
-	'url_libres' => '<NEW>libres@_CS_ASTER@',
-	'url_page' => '<NEW>page',
-	'url_propres' => '<NEW>propres@_CS_ASTER@',
-	'url_propres-qs' => '<NEW>propres-qs',
-	'url_propres2' => '<NEW>propres2@_CS_ASTER@',
-	'url_propres_qs' => '<NEW>propres_qs',
-	'url_standard' => '<NEW>standard',
-	'urls_base_total' => '<NEW>Il y a actuellement @nb@ URL(s) en base',
-	'urls_base_vide' => '<NEW>La base des URLs est vide',
+	'url_arbo' => 'arborescentes@_CS_ASTER@',
+	'url_html' => 'html@_CS_ASTER@',
+	'url_libres' => 'llibres@_CS_ASTER@',
+	'url_page' => 'p&aacute;xina',
+	'url_propres' => 'propies@_CS_ASTER@',
+	'url_propres-qs' => 'propies-qs',
+	'url_propres2' => 'propies2@_CS_ASTER@',
+	'url_propres_qs' => 'propies_qs',
+	'url_standard' => 'est&aacute;ndar',
+	'urls_base_total' => 'Actualmente hai @nb@ URL(s) na base',
+	'urls_base_vide' => 'La base de les URLs ta vac&iacute;a',
 	'urls_choix_objet' => 'Edici&oacute;n de la base de la URL d\'un oxetu espec&iacute;ficu:',
-	'urls_edit_erreur' => '<NEW>Le format actuel des URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) ne permet pas d\'&eacute;dition.',
-	'urls_enregistrer' => '<NEW>Enregistrer cette URL en base',
+	'urls_edit_erreur' => 'El formatu actual de les URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) nun permite la edici&oacute;n.',
+	'urls_enregistrer' => 'Grabar esta URL na base',
 	'urls_nouvelle' => 'Editar la URL &laquo;propia&raquo;:',
-	'urls_num_objet' => '<NEW>Num&eacute;ro&nbsp;:',
-	'urls_purger' => '<NEW>Tout vider',
-	'urls_purger_tables' => '<NEW>Vider les tables s&eacute;lectionn&eacute;es',
-	'urls_purger_tout' => '<NEW>R&eacute;initialiser les URLs stock&eacute;es dans la base&nbsp;:',
-	'urls_rechercher' => '<NEW>Rechercher cet objet en base',
-	'urls_titre_objet' => '<NEW>Titre enregistr&eacute; &nbsp;:',
-	'urls_type_objet' => '<NEW>Objet&nbsp;:',
-	'urls_url_calculee' => '<NEW>URL publique &laquo;&nbsp;@type@&nbsp;&raquo;&nbsp;:',
+	'urls_num_objet' => 'N&uacute;mberu:',
+	'urls_purger' => 'Vacialo ensembre',
+	'urls_purger_tables' => 'Vaciar les tables seleicion&aacute;es',
+	'urls_purger_tout' => 'Reaniciar les URLs guard&aacute;es na base:',
+	'urls_rechercher' => 'Restolar esti oxetu na base',
+	'urls_titre_objet' => 'T&iacute;tulu grab&aacute;u:',
+	'urls_type_objet' => 'Oxetu:',
+	'urls_url_calculee' => 'URL p&uacute;blica &laquo;&nbsp;@type@&nbsp;&raquo;:',
 	'urls_url_objet' => 'URL &laquo;propia&raquo; grabada:',
-	'urls_valeur_vide' => '<NEW>(Une valeur vide entraine la suppression de l\'URL)',
+	'urls_valeur_vide' => '<MODIF>(Un valor vac&iacute;u produz el desaniciu de la URL)',
 
 	// V
-	'validez_page' => '<NEW>Pour acc&eacute;der aux modifications :',
-	'variable_vide' => '<NEW>(Vide)',
-	'vars_modifiees' => '<NEW>Les donn&eacute;es ont bien &eacute;t&eacute; modifi&eacute;es',
-	'version_a_jour' => '<NEW>Votre version est &agrave; jour.',
-	'version_distante' => '<NEW>Version distante...',
+	'validez_page' => 'Pa acceder a les modificaciones:',
+	'variable_vide' => '(Vac&iacute;o)',
+	'vars_modifiees' => 'Los datos modific&aacute;ronse bien',
+	'version_a_jour' => 'Esta versi&oacute;n ta actualizada.',
+	'version_distante' => 'Versi&oacute;n esterna...',
 	'version_distante_off' => '<NEW>V&eacute;rification distante d&eacute;sactiv&eacute;e',
 	'version_nouvelle' => '<NEW>Nouvelle version : @version@',
 	'version_revision' => '<NEW>R&eacute;vision : @revision@',
@@ -611,13 +653,13 @@ Escueye equ&iacute; escribir como esponentes dellos atayos suplementarios, magar
 	'verstexte:description' => '2 filtros pa les tos cadarmes, que permiten de producir p&aacute;xines m&aacute;s lixeres.
 _ version_texte : estr&aacute;i el conten&iacute;u de testu d\'una p&aacute;xina html escluyendo delles etiquetes elementales.
 _ version_plein_texte : estr&aacute;i el conten&iacute;u de testu d\'una p&aacute;xina html pa amosar el testu en bruto.',
-	'verstexte:nom' => '<NEW>Version texte',
+	'verstexte:nom' => 'Versi&oacute;n testu',
 	'visiteurs_connectes:description' => '<NEW>Offre une noisette pour votre squelette qui affiche le nombre de visiteurs connect&eacute;s sur le site public.
 
 Ajoutez simplement <code><INCLURE{fond=fonds/visiteurs_connectes}></code> dans vos pages.',
 	'visiteurs_connectes:nom' => '<NEW>Visiteurs connect&eacute;s',
 	'voir' => 'Ver: @voir@',
-	'votre_choix' => '<NEW>Votre choix :',
+	'votre_choix' => 'Seleici&oacute;n:',
 
 	// W
 	'webmestres:description' => '<NEW>Un {{webmestre}} au sens SPIP est un {{administrateur}} ayant acc&egrave;s &agrave; l\'espace FTP. Par d&eacute;faut et &agrave; partir de SPIP 2.0, il est l’administrateur <code>id_auteur=1</code> du site. Les webmestres ici d&eacute;finis ont le privil&egrave;ge de ne plus &ecirc;tre oblig&eacute;s de passer par FTP pour valider les op&eacute;rations sensibles du site, comme la mise &agrave; jour de la base de donn&eacute;es ou la restauration d&rsquo;un dump.

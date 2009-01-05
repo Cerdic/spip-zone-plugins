@@ -20,22 +20,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'acces_admin' => 'Y&ouml;netici eri&#351;imi :',
 	'action_rapide' => '<NEW>Action rapide, uniquement si vous savez ce que vous faites !',
-	'attente' => '<NEW>Attente...',
+	'action_rapide_non' => '<NEW>Action rapide, disponible une fois cet outil activ&eacute; :',
+	'admins_seuls' => 'Sadece y&ouml;neticiler',
+	'attente' => 'Beklemede...',
 	'auteur_forum:description' => 'En az&#305;ndan bir mektup yazm&#305;&#351; olan kamusal ileti yazarlar&#305;n&#305;, t&uuml;m kat&#305;l&#305;mlar&#305;n isimsiz olmamas&#305; i&ccedil;in &laquo;@_CS_FORUM_NOM@&raquo; alan&#305;n&#305; doldurmaya te&#351;vik eder.',
 	'auteur_forum:nom' => 'Anonim (isimsiz) forum yok',
-	'auteurs:description' => '<MODIF>Bu alet [yazarlar sayfas&#305;->./?exec=auteurs]\'n&#305;n &ouml;zel alandaki g&ouml;r&uuml;n&uuml;&#351;&uuml;n&uuml; konfig&uuml;re eder.
+	'auteurs:description' => 'Bu gere&ccedil;[yazarlar sayfas&#305;->./?exec=auteurs]\'n&#305;n &ouml;zel alandaki g&ouml;r&uuml;n&uuml;&#351;&uuml;n&uuml; konfig&uuml;re eder.
 
-@puce@ Yazarlar sayfas&#305;n&#305;n ortas&#305;ndaki ana &ccedil;er&ccedil;evede g&ouml;sterilecek maksimum yazar say&#305;s&#305;n&#305; belirtiniz. Bu say&#305;dan fazlas&#305; sayfalama (pagination) ile g&ouml;sterilir.[[%max_auteurs_page%]]
+@puce@ Yazarlar sayfas&#305;n&#305;n ortas&#305;ndaki ana &ccedil;er&ccedil;evede g&ouml;sterilecek maksimum yazar say&#305;s&#305;n&#305; belirtiniz. Bu say&#305;dan fazlas&#305; sayfalama ile g&ouml;sterilir.[[%max_auteurs_page%]]
 
-@puce@ Quels statuts d\'auteurs peuvent &ecirc;tre list&eacute;s sur cette page ?
+@puce@ Bu sayfada hangi yazar stat&uuml;leri listelenecek  ?
 [[%auteurs_tout_voir%]][[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]',
 	'auteurs:nom' => 'Yazarlar sayfas&#305;',
 
 	// B
 	'basique' => 'Temel',
 	'blocs:aide' => 'Katlanabilir bloklar : <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias : <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) et <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF>T&#305;klanabilir ba&#351;l&#305;kalar sayesinde g&ouml;r&uuml;n&uuml;r veya g&ouml;r&uuml;nmez olabilen bloklar olu&#351;turman&#305;za olanak tan&#305;r.
-@puce@ {{SPIP metinlerinde}} : yazarlar i&ccedil;in yeni komutlar sunulmu&#351;tur &lt;bloc&gt; (ou &lt;invisible&gt;) et &lt;visible&gt; bu komutlar&#305; &#351;u bi&ccedil;imde metinlerinde kullanabilirler : 
+	'blocs:description' => 'T&#305;klanabilir ba&#351;l&#305;klar sayesinde g&ouml;r&uuml;n&uuml;r veya g&ouml;r&uuml;nmez olabilen bloklar olu&#351;turman&#305;za olanak tan&#305;r.
+@puce@ {{SPIP metinlerinde}} : yazarlar i&ccedil;in yeni komutlar sunulmu&#351;tur &lt;bloc&gt; (ou &lt;invisible&gt;) ve &lt;visible&gt; bu komutlar metinlerde &#351;u bi&ccedil;imde kullan&#305;labilir : 
 
 <quote><code>
 <bloc>
@@ -55,18 +57,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  #BLOC_FIN</code></quote>
 ',
 	'blocs:nom' => 'Katlanabilir Bloklar (D&eacute;pliables)',
-	'boites_privees:description' => '<MODIF>A&#351;a&#287;&#305;da tan&#305;mlanan t&uuml;m kutular &ouml;zel alanda g&ouml;r&uuml;n&uuml;rler. [[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]]
+	'boites_privees:description' => 'A&#351;a&#287;&#305;da tan&#305;mlanan t&uuml;m kutular &ouml;zel alanda g&ouml;r&uuml;n&uuml;rler. [[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]]
 - {{&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305; g&ouml;zden ge&ccedil;irmeleri}} : ([Source->@_CS_RSS_SOURCE@]) eklentisinin kodlar&#305;nda yap&#305;lan son de&#287;i&#351;iklikler akt&uuml;el konfig&uuml;rasyon sayfas&#305;nda bir &ccedil;er&ccedil;eve i&ccedil;inde g&ouml;sterilirler.
 - {{SPIP format&#305;ndaki makaleler}} : yazarlar&#305; taraf&#305;ndan kullan&#305;lan kaynak kodlar&#305; g&ouml;rebilmeniz i&ccedil;in katlanabilir ek bir &ccedil;er&ccedil;eve.
 - {{stat durumundaki yazarlar}} : [yazarlar sayfas&#305;nda->./?exec=auteurs] ba&#287;lanan son 10 kullan&#305;c&#305;y&#305; ve onaylanmam&#305;&#351; kay&#305;tlar&#305; g&ouml;steren &#287;m bir &ccedil;er&ccedil;eve. Bu bilgileri sadece y&ouml;neticiler g&ouml;rebilir.',
 	'boites_privees:nom' => '&Ouml;zel kutular',
-	'bp_urls_propres' => '<MODIF>Voir les URLs propres',
+	'bp_tri_auteurs' => 'Yazar s&#305;ralamalar&#305;',
+	'bp_urls_propres' => 'Ki&#351;isel URL\'ler',
 
 	// C
-	'cache_controle' => '<NEW>Contr&ocirc;le du cache',
-	'cache_nornal' => '<NEW>Usage normal',
-	'cache_permanent' => '<NEW>Cache permanent',
-	'cache_sans' => '<NEW>Pas de cache',
+	'cache_controle' => '&Ouml;nbellek kontrol&uuml;',
+	'cache_nornal' => 'Normal kullan&#305;m',
+	'cache_permanent' => 'Kal&#305;c&#305; &ouml;nbellek',
+	'cache_sans' => '&Ouml;nbellek yok',
 	'categ:admin' => '1. Y&ouml;netim',
 	'categ:divers' => '6. Di&#287;er',
 	'categ:interface' => '10. &Ouml;zel aray&uuml;z',
@@ -83,7 +86,7 @@ _ Cet outil remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trou
 	'class_spip:description2' => '@puce@ {{SPIP k&#305;sayollar&#305;}}.
 
 Burada baz&#305; SPIP k&#305;sayollar&#305;n&#305; tan&#305;mlayabilirsiniz. Bo&#351; de&#287;er varsay&#305;lan de&#287;erin kullan&#305;lmas&#305; demektir.[[%racc_hr%]][[%puce%]]',
-	'class_spip:description3' => '<MODIF>
+	'class_spip:description3' => '
 
 SPIP normalde ara ba&#351;l&#305;klar i&ccedil;in &lt;h3&gt; komutunu kullan&#305;r. Burada ba&#351;ka bir komut se&ccedil;iniz :[[%racc_h1%]][[->%racc_h2%]]',
 	'class_spip:description4' => '<MODIF>
@@ -91,7 +94,7 @@ SPIP normalde ara ba&#351;l&#305;klar i&ccedil;in &lt;h3&gt; komutunu kullan&#30
 SPIP a choisi d\'utiliser la balise &lt;i> pour transcrire les italiques. Mais &lt;em> aurait pu &eacute;galement convenir. &Agrave; vous de voir :[[%racc_i1%]][[->%racc_i2%]]
 Notez : en modifiant le remplacement des raccourcis d\'italiques, le style {{2.}} sp&eacute;cifi&eacute; plus haut ne sera pas appliqu&eacute;.
 
-@puce@ {{Les styles de SPIP}}. Jusqu\'&agrave; la version 1.92 de SPIP, les raccourcis typographiques produisaient des balises syst&eacute;matiquement affubl&eacute;s du style &quot;spip&quot;. Par exemple : <code><p class="spip"></code>. Vous pouvez ici d&eacute;finir le style de ces balises en fonction de vos feuilles de style. Une case vide signifie qu\'aucun style particulier ne sera appliqu&eacute;.<blockquote style=\'margin:0 2em;\'>
+@puce@ {{Les styles de SPIP}}. Jusqu\'&agrave; la version 1.92 de SPIP, les raccourcis typographiques produisaient des balises syst&eacute;matiquement affubl&eacute;s du style "spip". Par exemple : <code><p class="spip"></code>. Vous pouvez ici d&eacute;finir le style de ces balises en fonction de vos feuilles de style. Une case vide signifie qu\'aucun style particulier ne sera appliqu&eacute;.<blockquote style=\'margin:0 2em;\'>
 _ {{1.}} Balises &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; et les listes (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[%style_p%]]
 _ {{2.}} Balises &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; et &lt;blockquote&gt; :[[%style_h%]]
 
@@ -100,10 +103,17 @@ Notez : en modifiant ce deuxi&egrave;me param&egrave;tre, vous perdez alors les 
 	'code_css' => 'CSS',
 	'code_fonctions' => '&#304;&#351;levler',
 	'code_jq' => 'jQuery',
-	'code_js' => '<MODIF>Javascript',
+	'code_js' => 'Javascript',
 	'code_options' => 'Se&ccedil;enekler',
-	'code_spip_options' => '<NEW>Options SPIP',
+	'code_spip_options' => 'SPIP se&ccedil;enekleri',
 	'contrib' => 'Daha fazla bilgi : @url@',
+	'corbeille:description' => '<NEW>SPIP supprime automatiquement les objets mis au rebuts au bout de 24 heures, en g&eacute;n&eacute;ral vers 4 heures du matin, gr&acirc;ce &agrave; une t&acirc;che &laquo;CRON&raquo; (lancement p&eacute;riodique et/ou automatique de processus pr&eacute;programm&eacute;s). Vous pouvez ici emp&ecirc;cher ce processus afin de mieux g&eacute;rer votre corbeille.[[%arret_optimisation%]]',
+	'corbeille:nom' => '&Ccedil;&ouml;p kutusu',
+	'corbeille_objets' => '&Ccedil;&ouml;p kutusunda @nb@ nesne var.',
+	'corbeille_objets_lies' => '@nb_lies@ ba&#287; g&ouml;r&uuml;ld&uuml;.',
+	'corbeille_objets_vide' => '&Ccedil;&ouml;p kutusunda hi&ccedil; nesne yok',
+	'corbeille_objets_vider' => 'Se&ccedil;ilen nesneleri sil',
+	'corbeille_vider' => '&Ccedil;&ouml;p kutusunu bo&#351;alt&nbsp;:',
 	'couleurs:aide' => 'Renklendirme : <b>[coul]metin[/coul]</b>@fond@ ile <b>coul</b> = @liste@',
 	'couleurs:description' => 'K&#305;sayollar&#305;n i&ccedil;inde komutlar kullanarak sitedeki t&uuml;m metinlere renk uygulanmas&#305;na olanak tan&#305;r (makaleler, k&#305;sa haberler, ba&#351;l&#305;klar, forum, ...).
 
@@ -122,10 +132,11 @@ Fon rengini de&#287;i&#351;tirmek i&ccedil;in (e&#287;er yukar&#305;daki se&cced
 [[%spip_options_on%]]
 
 @puce@ {{Requ&ecirc;tes externes.}} Le Couteau Suisse v&eacute;rifie r&eacute;guli&egrave;rement l\'existence d\'une version plus r&eacute;cente de son code et informe sur sa page de configuration d\'une mise &agrave; jour &eacute;ventuellement disponible. Si les requ&ecirc;tes externes de votre serveur posent des probl&egrave;mes, alors cochez la case suivante.[[%distant_off%]]',
-	'cs_comportement:nom' => '<NEW>Comportements du Couteau Suisse',
-	'cs_distant_off' => '<NEW>Les v&eacute;rifications de versions distantes',
-	'cs_log_couteau_suisse' => '<NEW>Les logs d&eacute;taill&eacute;s du Couteau Suisse',
-	'cs_spip_options_on' => '<NEW>Les options SPIP dans &laquo;@_CS_FILE_OPTIONS@&raquo;',
+	'cs_comportement:nom' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305; davran&#305;&#351;lar&#305;',
+	'cs_distant_off' => 'Uzaktan s&uuml;r&uuml;mlerin do&#287;rulanmas&#305;',
+	'cs_log_couteau_suisse' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;n&#305;n detayl&#305; kay&#305;tlar&#305;',
+	'cs_reset' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;\'n&#305; ba&#351;tan ba&#351;latmak istedi&#287;inizden emin misiniz ?',
+	'cs_spip_options_on' => '&laquo;@_CS_FILE_OPTIONS@&raquo; i&ccedil;indeki SPIP se&ccedil;enekleri',
 
 	// D
 	'decoration:aide' => 'Dekorasyon&nbsp;: <b>&lt;balise&gt;test&lt;/balise&gt;</b> ile <b>balise</b> = @liste@',
@@ -145,7 +156,7 @@ Le param&egrave;tre {type} ci-dessus peut prendre trois valeurs :
 	'decoration:nom' => 'Dekorasyon',
 	'decoupe:aide' => 'T&#305;rnak blo&#287;u : <b>&lt;onglets>&lt;/onglets></b><br/>Sayfa veya t&#305;rnak ayrac&#305;&nbsp;: @sep@',
 	'decoupe:aide2' => 'Alias&nbsp;:&nbsp;@sep@',
-	'decoupe:description' => '<MODIF>Bir makalenin, otomatik bir sayfalama ile kamusal alanda bir ka&ccedil; sayfaya b&ouml;l&uuml;nerek g&ouml;sterilmesini sa&#287;lar. Makalenizde sadece pe&#351;pe&#351;e art&#305; i&#351;aretlerini(<code>++++</code>) kesinti yap&#305;lacak yerde kullan&#305;n.
+	'decoupe:description' => 'Bir makalenin, otomatik bir sayfalama ile kamusal alanda bir ka&ccedil; sayfaya b&ouml;l&uuml;nerek g&ouml;sterilmesini sa&#287;lar. Makalenizde sadece pe&#351;pe&#351;e art&#305; i&#351;aretlerini(<code>++++</code>) kesinti yap&#305;lacak yerde kullan&#305;n.
 _ E&#287;er bu ayrac&#305; &lt;onglets&gt; ve &lt;/onglets&gt; komutlar&#305;yla kullan&#305;rsan&#305;z bir &ccedil;ift t&#305;rnak elde edersiniz.
 _ &#304;skeletlerde : &#351;u yeni komutlara sahipsiniz #ONGLETS_DEBUT, #ONGLETS_TITRE ve #ONGLETS_FIN.
 _ Bu gere&ccedil; {makaleleriniz i&ccedil;in bir &ouml;zet} ile birlikte kullan&#305;labilir.',
@@ -157,7 +168,7 @@ _ Bu gere&ccedil; {makaleleriniz i&ccedil;in bir &ouml;zet} ile birlikte kullan&
 	'detail_inline' => 'Inline kod :',
 	'detail_jquery1' => '{{Dikkat}} : bu alet SPIP\'in bu s&uuml;r&uuml;m&uuml;yle &ccedil;al&#305;&#351;abilmek i&ccedil;in {jQuery} eklentisini gerektirir.',
 	'detail_jquery2' => 'Bu alet {jQuery} k&uuml;t&uuml;phanesini gerektirir.',
-	'detail_jquery3' => '<NEW>{{Attention}} : cet outil n&eacute;cessite le plugin [jQuery pour SPIP 1.92->http://files.spip.org/spip-zone/jquery_192.zip] pour fonctionner correctement avec cette version de SPIP.',
+	'detail_jquery3' => '{{Dikkat}} : bu gere&ccedil; sorunsuz &ccedil;al&#305;&#351;abilmek i&ccedil;in [SPIP 1.92-i&ccedil;in jQuery>http://files.spip.org/spip-zone/jquery_192.zip] eklentisi gerektirir.',
 	'detail_pipelines' => 'Boru hatlar&#305; (pipeline) :',
 	'detail_traitements' => '&#304;&#351;lemler :',
 	'dossier_squelettes:description' => 'Kullan&#305;lan iskelet dizinini de&#287;i&#351;tirir. &Ouml;rne&#287;in : "squelettes/iskeletim". Dizinleri iki nokta ile ay&#305;rarak bir &ccedil;ok dizin belirtebilirsiniz  <html>&laquo;&nbsp;:&nbsp;&raquo;</html>. &#304;zleyen kutuyu bo&#351; b&#305;rakarak (veya "dist" yazarak) SPIP taraf&#305;ndan sunulan orijinal "dist" iskeletini kullanabilirsiniz. [[%dossier_squelettes%]]',
@@ -165,13 +176,13 @@ _ Bu gere&ccedil; {makaleleriniz i&ccedil;in bir &ouml;zet} ile birlikte kullan&
 
 	// E
 	'effaces' => 'Silinmi&#351;',
-	'en_travaux:description' => '<MODIF>T&uuml;m kamusal sitede bak&#305;m yap&#305;l&#305;rken ki&#351;iselle&#351;tirilebilir bir mesaj yay&#305;nlanmas&#305;n&#305; sa&#287;lar.
+	'en_travaux:description' => 'T&uuml;m kamusal sitede bak&#305;m yap&#305;l&#305;rken ki&#351;iselle&#351;tirilebilir bir mesaj yay&#305;nlanmas&#305;n&#305; sa&#287;lar.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]]',
 	'en_travaux:nom' => 'Sitede &ccedil;al&#305;&#351;ma var',
 	'erreur:bt' => '<NEW><span style=\\"color:red;\\">Attention :</span> la barre typographique (version @version@) semble ancienne.<br />Le Couteau Suisse est compatible avec une version sup&eacute;rieure ou &eacute;gale &agrave; @mini@.',
 	'erreur:description' => 'Alet tan&#305;m&#305;nda id eksik !',
 	'erreur:distant' => 'uzak sunucu',
-	'erreur:jquery' => '<MODIF>{{Note}} : la librairie {jQuery} semble inactive sur cette page. Veuillez consulter [ici->http://www.spip-contrib.net/?article2166] le paragraphe sur les d&eacute;pendances du plugin.',
+	'erreur:jquery' => '{{Not}} : {jQuery} k&uuml;t&uuml;phanesi bu sayfada pasif durumda g&ouml;r&uuml;l&uuml;yor. Eklentinin ba&#287;&#305;ml&#305;l&#305;klar&#305; paragraf&#305;na bak&#305;n&#305;z [->http://www.spip-contrib.net/?article2166].',
 	'erreur:js' => 'bu sayfada bir JavaScript hatas&#305; olu&#351;tu ve sayfan&#305;n do&#287;ru &ccedil;al&#305;&#351;mas&#305;n&#305; engelliyor. L&uuml;tfen gezgininizde JavaScript\'i aktive edin veyasitenizdeki baz&#305; SPIP eklentilerini deaktive edin.',
 	'erreur:nojs' => 'JavaScript bu sayfada deaktive edilmi&#351;.',
 	'erreur:nom' => 'Hata !',
@@ -181,36 +192,36 @@ _ Bu gere&ccedil; {makaleleriniz i&ccedil;in bir &ouml;zet} ile birlikte kullan&
 	'etendu' => 'Kapsam',
 
 	// F
-	'f_jQuery:description' => '<MODIF>{jQuery}\'nin kamusal alana kurulmas&#305;n&#305; engeller, b&ouml;ylece &laquo;makine zaman&#305;&raquo;ndan biraz ekonomi yapar. Bu ([->http://jquery.com/]) kitapl&#305;&#287;&#305; Javascript programlamada bir &ccedil;ok kolayl&#305;k getirir ve baz&#305; eklentilerde kullan&#305;labilir. SPIP, Jquery\'yi &ouml;zel alanda kullan&#305;r.
+	'f_jQuery:description' => '{jQuery}\'nin kamusal alana kurulmas&#305;n&#305; engeller, b&ouml;ylece &laquo;makine zaman&#305;&raquo;ndan biraz ekonomi yapar. Bu ([->http://jquery.com/]) kitapl&#305;&#287;&#305; Javascript programlamada bir &ccedil;ok kolayl&#305;k getirir ve baz&#305; eklentilerde kullan&#305;labilir. SPIP, Jquery\'yi &ouml;zel alanda kullan&#305;r.
 
 Dikkat : baz&#305; &#304;svi&ccedil;re &Ccedil;ak&#305;s&#305; gere&ccedil;leri {jQuery} fonksiyonlar&#305;na ihtiya&ccedil; duyar. ',
 	'f_jQuery:nom' => 'jQuery\'yi deaktive eder',
 	'filets_sep:aide' => 'Ay&#305;rma Fileleri (Filet)&nbsp;: <b>__i__</b>  <b>i</b> burada bir say&#305;y&#305; temsil eder.<br />Di&#287;er fileler : @liste@',
 	'filets_sep:description' => '<NEW>Ins&egrave;re des filets de s&eacute;paration, personnalisables par des feuilles de style, dans tous les textes de SPIP.
-_ La syntaxe est : &quot;__code__&quot;, o&ugrave; &quot;code&quot; repr&eacute;sente soit le num&eacute;ro d&rsquo;identification (de 0 &agrave; 7) du filet &agrave; ins&eacute;rer en relation directe avec les styles correspondants, soit le nom d\'une image plac&eacute;e dans le dossier plugins/couteau_suisse/img/filets.',
+_ La syntaxe est : "__code__", o&ugrave; "code" repr&eacute;sente soit le num&eacute;ro d’identification (de 0 &agrave; 7) du filet &agrave; ins&eacute;rer en relation directe avec les styles correspondants, soit le nom d\'une image plac&eacute;e dans le dossier plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'Ay&#305;rma Filesi (Filet)',
-	'filtrer_javascript:description' => '<MODIF>Makalelerde javascript kullan&#305;m&#305; i&ccedil;in 3 metod vard&#305;r :
+	'filtrer_javascript:description' => 'Makalelerde javascript kullan&#305;m&#305; i&ccedil;in 3 metod vard&#305;r :
 - <i>jamais</i> : javascript her yerde reddedilir
 - <i>d&eacute;faut</i> : javascript &ouml;zel alanda k&#305;rm&#305;z&#305; ile belirtilir 
 - <i>toujours</i> : javascript her yerde kab&ucirc;l edilir.
 
 Dikkat : forumlarda, dilek&ccedil;elerde, payla&#351;&#305;lan ak&#305;larda ve benzerlerinde javascript\'in y&ouml;netimi <b>daima</b> g&uuml;venlidir.[[%radio_filtrer_javascript3%]]',
-	'filtrer_javascript:nom' => '<MODIF>Javascript y&ouml;netimi',
+	'filtrer_javascript:nom' => 'Javascript y&ouml;netimi',
 	'flock:description' => 'PHP fonksiyonunu n&ouml;tralize ederek {flock()} dosya kilitleme sistemini deaktive eder. Baz&#305; bar&#305;nd&#305;rma firmalar&#305; uyumsuz dosya sistemi veya senkronizasyon eksikli&#287;i y&uuml;z&uuml;nden b&uuml;y&uuml;k sorunlara yol a&ccedil;maktad&#305;r. E&#287;er siteniz normal &ccedil;al&#305;&#351;&#305;yorsa bunu aktive etmeyin.',
 	'flock:nom' => 'Dosya kilitleme yok',
 	'fonds' => 'Arka alanlar :',
-	'forcer_langue:description' => '<MODIF>Dil cookie\'sini y&ouml;netmeyi bilen bir dil men&uuml;s&uuml; veya bir form i&ccedil;eren &ccedil;ok dilli iskelet tak&#305;m&#305;na sahip dile zorla',
-	'forcer_langue:nom' => '<MODIF>Bu dile zorla',
+	'forcer_langue:description' => 'Dil cookie\'sini y&ouml;netmeyi bilen bir dil men&uuml;s&uuml; veya bir form i&ccedil;eren &ccedil;ok dilli iskelet tak&#305;m&#305;na sahip dile zorla',
+	'forcer_langue:nom' => 'Bu dile zorla',
 	'format_spip' => 'SPIP format&#305;nda makaleler',
-	'forum_lgrmaxi:description' => '<MODIF>Varsay&#305;lan olarak, forum mesajlar&#305;n&#305;n boyu s&#305;n&#305;rlanmam&#305;&#351;t&#305;r. Bu gere&ccedil; aktive edildi&#287;inde, bir kullan&#305;c&#305; belirtilen boydan daha uzun bir mesaj g&ouml;ndermek istedi&#287;inde bir hata mesaj&#305; g&ouml;r&uuml;lecektir ve mesaj reddedilecektir. Bo&#351; bir de&#287;er veya S&#305;f&#305;r boyda s&#305;n&#305;r olmad&#305;&#287;&#305;n&#305; belirtir. [[%forum_lgrmaxi%]]',
+	'forum_lgrmaxi:description' => 'Varsay&#305;lan olarak, forum mesajlar&#305;n&#305;n boyu s&#305;n&#305;rlanmam&#305;&#351;t&#305;r. Bu gere&ccedil; aktive edildi&#287;inde, bir kullan&#305;c&#305; belirtilen boydan daha uzun bir mesaj g&ouml;ndermek istedi&#287;inde bir hata mesaj&#305; g&ouml;r&uuml;lecektir ve mesaj reddedilecektir. Bo&#351; bir de&#287;er veya S&#305;f&#305;r de&#287;eri hi&ccedil;bir s&#305;n&#305;r uygulanmad&#305;&#287;&#305;n&#305; belirtir. [[%forum_lgrmaxi%]]',
 	'forum_lgrmaxi:nom' => 'Forumlar&#305;n boyutu',
 
 	// G
-	'glossaire:aide' => '<NEW>Un texte sans glossaire : <b>@_CS_SANS_GLOSSAIRE@</b>',
-	'glossaire:description' => '<MODIF>@puce@ Gestion d&rsquo;un glossaire interne li&eacute; &agrave; un ou plusieurs groupes de mots-cl&eacute;s. Inscrivez ici le nom des groupes en  les s&eacute;parant par les deux points &laquo;&nbsp;:&nbsp;&raquo;. En laissant vide la case qui  suit (ou en tapant &quot;Glossaire&quot;), c&rsquo;est le groupe &quot;Glossaire&quot; qui sera utilis&eacute;.[[%glossaire_groupes%]]@puce@ Pour chaque mot, vous avez la possibilit&#233; de choisir le nombre maximal de liens cr&#233;&#233;s dans vos textes. Toute valeur nulle ou n&#233;gative implique que tous les mots reconnus seront trait&#233;s. [[%glossaire_limite% par mot-cl&#233;]]@puce@ Deux solutions vous sont offertes pour g&#233;n&#233;rer la petite fen&ecirc;tre automatique qui apparait lors du survol de la souris. [[%glossaire_js%]]',
+	'glossaire:aide' => '&Ouml;zetsiz metin : <b>@_CS_SANS_GLOSSAIRE@</b>',
+	'glossaire:description' => '<MODIF>@puce@ Gestion d’un glossaire interne li&eacute; &agrave; un ou plusieurs groupes de mots-cl&eacute;s. Inscrivez ici le nom des groupes en  les s&eacute;parant par les deux points &laquo;&nbsp;:&nbsp;&raquo;. En laissant vide la case qui  suit (ou en tapant "Glossaire"), c’est le groupe "Glossaire" qui sera utilis&eacute;.[[%glossaire_groupes%]]@puce@ Pour chaque mot, vous avez la possibilit&eacute; de choisir le nombre maximal de liens cr&eacute;&eacute;s dans vos textes. Toute valeur nulle ou n&eacute;gative implique que tous les mots reconnus seront trait&eacute;s. [[%glossaire_limite% par mot-cl&eacute;]]@puce@ Deux solutions vous sont offertes pour g&eacute;n&eacute;rer la petite fen&ecirc;tre automatique qui apparait lors du survol de la souris. [[%glossaire_js%]]',
 	'glossaire:nom' => '&#304;&ccedil; endeks',
 	'glossaire_css' => 'CSS &ccedil;&ouml;z&uuml;m&uuml;',
-	'glossaire_js' => '<MODIF>Javascript &ccedil;&ouml;z&uuml;m&uuml;',
+	'glossaire_js' => 'Javascript &ccedil;&ouml;z&uuml;m&uuml;',
 	'guillemets:description' => 'Normal t&#305;rnak i&#351;aretlerini (") tipografik t&#305;rnak i&#351;aretleriyle de&#287;i&#351;tirir. De&#287;i&#351;tirme kullan&#305;c&#305; taraf&#305;ndan g&ouml;r&uuml;lmez ve orijinal metni etkilemez sadece g&ouml;sterilen metni etkiler.',
 	'guillemets:nom' => 'Tipografik t&#305;rnaklar',
 
@@ -231,13 +242,13 @@ Bu logoyu tan&#305;mlamak i&ccedil;in &laquo;&nbsp;Konfig&uuml;rasyon&nbsp;&raqu
 	'insert_head:nom' => '#INSERT_HEAD komutu',
 	'insertions:description' => 'DiKKAT : geli&#351;tirilmekte olan gere&ccedil; !! [[%insertions%]]',
 	'insertions:nom' => 'Otomatik d&uuml;zeltmeler',
-	'introduction:description' => '<MODIF><MODIF><NEW>Cette balise &agrave; placer dans les squelettes sert en g&eacute;n&eacute;ral &agrave; la une ou dans les rubriques afin de produire un r&eacute;sum&eacute; des articles, des br&egrave;ves, etc..</p>
+	'introduction:description' => '&#304;skeletlere yerle&#351;tirilecek bu komut genelde ana sayfaya veya ba&#351;l&#305;klarda makalelerin veya k&#305;sa haberlerin bir &ouml;zetini olu&#351;turmaya yarar.</p>
 <p>{{Dikkat}} : Bu i&#351;levi aktive etmeden &ouml;nce iskeletinizde veya eklentilerinizde hi&ccedil;bir {balise_INTRODUCTION()} fonksiyonunun  olmad&#305;&#287;&#305;ndan emin olun, aksi halde derleme hatas&#305; olu&#351;acakt&#305;r.</p>
 @puce@ #INTRODUCTION komutu taraf&#305;ndan g&ouml;nderilen metnin uzunlu&#287;unu (varsay&#305;lan de&#287;ere g&ouml;re y&uuml;zde olarak) belirtebilirsiniz. Bo&#351; bir de&#287;er veya 100 de&#287;eri metni de&#287;i&#351;tirmeyecektir ve &#351;u varsay&#305;lan de&#287;erleri kullanacakt&#305;r : makaleler i&ccedil;in 500 karakter, k&#305;sa haberler i&ccedil;in 300karakter, forumlar veya ba&#351;l&#305;klar i&ccedil;in 600 karakter.
 [[%lgr_introduction%&nbsp;%]]
 @puce@ E&#287;er metin &ccedil;ok uzunsa, #INTRODUCTION komutuna eklenen varsay&#305;lan &uuml;&ccedil; nokta &#351;&ouml;yledir : <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Burada, metnin kesildi&#287;ini ve devam&#305; oldu&#287;unu siz kendi &ouml;zel karakter zincirinizi kullanarak okuyucular&#305;n&#305;za belirtebilirsiniz.
 [[%suite_introduction%]]
-@puce@ Si la balise #INTRODUCTION est utilis&eacute;e pour r&eacute;sumer un article, alors le Couteau Suisse peut fabriquer un lien hypertexte sur les points de suite d&eacute;finis ci-dessus afin de mener le lecteur vers le texte original. Par exemple : &laquo;Lire la suite de l\'article…&raquo;
+@puce@ #INTRODUCTION komutu bir makaleyi &ouml;zetlemek i&ccedil;in kulan&#305;lm&#305;&#351;sa &#304;svi&ccedil;re &Ccedil;ak&#305;s&#305; &uuml;&ccedil; noktalar&#305;n &uuml;zerine bir hipermetin olu&#351;turarak okuru orijinal metne y&ouml;nlendirir. &Ouml;rne&#287;in : &laquo;Makalenin devam&#305; i&ccedil;in…&raquo;
 [[%lien_introduction%]]
 ',
 	'introduction:nom' => '#INTRODUCTION komutu',
@@ -259,19 +270,20 @@ Dikkat, bu gere&ccedil; &ccedil;al&#305;&#351;mak i&ccedil;in {Round Corners} {j
 
 	// L
 	'label:admin_travaux' => 'Kamusal alan&#305; &#351;una kapat :',
+	'label:arret_optimisation' => 'SPIP\'in &ccedil;&ouml;p kutusunu otomatik olarak bo&#351;altmas&#305;n&#305; engelle&nbsp;:',
 	'label:auteurs_tout_voir' => '@_CS_CHOIX@',
 	'label:auto_sommaire' => '&Ouml;zet\'in sistemli bi&ccedil;imde olu&#351;turulmas&#305; :',
 	'label:balise_decoupe' => '#CS_DECOUPE komutunu aktive et :',
 	'label:balise_sommaire' => '#CS_SOMMAIRE komutunu aktive et :',
-	'label:bloc_unique' => '<NEW>Un seul bloc ouvert sur la page :',
+	'label:bloc_unique' => 'Sayfada sadece bir blok a&ccedil;&#305;k :',
 	'label:couleurs_fonds' => 'Arka alanlara izin ver :',
 	'label:cs_rss' => 'Aktive et :',
 	'label:debut_urls_libres' => '<:label:debut_urls_propres:>',
-	'label:debut_urls_propres' => '<NEW>D&eacute;but des URLs :',
+	'label:debut_urls_propres' => 'URL\'lerin ba&#351;lang&#305;c&#305; :',
 	'label:debut_urls_propres2' => '<:label:debut_urls_propres:>',
 	'label:decoration_styles' => 'Ki&#351;iselle&#351;tirilmi&#351; stil komutlar&#305;n&#305;z :',
 	'label:derniere_modif_invalide' => 'Bir de&#287;i&#351;iklikten sonra yeniden hesapla :',
-	'label:distant_off' => '<NEW>D&eacute;sactiver :',
+	'label:distant_off' => 'Pasif k&#305;l :',
 	'label:dossier_squelettes' => 'Kullan&#305;lacak dizinler :',
 	'label:duree_cache' => 'Yerel &ouml;nbelle&#287;in s&uuml;resi :',
 	'label:duree_cache_mutu' => '&Ouml;n bellek s&uuml;resi :',
@@ -288,48 +300,50 @@ Dikkat, bu gere&ccedil; &ccedil;al&#305;&#351;mak i&ccedil;in {Round Corners} {j
 	'label:lien_introduction' => 'T&#305;klanabilir &uuml;&ccedil; nokta :',
 	'label:liens_interrogation' => '&#350;u URL\'leri koru :',
 	'label:liens_orphelins' => 'T&#305;klanabilir ba&#287;lar :',
-	'label:log_couteau_suisse' => '<NEW>Activer :',
+	'label:log_couteau_suisse' => 'Aktive et :',
 	'label:marqueurs_urls_propres' => '<NEW>Ajouter les marqueurs dissociant les objets (SPIP>=2.0) :<br/>(ex. : &laquo;&nbsp;-&nbsp;&raquo; pour -Ma-rubrique-, &laquo;&nbsp;@&nbsp;&raquo; pour @Mon-site@) ',
 	'label:marqueurs_urls_propres2' => '<:label:marqueurs_urls_propres:>',
 	'label:marqueurs_urls_propres_qs' => '<:label:marqueurs_urls_propres:>',
 	'label:max_auteurs_page' => 'Bir sayfadaki yazar adedi :',
 	'label:message_travaux' => 'Bak&#305;m mesaj&#305;n&#305;z :',
-	'label:moderation_admin' => '<NEW>Valider automatiquement les messages des : ',
+	'label:moderation_admin' => 'Mesajlar&#305; otomatik olarak onaylanacaklar : ',
 	'label:paragrapher' => 'Daima paragraflanmal&#305; :',
+	'label:prive_travaux' => '&Ouml;zel alana eri&#351;im :',
 	'label:puce' => 'Kamusal ikon &laquo;<html>-</html>&raquo; :',
 	'label:quota_cache' => 'Kota de&#287;eri :',
-	'label:racc_g1' => '<NEW>Entr&eacute;e et sortie de la mise en &laquo;<html>{{gras}}</html>&raquo; :',
+	'label:racc_g1' => '&laquo;<html>{{koyu}}</html>&raquo; giri&#351; &ccedil;&#305;k&#305;&#351;&#305; :',
 	'label:racc_h1' => ' &laquo;<html>{{{intertitre}}}</html>&raquo; giri&#351; &ccedil;&#305;k&#305;&#351;&#305; :',
 	'label:racc_hr' => 'Yatay &ccedil;izgi &laquo;<html>----</html>&raquo; :',
-	'label:racc_i1' => '<MODIF>&laquo;<html>{italique}</html>&raquo; giri&#351; &ccedil;&#305;k&#305;&#351;&#305;:',
-	'label:radio_desactive_cache3' => '<MODIF>&Ouml;nbelle&#287;i deaktive et :',
-	'label:radio_desactive_cache4' => '<NEW>Utilisation du cache :',
+	'label:racc_i1' => '&laquo;<html>{italik}</html>&raquo; giri&#351; &ccedil;&#305;k&#305;&#351;&#305;:',
+	'label:radio_desactive_cache3' => '&Ouml;nbellek kullan&#305;m&#305; :',
+	'label:radio_desactive_cache4' => '&Ouml;nbellek kullan&#305;m&#305; :',
 	'label:radio_filtrer_javascript3' => '@_CS_CHOIX@',
 	'label:radio_set_options4' => '@_CS_CHOIX@',
 	'label:radio_suivi_forums3' => '@_CS_CHOIX@',
 	'label:radio_target_blank3' => 'D&#305;&#351; ba&#287;lar i&ccedil;in yeni pencere:',
 	'label:radio_type_urls3' => 'URL\'lerin format&#305; :',
 	'label:scrollTo' => 'Eklentileri {jQuery} kur :',
-	'label:separateur_urls_page' => '<NEW>Caract&egrave;re de s&eacute;paration \'type-id\'<br/>(ex. : ?article-123) :',
+	'label:separateur_urls_page' => 'Ayra&ccedil; \'type-id\'<br/>(&ouml;r. : ?article-123) :',
 	'label:set_couleurs' => 'Kullan&#305;lacak set :',
 	'label:spam_mots' => 'Yasaklanan diziler :',
-	'label:spip_options_on' => '<NEW>Inclure :',
+	'label:spip_options_on' => 'Ekle :',
 	'label:spip_script' => '&Ccedil;a&#287;r&#305; script\'i :',
 	'label:style_h' => 'Stiliniz :',
 	'label:style_p' => 'Stiliniz :',
 	'label:suite_introduction' => '&Uuml;&ccedil; nokta  :',
 	'label:terminaison_urls_arbo' => '<:label:terminaison_urls_page:>',
 	'label:terminaison_urls_libres' => '<:label:terminaison_urls_page:>',
-	'label:terminaison_urls_page' => '<MODIF>URl soyadlar&#305; (&ouml;r : .html) :',
+	'label:terminaison_urls_page' => 'URL soyadlar&#305; (&ouml;r : &laquo;&nbsp;.html&nbsp;&raquo;) :',
 	'label:terminaison_urls_propres' => '<:label:terminaison_urls_page:>',
 	'label:terminaison_urls_propres_qs' => '<:label:terminaison_urls_page:>',
 	'label:titre_travaux' => 'Mesaj&#305;n ba&#351;l&#305;&#287;&#305; :',
+	'label:titres_etendus' => '<NEW>Activer l\'utilisation &eacute;tendue des balises #TITRE_XXX&nbsp;:',
 	'label:tri_articles' => 'Se&ccedil;iminiz :',
 	'label:url_arbo_minuscules' => 'URL\'lerde k&uuml;&ccedil;&uuml;k b&uuml;y&uuml;k harfleri koru :',
 	'label:url_arbo_sep_id' => 'Tekrarlama durumunda kullan&#305;lacak ayra&ccedil; \'titre-id\' :<br/>(\'/\' kullanmay&#305;n)',
 	'label:url_glossaire_externe2' => 'D&#305;&#351; s&ouml;zl&uuml;&#287;e ba&#287; :',
 	'label:urls_arbo_sans_type' => 'URL\'lerde SPIP nesnesinin tipini g&ouml;ster :',
-	'label:webmestres' => '<NEW>Liste des webmestres du site :',
+	'label:webmestres' => 'Site y&ouml;neticilerinin listesi :',
 	'liens_en_clair:description' => '<NEW>Met &agrave; votre disposition le filtre : \'liens_en_clair\'. Votre texte contient probablement des liens hypertexte qui ne sont pas visibles lors d\'une impression. Ce filtre ajoute entre crochets la destination de chaque lien cliquable (liens externes ou mails). Attention : en mode impression (parametre \'cs=print\' ou \'page=print\' dans l\'url de la page), cette fonctionnalit&eacute; est appliqu&eacute;e automatiquement.',
 	'liens_en_clair:nom' => 'A&ccedil;&#305;kta b&#305;rak&#305;lm&#305;&#351; ba&#287;lar',
 	'liens_orphelins:description' => 'Bu gerecin 2 i&#351;levi vard&#305;r:
@@ -349,16 +363,17 @@ _ • {Yayg&#305;n} : &#351;u tipteki ba&#287;lar da de&#287;i&#351;tirilir {<html
 	'liens_orphelins:nom' => 'G&uuml;zel URL\'ler',
 
 	// M
-	'mailcrypt:description' => '<MODIF>Metinlerinizde bulunan t&uuml;m ba&#287;lar&#305; maskeler ve bir Javascript ba&#287; yard&#305;m&#305;yla okuyucunun mesajla&#351;mas&#305;n&#305; aktive etme olana&#287;&#305; tan&#305;r. Bu anti-spam gereci robotlar&#305;n, forumlarda veya iskeletlerde kullan&#305;lan komutlarda a&ccedil;&#305;kta b&#305;rak&#305;lan elektronik adresleri toplamas&#305;n&#305; engellemeye &ccedil;al&#305;&#351;&#305;r.',
+	'mailcrypt:description' => 'Metinlerinizde bulunan t&uuml;m ba&#287;lar&#305; maskeler ve bir Javascript ba&#287; yard&#305;m&#305;yla okuyucunun mesajla&#351;mas&#305;n&#305; aktive etme olana&#287;&#305; tan&#305;r. Bu anti-spam gereci robotlar&#305;n, forumlarda veya iskeletlerde kullan&#305;lan komutlarda a&ccedil;&#305;kta b&#305;rak&#305;lan elektronik adresleri toplamas&#305;n&#305; engellemeye &ccedil;al&#305;&#351;&#305;r.',
 	'mailcrypt:nom' => 'MailCrypt',
-	'message_perso' => '<NEW>Un grand merci aux traducteurs qui passeraient par ici. Pat ;-)',
-	'moderation_admins' => '<NEW>administrateurs authentifi&eacute;s',
+	'message_perso' => 'Buraya u&#287;rayacak &ccedil;evirmenlere &ccedil;ok &ccedil;ok te&#351;ekk&uuml;rler. Pat ;-)',
+	'moderation_admins' => 'onayl&#305; y&ouml;neticiler',
+	'moderation_message' => '<NEW>Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n\'appara&icirc;tra qu\'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site, sauf si vous &ecirc;tes identifi&eacute; et autoris&eacute; &agrave; poster directement.',
 	'moderation_moderee:description' => '<MODIF>Permet de mod&eacute;rer la mod&eacute;ration des forums pour les utilisateurs inscrits. [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
 	'moderation_moderee:nom' => '<NEW>Mod&eacute;ration mod&eacute;r&eacute;e',
-	'moderation_redacs' => '<NEW>r&eacute;dacteurs authentifi&eacute;s',
-	'moderation_visits' => '<NEW>visiteurs authentifi&eacute;s',
+	'moderation_redacs' => 'onayl&#305; redakt&ouml;rler',
+	'moderation_visits' => 'onayl&#305; ziyaret&ccedil;iler',
 	'modifier_vars' => '@nb@ parametreyi de&#287;i&#351;tir',
-	'modifier_vars_0' => '<NEW>Modifier ces param&egrave;tres',
+	'modifier_vars_0' => 'Bu parametreleri de&#287;i&#351;tir',
 
 	// N
 	'no_IP:description' => '&Ouml;zel bilgilerin korunmas&#305; endi&#351;esiyle sitenizi ziyaret edenlerin IP adreslerinin otomatik olarak kaydeilmesi i&#351;lemini durdurur : SPIP art&#305;k istatistikler i&ccedil;in veya spip.log dosyas&#305; i&ccedil;in forumlarda bile ziyaretler esnas&#305;nda ge&ccedil;ici olarak hi&ccedil;bir IP numaras&#305;n&#305; saklamayacakt&#305;r.',
@@ -392,6 +407,9 @@ _ • {Yayg&#305;n} : &#351;u tipteki ba&#287;lar da de&#287;i&#351;tirilir {<html
 	'outils_selectiontous' => 'HEPS&#304;',
 
 	// P
+	'pack_actuel' => '@date@ paketi',
+	'pack_actuel_avert' => 'Dikkat, define()\'lar ve global\'ler &uuml;zerindeki y&uuml;k burada belirtilmez',
+	'pack_actuel_titre' => '&#304;SV&#304;&Ccedil;RE &Ccedil;AKISI\'NIN G&Uuml;NCEL KONF&#304;G&Uuml;RASYON PAKET&#304;',
 	'pack_alt' => 'Aktif konfig&uuml;rasyonun parametrelerini g&ouml;ster',
 	'pack_descrip' => '<MODIF>Votre "Pack de configuration actuelle" rassemble l\'ensemble des param&egrave;tres de configuration en cours concernant le Couteau Suisse : l\'activation des outils et la valeur de leurs &eacute;ventuelles variables.
 
@@ -400,7 +418,15 @@ Ce code PHP peut prendre place dans le fichier /config/mes_options.php et ajoute
 Si vous r&eacute;initialisez le plugin en cliquant sur un pack, le Couteau Suisse se reconfigurera automatiquement en fonction des param&egrave;tres pr&eacute;d&eacute;finis dans le pack.',
 	'pack_du' => '• @pack@ paketinin',
 	'pack_installe' => 'Bir konfig&uuml;rasyon paketini y&uuml;kle',
+	'pack_installer' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;\'n&#305; yeniden ba&#351;latmak ve &laquo;&nbsp;@pack@&nbsp;&raquo; paketini kurmak istedi&#287;inizden emin misiniz ?',
+	'pack_nb_plrs' => '&#350;u anda g&uuml;ncel @nb@ &laquo;&nbsp;konfig&uuml;rasyon paketi&nbsp;&raquo; var.',
+	'pack_nb_un' => '&#350;u anda g&uuml;ncel bir &laquo;&nbsp;konfig&uuml;rasyon paketi&nbsp;&raquo; var',
+	'pack_nb_zero' => '&#350;u anda g&uuml;ncel bir &laquo;&nbsp;konfig&uuml;rasyon paketi&nbsp;&raquo; yok.',
+	'pack_outils_defaut' => 'Varsay&#305;lan gere&ccedil;lerin kurulumu',
+	'pack_sauver' => 'G&uuml;ncel konfig&uuml;rasyonu kaydet',
+	'pack_sauver_descrip' => '<NEW>Le bouton ci-dessous vous permet d\'ins&eacute;rer directement dans votre fichier <b>@file@</b> les param&egrave;tres n&eacute;cessaires pour ajouter un &laquo;&nbsp;pack de configuration&nbsp;&raquo; dans le menu de gauche. Ceci vous permettra ult&eacute;rieurement de reconfigurer en un clic votre Couteau Suisse dans l\'&eacute;tat o&ugrave; il est actuellement.',
 	'pack_titre' => 'Akt&uuml;el Konfig&uuml;rasyon',
+	'pack_variables_defaut' => 'Varsay&#305;lan de&#287;i&#351;kenlerin kurulumu',
 	'par_defaut' => 'Varsay&#305;lan',
 	'paragrapher2:description' => '<NEW>La fonction SPIP <code>paragrapher()</code> ins&egrave;re des balises &lt;p&gt; et &lt;/p&gt; dans tous les textes qui sont d&eacute;pourvus de paragraphes. Afin de g&eacute;rer plus finement vos styles et vos mises en page, vous avez la possibilit&eacute; d\'uniformiser l\'aspect des textes de votre site.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Paragrafla',
@@ -412,25 +438,25 @@ Si vous r&eacute;initialisez le plugin en cliquant sur un pack, le Couteau Suiss
 	'raccourcis' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;\'n&#305;n aktif tipografik k&#305;sayollar&#305;&nbsp;:',
 	'raccourcis_barre' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;\'n&#305;n tipografik k&#305;sayollar&#305;',
 	'reserve_admin' => 'Y&ouml;neticilere ayr&#305;lm&#305;&#351; eri&#351;im.',
-	'rss_actualiser' => '<NEW>Actualiser',
+	'rss_actualiser' => 'G&uuml;ncelle',
 	'rss_attente' => 'RSS bekleniyor...',
 	'rss_desactiver' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;\'n&#305;n "G&ouml;zden Ge&ccedil;irmeleri"ni deaktive et',
 	'rss_edition' => 'RSS ak&#305;&#351;&#305;n&#305;n g&uuml;ncellenme tarihi :',
-	'rss_source' => '<NEW>Source RSS',
+	'rss_source' => 'RSS kayna&#287;&#305;',
 	'rss_titre' => '&laquo;&nbsp;&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;&nbsp;&raquo; geli&#351;tirilmekte :',
 	'rss_var' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;\'n&#305;n "G&ouml;zden Ge&ccedil;irmeleri"',
 
 	// S
 	'sauf_admin' => 'Y&ouml;neticiler d&#305;&#351;&#305;nda herkes',
-	'set_options:description' => '<NEW>S&eacute;lectionne d\'office le type d&rsquo;interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes.[[%radio_set_options4%]]',
+	'set_options:description' => '<NEW>S&eacute;lectionne d\'office le type d’interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes.[[%radio_set_options4%]]',
 	'set_options:nom' => '&Ouml;zel aray&uuml;z tipi',
 	'sf_amont' => '<NEW>En amont',
 	'sf_tous' => 'Hepsi',
 	'simpl_interface:description' => 'Renkli ikonun &uuml;zerinden ge&ccedil;erken bir makalenin stat&uuml;s&uuml;n&uuml; h&#305;zl&#305; y&uuml;kleme men&uuml;s&uuml;n&uuml; dezaktive eder. E&#287;er \'client\' performas&#305;n&#305; artt&#305;rmak i&ccedil;in &ouml;zel bir aray&uuml;z istiyorsan&#305;z idealdir.',
 	'simpl_interface:nom' => '&Ouml;zel aray&uuml;z&uuml;n hafifletilmesi',
 	'smileys:aide' => 'G&uuml;len y&uuml;zler : @liste@',
-	'smileys:description' => '<MODIF><acronym>:-)</acronym> tipinde k&#305;sayol i&ccedil;eren t&uuml;m metinlere g&uuml;len y&uuml;z ekler. Forumlar i&ccedil;in ideal. 
-_ Une balise est disponible pour aficher un tableau de smileys dans vos squelettes : #SMILEYS.
+	'smileys:description' => '<acronym>:-)</acronym> tipinde k&#305;sayol i&ccedil;eren t&uuml;m metinlere g&uuml;len y&uuml;z ekler. Forumlar i&ccedil;in ideal. 
+_ &#304;skeletlerinizde g&uuml;len suratlar&#305; bir tabloda g&ouml;stermek i&ccedil;in bir komut mevcuttur : #SMILEYS.
 _ Dessins : [Sylvain Michel->http://www.guaph.net/]',
 	'smileys:nom' => 'G&uuml;len y&uuml;zler (smileys)',
 	'soft_scroller:description' => '<MODIF><NEW>Offre &agrave; votre site public un d&eacute;filement  adouci de la page lorsque le visiteur clique sur un lien pointant vers une ancre : tr&egrave;s utile pour &eacute;viter de se perdre dans une page complexe ou un texte tr&egrave;s long...
@@ -453,7 +479,7 @@ _ • Uniquement pour les articles contenant la balise <code>[sommaire]</code>.
 Ce sommaire peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe en pages et onglets}.',
 	'sommaire:nom' => '<MODIF>Makaleleriniz i&ccedil;in bir &ouml;zet',
 	'sommaire_avec' => '<MODIF>&Ouml;zet i&ccedil;eren bir makale&nbsp;: <b>@racc@</b>',
-	'sommaire_sans' => '<MODIF>&Ouml;zetsiz bir makale&nbsp;: <b>@racc@</b>',
+	'sommaire_sans' => '&Ouml;zetsiz bir makale&nbsp;: <b>@racc@</b>',
 	'spam:description' => 'Kamusal b&ouml;l&uuml;mde otomatik veya k&ouml;t&uuml; niyetli mesaj g&ouml;nderilmesine engel olmaya &ccedil;al&#305;&#351;&#305;r. Baz&#305; s&ouml;zc&uuml;kler ve &lt;a>&lt;/a> komutlar&#305; yasakt&#305;r.
 
 Burada yasaklanacak serileri @_CS_ASTER@ aralar&#305;nda bir bo&#351;luk b&#305;rakarak listeleyiniz. [[%spam_mots%]]
@@ -462,10 +488,10 @@ Burada yasaklanacak serileri @_CS_ASTER@ aralar&#305;nda bir bo&#351;luk b&#305;
 	'spip_cache:description' => '<MODIF>@puce@ Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.[[%radio_desactive_cache3%]]@puce@ Le cache occupe un certain espace disque et SPIP peut en limiter l\'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu\'aucun quota ne s\'applique.[[%quota_cache% Mo]]@puce@ Si la balise #CACHE n\'est pas trouv&eacute;e dans vos squelettes locaux, SPIP consid&egrave;re par d&eacute;faut que le cache d\'une page a une dur&eacute;e de vie de 24 heures avant de la recalculer. Afin de mieux g&eacute;rer la charge de votre serveur, vous pouvez ici modifier cette valeur.[[%duree_cache% heures]]@puce@ Si vous avez plusieurs sites en mutualisation, vous pouvez sp&eacute;cifier ici la valeur par d&eacute;faut prise en compte par tous les sites locaux (SPIP 1.93).[[%duree_cache_mutu% heures]]',
 	'spip_cache:description1' => '<NEW>@puce@ Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]',
 	'spip_cache:description2' => '<NEW>@puce@ Quatre options pour orienter le fonctionnement du cache de SPIP : <q1>
-_ &bull; {Usage normal} : SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. Apr&egrave;s un certain d&eacute;lai, le cache est recalcul&eacute; et stock&eacute;.
-_ &bull; {Cache permanent} : les d&eacute;lais d\'invalidation du cache sont ignor&eacute;s.
-_ &bull; {Pas de cache} : d&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. Ici, rien n\'est stock&eacute; sur le disque.
-_ &bull; {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&eacute;dente, avec une &eacute;criture sur le disque de tous les r&eacute;sultats afin de pouvoir &eacute;ventuellement les contr&ocirc;ler.</q1>[[%radio_desactive_cache4%]]',
+_ • {Usage normal} : SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. Apr&egrave;s un certain d&eacute;lai, le cache est recalcul&eacute; et stock&eacute;.
+_ • {Cache permanent} : les d&eacute;lais d\'invalidation du cache sont ignor&eacute;s.
+_ • {Pas de cache} : d&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. Ici, rien n\'est stock&eacute; sur le disque.
+_ • {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&eacute;dente, avec une &eacute;criture sur le disque de tous les r&eacute;sultats afin de pouvoir &eacute;ventuellement les contr&ocirc;ler.</q1>[[%radio_desactive_cache4%]]',
 	'spip_cache:nom' => 'SPIP ve &ouml;nbellek…',
 	'stat_auteurs' => 'Stat durumundaki yazarlar',
 	'statuts_spip' => 'Sadece &#351;u SPIP stat&uuml;s&uuml; :',
@@ -473,19 +499,27 @@ _ &bull; {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&ea
 	'suivi_forums:description' => 'Bir makale yazar&#305;, ilintili kamusal forumda bir mesaj yay&#305;nland&#305;&#287;&#305;nda her zaman bilgilendirilir. Ama ayr&#305;ca &#351;unlar da bilgilendirilebilir : t&uuml;m forum kat&#305;l&#305;mc&#305;lar&#305; veya mesajlar&#305;n yazarlar&#305;.[[%radio_suivi_forums3%]]',
 	'suivi_forums:nom' => 'Kamusal forumlar&#305;n izlenmesi',
 	'supprimer_cadre' => 'Bu &ccedil;er&ccedil;eveyi kald&#305;r',
-	'supprimer_numero:description' => '<MODIF>Supprimer_numero() SPIP fonksiyonunu iskeletlerde supprimer_numero filtresi olmasa da kamusal alandaki t&uuml;m {{ba&#351;l&#305;klara}} ve {{isimlere}} uygular.<br /> &Ccedil;ok dilli bir sitede kullan&#305;lacak c&uuml;mle yap&#305;s&#305; &#351;&ouml;yledir : <code>1. <multi>My Title[fr]Mon Titre[de]Mein Titel</multi></code>',
+	'supprimer_numero:description' => 'Supprimer_numero() SPIP i&#351;levini iskeletlerde supprimer_numero filtresi olmasa da kamusal alandaki t&uuml;m {{ba&#351;l&#305;klara}} ve {{isimlere}} uygular.<br /> &Ccedil;ok dilli bir sitede kullan&#305;lacak c&uuml;mle yap&#305;s&#305; &#351;&ouml;yledir : <code>1. <multi>My Title[fr]Mon Titre[tr]Ba&#351;l&#305;&#287;&#305;m</multi></code>',
 	'supprimer_numero:nom' => 'Numaray&#305; sil',
 
 	// T
 	'titre' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;',
+	'titre_parent:description' => '<NEW>Au sein d\'une boucle, il est courant de vouloir afficher le titre du parent de l\'objet en cours. Traditionnellement, il suffirait d\'utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT all&eacute;gera l\'&eacute;criture de vos squelettes. Le r&eacute;sultat renvoy&eacute; est : le titre du groupe d\'un mot-cl&eacute; ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, br&egrave;ve, etc.).
+
+Notez : Pour les mots-cl&eacute;s, un alias de #TITRE_PARENT est #TITRE_GROUPE. Le traitement SPIP de ces nouvelles balises est similaire &agrave; celui de #TITRE.
+
+@puce@ Si vous &ecirc;tes sous SPIP 2.0, alors vous avez ici &agrave; votre disposition tout un ensemble de balises #TITRE_XXX qui pourront vous donner le titre de l\'objet \'xxx\', &agrave; condition que le champ \'id_xxx\' soit pr&eacute;sent dans la table en cours (#ID_XXX utilisable dans la boucle en cours).
+
+Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du secteur dans lequel est plac&eacute; l\'article en cours, puisque l\'identifiant #ID_SECTEUR (ou le champ \'id_secteur\') est disponible dans ce cas.[[%titres_etendus%]]',
+	'titre_parent:nom' => '#TITRE_PARENT komutu',
 	'titre_tests' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305; - Test sayfalar&#305;',
 	'tous' => 'Hepsi',
 	'toutes_couleurs' => 'Css stillerinin 36 rengi :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => '&Ccedil;ok dilli bloklar&nbsp;: <b><:trad:></b>',
-	'toutmulti:description' => '<MODIF>SPIP\'in dil zincirlerinin (&ccedil;oklu bloklar&#305;n) makalelerde, ba&#351;l&#305;klarda ve mesajlarda serbest&ccedil;e kullan&#305;labilmesi i&ccedil;in <code><:chaine:></code> k&#305;sayolunu sunar. 
+	'toutmulti:description' => 'SPIP\'in dil zincirlerinin (&ccedil;oklu bloklar&#305;n) makalelerde, ba&#351;l&#305;klarda ve mesajlarda serbest&ccedil;e kullan&#305;labilmesi i&ccedil;in <code><:chaine:></code> k&#305;sayolunu sunar. 
 _ Kullan&#305;lan SPIP fonksiyonu &#351;udur : <code>_T(\'zincir\')</code>.
 
-Bu gere&ccedil; arg&uuml;man da kab&ucirc;l eder. &Ouml;rne&#287;in <code><:chaine{arg1=un texte, arg2=un autre texte}:></code> k&#305;saltmas&#305; 2 arg&uuml;man&#305;n &#351;u zincire ge&ccedil;irilmesine izin verir : <code>\'chaine\'=>\'&#304;&#351;te benim arg&uuml;manlar&#305;m : @arg1@ et @arg2@\'</code>.
+Bu gere&ccedil; arg&uuml;man da kab&ucirc;l eder. &Ouml;rne&#287;in <code><:chaine{arg1=bir metin, arg2=bir ba&#351;ka metin}:></code> k&#305;saltmas&#305; 2 arg&uuml;man&#305;n &#351;u zincire ge&ccedil;irilmesine izin verir : <code>\'chaine\'=>\'&#304;&#351;te benim arg&uuml;manlar&#305;m : @arg1@ et @arg2@\'</code>.
 
 <code>\'zincir\'</code> anahtar&#305;n&#305;n dil dosyalar&#305;nda d&uuml;zg&uuml;n bi&ccedil;imde tan&#305;mland&#305;&#287;&#305;ndan emin olun. [Bu konuyla ilgili &#351;u adresteki ->http://www.spip.net/fr_article2128.html] SPIP belgelerine g&ouml;z at&#305;n&#305;z.',
 	'toutmulti:nom' => '&Ccedil;ok dilli bloklar',
@@ -544,7 +578,7 @@ _ Exemple : <code>article.php3?id_article=123</code>
 @puce@ Si vous utilisez le format {page} ci-dessus ou si l\'objet demand&eacute; n\'est pas reconnu, alors il vous est possible de choisir {{le script d\'appel}} &agrave; SPIP. Par d&eacute;faut, SPIP choisit {spip.php}, mais {index.php} (exemple de format : <code>/index.php?article123</code>) ou une valeur vide (format : <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il vous faut absolument cr&eacute;er le fichier correspondant dans la racine de SPIP, &agrave; l\'image de celui qui existe d&eacute;j&agrave; : {index.php}.
 [[%spip_script%]]',
 	'type_urls:nom' => 'URL\'lerin formatlar&#305;',
-	'typo_exposants:description' => '<MODIF>{{Frans&#305;zca metinler}} : g&uuml;ncel k&#305;saltmalar&#305;n tipografik g&ouml;r&uuml;n&uuml;m&uuml;n&uuml; gerekli elemanlar&#305; &uuml;s\'e koyarak  (b&ouml;ylece, {<acronym>Mme</acronym>} &#351;u hale gelir {M<sup>me</sup>}) ve s&#305;k&ccedil;a yap&#305;lan hatalar&#305; d&uuml;zelterek ({<acronym>2&egrave;me</acronym>} veya {<acronym>2me</acronym>} &#351;u hale gelir {2<sup>e</sup>}) geli&#351;tirir,.
+	'typo_exposants:description' => '{{Frans&#305;zca metinler}} : g&uuml;ncel k&#305;saltmalar&#305;n tipografik g&ouml;r&uuml;n&uuml;m&uuml;n&uuml; gerekli elemanlar&#305; &uuml;s\'e koyarak  (b&ouml;ylece, {<acronym>Mme</acronym>} &#351;u hale gelir {M<sup>me</sup>}) ve s&#305;k&ccedil;a yap&#305;lan hatalar&#305; d&uuml;zelterek ({<acronym>2&egrave;me</acronym>} veya {<acronym>2me</acronym>} &#351;u hale gelir {2<sup>e</sup>}) geli&#351;tirir,.
 _ Burada elde edilen k&#305;saltmalar 2002 y&#305;l&#305;nda yay&#305;nlanan Paris Ulusal Bas&#305;mevi 2002 standartlar&#305;na uygundur. 
 B&ouml;ylece Frans&#305;zca\'da: <html>Dr, Pr, Mgr, St, Bx, m2, m3, Mn, Md, St&eacute;, &Eacute;ts, Vve, bd, Cie, 1o, 2o, etc.</html> k&#305;saltmalar&#305; halledilmi&#351; olur
 
@@ -561,22 +595,22 @@ B&ouml;ylece Frans&#305;zca\'da: <html>Dr, Pr, Mgr, St, Bx, m2, m3, Mn, Md, St&e
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'standart',
-	'urls_base_total' => '<NEW>Il y a actuellement @nb@ URL(s) en base',
-	'urls_base_vide' => '<NEW>La base des URLs est vide',
-	'urls_choix_objet' => '<MODIF>Edition en base de l\'URL d\'un objet sp&eacute;cifique&nbsp;:',
+	'urls_base_total' => '&#350;u anda veritaban&#305;nda @nb@ URL var',
+	'urls_base_vide' => 'URL veritaban&#305; bo&#351;',
+	'urls_choix_objet' => 'Belirgin bir nesnenin URL\'sinin veritaban&#305;nda d&uuml;zenlenmesi&nbsp;:',
 	'urls_edit_erreur' => '<NEW>Le format actuel des URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) ne permet pas d\'&eacute;dition.',
-	'urls_enregistrer' => '<NEW>Enregistrer cette URL en base',
-	'urls_nouvelle' => '<MODIF>&Eacute;diter l\'URL &laquo;&nbsp;propre&nbsp;&raquo;&nbsp;:',
-	'urls_num_objet' => '<NEW>Num&eacute;ro&nbsp;:',
-	'urls_purger' => '<NEW>Tout vider',
-	'urls_purger_tables' => '<NEW>Vider les tables s&eacute;lectionn&eacute;es',
+	'urls_enregistrer' => 'Bu URL\'yi veritaban&#305;na ekle',
+	'urls_nouvelle' => 'URL &laquo;&nbsp;propre&nbsp;&raquo;\'u d&uuml;zenle&nbsp;:',
+	'urls_num_objet' => 'Numara&nbsp;:',
+	'urls_purger' => 'Hepsini bo&#351;alt',
+	'urls_purger_tables' => 'Se&ccedil;ilen tablolar&#305; bo&#351;alt',
 	'urls_purger_tout' => '<NEW>R&eacute;initialiser les URLs stock&eacute;es dans la base&nbsp;:',
-	'urls_rechercher' => '<NEW>Rechercher cet objet en base',
-	'urls_titre_objet' => '<NEW>Titre enregistr&eacute; &nbsp;:',
-	'urls_type_objet' => '<NEW>Objet&nbsp;:',
-	'urls_url_calculee' => '<NEW>URL publique &laquo;&nbsp;@type@&nbsp;&raquo;&nbsp;:',
-	'urls_url_objet' => '<MODIF>URL &laquo;&nbsp;propre&nbsp;&raquo; enregistr&eacute;e&nbsp;:',
-	'urls_valeur_vide' => '<NEW>(Une valeur vide entraine la suppression de l\'URL)',
+	'urls_rechercher' => 'Bu nesneyi veritaban&#305;nda ara',
+	'urls_titre_objet' => 'Kay&#305;tl&#305; ba&#351;l&#305;k &nbsp;:',
+	'urls_type_objet' => 'Nesne&nbsp;:',
+	'urls_url_calculee' => 'Kamusal URL &laquo;&nbsp;@type@&nbsp;&raquo;&nbsp;:',
+	'urls_url_objet' => 'Kaydedilmi&#351; &laquo;&nbsp;ki&#351;isel&nbsp;&raquo; URLler&nbsp;:',
+	'urls_valeur_vide' => '<MODIF>(Bo&#351; bir de&#287;er URL\'nin silinmesine yol a&ccedil;ar)',
 
 	// V
 	'validez_page' => 'De&#287;i&#351;ikliklere eri&#351;mek i&ccedil;in :',
@@ -584,14 +618,14 @@ B&ouml;ylece Frans&#305;zca\'da: <html>Dr, Pr, Mgr, St, Bx, m2, m3, Mn, Md, St&e
 	'vars_modifiees' => 'Veriler sorunsuz de&#287;i&#351;tirildi',
 	'version_a_jour' => 'S&uuml;r&uuml;m&uuml;n&uuml;z g&uuml;ncel.',
 	'version_distante' => 'En eski s&uuml;r&uuml;m...',
-	'version_distante_off' => '<NEW>V&eacute;rification distante d&eacute;sactiv&eacute;e',
+	'version_distante_off' => 'Uzaktan onaylama pasif hale getirildi',
 	'version_nouvelle' => 'Yeni s&uuml;r&uuml;m : @version@',
 	'version_revision' => 'G&ouml;zden ge&ccedil;irme : @revision@',
 	'version_update' => 'Otomatik g&uuml;ncelleme',
-	'version_update_chargeur' => '<NEW>T&eacute;l&eacute;chargement automatique',
-	'version_update_chargeur_title' => '<NEW>T&eacute;l&eacute;charge la derni&egrave;re version du plugin gr&acirc;ce au plugin &laquo;T&eacute;l&eacute;chargeur&raquo;',
+	'version_update_chargeur' => 'Otomatik dosya indirme',
+	'version_update_chargeur_title' => '&laquo;T&eacute;l&eacute;chargeur&raquo; eklentisi sayesinde eklentinin son s&uuml;r&uuml;m&uuml;n&uuml; indirir',
 	'version_update_title' => 'Eklentinin son s&uuml;r&uuml;m&uuml;n&uuml; indirir ve otomatik g&uuml;ncellemeyi ba&#351;lat&#305;r',
-	'verstexte:description' => '<MODIF>&#304;skeletleriniz i&ccedil;in, daha hafif sayfalar olu&#351;turman&#305;z&#305; sa&#287;layacak 2 filtre.
+	'verstexte:description' => '&#304;skeletleriniz i&ccedil;in, daha hafif sayfalar olu&#351;turman&#305;z&#305; sa&#287;layacak 2 filtre.
 _ version_texte : birka&ccedil; &ouml;nemli komut d&#305;&#351;&#305;nda bir html sayfan&#305;n metin i&ccedil;eri&#287;ini al&#305;r.
 _ version_plein_texte : bir html sayfan&#305;n t&uuml;m metin i&ccedil;eri&#287;ini al&#305;r.',
 	'verstexte:nom' => 'Metin s&uuml;r&uuml;m&uuml;',
@@ -603,13 +637,13 @@ Sayfalar&#305;n&#305;za yaln&#305;zca &#351;unu ekleyin  <code><INCLURE{fond=fon
 	'votre_choix' => 'Se&ccedil;iminiz :',
 
 	// W
-	'webmestres:description' => '<NEW>Un {{webmestre}} au sens SPIP est un {{administrateur}} ayant acc&egrave;s &agrave; l\'espace FTP. Par d&eacute;faut et &agrave; partir de SPIP 2.0, il est l’administrateur <code>id_auteur=1</code> du site. Les webmestres ici d&eacute;finis ont le privil&egrave;ge de ne plus &ecirc;tre oblig&eacute;s de passer par FTP pour valider les op&eacute;rations sensibles du site, comme la mise &agrave; jour de la base de donn&eacute;es ou la restauration d&rsquo;un dump.
+	'webmestres:description' => '<NEW>Un {{webmestre}} au sens SPIP est un {{administrateur}} ayant acc&egrave;s &agrave; l\'espace FTP. Par d&eacute;faut et &agrave; partir de SPIP 2.0, il est l’administrateur <code>id_auteur=1</code> du site. Les webmestres ici d&eacute;finis ont le privil&egrave;ge de ne plus &ecirc;tre oblig&eacute;s de passer par FTP pour valider les op&eacute;rations sensibles du site, comme la mise &agrave; jour de la base de donn&eacute;es ou la restauration d’un dump.
 
 Webmestre(s) actuel(s) : {@_CS_LISTE_WEBMESTRES@}.
 _ Administrateur(s) &eacute;ligible(s) : {@_CS_LISTE_ADMINS@}.
 
 En tant que webmestre vous-m&ecirc;me, vous avez ici les droits de modifier cette liste d\'ids -- s&eacute;par&eacute;s par les deux points &laquo;&nbsp;:&nbsp;&raquo; s\'ils sont plusieurs. Exemple : &laquo;1:5:6&raquo;.[[%webmestres%]]',
-	'webmestres:nom' => '<NEW>Liste des webmestres',
+	'webmestres:nom' => 'Webmaster listesi',
 
 	// X
 	'xml:description' => 'Xml onaylay&#305;c&#305;s&#305;n&#305;, kamusal alan i&ccedil;in [&#351;u belgede->http://www.spip.net/fr_article3541.html] belirtildi&#287;i gibi aktive eder. &laquo;&nbsp;Analyse XML&nbsp;&raquo; ba&#351;l&#305;kl&#305; bir d&uuml;&#287;me di&#287;er y&ouml;netim d&uuml;&#287;melerine eklenecektir.',

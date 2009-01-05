@@ -648,7 +648,7 @@ Escolla aqu&iacute; se quere po&ntilde;er en super&iacute;ndice certos atallos s
 	'urls_type_objet' => 'Obxecto&nbsp;:',
 	'urls_url_calculee' => 'URL p&uacute;blico &laquo;&nbsp;@type@&nbsp;&raquo;&nbsp;:',
 	'urls_url_objet' => 'URL &laquo;&nbsp;propias&nbsp;&raquo; rexistrado&nbsp;:',
-	'urls_valeur_vide' => '(Un valor baleiro provoca a supresi&oacute;n do URL)',
+	'urls_valeur_vide' => '<MODIF>(Un valor baleiro provoca a supresi&oacute;n do URL)',
 
 	// V
 	'validez_page' => 'Para acceder &aacute;s modificaci&oacute;ns :',
