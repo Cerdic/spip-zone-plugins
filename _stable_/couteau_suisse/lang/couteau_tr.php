@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attente_confirmation' => 'Onay bekliyor',
 
 	// D
+	'date_court' => '@jour@/@mois@/@annee@',
 	'derniers_connectes' => 'Son ba&#287;lananlar :',
 
 	// E
@@ -35,6 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'objet_breves' => 'K&#305;sa haberler',
 	'objet_mot' => 'S&ouml;zc&uuml;k',
 	'objet_mots' => 'S&ouml;zc&uuml;kler',
+	'objet_petition' => 'Dilek&ccedil;e',
+	'objet_petitions' => 'Dilek&ccedil;e',
 	'objet_rubrique' => 'Ba&#351;l&#305;k',
 	'objet_rubriques' => 'Ba&#351;l&#305;klar',
 	'objet_syndic' => 'Site',
@@ -46,17 +49,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'Sayfa @page@ : @title@',
 	'page_precedente' => '&Ouml;nceki sayfa',
 	'page_suivante' => 'Sonraki sayfa',
-	'plugin_xml' => '<MODIF>SPIP sitenizin y&ouml;netilmesin&#351; geli&#351;tirecek bir &ccedil;ok k&uuml;&ccedil;&uuml;k ve yeni i&#351;levi tek bir eklentide toplar.
+	'plugin_xml' => 'SPIP sitenizin y&ouml;netilmesine geli&#351;tirecek bir &ccedil;ok k&uuml;&ccedil;&uuml;k ve yararl&#305; yeni i&#351;levi tek bir eklentide toplar.
 
-Bu aletlerden her biri kullan&#305;z&#305; taraf&#305;ndan aktive edilebilir ve pasif hale getirilebilir [eklentinin y&ouml;netim sayfas&#305;->./?exec=admin_couteau_suisse] ve bir &ccedil;ok de&#287;i&#351;ken kontrol edilebilir : cliquer sur {{Configuration}}\'a t&#305;klay&#305;n&#305;z ve {{&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;}} ba&#351;l&#305;&#287;&#305;na t&#305;klay&#305;n&#305;z.
+Bu gere&ccedil;lerin her biri kullan&#305;c&#305; taraf&#305;ndan aktive edilebilir ve pasif hale getirilebilir [eklentinin y&ouml;netim sayfas&#305;->./?exec=admin_couteau_suisse] ve baz&#305; de&#287;i&#351;kenleri kontrol edilebilir : {{Configuration}}\'a t&#305;klay&#305;n&#305;z ve {{&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;}} ba&#351;l&#305;&#287;&#305;n&#305; se&ccedil;iniz.
 
 Mevcut kategoriler &#351;unlard&#305;r : Y&ouml;netim, Tipografik Geli&#351;tirme, Tipografik K&#305;sayollar, Kamusal g&ouml;sterim, Komutlar, filtreler, kriterler.
 
-D&eacute;couvrez dans ce plugin vos outils favoris : {Exposants typographiques}, {Guillemets typographiques}, {Belles puces}, {Un sommaire pour vos articles}, {Smileys}, {Supprime le num&eacute;ro}, {Belles URLs}, {SPIP et les liens... externes}, {Pas de forums anonymes}, {D&eacute;coupe en pages et onglets}, etc., etc.
+Bu eklentide favori gere&ccedil;lerinizi bulacaks&#305;n&#305;z : {Numaray&#305; sil}, {URL formatlar&#305;}, {Tipografik t&#305;rnaklar}, {G&uuml;zel i&#351;aretler}, {Makaleleriniz i&ccedil;in i&ccedil;indekiler}, {G&uuml;len suratlar}, {SPAM\'e kar&#351;&#305; sava&#351;}, {G&uuml;zel URLler}, {SPIP ve d&#305;&#351; ba&#287;lar}, {Anonim forum yasaklama}, {Sayfa ve sekmelere ay&#305;rma}, vb.
 
-N\'h&eacute;sitez pas &agrave; consulter les articles de documentation du plugin publi&eacute;s sur : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Eklentinin belgeleme makalelerini inceleyiniz : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilit&eacute; : SPIP toutes versions 1.9x',
+Uyumluluk : SPIP 1.9x ve 2.0 ',
 
 	// S
 	'smileys_dispos' => 'Sunulan g&uuml;len suratlar (smileys) :',
@@ -70,6 +73,9 @@ Compatibilit&eacute; : SPIP toutes versions 1.9x',
 	'texte_formatspip' => 'SPIP FORMATINDA OR&#304;J&#304;NAL MET&#304;N',
 	'textes_formatspip' => 'SPIP FORMATINDA OR&#304;J&#304;NAL MET&#304;NLER',
 	'titre' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;',
+	'tri_auteurs' => 'YAZAR SIRASI',
+	'tri_descendre' => 'Bu yazar&#305; alta indir',
+	'tri_monter' => 'Bu yazar&#305; yukar&#305; &ccedil;&#305;kart',
 
 	// U
 	'urls_propres_erreur' => 'Bu format a&#351;a&#287;&#305;da belirtilen &ouml;zel URL\'leri dikkate almaz.',
