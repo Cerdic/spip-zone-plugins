@@ -238,9 +238,10 @@ class cfg
 		if ($onglets = lister_onglets_cfg()){
 			foreach ($onglets as $fonds=>$ong){
 				$o = $ong['onglet'];
+
 				// onglet actif
 				if ($o == 'oui')	
-					$ong['actif'] = ($fonds == _request('cfg'));
+					$onglets[$fonds]['actif'] = ($fonds == _request('cfg'));
 				// rendre actif un parent si l'enfant est actif (onglet=nom_du_parent
 				// (/!\ ne pas le desactiver s'il a deja ete mis actif)
 				if ($o && $o!='oui' && $o!='non'){
