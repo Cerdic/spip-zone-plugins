@@ -1,0 +1,26 @@
+<!-- descriptif=
+<h4>
+Configuration de la RBL
+</h4>
+-->
+
+<!-- titre=RBL-->
+
+#CACHE{0}
+
+<form method="post" action="#SELF">[<div>(#ENV{_cfg_}|form_hidden)</div>]
+
+<fieldset><legend>Realtime Blakhole List</legend>
+<p>
+<label>
+Si vous ne voulez pas utiliser la valeur par d&#233;faut <strong>sbl-xbl.spamhaus.org</strong> indiquez ci-dessous une RBL alternative&nbsp;:
+<br />
+<input type="text" name="rbl" class="fondl" value="#ENV{rbl}" />
+</label>
+</p>
+</fieldset>
+<div style="text-align:#LANG_RIGHT">
+	<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
+</div>
+</form>
+
