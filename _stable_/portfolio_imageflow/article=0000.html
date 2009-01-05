@@ -1,6 +1,6 @@
 #CACHE{86400}
 [(#REM)
-
+<!--
 	// $LastChangedRevision$
 	// $LastChangedBy$
 	// $LastChangedDate$
@@ -12,21 +12,40 @@
 	Identique a html/article.html
 	sauf 
 	- insertion de la balise IMAGEFLOW_INSERT_HEAD avant le head
+	- ajout de styles complementaires en fin de head
 	- retrait du portfolio dist de bas de page
 	- retrait de la liste des documents joints
 	
 	Documentation : http://www.quesaco.org/Portfolio-ImageFlow-pour-SPIP	
-
+-->
 ]<BOUCLE_article_principal(ARTICLES) {id_article}>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
 <title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
-<INCLURE{fond=inc-head}>
-
-#IMAGEFLOW_INSERT_HEAD
-
+[(#REM)
+<!--
+	Insertion du inc-head (contient la balise INSERT-HEAD)
+-->	
+]<INCLURE{fond=inc-head}>
+[(#REM)
+<!--
+	Ajout de la balise IMAGEFLOW_INSERT_HEAD pour charger le javascrpt du plugin
+-->	
+]#IMAGEFLOW_INSERT_HEAD
+[(#REM)
+<!--
+	Optimisez le style du portfolio ici (toujours en fin de head pour ecraser les reglages par defaut)
+	Exemple:
+-->	
+]<style type="text/css">
+<!--
+#imageflow {margin-top:0; margin-right:135px;} /* la boite complete imageflow */
+#imageflow #captions {color:#003} /* petit titre sous les vignettes */
+#imageflow #slider {margin-left:180px} /* boite conteneur ascenseur */
+-->
+</style>
 </head>
 
 <body class="page_article">
