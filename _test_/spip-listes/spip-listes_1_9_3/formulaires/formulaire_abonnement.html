@@ -92,8 +92,10 @@
 		<ul>
 		<BOUCLE_listes(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'} {0,(#ENV{mode_login}|?{100,0})}>
 				[(#TOTAL_BOUCLE|=={1}|?{' ',''})
-				<input type="hidden" name="list&#91;&#93;"  checked="checked" value="#ID_LISTE" />
+				<li>
+				<label><input type="hidden" name="list&#91;&#93;"  checked="checked" value="#ID_LISTE" />
 				<:spiplistes:abonnement_seule_liste_dispo:>: <strong>#TITRE</strong> [- <em>(#TEXTE|textebrut)</em>]
+				</label></li>
 				]
 				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
 				<li>
@@ -104,12 +106,14 @@
 		</fieldset>
 		[(#COMPTEUR_BOUCLE|!={1}|?{'<!-- fin de liste -->',''})]
 		</B_listes>
-			[(#ENV{reponse_formulaire}|?{'',' '})
-				<:spiplistes:aucune_liste_publique:>]
-			[(#ENV{mode_login}|?{' ',''})
+			[(#ENV{reponse_formulaire}|non)
+				<fieldset><:spiplistes:aucune_liste_publique:></fieldset>]
+			[(#ENV{reponse_formulaire}|oui)
+			[(#ENV{mode_login}|oui)
 			</fieldset>
 			<fieldset style="color:#000">
 			<legend><:spiplistes:abo_1_lettre:></legend>]
+			]
 		<//B_listes>
 		
 [(#REM) 
