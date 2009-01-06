@@ -16,7 +16,7 @@
 		<language>#LANG</language>
 	<//B_titre>
 
-	<BOUCLE_20recents(SYNDIC_ARTICLES){contenu}{id_syndic?}{tri_sedna}{0,20}{unique}>
+	<BOUCLE_20recents(SYNDIC_ARTICLES){contenu}{id_syndic?}{tri_sedna}{0,20}{unique}{age<31}>
 		<item>
 		<title>[(#TITRE*|texte_backend)]</title>
 		<link>#URL_ARTICLE</link>
