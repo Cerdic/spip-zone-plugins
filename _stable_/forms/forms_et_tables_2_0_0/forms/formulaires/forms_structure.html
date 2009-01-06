@@ -34,13 +34,13 @@
 				[<span class="formInfo"><a href="#URL_PAGE{forms_tip,id_form=#ID_FORM&champ=#CHAMP&width=200}" class="jTip" id='aide-#ID_FORM-#CHAMP'>(#AIDE|?{'?'})</a></span>]
 				[<div class='explication'>(#TYPE|forms_label_details)</div>]
 				[(#GET{type}|=={select}|oui) #SET{afficher,0}
-					<INCLURE{fond=formulaires/forms_champ_select}{id_form}{champ}{valeurs=#ENV**{valeurs}}{name=#ENV{name_#CHAMP,#CHAMP}}{crayon_active=#ENV{crayon_active,''}}>
+					<INCLURE{fond=formulaires/forms_champ_select}{id_form}{champ}{name=#ENV{name_#CHAMP,#CHAMP}}{env}>
 				]
 				[(#GET{type}|=={multiple}|oui) #SET{afficher,0}
-					<INCLURE{fond=formulaires/forms_champ_case_choix}{type=checkbox}{id_form}{champ}{valeurs=#ENV**{valeurs}}{name=#ENV{name_#CHAMP,#CHAMP}}{crayon_active=#ENV{crayon_active,''}}>
+					<INCLURE{fond=formulaires/forms_champ_case_choix}{type=checkbox}{id_form}{champ}{name=#ENV{name_#CHAMP,#CHAMP}}{env}>
 				]
 				[(#GET{type}|=={radio}|oui) #SET{afficher,0}
-					<INCLURE{fond=formulaires/forms_champ_case_choix}{type=radio}{id_form}{champ}{valeurs=#ENV**{valeurs}}{name=#ENV{name_#CHAMP,#CHAMP}}{crayon_active=#ENV{crayon_active,''}}>
+					<INCLURE{fond=formulaires/forms_champ_case_choix}{type=radio}{id_form}{champ}{name=#ENV{name_#CHAMP,#CHAMP}}{env}>
 				]
 				[(#TYPE|=={mot}|oui) #SET{afficher,0}
 					<INCLURE{fond=formulaires/forms_select_mot}{id_form}{id_groupe=#EXTRA_INFO}{champ}{valeur=#ENV**{valeurs}}{name=#ENV{name_#CHAMP,#CHAMP}}{crayon_active=#ENV{crayon_active,''}}>
@@ -53,18 +53,18 @@
 				[(#TYPE|=={date}|oui) #SET{class,date-picker} #SET{date-picker,1}]
 				[(#TYPE|=={password}|oui) #SET{type,password} #SET{afficher,0}]
 				[(#TYPE|=={texte}|oui) #SET{afficher,0}
-					[(#ENV**{valeurs}|table_valeur{#CHAMP,''}|forms_textarea{10,80,#ENV{name_#CHAMP,#CHAMP},input-#ID_FORM-#CHAMP,[(#OBLIGATOIRE|=={oui}|?{forml,formo}|concat{' ',#ENV{crayon_active,''},' ',#ENV**{erreur}|table_valeur{#CHAMP}|?{champ_obli_oubli}})],'',#EXTRA_INFO})]
+					[(#ENV{#CHAMP,''}|forms_textarea{10,80,#ENV{name_#CHAMP,#CHAMP},input-#ID_FORM-#CHAMP,[(#OBLIGATOIRE|=={oui}|?{forml,formo}|concat{' ',#ENV{crayon_active,''},' ',#ENV**{erreur}|table_valeur{#CHAMP}|?{champ_obli_oubli}})],'',#EXTRA_INFO})]
 				]
 				[(#TYPE|=={fichier}|oui) #SET{afficher,0}
 					<input type='file' name='#ENV{name_#CHAMP,#CHAMP}' id='input-#ID_FORM-#CHAMP'
 						class='file[ (#ENV{crayon_active,''})][ (#TYPE)]' 
 						size='40' />
-					[(#ENV**{valeurs}|table_valeur{#CHAMP,''})]
+					#ENV{#CHAMP,''}
 				]
 				[(#REM) tous les autres types sont affiches ici]
 				[(#GET{afficher}|oui)
 				[(#SET{input,
-					<input type="[(#GET{type})]" name='[(#ENV{name_#CHAMP,#CHAMP})]' id='input-#ID_FORM-#CHAMP' value="[(#ENV**{valeurs}|table_valeur{#CHAMP,''})]" 
+					<input type="[(#GET{type})]" name='[(#ENV{name_#CHAMP,#CHAMP})]' id='input-#ID_FORM-#CHAMP' value="[(#ENV{#CHAMP,''})]" 
 						class='[(#GET{type})][ (#GET{class})][ (#ENV{crayon_active,''})][ (#TYPE)]' 
 						size='40' />
 				})]

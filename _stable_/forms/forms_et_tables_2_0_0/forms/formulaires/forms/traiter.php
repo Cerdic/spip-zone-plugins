@@ -23,12 +23,12 @@ function formulaires_forms_traiter_dist($id_form = 0, $id_article = 0, $id_donne
 		forms_poser_cookie_sondage($id_form);
 	}
 	
-	include_spip('inc/forms');
+	include_spip('action/forms_editer_donnee');
 	$url_validation = forms_enregistrer_reponse_formulaire($id_form, $id_donnee, $erreur, $reponse, $script_validation, $id_article?"id_article=$id_article":"");
 	if (!$erreur) {
 		$formok = _T($reponse_enregistree)."<span class='id_donnee' rel='$id_donnee'></span>";
 		if ($id_donnee_liee && $id_donnee){
-			sql_insertq("spip_forms_donnees_donnees",array("id_donnee"=>$id_donnee,"id_donnee_liee"=>$id_donnee_liee);
+			sql_insertq("spip_forms_donnees_donnees",array("id_donnee"=>$id_donnee,"id_donnee_liee"=>$id_donnee_liee));
 		}
 		if ($reponse)
 		  $formok .= "<span class='spip_form_ok_confirmation'>"

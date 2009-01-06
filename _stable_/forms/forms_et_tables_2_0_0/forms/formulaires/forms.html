@@ -17,7 +17,7 @@
 [(#ENV{editable}|oui)
 	[<form method='post' action='#ENV{action}#form#ID_FORM' enctype='multipart/form-data'>(#ENV{formactif})]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<INCLURE{fond=#ENV{class}}{id_form}{affiche_sondage}{erreur=#ENV**{erreurs}|serialize}{valeurs=#ENV**}>
+		<INCLURE{fond=#ENV{class}}{env}>
 	[</form>(#ENV{formactif})]
 	
 	[(#REM) [(#ID_DONNEE|afficher_documents_colonne{donnee,donnees_edit})]]

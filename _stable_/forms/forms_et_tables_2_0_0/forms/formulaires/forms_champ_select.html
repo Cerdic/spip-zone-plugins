@@ -4,7 +4,7 @@
 <select name='#ENV{name,#CHAMP}' id='input-#ID_FORM-#CHAMP' class='[(#ENV{crayon_active,''}) ]'>
 	<option value=''>#ENV{titre_select,''}</option>]
 	<BOUCLE_choix(FORMS_CHAMPS_CHOIX){id_form}{champ}{par rang}>
-	<option value='#CHOIX' [(#CHOIX|=={[(#ENV**{valeurs}|table_valeur{#CHAMP})]}|?{'selected="selected"',''})]>
+	<option value='#CHOIX' [(#CHOIX|=={#ENV{#CHAMP,''}}|?{'selected="selected"'})]>
 		&nbsp;&nbsp;&nbsp;[(#TITRE|supprimer_numero)]
 	</option>
 	</BOUCLE_choix>
