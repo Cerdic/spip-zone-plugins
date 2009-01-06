@@ -57,7 +57,9 @@ function formulaires_forms_charger_dist($id_form = 0, $id_article = 0, $id_donne
 
 	$valeurs['id_article'] = $id_article;
 	$valeurs['id_form'] = $id_form;
-	$valeurs['id_donnee'] = $id_donnee?$id_donnee:(0-$GLOBALS['auteur_session']['id_auteur']); # GROS Hack pour les jointures a la creation;
+	$valeurs['id_donnee'] = $id_donnee;
+	if (!$valeurs['id_donnee'] AND isset($GLOBALS['visiteur_session']['id_auteur']))
+		$valeurs['id_donnee'] = (0-$GLOBALS['visiteur_session']['id_auteur']); # GROS Hack pour les jointures a la creation;
 	$valeurs['class'] = 'formulaires/'.($class?$class:'forms_structure');
 
 	$valeurs['_hidden'] = 

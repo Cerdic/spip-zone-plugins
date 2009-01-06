@@ -1,0 +1,14 @@
+<BOUCLE_f(FORMS){id_form}>
+<BOUCLE_champs(FORMS_CHAMPS){id_form}{tout}{champ}>
+<B_choix>
+<div class='choix_#ENV{type,radio}[ (#ENV{crayon_active,''})]'>]
+	<BOUCLE_choix(FORMS_CHAMPS_CHOIX){id_form}{champ}{par rang}>
+	<div class='choix'><input type='#ENV{type,radio}' class='#ENV{type,radio}' name='#ENV{name,#CHAMP}' value='#CHOIX' id='input-#ID_FORM-#CHOIX'
+	[(#CHOIX|=={[(#ENV**{valeurs}|table_valeur{#CHAMP})]}|?{'checked="checked"',''})] /> 
+	<label for='input-#ID_FORM-#CHOIX'>[(#TITRE|supprimer_numero)]</label>
+	</div>]
+	</BOUCLE_choix>
+</div>
+</B_choix>
+</BOUCLE_champs>
+</BOUCLE_f>
