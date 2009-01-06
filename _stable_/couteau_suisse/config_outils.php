@@ -786,15 +786,12 @@ add_outil( array(
 	'categorie'	 => 'typo-racc',
 	'contrib'	=> 2427,
 	'pipeline:pre_typo' => 'couleurs_pre_typo',
+	'pipeline:nettoyer_raccourcis_typo' => 'couleurs_nettoyer_raccourcis',
 	'pipeline:bt_toolbox' => 'couleurs_BarreTypo',
 	'code:options' => "%%couleurs_fonds%%%%set_couleurs%%%%couleurs_perso%%",
 	'code:fonctions' => "// aide le Couteau Suisse a calculer la balise #INTRODUCTION
-function couleurs_introduire(\$texte) {
-	\$couleurs = unserialize(\$GLOBALS['meta']['cs_couleurs']);
-	\$couleurs = _COULEURS_SET===0?\"\$couleurs[0]|\$couleurs[1]\":\$couleurs[0];
-	return preg_replace(\",\[/?(bg|fond)?\s*(\$couleurs|couleur|color)\],i\", '', \$texte);
-}
-\$GLOBALS['cs_introduire'][] = 'couleurs_introduire';
+include_spip('outils/couleurs');
+\$GLOBALS['cs_introduire'][] = 'couleurs_nettoyer_raccourcis';
 ",
 ));
 

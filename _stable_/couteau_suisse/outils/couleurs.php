@@ -155,4 +155,13 @@ function couleurs_BarreTypo($tr) {
 	return $tr.'<tr><td><p style="margin:0; line-height:1.9em;">'._T('couteauprive:couleurs:nom')."&nbsp;$r1$r2</div></td></tr>";
 }
 
+function couleurs_nettoyer_raccourcis($texte) {
+	// les raccoucis de couleur sont-il dispo ?
+	if (!isset($GLOBALS['meta']['cs_couleurs'])) couleurs_installe();
+	// le tableau des smileys est present dans les metas
+	$couleurs = unserialize($GLOBALS['meta']['cs_couleurs']);
+	$couleurs = _COULEURS_SET===0?"$couleurs[0]|$couleurs[1]":$couleurs[0];
+	return preg_replace(",\[/?(bg|fond)?\s*($couleurs|couleur|color)\],i", '', $texte);
+}
+
 ?>
