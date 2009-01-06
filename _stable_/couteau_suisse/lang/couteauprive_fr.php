@@ -546,7 +546,7 @@ Notez : Pour les mots-cl&eacute;s, un alias de #TITRE_PARENT est #TITRE_GROUPE. 
 Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du secteur dans lequel est plac&eacute; l\'article en cours, puisque l\'identifiant #ID_SECTEUR (ou le champ \'id_secteur\') est disponible dans ce cas.
 
 La syntaxe <html>#TITRE_XXX{yy}</html> est &eacute;galement support&eacute;e. Exemple : <html>#TITRE_ARTICLE{10}</html> renverra le titre de l\'article #10.[[%titres_etendus%]]',
-	'titre_parent:nom' => 'Balise #TITRE_PARENT &amp; Cie',
+	'titre_parent:nom' => 'Balises #TITRE_PARENT/OBJET',
 	'titre_tests' => 'Le Couteau Suisse - Page de tests&hellip;',
 	'tous' => 'Tous',
 	'toutes_couleurs' => 'Les 36 couleurs des styles css :@_CS_EXEMPLE_COULEURS@',
