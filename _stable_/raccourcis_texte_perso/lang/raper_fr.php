@@ -80,7 +80,7 @@ $GLOBALS['i18n_'._RAPER_PREFIX.'_fr'] = array(
 		<br /> 
 		Pour une meilleure fluidité lors de modifications des raccourcis, 
 		il est conseillé d'installer - au minimum - la version 1.2.6 de jQuery."
-
+	, 'jquery_detecte_' => "jQuery détecté : v."
 ); //
 
 ?>

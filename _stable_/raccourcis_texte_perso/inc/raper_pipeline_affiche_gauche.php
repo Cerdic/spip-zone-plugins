@@ -18,13 +18,23 @@ function raper_affiche_gauche ($flux) {
 		
 		$flux['data'] .= ""
 			. "<br />\n"
-			. "<div class='verdana2'>\n"
+			. "<div class='verdana2' style='margin:1em 0;'>\n"
 			. "
 <script type='text/javascript'>
 <!--
 	if(jQuery.fn.jquery < '1.2.6') {
 		document.write(\"" . raper_js_propre(_T('raper:jquery_ancienne_version')) . "\"); 
 	}
+	";
+		// afficher la version actuelle de jQuery uniquement en page de configuration
+		if($exec == 'raper_configure') {
+			$flux['data'] .= ""
+				. "else { document.write(\"" . raper_js_propre(_T('raper:jquery_detecte_')) . "\" + jQuery.fn.jquery); }\n";
+		}
+		
+		// suite/fin du js
+		$flux['data'] .= ""
+			. "
 //-->
 </script>
 <noscript>
@@ -41,10 +51,11 @@ function raper_affiche_gauche ($flux) {
 
 function raper_js_propre ($s) {
 	$s = ""
-		. "<div class='cadre-padding'><div class='verdana2'>"
+		//. "<div class='cadre-padding'><div class='verdana2'>"
 		//. $s // semble ne pas aimer les \n ?
 		. preg_replace("|[[:space:]]+|" , " ", $s)
-		. "</div></div>";
+		//. "</div></div>"
+		;
 	return($s);
 }
 
