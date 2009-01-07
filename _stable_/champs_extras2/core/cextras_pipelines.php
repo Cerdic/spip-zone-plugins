@@ -107,6 +107,7 @@ function cextra_quete_valeurs_extras($extras, $type, $id){
 function cextras_get_extras_match($nom) {
 	$extras = array();
 	if ($champs = pipeline('declarer_champs_extras', array())) {
+		$nom = objet_type(table_objet($nom));
 		foreach ($champs as $c) {
 			if ($nom == objet_type($c->table) and $c->champ and $c->sql) {
 				$extras[] = $c;
@@ -180,7 +181,7 @@ function cextras_editer_contenu_objet($flux){
 function cextras_pre_edition($flux){
 	
 	// recuperer les champs crees par les plugins
-	if ($extras = cextras_get_extras_match(objet_type($flux['args']['table']))) {
+	if ($extras = cextras_get_extras_match($flux['args']['table'])) {
 		foreach ($extras as $c) {
 			if (_request('cextra_'.$c->champ)) {
 				$extra = _request($c->champ);

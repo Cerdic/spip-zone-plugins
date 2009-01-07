@@ -7,7 +7,7 @@ include_spip('inc/cextras');
 // (dont on peut afficher les champs dans les formulaires)
 function cextras_objets_valides(){
 	$objets = array();
-	foreach (array('article','auteur','breve','groupe_mot','mot','rubrique','site') as $objet) {
+	foreach (array('article','auteur','breve','groupes_mot','mot','rubrique','site') as $objet) {
 		$objets[$objet] = array(
 			'table' => table_objet_sql($objet), 
 			'nom' => _T('cextras:table_'.$objet),
