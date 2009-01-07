@@ -86,9 +86,7 @@ function formulaires_editer_champ_extra_traiter_dist($id_extra='new', $redirect=
 	$extras = iextras_get_extras();
 
 	// ajout du champ ou modification du champ extra de meme id.
-spip_log($extra, 'aa');
 	$extra = new ChampExtra($extra);
-spip_log($extra, 'aa');
 	if ($new) {
 		$extras[] = $extra;
 	} else {
