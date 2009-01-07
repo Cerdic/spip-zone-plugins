@@ -4,60 +4,43 @@
 	<auteur>	<!-- Auteur du plugin -->
 	Joseph, marcimat et toutes les bonnes volont&eacute;es - 2008
 	</auteur>
-	<version>0.4.1</version>
+	<version>0.5</version>
 	<version_base>0.3</version_base>
 	<etat>
 	test
 	</etat>
 	<description>
 	<multi>
-	Ce plugin ajoute une sp&eacute;cialisation "technique" aux groupes de mots cl&eacute;s. 
-_ Test&eacute; sur la version 2.0 beta 2 [13050] de SPIP.
-- Ajout d'un champ technique de type texte &agrave; la table spip_groupes_mots.
-- Sur le formulaire editer_groupe_mot, ajout d'une case à cocher mots techniques. 
-Si elle est coch&eacute;e, alors la valeur 'oui' sera mise dans le champs 
-technique sinon le champs technique restera vide.
-- Les plugins pourront rajouter des groupes de mots-cl&eacute;s avec une autre 
-valeur dans le champs technique. Ce sera au plugin de d&eacute;finir les autorisations du groupe de mots-cl&eacute;s, 
-en fonction de chaque usage.
-- Pour mieux distinguer les mots cl&eacute;s non techniques des mots cl&eacute;s 
-techniques, les mots cl&eacute;s techniques sont repr&eacute;sent&eacute;s par une petite 
-roue dent&eacute;e au lieu d'une cl&eacute; à molette (sur la page exec=mots-tous uniquement pour le moment)
-- Par d&eacute;faut, les boucles MOTS et GROUPES_MOTS filtreront les mots-cl&eacute;s 
+Ce plugin ajoute une sp&eacute;cialisation "technique" aux groupes de mots cl&eacute;s. 
+
+Par d&eacute;faut, les boucles MOTS et GROUPES_MOTS filtreront les mots-cl&eacute;s 
 techniques. Cependant, le critère {tout} permettra de renvoyer tous 
 les mots cl&eacute;s et le crit&egrave;re {technique=oui} 
 permet de s&eacute;lectionner par type technique
 	</multi>
 	</description>
-	<options>mots_techniques_options.php</options>
-	<fonctions>mots_techniques_autorisations.php</fonctions>
-	<fonctions>mots_techniques_fonctions.php</fonctions>
-	<fonctions>public/mots_techniques_boucles.php</fonctions>
 	<prefix> 
 	mots_techniques
 	</prefix>
- 	<pipeline>
-		<nom>editer_contenu_objet</nom>
-		<inclure>mots_techniques_pipelines.php</inclure>
-	</pipeline>	
- 	<pipeline>
-		<nom>pre_edition</nom>
-		<inclure>mots_techniques_pipelines.php</inclure>
-	</pipeline>		
 	<pipeline>
-		<nom>autoriser_groupemots</nom>
+		<nom>pre_boucle</nom>
 		<inclure>mots_techniques_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/mots_techniques.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/mots_techniques.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>declarer_tables_principales</nom>
+		<nom>declarer_champs_extras</nom>
 		<inclure>base/mots_techniques.php</inclure>
 	</pipeline>
 	<install>base/mots_techniques_install.php</install>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<chemin dir='' />
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[2.0.2;]" />
+	<necessite id="cextras" version="[0.7;]" />
 </plugin>

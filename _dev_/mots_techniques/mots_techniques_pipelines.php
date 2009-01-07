@@ -1,79 +1,44 @@
 <?php
 
-// ajouter un checkbox 'mots techniques' sur le formulaire CVT editer_groupe_mots
-function mots_techniques_editer_contenu_objet($flux){
-	
-	if ($flux['args']['type']=='groupe_mot') {
-		include_spip('public/assembler');
-		$flux['args']['contexte']['technique'] = sql_getfetsel('technique','spip_groupes_mots','id_groupe='.sql_quote($flux['args']['contexte']['id_groupe']));
-		$mt = recuperer_fond('formulaires/inc-groupe_mots_techniques', $flux['args']['contexte']);
-		spip_log($mt,'ploup');
-		$flux['data'] = preg_replace('%(<!--extra-->)%is', '$1'."\n".$mt, $flux['data']);
-	}
-	return $flux;
-}
-
-// ajouter le champ technique soumis lors de la soumission du formulaire CVT editer_groupe_mots
-function mots_techniques_pre_edition($flux){
-	if ($flux['args']['table']=='spip_groupes_mots' AND $flux['args']['action']=='modifier') {
-		if (_request('mt_technique_present')=='oui') {
-			$technique = _request('technique'); 
-			$flux['data']['technique'] = ($technique=='oui')?'oui':'';
+/**
+ * Prendre en compte les criteres "technique" et "tout"
+ * sur les boucles mots et groupes_mots
+ * (on restreint par defaut aux mots cles non techniques)
+ */
+function mots_techniques_pre_boucle($boucle){
+	// MOTS
+	if ($boucle->type_requete == 'mots') {
+		$id_table = $boucle->id_table;
+		// Restreindre aux mots cles non techniques
+		// les modificateurs ne se creent que sur les champs de la table principale
+		// pas sur une jointure, il faut donc analyser les criteres passes pour
+		// savoir si l'un deux est un 'technique'...
+		// pff...
+		$technique = false;
+		foreach($boucle->criteres as $c){
+			if ($c->param[0][0]->texte == 'technique') {
+				$technique = true;
+				break;
+			}
 		}
+		if (!$technique && 
+			!isset($boucle->modificateur['tout'])) {
+				$boucle->from["groupes"] =  "spip_groupes_mots";
+				$boucle->where[]= array("'='", "'groupes.id_groupe'", "'$id_table.id_groupe'");
+				$boucle->where[]= array("'='", "'groupes.technique'", "'\"\"'");	
+		} 
+	// GROUPES_MOTS		
+	} elseif ($boucle->type_requete == 'groupes_mots') {
+		$id_table = $boucle->id_table;
+		$mtechnique = $id_table .'.technique';
+		// Restreindre aux mots cles non techniques
+		if (!isset($boucle->modificateur['criteres']['technique']) && 
+			!isset($boucle->modificateur['tout'])) {
+				$boucle->where[]= array("'='", "'$mtechnique'", "'\"\"'");
+		}		
 	}
-	return $flux;
+	return $boucle;
 }
 
-//
-// Recapitulons nos autorisations
-//
-// - pour les mots d'un groupe
-// * voirmots
-// * creermots
-// * modifiermots
-// * liermots
-//
-// - pour un groupe
-// * voir
-// * creer
-// * modifier
-//
-function mots_techniques_autoriser_groupemots($flux){
-	$args = &$flux['args'];
-	if ($args['technique'] == 'oui'){
-		switch ($args['faire']){
-			
-			// voir le groupe
-			case 'voir':
-				// $flux['autoriser'] = true;
-				break;
-				
-			// voir les mots du groupe
-			case 'voirmots':
-				// $flux['autoriser'] = ($args['qui']['statut'] == '0minirezo' AND !$args['qui']['restreint']);
-				break;
-			
-			// creer un groupe
-			case 'creer':
-			// modifier un groupe
-			case 'modifier':
-				// $flux['autoriser'] =	$args['qui']['statut'] == '0minirezo' AND !$args['qui']['restreint'];
-				break;
-				
-			// creer des mots dans ce groupe
-			case 'creermots':
-				// $flux['autoriser'] = false;
-				break;
-			// modifier des mots dans ce groupe (y compris suppression)
-			case 'modifiermots':			
-			// lier des mots de ce groupe a des objets (articles, rubriques, etc.)
-			case 'liermots':
-				// $flux['autoriser'] &= ($args['qui']['statut'] == '0minirezo' AND !$args['qui']['restreint']);
-				// $flux['autoriser'] = ($args['row'][substr($args['qui']['statut'],1)]=='oui');
-				break;
-		}
-	}
 
-	return $flux;
-}
 ?>
