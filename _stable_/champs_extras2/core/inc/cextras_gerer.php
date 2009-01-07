@@ -37,46 +37,61 @@ function cextras_types_formulaires(){
 
 
 /**
- * Cree en base les champs extras demandes lors d'une installation
- * d'un plugin dependant
- * $champs est un tableau d'objets ChampExtra a creer
+ * Installe des champs extras et
+ * gere en meme temps la mise a jour de la meta
+ * du plugin concernant la base de donnee
  */
-function creer_champs_extras($champs, $nom_meta_base_version, $version_cible) {
+function installer_champs_extras($champs, $nom_meta_base_version, $version_cible) {
 	$current_version = 0.0;
-
 	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
 	|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-
 		// cas d'une installation
 		if ($current_version==0.0){
-			include_spip('base/create');
-			// on recupere juste les differentes tables a mettre a jour
-			$tables = array();
-			foreach ($champs as $c){ 
-				if ($table = table_objet_sql($c->table)) {
-					$tables[$table] = $table;
-				}
-			}		
-			// on met a jour les tables trouvees
-			foreach($tables as $table) {
-				maj_tables($table);
-			}
+			creer_champs_extras($champs);
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 		}
 	}	
 }
 
 /**
+ * Cree en base les champs extras demandes
+ * $champs est un tableau d'objets ChampExtra a creer
+ */
+function creer_champs_extras($champs) {
+	include_spip('base/create');
+	// on recupere juste les differentes tables a mettre a jour
+	$tables = array();
+	foreach ($champs as $c){ 
+		if ($table = table_objet_sql($c->table)) {
+			$tables[$table] = $table;
+		}
+	}		
+	// on met a jour les tables trouvees
+	foreach($tables as $table) {
+		maj_tables($table);
+	}
+}
+
+/**
+ * Desinstaller des champs extras
+ * et gerer la suppression de la meta du plugin concernant 
+ * la base de donnee
+ */
+function desinstaller_champs_extras($champs, $nom_meta_base_version) {
+	vider_champs_extras($champs);
+	effacer_meta($nom_meta_base_version);	
+}
+
+/**
  * Supprime les champs extras (objets ChampExtra passes dans le tableau $champs)
  */
-function vider_champs_extras($champs, $nom_meta_base_version) {
+function vider_champs_extras($champs) {
 	// on efface chaque champ trouve
 	foreach ($champs as $c){ 
 		if ($table = table_objet_sql($c->table) and $c->champ and $c->sql) {
 			sql_alter("TABLE $table DROP $c->champ");
 		}
-	}
-	effacer_meta($nom_meta_base_version);	
+	}	
 }
 
 
