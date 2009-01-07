@@ -56,13 +56,13 @@
 				formMap.addOverlay(marker);
 				var center = marker.getPoint();
 				var zoom = formMap.getZoom();
-				jQuery("#form_lat").val(center.lat());
-				jQuery("#form_long").val(center.lng());
+				jQuery("#latitude").val(center.lat());
+				jQuery("#longitude").val(center.lng());
 				jQuery("#form_zoom").val(zoom);
 				GEvent.addListener(marker, 'dragend', function(){
 					var center = marker.getPoint();
-					jQuery("#form_lat").val(center.lat());
-					jQuery("#form_long").val(center.lng());
+					jQuery("#latitude").val(center.lat());
+					jQuery("#longitude").val(center.lng());
 				});
 			}
 		});
