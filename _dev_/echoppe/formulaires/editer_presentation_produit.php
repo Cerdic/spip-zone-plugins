@@ -40,7 +40,7 @@ function formulaires_editer_presentation_produit_verifier_dist(){
 		$erreurs['ref_produit'] = _T('echoppe:cette_ref_produit_n_est_pas_unique');
 
 	if (count($erreurs))
-		$erreurs['message_erreur'] = 'Votre saisie contient des erreurs !';
+		$erreurs['message_erreur'] = _T('echoppe:votre_saisie_contient_des_erreurs');
 	
 	return $erreurs;
 	

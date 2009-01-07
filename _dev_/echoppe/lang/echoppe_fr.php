@@ -133,9 +133,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'longeur' => 'Longueur',
 
 // M
-'mettre_a_jour' => 'Mettre &agrave; jour',
-'mettre_le_panier_a_jour' => 'Actualiser le panier',
-'montant_total_du_panier' => 'Montant total du panier',
 'mail_recap_debut' => 'Bonjour,
 
 Voici le récapitulatif de votre commande sur ',
@@ -144,6 +141,10 @@ Voici le récapitulatif de votre commande sur ',
 Merci de votre confiance,
 
 L\'équipe de ',
+'mettre_a_jour' => 'Mettre &agrave; jour',
+'mettre_le_panier_a_jour' => 'Actualiser le panier',
+'montant_total_du_panier' => 'Montant total du panier',
+'modification_du_panier_ok' => 'Panier modifi&eacute; avec succ&eacute;s !',
 
 // N
 'ne_le' => 'N&eacute;(e) le',
@@ -167,6 +168,7 @@ L\'équipe de ',
 // P
 'paiement' => 'Paiement',
 'panier' => 'Panier',
+'panier_du_client' => 'Panier du client',
 'paniers_en_attente' => 'Paniers temporaires',
 'paniers_paye' => 'Paniers pay&eacute;s',
 'paniers_reserve' => 'Paniers r&eacute;serv&eacute;s',
@@ -257,6 +259,7 @@ L\'équipe de ',
 
 // V
 'valider_le_panier' => 'Valider le panier',
+'valider_les_modifications' => 'Valider les modifications',
 'valider_mon_panier' => 'Valider mon panier &raquo;',
 'version_du_prestataire' => 'Vesrion du prestataire',
 'Ville_du_beneficiaire' => 'Code postal du b&eacute;n&eacute;ficiaire',
@@ -266,6 +269,7 @@ L\'équipe de ',
 'visualisation_d_un_prestataire_de_paiement' => 'Visualisation d\'un prestataire de paiement',
 'visualisation_d_un_produit' => 'Visualisation de',
 'visualisation_des_paniers' => 'Visualisation des paniers',
+'votre_saisie_contient_des_erreurs' => 'Votre saisie contient des erreurs !',
 
 // X
 'xxx' => 'xxx'
