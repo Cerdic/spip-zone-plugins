@@ -52,15 +52,6 @@ function action_iextras_dist() {
 	// cas de l'association d'un champ existant
 	if (($arg == 'associer_champ') and ($table = $id_extra_ou_table) and $champ){
 		$id_extra = action_associer_champ_sql_comme_champ_extra($table, $champ);
-		/*
-		if ($id_extra) {
-			// redirection vers le formulaire d'edition du champ
-			$redirect = generer_url_ecrire('iextras_edit');
-			$redirect = parametre_url($redirect,'id_extra', $id_extra, '&');
-			include_spip('inc/header');
-			redirige_par_entete($redirect);			
-		}
-		*/
 	}
 
 	// cas de la suppression d'un champ existant
@@ -116,8 +107,8 @@ function action_supprimer_champ_extra($id_extra) {
 			extras_log("Suppression d'un champ par auteur ".$GLOBALS['auteur_session']['id_auteur'],true);
 			extras_log($extra, true);
 			
-			$table = table_objet_sql($extra->table);
-			sql_alter("TABLE $table DROP ".$extra->champ);
+			include_spip('inc/cextras_gerer');
+			vider_champs_extras($extra);
 			
 			unset($extras[$i]);
 			iextras_set_extras($extras);

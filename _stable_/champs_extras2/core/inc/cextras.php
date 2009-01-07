@@ -22,33 +22,18 @@ class ChampExtra{
 	function definir($params=array()) {
 		foreach ($params as $cle=>$valeur) {
 			if (isset($this->$cle)) {
-				// si une fonction specifique existe pour ce type, l'utiliser
-				if (method_exists('ChampExtra','set_'.$cle)) {
-					$this->{'set_'.$cle}($valeur);
-				} else {
-					$this->$cle = $valeur;
-				}
+				$this->$cle = $valeur;
 			}
 		}
 		// calculer l'id du champ extra
 		$this->make_id();
 	}
 	
-	// declarations specifiques
-	function set_type($val='') {
-		$this->type = $val;
-	}
-	
 	// creer l'id du champ extra :
 	function make_id(){
 		// creer un hash
-		$hash = array();
-		foreach ($this as $cle=>$val) {
-			if ($cle[0]!=='_') {
-				$hash[] = $val;
-			}
-		}
-		$this->_id = substr(md5(serialize($hash)),0,6);
+		$hash = $this->champ . $this->table . $this->sql;
+		$this->_id = substr(md5($hash),0,6);
 	}
 	
 	// determiner un identifiant

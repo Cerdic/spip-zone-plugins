@@ -55,20 +55,34 @@ function installer_champs_extras($champs, $nom_meta_base_version, $version_cible
 
 /**
  * Cree en base les champs extras demandes
- * $champs est un tableau d'objets ChampExtra a creer
+ * @param $champs : objet ChampExtra ou tableau d'objets ChampExtra
  */
 function creer_champs_extras($champs) {
-	include_spip('base/create');
+	if (!is_array($champs)) 
+		$champs = array($champs);
+		
 	// on recupere juste les differentes tables a mettre a jour
 	$tables = array();
 	foreach ($champs as $c){ 
 		if ($table = table_objet_sql($c->table)) {
 			$tables[$table] = $table;
 		}
-	}		
+	}	
+		
 	// on met a jour les tables trouvees
-	foreach($tables as $table) {
-		maj_tables($table);
+	if ($tables) {	
+		// recharger les tables principales et auxiliaires
+		include_spip('base/serial');
+		include_spip('base/auxiliaires');
+		global $tables_principales, $tables_auxiliaires;
+		base_serial($tables_principales);
+		base_auxiliaires($tables_auxiliaires);		
+		
+		// executer la mise a jour
+		include_spip('base/create');
+		foreach($tables as $table) {
+			maj_tables($table);
+		}
 	}
 }
 
@@ -83,9 +97,13 @@ function desinstaller_champs_extras($champs, $nom_meta_base_version) {
 }
 
 /**
- * Supprime les champs extras (objets ChampExtra passes dans le tableau $champs)
+ * Supprime les champs extras 
+ * @param $champs : objet ChampExtra ou tableau d'objets ChampExtra
  */
 function vider_champs_extras($champs) {
+	if (!is_array($champs)) 
+		$champs = array($champs);
+		
 	// on efface chaque champ trouve
 	foreach ($champs as $c){ 
 		if ($table = table_objet_sql($c->table) and $c->champ and $c->sql) {

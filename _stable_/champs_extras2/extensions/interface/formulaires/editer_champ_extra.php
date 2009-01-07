@@ -15,6 +15,9 @@ function formulaires_editer_champ_extra_charger_dist($id_extra='new', $redirect=
 		'new' => $new,
 		'redirect' => $redirect,
 	));
+	// valeur par defaut tout de meme sur sql et pour saisie
+	if (!$valeurs['sql']) $valeurs['sql'] = "text NOT NULL DEFAULT ''";
+	if (!$valeurs['type']) $valeurs['type'] = "ligne";
 	
 	// si un extra est demande (pour edition)
 	// remplir les valeurs avec infos de celui-ci
@@ -83,12 +86,15 @@ function formulaires_editer_champ_extra_traiter_dist($id_extra='new', $redirect=
 	$extras = iextras_get_extras();
 
 	// ajout du champ ou modification du champ extra de meme id.
+spip_log($extra, 'aa');
+	$extra = new ChampExtra($extra);
+spip_log($extra, 'aa');
 	if ($new) {
-		$extras[] = new ChampExtra($extra);
+		$extras[] = $extra;
 	} else {
 		foreach($extras as $i=>$e) {
 			if ($e->get_id() == $id_extra) {
-				$extras[$i] = new ChampExtra($extra);
+				$extras[$i] = $extra;
 				break;
 			}
 		}		
@@ -99,16 +105,10 @@ function formulaires_editer_champ_extra_traiter_dist($id_extra='new', $redirect=
 	
 	// creer le champ s'il est nouveau :
 	if ($new) {
-		// recharger les tables principales
-		include_spip('base/serial');
-		global $tables_principales;
-		base_serial($tables_principales);
-		
-		include_spip('base/create');
-		$table = table_objet_sql($extra['table']);
+		creer_champs_extras($extra);
 		extras_log("Creation d'un nouveau champ par auteur ".$GLOBALS['auteur_session']['id_auteur'],true);
 		extras_log($extra, true);
-		maj_tables($table);
+
 	}
 	
 	$res = array(
