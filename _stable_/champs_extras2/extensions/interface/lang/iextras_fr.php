@@ -34,13 +34,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 						mais ne sont pas d&eacute;clar&eacute;s (par un plugin ou un jeu de squelettes), vous
 						pouvez demander &agrave; ce plugin de les g&eacute;rer. Ces champs, s'il y en a,
 						apparaissent dans un cadre «Liste des champs pr&eacute;sents non g&eacute;r&eacute;s».",		
-						
+				
 	//L
 	'label_champ' => 'Nom du champ',
 	'label_enum' => 'Liste de valeurs',
 	'label_label' => 'Label de la saisie',
 	'label_obligatoire' => 'Champ obligatoire&nbsp;?',
 	'label_precisions' => 'Pr&eacute;cisions de la saisie',
+	'label_rechercher' => 'Recherche',
 	'label_sql' => 'D&eacute;finition SQL',
 	'label_table' => 'Objet',
 	'label_type' => 'Type de saisie',
@@ -51,6 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'precisions_pour_label' => 'Peut &ecirc;tre une cha&icirc;ne de langue &laquo;plugin:chaine&raquo;.',
 	'precisions_pour_precisions' => 'Optionnellement, vous pouvez donner plus d\'informations concernant la saisie. 
 		Peut &ecirc;tre une cha&icirc;ne de langue &laquo;plugin:chaine&raquo;.',
+	'precisions_pour_rechercher' => 'Inclure ce champ dans le moteur de recherche ?',
 	'precisions_pour_type' => 'Afficher une saisie de type :',
 	
 	//S

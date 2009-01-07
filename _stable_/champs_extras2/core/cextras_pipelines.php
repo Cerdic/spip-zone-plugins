@@ -256,6 +256,37 @@ function cextras_formulaire_verifier($flux){
 }
 
 
+// prendre en compte les champs extras 2 dans les recherches
+// pour les champs qui le demandent
+function cextras_rechercher_liste_des_champs($tables){
+	if ($champs = pipeline('declarer_champs_extras', array())) {
+		$t = array();
+		// trouver les tables/champs a rechercher
+		foreach ($champs as $c) {
+			if ($c->rechercher) {
+				// priorite 2 par defaut, sinon sa valeur.
+				// Plus le chiffre est grand, plus les points de recherche 
+				// attribues pour ce champ seront eleves
+				if ($c->rechercher === true 
+				OR  $c->rechercher === 'oui') {
+					$priorite = 2;
+				} else {
+					$priorite = intval($c->rechercher);
+				}
+				if ($priorite) {
+					$t[objet_type($c->table)][$c->champ] = $priorite;
+				}
+			}
+		}
+		// les ajouter
+		if ($t) {
+			$tables = array_merge($tables, $t);
+		}
+	}
+	return $tables;
+}
+
+
 // declarer les autorisations specifiques aux extras
 function cextras_autoriser(){
 	include_spip('inc/cextras_autoriser');

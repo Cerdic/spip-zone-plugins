@@ -7,6 +7,7 @@ class ChampExtra{
 	var $label = ''; // label du champ, code de lanque ('monplug:mon_label')
 	var $precisions = ''; // precisions pour la saisie du champ (optionnel), code de lanque ('monplug:mon_label')
 	var $obligatoire = false; // ce champ est il obligatoire ? 'oui' ou true : c'est le cas.
+	var $rechercher = false; // ce champ entre-t-il dans le moteur de recherche ?
 	var $enum = ''; // liste de valeurs
 	var $type = ''; // type (ligne/bloc/etc)
 	var $sql = ''; // declaration sql (text NOT NULL DEFAULT '')

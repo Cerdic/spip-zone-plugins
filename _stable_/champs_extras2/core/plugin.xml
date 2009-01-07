@@ -2,7 +2,7 @@
 	<nom>Champs Extras2</nom>
 	<auteur>Matthieu Marcillaud, Fil</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.7</version>
+	<version>0.8</version>
 	<description>
 	Creer de nouveaux champs aux objets d'&eacute;dition de SPIP
 	</description>
@@ -32,6 +32,10 @@
 	</pipeline>
  	<pipeline>
 		<nom>formulaire_verifier</nom>
+		<inclure>cextras_pipelines.php</inclure>
+	</pipeline>	
+ 	<pipeline>
+		<nom>rechercher_liste_des_champs</nom>
 		<inclure>cextras_pipelines.php</inclure>
 	</pipeline>	
 </plugin>

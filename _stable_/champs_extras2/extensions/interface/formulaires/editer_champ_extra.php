@@ -121,7 +121,7 @@ function formulaires_editer_champ_extra_traiter_dist($id_extra='new', $redirect=
 // recuperer les valeurs postees par le formulaire
 function iextras_post_formulaire() {
 	$extra = array();
-	foreach(array('champ', 'table', 'type', 'label', 'sql', 'precisions', 'obligatoire', 'enum') as $c) {
+	foreach(array('champ', 'table', 'type', 'label', 'sql', 'precisions', 'obligatoire', 'enum', 'rechercher') as $c) {
 		$extra[$c] = _request($c);
 	}
 	return $extra;	
