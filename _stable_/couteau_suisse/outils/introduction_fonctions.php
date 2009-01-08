@@ -81,6 +81,11 @@ if (!function_exists('balise_INTRODUCTION')) {
 	function balise_INTRODUCTION_SPIP($p) {
 		return balise_INTRODUCTION_dist($p);
 	}
+	include_spip('public/interfaces');
+	global $table_des_traitements;
+	// INTRODUCTION_SPIP est une INTRODUCTION !
+	if (!isset($table_des_traitements['INTRODUCTION_SPIP']))
+		$table_des_traitements['INTRODUCTION_SPIP'] = $table_des_traitements['INTRODUCTION'];
 	// #INTRODUCTION
 	function balise_INTRODUCTION($p) {
 		@define('_INTRODUCTION_LGR', 100);

@@ -507,10 +507,12 @@ Ce sommaire peut &ecirc;tre coupl&eacute; avec : &laquo;&nbsp;[.->decoupe]&nbsp;
 	'sommaire:nom' => 'Un sommaire automatique',
 	'sommaire_avec' => 'Un texte avec sommaire&nbsp;: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un texte sans sommaire&nbsp;: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises &lt;a>&lt;/a> sont interdits.
+	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots, tout comme les balises en clair &lt;a>&lt;/a>, sont interdits : veuillez inciter vos rédacteurs à utiliser les raccourcis de liens SPIP.
 
-Listez ici les s&eacute;quences interdites@_CS_ASTER@ en les s&eacute;parant par des espaces. [[%spam_mots%]]
-@_CS_ASTER@Pour sp&eacute;cifier un mot entier, mettez-le entre paranth&egrave;ses. Pour une expression avec des espaces, placez-la entre guillemets.',
+Listez ici les s&eacute;quences interdites en les s&eacute;parant par des espaces. [[%spam_mots%]]
+&bull; Pour une expression avec des espaces, placez-la entre guillemets.
+_ &bull; Pour sp&eacute;cifier un mot entier, mettez-le entre parenth&egrave;ses. Exemple~:~{(asses)}.
+_ &bull; Pour une expression réguli&egrave;re, v&eacute;rifiez bien la syntaxe et placez-la entre slashes et entre guillemets. Exemple~:~{"/@test\\.(com|fr)/"}.',
 	'spam:nom' => 'Lutte contre le SPAM',
 	'spip_cache:description' => '@puce@ Le cache occupe un certain espace disque et SPIP peut en limiter l\'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu\'aucun quota ne s\'applique.[[%quota_cache% Mo]]
 

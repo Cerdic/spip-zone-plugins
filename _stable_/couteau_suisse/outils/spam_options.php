@@ -23,16 +23,18 @@ function spam_installe() {
 		
 	), defined('_spam_MOTS')?spam_liste_mots(_spam_MOTS):array());
 	array_walk($spam_mots, 'spam_walk');
-	ecrire_meta('cs_spam_mots', ',(' . join('|', $spam_mots) . '),i');
+	ecrire_meta('cs_spam_mots', '/(' . join('|', $spam_mots) . ')/i');
 	ecrire_metas();
 }
 
 // protege les expressions en vue d'une regexpr
-// repere les mots entiers entre parentheses
+// repere les mots entiers entre parentheses et les regexpr entre slashes
 function spam_walk(&$item) {
 	if(preg_match(',^\((.+)\)$,', $item, $reg))
-		$item = '\b'.preg_quote($reg[1], ',').'\b';
-	else $item = preg_quote($item, ',');
+		$item = '\b'.preg_quote($reg[1], '/').'\b';
+	elseif(preg_match(',^\/(.+)\/$,', $item, $reg))
+		$item = '('.$reg[1].')';
+	else $item = preg_quote($item, '/');
 }
 
 // retourne un tableau de mots ou d'expressions a partir d'un texte
