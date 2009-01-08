@@ -25,7 +25,7 @@ function glossaire_groupes() {
 // surcharge possible de cette fonction glossaire_generer_url_dist par : glossaire_generer_url($id_mot, $titre) 
 // si elle existe, elle sera utilisee pour generee l'url cliquable des mots trouves
 //   exemple pour annuler le clic : function glossaire_generer_url($id_mot, $titre) { return 'javascript:;'; }
-function glossaire_generer_url_dist($id_mot) {
+function glossaire_generer_url_dist($id_mot, $titre) {
 	if(defined('_SPIP19300')) 
 		return generer_url_entite($id_mot, 'mot'); // depuis SPIP 2.0
 		else { charger_generer_url(); return generer_url_mot($id_mot); } // avant SPIP 2.0
@@ -121,7 +121,7 @@ function cs_rempl_glossaire($texte) {
 			// on y va !
 			$lien = function_exists('glossaire_generer_url')
 				?glossaire_generer_url($gloss_id, $titre)
-				:glossaire_generer_url_dist($gloss_id);
+				:glossaire_generer_url_dist($gloss_id, $titre);
 			$mem = $GLOBALS['toujours_paragrapher'];
 			$GLOBALS['toujours_paragrapher'] = false;
 			// $definition =strlen($mot['descriptif'])?$mot['descriptif']:$mot['texte'];
