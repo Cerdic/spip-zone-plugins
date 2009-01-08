@@ -26,40 +26,32 @@
 // ----------------------------------------------------------------------------
 
 /*
- *   Le code original de markitup 1.0.1
+ *   Le code original de markitup 1.1.5
  *   a ete modifie pour prendre en compte
  * 
  *   1) la langue utilisee dans les textarea :
- * 
- * - si un textarea possede un attribut lang='xx' alors
- *   markitup n'affichera que les icones qui correspondent a cette langue
- * 
- * - on peut passer une valeur de langue par defaut a markitup (le textarea peut ne pas en definir)
- *   .markitup(set_spip,{lang:'fr'});
- * 
- * - une option supplementaire optionnelle 'lang' est introduite dans les parametres 
- *   des boutons (markupset), par exemple : lang:['fr','es','en']
- * 
- * - si un bouton n'a pas ce parametre, l'icone s'affiche 
- *   quelque soit la langue designee dans le textarea ou les parametres de markitup ;
- *   sinon, il faut que la langue soit contenue dedans pour que l'icone s'affiche.
- * 
- * 
+ * 		- si un textarea possede un attribut lang='xx' alors
+ *   	  markitup n'affichera que les icones qui correspondent a cette langue
+ * 		- on peut passer une valeur de langue par defaut a markitup (le textarea peut ne pas en definir)
+ *   	  .markitup(set_spip,{lang:'fr'});
+ * 		- une option supplementaire optionnelle 'lang' est introduite dans les parametres 
+ *   	  des boutons (markupset), par exemple : lang:['fr','es','en']
+ * 		- si un bouton n'a pas ce parametre, l'icone s'affiche 
+ *   	  quelque soit la langue designee dans le textarea ou les parametres de markitup ;
+ *   	  sinon, il faut que la langue soit contenue dedans pour que l'icone s'affiche.
  *   2) les control + shift (ou alt) + click bouton qui ne semblaient pas fonctionner
- *   en tout cas sous FF3/ubintu/jquery 1.2.6 a verifier chez les autres (opera 9.5/ubuntu ok)
- *
- * 
+ *      en tout cas sous FF3/ubintu/jquery 1.2.6 a verifier chez les autres (opera 9.5/ubuntu ok)
  *   3) gerer des types de selections differentes : 
- * 
- * - normales comme dans markitup (rien a faire)
- * - 'selectionType':'word' : aux mots le plus proche si pas de selection (sinon la selection)
- * - 'selectionType':'line' : aux lignes les plus proches
- * 
- * 
+ * 		- normales comme dans markitup (rien a faire)
+ * 		- 'selectionType':'word' : aux mots le plus proche si pas de selection (sinon la selection)
+ * 		- 'selectionType':'line' : aux lignes les plus proches
+ * 		- and 'return' : ugly hack to generate list (and so on) on key 'return' press
  *   4) forcer des actions multilignes sans avoir besoin de faire control+click
- * 
- * - 'forceMultiline':true  : force donc une insertion multiligne
- * 
+ * 		- 'forceMultiline':true  : force donc une insertion multiligne
+ *   5) correction de la recuperation des selections d'Opera et de IE
+ * 		en utilisant une autre fonction de split() qui corrige leurs bugs.
+ * 		(caretPosition n'est plus necessaire)
+ * 		
  */
 (function($) {
 	$.fn.markItUp = function(settings, extraSettings) {
