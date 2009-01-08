@@ -5,6 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_echoppe_ajouter_panier(){
 	
 	include_spip('inc/session');
+	include_spip('inc/echoppe_panier');
 	
 	$contexte = array();
 	$contexte['id_produit'] = _request('id_produit');
@@ -18,29 +19,34 @@ function action_echoppe_ajouter_panier(){
 	$contexte['date_maj'] = date("Y-m-d h:i:s");
 	$contexte['message_erreur'] = "";
 	
-	$res_le_produit_existant = sql_select(array("*"),"spip_echoppe_paniers","id_produit = '".$contexte['id_produit']."' AND token_panier = '".$contexte['token_panier']."'");
+	$res_le_produit_existant = sql_select(array("quantite"),"spip_echoppe_paniers","id_produit = '".$contexte['id_produit']."' AND token_panier = '".$contexte['token_panier']."'");
 	$le_produit_existant = sql_fetch($res_le_produit_existant);
 	
 	$contexte['id_panier'] = $le_produit_existant['id_panier'];
 	
 	$contexte['quantite'] = $contexte['quantite'] + $le_produit_existant['quantite'];
 	
-	if (session_get('echoppe_statut_panier') == "temp"){
-		if (sql_count($res_le_produit_existant) >= 1){
-			$res_maj_produit_panier = sql_updateq('spip_echoppe_paniers',array('quantite'=>$contexte['quantite'], 'configuration'=>$contexte['configuration'], 'statut' => $contexte['statut_panier'], 'date_maj' => $contexte['date_maj']), "id_panier = '".$contexte['id_panier']."' AND token_panier = '".$contexte['token_panier']."'");
-		}else{
-			$panier = array(
-				'id_client' => $contexte['id_client'],
-				'id_produit' => $contexte['id_produit'],
-				'quantite' => $contexte['quantite'],
-				'configuration' => $contexte['configuration'],
-				'token_client' => $contexte['token_client'],
-				'token_panier' => $contexte['token_panier'],
-				'statut' => session_get('echoppe_statut_panier'),
-				'date_maj' => $contexte['date_maj'],
-				'date' => $contexte['date_maj']
-			);
-			$contexte['id_panier'] = sql_insertq("spip_echoppe_paniers",$panier);
+	if (echoppe_panier_autoriser_modification($contexte['token_panier'])){
+		if (sql_count($res_le_produit_existant) == 1){
+			if (echoppe_panier_valider_disponibilite_produit($contexte['id_produit'])){
+				echoppe_panier_modifier_quantite_produit($contexte['id_produit'], $contexte['quantite'], $contexte['token_panier']);
+				spip_log('envoie à la modif',"echoppe");
+			}else{
+				$contexte['message_erreur'] = _T('echoppe:produit_non_disponible');
+				
+			}
+		}elseif (sql_count($res_le_produit_existant) == 0){
+			if (echoppe_panier_valider_disponibilite_produit($contexte['id_produit'])){
+				$quantite_originale = sql_fetch($res_le_produit_existant);
+				$contexte['quantite'] = $contexte['quantite'] + $quantite_originale['quantite'];
+				echoppe_panier_ajouter_produit($contexte['id_produit'], $contexte['quantite'], $contexte['id_client'], $contexte['token_panier'], $contexte['token_client'], session_get('echoppe_statut_panier'));
+			}else{
+				$contexte['message_erreur'] = _T('echoppe:produit_non_disponible');
+			}
+		}elseif (sql_count($res_le_produit_existant) == 0){
+			
+			$contexte['message_erreur'] = "ECHOPPE ERROR !";
+			spip_log('ECHOPPE_ERROR : formulaire_panier => plus d\'1 enregistrement pour un produit dans le panier '.$contexte['id_panier'], 'echoppe');
 			
 		}
 		

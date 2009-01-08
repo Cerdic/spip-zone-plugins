@@ -13,7 +13,7 @@
 				<th class = "panier_quantite"><:echoppe:quantite:></th>
 				<th class = "panier_modifier">
 					[(#EDITER_PANIER|=={oui}|?{'',' '})<a href="[(#SELF|parametre_url{editer_panier,oui})]"><:echoppe:modifier_mon_panier:></a></th>]
-					[(#EDITER_PANIER|=={oui}|?{' ',''})<a href="[(#SELF|parametre_url{id_panier,''}|parametre_url{editer_panier,non})]"><:echoppe:annuler:></a></th>]
+					[(#EDITER_PANIER|=={oui}|?{' ',''})<a href="[(#SELF|parametre_url{id_panier,''}|parametre_url{editer_panier,''})]"><:echoppe:annuler:></a></th>]
 			</tr>
 	<BOUCLE_LePanier(ECHOPPE_PANIERS){id_panier?}{token_panier = #SESSION{echoppe_token_panier}}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
@@ -26,14 +26,15 @@
 					</td>
 					<td class = "panier_modifier">
 						[(#EDITER_PANIER|=={oui}|?{'',' '})<a href="[(#SELF|parametre_url{id_panier,#ID_PANIER}|parametre_url{editer_panier,oui})]">Edit</a>]
-						[(#EDITER_PANIER|=={oui}|?{' ',''})<a href="[(#SELF|parametre_url{id_panier,''}|parametre_url{editer_panier,non})]">Cancel</a>]
+						[(#EDITER_PANIER|=={oui}|?{' ',''})<a href="[(#SELF|parametre_url{id_panier,''}|parametre_url{editer_panier,''})]">Cancel</a>]
 					</td>
 				</BOUCLE_LeProduit>
 			</tr>
 	</BOUCLE_LePanier>
-                <tr class="titre_panier">
+               <tr class="titre_panier">
                 <th>Total</th>
                 <th>#TOTAL_PANIER_TVAC&nbsp;&euro; TTC<br /><small>#TOTAL_PANIER_HTVA&nbsp;&euro; HTVA</small></td>
+                <th></th>
                 <th></th>
             </tr>
          </tbody>
