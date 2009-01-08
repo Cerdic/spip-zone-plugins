@@ -344,7 +344,7 @@ function spiplistes_listes_nb_abonnes_compter ($id_liste = 0, $preciser = false)
 	if($preciser) {
 		$selection = 
 			(spiplistes_spip_est_inferieur_193())
-			? "SELECT id_auteur FROM spip_auteurs_listes AS l " . (!empty($sql_whereq) ? "WHERE  $sql_whereq" : "")
+			? "SELECT id_auteur FROM spip_auteurs_listes " . (!empty($sql_whereq) ? "WHERE  $sql_whereq" : "")
 			: sql_select("id_auteur", "spip_auteurs_listes", $sql_whereq,'','','','','',false)
 			;
 		$sql_result = sql_select(
