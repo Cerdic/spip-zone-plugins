@@ -50,7 +50,7 @@
  * 		- 'forceMultiline':true  : force donc une insertion multiligne
  *   5) correction de la recuperation des selections d'Opera et de IE
  * 		en utilisant une autre fonction de split() qui corrige leurs bugs.
- * 		(caretPosition n'est plus necessaire)
+ * 		(caretOffset n'est plus necessaire)
  * 		
  */
 (function($) {
