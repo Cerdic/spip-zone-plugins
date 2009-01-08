@@ -37,12 +37,13 @@ if(!defined("LOG_WARNING")) {
 }
 
 function spiplistes_log($texte, $level = LOG_WARNING) {
-	static $lan;
+	static $lan, $syslog; 
 	if($lan === null) {
 		$lan = spiplistes_server_rezo_local();
+		$syslog = (($s = spiplistes_pref_lire('opt_console_syslog')) && ($s == 'oui'));
 	}
 	if($lan) {
-		if(spiplistes_pref_lire('opt_console_syslog') == 'oui') {
+		if($syslog) {
 			$tag = "_";
 			if(empty($tag)) { 
 				$tag = basename ($_SERVER['PHP_SELF']); 
@@ -61,7 +62,7 @@ function spiplistes_log($texte, $level = LOG_WARNING) {
 		}
 		
 	}
-	else if($level < LOG_DEBUG) {
+	else if($level <= LOG_WARNING) {
 		// Taille du log SPIP trop courte en 192
 		// Ne pas envoyer si DEBUG sinon tronque sans cesse
 		// En SPIP 193, modifier globale $taille_des_logs pour la rotation
@@ -107,7 +108,7 @@ function spiplistes_ecrire_metas() {
 }
 
 //CP-20080512
-function spiplistes_pref_lire ($key) {
+function spiplistes_pref_lire ($key) { 
 	return(spiplistes_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES));
 }
 
@@ -118,7 +119,10 @@ function spiplistes_pref_lire ($key) {
  */
 function spiplistes_lire_serialized_meta ($meta_name) {
 	if(isset($GLOBALS['meta'][$meta_name])) {
-		return(unserialize($GLOBALS['meta'][$meta_name]));
+		if(!empty($GLOBALS['meta'][$meta_name])) {
+			return(unserialize($GLOBALS['meta'][$meta_name]));
+		}
+		else spiplistes_log("erreur sur meta $meta_name (vide)", _SPIPLISTES_LOG_DEBUG);
 	}
 	return(false);
 }
@@ -134,7 +138,7 @@ function spiplistes_lire_key_in_serialized_meta ($key, $meta_name) {
 	$s_meta = spiplistes_lire_serialized_meta($meta_name);
 	if($s_meta && isset($s_meta[$key])) {
 		$result = $s_meta[$key];
-	}
+	} 
 	return($result);
 }
 
