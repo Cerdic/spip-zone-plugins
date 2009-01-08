@@ -27,5 +27,5 @@
 		<action>insert_head</action>
 		<inclure>porte_plume_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[2.0.2;]" />
 </plugin>
