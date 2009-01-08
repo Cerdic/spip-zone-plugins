@@ -120,7 +120,7 @@ function cs_rempl_glossaire($texte) {
 			}
 			// on y va !
 			$lien = function_exists('glossaire_generer_url')
-				?$glossaire_generer_url($gloss_id, $titre)
+				?glossaire_generer_url($gloss_id, $titre)
 				:glossaire_generer_url_dist($gloss_id);
 			$mem = $GLOBALS['toujours_paragrapher'];
 			$GLOBALS['toujours_paragrapher'] = false;
