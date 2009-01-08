@@ -618,9 +618,9 @@ _ Exemple : <code>article.php3?id_article=123</code>
 @puce@ Si vous utilisez le format {page} ci-dessus ou si l\'objet demand&eacute; n\'est pas reconnu, alors il vous est possible de choisir {{le script d\'appel}} &agrave; SPIP. Par d&eacute;faut, SPIP choisit {spip.php}, mais {index.php} (exemple de format : <code>/index.php?article123</code>) ou une valeur vide (format : <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il vous faut absolument cr&eacute;er le fichier correspondant dans la racine de SPIP, &agrave; l\'image de celui qui existe d&eacute;j&agrave; : {index.php}.
 [[%spip_script%]]',
 	'type_urls:description1' => '@puce@ Si vous utilisez un format &agrave; base d\'URLs &laquo;propres&raquo;  ({propres}, {propres2}, {libres}, {arborescentes} ou {propres_qs}), le Couteau Suisse peut :
-<q1>&bull; S\'assurer que l\'URL produite soit totalement {{en minuscules}}.
-_ &bull; Provoquer l\'ajout syst&eacute;matique de {{l\'id de l\'objet}} &agrave; son URL (en suffixe ou en pr&eacute;fixe).
-_ (exemples : <code>/Mon-titre-d-article,457</code> ou <code>/457-Mon-titre-d-article</code>)</q1>[[%urls_minuscules%]][[->%urls_avec_id%]][[->%urls_avec_id2%]]',
+<q1>&bull; S\'assurer que l\'URL produite soit totalement {{en minuscules}}.</q1>[[%urls_minuscules%]]
+<q1>&bull; Provoquer l\'ajout syst&eacute;matique de {{l\'id de l\'objet}} &agrave; son URL (en suffixe, en pr&eacute;fixe, etc.).
+_ (exemples : <code>/Mon-titre-d-article,457</code> ou <code>/457-Mon-titre-d-article</code>)</q1>',
 	'type_urls:nom' => 'Format des URLs',
 	'typo_exposants:description' => '{{Textes fran&ccedil;ais}} : am&eacute;liore le rendu typographique des abr&eacute;viations courantes, en mettant en exposant les &eacute;l&eacute;ments n&eacute;cessaires (ainsi, {<acronym>Mme</acronym>} devient {M<sup>me</sup>}) et en corrigeant les erreurs courantes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, par exemple, deviennent {2<sup>e</sup>}, seule abr&eacute;viation correcte).
 
@@ -643,8 +643,8 @@ Choisissez ici de mettre en exposant certains raccourcis suppl&eacute;mentaires,
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'standard',
-	'urls_avec_id' => 'Id syst&eacute;matique en suffixe',
-	'urls_avec_id2' => 'Id syst&eacute;matique en pr&eacute;fixe',
+	'urls_avec_id' => 'Le placer en suffixe',
+	'urls_avec_id2' => 'Le placer en pr&eacute;fixe',
 	'urls_base_total' => 'Il y a actuellement @nb@ URL(s) en base',
 	'urls_base_vide' => 'La base des URLs est vide',
 	'urls_choix_objet' => '&Eacute;dition en base de l\'URL d\'un objet sp&eacute;cifique&nbsp;:',
@@ -662,6 +662,9 @@ Choisissez ici de mettre en exposant certains raccourcis suppl&eacute;mentaires,
 	'urls_url_calculee' => 'URL publique &laquo;&nbsp;@type@&nbsp;&raquo;&nbsp;:',
 	'urls_url_objet' => 'URL &laquo;&nbsp;propres&nbsp;&raquo; enregistr&eacute;e&nbsp;:',
 	'urls_valeur_vide' => '(Une valeur vide entraine le recalcul de l\'URL)',
+	'urls_3_chiffres' => 'Imposer un minimum de 3 chiffres',
+	'urls_id_sauf_rubriques' => 'Exclure les rubriques',
+	'label:urls_avec_id' => 'Un id syst&eacute;matique, mais...',
 
 	// V
 	'validez_page' => 'Pour acc&eacute;der aux modifications :',
