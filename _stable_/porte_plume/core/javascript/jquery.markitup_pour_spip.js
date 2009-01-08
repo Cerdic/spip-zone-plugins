@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------------------
 // markItUp! Universal MarkUp Engine, JQuery plugin
-// v 1.1.4
+// v 1.1.5
 // Dual licensed under the MIT and GPL licenses.
 // ----------------------------------------------------------------------------
 // Copyright (C) 2007-2008 Jay Salvat
@@ -188,7 +188,7 @@
 				var lang = ($$.attr('lang')||options.lang);
 				
 				$('li:hover > ul', ul).css('display', 'block');
-				$(markupSet).each(function() {
+				$.each(markupSet, function() {
 					var button = this, t = '', title, li, j;
 					// pas de langue ou dans la langue ; et uniquement si langue autorisee
 					if ((!lang || !button.lang || ($.inArray(lang, button.lang) != -1))
@@ -657,6 +657,10 @@
 						}
 					
 						if (e.keyCode === 9) { // Tab key
+							// don't know what that is for...
+							if (shiftKey == true || ctrlKey == true || altKey == true) { // Thx Dr Floob.
+								return false; 
+							}
 							markup(options.onTab);
 							return options.onTab.keepDefault;
 						}
