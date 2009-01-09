@@ -104,4 +104,16 @@ function date_depuis($date) {
  	    return $retour;
 }
 
+/* CP-20090109
+ * Deux filtres SPIP2 bien sympathiques pour le formulaire.
+ * */
+if (spiplistes_spip_est_inferieur_193()) {
+	if(!function_exists('oui')) {
+		function oui($c) { return($c ? ' ' : ''); }
+	}
+	if(!function_exists('non')) {
+		function non($c) { return($c ? '' : ' '); }
+	}
+}
+
 ?>
