@@ -219,7 +219,7 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 				break;
 			}
 			$from = $email_envoi;
-			if(email_valide($from)) {
+			if($from_valide = email_valide($from)) {
 				if(strpos($from, "<") === false) {
 					$fromname = extraire_multi($GLOBALS['meta']['nom_site']);
 					if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
