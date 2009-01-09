@@ -5,6 +5,7 @@
 
 
 TO-DO:
+. SPIP2, le bouton valider maintenant dans gerer liste ne fonctionne plus
 . complement statistiques : liens sur courrier, taux d'ouverture, de clic, liens cliqués. etc...
 . verifier le champ from avec apostrophe
 . semble y avoir qq conflits avec autres plug-in. Verifier ! see: http://docs.jquery.com/Core/jQuery.noConflict
