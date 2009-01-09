@@ -22,7 +22,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pages_public' => 'Pages publiques',
 	'rechercher' => 'Rechercher',
 	'zoom' => 'Zoom',
-	'configuration_titre' => 'Configuration du plugin GoogleMap Api'
+	'configuration_titre' => 'Configuration du plugin GoogleMap Api',
+	'compacte' => 'Compacte',
+	'explication_compacte' => 'eviter le compactage du javascript',
+	'non' => 'non',
+	'oui' => 'oui'
+	
 );
 
 ?>

@@ -102,6 +102,18 @@
 			<p class="explications"><:geomap:explication_cle:></p>
 			<input type="text" name="cle_api" class="text" value="#ENV*{cle_api}" id="cle_api" />
 		</li>
+		<li class="editer_compacte_js_geomap">
+			<label for="compacte_js"><:geomap:compacte:></label>
+			<p class="explications"><:geomap:explication_compacte:></p>
+			<div class="choix">
+				<input type="radio" name="compacte_js" class="radio" value="non" id="compacte_js_non"[ (#ENV{compacte_js}|=={'non'}|?{'checked="checked"'})] />
+				<label for="current_version"><:geomap:non:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="compacte_js" class="radio" value="oui" id="compacte_js_oui"[ (#ENV{compacte_js}|=={'oui'}|?{'checked="checked"'})] />
+				<label for="lastest_version"><:geomap:oui:></label>
+			</div>
+		</li>
 		<li class="editer_api_version_geomap">
 			<label><:geomap:api_version:></label>
 			<p class="explications"><:geomap:explication_api_version:></p>
