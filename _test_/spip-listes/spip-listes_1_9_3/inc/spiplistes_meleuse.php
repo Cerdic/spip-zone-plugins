@@ -219,13 +219,15 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 				break;
 			}
 			$from = $email_envoi;
-			if($from_valide = email_valide($from)) {
-				$fromname = extraire_multi($GLOBALS['meta']['nom_site']);
-				if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
-					include_spip('inc/charsets');
-					$fromname = unicode2charset(charset2unicode($fromname),$GLOBALS['meta']['spiplistes_charset_envoi']);
+			if(email_valide($from)) {
+				if(strpos($from, "<") === false) {
+					$fromname = extraire_multi($GLOBALS['meta']['nom_site']);
+					if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
+						include_spip('inc/charsets');
+						$fromname = unicode2charset(charset2unicode($fromname),$GLOBALS['meta']['spiplistes_charset_envoi']);
+					}
+					$from = $fromname." <$from>";
 				}
-				$from = $fromname." <$from>";
 			}
 			
 			//spiplistes_log("email_envoi : " . $email_envoi, _SPIPLISTES_LOG_DEBUG);	

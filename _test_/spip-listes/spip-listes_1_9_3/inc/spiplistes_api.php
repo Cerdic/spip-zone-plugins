@@ -387,8 +387,9 @@ function spiplistes_listes_email_emetteur ($id_liste = 0) {
 		}
 	}
 	if(!$result) {
+		// email_defaut: celui defini par spiplistes_config
 		$result = (email_valide($ii = $GLOBALS['meta']['email_defaut'])) ? $ii : $GLOBALS['meta']['email_webmaster'];
-		$result = entites_html($GLOBALS['meta']['email_webmaster']);
+		//$result = entites_html($GLOBALS['meta']['email_webmaster']);
 	}
 	return($result);
 }
