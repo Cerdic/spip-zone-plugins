@@ -212,7 +212,7 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 			//////////////////////////////
 			// email emetteur
 			
-			if(!$email_envoi = spiplistes_listes_email_emetteur($id_liste)) {
+			if(!$is_a_test && !($email_envoi = spiplistes_listes_email_emetteur($id_liste))) {
 				$str_log .= " [ERROR] ID_LISTE #id_liste or from email MISSING"; 
 				spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_COURRIER_STATUT_ERREUR);
 				// quitte while() principal
@@ -228,6 +228,13 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 					}
 					$from = $fromname." <$from>";
 				}
+			}
+			else {
+				spiplistes_log("[ERROR] from address incorrect");
+				if($is_a_test) {
+					spiplistes_courriers_statut_redac ($id_courrier);
+				}
+				// break; // garder pour incrementer les erreurs des listes
 			}
 			
 			//spiplistes_log("email_envoi : " . $email_envoi, _SPIPLISTES_LOG_DEBUG);	
@@ -450,7 +457,8 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 								if($log_voir_destinataire) {
 									$str_temp .= _T('spiplistes:sans_adresse');
 								}
-							}
+							} 
+							
 						} // end if(($format_abo=='html') || ($format_abo=='texte'))
 						else {  
 							$nb_emails_non_envoyes++; 
@@ -473,15 +481,7 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 					
 					// si c'est un test on repasse le courrier en redac
 					if($is_a_test) {
-						spiplistes_courrier_modifier(
-							$id_courrier
-							, array(
-								'email_test' => ''
-								, 'total_abonnes' => 0
-								, 'statut' => _SPIPLISTES_COURRIER_STATUT_REDAC
-							)						
-						);
-						spiplistes_log($prefix_log."repasse document en statut redac", _SPIPLISTES_LOG_DEBUG);
+						spiplistes_courriers_statut_redac ($id_courrier);
 					}
 					$email_a_envoyer['texte']->SmtpClose();
 					$email_a_envoyer['html']->SmtpClose();
@@ -642,6 +642,23 @@ function spiplistes_translate_2_charset ($texte, $charset='AUTO', $is_html = fal
 	return($texte);
 }
 
+/*
+ * Repasse un courrier en mode redac (en general, un test d'envoi)
+ * @return 
+ * @param $id_courrier int
+ */
+function spiplistes_courriers_statut_redac ($id_courrier) {
+	spiplistes_courrier_modifier(
+		$id_courrier
+		, array(
+			'email_test' => ''
+			, 'total_abonnes' => 0
+			, 'statut' => _SPIPLISTES_COURRIER_STATUT_REDAC
+		)						
+	);
+	spiplistes_log($prefix_log."repasse document en statut redac", _SPIPLISTES_LOG_DEBUG);
+	return(true);
+}
 
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
