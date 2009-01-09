@@ -369,6 +369,10 @@ $.fn.activatecrayon = function(percent) {
 						.css('margin-top', '-16px');
 			})
 		.end();
+		// Declencher le onAjaxLoad normal de SPIP
+		// (apres donc le chargement de la page de saisie (controleur))
+		if (typeof triggerAjaxLoad == 'function')
+			triggerAjaxLoad(crayon);
 	});
 };
 
