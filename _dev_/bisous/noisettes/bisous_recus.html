@@ -3,7 +3,7 @@
 <BOUCLE_receveur(BISOUS){id_receveur=#ENV{id_auteur}}>
 	<B_donneurs>
 	<ul>
-	<BOUCLE_donneurs(AUTEURS){id_auteur=#ID_RECEVEUR}{tout}>
+	<BOUCLE_donneurs(AUTEURS){id_auteur=#ID_DONNEUR}{tout}>
 		<li><a href="#URL_AUTEUR">#NOM</a></li>
 	</BOUCLE_donneurs>
 	</ul>
