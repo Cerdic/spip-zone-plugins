@@ -6,12 +6,20 @@
 //***********
 var images_folder = "png";
 var images_extension = "png";
-// Microsoft spoils everyone's fun again. Since IE doesn't support pngs,
+
+
+// Microsoft spoils everyone's fun again. Since IE 6 doesn't support pngs,
 // Things will have to look a bit different.
-if(navigator.appName == "Microsoft Internet Explorer"){
+var version = navigator.appVersion;
+var pos = version.indexOf('MSIE ');
+version = version.slice(pos);
+pos = version.indexOf('.');
+version = version.slice(0, pos);
+if (version == "MSIE 6") {
 	images_folder = "ie";
 	images_extension = "gif";
 }
+
 
 //***********
 // First Map Custom Control
@@ -41,7 +49,7 @@ mapTypeControl.prototype.initialize = function(map) {
 	typeSatImg.src = URLbase + "/img_pack/" + images_folder + "/ctlSat." + images_extension;
 	typeSatImg.style.cursor = "pointer";
 	typeSatImg.style.position = "absolute";
-	typeSatImg.style.left= "49px";
+	typeSatImg.style.left= "75px";
 	mapTypeSat.appendChild(typeSatImg);
       		
 	var mapTypeHyb = document.createElement("div");
@@ -52,7 +60,7 @@ mapTypeControl.prototype.initialize = function(map) {
 	typeHybImg.src = URLbase + "/img_pack/" + images_folder + "/ctlHyb." + images_extension;
 	typeHybImg.style.cursor = "pointer";
 	typeHybImg.style.position = "absolute";
-	typeHybImg.style.left= "115px";
+	typeHybImg.style.left= "150px";
 	mapTypeHyb.appendChild(typeHybImg);
 	
 	var mapTypePhy = document.createElement("div");
@@ -63,7 +71,7 @@ mapTypeControl.prototype.initialize = function(map) {
 	typePhyImg.src = URLbase + "/img_pack/" + images_folder + "/ctlPhy." + images_extension;
 	typePhyImg.style.cursor = "pointer";
 	typePhyImg.style.position = "absolute";
-	typePhyImg.style.left= "172px";
+	typePhyImg.style.left= "225px";
 	mapTypePhy.appendChild(typePhyImg);
       		
 	container.appendChild(mapTypeMap);
@@ -75,8 +83,10 @@ mapTypeControl.prototype.initialize = function(map) {
 	return container;
 }
 mapTypeControl.prototype.getDefaultPosition = function() {
-	return new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(10, 0));
+	return new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(15, 10));
 }
+
+
 //***********
 // Second Map Custom Control
 //***********
@@ -89,6 +99,11 @@ mapZoomControl.prototype.initialize = function(map) {
 	var zoomIn = document.createElement("div");
 	zoomIn.style.position = "absolute";
 	zoomIn.style.top= "0px";
+	GEvent.addDomListener(map, "zoomend", function() {
+		//isto evita que o control se desaxuste cando alguen fai dobre click sobre o mapa para facer zoom
+		zoomIn.parentNode.childNodes[19 - map.getZoom()].firstChild.src = URLbase + "/img_pack/" + images_folder + "/ctlZoomNotch." + images_extension;
+		zoomIn.parentNode.childNodes[18 - map.getZoom()].firstChild.src = URLbase + "/img_pack/" + images_folder + "/ctlZoomSel." + images_extension;
+	});
 	GEvent.addDomListener(zoomIn, "click", function() {
 		this.parentNode.childNodes[18 - map.getZoom()].firstChild.src = URLbase + "/img_pack/" + images_folder + "/ctlZoomNotch." + images_extension;
 		map.zoomIn();
@@ -111,9 +126,14 @@ mapZoomControl.prototype.initialize = function(map) {
 		});
 		notchDiv[i].zoom = i;
 		notchDiv[i].style.position = "absolute";
-		notchDiv[i].style.top= 9 + (i*9) + "px";
+		notchDiv[i].style.top= 21 + (i*12) + "px";
 		notchImg[i] = document.createElement("img");
-		notchImg[i].src = URLbase + "/img_pack/" + images_folder + "/ctlZoomNotch." + images_extension;
+		// isto e para que o nodo seleccionado apareza dende o principio
+		if (i == (17 - map.getZoom())){
+			notchImg[i].src = URLbase + "/img_pack/" + images_folder + "/ctlZoomSel." + images_extension;
+		} else {
+			notchImg[i].src = URLbase + "/img_pack/" + images_folder + "/ctlZoomNotch." + images_extension;
+		}
 		notchImg[i].style.cursor = "pointer";
 		notchDiv[i].appendChild(notchImg[i]);
 		container.appendChild(notchDiv[i]);
@@ -121,7 +141,7 @@ mapZoomControl.prototype.initialize = function(map) {
     		
 	var zoomOut = document.createElement("div");
 	zoomOut.style.position = "absolute";
-	zoomOut.style.top= "179px";
+	zoomOut.style.top= "236px";
 	GEvent.addDomListener(zoomOut, "click", function() {
 		this.parentNode.childNodes[18 - map.getZoom()].firstChild.src = URLbase + "/img_pack/" + images_folder + "/ctlZoomNotch." + images_extension;
 		map.zoomOut();
@@ -137,8 +157,10 @@ mapZoomControl.prototype.initialize = function(map) {
 	return container;
 	}
 mapZoomControl.prototype.getDefaultPosition = function() {
-	return new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(24, 100));
+	return new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(15, 105));
 }
+
+
 //***********
 // Third Map Custom Control
 //***********
@@ -146,21 +168,21 @@ function mapMoveControl() {
 }
 mapMoveControl.prototype = new GControl();
 mapMoveControl.prototype.initialize = function(map) {
+	
 	var container = document.createElement("div");
-    		
-	var mapMoveMap = document.createElement("div");
+    var mapMoveMap = document.createElement("div");
     		
 	var mapMoveImgUL = document.createElement("img");
 	mapMoveImgUL.src = URLbase + "/img_pack/" + images_folder + "/ctlTopLeft." + images_extension;
 	mapMoveImgUL.style.position = "absolute";
-	mapMoveImgUL.style.left= "7px";
+	mapMoveImgUL.style.left= "0px";
 	mapMoveMap.appendChild(mapMoveImgUL);
       		
 	var butomUpDiv = document.createElement("div");
 	butomUpDiv.style.position = "absolute";
 	butomUpDiv.style.left= "24px";
 	GEvent.addDomListener(butomUpDiv, "click", function() {
-		pan(north);
+		pan(map, north);
 	});
 	var butomUpImg = document.createElement("img");
 	butomUpImg.src = URLbase + "/img_pack/" + images_folder + "/ctlTop." + images_extension;
@@ -171,15 +193,15 @@ mapMoveControl.prototype.initialize = function(map) {
 	var mapMoveImgUR = document.createElement("img");
 	mapMoveImgUR.src = URLbase + "/img_pack/" + images_folder + "/ctlTopRight." + images_extension;
 	mapMoveImgUR.style.position = "absolute";
-	mapMoveImgUR.style.left= "43px";
+	mapMoveImgUR.style.left= "46px";
 	mapMoveMap.appendChild(mapMoveImgUR);
       		
 	var butomRightDiv = document.createElement("div");
 	butomRightDiv.style.position = "absolute";
-	butomRightDiv.style.left= "43px";
-	butomRightDiv.style.top= "17px";
+	butomRightDiv.style.left= "46px";
+	butomRightDiv.style.top= "20px";
 	GEvent.addDomListener(butomRightDiv, "click", function() {
-		pan(east);
+		pan(map, east);
 	});
 	var butomRightImg = document.createElement("img");
 	butomRightImg.src = URLbase + "/img_pack/" + images_folder + "/ctlRight." + images_extension;
@@ -190,9 +212,11 @@ mapMoveControl.prototype.initialize = function(map) {
 	var butomCenterDiv = document.createElement("div");
 	butomCenterDiv.style.position = "absolute";
 	butomCenterDiv.style.left= "24px";
-	butomCenterDiv.style.top= "17px";
+	butomCenterDiv.style.top= "20px";
 	GEvent.addDomListener(butomCenterDiv, "click", function() {
-		map.panTo(center);
+		if(inicio) {
+			map.panTo(new GLatLng(inicio.y, inicio.x));
+		}
 	});
 	var butomCenterImg = document.createElement("img");
 	butomCenterImg.src = URLbase + "/img_pack/" + images_folder + "/ctlCenter." + images_extension;
@@ -202,10 +226,10 @@ mapMoveControl.prototype.initialize = function(map) {
       		
 	var butomLeftDiv = document.createElement("div");
 	butomLeftDiv.style.position = "absolute";
-	butomLeftDiv.style.left= "7px";
-	butomLeftDiv.style.top= "17px";
+	butomLeftDiv.style.left= "0px";
+	butomLeftDiv.style.top= "20px";
 	GEvent.addDomListener(butomLeftDiv, "click", function() {
-		pan(west);
+		pan(map, west);
 	});
 	var butomLeftImg = document.createElement("img");
 	butomLeftImg.src = URLbase + "/img_pack/" + images_folder + "/ctlLeft." + images_extension;
@@ -216,16 +240,16 @@ mapMoveControl.prototype.initialize = function(map) {
 	var mapMoveImgDL = document.createElement("img");
 	mapMoveImgDL.src = URLbase + "/img_pack/" + images_folder + "/ctlBotLeft." + images_extension;
 	mapMoveImgDL.style.position = "absolute";
-	mapMoveImgDL.style.top= "36px";
-	mapMoveImgDL.style.left= "7px";
+	mapMoveImgDL.style.left= "0px";
+	mapMoveImgDL.style.top= "34px";
 	mapMoveMap.appendChild(mapMoveImgDL);
       		
 	var butomDownDiv = document.createElement("div");
 	butomDownDiv.style.position = "absolute";
 	butomDownDiv.style.left= "24px";
-	butomDownDiv.style.top= "36px";
+	butomDownDiv.style.top= "34px";
 	GEvent.addDomListener(butomDownDiv, "click", function() {
-		pan(south);
+		pan(map, south);
 	});
 	var butomDownImg = document.createElement("img");
 	butomDownImg.src = URLbase + "/img_pack/" + images_folder + "/ctlBot." + images_extension;
@@ -236,8 +260,8 @@ mapMoveControl.prototype.initialize = function(map) {
 	var mapMoveImgDR = document.createElement("img");
 	mapMoveImgDR.src = URLbase + "/img_pack/" + images_folder + "/ctlBotRight." + images_extension;
 	mapMoveImgDR.style.position = "absolute";
-	mapMoveImgDR.style.left= "43px";
-	mapMoveImgDR.style.top= "36px";
+	mapMoveImgDR.style.left= "46px";
+	mapMoveImgDR.style.top= "34px";
 	mapMoveMap.appendChild(mapMoveImgDR);
       		
 	container.appendChild(mapMoveMap);
@@ -246,15 +270,21 @@ mapMoveControl.prototype.initialize = function(map) {
 	return container;
 }
 mapMoveControl.prototype.getDefaultPosition = function() {
-	return new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(0, 30));
+	return new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(15, 45));
 }
 //	map control functions
 var north="north";
 var east="east";
 var south="south";
 var west="west";
-		
-function pan(dir){
+var inicio;
+function inicia(map) {
+	if(!inicio) {
+		inicio = map.getCenter();
+	}
+}
+function pan(map, dir){
+	inicia(map);
 	var center = map.getCenter();
 	var bounds = map.getBounds();
 	var northEast = bounds.getNorthEast();
@@ -264,6 +294,8 @@ function pan(dir){
 	if(dir==south) map.panTo(new GLatLng(southWest.lat(), center.x));
 	if(dir==west)  map.panTo(new GLatLng(center.y, southWest.lng()));
 }
+
+
 //***********
 // Fake Map Custom Control
 // for rounded corners
@@ -304,6 +336,8 @@ cornerControl.prototype.initialize = function(map) {
 cornerControl.prototype.getDefaultPosition = function() {
 	return new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(0, 0));
 }
+
+
 //***********
 // Adress Custom Control
 //***********
