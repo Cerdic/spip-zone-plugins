@@ -1,13 +1,13 @@
-<B_auteur_principal>
+<B_donneur>
 <h5>Bisous donnés</h5>
-<BOUCLE_auteur_principal(AUTEURS){id_auteur}>
+<BOUCLE_donneur(BISOUS){id_donneur=#ENV{id_auteur}}{tout}>
 	<B_receveurs>
 	<ul>
-	<BOUCLE_receveurs(AUTEURS){id_donneur}>
+	<BOUCLE_receveurs(AUTEURS){id_auteur=#ID_RECEVEUR}{tout}>
 		<li><a href="#URL_AUTEUR">#NOM</a></li>
 	</BOUCLE_receveurs>
 	</ul>
 	</B_receveurs>
 	Aucun bisou donné. :(
 	<//B_receveurs>
-</BOUCLE_auteur_principal>
+</BOUCLE_donneur>

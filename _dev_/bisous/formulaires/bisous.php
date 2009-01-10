@@ -6,13 +6,14 @@
 
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('base/abstract_sql');
 
 function formulaires_bisous_charger_dist($id_auteur){
 
 	if (
 		$GLOBALS['visiteur_session']['id_auteur'] > 0
-		and !sql_fetsel(
-			'date',
+		and !sql_getfetsel(
+			'id_bisou',
 			'spip_bisous',
 			array(
 				array('=', 'id_donneur', intval($GLOBALS['visiteur_session']['id_auteur'])),
@@ -35,8 +36,8 @@ function formulaires_bisous_verifier_dist($id_auteur){
 function formulaires_bisous_traiter_dist($id_auteur){
 
 	// On teste si ya pas déjà un bisou
-	$bisou = sql_fetsel(
-		'date',
+	$bisou = sql_getfetsel(
+		'id_bisou',
 		'spip_bisous',
 		array(
 			array('=', 'id_donneur', intval($GLOBALS['visiteur_session']['id_auteur'])),
@@ -56,8 +57,7 @@ function formulaires_bisous_traiter_dist($id_auteur){
 		);
 	
 	// Relance la page
-	include_spip('inc/headers');
-	redirige_formulaire(self());
+	return array('redirect'=>self());
 
 }
 
