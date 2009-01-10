@@ -61,8 +61,8 @@ function notifier_publication_auteurs_article($id_article) {
 			$l = lang_select($row['lang']);
 
 			// URL de l'article
-			if (function_exists('generer_url_entite')) {
-				$url = url_absolue(generer_url_entite($id_article, 'article'));
+			if (function_exists('generer_url_entite_absolue')) {
+				$url = generer_url_entite_absolue($id_article, 'article'); 
 			} else {
 				charger_generer_url(false);
 				$url = url_absolue(suivre_lien(_DIR_RACINE,generer_url_article($id_article, '','', 'publie')));
@@ -263,8 +263,12 @@ function notifications_forumprive($quoi, $id_forum) {
 			while ($qui = spip_fetch_array($result))
 				$tous[] = $qui['email'];
 	
-			charger_generer_url();
-			$url = generer_url_ecrire('message', 'id_message='.$t['id_message']) .'#id'.$t['id_forum'];
+			if (function_exists('generer_url_entite')) {
+				$url = url_absolue(generer_url_entite($id_message, 'message'));
+			} else {
+				charger_generer_url(false);
+				$url = generer_url_ecrire('message', 'id_message='.$t['id_message']) .'#id'.$t['id_forum'];
+			}
 			$t['texte'] .= "\n\n"._T('forum_ne_repondez_pas')."\n<html>$url</html>";
 		}
 	
