@@ -1,9 +1,9 @@
 <plugin>
 	<nom>SPIP-Album</nom>
 	<auteur>[Xavier BUROT->mailto:xebiaut@free.fr] &#224; partir d&#039;une ide&#233;es de [Matthieu->http://www.plugandspip.com/?article17]
-_ &#169; 2006-2007 - Distribu&#233; sous licence GNU/GPL.</auteur>
+_ &#169; 2006-2009 - Distribu&#233; sous licence GNU/GPL.</auteur>
 	<lien>http://xebiaut.free.fr/?article287</lien><!-- URI de documentation -->
-	<version>2.03</version>
+	<version>2.05</version>
 	<etat>test</etat>
 	<description>Plugin permettant l'affichage d'une galerie de photo
 		Pour plus d&#039;information, consulter la [Documentation->http://xebiaut.free.fr/?article287].

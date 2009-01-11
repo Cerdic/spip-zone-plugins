@@ -15,6 +15,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+if(!defined("_SPIP19300")) include_spip('inc/vieilles_defs'); // Compatibilite avec SPIP 2
+
 //
 // -- fonction specifique pour afficher images locales ------------------
 // Balise #IMGLOCAL - Merci à Triton-pointcentral pour ce code.
@@ -48,6 +50,9 @@ function balise_IMGLOCAL($p) {
 // Cf. http://www.asp-php.net/scripts/asp-php/watermark-2.php
 //
 function image_watermark($im) {
+
+	if (empty($im) AND !file_exists($im)) return ''; // Verifie si un parametre est bien transmis et si l'image existe
+	
 	// Charge la librairie de traitements des images sous SPIP
 	include_spip('inc/filtres_images');
 
@@ -58,7 +63,7 @@ function image_watermark($im) {
 		tester_variable('watermarkmargin', '10');
 		tester_variable('watermarkopacity', '20');
 		tester_variable('watermarkimage', '/img_pack/copyright.png');
-		tester_variable('watermarktext', 'Copyright (c) '.date('Y').' '.$GLOBALS['meta']['adresse_site']);
+		tester_variable('watermarktext', 'Copyright (c) '.date('Y').' '.$GLOBALS['meta']['adresse_site']); // Voir si possible utiliser la date du document
 		tester_variable('watermarkfont', '3');
 		tester_variable('watermarkshadow', 'yes');
 		tester_variable('watermarkcolor', 'FFFFFF');
@@ -69,7 +74,7 @@ function image_watermark($im) {
 		tester_variable('watermarkmargin', lire_config('album/watermarkmargin','10'));
 		tester_variable('watermarkopacity', lire_config('album/watermarkopacity','20'));
 		tester_variable('watermarkimage', lire_config('album/watermarkimage','/img_pack/copyright.png'));
-		tester_variable('watermarktext', lire_config('album/watermarktext','Copyright (c) '.date('Y').' '.$GLOBALS['meta']['adresse_site']));
+		tester_variable('watermarktext', lire_config('album/watermarktext','Copyright (c) '.date('Y').' '.$GLOBALS['meta']['adresse_site'])); // Voir si possible utiliser la date du document
 		tester_variable('watermarkfont', lire_config('album/watermarkfont','3'));
 		tester_variable('watermarkshadow', lire_config('album/watermarkshadow','yes'));
 		tester_variable('watermarkcolor', lire_config('album/watermarkcolor','FFFFFF'));
@@ -99,8 +104,13 @@ function image_watermark($im) {
 			$mark = 'wmark';
 	}
 
-	$image = image_valeurs_trans($im, $mark);
-	if (!$image) return("");
+	// Verification si fichier GIF pour supprimer le passage automatique en PNG de SPIP
+	if (preg_match(",^(?>.*)(?<=\.(gif|jpg|png)),", $im, $regs)) $terminaison = $regs[1]; 
+	
+	if ($terminaison=='gif') {$image = image_valeurs_trans($im, $mark, 'gif'); }
+	else { $image = image_valeurs_trans($im, $mark); }
+
+	if (!$image) return''; // Erreur dans la creation de copie locale de la photo
 
     $x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
@@ -109,12 +119,13 @@ function image_watermark($im) {
 	$dest = $image["fichier_dest"];
 
 	$creer = $image["creer"];
-
+	
 	if ($creer) {
+
 		$im = $image["fonction_imagecreatefrom"]($im);
 
-		switch($watermarktype){
-			case 'image':
+		switch($watermarktype) {
+			case 'image' :
 				$masque = find_in_path($watermarkimage);
 				$mask = image_valeurs_trans($masque,"");
 
@@ -166,7 +177,7 @@ function image_watermark($im) {
 				imagecopymerge($im,$im1, $watermark_x, $watermark_y, 0, 0, $x_m, $y_m, $watermarkopacity);
 				imagedestroy($im1);
 				break;
-			case 'text':
+			case 'text' :
 				$color = $watermarkcolor;
 				$red = hexdec(substr($color, 0, 2));
 				$green = hexdec(substr($color, 2, 2));
@@ -207,10 +218,10 @@ function image_watermark($im) {
 				}
 
 				imagestring($im, $watermarkfont, $watermark_x, $watermark_y, $watermarktext, $text_color);
-				break;
-			case 'none':
-			default:
+				
+			Default :
 		}
+		
 		$image["fonction_image"]($im, "$dest");
 		imagedestroy($im);
 	}
@@ -225,7 +236,7 @@ function doc_download($url) {
 	if (!empty($url)) {
  		return generer_url_action("album_download","file=".$url,true);
 	} else {
-		return;
+		return '';
 	}
 }
 ?>
