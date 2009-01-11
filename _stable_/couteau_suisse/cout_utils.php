@@ -467,9 +467,9 @@ function cs_get_code_variable($variable, $valeur) {
 
 // remplace les valeurs marquees comme %%toto%% par le code reel prevu par $cs_variables['toto']['code:condition']
 // attention de bien declarer les variables a l'aide de add_variable()
-function cs_parse_code_php($code) {
+function cs_parse_code_php($code, $debut='%%', $fin='%%') {
 	global $metas_vars, $cs_variables;
-	while(preg_match(",([']?)%%([a-zA-Z_][a-zA-Z0-9_]*?)%%([']?),", $code, $matches)) {
+	while(preg_match(",([']?)$debut([a-zA-Z_][a-zA-Z0-9_]*?)$fin([']?),", $code, $matches)) {
 		$cotes = $matches[1]=="'" && $matches[3]=="'";
 		$nom = $matches[2];
 		// la valeur de la variable n'est stockee dans les metas qu'au premier post
@@ -493,6 +493,9 @@ function cs_parse_code_php($code) {
 // attention de bien declarer les variables a l'aide de add_variable()
 function cs_parse_code_js($code) {
 	global $metas_vars, $cs_variables;
+	// parse d'abord [[%toto%]] pour le code reel de la variable
+	$code = cs_parse_code_php($code, '\[\[%', '%\]\]');
+	// parse ensuite %%toto%% pour la valeur reelle de la variable
 	while(preg_match(',%%([a-zA-Z_][a-zA-Z0-9_]*)%%,U', $code, $matches)) {
 		// la valeur de la variable n'est stockee dans les metas qu'au premier post
 		if (isset($metas_vars[$matches[1]])) {
@@ -511,8 +514,8 @@ function cs_parse_code_js($code) {
 function cs_optimise_if($code, $root=true) {
 	if($root) {
 		$code = preg_replace(',if\s*\(\s*([^)]*\s*)\)\s*{\s*,imsS', 'if(\\1){', $code);
-		$code = str_replace('if(false){', 'if(0){', $code);
-		$code = str_replace('if(true){', 'if(1){', $code);
+		$code = str_replace(array('if(false){', 'if(!1){'), 'if(0){', $code);
+		$code = str_replace(array('if(true){', 'if(!0){'), 'if(1){', $code);
 	}
 	if (preg_match_all(',if\(([0-9])+\){(.*)$,msS', $code, $regs, PREG_SET_ORDER))
 	foreach($regs as $r) {

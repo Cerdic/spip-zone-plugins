@@ -687,13 +687,24 @@ add_variable( array(
 	'defaut' => '""',
 	'code:strlen(%s)' => '$GLOBALS["url_glossaire_externe"]=%s;',
 ));
+add_variable( array(
+	'nom' => 'enveloppe_mails',
+	'format' => _format_NOMBRE,
+	'radio' => array(1 => 'item_oui', 0 => 'item_non', -1 => 'couteauprive:par_defaut'),
+	'defaut' => -1,
+	// Code pour le CSS
+	'code:%s>0' => 'a.spip_mail:before{content:"\002709" !important;}',
+	'code:%s===0' => 'a.spip_mail:before{content:"" !important;}',
+));
 add_outil( array(
 	'id' => 'SPIP_liens',
 	'categorie' => 'public',
 	'contrib'	=> 2443,
 	'jquery'	=> 'oui',
+	'description' => '<:SPIP_liens::>'.(defined('_SPIP19300')?'<:SPIP_liens:1:>':''),
 	'code:options' => "%%radio_target_blank3%%\n%%url_glossaire_externe2%%",
 	'code:jq_init' => 'if (%%radio_target_blank3%%) { if(!cs_prive) jQuery("a.spip_out,a.spip_url,a.spip_glossaire",this).attr("target", "_blank"); }',
+	'code:css' => '[[%enveloppe_mails%]]',
 ));
 
 //-----------------------------------------------------------------------------//
