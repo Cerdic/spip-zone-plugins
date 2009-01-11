@@ -21,8 +21,8 @@ function album_entete($public=true){
 	$entete ='
 
 <!-- '. _T('album:head_debut') . ' -->
-<!-- <link rel="stylesheet" href="'.direction_css(compacte(find_in_path('css/album.css'))).'" type="text/css" media="projection, screen, tv" /> -->
-<link rel="stylesheet" href="'.generer_url_public(find_in_path('css/album.css')).'" type="text/css" media="projection, screen, tv" />
+<link rel="stylesheet" href="'.direction_css(compacte(find_in_path('css/album.css'))).'" type="text/css" media="projection, screen, tv" />
+<!-- <link rel="stylesheet" href="'.generer_url_public(find_in_path('css/album.css')).'" type="text/css" media="projection, screen, tv" /> -->
 <script type="text/javascript" src="'.find_in_path('javascript/interface.js').'"></script>
 <script type="text/javascript">
 var init_ib = function(){
