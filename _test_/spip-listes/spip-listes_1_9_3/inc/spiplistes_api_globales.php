@@ -261,9 +261,9 @@ function spiplistes_email_from_default () {
 			|| ($result = email_valide($ii = trim($GLOBALS['meta']['email_webmaster'])))
 		) {
 			if($result == $ii) {
-				$nom = extraire_multi($GLOBALS['meta']['nom_site']);
-				$nom = unicode2charset(charset2unicode($nom),$GLOBALS['meta']['spiplistes_charset_envoi']);
-				$result = "\"$nom\" <$ii>";
+				//$nom = extraire_multi($GLOBALS['meta']['nom_site']);
+				//$nom = unicode2charset(charset2unicode($nom),$GLOBALS['meta']['spiplistes_charset_envoi']);
+				//$result = "\"$nom\" <$ii>";
 			}
 		}
 		else {

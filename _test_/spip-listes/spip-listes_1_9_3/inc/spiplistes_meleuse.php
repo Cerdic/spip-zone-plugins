@@ -226,7 +226,7 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 						include_spip('inc/charsets');
 						$fromname = unicode2charset(charset2unicode($fromname),$GLOBALS['meta']['spiplistes_charset_envoi']);
 					}
-					$from = $fromname." <$from>";
+					//$from = $fromname." <$from>";
 				}
 			}
 			else {
@@ -294,6 +294,7 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 			
 			$email_a_envoyer['texte'] = new phpMail('', $objet_texte, '', $page_texte, $GLOBALS['meta']['spiplistes_charset_envoi']);
 			$email_a_envoyer['texte']->From = $from ; 
+			if($fromname) $email_a_envoyer['texte']->FromName = $fromname ; 
 			$email_a_envoyer['texte']->AddCustomHeader("Errors-To: ".$from); 
 			$email_a_envoyer['texte']->AddCustomHeader("Reply-To: ".$from); 
 			$email_a_envoyer['texte']->AddCustomHeader("Return-Path: ".$from); 
@@ -301,6 +302,7 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 
 			$email_a_envoyer['html'] = new phpMail('', $objet_html, $page_html, $page_texte, $GLOBALS['meta']['spiplistes_charset_envoi']);
 			$email_a_envoyer['html']->From = $from ; 
+			if($fromname) $email_a_envoyer['html']->FromName = $fromname ; 
 			$email_a_envoyer['html']->AddCustomHeader("Errors-To: ".$from); 
 			$email_a_envoyer['html']->AddCustomHeader("Reply-To: ".$from); 
 			$email_a_envoyer['html']->AddCustomHeader("Return-Path: ".$from); 	

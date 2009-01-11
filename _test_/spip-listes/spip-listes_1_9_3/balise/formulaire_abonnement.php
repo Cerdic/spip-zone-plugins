@@ -102,10 +102,15 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn()", _SPIPLISTES_LOG_DEBUG);
 					
 					$nom_site_spip = $GLOBALS['meta']['nom_site'];
 					$adresse_site = $GLOBALS['meta']['adresse_site'];
+					if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
+						include_spip('inc/charsets');
+						$nom_site_spip = unicode2charset(charset2unicode($nom_site_spip),$GLOBALS['meta']['spiplistes_charset_envoi']);
+					}
 				
 					$message = _T('spiplistes:abonnement_mail_passcookie'
 						, array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site, 'cookie' => $cookie));
 				
+					
 					if(spiplistes_envoyer_mail($email_oubli, "[$nom_site_spip] "._T('pass_oubli_mot'), $message)) {
 						$erreur = _T('pass_recevoir_mail');
 					}
@@ -201,6 +206,10 @@ function spiplistes_formulaire_inscription ($mail_inscription_, $type, $acces_me
 
 	$nom_site_spip = $GLOBALS['meta']['nom_site'];
 	$adresse_site = $GLOBALS['meta']['adresse_site'];
+	if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
+		include_spip('inc/charsets');
+		$nom_site_spip = unicode2charset(charset2unicode($nom_site_spip),$GLOBALS['meta']['spiplistes_charset_envoi']);
+	}
 	
 	if($type == 'redac') {
 		if($GLOBALS['meta']['accepter_inscriptions'] != "oui") return;

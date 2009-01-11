@@ -858,6 +858,13 @@ function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $heade
 	if(!$from) {
 		$from = spiplistes_email_from_default();
 	}
+	if(strpos($from, "<") === false) {
+		$fromname = extraire_multi($GLOBALS['meta']['nom_site']);
+		if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
+			include_spip('inc/charsets');
+			$fromname = unicode2charset(charset2unicode($fromname),$GLOBALS['meta']['spiplistes_charset_envoi']);
+		}
+	}
 	$reply_to = "no-reply".preg_replace("|.*(@[a-z.]+)|i", "$1", email_valide($from));
 	
 	if($opt_simuler_envoi == 'oui') {
@@ -868,8 +875,10 @@ function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $heade
 		include_once(_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
 		$email_a_envoyer['texte'] = new phpMail($to, $subject, ''
 			, html_entity_decode($message)
-			, $GLOBALS['meta']['spiplistes_charset_envoi']);
-		$email_a_envoyer['texte']->From = $from ; 
+			, $GLOBALS['meta']['spiplistes_charset_envoi']
+			);
+		$email_a_envoyer['texte']->From = $from ;
+		$email_a_envoyer['texte']->FromName = $fromname ;
 		$email_a_envoyer['texte']->AddCustomHeader("Errors-To: ".$from); 
 		$email_a_envoyer['texte']->AddCustomHeader("Reply-To: ".$reply_to); 
 		$email_a_envoyer['texte']->AddCustomHeader("Return-Path: ".$from); 
