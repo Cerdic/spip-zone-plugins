@@ -41,25 +41,24 @@ function balise_SHOUTBOX ($p) {
 // [(#SHOUTBOX|x)]
 function balise_SHOUTBOX_stat($args, $filtres) {
 
-	list($objet, $type, $id, $defaut) = $args;
-
-	// valeur par defaut du formulaire
-	if (!isset($defaut)) $defaut = '';
+	// valeur par defaut de la taille de la zone d'affichage (en nombre messages)
+	$taille = isset($args[2]) ? $args[2] : 10;
 
 	// nom de la shoutbox passe en argument #SHOUTBOX{},
 	// sinon le contexte d'objet, sinon 'normal'
-	$a = sinon(strval($type.$id), sinon($objet,'normal'));
+	$objet = isset($args[1]) ? $args[1] : $args[0];
+	$a = sinon($objet,'normal');
 
 	// Valeurs pas bonnes : on retourne un resultat vide
 	if (strlen($a) > 25)
 		return '';
 
 	// OK : on envoie nos donnees
-	return array($defaut, $a);
+	return array($a, $taille);
 }
 
 // http://doc.spip.org/@balise_SHOUTBOX_dyn
-function balise_SHOUTBOX_dyn($defaut, $a) {
+function balise_SHOUTBOX_dyn($a, $taille) {
 
 	// Le nickname c'est celui qu'on a donne, meme si on est loge
 	$nick = isset($GLOBALS['visiteur_session']['session_nom'])
@@ -116,7 +115,7 @@ function balise_SHOUTBOX_dyn($defaut, $a) {
 			// contexte
 			array(
 				'objet' => $a,
-				'defaut' => $defaut,
+				'taille' => $taille,
 				'bouton' => 'ok',
 				'nouveau' => isset($id), # si on vient de faire l'insertion
 				'erreur' => $erreur

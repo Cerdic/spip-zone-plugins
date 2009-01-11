@@ -2,7 +2,7 @@
 	Affichage du contenu de la shoutbox (partie mise a jour en ajax)
 	Si on ne lui passe pas {objet} elle affiche tous les messages du systeme
 ]
-<BOUCLE_shout(SHOUTBOX){objet?}{par date}{n-9,10}>
+<BOUCLE_shout(SHOUTBOX){objet?}{par date}{n-#ENV{taille},#ENV{taille}}>
 <div>[<small><abbr title="[(#DATE|date_iso)]">(#DATE|affdate{H:i})</abbr></small>]
 [<small>(#ID_AUTEUR|?{<a href="[(#URL_AUTEUR{#ID_AUTEUR})]">#AUTEUR</a>,#AUTEUR}):</small>]
 [(#TEXTE*|htmlspecialchars|liens_orphelins_actifs)]
