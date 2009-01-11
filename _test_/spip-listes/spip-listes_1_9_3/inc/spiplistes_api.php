@@ -385,7 +385,6 @@ function spiplistes_desabonner_auteur ($id_auteur) {
 //CP-20080509: renvoie email emetteur d'une liste
 function spiplistes_listes_email_emetteur ($id_liste = 0) {
 	$id_liste = intval($id_liste);
-	$result = false;
 	if($id_liste > 0) {
 		$result = 
 			sql_getfetsel(
@@ -397,7 +396,8 @@ function spiplistes_listes_email_emetteur ($id_liste = 0) {
 			spiplistes_sqlerror_log("listes_email_emetteur");
 		}
 	}
-	if(!$result) {
+	// si pas d'adresse moderateur, va chercher adresse par defaut
+	if($result !== false) {
 		$result = spiplistes_email_from_default();
 	}
 	return($result);
