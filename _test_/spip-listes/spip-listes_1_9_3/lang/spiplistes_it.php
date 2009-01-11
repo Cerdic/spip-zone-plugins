@@ -424,11 +424,10 @@ e ricevere le newsletter.',
 
 'bonjour' => 'Salve,',
 
-'inscription_response' => 'Siete abbonato alla newsletter del sito ',
-'inscription_responses' => 'Siete abbonati alle newsletter del sito ',
-'inscription_liste' => 'Avete scelto di ricevere i messaggi indirizzati alla Newsletter seguente: ',
-'inscription_listes' => 'Avete scelto di ricevere i messaggi indirizzati alle Newsletter seguenti: ',
-'_en_format_' => ' in formato '
+'inscription_reponse_s' => 'Siete abbonato alla newsletter del sito @s@\n',
+'inscription_reponses_s' => 'Siete abbonati alle newsletter del sito @s@\n',
+'inscription_liste_f' => 'Avete scelto di ricevere i messaggi indirizzati alla Newsletter seguente in formato @f@: ',
+'inscription_listes_f' => 'Avete scelto di ricevere i messaggi indirizzati alle Newsletter seguenti in formato @f@: '
 
 );
 

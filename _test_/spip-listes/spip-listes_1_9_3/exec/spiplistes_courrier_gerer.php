@@ -143,7 +143,7 @@ function exec_spiplistes_courrier_gerer () {
 							 * un format de reception
 							 */
 							if(
-								in_array($format_abo, explode(';', _SPIPLISTES_FORMATS_ALLOWED))
+								in_array($format_abo, spiplistes_formats_autorises())
 								&& ($format_abo != 'non')
 							) {
 								// Ok. Enregistre l'adresse test

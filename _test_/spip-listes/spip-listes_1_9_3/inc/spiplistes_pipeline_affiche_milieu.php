@@ -25,28 +25,31 @@ function spiplistes_affiche_milieu ($flux) {
 }
 
 // bloc appele' en pipeline par spiplistes_affiche_milieu()
+// si pas adresse mail, alerte
+// sinon, affiche bloc des abonnements
 function spiplistes_auteur_abonnement () {
 
 	$id_auteur = intval(_request('id_auteur'));
 	if($id_auteur > 0) {
 		if($row = sql_fetsel("email,statut", "spip_auteurs", "id_auteur=".sql_quote($id_auteur)." LIMIT 1")) {
 			if(strlen($auteur_email = $row['email']) > 3) {
-				return(spiplistes_auteur_abonnement_details($id_auteur, $row['statut'], $auteur_email));
+				$result = spiplistes_auteur_abonnement_details($id_auteur, $row['statut'], $auteur_email);
 			}
 			else {
-				return(	""
+				$result =	""
 					. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_listes-24.png", true, "", _T('spiplistes:abonnements_aux_courriers'))
 					. "<p class='verdana2'>"
 					. _T('spiplistes:Adresse_email_obligatoire')
 					. "</p>"
 					. fin_cadre_relief(true)
-					);
+					;
 			}
 		}
 	}
-	return('');
+	return($result);
 }
 
+// bloc des abonnements
 function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $email) {
 	
 	include_spip("inc/spiplistes_api");
@@ -57,7 +60,6 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 		, $connect_id_auteur
 		;
 
-	
 	$result = "";
 
 	$flag_editable = (
@@ -253,6 +255,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 					. "<li>\n"
 					. spiplistes_form_input_radio('abo_format', 'non', _T('spiplistes:Suspendre_abonnements')
 						, false, true, false)
+					. "</li>\n"
 					. "</ul>\n"
 					. fin_cadre_formulaire(true)
 					;

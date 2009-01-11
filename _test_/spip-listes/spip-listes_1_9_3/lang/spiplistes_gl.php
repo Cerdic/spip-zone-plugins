@@ -366,13 +366,12 @@ As isncripci&oacute;ns a importar deben estar nun ficheiro de texto que s&oacute
 
 'bonjour' => 'Ola,',
 
-'inscription_response' => 'Est&aacute;s inscrit@ na lista de ',
-'inscription_responses' => 'Est&aacute;s inscrit@ nas listas de ',
-'inscription_liste' => 'Seleccionaches recibir as mensaxes da lista: ',
-'inscription_listes' => 'Seleccionaches recibir as mensaxes das listas: ',
-'_en_format_' => ' en formato ',
+'inscription_reponse_s' => 'Est&aacute;s inscrit@ na lista de @s@\n',
+'inscription_reponses_s' => 'Est&aacute;s inscrit@ nas listas de @s@\n',
+'inscription_liste_f' => 'Seleccionaches recibir as mensaxes da lista en formato @f@: ',
+'inscription_listes_f' => 'Seleccionaches recibir as mensaxes das listas en formato @f@: ',
 
-'options' => 'radio|brut|Formato:|Html,Texto,Non recibir novidades|html,texte,non',
+'options' => 'radio|brut|Formato:|Html,Texto,Non recibir novidades|html,texte,non'
 
 );
 

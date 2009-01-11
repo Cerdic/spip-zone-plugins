@@ -232,7 +232,7 @@ function spiplistes_formulaire_inscription ($mail_inscription_, $type, $acces_me
 		
 	if($mail_valide && $nom_inscription_) {
 	
-spiplistes_log("mail inscription : ->".$mail_inscription_, _SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("mail inscription : ->".$mail_inscription_, _SPIPLISTES_LOG_DEBUG);
 
 		// si l'abonne existe deja.
 		if($row = sql_fetch(
@@ -267,7 +267,7 @@ spiplistes_log("mail inscription : ->".$mail_inscription_, _SPIPLISTES_LOG_DEBUG
 						, 'adresse_site' => $adresse_site
 						, 'cookie' => $cookie)
 					);
-spiplistes_log("message:".$message, _SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("message:".$message, _SPIPLISTES_LOG_DEBUG);
 				
 				$reponse_formulaire =
 					(
@@ -359,24 +359,25 @@ spiplistes_log("inscription id : ->".$row['id_auteur'], _SPIPLISTES_LOG_DEBUG);
 			else if($type_abo=="texte" || $type_abo=="html")  {
 				// prepare le message a envoyer par mail
 				$listes_abonnements = spiplistes_abonnements_listes_auteur($id_auteur, true);
-				$message_list = '' ;
 				$nb = count($listes_abonnements);
-				foreach($listes_abonnements as $liste) {
-					$message_list .= "\n- ".$liste['titre'];
-			}
+				$message_list = 
+					($nb)
+					? "\n- " . implode("\n- ", $listes_abonnements) . ".\n"
+					: ""
+					;
+
+				$m1 = ($nb > 1) ? 'inscription_reponses_s' : 'inscription_reponse_s';
 				if($nb > 1) {
-					$m1 = 'inscription_responses';
-					$m2 = 'inscription_liste';
+					$m2 = _T('spiplistes:inscription_listes_f', array('f' => $type_abo));
 				} else if($nb == 1) {
-					$m1 = 'inscription_response';
-					$m2 = 'inscription_liste';
+					$m2 = _T('spiplistes:inscription_liste_f', array('f' => $type_abo));
 				} else {
-					$m1 = 'inscription_response';
-					$m2 = '_en_format_';
+					$m2 = _T('spiplistes:vous_abonne_aucune_liste');
 				}
 				$message .= ""
-					. "\n"._T('spiplistes:'.$m1).$nom_site_spip
-					. _T('spiplistes:'.$m2).$message_list.$type_abo."."
+					. "\n"._T('spiplistes:'.$m1, array('s' => $nom_site_spip))
+					. ".\n"
+					. $m2.$message_list
 					;
 			} // end else if
 		
@@ -393,7 +394,8 @@ spiplistes_log("inscription id : ->".$row['id_auteur'], _SPIPLISTES_LOG_DEBUG);
 			
 			if(($type == 'redac') || ($inscriptions_ecrire && $acces_membres == 'non')) {
 				$message .= ""
-					. "\n\n"._T('spiplistes:inscription_mail_redac', array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site))."\n\n"
+					. "\n\n"._T('spiplistes:inscription_mail_redac'
+						, array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site))."\n\n"
 					. "- "._T('form_forum_login')." $login_\n"
 					. "- "._T('form_forum_pass')." $pass\n\n"
 					;

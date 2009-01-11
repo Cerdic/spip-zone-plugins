@@ -354,11 +354,10 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
 
 'bonjour' => 'Hallo,',
 
-'inscription_response' => 'Sie haben den Newsletter dieser Website abonniert ',
-'inscription_responses' => 'Sie haben die Newsletter dieser Website abonniert ',
-'inscription_liste' => 'Sie haben sich f&uuml;r den Empfang von Nachrichten der folgenden Liste eingetragen: ',
-'inscription_listes' => 'Sie haben folgende Listen abonniert: ',
-'_en_format_' => ' im Format ',
+'inscription_reponse_s' => 'Sie haben den Newsletter dieser Website abonniert @s@\n',
+'inscription_reponses_s' => 'Sie haben die Newsletter dieser Website abonniert @s@\n',
+'inscription_liste_f' => 'Sie haben sich f&uuml;r den Empfang von Nachrichten der folgenden Liste eingetragen im Format @f@: ',
+'inscription_listes_f' => 'Sie haben folgende Listen abonniert im Format @f@: '
 
 );
 

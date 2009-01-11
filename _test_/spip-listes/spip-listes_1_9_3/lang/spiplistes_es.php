@@ -426,11 +426,10 @@ Recibir&aacute;s un email para acceder a la p&aacute;gina de modificaci&oacute;n
 
 'bonjour' => 'Hola,',
 
-'inscription_response' => 'Est&aacute;s inscrit@ en el bolet&iacute;n informativo ',
-'inscription_responses' => 'Est&aacute;s inscrit@ en los boletines ',
-'inscription_liste' => 'Has seleccionado recibir los boletines informativos: ',
-'inscription_listes' => 'Has seleccionado recibir los boletines informativos: ',
-'_en_format_' => ' en formato ',
+'inscription_reponse_s' => 'Est&aacute;s inscrit en el bolet&iacute;n informativo @s@\n',
+'inscription_reponses_s' => 'Est&aacute;s inscrit en los boletines @s@\n',
+'inscription_liste_f' => 'Has seleccionado recibir los boletines informativos en formato @f@: ',
+'inscription_listes_f' => 'Has seleccionado recibir los boletines informativos en formato @f@: ',
 
 '1_liste' => '@n@ bolet&iacute;n informativo',
 'n_listes' => '@n@ boletines informativos',

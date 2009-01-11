@@ -239,7 +239,53 @@ function spiplistes_current_version_base_get ($prefix) {
 function spiplistes_sqlerror_log ($trace = "") {
 	if($trace) $trace = " ($trace) ";
 	spiplistes_log("DB ERROR".$trace.": [" . sql_errno() . "] " . sql_error());
+	return(true);
 }
 
+// CP-20090111. log pour les apis
+function spiplistes_log_api ($msg) {
+	spiplistes_log("API: $msg by id_auteur #".$GLOBALS['auteur_session']['id_auteur']);
+	return(true);
+}
+
+// CP-20090111: adresse mail de l'expediteur par defaut
+function spiplistes_email_from_default () {
+	static $default;
+	if(!$default) {
+		if(
+			// prendre d'abord celui du sender SMTP
+			($result = email_valide($ii = trim($GLOBALS['meta']['smtp_sender'])))
+			// sinon celui par defaut de SPIP-Listes
+			|| ($result = email_valide($ii = trim($GLOBALS['meta']['email_defaut'])))
+			// au pire, celui du webmaster
+			|| ($result = email_valide($ii = trim($GLOBALS['meta']['email_webmaster'])))
+		) {
+			if($result == $ii) {
+				$nom = extraire_multi($GLOBALS['meta']['nom_site']);
+				$nom = unicode2charset(charset2unicode($nom),$GLOBALS['meta']['spiplistes_charset_envoi']);
+				$result = "\"$nom\" <$ii>";
+			}
+		}
+		else {
+			spiplistes_log("ERROR: sender email address missing");
+		}
+	}
+	return($result);
+}
+
+// PHP 4 ?
+if(!function_exists('array_combine')) {
+	function array_combine ($keys, $values) {
+		if(is_array($keys) && is_array($values) && (count($keys) == count($values))) {
+			$keys = array_values($keys);
+			$values = array_values($values);
+			$result = array();
+			foreach($keys as $key => $value) {
+				$result[$value] = $values[$key];
+			}
+		}
+		return($result);
+	}
+}
 
 ?>

@@ -22,15 +22,17 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 
 // action/spiplistes_supprimer_abonne.php
 // balise/formulaire_abonnement.php
-, '_en_format_' => ' en format '
-, 'inscription_liste' => 'Vous avez choisi de recevoir les courriers adress&eacute;s &agrave; la liste suivante : '
-, 'inscription_response' => 'Vous &ecirc;tes abonn&eacute; &agrave; la liste d\'information du site '
-, 'inscription_responses' => 'Vous &ecirc;tes abonn&eacute; aux listes d\'informations du site '
+, 'inscription_liste_f' => 'Vous avez choisi de recevoir les courriers adress&eacute;s &agrave; la liste suivante en format @f@ : '
+, 'inscription_listes_f' => 'Vous avez choisi de recevoir les courriers adress&eacute;s aux listes suivantes en format @f@ : '
+, 'inscription_reponse_s' => 'Vous &ecirc;tes abonn&eacute; &agrave; la liste d\'information du site @s@\n'
+, 'inscription_reponses_s' => 'Vous &ecirc;tes abonn&eacute; aux listes d\'informations du site @s@\n'
+, 'vous_abonne_aucune_liste' => "Vous n'&ecirc;tes pas abonn&eacute; &agrave; une liste de diffusion"
 , 'abonnement_mail_passcookie' => "(ceci est un message automatique)
-	Pour modifier votre abonnement &agrave; la lettre d\'information de ce site :
+
+	Pour modifier votre abonnement &agrave; la lettre d'information de ce site :
 	@nom_site_spip@ (@adresse_site@)
 	
-	Veuillez vous rendre &agrave; l\'adresse suivante :
+	Veuillez vous rendre &agrave; l'adresse suivante :
 	
 	@adresse_site@/spip.php?page=abonnement&d=@cookie@
 	
@@ -90,7 +92,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
    votre patron _AUTEUR_NOM_ (notez le tiret bas en d&eacute;but et fin de tag)."
 , 'utiliser_smtp' => "Utiliser SMTP"
 , 'requiert_identification' => "Requiert une identification"
-, 'adresse_smtp' => "adresse email du <em>sender</em> SMTP"
+, 'adresse_smtp' => "Adresse email du <em>sender</em> SMTP"
 , '_aide_install' => "<p>Bienvenue dans le monde de SPIP-Listes.</p>
 	<p class='verdana2'>Par d&eacute;faut, &agrave; l'installation, SPIP-Listes est en mode <em>simulation 
 	d'envoi</em> afin de vous permettre de d&eacute;couvrir les fonctionnalit&eacute;s 
@@ -623,7 +625,6 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'listes_emails' => 'Lettres d\'information'
 , 'info_liste_1' => 'liste'
 //, 'bonjour' => 'Bonjour,' // deja dans SPIP
-, 'inscription_listes' => 'Vous avez choisi de recevoir les courriers adress&eacute;s aux listes suivantes : '
 , 'envoi_tous' => 'Envoi &agrave; destination de tous les inscrits'
 , 'patron_detecte' => '<p><strong>Patron d&eacute;tect&eacute; pour la version texte</strong><p>'
 , 'val_texte' => 'Texte'

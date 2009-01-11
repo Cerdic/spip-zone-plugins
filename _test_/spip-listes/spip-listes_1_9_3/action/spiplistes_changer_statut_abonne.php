@@ -36,7 +36,6 @@ function action_spiplistes_changer_statut_abonne_dist () {
 			$statut = _request('statut');
 			if(autoriser('modifierformat', 'abonne', $id_auteur)) {
 				if(spiplistes_format_abo_modifier($id_auteur, $statut)) {
-					spiplistes_log("FORMAT ID_AUTEUR #$id_auteur changed to [$statut] by ID_AUTEUR #$connect_id_auteur");
 					if(!$redirect) {
 						include_spip('inc/spiplistes_api_presentation');
 						include_spip('inc/spiplistes_listes_selectionner_auteur');

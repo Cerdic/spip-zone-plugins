@@ -52,15 +52,8 @@ function exec_spiplistes_maintenance () {
 
 	$msg_maintenance = array();
 	
-	$sql_formats_where = explode(";", _SPIPLISTES_FORMATS_ALLOWED);
-	foreach($sql_formats_where as $key => $value) {
-		$sql_formats_where[$key] = sql_quote($value);
-	}
-	$sql_formats_where = ""
-		. "`spip_listes_format`="
-		. implode(" OR `spip_listes_format`=", $sql_formats_where)
-		;
-	
+	$sql_formats_where = spiplistes_formats_autorises('sql_where');
+
 	/////////////////
 	// Faire ce qui est demande par le formulaire
 	if($flag_autorise) {

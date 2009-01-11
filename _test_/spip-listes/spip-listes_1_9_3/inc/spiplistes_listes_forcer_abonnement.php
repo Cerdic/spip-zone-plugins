@@ -115,7 +115,7 @@ function spiplistes_listes_forcer_abonnement ($id_liste, $statut, $forcer_format
 		$result = 0;
 		$sql_result = sql_delete('spip_auteurs_listes', "id_liste=".sql_quote($id_liste));
 		if($sql_result) {
-			spiplistes_log("AUTEURS (tous) REMOVED FROM LISTE $id_liste BY ID_AUTEUR #$connect_id_auteur");
+			spiplistes_log("auteurs (tous) removed from id_liste #$id_liste by id_auteur #$connect_id_auteur");
 			$result++;
 			return($result);
 		}

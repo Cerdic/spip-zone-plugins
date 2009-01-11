@@ -284,7 +284,7 @@ function exec_spiplistes_liste_gerer () {
 			if($btn_valider_forcer_abos && $forcer_abo && in_array($forcer_abo, array('tous', 'auteurs', '6forum', 'aucun'))) {
 				
 				$forcer_format_reception = 
-					(($forcer_format_abo == 'oui') && in_array($forcer_format_reception, explode(';', _SPIPLISTES_FORMATS_ALLOWED)))
+					(($forcer_format_abo == 'oui') && in_array($forcer_format_reception, spiplistes_formats_autorises()))
 					? $forcer_format_reception
 					: false
 					;

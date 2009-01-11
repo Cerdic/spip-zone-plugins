@@ -423,11 +423,10 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 
 'bonjour' => 'Hello,',
 
-'inscription_response' => 'Your e-mail address has been added to the mailing list of ',
-'inscription_responses' => 'Your e-mail address has been added to the mailing list of ',
-'inscription_liste' => 'You will receive the newsletter sent to the following mailing list : ',
-'inscription_listes' => 'You will receive the newsletters sent to the following mailing lists : ',
-'_en_format_' => ', in format ',
+'inscription_reponse_s' => 'Your e-mail address has been added to the mailing list of @s@\n',
+'inscription_reponses_s' => 'Your e-mail address has been added to the mailing list of @s@\n',
+'inscription_liste_f' => 'You will receive the newsletter sent to the following mailing list, in format @f@ : ',
+'inscription_listes_f' => 'You will receive the newsletters sent to the following mailing lists, in format @f@ : ',
 
 '1_liste' => '@n@ list',
 'n_listes' => "@n@ lists"
