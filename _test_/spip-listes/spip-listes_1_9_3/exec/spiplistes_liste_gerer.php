@@ -109,10 +109,11 @@ function exec_spiplistes_liste_gerer () {
 			
 			$pied_page = _SPIPLISTES_PATRON_PIED_DEFAUT;
 			
-			$id_liste = spiplistes_listes_liste_creer(_SPIPLISTES_PRIVATE_LIST, $GLOBALS['spip_lang']
-				, $titre, $texte, $pied_page);
-		} 
-		spiplistes_log("LISTE ID #$id_liste added by ID_AUTEUR #$connect_id_auteur");
+			if($id_liste = spiplistes_listes_liste_creer(_SPIPLISTES_PRIVATE_LIST, $GLOBALS['spip_lang']
+				, $titre, $texte, $pied_page)) {
+					spiplistes_log("id_liste #$id_liste added by id_auteur #$connect_id_auteur");
+			}
+		} 	
 	}
 	else if($id_liste > 0) {
 	//////////////////////////////////////////////////////

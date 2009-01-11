@@ -101,31 +101,37 @@ function spiplistes_courriers_casier_premier ($sql_select, $sql_whereq) {
 
 // CP-20080324 : abonner un id_auteur a une id_liste
 // CP-20080508 : ou une liste de listes ($id_liste est un tableau de (id)listes)
+// CP-20090111: ajouter la date d'inscription
 function spiplistes_abonnements_ajouter ($id_auteur, $id_liste) {
 	$result = false;
-	$nb_listes =  0;
 	if(($id_auteur = intval($id_auteur)) > 0) {
+		$nb_listes =  0;
 		$sql_table = "spip_auteurs_listes";
+		$sql_noms = "(id_auteur,id_liste,date_inscription)";
 		if(is_array($id_liste)) {
-			$id_aq = sql_quote($id_auteur);
 			$sql_valeurs = "";
 			foreach($id_liste as $id) {
-				if($id > 0) {
-					$sql_valeurs .= " ($id_aq,".sql_quote($id)."),";
+				if(($id = intval($id)) > 0) {
+					$sql_valeurs .= " ($id_auteur,$id,NOW()),";
+					$nb_listes++;
 				}
-				$nb_listes++;
 			}
 			if(!empty($sql_valeurs)) {
 				$sql_valeurs = rtrim($sql_valeurs, ",");
-				$result = sql_insert($sql_table, "(id_auteur,id_liste)", $sql_valeurs);
 			}
 		} else if(($id_liste = intval($id_liste)) > 0) {
-			$sql_champs = array('id_auteur' => $id_auteur, 'id_liste' => $id_liste);
-			$result = sql_insertq($sql_table, $sql_champs);
+			$sql_valeurs = " ($id_auteur,$id_liste,NOW())";
 			$nb_listes++;
 		}
+		if($sql_valeurs) {
+			if(($result = sql_insert($sql_table, $sql_noms, $sql_valeurs)) === false) {
+				spiplistes_sqlerror_log ("spiplistes_abonnements_ajouter()");
+			}
+			else {
+				spiplistes_log("API: listes_abonner id_auteur #$id_auteur to $nb_listes liste(s) ", _SPIPLISTES_LOG_DEBUG);
+			}
+		}
 	}
-	spiplistes_log("API: listes_abonner id_auteur #$id_auteur to $nb_listes liste(s) ", _SPIPLISTES_LOG_DEBUG);
 	return($result);
 }
 
