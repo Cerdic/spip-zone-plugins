@@ -158,7 +158,13 @@ function accesrestreint_documents_accessibles_where($primary, $_publique=''){
 	$where = "array('OR',$where,array('AND','zzzd.objet=\'breve\'',".accesrestreint_breves_accessibles_where('zzzd.id_objet',$_publique)."))";
 	$where = "array('OR',$where,array('AND','zzzd.objet=\'forum\'',".accesrestreint_forums_accessibles_where('zzzd.id_objet',$_publique)."))";
 	$where = "array('OR',$where,sql_in('zzzd.objet',\"'rubrique','article','breve','forum'\",'NOT',\$connect))";
-	return "array('IN','$primary','('.sql_get_select('zzzd.id_document','spip_documents_liens as zzzd',array($where),'','','','',\$connect).')')";
+	
+	$where = "array('OR',
+	array('IN','$primary','('.sql_get_select('zzzd.id_document','spip_documents_liens as zzzd',array($where),'','','','',\$connect).')'),
+	array('NOT IN','$primary','('.sql_get_select('zzzd.id_document','spip_documents_liens as zzzd','','','','','',\$connect).')')
+	)";
+	
+	return $where;
 }
 
 ?>
