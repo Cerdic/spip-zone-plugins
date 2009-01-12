@@ -6,6 +6,7 @@
 	[es]Papelera
 	[it]Cestino
 	[en]Recycle bin
+	[de]M&uuml;lleimer
 </multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin --><multi>[fr]contribution originale par [Matthieu Onfray (Japanim)->http://www.japanim.net/] &#169; 2002
@@ -17,6 +18,7 @@ _ <multi>
 	[es]&#169; 2005-2008 - Distribuido bajo licencia GPL
 	[it]&#169; 2005-2008 - Distribuito sotto licenza GPL
 	[en]&#169; 2005-2008 - distributed under the GPL license
+	[de]&#169; 2005-2008 - unter GPL Lizens herausgegeben
 </multi>
 	</auteur>
 	<version>
@@ -32,6 +34,7 @@ _ <multi>
 	[es]  Gesti&oacute;n de los documentos enviados a la papelera.
 	[it]	Gestione dei documenti nel cestino.
 	[en]	Managing documents chucked in the recycle bin.
+	[de]  Verwaltung der Elemente im M&uuml;lleimer
 	</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Corbeille</lien> <!-- URI de documentation -->
