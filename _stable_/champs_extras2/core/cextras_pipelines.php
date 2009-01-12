@@ -109,7 +109,8 @@ function cextras_get_extras_match($nom) {
 	if ($champs = pipeline('declarer_champs_extras', array())) {
 		$nom = objet_type(table_objet($nom));
 		foreach ($champs as $c) {
-			if ($nom == objet_type($c->table) and $c->champ and $c->sql) {
+			// attention aux cas compliques site->syndic !
+			if ($nom == objet_type(table_objet($c->table)) and $c->champ and $c->sql) {
 				$extras[] = $c;
 			}
 		}
@@ -127,7 +128,6 @@ function cextras_get_extras_match($nom) {
 function cextras_editer_contenu_objet($flux){
 	// recuperer les champs crees par les plugins
 	if ($extras = cextras_get_extras_match($flux['args']['type'])) {
-		
 		// les saisies a ajouter seront mises dedans.
 		$inserer_saisie = '';
 		
