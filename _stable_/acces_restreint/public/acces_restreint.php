@@ -127,6 +127,23 @@ function accesrestreint_syndic_articles_accessibles_where($primary, $_publique='
 	#return "array('IN','$primary',array('SUBSELECT','id_syndic','spip_syndic',array(".accesrestreint_rubriques_accessibles_where('id_rubrique').")))";
 }
 
+
+/**
+ * Renvoyer le code de la condition where pour la liste des forums accessibles
+ * on ne rend visible que les forums qui sont lies a un article, une breve ou une rubrique visible
+ *
+ * @param string $primary
+ * @return string
+ */
+function accesrestreint_forums_accessibles_where($primary, $_publique=''){
+	# hack : on utilise zzz pour eviter que l'optimiseur ne confonde avec un morceau de la requete principale
+	$where = accesrestreint_rubriques_accessibles_where('zzzf.id_rubrique','NOT',$_publique);
+	$where = "array('OR',$where,".accesrestreint_articles_accessibles_where('zzzf.id_article',$_publique).")";
+	$where = "array('OR',$where,".accesrestreint_breves_accessibles_where('zzzf.id_breve',$_publique).")";
+	return "array('IN','$primary','('.sql_get_select('zzzf.id_forum','spip_forum as zzzf',array($where),'','','','',\$connect).')')";
+}
+
+
 /**
  * Renvoyer le code de la condition where pour la liste des documents accessibles
  * on ne rend visible que les docs qui sont lies a un article, une breve ou une rubrique visible
@@ -136,24 +153,12 @@ function accesrestreint_syndic_articles_accessibles_where($primary, $_publique='
  */
 function accesrestreint_documents_accessibles_where($primary, $_publique=''){
 	# hack : on utilise zzz pour eviter que l'optimiseur ne confonde avec un morceau de la requete principale
-	return "array('IN','$primary','('.sql_get_select('zzz.id_document','spip_documents_liens as zzz',
-	array(array('OR',
-		array('OR',
-			array('AND','zzz.objet=\'rubrique\'',".accesrestreint_rubriques_accessibles_where('zzz.id_objet','NOT',$_publique)."),
-			array('AND','zzz.objet=\'article\'',".accesrestreint_articles_accessibles_where('zzz.id_objet',$_publique).")
-		),
-			array('AND','zzz.objet=\'breve\'',".accesrestreint_breves_accessibles_where('zzz.id_objet',$_publique).")
-	))"
-	.",'','','','',\$connect).')')";
-	/*return "array('IN','$primary',array('SUBSELECT','id_document','spip_documents_liens',
-	array(array('OR',
-		array('OR',
-			array('AND','objet=\'rubrique\'',".accesrestreint_rubriques_accessibles_where('id_objet')."),
-			array('AND','objet=\'article\'',".accesrestreint_articles_accessibles_where('id_objet').")
-		),
-			array('AND','objet=\'breve\'',".accesrestreint_breves_accessibles_where('id_objet').")
-	))
-	))";*/
+	$where = "array('AND','zzzd.objet=\'rubrique\'',".accesrestreint_rubriques_accessibles_where('zzzd.id_objet','NOT',$_publique).")";
+	$where = "array('OR',$where,array('AND','zzzd.objet=\'article\'',".accesrestreint_articles_accessibles_where('zzzd.id_objet',$_publique)."))";
+	$where = "array('OR',$where,array('AND','zzzd.objet=\'breve\'',".accesrestreint_breves_accessibles_where('zzzd.id_objet',$_publique)."))";
+	$where = "array('OR',$where,array('AND','zzzd.objet=\'forum\'',".accesrestreint_forums_accessibles_where('zzzd.id_objet',$_publique)."))";
+	$where = "array('OR',$where,sql_in('zzzd.objet',\"'rubrique','article','breve','forum'\",'NOT',\$connect))";
+	return "array('IN','$primary','('.sql_get_select('zzzd.id_document','spip_documents_liens as zzzd',array($where),'','','','',\$connect).')')";
 }
 
 ?>
