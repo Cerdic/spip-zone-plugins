@@ -54,7 +54,6 @@ function formulaires_forms_charger_dist($id_form = 0, $id_article = 0, $id_donne
 	else
 		$valeurs['formactif'] = '';
 
-	$valeurs['id_article'] = $id_article;
 	$valeurs['id_form'] = $id_form;
 	$valeurs['id_donnee'] = $id_donnee?$id_donnee:(0-$GLOBALS['auteur_session']['id_auteur']); # GROS Hack pour les jointures a la creation;
 	$valeurs['class'] = 'formulaires/'.($class?$class:'forms_structure');
@@ -64,6 +63,10 @@ function formulaires_forms_charger_dist($id_form = 0, $id_article = 0, $id_donne
 		"<input type='hidden' name='id_donnee' value='$id_donnee' />"
 		// pour la compat, ne sert plus !
 	  . "<input type='hidden' name='ajout_reponse' value='$id_form' />";
+	
+	if ($id_article)
+		$valeurs['_hidden'] .= 
+			"<input type='hidden' name='id_article' value='$id_article' />";
 
 	if (!_DIR_RESTREINT && $id_donnee)
 		$valeurs = array_merge($valeurs,Forms_valeurs($id_donnee,$id_form));
