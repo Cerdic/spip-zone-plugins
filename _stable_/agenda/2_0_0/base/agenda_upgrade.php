@@ -17,6 +17,7 @@
 				include_spip('base/create');
 				include_spip('base/abstract_sql');
 				creer_base();
+				maj_tables('spip_rubriques'); 
 				ecrire_meta('agenda_base_version',$current_version=$version_base,'non');
 			}
 			if ($current_version<0.11){
@@ -76,6 +77,7 @@
 		include_spip('base/abstract_sql');
 		sql_drop_table("spip_evenements");
 		sql_drop_table("spip_mots_evenements");
+		sql_alter("TABLE spip_rubriques DROP COLUMN agenda");
 		effacer_meta('agenda_base_version');
 	}
 	
