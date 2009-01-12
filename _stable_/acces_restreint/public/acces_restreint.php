@@ -21,6 +21,7 @@ function critere_tout_voir_dist($idb, &$boucles, $crit) {
 
 function accesrestreint_pre_boucle(&$boucle){
 	if (!isset($boucle->modificateur['tout_voir'])){
+		$securise = false;
 		switch ($boucle->type_requete){
 			case 'hierarchie':
 			case 'rubriques':
@@ -30,6 +31,7 @@ function accesrestreint_pre_boucle(&$boucle){
 				$t = $boucle->id_table . '.id_rubrique';
 				$boucle->select = array_merge($boucle->select, array($t)); // pour postgres
 				$boucle->where[] = accesrestreint_rubriques_accessibles_where($t);
+				$securise = true;
 				break;
 			case 'forums':
 				$t = $boucle->id_table . '.id_rubrique';
@@ -43,23 +45,35 @@ function accesrestreint_pre_boucle(&$boucle){
 				$t = $boucle->id_table . '.id_breve';
 				$boucle->select = array_merge($boucle->select, array($t)); // pour postgres
 				$boucle->where[] = "array('OR',$where,".accesrestreint_breves_accessibles_where($t).")";
+				$securise = true;
 				break;
 			case 'evenements':
 			case 'signatures':
 				$t = $boucle->id_table . '.id_article';
 				$boucle->select = array_merge($boucle->select, array($t));
 				$boucle->where[] = accesrestreint_articles_accessibles_where($t);
+				$securise = true;
 				break;
 			case 'syndic_articles':
 				$t = $boucle->id_table . '.' . $boucle->primary;
 				$boucle->select = array_merge($boucle->select, array($t));
 				$boucle->where[] = accesrestreint_syndic_articles_accessibles_where($t);
+				$securise = true;
 				break;
 			case 'documents':
 				$t = $boucle->id_table . '.' . $boucle->primary;
 				$boucle->select = array_merge($boucle->select, array($t));
 				$boucle->where[] = accesrestreint_documents_accessibles_where($t);
+				$securise = true;
 				break;
+		}
+		if ($securise){
+			$boucle->hash .= "if (!defined('_DIR_PLUGIN_ACCESRESTREINT')){
+			\$link_empty = generer_url_ecrire('admin_vider'); \$link_plugin = generer_url_ecrire('admin_plugin');
+			\$message_fr = 'La restriction d\'acc&egrave;s a ete desactiv&eacute;e. <a href=\"'.\$link_plugin.'\">Corriger le probl&egrave;me</a> ou <a href=\"'.\$link_empty.'\">vider le cache</a> pour supprimer les restrictions.';
+			\$message_en = 'Acces Restriction is now unusable. <a href=\"'.\$link_plugin.'\">Correct this trouble</a> or <a href=\"'.generer_url_ecrire('admin_vider').'\">empty the cache</a> to finish restriction removal.';
+			die(\$message_fr.'<br />'.\$message_en);
+			}";
 		}
 	}
 	return $boucle;
