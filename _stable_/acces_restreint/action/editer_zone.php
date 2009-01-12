@@ -139,9 +139,9 @@ function accesrestreint_revision_zone($id_zone, $c=false) {
  * @param unknown_type $supp_zone
  * @return unknown
  */
-function accesrestreint_supprime_zone($supp_zone){
-	$id_zone = sql_getfetsel("id_zone", "spip_zones", "id_zone=" . intval($supp_zone));
-	if ($id_zone == $supp_zone){
+function accesrestreint_supprime_zone($id_zone){
+	$supp_zone = sql_getfetsel("id_zone", "spip_zones", "id_zone=" . intval($id_zone));
+	if (intval($id_zone) AND 	intval($id_zone) == intval($supp_zone)){
 		// d'abord les auteurs
 		sql_delete("spip_zones_auteurs", "id_zone=".intval($id_zone));
 		// puis la portee
