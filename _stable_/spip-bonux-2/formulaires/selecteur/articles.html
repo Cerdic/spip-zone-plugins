@@ -5,6 +5,10 @@
 .item_picked li {margin:0 2px 2px;padding:2px;background:#eee;border:1px solid #999;float:left;clear:none;}
 .item_picked li span.sep {display:none;}
 
+.item_picked.select li {padding:2px 0;border:0;font-weight:bold;background:none;float:none;}
+.item_picked.select ul > li {float:left;}
+.item_picked.changing {}
+
 .picker_bouton {float:right;clear:both;}
 
 .item_picker {clear:left;}
@@ -16,16 +20,18 @@
 .item_picker .frame .pagination {font-size:0.9em;}
 
 .item_picker .frame ul {list-style:none;margin:0;padding:0;}
-.item_picker .frame ul li {list-style:none;margin:0;padding:2px;padding-left:15px;position:relative;}
-.item_picker .frame ul li.rubrique {background:url(#CHEMIN{prive/images/rubrique-12.gif}) no-repeat center left;padding-right:16px;}
-.item_picker .frame ul li.article {background:url(#CHEMIN{prive/images/article-12.gif}) no-repeat center left;}
+.item_picker .frame ul li {display:block;clear:both;list-style:none;margin:0;padding:0 2px;padding-left:15px;position:relative;}
+.item_picker .frame ul li.rubrique {background:url(#CHEMIN{prive/images/rubrique-12.gif}) no-repeat left 2px;padding-right:16px;}
+.item_picker .frame ul li.article {clear:both;background:url(#CHEMIN{img_pack/article-12.png}) no-repeat left 2px;}
 
 .item_picker .frame ul li:hover {background-color:#eee;}
-.item_picker .frame a:hover {background-color:#999;}
+.item_picker .frame a:hover,.item_picker .frame a:hover .ouvrir,.item_picker .frame a:hover .add {background-color:#999;}
 
 .item_picker .frame ul li.rubrique .ouvrir {position:absolute;display:block;top:0px;right:0px;}
-.item_picker .frame ul li .add {float:left;}
-.item_picker .frame ul li a:hover .add {background-color:#999;}
+.item_picker .frame ul >li .add {float:left;clear:left;}
+.item_picker .frame ul li a {display:block;}
+/*
+.item_picker .frame ul li a:hover .add {background-color:#999;}*/
 </style>
 
 
@@ -36,22 +42,10 @@ select=1 => le selecteur se comporte comme un select, avec un seul choix possibl
 <INCLURE{fond=formulaires/selecteur/inc-sel-articles}{selected=#ENV{articles_selected}}{select}{img_unpick=#CHEMIN{img_pack/item-remove.png}}>
 </ul>
 
+#SET{id_rubrique,#ENV{id_rubrique}}
+<BOUCLE_art(ARTICLES){statut?}{tout}{id_article}>#SET{id_rubrique,#ID_RUBRIQUE}</BOUCLE_art>
 
-[(#REM) Afficher un bouton ajax Modifier a la premiere fois ----------------------------------------
-][(#ENV{picker,''}|non)
-<div class='picker_bouton'>&#91;<a href='[(#SELF|parametre_url{picker,1})]' class='ajax'><:bouton_modifier:></a>&#93;</div>
-]
-[(#REM) Afficher un bouton Fermer/Modifier ensuite ---------------------------------------- 
-][(#ENV{picker,''}|oui)
-<div class='picker_bouton'>&#91;<a href='[(#SELF|parametre_url{picker,0})]' onclick="jQuery(this).hide().siblings('a').show().parents('.picker_bouton').siblings('.item_picker').hide();return false;"
-><:bouton_fermer:></a><a href='[(#SELF|parametre_url{picker,1})]' onclick="jQuery(this).hide().siblings('a').show().parents('.picker_bouton').siblings('.item_picker').show();return false;"
-style='display:none;'><:bouton_modifier:></a>&#93;</div>]
-
-[(#REM) et enfin le navigateur ; le container item_picker est ici pour etre voisin de item_picked ------]
+[(#REM) le container item_picker est ici pour etre voisin de item_picked ------]
 <div class='item_picker'>
-	<BOUCLE_art(ARTICLES){statut?}{tout}{id_article}>
-	[(#ENV{picker,''}|oui)	<INCLURE{fond=formulaires/selecteur/navigateur}{id_rubrique}{id_article}{articles=1}{ajax}{env}>]
-	</BOUCLE_art>
-	[(#ENV{picker,''}|oui)	<INCLURE{fond=formulaires/selecteur/navigateur}{id_rubrique}{id_article}{articles=1}{ajax}{env}>]
-	<//B_art>
+<INCLURE{fond=formulaires/selecteur/picker-ajax}{id_rubrique=#GET{id_rubrique}}{id_article}{articles=1}{ajax}{env}>
 </div>

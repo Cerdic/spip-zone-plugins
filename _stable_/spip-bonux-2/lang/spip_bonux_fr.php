@@ -6,6 +6,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'pages' => 'Pages',
 
+'bouton_fermer' => "Fermer",
+
+
 );
 
 
