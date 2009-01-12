@@ -9,6 +9,11 @@
 		<input type='hidden' name='id_evenement' value='#ID_EVENEMENT' />
 		<input type='hidden' name='id_parent' value='#ENV{id_parent}' />
 	  <ul>
+	  	<li class='editer_parent'>
+	    	<label for="id_article"><:agenda:evenement_article:></label>[
+	    	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_article})</span>
+	    	]<INCLURE{fond=formulaires/selecteur/articles}{articles_selected=#ARRAY{0,#ENV{id_parent}}}{id_article=#ENV{id_parent}}{select=1}{ajax}{env}>
+	  	</li>
 	    <li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 	    	<label for="titre"><:agenda:evenement_titre:></label>[
 	    	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>

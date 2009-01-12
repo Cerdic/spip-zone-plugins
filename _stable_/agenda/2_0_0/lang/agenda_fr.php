@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'creer_evenement' => "Cr&eacute;er un &eacute;v&eacute;nement",
 
+'evenement_article' => 'Dans l\'article',
 'evenement_autres_occurences' => "Autres occurences :",
 'evenement_descriptif' => 'Descriptif',
 'evenement_horaire' => 'Toute la journ&eacute;e',
