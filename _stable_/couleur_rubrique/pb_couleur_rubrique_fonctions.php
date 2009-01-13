@@ -29,4 +29,8 @@ function pb_couleur_rubrique($id_rubrique) {
 	return $pb_couleur_rubrique;
 }
 
+function couleur_rubrique($id_rubrique) {
+	return pb_couleur_rubrique($id_rubrique);
+}
+
 ?>

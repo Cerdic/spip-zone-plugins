@@ -12,7 +12,7 @@ function pb_couleur_rubrique_gauche($vars){
 		
 		$ret = "";
 		
-		if ($exec == "naviguer" && $id_rubrique > 0 && $GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
+		if ($exec == "naviguer" && $GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
 
 			$deplier = true;
 			$pb_couleur_rubrique = pb_couleur_rubrique($id_rubrique);
@@ -22,9 +22,10 @@ function pb_couleur_rubrique_gauche($vars){
 			}
 			
 
-			
+			$titre = "Couleur de la rubrique";
+			if ($id_rubrique == 0) $titre = "Couleur principale du site";
 		
-			$ret .= debut_cadre_enfonce(_DIR_PLUGIN_PB_COULEUR_RUBRIQUE."img_pack/icon.png", true, "rien.gif", bouton_block_depliable("Couleur de la rubrique", $deplier, "selection_couleur"));
+			$ret .= debut_cadre_enfonce(_DIR_PLUGIN_PB_COULEUR_RUBRIQUE."img_pack/icon.png", true, "rien.gif", bouton_block_depliable($titre, $deplier, "selection_couleur"));
 
 			$ret .= debut_block_depliable($deplier, "selection_couleur");
 		    $ret .= "<form method='post' action='index.php?exec=naviguer&id_rubrique=$id_rubrique'>";

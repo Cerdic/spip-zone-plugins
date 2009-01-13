@@ -9,20 +9,15 @@ _ &#169; Distribu&#233; sous licence GNU/GPL
 _ Le module de choix de couleur par [Steven Wittens->http://acko.net/dev/farbtastic] sous licence GPL
 	</auteur>
 	<version>
-	1.0
+	1.5
 	</version>
 	<etat>
 	stable
 	</etat>
 	<description>
 		<p>Ce plugin permet de choisir une couleur pour chaque rubrique du site.</p>
-		<p>Pour afficher la couleur d'une rubrique dans un squelette, il suffit d'utiliser le code: <code>[#(#ID_RUBRIQUE|pb_couleur_rubrique)]</code>.</p>
+		<p>Pour afficher la couleur d'une rubrique dans un squelette, il suffit d'utiliser le code: <code>[#(#ID_RUBRIQUE|couleur_rubrique)]</code>.</p>
 	</description>
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
 	<fonctions>
 	pb_couleur_rubrique_fonctions.php
 	</fonctions>
