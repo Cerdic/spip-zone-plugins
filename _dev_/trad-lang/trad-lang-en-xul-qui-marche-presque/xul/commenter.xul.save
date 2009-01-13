@@ -1,0 +1,40 @@
+
+<window
+    id="commenter"
+    title="Trad-Lang-Comment"
+    orient="vertical"
+    debug="false"
+    onload="loadCommenter();"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<? echo '<script src="/spip/trad-lang/js/header.js" type="application/x-javascript" />'; ?>
+<? echo '<script src="/spip/trad-lang/js/commenter.js" type="application/x-javascript" />'; ?>
+
+<grid>
+  <columns>
+    <column />
+  </columns>
+<rows>
+
+<row flex="1">
+  <description>xxx:Commentaire</description>
+</row>
+
+<row flex="20">
+    <textbox id="comm" multiline="true" ontextentered="commCommenter('commenter','');" value="<? echo xmlc($this->comm); ?>" />
+</row>
+
+<row flex="1">
+  <hbox>
+    <spacer flex="5" />
+    <button id="valider" oncommand="commCommenter('page_garde', '');" label="xxx:Valider" />
+  </hbox>
+</row>
+
+</rows>
+</grid>
+
+<script src="/spip/trad-lang/js/footer.js" type="application/x-javascript" />
+
+</window>

@@ -1,0 +1,192 @@
+
+<window
+    id="page_garde"
+    title="Trad-Lang"
+    orient="vertical"
+    debug="false"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<? echo '<script src="/spip/trad-lang/js/header.js" type="application/x-javascript" />'; ?>
+<? echo '<script src="/spip/trad-lang/js/page_garde.js" type="application/x-javascript" />'; ?>
+
+<grid>
+  <columns>
+    <column flex="1"/>
+  </columns>
+
+<rows>
+
+<row flex="1">
+
+  <hbox>
+    <spacer flex="1" />	
+    <description>
+	<?
+	  echo _TT("ts:texte_langue");
+	?>
+    </description>
+   <hbox>
+    <menulist id="lgi" label="langue">
+      <menupopup>
+	<?
+	  asort($app->lgis);
+	  while (list(,$lg) = each($app->lgis))
+	    {
+	      $option = "";
+	      if ($lg == $app->lgi)
+		$option = 'selected="true" ';
+	      echo '<menuitem value="'.$lg.'" oncommand="commPageGarde(\'page_garde\');" label="'.
+		  xmlc(traduire_nom_langue($lg)).' ('.$lg.')" '.$option.'/>';
+	    }
+	?>
+      </menupopup>
+    </menulist>
+    <spacer flex="1" />
+   </hbox>
+  </hbox>  
+</row>
+
+<row  flex="1" />
+
+<row  flex="1">
+
+<groupbox>
+  <caption label="Explication" />
+  <description>
+
+<?
+  echo "<html:p>"._TT('ts:texte_selectionner')."</html:p>";
+  echo "<html:ul><html:li>"._TT('ts:texte_module')."</html:li>";
+	
+  echo "<html:li>"._TT('ts:texte_langue_origine');
+  echo _TT('ts:texte_langue_origine2')."</html:li>";
+
+  echo "<html:li>"._TT('ts:texte_langue_cible').
+	"</html:li></html:ul>";
+
+  echo "<html:p>"._TT('ts:texte_explication_langue_cible', array('module' => $mod))."</html:p>";
+?>
+  </description>
+
+</groupbox>
+
+</row>
+
+
+<row  flex="1">
+
+<groupbox>
+  <caption label="Choix traduction" />
+
+<grid flex="1">
+  <columns>
+    <column width="400px"/>
+    <column flex="1" />
+  </columns>
+
+  <rows>
+    <row>  
+	<description>
+	 <? echo _TT('ts:texte_module_traduire'); ?>
+	</description>
+
+    <menulist id="mod">
+      <menupopup>
+	<?
+	  asort($app->mods);
+	  while (list($nom,$def) = each($app->mods))
+	    {
+	      $option = "";
+	      if ($nom == $app->mod)
+		$option = 'selected="true" ';
+		echo '<menuitem value="'.$nom.'" label="'.
+		  $def->nom_module.' ('.$def->type_module.')" '.$option.'/>';
+	    }
+	?>
+      </menupopup>
+    </menulist>
+
+    </row>
+    <row>
+	<description>
+	 <? echo _TT('ts:item_langue_origine'); ?>
+	</description>
+
+    <menulist id="lgo">
+      <menupopup>
+	<?
+	  asort($app->lgos);
+	  while (list(,$lg) = each($app->lgos))
+	    {
+	      $option = "";
+	      if ($lg == $app->lgo)
+		$option = 'selected="true" ';
+ 	      echo '<menuitem value="'.$lg.'" label="'.
+		  xmlc(traduire_nom_langue($lg)).' ('.$lg.')" '.$option.'/>';
+	    }
+	?>
+      </menupopup>
+    </menulist>
+
+    </row>
+
+    <row>
+	<description>
+	 <? echo _TT('ts:item_langue_cible'); ?>
+	</description>
+
+    <menulist id="lgc">
+      <menupopup>
+	<?
+	  asort($app->lgcs);
+	  while (list(,$lg) = each($app->lgcs))
+	    {
+	      $option = "";
+	      if ($lg == $app->lgc)
+		$option = 'selected="true" ';
+	      echo '<menuitem value="'.$lg.'" label="'.
+		  xmlc(traduire_nom_langue($lg)).' ('.$lg.')" '.$option.'/>';
+	    }
+	?>
+      </menupopup>
+    </menulist>
+
+    </row>
+
+    <row>
+	<description>
+	 <? echo _TT('ts:item_nouveau_code'); ?>
+	</description>
+
+	<hbox>
+  	  <textbox id="nlgc" flex="1" maxlength="3" size="5" />
+          <spacer flex="5" />
+       </hbox> 
+
+    </row>
+
+  </rows>
+</grid>
+
+</groupbox>
+  
+</row>
+
+<row  flex="1" />
+
+<row  flex="1">
+
+<hbox>
+  <spacer flex="5" />
+  <button id="traduire" oncommand="commPageGarde('administrer');" label="xxx:Administrer" />
+  <button id="traduire" oncommand="commPageGarde('verif');" label="xxx:Traduire" />
+</hbox>
+</row>
+
+</rows>
+</grid>
+
+<script src="/spip/trad-lang/js/footer.js" type="application/x-javascript" />
+
+</window>

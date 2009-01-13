@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<window
+    id="page_garde"
+    title="Trad-Lang"
+    orient="vertical"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+
+<label value="Click here:" control="normal"/>
+<button id="normal" label="Normal"/>
+<label value="or here:" control="disabled"/>
+<button id="disabled" label="Disabled" disabled="true"/>
+<button label="Fermer" default="true" oncommand="location.href='http://www.google.com'" />
+
+<label control="some-text" value="Enter some text"/>
+<textbox id="some-text"/>
+<label control="some-password" value="Enter a password"/>
+<textbox id="some-password" type="password" maxlength="8"/>
+
+<textbox multiline="true"
+           value="This is some text that could wrap onto multiple lines."/>
+
+<checkbox id="case-sensitive" checked="true" label="Case sensitive"/>
+<radio id="orange" label="Orange"/>
+<radio id="violet" selected="true" label="Violet"/>
+<radio id="yellow" label="Yellow"/>
+
+<listbox rows="3">
+  <listitem label="Butter Pecan" value="bpecan"/>
+  <listitem label="Chocolate Chip" value="chocchip"/>
+  <listitem label="Raspberry Ripple" value="raspripple"/>
+  <listitem label="Squash Swirl" value="squash"/>
+</listbox>
+
+<menulist label="Bus">
+  <menupopup>
+    <menuitem label="Car"/>
+    <menuitem label="Taxi"/>
+    <menuitem label="Bus" selected="true"/>
+    <menuitem label="Train"/>
+  </menupopup>
+</menulist>
+
+<toolbox>
+ <menubar id="windowlist-menubar">
+  <menu label="Window">
+   <menupopup id="window-menu" datasources="rdf:window-mediator" ref="NC:WindowMediatorRoot">
+    <template>
+     <rule>
+      <menuitem uri="rdf:*" label="rdf:http://home.netscape.com/NC-rdf#Name"/>
+     </rule>
+    </template>
+   </menupopup>
+  </menu>          
+ </menubar>
+</toolbox>
+
+
+</window>
