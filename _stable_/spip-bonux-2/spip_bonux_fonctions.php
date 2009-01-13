@@ -113,4 +113,13 @@ function filtre_icone($lien, $texte, $fond, $align="", $fonction=""){
 	return icone_inline($texte, $lien, $fond, $fonction, $align?$align:$GLOBALS['spip_lang_left']);
 }
 
+function picker_selected($selected,$type){
+	$select = array();
+	$type = preg_replace(',\W,','',$type);
+	foreach($selected as $value)
+		if (preg_match(",".$type."[|]([0-9]+),",$value,$match)
+		  AND $v=intval($match[1]))
+		  $select[] = $v;
+	return $select;
+}
 ?>
