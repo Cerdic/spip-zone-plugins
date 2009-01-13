@@ -3,12 +3,11 @@
         <nom> <!-- Nom du plugin -->
           <multi>
 					[fr]article s5
-					[en]article s5
 					</multi>
         </nom>
         <auteur>        <!-- Auteur du plugin -->
           <multi>
-					[fr]cy_altern, d'apr&#232;s une contrib de Bourgeon, Déesse A., Fil et une autre contrib de Cogefip
+					[fr]cy_altern, d'apr&#232;s une contrib Cogefip. Scripts et css s5 de Eric Meyer [->http://www.meyerweb.com]
 _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 					</multi>
         </auteur>
@@ -20,24 +19,17 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
         </etat>
         <description>
         <multi>
-			  [fr]transformer un article en diaporama
+			  [fr]transformer un article en diaporama. A utiliser avec le plugin squelette_par_mot_clef.
           </multi>
         </description>
 		    <lien>
-              [Documentation->http://www.spip-contrib.net/Squelette-S5-Slide-Show],
-		      et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=s5]
+              [Documentation pour la r&#233;daction de l'article->http://www.spip-contrib.net/Presentation-mode-Powerpoint-pour]
+              et [Documentation du plugin squelette_par_mot_clef->http://www.spip-contrib.net/Choix-des-squelettes-par-mot-clef]
 		    </lien>
         <icon>plugin-24.gif</icon>
         <prefix>
           s5
         </prefix>
-<!--  
-        <pipeline>
-        		<nom>ajouter_boutons</nom>
-            <inclure>aa_pipelines.php</inclure>
-        </pipeline>	
-				<necessite id="cfg" version="[1.0.0;]" />
--->
-				<chemin dir='' />
-	<necessite id="SPIP" version="[1.9.0;]" />
+				<fonctions>s5_fonctions.php</fonctions>
+        <chemin dir='' />
 </plugin>
