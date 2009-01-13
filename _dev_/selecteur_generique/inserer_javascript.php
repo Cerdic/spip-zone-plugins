@@ -23,8 +23,6 @@ function SelecteurGenerique_inserer_auteur() {
 				delay: 300,
 				autofill: false,
 				minChars: 1,
-				//'helperClass': 'autocompleter',
-				//'selectClass': 'selectAutocompleter',
 				formatItem: function(data, i, n, value) {
 					return data[0];
 				},
@@ -83,8 +81,6 @@ function SelecteurGenerique_inserer_mot() {
 				delay: 300,
 				autofill: false,
 				minChars: 1,
-				//'helperClass': 'autocompleter',
-				//'selectClass': 'selectAutocompleter',
 				formatItem: function(data, i, n, value) {
 					return data[0];
 				},
@@ -120,49 +116,49 @@ function SelecteurGenerique_inserer_rubrique() {
 	$ac = parametre_url(generer_url_ecrire('selecteur_generique',
 		'quoi=rubrique'),
 		'id_article', _request('id_article'), '\\x26');
-
+	$ac = generer_url_ecrire('selecteur_generique');
+	
 	return <<<EOS
+(function($) {
+	var appliquer_selecteur_cherche_rubrique = function() {
 
-var appliquer_selecteur_cherche_rubrique = function() {
-
-	// chercher l'input de saisie
-	jQuery('input#titreparent')
-	.not('[@autoCFG]')
-	.Autocomplete({
-		'source': '$ac',
-		'delay': 300,
-		'autofill': false,
-		'helperClass': 'autocompleter',
-		'selectClass': 'selectAutocompleter',
-		'minchars': 1,
-		'mustMatch': true,
-		'cacheLength': 20,
-		'onSelect': function(li) {
-			if (li.id > 0) {
-				inp
-				.attr('original', inp.attr('value'))
-				.parents('form')
-				.find('input[@name=id_parent]')
-					.attr('value', li.id)
-					.trigger('change') // auteur_infos a un bind('change')
-				.end();
-			} else {
-				inp.attr('value', inp.attr('original'));
-			}
-		}
-	})
-	.attr('disabled', false)
-	.attr('original', inp.attr('value'))
-	.bind('focus', function() {
-		this.select();
+		// chercher l'input de saisie
+		var me = jQuery('input[@id=titreparent]');
+		me.each(function(){
+			var inp = this;
+			var id_groupe = jQuery(this).parents('form').find('input[@name=select_groupe]').val();
+			
+			jQuery(inp).focus(function(){
+				$(this).val('');
+			});
+			jQuery(inp).attr('disabled','').autocomplete('$ac',{
+				extraParams:{quoi:'rubrique'},
+				delay: 300,
+				autofill: false,
+				minChars: 1,
+				formatItem: function(data, i, n, value) {
+					return data[0];
+				},
+			});
+			jQuery(inp).result(function(event, data, formatted) {
+				if (data[2] > 0) {
+					jQuery(inp)
+					.val(data[1])
+					.parents('form').find('input[id=id_parent]')
+					.val(data[2])
+					.end();
+				}
+				else{
+					return data[1];
+				}
+			});
+		});
+	};
+	$(function(){
+		appliquer_selecteur_cherche_rubrique();
+		onAjaxLoad(appliquer_selecteur_cherche_rubrique);
 	});
-}
-
-jQuery(document).ready(function(){
-	setInterval(appliquer_selecteur_cherche_rubrique,2000);
-});
-
-
+})(jQuery);
 EOS;
 }
 
@@ -186,6 +182,10 @@ function SelecteurGenerique_inserer_javascript($flux) {
 	OR _request('exec') == 'breves_voir'
 	OR _request('exec') == 'sites') {
 		$js .= SelecteurGenerique_inserer_mot();
+	}
+	if (_request('exec') == 'articles_edit'
+	OR _request('exec') == 'rubriques_edit') {
+		$js .= SelecteurGenerique_inserer_rubrique();
 	}
 	if ($js)
 		$js =
