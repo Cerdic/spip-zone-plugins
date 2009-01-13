@@ -17,7 +17,7 @@ include_spip('inc/article_select');
 
 function exec_evenements_edit_dist(){
 	exec_evenements_edit_args(_request('id_evenement'), // intval plus tard
-		intval(_request('id_article'))?intval(_request('id_article')):intval(_request('id_parent')),
+		_request('id_article'),
 		((_request('new') == 'oui') ? 'new' : ''));
 }
 
@@ -28,7 +28,7 @@ function exec_evenements_edit_args($id_evenement, $id_article, $new){
 		$id_article = $row['id_article'];
 
 	if ((!$new AND !$row)
-	  OR ($new AND !autoriser('creerevenementdans','article',$id_article)) 
+	  OR ($new AND $id_article AND !autoriser('creerevenementdans','article',$id_article))
 	  OR (!$new AND (!autoriser('voir', 'evenement', $id_evenement,null,array('id_article'=>$id_article))	OR !autoriser('modifier','evenement', $id_evenement,null,array('id_article'=>$id_article)))) 
 	  ) {
 		include_spip('inc/minipres');

@@ -252,8 +252,10 @@ function agenda_action_instituer_evenement($id_evenement, $c) {
 
 	if (!count($champs)) return;
 
-	// Envoyer les modifs.
-	sql_updateq('spip_evenements',$champs,'id_evenement='.intval($id_evenement));
+	// Envoyer les modifs sur l'evenement et toutes ses repetitons
+	$ids = array_map('reset',sql_allfetsel('id_evenement','spip_evenements','id_evenement_source='.intval($id_evenement)));
+	$ids[] = intval($id_evenement);
+	sql_updateq('spip_evenements',$champs,sql_in('id_evenement',$ids));
 
 	// Invalider les caches
 	include_spip('inc/invalideur');

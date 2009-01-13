@@ -16,6 +16,8 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_arti
 		$valeurs['id_article'] = $id_article;
 	$valeurs['id_parent'] = $valeurs['id_article'];
 	unset($valeurs['id_article']);
+	// pour le selecteur d'article(s) optionnel
+	$valeurs['id_parents'] = array("article|".$valeurs['id_parent']);
 
 	if (!$valeurs['titre'])
 		$valeurs['titre'] = sql_getfetsel('titre','spip_articles','id_article='.intval($valeurs['id_article']));
@@ -65,8 +67,20 @@ function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_art
 	if ($date_debut AND $date_fin AND $date_fin<$date_debut)
 		$erreurs['date_fin'] = _L('la date de fin doit etre posterieure a la date de debut');
 	
-	if (!_request('id_parent'))
-		$erreurs['message_erreur'] = _L('Vous devez indiquer un article');
+	include_spip('spip_bonux_fonctions');
+	if (count($id = picker_selected(_request('id_parents'),'article'))
+	  AND $id = reset($id)
+	  AND $id = sql_getfetsel('id_article','spip_articles','id_article='.intval($id))){
+	  // reinjecter dans id_parent
+	  set_request('id_parent',$id);
+	}
+
+	if (!$id_parent = intval(_request('id_parent')))
+		$erreurs['id_parent'] = _T('agenda:erreur_article_manquant');
+	else {
+		if (!autoriser('creerevenementdans','article',$id_parent))
+			$erreurs['id_parent'] = _T('agenda:erreur_article_interdit');
+	}
 
 	#if (!count($erreurs))
 	#	$erreurs['message_erreur'] = 'ok?';
