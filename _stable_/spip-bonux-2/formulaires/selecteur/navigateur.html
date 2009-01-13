@@ -5,12 +5,12 @@
 		</div>#SET{n,0}
 		<B_contenu>
 		[(#REM) afficher la racine si la profondeur le permer]
-		[(#GET{n}|<{3}|oui)
-		<div class='frame'><h2><:info_racine_site:></h2>[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique=0}{env})]</div>]
-		<BOUCLE_contenu(HIERARCHIE){id_rubrique}{tout}{n-3,3}>#SET{n,#GET{n}|plus{1}}
-		<div class='frame'><a
+		[(#GRAND_TOTAL|<{#TOTAL_BOUCLE}|oui)
+		<div class='frame[ total_(#GRAND_TOTAL|max{#TOTAL_BOUCLE|moins{1}})]frame_0'><h2><:info_racine_site:></h2>[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique=0}{env})]</div>]
+		<BOUCLE_contenu(HIERARCHIE){id_rubrique}{tout}{n-4,4}>#SET{n,0}
+		<div class='frame[ total_(#GRAND_TOTAL|min{#TOTAL_BOUCLE|moins{1}})][ frame_(#COMPTEUR_BOUCLE|moins{#GRAND_TOTAL|plus{1}|max{#TOTAL_BOUCLE}}|plus{#TOTAL_BOUCLE})]'><a
 		href='[(#SELF|parametre_url{id_r,#_rub:ID_PARENT|?{#_rub:ID_PARENT,racine}})]' class='frame_close ajax'><img src='#CHEMIN{img_pack/frame-close.png}' /></a>
-		<h2>#TITRE</h2>
+		<h2><a class='ajax' href='[(#SELF|parametre_url{id_r,#ID_RUBRIQUE})]'>#TITRE</a></h2>
 		[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique}{env})]
 		[(#ENV{articles,0}|oui) [(#INCLURE{fond=formulaires/selecteur/inc-nav-articles}{id_rubrique}{id_article}{env})] ]
 		</div>
@@ -18,5 +18,5 @@
 	
 	</BOUCLE_rub>
 	<div class='chemin'><strong class='on'><:info_racine_site:></strong></div>
-	<div class='frame'><h2><:info_racine_site:></h2>[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique=0}{env})]</div>
+	<div class='frame total_0 frame_0'><h2><:info_racine_site:></h2>[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique=0}{env})]</div>
 	<//B_rub>

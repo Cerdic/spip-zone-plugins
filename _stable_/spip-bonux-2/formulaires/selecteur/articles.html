@@ -1,45 +1,11 @@
 <script type='text/javascript'>var img_unpick='#CHEMIN{img_pack/item-remove.png}';</script>
 <script type='text/javascript' src='#CHEMIN{formulaires/selecteur/jquery.picker.js}'></script>
-<style>
-.item_picked {list-style:none;margin:0;padding:0;float:left;}
-.item_picked li {margin:0 2px 2px;padding:2px;background:#eee;border:1px solid #999;float:left;clear:none;}
-.item_picked li span.sep {display:none;}
-
-.item_picked.select li {padding:2px 0;border:0;font-weight:bold;background:none;float:none;}
-.item_picked.select ul > li {float:left;}
-.item_picked.changing {}
-
-.picker_bouton {float:right;clear:both;}
-
-.item_picker {clear:left;}
-.item_picker .chemin {border-bottom:1px sold #eee;margin:0.5em 0 0.25em;clear:both;}
-
-.item_picker .frame {border:1px solid #999;width:159px;height:400px;float:left;overflow:auto;}
-.item_picker .frame .frame_close {float:right;}
-.item_picker .frame h2 {margin:0;padding:5px;background:#ddd;}
-.item_picker .frame .pagination {font-size:0.9em;}
-
-.item_picker .frame ul {list-style:none;margin:0;padding:0;}
-.item_picker .frame ul li {display:block;clear:both;list-style:none;margin:0;padding:0 2px;padding-left:15px;position:relative;}
-.item_picker .frame ul li.rubrique {background:url(#CHEMIN{prive/images/rubrique-12.gif}) no-repeat left 2px;padding-right:16px;}
-.item_picker .frame ul li.article {clear:both;background:url(#CHEMIN{img_pack/article-12.png}) no-repeat left 2px;}
-
-.item_picker .frame ul li:hover {background-color:#eee;}
-.item_picker .frame a:hover,.item_picker .frame a:hover .ouvrir,.item_picker .frame a:hover .add {background-color:#999;}
-
-.item_picker .frame ul li.rubrique .ouvrir {position:absolute;display:block;top:0px;right:0px;}
-.item_picker .frame ul >li .add {float:left;clear:left;}
-.item_picker .frame ul li a {display:block;}
-/*
-.item_picker .frame ul li a:hover .add {background-color:#999;}*/
-</style>
-
 
 [(#REM) afficher la selection dans un ul class item_picked ----------------------------------------
 select=1 => le selecteur se comporte comme un select, avec un seul choix possible
 ]<ul class='item_picked[ (#ENV{select,''}|?{select})]'>
-[(#ENV{rubriques,0}|oui)<INCLURE{fond=formulaires/selecteur/inc-sel-rubriques}{selected=#ENV{rubriques_selected}}{select}{img_unpick=#CHEMIN{img_pack/item-remove.png}}>]
-<INCLURE{fond=formulaires/selecteur/inc-sel-articles}{selected=#ENV{articles_selected}}{select}{img_unpick=#CHEMIN{img_pack/item-remove.png}}>
+[(#ENV{rubriques,0}|oui)<INCLURE{fond=formulaires/selecteur/inc-sel-rubriques}{name}{selected=#ENV{rubriques_selected}}{select}{img_unpick=#CHEMIN{img_pack/item-remove.png}}>]
+<INCLURE{fond=formulaires/selecteur/inc-sel-articles}{name}{selected=#ENV{articles_selected}}{select}{img_unpick=#CHEMIN{img_pack/item-remove.png}}>
 </ul>
 
 #SET{id_rubrique,#ENV{id_rubrique}}
