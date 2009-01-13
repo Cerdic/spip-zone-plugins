@@ -23,6 +23,7 @@ function SelecteurGenerique_inserer_auteur() {
 				delay: 300,
 				autofill: false,
 				minChars: 1,
+				width: 'auto',
 				formatItem: function(data, i, n, value) {
 					return data[0];
 				},

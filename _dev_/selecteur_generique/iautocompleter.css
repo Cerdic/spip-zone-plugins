@@ -24,7 +24,6 @@
 	padding: 0px;
 	border:1px solid #FFFFFF;
 	background-color: white;
-	overflow: hidden;
 	z-index: 99999;
 }
 
@@ -52,7 +51,7 @@
 	in relative units scroll will be broken in firefox
 	*/
 	line-height: inherit;
-	overflow: hidden;
+	word-wrap:break-word;
 }
 
 .ac_loading {
