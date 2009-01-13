@@ -3,8 +3,6 @@
 
 	Menu de selection d'un mot a partir d'une valeur passee en parametre
 
-	La reponse doit etre en xml, elle sera exploitee par iautocompleter.js
-
 ]
 [(#REM)
 	Eliminer d'abord les mots deja lies a l'article/breve etc.
@@ -13,10 +11,10 @@
 <BOUCLE_e(MOTS){tout}{id_article?}{id_breve?}{id_rubrique?}{id_syndic?}{doublons}></BOUCLE_e>
 
 [(#REM) Chercher les mots correspondant a la requete ]
-<BOUCLE_s(MOTS){titre LIKE (#ENV{q})%}{id_groupe?}{0,20}{par titre}{doublons}>
+<BOUCLE_s(MOTS){titre LIKE (#ENV{q})%}{id_groupe?}{0,20}{par titre}{doublons}{tous}>
 	#TITRE[ - (#DESCRIPTIF|textebrut|couper{20})]|[(#TITRE|textebrut)]|#ID_MOT
 </BOUCLE_s>
-	<BOUCLE_s1(MOTS){titre LIKE %(#ENV{q})%}{id_groupe?}{0,20}{par titre}{doublons}>
+	<BOUCLE_s1(MOTS){titre LIKE %(#ENV{q})%}{id_groupe?}{0,20}{par titre}{doublons}{tous}>
 	#TITRE[ - (#DESCRIPTIF|textebrut|couper{20})]|[(#TITRE|textebrut)]|#ID_MOT
 	</BOUCLE_s1>
 		[(#REM) Vraiment on n'a rien trouve ]
