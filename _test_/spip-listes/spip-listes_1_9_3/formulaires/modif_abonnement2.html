@@ -37,14 +37,15 @@
 		<BOUCLE_listes(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'} {0,(#ENV{formulaire_affiche}|?{100,0})}>
 			[(#TOTAL_BOUCLE|=={1}|oui)
 				<li style="margin-bottom:3px">
-					<input type="checkbox" name="list&#91;&#93;" checked="checked"  value="#ID_LISTE" /><a href='[(#SELF|parametre_url{liste,#ID_LISTE})]' title='<:spiplistes:infos_liste:>'>#TITRE</a>				
+					<input type="checkbox" name="list&#91;&#93;" checked="checked"  value="#ID_LISTE" />
+					<a href='[(#SELF|parametre_url{liste,#ID_LISTE})]' title='<:spiplistes:infos_liste:>'>#TITRE</a>				
 				</li>
 			]
 			<BOUCLE_inscription(AUTEURS){tous} {id_liste} {id_auteur=#ENV{id_auteur}}></BOUCLE_inscription>
 				[(#TOTAL_BOUCLE|!={1}|oui)
 					<li style="margin-bottom:3px">
 						<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ''''''''''''',''})checked="checked"] value="#ID_LISTE" />
-						<a title='<:spiplistes:infos_liste:>' href='[(#SELF|parametre_url{liste,#ID_LISTE})]' title='<:spiplistes:infos_liste:>'>#TITRE</a>
+						<a href='[(#SELF|parametre_url{liste,#ID_LISTE})]' title='<:spiplistes:infos_liste:>'>#TITRE</a>
 					</li>
 				]
 		</BOUCLE_listes>
