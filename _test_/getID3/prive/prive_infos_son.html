@@ -5,6 +5,23 @@
 		<strong>[(#LOGO_DOCUMENT||image_reduire{24,24}|inserer_attribut{class,logo})]<a href="#" onclick="if(jQuery('#infos_son_bas_#ID_DOCUMENT').is(':visible')){jQuery('#infos_son_bas_#ID_DOCUMENT').slideUp(); return false;}else{jQuery('#infos_son_bas_#ID_DOCUMENT').slideDown(); return false;}"><:getid3:son_infos_techniques:></a></strong>
 		<div id="infos_son_bas_#ID_DOCUMENT" class="infos_son_bas">
 			[(#PLUGIN{Player}|oui)
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					var verif_taille_player = function(){
+						jQuery('#audioplayer#ID_DOCUMENT').parents('div:hidden').show(function(){
+							var div = this;
+							var widthnormale = #ENV{largeur,235};
+							var widthmax = jQuery('#audioplayer#ID_DOCUMENT').parent().width();
+							if(widthnormale > widthmax){	
+								jQuery('#audioplayer#ID_DOCUMENT').attr('width',widthmax+'px');
+							}
+							jQuery(div).hide();
+						});
+					}
+					verif_taille_player();
+					onAjaxLoad(verif_taille_player);
+				});
+			</script>
 			[(#EXTENSION|=={mp3}|oui)
 				[(#MODELE{doc_player_getid3}{id_document}{bgcolor=#ENV{couleur_foncee}})]
 			]]

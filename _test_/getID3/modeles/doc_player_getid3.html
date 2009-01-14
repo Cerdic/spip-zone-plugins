@@ -2,21 +2,12 @@
 
 	// modeles/doc_player_getid3.html
 
-Modele pour <doc> modifie pour le plugin Lecteur Flash pour MP3
-
-Si le document est de format mp3, afficher la vignette si elle est personnalisee
-Afficher le TITRE, le DESCRIPTIF suivi du lecteur flash permettant de faire jouer ce fichier.
-
-Sinon, utiliser le comportement normal.
-
-
+	Affiche un petit player au dessus des informations techniques des documents.
 ]
 <BOUCLE_doc (DOCUMENTS) {id_document}{tous}>
-#SET{player,#ENV{player,#CONFIG{player,'neoplayer'}}}
 
 [(#REM) Document MP3 ? ]
 [(#TYPE_DOCUMENT|=={MP3}|oui)
-
 <object type='application/x-shockwave-flash' data='#CHEMIN{flash/pixplayer.swf}' id='audioplayer#ID_DOCUMENT' height="#ENV{hauteur,24}" width="#ENV{largeur,235}">
 <param name="wmode" value="transparent" />
 <param name='movie' value='#CHEMIN{flash/pixplayer.swf}' />
