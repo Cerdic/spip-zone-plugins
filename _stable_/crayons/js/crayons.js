@@ -281,11 +281,11 @@ $.fn.activatecrayon = function(percent) {
 			.keypress(function(e){
 				e.cancelBubble = true;
 			})
-			.find("textarea.crayon-active,input.crayon-active[@type=text]")
+			.find("textarea.crayon-active,input.crayon-active[type=text]")
 				.each(function(n){
 					// focus pour commencer a taper son texte directement dans le champ
 					// on essaie de positionner la selection (la saisie) au niveau du clic
-					// ne pas le faire sur un input de [@type=file]
+					// ne pas le faire sur un input de [type=file]
 					if (n==0) {
 						this.focus();
 						// premiere approximation, en fonction de la hauteur du clic
@@ -298,8 +298,8 @@ $.fn.activatecrayon = function(percent) {
 					if(!e.charCode && e.keyCode == 119 /* F8, windows */) {
 							crayon
 							.find("form.formulaire_crayon")
-							.submit();				
-					}				
+							.submit();
+					}
 				})
 				.keypress(function(e){
 					if (e.keyCode == 27) {
