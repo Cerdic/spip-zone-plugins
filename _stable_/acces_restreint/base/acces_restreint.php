@@ -29,8 +29,8 @@ function accesrestreint_declarer_tables_interfaces($interface){
 function accesrestreint_declarer_tables_principales($tables_principales){
 	$spip_zones = array(
 		"id_zone" 	=> "bigint(21) NOT NULL",
-		"titre" 	=> "varchar(255) NOT NULL",
-		"descriptif" 	=> "text NOT NULL",
+		"titre" 	=> "varchar(255) DEFAULT '' NOT NULL",
+		"descriptif" 	=> "text DEFAULT '' NOT NULL",
 		"publique" 	=> "ENUM('non', 'oui') DEFAULT 'oui' NOT NULL",
 		"privee" 	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
 		"maj" 		=> "TIMESTAMP");
