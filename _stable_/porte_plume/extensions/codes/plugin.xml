@@ -4,12 +4,14 @@
 _ &#169; 2007 - Distribu&#233; sous licence GPL
 	</auteur>
 	<lien></lien>
-	<version>0.1</version>
+	<version>0.2</version>
 	<etat>test</etat>
     <description>
 Gestion de boutons pour ins&#233;rer du code informatique via la barre d'&#233;dition Porte Plume.
+Ajoute aussi un raccourci [?ecrire/inc_versions.php#trac].
 	</description>
 	<prefix>pp_codes</prefix>
+	<fonctions>pp_codes_fonctions.php</fonctions>
 	<pipeline>
 		<nom>porte_plume_barre_pre_charger</nom>
 		<inclure>pp_codes_pipelines.php</inclure>

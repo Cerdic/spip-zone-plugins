@@ -77,20 +77,12 @@ function pp_codes_porte_plume_barre_pre_charger($flux){
 						"id"          => 'lienTrac',
 						"name"        => _T('pp_codes:outil_inserer_lien_trac'),
 						"className"   => 'outil_lien_trac',
-						"replaceWith" => "function(h){return outil_inserer_lien_trac(h);}", 
+						"openWith" => "[?",
+						"closeWith" => "#trac]",
 						"display"     => true,
 					),
 				),
 			));
-	$barre->ajouterFonction("
-				// cree un lien [chemin/fichier.php->http://trac.rezo.net/trac/spip/browser/branches/spip-2.0/chemin/fichier.php]
-				function outil_inserer_lien_trac(h){
-					if (s = h.selection) {
-						s = '[' + s + '->' + 'http://trac.rezo.net/trac/spip/browser/branches/spip-2.0/' + s + ']';
-					}
-					return s;
-				}
-	");
 	return $flux;
 }
 
