@@ -1,4 +1,4 @@
-#SET{self,#SELF|parametre_url{debut_forum|email_auteur|ip|id_auteur,''}}
+#SET{self,#SELF|parametre_url{debut_forum|email_auteur|ip|id_auteur|auteur,''}}
 
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF}
 
@@ -28,6 +28,7 @@
 
 <B_forum>
 <h2>[(#GRAND_TOTAL|affiche_un_ou_plusieurs{forum:un_message_forum,forum:nombre_messages_forum}|sinon{<:forum:aucun_message_forum:>})]</h2>
+[(#ENV{ip}|ou{#ENV{email_auteur}}|ou{#ENV{auteur}}|ou{#ENV{id_auteur}}|ou{#ENV{id_forum}})<p class='tri'><a href='#GET{self}'><:forum:tout_voir:></a></p>]
 
 [(#REM) Les boutons pour tout le lot de message d'un emetteur ---------------------------------------------------------]
 [(#ENV{type,public}|=={public}|et{#ENV{ip}|ou{#ENV{email_auteur}}|ou{#ENV{auteur}}|ou{#ENV{id_auteur}}})
@@ -49,7 +50,6 @@
 </div>
 ]
 
-[(#ENV{ip}|ou{#ENV{email_auteur}}|ou{#ENV{auteur}}|ou{#ENV{id_auteur}}|ou{#ENV{id_forum}})<p class='tri'><a href='#GET{self}'><:forum:tout_voir:></a></p>]
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items forums'>
 <BOUCLE_forum(FORUMS){id_forum?}{id_auteur?}{auteur?}{email_auteur?}{ip?}{tri id_forum,#ARRAY{id_forum,-1,titre,1}}{pagination 10}{statut?}{statut LIKE #GET{prive}}{statut !LIKE #GET{public}}{texte LIKE #GET{vide}}{recherche?}>

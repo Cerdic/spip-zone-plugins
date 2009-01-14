@@ -8,4 +8,5 @@
 	<description>Interface d'aministration des forums</description>
 	<prefix>forum</prefix>
 	<necessite id="SPIP" version="[2.0.3;]" />
+	<necessite id="spip_bonux" version="[1.4;]" />
 </plugin>
