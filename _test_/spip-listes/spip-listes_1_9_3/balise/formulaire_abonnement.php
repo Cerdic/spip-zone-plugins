@@ -360,7 +360,7 @@ spiplistes_log("inscription id : ->".$row['id_auteur'], _SPIPLISTES_LOG_DEBUG);
 				ecrire_acces();
 			}
 					
-			$message = _T('form_forum_message_auto')."\n\n"._T('bonjour')."\n";
+			$message = _T('form_forum_message_auto')."\n\n"._T('spiplistes:bonjour')."\n";
 					
 			if($desabo=="oui"){
 				$message .= _T('spiplistes:mail_non', array('nom_site_spip' => $nom_site_spip))."\n";
