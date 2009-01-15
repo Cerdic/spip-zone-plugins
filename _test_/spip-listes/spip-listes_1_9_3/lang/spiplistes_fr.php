@@ -40,7 +40,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 
 // balise/formulaire_modif_abonnement.php
 , 'abonnement_modifie' => 'Vos modifications sont prises en compte'
-, 'abonnement_nouveau_format' => 'Votre format de r&#039;;ception est d&eacute;sormais : '
+, 'abonnement_nouveau_format' => 'Votre format de r&eacute;ception est d&eacute;sormais : '
 
 // base/spiplistes_init.php
 , 'autorisation_inscription' => 'SPIP-listes vient d\'activer l\'autorisation de s\'inscrire aux visiteurs du site'
@@ -440,7 +440,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'envoi_annule' => 'Envoi annul&eacute;'
 , 'sans_adresse' => ' Mail non envoy&eacute; -> Veuillez d&eacute;finir une adresse de r&eacute;ponse'
 , 'erreur_mail' => 'Erreur : envoi du mail impossible (v&eacute;rifier si mail() de php est disponible)'
-, 'abonnement_mail_text' => "Pour modifier votre abonnement, veuillez vous rendre à l'adresse suivante : "
+, 'abonnement_mail_text' => 'Pour modifier votre abonnement, veuillez vous rendre &agrave; l\'adresse suivante : '
 , 'msg_abonne_sans_format' => "format de reception manquant"
 , 'Cliquez_ici_pour_modifier_votre_abonnement' => "<br />Cliquez ici pour modifier votre abonnement"
 
@@ -488,9 +488,9 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'inscription_mail_forum' => 'Voici vos identifiants pour vous connecter au site @nom_site_spip@ (@adresse_site@)'
 , 'inscription_mail_redac' => 'Voici vos identifiants pour vous connecter au site @nom_site_spip@ (@adresse_site@) 
 	et &agrave; l\'interface de r&eacute;daction (@adresse_site@/ecrire)'
-, 'inscription_visiteurs' => 'L&#039;abonnement vous permet d&#039;acc&eacute;der aux parties du site en acc&egrave;s restreint,
-	d&#039;intervenir sur les forums r&eacute;serv&eacute;s aux visiteurs enregistr&eacute;s et de recevoir 
-	les lettres d&#039;informations.'
+, 'inscription_visiteurs' => 'L&acute;abonnement vous permet d&acute;acc&eacute;der aux parties du site en acc&egrave;s restreint,
+	d&acute;intervenir sur les forums r&eacute;serv&eacute;s aux visiteurs enregistr&eacute;s et de recevoir 
+	les lettres d&acute;informations.'
 , 'inscription_redacteurs' =>'L\'espace de r&eacute;daction de ce site est ouvert aux visiteurs apr&egrave;s inscription.
 	Une fois enregistr&eacute;, vous pourrez consulter les articles en cours de r&eacute;daction, proposer des articles
 	et participer &agrave; tous les forums.  L\'inscription permet &eacute;galement d\'acc&eacute;der aux parties du 

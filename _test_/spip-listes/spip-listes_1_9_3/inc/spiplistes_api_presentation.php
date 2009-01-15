@@ -66,7 +66,7 @@ function spiplistes_items_get_item($item, $statut) {
 
 function spiplistes_gros_titre ($titre, $ze_logo='', $return = false) {
 	if(!spiplistes_spip_est_inferieur_193()) {
-		$ze_logo = ""; // semble ne plus etre utilise dans exec/*
+		$ze_logo = ""; // semble ne plus etre utilise dans exec/
 	}
 	$aff = ($return === false);
 	$r = gros_titre($titre, $ze_logo, $aff);
