@@ -17,8 +17,8 @@ include_spip('inc/statistiques');
 function exec_stats_flot() {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page("Statistiques", "", "");
+	echo '<script language="javascript" type="text/javascript" src="'._DIR_PLUGIN_FLOT.'jquery.flot.js"></script>';
 	?>
-	<script language="javascript" type="text/javascript" src="../jquery.flot.js"></script>
 	<script id="source" language="javascript" type="text/javascript">
 		$(function () {
 		var stats =  <?php $select = sql_select("*", "spip_visites");
