@@ -52,6 +52,10 @@
 	*/
 	line-height: inherit;
 	word-wrap:break-word;
+	margin-right:15px;
+	overflow:hidden;
+	min-width:150px;
+	white-space:nowrap;
 }
 
 .ac_loading {
