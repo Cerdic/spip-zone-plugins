@@ -77,20 +77,20 @@ function nospam_pre_edition($flux){
 	  	$texte = propre($flux['data']['texte']);
 	  	$liens = extraire_balises($texte,'a');
 	  	if (count($liens)>20)
-	  		$flux['data']['statut']='off';
+	  		$flux['data']['statut']='spam';
 	  	elseif (count($liens)>=4)
 	  		$flux['data']['statut']='prop';
 	  }
 	  // verifier qu'un message identique n'a pas ete publie il y a peu
 	  if ($flux['data']['statut'] == 'publie'){
-	  	if (sql_countsel('spip_forum','texte='.sql_quote($flux['data']['texte'])." AND statut IN ('publie','off')")>0)
-	  		$flux['data']['statut']='prop';
+	  	if (sql_countsel('spip_forum','texte='.sql_quote($flux['data']['texte'])." AND statut IN ('publie','off','spam')")>0)
+	  		$flux['data']['statut']='spam';
 	  }
 	  // verifier que cette ip n'en est pas a son N-ieme post en peu de temps
 	  // plus de 5 messages en 5 minutes c'est suspect ...
 	  if ($flux['data']['statut'] == 'publie'){
 	  	if (sql_countsel('spip_forum','ip='.sql_quote($GLOBALS['ip']).' AND maj>DATE_SUB(NOW,INTERVAL 5 minute)')>5)
-	  		$flux['data']['statut']='prop';
+	  		$flux['data']['statut']='spam';
 	  }
 	}
 	return $flux;
