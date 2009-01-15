@@ -1,0 +1,19 @@
+<plugin>
+    <nom>
+	Statistiques en Flot
+    </nom>
+    <auteur>Yohann (potter64)</auteur>
+    <version>
+    0.1
+    </version>
+    <etat>
+    dev
+    </etat>
+    <description>
+		Les nouvelles stats de SPIP en flot !
+    </description>
+    <prefix>
+    flot
+    </prefix>
+</plugin>
+
