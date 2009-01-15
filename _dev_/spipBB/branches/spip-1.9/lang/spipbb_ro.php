@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb' => 'Activarea lui SpipBB',
 	'admin_config_spipbb_info' => 'Ap&#259;sa&#355;i pe Da pentru a activa SpipBB',
 	'admin_config_tables' => 'Configurarea tabelelor lui SpipBB',
-	'admin_config_tables_erreur' => 'Problem&#259; cu tabelele lui SpipBB : @tables_erreur@ sunt incorecte (tabelele @tables_ok@ par a fi corecte).
+	'admin_config_tables_erreur' => '<MODIF>Problem&#259; cu tabelele lui SpipBB : @tables_erreur@ sunt incorecte (tabelele @tables_ok@ par a fi corecte).
  Consulta&#355;i [documenta&#355;ia de la Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] sau [suportul pentru spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
 	'admin_config_tables_ok' => 'Tabelele lui SpipBB sunt corect instalate (@tables_ok@)',
 	'admin_date_ouverture' => 'Data deschiderii',
@@ -80,7 +80,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_plugin_requis_erreur_cfg' => 'Instala&#355;i plug-in-ul CFG &#351;i activa&#355;i-l ! [Documenta&#355;ie aici->http://www.spip-contrib.net/?article1605], [Arhiv&#259; ZIP aici->http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => 'Plug-in-uri necesare lipsesc. Activa&#355;i-le !',
 	'admin_plugin_requis_ok' => 'Plug-in(-uri) instalat(e) &#351;i activ(e)',
-	'admin_plugin_requis_ok_balisession' => '[Plug-in BALISE_SESSION->http://www.spip-contrib.net/?article1224] : furnizeaz&#259; informa&#355;ii despre vizitatorii autentifica&#355;i.',
 	'admin_plugin_requis_ok_cfg' => '[Plug-in CFG->http://www.spip-contrib.net/?article1605] : furnizeaz&#259; func&#355;ii &#351;i balize.',
 	'admin_sous_titre' => 'Accesa&#355;i panoul de administrare forum-uri cu SpipBB',
 	'admin_spip_config_forums' => 'Configura&#355;ie SPIP&nbsp;:',

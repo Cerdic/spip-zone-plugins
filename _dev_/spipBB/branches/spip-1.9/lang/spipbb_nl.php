@@ -48,8 +48,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb' => 'Activering van SpipBB',
 	'admin_config_spipbb_info' => 'Op Jawoord klikken om SpipBB te activeren',
 	'admin_config_tables' => 'Configuratie van de tafels van SpipBB',
-	'admin_config_tables_erreur' => 'Het probleem met de tafels van SpipBB: @tables_erreur@ zijn incorrect (de tafels @tables_ok@ lijken juist). 
-Raadpleegt [documentatie over Spip-Contrib-> http://www.spip-contrib.net/SpipBB-le-forum] of het [steun op spipbb.spip-zone -> http://spipbb.spip-zone.info/spip.php?article11]',
+	'admin_config_tables_erreur' => 'Het probleem met de tabels van SpipBB: @tables_erreur@ zijn incorrect (de tabels @tables_ok@ lijken juist). 
+Raadpleegt [documentatie over Spip-Contrib-> http://www.spip-contrib.net/SpipBB-le-forum] of het [steun op spipbb.spip-zone -> http://spipbb.free.fr/spip.php?article11]',
 	'admin_config_tables_ok' => 'De tafels van SpipBB worden juist geplaatst (@tables_ok@)',
 	'admin_date_ouverture' => 'Openingsdatum',
 	'admin_debug_log' => 'Bestand van log @log_name@',
@@ -81,7 +81,7 @@ Raadpleegt [documentatie over Spip-Contrib-> http://www.spip-contrib.net/SpipBB-
 	'admin_plugin_requis_erreur_cfg' => 'Plaatst plugin CFG en activeert! [Documentatie ici-> http://www.spip-contrib.net/?article1605], [Archief ZIP daar - > http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => 'Volgende vereiste plugins hebben aan gebrek. Activeert ze !',
 	'admin_plugin_requis_ok' => 'Geplaatste(s) en actieve(n) Plugin(s) :',
-	'admin_plugin_requis_ok_balisession' => '[Plugin BALISE_SESSION-> http://www.spip-contrib.net/?article1224]: geleverd de informatie over de bezoekers voor echt verklaard.',
+	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION-> http://www.spip-contrib.net/?article1224]: geleverd de informatie over de echt verklaard bezoekers.',
 	'admin_plugin_requis_ok_cfg' => '[Plugin CFG-> http://www.spip-contrib.net/?article1605]: geleverd van de functies en de bakens.',
 	'admin_sous_titre' => 'Het paneel van bestuur van de forums met SpipBB bereiken',
 	'admin_spip_config_forums' => 'Configuratie van SPIP&nbsp;:',
@@ -135,9 +135,13 @@ Raadpleegt [documentatie over Spip-Contrib-> http://www.spip-contrib.net/SpipBB-
 	'champs_obligatoires' => 'De duidelijke velden van een * zijn verplicht.',
 	'chercher' => 'Zoeken',
 	'choix_mots_annonce' => 'Een aankondiging doen',
+	'choix_mots_creation' => 'Als u <strong>automatisch</strong> wilt cre&euml;ren het woord gewijd aan SpipBB, steunt op deze knoop. Dit woord kunnen gewijzigd of later afgeschaft worden…',
+	'choix_mots_creation_submit' => 'Zelf configuratie van de sleutelwoorden',
 	'choix_mots_ferme' => 'Om een draad te sluiten',
 	'choix_mots_postit' => 'In postit zetten',
 	'choix_mots_selection' => 'De woordgroep moet drie bevatten woord. Normaal heeft plugin ze op het moment van zijn installatie gecre&euml;erd. SpipBB gebruikt in het algemeen de woorden {stevige}, {kondigen} aan en {postit}, maar u kunt anderen ervan kiezen.',
+	'choix_rubrique_creation' => 'Als u <strong>automatisch</strong> wilt cre&euml;ren de sector met de forums SpipBB en een eerste leeg forum, steunt op deze knoop. Dit gecre&euml;erde forum en hi&euml;rarchie kunnen gewijzigd of later afgeschaft worden…',
+	'choix_rubrique_creation_submit' => 'Zelf configuratie van de sector',
 	'choix_rubrique_selection' => 'Een sector selecteren die de basis van uw forums zal zijn. Het binnenste, elke sous-rubrique zullen een groep forums zijn, elk gepubliceerd artikel zal een forum openen.',
 	'choix_squelettes' => 'U kunt anderen ervan kiezen, maar de bestanden die groupeforum.html en filforum.html vervangen moeten bestaan !',
 	'citer' => 'Citeren',
@@ -221,6 +225,9 @@ Raadpleegt [documentatie over Spip-Contrib-> http://www.spip-contrib.net/SpipBB-
 	'forum_ferme_texte' => 'Dit forum is gesloten. U kunt niet meer er opstellen.',
 	'forum_maintenance' => 'Dit forum is voor onderhoud gesloten',
 	'forum_ouvrir' => 'Dit forum openen',
+	'forums_categories' => 'Diversen',
+	'forums_spipbb' => 'SpipBB Forums',
+	'forums_titre' => 'Mijn eerste gecre&euml;erd forum',
 	'fromphpbb_erreur_db_phpbb_config' => 'Onmogelijk om de configuratie in de basis phpBB te lezen',
 	'fromphpbb_migre_categories' => 'Import van de categorie&euml;n',
 	'fromphpbb_migre_categories_dans_rub_dpt' => 'Vestiging van de forums in de rubriek&nbsp;:',
@@ -338,8 +345,9 @@ _ Wordt een postit onder de aankondigingen, voor de gewone berichten geplaatst. 
 
 	// P
 	'pagine_page_' => ' .. bladzijde ',
-	'pagine_post_' => 'antwoord',
-	'pagine_post_s' => 'antwoord',
+	'pagine_post_' => ' antwoord',
+	'pagine_post_s' => ' antwoorden',
+	'pagine_sujet_' => ' onderwerp',
 	'pagine_sujet_s' => 'onderwerpen',
 	'par_' => 'door',
 	'plugin_auteur' => 'SpipBB Team: [zie de lijst van contributoren op Spip-contrib-> http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
@@ -348,17 +356,18 @@ _ Wordt een postit onder de aankondigingen, voor de gewone berichten geplaatst. 
  te beheren-* Om een sector als basis van een groep forums zoals &#132;het Bulletin Board&#147; zoals phpBB te gebruiken. In deze sector, zijn sous-rubriques groepen forums, de artikelen van de forums, elk bericht in het forum van een artikel start er een thread. 
 
 {{Raadplegen:}} 
--* •[de hulp en steun op spipbb.spip-zone.info - > http://spipbb.spip-zone.info/spip.php?article11], 
+-* •[de hulp en steun op spipbb.spip-zone.info - > http://spipbb.free.fr/spip.php?article11], 
  -* •[De documentatie over Spip-contrib-> http://www.spip-contrib.net/SpipBB-le-forum]. 
 
 _ {{Plugin spipbb in ontwikkeling. U gebruikt het met uw risico\'s en gevaren}} 
 
-_ [Toegang tot het administratie paneel ->.? exec=spipbb_configuration]',
+_ [Toegang tot het administratie paneel ->.?exec=spipbb_configuration]',
 	'plugin_licence' => 'Verdeeld onder GPL vergunning',
 	'plugin_lien' => '[De documentatie van plugin raadplegen op Spip-contrib-> http://www.spip-contrib.net/SpipBB-le-forum]',
+	'plugin_mauvaise_version' => 'Deze plugin versie is niet verenigbaar met uw SPIP versie !',
 	'plugin_nom' => 'SpipBB: Beleid van de SPIP forums ',
 	'post_aucun_pt' => 'geen enkel&nbsp;!',
-	'post_efface_lui' => 'Dit onderwerp omvat @
+	'post_efface_lui' => '<MODIF>Dit onderwerp omvat @
 nbr_post@ bericht(en). Uitgewist met hem&nbsp;!\\n',
 	'post_ip' => 'Berichten opgesteld aan deel van het IP adres',
 	'post_propose' => 'Voorgesteld bericht',
@@ -381,11 +390,36 @@ nbr_post@ bericht(en). Uitgewist met hem&nbsp;!\\n',
 	'recherche' => 'Onderzoek',
 	'recherche_elargie' => 'Geavanceerd zoeken',
 	'redige_post' => 'Bericht schrijven',
-	'reglement' => '<MODIF><p>Les administrateurs et mod&eacute;rateurs de ce forum s\'efforceront de supprimer ou &eacute;diter tous les messages &agrave; caract&egrave;re r&eacute;pr&eacute;hensible aussi rapidement que possible. Toutefois, il leur est impossible de passer en revue tous les messages. Vous admettez donc que tous les messages post&eacute;s sur ces forums expriment la vue et opinion de leurs auteurs respectifs, et non pas des administrateurs, ou mod&eacute;rateurs, ou webmestres (except&eacute; les messages post&eacute;s par eux-m&ecirc;me) et par cons&eacute;quent ne peuvent pas &ecirc;tre tenus pour responsables.</p>
-
-<p>Vous consentez &agrave; ne pas poster de messages injurieux, obsc&egrave;nes, vulgaires, diffamatoires, mena&ccedil;ants, sexuels ou tout autre message qui violerait les lois applicables. Le faire peut vous conduire &agrave; &ecirc;tre banni imm&eacute;diatement de fa&ccedil;on permanente (et votre fournisseur d\'acc&egrave;s &agrave; internet en sera inform&eacute;). L\'adresse IP de chaque message est enregistr&eacute;e afin d\'aider &agrave; faire respecter ces conditions. Vous &ecirc;tes d\'accord sur le fait que le webmestre, l\'administrateur et les mod&eacute;rateurs de ce forum ont le droit de supprimer, &eacute;diter, d&eacute;placer ou verrouiller n\'importe quel sujet de discussion &agrave; tout moment. En tant qu\'utilisateur, vous &ecirc;tes d\'accord sur le fait que toutes les informations que vous donnerez ci-apr&egrave;s seront stock&eacute;es dans une base de donn&eacute;es. Cependant, ces informations ne seront divulgu&eacute;es &agrave; aucune tierce personne ou soci&eacute;t&eacute; sans votre accord. Le webmestre, l\'administrateur, et les mod&eacute;rateurs ne peuvent pas &ecirc;tre tenus pour responsables si une tentative de piratage informatique conduit &agrave; l\'acc&egrave;s de ces donn&eacute;es.</p>
-
-<p>Ce forum utilise les cookies pour stocker des informations sur votre ordinateur. Ces cookies ne contiendront aucune information que vous aurez entr&eacute; ci-apr&egrave;s, ils servent uniquement &agrave; am&eacute;liorer le confort d\'utilisation. L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;tails de votre enregistrement ainsi que votre mot de passe (et aussi pour vous envoyer un nouveau mot de passe dans la cas o&ugrave; vous l\'oublieriez).</p><p>En vous enregistrant, vous vous portez garant du fait d\'&ecirc;tre en accord avec le r&egrave;glement ci-dessus.</p>',
+	'reglement' => '<p>De beheerders en mod&eacute;rateurs van dit forum zullen proberen om
+ af te schaffen    of alle berichten van laakbare aard 
+ uitgeven    eveneens snel dan mogelijk. Evenwel is het hun onmogelijk om alle
+ de revue te passeren    de berichten. U geeft dus toe dat alle berichten die op deze forums
+ zijn opgesteld    spreken het standpunt en mening van hun respectieve auteurs, en niet van beheerders uit,
+    of mod&eacute;rateurs, of webmestres (behalve de berichten die per
+ zijn opgesteld    zij zelf) en bijgevolg kunnen niet voor verantwoordelijken gehouden worden.</p>
+    <p>U stemt ermee in om geen beledigende, vies berichten op te stellen,
+     vulgair, lasterlijk, dreigend, seksueel of om het even welk ander bericht dat
+ zou schenden    de wetten van toepassing. Het kan doen u ertoe aanzetten om
+ verbannen te worden    onmiddellijk permanent (en uw leverancier van toegang
+     aan Internet zal ingelicht worden erover). Het adres IP van elk bericht is
+    geregistreerd teneinde te helpen om deze voorwaarden te laten eerbiedigen.
+           U gaat akkoord met het feit dat webmestre, de beheerder
+    en mod&eacute;rateurs van dit forum hebben het recht om af te schaffen, uit te geven,
+    om het even welke discussieonderwerp op elk moment verplaatsen of grendelen.
+   Als gebruiker, gaat u akkoord met het feit dat alle informatie
+    dat u hierna zal opgeslagen worden in een database zult geven.
+   Nochtans zal deze informatie aan geen enkele derde persoon
+ bekend gemaakt zijn    of vennootschap zonder uw overeenkomst. Webmestre, de beheerder,
+    en mod&eacute;rateurs kunnen niet voor verantwoordelijken gehouden worden als une
+    leidt de informaticapoging tot piratage tot de toegang van deze gegevens.</p>
+    <p>Dit forum gebruikt cookies om een informatie op te slaan over uw computer.
+    Dit cookies zullen geen enkele informatie bevatten dat u hierna zult ingegaan zijn 
+    zij dienen alleen om het comfort van gebruik te verbeteren.
+    Het adres e-mail wordt alleen gebruikt teneinde de details
+ te bevestigen    van uw registratie alsmede uw wachtwoord (en eveneens om u nieuwe 
+ te verzenden    wachtwoord in het geval waar u het zou vergeten).</p>
+<p>Door u te registreren, draagt u u borg ten gevolge van in overeenstemming met
+    zijn regeling hierboven.</p>',
 	'repondre' => 'Antwoorden',
 	'reponse_s_' => 'Antwoorden',
 	'resultat_s_pour_' => ' resultaten voor ',
@@ -398,7 +432,7 @@ nbr_post@ bericht(en). Uitgewist met hem&nbsp;!\\n',
 	'selection_tri_dpt' => 'Sorteren methode selecteren&nbsp;:',
 	'sign_admin' => '{{Deze bladzijde is alleen toegankelijk voor de verantwoordelijken voor de site.}}<p>Zij geeft toegang tot de plugin configuratie &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; alsmede aan het beleid van de site forums.</p><p>Version : @version@ @distant@</p><p>Raadpleegt&nbsp;:
 _ • [De documentatie om Spip-Contrib->http://www.spip-contrib.net/?article2460]
-_ • [De hulp en zurige steun spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
+_ • [De hulp en zurige steun spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Beschikbare recentere versie&nbsp;: @version@',
 	'sign_ok' => 'aan dag.',
 	'sign_reinit' => '<p>Weder-inwijding&nbsp;:
@@ -428,6 +462,8 @@ _ • [van hele plugin->@plugin@]</p>',
 	'sujet_valide' => 'Onderwerp ter goedkeuring',
 	'sujets' => 'Onderwerpen',
 	'sujets_aucun' => 'Momenteel geen onderwerp in dit forum',
+	'support_extra_normal' => 'extra',
+	'support_extra_table' => 'tabel',
 	'supprimer' => 'Afschaffen',
 	'sw_admin_can_spam' => 'Admins worden toegestaan',
 	'sw_admin_no_spam' => 'Geen spam',
@@ -446,14 +482,14 @@ _ • [van hele plugin->@plugin@]</p>',
 	'sw_send_pm_warning' => '<strong>Verzendt een MP naar de gebruiker</strong><br/>wanneer hij een bericht met een verboden woord opstelt',
 	'sw_spam_forum_titre' => 'Beleid van de spam berichten',
 	'sw_spam_titre' => 'Filtrering van spam',
-	'sw_spam_words_action' => '<NEW>A partir de cette page, vous pouvez ajouter, &eacute;diter et supprimer des mots associ&eacute;s &agrave; du spam. Le caract&egrave;re (*) est accept&eacute; dans le mot. Par exemple&nbsp;: {{*tes*}} capturera {d&eacute;testable}, {{tes*}} capturera {tester}, {{*tes}} capturera {portes}.',
+	'sw_spam_words_action' => 'Vanaf deze bladzijde, kunt u, woorden toevoegen uitgeven en afschaffen die met spam worden verenigd. Het karakter (*) wordt in het woord aanvaard. Bijvoorbeeld&nbsp;: {{*tes*}} nemen {afschuwelijk}, {{tes*}} nemen {testen}, {{*tes}} nemen {deur}',
 	'sw_spam_words_mass_add' => 'Kopi&euml;ren-plakken of grijpen uw woorden in deze zone. Elk woord door een komma, twee punten of een terugkeer naar de lijn scheiden.',
 	'sw_spam_words_titre' => 'Filtrering van woorden',
-	'sw_spam_words_url_add' => '<NEW>Saisir l\'URL d\'un fichier contenant une liste de mots format&eacute;e comme ci-dessus. Exemple&nbsp;: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
+	'sw_spam_words_url_add' => 'Hierboven URL van een bestand met een lijst van woorden grijpen die wordt geformatteerd, als. Het voorbeeld&nbsp;: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
 	'sw_warning_from_admin' => 'Admin auteur van het verzonden bericht kiezen',
 	'sw_warning_pm_message' => 'Tekst van het bericht particulier',
-	'sw_warning_pm_titre' => '<NEW>Sujet du message priv&eacute;',
-	'sw_word' => '<NEW>Mot',
+	'sw_warning_pm_titre' => 'Onderwerp van het particuliere bericht',
+	'sw_word' => 'Woord',
 
 	// T
 	'title_ferme' => 'Het forum/artikel sluiten',

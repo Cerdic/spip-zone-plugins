@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'Premer sobre Si para activar SpipBB',
 	'admin_config_tables' => 'Configuraci&oacute;n das t&aacute;boas de SpipBB',
 	'admin_config_tables_erreur' => 'Problema coas t&aacute;boas de SpipBB : @tables_erreur@ est&aacute;n incorrectas (as t&aacute;boas @tables_ok@ parecen correctas).
-Consulte a [documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] ou a [axuda en spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
+Consulte a [documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] ou a [axuda en spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]',
 	'admin_config_tables_ok' => 'As t&aacute;boas de SpipBB foron correctamente instaladas (@tables_ok@)',
 	'admin_date_ouverture' => 'Data de apertura',
 	'admin_debug_log' => 'Ficheiro de rexistro @log_name@',
@@ -81,7 +81,7 @@ Consulte a [documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/Sp
 	'admin_plugin_requis_erreur_cfg' => 'Instale o m&oacute;dulos CFG e act&iacute;veo ! [Documentaci&oacute;n aqu&iacute;->http://www.spip-contrib.net/?article1605], [Arquivo ZIP aqu&iacute;->http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => 'Os m&oacute;dulos requiridos faltan. Act&iacute;veos !',
 	'admin_plugin_requis_ok' => 'Modulo(s)  instalado(s) e activo(s) :',
-	'admin_plugin_requis_ok_balisession' => '[M&oacute;dulo BALISE_SESSION->http://www.spip-contrib.net/?article1224] : fornece informaci&oacute;ns sobre os visitantes autentificada.',
+	'admin_plugin_requis_ok_balisesession' => '[M&oacute;dulo BALISE_SESSION->http://www.spip-contrib.net/?article1224] : fornece os datos sobe visitantes autenticados.',
 	'admin_plugin_requis_ok_cfg' => '[M&oacute;dulo CFG->http://www.spip-contrib.net/?article1605] : fornece funci&oacute;ns e balizas.',
 	'admin_sous_titre' => 'Acceder ao panel de control de foros con  SpipBB',
 	'admin_spip_config_forums' => 'Configuraci&oacute;n de SPIP&nbsp;:',
@@ -135,9 +135,13 @@ Consulte a [documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/Sp
 	'champs_obligatoires' => 'Os campos marcados cun * son obrigados.',
 	'chercher' => 'Procurar',
 	'choix_mots_annonce' => 'Facer un anuncio',
+	'choix_mots_creation' => 'De crear <strong>automaticamente</strong> as palabras clave dedicadas a SpipBB, prema sobre este bot&oacute;n. Estas palabras clave poden ser modificadas ou suprimidas posteriormente...',
+	'choix_mots_creation_submit' => 'Configuraci&oacute;n auto das palabras clave',
 	'choix_mots_ferme' => 'Para pechar un f&iacute;o',
 	'choix_mots_postit' => 'Po&ntilde;er en relevo (postit)',
 	'choix_mots_selection' => 'O grupo de palabras debe conter tres palabras-clave. Normalmente, o m&oacute;dulo xa as creou no intre da s&uacute;a instalaci&oacute;n. SpipBB utiliza xeralmente as palabras {ferme}, {annonce} e {postit}, pero pode escoller outras.',
+	'choix_rubrique_creation' => 'De vostede querer crear <strong>automaticamente</strong> o sector que cont&eacute;n os foros SpipBB e un primeiro foro baleiro, prema sobre este bot&oacute;n. Este foro e a xerarqu&iacute;a creada poden ser modificadas ou suprimidas posteriormente...',
+	'choix_rubrique_creation_submit' => 'Configuraci&oacute;n autom&aacute;tica do sector',
 	'choix_rubrique_selection' => 'Seleccione un sector que ser&aacute; a base dos seus foros. Dentro, cada secci&oacute;n ser&aacute; un grupo de foros, cada artigo publicado abrir&aacute; un foro.',
 	'choix_squelettes' => 'Pode escoller outros pero os ficheiros que substit&uacute;an groupeforum.html e filforum.html deben existir !',
 	'citer' => 'Citar',
@@ -221,6 +225,9 @@ Consulte a [documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/Sp
 	'forum_ferme_texte' => 'Este foro est&aacute; pechado. Xa non se pode participar nel.',
 	'forum_maintenance' => 'Este foro est&aacute; pechado por reformas',
 	'forum_ouvrir' => 'Abrir este foro',
+	'forums_categories' => 'Diversos',
+	'forums_spipbb' => 'Foros de SpipBB',
+	'forums_titre' => 'O meu primeiro foro creado',
 	'fromphpbb_erreur_db_phpbb_config' => 'Resulta imposible ler a configuraci&oacute;n na base de datos de phpBB',
 	'fromphpbb_migre_categories' => 'Importaci&oacute;n de categor&iacute;as',
 	'fromphpbb_migre_categories_dans_rub_dpt' => 'Implantaci&oacute;n de foros na secci&oacute;n&nbsp;:',
@@ -338,27 +345,29 @@ _ Un destacado sit&uacute;ase por baixo dos anuncios, antes das mensaxes ordinar
 
 	// P
 	'pagine_page_' => ' .. p&aacute;xina ',
-	'pagine_post_' => ' resposta',
-	'pagine_post_s' => ' respostas',
+	'pagine_post_' => 'resposta',
+	'pagine_post_s' => 'respostas',
+	'pagine_sujet_' => 'asunto',
 	'pagine_sujet_s' => ' asuntos',
 	'par_' => 'por',
 	'plugin_auteur' => 'O equipo SpipBB : [ver a lista de contribuidores en Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
-	'plugin_description' => 'O m&oacute;dulos SpipBB permite :
+	'plugin_description' => 'O m&oacute;dulo de SpipBB permite :
 -* Xestionar de forma centralizada os foros d SPIP (interface privada),
--* Usar un sector como base dun grupo de de foros de tipo &laquo;Bulletin Board&raquo; como phpBB. Neste sector, as secci&oacute;ns son grupos de foros, os artigos son os foros, cada mensaxe dentro do foro dun artigo comeza un f&iacute;o.
+-* Usar un sector como base dun grupo de de foros de tipo &laquo;Bulletin Board&raquo; como phpBB. Neste sector, as subsecci&oacute;ns son grupos de foros, os artigos son os foros, cada mensaxe dentro do foro dun artigo comeza un f&iacute;o.
 
 {{Consulte :}}
 -* •[a axuda en spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
 -* •[a documentaci&oacute;n en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
-_ {{M&oacute;dulo spipbb en curso de desenvolvemento. &Uacute;seo ao seu risco e ventura}}
+_ {{M&oacute;dulo spipbb en curso de desenvolvemento. &Uacute;seo a seu risco e ventura}}
 
 _ [Acceso ao panel de administraci&oacute;n-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribu&iacute;do baixo licenza GPL',
 	'plugin_lien' => '[Consulte a documentaci&oacute;n do m&oacute;dulo en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
+	'plugin_mauvaise_version' => 'Esta versi&oacute;n do m&oacute;dulo non &eacute; compatible coa s&uacute;a versi&oacute;n de SPIP !',
 	'plugin_nom' => 'SpipBB : xesti&oacute;n de foros de SPIP',
 	'post_aucun_pt' => 'ning&uacute;n&nbsp;!',
-	'post_efface_lui' => 'este asunto afecta a @
+	'post_efface_lui' => '<MODIF>este asunto afecta a @
 nbr_post@ mensaxe(s). Borradas con el&nbsp;!\\n',
 	'post_ip' => 'Mensaxes publicada a partir do enderezo IP',
 	'post_propose' => 'Mensaxe proposta',
@@ -448,6 +457,8 @@ _ • [de todo o m&oacute;dulo->@plugin@]</p>',
 	'sujet_valide' => 'Asunto proposto para validaci&oacute;n',
 	'sujets' => 'Asuntos',
 	'sujets_aucun' => 'Non hai ning&uacute;n asunto neste foro neste intre',
+	'support_extra_normal' => 'extra',
+	'support_extra_table' => 't&aacute;boa',
 	'supprimer' => 'Suprimir',
 	'sw_admin_can_spam' => 'Os adminis est&aacute;n autorizados',
 	'sw_admin_no_spam' => 'No spam',
@@ -469,7 +480,7 @@ _ • [de todo o m&oacute;dulo->@plugin@]</p>',
 	'sw_spam_words_action' => 'A partir desta p&aacute;xina, pode engadir, editar e suprimir palabras asociadas ao spam. O car&aacute;cter (*) ac&eacute;ptase na palabra. Por exemplo&nbsp;: {{*tes*}} capturar&aacute; {detestable}, {{tes*}} capturar&aacute; {testear}, {{*tes}} capturar&aacute; {portes}.',
 	'sw_spam_words_mass_add' => 'Copiar-pegar ou escoller as s&uacute;a palabras nesta zona. Separe cada palabra por unha  v&iacute;rgula, dous puntos ou un retorno de li&ntilde;a.',
 	'sw_spam_words_titre' => 'Filtrado de palabras',
-	'sw_spam_words_url_add' => 'Escoller a URL dun ficheiro que conte&ntilde;a unha listaxe de palabras formatada da seguinte maneira. Exemplo&nbsp;: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
+	'sw_spam_words_url_add' => 'Escoller o URL dun ficheiro que conte&ntilde;a unha listaxe de palabras formatada as&iacute;. Exemplo&nbsp;: http://spipbb.free.fr/IMG/csv/spamwordlist.csv ',
 	'sw_warning_from_admin' => 'Escoller o admini autor da mensaxe enviada',
 	'sw_warning_pm_message' => 'Texto da mensaxe privada',
 	'sw_warning_pm_titre' => 'Asunto da mensaxe privada',
