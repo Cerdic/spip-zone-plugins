@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'icone_valider_messages' => 'Valider ces messages',
 'icone_bruler_messages' => "Signaler comme Spam",
+'icone_legitimer_message' => "Signaler comme licite",
 'icone_supprimer_messages' => 'Supprimer ces messages',
 
 'messages_meme_auteur' => 'Tous les messages de cet auteur',
