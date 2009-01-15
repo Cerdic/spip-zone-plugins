@@ -24,8 +24,8 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 // balise/formulaire_abonnement.php
 , 'inscription_liste_f' => 'Vous avez choisi de recevoir les courriers adress&eacute;s &agrave; la liste suivante en format @f@ : '
 , 'inscription_listes_f' => 'Vous avez choisi de recevoir les courriers adress&eacute;s aux listes suivantes en format @f@ : '
-, 'inscription_reponse_s' => 'Vous &ecirc;tes abonn&eacute; &agrave; la liste d\'information du site @s@\n'
-, 'inscription_reponses_s' => 'Vous &ecirc;tes abonn&eacute; aux listes d\'informations du site @s@\n'
+, 'inscription_reponse_s' => 'Vous &ecirc;tes abonn&eacute; &agrave; la liste d\'information du site @s@'
+, 'inscription_reponses_s' => 'Vous &ecirc;tes abonn&eacute; aux listes d\'informations du site @s@'
 , 'vous_abonne_aucune_liste' => "Vous n'&ecirc;tes pas abonn&eacute; &agrave; une liste de diffusion"
 , 'abonnement_mail_passcookie' => "(ceci est un message automatique)
 
@@ -40,7 +40,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 
 // balise/formulaire_modif_abonnement.php
 , 'abonnement_modifie' => 'Vos modifications sont prises en compte'
-, 'abonnement_nouveau_format' => 'Votre format de r&eacute;ception est d&eacute;sormais : '
+, 'abonnement_nouveau_format' => 'Votre format de r&#039;;ception est d&eacute;sormais : '
 
 // base/spiplistes_init.php
 , 'autorisation_inscription' => 'SPIP-listes vient d\'activer l\'autorisation de s\'inscrire aux visiteurs du site'
@@ -423,12 +423,12 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 
 // inc/spiplistes_listes_forcer_abonnement.php
 // inc/spiplistes_listes_selectionner_auteur.php
-, 'lien_trier_nombre' => "Trier par nombre d&acute;abonnements"
+, 'lien_trier_nombre' => "Trier par nombre d&#039;abonnements"
 , 'Abonner_format_html' => "Abonner au format HTML"
 , 'Abonner_format_texte' => "Abonner au format texte"
 , 'ajouter_un_moderateur' => "Ajouter un mod&eacute;rateur "
 , 'Desabonner' => "D&eacute;sabonner"
-, 'Pas_adresse_email' => "Pas d&acute;adresse email"
+, 'Pas_adresse_email' => "Pas d&#039;adresse email"
 , 'sup_mod' => "Supprimer ce mod&eacute;rateur"
 , 'supprimer_un_abo' => "Supprimer un abonné de cette liste"
 , 'supprimer_cet_abo' => "Supprimer cet abonné de cette liste" // + pipeline
@@ -488,9 +488,9 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'inscription_mail_forum' => 'Voici vos identifiants pour vous connecter au site @nom_site_spip@ (@adresse_site@)'
 , 'inscription_mail_redac' => 'Voici vos identifiants pour vous connecter au site @nom_site_spip@ (@adresse_site@) 
 	et &agrave; l\'interface de r&eacute;daction (@adresse_site@/ecrire)'
-, 'inscription_visiteurs' => 'L&acute;abonnement vous permet d&acute;acc&eacute;der aux parties du site en acc&egrave;s restreint,
-	d&acute;intervenir sur les forums r&eacute;serv&eacute;s aux visiteurs enregistr&eacute;s et de recevoir 
-	les lettres d&acute;informations.'
+, 'inscription_visiteurs' => 'L&#039;abonnement vous permet d&#039;acc&eacute;der aux parties du site en acc&egrave;s restreint,
+	d&#039;intervenir sur les forums r&eacute;serv&eacute;s aux visiteurs enregistr&eacute;s et de recevoir 
+	les lettres d&#039;informations.'
 , 'inscription_redacteurs' =>'L\'espace de r&eacute;daction de ce site est ouvert aux visiteurs apr&egrave;s inscription.
 	Une fois enregistr&eacute;, vous pourrez consulter les articles en cours de r&eacute;daction, proposer des articles
 	et participer &agrave; tous les forums.  L\'inscription permet &eacute;galement d\'acc&eacute;der aux parties du 

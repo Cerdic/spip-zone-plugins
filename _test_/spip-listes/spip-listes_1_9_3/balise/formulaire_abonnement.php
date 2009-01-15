@@ -414,7 +414,7 @@ spiplistes_log("inscription id : ->".$row['id_auteur'], _SPIPLISTES_LOG_DEBUG);
 		$tt = "\n\n".str_pad('-', 40)."\n\n";
 		$message .= ""
 			. $tt
-			. _T('spiplistes:abonnement_mail').' '.generer_url_public("abonnement","d=$cookie")
+			. _T('spiplistes:abonnement_mail_text').' '.generer_url_public("abonnement","d=$cookie")
 			. $tt
 			;
 			
