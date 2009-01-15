@@ -19,43 +19,42 @@
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
-.filtres { margin:1em 0;clear:#GET{left};}
+.filtres { margin:1em 0;clear:#GET{left};border-bottom:1px solid #GET{foncee};padding-#GET{left}:5px;}
 .filtres ul {list-style:none;margin-left:1px;padding:0;}
-.filtres ul li {float:left;padding:0;margin:0;}
-.filtres ul li strong,.filtres ul li a {display:block;float:#GET{left};padding:3px 7px;border:1px solid #GET{foncee};margin-#GET{left}:-1px;background-color:#eee;}
-.filtres ul li strong,.filtres ul li a:hover {background-color:#f8f7f3;border-bottom:1px solid #f8f7f3;}
+.filtres ul li {float:left;padding:0;margin:0;margin-bottom:-1px;}
 
-.emetteur {font-size:11px;}
+.filtres ul li.publie strong,.filtres ul li.publie a {background-image:url(#CHEMIN{img_pack/forum-statut-publie-24.png});padding-#GET{right}:27px;}
+.filtres ul li.off strong,.filtres ul li.off a {background-image:url(#CHEMIN{img_pack/forum-statut-off-24.png});padding-#GET{right}:27px;}
+.filtres ul li.spam strong,.filtres ul li.spam a {background-image:url(#CHEMIN{img_pack/forum-statut-spam-24.png});padding-#GET{right}:27px;}
+.filtres ul li.prop strong,.filtres ul li.prop a {background-image:url(#CHEMIN{img_pack/forum-statut-prop-24.png});padding-#GET{right}:27px;}
+
+.filtres ul li.prive strong,.filtres ul li.prive a {background-image:url(#CHEMIN{img_pack/forum-statut-prive-24.png});padding-#GET{right}:27px;}
+.filtres ul li.privadm strong,.filtres ul li.privadm a {background-image:url(#CHEMIN{img_pack/forum-statut-privadm-24.png});padding-#GET{right}:27px;}
+.filtres ul li.privrac strong,.filtres ul li.privrac a {background-image:url(#CHEMIN{img_pack/forum-statut-privrac-24.png});padding-#GET{right}:27px;}
+.filtres ul li.privoff strong,.filtres ul li.privoff a {background-image:url(#CHEMIN{img_pack/forum-statut-privoff-24.png});padding-#GET{right}:27px;}
+
+.filtres ul li strong,.filtres ul li a {display:block;float:#GET{left};padding:4px 7px;border:1px solid #GET{foncee};margin-#GET{left}:5px;background-color:#eee;background-position:center right;background-repeat:no-repeat;}
+.filtres ul li strong,.filtres ul li a:hover {background-color:#f8f7f3;}
+.filtres ul li strong {border-bottom:1px solid #f8f7f3;color:#555;}
+
+.filtres.second {font-size:0.9em;border:0;padding-#GET{left}:0;}
+.filtres.second ul li strong,.filtres.second ul li a {margin-#GET{left}:0px;margin-#GET{right}:5px;margin-bottom:5px;}
+.filtres.second ul li strong {border:1px solid #GET{foncee};}
+.filtres.second ul li strong,.filtres.second ul li a:hover {background-color:#fff;}
+
+.source {font-size:12px;font-weight:bold;background:#fff;padding:5px;border:1px solid #GET{foncee};}
+.source .actions {font-weight:normal;}
+.annule_filtre {float:#GET{right};}
 
 ul.forums li.item {padding:0.8em 0;}
-ul.forums li .cartouche {background:#eee url([(#EVAL{_DIR_IMG_PACK}|concat{forum-public-24.gif})]) no-repeat [(#GET{left})] 30px;padding:5px;padding-#GET{left}:30px;min-height:24px;}
-ul.forums li:hover .cartouche,ul.forums li.on .cartouche {background-color:#ddd;}
+ul.forums li .cartouche {padding:5px;padding-#GET{left}:30px;min-height:30px;border-bottom:1px solid #eee;}
 
-/*ul.forums li.statut_off .cartouche {border:3px dashed red;}
-ul.forums li.statut_spam .cartouche {border:3px dashed black;}
-ul.forums li.statut_prop .cartouche {border:3px dashed yellow;}*/
-
-ul.forums li.statut_off {background-color:#EFD1D1;}
-ul.forums li.statut_off:hover {background-color:#EFC2C2;}
-ul.forums li.statut_off .cartouche {background-color:#DFC3C3;}
-ul.forums li.statut_off:hover .cartouche {background-color:#DFB5B5;}
-
-ul.forums li.statut_privoff {background-color:#EFD1D1;}
-ul.forums li.statut_privoff:hover {background-color:#EFC2C2;}
-ul.forums li.statut_privoff .cartouche {background-color:#DFC3C3;}
-ul.forums li.statut_privoff:hover .cartouche {background-color:#DFB5B5;}
-
-
-ul.forums li.statut_spam {background-color:#EFDFC2;}
-ul.forums li.statut_spam:hover {background-color:#EFD4A4;}
-ul.forums li.statut_spam .cartouche {background-color:#DFD0B5;}
-ul.forums li.statut_spam:hover .cartouche {background-color:#DFC599;}
-
-ul.forums li.statut_prop {background-color:#fff;}
-ul.forums li.statut_prop:hover {background-color:#f9f9f9;}
-ul.forums li.statut_prop .cartouche {background-color:#FEFFAF;}
-ul.forums li.statut_prop:hover .cartouche {background-color:#FEFF7F;}
-
+ul.forums li.statut_off,ul.forums li.statut_privoff {border-top:5px solid red;padding-top:0;}
+ul.forums li.statut_off .cartouche,ul.forums li.statut_privoff .cartouche {border-top:3px solid #FF8F8F;}
+ul.forums li.statut_spam {border-top:5px solid black;padding-top:0;}
+ul.forums li.statut_spam .cartouche {border-top:3px solid #8f8f8f;}
+ul.forums li.statut_prop {border-top:5px solid #EDEF00;padding-top:0;}
+ul.forums li.statut_prop .cartouche {border-top:3px solid #EEEF86;}
 
 ul.forums li .cartouche h3 {font-size:1.1em;margin-bottom:0.25em;}
 ul.forums li .cartouche .date,ul.forums li .cartouche .par {display:inline;}

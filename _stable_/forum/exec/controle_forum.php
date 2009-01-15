@@ -9,7 +9,9 @@
 
 function exec_controle_forum_dist()
 {
-	if (!autoriser('publierdans','rubrique',_request('id_rubrique'))) {
+	if (!autoriser('publierdans','rubrique',_request('id_rubrique'))
+	  OR ($id_article = _request('id_article') AND !autoriser('modererforum', 'article', $id_article))
+	  ) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} 
@@ -18,8 +20,6 @@ function exec_controle_forum_dist()
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('titre_page_forum_suivi'), "forum", "forum-controle");
-
-		echo gros_titre(_T('titre_forum_suivi'),'',false);
 
 		echo debut_gauche('', true);
 		echo debut_boite_info(true);
@@ -31,12 +31,20 @@ function exec_controle_forum_dist()
 		echo bouton_spip_rss("forums_$type");
 
 		echo fin_boite_info(true);
-			
+
+		if ($id_article){
+			$res = icone_horizontale(_T('icone_retour'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.gif","rien.gif", false);
+			$res .= icone_horizontale(_T('icone_statistiques_visites'), generer_url_ecrire("statistiques_visites","id_article=$id_article"), "statistiques-24.gif","rien.gif", false);
+			echo bloc_des_raccourcis($res);
+		}
+
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
 		echo creer_colonne_droite('', true);
 		echo pipeline('affiche_droite',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
 			
 		echo debut_droite('', true);
+		echo gros_titre(_T('titre_forum_suivi'),'',false);
+		
 		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
 
 		echo recuperer_fond('',array_merge($_GET,array('fond'=>'prive/listes/controle_forum')),array('ajax'=>true));

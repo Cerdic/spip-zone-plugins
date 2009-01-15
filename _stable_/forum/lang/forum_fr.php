@@ -8,27 +8,34 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'un_message_forum' => '1 message de forum',
 'nombre_messages_forum' => '@nb@ messages de forum',
 
-'icone_bruler_message' => "Signaler comme SPAM",
+'icone_bruler_message' => "Signaler comme Spam",
 'icone_valider_repondre_message' => 'Valider &amp; R&eacute;pondre &agrave; ce message',
 
 'icone_valider_messages' => 'Valider ces messages',
-'icone_bruler_messages' => "Signaler comme SPAM",
+'icone_bruler_messages' => "Signaler comme Spam",
 'icone_supprimer_messages' => 'Supprimer ces messages',
 
 'messages_meme_auteur' => 'Tous les messages de cet auteur',
 'messages_meme_email' => 'Tous les messages de cet email',
 'messages_meme_ip' => 'Tous les messages de cette IP',
 
+// statuts
 'messages_tous' => 'Tous',
-'messages_publies' => 'Publi&eacute;s',
-'messages_proposes' => 'Propos&eacute;s',
-'messages_spams' => 'SPAM',
-'messages_poubelle' => 'Supprim&eacute;s',
+'messages_publie' => 'Publi&eacute;s',
+'messages_prop' => 'Propos&eacute;s',
+'messages_spam' => 'Spam',
+'messages_off' => 'Supprim&eacute;s',
 
+'messages_prive' => 'Priv&eacute;s',
+'messages_privoff' => 'Supprim&eacute;s',
+'messages_privrac' => 'G&eacute;n&eacute;raux',
+'messages_privadm' => 'Administrateurs',
+
+'messages_perso' => 'Personnels',
 
 'statut_prop' => 'Propos&eacute;',
 'statut_publie' => 'Publi&eacute;',
-'statut_spam' => 'SPAM',
+'statut_spam' => 'Spam',
 'statut_off' => 'Supprim&eacute;',
 
 'tout_voir' => 'Voir tous les messages',
