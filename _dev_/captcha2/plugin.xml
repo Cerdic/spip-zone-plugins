@@ -16,7 +16,11 @@ _ &#169; 2007-2009 - Distribu&#233; sous licence GNU/GPL
 	
 	<description>
 Surcharge les formulaires de SPIP en leur ajoutant des [Captchas->http://fr.wikipedia.org/wiki/Captcha] pour limiter le spam
-_ Rejete aussi les messages contenant trop de caract&#232;res non ASCII (chinois, japonais, russe, ...)
+
+
+Le plugin rej&#232;te aussi:
+-* Les messages contenant trop de caract&#232;res non ASCII (chinois, japonais, russe, ...)
+-* Les IPs blacklist&#233;s par  httpbl.abuse.ch (Realtime Blackhole List)
    
 Formulaires disponibles:
 -* &#035;FORMULAIRE_FORUM
@@ -25,10 +29,10 @@ Formulaires disponibles:
 
 Les autres formulaires &#224; venir bient&#244;t ....
 
-{{Avertissement:}} Utiliser les captchas limite l'accessibilt&eacute; de votre site [info->http://www.yoyodesign.org/doc/w3c/turingtest-20051123/]
+{{Avertissement:}} Utiliser les captchas limite l'accessibilt&eacute; de votre site [information->http://www.yoyodesign.org/doc/w3c/turingtest-20051123/]
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-Captcha2</lien> <!-- URI de documentation -->
 	<prefix>captcha2</prefix>
-
+  <options>rbl.php</options>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>
