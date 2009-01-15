@@ -58,6 +58,13 @@ function accesrestreint_upgrade($nom_meta_base_version,$version_cible){
 			echo "AccesRestreint@0.3.0.1<br />";
 			ecrire_meta($nom_meta_base_version,$current_version='0.3.0.1','non');
 		}
+		if (version_compare($current_version,'0.3.0.2','<')){
+			#ecrire_meta('creer_htaccess','oui');
+			sql_alter("TABLE spip_zone ALTER titre SET DEFAULT ''");
+			sql_alter("TABLE spip_zone ALTER descriptif SET DEFAULT ''");
+			echo "AccesRestreint@0.3.0.2<br />";
+			ecrire_meta($nom_meta_base_version,$current_version='0.3.0.2','non');
+		}
 	}
 }
 
