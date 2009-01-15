@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'bouton_fermer' => "Fermer",
 
+'annuler_recherche' => 'Annuler la recherche',
 
 );
 
