@@ -19,6 +19,9 @@ function create_image(){
     $grey = ImageColorAllocate($image, 204, 204, 204);
 
     ImageFill($image, 0, 0, $black);
+    imageline ( $image, 0 + rand(-10,10) , 0, $width/2 + rand(-10,10), $height, $white);
+    imageline ( $image, 20 + $width/3 + rand(-10,10), 0, 2*$width/3 + rand(-10,10) , $height, $white);
+    imageline ( $image, $width/2 + rand(-10,10) , 0, 3*$width/4 + rand(-10,10), $height, $white); 
     ImageString($image, 3, 30, 3, $security_code, $white); 
     ImageRectangle($image,0,0,$width-1,$height-1,$grey); 
  
