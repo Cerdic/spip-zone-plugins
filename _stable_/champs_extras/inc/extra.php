@@ -95,7 +95,7 @@ function extra_saisie($extra, $table_objet, $ensemble='') {
 			. $affiche
 			. fin_cadre_enfonce(true);
 */
-		return "<ul><li class='editer_type_fieldset fieldset'><fieldset><ul>".$affiche."</ul></fielset></li></ul>";
+		return "<ul><li class='editer_type_fieldset fieldset'><fieldset>".$affiche."</fielset></li></ul>";
 	}
 }
 
@@ -242,7 +242,7 @@ function extra_form($extra, $table_objet, $ensemble='') {
 			case "ligne":
 			case "line":
 			default:
-				$affiche .= "<input type='text' class='text' name='suppl_$champ'\n";
+				$affiche .= "<input type='text' name='suppl_$champ' class=''\n";
 				$affiche .= " value=\"".entites_html($extra[$champ])."\" size='40'>\n";
 				break;
 		}
