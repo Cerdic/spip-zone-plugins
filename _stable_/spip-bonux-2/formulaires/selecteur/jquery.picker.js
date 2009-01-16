@@ -75,6 +75,10 @@ jQuery.fn.item_pick = function(id_item,name,title){
 }
 jQuery.fn.item_unpick = function(){
 	var picked = this.parents('ul.item_picked');
-	this.parent().remove();
-	picked.find('>li').removeClass('last').find('li:last').addClass('last');
+	var me = this.parent();
+	jQuery(me).fadeOut('fast');
+	setTimeout(function(){
+		me.remove();
+		picked.find('>li').removeClass('last').find('li:last').addClass('last');
+	},400);
 }
