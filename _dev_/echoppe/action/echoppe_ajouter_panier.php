@@ -40,13 +40,14 @@ function action_echoppe_ajouter_panier(){
 				$quantite_originale = sql_fetch($res_le_produit_existant);
 				$contexte['quantite'] = $contexte['quantite'] + $quantite_originale['quantite'];
 				echoppe_panier_ajouter_produit($contexte['id_produit'], $contexte['quantite'], $contexte['id_client'], $contexte['token_panier'], $contexte['token_client'], session_get('echoppe_statut_panier'));
+				spip_log('Ajout au panier avec le statut'.session_get('echoppe_statut_panier'),'echoppe');
 			}else{
 				$contexte['message_erreur'] = _T('echoppe:produit_non_disponible');
 			}
-		}elseif (sql_count($res_le_produit_existant) == 0){
+		}elseif (sql_count($res_le_produit_existant) > 1){
 			
 			$contexte['message_erreur'] = "ECHOPPE ERROR !";
-			spip_log('ECHOPPE_ERROR : formulaire_panier => plus d\'1 enregistrement pour un produit dans le panier '.$contexte['id_panier'], 'echoppe');
+			spip_log('ECHOPPE_ERROR : action echoppe_ajouter_panier => plus d\'1 enregistrement pour un produit dans le panier '.$contexte['id_panier'], 'echoppe');
 			
 		}
 		

@@ -10,10 +10,13 @@ function action_echoppe_sauver_prestataire(){
 	$contexte['squelette'] = _request('mdl');
 	$contexte['statut'] = _request('statut');
 	$contexte['version'] = _request('version');
+	$contexte['type'] = _request('type');
 	
 	if ($contexte['new'] == "oui"){
 		$sql_sauver_prestataire = "INSERT INTO spip_echoppe_prestataires_paiement VALUES ('', '".addslashes($contexte['titre'])."', '"._request('version')."', '".addslashes($contexte['description'])."', '".addslashes($contexte['squelette'])."', '".$contexte['statut']."');";
 		$res_sauver_prestataire = spip_query($sql_sauver_prestataire);
+		$infos_prestataire = array(		);
+		//sql_insertq('spip_echoppe_prestataires_paiement');
 		$contexte['id_prestataire'] == spip_insert_id();
 		
 	}else{

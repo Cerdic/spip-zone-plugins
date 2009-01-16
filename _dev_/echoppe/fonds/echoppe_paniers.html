@@ -1,9 +1,10 @@
+#CACHE{0}
 [(#CHEMIN{images/panier.png}|debut_cadre_trait_couleur{1,"",<:echoppe:gestion_des_paniers:>,"",gestion_panier})]
 <h2><:echoppe:paniers_en_attente:>&nbsp;<a href="[(#EVAL{echoppe_purger_panier_temp}|generer_url_action)]"><img src="[(#CHEMIN{images/poubelle.gif})]" alt="<:echoppe:purger_les_paniers_temporaires:>" /></a></h2>
 	<B_LesPanierstemporaire>
 	[(#PAGINATION)<br />]
 	<ul class="liste_panier echoppe">
-<BOUCLE_LesPanierstemporaire(ECHOPPE_PANIERS){statut = temp}{pagination}{par date}{inverse}>
+<BOUCLE_LesPanierstemporaire(ECHOPPE_PANIERS){statut = temp}{pagination}{par date}{inverse}{fusion token_panier}>
 		<li>
 			<dl>
 				<dt><a href="[(#EVAL{echoppe_edit_panier}|generer_url_ecrire{token_panier=#TOKEN_PANIER, &})]">[(#DATE|affdate)]</a></dt>

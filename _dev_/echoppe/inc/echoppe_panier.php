@@ -32,7 +32,7 @@ function echoppe_panier_ajouter_produit($id_produit, $quantite = 1, $id_client, 
 		'configuration' => '',
 		'token_client' => $token_client,
 		'token_panier' => $token_panier,
-		'statut' => $statut_panier,
+		'statut' => $statut,
 		'date_maj' => $date_maj,
 		'date' => $date_maj
 	);

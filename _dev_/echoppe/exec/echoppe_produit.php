@@ -26,16 +26,16 @@ function exec_echoppe_produit(){
 	
 	
 	debut_grand_cadre(true);
-		echo recuperer_fond('fonds/echoppe_chemin_categorie',$contexte);
+		echo recuperer_fond('prive/general/echoppe_chemin_categorie',$contexte);
 	fin_grand_cadre(true);
 	
 	echo debut_gauche('',true);
 	
 	echo debut_boite_info(true);
-	echo recuperer_fond('fonds/echoppe_info_produit', $contexte);
+	echo recuperer_fond('prive/produit/info/echoppe_info_produit', $contexte);
 	echo fin_boite_info(true);
 	
-	echo recuperer_fond('fonds/echoppe_logo_produit',$contexte);
+	echo recuperer_fond('prive/produit/info/echoppe_logo_produit',$contexte);
 	
 	include_spip('inc/echoppe_raccourcis');
 	$raccourcis = generer_raccourcis_echoppe();
@@ -45,26 +45,26 @@ function exec_echoppe_produit(){
 	
 	echo debut_droite(false,_T('echoppe:visualisation_d_un_produit'),'');
 	echo gros_titre($contexte['titre'],'',false);
-	echo recuperer_fond('fonds/echoppe_onglets_produit',$contexte);
+	echo recuperer_fond('prive/produit/echoppe_onglets_produit',$contexte);
 	switch ($contexte['onglet']){
 		case 'options' :
-			echo recuperer_fond('fonds/echoppe_produit_options', $contexte);
+			echo recuperer_fond('prive/produit/voir/echoppe_produit_options', $contexte);
 		break;
 		
 		case 'stocks' :
-			echo recuperer_fond('fonds/echoppe_produit_stocks', $contexte);
+			echo recuperer_fond('prive/produit/voir/echoppe_produit_stocks', $contexte);
 		break;
 		
 		case 'statistiques' :
-			echo recuperer_fond('fonds/echoppe_produit_statistiques', $contexte);
+			echo recuperer_fond('prive/produit/voir/echoppe_produit_statistiques', $contexte);
 		break;
 		
 		case 'infos' :
-			echo recuperer_fond('fonds/echoppe_produit_infos', $contexte);
+			echo recuperer_fond('prive/produit/voir/echoppe_produit_infos', $contexte);
 		break;
 		
 		default :
-			echo recuperer_fond('fonds/echoppe_produit', $contexte);
+			echo recuperer_fond('prive/produit/voir/echoppe_produit', $contexte);
 		break;
 	}
 	

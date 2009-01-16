@@ -18,7 +18,7 @@ function exec_echoppe(){
 	
 	
 	echo debut_boite_info(true);
-		echo recuperer_fond('fonds/descriptif_echoppe');
+		echo recuperer_fond('prive/general/info/descriptif_echoppe');
 	echo fin_boite_info(true);
 	
 	
@@ -29,7 +29,7 @@ function exec_echoppe(){
 	echo creer_colonne_droite(true);
 	echo debut_droite(_T('echoppe:echoppe'), true);
 	
-	echo recuperer_fond('fonds/echoppe_echoppe');
+	echo recuperer_fond('prive/general/echoppe_echoppe');
 	
 	echo fin_gauche(true);
 	echo fin_page(true);

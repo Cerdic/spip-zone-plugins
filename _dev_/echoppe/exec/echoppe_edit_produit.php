@@ -35,7 +35,7 @@ function exec_echoppe_edit_produit(){
 	
 	echo creer_colonne_droite(true);
 	echo debut_droite(_T('echoppe:edition_de_produit'),true);
-	echo recuperer_fond('fonds/echoppe_edit_produit', $contexte);
+	echo recuperer_fond('prive/produit/editer/echoppe_edit_produit', $contexte);
 
 	echo fin_gauche(true);
 	echo fin_page(true);

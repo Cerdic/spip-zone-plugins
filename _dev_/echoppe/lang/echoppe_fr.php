@@ -109,6 +109,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ignorer_date_de_retrait_de_vente' => 'Ignorer la date de retrait de la vente',
 'ignorer_date_mise_en_vente' => 'Ignorer la date de mise en vente',
 'impossible_copier_dans'=>'Impossible de copier le fichier dans ',
+'impossible_d_effectuer_le_paiement_echoppe_n_est_pas_completement_configure' => 'Impossible de continuer le paiement, Erreur syst&eacute;me.',
+'impossible_d_effectuer_le_paiement_vos_infos_de_livraison_sont_manquantes_ou_incomplete_cliquez_ici_pour_les_completer' => 'Impossible d\'effectuer le paiement. Vos informations de livraison sont maquantes ou incompl&egrave;tes. <a href="@url_profile@" >Cliquez ici</a> pour les compl&eacute;ter.',
 'informations_client'=>'Informations du client',
 'information_technique_du_produit'=>'Informations techniques',
 
@@ -141,8 +143,10 @@ Voici le récapitulatif de votre commande sur ',
 Merci de votre confiance,
 
 L\'équipe de ',
+'mes_paniers' => 'Mes paniers',
 'mettre_a_jour' => 'Mettre &agrave; jour',
 'mettre_le_panier_a_jour' => 'Actualiser le panier',
+'mon_compte_client' => 'Mon compte client',
 'montant_total_du_panier' => 'Montant total du panier',
 'modification_du_panier_non_permise' => 'Modification du panier non permise !',
 'modification_du_panier_ok' => 'Panier modifi&eacute; avec succ&eacute;s !',
@@ -169,6 +173,7 @@ L\'équipe de ',
 
 // P
 'paiement' => 'Paiement',
+'paiement_du_panier' => 'Paiement de mon panier',
 'panier' => 'Panier',
 'panier_du_client' => 'Panier du client',
 'paniers_en_attente' => 'Paniers temporaires',
@@ -273,7 +278,7 @@ L\'équipe de ',
 'visualisation_d_un_produit' => 'Visualisation de',
 'visualisation_des_paniers' => 'Visualisation des paniers',
 'votre_saisie_contient_des_erreurs' => 'Votre saisie contient des erreurs !',
-
+'vous_n_avez_encore_aucun_panier_chez_nous' => 'Vous n\'avez encore aucun panier chez nous.',
 // X
 'xxx' => 'xxx'
 

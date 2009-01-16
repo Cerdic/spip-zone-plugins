@@ -40,7 +40,7 @@ function exec_echoppe_edit_categorie(){
 	echo creer_colonne_droite(true);
 	echo debut_droite(_T('echoppe:edition_de_cetegorie'),true);
 	
-	echo recuperer_fond('fonds/echoppe_edit_categorie',$contexte);
+	echo recuperer_fond('prive/categorie/editer/echoppe_edit_categorie',$contexte);
 	
 	echo fin_gauche(true);
 	echo fin_page(true);

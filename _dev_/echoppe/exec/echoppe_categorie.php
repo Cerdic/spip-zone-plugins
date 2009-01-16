@@ -44,7 +44,7 @@ function exec_echoppe_categorie(){
 	
 	if ($contexte['id_categorie'] != "0"){
 		debut_grand_cadre(true);
-		echo recuperer_fond('fonds/echoppe_chemin_categorie',$contexte);
+		echo recuperer_fond('prive/general/echoppe_chemin_categorie',$contexte);
 		fin_grand_cadre(true);
 	}
 	
@@ -52,7 +52,7 @@ function exec_echoppe_categorie(){
 	
 	if ($contexte['id_categorie'] != "0"){
 			echo debut_boite_info(true);
-				echo recuperer_fond('fonds/echoppe_info_categorie',$contexte);
+				echo recuperer_fond('prive/categorie/info/echoppe_info_categorie',$contexte);
 			echo fin_boite_info(true);
 			echo recuperer_fond('fonds/echoppe_logo_categorie',$contexte);
 	}else{
@@ -69,9 +69,9 @@ function exec_echoppe_categorie(){
 	
 	echo debut_droite(true,_T('echoppe:echoppe'));
 	if ($contexte['id_categorie'] == "0"){
-		echo recuperer_fond('fonds/echoppe_echoppe', $contexte);
+		echo recuperer_fond('prive/general/echoppe_echoppe', $contexte);
 	}else{
-		echo recuperer_fond('fonds/echoppe_categorie', $contexte);
+		echo recuperer_fond('prive/categorie/voir/echoppe_categorie', $contexte);
 	}
 	echo fin_gauche(true);
 	echo fin_page(true);	
