@@ -23,7 +23,11 @@ function mot_sel_add(id_mot,titre,name){
 	}
 }
 function mot_sel_remove(node){
-	$(node).parent().remove();
-	$('ul#mots_sel li').removeClass('show').removeClass('last');
-	$('ul#mots_sel li:last').addClass('last');
+	$(node).parent().fadeOut('fast');
+	$('ul#mots_sel li').removeClass('show');
+	setTimeout(function(){
+		$(node).parent().remove();
+		$('ul#mots_sel li').removeClass('last');
+		$('ul#mots_sel li:last').addClass('last');
+	},400);
 }
