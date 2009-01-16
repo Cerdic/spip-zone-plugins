@@ -9,7 +9,7 @@ include(dirname(__FILE__).'/../inc_malettre.php');
 function exec_malettre_archive(){  
   global $connect_statut;
 	global $connect_toutes_rubriques;
-	include_ecrire("inc_presentation");
+	include_spip("inc_presentation");
 
   // parametre
   $path_archive = "IMG/lettre";
@@ -22,22 +22,26 @@ function exec_malettre_archive(){
 		$page = "malettre";	
 
 		//--		
-		$action = _request('action');
-		if ($action == "del") {
-	      $file = _request('f');
+		$agir = _request('agir');
+		if ($agir == "del") {
+	      $file = _request('f');	      
 	      $file = str_replace("..","",$file);  // basic secu
 	      $file = str_replace("/","",$file);
 	      @unlink("$path/$file");
+	      $file_txt = substr($file,0,-4)."txt";
+	      @unlink("$path/$file_txt");	      
 	      header("location:?exec=malettre_archive");	      
         exit;  
     } else {
-    	  debut_page(_T('malettre:ma_lettre'));	  	
-        debut_gauche();    
-        debut_boite_info();
+        $commencer_page = charger_fonction('commencer_page', 'inc');
+        echo $commencer_page(_T('malettre:ma_lettre'),_T('malettre:ma_lettre'),_T('malettre:ma_lettre'));
+                	  	
+        echo debut_gauche('', true);   
+        debut_boite_info(true);
         echo "<p><a href='?exec=malettre'>"._T('malettre:ecrire_nouvelle')."</a></p>";
-        fin_boite_info();
+        fin_boite_info(true);
         
-        debut_droite();	        
+        echo debut_droite("", true);	        
         echo "<h3>"._T('malettre:archives')."</h3>";        
           if (!$folder = dir($path))   {
             echo _T('malettre:erreur_lecture');
@@ -71,8 +75,12 @@ function exec_malettre_archive(){
           $output .= "<td><small>$lang</small></td>";
           $output .= "<td>"._T('malettre:lettre_du')."  $date_lettre</td>";
           $output .= "<td><a href='#' onclick=\"malettref.location.href='../$path_archive/$lettre_path'\" style='color:green;'>"._T('malettre:voir')."</a></td>";
-          $output .= "<td><a href='../$path_archive/$lettre_path' target='_blank' style='color:green;'>"._T('malettre:lien')."</a></td>";
-          $output .= "<td><a href='?exec=malettre_archive&amp;action=del&amp;f=$lettre_path'  onclick='return confirm(\""._T('malettre:effacer_confirm')."\");' style='color:red;'>"._T('malettre:effacer')."</a></td>";
+          $output .= "<td><a href='../$path_archive/$lettre_path' target='_blank' style='color:green;'>HTML</a></td>";
+          // txt ?
+          $lettre_path_txt = substr($lettre_path,0,-4)."txt";          
+          if (is_file($path."/".$lettre_path_txt)) $output .= "<td><a href='../$path_archive/$lettre_path_txt' target='_blank' style='color:green;'>TXT</a></td>";
+                                              else $output .= "<td></td>";
+          $output .= "<td><a href='?exec=malettre_archive&amp;agir=del&amp;f=$lettre_path'  onclick='return confirm(\""._T('malettre:effacer_confirm')."\");' style='color:red;'>"._T('malettre:effacer')."</a></td>";
           $output .= "</tr>";
 
           

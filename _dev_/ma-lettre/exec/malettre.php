@@ -22,7 +22,7 @@ function exec_malettre(){
 	global $connect_toutes_rubriques;
  
   include_spip("inc/charsets"); 
-  include_ecrire("inc_presentation");
+  include_spip("inc_presentation");
   
   // chemin
   $path = _DIR_RACINE;  
@@ -64,36 +64,26 @@ function exec_malettre(){
     
   
 
-  // main ------------------------------------------------------
-  
-	echo debut_page(_T('malettre:ma_lettre'));	  
+  // main ------------------------------------------------------  
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+  echo $commencer_page(_T('malettre:ma_lettre'),_T('malettre:ma_lettre'),_T('malettre:ma_lettre'));	  
  
 	if ($connect_statut == "0minirezo" && $connect_toutes_rubriques) {	  // admin restreint (connect_toutes_rubriques si admin)
 		$page = "malettre";	
 
-    debut_gauche();
-    echo debut_boite_info();
+    echo debut_gauche('', true);   
+    debut_boite_info(true);
     echo "<p>"._T('malettre:info')."</p>";
     echo "<p><a href='?exec=malettre'>"._T('malettre:ecrire_nouvelle')."</a></p>";
-    echo "<p><a href='?exec=malettre&amp;action=letter_compose&amp;option=load'>"._T('malettre:charger_derniere')."</a></p>";
+    echo "<p><a href='?exec=malettre&amp;agir=letter_compose&amp;option=load'>"._T('malettre:charger_derniere')."</a></p>";
     echo "<p><a href='?exec=malettre_archive'>"._T('malettre:archives_gerer')."</a></p>";
     if (function_exists(lire_config)) echo "<p><a href='?exec=cfg&cfg=malettre'>"._T('malettre:config')."</a></p>";  
-    echo fin_boite_info();
+    fin_boite_info(true);
     
-    echo debut_droite();
-    
-    // list last articles
-		$titre = "titre";
-		$table = "spip_articles"; 
-		$id = "id_article";
-		$statut = "publie"; 
-		$temps = "id_article"; 
-		$page_voir = "?exec=articles&id_article=";
-    $page_edit = "?exec=articles_edit&id_article="; 
-		//--		
-
-		$action = _request('action');
-		if ($action == "letter_compose") {      // compose la lettre
+    echo debut_droite('', true);
+ 
+		$agir = _request('agir');
+		if ($agir == "letter_compose") {      // compose la lettre
 		        $errorFlag = false;		
       
 						$option = _request('option');
@@ -191,9 +181,9 @@ function exec_malettre(){
 							
 					  // affichage ?
 					  if (!$errorFlag) {
-						  echo "<form method='post' action='?exec=malettre'><fieldset>\n"; 
+						  echo "<form method='post' agir='?exec=malettre'><fieldset>\n"; 
               echo "<input type='hidden' name='lang_select' value='$lang' />"; 
-						  echo "<input type='hidden' name='action' value='letter_send' />\n";
+						  echo "<input type='hidden' name='agir' value='letter_send' />\n";
               echo "<h4>"._T('malettre:expediteur')."</h4>\n";
               echo "<select name='expediteur'>\n";
 							foreach ($expediteurs as $expediteur=>$val){
@@ -221,7 +211,7 @@ function exec_malettre(){
 							echo "</fieldset></form>\n";
 						} 					
 						
-   } else if ($action=='letter_send') {
+   } else if ($agir=='letter_send') {
 		        //
 	          // envoi de la lettre
 	          //
@@ -316,18 +306,25 @@ function exec_malettre(){
             echo "</div>";
             
             // archivage de la lettre en dur
+            echo "<div style=\"margin:15px 0;\">"._T('malettre:archives_placer');
+            
             $lettre_archive = "$path_archive_full/lettre_".date("Ymd")."_".$lettre_hash."_"._request('lang_select').".html";
             $f_archive=fopen($lettre_archive,"w");
             fwrite($f_archive,$recup); 
             fclose($f_archive);
-            echo "<div style=\"margin:15px 0;\">"._T('malettre:archives_placer')."(<a href='$url_lettre_archive' target='_blank'>"._T('malettre:consulter')."</a>)</div>";
-                      
+            echo " <a href='$url_lettre_archive' target='_blank'>html</a> - ";
            
-            
+            $lettre_archive = "$path_archive_full/lettre_".date("Ymd")."_".$lettre_hash."_"._request('lang_select').".txt";
+            $f_archive=fopen($lettre_archive,"w");
+            fwrite($f_archive,$recup_txt); 
+            fclose($f_archive);
+            echo "<a href='$url_lettre_archive_txt' target='_blank'>txt</a></div>";
+                                
+                       
             echo "<p><a href='?exec=malettre'>"._T('malettre:ecrire_nouvelle2')."</a></p>\n";
             
     } else {	//
-	            // pas d'action: affichage des articles pour composition de la lettre
+	            // pas d'agir: affichage des articles pour composition de la lettre
 	            //
 	            
 	            // verif si repertoire stockage dispo
@@ -339,17 +336,18 @@ function exec_malettre(){
               $lang_select = _request('lang_select');
               if ($lang_select!="") $cond_lang_sql = "AND lang='$lang_select'";
                               else  $cond_lang_sql = "";
-              $requete = "SELECT $id, $titre FROM $table WHERE statut like '$statut'  $cond_lang_sql ORDER BY $temps DESC LIMIT 0,50";
-              $result=spip_query($requete);
+              
+              $result = sql_select(
+               "id_article,titre","spip_articles",
+               "statut = 'publie' $cond_lang_sql","", 
+               "id_article DESC", "0,50" 
+              ); 
                                       
-              if (spip_num_rows($result) == 0) {
-							  echo "aucun article disponible";
-              } else {	                							
-                echo "<form method='post' action='?exec=malettre'>"; 
-                echo "<input type='hidden' name='action' value='letter_compose' />";
-                echo "<input type='hidden' name='lang_select' value='$lang_select' />";
-                echo "<fieldset>\n";
-                
+	                							
+              echo "<form method='post' agir='?exec=malettre'>"; 
+              echo "<input type='hidden' name='agir' value='letter_compose' />";
+              echo "<input type='hidden' name='lang_select' value='$lang_select' />";
+              echo "<fieldset>\n";              
               
               if($GLOBALS['meta']['multi_rubriques']=="oui" || $GLOBALS['meta']['multi_articles']=="oui")
       				      $active_langs = explode(",",$GLOBALS['meta']['langues_multilingue']);
@@ -378,7 +376,7 @@ function exec_malettre(){
                 echo "<table class='spip' style='width:100%;border:0;'>";
                         
                                 //affichage des 50 documents 
-                                while($row=spip_fetch_array($result)) {
+                                while($row = sql_fetch($result)){
                                         $id_document=$row['id_article'];                                        
                                         $titre=charset2unicode($row['titre']);  // BUG pb de charset  filtrer_entites ?
                                         
@@ -386,11 +384,10 @@ function exec_malettre(){
                                         else $couleur="#EEEEEE";
                                         $compteur++;
                                         
-                                        echo "<tr width=\"100%\">";
-                                        echo "<td bgcolor='$couleur'>";
-                                        if (! empty($page_voir)) echo "<a href='$page_voir$id_document'$page_voir_fin>";
+                                        echo "<tr width=\"100%\"><td bgcolor='$couleur'>";
+                                        echo "<a href='?exec=articles&amp;id_article=$id_document'>";
                                         echo typo("n&deg;".$id_document." - ".$titre);
-                                        if (! empty($page_voir)) echo "</a>";                
+                                        echo "</a>";                
                                         echo "</td>";										
                                         echo "<td align='center' bgcolor='$couleur'><input type=checkbox name=add[] value=\"$id_document\"></TD>";
                                         echo "</tr>\n";
@@ -403,7 +400,7 @@ function exec_malettre(){
                 echo "</table><br /><input type='submit' value='"._T('malettre:compose_submit')."' />\n";
 								echo "</fieldset>\n";
 								echo "</form>\n\n";
-              }
+
 		}
 		//--	
 
