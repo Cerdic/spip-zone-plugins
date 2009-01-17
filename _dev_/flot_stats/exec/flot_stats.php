@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/statistiques');
-function exec_stats_flot() {
+function exec_flot_stats() {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page("Statistiques", "", "");
 	echo '<script language="javascript" type="text/javascript" src="'._DIR_PLUGIN_FLOT.'jquery.flot.js"></script>';
