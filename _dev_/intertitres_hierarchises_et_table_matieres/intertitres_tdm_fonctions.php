@@ -52,6 +52,8 @@ function extrait_emphase($texte) {
 function extrait_liens($texte) {
 //protection de ce qui est code
  $texte=preg_replace("/(<code>)(.*?)(<\/code>)/","",$texte);
+//protection des ancres
+ $texte=preg_replace("/(\[.*?\<-])/","",$texte);
  $texte=preg_replace("/(\[\[)(.*?)(\]\])/","",$texte);
  preg_match_all("/(\[.*?\])/",$texte,$matches);
  $key = key($matches[1]);
