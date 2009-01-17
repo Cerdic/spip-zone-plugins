@@ -30,6 +30,9 @@ function exec_flot_stats() {
 		$nvis = $ele['visites'];
 		$d = explode("-", $date);
 		$times = mktime(0, 0, 0, $d[1], $d[2], $d[0]);
+		$times = intval($times);
+		$times = $times * 1000;
+		
 		echo '['.$times.', '.$nvis.']';
 		if ($coun<$nstats) {
 			$coun++;
@@ -41,9 +44,9 @@ function exec_flot_stats() {
 	
     $.plot($("#conteneur"),
            [ { data: stats, label: "Visites",lines: { show: true }, points: { show: true } },],
-           { xaxis: { mode: 'time' },
-             yaxis: { min: 0 },
-             legend: { position: 'ne', timeformat: "%y/%m/%d" } });
+           { xaxis: { mode: 'time', timeformat: "%y"   },
+             yaxis: { min: 0  },
+             legend: { position: 'ne'} });
 });
 </script>
 	<?php
