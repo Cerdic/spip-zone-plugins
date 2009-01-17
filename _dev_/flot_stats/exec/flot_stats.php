@@ -21,29 +21,57 @@ function exec_flot_stats() {
 	?>
 	<script id="source" language="javascript" type="text/javascript">
 		$(function () {
-			var stats =  [{
-				label: "Visites",
-				data: <?php $select = sql_select("*", "spip_visites");
-				$nstats = sql_countsel('spip_visites');
-				echo '[';
-				$coun = 1;
-				while ($ele=sql_fetch($select)){
-					$date = $ele['date'];
-					$nvis = $ele['visites'];
-					$d = explode("-", $date);
-					$times = mktime(0, 0, 0, $d[1], $d[2], $d[0]);
-					$times = intval($times);
-					$times = $times * 1000;
-					echo '['.$times.', '.$nvis.']';
-						if ($coun<$nstats) {
-							$coun++;
-							echo ",";
+			var stats =  [
+				{
+					label: "Visites",
+					data: <?php $select = sql_select("*", "spip_visites");
+					$nstats = sql_countsel('spip_visites');
+					echo '[';
+					$coun = 1;
+					while ($ele=sql_fetch($select)){
+						$date = $ele['date'];
+						$nvis = $ele['visites'];
+						$d = explode("-", $date);
+						$times = mktime(0, 0, 0, $d[1], $d[2], $d[0]);
+						$times = intval($times);
+						$times = $times * 1000;
+						echo '['.$times.', '.$nvis.']';
+							if ($coun<$nstats) {
+								$coun++;
+								echo ",";
+							}
 						}
-					}
-				echo ']';
-				?> 
-			}];
-
+					echo ']';
+					?> 
+				},
+				{
+					label: "Moyenne",
+					data: <?php $select = sql_select("*", "spip_visites");
+					$nstats = sql_countsel('spip_visites');
+					echo '[';
+					$coun = 1;
+					$mtotal = 0;
+					while ($ele=sql_fetch($select)){
+						$mdate = $ele['date'];
+						$mnvis = intval($ele['visites']);
+						$d = explode("-", $mdate);
+						$times = mktime(0, 0, 0, $d[1], $d[2], $d[0]);
+						$times = intval($times);
+						$times = $times * 1000;
+						$mtotal = $mnvis + $mtotal;
+						$mtotal = intval($mtotal);
+						$moy = $mtotal / $coun;
+						echo '['.$times.', '.$moy.']';
+							if ($coun<$nstats) {
+								$coun++;
+								echo ",";
+							}
+						}
+					echo ']';
+					?> 
+				}
+				];
+				
 			var options = { 
 				lines: { show: true }, 
 				points: { show: <?php $nstats = sql_countsel('spip_visites'); if ($nstats > 365) { echo "false";} else { echo "true";}?> },
@@ -73,9 +101,7 @@ function exec_flot_stats() {
 		});
 	</script>
 	<?php
-	echo '<br />';
 	echo '<div id="conteneur" style="width:600px;height:300px;border: 1px solid; margin: auto;"></div>';
-	echo '<div id="overview" style="width:166px;height:100px"></div>';
 	echo '<p><input id="clearSelection" type="button" value="Effacer la selection" />';
 	echo '<p><input id="zoom" type="checkbox">Zoomer sur la selection</input></p>';
 }
