@@ -43,7 +43,15 @@ function exec_flot_stats() {
 	?>;
 	
     $.plot($("#conteneur"),
-           [ { data: stats, label: "Visites",lines: { show: true }, points: { show: true } },],
+           [ { data: stats, label: "Visites",lines: { show: true }, points: { show: <?php
+		   $nstats = sql_countsel('spip_visites');
+	if ($nstats > 365) {
+	echo "false";
+	}
+	else {
+	echo "true";
+	}
+	?> } },],
            { xaxis: { mode: 'time', timeformat: "%y"   },
              yaxis: { min: 0  },
              legend: { position: 'ne'} });
