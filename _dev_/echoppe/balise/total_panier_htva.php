@@ -2,6 +2,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;    #securite
 
+
+
 // http://doc.spip.org/@balise_URL_LOGOUT
 function balise_TOTAL_PANIER_HTVA ($p) {return calculer_balise_dynamique($p,'TOTAL_PANIER_HTVA', array());
 }
@@ -14,6 +16,7 @@ function balise_TOTAL_PANIER_HTVA_stat ($args, $filtres) {
 
 // http://doc.spip.org/@balise_URL_LOGOUT_dyn
 function balise_TOTAL_PANIER_HTVA_dyn($cible) {
+	include_spip('inc/echoppe');
 	$_sql = "SELECT id_produit, quantite FROM spip_echoppe_paniers WHERE token_panier='".session_get('echoppe_token_panier')."' AND token_client = '".session_get('echoppe_token_client')."' ;";
 	$_res = spip_query($_sql);
 	//echo $_sql;

@@ -2,6 +2,25 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function zero_si_vide($_var){
+	if ($_var == ""){
+		$_var = 0; 
+	}
+	return $_var;
+}
+
+function calculer_prix_tvac($prix_htva, $taux_tva){
+	if ($taux_tva == 0){
+		$taux_tva = lire_config('echoppe/taux_de_tva_par_defaut',21);
+	}
+	$prix_ttc = $prix_htva + ($prix_htva * ($taux_tva / 100));
+	$prix_ttc = round($prix_ttc, lire_config('echoppe/nombre_chiffre_apres_virgule',2));
+	if (lire_config('echoppe/arrondi_superieur_de_prix_tvac','non') == 'on'){
+		$prix_ttc = ceil($prix_ttc);
+	}
+	return $prix_ttc;
+}
+
 function echoppe_echec_autorisation(){
 	echo debut_boite_alerte();
 	echo _T('echoppe:acces_non_autorise');

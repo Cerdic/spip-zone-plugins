@@ -15,7 +15,7 @@ function balise_TOTAL_ITEM_PANIER_stat ($args, $filtres) {
 
 // http://doc.spip.org/@balise_URL_LOGOUT_dyn
 function balise_TOTAL_ITEM_PANIER_dyn($cible) {
-
+	include_spip('inc/echoppe');
 	$select_produit = sql_select('quantite','spip_echoppe_paniers',"token_panier = '".session_get('echoppe_token_panier')."'");
 	
 	$_quantite = 0;
@@ -24,8 +24,6 @@ function balise_TOTAL_ITEM_PANIER_dyn($cible) {
 		$_quantite = $_quantite + $quantite['quantite'];
 	}
 	
-	zero_si_vide($_quantite);
-    
-    return $_quantite;
+    return zero_si_vide($_quantite);
 }
 ?>

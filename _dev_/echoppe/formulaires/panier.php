@@ -1,6 +1,7 @@
 <?php
 
 function formulaires_panier_charger_dist(){
+	include_spip('inc/echoppe');
 	$valeurs = array(
 				'editer_panier'=>_request('editer_panier'),
 				'id_panier'=>_request('id_panier'),

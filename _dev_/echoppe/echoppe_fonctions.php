@@ -1,5 +1,5 @@
 <?php
-
+include_spip('inc/echoppe');
 function select_lang($les_langues, $nom, $value, $style){
 	$les_langues = explode(",",$les_langues);
 	$select .= '<select name="'.$nom.'" class="'.$style.'">';
@@ -18,18 +18,6 @@ function generer_url_inscription(){
 	return "";
 }
 
-function calculer_prix_tvac($prix_htva, $taux_tva){
-	if ($taux_tva == 0){
-		$taux_tva = lire_config('echoppe/taux_de_tva_par_defaut',21);
-	}
-	$prix_ttc = $prix_htva + ($prix_htva * ($taux_tva / 100));
-	$prix_ttc = round($prix_ttc, lire_config('echoppe/nombre_chiffre_apres_virgule',2));
-	if (lire_config('echoppe/arrondi_superieur_de_prix_tvac','non') == 'on'){
-		$prix_ttc = ceil($prix_ttc);
-	}
-	return $prix_ttc;
-}
-
 function calculer_taux_tva($taux_tva){
 	if ($taux_tva == 0){
 		$taux_tva = lire_config('echoppe/taux_de_tva_par_defaut',21);
@@ -43,12 +31,6 @@ function vide_si_zero($_var){
 	}
 	return $_var;
 }
-function zero_si_vide($_var){
-	if ($_var == ""){
-		$_var = 0; 
-	}
-	return $_var;
-}
 
 function calculer_url_achat($_var,$quantite,$redirect){
 	if (isset($_var)){
@@ -56,9 +38,9 @@ function calculer_url_achat($_var,$quantite,$redirect){
 		$args_url = 'id_produit='.$_var;
 		$args_url .= "&quantite=".$quantite;
 		if ($redirect){
-			$args_url .= "&redirect=".$redirect;
+			$args_url .= "&page=".$redirect;
 		}else{
-			$args_url .= "&redirect=spip.php?".$_SERVER["QUERY_STRING"];
+			$args_url .= "&page=".$_page;
 		}
 		$url = generer_url_action('echoppe_ajouter_panier',$args_url,"&");
 		return $url;
@@ -125,6 +107,7 @@ function balise_LONGUEUR($p){
 function balise_URL_ACHAT($p){
 	$quantite = interprete_argument_balise(1,$p);
 	$redirect = interprete_argument_balise(2,$p);
+	//var_dump($redirect);
 	if (!$quantite) $quantite = "1";
 	if (!$redirect) $redirect = "0";
 	$_id_produit = champ_sql('id_produit', $p);
