@@ -79,8 +79,10 @@ function statistiques_lang_ok()
 	while ($row = sql_fetch($result)) {
 
 		$lang = $row['lang'];
-		$visites = round($row['cnt'] / $total_visites * $taille);
-		$pourcent = round($row['cnt'] / $total_visites * 100);
+		if ($row['cnt']) {
+			$visites = round($row['cnt'] / $total_visites * $taille);
+			$pourcent = round($row['cnt'] / $total_visites * 100);
+		}
 
 		if ($visites > 0) {
 
