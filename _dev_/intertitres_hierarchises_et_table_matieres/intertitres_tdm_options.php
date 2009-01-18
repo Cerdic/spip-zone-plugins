@@ -170,7 +170,7 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
  
        //on se rappelle du raccourcis
 	$cite[$ref] = $numeros;
-	$table .= "<li><a href=\"$url_article#$numeros\" title=\"Aller directement à  	&laquo;&nbsp;".textebrut($titre)."&nbsp;&raquo;\">$titre</a>";
+	$table .= "<li><a href=\"$url_article#$numeros\" title=\"Aller directement &agrave;  	&laquo;&nbsp;".textebrut($titre)."&nbsp;&raquo;\">$titre</a>";
 
        //on mémorise le niveau de ce titre
 	$lastlevel = strlen($level);
@@ -203,7 +203,7 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 
   // Comme la TDM est désormais affichée de manière externe aux articles, si un auteur met #TABLEMATIERES dans son article, celà crée un lien vers la TDM externe, d'où un remplacement de:
   //$texte = str_replace('#TABLEMATIERES',$table,$texte); par:
-  $texte = str_replace('#TABLEMATIERES',"<a href=\"#table_des_matieres\" title=\"Aller à la table des matières de l'article\">Table des matières</a>",$texte);
+  $texte = str_replace('#TABLEMATIERES',"<a href=\"#table_des_matieres\" title=\"Aller &agrave; la table des mati&egrave;res de l'article\">Table des mati&egrave;res</a>",$texte);
 
   // si tableseule on ne renvoit que la table, sinon, on renvoie tout
   if ($tableseule) {return $table;} else {return $texte;}
