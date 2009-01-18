@@ -1,0 +1,61 @@
+<plugin>
+    <nom>Statistiques</nom>
+    <auteur>Collectif SPIP</auteur>
+    <version>0.1</version>
+    <version_base>0.1</version_base>
+    <etat>dev</etat>
+    <description>
+	Statistiques de SPIP
+	</description>
+    <prefix>stats</prefix>
+    <install>base/stats_upgrade.php</install>
+    <options>stats_options.php</options>
+	
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/stats.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>configurer_liste_metas</nom>
+		<inclure>stats_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>affichage_entete_final</nom>
+		<inclure>stats_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>stats_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>stats_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>stats_autoriser.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[2.1;)" />
+	
+	
+	<bouton id="statistiques_visites">
+		<icone>images/statistiques-48.png</icone>
+		<titre>icone_statistiques_visites</titre>		
+	</bouton>
+	
+	<bouton id='statistiques_repartition' parent='statistiques_visites'>
+		<icone>images/rubrique-24.gif</icone>
+		<titre>icone_repartition_visites</titre>
+	</bouton>	
+	<bouton id='statistiques_lang' parent='statistiques_visites'>
+		<icone>images/langues-24.gif</icone>
+		<titre>onglet_repartition_lang</titre>
+	</bouton>	
+	<bouton id='statistiques_referers' parent='statistiques_visites'>
+		<icone>images/referers-24.gif</icone>
+		<titre>titre_liens_entrants</titre>
+	</bouton>		
+</plugin>
+
