@@ -2,7 +2,7 @@
 	<nom>
 	<multi>[fr]Peuplement LDAP[en]LDAP Populate</multi>
 	</nom>
-	<icon>img_pack/system-users.png</icon>
+	<icon>img_pack/ldap.png</icon>
 	<auteur>
  		benjamin.revel@free.fr
 		<multi>

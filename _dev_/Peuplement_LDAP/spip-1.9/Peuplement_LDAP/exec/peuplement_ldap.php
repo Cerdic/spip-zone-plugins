@@ -4,8 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/peuplement_ldap_common');
-include_spip('inc/auth_ldap.php');
-include('../ecrire/inc/auth_ldap.php');
+include_spip('inc/auth_ldap');
 
 
 function exec_peuplement_ldap(){
