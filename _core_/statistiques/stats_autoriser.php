@@ -17,7 +17,6 @@ function autoriser_statistiques_visites_bouton_dist($faire, $type, $id, $qui, $o
 }
 
 function autoriser_statistiques_repartition_bouton_dist($faire, $type, $id, $qui, $opt) {
-	spip_log('toto','stat');
 	return autoriser('voirstats', $type, $id, $qui, $opt);
 }
 
