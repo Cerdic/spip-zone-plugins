@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function stats_declarer_tables_auxiliaires($tables_principales){
+function stats_declarer_tables_auxiliaires($tables_auxiliaires){
 
 	$spip_visites = array(
 			"date"	=> "DATE NOT NULL",
