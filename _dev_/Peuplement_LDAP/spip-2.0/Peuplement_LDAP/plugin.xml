@@ -1,0 +1,32 @@
+<plugin>
+	<nom>
+	<multi>[fr]Peuplement LDAP[en]LDAP Populate</multi>
+	</nom>
+	<icon>img_pack/ldap.png</icon>
+	<auteur>
+ 		benjamin.revel@free.fr
+		<multi>
+			2008[fr]Distribu&#233; sous licence GPL
+			[es]Distribuido bajo licencia GPL 
+			[en]Distribued under GPL license
+		</multi>
+	</auteur>
+	<version>1.0</version>
+	<version_base>2.0.0</version_base>
+	<etat>dev</etat>
+	<description>
+		<multi>
+			[fr] Initialise la liste des auteurs du site en fonction d'un critere de recherche sur l'annuaire Ldap.
+		</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/Peuplement-LDAP</lien> <!-- URI de documentation -->
+	<options>peuplement_ldap_options.php</options>
+	<fonctions>peuplement_ldap.php</fonctions>
+	<prefix>PeuplementLdap</prefix>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>peuplement_ldap_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.0;]" />
+</plugin>
