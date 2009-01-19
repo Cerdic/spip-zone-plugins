@@ -7,7 +7,7 @@
  *
  */
 
-function exec_controle_forum_dist($fond = 'prive/listes/controle_forum')
+function exec_controle_forum_dist()
 {
 	if (!autoriser('publierdans','rubrique',_request('id_rubrique'))
 	  OR ($id_article = _request('id_article') AND !autoriser('modererforum', 'article', $id_article))
@@ -17,12 +17,11 @@ function exec_controle_forum_dist($fond = 'prive/listes/controle_forum')
 	} 
 	else 
 	{
-		$fond = 'prive/listes/controle_forum';
-		exec_controle_forum_args(_request('type'),$_GET,$fond);
+		exec_controle_forum_args(_request('type'),$_GET,'prive/listes/controler_forum');
 	}
 }
 
-function exec_controle_forum_args($type,$contexte=array(),$fond = 'prive/listes/controle_forum'){
+function exec_controle_forum_args($type,$contexte=array(),$fond = 'prive/listes/controler_forum'){
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('titre_page_forum_suivi'), "forum", "forum-controle");
