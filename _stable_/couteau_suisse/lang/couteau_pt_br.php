@@ -73,6 +73,9 @@ Compatibilidade: SPIP v1.9x e v2.0',
 	'texte_formatspip' => 'TEXTO ORIGINAL EM FORMATO SPIP',
 	'textes_formatspip' => 'TEXTOS ORIGINAIS EM FORMATO SPIP',
 	'titre' => 'Canivete Su&iacute;&ccedil;o',
+	'tri_auteurs' => 'ORDEM DOS AUTORES',
+	'tri_descendre' => 'Baixar este autor',
+	'tri_monter' => 'Subir este autor',
 
 	// U
 	'urls_propres_erreur' => 'Este formato n&atilde;o leva em conta os URLs limpos listados acima.',
