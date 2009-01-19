@@ -1,0 +1,19 @@
+<plugin>
+  <nom>antispam</nom>
+  <auteur>[bill->stephane@rezo.net]</auteur>
+  <licence>(c) 2009 GPL</licence>
+  <version>0.1</version>
+  <etat>test</etat>
+  <description>
+  Permet d'interdire certaines chaines de caracteres dans les forums (voir la page d'[administration du plugin->./?exec=cfg&cfg=antispam]).
+  
+  Pour chaque champ, on liste les "mots" interdits en les separant d'un retour a la ligne.
+  
+  on peut specifier un nombre d'occurrences autorisees en ajoutant le separateur puis le nombre d'occurrences en fin de lignes.
+  
+  par exemple, avec comme separateur ";", si on place dans texte "azerty;2", seule 1 occurences de "azerty" seront utilisables dans le texte du forum ("blabla azerty blabla blabla" passera, mais "blabla azerty blabla azertyblabla" ne passera pas).
+  
+  </description>
+  <prefix>antispam</prefix>
+  <necessite id="SPIP" version="[1.9.2;2.0.0)" />
+</plugin>
