@@ -65,9 +65,6 @@ function test_inscription($mode, $mail, $nom, $id=0)
 	if (!$r = email_valide($mail)) return _T('info_email_invalide');
 
 	// Controle de la ban_list
-	if (version_compare($GLOBALS['spip_version_code'],_SPIPBB_REV_SQL,'<')) {
-		include_spip('inc/spipbb_192'); // SPIP 1.9.2
-	}
 
 	$spipbb_meta = @unserialize($GLOBALS['meta']['spipbb']);
 
@@ -77,10 +74,10 @@ function test_inscription($mode, $mail, $nom, $id=0)
 
 		$user_ip = (isset($HTTP_SERVER_VARS['REMOTE_ADDR'])) ? $HTTP_SERVER_VARS['REMOTE_ADDR'] : getenv('REMOTE_ADDR');
 
+		include_spip('base/abstract_sql'); // requis quand il n'est pas initialisé
 		$res = sql_select('ban_login,ban_ip, ban_email','spip_ban_liste');
 		while ( $row = sql_fetch($res) )
 		{
-
 			$match_email = str_replace('*', '.*?', $row['ban_email']);
 			$match_ip = str_replace('*', '.*?', $row['ban_ip']);
 			$match_login = str_replace('*', '.*?', $row['ban_login']);
