@@ -369,6 +369,7 @@ Atenci&oacute;n, esta herramienta necesita el plugin {jQuery} : {Round Corners} 
 	'label:url_arbo_sep_id' => 'Car&aacute;cter de separaci&oacute;n \'titre-id\' en caso de duplicidad:<br/>(no utilizar \'/\')',
 	'label:url_glossaire_externe2' => 'Enlace al glosario externo:',
 	'label:urls_arbo_sans_type' => 'Mostrar el tipo de objeto SPIP en las URLs:',
+	'label:urls_minuscules' => '@_CS_CHOIX@',
 	'label:webmestres' => 'Lista de los y las webmasters del sitio:',
 	'liens_en_clair:description' => 'Pone a tu disposici&oacute;n el filtro: \'liens_en_clair\'. Probablemente tu texto contiene enlaces de hipertexto que no son visibles al imprimir. Este filtro a&ntilde;ade entre corchetes el destino de cada enlace pulsable (enlaces externos o de correo). Atenci&oacute;n: en el modo de impresi&oacute;n (par&aacute;metro \'cs=print\' o \'page=print\' en la url de la p&aacute;gina), esta caracter&iacute;stica se aplica autom&aacute;ticamente.',
 	'liens_en_clair:nom' => 'Ver enlaces',
@@ -507,7 +508,7 @@ Este sumario puede combinarse con: &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
 	'sommaire:nom' => 'Un sumario autom&aacute;tico',
 	'sommaire_avec' => 'Un texto con sumario: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un texto sin sumario: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'spam:description' => 'Intenta luchar contra los env&iacute;os de mensajes autom&aacute;ticos y malintencionados en la parte p&uacute;blica. Ciertas palabras y las etiquetas &lt;a>&lt;/a> est&aacute;n prohibidas.
+	'spam:description' => '<MODIF>Intenta luchar contra los env&iacute;os de mensajes autom&aacute;ticos y malintencionados en la parte p&uacute;blica. Ciertas palabras y las etiquetas &lt;a>&lt;/a> est&aacute;n prohibidas.
 
 Lista aqu&iacute; las secuencias prohibidas@_CS_ASTER@ separ&aacute;ndolas por espacios. [[%spam_mots%]]
 @_CS_ASTER@Para especificar una palabra completa, ponla entre par&eacute;ntesis. Para una expresi&oacute;n con espacios, ponla entre comillas.',
@@ -543,13 +544,15 @@ Nota: Para las palabras-clave, un alias de #TITRE_PARENT es #TITRE_GROUPE. El tr
 
 @puce@ Si utilizas SPIP 2.0, aqu&iacute; tienes disponible todo un conjunto de balizas #TITRE_XXX que podr&aacute;n devolver el t&iacute;tulo del objeto \'xxx\', a condici&oacute;n de que el campo \'id_xxx\' est&eacute; presente en la tabla en curso (#ID_XXX utilizable en el bucle en curso).
 
-Por ejemplo, en un bucle sobre (ARTICLES), #TITRE_SECTEUR devolver&aacute; el t&iacute;tulo del sector en el que est&aacute; situado el art&iacute;culo en curso, pues el identificador #ID_SECTEUR (o el campo \'id_secteur\') est&aacute; disponible en ese caso.[[%titres_etendus%]]',
-	'titre_parent:nom' => 'Baliza #TITRE_PARENT',
+Por ejemplo, en un bucle sobre (ARTICLES), #TITRE_SECTEUR devolver&aacute; el t&iacute;tulo del sector en el que est&aacute; situado el art&iacute;culo en curso, pues el identificador #ID_SECTEUR (o el campo \'id_secteur\') est&aacute; disponible en ese caso.
+
+Igualmente est&aacute; soportada la sintaxis <html>#TITRE_XXX{yy}</html>. Ejemplo: <html>#TITRE_ARTICLE{10}</html> devolver&aacute; el t&iacute;tulo del art&iacute;culo #10.[[%titres_etendus%]]',
+	'titre_parent:nom' => 'Balizas #TITRE_PARENT/OBJET',
 	'titre_tests' => 'La Navaja Suiza - P&aacute;gina de pruebas…',
 	'tous' => 'Todos',
 	'toutes_couleurs' => 'Los 36 colores de los estilos css: @_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Bloques multiling&uuml;es: <b><:trad:></b>',
-	'toutmulti:description' => 'Del mismo modo que puedes hacer en los esqueletos, esta herramienta te permite utilizar libremente las cadenas de idioma (de SPIP o de tus esqueletos) en todos los contenidos del sitio (art&iacute;culos, t&iacute;tulos, mensajes, etc.) con ayuda del atajo <code><:cadena:></code>.
+	'toutmulti:description' => '<MODIF>Del mismo modo que puedes hacer en los esqueletos, esta herramienta te permite utilizar libremente las cadenas de idioma (de SPIP o de tus esqueletos) en todos los contenidos del sitio (art&iacute;culos, t&iacute;tulos, mensajes, etc.) con ayuda del atajo <code><:cadena:></code>.
 
 Consulta [aqu&iacute; ->http://www.spip.net/es_article2247.html] la documentaci&oacute;n de SPIP sobre el tema.
 
@@ -613,6 +616,10 @@ _ Ejemplo: <code>article.php3?id_article=123</code>
 
 @puce@ Si utilizas el formato {page} de m&aacute;s arriba o si no se reconoce el objeto solicitado, te ser&aacute; posible elegir {{el script de llamada}} a SPIP. Por omisi&oacute;n, SPIP usa {spip.php}; pero {index.php} (ejemplo de formato: <code>/index.php?article123</code>) o un valor nulo (formato: <code>/?article123</code>) tambi&eacute;n funcionan. Para cualquier otro valor, te ser&aacute; absolutamente necesario crear el fichero correspondiente en la ra&iacute;z de SPIP, a imagen del que ya existe: {index.php}.
 [[%spip_script%]]',
+	'type_urls:description1' => '<MODIF>@puce@ Si utilizas un formato basado en URLs &laquo;propias&raquo; ({propres}, {propres2}, {libres}, {arborescentes} o {propres_qs}), la Navaja Suiza puede:
+<q1>• Asegurar que la URL producida est&eacute; totalmente {{en min&uacute;sculas}}.
+_ • Hacer que se a&ntilde;ada sistem&aacute;ticamente {{la id del objeto}} a su URL (como sufijo o prefijo).
+_ (ejemplos: <code>/Mi-titulo-de-articulo,457</code> o <code>/457-Mi-titulo-de-articulo</code>)</q1>[[%urls_minuscules%]][[->%urls_avec_id%]][[->%urls_avec_id2%]]',
 	'type_urls:nom' => 'Formato de las URLs',
 	'typo_exposants:description' => '{{Textos en franc&eacute;s}}: mejora la presentaci&oacute;n tipogr&aacute;fica de las abreviaturas corrientes, poniendo como super&iacute;ndices los elementos necesarios (as&iacute;, {<acronym>Mme</acronym>} se transforma en {M<sup>me</sup>}) y corrigiendo los errores comunes ({<acronym>2&egrave;me</acronym>} o  {<acronym>2me</acronym>}, por ejemplo, se transforman en {2<sup>e</sup>}, &uacute;nica abreviatura correcta).
 
@@ -635,11 +642,14 @@ Aqu&iacute; puedes escoger escribir como super&iacute;ndices otras abreviaturas 
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'standard',
+	'urls_avec_id' => '<MODIF>Id sistematicamente como sufijo',
+	'urls_avec_id2' => '<MODIF>Id sistem&aacute;ticamente como prefijo',
 	'urls_base_total' => 'Actualmente hay @nb@ URL(s) en la base',
 	'urls_base_vide' => 'La base de datos de URLs est&aacute; vac&iacute;a',
 	'urls_choix_objet' => 'Edici&oacute;n basada en la URL de un objeto espec&iacute;fico:',
 	'urls_edit_erreur' => 'El formato actual de las URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) no permite la edici&oacute;n.',
 	'urls_enregistrer' => 'Grabar esta URL en la base',
+	'urls_minuscules' => 'Letras min&uacute;sculas',
 	'urls_nouvelle' => 'Editar la URL &laquo;propres&raquo; (propia):',
 	'urls_num_objet' => 'N&uacute;mero:',
 	'urls_purger' => 'Vaciar todo',
@@ -650,7 +660,7 @@ Aqu&iacute; puedes escoger escribir como super&iacute;ndices otras abreviaturas 
 	'urls_type_objet' => 'Objeto:',
 	'urls_url_calculee' => 'URL p&uacute;blica &laquo;&nbsp;@type@&nbsp;&raquo;:',
 	'urls_url_objet' => 'URL &laquo;propres&raquo; (propia) grabada:',
-	'urls_valeur_vide' => '<MODIF>(Un valor vac&iacute;o implica la supresi&oacute;n de la URL)',
+	'urls_valeur_vide' => '(Un valor vac&iacute;o implica recalcular la URL)',
 
 	// V
 	'validez_page' => 'Para acceder a las modificaciones:',

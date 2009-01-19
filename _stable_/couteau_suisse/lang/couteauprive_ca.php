@@ -369,6 +369,7 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'label:url_arbo_sep_id' => 'Car&agrave;cter de separaci&oacute; \'titre-id\' en cas de doublon :<br/>(no utilitzar \'/\')',
 	'label:url_glossaire_externe2' => 'Enlla&ccedil; al glossari extern:',
 	'label:urls_arbo_sans_type' => 'Mostrar el tipus d\'objecte SPIP als URLs:',
+	'label:urls_minuscules' => '@_CS_CHOIX@',
 	'label:webmestres' => 'Llista dels webmestres del lloc:',
 	'liens_en_clair:description' => 'Posa a la vostra disposici&oacute; el filtre: \'liens_en_clair\'. El vostre text cont&eacute; probablement enlla&ccedil;os que no s&oacute;n visibles durant la impressi&oacute;. Aquest filtre afegeix entre claud&agrave;tors el dest&iacute; de cada enlla&ccedil; clicable (enlla&ccedil;os externs o correus electr&ograve;nics). Atenci&oacute;: en mode impressi&oacute; (par&agrave;metre \'cs=print\' o \'page=print\' al url de la p&agrave;gina), aquesta funcionalitat s\'aplica autom&agrave;ticament.',
 	'liens_en_clair:nom' => 'Enlla&ccedil;os visibles',
@@ -507,7 +508,7 @@ Aquest sumari pot ser acoblat amb: &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
 	'sommaire:nom' => 'Un sumari autom&agrave;tic',
 	'sommaire_avec' => 'Un text amb sumari:  <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un text sense sumari: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'spam:description' => 'Intenta lluitar contra els enviaments de missatges autom&agrave;tics i malevolents a la part p&uacute;blica. Algunes paraules i les etiquetes &lt;a>&lt;/a> estan prohibides.
+	'spam:description' => '<MODIF>Intenta lluitar contra els enviaments de missatges autom&agrave;tics i malevolents a la part p&uacute;blica. Algunes paraules i les etiquetes &lt;a>&lt;/a> estan prohibides.
 
 Llisteu aqu&iacute; les seq&uuml;&egrave;ncies prohibides @_CS_ASTER@ separant-les per espais. [[%spam_mots%]]
 @_CS_ASTER@Per especificar una paraula sencera, poseu-la entre par&egrave;ntesi. En cas d\'una expressi&oacute; amb espais, poseu-la entre cometes. ',
@@ -537,19 +538,21 @@ _ • {Control de la mem&ograve;ria cau}: opci&oacute; id&egrave;ntica a l\'anteri
 
 	// T
 	'titre' => 'El Ganivet Su&iacute;s',
-	'titre_parent:description' => 'Al si d\'un bucle, &eacute;s corrent voler mostrar el t&iacute;tol del parent de l\'objecte en curs. Tradicionalment, n\'hi hauria prou utilitzant un segon bucle, per&ograve; aquesta nova etiqueta  #TITRE_PARENT alleugerar&agrave; l\'escriptura dels vostres esquelets. El resultat que torna &eacute;s: el t&iacute;tol del grup d\'una paraula clau o el de la secci&oacute; parenta (si existeix) de qualsevol altre objecte (article, secci&oacute;, breu, etc.).
+	'titre_parent:description' => 'Al si d\'un bucle, &eacute;s corrent voler mostrar el t&iacute;tol del parent de l\'objecte en curs. Tradicionalment, n\'hi hauria prou utilitzant un segon bucle, per&ograve; aquesta nova etiqueta #TITRE_PARENT alleugerar&agrave; l\'escriptura dels vostres esquelets. El resultat que torna &eacute;s: el t&iacute;tol del grup d\'una paraula clau o el de la secci&oacute; parenta (si existeix) de qualsevol altre objecte (article, secci&oacute;, breu, etc.).
 
 Anoteu: Per les paraules clau, un &agrave;lies de #TITRE_PARENT &eacute;s #TITRE_GROUPE. El tractament SPIP d\'aquestes noves etiquetes &eacute;s similar al de #TITRE.
 
-@puce@ Si treballeu sota SPIP 2.0, teniu aqu&iacute;, a la vostra disposici&oacute;, tot un conjunt d\'etiquetes #TITRE_XXX que podran donar-vos el t&iacute;tol de l\'objecte \'xxx\', a condici&oacute; que el camp \'id_xxx\' estigui present a la taula en curs (#ID_XXX utilitzable en el bucle en curs).
+@puce@ Si treballeu sota SPIP 2.0, llavors teniu aqu&iacute;, a la vostra disposici&oacute;, tot un conjunt d\'etiquetes #TITRE_XXX que podran donar-vos el t&iacute;tol de l\'objecte \'xxx\', a condici&oacute; que el camp \'id_xxx\' estigui present a la taula en curs (#ID_XXX utilitzable en el bucle en curs).
 
-Per exemple, en un bucle sobre (ARTICLES), #TITRE_SECTEUR donar&agrave; el t&iacute;tol del sector en el que es troba l\'article en curs, ja que l\'identificador #ID_SECTEUR (o el camp \'id_secteur\') est&agrave; disponible en aquest cas.[[%titres_etendus%]]',
-	'titre_parent:nom' => 'Etiqueta #TITRE_PARENT',
+Per exemple, en un bucle sobre (ARTICLES), #TITRE_SECTEUR donar&agrave; el t&iacute;tol del sector en el que est&agrave; situat l\'article en curs, ja que l\'identificador #ID_SECTEUR (o el camp \'id_secteur\') est&agrave; disponible en aquest cas.
+
+La sintaxi <html>#TITRE_XXX{yy}</html> se suporta igualment. Exemple: <html>#TITRE_ARTICLE{10}</html> retornar&agrave; el t&iacute;tol de l\'article #10.[[%titres_etendus%]]',
+	'titre_parent:nom' => 'Etiqueta #TITRE_PARENT/OBJET',
 	'titre_tests' => 'El Ganivet Su&iacute;s - P&agrave;gina de proves…',
 	'tous' => 'Tots',
 	'toutes_couleurs' => 'Els 36 colors dels estils CSS :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Blocs multiling&uuml;es&nbsp;: <b><:trad:></b>',
-	'toutmulti:description' => 'De manera semblant al que ja podeu fer en els vostres esquelets, aquesta eina us permet utilitzar lliurement les cadenes de lleng&uuml;es (d\'SPIP o dels vostres esquelets) en tots els continguts de vostre lloc Web (articles, t&iacute;tols, missatges, etc.) amb l\'ajuda de la drecera <code><:chaine:></code>.
+	'toutmulti:description' => '<MODIF>De manera semblant al que ja podeu fer en els vostres esquelets, aquesta eina us permet utilitzar lliurement les cadenes de lleng&uuml;es (d\'SPIP o dels vostres esquelets) en tots els continguts de vostre lloc Web (articles, t&iacute;tols, missatges, etc.) amb l\'ajuda de la drecera <code><:chaine:></code>.
  
 Consulteu [aqu&iacute; ->http://www.spip.net/ca_article2191.html] la documentation d\'SPIP que fa refer&egrave;ncia a aquest tema.
 
@@ -613,6 +616,10 @@ _ Exemple : <code>article.php3?id_article=123</code>
 
 @puce@ Si utilitzeu el format {page} que hi ha m&eacute;s amunt o si l\'objecte demanat no &eacute;s reconegut, &eacute;s possible llavors escollir {{l\'script de crida}} a SPIP. Per defecte, SPIP escull {spip.php}, per&ograve; {index.php} (exemple de format : <code>/index.php?article123</code>) o un valor buit (format: <code>/?article123</code>) tamb&eacute; funcionen. Per qualsevol altre valor, heu de crear for&ccedil;osament el fitxer corresponent a l\'arrel d\'SPIP, semblant al que ja existeix: {index.php}.
 [[%spip_script%]]',
+	'type_urls:description1' => '<MODIF>@puce@ Si voleu fer servir un format a base d\'URLs &laquo;pr&ograve;pies&raquo;  ({propres}, {propres2}, {libres}, {arborescentes} ou {propres_qs}), el Ganivet Su&iacute;s pot:
+ <q1>• Assegurar-se que l\'URL produ&iuml;da estigui totalment {{en min&uacute;scules}}.
+_ • Provocar l\'afegit sistem&agrave;tic de {{l\'id de l\'objecte}} al seu URL (en sufix o en prefix).
+_ (exemples: <code>/El-meu-t&iacute;tol-d-article,457</code> o <code>/457-El-meu-t&iacute;tol-d-article</code>)</q1>[[%urls_minuscules%]][[->%urls_avec_id%]][[->%urls_avec_id2%]]',
 	'type_urls:nom' => 'Format dels URLs',
 	'typo_exposants:description' => '((Textos francesos)): millora el retorn tipogr&agrave;fic de les abreviacions corrents, exposant els elements necessaris (aix&iacute;, {<acronym>Mme</acronym>} esdev&eacute; {M<sup>me</sup>}) i corregint-ne els errors normals ({<acronym>2&egrave;me</acronym>} o  {<acronym>2me</acronym>}, per exemple, esdevenen {2<sup>e</sup>}, &uacute;nica abreviaci&oacute; correcta).
 
@@ -635,11 +642,14 @@ Podeu escollir aqu&iacute; de posar en exponent algunes dreceres suplement&agrav
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'est&agrave;ndard',
+	'urls_avec_id' => '<MODIF>Id sistem&agrave;tica en sufix ',
+	'urls_avec_id2' => '<MODIF>Id sistem&agrave;tica en prefix',
 	'urls_base_total' => 'Actualment hi ha @nb@ URL(s) a la base',
 	'urls_base_vide' => 'La base dels URLs est&agrave; buida',
 	'urls_choix_objet' => 'Edici&oacute; en la base del URL d\'un objecte espec&iacute;fic:',
 	'urls_edit_erreur' => 'El format actual dels URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) no permet l\'edici&oacute;.',
 	'urls_enregistrer' => 'Enregistrar aquest URL a la base',
+	'urls_minuscules' => 'Lletres min&uacute;scules',
 	'urls_nouvelle' => 'Editar el URL &laquo;propis&raquo;:',
 	'urls_num_objet' => 'N&uacute;mero:',
 	'urls_purger' => 'Buidar-ho tot',
@@ -650,7 +660,7 @@ Podeu escollir aqu&iacute; de posar en exponent algunes dreceres suplement&agrav
 	'urls_type_objet' => 'Objecte:',
 	'urls_url_calculee' => 'URL p&uacute;blica &laquo;&nbsp;@type@&nbsp;&raquo;&nbsp;:',
 	'urls_url_objet' => 'URL &laquo;propis&raquo; enregistrat:',
-	'urls_valeur_vide' => '<MODIF>Un valor buit provoca la supressi&oacute; del URL)',
+	'urls_valeur_vide' => '(Un valor buit provoca que es torni a calcular l\'URL)',
 
 	// V
 	'validez_page' => 'Per accedir a les modificacions:',

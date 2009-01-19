@@ -374,7 +374,7 @@ Ce sommaire peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe en pages et ong
 	'sommaire:nom' => '<MODIF>Un sommaire pour vos articles',
 	'sommaire_avec' => '<MODIF>Un article avec sommaire&nbsp;: <b>@racc@</b>',
 	'sommaire_sans' => '<MODIF>Un article sans sommaire&nbsp;: <b>@racc@</b>',
-	'spam:description' => '<NEW>Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises &lt;a>&lt;/a> sont interdits.
+	'spam:description' => '<MODIF>Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises &lt;a>&lt;/a> sont interdits.
 
 Listez ici les s&eacute;quences interdites@_CS_ASTER@ en les s&eacute;parant par des espaces. [[%spam_mots%]]
 @_CS_ASTER@Pour sp&eacute;cifier un mot entier, mettez-le entre paranth&egrave;ses. Pour une expression avec des espaces, placez-la entre guillemets.',

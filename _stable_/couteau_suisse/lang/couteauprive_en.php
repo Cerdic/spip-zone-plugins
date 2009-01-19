@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'acces_admin' => 'Administrators\' access:',
 	'action_rapide' => 'Rapid action, only if you know what you are doing!',
 	'action_rapide_non' => 'Rapid action, available when this tool is activated:',
+	'admins_seuls' => 'Only administrators',
 	'attente' => 'Waiting...',
 	'auteur_forum:description' => 'Request all authors of public messages to fill in (with at least one letter!) the field "@_CS_FORUM_NOM@" in order to avoid completely anonymous messages.',
 	'auteur_forum:nom' => 'No anonymous forums',
@@ -58,12 +59,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 @puce@ If you tick "yes" below, opening one block will cause all other blocks on the page to close. i.e. only one block is open at a time.[[%bloc_unique%]]',
 	'blocs:nom' => 'Folding Blocks',
-	'boites_privees:description' => '<MODIF>All the boxes described below appear in the editing area.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]]
+	'boites_privees:description' => 'All the boxes described below appear somewhere in the editing area.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Swiss Knife updates}}: a box on this configuration page showing the last changes made to the code of the plugin ([Source->@_CS_RSS_SOURCE@]).
 - {{Articles in SPIP format}}: an extra folding box for your articles showing the source code used by their authors.
 - {{Author stats}}: an extra box on [the authors\' page->./?exec=auteurs] showing the last 10 connected authors and unconfirmed registrations. Only administrators can view this information.
-- {{Clean URLs}}: a box for each objet type (article, section, author, ...) showing the clean URL associated with it and any existing aliases. The tool &laquo;&nbsp;[.->type_urls]&nbsp;&raquo; makes possible a fine adjustment of the site\'s URLs.',
+- {{Clean URLs}}: a box for each objet type (article, section, author, ...) showing the clean URL associated with it and any existing aliases. The tool &laquo;&nbsp;[.->type_urls]&nbsp;&raquo; makes possible a fine adjustment of the site\'s URLs.- {{Order of authors}}: a folding box for articles which have more than one author, allowing you simply to adjust the order in which they are displayed.',
 	'boites_privees:nom' => 'Private boxes',
+	'bp_tri_auteurs' => 'Order of authors',
 	'bp_urls_propres' => 'See clean URLs',
 
 	// C
@@ -190,8 +192,8 @@ This tool may be combined with "[.->sommaire]".',
 
 	// E
 	'effaces' => 'Deleted',
-	'en_travaux:description' => '<MODIF>Makes it possible to display a customised message on the public site during maintenance work.
-[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]]',
+	'en_travaux:description' => 'Makes it possible to display a customised message on the public site and also in the editing area during maintenance work.
+[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]',
 	'en_travaux:nom' => 'Site in maintenance mode',
 	'erreur:bt' => '<span style=\\"color:red;\\">Warning:</span> the typographical bar appears to be an old version (@version@).<br />The Swiss Knife is compatible only with version @mini@ or newer.',
 	'erreur:description' => 'missing id in the tool\'s definition!',
@@ -238,7 +240,11 @@ Thus multi blocks are always displayed in the language requested by the visitor.
 
 	// G
 	'glossaire:aide' => 'A text with no glossary: <b>@_CS_SANS_GLOSSAIRE@</b>',
-	'glossaire:description' => '<MODIF>@puce@ Use one or several groups of keywords to manage an internal glossary. Enter the names of the groups here, separating them by  colons (:). If you leave the box empty (or enter "Glossaire"), it is the "Glossaire" group which will be used.[[%glossaire_groupes%]]@puce@ You can indicate the maximum number of links to create in a text for each word. A null or negative value will mean that all instances of the words will be treated. [[%glossaire_limite% par mot-cl&eacute;]]@puce@ There is a choice of two options for generating the small window which appears on the mouseover. [[%glossaire_js%]]',
+	'glossaire:description' => '@puce@ Use one or several groups of keywords to manage an internal glossary. Enter the names of the groups here, separating them by  colons (:). If you leave the box empty (or enter "Glossaire"), it is the "Glossaire" group which will be used.[[%glossaire_groupes%]]
+
+@puce@ You can indicate the maximum number of links to create in a text for each word. A null or negative value will mean that all instances of the words will be treated. [[%glossaire_limite% par mot-cl&eacute;]]
+
+@puce@ There is a choice of two options for generating the small window which appears on the mouseover. [[%glossaire_js%]]',
 	'glossaire:nom' => 'Internal glossary',
 	'glossaire_css' => 'CSS solution',
 	'glossaire_js' => 'JavaScript solution',
@@ -328,6 +334,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:message_travaux' => 'Your maintenance message:',
 	'label:moderation_admin' => 'Automatically validate messages from:',
 	'label:paragrapher' => 'Always insert paragraphs:',
+	'label:prive_travaux' => 'Access to the editing area for:',
 	'label:puce' => 'Public bullet &laquo;<html>-</html>&raquo;:',
 	'label:quota_cache' => 'Quota value',
 	'label:racc_g1' => 'Beginning and end of "<html>{{bolded text}}</html>":',
@@ -362,6 +369,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:url_arbo_sep_id' => 'Separation character \'title-id\', used in the event of homonyms:<br/>(do not use \'/\')',
 	'label:url_glossaire_externe2' => 'Link to external glossary:',
 	'label:urls_arbo_sans_type' => 'Show the type of SPIP object in URLs:',
+	'label:urls_minuscules' => '@_CS_CHOIX@',
 	'label:webmestres' => 'List of the website managers:',
 	'liens_en_clair:description' => 'Makes the filter: \'liens_en_clair\' available to you. Your text probably contains hyperlinks which are not visible when the page is printed. This filter adds the link code between square brackets for every clickabel link (external links and email addresses). N.B: in printing mode (when using the parameter \'cs=print\' or \'page=print\' in the URL), this treatment is automatically applied.',
 	'liens_en_clair:nom' => 'Visible hyperlinks',
@@ -409,7 +417,7 @@ _ • {Extended}: additionally links such as these are also replaced:  {<html>me@s
 	'outil_desactiver' => 'Deactivate',
 	'outil_desactiver_le' => 'Deactivate this tool',
 	'outil_inactif' => 'Inactive tool',
-	'outil_intro' => '<MODIF>This page lists the functionalties which the plugin makes available to you.<br /><br />By clicking on the names of the tools below, you choose the ones which you can then switch on/off using the central button: active tools will be disabled and <i>vice versa</i>. When you click, the tools description is shown above the list. The tool categories are collapsible to hide the tools they contain. A double-click allows you to directly switch a tool on/off.<br /><br />For first use, it is recommended to activate tools one by one, thus reavealing any incompatibilites with your templates, with SPIP or with other plugins.<br /><br />N.B.: simply loading this page recompiles all the Swiss Knife tools.',
+	'outil_intro' => 'This page lists the functionalities which the plugin makes available to you.<br /><br />By clicking on the names of the tools below, you choose the ones which you can then switch on/off using the central button: active tools will be disabled and <i>vice versa</i>. When you click, the tools description is shown above the list. The tool categories are collapsible to hide the tools they contain. A double-click allows you to directly switch a tool on/off.<br /><br />For first use, it is recommended to activate tools one by one, thus reavealing any incompatibilites with your templates, with SPIP or with other plugins.<br /><br />N.B.: simply loading this page recompiles all the Swiss Knife tools.',
 	'outil_intro_old' => 'This is the old interface.<br /><br />If you have difficulties in using <a href=\\\'./?exec=admin_couteau_suisse\\\'>the new interface</a>, please let us know in the forum of <a href=\\\'http://www.spip-contrib.net/?article2166\\\'>Spip-Contrib</a>.',
 	'outil_nb' => '@pipe@ : @nb@ tool',
 	'outil_nbs' => '@pipe@ : @nb@ tools',
@@ -500,7 +508,7 @@ The summary can be used in conjunction with : {[.->decoupe]}.',
 	'sommaire:nom' => 'An automatic summary',
 	'sommaire_avec' => 'An article with summary: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'An article without summary: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'spam:description' => 'Attempts to fight against the sending of abusive and automatic messages through forms on the public site. Some words and the tags  &lt;a>&lt;/a> are prohibited.
+	'spam:description' => '<MODIF>Attempts to fight against the sending of abusive and automatic messages through forms on the public site. Some words and the tags  &lt;a>&lt;/a> are prohibited.
 
 List here the sequences you wish to prohibit@_CS_ASTER@ separating them with spaces. [[%spam_mots%]]
 @_CS_ASTER@To specify a whole word, place it in brackets. Expressions containing spaces should be placed with inverted commas.',
@@ -524,14 +532,14 @@ _ • {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&eacute;
 
 	// T
 	'titre' => 'The Swiss Knife',
-	'titre_parent:description' => '<NEW>Au sein d\'une boucle, il est courant de vouloir afficher le titre du parent de l\'objet en cours. Traditionnellement, il suffirait d\'utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT all&eacute;gera l\'&eacute;criture de vos squelettes. Le r&eacute;sultat renvoy&eacute; est : le titre du groupe d\'un mot-cl&eacute; ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, br&egrave;ve, etc.).
+	'titre_parent:description' => '<MODIF><NEW>Au sein d\'une boucle, il est courant de vouloir afficher le titre du parent de l\'objet en cours. Traditionnellement, il suffirait d\'utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT all&eacute;gera l\'&eacute;criture de vos squelettes. Le r&eacute;sultat renvoy&eacute; est : le titre du groupe d\'un mot-cl&eacute; ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, br&egrave;ve, etc.).
 
 Notez : Pour les mots-cl&eacute;s, un alias de #TITRE_PARENT est #TITRE_GROUPE. Le traitement SPIP de ces nouvelles balises est similaire &agrave; celui de #TITRE.
 
 @puce@ Si vous &ecirc;tes sous SPIP 2.0, alors vous avez ici &agrave; votre disposition tout un ensemble de balises #TITRE_XXX qui pourront vous donner le titre de l\'objet \'xxx\', &agrave; condition que le champ \'id_xxx\' soit pr&eacute;sent dans la table en cours (#ID_XXX utilisable dans la boucle en cours).
 
 Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du secteur dans lequel est plac&eacute; l\'article en cours, puisque l\'identifiant #ID_SECTEUR (ou le champ \'id_secteur\') est disponible dans ce cas.[[%titres_etendus%]]',
-	'titre_parent:nom' => '#TITRE_PARENT tag',
+	'titre_parent:nom' => '<MODIF>#TITRE_PARENT tag',
 	'titre_tests' => 'The Swiss Knife - Test page',
 	'tous' => 'All',
 	'toutes_couleurs' => 'The 36 colours in CSS styles: @_CS_EXEMPLE_COULEURS@',

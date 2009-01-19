@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'acces_admin' => 'Acceso de administraci&oacute;n :',
 	'action_rapide' => 'Acci&oacute;n r&aacute;pida, unicamente se sabe do que fai!',
 	'action_rapide_non' => 'Acci&oacute;n r&aacute;pida, dispo&ntilde;ible tras a activaci&oacute;n desta utilidade :',
+	'admins_seuls' => 'S&oacute; para administradores/as',
 	'attente' => 'En espera...',
 	'auteur_forum:description' => 'Invite a todos os autores a cubri (cando menos cunha letra!) o campo &laquo;@_CS_FORUM_NOM@&raquo; co fin de evitar as contribuci&oacute;ns totalmente an&oacute;nimas.',
 	'auteur_forum:nom' => 'Non haber&aacute; foros an&oacute;nimos',
@@ -194,8 +195,8 @@ _ Esta utilidade pode ser emparellada con &laquo;&nbsp;[.->sommaire]&nbsp;&raquo
 
 	// E
 	'effaces' => 'Borrados',
-	'en_travaux:description' => '<MODIF>Permite mostrar unha mensaxe personalizable durante unha fase de mantemento sobre todo o web p&uacute;blico.
-[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]]',
+	'en_travaux:description' => 'Permite mostrar unha mensaxe personalizable durante unha fase de mantemento sobre todo o web p&uacute;blico, e mesmo sobre a parte privada.
+[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]',
 	'en_travaux:nom' => 'Web en obras',
 	'erreur:bt' => '<span style=\\"color:red;\\">Aviso:</span> a barra tipogr&aacute;fica (version @version@) parece antiga.<br />A Navalla Su&iacute;za &eacute;  compatible cunha versi&oacute;n superior ou igual a @mini@.',
 	'erreur:description' => 'Falta o id na definici&oacute;n da ferramenta!',
@@ -335,6 +336,7 @@ Atenci&oacute;n, esta ferramenta, precisa para funcionar do m&oacute;dulo {jQuer
 	'label:message_travaux' => 'A s&uacute;a mensaxe de mantemento :',
 	'label:moderation_admin' => 'Validar automaticamente as mensaxes desde: ',
 	'label:paragrapher' => 'Paragrafar sempre :',
+	'label:prive_travaux' => 'Accesibilidade do espazo privado para:',
 	'label:puce' => 'Vi&ntilde;eta p&uacute;blica &laquo;<html>-</html>&raquo; :',
 	'label:quota_cache' => 'Valor de quota :',
 	'label:racc_g1' => 'Entrada e sa&iacute;da da presentaci&oacute;n en &laquo;<html>{{negra}}</html>&raquo; :',
@@ -369,6 +371,7 @@ Atenci&oacute;n, esta ferramenta, precisa para funcionar do m&oacute;dulo {jQuer
 	'label:url_arbo_sep_id' => 'Car&aacute;cter de separaci&oacute;n \'titulo-id\' para o caso de repetici&oacute;n (doublon) :<br/>(non empregue \'/\')',
 	'label:url_glossaire_externe2' => 'Ligaz&oacute;n sobre o glosario externo :',
 	'label:urls_arbo_sans_type' => 'Mostrar o tipo de obxecto SPIP nos URL :',
+	'label:urls_minuscules' => '@_CS_CHOIX@',
 	'label:webmestres' => 'Lista de webm&aacute;sters do web:',
 	'liens_en_clair:description' => 'Pon &aacute; s&uacute;a disposici&oacute;n o filtro : \'liens_en_clair\'. O seu texto cont&eacute;n probablemente ligaz&oacute;ns de hipertexto que non son visibles tras unha impresi&oacute;n. Este filtro engade entre corchetes o destino de cada ligaz&oacute;n activa (ligaz&oacute;ns externas ou correos). Atenci&oacute;n : en modo de impresi&oacute;n (par&aacute;metro \'cs=print\' ou \'page=print\' no url da p&aacute;xina), esta funcionalidade apl&iacute;case automaticamente.',
 	'liens_en_clair:nom' => 'Ligaz&oacute;ns en claro',
@@ -507,7 +510,7 @@ Este sumario pode ser aparellado con : &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
 	'sommaire:nom' => 'Un sumario autom&aacute;tico',
 	'sommaire_avec' => 'Un artigo con sumario&nbsp;: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un artigo sen sumario&nbsp;: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'spam:description' => 'Tenta loitar contra os env&iacute;os de mensaxes autom&aacute;ticas e impertinentes na parte p&uacute;blica. Algunhas palabras e as balizas &lt;a>&lt;/a> est&aacute;n prohibidas.
+	'spam:description' => '<MODIF>Tenta loitar contra os env&iacute;os de mensaxes autom&aacute;ticas e impertinentes na parte p&uacute;blica. Algunhas palabras e as balizas &lt;a>&lt;/a> est&aacute;n prohibidas.
 
 Liste aqu&iacute; as secuencias prohibidas @_CS_ASTER@ separ&aacute;ndoas por espazos. [[%spam_mots%]]
 @_CS_ASTER@Para especificar unha palabra enteira, p&oacute;&ntilde;aa entre par&eacute;nteses. Para unha expresi&oacute;n con espazos, sit&uacute;ea entre comas.',
@@ -537,19 +540,20 @@ _ • {Control da cach&eacute;} : opci&oacute;n id&eacute;ntica &aacute; precedent
 
 	// T
 	'titre' => 'A Navalla Su&iacute;za',
-	'titre_parent:description' => 'No interior dun bucle, &eacute; frecuente querer mostrar o t&iacute;tulo do pai do obxecto en curso. Tradicionalmente, cumpr&iacute;a utilizar un segundo bucle, mais esta nova baliza #TITRE_PARENT alixeirar&aacute; a escrita dos seus esqueletes. O resultado devolto &eacute; este : o t&iacute;tulo dun grupo de palabras clave ou o da secci&oacute;n pai (de existir) de calquera outro obxecto (artigo, secci&oacute;n, breve, breve, etc.).
+	'titre_parent:description' => 'No interior dun bucle, &eacute; frecuente querer mostrar o t&iacute;tulo do pai do obxecto en curso. Tradicionalmente, cumpr&iacute;a utilizar un segundo bucle, mais esta nova baliza #TITRE_PARENT alixeirar&aacute; a escrita dos seus esqueletes. O resultado devolto &eacute; este : o t&iacute;tulo dun grupo de palabras clave ou o da secci&oacute;n pai (de existir) de calquera outro obxecto (artigo, secci&oacute;n, breve, etc.).
 
 Note que : para as palabras clave, un alias de #TITRE_PARENT &eacute;  #TITRE_GROUPE. O tratamento de SPIP destas novas balizas &eacute; semellante a aquel de #TITRE.
 
-@puce@ De estar con SPIP 2.0, tam&eacute;n ten &aacute; s&uacute;a disposici&oacute;n todo un conxunto de balizas #TITRE_XXX que poder&aacute;n darvos o t&iacute;tulo do obxecto \'xxx\', coa condici&oacute;n de que o campo \'id_xxx\' estea presente na t&aacute;boa en curso (#ID_XXX utilizable no bucle en curso).
+@puce@ De estar con SPIP 2.0, tam&eacute;n ten &aacute; s&uacute;a disposici&oacute;n todo un conxunto de balizas #TITRE_XXX que poder&aacute;n darlle o t&iacute;tulo do obxecto \'xxx\', coa condici&oacute;n de que o campo \'id_xxx\' estea presente na t&aacute;boa en curso (#ID_XXX utilizable no bucle en curso).
 
-Por exemplo, nun bucle sobre  (ARTICLES), #TITRE_SECTEUR devolver&aacute; o t&iacute;tulo da secci&oacute;n na que estea situado o artigo en curso, xa que o identificador #ID_SECTEUR (de a&iacute; o campo \'id_secteur\') est&aacute; dispo&ntilde;ible neste caso.[[%titres_etendus%]]',
+Por exemplo, nun bucle sobre  (ARTICLES), #TITRE_SECTEUR devolver&aacute; o t&iacute;tulo da secci&oacute;n na que estea situado o artigo en curso, xa que o identificador #ID_SECTEUR (de a&iacute; o campo \'id_secteur\') est&aacute; dispo&ntilde;ible neste caso.[[%titres_etendus%]]
+A sintaxe <html>#TITRE_XXX{yy}</html> &eacute; igualmente aceptada. Exemplo : <html>#TITRE_ARTICLE{10}</html> reenviar&aacute; ao t&iacute;tulo do artigo #10.[[%titres_etendus%]]',
 	'titre_parent:nom' => 'Baliza #TITRE_PARENT',
 	'titre_tests' => 'A Navalla Su&iacute;za - P&aacute;xina de tests…',
 	'tous' => 'Todos',
 	'toutes_couleurs' => 'As 36 cores dos estilos css :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Bloques multiling&uuml;es&nbsp;: <b><:trad:></b>',
-	'toutmulti:description' => 'Para instar isto pode facelo xa desde os esqueletos, a utilidade permite usar librementemente nos contidos as cadeas de linguas (bloques multi) de SPIP ou dos seus esqueletos: nos contidos do seu web (artigos, t&iacute;tulos, mensaxes, etc.) coa axuda co atallo <code><:chaine:></code>.
+	'toutmulti:description' => '<MODIF>Para instar isto pode facelo xa desde os esqueletos, a utilidade permite usar librementemente nos contidos as cadeas de linguas (bloques multi) de SPIP ou dos seus esqueletos: nos contidos do seu web (artigos, t&iacute;tulos, mensaxes, etc.) coa axuda co atallo <code><:chaine:></code>.
 
 Consulte [aqui->http://www.spip.net/fr_article2128.html] a documentaci&oacute;n de SPIP sobre este asunto.
 
@@ -612,6 +616,10 @@ _ Exemplo : <code>article.php3?id_article=123</code></radio_type_urls3>
 
 @puce@ Se vostede emprega o formato {p&aacute;xina} seguinte ou se o obxecto demandado non &eacute; reco&ntilde;ecido, &eacute; posible escoller {{o script de chamada }} a SPIP. De modo predeterminado, SPIP escolle {spip.php}, mais {index.php} (exemplo de formato: <code>/index.php?article123</code>) ou un valor baleiro (formato : <code>/?article123</code>) funcionan tam&eacute;n. Para calquera outro valor, c&oacute;mpre crear necesariamente o ficheiro correspondente na raiz de SPIP, a imaxe daquel que xa existe: {index.php}.
 [[%spip_script%]]',
+	'type_urls:description1' => '<MODIF>@puce@ De utilizar un formato con base en URL &laquo;propres&raquo;  ({propres}, {propres2}, {libres}, {arborescentes} ou {propres_qs}), a Navalla Su&iacute;za pode :
+<q1>• Asegurarse que o URL producido sexa totalmente en {{en min&uacute;sculas}}.
+_ • Provocar o engadido sistem&aacute;tico do{{id do obxecto}} ao seu URL (en sufixo ou en prefixo).
+_(exemplos : <code>/Meu-titulo-de-artigo,457</code> ou <code>/457-Meu-titulo-de-artigo</code>)</q1>[[%urls_minuscules%]][[->%urls_avec_id%]][[->%urls_avec_id2%]]',
 	'type_urls:nom' => 'Formato das URL',
 	'typo_exposants:description' => 'Textos franceses : mellora o rendemento tipogr&aacute;fico das abreviaci&oacute;ns correntes, metendo en super&iacute;ndice os elementos necesarios (as&iacute;, {<acronym>Mme</acronym>} produce {M<sup>me</sup>}) e corrixindo os erros correntes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, por exemplo, produce {2<sup>e</sup>}, s&oacute; abreviatura correcta).
 
@@ -633,11 +641,14 @@ Escolla aqu&iacute; se quere po&ntilde;er en super&iacute;ndice certos atallos s
 	'url_propres2' => 'propias2@_CS_ASTER@',
 	'url_propres_qs' => 'propias_qs',
 	'url_standard' => 'est&aacute;ndar',
+	'urls_avec_id' => '<MODIF>Id sistem&aacute;tico en sufixo',
+	'urls_avec_id2' => '<MODIF>Id sistem&aacute;tico en prefixo',
 	'urls_base_total' => 'Hai actualmente @nb@ URL na base',
 	'urls_base_vide' => 'A base dos URL est&aacute; baleira',
 	'urls_choix_objet' => 'Edici&oacute;n con base no URL dun obxecto espec&iacute;fico&nbsp;:',
 	'urls_edit_erreur' => 'O formato actual dos URL (&laquo;&nbsp;@type@&nbsp;&raquo;) non permite a edici&oacute;n.',
 	'urls_enregistrer' => 'Rexistrar esta URL na base',
+	'urls_minuscules' => 'Letras min&uacute;sculas',
 	'urls_nouvelle' => 'Editar o URL &laquo;&nbsp;propias&nbsp;&raquo;&nbsp;:',
 	'urls_num_objet' => 'N&uacute;mero&nbsp;:',
 	'urls_purger' => 'Baleirar todo',
@@ -648,7 +659,7 @@ Escolla aqu&iacute; se quere po&ntilde;er en super&iacute;ndice certos atallos s
 	'urls_type_objet' => 'Obxecto&nbsp;:',
 	'urls_url_calculee' => 'URL p&uacute;blico &laquo;&nbsp;@type@&nbsp;&raquo;&nbsp;:',
 	'urls_url_objet' => 'URL &laquo;&nbsp;propias&nbsp;&raquo; rexistrado&nbsp;:',
-	'urls_valeur_vide' => '<MODIF>(Un valor baleiro provoca a supresi&oacute;n do URL)',
+	'urls_valeur_vide' => '(Un valor baleiro provoca o rec&aacute;lculo do URL)',
 
 	// V
 	'validez_page' => 'Para acceder &aacute;s modificaci&oacute;ns :',

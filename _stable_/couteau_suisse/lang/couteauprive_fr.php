@@ -8,14 +8,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// 2
 	'2pts_non' => '&nbsp;:&nbsp;non',
 	'2pts_oui' => '&nbsp;:&nbsp;oui',
-	'label:enveloppe_mails' => 'Petite enveloppe devant les mails :',
 
 	// S
-	'SPIP_liens:description1' => '@puce@ SPIP a pr&eacute;vu un style CSS pour les liens &laquo;~mailto:~&raquo; : une petite enveloppe devrait appara&icirc;tre devant chaque lien li&eacute; &agrave; un courriel; mais puisque tous les navigateurs ne peuvent pas l\'afficher (notamment IE6, IE7 et SAF3), &agrave; vous de voir s\'il faut conserver cet ajout.
-_ Lien de test : [->test@test.com] (rechargez la page enti&egrave;rement).[[%enveloppe_mails%]]',
 	'SPIP_liens:description' => '@puce@ Tous les liens du site s\'ouvrent par d&eacute;faut dans la fen&ecirc;tre de navigation en cours. Mais il peut &ecirc;tre utile d\'ouvrir les liens externes au site dans une nouvelle fen&ecirc;tre ext&eacute;rieure -- cela revient &agrave; ajouter {target=&quot;_blank&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'&eacute;tendre au maximum cette fonctionnalit&eacute;.[[%radio_target_blank3%]]
 
 @puce@ SPIP permet de relier des mots &agrave; leur d&eacute;finition gr&acirc;ce au raccourci typographique <code>[?mot]</code>. Par d&eacute;faut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l&rsquo;encyclop&eacute;die libre wikipedia.org. &Agrave; vous de choisir l\'adresse &agrave; utiliser. <br />Lien de test : [?SPIP][[%url_glossaire_externe2%]]',
+	'SPIP_liens:description1' => '@puce@ SPIP a pr&eacute;vu un style CSS pour les liens &laquo;~mailto:~&raquo; : une petite enveloppe devrait appara&icirc;tre devant chaque lien li&eacute; &agrave; un courriel; mais puisque tous les navigateurs ne peuvent pas l\'afficher (notamment IE6, IE7 et SAF3), &agrave; vous de voir s\'il faut conserver cet ajout.
+_ Lien de test : [->test@test.com] (rechargez la page enti&egrave;rement).[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP et les liens&hellip; externes',
 
 	// A
@@ -315,6 +314,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:dossier_squelettes' => 'Dossier(s) &agrave; utiliser :',
 	'label:duree_cache' => 'Dur&eacute;e du cache local :',
 	'label:duree_cache_mutu' => 'Dur&eacute;e du cache en mutualisation :',
+	'label:enveloppe_mails' => 'Petite enveloppe devant les mails :',
 	'label:expo_bofbof' => 'Mise en exposants pour : <html>St(e)(s), Bx, Bd(s) et Fb(s)</html>',
 	'label:forum_lgrmaxi' => 'Valeur (en caract&egrave;res) :',
 	'label:glossaire_groupes' => 'Groupe(s) utilis&eacute;(s) :',
@@ -371,6 +371,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:url_arbo_sep_id' => 'Caract&egrave;re de s&eacute;paration \'titre-id\' en cas de doublon :<br/>(ne pas utiliser \'/\')',
 	'label:url_glossaire_externe2' => 'Lien vers le glossaire externe :',
 	'label:urls_arbo_sans_type' => 'Afficher le type d\'objet SPIP dans les URLs :',
+	'label:urls_avec_id' => 'Un id syst&eacute;matique, mais...',
 	'label:urls_minuscules' => '@_CS_CHOIX@',
 	'label:webmestres' => 'Liste des webmestres du site :',
 	'liens_en_clair:description' => 'Met &agrave; votre disposition le filtre : \'liens_en_clair\'. Votre texte contient probablement des liens hypertexte qui ne sont pas visibles lors d\'une impression. Ce filtre ajoute entre crochets la destination de chaque lien cliquable (liens externes ou mails). Attention : en mode impression (parametre \'cs=print\' ou \'page=print\' dans l\'url de la page), cette fonctionnalit&eacute; est appliqu&eacute;e automatiquement.',
@@ -646,6 +647,7 @@ Choisissez ici de mettre en exposant certains raccourcis suppl&eacute;mentaires,
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'standard',
+	'urls_3_chiffres' => 'Imposer un minimum de 3 chiffres',
 	'urls_avec_id' => 'Le placer en suffixe',
 	'urls_avec_id2' => 'Le placer en pr&eacute;fixe',
 	'urls_base_total' => 'Il y a actuellement @nb@ URL(s) en base',
@@ -653,6 +655,7 @@ Choisissez ici de mettre en exposant certains raccourcis suppl&eacute;mentaires,
 	'urls_choix_objet' => '&Eacute;dition en base de l\'URL d\'un objet sp&eacute;cifique&nbsp;:',
 	'urls_edit_erreur' => 'Le format actuel des URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) ne permet pas d\'&eacute;dition.',
 	'urls_enregistrer' => 'Enregistrer cette URL en base',
+	'urls_id_sauf_rubriques' => 'Exclure les rubriques',
 	'urls_minuscules' => 'Lettres minuscules',
 	'urls_nouvelle' => '&Eacute;diter l\'URL &laquo;&nbsp;propres&nbsp;&raquo;&nbsp;:',
 	'urls_num_objet' => 'Num&eacute;ro&nbsp;:',
@@ -665,9 +668,6 @@ Choisissez ici de mettre en exposant certains raccourcis suppl&eacute;mentaires,
 	'urls_url_calculee' => 'URL publique &laquo;&nbsp;@type@&nbsp;&raquo;&nbsp;:',
 	'urls_url_objet' => 'URL &laquo;&nbsp;propres&nbsp;&raquo; enregistr&eacute;e&nbsp;:',
 	'urls_valeur_vide' => '(Une valeur vide entraine le recalcul de l\'URL)',
-	'urls_3_chiffres' => 'Imposer un minimum de 3 chiffres',
-	'urls_id_sauf_rubriques' => 'Exclure les rubriques',
-	'label:urls_avec_id' => 'Un id syst&eacute;matique, mais...',
 
 	// V
 	'validez_page' => 'Pour acc&eacute;der aux modifications :',
