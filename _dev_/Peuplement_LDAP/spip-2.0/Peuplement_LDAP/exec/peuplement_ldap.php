@@ -7,12 +7,16 @@ include_spip('inc/peuplement_ldap_common');
 include_spip('inc/auth_ldap');
 
 function exec_peuplement_ldap_dist(){
+	// TODO: Gerer la securite. On n'affiche que pour les admins.
+	 $commencer_page = charger_fonction('commencer_page','inc');
+     echo $commencer_page(_T('peuplementldap:titre_page'));
+	
 	//global $couleur_claire;
 	global $connect_statut;
 	global $couleur_claire;
 	global $spip_lang_right;
         // Titre de la page
-        gros_titre(_T('peuplementldap:titre_page'),'',false);
+        echo gros_titre(_T('peuplementldap:titre_page'),'',false);
         if (_request('peuplement_ldap_etape') == NULL || _request('peuplement_ldap_etape') == 1){
         	genere_etape_1();
         }
@@ -50,6 +54,8 @@ function exec_peuplement_ldap_dist(){
         		genere_etape_3($compte_rendu);
         	}
         }
+		echo fin_gauche();
+		echo fin_page();
 }
 
 ?>

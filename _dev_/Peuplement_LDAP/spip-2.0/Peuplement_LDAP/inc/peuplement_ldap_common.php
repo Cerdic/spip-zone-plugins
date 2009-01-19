@@ -7,19 +7,16 @@
 function genere_etape_1(){
 	global $couleur_claire;
 	// Cadre d'information sur la partie gauche
-	debut_gauche("",true); // Partie gauche de la page
-	debut_boite_info(true);// Cadre d'information concernant le plugin
+	echo debut_gauche("",true); // Partie gauche de la page
+	echo debut_boite_info(true);// Cadre d'information concernant le plugin
 	echo propre(_T('peuplementldap:info_etape_1'));
-	fin_boite_info(true);
-	fin_gauche(true);
+	echo fin_boite_info(true);
         
 	// Formulaire sur la partie centrale
-	debut_droite('',true);
+	echo debut_droite('',true);
 	$icone = "../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_icon'];
-	debut_cadre_relief('',true);
-	echo "<br />";
-	//echo generer_url_post_ecrire("peuplement_ldap");
-	//bandeau_titre_boite2(_T('peuplementldap:titre_form_etape_1'), $icone, $couleur_claire, "black");	
+	echo debut_cadre_relief($icone,true,'',_T('peuplementldap:titre_form_etape_1'));
+  	echo "<form action=\"".generer_url_ecrire("peuplement_ldap")."\" method=\"post\" />";
 	echo "<input type='text' class='formo'  name='peuplement_ldap_filtre' value='" .$GLOBALS['peuplement_ldap_filtre_defaut']. "' />";
 	echo "<input type='hidden' name='peuplement_ldap_etape' value='2' />";
 	echo "<br />";
@@ -27,7 +24,7 @@ function genere_etape_1(){
 	echo "<input type='submit' value='"._T('peuplementldap:titre_btn_valider')."' class='fondo' name='peuplement_ldap_btnvalider' />";
 	echo "</div>";
 	echo "</form>";
-	fin_cadre_relief(true);
+	echo fin_cadre_relief(true);
 	echo "<br />";
 	echo debut_boite_alerte();
 	echo "<center>";
@@ -40,33 +37,28 @@ function genere_etape_1(){
 function genere_etape_2($entreesLdap){
 	global $couleur_claire;
 	// Cadre d'information sur la partie gauche
-	debut_gauche();// Partie gauche de la page
-	debut_boite_info();// Cadre d'information concernant le plugin
+	echo debut_gauche("",true);// Partie gauche de la page
+	echo debut_boite_info(true);// Cadre d'information concernant le plugin
 	echo propre(_T('peuplementldap:info_etape_2'));
-	fin_boite_info();	
+	echo fin_boite_info(true);	
 	// Formulaire sur la partie centrale
-	debut_droite();
+	echo debut_droite("",true);
 	$icone = "../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_icon'];
-	debut_cadre_relief();
+	echo debut_cadre_relief(true);
 	echo "<br />";
-	echo generer_url_post_ecrire("peuplement_ldap");
 	echo "<input type='hidden' name='peuplement_ldap_etape' value='3' />";
-	echo "<input type='hidden' name='peuplement_ldap_filtre' value='"._request('peuplement_ldap_filtre')."' />";
-	bandeau_titre_boite2(_T('peuplementldap:titre_form_etape_2'), $icone, $couleur_claire, "black");
-	
+	echo "<input type='hidden' name='peuplement_ldap_filtre' value='"._request('peuplement_ldap_filtre')."' />";	
 	// Affichage de la liste des entrees issues de l'annuaire LDAP
-	$table='';
 	echo "<div style='text-align:right'><b>".$entreesLdap['count']."</b>"._T('peuplementldap:nombre_entrees')."</div>";
+	echo "<table>";
 	for ($i=0;$i<count($entreesLdap)-1;$i++){
-		$table[$i][0]="<input type='checkbox' name='ajouter_entree_".$i."' value='".$entreesLdap[$i]["dn"]."#".$entreesLdap[$i]["mail"][0]."#".$entreesLdap[$i]["cn"][0]."'/>";
-        $table[$i][1]=$entreesLdap[$i]["cn"][0];
-    	$table[$i][2]=$entreesLdap[$i]["mail"][0];
+		echo "<tr>";
+		echo "<td><input type='checkbox' name='ajouter_entree_".$i."' value='".$entreesLdap[$i]["dn"]."#".$entreesLdap[$i]["mail"][0]."#".$entreesLdap[$i]["cn"][0]."'/></td>";
+        echo "<td>".$entreesLdap[$i]["cn"][0]."</td>";
+    	echo "<td>".$entreesLdap[$i]["mail"][0]."</td>";
+		echo "</tr>";
 	}
-	echo afficher_liste_debut_tableau();
-	$largeurs = array('','','');
-	$styles = array('arial11', 'arial1', 'arial1','arial1');
-	echo afficher_liste($largeurs, $table, $styles);
-	echo afficher_liste_fin_tableau();
+	echo "</table>";
 	
 	echo "<br />";
 	echo "<div style='text-align:right'>";
@@ -76,7 +68,7 @@ function genere_etape_2($entreesLdap){
 	
 	echo "</div>";
 	echo "</form>";
-	fin_cadre_relief();	
+	echo fin_cadre_relief(true);	
 }
 
 function genere_etape_3($compte_rendu){
@@ -106,8 +98,10 @@ function genere_etape_3($compte_rendu){
 
 function recherche_ldap($filtre){
 	$resultat="";
-	$peuplementldap_cnx = spip_connect_ldap();
-	if (!$peuplementldap_cnx){ // Echec de la connexion à l'annuaire LDAP
+	$ldap = spip_connect_ldap();
+    $ldap_link = $ldap['link'];
+    $ldap_base = $ldap['base'];
+	if (!$ldap_link){ // Echec de la connexion à l'annuaire LDAP
 		echo _T('avis_connexion_ldap_echec_1');
 		echo "<div style='text-align:$spip_lang_right'>";
 		echo "<input type='submit' value='Valider' class='fondo' name='peuplement_ldap_btnvalider' />";
@@ -115,8 +109,8 @@ function recherche_ldap($filtre){
 		return false;
 	}
 	else{
-		$search=@ldap_search($peuplementldap_cnx, $GLOBALS["ldap_base"], $filtre, array("dn","cn","mail"));
-		return @ldap_get_entries($peuplementldap_cnx,$search);
+		$search=@ldap_search($ldap_link, $GLOBALS["ldap_base"], $filtre, array("dn","cn","mail"));
+		return @ldap_get_entries($ldap_link,$search);
 	}	
 }
 
