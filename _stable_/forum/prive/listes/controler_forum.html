@@ -1,4 +1,4 @@
-#SET{self,#SELF|parametre_url{debut_forum|email_auteur|ip|id_auteur|auteur,''}}
+#SET{self,#SELF|parametre_url{id_forum|email_auteur|ip|id_auteur|auteur|debut_id_forum,''}}
 <BOUCLE_repart(ARTICLES){id_article}><a class='annule_filtre' href='[(#GET{self}|parametre_url{id_article,''})]' title="<:forum:tout_voir|attribut_html:>">[(#CHEMIN{img_pack/annuler-recherche.png}|tag_img|inserer_attribut{alt,<:forum:tout_voir:>})]</a>
 <:texte_messages_publics:><h1><a href='[(#URL_ARTICLE|ancre_url{forum#ID_FORUM})]'>#TITRE</a></h1>
 </BOUCLE_repart>
@@ -47,8 +47,8 @@
 
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items forums'>
-<BOUCLE_forum(FORUMS){id_forum?}{id_auteur?}{id_article?}{auteur?}{email_auteur?}{ip?}{tri id_forum,#ARRAY{id_forum,-1,titre,1}}{pagination 10}{statut?}{statut LIKE #GET{prive}}{statut !LIKE #GET{public}}{texte LIKE #GET{vide}}{recherche?}>
-<li class="item statut_#STATUT[ (#COMPTEUR_BOUCLE|alterner{'','odd'})]" id='forum#ID_FORUM'>
+<BOUCLE_forum(FORUMS){id_forum?}{id_auteur?}{id_article?}{auteur?}{email_auteur?}{ip?}{!par id_forum}{pagination 10}{statut?}{statut LIKE #GET{prive}}{statut !LIKE #GET{public}}{texte LIKE #GET{vide}}{recherche?}>
+<li class="item forum statut_#STATUT[ (#COMPTEUR_BOUCLE|alterner{'','odd'})]" id='forum#ID_FORUM'>
 [(#INCLURE{fond=prive/modeles/forum}{id_forum}{self})]
 </li>
 </BOUCLE_forum>

@@ -46,6 +46,9 @@
 .source .actions {font-weight:normal;}
 .annule_filtre {float:#GET{right};}
 
+
+/* Habillage des forums en liste pour moderation
+---------------------------------------------- */
 ul.forums li.item {padding:0.8em 0;margin-bottom:15px;}
 ul.forums li.item .texte p {padding:0.8em 30px;margin:0px}
 
@@ -76,3 +79,45 @@ ul.forums >li.item:hover .actions.moderer > span  {visibility:visible;}
 
 ul.forums li .actions .bruler {color:#af976d;}
 ul.forums li .actions .supprimer {color:#cf4d4d;}
+
+
+
+/* Habillage des forums en thread pour participation
+---------------------------------------------- */
+.repondre { clear: both; margin-top: 2.50em; margin-right: 1em; text-align: right; font-weight: bold; }
+
+/* Habillage des forums */
+ul.forum { display: block; clear: both; margin: 0; padding: 0; font-size:11px; }
+ul.forum, ul.forum ul { list-style: none; }
+.forum-fil { margin-top: 1.50em; }
+.forum-fil ul { display: block; margin: 0; padding: 0; margin-left: 1em; }
+.forum-chapo .forum-titre, .forum-chapo .forum-titre a { display: block; margin: 0; padding: 0; font-weight: bold; color: #333; }
+.forum-texte { margin: 0; padding: 0.50em 1em; color: #333; }
+.forum-texte .hyperlien {}
+.forum-texte .repondre { margin: 0; padding: 0.10em 0; text-align: right; }
+
+/* Boite d'un forum : eclaircissement progressif des bords */
+#SET{border,#GET{foncee}}
+ul .forum-message { background:#fff; border: 1px solid #GET{border}; margin: 0; padding: 0; margin-bottom: 1em; }
+#SET{border,##GET{border}|couleur_eclaircir}
+ul ul .forum-message { border: 1px solid #GET{border}; }
+#SET{border,##GET{border}|couleur_eclaircir}
+ul ul ul .forum-message { border: 1px solid #GET{border}; }
+#SET{border,##GET{border}|couleur_eclaircir}
+ul ul ul ul .forum-message { border: 1px solid #GET{border}; }
+#SET{border,##GET{border}|couleur_eclaircir}
+ul ul ul ul ul .forum-message { border: 1px solid #GET{border}; }
+#SET{border,##GET{border}|couleur_eclaircir}
+ul ul ul ul ul ul .forum-message { border: 1px dotted #GET{border}; }
+
+/* Boite de titre d'un forum : mise en couleur selon la profondeur du forum */
+#SET{fond,##GET{claire}|couleur_eclaircir}
+ul .forum-chapo { border: 0; border-bottom: 1px dotted #B8B8B8; margin: 0; padding: 3px 6px 2px 6px; background: #GET{fond}; }
+#SET{fond,##GET{fond}|couleur_eclaircir}
+ul ul .forum-chapo { background: #GET{fond}; }
+#SET{fond,##GET{fond}|couleur_eclaircir}
+ul ul ul .forum-chapo { background: #GET{fond}; }
+#SET{fond,##GET{fond}|couleur_eclaircir}
+ul ul ul ul .forum-chapo { background: #GET{fond}; border-bottom: 1px dotted #E0E0E0; }
+#SET{fond,##GET{fond}|couleur_eclaircir}
+ul ul ul ul ul .forum-chapo { background: #GET{fond}; }

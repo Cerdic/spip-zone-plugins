@@ -17,11 +17,11 @@ function exec_controle_forum_dist()
 	} 
 	else 
 	{
-		exec_controle_forum_args(_request('type'),$_GET,'prive/listes/controler_forum');
+		exec_controle_forum_args(_request('type'),$_GET,'prive/controler_forum');
 	}
 }
 
-function exec_controle_forum_args($type,$contexte=array(),$fond = 'prive/listes/controler_forum'){
+function exec_controle_forum_args($type,$contexte=array(),$fond = 'prive/controler_forum'){
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('titre_page_forum_suivi'), "forum", "forum-controle");
