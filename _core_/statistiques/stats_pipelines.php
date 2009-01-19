@@ -60,6 +60,51 @@ function stats_affiche_milieu($flux){
 }
 
 
+// les boutons d'administration : ajouter les popularites et visites
+function stats_formulaire_admin($flux) {
+	$objet = $flux['args']['contexte']['objet'];
+	$id_objet = $flux['args']['contexte']['id_objet'];
+	if ($objet && $id_objet) {
+		if ($l = admin_stats($objet, $id_objet, $GLOBALS['var_preview'])) {
+			$btn = recuperer_fond('prive/bouton/statistiques', array(
+				'visites' => $l[0],
+				'popularite' => $l[1],
+				'statistiques' => $l[2],
+			));
+			$flux['data'] = preg_replace('%(<!--extra-->)%is', $btn.'$1', $flux['data']);				
+		}
+	}
+	return $flux;
+}
+
+// calculer les visites et popularite d'un objet/id_objet
+// (uniquement valable pour les articles) ...
+// http://doc.spip.org/@admin_stats
+function admin_stats($objet, $id_objet, $var_preview)
+{
+	if ($GLOBALS['meta']["activer_statistiques"] != "non" 
+	AND $objet = 'article'
+	AND !$var_preview
+	AND autoriser('voirstats')
+	) {
+		$row = sql_fetsel("visites, popularite", "spip_articles", "id_article=$id_objet AND statut='publie'");
+
+		if ($row) {
+			return array(intval($row['visites']),
+			       ceil($row['popularite']),
+			       str_replace('&amp;', '&', generer_url_ecrire_statistiques($id_objet)));
+		}
+	}
+	return false;
+}
+
+// http://doc.spip.org/@generer_url_ecrire_statistiques
+function generer_url_ecrire_statistiques($id_article) {
+	return generer_url_ecrire('statistiques_visites', "id_article=$id_article");
+}
+
+
+
 // les taches crons
 function stats_taches_generales_cron($taches_generales){
 

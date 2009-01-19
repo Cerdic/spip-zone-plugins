@@ -148,11 +148,11 @@ function exec_statistiques_repartition_dist()
 	$critere = _request('critere');
 	if ($critere == "debut") {
 		$critere = "visites";
-		echo barre_onglets("stat_depuis", "debut");
+		echo barre_onglets("stat_depuis", "debut_repartition");
 	}
 	else {
 		$critere = "popularite";
-		echo barre_onglets("stat_depuis", "popularite");
+		echo barre_onglets("stat_depuis", "popularite_repartition");
 	}
 
 	$abs_total=enfants(0, $critere);

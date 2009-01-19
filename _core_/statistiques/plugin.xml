@@ -29,9 +29,15 @@
 		<inclure>stats_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>formulaire_admin</nom>
+		<inclure>stats_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
 		<nom>taches_generales_cron</nom>
 		<inclure>stats_pipelines.php</inclure>
 	</pipeline>
+	
 	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>stats_autoriser.php</inclure>
@@ -45,17 +51,53 @@
 		<titre>icone_statistiques_visites</titre>		
 	</bouton>
 	
-	<bouton id='statistiques_repartition' parent='statistiques_visites'>
-		<icone>images/rubrique-24.gif</icone>
-		<titre>icone_repartition_visites</titre>
-	</bouton>	
-	<bouton id='statistiques_lang' parent='statistiques_visites'>
-		<icone>images/langues-24.gif</icone>
-		<titre>onglet_repartition_lang</titre>
-	</bouton>	
-	<bouton id='statistiques_referers' parent='statistiques_visites'>
-		<icone>images/referers-24.gif</icone>
-		<titre>titre_liens_entrants</titre>
-	</bouton>		
+		<bouton id='statistiques_repartition' parent='statistiques_visites'>
+			<icone>images/rubrique-24.gif</icone>
+			<titre>icone_repartition_visites</titre>
+		</bouton>
+			<onglet id='popularite_repartition' parent='stat_depuis'>
+				<icone>null</icone>
+				<titre>icone_repartition_actuelle</titre>
+				<url>statistiques_repartition</url>
+			</onglet>
+			<onglet id='debut_repartition' parent='stat_depuis'>
+				<icone>null</icone>
+				<titre>onglet_repartition_debut</titre>
+				<url>statistiques_repartition</url>
+				<args>critere=debut</args>
+			</onglet>
+			
+		<bouton id='statistiques_lang' parent='statistiques_visites'>
+			<icone>images/langues-24.gif</icone>
+			<titre>onglet_repartition_lang</titre>
+		</bouton>	
+			<onglet id='popularite' parent='rep_depuis'>
+				<icone>null</icone>
+				<titre>icone_repartition_actuelle</titre>
+				<url>statistiques_lang</url>
+			</onglet>
+			<onglet id='debut' parent='rep_depuis'>
+				<icone>null</icone>
+				<titre>onglet_repartition_debut</titre>
+				<url>statistiques_lang</url>
+				<args>critere=debut</args>
+			</onglet>		
+		
+		<bouton id='statistiques_referers' parent='statistiques_visites'>
+			<icone>images/referers-24.gif</icone>
+			<titre>titre_liens_entrants</titre>
+		</bouton>
+			<onglet id='jour_referers' parent='stat_referers'>
+				<icone>null</icone>
+				<titre>date_aujourdhui</titre>
+				<url>statistiques_referers</url>
+			</onglet>
+			<onglet id='veille_referers' parent='stat_referers'>
+				<icone>null</icone>
+				<titre>date_hier</titre>
+				<url>statistiques_referers</url>
+				<args>jour=veille</args>
+			</onglet>		
+				
 </plugin>
 

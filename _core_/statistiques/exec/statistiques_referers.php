@@ -60,7 +60,7 @@ function exec_statistiques_referers_dist()
 	echo "</p>";
 	echo fin_boite_info(true);
 	echo debut_droite('', true);
-	echo barre_onglets("stat_referers", $jour);
+	echo barre_onglets("stat_referers", $jour . '_referers'); // attention a pas avoir le meme id d'onglet...
 
 	if ($res) {
 		echo "<br /><div style='font-size:small;' class='verdana1'>";
@@ -73,19 +73,6 @@ function exec_statistiques_referers_dist()
 
 	echo fin_gauche(), fin_page();
 	}
-}
-
-// http://doc.spip.org/@barre_onglets_stat_referers
-function barre_onglets_stat_referers() {
-
-	$onglets = array();
-	$onglets['jour']=
-		  new Bouton(null, 'date_aujourdhui',
-			generer_url_ecrire("statistiques_referers",""));
-	$onglets['veille']=
-		  new Bouton(null, 'date_hier',
-			generer_url_ecrire("statistiques_referers","jour=veille"));
-	return $onglets;
 }
 
 ?>
