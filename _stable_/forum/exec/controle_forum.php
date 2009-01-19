@@ -7,7 +7,7 @@
  *
  */
 
-function exec_controle_forum_dist()
+function exec_controle_forum_dist($fond = 'prive/listes/controle_forum')
 {
 	if (!autoriser('publierdans','rubrique',_request('id_rubrique'))
 	  OR ($id_article = _request('id_article') AND !autoriser('modererforum', 'article', $id_article))
@@ -17,6 +17,12 @@ function exec_controle_forum_dist()
 	} 
 	else 
 	{
+		$fond = 'prive/listes/controle_forum';
+		exec_controle_forum_args(_request('type'),$_GET,$fond);
+	}
+}
+
+function exec_controle_forum_args($type,$contexte=array(),$fond = 'prive/listes/controle_forum'){
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('titre_page_forum_suivi'), "forum", "forum-controle");
@@ -27,7 +33,7 @@ function exec_controle_forum_dist()
 
 		// Afficher le lien RSS
 
-		$type = _request('type')?_request('type'):"public";
+		$type = $type?$type:"public";
 		echo bouton_spip_rss("forums_$type");
 
 		echo fin_boite_info(true);
@@ -47,9 +53,8 @@ function exec_controle_forum_dist()
 		
 		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
 
-		echo recuperer_fond('',array_merge($_GET,array('fond'=>'prive/listes/controle_forum')),array('ajax'=>true));
+		echo recuperer_fond('',array_merge($contexte,array('fond'=>$fond)),array('ajax'=>true));
 		echo fin_gauche(), fin_page();
-	}
 }
 
 ?>
