@@ -28,15 +28,15 @@ function tree_open_close_dir(&$current,$target,$current_file){
 		$chemin .= $open . "/";
 		if(!strstr($current_file,$chemin)){
 			$output .= "<div>\n";
-			$output .= bouton_block_invisible(md5($chemin));
+			//$output .= bouton_block_invisible(md5($chemin));
 			$output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/folder.png' alt='directory' /> $open";             
-			$output .= debut_block_invisible(md5($chemin));
+			//$output .= debut_block_invisible(md5($chemin));
 		}
 		else {
 			$output .= "<div>\n";
-			$output .= bouton_block_visible(md5($chemin));
+			//$output .= bouton_block_visible(md5($chemin));
 			$output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/folder.png' alt='directory' /> $open";             
-			$output .= debut_block_visible(md5($chemin));
+			//$output .= debut_block_visible(md5($chemin));
 		}
 		$output .= "<div style='line-height: 12px;border:1px solid #ededed;padding:4px;margin:4px 0'>\n";
 	}
@@ -95,9 +95,9 @@ function editor_form_directory($path,$depth="") {
 
 // add file form
 function editor_addfile($path_list) {
-  $output = bouton_block_invisible('editor_newfile');
+  //$output = bouton_block_invisible('editor_newfile');
   $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/action_add.png' alt='new' />"._T("skeleditor:fichier_nouveau");
-  $output .= debut_block_invisible('editor_newfile');  
+  //$output .= debut_block_invisible('editor_newfile');  
   $output .= "<form method='get'>\n"; 
   $output .= "<input type='hidden' name='exec' value='skeleditor' />"; 
   $output .= "<input type='hidden' name='action' value='new' />"; 
@@ -114,9 +114,9 @@ function editor_addfile($path_list) {
 
 // upload file form
 function editor_uploadfile($path_list) {
-  $output = "<br />".bouton_block_invisible('editor_uploadfile');
+  //$output = "<br />".bouton_block_invisible('editor_uploadfile');
   $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/action_add.png' alt='new' />"._T("skeleditor:fichier_upload");
-  $output .= debut_block_invisible('editor_uploadfile');
+  //$output .= debut_block_invisible('editor_uploadfile');
   
   $output .= "<form method='post' enctype='multipart/form-data' >\n";  
   $output .= "<input type='hidden' name='exec' value='skeleditor' />"; 
@@ -173,8 +173,8 @@ function skel_parser($skel_str) {
   $boucles = array_reverse($boucles,TRUE);
   
   /* parse outside boucles */
-  $output .= bouton_block_invisible("hors_boucle")._T("skeleditor:parseur_horsboucle");  
-  $output .= debut_block_invisible("hors_boucle");
+  //$output .= bouton_block_invisible("hors_boucle")._T("skeleditor:parseur_horsboucle");  
+  //$output .= debut_block_invisible("hors_boucle");
   $output .= "<div style='background: #fff;padding:10px;'>"; 
   foreach($b as $k=>$val) { 
      if ($val->type == "champ") $output .= "<span style='color:#c30;background:#eee'>#".$val->nom_champ."</span>";
@@ -187,9 +187,9 @@ function skel_parser($skel_str) {
   /* parse boucles */
   foreach($boucles as $k=>$val) {
      /* version gentle */ 
-     $output .= bouton_block_invisible("skel_parser_$k")." BOUCLE$k";
+     //$output .= bouton_block_invisible("skel_parser_$k")." BOUCLE$k";
      $output .= " <span style='color:#888'>(".strtoupper($val->type_requete).")</span>";
-     $output .= debut_block_invisible("skel_parser_$k");
+     //$output .= debut_block_invisible("skel_parser_$k");
      $output .= "<div style='background: #fff;padding:10px;'>";  
         if ($val->id_parent) $output .= "<strong>id_parent:</strong> BOUCLE$val->id_parent<br />";      
         if ($val->param) $output .= "<strong>"._T('skeleditor:parseur_param')."</strong>".skel_parser_param($val->param)."<br />";       
@@ -365,7 +365,8 @@ function exec_skeleditor(){
   global $connect_statut;
 	global $connect_toutes_rubriques;
   if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {    
-		debut_page(_T('titre'), "skel_editor", "plugin");
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+    echo $commencer_page(_T("skeleditor:editer_skel"),_T("skeleditor:editer_skel"),_T("skeleditor:editer_skel"));
 		echo _T('avis_non_acces_page');
 		fin_page();
 		exit;
@@ -493,20 +494,20 @@ function exec_skeleditor(){
   // ---------------------------------------------------------------------------
   // HTML output 
   // ---------------------------------------------------------------------------
-	debut_page(_T("skeleditor:editer_skel"), "naviguer", "plugin");	
-  debut_gauche();
-	debut_boite_info();
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+  echo $commencer_page(_T("skeleditor:editer_skel"),_T("skeleditor:editer_skel"),_T("skeleditor:editer_skel"));
+  
+  echo debut_gauche('', true);
+	debut_boite_info(true);
 	echo "<p>"._T("skeleditor:skeleditor_description")."</p>\n";
 	echo _T("skeleditor:skeleditor_dossier")." <strong>$dossier_squelettes</strong><br />";
 	echo show_skel_file($files_editable,$file_name,$img_extension);
-	fin_boite_info();
 	echo "<br />";
-	debut_boite_info();
 	echo editor_addfile($path_list);
 	echo editor_uploadfile($path_list);
-  fin_boite_info();
+  fin_boite_info(true);
 	
-	debut_droite();
+	debut_droite('',true);
 
 	// something to do ?	
 	if ($file_name!="") { 
@@ -532,7 +533,7 @@ function exec_skeleditor(){
                     if (($extension=='html') && (_request(debug)!='true')) echo  skel_parser($file_str); // experimental                            	        
                     $file_str = str_replace("&","&amp;",$file_str); //  preserve html entities
 		    $file_str = str_replace("</textarea","&lt;/textarea",$file_str); // exception: textarea closing tag                    
-  								  echo generer_url_post_ecrire('skeleditor',"retour=skeleditor&f=".urlencode($file_name));
+  								  echo generer_url_post_ecrire('skeleditor',"retour=skeleditor&f=".urlencode($file_name));   								 
                     echo "<textarea name='editor' cols='80' rows='50'>$file_str</textarea>\n";               
   									echo "<div style='text-align:$spip_lang_right'><input type='submit' name='action' value='"._T("skeleditor:sauver")."' class='fondo'></div>";
           	        echo "</form>\n";       	        
