@@ -17,14 +17,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'editer' => 'Editar',
 	'editer_@type@_@id@' => 'Editar @type@ @id@ dafechu',
-	'editer_tout' => 'Editar too',
+	'editer_tout' => 'Editalo ensembre',
 
 	// M
-	'modifie_par_ailleurs' => 'Modificao d\'otru llau',
+	'modifie_par_ailleurs' => 'Modificao n\'otru llau',
 
 	// N
 	'non_autorise' => 'Non autorizao',
-	'non_implemente' => 'Non implementao',
+	'non_implemente' => 'Ensin implementar',
 
 	// P
 	'pas_de_modification' => 'Ensin modificaci&oacute;n',
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'sauvegarder' => '&iquest;Guardar les modificaciones?',
-	'svp_copier_coller' => 'Sentimoslo, copia/pega los cambios y vuelve a entamar',
+	'svp_copier_coller' => 'Sentimoslo, copia/pega los camb&eacute;os y torna a entamar',
 
 	// V
 	'veuillez_patienter' => 'Un momentu...'
