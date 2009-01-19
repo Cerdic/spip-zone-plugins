@@ -47,7 +47,7 @@
 
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items forums'>
-<BOUCLE_forum(FORUMS){id_forum?}{id_auteur?}{id_article?}{auteur?}{email_auteur?}{ip?}{!par id_forum}{pagination 10}{statut?}{statut LIKE #GET{prive}}{statut !LIKE #GET{public}}{texte LIKE #GET{vide}}{recherche?}>
+<BOUCLE_forum(FORUMS){id_forum?}{id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?}{id_message?}{id_auteur?}{auteur?}{email_auteur?}{ip?}{!par id_forum}{pagination 10}{statut?}{statut LIKE #GET{prive}}{statut !LIKE #GET{public}}{texte LIKE #GET{vide}}{recherche?}>
 <li class="item forum statut_#STATUT[ (#COMPTEUR_BOUCLE|alterner{'','odd'})]" id='forum#ID_FORUM'>
 [(#INCLURE{fond=prive/modeles/forum}{id_forum}{self})]
 </li>

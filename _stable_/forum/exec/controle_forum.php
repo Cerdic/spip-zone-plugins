@@ -37,7 +37,7 @@ function exec_controle_forum_args($type,$contexte=array(),$fond = 'prive/control
 
 		echo fin_boite_info(true);
 
-		if ($id_article){
+		if ($id_article=$contexte['id_article']){
 			$res = icone_horizontale(_T('icone_retour'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.gif","rien.gif", false);
 			$res .= icone_horizontale(_T('icone_statistiques_visites'), generer_url_ecrire("statistiques_visites","id_article=$id_article"), "statistiques-24.gif","rien.gif", false);
 			echo bloc_des_raccourcis($res);
