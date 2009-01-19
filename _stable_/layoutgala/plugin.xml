@@ -27,7 +27,6 @@
 	[en]To choose a layout between the 40 in 
 	</multi>
 [LayoutGala->http://blog.html.it/layoutgala/].
-	<multi>
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
