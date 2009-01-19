@@ -8,7 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => '<MODIF>Aquesta llengua permet configurar l\'estil de la lupa. Es pot declarar un estil personalitzat; veure <a href="http://plugins.spip.net/?page=article&amp;id_article=48">la documentaci&oacute; en l&iacute;nia</a>.',
+	'descriptif' => 'Aquesta p&agrave;gina permet configurar l\'estil de la lupa. Es pot declarar un estil personalitzat; veure <a href="http://plugins.spip.net/?page=article&amp;id_article=48">la documentaci&oacute; en l&iacute;nia</a>.',
 
 	// E
 	'example' => 'Resultat gr&agrave;fic',
