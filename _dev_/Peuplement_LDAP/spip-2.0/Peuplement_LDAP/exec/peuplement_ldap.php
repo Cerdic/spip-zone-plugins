@@ -4,12 +4,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/peuplement_ldap_common');
-include_spip('inc/auth_ldap');
+include_spip('auth/ldap');
 
 function exec_peuplement_ldap_dist(){
 	// TODO: Gerer la securite. On n'affiche que pour les admins.
-	 $commencer_page = charger_fonction('commencer_page','inc');
-     echo $commencer_page(_T('peuplementldap:titre_page'));
+	$commencer_page = charger_fonction('commencer_page','inc');
+	echo $commencer_page(_T('peuplementldap:titre_page'));
 	
 	//global $couleur_claire;
 	global $connect_statut;

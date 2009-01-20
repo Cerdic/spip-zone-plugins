@@ -1,11 +1,12 @@
 <?php
 
 /**
- * Affichage de la page 1
- *
+ * IHM de l'etape 1 de l'importation des auteurs.
+ * 
+ * 
+ * Affichage du formulaire de saisie du filtre Ldap
  */
 function genere_etape_1(){
-	global $couleur_claire;
 	// Cadre d'information sur la partie gauche
 	echo debut_gauche("",true); // Partie gauche de la page
 	echo debut_boite_info(true);// Cadre d'information concernant le plugin
@@ -33,9 +34,14 @@ function genere_etape_1(){
 	echo fin_boite_alerte();
 }
 
-
+/**
+ * IHM de l'etape 2 de l'importation
+ *
+ * Affichage des entrées Ldap correspondant au filtre
+ * 
+ * @param Array $entreesLdap
+ */
 function genere_etape_2($entreesLdap){
-	global $couleur_claire;
 	// Cadre d'information sur la partie gauche
 	echo debut_gauche("",true);// Partie gauche de la page
 	echo debut_boite_info(true);// Cadre d'information concernant le plugin
@@ -72,28 +78,30 @@ function genere_etape_2($entreesLdap){
 }
 
 function genere_etape_3($compte_rendu){
-	global $couleur_claire;
 	// Cadre d'information sur la partie gauche
-	debut_gauche();// Partie gauche de la page
-	debut_boite_info();// Cadre d'information concernant le plugin
+	echo debut_gauche("",true);// Partie gauche de la page
+	echo debut_boite_info(true);// Cadre d'information concernant le plugin
 	echo propre(_T('peuplementldap:info_etape_3'));
-	fin_boite_info();
+	echo fin_boite_info(true);
 	echo "<br /><br />";
-	debut_boite_info();
+	echo debut_boite_info(true);
 	echo affiche_legende();
-	fin_boite_info();
+	echo fin_boite_info(true);
+	echo debut_droite("",true);
 	// Compte rendu des insertions d'auteur
-	debut_droite();
 	$icone = "../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_icon'];
-	debut_cadre_relief();
-	echo "<br />";
-	bandeau_titre_boite2(_T('peuplementldap:titre_form_etape_3'), $icone, $couleur_claire, "black");
-	echo "<br />";
-	echo afficher_liste_debut_tableau();
-	$largeurs = array('','','','');
-	$styles = array('arial11', 'arial1', 'arial1');
-	echo afficher_liste($largeurs, $compte_rendu, $styles);
-	echo afficher_liste_fin_tableau();
+	echo debut_cadre_relief($icone,true,'',_T('peuplementldap:titre_form_etape_3'));
+	echo "<table  class='arial2'  cellpadding='2' cellspacing='0' style='width: 100%; border: 0px;'>";
+	foreach ($compte_rendu as $unAuteur){
+		echo "<tr class=\"tr_liste\">";
+        echo "<td>".$unAuteur[0]."</td>";
+    	echo "<td>".$unAuteur[1]."</td>";
+    	echo "<td>".$unAuteur[2]."</td>";
+		echo "</tr>";
+	}
+	echo "</table>";
+	
+	echo fin_cadre_relief(true);
 }
 
 function recherche_ldap($filtre){
@@ -123,7 +131,9 @@ function recherche_ldap($filtre){
 */
 function insere_auteur($dn,$mail){
 		// Controle qu'un identifiant de connexion identique ne soit pas déjà présent
-        $cpt = spip_num_rows(spip_query("SELECT * FROM spip_auteurs WHERE email=\"".strtolower($mail)."\""));
+        // TODO Gerer le préfixe des tables Spip.
+        $select = sql_select(array("*"),array("spip_auteurs"),array("email=\"".strtolower($mail)."\""));
+        $cpt = sql_count($select);
         if ($cpt > 0){
                 return 1;
         }
