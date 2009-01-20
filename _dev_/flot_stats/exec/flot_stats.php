@@ -25,43 +25,11 @@ function exec_flot_stats() {
 			var stats =  [
 				{
 					label: "Visites",
-					data: <?php $select = sql_select("*", "spip_visites");
-					$nstats = sql_countsel('spip_visites');
-					echo '[';
-					$coun = 1;
-					while ($ele=sql_fetch($select)){
-						$date_vi = $ele['date'];
-						$nvis = $ele['visites'];
-						echo '['.rendre_date($date_vi).', '.$nvis.']';
-							if ($coun<$nstats) {
-								$coun++;
-								echo ",";
-							}
-						}
-					echo ']';
-					?> 
+					data: <?php courbe_visites();?> 
 				},
 				{
 					label: "Moyenne",
-					data: <?php $select = sql_select("*", "spip_visites");
-					$nstats = sql_countsel('spip_visites');
-					echo '[';
-					$coun = 1;
-					$mtotal = 0;
-					while ($ele=sql_fetch($select)){
-						$mdate = $ele['date'];
-						$mnvis = intval($ele['visites']);
-						$mtotal = $mnvis + $mtotal;
-						$mtotal = intval($mtotal);
-						$moy = $mtotal / $coun;
-						echo '['.rendre_date($mdate).', '.$moy.']';
-							if ($coun<$nstats) {
-								$coun++;
-								echo ",";
-							}
-						}
-					echo ']';
-					?> 
+					data: <?php courbe_moyenne(); ?> 
 				}
 				];
 				
