@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * 
+ * Ce fichier est la uniquement pour compatibilite avec SPIP < 2.1
+ * Il est inutile ensuite
+ * 
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
