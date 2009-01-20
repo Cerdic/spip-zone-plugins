@@ -5,7 +5,7 @@
   <version>0.1</version>
   <etat>test</etat>
   <description>
-  Permet d'interdire certaines chaines de caracteres dans les forums (voir la page d'[administration du plugin->./?exec=cfg&cfg=antispam]).
+  Permet d'interdire certaines chaines de caracteres dans les forums (voir la page d'[administration du plugin->./?exec=cfg&amp;cfg=antispam]).
   
   Pour chaque champ, on liste les "mots" interdits en les separant d'un retour a la ligne.
   
