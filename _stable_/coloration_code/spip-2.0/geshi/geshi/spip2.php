@@ -47,7 +47,7 @@
 @define('REG_NOM_BOUCLE', '[a-z0-9_]*');
 @define('REG_BOUCLE','(&lt;\/?\/?B(OUCLE)?' . REG_NOM_BOUCLE . ')(\([^)]*\))?(.*)?(&gt;)');
 @define('REG_INCLURE','(&lt;\/?\/?INCLU(D|R)E)(\([^)]*\))?(.*)?(&gt;)');
-@define('REG_BALISE','(\#)(' . REG_NOM_BOUCLE . ':)?([A-Z0-9_]*)');
+@define('REG_BALISE','(\#)(' . REG_NOM_BOUCLE . ':)?([A-Z0-9_]*)([*]{0,2})');
 @define('REG_NOM_FILTRE', '(<PIPE>[a-zA-Z_][a-zA-Z0-9_]*(::[a-zA-Z0-9_]*)?)');
 
 
@@ -88,8 +88,9 @@ $language_data = array (
 
             ),
 		'REGEXPS' => array(
-			0 => 'color: #CA5200;', // balise (#nom:TITRE)
-			1 => 'color: #e72;', // balise (#nom:TITRE)
+			0 => 'color: #E1861A;', // balise (#nom:TITRE**) ** (meme couleur que 50:filtre)
+			1 => 'color: #CA5200;', // balise (#nom:TITRE) #TITRE
+			2 => 'color: #e72;', // balise (#nom:TITRE) nom:
 
 			10 => 'color: #527EE0;', // tables boucle
             11 => 'color: #222;', // debut boucle
@@ -117,8 +118,16 @@ $language_data = array (
 		),
 
 	'REGEXPS' => array(
-		// Balise (#nom:TITRE)
+		// Balise (#nom:TITRE**)
 		0 => array(
+			GESHI_SEARCH => REG_BALISE,
+			GESHI_REPLACE => '\\4',
+			GESHI_MODIFIERS => 'i',
+			GESHI_BEFORE => '\\1\\2\\3',
+			GESHI_AFTER => ''
+			),
+		// Balise (#nom:TITRE)
+		1 => array(
 			GESHI_SEARCH => REG_BALISE,
 			GESHI_REPLACE => '\\1\\2\\3',
 			GESHI_MODIFIERS => 'i',
@@ -126,7 +135,7 @@ $language_data = array (
 			GESHI_AFTER => ''
 			),
 		// Balise (nom:)
-		1 => array(
+		2 => array(
 			GESHI_SEARCH => REG_BALISE,
 			GESHI_REPLACE => '\\2',
 			GESHI_MODIFIERS => 'i',
