@@ -44,15 +44,15 @@ function genere_etape_2($entreesLdap){
 	// Formulaire sur la partie centrale
 	echo debut_droite("",true);
 	$icone = "../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_icon'];
-	echo debut_cadre_relief(true);
-	echo "<br />";
+	echo debut_cadre_relief($icone,true,'',_T('peuplementldap:titre_form_etape_2'));
+	echo "<form action=\"".generer_url_ecrire('peuplement_ldap')."\" method=\"post\" >";
 	echo "<input type='hidden' name='peuplement_ldap_etape' value='3' />";
 	echo "<input type='hidden' name='peuplement_ldap_filtre' value='"._request('peuplement_ldap_filtre')."' />";	
 	// Affichage de la liste des entrees issues de l'annuaire LDAP
 	echo "<div style='text-align:right'><b>".$entreesLdap['count']."</b>"._T('peuplementldap:nombre_entrees')."</div>";
-	echo "<table>";
+	echo "<table  class='arial2'  cellpadding='2' cellspacing='0' style='width: 100%; border: 0px;'>";
 	for ($i=0;$i<count($entreesLdap)-1;$i++){
-		echo "<tr>";
+		echo "<tr class=\"tr_liste\">";
 		echo "<td><input type='checkbox' name='ajouter_entree_".$i."' value='".$entreesLdap[$i]["dn"]."#".$entreesLdap[$i]["mail"][0]."#".$entreesLdap[$i]["cn"][0]."'/></td>";
         echo "<td>".$entreesLdap[$i]["cn"][0]."</td>";
     	echo "<td>".$entreesLdap[$i]["mail"][0]."</td>";
@@ -68,7 +68,7 @@ function genere_etape_2($entreesLdap){
 	
 	echo "</div>";
 	echo "</form>";
-	echo fin_cadre_relief(true);	
+	echo fin_cadre_relief(true);
 }
 
 function genere_etape_3($compte_rendu){
