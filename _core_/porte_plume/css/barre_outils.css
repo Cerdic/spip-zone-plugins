@@ -20,6 +20,7 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 .markItUp  {
 	/*width:700px;*/
 	margin:5px 0 5px 0;
+	clear:both;
 }
 .markItUpContainer  {
 	font:11px Verdana, Arial, Helvetica, sans-serif;
