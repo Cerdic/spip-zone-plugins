@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/statistiques');
+include_spip('inc/statistiques_new');
 function exec_flot_stats() {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page("Statistiques", "", "");
@@ -29,13 +30,9 @@ function exec_flot_stats() {
 					echo '[';
 					$coun = 1;
 					while ($ele=sql_fetch($select)){
-						$date = $ele['date'];
+						$date_vi = $ele['date'];
 						$nvis = $ele['visites'];
-						$d = explode("-", $date);
-						$times = mktime(0, 0, 0, $d[1], $d[2], $d[0]);
-						$times = intval($times);
-						$times = $times * 1000;
-						echo '['.$times.', '.$nvis.']';
+						echo '['.rendre_date($date_vi).', '.$nvis.']';
 							if ($coun<$nstats) {
 								$coun++;
 								echo ",";
@@ -54,14 +51,10 @@ function exec_flot_stats() {
 					while ($ele=sql_fetch($select)){
 						$mdate = $ele['date'];
 						$mnvis = intval($ele['visites']);
-						$d = explode("-", $mdate);
-						$times = mktime(0, 0, 0, $d[1], $d[2], $d[0]);
-						$times = intval($times);
-						$times = $times * 1000;
 						$mtotal = $mnvis + $mtotal;
 						$mtotal = intval($mtotal);
 						$moy = $mtotal / $coun;
-						echo '['.$times.', '.$moy.']';
+						echo '['.rendre_date($mdate).', '.$moy.']';
 							if ($coun<$nstats) {
 								$coun++;
 								echo ",";
