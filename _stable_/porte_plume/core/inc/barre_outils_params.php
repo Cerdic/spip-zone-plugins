@@ -356,7 +356,6 @@ function barre_outils_spip(){
 	
 	$set->cacher(array(
 		'stroke_through',
-		'sepLorem', 'lorem_ipsum', 'lorem_ipsum_big',
 		'clean', 'preview',
 	));
 	
