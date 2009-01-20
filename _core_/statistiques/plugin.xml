@@ -46,7 +46,7 @@
 	<necessite id="SPIP" version="[2.1;)" />
 	
 	
-	<bouton id="statistiques_visites">
+	<bouton id="statistiques_visites" position='-4'>
 		<icone>images/statistiques-48.png</icone>
 		<titre>icone_statistiques_visites</titre>		
 	</bouton>
