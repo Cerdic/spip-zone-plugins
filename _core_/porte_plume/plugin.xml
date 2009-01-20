@@ -1,8 +1,6 @@
 <plugin>
 	<nom>Porte plume - Une barre d'outil pour bien &eacute;crire</nom>
-	<auteur>
-	Matthieu Marcillaud [magraine.net->http://magraine.net]
-	</auteur>
+	<auteur>Matthieu Marcillaud</auteur>
 	<licence>GNU/GLP</licence>
 	<version>1.0.0</version>
 	<description>
