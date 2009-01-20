@@ -1,0 +1,117 @@
+.formulaire_spip textarea {
+width:96%; /* reduire la taille par defaut des formulaires spip */
+}
+
+
+/* -------------------------------------------------------------------
+// markItUp! Universal MarkUp Engine, JQuery plugin
+// By Jay Salvat - http://markitup.jaysalvat.com/
+// ------------------------------------------------------------------*/
+
+.markItUp * {
+	margin:0px; padding:0px;
+	outline:none;
+}
+.markItUp a:link,
+.markItUp a:visited {
+	color:#000;
+	text-decoration:none;
+}
+.markItUp  {
+	/*width:700px;*/
+	margin:5px 0 5px 0;
+}
+.markItUpContainer  {
+	font:11px Verdana, Arial, Helvetica, sans-serif;
+}
+.markItUpEditor {
+	font:12px 'Courier New', Courier, monospace;
+	padding:5px;
+	width:690px;
+	height:320px;
+	clear:both; display:block;
+	line-height:18px;
+	overflow:auto;
+}
+.markItUpPreviewFrame	{
+	overflow:auto;
+	background-color:#FFF;
+	/*width:99.9%;*/
+	width:98%;
+	height:300px;
+	margin:5px 0;
+}
+.markItUpFooter {
+	width:100%;
+}
+.markItUpResizeHandle {
+	overflow:hidden;
+	width:22px; height:5px;
+	margin-left:auto;
+	margin-right:auto;
+	background-image:url(images/handle.png);
+	cursor:n-resize;
+}
+/***************************************************************************************/
+/* first row of buttons */
+.markItUpHeader ul li	{
+	list-style:none;
+	float:left;
+	position:relative;
+	clear:none;
+	border:0;
+	margin:0 0 2px 0;
+	padding:0;
+	overflow:visible;
+}
+.markItUpHeader ul li:first-child { /* annuler un reglage des forms prive */
+	padding-top:0; 
+}
+
+.markItUpHeader ul .markItUpDropMenu {
+	/*background:inherit url(images/menu.png) no-repeat 100% 80%;
+	padding-right:10px;*/
+}
+.markItUpHeader ul .markItUpDropMenu li {
+	margin-right:0px;
+}
+/* next rows of buttons */
+.markItUpHeader ul ul {
+	display:none;
+	position:absolute;
+	top:24px; left:0px;	
+	padding-top:2px;
+	/*width:130px;*/
+	width:110px;
+}
+.markItUpHeader ul ul li {
+	float:left;
+}
+.markItUpHeader ul ul .markItUpDropMenu {
+	background:#F5F5F5 url(images/submenu.png) no-repeat 50% 50%;
+}
+.markItUpHeader ul .markItUpSeparator {
+	margin:0 6px;
+	width:0px;
+	height:16px;
+	overflow:hidden;
+}
+.markItUpHeader ul ul .markItUpSeparator {
+	width:auto; height:1px;
+	margin:0px;
+}
+
+.markItUpHeader ul a {
+	display:block;
+	width:16px; height:16px;
+	text-indent:-10000px;
+	background-repeat:no-repeat;
+	background-position:50% 50%;
+	background-color:#f5f5f5;
+	border:1px solid #ccc;
+	padding:3px;
+	margin-right:1px;
+}
+.markItUpHeader ul a:hover{border:1px solid #888; background-color:#fff;}
+
+
