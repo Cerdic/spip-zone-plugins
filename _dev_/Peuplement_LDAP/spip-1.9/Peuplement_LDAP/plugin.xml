@@ -4,14 +4,14 @@
 	</nom>
 	<icon>img_pack/ldap.png</icon>
 	<auteur>
- 		benjamin.revel@free.fr
+ 		spip.peuplement.ldap@gmail.com
 		<multi>
 			2008[fr]Distribu&#233; sous licence GPL
 			[es]Distribuido bajo licencia GPL 
 			[en]Distribued under GPL license
 		</multi>
 	</auteur>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<version_base>1.9.2e</version_base>
 	<etat>stable</etat>
 	<description>
