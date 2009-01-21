@@ -8,12 +8,9 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 // By Jay Salvat - http://markitup.jaysalvat.com/
 // ------------------------------------------------------------------*/
 
-.markItUp * {
-	/*margin:0px; padding:0px;
-	outline:none;*/
-}
-.markItUp a:link,
-.markItUp a:visited {
+.markItUpHeader a,
+.markItUpTabs a,
+.markItUpFooter a {
 	color:#000;
 	text-decoration:none;
 }
@@ -72,7 +69,6 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 .preview p {margin-bottom:1em !important;}
 .preview ul {margin-bottom:1em; margin-top:0.5em;}
 .preview li {border:none;}
-
 
 
 /***************************************************************************************/
