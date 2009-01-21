@@ -11,6 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_desindenter' => 'D&eacute;sindenter une liste',
 'barre_inserer_caracteres' => 'Insérer des caractères spécifiques',
 
+'editer'=>'Editer',
+'voir'=>'Voir',
+
+
 // B (depuis SPIP)
 'barre_a_accent_grave' => 'Ins&eacute;rer un A accent grave majuscule',
 'barre_aide' => 'Utilisez les raccourcis typographiques pour enrichir votre mise en page',

@@ -53,9 +53,34 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 	background-image:url(images/handle.png);
 	cursor:n-resize;
 }
+
+/***************************/
+/* tabs */
+.markItUpTabs {
+	text-align:right; margin-bottom:3px; padding:0px 1px;
+	border-bottom:1px solid #888; overflow:auto; 
+	width:auto; float:right; clear:both;}
+.markItUpTabs a {
+	display:block; float:right; border:1px solid #888; margin:0px 1px; border-bottom:none;
+	padding:3px 4px 2px 4px; background:#f0f0f0;
+	-moz-border-radius:5px 5px 0 0;}
+.markItUpTabs a.on {background:#fff; }
+.markItUpTabs a:hover {background:#fff;}
+
+/***************************/
+/* previsu */
+.markItUpPreview {
+	clear:both;
+	border:1px solid #888;
+	background:#fff;
+	overflow:auto;
+	padding:0.5em;
+}
+
 /***************************************************************************************/
 /* first row of buttons */
-.markItUpHeader ul li	{
+.markItUpHeader {clear:both;}
+.markItUpHeader ul li {
 	list-style:none;
 	float:left;
 	position:relative;
