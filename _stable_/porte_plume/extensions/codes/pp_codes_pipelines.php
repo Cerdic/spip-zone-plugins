@@ -1,9 +1,9 @@
 <?php
 
 
-function pp_codes_porte_plume_barre_pre_charger($flux){
+function pp_codes_porte_plume_barre_pre_charger($barres){
 
-	$barre = &$flux['spip'];
+	$barre = &$barres['edition'];
 	$barre->ajouterApres('grpCaracteres', array(
 				"id" => "sepCode",
 				"separator" => "---------------",
@@ -83,7 +83,7 @@ function pp_codes_porte_plume_barre_pre_charger($flux){
 					),
 				),
 			));
-	return $flux;
+	return $barres;
 }
 
 function pp_codes_porte_plume_lien_classe_vers_icone($flux){

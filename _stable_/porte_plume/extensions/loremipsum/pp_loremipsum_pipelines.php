@@ -1,8 +1,8 @@
 <?php
 
-function pp_loremipsum_porte_plume_barre_pre_charger($flux){
+function pp_loremipsum_porte_plume_barre_pre_charger($barres){
 
-	$barre = &$flux['spip'];
+	$barre = &$barres['edition'];
 	
 	// separation
 	$barre->ajouterApres('grpCaracteres', array(
@@ -71,7 +71,7 @@ function pp_loremipsum_porte_plume_barre_pre_charger($flux){
 		"display"     => true,
 	));
 
-	return $flux;
+	return $barres;
 }
 
 function pp_loremipsum_porte_plume_lien_classe_vers_icone($flux){
