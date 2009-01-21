@@ -50,42 +50,19 @@
 
 [(#SET{containerheight,#ENV{containerheight,'500px'}})]
 
-
 	
 <script language="javascript" type="text/javascript" src="#CHEMIN{js/jquery.innerfade.js}"></script>
-<!-- Penser a mettre dans le repertoire squelettes un dossier js avec le script jquery.innerfade.js pour que le modele fonctionne -->
-
-
-
-<!-- pas besoin de jquery puisque c'est natif dans spip desormais <script language="javascript" type="text/javascript" src="#CHEMIN{js/jquery.js}"></script> -->
 
 <script type="text/javascript">
- $(document).ready(
-				function(){
-					$('#news').innerfade({
-						animationtype: 'slide',
-						speed: 750,
-						timeout: 2000,
-						type: 'random',
-						containerheight: '1em'
-					});
-					
-					$('ul.innerfade').innerfade({
-						speed: 'normal',
-						timeout: 2000,
-						type: 'sequence',
-						containerheight: '500px'
-						});
-					
-					$('.fade').innerfade({
-						speed: 'slow',
-						timeout: 1000,
-						type: 'sequence',
-						containerheight: '1.5em'
-					});
-
-			});
-			
+    $(document).ready(
+	    function(){					
+		    $('ul.innerfade').innerfade({
+			    speed: 'normal',
+			    timeout: 2000,
+			    type: 'sequence',
+			    containerheight: '500px'
+			    });
+    });		
 </script>
 
 <ul class="innerfade" style="list-style-type: none ;">
