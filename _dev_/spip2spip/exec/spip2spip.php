@@ -12,8 +12,7 @@ include_spip('inc/presentation');
 // -------------------------------
 
 function exec_spip2spip(){
-  
-  global $table_prefix;
+
   global $connect_statut;
   global $connect_toutes_rubriques;
   
@@ -33,14 +32,14 @@ function exec_spip2spip(){
   //-------------------------------
 	// suppression site
   if (_request('agir') == 'del') 
-      sql_delete($table_prefix."_spip2spip","id=".(int) _request('id'));
+      sql_delete("spip_spip2spip","id=".(int) _request('id'));
 
   // ajout site
   if (_request('agir') == 'add') {      
   		$my_url  = addslashes(trim(_request('url')));
   		$my_site = addslashes(trim(_request('site')));
-  		sql_delete($table_prefix."_spip2spip","site_rss='$my_url'"); // pas doublons  		
-  	  sql_insertq($table_prefix."_spip2spip", array(
+  		sql_delete("spip_spip2spip","site_rss='$my_url'"); // pas doublons  		
+  	  sql_insertq("spip_spip2spip", array(
                    'site_titre' => $my_site, 'site_rss' => $my_url));
   }
 
@@ -64,7 +63,7 @@ function exec_spip2spip(){
   echo "<h3>"._T('spiptospip:site_manage')."</h3>\n";
   
   // sites inscrits
-  $result = sql_select("*",$table_prefix."_spip2spip ORDER BY site_titre");
+  $result = sql_select("*","spip_spip2spip ORDER BY site_titre");
 
   echo "<table border='0' cellpadding=3 cellspacing=0 width='100%' class='arial2'>\n";
   echo "<tr style='background:#ff6600;font-weight:bold;'>\n";
