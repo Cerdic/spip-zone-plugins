@@ -25,5 +25,11 @@ Ce plugin fournit des modeles produisant des diaporamas en jquery innerfade
 	<prefix>
 	innerfade
 	</prefix>
+	<pipeline>
+        <nom>insert_head</nom>
+        <action>insert_head</action>
+        <inclure>innerfade_pipeline.php</inclure>
+    </pipeline>
+
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>
