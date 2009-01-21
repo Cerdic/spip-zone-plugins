@@ -15,7 +15,7 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_arti
 	if (!$valeurs['id_article'])
 		$valeurs['id_article'] = $id_article;
 	$valeurs['id_parent'] = $valeurs['id_article'];
-	unset($valeurs['id_article']);
+	#unset($valeurs['id_article']); // Cette ligne empechait que le titre de l'evenement soit par defaut le titre de l'article
 	// pour le selecteur d'article(s) optionnel
 	$valeurs['id_parents'] = array("article|".$valeurs['id_parent']);
 
