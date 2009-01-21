@@ -13,8 +13,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function barre_outils_edition(){
 	$set = new Barre_outils(array(
 		'nameSpace'         => 'edition',
-		'previewAutoRefresh'=> true,
-		'previewParserPath' => url_absolue(generer_url_public('preview')),
+		#'previewAutoRefresh'=> true,
+		#'previewParserPath' => url_absolue(generer_url_public('preview')),
 		'onShiftEnter'      => array('keepDefault'=>false, 'replaceWith'=>"\n_ "),
 		'onCtrlEnter'       => array('keepDefault'=>false, 'replaceWith'=>"\n\n"),
 		// garder les listes si on appuie sur entree
@@ -310,7 +310,7 @@ function barre_outils_edition(){
 		),
 		
 	'functions'         => "
-				// remplce ou cree -* ou -** ou -# ou -##
+				// remplace ou cree -* ou -** ou -# ou -##
 				function outil_liste(h, c) {
 					if ((s = h.selection) && (r = s.match(/^-([*#]+) (.*)\$/)))	 {
 						r[1] = r[1].replace(/[#*]/g, c);
