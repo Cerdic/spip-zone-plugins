@@ -18,21 +18,16 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 	text-decoration:none;
 }
 .markItUp  {
-	/*width:700px;*/
 	margin:5px 0 5px 0;
 	clear:both;
 }
 .markItUpContainer  {
 	margin:0px; padding:0px;
-	font:11px Verdana, Arial, Helvetica, sans-serif;
 }
 .markItUpEditor {
-	font:12px;
 	padding:5px;
-	width:690px;
-	height:320px;
+	height:320px; /* la hauteur est calculee par SPIP */
 	clear:both; display:block;
-	line-height:18px;
 	overflow:auto;
 }
 .markItUpPreviewFrame {
@@ -72,6 +67,13 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 	overflow:auto;
 	padding:1em;
 }
+
+/* correction des styles spip_formulaires appliques par defaut (grr) */
+.preview p {margin-bottom:1em !important;}
+.preview ul {margin-bottom:1em; margin-top:0.5em;}
+.preview li {border:none;}
+
+
 
 /***************************************************************************************/
 /* first row of buttons */
