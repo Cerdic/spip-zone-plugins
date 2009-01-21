@@ -9,8 +9,8 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 // ------------------------------------------------------------------*/
 
 .markItUp * {
-	margin:0px; padding:0px;
-	outline:none;
+	/*margin:0px; padding:0px;
+	outline:none;*/
 }
 .markItUp a:link,
 .markItUp a:visited {
@@ -23,6 +23,7 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 	clear:both;
 }
 .markItUpContainer  {
+	margin:0px; padding:0px;
 	font:11px Verdana, Arial, Helvetica, sans-serif;
 }
 .markItUpEditor {
@@ -34,15 +35,10 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 	line-height:18px;
 	overflow:auto;
 }
-.markItUpPreviewFrame	{
-	overflow:auto;
-	background-color:#FFF;
-	/*width:99.9%;*/
-	width:98%;
-	height:300px;
-	margin:5px 0;
+.markItUpPreviewFrame {
 }
 .markItUpFooter {
+	margin:0px; padding:0px;
 	width:100%;
 }
 .markItUpResizeHandle {
@@ -79,7 +75,7 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 
 /***************************************************************************************/
 /* first row of buttons */
-.markItUpHeader {clear:both;}
+.markItUpHeader {clear:both; margin:0px; padding:0px;}
 .markItUpHeader ul li {
 	list-style:none;
 	float:left;
