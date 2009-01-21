@@ -44,11 +44,11 @@
 
 [(#SET{type,#ENV{type,sequence}})]
 
-[(#SET{speed,#ENV{speed,'normal'}})]
+[(#SET{speed,#ENV{speed,normal}})]
 
 [(#SET{timeout,#ENV{timeout,2000}})]
 
-[(#SET{containerheight,#ENV{containerheight,'500px'}})]
+[(#SET{containerheight,#ENV{containerheight,500px}})]
 
 	
 <script language="javascript" type="text/javascript" src="#CHEMIN{js/jquery.innerfade.js}"></script>
@@ -57,11 +57,11 @@
     $(document).ready(
 	    function(){					
 		    $('ul.innerfade').innerfade({
-			    speed: 'normal',
-			    timeout: 2000,
-			    type: 'sequence',
-			    containerheight: '500px'
-			    });
+			    speed: '#GET{spedd}',
+			    timeout: #GET{timeout},
+			    type: '#GET{type}',
+			    containerheight: '#GET{containerheight}'
+		    });
     });		
 </script>
 
