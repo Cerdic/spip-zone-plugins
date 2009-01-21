@@ -66,9 +66,12 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 }
 
 /* correction des styles spip_formulaires appliques par defaut (grr) */
-.preview p {margin-bottom:1em !important;}
-.preview ul {margin-bottom:1em; margin-top:0.5em;}
-.preview li {border:none;}
+.markItUp .preview p {margin-bottom:1em;}
+.markItUp .preview ul {margin-bottom:1em; margin-top:0.5em;}
+.markItUp .preview li {border:none; padding:1px;}
+/* coloration code */
+.markItUp .preview .cadre ol, 
+.markItUp .preview .cadre ul {padding:0.5em;}
 
 
 /***************************************************************************************/
