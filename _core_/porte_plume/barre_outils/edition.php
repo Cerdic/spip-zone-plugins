@@ -8,12 +8,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
- * Definition de la barre 'spip' pour markitup
+ * Definition de la barre 'edition' pour markitup
  */
-function barre_outils_spip(){
-	include_spip('inc/barre_outils');
+function barre_outils_edition(){
 	$set = new Barre_outils(array(
-		'nameSpace'         => 'spip',
+		'nameSpace'         => 'edition',
 		'previewAutoRefresh'=> true,
 		'previewParserPath' => url_absolue(generer_url_public('preview')),
 		'onShiftEnter'      => array('keepDefault'=>false, 'replaceWith'=>"\n_ "),
@@ -363,30 +362,11 @@ function barre_outils_spip(){
 }
 
 
-/**
- * Definition de la barre 'spip_forum' pour markitup
- */
-function barre_outils_spip_forum(){
-	$barre = barre_outils_spip();
-	$barre->nameSpace = 'spip_forum';
-	$barre->cacherTout();
-	$barre->afficher(array(
-		'bold','italic',
-		'sepLink','link',
-		'sepCitations', 'quote',
-		'sepCaracteres','guillemets', 'guillemets_simples', 
-		   'guillemets_de', 'guillemets_de_simples',
-		   'guillemets_autres', 'guillemets_autres_simples',
-		   'A_grave', 'E_aigu', 'oe', 'OE',
-	));
-	return $barre;
-}
-
 
 /**
  * Definitions des liens entre css et icones
  */
-function barre_outils_icones(){
+function barre_outils_edition_icones(){
 	return array(
 		//'outil_header1' => 'text_heading_1.png',
 		'outil_header1' => 'intertitre.png',

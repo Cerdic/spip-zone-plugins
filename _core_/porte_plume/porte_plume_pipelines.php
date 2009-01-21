@@ -31,10 +31,10 @@ jQuery(document).ready(function()	{
 	function barrebouilles(){
 		// si c'est un appel de previsu markitup, faut pas relancer
 		// on attrappe donc uniquement les textarea qui n'ont pas deja la classe markItUpEditor
-		jQuery('.formulaire_forum textarea[name=texte]:not(.markItUpEditor)').markItUp(barre_outils_spip_forum,{lang:'$lang'});
-		jQuery('textarea.textarea_forum:not(.markItUpEditor)').markItUp(barre_outils_spip_forum,{lang:'$lang'});
+		jQuery('.formulaire_forum textarea[name=texte]:not(.markItUpEditor)').markItUp(barre_outils_forum,{lang:'$lang'});
+		jQuery('textarea.textarea_forum:not(.markItUpEditor)').markItUp(barre_outils_forum,{lang:'$lang'});
 		jQuery('.formulaire_spip textarea[name=texte]:not(.markItUpEditor)')
-			.markItUp(barre_outils_spip,{lang:'$lang'})
+			.markItUp(barre_outils_edition,{lang:'$lang'})
 			.previsu_spip({
 				previewParserPath:'$preview',
 				textEditer:'$tEditer',

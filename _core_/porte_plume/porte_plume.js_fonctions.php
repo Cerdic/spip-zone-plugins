@@ -11,11 +11,11 @@
  * @return string : declaration json
  */
 function porte_plume_creer_json_markitup(){
-	$sets = pipeline('porte_plume_barre_declarer', array(
-		'spip', 'spip_forum',
-	));
-	
+	// on recupere l'ensemble des barres d'outils connues
 	include_spip('inc/barre_outils');
+	if (!$sets = barre_outils_liste()) {
+		return null;
+	}
 
 	// 1 on initialise tous les jeux de barres
 	$barres = array();

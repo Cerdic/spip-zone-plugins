@@ -463,22 +463,39 @@ class Barre_outils{
 
 
 /**
- * Cette fonction cree automatiquement la css pour les images
+ * Cette fonction cree la css pour les images
  * des icones des barres d'outils
  * en s'appuyant sur la description des jeux de barres disponibles.
+ * 
+ * elle cherche une fonction barre_outils_($barre)_icones pour chaque
+ * barre et l'appelle si existe.
  * 
  * @return string : declaration css des icones
  */
 function barre_outils_css_icones(){
-	// recuperer la liste
-	// extraire les icones
+	// recuperer la liste, extraire les icones
 	$css = "";
 	
-	// retourne un tableau classe_css => nom_icone correspondante
-	include_spip('inc/barre_outils_params');
-	$lien_classCss_icone = pipeline('porte_plume_lien_classe_vers_icone', barre_outils_icones());
+	// liste des barres
+	if (!$barres = barre_outils_liste()) 
+		return null;
+		
+	// liste des classes css et leur correspondance avec une icone
+	$classe2icone = array();
+	foreach ($barres as $barre) {
+		include_spip('barre_outils/' . $barre);
+		if ($f = charger_fonction($barre . '_icones', 'barre_outils', true)) {
+			if (is_array($icones = $f())) {
+				$classe2icone = array_merge($classe2icone, $icones);
+			}
+		}
+	}
 	
-	foreach ($lien_classCss_icone as $n=>$i) {
+	// passer le tout dans un pipeline pour ceux qui ajoute de simples icones a des barres existantes
+	$classe2icone = pipeline('porte_plume_lien_classe_vers_icone',$classe2icone);
+	
+	// passage en css
+	foreach ($classe2icone as $n=>$i) {
 		$css .= "\n.markItUp .$n a {\n\tbackground-image:url(".url_absolue_css(chemin("icones_barre/$i")).");\n}";
 	}
 	return $css;
@@ -493,14 +510,34 @@ function barre_outils_css_icones(){
  * @return object/false : objet de type barre_outil
  */
 function barre_outils_initialiser($set){
-	include_spip('inc/barre_outils_params');
-	$f = 'barre_outils_'.$set;
-	if (function_exists($f)) {
+	if ($f = charger_fonction($set, 'barre_outils')) {
 		// retourne une instance de l'objet Barre_outils
 		return $f();
 	}
 	return false;
 }
 
+/**
+ * Retourne la liste des barres d'outils connues
+ *
+ * @return array/false : tableau des noms de barres trouvees
+ */
+function barre_outils_liste(){
+	static $sets = -1;
+	if ($sets !== -1) 
+		return $sets;
+	
+	// on recupere l'ensemble des barres d'outils connues
+	if (!$sets = find_all_in_path('barre_outils/','.*[.]php')
+	or !is_array($sets)) {
+		$sets = false;
+		return $sets;
+	}
+		
+	foreach($sets as $fichier=>$adresse) {
+		$sets[$fichier] = substr($fichier,0,-4); // juste le nom
+	}
+	return $sets;	
+}
 
 ?>
