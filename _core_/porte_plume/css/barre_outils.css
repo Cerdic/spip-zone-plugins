@@ -8,9 +8,9 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 // By Jay Salvat - http://markitup.jaysalvat.com/
 // ------------------------------------------------------------------*/
 
-.markItUpHeader a,
-.markItUpTabs a,
-.markItUpFooter a {
+.markItUp .markItUpHeader a,
+.markItUp .markItUpTabs a,
+.markItUp .markItUpFooter a {
 	color:#000;
 	text-decoration:none;
 }
