@@ -9,7 +9,7 @@
 	
 	Utilise les icones [FamFamFam->http://www.famfamfam.com/]
 	</description>
-	
+	<lien>http://documentation.magraine.net/-Porte-Plume-</lien> <!-- URI de documentation -->	
 	<etat>stable</etat>
 	<prefix>porte_plume</prefix>
   	
