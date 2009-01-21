@@ -67,13 +67,11 @@
 
 <ul class="innerfade" style="list-style-type: none ;">
     <BOUCLE_PORFOLIO2(DOCUMENTS){id_article?}{id_rubrique?}{mode=document}{extension==jpg|gif|png} {par num titre, date}>
-        <li>
+        <li class="diapo">
+            <img src="[(#URL_DOCUMENT||image_reduire{350,400}|extraire_attribut{src})]" alt=" #TITRE" /> 
             <div class="diapo">
-                <img src="[(#URL_DOCUMENT||image_reduire{350,400}|extraire_attribut{src})]" alt=" #TITRE" /> 
-                <div class="diapo">
-                    [<h3>(#TITRE|supprimer_numero)</h3>]
-                    [(#DESCRIPTIF|paragrapher)]
-                </div>
+                [<h3>(#TITRE|supprimer_numero)</h3>]
+                [(#DESCRIPTIF|paragrapher)]
             </div>
          </li>
     </BOUCLE_PORFOLIO2>	
