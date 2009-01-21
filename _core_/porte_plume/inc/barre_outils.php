@@ -6,8 +6,11 @@
  */
 include_spip('public/admin'); // pour stripos()
 
-include_spip('inc/layer'); // pour effacer la globale browser_caret
-$GLOBALS['browser_caret']="";
+/* pour compat 2.0 (inutile a partir de  2.1) */
+if (version_compare($GLOBALS['spip_version_branche'],'2.1.0 dev','<')) {
+	include_spip('inc/layer'); // pour effacer la globale browser_caret
+	$GLOBALS['browser_caret']="";
+}
 
 /**
  * La class Barre_outils est un objet contenant les differents

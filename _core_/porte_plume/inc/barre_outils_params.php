@@ -28,7 +28,7 @@ function barre_outils_spip(){
 				"name"      => _T('barre_outils:barre_intertitre'), 
 				"key"       => "H", 
 				"className" => "outil_header1", 
-				"openWith" => "\n\n{{{", 
+				"openWith" => "\n{{{", 
 				"closeWith" => "}}}\n",
 				"display"   => true,
 				"selectionType" => "line",
