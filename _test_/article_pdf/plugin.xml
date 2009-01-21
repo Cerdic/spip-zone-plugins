@@ -13,7 +13,7 @@ _ [Aquinatus->http://www.spip-contrib.net/_Aquinatus_]
 _ [C&#233;dric Morin->http://www.notre-ville.net]
     </auteur>
     <version>
-    0.1
+    0.2
     </version>
     <etat>
     stable
@@ -38,6 +38,5 @@ _ F&uuml;gen Sie den Tag #ARTICLE_PDF in Ihr Skelett ein um über einen Link zum 
     <prefix> 
     article_pdf
     </prefix>
-
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version='[2.0.0;]' />
 </plugin>
