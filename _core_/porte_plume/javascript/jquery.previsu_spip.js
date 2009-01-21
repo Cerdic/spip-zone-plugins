@@ -41,6 +41,7 @@
 						.addClass('ajaxLoad')
 						.html(renderPreview())
 						.removeClass('ajaxLoad');
+					return false;
 				});
 				$('.previsuEditer').click(function(){
 					mark = $(this).parent().parent();
@@ -49,6 +50,7 @@
 					$(mark).find('.markItUpEditor').show();
 					$(mark).find('.markItUpFooter').show();
 					$(this).addClass('on').prev().removeClass('on');
+					return false;
 				});
 			}
 
