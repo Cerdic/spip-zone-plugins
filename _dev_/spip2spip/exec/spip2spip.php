@@ -1,5 +1,7 @@
 <?php
-// version spip2spip lancée par le cron
+//
+// gestion des sites syndiques par spip2spip
+//
 include(dirname(__FILE__).'/../spiptospip_fonctions.php');
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -10,89 +12,94 @@ include_spip('inc/presentation');
 // -------------------------------
 
 function exec_spip2spip(){
-
   
   global $table_prefix;
+  global $connect_statut;
+  global $connect_toutes_rubriques;
   
   //------------------------------- 
-  // Some action ?
+  // droits  - FIXME ? en SPIP 2 utiliser autoriser ?????
   //-------------------------------
-  if (isset($_GET['action'])) {
-  	// del ?
-  	if ($_GET['action'] == 'del') {
-  		$my_id = $_GET['id'];
-  		$sql = "DELETE FROM ".$table_prefix."_spip2spip WHERE id = $my_id LIMIT 1";
-  		spip_query($sql);
-  	}
-  	// add ?
-  	if ($_GET['action'] == 'add') {
-  		$my_url  = addslashes(trim($_GET['url']));
-  		$my_site = addslashes(trim($_GET['site']));
-  		$sql = "INSERT INTO ".$table_prefix."_spip2spip VALUES ('', '".$my_site."' ,'".$my_url."','0000-00-00 00:00:00');";		
-  		spip_query($sql);
-  	}
+	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {   
+          $commencer_page = charger_fonction('commencer_page', 'inc');
+          echo $commencer_page(_T("spiptospip:copy_spip2spip"),_T("spiptospip:copy_spip2spip"),_T("spiptospip:copy_spip2spip"));
+	        echo _T('avis_non_acces_page');
+          echo fin_gauche().fin_page();
+	        exit;
   }
+
+  //------------------------------- 
+  // action 
+  //-------------------------------
+	// suppression site
+  if (_request('agir') == 'del') 
+      sql_delete($table_prefix."_spip2spip","id=".(int) _request('id'));
+
+  // ajout site
+  if (_request('agir') == 'add') {      
+  		$my_url  = addslashes(trim(_request('url')));
+  		$my_site = addslashes(trim(_request('site')));
+  		sql_delete($table_prefix."_spip2spip","site_rss='$my_url'"); // pas doublons  		
+  	  sql_insertq($table_prefix."_spip2spip", array(
+                   'site_titre' => $my_site, 'site_rss' => $my_url));
+  }
+
   
   //------------------------------- 
   // Main
   //-------------------------------
-  
-  debut_page(_T('spiptospip:copy_spip2spip'), "administration", "configuration","contenu");
-  echo "<br / ><br />";
-  gros_titre(_T('spiptospip:copy_spip2spip'));
-  debut_gauche();
-  echo debut_boite_info();
-  echo _T('spiptospip:intro_spip2spip');
+  $commencer_page = charger_fonction('commencer_page', 'inc');
+  echo $commencer_page(_T("spiptospip:copy_spip2spip"),_T("spiptospip:copy_spip2spip"),_T("spiptospip:copy_spip2spip"));
+  echo gros_titre(_T('spiptospip:copy_spip2spip'),'',false);
+  echo debut_gauche('', true);
+  echo debut_boite_info(true)._T('spiptospip:intro_spip2spip');
   if (function_exists(lire_config)) echo "<p><a href='?exec=cfg&cfg=spip2spip'>"._T('spiptospip:config_spip2spip')."</a></p>";
-  echo fin_boite_info();
-    
-    
-    
-  echo debut_droite();
-  
-  
+  echo fin_boite_info(true);
+ 
+   
   //
   // gestion des sites
-  debut_cadre_relief();
+  echo debut_droite('', true);
+  echo debut_cadre_relief(true);
   echo "<h3>"._T('spiptospip:site_manage')."</h3>\n";
   
   // sites inscrits
-  $sql = "SELECT * FROM ".$table_prefix."_spip2spip ORDER BY site_titre";
-  $result_copie = spip_query($sql);
+  $result = sql_select("*",$table_prefix."_spip2spip ORDER BY site_titre");
+
   echo "<table border='0' cellpadding=3 cellspacing=0 width='100%' class='arial2'>\n";
   echo "<tr style='background:#ff6600;font-weight:bold;'>\n";
   echo "<td>"._T('spiptospip:site_available')."</td>\n";
   echo "<td colspan=\"3\">"._T('spiptospip:last_syndic')."</td>\n";
   echo "</tr>\n";
   $i = 0;
-  while($row_copie  = spip_fetch_array($result_copie)) {  
+  while ($row = sql_fetch($result)) {  
     $couleur = ($i++ % 2) ? '#FFFFFF' : $couleur_claire;
   	echo "<tr bgcolor='$couleur'>";
-  	echo "\t<td><a href='".$row_copie["site_rss"]."' target='_blank'>".$row_copie["site_titre"]."</a></td>\n";
-  	echo "\t<td>".substr($row_copie["last_syndic"],0,-3)."</td>\n";
-  	echo "\t<td><a href='?exec=spip2spip_syndic&amp;id_site=".$row_copie["id"]."' class='verdana2'>"._T('spiptospip:action_syndic')."</a></td>\n";
-  	echo "\t<td><a href='?exec=spip2spip&amp;action=del&amp;id=".$row_copie["id"]."' class='verdana2'>"._T('spiptospip:action_delete')."</a></td>\n";
+  	echo "\t<td><a href='".$row["site_rss"]."' target='_blank'>".$row["site_titre"]."</a></td>\n";
+  	echo "\t<td>".substr($row["last_syndic"],0,-3)."</td>\n";
+  	echo "\t<td><a href='?exec=spip2spip_syndic&amp;id_site=".$row["id"]."' class='verdana2'>"._T('spiptospip:action_syndic')."</a></td>\n";
+  	echo "\t<td><a href='?exec=spip2spip&amp;agir=del&amp;id=".$row["id"]."' class='verdana2'>"._T('spiptospip:action_delete')."</a></td>\n";
   	echo "</tr>\n";
   }
   echo "</table>\n";
   
-  // ajouter un site
+  // formulaire ajout site
   echo "<h4>"._T('spiptospip:site_add')."</h4>\n";
-  echo "<form name='cp' method='get'>\n";
+  echo "<form name='cp' method='post' action='?exec=spip2spip'>\n";
   echo "<label for='site'>"._T('spiptospip:form_s2s_1')."<br/><input id=\"site\" name=\"site\" type=\"text\" size=\"50\"/><br />\n";
   echo "<label for='url'>"._T('spiptospip:form_s2s_2')."</label><br /><input name=\"url\" type=\"text\" size=\"50\"/><br />\n";
-  echo "<input name=\"action\" type=\"hidden\" value=\"add\"/>\n";
-  echo "<input name=\"exec\" type=\"hidden\" value=\"spip2spip\"/>\n";
-  echo "<input type=\"submit\" value=\""._T('spiptospip:form_s2s_3')."\"></form>";
-  fin_cadre_relief();
+  echo "<input name=\"agir\" type=\"hidden\" value=\"add\" />\n";
+  echo "<input type=\"submit\" value=\""._T('spiptospip:form_s2s_3')."\" /></form>";
+  echo fin_cadre_relief(true);
   
   //
   // memo
-  debut_cadre_relief();
+  echo debut_cadre_relief(true);
   echo "<p class='verdana2'>"._T('spiptospip:how_to')."</p>";
-  fin_cadre_relief();
+  echo fin_cadre_relief(true);
   
-  fin_page();
+  // pied
+  echo fin_gauche().fin_page();
 } 
 
 

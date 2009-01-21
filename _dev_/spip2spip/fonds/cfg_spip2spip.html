@@ -33,14 +33,6 @@
   </p>
   </fieldset>
  
-  <fieldset><legend>Mode d'import et de synchronisation des articles</legend> 
-     <select name="import_mode">
-      <option value="import_once"[(#ENV{import_mode}|=={import_once}|?{' selected="selected"'})]>Importer une seule fois et ne pas mettre &agrave; jour</option>
-      <option value="import_synchro"[(#ENV{import_mode}|=={import_synchro}|?{' selected="selected"'})]>Importer et synchroniser si mise &agrave; jour sur le site distant (exp&eacute;rimental)</option>
-      </select>
- </fieldset> 
- 
-
  
   <input type="submit" name="_cfg_ok" value="<:OK:>" />
   <input type="reset" value="<:Reset:>" />

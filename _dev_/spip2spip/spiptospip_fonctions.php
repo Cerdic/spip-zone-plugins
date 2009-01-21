@@ -33,8 +33,8 @@ function is_spip2spip_backend($str) {
 // parse le backend xml spip2spip 
 // basée sur la fonction originale: ecrire/inc/syndic.php -> analyser_backend()
 function analyser_backend_spip2spip($rss){  
-  include_ecrire("inc_texte.php"); # pour couper()
-	include_ecrire("inc_filtres.php"); # pour filtrer_entites()
+  include_spip("inc_texte.php"); # pour couper()
+	include_spip("inc_filtres.php"); # pour filtrer_entites()
 		
 	$xml_tags = array('surtitre','titre','soustitre','descriptif','chapo','texte','ps','auteur','link','evenements', 'lang','keyword','licence','documents'); 
 	
