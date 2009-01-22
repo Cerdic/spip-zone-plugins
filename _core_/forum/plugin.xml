@@ -1,0 +1,116 @@
+<plugin>
+	<nom>Forum</nom>
+	<auteur>Collectif SPIP</auteur>
+	<version>1.0</version>
+	<version_base>1.0</version_base>
+	<etat>dev</etat>
+	<description>Forum de SPIP (priv&eacute; et public)</description>
+	<prefix>forum</prefix>
+	<install>base/forum_upgrade.php</install>
+	<fonctions>public/forum.php</fonctions>
+	<fonctions>filtres/forum.php</fonctions>
+
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/forum.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/forum.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/forum.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>forum_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>notifications</nom>
+		<inclure>inc/forum_notifications.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>accueil_encours</nom>
+		<inclure>forum_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>accueil_informations</nom>
+		<inclure>forum_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>afficher_fiche_objet</nom>
+		<inclure>forum_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>afficher_config_objet</nom>
+		<inclure>forum_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>afficher_message_statut_objet</nom>
+		<inclure>forum_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>forum_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>boite_infos</nom>
+		<inclure>forum_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>compter_contributions_visiteur</nom>
+		<inclure>forum_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>configurer_liste_metas</nom>
+		<inclure>forum_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_objets_surnoms</nom>
+		<inclure>forum_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>optimiser_base_disparus</nom>
+		<inclure>forum_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_insertion</nom>
+		<inclure>forum_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>prepare_recherche</nom>
+		<inclure>forum_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>rechercher_liste_des_champs</nom>
+		<inclure>forum_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>rubrique_encours</nom>
+		<inclure>forum_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>supprimer_objets_lies</nom>
+		<inclure>forum_pipelines.php</inclure>
+	</pipeline>
+	
+
+	<necessite id="SPIP" version="[2.1.0 dev;)" />
+	
+	<bouton id="forum" position='2'>
+		<icone>images/messagerie-48.png</icone>
+		<titre>titre_forum</titre>		
+	</bouton>
+	<bouton id='forum_admin' parent='forum'>
+		<icone>images/forum-admin-24.gif</icone>
+		<titre>icone_forum_administrateur</titre>
+	</bouton>	
+	<bouton id='controle_forum' parent='forum'>
+		<icone>images/suivi-forum-24.gif</icone>
+		<titre>icone_suivi_forums</titre>
+	</bouton>	
+
+</plugin>
