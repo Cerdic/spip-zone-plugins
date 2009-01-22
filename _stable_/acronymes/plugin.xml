@@ -35,12 +35,12 @@ _ &#169; 2006 - Licence GPL
 		<inclure>acronymes_pipeline.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>post_propre</nom>
+		<nom>post_typo</nom>
 		<action>traiter_raccourcis</action>
 		<inclure>acronymes_filtres.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>post_propre</nom>
+		<nom>post_typo</nom>
 		<action>ajouter</action>
 		<inclure>acronymes_filtres.php</inclure>
 	</pipeline>
