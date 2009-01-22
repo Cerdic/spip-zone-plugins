@@ -6,7 +6,7 @@
 	erational - [erational.org->http://www.erational.org]
 _ &#169; 2006-2009 - Licence GPL version 3
 	</auteur>
-	<version>2.1</version>
+	<version>2.0</version>
 	<etat>dev</etat>
 	<description>
 Permet d'importer et d'exporter des articles avec d'autres sites SPIP en conservant le formatage spip
@@ -36,8 +36,7 @@ _ Les articles recopi&#233;s tentent de r&#233;cuperer le maximum de donn&#233;e
 	</pipeline>
 	<pipeline>
 		<nom>taches_generales_cron</nom>
-		<action>ajouter_cron</action>
-		<inclure>spip2spip.php</inclure>
+		<inclure>spiptospip_fonctions.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.0;]" />
 	<utilise id="cfg" version="[1.0;]" />

@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'article_license' => '<br />Licence de l\'article:',
 'action_syndic' => 'syndiquer manuellement',
 'action_delete' => 'effacer',
+'aucun_article' => 'aucun article &agrave; syndiquer actuellement',
 
 // B
 'back' => 'retour',

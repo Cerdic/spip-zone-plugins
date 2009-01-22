@@ -59,11 +59,11 @@ function exec_spip2spip(){
   //
   // gestion des sites
   echo debut_droite('', true);
-  echo debut_cadre_relief(true);
+  echo debut_cadre_relief(true);  
   echo "<h3>"._T('spiptospip:site_manage')."</h3>\n";
-  
+
   // sites inscrits
-  $result = sql_select("*","spip_spip2spip ORDER BY site_titre");
+  $result = sql_select("*","spip_spip2spip", "", "", "site_titre");
 
   echo "<table border='0' cellpadding=3 cellspacing=0 width='100%' class='arial2'>\n";
   echo "<tr style='background:#ff6600;font-weight:bold;'>\n";

@@ -77,7 +77,7 @@ function analyser_backend_spip2spip($rss){
   			'evenement'       => ',<evenement[>[:space:]],i',
 				'evenementfin'    => '</evenement>',
 				'idevent'             => ',<idevent[^>]*>(.*?)</idevent[^>]*>,ims',
-        		'datedeb'            => ',<datedeb[^>]*>(.*?)</datedeb[^>]*>,ims',
+        'datedeb'            => ',<datedeb[^>]*>(.*?)</datedeb[^>]*>,ims',
 				'datefin'          => ',<datefin[^>]*>(.*?)</datefin[^>]*>,ims',
 				'titre'          => ',<titre[^>]*>(.*?)</titre[^>]*>,ims',
 				'desc'           => ',<desc[^>]*>(.*?)</desc[^>]*>,ims',
@@ -86,7 +86,7 @@ function analyser_backend_spip2spip($rss){
 				'idsource'          => ',<idsource[^>]*>(.*?)</idsource[^>]*>,ims',
 	);
 	// fichier backend correct ?
-	if (!is_spip2spip_backend($rss)) return _T('avis_echec_syndication_01');
+	if (!is_spip2spip_backend($rss)) return _T('spiptospip:avis_echec_syndication_01');
 	
 	// Echapper les CDATA
 	$echappe_cdata = array();
@@ -115,7 +115,7 @@ function analyser_backend_spip2spip($rss){
 	}
 
 	// Analyser chaque <item>...</item> du backend et le transformer en tableau
-	if (!count($items)) return _T('avis_echec_syndication_01');
+	if (!count($items)) return _T('spiptospip:avis_echec_syndication_01');
 	
 	foreach ($items as $item) {
 	 
@@ -211,57 +211,54 @@ function analyser_backend_spip2spip($rss){
 
 //
 // recuperer rubrique (normalement uniquement) lié à un mot
-function spip2spip_get_id_rubrique($mot) { 
+function spip2spip_get_id_rubrique($mot) {   
     $id_group_spip2spip = spip2spip_get_id_groupemot("- spip2spip -");
-    $sql = "SELECT id_mot FROM spip_mots WHERE titre='".addslashes($mot)."' AND id_groupe='$id_group_spip2spip'"; // extra plus large utiliser  LIKE ?   
-    $result = spip_query($sql);    
-    while ($row = spip_fetch_array($result)) {
+    $result = sql_select("id_mot","spip_mots", array( 
+                                              "titre = ".sql_quote($mot),
+                                              "id_groupe = '$id_group_spip2spip'"));
+    while ($row = sql_fetch($result)) { 
         $id_mot = (int) $row['id_mot'];
-        $sql2 = "SELECT id_rubrique FROM spip_mots_rubriques WHERE id_mot='$id_mot' LIMIT 1";       
-        $result2 = spip_query($sql2);
-        while ($row2 = spip_fetch_array($result2)) {
-          return $row2['id_rubrique'];
-        }
-        return false;
+        if ($row2 = sql_fetsel("id_rubrique","spip_mots_rubriques","id_mot='$id_mot'"))  
+               return $row2['id_rubrique'];
+               
     }
     return false;
 }
 
 //
 // recupère id d'un groupe de mots-clés
-function spip2spip_get_id_groupemot($titre) {
-    $sql = "SELECT id_groupe FROM spip_groupes_mots WHERE titre='".addslashes($titre)."'"; 
-    $result = spip_query($sql);
-    while ($row = spip_fetch_array($result)) {
-       return $row['id_groupe'];
-    }
-    return false;  
+function spip2spip_get_id_groupemot($titre) {  
+   if ($row = sql_fetsel("id_groupe","spip_groupes_mots","titre=".sql_quote($titre))) 
+               return $row['id_groupe'];
+   return false;  
 }
 
 //
 // recupère id d'un mot
-function spip2spip_get_id_mot($titre) {
-    $sql = "SELECT id_mot FROM spip_mots WHERE titre='".addslashes($titre)."'"; 
-    $result = spip_query($sql);
-    while ($row = spip_fetch_array($result)) {
-       return $row['id_mot'];
-    }
-    return false;  
+function spip2spip_get_id_mot($titre) { 
+   if ($row = sql_fetsel("id_mot","spip_mots","titre=".sql_quote($titre))) 
+               return $row['id_mot']; 
+   return false;  
 }
 
 //
-// recupere id d'un auteur selon son nom ou le creer
-function spip2spip_get_id_auteur($name) {
-    if (trim($name)=="") return false;    
-    $sql = "SELECT id_auteur FROM spip_auteurs WHERE nom='".addslashes($name)."'";
-    $result = spip_query($sql);
-    while ($row = spip_fetch_array($result)) {
-       return $row['id_auteur'];
-    }
-    // auteur inconnu, on le cree ...
-    $sql = "INSERT INTO spip_auteurs (nom, statut) VALUES (\"$name\", '1comite')";
-    $result = spip_query($sql);
-    return spip_insert_id();
+// recupère id du secteur
+function spip2spip_get_id_secteur($id_rubrique) { 
+   if ($row = sql_fetsel("id_parent","spip_rubriques","id_rubrique=$id_rubrique")) 
+               return $row['id_parent']; 
+   return 0;  
+}
+
+//
+// recupere id d'un auteur selon son nom sinon le creer
+function spip2spip_get_id_auteur($name) {  
+   if (trim($name)=="") 
+              return false;
+   if ($row = sql_fetsel("id_auteur","spip_auteurs","nom=".sql_quote($name))) 
+              return $row['id_auteur']; 
+
+    // auteur inconnu, on le cree ... 
+    return sql_insertq('spip_auteurs',array('nom'=>$name,'statut'=>'1comite'));
 }
 
 //
@@ -297,12 +294,286 @@ function spip2spip_convert_ln($texte) {
 
 //
 // passe un document en mode vignette (ou autre)
-function spip2spip_passe_document_mode_vignette($id_document,$mode="vignette") {
+function spip2spip_passe_document_mode_vignette($id_document,$mode="vignette") {  // FIXME-SPIP2
    global $table_prefix;
    
    $sql="UPDATE ".$table_prefix."_documents SET mode = '$mode' WHERE id_document='$id_document' LIMIT 1";                        
    spip_query($sql);
-} 
+}
+
+//
+// function principale: spip2spip_syndique
+//
+// effectue la syndication d'un site donnee
+// - id_site
+// - mode: cron (silencieux avec spip_log) 
+//         html (log bavard)
+function spip2spip_syndiquer($id_site, $mode='cron') {
+    include_spip("inc/distant"); 
+    include_spip("inc/syndic"); 
+    include_spip("inc/mail"); 
+    include_spip("inc/getdocument"); 
+    include_spip("inc/ajouter_documents");
+
+
+    $log_html = "";
+    $log_email = "";
+    
+    //-------------------------------  
+    // Recupere la config
+    //-------------------------------
+    // groupe mot cle "licence" installe ? (contrib: http://www.spip-contrib.net/Filtre-Licence )
+    if (spip2spip_get_id_groupemot("licence"))  $isLicenceInstalled = true; 
+                                          else  $isLicenceInstalled = false;
+                                
+    // si cfg dispo, on charge les valeurs
+    if (function_exists(lire_config))  {
+        $import_statut = lire_config('spip2spip/import_statut');      
+        if (lire_config('spip2spip/citer_source')=="on") $citer_source=true; else  $citer_source=false;
+        if (lire_config('spip2spip/email_alerte')=="on") $email_alerte=true; else  $email_alerte=false;
+        $email_suivi = lire_config('spip2spip/email_suivi'); 
+    } else { // sinon valeur par defaut
+        $import_statut = "prop";         // statut des articles importés: prop(proposé),publie(publié)      
+        $citer_source = true; 
+        $email_alerte = true;
+        $email_suivi = $GLOBALS['meta']['adresse_suivi']; // adresse de suivi editorial
+    }
+    
+    //-------------------------------
+    // selection du site
+    //-------------------------------    
+    if ($row_site = sql_fetsel("*","spip_spip2spip","id=$id_site")) {    
+      $id_site   = $row_site["id"];
+      $site_titre = $row_site["site_titre"];
+      $url_syndic   = $row_site["site_rss"];
+      $date_syndic  = $row_site["last_syndic"];
+      
+      $log_html .= "<h4>$site_titre (<a href='$url_syndic'>flux</a>)</h4>";
+      spip_log("spip2spip: syndication: ".$url_syndic);
+      //$date =  date('Y-m-d H:i:s',time()); // utileser date OU NOW() ???
+      sql_update("spip_spip2spip", array('last_syndic' => 'NOW()'), "id=$id_site");
+      
+      // Aller chercher les donnees du flux RSS et les analyser
+      $rss = recuperer_page($url_syndic, true);
+      if (!$rss) {
+        $log_html .= "<div style='color:red'>"._T('spiptospip:avis_echec_syndication_02')."</div>";
+      } else {
+        $articles = analyser_backend_spip2spip($rss);              
+        //----*************        
+        // Des articles dispo pour ce site ?
+        if (is_array($articles)) { 
+            foreach ($articles as $article) {
+              $log_html .= "<ul>\n";              
+              
+              if (isset($article['titre'])) {    		  	    
+                $documents_current_article = array();
+                $current_titre = $article['titre'];
+                              
+                // Est que l'article n'a pas été déjà importé ?
+                $nb_reponses = sql_countsel("spip_articles","titre=".sql_quote($current_titre));                               
+                if ($nb_reponses>0) {                                   
+                   // article deja connu et present ds la base
+                   $log_html .= "<li>[<span style='color:#999'>"._T('spiptospip:imported_already')."</span>] $current_titre</li>\n";
+                   spip_log("spip2spip: deja importe: ".$current_titre);                    
+                } else {
+                   // nouvel article à importer
+                   $log_html .= "<li>[<span style='color:#090'>"._T('spiptospip:imported_new')."</span>] $current_titre<br />\n";
+                   
+                   // on cherche la rubrique destination
+                   $target = spip2spip_get_id_rubrique($article['keyword']);
+                   if (!$target) {  // pas de destination
+                      $log_html .= "<span style='color:#009'>"._T('spiptospip:no_target')." <strong>".$article['keyword']."</strong></span></li>\n";                    
+                   } else {   
+                      // tout est bon, on insert les donnnees !
+                      
+                      // etape 1 -  traitement des documents
+                      $_documents = $article['documents'];                    
+                      $documents_current_article = array();
+                      if ($_documents!="") {
+                        $_documents = unserialize($_documents);                  
+                        foreach($_documents as $_document) { 
+                            $id_distant = $_document['id'];
+                            $source = $_document['url'];
+                            $titre = $_document['titre'];                        
+                            $desc = $_document['desc'];                       
+                            // inspire de ajouter_un_document () de inc/getdocument.php 
+                            if ($a = recuperer_infos_distantes($source)) {  
+                              $fichier = $a['fichier'];                       
+                        			$id_type = $a['id_type'];
+                        			$taille = $a['taille'];                  			
+                        			$largeur = $a['largeur'];
+                        			$hauteur = $a['hauteur'];
+                        			$ext = $a['extension'];
+                        			$type_image = $a['type_image'];
+                        
+                        			$distant = 'oui';
+                        			$mode = 'document';
+                        			
+                              $date =  date('Y-m-d H:i:s',time()); // date de la syndication ou date du doc original (a ajouter car non parse) ?
+                        			// FIXME verif secu (par rapport ext) 
+                        			
+                        			// extension
+                        			ereg("\.([^.]+)$", $nom_envoye, $match);
+    		                      $ext = (corriger_extension(strtolower($match[1])));
+                               
+                              // Prevoir traitement specifique pour videos                      		
+                          		if ($ext != "mov" && $ext != "svg") {                      		 
+                          		  // Si c'est une image, recuperer sa taille et son type (detecte aussi swf)
+                          			if (!$size_image = @getimagesize($fichier)) 
+                          			   $size_image = @getimagesize($source); // si on arrive pas en local, on teste en distant                                                 			
+                          			$largeur = intval($size_image[0]);                      			
+                          			$hauteur = intval($size_image[1]);
+                          			$type_image = decoder_type_image($size_image[2]);
+                          		}  
+                          		
+                          		// SQL
+                              $id_nouveau_doc = sql_insertq('spip_documents', array(
+                                                                      'id_type' => $id_type,
+                                                                      'titre' => $titre,
+                                                                      'date' => $date,
+                                                                      'descriptif' => $desc,
+                                                                      'fichier' => $source,
+                                                                      'taille' => $taille,
+                                                                      'largeur' => $largeur,
+                                                                      'hauteur' => $hauteur,
+                                                                      'mode' => $mode,
+                                                                      'distant' => $distant,
+                                                                      'idx' => 'oui'));
+                              
+                              
+                              $documents_current_article[$id_distant] = $id_nouveau_doc;                   			
+                        		}  
+                        }
+                      } 
+                      
+                      // etape 2 -  traitement de l'article                             
+                      $_surtitre = $article['surtitre'];
+                  		$_titre = $article['titre'];
+                  		$_soustitre = $article['soustitre'];
+                  		$_descriptif = spip2spip_convert_extra($article['descriptif'],$documents_current_article);
+                  		$_chapo = spip2spip_convert_extra($article['chapo'],$documents_current_article);
+                  		$_texte = spip2spip_convert_extra($article['texte'],$documents_current_article);
+                  		$_ps = spip2spip_convert_extra($article['ps'],$documents_current_article);
+                  		$_date =  date('Y-m-d H:i:s',time()); // $article['date'];  // date de la syndication ou date de l'article ?
+                  		$_lang =  $article['lang'];
+                  		$_id_rubrique = $target; 
+                      $_id_secteur = spip2spip_get_id_secteur($target);           		          		
+                  		$_statut = $import_statut;
+                  		$_id_auteur = $article['auteur'];
+                  		$_link = $article['link'];
+                  		$_licence = $article['licence'];                           		
+                  		
+                  		// on cite la source originale ds le champs ps et la licence
+                  		if ($citer_source)
+                  		      $_ps .= _T('spiptospip:origin_url')." [".$_link."->".$_link."]";
+                  		
+                      // licence ?                
+                      if ($_licence !="" && !isLicenceInstalled)                               		
+                            $_ps .= _T('spiptospip:article_license')." ".$_licence;
+                     
+                                                  	            		
+                  		// ....dans la table articles             	
+                  		$id_nouvel_article = sql_insertq("spip_articles",array(
+                                              'lang' => $_lang,
+                                              'surtitre' => $_surtitre,
+                                              'titre' => $_titre,
+                                              'soustitre' => $_soustitre,
+                                              'id_rubrique' => $_id_rubrique,
+                                              'id_secteur' => $_id_secteur,
+                                              'descriptif' => $_descriptif,
+                                              'chapo' => $_chapo,
+                                              'texte' => $_texte,
+                                              'ps' => $_ps,
+                                              'statut' => $_statut,
+                                              'accepter_forum' => 'non',
+                                              'date' => $_date));      				        
+      				        $log_html  .= "<a href='?exec=articles&amp;id_article=$id_nouvel_article' style='padding:5px;border:1px solid;background:#ddd;display: block;'>"._T('spiptospip:imported_view')."</a>";
+                      $log_email .= $article['titre'] ."\n"._T('spiptospip:imported_view').": ".$GLOBALS['meta']['adresse_site']."/ecrire/?exec=articles&id_article=$id_nouvel_article \n\n";
+      				                      			        
+                      // ... dans la table auteurs
+                      if ($_id_auteur) {
+      				            $auteurs = explode(", ",$_id_auteur);
+      				            foreach($auteurs as $auteur) {
+      				                $id_auteur = spip2spip_get_id_auteur($auteur);
+      				                if ($id_auteur)   	
+                                @sql_insertq("spip_auteurs_articles",array('id_auteur'=>$id_auteur,'id_article'=>$id_nouvel_article));
+                          }
+                      }
+                      
+                      // ....dans la table documents_article
+                      foreach($documents_current_article as $document_current_article) { 
+                          @sql_insertq('spip_documents_articles',array('id_document'=>$document_current_article,'id_article'=>$id_nouvel_article));
+                      }  
+                      
+                      // etape 3 - traitement des evenements (a finir de porter) FIXME
+                      /*
+                      $_evenements = $article['evenements'];
+    				          $_evenements = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_evenements );
+                      if ($_evenements!="") {
+                       $_evenements=unserialize($_evenements);           
+                        foreach($_evenements as $_evenement) {                      
+                            $id_distant = $_evenement['idevent'];
+                            $datedeb = $_evenement['datedeb'];
+                            $datefin = $_evenement['datefin'];
+                            $lieu = addslashes($_evenement['lieu']);
+                            $horaire = $_evenement['horaire'];
+                            $titre = addslashes($_evenement['titre']);                        
+                            $desc = addslashes($_evenement['desc']);                         
+                            $idsource = $_evenement['idsource'];      
+              						      
+              						//echo $titreart."==".$titre."<br />";		  
+              						if($_titre==$titre){		                      
+                                        $sql="INSERT INTO `".$table_prefix."_evenements` (`id_evenement` ,	`id_article` ,`date_debut` ,`date_fin` ,`titre` ,`descriptif` ,	`lieu` ,`horaire` ,`id_evenement_source` ,`idx` ,`maj`)
+              								VALUES ('".$id_distant."' , '".$id_nouvel_article."', '".$datedeb."', '".$datefin."', '".$titre."', '".$desc."', '".$lieu."', '".$horaire."', '".$idsource."', 'oui', NOW( ))";
+              						  echo "<div style='padding:5px;border:1px solid #5DA7C5;background:#ddd;display: block;'>"._T('spiptospip:event_ok').$datedeb." &agrave; ".$lieu."</div>";
+              						 
+                      				          spip_query($sql);      
+              						}            			
+                                  	} 
+                                }
+                      */
+                      
+                      // .... dans le groupe mot "licence" ?
+                      if ($_licence !="" && isLicenceInstalled) {                              		
+                          $id_mot = spip2spip_get_id_mot($_licence);
+                          if ($id_mot) 
+                                  @sql_insertq('spip_mots_articles',array('id_mot'=>$id_mot,'id_article'=>$id_nouvel_article));                     
+                     } 
+
+                   }
+                   
+                   $log_html .= "</li>\n";
+                }
+
+              }  
+              $log_html .= "</ul>";
+              
+              // alerte email ?	
+              if ($email_alerte && $log_email !="") 
+                  envoyer_mail($email_suivi,"Syndication automatique SPIP2SPIP", $log_email);	    
+               
+              
+            }
+        } else {
+          $log_html .= "<div style='color:purple'>"._T('spiptospip:aucun_article')."</div>";
+        }
+        // #analyse article
+        //----*************
+      } 	
+   
+      
+    } // #selection du site
+    
+    if ($mode=='html') return $log_html;    
+    return false;
+}
+
+//
+// ajout au cron
+function spip2spip_taches_generales_cron($taches) {
+  $taches['spip2spip_syndic'] = 60*5;  
+	return $taches;
+}
 
 
 ?>
