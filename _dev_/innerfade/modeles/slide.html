@@ -9,6 +9,7 @@
 	#MODELE{article_innerfade}]
 	
 <script language="javascript" type="text/javascript" src="#CHEMIN{js/slideshow.js}"></script>
+
 <!-- Penser a mettre dans le repertoire squelettes un dossier js avec le script jquery.innerfade.js pour que le modele fonctionne -->
 
 
@@ -16,26 +17,21 @@
 <!-- pas besoin de jquery puisque c'est natif dans spip desormais <script language="javascript" type="text/javascript" src="#CHEMIN{js/jquery.js}"></script> -->
 
 <script type="text/javascript">
-$(document).ready(function() {
-	$	('#slideshow').slideshow({
-		timeout: 4000,
-		type: 'random'
-	});
-});
+    $(document).ready(
+	    function(){					
+		    $('.slideshow').slideshow({
+			    [speed: '(#ENV{speed})',]
+			    [type: '(#ENV{type})',]
+			    [containerheight: '(#ENV{containerheight})',]
+			    [containerwidth: '(#ENV{containerwidth})',]
+    		    timeout: #GET{timeout,2000}
+		    });
+    });	
 </script>
 
 
-
-
-<div id="slideshow">
-
-
-
-<BOUCLE_PORFOLIO2(DOCUMENTS){id_article?}{id_rubrique?}{mode=document}{extension==jpg|gif|png} {par num titre, date}>
-
-
-[(#FICHIER|image_reduire{433,161}|inserer_attribut{alt,slideshow})]
-
-</BOUCLE_PORFOLIO2>	
-
+<div class="slideshow">
+    <BOUCLE_PORFOLIO2(DOCUMENTS){id_article?}{id_rubrique?}{mode=document}{extension==jpg|gif|png} {par num titre, date}>
+        [(#URL_DOCUMENT||image_reduire{200,400}|inserer_attribut{'alt',#TITRE})]
+    </BOUCLE_PORFOLIO2>	
 </div>	
