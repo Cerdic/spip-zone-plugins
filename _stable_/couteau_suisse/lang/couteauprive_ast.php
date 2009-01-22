@@ -15,6 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'SPIP_liens:description' => '@puce@ Tolos enllaces del sitiu abrense por omisi&oacute;n nel ventanu de &ntilde;avegaci&oacute;n actual. Pero pue ser ama&ntilde;oso abrir los enllaces esternos al sitiu nun ventanu esterior nuevu -- lo que lleva a amesta-yos {target="_blank"} a toles balices &lt;a&gt; a les que SPIP conse&ntilde;a les clases {spip_out}, {spip_url} o {spip_glossaire}. Pue ser necesario amesta-yos una d\'estes clases a los enllaces de la cadarma del sitiu (archivos html) pa estender al m&aacute;simu esta carauter&iacute;stica.[[%radio_target_blank3%]]
 
 @puce@ SPIP permite enllazar les pallabres cola so definici&oacute;n gracies a l\'atayu tipogr&aacute;ficu <code>[?pallabra]</code>. Por omisi&oacute;n (o si dexes vac&iacute;a la caxina d\'embaxo), el glosariu esternu empobina pa la enciclopedia llibre wikipedia.org. A to eleici&oacute;n l\'enllaz a utilizar. <br />Enllaz de preba: [?SPIP][[%url_glossaire_externe2%]]',
+	'SPIP_liens:description1' => '@puce@ SPIP tien previstu un estilu CSS pa los enllaces &laquo;~mailto:&raquo;: un sobre peque&ntilde;u tendr&iacute;a que apaecer delantre de cada enllaz lligau a un corr&eacute;u; pero como hai &ntilde;avegadores que nun puen amosalo (notablemente IE6, IE7 y SAF3), t&uacute; decides si quies mantener esta carauter&iacute;stica.
+_ Enllaz de preba: [->test@test.com] (recarga la p&aacute;xina pa prebar).[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP y los enllaces… esternos',
 
 	// A
@@ -314,6 +316,7 @@ Atenci&oacute;n, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Ro
 	'label:dossier_squelettes' => 'Direutoriu(os) a utilizar:',
 	'label:duree_cache' => 'Duraci&oacute;n de la cach&eacute; local:',
 	'label:duree_cache_mutu' => 'Duraci&oacute;n de la cach&eacute; en mutualizaci&oacute;n:',
+	'label:enveloppe_mails' => 'Sobre peque&ntilde;u delantre los correos:',
 	'label:expo_bofbof' => 'Escribir como exponentes: <html>St(e)(s), Bx, Bd(s) y Fb(s)</html>',
 	'label:forum_lgrmaxi' => 'Valor (en carauteres):',
 	'label:glossaire_groupes' => 'Grupu(os) utilizao(s):',
@@ -370,6 +373,7 @@ Atenci&oacute;n, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Ro
 	'label:url_arbo_sep_id' => 'Carauter de separaci&oacute;n \'titre-id\' en casu de duplicaos :<br/>(nun uses \'/\')',
 	'label:url_glossaire_externe2' => 'Enllaz al glosariu esternu:',
 	'label:urls_arbo_sans_type' => 'Amosar el tipu d\'oxetu SPIP nes URLs:',
+	'label:urls_avec_id' => 'Una id sistem&aacute;tica, sicas&iacute;...',
 	'label:urls_minuscules' => '@_CS_CHOIX@',
 	'label:webmestres' => 'Llista de los webmasters del sitiu:',
 	'liens_en_clair:description' => 'Ponte a disposici&oacute;n el filtru: \'liens_en_clair\'. El testu probablemente tien enllaces d\'hipertestu que nun son visibles al imprentar. Esti filtru amesta ente corchetes el dest&iacute;n de cada enllaz calcable (enllaces esternos o mails). Atenci&oacute;n: nel mou impresi&oacute;n (par&aacute;metru \'cs=print\' o \'page=print\' na URL de la p&aacute;xina), esti funcionamientu apl&iacute;case autom&aacute;ticamente.',
@@ -509,10 +513,12 @@ Esti sumariu pue acoplase con: &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
 	'sommaire:nom' => 'Un sumariu autom&aacute;ticu',
 	'sommaire_avec' => 'Un testu con sumariu: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un testu ensin sumariu: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'spam:description' => '<MODIF>Tenta lluchar escontra los unv&iacute;os de mensaxes autom&aacute;ticos y gafientos na parte p&uacute;blica. Delles pallabres y les balices &lt;a>&lt;/a> tan torg&aacute;es.
+	'spam:description' => 'Tenta lluchar escontra los unv&iacute;os de mensaxes autom&aacute;ticos y gafientos na parte p&uacute;blica. Delles pallabres, igual que les balices en claro &lt;a>&lt;/a> tan torg&aacute;es: encamienta a los redactores a usar los atayos pa enllaces de SPIP.
 
-Llista equ&iacute; les secuencies torg&aacute;es@_CS_ASTER@ separtandoles con espacios. [[%spam_mots%]]
-@_CS_ASTER@ Pa especificar una pallabra entera, m&eacute;tela ente par&eacute;ntesis. Pa una espresi&oacute;n con espacios, ponla ente comines.',
+Llista equ&iacute; les secuencies torg&aacute;es separtandoles con espacios. [[%spam_mots%]]
+• Pa una espresi&oacute;n con espacios, ponla ente comines.
+_ • Pa especificar una pallabra entera, m&eacute;tela ente par&eacute;ntesis. Exemplu:~{(premiu)}.
+_ • Pa una espresi&oacute;n regular, verifica bien la sintaxis y ponla ente barres y ente comines. Exemplu:~{"/@test\\.(com|org|ast)/"}.',
 	'spam:nom' => 'Llucha escontra la puxarra',
 	'spip_cache:description' => '@puce@ La cach&eacute; ocupa ciertu espaciu en discu y SPIP puede limitar la cantid&aacute;. Un valor vac&iacute;u o igual a 0 significa que nun s\'aplica cuota denguna.[[%quota_cache% Mb]]
 
@@ -553,11 +559,11 @@ La sintaxis <html>#TITRE_XXX{yy}</html> sop&oacute;rtase igualmente. Exemplu: <h
 	'tous' => 'Toos',
 	'toutes_couleurs' => 'Los 36 colores de los estilos css :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Bloques multilling&uuml;es: <b><:trad:></b>',
-	'toutmulti:description' => '<MODIF>Del mesmu mou que ya pod&iacute;es facelo nes tos cadarmes, esta ferramienta te permite utilizar llibremente les cadenes de lling&uuml;es (de SPIP o de les cadarmes) con tolos conten&iacute;os del sitiu (art&iacute;culos, t&iacute;tulos, mensaxes, etc.) con l\'aida de l\'atayu <code><:cadena:></code>.
+	'toutmulti:description' => 'Del mesmu mou que ya pod&iacute;es facelo nes tos cadarmes, esta ferramienta te permite utilizar llibremente les cadenes de lling&uuml;es (de SPIP o de les cadarmes) nel conten&iacute;u ensembre del sitiu (art&iacute;culos, t&iacute;tulos, mensaxes, etc.) con l\'aida de l\'atayu <code><:cadena:></code>.
 
 Consulta [equ&iacute; ->http://www.spip.net/fr_article2128.html] la documentaci&oacute;n de SPIP pa esti asuntu.
 
-Esta ferramienta acepta igualmente los argumentos amestaos con SPIP 2.0. Por exemplu, l\'atayu <code><:mio_cadena{nome=Charles Martin, eda=37}:></code> permite pasa-y dos par&aacute;metros a la siguiente cadena: <code>\'mio_cadena\'=>"Bones, soi @nome@ y tengo @eda@ a&ntilde;os\\"</code>.
+Esta ferramienta acepta igualmente los argumentos que apaecieron con SPIP 2.0. Por exemplu, l\'atayu <code><:mio_cadena{nome=Charles Martin, eda=37}:></code> permite pasa-y dos par&aacute;metros a la siguiente cadena: <code>\'mio_cadena\'=>"Bones, soi @nome@ y tengo @eda@ a&ntilde;os\\"</code>.
 
 La funci&oacute;n SPIP usada en PHP ye <code>_T(\'cadena\')</code> ensin argumentu, y <code>_T(\'cadena\', array(\'arg1\'=>\'un testu\', \'arg2\'=>\'otru testu\'))</code> con argumentos.
 
@@ -617,10 +623,10 @@ _ Exemplu: <code>article.php3?id_article=123</code>
 
 @puce@ Si utilizes el formatu {page} d\'embaxo o si l\'oxetu solicit&aacute;u nun se reconocer&aacute;, pero ye posible escoyer {{el script de llamada}} a SPIP. Por omisi&oacute;n, SPIP escueye {spip.php}, pero {index.php} (exemplu de formatu: <code>/index.php?article123</code>) donde un valor vac&iacute;u (formatu: <code>/?article123</code>) funciona tami&eacute;n. Pa cualquier otru valor, necesites crear dafechu l\'archivu correspondiente na raiz de SPIP, a imaxe del que ya esiste: {index.php}.
 [[%spip_script%]]',
-	'type_urls:description1' => '<MODIF>@puce@ Si utilices un formatu bas&aacute;u en URLs &laquo;propies&raquo;  ({propres}, {propres2}, {libres}, {arborescentes} o {propres_qs}), la Navaya Suiza pue:
-<q1>• Asegurase que la URL producida tea totalmente {{en min&uacute;scules}}.
-_ • Provocar l\'amestamientu sistem&aacute;ticu de {{la id de l\'oxetu}} a la so URL (como sufixu o como prefixu).
-_ (exemplos: <code>/Mio-titulu-d-art&iacute;culu,457</code> o <code>/457-Mio-t&iacute;tulu-d-art&iacute;culu</code>)</q1>[[%urls_minuscules%]][[->%urls_avec_id%]][[->%urls_avec_id2%]]',
+	'type_urls:description1' => '@puce@ Si utilices un formatu bas&aacute;u en URLs &laquo;propies&raquo; ({propres}, {propres2}, {libres}, {arborescentes} o {propres_qs}), la Navaya Suiza pue:
+<q1>• Asegurase que la URL producida tea totalmente {{en min&uacute;scules}}.</q1>[[%urls_minuscules%]]
+<q1>• Provocar l\'amestamientu sistem&aacute;ticu de {{la id de l\'oxetu}} a la URL (como sufixu, prefixu, etc.).
+_ (exemplos: <code>/Mio-titulu-d-art&iacute;culu,457</code> o <code>/457-Mio-t&iacute;tulu-d-art&iacute;culu</code>)</q1>',
 	'type_urls:nom' => 'Formatu de les URLs',
 	'typo_exposants:description' => '{{Testos en franc&eacute;s}}: meyora la presentaci&oacute;n tipogr&aacute;fica de les abreviatures corrientes, escribiendo como esponente los elementos necesarios (as&iacute;, {<acronym>Mme</acronym>} tresf&oacute;rmase en {M<sup>me</sup>}) y corrixendo los fallos comunes ({<acronym>2&egrave;me</acronym>} o  {<acronym>2me</acronym>}, por exemplu, cam&uacute;dense en {2<sup>e</sup>}, &uacute;nica abreviatura correuta).
 
@@ -643,13 +649,15 @@ Escueye equ&iacute; escribir como esponentes dellos atayos suplementarios, magar
 	'url_propres2' => 'propies2@_CS_ASTER@',
 	'url_propres_qs' => 'propies_qs',
 	'url_standard' => 'est&aacute;ndar',
-	'urls_avec_id' => '<MODIF>Id sistem&aacute;ticamente nel sufixu',
-	'urls_avec_id2' => '<MODIF>Id sistem&aacute;ticamente nel prefixu',
+	'urls_3_chiffres' => 'Imponer un m&iacute;nimu de 3 cifres',
+	'urls_avec_id' => 'Ponela como sufixu',
+	'urls_avec_id2' => 'Ponela como prefixu',
 	'urls_base_total' => 'Actualmente hai @nb@ URL(s) na base',
 	'urls_base_vide' => 'La base de les URLs ta vac&iacute;a',
 	'urls_choix_objet' => 'Edici&oacute;n de la base de la URL d\'un oxetu espec&iacute;ficu:',
 	'urls_edit_erreur' => 'El formatu actual de les URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) nun permite la edici&oacute;n.',
 	'urls_enregistrer' => 'Grabar esta URL na base',
+	'urls_id_sauf_rubriques' => 'Encaboxar les estayes',
 	'urls_minuscules' => 'Letres min&uacute;scules',
 	'urls_nouvelle' => 'Editar la URL &laquo;propia&raquo;:',
 	'urls_num_objet' => 'N&uacute;mberu:',

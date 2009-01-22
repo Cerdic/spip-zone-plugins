@@ -15,12 +15,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'SPIP_liens:description' => '@puce@ Tous les liens du site s\'ouvrent par d&eacute;faut dans la fen&ecirc;tre de navigation en cours. Mais il peut &ecirc;tre utile d\'ouvrir les liens externes au site dans une nouvelle fen&ecirc;tre ext&eacute;rieure -- cela revient &agrave; ajouter {target="_blank"} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'&eacute;tendre au maximum cette fonctionnalit&eacute;.[[%radio_target_blank3%]]
 
 @puce@ SPIP permet de relier des mots &agrave; leur d&eacute;finition gr&acirc;ce au raccourci typographique <code>[?mot]</code>. Par d&eacute;faut (ou si tu laisses vide la case ci-dessous), le glossaire externe renvoie vers l’encyclop&eacute;die libre wikipedia.org. &Agrave; toi de choisir l\'adresse &agrave; utiliser. <br />Lien de test : [?SPIP][[%url_glossaire_externe2%]]',
+	'SPIP_liens:description1' => '@puce@ SPIP a pr&eacute;vu un style CSS pour les liens &laquo;~mailto:~&raquo; : une petite enveloppe devrait appara&icirc;tre devant chaque lien li&eacute; &agrave; un courriel; mais puisque tous les navigateurs ne peuvent pas l\'afficher (notamment IE6, IE7 et SAF3), &agrave; toi de voir s\'il faut conserver cet ajout.
+_ Lien de test : [->test@test.com] (rechargez la page enti&egrave;rement).[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP et les liens… externes',
 
 	// A
 	'acces_admin' => 'Acc&egrave;s administrateurs :',
 	'action_rapide' => 'Action rapide, uniquement si tu sais ce que tu fais !',
 	'action_rapide_non' => 'Action rapide, disponible une fois cet outil activ&eacute; :',
+	'admins_seuls' => 'Les administrateurs seulement',
 	'attente' => 'Attente...',
 	'auteur_forum:description' => 'Incite tous les auteurs de messages publics &agrave; remplir (d\'au moins d\'une lettre !) le champ &laquo;@_CS_FORUM_NOM@&raquo; afin d\'&eacute;viter les contributions totalement anonymes.',
 	'auteur_forum:nom' => 'Pas de forums anonymes',
@@ -192,8 +195,8 @@ Cet outil peut &ecirc;tre coupl&eacute; avec  &laquo;&nbsp;[.->sommaire]&nbsp;&r
 
 	// E
 	'effaces' => 'Effac&eacute;s',
-	'en_travaux:description' => '<MODIF>Permet d\'afficher un message personalisable pendant une phase de maintenance sur tout le site public.
-[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]]',
+	'en_travaux:description' => 'Pendant une phase de maintenance, permet d\'afficher un message personalisable sur tout le site public, &eacute;ventuellement la partie priv&eacute;e.
+[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]',
 	'en_travaux:nom' => 'Site en travaux',
 	'erreur:bt' => '<span style=\\"color:red;\\">Attention :</span> la barre typographique (version @version@) semble ancienne.<br />Le Couteau Suisse est compatible avec une version sup&eacute;rieure ou &eacute;gale &agrave; @mini@.',
 	'erreur:description' => 'id manquant dans la d&eacute;finition de l\'outil !',
@@ -313,6 +316,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:dossier_squelettes' => 'Dossier(s) &agrave; utiliser :',
 	'label:duree_cache' => 'Dur&eacute;e du cache local :',
 	'label:duree_cache_mutu' => 'Dur&eacute;e du cache en mutualisation :',
+	'label:enveloppe_mails' => 'Petite enveloppe devant les mails :',
 	'label:expo_bofbof' => 'Mise en exposants pour : <html>St(e)(s), Bx, Bd(s) et Fb(s)</html>',
 	'label:forum_lgrmaxi' => 'Valeur (en caract&egrave;res) :',
 	'label:glossaire_groupes' => 'Groupe(s) utilis&eacute;(s) :',
@@ -334,6 +338,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:message_travaux' => 'Ton message de maintenance :',
 	'label:moderation_admin' => 'Valider automatiquement les messages des : ',
 	'label:paragrapher' => 'Toujours paragrapher :',
+	'label:prive_travaux' => 'Accessibilit&eacute; de l\'espace priv&eacute; pour :',
 	'label:puce' => 'Puce publique &laquo;<html>-</html>&raquo; :',
 	'label:quota_cache' => 'Valeur du quota :',
 	'label:racc_g1' => 'Entr&eacute;e et sortie de la mise en &laquo;<html>{{gras}}</html>&raquo; :',
@@ -368,6 +373,8 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:url_arbo_sep_id' => 'Caract&egrave;re de s&eacute;paration \'titre-id\' en cas de doublon :<br/>(ne pas utiliser \'/\')',
 	'label:url_glossaire_externe2' => 'Lien vers le glossaire externe :',
 	'label:urls_arbo_sans_type' => 'Afficher le type d\'objet SPIP dans les URLs :',
+	'label:urls_avec_id' => 'Un id syst&eacute;matique, mais...',
+	'label:urls_minuscules' => '@_CS_CHOIX@',
 	'label:webmestres' => 'Liste des webmestres du site :',
 	'liens_en_clair:description' => 'Met &agrave; ta disposition le filtre : \'liens_en_clair\'. Ton texte contient probablement des liens hypertexte qui ne sont pas visibles lors d\'une impression. Ce filtre ajoute entre crochets la destination de chaque lien cliquable (liens externes ou mails). Attention : en mode impression (parametre \'cs=print\' ou \'page=print\' dans l\'url de la page), cette fonctionnalit&eacute; est appliqu&eacute;e automatiquement.',
 	'liens_en_clair:nom' => 'Liens en clair',
@@ -506,10 +513,12 @@ Ce sommaire peut &ecirc;tre coupl&eacute; avec&nbsp;: &laquo;&nbsp;[.->decoupe]&
 	'sommaire:nom' => 'Un sommaire pour vos articles',
 	'sommaire_avec' => 'Un texte avec sommaire&nbsp;: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un texte sans sommaire&nbsp;: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'spam:description' => '<MODIF>Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises &lt;a>&lt;/a> sont interdits.
+	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises &lt;a>&lt;/a> sont interdits :  inciter vos r&eacute;dacteurs &agrave; utiliser les raccourcis de liens SPIP.
 
-Listes ici les s&eacute;quences interdites@_CS_ASTER@ en les s&eacute;parant par des espaces. [[%spam_mots%]]
-@_CS_ASTER@Pour sp&eacute;cifier un mot entier, mets-le entre paranth&egrave;ses. Pour une expression avec des espaces, place-la entre guillemets.',
+Liste ici les s&eacute;quences interdites en les s&eacute;parant par des espaces. [[%spam_mots%]]
+• Pour une expression avec des espaces, placez-la entre guillemets.
+_ • Pour sp&eacute;cifier un mot entier, mettez-le entre parenth&egrave;ses. Exemple~:~{(asses)}.
+_ • Pour une expression r&eacute;guli&egrave;re, v&eacute;rifie bien la syntaxe et place-la entre slashes et entre guillemets. Exemple~:~{"/@test\\.(com|fr)/"}.',
 	'spam:nom' => 'Lutte contre le SPAM',
 	'spip_cache:description' => '@puce@ Le cache occupe un certain espace disque et SPIP peut en limiter l\'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu\'aucun quota ne s\'applique.[[%quota_cache% Mo]]
 
@@ -536,19 +545,21 @@ _ • {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&eacute;
 
 	// T
 	'titre' => 'Le Couteau Suisse',
-	'titre_parent:description' => '<MODIF>Au sein d\'une boucle, il est courant de vouloir afficher le titre du parent de l\'objet en cours. Traditionnellement, il suffirait d\'utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT all&eacute;gera l\'&eacute;criture de tes squelettes. Le r&eacute;sultat renvoy&eacute; est : le titre du groupe d\'un mot-cl&eacute; ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, br&egrave;ve, etc.).
+	'titre_parent:description' => 'Au sein d\'une boucle, il est courant de vouloir afficher le titre du parent de l\'objet en cours. Traditionnellement, il suffirait d\'utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT all&eacute;gera l\'&eacute;criture de tes squelettes. Le r&eacute;sultat renvoy&eacute; est : le titre du groupe d\'un mot-cl&eacute; ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, br&egrave;ve, etc.).
 
 Note : Pour les mots-cl&eacute;s, un alias de #TITRE_PARENT est #TITRE_GROUPE. Le traitement SPIP de ces nouvelles balises est similaire &agrave; celui de #TITRE.
 
 @puce@ Si tu es sous SPIP 2.0, alors tu as  ici &agrave; ta disposition tout un ensemble de balises #TITRE_XXX qui pourront te donner le titre de l\'objet \'xxx\', &agrave; condition que le champ \'id_xxx\' soit pr&eacute;sent dans la table en cours (#ID_XXX utilisable dans la boucle en cours).
 
-Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du secteur dans lequel est plac&eacute; l\'article en cours, puisque l\'identifiant #ID_SECTEUR (ou le champ \'id_secteur\') est disponible dans ce cas.[[%titres_etendus%]]',
-	'titre_parent:nom' => '<MODIF>Balise #TITRE_PARENT',
+Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du secteur dans lequel est plac&eacute; l\'article en cours, puisque l\'identifiant #ID_SECTEUR (ou le champ \'id_secteur\') est disponible dans ce cas.
+
+La syntaxe <html>#TITRE_XXX{yy}</html> est &eacute;galement support&eacute;e. Exemple : <html>#TITRE_ARTICLE{10}</html> renverra le titre de l\'article #10.[[%titres_etendus%]]',
+	'titre_parent:nom' => 'Balises #TITRE_PARENT/OBJET',
 	'titre_tests' => 'Le Couteau Suisse - Page de tests…',
 	'tous' => 'Tous',
 	'toutes_couleurs' => 'Les 36 couleurs des styles css :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Blocs multilingues&nbsp;: <b><:trad:></b>',
-	'toutmulti:description' => '<MODIF>&Agrave; l\'instar de ce tu peux d&eacute;j&agrave; faire dans tes squelettes, cet outil te permet d\'utiliser librement les cha&icirc;nes de langues (de SPIP ou de tes squelettes) dans tous les contenus de ton site (articles, titres, messages, etc.) &agrave; l\'aide du raccourci <code><:chaine:></code>.
+	'toutmulti:description' => '&Agrave; l\'instar de ce tu peux d&eacute;j&agrave; faire dans tes squelettes, cet outil te permet d\'utiliser librement les cha&icirc;nes de langues (de SPIP ou de tes squelettes) dans tous les contenus de ton site (articles, titres, messages, etc.) &agrave; l\'aide du raccourci <code><:chaine:></code>.
  
 Consulte [ici ->http://www.spip.net/fr_article2128.html] la documentation de SPIP &agrave; ce sujet.
 
@@ -612,6 +623,10 @@ _ Exemple : <code>article.php3?id_article=123</code>
 
 @puce@ Si tu utilises le format {page} ci-dessus ou si l\'objet demand&eacute; n\'est pas reconnu, alors il t\'est possible de choisir {{le script d\'appel}} &agrave; SPIP. Par d&eacute;faut, SPIP choisit {spip.php}, mais {index.php} (exemple de format : <code>/index.php?article123</code>) ou une valeur vide (format : <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il te faut absolument cr&eacute;er le fichier correspondant dans la racine de SPIP, &agrave; l\'image de celui qui existe d&eacute;j&agrave; : {index.php}.
 [[%spip_script%]]',
+	'type_urls:description1' => '@puce@ Si tu utilises un format &agrave; base d\'URLs &laquo;propres&raquo;  ({propres}, {propres2}, {libres}, {arborescentes} ou {propres_qs}), le Couteau Suisse peut :
+<q1>• S\'assurer que l\'URL produite soit totalement {{en minuscules}}.</q1>[[%urls_minuscules%]]
+<q1>• Provoquer l\'ajout syst&eacute;matique de {{l\'id de l\'objet}} &agrave; son URL (en suffixe, en pr&eacute;fixe, etc.).
+_ (exemples : <code>/Mon-titre-d-article,457</code> ou <code>/457-Mon-titre-d-article</code>)</q1>',
 	'type_urls:nom' => 'Format des URLs',
 	'typo_exposants:description' => '{{Textes fran&ccedil;ais}} : am&eacute;liore le rendu typographique des abr&eacute;viations courantes, en mettant en exposant les &eacute;l&eacute;ments n&eacute;cessaires (ainsi, {<acronym>Mme</acronym>} devient {M<sup>me</sup>}) et en corrigeant les erreurs courantes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, par exemple, deviennent {2<sup>e</sup>}, seule abr&eacute;viation correcte).
 
@@ -634,11 +649,16 @@ Choisis ici de mettre en exposant certains raccourcis suppl&eacute;mentaires, ma
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'standard',
+	'urls_3_chiffres' => 'Imposer un minimum de 3 chiffres',
+	'urls_avec_id' => 'Le placer en suffixe',
+	'urls_avec_id2' => 'Le placer en pr&eacute;fixe',
 	'urls_base_total' => 'Il y a actuellement @nb@ URL(s) en base',
 	'urls_base_vide' => 'La base des URLs est vide',
 	'urls_choix_objet' => '&Eacute;dition en base de l\'URL d\'un objet sp&eacute;cifique&nbsp;:',
 	'urls_edit_erreur' => 'Le format actuel des URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) ne permet pas d\'&eacute;dition.',
 	'urls_enregistrer' => 'Enregistrer cette URL en base',
+	'urls_id_sauf_rubriques' => 'Exclure les rubriques',
+	'urls_minuscules' => 'Lettres minuscules',
 	'urls_nouvelle' => '&Eacute;diter l\'URL &laquo;&nbsp;propres&nbsp;&raquo;&nbsp;:',
 	'urls_num_objet' => 'Num&eacute;ro&nbsp;:',
 	'urls_purger' => 'Tout vider',
@@ -649,7 +669,7 @@ Choisis ici de mettre en exposant certains raccourcis suppl&eacute;mentaires, ma
 	'urls_type_objet' => 'Objet&nbsp;:',
 	'urls_url_calculee' => 'URL publique &laquo;&nbsp;@type@&nbsp;&raquo;&nbsp;:',
 	'urls_url_objet' => 'URL &laquo;&nbsp;propres&nbsp;&raquo; enregistr&eacute;e&nbsp;:',
-	'urls_valeur_vide' => '<MODIF>(Une valeur vide entra&icirc;ne la suppression de l\'URL)',
+	'urls_valeur_vide' => '(Une valeur vide entra&icirc;ne le recalcul de l\'URL)',
 
 	// V
 	'validez_page' => 'Pour acc&eacute;der aux modifications :',
