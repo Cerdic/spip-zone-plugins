@@ -48,8 +48,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb' => 'Enable SpipBB',
 	'admin_config_spipbb_info' => 'Choose Yes to enable SpipBB',
 	'admin_config_tables' => 'Configuration of SpipBB tables',
-	'admin_config_tables_erreur' => '<MODIF>Problem with SpipBB tables: @tables_erreur@ are incorrect (the tables @tables_ok@ seem to be OK).
- Consult the [documentation on Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] or [support on spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
+	'admin_config_tables_erreur' => 'Problem with SpipBB tables: @tables_erreur@ are incorrect (the tables @tables_ok@ seem to be all right).
+ Refer to the [documentation on Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] or [support on spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
 	'admin_config_tables_ok' => 'The SpipBB database tables are installed correctly (@tables_ok@)',
 	'admin_date_ouverture' => 'Openning date',
 	'admin_debug_log' => 'Log file @log_name@',
@@ -135,9 +135,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champs_obligatoires' => 'Fields marked with an * are compulsory.',
 	'chercher' => 'Search',
 	'choix_mots_annonce' => 'Make an announce',
+	'choix_mots_creation' => 'If you want to create the keywords dedicated to SpipBB  <strong>automatically</strong>B, click this button. These keywords can be modified or deleted later...',
+	'choix_mots_creation_submit' => 'Automatic keywords configuration',
 	'choix_mots_ferme' => 'To close a thread',
 	'choix_mots_postit' => 'Set sticky',
 	'choix_mots_selection' => 'This keyword group should at least contain 3 keywords. Usually, the plugin will create them while installing. SpipBB needs - in general - the {ferme} (closed), {annonce} (announce) and {postit} (postit) keywords, but you are allowed to choose another one.',
+	'choix_rubrique_creation' => 'If you want to create the main section containing the SpipBB forums and the first empty forum <strong>automatically</strong>, click this button. This forum is the created hierarchy can be modified or deleted later...',
+	'choix_rubrique_creation_submit' => 'Main section automatic configuration',
 	'choix_rubrique_selection' => 'Select the section that will host the base of your forums. Inside, each sub-section will be a forum group, each published article will open a new forum.',
 	'choix_squelettes' => 'You are allowed to used other templates, but the selected files replacing groupeforum.html and filforum.html must already exist!',
 	'citer' => 'Quote',
@@ -221,6 +225,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_ferme_texte' => 'This forum is disabled. You cannot post to it anymore.',
 	'forum_maintenance' => 'This forum is close for maintenance',
 	'forum_ouvrir' => 'Open this Forum',
+	'forums_categories' => 'Miscellaneous',
+	'forums_spipbb' => 'SpipBB forums',
+	'forums_titre' => 'My first forum',
 	'fromphpbb_erreur_db_phpbb_config' => 'Impossible to read config value in phpBB database',
 	'fromphpbb_migre_categories' => 'Categories migration',
 	'fromphpbb_migre_categories_dans_rub_dpt' => 'Implanting the forums into the sector:',
@@ -340,25 +347,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pagine_page_' => ' .. page ',
 	'pagine_post_' => ' reply',
 	'pagine_post_s' => ' replies',
+	'pagine_sujet_' => 'topic',
 	'pagine_sujet_s' => ' topics',
 	'par_' => 'by ',
 	'plugin_auteur' => 'The SpipBB Team: [See the list of contributors on Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
-	'plugin_description' => '<MODIF>The SpipBB plugin provides the following features:
+	'plugin_description' => 'The SpipBB plugin provides the following features:
 -* centralizes the forum management in SPIP (in the private area),
--* turns a sector of the site into a forum, "Bulletin Board" style, similar to phpBB. In this sector, subsections are used as forum groups and articles dedicated forums where threads are made of messages posted to that article.
+-* turns a main section (sector) of the site into a group of forum, "Bulletin Board" style, similar to phpBB. In this sector, sub-sections are used as forum groups, articles are dedicated forums where threads are made of messages posted to an article.
 
 {{Please check:}}
 -* [help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
 -* [the documentation on Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
 _ {{The SpipBB plugin is still being developed. You use it at your own risk.}}
-',
+
+_ [Access to the management panel-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distributed under the GPL licence',
 	'plugin_lien' => '[See the documentation of the plugin from Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => 'This version of the plugin cannot be used with your version of SPIP!',
 	'plugin_nom' => 'SpipBB: Management of SPIP forums',
 	'post_aucun_pt' => 'aucun&nbsp;!',
-	'post_efface_lui' => '<MODIF>Ce sujet comprend @$nbr_post@ message(s). Effac&eacute;s avec lui&nbsp;!\\n',
+	'post_efface_lui' => 'This topic contains @
+nbr_post@ message(s). Deleted along with it!\\n',
 	'post_ip' => 'Posts sent from IP address',
 	'post_propose' => 'Suggested post',
 	'post_rejete' => 'Rejected post',
@@ -418,9 +428,9 @@ _ {{The SpipBB plugin is still being developed. You use it at your own risk.}}
 	'secteur_forum' => 'ROOT',
 	'selection_efface' => 'Deleted the selection... ',
 	'selection_tri_dpt' => 'Choose the sorting method:',
-	'sign_admin' => '<MODIF>{{This page can only be seen by the site owner.}}<p>It provides access to the plugin configuration of &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; and the forum management of your site.</p><p>Version : @version@ @distant@</p><p>See&nbsp;:
+	'sign_admin' => '{{This page can only be seen by the site owner.}}<p>It provides access to the plugin configuration of &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; as well as to the forum management of your site.</p><p>Version : @version@ @distant@</p><p>See&nbsp;:
 _ • [The documentation of Spip-Contrib->http://www.spip-contrib.net/?article2460]
-_ • [The help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
+_ • [Help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />update available: @version@',
 	'sign_ok' => 'up to date',
 	'sign_reinit' => '<p>Reset:
@@ -450,6 +460,8 @@ _ • [The help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info
 	'sujet_valide' => 'Topic to confirm',
 	'sujets' => 'Topics',
 	'sujets_aucun' => 'No topics in this forum for the time being',
+	'support_extra_normal' => 'extra',
+	'support_extra_table' => 'table',
 	'supprimer' => 'Delete',
 	'sw_admin_can_spam' => 'Allow admin to post spam words',
 	'sw_admin_no_spam' => 'No spam',
@@ -471,7 +483,7 @@ _ • [The help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info
 	'sw_spam_words_action' => 'From this control panel you can add, edit, and remove spam words. Wildcards (*) are accepted in the word field. For example, *test* will match detestable, test* would match testing, *test would match detest.',
 	'sw_spam_words_mass_add' => 'Paste or type your spam words lists into the text area. Separate each spam word by either a comma, semi-colon, or line-break',
 	'sw_spam_words_titre' => 'Spam words filtering',
-	'sw_spam_words_url_add' => '<MODIF>Type the URL of file with a word list formatted in the style above. Example: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
+	'sw_spam_words_url_add' => 'Type the URL of a file containing a list of word formatted in the style above. Example: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
 	'sw_warning_from_admin' => 'Select the administrator that is listed as the Private Message sender',
 	'sw_warning_pm_message' => 'Private message text',
 	'sw_warning_pm_titre' => 'Private message subject',
