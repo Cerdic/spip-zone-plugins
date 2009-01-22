@@ -19,7 +19,7 @@
     </prefix>
 	<pipeline>
 		<nom>header_prive</nom>
-		<action>insert_head</action>
+		<action>head_prive</action>
 		<inclure>inc/pipeline_add.php</inclure>
 	</pipeline>
 </plugin>

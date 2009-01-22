@@ -38,6 +38,7 @@ function courbe_moyenne () {
 		$mtotal = $mnvis + $mtotal;
 		$mtotal = intval($mtotal);
 		$moy = $mtotal / $coun;
+		$moy = intval(round($moy));
 		$var_s = '['.rendre_date($mdate).', '.$moy.']';
 		$lacourbe = $lacourbe.$var_s;
 		if ($coun<$nstats) {
