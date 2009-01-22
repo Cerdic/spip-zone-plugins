@@ -48,7 +48,8 @@
 
 [(#SET{timeout,#ENV{timeout,2000}})]
 
-[(#SET{containerheight,#ENV{containerheight,500px}})]
+[(#SET{containerheight,#ENV{containerheight,auto}})]
+[(#SET{containerwidth,#ENV{containerwidth,auto}})]
 
 	
 <script type="text/javascript">
@@ -58,7 +59,8 @@
 			    speed: '#GET{speed}',
 			    timeout: #GET{timeout},
 			    type: '#GET{type}',
-			    containerheight: '#GET{containerheight}'
+			    containerheight: '#GET{containerheight}',
+			    containerwidth: '#GET{containerwidth}'			    
 		    });
     });		
 </script>
