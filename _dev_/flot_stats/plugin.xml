@@ -17,5 +17,10 @@
     <prefix>
 		flot
     </prefix>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
+		<inclure>inc/pipeline_add.php</inclure>
+	</pipeline>
 </plugin>
 

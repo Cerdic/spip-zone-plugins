@@ -18,51 +18,6 @@ include_spip('inc/statistiques_new');
 function exec_flot_stats() {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page("Statistiques", "", "");
-	echo '<script language="javascript" type="text/javascript" src="'._DIR_PLUGIN_FLOT.'jquery.flot.js"></script>';
-	?>
-	<script id="source" language="javascript" type="text/javascript">
-		$(function () {
-			var stats =  [
-				{
-					label: "Visites",
-					data: <?php courbe_visites();?> 
-				},
-				{
-					label: "Moyenne",
-					data: <?php courbe_moyenne(); ?> 
-				}
-				];
-				
-			var options = { 
-				lines: { show: true }, 
-				points: { show: <?php $nstats = sql_countsel('spip_visites'); if ($nstats > 365) { echo "false";} else { echo "true";}?> },
-				xaxis: { mode: 'time', timeformat: "%d/%m/%y"   },
-				yaxis: { min: 0  },
-				legend: { position: 'ne'},
-				selection: { mode: "xy" }
-			};
-			
-			var conteneur = $("#conteneur");
-
-			conteneur.bind("plotselected", function (event, ranges) {
-				$("#selection").text(ranges.xaxis.from.toFixed(1) + " to " + ranges.xaxis.to.toFixed(1));
-				var zoom = $("#zoom").attr("checked");
-				if (zoom)
-					plot = $.plot(conteneur, stats,
-					$.extend(true, {}, options, {
-						xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to },
-						yaxis: { min: ranges.yaxis.from, max: ranges.yaxis.to }
-					}));
-			});
-			
-			var plot = $.plot(conteneur, stats, options);
-
-			$("#clearSelection").click(function () {
-				plot.clearSelection();
-			});
-		});
-	</script>
-	<?php
 	echo '<div id="conteneur" style="width:600px;height:300px;border: 1px solid; margin: auto;"></div>';
 	echo 'Total : '.$mtotal.'<br />';
 	$select = sql_select("*", "spip_visites","","","`date` DESC",1);

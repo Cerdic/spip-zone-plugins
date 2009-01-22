@@ -10,25 +10,26 @@ function rendre_date ($date) {
 function courbe_visites () {
 	$select = sql_select("*", "spip_visites");
 	$nstats = sql_countsel('spip_visites');
-	echo '[';
 	$coun = 1;
+	$lacourbe = '[';
 	while ($ele=sql_fetch($select)){
 		$date_vi = $ele['date'];
 		$nvis = $ele['visites'];
-		echo '['.rendre_date($date_vi).', '.$nvis.']';
+		$var_s = '['.rendre_date($date_vi).', '.$nvis.']';
+		$lacourbe = $lacourbe.$var_s;
 		if ($coun<$nstats) {
 			$coun++;
-			echo ",";
+			$lacourbe = $lacourbe.',';
 		}
 	}
-	echo ']';
+	$lacourbe = $lacourbe.']';
 	
-	return true;
+	return $lacourbe;
 }
 function courbe_moyenne () {
 	$select = sql_select("*", "spip_visites");
 	$nstats = sql_countsel('spip_visites');
-	echo '[';
+	$lacourbe = '[';
 	$coun = 1;
 	$mtotal = 0;
 	while ($ele=sql_fetch($select)){
@@ -37,14 +38,26 @@ function courbe_moyenne () {
 		$mtotal = $mnvis + $mtotal;
 		$mtotal = intval($mtotal);
 		$moy = $mtotal / $coun;
-		echo '['.rendre_date($mdate).', '.$moy.']';
+		$var_s = '['.rendre_date($mdate).', '.$moy.']';
+		$lacourbe = $lacourbe.$var_s;
 		if ($coun<$nstats) {
 			$coun++;
-			echo ",";
+			$lacourbe = $lacourbe.',';
 		}
 	}
-	echo ']';
+	$lacourbe = $lacourbe.']';
 	
-	return true;		
+	return $lacourbe;		
 	}
+function show_points () {
+	$nstats = sql_countsel('spip_visites'); 
+	if ($nstats > 365) { 
+		$show = "false";
+	} 
+	else { 
+		$show = "true";
+	}
+	
+	return $show;
+}
 ?>
