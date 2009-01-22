@@ -42,25 +42,17 @@
 
 
 
-[(#SET{type,#ENV{type,sequence}})]
-
-[(#SET{speed,#ENV{speed,normal}})]
-
 [(#SET{timeout,#ENV{timeout,2000}})]
-
-[(#SET{containerheight,#ENV{containerheight,auto}})]
-[(#SET{containerwidth,#ENV{containerwidth,auto}})]
-
 	
 <script type="text/javascript">
     $(document).ready(
 	    function(){					
 		    $('ul.innerfade').innerfade({
-			    speed: '#GET{speed}',
-			    timeout: #GET{timeout},
-			    type: '#GET{type}',
-			    containerheight: '#GET{containerheight}',
-			    containerwidth: '#GET{containerwidth}'			    
+			    [speed: '(#ENV{speed})',]
+			    [type: '(#ENV{type})',]
+			    [containerheight: '(#ENV{containerheight})',]
+			    [containerwidth: '(#ENV{containerwidth})',]
+    		    timeout: #GET{timeout}
 		    });
     });		
 </script>
