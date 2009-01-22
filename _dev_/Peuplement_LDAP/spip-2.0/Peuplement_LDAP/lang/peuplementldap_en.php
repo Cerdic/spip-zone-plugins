@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'legende_ok' => 'Author added',
 'legende_doublon' => 'This author already exists',
 'legende_ko' => 'The author can\'t be added',
+'minipres_corps' => 'You don\'t have enought permissions to access this page'
 );
 
 ?>
