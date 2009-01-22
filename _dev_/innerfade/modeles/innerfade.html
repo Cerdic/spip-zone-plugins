@@ -20,26 +20,21 @@
 	
 	
 [(#ENV{id_rubrique}|?{' ',''}) 
-  [(#SET{objet_spip,id_rubrique})]
-  [(#SET{objet_val,[(#ENV{id_rubrique})]})]
+  [(#SET{objet_spip,rubrique})]
+  [(#SET{id_objet,[(#ENV{id_rubrique})]})]
 ]
 [(#ENV{id_secteur}|?{' ',''}) 
-  [(#SET{objet_spip,id_secteur})]
-  [(#SET{objet_val,[(#ENV{id_secteur})]})]
+  [(#SET{objet_spip,secteur})]
+  [(#SET{id_objet,[(#ENV{id_secteur})]})]
 ]
 [(#ENV{id_document}|?{' ',''}) 
-  [(#SET{objet_spip,id_document})]
-  [(#SET{objet_val,[(#ENV{id_document})]})]
+  [(#SET{objet_spip,document})]
+  [(#SET{id_objet,[(#ENV{id_document})]})]
 ]
 [(#ENV{id_article}|?{' ',''}) 
-  [(#SET{objet_spip,id_article})]
-  [(#SET{objet_val,[(#ENV{id_article})]})]
+  [(#SET{objet_spip,article})]
+  [(#SET{id_objet,[(#ENV{id_article})]})]
 ]
-[(#GET{objet_spip}|?{'',' '}) 
-  [(#SET{objet_spip,id_article})]
-  [(#SET{objet_val,[(#ENV{id_rotator})]})]
-]
-
 
 
 [(#SET{timeout,#ENV{timeout,2000}})]
@@ -57,7 +52,7 @@
     });		
 </script>
 
-<ul class="innerfade" style="list-style-type: none ;">
+<ul id="innerfade-#GET{objet_spip}-#GET{id_objet}" class="innerfade" style="list-style-type: none ;">
     <BOUCLE_PORFOLIO2(DOCUMENTS){id_article?}{id_rubrique?}{mode=document}{extension==jpg|gif|png} {par num titre, date}>
         <li class="diapo">
             <img src="[(#URL_DOCUMENT||image_reduire{350,400}|extraire_attribut{src})]" alt=" #TITRE" /> 
