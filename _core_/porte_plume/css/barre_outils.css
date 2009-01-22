@@ -1,4 +1,4 @@
-.formulaire_spip textarea {
+.formulaire_spip  textarea.markItUpEditor {
 width:96%; /* reduire la taille par defaut des formulaires spip */
 }
 
