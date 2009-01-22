@@ -18,22 +18,21 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 	margin:5px 0 5px 0;
 	clear:both;
 }
-.markItUpContainer  {
+.markItUp .markItUpContainer  {
 	margin:0px; padding:0px;
 }
-.markItUpEditor {
+.markItUp .markItUpEditor {
 	padding:5px;
 	height:320px; /* la hauteur est calculee par SPIP */
 	clear:both; display:block;
 	overflow:auto;
 }
-.markItUpPreviewFrame {
-}
-.markItUpFooter {
+.markItUp .markItUpPreviewFrame {}
+.markItUp .markItUpFooter {
 	margin:0px; padding:0px;
 	width:100%;
 }
-.markItUpResizeHandle {
+.markItUp .markItUpResizeHandle {
 	overflow:hidden;
 	width:22px; height:5px;
 	margin-left:auto;
@@ -44,20 +43,20 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 
 /***************************/
 /* tabs */
-.markItUpTabs {
+.markItUp .markItUpTabs {
 	text-align:right; margin-bottom:3px; padding:0px 1px;
 	border-bottom:1px solid #888; overflow:auto; 
 	width:auto; float:right; clear:both;}
-.markItUpTabs a {
+.markItUp .markItUpTabs a {
 	display:block; float:right; border:1px solid #888; margin:0px 1px; border-bottom:none;
 	padding:3px 4px 2px 4px; background:#f0f0f0;
 	-moz-border-radius:5px 5px 0 0;}
-.markItUpTabs a.on {background:#fff; }
-.markItUpTabs a:hover {background:#fff;}
+.markItUp .markItUpTabs a.on {background:#fff; }
+.markItUp .markItUpTabs a:hover {background:#fff;}
 
 /***************************/
 /* previsu */
-.markItUpPreview {
+.markItUp .markItUpPreview {
 	clear:both;
 	border:1px solid #888;
 	background:#fff;
@@ -76,8 +75,8 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 
 /***************************************************************************************/
 /* first row of buttons */
-.markItUpHeader {clear:both; margin:0px; padding:0px;}
-.markItUpHeader ul li {
+.markItUp .markItUpHeader {clear:both; margin:0px; padding:0px;}
+.markItUp .markItUpHeader ul li {
 	list-style:none;
 	float:left;
 	position:relative;
@@ -87,19 +86,19 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 	padding:0;
 	overflow:visible;
 }
-.markItUpHeader ul li:first-child { /* annuler un reglage des forms prive */
+.markItUp .markItUpHeader ul li:first-child { /* annuler un reglage des forms prive */
 	padding-top:0; 
 }
 
-.markItUpHeader ul .markItUpDropMenu {
+.markItUp .markItUpHeader ul .markItUpDropMenu {
 	/*background:inherit url(images/menu.png) no-repeat 100% 80%;
 	padding-right:10px;*/
 }
-.markItUpHeader ul .markItUpDropMenu li {
+.markItUp .markItUpHeader ul .markItUpDropMenu li {
 	margin-right:0px;
 }
 /* next rows of buttons */
-.markItUpHeader ul ul {
+.markItUp .markItUpHeader ul ul {
 	display:none;
 	position:absolute;
 	top:24px; left:0px;	
@@ -107,24 +106,24 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 	/*width:130px;*/
 	width:110px;
 }
-.markItUpHeader ul ul li {
+.markItUp .markItUpHeader ul ul li {
 	float:left;
 }
-.markItUpHeader ul ul .markItUpDropMenu {
+.markItUp .markItUpHeader ul ul .markItUpDropMenu {
 	background:#F5F5F5 url(images/submenu.png) no-repeat 50% 50%;
 }
-.markItUpHeader ul .markItUpSeparator {
+.markItUp .markItUpHeader ul .markItUpSeparator {
 	margin:0 6px;
 	width:0px;
 	height:16px;
 	overflow:hidden;
 }
-.markItUpHeader ul ul .markItUpSeparator {
+.markItUp .markItUpHeader ul ul .markItUpSeparator {
 	width:auto; height:1px;
 	margin:0px;
 }
 
-.markItUpHeader ul a {
+.markItUp .markItUpHeader ul a {
 	display:block;
 	width:16px; height:16px;
 	text-indent:-10000px;
@@ -135,6 +134,6 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 	padding:3px;
 	margin-right:1px;
 }
-.markItUpHeader ul a:hover{border:1px solid #888; background-color:#fff;}
+.markItUp .markItUpHeader ul a:hover{border:1px solid #888; background-color:#fff;}
 
 
