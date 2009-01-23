@@ -52,7 +52,7 @@
 			if($data['fin']<date('Y-m-d')) {$puce="rouge";}
 			echo '<tr style="background-color: #EEEEEE;">';
 			echo '<td class="arial1" style="border-top: 1px solid #CCCCCC;">'.$data['id_banniere'].'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;"><img src="/dist/images/puce-'.$puce.'.gif"></td>';
+			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;"><img src="/prive/images/puce-'.$puce.'.gif"></td>';
 			echo '<td class="arial1" style="border-top: 1px solid #CCCCCC;"><a href="mailto:'.$data['email'].'"title="Envoyer un email">'.$data['nom'].'</a></td>';
 			echo '<td class="arial1" style="border-top: 1px solid #CCCCCC;">'.bannieres_datefr($data['debut']).'</td>';
 			echo '<td class="arial1" style="border-top: 1px solid #CCCCCC;">'.bannieres_datefr($data['fin']).'</td>';

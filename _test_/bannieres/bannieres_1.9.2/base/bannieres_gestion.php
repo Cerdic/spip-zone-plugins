@@ -29,6 +29,11 @@
 			}
 			ecrire_metas();
 		}
+		
+		if ($current_version<0.11){
+				spip_query("ALTER TABLE spip_bannieres ADD ext text NOT NULL AFTER alt");
+				ecrire_meta('ban_base_version',$current_version=0.11);
+			}	
 	}
 
 	function bannieres_effacer_tables(){
