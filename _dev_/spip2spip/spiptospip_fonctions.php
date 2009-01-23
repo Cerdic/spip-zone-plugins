@@ -272,12 +272,17 @@ function spip2spip_convert_extra($texte,$documents) {
 //
 // restaure le formatage des img et doc avec le tableau fourni
 function spip2spip_convert_img($texte,$documents) {
-  $original = $texte;
-	foreach($documents as $k=>$val) {	      
+  $texte_avt_regex = $texte;
+  krsort($documents);
+	foreach($documents as $k=>$val) {	
 	   $texte = preg_replace("/__IMG$k(.*?)__/i", "<img$val$1>",$texte);
+	   // si le doc est employe en tant image, changer son mode pour qu'il sorte du portfolio (mode=document) et passe en image (mode=image)
+	   if ($texte_avt_regex != $texte) spip2spip_update_mode_document($val,'image'); 
+	   
+	   // autre mise a jour non image
 	   $texte = preg_replace("/__DOC$k(.*?)__/i", "<doc$val$1>",$texte);
-     // changement ? (PHP<5, pas de parametre count)
-    if ($original != $texte) spip2spip_passe_document_mode_vignette($val);  	   
+	   
+     $texte_avt_regex = $texte;	   
   }	
   
   //$texte = preg_replace("/__(IMG|DOC)(.*?)__/i", "",$texte); // nettoyage des codes qui resteraient eventuellement
@@ -293,12 +298,9 @@ function spip2spip_convert_ln($texte) {
 }
 
 //
-// passe un document en mode vignette (ou autre)
-function spip2spip_passe_document_mode_vignette($id_document,$mode="vignette") {  // FIXME-SPIP2
-   global $table_prefix;
-   
-   $sql="UPDATE ".$table_prefix."_documents SET mode = '$mode' WHERE id_document='$id_document' LIMIT 1";                        
-   spip_query($sql);
+// change le mode (vignette/document/) du document
+function spip2spip_update_mode_document($id_document,$mode="vignette") {  
+   sql_updateq('spip_documents', array("mode"=>$mode), "id_document=$id_document");
 }
 
 //
@@ -391,60 +393,35 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                       $documents_current_article = array();
                       if ($_documents!="") {
                         $_documents = unserialize($_documents);                  
-                        foreach($_documents as $_document) { 
+                        foreach($_documents as $_document) {                    
                             $id_distant = $_document['id'];
                             $source = $_document['url'];
                             $titre = $_document['titre'];                        
-                            $desc = $_document['desc'];                       
-                            // inspire de ajouter_un_document () de inc/getdocument.php 
-                            if ($a = recuperer_infos_distantes($source)) {  
-                              $fichier = $a['fichier'];                       
-                        			$id_type = $a['id_type'];
-                        			$taille = $a['taille'];                  			
-                        			$largeur = $a['largeur'];
-                        			$hauteur = $a['hauteur'];
-                        			$ext = $a['extension'];
-                        			$type_image = $a['type_image'];
-                        
-                        			$distant = 'oui';
-                        			$mode = 'document';
-                        			
-                              $date =  date('Y-m-d H:i:s',time()); // date de la syndication ou date du doc original (a ajouter car non parse) ?
-                        			// FIXME verif secu (par rapport ext) 
-                        			
-                        			// extension
-                        			ereg("\.([^.]+)$", $nom_envoye, $match);
-    		                      $ext = (corriger_extension(strtolower($match[1])));
-                               
-                              // Prevoir traitement specifique pour videos                      		
-                          		if ($ext != "mov" && $ext != "svg") {                      		 
-                          		  // Si c'est une image, recuperer sa taille et son type (detecte aussi swf)
-                          			if (!$size_image = @getimagesize($fichier)) 
-                          			   $size_image = @getimagesize($source); // si on arrive pas en local, on teste en distant                                                 			
-                          			$largeur = intval($size_image[0]);                      			
-                          			$hauteur = intval($size_image[1]);
-                          			$type_image = decoder_type_image($size_image[2]);
-                          		}  
-                          		
-                          		// SQL
-                              $id_nouveau_doc = sql_insertq('spip_documents', array(
-                                                                      'id_type' => $id_type,
-                                                                      'titre' => $titre,
-                                                                      'date' => $date,
-                                                                      'descriptif' => $desc,
-                                                                      'fichier' => $source,
-                                                                      'taille' => $taille,
-                                                                      'largeur' => $largeur,
-                                                                      'hauteur' => $hauteur,
-                                                                      'mode' => $mode,
-                                                                      'distant' => $distant,
-                                                                      'idx' => 'oui'));
-                              
-                              
-                              $documents_current_article[$id_distant] = $id_nouveau_doc;                   			
-                        		}  
-                        }
+                            $desc = $_document['desc'];
+                                              
+                            // inspire de @ajouter_un_document() - inc/ajout_documents.php 
+                            if ($a = recuperer_infos_distantes($source)) { 
+                            
+                                $type_image = $a['type_image'];
+
+                          			unset($a['type_image']);
+                          			unset($a['body']);
+                          			unset($a['mode']); //
+                          
+                          			$a['date'] = 'NOW()';
+                          			$a['distant'] = 'oui';
+                          			//$a['mode'] = 'document';
+                          			$a['fichier'] = set_spip_doc($source);
+                          			                          			
+                          			$a['titre'] = $titre;     // infos spip2spip, recuperer via le flux
+                          			$a['descriptif'] = $desc;
+                          			
+                          			$documents_current_article[$id_distant] = sql_insertq("spip_documents", $a);
+                                 
+                        		}                            
+                        }                        
                       } 
+                      
                       
                       // etape 2 -  traitement de l'article                             
                       $_surtitre = $article['surtitre'];
@@ -502,7 +479,9 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                       
                       // ....dans la table documents_article
                       foreach($documents_current_article as $document_current_article) { 
-                          @sql_insertq('spip_documents_articles',array('id_document'=>$document_current_article,'id_article'=>$id_nouvel_article));
+                          @sql_insertq('spip_documents_liens',array(
+                                      'id_document'=>$document_current_article, 'id_objet'=>$id_nouvel_article,
+                                      'objet' => 'article'));
                       }  
                       
                       // etape 3 - traitement des evenements (a finir de porter) FIXME
