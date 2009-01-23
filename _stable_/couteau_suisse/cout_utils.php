@@ -429,9 +429,10 @@ cs_log(" -- fichier $fo absent. Fichier '$fo' et inclusion ".((!$ecriture || !$o
 
 // retire les guillemets extremes s'il y en a
 function cs_retire_guillemets($valeur) {
-	if (preg_match(',^\'(.*)\'$,ms', trim($valeur), $matches)) 
+	$valeur = trim($valeur);
+	if (preg_match(',^\'(.*)\'$,s', $valeur, $matches)) 
 		return str_replace("\'", "'", $matches[1]);
-	if (preg_match(',^"(.*)"$,ms', trim($valeur), $matches))
+	if (preg_match(',^"(.*)"$,s', $valeur, $matches))
 		return str_replace('\"', '"', $matches[1]);
 	return $valeur;
 }
