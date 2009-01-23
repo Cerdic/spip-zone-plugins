@@ -19,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
   // 2 petits utilitaires
 //force a un tableau de int
-if(!function_exists('secureintarray')){
+if(!function_exists('secureIntArray')){
 	function secureIntArray($array) {
 	  $to_return = Array();
 	  if(is_array($array)) {
