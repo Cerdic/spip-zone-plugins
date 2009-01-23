@@ -15,7 +15,7 @@ if (!defined('_DIR_PLUGIN_PEUPLEMENTLDAP')){ // definie automatiquement en 1.9.2
  * @return Array Tableau contenant les bouton Spip dont celui du peuplement
  */
 function PeuplementLdap_ajouterBoutons($boutons_admin) {
-	if ($GLOBALS['connect_statut'] == "0minirezo" AND $GLOBALS["options"]=="avancees" AND $GLOBALS["ldap_present"]) { // Controle sur les droits de l'auteur
+	if (autoriser('') AND $GLOBALS["ldap_present"]) { // Controle sur les droits de l'auteur
 		$boutons_admin['auteurs']->sousmenu['peuplement_ldap']= new Bouton(
         	"../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_icon'],
 			_T('peuplementldap:icone_menu_config')

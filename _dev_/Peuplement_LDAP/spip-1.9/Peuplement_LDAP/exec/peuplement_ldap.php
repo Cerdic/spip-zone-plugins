@@ -13,6 +13,13 @@ function exec_peuplement_ldap(){
 	global $couleur_claire;
 	global $spip_lang_right;
 	
+	// Il faut être administrateur complet pour accéder au plugin
+	if (!autoriser('')){
+		include_spip('inc/minipres');
+		echo minipres(_T('peuplementldap:titre_page'),_T('peuplementldap:minipres_corps'));
+		exit;
+	}
+	
 		// Entete HTML (fixe la balise Titre)
         debut_page(_T('peuplementldap:titre_page'));
         echo "<br /><br /><br />";

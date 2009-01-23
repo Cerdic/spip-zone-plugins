@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'legende_ok' => 'Auteur cr&eacute;&eacute;',
 'legende_doublon' => 'Cet auteur existe d&eacute;j&agrave;',
 'legende_ko' => 'Echec de l\'insertion de l\'auteur',
+'minipres_corps' => 'Vous n\'avez pas les droits suffisants pour acceder &agrave; cette page'
 );
 
 ?>
