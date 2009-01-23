@@ -17,7 +17,7 @@ _ Les articles recopi&#233;s tentent de r&#233;cuperer le maximum de donn&#233;e
 -* formatage original SPIP de l'article
 -* images, documents attach&#233;s recopi&#233;s en documents distants, licence
 -* essayer de faire correspondre les auteurs
--* &#233;v&#233;nements plugin agenda avec le [flux spip2spip (agenda)->../spip.php?page=backend-spip2spip-agenda]
+-* &#233;v&#233;nements plugin agenda avec le [flux spip2spip (agenda)->../spip.php?page=backend-spip2spip-agenda] (non actif sous SPIP2)
 
 
 	</description>

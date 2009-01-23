@@ -18,7 +18,7 @@
 	  	"id" 	    => "int(5) NOT NULL auto_increment",
 	  	"site_titre" 	=> "varchar(254) NOT NULL default ''",
 	  	"site_rss" 	=> "varchar(254) NOT NULL default ''",
-		"last_syndic" 	=> "TIMESTAMP");
+		  "last_syndic" 	=> "TIMESTAMP");
   
  	$spip_spip2spip_key = array(
 		"PRIMARY KEY" 	=> "id");

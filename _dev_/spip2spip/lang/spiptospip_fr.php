@@ -30,10 +30,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'intro_spip2spip' => '<strong>SPIP 2 SPIP</strong><br /><p>Permet de recopier automatiquement des articles d\'un SPIP &agrave;  l\'autre.</p>',
-'install_spip2spip' => 'Installation de SPIP2SPIP',
+'install_spip2spip' => 'Installation des tables de spip2spip',
 'install_spip2spip_1' => 'Cr&eacute;ation de la table SQL',
 'install_spip2spip_2' => 'Ajout des flux backends',
-'install_spip2spip_3' => 'Cr&eacute;ation du groupe de mots cl&eacute;s spip2spip',
+'install_spip2spip_groupe_mot' => 'Cr&eacute;ation du groupe de mots cl&eacute;s - spip2spip -',
 'install_spip2spip_4' => 'ce groupe sert &agrave;  spip2spip pour d&eacute;signer les articles et rubriques &agrave;  synchroniser.',
 'install_spip2spip_5' => '{{mode d&#039;emploi:}}
 -* attribuez les mots cl&eacute;s de ce groupe aux {{articles}} que vous voulez envoyer vers les sites utilisant spip2spip.
