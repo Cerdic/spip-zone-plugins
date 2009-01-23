@@ -19,14 +19,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
   // 2 petits utilitaires
 //force a un tableau de int
-function secureIntArray($array) {
-  $to_return = Array();
-  if(is_array($array)) {
-	foreach($array as $id) {
-	  $to_return[] = intval($id);
+if(!function_exists('secureintarray')){
+	function secureIntArray($array) {
+	  $to_return = Array();
+	  if(is_array($array)) {
+		foreach($array as $id) {
+		  $to_return[] = intval($id);
+		}
+	  } 
+	  return $to_return;
 	}
-  } 
-  return $to_return;
 }
 
 // transfert la variable POST d'un tableau (19 => 'avec', 20=>'voir') en 4 tableaux avec=(19) voir=(20)
