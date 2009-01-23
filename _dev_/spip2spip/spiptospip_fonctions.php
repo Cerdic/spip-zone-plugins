@@ -485,32 +485,34 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                       }  
                       
                       // etape 3 - traitement des evenements (a finir de porter) FIXME
-                      /*
                       $_evenements = $article['evenements'];
     				          $_evenements = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_evenements );
                       if ($_evenements!="") {
-                       $_evenements=unserialize($_evenements);           
+                        
+                        $_evenements=unserialize($_evenements);           
                         foreach($_evenements as $_evenement) {                      
-                            $id_distant = $_evenement['idevent'];
+                            $id_distant = $_evenement['idevent'];  // utile ? a supprimer ds backend aussi ?
                             $datedeb = $_evenement['datedeb'];
                             $datefin = $_evenement['datefin'];
-                            $lieu = addslashes($_evenement['lieu']);
+                            $lieu = $_evenement['lieu'];
                             $horaire = $_evenement['horaire'];
-                            $titre = addslashes($_evenement['titre']);                        
-                            $desc = addslashes($_evenement['desc']);                         
-                            $idsource = $_evenement['idsource'];      
-              						      
-              						//echo $titreart."==".$titre."<br />";		  
-              						if($_titre==$titre){		                      
-                                        $sql="INSERT INTO `".$table_prefix."_evenements` (`id_evenement` ,	`id_article` ,`date_debut` ,`date_fin` ,`titre` ,`descriptif` ,	`lieu` ,`horaire` ,`id_evenement_source` ,`idx` ,`maj`)
-              								VALUES ('".$id_distant."' , '".$id_nouvel_article."', '".$datedeb."', '".$datefin."', '".$titre."', '".$desc."', '".$lieu."', '".$horaire."', '".$idsource."', 'oui', NOW( ))";
-              						  echo "<div style='padding:5px;border:1px solid #5DA7C5;background:#ddd;display: block;'>"._T('spiptospip:event_ok').$datedeb." &agrave; ".$lieu."</div>";
-              						 
-                      				          spip_query($sql);      
-              						}            			
-                                  	} 
-                                }
-                      */
+                            $titre = $_evenement['titre'];                        
+                            $desc = $_evenement['desc'];                         
+                            $idsource = $_evenement['idsource'];   // utile ?
+		  		                      
+                            @sql_insertq('spip_evenements',array(
+                						            'id_article'=> $id_nouvel_article,
+                						            'date_debut'=> $datedeb,
+                						            'date_fin'=> $datefin,
+                						            'titre'=>$titre,
+                						            'descriptif'=>$desc,
+                						            'lieu'=>$lieu,
+                						            'horaire'=>$horaire));
+                            $log_html .= "<div style='padding:2px 5px;border:1px solid #5DA7C5;background:#eee;display: block;'>"._T('spiptospip:event_ok')." : $datedeb  $lieu</div>";
+                						 		                
+                						            			
+                        } 
+                      }
                       
                       // .... dans le groupe mot "licence" ?
                       if ($_licence !="" && isLicenceInstalled) {                              		

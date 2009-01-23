@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'imported_already' => 'article d&eacute;j&agrave;  import&eacute;',
 'imported_new' => 'nouvel article',
 'imported_update' => 'article mis &agrave; jour  ',
-'event_ok' => 'Nouvel Evenement le ',
+'event_ok' => 'ajout d\'un evenement ',
 'imported_view' => 'consulter l\'article import&eacute;',
 'installed' => 'spip2spip est install&eacute;. cette page ne sert plus &agrave;  rien</p>',
 
