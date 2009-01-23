@@ -40,7 +40,7 @@ function exec_peuplement_ldap_dist(){
 							$image = getImage(insere_auteur($info_auteur[0],$info_auteur[1]));
 							$ligne[0]=$info_auteur[2];
 							$ligne[1]=$info_auteur[1];
-							$ligne[2]="<img src=\"../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$image."\" />";
+							$ligne[2]="<img src=\""._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$image."\" />";
 							array_push($compte_rendu,$ligne);
 						}
 					}
@@ -53,7 +53,7 @@ function exec_peuplement_ldap_dist(){
 						$image = getImage(insere_auteur($entreesLdap[$i]["dn"],$entreesLdap[$i]["mail"][0]));
 						$ligne[0]=$entreesLdap[$i]["cn"][0];
 						$ligne[1]=$entreesLdap[$i]["mail"][0];
-						$ligne[2]="<img src=\"../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$image."\" />";
+						$ligne[2]="<img src=\""._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$image."\" />";
 						array_push($compte_rendu,$ligne);
 					}
 				}

@@ -118,6 +118,7 @@ function recherche_ldap($filtre){
 	}
 	else{
 		$search=@ldap_search($ldap_link, $GLOBALS["ldap_base"], $filtre, array("dn","cn","mail"));
+		ldap_sort($ldap_link,$search,"cn"); // Tri des données sur le cn
 		return @ldap_get_entries($ldap_link,$search);
 	}	
 }
@@ -131,7 +132,6 @@ function recherche_ldap($filtre){
 */
 function insere_auteur($dn,$mail){
 		// Controle qu'un identifiant de connexion identique ne soit pas déjà présent
-        // TODO Gerer le préfixe des tables Spip.
         $select = sql_select(array("*"),array("spip_auteurs"),array("email=\"".strtolower($mail)."\""));
         $cpt = sql_count($select);
         if ($cpt > 0){
@@ -158,9 +158,9 @@ function getImage($id_result){
 
 function affiche_legende(){
 	$legende = "<strong>"._T('peuplementldap:legende')."</strong><br />";
-	$legende.= "<img src=\"../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_insert_ok']."\" />&nbsp;"._T('peuplementldap:legende_ok')."<br />";
-	$legende.= "<img src=\"../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_insert_doublon']."\" />&nbsp;"._T('peuplementldap:legende_doublon')."<br />";
-	$legende.= "<img src=\"../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_insert_ko']."\" />&nbsp;"._T('peuplementldap:legende_ko')."<br />";
+	$legende.= "<img src=\""._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_insert_ok']."\" />&nbsp;"._T('peuplementldap:legende_ok')."<br />";
+	$legende.= "<img src=\""._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_insert_doublon']."\" />&nbsp;"._T('peuplementldap:legende_doublon')."<br />";
+	$legende.= "<img src=\""._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_insert_ko']."\" />&nbsp;"._T('peuplementldap:legende_ko')."<br />";
 	
 	return $legende;
 }
