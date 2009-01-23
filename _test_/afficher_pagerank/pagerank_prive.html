@@ -31,7 +31,7 @@ $(document).ready(function() {
 		if (afficher) {
 //			$(this).prepend(" +");
 			$(this).prepend("<span id='pr"+compteur+"'></span>");
-			$("#pr"+compteur).load("../?page=afficher_minipagerank_racine&url="+url);
+			$("#pr"+compteur).load("../?page=afficher_minipagerank_racine&url="+escape(url));
 		}
 
 	});
