@@ -1,3 +1,129 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.filtres { margin:1em 0;clear:#GET{left};border-bottom:1px solid #GET{foncee};padding-#GET{left}:5px;}
+.filtres ul {list-style:none;margin-left:1px;padding:0;}
+.filtres ul li {float:left;padding:0;margin:0;margin-bottom:-1px;}
+
+.filtres ul li.publie strong,.filtres ul li.publie a {background-image:url(#CHEMIN{images/forum-statut-publie-24.png});padding-#GET{right}:27px;}
+.filtres ul li.off strong,.filtres ul li.off a {background-image:url(#CHEMIN{images/forum-statut-off-24.png});padding-#GET{right}:27px;}
+.filtres ul li.spam strong,.filtres ul li.spam a {background-image:url(#CHEMIN{images/forum-statut-spam-24.png});padding-#GET{right}:27px;}
+.filtres ul li.prop strong,.filtres ul li.prop a {background-image:url(#CHEMIN{images/forum-statut-prop-24.png});padding-#GET{right}:27px;}
+
+.filtres ul li.prive strong,.filtres ul li.prive a {background-image:url(#CHEMIN{images/forum-statut-prive-24.png});padding-#GET{right}:27px;}
+.filtres ul li.privadm strong,.filtres ul li.privadm a {background-image:url(#CHEMIN{images/forum-statut-privadm-24.png});padding-#GET{right}:27px;}
+.filtres ul li.privrac strong,.filtres ul li.privrac a {background-image:url(#CHEMIN{images/forum-statut-privrac-24.png});padding-#GET{right}:27px;}
+.filtres ul li.privoff strong,.filtres ul li.privoff a {background-image:url(#CHEMIN{images/forum-statut-privoff-24.png});padding-#GET{right}:27px;}
+
+.filtres ul li strong,.filtres ul li a {display:block;float:#GET{left};padding:4px 7px;border:1px solid #GET{foncee};margin-#GET{left}:5px;background-color:#eee;background-position:center right;background-repeat:no-repeat;}
+.filtres ul li strong,.filtres ul li a:hover {background-color:#f8f7f3;}
+.filtres ul li strong {border-bottom:1px solid #f8f7f3;color:#555;}
+
+.filtres.second {font-size:0.9em;border:0;padding-#GET{left}:0;}
+.filtres.second ul li strong,.filtres.second ul li a {margin-#GET{left}:0px;margin-#GET{right}:5px;margin-bottom:5px;}
+.filtres.second ul li strong {border:1px solid #GET{foncee};}
+.filtres.second ul li strong,.filtres.second ul li a:hover {background-color:#fff;}
+
+.source {font-size:12px;font-weight:bold;background:#fff;padding:5px;border:1px solid #GET{foncee};}
+.source .actions {font-weight:normal;}
+.annule_filtre {float:#GET{right};}
+
+
+/* Habillage des forums en liste pour moderation
+---------------------------------------------- */
+ul.forums li.item {padding:0.8em 0;margin-bottom:15px;}
+ul.forums li.item .texte p {padding:0.8em 30px;margin:0px}
+
+ul.forums li .cartouche {padding:5px;padding-#GET{left}:30px;min-height:30px;border-bottom:1px solid #eee;}
+
+ul.forums li.item {border-top:5px solid #ccc;padding-top:0;}
+ul.forums li.item .cartouche {border-top:3px solid #ddd;}
+
+ul.forums li.statut_off,ul.forums li.statut_privoff {border-top:5px solid red;}
+ul.forums li.statut_off .cartouche,ul.forums li.statut_privoff .cartouche {border-top:3px solid #FF8F8F;}
+ul.forums li.statut_spam {border-top:5px solid black;}
+ul.forums li.statut_spam .cartouche {border-top:3px solid #8f8f8f;}
+ul.forums li.statut_prop {border-top:5px solid #EDEF00;}
+ul.forums li.statut_prop .cartouche {border-top:3px solid #EEEF86;}
+
+ul.forums li .cartouche h3 {font-size:1.1em;margin-bottom:0.25em;}
+ul.forums li .cartouche .date,ul.forums li .cartouche .par {display:inline;}
+
+ul.forums li .cartouche .info_statut {display:block;float:#GET{left};margin-#GET{left}:-30px;position:relative;display:inline;}
+ul.forums li .cartouche .reponse_a {font-weight:bold;}
+ul.forums li .cartouche .reponse_a a {font-weight:normal;}
+ul.forums li .cartouche .lien_admin {display:block;}
+
+ul.forums >li.item .actions.moderer {padding-top:10px;margin-#GET{right}:5px;background:url(#CHEMIN{images/actions-24.png}) no-repeat bottom right;}
+ul.forums >li.item:hover .actions.moderer {background-image:none;}
+ul.forums >li.item .actions.moderer > span {visibility:hidden;}
+ul.forums >li.item:hover .actions.moderer > span  {visibility:visible;}
+
+ul.forums li .actions .bruler {color:#af976d;}
+ul.forums li .actions .supprimer {color:#cf4d4d;}
+
+
+
+/* Habillage des forums en thread pour participation
+---------------------------------------------- */
+.repondre { clear: both; margin-top: 2.50em; margin-right: 1em; text-align: right; font-weight: bold; }
+
+/* Habillage des forums */
+ul.forum { display: block; clear: both; margin: 0; padding: 0; font-size:11px; }
+ul.forum, ul.forum ul { list-style: none; }
+.forum-fil { margin-top: 1.50em; }
+.forum-fil ul { display: block; margin: 0; padding: 0; margin-left: 1em; }
+.forum-chapo .forum-titre, .forum-chapo .forum-titre a { display: block; margin: 0; padding: 0; font-weight: bold; color: #333; }
+.forum-texte { margin: 0; padding: 0.50em 1em; color: #333; }
+.forum-texte .hyperlien {}
+.forum-texte .repondre { margin: 0; padding: 0.10em 0; text-align: right; }
+
+/* Boite d'un forum : eclaircissement progressif des bords */
+#SET{border,#GET{foncee}}
+ul .forum-message { background:#fff; border: 1px solid #GET{border}; margin: 0; padding: 0; margin-bottom: 1em; }
+#SET{border,##GET{border}|couleur_eclaircir}
+ul ul .forum-message { border: 1px solid #GET{border}; }
+#SET{border,##GET{border}|couleur_eclaircir}
+ul ul ul .forum-message { border: 1px solid #GET{border}; }
+#SET{border,##GET{border}|couleur_eclaircir}
+ul ul ul ul .forum-message { border: 1px solid #GET{border}; }
+#SET{border,##GET{border}|couleur_eclaircir}
+ul ul ul ul ul .forum-message { border: 1px solid #GET{border}; }
+#SET{border,##GET{border}|couleur_eclaircir}
+ul ul ul ul ul ul .forum-message { border: 1px dotted #GET{border}; }
+
+/* Boite de titre d'un forum : mise en couleur selon la profondeur du forum */
+#SET{fond,##GET{claire}|couleur_eclaircir}
+ul .forum-chapo { border: 0; border-bottom: 1px dotted #B8B8B8; margin: 0; padding: 3px 6px 2px 6px; background: #GET{fond}; }
+#SET{fond,##GET{fond}|couleur_eclaircir}
+ul ul .forum-chapo { background: #GET{fond}; }
+#SET{fond,##GET{fond}|couleur_eclaircir}
+ul ul ul .forum-chapo { background: #GET{fond}; }
+#SET{fond,##GET{fond}|couleur_eclaircir}
+ul ul ul ul .forum-chapo { background: #GET{fond}; border-bottom: 1px dotted #E0E0E0; }
+#SET{fond,##GET{fond}|couleur_eclaircir}
+ul ul ul ul ul .forum-chapo { background: #GET{fond}; }
+
+
+/* ?? */
 a.icone36.suivi-forum-24 { width: 100px; }
 .cadre-forum { background-color: #fff; border: 1px solid #aaa; margin-bottom: 0; }
 .cadre-forum div.cadre-titre { background-color: #GET{claire}; border-bottom: 1px solid #aaa; color: #000; }

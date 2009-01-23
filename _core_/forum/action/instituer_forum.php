@@ -22,7 +22,13 @@ function action_instituer_forum_dist() {
 	$id_forum = intval($id_forum);
 	$row = sql_fetsel("*", "spip_forum", "id_forum=$id_forum");
 	if (!$row) return;
+	
+	instituer_un_forum($statut,$row);
+}
 
+function instituer_un_forum($statut,$row){
+	
+	$id_forum = $row['id_forum'];
 	// invalider les pages comportant ce forum
 	include_spip('inc/invalideur');
 	include_spip('inc/forum');

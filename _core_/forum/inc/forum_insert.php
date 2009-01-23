@@ -86,12 +86,13 @@ function inc_forum_insert_dist($force_statut = NULL) {
 	$id_forum = intval(_request('id_forum'))>0?intval(_request('id_forum')):0;
 	$id_rubrique = intval(_request('id_rubrique'));
 	$id_syndic = intval(_request('id_syndic'));
+	$id_message = intval(_request('id_message'));
 
 	$reqret = rawurldecode(_request('retour_forum'));
-	$retour = ($reqret !== '!') ? $reqret : forum_insert_nopost($id_forum, $id_article, $id_breve, $id_syndic, $id_rubrique);
+	$retour = ($reqret !== '!') ? $reqret : forum_insert_nopost($id_forum, $id_article, $id_breve, $id_syndic, $id_rubrique, $id_message);
 
 	$c = array('statut'=>'off');
-	foreach(array('id_article','id_breve','id_rubrique','id_syndic') as $k)
+	foreach(array('id_article','id_breve','id_rubrique','id_syndic','id_message') as $k)
 		if ($$k)
 			$c[$k] = $$k;
 	foreach (array(
@@ -113,16 +114,16 @@ function inc_forum_insert_dist($force_statut = NULL) {
 		'data'=>forum_insert_statut($c, $retour, $force_statut)
 	));
 
-	$id_message = forum_insert_base($c, $id_forum, $id_article, $id_breve, $id_syndic, $id_rubrique, $c['statut'], $retour);
+	$id_reponse = forum_insert_base($c, $id_forum, $id_article, $id_breve, $id_syndic, $id_rubrique, $id_message, $c['statut'], $retour);
 
-	if (!$id_message) return array($retour,0); // echec
+	if (!$id_reponse) return array($retour,0); // echec
 
 	// En cas de retour sur (par exemple) {#SELF}, on ajoute quand
 	// meme #forum12 a la fin de l'url, sauf si un #ancre est explicite
 	if ($reqret !== '!')
 	  return array(strpos($retour, '#') ?
 			$retour
-			: $retour.'#forum'.$id_message,$id_message);
+			: $retour.'#forum'.$id_reponse,$id_reponse);
 
 	// le retour par defaut envoie sur le thread, ce qui permet
 	// de traiter elegamment le cas des forums moderes a priori.
@@ -130,11 +131,11 @@ function inc_forum_insert_dist($force_statut = NULL) {
 	// dans le cas des forums moderes a posteriori, ce qui n'est
 	// pas plus mal.
 
-	return array(generer_url_entite($id_message, 'forum'),$id_message);
+	return array(generer_url_entite($id_reponse, 'forum'),$id_reponse);
 }
 
 // http://doc.spip.org/@forum_insert_base
-function forum_insert_base($c, $id_forum, $id_article, $id_breve, $id_syndic, $id_rubrique, $statut, $retour)
+function forum_insert_base($c, $id_forum, $id_article, $id_breve, $id_syndic, $id_rubrique, $id_message, $statut, $retour)
 {
 	$afficher_texte = (_request('afficher_texte') <> 'non');
 	$ajouter_mot = _request('ajouter_mot');
@@ -144,7 +145,7 @@ function forum_insert_base($c, $id_forum, $id_article, $id_breve, $id_syndic, $i
 		return false;
 
 	//  Si forum avec previsu sans bon hash de securite, echec silencieux
-	if ($afficher_texte AND forum_insert_noprevisu()) {
+	if (!test_espace_prive() AND $afficher_texte AND forum_insert_noprevisu()) {
 		return false;
 	}
 
@@ -155,29 +156,29 @@ function forum_insert_base($c, $id_forum, $id_article, $id_breve, $id_syndic, $i
 	}
 
 	// Entrer le message dans la base
-	$id_message = sql_insertq('spip_forum', array('date_heure'=> 'NOW()'));
+	$id_reponse = sql_insertq('spip_forum', array('date_heure'=> 'NOW()'));
 
 	if ($id_forum>0) {
 		$id_thread = sql_getfetsel("id_thread", "spip_forum", "id_forum = $id_forum");
 	}
 	else
-		$id_thread = $id_message; # id_thread oblige INSERT puis UPDATE.
+		$id_thread = $id_reponse; # id_thread oblige INSERT puis UPDATE.
 
 	// id_rubrique est parfois passee pour les articles, on n'en veut pas
 	if ($id_rubrique > 0 AND ($id_article OR $id_breve OR $id_syndic))
 		$id_rubrique = 0;
 
 	// Entrer les cles de jointures et assimilees
-	sql_updateq('spip_forum', array('id_parent' => $id_forum, 'id_rubrique' => $id_rubrique, 'id_article' => $id_article, 'id_breve' => $id_breve, 'id_syndic' => $id_syndic, 'id_thread' => $id_thread, 'statut' => $statut), "id_forum = $id_message");
+	sql_updateq('spip_forum', array('id_parent' => $id_forum, 'id_rubrique' => $id_rubrique, 'id_article' => $id_article, 'id_breve' => $id_breve, 'id_syndic' => $id_syndic, 'id_message'=>$id_message, 'id_thread' => $id_thread, 'statut' => $statut), "id_forum = $id_reponse");
 
 	// Entrer les mots-cles associes
-	if ($ajouter_mot) mots_du_forum($ajouter_mot, $id_message);
+	if ($ajouter_mot) mots_du_forum($ajouter_mot, $id_reponse);
 
 	//
 	// Entree du contenu et invalidation des caches
 	//
 	include_spip('action/editer_forum');
-	revision_forum($id_message, $c);
+	revision_forum($id_reponse, $c);
 
 	// Ajouter un document
 	if (isset($_FILES['ajouter_document'])
@@ -185,7 +186,7 @@ function forum_insert_base($c, $id_forum, $id_article, $id_breve, $id_syndic, $i
 		$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 		$ajouter_documents(
 			$_FILES['ajouter_document']['tmp_name'],
-			$_FILES['ajouter_document']['name'], 'forum', $id_message,
+			$_FILES['ajouter_document']['name'], 'forum', $id_reponse,
 			'document', 0, $documents_actifs);
 		// supprimer le temporaire et ses meta donnees
 		spip_unlink($_FILES['ajouter_document']['tmp_name']);
@@ -195,16 +196,16 @@ function forum_insert_base($c, $id_forum, $id_article, $id_breve, $id_syndic, $i
 
 	// Notification
 	if ($notifications = charger_fonction('notifications', 'inc'))
-		$notifications('forumposte', $id_message);
+		$notifications('forumposte', $id_reponse);
 
-	return $id_message;
+	return $id_reponse;
 }
 
 // calcul de l'adresse de retour en cas d'echec du POST
 // mais la veritable adresse de retour sera calculee apres insertion
 
 // http://doc.spip.org/@forum_insert_nopost
-function forum_insert_nopost($id_forum, $id_article, $id_breve, $id_syndic, $id_rubrique)
+function forum_insert_nopost($id_forum, $id_article, $id_breve, $id_syndic, $id_rubrique, $id_message)
 {
 	if ($id_forum>0)
 		$r = generer_url_entite($id_forum, 'forum');
@@ -216,6 +217,8 @@ function forum_insert_nopost($id_forum, $id_article, $id_breve, $id_syndic, $id_
 		$r = generer_url_entite($id_syndic, 'site');
 	elseif ($id_rubrique) # toujours en dernier
 		$r = generer_url_entite($id_rubrique, 'rubrique');
+	elseif ($id_message)
+		$r = generer_url_entite($id_message, 'mssage');
 	else $r = ''; # ??
 	return str_replace('&amp;','&',$r);
 }
@@ -253,7 +256,7 @@ function forum_insert_statut($champs, $retour, $forcer_statut=NULL)
 	$statut = controler_forum($champs['id_article']);
 
 	// Ne pas autoriser d'envoi hacke si forum sur abonnement
-	if ($statut == 'abo') {
+	if ($statut == 'abo' AND !test_espace_prive()) {
 		controler_forum_abo($retour); // demandera une auth http
 	}
 	
@@ -268,7 +271,7 @@ function forum_insert_statut($champs, $retour, $forcer_statut=NULL)
 		tracer_erreur_forum('champ interdit (nobot) rempli');
 		$champs['statut']=false;
 	}
-
+	
 	return $champs;
 }
 
