@@ -116,6 +116,7 @@ function recherche_ldap($filtre){
 	}
 	else{
 		$search=@ldap_search($peuplementldap_cnx, $GLOBALS["ldap_base"], $filtre, array("dn","cn","mail"));
+		ldap_sort($peuplementldap_cnx,$search,"cn");
 		return @ldap_get_entries($peuplementldap_cnx,$search);
 	}	
 }
@@ -152,11 +153,17 @@ function getImage($id_result){
 }
 
 
+
+/**
+ * Affiche la légende des icones du compte rendu d'insertion.
+ *
+ * @return String
+ */
 function affiche_legende(){
 	$legende = "<strong>"._T('peuplementldap:legende')."</strong><br />";
-	$legende.= "<img src=\"../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_insert_ok']."\" />&nbsp;"._T('peuplementldap:legende_ok')."<br />";
-	$legende.= "<img src=\"../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_insert_doublon']."\" />&nbsp;"._T('peuplementldap:legende_doublon')."<br />";
-	$legende.= "<img src=\"../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_insert_ko']."\" />&nbsp;"._T('peuplementldap:legende_ko')."<br />";
+	$legende.= "<img src=\""._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_insert_ok']."\" />&nbsp;"._T('peuplementldap:legende_ok')."<br />";
+	$legende.= "<img src=\""._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_insert_doublon']."\" />&nbsp;"._T('peuplementldap:legende_doublon')."<br />";
+	$legende.= "<img src=\""._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$GLOBALS['peuplement_ldap_insert_ko']."\" />&nbsp;"._T('peuplementldap:legende_ko')."<br />";
 	
 	return $legende;
 }
