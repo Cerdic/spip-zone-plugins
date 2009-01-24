@@ -4,22 +4,25 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/peuplement_ldap_common');
-include_spip('inc/auth_ldap.php');
-include('../ecrire/inc/auth_ldap.php');
+include_spip('auth/ldap');
+include_spip('inc/autoriser');
 
-
-function exec_peuplement_ldap(){
+function exec_peuplement_ldap_dist(){
+	// Autorisation d'acces a cette page. Il faut être administrateur du site.
+	if (!autoriser('')){
+		include_spip('inc/minipres');
+		echo minipres(_T('peuplementldap:titre_page'),_T('peuplementldap:minipres_corps'));
+		exit;
+	}
+	$commencer_page = charger_fonction('commencer_page','inc');
+	echo $commencer_page(_T('peuplementldap:titre_page'));
+	
 	//global $couleur_claire;
 	global $connect_statut;
 	global $couleur_claire;
 	global $spip_lang_right;
-	
-		// Entete HTML (fixe la balise Titre)
-        debut_page(_T('peuplementldap:titre_page'));
-        echo "<br /><br /><br />";
         // Titre de la page
-        gros_titre(_T('peuplementldap:titre_page'));
-        
+        echo gros_titre(_T('peuplementldap:titre_page'),'',false);
         if (_request('peuplement_ldap_etape') == NULL || _request('peuplement_ldap_etape') == 1){
         	genere_etape_1();
         }
@@ -37,7 +40,7 @@ function exec_peuplement_ldap(){
 							$image = getImage(insere_auteur($info_auteur[0],$info_auteur[1]));
 							$ligne[0]=$info_auteur[2];
 							$ligne[1]=$info_auteur[1];
-							$ligne[2]="<img src=\"../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$image."\" />";
+							$ligne[2]="<img src=\""._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$image."\" />";
 							array_push($compte_rendu,$ligne);
 						}
 					}
@@ -50,13 +53,15 @@ function exec_peuplement_ldap(){
 						$image = getImage(insere_auteur($entreesLdap[$i]["dn"],$entreesLdap[$i]["mail"][0]));
 						$ligne[0]=$entreesLdap[$i]["cn"][0];
 						$ligne[1]=$entreesLdap[$i]["mail"][0];
-						$ligne[2]="<img src=\"../"._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$image."\" />";
+						$ligne[2]="<img src=\""._DIR_PLUGIN_PEUPLEMENTLDAP."/img_pack/".$image."\" />";
 						array_push($compte_rendu,$ligne);
 					}
 				}
         		genere_etape_3($compte_rendu);
         	}
         }
+		echo fin_gauche();
+		echo fin_page();
 }
 
 ?>
