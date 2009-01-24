@@ -15,9 +15,5 @@
 		Les nouvelles stats de SPIP en flot !
     </description>
     <prefix>flot</prefix>
-	<pipeline>
-		<nom>header_prive</nom>
-		<inclure>inc/pipeline_add.php</inclure>
-	</pipeline>
 </plugin>
 
