@@ -3,14 +3,14 @@ include_spip('inc/statistiques_new');
 function flot_header_prive($flux){
 	
 	$chemin_flot = find_in_path('javascript/jquery.flot.js');
-	$courbe_visites = "'".courbe_visites()."'";
-	$courbe_moyenne = "'".courbe_moyenne()."'";
+	$courbe_visites = courbe_visites();
+	$courbe_moyenne =  courbe_moyenne();
 	$show_points = show_points();
 	$mode_axis = "'".'time'."'";
 	$position_legend = "'".'ne'."'";
 	$flux .= "<script type='text/javascript' src=".$chemin_flot."></script>";
 	$preparer_flux = '<script type="text/javascript">';
-	$preparer_flux = $preparer_flux.'$(function () {
+	$preparer_flux .= '$(function () {
 			var stats =  [
 				{
 					label: "Visites",
@@ -21,7 +21,7 @@ function flot_header_prive($flux){
 					data: '.$courbe_moyenne.' 
 				}
 				];';
-	$preparer_flux = $preparer_flux.'var options = { 
+	$preparer_flux .= 'var options = { 
 				lines: { show: true }, 
 				points: { show: '.$show_points.' },
 				xaxis: { mode: '.$mode_axis.', timeformat: "%d/%m/%y"   },
@@ -29,9 +29,12 @@ function flot_header_prive($flux){
 				legend: { position: '.$position_legend.'},
 				selection: { mode: "xy" }
 			};';
-	$preparer_flux = $preparer_flux.'var conteneur = $("#conteneur");';
+	$preparer_flux .= 'var conteneur = $("#conteneur");
 	
-	$preparer_flux = $preparer_flux.'conteneur.bind("plotselected", function (event, ranges) {
+				plot = $.plot(conteneur, stats, options);
+	';
+	
+	$preparer_flux .= 'conteneur.bind("plotselected", function (event, ranges) {
 				$("#selection").text(ranges.xaxis.from.toFixed(1) + " to " + ranges.xaxis.to.toFixed(1));
 				var zoom = $("#zoom").attr("checked");
 				if (zoom)
@@ -41,13 +44,11 @@ function flot_header_prive($flux){
 						yaxis: { min: ranges.yaxis.from, max: ranges.yaxis.to }
 					}));
 			});';
-	$preparer_flux = $preparer_flux.'$("#clearSelection").click(function () {
+	$preparer_flux .= '$("#clearSelection").click(function () {
 				plot.clearSelection();
 			});';
-	$preparer_flux = $preparer_flux.'});';
-	$preparer_flux = $preparer_flux.'</script>';
-	
-	
+	$preparer_flux .= '});';
+	$preparer_flux .= '</script>';
 	
 	
 	$flux .= $preparer_flux;
