@@ -6,7 +6,7 @@
 		Yohann (potter64)
 	</auteur>
     <version>
-		0.1
+		0.2
     </version>
     <etat>
 		dev
@@ -14,12 +14,9 @@
     <description>
 		Les nouvelles stats de SPIP en flot !
     </description>
-    <prefix>
-		flot
-    </prefix>
+    <prefix>flot</prefix>
 	<pipeline>
 		<nom>header_prive</nom>
-		<action>head_prive</action>
 		<inclure>inc/pipeline_add.php</inclure>
 	</pipeline>
 </plugin>

@@ -1,14 +1,14 @@
 <?php
 include_spip('inc/statistiques_new');
-function flot_head_prive($flux){
+function flot_header_prive($flux){
 	
-	$chemin_flot = _DIR_PLUGIN_FLOT.'jquery.flot.js';
+	$chemin_flot = find_in_path('javascript/jquery.flot.js');
 	$courbe_visites = "'".courbe_visites()."'";
 	$courbe_moyenne = "'".courbe_moyenne()."'";
 	$show_points = show_points();
 	$mode_axis = "'".'time'."'";
 	$position_legend = "'".'ne'."'";
-	$flux .= "<script language='javascript' type='text/javascript' src=".$chemin_flot."></script>";
+	$flux .= "<script type='text/javascript' src=".$chemin_flot."></script>";
 	$preparer_flux = '<script type="text/javascript">';
 	$preparer_flux = $preparer_flux.'$(function () {
 			var stats =  [

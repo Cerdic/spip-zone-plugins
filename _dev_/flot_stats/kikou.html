@@ -1,0 +1,143 @@
+#CACHE{0}
+<html>
+<head>
+#INSERT_HEAD
+<!--[if IE]><script type="text/javascript" src="#CHEMIN{javascript/excanvas.pack.js}"></script><![endif]-->
+<script type="text/javascript" src="#CHEMIN{javascript/jquery.flot.js}"></script>
+<script type="text/javascript" src="#CHEMIN{javascript/jquery.tflot.js}"></script>
+<style>
+
+</style>
+<script type="text/javascript">
+(function($){
+	$(document).ready(function(){
+		$("table.graph").tFlot({
+			legendeExterne:true,
+			legendeActions:true, // ne fonctionne qu'avec legende externe a true.
+		});
+		
+		$("table.graph2").tFlot({
+			legendeExterne:true,
+			legendeActions:false,
+			modeDate:true,
+			moyenneGlissante:true,
+			//moyenneGlissantePlage:31,
+		});
+	});
+})(jQuery);
+</script>
+<style type='text/css'>
+.graphique{clear:both;}
+.graphResult{float:left;}
+.graphLegend{float:left; padding:0.5em;}
+</style>
+</head>
+<body>
+<table class="graph">
+	 <tr>
+		 <th>Ventes</th>
+		 <td>8</td>
+		 <td>4</td>
+		 <td>16</td>
+		 <td>12</td>
+		 <td>10</td>
+		 <td>8</td>
+		 <td>13</td>
+		 <td>10</td>
+		 <td>5</td>
+	 </tr>
+	 <tr class="flotLine">
+		 <th>Ventes glissantes</th>
+		 <td></td>
+		 <td></td>
+		 <td>10</td>
+		 <td>9</td>
+		 <td>10</td>
+		 <td>9</td>
+		 <td>8</td>
+		 <td></td>
+		 <td></td>
+	 </tr>
+ </table>
+
+
+ <table class="graph">
+	 <tr>
+	 	<th>Frameworks</th>
+	 	<th>jQuery 1.2.6</th>
+	 	<th>jQuery 1.3</th>
+	 	<th>MooTools 1.2.1</th>
+		<th>Prototype 1.6.0.3</th>
+	 </tr>
+	 <tr>
+	 	<th>Firefox 3</th>
+		<td>161</td>
+		<td>41</td>
+		<td>47</td>
+		<td>323</td>
+	 </tr>
+	 <tr>
+	 	<th>Firefox 3.1</th>
+		<td>113</td>
+		<td>31</td>
+		<td>42</td>
+		<td>78</td>
+	 </tr>
+	 <tr>
+	 	<th>Safari 3.2</th>
+		<td>77</td>
+		<td>10</td>
+		<td>25</td>
+		<td>41</td>
+	 </tr>
+	 <tr>
+	 	<th>Safari Nightly</th>
+		<td>87</td>
+		<td>22</td>
+		<td>22</td>
+		<td>31</td>
+	 </tr>
+	 <tr>
+	 	<th>Opera 9.6</th>
+		<td>130</td>
+		<td>23</td>
+		<td>36</td>
+		<td>84</td>
+	 </tr>
+	 <tr>
+	 	<th>IE 6</th>
+		<td>710</td>
+		<td>110</td>
+		<td>600</td>
+		<td>971</td>
+	 </tr>
+	 <tr>
+	 	<th>IE 7</th>
+		<td>560</td>
+		<td>60</td>
+		<td>330</td>
+		<td>460</td>
+	 </tr>
+	 <tr>
+	 	<th>Chrome</th>
+		<td>49</td>
+		<td>14</td>
+		<td>23</td>
+		<td>21</td>
+	 </tr>
+ </table>
+
+#SET{label,''}
+#SET{visites,''}
+<BOUCLE_visites(VISITES) {par date}>
+[(#SET{label, [(#GET{label}|concat{<th>[(#DATE|affdate{Y/m/d})]</th>})]})]
+[(#SET{visites, [(#GET{visites}|concat{<td>#VISITES</td>})]})]
+</BOUCLE_visites>
+<table class="graph2">
+	<tr><th><:date:></th>#GET{label}</tr>
+	<tr class="flotLine flotFill"><th><:visites:></th>#GET{visites}</tr>
+</table>
+</B_visites>
+  
+</body>
+</html>
