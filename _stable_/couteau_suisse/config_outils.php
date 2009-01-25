@@ -7,6 +7,8 @@
 #  Infos : http://www.spip-contrib.net/?article2166   #
 #-----------------------------------------------------#
 if (!defined("_ECRIRE_INC_VERSION")) return;
+// selecteur "[@" exclu par jQuery 1.3.1
+@define('_SEL_JQUERY', defined('_SPIP20100')?'':'@');
 
 // Noter :
 // outils/mon_outil.php : inclus par les pipelines de l'outil
@@ -936,7 +938,7 @@ add_outil( array(
 	// jQuery pour remplacer l'arobase image par l'arobase texte
 	// ... puis arranger un peu le title qui a ete protege
 	'code:jq_init' => "jQuery('span.spancrypt', this).attr('class','cryptOK').html('&#6'+'4;');
-	jQuery(\"a[@title*='..']\", this).each(function () {
+	jQuery(\"a["._SEL_JQUERY."title*='..']\", this).each(function () {
 		this.title = this.title.replace(/\.\..t\.\./,'[@]');
 	});",
 	'code:css' => 'span.spancrypt {background:transparent url(' . url_absolue(find_in_path('img/mailcrypt/leure.gif'))

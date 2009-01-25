@@ -22,7 +22,6 @@ if (window.jQuery) jQuery(function(){
 			return;
 		}
 		var val = jQuery("#ar_type_objet").val();
-		//var typ = jQuery("input:radio[@name='radio_type_urls3'][@checked]").val();
 		var url = "./?exec=action_rapide&arg=type_urls_spip2&type_objet="+val+"&id_objet="+num;
 		jQuery("#ar_url_trouvee").load(url);
 	});
@@ -56,12 +55,6 @@ function ar_load() {
 		jQuery("#url_objet_input").removeClass("cs_hidden");
 	}
 	jQuery("#ar_edit_info").removeClass("cs_hidden");
-}
-
-// cette fonction sert a transmettre les valeurs 'ar_type_objet' et 'ar_num_objet' lors de la redirection vers : ?exec=action_rapide
-function add_param_redirect(this_) {
-	var redirect = jQuery(this_).parents('form').find('input[@name=redirect]');
-	redirect.val(redirect.val()+'&ar_num_objet='+jQuery("#ar_num_objet").val()+'&ar_type_objet='+jQuery("#ar_type_objet").val());
 }
 
 </script>
@@ -103,7 +96,7 @@ function add_param_redirect(this_) {
 	  <label><b><:couteauprive:urls_nouvelle:></b><input style="width:100%;" id="ar_url_objet" name="ar_url_objet" value="" disabled="disabled"/></label>
 	  <div class="ar_edit_info cs_hidden" id="ar_edit_info">&nbsp;</div>
 	 </div>
-	 <div style="text-align:right"><input name="submit" id='url_objet_input' class='fondo' type='submit' disabled="disabled" value="<:couteauprive:urls_enregistrer:>" onclick="javascript:add_param_redirect(this);"/></div>
+	 <div style="text-align:right"><input name="submit" id='url_objet_input' class='fondo' type='submit' disabled="disabled" value="<:couteauprive:urls_enregistrer:>" /></div>
 	 <div id="ar_url_trouvee" class="cs_hidden">||</div>
 	</fieldset>
 </div>

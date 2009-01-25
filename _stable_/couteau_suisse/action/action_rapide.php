@@ -76,6 +76,8 @@ spip_log("action 'action_rapide' du Couteau suisse : $arg");
 		$url = trim(_request('ar_url_objet'));
 		$q = "UPDATE spip_$table SET url_propre="._q($url)." WHERE id_$type=$id";
 		spip_query($q);
+		redirige_par_entete(parametre_url(parametre_url(urldecode(_request('redirect'))
+			, 'ar_num_objet', _request('ar_num_objet'), '&'), 'ar_type_objet', _request('ar_type_objet'), '&'));
 		break;
 	// forms[1] : editer un objet (cas SPIP >= 2.0)
 	case 'edit_urls2_1': 
@@ -96,6 +98,8 @@ spip_log("action 'action_rapide' du Couteau suisse : $arg");
 				spip_log("L'URL $type#$id a ete cree : $url");
 			}
 		}
+		redirige_par_entete(parametre_url(parametre_url(urldecode(_request('redirect'))
+			, 'ar_num_objet', _request('ar_num_objet'), '&'), 'ar_type_objet', _request('ar_type_objet'), '&'));
 		break;
 
 	}

@@ -14,6 +14,8 @@ include_spip("inc/presentation");
 // compatibilite spip 1.9
 if(defined('_SPIP19100') && !function_exists('fin_gauche')) { function fin_gauche(){return '';} }
 function cs_compat_boite($b) {if(defined('_SPIP19200')) echo $b('', true); else $b(); }
+// selecteur "[@" exclu par jQuery 1.3.1
+@define('_SEL_JQUERY', defined('_SPIP20100')?'':'@');
 
 function cs_admin_styles_et_js($cs_version) {
 	global $afficher_outil;
@@ -189,13 +191,13 @@ if (window.jQuery) jQuery(function(){
 	
 	jQuery('div.sous_liste').each(cs_Categorie2);
 	if (window.location.search.match(/cmd=pack/)!=null) 
-		jQuery(\"div.cs_aide a[@href*='cmd=pack']\")
+		jQuery(\"div.cs_aide a["._SEL_JQUERY."href*='cmd=pack']\")
 			.click( function() { window.location.reload(true); return false; });
-	jQuery(\"div.cs_aide a[@href*='cmd=install']\").click( function() { 
+	jQuery(\"div.cs_aide a["._SEL_JQUERY."href*='cmd=install']\").click( function() { 
 		msg=\"".unicode_to_javascript(addslashes(html2unicode(_T('couteauprive:pack_installer'))))."\";
 		return window.confirm(msg.replace(/@pack@/,jQuery(this).text())); 
 	});
-	jQuery(\"div.cs_aide a[@href*='cmd=resetall']\").click( function() { 
+	jQuery(\"div.cs_aide a["._SEL_JQUERY."href*='cmd=resetall']\").click( function() { 
 		msg=\"".unicode_to_javascript(addslashes(html2unicode(_T('couteauprive:cs_reset'))))."\";
 		return window.confirm(msg); 
 	});
