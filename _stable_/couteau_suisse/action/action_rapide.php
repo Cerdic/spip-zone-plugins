@@ -26,7 +26,7 @@ cs_log("INIT : action_action_rapide_dist() - Une action rapide a ete demandee !"
 	}
 
 spip_log("action 'action_rapide' du Couteau suisse : $arg");
-//	spip_log($_POST); spip_log($_GET);
+//	cs_log($_POST, 'action POST='); cs_log($_GET, 'action GET=');
 
 	switch ($arg) {
 
@@ -41,6 +41,11 @@ spip_log("action 'action_rapide' du Couteau suisse : $arg");
 		action_rapide_tri_auteurs(_request('bp_article'), abs(_request('bp_auteur')), _request('bp_auteur')>0);
 		break;
 
+	// tester l'anti-spam
+	case 'test_spam':
+		// aucune action, le test est pris en charge par ?exec=action_rapide
+		redirige_par_entete(parametre_url(urldecode(_request('redirect')), 'ar_message', _request('ar_message'), '&'));
+		break;
 	// purger la corbeille
 	case 'corbeille':
 		include_spip('outils/corbeille_action_rapide');

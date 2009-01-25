@@ -511,6 +511,10 @@ Ce sommaire peut &ecirc;tre coupl&eacute; avec : &laquo;&nbsp;[.->decoupe]&nbsp;
 	'sommaire:nom' => 'Un sommaire automatique',
 	'sommaire_avec' => 'Un texte avec sommaire&nbsp;: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un texte sans sommaire&nbsp;: <b>@_CS_SANS_SOMMAIRE@</b>',
+	'spam_tester_label' => 'Testez ici votre liste de s&eacute;quences interdites :',
+	'spam_tester' => 'Lancer le test !',
+	'spam_test_ok' => 'Ce message serait accept&eacute; par le filtre anti-SPAM.',
+	'spam_test_ko' => 'Ce message serait bloqu&eacute; par le filtre anti-SPAM !',
 	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots, tout comme les balises en clair &lt;a>&lt;/a>, sont interdits : veuillez inciter vos r&eacute;dacteurs &agrave; utiliser les raccourcis de liens SPIP.
 
 Listez ici les s&eacute;quences interdites en les s&eacute;parant par des espaces. [[%spam_mots%]]

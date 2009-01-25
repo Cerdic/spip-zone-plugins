@@ -20,7 +20,7 @@ function spam_installe() {
 		'[link=', '[/link]',
 		// certains mots...
 		// 'ejakulation', 'fucking', '(asses)',
-		
+
 	), defined('_spam_MOTS')?spam_liste_mots(_spam_MOTS):array());
 	array_walk($spam_mots, 'spam_walk');
 	ecrire_meta('cs_spam_mots', '/(' . join('|', $spam_mots) . ')/i');
@@ -67,7 +67,7 @@ if ( count($_POST)
 
 	if (!isset($GLOBALS['meta']['cs_spam_mots'])) spam_installe();
 
-	// champs de formulaires a visiter
+	// champs du formulaire a visiter
 	//    un message en forum : texte, titre, auteur
 	//    un message a un auteur : texte_message_auteur_XX, sujet_message_auteur_XX, email_message_auteur_XX
 	$spam_POST_reg = ',^(texte|titre|sujet|auteur|email|session),i';
@@ -84,7 +84,7 @@ if ( count($_POST)
 
 	// nettoyage
 	unset($spam_POST_reg, $spam_POST_compile);
-	
+
 	function action_cs_spam(){
 		include_spip('inc/minipres');
 		$page = minipres(

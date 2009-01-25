@@ -23,7 +23,7 @@ function exec_action_rapide_dist() {
 	cs_minipres();
 	$arg = _request('arg');
 //	spip_log("exec 'action_rapide' du Couteau suisse : $arg / "._request('submit'));
-//	spip_log($_POST); spip_log($_GET);
+//	cs_log($_POST, 'exec POST='); cs_log($_GET, 'exec GET=');
 
 	switch ($arg) {
 	// formulaires en partie privee
@@ -52,7 +52,7 @@ cs_log(" -- outil = $outil - script = $script - arg = $arg");
 		cs_minipres(!preg_match('/^\w+$/', $script));
 		include_spip('inc/cs_outils');
 		$res = cs_action_rapide($outil);
-cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour() pour afficher la ligne de configuration de l'outil");	
+cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour() pour afficher le formulaire de la boite privee");	
 		ajax_retour($res);
 		break;
 

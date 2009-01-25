@@ -34,14 +34,11 @@ if (!defined('_DIR_PLUGIN_COUTEAU_SUISSE')){
 	$p=_DIR_PLUGINS.end($p); if ($p[strlen($p)-1]!='/') $p.='/';
 	define('_DIR_PLUGIN_COUTEAU_SUISSE', $p);
 }
-if(defined('_SPIP19100')) {
-	function compacte_css($texte) { return $texte; }
-	function compacte_js($texte) { return $texte; }
-}
 
 // SPIP 1.93 a change cette fonction. donc, en attendant mieux...
 function cs_ajax_action_greffe($idom, $corps, $br='<br />')	{
-	return _request('var_ajaxcharset') ? "$br$corps"	: "\n<div id='$idom'>$corps\n</div>\n";
+	$ajax = defined('_SPIP19300')?_AJAX:_request('var_ajaxcharset');
+	return $ajax?"$br$corps":"\n<div id='$idom'>$corps\n</div>\n";
 }
 
 function cs_suppr_metas_var($meta, $new = false) {
@@ -332,22 +329,32 @@ function cs_initialise_includes($count_metas_outils) {
 		$temp_css[] = 'span.cs_BT {background-color:#FFDDAA; font-weight:bold; border:1px outset #CCCC99; padding:0.2em 0.3em;}
 span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 	// prise en compte des css.html qu'il faudra compiler plus tard
-	if (count($temp_html))
+	if (count($temp_html)) {
 		$temp_css[] = '<cs_html>'.join("\n", $temp_html).'</cs_html>';
+		unset($temp_html);
+	}
 	// concatenation des css inline, js inline et filtres trouves
 	if (count($temp_css)) {
-		$temp = array("<style type=\"text/css\">\n".compacte_css(join("\n", $temp_css))."\n</style>");
+		$temp_css = join("\n", $temp_css);
+		if(function_exists('compacte_css')) $temp_css = compacte_css($temp_css);
+		$temp = array("<style type=\"text/css\">\n$temp_css\n</style>");
+		unset($temp_css);
 		$cs_metas_pipelines['header'] = is_array($cs_metas_pipelines['header'])?array_merge($temp, $cs_metas_pipelines['header']):$temp;
 	}
 	if (count($temp_jq_init)) {
 		$temp_js[] = "var cs_init = function() {\n\t".join("\n\t", $temp_jq_init)."\n}\nif(typeof onAjaxLoad=='function') onAjaxLoad(cs_init);";
 		$temp_jq[] = "cs_init.apply(document);";
+		unset($temp_jq_init);
 	}
-	if (count($temp_jq))
+	if (count($temp_jq)) {
 		$temp_js[] = "if (window.jQuery) jQuery(document).ready(function(){\n\t".join("\n\t", $temp_jq)."\n});";
+		unset($temp_jq);
+	}
 	if (count($temp_js)) {
-		$temp = array("<script type=\"text/javascript\"><!--\nvar cs_prive=window.location.pathname.match(/\\/ecrire\\/\$/)!=null;\n"
-			.compacte_js(join("\n", $temp_js))."\n// --></script>\n");
+		$temp_js = join("\n", $temp_js);
+		if(function_exists('compacte_js')) $temp_js = compacte_js($temp_js);
+		$temp = array("<script type=\"text/javascript\"><!--\nvar cs_prive=window.location.pathname.match(/\\/ecrire\\/\$/)!=null;\n$temp_js\n// --></script>\n");
+		unset($temp_js);
 		$cs_metas_pipelines['header'] = is_array($cs_metas_pipelines['header'])?array_merge($temp, $cs_metas_pipelines['header']):$temp;
 	}
 	// join final...
