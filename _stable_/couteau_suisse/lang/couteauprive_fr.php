@@ -511,10 +511,6 @@ Ce sommaire peut &ecirc;tre coupl&eacute; avec : &laquo;&nbsp;[.->decoupe]&nbsp;
 	'sommaire:nom' => 'Un sommaire automatique',
 	'sommaire_avec' => 'Un texte avec sommaire&nbsp;: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un texte sans sommaire&nbsp;: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'spam_tester_label' => 'Testez ici votre liste de s&eacute;quences interdites :',
-	'spam_tester' => 'Lancer le test !',
-	'spam_test_ok' => 'Ce message serait accept&eacute; par le filtre anti-SPAM.',
-	'spam_test_ko' => 'Ce message serait bloqu&eacute; par le filtre anti-SPAM !',
 	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots, tout comme les balises en clair &lt;a>&lt;/a>, sont interdits : veuillez inciter vos r&eacute;dacteurs &agrave; utiliser les raccourcis de liens SPIP.
 
 Listez ici les s&eacute;quences interdites en les s&eacute;parant par des espaces. [[%spam_mots%]]
@@ -522,6 +518,10 @@ Listez ici les s&eacute;quences interdites en les s&eacute;parant par des espace
 _ &bull; Pour sp&eacute;cifier un mot entier, mettez-le entre parenth&egrave;ses. Exemple~:~{(asses)}.
 _ &bull; Pour une expression r&eacute;guli&egrave;re, v&eacute;rifiez bien la syntaxe et placez-la entre slashes et entre guillemets. Exemple~:~{"/@test\\.(com|fr)/"}.',
 	'spam:nom' => 'Lutte contre le SPAM',
+	'spam_test_ko' => 'Ce message serait bloqu&eacute; par le filtre anti-SPAM !',
+	'spam_test_ok' => 'Ce message serait accept&eacute; par le filtre anti-SPAM.',
+	'spam_tester' => 'Lancer le test !',
+	'spam_tester_label' => 'Testez ici votre liste de s&eacute;quences interdites :',
 	'spip_cache:description' => '@puce@ Le cache occupe un certain espace disque et SPIP peut en limiter l\'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu\'aucun quota ne s\'applique.[[%quota_cache% Mo]]
 
 @puce@ Lorsqu\'une modification du contenu du site est faite, SPIP invalide imm&eacute;diatement le cache sans attendre le calcul p&eacute;riodique suivant. Si votre site a des probl&egrave;mes de performance face &agrave; une charge tr&egrave;s &eacute;lev&eacute;e, vous pouvez cocher &laquo;&nbsp;non&nbsp;&raquo; &agrave; cette option.[[%derniere_modif_invalide%]]

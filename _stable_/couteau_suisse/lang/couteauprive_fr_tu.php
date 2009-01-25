@@ -513,7 +513,7 @@ Ce sommaire peut &ecirc;tre coupl&eacute; avec&nbsp;: &laquo;&nbsp;[.->decoupe]&
 	'sommaire:nom' => 'Un sommaire pour vos articles',
 	'sommaire_avec' => 'Un texte avec sommaire&nbsp;: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un texte sans sommaire&nbsp;: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises &lt;a>&lt;/a> sont interdits :  inciter vos r&eacute;dacteurs &agrave; utiliser les raccourcis de liens SPIP.
+	'spam:description' => '<MODIF>Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises &lt;a>&lt;/a> sont interdits :  inciter vos r&eacute;dacteurs &agrave; utiliser les raccourcis de liens SPIP.
 
 Liste ici les s&eacute;quences interdites en les s&eacute;parant par des espaces. [[%spam_mots%]]
 • Pour une expression avec des espaces, placez-la entre guillemets.

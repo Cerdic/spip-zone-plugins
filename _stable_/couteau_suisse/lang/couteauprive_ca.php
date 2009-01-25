@@ -15,6 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'SPIP_liens:description' => '@puce@ Tout els enlla&ccedil;os del lloc s\'obren per defecte a la mateixa finestra de navegaci&oacute; que esteu. Per&ograve; pot ser &uacute;til obrir els enlla&ccedil;os externs al lloc en una nova finestra --es pot aconseguir afegint {target="_blank"} a totes les etiquetes &lt;a&gt; dotades per SPIP de les classes {spip_out}, {spip_url} o {spip_glossaire}. A vegades pot ser &uacute;til afegir una d\'aquestes classes als enlla&ccedil;os de l\'esquelet del lloc (fitxers html) per tal d\'ampliar al m&agrave;xim aquesta funcionalitat.[[%radio_target_blank3%]]
 
 @puce@ SPIP permet lligar paraules amb la seva definici&oacute; gr&agrave;cies a la drecera tipogr&agrave;fica <code>[?mot]</code>. Per defecte (o si deixeu buida la casella de m&eacute;s avall), el glossari extern us envia cap a l\'enciclop&egrave;dia lliure wikipedia.org. Us toca a vosaltres decidir quina adre&ccedil;a voleu utilitzar. <br />Enlla&ccedil; de prova: [?SPIP][[%url_glossaire_externe2%]]',
+	'SPIP_liens:description1' => '@puce@ SPIP ha previst un estil CSS pels enlla&ccedil;os &laquo;~mailto:~&raquo;: un petit sobre hauria d\'apar&egrave;ixer al davant de cada enlla&ccedil; lligat a un correu electr&ograve;nic; per&ograve; com que tots els navegadors no el poden mostrar (sobretot IE6, IE7 i SAF3), us toca a vosaltres decidir si &eacute;s necessari conservar aquest afegit.
+_ Enlla&ccedil; de test: [->test@test.com] (recarregueu la p&agrave;gina completament).[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP i els enlla&ccedil;os externs',
 
 	// A
@@ -313,6 +315,7 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'label:dossier_squelettes' => 'Carpeta(es) a utilitzar:',
 	'label:duree_cache' => 'Durada de la mem&ograve;ria cau local:',
 	'label:duree_cache_mutu' => 'Durada de la mem&ograve;ria cau en mutualitzaci&oacute;:',
+	'label:enveloppe_mails' => 'Petit sobre davant dels correus electr&ograve;nics:',
 	'label:expo_bofbof' => 'Escriptura com exponents de: <html>St(e)(s), Bx, Bd(s) et Fb(s)</html>',
 	'label:forum_lgrmaxi' => 'Valor (en car&agrave;cters):',
 	'label:glossaire_groupes' => 'Grup(s) utilitzat(s):',
@@ -369,6 +372,7 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'label:url_arbo_sep_id' => 'Car&agrave;cter de separaci&oacute; \'titre-id\' en cas de doublon :<br/>(no utilitzar \'/\')',
 	'label:url_glossaire_externe2' => 'Enlla&ccedil; al glossari extern:',
 	'label:urls_arbo_sans_type' => 'Mostrar el tipus d\'objecte SPIP als URLs:',
+	'label:urls_avec_id' => 'Un id sistem&agrave;tic, per&ograve;...',
 	'label:urls_minuscules' => '@_CS_CHOIX@',
 	'label:webmestres' => 'Llista dels webmestres del lloc:',
 	'liens_en_clair:description' => 'Posa a la vostra disposici&oacute; el filtre: \'liens_en_clair\'. El vostre text cont&eacute; probablement enlla&ccedil;os que no s&oacute;n visibles durant la impressi&oacute;. Aquest filtre afegeix entre claud&agrave;tors el dest&iacute; de cada enlla&ccedil; clicable (enlla&ccedil;os externs o correus electr&ograve;nics). Atenci&oacute;: en mode impressi&oacute; (par&agrave;metre \'cs=print\' o \'page=print\' al url de la p&agrave;gina), aquesta funcionalitat s\'aplica autom&agrave;ticament.',
@@ -508,10 +512,12 @@ Aquest sumari pot ser acoblat amb: &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
 	'sommaire:nom' => 'Un sumari autom&agrave;tic',
 	'sommaire_avec' => 'Un text amb sumari:  <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un text sense sumari: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'spam:description' => '<MODIF>Intenta lluitar contra els enviaments de missatges autom&agrave;tics i malevolents a la part p&uacute;blica. Algunes paraules i les etiquetes &lt;a>&lt;/a> estan prohibides.
+	'spam:description' => '<MODIF>Intenta lluitar contra els enviaments de missatges autom&agrave;tics i mal&egrave;vols a la part p&uacute;blica. Algunes paraules, com les etiquetes en clar &lt;a>&lt;/a>, estan prohibides: animeu als vostres redactors a fer servir les dreceres d\'enlla&ccedil;os SPIP.
 
-Llisteu aqu&iacute; les seq&uuml;&egrave;ncies prohibides @_CS_ASTER@ separant-les per espais. [[%spam_mots%]]
-@_CS_ASTER@Per especificar una paraula sencera, poseu-la entre par&egrave;ntesi. En cas d\'una expressi&oacute; amb espais, poseu-la entre cometes. ',
+Llisteu aqu&iacute; les seq&uuml;&egrave;ncies prohibides separant-les per espais. [[%spam_mots%]]
+• Per una expressi&oacute; amb espais, poseu-la entre cometes.
+_ • Per especificar una paraula sencera, poseu-la entre par&egrave;ntesi. Exemple~:~{(asses)}.
+_ • Per una expressi&oacute; regular, verifiqueu b&eacute; la sintaxi i poseu-la entre barres inclinades i entre cometes. Exemple~:~{"/@test\\.(com|fr)/"}.  ',
 	'spam:nom' => 'Lluita contra l\'SPAM',
 	'spip_cache:description' => '@puce@ La mem&ograve;ria cau ocupa un cert espai de disc i SPIP pot limitar-me la import&agrave;ncia. Un valor buit o igual a 0 significa que no s\'aplica cap quota.[[%quota_cache% Mo]]
 
@@ -552,15 +558,15 @@ La sintaxi <html>#TITRE_XXX{yy}</html> se suporta igualment. Exemple: <html>#TIT
 	'tous' => 'Tots',
 	'toutes_couleurs' => 'Els 36 colors dels estils CSS :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Blocs multiling&uuml;es&nbsp;: <b><:trad:></b>',
-	'toutmulti:description' => '<MODIF>De manera semblant al que ja podeu fer en els vostres esquelets, aquesta eina us permet utilitzar lliurement les cadenes de lleng&uuml;es (d\'SPIP o dels vostres esquelets) en tots els continguts de vostre lloc Web (articles, t&iacute;tols, missatges, etc.) amb l\'ajuda de la drecera <code><:chaine:></code>.
+	'toutmulti:description' => 'De manera semblant al que ja podeu fer en els vostres esquelets, aquesta eina us permet utilitzar lliurement les cadenes de lleng&uuml;es (d\'SPIP o dels vostres esquelets) en tots els continguts del vostre lloc Web (articles, t&iacute;tols, missatges, etc.) amb l\'ajuda de la drecera <code><:chaine:></code>.
  
-Consulteu [aqu&iacute; ->http://www.spip.net/ca_article2191.html] la documentation d\'SPIP que fa refer&egrave;ncia a aquest tema.
+Consulteu [aqu&iacute; ->http://www.spip.net/ca_article2191.html] la documentaci&oacute; d\'SPIP que fa refer&egrave;ncia a aquest tema.
 
 Aquesta eina accepta igualment els arguments introdu&iuml;ts per SPIP 2.0. Per exemple, la drecera <:ma_chaine{nom=Charles Martin, age=37}:></code> permet passar dos par&agrave;metres a la seg&uuml;ent cadena: <code>\'ma_chaine\'=>"Bonjour, je suis @nom@ et j\'ai @age@ ans\\"</code>.
 
 La funci&oacute; SPIP utilitzada en PHP &eacute;s <code>_T(\'chaine\')</code> sense argument, i <code>_T(\'chaine\', array(\'arg1\'=>\'un texte\', \'arg2\'=>\'un autre texte\'))</code> amb arguments.
  
-Per tant, nNo oblideu verificar que la clau  <code>\'chaine\'</code> est&agrave; ben definida en els fitxers de lleng&uuml;es. ',
+Per tant, no oblideu verificar que la clau  <code>\'chaine\'</code> est&agrave; ben definida en els fitxers de lleng&uuml;es. ',
 	'toutmulti:nom' => 'Blocs multiling&uuml;es',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Aquest lloc es restablir&agrave; ben aviat.
@@ -616,10 +622,10 @@ _ Exemple : <code>article.php3?id_article=123</code>
 
 @puce@ Si utilitzeu el format {page} que hi ha m&eacute;s amunt o si l\'objecte demanat no &eacute;s reconegut, &eacute;s possible llavors escollir {{l\'script de crida}} a SPIP. Per defecte, SPIP escull {spip.php}, per&ograve; {index.php} (exemple de format : <code>/index.php?article123</code>) o un valor buit (format: <code>/?article123</code>) tamb&eacute; funcionen. Per qualsevol altre valor, heu de crear for&ccedil;osament el fitxer corresponent a l\'arrel d\'SPIP, semblant al que ja existeix: {index.php}.
 [[%spip_script%]]',
-	'type_urls:description1' => '<MODIF>@puce@ Si voleu fer servir un format a base d\'URLs &laquo;pr&ograve;pies&raquo;  ({propres}, {propres2}, {libres}, {arborescentes} ou {propres_qs}), el Ganivet Su&iacute;s pot:
- <q1>• Assegurar-se que l\'URL produ&iuml;da estigui totalment {{en min&uacute;scules}}.
-_ • Provocar l\'afegit sistem&agrave;tic de {{l\'id de l\'objecte}} al seu URL (en sufix o en prefix).
-_ (exemples: <code>/El-meu-t&iacute;tol-d-article,457</code> o <code>/457-El-meu-t&iacute;tol-d-article</code>)</q1>[[%urls_minuscules%]][[->%urls_avec_id%]][[->%urls_avec_id2%]]',
+	'type_urls:description1' => '@puce@ Si voleu fer servir un format a base d\'URLs &laquo;pr&ograve;pies&raquo; ({propres}, {propres2}, {libres}, {arborescentes} o {propres_qs}), el Ganivet Su&iacute;s pot:
+ <q1>• Assegurar-se que l\'URL produ&iuml;da estigui totalment {{en min&uacute;scules}}.</q1>[[%urls_minuscules%]]
+<q1>• Provocar l\'afegit sistem&agrave;tic de {{l\'id de l\'objecte}} al seu URL (en sufix, en prefix, etc.).
+_ (exemples: <code>/El-meu-t&iacute;tol-d-article,457</code> o <code>/457-El-meu-t&iacute;tol-d-article</code>)</q1>',
 	'type_urls:nom' => 'Format dels URLs',
 	'typo_exposants:description' => '((Textos francesos)): millora el retorn tipogr&agrave;fic de les abreviacions corrents, exposant els elements necessaris (aix&iacute;, {<acronym>Mme</acronym>} esdev&eacute; {M<sup>me</sup>}) i corregint-ne els errors normals ({<acronym>2&egrave;me</acronym>} o  {<acronym>2me</acronym>}, per exemple, esdevenen {2<sup>e</sup>}, &uacute;nica abreviaci&oacute; correcta).
 
@@ -642,13 +648,15 @@ Podeu escollir aqu&iacute; de posar en exponent algunes dreceres suplement&agrav
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'est&agrave;ndard',
-	'urls_avec_id' => '<MODIF>Id sistem&agrave;tica en sufix ',
-	'urls_avec_id2' => '<MODIF>Id sistem&agrave;tica en prefix',
+	'urls_3_chiffres' => 'Imposar un m&iacute;nim de 3 xifres',
+	'urls_avec_id' => 'Posar-la en sufix ',
+	'urls_avec_id2' => 'Posar-la en prefix',
 	'urls_base_total' => 'Actualment hi ha @nb@ URL(s) a la base',
 	'urls_base_vide' => 'La base dels URLs est&agrave; buida',
 	'urls_choix_objet' => 'Edici&oacute; en la base del URL d\'un objecte espec&iacute;fic:',
 	'urls_edit_erreur' => 'El format actual dels URLs (&laquo;&nbsp;@type@&nbsp;&raquo;) no permet l\'edici&oacute;.',
 	'urls_enregistrer' => 'Enregistrar aquest URL a la base',
+	'urls_id_sauf_rubriques' => 'Excloure les seccions',
 	'urls_minuscules' => 'Lletres min&uacute;scules',
 	'urls_nouvelle' => 'Editar el URL &laquo;propis&raquo;:',
 	'urls_num_objet' => 'N&uacute;mero:',
