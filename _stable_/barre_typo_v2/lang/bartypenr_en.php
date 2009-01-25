@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_adresse' => 'Address',
 'barre_lien_externe' => 'External link',
 'barre_bulle' => 'Help bubble',
+'barre_formatages_speciaux' => 'Special formating',
 'barre_galerie' => 'Open gallery',
 'barre_gestion_caption' => 'Caption and Summary',
 'barre_gestion_colonne' => 'No. of columns',
