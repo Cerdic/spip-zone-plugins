@@ -45,16 +45,12 @@
 			
 			$url_retour = $_SERVER['HTTP_REFERER'];
 			
-			echo debut_gauche();
-			
-			echo debut_boite_info();
-			echo association_date_du_jour();	
-			echo fin_boite_info();
+			echo debut_gauche('',true);
 			
 			$rac=icone_horizontale(_T('ban:bouton_retour'), $url_retour, _DIR_PLUGIN_BANNIERES."/img_pack/retour-24.png","rien.gif",false);	
 			echo bloc_des_raccourcis($rac);
 			
-			echo debut_droite();
+			echo debut_droite('',true);
 			
 			echo debut_cadre_relief(  "", false, "", $titre = "Suppression d'une campagne d'affichage");
 							
@@ -65,7 +61,7 @@
 			echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
 			echo '<input name="submit" type="submit" value="Confirmer" class="fondo"></td></tr>';
 			
-			echo fin_cadre_relief();
+			echo fin_cadre_relief(true);
 			
 			echo fin_page();
 			exit;

@@ -19,22 +19,22 @@
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('ban:gestion_bannieres'));
 		
-		echo debut_gauche();
+		echo debut_gauche('',true);
 		
-		echo debut_boite_info();
+		echo debut_boite_info(true);
 		echo propre(_T('ban:info_doc'));  	
-		echo fin_boite_info();
+		echo fin_boite_info(true);
 		
 		$rac=icone_horizontale(_T('ban:creer_campagne'), generer_url_ecrire("edit_banniere","edit=ajoute"), '../'._DIR_PLUGIN_BANNIERES.'/img_pack/bannieres.png', 'creer.gif',false);	
 		echo bloc_des_raccourcis($rac);
 		
-		echo debut_droite();	
+		echo debut_droite('',true);	
 		
 		echo '<br />';
 		gros_titre(_T('ban:gestion_bannieres'));		
 		echo '<br />';	
 		
-		echo debut_cadre_relief();
+		echo debut_cadre_relief('',true);
 		
 		echo '<table border=0 cellpadding=2 cellspacing=0 width="100%" class="arial2" style="border: 1px solid #aaaaaa;">';
 		echo '<tr bgcolor="#DBE1C5">';
@@ -64,7 +64,7 @@
 		}				
 		echo '</table>';
 		
-		echo fin_cadre_relief();	
+		echo fin_cadre_relief(true);	
 		
 		echo fin_page();
 		

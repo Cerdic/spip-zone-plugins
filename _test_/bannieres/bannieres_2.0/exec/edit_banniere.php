@@ -29,16 +29,16 @@
 		$url_action_bannieres=generer_url_ecrire('action_bannieres');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
-		echo debut_gauche();
+		echo debut_gauche('',true);
 		
-		echo debut_boite_info();
+		echo debut_boite_info(true);
 		echo '<p>'._T('ban:info_edition').'</p>';
-		echo fin_boite_info();
+		echo fin_boite_info(true);
 		
 		$rac=icone_horizontale("Retour", $url_retour,_DIR_PLUGIN_BANNIERES."img_pack/retour-24.png","rien.gif",false);	
 		echo bloc_des_raccourcis($rac);
 
-		echo debut_droite();
+		echo debut_droite('',true);
 		
 		echo debut_cadre_relief ( "../"._DIR_PLUGIN_BANNIERES."img_pack/bannieres.png", false, "", $titre = 'FICHE BANNIERE');
 		
@@ -94,7 +94,7 @@
 		echo '</form>';
 		
 		// ON FERME TOUT
-		echo fin_cadre_relief();
+		echo fin_cadre_relief(true);
 		echo fin_page();
 	}
 ?>
