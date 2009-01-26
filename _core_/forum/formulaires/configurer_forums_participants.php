@@ -22,8 +22,32 @@ function formulaires_configurer_forums_participants_charger_dist(){
 
 function formulaires_configurer_forums_participants_traiter_dist(){
 	include_spip('inc/config');
-	appliquer_modifs_config();
-		
+	include_spip('inc/meta');
+
+	$purger_skel = false;
+	if ($accepter_forum = _request('forums_publics')
+	AND ($accepter_forum != $GLOBALS['meta']["forums_publics"])) {
+		$purger_skel = true;
+		$accepter_forum = substr($accepter_forum,0,3);
+	}
+
+	// Appliquer les changements de moderation forum
+	// forums_publics_appliquer : futur, saufnon, tous
+	if (in_array($appliquer = _request('forums_publics_appliquer'),
+		array('tous', 'saufnon')
+	)) {
+		$sauf = ($appliquer == 'saufnon')
+			? "accepter_forum != 'non'"
+			: '';
+
+		sql_updateq('spip_articles', array('accepter_forum'=>$accepter_forum), $sauf);
+	}
+
+	if ($accepter_forum == 'abo')
+		ecrire_meta('accepter_visiteurs', 'oui');
+
+	appliquer_modifs_config($purger_skel);
+
 	return array('message_ok'=>_T('config_info_enregistree'));
 }
 
