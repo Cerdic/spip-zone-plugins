@@ -109,36 +109,6 @@ function aff_statistique_visites_par_visites($serveur='', $id_article=0, $classe
 	  . '</ul></div></div>';
 }
 
-// http://doc.spip.org/@http_img_rien
-function http_img_rien($width, $height, $class='', $title='') {
-	return http_img_pack('rien.gif', $title,
-		"width='$width' height='$height'"
-		. (!$class ? '' : (" class='$class'"))
-		. (!$title ? '' : (" title=\"$title\"")));
-}
-
-// Donne la hauteur du graphe en fonction de la valeur maximale
-// Doit etre un entier "rond", pas trop eloigne du max, et dont
-// les graduations (divisions par huit) soient jolies :
-// on prend donc le plus proche au-dessus de x de la forme 12,16,20,40,60,80,100
-// http://doc.spip.org/@maxgraph
-function maxgraph($max) {
-
-	switch ($n =strlen($max)) {
-	case 0:
-		return 1;
-	case 1:
-		return 16;
-	case 2:
-		return (floor($max / 8) + 1) * 8;
-	case 3:
-		return (floor($max / 80) + 1) * 80;
-	default:
-		$dix = 2 * pow(10, $n-2);
-		return (floor($max / $dix) + 1) * $dix;
-	}
-}
-
 // http://doc.spip.org/@cadre_stat
 function cadre_stat($stats, $table, $id_article)
 {
@@ -167,16 +137,8 @@ function statistiques_tous($log, $id_article, $table, $where, $order, $serveur, 
 	$date_debut = min($r);
 	$date_premier = sql_getfetsel("UNIX_TIMESTAMP($order) AS d", $table, $where, '', $order, 1,'',$serveur);
 	$last = (time()-$date_fin>$interval) ? 0 : $log[$date_fin];
-	$max = max($log);
-	$maxgraph = maxgraph($max);
-	$rapport = 200 / $maxgraph;
-	$agreg = ceil(count($log) / 420);
-	$x = ceil(($date_fin-$date_debut)/$interval);
-	$largeur = ($agreg > 1) ? 1 : (!$x ? 420 :  floor(420 / $x));
 
-	if ($largeur > 50) $largeur = 50; elseif ($largeur < 1) $largeur = 1;
-
-	list($moyenne,$prec, $res) = stat_log1($log, $agreg, $date_fin, $largeur, $rapport, $interval, $script);
+	list($moyenne,$prec, $res) = stat_log1($log, $date_fin, $interval, $script);
 global $couleur_foncee,$couleur_claire;
 	$stats = 
 	  "<table id='visites'>"
@@ -184,7 +146,7 @@ global $couleur_foncee,$couleur_claire;
 	  . "<tbody>"
 	  . $res
 	  . (!$liste ? '' : // prevision que pour les visites
-	     statistiques_prevision($id_article, $largeur, $moyenne, $rapport, $popularite, $last))
+	     statistiques_prevision($id_article, $moyenne, $popularite, $last))
 	  . "</tbody>"
 	. "</table>";
 
@@ -300,15 +262,12 @@ function statistiques_zoom($id_article, $largeur_abs, $date_premier, $date_debut
 // Presentation graphique
 // (rq: on n'affiche pas le jour courant, c'est a la charge de la prevision)
 // http://doc.spip.org/@stat_log1
-function stat_log1($log, $agreg, $date_today, $largeur, $rapport, $interval, $script) {
+function stat_log1($log, $date_today, $interval, $script) {
 	$res = '';
-	$rien = http_img_rien($largeur, 1, 'trait_bas', '');
-	$test_agreg = $decal = $date_prec = $val_prec = $moyenne = 0;
+
+	$decal = $date_prec = $val_prec = $moyenne = 0;
 	foreach ($log as $key => $value) {
 		if ($key == $date_today) break;
-		$test_agreg ++;
-		if ($test_agreg != $agreg) continue;
-		$test_agreg = 0;
 		if ($decal == 30) $decal = 0;
 		$decal ++;
 		$evol[$decal] = $value;
@@ -354,7 +313,7 @@ function statistiques_href($jour, $moyenne, $script, $value='')
 }
 
 // http://doc.spip.org/@statistiques_prevision
-function statistiques_prevision($id_article, $largeur, $moyenne, $rapport, $val_popularite, $visites_today)
+function statistiques_prevision($id_article, $moyenne, $val_popularite, $visites_today)
 {
 	// $total_absolu = $total_absolu + $visites_today;
 	// prevision de visites jusqu'a minuit
@@ -363,25 +322,6 @@ function statistiques_prevision($id_article, $largeur, $moyenne, $rapport, $val_
 	$prevision = (1 - (date("H")*60 + date("i"))/(24*60)) * $val_popularite;
 	
 	$prevision = (round($prevision,0)+$visites_today);
-	/*
-	// preparer le texte de survol (prevision)
-	$tagtitle= attribut_html(supprimer_tags(_T('info_aujourdhui')." $visites_today &rarr; $prevision"));
-
-	$res .= "\n<td style='width: ${largeur}px'>";
-	if ($hauteur+$hauteurprevision>0)
-	// Afficher la barre tout en haut
-		$res .= http_img_rien($largeur, 1, "trait_haut");
-	if ($hauteurprevision>0)
-	// afficher la barre previsionnelle
-		$res .= http_img_rien($largeur, $hauteurprevision,'couleur_prevision', $tagtitle);
-	// afficher la barre deja realisee
-	if ($hauteur>0)
-		$res .= http_img_rien($largeur, $hauteur, 'couleur_realise', $tagtitle);
-	// et afficher la ligne de base
-	$res .= http_img_rien($largeur, 1, 'trait_bas')
-	. "</td>";
-	*/
-
 	return statistiques_jour(_T('info_aujourdhui'),"$visites_today<em>(<span>$prevision</span>)</em>","","","");
 }
 
@@ -422,130 +362,6 @@ function statistiques_jour($key, $value, $moyenne, $cumul, $script)
 	return $res;
 }
 
-
-// http://doc.spip.org/@statistiques_nom_des_mois
-function statistiques_nom_des_mois($date_debut, $date_today, $largeur, $pas, $agreg)
-{
-	global $spip_lang_left;
-
-	$res = '';
-	$largeur /= ($pas*$agreg);
-	$gauche_prec = -50;
-	for ($jour = $date_debut; $jour <= $date_today; $jour += $pas) {
-		if (date("d", $jour) == "1") {
-			$newy = (date("m", $jour) == 1);
-			$gauche = floor(($jour - $date_debut) * $largeur);
-			if ($gauche - $gauche_prec >= 40 OR $newy) {
-				$afficher = $newy ?
-				  ("<b>".annee(date("Y-m-d", $jour))."</b>")
-				  : nom_mois(date("Y-m-d", $jour));
-
-				  $res .= "<div class='arial0' style='border-$spip_lang_left: 1px solid black; padding-$spip_lang_left: 2px; padding-top: 3px; position: absolute; $spip_lang_left: ".$gauche."px; top: -1px;'>".$afficher."</div>";
-				$gauche_prec = $gauche;
-				if ($gauche > 400) break; //400px max
-			}
-		}
-	}
-	return "<div style='position: relative; height: 15px'>$res</div>";
-}
-
-// http://doc.spip.org/@statistiques_par_mois
-function statistiques_par_mois($entrees, $script){
-
-	$maxgraph = maxgraph(max($entrees));
-	$rapport = 200/$maxgraph;
-	$largeur = floor(420 / (count($entrees)));
-	if ($largeur < 1) $largeur = 1;
-	if ($largeur > 50) $largeur = 50;
-	$decal = 0;
-	$tab_moyenne = array();
-
-	$all = '';
-
-	while (list($key, $value) = each($entrees)) {
-		$mois = affdate_mois_annee($key);
-		if ($decal == 30) $decal = 0;
-		$decal ++;
-		$tab_moyenne[$decal] = $value;
-		$moyenne = statistiques_moyenne($tab_moyenne);
-		$hauteur_moyenne = round($moyenne * $rapport) - 1;
-		$hauteur = round($value * $rapport) - 1;
-		$res = '';
-		$title= attribut_html(supprimer_tags("$mois | "
-			._T('info_total')." ".$value));
-		$tagtitle = $script ? '' : $title;
-		if ($hauteur > 0){
-			if ($hauteur_moyenne > $hauteur) {
-				$difference = ($hauteur_moyenne - $hauteur) -1;
-				$res .= http_img_rien($largeur, 1, 'trait_moyen');
-				$res .= http_img_rien($largeur, $difference, '', $tagtitle);
-				$res .= http_img_rien($largeur,1,"trait_haut");
-				if (preg_match(",-01,",$key)){ // janvier en couleur foncee
-					$res .= http_img_rien($largeur,$hauteur,"couleur_janvier", $tagtitle);
-				} else {
-					$res .= http_img_rien($largeur,$hauteur,"couleur_mois", $tagtitle);
-				}
-			}
-			else if ($hauteur_moyenne < $hauteur) {
-				$difference = ($hauteur - $hauteur_moyenne) -1;
-				$res .= http_img_rien($largeur,1,"trait_haut", $tagtitle);
-				if (preg_match(",-01,",$key)){ // janvier en couleur foncee
-						$couleur =  'couleur_janvier';
-				} else {
-						$couleur = 'couleur_mois';
-				}
-				$res .= http_img_rien($largeur,$difference, $couleur, $tagtitle);
-				$res .= http_img_rien($largeur,1,'trait_moyen',$tagtitle);
-				$res .= http_img_rien($largeur,$hauteur_moyenne, $couleur, $tagtitle);
-			} else {
-				$res .= http_img_rien($largeur,1,"trait_haut", $tagtitle);
-				if (preg_match(",-01,",$key)){ // janvier en couleur foncee
-					$res .= http_img_rien($largeur, $hauteur, "couleur_janvier", $tagtitle);
-				} else {
-					$res .= http_img_rien($largeur,$hauteur, "couleur_mois", $tagtitle);
-				}
-			}
-		}
-		$res .= http_img_rien($largeur,1,'trait_bas', $tagtitle);
-
-		if (!$script) {
-			$y = annee($key);
-			$m = mois($key);
-			$href = generer_url_ecrire('calendrier', "type=mois&annee=$y&mois=$m&jour=1");
-		} else $href = "$script&amp;date=$key";
-
-		$all .= "\n<td style='width: ${largeur}px'><a href='"
-		.  $href
-		. '\' title="'
-		. $title
-		. '">'
-		. $res
-		. "</a></td>\n";
-	}
-
-	return
-	  "\n<table cellpadding='0' cellspacing='0' border='0'><tr>"
-	.  "\n<td ".http_style_background("fond-stats.gif").">"
-	. "\n<table cellpadding='0' cellspacing='0' border='0' class='bottom'><tr>"
-	. "\n<td class='trait_bas'>" . http_img_rien(1, 200) ."</td>"
-	.  $all
-	. "\n<td style='background-color: black'>" . http_img_rien(1, 1)
-	. "</td>"
-	. "</tr></table></td>"
-	. "\n<td ".http_style_background("fond-stats.gif")." valign='bottom'>"
-	. http_img_rien(3, 1, 'trait_bas') ."</td>"
-	. "\n<td>" . http_img_rien(5, 1) ."</td>"
-	. "\n<td valign='top'>"
-	. statistiques_echelle($maxgraph)
-	. "</td></tr></table>";
- }
-
-// http://doc.spip.org/@statistiques_echelle
-function statistiques_echelle($maxgraph)
-{
-  return recuperer_fond('prive/stats/echelle', array('echelle' => $maxgraph));
-}
-
 // http://doc.spip.org/@statistiques_moyenne
 function statistiques_moyenne($tab)
 {
@@ -584,10 +400,6 @@ function statistiques_signatures_dist($duree, $interval, $type, $id_article, $se
 
 	return "<br />"
 	. $res
-	. (!$mois ? '' : (
-	  "<br />"
-	. gros_titre(_T('titre_page_statistiques_signatures_mois'),'', false)
-	. statistiques_par_mois($mois, $script)))
 	. ($res ? '' : statistiques_mode("spip_signatures", $id_article))
 ;
 }
