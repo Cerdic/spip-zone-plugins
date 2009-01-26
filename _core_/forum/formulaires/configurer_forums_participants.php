@@ -12,18 +12,19 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function formulaires_configurer_forums_participants_charger_dist(){
 
-// http://doc.spip.org/@action_configurer_notifications_forum_dist
-function action_configurer_notifications_forum_dist() {
-
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
-
-	$res = array();
-	foreach ($GLOBALS['liste_des_forums'] as $desc => $val) {
-		$name = 'prevenir_auteurs_' . $val;
-		if (_request($name)) $res[]=$val;
-	}
-	ecrire_meta('prevenir_auteurs', $res ? (','.join(',',$res).',') : 'non');
+	return array(
+		'forums_publics' => $GLOBALS['meta']["forums_publics"],
+	);
+	
 }
+
+function formulaires_configurer_forums_participants_traiter_dist(){
+	include_spip('inc/config');
+	appliquer_modifs_config();
+		
+	return array('message_ok'=>_T('config_info_enregistree'));
+}
+
 ?>

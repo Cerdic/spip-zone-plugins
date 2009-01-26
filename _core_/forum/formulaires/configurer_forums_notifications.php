@@ -12,10 +12,27 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@exec_configurer_notifications_forum_dist
-function exec_configurer_notifications_forum_dist()
-{
-	$f = charger_fonction('notifications_forum', 'configuration');
-	ajax_retour($f());
+function formulaires_configurer_forums_notifications_charger_dist(){
+	$valeurs = array();
+	$m = $GLOBALS['meta']['prevenir_auteurs'];
+	$l = $GLOBALS['liste_des_forums'];
+	unset($l['info_pas_de_forum']);
+	foreach ($l as $desc => $val)
+		$valeurs['prevenir_auteurs_' . $val] = (($m == 'oui') OR strpos($m,",$val,")!==false);
+
+	return $valeurs;
 }
+
+function formulaires_configurer_forums_notifications_traiter_dist(){
+	include_spip('inc/meta');
+
+	$res = array();
+	foreach ($GLOBALS['liste_des_forums'] as $desc => $val) {
+		if (_request('prevenir_auteurs_' . $val)) $res[]=$val;
+	}
+	ecrire_meta('prevenir_auteurs', $res ? (','.join(',',$res).',') : 'non');
+
+	return array('message_ok'=>_T('config_info_enregistree'));
+}
+
 ?>

@@ -154,26 +154,7 @@ function forum_affiche_milieu($flux){
 	if ($flux['args']['exec']=='config_contenu'){
 		$res = "";
 
-		/*
-		 * Forums publics
-		 *
-		 */
-		$participants = charger_fonction('participants', 'configuration');
-		$contenu_forums = charger_fonction('contenu_forums', 'configuration');
-		// Mode de participation aux forums
-		$res.= $participants();
-	
-		// Champs actives sur les forums
-		$res.= $contenu_forums();
-	
-		/*
-		 * Forums prives
-		 *
-		 */
-		$forums_prives = charger_fonction('forums_prives', 'configuration');
-		$res.= $forums_prives();
-		$notifications_forum = charger_fonction('notifications_forum', 'configuration');
-		$res .= $notifications_forum() . "<br />\n";
+		$res = recuperer_fond("configuration/forum",array());
 		$flux['data'] .= $res;
 	}
 	return $flux;
