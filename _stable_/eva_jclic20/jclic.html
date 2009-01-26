@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Jclic</title>
+<script language="JavaScript" src="http://clic.xtec.net/dist/jclic/jclicplugin.js" type="text/javascript"></script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="window.focus();">
+
+<BOUCLE_jclic(DOCUMENTS){id_document}>
+	<script language="JavaScript">
+	setJarBase('http://clic.xtec.net/dist/jclic');
+	setExitUrl('index.html');
+	writePlugin('#URL_SITE_SPIP/[(#URL_DOCUMENT)]', '100%', '100%');
+	</script>
+</BOUCLE_jclic>
+
+<body>
+</html>
