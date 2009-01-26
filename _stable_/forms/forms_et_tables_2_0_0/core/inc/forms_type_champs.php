@@ -13,6 +13,10 @@
 
 	$GLOBALS['forms_types_champs_etendus']=array();
 	forms_importe_types_etendus();
+	
+	// passer les email en minuscule a l'enregistrement
+	$GLOBALS['forms_table_des_filtres_edition']['email'][] = "strtolower(%s)";
+
 
 	function forms_importe_types_etendus(){
 		// dans l'espace public on evite un find_in_path a chaque hit

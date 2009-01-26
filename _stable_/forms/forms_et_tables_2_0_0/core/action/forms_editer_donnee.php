@@ -89,6 +89,12 @@ function forms_donnee_modifier($id_form,$id_donnee,&$erreur, $c = NULL, $structu
 			$val = isset($c[$champ])?$c[$champ]:NULL;
 		if ($val!==NULL
 			AND (($infos['type']!=='password') OR strlen($val))){
+			
+			if (isset($GLOBALS['forms_table_des_filtres_edition'][$infos['type']])){
+				$filtre = reset($GLOBALS['forms_table_des_filtres_edition'][$infos['type']]);
+				$filtre = str_replace("%s",'$val',$filtre);
+				eval("\$val = $filtre;");
+			}
 			$valeurs[$champ] = $val;
 			$champs[$champ] = $infos;
 		}
