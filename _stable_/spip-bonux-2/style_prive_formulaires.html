@@ -167,13 +167,14 @@
 /*.formulaire_spip li em.aide { float:right;margin-right:-10px;}*/
 
 /* boutons */
-.formulaire_spip .boutons {
+.formulaire_spip .boutons,.boutons_formulaire {
 	margin:0; clear:both;
 	text-align: #GET{right};
 	font-size: 1.2em;
 	margin: 7px 1em;
 }
-.formulaire_spip .boutons input.submit {
+.boutons_formulaire {font-size:1em;}
+.formulaire_spip .boutons input.submit,.boutons_formulaire input.submit {
 	margin-#GET{right}: 1em;
 	padding: 0 1em;
 	font-weight:normal;
@@ -218,9 +219,9 @@
 }
 
 /* commentaires */
-.formulaire_spip .explication{
-	font-size:10px;
-}
+.formulaire_spip .explication{	font-size:10px;	padding:10px;}
+.formulaire_spip li >.explication{ padding:0;}
+
 /* remarques importantes */
 .formulaire_spip em.attention{
 	display:block;
@@ -352,3 +353,8 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 }
 
 .formulaire_spip a {color:[#(#GET{foncee}|couleur_foncer)];text-decoration:underline;}
+
+
+/* Style des formulaires de configuration
+----------------------------------------------- */
+.formulaire_configurer {margin:2em 0;}

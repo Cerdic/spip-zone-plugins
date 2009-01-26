@@ -109,9 +109,72 @@ function filtre_implode($a,$b){return implode($b,$a);}
  * @param unknown_type $fonction
  * @return unknown
  */
-function filtre_icone($lien, $texte, $fond, $align="", $fonction=""){
-	return icone_inline($texte, $lien, $fond, $fonction, $align?$align:$GLOBALS['spip_lang_left']);
+function filtre_icone($lien, $texte, $fond, $align="", $fonction="", $class=""){
+	$align = $align?$align:$GLOBALS['spip_lang_left'];
+	global $spip_display;
+
+	if ($fonction == "supprimer.gif") {
+		$style = 'icone36 danger';
+	} else {
+		$style = 'icone36';
+		if (strlen($fonction) < 3) $fonction = "rien.gif";
+	}
+	$style .= " " . substr(basename($fond),0,-4);
+
+	if ($spip_display == 1){
+		$hauteur = 20;
+		$largeur = 100;
+		$title = $alt = "";
+	}
+	else if ($spip_display == 3){
+		$hauteur = 30;
+		$largeur = 30;
+		$title = "\ntitle=\"$texte\"";
+		$alt = $texte;
+	}
+	else {
+		$hauteur = 70;
+		$largeur = 100;
+		$title = '';
+		$alt = $texte;
+	}
+
+	$size = 24;
+	if (preg_match("/-([0-9]{1,3})[.](gif|png)$/i",$fond,$match))
+		$size = $match[1];
+	if ($spip_display != 1 AND $spip_display != 4){
+		if ($fonction != "rien.gif"){
+		  $icone = http_img_pack($fonction, $alt, "$title width='$size' height='$size'\n" .
+					  http_style_background($fond, "no-repeat center center"));
+		}
+		else {
+			$icone = http_img_pack($fond, $alt, "$title width='$size' height='$size'");
+		}
+	} else $icone = '';
+
+	// cas d'ajax_action_auteur: faut defaire le boulot
+	// (il faudrait fusionner avec le cas $javascript)
+	if (preg_match(",^<a\shref='([^']*)'([^>]*)>(.*)</a>$,i",$lien,$r))
+		list($x,$lien,$atts,$texte)= $r;
+	else $atts = '';
+
+	if ($align && $align!='center') $align = "float: $align; ";
+
+	$icone = "<a style='$align' class='$style $class'"
+	. $atts
+	. $javascript
+	. "\nhref='"
+	. $lien
+	. "'>"
+	. $icone
+	. (($spip_display == 3)	? '' : "<span>$texte</span>")
+	  . "</a>\n";
+
+	if ($align <> 'center') return $icone;
+	$style = " style='text-align:center;'";
+	return "<div$style>$icone</div>";
 }
+
 
 function picker_selected($selected,$type){
 	$select = array();
