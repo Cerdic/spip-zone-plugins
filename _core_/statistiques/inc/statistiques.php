@@ -177,34 +177,21 @@ function statistiques_tous($log, $id_article, $table, $where, $order, $serveur, 
 	if ($largeur > 50) $largeur = 50; elseif ($largeur < 1) $largeur = 1;
 
 	list($moyenne,$prec, $res) = stat_log1($log, $agreg, $date_fin, $largeur, $rapport, $interval, $script);
-
-	$stats = "\n<table cellpadding='0' cellspacing='0' border='0'><tr>" .
-	  "\n<td ".http_style_background("fond-stats.gif").">"
-	. "\n<table cellpadding='0' cellspacing='0' border='0' class='bottom'><tr>"
-	. "\n<td style='background-color: black'>" . http_img_rien(1, 200) . "</td>"
-	. $res
+global $couleur_foncee,$couleur_claire;
+	$stats = 
+	  "<table id='visites'>"
+	  . "<thead><tr class='row_first'><th>"._T('date')."</th><th class='valeur'>"._T('info_visites')."</th><th class='moyenne'>"._T('info_moyenne')."</th><th class='cumul'>"._T('info_total')."</th></tr></thead>"
+	  . "<tbody>"
+	  . $res
 	  . (!$liste ? '' : // prevision que pour les visites
 	     statistiques_prevision($id_article, $largeur, $moyenne, $rapport, $popularite, $last))
-	. "\n<td style='background-color: black'>"
-	. http_img_rien(1, 1) ."</td>"
-	. "</tr></table>"
-	. "</td>\n<td "
-	. http_style_background("fond-stats.gif")."  valign='bottom'>"
-	. http_img_rien(3, 1, 'trait_bas') ."</td>"
-	. "\n<td>" . http_img_rien(5, 1) ."</td>"
-	. "\n<td valign='top'>"
-	. statistiques_echelle($maxgraph)
-	. "</td>"
-	. "</tr></table>";
+	  . "</tbody>"
+	. "</table>";
 
 	$total = "<b>" .  _T('info_total') ." " . $total."</b>";
 
 	if  ($liste) {
 		$liste = statistiques_classement($id_article, $classement, $liste);
-		$legend = statistiques_nom_des_mois($date_debut, $date_fin, $largeur, $interval,$agreg)
-		  . "<span class='arial1 spip_x-small'>"
-		  . _T('texte_statistiques_visites')
-		  . "</span><br />";
 		$resume =  statistiques_resume($max, $moyenne, $last, $prec, $popularite);
 	} else {
 	  $legend = "<table width='100%'><tr><td width='50%'>" .
@@ -216,7 +203,7 @@ function statistiques_tous($log, $id_article, $table, $where, $order, $serveur, 
 	}
 
 	$legend .=
-	  "<table cellpadding='0' cellspacing='0' border='0' width='100%'><tr style='width:100%;'>"
+	  "<table class='statistiques_cartouche'><tr style='width:100%;'>"
 	. $resume
 	. "\n<td valign='top' style='width: 33%; ' class='verdana1'>"
 	. $total
@@ -225,13 +212,13 @@ function statistiques_tous($log, $id_article, $table, $where, $order, $serveur, 
 
 	$x = (!$duree) ? 1 : (420/ $duree);
 	$zoom = statistiques_zoom($id_article, $x, $date_premier, $date_debut, $date_fin);
-	return array($zoom, $stats, $mark, $legend);
+	return array($zoom, $legend, $stats );
 }
 
 // http://doc.spip.org/@statistiques_resume
 function statistiques_resume($max, $moyenne, $last, $prec, $popularite)
 {
-	return  "\n<td valign='top' style='width: 33%; ' class='verdana1'>"
+	return  "\n<td>"
 	. _T('info_maximum')." "
 	. $max . "<br />"
 	. _T('info_moyenne')." "
@@ -332,15 +319,22 @@ function stat_log1($log, $agreg, $date_today, $largeur, $rapport, $interval, $sc
 				if ($decal == 30) $decal = 0;
 				$decal ++;
 				$evol[$decal] = $value;
-				$m = statistiques_moyenne($evol);
-				$m = statistiques_vides($date_prec+$i, $largeur, $rapport, $m, $script);
-				$res .= "\n<td style='width: ${largeur}px'>$m</td>";
+				$moyenne = round(statistiques_moyenne($evol),2);
+				$res .= statistiques_jour($date_prec+$i, 0, $moyenne, $cumul, $script);
+				if (date('m',$date_prec+$i+$interval)!=date('m',$date_prec+$i)){
+					$res .= statistiques_jour(affdate_mois_annee(date('Y-m-d',$date_prec+$i)), "", "", $cumul, $script);
+					$cumul = 0;
+				}
 			}
 		}
+		$cumul += $value;
 		$moyenne = round(statistiques_moyenne($evol),2);
-		$hauteur = round($value * $rapport) - 1;
-		$m = ($hauteur <= 0) ? '' : statistiques_jour($key, $value, $largeur, $moyenne, $hauteur, $rapport, (date("w",$key) == "0"), $script);
-		$res .= "\n<td style='width: ${largeur}px'>$m$rien</td>\n";
+		$res .= statistiques_jour($key, $value, $moyenne, $cumul, $script);
+		if (date('m',$key+$interval)!=date('m',$key)){
+			$res .= statistiques_jour(affdate_mois_annee(date('Y-m-d',$key)), "", "", $cumul, $script);
+			$cumul = 0;
+		}
+
 		$date_prec = $key;
 		$val_prec = $value;
 	}
@@ -359,34 +353,19 @@ function statistiques_href($jour, $moyenne, $script, $value='')
 	return attribut_html(supprimer_tags($title));
 }
 
-// http://doc.spip.org/@statistiques_vides
-function statistiques_vides($prec, $largeur, $rapport, $moyenne, $script)
-{
-	$hauteur_moyenne = round($moyenne*$rapport)-1;
-	$title = statistiques_href($prec, $moyenne, $script);
-	$tagtitle = $script ? '' : $title;
-	if ($hauteur_moyenne > 1) {
-		$res = http_img_rien($largeur,1, 'trait_moyen', $tagtitle)
-		. http_img_rien($largeur, $hauteur_moyenne, '', $tagtitle);
-	} else $res = '';
-	$res .= http_img_rien($largeur,1,'trait_bas', $tagtitle);
-	if (!$script) return $res;
-	return "<a href='$script' title='$title'>$res</a>";
-}
-
-
 // http://doc.spip.org/@statistiques_prevision
 function statistiques_prevision($id_article, $largeur, $moyenne, $rapport, $val_popularite, $visites_today)
 {
-	$hauteur = round($visites_today * $rapport) - 1;
 	// $total_absolu = $total_absolu + $visites_today;
 	// prevision de visites jusqu'a minuit
 	// basee sur la moyenne (site) ou popularite (article)
 	if (! $id_article) $val_popularite = $moyenne;
 	$prevision = (1 - (date("H")*60 + date("i"))/(24*60)) * $val_popularite;
-	$hauteurprevision = ceil($prevision * $rapport);
+	
+	$prevision = (round($prevision,0)+$visites_today);
+	/*
 	// preparer le texte de survol (prevision)
-	$tagtitle= attribut_html(supprimer_tags(_T('info_aujourdhui')." $visites_today &rarr; ".(round($prevision,0)+$visites_today)));
+	$tagtitle= attribut_html(supprimer_tags(_T('info_aujourdhui')." $visites_today &rarr; $prevision"));
 
 	$res .= "\n<td style='width: ${largeur}px'>";
 	if ($hauteur+$hauteurprevision>0)
@@ -401,35 +380,36 @@ function statistiques_prevision($id_article, $largeur, $moyenne, $rapport, $val_
 	// et afficher la ligne de base
 	$res .= http_img_rien($largeur, 1, 'trait_bas')
 	. "</td>";
+	*/
 
-	return $res;
+	return statistiques_jour(_T('info_aujourdhui'),"$visites_today<em>(<span>$prevision</span>)</em>","","","");
 }
 
 // Dimanche en couleur foncee
 // http://doc.spip.org/@statistiques_jour
-function statistiques_jour($key, $value, $largeur, $moyenne, $hauteur, $rapport, $dimanche, $script)
+function statistiques_jour($key, $value, $moyenne, $cumul, $script)
 {
-	$hauteur_moyenne = round($moyenne * $rapport) - 1;
+	if (is_int($key)){
+		$couleur = "couleur_". date("l",$key);
+		$res = "<tr class='$couleur'>"
+		  . "<td>" . affdate(date('Y-m-d',$key)) . "</td>";
+	}
+	else {
+		if (strlen($value))
+			$couleur = "couleur_". date("l")." couleur_today";
+		else
+			$couleur = "couleur_recap";
+		$res = "<tr class='$couleur'>"
+		  . "<td>" . $key . "</td>";
+	}
+	$res .= "<td class='valeur'>" . $value . "</td>"
+	. "<td class='moyenne'>" . $moyenne . "</td>"
+	. "<td class='cumul'>" . $cumul . "</td>"
+	." </tr>";
+
+	/*
 	$title= statistiques_href($key, $moyenne, $script, $value);
 	$tagtitle = $script ? '' : $title;
-	$couleur = $dimanche ? "couleur_dimanche" :  "couleur_jour";
-	if ($hauteur_moyenne > $hauteur) {
-		$difference = ($hauteur_moyenne - $hauteur) -1;
-
-		$res = http_img_rien($largeur, 1,'trait_moyen',$tagtitle)
-		. http_img_rien($largeur, $difference, '', $tagtitle)
-		. http_img_rien($largeur, 1, "trait_haut", $tagtitle)
-		. http_img_rien($largeur, $hauteur, $couleur, $tagtitle);
-	} else if ($hauteur_moyenne < $hauteur) {
-		$difference = ($hauteur - $hauteur_moyenne) -1;
-		$res = http_img_rien($largeur,1,"trait_haut", $tagtitle)
-		. http_img_rien($largeur, $difference, $couleur, $tagtitle)
-		. http_img_rien($largeur,1,"trait_moyen", $tagtitle)
-		. http_img_rien($largeur, $hauteur_moyenne, $couleur, $tagtitle);
-	} else {
-		$res = http_img_rien($largeur, 1, "trait_haut", $tagtitle)
-		. http_img_rien($largeur, $hauteur, $couleur, $tagtitle);
-	}
 	if ($script)
 		$script .= "&amp;date=$key";
 	else  {
@@ -438,9 +418,10 @@ function statistiques_jour($key, $value, $largeur, $moyenne, $hauteur, $rapport,
 		$d = date("d", $key);
 		$script = generer_url_ecrire('calendrier', 
 				"type=semaine&annee=$y&mois=$m&jour=$d");
-	} 
-	return "<a href='$script' title='$title'>$res</a>";
+	} */
+	return $res;
 }
+
 
 // http://doc.spip.org/@statistiques_nom_des_mois
 function statistiques_nom_des_mois($date_debut, $date_today, $largeur, $pas, $agreg)

@@ -22,7 +22,7 @@ function exec_statistiques_visites_dist()
 	$type = _request('type');
 	if (!preg_match('/^\w+$/', $type)) $type = 'day';
 	$duree = intval(_request('duree'));
-	if (!$duree) $duree = 105;
+	if (!$duree) $duree = 1825;
 	$interval = intval(_request('interval'));
 	if (!$interval) {
 	  if ($type == 'day')
@@ -128,19 +128,6 @@ function exec_statistiques_visites_args($id_article, $duree, $interval, $type, $
 	if ($log)
 	  $res = statistiques_tous($log, $id_article, $table, $where, $order, $serveur, $duree, $interval, $total_absolu, $val_popularite,  $classement, $liste);
 	  
-	$mois = statistiques_collecte_date("SUM(visites)",
-		"FROM_UNIXTIME(UNIX_TIMESTAMP($order),'%Y-%m')", 
-		$table,
-		"$order > DATE_SUB(NOW(),INTERVAL 2700 DAY)"
-		. ($where ? " AND $where" : ''),
-		$serveur);
-
-	if (count($mois)>1)  {
-		$res[] = "<br /><span class='verdana1 spip_small'><b>"
-			. _T('info_visites_par_mois')
-			. "</b></span>"
-			. statistiques_par_mois($mois, '');
-	}
   echo cadre_stat($res, $table, $id_article);
 
 	if ($id_article) {
@@ -183,7 +170,6 @@ function exec_statistiques_visites_args($id_article, $duree, $interval, $type, $
 		echo $plus;
 		echo "<br /></div>";	
 	}
-
 	echo fin_gauche(), fin_page();	
 }
 ?>
