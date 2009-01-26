@@ -330,9 +330,23 @@ function statistiques_prevision($id_article, $moyenne, $val_popularite, $visites
 function statistiques_jour($key, $value, $moyenne, $cumul, $script)
 {
 	if (is_int($key)){
+		$ce_jour=date("Y-m-d H:i:s", $key);
+		$title = /*nom_jour($ce_jour) . ' '
+		  .*/ ($script ? affdate_heure($ce_jour) :
+		     (affdate_jourcourt($ce_jour)));
+		if ($script)
+			$script .= "&amp;date=$key";
+		else  {
+			$y = date("Y", $key);
+			$m = date("m", $key);
+			$d = date("d", $key);
+			$script = generer_url_ecrire('calendrier', 
+					"type=semaine&annee=$y&mois=$m&jour=$d");
+		}
+	
 		$couleur = "couleur_". date("l",$key);
 		$res = "<tr class='$couleur'>"
-		  . "<td>" . affdate(date('Y-m-d',$key)) . "</td>";
+		  . "<td><a href='$script'>" . $title . "</a></td>";
 	}
 	else {
 		if (strlen($value))
@@ -347,18 +361,7 @@ function statistiques_jour($key, $value, $moyenne, $cumul, $script)
 	. "<td class='cumul'>" . $cumul . "</td>"
 	." </tr>";
 
-	/*
-	$title= statistiques_href($key, $moyenne, $script, $value);
-	$tagtitle = $script ? '' : $title;
-	if ($script)
-		$script .= "&amp;date=$key";
-	else  {
-		$y = date("Y", $key);
-		$m = date("m", $key);
-		$d = date("d", $key);
-		$script = generer_url_ecrire('calendrier', 
-				"type=semaine&annee=$y&mois=$m&jour=$d");
-	} */
+
 	return $res;
 }
 
