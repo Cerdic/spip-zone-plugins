@@ -145,22 +145,6 @@ function forum_afficher_message_statut_objet($flux){
 }
 
 /**
- * Afficher les formulaires de configuration dans les pages concernees
- *
- * @param array $flux
- * @return array
- */
-function forum_affiche_milieu($flux){
-	if ($flux['args']['exec']=='config_contenu'){
-		$res = "";
-
-		$res = recuperer_fond("configuration/forum",array());
-		$flux['data'] .= $res;
-	}
-	return $flux;
-}
-
-/**
  * Nombre de forums d'un secteur dans la boite d'info
  *
  * @param array $flux

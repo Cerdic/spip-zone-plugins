@@ -112,5 +112,10 @@
 		<icone>images/suivi-forum-24.gif</icone>
 		<titre>icone_suivi_forums</titre>
 	</bouton>	
+	
+	<onglet id='config_forum' parent='configuration'>
+		<icone>images/forum-public-24.gif</icone>
+		<titre>titre_forum</titre>
+	</onglet>	
 
 </plugin>
