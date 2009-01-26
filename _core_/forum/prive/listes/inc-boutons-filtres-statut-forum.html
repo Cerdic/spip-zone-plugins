@@ -5,23 +5,23 @@
 
 <div class='filtres second'>
 <ul>
-<li>[(#GET{self}|parametre_url{statut,''}|lien_ou_pasclicable{<:forum:messages_tous:>,#ENV{statut,''}|=={''},ajax})]</li>
+<li>[(#GET{self}|parametre_url{statut,''}|lien_ou_expose{<:forum:messages_tous:>,#ENV{statut,''}|=={''},ajax})]</li>
 
 #SET{statut,#ENV{type,public}|=={interne}|?{'prive','publie'}}
 <BOUCLE_cpt_1(FORUMS){id_forum?}{id_auteur?}{id_article?}{auteur?}{email_auteur?}{ip?}{statut=#GET{statut}}{statut !LIKE #GET{public}}{texte LIKE #GET{vide}}{recherche?} />
-[(#TOTAL_BOUCLE|oui) <li class='#GET{statut}'>[(#GET{self}|parametre_url{statut,#GET{statut}}|lien_ou_pasclicable{#VAL{forum:messages_#GET{statut}}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#GET{statut}},'ajax'})]</li>]<//B_cpt_1>
+[(#TOTAL_BOUCLE|oui) <li class='#GET{statut}'>[(#GET{self}|parametre_url{statut,#GET{statut}}|lien_ou_expose{#VAL{forum:messages_#GET{statut}}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#GET{statut}},'ajax'})]</li>]<//B_cpt_1>
 
 #SET{statut,#ENV{type,public}|=={interne}|?{'privrac','prop'}}
 <BOUCLE_cpt_2(FORUMS){id_forum?}{id_auteur?}{id_article?}{auteur?}{email_auteur?}{ip?}{statut=#GET{statut}}{statut !LIKE #GET{public}}{texte LIKE #GET{vide}}{recherche?} />
-[(#TOTAL_BOUCLE|oui) <li class='#GET{statut}'>[(#GET{self}|parametre_url{statut,#GET{statut}}|lien_ou_pasclicable{#VAL{forum:messages_#GET{statut}}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#GET{statut}},'ajax'})]</li>]<//B_cpt_2>
+[(#TOTAL_BOUCLE|oui) <li class='#GET{statut}'>[(#GET{self}|parametre_url{statut,#GET{statut}}|lien_ou_expose{#VAL{forum:messages_#GET{statut}}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#GET{statut}},'ajax'})]</li>]<//B_cpt_2>
 
 #SET{statut,#ENV{type,public}|=={interne}|?{'privadm','spam'}}
 <BOUCLE_cpt_3(FORUMS){id_forum?}{id_auteur?}{id_article?}{auteur?}{email_auteur?}{ip?}{statut=#GET{statut}}{statut !LIKE #GET{public}}{texte LIKE #GET{vide}}{recherche?} />
-[(#TOTAL_BOUCLE|oui) <li class='#GET{statut}'>[(#GET{self}|parametre_url{statut,#GET{statut}}|lien_ou_pasclicable{#VAL{forum:messages_#GET{statut}}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#GET{statut}},'ajax'})]</li>]<//B_cpt_3>
+[(#TOTAL_BOUCLE|oui) <li class='#GET{statut}'>[(#GET{self}|parametre_url{statut,#GET{statut}}|lien_ou_expose{#VAL{forum:messages_#GET{statut}}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#GET{statut}},'ajax'})]</li>]<//B_cpt_3>
 
 #SET{statut,#ENV{type,public}|=={interne}|?{'privoff','off'}}
 <BOUCLE_cpt_4(FORUMS){id_forum?}{id_auteur?}{id_article?}{auteur?}{email_auteur?}{ip?}{statut=#GET{statut}}{statut !LIKE #GET{public}}{texte LIKE #GET{vide}}{recherche?} />
-[(#TOTAL_BOUCLE|oui) <li class='#GET{statut}'>[(#GET{self}|parametre_url{statut,#GET{statut}}|lien_ou_pasclicable{#VAL{forum:messages_#GET{statut}}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#GET{statut}},'ajax'})]</li>]<//B_cpt_4>
+[(#TOTAL_BOUCLE|oui) <li class='#GET{statut}'>[(#GET{self}|parametre_url{statut,#GET{statut}}|lien_ou_expose{#VAL{forum:messages_#GET{statut}}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#GET{statut}},'ajax'})]</li>]<//B_cpt_4>
 </ul>
 <div class='nettoyeur'></div>
 </div>

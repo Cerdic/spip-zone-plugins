@@ -5,11 +5,12 @@
 [<h1><:resultats_recherche:> &#171;&nbsp;(#ENV{recherche})&nbsp;&#187;</h1>]
 #FORMULAIRE_RECHERCHE_ECRIRE{#GET{self}}
 
+#SET{self,#SELF|parametre_url{id_forum|email_auteur|ip|id_auteur|auteur|debut_id_forum|statut,''}}
 <div class='filtres premier'>
 <ul>
-<li>[(#GET{self}|parametre_url{type,public}|lien_ou_pasclicable{<:onglet_messages_publics:>,#ENV{type,public}|=={public}})]</li>
-<li>[(#GET{self}|parametre_url{type,interne}|lien_ou_pasclicable{<:onglet_messages_internes:>,#ENV{type,public}|=={interne}})]</li>
-<li>[(#GET{self}|parametre_url{type,vide}|lien_ou_pasclicable{<:onglet_messages_vide:>,#ENV{type,public}|=={vide}})]</li>
+<li>[(#GET{self}|parametre_url{type,public}|lien_ou_expose{<:onglet_messages_publics:>,#ENV{type,public}|=={public}})]</li>
+<li>[(#GET{self}|parametre_url{type,interne}|lien_ou_expose{<:onglet_messages_internes:>,#ENV{type,public}|=={interne}})]</li>
+<li>[(#GET{self}|parametre_url{type,vide}|lien_ou_expose{<:onglet_messages_vide:>,#ENV{type,public}|=={vide}})]</li>
 </ul>
 <div class='nettoyeur'></div>
 </div>
@@ -43,7 +44,7 @@
 ]
 
 [(#INCLURE{fond=prive/listes/inc-boutons-filtres-statut-forum}{env})]
-<h2>[(#GRAND_TOTAL|affiche_un_ou_plusieurs{forum:un_message_forum,forum:nombre_messages_forum}|sinon{<:forum:aucun_message_forum:>})]</h2>
+<h2>[(#GRAND_TOTAL|singulier_ou_pluriel{forum:un_message_forum,forum:nombre_messages_forum}|sinon{<:forum:aucun_message_forum:>})]</h2>
 
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items forums'>
