@@ -520,11 +520,17 @@ add_variable( array(
 	'defaut' => 1,
 	'code:%s' => "define('boites_privees_AUTEURS', %s);\n",
 ));
+add_variable( array(
+	'nom' => 'qui_webmasters',
+	'check' => 'couteauprive:qui_webmestres',
+	'defaut' => 1,
+	'code:%s' => "define('boites_privees_WEBMASTERS', %s);\n",
+));
 add_outil( array(
 	'id' => 'boites_privees',
 	'auteur'=>'Pat, Joseph LARMARANGE (format SPIP)',
 	'contrib' => 2564,
-	'code:options' => "%%cs_rss%%%%format_spip%%%%stat_auteurs%%%%bp_urls_propres%%%%bp_tri_auteurs%%",
+	'code:options' => "%%cs_rss%%%%format_spip%%%%stat_auteurs%%%%qui_webmasters%%%%bp_urls_propres%%%%bp_tri_auteurs%%",
 	'categorie' => 'interface',
 	'pipeline:affiche_milieu' => 'boites_privees_affiche_milieu',
 	'pipeline:affiche_droite' => 'boites_privees_affiche_droite',

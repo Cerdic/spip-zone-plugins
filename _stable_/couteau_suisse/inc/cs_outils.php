@@ -73,7 +73,9 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	$puce = $actif?'puce-verte.gif':'puce-rouge.gif';
 	$titre_etat = _T('couteauprive:outil_'.($actif?'actif':'inactif'));
 	$nb_var = intval($outil['nb_variables']);
-	
+
+	// cette valeur par defaut n'est pas definie sous SPIP 1.92
+	@define('_ID_WEBMESTRES', 1);
 	if(!strlen($outil['id']) || !cout_autoriser('outiller', $outil) || cs_version_erreur($outil))
 		return $s . _T('info_acces_interdit') . '</div>';
 

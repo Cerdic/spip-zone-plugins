@@ -25,10 +25,11 @@ if(!defined('_SPIP19300')) {
 }
 
 function boites_privees_affiche_gauche($flux){
-	if(defined('boites_privees_TRI_AUTEURS') && ($flux['args']['exec']=='articles')) 
+	$exec = &$flux['args']['exec'];
+	if(defined('boites_privees_TRI_AUTEURS') && ($exec=='articles')) 
 		$flux['data'] .= action_rapide_tri_auteurs($flux['args']['id_article']);
 	if(defined('boites_privees_URLS_PROPRES')) 
-		switch($flux['args']['exec']) {
+		switch($exec) {
 			case 'articles': $flux['data'] .= cs_urls_propres('article', $flux['args']['id_article']); break;
 			case 'naviguer': $flux['data'] .= cs_urls_propres('rubrique', $flux['args']['id_rubrique']); break;
 			case 'auteur_infos': $flux['data'] .= cs_urls_propres('auteur', $flux['args']['id_auteur']); break;
@@ -55,22 +56,30 @@ function boites_privees_affiche_milieu($flux){
 
 function boites_privees_affiche_droite($flux) {
 	switch($flux['args']['exec']) {
-		case 'auteurs':
-		case 'auteur_infos': if (defined('boites_privees_AUTEURS') && cout_autoriser()) {
-			// pour cs_lien()
-			include_spip('cout_fonctions');
-			$flux['data'] .= debut_cadre_relief(find_in_path('img/couteau-24.gif'),true,'',_T('icone_statistiques_visites'))
-				. "<p><b>"._T('couteau:derniers_connectes')."</b></p>"
-				. cs_derniers_connectes()
-				. "<p><b>"._T('couteau:non_confirmes')."</b></p>"
-				. cs_non_confirmes()
-				. fin_cadre_relief(true);
-			break;
-		}
+		case 'auteurs': $flux['data'] .= cs_infos_webmasters().cs_infos_connection(); break;
+		case 'auteur_infos': $flux['data'] .= cs_infos_webmasters().cs_infos_connection(); break;
 		default:
 			break;
 	}
 	return $flux;
+}
+
+function cs_infos_webmasters() {
+	if (!defined('boites_privees_WEBMASTERS') || !cout_autoriser()) return '';
+	include_spip('cout_define');
+	def_liste_adminsitrateurs();
+	return cs_cadre_depliable(_T('couteau:webmestres'), '', "<p>".(strlen(_CS_LISTE_WEBMESTRES)?_CS_LISTE_WEBMESTRES:_T('couteau:variable_vide'))."</p>");
+}
+
+function cs_infos_connection() {
+	if (!defined('boites_privees_AUTEURS') || !cout_autoriser()) return '';
+	// pour cs_lien()
+	include_spip('cout_fonctions');
+	$res = "<p><b>"._T('couteau:derniers_connectes')."</b></p>"
+		. cs_derniers_connectes()
+		. "<p><b>"._T('couteau:non_confirmes')."</b></p>"
+		. cs_non_confirmes();
+	return cs_cadre_depliable(_T('couteau:connections'), 'bp_infos_connection', $res);
 }
 
 function cs_formatspip($id_article){
@@ -132,21 +141,6 @@ function cs_non_confirmes(){
 } 
 
 function cs_urls_propres($type, $id) {
-	// SPIP < 2.0
-	if(!defined('_SPIP19300')) return debut_cadre_relief(find_in_path('img/couteau-24.gif'), true)
-		. "<div class='verdana1' style='text-align: left;'>"
-		. block_parfois_visible('bp_urls', '<b>'._T('couteau:urls_propres_titre').'</b>', cs_urls_propres_descrip($type, $id), 'text-align: center;')
-		. "</div>"
-		. fin_cadre_relief(true);
-	// SPIP >= 2.0
-	return cadre_depliable(find_in_path('img/couteau-24.gif'),
-		'<b>'._T('couteau:urls_propres_titre').'</b>',
-		false,	// true = deplie
-		cs_urls_propres_descrip($type, $id),
-		'bp_urls_propres');
-}
-
-function cs_urls_propres_descrip($type, $id) {
 	global $type_urls;
 	$res = "";
 	// SPIP >= 2.0
@@ -183,7 +177,7 @@ function cs_urls_propres_descrip($type, $id) {
 			:'<iframe src="./?exec=action_rapide&arg=type_urls_spip&format=iframe&type_objet='.$type.'&id_objet='.$id.'" width="100%" style="border:none; height:4em;"></iframe>')
 	);
 	$GLOBALS['class_spip_plus']=$mem;
-	return $res;
+	return cs_cadre_depliable(_T('couteau:urls_propres_titre'), 'bp_urls_propres', $res);
 }
 
 // fonction qui centralise : 
@@ -231,6 +225,22 @@ spip_log("action_rapide_tri_auteurs : $id_article, $id_auteur, $monter");
 		false,	// true = deplie
 		"<div id='bp_tri_auteurs_corps'>$texte</div>",
 		'bp_tri_auteurs');
+}
+
+function cs_div_configuration() {
+	return '<div style="float:right; top:4px; right:-4px; position:relative;" ><a title="'._T('couteau:configurer').'" href="'.generer_url_ecrire('admin_couteau_suisse','cmd=descrip&outil=boites_privees#cs_infos').'"><img alt="" src="'._DIR_IMG_PACK.'secteur-12.gif"/></a></div>';
+}
+
+function cs_cadre_depliable($titre, $id, $texte) {
+	// SPIP < 2.0
+	if(!defined('_SPIP19300')) return debut_cadre_relief(find_in_path('img/couteau-24.gif'), true)
+		. cs_div_configuration()
+		. "<div class='verdana1' style='text-align: left;'>"
+		. block_parfois_visible($id, "<b>$titre</b>", $texte, 'text-align: center;')
+		. "</div>"
+		. fin_cadre_relief(true);
+	// SPIP >= 2.0
+	return cadre_depliable(find_in_path('img/couteau-24.gif'), "<b>$titre</b>",	false /*true = deplie*/, $texte, $id);
 }
 
 ?>

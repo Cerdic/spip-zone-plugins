@@ -7,6 +7,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// 2
 	'2pts' => '@objet@&nbsp;:',
+	'webmestres' => 'Webmestres SPIP',
+	'configurer' => 'Configurer le Couteau Suisse',
+	'connections' => 'Connections',
 
 	// A
 	'attente_confirmation' => 'En attente de confirmation',
