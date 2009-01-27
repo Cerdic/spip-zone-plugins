@@ -4,17 +4,15 @@
  */
 
 /* 
- * Calcule l'intersection de deux tableaux
+ * Calcul de l'intersection de deux tableaux
  * Emule la fonction pour php <5.1
  * 
  * @author Rod Byrnes
  * @see http://fr.php.net/manual/fr/function.array-intersect-key.php#74956
  */
 
-if (!function_exists('array_intersect_key'))
-{
-  function array_intersect_key($isec, $keys)
-  {
+if (!function_exists('array_intersect_key')) {
+  function array_intersect_key($isec, $keys) {
     $argc = func_num_args();
     if ($argc > 2)
     {
@@ -44,5 +42,41 @@ if (!function_exists('array_intersect_key'))
       return $res;
     }
   }
+}
+
+/* 
+ * Création d'un tableau à partir de deux autres tableaux
+ * Requis pour array_fill_keys
+ *
+ * @author Zoran
+ * @see http://fr2.php.net/manual/fr/function.array-combine.php#82244
+ */
+ 
+if (!function_exists('array_combine')) {
+    function array_combine($arr1, $arr2) {
+        $out = array();
+        
+        $arr1 = array_values($arr1);
+        $arr2 = array_values($arr2);
+        
+        foreach($arr1 as $key1 => $value1) {
+            $out[(string)$value1] = $arr2[$key1];
+        }
+        
+        return $out;
+    }
+}
+
+/* 
+ * Remplissage d'un tableau avec des valeurs, en spécifiant les clés
+ *
+ * @author matrebatre
+ * @see http://fr2.php.net/manual/fr/function.array-fill-keys.php#83962
+ */
+ 
+if (!function_exists('array_fill_keys')) {
+    function array_fill_keys($keys ,$value){
+        return array_combine($keys,array_fill(0,count($keys),$value));
+    }
 }
 ?>
