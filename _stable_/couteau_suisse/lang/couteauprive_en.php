@@ -15,6 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'SPIP_liens:description' => '@puce@ By default, all links on the site open in the current window. But it can be useful to open external links in a new window, i.e. adding {target="_blank"} to all link tags bearing one of the SPIP classes {spip_out}, {spip_url} or {spip_glossaire}. It is sometimes necessary to add one of these classes to the links in the site\'s templates (html files) in order make this functionality wholly effective.[[%radio_target_blank3%]]
 
 @puce@ SPIP provides the shortcut <code>[?word]</code> to link words to their definition. By default (or if you leave the box below empty), wikipedia.org is used as the external glossary. You may choose another address. <br />Test link: [?SPIP][[%url_glossaire_externe2%]]',
+	'SPIP_liens:description1' => '<NEW>@puce@ SPIP a pr&eacute;vu un style CSS pour les liens &laquo;~mailto:~&raquo; : une petite enveloppe devrait appara&icirc;tre devant chaque lien li&eacute; &agrave; un courriel; mais puisque tous les navigateurs ne peuvent pas l\'afficher (notamment IE6, IE7 et SAF3), &agrave; vous de voir s\'il faut conserver cet ajout.
+_ Lien de test : [->test@test.com] (rechargez la page enti&egrave;rement).[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP and external links',
 
 	// A
@@ -313,6 +315,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:dossier_squelettes' => 'Directory(ies) to use:',
 	'label:duree_cache' => 'Duration of local cache:',
 	'label:duree_cache_mutu' => 'Duration of mutualised cache:',
+	'label:enveloppe_mails' => 'Small envelope before email addresses:',
 	'label:expo_bofbof' => 'Place in superscript: <html>St(e)(s), Bx, Bd(s) et Fb(s)</html>',
 	'label:forum_lgrmaxi' => 'Value (in characters):',
 	'label:glossaire_groupes' => 'Group(s) used:',
@@ -369,6 +372,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:url_arbo_sep_id' => 'Separation character \'title-id\', used in the event of homonyms:<br/>(do not use \'/\')',
 	'label:url_glossaire_externe2' => 'Link to external glossary:',
 	'label:urls_arbo_sans_type' => 'Show the type of SPIP object in URLs:',
+	'label:urls_avec_id' => 'A systematic id, but ...',
 	'label:urls_minuscules' => '@_CS_CHOIX@',
 	'label:webmestres' => 'List of the website managers:',
 	'liens_en_clair:description' => 'Makes the filter: \'liens_en_clair\' available to you. Your text probably contains hyperlinks which are not visible when the page is printed. This filter adds the link code between square brackets for every clickabel link (external links and email addresses). N.B: in printing mode (when using the parameter \'cs=print\' or \'page=print\' in the URL), this treatment is automatically applied.',
@@ -508,18 +512,24 @@ The summary can be used in conjunction with : {[.->decoupe]}.',
 	'sommaire:nom' => 'An automatic summary',
 	'sommaire_avec' => 'An article with summary: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'An article without summary: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'spam:description' => '<MODIF>Attempts to fight against the sending of abusive and automatic messages through forms on the public site. Some words and the tags  &lt;a>&lt;/a> are prohibited.
+	'spam:description' => 'Attempts to fight against the sending of abusive and automatic messages through forms on the public site. Some words and the tags  &lt;a>&lt;/a> are prohibited. Train your authors to use SPIP shortcuts for links
 
-List here the sequences you wish to prohibit@_CS_ASTER@ separating them with spaces. [[%spam_mots%]]
-@_CS_ASTER@To specify a whole word, place it in brackets. Expressions containing spaces should be placed with inverted commas.',
+List here the sequences you wish to prohibit separating them with spaces. [[%spam_mots%]]
+• Expressions containing spaces should be placed within inverted commas.
+• To specify a whole word, place it in brackets. For example: {(asses)}.
+',
 	'spam:nom' => 'Fight against SPAM',
+	'spam_test_ko' => 'This message would be blocked by the anti-SPAM filter!',
+	'spam_test_ok' => 'This message would be accepted by the anti-SPAM filter!',
+	'spam_tester' => 'Launch the test!',
+	'spam_tester_label' => 'Test your list of prohibited expressions here:',
 	'spip_cache:description' => '<MODIF>@puce@ By default, SPIP calculates all the public pages and caches them in order to accelerate their display. It can be useful, when developing the site to disable the cache temporarily, in order to see the effect of changes immediately.[[%radio_desactive_cache3%]]@puce@ The cache occupies disk space and SPIP can limit the amount of space taken up. Leaving empty or putting 0 means that no limit will be applied.[[%quota_cache% Mo]]@puce@ When the site\'s contents are changed, SPIP immediately invalidates the cache without waiting for the next periodic recalculation. If your site experiences performance problems because of the load of repeated recalculations, you can choose "no" for this option.[[%derniere_modif_invalide%]]@puce@ If the #CACHE tag is not found in a template then by default SPIP caches a page for 24 hours before recalculating it. You can modify this default here.[[%duree_cache% heures]]@puce@ If you are running several mutualised sites, you can specify here the default value for all the local sites (SPIP 1.93).[[%duree_cache_mutu% heures]]',
-	'spip_cache:description1' => '<NEW>@puce@ Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]',
-	'spip_cache:description2' => '<NEW>@puce@ Quatre options pour orienter le fonctionnement du cache de SPIP : <q1>
-_ • {Usage normal} : SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. Apr&egrave;s un certain d&eacute;lai, le cache est recalcul&eacute; et stock&eacute;.
-_ • {Cache permanent} : les d&eacute;lais d\'invalidation du cache sont ignor&eacute;s.
-_ • {Pas de cache} : d&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. Ici, rien n\'est stock&eacute; sur le disque.
-_ • {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&eacute;dente, avec une &eacute;criture sur le disque de tous les r&eacute;sultats afin de pouvoir &eacute;ventuellement les contr&ocirc;ler.</q1>[[%radio_desactive_cache4%]]',
+	'spip_cache:description1' => '<NEW>@puce@ By default, SPIP calculates all the public pages and caches them in order to accelerate their display. It can be useful, when developing the site to disable the cache temporarily. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]',
+	'spip_cache:description2' => '<NEW>@puce@ Four options to control SPIP cache system : <q1>
+_ • {Default} : SPIP will process all public pages and store them in the cache in order to decrease loading times. After a set time, the cache will be re-processed and stored again.
+_ • {Permanent cache} : Cache expiration timers are ignored.
+_ • {No cache} : Disable temporarily the cache system to help debugging. Nothing is stored on the hard drive.
+_ • {Cache debug} : Similar to previous setting, but still write to disk, so that result can be checked for debugging purpose.</q1>[[%radio_desactive_cache4%]]',
 	'spip_cache:nom' => 'SPIP and the cache',
 	'stat_auteurs' => 'Authors in statistics',
 	'statuts_spip' => 'Only the following SPIP status:',
@@ -539,7 +549,7 @@ Notez : Pour les mots-cl&eacute;s, un alias de #TITRE_PARENT est #TITRE_GROUPE. 
 @puce@ Si vous &ecirc;tes sous SPIP 2.0, alors vous avez ici &agrave; votre disposition tout un ensemble de balises #TITRE_XXX qui pourront vous donner le titre de l\'objet \'xxx\', &agrave; condition que le champ \'id_xxx\' soit pr&eacute;sent dans la table en cours (#ID_XXX utilisable dans la boucle en cours).
 
 Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du secteur dans lequel est plac&eacute; l\'article en cours, puisque l\'identifiant #ID_SECTEUR (ou le champ \'id_secteur\') est disponible dans ce cas.[[%titres_etendus%]]',
-	'titre_parent:nom' => '<MODIF>#TITRE_PARENT tag',
+	'titre_parent:nom' => '#TITRE_PARENT/OBJECT tags',
 	'titre_tests' => 'The Swiss Knife - Test page',
 	'tous' => 'All',
 	'toutes_couleurs' => 'The 36 colours in CSS styles: @_CS_EXEMPLE_COULEURS@',
@@ -587,6 +597,10 @@ More information: [->http://www.spip.net/en_article3588.html]
 
 @puce@ {{Only if you are using the type {arborescentes} describes aboves}}, you can customise the format:</p>
 [[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]',
+	'type_urls:description1' => '<NEW>@puce@ If you are using the &laquo;clean&raquo; URL formatting ({propres}, {propres2}, {libres}, {arborescentes} ou {propres_qs}), the swiss knife can :
+<q1>• Make sure the created URL is only in {{small caps}}.</q1>[[%urls_minuscules%]]
+<q1>• Automatically add the {{object id}} to its URL (beforehand, afterhand, etc.).
+_ (examples : <code>/My-article-title,457</code> or <code>/457-My-article-title</code>)</q1>',
 	'type_urls:nom' => 'Format of URLs',
 	'typo_exposants:description' => '{{Text in French}}: improves the typographical rendering of common abbreviations by adding superscript where necessary (thus, {<acronym>Mme</acronym>} becomes {M<sup>me</sup>}). Common errors corrected:  ({<acronym>2&egrave;me</acronym>} and  {<acronym>2me</acronym>}, for example, become {2<sup>e</sup>}, the only correct abbreviation).
 
@@ -609,11 +623,16 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'standard',
+	'urls_3_chiffres' => 'Require a minum of 3 digits',
+	'urls_avec_id' => 'Place as a suffix',
+	'urls_avec_id2' => 'Place as a prefix',
 	'urls_base_total' => 'There are currently @nb@ URL(s) in the database',
 	'urls_base_vide' => 'The URL database is empty',
 	'urls_choix_objet' => 'Edit the URL of a specific object in the database:',
 	'urls_edit_erreur' => 'The current URL format ("@type@") does not permit editing.',
 	'urls_enregistrer' => 'Write this URL to the database',
+	'urls_id_sauf_rubriques' => 'Exclude the sections',
+	'urls_minuscules' => 'Lower-case letters',
 	'urls_nouvelle' => 'Edit the "clean" URL',
 	'urls_num_objet' => 'Number:',
 	'urls_purger' => 'Empty all',
@@ -624,7 +643,7 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'urls_type_objet' => '<MODF>Order:',
 	'urls_url_calculee' => 'URL PUBLIC  &laquo;&nbsp;@type@&nbsp;&raquo;:',
 	'urls_url_objet' => 'Saved "clean" URL:',
-	'urls_valeur_vide' => '<MODIF>(An empty value implies the removal of the URL)',
+	'urls_valeur_vide' => '(An empty value triggers the recalculation of the URL)',
 
 	// V
 	'validez_page' => 'To access modifications:',

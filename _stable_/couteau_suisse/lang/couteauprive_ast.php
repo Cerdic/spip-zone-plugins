@@ -513,13 +513,17 @@ Esti sumariu pue acoplase con: &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
 	'sommaire:nom' => 'Un sumariu autom&aacute;ticu',
 	'sommaire_avec' => 'Un testu con sumariu: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un testu ensin sumariu: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'spam:description' => '<MODIF>Tenta lluchar escontra los unv&iacute;os de mensaxes autom&aacute;ticos y gafientos na parte p&uacute;blica. Delles pallabres, igual que les balices en claro &lt;a>&lt;/a> tan torg&aacute;es: encamienta a los redactores a usar los atayos pa enllaces de SPIP.
+	'spam:description' => 'Tenta lluchar escontra los unv&iacute;os de mensaxes autom&aacute;ticos y gafientos na parte p&uacute;blica. Delles pallabres, igual que les balices en claro &lt;a>&lt;/a>, tan torg&aacute;es: encamienta a los redactores a usar los atayos pa enllaces de SPIP.
 
 Llista equ&iacute; les secuencies torg&aacute;es separtandoles con espacios. [[%spam_mots%]]
 • Pa una espresi&oacute;n con espacios, ponla ente comines.
 _ • Pa especificar una pallabra entera, m&eacute;tela ente par&eacute;ntesis. Exemplu:~{(premiu)}.
-_ • Pa una espresi&oacute;n regular, verifica bien la sintaxis y ponla ente barres y ente comines. Exemplu:~{"/@test\\.(com|org|ast)/"}.',
+_ • Pa una espresi&oacute;n regular, verifica bien la sintaxis y ponla dientro de barres y comines. Exemplu:~{"/@test\\.(com|org|ast)/"}.',
 	'spam:nom' => 'Llucha escontra la puxarra',
+	'spam_test_ko' => '&iexcl;Esti mensaxe bloquiarase pol filtru anti-SPAM!',
+	'spam_test_ok' => 'Esti mensaxe aceutarase pol filtru anti-SPAM.',
+	'spam_tester' => '&iexcl;Entamar la preba!',
+	'spam_tester_label' => 'Preba equ&iacute; la llista de secuencies torg&aacute;es:',
 	'spip_cache:description' => '@puce@ La cach&eacute; ocupa ciertu espaciu en discu y SPIP puede limitar la cantid&aacute;. Un valor vac&iacute;u o igual a 0 significa que nun s\'aplica cuota denguna.[[%quota_cache% Mb]]
 
 @puce@ Cuando se fai una modificaci&oacute;n del conten&iacute;u del sitiu, SPIP invalida inmediatamente la cach&eacute; ensin esperar al siguiente c&aacute;lculu peri&oacute;dicu. Si el sitiu tien problemes de rendimientu por cuenta d\'una gran carga, puedes marcar &laquo;&nbsp;non&nbsp;&raquo; n\'esta opci&oacute;n.[[%derniere_modif_invalide%]]
