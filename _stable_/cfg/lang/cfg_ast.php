@@ -47,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_changement' => 'Ensin camb&eacute;os en <b>@nom@</b>',
 
 	// R
+	'refus_configuration_webmestre' => 'S&oacute;lo los webmasters d\'esti sitiu tienen autorizaci&oacute;n pa camudar estos par&aacute;metros.',
 	'reset' => 'Desaniciar',
 
 	// S
