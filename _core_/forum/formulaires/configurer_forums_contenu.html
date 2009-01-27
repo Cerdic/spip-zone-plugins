@@ -11,19 +11,19 @@
 				<label><:config_activer_champs:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{forums_titre})</span>
 				]<div class='choix'>
-					<input class='checkbox' type="checkbox" name="forums_titre" value='1' [checked="(#ENV{forums_titre}|?{checked})"] id="forums_titre"/>
+					<input class='checkbox' type="checkbox" name="forums_titre" value='oui' [checked="(#ENV{forums_titre}|=={oui}|?{checked})"] id="forums_titre"/>
 					<label for="forums_titre"><:info_titre:></label>
 				</div>
 				<div class='choix'>
-					<input class='checkbox' type="checkbox" name="forums_texte" value='1' [checked="(#ENV{forums_texte}|?{checked})"] id="forums_texte"/>
+					<input class='checkbox' type="checkbox" name="forums_texte" value='oui' [checked="(#ENV{forums_texte}|=={oui}|?{checked})"] id="forums_texte"/>
 					<label for="forums_texte"><:info_texte:></label>
 				</div>
 				<div class='choix'>
-					<input class='checkbox' type="checkbox" name="forums_afficher_barre" value='1' [checked="(#ENV{forums_afficher_barre}|?{checked})"] id="forums_afficher_barre"/>
+					<input class='checkbox' type="checkbox" name="forums_afficher_barre" value='oui' [checked="(#ENV{forums_afficher_barre}|=={oui}|?{checked})"] id="forums_afficher_barre"/>
 					<label for="forums_afficher_barre"><:info_barre_outils:></label>
 				</div>
 				<div class='choix'>
-					<input class='checkbox' type="checkbox" name="forums_urlref" value='1' [checked="(#ENV{forums_urlref}|?{checked})"] id="forums_urlref"/>
+					<input class='checkbox' type="checkbox" name="forums_urlref" value='oui' [checked="(#ENV{forums_urlref}|=={oui}|?{checked})"] id="forums_urlref"/>
 					<label for="forums_urlref"><:info_urlref:></label>
 				</div>
 			</li>

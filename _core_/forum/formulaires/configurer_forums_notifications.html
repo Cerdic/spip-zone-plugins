@@ -1,10 +1,10 @@
-<div class='formulaire_spip formulaire_configurer formulaire_configurer_forums_contenu' id='formulaire_configurer_forums_contenu'>
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_forums_notifications' id='formulaire_configurer_forums_notifications'>
 <h3 class='titrem'>[(#CHEMIN{images/mail-forum-24.gif}|balise_img{'',cadre-icone})]<:info_envoi_forum:></h3>
 
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-	<form action="#ENV{action}#formulaire_configurer_contenu_forums" method="post" enctype='multipart/form-data'><div>
+	<form action="#ENV{action}#formulaire_configurer_forums_notifications" method="post" enctype='multipart/form-data'><div>
 		[(#ACTION_FORMULAIRE{#ENV{action}})]
 		<p class='explication'><:info_option_email:></p>
 		<ul>
