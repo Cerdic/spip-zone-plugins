@@ -31,8 +31,7 @@ function stats_affichage_entetes_final($entetes){
 function stats_affiche_milieu($flux){
 	// afficher le formulaire de configuration (activer ou desactiver les statistiques).
 	if ($flux['args']['exec'] == 'config_fonctions') {
-		$compteur = charger_fonction('compteur', 'configuration');
-		$flux['data'] .= $compteur(); 
+		$flux['data'] .= recuperer_fond('prive/configurer/compteur',array());
 	}
 	
 	// afficher le formulaire de suppression des visites (configuration > maintenance du site).
