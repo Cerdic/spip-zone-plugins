@@ -3,7 +3,7 @@
 	<auteur>Collectif SPIP</auteur>
 	<version>1.0</version>
 	<version_base>1.0</version_base>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<description>Forum de SPIP (priv&eacute; et public)</description>
 	<prefix>forum</prefix>
 	<install>base/forum_upgrade.php</install>
