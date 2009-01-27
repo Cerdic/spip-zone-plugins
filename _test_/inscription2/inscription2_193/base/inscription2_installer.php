@@ -1,6 +1,6 @@
 <?php
 
-$GLOBALS['inscription2_version'] = 0.64;
+$GLOBALS['inscription2_version'] = 0.65;
 
 function inscription2_upgrade(){
 	
@@ -37,6 +37,32 @@ function inscription2_upgrade(){
 		//inclusion des fonctions pour les requetes sql
 		include_spip('base/abstract_sql');
 		
+		ecrire_config(
+			'inscription2',
+				array(
+				'id_societe' => NULL,
+				'id_societe_obligatoire' => NULL,
+				'id_societe_fiche_mod' => NULL,
+				'id_societe_fiche' => NULL,
+				'id_societe_table' => NULL
+			)
+		);
+				
+		$spip_societes['id_societe'] = "BIGINT(21) NOT NULL";
+		$spip_societes['nom'] = "VARCHAR(255) NOT NULL";
+		$spip_societes['secteur'] = "VARCHAR(255) NOT NULL";
+		$spip_societes['adresse'] = "TEXT NOT NULL";
+		$spip_societes['code_postal'] = "VARCHAR(255) NOT NULL";
+		$spip_societes['ville'] = "VARCHAR(255) NOT NULL";
+		$spip_societes['id_pays'] = "SMALLINT NOT NULL";
+		$spip_societes['telephone'] = "VARCHAR(255) NOT NULL";
+		$spip_societes['fax'] = "VARCHAR(255) NOT NULL";
+	
+		$spip_societes_key = array('PRIMARY KEY' => 'id_societe', 'KEY id_pays' => 'id_pays');
+		
+		sql_create('spip_societes', $spip_societes, $spip_societes_key,true);
+		
+
 		//definition de la table cible
 		$table_nom = "spip_auteurs_elargis";
 	
@@ -215,7 +241,7 @@ function inscription2_upgrade(){
 				}elseif($val!='' and !isset($desc['field'][$cle]) and $cle == 'pays'){
 					spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." int NOT NULL");
 					$desc['field'][$cle] = " int NOT NULL";
-				}elseif($val!='' and !isset($desc['field'][$cle])  and $cle != 'statut_nouveau' and $cle != 'nom' and $cle != 'email' and $cle != 'username' and $cle != 'statut_relances'  and $cle != 'accesrestreint'){
+				}elseif($val!='' and !isset($desc['field'][$cle]) and $cle != 'statut_nouveau' and $cle != 'nom' and $cle != 'email' and $cle != 'username' and $cle != 'statut_relances'  and $cle != 'accesrestreint'){
 					spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." text NOT NULL");
 					$desc['field'][$cle] = " text NOT NULL ";
 				}
@@ -296,13 +322,13 @@ function inscription2_upgrade(){
 		);
 		
 		$spip_societes['id_societe'] = "bigint(21) NOT NULL";
-		$spip_societes['nom'] = "text NOT NULL ";
-		$spip_societes['secteur'] = "text NOT NULL ";
-		$spip_societes['adresse'] = "text NOT NULL ";
-		$spip_societes['code_postal'] = "text NOT NULL ";
-		$spip_societes['ville'] = "text NOT NULL ";
+		$spip_societes['nom'] = "text NOT NULL";
+		$spip_societes['secteur'] = "text NOT NULL";
+		$spip_societes['adresse'] = "text NOT NULL";
+		$spip_societes['code_postal'] = "text NOT NULL";
+		$spip_societes['ville'] = "text NOT NULL";
 		$spip_societes['id_pays'] = "bigint(21) NOT NULL";
-		$spip_societes['telephone'] = "text NOT NULL ";
+		$spip_societes['telephone'] = "text NOT NULL";
 		
 		$spip_societes_key = array('PRIMARY KEY' => 'id_societe', 'KEY id_pays' => 'id_pays');
 		
@@ -315,9 +341,10 @@ function inscription2_upgrade(){
 		include_spip('base/abstract_sql');
 		// Suppression du champs id et on remet la primary key sur id_auteur...
 		spip_query("ALTER TABLE spip_auteurs_elargis DROP id, DROP INDEX id_auteur, ADD PRIMARY KEY (id_auteur)");
-		echo "Inscription2 update @ 0.63<br />On supprimer le champs id pour privilegier id_auteur";
+		echo "Inscription2 update @ 0.63<br />On supprime le champs id pour privilegier id_auteur";
 		ecrire_meta('inscription2_version',$current_version=0.63);
-	}	
+	}
+	
 	if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) ecrire_metas();
 }
 

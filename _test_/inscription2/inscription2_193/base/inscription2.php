@@ -22,8 +22,8 @@
 		}
 	}
 	$spip_auteurs_elargis_key = array("PRIMARY KEY" => "id_auteur");
-	$spip_geo_pays['id_pays'] = "bigint(21) NOT NULL";
-	$spip_geo_pays['pays'] = "text NOT NULL ";
+	$spip_geo_pays['id_pays'] = "SMALLINT NOT NULL";
+	$spip_geo_pays['pays'] = "text NOT NULL";
 	$spip_geo_pays_key = array("PRIMARY KEY"	=> "id_pays");
 
 	// surcharger auteur session, desactive car ca pete en 193
@@ -39,14 +39,14 @@
 
 	/* Gerer table Societes */
 	$spip_societes['id_societe'] = "BIGINT(21) NOT NULL";
-	$spip_societes['nom'] = "VARCHAR(255) NOT NULL ";
-	$spip_societes['secteur'] = "VARCHAR(255) NOT NULL ";
-	$spip_societes['adresse'] = "TEXT NOT NULL ";
-	$spip_societes['code_postal'] = "VARCHAR(255) NOT NULL ";
-	$spip_societes['ville'] = "VARCHAR(255) NOT NULL ";
-	$spip_societes['id_pays'] = "BIGINT(21) NOT NULL";
-	$spip_societes['telephone'] = "VARCHAR(255) NOT NULL ";
-	$spip_societes['fax'] = "VARCHAR(255) NOT NULL ";	
+	$spip_societes['nom'] = "VARCHAR(255) NOT NULL";
+	$spip_societes['secteur'] = "VARCHAR(255) NOT NULL";
+	$spip_societes['adresse'] = "TEXT NOT NULL";
+	$spip_societes['code_postal'] = "VARCHAR(255) NOT NULL";
+	$spip_societes['ville'] = "VARCHAR(255) NOT NULL";
+	$spip_societes['id_pays'] = "SMALLINT NOT NULL";
+	$spip_societes['telephone'] = "VARCHAR(255) NOT NULL";
+	$spip_societes['fax'] = "VARCHAR(255) NOT NULL";	
 	
 	$spip_societes_key = array('PRIMARY KEY' => 'id_societe', 'KEY id_pays' => 'id_pays');
 
