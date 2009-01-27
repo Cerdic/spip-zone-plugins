@@ -44,8 +44,8 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 /***************************/
 /* tabs */
 .markItUp .markItUpTabs {
-	text-align:right; margin-bottom:3px; padding:0px 1px;
-	border-bottom:1px solid #888; overflow:auto; 
+	text-align:right; margin-bottom:3px; padding:1px 1px 0;margin-top:-2em;
+	border-bottom:1px solid #888; overflow:hidden; 
 	width:auto; float:right; clear:both;}
 .markItUp .markItUpTabs a {
 	display:block; float:right; border:1px solid #888; margin:0px 1px; border-bottom:none;
