@@ -8,8 +8,7 @@ function compresseur_header_prive($flux){
 function compresseur_affiche_milieu($flux){
 
 	if ($flux['args']['exec']=='config_fonctions'){
-		$compresseur = charger_fonction('compresseur', 'configuration');
-		$flux['data'] .= $compresseur(); // Compression http et compactages CSS ou JS
+		$flux['data'] .= recuperer_fond('prive/configurer/compresseur',array()); // Compression http et compactages CSS ou JS
 	}
 	
 	return $flux;
