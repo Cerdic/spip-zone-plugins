@@ -34,7 +34,7 @@ function spipicious_insert_head($flux){
 	(function($) {
 	var appliquer_selecteur_spipicious = function() {
 		
-		var spipicious = $('input[@name=spipicious_tags][autocomplete!=off]');
+		var spipicious = $('input[name=spipicious_tags][autocomplete!=off]');
 		// chercher l'input de saisie
 		var id_objet = $("input#spipicious_id").val();
 		var type = $("input#spipicious_type").val();
