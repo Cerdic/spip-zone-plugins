@@ -3,7 +3,7 @@
 var nyro_init = function() {
 	if (nyro_traiter_toutes_images) {
 		// selectionner tous les liens vers des images
-		$("a[@type=\'image/jpeg\'],a[@type=\'image/png\'],a[@type=\'image/gif\']",this)
+		$("a[type=\'image/jpeg\'],a[type=\'image/png\'],a[type=\'image/gif\']",this)
 		.addClass("nyroceros") // noter qu\'on l\'a vue
 		.attr("onclick","") // se debarrasser du onclick de SPIP
 		.nyroModal({bgColor: nyro_bgcolor}); // activer le nyro
@@ -29,6 +29,6 @@ var nyro_init = function() {
 	  $.fn.nyroModal.settings.endShowContent = function(elts,settings) {
 	    $(".nyroModalNext").preload();
 	  } 
-	  $(".nyroceros[@rel]:eq(0)").preload();
+	  $(".nyroceros[rel]:eq(0)").preload();
 	}
 };
