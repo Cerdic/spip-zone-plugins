@@ -62,7 +62,7 @@
 		    //parcours les commandes demandées
     		foreach ($command as $cmd ) {
     		    //redéfini la commande complétement    		 
-    			$cmd = _SVN_COMMAND." $user ".$cmd;
+    			$cmd = _SVN_COMMAND." $user ".$cmd." 2>&1";
     			//execute la commande et sauve le resultat dans local_out
 			    exec($cmd,$local_out);
 			    //rappelle la commande executée
