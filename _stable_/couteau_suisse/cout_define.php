@@ -64,6 +64,11 @@ switch($contexte) {
 
 // Qui sont les webmestres et les administrateurs ?
 function def_liste_adminsitrateurs() {
+	if(defined('_SPIP19100')) {
+		@define('_CS_LISTE_WEBMESTRES', 'SPIP >= 1.92');
+		@define('_CS_LISTE_ADMINS', 'SPIP >= 1.92');
+		return;
+	}
 	include_spip('inc/autoriser');
 	include_spip('inc/texte');
 	$webmestres = array();

@@ -32,7 +32,7 @@ function boites_privees_affiche_gauche($flux){
 		switch($exec) {
 			case 'articles': $flux['data'] .= cs_urls_propres('article', $flux['args']['id_article']); break;
 			case 'naviguer': $flux['data'] .= cs_urls_propres('rubrique', $flux['args']['id_rubrique']); break;
-			case 'auteur_infos': $flux['data'] .= cs_urls_propres('auteur', $flux['args']['id_auteur']); break;
+			case 'auteur_infos': case 'auteurs_edit': $flux['data'] .= cs_urls_propres('auteur', $flux['args']['id_auteur']); break;
 			case 'breves_voir': $flux['data'] .= cs_urls_propres('breve', $flux['args']['id_breve']); break;
 			case 'mots_edit': $flux['data'] .= cs_urls_propres('mot', $flux['args']['id_mot']); break;
 			case 'sites': $flux['data'] .= cs_urls_propres('syndic', $flux['args']['id_syndic']); break;
@@ -56,8 +56,8 @@ function boites_privees_affiche_milieu($flux){
 
 function boites_privees_affiche_droite($flux) {
 	switch($flux['args']['exec']) {
-		case 'auteurs': $flux['data'] .= cs_infos_webmasters().cs_infos_connection(); break;
-		case 'auteur_infos': $flux['data'] .= cs_infos_webmasters().cs_infos_connection(); break;
+		case 'auteurs':case 'auteur_infos':case 'auteurs_edit': 
+			$flux['data'] .= cs_infos_webmasters().cs_infos_connection(); break;
 		default:
 			break;
 	}
