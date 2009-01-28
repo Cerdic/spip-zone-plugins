@@ -61,9 +61,12 @@ function stats_affiche_milieu($flux){
 
 // les boutons d'administration : ajouter les popularites et visites
 function stats_formulaire_admin($flux) {
-	$objet = $flux['args']['contexte']['objet'];
-	$id_objet = $flux['args']['contexte']['id_objet'];
-	if ($objet && $id_objet) {
+	if (
+	 isset($flux['args']['contexte']['objet'])
+	 AND $objet = $flux['args']['contexte']['objet']
+	 AND isset($flux['args']['contexte']['id_objet'])
+	 AND $id_objet = $flux['args']['contexte']['id_objet']
+	 ) {
 		if ($l = admin_stats($objet, $id_objet, $GLOBALS['var_preview'])) {
 			$btn = recuperer_fond('prive/bouton/statistiques', array(
 				'visites' => $l[0],
