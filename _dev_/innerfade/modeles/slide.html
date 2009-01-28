@@ -7,20 +7,21 @@
 [(#REM)
 	Modele <article1|innerfade> : diaporama avec les images en portfolio
 	#MODELE{article_innerfade}]
-	
-<script type="text/javascript">
-    $(document).ready(
-	    function(){					
-		    $('.slideshow').slideshow({
-			    [type: '(#ENV{type})',]
-    		    timeout: #GET{timeout,2000}
-		    });
-    });	
-</script>
 
+<B_PORFOLIO2>	
+    <script type="text/javascript">
+        $(document).ready(
+	        function(){					
+		        $('.slideshow').slideshow({
+			        [type: '(#ENV{type})',]
+        		    timeout: #GET{timeout,2000}
+		        });
+        });	
+    </script>
 
-<div class="slideshow">
-    <BOUCLE_PORFOLIO2(DOCUMENTS){id_article?}{id_rubrique?}{mode=document}{extension==jpg|gif|png} {par num titre, date}>
-        [(#URL_DOCUMENT||image_reduire{400,400}|inserer_attribut{'alt',#TITRE})]
-    </BOUCLE_PORFOLIO2>	
-</div>	
+    <div class="slideshow">
+        <BOUCLE_PORFOLIO2(DOCUMENTS){id_article?}{id_rubrique?}{mode=document}{extension==jpg|gif|png} {par num titre, date}>
+            [(#URL_DOCUMENT||image_reduire{400,400}|inserer_attribut{'alt',#TITRE})]
+        </BOUCLE_PORFOLIO2>	
+    </div>	
+</B_PORFOLIO2>

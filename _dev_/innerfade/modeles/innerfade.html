@@ -39,27 +39,29 @@
 
 [(#SET{timeout,#ENV{timeout,2000}})]
 	
-<script type="text/javascript">
-    $(document).ready(
-	    function(){					
-		    $('ul.innerfade').innerfade({
-			    [speed: '(#ENV{speed})',]
-			    [type: '(#ENV{type})',]
-			    [containerheight: '(#ENV{containerheight})',]
-			    [containerwidth: '(#ENV{containerwidth})',]
-    		    timeout: #GET{timeout}
-		    });
-    });		
-</script>
+<B_PORFOLIO2>
+    <script type="text/javascript">
+        $(document).ready(
+	        function(){					
+		        $('ul.innerfade').innerfade({
+			        [speed: '(#ENV{speed})',]
+			        [type: '(#ENV{type})',]
+			        [containerheight: '(#ENV{containerheight})',]
+			        [containerwidth: '(#ENV{containerwidth})',]
+        		    timeout: #GET{timeout}
+		        });
+        });		
+    </script>
 
-<ul id="innerfade-#GET{objet_spip}-#GET{id_objet}" class="innerfade" style="list-style-type: none ;">
-    <BOUCLE_PORFOLIO2(DOCUMENTS){id_article?}{id_rubrique?}{mode=document}{extension==jpg|gif|png} {par num titre, date}>
-        <li class="diapo">
-            <img src="[(#URL_DOCUMENT||image_reduire{350,400}|extraire_attribut{src})]" alt=" #TITRE" /> 
-            <div class="diapo">
-                [<h3>(#TITRE|supprimer_numero)</h3>]
-                [(#DESCRIPTIF|paragrapher)]
-            </div>
-         </li>
-    </BOUCLE_PORFOLIO2>	
-</ul>
+    <ul id="innerfade-#GET{objet_spip}-#GET{id_objet}" class="innerfade" style="list-style-type: none ;">
+        <BOUCLE_PORFOLIO2(DOCUMENTS){id_article?}{id_rubrique?}{mode=document}{extension==jpg|gif|png} {par num titre, date}>
+            <li class="diapo">
+                [(#URL_DOCUMENT||image_reduire{200,400}|inserer_attribut{'alt',#TITRE})]
+                <div class="diapo">
+                    [<h3>(#TITRE|supprimer_numero)</h3>]
+                    [(#DESCRIPTIF|paragrapher)]
+                </div>
+             </li>
+        </BOUCLE_PORFOLIO2>	
+    </ul>
+</B_PORFOLIO2>
