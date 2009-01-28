@@ -9,7 +9,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-include_spip('filtres/images_lib_mini');
+include_spip('inc/filtres_images_lib_mini');
 
 /**
  * Toutes les fonctions couleur_xx de ce fichier :
@@ -20,6 +20,7 @@ include_spip('filtres/images_lib_mini');
 
 // http://doc.spip.org/@couleur_web
 function couleur_web($couleur) {
+	include_spip('filtres/images_lib');
 	$rvb = _couleur_hex_to_dec($couleur);
 	
 	$rvb = array_map('multiple_de_trois',$rvb);
@@ -57,6 +58,7 @@ function couleur_extreme ($couleur, $limite=0.5) {
 	else $couleur_texte = "000000";
 	*/
 
+	include_spip('filtres/images_lib');
 	$hsl = _couleur_rgb2hsl ($red, $green, $blue);
 
 	if ($hsl["l"] > $limite) $couleur_texte = "ffffff";

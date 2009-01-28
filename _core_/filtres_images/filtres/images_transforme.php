@@ -914,82 +914,84 @@ function image_flou($im,$niveau=3)
 
 // http://doc.spip.org/@image_RotateBicubic
 function image_RotateBicubic($src_img, $angle, $bicubic=0) {
+	include_spip('filtres/images_lib');
    
-   if (round($angle/90)*90 == $angle) {
+	if (round($angle/90)*90 == $angle) {
 		$droit = true;
-   		if (round($angle/180)*180 == $angle) $rot = 180;
-   		else $rot = 90;
-   }
-   else $droit = false;
+		if (round($angle/180)*180 == $angle) $rot = 180;
+		else $rot = 90;
+	}
+	else 
+		$droit = false;
    
-  // convert degrees to radians
-   $angle = $angle + 180;
-   $angle = deg2rad($angle);
-  
-
-
-   $src_x = imagesx($src_img);
-   $src_y = imagesy($src_img);
-   
-  
-   $center_x = floor(($src_x-1)/2);
-   $center_y = floor(($src_y-1)/2);
-
-   $cosangle = cos($angle);
-   $sinangle = sin($angle);
+	// convert degrees to radians
+	$angle = $angle + 180;
+	$angle = deg2rad($angle);
+	
+	
+	
+	$src_x = imagesx($src_img);
+	$src_y = imagesy($src_img);
+	
+	
+	$center_x = floor(($src_x-1)/2);
+	$center_y = floor(($src_y-1)/2);
+	
+	$cosangle = cos($angle);
+	$sinangle = sin($angle);
 
 	// calculer dimensions en simplifiant angles droits, ce qui evite "floutage"
 	// des rotations a angle droit
 	if (!$droit) {
-	   $corners=array(array(0,0), array($src_x,0), array($src_x,$src_y), array(0,$src_y));
+		$corners=array(array(0,0), array($src_x,0), array($src_x,$src_y), array(0,$src_y));
 	
-	   foreach($corners as $key=>$value) {
-		 $value[0]-=$center_x;        //Translate coords to center for rotation
-		 $value[1]-=$center_y;
-		 $temp=array();
-		 $temp[0]=$value[0]*$cosangle+$value[1]*$sinangle;
-		 $temp[1]=$value[1]*$cosangle-$value[0]*$sinangle;
-		 $corners[$key]=$temp;    
-	   }
+		foreach($corners as $key=>$value) {
+			$value[0]-=$center_x;        //Translate coords to center for rotation
+			$value[1]-=$center_y;
+			$temp=array();
+			$temp[0]=$value[0]*$cosangle+$value[1]*$sinangle;
+			$temp[1]=$value[1]*$cosangle-$value[0]*$sinangle;
+			$corners[$key]=$temp;    
+		}
 	   
-	   $min_x=1000000000000000;
-	   $max_x=-1000000000000000;
-	   $min_y=1000000000000000;
-	   $max_y=-1000000000000000;
+		$min_x=1000000000000000;
+		$max_x=-1000000000000000;
+		$min_y=1000000000000000;
+		$max_y=-1000000000000000;
 	   
-	   foreach($corners as $key => $value) {
-		 if($value[0]<$min_x)
-		   $min_x=$value[0];
-		 if($value[0]>$max_x)
-		   $max_x=$value[0];
-	   
-		 if($value[1]<$min_y)
-		   $min_y=$value[1];
-		 if($value[1]>$max_y)
-		   $max_y=$value[1];
-	   }
+		foreach($corners as $key => $value) {
+			if($value[0]<$min_x)
+				$min_x=$value[0];
+			if($value[0]>$max_x)
+				$max_x=$value[0];
+			
+			if($value[1]<$min_y)
+				$min_y=$value[1];
+			if($value[1]>$max_y)
+				$max_y=$value[1];
+	  }
 	
-	   $rotate_width=ceil($max_x-$min_x);
-	   $rotate_height=ceil($max_y-$min_y);
-   }
-   else {
-   	if ($rot == 180) {
-   		$rotate_height = $src_y;
-   		$rotate_width = $src_x;
-   	} else {
-   		$rotate_height = $src_x;
-   		$rotate_width = $src_y;
-   	}
-   	$bicubic = false;
-   }
-   
-   
-   $rotate=imagecreatetruecolor($rotate_width,$rotate_height);
-   imagealphablending($rotate, false);
-   imagesavealpha($rotate, true);
-
-   $cosangle = cos($angle);
-   $sinangle = sin($angle);
+		$rotate_width=ceil($max_x-$min_x);
+		$rotate_height=ceil($max_y-$min_y);
+	}
+	else {
+		if ($rot == 180) {
+			$rotate_height = $src_y;
+			$rotate_width = $src_x;
+		} else {
+			$rotate_height = $src_x;
+			$rotate_width = $src_y;
+		}
+		$bicubic = false;
+	}
+	
+	
+	$rotate=imagecreatetruecolor($rotate_width,$rotate_height);
+	imagealphablending($rotate, false);
+	imagesavealpha($rotate, true);
+	
+	$cosangle = cos($angle);
+	$sinangle = sin($angle);
    
 	// arrondir pour rotations angle droit (car cos et sin dans {-1,0,1})
 	if ($droit) {
@@ -997,92 +999,94 @@ function image_RotateBicubic($src_img, $angle, $bicubic=0) {
 		$sinangle = round($sinangle);
 	}
 
-   $newcenter_x = ($rotate_width-1)/2;
-   $newcenter_y = ($rotate_height-1)/2;
+	$newcenter_x = ($rotate_width-1)/2;
+	$newcenter_y = ($rotate_height-1)/2;
 
    
-   for ($y = 0; $y < $rotate_height; $y++) {
-     for ($x = 0; $x < $rotate_width; $x++) {
-   // rotate...
-       $old_x = ((($newcenter_x-$x) * $cosangle + ($newcenter_y-$y) * $sinangle))
-         + $center_x;
-       $old_y = ((($newcenter_y-$y) * $cosangle - ($newcenter_x-$x) * $sinangle))
-         + $center_y;  
+	for ($y = 0; $y < $rotate_height; $y++) {
+		for ($x = 0; $x < $rotate_width; $x++) {
+			// rotate...
+			$old_x = ((($newcenter_x-$x) * $cosangle + ($newcenter_y-$y) * $sinangle))
+			 + $center_x;
+			$old_y = ((($newcenter_y-$y) * $cosangle - ($newcenter_x-$x) * $sinangle))
+			 + $center_y;  
          
-         $old_x = ceil($old_x);
-         $old_y = ceil($old_y);
+			$old_x = ceil($old_x);
+			$old_y = ceil($old_y);
          
-   if ( $old_x >= 0 && $old_x < $src_x
-         && $old_y >= 0 && $old_y < $src_y ) {
-     if ($bicubic == true) {
-       $xo = $old_x;
-       $x0 = floor($xo);
-       $x1 = ceil($xo);
-       $yo = $old_y;
-       $y0 = floor($yo);
-       $y1 = ceil($yo);
+			if ( $old_x >= 0 && $old_x < $src_x
+			 && $old_y >= 0 && $old_y < $src_y ) {
+				if ($bicubic == true) {
+					$xo = $old_x;
+					$x0 = floor($xo);
+					$x1 = ceil($xo);
+					$yo = $old_y;
+					$y0 = floor($yo);
+					$y1 = ceil($yo);
        
-		// on prend chaque point, mais on pondere en fonction de la distance
-		$rgb = ImageColorAt($src_img, $x0, $y0); 
-		$a1 = ($rgb >> 24) & 0xFF;
-		$r1 = ($rgb >> 16) & 0xFF;
-		$g1 = ($rgb >> 8) & 0xFF;
-		$b1 = $rgb & 0xFF;
-		$d1 = _image_distance_pixel($xo, $yo, $x0, $y0);
+					// on prend chaque point, mais on pondere en fonction de la distance
+					$rgb = ImageColorAt($src_img, $x0, $y0); 
+					$a1 = ($rgb >> 24) & 0xFF;
+					$r1 = ($rgb >> 16) & 0xFF;
+					$g1 = ($rgb >> 8) & 0xFF;
+					$b1 = $rgb & 0xFF;
+					$d1 = _image_distance_pixel($xo, $yo, $x0, $y0);
+					
+					$rgb = ImageColorAt($src_img, $x1, $y0); 
+					$a2 = ($rgb >> 24) & 0xFF;
+					$r2 = ($rgb >> 16) & 0xFF;
+					$g2 = ($rgb >> 8) & 0xFF;
+					$b2 = $rgb & 0xFF;
+					$d2 = _image_distance_pixel($xo, $yo, $x1, $y0);
+					
+					$rgb = ImageColorAt($src_img,$x0, $y1); 
+					$a3 = ($rgb >> 24) & 0xFF;
+					$r3 = ($rgb >> 16) & 0xFF;
+					$g3 = ($rgb >> 8) & 0xFF;
+					$b3 = $rgb & 0xFF;
+					$d3 = _image_distance_pixel($xo, $yo, $x0, $y1);
+					
+					$rgb = ImageColorAt($src_img,$x1, $y1);
+					$a4 = ($rgb >> 24) & 0xFF;
+					$r4 = ($rgb >> 16) & 0xFF;
+					$g4 = ($rgb >> 8) & 0xFF;
+					$b4 = $rgb & 0xFF;
+					$d4 = _image_distance_pixel($xo, $yo, $x1, $y1);
+					
+					$ac1 = ((127-$a1) / 127);
+					$ac2 = ((127-$a2) / 127);
+					$ac3 = ((127-$a3) / 127);
+					$ac4 = ((127-$a4) / 127);
 
-		$rgb = ImageColorAt($src_img, $x1, $y0); 
-		$a2 = ($rgb >> 24) & 0xFF;
-		$r2 = ($rgb >> 16) & 0xFF;
-		$g2 = ($rgb >> 8) & 0xFF;
-		$b2 = $rgb & 0xFF;
-		$d2 = _image_distance_pixel($xo, $yo, $x1, $y0);
+					// limiter impact des couleurs transparentes, 
+					// mais attention tout transp: division par 0
+					if ($ac1*$d1 + $ac2*$d2 + $ac3+$d3 + $ac4+$d4 > 0) {
+						if ($ac1 > 0) $d1 = $d1 * $ac1;
+						if ($ac2 > 0) $d2 = $d2 * $ac2;
+						if ($ac3 > 0) $d3 = $d3 * $ac3;
+						if ($ac4 > 0) $d4 = $d4 * $ac4;
+					}
+					
+					$tot  = $d1 + $d2 + $d3 + $d4;
 
-		$rgb = ImageColorAt($src_img,$x0, $y1); 
-		$a3 = ($rgb >> 24) & 0xFF;
-		$r3 = ($rgb >> 16) & 0xFF;
-		$g3 = ($rgb >> 8) & 0xFF;
-		$b3 = $rgb & 0xFF;
-		$d3 = _image_distance_pixel($xo, $yo, $x0, $y1);
-
-		$rgb = ImageColorAt($src_img,$x1, $y1);
-		$a4 = ($rgb >> 24) & 0xFF;
-		$r4 = ($rgb >> 16) & 0xFF;
-		$g4 = ($rgb >> 8) & 0xFF;
-		$b4 = $rgb & 0xFF;
-		$d4 = _image_distance_pixel($xo, $yo, $x1, $y1);
-
-		$ac1 = ((127-$a1) / 127);
-		$ac2 = ((127-$a2) / 127);
-		$ac3 = ((127-$a3) / 127);
-		$ac4 = ((127-$a4) / 127);
-		
-		// limiter impact des couleurs transparentes, 
-		// mais attention tout transp: division par 0
-		if ($ac1*$d1 + $ac2*$d2 + $ac3+$d3 + $ac4+$d4 > 0) {
-			if ($ac1 > 0) $d1 = $d1 * $ac1;
-			if ($ac2 > 0) $d2 = $d2 * $ac2;
-			if ($ac3 > 0) $d3 = $d3 * $ac3;
-			if ($ac4 > 0) $d4 = $d4 * $ac4;
+					$r = round((($d1*$r1)+($d2*$r2)+($d3*$r3)+($d4*$r4))/$tot);
+					$g = round((($d1*$g1+($d2*$g2)+$d3*$g3+$d4*$g4))/$tot);
+					$b = round((($d1*$b1+($d2*$b2)+$d3*$b3+$d4*$b4))/$tot);
+					$a = round((($d1*$a1+($d2*$a2)+$d3*$a3+$d4*$a4))/$tot);
+					$color = imagecolorallocatealpha($src_img, $r,$g,$b,$a);
+				} 
+				else {
+					$color = imagecolorat($src_img, round($old_x), round($old_y));
+				}
+			}
+			else {
+				// this line sets the background colour
+				$color = imagecolorallocatealpha($src_img, 255, 255, 255, 127);
+			}
+			@imagesetpixel($rotate, $x, $y, $color);
 		}
-		
-		$tot  = $d1 + $d2 + $d3 + $d4;
-
-       $r = round((($d1*$r1)+($d2*$r2)+($d3*$r3)+($d4*$r4))/$tot);
-       $g = round((($d1*$g1+($d2*$g2)+$d3*$g3+$d4*$g4))/$tot);
-       $b = round((($d1*$b1+($d2*$b2)+$d3*$b3+$d4*$b4))/$tot);
-       $a = round((($d1*$a1+($d2*$a2)+$d3*$a3+$d4*$a4))/$tot);
-        $color = imagecolorallocatealpha($src_img, $r,$g,$b,$a);
-     } else {
-       $color = imagecolorat($src_img, round($old_x), round($old_y));
-     }
-   } else {
-         // this line sets the background colour
-     $color = imagecolorallocatealpha($src_img, 255, 255, 255, 127);
-   }
-   @imagesetpixel($rotate, $x, $y, $color);
-     }
-   }
-   return $rotate;
+	}
+	return $rotate;
 }
 
 // permet de faire tourner une image d'un angle quelconque
@@ -1176,8 +1180,8 @@ function image_imagick () {
 // plus claire (gamma > 0)
 // ou plus foncee (gamma < 0)
 // http://doc.spip.org/@image_gamma
-function image_gamma($im, $gamma = 0)
-{
+function image_gamma($im, $gamma = 0){
+	include_spip('filtres/images_lib');
 	$fonction = array('image_gamma', func_get_args());
 	$image = _image_valeurs_trans($im, "gamma-$gamma",false,$fonction);
 	if (!$image) return("");
@@ -1228,8 +1232,8 @@ function image_gamma($im, $gamma = 0)
 // de la couleur "complementaire" pour forcer une dominante
 //function image_sepia($im, $dr = 137, $dv = 111, $db = 94)
 // http://doc.spip.org/@image_sepia
-function image_sepia($im, $rgb = "896f5e")
-{
+function image_sepia($im, $rgb = "896f5e"){
+	include_spip('filtres/images_lib');
 	
 	if (!function_exists("imagecreatetruecolor")) return $im;
 	

@@ -314,7 +314,7 @@ function _image_decale_composante($coul, $gamma) {
  * @param int $val
  * @return int
  */
-function _image_decale_composante_127 ($coul, $val) {
+function _image_decale_composante_127($coul, $val) {
 	if ($coul < 127) $y = round((($coul - 127) / 127) * $val) + $val;
 	else if ($coul >= 127) $y = round((($coul - 127) / 128) * (255-$val)) + $val;
 	else $y= $coul;
