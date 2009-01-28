@@ -102,8 +102,8 @@ function cs_formatspip($id_article){
 	$titre =  _T('couteau:texte'.($i>1?'s':'').'_formatspip');
 	// compatibilite SPIP < 2.0
 	$compat = function_exists('bouton_block_depliable');
-	$bouton = $compat?bouton_block_depliable($titre, 'invisible', "formatspip")
-		:bouton_block_invisible("formatspip").$titre;
+	$bouton = $compat?bouton_block_depliable(cs_div_configuration().$titre, 'invisible', "formatspip")
+		:bouton_block_invisible("formatspip").cs_div_configuration().$titre;
 	$bloc = $compat?debut_block_depliable(false, "formatspip")
 		:debut_block_invisible("formatspip");
 	return debut_cadre_enfonce(find_in_path('/img/formatspip-24.png'), true, '', $bouton)
@@ -229,6 +229,7 @@ spip_log("action_rapide_tri_auteurs : $id_article, $id_auteur, $monter");
 }
 
 function cs_div_configuration() {
+	if(!cout_autoriser()) return '';
 	return '<div style="float:right; top:4px; right:-4px; position:relative;" ><a title="'._T('couteau:configurer').'" href="'.generer_url_ecrire('admin_couteau_suisse','cmd=descrip&outil=boites_privees#cs_infos').'"><img alt="'._T('couteau:configurer').'" src="'._DIR_IMG_PACK.'secteur-12.gif"/></a></div>';
 }
 
