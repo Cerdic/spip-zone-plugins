@@ -6,7 +6,7 @@ function ThickBox1_insert_head($flux){
 	// on ajoute la class thickbox aux liens de type="image/xxx"
 
 	// TODO: ne charger thickbox.js et thickbox.css que si 
-	// jQuery("a.thickbox,a[@type='image/jpeg'],...").size() > 0)
+	// jQuery("a.thickbox,a[type='image/jpeg'],...").size() > 0)
 	if(!$GLOBALS["spip_pipeline"]["insert_js"])
 		$flux = ThickBox1_header_prive($flux);
 
@@ -25,7 +25,7 @@ $flux .=
 // Inside the function "this" will be "document" when called by ready() 
 // and "the ajaxed element" when called because of onAjaxLoad 
 var init_f = function() {
-	if (jQuery("a.thickbox,a[@type=\'image/jpeg\'],a[@type=\'image/png\'],a[@type=\'image/gif\']",this).addClass("thickbox").size()) {
+	if (jQuery("a.thickbox,a[type=\'image/jpeg\'],a[type=\'image/png\'],a[type=\'image/gif\']",this).addClass("thickbox").size()) {
 		TB_chemin_animation = "'.url_absolue(find_in_path('circle_animation.gif')).'";
 		TB_chemin_close = "'.url_absolue(find_in_path('close.gif')).'";
 		TB_chemin_css = "'.url_absolue(find_in_path('thickbox.css')).'";
@@ -47,7 +47,7 @@ include_spip("inc/filtres");
 // on ajoute la class thickbox aux liens de type="image/xxx"
 
 // TODO: ne charger thickbox.js et thickbox.css que si 
-// jQuery("a.thickbox,a[@type='image/jpeg'],...").size() > 0)
+// jQuery("a.thickbox,a[type='image/jpeg'],...").size() > 0)
 
 if($flux['type']=='inline')
   $flux["data"]["ThickBox1"] =
@@ -57,7 +57,7 @@ if($flux['type']=='inline')
 // and "the ajaxed element" when called because of onAjaxLoad 
 var init_f = function() {
 	var me = this;
-	if (jQuery("a.thickbox,a[@type=\'image/jpeg\'],a[@type=\'image/png\'],a[@type=\'image/gif\']",me).addClass("thickbox").size()) {
+	if (jQuery("a.thickbox,a[type=\'image/jpeg\'],a[type=\'image/png\'],a[type=\'image/gif\']",me).addClass("thickbox").size()) {
 	
 		var TB_initload = function(){
 			TB_chemin_animation = "'.url_absolue(find_in_path('circle_animation.gif')).'";
