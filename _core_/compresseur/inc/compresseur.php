@@ -68,7 +68,8 @@ function compacte_head_js($flux) {
 				$scripts[$s] = $src;
 		}
 	}
-	if (list($src,$comms,$time) = filtre_cache_static($scripts,'js')){
+	
+	if (list($src,$comms) = filtre_cache_static($scripts,'js')){
 		$scripts = array_keys($scripts);
 		$flux = str_replace(reset($scripts),
 			$comms
@@ -190,5 +191,5 @@ function filtre_cache_static($scripts,$type='js'){
 	}
 
 	// Le commentaire detaille n'apparait qu'au recalcul, pour debug
-	return array($nom, $comms ? "<!-- $comms -->\n" : '');
+	return array($nom, isset($comms) AND $comms ? "<!-- $comms -->\n" : '');
 }

@@ -47,6 +47,7 @@ function forum_accueil_informations($texte){
 	include_spip('base/abstract_sql');
 	$q = sql_select('COUNT(*) AS cnt, statut', 'spip_forum', sql_in('statut', array('publie', 'prop')), 'statut', '','', "COUNT(*)<>0");
 
+	$where = count($GLOBALS['connect_id_rubrique']) ? sql_in('id_rubrique', $GLOBALS['connect_id_rubrique'])	: '';
 	$cpt = array();
 	$cpt2 = array();
 	$defaut = $where ? '0/' : '';
@@ -70,9 +71,9 @@ function forum_accueil_informations($texte){
 		if (autoriser('modererforum'))
 			$texte .= afficher_plus(generer_url_ecrire("controle_forum",""));
 		$texte .= "<b>" ._T('onglet_messages_publics') ."</b>";
-		$texte .= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
-		if (isset($cpt['prop'])) $res .= "<li>"._T("texte_statut_attente_validation").": ".$cpt2['prop'] .$cpt['prop'] . '</li>';
-		if (isset($cpt['publie'])) $res .= "<li><b>"._T("texte_statut_publies").": ".$cpt2['publie'] .$cpt['publie'] . "</b>" .'</li>';
+		$texte .= "<ul style='margin:0px; padding-".$GLOBALS['spip_lang_left'].": 20px; margin-bottom: 5px;'>";
+		if (isset($cpt['prop'])) $texte .= "<li>"._T("texte_statut_attente_validation").": ".$cpt2['prop'] .$cpt['prop'] . '</li>';
+		if (isset($cpt['publie'])) $texte .= "<li><b>"._T("texte_statut_publies").": ".$cpt2['publie'] .$cpt['publie'] . "</b>" .'</li>';
 		$texte .= "</ul>";
 		$texte .= "</div>";
 	}
