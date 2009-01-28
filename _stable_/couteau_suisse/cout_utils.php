@@ -35,12 +35,6 @@ if (!defined('_DIR_PLUGIN_COUTEAU_SUISSE')){
 	define('_DIR_PLUGIN_COUTEAU_SUISSE', $p);
 }
 
-// SPIP 1.93 a change cette fonction. donc, en attendant mieux...
-function cs_ajax_action_greffe($idom, $corps, $br='<br />')	{
-	$ajax = defined('_SPIP19300')?_AJAX:_request('var_ajaxcharset');
-	return $ajax?"$br$corps":"\n<div id='$idom'>$corps\n</div>\n";
-}
-
 function cs_suppr_metas_var($meta, $new = false) {
  global $metas_vars;
  if (!isset($metas_vars[$meta])) return;

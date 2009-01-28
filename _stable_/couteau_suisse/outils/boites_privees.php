@@ -68,7 +68,8 @@ function cs_infos_webmasters() {
 	if (!defined('boites_privees_WEBMASTERS') || !cout_autoriser()) return '';
 	include_spip('cout_define');
 	def_liste_adminsitrateurs();
-	return cs_cadre_depliable(_T('couteau:webmestres'), '', "<p>".(strlen(_CS_LISTE_WEBMESTRES)?_CS_LISTE_WEBMESTRES:_T('couteau:variable_vide'))."</p>");
+	return cs_cadre_depliable(_T('couteau:webmestres'), 'bp_infos_webmasters', 
+	"<p>".(strlen(_CS_LISTE_WEBMESTRES)?'&bull; '.str_replace(', ','<br/>&bull; ',_CS_LISTE_WEBMESTRES):_T('couteau:variable_vide'))."</p>");
 }
 
 function cs_infos_connection() {
@@ -228,7 +229,7 @@ spip_log("action_rapide_tri_auteurs : $id_article, $id_auteur, $monter");
 }
 
 function cs_div_configuration() {
-	return '<div style="float:right; top:4px; right:-4px; position:relative;" ><a title="'._T('couteau:configurer').'" href="'.generer_url_ecrire('admin_couteau_suisse','cmd=descrip&outil=boites_privees#cs_infos').'"><img alt="" src="'._DIR_IMG_PACK.'secteur-12.gif"/></a></div>';
+	return '<div style="float:right; top:4px; right:-4px; position:relative;" ><a title="'._T('couteau:configurer').'" href="'.generer_url_ecrire('admin_couteau_suisse','cmd=descrip&outil=boites_privees#cs_infos').'"><img alt="'._T('couteau:configurer').'" src="'._DIR_IMG_PACK.'secteur-12.gif"/></a></div>';
 }
 
 function cs_cadre_depliable($titre, $id, $texte) {
@@ -240,7 +241,7 @@ function cs_cadre_depliable($titre, $id, $texte) {
 		. "</div>"
 		. fin_cadre_relief(true);
 	// SPIP >= 2.0
-	return cadre_depliable(find_in_path('img/couteau-24.gif'), "<b>$titre</b>",	false /*true = deplie*/, $texte, $id);
+	return cadre_depliable(find_in_path('img/couteau-24.gif'), cs_div_configuration()."<b>$titre</b>", false /*true = deplie*/, $texte, $id);
 }
 
 ?>

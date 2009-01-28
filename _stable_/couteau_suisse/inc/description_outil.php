@@ -16,8 +16,15 @@ include_spip('inc/layer');
 include_spip('inc/presentation');
 include_spip('inc/message_select');
 
+function cs_ajax_outil_greffe($idom, $corps)	{
+	// en fait, ajax uniquement si une modif est demandee...
+	return _request('modif')=='oui'
+		?'<div class="cs_modif_ok">&gt;&nbsp;'._T('couteauprive:vars_modifiees')."&nbsp;&lt;</div>$corps"
+		:"\n<div id='$idom'>$corps\n</div>\n";
+}
+
 // retourne le code html qu'il faut pour fabriquer le formulaire de l'outil proprietaire
-function description_outil_une_variable($index, $outil, $variable, $label, &$ok_actif_, &$ok_inactif_) {
+function description_outil_une_variable($index, $outil, $variable, $label) {
 	global $cs_variables, $metas_vars;
 	$actif = $outil['actif'];
 	// la valeur de la variable n'est stockee dans les metas qu'au premier post
@@ -29,47 +36,45 @@ function description_outil_une_variable($index, $outil, $variable, $label, &$ok_
 
 	// si la variable necessite des boutons radio
 	if (is_array($radios = &$cs_variable['radio'])) {
-		$ok_actif = "$label <ul>";
+		if(!$actif) {
+			$code = _T($radios[$valeur]);
+			return "<input type=\"hidden\" name=\"$variable\" class=\"cs_hidden_checkbox\" value=\"$code\" />"
+				. $label . (strlen($valeur)?ucfirst($code):'&nbsp;-');
+		}
+		$res = "$label <ul>";
 		$i = 0; $nb = intval($cs_variable['radio/ligne']);
 		foreach($radios as $code=>$traduc) {
 			$br = (($nb>0) && ( ++$i % $nb == 0))?'</ul><ul>':''; 
-			$ok_actif .=
+			$res .=
 				"<li><label><input id=\"label_{$variable}_$code\" class=\"cs_input_checkbox\" type=\"radio\""
 				.($valeur==$code?' checked="checked"':'')." value=\"$code\" name=\"$variable\" />"
 				.($valeur==$code?'<b>':'')._T($traduc).($valeur==$code?'</b>':'')
 				."</label></li>$br";
 		}
-		$ok_actif .= '</ul>'._VAR_OUTIL;
-		$code = _T($radios[$valeur]);
-		$ok_inactif = "<input type=\"hidden\" name=\"$variable\" class=\"cs_hidden_checkbox\" value=\"$code\" />"
-			. $label . (strlen($valeur)?ucfirst($code):'&nbsp;-');
+		return $res.'</ul>'._VAR_OUTIL;
 	}
 	// ... ou une case a cocher
-	elseif (isset($cs_variable['check'])) {
-		$ok_actif = $label;
-		$ok_actif .= '<label><input type="checkbox" '.($valeur?' checked="checked"':'')." value=\"1\" name=\"$variable\" />"
-			.($valeur?'<b>':'')._T($cs_variable['check']).($valeur?'</b>':'').'</label>';
-
-		$ok_actif .= _VAR_OUTIL;
-		$ok_inactif = $label._T($cs_variable['check'])._T($valeur?'couteauprive:2pts_oui':'couteauprive:2pts_non');
+	if (isset($cs_variable['check'])) {
+		if(!$actif)
+			return $label._T($cs_variable['check'])._T($valeur?'couteauprive:2pts_oui':'couteauprive:2pts_non');
+		return $label.'<label><input type="checkbox" '.($valeur?' checked="checked"':'')." value=\"1\" name=\"$variable\" />"
+			.($valeur?'<b>':'')._T($cs_variable['check']).($valeur?'</b>':'').'</label>'
+			. _VAR_OUTIL;
 	}
 	// ... ou un textarea ... ou une case input
-	else {
-		$len = $cs_variable['format']==_format_NOMBRE?4:0;
-		$width = $len?'':'style="width:100%;" ';
-		$lignes = $cs_variable['format']==_format_NOMBRE?0:strval($cs_variable['lignes']);
-//			else $len=strlen(strval($valeur));
-		$ok_actif = $label .
-			( $lignes < 2
-				// <html></html> empechera SPIP de modifier le contenu des <input> ou <textarea>
-				?"<html><input name='$variable' value=\""
-					. htmlspecialchars($valeur) . "\" type='text' size='$len' $width /></html>"
-				:"<html><textarea rows='$lignes' name='$variable' $width>"
-					. htmlspecialchars($valeur) . '</textarea></html>'
-			) . _VAR_OUTIL;
-		$ok_inactif = $label.'<html>'.(strlen($valeur)?nl2br(echapper_tags($valeur)):'&nbsp;'._T('couteauprive:variable_vide')).'</html>';
-	}
-	$ok_actif_ .= $ok_actif; $ok_inactif_ .= $ok_inactif;
+	if(!$actif)
+		return $label.'<html>'.(strlen($valeur)?nl2br(echapper_tags($valeur)):'&nbsp;'._T('couteauprive:variable_vide')).'</html>';
+	$len = $cs_variable['format']==_format_NOMBRE?4:0;
+	$width = $len?'':'style="width:100%;" ';
+	$lignes = $cs_variable['format']==_format_NOMBRE?0:strval($cs_variable['lignes']);
+	return $label .
+		( $lignes < 2
+			// <html></html> empechera SPIP de modifier le contenu des <input> ou <textarea>
+			?"<html><input name='$variable' value=\""
+				. htmlspecialchars($valeur) . "\" type='text' size='$len' $width /></html>"
+			:"<html><textarea rows='$lignes' name='$variable' $width>"
+				. htmlspecialchars($valeur) . '</textarea></html>'
+		) . _VAR_OUTIL;
 }
 
 // callback sur les labels de zones input ; format : [[label->qq chose]]
@@ -123,11 +128,6 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$descrip = preg_replace_callback(',\[\[([^][]*)->([^]]*)\]\],msS', 'description_outil_input1_callback' , $descrip);
 	// remplacement des zones input de format [[qq chose %variable% qq chose]] en utilisant _T('couteauprive:label:variable') comme label
 	$descrip = preg_replace_callback(',\[\[((.*?)%([a-zA-Z_][a-zA-Z0-9_]*)%(.*?))\]\],msS', 'description_outil_input2_callback', $descrip);
-	// remplacement des labels en doublon
-	$descrip = preg_replace_callback(',<:label:([a-zA-Z_][a-zA-Z0-9_-]*):>,', 
-		create_function('$matches','return _T("couteauprive:label:$matches[1]");'), $descrip);
-	// remplacement des liens sur un outil
-	$descrip = preg_replace_callback(',\[\.->([a-zA-Z_][a-zA-Z0-9_-]*)\],', 'description_outil_liens_callback', $descrip);
 
 	// recherche des blocs <variable></variable> eventuels associes pour du masquage/demasquage
 	foreach($cs_input_variable as $v) {
@@ -138,41 +138,47 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$t = preg_split(',%([a-zA-Z_][a-zA-Z0-9_]*)%,', $descrip, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 //cs_log("inc_description_outil_dist() - Parse la description de '$outil_'");
-	$ok_actif = $ok_inactif = $ok_visible = '';
-	$outil['nb_variables'] = 0; $variables = array();
+	$res = '';
+	$nb_variables = 0; $variables = array();
 	for($i=0;$i<count($t);$i+=2) if (isset($t[$i+1]) && strlen($var=trim($t[$i+1]))) {
 		// si la variable est presente on fabrique le input
 		if (isset($cs_variables[$var])) {
-			description_outil_une_variable(
-				$index + (++$outil['nb_variables']),
+			$res .= description_outil_une_variable(
+				$index + (++$nb_variables),
 				$outil, $var,
-				$t[$i],
-				$ok_actif, $ok_inactif);
+				$t[$i]);
 			$variables[] = $var;
 		} else {
 			// probleme a regler dans config_outils.php !
-			$temp = $t[$i]."[$var?]"; $ok_actif .= $temp; $ok_inactif .= $temp;
+			$temp = $t[$i]."[$var?]"; $res .= $temp;
 		}
-	} else { $ok_actif .= $t[$i]; $ok_inactif .= $t[$i]; }
+	} else 
+		$res .= $t[$i];
 	$outil['variables'] = $variables;
-	$c = $outil['nb_variables'];
+	$outil['nb_variables'] = $nb_variables;
+
+	// si ce n'est qu'une simple initialisation, on sort
+	if(!$modif) return;
 
 	// bouton 'Modifier' : en dessous du texte s'il y a plusieurs variables, a la place de _VAR_OUTIL s'il n'y en a qu'une.
 	// attention : on ne peut pas modifier les variables si l'outil est inactif
 	if ($actif) {
-		$bouton = "<input type='submit' class='fondo' value=\"".($c>1?_T('couteauprive:modifier_vars_0'):_T('bouton_modifier'))."\" />";
-		if($c>1) $ok_actif .= "<div class=\"cs_bouton\">$bouton</div>";
-			else $ok_actif = str_replace(_VAR_OUTIL, $bouton, $ok_actif);
+		$bouton = "<input type='submit' class='fondo' value=\"".($nb_variables>1?_T('couteauprive:modifier_vars_0'):_T('bouton_modifier'))."\" />";
+		if($nb_variables>1) $res .= "<div class=\"cs_bouton\">$bouton</div>";
+			else $res = str_replace(_VAR_OUTIL, $bouton, $res);
 	}
-	$res = "\n<div id='cs_inner_outil-$index' >" . str_replace(array('<ul></ul>',_VAR_OUTIL),'',$actif?$ok_actif:$ok_inactif) . '</div>';
+	$res = "\n<div id='cs_inner_outil-$index' >" . str_replace(array('<ul></ul>',_VAR_OUTIL),'',$res) . '</div>';
 	// si des variables sont trouvees ?
-	if($c) {
+	if($nb_variables) {
 		$variables = urlencode(serialize($variables));
 		// syntaxe : ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
 		$res = ajax_action_auteur('description_outil', $index, $url_self, "modif=oui&cmd=descrip&outil={$outil['id']}", 
 			"\n<input type='hidden' value='$variables' name='variables' /><input type='hidden' value='$outil_' name='outil' />"	. $res);
 	}
 //cs_log(" FIN : inc_description_outil_dist({$outil['id']}) - {$outil['nb_variables']} variables(s) trouvee(s)");
+	// remplacement des labels en doublon
+	$res = preg_replace_callback(',<:label:([a-zA-Z_][a-zA-Z0-9_-]*):>,', 
+		create_function('$matches','return _T("couteauprive:label:$matches[1]");'), $res);
 	// remplacement des blocs avec style. ex : <q2>bla bla</q2>
 	$res = preg_replace(',</q(\d)>,','</div>', preg_replace(',<q(\d)>,','<div class="q$1">', $res));
 	// remplacement des inputs successifs sans label : [[%var1%]][[->%var2%]] ou [[%var1%]][[-->%var2%]]
@@ -182,8 +188,9 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	// remplacement des constantes de forme @_CS_XXXX@
 	$res = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 
 		create_function('$matches','return defined($matches[1])?constant($matches[1]):"";'), $res);
+	// remplacement des liens sur un outil
+	$res = preg_replace_callback(',\[\.->([a-zA-Z_][a-zA-Z0-9_-]*)\],', 'description_outil_liens_callback', $res);
 
-	$modif=$modif?'<div class="cs_modif_ok">&gt;&nbsp;'._T('couteauprive:vars_modifiees').'&nbsp;&lt;</div>':'';
-	return cs_ajax_action_greffe("description_outil-$index", $res, $modif);
+	return cs_ajax_outil_greffe("description_outil-$index", $res);
 }
 ?>
