@@ -21,7 +21,7 @@
 	</pipeline>
 	
 	<pipeline>
-		<nom>affichage_entete_final</nom>
+		<nom>affichage_entetes_final</nom>
 		<inclure>stats_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
