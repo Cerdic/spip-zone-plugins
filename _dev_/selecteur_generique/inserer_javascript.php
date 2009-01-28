@@ -6,10 +6,10 @@ function SelecteurGenerique_inserer_auteur() {
 	$id_article = _request('id_article');
 	$statut = _request('statut');
 	if (_request('exec') == 'auteurs'){
-		$input = 'input[@name=recherche][autocomplete!=off]';
+		$input = 'input[name=recherche][autocomplete!=off]';
 	}
 	else{
-		$input = 'input[@name=cherche_auteur][autocomplete!=off]';
+		$input = 'input[name=cherche_auteur][autocomplete!=off]';
 	}
 	return <<<EOS
 
@@ -40,7 +40,7 @@ function SelecteurGenerique_inserer_auteur() {
 					jQuery("<input type='hidden' name='nouv_auteur' value='"+data[2]+"' />"
 					)
 				)
-				.find("input[@type=submit]")
+				.find("input[type=submit]")
 					.click()
 				.end();
 			}
@@ -73,10 +73,10 @@ function SelecteurGenerique_inserer_mot() {
 (function($) {
 	var appliquer_selecteur_cherche_mot = function() {
 		// chercher l'input de saisie
-		var me = jQuery('input[@name=cherche_mot][autocomplete!=off]');
+		var me = jQuery('input[name=cherche_mot][autocomplete!=off]');
 		me.each(function(){
 			var inp = this;
-			var id_groupe = jQuery(this).parents('form').find('input[@name=select_groupe]').val();
+			var id_groupe = jQuery(this).parents('form').find('input[name=select_groupe]').val();
 			jQuery(inp).autocomplete('$ac',{
 				extraParams:{quoi:'mot',$type:'$id',id_groupe:''+id_groupe+''},
 				delay: 300,
@@ -93,7 +93,7 @@ function SelecteurGenerique_inserer_mot() {
 					.parents('form')
 					.append(
 						jQuery("<input type='hidden' name='nouv_mot' value='"+data[2]+"' />")
-					).find('input[@type=submit]')
+					).find('input[type=submit]')
 					.click()
 					.end();
 				}
@@ -124,10 +124,10 @@ function SelecteurGenerique_inserer_rubrique() {
 	var appliquer_selecteur_cherche_rubrique = function() {
 
 		// chercher l'input de saisie
-		var me = jQuery('input[@id=titreparent]');
+		var me = jQuery('input[id=titreparent]');
 		me.each(function(){
 			var inp = this;
-			var id_groupe = jQuery(this).parents('form').find('input[@name=select_groupe]').val();
+			var id_groupe = jQuery(this).parents('form').find('input[name=select_groupe]').val();
 			
 			jQuery(inp).focus(function(){
 				$(this).val('');
