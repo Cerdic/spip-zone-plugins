@@ -1,0 +1,89 @@
+#CACHE{0}
+
+<style>
+#menu{
+float:right;
+padding:0px 20px;	
+width:25%;
+}
+</style>
+
+<INCLURE{fond=joomla2spip-entete}>
+
+
+<pre>
+<?php
+// preg_files($dir, $pattern=-1 /* AUTO */, $maxfiles = 10000, $recurs=array() /* false */)
+$rep="documents/[(#ENV{rep}|texte_script)/]";
+$tab = preg_files($rep,-1,10000);
+$profondeur = split('/',$rep);
+$profondeur = sizeof($profondeur);
+//var_dump($tab);
+$total = sizeof($tab);
+
+foreach($tab as $file){
+$path = split('/',$file);
+
+$fichier = array_pop($path);
+$n = sizeof($path);
+
+//var_dump($path);
+//marche pas
+
+if(!is_array($fichiers))
+	$fichiers = array();
+// racine	
+if(!is_array($lerep[$path[0]]))
+	$lerep[$path[0]] = array();
+// sous rub	
+if($path[1] AND !is_array($lerep[$path[0]][$path[1]]))
+	$lerep[$path[0]][$path[1]] = array();	
+// sousousrub
+if($path[2] AND !is_array($lerep[$path[0]][$path[1]][$path[2]]))
+	$lerep[$path[0]][$path[1]][$path[2]] = array();		
+// completer eventuellement pour plus de profondeur
+
+// fichiers dans images/
+if($n==$profondeur-1)
+	if(!in_array($rep.$fichier,$fichiers))
+		$fichiers[$path[0]][] = $rep.$fichier ;
+
+
+
+}
+//var_dump($lerep);
+//var_dump($fichiers);
+echo "<a name='documents'></a><h2>$total documents</h2>";
+
+// afficher les repertoires
+echo "<div style='float:right;width:25%'>";
+foreach($lerep["documents"] as $dossier => $sousdossier){
+echo "<a href='./?page=joomla-documents&rep=$dossier#documents'>$dossier</a>";
+echo "<ul>";
+foreach($sousdossier as $k => $v)
+echo "<li><a href='./?page=joomla-documents&rep=$dossier/"."$k#documents'>$k</a></li>";
+echo "</ul>";
+}
+echo "</div>";
+
+// afficher les fichiers
+
+//var_dump($fichiers);
+
+echo "<ul>";
+foreach($fichiers as $d => $s)
+$lesimages = array("png","gif","jpg") ;
+foreach($s as $k => $v){
+$ext = substr($v,-3) ;
+include_spip("inc/filtres");
+include_spip("inc/filtres_images");
+if(in_array($ext,$lesimages)) 
+	echo "<li style='list-style-type:none'><a href='$v'>".inserer_attribut(image_reduire($v),"border","0")."</a></li>";
+else echo "<li><a href='$v'>$v</a></li>";
+
+}
+echo "</ul>";
+
+
+?>
+</pre>

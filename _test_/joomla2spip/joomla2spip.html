@@ -1,0 +1,79 @@
+[(#REM)
+Ce fichier lit la base joomla, et permettra de l'importer dans SPIP
+Il faut mettre les documents du repertoire images/ de joomla dans un repertoire documents/ à la racine du SPIP
+]
+
+#CACHE{0}
+<html>
+<head>
+#INSERT_HEAD
+</head>
+<body>
+
+<style>
+#menu{
+float:right;
+padding:0px 20px;	
+width:25%;
+}
+#contenu{
+float:left;
+padding:0px 20px;	
+width:60%;
+margin-bottom:20px;
+
+}
+#pied{
+clear:both;
+padding:20px;
+border:1px dotted black;
+}
+
+.champ{
+border:1px solid #ccc;
+padding:10px;
+}
+
+.label{
+padding:20px 10px;
+background:#ccc;	
+}
+</style>
+
+<INCLURE{fond=joomla2spip-entete}>
+
+<div id="contenu">
+[(#ENV{id_article}|oui)
+<INCLURE{fond=joomla2spip-afficher-article}{env}>
+]
+[(#ENV{id_article}|non)
+<INCLURE{fond=joomla2spip-afficher-liste-articles}{env}>
+]
+
+
+
+</div>
+
+<div id="menu">
+<B_secteurs>
+<h2>Secteurs</h2>
+<BOUCLE_secteurs(jos_sections){pagination 50}>
+#NAME<br />
+<B_sous_rubriques>
+<ul>
+<BOUCLE_sous_rubriques(jos_categories){section=#ID}>
+<li><a href="./?page=joomla2spip&catid=#ID">#NAME</a></li>
+</BOUCLE_sous_rubriques>
+</ul>
+<B_sous_rubriques>
+
+</BOUCLE_secteurs>
+<p>#PAGINATION</p>
+</B_secteurs>
+</div>
+
+<div id="pied">
+Joomla2spip est un logiciel de BoOz
+</div>
+</body>
+</html>

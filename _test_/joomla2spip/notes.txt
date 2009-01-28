@@ -1,0 +1,28 @@
+
+
+DESCRIPTION DU PLUGIN
+
+- Permet de lire et afficher une bdd joomla avec SPIP
+- Gère la convertion Joomla -> SPIP via un squelette
+
+
+UTILISATION
+
+1) installer un SPIP sur la même base de donnée que le joomla
+
+2) installer le plugin et se rendre sur la page ./spip.php?page=joomla2spip
+
+
+REMARQUES
+
+Joomla propose des champs inexistants dans la table article de spip, ils sont disponibles via des plugins SPIP on les ignore ici
+- ordre
+- date de dépublication
+- id_parent (pour faire des articles liés)
+
+
+Joomla propose des features non gérées par SPIP ; ignoré.
+- menus
+
+
+BoOz@rezo.net

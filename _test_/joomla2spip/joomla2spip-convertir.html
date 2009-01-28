@@ -1,0 +1,75 @@
+#CACHE{0}
+
+<div id="menu">
+<B_secteurs>
+<h2>Secteurs</h2>
+<BOUCLE_secteurs(jos_sections)>
+<div>-> #NAME</div>
+<div>-->[(#DESCRIPTION*|joomla2spip_nettoyer_texte|pas_d_inter|propre)]</div>
+[(#SET{desc,[(#DESCRIPTION*|joomla2spip_nettoyer_texte|pas_d_inter)]})]
+[(#SET{ma_rubrique,#ARRAY{descriptif,#GET{desc},titre,#NAME}})]
+[(#SET{id_secteur,[(#GET{ma_rubrique}|rubrique_import)]})]
+<B_sous_rubriques>
+<dl>
+<BOUCLE_sous_rubriques(jos_categories){section=#ID}>
+<dt>#NAME</dt>
+<dd>[(#DESCRIPTION*|joomla2spip_nettoyer_texte|pas_d_inter|propre)]</dd>
+[(#SET{desc,[(#DESCRIPTION*|joomla2spip_nettoyer_texte|pas_d_inter)]})]
+[(#SET{ma_rubrique,#ARRAY{descriptif,#GET{desc},titre,#NAME}})]
+[(#GET{ma_rubrique}|rubrique_import{#GET{id_secteur},#GET{id_secteur}})]
+</BOUCLE_sous_rubriques>
+</dl>
+<B_sous_rubriques>
+
+</BOUCLE_secteurs>
+</div>
+
+<B_articles>
+<h2>#TOTAL_BOUCLE articles</h2>
+
+<BOUCLE_articles(jos_content){!par publish_up}>
+
+<BOUCLE_rubrique(jos_categories){id=#CATID}>
+<div>rubrique : #NAME</div>
+#SET{rubrique,#NAME}
+</BOUCLE_rubrique>
+<div>date : #PUBLISH_UP</div>
+<div>maj : #MODIFIED</div>
+[(#REM) -2 = publie + en une]
+<div>statut : [(#STATE|=={0}|oui)prop][(#STATE|=={-2}|oui)publie][(#STATE|=={1}|oui)publie]</div>
+[(#STATE|=={0}|oui)#SET{statut,prop}][(#STATE|=={-2}|oui)#SET{statut,publie}][(#STATE|=={1}|oui)#SET{statut,publie}]
+<div>Mots-cles : #METAKEY</div>
+<div>visites : #HITS</div>
+<div class="label">
+Titre
+</div>
+<div id="titre" class="champ">
+<h2>#TITLE*</h2>
+</div>
+
+<div class="label">
+Descriptif
+</div>
+<div id="descriptif" class="champ">
+[(#INTROTEXT|joomla2spip_nettoyer_texte|propre)]
+[(#SET{descriptif,[(#INTROTEXT|joomla2spip_nettoyer_texte)]})]
+</div>
+
+<div class="label traite">
+Texte traité
+</div>
+[(#SET{titre_original,[(#FULLTEXT*|joomla2spip_nettoyer_texte{titre})]})]
+[(#SET{chapo,[(#FULLTEXT*|joomla2spip_nettoyer_texte{chapo})]})]
+[(#SET{texte,[(#FULLTEXT*|joomla2spip_nettoyer_texte)]})]
+
+<div id="texte" class="champ">
+[<div> titre original : (#FULLTEXT*|joomla2spip_nettoyer_texte{titre}|propre)</div>]
+[<div> chapo : (#FULLTEXT*|joomla2spip_nettoyer_texte{chapo}|propre)</div>]
+[(#FULLTEXT*|joomla2spip_nettoyer_texte|propre)]
+</div>
+
+<hr />
+[(#REM) importer l'article]
+[(#SET{mon_article,#ARRAY{rubrique,#GET{rubrique},date,#PUBLISH_UP,maj,#MODIFIED,statut,#GET{statut},visites,#HITS,titre,#TITLE*,descriptif,#GET{descriptif},ps,#GET{titre_original},chapo,#GET{chapo},texte,#GET{texte}}})]
+[(#GET{mon_article}|article_import)]
+</BOUCLE_articles>

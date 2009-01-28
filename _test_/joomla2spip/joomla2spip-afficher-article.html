@@ -1,0 +1,68 @@
+#CACHE{0}
+<script>
+$(function(){
+$("#texte_brut").hide();
+$("#flip_brut").click(function(e){
+e.preventDefault();
+$("#texte_brut, .brut").show();
+$("#texte, .traite").hide();
+});
+$("#flip_traite").click(function(e){
+e.preventDefault();
+$("#texte, .traite").show();
+$("#texte_brut, .brut").hide();
+});
+
+});
+</script>
+<style>
+.flip{
+margin:10px;
+}
+</style>
+
+<B_article>
+<BOUCLE_article(jos_content){id=#ENV{id_article}}>
+<div class="label">
+Titre
+</div>
+<div id="titre" class="champ">
+<h2>#TITLE*</h2>
+</div>
+
+<div class="label">
+Descriptif
+</div>
+<div id="descriptif" class="champ">
+[(#INTROTEXT|joomla2spip_nettoyer_texte|propre)]
+</div>
+
+<a href="#flip_brut" id="flip_brut" class="flip">Texte brut bdd</a>
+<a href="#flip_brut" id="flip_traite" class="flip">Texte traité</a>
+
+<div class="label traite">
+Texte traité
+</div>
+[<div>
+titre original</div>
+<div id="titre_original" class="champ">
+(#FULLTEXT*|joomla2spip_nettoyer_texte{titre}|propre)
+</div>]
+[<div>
+chapo
+</div>
+<div id="chapo" class="champ">
+(#FULLTEXT*|joomla2spip_nettoyer_texte{chapo}|propre)
+</div>]
+
+<div id="texte" class="champ">
+[(#FULLTEXT*|joomla2spip_nettoyer_texte|propre)]
+</div>
+
+<div class="label brut">
+Texte brut bdd
+</div>
+<div id="texte_brut" class="champ">
+[(#FULLTEXT)]
+</div>
+</BOUCLE_article>

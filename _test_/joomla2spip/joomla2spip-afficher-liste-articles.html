@@ -1,0 +1,9 @@
+<B_articles>
+<h2>#GRAND_TOTAL articles</h2>
+<ul>
+<BOUCLE_articles(jos_content){catid ?}{!par publish_up}{pagination 50}>
+<li><a href="./?page=joomla2spip&id_article=#ID">#TITLE</a></li>
+</BOUCLE_articles>
+</ul>
+<p>#PAGINATION</p>
+</B_articles>

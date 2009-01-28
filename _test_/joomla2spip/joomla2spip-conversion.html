@@ -1,0 +1,66 @@
+[(#REM)
+Ce fichier lit la base joomla, et permettra de l'importer dans SPIP
+Il faut mettre les documents du repertoire images/ de joomla dans un repertoire documents/ à la racine du SPIP
+]
+
+#CACHE{0}
+
+<style>
+#menu{
+float:right;
+padding:0px 20px;	
+width:25%;
+}
+#contenu{
+float:left;
+padding:0px 20px;	
+width:60%;
+margin-bottom:20px;
+
+}
+#pied{
+clear:both;
+padding:20px;
+border:1px dotted black;
+}
+</style>
+
+<INCLURE{fond=joomla2spip-entete}>
+
+
+<div id="contenu">
+
+<B_articles>
+<h2>#TOTAL_BOUCLE articles</h2>
+<BOUCLE_articles(jos_content){catid ?}{!par publish_up}>
+</BOUCLE_articles>
+
+<B_secteurs>
+<h2>Secteurs</h2>
+<BOUCLE_secteurs(jos_sections){pagination 50}>
+#NAME<br />
+<B_sous_rubriques>
+<ul>
+<BOUCLE_sous_rubriques(jos_categories){section=#ID}>
+<li><a href="./?page=joomla2spip&catid=#ID">#NAME</a></li>
+</BOUCLE_sous_rubriques>
+</ul>
+<B_sous_rubriques>
+</BOUCLE_secteurs>
+
+
+
+</div>
+
+<div id="menu">
+
+<div id="convertir" style="font-size:16px;margin:20px">
+Activer la convertion (attention action irreversible sur la bdd) <br />
+<a href="#URL_PAGE{joomla2spip-convertir}">-> Transferer vers SPIP</a>
+</div>
+
+</div>
+
+<div id="pied">
+Joomla2spip est un logiciel de BoOz
+</div>
