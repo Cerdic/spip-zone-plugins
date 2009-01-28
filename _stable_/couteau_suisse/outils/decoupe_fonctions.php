@@ -187,20 +187,35 @@ function decouper_en_pages($texte){ return cs_decoupe($texte); }
 
 // Balises pour des onglets en squelette
 function balise_ONGLETS_DEBUT($p) {
-	$arg = interprete_argument_balise(1,$p);
-	eval("\$arg=_onglets_DEBUT._onglets_CONTENU.$arg.'</a></h2>';");
-	$p->code = "'$arg'";
+	$arg = sinon(interprete_argument_balise(1,$p),'??');
+	$p->code = "calcul_balise_titre($arg,1)";
 	return $p;
 }
 function balise_ONGLETS_TITRE($p) {
-	$arg = interprete_argument_balise(1,$p);
-	eval("\$arg='</div>'._onglets_CONTENU.$arg.'</a></h2>';");
-	$p->code = "'$arg'";
+	$arg = sinon(interprete_argument_balise(1,$p),'??');
+	$p->code = "calcul_balise_onglet($arg,2)";
 	return $p;
 }
 function balise_ONGLETS_FIN($p) {
-	$p->code = "'</div></div>'";
+	$p->code = "calcul_balise_onglet('',3)";
 	return $p;
+}
+function calcul_balise_onglet($arg, $type) {
+	/* dans un onglet principal (non imbrique), on peut omettre #ONGLETS_DEBUT : pratique a l'interieur d'une boucle
+		Sinon il faut jouer avec #COMPTEUR_BOUCLE :
+		<BOUCLE_sites(SITES)>
+			[(#COMPTEUR_BOUCLE|=={1}|?{' '})#ONGLETS_DEBUT{#NOM_SITE}]
+			[(#COMPTEUR_BOUCLE|>{1}|?{' '})#ONGLETS_TITRE{#NOM_SITE}]
+			(...)
+		</BOUCLE_sites>
+	*/
+	global  $onglets_stade;
+	if($type==2 && !isset($onglets_stade)) $type = 1;
+	switch($type) {
+		case 1:$onglets_stade=1; return _onglets_DEBUT._onglets_CONTENU.$arg.'</a></h2>';
+		case 2:$onglets_stade=1; return '</div>'._onglets_CONTENU.$arg.'</a></h2>';
+		case 3:unset($onglets_stade); return '</div></div>';
+	}
 }
 
 // decode le parametre artpage=page-total
