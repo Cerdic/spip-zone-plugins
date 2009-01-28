@@ -188,7 +188,7 @@ function decouper_en_pages($texte){ return cs_decoupe($texte); }
 // Balises pour des onglets en squelette
 function balise_ONGLETS_DEBUT($p) {
 	$arg = sinon(interprete_argument_balise(1,$p),'??');
-	$p->code = "calcul_balise_titre($arg,1)";
+	$p->code = "calcul_balise_onglet($arg,1)";
 	return $p;
 }
 function balise_ONGLETS_TITRE($p) {
