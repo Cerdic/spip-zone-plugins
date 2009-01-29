@@ -12,7 +12,7 @@ calcola i parametri:
 l'asterisco serve a inserire l'html
 */
 function balise_ABCALENDRIER($p) {
-   return calculer_balise_dynamique($p,ABCALENDRIER,array('prec_mois','prec_annee','moise_annee_curr','suiv_mois','suiv_annee','abcal_table','event_table'));
+   return calculer_balise_dynamique($p,'ABCALENDRIER',array('prec_mois','prec_annee','moise_annee_curr','suiv_mois','suiv_annee','abcal_table','event_table'));
 }
 /*function balise_ABCALENDRIER_stat($args) {
 //echo "stat";
@@ -138,7 +138,7 @@ function balise_ABCALENDRIER_dyn($prec_mois,$prec_annee,$moise_annee_curr,$suiv_
                foreach($events[$datai] as $myevent){
                 $my_event_tab .= "<tr>
                     <td class=\"date\">$i-$M: </td>
-                    <td class=\"eventtitle\"><a href=\"{$myevent[link]}\" >{$myevent[title]}</a>
+                    <td class=\"eventtitle\"><a href=\"{$myevent['link']}\" >{$myevent['title']}</a>
                     </td>
                     </tr>";
                 }
