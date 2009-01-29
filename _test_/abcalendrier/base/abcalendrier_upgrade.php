@@ -9,7 +9,14 @@ function abcalendrier_install($action){
             // doit retourner true si le plugin est proprement installé et à jour, false sinon
               // Verifier que le champ id_mon_plugin est present...
              include_spip('base/abstract_sql');
-             $desc = spip_abstract_showtable("spip_breves", '', true);
+             if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) {
+               $desc = sql_showtable("spip_breves", true);
+             } else {
+                $desc = spip_abstract_showtable("spip_breves", '', true);
+             }
+
+             
+             
              return (isset($desc['field']['evento']));
             break;      
          case 'install':
