@@ -19,7 +19,16 @@ function formulaires_editer_document_charger_dist($id_document='new', $id_parent
 	$valeurs = formulaires_editer_objet_charger('document',$id_document,$id_parent,$lier_trad,$retour,$config_fonc,$row,$hidden);
 	
 	// relier les parents
-	// todo
+	$valeurs['id_parents'] = array();
+	$valeurs['_hidden'] = "";
+	$parents = sql_allfetsel('objet,id_objet','spip_documents_liens','id_document='.intval($id_document));
+	foreach($parents as $p){
+		if (in_array($p['objet'],array('article','rubrique')))
+			$valeurs['id_parents'][] = $p['objet'].'|'.$p['id_objet'];
+		else 
+			$valeurs['_hidden'] .= "<input type='hidden' name='id_parents[]' value='".$p['objet'].'|'.$p['id_objet']."' />";
+	}
+
 	$valeurs['saisie_date'] = affdate($valeurs['date'],'d/m/Y');
 	$valeurs['saisie_heure'] = affdate($valeurs['date'],'H:i');
 	// en fonction du format

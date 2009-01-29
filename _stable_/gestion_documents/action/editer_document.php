@@ -105,7 +105,7 @@ function revisions_documents ($id_document, $c=false) {
 
 	// Changer le statut du document ?
 	// le statut n'est jamais fixe manuellement mais decoule de celui des objets lies
-	if(instituer_document($id_document)) {
+	if(instituer_document($id_document,array('id_parents'=>_request('id_parents')))) {
 
 		//
 		// Post-modifications
@@ -123,11 +123,17 @@ function revisions_documents ($id_document, $c=false) {
  *
  * @param int $id_document
  */
-function instituer_document($id_document,$statut=null, $date_publication = null){
+function instituer_document($id_document,$champs=array()){
+	
+	$statut=isset($champs['statut'])?$champs['statut']:null;
+	$date_publication = isset($champs['date_publication'])?$champs['date_publication']:null;
+	if (isset($champs['id_parents']))
+		gestdoc_revision_document_parents($id_document,$champs['id_parents']);
+	
 	$row = sql_fetsel("statut,date_publication", "spip_documents", "id_document=$id_document");
 	$statut_ancien = $row['statut'];
 	$date_publication_ancienne = $row['date_publication'];
-	if ($statut===null){
+	if (is_null($statut)){
 		$statut = 'prepa';
 	
 		$trouver_table = charger_fonction('trouver_table','base');
@@ -172,4 +178,28 @@ function instituer_document($id_document,$statut=null, $date_publication = null)
 	return false;
 }
 
+
+
+function gestdoc_revision_document_parents($id_document,$id_parents=null){
+	if (!is_array($id_parents))
+		return;
+	
+	$insertions = array();
+	$cond = array();
+	// au format objet|id_objet
+	foreach($id_parents as $p){
+		$p = explode('|',$p);
+		$insertions[] = array('id_document'=>$id_document,'objet'=>$p[0],'id_objet'=>$p[1]);
+		$cond[] = "(id_objet=".intval($p[1])." AND objet=".sql_quote($p[0]).")";
+	}
+	// suppression des parents obsoletes
+	$cond_notin = "id_document=".intval($id_document).(count($cond)?" AND NOT(".implode(") AND NOT(",$cond).")":"");
+	#$cond_in = "id_document=".intval($id_document).(count($cond)?" AND (".implode(" OR (",$cond).")":"");
+	sql_delete("spip_documents_liens", $cond_notin);
+
+	foreach($insertions as $ins){
+		if (!sql_countsel('spip_documents_liens','id_document='.intval($ins['id_document'])." AND id_objet=".intval($ins['id_objet'])." AND objet=".sql_quote($ins['objet'])))
+			sql_insertq('spip_documents_liens',$ins);
+	}
+}
 ?>
