@@ -383,14 +383,16 @@ function bible_generer_cfg($i){
 					<input type="checkbox" name="ref"  id="ref" [checked="(#ENV{ref})"]  value="oui" />
 				
 			</li>
+			
+			
 		</ul>
 	';
 	
 	foreach ($police as $i=>$polices){
 	$texte .= '<li>
-				<label for="police_'.$i.'"><:bible:police_'.$i.':></label><select><option value=""><:item_non:></option>';
+				<label for="police_'.$i.'"><:bible:police_'.$i.':></label><select name="police_'.$i.'"><option value="" [selected="(#ENV{police_'.$i.'}|=={non})"]><:item_non:></option>';
 		foreach ($polices as $j){
-			$texte .= "<option value='".$j."'>".$j."</option>";
+			$texte .= "<option value='".$j."' [selected='(#ENV{police_".$i."}|=={".$j."})']>".$j."</option>";
 		
 		
 		}
