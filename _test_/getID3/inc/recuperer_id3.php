@@ -44,10 +44,7 @@ function inc_recuperer_id3_dist($fichier,$info=null,$mime=null){
 		if(is_array($ThisFileInfo['tags']['id3v2']['track'])){
 			$id3['track'] = array_pop($ThisFileInfo['tags']['id3v2']['track']);
 		}
-		if(is_array($ThisFileInfo['tags']['id3v2']['track'])){
-			$codec_id3 = array_pop($ThisFileInfo['tags']['id3v2']['encoded_by']);	
-		}
-		$id3['codec'] = ($ThisFileInfo['audio']['encoder']) ? $ThisFileInfo['audio']['encoder'] : $codec_id3;
+		$id3['codec'] = ($ThisFileInfo['audio']['encoder']) ? $ThisFileInfo['audio']['encoder'] : $ThisFileInfo['audio']['codec'];
 		if(is_array($ThisFileInfo['tags']['id3v2']['totaltracks'])){
 			$id3['totaltracks'] = array_pop($ThisFileInfo['tags']['id3v2']['totaltracks']);
 		}
