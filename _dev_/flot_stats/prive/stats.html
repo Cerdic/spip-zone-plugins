@@ -1,5 +1,4 @@
 #CACHE{0}
-
 <style type='text/css'>
 .graphique{clear:both;}
 .graphResult{float:left;}
@@ -19,18 +18,47 @@
 	});
 })(jQuery);
 </script>
+<link rel="stylesheet" href="flot.css" type="text/css" media="projection, screen, tv" />
 <!--[if IE]><script type="text/javascript" src="#CHEMIN{javascript/excanvas.pack.js}"></script><![endif]-->
 <script type="text/javascript" src="#CHEMIN{javascript/jquery.flot.js}"></script>
 <script type="text/javascript" src="#CHEMIN{javascript/jquery.tflot.js}"></script>
+<h1>Statistiques</h1>
+<div class="espacegraph">
+	#SET{label,''}
+	#SET{visites,''}
+	<BOUCLE_visites(VISITES){par date}>
+	[(#SET{label, [(#GET{label}|concat{<th>[(#DATE|affdate{Y/m/d})]</th>})]})]
+	[(#SET{visites, [(#GET{visites}|concat{<td>#VISITES</td>})]})]
+	</BOUCLE_visites>
+	<table class="graph">
+		<tr><th><:date:></th>#GET{label}</tr>
+		<tr class="flotLine flotFill"><th><:visites:></th>#GET{visites}</tr>
+	</table>
+	</B_visites>
+	<BOUCLE_total(VISITES)>#SET{total,#GET{total}|plus{#VISITES}}</BOUCLE_total>
+	[Il y a au total <b>(#GET{total})</b> visites.]
+	<//B_total>
+	<B_stats>
 
-#SET{label,''}
-#SET{visites,''}
-<BOUCLE_visites(VISITES){par date}>
-[(#SET{label, [(#GET{label}|concat{<th>[(#DATE|affdate{Y/m/d})]</th>})]})]
-[(#SET{visites, [(#GET{visites}|concat{<td>#VISITES</td>})]})]
-</BOUCLE_visites>
-<table class="graph">
-	<tr><th><:date:></th>#GET{label}</tr>
-	<tr class="flotLine flotFill"><th><:visites:></th>#GET{visites}</tr>
-</table>
-</B_visites>
+	<div class="ajax-action" style="width: 500px;">
+		<div class="cadre cadre-liste" style="margin-top: 20px;">
+			<img src="../prive/images/statistiques-24.gif" alt="" class="cadre-icone">
+			<div id="dep" class="titrem deplie depliant" onmouseover="jQuery(this).depliant('#visites');">
+				<a href="#" onclick="return jQuery(this).depliant_clicancre('#visites');" class="titremancre">
+				</a>
+				<b>Les dernieres Visites</b>
+			</div>
+			<div>
+				<div id="visites" class="bloc_depliable blocdeplie">				
+					<BOUCLE_stats(VISITES){!par date}{" <br /> "}{0,5}>
+					[(#DATE|affdate{Y/m/d})] - <b>#VISITES</b> visites
+					</BOUCLE_stats>
+				</div>
+				<div class="nettoyeur">
+				</div>
+			</div>
+		</div>
+		</B_stats>
+	</div>
+</div>
+<div>
