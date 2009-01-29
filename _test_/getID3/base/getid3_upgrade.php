@@ -1,6 +1,6 @@
 <?php
 	
-	$GLOBALS['getid3_base_version'] = 0.1;
+	$GLOBALS['getid3_base_version'] = 0.2;
 	function getid3_verifier_base(){
 		$version_base = $GLOBALS['getid3_base_version'];
 		$current_version = 0.0;
@@ -13,7 +13,13 @@
 				sql_alter("TABLE spip_documents ADD `audiosamplerate` INTEGER AFTER `bitrate_mode`");
 				sql_alter("TABLE spip_documents ADD `encodeur` text AFTER `audiosamplerate`");
 				ecrire_meta('getid3_base_version',$current_version=0.1);
-				echo 'Mise &agrave; jour de la base de getid3 en 0.1';
+				echo _T('getid3:mise_a_jour_base',array('version'=>'0.1'));
+			}
+			if ($current_version<0.2){
+				sql_alter("TABLE spip_documents ADD `bits` INTEGER AFTER `encodeur`");
+				sql_alter("TABLE spip_documents ADD `canaux` text AFTER `bits`");
+				ecrire_meta('getid3_base_version',$current_version=0.2);
+				echo _T('getid3:mise_a_jour_base',array('version'=>'0.2'));
 			}
 			ecrire_metas();
 		}

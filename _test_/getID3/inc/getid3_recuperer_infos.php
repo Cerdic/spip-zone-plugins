@@ -35,7 +35,19 @@ function inc_getid3_recuperer_infos($id_document){
 		}
 	}
 	
-	sql_updateq('spip_documents',array('titre'=>$document['titre'],'descriptif'=>$document['descriptif'],'duree'=> $id3['duree'], 'bitrate' => $id3['bitrate'], 'bitrate_mode'=>$id3['bitrate_mode'],'audiosamplerate'=>$id3['audiosamplerate'], 'encodeur'=>$id3['encoded_by']),'id_document='.sql_quote($id_document));
+	sql_updateq('spip_documents',
+		array(
+			'titre'=>$document['titre'],
+			'descriptif'=>$document['descriptif'],
+			'duree'=> $id3['duree'],
+			'bitrate' => $id3['bitrate'],
+			'bitrate_mode'=>$id3['bitrate_mode'],
+			'audiosamplerate'=>$id3['audiosamplerate'],
+			'encodeur'=>$id3['codec'],
+			'bits'=>$id3['bits'],
+			'canaux' => $id3['channels']
+		),
+		'id_document='.sql_quote($id_document));
 	
 	return;
 }

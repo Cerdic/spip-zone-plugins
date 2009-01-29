@@ -16,6 +16,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'son_bitrate_vbr' => 'Bitrate variable',
 	'son_audiosamplerate' => 'Audio Samplerate :',
 	'son_encodeur' => 'Encodeur :',
+	'son_bits' => 'Bits :',
+	'canaux' => 'Canaux :',
 	'verifier_formulaire' => 'V&eacute;rifiez le remplissage du formulaire.',
 	
 	// Les tags
@@ -57,6 +59,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'url_payment' => 'Url de paiement',
 	'url_station' => 'Url de station (?)',
 	'url_publisher' => 'Url du site de publication',
+
+	'mise_a_jour_base' => 'Mise &agrave; jour de la base de getid3 en @version@',
 	
 );
 
