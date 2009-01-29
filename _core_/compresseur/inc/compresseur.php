@@ -191,5 +191,5 @@ function filtre_cache_static($scripts,$type='js'){
 	}
 
 	// Le commentaire detaille n'apparait qu'au recalcul, pour debug
-	return array($nom, isset($comms) AND $comms ? "<!-- $comms -->\n" : '');
+	return array($nom, (isset($comms) AND $comms) ? "<!-- $comms -->\n" : '');
 }
