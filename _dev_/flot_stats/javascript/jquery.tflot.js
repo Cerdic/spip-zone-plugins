@@ -222,6 +222,7 @@
 		// 
 		// mettre les options dans les series
 		//
+		color=0;
 		$.each(flot, function(i, serie) {
 			serie = $.extend(true, {
 					bars: {
@@ -233,67 +234,13 @@
 					lines: {
 						show:false,
 						fill:false,
-					}
+					},
+					color: color++,
 				},	serie);
 			flot[i] = serie;
 		});
 		
-		
-/*		
-		$(this).find('tr').each(function(){
-			cpt = 1;
-			data = [];
-			
-			// si th, le prendre en label
-			// si plusieurs th, prendre comme valeurs d'axes
-			th = $(this).find('th');
-			if (th.length > 1) {
-				n = 0;
-				th.each(function(){
-					if (n == 0) {
-						label = $(this).text();
-					} else {
-						options.ticks.push([n, $(this).text()]);
-					}
-					n++;
-				});
-			} else {
-				label = th.text();
-			}
 
-			// recuperer les valeurs
-			$(this).find('td').each(function(){
-				val = $(this).text();
-				val = parseFloat(val);
-				if (val || (val == 0)) {
-					data.push( [cpt, val] );
-				}
-				cpt++;
-			});
-
-			// seulement s'il y a des resultats
-			if (data.length) {
-				series = {
-					label:label,
-					data:data,
-					bars: {
-						barWidth: 0.9,
-						align: "center",
-						show:true,
-						fill:true,
-					},
-					lines: {
-						show:false,
-						fill:false,
-					},
-					color: color++,
-				}
-
-				flot.push(series);
-			}
-			
-		});
-*/
 		opt = {
 			xaxis: {}
 		}
