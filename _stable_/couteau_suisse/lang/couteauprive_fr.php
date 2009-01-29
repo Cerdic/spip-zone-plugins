@@ -518,7 +518,7 @@ Ce sommaire peut &ecirc;tre coupl&eacute; avec : &laquo;&nbsp;[.->decoupe]&nbsp;
 Listez ici les s&eacute;quences interdites en les s&eacute;parant par des espaces. [[%spam_mots%]]
 &bull; Pour une expression avec des espaces, placez-la entre guillemets.
 _ &bull; Pour sp&eacute;cifier un mot entier, mettez-le entre parenth&egrave;ses. Exemple~:~{(asses)}.
-_ &bull; Pour une expression r&eacute;guli&egrave;re, v&eacute;rifiez bien la syntaxe et placez-la entre slashes et entre guillemets. Exemple~:~{"/@test\\.(com|fr)/"}.',
+_ &bull; Pour une expression r&eacute;guli&egrave;re, v&eacute;rifiez bien la syntaxe et placez-la entre slashes et entre guillemets. Exemple~:~{<html>"/@test\\.(com|fr)/"</html>}.',
 	'spam:nom' => 'Lutte contre le SPAM',
 	'spam_test_ko' => 'Ce message serait bloqu&eacute; par le filtre anti-SPAM !',
 	'spam_test_ok' => 'Ce message serait accept&eacute; par le filtre anti-SPAM.',

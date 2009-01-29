@@ -7,6 +7,7 @@ global $spip_lang_left,$spip_lang_right;
 		// pour javascript...
 		include_spip('inc/filtres_images');
 		if(defined('_SPIP19300')) {
+			include_spip('inc/filtres_images_mini'); // pour SPIP 2.1
 			$r = image_reduire("<img src='$fid' alt='' style='margin:0;' />", 46, 46);
 			$r = "<span style='height:48px; margin:0;'>$r</span>";
 			$q = 'span.icon_fond:last';
