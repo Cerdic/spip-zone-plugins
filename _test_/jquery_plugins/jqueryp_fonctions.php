@@ -128,7 +128,7 @@ function jqueryp_add_plugins($plugins, $flux=array()){
 	$lpa = jqueryp_liste_fichiers_dispo();
 	foreach ($plugins as $nom){
 		if (isset($flux[$nom]) AND $flux[$nom]) continue; // meme nom, deja present, on passe
-		if ($c = chemin($lpa[$nom])) {
+		if ($c = find_in_path($lpa[$nom])) {
 			if (!in_array($c, $flux)) $flux[$nom] = $c;
 		} else {
 			spip_log("Adresse introuvable ($lpa[$nom]) sur $nom",'jquery_plugins');
