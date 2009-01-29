@@ -109,7 +109,7 @@ function array_query_filter($cle,$valeur,$table,$where){
 	return array_where_teste($cle,$valeur,$table,$wherec[$hash]);
 }
 
-function &array_results($hash,$store='get'){
+function array_results($hash,$store='get'){
 	static $array_results = array();
 	if($store=='get'){
 		if (isset($array_results[$hash]['res'])){

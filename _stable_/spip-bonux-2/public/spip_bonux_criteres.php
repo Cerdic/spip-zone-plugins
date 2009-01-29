@@ -45,10 +45,11 @@ function critere_compteur($idb, &$boucles, $crit){
 	$params = $crit->param;
 	$table = reset($params);
 	$table = $table[0]->texte;
+	$op = false;
 	if(preg_match(',^(\w+)([<>=])([0-9]+)$,',$table,$r)){
 		$table=$r[1];
-		$op=$r[2];
-		$op_val=$r[3];
+		if (count($r)>=3) $op=$r[2];
+		if (count($r)>=4) $op_val=$r[3];
 	}
 	$type = objet_type($table);
 	$type_id = id_table_objet($type);

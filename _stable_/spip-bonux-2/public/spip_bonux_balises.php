@@ -14,7 +14,8 @@
 function balise_URL_ACTION_AUTEUR($p) {
 	$p->descr['session'] = true;
 
-	if ($p->boucles[$p->id_boucle]->sql_serveur
+	if (isset($p->boucles[$p->id_boucle])
+	AND $p->boucles[$p->id_boucle]->sql_serveur
 	AND $p->boucles[$p->id_boucle]->sql_serveur!='pour'
 	AND $p->boucles[$p->id_boucle]->sql_serveur!='condition') {
 		$p->code = 'generer_url_public("404")';
@@ -39,7 +40,8 @@ function balise_URL_ACTION_AUTEUR($p) {
 // http://doc.spip.org/@balise_URL_ECRIRE_dist
 function balise_URL_ECRIRE($p) {
 
-	if ($p->boucles[$p->id_boucle]->sql_serveur
+	if (isset($p->boucles[$p->id_boucle])
+	AND $p->boucles[$p->id_boucle]->sql_serveur
 	AND $p->boucles[$p->id_boucle]->sql_serveur!='pour'
 	AND $p->boucles[$p->id_boucle]->sql_serveur!='condition') {
 		$p->code = 'generer_url_public("404")';
