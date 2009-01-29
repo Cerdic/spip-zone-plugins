@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Récupère le contenu des tags id3 et des données audio d'un fichier
+ *
+ * @param string $fichier
+ * @param string $info
+ * @param string $mime
+ * @return array Le contenu complet des tags id3 et des données audio
+ */
 function inc_recuperer_id3_dist($fichier,$info=null,$mime=null){
 	include_spip('getid3/getid3');
 	$getID3 = new getID3;	
@@ -26,16 +34,23 @@ function inc_recuperer_id3_dist($fichier,$info=null,$mime=null){
 		}
 		if(isset($ThisFileInfo['comments_html'])){
 			foreach($ThisFileInfo['comments_html'] as $cle=>$val){
-				$id3[$cle] = $val['0'];
+				$id3[$cle] = array_pop($val);
 			}
 		}
 		$id3['format'] = $ThisFileInfo['audio']['dataformat'];
 		$id3['lossless'] = $ThisFileInfo['audio']['lossless'];
-		$id3['sample_rate'] = $ThisFileInfo['audio']['sample_rate'] ;
+		$id3['audiosamplerate'] = $ThisFileInfo['audio']['sample_rate'] ;
 		$id3['bits'] = $ThisFileInfo['audio']['bits_per_sample'];
-		$id3['track'] = $ThisFileInfo['tags']['id3v2']['track']['0'] ;
-		$id3['codec'] = ($ThisFileInfo['audio']['encoder']) ? $ThisFileInfo['audio']['encoder'] : $ThisFileInfo['tags']['id3v2']['encoded_by']['0'] ;
-		$id3['totaltracks'] = $ThisFileInfo['tags']['id3v2']['totaltracks']['0'] ;
+		if(is_array($ThisFileInfo['tags']['id3v2']['track'])){
+			$id3['track'] = array_pop($ThisFileInfo['tags']['id3v2']['track']);
+		}
+		if(is_array($ThisFileInfo['tags']['id3v2']['track'])){
+			$codec_id3 = array_pop($ThisFileInfo['tags']['id3v2']['encoded_by']);	
+		}
+		$id3['codec'] = ($ThisFileInfo['audio']['encoder']) ? $ThisFileInfo['audio']['encoder'] : $codec_id3;
+		if(is_array($ThisFileInfo['tags']['id3v2']['totaltracks'])){
+			$id3['totaltracks'] = array_pop($ThisFileInfo['tags']['id3v2']['totaltracks']);
+		}
 		$id3['bitrate'] = $ThisFileInfo['audio']['bitrate'];
 		$id3['bitrate_mode'] = $ThisFileInfo['audio']['bitrate_mode'];
 		$id3['duree_secondes'] = $ThisFileInfo['playtime_seconds'];
