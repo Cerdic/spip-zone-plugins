@@ -15,6 +15,10 @@
 </BOUCLE_types>
 </ul>
 </B_types>
+[(#ENV{id_document}|oui)
+<a class='annule_filtre' href='[(#GET{self}|parametre_url{id_document,''})]' title="<:gestdoc:tout_voir|attribut_html:>">[(#CHEMIN{images/annuler-recherche.png}|balise_img|inserer_attribut{alt,<:gestdoc:tout_voir:>})]</a>
+]
+
 <ul class='choix statut'>
 [<li>(#GET{self}|parametre_url{statut,''}|aoustrong{<:gestdoc:documents_tous:>,#ENV{statut,.*}|=={.*},ajax})</li>]
 [<li>(#GET{self}|parametre_url{statut,publie}|aoustrong{<:gestdoc:documents_publies:>,#ENV{statut}|=={publie},ajax})</li>]
@@ -34,16 +38,17 @@
 <div class="galerie[ media-(#ENV{media,''})]">
 	<B_galerie>
 	<h2>[(#GRAND_TOTAL|gestdoc_affiche_un_ou_plusieurs{#VAL{gestdoc:un_}|concat{#ENV{media,document}},#VAL{gestdoc:des_}|concat{#ENV{media,document},s}})]</h2>
-	<div class="pagination"><div class='tris'>
-	[ (#SELF|parametre_url{sens,-1}|aoustrong{#CHEMIN{img_pack/croissant-16.png}|tag_img{<:gestdoc:par_tri_croissant:>},#ENV{sens,1}|<{0},ajax})]
-	[<span class='invisible'>|</span> (#SELF|parametre_url{sens,1}|aoustrong{#CHEMIN{img_pack/decroissant-16.png}|tag_img{<:gestdoc:par_tri_decroissant:>},#ENV{sens,1}|>{0},ajax})]
-	[| (#SELF|parametre_url{tri,id_document}|aoustrong{<:gestdoc:par_id:>,#ENV{tri,id_document}|=={id_document},ajax})]
-	[| (#SELF|parametre_url{tri,date}|aoustrong{<:gestdoc:par_date:>,#ENV{tri,id_document}|=={date},ajax})]
-	[| (#SELF|parametre_url{tri,taille}|aoustrong{<:gestdoc:par_taille:>,#ENV{tri,id_document}|=={taille},ajax})]
-	[| (#SELF|parametre_url{tri,largeur}|aoustrong{<:gestdoc:par_largeur:>,#ENV{tri,id_document}|=={largeur},ajax})]
-	[| (#SELF|parametre_url{tri,hauteur}|aoustrong{<:gestdoc:par_hauteur:>,#ENV{tri,id_document}|=={hauteur},ajax})]
-	[| (#SELF|parametre_url{tri,'titre'}|aoustrong{<:gestdoc:par_titre:>,#ENV{tri,id_document}|=={'titre'},ajax})]</div>
-	[| (#PAGINATION{page})]</div>
+	<div class='pagination tri'>
+		[(#TRI{'<',#CHEMIN{img_pack/tri_asc-16.png}|tag_img{<:gestdoc:par_tri_croissant:>}}) |]
+		[(#TRI{'>',#CHEMIN{img_pack/tri_desc-16.png}|tag_img{<:gestdoc:par_tri_decroissant:>}}) |]
+		[(#TRI{id_document,<:gestdoc:par_id:>}) |]
+		[(#TRI{date,<:gestdoc:par_date:>}) |]
+		[(#TRI{taille,<:gestdoc:par_taille:>}) |]
+		[(#TRI{largeur,<:gestdoc:par_largeur:>}) |]
+		[(#TRI{hauteur,<:gestdoc:par_hauteur:>}) |]
+		[(#TRI{titre,<:gestdoc:par_titre:>}) |]
+	</div>
+	[<div class="pagination">(#PAGINATION{page})</div>]
 	<table>
 	<thead>
 		<th></th>
@@ -54,7 +59,7 @@
 		<th><:gestdoc:descriptif:></th>
 		<th></th>
 	</thead>
-	<BOUCLE_galerie(DOCUMENTS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?} {par #ENV{tri,id_document}}{inverse #ENV{sens,1}|>{0}}{media?}{extension?}{distant?}{brise?}{statut==#ENV{statut,.*}}{pagination 10}>
+	<BOUCLE_galerie(DOCUMENTS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?} {tri id_document,inverse}{media?}{extension?}{distant?}{brise?}{statut==#ENV{statut,.*}}{pagination 10}>
 	<tr class="[(#ENV{media}|non)[ media-(#MEDIA)]]">
 	#SET{missing,''}
 		[(#EXTENSION|in_any{#ARRAY{0,gif,1,png,2,jpg}}|oui)
