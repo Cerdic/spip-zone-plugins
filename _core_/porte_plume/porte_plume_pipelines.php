@@ -7,10 +7,10 @@
 
 function porte_plume_insert_head($flux){
 	
-	$js = chemin('javascript/jquery.markitup_pour_spip.js');
-	$js_previsu = chemin('javascript/jquery.previsu_spip.js');
+	$js = find_in_path('javascript/jquery.markitup_pour_spip.js');
+	$js_previsu = find_in_path('javascript/jquery.previsu_spip.js');
 	$js_settings = generer_url_public('porte_plume.js');
-	$css = chemin('css/barre_outils.css');
+	$css = find_in_path('css/barre_outils.css');
 	$css_icones = generer_url_public('barre_outils_icones.css');
 
 	$flux .= "<link rel='stylesheet' type='text/css' media='all' href='$css' />\n"

@@ -496,8 +496,9 @@ function barre_outils_css_icones(){
 	
 	// passage en css
 	foreach ($classe2icone as $n=>$i) {
-		$css .= "\n.markItUp .$n a {\n\tbackground-image:url(".url_absolue_css(chemin("icones_barre/$i")).");\n}";
+		$css .= "\n.markItUp .$n a {\n\tbackground-image:url(".find_in_path("icones_barre/$i").");\n}";
 	}
+	$css = urls_absolues_css($css,$_SERVER['PHP_SELF']);
 	return $css;
 }
 
