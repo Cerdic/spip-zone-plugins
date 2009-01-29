@@ -40,7 +40,7 @@ jQuery.fn.stopAnimeajax = function(end) {
 	return this; // don't break the chain
 }
 
-jQuery.fn.item_pick = function(id_item,name,title){
+jQuery.fn.item_pick = function(id_item,name,title,type){
 	var picker = this.parents('.item_picker');
 	var picked = picker.siblings('ul.item_picked');
 	if (!picked.length) {
@@ -58,7 +58,7 @@ jQuery.fn.item_pick = function(id_item,name,title){
 		// simulons de la latence pour l'oeil de l'utilisateur
 		setTimeout(function(){
 			jQuery('li:last',picked).removeClass('last');
-			picked.append('<li class="last on">'
+			picked.append('<li class="last on '+type+'">'
 			+'<input type="hidden" name="'+name+'[]" value="'+id_item+'"/>'
 			+ title
 			+(select?"":" <a href='#' onclick='jQuery(this).item_unpick();return false;'>"
