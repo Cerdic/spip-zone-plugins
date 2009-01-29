@@ -494,11 +494,18 @@ function barre_outils_css_icones(){
 	// passer le tout dans un pipeline pour ceux qui ajoute de simples icones a des barres existantes
 	$classe2icone = pipeline('porte_plume_lien_classe_vers_icone',$classe2icone);
 	
-	// passage en css
-	foreach ($classe2icone as $n=>$i) {
-		$css .= "\n.markItUp .$n a {\n\tbackground-image:url(".find_in_path("icones_barre/$i").");\n}";
+	if (function_exists('url_absolue_css')) {
+		// passage en css ( pour SPIP version =< 2.0)
+		foreach ($classe2icone as $n=>$i) {
+			$css .= "\n.markItUp .$n a {\n\tbackground-image:url(".url_absolue_css(find_in_path("icones_barre/$i")).");\n}";
+		}
+	} else {
+		// passage en css ( pour SPIP version > 2.0)
+		foreach ($classe2icone as $n=>$i) {
+			$css .= "\n.markItUp .$n a {\n\tbackground-image:url(".find_in_path("icones_barre/$i").");\n}";
+		}
+		$css = urls_absolues_css($css,$_SERVER['PHP_SELF']);
 	}
-	$css = urls_absolues_css($css,$_SERVER['PHP_SELF']);
 	return $css;
 }
 
