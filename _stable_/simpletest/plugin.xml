@@ -4,7 +4,7 @@
 	Matthieu Marcillaud [magraine.net->http://magraine.net]
 	</auteur>
 	<licence>GNU/GLP</licence>
-	<version>0.4</version>
+	<version>0.4.1</version>
 	<description>
 	Fourni la bibliotheque [Simple Test->http://simpletest.org/] 1.0.1 
 	pour effectuer des tests unitaires,

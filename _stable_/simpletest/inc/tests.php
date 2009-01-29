@@ -10,7 +10,7 @@ if ($_SERVER["REMOTE_ADDR"]!='127.0.0.1')
 
 /*
  * il faut remettre le chdir pour les fonctions de spip
- * comme chemin() ou include_spip()
+ * comme find_in_path() ou include_spip()
  * a l'interieur de la classe.
  */
 define('_CHDIR', getcwd());
@@ -485,7 +485,7 @@ class SpipHtmlReporter extends HtmlReporter {
         print "<style type=\"text/css\">\n";
         print $this->_getCss() . "\n";
         print "</style>\n";
-		print "<link rel='stylesheet' href='" . url_absolue(chemin('css/tests.css')) . "' type='text/css' />";
+		print "<link rel='stylesheet' href='" . url_absolue(find_in_path('css/tests.css')) . "' type='text/css' />";
         print "</head>\n<body>\n";
 		
 		print "<h1>Tests SPIP " . $this->version_spip() . "</h1>\n";
