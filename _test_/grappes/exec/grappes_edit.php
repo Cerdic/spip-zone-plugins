@@ -45,7 +45,7 @@ function exec_grappes_edit_dist()
 	
 	$out .= "";
 	$contexte = array(
-		'icone_retour'=>icone_inline(_T('icone_retour'), generer_url_ecrire("grappes",""), chemin("images/grappe-24.gif"), "rien.gif",$GLOBALS['spip_lang_left']),
+		'icone_retour'=>icone_inline(_T('icone_retour'), generer_url_ecrire("grappes",""), find_in_path("images/grappe-24.gif"), "rien.gif",$GLOBALS['spip_lang_left']),
 		'titre'=>$type,
 		'redirect'=>generer_url_ecrire("grappes",""),
 		'new'=>_request('new') == "oui"?"oui":$id_grappe,

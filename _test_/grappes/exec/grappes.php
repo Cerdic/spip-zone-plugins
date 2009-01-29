@@ -35,7 +35,7 @@ function exec_grappes_dist()
 		<a href='#' onclick='$(\"div.grappe\").show();return false;'>"._T('grappes:icone_voir_toutes_grappes')."</a>";
 
 	if (autoriser('creer','grappe'))
-		$out = icone_horizontale(_T('grappes:icone_creation_grappe'), generer_url_ecrire("grappes_edit","new=oui"), chemin('images/grappe-24.gif'), "creer.gif",false)
+		$out = icone_horizontale(_T('grappes:icone_creation_grappe'), generer_url_ecrire("grappes_edit","new=oui"), find_in_path('images/grappe-24.gif'), "creer.gif",false)
 			.$out;
 	echo bloc_des_raccourcis($out);
 	
@@ -124,12 +124,12 @@ function exec_grappes_dist()
 			echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 			echo "<tr>";
 			echo "<td>";
-			echo icone_inline(_T('grappes:icone_modif_grappe'), generer_url_ecrire("grappes_edit","id_grappe=$id_grappe"), chemin("images/grappe-24.gif"), "edit.gif", $spip_lang_left);
+			echo icone_inline(_T('grappes:icone_modif_grappe'), generer_url_ecrire("grappes_edit","id_grappe=$id_grappe"), find_in_path("images/grappe-24.gif"), "edit.gif", $spip_lang_left);
 			echo "</td>";
 			echo "\n<td id='editer_grappe-$id_grappe-supprimer'",
 			  (!$elements ? '' : " style='visibility: hidden'"),
 			  ">";
-			echo icone_inline(_T('grappes:icone_supprimer_grappe'), redirige_action_auteur('supprimer_grappe', "-$id_grappe", "grappes"), chemin("images/grappe-24.gif"), "supprimer.gif", $spip_lang_left);
+			echo icone_inline(_T('grappes:icone_supprimer_grappe'), redirige_action_auteur('supprimer_grappe', "-$id_grappe", "grappes"), find_in_path("images/grappe-24.gif"), "supprimer.gif", $spip_lang_left);
 			echo "</td></tr></table>";
 		}	
 
