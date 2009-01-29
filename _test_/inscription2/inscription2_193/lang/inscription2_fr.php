@@ -50,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nom_explication' => 'votre nom ou votre&nbsp;pseudo',
 'nom_famille' => 'Nom de famille',
 'prenom' => 'Pr&eacute;nom',
+'surnom' => 'Surnom',
 'naissance' => 'Date de naissance',
 'civilite' => 'Civilit&eacute;',
 'adresse' => 'Adresse',
