@@ -22,6 +22,9 @@
 		options = {
 			width:'500px',
 			height:'250px',
+			parse:{
+				dataList:'row', // 'column' : tableaux verticaux par defaut... 
+			},
 			legendeExterne:false,
 			legendeActions:false, // ne fonctionne qu'avec l'option legende externe
 			modeDate:false, // pour calculer les timestamp automatiquement
@@ -54,7 +57,7 @@
 			//     .graphLegend 
 			$(this).hide().wrap("<div class='graphique' id='graphique"+idGraph+"'></div>");
 			graphique = $(this).parent();
-			values = $(this).tFlotParseTable();
+			values = $(this).tFlotParseTable(options.parse);
 			$.extend(true, values.options, options.flot);
 			
 			graph = $("<div class='graphResult' style='width:" + options.width + ";height:" + options.height + ";'></div>").appendTo(graphique);
@@ -136,10 +139,107 @@
 		color=0;
 		
 		options = {
-			ticks:[] // [1:"label 1", 2:"label 2"]
+			ticks:[], // [1:"label 1", 2:"label 2"]
+			dataList:'row', // 'column'
 		}
 		$.extend(options, settings);
-				
+		
+		row = (options.dataList == 'row');
+	
+		// 
+		// recuperer les points d'axes
+		// 	
+		axe=0; 
+		if (row) {
+			// dans le th de chaque tr
+			$(this).find('tr:not(:first)').each(function(){
+				$(this).find('th:first').each(function(){
+					options.ticks.push([++axe, $(this).text()]);
+				});
+			});
+
+		} else {
+			// dans les th du premier tr
+			$(this).find('tr:first th:not(:first)').each(function(){
+				options.ticks.push([++axe, $(this).text()]);
+			});
+		}
+		
+
+		// 
+		// recuperer les noms de series
+		//
+		axe = (axe ? 1 : 0);
+		
+		if (row) {
+			// si axes definis, on saute une ligne
+			if (axe) {
+				columns = $(this).find('tr:first th:not(:first)');
+			} else {
+				columns = $(this).find('tr:first th');
+			}
+			// chaque colonne est une serie
+			
+			for(i=0; i<columns.length; i++){
+				cpt=0, data=[];
+				th = $(this).find('tr:first th:eq(' + (i + axe) + ')');
+				label = th.text();
+				serieOptions = th.tFlotCssOptions();
+				$(this).find('tr td:nth-child(' + (i + 1 + axe) +')').each(function(){
+					val = parseFloat($(this).text());
+					data.push( [++cpt, val] );
+				});
+				serie = {label:label, data:data};
+				$.extend(serie, serieOptions);
+				flot.push(serie);
+			}
+
+			
+		} else {
+			// si axes definis, on saute une colonne
+			if (axe) {
+				rows = $(this).find('tr:not(:first)');
+			} else {
+				rows = $(this).find('tr');
+			}
+			// chaque ligne est une serie
+			rows.each(function(){
+				cpt=0, data=[];
+				th = $(this).find('th');
+				label = th.text();
+				serieOptions = th.tFlotCssOptions();
+				// recuperer les valeurs
+				$(this).find('td').each(function(){
+					val = parseFloat($(this).text());
+					data.push( [++cpt, val] );
+				});
+				serie = {label:label, data:data};
+				$.extend(serie, serieOptions);
+				flot.push(serie);
+			});		
+		}
+
+		// 
+		// mettre les options dans les series
+		//
+		$.each(flot, function(i, serie) {
+			serie = $.extend(true, {
+					bars: {
+						barWidth: 0.9,
+						align: "center",
+						show:true,
+						fill:true,
+					},
+					lines: {
+						show:false,
+						fill:false,
+					}
+				},	serie);
+			flot[i] = serie;
+		});
+		
+		
+/*		
 		$(this).find('tr').each(function(){
 			cpt = 1;
 			data = [];
@@ -188,20 +288,12 @@
 					},
 					color: color++,
 				}
-				// si classe 'flotLine' on met une ligne
-				if ($(this).hasClass('flotLine')) {
-					series.lines.show = true;
-					series.bars.show = false;
-				}
-				// si classe 'flotFill' on met rempli
-				if ($(this).hasClass('flotFill')) {
-					series.lines.fill = true;
-					series.bars.fill = true;
-				}
+
 				flot.push(series);
 			}
 			
 		});
+*/
 		opt = {
 			xaxis: {}
 		}
@@ -211,7 +303,25 @@
 	}
 	
 	
-	
+		
+	$.fn.tFlotCssOptions = function (){
+		options = {}
+		// si classe 'flotLine' on met une ligne
+		if ($(this).hasClass('flotLine')) {
+			$.extend(true, options, {
+				lines:{show:true},
+				bars:{show:false}
+			});
+		}
+		// si classe 'flotFill' on met rempli
+		if ($(this).hasClass('flotFill')) {
+			$.extend(true, options, {
+				lines:{fill:true},
+				bars:{fill:true}
+			});
+		}
+		return options;
+	}	
 	
 		
 	
