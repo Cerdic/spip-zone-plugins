@@ -126,7 +126,7 @@ function exec_statistiques_visites_args($id_article, $duree, $interval, $type, $
 
 	
 	if ($log)
-	  $res = statistiques_tous($log, $id_article, $table, $where, $order, $serveur, $duree, $interval, $total_absolu, $val_popularite,  $classement, $liste);
+	  $res = statistiques_tous($log, $id_article, $table, $where, $order, $serveur, $duree, $interval, $total_absolu, $val_popularite, $liste, $classement);
 	  
   echo cadre_stat($res, $table, $id_article);
 

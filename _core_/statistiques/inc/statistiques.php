@@ -137,12 +137,13 @@ function statistiques_tous($log, $id_article, $table, $where, $order, $serveur, 
 	$date_debut = min($r);
 	$date_premier = sql_getfetsel("UNIX_TIMESTAMP($order) AS d", $table, $where, '', $order, 1,'',$serveur);
 	$last = (time()-$date_fin>$interval) ? 0 : $log[$date_fin];
+	$max = max($log);
 
 	list($moyenne,$prec, $res) = stat_log1($log, $date_fin, $interval, $script);
-global $couleur_foncee,$couleur_claire;
+
 	$stats = 
 	  "<table id='visites'>"
-	  . "<thead><tr class='row_first'><th>"._T('date')."</th><th class='valeur'>"._T('info_visites')."</th><th class='moyenne'>"._T('info_moyenne')."</th><th class='cumul'>"._T('info_total')."</th></tr></thead>"
+	  . "<thead><tr class='row_first'><th>".trim(trim(_T('date'),':'))."</th><th class='valeur'>".trim(trim(_T('info_visites'),':'))."</th><th class='moyenne'>".trim(trim(_T('info_moyenne'),':'))."</th><th class='cumul'>".trim(trim(_T('info_total'),':'))."</th></tr></thead>"
 	  . "<tbody>"
 	  . $res
 	  . (!$liste ? '' : // prevision que pour les visites
@@ -150,11 +151,9 @@ global $couleur_foncee,$couleur_claire;
 	  . "</tbody>"
 	. "</table>";
 
-	$total = "<b>" .  _T('info_total') ." " . $total."</b>";
-
 	if  ($liste) {
 		$liste = statistiques_classement($id_article, $classement, $liste);
-		$resume =  statistiques_resume($max, $moyenne, $last, $prec, $popularite);
+		$legend =  statistiques_resume($max, $moyenne, $last, $prec, $popularite,$total,$liste);
 	} else {
 	  $legend = "<table width='100%'><tr><td width='50%'>" .
 	    affdate_heure(date("Y-m-d H:i:s", $date_debut)) .
@@ -164,42 +163,43 @@ global $couleur_foncee,$couleur_claire;
 	  $resume = '';
 	}
 
-	$legend .=
-	  "<table class='statistiques_cartouche'><tr style='width:100%;'>"
-	. $resume
-	. "\n<td valign='top' style='width: 33%; ' class='verdana1'>"
-	. $total
-	. $liste
-	. "</td></tr></table>";
-
 	$x = (!$duree) ? 1 : (420/ $duree);
 	$zoom = statistiques_zoom($id_article, $x, $date_premier, $date_debut, $date_fin);
-	return array($zoom, $legend, $stats );
+	return array($zoom,$legend, $stats );
 }
 
 // http://doc.spip.org/@statistiques_resume
-function statistiques_resume($max, $moyenne, $last, $prec, $popularite)
+function statistiques_resume($max, $moyenne, $last, $prec, $popularite,$total, $classement=null)
 {
-	return  "\n<td>"
-	. _T('info_maximum')." "
-	. $max . "<br />"
-	. _T('info_moyenne')." "
-	. round($moyenne). "</td>"
-	. "\n<td valign='top' style='width: 33%; ' class='verdana1'>"
-	. '<a href="'
-	. generer_url_ecrire("statistiques_referers")
-	. '" title="'._T('titre_liens_entrants').'">'
-	. _T('info_aujourdhui')
-	. '</a> '
-	. $last
-	. (($prec <= 0) ? '' :
-	     ('<br /><a href="'
-	      . generer_url_ecrire("statistiques_referers","jour=veille")
-	      .'"  title="'._T('titre_liens_entrants').'">'
-	      ._T('info_hier').'</a> '.$prec))
-	. (!$popularite ? '' :
-	   ("<br />"._T('info_popularite_5').' '.$popularite))
-	.  "</td>";
+	return  "<table class='info'>
+	<thead>
+		<tr class='row_first'>
+		<th>".trim(trim(_T('info_maximum'),':'))."</th><th>".trim(trim(_T('info_moyenne'),':'))."</th>
+		<th>".'<a href="'
+		. generer_url_ecrire("statistiques_referers")
+		. '" title="'._T('titre_liens_entrants').'">'
+		. trim(trim(_T('info_aujourdhui'),':'))
+		. '</a> '."</th>"
+		. (($prec <= 0) ? '' :
+		     '<th><a href="'
+		      . generer_url_ecrire("statistiques_referers","jour=veille")
+		      .'"  title="'._T('titre_liens_entrants').'">'
+		      .trim(trim(_T('info_hier'),':')).'</a></th>')
+		. (!$popularite ? '' :"<th>".trim(trim(_T('info_popularite_5'),':'))."</th>")
+		. (!$total ? '' :"<th>".trim(trim(_T('info_total'),':'))."</th>")
+		. (!$classement ? '' :"<th>".trim(trim($classement[0],':'))."</th>")
+		. "</tr>
+	</thead>
+	<tbody>
+		<tr>
+		<td class='num'>$max</td><td class='num'>".round($moyenne)."</td><td class='num'>$last</td>"
+		. (($prec <= 0) ? '' :"<td class='num'>$prec</td>")
+		. (!$popularite ? '' :"<td class='num'>$popularite</td>")
+		. (!$total ? '' :"<td class='num'>$total</td>")
+		. (!$classement ? '' :"<td class='num'>".$classement[1]."</td>")
+		. "</tr>
+	</tbody>
+	</table>";
 }
 
 // http://doc.spip.org/@statistiques_classement
@@ -211,13 +211,10 @@ function statistiques_classement($id_article, $classement, $liste)
 			      $ch = _T('info_classement_1', array('liste' => $liste));
 			else
 			      $ch = _T('info_classement_2', array('liste' => $liste));
-			return "<br />".$classement[$id_article].$ch;
+			return array('',$classement[$id_article].$ch);
 		}
 	  } else
-		return "<span class='spip_x-small'><br />"
-		  ._T('info_popularite_2')." "
-		  . ceil($GLOBALS['meta']['popularite_total'])
-		  . "</span>";
+		return array(_T('info_popularite_2'),ceil($GLOBALS['meta']['popularite_total']));
 }
 
 // http://doc.spip.org/@statistiques_zoom
@@ -265,7 +262,7 @@ function statistiques_zoom($id_article, $largeur_abs, $date_premier, $date_debut
 function stat_log1($log, $date_today, $interval, $script) {
 	$res = '';
 
-	$decal = $date_prec = $val_prec = $moyenne = 0;
+	$cumul = $decal = $date_prec = $val_prec = $moyenne = 0;
 	foreach ($log as $key => $value) {
 		if ($key == $date_today) break;
 		if ($decal == 30) $decal = 0;
@@ -273,7 +270,7 @@ function stat_log1($log, $date_today, $interval, $script) {
 		$evol[$decal] = $value;
 		// Inserer des jours vides si pas d'entrees
 		if ($date_prec > 0) {
-			$ecart = (($key-$date_prec)/$agreg)-$interval;
+			$ecart = $key-$date_prec-$interval;
 			for ($i=$interval; $i <= $ecart; $i+=$interval){
 				if ($decal == 30) $decal = 0;
 				$decal ++;
