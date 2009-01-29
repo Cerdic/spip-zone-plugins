@@ -25,21 +25,25 @@
 			legendeExterne:false,
 			legendeActions:false, // ne fonctionne qu'avec l'option legende externe
 			modeDate:false, // pour calculer les timestamp automatiquement
-			moyenneGlissante:false, // pour calculer une moyenne glissante automatiquement
-			moyenneGlissantePlage:7, // plage de glissement (nombre impair !)
-		}
-		$.extend(options, settings);
-		
-
-		flot = {
-			legend:{
-				show:true,
-				container:null,
-				labelFormatter:null,
+			moyenneGlissante:{
+				show:false, // pour calculer une moyenne glissante automatiquement
+				plage:7 // plage de glissement (nombre impair !)
 			},
-			yaxis: { min: 0 },
-			selection: { mode: "x" },
-		}		
+			infobulle:{
+				show:false,
+			},
+			flot:{
+				legend:{
+					show:true,
+					container:null,
+					labelFormatter:null,
+				},
+				yaxis: { min: 0 },
+				selection: { mode: "x" },
+			}
+		}
+		$.extend(true, options, settings);
+
 		
 		$(this).each(function(){
 
@@ -51,7 +55,7 @@
 			$(this).hide().wrap("<div class='graphique' id='graphique"+idGraph+"'></div>");
 			graphique = $(this).parent();
 			values = $(this).tFlotParseTable();
-			$.extend(values.options, flot);
+			$.extend(true, values.options, options.flot);
 			
 			graph = $("<div class='graphResult' style='width:" + options.width + ";height:" + options.height + ";'></div>").appendTo(graphique);
 			
@@ -93,20 +97,28 @@
 			}
 			
 			// en cas de moyenne glissante, on la calcule
-			// sur la base de 7 elements par defaut
-			if (options.moyenneGlissante) {
-				values.series = $.tFlotMoyenneGlissante(values.series, {
-					plage: options.moyenneGlissantePlage
+			if (options.moyenneGlissante.show) {
+				values.series = $.tFlotMoyenneGlissante(values.series, options.moyenneGlissante);
+			}
+
+			// si infobulles, les ajouter
+			if (options.infobulle.show) {
+				$.extend(true, options.infobulle, {date:options.modeDate});
+				$('#graphique'+idGraph).tFlotInfobulle(options.infobulle);
+				$.extend(true, values.options, {
+					grid:{hoverable:true}
 				});
 			}
-		
+			
+					
 			// stocker les valeurs
-			collections.push({id:idGraph,values:values});
+			collections.push({id:idGraph, values:values});
 			// dessiner
 			$.plot(graph, values.series, values.options);
 			
 			// prevoir les actions sur les labels
 			$('#graphique'+idGraph).tFlotActions();
+			
 			++idGraph;
 		});
 		
@@ -152,7 +164,8 @@
 			// recuperer les valeurs
 			$(this).find('td').each(function(){
 				val = $(this).text();
-				if (val || (val == "0")) {
+				val = parseFloat(val);
+				if (val || (val == 0)) {
 					data.push( [cpt, val] );
 				}
 				cpt++;
@@ -217,7 +230,6 @@
 			var seriesActives = [];
 			tr.parent().find('tr:not(.cacher)').each(function(){
 				nom = $(this).find('a').text();				
-				//console.log(collections[pid]);
 				n = collections[pid].values.series.length;
 				for(i=0;i<n;i++) {
 					if (collections[pid].values.series[i].label == nom) {
@@ -227,48 +239,49 @@
 				}
 			});
 			$.extend(collections[pid].values.options, {legend:{container:null, show:false}});
-			$.plot(master.find(' .graphResult'), seriesActives, collections[pid].values.options);
+			$.plot(master.find('.graphResult'), seriesActives, collections[pid].values.options);
 		});			
 	}
 	
 	
+	
+	
+	/*
+	 * 
+	 *  calcul d'une moyenne glissante
+	 * 
+	 */ 
 	$.tFlotMoyenneGlissante = $.fn.tFlotMoyenneGlissante = function(lesSeries, settings) {
 		options = {
-			plage: 7
+			plage: 7,
+			texte:"Moyenne glissante",
 		}
 		$.extend(options, settings);
 
-		g = options.plage; // nombre impair
+		g = options.plage;
 		series = [];
 		$.each(lesSeries, function(i, val){
 			data = [], moy = [];
-			r = (g-1)/2;
 			$.each(val.data, function (j, d){
-				// quand on peut calculer une moyenne
-				if ((j>r) && (val.data.length > j+r)) {
-					// initialisation, on remplit moy des valeurs, sauf la derniere
-					if (!moy.length) {
-						for (s=0;s<g-1;s++) {
-							moy.push(parseInt(val.data[s][1]));
-						}
-					}
-					// ajout du nouvel element
-					// et retrait du trop vieux
-					moy.push(parseInt(val.data[j+r][1]));
-					if (moy.length>=g) { moy.shift();}
-					// calcul de la somme et ajout de la moyenne
-					for(var k=0,sum=0;k<moy.length;sum+=moy[k++]);
-					data.push([d[0], Math.round(sum/g)]);						
-				}
-
-
+				// ajout du nouvel element
+				// et retrait du trop vieux
+				moy.push(parseInt(d[1]));
+				if (moy.length>=g) { moy.shift();}
+				
+				// calcul de la somme et ajout de la moyenne
+				for(var k=0,sum=0;k<moy.length;sum+=moy[k++]);
+				data.push([d[0], Math.round(sum/moy.length)]);						
 			});
 			
-			serieG = $.extend(true, {}, val);
-			serieG.data = data;
-			serieG.label = val.label + " (Moyenne glissante) ";
-			serieG.lines.show=true;
-			serieG.lines.fill=false;
+			serieG = $.extend(true, {}, val, {
+				data:data,
+				label:val.label + " ("+options.texte+")",
+				lines:{
+					show:true,
+					fill:false	
+				},
+				bars:{show:false}
+			});
 			series.push(val);
 			series.push(serieG);
 		});
@@ -281,6 +294,50 @@
 	}
 	
 	
+	
+	/*
+	 * 
+	 * Infobulles
+	 * 
+	 */
+	var previousPoint = null;
+	$.fn.tFlotInfobulle = function(settings) {
+		options = {
+			show:true
+		};
+		$.extend(true, options, settings);
+		
+		$(this).bind("plothover", function (event, pos, item) {
+			$("#x").text(pos.x.toFixed(2));
+			$("#y").text(pos.y.toFixed(2));
+
+			if (options.show) {
+				if (item) {
+					if (previousPoint != item.datapoint) {
+						previousPoint = item.datapoint;
+						
+						$("#tooltip").remove();
+						var x = item.datapoint[0],
+							y = item.datapoint[1];
+						// si une date, remise du forme
+						if (options.date) {
+							x = formatDate((new Date(x)), "%d/%m/%y");
+						}
+						
+						showTooltip(item.pageX, item.pageY,
+									item.series.label + " [" + x + "] = " + y);
+					}
+				}
+				else {
+					$("#tooltip").remove();
+					previousPoint = null;            
+				}
+			}
+		});
+	}
+		
+		
+		
 	// Pris sur le site de Flot (exemple de visites)
     // helper for returning the weekends in a period
     function weekendAreas(axes) {
@@ -301,5 +358,59 @@
 
         return markings;
     }
+	
+	
+	// Pris sur le site de Flot (exemple d'interactions)
+	// montrer les informations des points
+    function showTooltip(x, y, contents) {
+        $('<div id="tooltip">' + contents + '</div>').css( {
+            position: 'absolute',
+            display: 'none',
+            top: y + 5,
+            left: x + 5,
+            border: '1px solid #fdd',
+            padding: '2px',
+            'background-color': '#fee',
+            opacity: 0.80
+        }).appendTo("body").fadeIn(200);
+    }
 
+	// copie de la fonction de jquery.flot.js
+	// pour utilisation dans infobulle
+	function formatDate(d, fmt, monthNames) {
+		var leftPad = function(n) {
+			n = "" + n;
+			return n.length == 1 ? "0" + n : n;
+		};
+		
+		var r = [];
+		var escape = false;
+		if (monthNames == null)
+			monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+		for (var i = 0; i < fmt.length; ++i) {
+			var c = fmt.charAt(i);
+			
+			if (escape) {
+				switch (c) {
+				case 'h': c = "" + d.getUTCHours(); break;
+				case 'H': c = leftPad(d.getUTCHours()); break;
+				case 'M': c = leftPad(d.getUTCMinutes()); break;
+				case 'S': c = leftPad(d.getUTCSeconds()); break;
+				case 'd': c = "" + d.getUTCDate(); break;
+				case 'm': c = "" + (d.getUTCMonth() + 1); break;
+				case 'y': c = "" + d.getUTCFullYear(); break;
+				case 'b': c = "" + monthNames[d.getUTCMonth()]; break;
+				}
+				r.push(c);
+				escape = false;
+			}
+			else {
+				if (c == "%")
+					escape = true;
+				else
+					r.push(c);
+			}
+		}
+		return r.join("");
+	}
 })(jQuery);
