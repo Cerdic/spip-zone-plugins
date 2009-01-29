@@ -319,7 +319,7 @@ function image_histogramme($im) {
 function position_carte ($latitude, $longitude, $taille) {
 	if (strlen($latitude) == 0 && strlen($longitude) == 0) return;
 
-	$img = chemin("imgs_photo/earth-map-$taille.jpg");
+	$img = find_in_path("imgs_photo/earth-map-$taille.jpg");
 	$img = "<img src='$img' alt='carte' />";
 	
 	
@@ -329,7 +329,7 @@ function position_carte ($latitude, $longitude, $taille) {
 	$n = ($n - 4)."px";
 	$l = ($l - 4)."px";
 	
-	$croix = chemin("imgs_photo/croix-gps.gif");
+	$croix = find_in_path("imgs_photo/croix-gps.gif");
 	$croix = "<img src='$croix' alt='+' />";
 
 	

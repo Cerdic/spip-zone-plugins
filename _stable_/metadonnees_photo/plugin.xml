@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Metadonn&eacute;es photo (EXIF, IPTC et histogramme)</nom>
 	<auteur>ARNO*</auteur>
-	<version>1.1</version>
+	<version>1.1.1</version>
 	<icon>imgs_photo/logo-pb_plugin.png</icon>
 	<etat>stable</etat>
 	<description>
