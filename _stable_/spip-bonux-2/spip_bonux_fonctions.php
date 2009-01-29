@@ -179,10 +179,11 @@ function filtre_icone($lien, $texte, $fond, $align="", $fonction="", $class=""){
 function picker_selected($selected,$type){
 	$select = array();
 	$type = preg_replace(',\W,','',$type);
-	foreach($selected as $value)
-		if (preg_match(",".$type."[|]([0-9]+),",$value,$match)
-		  AND $v=intval($match[1]))
-		  $select[] = $v;
+	if (is_array($selected))
+		foreach($selected as $value)
+			if (preg_match(",".$type."[|]([0-9]+),",$value,$match)
+			  AND $v=intval($match[1]))
+			  $select[] = $v;
 	return $select;
 }
 ?>
