@@ -17,21 +17,14 @@ function action_editer_document_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	// Envoi depuis les boutons "publier/supprimer cette document"
-	if (preg_match(',^(\d+)\Wstatut\W(\w+)$,', $arg, $r)) {
-		$id_document = $r[1];
-		set_request('statut', $r[2]);
-		revisions_documents($id_document);
+	// Envoi depuis le formulaire de creation d'un document
+	if (!$id_document = intval($arg)) {
+		$id_document = insert_document();
 	} 
-	// Envoi depuis le formulaire d'edition d'une document existante
-	else if ($id_document = intval($arg)) {
+
+	if ($id_document = intval($id_document)) {
 		revisions_documents($id_document);
 	}
-	// Envoi depuis le formulaire de creation d'une document
-	else if ($arg == 'oui') {
-		$id_document = insert_document();
-		if ($id_document) revisions_documents($id_document);
-	} 
 	// Erreur
 	else{
 		include_spip('inc/headers');
@@ -56,10 +49,23 @@ function action_editer_document_dist() {
  */
 function insert_document() {
 
-	return sql_insertq("spip_documents", array(
+	$champs = array(
 		'statut' => 'prop',
 		'date' => 'NOW()',
-		));
+	);
+
+	// Envoyer aux plugins
+	$champs = pipeline('pre_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_documents',
+			),
+			'data' => $champs
+		)
+	);
+	$id_document = sql_insertq("spip_documents", $champs);
+	
+	return $id_document;
 }
 
 
@@ -76,14 +82,13 @@ function revisions_documents ($id_document, $c=false) {
 	if ($c === false) {
 		$c = array();
 		foreach (array(
-			'titre', 'descriptif', 'date', 'taille', 'largeur','hauteur','mode',
-			'statut'
+			'titre', 'descriptif', 'date', 'taille', 'largeur','hauteur','mode'
 		) as $champ)
 			if (($a = _request($champ)) !== null)
 				$c[$champ] = $a;
 	}
 
-	// Si la document est publiee, invalider les caches et demander sa reindexation
+	// Si le document est publie, invalider les caches et demander sa reindexation
 	$t = sql_getfetsel("statut", "spip_documents", "id_document=$id_document");
 	if ($t == 'publie') {
 		$invalideur = "id='id_document/$id_document'";
@@ -97,7 +102,6 @@ function revisions_documents ($id_document, $c=false) {
 			'indexation' => $indexation
 		),
 		$c);
-
 
 	// Changer le statut du document ?
 	// le statut n'est jamais fixe manuellement mais decoule de celui des objets lies

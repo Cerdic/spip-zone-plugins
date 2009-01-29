@@ -27,9 +27,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'des_videos'=>'@nb@ s&eacute;quences',
 	'des_utilisations'=>'@nb@ utilisations',
 	
+	// F
+	'format_date_incorrect' => 'La date ou l\'heure sont incorrectes',
+	
 	// I
 	'id' => 'ID',
 	'infos'=>'Infos techniques',
+	'info_modifier_document'=>'Modifier le document',
+	'info_heure' => 'Heure',
+	'info_largeur' => 'Largeur',
+	'info_hauteur' => 'Hauteur',
 	
 	// L
 	'logo' => 'Logo',

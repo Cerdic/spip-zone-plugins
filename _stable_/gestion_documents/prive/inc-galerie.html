@@ -52,6 +52,7 @@
 		<th><:gestdoc:logo:></th>
 		<th><:gestdoc:infos:></th>
 		<th><:gestdoc:descriptif:></th>
+		<th></th>
 	</thead>
 	<BOUCLE_galerie(DOCUMENTS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?} {par #ENV{tri,id_document}}{inverse #ENV{sens,1}|>{0}}{media?}{extension?}{distant?}{brise?}{statut==#ENV{statut,.*}}{pagination 10}>
 	<tr class="[(#ENV{media}|non)[ media-(#MEDIA)]]">
@@ -95,6 +96,8 @@
 		<td class="descriptif">
 			[<strong class="#EDIT{titre}">(#TITRE|sinon{<i>sans titre</i>})</strong>]
 			[<div class="#EDIT{descriptif}">(#DESCRIPTIF|sinon{...})</div>]
+		</td>
+		<td>[(#AUTORISER{modifier,document,#ID_DOCUMENT})&#91;<a href='#URL_ECRIRE{documents_edit,id_document=#ID_DOCUMENT}'><:bouton_modifier:></a>&#93;]
 		</td>
 	</tr>
 	</BOUCLE_galerie>

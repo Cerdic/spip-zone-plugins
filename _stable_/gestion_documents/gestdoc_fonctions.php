@@ -58,8 +58,8 @@ function boucle_DOCUMENTS($id_boucle, &$boucles) {
 	array_unshift($boucle->where,array("'($id_table.taille > 0 OR $id_table.distant=\\'oui\\')'"));
 
 	// Supprimer les vignettes
-	if (!$boucle->modificateur['criteres']['mode']
-	AND !$boucle->modificateur['criteres']['tout']) {
+	if (!isset($boucle->modificateur['criteres']['mode'])
+	AND !isset($boucle->modificateur['criteres']['tout'])) {
 		array_unshift($boucle->where,array("'!='", "'$id_table.mode'", "'\\'vignette\\''"));
 	}
 
@@ -69,8 +69,8 @@ function boucle_DOCUMENTS($id_boucle, &$boucles) {
 	// S'il y a un critere de lien {id_article} par exemple, on zappe
 	// ces complications (et tant pis si la boucle n'a pas prevu de
 	// verification du statut de l'article)
-	if (!$boucle->modificateur['tout']
-	AND !$boucle->modificateur['criteres']['statut']
+	if (!isset($boucle->modificateur['tout'])
+	AND !isset($boucle->modificateur['criteres']['statut'])
 	) {
 		if ($GLOBALS['var_preview']) {
 			array_unshift($boucle->where,"'($id_table.statut IN (\"publie\",\"prop\",\"prepa\"))'");
