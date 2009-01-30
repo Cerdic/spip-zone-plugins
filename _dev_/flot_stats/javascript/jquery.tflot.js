@@ -34,7 +34,10 @@
 		options = {
 			width:'500px',
 			height:'250px',
-			parse:'row', // 'column' : tableaux verticaux par defaut... 
+			parse:{
+				orientation:'row', // 'column' : tableaux verticaux par defaut... 
+				axeOnTitle:false, // les coordonnees x d'axe sont donnes dans l'attribut title du <th> et non dans le <th> ?
+			},
 			legendeExterne:false,
 			legendeActions:false, // ne fonctionne qu'avec l'option legende externe
 			modeDate:false, // pour calculer les timestamp automatiquement
@@ -72,7 +75,7 @@
 			//        .graphOverview
 			$(this).hide().wrap("<div class='graphique' id='graphique"+idGraph+"'></div>");
 			graphique = $(this).parent();
-			values = parseTable(this, {dataList:options.parse});
+			values = parseTable(this, options.parse);
 			$.extend(true, values.options, options.flot);
 			graph = $("<div class='graphResult' style='width:" + options.width + ";height:" + options.height + ";'></div>").appendTo(graphique);
 			gInfo = $("<div class='graphInfo'></div>").appendTo(graphique);
@@ -172,32 +175,45 @@
 			
 			options = {
 				ticks:[], // [1:"label 1", 2:"label 2"]
-				dataList:'row', // 'column'
+				orientation:'row', // 'column'
+				axeOnTitle:false,
 			}
 			$.extend(options, settings);
 			
-			row = (options.dataList == 'row');
+			row = (options.orientation == 'row');
 		
 			// 
 			// recuperer les points d'axes
 			// 	
+			
+			//
+			// Une fonction pour simplifier la recup
+			//
+			function getValue(element) {
+				if (options.axeOnTitle) {
+					return element.attr('title');
+				} else {
+					return element.text();
+				}
+			}
+			
 			axe=0; 
 			if (row) {
 				// dans le th de chaque tr
 				$(table).find('tr:not(:first)').each(function(){
 					$(this).find('th:first').each(function(){
-						options.ticks.push([++axe, $(this).text()]);
+						options.ticks.push([++axe, getValue($(this))]);
 					});
 				});
 
 			} else {
 				// dans les th du premier tr
 				$(table).find('tr:first th:not(:first)').each(function(){
-					options.ticks.push([++axe, $(this).text()]);
+					options.ticks.push([++axe, getValue($(this))]);
 				});
 			}
-			
 
+			
 			// 
 			// recuperer les noms de series
 			//
@@ -466,13 +482,31 @@
 				// don't fire event on the overview to prevent eternal loop
 				vignettes[pid].setSelection(ranges, true);
 			});
+			// raz sur double clic
+			$(graphique).find('.graphResult').dblclick(function (event) {
+				var graphique;
+				graphique = $(event.target).parent().parent();
+				pid = graphique.attr('id').substr(9);	
+				vignettesSelection[pid] = undefined;							
+				plots[pid] = $.plot(graphique.find('.graphResult'), 
+					collectionsActives[pid].values.series,
+					$.extend(true, collections[pid].values.options, {
+						xaxis: { min: null, max: null },
+					  	yaxis: { min: null, max: null }
+					}));
+					
+			});	
+			
+			// zoom depuis la miniature			
 			vignette.bind("plotselected", function (event, ranges) {
 				graph = $(event.target);
 				pid = graph.parent().parent().attr('id').substr(9);	
 				vignettesSelection[pid] = ranges;			
 				plots[pid].setSelection(ranges);
 			});
+			// raz depuis la miniature sur double clic
 			vignette.dblclick(function (event) {
+				var graphique;
 				graphique = $(event.target).parent().parent().parent();
 				pid = graphique.attr('id').substr(9);	
 				vignettesSelection[pid] = undefined;							
