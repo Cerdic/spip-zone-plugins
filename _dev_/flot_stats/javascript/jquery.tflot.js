@@ -471,6 +471,19 @@
 				pid = graph.parent().parent().attr('id').substr(9);	
 				vignettesSelection[pid] = ranges;			
 				plots[pid].setSelection(ranges);
+			});
+			vignette.dblclick(function (event) {
+				graphique = $(event.target).parent().parent().parent();
+				pid = graphique.attr('id').substr(9);	
+				vignettesSelection[pid] = undefined;							
+				
+				plots[pid] = $.plot(graphique.find('.graphResult'), 
+					collectionsActives[pid].values.series,
+					$.extend(true, collections[pid].values.options, {
+						xaxis: { min: null, max: null },
+					  	yaxis: { min: null, max: null }
+					}));
+					
 			});		
 			
 		}	
