@@ -77,6 +77,7 @@
 			graphique = $(this).parent();
 			values = parseTable(this, options.parse);
 			$.extend(true, values.options, options.flot);
+
 			graph = $("<div class='graphResult' style='width:" + options.width + ";height:" + options.height + ";'></div>").appendTo(graphique);
 			gInfo = $("<div class='graphInfo'></div>").appendTo(graphique);
 			
@@ -109,11 +110,12 @@
 					values.series[i].data = data;
 				});
 				// plus besoin du ticks
-				values.options.xaxis.ticks = null;
-				values.options.xaxis = {
+				// mais toujours besoin des valeurs completes...
+				$.extend(true, values.options.xaxis, {
+					ticks: null,
 					mode: "time",
 					timeformat: "%d/%m/%y",					
-				}
+				});
 				values.options.grid = { markings: weekendAreas }				
 			}
 
@@ -176,6 +178,7 @@
 			options = {
 				ticks:[], // [1:"label 1", 2:"label 2"]
 				orientation:'row', // 'column'
+				ticksReels:[], // on sauve les vraies donnees pour les infobulles (1 janvier 2008) et non le code de date (1/1/2008)
 				axeOnTitle:false,
 			}
 			$.extend(options, settings);
@@ -203,6 +206,7 @@
 				$(table).find('tr:not(:first)').each(function(){
 					$(this).find('th:first').each(function(){
 						options.ticks.push([++axe, getValue($(this))]);
+						options.ticksReels.push([axe, $(this).text()]);
 					});
 				});
 
@@ -210,6 +214,7 @@
 				// dans les th du premier tr
 				$(table).find('tr:first th:not(:first)').each(function(){
 					options.ticks.push([++axe, getValue($(this))]);
+					options.ticksReels.push([axe, $(this).text()]);
 				});
 			}
 
@@ -292,8 +297,10 @@
 			opt = {
 				xaxis: {}
 			}
-			if (options.ticks.length) 
+			if (options.ticks.length) {
 				opt.xaxis.ticks = options.ticks;
+				opt.xaxis.ticksReels = options.ticksReels;
+			}
 			return {series:flot, options:opt};
 		}
 
@@ -553,10 +560,8 @@
 							$("#tooltip").remove();
 							var x = item.datapoint[0],
 								y = item.datapoint[1];
-							// si une date, remise du forme
-							if (options.date) {
-								x = formatDate((new Date(x)), "%d/%m/%y");
-							}
+
+							x = collectionsActives[pid].values.options.xaxis.ticksReels[item.dataIndex][1];
 							
 							showTooltip(item.pageX, item.pageY,
 										item.series.label + " [" + x + "] = " + y);
