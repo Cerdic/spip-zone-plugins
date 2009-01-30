@@ -1,0 +1,12 @@
+
+</B_LesTraductions>
+<div class='onglets_produit'>
+	<ul>
+		<li class="onglet [(#ONGLET|sinon{selected})]" ><a href="[(#EVAL{echoppe_produit}|generer_url_ecrire{id_produit=#ID_PRODUIT})]"><:echoppe:presentation_du_produit:></a></li>
+		<li class="onglet [(#ONGLET|=={infos}|?{selected,''})]" ><a href="[(#EVAL{echoppe_produit}|generer_url_ecrire{id_produit=#ID_PRODUIT&onglet=infos})]"><:echoppe:information_technique_du_produit:></a></li>
+		<li class="onglet [(#ONGLET|=={stocks}|?{selected,''})]" ><a href="[(#EVAL{echoppe_produit}|generer_url_ecrire{id_produit=#ID_PRODUIT&onglet=stocks})]"><:echoppe:etat_des_stocks_du_produit:></a></li>
+		<li class="onglet [(#ONGLET|=={options}|?{selected,''})]" ><a href="[(#EVAL{echoppe_produit}|generer_url_ecrire{id_produit=#ID_PRODUIT&onglet=options})]"><:echoppe:options_du_produit:></a></li>
+		<li class="onglet [(#ONGLET|=={statistiques}|?{selected,''})]" ><a href="[(#EVAL{echoppe_produit}|generer_url_ecrire{id_produit=#ID_PRODUIT&onglet=statistiques})]"><:echoppe:statistiques_du_produit:></a></li>
+	</ul>
+</div>
+

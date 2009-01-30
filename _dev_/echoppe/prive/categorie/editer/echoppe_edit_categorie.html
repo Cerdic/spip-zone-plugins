@@ -1,0 +1,56 @@
+<div class="entete-formulaire">
+	<a class="icone36 secteur-24" [href="(#EVAL{echoppe_categorie}|generer_url_ecrire{[id_categorie=(#ID_CATEGORIE|sinon{#ID_PARENT})]})" style="float: left;">]
+	[<img width="24" height="24" alt="Retour" src="(#CHEMIN{images/categorie-24.png})"/>]
+	<span><:retour:></span>
+	</a>
+	<:echoppe:edition_de_cetegorie:> :
+	[<h1>(#TITRE|sinon{#NEW|=={oui}|?{<:echoppe:nouvelle_categorie:>,<:echoppe:pas_de_titre:>}})</h1>]
+</div>
+<div class="formulaire_spip">
+	<form action="[(#EVAL{echoppe_sauver_categorie}|generer_url_action{id_categorie=#ID_CATEGORIE&lang_categorie=#LANG_CATEGORIE})]" method="post" >
+		<div>
+			<input type="hidden" name="lang" value="#LANG_CATEGORIE" />
+			<input type="hidden" name="id_parent" value="#ID_PARENT" />
+			<input type="hidden" name="redirect" value="[(#EVAL{echoppe}|generer_url_action)]" />
+			[<input type="hidden" name="new" value="(#NEW)" />]
+			<input type="hidden" name="id_categorie" value="#ID_CATEGORIE" />
+		</div>
+		<ul>
+			<li class="editer_titre obligatoire" >
+				<label for="titre_categorie"><:echoppe:titre_categorie:></label>
+				<input type="text" class="forml" id="titre_categorie" name="titre_categorie" value="#TITRE"/><br />
+			</li>
+			[(#SET{'parent',#ID_PARENT})]
+			<B_les_categ>
+				<li>
+					<label for="id_parent" ><:echoppe:dans_la_categorie:></label>
+					<select name="id_parent" class="forml" id="id_parent" >
+						<option value="0"><:echoppe:a_la_racine:></option>
+					<BOUCLE_les_categ(ECHOPPE_CATEGORIES){id_categorie != #ID_CATEGORIE}>
+						<option value="#ID_CATEGORIE" [(#ID_CATEGORIE|=={#GET{'parent'}}|?{'selected="selected"',''})]>#TITRE</option>
+					</BOUCLE_les_categ>
+					</select>
+				</li>
+			</B_les_categ>
+			<li>
+				<label for="id_parent" ><:echoppe:dans_la_categorie:></label>
+				<input type="text" class="forml" name="fake_id_parent" value="<:echoppe:a_la_racine:>" disabled="disabled" id="id_parent" />
+				<input type="hidden" name="id_parent" value="0" />
+			</li>
+			<//B_les_categ>
+			<li>
+				<label for="descriptif_categorie" ><:echoppe:descriptif:></label><br />
+				<textarea name="descriptif_categorie" id="descriptif_categorie" class="forml" >#DESCRIPTIF**</textarea>
+			</li>
+			<li>
+				<label for="text_area" ><:echoppe:texte:></label><br />
+				[(#EVAL{text_area}|barre_typo)]
+				<textarea name='texte' id='text_area' class='barre_inserer forml' rows='30' cols='40'[(#ENV**{browser_caret,''})]>[(#TEXTE**)]</textarea>
+			</li>
+			<p class="boutons">
+				<input type="submit" class="fondo" value="<:spip:bouton_enregistrer:>" />
+			</p>
+		</ul>
+	</form>
+</div>
+
