@@ -19,6 +19,7 @@ function glossaire_groupes() {
 			return join(" OR type=", $groupes);
 		}
 }
+@define('_GLOSSAIRE_TITRE_SEP', '/');
 @define('_GLOSSAIRE_QUERY', 'SELECT id_mot, titre, texte, descriptif FROM spip_mots WHERE type=' . glossaire_groupes() . ' ORDER BY id_mot ASC');
 // TODO : QUERY pour SPIP 2.0
 
@@ -38,6 +39,16 @@ if(!function_exists('nettoyer_chapo')) {
 	function nettoyer_chapo($chapo){
 		return (substr($chapo,0,1) == "=") ? '' : $chapo;
 	}
+}
+
+// traitement pour #TITRE/mots : retrait des expressions regulieres
+function cs_glossaire_titres($titre) {
+	if(strpos($titre, ',')===false) return $titre;
+	$mots = array();
+	foreach (explode('/', $titre) as $m)
+		// interpretation des expressions regulieres grace aux virgules : ,un +mot,i
+		if(strpos($m = trim($m), ',')===false) $mots[] = $m;
+	return count($mots)?join(_GLOSSAIRE_TITRE_SEP, $mots):'??';
 }
 
 // Cette fonction retire du texte les boites de definition
@@ -105,18 +116,16 @@ function cs_rempl_glossaire($texte) {
 	foreach ($glossaire_array as $mot) if (($gloss_id = $mot['id_mot']) <> $mot_contexte) {
 		// prendre en compte les formes du mot : architrave/architraves
 		// contexte de langue a prendre en compte ici
-		$a = explode('/', $titre = extraire_multi($mot['titre']));
 		$les_mots = $les_regexp = $les_titres = array();
-		foreach ($a as $m) {
-			$m = trim($m);
+		foreach (explode('/', $titre = extraire_multi($mot['titre'])) as $m) {
 			// interpretation des expressions regulieres grace aux virgules : ,un +mot,i
-			if(strpos($m, ',')===0) $les_regexp[] = $m;
+			if(strpos($m = trim($m), ',')===0) $les_regexp[] = $m;
 			else {
 				$les_mots[] = charset2unicode($m);
 				$les_titres[] = $m;
 			}
 		}
-		$les_titres = count($les_titres)?join('/', $les_titres):'??';
+		$les_titres = count($les_titres)?join(_GLOSSAIRE_TITRE_SEP, $les_titres):'??';
 		$mot_present = false;
 		if(count($les_regexp)) {
 			// a chaque expression reconnue, on pose une balise temporaire cryptee

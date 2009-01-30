@@ -375,7 +375,7 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 	}
 	// mes_options.php : ajout des traitements
 	if(count($traitements_utilises))
-		$infos_fichiers['code_options'][] = "// Table des traitements\n" . join("\n", $traitements_utilises);
+		$infos_fichiers['code_options'][] = "\n// Table des traitements\n" . join("\n", $traitements_utilises);
 	// effacement du repertoire temporaire de controle
 	if (@file_exists(_DIR_CS_TMP) && ($handle = @opendir(_DIR_CS_TMP))) {
 		while (($fichier = @readdir($handle)) !== false)
