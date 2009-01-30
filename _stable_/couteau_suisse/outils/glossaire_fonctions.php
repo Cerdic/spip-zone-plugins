@@ -7,7 +7,7 @@
 include_spip('inc/charsets');
 
 // liste des accents (sans casse)
-define('_GLOSSAIRE_ACCENTS', '#(19[2-9]|2[023][0-9]|21[0-46-9]|24[0-689]|25[0-4]|33[89]|35[23]|376)||a(?:acute|circ|elig|grave|ring|tilde|uml)|ccedil|e(?:acute|circ|grave|th|uml)|i(?:acute|circ|grave|uml)|ntilde|o(?:acute|circ|elig|grave|slash|tilde|uml)|s(?:caron|zlig)|thorn|u(?:acute|circ|grave|uml)|y(?:acute|uml)');
+define('_GLOSSAIRE_ACCENTS', '#(19[2-9]|2[023][0-9]|21[0-46-9]|24[0-689]|25[0-4]|33[89]|35[23]|376)|a(?:acute|circ|elig|grave|ring|tilde|uml)|ccedil|e(?:acute|circ|grave|th|uml)|i(?:acute|circ|grave|uml)|ntilde|o(?:acute|circ|elig|grave|slash|tilde|uml)|s(?:caron|zlig)|thorn|u(?:acute|circ|grave|uml)|y(?:acute|uml)');
 
 // on calcule ici la constante _GLOSSAIRE_QUERY, surchargeable dans config/mes_options.php
 function glossaire_groupes() {
@@ -84,58 +84,84 @@ function cs_rempl_glossaire($texte) {
 		return str_replace(_CS_SANS_GLOSSAIRE, '', $texte);
 	// mise en static de la table des mots pour eviter d'interrroger la base a chaque fois
 	// attention aux besoins de memoire...
-	static $glossaire_array = null;
+	static $limit, $glossaire_generer_url, $glossaire_array = null;
 	if(!isset($glossaire_array)) {
 		$glossaire_array = array();
 		// compatibilite SPIP 1.92
 		$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array';
 		$query = spip_query(_GLOSSAIRE_QUERY);
 		while($r = $fetch($query)) $glossaire_array[] = $r;
+		$glossaire_generer_url = function_exists('glossaire_generer_url')?'glossaire_generer_url':'glossaire_generer_url_dist';
+		$limit = defined('_GLOSSAIRE_LIMITE')?_GLOSSAIRE_LIMITE:-1;
 	}
-	$limit = defined('_GLOSSAIRE_LIMITE')?_GLOSSAIRE_LIMITE:-1;
-	// protection des liens SPIP
+	$unicode = false;
+	$mem = $GLOBALS['toujours_paragrapher'];
+	$GLOBALS['toujours_paragrapher'] = false;
+	// prudence 1 : protection des liens SPIP
 	if (strpos($texte, '[')!==false) 
 		$texte = preg_replace_callback(',\[[^][]*->>?[^]]*\],msS', 'glossaire_echappe_balises_callback', $texte);
 	// parcours de tous les mots, sauf celui qui peut faire partie du contexte (par ex : /spip.php?mot5)
 	$mot_contexte=$GLOBALS['contexte']['id_mot']?$GLOBALS['contexte']['id_mot']:_request('id_mot');
 	foreach ($glossaire_array as $mot) if (($gloss_id = $mot['id_mot']) <> $mot_contexte) {
 		// prendre en compte les formes du mot : architrave/architraves
+		// contexte de langue a prendre en compte ici
 		$a = explode('/', $titre = extraire_multi($mot['titre']));
-		$les_mots = array();
-		foreach ($a as $m) $les_mots[] = charset2unicode($m = trim($m));
-		$les_mots = array_unique($les_mots);
-		array_walk($les_mots, 'cs_preg_quote');
-		$les_mots = glossaire_accents(join('|', $les_mots));
-		if(preg_match(",\W(?:$les_mots)\W,i", $texte)) {
-			// prudence 1 : on protege TOUTES les balises HTML comprenant le mot
-			if (strpos($texte, '<')!==false) {
-				$texte = preg_replace_callback(",<[^>]*(?:$les_mots)[^>]*>,Ui", 'glossaire_echappe_balises_callback', $texte);
+		$les_mots = $les_regexp = $les_titres = array();
+		foreach ($a as $m) {
+			$m = trim($m);
+			// interpretation des expressions regulieres grace aux virgules : ,un +mot,i
+			if(strpos($m, ',')===0) $les_regexp[] = $m;
+			else {
+				$les_mots[] = charset2unicode($m);
+				$les_titres[] = $m;
 			}
-			// prudence 2 : en iso-8859-1, (\W) comprend les accents, mais pas en utf-8... Donc on passe en unicode
-			if($GLOBALS['meta']['charset'] != 'iso-8859-1') $texte = charset2unicode($texte);
-			// prudence 3 : on neutralise le mot si on trouve un accent (HTML ou unicode) juste avant ou apres
-			if (strpos($texte, '&')!==false) {
-				$texte = preg_replace_callback(',&(?:'._GLOSSAIRE_ACCENTS.");(?:$les_mots),i", 'glossaire_echappe_balises_callback', $texte);
-				$texte = preg_replace_callback(",(?:$les_mots)&(?:"._GLOSSAIRE_ACCENTS.');,i', 'glossaire_echappe_balises_callback', $texte);
+		}
+		$les_titres = count($les_titres)?join('/', $les_titres):'??';
+		$mot_present = false;
+		if(count($les_regexp)) {
+			// a chaque expression reconnue, on pose une balise temporaire cryptee
+			// ce remplacement est puissant, attention aux balises HTML ; par exemple, eviter : ,div,i
+			$texte = preg_replace_callback($les_regexp, "glossaire_echappe_mot_callback", $texte, $limit);
+			// TODO 1 : sous PHP 5.0, un parametre &$count permet de savoir si un remplacement a eu lieu
+			// et s'il faut construire la fenetre de glossaire.
+			// TODO 2 : decrementer le parametre $limit pour $les_mots, si &$count est renseigne.
+			// en attendant, constuisons qd meme la fenetre...
+			$mot_present = true;
+		}
+		if(count($les_mots)) {
+			$les_mots = array_unique($les_mots);
+			array_walk($les_mots, 'cs_preg_quote');
+			$les_mots = glossaire_accents(join('|', $les_mots));
+			if(preg_match(",\W(?:$les_mots)\W,i", $texte)) {
+				// prudence 2 : on protege TOUTES les balises HTML comprenant le mot
+				if (strpos($texte, '<')!==false)
+					$texte = preg_replace_callback(",<[^>]*(?:$les_mots)[^>]*>,Ui", 'glossaire_echappe_balises_callback', $texte);
+				// prudence 3 : en iso-8859-1, (\W) comprend les accents, mais pas en utf-8... Donc on passe en unicode
+				if(($GLOBALS['meta']['charset'] != 'iso-8859-1') && !$unicode) 
+					{ $texte = charset2unicode($texte); $unicode = true; }
+				// prudence 4 : on neutralise le mot si on trouve un accent (HTML ou unicode) juste avant ou apres
+				if (strpos($texte, '&')!==false) {
+					$texte = preg_replace_callback(',&(?:'._GLOSSAIRE_ACCENTS.");(?:$les_mots),i", 'glossaire_echappe_balises_callback', $texte);
+					$texte = preg_replace_callback(",(?:$les_mots)&(?:"._GLOSSAIRE_ACCENTS.');,i', 'glossaire_echappe_balises_callback', $texte);
+				}
+				// a chaque mot reconnu, on pose une balise temporaire cryptee
+				$texte = preg_replace_callback(",(?<=\W)(?:$les_mots)(?=\W),i", "glossaire_echappe_mot_callback", $texte, $limit);
+				$mot_present = true;
 			}
-			// on y va !
-			$lien = function_exists('glossaire_generer_url')
-				?glossaire_generer_url($gloss_id, $titre)
-				:glossaire_generer_url_dist($gloss_id, $titre);
-			$mem = $GLOBALS['toujours_paragrapher'];
-			$GLOBALS['toujours_paragrapher'] = false;
+		}
+		// si un mot est trouve, on construit la fenetre de glossaire
+		if($mot_present) {
+			$lien = $glossaire_generer_url($gloss_id, $titre);
 			// $definition =strlen($mot['descriptif'])?$mot['descriptif']:$mot['texte'];
 			$table1[$gloss_id] = "href='$lien' name='mot$gloss_id"; // name est complete plus tard pour eviter les doublons
 			$table2[$gloss_id] = recuperer_fond(
 				defined('_GLOSSAIRE_JS')?'fonds/glossaire_js':'fonds/glossaire_css', 
-				array('id_mot' => $gloss_id, 'titre' => $titre, 
+				array('id_mot' => $gloss_id, 'titre' => $les_titres, 
 					'texte' => glossaire_safe($mot['texte']), 
 					'descriptif' => glossaire_safe($mot['descriptif'])));
-			$GLOBALS['toujours_paragrapher'] = $mem;
-			// a chaque mot reconnu, on pose une balise temporaire cryptee
-			$texte = preg_replace_callback(",(?<=\W)(?:$les_mots)(?=\W),i", "glossaire_echappe_mot_callback", $texte, $limit);
 		}
 	}
+	$GLOBALS['toujours_paragrapher'] = $mem;
 	// remplacement final des balises posees ci-dessus
 	$GLOBALS['i']=0;
 	return preg_replace(",@@GLOSS(.*?)#([0-9]+)@@,e", 
