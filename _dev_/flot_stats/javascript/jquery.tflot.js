@@ -1,15 +1,25 @@
+/**
+ * Librairie tFlot pour jQuery et jQuery.flot
+ * Licence GNU/GPL - Matthieu Marcillaud
+ * Version 1.0.0
+ */
+
 (function($){
 	
 	/**
 	 * Deux variables a garder globalement
 	 * 
 	 * collections : stockage de l'ensemble de toutes les valeurs de tous les graphs et leurs options
+	 * collectionsActives : stockage des series actives
+	 * plots : stockage des graphiques
+	 * vignettes : stockage des vignettes
 	 * idGraph : identifiant unique pour tous les graphs
 	 */
-	var collections,  id;
-	collections = []; 
+	collections = [];
+	collectionsActives = []; 
 	plots = []; 
 	vignettes = []; 
+	vignettesSelection = [];
 	idGraph = 0;
 	
 	/*
@@ -62,7 +72,7 @@
 			//        .graphOverview
 			$(this).hide().wrap("<div class='graphique' id='graphique"+idGraph+"'></div>");
 			graphique = $(this).parent();
-			values = $(this).tFlotParseTable({dataList:options.parse});
+			values = parseTable(this, {dataList:options.parse});
 			$.extend(true, values.options, options.flot);
 			graph = $("<div class='graphResult' style='width:" + options.width + ";height:" + options.height + ";'></div>").appendTo(graphique);
 			gInfo = $("<div class='graphInfo'></div>").appendTo(graphique);
@@ -103,246 +113,339 @@
 				}
 				values.options.grid = { markings: weekendAreas }				
 			}
-			
+
 			// en cas de moyenne glissante, on la calcule
 			if (options.moyenneGlissante.show) {
-				values.series = $.tFlotMoyenneGlissante(values.series, options.moyenneGlissante);
+				values.series = moyenneGlissante(values.series, options.moyenneGlissante);
 			}
 
 			// si infobulles, les ajouter
 			if (options.infobulle.show) {
 				$.extend(true, options.infobulle, {date:options.modeDate});
-				$('#graphique'+idGraph).tFlotInfobulle(options.infobulle);
+				infobulle($('#graphique'+idGraph), options.infobulle);
 				$.extend(true, values.options, {
 					grid:{hoverable:true}
 				});
 			}
 			
 					
-			// stocker les valeurs
-			collections.push({id:idGraph, values:values});
 			// dessiner
 			plots[idGraph] = $.plot(graph, values.series, values.options);
 			
 			// prevoir les actions sur les labels
-			$('#graphique'+idGraph).tFlotActions();
-			
+			if (options.legendeActions) {
+				$.extend(values.options, {legend:{container:null, show:false}});
+				actionsLegendes($('#graphique'+idGraph));
+			}
+		
 			// ajouter une mini vue si demandee
 			if (options.vignette.show) {
 				$("<div class='graphVignette' id='#graphVignette"+idGraph 
 					+ "' style='width:" + options.vignette.width + ";height:" 
 					+ options.vignette.height + ";'></div>").appendTo(gInfo);
-				$('#graphique'+idGraph).tFlotVignette(values, options.vignette);
+				creerVignette($('#graphique'+idGraph), values.series, values.options, options.vignette);
+				if (options.vignette.zoom) {
+					zoomVignette($('#graphique'+idGraph));
+				}
 			}
+
+			// stocker les valeurs
+			collections.push({id:idGraph, values:values}); // sources
+			collectionsActives = $.extend(true, {}, collections); // affiches
 			
+					
 			++idGraph;
 		});
-		
-	}
-	
 
 
-	/*
-	 * Prendre une table HTML
-	 * et calculer les donnees d'un graph jQuery.plot
-	 */
-	$.fn.tFlotParseTable = function(settings){
-		var table, series, data, labels, cpt, options, color;
-		flot = series = data = labels = [];
-		color=0;
+
+
+
+
+		/*
+		 * Prendre une table HTML
+		 * et calculer les donnees d'un graph jQuery.plot
+		 */
+		function parseTable(table, settings){
+			var options;
+			flot = [];
+			
+			options = {
+				ticks:[], // [1:"label 1", 2:"label 2"]
+				dataList:'row', // 'column'
+			}
+			$.extend(options, settings);
+			
+			row = (options.dataList == 'row');
 		
-		options = {
-			ticks:[], // [1:"label 1", 2:"label 2"]
-			dataList:'row', // 'column'
-		}
-		$.extend(options, settings);
-		
-		row = (options.dataList == 'row');
-	
-		// 
-		// recuperer les points d'axes
-		// 	
-		axe=0; 
-		if (row) {
-			// dans le th de chaque tr
-			$(this).find('tr:not(:first)').each(function(){
-				$(this).find('th:first').each(function(){
+			// 
+			// recuperer les points d'axes
+			// 	
+			axe=0; 
+			if (row) {
+				// dans le th de chaque tr
+				$(table).find('tr:not(:first)').each(function(){
+					$(this).find('th:first').each(function(){
+						options.ticks.push([++axe, $(this).text()]);
+					});
+				});
+
+			} else {
+				// dans les th du premier tr
+				$(table).find('tr:first th:not(:first)').each(function(){
 					options.ticks.push([++axe, $(this).text()]);
 				});
-			});
-
-		} else {
-			// dans les th du premier tr
-			$(this).find('tr:first th:not(:first)').each(function(){
-				options.ticks.push([++axe, $(this).text()]);
-			});
-		}
-		
-
-		// 
-		// recuperer les noms de series
-		//
-		axe = (axe ? 1 : 0);
-		
-		if (row) {
-			// si axes definis, on saute une ligne
-			if (axe) {
-				columns = $(this).find('tr:first th:not(:first)');
-			} else {
-				columns = $(this).find('tr:first th');
 			}
-			// chaque colonne est une serie
 			
-			for(i=0; i<columns.length; i++){
-				cpt=0, data=[];
-				th = $(this).find('tr:first th:eq(' + (i + axe) + ')');
-				label = th.text();
-				serieOptions = th.tFlotCssOptions();
-				$(this).find('tr td:nth-child(' + (i + 1 + axe) +')').each(function(){
-					val = parseFloat($(this).text());
-					data.push( [++cpt, val] );
-				});
-				serie = {label:label, data:data};
-				$.extend(serie, serieOptions);
-				flot.push(serie);
-			}
 
+			// 
+			// recuperer les noms de series
+			//
+			axe = (axe ? 1 : 0);
 			
-		} else {
-			// si axes definis, on saute une colonne
-			if (axe) {
-				rows = $(this).find('tr:not(:first)');
-			} else {
-				rows = $(this).find('tr');
-			}
-			// chaque ligne est une serie
-			rows.each(function(){
-				cpt=0, data=[];
-				th = $(this).find('th');
-				label = th.text();
-				serieOptions = th.tFlotCssOptions();
-				// recuperer les valeurs
-				$(this).find('td').each(function(){
-					val = parseFloat($(this).text());
-					data.push( [++cpt, val] );
-				});
-				serie = {label:label, data:data};
-				$.extend(serie, serieOptions);
-				flot.push(serie);
-			});		
-		}
-
-		// 
-		// mettre les options dans les series
-		//
-		color=0;
-		$.each(flot, function(i, serie) {
-			serie = $.extend(true, {
-					bars: {
-						barWidth: 0.9,
-						align: "center",
-						show:true,
-						fill:true,
-					},
-					lines: {
-						show:false,
-						fill:false,
-					},
-					color: color++,
-				},	serie);
-			flot[i] = serie;
-		});
-		
-
-		opt = {
-			xaxis: {}
-		}
-		if (options.ticks.length) 
-			opt.xaxis.ticks = options.ticks;
-		return {series:flot, options:opt};
-	}
-	
-	
-	
-	$.fn.tFlotCssOptions = function (){
-		options = {}
-		// si classe 'flotLine' on met une ligne
-		if ($(this).hasClass('flotLine')) {
-			$.extend(true, options, {
-				lines:{show:true},
-				bars:{show:false}
-			});
-		}
-		// si classe 'flotFill' on met rempli
-		if ($(this).hasClass('flotFill')) {
-			$.extend(true, options, {
-				lines:{fill:true},
-				bars:{fill:true}
-			});
-		}
-		return options;
-	}	
-	
-		
-	//
-	// Permettre de cacher certaines series
-	//
-	$.fn.tFlotActions = function() {
-		// actions sur les items de legende
-		// pour masquer / afficher certaines series
-		// a ne charger qu'une fois par graph !!!
-		$(this).find('.legendLabel a').click(function(){
-			tr = $(this).parent().parent();
-			tr.toggleClass('cacher').find('.legendColorBox div').toggle();
-
-			// bof bof tous ces parent() et ca marche qu'avec legendeExterne:true
-			master = tr.parent().parent().parent().parent().parent();
-			pid = master.attr('id').substr(9); // enlever 'graphique'
-			
-			var seriesActives = [];
-			tr.parent().find('tr:not(.cacher)').each(function(){
-				nom = $(this).find('a').text();				
-				n = collections[pid].values.series.length;
-				for(i=0;i<n;i++) {
-					if (collections[pid].values.series[i].label == nom) {
-						seriesActives.push(collections[pid].values.series[i]);
-						break;
-					}
+			if (row) {
+				// si axes definis, on saute une ligne
+				if (axe) {
+					columns = $(table).find('tr:first th:not(:first)');
+				} else {
+					columns = $(table).find('tr:first th');
 				}
-			});
-			$.extend(collections[pid].values.options, {legend:{container:null, show:false}});
-			$.plot(master.find('.graphResult'), seriesActives, collections[pid].values.options);
-		});			
-	}
-	
-	
-	//
-	// Permettre d'afficher une miniature zoomable du tableau
-	//
-	$.fn.tFlotVignette = function(values, settings) {
-		options = {
-			show:true,
-			zoom:true,
-			flot:{
-				legend: { show: false },
-				lines: { show: true, lineWidth: 1 },
-				shadowSize: 0,
-				xaxis: { ticks: 4},
-				yaxis: { ticks: 3},
+				// chaque colonne est une serie
+				
+				for(i=0; i<columns.length; i++){
+					cpt=0, data=[];
+					th = $(table).find('tr:first th:eq(' + (i + axe) + ')');
+					label = th.text();
+					serieOptions = optionsCss(th);
+					$(table).find('tr td:nth-child(' + (i + 1 + axe) +')').each(function(){
+						val = parseFloat($(this).text());
+						data.push( [++cpt, val] );
+					});
+					serie = {label:label, data:data};
+					$.extend(serie, serieOptions);
+					flot.push(serie);
+				}
 
-				grid: { color: "#999" },
-				selection: { mode: "x" }				
+				
+			} else {
+				// si axes definis, on saute une colonne
+				if (axe) {
+					rows = $(table).find('tr:not(:first)');
+				} else {
+					rows = $(table).find('tr');
+				}
+				// chaque ligne est une serie
+				rows.each(function(){
+					cpt=0, data=[];
+					th = $(this).find('th');
+					label = th.text();
+					serieOptions = optionsCss(th);
+					// recuperer les valeurs
+					$(this).find('td').each(function(){
+						val = parseFloat($(this).text());
+						data.push( [++cpt, val] );
+					});
+					serie = {label:label, data:data};
+					$.extend(serie, serieOptions);
+					flot.push(serie);
+				});		
 			}
-		};
-		$.extend(true, options, settings);
-		// demarrer la vignette
-		vignette = $(this).find('.graphVignette');
-		pid = vignette.parent().parent().attr('id').substr(9);
-		vignettes[pid] = $.plot(vignette, values.series, options.flot);
+
+			// 
+			// mettre les options dans les series
+			//
+			color=0;
+			$.each(flot, function(i, serie) {
+				serie = $.extend(true, {
+						bars: {
+							barWidth: 0.9,
+							align: "center",
+							show:true,
+							fill:true,
+						},
+						lines: {
+							show:false,
+							fill:false,
+						},
+						color: color++,
+					},	serie);
+				flot[i] = serie;
+			});
+			
+
+			opt = {
+				xaxis: {}
+			}
+			if (options.ticks.length) 
+				opt.xaxis.ticks = options.ticks;
+			return {series:flot, options:opt};
+		}
+
+
 		
-		// autoriser le zoom
-		if (options.zoom) {
-			$(this).find('.graphResult').bind("plotselected", function (event, ranges) {
+		
+		/*
+		 * 
+		 * Recuperer les options en fonctions de CSS
+		 * 
+		 */
+		function optionsCss(element) {
+			var options = {};
+			// si classe 'flotLine' on met une ligne
+			if ($(element).hasClass('flotLine')) {
+				$.extend(true, options, {
+					lines:{show:true},
+					bars:{show:false}
+				});
+			}
+			// si classe 'flotFill' on met rempli
+			if ($(element).hasClass('flotFill')) {
+				$.extend(true, options, {
+					lines:{fill:true},
+					bars:{fill:true}
+				});
+			}
+			return options;			
+		}
+		
+		
+		
+		
+
+		/*
+		 * 
+		 *  calcul d'une moyenne glissante
+		 * 
+		 */ 
+		function moyenneGlissante(lesSeries, settings) {
+			var options;
+			options = {
+				plage: 7,
+				texte:"Moyenne glissante",
+			}
+			$.extend(options, settings);
+
+			g = options.plage;
+			series = [];
+			$.each(lesSeries, function(i, val){
+				data = [], moy = [];
+				$.each(val.data, function (j, d){
+					// ajout du nouvel element
+					// et retrait du trop vieux
+					moy.push(parseInt(d[1]));
+					if (moy.length>=g) { moy.shift();}
+					
+					// calcul de la somme et ajout de la moyenne
+					for(var k=0,sum=0;k<moy.length;sum+=moy[k++]);
+					data.push([d[0], Math.round(sum/moy.length)]);						
+				});
+				
+				serieG = $.extend(true, {}, val, {
+					data:data,
+					label:val.label + " ("+options.texte+")",
+					lines:{
+						show:true,
+						fill:false	
+					},
+					bars:{show:false}
+				});
+				series.push(val);
+				series.push(serieG);
+			});
+			// remettre les couleurs
+			color=0;
+			$.each(series, function(i, val) {
+				val.color = color++;
+			});
+			return series;
+		}		
+		
+		
+		
+
+
+		//
+		// Permettre de cacher certaines series
+		//
+		function actionsLegendes(graph) {
+			// actions sur les items de legende
+			// pour masquer / afficher certaines series
+			// a ne charger qu'une fois par graph !!!
+			$(graph).find('.legendLabel a').click(function(){
+				tr = $(this).parent().parent();
+				tr.toggleClass('cacher').find('.legendColorBox div').toggle();
+
+				// bof bof tous ces parent() et ca marche qu'avec legendeExterne:true
+				master = tr.parent().parent().parent().parent().parent();
+				pid = master.attr('id').substr(9); // enlever 'graphique'
+				
+				var seriesActives = [];
+				tr.parent().find('tr:not(.cacher)').each(function(){
+					nom = $(this).find('a').text();
+					n = collections[pid].values.series.length;
+					for(i=0;i<n;i++) {
+						if (collections[pid].values.series[i].label == nom) {
+							seriesActives.push(collections[pid].values.series[i]);
+							break;
+						}
+					}
+				});
+				collectionsActives[pid].values.series = seriesActives;
+
+				$.plot(master.find('.graphResult'), seriesActives, collections[pid].values.options);
+				// vignettes
+				if (master.find('.graphVignette').length) {
+					creerVignette(master, seriesActives, collections[pid].values.options);
+				}
+
+			});			
+		}
+		
+		
+
+
+		//
+		// Afficher une miniature
+		//
+		function creerVignette(graphique, series, optionsParents, settings) {
+			var options;
+			options = {
+				show:true,
+				zoom:true,
+				flot:{
+					legend: { show: false },
+					lines: { show: true, lineWidth: 1 },
+					shadowSize: 0,
+
+					grid: { color: "#999", hoverable:null },
+					selection: { mode: "x" },
+					xaxis:{min:null, max:null},			
+					yaxis:{min:null, max:null},			
+				}
+			};
+			$.extend(true, options, settings);
+			options.flot = $.extend(true, {}, optionsParents, options.flot);
+
+			// demarrer la vignette
+			vignette = $(graphique).find('.graphVignette');
+			pid = vignette.parent().parent().attr('id').substr(9);
+			vignettes[pid] = $.plot(vignette, series, options.flot);
+			
+			if (vignettesSelection[pid] !== undefined) {
+				vignettes[pid].setSelection(vignettesSelection[pid]);
+			}
+		}
+		
+		
+		
+		//
+		// Permettre le zoom sur une miniature
+		//		
+		function zoomVignette(graphique) {	
+			vignette = $(graphique).find('.graphVignette');
+			pid = vignette.parent().parent().attr('id').substr(9);
+						
+			$(graphique).find('.graphResult').bind("plotselected", function (event, ranges) {
 				graph = $(event.target);
 				pid = graph.parent().attr('id').substr(9);
 
@@ -353,8 +456,9 @@
 					ranges.yaxis.to = ranges.yaxis.from + 0.00001;
 				
 				// do the zooming
-				plots[pid] = $.plot(graph, collections[pid].values.series,
-					$.extend(true, {}, options, {
+				// et sauver les parametres du zoom
+				plots[pid] = $.plot(graph, collectionsActives[pid].values.series,
+					$.extend(true, collections[pid].values.options, {
 					  xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to },
 					  yaxis: { min: ranges.yaxis.from, max: ranges.yaxis.to }
 					}));
@@ -364,105 +468,64 @@
 			});
 			vignette.bind("plotselected", function (event, ranges) {
 				graph = $(event.target);
-				pid = graph.parent().parent().attr('id').substr(9);				
+				pid = graph.parent().parent().attr('id').substr(9);	
+				vignettesSelection[pid] = ranges;			
 				plots[pid].setSelection(ranges);
 			});		
-		}
-
-
-	}
-	
-	
-	/*
-	 * 
-	 *  calcul d'une moyenne glissante
-	 * 
-	 */ 
-	$.tFlotMoyenneGlissante = $.fn.tFlotMoyenneGlissante = function(lesSeries, settings) {
-		options = {
-			plage: 7,
-			texte:"Moyenne glissante",
-		}
-		$.extend(options, settings);
-
-		g = options.plage;
-		series = [];
-		$.each(lesSeries, function(i, val){
-			data = [], moy = [];
-			$.each(val.data, function (j, d){
-				// ajout du nouvel element
-				// et retrait du trop vieux
-				moy.push(parseInt(d[1]));
-				if (moy.length>=g) { moy.shift();}
-				
-				// calcul de la somme et ajout de la moyenne
-				for(var k=0,sum=0;k<moy.length;sum+=moy[k++]);
-				data.push([d[0], Math.round(sum/moy.length)]);						
-			});
 			
-			serieG = $.extend(true, {}, val, {
-				data:data,
-				label:val.label + " ("+options.texte+")",
-				lines:{
-					show:true,
-					fill:false	
-				},
-				bars:{show:false}
-			});
-			series.push(val);
-			series.push(serieG);
-		});
-		// remettre les couleurs
-		color=0;
-		$.each(series, function(i, val) {
-			val.color = color++;
-		});
-		return series;
-	}
+		}	
 	
 	
 	
-	/*
-	 * 
-	 * Infobulles
-	 * 
-	 */
-	var previousPoint = null;
-	$.fn.tFlotInfobulle = function(settings) {
-		options = {
-			show:true
-		};
-		$.extend(true, options, settings);
 		
-		$(this).bind("plothover", function (event, pos, item) {
-			$("#x").text(pos.x.toFixed(2));
-			$("#y").text(pos.y.toFixed(2));
-
-			if (options.show) {
-				if (item) {
-					if (previousPoint != item.datapoint) {
-						previousPoint = item.datapoint;
-						
-						$("#tooltip").remove();
-						var x = item.datapoint[0],
-							y = item.datapoint[1];
-						// si une date, remise du forme
-						if (options.date) {
-							x = formatDate((new Date(x)), "%d/%m/%y");
+		/*
+		 * 
+		 * Infobulles
+		 * 
+		 */
+		var previousPoint = null;
+		function infobulle(graph, settings) {
+			var options;
+			options = {
+				show:true
+			};
+			$.extend(true, options, settings);
+			
+			$(graph).bind("plothover", function (event, pos, item) {
+				$("#x").text(pos.x.toFixed(2));
+				$("#y").text(pos.y.toFixed(2));
+				
+				graph = $(event.target);
+				pid = graph.parent().attr('id').substr(9);
+				
+				if (options.show) {
+					if (item) {
+						if (previousPoint != item.datapoint) {
+							previousPoint = item.datapoint;
+							
+							$("#tooltip").remove();
+							var x = item.datapoint[0],
+								y = item.datapoint[1];
+							// si une date, remise du forme
+							if (options.date) {
+								x = formatDate((new Date(x)), "%d/%m/%y");
+							}
+							
+							showTooltip(item.pageX, item.pageY,
+										item.series.label + " [" + x + "] = " + y);
 						}
-						
-						showTooltip(item.pageX, item.pageY,
-									item.series.label + " [" + x + "] = " + y);
+					}
+					else {
+						$("#tooltip").remove();
+						previousPoint = null;            
 					}
 				}
-				else {
-					$("#tooltip").remove();
-					previousPoint = null;            
-				}
-			}
-		});
+			});
+		}				
 	}
-		
+	
+
+
 		
 		
 	// Pris sur le site de Flot (exemple de visites)
@@ -501,6 +564,7 @@
             opacity: 0.80
         }).appendTo("body").fadeIn(200);
     }
+
 
 	// copie de la fonction de jquery.flot.js
 	// pour utilisation dans infobulle
