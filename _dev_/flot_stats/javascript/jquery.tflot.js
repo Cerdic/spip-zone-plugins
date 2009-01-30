@@ -8,6 +8,8 @@
 	 */
 	var collections,  id;
 	collections = []; 
+	plots = []; 
+	vignettes = []; 
 	idGraph = 0;
 	
 	/*
@@ -22,9 +24,7 @@
 		options = {
 			width:'500px',
 			height:'250px',
-			parse:{
-				dataList:'row', // 'column' : tableaux verticaux par defaut... 
-			},
+			parse:'row', // 'column' : tableaux verticaux par defaut... 
 			legendeExterne:false,
 			legendeActions:false, // ne fonctionne qu'avec l'option legende externe
 			modeDate:false, // pour calculer les timestamp automatiquement
@@ -32,9 +32,12 @@
 				show:false, // pour calculer une moyenne glissante automatiquement
 				plage:7 // plage de glissement (nombre impair !)
 			},
-			infobulle:{
-				show:false,
-			},
+			infobulle:{show:false},
+			vignette:{
+				show:false, 
+				zoom:true,
+				width:'160px',
+				height:'100px'},
 			flot:{
 				legend:{
 					show:true,
@@ -54,17 +57,19 @@
 			// creer les cadres
 			// .graphique
 			//     .graphResult
-			//     .graphLegend 
+			//	   .graphInfos
+			//     	  .graphLegend
+			//        .graphOverview
 			$(this).hide().wrap("<div class='graphique' id='graphique"+idGraph+"'></div>");
 			graphique = $(this).parent();
-			values = $(this).tFlotParseTable(options.parse);
+			values = $(this).tFlotParseTable({dataList:options.parse});
 			$.extend(true, values.options, options.flot);
-			
 			graph = $("<div class='graphResult' style='width:" + options.width + ";height:" + options.height + ";'></div>").appendTo(graphique);
+			gInfo = $("<div class='graphInfo'></div>").appendTo(graphique);
 			
 			// legende en dehors du dessin ?
 			if (options.legendeExterne) {
-				legend = $("<div class='graphLegend' id='grapLegend"+idGraph+"'></div>").appendTo(graphique);
+				legend = $("<div class='graphLegend' id='grapLegend"+idGraph+"'></div>").appendTo(gInfo);
 				values.options.legend.container = legend;
 			}
 			// legende avec items clicables pour desactiver certaines series
@@ -117,10 +122,18 @@
 			// stocker les valeurs
 			collections.push({id:idGraph, values:values});
 			// dessiner
-			$.plot(graph, values.series, values.options);
+			plots[idGraph] = $.plot(graph, values.series, values.options);
 			
 			// prevoir les actions sur les labels
 			$('#graphique'+idGraph).tFlotActions();
+			
+			// ajouter une mini vue si demandee
+			if (options.vignette.show) {
+				$("<div class='graphVignette' id='#graphVignette"+idGraph 
+					+ "' style='width:" + options.vignette.width + ";height:" 
+					+ options.vignette.height + ";'></div>").appendTo(gInfo);
+				$('#graphique'+idGraph).tFlotVignette(values, options.vignette);
+			}
 			
 			++idGraph;
 		});
@@ -250,7 +263,7 @@
 	}
 	
 	
-		
+	
 	$.fn.tFlotCssOptions = function (){
 		options = {}
 		// si classe 'flotLine' on met une ligne
@@ -271,7 +284,9 @@
 	}	
 	
 		
-	
+	//
+	// Permettre de cacher certaines series
+	//
 	$.fn.tFlotActions = function() {
 		// actions sur les items de legende
 		// pour masquer / afficher certaines series
@@ -281,7 +296,7 @@
 			tr.toggleClass('cacher').find('.legendColorBox div').toggle();
 
 			// bof bof tous ces parent() et ca marche qu'avec legendeExterne:true
-			master = tr.parent().parent().parent().parent();
+			master = tr.parent().parent().parent().parent().parent();
 			pid = master.attr('id').substr(9); // enlever 'graphique'
 			
 			var seriesActives = [];
@@ -301,6 +316,61 @@
 	}
 	
 	
+	//
+	// Permettre d'afficher une miniature zoomable du tableau
+	//
+	$.fn.tFlotVignette = function(values, settings) {
+		options = {
+			show:true,
+			zoom:true,
+			flot:{
+				legend: { show: false },
+				lines: { show: true, lineWidth: 1 },
+				shadowSize: 0,
+				xaxis: { ticks: 4},
+				yaxis: { ticks: 3},
+
+				grid: { color: "#999" },
+				selection: { mode: "x" }				
+			}
+		};
+		$.extend(true, options, settings);
+		// demarrer la vignette
+		vignette = $(this).find('.graphVignette');
+		pid = vignette.parent().parent().attr('id').substr(9);
+		vignettes[pid] = $.plot(vignette, values.series, options.flot);
+		
+		// autoriser le zoom
+		if (options.zoom) {
+			$(this).find('.graphResult').bind("plotselected", function (event, ranges) {
+				graph = $(event.target);
+				pid = graph.parent().attr('id').substr(9);
+
+				// clamp the zooming to prevent eternal zoom
+				if (ranges.xaxis.to - ranges.xaxis.from < 0.00001)
+					ranges.xaxis.to = ranges.xaxis.from + 0.00001;
+				if (ranges.yaxis.to - ranges.yaxis.from < 0.00001)
+					ranges.yaxis.to = ranges.yaxis.from + 0.00001;
+				
+				// do the zooming
+				plots[pid] = $.plot(graph, collections[pid].values.series,
+					$.extend(true, {}, options, {
+					  xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to },
+					  yaxis: { min: ranges.yaxis.from, max: ranges.yaxis.to }
+					}));
+				
+				// don't fire event on the overview to prevent eternal loop
+				vignettes[pid].setSelection(ranges, true);
+			});
+			vignette.bind("plotselected", function (event, ranges) {
+				graph = $(event.target);
+				pid = graph.parent().parent().attr('id').substr(9);				
+				plots[pid].setSelection(ranges);
+			});		
+		}
+
+
+	}
 	
 	
 	/*
@@ -470,4 +540,5 @@
 		}
 		return r.join("");
 	}
+
 })(jQuery);
