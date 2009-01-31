@@ -200,7 +200,7 @@ c'est le par defaut des formulaires de Spip */
 .formulaire_spip li.obligatoire label,
 .formulaire_spip li.obligatoire.gauche label {
 	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], center [(#GET{right})] no-repeat })]
-	color: white;
+	color: black;
 	font-weight: bold;
 }
 
@@ -434,8 +434,8 @@ padding-top:10px;
 
 .formulaire_spip li.editer_parent label, 
 .formulaire_spip li.editer_groupe_mot label {
-	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{999999, bottom [(#GET{left})] no-repeat })]
-	color: white;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{bbbbbb, bottom [(#GET{left})] no-repeat })]
+	color: black;
 }
 
 
