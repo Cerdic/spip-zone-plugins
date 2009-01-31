@@ -219,7 +219,8 @@ function exec_spipbb_admin() {
 				bloc_info_etat($art_ferme);
 				echo "<br />";
 			}
-			echo puce_statut_article($id_forum, $row['statut'], $id_salon, $type='article', $ajax = false)."&nbsp;";
+			$puce_statut = charger_fonction('puce_statut', 'inc');
+			echo $puce_statut($id_forum, $row['statut'], $id_salon,'article')."&nbsp;";
 			echo "<span class='verdana3'><b>".propre($titre_forum)."</b></span><br />"
 			. propre($desc_forum)
 			. "</td>\n"
