@@ -515,6 +515,7 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 
 /* Bouton de validation */
 input[type="submit"] {
+	background-color: #[(#ENV{couleur_foncee})];
 	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|image_bg{[(#ENV{couleur_foncee})], center center })]
 	border: 1px outset [(#GET{claire})];
 	padding: 3px;
