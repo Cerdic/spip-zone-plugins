@@ -11,13 +11,14 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
-include_spip('inc/presentation');
-include_spip('inc/statistiques');
-include_spip('inc/statistiques_new');
 function exec_flot_stats() {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page("Statistiques", "", "");
 	echo recuperer_fond('prive/stats');
+}
+function exec_flot_stats_args() {
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page("Statistiques", "", "");
+	echo recuperer_fond('prive/stats_args');
 }
 ?>
