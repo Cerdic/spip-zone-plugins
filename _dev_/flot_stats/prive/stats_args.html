@@ -23,7 +23,7 @@
 </script>
 <h1>Statistiques</h1>
 <div class="espacegraph">
-	<BOUCLE_visites(VISITES){par date}{id_article}>
+	<BOUCLE_visites(VISITES_ARTICLES){par date}{id_article ?}{visites!=0}>
 	[(#SET{tableau, [(#GET{tableau}|concat{<tr><th>[(#DATE|affdate{Y/m/d})]</th><td>#VISITES</td></tr>})]})]
 	</BOUCLE_visites>
 	<table class="graph">
@@ -31,7 +31,7 @@
 		#GET{tableau}
 	</table>
 	</B_visites>
-	<BOUCLE_total(VISITES)>#SET{total,#GET{total}|plus{#VISITES}}</BOUCLE_total>
+	<BOUCLE_total(VISITES_ARTICLES){id_article ?}{visites!=0}>#SET{total,#GET{total}|plus{#VISITES}}</BOUCLE_total>
 	[Il y a au total <b>(#GET{total})</b> visites.]
 	<//B_total>
 	<B_stats>
@@ -46,7 +46,7 @@
 			</div>
 			<div>
 				<div id="visites" class="bloc_depliable blocdeplie">				
-					<BOUCLE_stats(VISITES){!par date}{" <br /> "}{0,5}{id_article}>
+					<BOUCLE_stats(VISITES_ARTICLES){!par date}{" <br /> "}{0,5}{id_article ?}{visites!=0}>
 					[(#DATE|affdate{Y/m/d})] - <b>#VISITES</b> visites
 					</BOUCLE_stats>
 				</div>

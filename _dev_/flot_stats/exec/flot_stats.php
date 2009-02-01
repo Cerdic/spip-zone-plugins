@@ -11,14 +11,16 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function exec_flot_stats() {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page("Statistiques", "", "");
-	echo recuperer_fond('prive/stats');
+	if(_request('id_article')) {
+		echo recuperer_fond('prive/stats_args');
+	}
+	else {
+		echo recuperer_fond('prive/stats');
+	}
 }
-function exec_flot_stats_args() {
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page("Statistiques", "", "");
-	echo recuperer_fond('prive/stats_args');
-}
+
 ?>
