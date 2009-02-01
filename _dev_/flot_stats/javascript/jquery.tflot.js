@@ -180,6 +180,18 @@
 				orientation:'row', // 'column'
 				ticksReels:[], // on sauve les vraies donnees pour les infobulles (1 janvier 2008) et non le code de date (1/1/2008)
 				axeOnTitle:false,
+				defaultSerie:{
+					bars: {
+						barWidth: 0.9,
+						align: "center",
+						show:true,
+						fill:true,
+					},
+					lines: {
+						show:false,
+						fill:false,
+					}
+				},
 			}
 			$.extend(options, settings);
 			
@@ -277,19 +289,7 @@
 			//
 			color=0;
 			$.each(flot, function(i, serie) {
-				serie = $.extend(true, {
-						bars: {
-							barWidth: 0.9,
-							align: "center",
-							show:true,
-							fill:true,
-						},
-						lines: {
-							show:false,
-							fill:false,
-						},
-						color: color++,
-					},	serie);
+				serie = $.extend(true, {}, options.defaultSerie, {color: color++}, serie);
 				flot[i] = serie;
 			});
 			
