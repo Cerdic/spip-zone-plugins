@@ -21,14 +21,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param unknown_type $largeur
  * @param unknown_type $hauteur
  */
-function inc_choisir_mode_document_dist($fichier, $type_lien, $type_image, $largeur, $hauteur){
+function inc_choisir_mode_document_dist($infos, $type_inclus_image, $objet){
 	
 	// si ce n'est pas une image, c'est forcement un document
-	if (!in_array($type_image, array('gif', 'png', 'jpg')))
+	if (!$infos['type_image'] OR !$type_inclus_image)
 		return 'document';
 
 	// si on a pas le droit d'ajouter de document a l'objet, c'est donc un mode image
-	if ($type_lien AND isset($GLOBALS['meta']["documents_$type_lien"]) AND ($GLOBALS['meta']["documents_$type_lien"]=='non'))
+	if ($objet AND isset($GLOBALS['meta']["documents_$objet"]) AND ($GLOBALS['meta']["documents_$objet"]=='non'))
 		return 'image';
 	
 
@@ -44,8 +44,8 @@ function inc_choisir_mode_document_dist($fichier, $type_lien, $type_image, $larg
 	if (!_LARGEUR_MODE_IMAGE)
 		return 'image';
 	
-	if ($largeur > 0
-	  AND $largeur < _LARGEUR_MODE_IMAGE)
+	if ($infos['largeur'] > 0
+	  AND $infos['largeur'] < _LARGEUR_MODE_IMAGE)
 		return 'image';
 	else
 		return 'document';

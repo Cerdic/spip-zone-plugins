@@ -12,206 +12,257 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/charsets'); # pour le nom de fichier
 
-// http://doc.spip.org/@action_joindre_sous_action
-function action_joindre_sous_action($id, $id_document, $mode, $type, &$documents_actifs)
-{
-	$hash = _request('hash');
-	$url = _request('url');
-	$chemin = _request('chemin');
-	$ancre = _request('ancre');
-	$sousaction1 = _request('sousaction1');
-	$sousaction2 = _request('sousaction2');
-	$sousaction3 = _request('sousaction3');
-	$sousaction4 = _request('sousaction4');
-	$sousaction5 = _request('sousaction5'); // decompacter un zip
-	$redirect = _request('redirect');
-	$iframe_redirect = _request('iframe_redirect');
-
-// pas terrible, mais c'est le pb du bouton Submit qui retourne son texte,
-// et son transcodage est couteux et perilleux
-	$sousaction = 
-       ($sousaction1 ? 1 :
-	($sousaction2 ? 2 :
-	 ($sousaction3 ? 3 : 
-	  ($sousaction4 ? 4 :
-	   $sousaction5 ))));
-
-	$path = ($sousaction1 ? ($_FILES ? $_FILES : $GLOBALS['HTTP_POST_FILES']) :
-		($sousaction2 ? $url : $chemin));
-
-	$sousaction = charger_fonction('joindre' . $sousaction, 'inc');
-	$type_image = $sousaction($path, $mode, $type, $id, $id_document, 
-		 $hash, $redirect, $documents_actifs, $iframe_redirect);
-
-}
-
-// Cas d'un document distant reference sur internet
-// http://doc.spip.org/@inc_joindre2_dist
-function inc_joindre2_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
-{
-	return joindre_documents(
-					array(
-				   array('name' => basename($path),
-					 'tmp_name' => $path)
-				   ), 'distant', $type, $id, $id_document,
-			     $hash, $redirect, $actifs, $iframe_redirect);
-}
-
-// Cas d'un fichier transmis
-// http://doc.spip.org/@inc_joindre1_dist
-function inc_joindre1_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
-{
-	$files = array();
-	if (is_array($path))
-	  foreach ($path as $file) {
-	  //UPLOAD_ERR_NO_FILE
-		if (!($file['error'] == 4) )
-			$files[]=$file;
+/**
+ * Recuperer le nom du fichier selon le mode d'upload choisi
+ * et mettre cela au format $_FILES
+ * 
+ * Renvoie une liste de fichier ou un message en cas d'erreur
+ *
+ * @return string/array
+ */
+function joindre_trouver_fichier_envoye(){
+	static $files = array();
+	// on est appele deux fois dans un hit, resservir ce qu'on a trouve a la verif
+	// lorsqu'on est appelle au traitement
+	
+	if (count($files))
+		return $files;
+	
+	if (_request('joindre_upload')){
+		$post = isset($_FILES) ? $_FILES : $GLOBALS['HTTP_POST_FILES'];
+		$files = array();
+		if (is_array($post)){
+			include_spip('action/ajouter_documents');
+		  foreach ($post as $file) {
+		  //UPLOAD_ERR_NO_FILE
+			if (!($file['error'] == 4) )
+				if (!verifier_upload_autorise($file['name']))
+					return _L("Le telechargement des fichiers du type de ".$file['name']." n'est pas autoris&eacute;");
+				$files[]=$file;
+			}
+		}
+		return $files;
 	}
-
-	return joindre_documents($files, $mode, $type, $id, $id_document,
-			     $hash, $redirect, $actifs, $iframe_redirect);
-} 
-
-// copie de tout ou partie du repertoire upload
-// http://doc.spip.org/@inc_joindre3_dist
-function inc_joindre3_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
-{
-	if (!$path || strstr($path, '..')) return;
-	    
-	$upload = determine_upload();
-	if ($path != '/' AND $path != './') $upload .= $path;
-
-	if (!is_dir($upload))
-	  // seul un fichier est demande
-	  $files = array(array ('name' => basename($upload),
-				'tmp_name' => $upload)
-			 );
-	else {
-	  include_spip('inc/documents');
-	  $files = array();
-	  foreach (preg_files($upload) as $fichier) {
-			$files[]= array (
+	elseif (_request('joindre_distant')){
+		$path = _request('url');
+		include_spip('action/ajouter_documents');
+		$infos = renseigner_source_distante($path);
+		if (!is_array($infos))
+			return $infos; // message d'erreur
+		else
+			return array(
+				array(
+					'name' => basename($path),
+					'tmp_name' => $path,
+					'distant' => true,
+				)
+			);
+	}
+	elseif (_request('joindre_ftp')){
+		$path = _request('cheminftp');
+		if (!$path || strstr($path, '..')) return _L('chemin ftp incorrect');
+		
+		include_spip('inc/actions');
+		$upload = determine_upload();
+		if ($path != '/' AND $path != './') $upload .= $path;
+	
+		if (!is_dir($upload))
+		  // seul un fichier est demande
+		  return array(
+		  	array (
+		  		'name' => basename($upload),
+					'tmp_name' => $upload
+				)
+			);
+		else {
+		  // on upload tout un repertoire
+		  $files = array();
+		  foreach (preg_files($upload) as $fichier) {
+				$files[]= array (
 					'name' => basename($fichier),
 					'tmp_name' => $fichier
-					);
+				);
+		  }
+		  return $files;
+		}
+	}
+	elseif (_request('joindre_zip') AND $path = _request('chemin_zip')){
+		define('_tmp_dir', creer_repertoire_documents(md5($path.$GLOBALS['visiteur_session']['id_auteur'])));
+		if (_tmp_dir == _DIR_IMG)
+			return _T('avis_operation_impossible');
+		
+		$files = joindre_deballer_lister_zip();
+	  
+		// si le zip doit aussi etre conserve, l'ajouter
+		if (_request('options_deballe_zip_conserver')){
+	  	$files[] = array(
+				'name' => basename($path),
+				'tmp_name' => $path,
+	  	);
 	  }
+
+	  return $files;
+		
 	}
 
-	return joindre_documents($files, $mode, $type, $id, $id_document, $hash, $redirect, $actifs, $iframe_redirect);
+	return array();
 }
 
-// Charger la fonction surchargeable receptionnant un fichier
-// et l'appliquer sur celui ou ceux indiques.
-// http://doc.spip.org/@joindre_documents
-function inc_joindre_documents_dist($files, $mode, $type, $id, $id_document, $hash, $redirect, &$actifs, $iframe_redirect)
-{
-	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 
-	if (function_exists('gzopen') 
-	AND !($mode == 'distant')
-	AND (count($files) == 1)
-	AND (preg_match('/\.zip$/i', $files[0]['name'])
-	     OR ($files[0]['type'] == 'application/zip'))) {
+// Erreurs d'upload
+// renvoie false si pas d'erreur
+// et true si erreur = pas de fichier
+// pour les autres erreurs renvoie le message d'erreur
+function joindre_upload_error($error) {
+
+	if (!$error) return false;
+	spip_log("Erreur upload $error -- cf. http://php.net/manual/fr/features.file-upload.errors.php");
+	switch ($error) {
+			
+		case 4: /* UPLOAD_ERR_NO_FILE */
+			return true;
+
+		# on peut affiner les differents messages d'erreur
+		case 1: /* UPLOAD_ERR_INI_SIZE */
+			$msg = _T('upload_limit',
+			array('max' => ini_get('upload_max_filesize')));
+			break;
+		case 2: /* UPLOAD_ERR_FORM_SIZE */
+			$msg = _T('upload_limit',
+			array('max' => ini_get('upload_max_filesize')));
+			break;
+		case 3: /* UPLOAD_ERR_PARTIAL  */
+			$msg = _T('upload_limit',
+			array('max' => ini_get('upload_max_filesize')));
+			break;
+		
+		default: /* autre */
+			if (!$msg)
+			$msg = _T('pass_erreur').' '. $error
+			. '<br />' . propre("[->http://php.net/manual/fr/features.file-upload.errors.php]");
+			break;
+	}
+
+	spip_log ("erreur upload $error");
+	return $msg;
+	
+}
+
+/**
+ * Verifier si le fichier poste est un zip
+ * Si on sait le deballer, proposer les options necessaires
+ *
+ * @param array $files
+ * @return string
+ */
+function joindre_verifier_zip($files){
+	if (function_exists('gzopen')
+	 AND (count($files) == 1)
+	 AND !isset($files[0]['distant'])
+	 AND 
+	  (preg_match('/\.zip$/i', $files[0]['name']) 
+	   OR ($files[0]['type'] == 'application/zip'))
+	  ){
 	
 	  // on pose le fichier dans le repertoire zip 
 	  // (nota : copier_document n'ecrase pas un fichier avec lui-meme
 	  // ca autorise a boucler)
+	  include_spip('inc/getdocument');
 		$desc = $files[0];
 		$zip = copier_document("zip",
 					$desc['name'],
 					$desc['tmp_name']
 				);
+		
 		// Est-ce qu'on sait le lire ?
 		include_spip('inc/pclzip');
-		$archive = $zip ? new PclZip($zip) : '';
-		if ($archive) {
-			$valables = verifier_compactes($archive);
-			if ($valables) {
-				if (rename($zip, $tmp = _DIR_TMP.basename($zip))) {
-					echo $ajouter_documents($valables, $tmp, $type, $id, $mode, $id_document, $actifs, $hash, $redirect, $iframe_redirect);
-	// a tout de suite en joindre4, joindre5, ou joindre6
-					exit;
-				}
-			}
-		}
+		if ($zip
+		 AND $archive = new PclZip($zip)
+		 AND $contenu = joindre_decrire_contenu_zip($archive)
+		 AND rename($zip, $tmp = _DIR_TMP.basename($zip))
+		 ){
+		 	$contenu[] = $tmp;
+		 	return $contenu;
+		 }
 	}
+	
+	// ce n'est pas un zip sur lequel il faut demander plus de precisions
+	return false;
+}
 
-	foreach ($files as $arg) {
-		// verifier l'extension du fichier en fonction de son type mime
-		list($extension,$arg['name']) = fixer_extension_document($arg);
-		check_upload_error($arg['error']);
-		$x = $ajouter_documents($arg['tmp_name'], $arg['name'], 
-				    $type, $id, $mode, $id_document, $actifs);
+/**
+ * Verifier et decrire les fichiers de l'archive, en deux listes :
+ * - une liste des noms de fichiers ajoutables
+ * - une liste des erreurs (fichiers refuses)
+ *
+ * @param object $zip
+ * @return array
+ */
+function joindre_decrire_contenu_zip($zip) {
+	include_spip('action/ajouter_documents');
+	if (!$list = $zip->listContent()) return false;
+
+	// si pas possible de decompacter: installer comme fichier zip joint
+	// Verifier si le contenu peut etre uploade (verif extension)
+	$fichiers = array();
+	$erreurs = array();
+	foreach ($list as $file) {
+		if (accepte_fichier_upload($f = $file['stored_filename']))
+			$fichiers[$f] = $file;
+		else 
+			$erreurs[] = _L("chargement de $f interdit");
 	}
-	// un invalideur a la hussarde qui doit marcher au moins pour article, breve, rubrique
-	include_spip('inc/invalideur');
-	suivre_invalideur("id='id_$type/$id'");
-	return $x;
+	ksort($fichiers);
+	return array($fichiers,$erreurs);
 }
 
-#-----------------------------------------------------------------------
 
-// sous-actions suite a l'envoi d'un Zip:
-// la fonction joindre_documents ci-dessus a construit un formulaire 
-// qui renvoie sur une des 3 sous-actions qui suivent. 
-
-//  Zip avec confirmation "tel quel"
-
-// http://doc.spip.org/@inc_joindre5_dist
-function inc_joindre5_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
-{
-	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
-	return $ajouter_documents($path, basename($path), $type, $id, $mode, $id_document, $actifs);
-}
-
-// Zip a deballer. 
-
-// http://doc.spip.org/@inc_joindre6_dist
-function inc_joindre6_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
-{
-	$x = joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
-	//  suppression de l'archive en zip
-	spip_unlink($path);
-	return $x;
-}
-
-// Zip avec les 2 options a la fois
-
-// http://doc.spip.org/@inc_joindre4_dist
-function inc_joindre4_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
-{
-	joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
-	return inc_joindre5_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
-}
 
 // http://doc.spip.org/@joindre_deballes
-function joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
-{
-	    $ajouter_documents = charger_fonction('ajouter_documents', 'inc');
-	    define('_tmp_dir', creer_repertoire_documents($hash));
+function joindre_deballer_lister_zip($path,$tmp_dir) {
+  include_spip('inc/pclzip');
+	$archive = new PclZip($path);
+	$archive->extract(
+		PCLZIP_OPT_PATH, _tmp_dir,
+		PCLZIP_CB_PRE_EXTRACT, 'callback_deballe_fichier'
+	);
+	if ($contenu = joindre_decrire_contenu_zip($archive)){
+		$files = array();
+		$fichiers = reset($contenu);
+		foreach($fichiers as $fichier){
+			$f = basename($fichier);
+			$files[] = array('tmp_name'=>$tmp_dir. $f,'name'=>$f,'titrer'=>_request('options_deballe_zip_titrer'));
+		}
+		return $files;
+	}
+ 	return _T('avis_operation_impossible');
+}
 
-	    if (_tmp_dir == _DIR_IMG)
-	      {include_spip('inc/minipres');
-		echo minipres(_T('avis_operation_impossible'));
-		exit;
-	      }
-	    include_spip('inc/pclzip');
-	    $archive = new PclZip($path);
-	    $archive->extract(
-			      PCLZIP_OPT_PATH, _tmp_dir,
-			      PCLZIP_CB_PRE_EXTRACT, 'callback_deballe_fichier'
-			      );
-	    $contenu = verifier_compactes($archive);
-	    $titrer = _request('titrer') == 'on';
-	    foreach ($contenu as $fichier => $size) {
-		$f = basename($fichier);
-		$x = $ajouter_documents(_tmp_dir. $f, $f,
-			$type, $id, $mode, $id_document, $actifs, $titrer);
-	    }
-	    effacer_repertoire_temporaire(_tmp_dir);
-	    return $x;
+
+/**
+ * Cherche dans la base le type-mime du tableau representant le document
+ * et corrige le nom du fichier ; retourne array(extension, nom corrige)
+ * s'il ne trouve pas, retourne '' et le nom inchange
+ *
+ * @param unknown_type $doc
+ * @return unknown
+ */
+// http://doc.spip.org/@fixer_extension_document
+function fixer_extension_document($doc) {
+	$extension = '';
+	$name = $doc['name'];
+	if (preg_match(',[.]([^.]+)$,', $name, $r)
+	 AND $t = sql_fetsel("extension", "spip_types_documents",	"extension=" . sql_quote(corriger_extension($r[1])))
+	 ) {
+		$extension = $t['extension'];
+		$name = preg_replace(',[.][^.]*$,', '', $doc['name']).'.'.$extension;
+	}
+	else if ($t = sql_fetsel("extension", "spip_types_documents",	"mime_type=" . sql_quote($doc['type']))) {
+		$extension = $t['extension'];
+		$name = preg_replace(',[.][^.]*$,', '', $doc['name']).'.'.$extension;
+	}
+
+	return array($extension,$name);
 }
 ?>

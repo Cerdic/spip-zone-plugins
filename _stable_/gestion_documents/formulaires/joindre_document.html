@@ -55,15 +55,30 @@
 			</ul>
 			<p class='boutons'><input class='submit' type="submit" name="joindre_distant" value="<:bouton_choisir:>"/></p>
 		</div>
-
+		<div>
+			<a href='#' onclick="jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_upload').slideDown('fast');return false;"><:bouton_download:></a>
+			| <a href='#' onclick="jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_ftp').slideDown('fast');return false;">ftp</a>
+			| <a href='#' onclick="jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_distant').slideDown('fast');return false;">distant</a>
+		</div>
+		[(#REM) Formulaire pour deballer un zip ]
+		[<ul><li class='fieldset deballer_zip'>(#ENV**{erreurs}|table_valeur{lister_contenu_archive})</li></ul>]
 	</div></form>
-	<div>
-	<a href='#' onclick="jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_upload').slideDown('fast');return false;"><:bouton_download:></a>
-	| <a href='#' onclick="jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_ftp').slideDown('fast');return false;">ftp</a>
-	| <a href='#' onclick="jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_distant').slideDown('fast');return false;">distant</a>
-	</div>
 
 </div>
 <script type='text/javascript'>
-jQuery(document).ready(function(){jQuery('#joindre_ftp,#joindre_distant').hide();});
+if (window.jQuery){
+jQuery(document).ready(function(){
+	[(#ENV{joindre_upload}|oui) 
+	jQuery('.joindre_mode:not(#joindre_upload)').hide();
+	]
+	[(#ENV{joindre_distant}|oui)
+	jQuery('.joindre_mode:not(#joindre_distant)').hide();
+	]
+	[(#ENV{joindre_ftp}|oui)
+	jQuery('.joindre_mode:not(#joindre_ftp)').hide();
+	]
+	if (jQuery('.joindre_mode:visible').length>1)
+		jQuery('.joindre_mode:not(#joindre_upload)').hide();
+});
+}
 </script>

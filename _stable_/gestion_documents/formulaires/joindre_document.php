@@ -12,11 +12,132 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto'){
+	$valeurs = array();
+	if ($mode=='auto'){
+		$mode='choix';
+		if ($objet AND $GLOBALS['meta']["documents_$objet"]=='non')
+			$mode = 'image';
+	}
+	
+	$valeurs['mode'] = $mode;
+	
+	$valeurs['url'] = 'http://';
+	$valeurs['fichier'] = '';
+	
+	$valeurs['_options_upload_ftp'] = '';
+	$valeurs['_dir_upload_ftp'] = '';
+	
+	$valeurs['joindre_upload']=''; 
+	$valeurs['joindre_distant']=''; 
+	$valeurs['joindre_ftp']='';
+	
+	# regarder si un choix d'upload FTP est possible
+	if (
+	 test_espace_prive() # ??
+	 AND ($mode == 'document' OR $mode == 'choix') # si c'est pour un document
+	 //AND !$vignette_de_doc		# pas pour une vignette (NB: la ligne precedente suffit, mais si on la supprime il faut conserver ce test-ci)
+	 AND $GLOBALS['flag_upload']
+	 ) {
+		include_spip('inc/actions');
+		if ($dir = determine_upload('documents')) {
+			// quels sont les docs accessibles en ftp ?
+			$valeurs['_options_upload_ftp'] = joindre_options_upload_ftp($dir, $mode);
+			// s'il n'y en a pas, on affiche un message d'aide
+			// en mode document, mais pas en mode image
+			if ($valeurs['_options_upload_ftp'] OR ($mode == 'document' OR $mode=='choix'))
+				$valeurs['_dir_upload_ftp'] = "<b>".joli_repertoire($dir)."</b>";
+		}
+	}
+	
+	return $valeurs;
+}
 
-//
-// Retourner le contenu du select HTML d'utilisation de fichiers envoyes
-//
-function options_upload_ftp($dir, $mode = 'document') {
+
+function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto'){
+	include_spip('inc/joindre_document');
+	
+	$erreurs = array();
+	$files = joindre_trouver_fichier_envoye();
+	if (is_string($files)){
+		$erreurs['message_erreur'] = $files;
+	}
+	elseif(is_array($files)){
+		// erreur si on a pas trouve de fichier
+		if (!count($files))
+			$erreurs['message_erreur'] = _L('aucun fichier trouv&eacute;');
+		
+		else{
+			// regarder si on a eu une erreur sur l'upload d'un fichier
+			foreach($files as $file){
+				if (isset($file['error'])
+				  AND $test = joindre_upload_error($file['error'])){
+				  	if (is_string($test))
+				  		$erreurs['message_erreur'] = $test;
+				  	else
+							$erreurs['message_erreur'] = _L('aucun fichier trouv&eacute;');
+				}
+			}
+					
+			// si ce n'est pas deja un post de zip confirme
+			// regarder si il faut lister le contenu du zip et le presenter
+			if (!count($erreurs)
+			 AND !_request('joindre_zip') 
+			 AND $contenu_zip = joindre_verifier_zip($files)){
+				list($fichiers,$erreurs,$tmp_zip) = $contenu_zip;
+				$erreurs['lister_contenu_archive'] = recuperer_fond("formulaires/inc-lister_archive_jointe",array('chemin_zip'=>$tmp_zip,'liste_fichiers_zip'=>$fichiers,'erreurs_fichier_zip'=>$erreurs));
+			}
+		}
+	}
+	
+	if (count($erreurs) AND defined('_tmp_dir'))
+		effacer_repertoire_temporaire(_tmp_dir);
+	
+	return $erreurs;
+}
+
+/*
+function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto'){
+	$ajouter_documents = charger_fonction('ajouter_documents', 'action');
+
+	include_spip('inc/joindre_document');
+	$files = joindre_trouver_fichier_envoye();
+
+	$actifs = array();
+	$nouveaux_doc = action_ajouter_documents_dist($id_document,$files,$objet,$id_objet,$mode,$actifs);
+
+	if (defined('_tmp_dir'))
+		effacer_repertoire_temporaire(_tmp_dir);
+	
+	// checker les erreurs eventuelles
+	$messages_erreur = array();
+	foreach ($nouveaux_doc as $doc) {
+		if (!is_numeric($doc))
+			$messages_erreur[] = $doc;
+	}
+	
+	$res = array('editable'=>true);
+	if (count($messages_erreur))
+		$res['message_erreur'] = implode('<br />',$messages_erreur);
+	else 
+		$res['message_ok'] = 'ok';
+	
+	// todo : 
+	// generer les case docs si c'est necessaire
+	// rediriger sinon
+	return $res;
+}
+*/
+
+
+/**
+ * Retourner le contenu du select HTML d'utilisation de fichiers envoyes
+ *
+ * @param string $dir
+ * @param string $mode
+ * @return string
+ */
+function joindre_options_upload_ftp($dir, $mode = 'document') {
 	$fichiers = preg_files($dir);
 	$exts = array();
 	$dirs = array(); 
@@ -32,7 +153,7 @@ function options_upload_ftp($dir, $mode = 'document') {
 		if (preg_match(",\.([^.]+)$,", $f, $match)) {
 			$ext = strtolower($match[1]);
 			if (!isset($exts[$ext])) {
-				include_spip('inc/ajouter_documents');
+				include_spip('action/ajouter_documents');
 				$ext = corriger_extension($ext);
 				if (sql_fetsel('extension', 'spip_types_documents', $a = "extension='$ext'" . $inclus))
 					$exts[$ext] = 'oui';
@@ -74,42 +195,33 @@ function options_upload_ftp($dir, $mode = 'document') {
 }
 
 
-function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto'){
-	$valeurs = array();
-	if ($mode=='auto'){
-		$mode='choix';
-		if ($objet AND $GLOBALS['meta']["documents_$objet"]=='non')
-			$mode = 'image';
-	}
+/**
+ * Lister les fichiers contenus dans un zip
+ *
+ * @param unknown_type $files
+ * @return unknown
+ */
+function joindre_liste_contenu_tailles_archive($files) {
+	include_spip('inc/charsets'); # pour le nom de fichier
+
+	$res = '';
+	if (is_array($files))
+		foreach ($files as $nom => $file) {
+			$nom = translitteration($nom);
+			$date = date_interface(date("Y-m-d H:i:s", $file['mtime']));
 	
-	$valeurs['mode'] = $mode;
-	
-	$valeurs['url'] = 'http://';
-	$valeurs['fichier'] = '';
-	
-	$valeurs['_options_upload_ftp'] = '';
-	$valeurs['_dir_upload_ftp'] = '';
-	
-	# regarder si un choix d'upload FTP est possible
-	if (
-	 test_espace_prive() # ??
-	 AND ($mode == 'document' OR $mode == 'choix') # si c'est pour un document
-	 //AND !$vignette_de_doc		# pas pour une vignette (NB: la ligne precedente suffit, mais si on la supprime il faut conserver ce test-ci)
-	 AND $GLOBALS['flag_upload']
-	 ) {
-		include_spip('inc/actions');
-		if ($dir = determine_upload('documents')) {
-			// quels sont les docs accessibles en ftp ?
-			$valeurs['_options_upload_ftp'] = options_upload_ftp($dir, $mode);
-			// s'il n'y en a pas, on affiche un message d'aide
-			// en mode document, mais pas en mode image
-			if ($valeurs['_options_upload_ftp'] OR ($mode == 'document' OR $mode=='choix'))
-				$valeurs['_dir_upload_ftp'] = "<b>".joli_repertoire($dir)."</b>";
+			$taille = taille_en_octets($file['size']);
+			$res .= "<li title=\"".attribut_html($title)."\"><b>$nom</b> &ndash; $taille<br />&nbsp; $date</li>\n";
 		}
-	}
 	
-	return $valeurs;
+	return $res;
 }
 
+
+function joindre_liste_erreurs_to_li($erreurs){
+	$res = implode("</li><li>",$erreurs);
+	if (strlen($res)) $res = "<li>$res</li>";
+	return $res;
+}
 
 ?>

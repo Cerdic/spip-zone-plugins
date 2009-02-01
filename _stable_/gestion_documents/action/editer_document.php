@@ -103,9 +103,10 @@ function revisions_documents ($id_document, $c=false) {
 		),
 		$c);
 
+
 	// Changer le statut du document ?
 	// le statut n'est jamais fixe manuellement mais decoule de celui des objets lies
-	if(instituer_document($id_document,array('id_parents'=>_request('id_parents')))) {
+	if(instituer_document($id_document,array('id_parents'=>_request('id_parents',$c)))) {
 
 		//
 		// Post-modifications
@@ -179,7 +180,13 @@ function instituer_document($id_document,$champs=array()){
 }
 
 
-
+/**
+ * Revision des parents d'un document
+ * chaque parent est liste au format objet|id_objet
+ *
+ * @param unknown_type $id_document
+ * @param unknown_type $id_parents
+ */
 function gestdoc_revision_document_parents($id_document,$id_parents=null){
 	if (!is_array($id_parents))
 		return;
@@ -189,8 +196,10 @@ function gestdoc_revision_document_parents($id_document,$id_parents=null){
 	// au format objet|id_objet
 	foreach($id_parents as $p){
 		$p = explode('|',$p);
-		$insertions[] = array('id_document'=>$id_document,'objet'=>$p[0],'id_objet'=>$p[1]);
-		$cond[] = "(id_objet=".intval($p[1])." AND objet=".sql_quote($p[0]).")";
+		if (preg_match('/^[a-z0-9_]+$/i', $objet=$p[0])){ // securite
+			$insertions[] = array('id_document'=>$id_document,'objet'=>$p[0],'id_objet'=>$p[1]);
+			$cond[] = "(id_objet=".intval($p[1])." AND objet=".sql_quote($p[0]).")";
+		}
 	}
 	// suppression des parents obsoletes
 	$cond_notin = "id_document=".intval($id_document).(count($cond)?" AND NOT(".implode(") AND NOT(",$cond).")":"");
