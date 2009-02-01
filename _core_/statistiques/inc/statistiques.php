@@ -343,7 +343,7 @@ function statistiques_jour($key, $value, $moyenne, $cumul, $script)
 	
 		$couleur = "couleur_". date("l",$key);
 		$res = "<tr class='$couleur'>"
-		  . "<td><a href='$script'>" . $title . "</a></td>";
+		  . "<th title='" . date("Y/m/d", $key) . "'><a href='$script'>" . $title . "</a></th>";
 	}
 	else {
 		if (strlen($value))
@@ -351,7 +351,7 @@ function statistiques_jour($key, $value, $moyenne, $cumul, $script)
 		else
 			$couleur = "couleur_recap";
 		$res = "<tr class='$couleur'>"
-		  . "<td>" . $key . "</td>";
+		  . "<th>" . $key . "</th>";
 	}
 	$res .= "<td class='valeur'>" . $value . "</td>"
 	. "<td class='moyenne'>" . $moyenne . "</td>"
