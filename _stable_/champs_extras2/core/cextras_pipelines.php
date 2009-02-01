@@ -280,7 +280,7 @@ function cextras_rechercher_liste_des_champs($tables){
 		}
 		// les ajouter
 		if ($t) {
-			$tables = array_merge($tables, $t);
+			$tables = array_merge_recursive($tables, $t);
 		}
 	}
 	return $tables;
