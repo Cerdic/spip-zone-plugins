@@ -7,7 +7,7 @@
 (function($){
 	
 	/**
-	 * Deux variables a garder globalement
+	 * Des variables a garder globalement
 	 * 
 	 * collections : stockage de l'ensemble de toutes les valeurs de tous les graphs et leurs options
 	 * collectionsActives : stockage des series actives
@@ -45,6 +45,7 @@
 				show:false, // pour calculer une moyenne glissante automatiquement
 				plage:7 // plage de glissement (nombre impair !)
 			},
+			grille:{weekend:false},
 			infobulle:{show:false},
 			vignette:{
 				show:false, 
@@ -116,7 +117,9 @@
 					mode: "time",
 					timeformat: "%d/%m/%y",					
 				});
-				values.options.grid = { markings: weekendAreas }				
+				if (options.grille.weekend) {
+					values.options.grid = { markings: weekendAreas }
+				}				
 			}
 
 			// en cas de moyenne glissante, on la calcule
@@ -494,7 +497,10 @@
 				var graphique;
 				graphique = $(event.target).parent().parent();
 				pid = graphique.attr('id').substr(9);	
-				vignettesSelection[pid] = undefined;							
+				vignettesSelection[pid] = undefined;
+				if (vignettes[pid] != undefined) {	
+					vignettes[pid].clearSelection();
+				}			
 				plots[pid] = $.plot(graphique.find('.graphResult'), 
 					collectionsActives[pid].values.series,
 					$.extend(true, collections[pid].values.options, {
