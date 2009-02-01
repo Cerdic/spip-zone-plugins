@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'messages_meme_auteur' => 'Tous les messages de cet auteur',
 'messages_meme_email' => 'Tous les messages de cet email',
 'messages_meme_ip' => 'Tous les messages de cette IP',
+'texte_en_cours_validation'=> 'Les articles, br&egrave;ves, forums ci dessous sont propos&eacute;s &agrave; la publication.',
 
 // statuts
 'messages_tous' => 'Tous',
