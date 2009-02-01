@@ -36,6 +36,8 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 			$pos = $pos2 + strlen($ancre) + strlen($regs[0][$i]);
 			// tout le texte, sans les notes
 			$brut = preg_replace(',\[<a href=["\']#nb.*?</a>\],','', echappe_retour($regs[2][$i],'CS'));
+			// pas de glossaire
+			if(function_exists('cs_retire_glossaire')) $brut = cs_retire_glossaire($brut);
 			// texte brut
 			$brut = preg_replace(',[\n\r]+,',' ',textebrut($brut));
 			$lien = cs_propre(couper($brut, _sommaire_NB_CARACTERES));
