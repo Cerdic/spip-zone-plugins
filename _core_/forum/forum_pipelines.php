@@ -18,23 +18,23 @@
  * @return string
  */
 function forum_accueil_encours($texte){
-	// Les forums en attente de moderation
-	$cpt = sql_countsel("spip_forum", "statut='prop'");
-	$cpt1 = sql_countsel("spip_articles", "statut='prop'");
-	$cpt2 = sql_countsel("spip_breves", "statut='prop'");
-	$cpt3 = sql_countsel("spip_syndic", "statut='prop'");
-	if ($cpt) {
-		if ($cpt>1)
-			$lien = _T('info_liens_syndiques_3')." "._T('info_liens_syndiques_4');
-		else
-			$lien = _T('info_liens_syndiques_5')." "._T('info_liens_syndiques_6');
-		$lien = "<small>$cpt $lien " ._T('info_liens_syndiques_7'). "</small>";
-		if ($GLOBALS['connect_toutes_rubriques'])
-			$lien = "<a href='" . generer_url_ecrire("controle_forum","statut=prop") . "' style='color: black;'>". $lien . ".</a>";
-		$texte .= "\n<br />" . $lien;
+	// si aucun autre objet n'est a valider, on ne dit rien sur les forum
+	if (strlen($texte)){
+		// Les forums en attente de moderation
+		$cpt = sql_countsel("spip_forum", "statut='prop'");
+		if ($cpt) {
+			if ($cpt>1)
+				$lien = _T('info_liens_syndiques_3')." "._T('info_liens_syndiques_4');
+			else
+				$lien = _T('info_liens_syndiques_5')." "._T('info_liens_syndiques_6');
+			$lien = "<small>$cpt $lien " ._T('info_liens_syndiques_7'). "</small>";
+			if ($GLOBALS['connect_toutes_rubriques'])
+				$lien = "<a href='" . generer_url_ecrire("controle_forum","statut=prop") . "' style='color: black;'>". $lien . ".</a>";
+			$texte .= "\n<br />" . $lien;
+		}
+		if ($GLOBALS['meta']['forum_prive_objets'] != 'non')
+			$texte = _T('texte_en_cours_validation_forum') . $texte;
 	}
-	if ($GLOBALS['meta']['forum_prive_objets'] != 'non' AND $cpt1 OR $cpt2 OR $cpt3)
-		$texte = _T('texte_en_cours_validation_forum') . $texte;
 
 	return $texte;
 }
