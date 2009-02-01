@@ -85,8 +85,13 @@ onchange=\"findObj_forcer('valider_date_evenement').style.visibility='visible';\
   }
 
   $res =  debut_cadre_couleur('',true) . $res .  fin_cadre_couleur(true);
+             if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) {
+               return ajax_action_greffe("dater-$id","dater-$id", $res);
+             } else {
+                return ajax_action_greffe("dater-$id", $res);
+             }
 
-  return ajax_action_greffe("dater-$id", $res);
+  
 }
 
 ?>
