@@ -31,12 +31,13 @@ function gestdoc_post_edition($flux){
 }
 
 function gestdoc_affiche_gauche($flux){
-	
+	/*
 	if ($flux['args']['exec']=='articles_edit'){
 		if (!$id_article=intval($flux['args']['id_article'])){
 			$id_article = 0-$GLOBALS['visiteur_session']['id_auteur'];
 		}
 		$flux['data'] .= recuperer_fond('prive/editer/colonne_document',array('objet'=>'article','id_objet'=>$id_article));
 	}
+	*/
 	return $flux;
 }
