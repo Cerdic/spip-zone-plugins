@@ -19,7 +19,7 @@
  */
 function forum_accueil_encours($texte){
 	// si aucun autre objet n'est a valider, on ne dit rien sur les forum
-	if (strlen($texte)){
+	if ($GLOBALS['visiteur_session']['statut'] == '0minirezo') {
 		// Les forums en attente de moderation
 		$cpt = sql_countsel("spip_forum", "statut='prop'");
 		if ($cpt) {
@@ -32,7 +32,7 @@ function forum_accueil_encours($texte){
 				$lien = "<a href='" . generer_url_ecrire("controle_forum","statut=prop") . "' style='color: black;'>". $lien . ".</a>";
 			$texte .= "\n<br />" . $lien;
 		}
-		if ($GLOBALS['meta']['forum_prive_objets'] != 'non')
+		if (strlen($texte) AND $GLOBALS['meta']['forum_prive_objets'] != 'non')
 			$texte = _T('texte_en_cours_validation_forum') . $texte;
 	}
 
