@@ -7,10 +7,29 @@
 #  Documentation : http://www.spip-contrib.net/Plugin-Etiquettes  #
 #-----------------------------------------------------------------#
 
-function etiquettes_produire_id($groupe, $type_objet, $id_objet){
+function etiquettes_produire_id($groupe, $type_objet='', $id_objet=''){
 
 	$elements = compact("groupe", "type_objet", "id_objet");
-	$operations = create_function('$e', 'return str_replace(" ", "_", preg_replace(",([^[:cntrl:][:alnum:]_]|[[:space:]])+,u", " ", translitteration(corriger_caracteres(strtolower(supprimer_tags(supprimer_numero($e)))))));');
+	$operations = create_function(
+		'$e',
+		'return str_replace(
+			" ",
+			"_",
+			preg_replace(
+				",([^[:cntrl:][:alnum:]_]|[[:space:]])+,u",
+				" ",
+				translitteration(
+					corriger_caracteres(
+						strtolower(
+							supprimer_tags(
+								supprimer_numero($e)
+							)
+						)
+					)
+				)
+			)
+		);'
+	);
 	
 	$elements = array_map($operations, $elements);
 	return trim(join('_', $elements), '_');
