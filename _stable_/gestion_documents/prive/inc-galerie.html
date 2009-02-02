@@ -93,7 +93,7 @@
 			<a href='#' onclick="jQuery(this).next().show();$(this).hide();return false;">[(#TOTAL_BOUCLE|gestdoc_affiche_un_ou_plusieurs{gestdoc:une_utilisation,gestdoc:des_utilisations})]</a><div style='display: none;'>
 			]
 			<BOUCLE_liens(DOCUMENTS_LIENS){id_document}{'<br />'}>
-			<a href="[(#ID_OBJET|generer_url_entite{#OBJET,'','',0})]">#OBJET #ID_OBJET</a>
+			[(#ID_OBJET|lien_objet{#OBJET})]
 			</BOUCLE_liens>
 			[(#TOTAL_BOUCLE|>{1}|oui)</div>]
 			</B_liens>

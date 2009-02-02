@@ -196,7 +196,7 @@ function renseigner_source_distante($source){
 		return $infos[$source];
 	}
 
-	return _L("Document $source introuvable");
+	return _T('gestdoc:erreur_chemin_distant',array('nom'=>$source));
 }
 
 if (!function_exists('corriger_extension')){
@@ -327,7 +327,7 @@ function renseigner_taille_dimension_image($fichier,$ext){
 	 OR !@file_exists($fichier)
 	 OR !$infos['taille'] = @intval(filesize($fichier))) {
 		spip_log ("Echec copie du fichier $fichier");
-		return _L("Echec copie du fichier $fichier");
+		return _T('gestdoc:erreur_copie_fichier',array('nom'=> $fichier));
 	}
 
 	// VIDEOS : Prevoir traitement specifique ?
@@ -445,7 +445,7 @@ function verifier_taille_document_acceptable($infos){
 			return _T('info_logo_max_poids', array('maxi' => taille_en_octets(_DOC_MAX_SIZE*1024), 'actuel' => taille_en_octets($taille)));
 
 		if ($infos['mode'] == 'image')
-			return _L("le format de $fichier ne convient pas pour une image");
+			return _T('gestdoc:erreur_format_fichier_image',array('nom'=> $infos['fichier']));
 	}
 	
 	// si c'est une image
@@ -475,10 +475,10 @@ function verifier_taille_document_acceptable($infos){
 	// Si on veut uploader une vignette, il faut qu'elle ait ete bien lue
 	if ($infos['mode'] == 'vignette') {
 		if ($infos['inclus'] != 'image')
-			return _L("le format de ".$infos['fichier']." ne convient pas pour une image"); # SVG
+			return _T('gestdoc:erreur_format_fichier_image',array('nom'=> $infos['fichier'])); #SVG
 
 		if (!($infos['largeur'] OR $infos['hauteur']))
-			return _L('erreur upload vignette '.$infos['fichier']);
+			return _T('gestdoc:erreur_upload_vignette',array('nom'=>$infos['fichier']));
 	}
 
 	return true;

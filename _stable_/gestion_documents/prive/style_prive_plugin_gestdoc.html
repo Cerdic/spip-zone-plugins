@@ -9,6 +9,7 @@
 
 	ATTENTION: il faut absolument le charset sinon Firefox croit que
 	c'est du text/html !
+	<style>
 ]
 #CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
@@ -23,7 +24,53 @@
 .formulaire_editer_document .editer_parent {padding-#GET{left}:10px;}
 .formulaire_editer_document .editer_parent label {margin-#GET{left}:0;display:block;float:left;padding:2px 0;}
 
+.formulaire_joindre_document .sourceup {padding:0 5px;}
+#navigation .formulaire_joindre_document .sourceup, #extra .formulaire_joindre_document .sourceup {font-size:0.9em;}
 .formulaire_joindre_document .deballer_zip ul {font-size:0.9em;}
 .formulaire_joindre_document .deballer_zip ul ul {font-size:1em;}
 .formulaire_joindre_document .deballer_zip ol {padding-#GET{left}:15px;margin:0;}
 .formulaire_joindre_document .deballer_zip li {padding:0;}
+
+.galerie { float: none; width: 100%; clear:left;padding-top:10px;}
+.galerie table { width: 100%; border: none; }
+.galerie table thead { background: [#(#GET{foncee}|couleur_foncer)];color:#fff; }
+.galerie table tbody tr:hover { background: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
+.galerie table td { min-height: 100px; vertical-align: top; }
+.galerie table th, .galerie table td { padding: 0.5em .3em; border-bottom: 1px solid #ccc; }
+.galerie table th.id { text-align: right; }
+.galerie table td.id { width: 80px; text-align: right; vertical-align: top; line-height: normal; }
+.galerie table td.id strong { font-size: 1.6em; color: #666; font-weight: normal; }
+.galerie table td.statut { width: 9px; }
+.galerie table td.logo { width: 250px; overflow: hidden; }
+.galerie table td.logo img { /*border: 1px solid #666;*/ }
+.galerie table td.exif { width: 140px;  }
+.galerie table td.exif small { display: inline; }
+.galerie table td.exif .extension {}
+.galerie table td.exif .dimensions { font-size: .9em; }
+.galerie table td.exif .taille { font-size: .9em; font-weight: bold; color: #666; }
+.galerie table td.exif .date { font-size: .9em; }
+.galerie table td.descriptif { }
+
+.galerie.media-image h2 { background: url(#CHEMIN{img_pack/photo-32.png}) no-repeat center left; padding: 6px;padding-left: 40px; }
+.galerie.media-audio h2 { background: url(#CHEMIN{img_pack/audio-32.png}) no-repeat center left; padding: 6px;padding-left: 40px; }
+.galerie.media-video h2 { background: url(#CHEMIN{img_pack/video-32.png}) no-repeat center left; padding: 6px;padding-left: 40px; }
+
+.galerie table td.exif { background-repeat: no-repeat; background-position: top right; }
+.galerie table .media-image td.exif { background-image: url([(#CHEMIN{img_pack/photo-32.png}|image_nb|image_gamma{100}|extraire_attribut{src})]); }
+.galerie table .media-audio td.exif { background-image: url([(#CHEMIN{img_pack/audio-32.png}|image_nb|image_gamma{80}|extraire_attribut{src})]); }
+.galerie table .media-video td.exif { background-image: url([(#CHEMIN{img_pack/video-32.png}|image_nb|image_gamma{60}|extraire_attribut{src})]); }
+
+ul.choix {list-style:none;clear:left;padding:0;margin:0;float:left;}
+ul.choix li {float:left;}
+ul.choix li a,ul.choix li strong.on {display:block;float:left;padding:2px 5px;border-right:1px solid #ddd;border-left:1px solid #ddd;border-top:2px solid #ddd;}
+ul.choix li a:hover,ul.choix li strong.on {background:#ddd;}
+
+ul.choix.statut,
+ul.choix.distant,
+ul.choix.brises {padding-right:20px;}
+ul.choix.distant,
+ul.choix.brises {clear:none;}
+
+.pagination .tris {float:left;}
+
+[(#REM)</style>]

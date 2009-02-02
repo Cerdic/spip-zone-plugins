@@ -1,10 +1,10 @@
 <div class='formulaire_spip formulaire_joindre formulaire_joindre_document' id='formulaire_joindre_document-#ENV{id,new}'>
 	[(#ENV{mode}|=={image}|oui)
-	<h3 class='titrem'>[(#CHEMIN{images/image-24.gif}|balise_img{'',cadre-icone})][(#ENV{id,new}|intval|?{<:bouton_remplacer_image:>,<:bouton_ajouter_image:>}) #AIDER{ins_img}]</h3>
+	<h3 class='titrem'>[(#CHEMIN{images/image-24.gif}|balise_img{'',cadre-icone})][(#ENV{id,new}|intval|?{<:gestdoc:bouton_remplacer_image:>,<:bouton_ajouter_image:>}) #AIDER{ins_img}]</h3>
 	][(#ENV{mode}|=={document}|oui)
-	<h3 class='titrem'>[(#CHEMIN{images/doc-24.gif}|balise_img{'',cadre-icone})][(#ENV{id,new}|intval|?{<:bouton_remplacer_document:>,<:bouton_ajouter_document:>}) #AIDER{ins_doc}]</h3>
+	<h3 class='titrem'>[(#CHEMIN{images/doc-24.gif}|balise_img{'',cadre-icone})][(#ENV{id,new}|intval|?{<:gestdoc:bouton_remplacer_document:>,<:bouton_ajouter_document:>}) #AIDER{ins_doc}]</h3>
 	][(#ENV{mode}|=={choix}|oui)
-	<h3 class='titrem'>[(#CHEMIN{images/doc-24.gif}|balise_img{'',cadre-icone})][(#ENV{id,new}|intval|?{<:bouton_remplacer_image_document:>,<:bouton_ajouter_image_document:>}) #AIDER{ins_doc}]</h3>
+	<h3 class='titrem'>[(#CHEMIN{images/doc-24.gif}|balise_img{'',cadre-icone})][(#ENV{id,new}|intval|?{<:gestdoc:bouton_remplacer_image_document:>,<:bouton_ajouter_image_document:>}) #AIDER{ins_doc}]</h3>
 	]
 	
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -22,6 +22,11 @@
 					]<input class='file' type="file" name="fichier" value='#ENV{fichier}' id="fichier" size='14'/>
 				</li>
 			</ul>
+			<div class='sourceup'>
+				<:gestdoc:bouton_download_local:>
+				[(#ENV*{_options_upload_ftp}|oui)| <a href='#' onclick="if (jQuery('#joindre_ftp').is(':hidden')) {jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_ftp').slideDown('fast');}return false;"><:gestdoc:bouton_dowload_par_ftp:></a>]
+				| <a href='#' onclick="if (jQuery('#joindre_distant').is(':hidden')) {jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_distant').slideDown('fast');}return false;"><:gestdoc:bouton_dowload_sur_le_web:></a>
+			</div>
 			<p class='boutons'><input class='submit' type="submit" name="joindre_upload" value="<:bouton_download:>"/></p>
 		</div>
 		
@@ -38,6 +43,11 @@
 					</select>
 				</li>
 			</ul>
+			<div class='sourceup'>
+				<a href='#' onclick="if (jQuery('#joindre_upload').is(':hidden')) {jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_upload').slideDown('fast');}return false;"><:gestdoc:bouton_download_local:></a>
+				[(#ENV*{_options_upload_ftp}|oui)| <:gestdoc:bouton_dowload_par_ftp:>]
+				| <a href='#' onclick="if (jQuery('#joindre_distant').is(':hidden')) {jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_distant').slideDown('fast');}return false;"><:gestdoc:bouton_dowload_sur_le_web:></a>
+			</div>
 			<p class='boutons'><input class='submit' type="submit" name="joindre_ftp" value="<:bouton_choisir:>"/></p>
 			][(#ENV{_dir_upload_ftp}|et{#ENV{_options_upload_ftp}|non}|oui)
 			[(#VAL{info_installer_ftp}|_T{#ARRAY{upload,#ENV*{_dir_upload_ftp}}})] #AIDER{ins_upload}
@@ -53,13 +63,14 @@
 					]<input class='text' type="text" name="url" value='#ENV{url}' id="url"/>
 				</li>
 			</ul>
+			<div class='sourceup'>
+				<a href='#' onclick="if (jQuery('#joindre_upload').is(':hidden')) {jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_upload').slideDown('fast');}return false;"><:gestdoc:bouton_download_local:></a>
+				[(#ENV*{_options_upload_ftp}|oui)| <a href='#' onclick="if (jQuery('#joindre_ftp').is(':hidden')) {jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_ftp').slideDown('fast');}return false;"><:gestdoc:bouton_dowload_par_ftp:></a>]
+				| <:gestdoc:bouton_dowload_sur_le_web:>
+			</div>
 			<p class='boutons'><input class='submit' type="submit" name="joindre_distant" value="<:bouton_choisir:>"/></p>
 		</div>
-		<div>
-			<a href='#' onclick="jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_upload').slideDown('fast');return false;"><:bouton_download:></a>
-			| <a href='#' onclick="jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_ftp').slideDown('fast');return false;">ftp</a>
-			| <a href='#' onclick="jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_distant').slideDown('fast');return false;">distant</a>
-		</div>
+		
 		[(#REM) Formulaire pour deballer un zip ]
 		[<ul><li class='fieldset deballer_zip'>(#ENV**{erreurs}|table_valeur{lister_contenu_archive})</li></ul>]
 	</div></form>

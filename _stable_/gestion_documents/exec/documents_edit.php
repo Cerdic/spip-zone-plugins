@@ -69,8 +69,8 @@ function documents_edit_ok($row, $id_document, $id_parent, $new)
 	echo debut_droite('', true);
 
 	$contexte = array(
-	'icone_retour'=>$new=='oui'?'':icone_inline(_T('icone_retour'), generer_url_ecrire("portfolio","id_document=$id_document"), "doc-24.gif", "rien.gif",$GLOBALS['spip_lang_left']),
-	'redirect'=>generer_url_ecrire("portfolio"),
+	'icone_retour'=>$new=='oui'?'':icone_inline(_T('icone_retour'), generer_url_ecrire("portfolio"), "doc-24.gif", "rien.gif",$GLOBALS['spip_lang_left']),
+	'redirect'=>'',//generer_url_ecrire("portfolio"),
 	'titre'=>$titre,
 	'new'=>$new == "oui"?$new:$id_document,
 	'id_parent'=>$id_parent,

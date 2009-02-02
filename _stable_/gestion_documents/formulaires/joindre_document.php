@@ -12,14 +12,25 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function joindre_determiner_mode($mode,$id_document,$objet){
+	if ($mode=='auto'){
+		if (intval($id_document))
+			$mode = sql_getfetsel('mode','spip_documents','id_document='.intval($id_document));
+		if (!in_array($mode,array('choix','document','image'))){
+			$mode='choix';
+			if ($objet AND $GLOBALS['meta']["documents_$objet"]=='non')
+				$mode = 'image';
+		}
+	}
+	return $mode;
+}
+
+
 function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto'){
 	$valeurs = array();
-	if ($mode=='auto'){
-		$mode='choix';
-		if ($objet AND $GLOBALS['meta']["documents_$objet"]=='non')
-			$mode = 'image';
-	}
+	$mode = joindre_determiner_mode($mode,$id_document,$objet);
 	
+	$valeurs['id'] = $id_document;
 	$valeurs['mode'] = $mode;
 	
 	$valeurs['url'] = 'http://';
@@ -65,7 +76,7 @@ function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet
 	elseif(is_array($files)){
 		// erreur si on a pas trouve de fichier
 		if (!count($files))
-			$erreurs['message_erreur'] = _L('aucun fichier trouv&eacute;');
+			$erreurs['message_erreur'] = _T('gestdoc:erreur_aucun_fichier');
 		
 		else{
 			// regarder si on a eu une erreur sur l'upload d'un fichier
@@ -75,10 +86,10 @@ function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet
 				  	if (is_string($test))
 				  		$erreurs['message_erreur'] = $test;
 				  	else
-							$erreurs['message_erreur'] = _L('aucun fichier trouv&eacute;');
+							$erreurs['message_erreur'] = _T('gestdoc:erreur_aucun_fichier');
 				}
 			}
-					
+			
 			// si ce n'est pas deja un post de zip confirme
 			// regarder si il faut lister le contenu du zip et le presenter
 			if (!count($erreurs)
@@ -100,6 +111,7 @@ function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet
 function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto'){
 	$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 
+	$mode = joindre_determiner_mode($mode,$id_document,$objet);
 	include_spip('inc/joindre_document');
 	$files = joindre_trouver_fichier_envoye();
 
@@ -120,7 +132,7 @@ function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=
 	if (count($messages_erreur))
 		$res['message_erreur'] = implode('<br />',$messages_erreur);
 	else 
-		$res['message_ok'] = 'ok';
+		$res['message_ok'] = _T('gestdoc:document_installe_succes');
 	
 	// todo : 
 	// generer les case docs si c'est necessaire

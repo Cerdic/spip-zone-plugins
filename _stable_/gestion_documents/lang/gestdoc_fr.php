@@ -11,6 +11,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_audio'=>'Aucune bande son',
 	'aucun_video'=>'Aucune s&eacute;quence',
 	
+	// B
+	'bouton_remplacer_image' => 'Remplacer cette image',
+	'bouton_remplacer_document' => 'Remplacer ce document',
+	'bouton_remplacer_image_document' => 'Remplacer par une image ou un document',
+	'bouton_download_local' => 'depuis mon ordinateur',
+	'bouton_dowload_par_ftp' => 'sur le serveur',
+	'bouton_dowload_sur_le_web' => 'sur l\'Internet',
+	
 	// D
 	'documents'=> 'Mediath&egrave;que',
 	'documents_distants'=> 'Distants',
@@ -26,6 +34,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'des_audios'=>'@nb@ bandes sons',
 	'des_videos'=>'@nb@ s&eacute;quences',
 	'des_utilisations'=>'@nb@ utilisations',
+	'document_installe_succes' => 'Le fichier a bien &eacute;t&eacute; charg&eacute;',
+	
+	// E
+	'erreur_indiquez_un_fichier'=>'Indiquez un fichier !',
+	'erreur_aucun_fichier'=>'Aucun fichier n\'a &eacute;t&eacute; trouv&eacute;',
+	'erreur_upload_type_interdit'=> "Le telechargement des fichiers du type de @nom@ n'est pas autoris&eacute;",
+	'erreur_chemin_ftp'=>'Le fichier indiqu&eacute; n\'a pas &eacute;t&eacute; trouv&eacute; sur le serveur',
+	'erreur_chemin_distant' => 'Le fichier distant @nom@ n\'a pas pu &ecirc;tre trouv&eacute;',
+	'erreur_copie_fichier' => 'Impossible de copier le fichier @nom@',
+	'erreur_format_fichier_image' => 'Le format de @nom@ ne convient pas pour une image',
+	'erreur_upload_vignette' => 'Erreur lors du chargement de la vignette @nom@',
 	
 	// F
 	'format_date_incorrect' => 'La date ou l\'heure sont incorrectes',

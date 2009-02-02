@@ -67,7 +67,12 @@ function formulaires_editer_document_verifier_dist($id_document='new', $id_paren
 
 // http://doc.spip.org/@inc_editer_article_dist
 function formulaires_editer_document_traiter_dist($id_document='new', $id_parent='', $retour='', $lier_trad=0, $config_fonc='documents_edit_config', $row=array(), $hidden=''){
-	return formulaires_editer_objet_traiter('document',$id_document,$id_parent,$lier_trad,$retour,$config_fonc,$row,$hidden);
+	$res = formulaires_editer_objet_traiter('document',$id_document,$id_parent,$lier_trad,$retour,$config_fonc,$row,$hidden);
+	if (!isset($res['redirect']))
+		$res['editable'] = true;
+	if (!isset($res['message_erreur']))
+		$res['message_ok'] = _L('Votre modification a &eacute;t&eacute; enregistr&eacute;e');
+	return $res;
 }
 
 ?>
