@@ -234,18 +234,28 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script) {
 
 	$out = "<div id='editer_produit-$id_article'>";
 	$out .= "<a name='produit'></a>";
+	
+	// Quel est le bon titre
+	if (lire_config("spip_thelia/produits_articles_spip_thelia", "non") != "oui") {
+		$titre = _T('spipthelia:rubriques_associees_article');
+	} elseif (lire_config("spip_thelia/rubriques_articles_spip_thelia", "non") != "oui") {
+			$titre = _T('spipthelia:produits_associes_article');
+		} else {
+			$titre = _T('spipthelia:produits_et_rubriques_associes_article');			
+			}
+			
 	if (function_exists('bouton_block_depliable')) {  // SPIP2.0
 		if ($flag_editable) {
 			if (_request('edit')||_request('neweven'))
-				$bouton = bouton_block_depliable(_T('spipthelia:produits_associes_article'),true,"produitsarticle");
+				$bouton = bouton_block_depliable($titre,true,"produitsarticle");
 			else
-				$bouton = bouton_block_depliable(_T('spipthelia:produits_associes_article'),false,"produitsarticle");
+				$bouton = bouton_block_depliable($titre,false,"produitsarticle");
 		}
 	} else {
 		if (_request('edit')||_request('neweven'))
-			$bouton = bouton_block_visible("produitsarticle")._T('spipthelia:produits_associes_article');
+			$bouton = bouton_block_visible("produitsarticle").$titre;
 		else
-			$bouton = bouton_block_invisible("produitsarticle")._T('spipthelia:produits_associes_article');		
+			$bouton = bouton_block_invisible("produitsarticle").$titre;		
 	}
 
 	$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_SPIP_THELIA."/img_pack/logo_thelia_petit.png", true, "", $bouton);
@@ -253,6 +263,8 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script) {
 	//
 	// Afficher les produits associes
 	//
+	$out .= afficher_rubriques_objet('article',$id_rubrique);
+
 	$out .= afficher_produits_objet('article',$id_article);
 
 	$out .= debut_block_invisible('produitsarticle');
@@ -305,20 +317,29 @@ function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script) 
 	global $spip_lang_left, $spip_lang_right, $options;
 	global $connect_statut, $options,$connect_id_auteur, $couleur_claire ;
 
+	// Quel est le bon titre	
+	if (lire_config("spip_thelia/produits_rubriques_spip_thelia", "non") != "oui") {
+		$titre = _T('spipthelia:rubriques_associees_rubrique');
+	} elseif (lire_config("spip_thelia/rubriques_rubriques_spip_thelia", "non") != "oui") {
+			$titre = _T('spipthelia:produits_associes_rubrique');
+		} else {
+			$titre = _T('spipthelia:produits_et_rubriques_associes_rubrique');			
+			}
+			
 	$out = "<div id='editer_produit-$id_rubrique'>";
 	$out .= "<a name='produit'></a>";
 	if (function_exists('bouton_block_depliable')) { // SPIP2.0
 		if ($flag_editable) {
 			if (_request('edit')||_request('neweven'))
-				$bouton = bouton_block_depliable(_T('spipthelia:produits_associes_rubrique'),true,"produitsrubrique");
+				$bouton = bouton_block_depliable($titre,true,"produitsrubrique");
 			else
-				$bouton = bouton_block_depliable(_T('spipthelia:produits_associes_rubrique'),false,"produitsrubrique");
+				$bouton = bouton_block_depliable($titre,false,"produitsrubrique");
 		}
 	} else {
 		if (_request('edit')||_request('neweven'))
-			$bouton = bouton_block_visible("produitsrubrique")._T('spipthelia:produits_associes_rubrique');
+			$bouton = bouton_block_visible("produitsrubrique").$titre;
 		else
-			$bouton = bouton_block_invisible("produitsrubrique")._T('spipthelia:produits_associes_rubrique');		
+			$bouton = bouton_block_invisible("produitsrubrique").$titre;		
 	}
 
 	$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_SPIP_THELIA."/img_pack/logo_thelia_petit.png", true, "", $bouton);
@@ -326,6 +347,8 @@ function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script) 
 	//
 	// Afficher les produits associes
 	//
+	$out .= afficher_rubriques_objet('rubrique',$id_rubrique);
+
 	$out .= afficher_produits_objet('rubrique',$id_rubrique);
 	
 	$out .= debut_block_invisible('produitsrubrique');
@@ -399,8 +422,9 @@ function afficher_produits_objet($type, $id) {
 	if ($spip_display != 4)
 		$t = $tranches
 			. "<table width='100%' cellpadding='3' cellspacing='0' border='0'>"
+			. "<thead><tr><th>&nbsp;</th><th>". _T('spipthelia:nom_du_produit'). "</th><th>". _T('spipthelia:prix'). "</th></tr></head><tbody>"
 			. $t
-			. "</table>";
+			. "</tbody></table>";
 	return "<div class='liste'>$t</div>\n";
 }
 
@@ -412,6 +436,56 @@ function determiner_produits_objet($type, $id) {
 		FROM spip_produits_{$type}s 
 		JOIN produit ON produit.id = spip_produits_{$type}s.id_produit 
 		JOIN produitdesc ON produitdesc.id = spip_produits_{$type}s.id_produit 
+		WHERE id_{$type}="._q($id));
+
+	return $result;
+}
+
+function afficher_rubriques_objet($type, $id) {
+
+	if (!preg_match(',^[a-z]*$,',$type)) return '';
+
+	$result = determiner_rubriques_objet($type,$id);
+	if (!spip_num_rows($result)) return '';
+
+	$table = array();
+
+	while ($row = spip_fetch_array($result)) {
+		$vals = array();
+		if (!is_utf8($row['titre'])) $row['titre'] = unicode2charset(charset2unicode($row['titre'], 'iso-8859-1'),'utf-8');
+		
+		$puce = ($row['ligne'])?find_in_path('images/puce-verte.gif'):find_in_path('images/puce-orange.gif');
+		$etat = ($row['ligne'])?_T('spipthelia:rubrique_en_ligne'):_T('spipthelia:rubrique_non_publiee');
+		$url = generer_url_ecrire('spip_thelia_catalogue','thelia_url='.urlencode('parcourir.php?parent='.$row['rubrique']));
+		$link = "<a class='product_details' href='%s' target='_blank'>%s</a>";
+				
+		$vals[] = sprintf($link,$url,"<img src='$puce' alt='$etat'/>");
+		$vals[] = sprintf($link,$url,$row['titre']);
+		
+		$table[] = $vals;
+	}
+
+	$largeurs = array('14', '', '', '', '', '');
+	$styles = array('arial11', 'arial2', 'arial11', 'arial11', 'arial11', 'arial1');
+
+	$t = afficher_liste($largeurs, $table, $styles);
+	if ($spip_display != 4)
+		$t = $tranches
+			. "<table width='100%' cellpadding='3' cellspacing='0' border='0'>"
+			. "<thead><tr><th>&nbsp;</th><th>". _T('spipthelia:nom_de_la_rubrique'). "</th></tr></head><tbody>"
+			. $t
+			. "</tbody></table>";
+	return "<div class='liste'>$t</div>\n";
+}
+
+function determiner_rubriques_objet($type, $id) {
+	$les_produits = array();
+	if (!preg_match(',^[a-z]*$,',$type)) return $les_produits;
+
+	$result = spip_query("SELECT titre,ligne,rubrique 
+		FROM spip_rubriquesthelia_{$type}s 
+		JOIN rubrique ON rubrique.id = spip_rubriquesthelia_{$type}s.id_rubriquethelia
+		JOIN rubriquedesc ON rubriquedesc.rubrique = spip_rubriquesthelia_{$type}s.id_rubriquethelia
 		WHERE id_{$type}="._q($id));
 
 	return $result;

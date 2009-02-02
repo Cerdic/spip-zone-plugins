@@ -13,9 +13,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'catalogue_thelia' => 'Catalogue T&eacute;lia',
 'total_panier' => 'Total',
 'mes_coordonnees' => 'Mes coordonn&eacute;es',
-'adresse_facturation' => 'Mon adresse de facturation',
+'adresse_facturation' => 'Adresse de facturation',
 'modifier_adresse' => 'Modifier cette adresse',
-'adresse_livraison' => 'Mon adresse de livraison',
+'adresse_livraison' => 'Adresse du b&eacute;n&eacute;ficiaire du stage',
 'supprimer_adresse' => 'Supprimer cette adresse',
 'modifier_adresse' => 'Modifier cette adresse',
 'ajouter_adresse_livraison' => 'Ajouter une nouvelle adresse de livraison',
@@ -128,7 +128,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mes_achats' => 'Mes achats',
 'bonjour' => 'Bonjour',
 'produits_associes_article' => 'PRODUITS ASSOCI&Eacute;S &Agrave; L\'ARTICLE',
-'produits_associes_rubrique' => 'PRODUITS ASSOCI&Eacute;S &Agrave; LA RUBRIQUE',
+'produits_associes_rubrique' => 'PRODUITS ASSOCI&Eacute;S &Agrave; LA RUBRIQUE SPIP',
 'mettre_a_jour' => 'Mettre &agrave; jour',
 'etapes_achat' => 'Les &eacute;tapes de ma commande :',
 'envoyer_commande' => 'J\'envoie ma commande',
@@ -137,9 +137,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pas_de_commande' => 'Vous n\'avez pas de commande enregistr&eacute;es ou en cours',
 'prix' => 'prix',
 'produit_en_ligne' => 'Produit en ligne',
-'produit_non_publie' => 'Produit non publi&eacute;'
-
-
+'produit_non_publie' => 'Produit non publi&eacute;',
+'rubriques_associees_article' => 'RUBRIQUES THELIA ASSOCI&Eacute;ES &Agrave; L\'ARTICLE',
+'rubriques_associees_rubrique' => 'RUBRIQUES THELIA ASSOCI&Eacute;ES &Agrave; LA RUBRIQUE SPIP',
+'produits_et_rubriques_associes_article' => 'PRODUITS ET RUBRIQUES THELIA ASSOCI&Eacute;S &Agrave; L\'ARTICLE',
+'produits_et_rubriques_associes_rubrique' => 'PRODUITS ET RUBRIQUES THELIA ASSOCI&Eacute;S &Agrave; LA RUBRIQUE SPIP',
+'nom_de_la_rubrique' => "Nom de la rubrique",
+'nom_du_produit' => "Nom du produit",
+'prix' => "Prix",
+'rubrique_en_ligne' => "Rubrique THELIA en ligne",
+'rubrique_non_publiee' => "Rubrique THELIA non publi&eacute;e"
 
 );
 ?>
