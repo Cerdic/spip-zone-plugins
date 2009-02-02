@@ -2,20 +2,12 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// formulaire inscription2
-'coord_livraison' => 'Coordonn&eacute;es de livraison',
-'adresse_livraison' => 'Adresse (livraison)',
-
-// Formulaire profil : controleurs et vues
-'contacts_livraison' => 'Contacts de livraison',
-'vos_contacts_livraison' => 'Vos contacts de livraison',
-'votre_adresse_livraison' => 'Votre adresse de livraison',
-
 // A
-'acces_non_autorise'=>'D&eacute;sol&eacute,<br />vous n\'avez pas le droit d\'acc&eacute;der &aacute; cette partie.',
-'acces_rapide_aux_produits' => 'Acc&eacute;s rapide aux produits',
+'acces_non_autorise'=>'D&eacute;sol&eacute;,<br />vous n\'avez pas le droit d\'acc&eacute;der &agrave; cette partie.',
+'acces_rapide_aux_produits' => 'Acc&egrave;s rapide aux produits',
 'adresse_du_beneficiaire' => 'Adresse du B&eacute;n&eacute;ficiaire',
 'adresse_du_depot' => 'Adresse du d&eacute;p&ocirc;t',
+'adresse_livraison' => 'Adresse (livraison)', // formulaire inscription2
 'ajouter' => 'Ajouter',
 'ajouter_un_depot' => 'Ajouter un d&eacute;p&ocirc;t',
 'ajouter_un_prestataire_de_paiement' => 'Ajouter un prestataire de paiement',
@@ -35,12 +27,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colisage' => 'Frais de colisage',
 'confguration_d_echoppe' => 'Configuration d\'Echoppe',
 'configuration_generale' => 'Configuration g&eacute;n&eacute;rale',
+'contacts_livraison' => 'Contacts de livraison',
 'coordonees_du_beneficiaire' => 'Coordonn&eacute;es du b&eacute;n&eacute;ficiaire',
 'coordonnees_societe' => 'Coordonn&eacute;es soci&eacute;t&eacute; (facultatif)',
 'coordonnees_livraison' => 'Coordonn&eacute;es de livraison (facultatif)',
+'coord_livraison' => 'Coordonn&eacute;es de livraison', // formulaire inscription2
 'coordonnees_livraison_detail' => 'Si vous ne remplissez pas cette partie, votre commande sera envoy&eacute;e aux coordonn&eacute;es renseign&eacute;es ci-dessus.',
 'connection' => 'Connectez-vous',
-'commentaire' => 'Communication structur&eacute;',
+'commentaire' => 'Communication structur&eacute;e',
 
 // D
 'dans_la_categorie' => 'Dans la cat&eacute;gorie',
@@ -64,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'editer_version'=>'&Eacute;diter la version',
 'editer_panier'=>'&Eacute;diter mon panier',
 'editer_le_panier'=>'Panier',
-'edition_d_un_depot'=>'&Eacute;dition d\'un d&eacute;pot',
+'edition_d_un_depot'=>'&Eacute;dition d\'un d&eacute;p&ocirc;t',
 'edition_d_un_prestataire' => '&Eacute;dition d\'un prestataire',
 'edition_de' => '&Eacute;dition de',
 'edition_de_cetegorie'=>'&Eacute;dition d\'une cat&eacute;gorie',
@@ -109,14 +103,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ignorer_date_de_retrait_de_vente' => 'Ignorer la date de retrait de la vente',
 'ignorer_date_mise_en_vente' => 'Ignorer la date de mise en vente',
 'impossible_copier_dans'=>'Impossible de copier le fichier dans ',
-'impossible_d_effectuer_le_paiement_echoppe_n_est_pas_completement_configure' => 'Impossible de continuer le paiement, Erreur syst&eacute;me.',
-'impossible_d_effectuer_le_paiement_vos_infos_de_livraison_sont_manquantes_ou_incomplete_cliquez_ici_pour_les_completer' => 'Impossible d\'effectuer le paiement. Vos informations de livraison sont maquantes ou incompl&egrave;tes. <a href="@url_profile@" >Cliquez ici</a> pour les compl&eacute;ter.',
+'impossible_d_effectuer_le_paiement_echoppe_n_est_pas_completement_configure' => 'Impossible de continuer le paiement, Erreur syst&egrave;me.',
+'impossible_d_effectuer_le_paiement_vos_infos_de_livraison_sont_manquantes_ou_incomplete_cliquez_ici_pour_les_completer' => 'Impossible d\'effectuer le paiement. Vos informations de livraison sont manquantes ou incompl&egrave;tes. <a href="@url_profile@" >Cliquez ici</a> pour les compl&eacute;ter.',
 'informations_client'=>'Informations du client',
+'information_de_l_option' => 'informations sur l\'option',
 'information_technique_du_produit'=>'Informations techniques',
 
 //J
 'jours' => 'jours',
-'0_pour_ne_rien_effacer' => 'Mettre 0 pour ne rien &eacute;ffacer',
+'0_pour_ne_rien_effacer' => 'Mettre 0 pour ne rien effacer',
 
 
 // L
@@ -149,8 +144,8 @@ L\'équipe de ',
 'mon_compte_client' => 'Mon compte client',
 'montant_total_du_panier' => 'Montant total du panier',
 'modification_du_panier_non_permise' => 'Modification du panier non permise !',
-'modification_du_panier_ok' => 'Panier modifi&eacute; avec succ&eacute;s !',
-'modifier_mon_panier' => 'Modifer mon panier',
+'modification_du_panier_ok' => 'Panier modifi&eacute; avec succ&egrave;s !',
+'modifier_mon_panier' => 'Modifier mon panier',
 
 // N
 'ne_le' => 'N&eacute;(e) le',
@@ -159,7 +154,7 @@ L\'équipe de ',
 'numero_de_compte_du_beneficiaire' => 'Num&eacute;ro de compte du b&eacute;n&eacute;ficiaire',
 'numero_du_depot' => 'Num&eacute;ro',
 'numero_tva_livraison' => 'Num&eacute;ro de TVA',
-'nombre_de_chiffre_apres_la_virgule' => 'Nombre maximum de chiffre apr&egrave;s la virgule',
+'nombre_de_chiffre_apres_la_virgule' => 'Nombre maximum de chiffres apr&egrave;s la virgule',
 'nouveau_depot' => 'Nouveau d&eacute;p&ocirc;t',
 'nouveau_prestataire' => 'Nouveau prestataire',
 'nouveau_produit' => 'Cr&eacute;er un produit',
@@ -191,7 +186,7 @@ L\'équipe de ',
 'pas_de_depot_ici' => 'Pas de d&eacute;p&ocirc;t ici',
 'pas_de_categorie_ici' => 'Pas de cat&eacute;gorie ici',
 'pas_de_num_de_ref' => 'Aucune',
-'pas_de_produit_ici' => 'Pas de produits &agrave; cette adresse.',
+'pas_de_produit_ici' => 'Pas de produit &agrave; cette adresse.',
 'pas_de_titre' => 'Pas de titre',
 'pas_encore_de_categorie' => 'Pas encore de cat&eacute;gorie',
 'pas_encore_de_depots' => 'Il n\'y a pas encore de d&eacute;p&ocirc;t',
@@ -253,9 +248,8 @@ L\'équipe de ',
 'telephone_du_depot' => 'T&eacute;l&eacute;phone',
 'titre_categorie' => 'Titre de la cat&eacute;gorie :',
 'titre_ou_texte_de_l_option' => 'Titre/Texte de l\'option',
-'information_de_l_option' => 'informations dur l\'option',
 'titre_produit' => 'Titre du produit :',
-'titre_du_depot' => 'Titre du d&eacute;pot',
+'titre_du_depot' => 'Titre du d&eacute;p&ocirc;t',
 'titre_du_prestataire' => 'Titre',
 'tva' => 'TVA',
 'total' => 'Total',
@@ -269,7 +263,7 @@ L\'équipe de ',
 'valider_le_panier' => 'Valider le panier',
 'valider_les_modifications' => 'Valider les modifications',
 'valider_mon_panier' => 'Valider mon panier &raquo;',
-'version_du_prestataire' => 'Vesrion du prestataire',
+'version_du_prestataire' => 'Version du prestataire',
 'Ville_du_beneficiaire' => 'Code postal du b&eacute;n&eacute;ficiaire',
 'ville_du_depot' => 'Ville',
 'visualisation_d_un_depot' => 'Visualisation d\'un d&eacute;p&ocirc;t',
@@ -277,12 +271,14 @@ L\'équipe de ',
 'visualisation_d_un_prestataire_de_paiement' => 'Visualisation d\'un prestataire de paiement',
 'visualisation_d_un_produit' => 'Visualisation de',
 'visualisation_des_paniers' => 'Visualisation des paniers',
+'vos_contacts_livraison' => 'Vos contacts de livraison',
+'votre_adresse_livraison' => 'Votre adresse de livraison',
 'votre_saisie_contient_des_erreurs' => 'Votre saisie contient des erreurs !',
 'vous_n_avez_encore_aucun_panier_chez_nous' => 'Vous n\'avez encore aucun panier chez nous.',
+
 // X
 'xxx' => 'xxx'
 
 );
-
 
 ?>
