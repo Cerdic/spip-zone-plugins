@@ -1,7 +1,7 @@
 [(#REM)
-	Modele pour le Flash MEDIA player 3.8  : Playlist below, using mixed media files
-	http://www.jeroenwijering.com/extras/readme.html
-	http://www.jeroenwijering.com/?item=Flash_video_Player
+	Modele pour le Flash MEDIA player 4.3  : Playlist below, using mixed media files
+	http://www.longtailvideo.com/players/jw-flv-player/
+	
 	The Flash Media player supports playback of a single media file of any format the Adobe Flash Player can handle (MP3,FLV,SWF,JPG,PNG or GIF).
 	This script is licensed under a Creative Commons License.
 	It allows you to use and modify the script for noncommercial purposes. 
@@ -21,108 +21,116 @@ Plusieurs methodes d'insertion :
 	Methode par document unique (on prend un seul document) :
 	<template><mediaplayer|document=123></template>
 	
-	Pour les options, voir http://www.jeroenwijering.com/extras/readme.html
-	- type : texte,'flv,swf,mp3,jpg,png,gif'	Types de fichiers a prendre en compte
-	- width : px|%,320		Largeur de l'animation flash
-	- height : px|%,240		Hauteur de l'animation flash
-	- displaywidth : px|%,width		Largeur de la zone d'affichage du contenu (photo, logo, video) dans l'animation 
-	- displayheight : px|%,height		Hauteur de la zone d'affichage du contenu (photo, logo, video) dans l'animation (La difference entre la hauteur de l'animation et la hauteur de la zone de contenu est la place disponible pour la playlist)
-	- overstretch : true|false|fit|none,none
-	- shuffle : true|false,false
-	- repeat : true|false|list,false
-	- showvolume: true|false,true
-	- thumbs : true|false,true
-	- showdigits: true|false|total,true
-	- allowfullscreen: true|false,true
-	- showeq: true|false,true
-	- showicons: true|false, false
-	- autostart: true|false|mute, false
-	- jwlogo: url
-	- autoscroll: true|false, false
-	- audio: url
-	- useaudio: true|false, false
-	- enablejs: true|false, false Permet de controler les player par javascript externe
-	- javascriptid: texte,'player' Donne l'id du player pour le javascript
-	- showdownload: true|false,false
-	- link: url
-	- linkfromdisplay: true|false, false
+	Pour les options, voir http://developer.longtailvideo.com/trac/wiki/FlashVars
+	- type : texte,'flv,swf,mp3,jpg,png,gif'	Types de fichiers a prendre en compte (filtre les documents dans la playliste)
+	- allowfullscreen : boolean true|false true
+	
+	
+	Définition du Layout
+	- controlbar : string bottom|over|none Position des controles
+	- width : int px|%,320		Largeur de l'animation flash
+	- height : int px|%,240		Hauteur de l'animation flash
+	- playlist : string |bottom,over,right,none	Position de la playliste
+	- playlistsize : int px|% Taille de la playliste
+	
+	Définition des couleurs
+	- backcolor string couleur héxadécimale
+	- frontcolor string couleur héxadécimale
+	- lightcolor string couleur héxadécimale
+	- screencolor string couleur héxadécimale
+	
+	Définition du behaviour
+	- autostart: bool true|false, false
+	- bufferlength: int 1	Nombre de seconde à charger avant lecture
+	- displayclick: string play|link|fullscreen|none|mute|next, play	Action lors du click sur le lecteur
 	- linktarget: _blank|_self|_parent|_top|framename, _self
+	- mute: bool true|false, false
+	- quality: bool true|false, true
+	- icons: boolean true|false, false
+	- jwlogo: string url d'un fichier image
+	- repeat: string none|list|allways|single, none 
+	- shuffle : boolean true|false,false
+	- stretching : string none|exactfit|uniform|fill, uniform
+	- volume: int 90 Volume au chargement
+	
+	
+	Définition des utilisations externes
+	- javascriptid: texte,'player' Donne l'id du player pour le javascript
+	
 	- creator: du texte
 	- prerolllocation: url d'un flv sans son extension
 	- prerolllink: url
 	- postrolllocation: url d'un flv sans son extension
 	- postrolllink: url
 	- domaine: url d'un squelette xspf sur un autre site spip
-	
 	- align : left|center|right,center	
-	]
+]
 
-[(#ENV{donnee}|?{' ',''}) 
+[(#ENV{objet}|=={site}|?{' '})
+	#SET{objet,site}
+]
+
+[(#ENV{donnee}|oui) 
   [(#SET{objet_spip,id_donnee})]
   [(#SET{objet_val,[(#ENV{donnee})]})]
 ]
-[(#ENV{rubrique}|?{' ',''}) 
+[(#ENV{rubrique}|oui) 
   [(#SET{objet_spip,id_rubrique})]
   [(#SET{objet_val,[(#ENV{rubrique})]})]
 ]
-[(#ENV{art_secteur}|?{' ',''}) 
+[(#ENV{art_secteur}|oui) 
   [(#SET{objet_spip,art_secteur})]
   [(#SET{objet_val,[(#ENV{art_secteur})]})]
 ]
-[(#ENV{document}|?{' ',''}) 
+[(#ENV{document}|oui) 
   [(#SET{objet_spip,id_document})]
   [(#SET{objet_val,[(#ENV{document})]})]
 ]
-[(#ENV{mot}|?{' ',''}) 
+[(#ENV{mot}|oui) 
   [(#SET{objet_spip,id_mot})]
   [(#SET{objet_val,[(#ENV{mot})]})]
 ]
-[(#ENV{breve}|?{' ',''}) 
+[(#ENV{breve}|oui) 
   [(#SET{objet_spip,id_breve})]
   [(#SET{objet_val,[(#ENV{breve})]})]
 ]
-[(#ENV{article}|?{' ',''}) 
-  [(#SET{objet_spip,id_article})]
-  [(#SET{objet_val,[(#ENV{article})]})]
+[(#ENV{article}|oui) 
+  #SET{objet_spip,id_article}
+  #SET{objet_val,#ENV{article}}
 ]
-[(#GET{objet_spip}|?{'',' '}) 
+[(#GET{objet_spip}|non) 
   [(#SET{objet_spip,id_article})]
   [(#SET{objet_val,[(#ENV{id_mediaplayer})]})]
 ]
 
 [(#SET{wmode,#ENV{wmode,#CONFIG{xspf/wmode}|sinon{transparent}}})]
 [(#SET{type,#ENV{type,#CONFIG{xspf/mpltypefichier}|sinon{flv|swf|mp3|jpg|png|gif}}})]
+[(#SET{allowfullscreen,#ENV{allowfullscreen,#CONFIG{xspf/mplallowfullscreen}|sinon{true}}})]
 
+[(#SET{controlbar,#ENV{controlbar,#CONFIG{xspf/mplcontrolbar,over}}})]
 [(#SET{width,#ENV{width,#CONFIG{xspf/mplwidth}|sinon{320}}})]
 [(#SET{height,#ENV{height,#CONFIG{xspf/mplheigth}|sinon{240}}})]
-[(#SET{displaywidth,#ENV{displaywidth,#CONFIG{xspf/mpldisplaywidth}|sinon{#GET{width}}}})]
-[(#SET{displayheight,#ENV{displayheight,#CONFIG{xspf/mpldisplayheight}|sinon{#GET{height}}}})]
-[(#SET{overstretch,#ENV{overstretch,#CONFIG{xspf/mploverstretch}|sinon{none}}})]
-[(#SET{shuffle,#ENV{shuffle,#CONFIG{xspf/mplshuffle}|sinon{false}}})]
-[(#SET{repeat,#ENV{repeat,#CONFIG{xspf/mplrepeat}|sinon{false}}})]
-[(#SET{showdownload,#ENV{showdownload,false}})]
-
-[(#SET{showvolume,#ENV{showvolume,#CONFIG{xspf/mplshowvolume}|sinon{true}}})]
-[(#SET{autostart,#ENV{autostart,#CONFIG{xspf/mplautostart}|sinon{false}}})]
-[(#SET{showicons,#ENV{showicons,#CONFIG{xspf/mplshowicons}|sinon{true}}})]
-[(#SET{showeq,#ENV{showeq,#CONFIG{xspf/mplshoweq}|sinon{true}}})]
-[(#SET{thumbs,#ENV{thumbs,#CONFIG{xspf/mplthumbs}|sinon{true}}})]
-[(#SET{showdigits,#ENV{showdigits,#CONFIG{xspf/mplshowdigits}|sinon{true}}})]
-[(#SET{allowfullscreen,#ENV{allowfullscreen,#CONFIG{xspf/mplallowfullscreen}|sinon{true}}})]
+[(#SET{playliste,#ENV{playliste,#CONFIG{xspf/mplplayliste,none}}})]
+[(#SET{playlistesize,#ENV{playlistesize,#CONFIG{xspf/mplplaylistsize}|sinon{180}}})]
 
 [(#SET{backcolor,#CONFIG{xspf/mplbackcolor}|replace{#,0x}|sinon{0x000000}})]
 [(#SET{frontcolor,#CONFIG{xspf/mplfrontcolor}|replace{#,0x}|sinon{0xCCCCCC}})]
 [(#SET{lightcolor,#CONFIG{xspf/mpllightcolor}|replace{#,0x}|sinon{0x996600}})]
+[(#SET{screencolor,#CONFIG{xspf/mpllightcolor}|replace{#,0x}|sinon{0x000000}})]
 
-[(#SET{jwlogo,#ENV{jwlogo,#CONFIG{xspf/jwlogo}}})]
-[(#SET{autoscroll,#ENV{autoscroll,#CONFIG{xspf/jwautoscroll}}})]
-[(#SET{audio,#ENV{audio,#CONFIG{xspf/mplaudio}}})]
-[(#SET{useaudio,#ENV{useaudio,#CONFIG{xspf/mpluseaudio}|sinon{false}}})]
-[(#SET{link,#ENV{link,#CONFIG{xspf/mpllink}}})]
-[(#SET{linkfromdisplay,#ENV{linkfromdisplay,#CONFIG{xspf/mpllinkfromdisplay}|sinon{false}}})]
+[(#SET{autostart,#ENV{autostart,#CONFIG{xspf/mplautostart}|sinon{false}}})]
+[(#SET{bufferlength,#ENV{bufferlength,#CONFIG{xspf/mplbufferlength}|sinon{1}}})]
+[(#SET{displayclick,#ENV{displayclick,#CONFIG{xspf/mpldisplayclick}|sinon{play}}})]
+[(#SET{icons,#ENV{icons,#CONFIG{xspf/mplicons}|sinon{true}}})]
 [(#SET{linktarget,#ENV{linktarget,#CONFIG{xspf/mpllinktarget}}})]
+[(#SET{jwlogo,#ENV{jwlogo,#CONFIG{xspf/jwlogo}}})]
+[(#SET{mute,#ENV{mute,#CONFIG{xspf/mplmute}|sinon{false}}})]
+[(#SET{quality,#ENV{quality,#CONFIG{xspf/mplquality}|sinon{true}}})]
+[(#SET{repeat,#ENV{repeat,#CONFIG{xspf/mplrepeat}|sinon{none}}})]
+[(#SET{shuffle,#ENV{shuffle,#CONFIG{xspf/mplshuffle}|sinon{false}}})]
+[(#SET{stretching,#ENV{stretching,#CONFIG{xspf/mplstretching}|sinon{uniform}}})]
+[(#SET{volume,#ENV{volume,#CONFIG{xspf/mplvolume}|sinon{90}}})]
 
-[(#SET{enablejs,#ENV{enablejs,#CONFIG{xspf/mplenablejs}}})]
 [(#SET{javascriptid,#ENV{javascriptid,#CONFIG{xspf/mpljavascriptid}}})]
 
 [(#SET{prerolllocation,#ENV{prerolllocation,#CONFIG{xspf/mplprerolllocation}}})]
@@ -136,7 +144,7 @@ Plusieurs methodes d'insertion :
 <noscript><p><:xspf:js_necessaire:></p></noscript>
 <!-- alternative texte pour ceux qui ont le js desactive -->
 
-<div id="mediaplayer_[(#ENV{id})]_[(#GET{objet_spip})]_[(#GET{objet_val})]" class="player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]">
+<div id="mediaplayer_container_[(#GET{objet_spip})]_[(#GET{objet_val})]" class="player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;float:[(#GET{align})]})]">
 	<p>
 		<a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.
 	</p>
@@ -144,41 +152,41 @@ Plusieurs methodes d'insertion :
 
 <script type="text/javascript">
 // <![CDATA[
-	var s_[(#ENV{id})]_[(#GET{objet_val})] = new SWFObject("#CHEMIN{lib/mediaplayer/player.swf}","mediaplayer","#GET{width}","#GET{height}","7");
+	var s_[(#ENV{id})]_[(#GET{objet_val})] = new SWFObject("#CHEMIN{lib/mediaplayer/player.swf}","[(#GET{javascriptid,player})]_[(#GET{objet_spip})]_[(#GET{objet_val})]","#GET{width}","#GET{height}","7");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addParam("allowfullscreen","#GET{allowfullscreen}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addParam("wmode","#GET{wmode}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("file",encodeURIComponent("[(#ENV{domaine,#URL_PAGE{xspf}}|url_absolue|parametre_url{type,#GET{type},'&'}|parametre_url{prerolllocation,[(#GET{prerolllocation})],'&'}|parametre_url{postrolllocation,[(#GET{postrolllocation})],'&'}|parametre_url{prerolllink,[(#GET{prerolllink})],'&'}|parametre_url{postrolllink,[(#GET{postrolllink})],'&'}|parametre_url{creator,[(#ENV{creator})],'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("file",encodeURIComponent("[(#ENV{domaine,#URL_PAGE{xspf}}|url_absolue|parametre_url{type,#GET{type},'&'}|parametre_url{prerolllocation,[(#GET{prerolllocation})],'&'}|parametre_url{postrolllocation,[(#GET{postrolllocation})],'&'}|parametre_url{objet,#GET{objet},'&'}|parametre_url{prerolllink,[(#GET{prerolllink})],'&'}|parametre_url{postrolllink,[(#GET{postrolllink})],'&'}|parametre_url{creator,[(#ENV{creator})],'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
+
+	// Layout
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("controlbar","#GET{controlbar}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("height","#GET{height}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("width","#GET{width}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("playlist","#GET{playliste}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("playlistsize","#GET{playlistesize}");
+	
+	// Colors
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("backcolor","#GET{backcolor}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("frontcolor","#GET{frontcolor}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("lightcolor","#GET{lightcolor}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("showdigits","#GET{showdigits}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("thumbsinplaylist","#GET{thumbs}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("type","'#GET{type}'");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("showvolume","#GET{showvolume}");	
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("overstretch","#GET{overstretch}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("shuffle","#GET{shuffle}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("repeat","#GET{repeat}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("height","#GET{height}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("lightcolor","#GET{screencolor}");
+
+	//Behaviour
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("autostart","#GET{autostart}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("showicons","#GET{showicons}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("showeq","#GET{showeq}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("width","#GET{width}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("bufferlength","#GET{bufferlength}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("displayclick","#GET{displayclick}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("fullscreen","#GET{allowfullscreen}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("icons","#GET{icons}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("linktarget","#GET{linktarget}");
 	[(#GET{jwlogo}|!={''}|?{'s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("logo","#GET{jwlogo}");',''})]
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("displaywidth","#GET{displaywidth}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("displayheight","#GET{displayheight}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("showdownload","#GET{showdownload}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("autoscroll","#GET{autoscroll}");
-	[(#GET{enablejs}|=={true}|?{' ',''})
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("enablejs","#GET{enablejs}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("javascriptid","[(#GET{javascriptid,player})][(#GET{objet_spip})][(#GET{objet_val})]");]
-	[(#GET{audio}|!={''}|?{'s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("audio","#GET{audio}");',''})]
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("useaudio","#GET{useaudio}");
-	[(#GET{link}|!={''}|?{'s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("link","#GET{link}");',''})]
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("linkfromdisplay","#GET{linkfromdisplay}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("linktarget","#GET{linktarget}");	
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("mute","#GET{mute}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("quality","#GET{quality}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("repeat","#GET{repeat}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("shuffle","#GET{shuffle}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("stretching","#GET{stretching}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("volume","#GET{volume}");
 	
 	$(document).ready(function() {
-		s_[(#ENV{id})]_[(#GET{objet_val})].write("mediaplayer_[(#ENV{id})]_[(#GET{objet_spip})]_[(#GET{objet_val})]");
+		s_[(#ENV{id})]_[(#GET{objet_val})].write("mediaplayer_container_[(#GET{objet_spip})]_[(#GET{objet_val})]");
 	});
 // ]]>
 </script>

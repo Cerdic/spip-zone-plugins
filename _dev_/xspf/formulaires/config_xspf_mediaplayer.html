@@ -1,0 +1,262 @@
+#CACHE{0}
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=xspf -->
+<BOUCLE_article(DOCUMENTS documents_liens){id_article>0}{extension = flv}{0,1}{tout}>
+	<h3><:xspf:mediaplayer_exemple{id_article=#ID_OBJET}:></h3>
+	<div style="margin:10px;border:1px solid #ccc;padding:5px">
+		[(#MODELE{mediaplayer}{article=#ID_OBJET}{width=450})]
+	</div>
+</BOUCLE_article>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#SELF">
+	<div>
+		#ACTION_FORMULAIRE{SELF}
+			<ul>
+				<li>
+					<label for="mpltypefichier"><a href="#mpltypefichier" title="<:xspf:typefichier:> - <:xspf:desc_typefichier:>"><:xspf:typefichier:></a></label>&nbsp;
+					<input type="text" name="mpltypefichier" class="text" style="width:200px;" id="mpltypefichier" value="#CONFIG{xspf/mpltypefichier}" />
+				</li>
+				<li>
+					<label for="mplallowfullscreen">
+						<a href="#mplallowfullscreen" title="<:xspf:allowfullscreen:> - <:xspf:desc_allowfullscreen:>">
+							<:xspf:allowfullscreen:>
+						</a>
+					</label>
+					<select name="mplallowfullscreen" id="mplallowfullscreen">
+						<option [(#CONFIG{xspf/mplallowfullscreen}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+						<option [(#CONFIG{xspf/mplallowfullscreen}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+					</select>
+				</li>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend">
+							<:xspf:layout:>
+						</h3>
+						<ul>
+							<li>
+								<label for="mplcontrolbar"><a href="#mplcontrolbar" title="<:xspf:controlbar:> - <:xspf:desc_controlbar:>"><:xspf:controlbar:></a></label>
+								<select name="mplcontrolbar" id="mplcontrolbar">
+									<option [(#CONFIG{xspf/mplcontrolbar}|=={none}|?{selected="selected",''})]value="none"><:xspf:none:></option>
+									<option [(#CONFIG{xspf/mplcontrolbar}|=={bottom}|?{selected="selected",''})]value="bottom"><:xspf:bottom:></option>
+									<option [(#CONFIG{xspf/mplcontrolbar}|=={over}|?{selected="selected",''})]value="over"><:xspf:over:></option>
+								</select>
+							</li>
+							<li>
+								<label for="mplwidth"><a href="#mplwidth" title="<:xspf:width:> - <:xspf:desc_width:>"><:xspf:width:></a></label>
+								<input type="text" name="mplwidth" class="text" style="width:4em;" id="mplwidth" value="#CONFIG{xspf/mplwidth}" />&nbsp;<i>px</i>&nbsp;&nbsp;
+							</li>
+							<li>
+								<label for="mplheigth"><a href="#mplheigth" title="<:xspf:height:> - <:xspf:desc_height:>"><:xspf:height:></a></label>
+								<input type="text" name="mplheigth" class="text" style="width:4em;" id="mplheigth" value="#CONFIG{xspf/mplheigth}" />&nbsp;<i>px</i>
+							</li>
+							<li>
+								<label for="mplplayliste"><a href="#mplplayliste" title="<:xspf:playliste:> - <:xspf:desc_playliste:>"><:xspf:playliste:></a></label>
+								<select name="mplplayliste" id="mplplayliste">
+									<option [(#CONFIG{xspf/mplplayliste}|=={none}|?{selected="selected",''})]value="none"><:xspf:none:></option>
+									<option [(#CONFIG{xspf/mplplayliste}|=={bottom}|?{selected="selected",''})]value="bottom"><:xspf:bottom:></option>
+									<option [(#CONFIG{xspf/mplplayliste}|=={over}|?{selected="selected",''})]value="over"><:xspf:over:></option>
+									<option [(#CONFIG{xspf/mplplayliste}|=={right}|?{selected="selected",''})]value="right"><:xspf:right:></option>
+								</select>
+							</li>
+							<li>
+								<label for="mplplaylistsize"><a href="#mplplaylistsize" title="<:xspf:playlistsize:> - <:xspf:desc_playlistsize:>"><:xspf:playlistsize:></a></label>
+								<input type="text" name="mplplaylistsize" class="text" style="width:4em;" id="mplplaylistsize" value="#CONFIG{xspf/mplplaylistsize}" />&nbsp;<i>px</i>
+							</li>
+						</ul>
+					</fieldset>
+				</li>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend">
+							<:xspf:color_anim:>
+						</h3>
+						<ul>
+							<li>
+								<label for="mplbackcolor">
+									<a href="#mplbackcolor" title="<:xspf:backcolor:> - <:xspf:desc_backcolor:>">
+										<:xspf:backcolor:>
+									</a>
+								</label>
+								<input type="text" name="mplbackcolor" class="palette text" style="width:100px;" id="mplbackcolor" value="[(#CONFIG{xspf/mplbackcolor}|sinon{#000000})]" maxlength="7" />
+							</li>
+							<li>
+								<label for="mplfrontcolor">
+									<a href="#mplfrontcolor" title="<:xspf:frontcolor:> - <:xspf:desc_frontcolor:>">
+										<:xspf:frontcolor:>
+									</a>
+								</label>
+								<input type="text" name="mplfrontcolor" class="palette text" style="width:100px;" id="mplfrontcolor" value="[(#CONFIG{xspf/mplfrontcolor}|sinon{#CCCCCC})]" maxlength="7" />
+							</li>
+							<li>
+								<label for="mpllightcolor">
+									<a href="#mpllightcolor" title="<:xspf:lightcolor:> - <:xspf:desc_lightcolor:>">
+										<:xspf:lightcolor:>
+									</a>
+								</label>
+								<input type="text" name="mpllightcolor" class="palette text" style="width:100px;" id="mpllightcolor" value="[(#CONFIG{xspf/mpllightcolor}|sinon{#996600})]" maxlength="7" />
+							</li>
+							<li>
+								<label for="mplscreencolor">
+									<a href="#mplscreencolor" title="<:xspf:screencolor:> - <:xspf:desc_screencolor:>">
+										<:xspf:screencolor:>
+									</a>
+								</label>
+								<input type="text" name="mplscreencolor" class="palette" style="width:100px;" id="mplscreencolor" value="[(#CONFIG{xspf/mplscreencolor}|sinon{#000000})]" maxlength="7" />
+							</li>
+						</ul>
+					</fieldset>
+				</li>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend">
+							<:xspf:behaviour:>
+						</h3>
+							<ul>
+								<li>
+									<label for="mplautostart"><a href="#mplautostart" title="<:xspf:autostart:> - <:xspf:desc_autostart:>"><:xspf:autostart:></a></label>
+									<select name="mplautostart" id="mplautostart">
+										#SET{mplautostart,#CONFIG{xspf/mplautostart}}
+										<option [(#GET{mplautostart}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+										<option [(#GET{mplautostart}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>	
+									</select>
+								</li>
+								<li>
+									<label for="mplbufferlength">
+										<a href="#mplbufferlength" title="<:xspf:bufferlength:> - <:xspf:desc_bufferlength:>">
+											<:xspf:bufferlength:>
+										</a>
+									</label>
+									<input type="text" name="mplbufferlength" class="text" style="width:2em;" id="mplbufferlength" value="[(#CONFIG{xspf/mplbufferlength}|sinon{1})]" maxlength="2" />
+								</li>
+								<li>
+									<label for="mpldisplayclick"><a href="#mplautostart" title="<:xspf:displayclick:> - <:xspf:desc_displayclick:>"><:xspf:displayclick:></a></label>
+									<select name="mpldisplayclick" id="mpldisplayclick">
+										#SET{mpldisplayclick,#CONFIG{xspf/mpldisplayclick}}
+										<option [(#GET{mpldisplayclick}|=={play}|?{selected="selected",''})]value="play"><:xspf:play:></option>
+										<option [(#GET{mpldisplayclick}|=={link}|?{selected="selected",''})]value="link"><:xspf:link:></option>
+										<option [(#GET{mpldisplayclick}|=={fullscreen}|?{selected="selected",''})]value="fullscreen"><:xspf:fullscreen:></option>
+										<option [(#GET{mpldisplayclick}|=={none}|?{selected="selected",''})]value="none"><:xspf:none:></option>
+										<option [(#GET{mpldisplayclick}|=={mute}|?{selected="selected",''})]value="mute"><:xspf:mute:></option>
+										<option [(#GET{mpldisplayclick}|=={next}|?{selected="selected",''})]value="next"><:xspf:next:></option>
+									</select>
+								</li>
+								<li>
+									<label for="mpllinktarget">
+										<a href="#mpllinktarget" title="<:xspf:linktarget:> - <:xspf:desc_linktarget:>">
+											<:xspf:linktarget:>
+										</a>
+									</label>
+									<select name="mpllinktarget" id="mpllinktarget">
+										#SET{mpllinktarget,#CONFIG{xspf/mpllinktarget}}
+										<option [(#GET{mpllinktarget}|=={none}|?{selected="selected",''})]value="none"><:xspf:none:></option>
+										<option [(#GET{mpllinktarget}|=={_blank}|?{selected="selected",''})]value="_blank">_blank</option>
+										<option [(#GET{mpllinktarget}|=={_self}|?{selected="selected",''})]value="_self">_self</option>
+									</select>
+								</li>
+								<li>
+									<label for="mplmute"><a href="#mplmute" title="<:xspf:mute:> - <:xspf:desc_mute:>"><:xspf:mute:></a></label>
+									<select name="mplmute" id="mplmute">
+										#SET{mplmute,#CONFIG{xspf/mplmute}}
+										<option [(#GET{mplmute}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+										<option [(#GET{mplmute}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>	
+									</select>
+								</li>
+								<li>
+									<label for="mplquality"><a href="#mplquality" title="<:xspf:quality:> - <:xspf:desc_quality:>"><:xspf:quality:></a></label>
+									<select name="mplquality" id="mplquality">
+										#SET{mplquality,#CONFIG{xspf/mplquality}}
+										<option [(#GET{mplquality}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>	
+										<option [(#GET{mplquality}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+									</select>
+								</li>
+								<li>
+									<label for="mplicons">
+										<a href="#mplicons" title="<:xspf:icons:> - <:xspf:desc_icons:>">
+											<:xspf:icons:>
+										</a>
+									</label>
+									<select name="mplicons" id="mplicons">
+										<option [(#CONFIG{xspf/mplicons}|=={true}|?{selected="selected",''})] value="true" ><:xspf:true:></option>
+										<option [(#CONFIG{xspf/mplicons}|=={false}|?{selected="selected",''})] value="false"><:xspf:false:></option>
+									</select>
+								</li>
+								<li>
+									<label for="mplrepeat">
+										<a href="#mplrepeat" title="<:xspf:repeat:> - <:xspf:desc_jwrepeat:>">
+											<:xspf:repeat:>
+										</a>
+									</label>
+									<select name="mplrepeat" id="mplrepeat">
+										#SET{mplrepeat,#CONFIG{xspf/mplrepeat}}
+										<option [(#GET{mplrepeat}|=={false}|?{selected="selected",''})]value="none"><:xspf:false:></option>
+										<option [(#GET{mplrepeat}|=={single}|?{selected="selected",''})]value="single"><:xspf:single:></option>
+										<option [(#GET{mplrepeat}|=={allways}|?{selected="selected",''})]value="allways"><:xspf:allways:></option>
+										<option [(#GET{mplrepeat}|=={list}|?{selected="selected",''})] value="list"><:xspf:list:></option>	
+									</select>
+								</li>
+								<li>
+									<label for="mplshuffle">
+										<a href="#mplshuffle" title="<:xspf:shuffle:> - <:xspf:desc_shuffle:>">
+											<:xspf:shuffle:>
+										</a>
+									</label>
+									<select name="mplshuffle" id="mplshuffle">
+										<option [(#CONFIG{xspf/mplshuffle}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+										<option [(#CONFIG{xspf/mplshuffle}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+									</select>
+								</li>
+								<li>
+									<label for="mplstretching">
+										<a href="#mplstretching" title="<:xspf:stretching:> - <:xspf:desc_stretching:>">
+											<:xspf:stretching:>
+										</a>
+									</label>
+									<select name="mplstretching" id="mplstretching">
+										#SET{mplstretching,#CONFIG{xspf/mplstretching}}
+										<option [(#GET{mplstretching}|=={uniform}|?{selected="selected",''})] value="uniform"><:xspf:uniform:></option>	
+										<option [(#GET{mplstretching}|=={none}|?{selected="selected",''})]value="none"><:xspf:none:></option>
+										<option [(#GET{mplstretching}|=={exactfit}|?{selected="selected",''})]value="exactfit"><:xspf:exactfit:></option>
+										<option [(#GET{mplstretching}|=={fill}|?{selected="selected",''})] value="fill"><:xspf:fill:></option>	
+									</select>
+								</li>
+								<li>
+									<label for="mplvolume">
+										<a href="#mplvolume" title="<:xspf:volume:> - <:xspf:desc_volume:>">
+											<:xspf:volume:>
+										</a>
+									</label>
+									<input type="text" name="mplvolume" class="text" style="width:2em;" id="mplvolume" value="[(#CONFIG{xspf/mplvolume}|sinon{90})]" maxlength="2" />
+								</li>
+							</ul>
+						</fieldset>
+					</li>
+					<li class="fieldset">
+						<fieldset>
+							<h3 class="legend">
+								<:xspf:externals:>
+							</h3>
+							<ul>
+								<li>
+									<label for="mpljavascriptid">
+										<a href="#mpljavascriptid" title="<:xspf:javascriptid:> - <:xspf:desc_javascriptid:>">
+											<:xspf:javascriptid:>
+										</a>
+									</label>
+									<input type="text" name="mpljavascriptid" class="text" style="width:200px;" id="mpljavascriptid" value="#CONFIG{xspf/mpljavascriptid}" />
+								</li>
+							</ul>
+						</fieldset>
+					</li>
+				</ul>
+				
+			<p class="boutons">
+				<input type="submit" name="_cfg_ok" value="<:OK:>" class="submit" />
+				<input type="reset" value="<:reset:>" class="submit" />
+			</p>
+	</div>		
+</form>
+#CFG_ARBO{xspf}

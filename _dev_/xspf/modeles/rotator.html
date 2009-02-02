@@ -22,17 +22,13 @@
 	Pour les options, voir http://www.jeroenwijering.com/extras/readme.html
 	- width : px|%,100%
 	- height : px|%,100%
-	- displaywidth : px|%,width
-	- displayheight : px|%,height
 	- transition : fade|bgfade|blocks|bubbles|circles|fluids|lines|random|slowfade,fade
 	- overstretch : true|false|fit|none,none
 	- shownavigation : true|false,true
 	- rotate: secondes,10
 	- shuffle : true|false,false
 	- repeat : true|false,true
-	- showdownload: true|false,false
 	- audio: url
-	- useaudio: true|false, false
 	- jwlogo: url
 	- autoscroll: true|false, false
 	- link: url
@@ -42,35 +38,35 @@
 	
 ]
 
-[(#ENV{donnee}|?{' ',''}) 
+[(#ENV{donnee}|oui) 
   [(#SET{objet_spip,id_donnee})]
   [(#SET{objet_val,[(#ENV{donnee})]})]
 ]
-[(#ENV{rubrique}|?{' ',''}) 
+[(#ENV{rubrique}|oui) 
   [(#SET{objet_spip,id_rubrique})]
   [(#SET{objet_val,[(#ENV{rubrique})]})]
 ]
-[(#ENV{secteur}|?{' ',''}) 
+[(#ENV{secteur}|oui) 
   [(#SET{objet_spip,id_secteur})]
   [(#SET{objet_val,[(#ENV{secteur})]})]
 ]
-[(#ENV{document}|?{' ',''}) 
+[(#ENV{document}|oui) 
   [(#SET{objet_spip,id_document})]
   [(#SET{objet_val,[(#ENV{document})]})]
 ]
-[(#ENV{mot}|?{' ',''}) 
+[(#ENV{mot}|oui) 
   [(#SET{objet_spip,id_mot})]
   [(#SET{objet_val,[(#ENV{mot})]})]
 ]
-[(#ENV{breve}|?{' ',''}) 
+[(#ENV{breve}|oui) 
   [(#SET{objet_spip,id_breve})]
   [(#SET{objet_val,[(#ENV{breve})]})]
 ]
-[(#ENV{article}|?{' ',''}) 
+[(#ENV{article}|oui) 
   [(#SET{objet_spip,id_article})]
   [(#SET{objet_val,[(#ENV{article})]})]
 ]
-[(#GET{objet_spip}|?{'',' '}) 
+[(#GET{objet_spip}|non) 
   [(#SET{objet_spip,id_article})]
   [(#SET{objet_val,[(#ENV{id_rotator})]})]
 ]
@@ -79,7 +75,7 @@
 
 [(#SET{transition,#ENV{transition,#CONFIG{xspf/rottransition}|sinon{fade}}})]
 [(#SET{shownavigation,#ENV{shownavigation,#CONFIG{xspf/rotshownavigation}|sinon{true}}})]
-[(#SET{rotatetime,#ENV{rotate,#CONFIG{xspf/rotrotate}|sinon{10}}})]
+[(#SET{rotatetime,#ENV{rotate,#CONFIG{xspf/rotrotate}|sinon{5}}})]
 
 [(#SET{width,#ENV{width,#CONFIG{xspf/rotwidth}|sinon{100%}}})]
 [(#SET{height,#ENV{height,#CONFIG{xspf/rotheigth}|sinon{100%}}})]
@@ -88,7 +84,6 @@
 [(#SET{overstretch,#ENV{overstretch,#CONFIG{xspf/rotoverstretch}|sinon{none}}})]
 [(#SET{shuffle,#ENV{shuffle,#CONFIG{xspf/rotshuffle}|sinon{false}}})]
 [(#SET{repeat,#ENV{repeat,#CONFIG{xspf/rotrepeat}|sinon{true}}})]
-[(#SET{showdownload,#ENV{showdownload,false}})]
 
 [(#SET{showvolume,#ENV{showvolume,#CONFIG{xspf/rotshowvolume}|sinon{true}}})]
 [(#SET{autostart,#ENV{autostart,#CONFIG{xspf/rotautostart}|sinon{false}}})]
@@ -97,15 +92,15 @@
 [(#SET{backcolor,#CONFIG{xspf/rotbackcolor}|replace{#,0x}|sinon{0xFFFFFF}})]
 [(#SET{frontcolor,#CONFIG{xspf/rotfrontcolor}|replace{#,0x}|sinon{0x000000}})]
 [(#SET{lightcolor,#CONFIG{xspf/rotlightcolor}|replace{#,0x}|sinon{0xCC0000}})]
+[(#SET{screencolor,#CONFIG{xspf/rotscreencolor}|replace{#,0x}|sinon{0x000000}})]
 
 [(#SET{jwlogo,#ENV{jwlogo,#CONFIG{xspf/jwlogo}}})]
 [(#SET{audio,#ENV{audio,#CONFIG{xspf/rotaudio}}})]
-[(#SET{useaudio,#ENV{useaudio,#CONFIG{xspf/rotuseaudio}|sinon{false}}})]
 [(#SET{link,#ENV{link,#CONFIG{xspf/rotlink}}})]
 [(#SET{linkfromdisplay,#ENV{linkfromdisplay,#CONFIG{xspf/rotlinkfromdisplay}}})]
 [(#SET{linktarget,#ENV{linktarget,#CONFIG{xspf/rotlinktarget}}})]
 
-
+[(#SET{file,[(#ENV{file,[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,'jpg|png|gif','&'}|parametre_url{width,#GET{width}}|parametre_url{height,#GET{height}}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]})]})]
 [(#SET{align,#ENV{align,center}})]
 
 <noscript><p><:xspf:js_necessaire:></p></noscript>
@@ -121,13 +116,13 @@
 // <![CDATA[
 	var s_[(#ENV{id})]_[(#GET{objet_val})] = new SWFObject("#CHEMIN{lib/imagerotator/imagerotator.swf}","rotator","#GET{width}","#GET{height}","7");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addParam("wmode","#GET{wmode}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("file",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,'jpg|png|gif','&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("file",encodeURIComponent("#GET{file}"));
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("transition","#GET{transition}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("backcolor","#GET{backcolor}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("frontcolor","#GET{frontcolor}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("lightcolor","#GET{lightcolor}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("screencolor","#GET{screencolor}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("shownavigation","#GET{shownavigation}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("showdownload","#GET{showdownload}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("kenburns","false");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("overstretch","#GET{overstretch}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("repeat","#GET{repeat}");
@@ -135,11 +130,8 @@
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("shuffle","#GET{shuffle}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("height","#GET{height}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("width","#GET{width}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("displaywidth","#GET{displaywidth}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("displayheight","#GET{displayheight}");
 	[(#GET{jwlogo}|!={''}|?{'s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("logo","#GET{jwlogo}");',''})]
 	[(#GET{audio}|!={''}|?{'s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("audio","#GET{audio}");',''})]
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("useaudio","#GET{useaudio}");
 	[(#GET{link}|!={''}|?{'s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("link","#GET{link}");',''})]
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("linkfromdisplay","#GET{linkfromdisplay}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("linktarget","#GET{linktarget}");	

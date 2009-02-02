@@ -72,7 +72,7 @@
 // <![CDATA[
 	var s1 = new SWFObject("#CHEMIN{swf/xspf_player.swf}","musicplayer","#GET{width}","#GET{height}","7");
 	s1.addParam("wmode","#GET{wmode}");
-	s1.addVariable("playlist_url",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,mp3,'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
+	s1.addVariable("playlist_url",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,mp3|m3u,'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
 	s1.addVariable("autoload","#GET{autoload}");
 	s1.addVariable("autoplay","#GET{autoplay}");
 	s1.addVariable("repeat_playlist","#GET{repeat}");

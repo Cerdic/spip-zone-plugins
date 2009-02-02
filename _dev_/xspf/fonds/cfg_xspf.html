@@ -1,8 +1,7 @@
 #CACHE{0}
-<!-- icone=css/_img/xifish_icone.gif -->
+<!-- icone=images/xifish_icone.gif -->
 
-[(#SET{logo, <img src='#CHEMIN{css/_img/xifish.gif}' width='64' height='64' alt='xifish' style="float:#LANG_RIGHT;" /> })]
-
+[(#SET{logo,'<img src="#CHEMIN{images/xifish.gif}" width="64" height="64" alt="xifish" style="float:#LANG_RIGHT;" />'})]
 <!-- descriptif= [(#GET{logo})] <:xspf:description_xspf:> -->
 
 <!-- titre=XSPF plugin -->
@@ -11,24 +10,42 @@
 <!-- liens*=xspf_mediaplayer -->
 <!-- liens*=xspf_musicplayer -->
 <!-- liens*=xspf_rotator -->
-  
- 
+
 <:xspf:description_xspf_lecteurs:>
- 
-<form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]
 
-<fieldset>
-	<h4><:xspf:wmode:></h4>
-	<label for="wmode">Wmode</label>
-	<select name="wmode" id="wmode" class="fondl">
-		<option value="transparent"[(#ENV*{wmode}|=={transparent}|?{selected,''})]>transparent</option>
-		<option value="opaque"[(#ENV*{wmode}|=={opaque}|?{selected,''})]>opaque</option>
-	</select>
-	<h4><:xspf:jw_logo:></h4>
-	<label for="jwlogo"><a href="#" title="<:xspf:jwlogo:> - <:xspf:desc_jwlogo:>"><:xspf:jwlogo:></a></label>
-	<input type="text" name="jwlogo" class="forml" style="width:200px;display:inline" id="jwlogo" value="#ENV{jwlogo}" /> <i>URL</i>
-</fieldset>
+<div class="formulaire_spip">
 
-	<input type="submit" class="fondo" name="_cfg_ok" value="<:xspf:OK:>" />
-	<input type="reset" class="fondo" value="<:xspf:Reset:>" />
-</form>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>] 
+
+	<form method="post" action="#SELF">
+		<div>
+			[(#ENV{_cfg_}|form_hidden)]
+			<ul>
+				<li>
+					<label for="wmode">
+						<a href="#" title="<:xspf:wmode:> - <:xspf:desc_wmode:>">
+							<:xspf:wmode:>
+						</a>
+					</label>
+					<select name="wmode" id="wmode" class="text">
+						<option value="transparent"[(#ENV*{wmode}|=={transparent}|?{ selected="selected",''})]>transparent</option>
+						<option value="opaque"[(#ENV*{wmode}|=={opaque}|?{ selected="selected",''})]>opaque</option>
+					</select>
+				</li>
+				<li>
+					<label for="jwlogo">
+						<a href="#" title="<:xspf:jwlogo:> - <:xspf:desc_jwlogo:>">
+							<:xspf:jwlogo:>
+						</a>
+					</label>
+					<input type="text" name="jwlogo" class="text" id="jwlogo" value="#ENV{jwlogo}" /> <i>URL</i>		
+				</li>
+			</ul>
+			<div class="boutons">
+				<input type="submit" class="submit" name="_cfg_ok" value="<:xspf:OK:>" />
+				<input type="reset" class="submit" value="<:xspf:Reset:>" />
+			</div>
+		</div>
+	</form>
+</div>

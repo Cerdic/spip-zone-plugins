@@ -16,6 +16,9 @@
 	- align : left|center|right,center
 	
 ]
+[(#ENV{objet}|=={site}|?{' '})
+	#SET{objet,site}
+]
 
 [(#ENV{donnee}|?{' ',''}) 
   [(#SET{objet_spip,id_donnee})]
@@ -71,7 +74,7 @@
 // <![CDATA[
 	var s#ENV{id} = new SWFObject("#CHEMIN{swf/musicplayer.swf}","buttonplayer#ENV{id}","#GET{width}","#GET{height}","7");
 	s#ENV{id}.addParam("wmode","#GET{wmode}");
-	s#ENV{id}.addVariable("playlist_url",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,mp3,'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
+	s#ENV{id}.addVariable("playlist_url",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,mp3,'&'}|parametre_url{objet,#GET{objet},'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
 	s#ENV{id}.addVariable("autoload","#GET{autoload}");
 	s#ENV{id}.addVariable("autoplay","#GET{autoplay}");
 	s#ENV{id}.addVariable("repeat_playlist","#GET{repeat}");
