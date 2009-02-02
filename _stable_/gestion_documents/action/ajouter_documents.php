@@ -14,6 +14,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/getdocument');
 include_spip('inc/documents');
+include_spip('inc/ajouter_documents'); // compat core
+include_spip('inc/choisir_mode_document'); // compat core
 
 function action_ajouter_documents_dist($id_document, $files, $objet, $id_objet, $mode, &$documents_actifs){
 	$ajouter_un_document = charger_fonction('ajouter_un_document','action');
@@ -65,7 +67,7 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 	// Documents distants : pas trop de verifications bloquantes, mais un test
 	// via une requete HEAD pour savoir si la ressource existe (non 404), si le
 	// content-type est connu, et si possible recuperer la taille, voire plus.
-	if (isset($file['mode']) AND $file['mode'] = 'distant') {
+	if (isset($file['distant']) AND $file['distant']) {
 		include_spip('inc/distant');
 		if (is_array($a = renseigner_source_distante($source))) {
 
@@ -73,7 +75,6 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 			# NB: dans les bonnes conditions (fichier autorise et pas trop gros)
 			# $a['fichier'] est une copie locale du fichier
 
-			$type_image = $champs['type_image'];
 			unset($champs['type_image']);
 			$champs['date'] = 'NOW()';
 		}
@@ -126,7 +127,7 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 		
 		unset($champs['type_image']);
 		unset($champs['inclus']);
-		$champs['fichier'] = set_spip_doc($fichier);
+		$champs['fichier'] = set_spip_doc($champs['fichier']);
 	}
 	
 	// lier le parent si necessaire
@@ -153,16 +154,16 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 		spip_log ("ajout du document $source $nom_envoye  (M '$mode' T '$objet' L '$id_objet' D '$id')");
 	}
 	
-	revision_document($id,$a);
+	document_set($id,$champs);
 
 	// si on vient de charger une vignette, reviser le document concerne
 	if ($id_document) {
 		revision_document($id_document,array("id_vignette" => $id, "mode" => 'document'));
 		// pour que le retour vers ecrire/ active le bon doc.
-		$documents_actifs[$fichier] = $id_document;
+		$documents_actifs[$champs['fichier']] = $id_document;
 	}
 	else 
-		$documents_actifs[$fichier] = $id;
+		$documents_actifs[$champs['fichier']] = $id;
 
 	return $id ;
 }
@@ -198,7 +199,7 @@ function renseigner_source_distante($source){
 	return _L("Document $source introuvable");
 }
 
-
+if (!function_exists('corriger_extension')){
 /**
  * Corrige l'extension du fichier dans quelques cas particuliers
  * (a passer dans ecrire/base/typedoc)
@@ -229,7 +230,7 @@ function corriger_extension($ext) {
 	}
 	return $ext;
 }
-
+}
 
 /**
  * Verifie la possibilite d'uploader une extension
@@ -354,6 +355,7 @@ function renseigner_taille_dimension_image($fichier,$ext){
 	return $infos;
 }
 
+if (!function_exists('traite_svg')){
 /**
  * Determiner les dimensions d'un svg, et enlever ses scripts si necessaire
  *
@@ -400,7 +402,9 @@ function traite_svg($file)
 	}
 	return array($width, $height);
 }
+}
 
+if (!function_exists('decoder_type_image')){
 /**
  * Convertit le type numerique retourne par getimagesize() en extension fichier
  *
@@ -429,6 +433,7 @@ function decoder_type_image($type, $strict = false) {
 		default:
 			return "";
 	}
+}
 }
 
 function verifier_taille_document_acceptable($infos){

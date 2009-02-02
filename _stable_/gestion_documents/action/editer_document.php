@@ -23,7 +23,7 @@ function action_editer_document_dist() {
 	} 
 
 	if ($id_document = intval($id_document)) {
-		revisions_documents($id_document);
+		document_set($id_document);
 	}
 	// Erreur
 	else{
@@ -76,17 +76,16 @@ function insert_document() {
  * @param int $id_document
  * @param array $c
  */
-function revisions_documents ($id_document, $c=false) {
+function document_set ($id_document, $c=false) {
 
 	// champs normaux
-	if ($c === false) {
-		$c = array();
-		foreach (array(
-			'titre', 'descriptif', 'date', 'taille', 'largeur','hauteur','mode'
-		) as $champ)
-			if (($a = _request($champ)) !== null)
-				$c[$champ] = $a;
-	}
+	$champs = array();
+	foreach (array(
+		'titre', 'descriptif', 'date', 'taille', 'largeur','hauteur','mode',
+		'fichier','distant','extension',
+	  ) as $champ)
+		if (($a = _request($champ,$c)) !== null)
+			$champs[$champ] = $a;
 
 	// Si le document est publie, invalider les caches et demander sa reindexation
 	$t = sql_getfetsel("statut", "spip_documents", "id_document=$id_document");
@@ -101,7 +100,7 @@ function revisions_documents ($id_document, $c=false) {
 			'invalideur' => $invalideur,
 			'indexation' => $indexation
 		),
-		$c);
+		$champs);
 
 
 	// Changer le statut du document ?

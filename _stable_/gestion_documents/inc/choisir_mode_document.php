@@ -21,7 +21,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param unknown_type $largeur
  * @param unknown_type $hauteur
  */
-function inc_choisir_mode_document_dist($infos, $type_inclus_image, $objet){
+function inc_choisir_mode_document($infos, $type_inclus_image, $objet){
 	
 	// si ce n'est pas une image, c'est forcement un document
 	if (!$infos['type_image'] OR !$type_inclus_image)

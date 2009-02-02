@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/ajouter_documents'); // compat core
 
 
 /**
@@ -35,11 +36,12 @@ function joindre_trouver_fichier_envoye(){
 		if (is_array($post)){
 			include_spip('action/ajouter_documents');
 		  foreach ($post as $file) {
-		  //UPLOAD_ERR_NO_FILE
-			if (!($file['error'] == 4) )
-				if (!verifier_upload_autorise($file['name']))
-					return _L("Le telechargement des fichiers du type de ".$file['name']." n'est pas autoris&eacute;");
-				$files[]=$file;
+		  	//UPLOAD_ERR_NO_FILE
+				if (!($file['error'] == 4) ){
+					if (!verifier_upload_autorise($file['name']))
+						return _L("Le telechargement des fichiers du type de ".$file['name']." n'est pas autoris&eacute;");
+					$files[]=$file;
+				}
 			}
 		}
 		return $files;
@@ -239,7 +241,7 @@ function joindre_deballer_lister_zip($path,$tmp_dir) {
  	return _T('avis_operation_impossible');
 }
 
-
+if (!function_exists('fixer_extension_document')){
 /**
  * Cherche dans la base le type-mime du tableau representant le document
  * et corrige le nom du fichier ; retourne array(extension, nom corrige)
@@ -264,5 +266,6 @@ function fixer_extension_document($doc) {
 	}
 
 	return array($extension,$name);
+}
 }
 ?>

@@ -96,7 +96,7 @@ function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet
 	return $erreurs;
 }
 
-/*
+
 function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto'){
 	$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 
@@ -127,7 +127,7 @@ function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=
 	// rediriger sinon
 	return $res;
 }
-*/
+
 
 
 /**
