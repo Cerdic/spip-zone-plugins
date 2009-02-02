@@ -56,6 +56,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_heure' => 'Heure',
 	'info_largeur' => 'Largeur',
 	'info_hauteur' => 'Hauteur',
+	'info_gauche_numero_document'=>'DOCUMENT NUM&Eacute;RO',
+	'info_statut_document'=> 'Ce document est&nbsp;:',
 	
 	// L
 	'logo' => 'Logo',

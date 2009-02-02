@@ -62,7 +62,17 @@ function documents_edit_ok($row, $id_document, $id_parent, $new)
 	echo $commencer_page(_T('titre_page_documents_edit', array('titre' => $titre)), "naviguer", "documents");
 
 	echo debut_gauche('', true);
-	echo recuperer_fond("modeles/doc",array('id_document'=>$id_document,'largeur'=>180));
+	$boite = pipeline ('boite_infos', array('data' => '',
+		'args' => array(
+			'type'=>'document',
+			'id' => $id_document,
+			'row' => $row
+		)
+	));
+
+	echo debut_boite_info(true). $boite . fin_boite_info(true);
+	
+	echo recuperer_fond("prive/navigation/documents_edit",array('id_document'=>$id_document));
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'documents_edit','id_document'=>$id_document),'data'=>''));
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'documents_edit','id_document'=>$id_document),'data'=>''));
