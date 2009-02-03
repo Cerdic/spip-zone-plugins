@@ -99,8 +99,10 @@ Plusieurs methodes d'insertion :
   #SET{objet_val,#ENV{article}}
 ]
 [(#GET{objet_spip}|non) 
-  [(#SET{objet_spip,id_article})]
-  [(#SET{objet_val,[(#ENV{id_mediaplayer})]})]
+	[(#ENV{id_mediaplayer}|oui)
+		[(#SET{objet_spip,id_article})]
+		[(#SET{objet_val,[(#ENV{id_mediaplayer})]})]
+	]
 ]
 
 [(#SET{wmode,#ENV{wmode,#CONFIG{xspf/wmode}|sinon{transparent}}})]
@@ -155,7 +157,7 @@ Plusieurs methodes d'insertion :
 	var s[_(#ENV{id})][_(#GET{objet_val})] = new SWFObject("#CHEMIN{lib/mediaplayer/player.swf}","[(#GET{javascriptid,mediaplayer})]_[(#GET{objet_spip})][_(#GET{objet_val})]","#GET{width}","#GET{height}","7");
 	s[_(#ENV{id})][_(#GET{objet_val})].addParam("allowfullscreen","#GET{allowfullscreen}");
 	s[_(#ENV{id})][_(#GET{objet_val})].addParam("wmode","#GET{wmode}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("file",encodeURIComponent("[(#ENV{domaine,#URL_PAGE{xspf}}|parametre_url{type,#GET{type}}|parametre_url{prerolllocation,[(#GET{prerolllocation})],'&'}|parametre_url{postrolllocation,[(#GET{postrolllocation})],'&'}|parametre_url{objet,#GET{objet},'&'}|parametre_url{prerolllink,[(#GET{prerolllink})],'&'}|parametre_url{postrolllink,[(#GET{postrolllink})],'&'}|parametre_url{creator,[(#ENV{creator})],'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'}|url_absolue)])]"));
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("file",encodeURIComponent("[(#ENV{domaine,#URL_PAGE{xspf}}|parametre_url{type,#GET{type}}|parametre_url{prerolllocation,[(#GET{prerolllocation})],'&'}|parametre_url{postrolllocation,[(#GET{postrolllocation})],'&'}|parametre_url{objet,#GET{objet},'&'}|parametre_url{prerolllink,[(#GET{prerolllink})],'&'}|parametre_url{postrolllink,[(#GET{postrolllink})],'&'}|parametre_url{creator,[(#ENV{creator})],'&'}|parametre_url{[(#GET{objet_spip,x})],[(#GET{objet_val,x})],'&'}|url_absolue)]"));
 
 	// Layout
 	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("controlbar","#GET{controlbar}");

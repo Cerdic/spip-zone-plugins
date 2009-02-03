@@ -3,11 +3,10 @@
 <!-- refus=<:cfg:refus_configuration_webmestre:> -->
 <!-- nom=xspf -->
 
-	<h3><:xspf:mediaplayer_exemple{id_article=#ID_OBJET}:></h3>
-	<div style="margin:10px;border:1px solid #ccc;padding:5px">
-		[(#MODELE{mediaplayer}{width=450})]
-	</div>
-
+<h3><:xspf:mediaplayer_exemple{id_article=#ID_OBJET}:></h3>
+<div style="margin:10px;border:1px solid #ccc;padding:5px">
+	[(#MODELE{mediaplayer}{width=450})]
+</div>
 
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -264,7 +263,6 @@
 						</fieldset>
 					</li>
 				</ul>
-				
 			<p class="boutons">
 				<input type="submit" name="_cfg_ok" value="<:OK:>" class="submit" />
 				<input type="reset" name="_cfg_delete" value="<:reset:>" class="submit" />

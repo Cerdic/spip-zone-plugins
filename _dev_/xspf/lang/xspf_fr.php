@@ -54,7 +54,7 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 <p>Ici vous pouvez configurer les diff&eacute;rentes options du lecteur "mediaplayer" de Jeroen Wijering.</p>
 En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>',
 
-'mediaplayer_exemple' => 'Exemple du mod&egrave;le "mediaplayer" sur l\'article @id_article@',
+'mediaplayer_exemple' => 'Pr&eacute;visualisation du mod&egrave;le "mediaplayer" (sur tout le site)',
 'typefichier' => 'Type de fichiers g&eacute;r&eacute;s',
 'desc_typefichier' => 'D&eacute;fini les types de fichiers pris en compte.<br />Les types doivent &ecirc;tre mentionn&eacute;s par leur extension et s&eacute;par&eacute;s par un pipe (par d&eacute;faut &laquo;flv|swf|mp3|jpg|png|gif&raquo;)',
 'playliste' => 'Position de la playliste',
@@ -97,6 +97,7 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 <p>Ici vous pouvez configurer les diff&eacute;rentes options du lecteur "rotator" de Jeroen Wijering.</p>
 En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>',
 
+'rotator_exemple' => 'Pr&eacute;visualisation du mod&egrave;le "rotator" (sur tout le site)',
 'enablejs' => 'Enable JS',
 'desc_enablejs' => 'Option enablejs<br />Autorise le contr&ocirc;le externe du lecteur par javascript',
 'javascriptid' => 'Javacript ID',

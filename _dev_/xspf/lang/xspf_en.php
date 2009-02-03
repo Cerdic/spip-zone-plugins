@@ -54,7 +54,7 @@ Waiting for the full documentation on <a href="http://www.spip-contrib.net">Spip
 <p>Here you can configure all the options for the Jeroen Wijering\'s mediaplayer.</p>
 Waiting for the full documentation on <a href="http://www.spip-contrib.net">Spip-Contrib</a>, you can consult the <a href="http://kent1.sklunk.net/spip.php?article96"> kent1\'s notepad</a>',
 
-'mediaplayer_exemple' => 'Example of the "mediaplayer" template on the article number @id_article@',
+'mediaplayer_exemple' => 'Previsualization of the "mediaplayer" template (on the whole site)',
 'typefichier' => 'File Types used',
 'desc_typefichier' => 'Configure the file types used.<br />They should be written with their extension and separated by a pipe (by default &laquo;flv|swf|mp3|jpg|png|gif&raquo;)',
 'playliste' => 'Position of the playlist',
@@ -97,6 +97,7 @@ Waiting for the full documentation on <a href="http://www.spip-contrib.net">Spip
 <p>Here you can configure all the options for the Jeroen Wijering\'s "rotator".</p>
 Waiting for the full documentation on <a href="http://www.spip-contrib.net">Spip-Contrib</a>, you can consult the <a href="http://kent1.sklunk.net/spip.php?article96"> kent1\'s notepad</a>',
 
+'rotator_exemple' => 'Previsualization of the "rotator" template (on the whole site)',
 'enablejs' => 'Enable JS',
 'desc_enablejs' => 'Option enablejs<br />Autorize external javascript controls to the player.',
 'javascriptid' => 'Javacript ID',
