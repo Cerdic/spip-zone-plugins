@@ -259,13 +259,24 @@
 									</label>
 									<input type="text" name="mpljavascriptid" class="text" style="width:200px;" id="mpljavascriptid" value="[(#CONFIG{xspf/mpljavascriptid}|sinon{mediaplayer})]" />
 								</li>
+								<li>
+									<label for="mplmenu">
+										<a href="#mplmenu" title="<:xspf:menu:> - <:xspf:desc_menu:>">
+											<:xspf:menu:>
+										</a>
+									</label>
+									<select name="mplmenu" id="mplmenu">
+										<option [(#CONFIG{xspf/mplmenu}|=={false}|?{selected="selected",''})] value="false"><:xspf:false:></option>
+										<option [(#CONFIG{xspf/mplmenu}|=={true}|?{selected="selected",''})] value="true" ><:xspf:true:></option>
+									</select>
+								</li>
 							</ul>
 						</fieldset>
 					</li>
 				</ul>
 			<p class="boutons">
 				<input type="submit" name="_cfg_ok" value="<:OK:>" class="submit" />
-				<input type="reset" name="_cfg_delete" value="<:reset:>" class="submit" />
+				<input type="submit" name="_cfg_delete" value="<:reset:>" class="submit" />
 			</p>
 	</div>		
 </form>

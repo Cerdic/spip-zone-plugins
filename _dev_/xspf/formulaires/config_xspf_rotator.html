@@ -317,6 +317,17 @@
 										<option [(#GET{rotlinkfromdisplay}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
 									</select>
 								</li>
+								<li>
+									<label for="rotmenu">
+										<a href="#rotmenu" title="<:xspf:menu:> - <:xspf:desc_menu:>">
+											<:xspf:menu:>
+										</a>
+									</label>
+									<select name="rotmenu" id="rotmenu">
+										<option [(#CONFIG{xspf/rotmenu}|=={false}|?{selected="selected",''})] value="false"><:xspf:false:></option>
+										<option [(#CONFIG{xspf/rotmenu}|=={true}|?{selected="selected",''})] value="true" ><:xspf:true:></option>
+									</select>
+								</li>
 							</ul>
 						</fieldset>
 					</li>

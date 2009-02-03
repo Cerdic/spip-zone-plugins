@@ -149,6 +149,8 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 'layout' => 'Layout',
 'display_appearance' => 'Apparence du lecteur',
 'controlbar_appearance' => 'Apparence de la barre de contr&ocirc;le',
+'menu' => 'Menu flash',
+'desc_menu' => 'Affichage du menu falsh au clic droit sur le lecteur.',
 
 //page d\'affichage de la configuration du plugin
 

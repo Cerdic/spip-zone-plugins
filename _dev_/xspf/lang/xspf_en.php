@@ -149,6 +149,8 @@ Waiting for the full documentation on <a href="http://www.spip-contrib.net">Spip
 'layout' => 'Layout',
 'display_appearance' => 'Display appearance',
 'controlbar_appearance' => 'Controlbar appearance',
+'menu' => 'Flash menu',
+'desc_menu' => 'Display the flash menu when right clicking on the player.',
 
 //page d\'affichage de la configuration du plugin
 
