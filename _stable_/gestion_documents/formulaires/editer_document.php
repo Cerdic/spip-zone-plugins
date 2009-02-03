@@ -33,6 +33,9 @@ function formulaires_editer_document_charger_dist($id_document='new', $id_parent
 	$valeurs['saisie_heure'] = affdate($valeurs['date'],'H:i');
 	// en fonction du format
 	$valeurs['_editer_dimension'] = autoriser('tailler','document',$id_document)?' ':'';
+	
+	// type du document
+	$valeurs['type_document'] = sql_getfetsel('titre as type_document','spip_types_documents','extension='.sql_quote($valeurs['extension']));
 	return $valeurs;
 }
 

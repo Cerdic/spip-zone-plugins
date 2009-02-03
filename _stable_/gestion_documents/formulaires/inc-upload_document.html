@@ -8,6 +8,7 @@
 		</li>
 	</ul>
 	<div class='sourceup'>
+		<:gestdoc:bouton_download_depuis:>
 		<:gestdoc:bouton_download_local:>
 		[(#ENV*{_options_upload_ftp}|oui)| <a href='#' onclick="if (jQuery('#joindre_ftp').is(':hidden')) {jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_ftp').slideDown('fast');}return false;"><:gestdoc:bouton_dowload_par_ftp:></a>]
 		| <a href='#' onclick="if (jQuery('#joindre_distant').is(':hidden')) {jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_distant').slideDown('fast');}return false;"><:gestdoc:bouton_dowload_sur_le_web:></a>
@@ -29,6 +30,7 @@
 		</li>
 	</ul>
 	<div class='sourceup'>
+		<:gestdoc:bouton_download_depuis:>
 		<a href='#' onclick="if (jQuery('#joindre_upload').is(':hidden')) {jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_upload').slideDown('fast');}return false;"><:gestdoc:bouton_download_local:></a>
 		[(#ENV*{_options_upload_ftp}|oui)| <:gestdoc:bouton_dowload_par_ftp:>]
 		| <a href='#' onclick="if (jQuery('#joindre_distant').is(':hidden')) {jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_distant').slideDown('fast');}return false;"><:gestdoc:bouton_dowload_sur_le_web:></a>
@@ -49,6 +51,7 @@
 		</li>
 	</ul>
 	<div class='sourceup'>
+		<:gestdoc:bouton_download_depuis:>
 		<a href='#' onclick="if (jQuery('#joindre_upload').is(':hidden')) {jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_upload').slideDown('fast');}return false;"><:gestdoc:bouton_download_local:></a>
 		[(#ENV*{_options_upload_ftp}|oui)| <a href='#' onclick="if (jQuery('#joindre_ftp').is(':hidden')) {jQuery('div.joindre_mode:visible').slideUp('fast');jQuery('#joindre_ftp').slideDown('fast');}return false;"><:gestdoc:bouton_dowload_par_ftp:></a>]
 		| <:gestdoc:bouton_dowload_sur_le_web:>

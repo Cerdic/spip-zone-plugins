@@ -88,10 +88,16 @@ function document_set ($id_document, $c=false) {
 			$champs[$champ] = $a;
 
 	// Si le document est publie, invalider les caches et demander sa reindexation
-	$t = sql_getfetsel("statut", "spip_documents", "id_document=$id_document");
+	$t = sql_getfetsel("statut", "spip_documents", 'id_document='.intval($id_document));
 	if ($t == 'publie') {
 		$invalideur = "id='id_document/$id_document'";
 		$indexation = true;
+	}
+	
+	$ancien_fichier = "";
+	// si le fichier est modifie, noter le nom de l'ancien pour faire le menage
+	if (isset($champs['fichier'])){
+		$ancien_fichier = sql_getfetsel('fichier','spip_documents','id_document='.intval($id_document));
 	}
 
 	include_spip('inc/modifier');
@@ -102,6 +108,12 @@ function document_set ($id_document, $c=false) {
 		),
 		$champs);
 
+	// nettoyer l'ancien fichier si necessaire
+	if ($champs['fichier'] // un plugin a pu interdire la modif du fichier en virant le champ
+	 AND $ancien_fichier // on avait bien note le nom du fichier avant la modif
+	 AND $ancien_fichier!==$champs['fichier'] // et il a ete modifie
+	 AND @file_exists($f = get_spip_doc($ancien_fichier)))
+	 	spip_unlink($f);
 
 	// Changer le statut du document ?
 	// le statut n'est jamais fixe manuellement mais decoule de celui des objets lies

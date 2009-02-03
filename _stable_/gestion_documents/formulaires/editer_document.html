@@ -8,6 +8,16 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <input type='hidden' name='id_document' value='#ENV{id_document}' />
 	  <ul>
+	  	<li>
+		  	<label><:gestdoc:label_apercu:></label>
+		  	[(#MODELE{doc,id_document,hauteur=200,largeur=400}|extraire_balise{img})]
+	  	</li>
+	  	<li>
+		  	<label><:gestdoc:label_caracteristiques:></label>
+		  	[<span class='type'>(#ENV{type_document}) - </span>]
+				<span class='taille'>[(#LARGEUR|ou{#HAUTEUR}|oui)[(#VAL{info_largeur_vignette}|_T{#ARRAY{largeur_vignette,#LARGEUR,hauteur_vignette,#HAUTEUR}})] - 
+				][(#TAILLE|taille_en_octets|texte_backend)]</span>
+	  	</li>
 	    <li class="editer_titre[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 		    <label for="titre">[(#ENV{mode}|=={document}|?{<:entree_titre_document:>,<:entree_titre_image:>})]</label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>

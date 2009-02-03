@@ -15,9 +15,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_image' => 'Remplacer cette image',
 	'bouton_remplacer_document' => 'Remplacer ce document',
 	'bouton_remplacer_image_document' => 'Remplacer par une image ou un document',
-	'bouton_download_local' => 'depuis mon ordinateur',
-	'bouton_dowload_par_ftp' => 'sur le serveur',
-	'bouton_dowload_sur_le_web' => 'sur l\'Internet',
+	'bouton_download_depuis'=>'depuis&nbsp:',
+	'bouton_download_local' => 'mon ordinateur',
+	'bouton_dowload_par_ftp' => 'le serveur',
+	'bouton_dowload_sur_le_web' => 'internet',
 	
 	// D
 	'documents'=> 'Mediath&egrave;que',
@@ -35,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'des_videos'=>'@nb@ s&eacute;quences',
 	'des_utilisations'=>'@nb@ utilisations',
 	'document_installe_succes' => 'Le fichier a bien &eacute;t&eacute; charg&eacute;',
+	'document_vu' => 'Ins&eacute;r&eacute; dans le texte',
 	
 	// E
 	'erreur_indiquez_un_fichier'=>'Indiquez un fichier !',
@@ -63,6 +65,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'logo' => 'Logo',
 	'label_id_parents' => 'Ce document est li&eacute; &agrave;',
 	'label_fichier' => 'Fichier',
+	'label_caracteristiques' => 'Caract&eacute;ristiques',
+	'label_apercu' => 'Aper&ccedil;u',
 	
 	// M
 	'media_audio' => 'Bandes sons',
