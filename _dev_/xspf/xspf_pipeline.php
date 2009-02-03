@@ -10,13 +10,13 @@ function xspf_header_prive($texte) {
 	if ($pos === 0){
 		$tooltipcss = find_in_path('javascript/jquery.tooltip.css');
 		$bgiframejs = find_in_path('javascript/jquery.bgiframe.js');
-		$dimensionjs = find_in_path('javascript/jquery.dimensions.pack.js');
-		$tooltipjs = find_in_path('javascript/jquery.tooltip.pack.js');
+		$tooltipjs = find_in_path('javascript/jquery.tooltip.js');
+		$swfobject = find_in_path('javascript/swfobject.js');
 				
 		$texte.= "
 			<link rel='stylesheet' type='text/css' href='$tooltipcss' />\n
+			<script type='text/javascript' src='$swfobject'></script>\n
 			<script type='text/javascript' src='$bgiframejs'></script>\n
-			<script type='text/javascript' src='$dimensionjs'></script>\n
 			<script type='text/javascript' src='$tooltipjs'></script>\n";
 
 		$texte.= "
@@ -38,14 +38,12 @@ function xspf_header_prive($texte) {
 function xspf_affichage_final($page) {
 
     // on regarde rapidement si la page a des classes player
-    if (strpos($page, 'class="player"')===FALSE)
+    if (strpos($page, 'class="xspf_player"')===FALSE)
         return $page;
 
     // Si oui on ajoute le js de swfobject
     $jsFile = find_in_path('javascript/swfobject.js');
-
 	$head = "<script src='$jsFile' type='text/javascript'></script>";
-
 	$pos_head = strpos($page, '</head>');
 
 	return substr_replace($page, $head, $pos_head, 0);
