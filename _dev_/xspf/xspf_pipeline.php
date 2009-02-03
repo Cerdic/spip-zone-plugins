@@ -5,9 +5,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // ajoute les css et js necessaires dans les pages adequates
 function xspf_header_prive($texte) {
 	global $auteur_session, $spip_display, $spip_lang;
-	$cfg = _request('cfg');
-	$pos = strpos($cfg, 'xspf');
-	if ($pos === 0){
 		$tooltipcss = find_in_path('javascript/jquery.tooltip.css');
 		$bgiframejs = find_in_path('javascript/jquery.bgiframe.js');
 		$tooltipjs = find_in_path('javascript/jquery.tooltip.js');
@@ -30,7 +27,6 @@ function xspf_header_prive($texte) {
 					});
 				});
 			</script>\n";
-	}
 	return $texte;
 }
 
