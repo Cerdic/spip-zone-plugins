@@ -36,14 +36,33 @@ function joindre_trouver_fichier_envoye(){
 		if (is_array($post)){
 			include_spip('action/ajouter_documents');
 		  foreach ($post as $file) {
-		  	//UPLOAD_ERR_NO_FILE
-				if (!($file['error'] == 4)){
-					if (is_string($err = joindre_upload_error($file['error'])))
-						return $err; // un erreur upload
-					if (!verifier_upload_autorise($file['name']))
-						return _T('gestdoc:erreur_upload_type_interdit',array('nom'=>$file['name']));
-					$files[]=$file;
-				}
+		  	if (is_array($file['name'])){
+		  		while (count($file['name'])){
+						$test=array(
+							'error'=>array_shift($file['error']),
+							'name'=>array_shift($file['name']),
+							'tmp_name'=>array_shift($file['tmp_name']),
+							'type'=>array_shift($file['type']),
+							);
+						if (!($test['error'] == 4)){
+							if (is_string($err = joindre_upload_error($test['error'])))
+								return $err; // un erreur upload
+							if (!verifier_upload_autorise($test['name']))
+								return _T('gestdoc:erreur_upload_type_interdit',array('nom'=>$test['name']));
+							$files[]=$test;
+						}
+		  		}
+		  	}
+		  	else {
+			  	//UPLOAD_ERR_NO_FILE
+					if (!($file['error'] == 4)){
+						if (is_string($err = joindre_upload_error($file['error'])))
+							return $err; // un erreur upload
+						if (!verifier_upload_autorise($file['name']))
+							return _T('gestdoc:erreur_upload_type_interdit',array('nom'=>$file['name']));
+						$files[]=$file;
+					}
+		  	}
 			}
 			if (!count($files))
 				return _T('gestdoc:erreur_indiquez_un_fichier');

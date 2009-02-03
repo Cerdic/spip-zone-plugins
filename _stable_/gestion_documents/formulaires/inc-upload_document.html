@@ -4,10 +4,7 @@
 		<li class='editer_fichier[ (#ENV**{erreurs}|table_valeur{fichier}|oui)erreur]'>
 			<label for='fichier'><:info_telecharger:></label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>
-			]<input class='file' type="file" name="fichier" value='#ENV{fichier}' id="fichier" size='14' 
-			onchange="if (jQuery('li.editer_fichier > input.file:last').attr('value').length){
-			jQuery(this).clone().attr('value','').attr('id','').attr('name','fichier'+jQuery('li.editer_fichier > input.file').length).insertAfter(this);
-			}" />
+			]<input class='file multi' type="file" name="fichier[]" value='#ENV{fichier}' id="fichier" size='14' />
 		</li>
 	</ul>
 	<div class='sourceup'>
