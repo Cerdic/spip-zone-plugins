@@ -56,7 +56,7 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 
 'mediaplayer_exemple' => 'Exemple du mod&egrave;le "mediaplayer" sur l\'article @id_article@',
 'typefichier' => 'Type de fichiers g&eacute;r&eacute;s',
-'desc_typefichier' => 'D&eacute;fini les types de fichiers pris en compte.<br />Les types doivent &ecirc;tre mentionn&eacute;s par leur extension et s&eacute;par&eacute;s par une virgule (par d&eacute;faut &laquo;flv,swf,mp3,jpg,png,gif&raquo;)',
+'desc_typefichier' => 'D&eacute;fini les types de fichiers pris en compte.<br />Les types doivent &ecirc;tre mentionn&eacute;s par leur extension et s&eacute;par&eacute;s par un pipe (par d&eacute;faut &laquo;flv|swf|mp3|jpg|png|gif&raquo;)',
 'playliste' => 'Position de la playliste',
 'desc_playliste' => 'Peut &ecirc;tre configur&eacute; en bas, &agrave; droite, par dessus ou invisible.',
 'right' => '&Agrave; droite',

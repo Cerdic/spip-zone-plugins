@@ -1,4 +1,3 @@
-[(#REM) -------------------- Il faut tout laisser sur une ligne, sinon VLC ne parvient pas à tout lire s'il y a un saut  de ligne ----------------]
 	<title>[(#NOM_SITE_SPIP|translitteration)]<BOUCLE_art(ARTICLES){id_article}>[: (#TITRE|supprimer_numero|texte_backend)]</BOUCLE_art><BOUCLE_rub(RUBRIQUES){id_rubrique}>[: (#TITRE|supprimer_numero|texte_backend)]</BOUCLE_rub><BOUCLE_doc(DOCUMENTS){id_document}>[: (#TITRE|supprimer_numero|propre|texte_backend)]</BOUCLE_doc><BOUCLE_SEC(RUBRIQUES){id_rubrique=#ENV{id_secteur}}>[: (#TITRE|supprimer_numero|translitteration)]</BOUCLE_SEC></title>
 	<B_rubsecteur>
 		<BOUCLE_rubsecteur(RUBRIQUES){id_rubrique=#ENV{id_secteur}}>
@@ -46,11 +45,11 @@
 			<BOUCLE_lien3(DOCUMENTS_LIENS){id_document}{objet IN 'article','rubrique','breve'}{0,1}>
 			<info>[(#ID_OBJET|generer_url_entite{#OBJET}|parametre_url{id_document,#ID_DOCUMENT}|url_absolue)]</info>
 			</BOUCLE_lien3>
-			[(#ENV{creator}|!={''}|?{' ',''})<creator>#ENV{creator}</creator>]
+			[(#ENV{creator}|!={''}|oui)<creator>#ENV{creator}</creator>]
 		</track>
 	</BOUCLE_docs>
 [(#REM) -------------------- Pour jw uniquement ----------------]	
-		[(#ENV{postrolllocation}|!={''}|?{' ',''})
+		[(#ENV{postrolllocation}|!={''}|oui)
 		<track>
 			<location>#ENV{postrolllocation}.flv</location>
 			<info>#ENV{postrolllink}</info>

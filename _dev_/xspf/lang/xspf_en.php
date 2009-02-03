@@ -56,7 +56,7 @@ Waiting for the full documentation on <a href="http://www.spip-contrib.net">Spip
 
 'mediaplayer_exemple' => 'Example of the "mediaplayer" template on the article number @id_article@',
 'typefichier' => 'File Types used',
-'desc_typefichier' => 'Configure the file types used.<br />They should be written with their extension and separated by a comma (by default &laquo;flv,swf,mp3,jpg,png,gif&raquo;)',
+'desc_typefichier' => 'Configure the file types used.<br />They should be written with their extension and separated by a pipe (by default &laquo;flv|swf|mp3|jpg|png|gif&raquo;)',
 'playliste' => 'Position of the playlist',
 'desc_playliste' => 'Can be set to bottom, over, right or none.',
 'right' => 'Right',

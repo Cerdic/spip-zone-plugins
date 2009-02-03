@@ -66,7 +66,7 @@ Plusieurs methodes d'insertion :
 	- align : left|center|right,center	
 ]
 
-[(#ENV{objet}|=={site}|?{' '})
+[(#ENV{objet}|=={site}|oui)
 	#SET{objet,site}
 ]
 
@@ -123,7 +123,7 @@ Plusieurs methodes d'insertion :
 [(#SET{displayclick,#ENV{displayclick,#CONFIG{xspf/mpldisplayclick}|sinon{play}}})]
 [(#SET{icons,#ENV{icons,#CONFIG{xspf/mplicons}|sinon{true}}})]
 [(#SET{linktarget,#ENV{linktarget,#CONFIG{xspf/mpllinktarget}}})]
-[(#SET{jwlogo,#ENV{jwlogo,#CONFIG{xspf/jwlogo}}})]
+[(#SET{jwlogo,#ENV{jwlogo,#CONFIG{xspf/mpllogo}}})]
 [(#SET{mute,#ENV{mute,#CONFIG{xspf/mplmute}|sinon{false}}})]
 [(#SET{quality,#ENV{quality,#CONFIG{xspf/mplquality}|sinon{true}}})]
 [(#SET{repeat,#ENV{repeat,#CONFIG{xspf/mplrepeat}|sinon{none}}})]
@@ -155,7 +155,7 @@ Plusieurs methodes d'insertion :
 	var s[_(#ENV{id})][_(#GET{objet_val})] = new SWFObject("#CHEMIN{lib/mediaplayer/player.swf}","[(#GET{javascriptid,mediaplayer})]_[(#GET{objet_spip})][_(#GET{objet_val})]","#GET{width}","#GET{height}","7");
 	s[_(#ENV{id})][_(#GET{objet_val})].addParam("allowfullscreen","#GET{allowfullscreen}");
 	s[_(#ENV{id})][_(#GET{objet_val})].addParam("wmode","#GET{wmode}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("file",encodeURIComponent("[(#ENV{domaine,#URL_PAGE{xspf}}|url_absolue|parametre_url{type,#GET{type},'&'}|parametre_url{prerolllocation,[(#GET{prerolllocation})],'&'}|parametre_url{postrolllocation,[(#GET{postrolllocation})],'&'}|parametre_url{objet,#GET{objet},'&'}|parametre_url{prerolllink,[(#GET{prerolllink})],'&'}|parametre_url{postrolllink,[(#GET{postrolllink})],'&'}|parametre_url{creator,[(#ENV{creator})],'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("file",encodeURIComponent("[(#ENV{domaine,#URL_PAGE{xspf}}|parametre_url{type,#GET{type}}|parametre_url{prerolllocation,[(#GET{prerolllocation})],'&'}|parametre_url{postrolllocation,[(#GET{postrolllocation})],'&'}|parametre_url{objet,#GET{objet},'&'}|parametre_url{prerolllink,[(#GET{prerolllink})],'&'}|parametre_url{postrolllink,[(#GET{postrolllink})],'&'}|parametre_url{creator,[(#ENV{creator})],'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'}|url_absolue)])]"));
 
 	// Layout
 	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("controlbar","#GET{controlbar}");
@@ -177,7 +177,7 @@ Plusieurs methodes d'insertion :
 	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("fullscreen","#GET{allowfullscreen}");
 	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("icons","#GET{icons}");
 	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("linktarget","#GET{linktarget}");
-	[(#GET{jwlogo}|!={''}|?{'s[_(#ENV{id})][_(#GET{objet_val})].addVariable("logo","#GET{jwlogo}");',''})]
+	[(#GET{jwlogo}|!={''}|oui)s[_(#ENV{id})][_(#GET{objet_val})].addVariable("logo","#GET{jwlogo}");]
 	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("mute","#GET{mute}");
 	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("quality","#GET{quality}");
 	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("repeat","#GET{repeat}");

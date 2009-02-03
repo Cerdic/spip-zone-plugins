@@ -162,6 +162,14 @@
 									</select>
 								</li>
 								<li>
+									<label for="mpllogo">
+										<a href="#mpllogo" title="<:xspf:logo:> - <:xspf:desc_logo:>">
+											<:xspf:logo:>
+										</a>
+									</label>
+									<input type="text" name="mpllogo" class="text" id="mpllogo" value="[(#CONFIG{xspf/mpllogo})]" />
+								</li>
+								<li>
 									<label for="mplmute"><a href="#mplmute" title="<:xspf:mute:> - <:xspf:desc_mute:>"><:xspf:mute:></a></label>
 									<select name="mplmute" id="mplmute">
 										#SET{mplmute,#CONFIG{xspf/mplmute}}
