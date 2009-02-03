@@ -70,15 +70,15 @@
 
 <script type="text/javascript">
 // <![CDATA[
-	var s1 = new SWFObject("#CHEMIN{swf/xspf_player.swf}","musicplayer_[(#GET{objet_spip})]#ENV{id}","#GET{width}","#GET{height}","7");
-	s1.addParam("wmode","#GET{wmode}");
-	s1.addVariable("playlist_url",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,mp3|m3u,'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
-	s1.addVariable("autoload","#GET{autoload}");
-	s1.addVariable("autoplay","#GET{autoplay}");
-	s1.addVariable("repeat_playlist","#GET{repeat}");
+	var s_music[(#GET{objet_spip})]#ENV{id} = new SWFObject("#CHEMIN{swf/xspf_player.swf}","musicplayer_[(#GET{objet_spip})]#ENV{id}","#GET{width}","#GET{height}","7");
+	s_music[(#GET{objet_spip})]#ENV{id}.addParam("wmode","#GET{wmode}");
+	s_music[(#GET{objet_spip})]#ENV{id}.addVariable("playlist_url",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,mp3|m3u,'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
+	s_music[(#GET{objet_spip})]#ENV{id}.addVariable("autoload","#GET{autoload}");
+	[(#GET{autoplay}|=={true}|oui)s_slim_[(#GET{objet_spip})]#ENV{id}.addVariable("autoplay","#GET{autoplay}");]
+	s_music[(#GET{objet_spip})]#ENV{id}.addVariable("repeat_playlist","#GET{repeat}");
 	
 	$(document).ready(function() {
-		s1.write("musicplayer_container_[(#GET{objet_spip})]#ENV{id}");
+		s_music[(#GET{objet_spip})]#ENV{id}.write("musicplayer_container_[(#GET{objet_spip})]#ENV{id}");
 	});
 // ]]>
 </script>

@@ -72,15 +72,15 @@
 
 <script type="text/javascript">
 // <![CDATA[
-	var s#ENV{id} = new SWFObject("#CHEMIN{swf/musicplayer.swf}","buttonplayer_(#GET{objet_spip})]#ENV{id}","#GET{width}","#GET{height}","7");
-	s#ENV{id}.addParam("wmode","#GET{wmode}");
-	s#ENV{id}.addVariable("playlist_url",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,mp3,'&'}|parametre_url{objet,#GET{objet},'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
-	s#ENV{id}.addVariable("autoload","#GET{autoload}");
-	s#ENV{id}.addVariable("autoplay","#GET{autoplay}");
-	s#ENV{id}.addVariable("repeat_playlist","#GET{repeat}");
+	var s_button_[(#GET{objet_spip})]#ENV{id} = new SWFObject("#CHEMIN{swf/musicplayer.swf}","buttonplayer_(#GET{objet_spip})]#ENV{id}","#GET{width}","#GET{height}","7");
+	s_button_[(#GET{objet_spip})]#ENV{id}.addParam("wmode","#GET{wmode}");
+	s_button_[(#GET{objet_spip})]#ENV{id}.addVariable("playlist_url",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,mp3,'&'}|parametre_url{objet,#GET{objet},'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
+	s_button_[(#GET{objet_spip})]#ENV{id}.addVariable("autoload","#GET{autoload}");
+	s_button_[(#GET{objet_spip})]#ENV{id}.addVariable("autoplay","#GET{autoplay}");
+	s_button_[(#GET{objet_spip})]#ENV{id}.addVariable("repeat_playlist","#GET{repeat}");
 	
 	$(document).ready(function() {
-		s#ENV{id}.write("buttonplayer_container_[(#GET{objet_spip})]#ENV{id}");
+		s_button_[(#GET{objet_spip})]#ENV{id}.write("buttonplayer_container_[(#GET{objet_spip})]#ENV{id}");
 	});
 // ]]>
 </script>
