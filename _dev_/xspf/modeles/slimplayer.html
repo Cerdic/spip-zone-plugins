@@ -17,35 +17,35 @@
 	
 ]
 
-[(#ENV{donnee}|?{' ',''}) 
+[(#ENV{donnee}|oui) 
   [(#SET{objet_spip,id_donnee})]
   [(#SET{objet_val,[(#ENV{donnee})]})]
 ]
-[(#ENV{rubrique}|?{' ',''}) 
+[(#ENV{rubrique}|oui) 
   [(#SET{objet_spip,id_rubrique})]
   [(#SET{objet_val,[(#ENV{rubrique})]})]
 ]
-[(#ENV{secteur}|?{' ',''}) 
+[(#ENV{secteur}|oui) 
   [(#SET{objet_spip,id_secteur})]
   [(#SET{objet_val,[(#ENV{secteur})]})]
 ]
-[(#ENV{document}|?{' ',''}) 
+[(#ENV{document}|oui) 
   [(#SET{objet_spip,id_document})]
   [(#SET{objet_val,[(#ENV{document})]})]
 ]
-[(#ENV{mot}|?{' ',''}) 
+[(#ENV{mot}|oui) 
   [(#SET{objet_spip,id_mot})]
   [(#SET{objet_val,[(#ENV{mot})]})]
 ]
-[(#ENV{breve}|?{' ',''}) 
+[(#ENV{breve}|oui) 
   [(#SET{objet_spip,id_breve})]
   [(#SET{objet_val,[(#ENV{breve})]})]
 ]
-[(#ENV{article}|?{' ',''}) 
+[(#ENV{article}|oui) 
   [(#SET{objet_spip,id_article})]
   [(#SET{objet_val,[(#ENV{article})]})]
 ]
-[(#GET{objet_spip}|?{'',' '}) 
+[(#GET{objet_spip}|non) 
   [(#SET{objet_spip,id_article})]
   [(#SET{objet_val,[(#ENV{id_slimplayer})]})]
 ]
@@ -63,7 +63,7 @@
 <noscript><p><:xspf:js_necessaire:></p></noscript>
 <!-- alternative texte pour ceux qui ont le js desactive -->
 
-<div id="musicplayer[(#GET{objet_spip})]#ENV{id}" class="player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]>
+<div id="slimplayer_container_[(#GET{objet_spip})]#ENV{id}" class="xspf_player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]>
 	<p>
 		<a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.
 	</p>
@@ -71,7 +71,7 @@
 
 <script type="text/javascript">
 // <![CDATA[
-	var s1 = new SWFObject("#CHEMIN{swf/xspf_player_slim.swf}","slimplayer","#GET{width}","#GET{height}","7");
+	var s1 = new SWFObject("#CHEMIN{swf/xspf_player_slim.swf}","slimplayer_[(#GET{objet_spip})]#ENV{id}","#GET{width}","#GET{height}","7");
 	s1.addParam("wmode","#GET{wmode}");
 	s1.addVariable("playlist_url",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,mp3,'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
 	s1.addVariable("autoload","#GET{autoload}");
@@ -79,7 +79,7 @@
 	s1.addVariable("repeat_playlist","#GET{repeat}");
 	
 	$(document).ready(function() {
-		s1.write("musicplayer[(#GET{objet_spip})]#ENV{id}");
+		s1.write("slimplayer_container_[(#GET{objet_spip})]#ENV{id}");
 	});
 
 // ]]>

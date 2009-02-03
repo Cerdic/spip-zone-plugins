@@ -64,7 +64,7 @@
 <noscript><p><:xspf:js_necessaire:></p></noscript>
 <!-- alternative texte pour ceux qui ont le js desactive -->
 
-<div id="buttonplayer[(#GET{objet_spip})]#ENV{id}" class="player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]">
+<div id="buttonplayer_container_[(#GET{objet_spip})]#ENV{id}" class="xspf_player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]">
 	<p>
 		<a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.
 	</p>
@@ -72,7 +72,7 @@
 
 <script type="text/javascript">
 // <![CDATA[
-	var s#ENV{id} = new SWFObject("#CHEMIN{swf/musicplayer.swf}","buttonplayer#ENV{id}","#GET{width}","#GET{height}","7");
+	var s#ENV{id} = new SWFObject("#CHEMIN{swf/musicplayer.swf}","buttonplayer_(#GET{objet_spip})]#ENV{id}","#GET{width}","#GET{height}","7");
 	s#ENV{id}.addParam("wmode","#GET{wmode}");
 	s#ENV{id}.addVariable("playlist_url",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,mp3,'&'}|parametre_url{objet,#GET{objet},'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
 	s#ENV{id}.addVariable("autoload","#GET{autoload}");
@@ -80,7 +80,7 @@
 	s#ENV{id}.addVariable("repeat_playlist","#GET{repeat}");
 	
 	$(document).ready(function() {
-		s#ENV{id}.write("buttonplayer[(#GET{objet_spip})]#ENV{id}");
+		s#ENV{id}.write("buttonplayer_container_[(#GET{objet_spip})]#ENV{id}");
 	});
 // ]]>
 </script>

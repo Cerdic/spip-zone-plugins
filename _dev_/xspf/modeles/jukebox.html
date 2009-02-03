@@ -30,31 +30,31 @@ Plusieurs methodes d'insertion :
 	- align : left|center|right,center	
 	]
 
-[(#ENV{donnee}|?{' ',''}) 
+[(#ENV{donnee}|oui) 
   [(#SET{objet_spip,id_donnee})]
   [(#SET{objet_val,[(#ENV{donnee})]})]
 ]
-[(#ENV{rubrique}|?{' ',''}) 
+[(#ENV{rubrique}|oui) 
   [(#SET{objet_spip,id_rubrique})]
   [(#SET{objet_val,[(#ENV{rubrique})]})]
 ]
-[(#ENV{document}|?{' ',''}) 
+[(#ENV{document}|oui) 
   [(#SET{objet_spip,id_document})]
   [(#SET{objet_val,[(#ENV{document})]})]
 ]
-[(#ENV{mot}|?{' ',''}) 
+[(#ENV{mot}|oui) 
   [(#SET{objet_spip,id_mot})]
   [(#SET{objet_val,[(#ENV{mot})]})]
 ]
-[(#ENV{breve}|?{' ',''}) 
+[(#ENV{breve}|oui) 
   [(#SET{objet_spip,id_breve})]
   [(#SET{objet_val,[(#ENV{breve})]})]
 ]
-[(#ENV{article}|?{' ',''}) 
+[(#ENV{article}|oui) 
   [(#SET{objet_spip,id_article})]
   [(#SET{objet_val,[(#ENV{article})]})]
 ]
-[(#GET{objet_spip}|?{'',' '}) 
+[(#GET{objet_spip}|non) 
   [(#SET{objet_spip,id_article})]
   [(#SET{objet_val,[(#ENV{id_jukebox})]})]
 ]
@@ -100,7 +100,7 @@ Plusieurs methodes d'insertion :
 <noscript><p><:xspf:js_necessaire:></p></noscript>
 <!-- alternetive texte pour ceux qui ont le js desactive -->
 
-<div id="jukebox[(#GET{objet_spip})]#ENV{id}" class="player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]">
+<div id="jukebox_container_[(#GET{objet_spip})]#ENV{id}" class="xspf_player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]">
 	<p>
 		<a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.
 	</p>
@@ -108,7 +108,7 @@ Plusieurs methodes d'insertion :
 
 <script type="text/javascript">
 // <![CDATA[
-	var s1 = new SWFObject("[(#CHEMIN{lib/jukebox/xspf_jukebox.swf})]", "jukebox", "#GET{width}","#GET{height}", "7", "#ffffff", true);
+	var s1 = new SWFObject("[(#CHEMIN{lib/jukebox/xspf_jukebox.swf})]", "jukebox_[(#GET{objet_spip})]#ENV{id}", "#GET{width}","#GET{height}", "7", "#ffffff", true);
 	s1.addParam("wmode","#GET{wmode}");
 	s1.addVariable("skin_url", "#URL_SITE_SPIP/lib/jukebox/[(#GET{skin})/]");
 	s1.addVariable("playlist_url",encodeURIComponent("[(#ENV{domaine,#URL_PAGE{xspf}}|url_absolue|parametre_url{type,mp3|flv,'&'}|parametre_url{creator,[(#ENV{creator})],'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
@@ -143,7 +143,7 @@ Plusieurs methodes d'insertion :
 	s1.addParam("wmode", "#GET{wmode}");
 	
 	$(document).ready(function() {
-		s1.write("jukebox[(#GET{objet_spip})]#ENV{id}");
+		s1.write("jukebox_container_[(#GET{objet_spip})]#ENV{id}");
 	});
 // ]]>
 </script>

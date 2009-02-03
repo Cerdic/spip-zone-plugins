@@ -100,13 +100,13 @@
 [(#SET{linkfromdisplay,#ENV{linkfromdisplay,#CONFIG{xspf/rotlinkfromdisplay}}})]
 [(#SET{linktarget,#ENV{linktarget,#CONFIG{xspf/rotlinktarget}}})]
 
-[(#SET{file,[(#ENV{file,[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,'jpg|png|gif','&'}|parametre_url{width,#GET{width}}|parametre_url{height,#GET{height}}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]})]})]
+[(#SET{file,[(#ENV{file,[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,'jpg|png|gif','&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]})]})]
 [(#SET{align,#ENV{align,center}})]
 
 <noscript><p><:xspf:js_necessaire:></p></noscript>
 <!-- alternative texte pour ceux qui ont le js desactive -->
 
-<div id="rotator_[(#ENV{id})]_[(#GET{objet_spip})]_[(#GET{objet_val})]" class="player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]">
+<div id="rotator_container_[(#GET{objet_spip})]_[(#GET{objet_val})]" class="xspf_player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]">
 	<p>
 		<a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.
 	</p>
@@ -114,7 +114,7 @@
 
 <script type="text/javascript">
 // <![CDATA[
-	var s_[(#ENV{id})]_[(#GET{objet_val})] = new SWFObject("#CHEMIN{lib/imagerotator/imagerotator.swf}","rotator","#GET{width}","#GET{height}","7");
+	var s_[(#ENV{id})]_[(#GET{objet_val})] = new SWFObject("#CHEMIN{lib/imagerotator/imagerotator.swf}","rotator_[(#GET{objet_spip})]_[(#GET{objet_val})]","#GET{width}","#GET{height}","7");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addParam("wmode","#GET{wmode}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("file",encodeURIComponent("#GET{file}"));
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("transition","#GET{transition}");
@@ -138,7 +138,7 @@
 	s_[(#ENV{id})]_[(#GET{objet_val})].addParam('menu','true');
 	
 	$(document).ready(function() {
-		s_[(#ENV{id})]_[(#GET{objet_val})].write("rotator_[(#ENV{id})]_[(#GET{objet_spip})]_[(#GET{objet_val})]");
+		s_[(#ENV{id})]_[(#GET{objet_val})].write("rotator_container_[(#GET{objet_spip})]_[(#GET{objet_val})]");
 	});
 // ]]>
 </script>
