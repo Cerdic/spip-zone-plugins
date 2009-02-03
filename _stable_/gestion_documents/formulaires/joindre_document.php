@@ -123,16 +123,19 @@ function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=
 	
 	// checker les erreurs eventuelles
 	$messages_erreur = array();
+	$nb_docs = 0;
 	foreach ($nouveaux_doc as $doc) {
 		if (!is_numeric($doc))
 			$messages_erreur[] = $doc;
+		else 
+			$nb_docs++;
 	}
 	
 	$res = array('editable'=>true);
 	if (count($messages_erreur))
 		$res['message_erreur'] = implode('<br />',$messages_erreur);
-	else 
-		$res['message_ok'] = _T('gestdoc:document_installe_succes');
+	if ($nb_docs)
+		$res['message_ok'] = $nb_docs==1? _T('gestdoc:document_installe_succes'):_T('gestdoc:nb_documents_installe_succes',array('nb'=>$nb_docs));
 	
 	// todo : 
 	// generer les case docs si c'est necessaire

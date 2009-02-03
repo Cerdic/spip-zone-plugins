@@ -1,0 +1,7 @@
+[(#ENV{ajouter}|=={oui}|oui)
+<a href='[(#SELF|parametre_url{ajouter,non})]' class='ajax'>fermer</a>
+#FORMULAIRE_JOINDRE_DOCUMENT
+]
+[(#ENV{ajouter}|=={oui}|non)
+<a href='[(#SELF|parametre_url{ajouter,oui})]' class='ajax'>ajouter</a>
+]

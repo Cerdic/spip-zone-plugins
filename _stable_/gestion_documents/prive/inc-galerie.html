@@ -38,6 +38,7 @@
 <div class="galerie[ media-(#ENV{media,''})]">
 	<B_galerie>
 	<h2>[(#GRAND_TOTAL|gestdoc_affiche_un_ou_plusieurs{#VAL{gestdoc:un_}|concat{#ENV{media,document}},#VAL{gestdoc:des_}|concat{#ENV{media,document},s}})]</h2>
+	[(#INCLURE{fond=prive/inc-ajouter-documents}{env}{ajax})]
 	<div class='pagination tri'>
 		[(#TRI{'<',#CHEMIN{img_pack/tri_asc-16.png}|tag_img{<:gestdoc:par_tri_croissant:>}}) |]
 		[(#TRI{'>',#CHEMIN{img_pack/tri_desc-16.png}|tag_img{<:gestdoc:par_tri_decroissant:>}}) |]
@@ -110,5 +111,6 @@
 	[<p class="pagination">(#PAGINATION{page})</p>]
 	</B_galerie>
 	<h2>[(#VAL{gestdoc:aucun_}|concat{#ENV{media,document}}|_T)]</h2>
+	[(#INCLURE{fond=prive/inc-ajouter-documents}{env}{ajax})]
 	<//B_galerie>
 </div><!--#galerie-->
