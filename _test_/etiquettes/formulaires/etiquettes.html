@@ -38,11 +38,11 @@
 			<ul class="etiquettes"[ (#ENV{aide_liste}|?{style="display:none;"})]>
 			<li>
 				<input type="text" class="text"
-					id="etiquettes_#ENV{identifiant}"
-					name="[(#ENV{name}|sinon{etiquettes_#ENV{identifiant}})]"
-					value="#ENV*{etiquettes}"
+					id="#ENV{name}"
+					name="#ENV{name}"
+					value="#ENV*{#ENV{name}}"
 				/>
-				<label for="etiquettes_#ENV{identifiant}">
+				<label for="#ENV{name}">
 					<:etiquettes:explication:>
 				</label>
 			</li>
@@ -52,7 +52,7 @@
 			<script type="text/javascript">
 			<!--
 			var crayon_etiquettes_#ENV{identifiant} = function(){
-				var input = $('#etiquettes_#ENV{identifiant}');
+				var input = $('##ENV{name}');
 				var crayon = input.parents('.crayon-html');
 				if (crayon.length > 0)
 					input
@@ -69,7 +69,7 @@
 				<!--
 				var appliquer_selecteur_#ENV{identifiant} = function(){
 					appliquer_selecteur_cherche_mot(
-						'#etiquettes_#ENV{identifiant}',
+						'##ENV{name}',
 						'[(#URL_PAGE{etiquettes_selecteur}|parametre_url{groupe,#ENV{groupe},"&"})]'
 					);
 				}
@@ -79,11 +79,11 @@
 			]
 			
 			[(#ENV{aide_nuage}|?{' '})
-				<INCLURE{fond=fonds/etiquettes_aide_nuage}{type=#ENV{groupe}}{type_objet}{id_objet}{identifiant}>
+				<INCLURE{fond=fonds/etiquettes_aide_nuage}{type=#ENV{groupe}}{type_objet}{id_objet}{identifiant}{name}>
 			]
 			
 			[(#ENV{aide_liste}|?{' '})
-				<INCLURE{fond=fonds/etiquettes_aide_liste}{type=#ENV{groupe}}{type_objet}{id_objet}{identifiant}>
+				<INCLURE{fond=fonds/etiquettes_aide_liste}{type=#ENV{groupe}}{type_objet}{id_objet}{identifiant}{name}>
 			]
 			
 [(#REM) Si on ne veut pas que le champ ]

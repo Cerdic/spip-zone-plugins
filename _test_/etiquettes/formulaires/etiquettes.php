@@ -68,7 +68,12 @@ function formulaires_etiquettes_charger_dist($groupe, $id_groupe, $name, $aide_n
 		
 		}
 		
-		$valeurs['etiquettes'] = $etiquettes;
+		// Si c'est un champ inclu dans un autre formulaire, il faut aller chercher à la main le POST
+		if ($uniquement_champ and $_POST[$name]){
+			$etiquettes = $_POST[$name];
+		}
+		
+		$valeurs[$name] = $etiquettes;
 		$valeurs['identifiant'] = etiquettes_produire_id($groupe, $type_objet, $id_objet);
 		
 		return $valeurs;
@@ -88,13 +93,12 @@ function formulaires_etiquettes_traiter_dist($groupe, $id_groupe, $name, $aide_n
 
 	$identifiant = etiquettes_produire_id($groupe, $type_objet, $id_objet);
 	$id_formulaire = "valider_etiquettes_$identifiant";
-	$id_etiquettes = "etiquettes_$identifiant";
 	
 	// si on vient du formulaire validé on le traite
 	if (_request($id_formulaire)){
 		
 		// On récupère les tags
-		$etiquettes = trim(_request($id_etiquettes));
+		$etiquettes = trim(_request($name));
 		// On utilise la tag-machine avec les millions de paramètres
 		include_spip('inc/tag-machine');
 		ajouter_liste_mots($etiquettes,$id_objet,$groupe,$type_objet,$cle_objet,$remplacer);

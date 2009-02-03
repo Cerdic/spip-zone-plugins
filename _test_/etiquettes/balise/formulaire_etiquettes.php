@@ -178,9 +178,10 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 		$aide_nuage &= defined('_DIR_PLUGIN_NUAGE');
 		$aide_autocompletion &= defined('_DIR_PLUGIN_SELECTEURGENERIQUE');
 	
-	// initialisation du nom du champ seulement si on ne demande pas le formulaire complet
-		if (!isset($name)) $name = false;
-		if (!$uniquement_champ) $name = false;
+	// initialisation du nom du champ
+		// pour le formulaire complet c'est automatique
+		// sinon on peut le choisir (sinon c'est aussi automatique)
+		if (!$uniquement_champ or !isset($name)) $name = 'etiquettes_'.etiquettes_produire_id($groupe, $type_objet, $id_objet);
     
     return array($groupe, $id_groupe, $name, $aide_nuage, $aide_autocompletion, $aide_liste, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login, $uniquement_champ);
 	
