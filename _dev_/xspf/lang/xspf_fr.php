@@ -55,6 +55,8 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>',
 
 'mediaplayer_exemple' => 'Exemple du mod&egrave;le "mediaplayer" sur l\'article @id_article@',
+'typefichier' => 'Type de fichiers g&eacute;r&eacute;s',
+'desc_typefichier' => 'D&eacute;fini les types de fichiers pris en compte.<br />Les types doivent &ecirc;tre mentionn&eacute;s par leur extension et s&eacute;par&eacute;s par une virgule (par d&eacute;faut &laquo;flv,swf,mp3,jpg,png,gif&raquo;)',
 'playliste' => 'Position de la playliste',
 'desc_playliste' => 'Peut &ecirc;tre configur&eacute; en bas, &agrave; droite, par dessus ou invisible.',
 'right' => '&Agrave; droite',
@@ -113,7 +115,7 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 'desc_audio'=>'Vous pouvez r&eacute;gler cette variable flash avec l&rsquo;adresse URL d&rsquo;un fichier mp3 qui peut servir de piste audio suppl&eacute;mentaire. Utilisez le pour des commentaires d&rsquo;accessibilit&eacute;, pour simplement commmenter une vid&eacute;o, ou avec rotator comme musique de fond.',
 'rotatetime' => 'Temps de rotation',
 'desc_rotatetime' => 'Utilisez cette variable flash pour r&eacute;gler le temps pendant lequel vous souhaitez afficher une image. La valeur par d&eacute;faut est 5.',
-'retailler_images' => 'Retailler les images'
+'retailler_images' => 'Retailler les images',
 'rotrecadre_width' => 'Retaillage des images (largeur)',
 'desc_rotrecadre_width' => 'Largeur (en pixel) &agrave; laquelle spip retaillera automatiquement les images dans la playliste (640 par d&eacute;faut). Mettre 0 pour ne pas retailler.',
 'rotrecadre_height' => 'Retaillage des images (hauteur)',
@@ -153,20 +155,12 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 'logo' => 'Logo',
 'desc_logo' => 'Permet d&rsquo;afficher une image en surimpression, en haut &agrave; droite de la zone de contenu, des lecteurs de Jeroen Wijering',
 'jw_logo' => 'Configuration g&eacute;n&eacute;rale pour les lecteurs de Jeroen Wijering',
-'typefichier' => 'Type de fichiers g&eacute;r&eacute;s',
-'desc_typefichier' => 'D&eacute;fini les types de fichiers pris en compte.<br />Les types doivent &ecirc;tre mentionn&eacute;s par leur extension et s&eacute;par&eacute;s par une virgule (par d&eacute;faut &laquo;flv,swf,mp3,jpg,png,gif&raquo;)',
 'display_size' => 'Dimensions de la zone de contenu de l&rsquo;animation',
 'link' =>'Link',
 'desc_link' =>'Ins&eacute;rez ici l&rsquo;adresse URL d&rsquo;une version t&eacute;l&eacute;chargeable du fichier ou d&rsquo;un script de t&eacute;l&eacute;chargement forc&eacute; du fichier. Vous pouvez assigner des liens cliquables &agrave; la zone de contenu (display ci-dessous) et au bouton de t&eacute;l&eacute;chargement, mais pas encore aux &eacute;l&eacute;ment de la liste de lecture.',
 'linkfromdisplay' =>'linkfromdisplay',
 'desc_linkfromdisplay' => 'Vous pouvez r&eacute;gler cette variable flash sur  &laquo;Vrai&raquo;  pour rendre cliquable l&rsquo;image(ou la vid&eacute;o) affich&eacute;e dans la zone de contenu provoquant &rsquo;affichage de la page indiqu&eacute;e dans &quot;link&quot;. Par d&eacute;faut un click sur la zone de contenu lira/stopera la lecture du contenu.',
-
-
-
-
 'number'=>'Un nombre',
-
-
 'opt_lec' => 'Options de lecture',
 'opt_aff' => 'Options d&rsquo;affichage',
 'opt_link' => 'Options des liens',
@@ -175,9 +169,6 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 'conf_jw_mpl' => 'Configuration de mediaplayer',
 'conf_jw_flp' => 'Configuration de flash video player',
 'conf_jw_rot' => 'Configuration de rotator',
-
-
-
 'opt_avancees' => 'Options avanc&eacute;es',
 'prerolllocation' =>'Emplacement preroll',
 'prerolllink' =>'Lien sur preroll',
@@ -187,17 +178,14 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 'desc_prerolllink' =>'Lien depuis le fichier de pr&eacute;face',
 'desc_postrolllocation' =>'Adresse du fichier de postface. <br /> Il vous est possible d&rsquo;afficher une vid&eacute;o apr&egrave; la fin de la lecture de la playlist',
 'desc_postrolllink' =>'Lien depuis le fichier de postface',
-
 'jw_media_player' => '<NEW><p>The JW Media Player supports playback of a single media file of any format the Adobe Flash Player can handle (MP3, FLV, SWF, JPG, PNG and GIF). 
 It also supports RSS, XSPF and ATOM playlist (with mixed mediatypes and advertisement possibilities), a wide range of flashvars (settings) for tweaking both behavior and appearance and an extensive, documented javascript/actionscript API.</p>
 <p><a href="http://www.longtailvideo.com/players/jw-flv-player/">http://www.longtailvideo.com/players/jw-flv-player/</a></p>',
 'jw_rotator' => '<NEW><p>The JW Image Rotator enables you to show a couple of photos in sequence, with fluid transitions between them. 
 It supports rotation of an RSS, XSPF or ATOM playlist with JPG, GIF and PNG images, a wide range of flashvars (settings) for tweaking both behavior and appearance and an extensive, documented javascript and actionscript API.</p>
 <p><a href="http://www.longtailvideo.com/players/jw-image-rotator/">http://www.longtailvideo.com/players/jw-image-rotator/</a></p>',
-
 'jw_media_player_install' => '<p>Pour installer JW Media Player, t&eacute;l&eacute;chargez le <a href="http://www.jeroenwijering.com/upload/imagerotator-3-16.zip">ici</a> et d&eacute;compressez un répertoire du m&ecirc;me nom que l\'archive dans un dossier lib/ &agrave; la racine du site (en pr&eacute;vision de la verion 2.0 de SPIP.</p>',
 'jw_rotator_install' => '<p>Pour installer JW Image Rotator, t&eacute;l&eacute;chargez le <a href="http://www.jeroenwijering.com/upload/jw_image_rotator.zip">ici</a> et d&eacute;compressez le tel quel dans un dossier lib/ &agrave; la racine du site (en pr&eacute;vision de la verion 2.0 de SPIP.</p>',
-
 'js_necessaire' => 'D&#233;sol&#233;, mais le javascript est n&#233;ecessaire dans la version actuelle. Merci de le r&#233;activer pour afficher le contenu multimedia ',
 );
 ?>

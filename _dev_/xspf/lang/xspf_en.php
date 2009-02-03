@@ -55,6 +55,8 @@ Waiting for the full documentation on <a href="http://www.spip-contrib.net">Spip
 Waiting for the full documentation on <a href="http://www.spip-contrib.net">Spip-Contrib</a>, you can consult the <a href="http://kent1.sklunk.net/spip.php?article96"> kent1\'s notepad</a>',
 
 'mediaplayer_exemple' => 'Example of the "mediaplayer" template on the article number @id_article@',
+'typefichier' => 'File Types used',
+'desc_typefichier' => 'Configure the file types used.<br />They should be written with their extension and separated by a comma (by default &laquo;flv,swf,mp3,jpg,png,gif&raquo;)',
 'playliste' => 'Position of the playlist',
 'desc_playliste' => 'Can be set to bottom, over, right or none.',
 'right' => 'Right',
@@ -76,7 +78,7 @@ Waiting for the full documentation on <a href="http://www.spip-contrib.net">Spip
 'desc_icons' => 'Set this to false to hide the play button and buffering icon in the middle of the video.',
 'desc_mute' => 'Mute all sounds on startup. Is saved in a cookie.',
 'quality' => 'Quality',
-'desc_quality' => 'Enables smoothed playback. This sets the smoothing and deblocking of videos on/off. Is saved in a cookie.'
+'desc_quality' => 'Enables smoothed playback. This sets the smoothing and deblocking of videos on/off. Is saved in a cookie.',
 'stretching' => 'Stretching',
 'desc_stretching' => 'Defines how to resize images in the display. Can be none (no stretching), exactfit (disproportionate), uniform (stretch with black borders) or fill (uniform, but completely fill the display).',
 'uniform' => 'Uniform',
@@ -113,7 +115,7 @@ Waiting for the full documentation on <a href="http://www.spip-contrib.net">Spip
 'desc_audio'=>'You can set this flashvar to the location of an external mp3 file that should serve as an additional audiotrack. Use this for accessibility commentary, director\'s comments or, with the imagerotator, background music.',
 'rotatetime' => 'Rotate time',
 'desc_rotatetime' => 'Use this flashvar to set the number of seconds you want an image to display. The default is "5".',
-'retailler_images' => 'Resizing pictures'
+'retailler_images' => 'Resizing pictures',
 'rotrecadre_width' => 'Resizing pictures (width)',
 'desc_rotrecadre_width' => 'Width (in pixel) which SPIP uses to resize pictures in the playlist (640 by default). Put 0 to disable width resizing.',
 'rotrecadre_height' => 'Resizing pictures (height)',
@@ -131,10 +133,10 @@ Waiting for the full documentation on <a href="http://www.spip-contrib.net">Spip
 'lightcolor' => 'Light color',
 'desc_lightcolor' => 'Rollover/ active color of the player/rotator. The default for the mediaplayer is 0x000000 (black) and for the rotator 0xCC0000 (red).',
 'screencolor' => 'Background color of the display',
-'desc_screencolor' => 'Background color of the display. The default for the mediaplayer is 0x000000 (black) and for the rotator 0xCC0000 (red).'
+'desc_screencolor' => 'Background color of the display. The default for the mediaplayer is 0x000000 (black) and for the rotator 0xCC0000 (red).',
 'autostart' => 'Autostart',
 'desc_autostart' => 'Set this to &quot;true&quot; to make the player automatically start playing when the page loads. If set to &quot;muted&quot;, the player will autostart with the volume set to 0 and an unmute icon in the display.',
-'linktarget'=>'linktarget',
+'linktarget'=>'Link target',
 'desc_linktarget' =>'The targetframe a link (from the display or playlist buttons) will open into. The default is &quot;_self&quot;. Set it to &quot;_blank&quot; to open links in a new window.',
 'desc_width' => 'As with the height of the player/rotator, this variable is already set with a default embed code. However, sometimes (notably on IE), this won\t get through (so you get a messed-up display). Then use this flashvar to tell the player/rotator how many pixels wide it should be.',
 'desc_height' => 'As with the width of the player/rotator, this variable is already set with a default embed code. However, sometimes (notably on IE), this won\'t get through (so you get a messed-up display). Then use this flashvar to tell the player/rotator how many pixels high it should be.',
@@ -150,12 +152,11 @@ Waiting for the full documentation on <a href="http://www.spip-contrib.net">Spip
 'allowfullscreen' => 'Allow fullscreen',
 'desc_allowfullscreen' => 'Allow Fullscreen mode',
 'link' =>'Link',
+'desc_logo' => 'Set this flashvar to put a watermark logo in the top right corner of the display. All image formats are supported, but transparent PNG files give the best results',
 'desc_link' =>'Set here the url to an external URL, downloadeable version of the file, or force-download script you can use for downloading the file. You can assign link-clicks to the display (see below) and the downloadbutton but not yet to every item in a playlist.',
 'linkfromdisplay' =>'linkfromdisplay',
 'desc_linkfromdisplay' => 'You can set this flashvar to &quot;true&quot; to make a click on the image/video display to result in a jump to the &quot;link&quot; webpage. By default, a click on the display will play/pause the movie.',
 'number'=>'A number',
-'typefichier' => '<NEW>Type de fichiers g&eacute;r&eacute;s',
-'desc_typefichier' => '<NEW>D&eacute;fini les types de fichiers pris en compte.<br />Les types doivent &ecirc;tre mentionn&eacute;s par leur extension et s&eacute;par&eacute;s par une virgule (par d&eacute;faut &laquo;flv,swf,mp3,jpg,png,gif&raquo;)',
 'display_size' => 'Display size',
 'opt_lec' => 'Playing options',
 'opt_aff' => 'Display options',
@@ -184,17 +185,14 @@ It supports rotation of an RSS, XSPF or ATOM playlist with JPG, GIF and PNG imag
 'jw_flv_player' => '<p>The JW FLV Player can be used standalone, without the need for the Flash authoring tool. The player allows you to show your videos more controlled and to a broader audience than with Quicktime, Windows Media or Real Media. 
 It supports playback of a single Flash video file, RTMP streams or RSS, XSPF and ATOM playlists (with advertisement possibilities), a wide range of flashvars (settings) for tweaking both behavior and appearance and an extensive, documented javascript/actionscript API.</p>
 <p><a href="http://www.jeroenwijering.com/?item=JW_FLV_Player">http://www.jeroenwijering.com/?item=JW_FLV_Player</a></p>',
-
 'jw_media_player_install' => '<p>The JW Media Player supports playback of a single media file of any format the Adobe Flash Player can handle (MP3, FLV, SWF, JPG, PNG and GIF). 
 It also supports RSS, XSPF and ATOM playlist (with mixed mediatypes and advertisement possibilities), a wide range of flashvars (settings) for tweaking both behavior and appearance and an extensive, documented javascript/actionscript API.</p>
 <p><a href="http://www.longtailvideo.com/players/jw-flv-player/">http://www.longtailvideo.com/players/jw-flv-player/</a></p>',
 'jw_rotator_install' => '<p>The JW Image Rotator enables you to show a couple of photos in sequence, with fluid transitions between them. 
 It supports rotation of an RSS, XSPF or ATOM playlist with JPG, GIF and PNG images, a wide range of flashvars (settings) for tweaking both behavior and appearance and an extensive, documented javascript and actionscript API.</p>
 <p><a href="http://www.longtailvideo.com/players/jw-image-rotator/">http://www.longtailvideo.com/players/jw-image-rotator/</a></p>',
-
 'jw_media_player_install' => '<p>Pour installer JW Media Player, t&eacute;l&eacute;chargez le <a href="http://www.jeroenwijering.com/upload/mediaplayer-3-16.zip">ici</a> et d&eacute;compressez un répertoire du m&ecirc;me nom que l\'archive dans un dossier lib/ &agrave; la racine du site (en pr&eacute;vision de la verion 2.0 de SPIP.</p>',
 'jw_rotator_install' => '<NEW><p>Pour installer JW Image Rotator, t&eacute;l&eacute;chargez le <a href="http://www.jeroenwijering.com/upload/jw_image_rotator.zip">ici</a> et d&eacute;compressez le tel quel dans un dossier lib/ &agrave; la racine du site (en pr&eacute;vision de la verion 2.0 de SPIP.</p>',
-
 'js_necessaire' => 'D&#233;sol&#233;, mais le javascript est n&#233;ecessaire dans la version actuelle. Merci de le r&#233;activer pour afficher le contenu multimedia ',
 );
 ?>

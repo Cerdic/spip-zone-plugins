@@ -17,7 +17,8 @@
 		#ACTION_FORMULAIRE{SELF}
 			<ul>
 				<li>
-					<label for="mpltypefichier"><a href="#mpltypefichier" title="<:xspf:typefichier:> - <:xspf:desc_typefichier:>"><:xspf:typefichier:></a></label>&nbsp;
+					<label for="mpltypefichier">
+						<a href="#mpltypefichier" title="<:xspf:typefichier:> - <:xspf:desc_typefichier:>"><:xspf:typefichier:></a></label>&nbsp;
 					<input type="text" name="mpltypefichier" class="text" style="width:200px;" id="mpltypefichier" value="#CONFIG{xspf/mpltypefichier}" />
 				</li>
 				<li>
@@ -246,7 +247,7 @@
 											<:xspf:javascriptid:>
 										</a>
 									</label>
-									<input type="text" name="mpljavascriptid" class="text" style="width:200px;" id="mpljavascriptid" value="#CONFIG{xspf/mpljavascriptid}" />
+									<input type="text" name="mpljavascriptid" class="text" style="width:200px;" id="mpljavascriptid" value="[(#CONFIG{xspf/mpljavascriptid}|sinon{mediaplayer})]" />
 								</li>
 							</ul>
 						</fieldset>

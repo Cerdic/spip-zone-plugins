@@ -1,7 +1,7 @@
 #CACHE{0}
 <!-- icone=images/xifish_icone.gif -->
 
-[(#SET{logo,'<img src="#CHEMIN{images/xifish.gif}" width="64" height="64" alt="xifish" style="float:#LANG_RIGHT;" />'})]
+[(#SET{logo,[<img src="(#CHEMIN{images/xifish.gif})" width="64" height="64" alt="xifish" style="float:#LANG_RIGHT;" />]})]
 <!-- descriptif= [(#GET{logo})] <:xspf:description_xspf:> -->
 
 <!-- titre=XSPF plugin -->
@@ -32,14 +32,6 @@
 						<option value="transparent"[(#ENV*{wmode}|=={transparent}|?{ selected="selected",''})]>transparent</option>
 						<option value="opaque"[(#ENV*{wmode}|=={opaque}|?{ selected="selected",''})]>opaque</option>
 					</select>
-				</li>
-				<li>
-					<label for="jwlogo">
-						<a href="#" title="<:xspf:jwlogo:> - <:xspf:desc_jwlogo:>">
-							<:xspf:jwlogo:>
-						</a>
-					</label>
-					<input type="text" name="jwlogo" class="text" id="jwlogo" value="#ENV{jwlogo}" /> <i>URL</i>		
 				</li>
 			</ul>
 			<div class="boutons">
