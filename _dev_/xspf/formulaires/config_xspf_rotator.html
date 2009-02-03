@@ -4,7 +4,7 @@
 
 	<h3><:xspf:rotator_exemple:></h3>
 	<div style="margin:10px;border:1px solid #ccc;padding:5px">
-		[(#MODELE{rotator}{file=#CHEMIN{lib/imagerotator/madrid.xml}}{width=450})]
+		[(#MODELE{rotator}{width=450})]
 	</div>
 
 
@@ -306,6 +306,18 @@
 										<option [(#GET{rotlinktarget}|=={_self}|?{selected="selected",''})]value="_self">_self</option>
 									</select>
 								</li>
+								<li>
+									<label for="rotlinkfromdisplay">
+										<a href="#rotlinkfromdisplay" title="<:xspf:linkfromdisplay:> - <:xspf:desc_linkfromdisplay:>">
+											<:xspf:linkfromdisplay:>
+										</a>
+									</label>
+									<select name="rotlinkfromdisplay" id="rotlinkfromdisplay">
+										#SET{rotlinkfromdisplay,#CONFIG{xspf/rotlinkfromdisplay}}
+										<option [(#GET{rotlinkfromdisplay}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+										<option [(#GET{rotlinkfromdisplay}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+									</select>
+								</li>
 							</ul>
 						</fieldset>
 					</li>
@@ -338,7 +350,7 @@
 				
 			<p class="boutons">
 				<input type="submit" name="_cfg_ok" value="<:OK:>" class="submit" />
-				<input type="reset" value="<:reset:>" class="submit" />
+				<input type="reset" name="_cfg_delete" value="<:reset:>" class="submit" />
 			</p>
 	</div>		
 </form>

@@ -144,7 +144,7 @@ Plusieurs methodes d'insertion :
 <noscript><p><:xspf:js_necessaire:></p></noscript>
 <!-- alternative texte pour ceux qui ont le js desactive -->
 
-<div id="mediaplayer_container_[(#GET{objet_spip})]_[(#GET{objet_val})]" class="xspf_player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;float:[(#GET{align})]})]">
+<div id="mediaplayer_container_[(#GET{objet_spip})][_(#GET{objet_val})]" class="xspf_player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;float:[(#GET{align})]})]">
 	<p>
 		<a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.
 	</p>
@@ -152,41 +152,41 @@ Plusieurs methodes d'insertion :
 
 <script type="text/javascript">
 // <![CDATA[
-	var s_[(#ENV{id})]_[(#GET{objet_val})] = new SWFObject("#CHEMIN{lib/mediaplayer/player.swf}","[(#GET{javascriptid,mediaplayer})]_[(#GET{objet_spip})]_[(#GET{objet_val})]","#GET{width}","#GET{height}","7");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addParam("allowfullscreen","#GET{allowfullscreen}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addParam("wmode","#GET{wmode}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("file",encodeURIComponent("[(#ENV{domaine,#URL_PAGE{xspf}}|url_absolue|parametre_url{type,#GET{type},'&'}|parametre_url{prerolllocation,[(#GET{prerolllocation})],'&'}|parametre_url{postrolllocation,[(#GET{postrolllocation})],'&'}|parametre_url{objet,#GET{objet},'&'}|parametre_url{prerolllink,[(#GET{prerolllink})],'&'}|parametre_url{postrolllink,[(#GET{postrolllink})],'&'}|parametre_url{creator,[(#ENV{creator})],'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
+	var s[_(#ENV{id})][_(#GET{objet_val})] = new SWFObject("#CHEMIN{lib/mediaplayer/player.swf}","[(#GET{javascriptid,mediaplayer})]_[(#GET{objet_spip})][_(#GET{objet_val})]","#GET{width}","#GET{height}","7");
+	s[_(#ENV{id})][_(#GET{objet_val})].addParam("allowfullscreen","#GET{allowfullscreen}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addParam("wmode","#GET{wmode}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("file",encodeURIComponent("[(#ENV{domaine,#URL_PAGE{xspf}}|url_absolue|parametre_url{type,#GET{type},'&'}|parametre_url{prerolllocation,[(#GET{prerolllocation})],'&'}|parametre_url{postrolllocation,[(#GET{postrolllocation})],'&'}|parametre_url{objet,#GET{objet},'&'}|parametre_url{prerolllink,[(#GET{prerolllink})],'&'}|parametre_url{postrolllink,[(#GET{postrolllink})],'&'}|parametre_url{creator,[(#ENV{creator})],'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
 
 	// Layout
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("controlbar","#GET{controlbar}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("height","#GET{height}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("width","#GET{width}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("playlist","#GET{playliste}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("playlistsize","#GET{playlistesize}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("controlbar","#GET{controlbar}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("height","#GET{height}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("width","#GET{width}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("playlist","#GET{playliste}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("playlistsize","#GET{playlistesize}");
 	
 	// Colors
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("backcolor","#GET{backcolor}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("frontcolor","#GET{frontcolor}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("lightcolor","#GET{lightcolor}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("lightcolor","#GET{screencolor}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("backcolor","#GET{backcolor}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("frontcolor","#GET{frontcolor}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("lightcolor","#GET{lightcolor}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("lightcolor","#GET{screencolor}");
 
 	//Behaviour
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("autostart","#GET{autostart}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("bufferlength","#GET{bufferlength}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("displayclick","#GET{displayclick}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("fullscreen","#GET{allowfullscreen}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("icons","#GET{icons}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("linktarget","#GET{linktarget}");
-	[(#GET{jwlogo}|!={''}|?{'s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("logo","#GET{jwlogo}");',''})]
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("mute","#GET{mute}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("quality","#GET{quality}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("repeat","#GET{repeat}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("shuffle","#GET{shuffle}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("stretching","#GET{stretching}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("volume","#GET{volume}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("autostart","#GET{autostart}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("bufferlength","#GET{bufferlength}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("displayclick","#GET{displayclick}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("fullscreen","#GET{allowfullscreen}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("icons","#GET{icons}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("linktarget","#GET{linktarget}");
+	[(#GET{jwlogo}|!={''}|?{'s[_(#ENV{id})][_(#GET{objet_val})].addVariable("logo","#GET{jwlogo}");',''})]
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("mute","#GET{mute}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("quality","#GET{quality}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("repeat","#GET{repeat}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("shuffle","#GET{shuffle}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("stretching","#GET{stretching}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("volume","#GET{volume}");
 	
 	$(document).ready(function() {
-		s_[(#ENV{id})]_[(#GET{objet_val})].write("mediaplayer_container_[(#GET{objet_spip})]_[(#GET{objet_val})]");
+		s[_(#ENV{id})][_(#GET{objet_val})].write("mediaplayer_container_[(#GET{objet_spip})][_(#GET{objet_val})]");
 	});
 // ]]>
 </script>

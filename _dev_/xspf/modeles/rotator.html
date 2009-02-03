@@ -73,34 +73,35 @@
 
 [(#SET{wmode,#ENV{wmode,#CONFIG{xspf/wmode}|sinon{transparent}}})]
 
-[(#SET{transition,#ENV{transition,#CONFIG{xspf/rottransition}|sinon{fade}}})]
-[(#SET{shownavigation,#ENV{shownavigation,#CONFIG{xspf/rotshownavigation}|sinon{true}}})]
-[(#SET{rotatetime,#ENV{rotate,#CONFIG{xspf/rotrotate}|sinon{5}}})]
-
 [(#SET{width,#ENV{width,#CONFIG{xspf/rotwidth}|sinon{100%}}})]
 [(#SET{height,#ENV{height,#CONFIG{xspf/rotheigth}|sinon{100%}}})]
-[(#SET{displaywidth,#ENV{displaywidth,#CONFIG{xspf/rotdisplaywidth}|sinon{#GET{width}}}})]
-[(#SET{displayheight,#ENV{displayheight,#CONFIG{xspf/rotdisplayheight}|sinon{#GET{height}}}})]
-[(#SET{overstretch,#ENV{overstretch,#CONFIG{xspf/rotoverstretch}|sinon{none}}})]
-[(#SET{shuffle,#ENV{shuffle,#CONFIG{xspf/rotshuffle}|sinon{false}}})]
-[(#SET{repeat,#ENV{repeat,#CONFIG{xspf/rotrepeat}|sinon{true}}})]
-
-[(#SET{showvolume,#ENV{showvolume,#CONFIG{xspf/rotshowvolume}|sinon{true}}})]
-[(#SET{autostart,#ENV{autostart,#CONFIG{xspf/rotautostart}|sinon{false}}})]
-[(#SET{allowfullscreen,#ENV{allowfullscreen,#CONFIG{xspf/rotallowfullscreen}|sinon{true}}})]
 
 [(#SET{backcolor,#CONFIG{xspf/rotbackcolor}|replace{#,0x}|sinon{0xFFFFFF}})]
 [(#SET{frontcolor,#CONFIG{xspf/rotfrontcolor}|replace{#,0x}|sinon{0x000000}})]
 [(#SET{lightcolor,#CONFIG{xspf/rotlightcolor}|replace{#,0x}|sinon{0xCC0000}})]
 [(#SET{screencolor,#CONFIG{xspf/rotscreencolor}|replace{#,0x}|sinon{0x000000}})]
 
-[(#SET{jwlogo,#ENV{jwlogo,#CONFIG{xspf/jwlogo}}})]
+[(#SET{jwlogo,#ENV{logo,#CONFIG{xspf/rotlogo}}})]
+[(#SET{overstretch,#ENV{overstretch,#CONFIG{xspf/rotoverstretch}|sinon{none}}})]
+[(#SET{showicons,#ENV{showicons,#CONFIG{xspf/rotshowicons}|sinon{true}}})]
+[(#SET{transition,#ENV{transition,#CONFIG{xspf/rottransition}|sinon{fade}}})]
+
+[(#SET{usefullscreen,#ENV{usefullscreen,#CONFIG{xspf/rotusefullscreen}|sinon{true}}})]
+[(#SET{shownavigation,#ENV{shownavigation,#CONFIG{xspf/rotshownavigation}|sinon{true}}})]
+
 [(#SET{audio,#ENV{audio,#CONFIG{xspf/rotaudio}}})]
+[(#SET{autostart,#ENV{autostart,#CONFIG{xspf/rotautostart}|sinon{false}}})]
+[(#SET{repeat,#ENV{repeat,#CONFIG{xspf/rotrepeat}|sinon{true}}})]
+[(#SET{rotatetime,#ENV{rotate,#CONFIG{xspf/rotrotate}|sinon{5}}})]
+[(#SET{shuffle,#ENV{shuffle,#CONFIG{xspf/rotshuffle}|sinon{false}}})]
+[(#SET{volume,#ENV{volume,#CONFIG{xspf/rotvolume}|sinon{90}}})]
+
+[(#SET{enablejs,#ENV{enablejs,#CONFIG{xspf/enablejs}}})]
 [(#SET{link,#ENV{link,#CONFIG{xspf/rotlink}}})]
 [(#SET{linkfromdisplay,#ENV{linkfromdisplay,#CONFIG{xspf/rotlinkfromdisplay}}})]
 [(#SET{linktarget,#ENV{linktarget,#CONFIG{xspf/rotlinktarget}}})]
 
-[(#SET{file,[(#ENV{file,[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,'jpg|png|gif','&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]})]})]
+
 [(#SET{align,#ENV{align,center}})]
 
 <noscript><p><:xspf:js_necessaire:></p></noscript>
@@ -116,25 +117,38 @@
 // <![CDATA[
 	var s_[(#ENV{id})]_[(#GET{objet_val})] = new SWFObject("#CHEMIN{lib/imagerotator/imagerotator.swf}","rotator_[(#GET{objet_spip})]_[(#GET{objet_val})]","#GET{width}","#GET{height}","7");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addParam("wmode","#GET{wmode}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("file",encodeURIComponent("#GET{file}"));
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("transition","#GET{transition}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addParam("allowfullscreen","#GET{usefullscreen}");
+
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("file",encodeURIComponent("[(#URL_PAGE{xspf}|parametre_url{type,'jpg|png|gif','&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'}|url_absolue)]})]"));
+
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("height","#GET{height}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("width","#GET{width}");
+
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("backcolor","#GET{backcolor}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("frontcolor","#GET{frontcolor}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("lightcolor","#GET{lightcolor}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("screencolor","#GET{screencolor}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("shownavigation","#GET{shownavigation}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("kenburns","false");
+
+	[(#GET{jwlogo}|!={''}|oui)s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("logo","#GET{jwlogo}");]
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("overstretch","#GET{overstretch}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("showicons","#GET{showicons}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("transition","#GET{transition}");
+
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("usefullscreen","#GET{usefullscreen}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("shownavigation","#GET{shownavigation}");
+	
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("kenburns","false");
+
+	[(#GET{audio}|!={''}|oui)s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("audio","#GET{audio}");]
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("autostart","#GET{autostart}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("repeat","#GET{repeat}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("rotatetime","#GET{rotatetime}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("shuffle","#GET{shuffle}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("height","#GET{height}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("width","#GET{width}");
-	[(#GET{jwlogo}|!={''}|?{'s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("logo","#GET{jwlogo}");',''})]
-	[(#GET{audio}|!={''}|?{'s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("audio","#GET{audio}");',''})]
-	[(#GET{link}|!={''}|?{'s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("link","#GET{link}");',''})]
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("linkfromdisplay","#GET{linkfromdisplay}");
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("linktarget","#GET{linktarget}");	
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("volume","#GET{volume}");
+
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("enablejs","#GET{enablejs}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("linktarget","#GET{linktarget}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("linkfromdisplay","#GET{linkfromdisplay}");	
 	s_[(#ENV{id})]_[(#GET{objet_val})].addParam('menu','true');
 	
 	$(document).ready(function() {

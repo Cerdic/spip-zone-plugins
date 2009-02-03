@@ -120,6 +120,8 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 'desc_rotrecadre_width' => 'Largeur (en pixel) &agrave; laquelle spip retaillera automatiquement les images dans la playliste (640 par d&eacute;faut). Mettre 0 pour ne pas retailler.',
 'rotrecadre_height' => 'Retaillage des images (hauteur)',
 'desc_rotrecadre_height' => 'Hauteur (en pixel) &agrave; laquelle spip retaillera automatiquement les images dans la playliste (0 par d&eacute;faut). Mettre 0 pour ne pas retailler.',
+'linkfromdisplay' =>'Lien depuis le lecteur',
+'desc_linkfromdisplay' => 'Vous pouvez r&eacute;gler cette variable flash sur  &laquo;Vrai&raquo;  pour rendre cliquable l&rsquo;image(ou la vid&eacute;o) affich&eacute;e dans la zone de contenu provoquant &rsquo;affichage de la page indiqu&eacute;e dans &quot;link&quot;. Par d&eacute;faut un click sur la zone de contenu lira/stopera la lecture du contenu.',
 
 // Les deux player de JW
 'shuffle' => 'Lecture al&eacute;atoire (Shuffle)',
@@ -158,8 +160,6 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 'display_size' => 'Dimensions de la zone de contenu de l&rsquo;animation',
 'link' =>'Link',
 'desc_link' =>'Ins&eacute;rez ici l&rsquo;adresse URL d&rsquo;une version t&eacute;l&eacute;chargeable du fichier ou d&rsquo;un script de t&eacute;l&eacute;chargement forc&eacute; du fichier. Vous pouvez assigner des liens cliquables &agrave; la zone de contenu (display ci-dessous) et au bouton de t&eacute;l&eacute;chargement, mais pas encore aux &eacute;l&eacute;ment de la liste de lecture.',
-'linkfromdisplay' =>'linkfromdisplay',
-'desc_linkfromdisplay' => 'Vous pouvez r&eacute;gler cette variable flash sur  &laquo;Vrai&raquo;  pour rendre cliquable l&rsquo;image(ou la vid&eacute;o) affich&eacute;e dans la zone de contenu provoquant &rsquo;affichage de la page indiqu&eacute;e dans &quot;link&quot;. Par d&eacute;faut un click sur la zone de contenu lira/stopera la lecture du contenu.',
 'number'=>'Un nombre',
 'opt_lec' => 'Options de lecture',
 'opt_aff' => 'Options d&rsquo;affichage',

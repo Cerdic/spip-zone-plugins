@@ -120,6 +120,8 @@ Waiting for the full documentation on <a href="http://www.spip-contrib.net">Spip
 'desc_rotrecadre_width' => 'Width (in pixel) which SPIP uses to resize pictures in the playlist (640 by default). Put 0 to disable width resizing.',
 'rotrecadre_height' => 'Resizing pictures (height)',
 'desc_rotrecadre_height' => 'Height (in pixel) which SPIP uses to resize pictures in the playlist (0 by default). Put 0 to disable height resizing.',
+'linkfromdisplay' =>'Link from display',
+'desc_linkfromdisplay' => 'You can set this flashvar to &quot;true&quot; to make a click on the image/video display to result in a jump to the &quot;link&quot; webpage. By default, a click on the display will play/pause the movie.',
 
 // Les deux player de JW
 'shuffle' => 'Shuffle',
@@ -154,8 +156,6 @@ Waiting for the full documentation on <a href="http://www.spip-contrib.net">Spip
 'link' =>'Link',
 'desc_logo' => 'Set this flashvar to put a watermark logo in the top right corner of the display. All image formats are supported, but transparent PNG files give the best results',
 'desc_link' =>'Set here the url to an external URL, downloadeable version of the file, or force-download script you can use for downloading the file. You can assign link-clicks to the display (see below) and the downloadbutton but not yet to every item in a playlist.',
-'linkfromdisplay' =>'linkfromdisplay',
-'desc_linkfromdisplay' => 'You can set this flashvar to &quot;true&quot; to make a click on the image/video display to result in a jump to the &quot;link&quot; webpage. By default, a click on the display will play/pause the movie.',
 'number'=>'A number',
 'display_size' => 'Display size',
 'opt_lec' => 'Playing options',
