@@ -3,17 +3,19 @@
 	http://www.longtailvideo.com/players/jw-flv-player/
 	
 	The Flash Media player supports playback of a single media file of any format the Adobe Flash Player can handle (MP3,FLV,SWF,JPG,PNG or GIF).
-	This script is licensed under a Creative Commons License.
-	It allows you to use and modify the script for noncommercial purposes. 
-	For commercial use, Jeroenwijering distribute licenses of the script for 15 euros. 
+	
+	JW Players are licensed under a Creative Commons license.
+	It allows you to use, modify and redistribute the script for noncommercial purposes ONLY.
+	For all other use, you should buy a commercial license. 
 	For more info and instant ordering, please advance to his online order page!
-	http://www.jeroenwijering.com/?order=form
+	http://www.longtailvideo.com/players/order
 	
 	Modele spip mis au point sur irc a l'initiative d'alexandra
 	avec la participation de kent1, cy_altern, marcimat, renato et toggg.
 	
 Plusieurs methodes d'insertion :
-	Methode classique <template><mediaplayer123></template> ou 123 est l'id article fournissant les documents attaches
+
+	Methode classique <template><mediaplayer123></template> ou 123 est l'id article fournissant les documents attachés
 	Methode par rubrique (on prend les videos parmis les documents de la rubrique) :
 	<template><mediaplayer|rubrique=123></template>
 	Methode par secteur (on prend les videos parmis les documents du secteur) :
@@ -22,9 +24,9 @@ Plusieurs methodes d'insertion :
 	<template><mediaplayer|document=123></template>
 	
 	Pour les options, voir http://developer.longtailvideo.com/trac/wiki/FlashVars
-	- type : texte,'flv,swf,mp3,jpg,png,gif'	Types de fichiers a prendre en compte (filtre les documents dans la playliste)
+
+	- type : string,'flv|swf|mp3|jpg|png|gif'	Types de fichiers a prendre en compte (filtre les documents dans la playliste)
 	- allowfullscreen : boolean true|false true
-	
 	
 	Définition du Layout
 	- controlbar : string bottom|over|none Position des controles
@@ -195,6 +197,6 @@ Plusieurs methodes d'insertion :
 
 [(#REM)
 Assistant wizard pour personnaliser les variables
-http://www.jeroenwijering.com/extras/wizard.html
-Toutes les options du flash image rotator des flashvars sont disponibles ici 
-http://www.jeroenwijering.com/extras/readme.html]
+http://www.longtailvideo.com/support/jw-player-setup-wizard
+Toutes les options du mediaplayer des flashvars sont disponibles ici 
+http://developer.longtailvideo.com/trac/wiki/FlashVars]
