@@ -33,7 +33,6 @@ Vous &ecirc;tes libres de les installer selon vos convictions et nous ne pouvons
 
 'wmode' => 'Param&egrave;tre flash Wmode',
 'desc_wmode' => 'Option flash de disposition de l&rsquo;animation &agrave; l&rsquo;avant ou l&rsquo;arri&egrave;re plan',
-
 'jwlogo' => 'Logo',
 'desc_jwlogo' => 'Utilisez cette variable flash pour mettre un logo en filigrane dans le bon coin sup&eacute;rieur de l&rsquo;affichage. Tous les formats d&rsquo;image sont support&eacute;s, mais les fichiers png en transparence donnent les meilleurs r&eacute;sultats.',
 
@@ -46,7 +45,6 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 'conf_msc' => 'Configuration de musicplayer',
 'conf_slim' => 'Configuration de slimplayer',
 'conf_but' => 'Configuration de buttonplayer',
-
 'autoload' => 'Pr&eacute;chargement',
 'desc_autoload' => 'Valeur bool&eacute;enne indiquant si le media doit &ecirc;tre pr&eacute;charg&eacute; (&eacute;vite un temps d&rsquo;attente lorsque l&rsquo;utilisateur d&eacute;marre l&rsquo;&eacute;coute)',
 
@@ -113,8 +111,13 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 'desc_shownavigation' => 'Active/d&eacute;sactive la barre de navigation.',
 'audio'=>'Audio',
 'desc_audio'=>'Vous pouvez r&eacute;gler cette variable flash avec l&rsquo;adresse URL d&rsquo;un fichier mp3 qui peut servir de piste audio suppl&eacute;mentaire. Utilisez le pour des commentaires d&rsquo;accessibilit&eacute;, pour simplement commmenter une vid&eacute;o, ou avec rotator comme musique de fond.',
-'rotatetime' => 'rotatetime',
+'rotatetime' => 'Temps de rotation',
 'desc_rotatetime' => 'Utilisez cette variable flash pour r&eacute;gler le temps pendant lequel vous souhaitez afficher une image. La valeur par d&eacute;faut est 5.',
+'retailler_images' => 'Retailler les images'
+'rotrecadre_width' => 'Retaillage des images (largeur)',
+'desc_rotrecadre_width' => 'Largeur (en pixel) &agrave; laquelle spip retaillera automatiquement les images dans la playliste (640 par d&eacute;faut). Mettre 0 pour ne pas retailler.',
+'rotrecadre_height' => 'Retaillage des images (hauteur)',
+'desc_rotrecadre_height' => 'Hauteur (en pixel) &agrave; laquelle spip retaillera automatiquement les images dans la playliste (0 par d&eacute;faut). Mettre 0 pour ne pas retailler.',
 
 // Les deux player de JW
 'shuffle' => 'Lecture al&eacute;atoire (Shuffle)',
@@ -135,29 +138,24 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 'desc_linktarget' =>'Permet de d&eacute;terminer o&ugrave; doit s&rsquo;ouvrir un lien (depuis la zone de contenu ou les boutons). Par d&eacute; le r&eacute;glage est &laquo;_self&raquo;. Indiquez &laquo;_blank&raquo; pour ouvrir le lien dans une nouvelle fen&ecirc;tre. Ins&eacute;rez le nom d&rsquo;un frame pour l&rsquo;y ouvrir.',
 'desc_width' => 'As with the height of the player/rotator, this variable is already set with a default embed code. However, sometimes (notably on IE), this won\'t get through (so you get a messed-up display). Then use this flashvar to tell the player/rotator how many pixels wide it should be.',
 'desc_height' => 'As with the width of the player/rotator, this variable is already set with a default embed code. However, sometimes (notably on IE), this won\'t get through (so you get a messed-up display). Then use this flashvar to tell the player/rotator how many pixels high it should be.',
+'external_communication' => 'Communication externe',
+'playback_behaviour' => 'Comportement de lecture',
+'color_anim' => 'Couleurs de l&rsquo;animation',
+'layout' => 'Layout',
+'display_appearance' => 'Apparence du lecteur',
+'controlbar_appearance' => 'Apparence de la barre de contr&ocirc;le',
 
 //page d\'affichage de la configuration du plugin
 
 'allowfullscreen' => 'Plein &eacute;cran',
 'desc_allowfullscreen' => 'Permettre l&rsquo;affichage en plein &eacute;cran.',
-
-
-
 'list' => 'Liste',
-
 'logo' => 'Logo',
 'desc_logo' => 'Permet d&rsquo;afficher une image en surimpression, en haut &agrave; droite de la zone de contenu, des lecteurs de Jeroen Wijering',
 'jw_logo' => 'Configuration g&eacute;n&eacute;rale pour les lecteurs de Jeroen Wijering',
-
-
-
 'typefichier' => 'Type de fichiers g&eacute;r&eacute;s',
 'desc_typefichier' => 'D&eacute;fini les types de fichiers pris en compte.<br />Les types doivent &ecirc;tre mentionn&eacute;s par leur extension et s&eacute;par&eacute;s par une virgule (par d&eacute;faut &laquo;flv,swf,mp3,jpg,png,gif&raquo;)',
 'display_size' => 'Dimensions de la zone de contenu de l&rsquo;animation',
-'color_anim' => 'Couleurs de l&rsquo;animation',
-
-'showdownload'=>'showdownload',
-'desc_showdownload' => 'R&eacute;glez ce param&egrave;tre sur &laquo;Vrai&raquo; pour afficher un bouton de t&eacute;l&eacute;chargement dans la barre de controle. Le bouton de t&eacute;l&eacute;chargement est li&eacute; &agrave; la variable flash nomm&eacute;e link ci-dessous',
 'link' =>'Link',
 'desc_link' =>'Ins&eacute;rez ici l&rsquo;adresse URL d&rsquo;une version t&eacute;l&eacute;chargeable du fichier ou d&rsquo;un script de t&eacute;l&eacute;chargement forc&eacute; du fichier. Vous pouvez assigner des liens cliquables &agrave; la zone de contenu (display ci-dessous) et au bouton de t&eacute;l&eacute;chargement, mais pas encore aux &eacute;l&eacute;ment de la liste de lecture.',
 'linkfromdisplay' =>'linkfromdisplay',

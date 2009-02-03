@@ -5,14 +5,14 @@
 		<trackList>
 			<BOUCLE_docsrubsecteur(DOCUMENTS){rubriques.id_secteur=#ENV{id_secteur}}{mode=document}{extension==#ENV{type,.}}{par num titre,titre,id_document}>
 			<track>
-				<location>[(#EXTENSION|match{jpg|png|gif}|?{[(#URL_DOCUMENT|image_reduire{640,0}|url_absolue|extraire_attribut{src})],[(#URL_DOCUMENT|url_absolue)]})]</location>
+				<location>[(#EXTENSION|match{jpg|png|gif}|?{[(#URL_DOCUMENT|image_reduire{#CONFIG{xspf/rotrecadre_width,640},#CONFIG{xspf/rotrecadre_height,0}}|url_absolue|extraire_attribut{src})],[(#URL_DOCUMENT|url_absolue)]})]</location>
 				<image>[(#LOGO_DOCUMENT||extraire_attribut{src}|sinon{[(#GET{img_defaut})]}|url_absolue)]</image>
 				<annotation>[(#TITRE|supprimer_tags|supprimer_numero|texte_backend)]</annotation>
 			</track>
 			</BOUCLE_docsrubsecteur>
 			<BOUCLE_docsartsecteur(DOCUMENTS){articles.id_secteur=#ENV{id_secteur}}{mode=document}{extension==#ENV{type,.}}{par num titre,titre,id_document}>
 			<track>
-				<location>[(#EXTENSION|match{jpg|png|gif}|?{[(#URL_DOCUMENT|image_reduire{640,0}|url_absolue|extraire_attribut{src})],[(#URL_DOCUMENT|url_absolue)]})]</location>
+				<location>[(#EXTENSION|match{jpg|png|gif}|?{[(#URL_DOCUMENT|image_reduire{#CONFIG{xspf/rotrecadre_width,640},#CONFIG{xspf/rotrecadre_height,0}}|url_absolue|extraire_attribut{src})],[(#URL_DOCUMENT|url_absolue)]})]</location>
 				<image>[(#LOGO_DOCUMENT||extraire_attribut{src}|sinon{[(#GET{img_defaut})]}|url_absolue)]</image>
 				<annotation>[(#TITRE|supprimer_numero|supprimer_tags|texte_backend)]</annotation>
 				<creator>[(#TITRE|supprimer_numero|supprimer_tags|texte_backend)]</creator>
@@ -33,7 +33,7 @@
 [(#REM) -------------------- Boucle generale de generation des listes de lecture xspf ----------------]
 	<BOUCLE_docs(DOCUMENTS){id_article ?}{id_rubrique ?}{id_document ?}{id_breve ?}{id_mot ?}{id_donnee ?}{mode=document}{extension==#ENV{type,.}}{par num titre,titre,id_document}>
 		<track>
-			<location>[(#EXTENSION|match{jpg|png|gif}|?{[(#URL_DOCUMENT|image_reduire{640,0}|url_absolue|extraire_attribut{src})],[(#URL_DOCUMENT|url_absolue)]})]</location>
+			<location>[(#EXTENSION|match{jpg|png|gif}|?{[(#URL_DOCUMENT|image_reduire{#CONFIG{xspf/rotrecadre_width,640},#CONFIG{xspf/rotrecadre_height,0}}|url_absolue|extraire_attribut{src})],[(#URL_DOCUMENT|url_absolue)]})]</location>
 			[<image>(#LOGO_DOCUMENT||extraire_attribut{src}|match{dist/vignettes}|?{#LOGO_ARTICLE_RUBRIQUE||sinon{#LOGO_BREVE_RUBRIQUE}||sinon{#LOGO_SITE_SPIP},#LOGO_DOCUMENT}|extraire_attribut{src}|url_absolue)</image>]
 			<title>[(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER|basename)]}|texte_backend)]</title>
 			<annotation>[(#TITRE|supprimer_numero|propre|supprimer_tags|translitteration|sinon{[(#FICHIER|basename)]}|texte_backend)]</annotation>
