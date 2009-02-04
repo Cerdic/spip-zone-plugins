@@ -15,6 +15,7 @@
 </BOUCLE_types>
 </ul>
 </B_types>
+
 [(#ENV{id_document}|oui)
 <a class='annule_filtre' href='[(#GET{self}|parametre_url{id_document,''})]' title="<:gestdoc:tout_voir|attribut_html:>">[(#CHEMIN{images/annuler-recherche.png}|tag_img|inserer_attribut{alt,<:gestdoc:tout_voir:>})]</a>
 ]
@@ -35,10 +36,14 @@
 [(#ENV{brise,0}|oui)
 [<li>(#URL_ACTION_AUTEUR{verifier_documents_brises,'1',#GET{self}}|aoustrong{<:gestdoc:verifier_documents_brises:>,0,ajax})</li>]]
 </ul>
+
+[
+(#INCLURE{fond=prive/inc-ajouter-documents}{env}{ajax})
+]
+
 <div class="galerie[ media-(#ENV{media,''})]">
 	<B_galerie>
 	<h2>[(#GRAND_TOTAL|gestdoc_affiche_un_ou_plusieurs{#VAL{gestdoc:un_}|concat{#ENV{media,document}},#VAL{gestdoc:des_}|concat{#ENV{media,document},s}})]</h2>
-	[(#INCLURE{fond=prive/inc-ajouter-documents}{env}{ajax})]
 	<div class='pagination tri'>
 		[(#TRI{'<',#CHEMIN{img_pack/tri_asc-16.png}|tag_img{<:gestdoc:par_tri_croissant:>}}) |]
 		[(#TRI{'>',#CHEMIN{img_pack/tri_desc-16.png}|tag_img{<:gestdoc:par_tri_decroissant:>}}) |]
@@ -72,8 +77,8 @@
 		]
 		<td class='infos'>
 		[(#ENV{media}|non|et{#MEDIA|!={file}})<img src='#CHEMIN{img_pack/#MEDIA|replace{image,photo}|concat{-22.png}}' width='22' height='22' alt='<:gestdoc:fichier_manquant:>' />]
-		[(#GET{missing}|oui)<img src='#CHEMIN{img_pack/unreadable-22.png}' width='22' height='22' alt='<:gestdoc:fichier_manquant:>' />]
-		[(#DISTANT|=={oui}|oui)<img src='#CHEMIN{img_pack/distant-22.png}' width='22' height='22' alt='<:gestdoc:fichier_distant:>' />]
+		[(#GET{missing}|oui)<img src='#CHEMIN{images/document-manquant-24.png}' width='22' height='22' alt='<:gestdoc:fichier_manquant:>' />]
+		[(#DISTANT|=={oui}|oui)<img src='#CHEMIN{images/document-distant-24.png}' width='22' height='22' alt='<:gestdoc:fichier_distant:>' />]
 		</td>
 		<td class="id">
 			<strong>#ID_DOCUMENT</strong>
@@ -111,6 +116,5 @@
 	[<p class="pagination">(#PAGINATION{page})</p>]
 	</B_galerie>
 	<h2>[(#VAL{gestdoc:aucun_}|concat{#ENV{media,document}}|_T)]</h2>
-	[(#INCLURE{fond=prive/inc-ajouter-documents}{env}{ajax})]
 	<//B_galerie>
 </div><!--#galerie-->

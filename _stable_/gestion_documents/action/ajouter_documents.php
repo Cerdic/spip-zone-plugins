@@ -76,7 +76,6 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 			# $a['fichier'] est une copie locale du fichier
 
 			unset($champs['type_image']);
-			$champs['date'] = 'NOW()';
 		}
 		// on ne doit plus arriver ici, car l'url distante a ete verifiee a la saisie !
 		else {
@@ -87,7 +86,6 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 	else { // pas distant
 
 		$champs = array(
-			'date' => 'NOW()',
 			'distant' => 'non'
 		);
 		

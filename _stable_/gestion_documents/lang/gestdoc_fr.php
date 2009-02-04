@@ -53,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'format_date_incorrect' => 'La date ou l\'heure sont incorrectes',
 	
 	// I
+	'icone_creer_document' => 'Ajouter un document',
 	'id' => 'ID',
 	'infos'=>'Infos techniques',
 	'info_modifier_document'=>'Modifier le document',

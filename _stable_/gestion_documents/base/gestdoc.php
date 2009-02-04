@@ -76,7 +76,23 @@ function gestdoc_upgrade($nom_meta_base_version,$version_cible){
 			$trouver_table = charger_fonction('trouver_table','base');
 			$trouver_table(false);
 			ecrire_meta($nom_meta_base_version,$current_version="0.5",'non');
-		}			
+		}
+		if (version_compare($current_version,'0.6','<')){
+			include_spip('base/abstract_sql');
+			sql_alter("TABLE spip_types_documents ADD media varchar(10) DEFAULT 'file' NOT NULL");
+			// mettre a jour les bonnes valeurs
+			// les cas evidents
+			sql_updateq('spip_types_documents',array('media'=>'image'),"mime_type REGEXP '^image/'");
+			sql_updateq('spip_types_documents',array('media'=>'audio'),"mime_type REGEXP '^audio/'");
+			sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type REGEXP '^video/'");
+			// les cas particuliers ...
+			sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type='application/ogg'");
+			sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type='application/x-shockwave-flash'");
+			sql_updateq('spip_types_documents',array('media'=>'image'),"mime_type='application/illustrator'");
+			sql_updateq('spip_types_documents',array('media'=>'image'),"mime_type='application/illustrator'");
+			sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type='application/mp4'");
+			ecrire_meta($nom_meta_base_version,$current_version="0.6",'non');
+		}
 	}
 }
 
