@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_image_document' => 'Remplacer par une image ou un document',
 	'bouton_supprimer' => 'Supprimer',
 	
+	
 	// D
 	'documents'=> 'Mediath&egrave;que',
 	'documents_distants'=> 'Distants',
@@ -71,6 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_fichier' => 'Fichier',
 	'label_caracteristiques' => 'Caract&eacute;ristiques',
 	'label_apercu' => 'Aper&ccedil;u',
+	'label_credits' => 'Cr&eacute;dits',
 	
 	// M
 	'media_audio' => 'Bandes sons',

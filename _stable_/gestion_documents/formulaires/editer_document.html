@@ -43,6 +43,11 @@
 					<input type='text' class='text heure' name='saisie_heure' id='heure' value="[(#ENV{saisie_heure})]" />
 				</span>
 	    </li>
+	    <li class="editer_credits[ (#ENV**{erreurs}|table_valeur{credits}|oui)erreur]">
+		    <label for="credits"><:gestdoc:label_credits:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{credits})</span>
+				]<input type='text' class='text' name='credits' id='credits' value="#ENV**{credits,''}" />
+	    </li>
 	    [(#ENV{_editer_dimension})
 	    <li class="editer_dimensions[ (#ENV**{erreurs}|table_valeur{dimensions}|oui)erreur]">
 				<label><:entree_dimensions:></label>[

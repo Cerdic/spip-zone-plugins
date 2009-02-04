@@ -38,7 +38,7 @@ function action_copier_local_dist() {
 function action_copier_local_post($id_document) {
 
 	// Il faut la source du document pour le copier
-	$row = sql_fetsel("mode,fichier, descriptif", "spip_documents", "id_document=$id_document");
+	$row = sql_fetsel("mode,fichier, descriptif, credits", "spip_documents", "id_document=$id_document");
 	$source = $row['fichier'];
 
 	include_spip('inc/distant'); // pour 'copie_locale'
@@ -55,7 +55,7 @@ function action_copier_local_post($id_document) {
 		
 		// ajouter l'origine du document aux credits
 		include_spip('action/editer_document');
-		document_set($id_document,array('credits'=>"[->$source]"));
+		document_set($id_document,array('credits'=>($row['credits']?$row['credits'].', ':'').$source));
 		
 	} else {
 		spip_log("echec copie locale $source");

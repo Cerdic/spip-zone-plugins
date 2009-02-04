@@ -14,6 +14,7 @@ function gestdoc_declarer_tables_principales($tables_principales){
 	
 	$tables_principales['spip_types_documents']['field']['media'] = "varchar(10) DEFAULT 'file' NOT NULL";
 	$tables_principales['spip_documents']['field']['statut'] = "varchar(10) DEFAULT '0' NOT NULL";
+	$tables_principales['spip_documents']['field']['credits'] = "varchar(255) DEFAULT '' NOT NULL";	
 	$tables_principales['spip_documents']['field']['date_publication'] = "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL";
 	$tables_principales['spip_documents']['field']['brise'] = "tinyint DEFAULT 0";
 	return $tables_principales;
@@ -92,6 +93,11 @@ function gestdoc_upgrade($nom_meta_base_version,$version_cible){
 			sql_updateq('spip_types_documents',array('media'=>'image'),"mime_type='application/illustrator'");
 			sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type='application/mp4'");
 			ecrire_meta($nom_meta_base_version,$current_version="0.6",'non');
+		}
+		if (version_compare($current_version,'0.7','<')){
+			include_spip('base/abstract_sql');
+			sql_alter("TABLE spip_documents ADD credits varchar(255) DEFAULT '' NOT NULL");
+			ecrire_meta($nom_meta_base_version,$current_version="0.7",'non');
 		}
 	}
 }

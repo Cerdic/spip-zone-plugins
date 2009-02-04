@@ -81,7 +81,7 @@ function document_set ($id_document, $c=false) {
 	// champs normaux
 	$champs = array();
 	foreach (array(
-		'titre', 'descriptif', 'date', 'taille', 'largeur','hauteur','mode',
+		'titre', 'descriptif', 'date', 'taille', 'largeur','hauteur','mode','credits',
 		'fichier','distant','extension',
 	  ) as $champ)
 		if (($a = _request($champ,$c)) !== null)
