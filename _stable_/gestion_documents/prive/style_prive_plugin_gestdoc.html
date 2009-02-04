@@ -33,9 +33,29 @@
 
 .formulaire_joindre_document .editer_fichier input.file {display:block;}
 
+
+.onglets_simple { margin:1em 0;clear:#GET{left};border-bottom:1px solid #GET{foncee};padding-#GET{left}:5px;}
+.onglets_simple ul {list-style:none;margin-left:1px;padding:0;}
+.onglets_simple ul li {float:left;padding:0;margin:0;margin-bottom:-1px;}
+
+.onglets_simple ul li strong,.onglets_simple ul li a {display:block;float:#GET{left};padding:4px 7px;border:1px solid #GET{foncee};margin-#GET{left}:5px;background-color:#eee;background-position:center right;background-repeat:no-repeat;}
+.onglets_simple ul li strong,.onglets_simple ul li a:hover {background-color:#f8f7f3;}
+.onglets_simple ul li strong {border-bottom:1px solid #f8f7f3;color:#555;}
+
+.onglets_simple.second {font-size:0.9em;border:0;padding-#GET{left}:0;}
+.onglets_simple.second ul li strong,.onglets_simple.second ul li a {margin-#GET{left}:0px;margin-#GET{right}:5px;margin-bottom:5px;}
+.onglets_simple.second ul li strong {border:1px solid #GET{foncee};}
+.onglets_simple.second ul li strong,.onglets_simple.second ul li a:hover {background-color:#fff;}
+.onglets_simple.second ul.distant li.first,.onglets_simple.second ul.brises li.first {margin-#GET{left}:30px;}
+
+.choix-type, .choix-type li {display:inline;list-style:none;margin:0;padding:0;}
+.choix-type {margin:1em 0;padding:0;}
+
+
 a.bouton_fermer {display:block;text-align:#GET{right};}
 
-.galerie { float: none; width: 100%; clear:left;padding-top:10px;}
+.galerie { float: none; width: 100%; padding:0;}
+.galerie .pagination {clear:both;}
 .galerie table { width: 100%; border: none; }
 .galerie table thead { background: [#(#GET{foncee}|couleur_foncer)];color:#fff; }
 .galerie table tbody tr:hover { background: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
@@ -75,17 +95,8 @@ a.bouton_fermer {display:block;text-align:#GET{right};}
 .document_utilisations li.item .vu {position:absolute;top:0;right:0;}
 
 
-ul.choix {list-style:none;clear:left;padding:0;margin:0;float:left;}
-ul.choix li {float:left;}
-ul.choix li a,ul.choix li strong.on {display:block;float:left;padding:2px 5px;border-right:1px solid #ddd;border-left:1px solid #ddd;border-top:2px solid #ddd;}
-ul.choix li a:hover,ul.choix li strong.on {background:#ddd;}
-
-ul.choix.statut,
-ul.choix.distant,
-ul.choix.brises {padding-right:20px;}
-ul.choix.distant,
-ul.choix.brises {clear:none;}
-
 .pagination .tris {float:left;}
+
+p.actions {clear:both;}
 
 [(#REM)</style>]
