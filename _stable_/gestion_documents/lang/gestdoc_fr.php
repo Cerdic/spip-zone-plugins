@@ -12,13 +12,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_video'=>'Aucune s&eacute;quence',
 	
 	// B
-	'bouton_remplacer_image' => 'Remplacer cette image',
-	'bouton_remplacer_document' => 'Remplacer ce document',
-	'bouton_remplacer_image_document' => 'Remplacer par une image ou un document',
+	'bouton_copier_local'=>'Copier dans le site',
 	'bouton_download_depuis'=>'depuis&nbsp:',
 	'bouton_download_local' => 'mon ordinateur',
 	'bouton_dowload_par_ftp' => 'le serveur',
 	'bouton_dowload_sur_le_web' => 'internet',
+	'bouton_remplacer_image' => 'Remplacer cette image',
+	'bouton_remplacer_document' => 'Remplacer ce document',
+	'bouton_remplacer_image_document' => 'Remplacer par une image ou un document',
+	'bouton_supprimer' => 'Supprimer',
 	
 	// D
 	'documents'=> 'Mediath&egrave;que',

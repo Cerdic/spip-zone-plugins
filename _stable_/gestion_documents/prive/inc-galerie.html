@@ -94,6 +94,7 @@
 			[<div class="dimensions">(#LARGEUR|?{[(#LARGEUR)[ x (#HAUTEUR) pixels]],''})</div>]
 			[<div class="taille">(#TAILLE|taille_en_octets)</div>]
 			[<div class="date">(#DATE|affdate{d/m/Y})</div>]
+			#SET{supprimer,' '}
 			<B_liens>
 			[(#TOTAL_BOUCLE|>{1}|oui)
 			<a href='#' onclick="jQuery(this).next().show();$(this).hide();return false;">[(#TOTAL_BOUCLE|gestdoc_affiche_un_ou_plusieurs{gestdoc:une_utilisation,gestdoc:des_utilisations})]</a><div style='display: none;'>
@@ -102,6 +103,7 @@
 			[(#ID_OBJET|lien_objet{#OBJET})]
 			</BOUCLE_liens>
 			[(#TOTAL_BOUCLE|>{1}|oui)</div>]
+			#SET{supprimer,''}
 			</B_liens>
 		</td>
 		<td class="descriptif">
@@ -109,6 +111,7 @@
 			[<div class="#EDIT{descriptif}">(#DESCRIPTIF|sinon{...})</div>]
 		</td>
 		<td>[(#AUTORISER{modifier,document,#ID_DOCUMENT})&#91;<a href='#URL_ECRIRE{documents_edit,id_document=#ID_DOCUMENT}'><:bouton_modifier:></a>&#93;]
+		[<span class='supprimer'>(#GET{supprimer}|et{#AUTORISER{supprimer,document,#ID_DOCUMENT}})&#91;<a href='#URL_ACTION_AUTEUR{supprimer_document,#ID_DOCUMENT,#SELF}' class='ajax'><:gestdoc:bouton_supprimer:></a>&#93;</span>]
 		</td>
 	</tr>
 	</BOUCLE_galerie>

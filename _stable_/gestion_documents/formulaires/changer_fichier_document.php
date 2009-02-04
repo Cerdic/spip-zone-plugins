@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_changer_fichier_document_charger_dist($id_document){
-	$valeurs = sql_fetsel('fichier,id_document','spip_documents','id_document='.intval($id_document));
+	$valeurs = sql_fetsel('id_document,fichier,distant','spip_documents','id_document='.intval($id_document));
 	if (!$valeurs)
 		return array('editable'=>false);
 		
