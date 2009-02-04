@@ -529,11 +529,7 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
               }  
               $log_html .= "</ul>";
               
-              // alerte email ?	
-              if ($email_alerte && $log_email !="") 
-                  envoyer_mail($email_suivi,"Syndication automatique SPIP2SPIP", $log_email);	    
-               
-              
+
             }
         } else {
           $log_html .= "<div style='color:purple'>"._T('spiptospip:aucun_article')."</div>";
@@ -544,6 +540,11 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
    
       
     } // #selection du site
+    
+    // alerte email ?	
+    if ($email_alerte && $log_email !="") 
+                  envoyer_mail($email_suivi,"Syndication automatique SPIP2SPIP", $log_email);	    
+             
     
     if ($mode=='html') return $log_html;    
     return false;
