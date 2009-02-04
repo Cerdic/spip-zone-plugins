@@ -30,7 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'documents_non_publies'=> 'Non publies',
 	'documents_publies'=> 'Publies',
 	'documents_tous'=> 'Tous',
-	'documents_brises' => 'Fichiers manquants',
+	'documents_brises' => 'Bris&eacute;s',
+	'documents_orphelins' => 'Inutilis&eacute;s',
 	'descriptif'=>'Description',
 	'des_documents'=>'@nb@ documents',
 	'des_files'=>'@nb@ documents',
@@ -78,7 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'media_audio' => 'Bandes sons',
 	'media_video' => 'S&eacute;quences',
 	'media_image' => 'Images',
-	'media_file' => 'Autres documents',
+	'media_file' => 'Autres',
 	
 	// P
 	'par_id' => 'ID',

@@ -41,7 +41,11 @@
 .onglets_simple ul li strong,.onglets_simple ul li a {display:block;float:#GET{left};padding:4px 7px;border:1px solid #GET{foncee};margin-#GET{left}:5px;background-color:#eee;background-position:center right;background-repeat:no-repeat;}
 .onglets_simple ul li strong,.onglets_simple ul li a:hover {background-color:#f8f7f3;}
 .onglets_simple ul li strong {border-bottom:1px solid #f8f7f3;color:#555;}
-
+/*
+.medias .image a { background-image: url(#CHEMIN{images/media-image-32.png});background-repeat:no-repeat;background-position:center #GET{right}; padding-#GET{right}: 40px;}
+.medias .audio a { background-image: url(#CHEMIN{images/media-audio-32.png});background-repeat:no-repeat;background-position:center #GET{right}; padding-#GET{right}: 40px;}
+.medias .video a { background-image: url(#CHEMIN{images/media-video-32.png});background-repeat:no-repeat;background-position:center #GET{right}; padding-#GET{right}: 40px;}
+*/
 .onglets_simple.second {font-size:0.9em;border:0;padding-#GET{left}:0;}
 .onglets_simple.second ul li strong,.onglets_simple.second ul li a {margin-#GET{left}:0px;margin-#GET{right}:5px;margin-bottom:5px;}
 .onglets_simple.second ul li strong {border:1px solid #GET{foncee};}
@@ -82,10 +86,11 @@ a.bouton_fermer {display:block;text-align:#GET{right};}
 .galerie.media-video h2 { background: url(#CHEMIN{images/media-video-32.png}) no-repeat center left; padding: 6px;padding-left: 40px;}
 
 .galerie table td.exif { background-repeat: no-repeat; background-position: top right; }
-.galerie table .media-image td.exif { background-image: url([(#CHEMIN{img_pack/photo-32.png}|image_nb|image_gamma{100}|extraire_attribut{src})]); }
-.galerie table .media-audio td.exif { background-image: url([(#CHEMIN{img_pack/audio-32.png}|image_nb|image_gamma{80}|extraire_attribut{src})]); }
-.galerie table .media-video td.exif { background-image: url([(#CHEMIN{img_pack/video-32.png}|image_nb|image_gamma{60}|extraire_attribut{src})]); }
-
+/*
+.galerie table .media-image td.exif { background-image: url([(#CHEMIN{images/media-image-32.png}|image_sepia|image_nb|image_alpha{60}|image_aplatir{png,f8f7f3}|extraire_attribut{src})]); }
+.galerie table .media-audio td.exif { background-image: url([(#CHEMIN{images/media-audio-32.png}|image_sepia|image_nb|image_alpha{60}|image_aplatir{png,f8f7f3}|extraire_attribut{src})]); }
+.galerie table .media-video td.exif { background-image: url([(#CHEMIN{images/media-video-32.png}|image_sepia|image_nb|image_alpha{60}|image_aplatir{png,f8f7f3}|extraire_attribut{src})]); }
+*/
 .spip_documents_legende {border:1px solid #GET{foncee};text-align:center;font-size:0.9em;margin:0 0 1em;}
 .spip_documents_legende dt {background:#GET{foncee};color:#fff;padding:5px 3px;font-weight:bold;}
 .spip_documents_legende dd {padding:3px 0;margin:0;}

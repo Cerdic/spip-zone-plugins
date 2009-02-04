@@ -81,4 +81,19 @@ function lien_objet($id,$type,$longueur=80,$connect=NULL){
 }
 
 
+function critere_DOCUMENTS_orphelins_dist($idb, &$boucles, $crit) {
+
+	$boucle = &$boucles[$idb];
+	$quoi = '@$Pile[0]["orphelins"]';
+	$cond = $crit->cond;
+	$not = $crit->not?"":"NOT";
+	
+	$select = sql_get_select("DISTINCT id_document","spip_documents_liens as oooo");
+	$where = "'".$boucle->id_table.".id_document $not IN ($select)'";
+	if ($cond)
+		$where = "($quoi)?$where:''";
+	
+	$boucle->where[]= $where;
+}
+
 ?>

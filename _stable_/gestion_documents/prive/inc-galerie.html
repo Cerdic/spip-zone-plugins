@@ -2,10 +2,10 @@
 #SET{self,#GET{self}|parametre_url{extension,''}}
 
 <div class='onglets_simple'>
-<ul>
+<ul class='medias'>
 [<li>(#GET{self}|parametre_url{media,''}|aoustrong{<:gestdoc:tous_les_medias:>,#ENV{media,''}|=={''},ajax})</li>]
 <BOUCLE_medias(DOCUMENTS){id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?}{statut==.*}{compteur types_documents, media}{media IN image,audio,video,file}>
-[<li>(#GET{self}|parametre_url{media,#MEDIA}|aoustrong{#VAL{gestdoc:media_}|concat{#MEDIA}|_T|concat{' (',#COMPTEUR{types_documents},')'},#ENV{media}|=={#MEDIA},ajax})</li>]
+[<li class='#MEDIA'>(#GET{self}|parametre_url{media,#MEDIA}|aoustrong{#VAL{gestdoc:media_}|concat{#MEDIA}|_T|concat{' (',#COMPTEUR{types_documents},')'},#ENV{media}|=={#MEDIA},ajax})</li>]
 </BOUCLE_medias>
 </ul>
 <div class='nettoyeur'></div>
@@ -29,8 +29,9 @@
 </ul>
 
 <ul class='brises'>
-[<li class='first'>(#GET{self}|parametre_url{brise,''}|aoustrong{<:gestdoc:documents_tous:>,#ENV{brise,0}|=={0},ajax})</li>]
-[<li>(#GET{self}|parametre_url{brise,1}|aoustrong{<:gestdoc:documents_brises:>,#ENV{brise,0}|=={1},ajax})</li>]
+[<li class='first'>(#GET{self}|parametre_url{brise|orphelins,''}|aoustrong{<:gestdoc:documents_tous:>,#ENV{brise,0}|non|et{#ENV{orphelins,0}|non},ajax})</li>]
+[<li>(#GET{self}|parametre_url{brise,''}|parametre_url{orphelins,1}|aoustrong{<:gestdoc:documents_orphelins:>,#ENV{orphelins,0}|=={1},ajax})</li>]
+[<li>(#GET{self}|parametre_url{brise,1}|parametre_url{orphelins,''}|aoustrong{<:gestdoc:documents_brises:>,#ENV{brise,0}|=={1},ajax})</li>]
 </ul>
 <div class='nettoyeur'></div>
 </div>
@@ -80,7 +81,7 @@
 		<th><:gestdoc:descriptif:></th>
 		<th></th>
 	</thead>
-	<BOUCLE_galerie(DOCUMENTS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?} {tri id_document,inverse}{media?}{extension?}{distant?}{brise?}{statut==#ENV{statut,.*}}{pagination 10}>
+	<BOUCLE_galerie(DOCUMENTS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?} {tri id_document,inverse}{media?}{extension?}{distant?}{brise?}{statut==#ENV{statut,.*}}{orphelins?}{pagination 10}>
 	<tr class="[(#ENV{media}|non)[ media-(#MEDIA)]]">
 	#SET{missing,''}
 		[(#EXTENSION|in_any{#ARRAY{0,gif,1,png,2,jpg}}|oui)
@@ -91,7 +92,7 @@
 		[(#DISTANT|=={oui}|non)#SET{missing,#FICHIER|file_exists|non}]
 		]
 		<td class='infos'>
-		[(#ENV{media}|non|et{#MEDIA|!={file}})[(#CHEMIN{images/media-#MEDIA|concat{-32.png}}|tag_img)]]
+		[(#ENV{media}|non|et{#MEDIA|!={file}})[(#CHEMIN{images/media-#MEDIA|concat{-32.png}}|tag_img|inserer_attribut{alt,#VAL{gestdoc:media_#MEDIA}|_T}|inserer_attribut{title,#VAL{gestdoc:media_#MEDIA}|_T})]]
 		[(#GET{missing}|oui)<img src='#CHEMIN{images/document-manquant-24.png}' width='22' height='22' alt='<:gestdoc:fichier_manquant:>' />]
 		[(#DISTANT|=={oui}|oui)<img src='#CHEMIN{images/document-distant-24.png}' width='22' height='22' alt='<:gestdoc:fichier_distant:>' />]
 		</td>
