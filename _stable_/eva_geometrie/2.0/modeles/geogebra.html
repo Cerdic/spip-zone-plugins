@@ -7,7 +7,8 @@
 ******************************************************************/
 ]
 <BOUCLE_freeminddoc(DOCUMENTS){id_document=#ENV**{doc}}{mode=document}{extension==ggb}>
-	<applet name="ggbApplet" code="geogebra.GeoGebraApplet" codebase="./" archive="#EVAL{_DIR_PLUGIN_EVA_GEOMETRIE}scripts/geogebra.jar" 
+	<applet name="ggbApplet" code="geogebra.GeoGebraApplet" codebase="./"
+	[(#ENV**{dev}|?{'archive="http://www.geogebra.org/webstart/dev/geogebra.jar"','archive="http://www.geogebra.org/webstart/geogebra.jar"'})]
 	width="[(#ENV**{largeur}|?{#ENV**{largeur},"100%"})]"
 	height="[(#ENV**{hauteur}|?{#ENV**{hauteur},"500"})]">
 	<param name="filename" value="#URL_DOCUMENT">
