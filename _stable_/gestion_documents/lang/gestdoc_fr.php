@@ -10,6 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_image'=>'Aucune image',
 	'aucun_audio'=>'Aucune bande son',
 	'aucun_video'=>'Aucune s&eacute;quence',
+	'aucune_utilisation'=>'Ce document n\'est pas utilis&eacute;',
+
 	
 	// B
 	'bouton_copier_local'=>'Copier dans le site',

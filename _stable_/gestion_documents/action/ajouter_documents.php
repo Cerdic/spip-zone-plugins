@@ -17,17 +17,17 @@ include_spip('inc/documents');
 include_spip('inc/ajouter_documents'); // compat core
 include_spip('inc/choisir_mode_document'); // compat core
 
-function action_ajouter_documents_dist($id_document, $files, $objet, $id_objet, $mode, &$documents_actifs){
+function action_ajouter_documents_dist($id_document, $files, $objet, $id_objet, $mode){
 	$ajouter_un_document = charger_fonction('ajouter_un_document','action');
 	$ajoutes = array();
 
 	// on ne peut mettre qu'un seul document a la place d'un autre ou en vignette d'un autre
 	if (intval($id_document)){
-		$ajoutes[] = $ajouter_un_document($id_document, reset($files), $objet, $id_objet, $mode, $documents_actifs);
+		$ajoutes[] = $ajouter_un_document($id_document, reset($files), $objet, $id_objet, $mode);
 	}
 	else
 		foreach($files as $file){
-			$ajoutes[] = $ajouter_un_document('new', $file, $objet, $id_objet, $mode, $documents_actifs);
+			$ajoutes[] = $ajouter_un_document('new', $file, $objet, $id_objet, $mode);
 		}
 	return $ajoutes;
 }
@@ -56,7 +56,7 @@ function action_ajouter_documents_dist($id_document, $files, $objet, $id_objet, 
  * @return unknown
  */
 // http://doc.spip.org/@ajouter_un_document
-function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet, $mode, &$documents_actifs) {
+function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet, $mode) {
 	
 	$source = $file['tmp_name'];
 	$nom_envoye = $file['name'];
@@ -133,10 +133,8 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 		$champs['id_parents'][] = "$objet|$id_objet";
 
 	// "mettre a jour un document" si on lui
-	// passe "mode=document" et "id_document=.."
-	if (($id_document=intval($id_document)) AND $mode!='vignette'){
-		$id = $id_document;
-		$id_document = 0;
+	// passe un id_document
+	if ($id_document=intval($id_document)){
 		unset($champs['titre']); // garder le titre d'origine
 		unset($champs['date']); // garder la date d'origine
 		unset($champs['descriptif']); // garder la desc d'origine
@@ -147,23 +145,14 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 	include_spip('action/editer_document');
 	// Installer le document dans la base
 	// attention piege semantique : les images s'installent en mode 'vignette'
-	if (!$id){
-		$id = insert_document();
-		spip_log ("ajout du document $source $nom_envoye  (M '$mode' T '$objet' L '$id_objet' D '$id')");
+	if (!$id_document){
+		$id_document = insert_document();
+		spip_log ("ajout du document $source $nom_envoye  (M '$mode' T '$objet' L '$id_objet' D '$id_document')");
 	}
 	
-	document_set($id,$champs);
+	document_set($id_document,$champs);
 
-	// si on vient de charger une vignette, reviser le document concerne
-	if ($id_document) {
-		revision_document($id_document,array("id_vignette" => $id, "mode" => 'document'));
-		// pour que le retour vers ecrire/ active le bon doc.
-		$documents_actifs[$champs['fichier']] = $id_document;
-	}
-	else 
-		$documents_actifs[$champs['fichier']] = $id;
-
-	return $id ;
+	return $id_document ;
 }
 
 

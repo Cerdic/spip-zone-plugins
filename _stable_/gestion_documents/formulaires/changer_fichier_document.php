@@ -18,6 +18,7 @@ function formulaires_changer_fichier_document_charger_dist($id_document){
 		return array('editable'=>false);
 		
 	$valeurs['_hidden'] = "<input name='id_document' value='$id_document' type='hidden' />";
+	$valeurs['mode'] = 'choix';
 	
 	return $valeurs;
 }

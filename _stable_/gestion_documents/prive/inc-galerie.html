@@ -123,8 +123,9 @@
 			</B_liens>
 		</td>
 		<td class="descriptif">
-			[<strong class="#EDIT{titre}">(#TITRE|sinon{<i>sans titre</i>})</strong>]
-			[<div class="#EDIT{descriptif}">(#DESCRIPTIF|sinon{...})</div>]
+			[<strong class="titre #EDIT{titre}">(#TITRE|sinon{#VAL{<i>}|concat{<:info_sans_titre:>,'</i>'}})</strong>]
+			[<div class="descriptif #EDIT{descriptif}">(#DESCRIPTIF)</div>]
+			[<p class="credits #EDIT{credits}">(#CREDITS)</p>]
 		</td>
 		<td>[(#AUTORISER{modifier,document,#ID_DOCUMENT})&#91;<a href='#URL_ECRIRE{documents_edit,id_document=#ID_DOCUMENT}'><:bouton_modifier:></a>&#93;]
 		[<span class='supprimer'>(#GET{supprimer}|et{#AUTORISER{supprimer,document,#ID_DOCUMENT}})&#91;<a href='#URL_ACTION_AUTEUR{supprimer_document,#ID_DOCUMENT,#SELF}' class='ajax'><:gestdoc:bouton_supprimer:></a>&#93;</span>]
