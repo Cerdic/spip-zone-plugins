@@ -1,0 +1,11 @@
+<script type="text/javascript">
+var so = new SWFObject("#CHEMIN{flash/tagcloud.swf}", "#CONFIG{spip-cumulus/titre}", "[(#CONFIG{spip-cumulus/largeur,220})]", "[(#CONFIG{spip-cumulus/hauteur,220})]", "7", "[(#CONFIG{spip-cumulus/couleur_de_fond,#FFFFFF})]");
+so.addParam("wmode", "transparent");
+so. addVariable("distr", "[(#CONFIG{spip-cumulus/distance_egale_sur_la_sphere,true})]");
+so.addVariable("tcolor", "0x[(#CONFIG{spip-cumulus/couleur_des_tags,EEEEEE})]");
+so.addVariable("tcolor2", "0x[(#CONFIG{spip-cumulus/couleur_des_tags2,EEEEEE})]");
+so.addVariable("hicolor", "0x[(#CONFIG{spip-cumulus/couleur_high,777777})]");
+so.addVariable("tspeed", "[(#CONFIG{spip-cumulus/vitesse,100})]");
+so.addVariable("tagcloud", "<tags><BOUCLE_LesMotsCles(MOTS)><a href='#URL_MOT' style='font-size:9pt;'>#TITRE<a></BOUCLE_LesMotsCles></tags>");
+so.write("flashcontent");
+</script>

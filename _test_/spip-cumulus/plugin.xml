@@ -1,0 +1,35 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	SPIP Cumulus
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	Sebastien Denooz 
+_ &#169; 2006 - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version> <!-- Version du plugin -->
+	0.1
+	</version>
+	<icon>images/spip-cumulus-32.png</icon>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	test
+	</etat>
+	<description>
+	Portage du [plugin wordpress "wp-cumulus"->http://wordpress.org/extend/plugins/wp-cumulus/] en spip. Fonctionne via des mod&egrave;les.
+	</description>
+
+	<!-- prefixe des fonctions, filtres et fichers de votre plugin : 
+		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : template_ma_fonction() par exemple)
+		C'est par ailleurs conseille pour les noms de fichier
+		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
+		-->
+	<prefix> 
+	spipcumulus
+	</prefix>
+	
+	<!-- Boutons, SPIP >= 1.9.3 [9984] (spip_version_code >= 1.9261)
+	     Avant cette version de spip, utiliser les pipelines
+	     ajouter_boutons ou ajouter_onglets
+	     -->
+	<!-- Ajoute un bouton dans le menu principal -->
+	<necessite id="SPIP" version="[1.9.2;]" /> <!-- voir http://doc.spip.org/@Plugin-xml#necessite -->
+</plugin>

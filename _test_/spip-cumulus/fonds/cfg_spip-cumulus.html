@@ -1,0 +1,45 @@
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+	<!-- descriptif=
+	<h4>Spip Cumulus</h4>
+	Configuration de l'affichage par default de spip-cumulus.<br />
+	<br /><a href="#" class="spip_out">Documentation</a>
+	-->
+	<!-- titre=SPIP-cumulus -->
+	<fieldset>
+		<legend>Génrale</legend>
+		<label>Titre :</label><input type="text" name="titre"  value="[(#CONFIG{spip-cumulus/titre,tagcloud})]" />
+		<br />
+		<label>Utiliser le mode transparent</label>
+		<select name="transparence">
+			<option value="oui" [(#CONFIG{spip-cumulus/transparence,oui}|=={oui}|?{SELECTED="SELECTED"})] >oui</option>
+			<option value="non" [(#CONFIG{spip-cumulus/transparence,oui}|=={non}|?{SELECTED="SELECTED"})] >non</option>
+		</select>
+		<br />
+		<label>Disposer les &eacute;l&eacute;ments &agrave; distance &eacute;gale sur la sphere</label>
+		<select name="distance_egale_sur_la_sphere">
+			<option value="true" [(#CONFIG{spip-cumulus/distance_egale_sur_la_sphere,true}|=={true}|?{SELECTED="SELECTED"})] >oui</option>
+			<option value="false" [(#CONFIG{spip-cumulus/distance_egale_sur_la_sphere,false}|=={false}|?{SELECTED="SELECTED"})] >non</option>
+		</select>
+		<br />
+		<label>Vitesse (en %) :</label><input type="text" name="vitesse"  value="[(#CONFIG{spip-cumulus/vitesse,100})]" />
+	</fieldset>
+	<fieldset>
+		<legend>Taille</legend>
+		<label>Largeur :</label><input type="text" name="largeur"  value="[(#CONFIG{spip-cumulus/largeur,220})]" /><br />
+		<label>Hauteur :</label><input type="text" name="hauteur"  value="[(#CONFIG{spip-cumulus/hauteur,220})]" /><br />
+		<label>Taille de la police de caract&egrave;re :</label><input type="text" name="fontsize"  value="[(#CONFIG{spip-cumulus/fontsize,8})]" />pt<br />
+	</fieldset>
+	<fieldset>
+		<legend>Couleurs</legend>
+		<label>Couleur des tags :</label><input type="text" name="couleur_des_tags"  value="[(#CONFIG{spip-cumulus/couleur_des_tags,EEEEEE})]" /><br />
+		<label>Couleur utilis&eacute;e pour le d&eacute;grd&eacute; :</label><input type="text" name="couleur_des_tags2"  value="[(#CONFIG{spip-cumulus/couleur_des_tags2,EEEEEE})]" /><br />
+		<label>Couleur du tag lors du survol de la souris :</label><input type="text" name="couleur_high"  value="[(#CONFIG{spip-cumulus/couleur_high,777777})]" /><br />
+		<br />
+		<label>Couleur de fond :</label><input type="text" name="couleur_de_fond"  value="[(#CONFIG{spip-cumulus/couleur_de_fond,#FFFFFF})]" /><br />
+	</fieldset>
+
+	<input type="submit" name="_cfg_ok" value="<:OK:>" />
+	<input type="reset" value="<:Reset:>" />
+	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
