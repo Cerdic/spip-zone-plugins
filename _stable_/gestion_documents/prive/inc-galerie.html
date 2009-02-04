@@ -58,7 +58,7 @@
 
 <div class="galerie[ media-(#ENV{media,''})]">
 	<B_galerie>
-	<h2>[(#GRAND_TOTAL|gestdoc_affiche_un_ou_plusieurs{#VAL{gestdoc:un_}|concat{#ENV{media,document}},#VAL{gestdoc:des_}|concat{#ENV{media,document},s}})]</h2>
+	<h2>[(#GRAND_TOTAL|affiche_un_ou_plusieurs{#VAL{gestdoc:un_}|concat{#ENV{media,document}},#VAL{gestdoc:des_}|concat{#ENV{media,document},s}})]</h2>
 	<div class='pagination tri'>
 		[(#TRI{'<',#CHEMIN{img_pack/tri_asc-16.png}|tag_img{<:gestdoc:par_tri_croissant:>}}) |]
 		[(#TRI{'>',#CHEMIN{img_pack/tri_desc-16.png}|tag_img{<:gestdoc:par_tri_decroissant:>}}) |]
@@ -91,7 +91,7 @@
 		[(#DISTANT|=={oui}|non)#SET{missing,#FICHIER|file_exists|non}]
 		]
 		<td class='infos'>
-		[(#ENV{media}|non|et{#MEDIA|!={file}})<img src='#CHEMIN{img_pack/#MEDIA|replace{image,photo}|concat{-22.png}}' width='22' height='22' alt='<:gestdoc:fichier_manquant:>' />]
+		[(#ENV{media}|non|et{#MEDIA|!={file}})[(#CHEMIN{images/media-#MEDIA|concat{-32.png}}|tag_img)]]
 		[(#GET{missing}|oui)<img src='#CHEMIN{images/document-manquant-24.png}' width='22' height='22' alt='<:gestdoc:fichier_manquant:>' />]
 		[(#DISTANT|=={oui}|oui)<img src='#CHEMIN{images/document-distant-24.png}' width='22' height='22' alt='<:gestdoc:fichier_distant:>' />]
 		</td>
@@ -112,7 +112,7 @@
 			#SET{supprimer,' '}
 			<B_liens>
 			[(#TOTAL_BOUCLE|>{1}|oui)
-			<a href='#' onclick="jQuery(this).next().show();$(this).hide();return false;">[(#TOTAL_BOUCLE|gestdoc_affiche_un_ou_plusieurs{gestdoc:une_utilisation,gestdoc:des_utilisations})]</a><div style='display: none;'>
+			<a href='#' onclick="jQuery(this).next().show();$(this).hide();return false;">[(#TOTAL_BOUCLE|affiche_un_ou_plusieurs{gestdoc:une_utilisation,gestdoc:des_utilisations})]</a><div style='display: none;'>
 			]
 			<BOUCLE_liens(DOCUMENTS_LIENS){id_document}{'<br />'}>
 			[(#ID_OBJET|lien_objet{#OBJET})]
