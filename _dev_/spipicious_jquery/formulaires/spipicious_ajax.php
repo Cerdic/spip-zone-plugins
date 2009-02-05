@@ -31,7 +31,7 @@ function formulaires_spipicious_ajax_charger($id_objet,$type='article') {
 
 function formulaires_spipicious_ajax_traiter($id_objet,$type) {
 	global $visiteur_session;
-	if(!function_exists('sql_get_fetsel')){
+	if(!function_exists('sql_getfetsel')){
 		include_spip('base/abstract_sql');	
 	}
 	$autorise = lire_config('spipicious/people');

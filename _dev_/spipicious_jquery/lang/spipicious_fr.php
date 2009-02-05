@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tag_ajoute' => 'Vous avez ajout&eacute; un tag:<br />@name@',
 	'tags_ajoutes' => 'Vous avez ajout&eacute; plusieurs tags:<br />@name@',
 	'tag_deja_present' => 'Vous aviez d&eacute;j&agrave; ajout&eacute; ce tag.',
+	'tags' => 'Tags :',
 
 	// V
 	'vos_tags' => 'Vos tags (modification)',  
