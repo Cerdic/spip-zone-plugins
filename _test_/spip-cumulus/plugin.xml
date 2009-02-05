@@ -16,7 +16,7 @@ _ &#169; 2006 - Distribu&eacute; sous licence GPL
 	<description>
 	Portage du [plugin wordpress "wp-cumulus"->http://wordpress.org/extend/plugins/wp-cumulus/] en spip. Fonctionne via des mod&egrave;les.
 	_ 
-	Une page de demo pour votre site est disponible [ici->?page=cumulmus&esc;var_mode=recalcul]
+	Une page de demo pour votre site est disponible [ici->?page=cumulmus&amp;var_mode=recalcul]
 	</description>
 
 	<!-- prefixe des fonctions, filtres et fichers de votre plugin : 
