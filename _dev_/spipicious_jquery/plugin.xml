@@ -2,12 +2,10 @@
 	<nom>spip.icio.us</nom>
 	<auteur>[kent1->http://kent1.sklunk.net]
 _ R&#233;utilisation de code du plugin r&#233;alis&#233; par [erational->http://www.erational.org]
-_ &#169; 2007 - Licence GPL 
+_ &#169; 2007-2009 - Licence GPL 
 	</auteur>
 	<version>0.4</version>
-	<etat>dev</etat>
-	<description>
-<multi>
+	<etat>test<multi>
 [fr]Permet aux visiteurs authentifi&#233;s d'ajouter des tags (mots-cl&#233;s) sur les articles de SPIP.
 _ N&#233;cessite le plugin "s&#233;lecteur g&#233;n&#233;rique"
 _ N&#233;cessite le plugin CFG
