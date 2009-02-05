@@ -20,9 +20,15 @@ function action_supprimer_document_dist($id_document=0) {
 	}
 	if (!autoriser('supprimer','document',$id_document))
 		return false;
-		
+
+	// si c'etait une vignette, modifier le document source !
+	if ($source = sql_getfetsel('id_document', 'spip_documents', 'id_vignette='.intval($id_document))){
+		include_spip('action/editer_document');
+		document_set($source,array("id_vignette" => 0));
+	}
+
 	include_spip('inc/documents');
-	if (!$doc = sql_fetsel('*', 'spip_documents', 'id_document='.$id_document))
+	if (!$doc = sql_fetsel('*', 'spip_documents', 'id_document='.intval($id_document)))
 		return false;
 
 	spip_log("Suppression du document $id_document (".$doc['fichier'].")");
@@ -32,17 +38,22 @@ function action_supprimer_document_dist($id_document=0) {
 		action_supprimer_document_dist($doc['id_vignette']);
 		sql_delete('spip_documents_liens', 'id_document='.$doc['id_vignette']);
 	}
+	
+	// dereferencer dans la base
+	sql_delete('spip_documents', 'id_document='.intval($id_document));
 
+	
 	// Supprimer le fichier si le doc est local,
 	// et la copie locale si le doc est distant
 	if ($doc['distant'] == 'oui') {
 		include_spip('inc/distant');
-		if ($local = copie_locale($doc['fichier'],'test'))
+		if ($local = _DIR_RACINE . copie_locale($doc['fichier'],'test'))
 			spip_unlink($local);
 	}
-	else spip_unlink(get_spip_doc($doc['fichier']));
+	else
+		spip_unlink(get_spip_doc($doc['fichier']));
 
-	sql_delete('spip_documents', 'id_document='.$id_document);
+
 }
 
 ?>

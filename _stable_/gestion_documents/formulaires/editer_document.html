@@ -10,7 +10,8 @@
 	  <ul>
 	  	<li>
 		  	<label><:gestdoc:label_apercu:></label>
-		  	[(#MODELE{doc,id_document,hauteur=200,largeur=400}|extraire_balise{a})]
+		  	[(#ENV{apercu}|oui)[<a href='#ENV{apercu}'>(#ENV{apercu}|image_reduire{300,200})</a>]]
+		  	[(#ENV{apercu}|non)[(#MODELE{doc,id_document,hauteur=200,largeur=300}|extraire_balise{a})]]
 	  	</li>
 	  	<li>
 		  	<label><:gestdoc:label_caracteristiques:></label>

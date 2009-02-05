@@ -36,6 +36,9 @@ function formulaires_editer_document_charger_dist($id_document='new', $id_parent
 	
 	// type du document
 	$valeurs['type_document'] = sql_getfetsel('titre as type_document','spip_types_documents','extension='.sql_quote($valeurs['extension']));
+	if (in_array($valeurs['extension'],array('jpg','gif','png'))){
+		$valeurs['apercu'] = get_spip_doc($valeurs['fichier']);
+	}
 	return $valeurs;
 }
 

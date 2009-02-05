@@ -15,10 +15,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function formulaires_illustrer_document_charger_dist($id_document){
 	$valeurs = sql_fetsel('id_document,mode,id_vignette,extension','spip_documents','id_document='.intval($id_document));
 	if (!$valeurs OR in_array($valeurs['extension'],array('jpg','gif','png')))
-		return array('editable'=>false);
-		
+		return array('editable'=>false,'id'=>$id_document);
+
+	$valeurs['id'] = $id_document;
 	$valeurs['_hidden'] = "<input name='id_document' value='$id_document' type='hidden' />";
 	$valeurs['mode'] = 'vignette'; // pour les id dans le dom
+	$vignette = sql_fetsel('fichier,largeur,hauteur','spip_documents','id_document='.$valeurs['id_vignette']);
+	$valeurs['vignette'] = get_spip_doc($vignette['fichier']);
+	$valeurs['hauteur'] = $vignette['hauteur'];
+	$valeurs['largeur'] = $vignette['largeur'];
 	
 	return $valeurs;
 }
@@ -38,12 +43,12 @@ function formulaires_illustrer_document_traiter_dist($id_document){
 
 	$ajoute = action_ajouter_documents_dist($id_vignette,$files,'',0,'vignette');
 
-	$res = array();
+	$res = array('editable'=>true);
 	
 	if (is_int(reset($ajoute))){
 		$id_vignette = reset($ajoute);
 		include_spip('action/editer_document');
-		revision_document($id_document,array("id_vignette" => $id_vignette,'mode'=>'document'));
+		document_set($id_document,array("id_vignette" => $id_vignette,'mode'=>'document'));
 		$res['message_ok'] = _T('gestdoc:document_installe_succes');
 	}
 	else 

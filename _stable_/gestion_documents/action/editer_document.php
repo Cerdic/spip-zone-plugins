@@ -82,7 +82,7 @@ function document_set ($id_document, $c=false) {
 	$champs = array();
 	foreach (array(
 		'titre', 'descriptif', 'date', 'taille', 'largeur','hauteur','mode','credits',
-		'fichier','distant','extension',
+		'fichier','distant','extension', 'id_vignette',
 	  ) as $champ)
 		if (($a = _request($champ,$c)) !== null)
 			$champs[$champ] = $a;

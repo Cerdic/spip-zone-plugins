@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_audio'=>'Aucune bande son',
 	'aucun_video'=>'Aucune s&eacute;quence',
 	'aucune_utilisation'=>'Ce document n\'est pas utilis&eacute;',
+	'aucune_vignette' => 'Aucune vignette',
 
 	
 	// B
@@ -73,6 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'logo' => 'Logo',
 	'label_id_parents' => 'Ce document est li&eacute; &agrave;',
 	'label_fichier' => 'Fichier',
+	'label_fichier_vignette' => 'Vignette',
 	'label_caracteristiques' => 'Caract&eacute;ristiques',
 	'label_apercu' => 'Aper&ccedil;u',
 	'label_credits' => 'Cr&eacute;dits',

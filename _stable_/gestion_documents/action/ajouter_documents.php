@@ -63,6 +63,12 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 	$titrer = isset($file['titrer'])?$file['titrer']:false;
 
 	include_spip('inc/modifier');
+	if (isset($file['distant']) AND $file['distant'] AND $mode=='vignette') {
+		include_spip('inc/distant');
+		$file['tmp_name'] = _DIR_RACINE . copie_locale($source);
+		$source = $file['tmp_name'];
+		unset($file['distant']);
+	}
 
 	// Documents distants : pas trop de verifications bloquantes, mais un test
 	// via une requete HEAD pour savoir si la ressource existe (non 404), si le
