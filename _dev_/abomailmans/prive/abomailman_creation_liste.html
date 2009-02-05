@@ -1,0 +1,24 @@
+#CACHE{0}
+<div class='cadre-formulaire-editer'>
+	<div class="entete-formulaire">
+		#ENV**{icone_retour}
+		<BOUCLE_liste(ABOMAILMANS){id_abomailman}>
+			<h1>[(#TITRE|supprimer_numero)]</h1>
+			[<div style="border: 1px dashed #aaaaaa;">
+				<p><strong class='verdana2'><:info_descriptif:></strong></p>
+				(#DESCRIPTIF)
+			</div>]
+			[<div style="border: 1px dashed #aaaaaa;">
+				<p><strong class='verdana2'><:abomailmans:emailliste_abomailman:></strong></p>
+				<p>(#EMAIL)</p>
+			</div>]
+			[<div style="border: 1px dashed #aaaaaa;">
+				<p><strong class='verdana2'><:abomailmans:emailliste_abosympa:></strong></p>
+				<p>(#EMAIL_SYMPA)</p>
+			</div>]
+		</BOUCLE_liste>
+		<h1><:abomailmans:icone_ajouter_liste:></h1>
+		<//B_liste>
+	</div>
+	#FORMULAIRE_ABOMAILMAN_CREATION_LISTE{#ENV{id_abomailman}}
+</div>

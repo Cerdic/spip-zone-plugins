@@ -11,50 +11,34 @@
 
 include_spip('inc/abomailmans');
 
-
 function exec_abomailmans_tous(){
 	include_spip("inc/presentation");
+	global $couleur_claire;
 	
-	_abomailmans_install();
-	
-	
-	debut_page(_T("abomailmans:les_listes_mailmans"), "documents", "abomailmans");
-	debut_gauche();
-	debut_boite_info();
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T("abomailmans:les_listes_mailmans"), "documents", "abomailmans", "");
+	echo debut_gauche("",true);
+	echo debut_boite_info(true);
 	echo _T("abomailmans:les_listes_mailmans");
-	fin_boite_info();
+	echo fin_boite_info(true);
 	
 	echo "<br/>";
-	$result = spip_query("SELECT id_abomailman FROM spip_abomailmans");
-	if (spip_num_rows($result)) {
-		debut_boite_info();
-			icone_horizontale (_T("abomailmans:icone_envoyer_mail_liste"), generer_url_ecrire("abomailmans_envoyer",""), "../"._DIR_PLUGIN_ABOMAILMANS."/img_pack/configure_mail.png", "");
-		fin_boite_info();
+	$result = sql_count(sql_select("id_abomailman","spip_abomailmans"));
+	if ($result>0) {
+		echo debut_boite_info(true);
+			echo icone_horizontale(_T("abomailmans:icone_envoyer_mail_liste"), generer_url_ecrire("abomailmans_envoyer",""),find_in_path("img_pack/configure_mail.png"), "",false);
+		echo fin_boite_info(true);
 	}
-	debut_droite();
+	echo debut_droite("",true);
 	
-	abomailmans_afficher_abomailmans(_T("abomailmans:les_listes_mailmans"),
-		array(
-		"SELECT"=>"abomailmans.*",
-		"FROM" => "spip_abomailmans AS abomailmans",
-		"JOIN" => "",
-		"WHERE" => "",
-		"GROUP BY" => "abomailmans.id_abomailman",
-		"ORDER BY" => "titre"));
+	// L'icone de creation de liste
+	$link=generer_url_ecrire('abomailmans_edit', 'new=oui');
+	$link=parametre_url($link,'retour',str_replace('&amp;', '&', self()));
+	$icone = icone(_T("abomailmans:icone_ajouter_liste"), $link, _DIR_PLUGIN_ABOMAILMANS. "/img_pack/mailman.gif", "creer.gif");
 	
-	echo "<br />\n";
-	
-	if (abomailmans_abomailman_editable()) {
-		echo "<div align='right'>";
-		$link=generer_url_ecrire('abomailmans_edit', 'new=oui');
-		$link=parametre_url($link,'retour',str_replace('&amp;', '&', self()));
-		icone(_T("abomailmans:icone_ajouter_liste"), $link, "../"._DIR_PLUGIN_ABOMAILMANS. "/img_pack/mailman.gif", "creer.gif");
-		echo "</div>";
-	}
-	
-	
-	
-	fin_page();
+	echo recuperer_fond('prive/abomailman_afficher_abomailmans',array("couleur_claire"=>$couleur_claire,'icone' => $icone));
+
+	echo fin_gauche(), fin_page();
 }
 
 ?>

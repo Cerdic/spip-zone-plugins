@@ -8,14 +8,14 @@
 */
 
 $spip_abomailmans = array(
-	"id_abomailman" 		=> "bigint(21) NOT NULL",
+	"id_abomailman" => "bigint(21) NOT NULL",
 	"titre" 		=> "varchar(255) NOT NULL",
 	"descriptif" 	=> "text",
 	"email"			=> "varchar(255)",
 	"maj" 			=> "TIMESTAMP",
 	"email_sympa"   => "varchar(255)",
 	"desactive"     => "tinyint(4) NOT NULL default '0'"
-	);
+);
 
 $spip_abomailmans_key = array(
 	"PRIMARY KEY" => "id_abomailman");
@@ -25,11 +25,8 @@ $tables_principales['spip_abomailmans'] = array(
 	'field' => &$spip_abomailmans,
 	'key' => &$spip_abomailmans_key);
 
-
-
 global $table_des_tables;
 $table_des_tables['abomailmans']='abomailmans';
-
 
 //
 // <BOUCLE(ABONNEMENTSMAILMANS)>

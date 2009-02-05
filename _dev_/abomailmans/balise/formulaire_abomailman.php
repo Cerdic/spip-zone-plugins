@@ -59,14 +59,15 @@ function balise_FORMULAIRE_ABOMAILMAN_dyn($id_abomailman) {
 
             // 2eme cas : c'est une liste SYMPA (présence de deux @ à suivre)
 			else {
+				spip_log("on s'abonne à sympa","abomailmans");
 			    $temp = explode ("@@", $liste[1]);
 			    $email_liste_sympa = $temp[1];
 			    $sympa_join = $temp[0];
 			    $temp2 = explode ("@", $email_liste_sympa);
 			    $proprio_liste = $temp2[0] . '-request@' . $temp2[1];
 			    $objet = (empty($abonnement)) ? 'UNSUBSCRIBE' : 'SUBSCRIBE';
-                $sujet = $objet . " " . $email_liste_sympa . ' ';
-                $sujet .= (empty($desabonnement)) ? $nom : '';
+              		  $sujet = $objet . " " . $email_liste_sympa . ' ';
+               		 $sujet .= (empty($desabonnement)) ? $nom : '';
                 if (abomailman_mail ($nom, $email, $sympa_join, $sympa_join, $sujet)) {
                     $liste_confirme  .= " <b>". $email_liste_sympa ."</b><br>";
                 }

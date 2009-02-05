@@ -10,12 +10,6 @@
 */
 
 
-	function _abomailmans_install(){
-		if ($GLOBALS['spip_version_code']<1.9204){
-			include_spip('base/abomailmans_upgrade');
-			abomailmans_install('install');
-		}
-	}
 	
 	// Fonction utilitaires
 	function abomailmans_abomailman_editable($id_abomailman = 0) {
@@ -25,6 +19,7 @@
 	
 	function abomailmans_abomailman_administrable($id_abomailman = 0) {
 		global $connect_statut;
+		spip_log('connect_statut ='.$connect_statut);
 		return $connect_statut == '0minirezo';
 	}
 
@@ -51,11 +46,11 @@
 		$tmp_var = substr(md5($cpt), 0, 4);
 
 		if (!$group){
-			$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $cpt"));
+			$cpt = sql_fetch(sql_select("COUNT(*) AS n","$from$join","$where"));
 			if (! ($cpt = $cpt['n'])) return $tous_id ;
 		}
 		else
-			$cpt = spip_num_rows(spip_query("SELECT $select FROM $cpt"));
+			$cpt = sql_count(sql_select("$select","$from$join$group","$where"));
 		if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
 	
 		$nb_aff = 1.5 * _TRANCHES;
@@ -63,10 +58,10 @@
 	
 		if ($cpt > $nb_aff) {
 			$nb_aff = (_TRANCHES); 
-			$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
+			//$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
 		}
 		
-		if (!$icone) $icone = "../"._DIR_PLUGIN_ABOMAILMANS."/img_pack/mailman.gif";
+		if (!$icone) $icone = find_in_path("img_pack/mailman.gif");
 		
 		if ($cpt) {
 			if ($titre_table) echo "<div style='height: 12px;'></div>";
@@ -76,14 +71,14 @@
 	
 			echo $tranches;
 	
-			$result = spip_query("SELECT $select FROM $from$join$where$group$order LIMIT $deb_aff, $nb_aff");
-			$num_rows = spip_num_rows($result);
+			$result = sql_select("$select","$from$join$group","$where$order LIMIT $deb_aff, $nb_aff");
+			$num_rows = sql_count($result);
 	
 			$ifond = 0;
 			$premier = true;
 			
 			$compteur_liste = 0;
-			while ($row = spip_fetch_array($result)) {
+			while ($row = sql_fetch($result)) {
 				$vals = '';
 				$id_abomailman = $row['id_abomailman'];
 				$reponses = $row['reponses'];
@@ -93,6 +88,7 @@
 
 				$retour = parametre_url(self(),'duplique_chart','');
 				$link = generer_url_ecrire('abomailmans_edit',"id_abomailman=$id_abomailman&retour=".urlencode($retour));
+				
 				if ($reponses) {
 					$puce = 'puce-verte-breve.gif';
 				}
@@ -127,7 +123,7 @@
 
 				$table[] = $vals;
 			}
-			spip_free_result($result);
+			//spip_free_result($result);
 			
 			$largeurs = array('','','','','');
 			$styles = array('arial11', 'arial11', 'arial1', 'arial1','arial1');
@@ -137,7 +133,6 @@
 		}
 		return $tous_id;
 	}
-
 
 //* Envoi de mail via Mailman
 	function abomailman_mail ($from_nom, $from_email, $to_nom, $to_email, $subject="", $body="", $html="", $charset="") {	
@@ -158,6 +153,36 @@
 		}
 	}
 
+
+	function abomailman_http_build_query($data,$prefix=null,$sep='',$key=''){
+		if(!function_exists('http_build_query')) {
+		    function http_build_query($data,$prefix=null,$sep='',$key='') {
+		        $ret = array();
+		            foreach((array)$data as $k => $v) {
+		                $k    = urlencode($k);
+		                if(is_int($k) && $prefix != null) {
+		                    $k    = $prefix.$k;
+		                };
+		                if(!empty($key)) {
+		                    $k    = $key."[".$k."]";
+		                };
+		
+		                if(is_array($v) || is_object($v)) {
+		                    array_push($ret,http_build_query($v,"",$sep,$k));
+		                }
+		                else {
+		                    array_push($ret,$k."=".urlencode($v));
+		                };
+		            };
+		
+		        if(empty($sep)) {
+		            $sep = ini_get("arg_separator.output");
+		        };
+		        return implode($sep, $ret);
+		    };
+		};
+		return http_build_query($data);
+	}
 
 // Afficher l'arbo
 function  abomailman_arbo_rubriques($id_rubrique,  $rslt_id_rubrique="") {

@@ -7,22 +7,22 @@
 ?>
 [(#ENV**{message})]
 <B_listes>
-	<form action="#SELF" method="post"  name="abomailman_listes" id="abomailmansListes">
+	<form action="#SELF" method="post" id="abomailmansListes">
 		<fieldset>
 			<legend><b>Abonnement aux listes de <br />diffusion et de discussions</b></legend>
 				<label for="nom"><:abomailmans:nom:><br />
 					<input name="nom" id="nom" type="text" class="inp" /><br />
 				</label>
 				<br />
-				<label for="email"><:abomailmans:email_abonnement:><br />
-					<input name="email" id="email" type="text" class="inp" />
+				<label for="email_listes"><:abomailmans:email_abonnement:><br />
+					<input name="email" id="email_listes" type="text" class="inp" />
 				</label><br />
 				<BOUCLE_listes(ABOMAILMANS){id_abomailman ?}{desactive=0}>
 					<br />
                     <label>
                         <input name="listes[]" type="checkbox" value="[(#EMAIL_SYMPA|?{[(#TITRE)]@@@[(#EMAIL_SYMPA)]@@[(#EMAIL|abosympa_checkbox{#TOTAL_BOUCLE})]" />, [(#TITRE)]@@@[(#EMAIL|abomailman_checkbox{#TOTAL_BOUCLE})]" />})]
                         <b>#TITRE</b><br />
-					    [<i>(#DESCRIPTIF)</i><br />]
+					    [<i>(#DESCRIPTIF|PtoBR)</i><br />]
 					</label>
 				</BOUCLE_listes><br /><br />
 				<input name="abonnement" type="submit" value="<:abomailmans:btn_abonnement:>" class="inp" />
