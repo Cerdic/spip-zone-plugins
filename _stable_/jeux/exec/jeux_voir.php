@@ -29,8 +29,9 @@ function exec_jeux_voir(){
 	
 	if(!$id_jeu){
 		jeux_debut_page(_T("jeux:pas_de_jeu"));
-		gros_titre(_T("jeux:pas_de_jeu"), '', false);
-		fin_page();
+		jeux_compat_boite('debut_gauche');
+		boite_infos_accueil();
+		echo fin_gauche(), _T("jeux:pas_de_jeu"), fin_page();
 		return;
 	}
 	

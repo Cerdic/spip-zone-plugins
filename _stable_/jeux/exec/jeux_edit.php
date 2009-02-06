@@ -10,7 +10,7 @@ function exec_jeux_edit(){
 	$id_jeu	 = _request('id_jeu');
 
 	if (_request('valider')) {
-		jeux_ajouter_jeu($id_jeu,_request('contenu'),_request('titre_prive'),_request('enregistrer_resultat'),_request('resultat_unique'));
+		$id_jeu = jeux_ajouter_jeu($id_jeu,_request('contenu'),_request('titre_prive'),_request('enregistrer_resultat'),_request('resultat_unique'));
 		include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('jeux_voir', 'id_jeu='.$id_jeu, true));
 	}
@@ -55,8 +55,12 @@ function jeux_ajouter_jeu($id_jeu=false, $contenu='', $titre_prive='', $enregist
 	$titre_prive = strlen($titre_prive)?$titre_prive:_T('jeux:sans_titre_prive');
 	$contenu = "<jeux>$contenu</jeux>";
 	if (!$id_jeu) {
-//		spip_query("INSERT into spip_jeux (statut,type_jeu,titre_prive,contenu,enregistrer_resultat,resultat_unique) VALUES('publie',"._q($type_jeu).","._q($titre_prive).","._q($contenu).",'$enregistrer_resultat','$resultat_unique')");	
-//		$id_jeu = mysql_insert_id();		
+		if(function_exists('sql_insertq'))
+			return sql_insertq('spip_jeux', array('date' => 'NOW()', 'statut'=>$statut, 'type_jeu'=>$type_jeu, 'titre_prive'=>$titre_prive, 'contenu'=>$contenu, 'enregistrer_resultat'=>$enregistrer_resultat, 'resultat_unique'=>$resultat_unique));
+		else {
+			spip_query("INSERT into spip_jeux (statut,type_jeu,titre_prive,contenu,enregistrer_resultat,resultat_unique) VALUES('publie',"._q($type_jeu).","._q($titre_prive).","._q($contenu).",'$enregistrer_resultat','$resultat_unique')");	
+			return mysql_insert_id();
+		}
 	} else {
 		if(function_exists('sql_replace'))
 			sql_replace('spip_jeux', array('id_jeu'=>$id_jeu, 'statut'=>$statut, 'type_jeu'=>$type_jeu, 'titre_prive'=>$titre_prive, 'contenu'=>$contenu, 'enregistrer_resultat'=>$enregistrer_resultat, 'resultat_unique'=>$resultat_unique));
