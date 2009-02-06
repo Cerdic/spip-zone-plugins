@@ -53,7 +53,7 @@ guillemets ou le signe + :
 */
 
 function trous_inserer_le_trou($indexJeux, $indexTrou, $size, $corriger) {
-  global $propositionsTROUS, $scoreTROUS;
+  global $propositionsTROUS, $scoreTROUS, $score_detailTROUS;
   // Initialisation du code a retourner
   $nomVarSelect = "var{$indexJeux}_T{$indexTrou}";
   $mots = $propositionsTROUS[$indexTrou];
@@ -65,7 +65,10 @@ function trous_inserer_le_trou($indexJeux, $indexTrou, $size, $corriger) {
 
   // en cas de correction
   if ($corriger){
-   if ($prop!='' && in_array($prop, $mots)) ++$scoreTROUS;
+   $ok = $prop!='' && in_array($prop, $mots);
+   if ($ok) ++$scoreTROUS; 
+   // on renseigne le resultat detaille
+   $score_detailTROUS[] = 'T'.($indexTrou+1).":$prop:".($ok?'1':'0');
   }
   return $codeHTML;
 }
@@ -96,9 +99,10 @@ function trous_afficher_indices($indexJeux) {
 }
 
 function jeux_trous($texte, $indexJeux) {
-  global $propositionsTROUS, $scoreTROUS;
+  global $propositionsTROUS, $scoreTROUS, $score_detailTROUS;
   $titre = $html = false;
   $indexTrou = $scoreTROUS = 0;
+  $score_detailTROUS = array();
 
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('trous', $texte); 
@@ -129,11 +133,12 @@ function jeux_trous($texte, $indexJeux) {
 	$pied .= '<br /><div align="center"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton"></div>'.jeux_form_fin();
   } else {
       // On ajoute le score final
-        $pied .= jeux_afficher_score($scoreTROUS, $indexTrou, $_POST['id_jeu'])
+	    sort($score_detailTROUS);
+        $pied .= jeux_afficher_score($scoreTROUS, $indexTrou, $_POST['id_jeu'], join(', ', $score_detailTROUS))
   			. jeux_bouton_recommencer();
   }
   
-  unset($propositionsTROUS); unset($scoreTROUS);
+  unset($propositionsTROUS, $scoreTROUS, $score_detailTROUS);
   return $tete.$texte.$pied.'</div>';
 }
 ?>
