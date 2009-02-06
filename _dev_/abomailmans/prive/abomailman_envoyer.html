@@ -25,10 +25,10 @@
 					</select>
 				</li>
 				<li>
-					<label for='id_mot'><:abomailmans:mot:></label>
+					<label for="id_mot"><:abomailmans:mot:></label>
 					<select name="id_mot" id="id_mot">
 						<option value=""></option>
-						#ENV*{mots}
+						#INCLURE{fond=prive/listes/abomailman_mots}
 					</select>
 				</li>
 				<li class="obligatoire">

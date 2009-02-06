@@ -9,7 +9,6 @@
  * $Id$
 */
 
-include_spip('inc/abomailmans');
 include_spip('inc/barre');
 
 function exec_abomailmans_envoyer(){
@@ -36,21 +35,7 @@ function exec_abomailmans_envoyer(){
 		$templates .= "<option value='".$value_option."'>".$titre_option."</option>\n";
 	}
 	
-	$mots = "";
-	$groupes_mots = sql_select("id_groupe, titre","spip_groupes_mots","tables_liees LIKE '%articles%'");
-	while ($row = sql_fetch($groupes_mots)) {
-		$id_groupe = $row['id_groupe'];
-		$titre = $row['titre'];
-		$mots .= "<option value='' disabled=\"disabled\">". supprimer_numero(typo($titre)) . "</option>";
-		$mots_query = sql_select("id_mot, titre","spip_mots","id_groupe='".$id_groupe."'");
-		while ($row = sql_fetch($mots_query)) {
-			$id_mot = $row['id_mot'];
-			$titre = $row['titre'];
-			$mots .= "<option value='".$id_mot ."'>--". supprimer_numero (typo($titre)) . "</option>";
-		}
-	}
-	
-	echo recuperer_fond("prive/abomailman_envoyer",array("templates"=>$templates, "rubriques"=>$rubriques, "mots"=>$mots, "texte"=>$texte));
+	echo recuperer_fond("prive/abomailman_envoyer",array("templates"=>$templates, "texte"=>$texte));
 
 	echo fin_gauche(), fin_page();
 }
