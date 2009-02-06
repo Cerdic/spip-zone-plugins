@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_desindenter' => 'D&eacute;sindenter une liste',
 'barre_inserer_caracteres' => 'Insérer des caractères spécifiques',
 
-'editer'=>'Editer',
+'editer'=>'&Eacute;diter',
 'voir'=>'Voir',
 
 
@@ -73,7 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_stats' => 'Afficher les statistiques du texte',
 
 'barre_code' => 'Mettre en forme un &lt;code&gt;code informatique&lt;/code&gt;',
-'barre_cadre' => 'Placer dans une &lt;cadre&gt;zone de saisie de texte&lt;/poesie&gt;',
+'barre_cadre' => 'Placer dans une &lt;cadre&gt;zone de saisie de texte&lt;/cadre&gt;',
 'barre_poesie' => 'Mettre en forme comme une &lt;poesie&gt;po&eacute;sie&lt;/poesie&gt;',
 
 'barre_ancres' => 'Gestion des ancres',
