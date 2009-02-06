@@ -32,10 +32,5 @@ function abomailmans_header_prive($flux) {
 	$flux .="<!-- / PLUGIN ABOMAILMANS -->\n\n";
 	return $flux;
 }
-function abomailmans_insert_head($flux) {
-	$flux .="\n\n<!-- PLUGIN ABOMAILMANS -->\n";
-	$flux .= "<link rel=\"stylesheet\" href=\"" ._DIR_PLUGIN_ABOMAILMANS . "css/abomailmans_style.css\" type=\"text/css\" media=\"all\" />\n";
-	$flux .="<!-- / PLUGIN ABOMAILMANS -->\n\n";
-	return $flux;
-}
+
 ?>

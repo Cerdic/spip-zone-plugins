@@ -38,9 +38,5 @@
 		<nom>header_prive</nom>
 		<inclure>abomailmans_interface.php</inclure>
 	</pipeline>
-	<pipeline>
-		<nom>insert_head</nom>
-		<inclure>abomailmans_interface.php</inclure>
-	</pipeline>
 	<necessite id="SPIP" version="[2.0.0;]" />
 </plugin>
