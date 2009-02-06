@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		'abomailmans' 					=> 'Mailmans',
 		'icone_ajouter_liste'			=> 'Ajouter une nouvelle liste',
 		'icone_envoyer_mail_liste'		=> 'Envoyer un e-mail aux listes &agrave; partir du contenu de ce site',
-		'les_listes_mailmans'			=> 'Les listes mailmans renseign&eacute;es',
+		'les_listes_mailmans'			=> 'Les listes mailmans ou sympas renseign&eacute;es',
 		
 		
 		'titre_abomailman'				=> 'Titre de la liste',
@@ -28,7 +28,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		'message_confirm_suite'         => 'Pour valider votre demande, r&eacute;pondez &agrave; la demande de confirmation que vous allez recevoir par mail.',
 		
 		'email_oublie'					=> 'Vous avez oubli&eacute; votre adresse e-mail',
-
+		
+		'envoyer_courier'				=> 'Envoyer un courier',
 		'template'						=> 'Choisissez le mod&egrave;le et son contenu',
 		'sujet'							=> 'Sujet du courrier',
 		'rubrique'						=> 'Et lister les articles de la rubrique',

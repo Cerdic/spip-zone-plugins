@@ -35,17 +35,6 @@ function init()
 	//$('input#date').datePicker();
 	// ...and the input with an id of "date2" will have a date picker that lets you pick any day between the 02/11/2006 and 13/11/2006
 	$('input#date').datePicker({startDate:'01-01-2000'});
-
-	/*
-	// testing code to check the change event is fired...
-	$('input#date1').bind(
-		'change',
-		function()
-		{
-			alert($(this).val());
-		}
-	);
-	*/
 	
 	// END DIFFERENT OPTIONS //
 }

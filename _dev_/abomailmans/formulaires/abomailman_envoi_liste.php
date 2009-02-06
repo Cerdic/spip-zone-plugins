@@ -68,7 +68,7 @@ function formulaires_abomailman_envoi_liste_verifier_dist(){
 }
 
 function abomailmain_inclure_previsu($sujet, $message, $template, $date, $id_mot, $id_rubrique){
-	$bouton = _T('abomailman:envoi_confirmer');
+	$bouton = _T('abomailmans:envoi_confirmer');
 	include_spip('public/assembler');
 	$datas =  array(
 			'sujet' => $sujet,
@@ -114,7 +114,7 @@ function formulaires_abomailman_envoi_liste_traiter_dist(){
 	$datas['email_liste'] = _request('email_liste');
 	$datas['nomsite'] = lire_meta("nom_site");
 	$datas['email_webmaster'] = lire_meta("email_webmaster");
-		
+	spip.log($datas['texte_template']);
 	if (abomailman_mail($datas['nomsite'], $datas['email_webmaster'], "", $datas['email_liste'], $datas['sujet'], $datas['texte_template'], true, $datas['charset'])) {
 		$message['message_ok'] = _T('abomailman:email_envoye',array('liste'=>$datas['email_liste']));
 	}
