@@ -6,10 +6,11 @@
  */
 
 function porte_plume_insert_head($flux){
+	$lang = $GLOBALS['spip_lang'];
 	
 	$js = find_in_path('javascript/jquery.markitup_pour_spip.js');
 	$js_previsu = find_in_path('javascript/jquery.previsu_spip.js');
-	$js_settings = generer_url_public('porte_plume.js');
+	$js_settings = parametre_url(generer_url_public('porte_plume.js'), 'lang', $lang);
 	$css = find_in_path('css/barre_outils.css');
 	$css_icones = generer_url_public('barre_outils_icones.css');
 
@@ -19,7 +20,6 @@ function porte_plume_insert_head($flux){
 		. "<script type='text/javascript' src='$js_previsu'></script>\n"
 		. "<script type='text/javascript' src='$js_settings'></script>\n";
 		
-	$lang = $GLOBALS['spip_lang'];
 	$preview = url_absolue(generer_url_public('preview'));
 	$tEditer = _T('barre_outils:editer');
 	$tVoir = _T('barre_outils:voir');
