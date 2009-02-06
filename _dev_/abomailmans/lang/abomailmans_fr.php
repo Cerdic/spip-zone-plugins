@@ -22,7 +22,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		'je_m_abonne'					=> 'Cochez pour valider l\'abonnement ou le d&eacute;sabonnement.',
 
 		'message_confirmation_a'      	=> 'Une demande d\'abonnement aux listes suivantes vient d\'&ecirc;tre envoy&eacute;e :',
-		'message_confirmation_d'        => 'Une demande de d&eacute;sabonnement aux listes suivantes vient d\'&ecirc;tre envoy&eacute;e. Il faudra r&eacute;pondre aux mails que vous allez recevoir pour valider ces demandes : ',
+		'message_confirmation_unique_a' => 'Une demande d\'abonnement &agrave; la liste suivante vient d\'&ecirc;tre envoy&eacute;e :',
+		'message_confirmation_d'        => 'Une demande de d&eacute;sabonnement aux listes suivantes vient d\'&ecirc;tre envoy&eacute;e. ',
+		'message_confirmation_unique_d'	=> 'Une demande de d&eacute;sabonnement &agrave; la liste suivante vient d\'&ecirc;tre envoy&eacute;e. ',
 		'message_confirm_suite'         => 'Pour valider votre demande, r&eacute;pondez &agrave; la demande de confirmation que vous allez recevoir par mail.',
 		
 		'email_oublie'					=> 'Vous avez oubli&eacute; votre adresse e-mail',
@@ -55,6 +57,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		'envoyer_courier_liste'			=>	'Envoyer ce courrier &agrave; cette liste de diffusion :',
 
 		'contenu_date'					=>	'Contenu a partir de cette date',
+
+		// #FORMULAIRE_ABOMAILMAN
+		'insciption_listes_legende'		=> 'Abonnement aux listes de <br />diffusion et de discussions',
+		'choisir_liste'					=> 'Vous devez choisir une liste.',
 );
 
 
