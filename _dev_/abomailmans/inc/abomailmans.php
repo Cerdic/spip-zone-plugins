@@ -9,8 +9,6 @@
  * $Id$
 */
 
-
-	
 	// Fonction utilitaires
 	function abomailmans_abomailman_editable($id_abomailman = 0) {
 		global $connect_statut;
@@ -23,7 +21,6 @@
 		return $connect_statut == '0minirezo';
 	}
 
-	
 	//
 	// Afficher une liste de mailmans
 	//
