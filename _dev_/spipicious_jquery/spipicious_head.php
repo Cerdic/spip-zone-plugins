@@ -15,9 +15,12 @@
 function spipicious_insert_head($flux){
 	global $visiteur_session;
 	$contenu = " ";
-	$autorise = lire_config('spipicious/people');
 	
-	if($visiteur_session['id_auteur'] && in_array($visiteur_session['statut'],$autorise)){
+	$autorise = lire_config('spipicious/people',array());
+	
+	spip_log("autorise == '$autorise'");
+	
+	if($visiteur_session['id_auteur'] && in_any($visiteur_session['statut'],$autorise)){
 
 	include_spip('selecteurgenerique_fonctions');
 	$flux .= selecteurgenerique_verifier_js($flux);

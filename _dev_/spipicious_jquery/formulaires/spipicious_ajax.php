@@ -16,8 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 function formulaires_spipicious_ajax_charger($id_objet,$type='article') {
 	global $visiteur_session;
-	$autorise = lire_config('spipicious/people');
-	spip_log($autorise,'spipicious');
+	$autorise = lire_config('spipicious/people',array());
 	if (!$visiteur_session['id_auteur'] OR !in_array($visiteur_session['statut'],$autorise)) {
 		spip_log('pas auteur pour spipicious');
 		return array('editable'=>'');
