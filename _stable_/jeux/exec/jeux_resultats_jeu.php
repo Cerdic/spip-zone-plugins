@@ -34,8 +34,8 @@ function exec_jeux_resultats_jeu(){
 	$titre_prive = $titre_prive==''?_T('jeux:sans_titre_prive'):propre($titre_prive);
 	echo "<div style='font-weight:bold'>$titre_prive</div><br />";
 	echo "<div class='nettoyeur'></div>";
-	include_spip('public/assembler');
 	debut_cadre('liste');
+	include_spip('public/assembler');
 	echo recuperer_fond('fonds/resultats', array('id_jeu'=>$id_jeu,'par'=>$par));
 	fin_cadre('liste');
 	

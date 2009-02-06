@@ -104,7 +104,7 @@ $jeux_caracteristiques = array(
 
 );
 
-// on envoie les caracteristiques aux plugins pour pouvoir ajouter des jeux tierces
+// on envoie les caracteristiques aux plugins pour pouvoir ajouter des jeux tiers
 $jeux_caracteristiques = pipeline('jeux_caracteristiques', $jeux_caracteristiques);
 
 // addition de tous les separateurs
@@ -123,7 +123,7 @@ $jeux_javascript_prive = array('jeux', 'qcm', 'pendu', 'mots_croises');
 
 // Codes RGB des couleurs predefinies a utiliser pour certains parametres apres la balise [config]
 global $jeux_couleurs;
-$jeux_couleurs = Array(
+$jeux_couleurs = array(
   	// en
 	'white' => array(255,255,255),
 	'black' => array(0,0,0), 

@@ -144,13 +144,12 @@ function calcul_erreurs_grille($solution, $indexJeux) {
 	if (_request("bouton_envoi_$indexJeux") == '') return '';
 	else {
 	  list($nbr_erreurs, $nbr_vides,$total) = comparaison_grille($solution, $indexJeux); 
-	  // on insère le resultat dans ma base de donnée
-	  if ($_POST['id_jeu']!=''){
-	  	
+	  // on insere le resultat dans la base de donnee
+	  if ($_POST['id_jeu']){
 	  	include_spip('base/jeux_ajouter_resultat');
-		jeux_ajouter_resultat($_POST['id_jeu'], $total-$nbr_erreurs-$nbr_vides, $total);
-		}
-	  
+		jeux_ajouter_resultat($_POST['id_jeu'], $total-$nbr_erreurs-$nbr_vides, $total, "erreurs=$nbr_erreurs, vides=$nbr_vides");
+	  }
+
 	  // on retourne ce qu'on affiche
 	  return '<p class="jeux_erreur">'
 		. (($nbr_erreurs==0)?_T('jeux:aucune_erreur'):(

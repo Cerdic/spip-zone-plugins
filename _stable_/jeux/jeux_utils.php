@@ -108,10 +108,11 @@ function jeux_liste_mots_min($texte) {
 }
 
 // retourne la boite de score
-function jeux_afficher_score($score, $total, $id_jeu=false) {
-	if ($id_jeu){		
+function jeux_afficher_score($score, $total, $id_jeu=false, $resultat_detaille='') {
+	if ($id_jeu){
+		// ici, #CONTENU est passe par le filtre |ajoute_id_jeu{#ID_JEU}
 		include_spip('base/jeux_ajouter_resultat');
-		jeux_ajouter_resultat($id_jeu, $score, $total);
+		jeux_ajouter_resultat($id_jeu, $score, $total, $resultat_detaille);
 	}
 	return '<div class="jeux_score">'._T('jeux:score')
 	  			. "&nbsp;$score&nbsp;/&nbsp;".$total.'<br />'
@@ -163,6 +164,7 @@ function jeux_trouver_nom($texte) {
 
 // retourne le titre public, si le separateur [titre] est present
 function jeux_trouver_titre_public($texte) {
+  $texte = str_replace(array('<jeux>','</jeux>'), '', $texte);
   $titre_public = false;
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('la_totale', $texte);
@@ -170,6 +172,24 @@ function jeux_trouver_titre_public($texte) {
 	 if ($valeur==_JEUX_TITRE) $titre_public = $tableau[$i+1];
   }
   return $titre_public;
+}
+
+// retourne la configuration interne, si le separateur [config] est present
+function jeux_trouver_configuration_interne($texte) {
+  $texte = str_replace(array('<jeux>','</jeux>'), '', $texte);
+  $configuration_interne = array();
+  // parcourir tous les #SEPARATEURS
+  $tableau = jeux_split_texte('la_totale', $texte);
+  foreach($tableau as $i => $valeur) if ($i & 1) {
+	if ($valeur==_JEUX_CONFIG) {
+		$lignes = preg_split(",[\r\n]+,", $tableau[$i+1]);
+		foreach ($lignes as $ligne) {
+			$ligne = trim($ligne);
+		 	if(strlen($ligne)) $configuration_interne[] = $ligne;
+		}
+	}
+  }
+  return $configuration_interne;
 }
 
 

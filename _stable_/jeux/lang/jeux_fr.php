@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nouveau_jeu'	=> 'Nouveau jeu',
 'explication_jeu'=> 'Le titre priv&eacute; sert simplement &agrave; identifier le jeu en partie priv&eacute;e.<br /><br />Le contenu du jeu doit suivre la syntaxe d&eacute;crite dans <a href="http://www.spip-contrib.net/Des-jeux-dans-vos-articles">la&nbsp;documentation</a> du plugin.<br /><br />Ici, les balises &lt;jeux> et &lt;/jeux> sont inutiles.',
-'modifier_jeu'	=> 'Modifier le jeu num&eacute;ro @id@ (@nom@)',
+'modifier_jeu'	=> 'Modifier le jeu num&eacute;ro @id@',
 'modifier_ce_jeu'	=> 'Modifier ce jeu',
 'voir_jeu'			=> 'Voir le jeu',
 'liste_jeux'			=> 'Liste des jeux',
@@ -76,7 +76,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'derniere_modif'	=> 'Derni&egrave;re modification',
 'resultat'			=> 'R&eacute;sultat',
-'resultat_unique'	=> 'R&eacute;sultat unique',
 'resultats'			=> 'R&eacute;sultats',
 'resultats_auteur'	=> 'Les r&eacute;sultats de @nom@',
 'resultats_auteur_'	=> "R&eacute;sultats de l&#8217;auteur",
@@ -88,6 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'gerer_ses_resultats'	=> 'G&eacute;rer ses r&eacute;sultats',
 'voir_resultats'	=> 'Voir les r&eacute;sultats',
 'enregistrer_resultat' => 'Enregistrer les r&eacute;sultats&nbsp;?',
+'resultat_unique'	=> 'R&eacute;sultat unique&nbsp;?',
 'gerer_resultats_jeu' => 'G&eacute;rer les r&eacute;sultats du jeu num&eacute;ro @id@ (@nom@)',
 'aucun_resultat' => 'Aucun r&eacute;sultat',
 
@@ -129,6 +129,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'confirmation_compacter_jeu' 	=> '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir compacter les r&eacute;sultats de ce jeu&nbsp;?',
 'compacter_confirmer'			=> 'Confirmer le compactage de ces r&eacute;sultats',
 'statut_jeu'					=>'Statut du jeu&nbsp;: ',
+'options_jeu'					=> 'Options sur les r&eacute;sultats&nbsp;: ',
+'configuration_interne'			=> 'Configuration interne&nbsp;: ',
 
 'doc_jeux' => 'Documentation générale',
 'doc_scores' => 'Documentation sur les scores',

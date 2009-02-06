@@ -33,8 +33,8 @@ function exec_jeux_resultats_auteur(){
 	
 	echo gros_titre(_T("jeux:resultats_auteur", array('nom'=>$nom)), '', false);
 	
-	include_spip('public/assembler');
 	debut_cadre('liste');
+	include_spip('public/assembler');
 	echo recuperer_fond('fonds/resultats',array('id_auteur'=>$id_auteur,'par'=>$par));
 	fin_cadre('liste');
 	

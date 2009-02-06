@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	<br /><br />
 	Bei intern verwalteten Spielen sind die Tags &lt;jeux> und &lt;/jeux>
 	&uuml;berfl&uuml;ssig.',
-'modifier_jeu'	=> 'Spiel Nummer @id@ (@nom@) bearbeiten',
+'modifier_jeu'	=> 'Spiel Nummer @id@ bearbeiten',
 'modifier_ce_jeu'	=> 'Dieses Spiel bearbeiten',
 'voir_jeu'			=> 'Spiel ansehen',
 'liste_jeux'			=> 'Liste der Spiele',
@@ -81,7 +81,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'derniere_modif'	=> 'Letzte &Auml;nderung',
 'resultat'			=> 'Ergebnis',
-'resultat_unique'	=> 'Nur ein Ergebnis',
 'resultats'			=> 'Ergebnisse',
 'resultats_auteur'	=> 'Die Ergebnisse von @nom@',
 'resultats_auteur_'	=> "Ergebnisse von Autor",
@@ -93,6 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'gerer_ses_resultats'	=> 'Eigene Ergebnisse verwalten',
 'voir_resultats'	=> 'Ergebnisse ansehen',
 'enregistrer_resultat' => 'Ergebnisse speichern?',
+'resultat_unique'	=> 'Nur ein Ergebnis?',
 'gerer_resultats_jeu' => 'Ergebnisse von Spiel no. @id@ (@nom@) verwalten',
 'aucun_resultat' => 'Kein Ergebnis',
 
@@ -133,7 +133,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'confirmation_compacter_auteur' 	=> 'Sind sie sicher, dass ALLE Ergebnisse dieses Autors komprimiert werden sollen?',
 'confirmation_compacter_jeu' 	=> 'Sind sie sicher, dass ALLE Ergebnisse dieses Spiels komprimiert werden sollen?',
 'compacter_confirmer'			=> 'Komprimieren der Ergebnisse best&auml;tigen',
-'statut_jeu'					=>'Status des Spiels: ',
+'statut_jeu'					=> 'Status des Spiels: ',
+'options_jeu'					=> 'Options sur les r&eacute;sultats&nbsp;: ',
+'configuration_interne'			=> 'Configuration interne&nbsp;: ',
 
 'doc_jeux' => 'Allegemeine Dokumentation',
 'doc_scores' => 'Dokumentation der Ergebnisse',

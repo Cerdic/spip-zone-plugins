@@ -65,6 +65,7 @@ function pas_de_balise_jeux($texte) {
 $GLOBALS['cs_introduire'][] = 'pas_de_balise_jeux';
 
 // ajoute un identifiant dans le formulaire, correspondant au jeu
+// ce filtre doit agir sur #CONTENU
 function ajoute_id_jeu($texte, $id_jeu) {
 	$texte = str_replace('</form>', "<input type='hidden' name='id_jeu' value='".$id_jeu."' />\n</form>", $texte);
 	return $texte;
@@ -81,12 +82,14 @@ function balise_TITRE_PUBLIC_dist($p) {
 	$p->code = "titre_jeu($texte)";
 	return $p;
 }
+/*
 function balise_CONTENU_dist($p) {
 	$id = champ_sql('id_jeu', $p);
 	$texte = champ_sql('contenu', $p);
 	$p->code = "ajoute_id_jeu($texte, $id)";
 	return $p;
 }
+*/
 
 include_spip('public/interfaces');
 global $table_des_traitements;

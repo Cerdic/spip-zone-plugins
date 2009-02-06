@@ -19,8 +19,8 @@ function exec_jeux_tous(){
 	
 	echo gros_titre(_T("jeux:liste_jeux"), '', false);
 	
-	include_spip('public/assembler');
 	debut_cadre('liste');
+	include_spip('public/assembler');
 	echo recuperer_fond('fonds/jeux_tous', array('par'=>$par));
 	fin_cadre('liste');
 	

@@ -156,7 +156,8 @@ function qcm_un_trou($nomVarSelect, $indexQCM) {
 }
 
 function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoints) {
-  global $qcms, $qcm_score;
+  global $qcms, $qcm_score, $qcm_score_detaille;
+  $indexQCM_1 = $indexQCM + 1;
   if (!$qcms[$indexQCM]['nbpropositions'] || !$qcms[$indexQCM]['maxscore']) 
   	return "<div class=\"jeux_question\">".definir_puce()._T('jeux:erreur_syntaxe').'</div><br />';
 
@@ -228,9 +229,12 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 			$lower = init_mb_string()?mb_strtolower($reponse,$GLOBALS['meta']['charset']):strtolower($reponse);
 			$bonneReponse = ($trou && in_array($lower, $qcms[$indexQCM]['propositions']))
 				|| ($qcms[$indexQCM]['bonnesreponses'][$reponse]==1);
-	
+
 			// si ce n'est pas un trou, on donne les points de la reponse quoiqu'il arrive
 			if (!$trou || $bonneReponse) $qcm_score += $pointsR;
+			// on renseigne le resultat detaille
+			$qcm_score_detaille[] = $trou?"T$indexQCM_1:$lower:".($bonneReponse?$pointsR:'0')
+				:"Q$indexQCM_1:R$reponse:$pointsR";
 				
 			// les precisions eventuelles
 			$prec = $qcms[$indexQCM]['precisions'][$trou?0:$reponse];
@@ -252,6 +256,7 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 	
 			// on donne les points de la reponse quoiqu'il arrive
 			$qcm_score += $qcms[$indexQCM]['points'][$r];
+			$qcm_score_detaille[] = "Q$indexQCM_1:R$r:".$qcms[$indexQCM]['points'][$r];
 			$qrm_score += $qcms[$indexQCM]['points'][$r];
 				
 			$codeHTML .= '<div class="qcm_reponse"><span class="qcm_correction_'.($bonneReponse?'juste':'faux').'">'
@@ -263,7 +268,10 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 		}
 
 	// pas de reponse postee...
-	} else $codeHTML.='<div class="qcm_correction_null">'._T('jeux:reponseNulle').'</div>';
+	} else {
+		$codeHTML.='<div class="qcm_correction_null">'._T('jeux:reponseNulle').'</div>';
+		$qcm_score_detaille[] = "Q$indexQCM_1:R?:0";
+	}
 
 	// on affiche les bonnes reponses si la configuration l'autorise
 	if (jeux_config('solution')) {
@@ -327,9 +335,10 @@ function qcm_inserer_les_qcm(&$chaine, $indexJeux, $gestionPoints) {
 
 function jeux_qcm($texte, $indexJeux) {
   // initialisation  
-  global $qcms, $qcm_score;
+  global $qcms, $qcm_score, $qcm_score_detaille;
  
   $qcms = array(); $indexQCM = $qcm_score = 0;
+  $qcm_score_detaille = array();
   $qcms['nbquestions'] = $qcms['totalscore'] = $qcms['totalpropositions'] = 0;
   $titre = $horizontal = $vertical = $solution = $html = $categ_score = false;
 
@@ -371,7 +380,7 @@ function jeux_qcm($texte, $indexJeux) {
 	$tete .= jeux_form_debut('qcm', $indexJeux);
 	$pied = '<br /><div align="center"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton"></div>'.jeux_form_fin();
   } else {
-      $pied = jeux_afficher_score($qcm_score, $qcms['totalscore'], $_POST['id_jeu'])
+      $pied = jeux_afficher_score($qcm_score, $qcms['totalscore'], $_POST['id_jeu'], join(', ', $qcm_score_detaille))
   			. qcm_afficher_commentaire($categ_score, $qcm_score, $qcms['totalscore'])
 			. jeux_bouton_reinitialiser();
   }
@@ -382,7 +391,7 @@ function jeux_qcm($texte, $indexJeux) {
   else
   	$js = '';
   
-  unset($qcms); unset($qcm_score);
+  unset($qcms, $qcm_score, $qcm_score_detaille);
   return $tete.$texte.$pied.'</div>'.$js;
 }
 

@@ -1,0 +1,30 @@
+#CACHE{0}
+<BOUCLE_jeu(JEUX){id_jeu}>
+[(#SET{grand_titre,[(#REM|sinon{<:jeux:modifier_jeu:>}|replace{@id@,#ID_JEU})]})]
+[(#SET{contenu,[(#CONTENU*|replace{</?jeux>,}|entites_html)]})]
+[(#SET{titre_prive,[(#TITRE_PRIVE|sinon{<:jeux:sans_titre_prive:>})]})]
+#SET{type_jeu,#TYPE_JEU}
+#SET{enregistrer_resultat,#ENREGISTRER_RESULTAT}
+#SET{resultat_unique,#RESULTAT_UNIQUE}
+</BOUCLE_jeu>
+<//B_jeu>
+
+<h2>[(#GET{grand_titre,<:jeux:nouveau_jeu:>})][&nbsp;-&nbsp;(#GET{type_jeu})]</h2><hr/><br/>
+<label><span class='titrem'><:jeux:jeu_titre_prive:></span><br />
+<input type='text' name='titre_prive' value="[(#GET{titre_prive}|textebrut)]" style='width:99%;' />
+</label><br /><br />
+<label><span class='titrem'><:jeux:jeu_contenu:></span><br />
+<textarea  name='contenu' class='formo' rows='20' cols='40' style='width:99%;' >#GET{contenu}</textarea>
+</label><br />
+<label><span class='titrem'><:jeux:enregistrer_resultat:></span><br />
+<select class="formo" name="enregistrer_resultat" >
+	<option value="oui"><:item_oui:></option>
+	<option value="non"[ selected="(#GET{enregistrer_resultat,oui}|=={non}|?{selected})"]><:item_non:></option>
+</select>
+</label><br />
+<label><span class='titrem'><:jeux:resultat_unique:></span><br />
+<select class="formo" name="resultat_unique" >
+	<option value="non"><:item_non:></option>
+	<option value="oui"[ selected="(#GET{resultat_unique,non}|=={oui}|?{selected})"]><:item_oui:></option>
+</select>
+</label>

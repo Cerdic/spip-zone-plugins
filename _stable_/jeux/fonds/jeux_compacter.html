@@ -1,12 +1,1 @@
-(
-0
-<BOUCLE_resultat(JEUX){id_jeu?}{statut==refuse|publie}>
-<BOUCLE_2(JEUX_RESULTATS){!par date}{id_jeu}{id_auteur?}>
-[(#ID_AUTEUR|unique{#ID_JEU}|?{','#ID_RESULTAT})]</BOUCLE_2>
-
-
-
-
-</BOUCLE_resultat>
-</B_resultat>)
-
+#CACHE{0}0<BOUCLE_resultat(JEUX){id_jeu?}{statut==refuse|publie}><BOUCLE_2(JEUX_RESULTATS){!par date}{id_jeu}{id_auteur?}>[(#ID_AUTEUR|unique{#ID_JEU}|?{','#ID_RESULTAT})]</BOUCLE_2></BOUCLE_resultat>
