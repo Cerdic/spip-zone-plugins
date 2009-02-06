@@ -1,0 +1,20 @@
+[<h2>Je souhaite rester informé-e</h2><div class="bloc"><br /><p>(#ENV{message})</p><a href="#URL_PAGE{listesdiffusions}" class="SuiteTout">Toutes les listes de diffusions</a></div><br />]
+[<h2>Je souhaite rester informé-e</h2><div class="bloc"><br /><p>(#ENV{liste_confirme})</p><a href="#URL_PAGE{listesdiffusions}" class="SuiteTout">Toutes les listes de diffusions</a></div><br />]
+
+<B_listes>
+<h2>Je souhaite rester informé-e</h2>
+<div class="bloc">
+<form action="#SELF" method="post"  name="abomailman_listes" id="abomailmansListes">
+		<div class="abonnement">
+			<input name="email" id="email" type="text" class="inp" value="E-mail" onclick="this.value=''" />
+			<BOUCLE_listes(ABOMAILMANS){id_abomailman=1}>
+					[(#EMAIL|abomailman_inputhidden)]
+			</BOUCLE_listes>
+			<input name="abonnement" type="submit" value="Je m'abonne" class="inp" />
+		</div>
+	</form>
+	
+	<a href="#URL_PAGE{listesdiffusions}" class="SuiteTout">Toutes les listes de diffusions</a>
+</div>
+<br />
+</B_listes>
