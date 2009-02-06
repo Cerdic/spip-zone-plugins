@@ -4,7 +4,7 @@
  * Abomailmans
  * MaZiaR - NetAktiv
  * tech@netaktiv.com
- * Printemps 2007
+ * Printemps 2007 - 2009
  * $Id$
 */
 

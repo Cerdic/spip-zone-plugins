@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		
 		'email_oublie'					=> 'Vous avez oubli&eacute; votre adresse e-mail',
 
-		'template'						=> 'Choisissez le mod&egrave;le et son contnu',
+		'template'						=> 'Choisissez le mod&egrave;le et son contenu',
 		'sujet'							=> 'Sujet du courrier',
 		'rubrique'						=> 'Et lister les articles de la rubrique',
 		'mot'							=> 'Et lister les articles du mot cl&eacute;',
@@ -37,6 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		'envoi_apercu'					=> 'Aper&ccedil;u',
 		'envoi_confirmer'				=> 'Confirmer et envoyer',
 		'envoyer_mailmans'				=> 'S&eacute;l&eacute;ctionner le mod&egrave;le et son contenu',
+		'sujet_obligatoire'				=> 'Le sujet est obligatoire.',
+		'email_envoye'					=> 'L\'e-mail a &eacute;t&eacute; envoy&eacute; &agrave; la liste de diffusion : @liste@.',
 		
 		'creation_droits_insuffisants'	=>	'Vos droits sont insuffisants...',
 		'emailliste_abosympa'           => 'L\'adresse e-mail de l\'administrateur Sympa',

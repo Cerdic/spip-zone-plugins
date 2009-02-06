@@ -3,7 +3,7 @@
  * Abomailmans
  * MaZiaR - NetAktiv
  * tech@netaktiv.com
- * Printemps 2007
+ * Printemps 2007 - 2009
  * $Id$
 */
 
@@ -24,7 +24,6 @@ function abomailmans_ajouter_boutons($boutons_admin) {
 function abomailmans_header_prive($flux) {
 	$exec = _request('exec');
 	$flux .="\n\n<!-- PLUGIN ABOMAILMANS -->\n";
-	$flux .= "<script type=\"application/javascript\" src=\"" ._DIR_PLUGIN_ABOMAILMANS . "js/abomailmans_js.js\"></script>\n";
 	if ($exec=="abomailmans_envoyer") {
 		$flux .= "<script type=\"text/javascript\" src=\"" ._DIR_PLUGIN_ABOMAILMANS . "js/datePicker.js\"></script>\n";
 		$flux .= "<script type=\"text/javascript\" src=\"" ._DIR_PLUGIN_ABOMAILMANS . "js/datePicker_myScripts.js\"></script>\n";
