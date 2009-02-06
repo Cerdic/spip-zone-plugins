@@ -3,13 +3,13 @@
 <div id="ajax-loader" style="text-align:right">
 	<img src="#CHEMIN{img_pack/ajax_indicator.gif}" alt="" />
 </div>
-<div class='verdana2' id='envoyer'>
+<div class="verdana2" id="envoyer">
 	<div class="formulaire_spip">
-		<form method='post' action='#URL_ECRIRE{abomailmans_affiche_template}' style='border: 0px; margin: 0px;' id='template'>
+		<form method='post' action="#URL_ECRIRE{abomailmans_affiche_template}" style="border: 0px; margin: 0px;" id="template">
 			<ul>
 				<li>
-					<label for='template'><:abomailmans:template:></label>
-					<select name='template'>
+					<label for="template"><:abomailmans:template:></label>
+					<select name="template">
 						#ENV*{templates}
 					</select>
 				</li>
@@ -18,10 +18,10 @@
 					<input name="date" id="date" class="date-picker" />
 				</li>
 				<li>
-					<label for='id_rubrique'><:abomailmans:rubrique:></label>
+					<label for="id_rubrique"><:abomailmans:rubrique:></label>
 					<select name="id_rubrique" id="id_rubrique">
 						<option value=""></option>
-						#ENV*{rubriques}
+						#INCLURE{fond=prive/listes/abomailman_rubriques}
 					</select>
 				</li>
 				<li>
@@ -36,9 +36,9 @@
 					<input type='text' name='sujet' id='sujet' class="text" value="" size='40' $js_titre />
 				</li>
 				<li>
-					<label for='message'><:abomailmans:message:></label>
-					<textarea id='message' name='message' ".$GLOBALS['browser_caret']." class='formo' rows='5' cols='40' wrap=soft>
-					#ENV*{texte}
+					<label for="message"><:abomailmans:message:></label>
+					<textarea id="message" name="message" class="formo" rows="5" cols="40" wrap="soft">
+					#ENV**{texte}
 					</textarea>
 				</li>
 			</ul>

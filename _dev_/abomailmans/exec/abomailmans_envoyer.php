@@ -35,8 +35,6 @@ function exec_abomailmans_envoyer(){
 		$value_option = "templates/$titre_option";
 		$templates .= "<option value='".$value_option."'>".$titre_option."</option>\n";
 	}
-
-	$rubriques = abomailman_arbo_rubriques(0);
 	
 	$mots = "";
 	$groupes_mots = sql_select("id_groupe, titre","spip_groupes_mots","tables_liees LIKE '%articles%'");
