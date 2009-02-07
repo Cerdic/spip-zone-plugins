@@ -19,7 +19,8 @@ function inc_geomap_script_init_dist(){
 	$geomap = find_in_path('js/geomap.js');
 	
 	if (function_exists('lire_config') && lire_config("geomap/compacte_js") == 'non') {
-		$out = '<script type="text/javascript" src="'.generer_url_public('geomap.js').'"></script>';
+		$out = '
+		<script type="text/javascript" src="'.generer_url_public('geomap.js').'"></script>';
 	} else {
 		include_spip('inc/filtres');
 		if ($GLOBALS['meta']['charset'] == 'utf-8') {
@@ -28,13 +29,19 @@ function inc_geomap_script_init_dist(){
 		else {
 			$gmap_script = compacte_js(recuperer_page('http://maps.google.com/maps?file=api&v='.$version.'&key='.$config.'&hl='.$GLOBALS['spip_lang']));
 		}
-		$out = '<script type="text/javascript" src="'.$geomap.'"></script>
+		$out = '
+		<script type="text/javascript" src="'.$geomap.'"></script>
 		<script type="application/javascript">/*<![CDATA[*/ '.$gmap_script.' /*]]>*/</script>';
 	}
 	
 	if (function_exists('lire_config') && lire_config("geomap/custom_control") != 'non'){
-		$out .= '<script type="text/javascript" src="'._DIR_PLUGIN_GEOMAP.'js/customControls.js"></script>';
+		$out .= '
+		<script type="text/javascript" src="'._DIR_PLUGIN_GEOMAP.'js/customControls.js"></script>';
 	}
+	
+	$out .= '
+		<link rel="stylesheet" type="text/css" media="screen" href="'._DIR_PLUGIN_GEOMAP.'css/map_elements.css" />
+	';
 	
 	return $out;
 }

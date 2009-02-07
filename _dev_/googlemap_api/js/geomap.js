@@ -45,7 +45,7 @@ function creaMarcador(point, html, icon, son, idmap) {
 	GEvent.addListener(marcador, "click", function() {
 		marcador.openInfoWindowHtml(html);
 		//cando se abre a ventana do marcador executamos as seguintes intsruccions
-		GEvent.addListener(map,"infowindowopen", function() {
+		GEvent.addListener(marcador,"infowindowopen", function() {
 			if(son){
 				//esta parte del codigo enbebe un obxecto flah na ventana creado con flashobject.js
 				var fo = new FlashObject(URLbaseGis + "/img_pack/musicplayer.swf?autoplay=true&song_url="+son, "player_x", "17", "17", "6", "#FFFFFF");
@@ -67,7 +67,7 @@ function agregarMarcador (xmlItem, idmap, minZoom, maxZoom) {
 		var lat = parseFloat(xmlLat.text());
 		var lng = parseFloat(xmlLng.text());
 		var id = extraerID($("link",xmlItem).text());
-		var html = $("description",xmlItem).text();
+		var html = "<div id='window_" + id +"' class='window_content'><div id='player'></div><h3><a href='" + $("guid",xmlItem).text() + "'>" + $("title",xmlItem).text() + "</a></h3>" + $("description",xmlItem).text() + "</div>";
 		var icon = $("geo_icon",xmlItem).text();
 		var son;
 		if (xmlSon.length != 0) son = xmlSon.attr("url");

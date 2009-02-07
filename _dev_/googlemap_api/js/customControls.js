@@ -10,16 +10,14 @@ var images_extension = "png";
 
 // Microsoft spoils everyone's fun again. Since IE 6 doesn't support pngs,
 // Things will have to look a bit different.
-var version = navigator.appVersion;
-var pos = version.indexOf('MSIE ');
-version = version.slice(pos);
-pos = version.indexOf('.');
-version = version.slice(0, pos);
-if (version == "MSIE 6") {
-	images_folder = "ie";
-	images_extension = "gif";
+var browser_type = navigator.appName;
+if (browser_type == "Microsoft Internet Explorer") {
+	var browser_version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+	if (browser_version < 7) {
+		images_folder = "ie";
+		images_extension = "gif";
+	}
 }
-
 
 //***********
 // First Map Custom Control
