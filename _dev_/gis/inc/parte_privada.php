@@ -54,7 +54,7 @@ function gis_cambiar_coord($id,$table,$exec) {
 		}
 		if ($api_carte) {
 			$gis_append_view_map = charger_fonction($api_carte.'_append_view_map','inc');
-			$mapa = '<div id="viewMap" name="viewMap" style="width: 470px; height: 100px; border:1px solid #000"></div>';
+			$mapa = '<div id="viewMap" name="viewMap" style="width: 477px; height: 100px; border:1px solid #000"></div>';
 		  	$mapa .= $gis_append_view_map('viewMap',$glat,$glonx,$zoom,array(array('lonx'=>$glonx,'lat'=>$glat)),$gicon);
 		} else {
 			$mapa = '<div>' . _T('gis:falta_plugin') . '</div>';
@@ -65,29 +65,37 @@ function gis_cambiar_coord($id,$table,$exec) {
 	$s .= '';
 	// Ajouter un formulaire
 	$s .= '<p>';
-	$s .= debut_cadre('r', _DIR_PLUGIN_GIS."img_pack/correxir.png");
-	$s .= bouton_block_invisible("ajouter_form");
-	$s .= '&nbsp;&nbsp;&nbsp;<strong class="verdana3" style="text-transform: uppercase;">' . _T('gis:cambiar') . ' <a onclick="$(\'#cadroFormulario\').slideToggle(\'slow\')">(' . _T('gis:clic_desplegar') . ')</a></strong>';
+	$s .= debut_cadre('e', _DIR_PLUGIN_GIS."img_pack/correxir.png",'',bouton_block_depliable('&nbsp;&nbsp;&nbsp;<span style="text-transform: uppercase;">'._T('gis:cambiar').'</span>', false, "cadroFormulario"));
 	$s .= debut_block_visible("ajouter_form");
-	$s .= '<div class="verdana2">' . _T("gis:clic_mapa") . '</div>';
-	$s .= debut_block_visible("ajouter_form");
-	$s .= '<div id="cadroFormulario" style="border:1px solid #000">';
-	
+	$s .= '<div id="cadroFormulario" class="formulaire_spip formulaire_editer formulaire_cfg" style="margin-bottom:5px;">
+	<span class="verdana2">' . _T("gis:clic_mapa") . '</span>';
 	if ($api_carte) {
 		$gis_append_clicable_map = charger_fonction($api_carte.'_append_clicable_map','inc');
-		$s .= '<div id="formMap" name="formMap" style="width: 470px; height: 350px"></div>';
+		$s .= '<div id="formMap" name="formMap" style="width: 467px; height: 350px; margin:5px auto; overflow:hidden;"></div>';
 		$s .= $gis_append_clicable_map('formMap','form_lat','form_long',$glat,$glonx,'form_zoom',$gzoom,$row?true:false);
 	} else {
 		$s .= '<div>' . _T('gis:falta_plugin') . '</div>';
 	}
 		
 	// Formulario para actualizar as coordenadas do mapa______________________.
-	$s .= '<form id="formulaire_coordenadas" name="formulaire_coordenadas" action="'.generer_url_ecrire($exec,"$pkey=".$id).'" method="post">
-		<label>'._T('gis:lat').': </label><input type="text" name="lat" id="form_lat" value="'.$glat.'" size="12" />
-		<label>'._T('gis:long').': </label><input type="text" name="lonx" id="form_long" value="'.$glonx.'" size="12" />
-		<label>'._T('gis:zoom').': </label><input type="text" name="zoom" id="form_zoom" value="'.$gzoom.'" size="6" />
-		<p></p><input type="submit" name="actualizar" value="'._T("gis:boton_actualizar").'" />
-		<input type="submit" name="supprimer" value="'._T("gis:bouton_supprimer").'" /></p>
+	$s .= '
+		<form id="formulaire_address" name="formulaire_address" action="#">
+		<ul style="text-align:center;">
+			<li style="padding-left:0; display:inline;">
+				<input type="text" class="text" size="50" name="map_address" id="map_address" value="'._T('gis:address').'" onfocus="this.value=\'\';" style="width:360px; margin-right:10px;" />
+      			<input type="submit" value="'._T('gis:label_address').'" />
+      		</li>
+      	</ul>
+      	</form>
+		<form id="formulaire_coordenadas" name="formulaire_coordenadas" action="'.generer_url_ecrire($exec,"$pkey=".$id).'" method="post">
+		<ul style="text-align:center;">
+		<li style="padding-left:0; display:inline;"><label for="lat" style="margin-left:0; float:none; display:inline;">'._T('gis:lat').': </label><input type="text" class="text" name="lat" id="form_lat" value="'.$glat.'" size="12" style="width:80px;" /></li>
+		<li style="padding-left:0; display:inline;"><label for="lonx" style="margin-left:0; float:none; display:inline;">'._T('gis:long').': </label><input type="text" class="text" name="lonx" id="form_long" value="'.$glonx.'" size="12" style="width:80px;" /></li>
+		<li style="padding-left:0; display:inline;"><label for="zoom" style="margin-left:0; float:none; display:inline;">'._T('gis:zoom').': </label><input type="text" class="text" name="zoom" id="form_zoom" value="'.$gzoom.'" size="6" style="width:30px;" /></li>
+		</ul>
+		<p class="boutons">
+		<input type="submit" name="actualizar" value="'._T("gis:boton_actualizar").'" /><input type="submit" name="supprimer" value="'._T("gis:bouton_supprimer").'" />
+		</p>
 		</form>
 		</div>';
 	$s .= $mapa;
