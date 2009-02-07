@@ -21,37 +21,40 @@ function inc_geomap_append_view_map_dist($target_id,$view_lat,$view_long,$view_z
 	}
 	$out = '
 	<script type="text/javascript">
-		/*<![CDATA[*/
-		if (GBrowserIsCompatible()) {
-			var viewMap = new GMap2(document.getElementById(\''.$target_id.'\'));
-			viewMap.setCenter(new GLatLng('.$view_lat.','.$view_long.'), '.$view_zoom.');
-			viewIcono = new GIcon();';
+		//<![CDATA[
+		function loadViewMap() {
+			if (GBrowserIsCompatible()) {
+				var viewMap = new GMap2(document.getElementById(\''.$target_id.'\'));
+				viewMap.setCenter(new GLatLng('.$view_lat.','.$view_long.'), '.$view_zoom.');
+				var view_icon = new GIcon();';
 	if (is_array($Markers) AND count($Markers)){
 		foreach($Markers as $point){
 			if ($view_icon){
 				$out .= '
-			viewIcono.image = "/IMG/'.$view_icon.'";
-			viewIcono.shadow = "'._DIR_PLUGIN_GEOMAP.'img_pack/shadow.png";';
+				view_icon.image = "../IMG/'.$view_icon.'";';
 			} else {
 				$out .= '
-			viewIcono.image = "'._DIR_PLUGIN_GEOMAP.'img_pack/correxir.png";
-			viewIcono.shadow = "'._DIR_PLUGIN_GEOMAP.'img_pack/shadow.png";';
+				view_icon.image = "'._DIR_PLUGIN_GEOMAP.'img_pack/correxir.png";';
 			}
 			$out .= '
-			viewIcono.iconSize = new GSize(20, 34);
-			viewIcono.shadowSize = new GSize(22, 20);
-			viewIcono.iconAnchor = new GPoint(10, 34);
-			viewIcono.infoWindowAnchor = new GPoint(5,1);
-			viewPoint = new GPoint('.$point['lonx'].','.$point['lat'].');
-			viewMarker = new GMarker(viewPoint, viewIcono);
-			viewMap.addOverlay(viewMarker);';
+				view_icon.shadow = "'._DIR_PLUGIN_GEOMAP.'img_pack/shadow.png";
+				view_icon.iconSize = new GSize(20, 34);
+				view_icon.shadowSize = new GSize(37, 34);	
+				view_icon.iconAnchor = new GPoint(10, 34);
+				view_icon.infoWindowAnchor = new GPoint(5, 1);
+
+				viewPoint = new GPoint('.$point['lonx'].','.$point['lat'].');
+				viewMarker = new GMarker(viewPoint, view_icon);
+				viewMap.addOverlay(viewMarker);';
 		}
 	}
 	$out .= '
-		} else {
-			alert("Sorry, the Google Maps API is not compatible with this browser");
+			}
 		}
-		/*]]>*/
+		jQuery(document).ready(function(){
+			loadViewMap();
+		});
+		//]]>
 	</script>';
 	return $out;
 }
