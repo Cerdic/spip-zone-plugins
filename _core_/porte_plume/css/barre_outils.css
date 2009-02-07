@@ -38,7 +38,7 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 	margin-left:auto;
 	margin-right:auto;
 	background-image:url(images/handle.png);
-	cursor:n-resize;
+	cursor:s-resize;
 }
 
 /***************************/
