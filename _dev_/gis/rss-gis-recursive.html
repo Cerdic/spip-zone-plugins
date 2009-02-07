@@ -17,18 +17,15 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 	</itunes:owner>
 	<itunes:explicit>no</itunes:explicit>
 	<language>#LANG</language>
-	<BOUCLE_un_article(ARTICLES){id_rubrique ?}{id_secteur ?}{id_mot ?}{id_auteur ?}{recherche ?}{id_article ?}{id_groupe?}{par date}{inverse}{0, #ENV{limit}}>
+	<BOUCLE_un_article(ARTICLES){id_rubrique ?}{id_secteur ?}{id_mot ?}{id_auteur ?}{recherche ?}{id_article ?}{id_groupe ?}{par date}{inverse}{0, #ENV{limit}}>
 	<item>
 	<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
 	[<guid isPermaLink="true">(#URL_ARTICLE|url_absolue)</guid>]
 	[<link>(#URL_ARTICLE|url_absolue)</link>]
-	<description>&lt;div style='width:200px'&gt;
-			&lt;div id='player'&gt;&lt;/div&gt;
-			&lt;div style='font-size:11px; font-weight:bold'&gt;&lt;a href='[(#URL_ARTICLE|url_absolue|texte_backend)]'&gt;[(#TITRE|texte_backend)]&lt;/a&gt; &lt;/div&gt;
-			&lt;div style='font-size:10px; text-align:left'&gt;[(#CHAPO|sinon{#DESCRIPTIF}|supprimer_tags|texte_backend)] &lt;/div&gt;
-			<BOUCLE_imaxe(DOCUMENTS){id_article}{extension==jpg|png|gif}{0,1}>&lt;a href='[(#URL_DOCUMENT|url_absolue)]' [title='(#TITRE|texte_backend)']&gt;&lt;img src='[(#LOGO_DOCUMENT|fichier|url_absolue)]' border='0' [height='(#LOGO_DOCUMENT||hauteur)'] [width='(#LOGO_DOCUMENT||largeur)'] alt='Single Image'&gt;&lt;/a&gt;</BOUCLE_imaxe>
-			&lt;div style='font-size:10px; margin-bottom:10px'&gt;[(#DATE|date_iso)]<BOUCLE_autores(AUTEURS){id_article}>[, <:par_auteur:> &lt;a href='[(#URL_AUTEUR|url_absolue)]'&gt;(#NOM|texte_backend)&lt;/a&gt;]</BOUCLE_autores>&lt;/div&gt;
-			&lt;/div&gt;</description>
+	<description>&lt;p&gt;[(#CHAPO|sinon{#DESCRIPTIF}|supprimer_tags|texte_backend)]&lt;/p&gt;
+			<BOUCLE_imaxe(DOCUMENTS){id_article}{extension==jpg|png|gif}{0,1}>&lt;a href='[(#URL_DOCUMENT|url_absolue)]' [title='(#TITRE|texte_backend)']&gt;&lt;img src='[(#LOGO_DOCUMENT|fichier|url_absolue)]' [height='(#LOGO_DOCUMENT||hauteur)'] [width='(#LOGO_DOCUMENT||largeur)'] alt='Single Image' /&gt;&lt;/a&gt;</BOUCLE_imaxe>
+			&lt;span&gt;[(#DATE|date_iso)]<BOUCLE_autores(AUTEURS){id_article}>[, <:par_auteur:> &lt;a href='[(#URL_AUTEUR|url_absolue)]'&gt;(#NOM|texte_backend)&lt;/a&gt;]</BOUCLE_autores>&lt;/span&gt;
+			</description>
 			[<dc:date>(#DATE|date_iso)</dc:date>]
 			<BOUCLE_gis(GIS){id_article}>
 			<geo_lat>#LAT</geo_lat>
@@ -53,13 +50,10 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 	<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
 	[<guid isPermaLink="true">(#URL_ARTICLE|url_absolue)</guid>]
 	[<link>(#URL_ARTICLE|url_absolue)</link>]
-	<description>&lt;div style='width:200px'&gt;
-			&lt;div id='player'&gt;&lt;/div&gt;
-			&lt;div style='font-size:11px; font-weight:bold'&gt;&lt;a href='[(#URL_ARTICLE|url_absolue|texte_backend)]'&gt;[(#TITRE|texte_backend)]&lt;/a&gt; &lt;/div&gt;
-			&lt;div style='font-size:10px; text-align:left'&gt;[(#CHAPO|sinon{#DESCRIPTIF}|texte_backend)] &lt;/div&gt;
-			<BOUCLE_imaxe2(DOCUMENTS){id_article}{extension==jpg|png|gif}{0,1}>&lt;a href='[(#URL_DOCUMENT|url_absolue)]' [title='(#TITRE|texte_backend)']&gt;&lt;img src='[(#LOGO_DOCUMENT|fichier|url_absolue)]' border='0' [height='(#LOGO_DOCUMENT||hauteur)'] [width='(#LOGO_DOCUMENT||largeur)'] alt='Single Image'&gt;&lt;/a&gt;</BOUCLE_imaxe2>
-			&lt;div style='font-size:10px; margin-bottom:10px'&gt;[(#DATE|date_iso)]<BOUCLE_autores2(AUTEURS){id_article}>[, <:par_auteur:> &lt;a href='[(#URL_AUTEUR|url_absolue)]'&gt;(#NOM|texte_backend)&lt;/a&gt;]</BOUCLE_autores2>&lt;/div&gt;
-			&lt;/div&gt;</description>
+	<description>&lt;p&gt;[(#CHAPO|sinon{#DESCRIPTIF}|supprimer_tags|texte_backend)]&lt;/p&gt;
+			<BOUCLE_imaxe2(DOCUMENTS){id_article}{extension==jpg|png|gif}{0,1}>&lt;a href='[(#URL_DOCUMENT|url_absolue)]' [title='(#TITRE|texte_backend)']&gt;&lt;img src='[(#LOGO_DOCUMENT|fichier|url_absolue)]' [height='(#LOGO_DOCUMENT||hauteur)'] [width='(#LOGO_DOCUMENT||largeur)'] alt='Single Image' /&gt;&lt;/a&gt;</BOUCLE_imaxe2>
+			&lt;span&gt;[(#DATE|date_iso)]<BOUCLE_autores2(AUTEURS){id_article}>[, <:par_auteur:> &lt;a href='[(#URL_AUTEUR|url_absolue)]'&gt;(#NOM|texte_backend)&lt;/a&gt;]</BOUCLE_autores2>&lt;/span&gt;
+			</description>
 			[<dc:date>(#DATE|date_iso)</dc:date>]
 			<BOUCLE_gis2(GIS){id_article}>
 			<geo_lat>#LAT</geo_lat>

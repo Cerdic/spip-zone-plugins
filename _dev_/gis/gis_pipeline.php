@@ -72,7 +72,8 @@ function gis_affichage_final($flux){
 		$incHead = '';
 		if (function_exists('lire_config') && lire_config('gis/api_carte')) {
 			if (function_exists('lire_config') && lire_config("gis/swfobject") != 'non')
-				$incHead .= '<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/swfobject.js"></script>';
+				$incHead .= '
+		<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/swfobject.js"></script>';
 		}
         return substr_replace($flux, $incHead, strpos($flux, '</head>'), 0);
     } else {
