@@ -3,14 +3,14 @@
 function palette_insert_head($flux) {
   $cfg = unserialize($GLOBALS['meta']['palette']);
   if ($cfg['palette_public'] =='on')
-	  $flux .= palette_header_common();
+	  $flux .= palette_header_common('public');
 	return $flux;
 }
 
 function palette_header_prive($flux) {
   $cfg = unserialize($GLOBALS['meta']['palette']);
 	if ($cfg['palette_ecrire'] == 'on')
-	  $flux .= palette_header_common();
+	  $flux .= palette_header_common('prive');
 	return $flux;
 }
 
@@ -20,10 +20,11 @@ function palette_header_prive($flux) {
  *
  * @return string
  */
-function palette_header_common() {
+function palette_header_common($type) {
+	spip_log("type = $type");
 	$f = charger_fonction('palette_header', 'inc');
 	if (is_callable($f))
-		return $f();
+		return $f($type);
 	else
 		return '';
 }
