@@ -23,19 +23,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	//elements de formulaire pour editer les coordonnees
 	
-	"clave_engadida" => "Clef ajout&eacute;e: ",
-	"clic_mapa" => "Cliquer sur la carte pour changer les coordonn&eacute;es",
-	"clic_desplegar" => "d&eacute;plier",
-	"configurar_gis" => "Configurer le Plugin Gis",
-	"conseguir" => "(obtenir)",
-	"coord_enregistre" => "Coordonn&eacute;es enregistr&eacute;es",
-	"coord_maj" => "Coordonn&eacute;es mises &agrave; jour",
-	"cambiar" => "changer les coordonn&eacute;es",
 	"boton_actualizar" => "actualiser",
 	"bouton_supprimer" => "supprimer",
-	"default_geoloc" => "Position par defaut des cartes :",
+	"cambiar" => "changer les coordonn&eacute;es",
+	"clic_mapa" => "Cliquer sur la carte pour changer les coordonn&eacute;es",
+	"clic_desplegar" => "d&eacute;plier",
+	"coord_enregistre" => "Coordonn&eacute;es enregistr&eacute;es",
+	"coord_maj" => "Coordonn&eacute;es mises &agrave; jour",
 	
 	//elements du formulaire public
+	
 	"bouton_documents" => "Valider",
 	"document_joint" => "Documents joints",
 	"document_supprime" => "Document(s) supprim&eacute;(s)",
@@ -46,7 +43,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"erreur_texte" => "Veuillez entrer un texte",
 	"erreur_upload" => "Erreur lors du chargement du fichier",
 	"ok_formulaire_soumis" => "Votre article a &eacute;t&eacute; envoy&eacute; sur le site.",
-
+	
+	"configurar_gis" => "Configurer le Plugin Gis",
 );
 
 ?>
