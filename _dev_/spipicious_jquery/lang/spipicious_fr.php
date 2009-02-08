@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'add_tags' => 'Ajouter des tags',
+	'aucun_tags' => 'Aucun tag associ&eacute;.',
 
 	// B
 	'by' => 'Par',
