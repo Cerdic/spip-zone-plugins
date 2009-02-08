@@ -47,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_changement' => 'Cap canvi a <b>@nom@</b>',
 
 	// R
+	'refus_configuration_webmestre' => 'Nom&eacute;s els webmestres del lloc estan autoritzats per modificar aquests par&agrave;metres. ',
 	'reset' => 'Esborrar',
 
 	// S
