@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_ajouter_donnees' => 'Add data',
-	'icone_creer_table' => 'Create a new table',
+	'icone_creer_table' => '',
 	'importer_donnees_csv' => 'Imprt data',
 	'info_supprimer_formulaire' => 'Do you really want to delete this table?',
 	'info_supprimer_formulaire_reponses' => 'Existing data is associated with this table. Do you really want to delete it?',
