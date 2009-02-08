@@ -7,12 +7,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// 2
 	'2pts' => '@objet@&nbsp;:',
-	'webmestres' => 'Webmestres SPIP',
-	'configurer' => 'Configurer le Couteau Suisse',
-	'connections' => 'Connections',
 
 	// A
 	'attente_confirmation' => 'En attente de confirmation',
+
+	// C
+	'configurer' => 'Configurer le Couteau Suisse',
+	'connections' => 'Connections',
 
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',
@@ -87,7 +88,10 @@ Compatibilit&#233; : SPIP v1.9x et v2.0',
 
 	// V
 	'variable_vide' => '(Vide)',
-	'visiteurs_connectes' => 'Visiteurs connect&eacute;s : @nb@'
+	'visiteurs_connectes' => 'Visiteurs connect&eacute;s : @nb@',
+
+	// W
+	'webmestres' => 'Webmestres SPIP'
 );
 
 ?>
