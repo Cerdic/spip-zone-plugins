@@ -55,6 +55,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 */
 function action_lilo_auteur_infos_dist () {
 
+	//lilo_log("appel action"); // debug
+	
 	$var_login = trim($_POST['var_login']);
 	
 	if(!empty($var_login)) {
@@ -91,7 +93,7 @@ function action_lilo_auteur_infos_dist () {
 			}
 		}
 		
-		// preparer le resultat � renvoyer
+		// preparer le resultat a renvoyer
 		$result = "";
 		$sql_select .= ",logo_src";
 		foreach(split(',', $sql_select) as $key) {

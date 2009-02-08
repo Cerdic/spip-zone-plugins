@@ -1,0 +1,10 @@
+
+	// TODO.txt
+
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+
+- ajouter en option la possibilité de cacher les précédents login validés.
+	(un attribut non strict permet ca)
+- ajouter en option la possibilité de loger les connexions.

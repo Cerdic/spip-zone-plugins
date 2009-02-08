@@ -74,5 +74,17 @@
 		)
 	);
 
+/*
+ * Journal de bord
+ * @return boolean true
+ * @param $msg string
+ */
+function lilo_log ($msg) {
+	spip_log($msg, _LILO_PREFIX);
+	return(true);
+}
+
+lilo_log('ok');
+
 
 ?>

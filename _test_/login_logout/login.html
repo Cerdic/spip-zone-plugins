@@ -1,6 +1,6 @@
 #CACHE{24 * 3600}
 #HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
-[(#REM)
+[<!--(#REM)
 
 	// login.html
 	
@@ -11,7 +11,8 @@
 
 	Le fichier est en cache dans SPIP, mais les navigateurs ne doivent pas
 	conserver cette page en memoire
-]
+
+-->]
 <?xml version="1.0" encoding="#CHARSET"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
@@ -38,7 +39,7 @@
 <script type="text/JavaScript">
 //<![CDATA[
 jQuery().ready(function(){
-	$('#var_login_id').focus();
+	/* $('#var_login_id').focus(); */
 	$('.lilo-alert-intro').hide();
 });
 //]]>

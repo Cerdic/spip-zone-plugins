@@ -1,6 +1,6 @@
 <?php 
 
-	// exec/lilo_pipeline_ajouter_onglets.php
+	// inc/lilo_pipeline_ajouter_onglets.php
 	
 	// $LastChangedRevision$
 	// $LastChangedBy$
