@@ -4,10 +4,11 @@
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
  	aurelien levy , alm()elastick.net
-_ &#169; 2006 - Distribue sous licence GNU/GPL
+_ Daniel Vi&ntilde;ar Ulriksen, dani (a) belvil.net
+_ &#169; 2006 - Distribu&eacute; sous licence GNU/GPL
 	</auteur>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
 	test
@@ -16,18 +17,13 @@ _ &#169; 2006 - Distribue sous licence GNU/GPL
 	permet de g&#233;rer les traductions dans les fichiers de langues
 	</description>
 	<lien></lien> <!-- URI de documentation -->
-	<options>  
-	admin_lang_options.php
-	</options>
+	<options>admin_lang_options.php</options>
  	<pipeline>
 		<nom>ajouter_onglets</nom>
 		<action>ajouterOnglets</action>
         <inclure>admin_lang_boutons.php</inclure>
 	</pipeline>
-	
-	<prefix> 
-	admin_lang
-	</prefix>
+	<prefix>admin_lang</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines
 	<pipeline>
 		<nom>pre_typo</nom>
@@ -35,6 +31,4 @@ _ &#169; 2006 - Distribue sous licence GNU/GPL
 		<inclure>toutmulti.php</inclure>
 	</pipeline> -->
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
-
-	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

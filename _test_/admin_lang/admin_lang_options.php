@@ -32,7 +32,7 @@ function up_arbo_complet($path,$racine_arbo){
 // retourne le chemin d'un fichier sinon tous les chemins possibles
 // à partir de find_in_path() : chercher un fichier nomme x selon le chemin rep1:rep2:rep3
 
-function admin_lang_find_in_path ($filename) {
+function admin_lang_creer_chemin () {
 	static $path_a = array();
 	static $c = '';
 
@@ -74,18 +74,23 @@ function admin_lang_find_in_path ($filename) {
 				$dir .= "/";
 			$path_a[] = $dir;
 		}
-	}
+	} 
+	return $path_a;
+}
  
-	foreach ($path_a as $dir) {
+function admin_lang_find_in_path ($filename) {
+	foreach (admin_lang_creer_chemin () as $dir) {
 			 //$dir = up_arbo_complet($dir,$racine_arbo); 
 			 $listdir[] = $dir;
 			 
-				if (file_exists($f = "$dir$filename")) {
+				if (@is_readable($f = "$dir$filename")) {
 				//$f = up_arbo_complet($f,$racine_arbo);
 		# spip_log("find_in_path trouve $f");
 					return $f;
 				} 
 	}
+
+
 
 # spip_log("find_in_path n'a pas vu '$filename' dans " . join(':',$path_a));
 //alors on recup l'array des dir possibles!
