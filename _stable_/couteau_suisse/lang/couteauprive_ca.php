@@ -61,7 +61,7 @@ _ Enlla&ccedil; de test: [->test@test.com] (recarregueu la p&agrave;gina complet
  
 @puce@ Marcant amb una creu &laquo;si&raquo; m&eacute;s avall, l\'obertura d\'un bloc provocar&agrave; el tancament de tots els altres blocs de la p&agrave;gina, per tal de tenir-ne nom&eacute;s un d\'obert a la vegada.[[%bloc_unique%]]',
 	'blocs:nom' => 'Blocs Desplegables',
-	'boites_privees:description' => 'Tots els quadres descrits m&eacute;s avall apareixen aqu&iacute; o a la part privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]]
+	'boites_privees:description' => '<MODIF>Tots els quadres descrits m&eacute;s avall apareixen aqu&iacute; o a la part privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]]
 - {{Les revisions del Ganivet Su&iacute;s}} : un quadre a la p&agrave;gina actual de configuraci&oacute;, indicant les &uacute;ltimes modificacions aportades al codi del plugin ([Source->@_CS_RSS_SOURCE@]).
 - {{Els articles en format SPIP}}: un quadre plegable suplementari pels vostres articles per tal de con&egrave;ixer el codi font utilitzat pels seus autors.
 - {{Els autors en estat}}: un quadre suplementari a [la p&agrave;gina d\'autors->./?exec=auteurs] que indica els 10 &uacute;ltims connectats i les inscripcions no confirmades. Aquestes informacions nom&eacute;s les veuen els administradors.
@@ -519,6 +519,10 @@ Llisteu aqu&iacute; les seq&uuml;&egrave;ncies prohibides separant-les per espai
 _ • Per especificar una paraula sencera, poseu-la entre par&egrave;ntesi. Exemple~:~{(asses)}.
 _ • Per una expressi&oacute; regular, verifiqueu b&eacute; la sintaxi i poseu-la entre barres inclinades i entre cometes. Exemple~:~{"/@test\\.(com|fr)/"}.  ',
 	'spam:nom' => 'Lluita contra l\'SPAM',
+	'spam_test_ko' => 'Aquest missatge ser&agrave; bloquejat pel filtre anti-SPAM!',
+	'spam_test_ok' => 'Aquest missatge ser&agrave; acceptat pel filtre anti-SPAM.',
+	'spam_tester' => 'Llen&ccedil;ar el test!',
+	'spam_tester_label' => 'Verifiqueu aqu&iacute; la vostra llista de seq&uuml;&egrave;ncies prohibides:',
 	'spip_cache:description' => '@puce@ La mem&ograve;ria cau ocupa un cert espai de disc i SPIP pot limitar-me la import&agrave;ncia. Un valor buit o igual a 0 significa que no s\'aplica cap quota.[[%quota_cache% Mo]]
 
 @puce@ Quan s\'ha fet una modificaci&oacute; del lloc, SPIP invalida immediatament la mem&ograve;ria cau sense esperar el c&agrave;lcul peri&ograve;dic seg&uuml;ent. Si el vostre lloc t&eacute; problemes de presentaci&oacute; com a conseq&uuml;&egrave;ncia d\'una c&agrave;rrega molt elevada, podeu marcar &laquo;&nbsp;non&nbsp;&raquo; en aquesta opci&oacute;. [[%derniere_modif_invalide%]]

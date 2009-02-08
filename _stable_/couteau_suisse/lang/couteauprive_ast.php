@@ -61,7 +61,7 @@ _ Enllaz de preba: [->test@test.com] (recarga la p&aacute;xina pa prebar).[[%env
 
 @puce@ Si marques &laquo;si&raquo; embaxo, l\'apertura d\'un bloque provocar&aacute; que se pesllen toos los dem&aacute;s bloques de la p&aacute;xina, col env&iacute;s de nun tener m&aacute;s que uno solu abiertu a la vez.[[%bloc_unique%]]',
 	'blocs:nom' => 'Bloques Desplegables',
-	'boites_privees:description' => 'Toes les caxes descrites embaxo apaecen per dayuri na parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
+	'boites_privees:description' => '<MODIF>Toes les caxes descrites embaxo apaecen per dayuri na parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Les revisiones de La Navaya Suiza}}: un cuadru na presente p&aacute;xina de configuraci&oacute;n, que indica les caberes modificaciones amest&aacute;es al c&oacute;digu del plugin ([Source->@_CS_RSS_SOURCE@]).
 - {{Los art&iacute;culos en formatu SPIP}}: un cuadru plegable suplementariu pa los art&iacute;culos, col env&iacute;s de saber el c&oacute;digu fonte utilizao polos autores.
 - {{Estad&iacute;stiques de los autores}}: un cuadru suplementariu na [p&aacute;xina de los autores->./?exec=auteurs] que amuesa los caberos 10 coneutaos y les inscripciones nun confirm&aacute;es. S&oacute;lo los alministradores ven esta informaci&oacute;n.
@@ -513,7 +513,7 @@ Esti sumariu pue acoplase con: &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
 	'sommaire:nom' => 'Un sumariu autom&aacute;ticu',
 	'sommaire_avec' => 'Un testu con sumariu: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un testu ensin sumariu: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'spam:description' => 'Tenta lluchar escontra los unv&iacute;os de mensaxes autom&aacute;ticos y gafientos na parte p&uacute;blica. Delles pallabres, igual que les balices en claro &lt;a>&lt;/a>, tan torg&aacute;es: encamienta a los redactores a usar los atayos pa enllaces de SPIP.
+	'spam:description' => '<MODIF>Tenta lluchar escontra los unv&iacute;os de mensaxes autom&aacute;ticos y gafientos na parte p&uacute;blica. Delles pallabres, igual que les balices en claro &lt;a>&lt;/a>, tan torg&aacute;es: encamienta a los redactores a usar los atayos pa enllaces de SPIP.
 
 Llista equ&iacute; les secuencies torg&aacute;es separtandoles con espacios. [[%spam_mots%]]
 • Pa una espresi&oacute;n con espacios, ponla ente comines.

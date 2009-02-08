@@ -15,8 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'SPIP_liens:description' => '@puce@ By default, all links on the site open in the current window. But it can be useful to open external links in a new window, i.e. adding {target="_blank"} to all link tags bearing one of the SPIP classes {spip_out}, {spip_url} or {spip_glossaire}. It is sometimes necessary to add one of these classes to the links in the site\'s templates (html files) in order make this functionality wholly effective.[[%radio_target_blank3%]]
 
 @puce@ SPIP provides the shortcut <code>[?word]</code> to link words to their definition. By default (or if you leave the box below empty), wikipedia.org is used as the external glossary. You may choose another address. <br />Test link: [?SPIP][[%url_glossaire_externe2%]]',
-	'SPIP_liens:description1' => '<NEW>@puce@ SPIP a pr&eacute;vu un style CSS pour les liens &laquo;~mailto:~&raquo; : une petite enveloppe devrait appara&icirc;tre devant chaque lien li&eacute; &agrave; un courriel; mais puisque tous les navigateurs ne peuvent pas l\'afficher (notamment IE6, IE7 et SAF3), &agrave; vous de voir s\'il faut conserver cet ajout.
-_ Lien de test : [->test@test.com] (rechargez la page enti&egrave;rement).[[%enveloppe_mails%]]',
+	'SPIP_liens:description1' => '@puce@ SPIP includes a CSS style for email links: a little envelope appears before each "mailto" link. However not all browsers can display it (IE6, IE7 and SAF3, in particular, cannot). It is up to you to decide whether to keep this addition.
+_ Test link:[->test@test.com] (Reload the page to test.)[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP and external links',
 
 	// A
@@ -61,7 +61,7 @@ _ Lien de test : [->test@test.com] (rechargez la page enti&egrave;rement).[[%env
 
 @puce@ If you tick "yes" below, opening one block will cause all other blocks on the page to close. i.e. only one block is open at a time.[[%bloc_unique%]]',
 	'blocs:nom' => 'Folding Blocks',
-	'boites_privees:description' => 'All the boxes described below appear somewhere in the editing area.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
+	'boites_privees:description' => '<MODIF>All the boxes described below appear somewhere in the editing area.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Swiss Knife updates}}: a box on this configuration page showing the last changes made to the code of the plugin ([Source->@_CS_RSS_SOURCE@]).
 - {{Articles in SPIP format}}: an extra folding box for your articles showing the source code used by their authors.
 - {{Author stats}}: an extra box on [the authors\' page->./?exec=auteurs] showing the last 10 connected authors and unconfirmed registrations. Only administrators can view this information.
@@ -398,8 +398,8 @@ _ • {Extended}: additionally links such as these are also replaced:  {<html>me@s
 	'mailcrypt:nom' => 'MailCrypt',
 	'message_perso' => 'oh!',
 	'moderation_admins' => 'authenticated administrators',
-	'moderation_message' => '<NEW>Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n\'appara&icirc;tra qu\'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site, sauf si vous &ecirc;tes identifi&eacute; et autoris&eacute; &agrave; poster directement.',
-	'moderation_moderee:description' => '<NEW>Permet de mod&eacute;rer la mod&eacute;ration des forums publics <b>configur&eacute;s &agrave; priori</b> pour les utilisateurs inscrits.<br />Exemple : Je suis le webmestre de mon site, et je r&eacute;ponds &agrave; un message d\'un utilisateur, pourquoi devoir valider mon propre message ? Mod&eacute;ration mod&eacute;r&eacute;e le fait pour moi ! [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
+	'moderation_message' => 'This forum is pre-moderated: your contribution will only appear once it has been validated by one of the site administrators (unless you are logged in and authorised to post directly).',
+	'moderation_moderee:description' => 'Makes it possible to moderate the moderation of the <b>pre-moderated</b> public forums for logged-in visitors.<br />Example: I am the webmaster of a site, and I reply to the message of a user who asks why they need to validate their own message. Moderating moderation does it for me! [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
 	'moderation_moderee:nom' => 'Moderate moderation',
 	'moderation_redacs' => 'authenticated authors',
 	'moderation_visits' => 'Visitors authenticated',
@@ -455,7 +455,7 @@ If you reset the plugin by clicking on a pack, the Swiss Knife will reconfigure 
 	'pack_nb_zero' => 'No "configuration pack" is currently available.',
 	'pack_outils_defaut' => 'Installation of the default tools',
 	'pack_sauver' => 'Save the current configuration',
-	'pack_sauver_descrip' => '<NEW>Le bouton ci-dessous vous permet d\'ins&eacute;rer directement dans votre fichier <b>@file@</b> les param&egrave;tres n&eacute;cessaires pour ajouter un &laquo;&nbsp;pack de configuration&nbsp;&raquo; dans le menu de gauche. Ceci vous permettra ult&eacute;rieurement de reconfigurer en un clic votre Couteau Suisse dans l\'&eacute;tat o&ugrave; il est actuellement.',
+	'pack_sauver_descrip' => 'The button below allows you to insert into your <b>@file@</b> file the parameters needed for an additional "configuration pack" in the the lefthand menu. This makes it possible to reconfigure the Swiss Knife with a single click to the current state.',
 	'pack_titre' => 'Current configuration',
 	'pack_variables_defaut' => 'Installation of the default variables',
 	'par_defaut' => 'By default',
@@ -512,7 +512,7 @@ The summary can be used in conjunction with : {[.->decoupe]}.',
 	'sommaire:nom' => 'An automatic summary',
 	'sommaire_avec' => 'An article with summary: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'An article without summary: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'spam:description' => 'Attempts to fight against the sending of abusive and automatic messages through forms on the public site. Some words and the tags  &lt;a>&lt;/a> are prohibited. Train your authors to use SPIP shortcuts for links
+	'spam:description' => '<MODIF>Attempts to fight against the sending of abusive and automatic messages through forms on the public site. Some words and the tags  &lt;a>&lt;/a> are prohibited. Train your authors to use SPIP shortcuts for links
 
 List here the sequences you wish to prohibit separating them with spaces. [[%spam_mots%]]
 • Expressions containing spaces should be placed within inverted commas.
@@ -523,13 +523,19 @@ List here the sequences you wish to prohibit separating them with spaces. [[%spa
 	'spam_test_ok' => 'This message would be accepted by the anti-SPAM filter!',
 	'spam_tester' => 'Launch the test!',
 	'spam_tester_label' => 'Test your list of prohibited expressions here:',
-	'spip_cache:description' => '<MODIF>@puce@ By default, SPIP calculates all the public pages and caches them in order to accelerate their display. It can be useful, when developing the site to disable the cache temporarily, in order to see the effect of changes immediately.[[%radio_desactive_cache3%]]@puce@ The cache occupies disk space and SPIP can limit the amount of space taken up. Leaving empty or putting 0 means that no limit will be applied.[[%quota_cache% Mo]]@puce@ When the site\'s contents are changed, SPIP immediately invalidates the cache without waiting for the next periodic recalculation. If your site experiences performance problems because of the load of repeated recalculations, you can choose "no" for this option.[[%derniere_modif_invalide%]]@puce@ If the #CACHE tag is not found in a template then by default SPIP caches a page for 24 hours before recalculating it. You can modify this default here.[[%duree_cache% heures]]@puce@ If you are running several mutualised sites, you can specify here the default value for all the local sites (SPIP 1.93).[[%duree_cache_mutu% heures]]',
-	'spip_cache:description1' => '<NEW>@puce@ By default, SPIP calculates all the public pages and caches them in order to accelerate their display. It can be useful, when developing the site to disable the cache temporarily. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]',
-	'spip_cache:description2' => '<NEW>@puce@ Four options to control SPIP cache system : <q1>
-_ • {Default} : SPIP will process all public pages and store them in the cache in order to decrease loading times. After a set time, the cache will be re-processed and stored again.
-_ • {Permanent cache} : Cache expiration timers are ignored.
-_ • {No cache} : Disable temporarily the cache system to help debugging. Nothing is stored on the hard drive.
-_ • {Cache debug} : Similar to previous setting, but still write to disk, so that result can be checked for debugging purpose.</q1>[[%radio_desactive_cache4%]]',
+	'spip_cache:description' => '@puce@ The cache occupies disk space and SPIP can limit the amount of space taken up. Leaving empty or putting 0 means that no limit will be applied.[[%quota_cache% Mo]]
+
+@puce@ When the site\'s contents are changed, SPIP immediately invalidates the cache without waiting for the next periodic recalculation. If your site experiences performance problems because of the load of repeated recalculations, you can choose "no" for this option.[[%derniere_modif_invalide%]]
+
+@puce@ If the #CACHE tag is not found in a template then by default SPIP caches a page for 24 hours before recalculating it. You can modify this default here.[[%duree_cache% heures]]
+
+@puce@ If you are running several mutualised sites, you can specify here the default value for all the local sites (SPIP 2.0 mini).[[%duree_cache_mutu% heures]]',
+	'spip_cache:description1' => '@puce@ By default, SPIP calculates all the public pages and caches them in order to accelerate their display. It can be useful, when developing the site to disable the cache temporarily, in order to see the effect of changes immediately.@_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]',
+	'spip_cache:description2' => '@puce@ Four options to configure the cache: <q1>
+_ • {Normal usage}: SPIP places all the calculated pages of the public site in the cache in order to speed up their delivery. After a certain time the cache is recalculated and stored again.
+_ • {Permanent cache}: the cache is never recalculated (time limits in the templates are ignored).
+_ • {No cache}: temporarily deactivating the cache can be useful when the site is being developed. With this option, nothing is cached on disk.
+_ • {Cache checking}: similar to the preceding option. However, all results are written to disk in order to be able to check them.</q1>[[%radio_desactive_cache4%]]',
 	'spip_cache:nom' => 'SPIP and the cache',
 	'stat_auteurs' => 'Authors in statistics',
 	'statuts_spip' => 'Only the following SPIP status:',
@@ -542,27 +548,27 @@ _ • {Cache debug} : Similar to previous setting, but still write to disk, so tha
 
 	// T
 	'titre' => 'The Swiss Knife',
-	'titre_parent:description' => '<MODIF><NEW>Au sein d\'une boucle, il est courant de vouloir afficher le titre du parent de l\'objet en cours. Traditionnellement, il suffirait d\'utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT all&eacute;gera l\'&eacute;criture de vos squelettes. Le r&eacute;sultat renvoy&eacute; est : le titre du groupe d\'un mot-cl&eacute; ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, br&egrave;ve, etc.).
+	'titre_parent:description' => 'Within a loop it is common to want to show the title of the parent of the current object. You normally need to use a second loop to do this, but a new tag #TITRE_PARENT makes the syntax easier. In the case of a MOTS loop, the tag gives the title of the keyword group. For other objetcs (articles, sections, news items, etc.) it gives the title of the parent section (if it exists).
 
-Notez : Pour les mots-cl&eacute;s, un alias de #TITRE_PARENT est #TITRE_GROUPE. Le traitement SPIP de ces nouvelles balises est similaire &agrave; celui de #TITRE.
+Note: For keywords, #TITRE_GROUPE is an alias of #TITRE_PARENT. SPIP treats the contents of these new tags as it does other #TITRE tags.
 
-@puce@ Si vous &ecirc;tes sous SPIP 2.0, alors vous avez ici &agrave; votre disposition tout un ensemble de balises #TITRE_XXX qui pourront vous donner le titre de l\'objet \'xxx\', &agrave; condition que le champ \'id_xxx\' soit pr&eacute;sent dans la table en cours (#ID_XXX utilisable dans la boucle en cours).
+@puce@ If you are using SPIP 2.0, then you can use an array of tags of this form: #TITRE_XXX, which give you the title of the object \'xxx\', provided that the field \'id_xxx\' is present in the current table (i.e. #ID_XXX is available in the current loop).
 
-Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du secteur dans lequel est plac&eacute; l\'article en cours, puisque l\'identifiant #ID_SECTEUR (ou le champ \'id_secteur\') est disponible dans ce cas.[[%titres_etendus%]]',
+For example, in an (ARTICLES) loop, #TITRE_SECTEUR will give the title of the sector of the current article, since the identifier #ID_SECTEUR (or the field  \'id_secteur\') is available in the loop.[[%titres_etendus%]]',
 	'titre_parent:nom' => '#TITRE_PARENT/OBJECT tags',
 	'titre_tests' => 'The Swiss Knife - Test page',
 	'tous' => 'All',
 	'toutes_couleurs' => 'The 36 colours in CSS styles: @_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Multilingual blocks: <b><:trad:></b>',
-	'toutmulti:description' => '<MODIF>Makes it possible to use the shortcut <code><:a_text:></code> in order to place multilingual blocks anywhere in the text, titles, etc. of an article.
+	'toutmulti:description' => 'Makes it possible to use the shortcut <code><:a_text:></code> in order to place multilingual blocks from language files, whether SPIP\'s own or your customised ones, anywhere in the text, titles, etc. of an article.
 
-The SPIP function used is: <code>_T(\'a_text\')</code>.
+More information on this can be found in [this article->http://www.spip.net/en_article2444.html].
 
-User variables can also be added to the shortcuts. For example, <code><:a_text{name=John, tel=2563}:></code> makes it possible to pass the values to the SPIP language file: <code>\'a_text\'=>\'Please contact @name@, the administrator, on @tel@.</code>.
+User variables can also be added to the shortcuts. This was introduced with SPIP 2.0. For example, <code><:a_text{name=John, tel=2563}:></code> makes it possible to pass the values to the SPIP language file: <code>\'a_text\'=>\'Please contact @name@, the administrator, on @tel@.</code>.
 
-In this case, the SPIP function used is: <code>_T(\'a_text\', array(\'var1\'=>\'first text\', \'var2\'=>\'second text\', ...))</code>.
+The SPIP function used is: <code>_T(\'a_text\')</code> (with no parmameters), and <code>_T(\'a_text\', array(\'arg1\'=>\'some words\', \'arg2\'=>\'other words\'))</code> (with parameters).
 
-Do not forget to check that the variable used <code>\'a_text\'</code> is defined in the language files. Consult [this article->http://www.spip.net/en_article2444.html] for documentation.',
+Do not forget to check that the variable used <code>\'a_text\'</code> is defined in the language files.',
 	'toutmulti:nom' => 'Multilingual blocks',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'This site will be back online soon.
@@ -577,30 +583,48 @@ The options below use the SQL function \'ORDER BY\'. Only use the customised opt
 	'tri_perso' => 'Sort by customised SQL, ORDER BY:',
 	'tri_publi' => 'Sort by publication date (ORDER BY date DESC)',
 	'tri_titre' => 'Sort by title (ORDER BY 0+titre,titre)',
-	'type_urls:description' => '<MODIF>@puce@ SPIP offers a choice between several types of URLs for your site:
+	'type_urls:description' => '@puce@ SPIP offers a choice between several types of URLs for your site:
 
-<div style="font-size:90%; margin:0 2em;">
-- {{page}} : the default type for SPIP since version 1.9: <code>/spip.php?article123</code>.
-- {{html}} : URLs take the form of classic html pages: <code>/article123.html</code>.
-- {{propre}} : URLs are constructed using the title of the object: <code>/Mon-titre-d-article</code>.
-- {{propres2}} : the extension \'.html\' is added to the URLs generated: <code>/Mon-titre-d-article.html</code>.
-- {{arborescentes}} (only from SPIP 2.0 on) URLs are built in a tree structure: <code>/sector/section1/section2/article</code>.
-- {{standard}} : the URLs used by SPIP v1.8 and earlier: <code>article.php3?id_article=123</code>
-- {{propres-qs}} : this system functions using a "Query-String", in other words, without using the .htaccess file. The URLs are of the form: <code>/?Mon-titre-d-article</code>.</div>
-
-More information: [->http://www.spip.net/en_article3588.html]
+More information: [->http://www.spip.net/en_article3588.html] The "[.->boites_privees]" tool allows you to see on the page of each SPIP object the clean URL which is associated with it.
 [[%radio_type_urls3%]]
-<p style=\'font-size:85%\'>@_CS_ASTER@to use the types {html}, {propre}, {propre2} ou {arborescentes}, copy the file "htaccess.txt" from the root directory of the SPIP site to a file (also at the root) named ".htaccess" (be careful not to overwrite any existing configuration if there already is a file of this name). If your site is in a subdirectory, you may need to edit the line "RewriteBase" in the file in order for the defined URLs to direct requests to the SPIP files.</p>
+<q3>@_CS_ASTER@to use the types {html}, {propres}, {propres2}, {libres} or {arborescentes}, copy the file "htaccess.txt" from the root directory of the SPIP site to a file (also at the root) named ".htaccess" (be careful not to overwrite any existing configuration if there already is a file of this name). If your site is in a subdirectory, you may need to edit the line "RewriteBase" in the file in order for the defined URLs to direct requests to the SPIP files.</q3>
 
-@puce@ {{Only if you are using the type  {page} described above}} can you choose the displayed calling script for SPIP. By default, SPIP shows {spip.php}, but {index.php} (format : <code>/index.php?article123</code>) or an empty value (format : <code>/?article123</code>) are also possible. To use any other value, you need to create the corresponding file at the root of your site with the same contents as are found in the file {index.php}.
-[[%spip_script%]]
+<radio_type_urls3 valeur="page">@puce@ {{URLs &laquo;page&raquo;}}: the default type for SPIP since version 1.9x.
+_ Example: <code>/spip.php?article123</code>.
+[[%terminaison_urls_page%]][[%separateur_urls_page%]]</radio_type_urls3>
 
-@puce@ {{Only if you are using the type {arborescentes} describes aboves}}, you can customise the format:</p>
-[[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]',
-	'type_urls:description1' => '<NEW>@puce@ If you are using the &laquo;clean&raquo; URL formatting ({propres}, {propres2}, {libres}, {arborescentes} ou {propres_qs}), the swiss knife can :
-<q1>• Make sure the created URL is only in {{small caps}}.</q1>[[%urls_minuscules%]]
-<q1>• Automatically add the {{object id}} to its URL (beforehand, afterhand, etc.).
-_ (examples : <code>/My-article-title,457</code> or <code>/457-My-article-title</code>)</q1>',
+<radio_type_urls3 valeur="html">@puce@ {{URLs &laquo;html&raquo;}}: URLs take the form of classic html pages.
+_ Example : <code>/article123.html</code></radio_type_urls3>
+
+<radio_type_urls3 valeur="propres">@puce@ {{URLs &laquo;propres&raquo;}}: URLs are constructed using the title of the object. Markers (_, -, +, @, etc.) surround the titles, depending on the type of object.
+_ Examples : <code>/My-article-title</code> or <code>/-My-section-</code> or <code>/@My-site@</code>[[%terminaison_urls_propres%]][[%debut_urls_propres%]][[%marqueurs_urls_propres%]]</radio_type_urls3>
+
+<radio_type_urls3 valeur="propres2">@puce@ {{URLs &laquo;propres2&raquo;}}: the extension \'.html\' is added to the URLs generated.
+_ Example : <code>/My-article-title.html</code> or <code>/-My-section-.html</code>
+[[%debut_urls_propres2%]][[%marqueurs_urls_propres2%]]</radio_type_urls3>
+
+<radio_type_urls3 valeur="libres">@puce@ {{URLs &laquo;libres&raquo;}} : the URLs are like {&laquo;propres&raquo;}, but without markers  (_, -, +, @, etc.) to differentiate the objects.
+_ Example : <code>/My-article-title</code> or <code>/My-section</code>
+[[%terminaison_urls_libres%]][[%debut_urls_libres%]]</radio_type_urls3>
+
+<radio_type_urls3 valeur="arbo">@puce@ {{URLs &laquo;arborescentes&raquo;}}: URLs are built in a tree structure.
+_ Example : <code>/sector/section1/section2/My-article-title</code>
+[[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]</radio_type_urls3>
+
+<radio_type_urls3 valeur="propres-qs">@puce@ {{URLs &laquo;propres-qs&raquo;}}:  this system functions using a "Query-String", in other words, without using the .htaccess file. The URLs are of the form. URLs are similar in form to {&laquo;propres&raquo;}.
+_ Example : <code>/?My-article-title</code>
+[[%terminaison_urls_propres_qs%]]</radio_type_urls3>
+
+<radio_type_urls3 valeur="standard">@puce@ {{URLs &laquo;standard&raquo;}}: these now discarded URLs were used by SPIP up to version 1.8.
+_ Example : <code>article.php3?id_article=123</code>
+</radio_type_urls3>
+
+@puce@ If you are using the type  {page} described above or if the object requested is not recognised, you can choose the calling script for SPIP. By default, SPIP uses {spip.php}, but {index.php} (format: <code>/index.php?article123</code>) or an empty value (format: <code>/?article123</code>) are also possible. To use any other value, you need to create the corresponding file at the root of your site with the same contents as in the file {index.php}.
+[[%spip_script%]]',
+	'type_urls:description1' => '@puce@ If you are using a format based on URLs &laquo;propres&raquo; ({propres}, {propres2}, {libres}, {arborescentes} ou {propres_qs}), the Swiss Knife can:
+<q1>• make sure the URL is in {{lower case}}.</q1>[[%urls_minuscules%]]
+<q1>• systematically add the {{ID of the object}} to the URL (as a suffix, prefix, etc.).
+_ (examples: <code>/My-article-title,457</code> or <code>/457-My-article-title</code>)</q1>',
 	'type_urls:nom' => 'Format of URLs',
 	'typo_exposants:description' => '{{Text in French}}: improves the typographical rendering of common abbreviations by adding superscript where necessary (thus, {<acronym>Mme</acronym>} becomes {M<sup>me</sup>}). Common errors corrected:  ({<acronym>2&egrave;me</acronym>} and  {<acronym>2me</acronym>}, for example, become {2<sup>e</sup>}, the only correct abbreviation).
 
@@ -670,12 +694,12 @@ Simply add <code><INCLURE{fond=fonds/visiteurs_connectes}></code> in the templat
 	'votre_choix' => 'Your choice:',
 
 	// W
-	'webmestres:description' => '<NEW>Un {{webmestre}} au sens SPIP est un {{administrateur}} ayant acc&egrave;s &agrave; l\'espace FTP. Par d&eacute;faut et &agrave; partir de SPIP 2.0, il est l’administrateur <code>id_auteur=1</code> du site. Les webmestres ici d&eacute;finis ont le privil&egrave;ge de ne plus &ecirc;tre oblig&eacute;s de passer par FTP pour valider les op&eacute;rations sensibles du site, comme la mise &agrave; jour de la base de donn&eacute;es ou la restauration d’un dump.
+	'webmestres:description' => 'For SPIP, a {{webmaster}} means an {{administrator}} who has an FTP access to the site. By default, from SPIP 2.0 on, this is assumed to be the administrator whose <code>id_auteur=1</code>. Webmasters defined here have the privelege of no longer needing to use FTP to validate important actions on the site, such as upgrading the database format or restoring a backup.
 
-Webmestre(s) actuel(s) : {@_CS_LISTE_WEBMESTRES@}.
-_ Administrateur(s) &eacute;ligible(s) : {@_CS_LISTE_ADMINS@}.
+Current webmasters: {@_CS_LISTE_WEBMESTRES@}.
+_ Eligible administrators: {@_CS_LISTE_ADMINS@}.
 
-En tant que webmestre vous-m&ecirc;me, vous avez ici les droits de modifier cette liste d\'ids -- s&eacute;par&eacute;s par les deux points &laquo;&nbsp;:&nbsp;&raquo; s\'ils sont plusieurs. Exemple : &laquo;1:5:6&raquo;.[[%webmestres%]]',
+As a webmaster yourself, you can change this list od IDs. Use a colon as a separator if there are more than one. e.g. "1:5:6".[[%webmestres%]]',
 	'webmestres:nom' => 'list of webmasters',
 
 	// X

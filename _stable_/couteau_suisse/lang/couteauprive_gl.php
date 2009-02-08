@@ -15,6 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'SPIP_liens:description' => '@puce@ Todas as ligaz&oacute;ns do web se abren predeterminadamente na mesma vent&aacute; de navegaci&oacute;n en curso. Mais pode ser &uacute;til abril ligaz&oacute;ns externas ao web nunha nova vent&aacute; exterior -- iso implica engadir {target="_blank"} a todas as balizas &lt;a&gt; dotadas por  SPIP de clases {spip_out}, {spip_url} ou {spip_glossaire}. Se cadra &eacute; necesario engadir unha destas clases nas ligaz&oacute;ns do esqueleto do web (ficheiros html) co fin de estender ao m&aacute;ximo esta funcionalidade.[[%radio_target_blank3%]]
 
 @puce@ SPIP permite ligar palabras &aacute; s&uacute;a definici&oacute;n merc&eacute; ao atallo tipogr&aacute;fico <code>[?mot]</code>. Predeterminadamente (ou se vostede  deixa baleira a caixa seguinte), o glosario externo reenv&iacute;a sobre a enciclopedia libre wikipedia.org. Pode escoller o enderezo que se vaia utilizar. <br />Ligaz&oacute;n de test : [?SPIP][[%url_glossaire_externe2%]]',
+	'SPIP_liens:description1' => '@puce@ SPIP prev&eacute; un estilo CSS para as ligaz&oacute;ns &laquo;~mailto:~&raquo; : un pequeno cadro deber&iacute;a aparecer para cada ligaz&oacute;n relacionada cun enderezo de correo; mais para que todos os navegadores non o poidan mostrar (nomeadamente IE6, IE7 e SAF3), decida se c&oacute;mpre conservar este engadido.
+_ Ligaz&oacute;n de test : [->test@test.com] (vexa a p&aacute;xina completamente).[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP e as ligaz&oacute;ns externas',
 
 	// A
@@ -60,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 @puce@ Marcando &laquo;si&raquo;, a apertura dun bloque provocar&aacute; o cerre de todos os outros bloques da p&aacute;xina, co fin de non ter m&aacute;is ca un aberto &aacute; vez.[[%bloc_unique%]]
 ',
 	'blocs:nom' => 'Bloques despregables',
-	'boites_privees:description' => 'Todas as funcionalidades abaixo descritas aparecen aqu&iacute; ou na parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]]
+	'boites_privees:description' => '<MODIF>Todas as funcionalidades abaixo descritas aparecen aqu&iacute; ou na parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]]
 [[->%bp_tri_auteurs%]]
 - {{As revisi&oacute;ns da Navalla Su&iacute;za}} : un cadro sobre a presente p&aacute;xina de configuraci&oacute;n que indica as &uacute;ltimas modificaci&oacute;ns achegadas ao c&oacute;digo do m&oacute;dulo ([Source->@_CS_RSS_SOURCE@]).
 - {{Os artigos en formato SPIP}} : un cadro repregable suplementario para os seus artigos co fin co fin de co&ntilde;ecer o  c&oacute;digo fonte usado polos seus autores.
@@ -315,6 +317,7 @@ Atenci&oacute;n, esta ferramenta, precisa para funcionar do m&oacute;dulo {jQuer
 	'label:dossier_squelettes' => 'Cartafol para utilizar :',
 	'label:duree_cache' => 'Duraci&oacute;n da cach&eacute; local :',
 	'label:duree_cache_mutu' => 'Duraci&oacute;n da cach&eacute; en mutualizaci&oacute;n :',
+	'label:enveloppe_mails' => 'Pequeno cadro diante dos enderezos de correo:',
 	'label:expo_bofbof' => 'Mostrar en super&iacute;ndice cando : <html>St(e)(s), Bx, Bd(s) e Fb(s)</html>',
 	'label:forum_lgrmaxi' => 'Valor (en caracteres) :',
 	'label:glossaire_groupes' => 'Grupo(s) usado(s) :',
@@ -371,6 +374,7 @@ Atenci&oacute;n, esta ferramenta, precisa para funcionar do m&oacute;dulo {jQuer
 	'label:url_arbo_sep_id' => 'Car&aacute;cter de separaci&oacute;n \'titulo-id\' para o caso de repetici&oacute;n (doublon) :<br/>(non empregue \'/\')',
 	'label:url_glossaire_externe2' => 'Ligaz&oacute;n sobre o glosario externo :',
 	'label:urls_arbo_sans_type' => 'Mostrar o tipo de obxecto SPIP nos URL :',
+	'label:urls_avec_id' => 'Un id sistem&aacute;ticos, mais...',
 	'label:urls_minuscules' => '@_CS_CHOIX@',
 	'label:webmestres' => 'Lista de webm&aacute;sters do web:',
 	'liens_en_clair:description' => 'Pon &aacute; s&uacute;a disposici&oacute;n o filtro : \'liens_en_clair\'. O seu texto cont&eacute;n probablemente ligaz&oacute;ns de hipertexto que non son visibles tras unha impresi&oacute;n. Este filtro engade entre corchetes o destino de cada ligaz&oacute;n activa (ligaz&oacute;ns externas ou correos). Atenci&oacute;n : en modo de impresi&oacute;n (par&aacute;metro \'cs=print\' ou \'page=print\' no url da p&aacute;xina), esta funcionalidade apl&iacute;case automaticamente.',
@@ -510,11 +514,16 @@ Este sumario pode ser aparellado con : &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
 	'sommaire:nom' => 'Un sumario autom&aacute;tico',
 	'sommaire_avec' => 'Un artigo con sumario&nbsp;: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un artigo sen sumario&nbsp;: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'spam:description' => '<MODIF>Tenta loitar contra os env&iacute;os de mensaxes autom&aacute;ticas e impertinentes na parte p&uacute;blica. Algunhas palabras e as balizas &lt;a>&lt;/a> est&aacute;n prohibidas.
+	'spam:description' => '<MODIF>Tenta loitar contra os env&iacute;os de mensaxes autom&aacute;ticas e impertinentes na parte p&uacute;blica. Algunhas palabras e as balizas &lt;a>&lt;/a> est&aacute;n prohibidas.Anime os seus redactores a empregar os atallos de SPIP
 
-Liste aqu&iacute; as secuencias prohibidas @_CS_ASTER@ separ&aacute;ndoas por espazos. [[%spam_mots%]]
-@_CS_ASTER@Para especificar unha palabra enteira, p&oacute;&ntilde;aa entre par&eacute;nteses. Para unha expresi&oacute;n con espazos, sit&uacute;ea entre comas.',
+Liste aqu&iacute;, separ&aacute;ndoas por espazos, as secuencias prohibidas [[%spam_mots%]]
+• Para unha expresi&oacute;n con espazos, sit&uacute;ea entre par&eacute;nteses. Exemplo:~{(asses)}.
+• Para unha expresi&oacute;n regular, comprobe ben a sintaxe e sit&uacute;ea entre barras e comas. Exemplos:~{"/@test\\.(com|fr)/"}.',
 	'spam:nom' => 'Loita contra o SPAM',
+	'spam_test_ko' => 'Esta mensaxe ser&aacute; bloqueada polo filtro antispam!',
+	'spam_test_ok' => 'Esta mensaxe ser&aacute; aceptada polo filtro antispam.',
+	'spam_tester' => 'Lanzar o test!',
+	'spam_tester_label' => 'Teste aqu&iacute; a s&uacute;a lista de secuencias prohibidas:',
 	'spip_cache:description' => '@puce@ A cach&eacute; ocupa un certo espazo de disco e SPIP pode limitalo. Un valor baleiro ou igual a 0 significa que non se lle aplica ningunha cota.[[%quota_cache% Mo]]
 
 @puce@ Tras unha modificaci&oacute;n do contido do web, SPIP invalida inmediatamente a cach&eacute; sen agardar ao c&aacute;lculo peri&oacute;dico establecido. Se o seu web ten problemas de rendemento por unha carga moi elevada, pode establecer como &laquo;&nbsp;non&nbsp;&raquo; esta opci&oacute;n.[[%derniere_modif_invalide%]]
@@ -553,13 +562,13 @@ A sintaxe <html>#TITRE_XXX{yy}</html> &eacute; igualmente aceptada. Exemplo : <h
 	'tous' => 'Todos',
 	'toutes_couleurs' => 'As 36 cores dos estilos css :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Bloques multiling&uuml;es&nbsp;: <b><:trad:></b>',
-	'toutmulti:description' => '<MODIF>Para instar isto pode facelo xa desde os esqueletos, a utilidade permite usar librementemente nos contidos as cadeas de linguas (bloques multi) de SPIP ou dos seus esqueletos: nos contidos do seu web (artigos, t&iacute;tulos, mensaxes, etc.) coa axuda co atallo <code><:chaine:></code>.
+	'toutmulti:description' => 'Ao instar isto, pode facelo xa nos seus esqueletos, esta utilidade perm&iacute;telle usar librementemente as cadeas de linguas de SPIP ou dos seus esqueletos: nos contidos do seu web (artigos, t&iacute;tulos, mensaxes, etc.) coa axuda co atallo <code><:chaine:></code>.
 
 Consulte [aqui->http://www.spip.net/fr_article2128.html] a documentaci&oacute;n de SPIP sobre este asunto.
 
-Esta ferramenta acepta igualmente os argumentos introducidos por SPIP 2.0. Por exemplo, o atallo <code><:mi&ntilde;a_cadea{nome=Charles Martin, idade=37}:></code> permite pasar dous par&aacute;metros &aacute; cadea seguinte: <code>\'mi&ntilde;a_cadea\'=>"Bos d&iacute;as, eu son @nome@ e te&ntilde;o @idade@ anos\\"</code>.
+Esta ferramenta acepta igualmente os argumentos introducidos por SPIP 2.0. Por exemplo, o atallo <code><:mi&ntilde;a_cadea{nome=Carlos Mart&iacute;n, idade=37}:>/code> permite pasar dous par&aacute;metros &aacute; cadea seguinte: <code>\'mi&ntilde;a_cadea\'=>"Bos d&iacute;as, eu son @nome@ e te&ntilde;o @idade@ anos\\"</code>.
 
-_ A funci&oacute;n SPIP usada en PHP &eacute; : <code>_T(\'chaine\')</code>. sen argumento, e <code>_T(\'chaine\', array(\'arg1\'=>\'un texto\', \'arg2\'=>\'un outro texto\'))</code> con argumentos.
+A funci&oacute;n SPIP usada en PHP &eacute; : <code>_T(\'chaine\')</code>. sen argumento, e <code>_T(\'chaine\', array(\'arg1\'=>\'un texto\', \'arg2\'=>\'un outro texto\'))</code> con argumentos.
 
 Non esqueza verificar que a clave <code>\'cadea\'</code> est&aacute; ben definida nos ficheiros de lingua.',
 	'toutmulti:nom' => 'Bloques multiling&uuml;es',
@@ -616,10 +625,11 @@ _ Exemplo : <code>article.php3?id_article=123</code></radio_type_urls3>
 
 @puce@ Se vostede emprega o formato {p&aacute;xina} seguinte ou se o obxecto demandado non &eacute; reco&ntilde;ecido, &eacute; posible escoller {{o script de chamada }} a SPIP. De modo predeterminado, SPIP escolle {spip.php}, mais {index.php} (exemplo de formato: <code>/index.php?article123</code>) ou un valor baleiro (formato : <code>/?article123</code>) funcionan tam&eacute;n. Para calquera outro valor, c&oacute;mpre crear necesariamente o ficheiro correspondente na raiz de SPIP, a imaxe daquel que xa existe: {index.php}.
 [[%spip_script%]]',
-	'type_urls:description1' => '<MODIF>@puce@ De utilizar un formato con base en URL &laquo;propres&raquo;  ({propres}, {propres2}, {libres}, {arborescentes} ou {propres_qs}), a Navalla Su&iacute;za pode :
+	'type_urls:description1' => '@puce@ De utilizar un formato con base en URL &laquo;propres&raquo;  ({propres}, {propres2}, {libres}, {arborescentes} ou {propres_qs}), a Navalla Su&iacute;za pode :
 <q1>• Asegurarse que o URL producido sexa totalmente en {{en min&uacute;sculas}}.
-_ • Provocar o engadido sistem&aacute;tico do{{id do obxecto}} ao seu URL (en sufixo ou en prefixo).
-_(exemplos : <code>/Meu-titulo-de-artigo,457</code> ou <code>/457-Meu-titulo-de-artigo</code>)</q1>[[%urls_minuscules%]][[->%urls_avec_id%]][[->%urls_avec_id2%]]',
+</ql>[[%urls_minuscules%]]
+ <ql> Provocar o engadido sistem&aacute;tico do{{id do obxecto}} ao seu URL (en sufixo ou en prefixo, etc.).
+_(exemplos : <code>/Meu-titulo-de-artigo,457</code> ou <code>/457-Meu-titulo-de-artigo</code>)</q1>[[%urls_minuscules%]][[->%urls_avec_id%]][[->%urls_avec_id2%]]</ql>',
 	'type_urls:nom' => 'Formato das URL',
 	'typo_exposants:description' => 'Textos franceses : mellora o rendemento tipogr&aacute;fico das abreviaci&oacute;ns correntes, metendo en super&iacute;ndice os elementos necesarios (as&iacute;, {<acronym>Mme</acronym>} produce {M<sup>me</sup>}) e corrixindo os erros correntes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, por exemplo, produce {2<sup>e</sup>}, s&oacute; abreviatura correcta).
 
@@ -641,13 +651,15 @@ Escolla aqu&iacute; se quere po&ntilde;er en super&iacute;ndice certos atallos s
 	'url_propres2' => 'propias2@_CS_ASTER@',
 	'url_propres_qs' => 'propias_qs',
 	'url_standard' => 'est&aacute;ndar',
-	'urls_avec_id' => '<MODIF>Id sistem&aacute;tico en sufixo',
-	'urls_avec_id2' => '<MODIF>Id sistem&aacute;tico en prefixo',
+	'urls_3_chiffres' => 'Impo&ntilde;er un m&iacute;nimo de 3 cifras',
+	'urls_avec_id' => 'Po&ntilde;elo en sufixo',
+	'urls_avec_id2' => 'Po&ntilde;er o Id en prefixo',
 	'urls_base_total' => 'Hai actualmente @nb@ URL na base',
 	'urls_base_vide' => 'A base dos URL est&aacute; baleira',
 	'urls_choix_objet' => 'Edici&oacute;n con base no URL dun obxecto espec&iacute;fico&nbsp;:',
 	'urls_edit_erreur' => 'O formato actual dos URL (&laquo;&nbsp;@type@&nbsp;&raquo;) non permite a edici&oacute;n.',
 	'urls_enregistrer' => 'Rexistrar esta URL na base',
+	'urls_id_sauf_rubriques' => 'Exclu&iacute;r as secci&oacute;ns',
 	'urls_minuscules' => 'Letras min&uacute;sculas',
 	'urls_nouvelle' => 'Editar o URL &laquo;&nbsp;propias&nbsp;&raquo;&nbsp;:',
 	'urls_num_objet' => 'N&uacute;mero&nbsp;:',
