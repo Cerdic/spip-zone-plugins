@@ -185,6 +185,13 @@ function exec_lilo_configuration () {
 			, ($lilo_login_voir_erreur == 'oui'), 'oui', true)
 		. "</fieldset>\n"
 		//
+		// autocomplete ?
+		. "<fieldset class='text-center'>\n"
+		. lilo_form_legend('configurer_login_autocomplete')
+		. lilo_form_checkbox_button ('lilo_login_nocomplete', _T(_LILO_LANG."configurer_login_autocomplete_desc")
+			, ($lilo_login_nocomplete == 'oui'), 'oui', true)
+		. "</fieldset>\n"
+		//
 		. "<fieldset class='text-center'>\n"
 		. lilo_form_legend('configurer_login_session_remember')
 		. lilo_form_checkbox_button ('lilo_login_session_remember', _T(_LILO_LANG."configurer_login_session_remember_desc")

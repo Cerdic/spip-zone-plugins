@@ -26,6 +26,11 @@ $GLOBALS['i18n_'._LILO_PREFIX.'_fr'] = array(
 , 'configurer_login_voir_erreur' => "Message d'erreur"
 , 'configurer_login_voir_erreur_desc' => "Afficher les messages d'erreur (mot-de-passe erroné, login inconnu...)."
 
+, 'configurer_login_autocomplete' => "Désactiver l'autocomplétion"
+, 'configurer_login_autocomplete_desc' => "Demander au butineur de ne pas compléter le champ login
+	(attention: compatible FFX 3.0+, IE 5.0+, Safari 1.0+).
+	"
+
 , 'configurer_login_session_remember' => "Cookie de correspondance"
 , 'configurer_login_session_remember_desc' => "Forcer le cookie de correspondance."
 

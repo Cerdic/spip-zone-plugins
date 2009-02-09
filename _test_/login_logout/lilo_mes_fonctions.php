@@ -102,8 +102,26 @@ function calculer_LILO_LOGIN_VOIR_ERREUR () {
 
 function balise_LILO_LOGIN_VOIR_ERREUR ($p) {
 	$p->code = 'calculer_LILO_LOGIN_VOIR_ERREUR()';
-   $p->statut = 'php';
-   return ($p);
+	$p->statut = 'php';
+	return ($p);
+}
+
+
+/*
+ * l'attribut 'autocomplete' demande au butineur de (ou ne pas) completer le
+ * champ input des que plus de trois caracteres
+ * compatible IE 5.0+, Safari 1.0+
+ * ca ne passe pas en XHTML strict. Sera attribue' en JS
+ * see: http://msdn.microsoft.com/en-us/library/ms533486(VS.85).aspx
+ * @return string 'oui' ou 'non'
+ */
+function calculer_LILO_LOGIN_NOCOMPLETE () {
+	return (lilo_get_config_pref_oui_non('lilo_login_nocomplete'));
+}
+function balise_LILO_LOGIN_NOCOMPLETE ($p) {
+	$p->code = 'calculer_LILO_LOGIN_NOCOMPLETE()';
+	$p->statut = 'php';
+	return ($p);
 }
 
 /*

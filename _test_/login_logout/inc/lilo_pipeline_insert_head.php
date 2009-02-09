@@ -200,6 +200,7 @@ function lilo_insert_head ($flux) {
 			});
 			"; // end $lilo_js_insert_head
 		}
+		
 
 	} // end else
 	

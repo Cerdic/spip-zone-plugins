@@ -60,6 +60,7 @@
 	 	serialize(
 			array(
 				  'lilo_login_voir_logo' => 'non'
+				, 'lilo_login_nocomplete' => 'non'
 				, 'lilo_login_voir_erreur' => 'non'
 				, 'lilo_login_session_remember' => 'oui'
 				, 'lilo_statut_sans_animation' => 'non'

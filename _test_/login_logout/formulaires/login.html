@@ -83,6 +83,9 @@ $(document).ready(function(){
 			}
 		return(false);
 	}); // end submit
+	
+	$('#lilo_login input.noAutoComplete').attr("autocomplete","off"); 
+	
 });[<!--(#REM) fin de .ready() -->]
 </script>
 
@@ -107,7 +110,7 @@ $(document).ready(function(){
 	[(#LILO_LOGIN_VOIR_ERREUR|match{oui}|?{' '})
 		[<div class="reponse_formulaire">(#ENV*{erreur})</div>]]
 	<div><label for="var_login_id"><:login_login:></label>
-	<input type="text" class="forml" id="var_login_id" name="var_login" value="" title="<:login_login2:>" maxlength="40" /></div>
+	<input type="text" class="forml[(#LILO_LOGIN_NOCOMPLETE|match{oui}|?{' '})noAutoComplete]" id="var_login_id" name="var_login" value="" title="<:login_login2:>" maxlength="40" /></div>
 	<input type="hidden" name="session_login_hidden" value="" />
 
 	<div><label for="session_password"><:login_pass2:></label>
