@@ -36,6 +36,7 @@ $GLOBALS['spip_matrice']['image_aplatir'] = 'filtres/images_transforme.php';
 $GLOBALS['spip_matrice']['image_format'] = 'filtres/images_transforme.php';
 $GLOBALS['spip_matrice']['image_renforcement'] = 'filtres/images_transforme.php';
 $GLOBALS['spip_matrice']['image_imagick'] = 'filtres/images_transforme.php';
+$GLOBALS['spip_matrice']['image_fond_transparent'] = 'filtres/images_transforme.php';
 
 
 // Filtres couleur -> couleur

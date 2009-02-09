@@ -1368,4 +1368,87 @@ function image_renforcement($im, $k=0.5)
 	return _image_ecrire_tag($image,array('src'=>$dest));
 }
 
+
+
+
+// 
+// alpha = 0: aucune transparence
+// alpha = 127: completement transparent
+/**
+ * Transforme la couleur de fond de l'image en transparence
+ * Le filtre ne gère pas la notion de contiguite aux bords, et affectera tous les pixels de l'image dans la couleur visee
+ * $background_color : couleur cible
+ * $tolerance : distance L1 dans l'espace RGB des couleur autour de la couleur $background_color pour lequel la transparence sera appliquee
+ * $alpha : transparence a appliquer pour les pixels de la couleur cibles avec la tolerance ci-dessus
+ * $coeff_lissage : coeff applique a la tolerance pour determiner la decroissance de la transparence fonction de la distance L1 entre la couleur du pixel et la couleur cible
+ *
+ * @param string $im
+ * @param string $background_color
+ * @param int $tolerance
+ * @param int $alpha
+ * @param float $coeff_lissage
+ * @return string
+ */
+function image_fond_transparent($im, $background_color, $tolerance=12, $alpha = 127, $coeff_lissage=7)
+{
+	$fonction = array('image_fond_transparent', func_get_args());
+	$image = _image_valeurs_trans($im, "fond_transparent-$background_color-$tolerance-$coeff_lissage-$alpha", "png", $fonction);
+	if (!$image) return("");
+	
+	$x_i = $image["largeur"];
+	$y_i = $image["hauteur"];
+	
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	
+	$creer = $image["creer"];
+	
+	if (true OR $creer) {
+		$bg = _couleur_hex_to_dec($background_color);
+		$bg_r = $bg['red'];
+		$bg_g = $bg['green'];
+		$bg_b = $bg['blue'];
+	
+		// Creation de l'image en deux temps
+		// de facon a conserver les GIF transparents
+		$im = $image["fonction_imagecreatefrom"]($im);
+		imagepalettetotruecolor($im);
+		$im2 = imagecreatetruecolor($x_i, $y_i);
+		@imagealphablending($im2, false);
+		@imagesavealpha($im2,true);
+		$color_t = ImageColorAllocateAlpha( $im2, 255, 255, 255 , 127 );
+		imagefill ($im2, 0, 0, $color_t);
+		imagecopy($im2, $im, 0, 0, 0, 0, $x_i, $y_i);
+
+		$im_ = imagecreatetruecolor($x_i, $y_i);
+		imagealphablending ($im_, FALSE );
+		imagesavealpha ( $im_, TRUE );
+		$color_f = ImageColorAllocateAlpha( $im_, 255, 255, 255 , $alpha );
+
+		for ($x = 0; $x < $x_i; $x++) {
+			for ($y = 0; $y < $y_i; $y++) {
+				$rgb = ImageColorAt($im2, $x, $y);
+				$r = ($rgb >> 16) & 0xFF;
+				$g = ($rgb >> 8) & 0xFF;
+				$b = $rgb & 0xFF;
+				if ((($d=abs($r-$bg_r)+abs($g-$bg_g)+abs($b-$bg_b))<=$tolerance)){
+					imagesetpixel ( $im_, $x, $y, $color_f );
+				}
+				elseif ($tolerance AND $d<=($coeff_lissage+1)*$tolerance){
+					$transp = round($alpha*(1-($d-$tolerance)/($coeff_lissage*$tolerance)));
+					$color_p = ImageColorAllocateAlpha( $im_, $r, $g, $b , $transp);					
+					imagesetpixel ( $im_, $x, $y, $color_p );
+				}
+				else
+					imagesetpixel ( $im_, $x, $y, $rgb );
+			}
+		}
+		_image_gd_output($im_,$image);
+		imagedestroy($im_);
+		imagedestroy($im);
+		imagedestroy($im2);
+	}
+	
+	return _image_ecrire_tag($image,array('src'=>$dest));
+}
 ?>
