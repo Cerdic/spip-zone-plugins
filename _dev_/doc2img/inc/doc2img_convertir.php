@@ -233,9 +233,16 @@ function convertir_document($id_document) {
         //on sauvegarde la page
         if ($version == '0.9') {
             imagick_writeimage($handle_frame, $document['cible_url']['absolute'].$document['frame']);
+            $taille = filesize($document['cible_url']['absolute'].$document['frame']);
+            $largeur = imagick_getwidth($handle_frame);
+            $hauteur = imagick_getheight($handle_frame);
+            
         } else {
             $image_frame->setImageFormat($extension);
             $image_frame->writeImage($document['cible_url']['absolute'].$document['frame']);
+            $taille = $image_frame->getImageLenght();
+            $largeur = $image_frame->getImageWidth();
+            $hauteur = $image_frame->getImageHeight();
             spip_log('ecriture frame '.$frame,'doc2img');
         }
         //sauvegarde les donnees dans la base        
@@ -245,6 +252,9 @@ function convertir_document($id_document) {
                 "id_document" => $id_document,
                 "fichier" => set_spip_doc($document['cible_url']['relative'].$document['frame']),
                 "page" => $frame,
+                "largeur" => $largeur,
+                "hauteur" => $hauteur,
+                "taille" => $taille
             )
         )) {
             spip_log("erreur sql","doc2img");

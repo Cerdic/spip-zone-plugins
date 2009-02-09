@@ -152,6 +152,21 @@ function doc2img_installer($version,$version_finale) {
 #				"TABLE spip_doc2img 
 #					ADD UNIQUE document (id_document, page)"
 #			);
+        //passage en 0.91
+        case 0.9 :
+            sql_alter(
+                "TABLE spip_doc2img
+                    ADD largeur INT"
+            );
+            sql_alter(
+                "TABLE spip_doc2img
+                    ADD hauteur INT"
+            );
+            sql_alter(
+                "TABLE spip_doc2img
+                    ADD taille INT"
+            );
+
     }
 
     //on met à jour la version du plugin
