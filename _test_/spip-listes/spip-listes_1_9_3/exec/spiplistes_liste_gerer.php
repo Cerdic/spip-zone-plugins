@@ -212,12 +212,12 @@ function exec_spiplistes_liste_gerer () {
 						$boite_pour_confirmer_envoi_maintenant = ""
 							. debut_cadre_couleur('', true)
 							// formulaire de confirmation envoi
-							. (!empty($msg_bouton) ? spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE), true) : "")
+							. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE), true)
 							. "<p style='text-align:center;font-weight:bold;' class='verdana2'>"
 							. _T('spiplistes:boite_confirmez_envoi_liste') . "</p>"
-							. (!empty($msg_bouton) ? "<input type='hidden' name='id_liste' value='$id_liste' />\n" : "")
+							. "<input type='hidden' name='id_liste' value='$id_liste' />\n"
 							. spiplistes_form_bouton_valider('btn_confirmer_envoi_maintenant')
-							. (!empty($msg_bouton) ? spiplistes_form_fin(true) : "")
+							. spiplistes_form_fin(true)
 							. fin_cadre_couleur(true)
 							;
 					}
