@@ -54,7 +54,7 @@ ul.forums li.item .texte p {padding:0.8em 30px;margin:0px}
 
 ul.forums li .cartouche {padding:5px;padding-#GET{left}:30px;min-height:30px;border-bottom:1px solid #eee;}
 
-ul.forums li.item {border-top:5px solid #ccc;padding-top:0;}
+ul.forums li.item {border-top:5px solid #ccc;padding-top:0;padding-bottom:0;}
 ul.forums li.item .cartouche {border-top:3px solid #ddd;}
 
 
@@ -77,13 +77,13 @@ ul.forums li .cartouche .reponse_a {font-weight:bold;}
 ul.forums li .cartouche .reponse_a a {font-weight:normal;}
 ul.forums li .cartouche .lien_admin {display:block;}
 
-ul.forums >li.item .actions.moderer {padding-top:10px;margin-#GET{right}:5px;background:url(#CHEMIN{images/actions-24.png}) no-repeat bottom right;}
-ul.forums >li.item:hover .actions.moderer {background-image:none;}
+ul.forums >li.item .actions.moderer {padding-top:5px;padding-bottom:5px;margin-#GET{right}:5px;background:url([(#CHEMIN{images/actions-24.png}|image_alpha{100}|extraire_attribut{src})]) no-repeat bottom right;padding-#GET{right}:30px;}
+ul.forums >li.item:hover .actions.moderer {/*background-image:none;*/}
 ul.forums >li.item .actions.moderer > span {visibility:hidden;}
 ul.forums >li.item:hover .actions.moderer > span  {visibility:visible;}
 
-ul.forums li .actions .bruler {color:#af976d;}
-ul.forums li .actions .supprimer {color:#cf4d4d;}
+ul.forums li .actions .bruler input.submit {color:#af976d;}
+ul.forums li .actions .supprimer input.submit {color:#cf4d4d;}
 
 
 
