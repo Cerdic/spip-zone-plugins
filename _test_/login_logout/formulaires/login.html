@@ -26,6 +26,13 @@ jQuery().ready(function(){
 $(document).ready(function(){
 	[<!--(#REM) 
 		
+		si demande', stopper d'abord l'autocomplete AVANT l'appel au focus()
+		
+	-->]$('#lilo_login input.noAutoComplete').focus(function(){
+		$(this).attr("autocomplete","off"); 
+		});
+	[<!--(#REM) 
+		
 		placer le focus sur le premier champ (login) 
 		
 	-->]$('#var_login_id').focus();
@@ -84,7 +91,6 @@ $(document).ready(function(){
 		return(false);
 	}); // end submit
 	
-	$('#lilo_login input.noAutoComplete').attr("autocomplete","off"); 
 	
 });[<!--(#REM) fin de .ready() -->]
 </script>
