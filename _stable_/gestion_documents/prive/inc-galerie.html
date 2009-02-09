@@ -128,7 +128,7 @@
 			[<p class="credits #EDIT{credits}">(#CREDITS)</p>]
 		</td>
 		<td>[(#AUTORISER{modifier,document,#ID_DOCUMENT})&#91;<a href='#URL_ECRIRE{documents_edit,id_document=#ID_DOCUMENT}'><:bouton_modifier:></a>&#93;]
-		[<span class='supprimer'>(#GET{supprimer}|et{#AUTORISER{supprimer,document,#ID_DOCUMENT}})&#91;<a href='#URL_ACTION_AUTEUR{supprimer_document,#ID_DOCUMENT,#SELF}' class='ajax'><:gestdoc:bouton_supprimer:></a>&#93;</span>]
+		[<span class='supprimer'>(#GET{supprimer}|et{#AUTORISER{supprimer,document,#ID_DOCUMENT}})[(#BOUTON_ACTION{<:gestdoc:bouton_supprimer:>,#URL_ACTION_AUTEUR{supprimer_document,#ID_DOCUMENT,#SELF},ajax})]</span>]
 		</td>
 	</tr>
 	</BOUCLE_galerie>
