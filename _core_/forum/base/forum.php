@@ -37,6 +37,7 @@ function forum_declarer_tables_interfaces($interfaces){
 	$interfaces['table_des_traitements']['PARAMETRES_FORUM'][]= 'htmlspecialchars(%s)';
 	$interfaces['table_des_traitements']['TEXTE']['forums']= "safehtml("._TRAITEMENT_RACCOURCIS.")";
 	$interfaces['table_des_traitements']['TITRE']['forums']= "safehtml("._TRAITEMENT_TYPO.")";
+	$interfaces['table_des_traitements']['NOTES']['forums']= "safehtml("._TRAITEMENT_RACCOURCIS.")";
 	$interfaces['table_des_traitements']['NOM_SITE']['forums']=  "safehtml("._TRAITEMENT_TYPO.")";
 	$interfaces['table_des_traitements']['URL_SITE']['forums']= 'safehtml(vider_url(%s))';
 	$interfaces['table_des_traitements']['AUTEUR']['forums']= 'safehtml(vider_url(%s))';
