@@ -33,7 +33,9 @@ function forum_accueil_encours($texte){
 			$texte .= "\n<br />" . $lien;
 		}
 		if (strlen($texte) AND $GLOBALS['meta']['forum_prive_objets'] != 'non')
-			$texte = _T('texte_en_cours_validation_forum') . $texte;
+			$cpt2 = sql_countsel("spip_articles", "statut='prop'");
+			if ($cpt2)
+				$texte = _T('texte_en_cours_validation_forum') . $texte;
 	}
 
 	return $texte;
