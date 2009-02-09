@@ -28,7 +28,8 @@ Plusieurs methodes d'insertion :
 	- type : string,'flv|swf|mp3|jpg|png|gif'	Types de fichiers a prendre en compte (filtre les documents dans la playliste)
 	- allowfullscreen : boolean true|false true
 	- menu: boolean true|false Affiche ou cache le menu du lecteur au clic droit
-	
+	- align : left|center|right,center
+		
 	Définition du Layout
 	- controlbar : string bottom|over|none Position des controles
 	- width : int px|%,320		Largeur de l'animation flash
@@ -56,17 +57,15 @@ Plusieurs methodes d'insertion :
 	- stretching : string none|exactfit|uniform|fill, uniform
 	- volume: int 90 Volume au chargement
 	
-	
 	Définition des utilisations externes
 	- javascriptid: texte,'player' Donne l'id du player pour le javascript
-	
 	- creator: du texte
 	- prerolllocation: url d'un flv sans son extension
 	- prerolllink: url
 	- postrolllocation: url d'un flv sans son extension
 	- postrolllink: url
 	- domaine: url d'un squelette xspf sur un autre site spip
-	- align : left|center|right,center	
+	
 ]
 
 [(#ENV{objet}|=={site}|oui)
@@ -149,7 +148,7 @@ Plusieurs methodes d'insertion :
 <noscript><p><:xspf:js_necessaire:></p></noscript>
 <!-- alternative texte pour ceux qui ont le js desactive -->
 
-<div id="mediaplayer_container_[(#GET{objet_spip})][_(#GET{objet_val})]" class="xspf_player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;float:[(#GET{align})]})]">
+<div id="mediaplayer_container[_(#ENV{id})]_[(#GET{objet_spip})][_(#GET{objet_val})]" class="xspf_player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;float:[(#GET{align})]})]">
 	<p>
 		<a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.
 	</p>
@@ -193,7 +192,7 @@ Plusieurs methodes d'insertion :
 	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("volume","#GET{volume}");
 	
 	$(document).ready(function() {
-		s[_(#ENV{id})][_(#GET{objet_val})].write("mediaplayer_container_[(#GET{objet_spip})][_(#GET{objet_val})]");
+		s[_(#ENV{id})][_(#GET{objet_val})].write("mediaplayer_container[_(#ENV{id})]_[(#GET{objet_spip})][_(#GET{objet_val})]");
 	});
 // ]]>
 </script>

@@ -52,7 +52,7 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 'description_mediaplayer' => '
 <h4>Configuration du mediaplayer</h4>
 <p>Ici vous pouvez configurer les diff&eacute;rentes options du lecteur "mediaplayer" de Jeroen Wijering.</p>
-En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>',
+En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/SPIP-Plugin-XSPF-Le-modele"> bloc note de kent1</a>',
 
 'mediaplayer_exemple' => 'Pr&eacute;visualisation du mod&egrave;le "mediaplayer" (sur tout le site)',
 'typefichier' => 'Type de fichiers g&eacute;r&eacute;s',
@@ -75,12 +75,12 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 'mute' => 'Mute',
 'play' => 'Lecture',
 'icons' => 'Icones',
-'desc_icons' => 'Afficher les ic&ocirc;nes des documents joints dans la zone de contenu du lecteur.',
+'desc_icons' => 'Permet d\'afficher ou de cacher l\'icone de lecture et de chargement au milieu du lecteur',
 'desc_mute' => 'Met &agrave; z&eacute;ro le volume au chargement. Sauvegard&eacute; dans un cookie.',
 'quality' => 'Qualit&eacute;',
 'desc_quality' => 'Permet de passer d\'une haute &agrave; une basse qualit&eacute;. Sauvegard&eacute; dans un cookie.',
 'stretching' => 'Redimentionnement',
-'desc_stretching' => 'D&eacute;fini la m&eacute;thode de redimentionnement des images dans le lecteur. Peut &ecirc;tre \'non\' (pas de redimentionnement), \'exactfit\' (disproportion&eacute;), \'uniform\' (redimentionnement avec barres noires autour) ou \'fill\' (comme \'uniform\', mais en remplissant compl&ecirc;tement le lecteur).',
+'desc_stretching' => 'D&eacute;fini la m&eacute;thode de redimensionnement des images dans le lecteur. Peut &ecirc;tre \'non\' (pas de redimensionnement), \'exactfit\' (disproportion&eacute;), \'uniform\' (redimensionnement avec barres noires autour) ou \'fill\' (comme \'uniform\', mais en remplissant compl&ecirc;tement le lecteur).',
 'uniform' => 'Uniforme',
 'fill' => 'Remplissage (sans perte)',
 'exactfit' => 'Remplissage exact',
@@ -95,7 +95,7 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 'description_rotator' => '
 <h4>Configuration de rotator</h4>
 <p>Ici vous pouvez configurer les diff&eacute;rentes options du lecteur "rotator" de Jeroen Wijering.</p>
-En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>',
+En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/SPIP-Plugin-XSPF-Le-modele-rotator"> bloc note de kent1</a>',
 
 'rotator_exemple' => 'Pr&eacute;visualisation du mod&egrave;le "rotator" (sur tout le site)',
 'enablejs' => 'Enable JS',

@@ -20,24 +20,45 @@
 	<template><rotator|document=123></template>
 	
 	Pour les options, voir http://www.jeroenwijering.com/extras/readme.html
-	- width : px|%,100%
-	- height : px|%,100%
-	- transition : fade|bgfade|blocks|bubbles|circles|fluids|lines|random|slowfade,fade
-	- overstretch : true|false|fit|none,none
-	- shownavigation : true|false,true
-	- rotate: secondes,10
-	- shuffle : true|false,false
-	- repeat : true|false,true
-	- audio: url
+	
+	- align : left|center|right,center : 
+	- wmode : transparent|opaque ... gère le paramètre flash wmode (pour utilisation avec thickbox notamment)
+	- menu: boolean true|false : Affiche ou cache le menu du lecteur au clic droit
+		
+	Définition du Layout :
+	- width : px|%,100% : Largeur du lecteur
+	- height : px|%,100% : hauteur du lecteur
+	
+	Définition des couleurs :
+	- backcolor : string : couleur héxadécimale
+	- frontcolor : string : couleur héxadécimale
+	- lightcolor : string : couleur héxadécimale
+	- screencolor : string : couleur héxadécimale
+
+	Définition de l'apparence du lecteur :
 	- jwlogo: url
-	- autoscroll: true|false, false
+	- overstretch : true|false|fit|none,none
+	- showeq : boolean true|false : Affiche l'equalizer sur le lecteur (utile pour des fichiers mp3)
+	- showicons : boolean true|false : Montrer l'icone d'activit&eacute et le bouton de lecture au milieu du lecteur
+	- transition : fade|bgfade|blocks|bubbles|circles|fluids|lines|random|slowfade,fade : choisi la méthode de transition
+
+	Définition de l'apparence de la barre de contôles :
+	- shownavigation : true|false,true Active/désactive la barre de navigation.
+	- usefullscreen : true|false,true 
+	
+	Définition du comportement lors de la lecture :
+	- audio : string,url : Url d'un fichier audio à lire lors de la lecture des images
+	- autostart
+	- repeat : true|false,true
+	- rotatetime: int,5 : Nombre de secondes entre les rotations d'images
+	- shuffle : true|false,false
+
+	Communication externe :
+	- enablejs : boolean true|false,true
+	- javascriptid : string,player 
 	- link: url
 	- linkfromdisplay: true|false, false
 	- linktarget: _blanl|_self|_parent|_top|framename, _self
-	- align : left|center|right,center
-	
-	- menu: boolean true|false Affiche ou cache le menu du lecteur au clic droit 
-	
 ]
 
 [(#ENV{donnee}|oui) 
@@ -87,20 +108,22 @@
 
 [(#SET{jwlogo,#ENV{logo,#CONFIG{xspf/rotlogo}}})]
 [(#SET{overstretch,#ENV{overstretch,#CONFIG{xspf/rotoverstretch}|sinon{none}}})]
+[(#SET{showeq,#ENV{showeq,#CONFIG{xspf/rotshoweq}|sinon{false}}})]
 [(#SET{showicons,#ENV{showicons,#CONFIG{xspf/rotshowicons}|sinon{true}}})]
 [(#SET{transition,#ENV{transition,#CONFIG{xspf/rottransition}|sinon{fade}}})]
 
-[(#SET{usefullscreen,#ENV{usefullscreen,#CONFIG{xspf/rotusefullscreen}|sinon{true}}})]
 [(#SET{shownavigation,#ENV{shownavigation,#CONFIG{xspf/rotshownavigation}|sinon{true}}})]
+[(#SET{usefullscreen,#ENV{usefullscreen,#CONFIG{xspf/rotusefullscreen}|sinon{true}}})]
 
 [(#SET{audio,#ENV{audio,#CONFIG{xspf/rotaudio}}})]
 [(#SET{autostart,#ENV{autostart,#CONFIG{xspf/rotautostart}|sinon{false}}})]
 [(#SET{repeat,#ENV{repeat,#CONFIG{xspf/rotrepeat}|sinon{true}}})]
-[(#SET{rotatetime,#ENV{rotate,#CONFIG{xspf/rotrotate}|sinon{5}}})]
+[(#SET{rotatetime,#ENV{rotatetime,#CONFIG{xspf/rotrotate}|sinon{5}}})]
 [(#SET{shuffle,#ENV{shuffle,#CONFIG{xspf/rotshuffle}|sinon{false}}})]
 [(#SET{volume,#ENV{volume,#CONFIG{xspf/rotvolume}|sinon{90}}})]
 
 [(#SET{enablejs,#ENV{enablejs,#CONFIG{xspf/enablejs}}})]
+[(#SET{javascriptid,#ENV{javascriptid,#CONFIG{xspf/rotjavascriptid}}})]
 [(#SET{link,#ENV{link,#CONFIG{xspf/rotlink}}})]
 [(#SET{linkfromdisplay,#ENV{linkfromdisplay,#CONFIG{xspf/rotlinkfromdisplay}}})]
 [(#SET{linktarget,#ENV{linktarget,#CONFIG{xspf/rotlinktarget}}})]
@@ -133,13 +156,12 @@
 
 	[(#GET{jwlogo}|!={''}|oui)s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("logo","#GET{jwlogo}");]
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("overstretch","#GET{overstretch}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("showeq","#GET{showeq}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("showicons","#GET{showicons}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("transition","#GET{transition}");
 
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("usefullscreen","#GET{usefullscreen}");
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("shownavigation","#GET{shownavigation}");
-	
-	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("kenburns","false");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("usefullscreen","#GET{usefullscreen}");
 
 	[(#GET{audio}|!={''}|oui)s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("audio","#GET{audio}");]
 	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("autostart","#GET{autostart}");
