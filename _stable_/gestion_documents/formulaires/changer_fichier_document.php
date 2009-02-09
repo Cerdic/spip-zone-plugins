@@ -24,13 +24,30 @@ function formulaires_changer_fichier_document_charger_dist($id_document){
 }
 
 function formulaires_changer_fichier_document_verifier_dist($id_document){
-	$verifier = charger_fonction('verifier','formulaires/joindre_document');
-	return $verifier($id_document);
+	$erreurs = array();
+	if (_request('copier_local')){
+	}
+	else {
+		$verifier = charger_fonction('verifier','formulaires/joindre_document');
+		$erreurs = $verifier($id_document);
+	}
+	return $erreurs;
 }
 
 function formulaires_changer_fichier_document_traiter_dist($id_document){
-	$traiter = charger_fonction('traiter','formulaires/joindre_document');
-	return $traiter($id_document);
+	if (_request('copier_local')){
+		$copier_local = charger_fonction('copier_local','action');
+		$res = array('editable'=>true);
+		if (($err=$copier_local($id_document))===true)
+			$res['message_ok'] = _T('gestdoc:document_copie_locale_succes');
+		else
+			$res['message_erreur'] = $err;
+	}
+	else {
+		$traiter = charger_fonction('traiter','formulaires/joindre_document');
+		$res = $traiter($id_document);
+	}
+	return $res;
 }
 
 ?>

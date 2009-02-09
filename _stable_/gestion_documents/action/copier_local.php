@@ -18,19 +18,22 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // realise la copie.
 
 // http://doc.spip.org/@action_copier_local_dist
-function action_copier_local_dist() {
+function action_copier_local_dist($id_document=0) {
 
-	// Recupere les arguments.
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
-
-	$id_document = intval($arg);
+	if (!$id_document){
+		// Recupere les arguments.
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	
+		$id_document = intval($arg);
+	}
 
 	if (!$id_document) {
 		spip_log("action_copier_local_dist $arg pas compris");
+		return false;
 	} else  {
 		// arguments recuperes, on peut maintenant appeler la fonction.
-		action_copier_local_post($id_document);
+		return action_copier_local_post($id_document);
 	}
 }
 
@@ -56,10 +59,12 @@ function action_copier_local_post($id_document) {
 		// ajouter l'origine du document aux credits
 		include_spip('action/editer_document');
 		document_set($id_document,array('credits'=>($row['credits']?$row['credits'].', ':'').$source));
+		return true;
 		
 	} else {
 		spip_log("echec copie locale $source");
 	}
+	return _T('gestdoc:erreur_copie_fichier',array('nom'=>$source));
 }
 
 ?>

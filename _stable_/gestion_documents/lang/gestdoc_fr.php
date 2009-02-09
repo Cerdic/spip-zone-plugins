@@ -43,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'des_videos'=>'@nb@ s&eacute;quences',
 	'des_utilisations'=>'@nb@ utilisations',
 	'document_installe_succes' => 'Le fichier a bien &eacute;t&eacute; charg&eacute;',
+	'document_copie_locale_succes' => 'Le fichier a bien &eacute;t&eacute; copi&eacute; dans le site',
 	'nb_documents_installe_succes' => '@nb@ fichiers charg&eacute;s avec succ&egrave;s',
 	'document_vu' => 'Ins&eacute;r&eacute; dans le texte',
 	
@@ -106,6 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	//
 	'verifier_documents_brises' => 'V&eacute;rifier les fichiers manquants',
+	'vignette_supprimee' => 'La vignette a &eacute;t&eacute; supprim&eacute;e',
 
 	
 /*	'affichage' => 'Affichage :',

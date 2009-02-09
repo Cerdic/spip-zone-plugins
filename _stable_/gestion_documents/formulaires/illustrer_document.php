@@ -29,30 +29,46 @@ function formulaires_illustrer_document_charger_dist($id_document){
 }
 
 function formulaires_illustrer_document_verifier_dist($id_document){
-	$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
-	$verifier = charger_fonction('verifier','formulaires/joindre_document');
-	return $verifier($id_vignette,0,'','vignette');
+	$erreurs = array();
+	if (_request('supprimer')){
+		
+	}
+	else {
+		
+		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
+		$verifier = charger_fonction('verifier','formulaires/joindre_document');
+		$erreurs = $verifier($id_vignette,0,'','vignette');
+	}
+	return $erreurs;
 }
 
 function formulaires_illustrer_document_traiter_dist($id_document){
 	$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
-	$ajouter_documents = charger_fonction('ajouter_documents', 'action');
-
-	include_spip('inc/joindre_document');
-	$files = joindre_trouver_fichier_envoye();
-
-	$ajoute = action_ajouter_documents_dist($id_vignette,$files,'',0,'vignette');
-
 	$res = array('editable'=>true);
-	
-	if (is_int(reset($ajoute))){
-		$id_vignette = reset($ajoute);
-		include_spip('action/editer_document');
-		document_set($id_document,array("id_vignette" => $id_vignette,'mode'=>'document'));
-		$res['message_ok'] = _T('gestdoc:document_installe_succes');
+	if (_request('supprimer')){
+		$supprimer_document = charger_fonction('supprimer_document','action');
+		if ($id_vignette)
+			$supprimer_document($id_vignette);
+		$res['message_ok'] = _T('gestdoc:vignette_supprimee');
 	}
-	else 
-		$res['message_erreur'] = reset($ajoute);
+	else {
+		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
+	
+		include_spip('inc/joindre_document');
+		$files = joindre_trouver_fichier_envoye();
+	
+		$ajoute = action_ajouter_documents_dist($id_vignette,$files,'',0,'vignette');
+	
+		
+		if (is_int(reset($ajoute))){
+			$id_vignette = reset($ajoute);
+			include_spip('action/editer_document');
+			document_set($id_document,array("id_vignette" => $id_vignette,'mode'=>'document'));
+			$res['message_ok'] = _T('gestdoc:document_installe_succes');
+		}
+		else 
+			$res['message_erreur'] = reset($ajoute);
+	}
 
 	// todo : 
 	// generer les case docs si c'est necessaire
