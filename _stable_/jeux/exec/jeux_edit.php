@@ -31,10 +31,10 @@ function exec_jeux_edit(){
 	if(defined('_SPIP19100')) debut_cadre_formulaire(); else echo debut_cadre_formulaire('', true);
 
 	echo "<form method='post' name='jeux_edit'>\n";
-	debut_cadre_relief();
+//	debut_cadre_relief();
 	include_spip('public/assembler');
 	echo recuperer_fond('fonds/jeux_edit',array('id_jeu'=>$id_jeu));
-	fin_cadre_relief();
+//	fin_cadre_relief();
 	echo "<p align='right'><input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo' /></p>";
 	echo '</form>';
 	if(defined('_SPIP19100')) fin_cadre_formulaire(); else echo fin_cadre_formulaire(true);
