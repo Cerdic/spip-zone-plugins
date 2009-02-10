@@ -17,7 +17,6 @@ function lienscontenus_upgrade($nom_meta_base_version, $version_cible)
 			effacer_meta($nom_meta_base_version); // salade de majuscules
 			ecrire_meta($nom_meta_base_version, $current_version=$version_cible, 'non');
 
-			spip_log('Initialisation des contenus', 'liens_contenus');
 			lienscontenus_initialiser();
 		}
 		if (version_compare($current_version,'0.2','<')) {

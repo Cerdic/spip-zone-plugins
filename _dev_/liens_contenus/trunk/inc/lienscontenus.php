@@ -53,7 +53,7 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
 					break;
 				case 'document':
 					if ($type_objet_contenant == 'article' || $type_objet_contenant == 'rubrique') {
-						$nb = sql_countsel("spip_documents_liens", "objet=".$type_objet_contenant." AND id_document=".$id_objet_contenu." AND id_objet=".$id_objet_contenant);
+						$nb = sql_countsel("spip_documents_liens", "objet='".$type_objet_contenant."' AND id_document=".$id_objet_contenu." AND id_objet=".$id_objet_contenant);
 						if ($nb == 1) {
 							// Si le doc est rattache a l'article ou la rubrique courant, on ne doit pas le comptabiliser
 							$nouveau_lien = false;
@@ -122,8 +122,6 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
 			  )
 			);
 		}
-	} else {
-		//spip_log('- aucun lien', 'liens_contenus');
 	}
 }
 
@@ -132,24 +130,27 @@ function lienscontenus_initialiser()
 {
 	// vider la table
 	sql_delete("spip_liens_contenus");
-
-	// TODO: ne fonctionne plus en SPIP 2...
-	/*
-	include_spip('inc/indexation');
-	$liste_tables = liste_index_tables();
+  spip_log('Initialisation des contenus', 'liens_contenus');
+	
+  // TODO: decouvrir un moyen automatique en SPIP 2 de récupérer la liste des tables
+  $liste_tables = array(
+    'spip_articles' => 'id_article',
+    'spip_rubriques' => 'id_rubrique',
+    'spip_breves' => 'id_breve',
+    'spip_syndic' => 'id_syndic',
+    'spip_forum' => 'id_forum'
+  );
 	// parcourir les tables et les champs
-	foreach ($liste_tables as $table) {
+	foreach ($liste_tables as $table => $col_id) {
 		$type_objet_contenant = ereg_replace("^spip_(.*[^s])s?$", "\\1", $table);
-		$col_id = primary_index_table($table);
-		if ($res = spip_query("SELECT * FROM $table")) {
-			while ($row = spip_fetch_array($res)) {
+		if ($res = sql_select("*", $table)) {
+			while ($row = sql_fetch($res)) {
 				$id_objet_contenant = $row[$col_id];
 				// implode() n'est pas forcement le plus propre conceptuellement, mais ca doit convenir et c'est rapide
 				lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contenant, implode(' ', $row));
 			}
 		}
 	}
-  */
 }
 
 function lienscontenus_boite_liste($type_objet, $id_objet)
