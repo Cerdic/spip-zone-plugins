@@ -1,12 +1,15 @@
 <plugin>
 	<nom>Liens inter-contenus</nom>
-	<auteur>Nicolas Hoizey &#169; 2007 - Licence GNU/GPL</auteur>
-	<version>0.18</version>
+	<auteur>Nicolas Hoizey</auteur>
+	<licence>GNU/GPL</licence>
+	<version>0.19</version>
 	<version_base>0.2</version_base>
 	<install>base/lienscontenus_upgrade.php</install>
 	<etat>dev</etat>
+  <necessite id='SPIP' version='[2.0.0;]' />
+  <lien>http://www.spip-contrib.net/Liens-inter-contenus</lien>
 	<description>
-Ce plugin (pour SPIP 1.9.2+) permet d'identifier les liens d&eacute;finis entre les contenus au sein de leurs &eacute;l&eacute;ments textuels, et donc notamment d'{{&eacute;viter la suppression par erreur}} d'une rubrique, d'un article, d'une br&egrave;ve, d'un site, d'un document ou m&ecirc;me d'un mod&egrave;le, vers lesquels pointent d'autres contenus.
+Ce plugin (pour SPIP 2.0.0+) permet d'identifier les liens d&eacute;finis entre les contenus au sein de leurs &eacute;l&eacute;ments textuels, et donc notamment d'{{&eacute;viter la suppression par erreur}} d'une rubrique, d'un article, d'une br&egrave;ve, d'un site, d'un document ou m&ecirc;me d'un mod&egrave;le, vers lesquels pointent d'autres contenus.
 
 Reste &agrave; faire :
 -* Etendre le contr&ocirc;le de depublication aux actions dans les listes
@@ -14,13 +17,16 @@ Reste &agrave; faire :
 -* Initialisation progressive en cron pour les gros sites
 -* R&eacute;f&eacute;rencement des liens externes ? (rapprochement avec le plugin {checklink} de C&eacute;dric ?)
 	</description>
-    <chemin dir='' />
+  <chemin dir='' />
 	<prefix>lienscontenus</prefix>
 	<options>lienscontenus_options.php</options>
 	<fonctions>lienscontenus_fonctions.php</fonctions>
+  <pipeline>
+    <nom>declarer_tables_principales</nom>
+    <inclure>base/lienscontenus.php</inclure>
+  </pipeline>
 	<pipeline>
-		<nom>post_edition</nom>
-		<action>post_edition</action>
+		<nom>pre_edition</nom>
 		<inclure>lienscontenus_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>

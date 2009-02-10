@@ -1,27 +1,17 @@
 <?php
-/*
- * liens_contenus
- * Gestion des liens inter-contenus
- *
- * Auteur :
- * Nicolas Hoizey
- * © 2007 - Distribue sous licence GNU/GPL
- *
- */
-
 function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contenant, $contenu)
 {
-    spip_log('Referencer liens contenus dans '.$type_objet_contenant.' '.$id_objet_contenant.' :', 'liens_contenus');
+	spip_log('Referencer liens contenus dans '.$type_objet_contenant.' '.$id_objet_contenant.' :', 'liens_contenus');
 
-    $liens_trouves = array();
+	$liens_trouves = array();
 
 	// Types et aliases
 	$liens_contenus_types = array('article', 'breve', 'rubrique', 'auteur', 'document', 'mot', 'syndic');
-	$liens_contenus_aliases = array('art' => 'article', 'br' => 'breve', 'brËve' => 'breve', 'rub' => 'rubrique', 'aut' => 'auteur', 'doc' => 'document', 'im' => 'document', 'img' => 'document', 'image' => 'document', 'emb' => 'document', 'mot' => 'mot', 'site' => 'syndic');
+	$liens_contenus_aliases = array('art' => 'article', 'br' => 'breve', 'br√®ve' => 'breve', 'rub' => 'rubrique', 'aut' => 'auteur', 'doc' => 'document', 'im' => 'document', 'img' => 'document', 'image' => 'document', 'emb' => 'document', 'mot' => 'mot', 'site' => 'syndic');
 
 	// Effacer les liens connus
-	spip_query("DELETE FROM spip_liens_contenus WHERE type_objet_contenant="._q($type_objet_contenant)." AND id_objet_contenant="._q($id_objet_contenant));
-	
+	sql_delete("spip_liens_contenus", "type_objet_contenant="._q($type_objet_contenant)." AND id_objet_contenant="._q($id_objet_contenant));
+
 	// Echapper les <a href>, <html>...< /html>, <code>...< /code>
 	include_spip('inc/texte');
 	$contenu = echappe_html($contenu);
@@ -37,7 +27,7 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
 				if (!$type_objet_contenu) $type_objet_contenu = 'article';
 				$type_objet_contenu = isset($liens_contenus_aliases[$type_objet_contenu]) ? $liens_contenus_aliases[$type_objet_contenu] : $type_objet_contenu;
 				if (in_array($type_objet_contenu, $liens_contenus_types)) {
-				    $liens_trouves[$type_objet_contenu.' '.$id_objet_contenu] = array('type' => $type_objet_contenu, 'id' =>$id_objet_contenu);
+					$liens_trouves[$type_objet_contenu.' '.$id_objet_contenu] = array('type' => $type_objet_contenu, 'id' =>$id_objet_contenu);
 				}
 			}
 		}
@@ -45,92 +35,95 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
 
 	// Raccourcis d'insertion de modeles
 	$regexp = '/<([a-z_-]{3,})\s*([0-9]+)?([|][^>]*)*>/iS';
-    // La regex de inc/texte n'est pas exploitable directement
-    // $regexp = '/'._RACCOURCI_MODELE.'/iS';
+	// La regex de inc/texte n'est pas exploitable directement
+	// $regexp = '/'._RACCOURCI_MODELE.'/iS';
 	if (preg_match_all($regexp, $contenu, $matches, PREG_SET_ORDER)) {
 		foreach ($matches as $match) {
 			list($chaine_modele ,$type_objet_contenu, $id_objet_contenu, $params) = $match;
 			$type_objet_contenu = isset($liens_contenus_aliases[$type_objet_contenu]) ? $liens_contenus_aliases[$type_objet_contenu] : $type_objet_contenu;
-            $nouveau_lien = true;
-            switch ($type_objet_contenu) {
-                case 'article':
-                case 'rubrique':
-                case 'breve':
-                case 'syndic':
-                case 'auteur':
-                case 'mot':
-                    // Les elements de base de SPIP ont des pseudo modeles automatiques
-                    break;
-                case 'document':
-                    if ($type_objet_contenant == 'article' || $type_objet_contenant == 'rubrique') {
-                        $query = 'SELECT COUNT(*) AS nb FROM spip_documents_'.$type_objet_contenant.'s WHERE id_document='.$id_objet_contenu.' AND id_'.$type_objet_contenant.'='.$id_objet_contenant;
-                        $res = spip_query($query);
-                        $row = spip_fetch_array($res);
-                        if ($row['nb'] == 1) {
-                            // Si le doc est rattache a l'article ou la rubrique courant, on ne doit pas le comptabiliser
-                            $nouveau_lien = false;
-                        }
-                    }
-                    break;
-            	case 'form':
-                    // Soyons gentil avec le plugin Forms s'il est activé
-                    if (defined('_DIR_PLUGIN_FORMS')) {
-                        break;
-                    }
-                default:
-                    if ($id_objet_contenu != '' || $params != '') {
-                        // C'est a priori un modele
-                        $params = array_filter(explode('|', strtolower($params)));
-                        if ($params) {
-                            list(, $soustype) = each($params);
-                            if (in_array($soustype, array('left', 'right', 'center'))) {
-                                list(, $soustype) = each($params);
-                            }
-                            if (preg_match(',^[a-z0-9_]+$,', $soustype)) {
-                                if (find_in_path('modeles/'.$type_objet_contenu.'_'.$soustype.'.html')) {
-                                    // C'est un modele compose
-                                    $id_objet_contenu = $type_objet_contenu.'_'.$soustype;
-                                    $type_objet_contenu = 'modele';
-                                } elseif (find_in_path('modeles/'.$type_objet_contenu.'.html')) {
-                                    // C'est un modele simple
-                                    $id_objet_contenu = $type_objet_contenu;
-                                    $type_objet_contenu = 'modele';
-                                } else {
-                                    // C'est cense etre un modele, mais on ne le trouve pas
-                                    $id_objet_contenu = $type_objet_contenu;
-                                    $type_objet_contenu = 'modele';
-                                }
-                            }
-                        } elseif (find_in_path('modeles/'.$type_objet_contenu.'.html')) {
-                            // C'est un modele simple
-                            $id_objet_contenu = $type_objet_contenu;
-                            $type_objet_contenu = 'modele';
-                        } else {
-                            // C'est cense etre un modele, mais on ne le trouve pas
-                            $id_objet_contenu = $type_objet_contenu;
-                            $type_objet_contenu = 'modele';
-                        }
-                    } else {
-                        // Ce n'est pas un modele, sans doute un de <quote>, <poesie>, <html>, <code>, <cadre>, etc.
-                        $nouveau_lien = false;
-                    }
-            }
-            if ($nouveau_lien) {
-                $liens_trouves[$type_objet_contenu.' '.$id_objet_contenu] = array('type' => $type_objet_contenu, 'id' =>$id_objet_contenu);
-            }
+			$nouveau_lien = true;
+			switch ($type_objet_contenu) {
+				case 'article':
+				case 'rubrique':
+				case 'breve':
+				case 'syndic':
+				case 'auteur':
+				case 'mot':
+					// Les elements de base de SPIP ont des pseudo modeles automatiques
+					break;
+				case 'document':
+					if ($type_objet_contenant == 'article' || $type_objet_contenant == 'rubrique') {
+						$nb = sql_countsel("spip_documents_liens", "objet=".$type_objet_contenant." AND id_document=".$id_objet_contenu." AND id_objet=".$id_objet_contenant);
+						if ($nb == 1) {
+							// Si le doc est rattache a l'article ou la rubrique courant, on ne doit pas le comptabiliser
+							$nouveau_lien = false;
+						}
+					}
+					break;
+				case 'form':
+					// Soyons gentil avec le plugin Forms s'il est actif
+					if (defined('_DIR_PLUGIN_FORMS')) {
+						break;
+					}
+				default:
+					if ($id_objet_contenu != '' || $params != '') {
+						// C'est a priori un modele
+						$params = array_filter(explode('|', strtolower($params)));
+						if ($params) {
+							list(, $soustype) = each($params);
+							if (in_array($soustype, array('left', 'right', 'center'))) {
+								list(, $soustype) = each($params);
+							}
+							if (preg_match(',^[a-z0-9_]+$,', $soustype)) {
+								if (find_in_path('modeles/'.$type_objet_contenu.'_'.$soustype.'.html')) {
+									// C'est un modele compose
+									$id_objet_contenu = $type_objet_contenu.'_'.$soustype;
+									$type_objet_contenu = 'modele';
+								} elseif (find_in_path('modeles/'.$type_objet_contenu.'.html')) {
+									// C'est un modele simple
+									$id_objet_contenu = $type_objet_contenu;
+									$type_objet_contenu = 'modele';
+								} else {
+									// C'est cense etre un modele, mais on ne le trouve pas
+									$id_objet_contenu = $type_objet_contenu;
+									$type_objet_contenu = 'modele';
+								}
+							}
+						} elseif (find_in_path('modeles/'.$type_objet_contenu.'.html')) {
+							// C'est un modele simple
+							$id_objet_contenu = $type_objet_contenu;
+							$type_objet_contenu = 'modele';
+						} else {
+							// C'est cense etre un modele, mais on ne le trouve pas
+							$id_objet_contenu = $type_objet_contenu;
+							$type_objet_contenu = 'modele';
+						}
+					} else {
+						// Ce n'est pas un modele, sans doute un de <quote>, <poesie>, <html>, <code>, <cadre>, etc.
+						$nouveau_lien = false;
+					}
+			}
+			if ($nouveau_lien) {
+				$liens_trouves[$type_objet_contenu.' '.$id_objet_contenu] = array('type' => $type_objet_contenu, 'id' =>$id_objet_contenu);
+			}
 		}
 	}
 	if (count($liens_trouves) > 0) {
-	   foreach ($liens_trouves as $lien) {
-            //spip_log('- lien '.$type_objet_contenant.' '.$id_objet_contenant.' vers '.$lien['type'].' '.$lien['id'], 'liens_contenus');
-            include_spip('base/abstract_sql');
-            spip_abstract_insert(
-                'spip_liens_contenus',
-                '(type_objet_contenant, id_objet_contenant, type_objet_contenu, id_objet_contenu)',
-                '('._q($type_objet_contenant).','._q($id_objet_contenant).','._q($lien['type']).','._q($lien['id']).')');
-	   }
+		foreach ($liens_trouves as $lien) {
+			spip_log('- lien '.$type_objet_contenant.' '.$id_objet_contenant.' vers '.$lien['type'].' '.$lien['id'], 'liens_contenus');
+			include_spip('base/abstract_sql');
+			sql_insertq(
+			  "spip_liens_contenus",
+			  array(
+	        "type_objet_contenant" => $type_objet_contenant,
+				  "id_objet_contenant" => $id_objet_contenant,
+				  "type_objet_contenu" => $lien['type'],
+				  "id_objet_contenu" => $lien['id']
+			  )
+			);
+		}
 	} else {
-        //spip_log('- aucun lien', 'liens_contenus');
+		//spip_log('- aucun lien', 'liens_contenus');
 	}
 }
 
@@ -138,52 +131,54 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
 function lienscontenus_initialiser()
 {
 	// vider la table
-	spip_query("DELETE FROM spip_liens_contenus");
-	
+	sql_delete("spip_liens_contenus");
+
+	// TODO: ne fonctionne plus en SPIP 2...
+	/*
 	include_spip('inc/indexation');
 	$liste_tables = liste_index_tables();
-
 	// parcourir les tables et les champs
 	foreach ($liste_tables as $table) {
 		$type_objet_contenant = ereg_replace("^spip_(.*[^s])s?$", "\\1", $table);
 		$col_id = primary_index_table($table);
-        if ($res = spip_query("SELECT * FROM $table")) {
-            while ($row = spip_fetch_array($res)) {
-                $id_objet_contenant = $row[$col_id];
-                // implode() n'est pas forcement le plus propre conceptuellement, mais ca doit convenir et c'est rapide
-                lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contenant, implode(' ', $row));
-            }
-        }
+		if ($res = spip_query("SELECT * FROM $table")) {
+			while ($row = spip_fetch_array($res)) {
+				$id_objet_contenant = $row[$col_id];
+				// implode() n'est pas forcement le plus propre conceptuellement, mais ca doit convenir et c'est rapide
+				lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contenant, implode(' ', $row));
+			}
+		}
 	}
+  */
 }
 
 function lienscontenus_boite_liste($type_objet, $id_objet)
 {
-    $data = "\n";
-    $data .= debut_cadre_relief('../'._DIR_PLUGIN_LIENSCONTENUS.'/images/liens_contenus-24.gif', true);
-    include_spip('public/assembler');
+	$data = "\n";
+	$data .= debut_cadre_relief('../'._DIR_PLUGIN_LIENSCONTENUS.'/images/liens_contenus-24.gif', true);
+	include_spip('public/assembler');
 	$contexte = array('type_objet' => $type_objet, 'id_objet' => $id_objet);
 	$data .= recuperer_fond('exec/lienscontenus_liste', $contexte);
-    $data .= fin_cadre_relief(true);
-    return $data;
+	$data .= fin_cadre_relief(true);
+	return $data;
 }
 
 function lienscontenus_verification()
 {
-    $data = '<script language="javascript" type="text/javascript">' .
+	$data = '<script language="javascript" type="text/javascript">' .
                 'var messageConfirmationChangementStatut="'._T('lienscontenus:confirmation_depublication').'";' .
                 'var messageConfirmationSuppression="'._T('lienscontenus:confirmation_suppression').'";' .
                 'var messageInformationElementContenu="'._T('lienscontenus:information_element_contenu').'";' .
                 'var baseUrlPlugin="../'._DIR_PLUGIN_LIENSCONTENUS.'";' .
                 '</script>';
-    $data .= '<style>a.lienscontenus_oui { color: red; text-decoration: line-through; }</style>';
-    return $data;
+	$data .= '<style>a.lienscontenus_oui { color: red; text-decoration: line-through; }</style>';
+	return $data;
 }
 
 function lienscontenus_verification_articles()
 {
-    $data = lienscontenus_verification();
-    $script = <<<EOS
+	$data = lienscontenus_verification();
+	$script = <<<EOS
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             // ETAPE 1 : Gestion des changements de statut de l'article
@@ -260,16 +255,16 @@ function lienscontenus_verification_articles()
         });
         </script>
 EOS;
-    $data .= $script;
-    return $data;
+	$data .= $script;
+	return $data;
 }
 
 function lienscontenus_verification_articles_edit()
 {
-    // TODO : Quand on met a jour le doc, comment relancer cela ?
-    // TODO : Y a t'il parfois de l'AjaxSqueeze pour la suppression de doc ? 
-    $data = lienscontenus_verification();
-    $script = <<<EOS
+	// TODO : Quand on met a jour le doc, comment relancer cela ?
+	// TODO : Y a t'il parfois de l'AjaxSqueeze pour la suppression de doc ?
+	$data = lienscontenus_verification();
+	$script = <<<EOS
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             // on ajoute une classe specifique aux liens de suppression des docs
@@ -312,14 +307,14 @@ function lienscontenus_verification_articles_edit()
         });
         </script>
 EOS;
-    $data .= $script;
-    return $data;
+	$data .= $script;
+	return $data;
 }
 
 function lienscontenus_verification_breves_edit()
 {
-    $data = lienscontenus_verification();
-    $script = <<<EOS
+	$data = lienscontenus_verification();
+	$script = <<<EOS
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             // on recupere le statut actuel
@@ -347,14 +342,14 @@ function lienscontenus_verification_breves_edit()
                 });
                 </script>
 EOS;
-    $data .= $script;
-    return $data;
+	$data .= $script;
+	return $data;
 }
 
 function lienscontenus_verification_sites()
 {
-    $data = lienscontenus_verification();
-    $script = <<<EOS
+	$data = lienscontenus_verification();
+	$script = <<<EOS
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             // on recupere le statut actuel
@@ -382,14 +377,14 @@ function lienscontenus_verification_sites()
         });
         </script>
 EOS;
-    $data .= $script;
-    return $data;
+	$data .= $script;
+	return $data;
 }
 
 function lienscontenus_verification_auteur_infos()
 {
-    $data = lienscontenus_verification();
-    $script = <<<EOS
+	$data = lienscontenus_verification();
+	$script = <<<EOS
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             // on recupere le statut actuel
@@ -416,15 +411,15 @@ function lienscontenus_verification_auteur_infos()
         });
         </script>
 EOS;
-    $data .= $script;
-    return $data;
+	$data .= $script;
+	return $data;
 }
 
 function lienscontenus_verification_mots_tous()
 {
-    // TODO : A finir...
-    $data = lienscontenus_verification();
-    $script = <<<EOS
+	// TODO : A finir...
+	$data = lienscontenus_verification();
+	$script = <<<EOS
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             function gestionDesSuppressionsDeMots() {
@@ -480,15 +475,15 @@ function lienscontenus_verification_mots_tous()
         });
         </script>
 EOS;
-    $data .= $script;
-    return $data;
+	$data .= $script;
+	return $data;
 }
 
 function lienscontenus_verification_articles_page()
 {
-    // TODO : A finir...
-    $data = lienscontenus_verification();
-    $script = <<<EOS
+	// TODO : A finir...
+	$data = lienscontenus_verification();
+	$script = <<<EOS
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             // on ajoute une classe specifique
@@ -513,12 +508,12 @@ function lienscontenus_verification_articles_page()
         });
         </script>
 EOS;
-    $data .= $script;
-    return $data;
+	$data .= $script;
+	return $data;
 }
 
 function lienscontenus_verification_naviguer()
 {
-    lienscontenus_verification_articles_page();	
+	lienscontenus_verification_articles_page();
 }
 ?>
