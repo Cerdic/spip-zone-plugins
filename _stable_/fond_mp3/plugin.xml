@@ -22,7 +22,7 @@
 		[Documentation sur www.quesaco.org->http://quesaco.org/Illustration-sonore-mp3]
 	</lien>
 	
-	<version>1.06</version>
+	<version>1.07</version>
 	<etat>stable</etat>
 	<icon>images/fmp3-64.png</icon>
 	
@@ -49,5 +49,5 @@
 		<inclure>inc/fmp3_pipeline_insert_head.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.2;]" />
 </plugin>
