@@ -5,26 +5,24 @@ include_spip('inc/presentation');
 include_spip('exec/inc_boites_infos');
 
 function exec_jeux_resultats_jeu(){
-	$id_jeu 	= _request('id_jeu');
+	$id_jeu	= _request('id_jeu');
 	$par = _request('par');
-	($par == '') ? $par='' : $par = $par;
 	
-	$requete	= spip_fetch_array(spip_query("SELECT id_jeu,type_jeu,titre_prive FROM spip_jeux WHERE id_jeu =".$id_jeu));
-	$id_jeu		= $requete['id_jeu'];
-	$type_jeu		= $requete['type_jeu'];
-	$titre_prive		= $requete['titre_prive'];
+	$requete = jeux_fetsel('id_jeu,type_jeu,titre_prive', 'spip_jeux', "id_jeu=$id_jeu");
+	$id_jeu = $requete['id_jeu'];
+	$type_jeu = $requete['type_jeu'];
+	$titre_prive = $requete['titre_prive'];
 	if(!$id_jeu){
 		jeux_debut_page(_T("jeux:pas_de_jeu"));
-		gros_titre(_T("jeux:pas_de_jeu"), '', false);
-		fin_page();
+		echo gros_titre(_T("jeux:pas_de_jeu"), '', false), fin_page();
 		return;
-		}
+	}
 	jeux_debut_page(_T("jeux:resultats_jeu",array('id'=>$id_jeu,'nom'=>$type_jeu)));
 
 	jeux_compat_boite('debut_gauche');
 
-	boite_infos_jeu($id_jeu, $type_jeu);
-	boite_infos_accueil();
+	echo boite_infos_jeu($id_jeu);
+	echo boite_infos_accueil($id_jeu);
 	
 	jeux_compat_boite('creer_colonne_droite');
 	jeux_compat_boite('debut_droite');

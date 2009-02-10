@@ -9,36 +9,35 @@ global $tables_jointures;
 $table_des_tables['jeux'] = 'jeux';
 $table_des_tables['jeux_resultats'] = 'jeux_resultats';
 $jeux = array(
-	'id_jeu'	=> 'bigint(21) NOT NULL',
+	'id_jeu' => 'bigint(21) NOT NULL',
 	'date'		=> 'timestamp');
 if (isset($GLOBALS['meta']['jeux_base_version'])) {
 	$jeux = array_merge($jeux, array(
-		'type_jeu'	=> 'text NOT NULL',
-		'titre_prive'	=> 'text NOT NULL',
+		'type_jeu' => 'text NOT NULL',
+		'titre_prive' => 'text NOT NULL',
 	));
 }
 $jeux = array_merge($jeux, array(
-	'contenu'	=> 'text NOT NULL',
-	'statut'	=> "varchar(10) DEFAULT '0' NOT NULL",
-	'enregistrer_resultat'=>'enum ("oui", "non")',
-	'resultat_unique'=>'enum ("oui", "non")'
+	'contenu' => 'text NOT NULL',
+	'statut' => "varchar(10) DEFAULT '0' NOT NULL",
+	'type_resultat'=>"varchar(10) DEFAULT '0' NOT NULL"
 	)
 );
 
 $jeux_key = array(
-	'PRIMARY KEY'	=>'id_jeu');
+	'PRIMARY KEY' =>'id_jeu');
 $jeux_resultats = array(
-	'id_resultat'	=> 'bigint(21) NOT NULL',
+	'id_resultat' => 'bigint(21) NOT NULL',
 	'id_jeu'		=> 'bigint(21) NOT NULL',
 	'id_auteur'		=> 'bigint(21) NOT NULL',
 	'date'			=>	'timestamp',
-	'resultat_court'	=>	'int(12)',
-	'resultat_long'	=>	'text NOT NULL',
+	'resultat_court' =>	'int(12)',
+	'resultat_long' =>	'text NOT NULL',
 	'total'			=>	'int(12) NOT NULL'
 	);
 $jeux_resultats_key=array('PRIMARY KEY' =>'id_resultat',
-	'KEY id_jeu'	=>'id_jeu',
-	'KEY id_auteur'	=>'id_auteur'
+	'KEY id_jeu' =>'id_jeu',
+	'KEY id_auteur' =>'id_auteur'
 );
 
 $tables_principales['spip_jeux'] =
@@ -57,4 +56,5 @@ $corbeille_params['jeux'] = array (
 	"tableliee"=> array('spip_jeux_resultats'),
 	"libelle" => 'jeux:jeux',
 );
+
 ?>

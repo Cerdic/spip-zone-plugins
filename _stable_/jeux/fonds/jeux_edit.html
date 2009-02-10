@@ -4,8 +4,7 @@
 [(#SET{contenu,[(#CONTENU*|replace{</?jeux>,}|entites_html)]})]
 [(#SET{titre_prive,[(#TITRE_PRIVE|sinon{<:jeux:sans_titre_prive:>})]})]
 #SET{type_jeu,#TYPE_JEU}
-#SET{enregistrer_resultat,#ENREGISTRER_RESULTAT}
-#SET{resultat_unique,#RESULTAT_UNIQUE}
+#SET{type_resultat,#TYPE_RESULTAT}
 </BOUCLE_jeu>
 <//B_jeu>
 
@@ -16,15 +15,14 @@
 <label><span class='titrem'><:jeux:jeu_contenu:></span><br />
 <textarea  name='contenu' class='formo' rows='20' cols='40' style='width:99%;' >#GET{contenu}</textarea>
 </label><br />
-<label><span class='titrem'><:jeux:enregistrer_resultat:></span><br />
-<select class="formo" name="enregistrer_resultat" >
-	<option value="oui"><:item_oui:></option>
-	<option value="non"[ selected="(#GET{enregistrer_resultat,oui}|=={non}|?{selected})"]><:item_non:></option>
-</select>
-</label><br />
-<label><span class='titrem'><:jeux:resultat_unique:></span><br />
-<select class="formo" name="resultat_unique" >
-	<option value="non"><:item_non:></option>
-	<option value="oui"[ selected="(#GET{resultat_unique,non}|=={oui}|?{selected})"]><:item_oui:></option>
+<label><span class='titrem'><:jeux:type_resultat:></span><br />
+<select class="formo" name="type_resultat" >
+	<option value="defaut"[ selected="(#GET{type_resultat,defaut}|=={defaut}|?{selected})"]><:jeux:resultat2_defaut:></option>
+	<option value="premier"[ selected="(#GET{type_resultat,defaut}|=={premier}|?{selected})"]><:jeux:resultat2_premier:></option>
+	<option value="dernier"[ selected="(#GET{type_resultat,defaut}|=={dernier}|?{selected})"]><:jeux:resultat2_dernier:></option>
+	<option value="meilleur"[ selected="(#GET{type_resultat,defaut}|=={meilleur}|?{selected})"]><:jeux:resultat2_meilleur:></option>
+	<option value="meilleurs"[ selected="(#GET{type_resultat,defaut}|=={meilleurs}|?{selected})"]><:jeux:resultat2_meilleurs:></option>
+	<option value="tous"[ selected="(#GET{type_resultat,defaut}|=={tous}|?{selected})"]><:jeux:resultat2_tous:></option>
+	<option value="aucun"[ selected="(#GET{type_resultat,defaut}|=={aucun}|?{selected})"]><:jeux:resultat2_aucun:></option>
 </select>
 </label>

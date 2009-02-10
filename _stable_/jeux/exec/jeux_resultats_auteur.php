@@ -7,16 +7,14 @@ include_spip('exec/inc_boites_infos');
 function exec_jeux_resultats_auteur(){
 	$id_auteur 	= _request('id_auteur');
 	$par = _request('par');
-	($par == '') ? $par='' : $par = $par;
 	
-	$requete = spip_fetch_array(spip_query("SELECT id_auteur,nom FROM spip_auteurs WHERE id_auteur =".$id_auteur));
+	$requete = jeux_fetsel('id_auteur,nom', 'spip_auteurs', "id_auteur=$id_auteur", '');
 	$nom = $requete['nom'];
 	$id_auteur = $requete['id_auteur'];
 
 	if(!$id_auteur){
 		jeux_debut_page(_T("jeux:pas_d_auteur"));
-		gros_titre(_T("jeux:pas_d_auteur"), '', false);
-		fin_page();
+		echo gros_titre(_T("jeux:pas_d_auteur"), '', false), fin_page();
 		return;
 	}
 
@@ -24,8 +22,8 @@ function exec_jeux_resultats_auteur(){
 
 	jeux_compat_boite('debut_gauche');
 
-	boite_infos_auteur($id_auteur, $nom);
-	boite_infos_accueil();
+	echo boite_infos_auteur($id_auteur);
+	echo boite_infos_accueil($id_auteur);
 	
 	jeux_compat_boite('creer_colonne_droite');
 	jeux_compat_boite('debut_droite');

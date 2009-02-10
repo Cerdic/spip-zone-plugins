@@ -13,10 +13,9 @@ function exec_jeux_voir(){
 //	include_spip('public/assembler');
 //	echo recuperer_fond('fonds/jeux_voir',array('id_jeu'=>$id_jeu));
 
-
-	$requete = spip_fetch_array(spip_query("SELECT statut,contenu,id_jeu,type_jeu,titre_prive,date,enregistrer_resultat,resultat_unique FROM spip_jeux WHERE id_jeu =$id_jeu"));
-	list($statut, $contenu, $id_jeu, $type_jeu, $titre_prive, $date, $enregistrer_resultat, $resultat_unique) =
-		array($requete['statut'],$requete['contenu'], $requete['id_jeu'], $requete['type_jeu'], $requete['titre_prive'], $requete['date'], $requete['enregistrer_resultat'], $requete['resultat_unique']);
+	$requete = jeux_fetsel('statut,contenu,id_jeu,type_jeu,titre_prive,date,type_resultat', 'spip_jeux', "id_jeu=$id_jeu");
+	list($statut, $contenu, $id_jeu, $type_jeu, $titre_prive, $date, $type_resultat) =
+		array($requete['statut'],$requete['contenu'], $requete['id_jeu'], $requete['type_jeu'], $requete['titre_prive'], $requete['date'], $requete['type_resultat']);
 
 	$configuration_interne = jeux_trouver_configuration_interne($contenu);
 	$titre_public = jeux_trouver_titre_public($contenu);
@@ -30,7 +29,7 @@ function exec_jeux_voir(){
 	if(!$id_jeu){
 		jeux_debut_page(_T("jeux:pas_de_jeu"));
 		jeux_compat_boite('debut_gauche');
-		boite_infos_accueil();
+		echo boite_infos_accueil();
 		echo fin_gauche(), _T("jeux:pas_de_jeu"), fin_page();
 		return;
 	}
@@ -38,8 +37,8 @@ function exec_jeux_voir(){
 	jeux_debut_page(_T("jeux:jeu_numero",array('id'=>$id_jeu,'nom'=>$type_jeu)));
 			
 	jeux_compat_boite('debut_gauche');
-	boite_infos_jeu($id_jeu, $type_jeu, $statut);
-	boite_infos_accueil();
+	echo boite_infos_jeu($id_jeu);
+	echo boite_infos_accueil();
 
 	debut_cadre_relief();
 	echo "<strong>"._t("jeux:derniere_modif")."</strong><br />".affdate($date).' '.heures($date).":".minutes($date);
@@ -56,28 +55,27 @@ function exec_jeux_voir(){
 			include_spip('base/jeux_modifier_statut');
 			jeu_modifier_statut($id_jeu, $statut=_request('statut_modif'));
 		}
-		gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$type_jeu)), puce_statut($statut, " style='vertical-align: center'"), '', false);
-		echo propre("<div style='font-weight:bold; margin-bottom:0.6em;'>$titre_prive</div>");
-		if($titre_public) echo propre("<div style='font-weight:bold; margin-bottom:0.5em;'>$titre_public</div>");
+		echo gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$type_jeu)), puce_statut($statut, " style='vertical-align: center'"), '', false);
 
 		debut_cadre_relief();
+		echo "<span class='titrem'>"._T('jeux:titres_jeu')
+			.'</span>'.propre('<ul><li>'.$titre_prive.($titre_public?"</li><li>$titre_public":'').'</li></ul>');
 		echo "<form method='post' name='statut_edit'>\n";
-		echo "<span class='titrem'>"._T('jeux:statut_jeu').'</span><ul><li><select name="statut_modif">';
+		echo "<span class='titrem'>"._T('jeux:statut_jeu')."</span><ul><li>$type_jeu</li><li><select name='statut_modif'>";
 		echo '<option value="publie">'._T('texte_statut_publie').'</option>';
 		echo '<option value="poubelle"'.($statut=='poubelle'?' selected="selected"':'').'>'._T('texte_statut_poubelle').'</option>';
 		echo '<option value="refuse"'.($statut=='refuse'?' selected="selected"':'').'>'._T('texte_statut_refuse').'</option>';
 		echo "</select>&nbsp;<input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo' /></li></ul>\n";
 		echo "</form>";
-		echo "<span class='titrem'>"._T('jeux:options_jeu')
-			."</span><ul><li>"._T('jeux:enregistrer_resultat')." "._T("item_$enregistrer_resultat").
-			"</li><li>"._T('jeux:resultat_unique')." "._T("item_$resultat_unique")."</li></ul>";
+		echo "<span class='titrem'>"._T('jeux:type_resultat')
+			."</span><ul><li>"._T("jeux:resultat2_$type_resultat")."</li></ul>";
 		if(count($configuration_interne))
 			echo "<span class='titrem'>"._T('jeux:configuration_interne')
 				."</span><ul><li>".join('</li><li>', $configuration_interne)."</li></ul>";
 		fin_cadre_relief();
 	}
 	else
-		gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$type_jeu)),puce_statut($statut, " style='vertical-align: center'"), '', false);
+		echo gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$type_jeu)),puce_statut($statut, " style='vertical-align: center'"), '', false);
 	echo '<br />', $contenu;
 
 //echo 'compacter (auteur=1) : NOT IN ',recuperer_fond('fonds/jeux_compacter', array('id_auteur'=>1));

@@ -10,7 +10,7 @@ function exec_jeux_edit(){
 	$id_jeu	 = _request('id_jeu');
 
 	if (_request('valider')) {
-		$id_jeu = jeux_ajouter_jeu($id_jeu,_request('contenu'),_request('titre_prive'),_request('enregistrer_resultat'),_request('resultat_unique'));
+		$id_jeu = jeux_ajouter_jeu($id_jeu,_request('contenu'),_request('titre_prive'),_request('type_resultat'));
 		include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('jeux_voir', 'id_jeu='.$id_jeu, true));
 	}
@@ -21,19 +21,14 @@ function exec_jeux_edit(){
 		jeux_debut_page(_T('jeux:modifier_jeu', array('id'=>$id_jeu)));
 	
 	jeux_compat_boite('debut_gauche');
-	echo debut_boite_info(true);
-	
-	if ($id_jeu)
-		echo icone_horizontale(_T('jeux:retourner_jeu'),generer_url_ecrire('jeux_voir','id_jeu='.$id_jeu),find_in_path('img/jeu-loupe.png'),'',false);
-	echo icone_horizontale(_T('jeux:liste_jeux'),generer_url_ecrire('jeux_tous'),find_in_path('img/jeux-tous.png'),'',false),
-		fin_boite_info(true);
+	echo boite_infos_jeu($id_jeu);
 	
 	echo debut_cadre_relief();
 	echo _T('jeux:explication_jeu');
 	echo fin_cadre_relief();
 	jeux_compat_boite('creer_colonne_droite');
 	jeux_compat_boite('debut_droite');
-	$nouveau ? gros_titre(_T('jeux:nouveau_jeu'), '', false) : gros_titre(_T('jeux:modifier_jeu',array('id'=>$id_jeu,'nom'=>$type_jeu)), '', false);
+	echo $nouveau ? gros_titre(_T('jeux:nouveau_jeu'), '', false) : gros_titre(_T('jeux:modifier_jeu',array('id'=>$id_jeu,'nom'=>$type_jeu)), '', false);
 	
 	if(defined('_SPIP19100')) debut_cadre_formulaire(); else echo debut_cadre_formulaire('', true);
 
@@ -48,24 +43,26 @@ function exec_jeux_edit(){
 	echo fin_gauche(), fin_page();
 }
 
-function jeux_ajouter_jeu($id_jeu=false, $contenu='', $titre_prive='', $enregistrer_resultat='oui', $resultat_unique='non'){
+function jeux_ajouter_jeu($id_jeu=false, $contenu='', $titre_prive='', $type_resultat='defaut'){
 	include_spip('jeux_utils');
 	$type_jeu = jeux_trouver_nom($contenu);
 	$type_jeu = strlen($type_jeu)?$type_jeu:_T('jeux:jeu_vide');
 	$titre_prive = strlen($titre_prive)?$titre_prive:_T('jeux:sans_titre_prive');
 	$contenu = "<jeux>$contenu</jeux>";
 	if (!$id_jeu) {
-		if(function_exists('sql_insertq'))
-			return sql_insertq('spip_jeux', array('date' => 'NOW()', 'statut'=>$statut, 'type_jeu'=>$type_jeu, 'titre_prive'=>$titre_prive, 'contenu'=>$contenu, 'enregistrer_resultat'=>$enregistrer_resultat, 'resultat_unique'=>$resultat_unique));
+		if(defined('_SPIP19300'))
+			$id_jeu = sql_insertq('spip_jeux', array('date' => 'NOW()', 'statut'=>'publie', 'type_jeu'=>$type_jeu, 'titre_prive'=>$titre_prive, 'contenu'=>$contenu, 'type_resultat'=>$type_resultat));
 		else {
-			spip_query("INSERT into spip_jeux (statut,type_jeu,titre_prive,contenu,enregistrer_resultat,resultat_unique) VALUES('publie',"._q($type_jeu).","._q($titre_prive).","._q($contenu).",'$enregistrer_resultat','$resultat_unique')");	
-			return mysql_insert_id();
+			spip_query("INSERT into spip_jeux (date,statut,type_jeu,titre_prive,contenu,type_resultat) VALUES(NOW(),'publie',"._q($type_jeu).","._q($titre_prive).","._q($contenu).",'$type_resultat')");	
+			$id_jeu = mysql_insert_id();
+			spip_log("Le jeu #$id_jeu a ete insere par l'auteur #".$GLOBALS["auteur_session"]['id_auteur']);
 		}
 	} else {
-		if(function_exists('sql_replace'))
-			sql_replace('spip_jeux', array('id_jeu'=>$id_jeu, 'statut'=>$statut, 'type_jeu'=>$type_jeu, 'titre_prive'=>$titre_prive, 'contenu'=>$contenu, 'enregistrer_resultat'=>$enregistrer_resultat, 'resultat_unique'=>$resultat_unique));
+		if(defined('_SPIP19300'))
+			sql_updateq('spip_jeux', array('date' => 'NOW()', 'type_jeu'=>$type_jeu, 'titre_prive'=>$titre_prive, 'contenu'=>$contenu, 'type_resultat'=>$type_resultat), "id_jeu=$id_jeu");
 		else
-			spip_query("REPLACE into spip_jeux (id_jeu,statut,type_jeu,titre_prive,contenu,enregistrer_resultat,resultat_unique) VALUES ($id_jeu,'publie',"._q($type_jeu).","._q($titre_prive).","._q($contenu).",'$enregistrer_resultat','$resultat_unique')");
+			spip_query("UPDATE spip_jeux SET date=NOW(),type_jeu="._q($type_jeu).",titre_prive="._q($titre_prive).",contenu="._q($contenu).",type_resultat="._q($type_resultat)." WHERE id_jeu=$id_jeu");
+			spip_log("Le jeu #$id_jeu a ete modifie par l'auteur #".$GLOBALS["auteur_session"]['id_auteur']);
 	}
 	return $id_jeu;
 }

@@ -11,7 +11,7 @@ function exec_jeux_tous(){
 	jeux_debut_page(_T("jeux:liste_jeux"));
 
 	jeux_compat_boite('debut_gauche');
-	boite_infos_accueil();
+	echo boite_infos_accueil();
 
 	jeux_compat_boite('creer_colonne_droite');
 	jeux_compat_boite('debut_droite');

@@ -19,4 +19,10 @@ include_spip('inc/jeux_autoriser');
 // Declaration du pipeline "jeux_caracteristiques" qui permet de declarer au plugin des jeux tierces
 $GLOBALS['spip_pipeline']['jeux_caracteristiques']=''; 
 
+// raccourcis compatible SPIP 1.9x et 2.x
+function jeux_fetsel($sel, $t, $w=false, $o='date DESC', $l=1) {
+	if(defined('_SPIP19300')) return sql_fetsel($sel, $t, $w, $o, $l);
+	return spip_fetch_array(spip_query("SELECT $sel FROM $t".($w?" WHERE $w":'').($o?" ORDER BY $o":'').($l?" LIMIT $l":'')));
+}
+
 ?>

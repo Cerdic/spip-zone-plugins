@@ -108,11 +108,11 @@ function jeux_liste_mots_min($texte) {
 }
 
 // retourne la boite de score
-function jeux_afficher_score($score, $total, $id_jeu=false, $resultat_detaille='') {
+function jeux_afficher_score($score, $total, $id_jeu=false, $resultat_long='') {
 	if ($id_jeu){
 		// ici, #CONTENU est passe par le filtre |ajoute_id_jeu{#ID_JEU}
 		include_spip('base/jeux_ajouter_resultat');
-		jeux_ajouter_resultat($id_jeu, $score, $total, $resultat_detaille);
+		jeux_ajouter_resultat($id_jeu, $score, $total, $resultat_long);
 	}
 	return '<div class="jeux_score">'._T('jeux:score')
 	  			. "&nbsp;$score&nbsp;/&nbsp;".$total.'<br />'
