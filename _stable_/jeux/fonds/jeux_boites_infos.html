@@ -1,7 +1,6 @@
 [(#REM|sinon{' '}|debut_boite_info)]
 <BOUCLE_jeu(JEUX){id_jeu}{0,1}>
-	[(#SET{type_jeu,[(#REM|sinon{<:jeux:jeu_court:>}|replace{@id@,#ID_JEU}|replace{@nom@,#TYPE_JEU})]})]
-	<strong>#GET{type_jeu}</strong><br />
+	[<strong>(#REM|sinon{<:jeux:jeu_court:>}|replace{@id@,#ID_JEU}|replace{@nom@,#TYPE_JEU})</strong><br />]
 	[(#ENV{exec}|=={jeux_edit}|?{' '})
 		[(#REM|sinon{<:jeux:retourner_jeu:>}|icone_horizontale{#URL_ECRIRE{jeux_voir,id_jeu=#ID_JEU},#CHEMIN{img/jeu-loupe.png},'',0})]
 		[(#REM|sinon{<:jeux:liste_jeux:>}|icone_horizontale{#URL_ECRIRE{jeux_tous},#CHEMIN{img/jeux-tous.png},'',0})]
@@ -47,6 +46,10 @@
 
 #SET{resultats,non}
 <BOUCLE_tous_resultats(JEUX_RESULTATS){0,1}>[(#AUTORISER{gererresultats}) #SET{resultats,oui}]</BOUCLE_tous_resultats>
+
+[(#ENV{exec}|=={jeux_edit}|?{' '})
+	[(#REM|sinon{<:jeux:liste_jeux:>}|icone_horizontale{#URL_ECRIRE{jeux_tous},#CHEMIN{img/jeux-tous.png},'',0})]
+]
 
 [(#ENV{boite}|=={accueil}|?{' '})
 	[(#ENV{exec}|=={jeux_tous}|?{' '})

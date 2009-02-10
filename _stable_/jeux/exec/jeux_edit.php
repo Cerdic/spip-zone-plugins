@@ -15,10 +15,8 @@ function exec_jeux_edit(){
 		redirige_par_entete(generer_url_ecrire('jeux_voir', 'id_jeu='.$id_jeu, true));
 	}
 
-	if (_request('nouveau'))
-		jeux_debut_page(_T('jeux:nouveau_jeu'));
-	 else
-		jeux_debut_page(_T('jeux:modifier_jeu', array('id'=>$id_jeu)));
+	$gros_titre = _request('nouveau')?_T('jeux:nouveau_jeu'):_T('jeux:modifier_jeu', array('id'=>$id_jeu));
+	jeux_debut_page($gros_titre);
 	
 	jeux_compat_boite('debut_gauche');
 	echo boite_infos_jeu($id_jeu);
@@ -28,7 +26,7 @@ function exec_jeux_edit(){
 	echo fin_cadre_relief();
 	jeux_compat_boite('creer_colonne_droite');
 	jeux_compat_boite('debut_droite');
-	echo $nouveau ? gros_titre(_T('jeux:nouveau_jeu'), '', false) : gros_titre(_T('jeux:modifier_jeu',array('id'=>$id_jeu,'nom'=>$type_jeu)), '', false);
+	echo gros_titre($gros_titre, '', false);
 	
 	if(defined('_SPIP19100')) debut_cadre_formulaire(); else echo debut_cadre_formulaire('', true);
 

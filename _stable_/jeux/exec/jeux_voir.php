@@ -55,7 +55,7 @@ function exec_jeux_voir(){
 			include_spip('base/jeux_modifier_statut');
 			jeu_modifier_statut($id_jeu, $statut=_request('statut_modif'));
 		}
-		echo gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$type_jeu)), puce_statut($statut, " style='vertical-align: center'"), '', false);
+		echo gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$type_jeu)), 'puce-'.puce_statut($statut).'.gif', '', false);
 
 		debut_cadre_relief();
 		echo "<span class='titrem'>"._T('jeux:titres_jeu')
@@ -75,7 +75,7 @@ function exec_jeux_voir(){
 		fin_cadre_relief();
 	}
 	else
-		echo gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$type_jeu)),puce_statut($statut, " style='vertical-align: center'"), '', false);
+		echo gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$type_jeu)), 'puce-'.puce_statut($statut).'.gif', '', false);
 	echo '<br />', $contenu;
 
 //echo 'compacter (auteur=1) : NOT IN ',recuperer_fond('fonds/jeux_compacter', array('id_auteur'=>1));
