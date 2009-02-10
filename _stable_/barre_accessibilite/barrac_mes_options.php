@@ -32,19 +32,19 @@
 	Ce fichier est un des composants de BarrAc. 
 	
 	BarrAc est un programme libre, vous pouvez le redistribuer et/ou le modifier 
-	selon les termes de la Licence Publique Generale GNU publiée par 
-	la Free Software Foundation (version 2 ou bien toute autre version ultérieure 
+	selon les termes de la Licence Publique Generale GNU publiee par 
+	la Free Software Foundation (version 2 ou bien toute autre version ulterieure 
 	choisie par vous).
 	
-	BarrAc est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,
+	BarrAc est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,
 	ni explicite ni implicite, y compris les garanties de commercialisation ou
-	d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU 
-	pour plus de détails. 
+	d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU 
+	pour plus de details. 
 	
-	Vous devez avoir reçu une copie de la Licence Publique Generale GNU 
-	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez à la  
+	Vous devez avoir recu une copie de la Licence Publique Generale GNU 
+	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la  
 	Free Software Foundation, Inc., 
-	59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.
+	59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.
 	
 	*****************************************************/
 
@@ -128,38 +128,40 @@
 	define("_BARRAC_DEFAULT_VALUES_ARRAY", 
 	 	serialize(
 			array(
-					// par défaut, tous les boutons actifs (ne valider que les parents !)
+					// par defaut, tous les boutons actifs (ne valider que les parents !)
 					_BARRAC_ACTION_POINTER => 'oui'
 				,	_BARRAC_ACTION_GROSSIR => 'oui'
 				,	_BARRAC_ACTION_ESPACER => 'oui'
 				,	_BARRAC_ACTION_ENCADRER => 'oui'
 				,	_BARRAC_ACTION_INVERSER => 'oui'
-				, 'barrac_position_barre' => _BARRAC_POSITION_DEFAULT // coin de l'écran : top_left, top_right, bottom_left, bottom_right
+				, 'barrac_position_barre' => _BARRAC_POSITION_DEFAULT // coin de l'ecran : top_left, top_right, bottom_left, bottom_right
 				, 'barrac_position_fixed' => 'non'
 				, 'barrac_presentation_barre' => _BARRAC_PRESENTATION_DEFAULT // vertical || horizontal
 				, 'barrac_marge_entre_boutons' => _BARRAC_ICONE_MARGE_DEFAULT
 				, 'barrac_taille_bouton' => _BARRAC_ICONE_TAILLE_DEFAULT
 				, 'barrac_pointeur_ancre' => _BARRAC_POINTER_DEFAULT	// ancre du contenu de la page
 				, 'barrac_famille_boutons' => _BARRAC_FAMILLE_DEFAULT
-				, 'barrac_flip_pointer' => 'oui' // rotation de la flèche sur le centre de l'écran (pointer)
+				, 'barrac_flip_pointer' => 'oui' // rotation de la fleche sur le centre de l'ecran (pointer)
 				, 'barrac_flip_horizontal' => 'oui' 
 				, 'barrac_flip_vertical' => 'oui' 
 				, 'barrac_flip_contextuel' => 'oui' 
 				, 'barrac_grossir_global' => 'oui'
 				, 'barrac_grossir_taille' => '600'
-				, 'barrac_grossir_cssfile' => '' // si complété, force barrac_grossir_global => 'non'
+				, 'barrac_grossir_cssfile' => '' // si complete, force barrac_grossir_global => 'non'
 				, 'barrac_espacer_global' => 'oui'
 				, 'barrac_espacer_taille' => '2ex'
-				, 'barrac_espacer_cssfile' => '' // si complété, force barrac_espacer_global => 'non'
+				, 'barrac_espacer_cssfile' => '' // si complete, force barrac_espacer_global => 'non'
 				, 'barrac_encadrer_global' => 'oui'
 				, 'barrac_encadrer_taille' => '12px'
 				, 'barrac_encadrer_padding' => '12px'
 				, 'barrac_encadrer_couleur' => 'black'
-				, 'barrac_encadrer_cssfile' => '' // si complété, force barrac_encadrer_global => 'non'
+				, 'barrac_encadrer_cssfile' => '' // si complete, force barrac_encadrer_global => 'non'
 				, 'barrac_inverser_global' => 'oui'
 				, 'barrac_inverser_color' => '#000'
 				, 'barrac_inverser_bgcolor' => '#fff'
-				, 'barrac_inverser_cssfile' => '' // si complété, force barrac_inverser_global => 'non'
+				, 'barrac_inverser_cssfile' => '' // si complete, force barrac_inverser_global => 'non'
+				
+				, 'barrac_mobile_no_display' => "oui" // ne pas afficher sur les mobiles
 			)
 		)
 	);

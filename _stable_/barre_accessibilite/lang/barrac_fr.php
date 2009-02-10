@@ -51,6 +51,12 @@ $GLOBALS['i18n_'._BARRAC_PREFIX.'_fr'] = array(
 	(en pixels) : "
 , 'configurer_espace_boutons' => "Espace entre les boutons : "
 , 'configurer_taille_boutons' => "Taille des boutons : "
+
+, 'configurer_mobile_no_display' => "Ne pas afficher sur les mobiles"
+, 'configurer_mobile_no_display_desc' => "La présence de la barre d'accessibilité n'est pas toujours souhaitable sur 
+	les téléphones mobiles et autres ordinateurs de petite taille. Cochez l'option ci-dessous pour cacher
+	la barre sur ces appareils (expérimental. Seuls les compatibles WebKit sont pris en charge)."
+
 , 'configurer_familles' => "Famille de boutons : "
 , 'configurer_familles_defaut' => "Il n'y a qu'une seule famille de boutons 
 	disponible. Elle sera utilis&eacute;e par d&eacute;faut.

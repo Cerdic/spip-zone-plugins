@@ -32,19 +32,19 @@
 	Ce fichier est un des composants de BarrAc. 
 	
 	BarrAc est un programme libre, vous pouvez le redistribuer et/ou le modifier 
-	selon les termes de la Licence Publique Generale GNU publiée par 
-	la Free Software Foundation (version 2 ou bien toute autre version ultérieure 
+	selon les termes de la Licence Publique Generale GNU publiee par 
+	la Free Software Foundation (version 2 ou bien toute autre version ulterieure 
 	choisie par vous).
 	
-	BarrAc est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,
+	BarrAc est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,
 	ni explicite ni implicite, y compris les garanties de commercialisation ou
-	d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU 
-	pour plus de détails. 
+	d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU 
+	pour plus de details. 
 	
-	Vous devez avoir reçu une copie de la Licence Publique Generale GNU 
-	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez à la  
+	Vous devez avoir recu une copie de la Licence Publique Generale GNU 
+	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la  
 	Free Software Foundation, Inc., 
-	59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.
+	59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.
 	
 	*****************************************************/
 
@@ -55,7 +55,7 @@ include_spip('inc/plugin_globales_lib');
 include_spip('inc/barrac_api_icones');
 
 // pipeline (plugin.xml)
-// Insère les css de la barre d'accessibilité dans l'espace public
+// Insere les css de la barre d'accessibilite dans l'espace public
 function barrac_insert_head ($flux) {
 
 	$barrac_js_declarations = $barrac_js_var_init = $barrac_js_events_manager = 
@@ -67,7 +67,7 @@ function barrac_insert_head ($flux) {
 	// charger la config barrac
 	$config = __plugin_lire_key_in_serialized_meta('config', _BARRAC_META_PREFERENCES);
 	
-	// corrige les manques éventuels
+	// corrige les manques eventuels
 	foreach($config_default as $key=>$value) {
 		if(!isset($config[$key])) $config[$key] = $config_default[$key];
 	}
@@ -91,7 +91,7 @@ function barrac_insert_head ($flux) {
 	$style_barre = "$ii:0px;$jj:0px;";
 	
 	if($config['barrac_position_fixed'] == 'oui') {
-		// sera corrigé en dynamique par affichage_final pour IE qui ne comprend pas fixed
+		// sera corrige en dynamique par affichage_final pour IE qui ne comprend pas fixed
 		$style_barre .= " position:fixed;"; 
 	}
 	
@@ -111,7 +111,7 @@ function barrac_insert_head ($flux) {
 		: _BARRAC_ICONE_TAILLE_DEFAULT
 		;
 
-	// valider la présentation 
+	// valider la presentation 
 	$config['barrac_presentation_barre'] = barrac_confirmer_valeur_var($config['barrac_presentation_barre']
 		, array(_BARRAC_PRESENTATION_HORIZONTAL, _BARRAC_PRESENTATION_VERTICAL)
 		, _BARRAC_PRESENTATION_DEFAULT);
@@ -135,7 +135,7 @@ function barrac_insert_head ($flux) {
 	}
 	$style_barre .= "width:".$width."px;height:".$height."px;".$padding;
 
-	// bouton action grossir taille caractères
+	// bouton action grossir taille caracteres
 	if($config[_BARRAC_ACTION_GROSSIR]=='oui') {
 		if(($config['barrac_grossir_global'] == "non") 
 			&& ($ii = barac_compacte_css_link ('barrac_grossir_css', $config['barrac_grossir_cssfile'], 'nav_caracteres_grossir'))
@@ -272,7 +272,19 @@ function barrac_insert_head ($flux) {
 	}
 
 	$(document).ready(function() {
-		$('#barrac_boutons').css('display','block');
+		
+		var barrac_montre_toi = true;
+		
+		if('" . $barrac_mobile_no_display . "'=='oui') {
+			/* alert(jQuery.fn.jquery); */
+			if(navigator.userAgent.match(/webkit/i)) {
+					barrac_montre_toi = false;
+			}
+		}
+		
+		if(barrac_montre_toi) {
+			$('#barrac_boutons').css('display','block');
+		
 "
 .	$barrac_js_var_init
 .	"
@@ -319,7 +331,11 @@ function barrac_insert_head ($flux) {
 				}
 			}
 		}
-	});
+		} /* fin if(barrac_montre_toi) */
+		else {
+			$('#barrac_boutons').css('display','none');
+		}
+	}); /* fin ready() */
 ";
 
 	// corriger la transparence des fonds en png pour IE > 5.5 < 7.0
@@ -362,8 +378,8 @@ function barrac_insert_head ($flux) {
 }
 #barrac_boutons {
 	position: absolute;
-	width:42px; /* calculé par insert_head */
-	height:42px; /* calculé par insert_head */
+	width:42px; /* calcule par insert_head */
+	height:42px; /* calcule par insert_head */
 	z-index: 32000;
 	list-style: none;
 }
@@ -402,12 +418,14 @@ function barrac_insert_head ($flux) {
 </style>
 ";
 
+/* */
 $barrac_js_code_result = "
 <!-- barrac JS -->
 <script type='text/javascript'>
 //<![CDATA[
 " 
-. compacte_js($barrac_js_code_result) 
+. preg_replace('=[[:space:]]+=', ' ', compacte_js($barrac_js_code_result)) 
+//. $barrac_js_code_result
 . "
 //]]>
 </script>
@@ -475,7 +493,7 @@ function barrac_javascript_cookie ($action_parent, $value) {
 
 /** barrac_confirmer_valeur_var () 
 	Verifier si la variable contient une valeur acceptable.
-	Renvoyer si ok, sinon renvoyer valeur par défaut.
+	Renvoyer si ok, sinon renvoyer valeur par defaut.
 */
 function barrac_confirmer_valeur_var ($var, $acceptables, $defaut) {
 	return ((!empty($var) && in_array($var, $acceptables)) ? $var : $defaut);

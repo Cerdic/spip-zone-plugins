@@ -32,19 +32,19 @@
 	Ce fichier est un des composants de BarrAc. 
 	
 	BarrAc est un programme libre, vous pouvez le redistribuer et/ou le modifier 
-	selon les termes de la Licence Publique Generale GNU publiée par 
-	la Free Software Foundation (version 2 ou bien toute autre version ultérieure 
+	selon les termes de la Licence Publique Generale GNU publiee par 
+	la Free Software Foundation (version 2 ou bien toute autre version ulterieure 
 	choisie par vous).
 	
-	BarrAc est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,
+	BarrAc est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,
 	ni explicite ni implicite, y compris les garanties de commercialisation ou
-	d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU 
-	pour plus de détails. 
+	d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU 
+	pour plus de details. 
 	
-	Vous devez avoir reçu une copie de la Licence Publique Generale GNU 
-	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez à la  
+	Vous devez avoir recu une copie de la Licence Publique Generale GNU 
+	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la  
 	Free Software Foundation, Inc., 
-	59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.
+	59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.
 	
 	*****************************************************/
 
@@ -83,7 +83,7 @@ spip_log("## exec_barrac_configuration() --", _BARRAC_PREFIX);
 	$barrac_boutons_parents = unserialize(_BARRAC_BOUTONS_PARENTS);
 	
 	////////////////////////////////////
-	// initialise les variables postées par le formulaire
+	// initialise les variables postees par le formulaire
 	foreach(array_merge(
 		array('btn_valider_configure')
 		, array_keys($barrac_default_values_array)
@@ -96,7 +96,7 @@ spip_log("## exec_barrac_configuration() --", _BARRAC_PREFIX);
 	$message_gauche = $message_erreur = "";
 	
 	////////////////////////////////////
-	// valider la configuration demandée
+	// valider la configuration demandee
 	if($btn_valider_configure) {
 		$config = array();
 		foreach($barrac_default_values_array as $key => $value) {
@@ -105,7 +105,7 @@ spip_log("## exec_barrac_configuration() --", _BARRAC_PREFIX);
 			}
 			else {
 				if(($value == 'oui')) {
-					// si radio non coché, dévalider l'option
+					// si radio non coche, devalider l'option
 					$config[$key] = 'non';
 				}
 			}
@@ -113,7 +113,7 @@ spip_log("## exec_barrac_configuration() --", _BARRAC_PREFIX);
 
 		$config['barrac_pointeur_ancre'] = "#".trim($barrac_pointeur_ancre, "#");
 		
-		// verifier si les fichiers css indiqués sont présents
+		// verifier si les fichiers css indiques sont presents
 		foreach(
 			array(
 				'barrac_grossir_global' => 'barrac_grossir_cssfile'
@@ -134,7 +134,7 @@ spip_log("## exec_barrac_configuration() --", _BARRAC_PREFIX);
 		
 		__plugin_ecrire_key_in_serialized_meta('config', $config, _BARRAC_META_PREFERENCES);
 		__ecrire_metas();
-		// vide le cache (est-ce la meilleure solution ? la barre est recalculée également en js)
+		// vide le cache (est-ce la meilleure solution ? la barre est recalculee egalement en js)
 		include_spip('inc/invalideur');
 		suivre_invalideur(1);
 	}
@@ -168,14 +168,14 @@ spip_log("## exec_barrac_configuration() --", _BARRAC_PREFIX);
 		;
 
 	////////////////////////////////////
-	// Boite des réglages
+	// Boite des reglages
 	$page_result .= ""
 		. debut_cadre_trait_couleur(_DIR_PLUGIN_BARRAC_IMG_PACK."administration-24.png", true, "", _T(_BARRAC_LANG."configurer_barrac"))
 		. barrac_form_description_champ('configurer_barrac_desc')
 		. $message_erreur
 		. "<div  style='text-align: $spip_lang_left;' class='verdana2'>\n"
 
-		// début formulaire
+		// debut formulaire
 		. "<form name='form_configuration' id='form_configuration' method='post' action=''>\n"
 		;
 
@@ -217,7 +217,7 @@ spip_log("## exec_barrac_configuration() --", _BARRAC_PREFIX);
 
 
 	//=================================
-	// Sélection des boutons actifs
+	// Selection des boutons actifs
 	$page_result .= ""
 		. "<fieldset class='text-center'>\n"
 		. barrac_form_fieldset_legend("configurer_activation_boutons")
@@ -228,7 +228,7 @@ spip_log("## exec_barrac_configuration() --", _BARRAC_PREFIX);
 
 	foreach(barrac_icones_array(false, 24) as $key=>$value) {
 	
-		// pas les boutons frères
+		// pas les boutons freres
 		if($value['display']=='none') {
 			continue;
 		}
@@ -270,7 +270,7 @@ spip_log("## exec_barrac_configuration() --", _BARRAC_PREFIX);
 		. "<fieldset class='text-center' id='fieldset_configurer_position_boutons'>\n"
 		. barrac_form_fieldset_legend("configurer_position_boutons")
 		. "<div class='barrac-table-ecran'>\n"
-			. "<div class='row'>\n" // rangée #1
+			. "<div class='row'>\n" // rangee #1
 				. "<div class='cell block-left'>\n"
 					. "<label for='position_tl'>"._T(_BARRAC_LANG."configurer_position_tl")."</label>\n"
 					. "<input type='radio' name='barrac_position_barre' value='top_left' id='position_tl' title=\""._T(_BARRAC_LANG."configurer_position_tl")."\" ".$checked['top_left']."/>\n"
@@ -280,7 +280,7 @@ spip_log("## exec_barrac_configuration() --", _BARRAC_PREFIX);
 					. "<input type='radio' name='barrac_position_barre' value='top_right' id='position_tr' title=\""._T(_BARRAC_LANG."configurer_position_tr")."\" ".$checked['top_right']."/>\n"
 				. "</div>\n"
 			. "</div>\n" // #1
-			. "<div class='row'>\n" // rangée #2
+			. "<div class='row'>\n" // rangee #2
 				. "<div class='cell block-left text-bottom'>\n"
 					. "<label for='position_bl'>"._T(_BARRAC_LANG."configurer_position_bl")."</label>\n"
 					. "<input type='radio' name='barrac_position_barre' value='bottom_left' id='position_bl' title=\""._T(_BARRAC_LANG."configurer_position_bl")."\" ".$checked['bottom_left']."/>\n"
@@ -305,8 +305,8 @@ spip_log("## exec_barrac_configuration() --", _BARRAC_PREFIX);
 		;	
 
 	//=================================
-	// Adapter les boutons (flip h ou v suivant la position écran)
-	// et direction de la flèche (pointer)
+	// Adapter les boutons (flip h ou v suivant la position ecran)
+	// et direction de la fleche (pointer)
 	$page_result .= ""
 		. "<fieldset class='text-center' id='fieldset_configurer_flip_boutons'>\n"
 		. barrac_form_fieldset_legend("configurer_flip_boutons")
@@ -318,7 +318,7 @@ spip_log("## exec_barrac_configuration() --", _BARRAC_PREFIX);
 		;	
 
 	//=================================
-	// Présentation de la barre (horizontal ou vertical)
+	// Presentation de la barre (horizontal ou vertical)
 	$checked = array(_BARRAC_PRESENTATION_HORIZONTAL => "", _BARRAC_PRESENTATION_VERTICAL => "");
 	$key = (
 		($barrac_presentation_barre && in_array($barrac_presentation_barre, array_keys($checked)))
@@ -379,13 +379,23 @@ spip_log("## exec_barrac_configuration() --", _BARRAC_PREFIX);
 		;
 	
 	//=================================
-	// plusieurs boutons valider pour éviter le mal d'ascenseur
+	// ne pas afficher sur les petits ordinateurs WebKit (iphone, etc.)
+	$page_result .= ""
+		. "<fieldset class='text-center' id='fieldset_mobile_no_display'>\n"
+		. barrac_form_fieldset_legend("configurer_mobile_no_display")
+		. barrac_form_description_champ('configurer_mobile_no_display_desc')
+		. barrac_form_checkbox_button ('barrac_mobile_no_display', "configurer_mobile_no_display", ($barrac_mobile_no_display == 'oui'), 'oui', true)
+		. "</fieldset>\n"
+		;	
+
+	//=================================
+	// plusieurs boutons valider pour eviter le mal d'ascenseur
 	$page_result .= ""
 			. barrac_form_bouton_valider ('btn_valider_configure')
 			;
 
 	//=================================
-	// texte d'intro sur les réglages
+	// texte d'intro sur les reglages
 	$page_result .= ""
 		. "<div style='margin-top:1em;'>\n"
 		. debut_cadre_trait_couleur('', true, '', '')
@@ -463,7 +473,7 @@ spip_log("## exec_barrac_configuration() --", _BARRAC_PREFIX);
 
 	//=================================
 	// validation, fin de formulaire
-	// plusieurs boutons valider pour éviter le mal d'ascenseur
+	// plusieurs boutons valider pour eviter le mal d'ascenseur
 	$page_result .= ""
 		. barrac_form_bouton_valider ('btn_valider_configure')
 		;
@@ -473,7 +483,7 @@ spip_log("## exec_barrac_configuration() --", _BARRAC_PREFIX);
 		. fin_cadre_trait_couleur(true)
 		;
 	////////////////////////////////////
-	// Boite des réglages :: FIN
+	// Boite des reglages :: FIN
 
 	echo($page_result);
 	echo __plugin_html_signature(_BARRAC_PREFIX, true, true, true), fin_gauche(), fin_page();
@@ -490,8 +500,8 @@ spip_log("## exec_barrac_configuration() --", _BARRAC_PREFIX);
 
 // barrac_familles_array ()
 /**
-/*	vérifie les familles et renvoie la liste des familles 
-/*	qui sont correctement composées des 10 icones
+/*	verifie les familles et renvoie la liste des familles 
+/*	qui sont correctement composees des 10 icones
 */
 function barrac_familles_array () {
 	$result = false;
