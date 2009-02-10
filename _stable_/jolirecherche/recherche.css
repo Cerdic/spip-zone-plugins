@@ -22,8 +22,8 @@
 }
 
 /* Masquer le bouton submit */
-#recherche-style input.envoi {
-	display:none; /* display:inline */
+#recherche-style button {
+	display:inline; /* display:none */
 }
 
 /* hack IE pour decaler d'un pixel vers le bas */
