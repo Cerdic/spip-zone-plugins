@@ -25,4 +25,10 @@ function jeux_fetsel($sel, $t, $w=false, $o='date DESC', $l=1) {
 	return spip_fetch_array(spip_query("SELECT $sel FROM $t".($w?" WHERE $w":'').($o?" ORDER BY $o":'').($l?" LIMIT $l":'')));
 }
 
+// filtre de compatibilite avec SPIP 1.92
+function puce_compat192($couleur) {
+	if (defined('_SPIP19300')) return $couleur;
+	return http_img_pack("puce-$couleur.gif", "puce $couleur", " style='margin: 1px;'");
+}
+
 ?>

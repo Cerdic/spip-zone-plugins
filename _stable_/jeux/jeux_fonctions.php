@@ -11,14 +11,6 @@
 
 include_spip('base/jeux_tables');
 
-// filtre de compatibilite avec SPIP 1.92
-function puce_compat192($couleur) {
- if (!defined('_SPIP19300')) {
- 	return http_img_pack("puce-$couleur.gif", "puce $couleur", " style='margin: 1px;'");
- }
- return $couleur;
-}
-
 function boucle_JEUX($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
@@ -106,6 +98,5 @@ global $table_des_traitements;
 // TITRE_PUBLIC est un TITRE :
 if (!isset($table_des_traitements['TITRE_PUBLIC']))
 	$table_des_traitements['TITRE_PUBLIC'] = $table_des_traitements['TITRE'];
-
 
 ?>

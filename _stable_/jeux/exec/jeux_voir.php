@@ -25,6 +25,7 @@ function exec_jeux_voir(){
 		$titre_public = _T('jeux:jeu_titre_public_') . ' ' . $titre_public;
 	}
 	$contenu = $type_jeu==_T('jeux:jeu_vide')?_T('jeux:introuvable'):propre($contenu);
+	$puce = puce_compat192(puce_statut($statut));
 	
 	if(!$id_jeu){
 		jeux_debut_page(_T("jeux:pas_de_jeu"));
@@ -55,7 +56,7 @@ function exec_jeux_voir(){
 			include_spip('base/jeux_modifier_statut');
 			jeu_modifier_statut($id_jeu, $statut=_request('statut_modif'));
 		}
-		echo gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$type_jeu)), 'puce-'.puce_statut($statut).'.gif', '', false);
+		echo gros_titre($puce." "._T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$type_jeu)), '', '', false);
 
 		debut_cadre_relief();
 		echo "<span class='titrem'>"._T('jeux:titres_jeu')
@@ -75,7 +76,7 @@ function exec_jeux_voir(){
 		fin_cadre_relief();
 	}
 	else
-		echo gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$type_jeu)), 'puce-'.puce_statut($statut).'.gif', '', false);
+		echo gros_titre($puce." "._T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$type_jeu)), '', '', false);
 	echo '<br />', $contenu;
 
 //echo 'compacter (auteur=1) : NOT IN ',recuperer_fond('fonds/jeux_compacter', array('id_auteur'=>1));
