@@ -1,7 +1,7 @@
 <?php
 function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contenant, $contenu)
 {
-	spip_log('Referencer liens contenus dans '.$type_objet_contenant.' '.$id_objet_contenant.' :', 'liens_contenus');
+	spip_log('Referencer liens contenus dans '.$type_objet_contenant.' '.$id_objet_contenant, 'liens_contenus');
 
 	$liens_trouves = array();
 
@@ -40,6 +40,7 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
 	if (preg_match_all($regexp, $contenu, $matches, PREG_SET_ORDER)) {
 		foreach ($matches as $match) {
 			list($chaine_modele ,$type_objet_contenu, $id_objet_contenu, $params) = $match;
+			$type_objet_contenu = strtolower($type_objet_contenu); // Pour tranformer les vieux <IMG...> en <img...>
 			$type_objet_contenu = isset($liens_contenus_aliases[$type_objet_contenu]) ? $liens_contenus_aliases[$type_objet_contenu] : $type_objet_contenu;
 			$nouveau_lien = true;
 			switch ($type_objet_contenu) {
@@ -122,6 +123,8 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
 			  )
 			);
 		}
+	} else {
+    spip_log('- aucun lien', 'liens_contenus');
 	}
 }
 

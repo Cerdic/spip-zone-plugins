@@ -26,6 +26,14 @@ function lienscontenus_upgrade($nom_meta_base_version, $version_cible)
 			sql_update("spip_liens_contenus", "type_objet_contenu='syndic'", "type_objet_contenu='site'");
 			ecrire_meta($nom_meta_base_version, $current_version='0.2', 'non');
 		}
+    if (version_compare($current_version,'0.3','<')) {
+      spip_log('Mise a jour de la base en v0.3', 'liens_contenus');
+      include_spip('base/abstract_sql');
+      sql_updateq("spip_liens_contenus", array('type_objet_contenu' => 'document'), "type_objet_contenu='IMG'");
+      sql_updateq("spip_liens_contenus", array('type_objet_contenu' => 'document'), "type_objet_contenu='DOC'");
+      sql_updateq("spip_liens_contenus", array('type_objet_contenu' => 'document'), "type_objet_contenu='EMB'");
+      ecrire_meta($nom_meta_base_version, $current_version='0.3', 'non');
+    }
 	}
 }
 

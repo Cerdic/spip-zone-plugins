@@ -3,11 +3,10 @@
 	<auteur>Nicolas Hoizey</auteur>
 	<licence>GNU/GPL</licence>
 	<version>0.19</version>
-	<version_base>0.2</version_base>
+	<version_base>0.3</version_base>
 	<install>base/lienscontenus_upgrade.php</install>
 	<etat>dev</etat>
   <necessite id='SPIP' version='[2.0.0;]' />
-  <lien>http://www.spip-contrib.net/Liens-inter-contenus</lien>
 	<description>
 Ce plugin (pour SPIP 2.0.0+) permet d'identifier les liens d&eacute;finis entre les contenus au sein de leurs &eacute;l&eacute;ments textuels, et donc notamment d'{{&eacute;viter la suppression par erreur}} d'une rubrique, d'un article, d'une br&egrave;ve, d'un site, d'un document ou m&ecirc;me d'un mod&egrave;le, vers lesquels pointent d'autres contenus.
 
