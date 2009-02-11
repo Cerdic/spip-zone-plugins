@@ -56,7 +56,7 @@ function exec_malettre(){
               $expediteurs[lire_config("malettre/expediteur_nom$i")] = lire_config("malettre/expediteur_email$i");
       }
       $adresses = array();
-      for ($i=1;$i<6;$i++) {
+      for ($i=1;$i<8;$i++) {
         if (trim(lire_config("malettre/adresse_email$i"))!="")
               $adresses[lire_config("malettre/adresse_nom$i")] = lire_config("malettre/adresse_email$i");
       }
