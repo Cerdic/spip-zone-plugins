@@ -93,16 +93,20 @@ $().ready(function() {
 			}
 		}
 		
-		if(_request('abonnement') and _request('id_auteur_elargi')){
-
-		spip_query("delete from spip_auteurs_elargis_abonnements where id_auteur_elargi ='"._request('id_auteur_elargi')."'"); //source de pbs
-		spip_query("INSERT INTO spip_auteurs_elargis_abonnements (id_abonnement, id_auteur_elargi, validite) values ('"._request('abonnement')."','"._request('id_auteur_elargi')."','"._request('validite_abo')."')");
+		if(_request('abonnement') and _request('id')){
+		$query_elargi = spip_query("select id from spip_auteurs_elargis where id_auteur = $id");
+		$row_abo = spip_fetch_array($query_elargi);
+		$id_auteur_elargi_abo = $row_abo['id'] ;
+		echo $id_auteur_elargi_abo ;
+		spip_query("delete from spip_auteurs_elargis_abonnements where id_auteur_elargi ='".$id_auteur_elargi_abo."'"); //source de pbs
+		spip_query("INSERT INTO spip_auteurs_elargis_abonnements (id_abonnement, id_auteur_elargi, validite) values ('"._request('abonnement')."','".$id_auteur_elargi_abo."','"._request('validite_abo')."')");
 		}
-		spip_log($var_user);		
+		// spip_log($var_user);	
+				
 		if($var_user['a.nom'])
 			$q1 = spip_query("update spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur set ".join(', ', $var_user)." where a.`id_auteur`='$id'");
 		if($q1)
-		    $message = "adherent mis à jour";
+		    $message = "adherent mis Ã  jour";
 	}
 
 
