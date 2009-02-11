@@ -75,13 +75,15 @@ function inc_prepare_recherche($recherche, $table='articles', $cond=false, $serv
 
 			// rechercher le contexte correspondant
 			spip_connect();
-			if (!$f = generer_url_entite())
-				$f = 'recuperer_parametres_url';
+			$f = generer_url_entite();
 
 			$save = $GLOBALS['contexte'];
 			$points = array();
 			foreach($urls as $url => $score) {
-				$f($fond, $url);
+				if ($f)
+					$f($url, $entite);
+				else
+					recuperer_parametres_url($fond, $url);
 				foreach ($liste_index_tables as $type => $_id) {
 					if (isset($GLOBALS['contexte'][$_id])) {
 						$id = $GLOBALS['contexte'][$_id];
