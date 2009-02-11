@@ -1,0 +1,24 @@
+<plugin>
+	<nom>
+	Yagloo! Search
+	</nom>
+	<auteur>Fil</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Utilise les API Yahoo BOSS et Google AjaxSearch pour alimenter le crit&#232;re <code>{recherche}</code> des boucles SPIP.
+
+	Puisque les g&#233;ants du Web indexent nos sites, utilisons leurs serveurs pour nos recherches.
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix>
+	Yagloo
+	</prefix>
+	<chemin dir='' />
+	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="CFG" version="[1.0;]" />
+</plugin>
