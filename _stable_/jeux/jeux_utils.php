@@ -92,19 +92,33 @@ function jeux_liste_mots($texte) {
 			// on touche pas au texte entre deux ""
 			$split2[] = $s;
 		} else {
-			// on rassemble tous les separateurs : ,;.|\s\t\n
-			$temp = preg_replace("/[,;\.\|\s\t\n\r]+/", "\t", $s);
+			// on rassemble tous les separateurs : ,;.\s\t\n
+			$temp = preg_replace("/[,;\.\s\t\n\r]+/", "\t", $s);
 			$temp = str_replace("+"," ", $temp);
 			$split2 = array_merge($split2, explode("\t", $temp));
 		}
 	}
-		return array_unique($split2);
+	return array_unique($split2);
 }
-function jeux_liste_mots_maj($texte) {
-	return jeux_liste_mots(init_mb_string()?mb_strtoupper($texte,$GLOBALS['meta']['charset']):strtoupper($texte));
+function jeux_majuscules($texte) {
+	return init_mb_string()?mb_strtoupper($texte,$GLOBALS['meta']['charset']):strtoupper($texte);
 }
-function jeux_liste_mots_min($texte) {
-	return jeux_liste_mots(init_mb_string()?mb_strtolower($texte,$GLOBALS['meta']['charset']):strtolower($texte));
+function jeux_minuscules($texte) {
+	return init_mb_string()?mb_strtolower($texte,$GLOBALS['meta']['charset']):strtolower($texte);
+}
+function jeux_in_liste($texte, $liste=array()) {
+	$texte_m = jeux_minuscules($texte);
+	foreach($liste as $expr) {
+		// interpretation des expressions regulieres grace aux virgules : ,un +mot,i
+		if(strpos($expr, ',')===0) {
+			if(preg_match($expr, $texte)) return true;
+		} elseif(strpos($expr, '/M')===($len=strlen($expr)-2)) {
+			if(substr($expr,0,$len)===$texte) return true;
+		} else {
+			if(jeux_minuscules($expr)===$texte_m) return true;
+		}
+	}
+	return false;
 }
 
 // retourne la boite de score

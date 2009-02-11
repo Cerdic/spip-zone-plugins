@@ -59,14 +59,7 @@ Q Citez une planete du systeme solaire :
 P mercure venus terre mars jupiter saturne uranus neptune
 </jeux>
 
-La liste des mots a placer apres "P" peut accepter 
-les separateurs usuels : 
-	retours a la ligne, tabulations, espaces
-	virgules, point-virgules, points
-Pour une expression comprenant des espaces, utiliser les 
-guillemets ou le signe + :
-	par ex. : "afin de" est equivalent a : afin+de
-Les minuscules ou majuscules peuvent etre utilisees indifferemment.
+Liste des mots a placer apres "P" : voir le fichier trous.php pour l'utilisation des listes de mots.
 La gestion des points et des precisions est toujours possible :
 	P.4 mercure venus terre mars jupiter saturne uranus neptune|saviez-vous que pluton n'est plus une planete ?
 
@@ -109,7 +102,7 @@ function qcm_analyse_le_qcm($qcm, $indexQCM, $isQRM) {
 		// cas d'un trou (ou d'une proposition non numerotee !)
 		if ($indexProposition==0) {
 			$qcms[$indexQCM]['maxscore'] = $qcms[$indexQCM]['points'][0] = max($qcms[$indexQCM]['points'][0], 1);
-			$qcms[$indexQCM]['propositions'] = jeux_liste_mots_min($qcms[$indexQCM]['propositions'][0]);
+			$qcms[$indexQCM]['propositions'] = jeux_liste_mots($qcms[$indexQCM]['propositions'][0]);
 			$qcms[$indexQCM]['nbpropositions'] = 1;
 		}
 		break;
@@ -151,7 +144,7 @@ function qcm_un_trou($nomVarSelect, $indexQCM) {
   if (($sizeInput = intval(jeux_config('trou')))==0)
 	foreach($qcms[$indexQCM]['propositions'] as $mot) $sizeInput = max($sizeInput, strlen($mot));
   $temp = $_POST[$nomVarSelect] = trim($_POST[$nomVarSelect]);
-  $prop = init_mb_string()?mb_strtolower($temp,$GLOBALS['meta']['charset']):strtolower($temp);
+  $prop = jeux_minuscules($temp);
   return " &nbsp; &nbsp; &nbsp;<input name=\"$nomVarSelect\" class=\"jeux_input qcm_input\" size=\"$sizeInput\" type=\"text\"> ";
 }
 
@@ -167,7 +160,6 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
   $trou = $qcms[$indexQCM]['nbpropositions']==1;
   $qrm = $qcms[$indexQCM]['qrm'];
   $nbcol = jeux_config('colonnes');
-  $lower = init_mb_string()?'mb_strtolower':'strtolower';
 
   // affichage des points dans la question
   if ($gestionPoints) {
@@ -226,14 +218,13 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 				 .'</div>';
 
 			// bonne reponse
-			$lower = init_mb_string()?mb_strtolower($reponse,$GLOBALS['meta']['charset']):strtolower($reponse);
-			$bonneReponse = ($trou && in_array($lower, $qcms[$indexQCM]['propositions']))
+			$bonneReponse = ($trou && jeux_in_liste($reponse, $qcms[$indexQCM]['propositions']))
 				|| ($qcms[$indexQCM]['bonnesreponses'][$reponse]==1);
 
 			// si ce n'est pas un trou, on donne les points de la reponse quoiqu'il arrive
 			if (!$trou || $bonneReponse) $qcm_score += $pointsR;
 			// on renseigne le resultat detaille
-			$qcm_score_detaille[] = $trou?"T$indexQCM_1:$lower:".($bonneReponse?$pointsR:'0')
+			$qcm_score_detaille[] = $trou?"T$indexQCM_1:$reponse:".($bonneReponse?$pointsR:'0')
 				:"Q$indexQCM_1:R$reponse:$pointsR";
 				
 			// les precisions eventuelles

@@ -106,7 +106,7 @@ function jeux_pendu($texte, $indexJeux) {
   $js .= join(",\n\t",$js2) . "\n\t);\n\tnb_pendu_Images[$indexJeux]=$c;\n\tnb_Pendus[$indexJeux]=$i;";
   foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $html .= pendu_titre($tableau[$i+1]);
-	  elseif ($valeur==_JEUX_PENDU) $mots = jeux_liste_mots_maj($tableau[$i+1]);
+	  elseif ($valeur==_JEUX_PENDU) $mots = jeux_liste_mots(jeux_majuscules($tableau[$i+1]));
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
   }
   $js .= "\n\tpendu_Mots[$indexJeux]=new Array('".join("','",$mots)."');";

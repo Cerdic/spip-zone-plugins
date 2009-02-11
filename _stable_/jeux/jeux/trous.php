@@ -49,6 +49,19 @@ les separateurs usuels :
 Pour une expression comprenant des espaces, utiliser les 
 guillemets ou le signe + :
 	par ex. : "afin de" est equivalent a : afin+de
+Les comparaisons sont insensibles a la casse.
+Pour une expression sensible a la casse, ajouter /M
+en fin d'expression :
+	par ex. : "la France/M" (ou : la+France/M)
+Pour une expression reguliere, utiliser les guillemets et
+les virgules pour separateur :
+	par ex. : ",stylo(graphe)?,"
+A propos de la casse, voici des expressions equivalentes :
+	"la France/M", la+France/M, ",la France,"
+ou :
+	"la France", la+France, la+france, ",la france,i"
+Pour l'affichage des indices, veillez a ce que la premiere
+expression ne soit pas une expression reguliere
 
 */
 
@@ -57,18 +70,18 @@ function trous_inserer_le_trou($indexJeux, $indexTrou, $size, $corriger) {
   // Initialisation du code a retourner
   $nomVarSelect = "var{$indexJeux}_T{$indexTrou}";
   $mots = $propositionsTROUS[$indexTrou];
-  $temp = $_POST[$nomVarSelect] = trim($_POST[$nomVarSelect]);
-  $prop = init_mb_string()?mb_strtolower($temp,$GLOBALS['meta']['charset']):strtolower($temp);		  // function TrackFocus(BoxNumber){CurrentWord = BoxNumber;}
+  $prop = trim($_POST[$nomVarSelect]);
   $codeHTML = " <input name=\"$nomVarSelect\" class=\"jeux_input trous\" size=\"$size\"  type=\"text\"" //onfocus=\"TrackFocus('$nomVarSelect')\"
-	  . ($prop?" value=\"{$_POST[$nomVarSelect]}\"":'') . "> "
+	  . " value=\"$prop\" > "
 	 ;// . " (".join('|', $mots).")";
 
   // en cas de correction
   if ($corriger){
-   $ok = $prop!='' && in_array($prop, $mots);
+   $ok = strlen($prop) && jeux_in_liste($prop, $mots);
    if ($ok) ++$scoreTROUS; 
    // on renseigne le resultat detaille
    $score_detailTROUS[] = 'T'.($indexTrou+1).":$prop:".($ok?'1':'0');
+//$codeHTML .= '(T'.($indexTrou+1).":$prop:".($ok?'1':'0').')';
   }
   return $codeHTML;
 }
@@ -93,7 +106,8 @@ function trous_inserer_les_trous($chaine, $indexJeux) {
 // si plusieurs solutions sont possibles, seule la premiere est retenue
 function trous_afficher_indices($indexJeux) {
  global $propositionsTROUS;
- foreach ($propositionsTROUS as $prop) $indices[] = $prop[0];
+ foreach ($propositionsTROUS as $prop) 
+ 	$indices[] = strpos($prop[0], '/M')===($len=strlen($prop[0])-2) ?substr($prop[0],0,$len):$prop[0];
  shuffle($indices);
  return '<br/>'.jeux_block_depliable(_T('jeux:indices'), '<center>'.charset2unicode(join(' -&nbsp;', $indices)).'</center>');
 }
@@ -117,7 +131,7 @@ function jeux_trous($texte, $indexJeux) {
 	  elseif ($valeur==_JEUX_TROU) {
 		// remplacement des trous par : <ATTENTE_TROU>ii</ATTENTE_TROU>
 		$html .= "<ATTENTE_TROU>$indexTrou</ATTENTE_TROU>";
-		$propositionsTROUS[$indexTrou] = jeux_liste_mots_min($tableau[$i+1]);
+		$propositionsTROUS[$indexTrou] = jeux_liste_mots($tableau[$i+1]);
 		$indexTrou++;
 	  }
   }
