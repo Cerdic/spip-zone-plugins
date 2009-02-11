@@ -175,7 +175,6 @@ function TypoEnluminee_post_propre($texte) {
 		$cherche1[] = /* 22 */	"/\*\]/S";
 		$cherche1[] = /* 23 */ 	"/\[\^/S";
 		$cherche1[] = /* 24 */	"/\^\]/S";
-		$cherche1[] = /* 40 */	"/@@acro@@([^@]*)@@([^@]*)@@acro@@/S";
 	
 		$remplace1[] = /* 15 */ 	"<div class=\"spip\" style=\"text-align:right;\">$1</div>";
 		$remplace1[] = /* 17 */ 	"<div class=\"spip\" style=\"text-align:center;\">$1</div>";
@@ -187,7 +186,6 @@ function TypoEnluminee_post_propre($texte) {
 		$remplace1[] = /* 24 */	"</sup>";
 		$remplace1[] = /* 25 */ 	"<sub>";
 		$remplace1[] = /* 26 */	"</sub>";
-		$remplace1[] = /* 40 */	"<acronym title='$1' class='spip_acronym spip'>$2</acronym>";
 	}
 
 	$texte = preg_replace($cherche1, $remplace1, $texte);
@@ -238,7 +236,6 @@ function TypoEnluminee_pre_typo($texte) {
 			/* 20 */ 	"/\(r\)/Si",
 			/* 21 */ 	"/\(tm\)/Si",
 			/* 22 */ 	"/\.\.\./S",
-			/* 23 */	"/\[([^|?][^][]*)\|((?:[^][](?!->))*)\]/S"
 		);
 	
 		$remplacer_raccourcis = array(
@@ -254,7 +251,6 @@ function TypoEnluminee_pre_typo($texte) {
 			/* 20 */ 	"&reg;",
 			/* 21 */ 	"&trade;",
 			/* 22 */ 	"&hellip;",
-			/* 23 */	"@@acro@@$2@@$1@@acro@@"
 		);
 	}
 
@@ -307,8 +303,6 @@ function TypoEnluminee_post_typo($texte) {
 		);
 	}
 	$texte = preg_replace($cherche1, $remplace1, $texte);
-	// Acronymes
-	$texte = preg_replace('/@@acro@@([^@]*)@@([^@]*)@@acro@@/S',"<acronym title='$1' class='spip_acronym spip'>$2</acronym>",$texte);
 	// Correction des & en &amp;
 	$texte = preg_replace('/&([A-Za-z#0-9]*);/','@@@amp:\1:amp@@@',$texte); // echapement des entites html deja presentes
 	$texte = str_replace('&','&amp;',$texte);
