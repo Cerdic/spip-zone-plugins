@@ -18,6 +18,9 @@
 	<prefix>
 	Yagloo
 	</prefix>
+
+	<icon>yagloo.png</icon>
+
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0.0;]" />
 	<necessite id="CFG" version="[1.0;]" />
