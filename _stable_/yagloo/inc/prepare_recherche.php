@@ -61,7 +61,8 @@ function inc_prepare_recherche($recherche, $table='articles', $cond=false, $serv
 			$domains = preg_replace(',^https?://,', '', $GLOBALS['meta']['adresse_site']);
 
 			$yagloo = 'Yagloo_recherche_'.$config['service'];
-			$results = $yagloo($recherche, $domains);
+			$key = $config[$config['service'].'key'];
+			$results = $yagloo($recherche, $domains, $key);
 
 			$urls = array();
 			$preg = ',^http://'.preg_quote($domains).'(/.+?)(\.html)?$,S';
@@ -187,22 +188,20 @@ function Yagloo_recherche_api($urlapi, $page, $maxpages, $json_decode) {
 	return $results;
 }
 
-function Yagloo_recherche_boss($recherche, $domains='') {
-	$appid = '';
+function Yagloo_recherche_boss($recherche, $domains='', $key='') {
 	$api = 'http://boss.yahooapis.com/ysearch/web/v1/';
 	$page = 50;
-	$urlapi = $api . urlencode($recherche) . '?appid=' . $appid
+	$urlapi = $api . urlencode($recherche) . '?appid=' . $key
 		. '&format=json&sites=' . urlencode($domains) . '&count=' . $page;
 
 	return Yagloo_recherche_api($urlapi, $page, 14, 'Yagloo_boss_decode');
 }
 
-function Yagloo_recherche_google($recherche, $domains='') {
-	$apikey = '';
+function Yagloo_recherche_google($recherche, $domains='', $key='') {
 	$api = 'http://ajax.googleapis.com/ajax/services/search/web?v=1.0&rsz=large';
 	$urlapi = $api . '&q=site:' . urlencode($domains) . '+' . urlencode($recherche);
-	if ($apikey)
-		$urlapi .= '&key='.urlencode($apikey);
+	if ($key)
+		$urlapi .= '&key='.urlencode($key);
 	if (strlen($GLOBALS['spip_lang']))
 		$urlapi .= '&hl=' . $GLOBALS['spip_lang'];
 
