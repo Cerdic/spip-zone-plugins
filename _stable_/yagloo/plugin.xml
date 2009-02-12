@@ -4,10 +4,10 @@
 	</nom>
 	<auteur>Fil</auteur>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
-	dev
+	test
 	</etat>
 	<description>
 	Utilise les API Yahoo BOSS et Google AjaxSearch pour alimenter le crit&#232;re <code>{recherche}</code> des boucles SPIP.
@@ -22,6 +22,6 @@
 	<icon>yagloo.png</icon>
 
 	<chemin dir='' />
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.4;]" />
 	<necessite id="CFG" version="[1.0;]" />
 </plugin>

@@ -80,10 +80,14 @@ function inc_prepare_recherche($recherche, $table='articles', $cond=false, $serv
 			$save = $GLOBALS['contexte'];
 			$points = array();
 			foreach($urls as $url => $score) {
-				if ($f)
-					$f($url, $entite);
-				else
+				$GLOBALS['contexte'] = array();
+				if ($f) {
+					$a = $f($url, $entite);
+					if (is_array($a))
+						$GLOBALS['contexte'] = $a[0];
+				} else {
 					recuperer_parametres_url($fond, $url);
+				}
 				foreach ($liste_index_tables as $type => $_id) {
 					if (isset($GLOBALS['contexte'][$_id])) {
 						$id = $GLOBALS['contexte'][$_id];
@@ -91,6 +95,7 @@ function inc_prepare_recherche($recherche, $table='articles', $cond=false, $serv
 					}
 				}
 			}
+			$GLOBALS['contexte'] = $save;
 
 			/* modification des points pour les articles selon leur age */
 			if (is_array($points['articles'])) {
