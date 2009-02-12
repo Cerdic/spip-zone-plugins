@@ -19,6 +19,5 @@
 		<action>interface</action>
 		<inclure>spicasa.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>
 

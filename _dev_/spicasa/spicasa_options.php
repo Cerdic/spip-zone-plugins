@@ -5,7 +5,7 @@ define('_DIR_PLUGIN_SPICASA',(_DIR_PLUGINS.end($p))."/");
 
 
 
-function spicasa_resultados($recherche, $id_article, $debut=1, $max_results=400, $items_page=2){
+function spicasa_resultados($recherche, $id_article, $debut=1, $max_results=40, $items_page=40){
 		//add LightweightPicasa libary to include_path
 		ini_set('include_path', 
 				ini_get('include_path') . PATH_SEPARATOR . _DIR_PLUGIN_SPICASA.'LightweightPicasaAPI');
@@ -17,7 +17,7 @@ function spicasa_resultados($recherche, $id_article, $debut=1, $max_results=400,
 		include_spip('inc/distant'); // pour 'copie_locale'
 
 		$pic = new Picasa();
-		$images = $pic->getImages(null, $debut+$items_page, $debut, $recherche, null, "public", null, 1024);
+		$images = $pic->getImages(null, $debut+$items_page, $debut, $recherche, null, "public", null, 800);
 
 		if($images->getTotalResults() < $max_results) $max_results=$images->getTotalResults();
 		
@@ -91,7 +91,7 @@ function spicasa_add($id_image, $id_article, $id_album, $user){
 	
 	
 	$pic = new Picasa();
-	$image = $pic->getImageById($user, $id_album, $id_image, null, 1024);
+	$image = $pic->getImageById($user, $id_album, $id_image, null, 800);
 	foreach($image->getContentUrlMap() as $value) $url = $value; //just one
 
 	$type = $image->getImageType();
@@ -113,22 +113,28 @@ function spicasa_add($id_image, $id_article, $id_album, $user){
 	$largeur = $image->getWidth();
 	$hauteur = $image->getHeight();
 	
+	
+    
+   
 
-	$url = $GLOBALS['meta']['adresse_site']."/?page=picasaimage&url=".$url;
+	//$url = $GLOBALS['meta']['adresse_site']."/?page=picasaimage&url=".$url;
 	print "<a href='$url'>remote</a><br>";
 	
-	//this line fail! get 404 on spip.log
+	
+	define('BUFSIZ', 4095);
+	$dir = dirname($_SERVER["SCRIPT_FILENAME"])."/IMG/";
+
+
+	//$img_local = copie_locale($GLOBALS['meta']['adresse_site']."/IMG/".basename($url));
 	$img_local = copie_locale($url);
 	
-	print "<a href='../$img_local'>local</a><br>";
+	echo "local: ".$img_local;
 	
-	$img_local = ereg_replace("^"._DIR_IMG, "", $img_local);
+	
+	//$img_local = ereg_replace("^"._DIR_IMG, "", $img_local);
 
 	
-	
-	
 	$taille = filesize($img_local);
-	
 	
 	
 	include_spip("base/abstract_sql");
@@ -142,7 +148,7 @@ function spicasa_add($id_image, $id_article, $id_album, $user){
 			"fichier" => "$img_local",
 			"largeur" => "$largeur",
 			"hauteur" => "$hauteur",
-			"mode" => "image",
+			"mode" => "document",
 			"taille" => $taille,
 			"distant" => "non"
 		)
@@ -157,6 +163,8 @@ function spicasa_add($id_image, $id_article, $id_album, $user){
 			)
 		);
 	}
+	
+	print "ok";
 	
 
 

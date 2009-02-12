@@ -1,9 +1,19 @@
-#CACHE{0}
-[(#HTTP_HEADER{Content-Type: image/jpg})]
-[(#HTTP_HEADER{Expires: Mon, 26 Jul 1997 05:00:00 GMT})]
-[(#HTTP_HEADER{Last-Modified: #EVAL{gmdate( 'D, d M Y H:i:s' )} GMT})]
-[(#HTTP_HEADER{Cache-Control: no-store, no-cache, must-revalidate})]
-[(#HTTP_HEADER{Cache-Control: post-check=0, pre-check=0', false ))]
-[(#HTTP_HEADER{Pragma: no-cache})]
-[(#EVAL{file_get_contents('#ENV{url}')})]
-
+<?php
+    if( isset($_GET['url']) )
+    {   
+        if( $sImageData = @file_get_contents( $_GET['url']) )
+        {
+            header( 'Expires: Mon, 26 Jul 1997 05:00:00 GMT' );
+            header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s' ) . ' GMT' );
+            header( 'Content-Type: image/jpg' );
+            header( 'Cache-Control: no-store, no-cache, must-revalidate' );
+            header( 'Cache-Control: post-check=0, pre-check=0', false );
+            header( 'Pragma: no-cache' );
+            echo $sImageData;
+            exit();
+    }else{
+        header("HTTP/1.0 404 Not Found"); 
+    }
+}
+exit();
+?>
