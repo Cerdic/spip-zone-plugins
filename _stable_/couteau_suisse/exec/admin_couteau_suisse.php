@@ -296,6 +296,8 @@ function bloc_variables(index, domElement) {
 }
 if(typeof onAjaxLoad=='function') onAjaxLoad(input_init);
 
+// TODO : cookies en jQuery sous SPIP>=2.0 (plugin jquery.cookie.js)
+
 var dixans=new Date;
 dixans.setFullYear(dixans.getFullYear()+10);
 
