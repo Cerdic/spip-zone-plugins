@@ -38,7 +38,7 @@ if (window.jQuery)
 	$(nyro_init);
  })(jQuery);
 /* ]]> */</script>
-<link rel="stylesheet" href="'.url_absolue(find_in_path('styles/nyroModal.full.css')).'" type="text/css" media="all"/>
+<link rel="stylesheet" href="'.url_absolue(find_in_path('styles/nyroModal.full.css')).'" type="text/css" />
 ';
 	return $flux;
 }
