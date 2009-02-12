@@ -15,12 +15,12 @@ function compacte_css ($contenu) {
 }
 
 // Compacte du javascript grace a Dean Edward's JavaScriptPacker
-// utile pour dist/jquery.js par exemple
+// utile pour prive/jquery.js par exemple
 // http://doc.spip.org/@compacte_js
 function compacte_js($flux) {
 	if (!strlen($flux))
 		return $flux;
-	include_spip('lib/JavaScriptPacker/class.JavaScriptPacker');
+	include_spip('lib/JavascriptPacker/class.JavaScriptPacker');
 	$packer = new JavaScriptPacker($flux, 0, true, false);
 
 	// en cas d'echec (?) renvoyer l'original
