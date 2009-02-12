@@ -15,10 +15,19 @@
 			$ret .= "<script type='text/javascript'><!--\n"
 				. "function close_spicasa() {\n$('body').css('overflow','auto');\n $('#spicasa').fadeOut();\n}\n"
 				. "function spicasa_buscar(debut) {\n "
-				. " buscar = $('#spicasa_busqueda').attr('value');\n "
+				. " buscar = $('#spicasa_busqueda').val();\n "
 				. "$('#spicasa_loading').fadeIn(); $('#spicasa_resultados').hide(); "
 				. "$('#spicasa_resultados').load('../?page=spicasa_resultados&id_article=$id_article&buscar='+escape(buscar)+'&debut='+debut, function() {\n"
 				. "$('#spicasa_resultados').fadeIn();$('#spicasa_loading').hide();\n});  \n}\n"
+
+				. "function spicasa_login() {\n "
+				. " user = $('#username').val(); \n"
+				. " pass = $('#password').val(); \n"
+				. "$('#spicasa_loading').fadeIn(); $('#spicasa_resultados').hide(); "				    
+				. "$('#spicasa_resultados').load('../?page=spicasa_login&user='+escape(user)+'&pass='+escape(pass), function(){\n"
+				    . "$('#spicasa_resultados').fadeIn();$('#spicasa_loading').hide();\n});  \n}\n"
+				
+				
 				. "//--></script>\n";
 		
 		
