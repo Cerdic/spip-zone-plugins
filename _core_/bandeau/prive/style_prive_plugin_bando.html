@@ -1,0 +1,106 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+/*  ------------------------------------------
+/*  Habillage des elements du contenu
+/*  ------------------------------------------ */
+body { font-size:0.625em; }
+/* redefinir la largeur de l'ecran etroit*/
+#conteneur,.table_page,div.messages { width: 780px; margin-top:0.5em;}
+#navigation {}
+#contenu {width: 535px; }
+#extra {}
+
+/* ecran large*/
+.large #conteneur,.large .table_page,.large div.messages {}
+.large #navigation {}
+.large #contenu {}
+.large #extra {}
+
+
+#bando_haut { font-size: 110%; }
+#bando_haut a { text-decoration: none; }
+#bando_haut .largeur { width: 780px; margin: auto; text-align: left; }
+.large #bando_haut .largeur {width:974px;}
+
+
+#bando_haut ul{margin: 0; padding: 0; list-style: none;}
+#bando_haut ul li { /*position:relative; */float: left; display: block; min-width:80px; text-align: center; border-right: 1px solid #eee; }
+#bando_haut ul li:hover { background: #fff; }
+#bando_haut ul li ul {border: 1px solid #666; border-top: 0; text-align: left; height: auto; width: auto; display: block; position:absolute; left:-3000em; z-index: 99; }
+#bando_haut ul li:hover ul,
+#bando_haut ul li ul.actif { left:auto;}
+#bando_haut ul li ul li a { background-color: #fff; border-top: 1px solid #ccc; font-weight: normal; }
+#bando_haut ul li ul li a:hover, 
+#bando_haut ul li ul li a:focus { background-color: #F8F7F3; }
+
+#bando_haut ul li ul li {float:none;text-align:left;position:static;}
+
+/*
+#bando_haut ul li.bouton { position:relative; display: inline; }
+#bando_haut ul li.bouton ul { position: absolute; z-index:200; display: block; width: 200px; background-color: #C3C3C3; left:-3000em;}
+#bando_haut ul li.bouton:hover ul,
+#bando_haut ul li.bouton ul.actif { left:0;}
+#bando_haut ul li.bouton:hover ul li,
+#bando_haut ul li.bouton ul.actif li { padding: 0; }
+#bando_haut ul li.bouton:hover ul li a,
+#bando_haut ul li.bouton ul.actif li a { display: block; padding: .5em; }*/
+
+#bando_identite { line-height:2em; background: #444; color: #eee; overflow:hidden; border-bottom:1px solid #222; }
+#bando_identite p { width: 50%; padding: 1px 0; margin:0;}
+#bando_identite p img { vertical-align: middle; }
+#bando_identite p.nom_site_spip { width: 40%; float: left; }
+#bando_identite p.session { width: 60%; float: right; text-align: right; }
+#bando_identite p.session .menu_lang { vertical-align: middle; }
+#bando_identite strong, #identite a { color: #eee; }
+#bando_identite a:hover { text-decoration: underline; }
+
+#bando_outils { position:fixed; bottom:0px; width:100%; line-height:2em; clear:both; background: #E4A7C5; overflow:hidden;border-top: 1px solid #888; }
+#bando_outils ul.outiller{text-align:right;}
+#bando_outils ul.outiller li{ overflow:hidden; }
+
+#bando_outils ul.outiller li.tout{ float:left; margin-left:10px; }
+#bando_outils ul.outiller li.rapide{ float:left; margin-left:20px; }
+#bando_outils ul.outiller li.bando_couleur{ float:left; margin-left:100px; }
+#bando_outils ul.outiller li.aide{ float:right; margin-left:20px; }
+#bando_outils ul.outiller li.recherche{ float:right; }
+
+#bando_outils ul.creer li.bouton{ float:left; }
+#bando_outils ul.creer li.bouton a{ display:block; padding:3px; }
+#bando_outils ul.creer li.bouton a:hover, #bando_outils ul.creer li.bouton a:focus{background-color:white;}
+#bando_outils ul.creer li.bouton{ margin-top:0px;}
+
+#bando_outils #formRecherche {margin-top:-1px;}
+#bando_outils #formRecherche label{}
+#bando_outils #formRecherche input{width:100px;}
+#bando_outils #formRecherche button{vertical-align:bottom; display:inline; padding:0; margin:0; margin-left:-2px; padding-left:1px; cursor:pointer;}
+
+
+#bando_navigation { clear:both; background: #fff; border-bottom: 1px solid #999; border-top: 1px solid #ddd;  }
+#bando_navigation ul li a { display: block; padding: .8em 1.2em; font-weight: bold; }
+#bando_navigation ul li a:hover,
+#bando_navigation ul li a:focus { text-decoration: underline; }
+
+#bando_navigation ul li.first { border-left: 1px solid #eee;}
+
+
+[(#REM)</style>]

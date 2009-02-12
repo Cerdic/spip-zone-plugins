@@ -1,0 +1,108 @@
+<plugin>
+  <nom>Bandeau 2.1</nom>
+  <auteur>Collectif spip-dev</auteur>
+  <licence>(c) 2009 GPL</licence>
+  <version>1.0</version>
+  <etat>dev</etat>
+  <description>Revisitons la barre de nav de SPIP</description>
+  <prefix>bando</prefix>
+  <necessite id='SPIP' version='[2.1.0 dev;]' />
+  
+ 	<necessite id="SPIP" version="[2.1.0 dev;)" />
+	
+	<bouton id="bando_accueil">
+		<icone>images/accueil-48.png</icone>
+		<titre>Accueil</titre>
+		<url>accueil</url>
+	</bouton>
+	
+	<bouton id="bando_edition">
+		<icone>images/edition-48.png</icone>
+		<titre>Edition</titre>		
+		<url>navigation</url>
+		<args>menu=bando_edition</args>
+	</bouton>
+	<bouton id='articles_page' parent="bando_edition">
+		<icone></icone>
+		<titre>icone_tous_articles</titre>		
+	</bouton>
+	<bouton id='naviguer' parent="bando_edition">
+		<icone></icone>
+		<titre>info_rubriques</titre>		
+	</bouton>
+	<bouton id='auteurs' parent="bando_edition">
+		<icone></icone>
+		<titre>icone_auteurs</titre>		
+	</bouton>
+	<bouton id='breves' parent="bando_edition">
+		<icone></icone>
+		<titre>icone_breves</titre>		
+	</bouton>
+	<bouton id='mots_tous' parent="bando_edition">
+		<icone></icone>
+		<titre>icone_mots_cles</titre>		
+	</bouton>
+	<bouton id='sites_tous' parent="bando_edition">
+		<icone></icone>
+		<titre>icone_sites_references</titre>		
+	</bouton>
+
+	<bouton id="bando_suivi">
+		<icone>images/suivi-48.png</icone>
+		<titre>Suivi Editorial</titre>		
+		<url>navigation</url>
+		<args>menu=bando_suivi</args>
+	</bouton>
+	<bouton id='synchro' parent="bando_suivi">
+		<icone></icone>
+		<titre>info_suivi_activite</titre>		
+	</bouton>
+	<bouton id="forum_2" parent="bando_suivi">
+		<icone></icone>
+		<titre>titre_cadre_forum_interne</titre>
+		<url>forum</url>
+	</bouton>
+	<bouton id='suivi_revisions' parent="bando_suivi">
+		<icone></icone>
+		<titre>info_historique_titre</titre>
+	</bouton>
+	<bouton id='messagerie' parent="bando_suivi">
+		<icone></icone>
+		<titre>info_messagerie_interne</titre>
+	</bouton>
+	<bouton id='calendrier' parent="bando_suivi">
+		<icone></icone>
+		<titre>Agenda interne</titre>
+	</bouton>
+
+	
+	<bouton id="bando_reactions">
+		<icone>images/suivi-48.png</icone>
+		<titre>R&eacute;actions</titre>		
+		<url>navigation</url>
+		<args>menu=bando_reactions</args>
+	</bouton>
+	
+	
+	
+	<bouton id="bando_administration">
+		<icone>images/administration-48.png</icone>
+		<titre>Administration</titre>		
+		<url>navigation</url>
+		<args>menu=bando_administration</args>
+	</bouton>
+	
+	
+	
+	<bouton id="bando_configuration">
+		<icone>images/configuration-48.png</icone>
+		<titre>Configuration</titre>		
+		<url>navigation</url>
+		<args>menu=bando_configuration</args>
+	</bouton>
+	<bouton id='admin_plugin' parent="bando_configuration">
+		<icone></icone>
+		<titre>icone_admin_plugin</titre>		
+	</bouton>
+
+</plugin>
