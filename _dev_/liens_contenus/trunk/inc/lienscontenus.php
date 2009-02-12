@@ -115,16 +115,16 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
 			include_spip('base/abstract_sql');
 			sql_insertq(
 			  "spip_liens_contenus",
-			  array(
+			array(
 	        "type_objet_contenant" => $type_objet_contenant,
 				  "id_objet_contenant" => $id_objet_contenant,
 				  "type_objet_contenu" => $lien['type'],
 				  "id_objet_contenu" => $lien['id']
-			  )
+			)
 			);
 		}
 	} else {
-    spip_log('- aucun lien', 'liens_contenus');
+		spip_log('- aucun lien', 'liens_contenus');
 	}
 }
 
@@ -133,27 +133,27 @@ function lienscontenus_initialiser()
 {
 	// vider la table
 	sql_delete("spip_liens_contenus");
-  spip_log('Initialisation des contenus', 'liens_contenus');
-	
-  // TODO: decouvrir un moyen automatique en SPIP 2 de récupérer la liste des tables
-  $liste_tables = array(
+	spip_log('Initialisation des contenus', 'liens_contenus');
+
+	// TODO: decouvrir un moyen automatique en SPIP 2 de récupérer la liste des tables
+	$liste_tables = array(
     'spip_articles' => 'id_article',
     'spip_rubriques' => 'id_rubrique',
     'spip_breves' => 'id_breve',
     'spip_syndic' => 'id_syndic',
     'spip_forum' => 'id_forum'
-  );
-	// parcourir les tables et les champs
-	foreach ($liste_tables as $table => $col_id) {
-		$type_objet_contenant = ereg_replace("^spip_(.*[^s])s?$", "\\1", $table);
-		if ($res = sql_select("*", $table)) {
-			while ($row = sql_fetch($res)) {
-				$id_objet_contenant = $row[$col_id];
-				// implode() n'est pas forcement le plus propre conceptuellement, mais ca doit convenir et c'est rapide
-				lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contenant, implode(' ', $row));
-			}
-		}
-	}
+    );
+    // parcourir les tables et les champs
+    foreach ($liste_tables as $table => $col_id) {
+    	$type_objet_contenant = ereg_replace("^spip_(.*[^s])s?$", "\\1", $table);
+    	if ($res = sql_select("*", $table)) {
+    		while ($row = sql_fetch($res)) {
+    			$id_objet_contenant = $row[$col_id];
+    			// implode() n'est pas forcement le plus propre conceptuellement, mais ca doit convenir et c'est rapide
+    			lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contenant, implode(' ', $row));
+    		}
+    	}
+    }
 }
 
 function lienscontenus_boite_liste($type_objet, $id_objet)
@@ -185,39 +185,24 @@ function lienscontenus_verification_articles()
 	$script = <<<EOS
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
-            // ETAPE 1 : Gestion des changements de statut de l'article
-            // on recupere le statut actuel et le code par defaut du onchange
-            var initialStatut = $('select[@name=statut_nouv] > option[@selected]').attr('value');
-            var currentStatut = initialStatut;
-            var select = $('select[@name=statut_nouv]')[0];
-            var currentOnChange = select.onchange;
-        
-            // on supprime le onchange par defaut
-            select.onchange = null;
-        
-            // on gere un onchange specifique
-            $('select[@name=statut_nouv]').bind('change', function(event) {
-                // Si le statut initial etait "publie" et s'il y a au moins un contenu publie qui pointe vers lui, on demande confirmation
-                if ((initialStatut == 'publie') && (currentStatut == 'publie') && ($('#liens_contenus_contenants > li.publie').size() > 0)) {
-                    if (confirm(messageConfirmationChangementStatut)) {
-                        // changement confirme
-                        var newStatut = $('select[@name=statut_nouv] > option[@selected]').attr('value');
-                        currentStatut = newStatut; 
-                        // on execute le onchange initial
-                        currentOnChange.apply(this);
-                    } else {
-                        // on ne change pas, finalement
-                        $('select[@name=statut_nouv] > option[@selected]').removeAttr('selected');
-                        $('select[@name=statut_nouv] > option[@value=publie]').attr('selected', 'selected');
-                    }
-                } else {
-                    // pas de probleme pour changer
-                    var newStatut = $('select[@name=statut_nouv] > option[@selected]').attr('value');
-                    currentStatut = newStatut;
-                    // on execute le onchange initial
-                    currentOnChange.apply(this);
-                }
-            });
+            // ETAPE 1 : Gestion des changements de statut de l'article s'il est publie
+            // on recupere le statut actuel
+            var estPublie = $('ul.instituer_article.instituer > li > ul > li.publie.selected').size() == 1;
+            var estLie = $('#liens_contenus_contenants > li.publie').size() > 0;
+            if (estPublie && estLie) {
+              $('ul.instituer_article.instituer > li > ul > li:not(.selected) > a').each(function(){
+                this.onclick = null; // this plutot que $(this), pas tous les jours facile
+                $(this).bind('click', function(event){
+	                if (confirm(messageConfirmationChangementStatut)) {
+	                  // changement confirme
+	                  $(this).unbind('click');
+	                  $(this).trigger('click');
+	                } else {
+                    return false;
+                  }
+                });
+              });
+            }
             // ETAPE 2 : Gestion des changements de statut de l'article
             // on ajoute une classe specifique aux liens de suppression des docs
             $('div[@id^=legender-]').each(function() {
