@@ -44,6 +44,11 @@ Sinon, utiliser le comportement normal.
 <param name='bgcolor' value='[(#ENV{bgcolor,#FFFFFF})]' />
 [<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
 </object>
+<script type="text/javascript">
+	if(typeof(ap_instances) == "undefined"){
+		jQuery.getScript("[(#CHEMIN{javascript/audio-player.js})]");
+	}
+</script>
 ][(#GET{player}|=={neoplayer}|?{' ',''})
 <object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="#CHEMIN{flash/neoplayer_maxi.swf}" height="[(#ENV{height,20})]" width="[(#ENV{width,200})]">
 <param name="wmode" value="opaque" />
