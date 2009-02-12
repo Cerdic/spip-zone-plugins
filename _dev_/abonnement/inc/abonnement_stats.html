@@ -234,20 +234,13 @@ $query = spip_query ( "SELECT COUNT(a.id) as n FROM `spip_auteurs_elargis` a WHE
 
 
 
-	
-		
-
 	<script type="text/javascript">
 	$(document).ready(function(){
 	
 	$("a.date_liste").click(function(e){
-	
-	e.preventDefault();
-	$("#tableau").load('../?page=liste_abonnes&date_liste=' + this.rel );
-	
+	var ladate = this.rel.split(' ');
+	$("#tableau").load('/?page=liste_abonnes&date_liste=' + ladate[0] );
 	});
-	
-	
 	
 	});
 	</script>
