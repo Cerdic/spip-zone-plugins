@@ -20,6 +20,7 @@ separateurs optionnels   : [titre], [config]
 parametres de configurations par defaut :
 	taille=auto	// taille des trous
 	indices=oui	// afficher les indices ?
+	couleurs=oui // appliquer des couleurs sur les corrections ?
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
@@ -66,24 +67,24 @@ expression ne soit pas une expression reguliere
 */
 
 function trous_inserer_le_trou($indexJeux, $indexTrou, $size, $corriger) {
-  global $propositionsTROUS, $scoreTROUS, $score_detailTROUS;
-  // Initialisation du code a retourner
-  $nomVarSelect = "var{$indexJeux}_T{$indexTrou}";
-  $mots = $propositionsTROUS[$indexTrou];
-  $prop = trim($_POST[$nomVarSelect]);
-  $codeHTML = " <input name=\"$nomVarSelect\" class=\"jeux_input trous\" size=\"$size\"  type=\"text\"" //onfocus=\"TrackFocus('$nomVarSelect')\"
-	  . " value=\"$prop\" > "
-	 ;// . " (".join('|', $mots).")";
-
-  // en cas de correction
-  if ($corriger){
-   $ok = strlen($prop) && jeux_in_liste($prop, $mots);
-   if ($ok) ++$scoreTROUS; 
-   // on renseigne le resultat detaille
-   $score_detailTROUS[] = 'T'.($indexTrou+1).":$prop:".($ok?'1':'0');
-//$codeHTML .= '(T'.($indexTrou+1).":$prop:".($ok?'1':'0').')';
-  }
-  return $codeHTML;
+	global $propositionsTROUS, $scoreTROUS, $score_detailTROUS;
+	// Initialisation du code a retourner
+	$nomVarSelect = "var{$indexJeux}_T{$indexTrou}";
+	$mots = $propositionsTROUS[$indexTrou];
+	$prop = trim($_POST[$nomVarSelect]);
+	$disab = $color = '';
+	// en cas de correction
+	if($corriger) {
+		$ok = strlen($prop) && jeux_in_liste($prop, $mots);
+		if($ok) ++$scoreTROUS;
+		if(jeux_config('couleurs')) $color = $ok?' juste':' faux';
+		// on renseigne le resultat detaille
+		$score_detailTROUS[] = 'T'.($indexTrou+1).":$prop:".($ok?'1':'0');
+		$disab = " disabled='disabled'";
+	}
+	$codeHTML = "<input name='$nomVarSelect' class='jeux_input trous$color' size='$size' type='text'$disab' value=\"$prop\" />";
+//	if($corriger) $codeHTML .= '(T'.($indexTrou+1).":$prop/".$GLOBALS['meta']['charset']."[".join('|',$mots)."]:".($ok?'1':'0').'pt)';
+	return $codeHTML;
 }
 
 function trous_inserer_les_trous($chaine, $indexJeux) {
@@ -124,6 +125,7 @@ function jeux_trous($texte, $indexJeux) {
   jeux_config_init("
 	taille=auto	// taille des trous
 	indices=oui	// afficher les indices ?
+	couleurs=oui	// afficher les indices ?
   ", false);
   foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];

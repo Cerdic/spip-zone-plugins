@@ -3,3 +3,10 @@ input.trous {
 	display:inline;
 }	
 
+input.juste {
+	color:#006600;
+}
+
+input.faux {
+	color:#FF0000;
+}
