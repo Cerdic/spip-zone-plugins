@@ -101,4 +101,47 @@ function image_typo() {
 	return call_user_func_array('produire_image_typo', $tous);
 }
 
+/**
+ * balise #FAVICON un peu smart
+ * elle transforme toute image passee dans #ENV{favicon} en .ico
+ *
+ */
+if (!function_exists('balise_FAVICON')) {
+function balise_FAVICON($p) {
+	$t = 32;
+	$_favicon = champ_sql('favicon', $p);
+
+	// On recopie honteusement #LGO_SITE_SPIP
+	$_logo_site_spip = '((!is_array($l = quete_logo("id_syndic", "ON", "\'0\'","", 0))) ? "": ("<img class=\'spip_logos\' alt=\'\' src=\'$l[0]\'" . $l[3] .  ($l[1] ? " onmouseover=\\"this.src=\'$l[1]\'\\" onmouseout=\\"this.src=\'$l[0]\'\\"" : "") . " />"))';
+
+	$p->code =
+	'((
+		($fav = ' . $_favicon . ')
+		OR ($fav = find_in_path("favicon.ico"))
+		OR ($fav = '. $_logo_site_spip .')
+	) ? ((!include_spip("filtres/images_transforme"))
+		.(!include_spip("inc/filtres_images_mini"))
+		.extraire_attribut(image_format(
+			image_recadre(
+				image_passe_partout($fav, '.$t.', '.$t.')
+			,'.$t.', '.$t.', "center")
+		,"ico"),"src")
+		)
+		: find_in_path("spip.ico")
+	)';
+
+	return $p;
+
+/*
+. ')'
+	|sinon{#CHEMIN{favicon.ico}}
+	|sinon{#LOGO_SITE_SPIP}
+		|image_passe_partout{32,32}
+		|image_recadre{32,32,center}
+		|image_format{ico}|extraire_attribut{src}
+	|sinon{#CHEMIN{spip.ico}}
+*/
+}
+}
+
 ?>
