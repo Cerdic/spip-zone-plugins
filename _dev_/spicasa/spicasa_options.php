@@ -11,14 +11,10 @@ require_once 'Picasa.php';
 include_spip('inc/distant'); // pour 'copie_locale'
 
 
-function spicasa_resultados($recherche, $id_article, $debut=1, $max_results=250, $items_page=50){
-
-
-
-
-
+function spicasa_resultados($query, $id_article, $debut=1, $max_results=250, $items_page=50){
 		$pic = new Picasa();
-		$images = $pic->getImages(null, $debut+$items_page, $debut, $recherche, null, "public", null, 800);
+		$query = str_replace(" ", "+", $query);
+		$images = $pic->getImages(null, $debut+$items_page, $debut, $query, null, "public", null, 800);
 
 		if($images->getTotalResults() < $max_results) $max_results=$images->getTotalResults();
 		
@@ -31,17 +27,9 @@ function spicasa_resultados($recherche, $id_article, $debut=1, $max_results=250,
 				$author = $img->getAuthor()->getUser();
 				
 				$titre = $img->getTitle();
+				$thumb = $img->getMediumThumb();
 					
-					
-					
-				//$url_image = $value;
-									
-				$ret .= "<div style='width: 190px; height: 190px; text-align: center; float: left; margin-right: 10px; margin-bottom: 10px;'>";
-				$ret .= "<table cellpadding='0' cellspacing='0'><tr><td style='width: 190px; height: 190px; vertical-align: bottom; text-align: center; border: 0px;'>";
-				$ret .= "<a onclick='spicasa_add(\"$id_image\",\"$id_album\",\"$author\");return false;' href='#'><img src='".$img->getMediumThumb()."' /></a></td></tr></table>";
-				$ret .= "<div style='font-size: 0.8em;'><strong>$titre</strong></div>";
-				$ret .= "</div>";
-			
+		        $ret .= spicasa_thumb($id_image,$id_album, $thumb, $titre, $author,"");
 		}
 	
  	//pagination
@@ -70,24 +58,6 @@ function spicasa_resultados($recherche, $id_article, $debut=1, $max_results=250,
 		
 
 function spicasa_add($id_image, $id_article, $id_album, $user){
-
-
-	
-
-
-	//print "<script>console.log(\"$id_album\");</script>";
-	
-	/*
-	print $id_image."<br>";
-	print $id_article."<br>";
-	print $id_album."<br>";
-	print $user."<br>";
-	*/
-	
-	
-	
-	
-	
 	$pic = new Picasa();
 	$image = $pic->getImageById($user, $id_album, $id_image, null, 800);
 	foreach($image->getContentUrlMap() as $value) $url = $value; //just one
@@ -110,26 +80,12 @@ function spicasa_add($id_image, $id_article, $id_album, $user){
 	$descriptif = $image->getDescription()."(c)".$image->getAuthor()->getName() ;
 	$largeur = $image->getWidth();
 	$hauteur = $image->getHeight();
-	
-	
-    
    
-
-	//$url = $GLOBALS['meta']['adresse_site']."/?page=picasaimage&url=".$url;
-	print "<a href='$url'>remote</a><br>";
-	
-	
-	define('BUFSIZ', 2097152);
-	$dir = dirname($_SERVER["SCRIPT_FILENAME"])."/IMG/";
-
-
-	//$img_local = copie_locale($GLOBALS['meta']['adresse_site']."/IMG/".basename($url));
 	$img_local = copie_locale($url);
 	
 	$taille = filesize($img_local);
 	$tam = getimagesize($img_local);
 	$img_local = ereg_replace("^"._DIR_IMG, "", $img_local);
-
 	
 	include_spip("base/abstract_sql");
 	$id_document = sql_insertq (
@@ -158,43 +114,42 @@ function spicasa_add($id_image, $id_article, $id_album, $user){
 		);
 	}
 	
-	return "La imágen $titre se cargó exitosamente";
+	return _T('spicasa:la_imagen')." ".$titre." "._T('spicasa:exitosamente');
 
 }
 
 function spicasa_login($email, $pass){
 
-  
     $pic = new Picasa();
 
     try{
         $login = $pic->authorizeWithClientLogin($email, $pass);
-        print "<script>$('#login').html('<p>Logged as <strong>$email</strong></p>');</script>";
+        print "<script>$('#login').html('<p>"._T('spicasa:logged')."<strong>$email</strong></p>');</script>";
         
     } catch (Picasa_Exception_CaptchaRequiredException $ce) {
-        print "Por favor, ingrese el captcha ";
+        print _T('spicasa:captcha');
         print '<img src="'.$ce->getCaptchaUrl().'" />';
+        return;
 
        /* Put code for generating a form with an input field, setting $ce->getCaptchaToken(),
         * $ce->getUsername(), and $cd->getPassword() as hidden fields here
         */
     } catch (Picasa_Exception_InvalidUsernameOrPasswordException $ie) {
-        print "The username or password you have entered is invalid.";
-
-        /* Put code for handling re-logins here
-        */
+        print _T('spicasa:login_invalid');
+        print _T('spicasa:intente');
+        return;
     } catch (Picasa_Exception $e) {
-        print "Your attempt to login has failed: ".$e->getMessage();
+        print _T('spicasa:login_fail').": ".$e->getMessage();
+        print "<br/>"._T('spicasa:intente');
+        return;
 
-        /* Put code for handling relogins here
-        */
     }
     $username = substr($email, 0, strrpos($email, "@")); 
     //print $username;
     $account = $pic->getAlbumsByUsername ($username);
     
      foreach($account->getAlbums() as $album){
-        $ret .=  spicasa_thumb_album($album->getIdnum(),$album->getIcon(),$album->getTitle(), $username);
+        $ret .=  spicasa_thumb("",$album->getIdnum(),$album->getIcon(),$album->getTitle(), $username, "_album");
      }
     
     return $ret;
@@ -202,14 +157,7 @@ function spicasa_login($email, $pass){
 
 
 function spicasa_add_album($id_album, $user, $id_article){
-
 	 $pic = new Picasa();
-
-
-     /*
-     getAlbumById  (string $username, string $albumid, [int $maxResults = null], [int $startIndex = null], [string $keywords = null], [string $tags = null], [int $thumbsize = null], [int $imgmax = null], string $visibility) 
-     */
-
      $album = $pic->getAlbumById($user, $id_album, null, null, null, null, null, 800);
      foreach($album->getImages() as $img){    
             	$id_image = $img->getIdnum();
@@ -220,15 +168,20 @@ function spicasa_add_album($id_album, $user, $id_article){
 
 
 
-function spicasa_thumb_album($id_album, $icon, $titre, $author) {
 
-			$ret .= "<div style='width: 240px; height: 270px; text-align: center; float: left; margin-right: 10px; margin-bottom: 10px;'>";
-				$ret .= "<table cellpadding='0' cellspacing='0'><tr><td style='width: 250px; height: 240px; vertical-align: bottom; text-align: center; border: 0px;'>";
-				$ret .= "<a onclick='spicasa_add_album(\"$id_album\",\"$author\");return false;' href='#'><img src='".$icon."' /></a></td></tr></table>";
+function spicasa_thumb($id_image,$id_album, $thumb, $titre, $author, $type="") {
+
+    			$ret .= "<div style='width: 190px; height: 190px; text-align: center; float: left; margin-right: 10px; margin-bottom: 10px;'>";
+				$ret .= "<table cellpadding='0' cellspacing='0'><tr><td style='width: 190px; height: 190px; vertical-align: bottom; text-align: center; border: 0px;'>";
+				$ret .= "<a onclick='spicasa_add";
+				if ($type) $ret .= $type;
+				$ret .= "(";
+				if ($id_image) $ret .= "\"$id_image\", ";
+				$ret .= "\"$id_album\",\"$author\");return false;' href='#'><img src='".$thumb."' /></a></td></tr></table>";
 				$ret .= "<div style='font-size: 0.8em;'><strong>$titre</strong></div>";
 				$ret .= "</div>";
-    return $ret;
-			
+                return $ret;
 }
+
 
 ?>

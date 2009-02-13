@@ -36,7 +36,7 @@
 			$url = _DIR_PLUGIN_SPICASA."imgs/spicasa-logo-thumb.jpg";
 
 		
-			$ret .= "<div style='text-align:center; margin-top: 20px;'><a onclick=\"$('#spicasa').remove();$('body').scrollTop('body',0).css('height','100%').css('overflow','hidden').append('$div');$('#spicasa').load('../?page=spicasa&id_article=$id_article');return false;\" href=\"#\"><img src='$url' alt='Ajouter une image Picasa' align='left' />"._T('spipcasa:adjuntar_imagenes')."</a></div>";			
+			$ret .= "<div style='text-align:center; margin-top: 20px;'><a onclick=\"$('#spicasa').remove();$('html').animate({scrollTop:0}, 'slow'); $('body').css('height','100%').css('overflow','hidden').append('$div');$('#spicasa').load('../?page=spicasa&id_article=$id_article');return false;\" href=\"#\"><img src='$url' alt='"._T('spicasa:adjuntar_imagenes')."' align='left' />"._T('spicasa:adjuntar_imagenes')."</a></div>";			
 			
 			
 		} 
