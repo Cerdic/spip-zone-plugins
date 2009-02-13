@@ -20,7 +20,6 @@ Exemple de syntaxe
 function jeux_question_ouverte($texte, $indexJeux){
 	
 	$titre = $html = $reponse = "";
-	jeux_block_init();
 	
 	// parcourir tous les [separateurs]
 	$tableau = jeux_split_texte('question_ouverte', $texte);
