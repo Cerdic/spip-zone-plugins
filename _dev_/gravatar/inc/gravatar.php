@@ -53,6 +53,7 @@ function gravatar($email) {
 		) AND $max-- > 0) {
 
 			$nb--;
+			include_spip("inc/distant");
 			if ($gravatar
 			= recuperer_page('http://www.gravatar.com/avatar/'.$md5_email)
 			// ceci est le hash du gravatar bleu moche par defaut : on l'ignore
