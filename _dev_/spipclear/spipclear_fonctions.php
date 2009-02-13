@@ -24,6 +24,7 @@
 // lister les themes présents dans plugins/spipclear/themes  
   function lister_themes() {
     $dir = _DIR_PLUGIN_SPIPCLEAR.'themes/';
+    $dir_perso = find_in_path('squelettes/themes/');
     $Treps_themes = array();
     $htm = '';
     if (is_dir($dir) AND $t = @opendir($dir)) {
@@ -46,6 +47,26 @@
                 }
             }
         }
+		if (is_dir($dir_perso) AND $t = @opendir($dir_perso)) {
+			while (($rt = readdir($t)) !== false) {
+				if (is_dir($dir_perso.$rt) AND $r = @opendir($dir_perso.$rt) AND $rt != '..') {
+					$capture = false;
+					$nom_theme = false;
+					while (($f = readdir($r)) !== false) {
+					  // à minima un theme doit avoir un fichier style.css
+						if ($f == 'style.css') $nom_theme = $rt;
+						if ($f == 'screenshot.jpg') $capture = true;
+					}
+					if ($nom_theme) {
+						$htm .= '<li style="padding-left: 10px; border-bottom: 2px solid #ccc;"><p><a id="'. $nom_theme .'" class="theme" href="#" title="'. _T(selectionner_theme) .'">'. $nom_theme .'</p>';
+						if ($capture) {
+							$htm .= '<img src="'.$dir_perso.$rt.'/screenshot.jpg" />';
+						}
+						$htm .= "</a></li>\r\n";
+					}
+				}
+			}
+		}
 		$htm .= '</ul>';
     }
     return $htm;
