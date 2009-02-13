@@ -145,11 +145,12 @@ function bando_identite(){
 
 	$nom_site = typo($GLOBALS['meta']['nom_site']);
 	$img_info = find_in_path('images/information.png');
+	$url_config_identite = generer_url_ecrire('config_identite');
 	
 	$res = "<p class='nom_site_spip'>"
 	  . "<strong class='nom'> $nom_site </strong>"
 	  . " |"
-	  . "<a class='info' title='Informations sur $nom_site' href='#'><img alt='Informations sur $nom_site' src='$img_info' /></a>"
+	  . "<a class='info' title='Informations sur $nom_site' href='$url_config_identite'><img alt='Informations sur $nom_site' src='$img_info' /></a>"
 	  . "| "
 	  . "<a class='voir' href='"._DIR_RACINE."'>Voir le site public</a>"
 	  . "</p>";
