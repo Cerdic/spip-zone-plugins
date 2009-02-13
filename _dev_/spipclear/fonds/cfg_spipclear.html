@@ -70,8 +70,8 @@
 //<![CDATA[
 	jQuery(document).ready(function() {
 		[(#ENV{choix_theme}|!={1}|?{jQuery(".editer_spipclear_nom_theme").hide();})]
-		jQuery("input[@name='choix_theme']").click(function() {
-			if (jQuery("input[@name='choix_theme']:checked").val() == 1){
+		jQuery("input[name='choix_theme']").click(function() {
+			if (jQuery("input[name='choix_theme']:checked").val() == 1){
 				jQuery(".editer_spipclear_nom_theme").show();
 				jQuery(this).blur();
 			}
@@ -79,7 +79,7 @@
 				jQuery(".editer_spipclear_nom_theme").hide();
 		});
 		jQuery(".theme").click(function() {
-			jQuery("input[@name='nom_theme']").val($(this).attr("id"));
+			jQuery("input[name='nom_theme']").val($(this).attr("id"));
 			return false;
 		});	
 	});
