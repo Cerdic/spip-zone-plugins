@@ -157,7 +157,7 @@ function bando_identite(){
 	 
 	
 	$moi = typo($GLOBALS['visiteur_session']['nom']);
-	$img_langue = find_in_path('images/langues-2.png');
+	$img_langue = find_in_path('images/langues.png');
 	$url_aide = generer_url_ecrire('aide_index',"var_lang=".$GLOBALS['spip_lang']);
 	$url_lang = generer_url_ecrire('config_langage');
 
@@ -189,7 +189,7 @@ function bando_identite(){
  */
 function inc_bandeau_dist($rubrique, $sous_rubrique, $largeur)
 {
-	return "<div id='bando_haut'>"
+	return "<div class='avec_icones' id='bando_haut'>"
 		. bando_identite()
 		. bando_navigation(definir_barre_boutons())
 		. "</div>"

@@ -16,13 +16,13 @@
  	</pipeline>
 	
 	<bouton id="bando_accueil">
-		<icone>images/accueil-48.png</icone>
+		<icone>images/v1/accueil-48.png</icone>
 		<titre>bando:icone_accueil</titre>
 		<url>accueil</url>
 	</bouton>
 	
 	<bouton id="bando_edition">
-		<icone>images/edition-48.png</icone>
+		<icone>images/v1/edition-48.png</icone>
 		<titre>bando:icone_edition</titre>		
 		<url>navigation</url>
 		<args>menu=bando_edition</args>
@@ -57,7 +57,7 @@
 	</bouton>
 
 	<bouton id="bando_suivi">
-		<icone>images/suivi-48.png</icone>
+		<icone>images/v1/suivi-48.png</icone>
 		<titre>bando:icone_suivi_edito</titre>		
 		<url>navigation</url>
 		<args>menu=bando_suivi</args>
@@ -90,7 +90,7 @@
 	</bouton>
 	
 	<bouton id="bando_reactions">
-		<icone>images/suivi-48.png</icone>
+		<icone>images/v1/reactions-48.png</icone>
 		<titre>bando:icone_reactions</titre>		
 		<url>navigation</url>
 		<args>menu=bando_reactions</args>
@@ -124,7 +124,7 @@
 	
 	
 	<bouton id="bando_administration">
-		<icone>images/administration-48.png</icone>
+		<icone>images/v1/administration-48.png</icone>
 		<titre>bando:icone_administration</titre>		
 		<url>navigation</url>
 		<args>menu=bando_administration</args>
@@ -152,7 +152,7 @@
 	
 	
 	<bouton id="bando_configuration">
-		<icone>images/configuration-48.png</icone>
+		<icone>images/v1/configuration-48.png</icone>
 		<titre>bando:icone_configuration</titre>		
 		<url>navigation</url>
 		<args>menu=bando_configuration</args>
