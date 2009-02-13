@@ -162,6 +162,7 @@ function couteau_suisse_post_propre($flux){
 	global $cs_metas_pipelines;
 	if (isset($cs_metas_pipelines['post_propre']))
 		eval($cs_metas_pipelines['post_propre']);
+	cs_trace_balises_html($flux);
 	return $flux;
 }
 

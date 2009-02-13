@@ -131,6 +131,18 @@ function cs_block($texte) {
 		|| preg_match(',</?(p|'._BALISES_BLOCS.')[>[:space:]],iS', $texte);
 }
 
+// fonction de tracage des balises <html></html>
+// SPIP supprime ces balises dans les pipelines. Les traitements de balises ne les voient donc jamais...
+function cs_trace_balises_html(&$flux) {
+	if(strpos($flux, 'base64')!==false)
+		$flux = preg_replace(',<span class="base64"[^>]+></span>,', '<!-- htmlA -->$0<!-- htmlB -->', $flux);
+}
+
+// fonction callback pour cs_echappe_balises
+function cs_echappe_html_callback($matches) {
+ return '<!-- htmlA -->'.cs_code_echappement($matches[1], 'CS');
+}
+
 // evite les transformations typo dans les balises $balises
 // par exemple pour <html>, <cadre>, <code>, <frame>, <script>, <acronym> et <cite>, $balises = 'html|code|cadre|frame|script|acronym|cite'
 // $fonction est la fonction prevue pour transformer $texte
@@ -144,6 +156,10 @@ function cs_echappe_balises($balises, $fonction, $texte, $arg=NULL){
 		spip_log("Erreur - cs_echappe_balises() : $fonction() non definie !");
 		return $texte;
 	}
+	// trace d'anciennes balises <html></html> ?
+	if(strpos($texte, '<!-- htmlA')!==false)
+		$texte = preg_replace_callback(',<!-- htmlA -->(.*?)(?=<!-- htmlB -->),s', 'cs_echappe_html_callback', $texte);
+
 	// protection du texte
 	if($balise!==false) {
 		if(!strlen($balises)) $balises = 'html|code|cadre|frame|script';
