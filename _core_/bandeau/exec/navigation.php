@@ -28,7 +28,7 @@ function exec_navigation_dist()
 		echo minipres();		
 	}
 	
-	$titre = $boutons[$menu]->libelle;
+	$titre = _T($boutons[$menu]->libelle);
 	
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page($titre, "", "");
