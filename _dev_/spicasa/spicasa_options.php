@@ -11,7 +11,7 @@ require_once 'Picasa.php';
 include_spip('inc/distant'); // pour 'copie_locale'
 
 
-function spicasa_resultados($recherche, $id_article, $debut=1, $max_results=40, $items_page=40){
+function spicasa_resultados($recherche, $id_article, $debut=1, $max_results=250, $items_page=50){
 
 
 
@@ -36,8 +36,8 @@ function spicasa_resultados($recherche, $id_article, $debut=1, $max_results=40, 
 					
 				//$url_image = $value;
 									
-				$ret .= "<div style='width: 240px; height: 270px; text-align: center; float: left; margin-right: 10px; margin-bottom: 10px;'>";
-				$ret .= "<table cellpadding='0' cellspacing='0'><tr><td style='width: 250px; height: 240px; vertical-align: bottom; text-align: center; border: 0px;'>";
+				$ret .= "<div style='width: 190px; height: 190px; text-align: center; float: left; margin-right: 10px; margin-bottom: 10px;'>";
+				$ret .= "<table cellpadding='0' cellspacing='0'><tr><td style='width: 190px; height: 190px; vertical-align: bottom; text-align: center; border: 0px;'>";
 				$ret .= "<a onclick='spicasa_add(\"$id_image\",\"$id_album\",\"$author\");return false;' href='#'><img src='".$img->getMediumThumb()."' /></a></td></tr></table>";
 				$ret .= "<div style='font-size: 0.8em;'><strong>$titre</strong></div>";
 				$ret .= "</div>";
@@ -126,13 +126,10 @@ function spicasa_add($id_image, $id_article, $id_album, $user){
 	//$img_local = copie_locale($GLOBALS['meta']['adresse_site']."/IMG/".basename($url));
 	$img_local = copie_locale($url);
 	
-	echo "local: ".$img_local;
-	
-	
-	$img_local = ereg_replace("^"._DIR_IMG, "", $img_local);
-	
 	$taille = filesize($img_local);
-	
+	$tam = getimagesize($img_local);
+	$img_local = ereg_replace("^"._DIR_IMG, "", $img_local);
+
 	
 	include_spip("base/abstract_sql");
 	$id_document = sql_insertq (
@@ -143,8 +140,8 @@ function spicasa_add($id_image, $id_article, $id_album, $user){
 			"date" => "NOW()",
 			"descriptif" => "$descriptif",
 			"fichier" => "$img_local",
-			"largeur" => "$largeur",
-			"hauteur" => "$hauteur",
+			"largeur" => "$tam[0]",
+			"hauteur" => "$tam[1]",
 			"mode" => "document",
 			"taille" => $taille,
 			"distant" => "non"
@@ -161,9 +158,7 @@ function spicasa_add($id_image, $id_article, $id_album, $user){
 		);
 	}
 	
-	print "ok";
-	
-
+	return "La imágen $titre se cargó exitosamente";
 
 }
 
