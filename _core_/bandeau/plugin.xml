@@ -27,15 +27,15 @@
 		<url>navigation</url>
 		<args>menu=bando_edition</args>
 	</bouton>
-	<bouton id='articles' parent="bando_edition">
-		<icone></icone>
-		<titre>icone_tous_articles</titre>		
-		<url>articles_page</url>
-	</bouton>
 	<bouton id='rubriques' parent="bando_edition">
 		<icone></icone>
 		<titre>info_rubriques</titre>		
 		<url>naviguer</url>
+	</bouton>
+	<bouton id='articles' parent="bando_edition">
+		<icone></icone>
+		<titre>icone_tous_articles</titre>		
+		<url>articles_page</url>
 	</bouton>
 	<bouton id='auteurs' parent="bando_edition">
 		<icone></icone>
@@ -88,7 +88,6 @@
 		<icone></icone>
 		<titre>Agenda interne</titre>
 	</bouton>
-
 	
 	<bouton id="bando_reactions">
 		<icone>images/suivi-48.png</icone>
@@ -115,6 +114,12 @@
 		<icone></icone>
 		<titre>icone_suivi_pettions</titre>
 		<url>controle_petition</url>
+	</bouton>
+	<bouton id='visiteurs' parent="bando_reactions">
+		<icone></icone>
+		<titre>icone_afficher_visiteurs</titre>
+		<url>auteurs</url>
+		<args>statut=!1comite,0minirezo,nouveau</args>
 	</bouton>
 	
 	
