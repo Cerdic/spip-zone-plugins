@@ -170,9 +170,11 @@ function lienscontenus_boite_liste($type_objet, $id_objet)
 function lienscontenus_verification()
 {
 	$data = '<script language="javascript" type="text/javascript">' .
-                'var messageConfirmationChangementStatut="'._T('lienscontenus:confirmation_depublication').'";' .
+                'var messageConfirmationDepublication="'._T('lienscontenus:confirmation_depublication').'";' .
+	              'var messageConfirmationPublication="'._T('lienscontenus:confirmation_publication').'";' .
                 'var messageConfirmationSuppression="'._T('lienscontenus:confirmation_suppression').'";' .
                 'var messageInformationElementContenu="'._T('lienscontenus:information_element_contenu').'";' .
+	              'var messageAlertePublieContenant="'._T('lienscontenus:alerte_publie_contenant').'";' .
                 'var baseUrlPlugin="../'._DIR_PLUGIN_LIENSCONTENUS.'";' .
                 '</script>';
 	$data .= '<style>a.lienscontenus_oui { color: red; text-decoration: line-through; }</style>';
@@ -185,15 +187,18 @@ function lienscontenus_verification_articles()
 	$script = <<<EOS
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
-            // ETAPE 1 : Gestion des changements de statut de l'article s'il est publie
-            // on recupere le statut actuel
             var estPublie = $('ul.instituer_article.instituer > li > ul > li.publie.selected').size() == 1;
             var estLie = $('#liens_contenus_contenants > li.publie').size() > 0;
+            var estLiant = $('#liens_contenus_contenus > li:not(.publie)').size() > 0;
+            if (estPublie && estLiant) {
+              $('div.fiche_objet').prepend('<div class="alerte">' + messageAlertePublieContenant + '</div>');
+            }
+            // ETAPE 1 : Alerte en cas de dépublication d'un article vers lequel pointent des contenus publies
             if (estPublie && estLie) {
               $('ul.instituer_article.instituer > li > ul > li:not(.selected) > a').each(function(){
                 this.onclick = null; // this plutot que $(this), pas tous les jours facile
                 $(this).bind('click', function(event){
-	                if (confirm(messageConfirmationChangementStatut)) {
+	                if (confirm(messageConfirmationDepublication)) {
 	                  // changement confirme
 	                  $(this).unbind('click');
 	                  $(this).trigger('click');
@@ -203,7 +208,22 @@ function lienscontenus_verification_articles()
                 });
               });
             }
-            // ETAPE 2 : Gestion des changements de statut de l'article
+            // ETAPE 2 : Alerte en cas de publication d'un article qui pointe vers des contenus non publies
+            if (!estPublie && estLiant) {
+              $('ul.instituer_article.instituer > li > ul > li.publie > a').each(function(){
+                this.onclick = null; // this plutot que $(this), pas tous les jours facile
+                $(this).bind('click', function(event){
+                  if (confirm(messageConfirmationPublication)) {
+                    // changement confirme
+                    $(this).unbind('click');
+                    $(this).trigger('click');
+                  } else {
+                    return false;
+                  }
+                });
+              });
+            }
+            // ETAPE 3 : Gestion des changements de statut de l'article
             // on ajoute une classe specifique aux liens de suppression des docs
             $('div[@id^=legender-]').each(function() {
                 var idDoc = $(this).attr('id').replace(/^legender-([0-9]+)$/g, '$1');
@@ -315,7 +335,7 @@ function lienscontenus_verification_breves_edit()
                 $('select[@name=statut]').bind('change', function(event) {
                     // Si le statut initial etait "publie" et s'il y a au moins un contenu publie qui pointe vers lui, on demande confirmation
                     if ((initialStatut == 'publie') && (currentStatut == 'publie') && ($('#liens_contenus_contenants > li.publie').size() > 0)) {
-                        if (confirm(messageConfirmationChangementStatut)) {
+                        if (confirm(messageConfirmationDepublication)) {
                             var newStatut = $('select[@name=statut] > option[@selected]').attr('value');
                             currentStatut = newStatut; 
                         } else {
@@ -350,7 +370,7 @@ function lienscontenus_verification_sites()
                 $('select[@name=nouveau_statut]').bind('change', function(event) {
                     // Si le statut initial etait "publie" et s'il y a au moins un contenu publie qui pointe vers lui, on demande confirmation
                     if ((initialStatut == 'publie') && (currentStatut == 'publie') && ($('#liens_contenus_contenants > li.publie').size() > 0)) {
-                        if (confirm(messageConfirmationChangementStatut)) {
+                        if (confirm(messageConfirmationDepublication)) {
                             var newStatut = $('select[@name=nouveau_statut] > option[@selected]').attr('value');
                             currentStatut = newStatut; 
                         } else {
@@ -386,7 +406,7 @@ function lienscontenus_verification_auteur_infos()
                     // Si le statut initial n'etait pas "5poubelle" et s'il y a au moins un contenu publie qui pointe vers lui, on demande confirmation
                     var newStatut = $('select[@name=statut] > option[@selected]').attr('value');
                     if ((initialStatut != '5poubelle') && (newStatut == '5poubelle') && ($('#liens_contenus_contenants > li.publie').size() > 0)) {
-                        if (confirm(messageConfirmationChangementStatut)) {
+                        if (confirm(messageConfirmationDepublication)) {
                             currentStatut = newStatut; 
                         } else {
                             $('select[@name=statut] > option[@selected]').removeAttr('selected');

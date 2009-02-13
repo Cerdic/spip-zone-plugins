@@ -11,7 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'statut_publie' => 'Published online',
   'statut_refuse' => 'Rejected',
   'statut_poubelle' => 'In the dustbin',
+  'confirmation_publication' => 'Be careful, this content links to at least one other content that is not yet published!\n\nDo you still want to change the status?',
   'confirmation_depublication' => 'Be careful, a published content contains at least one link to this one and will be affected if you change its status!\n\nDo you still want to change the status?',
-  'confirmation_suppression' => 'Be careful, a published content contains at least one link to this one and will be affected if you delete it!\n\nDo you still want to delete it?'
+  'confirmation_suppression' => 'Be careful, a published content contains at least one link to this one and will be affected if you delete it!\n\nDo you still want to delete it?',
+  'information_element_contenu' => 'Be careful, another content links to this one!',
+  'alerte_publie_contenant' => 'Be careful, this content is published, but contains links to other contents that are not!'
 );
 ?>

@@ -11,8 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'statut_publie' => 'Publi&eacute;',
   'statut_refuse' => 'Refus&eacute;',
   'statut_poubelle' => 'A la poubelle',
+  'confirmation_publication' => 'Attention, un contenu vers lequel pointe celui-ci n\'est pas publié !\n\nVoulez-vous vraiment changer le statut ?',
   'confirmation_depublication' => 'Attention, un contenu publié pointe vers celui-ci, et sera impacté si vous le dépubliez !\n\nVoulez-vous vraiment changer le statut ?',
   'confirmation_suppression' => 'Attention, un contenu publié pointe vers celui-ci, et sera impacté si vous le supprimez !\n\nVoulez-vous vraiment le supprimer ?',
-  'information_element_contenu' => 'Attention, un autre contenu pointe vers celui-ci !'
+  'information_element_contenu' => 'Attention, un autre contenu pointe vers celui-ci !',
+  'alerte_publie_contenant' => 'Attention, ce contenu est publié, mais contient des liens vers des contenus qui ne le sont pas !'
 );
 ?>
