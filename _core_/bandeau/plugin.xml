@@ -9,6 +9,11 @@
   <necessite id='SPIP' version='[2.1.0 dev;]' />
   
  	<necessite id="SPIP" version="[2.1.0 dev;)" />
+ 	
+ 	<pipeline>
+ 		<nom>autoriser</nom>
+ 		<inclure>bando_autoriser.php</inclure>
+ 	</pipeline>
 	
 	<bouton id="bando_accueil">
 		<icone>images/accueil-48.png</icone>
@@ -22,13 +27,15 @@
 		<url>navigation</url>
 		<args>menu=bando_edition</args>
 	</bouton>
-	<bouton id='articles_page' parent="bando_edition">
+	<bouton id='articles' parent="bando_edition">
 		<icone></icone>
 		<titre>icone_tous_articles</titre>		
+		<url>articles_page</url>
 	</bouton>
-	<bouton id='naviguer' parent="bando_edition">
+	<bouton id='rubriques' parent="bando_edition">
 		<icone></icone>
 		<titre>info_rubriques</titre>		
+		<url>naviguer</url>
 	</bouton>
 	<bouton id='auteurs' parent="bando_edition">
 		<icone></icone>
@@ -38,13 +45,15 @@
 		<icone></icone>
 		<titre>icone_breves</titre>		
 	</bouton>
-	<bouton id='mots_tous' parent="bando_edition">
+	<bouton id='mots' parent="bando_edition">
 		<icone></icone>
 		<titre>icone_mots_cles</titre>		
+		<url>mots_tous</url>
 	</bouton>
-	<bouton id='sites_tous' parent="bando_edition">
+	<bouton id='sites' parent="bando_edition">
 		<icone></icone>
 		<titre>icone_sites_references</titre>		
+		<url>sites_tous</url>
 	</bouton>
 
 	<bouton id="bando_suivi">
@@ -57,11 +66,16 @@
 		<icone></icone>
 		<titre>info_suivi_activite</titre>		
 	</bouton>
-	<bouton id="forum_2" parent="bando_suivi">
+	<bouton id="forum_interne_suivi" parent="bando_suivi">
 		<icone></icone>
 		<titre>titre_cadre_forum_interne</titre>
 		<url>forum</url>
 	</bouton>
+	<bouton id='forum_admin_suivi' parent='bando_suivi'>
+		<icone></icone>
+		<titre>icone_forum_administrateur</titre>
+		<url>forum_admin</url>
+	</bouton>	
 	<bouton id='suivi_revisions' parent="bando_suivi">
 		<icone></icone>
 		<titre>info_historique_titre</titre>
@@ -82,7 +96,26 @@
 		<url>navigation</url>
 		<args>menu=bando_reactions</args>
 	</bouton>
-	
+	<bouton id="statistiques" parent="bando_reactions">
+		<icone></icone>
+		<titre>icone_statistiques_visites</titre>		
+		<url>statistiques_visites</url>
+	</bouton>
+	<bouton id="referers" parent="bando_reactions">
+		<icone></icone>
+		<titre>titre_liens_entrants</titre>
+		<url>statistiques_referers</url>
+	</bouton>
+	<bouton id='forum_reactions' parent='bando_reactions'>
+		<icone></icone>
+		<titre>icone_suivi_forums</titre>
+		<url>controle_forum</url>
+	</bouton>
+	<bouton id='petitions_reactions' parent='bando_reactions'>
+		<icone></icone>
+		<titre>icone_suivi_pettions</titre>
+		<url>controle_petition</url>
+	</bouton>
 	
 	
 	<bouton id="bando_administration">
@@ -90,6 +123,25 @@
 		<titre>Administration</titre>		
 		<url>navigation</url>
 		<args>menu=bando_administration</args>
+	</bouton>
+	<bouton id='admin_vider' parent='bando_administration'>
+		<icone></icone>
+		<titre>onglet_vider_cache</titre>
+	</bouton>
+	<bouton id='admin_sauvegarder' parent='bando_administration'>
+		<icone></icone>
+		<titre>texte_sauvegarde_base</titre>
+		<url>admin_tech</url>
+	</bouton>
+	<bouton id='admin_restaurer' parent='bando_administration'>
+		<icone></icone>
+		<titre>bouton_restaurer_base</titre>
+		<url>admin_tech</url>
+	</bouton>
+	<bouton id='admin_maintenir' parent='bando_administration'>
+		<icone></icone>
+		<titre>titre_admin_tech</titre>
+		<url>admin_tech</url>
 	</bouton>
 	
 	
@@ -100,6 +152,31 @@
 		<url>navigation</url>
 		<args>menu=bando_configuration</args>
 	</bouton>
+	<bouton id='config_identite' parent="bando_configuration">
+		<icone></icone>
+		<titre>entree_description_site</titre>		
+		<url>configuration</url>
+	</bouton>
+	<bouton id='config_lang' parent="bando_configuration">
+		<icone></icone>
+		<titre>icone_gestion_langues</titre>		
+	</bouton>
+	<bouton id='config_contenu' parent="bando_configuration">
+		<icone></icone>
+		<titre>onglet_contenu_site</titre>		
+		<url>configuration</url>
+	</bouton>
+	<bouton id='config_interactivite' parent="bando_configuration">
+		<icone></icone>
+		<titre>onglet_interactivite</titre>		
+		<url>config_contenu</url>
+	</bouton>
+	<bouton id='config_avancee' parent="bando_configuration">
+		<icone></icone>
+		<titre>onglet_fonctions_avances</titre>		
+		<url>config_fonctions</url>
+	</bouton>
+	
 	<bouton id='admin_plugin' parent="bando_configuration">
 		<icone></icone>
 		<titre>icone_admin_plugin</titre>		
