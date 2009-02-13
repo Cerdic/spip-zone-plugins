@@ -152,20 +152,21 @@ function bando_identite(){
 	  . " |"
 	  . "<a class='info' title='Informations sur $nom_site' href='$url_config_identite'><img alt='Informations sur $nom_site' src='$img_info' /></a>"
 	  . "| "
-	  . "<a class='voir' href='"._DIR_RACINE."'>Voir le site public</a>"
+	  . "<a class='voir' href='"._DIR_RACINE."'>"._T('bando:icone_visiter_site')."</a>"
 	  . "</p>";
 	 
 	
 	$moi = typo($GLOBALS['visiteur_session']['nom']);
 	$img_langue = find_in_path('images/langues-2.png');
 	$url_aide = generer_url_ecrire('aide_index',"var_lang=".$GLOBALS['spip_lang']);
+	$url_lang = generer_url_ecrire('config_langage');
 
 	$res .= "<p class='session'>"
 	  . "<strong class='nom'>$moi</strong>"
 	  . " |"
 	  . "<a title='Mes informations personnelles' href='".generer_url_ecrire("auteur_infos","id_auteur=".$GLOBALS['visiteur_session']['id_auteur'])."'><img alt='"._T('icone_informations_personnelles')."' src='$img_info'/></a>"
 	  . "| "
-	  . "<a class='menu_lang' href='#' title='"._T('info_langues')."'><img alt='"._T('info_langues')."' src='$img_langue'/>".traduire_nom_langue($GLOBALS['spip_lang'])."</a>"
+	  . "<a class='menu_lang' href='$url_lang' title='"._T('bando:titre_config_langage')."'><img alt='"._T('bando:titre_config_langage')."' src='$img_langue'/>".traduire_nom_langue($GLOBALS['spip_lang'])."</a>"
 	  . " | "
 	  . "<a class='aide' onclick=\"window.open('$url_aide', 'spip_aide', 'scrollbars=yes,resizable=yes,width=740,height=580');return false;\" href='$url_aide'>"._T('icone_aide_ligne')."</a>"
 	  . " | "

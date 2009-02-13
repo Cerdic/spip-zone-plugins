@@ -6,9 +6,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'titre_identite_site' => 'Identit&eacute; du site',
+	'icone_visiter_site' => 'Voir le site public',
+	
+	'icone_accueil' => 'Accueil',
+	'icone_edition' => '&Eacute;dition',
+	'icone_suivi_edito' => 'Suivi &Eacute;ditorial',
+	'icone_reactions' => 'R&eacute;actions',
+	'icone_configuration' => 'Configuration',
+	'icone_administration' => 'Administration',
+
 	// L
 	'label_slogan_site' => 'Slogan du site',
+	'label_choix_langue' => 'Selectionnez votre langue',
 
 	// M
 
@@ -21,6 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 
 	// T
+	'titre_identite_site' => 'Identit&eacute; du site',
+	'titre_config_langage' => 'Configurer la langue',
 
 	// V
 

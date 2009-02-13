@@ -12,27 +12,17 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function exec_config_identite(){
-	if (!autoriser('configurer','identite',0)) {
-		include_spip('inc/minipres');
-		echo minipres();
-		exit;
-	}
+function exec_config_langage(){
+	
 	$commencer_page = charger_fonction('commencer_page','inc');
-	echo $commencer_page(_T('bando:titre_identite_site'));
+	echo $commencer_page(_T('bando:titre_config_langage'));
 	
-	echo debut_gauche("configurer_identite",true);
+	echo debut_gauche("configurer_langage",true);
 	
-	//
-	// Le logo de notre site, c'est site{on,off}0.{gif,png,jpg}
-	//
-	$iconifier = charger_fonction('iconifier', 'inc');
-	echo $iconifier('id_syndic', 0, 'configuration');
-
-	echo debut_droite("configurer_identite",true);
+	echo debut_droite("configurer_langage",true);
 
 
-	echo recuperer_fond('prive/configurer/identite',$_GET);
+	echo recuperer_fond('prive/configurer/langage',$_GET);
 	echo fin_gauche(),fin_page();
 }
 
