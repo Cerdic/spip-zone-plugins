@@ -44,6 +44,5 @@
 	</pipeline>
 	
 	<!-- Big brother nécessite les plugins suivant -->
-	<necessite id="SPIP" version="[1.9.0;]" />
-	<necessite id='cfg' version="[1.10.3;]" />
+	<necessite id='cfg' version="[1.10.5;]" />
 </plugin>

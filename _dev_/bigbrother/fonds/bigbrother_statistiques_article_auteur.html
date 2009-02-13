@@ -11,14 +11,12 @@
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_visites_articles(VISITES_ARTICLES_AUTEURS){id_auteur}{id_article}{par date_debut}{pagination #ENV{pagination,10}}>
-[(#DATE_FIN|!={0000-00-00 00:00:00}|oui)
+<BOUCLE_visites_articles(VISITES_ARTICLES_AUTEURS){id_auteur}{id_article}{date_fin!=0000-00-00 00:00:00}{par date_debut}{pagination #ENV{pagination,10}}>
 	<tr class="tr_liste">
-		<td>[(#DATE_DEBUT|affdate_court)], [(#DATE_DEBUT|affdate{H:i:s})]</td>
-		<td>[(#DATE_FIN|affdate_court)], [(#DATE_FIN|affdate{H:i:s})]</td>
+		<td>[(#DATE_DEBUT|affdate)], [(#DATE_DEBUT|affdate{H:i:s})]</td>
+		<td>[(#DATE_FIN|affdate)], [(#DATE_FIN|affdate{H:i:s})]</td>
 		<td class="temps">[(#DATE_DEBUT|bigbrother_duree{#DATE_FIN,horaire})]</td>
 	</tr>
-]
 </BOUCLE_visites_articles>
 	</tbody>
 </table>
