@@ -136,6 +136,9 @@ function exec_statistiques_repartition_dist()
 	
 	echo debut_grand_cadre(true);
 	echo gros_titre(_T('titre_page_statistiques'),'',false);
+	
+	echo barre_onglets("statistiques", "statistiques_repartition");
+
 	if ($spip_ecran == "large") { 
 	 	                $largeur_table = 974; 
 	 	                $taille = 550; 
@@ -146,13 +149,16 @@ function exec_statistiques_repartition_dist()
 	 	 
 	echo "\n<br /><br /><table width='$largeur_table'><tr><td class='verdana2' style='text-align: center;  width: $largeur_table" . "px;'>"; 
 	$critere = _request('critere');
+	
 	if ($critere == "debut") {
 		$critere = "visites";
-		echo barre_onglets("stat_depuis", "debut_repartition");
+		echo "<a href='".generer_url_ecrire('statistiques_repartition')."'>"._T('icone_repartition_actuelle').'</a>';
+		echo " | <strong>"._T('onglet_repartition_debut').'</strong>';
 	}
 	else {
 		$critere = "popularite";
-		echo barre_onglets("stat_depuis", "popularite_repartition");
+		echo "<strong>"._T('icone_repartition_actuelle').'</strong>';
+		echo " | <a href='".generer_url_ecrire('statistiques_repartition','critere=debut')."'>"._T('onglet_repartition_debut').'</a>';
 	}
 
 	$abs_total=enfants(0, $critere);

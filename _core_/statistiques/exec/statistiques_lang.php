@@ -42,17 +42,18 @@ function statistiques_lang_ok()
 
 	echo gros_titre(_T('onglet_repartition_lang'),'', false);
 
-//barre_onglets("repartition", "langues");
+	echo barre_onglets("statistiques", "statistiques_lang");
 
-	if (_request('critere') == "debut") {
+	if ($critere == "debut") {
 		$critere = "visites";
-//	echo gros_titre(_T('onglet_repartition_debut','', false));	
-	} else {
+		echo "<a href='".generer_url_ecrire('statistiques_lang')."'>"._T('icone_repartition_actuelle').'</a>';
+		echo " | <strong>"._T('onglet_repartition_debut').'</strong>';
+	}
+	else {
 		$critere = "popularite";
-//	echo gros_titre(_T('onglet_repartition_actuelle','', false));	
-}
-
-	echo ($critere == "popularite") ? barre_onglets("rep_depuis", "popularite"): barre_onglets("rep_depuis", "debut");
+		echo "<strong>"._T('icone_repartition_actuelle').'</strong>';
+		echo " | <a href='".generer_url_ecrire('statistiques_lang','critere=debut')."'>"._T('onglet_repartition_debut').'</a>';
+	}
 
 
 //

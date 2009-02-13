@@ -73,6 +73,8 @@ function exec_statistiques_visites_args($id_article, $duree, $interval, $type, $
 //	barre_onglets("statistiques", "evolution");
 	if ($titre) echo gros_titre($titre,'', false);
 
+	echo barre_onglets("statistiques", "statistiques_visites");
+
 	echo debut_gauche('', true);
 	echo "<br />";
 	echo "<div class='iconeoff' style='padding: 5px;'>";
