@@ -1,7 +1,7 @@
 <div id="sidebar">
 <div id="blognav">
 	[(#CONFIG{spipclear/navigation_desactiver_calendrier}|=={on}|non)
-	[(#MODELE{rubrique_calendrier}{id_rubrique=#ID_RUBRIQUE}{self=#SELF}{var_date=archives}{date=#ENV{archives,#DATE}})]
+	[(#MODELE{rubrique_calendrier}{id_rubrique=#ID_RUBRIQUE}{self=#ENV{self}}{var_date=archives}{date=#ENV{archives,#DATE}})]
 	]
 	<INCLURE{fond=inc-archives}{env}{decal}{var_date=archives}{date=#ENV{archives,#DATE}}{ajax}>
 	<div id="search">
