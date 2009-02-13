@@ -112,7 +112,7 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 		"objet=" . sql_quote($objet),
 		"id_objet=" . sql_quote($id_objet),
 		);
-	if ($id_auteur == 0) $where[] = "id_auteur=" . sql_quote($id_auteur);
+	if ($id_auteur != 0) $where[] = "id_auteur=" . sql_quote($id_auteur);
 	else $where[] = "ip=" . sql_quote($ip);
 	$row = sql_fetsel(
 		array("id_notation", "id_auteur", "note"),
