@@ -23,6 +23,7 @@ include_spip('inc/boutons');
  */
 // http://doc.spip.org/@definir_barre_boutons
 function definir_barre_boutons() {
+    include_spip('inc/autoriser');
 	$boutons_admin=array();
 
 	// ajouter les boutons issus des plugin via plugin.xml
@@ -34,7 +35,7 @@ function definir_barre_boutons() {
 			if (!($parent = $infos['parent']) OR autoriser('bouton',$id)){
 				if ($parent AND isset($boutons_admin[$parent]))
 					$boutons_admin[$parent]->sousmenu[$id]= new Bouton(
-					  find_in_path($infos['icone']),  // icone
+					  $infos['icone']?find_in_path($infos['icone']):'',  // icone
 					  $infos['titre'],	// titre
 					  $infos['url']?$infos['url']:null,
 					  $infos['args']?$infos['args']:null
@@ -47,7 +48,7 @@ function definir_barre_boutons() {
 					$position = $infos['position']?$infos['position']:count($boutons_admin);
 					$boutons_admin = array_slice($boutons_admin,0,$position)
 					+array($id=> new Bouton(
-					  find_in_path($infos['icone']),  // icone
+					  $infos['icone']?find_in_path($infos['icone']):'',  // icone
 					  $infos['titre'],	// titre
 					  $infos['url']?$infos['url']:null,
 					  $infos['args']?$infos['args']:null
@@ -83,18 +84,28 @@ function bandeau_creer_url($url, $args=""){
  * @param string $class
  * @return string
  */
-function bando_lister_sous_menu($sousmenu,$class=""){
+function bando_lister_sous_menu($sousmenu,$class="",$image=false){
 	$class = $class ? " class='$class'":"";
 	$sous = "";
 	if (is_array($sousmenu)){
 		$sous = "";		 
 		foreach($sousmenu as $souspage => $sousdetail){
 			$url = bandeau_creer_url($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg);
-			$sous .= "<li$class>"
-		 . "<a href='$url' id='bando2_$souspage'>"
-		 . _T($sousdetail->libelle)
-		 . "</a>"
-		 . "</li>";
+            if (!$image OR !$sousdetail->icone){
+                $sous .= "<li$class>"
+             . "<a href='$url' id='bando2_$souspage'>"
+             . _T($sousdetail->libelle)
+             . "</a>"
+             . "</li>";
+            }
+            else {
+                $image = "<img src='".$sousdetail->icone."' width='".largeur($sousdetail->icone)."' height='".hauteur($sousdetail->icone)."' alt='".attribut_html(_T($sousdetail->libelle))."' />";
+                $sous .= "<li$class>"
+             . "<a href='$url' id='bando2_$souspage' title='".attribut_html(_T($sousdetail->libelle))."'>"
+             . $image
+             . "</a>"
+             . "</li>";
+            }
 		}
 	}
 	return $sous;
@@ -113,24 +124,27 @@ function bando_navigation($boutons)
 	
 	$first = " class = 'first'";
 	foreach($boutons as $page => $detail){
+        // les outils rapides sont traites a part, dans une barre dediee
+        if ($page!='outils_rapides'){
 		
-		// les icones de premier niveau sont ignoree si leur sous menu est vide
-		// et si elles pointent vers exec=navigation
-		if (
-		 (is_array($detail->sousmenu) AND count($detail->sousmenu))
-		 OR ($detail->url!='navigation')) {
-			$url = bandeau_creer_url($detail->url?$detail->url:$page, $detail->urlArg);
-			$res .= "<li$first>"
-			 . "<a href='$url' id='bando1_$page'>"
-			 . _T($detail->libelle)
-			 . "</a>";
-		}
-		
-		$sous = bando_lister_sous_menu($detail->sousmenu);
-		$res .= $sous ? "<ul>$sous</ul>":"";
-		 
-		$res .= "</li>";
-		$first = "";
+            // les icones de premier niveau sont ignoree si leur sous menu est vide
+            // et si elles pointent vers exec=navigation
+            if (
+             (is_array($detail->sousmenu) AND count($detail->sousmenu))
+             OR ($detail->url!='navigation')) {
+                $url = bandeau_creer_url($detail->url?$detail->url:$page, $detail->urlArg);
+                $res .= "<li$first>"
+                 . "<a href='$url' id='bando1_$page'>"
+                 . _T($detail->libelle)
+                 . "</a>";
+            }
+
+            $sous = bando_lister_sous_menu($detail->sousmenu);
+            $res .= $sous ? "<ul>$sous</ul>":"";
+
+            $res .= "</li>";
+            $first = "";
+        }
 	}
 
 	return "<div id='bando_navigation'><div class='largeur'><ul>\n$res</ul><div class='nettoyeur'></div></div></div>";
@@ -179,6 +193,27 @@ function bando_identite(){
 }
 
 
+function bando_outils_rapides($boutons){
+    $res = "";
+
+
+    // le navigateur de rubriques
+  	$img = find_in_path('images/v1/boussole-22.png');
+    $url = generer_url_ecrire("articles_tous");
+    $res .= "<a class='boussole' href='$url' id='boutonbandeautoutsite'><img src='$img' width='22' height='22' alt='' /></a>";
+    $res .= "<div id='gadget-rubriques'></div>";
+
+    // la barre de raccourcis rapides
+    if (isset($boutons['outils_rapides']))
+        $res .= "<ul class='creer'>"
+          . bando_lister_sous_menu($boutons['outils_rapides']->sousmenu,'bouton',true)
+          . "</ul>";
+
+
+    $res .= formulaire_recherche("recherche");
+	return "<div id='bando_outils'><div class='largeur'>\n$res<div class='nettoyeur'></div></div></div>";
+}
+
 /**
  * Construire tout le bandeau superieur de l'espace prive
  *
@@ -189,9 +224,11 @@ function bando_identite(){
  */
 function inc_bandeau_dist($rubrique, $sous_rubrique, $largeur)
 {
+    $boutons = definir_barre_boutons();
 	return "<div class='avec_icones' id='bando_haut'>"
 		. bando_identite()
-		. bando_navigation(definir_barre_boutons())
+        . bando_outils_rapides($boutons)
+		. bando_navigation($boutons)
 		. "</div>"
 		;
 	

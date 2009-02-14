@@ -28,30 +28,30 @@
 		<args>menu=bando_edition</args>
 	</bouton>
 	<bouton id='rubriques' parent="bando_edition">
-		<icone></icone>
+		<icone>images/v1/rubrique-16.png</icone>
 		<titre>info_rubriques</titre>		
 		<url>naviguer</url>
 	</bouton>
 	<bouton id='articles' parent="bando_edition">
-		<icone></icone>
+		<icone>images/v1/article-16.png</icone>
 		<titre>icone_tous_articles</titre>		
 		<url>articles_page</url>
 	</bouton>
 	<bouton id='auteurs' parent="bando_edition">
-		<icone></icone>
+		<icone>images/v1/auteur-16.png</icone>
 		<titre>icone_auteurs</titre>		
 	</bouton>
 	<bouton id='breves' parent="bando_edition">
-		<icone></icone>
+		<icone>images/v1/breve-16.png</icone>
 		<titre>icone_breves</titre>		
 	</bouton>
 	<bouton id='mots' parent="bando_edition">
-		<icone></icone>
+		<icone>images/v1/mot-16.png</icone>
 		<titre>icone_mots_cles</titre>		
 		<url>mots_tous</url>
 	</bouton>
 	<bouton id='sites' parent="bando_edition">
-		<icone></icone>
+		<icone>images/v1/site-16.png</icone>
 		<titre>icone_sites_references</titre>		
 		<url>sites_tous</url>
 	</bouton>
@@ -63,29 +63,29 @@
 		<args>menu=bando_suivi</args>
 	</bouton>
 	<bouton id='synchro' parent="bando_suivi">
-		<icone></icone>
+		<icone>images/v1/suivi-16.png</icone>
 		<titre>info_suivi_activite</titre>		
 	</bouton>
 	<bouton id="forum_interne_suivi" parent="bando_suivi">
-		<icone></icone>
+		<icone>images/v1/forum-16.png</icone>
 		<titre>titre_cadre_forum_interne</titre>
 		<url>forum</url>
 	</bouton>
 	<bouton id='forum_admin_suivi' parent='bando_suivi'>
-		<icone></icone>
+		<icone>images/v1/forum-16.png</icone>
 		<titre>icone_forum_administrateur</titre>
 		<url>forum_admin</url>
 	</bouton>	
 	<bouton id='suivi_revisions' parent="bando_suivi">
-		<icone></icone>
+		<icone>images/v1/revisions-16.png</icone>
 		<titre>info_historique_titre</titre>
 	</bouton>
 	<bouton id='messagerie' parent="bando_suivi">
-		<icone></icone>
+		<icone>images/v1/message-16.png</icone>
 		<titre>info_messagerie_interne</titre>
 	</bouton>
 	<bouton id='calendrier' parent="bando_suivi">
-		<icone></icone>
+		<icone>images/v1/calendrier-16.png</icone>
 		<titre>Agenda interne</titre>
 	</bouton>
 	
@@ -96,27 +96,27 @@
 		<args>menu=bando_reactions</args>
 	</bouton>
 	<bouton id="statistiques" parent="bando_reactions">
-		<icone></icone>
+		<icone>images/v1/statistiques-16.png</icone>
 		<titre>icone_statistiques_visites</titre>		
 		<url>statistiques_visites</url>
 	</bouton>
 	<bouton id="referers" parent="bando_reactions">
-		<icone></icone>
+		<icone>images/v1/referer-16.png</icone>
 		<titre>titre_liens_entrants</titre>
 		<url>statistiques_referers</url>
 	</bouton>
 	<bouton id='forum_reactions' parent='bando_reactions'>
-		<icone></icone>
+		<icone>images/v1/forum-16.png</icone>
 		<titre>icone_suivi_forums</titre>
 		<url>controle_forum</url>
 	</bouton>
 	<bouton id='petitions_reactions' parent='bando_reactions'>
-		<icone></icone>
+		<icone>images/v1/petition-16.png</icone>
 		<titre>icone_suivi_pettions</titre>
 		<url>controle_petition</url>
 	</bouton>
 	<bouton id='visiteurs' parent="bando_reactions">
-		<icone></icone>
+		<icone>images/v1/auteur-16.png</icone>
 		<titre>icone_afficher_visiteurs</titre>
 		<url>auteurs</url>
 		<args>statut=!1comite,0minirezo,nouveau</args>
@@ -130,21 +130,21 @@
 		<args>menu=bando_administration</args>
 	</bouton>
 	<bouton id='admin_vider' parent='bando_administration'>
-		<icone></icone>
+		<icone>images/v1/cache-empty-16.png</icone>
 		<titre>onglet_vider_cache</titre>
 	</bouton>
 	<bouton id='admin_sauvegarder' parent='bando_administration'>
-		<icone></icone>
+		<icone>images/v1/backup-16.png</icone>
 		<titre>texte_sauvegarde_base</titre>
 		<url>admin_tech</url>
 	</bouton>
 	<bouton id='admin_restaurer' parent='bando_administration'>
-		<icone></icone>
+		<icone>images/v1/restore-16.png</icone>
 		<titre>bouton_restaurer_base</titre>
 		<url>admin_tech</url>
 	</bouton>
 	<bouton id='admin_maintenir' parent='bando_administration'>
-		<icone></icone>
+		<icone>images/v1/base-maintenance-16.png</icone>
 		<titre>titre_admin_tech</titre>
 		<url>admin_tech</url>
 	</bouton>
@@ -158,33 +158,73 @@
 		<args>menu=bando_configuration</args>
 	</bouton>
 	<bouton id='config_identite' parent="bando_configuration">
-		<icone></icone>
+		<icone>images/v1/identite-16.png</icone>
 		<titre>bando:titre_identite_site</titre>		
 		<url>config_identite</url>
 	</bouton>
 	<bouton id='config_lang' parent="bando_configuration">
-		<icone></icone>
+		<icone>images/v1/langues-16.png</icone>
 		<titre>icone_gestion_langues</titre>		
 	</bouton>
 	<bouton id='config_contenu' parent="bando_configuration">
-		<icone></icone>
+		<icone>images/v1/config-contenu-16.png</icone>
 		<titre>onglet_contenu_site</titre>		
 		<url>configuration</url>
 	</bouton>
 	<bouton id='config_interactivite' parent="bando_configuration">
-		<icone></icone>
+		<icone>images/v1/config-interaction-16.png</icone>
 		<titre>onglet_interactivite</titre>		
 		<url>config_contenu</url>
 	</bouton>
 	<bouton id='config_avancee' parent="bando_configuration">
-		<icone></icone>
+		<icone>images/v1/configuration-16.png</icone>
 		<titre>onglet_fonctions_avances</titre>		
 		<url>config_fonctions</url>
 	</bouton>
 	
 	<bouton id='admin_plugin' parent="bando_configuration">
-		<icone></icone>
+		<icone>images/v1/plugin-16.png</icone>
 		<titre>icone_admin_plugin</titre>		
+	</bouton>
+
+	<bouton id="outils_rapides">
+		<titre></titre>
+	</bouton>
+	<bouton id='rubrique_creer' parent="outils_rapides">
+		<icone>images/v1/rubrique-add-16.png</icone>
+		<titre>icone_creer_rubrique_2</titre>
+		<url>rubriques_edit</url>
+		<args>new=oui</args>
+	</bouton>
+	<bouton id='article_creer' parent="outils_rapides">
+		<icone>images/v1/article-add-16.png</icone>
+		<titre>icone_ecrire_article</titre>
+		<url>articles_edit</url>
+		<args>new=oui</args>
+	</bouton>
+	<bouton id='auteur_creer' parent="outils_rapides">
+		<icone>images/v1/auteur-add-16.png</icone>
+		<titre>icone_creer_nouvel_auteur</titre>
+		<url>auteur_infos</url>
+		<args>new=oui</args>
+	</bouton>
+	<bouton id='mot_creer' parent="outils_rapides">
+		<icone>images/v1/mot-add-16.png</icone>
+		<titre>icone_creation_mots_cles</titre>
+		<url>mots_edit</url>
+		<args>new=oui</args>
+	</bouton>
+	<bouton id='site_creer' parent="outils_rapides">
+		<icone>images/v1/site-add-16.png</icone>
+		<titre>icone_referencer_nouveau_site</titre>
+		<url>sites_edit</url>
+		<args>new=oui</args>
+	</bouton>
+	<bouton id='breve_creer' parent="outils_rapides">
+		<icone>images/v1/breve-add-16.png</icone>
+		<titre>icone_nouvelle_breve</titre>
+		<url>breves_edit</url>
+		<args>new=oui</args>
 	</bouton>
 
 </plugin>
