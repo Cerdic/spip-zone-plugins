@@ -1,13 +1,13 @@
 <plugin>
 	<nom>Spicasa</nom>
-	<auteur>Martín Gaitán</auteur>
-	<version>0.1.1</version>
-	<etat>dev</etat>
+    <auteur>Martín Gaitán &#169; 2006-2009 </auteur>
+	<version>0.1.3</version>
+	<etat>test</etat>
 	<description>
 	<multi>
-	Search and download public and private pictures from Google Picasa Web Albums. 
+	<p>Search and download public and private pictures from Google Picasa Web Albums.</p><p>Originally based on flickr_cc by Arno</p>
+	[es]<p> Busca y descarga fotos públicas o privadas de los Albumes web de Picasa. </p><p>Basado originalmente en flickr_cc de Arno<p>
 	</multi>
-
 	</description>
 	<icon>imgs/spicasa-logo-thumb.jpg</icon>
 	<lien>http://nqnwebs.com/Spicasa-adjunta-fotos-de-picasa-a</lien> <!-- URI de documentation -->
