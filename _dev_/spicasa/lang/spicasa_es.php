@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 					 Pod&eacute;s buscar fotos públicas, o conectarte con tu usuario y contraseña y usar descargar
 					 tus propios &aacute;lbumes </p>
 					 <p>Si tenés sugerencias o comentarios, agradecer&eacute; mucho  
-					 <a href="http://nqnwebs.com/-Contacto-" taget="_blank">que me escribas</p>',
+					 <a href="http://nqnwebs.com/-Contacto-" taget="_blank">que me escribas</a></p>',
     'download_all' => 'Pod&eacute;s descargar el &aacute;lbum completo',
 	// E
     'el_album' => "El &aacute;lbum",
