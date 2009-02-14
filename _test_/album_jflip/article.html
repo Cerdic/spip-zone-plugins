@@ -45,7 +45,7 @@
 		[<div class="ps surlignable"><h2 class="pas_surlignable"><:info_ps:></h2><div class="#EDIT{ps}">(#PS|image_reduire{500,0})</div></div>]
 
 		[(#REM) Insertion du jFlipBook ]
-		[(#CONFIG{plugin}|match{ALBUM_JFLIP}|?{' ',''})<INCLURE{fond=album_jflip}{id_article}{env}>]
+		<INCLURE{fond=album_jflip}{id_article}>
 
 		[(#REM) Gestion du portfolio et des documents
 			Le critere {env} permet de passer d'autres arguments de la page
