@@ -16,7 +16,6 @@
 		$scale = lire_config('album_jflip/scale');	
 		$flux = '<link rel="stylesheet" TYPE="text/css" href="'._DIR_PLUGIN_ALBUM_JFLIP.'css/jflip_style.css"></link>';
 		$flux .= '<!--[if IE]><script type="text/javascript" src="'._DIR_PLUGIN_ALBUM_JFLIP.'javascript/excanvasX.js"></script><![endif]-->';
-		//$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_ALBUMJFLIP.'javascript/jquery-1.2.6.min.js"></script>';
 		$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_ALBUM_JFLIP.'javascript/jquery-1.2.6.min.js"></script>';
 		$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_ALBUM_JFLIP.'javascript/jquery.jflip.js"></script>';
 		$flux .= '<script type="text/javascript">
@@ -26,8 +25,6 @@
 	      				});
 	  					})(jQuery);';
 		$flux .= '</script>';
-		//$("#g1").jFlip(450,500,{background:"grey",cornersTop:false,scale:"fill"});
-	
 		$flux .= '<style type="text/css">
 	  					.flip_gallery {margin:10px}
 	  				</style>';
