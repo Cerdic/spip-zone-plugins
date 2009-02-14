@@ -338,21 +338,6 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	if (!$crayons && test_espace_prive() && !$forum) {
 	$ret .= '<script type="text/javascript"><!--';
 	$ret .= '
-form_dirty = false;
-warn_onunload = true;
-
-/* ChainHandler, py Peter van der Beken
--------------------------------------------------------- */
-function chainHandler(obj, handlerName, handler) {
-        obj[handlerName] = (function(existingFunction) {
-                return function() {
-                        handler.apply(this, arguments);
-                        if (existingFunction)
-                                existingFunction.apply(this, arguments);
-                };
-        })(handlerName in obj ? obj[handlerName] : null);
-};
-
 $(document).ready(function(){';
 	if (test_espace_prive()) {
 		$ret .= '
@@ -365,25 +350,6 @@ $(document).ready(function(){';
 		$('.$champ.').select(function() { MajStats('.$num_barre.',"'.$champ.'") });
 		$('.$champ.').click(function() { MajStats('.$num_barre.',"'.$champ.'") });';
 	}
-	$ret .= '
-	chainHandler(window,\'onbeforeunload\',function(e) { 
-		if (e == undefined && window.event) {
-			e = window.event;
-		}
-		if ( (warn_onunload == true) && (form_dirty == true) && ($.browser.mozilla) ) {
-			e.returnValue = \'Quitter la page sans sauvegarder ?\';
-			return \'Quitter la page sans sauvegarder ?\'; 
-		}
-		return false;
-	} );
-	$("form").submit ( function() {warn_onunload=false;} );
-	$('.$champ.')
-		.parents(\'form\')
-		.find(\'input,textarea,select\')
-		.not(\'[@type=hidden]\')
-		.change ( function() {form_dirty=true;} );
-	$("input").change ( function() {form_dirty=true;} );
-});
 	 //--></script>';
 	} else {
 		$ret .= ($num_barre > 1)  ? '' : 
