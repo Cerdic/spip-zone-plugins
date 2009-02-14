@@ -14,9 +14,7 @@ function photo_infos_pave($args) {
 		$query = sql_select("fichier", "spip_documents", "id_document=$id_document AND extension='jpg'");
 
 		if ($row = sql_fetch($query)) {
-			$fichier = _DIR_IMG.$row["fichier"];
-			
-			include_spip("inc/utils");
+			$fichier = get_spip_doc($row["fichier"]);
 			$contexte = array('fichier'=>$fichier);
 
 			$page = recuperer_fond("pave_exif", $contexte);
