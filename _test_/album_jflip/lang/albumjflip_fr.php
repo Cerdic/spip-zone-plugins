@@ -1,16 +1,19 @@
 <?php
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-//encodage des caractères = ê = &ecirc; - é = &eacute; - à = &agrave; - è = &egrave;
+// encodage des caractères : ê = &ecirc; - é = &eacute; - à = &agrave; - è = &egrave;
+// encodage des caractères : - ù= - î= - ° = &#176;
 // format : ' ' => " ",
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-'accents' => "é=&eacute;, è=&egrave;, ê=&ecirc;, à=&agrave;, ù= î=, °=&#176;, ",
+
 'article_num' => "Article n &#176;",
 
 'boite_info' => "<i>Informations :</i>",
 
 'clic_editer' => "Cliquez ici pour &eacute;diter",
+'conf_docs' => "<strong>Accepter les documents joints dans les articles :</strong><br />",
+'conf_mots' => "<strong>Activation des mots-clés :</strong><br />",
 
 'descriptif' => "<strong>Descriptif : </strong>",
 'discipline' => "<strong>Discipline : </strong>",
@@ -27,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lienoff1' => "<a href='http://eva-web.edres74.net' target='_blank'>http://eva-web.edres74.net</a><br/>",
 'lienoff2' => "<a href='' target='_blank' ></a><br/>",
 
-'modif_renseignements' => "Modifier ces renseignements",
+'modif_conf' => "Modifier la configuration",
 'mot_titre' => "<strong>Nom du mot-cl&eacute; : </strong>",
 'mot_descriptif' => "<strong>Descriptif : </strong>",
 
@@ -37,26 +40,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'siteoff2' => "<strong></strong><br/>",
 
 'texte_article' => "<strong>Texte de l'article : </strong>",
-'texte_descriptif' => "<br />Here is a jQuery plugins that lets you create JavaScript News Slide as fly.(Tested with jQuery 1.2.3),Effect (Fade In-Out ,Slide Up-Down, Left To Right), version 1.0.5 add button images directory setup function<br />",
+'texte_descriptif' => "<br />Ce plugin transforme les images d'un article en un petit livre feuilletable. Les coins sont cliquables et permettent de passer d'une page &agrave; une autre 
+    							avec un effet de tourner de page.<br />",
+'texte_motcle' => "<br/><strong>V&eacute;rification du mot-cl&eacute; n&eacute;cessaire au fonctionnement :</strong><br/>",
+'texte_reglages' => "<br/><strong>Configuration actuelle : </strong><br/>",
 'titre' => "<strong>Titre du bloc : </strong>",
 'titre_boite_principale' => "Param&egrave;trage du plugin :",
 'titre_presentation' => "<strong>Pr&eacute;sentation :</strong><br/>",
-'titre_page' => "ALBUMS JFLIP : livre avec effet de tourner de page",
+'titre_page' => "JFLIPBOOK : livre avec effet de tourner de page",
 
 'vitesse' => "<strong>Vitesse entre les transitions (1000=1seconde) : </strong>",
+'verification_conf' => "<br/><strong>V&eacute;rification de la configuration du site<br/></strong>",
 
 'quitter' => "Quitter ce formulaire",
 
-//Variables pour les paramêtres
-'titre' => "<strong>titre : </strong>",
-'idwebmaster' => "<strong>Num&eacute;ro du compte SPIP du Webmaster : </strong>",
-'fonction' => "<strong>Fonction du webmaster : </strong>",
-'directeur' => "<strong>Directeur de publication : </strong>",
-'responsable' => "<strong>Responsable d'&eacute;dition : </strong>",
-'hebergeur' => "<strong>H&eacute;bergeur du site : </strong>",
-'etab' => "<strong>Nom de l'&eacute;tablissement, &eacute;cole, association, etc. : </strong>",
-'idweb' => "<strong>Num&eacute;ro du compte SPIP du webmestre : </strong>",
-'adresse' => "<strong>Adresse de l'h&eacute;bergeur : </strong>",
 
 );
 ?>
