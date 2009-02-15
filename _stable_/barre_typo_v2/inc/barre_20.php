@@ -350,7 +350,8 @@ $(document).ready(function(){';
 		$('.$champ.').select(function() { MajStats('.$num_barre.',"'.$champ.'") });
 		$('.$champ.').click(function() { MajStats('.$num_barre.',"'.$champ.'") });';
 	}
-	$ret .= '//--></script>';
+	$ret .= '});
+//--></script>';
 	} else {
 		$ret .= ($num_barre > 1)  ? '' : 
 			"<script type='text/javascript' src='". find_in_path(_JAVASCRIPT.'layer.js') ."'></script>";
