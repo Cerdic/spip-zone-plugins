@@ -144,7 +144,7 @@ function statistiques_tous($log, $id_article, $table, $where, $order, $serveur, 
 	$stats = 
 	  "<table class='visites' id='visites_quotidiennes'>"
 	  . "<caption>"._T('visites_journalieres')."</caption>"
-	  . "<thead><tr class='row_first'><th>".trim(trim(_T('date'),':'))."</th><th class='valeur'>".trim(trim(_T('info_visites'),':'))."</th><th class='moyenne'>".trim(trim(_T('info_moyenne'),':'))."</th><th class='cumul'>".trim(trim(_T('info_total'),':'))."</th></tr></thead>"
+	  . "<thead><tr class='row_first'><th>".trim(trim(_T('date'),':'))."</th><th class='valeur'>".trim(trim(_T('info_visites'),':'))."</th><th class='moyenne'>".trim(trim(_T('info_moyenne'),':'))."</th></tr></thead>"
 	  . "<tbody>"
 	  . $res
 	  . (!$liste ? '' : // prevision que pour les visites
@@ -155,7 +155,7 @@ function statistiques_tous($log, $id_article, $table, $where, $order, $serveur, 
 		$stats .=
 		  "<table class='visites' id='visites_mensuelles'>"
 		  . "<caption>"._T('visites_mensuelles')."</caption>"
-		  . "<thead><tr class='row_first'><th>".trim(trim(_T('date'),':'))."</th><th class='valeur'>".trim(trim(_T('info_visites'),':'))."</th><th class='moyenne'>".trim(trim(_T('info_moyenne'),':'))."</th><th class='cumul'>".trim(trim(_T('info_total'),':'))."</th></tr></thead>"
+		  . "<thead><tr class='row_first'><th>".trim(trim(_T('date'),':'))."</th><th class='valeur'>".trim(trim(_T('info_visites'),':'))."</th><th class='moyenne'>".trim(trim(_T('info_moyenne'),':'))."</th></tr></thead>"
 		  . "<tbody>"
 		  . $res_mois
 		  . "</tbody>"
@@ -291,7 +291,7 @@ function stat_log1($log, $date_today, $interval, $script) {
 				$moyenne = round(statistiques_moyenne($evol),2);
 				$res .= statistiques_jour($date_prec+$i, 0, $moyenne, $cumul, $script);
 				if (date('m',$date_prec+$i+$interval)!=date('m',$date_prec+$i)){
-					$res_mois .= statistiques_jour(affdate_mois_annee(date('Y-m-d',$date_prec+$i)), "", "", $cumul, $script);
+					$res_mois .= statistiques_jour(affdate_mois_annee(date('Y-m-d',$date_prec+$i)), $cumul, "", "", $script);
 					$cumul = 0;
 				}
 			}
@@ -300,7 +300,7 @@ function stat_log1($log, $date_today, $interval, $script) {
 		$moyenne = round(statistiques_moyenne($evol),2);
 		$res .= statistiques_jour($key, $value, $moyenne, $cumul, $script);
 		if (date('m',$key+$interval)!=date('m',$key)){
-			$res_mois .= statistiques_jour(affdate_mois_annee(date('Y-m-d',$key)), "", "", $cumul, $script);
+			$res_mois .= statistiques_jour(affdate_mois_annee(date('Y-m-d',$key)), $cumul, "", "", $script);
 			$cumul = 0;
 		}
 
@@ -368,7 +368,7 @@ function statistiques_jour($key, $value, $moyenne, $cumul, $script)
 	}
 	$res .= "<td class='valeur'>" . $value . "</td>"
 	. "<td class='moyenne'>" . $moyenne . "</td>"
-	. "<td class='cumul'>" . $cumul . "</td>"
+	//. "<td class='cumul'>" . $cumul . "</td>"
 	." </tr>";
 
 
