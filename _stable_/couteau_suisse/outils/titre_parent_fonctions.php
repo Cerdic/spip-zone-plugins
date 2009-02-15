@@ -112,7 +112,8 @@ if(defined('_SPIP19300') && defined('_PARENTS_ETENDUS')) {
 			// id de l'objet a trouver pour retourner son titre
 			$id = ($v = interprete_argument_balise(1,$p))!==NULL ? $v : champ_sql($champ_parent, $p);
 			// le code php a executer, avant de le passer aux traitements
-			$p->code = "\"$champ_parent - $table - $objet - $id - \".".cs_titre_traitements("cs_titre_id(intval($id), '$table', '$champ_parent')", $table);
+			$p->code = cs_titre_traitements("cs_titre_id(intval($id), '$table', '$champ_parent')", $table);
+// $p->code = "\"$champ_parent - $table - $objet - $id - \".".cs_titre_traitements("cs_titre_id(intval($id), '$table', '$champ_parent')", $table);
 		} else 
 			$p->code = "''";
 // $p->code = $p->code.".' - ".addslashes($p->code)."'";
