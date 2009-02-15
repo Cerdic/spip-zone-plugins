@@ -1,31 +1,10 @@
 <?php
 
 function photo_infos_pave($args) {
-	$type = $args["args"]["type"];
-	
-	if ($type == "case_document") {
-		$data = $args["data"];
-		$id_document = $args["args"]["id"];		
-			
-			
-		include_spip("base/abstract_sql");
-			
-			
-		$query = sql_select("fichier", "spip_documents", "id_document=$id_document AND extension='jpg'");
-
-		if ($row = sql_fetch($query)) {
-			$fichier = get_spip_doc($row["fichier"]);
-			$contexte = array('fichier'=>$fichier);
-
-			$page = recuperer_fond("pave_exif", $contexte);
-			$ret .= $page;
-		}
-		
-		
-		$args["data"] = $data . $ret;
+	if ($args["args"]["type"] == "case_document") {
+		$args["data"] .= recuperer_fond("pave_exif",
+			array('id_document' => $args["args"]["id"]));;
 	}
-
-
 	return $args;
 }
 

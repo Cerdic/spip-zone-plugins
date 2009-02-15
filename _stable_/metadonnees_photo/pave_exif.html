@@ -1,11 +1,11 @@
+<BOUCLE_d(DOCUMENTS){id_document}{tout}{extension=jpg}{distant=non}>
 
-[(#SET{compteur,[(#ENV{fichier}|md5|substr{0,5})]})]
-
-[(#SET{afficher,[(#ENV{fichier}|lire_exif{make}|sinon{#ENV{fichier}|lire_exif{model}}|sinon{[(#ENV{fichier}|test_traiter_image{[(#ENV{fichier}|largeur)], [(#ENV{fichier}|hauteur)]})]}|sinon{[(#ENV{fichier}|lire_iptc)]})]})]
-
+#SET{fichier,#FICHIER}
+[(#SET{compteur,[(#GET{fichier}|md5|substr{0,5})]})]
+[(#SET{afficher,[(#GET{fichier}|lire_exif{make}|sinon{#GET{fichier}|lire_exif{model}}|sinon{[(#GET{fichier}|test_traiter_image{[(#GET{fichier}|largeur)], [(#GET{fichier}|hauteur)]})]}|sinon{[(#GET{fichier}|lire_iptc)]})]})]
 [(#GET{afficher}|?{" ",""})
 
-<div id="exif_haut_#GET{compteur}" onclick="$('#exif_haut_#GET{compteur}').hide();$('#exif_bas_#GET{compteur}').show(); $('#histogramme#GET{compteur}').load('?exec=pave_histogramme&fichier=#ENV{fichier}');"
+<div id="exif_haut_#GET{compteur}" onclick="$('#exif_haut_#GET{compteur}').hide();$('#exif_bas_#GET{compteur}').show(); $('#histogramme#GET{compteur}').load('?exec=pave_histogramme&id_document=#ID_DOCUMENT');"
 		onmouseover="$('#exif_resume_#GET{compteur}:hidden').show();"
 		onmouseout="$('#exif_resume_#GET{compteur}:visible').hide();"
 		style='cursor: pointer; text-align: #LANG_LEFT; font-size: 90%; background-color: #d0e19f; padding: 5px; -webkit-border-radius: 10px;-moz-border-radius: 10px; margin-bottom: 5px; margin-top: 5px;'>
@@ -18,16 +18,16 @@
 		<div style="position: relative; height: 11px; margin-top: 2px;">
 		
 		[(#SET{logo_exif,<div style="position: absolute; #LANG_LEFT: 0px; top: 0px;"><img src='[(#CHEMIN{imgs_photo/indicateur-exif.png})]' alt='exif' /></div>})]
-		[(#ENV{fichier}|lire_exif{make}|sinon{#ENV{fichier}|lire_exif{model}}|>{0}|?{[(#GET{logo_exif})],""})]
+		[(#GET{fichier}|lire_exif{make}|sinon{#GET{fichier}|lire_exif{model}}|>{0}|?{[(#GET{logo_exif})],""})]
 		
 		[(#SET{logo_iptc,<div style="position: absolute; #LANG_LEFT: 32px; top: 0px;"><img src='[(#CHEMIN{imgs_photo/indicateur-iptc.png})]' alt='iptc' /></div>})]
-		[(#ENV{fichier}|lire_iptc|?{[(#GET{logo_iptc})],""})]
+		[(#GET{fichier}|lire_iptc|?{[(#GET{logo_iptc})],""})]
 
 		[(#SET{logo_hist,<div style="position: absolute; #LANG_LEFT: 64px; top: 0px;"><img src='[(#CHEMIN{imgs_photo/indicateur-hist.png})]' alt='hist' /></div>})]
-		[(#ENV{fichier}|test_traiter_image{[(#ENV{fichier}|largeur)], [(#ENV{fichier}|hauteur)]}|>{0}|?{[(#GET{logo_hist})],""})]
+		[(#GET{fichier}|test_traiter_image{[(#GET{fichier}|largeur)], [(#GET{fichier}|hauteur)]}|>{0}|?{[(#GET{logo_hist})],""})]
 		
 		[(#SET{logo_gps,<div style='position: absolute; #LANG_LEFT: 96px; top: 0px;'><img src='[(#CHEMIN{imgs_photo/indicateur-gps.png})]' alt='gps' /></div>})]
-		[(#ENV{fichier}|lire_exif{GPSLatitudeInt}|position_carte{[(#ENV{fichier}|lire_exif{GPSLongitudeInt})],128}|?{[(#GET{logo_gps})],""})]
+		[(#GET{fichier}|lire_exif{GPSLatitudeInt}|position_carte{[(#GET{fichier}|lire_exif{GPSLongitudeInt})],128}|?{[(#GET{logo_gps})],""})]
 
 		</div>
 		
@@ -35,21 +35,21 @@
 
 
 
-	[(#SET{logo,#CHEMIN{appareils/#ENV{fichier}|lire_exif{logoAppareil}}})]
+	[(#SET{logo,#CHEMIN{appareils/#GET{fichier}|lire_exif{logoAppareil}}})]
 	
 
 
 
 	<div style="clear: #LANG_RIGHT;">
-		[(#ENV{fichier}|lire_exif{logoAppareil}|?{" ",""})
+		[(#GET{fichier}|lire_exif{logoAppareil}|?{" ",""})
 			[<div style="float: #LANG_LEFT;">(#GET{logo}|image_reduire{24})</div>]
 		]
-		<div style="margin-#LANG_LEFT: 30px;">[(#ENV{fichier}|lire_exif{make})]
-		[(#ENV{fichier}|lire_exif{model})]</div>
+		<div style="margin-#LANG_LEFT: 30px;">[(#GET{fichier}|lire_exif{make})]
+		[(#GET{fichier}|lire_exif{model})]</div>
 
 
-		[<div style="margin-#LANG_LEFT: 30px;"><strong>(#ENV{fichier}|lire_iptc{objectName}|typo)</strong></div>]
-		[<div style="margin-#LANG_LEFT: 30px;">(#ENV{fichier}|lire_iptc{caption}|couper{100}|typo)</div>]
+		[<div style="margin-#LANG_LEFT: 30px;"><strong>(#GET{fichier}|lire_iptc{objectName}|typo)</strong></div>]
+		[<div style="margin-#LANG_LEFT: 30px;">(#GET{fichier}|lire_iptc{caption}|couper{100}|typo)</div>]
 
 		<div class='nettoyeur'></div>	
 
@@ -64,26 +64,26 @@
 	<td>[
 		<!-- [<img src="(#CHEMIN{imgs_photo/iso-16.png})" alt="ISO" align="top" />]  -->
 		<span style="font-family: helvetical, arial, sans; font-size: 80%; font-weight: bold;">ISO</span>
-		(#ENV{fichier}|lire_exif{isoEquiv})
+		(#GET{fichier}|lire_exif{isoEquiv})
 		]</td>
 	<td>[
-		(#ENV{fichier}|lire_exif{exposureTime}) s
+		(#GET{fichier}|lire_exif{exposureTime}) s
 		]</td>
 	</tr>
 	<tr>
 	<td>[
 	<!--	[<img src="(#CHEMIN{imgs_photo/ouverture-16.png})" alt="ISO" align="top" />] -->
-		<i>f</i>/(#ENV{fichier}|lire_exif{fnumber})
+		<i>f</i>/(#GET{fichier}|lire_exif{fnumber})
 		]</td>
 	<td>[
-		(#ENV{fichier}|lire_exif{focalLength})&nbsp;mm
+		(#GET{fichier}|lire_exif{focalLength})&nbsp;mm
 		]</td>
 	</tr>
 
 
 	[<tr>
 		<td colspan="2">
-		(#ENV{fichier}|lire_iptc{copy#LANG_RIGHT})
+		(#GET{fichier}|lire_iptc{copy#LANG_RIGHT})
 		</td>
 	</tr>]
 	</table>
@@ -99,16 +99,16 @@
 		<div style="float: #LANG_RIGHT;"><a href="#" onclick="$('#exif_haut_#GET{compteur}').show();$('#exif_bas_#GET{compteur}').hide(); return false;">[<img src="(#CHEMIN{images/noeud_moins.gif})" alt="-" />]</a></div>
 
 		<div style="text-align: center; font-size: 11px; font-weight: bold;">
-		[(#ENV{fichier}|lire_exif{logoAppareil}|?{" ",""})
+		[(#GET{fichier}|lire_exif{logoAppareil}|?{" ",""})
 			[<a id="logo_camera_small#GET{compteur}" onclick="$('#logo_camera_small#GET{compteur}').hide(); $('#logo_camera_big#GET{compteur}').show(); return false;" href="#">(#GET{logo}|image_reduire{64})</a>]
 			[<a id="logo_camera_big#GET{compteur}" onclick="$('#logo_camera_big#GET{compteur}').hide(); $('#logo_camera_small#GET{compteur}').show(); return false;" style="display: none;" href="#">(#GET{logo}|image_reduire{120})</a>]
 		]
-		<div>[(#ENV{fichier}|lire_exif{make})]
-			[(#ENV{fichier}|lire_exif{model})]
+		<div>[(#GET{fichier}|lire_exif{make})]
+			[(#GET{fichier}|lire_exif{model})]
 		
 		</div>
 		</div>
-		[(#ENV{fichier}|test_traiter_image{[(#ENV{fichier}|largeur)], [(#ENV{fichier}|hauteur)]}|>{0}|?{" ",""})
+		[(#GET{fichier}|test_traiter_image{[(#GET{fichier}|largeur)], [(#GET{fichier}|hauteur)]}|>{0}|?{" ",""})
 			<div id="histogramme#GET{compteur}" style="text-align: center; padding-top: 5px;"><img src="#CHEMIN{images/loader.gif}" alt="Loading..." /></div>
 		]
 	
@@ -121,7 +121,7 @@
 			<:photo_infos_fonctions:titre:>
 		</td>
 		<td >
-		<strong>(#ENV{fichier}|lire_iptc{objectName}|typo)</strong>
+		<strong>(#GET{fichier}|lire_iptc{objectName}|typo)</strong>
 		</td>
 	</tr>]
 
@@ -130,7 +130,7 @@
 			<:photo_infos_fonctions:legende:>
 		</td>
 		<td >
-		(#ENV{fichier}|lire_iptc{caption}|typo)
+		(#GET{fichier}|lire_iptc{caption}|typo)
 		</td>
 	</tr>]
 
@@ -139,7 +139,7 @@
 			<:photo_infos_fonctions:copyright:>
 		</td>
 		<td >
-		(#ENV{fichier}|lire_iptc{copyright})
+		(#GET{fichier}|lire_iptc{copyright})
 		</td>
 	</tr>]
 
@@ -148,7 +148,7 @@
 			<:photo_infos_fonctions:credits:>
 		</td>
 		<td >
-		(#ENV{fichier}|lire_iptc{credit})
+		(#GET{fichier}|lire_iptc{credit})
 		</td>
 	</tr>]
 
@@ -157,7 +157,7 @@
 			<:photo_infos_fonctions:motscles:>
 		</td>
 		<td >
-		<div>(#ENV{fichier}|lire_iptc{keywords}|replace{"\n","</div><div>"})</div>
+		<div>(#GET{fichier}|lire_iptc{keywords}|replace{"\n","</div><div>"})</div>
 		</td>
 	</tr>]
 
@@ -171,7 +171,7 @@
 		</td>
 		<td >
 		[<img src="(#CHEMIN{imgs_photo/iso-16.png})" alt="ISO" align="top" />]
-		(#ENV{fichier}|lire_exif{isoEquiv})
+		(#GET{fichier}|lire_exif{isoEquiv})
 		</td>
 	</tr>]
 	
@@ -180,7 +180,7 @@
 			<:photo_infos_fonctions:vitesse:>
 		</td>
 		<td >
-		(#ENV{fichier}|lire_exif{exposureTime}) s
+		(#GET{fichier}|lire_exif{exposureTime}) s
 		</td>
 	</tr>]
 	
@@ -190,7 +190,7 @@
 		</td>
 		<td >
 		[<img src="(#CHEMIN{imgs_photo/ouverture-16.png})" alt="ISO" align="top" />]
-		<i>f</i>/(#ENV{fichier}|lire_exif{fnumber})
+		<i>f</i>/(#GET{fichier}|lire_exif{fnumber})
 		</td>
 	</tr>]
 	
@@ -199,7 +199,7 @@
 			<:photo_infos_fonctions:focale:>
 		</td>
 		<td >
-		(#ENV{fichier}|lire_exif{focalLength})&nbsp;mm
+		(#GET{fichier}|lire_exif{focalLength})&nbsp;mm
 		</td>
 	</tr>]
 	
@@ -208,7 +208,7 @@
 			<:photo_infos_fonctions:focale35mm:>
 		</td>
 		<td >
-		(#ENV{fichier}|lire_exif{focalLength35mm})&nbsp;mm
+		(#GET{fichier}|lire_exif{focalLength35mm})&nbsp;mm
 		</td>
 	</tr>]
 	
@@ -217,8 +217,8 @@
 			<:photo_infos_fonctions:flash:>
 		</td>
 		<td >
-		[<img src="(#CHEMIN{imgs_photo/flash-[(#ENV{fichier}|lire_exif{flashUsed})]-16.png})" alt="ISO" align="top" />]
-		(#ENV{fichier}|lire_exif{flashUsed})
+		[<img src="(#CHEMIN{imgs_photo/flash-[(#GET{fichier}|lire_exif{flashUsed})]-16.png})" alt="ISO" align="top" />]
+		(#GET{fichier}|lire_exif{flashUsed})
 		</td>
 	</tr>]
 	
@@ -227,7 +227,7 @@
 			<:photo_infos_fonctions:distance:>
 		</td>
 		<td >
-		(#ENV{fichier}|lire_exif{focusDistance})[(#ENV{fichier}|lire_exif{focusDistance}|=={infini}|?{'','&nbsp;m'})]
+		(#GET{fichier}|lire_exif{focusDistance})[(#GET{fichier}|lire_exif{focusDistance}|=={infini}|?{'','&nbsp;m'})]
 		</td>
 	</tr>]
 
@@ -237,7 +237,7 @@
 		</td>
 		<td >
 		[<img src="(#CHEMIN{imgs_photo/ouverture-max-16.png})" alt="ISO" align="top" />]
-		<i>f</i>/(#ENV{fichier}|lire_exif{maxAperture})
+		<i>f</i>/(#GET{fichier}|lire_exif{maxAperture})
 		</td>
 	</tr>]
 	
@@ -246,7 +246,7 @@
 			<:photo_infos_fonctions:objectif:>
 		</td>
 		<td >
-		(#ENV{fichier}|lire_exif{auxLens})
+		(#GET{fichier}|lire_exif{auxLens})
 		</td>
 	</tr>]
 	
@@ -257,7 +257,7 @@
 			<:photo_infos_fonctions:intitule:>
 		</td>
 		<td >
-		(#ENV{fichier}|lire_iptc{headline})
+		(#GET{fichier}|lire_iptc{headline})
 		</td>
 	</tr>]
 
@@ -266,7 +266,7 @@
 			<:photo_infos_fonctions:categorie:>
 		</td>
 		<td >
-		(#ENV{fichier}|lire_iptc{category})
+		(#GET{fichier}|lire_iptc{category})
 		</td>
 	</tr>]
 
@@ -275,7 +275,7 @@
 			<:photo_infos_fonctions:datecreation:>
 		</td>
 		<td >
-		(#ENV{fichier}|lire_iptc{createdDate}|affdate)
+		(#GET{fichier}|lire_iptc{createdDate}|affdate)
 		</td>
 	</tr>]
 
@@ -284,7 +284,7 @@
 			<:photo_infos_fonctions:ville:>
 		</td>
 		<td >
-		(#ENV{fichier}|lire_iptc{city})
+		(#GET{fichier}|lire_iptc{city})
 		</td>
 	</tr>]
 
@@ -293,7 +293,7 @@
 			<:photo_infos_fonctions:provinceetat:>
 		</td>
 		<td >
-		(#ENV{fichier}|lire_iptc{provinceState})
+		(#GET{fichier}|lire_iptc{provinceState})
 		</td>
 	</tr>]
 
@@ -302,7 +302,7 @@
 			<:photo_infos_fonctions:pays:>
 		</td>
 		<td >
-		(#ENV{fichier}|lire_iptc{country})
+		(#GET{fichier}|lire_iptc{country})
 		</td>
 	</tr>]
 
@@ -311,7 +311,7 @@
 			<:photo_infos_fonctions:auteur:>
 		</td>
 		<td >
-		(#ENV{fichier}|lire_iptc{byline})
+		(#GET{fichier}|lire_iptc{byline})
 		</td>
 	</tr>]
 
@@ -320,7 +320,7 @@
 			<:photo_infos_fonctions:latitude:>
 		</td>
 		<td >
-		(#ENV{fichier}|lire_exif{GPSLatitude})
+		(#GET{fichier}|lire_exif{GPSLatitude})
 		</td>
 	</tr>]
 
@@ -329,14 +329,15 @@
 			<:photo_infos_fonctions:longitude:>
 		</td>
 		<td >
-		(#ENV{fichier}|lire_exif{GPSLongitude})
+		(#GET{fichier}|lire_exif{GPSLongitude})
 		</td>
 	</tr>]
 	
 	</table>
-		[<div style='margin-#LANG_LEFT: 15px;'>(#ENV{fichier}|lire_exif{GPSLatitudeInt}|position_carte{[(#ENV{fichier}|lire_exif{GPSLongitudeInt})],128})</div>]
+		[<div style='margin-#LANG_LEFT: 15px;'>(#GET{fichier}|lire_exif{GPSLatitudeInt}|position_carte{[(#GET{fichier}|lire_exif{GPSLongitudeInt})],128})</div>]
 	
 	
 	</div>
 ]
 
+</BOUCLE_d>
