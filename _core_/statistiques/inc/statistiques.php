@@ -139,17 +139,29 @@ function statistiques_tous($log, $id_article, $table, $where, $order, $serveur, 
 	$last = (time()-$date_fin>$interval) ? 0 : $log[$date_fin];
 	$max = max($log);
 
-	list($moyenne,$prec, $res) = stat_log1($log, $date_fin, $interval, $script);
+	list($moyenne,$prec, $res, $res_mois) = stat_log1($log, $date_fin, $interval, $script);
 
 	$stats = 
-	  "<table id='visites'>"
+	  "<table class='visites' id='visites_quotidiennes'>"
+	  . "<caption>"._T('visites_journalieres')."</caption>"
 	  . "<thead><tr class='row_first'><th>".trim(trim(_T('date'),':'))."</th><th class='valeur'>".trim(trim(_T('info_visites'),':'))."</th><th class='moyenne'>".trim(trim(_T('info_moyenne'),':'))."</th><th class='cumul'>".trim(trim(_T('info_total'),':'))."</th></tr></thead>"
 	  . "<tbody>"
 	  . $res
 	  . (!$liste ? '' : // prevision que pour les visites
 	     statistiques_prevision($id_article, $moyenne, $popularite, $last))
 	  . "</tbody>"
-	. "</table>";
+	  . "</table>";
+	if ($res_mois) {
+		$stats .=
+		  "<table class='visites' id='visites_mensuelles'>"
+		  . "<caption>"._T('visites_mensuelles')."</caption>"
+		  . "<thead><tr class='row_first'><th>".trim(trim(_T('date'),':'))."</th><th class='valeur'>".trim(trim(_T('info_visites'),':'))."</th><th class='moyenne'>".trim(trim(_T('info_moyenne'),':'))."</th><th class='cumul'>".trim(trim(_T('info_total'),':'))."</th></tr></thead>"
+		  . "<tbody>"
+		  . $res_mois
+		  . "</tbody>"
+		  . "</table>";
+	}
+
 
 	if  ($liste) {
 		$liste = statistiques_classement($id_article, $classement, $liste);
@@ -261,6 +273,7 @@ function statistiques_zoom($id_article, $largeur_abs, $date_premier, $date_debut
 // http://doc.spip.org/@stat_log1
 function stat_log1($log, $date_today, $interval, $script) {
 	$res = '';
+	$res_mois = '';
 
 	$cumul = $decal = $date_prec = $val_prec = $moyenne = 0;
 	foreach ($log as $key => $value) {
@@ -278,7 +291,7 @@ function stat_log1($log, $date_today, $interval, $script) {
 				$moyenne = round(statistiques_moyenne($evol),2);
 				$res .= statistiques_jour($date_prec+$i, 0, $moyenne, $cumul, $script);
 				if (date('m',$date_prec+$i+$interval)!=date('m',$date_prec+$i)){
-					$res .= statistiques_jour(affdate_mois_annee(date('Y-m-d',$date_prec+$i)), "", "", $cumul, $script);
+					$res_mois .= statistiques_jour(affdate_mois_annee(date('Y-m-d',$date_prec+$i)), "", "", $cumul, $script);
 					$cumul = 0;
 				}
 			}
@@ -287,14 +300,14 @@ function stat_log1($log, $date_today, $interval, $script) {
 		$moyenne = round(statistiques_moyenne($evol),2);
 		$res .= statistiques_jour($key, $value, $moyenne, $cumul, $script);
 		if (date('m',$key+$interval)!=date('m',$key)){
-			$res .= statistiques_jour(affdate_mois_annee(date('Y-m-d',$key)), "", "", $cumul, $script);
+			$res_mois .= statistiques_jour(affdate_mois_annee(date('Y-m-d',$key)), "", "", $cumul, $script);
 			$cumul = 0;
 		}
 
 		$date_prec = $key;
 		$val_prec = $value;
 	}
-	return array($moyenne, $val_prec, $res);
+	return array($moyenne, $val_prec, $res, $res_mois);
 }
 
 // http://doc.spip.org/@statistiques_href

@@ -37,20 +37,23 @@ ul.classement li {padding:0 0 4px;margin:0;line-height:100%;}
 ul.classement li em {display:block;width:37px;float:#GET{left};margin-left:-40px;position:relative;display:inline;font-style:normal;text-align:#GET{right};}
 
 
-table#visites {width: 80%; margin-right: auto; margin-left: auto; margin-bottom: 1em; border-collapse: collapse; border-spacing: 0; line-height: normal;border:1px solid #999;}
-table#visites a {color:#[(#GET{foncee}|couleur_foncer)];}
+table.visites caption {font-size:1.3em;font-weight:bold;text-align:center;margin:0.5em auto;}
+table.visites {width: 80%; margin-right: auto; margin-left: auto; margin-bottom: 1em; border-collapse: collapse; border-spacing: 0; line-height: normal;border:1px solid #999;}
+table.visites a {color:#[(#GET{foncee}|couleur_foncer)];}
 
-table#visites tr.row_first { background-color:#[(#GET{foncee}|couleur_foncer)];color:#fff;border: 1px solid #ddd; }
-table#visites th, table#visites td { padding: 0.20em 0.40em; text-align: left; border: 1px solid #ddd; }
-table#visites th { vertical-align: bottom; font-weight: bold; }
-table#visites tbody th { font-weight: normal; }
-table#visites td { vertical-align: top; }
-table#visites td.valeur, table#visites td.moyenne, table#visites td.cumul { text-align:center; }
+table.visites tr.row_first { background-color:#[(#GET{foncee}|couleur_foncer)];color:#fff;border: 1px solid #ddd; }
+table.visites th, table.visites td { padding: 0.20em 0.40em; text-align: left; border: 1px solid #ddd; }
+table.visites th { vertical-align: bottom; font-weight: bold; }
+table.visites tbody th { font-weight: normal; }
+table.visites td { vertical-align: top; }
+table.visites td.valeur, table.visites td.moyenne, table.visites td.cumul { text-align:center; }
 
-table#visites tr.couleur_Sunday td,
-table#visites tr.couleur_Sunday th {background-color:#[(#GET{claire}|couleur_eclaircir)];}
-table#visites tr.couleur_today td,
-table#visites tr.couleur_today th {background-color:#eee;}
+table.visites tr.couleur_Sunday td,
+table.visites tr.couleur_Sunday th {background-color:#[(#GET{claire}|couleur_eclaircir)];}
+table.visites tr.couleur_today td,
+table.visites tr.couleur_today th {background-color:#eee;}
+/*
 table#visites tr.couleur_recap td,
 table#visites tr.couleur_recap th {background-color:#[(#GET{foncee}|couleur_foncer)];color:#fff;}
+*/
 
