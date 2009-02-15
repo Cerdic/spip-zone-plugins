@@ -22,7 +22,7 @@ include_spip('inc/boutons');
  * puissent y mettre leur grain de sel
  */
 // http://doc.spip.org/@definir_barre_boutons
-function definir_barre_boutons() {
+function definir_barre_boutons($icones = true) {
     include_spip('inc/autoriser');
 	$boutons_admin=array();
 
@@ -35,7 +35,7 @@ function definir_barre_boutons() {
 			if (!($parent = $infos['parent']) OR autoriser('bouton',$id)){
 				if ($parent AND isset($boutons_admin[$parent]))
 					$boutons_admin[$parent]->sousmenu[$id]= new Bouton(
-					  $infos['icone']?find_in_path($infos['icone']):'',  // icone
+					  ($icones AND $infos['icone'])?find_in_path($infos['icone']):'',  // icone
 					  $infos['titre'],	// titre
 					  $infos['url']?$infos['url']:null,
 					  $infos['args']?$infos['args']:null
@@ -48,7 +48,7 @@ function definir_barre_boutons() {
 					$position = $infos['position']?$infos['position']:count($boutons_admin);
 					$boutons_admin = array_slice($boutons_admin,0,$position)
 					+array($id=> new Bouton(
-					  $infos['icone']?find_in_path($infos['icone']):'',  // icone
+					  ($icones AND $infos['icone'])?find_in_path($infos['icone']):'',  // icone
 					  $infos['titre'],	// titre
 					  $infos['url']?$infos['url']:null,
 					  $infos['args']?$infos['args']:null
@@ -91,7 +91,7 @@ function bando_lister_sous_menu($sousmenu,$class="",$image=false){
 		$sous = "";		 
 		foreach($sousmenu as $souspage => $sousdetail){
 			$url = bandeau_creer_url($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg);
-            if (!$image OR !$sousdetail->icone){
+            if (!$image){
                 $sous .= "<li$class>"
              . "<a href='$url' id='bando2_$souspage'>"
              . _T($sousdetail->libelle)
@@ -99,10 +99,10 @@ function bando_lister_sous_menu($sousmenu,$class="",$image=false){
              . "</li>";
             }
             else {
-                $image = "<img src='".$sousdetail->icone."' width='".largeur($sousdetail->icone)."' height='".hauteur($sousdetail->icone)."' alt='".attribut_html(_T($sousdetail->libelle))."' />";
+                //$image = "<img src='".$sousdetail->icone."' width='".largeur($sousdetail->icone)."' height='".hauteur($sousdetail->icone)."' alt='".attribut_html(_T($sousdetail->libelle))."' />";
                 $sous .= "<li$class>"
              . "<a href='$url' id='bando2_$souspage' title='".attribut_html(_T($sousdetail->libelle))."'>"
-             . $image
+             . "<span>"._T($sousdetail->libelle)."</span>"
              . "</a>"
              . "</li>";
             }
@@ -238,7 +238,7 @@ function bando_liens_acces_rapide(){
  */
 function inc_bandeau_dist($rubrique, $sous_rubrique, $largeur)
 {
-    $boutons = definir_barre_boutons();
+    $boutons = definir_barre_boutons(false);
 	return "<div class='avec_icones' id='bando_haut'>"
 		. bando_liens_acces_rapide()
 		. bando_identite()

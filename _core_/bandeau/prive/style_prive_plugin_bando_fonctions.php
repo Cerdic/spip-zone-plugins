@@ -20,7 +20,7 @@ function bando_images_background(){
 	foreach($boutons as $page => $detail){
 		if ($detail->icone AND strlen(trim($detail->icone)))
 			$res .="\n.avec_icones #bando1_$page {background-image:url(".$detail->icone.");}";
-        if ($page!='outils_rapides' AND is_array($detail->sousmenu))
+        if (is_array($detail->sousmenu))
             foreach($detail->sousmenu as $souspage=>$sousdetail)
                 if ($sousdetail->icone AND strlen(trim($sousdetail->icone)))
                     $res .="\n.avec_icones #bando2_$souspage {background-image:url(".$sousdetail->icone.");}";
