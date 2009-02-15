@@ -268,6 +268,36 @@ function statistiques_zoom($id_article, $largeur_abs, $date_premier, $date_debut
 	return $zoom;
 }
 
+define('MOYENNE_GLISSANTE_JOUR', 30);
+define('MOYENNE_GLISSANTE_MOIS', 12);
+
+function moyenne_glissante_jour($valeur = false) {
+	static $v = array();
+	// pas d'argument, on rend la moyenne
+	if ($valeur === false) {
+		return round(statistiques_moyenne($v),2);
+	}
+	// argument, on l'ajoute au tableau...
+	// surplus, on enleve...
+	$v[] = $valeur;
+	if (count($v) > MOYENNE_GLISSANTE_JOUR)
+		array_shift($v);
+}
+
+function moyenne_glissante_mois($valeur = false) {
+	static $v = array();
+	// pas d'argument, on rend la moyenne
+	if ($valeur === false) {
+		return round(statistiques_moyenne($v),2);
+	}
+	// argument, on l'ajoute au tableau...
+	// surplus, on enleve...
+	$v[] = $valeur;
+	if (count($v) > MOYENNE_GLISSANTE_MOIS)
+		array_shift($v);
+}
+
+
 // Presentation graphique
 // (rq: on n'affiche pas le jour courant, c'est a la charge de la prevision)
 // http://doc.spip.org/@stat_log1
@@ -275,32 +305,31 @@ function stat_log1($log, $date_today, $interval, $script) {
 	$res = '';
 	$res_mois = '';
 
-	$cumul = $decal = $date_prec = $val_prec = $moyenne = 0;
+	$cumul = $decal_jour = $decal_mois = $date_prec = $val_prec = $moyenne = 0;
 	foreach ($log as $key => $value) {
 		if ($key == $date_today) break;
-		if ($decal == 30) $decal = 0;
-		$decal ++;
-		$evol[$decal] = $value;
+		moyenne_glissante_jour($value);
 		// Inserer des jours vides si pas d'entrees
 		if ($date_prec > 0) {
 			$ecart = $key-$date_prec-$interval;
 			for ($i=$interval; $i <= $ecart; $i+=$interval){
-				if ($decal == 30) $decal = 0;
-				$decal ++;
-				$evol[$decal] = $value;
-				$moyenne = round(statistiques_moyenne($evol),2);
-				$res .= statistiques_jour($date_prec+$i, 0, $moyenne, $cumul, $script);
+				moyenne_glissante_jour($value);
+				$res .= statistiques_jour($date_prec+$i, 0, moyenne_glissante_jour(), $cumul, $script);
 				if (date('m',$date_prec+$i+$interval)!=date('m',$date_prec+$i)){
-					$res_mois .= statistiques_jour(affdate_mois_annee(date('Y-m-d',$date_prec+$i)), $cumul, "", "", $script);
+					moyenne_glissante_mois($cumul);				
+					$res_mois .= statistiques_jour(affdate_mois_annee(date('Y-m-d',$date_prec+$i)), $cumul, moyenne_glissante_mois(), "", $script);
 					$cumul = 0;
 				}
 			}
 		}
+		
 		$cumul += $value;
-		$moyenne = round(statistiques_moyenne($evol),2);
+		$moyenne = moyenne_glissante_jour();
+
 		$res .= statistiques_jour($key, $value, $moyenne, $cumul, $script);
 		if (date('m',$key+$interval)!=date('m',$key)){
-			$res_mois .= statistiques_jour(affdate_mois_annee(date('Y-m-d',$key)), $cumul, "", "", $script);
+			moyenne_glissante_mois($cumul);			
+			$res_mois .= statistiques_jour(affdate_mois_annee(date('Y-m-d',$key)), $cumul, moyenne_glissante_mois(), "", $script);
 			$cumul = 0;
 		}
 
