@@ -1,0 +1,21 @@
+
+canvas {
+  margin: 10px;
+  display:block;
+}
+
+pre {
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 5px;
+  background: #FFF;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+}
+
+div.ref-col {
+  float: left;
+  width: 32%;
+}
+
+.flip_gallery canvas {margin:auto}
