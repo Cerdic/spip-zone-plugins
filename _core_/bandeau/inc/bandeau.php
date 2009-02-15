@@ -130,8 +130,8 @@ function bando_navigation($boutons)
             // les icones de premier niveau sont ignoree si leur sous menu est vide
             // et si elles pointent vers exec=navigation
             if (
-             (is_array($detail->sousmenu) AND count($detail->sousmenu))
-             OR ($detail->url!='navigation')) {
+             ($detail->libelle AND is_array($detail->sousmenu) AND count($detail->sousmenu))
+             OR ($detail->libelle AND $detail->url AND $detail->url!='navigation')) {
                 $url = bandeau_creer_url($detail->url?$detail->url:$page, $detail->urlArg);
                 $res .= "<li$first>"
                  . "<a href='$url' id='bando1_$page'>"
