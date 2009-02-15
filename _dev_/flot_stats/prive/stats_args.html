@@ -32,7 +32,7 @@
 	</table>
 	</B_visites>
 	<BOUCLE_total(VISITES_ARTICLES){id_article ?}{visites!=0}>#SET{total,#GET{total}|plus{#VISITES}}</BOUCLE_total>
-	[Il y a au total <b>(#GET{total})</b> visites.]
+	[Il y a au total <b>(#GET{total})</b> visites sur #COMPTEUR_BOUCLE jours.]
 	<//B_total>
 	<B_stats>
 

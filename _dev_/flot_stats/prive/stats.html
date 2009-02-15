@@ -1,8 +1,24 @@
 #CACHE{0}
 <style type='text/css'>
-.graphique{clear:both;}
-.graphResult{float:left;}
-.graphLegend{float:left; padding:0.5em;}
+#letout { margin: auto; width: 40%;}
+.cadre_gr { margin: auto; width: 500px; }
+table.graph { margin: auto; border:1px solid #999999;
+border-collapse:collapse;
+border-spacing:0;
+line-height:normal;
+margin:1em auto;
+width:90%;}
+tr.first {
+background-color:#4C4C33;
+border:1px solid #DDDDDD;
+color:#FFFFFF;
+}
+th.tdate {
+border: 1px solid #000000;
+}
+td.tvisites {
+border: 1px dashed #000000;
+}
 </style>
 <link rel="stylesheet" href="flot.css" type="text/css" media="projection, screen, tv" />
 <!--[if IE]><script type="text/javascript" src="#CHEMIN{javascript/excanvas.pack.js}"></script><![endif]-->
@@ -13,48 +29,56 @@
 	$(document).ready(function(){
 		$("table.graph").tFlot({
 			legendeExterne:true,
-			legendeActions:false,
+			legendeActions:true,
+			
+			moyenneGlissante:{
+				show:true, // pour calculer une moyenne glissante automatiquement
+				plage:7 // plage de glissement (nombre impair !)
+			},
 			modeDate:true,
-			moyenneGlissante:true,
-			//moyenneGlissantePlage:31,
+			parse:{
+				axeOnTitle:true,
+				defaultSerie:{
+					bars:{show:false},
+					lines:{show:true, fill: true},
+				}	
+			},
+			vignette:{show:true},
+			infobulle:{show:true}
 		});
 	});
 })(jQuery);
 </script>
 <h1>Statistiques</h1>
-<div class="espacegraph">
+
+<div id="letout">
+<BOUCLE_max(VISITES){!par visites}{0,1}>
+	[(#SET{max, #VISITES})]
+</BOUCLE_max>
+<BOUCLE_moyenne(VISITES){par date}>
+	#SET{total,#GET{total}|plus{#VISITES}}
+	#SET{moyene, #GET{total}|div{#COMPTEUR_BOUCLE}}
+	#SET{moyenne, #GET{moyene}|div{#COMPTEUR_BOUCLE}}
+</BOUCLE_moyenne>
+<BOUCLE_today(VISITES){!par date}{0,1}>
+	[(#SET{today, #VISITES})]
+</BOUCLE_today>
+<BOUCLE_hier(VISITES){!par date}{1,1}>
+	[(#SET{hier, #VISITES})]
+</BOUCLE_hier>
+<table class="stats">
+<tr class="first"><th><:info:maximum:></th><th><:info:moyenne:></th><th><:info:aujourdhui:></th><th><:info:hier:></th><th><:info:total:></th></tr>
+<tr><td>#GET{max}</td><td>#GET{moyenne}</td><td>#GET{today}</td><td>#GET{hier}</td><td>#GET{total}</t></tr>
+</table>
+
 	<BOUCLE_visites(VISITES){par date}>
-	[(#SET{tableau, [(#GET{tableau}|concat{<tr><th>[(#DATE|affdate{Y/m/d})]</th><td>#VISITES</td></tr>})]})]
+	[(#SET{tableau, [(#GET{tableau}|concat{<tr><th title="[(#DATE|affdate{Y/m/d})]" class="tdate">[(#DATE|affdate{Y/m/d})]</th><td class="tvisites">#VISITES</td></tr>})]})]
 	</BOUCLE_visites>
+	<div class="cadre_gr">
 	<table class="graph">
-		<tr class="flotLine flotFill"><th><:date:></th><th><:visites:></th></tr>
+		<tr class="first"><th><:date:></th><th><:visites:></th></tr>
 		#GET{tableau}
 	</table>
-	</B_visites>
-	<BOUCLE_total(VISITES)>#SET{total,#GET{total}|plus{#VISITES}}</BOUCLE_total>
-	[Il y a au total <b>(#GET{total})</b> visites.]
-	<//B_total>
-	<B_stats>
-
-	<div class="ajax-action" style="width: 500px;">
-		<div class="cadre cadre-liste" style="margin-top: 20px;background-color: gray;">
-			<img src="../prive/images/statistiques-24.gif" alt="" class="cadre-icone">
-			<div id="dep" class="titrem deplie depliant" onmouseover="jQuery(this).depliant('#visites');">
-				<a href="#" onclick="return jQuery(this).depliant_clicancre('#visites');" class="titremancre">
-				</a>
-				<b>Les dernieres Visites</b>
-			</div>
-			<div>
-				<div id="visites" class="bloc_depliable blocdeplie">				
-					<BOUCLE_stats(VISITES){!par date}{" <br /> "}{0,5}>
-					[(#DATE|affdate{Y/m/d})] - <b>#VISITES</b> visites
-					</BOUCLE_stats>
-				</div>
-				<div class="nettoyeur">
-				</div>
-			</div>
-		</div>
-		</B_stats>
 	</div>
+	</B_visites>
 </div>
-<div>
