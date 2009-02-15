@@ -6,7 +6,7 @@
 	<p class="post-info"><B_auteurs><:par_auteur|ucfirst:> <BOUCLE_auteurs(AUTEURS){id_article}{", "}><span[ title="(#BIO|couper{60}|texte_backend)"]>#NOM</span></BOUCLE_auteurs>,</B_auteurs>
 	[(#DATE|affdate_long)] <:spipclear:attime:> [(#DATE|heures)]:[(#DATE|minutes)]
 	<span>::</span> <BOUCLE_categorie(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></BOUCLE_categorie>
-	<span>::</span>#DEBUT_SURLIGNE<a href="#URL_SITE_SPIP/#URL_ARTICLE" title="<:spipclear:permalink_pour:> : [(#TITRE|textebrut|entites_html)]">##ID_ARTICLE</a>#FIN_SURLIGNE
+	<span>::</span><a href="#URL_SITE_SPIP/#URL_ARTICLE" title="<:spipclear:permalink_pour:> : [(#TITRE|textebrut|entites_html)]" class="surlignable">##ID_ARTICLE</a>
 	</p>
 
 	<B_mots>
@@ -19,14 +19,14 @@
 	
 	[(#LOGO_ARTICLE||image_reduire{150}|inserer_attribut{class,#EDIT{logo}}|inserer_attribut{class,logo})]
 	
-	[<div class="post-excerpt #EDIT{chapo}">
-		#DEBUT_SURLIGNE(#CHAPO)#FIN_SURLIGNE
+	[<div class="post-excerpt #EDIT{chapo} surlignable">
+		(#CHAPO)
 	</div>]
-	[<div class="post-content #EDIT{texte}" lang="#LANG">
-		#DEBUT_SURLIGNE(#TEXTE|image_reduire{450})#FIN_SURLIGNE
+	[<div class="post-content #EDIT{texte} surlignable" lang="#LANG">
+		(#TEXTE|image_reduire{450})
 		<br style="clear: both;" />
-		[<div class="#EDIT{ps}">#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>]
-		[<div class="footnotes">#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
+		[<div class="#EDIT{ps}">(#PS)</div>]
+		[<div class="footnotes">(#NOTES)</div>]
 		[<div><strong><:voir_en_ligne:></strong> : <a href="(#URL_SITE)">#NOM_SITE</a></div>]
 		[<div id="attachments">(#INCLURE{fond=noisettes/documents}{id_article}{env})</div>]
 	</div>]
