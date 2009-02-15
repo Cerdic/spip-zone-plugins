@@ -33,7 +33,7 @@ jQuery(document).ready(function(){
 		})
 		// cacher en partant de l'onglet...
 		.blur(function(){
-			jQuery(this).parent().removeClass('actif');
+			jQuery(this).parent().removeClass('actif').parents('li.actif').removeClass('actif');
 		})
 		// remonter au li parent
 		.parent()
