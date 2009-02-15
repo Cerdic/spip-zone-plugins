@@ -26,7 +26,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'presentation' => "Ce plugin permet de g&eacute;rer les renseignements &agrave; compl&eacute;ter pour les mentions l&eacute;gales<br/>",
 'probleme_base' => "Il y a un probl&egrave;me dans votre base de donn&eacute;es.<br/>",
 
-'lcen' => "En vertu de la loi pour la confiance dans l'&eacute;conomie num&eacute;rique (LCEN) du 21 juin 2004, vous devez compl&eacute;ter les mentions suivantes pour ce site : <br />",
 'lienoff1' => "<a href='http://eva-web.edres74.net' target='_blank'>http://eva-web.edres74.net</a><br/>",
 'lienoff2' => "<a href='' target='_blank' ></a><br/>",
 
@@ -34,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mot_titre' => "<strong>Nom du mot-cl&eacute; : </strong>",
 'mot_descriptif' => "<strong>Descriptif : </strong>",
 
-'pausevitesse' => "<strong>Dur&eacute;e de pause entre chaque articles (1000=1seconde) : </strong>",
+'projeteva' => "<br />jFlipBook est d&eacute;velopp&eacute; dans le cadre du projet EVA-WEB<br />",
 
 'siteoff1' => "<strong>Site officiel eva-web :</strong><br/>",
 'siteoff2' => "<strong></strong><br/>",
@@ -54,6 +53,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'quitter' => "Quitter ce formulaire",
 
+//paramètres
+'largeur' => "Largeur du livre (en pixel) : ",
+'hauteur' => "Hauteur du livre (en pixel) : ",
+'couleur' => "Couleur du fond des pages : ",
+'coins' => "Position des coins r&eacute;actifs : ",
+'scale' => "Redimensionnement des images : "
 
 );
 ?>

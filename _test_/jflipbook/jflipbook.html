@@ -3,7 +3,8 @@
 <BOUCLE_mot(MOTS){id_article} {titre=jflip}>
 <B_jflip>
 <div class="divers">
-<h4>Livre JFlip de [(#TOTAL_BOUCLE) image(s)]</h4>
+<h4><img src="#EVAL{_DIR_PLUGIN_JFLIPBOOK}img_pack/jflip.png" width="53" height="24" alt="Logo de jFlipBook" />
+Livre JFlip de [(#TOTAL_BOUCLE) image(s)]</h4>
 <small>Cliquez dans un des coins de l'image pour tourner les pages...</small> 
 	<ul id="g1">
 		<BOUCLE_jflip (DOCUMENTS) {id_article} {mode=document} {extension==jpg|png|gif} {par num titre} {doublons image}>

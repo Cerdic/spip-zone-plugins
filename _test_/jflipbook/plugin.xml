@@ -1,5 +1,5 @@
 <plugin>
-    <nom>ALBUM JFLIP : Livre d'images avec effet de pages tournantes</nom>
+    <nom>jFlipBook : Livre d'images avec effet de pages tournantes</nom>
     <auteur>Samuel "PoongalOO" [->sam@poongaloo.org]</auteur>
     <version>0.1</version>
     <etat>test</etat>
@@ -9,12 +9,12 @@
     {{Utilisation :}}<br />
     En premier lieu, vous devez ins&eacute;rer la ligne suivante dans votre squelette article 
     (donc dans une boucle ARTICLES) à l'endroit ou vous voulez faire apparaître le livre :
-    <code>[(#CONFIG{plugin}|match{ALBUM_JFLIP}|?{' ',''})&lt;INCLURE{fond=album_jflip}{id_article}&gt;]</code>
+    <code>[(#CONFIG{plugin}|match{JFLIPBOOK}|?{' ',''})&lt;INCLURE{fond=jflipbook}{id_article}&gt;]</code>
     
     Les images doivent être ins&eacute;r&eacute;es dans un article en documents joints en cliquant sur 
     "joindre un document" en bas d'un article dans l'interface priv&eacute;e.<br /><br />
     {{Configuration :}}<br/>
-	 Cliquez [ICI->?exec=cfg&amp;cfg=album_jflip] pour configurer les albums.<br/>
+	 Cliquez [ICI->?exec=cfg&amp;cfg=jflipbook] pour configurer les livres.<br/>
     <br />
     Le module jFlip jQuery a &eacute;t&eacute; cr&eacute;&eacute; par Renato Formato.<br />
     [A voir sur jQuery.info->http://www.jquery.info/spip.php?article78]
@@ -22,14 +22,14 @@
     <lien>http://eva-web.edres74.net</lien>
     
     <icon>img_pack/jflip.png</icon>
-    <prefix>album_jflip</prefix>
+    <prefix>jflipbook</prefix>
 	
 	<necessite id="SPIP" version="[1.9.3;]" />
 	<necessite id="cfg" version="[1.10.3;]" />
 	
-	<bouton id='album_jflip' parent='configuration'>
+	<bouton id='jflipbook' parent='configuration'>
       <icone>img_pack/jflip.png</icone>
-      <titre>Albums jFlip</titre>
+      <titre>jFlipBook</titre>
   </bouton>
     
 	<pipeline>
