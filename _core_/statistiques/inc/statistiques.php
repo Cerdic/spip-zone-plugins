@@ -351,23 +351,23 @@ function statistiques_jour($key, $value, $moyenne, $cumul, $script)
 			$m = date("m", $key);
 			$d = date("d", $key);
 			$script = generer_url_ecrire('calendrier', 
-					"type=semaine&annee=$y&mois=$m&jour=$d");
+					"date=$y-$m-$d",false,true);
 		}
 	
-		$couleur = "couleur_". date("l",$key);
+		$couleur = "c_". substr(date("l",$key),0,3);
 		$res = "<tr class='$couleur'>"
 		  . "<th title='" . date("Y/m/d", $key) . "'><a href='$script'>" . $title . "</a></th>";
 	}
 	else {
 		if (strlen($value))
-			$couleur = "couleur_". date("l")." couleur_today";
+			$couleur = "c_". substr(date("l"),0,3)." c_today";
 		else
-			$couleur = "couleur_recap";
+			$couleur = "c_recap";
 		$res = "<tr class='$couleur'>"
 		  . "<th>" . $key . "</th>";
 	}
-	$res .= "<td class='valeur'>" . $value . "</td>"
-	. "<td class='moyenne'>" . $moyenne . "</td>"
+	$res .= "<td class='val'>" . $value . "</td>"
+	. "<td class='mean'>" . $moyenne . "</td>"
 	//. "<td class='cumul'>" . $cumul . "</td>"
 	." </tr>";
 
