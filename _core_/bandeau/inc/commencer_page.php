@@ -51,52 +51,7 @@ function init_entete($titre='', $id_rubrique=0, $minipres=false) {
 	$head .= "
 	<script type='text/javascript'><!--
 	jQuery(document).ready(function(){
-        // deplier le menu au focus clavier,
-        // enlever ce depliement si passage a la souris,
-        // delai de fermeture.
-        var menuOn = []; // pour timeout du menu...
-        jQuery.fn.menuFocus = function(){
-            // deplier le ul enfant
-            jQuery(this).focus(function(){
-                jQuery('#bando_navigation li ul').removeClass('actif');
-                jQuery(this).parent().find('ul').addClass('actif');
-            })
-            // cacher en partant de l'onglet...
-            .blur(function(){
-                jQuery('#bando_navigation li ul').removeClass('actif');
-            })
-            // le replier si un hover de souris sur un autre onglet,
-            // timer sur la fermeture des onglets pour ne pas que ca aille trop vite
-            .parent().hover(function(){
-                var nom = jQuery(this).attr('id');
-                menuOn.push(nom);
-                jQuery(this).parent().parent().find('ul').removeClass('actif');
-                jQuery(this).find('ul').addClass('actif');
-            }, function(){
-                var me = jQuery(this), nom = me.attr('id');
-                menuOn.shift();
-                setTimeout(function(){
-                    if (jQuery.inArray(nom, menuOn) == -1) {
-                        me.find('ul').removeClass('actif');
-                    }
-                }, 600);
-            })
-            // afficher le menu de l'onglet si un lien enfant devient actif
-            .find('li a').focus(function(){
-                jQuery('#bando_navigation li ul').removeClass('actif');
-                jQuery(this).parent().parent().addClass('actif');
-            });
-            return this;
-        }
-        jQuery('#bando_navigation li >a').menuFocus();
-        jQuery('#bandeau_haut #formRecherche input').hover(function(){
-            jQuery('#bandeau_haut ul.actif').trigger('mouseout');
-        });
-
-	"
-	.
-	repercuter_gadgets($id_rubrique)
-	.'
+	" .	repercuter_gadgets($id_rubrique) . '
 	});
 	// --></script>
 	';

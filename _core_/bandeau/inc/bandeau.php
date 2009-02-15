@@ -192,7 +192,12 @@ function bando_identite(){
 
 }
 
-
+/**
+ * Construire le bandeau des raccourcis rapides
+ *
+ * @param array $boutons
+ * @return string
+ */
 function bando_outils_rapides($boutons){
     $res = "";
 
@@ -210,8 +215,17 @@ function bando_outils_rapides($boutons){
           . "</ul>";
 
 
-    $res .= formulaire_recherche("recherche");
+    $res .= "<div id='recherche'>".formulaire_recherche("recherche")."</div>";
 	return "<div id='bando_outils'><div class='largeur'>\n$res<div class='nettoyeur'></div></div></div>";
+}
+
+function bando_liens_acces_rapide(){
+	$res = "";
+	$res .= "<a href='#conteneur' onclick='return focus_zone(\"#conteneur\")'>Aller au contenu</a> | ";
+	$res .= "<a href='#bando_navigation' onclick='return focus_zone(\"#bando_navigation\")'>Aller &agrave; la navigation</a> | ";
+	$res .= "<a href='#recherche' onclick='return focus_zone(\"#recherche\")'>Aller &agrave; la recherche</a>";
+
+	return "<div id='bando_liens_rapides'><div class='largeur'>\n$res<div class='nettoyeur'></div></div></div>";
 }
 
 /**
@@ -226,6 +240,7 @@ function inc_bandeau_dist($rubrique, $sous_rubrique, $largeur)
 {
     $boutons = definir_barre_boutons();
 	return "<div class='avec_icones' id='bando_haut'>"
+		. bando_liens_acces_rapide()
 		. bando_identite()
         . bando_outils_rapides($boutons)
 		. bando_navigation($boutons)
