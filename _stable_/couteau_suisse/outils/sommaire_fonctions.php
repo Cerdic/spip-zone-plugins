@@ -45,7 +45,7 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 			$lien = preg_replace('/(&nbsp;|\s)*[!?,;.:]+$/', '', $lien); // eviter une ponctuation a la fin
 			$titre = attribut_html(couper($brut, 100));
 			// si la decoupe en page est active...
-			$artpage = (function_exists('decoupe_url') && strlen(_request('artpage')))
+			$artpage = (function_exists('decoupe_url') && (strlen(_request('artpage') || $page>1) ))
 				?decoupe_url($self, $page, $num_pages):$self;
 			$sommaire .= "<li><a $st title=\"$titre\" href=\"{$artpage}#outil_sommaire_$index\">$lien</a>$p</li>";
 		}
@@ -81,7 +81,7 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 			$texte = join(_decoupe_SEPARATEUR, $pages);
 		}
 	} else $sommaire = sommaire_d_une_page($texte, $nbh3);
-	if(!strlen($sommaire) || $nbh3<_sommaire_NB_TITRES_MINI) 
+	if(!strlen($sommaire) || $nbh3<_sommaire_NB_TITRES_MINI)
 		return $sommaire_seul?'':sommaire_nettoyer_raccourcis($texte0);
 
 	// calcul du sommaire
