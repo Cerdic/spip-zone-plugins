@@ -85,6 +85,7 @@ function public_stats() {
 		AND $fw = fopen($tmp, 'w')
 		AND fwrite($fw, serialize($content))) {
 			fclose($fw);
+			if (is_file($fichier)) unlink($fichier);
 			rename($tmp,$fichier);
 		}
 	}
