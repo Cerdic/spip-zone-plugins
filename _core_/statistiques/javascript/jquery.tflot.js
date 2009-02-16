@@ -403,7 +403,7 @@
 			// a ne charger qu'une fois par graph !!!
 			$(graph).find('.legendLabel a').click(function(){
 				tr = $(this).parent().parent();
-				tr.toggleClass('cacher').find('.legendColorBox').toggleClass('cacher');
+				tr.toggleClass('cacher');
 
 				// bof bof tous ces parent() et ca marche qu'avec legendeExterne:true
 				master = tr.parent().parent().parent().parent().parent();
@@ -474,7 +474,6 @@
 		//		
 		function zoomGraphique(graphique) {
 			pid = $(graphique).attr('id').substr(9);		
-			//pid = vignette.parent().parent().attr('id').substr(9);
 						
 			$(graphique).find('.graphResult').bind("plotselected", function (event, ranges) {
 				graph = $(event.target);
