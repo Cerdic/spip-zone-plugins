@@ -385,11 +385,10 @@ function statistiques_jour($key, $value, $moyenne, $script)
 		  . "<th title='" . date("Y/m/d", $key) . "'><a href='$script'>" . $title . "</a></th>";
 	}
 	else {
-
+		// c'est aujourd'hui
 		$couleur = "c_". substr(date("l"),0,3)." c_today";
-
 		$res = "<tr class='$couleur'>"
-		  . "<th title='" . date("Y/m/d", $key) . "'>" . $key . "</th>";
+		  . "<th title='" . date("Y/m/d", time()) . "'>" . $key . "</th>";
 	}
 	
 	$res .= "<td class='val'>" . $value . "</td>"
