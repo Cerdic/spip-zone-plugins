@@ -16,7 +16,7 @@
                     $('#spicasa_mensaje_fix').hide();                    $('#spicasa_resultados').hide()
                     $('#spicasa_mensaje').load("../?page=spicasa_add&id_article=#ENV{id_article}&id_image="+id_image+"&id_album="+id_album+"&user="+user,                        function() {                            $('#spicasa_loading').hide();
                             $('#spicasa_mensaje').fadeIn('slow').animate({opacity: 1.0}, 3000).fadeOut('slow');                            $('#spicasa_resultados').show();
-                            $('#spicasa_mensaje_fix').show();                            $("#documents").load("?exec=spicasa_documents&id_article=#ENV{id_article}");                        });                }
+                            //$('#spicasa_mensaje_fix').show();                            $("#documents").load("?exec=spicasa_documents&id_article=#ENV{id_article}");                        });                }
                 
                 function spicasa_show_album(id_album, user) {
                     album_list = $('#spicasa_resultados').html();                    $('#spicasa_loading').show();                    $('#spicasa_resultados').hide().load("../?page=spicasa_show_album&id_article=#ENV{id_article}&id_album="+id_album+"&user="+user,                        function() {                            $('#spicasa_loading').hide();

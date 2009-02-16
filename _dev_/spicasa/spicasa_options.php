@@ -1,5 +1,5 @@
 <?php
-
+function spicasa_init(){
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 define('_DIR_PLUGIN_SPICASA',(_DIR_PLUGINS.end($p))."/");
 
@@ -9,11 +9,12 @@ ini_set('include_path',
 require_once 'Picasa.php';
 
 include_spip('inc/distant'); // pour 'copie_locale'
+}
 
 
 function spicasa_resultados($query, $id_article, $debut=1, $max_results=250, $items_page=50){
         /*Return images for a general query*/
-    
+        spicasa_init();    
 
 		$pic = new Picasa();
 		$query = str_replace(" ", "+", $query);
@@ -57,7 +58,7 @@ function spicasa_resultados($query, $id_article, $debut=1, $max_results=250, $it
 
 function spicasa_add_photo($id_image, $id_article, $id_album, $user){
     /* This function download the given image and attach it to the articule in course.*/
-    
+    spicasa_init();    
 	$pic = new Picasa();
 	$image = $pic->getImageById($user, $id_album, $id_image, null, 800);
 	foreach($image->getContentUrlMap() as $value) $url = $value; //just one
@@ -119,6 +120,7 @@ function spicasa_add_photo($id_image, $id_article, $id_album, $user){
 }
 
 function spicasa_login($email, $pass){
+    spicasa_init();
     /* function to login at Picasa Web album. If it's ok, show the list of user's albums */
     $pic = new Picasa();
 
@@ -164,6 +166,7 @@ function spicasa_lists_albums($email, $pic){
 
 
 function spicasa_add_album($id_album, $user, $id_article){
+         spicasa_init();
     	 $pic = new Picasa();
 	     $album = $pic->getAlbumById($user, $id_album, null, null, null, null, null, 800);
          foreach($album->getImages() as $img){    
@@ -177,6 +180,7 @@ function spicasa_add_album($id_album, $user, $id_article){
 
 
 function spicasa_show_album($id_album, $user, $id_article){
+     spicasa_init();
 	 $pic = new Picasa();
      $album = $pic->getAlbumById($user, $id_album, null, null, null, null, null, 800);
      foreach($album->getImages() as $img){    
