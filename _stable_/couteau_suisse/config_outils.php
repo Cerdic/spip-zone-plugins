@@ -966,6 +966,12 @@ add_outil( array(
 )); 
 
 add_variable( array(
+	'nom' => 'bloc_h4',
+	'format' => _format_CHAINE,
+	'defaut' => 'h4',
+	'code:strlen(%s)' => "define('_BLOC_TITRE_H', %s);\n",
+));
+add_variable( array(
 	'nom' => 'bloc_unique',
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
@@ -976,6 +982,7 @@ add_outil( array(
 	'id' => 'blocs',
 	'categorie'	=> 'typo-racc',
 	'contrib' => 2583,
+	'code:options' => "%%bloc_h4%%",
 	// fonction blocs_init() codee dans blocs.js : executee lors du chargement de la page et a chaque hit ajax
 	'code:js' => "var blocs_replier_tout = %%bloc_unique%%;",
 	'code:jq_init' => 'blocs_init.apply(this);',

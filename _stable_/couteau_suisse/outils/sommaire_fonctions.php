@@ -30,9 +30,11 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 		$ancre = " id=\"outil_sommaire_$index\">";
 		if (($pos2 = strpos($texte, $regs[0][$i], $pos))!==false) {
 			$titre = preg_replace(',^<p[^>]*>(.*)</p>$,Umsi', '\\1', trim($regs[2][$i]));
-			$texte = substr($texte, 0, $pos2) . $regs[1][$i] 
-				. $ancre . $haut . $titre
-				. substr($texte, $pos2 + strlen($regs[1][$i])+1 + strlen($regs[2][$i]));
+			// ancre 'haut', sauf si les blocs depliables utilisent h3...
+			if (strpos($regs[0][$i], 'blocs_titre')===false)
+				$texte = substr($texte, 0, $pos2) . $regs[1][$i]
+					. $ancre . $haut . $titre
+					. substr($texte, $pos2 + strlen($regs[1][$i])+1 + strlen($regs[2][$i]));
 			$pos = $pos2 + strlen($ancre) + strlen($regs[0][$i]);
 			// tout le texte, sans les notes
 			$brut = preg_replace(',\[<a href=["\']#nb.*?</a>\],','', echappe_retour($regs[2][$i],'CS'));
