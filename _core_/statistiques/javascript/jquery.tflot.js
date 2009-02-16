@@ -123,6 +123,9 @@
 				if (options.grille.weekend) {
 					values.options.grid = { markings: weekendAreas }
 				}				
+				if (options.grille.years) {
+					values.options.grid = { markings: yearsArea }
+				}				
 			}
 
 			// en cas de moyenne glissante, on la calcule
@@ -600,26 +603,57 @@
 
 		
 		
-	// Pris sur le site de Flot (exemple de visites)
+	// Adapte du site de Flot (exemple de visites)
     // helper for returning the weekends in a period
     function weekendAreas(axes) {
         var markings = [];
-        var d = new Date(axes.xaxis.min);
+		var heure = 60 * 60 * 1000;
+		var jour = 24 * heure;
+        	
+		// les week ends
         // go to the first Saturday
+		var d = new Date(axes.xaxis.min);
         d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 1) % 7))
         d.setUTCSeconds(0);
         d.setUTCMinutes(0);
         d.setUTCHours(0);
-        var i = d.getTime();
         do {
-            // when we don't set yaxis the rectangle automatically
-            // extends to infinity upwards and downwards
-            markings.push({ xaxis: { from: i, to: i + 2 * 24 * 60 * 60 * 1000 } });
-            i += 7 * 24 * 60 * 60 * 1000;
-        } while (i < axes.xaxis.max);
+            markings.push({ xaxis: { from: i, to: i + 2*jour }, color: '#f6f6f6' });
+            i += 7*jour;
+        } while (i < axes.xaxis.max);	
+
+		
+		// les mois et les ans...
+		$.each(yearsArea(axes), function(i,j){
+			markings.push(j);
+		});
 
         return markings;
     }
+	
+	// une grille pour afficher les mois et les ans...
+	function yearsArea(axes){
+    	var markings = [];
+		var heure = 60 * 60 * 1000;
+		var jour = 24 * heure;
+
+		// les mois et les ans...
+		d = new Date(axes.xaxis.min);     
+		y = d.getUTCFullYear();
+		m = d.getUTCMonth();
+		if (++m == 12) {m=0; ++y;}
+		d = new Date(Date.UTC(y,m,1,0,0,0));
+		do {
+			i = d.getTime();
+			if (m == 0) {couleur = '#CA5F18';}
+			else {couleur = '#D7C2AF'; }
+			markings.push({ xaxis: { from: i - jour, to: i}, color: couleur });
+			if (++m == 12) {m=0; ++y;}
+			d = new Date(Date.UTC(y,m,1,0,0,0));
+		} while (d.getTime() < axes.xaxis.max);
+		
+        return markings;		
+	}
 	
 	
 	// Pris sur le site de Flot (exemple d'interactions)
