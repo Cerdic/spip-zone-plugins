@@ -969,7 +969,7 @@ add_variable( array(
 	'nom' => 'bloc_h4',
 	'format' => _format_CHAINE,
 	'defaut' => 'h4',
-	'code:strlen(%s)' => "define('_BLOC_TITRE_H', %s);\n",
+	'code:preg_match(\',^h\d$,i\', trim(%s))' => "define('_BLOC_TITRE_H', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'bloc_unique',
