@@ -71,10 +71,18 @@ function definir_barre_boutons($icones = true) {
  */
 // http://doc.spip.org/@bandeau_creer_url
 function bandeau_creer_url($url, $args=""){
-	if (preg_match(',[\/\?],',$url))
-		return $url;
-	else
-		return generer_url_ecrire($url,$args);
+	if (!preg_match(',[\/\?],',$url)) {
+		$url = generer_url_ecrire($url,$args,true);
+		// recuperer les parametres du contexte demande par l'url sous la forme
+		// &truc=@machin@
+		// @machin@ etant remplace par _request('machin')
+		while (preg_match(",[&?]([a-z_]+)=@([a-z_]+)@,i",$url,$matches)){
+			$val = _request($matches[2]);
+			$url = parametre_url($url,$matches[1],$val?$val:'','&');
+		}
+		$url = str_replace('&','&amp;',$url);
+	}
+	return $url;
 }
 
 /**
