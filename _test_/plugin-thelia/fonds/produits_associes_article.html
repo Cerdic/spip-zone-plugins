@@ -112,12 +112,12 @@
 		$('.produits-articles li ul').hide();
 		<BOUCLE_associationsrubriques(RUBRIQUESTHELIA_ARTICLES){id_article}>
 			$('#rubriquethelia-#ID_RUBRIQUETHELIA').attr('checked', 'checked');
-			$('#rubriquethelia-#ID_RUBRIQUETHELIA').parents('li+ul').show().prev().html('[-]');
+			$('#rubriquethelia-#ID_RUBRIQUETHELIA').parents('ul').show().prev().html('[-]');
 		</BOUCLE_associationsrubriques>
 	
 		<BOUCLE_associationsarticles(PRODUITS_ARTICLES){id_article}>
 			$('#produit-#ID_PRODUIT').attr('checked', 'checked');
-			$('#produit-#ID_PRODUIT').parents('li+ul').show().prev().html('[-]');
+			$('#produit-#ID_PRODUIT').parents('ul').show().prev().html('[-]');
 		</BOUCLE_associationsarticles>
 		
 		$('.produits-articles li span').toggle(function(){
