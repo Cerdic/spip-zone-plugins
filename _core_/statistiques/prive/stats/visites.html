@@ -8,10 +8,14 @@
 
 		// copier le titre des tableaux
 		titre = $("#visites_quotidiennes caption").text();
-		$("#visites_quotidiennes").before("<h3 class='caption'>" + titre + "</h3>");
+		$("#visites_quotidiennes")
+			.before("<h3 class='caption'>" + titre + "</h3>")
+			.wrap("<div class='statistiques_visites_quotidiennes statistiques_visites'></div>");
 		
 		titre = $("#visites_mensuelles caption").text();
-		$("#visites_mensuelles").before("<h3 class='caption'>" + titre + "</h3>");
+		$("#visites_mensuelles")
+			.before("<h3 class='caption'>" + titre + "</h3>")
+			.wrap("<div class='statistiques_visites_mensuelles statistiques_visites'></div>");;
 		
 		// mettre les visites avec un fond colore pour le graphique
 		$("#visites_mensuelles thead th:eq(1), #visites_quotidiennes thead th:eq(1)").addClass('flotFill');
@@ -19,9 +23,10 @@
 		params = {
 			legendeExterne:true,
 			legendeActions:true,
-			width:'360px',
+			width:'480px',
 			height:'200px',
 			modeDate:true,
+			zoom:true,
 			parse:{
 				axeOnTitle:true,
 				defaultSerie:{
@@ -31,6 +36,7 @@
 			},
 			flot:{
 				xaxis:{
+					labelWidth:30,
 					monthNames: [
 						'[(#VAL{2000-01-01}|nom_mois)]',
 						'[(#VAL{2000-02-01}|nom_mois)]',
@@ -47,7 +53,6 @@
 					]
 				}
 			},
-			vignette:{show:true, width:'100px', height:'60px'},
 			infobulle:{show:true}			
 		}
 		

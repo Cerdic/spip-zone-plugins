@@ -1,7 +1,7 @@
 /**
  * Librairie tFlot pour jQuery et jQuery.flot
  * Licence GNU/GPL - Matthieu Marcillaud
- * Version 1.1.0
+ * Version 1.2.0
  */
 
 (function($){
@@ -47,9 +47,9 @@
 			},
 			grille:{weekend:false},
 			infobulle:{show:false},
+			zoom:false,
 			vignette:{
-				show:false, 
-				zoom:true,
+				show:false,
 				width:'160px',
 				height:'100px'
 			},
@@ -155,9 +155,10 @@
 					+ "' style='width:" + options.vignette.width + ";height:" 
 					+ options.vignette.height + ";'></div>").appendTo(gInfo);
 				creerVignette($('#graphique'+idGraph), values.series, values.options, options.vignette);
-				if (options.vignette.zoom) {
-					zoomVignette($('#graphique'+idGraph));
-				}
+			}
+			// autoriser les zoom
+			if (options.zoom) {
+				zoomGraphique($('#graphique'+idGraph));
 			}
 
 			// stocker les valeurs
@@ -402,7 +403,7 @@
 			// a ne charger qu'une fois par graph !!!
 			$(graph).find('.legendLabel a').click(function(){
 				tr = $(this).parent().parent();
-				tr.toggleClass('cacher').find('.legendColorBox div').toggle();
+				tr.toggleClass('cacher').find('.legendColorBox').toggleClass('cacher');
 
 				// bof bof tous ces parent() et ca marche qu'avec legendeExterne:true
 				master = tr.parent().parent().parent().parent().parent();
@@ -468,11 +469,12 @@
 		
 		
 		//
-		// Permettre le zoom sur une miniature
+		// Permettre le zoom sur le graphique
+		// et sur la miniature 		
 		//		
-		function zoomVignette(graphique) {	
-			vignette = $(graphique).find('.graphVignette');
-			pid = vignette.parent().parent().attr('id').substr(9);
+		function zoomGraphique(graphique) {
+			pid = $(graphique).attr('id').substr(9);		
+			//pid = vignette.parent().parent().attr('id').substr(9);
 						
 			$(graphique).find('.graphResult').bind("plotselected", function (event, ranges) {
 				graph = $(event.target);
@@ -493,8 +495,11 @@
 					}));
 				
 				// don't fire event on the overview to prevent eternal loop
-				vignettes[pid].setSelection(ranges, true);
+				if (vignettes[pid] !== undefined) {
+					vignettes[pid].setSelection(ranges, true);
+				}
 			});
+			
 			// raz sur double clic
 			$(graphique).find('.graphResult').dblclick(function (event) {
 				var graphique;
@@ -513,28 +518,35 @@
 					
 			});	
 			
-			// zoom depuis la miniature			
-			vignette.bind("plotselected", function (event, ranges) {
-				graph = $(event.target);
-				pid = graph.parent().parent().attr('id').substr(9);	
-				vignettesSelection[pid] = ranges;			
-				plots[pid].setSelection(ranges);
-			});
-			// raz depuis la miniature sur double clic
-			vignette.dblclick(function (event) {
-				var graphique;
-				graphique = $(event.target).parent().parent().parent();
-				pid = graphique.attr('id').substr(9);	
-				vignettesSelection[pid] = undefined;							
+			
+			// si une vignette est presente
+			vignette = $(graphique).find('.graphVignette');
+			
+			if (vignette.length) {
 				
-				plots[pid] = $.plot(graphique.find('.graphResult'), 
-					collectionsActives[pid].values.series,
-					$.extend(true, collections[pid].values.options, {
-						xaxis: { min: null, max: null },
-					  	yaxis: { min: null, max: null }
-					}));
+				// zoom depuis la miniature			
+				vignette.bind("plotselected", function (event, ranges) {
+					graph = $(event.target);
+					pid = graph.parent().parent().attr('id').substr(9);	
+					vignettesSelection[pid] = ranges;			
+					plots[pid].setSelection(ranges);
+				});
+				
+				// raz depuis la miniature sur double clic
+				vignette.dblclick(function (event) {
+					var graphique;
+					graphique = $(event.target).parent().parent().parent();
+					pid = graphique.attr('id').substr(9);	
+					vignettesSelection[pid] = undefined;							
 					
-			});		
+					plots[pid] = $.plot(graphique.find('.graphResult'), 
+						collectionsActives[pid].values.series,
+						$.extend(true, collections[pid].values.options, {
+							xaxis: { min: null, max: null },
+							yaxis: { min: null, max: null }
+						}));		
+				});	
+			}	
 			
 		}	
 	
