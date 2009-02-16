@@ -14,6 +14,22 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/boutons');
 
+function definir_barre_contexte(){
+	$contexte = $_GET;
+	if (!isset($contexte['id_rubrique'])){
+		foreach(array('article','site','breve') as $type) {
+			$_id = id_table_objet($type);
+			if ($id = _request($_id,$contexte)){
+				$table = table_objet_sql($type);
+				$id_rubrique = sql_getfetsel('id_rubrique',$table,"$_id=".intval($id));
+				$contexte['id_rubrique'] = $id_rubrique;
+				continue;
+			}
+		}
+	}
+	return $contexte;
+}
+
 
 /**
  * definir la liste des boutons du haut et de ses sous-menus
@@ -22,7 +38,7 @@ include_spip('inc/boutons');
  * puissent y mettre leur grain de sel
  */
 // http://doc.spip.org/@definir_barre_boutons
-function definir_barre_boutons($icones = true) {
+function definir_barre_boutons($contexte=array(),$icones = true) {
     include_spip('inc/autoriser');
 	$boutons_admin=array();
 
@@ -32,7 +48,7 @@ function definir_barre_boutons($icones = true) {
 	  AND is_array($liste_boutons_plugins = boutons_plugins())){
 		foreach($liste_boutons_plugins as $id => $infos){
 			// les boutons principaux ne sont pas soumis a autorisation
-			if (!($parent = $infos['parent']) OR autoriser('bouton',$id)){
+			if (!($parent = $infos['parent']) OR autoriser('bouton',$id,0,NULL,array('contexte'=>$contexte))){
 				if ($parent AND isset($boutons_admin[$parent]))
 					$boutons_admin[$parent]->sousmenu[$id]= new Bouton(
 					  ($icones AND $infos['icone'])?find_in_path($infos['icone']):'',  // icone
@@ -70,14 +86,14 @@ function definir_barre_boutons($icones = true) {
  * @return string
  */
 // http://doc.spip.org/@bandeau_creer_url
-function bandeau_creer_url($url, $args=""){
+function bandeau_creer_url($url, $args="", $contexte=null){
 	if (!preg_match(',[\/\?],',$url)) {
 		$url = generer_url_ecrire($url,$args,true);
 		// recuperer les parametres du contexte demande par l'url sous la forme
 		// &truc=@machin@
 		// @machin@ etant remplace par _request('machin')
 		while (preg_match(",[&?]([a-z_]+)=@([a-z_]+)@,i",$url,$matches)){
-			$val = _request($matches[2]);
+			$val = _request($matches[2],$contexte);
 			$url = parametre_url($url,$matches[1],$val?$val:'','&');
 		}
 		$url = str_replace('&','&amp;',$url);
@@ -92,28 +108,28 @@ function bandeau_creer_url($url, $args=""){
  * @param string $class
  * @return string
  */
-function bando_lister_sous_menu($sousmenu,$class="",$image=false){
+function bando_lister_sous_menu($sousmenu,$contexte=null,$class="",$image=false){
 	$class = $class ? " class='$class'":"";
 	$sous = "";
 	if (is_array($sousmenu)){
 		$sous = "";		 
 		foreach($sousmenu as $souspage => $sousdetail){
-			$url = bandeau_creer_url($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg);
-            if (!$image){
-                $sous .= "<li$class>"
-             . "<a href='$url' id='bando2_$souspage'>"
-             . _T($sousdetail->libelle)
-             . "</a>"
-             . "</li>";
-            }
-            else {
-                //$image = "<img src='".$sousdetail->icone."' width='".largeur($sousdetail->icone)."' height='".hauteur($sousdetail->icone)."' alt='".attribut_html(_T($sousdetail->libelle))."' />";
-                $sous .= "<li$class>"
-             . "<a href='$url' id='bando2_$souspage' title='".attribut_html(_T($sousdetail->libelle))."'>"
-             . "<span>"._T($sousdetail->libelle)."</span>"
-             . "</a>"
-             . "</li>";
-            }
+			$url = bandeau_creer_url($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg, $contexte);
+			if (!$image){
+					$sous .= "<li$class>"
+			 . "<a href='$url' id='bando2_$souspage'>"
+			 . _T($sousdetail->libelle)
+			 . "</a>"
+			 . "</li>";
+			}
+			else {
+					//$image = "<img src='".$sousdetail->icone."' width='".largeur($sousdetail->icone)."' height='".hauteur($sousdetail->icone)."' alt='".attribut_html(_T($sousdetail->libelle))."' />";
+					$sous .= "<li$class>"
+			 . "<a href='$url' id='bando2_$souspage' title='".attribut_html(_T($sousdetail->libelle))."'>"
+			 . "<span>"._T($sousdetail->libelle)."</span>"
+			 . "</a>"
+			 . "</li>";
+			}
 		}
 	}
 	return $sous;
@@ -126,7 +142,7 @@ function bando_lister_sous_menu($sousmenu,$class="",$image=false){
  * @param array $boutons
  * @return string
  */
-function bando_navigation($boutons)
+function bando_navigation($boutons, $contexte = array())
 {
 	$res = "";
 	
@@ -140,14 +156,14 @@ function bando_navigation($boutons)
             if (
              ($detail->libelle AND is_array($detail->sousmenu) AND count($detail->sousmenu))
              OR ($detail->libelle AND $detail->url AND $detail->url!='navigation')) {
-                $url = bandeau_creer_url($detail->url?$detail->url:$page, $detail->urlArg);
+                $url = bandeau_creer_url($detail->url?$detail->url:$page, $detail->urlArg,$contexte);
                 $res .= "<li$first>"
                  . "<a href='$url' id='bando1_$page'>"
                  . _T($detail->libelle)
                  . "</a>";
             }
 
-            $sous = bando_lister_sous_menu($detail->sousmenu);
+            $sous = bando_lister_sous_menu($detail->sousmenu, $contexte);
             $res .= $sous ? "<ul>$sous</ul>":"";
 
             $res .= "</li>";
@@ -206,7 +222,7 @@ function bando_identite(){
  * @param array $boutons
  * @return string
  */
-function bando_outils_rapides($boutons){
+function bando_outils_rapides($boutons, $contexte = array()){
     $res = "";
 
 
@@ -219,7 +235,7 @@ function bando_outils_rapides($boutons){
     // la barre de raccourcis rapides
     if (isset($boutons['outils_rapides']))
         $res .= "<ul class='creer'>"
-          . bando_lister_sous_menu($boutons['outils_rapides']->sousmenu,'bouton',true)
+          . bando_lister_sous_menu($boutons['outils_rapides']->sousmenu,$contexte,'bouton',true)
           . "</ul>";
 
 
@@ -246,12 +262,13 @@ function bando_liens_acces_rapide(){
  */
 function inc_bandeau_dist($rubrique, $sous_rubrique, $largeur)
 {
-    $boutons = definir_barre_boutons(false);
+	$contexte = definir_barre_contexte();
+	$boutons = definir_barre_boutons($contexte, false);
 	return "<div class='avec_icones' id='bando_haut'>"
 		. bando_liens_acces_rapide()
 		. bando_identite()
-        . bando_outils_rapides($boutons)
-		. bando_navigation($boutons)
+		. bando_outils_rapides($boutons,$contexte)
+		. bando_navigation($boutons,$contexte)
 		. "</div>"
 		;
 	

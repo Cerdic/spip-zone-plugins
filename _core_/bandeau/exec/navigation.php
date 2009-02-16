@@ -22,7 +22,8 @@ function exec_navigation_dist()
 	$menu = _request('menu');
 	include_spip('inc/bandeau');
 	
-	$boutons = definir_barre_boutons();
+	$contexte = definir_barre_contexte();
+	$boutons = definir_barre_boutons($contexte);
 	if (!isset($boutons[$menu])){
 		include_spip('inc/minipres');
 		echo minipres();		
@@ -42,7 +43,7 @@ function exec_navigation_dist()
 	echo debut_droite('', true);
 	echo gros_titre($titre,'',false);
 
-	$sous = bando_lister_sous_menu($boutons[$menu]->sousmenu,"item");
+	$sous = bando_lister_sous_menu($boutons[$menu]->sousmenu,$contexte,"item");
 	
 	$res = $sous ? "<ul class='liste_items'>$sous</ul>":"";
 

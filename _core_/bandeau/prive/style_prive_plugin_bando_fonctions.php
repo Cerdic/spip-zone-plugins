@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function bando_images_background(){
 	include_spip('inc/bandeau');
-	$boutons = definir_barre_boutons();
+	$boutons = definir_barre_boutons(definir_barre_contexte());
 	
 	$res = "";
 	foreach($boutons as $page => $detail){

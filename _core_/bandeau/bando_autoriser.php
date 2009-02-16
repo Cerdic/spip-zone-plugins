@@ -122,5 +122,16 @@ function autoriser_admin_plugin_bouton_dist($faire, $type='', $id=0, $qui = NULL
 	return autoriser('configurer', 'admin_plugin');
 }
 
+/**
+ * Outils rapides
+ */
+
+function autoriser_rubrique_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
+	return autoriser('creerrubriquedans','rubrique',_request('id_rubrique',isset($opt['contexte'])?$opt['contexte']:null));
+}
+
+function autoriser_article_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
+	return autoriser('creerarticledans','rubrique',_request('id_rubrique',isset($opt['contexte'])?$opt['contexte']:null));
+}
 
 ?>

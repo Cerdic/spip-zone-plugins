@@ -200,7 +200,7 @@
 		<icone>images/v1/article-add-16.png</icone>
 		<titre>icone_ecrire_article</titre>
 		<url>articles_edit</url>
-		<args>new=oui</args>
+		<args>new=oui&id_rubrique=@id_rubrique@</args>
 	</bouton>
 	<bouton id='auteur_creer' parent="outils_rapides">
 		<icone>images/v1/auteur-add-16.png</icone>
@@ -218,13 +218,13 @@
 		<icone>images/v1/site-add-16.png</icone>
 		<titre>icone_referencer_nouveau_site</titre>
 		<url>sites_edit</url>
-		<args>new=oui</args>
+		<args>new=oui&id_rubrique=@id_rubrique@</args>
 	</bouton>
 	<bouton id='breve_creer' parent="outils_rapides">
 		<icone>images/v1/breve-add-16.png</icone>
 		<titre>icone_nouvelle_breve</titre>
 		<url>breves_edit</url>
-		<args>new=oui</args>
+		<args>new=oui&id_rubrique=@id_rubrique@</args>
 	</bouton>
 
 </plugin>
