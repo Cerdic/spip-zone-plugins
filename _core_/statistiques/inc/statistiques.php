@@ -314,10 +314,10 @@ function stat_log1($log, $date_today, $interval, $script) {
 			$ecart = $key-$date_prec-$interval;
 			for ($i=$interval; $i <= $ecart; $i+=$interval){
 				moyenne_glissante_jour($value);
-				$res .= statistiques_jour($date_prec+$i, 0, moyenne_glissante_jour(), $cumul, $script);
+				$res .= statistiques_jour($date_prec+$i, 0, moyenne_glissante_jour(), $script);
 				if (date('m',$date_prec+$i+$interval)!=date('m',$date_prec+$i)){
 					moyenne_glissante_mois($cumul);				
-					$res_mois .= statistiques_jour(affdate_mois_annee(date('Y-m-d',$date_prec+$i)), $cumul, moyenne_glissante_mois(), "", $script);
+					$res_mois .= statistiques_mois($date_prec+$i, $cumul, moyenne_glissante_mois(), $script);
 					$cumul = 0;
 				}
 			}
@@ -326,10 +326,10 @@ function stat_log1($log, $date_today, $interval, $script) {
 		$cumul += $value;
 		$moyenne = moyenne_glissante_jour();
 
-		$res .= statistiques_jour($key, $value, $moyenne, $cumul, $script);
+		$res .= statistiques_jour($key, $value, $moyenne, $script);
 		if (date('m',$key+$interval)!=date('m',$key)){
 			moyenne_glissante_mois($cumul);			
-			$res_mois .= statistiques_jour(affdate_mois_annee(date('Y-m-d',$key)), $cumul, moyenne_glissante_mois(), "", $script);
+			$res_mois .= statistiques_mois($key, $cumul, moyenne_glissante_mois(), $script);
 			$cumul = 0;
 		}
 
@@ -361,12 +361,12 @@ function statistiques_prevision($id_article, $moyenne, $val_popularite, $visites
 	$prevision = (1 - (date("H")*60 + date("i"))/(24*60)) * $val_popularite;
 	
 	$prevision = (round($prevision,0)+$visites_today);
-	return statistiques_jour(_T('info_aujourdhui'),"$visites_today<em>(<span>$prevision</span>)</em>","","","");
+	return statistiques_jour(_T('info_aujourdhui'),"$visites_today<em>(<span>$prevision</span>)</em>","","");
 }
 
 // Dimanche en couleur foncee
 // http://doc.spip.org/@statistiques_jour
-function statistiques_jour($key, $value, $moyenne, $cumul, $script)
+function statistiques_jour($key, $value, $moyenne, $script)
 {
 	if (is_int($key)){
 		$ce_jour=date("Y-m-d H:i:s", $key);
@@ -376,11 +376,8 @@ function statistiques_jour($key, $value, $moyenne, $cumul, $script)
 		if ($script)
 			$script .= "&amp;date=$key";
 		else  {
-			$y = date("Y", $key);
-			$m = date("m", $key);
-			$d = date("d", $key);
 			$script = generer_url_ecrire('calendrier', 
-					"date=$y-$m-$d",false,true);
+					"date=" . date("Y-m-d", $key), false, true);
 		}
 	
 		$couleur = "c_". substr(date("l",$key),0,3);
@@ -388,21 +385,30 @@ function statistiques_jour($key, $value, $moyenne, $cumul, $script)
 		  . "<th title='" . date("Y/m/d", $key) . "'><a href='$script'>" . $title . "</a></th>";
 	}
 	else {
-		if (strlen($value))
-			$couleur = "c_". substr(date("l"),0,3)." c_today";
-		else
-			$couleur = "c_recap";
+
+		$couleur = "c_". substr(date("l"),0,3)." c_today";
+
 		$res = "<tr class='$couleur'>"
-		  . "<th>" . $key . "</th>";
+		  . "<th title='" . date("Y/m/d", $key) . "'>" . $key . "</th>";
 	}
+	
 	$res .= "<td class='val'>" . $value . "</td>"
 	. "<td class='mean'>" . $moyenne . "</td>"
-	//. "<td class='cumul'>" . $cumul . "</td>"
 	." </tr>";
-
 
 	return $res;
 }
+
+function statistiques_mois($key, $value, $moyenne, $script) {
+	$res = "<tr>"
+		. "<th title='" . date("Y/m/01", $key) . "'>" . affdate_mois_annee(date('Y-m-d',$key)) . "</th>"
+		. "<td class='val'>" . $value . "</td>"
+		. "<td class='mean'>" . $moyenne . "</td>"
+		. "</tr>";
+		
+	return $res;	  
+}
+
 
 // http://doc.spip.org/@statistiques_moyenne
 function statistiques_moyenne($tab)

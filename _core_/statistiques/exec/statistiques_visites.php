@@ -129,7 +129,9 @@ function exec_statistiques_visites_args($id_article, $duree, $interval, $type, $
 	
 	if ($log)
 	  $res = statistiques_tous($log, $id_article, $table, $where, $order, $serveur, $duree, $interval, $total_absolu, $val_popularite, $liste, $classement);
-	  
+ 
+  // installer les js
+  echo recuperer_fond('prive/stats/visites');
   echo cadre_stat($res, $table, $id_article);
 
 	if ($id_article) {
