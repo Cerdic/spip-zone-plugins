@@ -28,7 +28,7 @@
 		<div id="contenu">
 
 			  
-			<INCLURE{fond=inc/inc-rubrique_thelia}>
+			<INCLURE{fond=inc/inc-rubrique_thelia}{env}>
 		  	
 		</div>[(#REM) fin contenu ]
 
@@ -36,7 +36,7 @@
 		<div id="navigation">
 
 			[(#REM) Menu de navigation par rubriques ]
-			<INCLURE{fond=inc-rubriques}{id_rubrique_thelia=THELIA-RUBRIQUE_ID}>
+			<INCLURE{fond=inc-rubriques}{id_rubrique_thelia=THELIA-RUBRIQUE_ID}{env}>
 
 			[(#REM) Menu de navigation mots-cles ]
 			<B_mots>
