@@ -7,7 +7,7 @@
 				</div>
 
 			
-				[(#REM) Détail du produit ]
+				[(#REM) DÃ©tail du produit ]
 
 				<div>
 				<THELIA_img type="IMAGE" num="1" produit="THELIA-ID" largeur="300">
@@ -107,11 +107,11 @@
 				
 				
 							
-			[(#REM) Retour à la page précédente ]	
+			[(#REM) Retour ï¿½ la page prï¿½cï¿½dente ]	
 
 				<div id="pages">
 				<THELIA_PAGEPREC type="PAGE" rubrique="THELIA-RUBRIQUE_ID" caracteristique="THELIA-CARACTERISTIQUE_ID" caracdisp="THELIA-CARACTERISTIQUE_DISP" num="9" typeaff="0">
-				<a href="#URL_PAGE{rubrique_thelia,id_rubrique=THELIA-RUBRIQUE_ID&page_thelia=THELIA-PAGE_PREC}" class="LIEN_pages"><:spipthelia:page_precedente:></a>
+				<a href="#URL_PAGE{rubrique_thelia,page_thelia=THELIA-PAGE_PREC&amp;id_rubrique=#ENV{id_rubrique}}" class="LIEN_pages"><:spipthelia:page_precedente:></a>
 				</THELIA_PAGEPREC>
 				</div>
 
