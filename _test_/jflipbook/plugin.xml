@@ -5,13 +5,13 @@
     <etat>test</etat>
     <description>
     Ce plugin transforme les images d'un article en un petit livre cliquable dans les coins 
-    où une transition donne l'effet de tourner une page.<br /><br />
+    o&ugrave; une transition donne l'effet de tourner une page.<br /><br />
     {{Utilisation :}}<br />
     En premier lieu, vous devez ins&eacute;rer la ligne suivante dans votre squelette article 
-    (donc dans une boucle ARTICLES) à l'endroit ou vous voulez faire apparaître le livre :
+    (donc dans une boucle ARTICLES) &agrave; l'endroit ou vous voulez faire appara&icirc;tre le livre :
     <code>[(#CONFIG{plugin}|match{JFLIPBOOK}|?{' ',''})&lt;INCLURE{fond=jflipbook}{id_article}&gt;]</code>
     
-    Les images doivent être ins&eacute;r&eacute;es dans un article en documents joints en cliquant sur 
+    Les images doivent &ecirc;tre ins&eacute;r&eacute;es dans un article en documents joints en cliquant sur 
     "joindre un document" en bas d'un article dans l'interface priv&eacute;e.<br /><br />
     {{Configuration :}}<br/>
 	 Cliquez [ICI->?exec=cfg&amp;cfg=jflipbook] pour configurer les livres.<br/>
@@ -34,7 +34,7 @@
     
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>head.php</inclure>
+		<inclure>jflipbook_head.php</inclure>
 	</pipeline>
 	  
 </plugin>
