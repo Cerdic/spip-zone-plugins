@@ -336,22 +336,21 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$ret .= "</table>";
 	$ret .= $toolbox;
 	if (!$crayons && test_espace_prive() && !$forum) {
-	$ret .= '<script type="text/javascript"><!--';
-	$ret .= '
-$(document).ready(function(){';
+	$ret .= '<script type="text/javascript"><!-- 
+	';
 	if (test_espace_prive()) {
-		$ret .= '
+		$ret .= '$(document).ready(function(){
 		$('.$champ.').after("<div id=\"article_preview'.$num_barre.'\"></div>");
 		$('.$champ.').before("<div id=\"article_stats'.$num_barre.'\"></div>");
 		';
-		$ret .= '$.ajaxSetup({timeout: 5000});'; // a partir de jquery 1.1.4, donc de SPIP 1.9.3
 		$ret .= '
 		$('.$champ.').keypress(function() { MajPreview('.$num_barre.',"'.$champ.'") });
 		$('.$champ.').select(function() { MajStats('.$num_barre.',"'.$champ.'") });
-		$('.$champ.').click(function() { MajStats('.$num_barre.',"'.$champ.'") });';
+		$('.$champ.').click(function() { MajStats('.$num_barre.',"'.$champ.'") });
+		});';
 	}
-	$ret .= '});
-//--></script>';
+	$ret .= '
+	// --></script>';
 	} else {
 		$ret .= ($num_barre > 1)  ? '' : 
 			"<script type='text/javascript' src='". find_in_path(_JAVASCRIPT.'layer.js') ."'></script>";
