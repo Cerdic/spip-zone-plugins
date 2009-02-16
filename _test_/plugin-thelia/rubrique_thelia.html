@@ -14,14 +14,15 @@
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
 
-	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><THELIA_chemrub type="CHEMIN" rubrique="THELIA-RUBRIQUE_ID">
-			<THELIA_rubdetchem type="RUBRIQUE" id="THELIA-ID">
-			&gt; <a href="#URL_PAGE{rubrique_thelia, id_rubrique=THELIA-ID}" class="LIEN_chemin">THELIA-TITRE</a> 
-			</THELIA_rubdetchem>
-			</THELIA_chemrub>
-			 &gt; THELIA-RUBRIQUE_NOM</div>
-
+		[(#REM) Fil d'Ariane ]
+		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+			    <THELIA_chemrub type="CHEMIN" rubrique="#ENV{id_rubrique}">
+				  <THELIA_rubdetchem type="RUBRIQUE" id="THELIA-ID">
+				      &gt; <a href="#URL_PAGE{rubrique_thelia, id_rubrique=THELIA-ID}" class="LIEN_chemin">THELIA-TITRE</a>
+				  </THELIA_rubdetchem>
+			    </THELIA_chemrub>
+			    &gt; THELIA-TITRE
+		</div>
 		<div id="conteneur">
 
 		[(#REM) Contenu principal : contenu de la rubrique ]

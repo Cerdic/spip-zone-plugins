@@ -18,12 +18,18 @@
 		<div id="contenu">
 
 			[(#REM) Fil d'Ariane ]
-			<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><THELIA_chemrub type="CHEMIN" rubrique="THELIA-RUBRIQUE_ID">
-			<THELIA_rubdetchem type="RUBRIQUE" id="THELIA-ID">
-			&gt; <a href="#URL_PAGE{rubrique_thelia, id_rubrique=THELIA-ID}" class="LIEN_chemin">THELIA-TITRE</a> 
-			</THELIA_rubdetchem>
-			</THELIA_chemrub> &gt; <a href="#URL_PAGE{rubrique_thelia, id_rubrique=THELIA-RUBRIQUE_ID}">THELIA-RUBRIQUE_NOM</a> &gt; THELIA-TITRE</div>
-  
+			<div id="hierarchie">
+			  <a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+			  <THELIA_chemrub type="CHEMIN" rubrique="THELIA-RUBRIQUE">
+				<THELIA_rubdetchem type="RUBRIQUE" id="THELIA-ID">
+					> <a href="#URL_PAGE{rubrique_thelia, id_rubrique=THELIA-ID}"
+			class="LIEN_chemin">THELIA-TITRE</a> 
+				</THELIA_rubdetchem>
+			  </THELIA_chemrub> 
+			 
+			  > THELIA-TITRE
+			</div>
+
 			<INCLURE{fond=inc/inc-produit}>
 		  	
 
