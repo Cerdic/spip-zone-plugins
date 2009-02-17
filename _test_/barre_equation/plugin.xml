@@ -1,0 +1,61 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	<multi>[it]Equazioni
+	[fr]Barre Equation
+	[en]Equation Bar
+	</multi>
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	mmmxvvv@tiscali.it
+_ &#169; 2007 - 2008 - Distribue sous licence GNU/GPL
+	</auteur>
+	<version>
+	0.02
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	<multi>
+	[it]
+	Attivare il plugin barre typo v2 e poi questo plugin.
+	Nella barra tipografica apparirà una icona per aprire la barra delle formule
+	
+	TO DO
+
+	studiare javascript in modo da far finire il cursore nelle giuste posizioni a ogni comando	
+	
+	aggiungere, ordinare e raggruppare i bottoni
+	
+	file di traduzione
+	
+	automatizzare la funzione di creazione bottoni da un file di elenco dei bottoni? tipo
+	comando;help bottone; file immagine; tipo;
+	
+	che eventualmnete si crea la funzione e scrive il file all'attivazione del plugin?
+	[fr]
+	Activer le plugin barres typo v2 et ensuite ceci plugin. Dans la barre typographique apparaîtra une icon pour ouvrir la barre des formules
+	</multi>
+	</description>
+	<prefix> 
+	TypoEquation
+	</prefix>
+	<icon>
+	img_pack/eqeuler.jpg
+	</icon>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>bt_toolbox</nom>
+		<inclure>barre_equation.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>bt_gadgets</nom>
+		<inclure>barre_equation.php</inclure>
+	</pipeline>
+
+
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+
+	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="BarreTypoEnrichie" version="[2.4.0;]" />
+</plugin>
