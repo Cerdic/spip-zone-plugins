@@ -27,6 +27,14 @@
 		inscription2_mes_fonctions.php
 	</fonctions>
 	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/inscription2.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/inscription2.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouter_boutons</action>
 		<inclure>inscription2_pipelines.php</inclure>
@@ -45,5 +53,5 @@
 	</pipeline>
 	<necessite id="cfg" version="[1.10.1;]" />
 	<necessite id="SPIP" version='[2.0.0;]' />
-	<necessite id='spip_bonux' version='[1.2;]' />
+	<necessite id='spip_bonux' version='[1.6;]' />
 </plugin>
