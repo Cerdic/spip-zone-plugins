@@ -32,8 +32,9 @@ function rtl_mb_ord($char){
 
 // http://doc.spip.org/@rtl_reverse
 function rtl_reverse($mot, $rtl_global) {
+	$rtl_prec = $rtl_global;
 
-	$ponctuations = array("«","»", "“", "”", ",", ".", " ", ":", ";", "(", ")", "،", "؟", "?", "!", " ");
+	$ponctuations = array("/", "-", "«","»", "“", "”", ",", ".", " ", ":", ";", "(", ")", "،", "؟", "?", "!", " ");
 	foreach($ponctuations as $ponct) {
 		$ponctuation[$ponct] = true;
 	}
@@ -43,12 +44,9 @@ function rtl_reverse($mot, $rtl_global) {
 	for ($i = 0; $i < spip_strlen($mot); $i++) {
 		$lettre = spip_substr($mot, $i, 1);
 		
-		
 		$code = rtl_mb_ord($lettre);
-		#	echo "<li>$lettre - $code";
+		# echo "<li>$lettre - $code";
 
-		
-		# echo "<li>$code";
 		if (($code >= 54928 && $code <= 56767) ||  ($code >= 15707294 && $code <= 15711164)) {
 			$rtl = true;
 		}
@@ -58,7 +56,10 @@ function rtl_reverse($mot, $rtl_global) {
 				 || $lettre == "٦" || $lettre == "٧" || $lettre == "٨" || $lettre == "٩") $rtl = false;
 		
 		if ($ponctuation[$lettre]) {
-			$rtl = $rtl_global;
+			# le truc mega casse-gueule de l'inversion unicode:
+			# traiter le sens de placement en fonction de la lettre precedente
+			# (et non automatiquement le rtl_global)
+			$rtl = $rtl_prec;
 			
 			if ($rtl) {
 				switch ($lettre) {
@@ -76,9 +77,12 @@ function rtl_reverse($mot, $rtl_global) {
 		if ($rtl) $res = $lettre.$res;
 		else $res = $res.$lettre;
 		
+		$rtl_prec = $rtl;
+		
 	}
 	return $res;
 }
+
 
 
 // http://doc.spip.org/@rtl_visuel
@@ -317,7 +321,7 @@ function rtl_visuel($texte, $rtl_global) {
 		$mot = preg_replace(",&#187;,u", "»", $mot);
 
 		// ponctuations
-		$ponctuations = array("«","»", "“", "”", ",", ".", " ", ":", ";", "(", ")", "،", "؟", "?", "!"," ");
+		$ponctuations = array("/", "-", "«","»", "“", "”", ",", ".", " ", ":", ";", "(", ")", "،", "؟", "?", "!"," ");
 		foreach($ponctuations as $ponct) {
 			$mot = str_replace("$ponct", "^$ponct^", $mot);
 		}
