@@ -171,7 +171,7 @@ function bando_navigation($boutons, $contexte = array())
         }
 	}
 
-	return "<div id='bando_navigation'><div class='largeur'><ul>\n$res</ul><div class='nettoyeur'></div></div></div>";
+	return "<div id='bando_navigation'><div class='largeur'><ul class='deroulant'>\n$res</ul><div class='nettoyeur'></div></div></div>";
 }
 
 /**
@@ -229,8 +229,12 @@ function bando_outils_rapides($boutons, $contexte = array()){
     // le navigateur de rubriques
   	$img = find_in_path('images/v1/boussole-22.png');
     $url = generer_url_ecrire("articles_tous");
+	$res .= "<ul class='bandeau_rubriques deroulant'><li>";
     $res .= "<a class='boussole' href='$url' id='boutonbandeautoutsite'><img src='$img' width='22' height='22' alt='' /></a>";
-    $res .= "<div id='gadget-rubriques'></div>";
+	include_spip('exec/menu_rubriques');
+	$res .= menu_rubriques();
+	$res .= "</li></ul>";
+    //$res .= "<div id='gadget-rubriques'></div>";
 
     // la barre de raccourcis rapides
     if (isset($boutons['outils_rapides']))

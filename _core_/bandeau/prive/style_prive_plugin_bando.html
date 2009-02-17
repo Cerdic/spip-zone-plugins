@@ -48,15 +48,17 @@ body { font-size:0.625em; margin-bottom:5em;}
 #bando_haut #bando_liens_rapides a {color:#fff;font-weight:bold;}
 
 #bando_haut ul{margin: 0; padding: 0; list-style: none;}
-#bando_navigation ul li { /*position:relative; */float: left; display: block; min-width:80px; text-align: center; border-right: 1px solid #eee; }
-#bando_navigation ul li:hover, #bando_navigation ul li.actif { background: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
-#bando_navigation ul li ul {border: 1px solid #666; border-top: 0; text-align: left; height: auto; width: auto; display: block; position:absolute; left:-3000em; z-index: 99; }
-#bando_navigation ul li:hover ul, #bando_navigation ul li.actif ul { left:auto;}
-#bando_navigation ul li ul li a { background-color: #fff; border-top: 1px solid #ccc; font-weight: normal; }
-#bando_navigation ul li ul li a:hover,
-#bando_navigation ul li ul li a:focus { background-color: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
 
-#bando_navigation ul li ul li {float:none;text-align:left;position:static;}
+#bando_haut ul.deroulant li { /*position:relative; */float: left; display: block;}
+#bando_haut ul.deroulant li ul li {float:none;position:static;}
+#bando_haut ul.deroulant li:hover, #bando_haut ul.deroulant li.actif { background: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
+#bando_haut ul.deroulant li ul {border: 1px solid #666; border-top: 0; text-align: left; height: auto; width: auto; display: block; position:absolute; left:-3000em; z-index: 99; }
+#bando_haut ul.deroulant li:hover ul, #bando_haut ul.deroulant li.actif ul { left:auto;}
+#bando_haut ul.deroulant li a { display: block; }
+#bando_haut ul.deroulant li ul li { background-color: #fff; border-top: 1px solid #ccc;}
+#bando_haut ul.deroulant li ul li a { font-weight: normal; }
+#bando_haut ul.deroulant li ul li a:hover,
+#bando_haut ul.deroulant li ul li a:focus { background-color: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
 
 #bando_identite { line-height:2em; background: #333; color: #eee; overflow:hidden; border-bottom:1px solid #222; z-index:10;position:relative;}
 #bando_identite p { width: 50%; padding: 1px 0; margin:0;}
@@ -67,10 +69,21 @@ body { font-size:0.625em; margin-bottom:5em;}
 #bando_identite strong, #identite a { color: #eee; }
 #bando_identite a:hover { text-decoration: underline; }
 
-#bando_outils { position:fixed; bottom:0px; width:100%; line-height:2em; clear:both; background: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; border-top: 1px solid #888; z-index:10000;}
 
+#bando_outils { /*position:fixed;*/ bottom:0px; width:100%; line-height:2em; clear:both; background: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; border-top: 1px solid #888; z-index:10000;}
 
-#bando_outils a.boussole {display:block; float:left;margin-right:20px;}
+#bando_outils a.boussole {display:block; /*float:left;*/margin-right:20px;}
+
+#bando_outils ul.deroulant li a { padding: 2px 3px;padding-left:20px;background-repeat:no-repeat;background-position:2px 3px;}
+#bando_outils ul.deroulant li li,#bando_outils ul.deroulant li li a {min-width:170px;}
+#bando_outils ul.deroulant li.haschild {padding-right:20px;background:#fff url(#CHEMIN{images/deplierhaut.gif}) no-repeat right center;}
+#bando_outils ul.deroulant li li a {background-image:url(#CHEMIN{images/secteur-12.gif});}
+#bando_outils ul.deroulant li li li a {background-image:url(#CHEMIN{images/rubrique-12.gif});}
+
+#bando_outils ul.deroulant li ul li {float:none;position:relative;}
+#bando_outils ul.deroulant li:hover > ul,#bando_outils ul.deroulant li.actif > ul {border:2px solid #999;}
+#bando_outils ul.deroulant li:hover li ul, #bando_outils ul.deroulant li.actif li ul {left:-3000em;}
+#bando_outils ul.deroulant li li:hover >ul,#bando_outils ul.deroulant li li.actif >ul  {left:40px;top:10px;}
 
 #bando_outils ul.creer {float:left;}
 #bando_outils ul.creer li.bouton{ float:left; }
@@ -78,6 +91,9 @@ body { font-size:0.625em; margin-bottom:5em;}
 #bando_outils ul.creer li.bouton a span { visibility:hidden;display:block;height:22px;width:16px;overflow:hidden; }
 #bando_outils ul.creer li.bouton a:hover, #bando_outils ul.creer li.bouton a:focus{background-color:white;}
 #bando_outils ul.creer li.bouton{ margin-top:0px;}
+
+#bando_navigation ul li {min-width:80px; text-align: center; border-right: 1px solid #eee; }
+#bando_navigation ul li ul li {float:none;text-align:left;position:static;}
 
 #bando_navigation { clear:both; background: #fff; border-bottom: 1px solid #999; border-top: 1px solid #ddd;  }
 #bando_navigation ul li a { display: block; padding: .8em 1.2em; font-weight: bold; }
