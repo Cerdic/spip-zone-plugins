@@ -65,7 +65,16 @@ function gis_cambiar_coord($id,$table,$exec) {
 	$s .= '';
 	// Ajouter un formulaire
 	$s .= '<p>';
-	$s .= debut_cadre('e', _DIR_PLUGIN_GIS."img_pack/correxir.png",'',bouton_block_depliable('&nbsp;&nbsp;&nbsp;<span style="text-transform: uppercase;">'._T('gis:cambiar').'</span>', false, "cadroFormulario"));
+	
+	// On teste la version de SPIP utilisee 2 ou 1.9
+	if(function_exists('bouton_block_depliable')){
+		$s .= debut_cadre('e', _DIR_PLUGIN_GIS."img_pack/correxir.png",'',bouton_block_depliable('&nbsp;&nbsp;&nbsp;<span style="text-transform: uppercase;">'._T('gis:cambiar').'</span>', false, "cadroFormulario"));
+	}else{
+		$s .= debut_cadre('r', _DIR_PLUGIN_GIS."img_pack/correxir.png"); 
+		$s .= bouton_block_invisible("ajouter_form"); 
+		$s .= '&nbsp;&nbsp;&nbsp;<strong class="verdana3" style="text-transform: uppercase;">' . _T('gis:cambiar') . ' <a onclick="$(\'#cadroFormulario\').slideToggle(\'slow\')">(' . _T('gis:clic_desplegar') . ')</a></strong>';
+	}
+	
 	$s .= debut_block_visible("ajouter_form");
 	$s .= '<div id="cadroFormulario" class="formulaire_spip formulaire_editer formulaire_cfg" style="margin-bottom:5px;">
 	<span class="verdana2">' . _T("gis:clic_mapa") . '</span>';
