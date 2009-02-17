@@ -31,6 +31,7 @@ function inc_legender_auteur_supp_dist($auteur){
 }
 // La partie affichage du formulaire...
 function legender_auteur_supp_saisir($auteur){
+	
 	spip_log('saisir les infos de l auteur='.$auteur);
 	$id_auteur = $auteur;
 	$corps_supp = '<li class="editer_inscription2 fieldset">';
