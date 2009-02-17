@@ -104,11 +104,16 @@ function balise_ABCALENDRIER_dyn($prec_mois,$prec_annee,$moise_annee_curr,$suiv_
             $my_cal_tab .= '<a href="'.$events[$date][0]['link'].'" title="'.$events[$date][0]['title'].'" >'. date('j', mkdate($M, $TempD, $Y)) .'</a>';
          }
          else{
-            $my_cal_tab .= '<ul class="multievent" ><li><a href="">'. date('j', mkdate($M, $TempD, $Y)) ."</a>\n<ul>\n";
-               foreach($events[$date] as $myevent){
-                  $my_cal_tab .= '<li><a href="'.$myevent['link'].'" title="'.$myevent['title'].'" >'.$myevent['title']."</a></li>\n";
-               }
-            $my_cal_tab .= '</ul></li></ul>';
+            if('oui'==MULTIEVENINTITLE){
+            $my_cal_tab .= '<a href="?page=ev_du_jour&date='.date('Y-m-d', mkdate($M, $TempD, $Y)).'" title="'._T('abcalendrier:evenements_du_jour').'" >'. date('j', mkdate($M, $TempD, $Y)) .'</a>';                        
+            }
+            else{
+               $my_cal_tab .= '<ul class="multievent" ><li><a href="">'. date('j', mkdate($M, $TempD, $Y)) ."</a>\n<ul>\n";
+                  foreach($events[$date] as $myevent){
+                     $my_cal_tab .= '<li><a href="'.$myevent['link'].'" title="'.$myevent['title'].'" >'.$myevent['title']."</a></li>\n";
+                  }
+               $my_cal_tab .= '</ul></li></ul>';
+            }
          }
       }
       else {

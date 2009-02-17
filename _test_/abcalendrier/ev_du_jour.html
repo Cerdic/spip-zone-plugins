@@ -1,0 +1,25 @@
+#CACHE{86400}
+<h2>Evenements du Jour</h2>
+	<B_articles>
+	<div class="liste-articles">
+		<ul>
+			<BOUCLE_articles(ARTICLES){date_redac}{titre_mot=mini-calendrier}>
+			<li>
+				<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+				<small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
+			</li>
+			</BOUCLE_articles>
+		</ul>
+	</div>
+	</B_articles>
+	<B_breves>
+	<div class="liste-articles">
+		<ul>
+			<BOUCLE_breves(BREVES){evento=#DATE}{titre_mot=mini-calendrier}>
+			<li>
+				<h3 class="titre"><a href="#URL_BREVE">#TITRE</a></h3>
+			</li>
+			</BOUCLE_breves>
+		</ul>
+	</div>
+	</B_breves>
