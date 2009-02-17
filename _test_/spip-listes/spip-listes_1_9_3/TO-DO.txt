@@ -5,6 +5,7 @@
 
 
 TO-DO:
+. ajouter formulaire pour confirmation abonnement par mail (actuellement en 'dur' dans balise/formulaire_abonnement.php)
 . revoir inventaire des abonnements. Donne parfois un chiffre negatif pour le nombre d'abonnes (probablement ancienne version. SL 1.98 ?)
 . ajouter outil de nettoyage de tables ?
 . personnaliser les abonnement (s’abonner en « html » à la liste x, « texte » à la liste y, ou « non » à la liste z). Utiliser la table spip_auteurs_liste (completer le format qui est pour l'instant toujours html).
