@@ -16,14 +16,17 @@ function boucle_AUTEURS($id_boucle, &$boucles) {
 	if (!isset($boucle->modificateur['criteres']['statut'])) {
 		// Si pas de lien avec un article, selectionner
 		// uniquement les auteurs d'un article publie
-		if (!$GLOBALS['var_preview'])
-		if (!isset($boucle->modificateur['lien']) AND !isset($boucle->modificateur['tout'])) {
+		if (!$GLOBALS['var_preview']){
 			fabrique_jointures($boucle, array(
-				array($id_table, array('spip_auteurs_articles'), 'id_auteur'),
-				array('', array('spip_articles'), 'id_article')), true, $boucle->show, $id_table);
-			$t = array_search('spip_articles', $boucle->from) . '.statut';
-			array_unshift($boucle->where,array("'='", "'$t'", "'\\'publie\\''"));
-			
+				array($id_table, array('spip_auteurs_elargis'), 'id_auteur')),
+				'', true, $boucle->show, $id_table);
+			if (!isset($boucle->modificateur['lien']) AND !isset($boucle->modificateur['tout'])) {
+				fabrique_jointures($boucle, array(
+					array($id_table, array('spip_auteurs_articles'), 'id_auteur'),
+					array('', array('spip_articles'), 'id_article')), true, $boucle->show, $id_table);
+				$t = array_search('spip_articles', $boucle->from) . '.statut';
+				array_unshift($boucle->where,array("'='", "'$t'", "'\\'publie\\''"));
+			}
 		}
 		// pas d'auteurs poubellises
 		array_unshift($boucle->where,array("'!='", "'$mstatut'", "'\\'5poubelle\\''"));
@@ -67,4 +70,6 @@ if (!function_exists('revision_auteurs_elargi')) {
 	}
 }
 
+//$plop = sql_showtable('spip_auteurs_elargis');
+//var_dump($plop['field']);
 ?>

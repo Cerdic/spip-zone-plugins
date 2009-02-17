@@ -30,4 +30,17 @@ function id_pays_to_pays($id_pays){
 	}
 	else return;
 }
+
+function inscription2_recuperer_champs($champs,$id_auteur){
+	if($champs == 'login'){
+		$champs = 'spip_auteurs.login';
+	}
+	if($champs == 'pays'){
+		spip_log('champs = pays');
+		$resultat = sql_getfetsel("b.pays","spip_auteurs_elargis a LEFT JOIN spip_geo_pays b on a.pays = b.id_pays","a.id_auteur=$id_auteur");
+		return propre($resultat);
+	}
+	$resultat = sql_getfetsel($champs,"spip_auteurs_elargis LEFT JOIN spip_auteurs USING(id_auteur)","id_auteur=$id_auteur");
+	return propre($resultat);
+}
 ?>
