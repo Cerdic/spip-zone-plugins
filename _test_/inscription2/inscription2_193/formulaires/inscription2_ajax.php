@@ -179,7 +179,7 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 	*/
 	
 	foreach(inscription2_champs_formulaire() as $clef => $valeur) {
-		$valeurs[$valeur] = _request($valeur);  
+		$valeurs[$valeur] = _request($valeur);
 	}
 	
 	//Définir le login
