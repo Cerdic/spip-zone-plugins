@@ -15,7 +15,7 @@
 			</td>
 			<BOUCLE_champshead(POUR){tableau #CONFIG{inscription2}}{valeur = 'on'}>
 			[(#CLE|match{_table}|oui)
-			<td>
+			<td[(#ENV{ordre}|=={[(#CLE|replace{'_table',''})]}|oui) class="on"]>
 				<strong>
 					<a href="[(#SELF|parametre_url{'ordre',[(#CLE|replace{'_table',''})]}|parametre_url{'desc',#GET{desc}})]">
 						[(#VAL{inscription2:}|concat{[(#CLE|replace{'_table',''})]}|_T)]
