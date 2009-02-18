@@ -51,9 +51,9 @@ body { font-size:0.625em; margin-bottom:5em;}
 
 #bando_haut ul.deroulant li { /*position:relative; */float: left; display: block;}
 #bando_haut ul.deroulant li ul li {float:none;position:static;}
-#bando_haut ul.deroulant li:hover, #bando_haut ul.deroulant li.actif { background-color: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
+#bando_haut ul.deroulant li:hover, #bando_haut ul.deroulant li.actif,#bando_haut ul.deroulant li.actif_tempo { background-color: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
 #bando_haut ul.deroulant li ul {border: 1px solid #666; border-top: 0; text-align: left; height: auto; width: auto; display: block; position:absolute; left:-3000em; z-index: 99; }
-#bando_haut ul.deroulant li:hover ul, #bando_haut ul.deroulant li.actif ul { left:auto;}
+#bando_haut ul.deroulant li:hover ul, #bando_haut ul.deroulant li.actif ul, #bando_haut ul.deroulant li.actif_tempo ul { left:auto;}
 #bando_haut ul.deroulant li a { display: block; }
 #bando_haut ul.deroulant li ul li { background-color: #fff; border-top: 1px solid #ccc;}
 #bando_haut ul.deroulant li ul li a { font-weight: normal; }
@@ -85,9 +85,9 @@ body { font-size:0.625em; margin-bottom:5em;}
 #bando_outils ul.deroulant li li li {background-image:url(#CHEMIN{images/rubrique-12.gif});}
 
 #bando_outils ul.deroulant li ul li {float:none;position:relative;}
-#bando_outils ul.deroulant li:hover > ul,#bando_outils ul.deroulant li.actif > ul {border:2px solid #999;}
-#bando_outils ul.deroulant li:hover li ul, #bando_outils ul.deroulant li.actif li ul {left:-3000em;}
-#bando_outils ul.deroulant li li:hover >ul,#bando_outils ul.deroulant li li.actif >ul  {left:50px;top:1.5em;}
+#bando_outils ul.deroulant li:hover > ul,#bando_outils ul.deroulant li.actif > ul,#bando_outils ul.deroulant li.actif_tempo > ul {border:2px solid #999;}
+#bando_outils ul.deroulant li:hover li ul, #bando_outils ul.deroulant li.actif li ul,#bando_outils ul.deroulant li.actif_tempo li ul  {left:-3000em;}
+#bando_outils ul.deroulant li li:hover >ul,#bando_outils ul.deroulant li li.actif >ul,#bando_outils ul.deroulant li li.actif_tempo >ul  {left:50px;top:1.5em;}
 
 #bando_outils ul.deroulant li ul {width:770px;}
 .large #bando_outils ul.deroulant li ul {width:970px;}
