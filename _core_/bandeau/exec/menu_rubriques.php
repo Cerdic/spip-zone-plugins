@@ -31,18 +31,23 @@ function exec_menu_rubriques_dist() {
 		http_status(304);
 	} else {
 		$ret = menu_rubriques();
-		ajax_retour("<div>&nbsp;</div>" . $ret);
+		ajax_retour($ret);
 	}
 }
 
-function menu_rubriques(){
+function menu_rubriques($complet = true){
+	$ret = "<li class='toutsite'><a href='".generer_url_ecrire('articles_tous')."'>"._T('info_tout_site')."</a></li>";
+
+	if (!$complet) {
+		return "<ul class='cols_1'>$ret\n</ul>\n";
+	}
+
 	if (!isset($GLOBALS['db_art_cache'])){
 		gen_liste_rubriques();
 	}
 	$arr_low = extraire_article(0, $GLOBALS['db_art_cache']);
 
 	$total_lignes = $i = sizeof($arr_low);
-	$ret = '';
 
 	if ($i > 0) {
 		$nb_col = min(8,ceil($total_lignes / 30));

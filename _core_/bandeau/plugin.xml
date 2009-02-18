@@ -191,37 +191,37 @@
 		<titre></titre>
 	</bouton>
 	<bouton id='rubrique_creer' parent="outils_rapides">
-		<icone>images/v1/rubrique-add-16.png</icone>
+		<icone>images/v1/rubrique-add-24.png</icone>
 		<titre>icone_creer_rubrique_2</titre>
 		<url>rubriques_edit</url>
 		<args>new=oui&amp;id_parent=@id_rubrique@</args>
 	</bouton>
 	<bouton id='article_creer' parent="outils_rapides">
-		<icone>images/v1/article-add-16.png</icone>
+		<icone>images/v1/article-add-24.png</icone>
 		<titre>icone_ecrire_article</titre>
 		<url>articles_edit</url>
 		<args>new=oui&amp;id_rubrique=@id_rubrique@</args>
 	</bouton>
 	<bouton id='auteur_creer' parent="outils_rapides">
-		<icone>images/v1/auteur-add-16.png</icone>
+		<icone>images/v1/auteur-add-24.png</icone>
 		<titre>icone_creer_nouvel_auteur</titre>
 		<url>auteur_infos</url>
 		<args>new=oui</args>
 	</bouton>
 	<bouton id='mot_creer' parent="outils_rapides">
-		<icone>images/v1/mot-add-16.png</icone>
+		<icone>images/v1/mot-add-24.png</icone>
 		<titre>icone_creation_mots_cles</titre>
 		<url>mots_edit</url>
 		<args>new=oui</args>
 	</bouton>
 	<bouton id='site_creer' parent="outils_rapides">
-		<icone>images/v1/site-add-16.png</icone>
+		<icone>images/v1/site-add-24.png</icone>
 		<titre>icone_referencer_nouveau_site</titre>
 		<url>sites_edit</url>
 		<args>new=oui&amp;id_rubrique=@id_rubrique@</args>
 	</bouton>
 	<bouton id='breve_creer' parent="outils_rapides">
-		<icone>images/v1/breve-add-16.png</icone>
+		<icone>images/v1/breve-add-24.png</icone>
 		<titre>icone_nouvelle_breve</titre>
 		<url>breves_edit</url>
 		<args>new=oui&amp;id_rubrique=@id_rubrique@</args>

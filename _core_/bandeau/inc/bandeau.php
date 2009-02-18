@@ -92,6 +92,7 @@ function bandeau_creer_url($url, $args="", $contexte=null){
 		// recuperer les parametres du contexte demande par l'url sous la forme
 		// &truc=@machin@
 		// @machin@ etant remplace par _request('machin')
+		$url = str_replace('&amp;','&',$url);
 		while (preg_match(",[&?]([a-z_]+)=@([a-z_]+)@,i",$url,$matches)){
 			$val = _request($matches[2],$contexte);
 			$url = parametre_url($url,$matches[1],$val?$val:'','&');
@@ -227,12 +228,12 @@ function bando_outils_rapides($boutons, $contexte = array()){
 
 
     // le navigateur de rubriques
-  	$img = find_in_path('images/v1/boussole-22.png');
+  	$img = find_in_path('images/v1/boussole-24.png');
     $url = generer_url_ecrire("articles_tous");
 	$res .= "<ul class='bandeau_rubriques deroulant'><li>";
-    $res .= "<a class='boussole' href='$url' id='boutonbandeautoutsite'><img src='$img' width='22' height='22' alt='' /></a>";
+    $res .= "<a class='boussole' href='$url' id='boutonbandeautoutsite'><img src='$img' width='24' height='24' alt='' /></a>";
 	include_spip('exec/menu_rubriques');
-	$res .= menu_rubriques();
+	$res .= menu_rubriques(false);
 	$res .= "</li></ul>";
     //$res .= "<div id='gadget-rubriques'></div>";
 
@@ -271,8 +272,8 @@ function inc_bandeau_dist($rubrique, $sous_rubrique, $largeur)
 	return "<div class='avec_icones' id='bando_haut'>"
 		. bando_liens_acces_rapide()
 		. bando_identite()
-		. bando_outils_rapides($boutons,$contexte)
 		. bando_navigation($boutons,$contexte)
+		. bando_outils_rapides($boutons,$contexte)
 		. "</div>"
 		;
 	

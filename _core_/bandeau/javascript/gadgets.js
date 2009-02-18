@@ -1,5 +1,14 @@
 function init_gadgets(url_toutsite,url_navrapide,url_agenda,html_messagerie){
-    var t=null;
+	jQuery('#boutonbandeautoutsite').one('mouseover',function(){
+		jQuery(this).siblings('ul').animeajax();
+		jQuery.ajax({
+						url: url_toutsite,
+						success: function(c){
+							jQuery('#boutonbandeautoutsite').siblings('ul').remove();
+							jQuery('#boutonbandeautoutsite').after(c);
+						}
+					});
+	});
 }
 function focus_zone(selecteur){
 	jQuery(selecteur).eq(0).find('a,input:visible').get(0).focus();
@@ -15,6 +24,9 @@ jQuery(document).ready(function(){
 		// timer sur la fermeture des onglets pour ne pas que ca aille trop vite
 		.hover(
 			function(){
+				if (this.timer)
+						clearTimeout(this.timer);
+				this.timer = null;
 				/*jQuery(this).parents('ul').find('>li.actif').removeClass('actif');*/
 				jQuery(this)
 					.addClass('actif')
@@ -24,9 +36,9 @@ jQuery(document).ready(function(){
 			,
 			function(){
 				var me = jQuery(this).removeClass('actif').addClass('actif_tempo');
-				setTimeout(function(){
+				this.timer = setTimeout(function(){
 					me.removeClass('actif_tempo');
-				}, 600);
+				}, 400);
 			}
 		)
 		// navigation au clavier :

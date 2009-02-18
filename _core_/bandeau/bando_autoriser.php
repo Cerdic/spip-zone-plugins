@@ -134,4 +134,20 @@ function autoriser_article_creer_bouton_dist($faire, $type='', $id=0, $qui = NUL
 	return autoriser('creerarticledans','rubrique',_request('id_rubrique',isset($opt['contexte'])?$opt['contexte']:null));
 }
 
+function autoriser_auteur_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
+	return autoriser('creer','auteur');
+}
+
+function autoriser_mot_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
+	return autoriser('creer','mot');
+}
+
+function autoriser_site_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
+	return autoriser('creersitedans','rubrique',_request('id_rubrique',isset($opt['contexte'])?$opt['contexte']:null));
+}
+
+function autoriser_breve_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
+	return autoriser('creerbrevedans','rubrique',_request('id_rubrique',isset($opt['contexte'])?$opt['contexte']:null));
+}
+
 ?>
