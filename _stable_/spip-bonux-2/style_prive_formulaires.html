@@ -94,7 +94,6 @@
 	width: auto;
 }
 
-
 /* intitules (label) */
 .formulaire_spip li label {
 	width: 120px;
@@ -158,24 +157,29 @@
 *  pour l'avoir horizontale, il faut specifier :
 *  .formulaire_spip .formulaire_editer .editer_qqc .champ{display:inline;}
 */
-.formulaire_spip .choix label {float:none; margin-left:5px; display:inline;font-weight:normal;width:auto;}
+.formulaire_spip .choix label {float:none; margin-#GET{left}:5px; display:inline;font-weight:normal;width:auto;}
 .formulaire_spip .choix label input {vertical-align:middle;}
 .formulaire_spip .choix input.radio,
 .formulaire_spip .choix input.checkbox {width:auto;}
 
 /* icone d'aide */
-/*.formulaire_spip li em.aide { float:right;margin-right:-10px;}*/
+/*.formulaire_spip li em.aide { float:#GET{right};margin-#GET{right}:-10px;}*/
 
 /* boutons */
 .formulaire_spip .boutons,.boutons_formulaire {
 	margin:0; clear:both;
 	text-align: #GET{right};
 	font-size: 1.2em;
-	margin: 7px 1em;
+	padding: 7px 1em;
+	margin:0;
 }
+#navigation .formulaire_spip .boutons,.boutons_formulaire,#extra .formulaire_spip .boutons,.boutons_formulaire {
+	padding: 5px;
+}
+
 .boutons_formulaire {font-size:1em;}
 .formulaire_spip .boutons input.submit,.boutons_formulaire input.submit {
-	margin-#GET{right}: 1em;
+	margin-#GET{left}: 1em;
 	padding: 0 1em;
 	font-weight:normal;
 }
@@ -358,3 +362,4 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 /* Style des formulaires de configuration
 ----------------------------------------------- */
 .formulaire_configurer {margin:2em 0;}
+
