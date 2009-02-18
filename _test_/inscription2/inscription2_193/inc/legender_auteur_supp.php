@@ -54,7 +54,7 @@ function legender_auteur_supp_saisir($auteur){
 		}
 	}
 	
-	$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur","a.id_auteur='$id_auteur'");
+	$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b USING(id_auteur)","a.id_auteur='$id_auteur'");
 
 	$query = sql_fetch($query);
 	if($query == NULL){
@@ -69,12 +69,12 @@ function legender_auteur_supp_saisir($auteur){
 				$corps_supp .= recuperer_fond('prive/inscription2_champs_'.$cle,array('cle'=>$cle,'val'=>$val,'id_auteur' => $id_auteur));
 			}else{
 				$corps_supp .= "\n<li><label>"._T('inscription2:'.$cle)."</label>"
-				. "<input type='text' id='$cle' name='$cle' class='text' value='".$val."' /></li>";
+				. "<input type='text' id='$cle' name='$cle' class='text' value=\"".entites_html($val)."\" /></li>";
 			}
 		}
 	}
-		$corps_supp .= "\n</ul>";
-		$corps_supp .= "\n</fieldset></li>";
+	$corps_supp .= "\n</ul>";
+	$corps_supp .= "\n</fieldset>\n</li>";
 	return $corps_supp;
 }
 

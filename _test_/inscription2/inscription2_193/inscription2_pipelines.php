@@ -26,12 +26,15 @@ function inscription2_affiche_milieu($flux){
 // ajouter les champs I2 sur le formulaire CVT editer_auteur
 function inscription2_editer_contenu_objet($flux){
 	if ($flux['args']['type']=='auteur') {
+		spip_log('inscription2_editer_contenu_objet');
 		include_spip('public/assembler');
 		include_spip('inc/legender_auteur_supp');
-		if(($flux['args']['contexte']['id_auteur'] != 'oui') && (!sql_getfetsel('id_auteur','spip_auteurs_elargis','id_auteur='.$flux['args']['contexte']['id_auteur']))){
+		// ici on verifies que l'entree dans spip_auteurs_elargis existe ...
+		// il y a des cas ou elle n'existe pas ...
+		// Donc on la cree si on n'est pas dans le cas de la creation d'un nouvel auteur
+		if((is_numeric($flux['args']['contexte']['id_auteur'])) && (!sql_getfetsel('id_auteur','spip_auteurs_elargis','id_auteur='.$flux['args']['contexte']['id_auteur']))){
 			sql_insertq('spip_auteurs_elargis',array('id_auteur'=>$flux['args']['contexte']['id_auteur']));
 		}
-		spip_log('editer_contenu_objet');
 		$inscription2 = legender_auteur_supp_saisir($flux['args']['contexte']['id_auteur']);
 		$flux['data'] = preg_replace('%(<li class="editer_pgp(.*?)</li>)%is', '$1'."\n".$inscription2, $flux['data']);
 	}
@@ -41,6 +44,7 @@ function inscription2_editer_contenu_objet($flux){
 // ajouter les champs inscription2 soumis lors de la soumission du formulaire CVT editer_auteur
 function inscription2_post_edition($flux){
 	if ($flux['args']['table']=='spip_auteurs') {
+		spip_log('inscription2_post_edition');
 		$id_auteur = $flux['args']['id_objet'];
 			$echec = array();
 				foreach(lire_config('inscription2',array()) as $cle => $val){
