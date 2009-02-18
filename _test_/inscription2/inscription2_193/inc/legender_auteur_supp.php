@@ -24,7 +24,7 @@ function inc_legender_auteur_supp_dist($auteur){
    
 	if (!$new) {
 		if (autoriser('modifier', 'auteur', $auteur['id_auteur'])) {
-			$auteur_infos_voir_supp = legender_auteur_supp_voir($auteur, $redirect);
+			$auteur_infos_voir_supp = legender_auteur_supp_voir($auteur['id_auteur'], $redirect);
 		}
 	}
 	return $auteur_infos_voir_supp;
@@ -54,7 +54,7 @@ function legender_auteur_supp_saisir($auteur){
 		}
 	}
 	
-	$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur","a.id_auteur= $id_auteur");
+	$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur","a.id_auteur='$id_auteur'");
 
 	$query = sql_fetch($query);
 	if($query == NULL){

@@ -28,10 +28,10 @@ function inscription2_editer_contenu_objet($flux){
 	if ($flux['args']['type']=='auteur') {
 		include_spip('public/assembler');
 		include_spip('inc/legender_auteur_supp');
-		spip_log('editer_contenu_objet sur auteur='.$flux['args']['contexte']['id_auteur']);
-		if(!sql_getfetsel('id_auteur','spip_auteurs_elargis','id_auteur='.$flux['args']['contexte']['id_auteur'])){
+		if(($flux['args']['contexte']['id_auteur'] != 'oui') && (!sql_getfetsel('id_auteur','spip_auteurs_elargis','id_auteur='.$flux['args']['contexte']['id_auteur']))){
 			sql_insertq('spip_auteurs_elargis',array('id_auteur'=>$flux['args']['contexte']['id_auteur']));
 		}
+		spip_log('editer_contenu_objet');
 		$inscription2 = legender_auteur_supp_saisir($flux['args']['contexte']['id_auteur']);
 		$flux['data'] = preg_replace('%(<li class="editer_pgp(.*?)</li>)%is', '$1'."\n".$inscription2, $flux['data']);
 	}
