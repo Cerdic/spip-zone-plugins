@@ -126,16 +126,26 @@ function autoriser_admin_plugin_bouton_dist($faire, $type='', $id=0, $qui = NULL
  * Outils rapides
  */
 
+function select_rubrique_insertion($condition=""){
+	static $rubriques = array();
+	if (!isset($rubriques[$condition])){
+		$in = !$GLOBALS['connect_id_rubrique'] ? ''
+			: sql_in('id_rubrique', $GLOBALS['connect_id_rubrique']);
+		if ($condition)
+			$in .= ($in?" AND ":""). $condition;
+		$rubriques[$condition] = sql_getfetsel('id_rubrique', 'spip_rubriques', $in, '',  'id_rubrique DESC',  1);
+	}
+	return $rubriques[$condition];
+}
+
+
 function autoriser_rubrique_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
 	return autoriser('creerrubriquedans','rubrique',_request('id_rubrique',isset($opt['contexte'])?$opt['contexte']:null));
 }
 
 function autoriser_article_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	if (!$id_rubrique = intval(_request('id_rubrique',isset($opt['contexte'])?$opt['contexte']:null))){
-		$article_select = charger_fonction('article_select','inc');
-		$row = $article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
-		$id_rubrique = $row['id_rubrique'];
-	}
+	if (!$id_rubrique = intval(_request('id_rubrique',isset($opt['contexte'])?$opt['contexte']:null)))
+		$id_rubrique = select_rubrique_insertion();
 	return autoriser('creerarticledans','rubrique',$id_rubrique);
 }
 
@@ -148,11 +158,15 @@ function autoriser_mot_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $
 }
 
 function autoriser_site_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return autoriser('creersitedans','rubrique',_request('id_rubrique',isset($opt['contexte'])?$opt['contexte']:null));
+	if (!$id_rubrique = intval(_request('id_rubrique',isset($opt['contexte'])?$opt['contexte']:null)))
+		$id_rubrique = select_rubrique_insertion();
+	return autoriser('creersitedans','rubrique',$id_rubrique);
 }
 
 function autoriser_breve_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return autoriser('creerbrevedans','rubrique',_request('id_rubrique',isset($opt['contexte'])?$opt['contexte']:null));
+	if (!$id_rubrique = intval(_request('id_rubrique',isset($opt['contexte'])?$opt['contexte']:null)))
+		$id_rubrique = select_rubrique_insertion("id_parent=0");
+	return autoriser('creerbrevedans','rubrique',$id_rubrique);
 }
 
 ?>

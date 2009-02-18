@@ -36,9 +36,13 @@ function definir_barre_contexte(){
  * On defini les boutons a metrtre selon les droits de l'utilisateur
  * puis on balance le tout au pipeline "ajouter_boutons" pour que des plugins
  * puissent y mettre leur grain de sel
+ *
+ * @param array $contexte
+ * @param bool $icones // rechercher les icones
+ * @param bool $autorise // ne renvoyer que les boutons autorises
+ * @return array
  */
-// http://doc.spip.org/@definir_barre_boutons
-function definir_barre_boutons($contexte=array(),$icones = true) {
+function definir_barre_boutons($contexte=array(),$icones = true, $autorise = true) {
     include_spip('inc/autoriser');
 	$boutons_admin=array();
 
@@ -48,7 +52,7 @@ function definir_barre_boutons($contexte=array(),$icones = true) {
 	  AND is_array($liste_boutons_plugins = boutons_plugins())){
 		foreach($liste_boutons_plugins as $id => $infos){
 			// les boutons principaux ne sont pas soumis a autorisation
-			if (!($parent = $infos['parent']) OR autoriser('bouton',$id,0,NULL,array('contexte'=>$contexte))){
+			if (!($parent = $infos['parent']) OR !$autorise OR autoriser('bouton',$id,0,NULL,array('contexte'=>$contexte))){
 				if ($parent AND isset($boutons_admin[$parent]))
 					$boutons_admin[$parent]->sousmenu[$id]= new Bouton(
 					  ($icones AND $infos['icone'])?find_in_path($infos['icone']):'',  // icone
@@ -230,8 +234,8 @@ function bando_outils_rapides($boutons, $contexte = array()){
     // le navigateur de rubriques
   	$img = find_in_path('images/v1/boussole-24.png');
     $url = generer_url_ecrire("articles_tous");
-	$res .= "<ul class='bandeau_rubriques deroulant'><li>";
-    $res .= "<a class='boussole' href='$url' id='boutonbandeautoutsite'><img src='$img' width='24' height='24' alt='' /></a>";
+	$res .= "<ul class='bandeau_rubriques deroulant'><li class='boussole'>";
+    $res .= "<a href='$url' id='boutonbandeautoutsite'><img src='$img' width='24' height='24' alt='' /></a>";
 	include_spip('exec/menu_rubriques');
 	$res .= menu_rubriques(false);
 	$res .= "</li></ul>";
