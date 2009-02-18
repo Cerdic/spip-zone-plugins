@@ -51,7 +51,7 @@ body { font-size:0.625em; margin-bottom:5em;}
 
 #bando_haut ul.deroulant li { /*position:relative; */float: left; display: block;}
 #bando_haut ul.deroulant li ul li {float:none;position:static;}
-#bando_haut ul.deroulant li:hover, #bando_haut ul.deroulant li.actif { background: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
+#bando_haut ul.deroulant li:hover, #bando_haut ul.deroulant li.actif { background-color: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
 #bando_haut ul.deroulant li ul {border: 1px solid #666; border-top: 0; text-align: left; height: auto; width: auto; display: block; position:absolute; left:-3000em; z-index: 99; }
 #bando_haut ul.deroulant li:hover ul, #bando_haut ul.deroulant li.actif ul { left:auto;}
 #bando_haut ul.deroulant li a { display: block; }
@@ -75,16 +75,41 @@ body { font-size:0.625em; margin-bottom:5em;}
 #bando_outils a.boussole {display:block; /*float:left;*/margin-right:20px;}
 
 #bando_outils ul.deroulant {font-size:0.9em;}
-#bando_outils ul.deroulant li a { padding: 1px 3px;padding-left:20px;background-repeat:no-repeat;background-position:2px 3px;}
-#bando_outils ul.deroulant li li,#bando_outils ul.deroulant li li a {min-width:170px;}
-#bando_outils ul.deroulant li.haschild {padding-right:20px;background:#fff url(#CHEMIN{images/triangle-droite#GET{rtl}|concat{.gif}}) no-repeat right center;}
-#bando_outils ul.deroulant li li a {background-image:url(#CHEMIN{images/secteur-12.gif});}
-#bando_outils ul.deroulant li li li a {background-image:url(#CHEMIN{images/rubrique-12.gif});}
+#bando_outils ul.deroulant ul {background:#fff;}
+#bando_outils ul.deroulant li a { padding: 1px 3px;padding-right:10px;background-repeat:no-repeat;background-position:right 3px;}
+#bando_outils ul.deroulant li { background-repeat:no-repeat;background-position:left 3px;padding-left:15px;}
+#bando_outils ul.deroulant li li,#bando_outils ul.deroulant li li a {}
+
+#bando_outils ul.deroulant li.haschild > a {background-image:url(#CHEMIN{images/triangle-droite#GET{rtl}|concat{.gif}});}
+#bando_outils ul.deroulant li li {background-image:url(#CHEMIN{images/secteur-12.gif});}
+#bando_outils ul.deroulant li li li {background-image:url(#CHEMIN{images/rubrique-12.gif});}
 
 #bando_outils ul.deroulant li ul li {float:none;position:relative;}
 #bando_outils ul.deroulant li:hover > ul,#bando_outils ul.deroulant li.actif > ul {border:2px solid #999;}
 #bando_outils ul.deroulant li:hover li ul, #bando_outils ul.deroulant li.actif li ul {left:-3000em;}
 #bando_outils ul.deroulant li li:hover >ul,#bando_outils ul.deroulant li li.actif >ul  {left:50px;top:1.5em;}
+
+#bando_outils ul.deroulant li ul {width:770px;}
+.large #bando_outils ul.deroulant li ul {width:970px;}
+#bando_outils ul.deroulant li ul.cols_1 {width:200px;}
+#bando_outils ul.deroulant li ul.cols_1 > li {width:185px;}
+#bando_outils ul.deroulant li ul.cols_2 {width:350px;}
+#bando_outils ul.deroulant li ul.cols_2 > li {float:left;width:160px;}
+#bando_outils ul.deroulant li ul.cols_3 {width:495px;}
+#bando_outils ul.deroulant li ul.cols_3 > li {float:left;width:150px;}
+
+#bando_outils ul.deroulant li ul.cols_4 {width:620px;}
+#bando_outils ul.deroulant li ul.cols_4 > li {float:left;width:140px;}
+.large #bando_outils ul.deroulant li ul.cols_4 {width:800px;}
+.large #bando_outils ul.deroulant li ul.cols_4 > li {float:left;width:185px;}
+#bando_outils ul.deroulant li ul.cols_5 > li {float:left;width:139px;}
+.large #bando_outils ul.deroulant li ul.cols_5 > li {float:left;width:179px;}
+#bando_outils ul.deroulant li ul.cols_6 > li {float:left;width:113px;}
+.large #bando_outils ul.deroulant li ul.cols_6 > li {float:left;width:146px;}
+#bando_outils ul.deroulant li ul.cols_7 > li {float:left;width:113px;}
+.large #bando_outils ul.deroulant li ul.cols_7 > li {float:left;width:123px;}
+#bando_outils ul.deroulant li ul.cols_8 > li {float:left;width:113px;}
+.large #bando_outils ul.deroulant li ul.cols_8 > li {float:left;width:123px;}
 
 #bando_outils ul.creer {float:left;}
 #bando_outils ul.creer li.bouton{ float:left; }
@@ -109,16 +134,5 @@ body { font-size:0.625em; margin-bottom:5em;}
 [(#REM|bando_images_background)]
 
 .formulaire_configurer_langage li .choix {width:48%;margin-right:1%;float:left;}
-
-
-#gadget-rubriques {
-background-color:#GET{claire};
-border:1px solid #999;
-padding:2px;
-position:absolute;
-bottom:2em;
-display:none;
-}
-
 
 [(#REM)</style>]
