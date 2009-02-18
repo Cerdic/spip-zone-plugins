@@ -74,16 +74,17 @@ body { font-size:0.625em; margin-bottom:5em;}
 
 #bando_outils a.boussole {display:block; /*float:left;*/margin-right:20px;}
 
-#bando_outils ul.deroulant li a { padding: 2px 3px;padding-left:20px;background-repeat:no-repeat;background-position:2px 3px;}
+#bando_outils ul.deroulant {font-size:0.9em;}
+#bando_outils ul.deroulant li a { padding: 1px 3px;padding-left:20px;background-repeat:no-repeat;background-position:2px 3px;}
 #bando_outils ul.deroulant li li,#bando_outils ul.deroulant li li a {min-width:170px;}
-#bando_outils ul.deroulant li.haschild {padding-right:20px;background:#fff url(#CHEMIN{images/deplierhaut.gif}) no-repeat right center;}
+#bando_outils ul.deroulant li.haschild {padding-right:20px;background:#fff url(#CHEMIN{images/triangle-droite#GET{rtl}|concat{.gif}}) no-repeat right center;}
 #bando_outils ul.deroulant li li a {background-image:url(#CHEMIN{images/secteur-12.gif});}
 #bando_outils ul.deroulant li li li a {background-image:url(#CHEMIN{images/rubrique-12.gif});}
 
 #bando_outils ul.deroulant li ul li {float:none;position:relative;}
 #bando_outils ul.deroulant li:hover > ul,#bando_outils ul.deroulant li.actif > ul {border:2px solid #999;}
 #bando_outils ul.deroulant li:hover li ul, #bando_outils ul.deroulant li.actif li ul {left:-3000em;}
-#bando_outils ul.deroulant li li:hover >ul,#bando_outils ul.deroulant li li.actif >ul  {left:40px;top:10px;}
+#bando_outils ul.deroulant li li:hover >ul,#bando_outils ul.deroulant li li.actif >ul  {left:50px;top:1.5em;}
 
 #bando_outils ul.creer {float:left;}
 #bando_outils ul.creer li.bouton{ float:left; }
@@ -118,15 +119,6 @@ position:absolute;
 bottom:2em;
 display:none;
 }
-a.bando_rub { display: block; font-size: 10px; padding: 2px; padding-#GET{right}: 13px; padding-#GET{left}: 16px; color: #666; text-decoration: none; border-bottom: 1px solid #ccc; background-repeat: no-repeat; background-position: [(#ENV{ltr}|choixsiegal{left,1,99})%] center; background-image: url(#GET{chemin_img_pack}rubrique-12.gif); }
-a.bando_rub:hover { background-color: #fff; text-decoration: none; color: #333; background-repeat: no-repeat; background-position: [(#ENV{ltr}|choixsiegal{left,1,99})%] center; }
-div.bando_rub { position: absolute; #GET{left}: 120px; background-color: #eee; padding: 0; border: 1px solid #555; visibility: hidden; min-width:100%; }
-
-div.petite-racine { margin-bottom: -5px; }
-div.petite-racine, a.petite-racine { background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat; background-image: url(#CHEMIN{images/racine-site-12.gif}); padding-#GET{left}: 15px; background-color: #fff; border: 1px solid #GET{foncee}; border-bottom: 0; width: 134px; }
-div.petite-rubrique, a.petite-rubrique { background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat; background-image: url(#CHEMIN{images/rubrique-12.gif}); padding-#GET{left}: 15px; }
-div.petit-secteur, a.petit-secteur { background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat; background-image: url(#CHEMIN{images/secteur-12.gif}); padding-#GET{left}: 15px; }
-div.rub-ouverte, a.rub-ouverte { padding-#GET{right}: 10px; background: url(#GET{chemin_img_pack}triangle-droite[(#GET{rtl})].gif) [(#GET{right})] center no-repeat; }
 
 
 [(#REM)</style>]
