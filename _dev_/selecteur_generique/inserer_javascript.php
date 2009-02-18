@@ -37,7 +37,8 @@ function SelecteurGenerique_inserer_auteur() {
 				me.attr('name', 'old_value')
 				.parents('form')
 				.append(
-					jQuery("<input type='hidden' name='nouv_auteur' value='"+data[2]+"' />"
+					jQuery("<input type='hidden' name='nouv_auteur' value='"+data[2]+"' />" // signature SPIP 1.9
+					+"<input type='hidden' name='auteur_article_${id_article}_new' value='"+data[2]+"' />"  // signature SPIP 2.0
 					)
 				)
 				.find("input[type=submit]")
