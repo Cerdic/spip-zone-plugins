@@ -131,7 +131,12 @@ function autoriser_rubrique_creer_bouton_dist($faire, $type='', $id=0, $qui = NU
 }
 
 function autoriser_article_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return autoriser('creerarticledans','rubrique',_request('id_rubrique',isset($opt['contexte'])?$opt['contexte']:null));
+	if (!$id_rubrique = intval(_request('id_rubrique',isset($opt['contexte'])?$opt['contexte']:null))){
+		$article_select = charger_fonction('article_select','inc');
+		$row = $article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
+		$id_rubrique = $row['id_rubrique'];
+	}
+	return autoriser('creerarticledans','rubrique',$id_rubrique);
 }
 
 function autoriser_auteur_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
