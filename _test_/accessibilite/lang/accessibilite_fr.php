@@ -5,6 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+ 'listezones' => 'liste des zones cliquables',
  'pages_dernieres' => 'derni&egrave;re page',
  'pages_premieres' => 'premi&egrave;re page',
  'resultats' => 'R&eacute;sultats',
