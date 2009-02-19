@@ -1,111 +1,225 @@
 <?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/_test_/inscription2/inscription2_193/lang
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-//page de l affichage de la configuration du plugin
-'conf_plugin' => 'Configuration Inscription2',
-'conf_plugin_page' => 'Configuration stock&eacute;e du plugin Inscription2',
-'description_page' => 'Ici vous pouvez v&eacute;rifier vos choix de configuration tels qu\'ils sont stock&eacute;s', 
-'configs' => 'Configurations',
-'formulaire_inscription' => 'Formulaire d\'inscription',
-'info_defaut' => 'Informations par d&eacute;faut',
-'info_defaut_desc' => 'Informations obligatoires par d&eacute;faut',
-'info_perso' => 'Informations personnelles',
-'info_pro' => 'Informations professionnelles',
-'info_connection' => 'Informations de connexion',
-'general_infos' => 'Informations G&eacute;n&eacute;rales',
-'info_perso_desc' => 'Informations personnelles qui seront demand&eacute;es aux nouveaux adh&eacute;rents du site',
-'info_gener' => 'Informations G&eacute;n&eacute;rales',
-'info_gener_desc' => 'Options qui seront demand&eacute;es aux nouveaux adh&eacute;rents du site',
-'info_internes' => 'Informations internes',
-'info_internes_desc' => 'Options qui seront stock&eacute;es dans la base de donn&eacute;es mais ne seront pas affich&eacute;es dans le formulaire des nouveaux adh&eacute;rents',
-'choisir_listes' => 'Choisissez ci-dessous les listes de diffusion &#224; proposer aux nouveaux adh&eacute;rents&nbsp;: ',
-'select_listes' => '(vous pouvez s&#233;lectionner plusieurs secteurs avec la touche shift)',
-'deselect_listes' => '> tout d&#233;s&eacute;lectionner',
-'optout' => 'Cases &agrave; coch&#233;es non pr&#233;coch&#233;es (optout)',
+	// A
+	'a_confirmer' => '&Agrave; confirmer',
+	'accesrestreint' => 'Acc&egrave;s Restreint',
+	'aconfirmer' => '&Agrave; confirmer',
+	'action_adherent' => 'Action adh&eacute;rent',
+	'activation_compte' => 'Activez votre compte',
+	'adherent' => 'Adh&eacute;rent',
+	'adherents' => 'Adh&eacute;rents',
+	'admin' => 'Admin',
+	'admin_modifier_auteur_supp' => 'Informations suppl&eacute;mentaires',
+	'adresse' => 'Adresse',
+	'adresse_pro' => 'Adresse professionnelle (Pro.)',
+	'ajouter_adherent' => 'Ajouter adh&eacute;rent',
+	'aout' => 'ao&ucirc;t',
+	'auteur' => 'Auteur',
+	'autre' => 'Autre',
+	'avril' => 'avril',
 
-//Geolocalisation
-'geoloc' => 'G&eacute;olocalisation',
+	// C
+	'caracteres' => 'caract&egrave;res',
+	'categorie' => 'Cat&eacute;gorie de cotisation',
+	'chaine_valide' => 'Veuillez ins&eacute;rer une chaine de caract&egrave;re',
+	'chainelettre' => '(compos&eacute;e uniquement de lettres)',
+	'chainenombre' => '(compos&eacute;e de lettres et/ou de chiffres)',
+	'champ_obligatoire' => 'Ce champ est obligatoire',
+	'choisir_categories' => 'Choisissez-les ci-dessous&nbsp;:',
+	'choisir_listes' => 'Choisissez ci-dessous les listes de diffusion &#224; proposer aux nouveaux adh&eacute;rents&nbsp;: ',
+	'choisir_nouveau_password' => 'Vous pourrez choisir un nouveau mot de passe en cliquant le lien suivant',
+	'choisir_zones' => 'Veuillez choisir les zones auxquelles vous voulez que les nouveaux adh&eacute;rents soient affect&eacute;s',
+	'choix_domaine' => 'Veuillez choisir votre domaine',
+	'civilite' => 'Civilit&eacute;',
+	'code_postal' => 'Code Postal',
+	'code_postal_pro' => 'Code Postal (Pro.)',
+	'commentaire' => 'Commentaire',
+	'compte_active' => 'Votre compte sur @nom_site@',
+	'conf_plugin' => 'Configuration Inscription2',
+	'conf_plugin_page' => 'Configuration stock&eacute;e du plugin Inscription2',
+	'configs' => 'Configurations',
+	'configuration' => 'Configuration',
+	'confirmation' => '<p>&Ecirc;tes vous s&ucirc;r(e) de vouloir continuer?</p><p>Toutes les modifications seront irreversibles!!!</p>',
+	'contacts_personnels' => 'Contacts personnels',
+	'contacts_pros' => 'Contacts professionnels',
+	'cp_valide' => 'Veuillez ins&eacute;rer un code postal valide',
+	'creation' => 'Date de cr&eacute;ation de la fiche',
 
-'inserez_infos' => 'Veuillez saisir les informations demand&eacute;es',
+	// D
+	'decembre' => 'd&eacute;cembre',
+	'demande_password' => 'Votre mot de passe&nbsp;:',
+	'description_page' => 'Ici vous pouvez v&eacute;rifier vos choix de configuration tels qu\'ils sont stock&eacute;s',
+	'deselect_listes' => '> tout d&#233;s&eacute;lectionner',
+	'divers' => 'Divers',
+	'domaine' => 'Domaine',
+	'domaines' => 'Domaine',
 
-'admin_modifier_auteur_supp' => 'Informations suppl&eacute;mentaires',
+	// E
+	'editer_adherent' => '&Eacute;diter adh&eacute;rent',
+	'email' => 'E-Mail',
+	'email_bonjour' => 'Bonjour @nom@,',
+	'email_obligatoire' => 'Le champ email est obligatoire',
+	'email_valide' => 'Veuillez ins&eacute;rer un email valide',
+	'exp_categorie' => 'Liste d&eacute;roulante des cat&eacute;gories de la table \'spip_asso_categories\' &agrave; proposer aux nouveaux adherents.',
+	'exp_divers' => 'Champ qui sera propos&eacute; aux visiteurs avec le nom de commentaire',
+	'exp_domaines' => 'Restreindre l\'acc&egrave;s &agrave; une liste pr&eacute;d&eacute;finie de domaines',
+	'exp_domaines2' => 'Veuillez d&eacute;finir vos domaines dans le fichier inc/domaines.php en suivant le mod&egrave;le.',
+	'exp_newsletter' => 'Choisissez ci-dessous les listes de diffusion auxquelles vous voulez vous abonner',
+	'exp_publication' => 'Autorisation de publication des donn&eacute;es personnelles',
+	'exp_statut' => 'Choisissez le statut que vous voulez attribuer aux nouveaux adh&eacute;rents',
+	'exp_statut_rel' => 'Champ diff&eacute;rent du statut de SPIP, celui-ci sert pour le controle interne d\'une institution',
+	'exp_validite' => 'Champ utile avec le plugin <strong>ABONNEMENT</strong>, &agrave; cocher s\'il est install&eacute;',
+	'expl_format' => 'Format de reception pour les emails des listes de diffusion',
 
-'form' => 'Formulaire',
-'fiche' => 'Fiche',
-'fiche_mod' => 'Modifiable',
-'table' => 'Table',
-'par_defaut' => 'Ce champs est obligatoire',
-'form_expl' => ' : Le champ sera affich&eacute; sur le formulaire INSCRIPTION2',
-'form_oblig_expl' => ' : Rendre la saisie obligatoire dans le formulaire',
-'fiche_expl'=> ' : Le champ sera visible sur la fiche d\'adh&eacute;rent',
-'fiche_mod_expl' => ' : Le champ sera modifiable depuis l\'interface publique par l\'adh&eacute;rent &agrave; condition d\'utiliser le plugin CRAYONS',
-'table_expl' => ' : Le champ sera affich&eacute; sur la liste des adh&eacute;rents (espace priv&eacute;)',
+	// F
+	'fax' => 'Fax',
+	'fax_pro' => 'Fax professionnel',
+	'feminin' => 'Madame',
+	'fevrier' => 'f&eacute;vrier',
+	'fiche' => 'Fiche',
+	'fiche_adherent' => 'Fiche adh&eacute;rent',
+	'fiche_expl' => ' : Le champ sera visible sur la fiche d\'adh&eacute;rent',
+	'fiche_mod' => 'Modifiable',
+	'fiche_mod_expl' => ' : Le champ sera modifiable depuis l\'interface publique par l\'adh&eacute;rent &agrave; condition d\'utiliser le plugin CRAYONS',
+	'fonction' => 'Fonction',
+	'form' => 'Formulaire',
+	'form_expl' => ' : Le champ sera affich&eacute; sur le formulaire INSCRIPTION2',
+	'form_oblig_expl' => ' : Rendre la saisie obligatoire dans le formulaire',
+	'format' => 'Format',
+	'formulaire_inscription' => 'Formulaire d\'inscription',
+	'formulaire_inscription_ok' => 'Votre inscription a bien &eacute;t&eacute; prise en compte. Vous allez recevoir par courrier &eacute;lectronique vos identifiants de connexion.',
+	'formulaire_login_deja_utilise' => 'Le login est d&eacute;ja utilis&eacute;, veuillez en choisir un autre.',
+	'formulaire_remplir_obligatoires' => 'Veuillez remplir les champs obligatoires',
 
-'icone_menu_config' => 'Inscription2',
-'nom' => 'Signature',
-'password' => 'Mot de passe',
-'password_retaper' => 'Confirmez le mot de passe',
-'password_obligatoire' => 'Le mot de passe est obligatoire.',
-'nom_explication' => 'votre nom ou votre&nbsp;pseudo',
-'nom_famille' => 'Nom de famille',
-'prenom' => 'Pr&eacute;nom',
-'surnom' => 'Surnom',
-'naissance' => 'Date de naissance',
-'civilite' => 'Civilit&eacute;',
-'adresse' => 'Adresse',
-'code_postal' => 'Code Postal',
-'sexe' => 'Civilit&eacute;',
-'ville' => 'Ville',
-'pays' => 'Pays',
-'email' => 'E-Mail',
-'telephone' => 'T&eacute;l&eacute;phone',
-'tel' => 'T&eacute;l.',
-'fax' => 'Fax',
-'mobile' => 'Mobile',
-'profession' => 'Profession',
-'societe' => 'Soci&eacute;t&eacute; / Association ...',
-'url_societe' => 'Site soci&eacute;t&eacute;',
-'secteur' => 'Secteur',
-'adresse_pro' => 'Adresse professionnelle (Pro.)',
-'code_postal_pro' => 'Code Postal (Pro.)',
-'ville_pro' => 'Ville (Pro.)',
-'pays_pro' => 'Pays (Pro.)',
-'telephone_pro' => 'T&eacute;l&eacute;phone professionnel',
-'fax_pro' => 'Fax professionnel',
-'mobile_pro' => 'Mobile professionnel',
-'newsletter' => 'Listes de diffusion',
-'exp_newsletter' => 'Choisissez ci-dessous les listes de diffusion auxquelles vous voulez vous abonner',
-'fonction' => 'Fonction',
-'masculin' => 'Monsieur',
-'feminin' => 'Madame',
-'login' => 'Nom d\'utilisateur (login)',
-'divers' => 'Divers',
-'latitude' => 'Latitude',
-'longitude' => 'Longitude',
-'geomap_obligatoire' => 'Pour utiliser les donn&eacute;es de g&eacute;olocalisation des personnes, il est n&eacute;cessaire d\'installer le plugin GoogleMapApi...',
-'exp_divers' => 'Champ qui sera propos&eacute; aux visiteurs avec le nom de commentaire',
-'categorie' => 'Cat&eacute;gorie de cotisation',
-'exp_categorie' => 'Liste d&eacute;roulante des cat&eacute;gories de la table \'spip_asso_categories\' &agrave; proposer aux nouveaux adherents.',
-'choisir_categories' => 'Choisissez-les ci-dessous&nbsp;:',
-'publication' => 'Publication',
-'exp_publication' => 'Autorisation de publication des donn&eacute;es personnelles',
-'admin' => 'Admin',
-'auteur' => 'Auteur',
-'adherent' => 'Adh&eacute;rent',
-'a_confirmer' => '&Agrave; confirmer',
-'autre' => 'Autre',
-'confirmation' => '<p>&Ecirc;tes vous s&ucirc;r(e) de vouloir continuer?</p><p>Toutes les modifications seront irreversibles!!!</p>',
+	// G
+	'general_infos' => 'Informations G&eacute;n&eacute;rales',
+	'geoloc' => 'G&eacute;olocalisation',
+	'geomap_obligatoire' => 'Pour utiliser les donn&eacute;es de g&eacute;olocalisation des personnes, il est n&eacute;cessaire d\'installer le plugin GoogleMapApi...',
+	'gestion_adherent' => 'Gestion d\'adh&eacute;rents',
 
-'creation' => 'Date de cr&eacute;ation de la fiche',
-'statut_rel' => 'Statut interne',
-'exp_statut_rel' => 'Champ diff&eacute;rent du statut de SPIP, celui-ci sert pour le controle interne d\'une institution',
+	// H
+	'html' => 'HTML',
 
-'activation_compte' => 'Activez votre compte',
-'probleme_email' => 'Probl&egrave;me de mail&nbsp;: l\'email d\'activation ne peut pas &ecirc;tre envoy&eacute;.',
-'email_bonjour' => 'Bonjour @nom@,',
-'message_auto' => '(ceci est un message automatique)',
-'texte_email_inscription' =>   'Vous avez demand&eacute; &agrave; participer &agrave; notre site @nom_site@. 
+	// I
+	'icone_menu_config' => 'Inscription2',
+	'info_connection' => 'Informations de connexion',
+	'info_defaut' => 'Informations par d&eacute;faut',
+	'info_defaut_desc' => 'Informations obligatoires par d&eacute;faut',
+	'info_gener' => 'Informations G&eacute;n&eacute;rales',
+	'info_gener_desc' => 'Options qui seront demand&eacute;es aux nouveaux adh&eacute;rents du site',
+	'info_internes' => 'Informations internes',
+	'info_internes_desc' => 'Options qui seront stock&eacute;es dans la base de donn&eacute;es mais ne seront pas affich&eacute;es dans le formulaire des nouveaux adh&eacute;rents',
+	'info_perso' => 'Informations personnelles',
+	'info_perso_desc' => 'Informations personnelles qui seront demand&eacute;es aux nouveaux adh&eacute;rents du site',
+	'info_pro' => 'Informations professionnelles',
+	'infos_adherent' => 'Informations suppl&eacute;mentaires',
+	'infos_personnelles' => 'Informations personnelles',
+	'inserez_infos' => 'Veuillez saisir les informations demand&eacute;es',
+
+	// J
+	'janvier' => 'janvier',
+	'juillet' => 'juillet',
+	'juin' => 'juin',
+
+	// L
+	'latitude' => 'Latitude',
+	'legende' => 'L&eacute;gende',
+	'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; &agrave; l\'adresse fournie. Pour activer votre compte veuillez suivre les instructions.',
+	'liste_adherents' => 'Liste d\'adh&eacute;rents',
+	'login' => 'Nom d\'utilisateur (login)',
+	'longitude' => 'Longitude',
+
+	// M
+	'mai' => 'mai',
+	'mail_non_domaine' => 'L\'adresse email que vous avez donn&eacute;e n\'appartient pas au domaine que vous avez indiqu&eacute; veuillez essayer &agrave; nouveau',
+	'mail_renvoye' => 'Cette adresse email a d&eacute;j&agrave; &eacute;t&eacute; enregistr&eacute;e, veuillez activer votre compte en suivant les instructions contenues dans le mail.',
+	'mars' => 'mars',
+	'masculin' => 'Monsieur',
+	'message_auto' => '(ceci est un message automatique)',
+	'mobile' => 'Mobile',
+	'mobile_pro' => 'Mobile professionnel',
+	'modif_pass_titre' => 'Modifier votre mot de passe',
+
+	// N
+	'naissance' => 'Date de naissance',
+	'nettoyer_tables' => 'Nettoyer tables',
+	'newsletter' => 'Listes de diffusion',
+	'nom' => 'Signature',
+	'nom_explication' => 'votre nom ou votre&nbsp;pseudo',
+	'nom_famille' => 'Nom de famille',
+	'non_renseigne' => 'non renseign&eacute;.',
+	'non_renseignee' => 'non renseign&eacute;e.',
+	'novembre' => 'novembre',
+	'numero_valide' => 'Veuillez ins&eacute;rer un num&eacute;ro valide',
+
+	// O
+	'octobre' => 'octobre',
+	'optout' => 'Cases &agrave; coch&#233;es non pr&#233;coch&#233;es (optout)',
+
+	// P
+	'page_confirmation' => 'Page de confirmation de votre inscription',
+	'par_defaut' => 'Ce champs est obligatoire',
+	'pass_egal' => 'Veuillez entrer le m&ecirc;me mot de passe que pr&eacute;c&eacute;demment.',
+	'pass_indiquez_cidessous' => 'Indiquez ci-dessous l\'adresse email sous laquelle vous
+			vous &ecirc;tes pr&eacute;c&eacute;demment enregistr&eacute;. Vous
+			recevrez un email vous indiquant la marche &agrave; suivre pour
+			modifier votre acc&egrave;s.',
+	'pass_minimum' => 'Votre mot de passe doit comporter au moins 5 caract&egrave;res',
+	'pass_oubli_mot' => 'Changement de votre mot de passe',
+	'pass_recevoir_mail' => 'Vous allez recevoir un email vous indiquant comment modifier votre acc&egrave;s au site.',
+	'password' => 'Mot de passe',
+	'password_obligatoire' => 'Le mot de passe est obligatoire.',
+	'password_retaper' => 'Confirmez le mot de passe',
+	'pays' => 'Pays',
+	'pays_pro' => 'Pays (Pro.)',
+	'prenom' => 'Pr&eacute;nom',
+	'probleme_email' => 'Probl&egrave;me de mail&nbsp;: l\'email d\'activation ne peut pas &ecirc;tre envoy&eacute;.',
+	'profession' => 'Profession',
+	'profil_droits_insuffisants' => 'Desol&eacute; vous n\'avez pas le droit de modifier cet auteur<br/>',
+	'profil_modifie_ok' => 'Les modifications de votre profil ont bien &eacute;t&eacute; prises en compte.',
+	'publication' => 'Publication',
+
+	// R
+	'raccourcis' => 'Raccourcis',
+	'rappel_login' => 'Rappel : votre identifiant est : ',
+	'rappel_password' => 'Votre mot de passe',
+	'redemande_password' => 'R&eacute;inserez votre mot de passe&nbsp;:',
+	'rien_a_faire' => 'Rien &agrave; faire',
+
+	// S
+	'secteur' => 'Secteur',
+	'select_listes' => '(vous pouvez s&#233;lectionner plusieurs secteurs avec la touche shift)',
+	'septembre' => 'septembre',
+	'sexe' => 'Civilit&eacute;',
+	'societe' => 'Soci&eacute;t&eacute; / Association ...',
+	'statut' => 'Statut',
+	'statut_rel' => 'Statut interne',
+	'suppression_faite' => 'La suppression de vos donn&eacute;es a &eacute;t&eacute; effectu&eacute;e',
+	'supprimer_adherent' => 'Supprimer adh&eacute;rent',
+	'supprimer_adherent_red' => 'Sup',
+	'surnom' => 'Surnom',
+
+	// T
+	'table' => 'Table',
+	'table_expl' => ' : Le champ sera affich&eacute; sur la liste des adh&eacute;rents (espace priv&eacute;)',
+	'tel' => 'T&eacute;l.',
+	'telephone' => 'T&eacute;l&eacute;phone',
+	'telephone_pro' => 'T&eacute;l&eacute;phone professionnel',
+	'texte' => 'Texte',
+	'texte_email_confirmation' => 'Votre compte est actif, vous pouvez d&egrave;s maintenant vous connecter au site en utilisant vos identifiants personnels.
+
+Votre login est&nbsp;: @login@
+et vous venez choisir votre mot de passe.
+
+Merci de votre confiance
+
+L\'&eacute;quipe de @nom_site@',
+	'texte_email_inscription' => 'Vous avez demand&eacute; &agrave; participer &agrave; notre site @nom_site@. 
 Vous &ecirc;tes actuellement sur le point de finir votre inscription. Il vous suffit de cliquer le lien ci-dessous pour activer votre compte et choisir votre mot de passe.
 
 @link_activation@
@@ -119,120 +233,24 @@ Si vous n\'avez pas demand&eacute; cette inscription ou ne voulez plus faire par
 Merci de votre confiance.
 
 L\'&eacute;quipe de @nom_site@',
-'rappel_password' => 'Votre mot de passe',
-'rappel_login' => 'Rappel : votre identifiant est : ',
-'choisir_nouveau_password' => 'Vous pourrez choisir un nouveau mot de passe en cliquant le lien suivant',
-'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; &agrave; l\'adresse fournie. Pour activer votre compte veuillez suivre les instructions.',
-'mail_renvoye' => 'Cette adresse email a d&eacute;j&agrave; &eacute;t&eacute; enregistr&eacute;e, veuillez activer votre compte en suivant les instructions contenues dans le mail.',
-'demande_password' => 'Votre mot de passe&nbsp;:',
-'redemande_password' => 'R&eacute;inserez votre mot de passe&nbsp;:',
-'texte_email_confirmation' => 'Votre compte est actif, vous pouvez d&egrave;s maintenant vous connecter au site en utilisant vos identifiants personnels.
+	'titre_confirmation' => 'Confirmation',
 
-Votre login est&nbsp;: @login@
-et vous venez choisir votre mot de passe.
+	// U
+	'url_societe' => 'Site soci&eacute;t&eacute;',
 
-Merci de votre confiance
+	// V
+	'validite' => 'Date de validit&eacute;',
+	'ville' => 'Ville',
+	'ville_pro' => 'Ville (Pro.)',
+	'visiteur' => 'Visiteur',
+	'vos_contacts_personnels' => 'Vos contacts personnels',
+	'votre_adresse' => 'Votre adresse personnelle',
+	'votre_adresse_pro' => 'Votre adresse (professionnelle)',
+	'votre_nom_complet' => 'Votre nom complet',
+	'votre_profil' => 'Votre profil',
 
-L\'&eacute;quipe de @nom_site@',
-'compte_active' => 'Votre compte sur @nom_site@',
-'suppression_faite' => 'La suppression de vos donn&eacute;es a &eacute;t&eacute; effectu&eacute;e',
-
-'janvier' => 'janvier',
-'fevrier' => 'f&eacute;vrier',
-'mars' => 'mars',
-'avril' => 'avril',
-'mai' => 'mai',
-'juin' => 'juin',
-'juillet' => 'juillet',
-'aout' => 'ao&ucirc;t',
-'septembre' => 'septembre',
-'octobre' => 'octobre',
-'novembre' => 'novembre',
-'decembre' => 'd&eacute;cembre',
-
-'accesrestreint' => 'Acc&egrave;s Restreint',
-'choisir_zones' => 'Veuillez choisir les zones auxquelles vous voulez que les nouveaux adh&eacute;rents soient affect&eacute;s',
-'domaines' => 'Domaine',
-'exp_domaines' => 'Restreindre l\'acc&egrave;s &agrave; une liste pr&eacute;d&eacute;finie de domaines',
-'exp_domaines2' => 'Veuillez d&eacute;finir vos domaines dans le fichier inc/domaines.php en suivant le mod&egrave;le.',
-'domaine' => 'Domaine',
-'choix_domaine' => 'Veuillez choisir votre domaine',
-'mail_non_domaine' => 'L\'adresse email que vous avez donn&eacute;e n\'appartient pas au domaine que vous avez indiqu&eacute; veuillez essayer &agrave; nouveau',
-'format' => 'Format',
-'expl_format' => 'Format de reception pour les emails des listes de diffusion',
-'texte' => 'Texte', 
-'html' => 'HTML',
-
-'gestion_adherent' => 'Gestion d\'adh&eacute;rents',
-'configuration' => 'Configuration',
-'adherents' => 'Adh&eacute;rents',
-'ajouter_adherent' => 'Ajouter adh&eacute;rent',
-'liste_adherents' => 'Liste d\'adh&eacute;rents',
-'nettoyer_tables' => 'Nettoyer tables',
-'raccourcis' => 'Raccourcis',
-'legende' => 'L&eacute;gende',
-'supprimer_adherent_red' => 'Sup',
-'supprimer_adherent' => 'Supprimer adh&eacute;rent',
-'editer_adherent' => '&Eacute;diter adh&eacute;rent',
-'fiche_adherent' => 'Fiche adh&eacute;rent',
-'action_adherent' => 'Action adh&eacute;rent',
-'auteur' => 'Auteur',
-'aconfirmer' => '&Agrave; confirmer',
-'statut' => 'Statut',
-'infos_adherent' => 'Informations suppl&eacute;mentaires',
-'visiteur' => 'Visiteur',
-'exp_statut' => 'Choisissez le statut que vous voulez attribuer aux nouveaux adh&eacute;rents',
-'commentaire' => 'Commentaire',
-'validite' => 'Date de validit&eacute;',
-'exp_validite' => 'Champ utile avec le plugin <strong>ABONNEMENT</strong>, &agrave; cocher s\'il est install&eacute;',
-
-//profil
-'votre_profil' => 'Votre profil',
-'contacts_personnels' => 'Contacts personnels',
-'contacts_pros' => 'Contacts professionnels',
-'votre_adresse' => 'Votre adresse personnelle',
-'votre_adresse_pro' => 'Votre adresse (professionnelle)',
-'votre_nom_complet' => 'Votre nom complet',
-'vos_contacts_personnels' => 'Vos contacts personnels',
-'website' => 'Site Internet',
-'infos_personnelles' => 'Informations personnelles',
-'non_renseigne' => 'non renseign&eacute;.',
-'non_renseignee' => 'non renseign&eacute;e.',
-'modif_pass_titre' => 'Modifier votre mot de passe',
-'profil_modifie_ok' => 'Les modifications de votre profil ont bien &eacute;t&eacute; prises en compte.',
-'profil_droits_insuffisants' => 'Desol&eacute; vous n\'avez pas le droit de modifier cet auteur<br/>',
-
-// Validation des champs
-'champ_obligatoire' => 'Ce champ est obligatoire',
-'chaine_valide' => 'Veuillez ins&eacute;rer une chaine de caract&egrave;re',
-'cp_valide' => 'Veuillez ins&eacute;rer un code postal valide',
-'numero_valide' => 'Veuillez ins&eacute;rer un num&eacute;ro valide',
-'caracteres' => 'caract&egrave;res',
-'chainenombre' => '(compos&eacute;e de lettres et/ou de chiffres)',
-'chainelettre' => '(compos&eacute;e uniquement de lettres)',
-'email_valide' => 'Veuillez ins&eacute;rer un email valide',
-'email_obligatoire' => 'Le champ email est obligatoire',
-'pass_minimum' => 'Votre mot de passe doit comporter au moins 5 caract&egrave;res',
-'pass_egal' => 'Veuillez entrer le m&ecirc;me mot de passe que pr&eacute;c&eacute;demment.',
-
-// Change_pass
-'pass_indiquez_cidessous' => 'Indiquez ci-dessous l\'adresse email sous laquelle vous
-			vous &ecirc;tes pr&eacute;c&eacute;demment enregistr&eacute;. Vous
-			recevrez un email vous indiquant la marche &agrave; suivre pour
-			modifier votre acc&egrave;s.',
-'pass_recevoir_mail' => 'Vous allez recevoir un email vous indiquant comment modifier votre acc&egrave;s au site.',
-'pass_oubli_mot' => 'Changement de votre mot de passe',
-
-'titre_confirmation' => 'Confirmation',
-'page_confirmation' => 'Page de confirmation de votre inscription',
-
-//Confirmation Inscription
-'rien_a_faire' => 'Rien &agrave; faire',
-
-// Formulaire CVT inscription
-'formulaire_login_deja_utilise' => 'Le login est d&eacute;ja utilis&eacute;, veuillez en choisir un autre.',
-'formulaire_remplir_obligatoires' => 'Veuillez remplir les champs obligatoires',
-'formulaire_inscription_ok' => 'Votre inscription a bien &eacute;t&eacute; prise en compte. Vous allez recevoir par courrier &eacute;lectronique vos identifiants de connexion.',
-
+	// W
+	'website' => 'Site Internet'
 );
+
 ?>

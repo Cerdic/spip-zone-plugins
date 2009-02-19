@@ -1,124 +1,177 @@
 <?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-//page d'affichage de la configuration du plugin
-'conf_plugin' => 'Inscription2 settings',
-'conf_plugin_page' => 'Registered settings of plugin Inscription2',
-'description_page' => 'Here you can check your settings choices how they are registered', 
-'configs' => 'Configurations',
-'formulaire_inscription' => 'Form of inscription',
-'info_defaut' => 'Informations by defect',
-'info_defaut_desc' => 'Obligatory by defect informations',
-'info_perso' => 'Personal informations',
-'info_pro' => 'Professional informations',
-'info_connection' => 'Login informations',
-'general_infos' => 'General Infos',
-'info_perso_desc' => 'Personal informations requested from the new members of the site',
-'info_gener' => 'General Informations',
-'info_gener_desc' => 'Options which will be asked to the new adherents of the site',
-'info_internes' => 'Internal information',
-'info_internes_desc' => 'Options which will be stored in the data base but will not be displayed in the form for the new members',
-'choisir_listes' => "Choose the newsletters that will be proposed to the new adherents of the site:",
-'select_listes' => '(you may select a group holding down the shift key)',
-'deselect_listes' => '> deselect all',
-'optout' => 'Cases &agrave; coch&#233;es non pr&#233;coch&#233;es (optout)',
+	// A
+	'a_confirmer' => '<NEW>&Agrave; confirmer',
+	'accesrestreint' => 'Restricted access',
+	'activation_compte' => 'Activate your account',
+	'adherent' => '<NEW>Adh&eacute;rent',
+	'admin' => 'Admin',
+	'admin_modifier_auteur_supp' => '<NEW>Informations suppl&eacute;mentaires',
+	'adresse' => 'Address',
+	'adresse_pro' => 'Professionnal address',
+	'aout' => 'August',
+	'auteur' => 'Author',
+	'autre' => '<NEW>Autre',
+	'avril' => 'April',
 
-//Geolocalisation
-'geoloc' => 'G&eacute;olocalisation',
+	// C
+	'caracteres' => 'characters',
+	'categorie' => 'Category of contribution',
+	'chaine_valide' => 'Please insert a string',
+	'chainelettre' => '(composed only by letters)',
+	'chainenombre' => '(composed by letters and/or figures)',
+	'champ_obligatoire' => 'This field is required',
+	'choisir_categories' => 'Select them in the following list:',
+	'choisir_listes' => 'Choose the newsletters that will be proposed to the new adherents of the site:',
+	'choisir_nouveau_password' => 'You will be able to choose a new password by clicking on the following link',
+	'choisir_zones' => 'Choose the areas where the new adherents of the site will be affected',
+	'choix_domaine' => 'Choose your domain',
+	'code_postal' => 'Postal Code',
+	'code_postal_pro' => 'Postal Code',
+	'compte_active' => 'Your account was activated',
+	'conf_plugin' => 'Inscription2 settings',
+	'conf_plugin_page' => 'Registered settings of plugin Inscription2',
+	'configs' => 'Configurations',
+	'confirmation' => '<NEW><p>&Ecirc;tes vous s&ucirc;r(e) de vouloir continuer?</p><p>Toutes les modifications seront irreversibles!!!</p>',
+	'contacts_personnels' => 'Personnal contacts',
+	'contacts_pros' => 'Professional contacts',
+	'cp_valide' => 'Please insert a valid postal code',
+	'creation' => 'Creation date of the card',
 
-'inserez_infos' => 'Please fill the form with informations requested',
+	// D
+	'decembre' => 'December',
+	'description_page' => 'Here you can check your settings choices how they are registered',
+	'deselect_listes' => '> deselect all',
+	'divers' => 'any other business',
+	'domaine' => 'Domain',
+	'domaines' => 'Restrict the inscriptions to certain domains',
 
-'admin_modifier_auteur_supp' => '<NEW>Informations suppl&eacute;mentaires',
+	// E
+	'email' => 'E-Mail',
+	'email_bonjour' => 'Hello @nom@,',
+	'email_valide' => 'Please insert a valid e-mail address',
+	'exp_categorie' => 'Drop-down list of the categories from the table \'spip_asso_categories\' so that the user chooses one of them',
+	'exp_divers' => 'Field which will be proposed to the visitors under the name of comment',
+	'exp_domaines' => 'Define your domains in the file inc/domaines.php following the model',
+	'exp_newsletter' => 'Choose the newsletter to wich you want to subscribe',
+	'exp_publication' => 'Publication authorization of the personal data',
+	'exp_statut_rel' => 'This field is different from the SPIP status, this one is useful for the internal control of an institution',
+	'expl_format' => 'Choose the format that you prefer to receive the emails of the newsletters',
 
-'form' => 'Form',
-'fiche' => 'card-index',
-'fiche_mod' => 'Modifiable',
-'table' => 'Table',
-'par_defaut' => ' by default',
-'form_expl' => ' : The field will be displayed on the form INSCRIPTION2',
-'form_oblig_expl' => '<NEW> : Rendre la saisie obligatoire dans le formulaire',
-'fiche_expl'=> ' : The field will be visible on the card of member',
-'fiche_mod_expl' => ' : The field could be modified from the public interface by the member if the plugin CRAYONS is used (PENCILS)',
-'table_expl' => ' : The field will be displayed on the list of the adherents (private area)',
+	// F
+	'fax' => 'Fax',
+	'fax_pro' => 'Professionnal fax',
+	'feminin' => 'female',
+	'fevrier' => 'February',
+	'fiche' => 'card-index',
+	'fiche_expl' => ' : The field will be visible on the card of member',
+	'fiche_mod' => 'Modifiable',
+	'fiche_mod_expl' => ' : The field could be modified from the public interface by the member if the plugin CRAYONS is used (PENCILS)',
+	'fonction' => 'Function',
+	'form' => 'Form',
+	'form_expl' => ' : The field will be displayed on the form INSCRIPTION2',
+	'form_oblig_expl' => '<NEW> : Rendre la saisie obligatoire dans le formulaire',
+	'format' => 'Format',
+	'formulaire_inscription' => 'Form of inscription',
 
-'icone_menu_config' => 'Inscription2',
-'nom' => 'Signature',
-'nom_explication' => 'your name or nickname',
-'nom_famille' => 'Name',
-'prenom' => 'First name',
-'naissance' => 'Date of birth',
-'adresse' => 'Address',
-'code_postal' => 'Postal Code',
-'sexe' => 'Gender',
-'ville' => 'City',
-'pays' => 'Country',
-'email' => 'E-Mail',
-'telephone' => 'Phone',
-'tel' => 'Tel.',
-'fax' => 'Fax',
-'mobile' => 'Mobile',
-'profession' => 'Profession',
-'societe' => 'Company / Non Profit Organization...',
-'url_societe' => '<NEW>Site soci&eacute;t&eacute;',
-'secteur' => 'Sector of activity',
-'adresse_pro' => 'Professionnal address',
-'code_postal_pro' => 'Postal Code',
-'ville_pro' => 'City',
-'pays_pro' => 'Country',
-'telephone_pro' => 'Professionnal phone',
-'fax_pro' => 'Professionnal fax',
-'mobile_pro' => 'Professionnal mobile',
-'newsletter' => 'Newsletter',
-'exp_newsletter' => 'Choose the newsletter to wich you want to subscribe',
-'fonction' => 'Function',
-'masculin' => 'male',
-'feminin' => 'female',
-'login' => 'Username (login)',
-'divers' => 'any other business',
-'latitude' => 'Latitude',
-'longitude' => 'Longitude',
-'geomap_obligatoire' => 'To use the geolocalization datas for the people, you need to install the GoogleMapApi plugin',
-'exp_divers' => 'Field which will be proposed to the visitors under the name of comment',
-'categorie' => 'Category of contribution',
-'exp_categorie' => 'Drop-down list of the categories from the table \'spip_asso_categories\' so that the user chooses one of them',
-'choisir_categories' => 'Select them in the following list:',
-'publication' => 'Publication',
-'exp_publication' => 'Publication authorization of the personal data',
-'admin' => 'Admin',
-'auteur' => 'Author',
-'adherent' => '<NEW>Adh&eacute;rent',
-'a_confirmer' => '<NEW>&Agrave; confirmer',
-'autre' => '<NEW>Autre',
-'confirmation' => '<NEW><p>&Ecirc;tes vous s&ucirc;r(e) de vouloir continuer?</p><p>Toutes les modifications seront irreversibles!!!</p>',
+	// G
+	'general_infos' => 'General Infos',
+	'geoloc' => 'G&eacute;olocalisation',
+	'geomap_obligatoire' => 'To use the geolocalization datas for the people, you need to install the GoogleMapApi plugin',
 
-'creation' => 'Creation date of the card',
-'statut_rel' => 'Internal status',
-'exp_statut_rel' => 'This field is different from the SPIP status, this one is useful for the internal control of an institution',
+	// H
+	'html' => 'HTML',
 
-'activation_compte' => 'Activate your account',
-'probleme_email' => 'eMail trouble &nbsp;: the activation email cannot be sent.',
-'email_bonjour' => 'Hello @nom@,',
-'message_auto' => '(this is an automatic message)',
-'texte_email_inscription' =>   'You asked to take part in our site @nom_site@. 
-You are currently about to finish your inscription. You just have to click the link below to activate your account and to choose your password.
-@link_activation@
+	// I
+	'icone_menu_config' => 'Inscription2',
+	'info_connection' => 'Login informations',
+	'info_defaut' => 'Informations by defect',
+	'info_defaut_desc' => 'Obligatory by defect informations',
+	'info_gener' => 'General Informations',
+	'info_gener_desc' => 'Options which will be asked to the new adherents of the site',
+	'info_internes' => 'Internal information',
+	'info_internes_desc' => 'Options which will be stored in the data base but will not be displayed in the form for the new members',
+	'info_perso' => 'Personal informations',
+	'info_perso_desc' => 'Personal informations requested from the new members of the site',
+	'info_pro' => 'Professional informations',
+	'infos_personnelles' => '<NEW>Informations personnelles',
+	'inserez_infos' => 'Please fill the form with informations requested',
 
-Your login is&nbsp;: @login@
+	// J
+	'janvier' => 'January',
+	'juillet' => 'July',
+	'juin' => 'June',
 
-If you did not ask for this inscription or you do not want to form part of our site any more, click link below.\n
-@link_suppresion@
+	// L
+	'latitude' => 'Latitude',
+	'lisez_mail' => 'An email has been just sent to the provided address. To activate your account please follow the instructions.',
+	'login' => 'Username (login)',
+	'longitude' => 'Longitude',
 
-Thank you for your confidence.
+	// M
+	'mai' => 'May',
+	'mail_non_domaine' => 'The email that you entered does not belong to the chosen domain, try again',
+	'mail_renvoye' => 'This email address was already recorded. Please activate your account following the instructions contained in the mail.',
+	'mars' => 'March',
+	'masculin' => 'male',
+	'message_auto' => '(this is an automatic message)',
+	'mobile' => 'Mobile',
+	'mobile_pro' => 'Professionnal mobile',
 
-The @nom_site@\'s Team',
-'rappel_password' => 'Reminder of your password',
-'rappel_login' => 'Reminder : your login is : ',
-'choisir_nouveau_password' => 'You will be able to choose a new password by clicking on the following link',
-'lisez_mail' => 'An email has been just sent to the provided address. To activate your account please follow the instructions.',
-'mail_renvoye' => 'This email address was already recorded. Please activate your account following the instructions contained in the mail.',
-'redemande_password' => 'Please fill your password again:',
-'texte_email_confirmation' => 'Your account has been activated. Since now you can access to the site by using your personal identifiers.\n
+	// N
+	'naissance' => 'Date of birth',
+	'newsletter' => 'Newsletter',
+	'nom' => 'Signature',
+	'nom_explication' => 'your name or nickname',
+	'nom_famille' => 'Name',
+	'non_renseigne' => '<NEW>non renseign&eacute;.',
+	'non_renseignee' => '<NEW>non renseign&eacute;e.',
+	'novembre' => 'November',
+	'numero_valide' => 'Please insert a valid number',
+
+	// O
+	'octobre' => 'October',
+	'optout' => 'Cases &agrave; coch&#233;es non pr&#233;coch&#233;es (optout)',
+
+	// P
+	'page_confirmation' => 'Confirmation of your inscription',
+	'par_defaut' => ' by default',
+	'pays' => 'Country',
+	'pays_pro' => 'Country',
+	'prenom' => 'First name',
+	'probleme_email' => 'eMail trouble &nbsp;: the activation email cannot be sent.',
+	'profession' => 'Profession',
+	'publication' => 'Publication',
+
+	// R
+	'rappel_login' => 'Reminder : your login is : ',
+	'rappel_password' => 'Reminder of your password',
+	'redemande_password' => 'Please fill your password again:',
+
+	// S
+	'secteur' => 'Sector of activity',
+	'select_listes' => '(you may select a group holding down the shift key)',
+	'septembre' => 'September',
+	'sexe' => 'Gender',
+	'societe' => 'Company / Non Profit Organization...',
+	'statut_rel' => 'Internal status',
+	'suppression_faite' => 'erasure completed',
+
+	// T
+	'table' => 'Table',
+	'table_expl' => ' : The field will be displayed on the list of the adherents (private area)',
+	'tel' => 'Tel.',
+	'telephone' => 'Phone',
+	'telephone_pro' => 'Professionnal phone',
+	'texte' => 'Text',
+	'texte_email_confirmation' => 'Your account has been activated. Since now you can access to the site by using your personal identifiers.\\n
 
 Your login is&nbsp;: @login@
 and your password you just typed it.
@@ -126,62 +179,34 @@ and your password you just typed it.
 Thank you for your confidence
 
 The @nom_site@\'s Team',
-'compte_active' => 'Your account was activated',
-'suppression_faite' => "erasure completed",
+	'texte_email_inscription' => 'You asked to take part in our site @nom_site@. 
+You are currently about to finish your inscription. You just have to click the link below to activate your account and to choose your password.
+@link_activation@
 
-'janvier' => 'January',
-'fevrier' => 'February',
-'mars' => 'March',
-'avril' => 'April',
-'mai' => 'May',
-'juin' => 'June',
-'juillet' => 'July',
-'aout' => 'August',
-'septembre' => 'September',
-'octobre' => 'October',
-'novembre' => 'November',
-'decembre' => 'December',
+Your login is&nbsp;: @login@
 
-'accesrestreint' => 'Restricted access',
-'choisir_zones' => 'Choose the areas where the new adherents of the site will be affected',
+If you did not ask for this inscription or you do not want to form part of our site any more, click link below.\\n
+@link_suppresion@
 
-'domaines' => 'Restrict the inscriptions to certain domains',
-'exp_domaines' => 'Define your domains in the file inc/domaines.php following the model',
-'domaine' => 'Domain',
-'choix_domaine' => 'Choose your domain',
-'mail_non_domaine' => 'The email that you entered does not belong to the chosen domain, try again',
-'format' => 'Format',
-'expl_format' => 'Choose the format that you prefer to receive the emails of the newsletters',
-'texte' => 'Text', 
-'html' => 'HTML',
+Thank you for your confidence.
 
-//profil
-'votre_profil' => 'Your profile',
-'contacts_personnels' => 'Personnal contacts',
-'contacts_pros' => 'Professional contacts',
-'votre_adresse' => 'Your personnal address',
-'votre_adresse_pro' => 'Your professionnal address',
-'votre_nom_complet' => 'Your complete name',
-'vos_contacts_personnels' => '<NEW>Vos contacts personnels',
-'website' => 'website',
-'infos_personnelles' => '<NEW>Informations personnelles',
-'non_renseigne' => '<NEW>non renseign&eacute;.',
-'non_renseignee' => '<NEW>non renseign&eacute;e.',
+The @nom_site@\'s Team',
+	'titre_confirmation' => 'Confirmation',
 
-//validation des champs
-'champ_obligatoire' => 'This field is required',
-'chaine_valide' => 'Please insert a string',
-'cp_valide' => 'Please insert a valid postal code',
-'numero_valide' => 'Please insert a valid number',
-'caracteres' => 'characters',
-'chainenombre' => '(composed by letters and/or figures)',
-'chainelettre' => '(composed only by letters)',
-'email_valide' => 'Please insert a valid e-mail address',
+	// U
+	'url_societe' => '<NEW>Site soci&eacute;t&eacute;',
 
-'titre_confirmation' => 'Confirmation',
-'page_confirmation' => 'Confirmation of your inscription'
+	// V
+	'ville' => 'City',
+	'ville_pro' => 'City',
+	'vos_contacts_personnels' => '<NEW>Vos contacts personnels',
+	'votre_adresse' => 'Your personnal address',
+	'votre_adresse_pro' => 'Your professionnal address',
+	'votre_nom_complet' => 'Your complete name',
+	'votre_profil' => 'Your profile',
 
+	// W
+	'website' => 'website'
 );
-
 
 ?>
