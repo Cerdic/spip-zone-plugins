@@ -130,6 +130,10 @@ body { font-size:0.625em; margin-bottom:5em;}
 #bando_navigation ul li a:focus { text-decoration: underline; }
 
 #bando_navigation ul li.first { border-#GET{left}: 1px solid #eee;}
+/* pour les icones pochoir de diala */
+#bando_navigation ul.deroulant > li > a { background-color: #[(#GET{claire}|couleur_eclaircir)]; }
+#bando_navigation ul.deroulant > li > a:hover,
+#bando_navigation ul.deroulant > li > a:focus { background-color: #GET{claire}; }
 
 .avec_icones #bando_navigation ul li a {background-position:center top;background-repeat:no-repeat;margin-top:5px;padding-top:55px;}
 .avec_icones #bando_navigation ul li ul li a {margin-#GET{left}:7px;background-position:[(#GET{left})] center;margin-top:0;padding-#GET{left}:30px;padding-top:0.8em;}
