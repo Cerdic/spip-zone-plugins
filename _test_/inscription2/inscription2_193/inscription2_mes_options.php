@@ -1,7 +1,6 @@
 <?php
-	/**Plugin Inscription 2 avec CFG **/
-	include_spip('base/inscription2');
-	include_spip('base/abstract_sql');
+
+include_spip('base/abstract_sql');
 
 //
 // <BOUCLE(AUTEURS)>

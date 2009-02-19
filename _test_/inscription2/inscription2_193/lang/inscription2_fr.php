@@ -165,6 +165,7 @@ L\'&eacute;quipe de @nom_site@',
 
 'gestion_adherent' => 'Gestion d\'adh&eacute;rents',
 'configuration' => 'Configuration',
+'adherents' => 'Adh&eacute;rents',
 'ajouter_adherent' => 'Ajouter adh&eacute;rent',
 'liste_adherents' => 'Liste d\'adh&eacute;rents',
 'nettoyer_tables' => 'Nettoyer tables',

@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_internes' => 'Interne Informationen',
 'info_internes_desc' => 'Options qui seront stock&eacute;es dans la base de donn&eacute;es mais ne seront pas affich&eacute;es dans le formulaire des nouveaux adh&eacute;rents',
 'choisir_listes' => 'Unten w&auml;hlen Sie die den neuen Mitgliedern vorzuschlagenden Verbreitungslisten:',
-'select_listes' => '(Sie k&ouml;nnen mehrere Bereiche mit dem Anschlag auswählen shift)',
+'select_listes' => '(Sie k&ouml;nnen mehrere Bereiche mit dem Anschlag auswï¿½hlen shift)',
 'deselect_listes' => '> alles unauszuw&auml;hlen',
 'optout' => 'Cases &agrave; coch&#233;es non pr&#233;coch&#233;es (optout)',
 
@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'form' => 'Formular',
 'fiche' => 'Karte',
-'fiche_mod' => 'Abänderungsfähig',
+'fiche_mod' => 'Abï¿½nderungsfï¿½hig',
 'table' => 'Tisch',
 'par_defaut' => 'par d&eacute;faut',
 'form_expl' => ' : Le champ sera affich&eacute; sur le formulaire INSCRIPTION2',
@@ -136,14 +136,14 @@ L\'&eacute;quipe de @nom_site@',
 'novembre' => 'November',
 'decembre' => 'Dezember',
 
-'accesrestreint' => 'Eingeschränkter Zugang',
+'accesrestreint' => 'Eingeschrï¿½nkter Zugang',
 'choisir_zones' => 'Veuillez choisir les zones auxquelles vous voulez que les nouveaux adh&eacute;rents soient affect&eacute;s',
 'domaines' => 'Domaine',
 'exp_domaines' => 'Restreindre l\'acc&egrave;s &agrave; une liste predefinie des domaines',
 'exp_domaines2' => 'Veuillez definir vos domaines dans le fichier inc/domaines.php en suivant le mod&egrave;le.',
 'domaine' => 'Domaine',
 'choix_domaine' => 'Veuillez choisir votre domaine',
-'mail_non_domaine' => 'L\'adresse email que vous avez donnée n\'appartient pas au domaine que vous avez indiqu&eacute; vueillez essayer &agrave; nouveau',
+'mail_non_domaine' => 'L\'adresse email que vous avez donn&eacute;e n\'appartient pas au domaine que vous avez indiqu&eacute; vueillez essayer &agrave; nouveau',
 'format' => 'Format',
 'expl_format' => 'Veuillez choisir le format que vous pr&eacute;f&eacute;rez pour recevoir les emails des listes de diffusion',
 'texte' => 'Text', 
@@ -151,6 +151,7 @@ L\'&eacute;quipe de @nom_site@',
 
 'gestion_adherent' => 'Genstion d\'adh&eacute;rents',
 'configuration' => 'Konfiguration',
+'adherents' => 'Adh&eacute;rents',
 'ajouter_adherent' => 'Ajouter adh&eacute;rent',
 'liste_adherents' => 'Liste d\'adh&eacute;rents',
 'nettoyer_tables' => 'Tische zu reinigen',
@@ -173,9 +174,9 @@ L\'&eacute;quipe de @nom_site@',
 
 //profil
 'votre_profil' => 'Ihr Profil',
-'contacts_personnels' => 'Persönliche Kontakte',
+'contacts_personnels' => 'Persï¿½nliche Kontakte',
 'contacts_pros' => 'Professionelle Kontakte',
-'votre_adresse' => 'Ihre persönliche Adresse',
+'votre_adresse' => 'Ihre persï¿½nliche Adresse',
 'votre_adresse_pro' => 'Ihre professionelle Adresse',
 'votre_nom_complet' => '<NEW>Votre nom complet',
 'vos_contacts_personnels' => '<NEW>Vos contacts personnels',
@@ -195,7 +196,7 @@ L\'&eacute;quipe de @nom_site@',
 'email_valide' => '<NEW>Veuillez ins&eacute;rer un email valide',
 
 'titre_confirmation' => 'Confirmation',
-'page_confirmation' => 'Seite der Bestätigung Ihrer Einschreibung'
+'page_confirmation' => 'Seite der Bestï¿½tigung Ihrer Einschreibung'
 
 );
 
