@@ -37,43 +37,12 @@
 
 ][(#GET{image})
 <span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[ width:(#LARGEUR)px;]']>
-[<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"][ lang="(#ENV{langue})"][ title="(#ENV{alt}|texte_backend|sinon{#TITRE|texte_backend|sinon{#ENV{lien}|texte_backend}})"]>]<img src='#URL_DOCUMENT'[ width="(#LARGEUR)"][ height="(#HAUTEUR)"][(#ENV{lien1}|oui) usemap="#[AP(#URL_DOCUMENT|md5)]"][ lang="(#ENV{langue})"] alt="[(#ENV{alt}|texte_backend|sinon{#TITRE|texte_backend|sinon{#ENV{lien}|texte_backend}})]"[(#DESCRIPTIF|?{' ',''})longdesc="[(#URL_PAGE{longdesc,id=#ID_DOCUMENT}|parametre_url{'lang',#ENV{langue,#LANG}})]"] />
-
-[(#ENV{lien1}|oui)<map name="AP[(#URL_DOCUMENT|md5)]" id="AP[(#URL_DOCUMENT|md5)]">
-[<area shape="#ENV{type1}" coords="(#ENV{coord1})" href="[(#ENV{lien1}|accessibilite_enlien)]" alt="#ENV{alt1}" />]
-[<area shape="#ENV{type2}" coords="(#ENV{coord2})" href="[(#ENV{lien2}|accessibilite_enlien)]" alt="#ENV{alt2}" />]
-[<area shape="#ENV{type3}" coords="(#ENV{coord3})" href="[(#ENV{lien3}|accessibilite_enlien)]" alt="#ENV{alt3}" />]
-[<area shape="#ENV{type4}" coords="(#ENV{coord4})" href="[(#ENV{lien4}|accessibilite_enlien)]" alt="#ENV{alt4}" />]
-[<area shape="#ENV{type5}" coords="(#ENV{coord5})" href="[(#ENV{lien5}|accessibilite_enlien)]" alt="#ENV{alt5}" />]
-[<area shape="#ENV{type6}" coords="(#ENV{coord6})" href="[(#ENV{lien6}|accessibilite_enlien)]" alt="#ENV{alt6}" />]
-[<area shape="#ENV{type7}" coords="(#ENV{coord7})" href="[(#ENV{lien7}|accessibilite_enlien)]" alt="#ENV{alt7}" />]
-[<area shape="#ENV{type8}" coords="(#ENV{coord8})" href="[(#ENV{lien8}|accessibilite_enlien)]" alt="#ENV{alt8}" />]
-[<area shape="#ENV{type9}" coords="(#ENV{coord9})" href="[(#ENV{lien9}|accessibilite_enlien)]" alt="#ENV{alt9}" />]
-[<area shape="#ENV{type10}" coords="(#ENV{coord10})" href="[(#ENV{lien10}|accessibilite_enlien)]" alt="#ENV{alt10}" />]
-[<area shape="#ENV{type11}" coords="(#ENV{coord11})" href="[(#ENV{lien11}|accessibilite_enlien)]" alt="#ENV{alt11}" />]
-[<area shape="#ENV{type12}" coords="(#ENV{coord12})" href="[(#ENV{lien12}|accessibilite_enlien)]" alt="#ENV{alt12}" />]
-</map>]
-
+[<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"][ lang="(#ENV{langue})"][ title="(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html}})"]>]<img src='#URL_DOCUMENT'[ width="(#LARGEUR)"][ height="(#HAUTEUR)"][ lang="(#ENV{langue})"] alt="[(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html}})]"[(#DESCRIPTIF|?{' ',''})longdesc="[(#URL_PAGE{longdesc,id=#ID_DOCUMENT}|parametre_url{'lang',#ENV{langue,#LANG}})]"] />
 [(#ENV{lien}|?{</a>})]</span>
-
-[(#ENV{lien1}|oui)<p>[(#TITRE) ](<:accessibilite:listezones:>)&nbsp;:</p><ul>]
-[<li><a href="[(#ENV{lien1}|accessibilite_enlien)]">(#ENV{alt1})</a></li>]
-[<li><a href="[(#ENV{lien2}|accessibilite_enlien)]">(#ENV{alt2})</a></li>]
-[<li><a href="[(#ENV{lien3}|accessibilite_enlien)]">(#ENV{alt3})</a></li>]
-[<li><a href="[(#ENV{lien4}|accessibilite_enlien)]">(#ENV{alt4})</a></li>]
-[<li><a href="[(#ENV{lien5}|accessibilite_enlien)]">(#ENV{alt5})</a></li>]
-[<li><a href="[(#ENV{lien6}|accessibilite_enlien)]">(#ENV{alt6})</a></li>]
-[<li><a href="[(#ENV{lien7}|accessibilite_enlien)]">(#ENV{alt7})</a></li>]
-[<li><a href="[(#ENV{lien8}|accessibilite_enlien)]">(#ENV{alt8})</a></li>]
-[<li><a href="[(#ENV{lien9}|accessibilite_enlien)]">(#ENV{alt9})</a></li>]
-[<li><a href="[(#ENV{lien10}|accessibilite_enlien)]">(#ENV{alt10})</a></li>]
-[<li><a href="[(#ENV{lien11}|accessibilite_enlien)]">(#ENV{alt11})</a></li>]
-[<li><a href="[(#ENV{lien12}|accessibilite_enlien)]">(#ENV{alt12})</a></li>]
-[(#ENV{lien1}|oui)</ul>]
 ][
 
 	(#REM) sinon logo document + lien + alt + title etc
 
 ][(#GET{image}|?{'',' '})
-<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[ width:(#LOGO_DOCUMENT||largeur)px;]']><a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]"[ (#ENV{lien}|?{'',type="#MIME_TYPE"})][ lang="(#ENV{langue})"] title="[(#ENV{alt}|texte_backend|sinon{#TITRE|texte_backend|sinon{#ENV{lien}|texte_backend|sinon{<:info_document:>}}})[(#ENV{lien}|?{'',' - '})]][(#ENV{lien}|?{'',[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]"><img src="[(#LOGO_DOCUMENT||extraire_attribut{src})]" width="[(#LOGO_DOCUMENT||largeur)]" height="[(#LOGO_DOCUMENT||hauteur)]"[ lang="(#ENV{langue})"] alt="[(#ENV{alt}|texte_backend|sinon{#TITRE|texte_backend|sinon{#ENV{lien}|texte_backend|sinon{<:info_document:>}}})[(#ENV{lien}|?{'',' - '})]][(#ENV{lien}|?{'',[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]"[(#DESCRIPTIF|?{' ',''})longdesc="[(#URL_PAGE{longdesc,id=#ID_DOCUMENT}|parametre_url{'lang',#ENV{langue,#LANG}})]"] /></a></span>
+<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[ width:(#LOGO_DOCUMENT||largeur)px;]']><a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]"[ (#ENV{lien}|?{'',type="#MIME_TYPE"})][ lang="(#ENV{langue})"] title="[(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html|sinon{<:info_document:>}}})[(#ENV{lien}|?{'',' - '})]][(#ENV{lien}|?{'',[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]"><img src="[(#LOGO_DOCUMENT||extraire_attribut{src})]" width="[(#LOGO_DOCUMENT||largeur)]" height="[(#LOGO_DOCUMENT||hauteur)]"[ lang="(#ENV{langue})"] alt="[(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html|sinon{<:info_document:>}}})[(#ENV{lien}|?{'',' - '})]][(#ENV{lien}|?{'',[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]"[(#DESCRIPTIF|?{' ',''})longdesc="[(#URL_PAGE{longdesc,id=#ID_DOCUMENT}|parametre_url{'lang',#ENV{langue,#LANG}})]"] /></a></span>
 ]</BOUCLE_document>
