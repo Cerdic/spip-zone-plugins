@@ -16,6 +16,8 @@ function creer_fastcache() {
 	$periode = var_export($periode, true);
 
 	$stats = var_export($GLOBALS['meta']['activer_statistiques'] === 'oui', true);
+	$dir_plugin_fastcache = var_export(_DIR_PLUGIN_FASTCACHE, true);
+	$dir_tmp = var_export(_DIR_TMP, true);
 
 	if (!$cache = $cfg['cache'])
 		$cache = _DIR_CACHE;
@@ -31,6 +33,8 @@ function creer_fastcache() {
 @define ('_FC_DEBUG', $debug);
 @define ('_FC_PERIODE', $periode);
 @define ('_FC_STATS_SPIP', $stats);
+@define ('_DIR_PLUGIN_FASTCACHE', $dir_plugin_fastcache);
+@define ('_DIR_TMP', $dir_tmp);
 @define ('_FC_DIR_CACHE', $cache);
 @define ('_FC_META', $meta);
 @define ('_FC_IE_PNGHACK', $pnghack);
