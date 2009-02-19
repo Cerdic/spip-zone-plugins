@@ -13,6 +13,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'attente_confirmation' => 'N\'espera de confirmaci&oacute;n',
 
+	// C
+	'configurer' => 'Configurar la Navaya Suiza',
+	'connections' => 'Conexones',
+
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',
 	'derniers_connectes' => 'Caberos coneut&aacute;os:',
@@ -86,7 +90,10 @@ Compatibilid&aacute;: SPIP v1.9x y v2.0',
 
 	// V
 	'variable_vide' => '(Vac&iacute;u)',
-	'visiteurs_connectes' => 'Visites coneut&aacute;es: @nb@'
+	'visiteurs_connectes' => 'Visites coneut&aacute;es: @nb@',
+
+	// W
+	'webmestres' => 'Webmasters SPIP'
 );
 
 ?>

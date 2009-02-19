@@ -13,6 +13,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'attente_confirmation' => 'Waiting for confirmation',
 
+	// C
+	'configurer' => 'Configure the Swiss Knife',
+	'connections' => 'Connections',
+
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',
 	'derniers_connectes' => 'Last connected:',
@@ -86,7 +90,10 @@ Compatibility: SPIP 1.9x and v2.0',
 
 	// V
 	'variable_vide' => '(Empty)',
-	'visiteurs_connectes' => 'Logged in visitors: @nb@'
+	'visiteurs_connectes' => 'Logged in visitors: @nb@',
+
+	// W
+	'webmestres' => 'SPIP webmasters'
 );
 
 ?>

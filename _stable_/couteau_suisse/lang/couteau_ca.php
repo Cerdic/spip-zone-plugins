@@ -13,6 +13,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'attente_confirmation' => 'Esperant confirmaci&oacute;',
 
+	// C
+	'configurer' => 'Configurar el Ganivet Su&iacute;s',
+	'connections' => 'Connexions',
+
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',
 	'derniers_connectes' => 'Darrers connectats:',
@@ -86,7 +90,10 @@ Compatibilitat: SPIP v1.9x i v2.0',
 
 	// V
 	'variable_vide' => '(Buit)',
-	'visiteurs_connectes' => 'Visitants connectats: @nb@'
+	'visiteurs_connectes' => 'Visitants connectats: @nb@',
+
+	// W
+	'webmestres' => 'Webmestres SPIP'
 );
 
 ?>
