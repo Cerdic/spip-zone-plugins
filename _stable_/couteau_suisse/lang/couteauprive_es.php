@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'basique' => 'B&aacute;sico',
 	'blocs:aide' => '<Bloques Desplegables : <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias : <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) et <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => 'Permite crear bloques que pueden hacerse visibles o invisibles al pulsar en su t&iacute;tulo.
+	'blocs:description' => '<MODIF>Permite crear bloques que pueden hacerse visibles o invisibles al pulsar en su t&iacute;tulo.
 
 @puce@ {{En los textos de SPIP}}: los redactores disponen de las  nuevas balizas &lt;bloc&gt; (o &lt;invisible&gt;) y &lt;visible&gt; para utilizarlas en sus textos as&iacute;: 
 

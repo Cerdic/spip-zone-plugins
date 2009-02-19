@@ -38,7 +38,7 @@ _ Test link:[->test@test.com] (Reload the page to test.)[[%enveloppe_mails%]]',
 	// B
 	'basique' => 'Basic',
 	'blocs:aide' => 'Folding blocks: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) and <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => 'Allows you to create blocks which show/hide when you click on the title.
+	'blocs:description' => '<MODIF>Allows you to create blocks which show/hide when you click on the title.
 
 @puce@ {{In SPIP texts}}: authors can use the tags &lt;bloc&gt; (or &lt;invisible&gt;) and &lt;visible&gt; in this way: 
 
@@ -61,11 +61,12 @@ _ Test link:[->test@test.com] (Reload the page to test.)[[%enveloppe_mails%]]',
 
 @puce@ If you tick "yes" below, opening one block will cause all other blocks on the page to close. i.e. only one block is open at a time.[[%bloc_unique%]]',
 	'blocs:nom' => 'Folding Blocks',
-	'boites_privees:description' => '<MODIF>All the boxes described below appear somewhere in the editing area.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
+	'boites_privees:description' => 'All the boxes described below appear somewhere in the editing area.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Swiss Knife updates}}: a box on this configuration page showing the last changes made to the code of the plugin ([Source->@_CS_RSS_SOURCE@]).
 - {{Articles in SPIP format}}: an extra folding box for your articles showing the source code used by their authors.
 - {{Author stats}}: an extra box on [the authors\' page->./?exec=auteurs] showing the last 10 connected authors and unconfirmed registrations. Only administrators can view this information.
-- {{Clean URLs}}: a box for each objet type (article, section, author, ...) showing the clean URL associated with it and any existing aliases. The tool &laquo;&nbsp;[.->type_urls]&nbsp;&raquo; makes possible a fine adjustment of the site\'s URLs.- {{Order of authors}}: a folding box for articles which have more than one author, allowing you simply to adjust the order in which they are displayed.',
+- {{SPIP webmasters}} : a box on the [authors\' page->./?exec=auteurs] showing which administrators are also SPIP webmasters. Only administrators can see this information. If you are a webmaster, see also the the tool "[.->webmestres]".
+- {{Friendly URLs}}: a box for each objet type (article, section, author, ...) showing the clean URL associated with it and any existing aliases. The tool &laquo;&nbsp;[.->type_urls]&nbsp;&raquo; makes possible a fine adjustment of the site\'s URLs.- {{Order of authors}}: a folding box for articles which have more than one author, allowing you simply to adjust the order in which they are displayed.',
 	'boites_privees:nom' => 'Private boxes',
 	'bp_tri_auteurs' => 'Order of authors',
 	'bp_urls_propres' => 'See clean URLs',
@@ -465,6 +466,9 @@ If you reset the plugin by clicking on a pack, the Swiss Knife will reconfigure 
 	'pucesli:description' => 'Replaces bullets &laquo;-&raquo; (simple dash) in articles with ordered lists &laquo;-*&raquo; (transformed into  &lt;ul>&lt;li>…&lt;/li>&lt;/ul> in HTML) whose style may be customised using CSS.',
 	'pucesli:nom' => 'Beautiful bullets',
 
+	// Q
+	'qui_webmestres' => 'SPIP webmasters',
+
 	// R
 	'raccourcis' => 'Active Swiss Knife typographical shortcuts:',
 	'raccourcis_barre' => 'The Swiss Knife\'s typographical shorcuts',
@@ -512,12 +516,12 @@ The summary can be used in conjunction with : {[.->decoupe]}.',
 	'sommaire:nom' => 'An automatic summary',
 	'sommaire_avec' => 'An article with summary: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'An article without summary: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'spam:description' => '<MODIF>Attempts to fight against the sending of abusive and automatic messages through forms on the public site. Some words and the tags  &lt;a>&lt;/a> are prohibited. Train your authors to use SPIP shortcuts for links
+	'spam:description' => 'Attempts to fight against the sending of abusive and automatic messages through forms on the public site. Some words and the tags  &lt;a>&lt;/a> are prohibited. Train your authors to use SPIP shortcuts for links
 
 List here the sequences you wish to prohibit separating them with spaces. [[%spam_mots%]]
 • Expressions containing spaces should be placed within inverted commas.
 • To specify a whole word, place it in brackets. For example: {(asses)}.
-',
+_ • To use a regular expression, first check the syntax, then place it between slashes and inverted commas. Example:~{<html>"/@test\\.(com|fr)/"</html>}.',
 	'spam:nom' => 'Fight against SPAM',
 	'spam_test_ko' => 'This message would be blocked by the anti-SPAM filter!',
 	'spam_test_ok' => 'This message would be accepted by the anti-SPAM filter!',

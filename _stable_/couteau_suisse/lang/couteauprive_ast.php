@@ -38,7 +38,7 @@ _ Enllaz de preba: [->test@test.com] (recarga la p&aacute;xina pa prebar).[[%env
 	// B
 	'basique' => 'B&aacute;sica',
 	'blocs:aide' => 'Bloques Desplegables: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) y <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => 'Te permite crear bloques que puen facese visibles o invisibles al calcar nel so t&iacute;tulu.
+	'blocs:description' => '<MODIF>Te permite crear bloques que puen facese visibles o invisibles al calcar nel so t&iacute;tulu.
 
 @puce@ {{Nos testos SPIP}}: los redactores disponen de les nueves balices &lt;bloc&gt; (o &lt;invisible&gt;) y &lt;visible&gt; pa utilizar nos testos as&iacute;: 
 
@@ -61,12 +61,13 @@ _ Enllaz de preba: [->test@test.com] (recarga la p&aacute;xina pa prebar).[[%env
 
 @puce@ Si marques &laquo;si&raquo; embaxo, l\'apertura d\'un bloque provocar&aacute; que se pesllen toos los dem&aacute;s bloques de la p&aacute;xina, col env&iacute;s de nun tener m&aacute;s que uno solu abiertu a la vez.[[%bloc_unique%]]',
 	'blocs:nom' => 'Bloques Desplegables',
-	'boites_privees:description' => '<MODIF>Toes les caxes descrites embaxo apaecen per dayuri na parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
+	'boites_privees:description' => 'Toes les caxes descrites embaxo apaecen per dayuri na parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Les revisiones de La Navaya Suiza}}: un cuadru na presente p&aacute;xina de configuraci&oacute;n, que indica les caberes modificaciones amest&aacute;es al c&oacute;digu del plugin ([Source->@_CS_RSS_SOURCE@]).
-- {{Los art&iacute;culos en formatu SPIP}}: un cuadru plegable suplementariu pa los art&iacute;culos, col env&iacute;s de saber el c&oacute;digu fonte utilizao polos autores.
-- {{Estad&iacute;stiques de los autores}}: un cuadru suplementariu na [p&aacute;xina de los autores->./?exec=auteurs] que amuesa los caberos 10 coneutaos y les inscripciones nun confirm&aacute;es. S&oacute;lo los alministradores ven esta informaci&oacute;n.
-- {{Les URLs propies}}: un cuadru desplegable pa cada oxetu de conten&iacute;u (art&iacute;culu, estaya, autor, ...) que indica la URL propia asociada igual que los eventuales nomatos. La ferramienta &laquo;[.->type_urls]&raquo; te permite l\'axuste finu de les URLs del to sitiu.
-- {{L\'orde d\'autores}}: un cuadru desplegable pa los art&iacute;culos que tengan m&aacute;s d\'un autor y que permite axustar facilmente l\'orde en que s\'amuesen.',
+- {{Los art&iacute;culos en formatu SPIP}}: un cuadru estenderexable suplementariu pa los art&iacute;culos, col env&iacute;s de saber el c&oacute;digu fonte utilizao polos autores.
+- {{Estad&iacute;stiques de los autores}}: un cuadru estenderexable suplementariu na [p&aacute;xina de los autores->./?exec=auteurs] que amuesa los caberos 10 coneutaos y les inscripciones nun confirm&aacute;es. S&oacute;lo los alministradores ven esta informaci&oacute;n.
+- {{Los webmasters SPIP}}: un cuadru estenderexable na [p&aacute;xina de los autores->./?exec=auteurs] que amuesa los alministradores elevaos al rangu de webmaster SPIP. S&oacute;lo los alministradores puen ver etas informaci&oacute;n. Si yes webmaster t&uacute; mesmu, mira tambi&eacute;n la ferramienta &laquo;[.->webmasters]&raquo;.
+- {{Les URLs propies}}: un cuadru estenderexable pa cada oxetu de conten&iacute;u (art&iacute;culu, estaya, autor, ...) que indica la URL propia asociada igual que los eventuales nomatos. La ferramienta &laquo;[.->type_urls]&raquo; te permite l\'axuste finu de les URLs del to sitiu.
+- {{L\'orde d\'autores}}: un cuadru estenderexable pa los art&iacute;culos que tengan m&aacute;s d\'un autor y que permite axustar facilmente l\'orde en que s\'amuesen.',
 	'boites_privees:nom' => 'Caxes privaes',
 	'bp_tri_auteurs' => 'Ordenaciones d\'autores',
 	'bp_urls_propres' => 'Les URLs propies',
@@ -466,6 +467,9 @@ Si reanicies el plugin calcando nun paquete, la Navaya Suiza reconfigurarase aut
 	'pucesli:description' => 'Reemplaza les marques &laquo;-&raquo; (gui&oacute;n simple) de los art&iacute;culos por llistes anot&aacute;es &laquo;-*&raquo; (traduc&iacute;es en HTML como: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) nes que l\'estilu pue personalizase con css.',
 	'pucesli:nom' => 'Marques guapes',
 
+	// Q
+	'qui_webmestres' => 'Los webmasters SPIP',
+
 	// R
 	'raccourcis' => 'Atayos tipogr&aacute;ficos activos de la Navaya Suiza:',
 	'raccourcis_barre' => 'Los atayos tipogr&aacute;ficos de la Navaya Suiza',
@@ -513,12 +517,12 @@ Esti sumariu pue acoplase con: &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
 	'sommaire:nom' => 'Un sumariu autom&aacute;ticu',
 	'sommaire_avec' => 'Un testu con sumariu: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un testu ensin sumariu: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'spam:description' => '<MODIF>Tenta lluchar escontra los unv&iacute;os de mensaxes autom&aacute;ticos y gafientos na parte p&uacute;blica. Delles pallabres, igual que les balices en claro &lt;a>&lt;/a>, tan torg&aacute;es: encamienta a los redactores a usar los atayos pa enllaces de SPIP.
+	'spam:description' => 'Tenta lluchar escontra los unv&iacute;os de mensaxes autom&aacute;ticos y gafientos na parte p&uacute;blica. Delles pallabres, igual que les balices en claro &lt;a>&lt;/a>, tan torg&aacute;es: encamienta a los redactores a usar los atayos pa enllaces de SPIP.
 
 Llista equ&iacute; les secuencies torg&aacute;es separtandoles con espacios. [[%spam_mots%]]
 • Pa una espresi&oacute;n con espacios, ponla ente comines.
 _ • Pa especificar una pallabra entera, m&eacute;tela ente par&eacute;ntesis. Exemplu:~{(premiu)}.
-_ • Pa una espresi&oacute;n regular, verifica bien la sintaxis y ponla dientro de barres y comines. Exemplu:~{"/@test\\.(com|org|ast)/"}.',
+_ • Pa una espresi&oacute;n regular, verifica bien la sintaxis y ponla dientro de barres y comines. Exemplu:~{<html>"/@test\\.(com|org|ast)/"</html>}.',
 	'spam:nom' => 'Llucha escontra la puxarra',
 	'spam_test_ko' => '&iexcl;Esti mensaxe bloquiarase pol filtru anti-SPAM!',
 	'spam_test_ok' => 'Esti mensaxe aceutarase pol filtru anti-SPAM.',
