@@ -10,7 +10,7 @@
 	<input type='hidden' name='modif' value="1" />
 
 	<p><label for="email"><:spipbb:votre_email:></label><br />
-	<input type="text" id="email" name="email" class="forml" value="[(#SESSION**{email}|sinon{#SESSION**{session_email}}|entites_html)]" size="40" [(#SESSION{statut}|=={0minirezo}|?{'',' '})readonly disabled] />
+	<input type='text' id='email' name='email' class='forml' value="[(#SESSION**{email}|sinon{#SESSION**{session_email}}|entites_html)]" size="40" disabled='disabled' />
 	</p>
 
 	<p><label for="bio"><:spipbb:votre_bio:></label><br />

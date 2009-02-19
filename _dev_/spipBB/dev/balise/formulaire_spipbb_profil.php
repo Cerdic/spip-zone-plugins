@@ -57,7 +57,7 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 	$auteur_pgp = corriger_caracteres(_request('pgp'));
 	$auteur_nom_site = corriger_caracteres(_request('nom_site')); //h.?? attention mix avec $nom_site_spip ;(
 	$auteur_url_site = vider_url(_request('url_site'));
-	$auteur_email = _request('email');
+	//$auteur_email = _request('email'); On ne change pas l'email... seuls les admins le peuvent (dans l'interface privée)
 	$nouveau = _request('nouveau'); // nouveau == 1 si date_crea_spipbb est vide
 
 	$traiter_chps=array(); // c: 21/12/7 Bug report BB du 2
@@ -165,7 +165,7 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 			@sql_updateq("spip_auteurs",array_merge($query_pass,array(
 				login=>$auteur['login'],
 				bio=>$auteur_bio,
-				email=>$auteur_email,
+				//email=>$auteur_email,
 				nom_site=>$auteur_nom_site,
 				url_site=>$auteur_url_site,
 				pgp=>$auteur_pgp,
@@ -200,7 +200,7 @@ function balise_FORMULAIRE_SPIPBB_PROFIL_dyn($id_auteur) {
 	#
 	$ch_retour = array (
 		'nom' => $auteur['nom'],
-		'email' => $auteur_email,
+	//	'email' => $auteur_email,
 		'url_site' => $auteur_url_site,
 		'nom_site' => $auteur_nom_site,
 		'pgp' => $auteur_pgp,
