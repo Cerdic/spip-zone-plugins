@@ -20,7 +20,7 @@
 	</prefix>
 	<icon>img_pack/wcag1AAA.png
 	</icon>
-	<fonctions>accessibilite_fonctions.php</fonctions>
+	<fonctions></fonctions>
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0.3;]" />
 </plugin>
