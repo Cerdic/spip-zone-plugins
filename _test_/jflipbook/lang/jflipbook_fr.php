@@ -54,6 +54,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'quitter' => "Quitter ce formulaire",
 
 //paramètres
+'fill' => "Les images sont redimensionn&eacute;es tout en gardant le ratio",
+'fit' => "Les images trop grandes sont redimensionn&eacute;es",
+'noresize' => "Les images ne sont pas redimensionn&eacute;es",
+
+'false' => "En bas, à gauche et à droite",
+'true' => "En haut, à gauche et à droite",
+
 'largeur' => "Largeur du livre (en pixel) : ",
 'hauteur' => "Hauteur du livre (en pixel) : ",
 'couleur' => "Couleur du fond des pages : ",

@@ -80,10 +80,15 @@ $descriptifmot = 'mot-clé permettant de transformer un article contenant des im
 //Rappel des réglages en cours
 	echo _T('jflipbook:texte_reglages');
    echo "<br />"._T('jflipbook:largeur').lire_config('jflipbook/largeur');
-   echo "<br /><br />"._T('jflipbook:hauteur').lire_config('jflipbook/hauteur');  
+   echo "<br /><br />"._T('jflipbook:hauteur').lire_config('jflipbook/hauteur');
    echo "<br /><br />"._T('jflipbook:couleur').lire_config('jflipbook/couleur');
-   echo "<br /><br />"._T('jflipbook:coins').lire_config('jflipbook/corners');  
-   echo "<br /><br />"._T('jflipbook:scale').lire_config('jflipbook/scale');    
+   
+   echo "<br /><br />"._T('jflipbook:coins');
+   echo _T('jflipbook:'.lire_config('jflipbook/corners').'');
+   
+   echo "<br /><br />"._T('jflipbook:scale');
+   echo _T('jflipbook:'.lire_config('jflipbook/scale').'');
+   
    echo '<br />';
    
    echo fin_cadre_couleur(true);

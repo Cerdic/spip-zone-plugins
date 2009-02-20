@@ -8,6 +8,7 @@ Ici vous pouvez modifier les dimensions, la couleur, la position des coins r&eac
 ]
 
 [(#REM) titre= Param&egrave;trage des jFlipBooks]
+[(#REM) liens*=qualif]
 
 <fieldset><legend>jFlipBooks</legend>
 <label>Dimensions des pages d'un jFlipBooks (s'applique à tous les livres jFlip) : </label><br />
@@ -31,19 +32,13 @@ Ici vous pouvez modifier les dimensions, la couleur, la position des coins r&eac
 </select>
 <br/><br/>
 
-<label>Mot cl&eacute; associ&eacute; : </label><input type="text" name="mot" value="#ENV{mot,jflip}" /><br />
-
 </fieldset>
 
-<input type="submit" name="_cfg_ok" value="<:valider:>" />
-
+<input type="submit" name="_cfg_ok" value="<:enregistrer:>" />
+<input type="submit" name="_cfg_delete" value="<:effacer_config:>" />
 <br /><br />
 </form>
 
-<form method="post" action="#URL_SITE_SPIP/">
-<input type="submit" value="<:page_publique:>" />
-</form>
-<br />
 <form method="post" action="?exec=jflipbook">
 <input type="submit" value="Retour à la page du plugin" />
 </form>
