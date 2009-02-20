@@ -37,7 +37,7 @@
     
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>head.php</inclure>
+		<inclure>evanews_head.php</inclure>
 	</pipeline>
 	  
 </plugin>

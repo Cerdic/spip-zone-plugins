@@ -37,7 +37,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'siteoff2' => "<strong></strong><br/>",
 
 'texte_article' => "<strong>Texte de l'article : </strong>",
-'texte_descriptif' => "<br />Here is a jQuery plugins that lets you create JavaScript News Slide as fly.(Tested with jQuery 1.2.3),Effect (Fade In-Out ,Slide Up-Down, Left To Right), version 1.0.5 add button images directory setup function<br />",
+'texte_descriptif' => "<br />Ce plugin vous permet de publier une s&eacute;rie d'articles dans un bloc avec des effets d'affichage.
+							<br />Liste des effets : Fade In-Out ,Slide Up-Down, Left To Right<br />",
+'texte_integration' => "<br /><strong>Avec des squelettes autres que eva-web 4 :</strong><br />
+	 Vous devez ins&eacute;rer la ligne <code><INCLURE {fond=articles_news}{ajax}></code> dans votre squelette &agrave; l'endroit où doit apparaître le bloc de news<br/><br />
+	 <strong>Avec eva-web 4 :</strong><br />
+	 Rendez-vous dans l'onglet <i>structure</i> du plugin eva-habillage.<br />
+	 Dans le deuxi&egrave;me bloc intitul&eacute; <i>Choisir la position des blocs dans les pages</i>,
+	 allez &agrave; la ligne <i>Ins&eacute;rer un squelette personnel de type bloc dans une des pages...</i>.<br />
+	 A l'&eacute;tape 2, dans la zone de texte <i>Nom du squelette</i>, tapez <i>articles_news</i>, puis validez.<br /><br/>
+	 ",
 'titre' => "<strong>Titre du bloc de news : </strong>",
 'titre_boite_principale' => "Param&egrave;trage du plugin :",
 'titre_presentation' => "<strong>Pr&eacute;sentation :</strong><br/>",
