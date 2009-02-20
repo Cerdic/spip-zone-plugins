@@ -1,7 +1,7 @@
 <plugin>
     <nom>jFlipBook : Livre d'images avec effet de pages tournantes</nom>
     <auteur>Samuel "PoongalOO" [->sam@poongaloo.org]</auteur>
-    <version>0.1</version>
+    <version>0.2</version>
     <etat>test</etat>
     <description>
     Ce plugin transforme les images d'un article en un petit livre cliquable dans les coins 
