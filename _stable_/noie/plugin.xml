@@ -1,0 +1,11 @@
+<plugin>
+<nom>Pour un meilleur navigateur</nom>
+<icon>noie.gif</icon>
+<auteur>[romy.tetue.net->http://romy.tetue.net] - 2009</auteur>
+<licence>GPL</licence>
+<version>1.0</version>
+<etat>stable</etat>
+<description>Ce plugin permet d'afficher un gentil message aux internautes surfant avec Internet Explorer afin de les pr&eacute;venir qu'ils ne visitent pas le site dans les meilleures conditions.</description>
+<prefix>noie</prefix>
+<necessite id='SPIP' version='[2.0.0;]' />
+</plugin>
