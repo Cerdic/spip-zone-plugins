@@ -5,7 +5,9 @@ function noie_affichage_final(&$page) {
 	// ne pas se fatiguer si pas HTML ou pas IE
 	if (!($GLOBALS['html']
 	AND strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')
-	AND preg_match('/MSIE /i', $_SERVER['HTTP_USER_AGENT'])))
+	AND preg_match('/MSIE /i', $_SERVER['HTTP_USER_AGENT'])
+	AND !strpos('<div id="ie6msg">', $page) # pas deux fois, au cas ou !
+	))
 		return $page;
 
 	return preg_replace(',<(div id=[\'"]noie[\'"]|body)\b.*?>,',
