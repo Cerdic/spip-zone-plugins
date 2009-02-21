@@ -9,7 +9,8 @@ function noie_affichage_final(&$page) {
 	AND !strpos('<div id="ie6msg">', $page) # pas deux fois, au cas ou !
 	))
 		return $page;
-
+  
+  if (!function_exists('recuperer_fond')) include_spip('public/assembler');
 	return preg_replace(',<(div id=[\'"]noie[\'"]|body)\b.*?>,',
 		'$0' . recuperer_fond('ie6msg', array('lang'=>$GLOBALS['spip_lang']))
 		, $page);
