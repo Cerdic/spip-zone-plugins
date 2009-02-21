@@ -35,6 +35,9 @@
 	
 	[(#CONFIG{socialtags/slashdot}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_slashdot}|parametre_url{'url',[(#URL_ARTICLE|url_absolue)]}|parametre_url{'title',[(#TITRE|texte_script)]})]" title="Slashdot"><img src="[(#CHEMIN{images/slashdot.png})]" title="Slashdot" alt="slashdot" class="socialtags-hovers" /></a></li>,''})]
 	
+		[(#CONFIG{socialtags/blogmemes}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_blogmemes}|parametre_url{'url',[(#URL_ARTICLE|url_absolue)]}|parametre_url{'title',[(#TITRE|texte_script)]})]" title="BlogMemes"><img src="[(#CHEMIN{images/blogmemes.png})]" title="BlogMemes" alt="blogmemes" class="socialtags-hovers" /></a></li>,''})]
+
+		
 </BOUCLE_article>
 </ul>
 </div>
