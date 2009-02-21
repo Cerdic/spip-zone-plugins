@@ -6,12 +6,16 @@ function noie_affichage_final(&$page) {
 	if (!($GLOBALS['html']
 	AND strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')
 	AND preg_match('/MSIE /i', $_SERVER['HTTP_USER_AGENT'])
-	AND !strpos('<div id="ie6msg">', $page) # pas deux fois, au cas ou !
+	AND !strpos($page, '<div id="ie6msg">') # pas deux fois, au cas ou !
 	))
 		return $page;
   
-  if (!function_exists('recuperer_fond')) include_spip('public/assembler');
-	return preg_replace(',<(div id=[\'"]noie[\'"]|body)\b.*?>,',
-		'$0' . recuperer_fond('ie6msg', array('lang'=>$GLOBALS['spip_lang']))
-		, $page);
+	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
+	$campagne = recuperer_fond('ie6msg', array('lang'=>$GLOBALS['spip_lang']));
+	preg_match(',<div id=[\'"]noie[\'"].*?>,', $page, $regs)
+	|| preg_match(',<body\b.*?>,i', $page, $regs);
+	if ($regs)
+		$page = substr_replace($page, $campagne, strpos($page, $regs[0]), 0);
+
+	return $page;
 }
