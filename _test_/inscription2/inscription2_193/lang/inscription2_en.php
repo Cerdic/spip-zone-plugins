@@ -8,101 +8,120 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'a_confirmer' => '<NEW>&Agrave; confirmer',
+	'a_confirmer' => 'To be confirmed',
 	'accesrestreint' => 'Restricted access',
+	'aconfirmer' => 'To be confirmed',
+	'action_adherent' => 'Member action',
 	'activation_compte' => 'Activate your account',
-	'adherent' => '<NEW>Adh&eacute;rent',
+	'adherent' => 'Member',
+	'adherents' => 'Members',
 	'admin' => 'Admin',
-	'admin_modifier_auteur_supp' => '<NEW>Informations suppl&eacute;mentaires',
+	'admin_modifier_auteur_supp' => 'Extra information',
 	'adresse' => 'Address',
 	'adresse_pro' => 'Professionnal address',
+	'ajouter_adherent' => 'Add a member',
 	'aout' => 'August',
 	'auteur' => 'Author',
-	'autre' => '<NEW>Autre',
+	'autre' => 'Other',
 	'avril' => 'April',
 
 	// C
 	'caracteres' => 'characters',
 	'categorie' => 'Category of contribution',
 	'chaine_valide' => 'Please insert a string',
-	'chainelettre' => '(composed only by letters)',
-	'chainenombre' => '(composed by letters and/or figures)',
+	'chainelettre' => '(composed only of letters)',
+	'chainenombre' => '(composed of letters and/or digits)',
 	'champ_obligatoire' => 'This field is required',
 	'choisir_categories' => 'Select them in the following list:',
-	'choisir_listes' => 'Choose the newsletters that will be proposed to the new adherents of the site:',
+	'choisir_listes' => 'Choose the newsletters that will be offered to new members:',
 	'choisir_nouveau_password' => 'You will be able to choose a new password by clicking on the following link',
-	'choisir_zones' => 'Choose the areas where the new adherents of the site will be affected',
+	'choisir_zones' => 'Choose the areas to which new members will be assigned',
 	'choix_domaine' => 'Choose your domain',
-	'code_postal' => 'Postal Code',
-	'code_postal_pro' => 'Postal Code',
-	'compte_active' => 'Your account was activated',
+	'civilite' => 'Title',
+	'code_postal' => 'Postcode',
+	'code_postal_pro' => 'Postcode',
+	'commentaire' => 'Comments',
+	'compte_active' => 'Your account on @nom_site@',
 	'conf_plugin' => 'Inscription2 settings',
-	'conf_plugin_page' => 'Registered settings of plugin Inscription2',
+	'conf_plugin_page' => 'Saved settings of the Inscription2 plugin',
 	'configs' => 'Configurations',
-	'confirmation' => '<NEW><p>&Ecirc;tes vous s&ucirc;r(e) de vouloir continuer?</p><p>Toutes les modifications seront irreversibles!!!</p>',
+	'configuration' => 'Configuration',
+	'confirmation' => '<p>Are you sure you wish to continue</p><p>The changes made are irreversible!</p>',
 	'contacts_personnels' => 'Personnal contacts',
 	'contacts_pros' => 'Professional contacts',
-	'cp_valide' => 'Please insert a valid postal code',
-	'creation' => 'Creation date of the card',
+	'cp_valide' => 'Please give a valid postcode',
+	'creation' => 'Creation date of the record',
 
 	// D
 	'decembre' => 'December',
-	'description_page' => 'Here you can check your settings choices how they are registered',
+	'demande_password' => 'Your password:',
+	'description_page' => 'Here you can check your saved settings',
 	'deselect_listes' => '> deselect all',
 	'divers' => 'any other business',
 	'domaine' => 'Domain',
-	'domaines' => 'Restrict the inscriptions to certain domains',
+	'domaines' => 'Domain',
 
 	// E
-	'email' => 'E-Mail',
+	'editer_adherent' => 'Edit member',
+	'email' => 'Email',
 	'email_bonjour' => 'Hello @nom@,',
+	'email_obligatoire' => 'An email address is required',
 	'email_valide' => 'Please insert a valid e-mail address',
-	'exp_categorie' => 'Drop-down list of the categories from the table \'spip_asso_categories\' so that the user chooses one of them',
-	'exp_divers' => 'Field which will be proposed to the visitors under the name of comment',
-	'exp_domaines' => 'Define your domains in the file inc/domaines.php following the model',
-	'exp_newsletter' => 'Choose the newsletter to wich you want to subscribe',
-	'exp_publication' => 'Publication authorization of the personal data',
-	'exp_statut_rel' => 'This field is different from the SPIP status, this one is useful for the internal control of an institution',
-	'expl_format' => 'Choose the format that you prefer to receive the emails of the newsletters',
+	'exp_categorie' => 'Drop-down list of the categories from the table \'spip_asso_categories\' for the new user to choose one.',
+	'exp_divers' => 'Field which will be offered to the visitors with the name Comments',
+	'exp_domaines' => 'Restrict access to a predefined list of domains',
+	'exp_domaines2' => 'Please define your domains in the  inc/domaines.php file, following the example given.',
+	'exp_newsletter' => 'Choose the newsletters to wich you want to subscribe',
+	'exp_publication' => 'Authorization for publication of personal data',
+	'exp_statut' => 'Choose the status to be given to new members',
+	'exp_statut_rel' => 'This field is different from the SPIP status, this one is used for the internal control of an institution',
+	'exp_validite' => 'Field used with the <strong>ABONNEMENT</strong> plugin: tick the box if it is installed',
+	'expl_format' => 'Choose the format in which you prefer to receive the newsletter emails',
 
 	// F
 	'fax' => 'Fax',
-	'fax_pro' => 'Professionnal fax',
-	'feminin' => 'female',
+	'fax_pro' => 'Work fax',
+	'feminin' => 'Ms.',
 	'fevrier' => 'February',
-	'fiche' => 'card-index',
-	'fiche_expl' => ' : The field will be visible on the card of member',
-	'fiche_mod' => 'Modifiable',
-	'fiche_mod_expl' => ' : The field could be modified from the public interface by the member if the plugin CRAYONS is used (PENCILS)',
+	'fiche' => 'Record',
+	'fiche_adherent' => 'Member record',
+	'fiche_expl' => ' : The field will be visible on the member\'s record',
+	'fiche_mod' => 'Can be modified',
+	'fiche_mod_expl' => ' : The field could be modified from the public interface by the member if the plugin CRAYONS is used ',
 	'fonction' => 'Function',
 	'form' => 'Form',
-	'form_expl' => ' : The field will be displayed on the form INSCRIPTION2',
-	'form_oblig_expl' => '<NEW> : Rendre la saisie obligatoire dans le formulaire',
+	'form_expl' => ' : The field will be displayed on the INSCRIPTION2 form',
+	'form_oblig_expl' => ' : required field on the form',
 	'format' => 'Format',
-	'formulaire_inscription' => 'Form of inscription',
+	'formulaire_inscription' => 'Registration form',
+	'formulaire_inscription_ok' => 'Your registration has been noted. You will receive your login information by email.',
+	'formulaire_login_deja_utilise' => 'This login is already in use. Please choose another.',
+	'formulaire_remplir_obligatoires' => 'Please fill in the required fields.',
 
 	// G
-	'general_infos' => 'General Infos',
-	'geoloc' => 'G&eacute;olocalisation',
-	'geomap_obligatoire' => 'To use the geolocalization datas for the people, you need to install the GoogleMapApi plugin',
+	'general_infos' => 'General Information',
+	'geoloc' => 'Geographical positioning',
+	'geomap_obligatoire' => 'To use the geographical positioning data for people, you need to install the GoogleMapApi plugin',
+	'gestion_adherent' => 'Manage members',
 
 	// H
 	'html' => 'HTML',
 
 	// I
 	'icone_menu_config' => 'Inscription2',
-	'info_connection' => 'Login informations',
-	'info_defaut' => 'Informations by defect',
-	'info_defaut_desc' => 'Obligatory by defect informations',
-	'info_gener' => 'General Informations',
-	'info_gener_desc' => 'Options which will be asked to the new adherents of the site',
+	'info_connection' => 'Login information',
+	'info_defaut' => 'Default information',
+	'info_defaut_desc' => 'Information which is required by default',
+	'info_gener' => 'General Information',
+	'info_gener_desc' => 'Options which new members will be asked about',
 	'info_internes' => 'Internal information',
-	'info_internes_desc' => 'Options which will be stored in the data base but will not be displayed in the form for the new members',
-	'info_perso' => 'Personal informations',
-	'info_perso_desc' => 'Personal informations requested from the new members of the site',
-	'info_pro' => 'Professional informations',
-	'infos_personnelles' => '<NEW>Informations personnelles',
-	'inserez_infos' => 'Please fill the form with informations requested',
+	'info_internes_desc' => 'Options which will be stored in the database but will not be displayed in the form for new members',
+	'info_perso' => 'Personal information',
+	'info_perso_desc' => 'Personal information requested of the new members of the site',
+	'info_pro' => 'Professional information',
+	'infos_adherent' => 'Extra information',
+	'infos_personnelles' => 'Personal information',
+	'inserez_infos' => 'Please fill in the requested information',
 
 	// J
 	'janvier' => 'January',
@@ -111,102 +130,126 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'latitude' => 'Latitude',
-	'lisez_mail' => 'An email has been just sent to the provided address. To activate your account please follow the instructions.',
+	'legende' => 'Caption',
+	'lisez_mail' => 'An email has been just sent to the address provided. To activate your account please follow the instructions.',
+	'liste_adherents' => 'List of members',
 	'login' => 'Username (login)',
 	'longitude' => 'Longitude',
 
 	// M
 	'mai' => 'May',
-	'mail_non_domaine' => 'The email that you entered does not belong to the chosen domain, try again',
-	'mail_renvoye' => 'This email address was already recorded. Please activate your account following the instructions contained in the mail.',
+	'mail_non_domaine' => 'The email that you entered does not belong to the chosen domain, please try again',
+	'mail_renvoye' => 'This email address was already recorded. Please activate your account following the instructions contained in the email.',
 	'mars' => 'March',
-	'masculin' => 'male',
+	'masculin' => 'Mr.',
 	'message_auto' => '(this is an automatic message)',
 	'mobile' => 'Mobile',
-	'mobile_pro' => 'Professionnal mobile',
+	'mobile_pro' => 'Work mobile',
+	'modif_pass_titre' => 'Change your password',
 
 	// N
 	'naissance' => 'Date of birth',
-	'newsletter' => 'Newsletter',
+	'nettoyer_tables' => 'Clean the tables',
+	'newsletter' => 'Newsletters',
 	'nom' => 'Signature',
 	'nom_explication' => 'your name or nickname',
-	'nom_famille' => 'Name',
-	'non_renseigne' => '<NEW>non renseign&eacute;.',
-	'non_renseignee' => '<NEW>non renseign&eacute;e.',
+	'nom_famille' => 'Family Name',
+	'non_renseigne' => 'empty.',
+	'non_renseignee' => 'empty.',
 	'novembre' => 'November',
-	'numero_valide' => 'Please insert a valid number',
+	'numero_valide' => 'Please give a valid number',
 
 	// O
 	'octobre' => 'October',
-	'optout' => 'Cases &agrave; coch&#233;es non pr&#233;coch&#233;es (optout)',
+	'optout' => 'Tick boxes unticked in advance (opt out)',
 
 	// P
-	'page_confirmation' => 'Confirmation of your inscription',
-	'par_defaut' => ' by default',
+	'page_confirmation' => 'Confirmation of your registration',
+	'par_defaut' => 'This field is required',
+	'pass_egal' => 'Please enter the same password as earlier.',
+	'pass_indiquez_cidessous' => 'Give the email address with which you were previously registered.
+You will receive and email telling you how to change your login.',
+	'pass_minimum' => 'Your password must be at least 5 characters in length',
+	'pass_oubli_mot' => 'Change your password',
+	'pass_recevoir_mail' => 'You will receive and email telling you how to change your login.',
+	'password' => 'Password',
+	'password_obligatoire' => 'A password is required',
+	'password_retaper' => 'Confirm the password',
 	'pays' => 'Country',
 	'pays_pro' => 'Country',
 	'prenom' => 'First name',
-	'probleme_email' => 'eMail trouble &nbsp;: the activation email cannot be sent.',
+	'probleme_email' => 'Email problem: the activation email cannot be sent.',
 	'profession' => 'Profession',
+	'profil_droits_insuffisants' => 'Sorry! You are not allowed to change this author<br />',
+	'profil_modifie_ok' => 'The changes to your profile have been saved.',
 	'publication' => 'Publication',
 
 	// R
-	'rappel_login' => 'Reminder : your login is : ',
-	'rappel_password' => 'Reminder of your password',
-	'redemande_password' => 'Please fill your password again:',
+	'raccourcis' => 'Shortcuts',
+	'rappel_login' => 'Reminder: your login is: ',
+	'rappel_password' => 'Your password',
+	'redemande_password' => 'Please fill in your password again:',
+	'rien_a_faire' => 'Nothing to do',
 
 	// S
 	'secteur' => 'Sector of activity',
-	'select_listes' => '(you may select a group holding down the shift key)',
+	'select_listes' => '(you may select a group by holding down the shift key)',
 	'septembre' => 'September',
-	'sexe' => 'Gender',
-	'societe' => 'Company / Non Profit Organization...',
+	'sexe' => 'Title',
+	'societe' => 'Company / Association ...',
+	'statut' => 'Status',
 	'statut_rel' => 'Internal status',
-	'suppression_faite' => 'erasure completed',
+	'suppression_faite' => 'Deletion completed',
+	'supprimer_adherent' => 'Delete member',
+	'supprimer_adherent_red' => 'Del',
+	'surnom' => 'Nickname',
 
 	// T
 	'table' => 'Table',
-	'table_expl' => ' : The field will be displayed on the list of the adherents (private area)',
+	'table_expl' => ' : The field will be displayed on the list of the members (private area)',
 	'tel' => 'Tel.',
 	'telephone' => 'Phone',
-	'telephone_pro' => 'Professionnal phone',
+	'telephone_pro' => 'Work phone',
 	'texte' => 'Text',
-	'texte_email_confirmation' => 'Your account has been activated. Since now you can access to the site by using your personal identifiers.\\n
+	'texte_email_confirmation' => 'Your account has been activated. From now on you can access the site using your login.\\n
 
 Your login is&nbsp;: @login@
-and your password you just typed it.
+and you have just chosen your password.
 
-Thank you for your confidence
+Thank you for your trust
 
-The @nom_site@\'s Team',
-	'texte_email_inscription' => 'You asked to take part in our site @nom_site@. 
-You are currently about to finish your inscription. You just have to click the link below to activate your account and to choose your password.
+The @nom_site@ Team',
+	'texte_email_inscription' => 'You have asked to participate on @nom_site@. 
+You are about to finish your registration. You just need to click the link below to activate your account and choose your password.
+
 @link_activation@
 
 Your login is&nbsp;: @login@
 
-If you did not ask for this inscription or you do not want to form part of our site any more, click link below.\\n
+If you did not ask for this registration or do not want to take part in the site anymore, click the link below.\\n
 @link_suppresion@
 
-Thank you for your confidence.
+Thank you for your trust.
 
-The @nom_site@\'s Team',
+The @nom_site@ Team',
 	'titre_confirmation' => 'Confirmation',
 
 	// U
-	'url_societe' => '<NEW>Site soci&eacute;t&eacute;',
+	'url_societe' => 'Company website',
 
 	// V
-	'ville' => 'City',
-	'ville_pro' => 'City',
-	'vos_contacts_personnels' => '<NEW>Vos contacts personnels',
-	'votre_adresse' => 'Your personnal address',
+	'validite' => 'Date of validity',
+	'ville' => 'Town/City',
+	'ville_pro' => 'Town/City',
+	'visiteur' => 'Visitor',
+	'vos_contacts_personnels' => 'Your personal contacts',
+	'votre_adresse' => 'Your home address',
 	'votre_adresse_pro' => 'Your professionnal address',
-	'votre_nom_complet' => 'Your complete name',
+	'votre_nom_complet' => 'Your full name',
 	'votre_profil' => 'Your profile',
 
 	// W
-	'website' => 'website'
+	'website' => 'Website'
 );
 
 ?>
