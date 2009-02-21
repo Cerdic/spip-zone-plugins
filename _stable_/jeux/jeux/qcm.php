@@ -15,7 +15,7 @@
 ---------------------------------------
 
 separateurs obligatoires : [qcm], [qrm] ou [quiz]
-separateurs optionnels   : [titre], [texte], [config]
+separateurs optionnels   : [titre], [texte], [config], [score]
 parametres de configurations par defaut :
 	trou=auto // taille du trou affiche en cas de proposition unique
 	une_par_une=non // affiche les questions une par une
@@ -301,16 +301,6 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
   return $codeHTML;
 }
 
-function qcm_afficher_commentaire($categ, $score, $total) {
-	if(!categ) return '';
-	$categ = preg_split(',(^|\n|\r)\s*([0-9]+)(%|pt|pts)\s*:,', trim($categ), -1, PREG_SPLIT_DELIM_CAPTURE);
-	for($i=2; $i<count($categ); $i+=4) {
-		$limite = $categ[$i+1]=='%'?$total*$categ[$i]/100:$categ[$i];
-		if($score<=$limite)
-			return '<br /><div class="qcm_precision">'.$categ[$i+2].'</div>';
-	}
-}
-
 function qcm_inserer_les_qcm(&$chaine, $indexJeux, $gestionPoints) {
   global $qcms;
   if (ereg('<ATTENTE_QCM>([0-9]+)</ATTENTE_QCM>', $chaine, $eregResult)) {
@@ -369,10 +359,9 @@ function jeux_qcm($texte, $indexJeux) {
   $tete = '<div class="jeux_cadre qcm">'.($titre?'<div class="jeux_titre qcm_titre">'.$titre.'<hr /></div>':'');
   if (!isset($_POST["var_correction_".$indexJeux])) {
 	$tete .= jeux_form_debut('qcm', $indexJeux);
-	$pied = '<br /><div align="center"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton"></div>'.jeux_form_fin();
+	$pied = '<br /><div style="text-align:center;"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton"></div>'.jeux_form_fin();
   } else {
-      $pied = jeux_afficher_score($qcm_score, $qcms['totalscore'], $_POST['id_jeu'], join(', ', $qcm_score_detaille))
-  			. qcm_afficher_commentaire($categ_score, $qcm_score, $qcms['totalscore'])
+      $pied = jeux_afficher_score($qcm_score, $qcms['totalscore'], $_POST['id_jeu'], join(', ', $qcm_score_detaille), $categ_score)
 			. jeux_bouton_reinitialiser();
   }
   

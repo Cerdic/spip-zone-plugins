@@ -122,25 +122,44 @@ function jeux_in_liste($texte, $liste=array()) {
 }
 
 // retourne la boite de score
-function jeux_afficher_score($score, $total, $id_jeu=false, $resultat_long='') {
+function jeux_afficher_score($score, $total, $id_jeu=false, $resultat_long='', $categories='') {
 	if ($id_jeu){
 		// ici, #CONTENU est passe par le filtre |ajoute_id_jeu{#ID_JEU}
 		include_spip('base/jeux_ajouter_resultat');
 		jeux_ajouter_resultat($id_jeu, $score, $total, $resultat_long);
 	}
-	return '<div class="jeux_score">'._T('jeux:score')
-	  			. "&nbsp;$score&nbsp;/&nbsp;".$total.'<br />'
-				. ($score==$total?_T('jeux:bravo'):'').'</div>';
+	include_spip('public/assembler');
+	return recuperer_fond('fonds/jeu_score', 
+		array('id_jeu'=>$id_jeu, 'score'=>$score, 'total'=>$total,
+			'resultat_long'=>$resultat_long, 
+			'commentaire'=>jeux_commentaire_score($categories, $score, $total)
+		)
+	);
+}
+
+function jeux_commentaire_score($categ, $score, $total) {
+	if(!strlen(categ)) return '';
+	$score = intval($score);
+	$total = intval($total);
+	$res = false;
+	$categ = preg_split(',(^|\n|\r)\s*([0-9]+[.\,]?[0-9]*)(%|pt|pts)\s*:,', trim($categ), -1, PREG_SPLIT_DELIM_CAPTURE);
+	for($i=2; $i<count($categ); $i+=4) {
+		$mini = $categ[$i+1]=='%'?$total*$categ[$i]/100:$categ[$i];
+		if($score > $total) $res=false;
+		elseif($score >= $mini) $res = $i+2;
+		else break;
+	}
+	return $res===false?'':$categ[$res];
 }
 
 // fonctions qui retournent des boutons
 function jeux_bouton_reinitialiser() {
-	return '<div class="jeux_bouton_corriger" align="right">[ <a href="'
-	 . parametre_url(self(),'var_mode','recalcul').'">'._T('jeux:reinitialiser').'</a> ]</div>';
+	return '<div class="jeux_bouton_reset">&#091; <a href="'
+	 . parametre_url(self(),'var_mode','recalcul').'">'._T('jeux:reinitialiser').'</a> &#093;</div>';
 }
 function jeux_bouton_recommencer() {
-	return '<div class="jeux_bouton_corriger" align="right">[ <a href="'
-	 . parametre_url(self(),'var_mode','recalcul').'">'._T('jeux:recommencer').'</a> ]</div>';
+	return '<div class="jeux_bouton_reset">&#091; <a href="'
+	 . parametre_url(self(),'var_mode','recalcul').'">'._T('jeux:recommencer').'</a> &#093;</div>';
 }
 
 // ajoute un module jeu a la bibliotheque
