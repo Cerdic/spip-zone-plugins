@@ -7,5 +7,9 @@
 <etat>stable</etat>
 <description>Ce plugin permet d'afficher un gentil message aux internautes surfant avec Internet Explorer afin de les pr&eacute;venir qu'ils ne visitent pas le site dans les meilleures conditions.</description>
 <prefix>noie</prefix>
+<pipeline>
+	<nom>affichage_final</nom>
+	<inclure>insere_campagne.php</inclure>
+</pipeline>
 <necessite id='SPIP' version='[1.9.0;]' />
 </plugin>
