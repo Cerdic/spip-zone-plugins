@@ -13,9 +13,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // ie6msg
 'ie6msg_titre' => 'Wussten Sie dass Ihr Browser (Internet Explorer) veraltet ist?',
 'ie6msg_info' => 'Um das beste Ergebnis und den vollen Nutzungsumfang unseres Internetauftrittes nutzen zu k&ouml;nnen, aktualisieren Sie bitte ihren Browser.
-Die aktuelle Version ist der <a href="http://www.microsoft.com/windows/downloads/ie/getitnow.mspx">Internet Explorer 7</a> und der <a href="http://www.microsoft.com/windows/Internet-explorer/beta/default.aspx">Internet Explorer 8</a> ist bereits als beta verf&uuml;gbar.
+Die aktuelle Version ist der <a href="http://www.microsoft.com/germany/windows/downloads/">Internet Explorer&nbsp;7</a> und der <a href="http://www.microsoft.com/windows/Internet-explorer/beta/">Internet Explorer&nbsp;8</a> ist bereits als beta verf&uuml;gbar.
 Die Aktualisierung ist kostenlos. Sollten sie einen Computer am Arbeitsplatz benutzen, wenden Sie sich bitte an den Administrator/Informatiker.
-<br />Sie k&ouml;nnen auch andere Internet Browser probieren, wie die kostenlosen <a href="http://www.opera.com">Opera</a>, <a href="http://mozilla.com">FireFox</a> oder <a href="http://www.apple.com/safari/download/">Safari</a>',
+<br />Sie k&ouml;nnen auch andere Internet Browser probieren, wie die kostenlosen <a href="http://www.opera.com">Opera</a>, <a href="http://www.mozilla-europe.org/de/firefox/">FireFox</a> oder <a href="http://www.apple.com/de/safari/">Safari</a>',
 
 );
 

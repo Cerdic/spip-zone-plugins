@@ -12,8 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // ie6msg
 'ie6msg_titre' => 'Did you know that your browser is out of date',
-'ie6msg_info' => 'To get the best possible experience using our website we recommend that you upgrade your browser to a newer version. The current version is <a class="getie7" href="http://www.microsoft.com/windows/downloads/ie/getitnow.mspx">Internet Explorer&nbsp;7</a> and <a class="getie7" href = "http://www.microsoft.com/windows/Internet-explorer/beta/default.aspx">Internet Explorer&nbsp;8</a> is available as a beta. The upgrade is free. If you\'re using a PC at work you should contact your IT-administrator.
-<br />If you want to you may also try some other popular Internet browsers like <a class="ie6expl" href="http://www.opera.com">Opera</a>, <a class="ie6expl" href="http://mozilla.com ">FireFox</a> or <a class="ie6expl" href="http://www.apple.com/safari/download/">Safari</a>.',
+'ie6msg_info' => 'To get the best possible experience using our website we recommend that you upgrade your browser to a newer version. The current version is <a href="http://www.microsoft.com/windows/downloads/ie/getitnow.mspx">Internet Explorer&nbsp;7</a> and <a href = "http://www.microsoft.com/windows/Internet-explorer/beta/">Internet Explorer&nbsp;8</a> is available as a beta. The upgrade is free. If you\'re using a PC at work you should contact your IT-administrator.
+<br />If you want to you may also try some other popular Internet browsers like <a href="http://www.opera.com">Opera</a>, <a href="http://mozilla.com ">FireFox</a> or <a href="http://www.apple.com/safari/download/">Safari</a>.',
 
 );
 

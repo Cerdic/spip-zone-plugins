@@ -12,8 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // ie6msg
 'ie6msg_titre' => '&iquest;Sab&iacute;as que tu navegador no est&aacute; actualizado?',
-'ie6msg_info' => 'Para obtener la mejor experiencia posible utilizando nuestra p&aacute;gina web te recomendamos que actualices tu navegador a una versi&oacute;n m&aacute;s reciente. La versi&oacute;n actual es <a  href="http://www.microsoft.com/windows/downloads/ie/getitnow.mspx" class="ie6expl"><strong>Internet Explorer 7</strong></a> y <a href="http://www.microsoft.com/windows/Internet-explorer/beta/default.aspx" class="ie6expl"><strong>Internet Explorer 8</strong></a> est&aacute; disponible como una versi&oacute;n beta. La actualizaci&oacute;n es gratuita. Si est&aacute;s utilizando un equipo en el trabajo solicita la actualizacion a tu Administrador de Sistemas.
-<br />Si deseas, tambi&eacute;n puede probar otros populares navegadores de Internet como  <a class="ie6expl" href="http://www.mozilla-europe.org/es/firefox/"><strong>Firefox</strong>,</a> <a href="http://www.google.com/chrome/?hl=es"><strong>Chrome de Google</strong></a> y <a href="http://www.opera.com"><strong>Opera</strong></a>.',
+'ie6msg_info' => 'Para obtener la mejor experiencia posible utilizando nuestra p&aacute;gina web te recomendamos que actualices tu navegador a una versi&oacute;n m&aacute;s reciente.
+La&nbsp;versi&oacute;n actual es <a href="http://www.microsoft.com/spain/windows/downloads/">Internet Explorer&nbsp;7</a> y <a href="http://www.microsoft.com/windows/Internet-explorer/beta/">Internet Explorer&nbsp;8</a> est&aacute; disponible como una versi&oacute;n beta. La actualizaci&oacute;n es gratuita. Si est&aacute;s utilizando un equipo en el trabajo solicita la actualizacion a tu Administrador de Sistemas.
+<br />Si deseas, tambi&eacute;n puede probar otros populares navegadores de Internet como <a href="http://www.mozilla-europe.org/es/firefox/">Firefox,</a> <a href="http://www.google.com/chrome/?hl=es">Chrome</a> y <a href="http://www.opera.com">Opera</a>.',
 
 );
 
