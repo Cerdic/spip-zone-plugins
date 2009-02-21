@@ -33,6 +33,8 @@
 	
 	[(#CONFIG{socialtags/stumbleupon}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_stumbleupon}|parametre_url{'url',[(#URL_BREVE|url_absolue)]}|parametre_url{'title',[(#TITRE|texte_script)]})]" title="StumbleUpon"><img src="[(#CHEMIN{images/stumbleupon.png})]" title="StumbleUpon" alt="StumbleUpon" class="socialtags-hovers" /></a></li>,''})]
 	
+	[(#CONFIG{socialtags/slashdot}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_slashdot}|parametre_url{'url',[(#URL_BREVE|url_absolue)]}|parametre_url{'title',[(#TITRE|texte_script)]})]" title="Slashdot"><img src="[(#CHEMIN{images/slashdot.png})]" title="Slashdot" alt="slashdot" class="socialtags-hovers" /></a></li>,''})]
+	
 </BOUCLE_breve>
 </ul>
 </div>
