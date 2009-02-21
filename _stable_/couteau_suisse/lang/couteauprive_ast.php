@@ -38,7 +38,7 @@ _ Enllaz de preba: [->test@test.com] (recarga la p&aacute;xina pa prebar).[[%env
 	// B
 	'basique' => 'B&aacute;sica',
 	'blocs:aide' => 'Bloques Desplegables: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) y <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF>Te permite crear bloques que puen facese visibles o invisibles al calcar nel so t&iacute;tulu.
+	'blocs:description' => 'Te permite crear bloques que puen facese visibles o invisibles al calcar nel so t&iacute;tulu.
 
 @puce@ {{Nos testos SPIP}}: los redactores disponen de les nueves balices &lt;bloc&gt; (o &lt;invisible&gt;) y &lt;visible&gt; pa utilizar nos testos as&iacute;: 
 
@@ -50,16 +50,18 @@ _ Enllaz de preba: [->test@test.com] (recarga la p&aacute;xina pa prebar).[[%env
  </bloc>
 </code></quote>
 
-@puce@ {{Nes cadarmes}}: dispones de les noeves balices #BLOC_TITRE, #BLOC_DEBUT y #BLOC_FIN pa utilizar as&iacute;: 
+@puce@ {{Nes cadarmes}}: dispones de les nueves balices #BLOC_TITRE, #BLOC_DEBUT y #BLOC_FIN pa utilizar as&iacute;: 
 <quote><code> #BLOC_TITRE o #BLOC_TITRE{mio_URL}
  Mio t&iacute;tulu
  #BLOC_RESUME    (opcional)
  una versi&oacute;n en resume del bloque siguiente
  #BLOC_DEBUT
- El mio bloque desplegable (que contendr&aacute; la URL a la que apunta si fai falta)
+ El mio bloque estenderexable (que contendr&aacute; la URL a la que apunta si fai falta)
  #BLOC_FIN</code></quote>
 
-@puce@ Si marques &laquo;si&raquo; embaxo, l\'apertura d\'un bloque provocar&aacute; que se pesllen toos los dem&aacute;s bloques de la p&aacute;xina, col env&iacute;s de nun tener m&aacute;s que uno solu abiertu a la vez.[[%bloc_unique%]]',
+@puce@ Si marques &laquo;si&raquo; embaxo, l\'apertura d\'un bloque provocar&aacute; que se pesllen tolos dem&aacute;s bloques de la p&aacute;xina, col env&iacute;s de nun tener m&aacute;s que uno solu abiertu a la vez.[[%bloc_unique%]]
+
+@puce@ La Navaya Suiza utiliza por omisi&oacute;n la etiqueta HTML &lt;h4&gt; pal t&iacute;tulu de los bloques estenderexables. Equ&iacute; pue escoyese otra etiqueta &lt;hN&gt;:&nbsp;[[%bloc_h4%]]',
 	'blocs:nom' => 'Bloques Desplegables',
 	'boites_privees:description' => 'Toes les caxes descrites embaxo apaecen per dayuri na parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Les revisiones de La Navaya Suiza}}: un cuadru na presente p&aacute;xina de configuraci&oacute;n, que indica les caberes modificaciones amest&aacute;es al c&oacute;digu del plugin ([Source->@_CS_RSS_SOURCE@]).
@@ -305,6 +307,7 @@ Atenci&oacute;n, esta ferramienta necesita pa funcionar el plugin {jQuery} : {Ro
 	'label:auto_sommaire' => 'Creaci&oacute;n sistem&aacute;tica del sumariu:',
 	'label:balise_decoupe' => 'Activar la baliza #CS_DECOUPE:',
 	'label:balise_sommaire' => 'Activar la baliza #CS_SOMMAIRE:',
+	'label:bloc_h4' => 'Etiqueta HTML pa los t&iacute;tulos:',
 	'label:bloc_unique' => 'Solo un bloque abiertu na p&aacute;xina:',
 	'label:couleurs_fonds' => 'Permitir los fondos:',
 	'label:cs_rss' => 'Activar:',

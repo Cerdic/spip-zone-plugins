@@ -38,7 +38,7 @@ _ Lien de test : [->test@test.com] (rechargez la page enti&egrave;rement).[[%env
 	// B
 	'basique' => 'Basique',
 	'blocs:aide' => 'Blocs D&eacute;pliables : <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias : <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) et <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF>Te permet  de cr&eacute;er des blocs dont le titre cliquable peut les rendre visibles ou invisibles.
+	'blocs:description' => 'Te permet  de cr&eacute;er des blocs dont le titre cliquable peut les rendre visibles ou invisibles.
 
 @puce@ {{Dans les textes SPIP}} : les r&eacute;dacteurs ont &agrave; disposition les  nouvelles balises &lt;bloc&gt; (ou &lt;invisible&gt;) et &lt;visible&gt; &agrave; utiliser dans leurs textes comme ceci : 
 
@@ -59,7 +59,8 @@ _ Lien de test : [->test@test.com] (rechargez la page enti&egrave;rement).[[%env
  Mon bloc de\'pliable (qui contiendra l\'URL pointe\'e si ne\'ce\'ssaire)
  #BLOC_FIN</code></quote>
 
-@puce@ En cochant &laquo;oui&raquo; ci-dessous, l\'ouverture d\'un bloc provoquera la fermeture de tous les autres blocs de la page, afin d\'en avoir qu\'un seul ouvert &agrave; la fois.[[%bloc_unique%]]',
+@puce@ En cochant &laquo;oui&raquo; ci-dessous, l\'ouverture d\'un bloc provoquera la fermeture de tous les autres blocs de la page, afin d\'en avoir qu\'un seul ouvert &agrave; la fois.[[%bloc_unique%]]
+@puce@ Le Couteau Suisse utilise par d&eacute;faut la balise HTML &lt;h4&gt; pour le titre des blocs d&eacute;pliables. Choisis ici une autre balise &lt;hN&gt;&nbsp;:[[%bloc_h4%]]',
 	'blocs:nom' => 'Blocs D&eacute;pliables',
 	'boites_privees:description' => 'Toutes les bo&icirc;tes d&eacute;crites ci-dessous apparaissent ici ou l&agrave; dans la partie priv&eacute;e.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Les r&eacute;visions du Couteau Suisse}} : un cadre sur la pr&eacute;sente page de configuration, indiquant les derni&egrave;res modifications apport&eacute;es au code du plugin ([Source->@_CS_RSS_SOURCE@]).
@@ -305,6 +306,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:auto_sommaire' => 'Cr&eacute;ation syst&eacute;matique du sommaire :',
 	'label:balise_decoupe' => 'Activer la balise #CS_DECOUPE :',
 	'label:balise_sommaire' => 'Activer la balise #CS_SOMMAIRE :',
+	'label:bloc_h4' => 'Balise pour les titres&nbsp;:',
 	'label:bloc_unique' => 'Un seul bloc ouvert sur la page :',
 	'label:couleurs_fonds' => 'Permettre les fonds :',
 	'label:cs_rss' => 'Activer :',

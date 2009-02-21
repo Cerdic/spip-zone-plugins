@@ -38,7 +38,7 @@ _ Test link:[->test@test.com] (Reload the page to test.)[[%enveloppe_mails%]]',
 	// B
 	'basique' => 'Basic',
 	'blocs:aide' => 'Folding blocks: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) and <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF>Allows you to create blocks which show/hide when you click on the title.
+	'blocs:description' => 'Allows you to create blocks which show/hide when you click on the title.
 
 @puce@ {{In SPIP texts}}: authors can use the tags &lt;bloc&gt; (or &lt;invisible&gt;) and &lt;visible&gt; in this way: 
 
@@ -59,7 +59,9 @@ _ Test link:[->test@test.com] (Reload the page to test.)[[%enveloppe_mails%]]',
  My collapsible block (which can be loaded by an AJAX URL, if needed)
  #BLOC_FIN</code></quote>
 
-@puce@ If you tick "yes" below, opening one block will cause all other blocks on the page to close. i.e. only one block is open at a time.[[%bloc_unique%]]',
+@puce@ If you tick "yes" below, opening one block will cause all other blocks on the page to close. i.e. only one block is open at a time.[[%bloc_unique%]]
+
+@puce@ By default, the Swiss Knife uses the HTML tag &lt;h4&gt; for the titles of the collapsible blocks. You can specify another tag here &lt;hN&gt;:[[%bloc_h4%]]',
 	'blocs:nom' => 'Folding Blocks',
 	'boites_privees:description' => 'All the boxes described below appear somewhere in the editing area.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Swiss Knife updates}}: a box on this configuration page showing the last changes made to the code of the plugin ([Source->@_CS_RSS_SOURCE@]).
@@ -304,6 +306,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:auto_sommaire' => 'Systematic creation of a summary:',
 	'label:balise_decoupe' => 'Activate the #CS_DECOUPE tag:',
 	'label:balise_sommaire' => 'Activate the tag #CS_SOMMAIRE :',
+	'label:bloc_h4' => 'Tag for the titles:',
 	'label:bloc_unique' => 'Only one block open on the page:',
 	'label:couleurs_fonds' => 'Allow backgrounds:',
 	'label:cs_rss' => 'Activate:',
