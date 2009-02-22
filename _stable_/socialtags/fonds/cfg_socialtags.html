@@ -144,8 +144,15 @@ Ici vous pouvez choisir les sites de partages de vos articles.<br /><br />
 <br />
 <label><input type="radio" name="jshead" value="1"[ checked="(#ENV{jshead}|=={1}|?{checked})"] /> Insertion javascript.</label>
 <br />Ins&#233;rer le bloc social-tags en-dessous du bloc suivant :
-<label>S&#233;lecteur : <input type="text" name="jsselector" value="[(#ENV{jsselector}|sinon{'#contenu'})]" /></label>
-
+<br />
+<label>S&#233;lecteur : <input type="text" name="jsselector" value="[(#ENV{jsselector}|sinon{'#contenu'})]" size="50" /></label>
+<p><small><b>Exemples (sur les squelettes dist) :</b>
+<dl>
+<dt><tt>#contenu</tt></dt>
+<dd>En bas de chaque page</dd>
+<dt><tt>.page_article .cartouche:first</tt></dt>
+<dd>Sous le bloc de titre des pages article</dd>
+</dl>
 </fieldset>
 
 </div>
