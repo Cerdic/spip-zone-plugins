@@ -4,10 +4,10 @@
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
  	Fil
-_ &#169; 2005-2007 - Distribu&eacute; sous licence GPL
+_ &#169; 2005-2009 - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version> <!-- Version du plugin -->
-	1.0
+	1.1
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	stable
