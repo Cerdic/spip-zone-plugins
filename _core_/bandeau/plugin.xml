@@ -136,7 +136,7 @@
 	<bouton id='admin_sauvegarder' parent='bando_administration'>
 		<icone>images/v1/backup-16.png</icone>
 		<titre>texte_sauvegarde_base</titre>
-		<url>admin_tech</url>
+		<url>admin_backup</url>
 	</bouton>
 	<bouton id='admin_restaurer' parent='bando_administration'>
 		<icone>images/v1/restore-16.png</icone>

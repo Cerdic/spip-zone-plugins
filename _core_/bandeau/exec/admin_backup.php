@@ -24,7 +24,7 @@ function exec_admin_backup_dist()
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('texte_sauvegarde'), "configuration", "base");
 
-		echo gros_titre(_T('titre_admin_tech'),'',false);
+		echo gros_titre(_T('texte_sauvegarde'),'',false);
 
 		echo debut_gauche('',true);
 		if ($GLOBALS['connect_toutes_rubriques']) {
@@ -48,7 +48,7 @@ function exec_admin_backup_dist()
 		// Sauvegarde de la base
 		//
 
-		echo debut_cadre_trait_couleur('',true,'',_T('texte_sauvegarde'),'sauvegarder');
+		echo debut_cadre_trait_couleur('',true,'',"",'sauvegarder');
 
 		// a passer en fonction
 		if (substr(_DIR_IMG, 0, strlen(_DIR_RACINE)) === _DIR_RACINE)
@@ -62,10 +62,10 @@ function exec_admin_backup_dist()
 		 "\n<p>" .
 		 http_img_pack('warning.gif', _T('info_avertissement'),
 			 "style='width: 48px; height: 48px; float: right;margin: 10px;'") .
-		 _T('texte_admin_backup_01',
+		 _T('texte_admin_tech_01',
 		   array('dossier' => '<i>'.$dir_dump.'</i>', 'img'=>'<i>'.$dir_img.'</i>')) .
 		 '&nbsp;' .
-		  _T('texte_admin_backup_02',
+		  _T('texte_admin_tech_02',
 			  array('archive' => str_replace('/', ' / ', $archive),
 				'spipnet' => $GLOBALS['home_server']
 				. '/' .  $GLOBALS['spip_lang'] . '_article1489.html'
@@ -77,7 +77,7 @@ function exec_admin_backup_dist()
 		$form = $chercher_rubrique(0, 'rubrique', !$GLOBALS['connect_toutes_rubriques'], 0, 'admin_backup');
 
 		$res .= "\n<label for='id_parent'>" .
-			  _T('texte_admin_backup_04') .
+			  _T('texte_admin_tech_04') .
 			  "</label><br /><br />" .
 			  $form . '<br />';
 
@@ -86,7 +86,7 @@ function exec_admin_backup_dist()
 		$znom = "\n<input name='znom_sauvegarde' id='znom_sauvegarde' size='40' value='$file' />";
 
 		$res .=
-		  _T('texte_admin_backup_03') .
+		  _T('texte_admin_tech_03') .
 		  "\n<ul>" .
 		  "\n<li style='list-style:none;'><input type='radio' name='gz' value='1' id='gz_on' checked='checked' /><label for='gz_on'> " .
 		  _T('bouton_radio_sauvegarde_compressee', array('fichier'=>'')) .
