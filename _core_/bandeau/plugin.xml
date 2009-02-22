@@ -58,11 +58,11 @@
 
 	<bouton id="bando_suivi">
 		<icone>images/spip/suivi-48.png</icone>
-		<titre>bando:icone_suivi_edito</titre>		
+		<titre>bando:icone_suivi_edito</titre>
 		<url>navigation</url>
 		<args>menu=bando_suivi</args>
 	</bouton>
-	<bouton id='synchro' parent="bando_suivi">
+	<bouton id='suivi_edito' parent="bando_suivi">
 		<icone>images/v1/suivi-16.png</icone>
 		<titre>info_suivi_activite</titre>		
 	</bouton>
@@ -87,6 +87,10 @@
 	<bouton id='calendrier' parent="bando_suivi">
 		<icone>images/v1/calendrier-16.png</icone>
 		<titre>Agenda interne</titre>
+	</bouton>
+	<bouton id='synchro' parent="bando_suivi">
+		<icone></icone>
+		<titre>icone_suivi_activite</titre>
 	</bouton>
 	
 	<bouton id="bando_reactions">
