@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Interface pour les forums</nom>
-	<icon>img_pack/forum-48.png</icon>
+	<icon>images/forum-48.png</icon>
 	<auteur>C&eacute;dric Morin</auteur>
 	<licence>GPL</licence>
 	<version>0.1</version>
