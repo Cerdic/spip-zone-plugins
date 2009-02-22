@@ -6,6 +6,12 @@
 <description>Liste des services du plugin Social tags</description>
 <items>
 
+<item>
+<title>Ajouter aux favoris</title>
+<link>javascript:if(jQuery.browser.ie)window.external.AddFavorite(document.location,document.title);else%20window.sidebar.addPanel(document.title,document.location,'');</link>
+<author>bookmark</author>
+</item>
+
 	<item>
 	<title>Digg</title>
 	<link>http://digg.com/submit?phase=2&amp;url=%u&amp;title=%t</link>
