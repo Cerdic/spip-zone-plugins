@@ -8,7 +8,7 @@ if (!defined('_DIR_PLUGIN_SOCIALTAGS')){ // defini automatiquement par SPIP 1.9.
 // ajout feuille de stylle
 //
 function socialtags_insert_head($flux){
-  $flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('socialtags.css').'" media="projection, screen, tv" />';
+  $flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('socialtags.css').'" media="all" />';
 
   if (lire_config('socialtags/jshead')) {
   	$jsFile = generer_url_public('socialtags.js');
