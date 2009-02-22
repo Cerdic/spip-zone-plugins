@@ -21,7 +21,7 @@ var socialtags = [
 	][(#CONFIG{socialtags/scoopeo}|oui)	{
 		n: 'Scoopeo', i:'[(#CHEMIN{images/scoopeo.png})]', u:'[(#CONFIG{socialtags/url_scoopeo})]' },
 	][(#CONFIG{socialtags/wikio}|oui)	{
-		n: 'Wikio', i:'[(#CHEMIN{images/wikio.gif})]', u:'[(#CONFIG{socialtags/url_wikio})]' },
+		n: 'Wikio', i:'[(#CHEMIN{images/wikio.png})]', u:'[(#CONFIG{socialtags/url_wikio})]' },
 	][(#CONFIG{socialtags/furl}|oui)	{
 		n: 'Furl', i:'[(#CHEMIN{images/furl.png})]', u:'[(#CONFIG{socialtags/url_furl})]' },
 	][(#CONFIG{socialtags/blogmarks}|oui)	{
@@ -29,9 +29,9 @@ var socialtags = [
 	][(#CONFIG{socialtags/reddit}|oui)	{
 		n: 'Reddit', i:'[(#CHEMIN{images/reddit.png})]', u:'[(#CONFIG{socialtags/url_reddit})]' },
 	][(#CONFIG{socialtags/misterwong}|oui)	{
-		n: 'Mister wong', i:'[(#CHEMIN{images/misterwong.gif})]', u:'[(#CONFIG{socialtags/url_misterwong})]' },
+		n: 'Mister wong', i:'[(#CHEMIN{images/misterwong.png})]', u:'[(#CONFIG{socialtags/url_misterwong})]' },
 	][(#CONFIG{socialtags/viadeo}|oui)	{
-		n: 'Viadeo', i:'[(#CHEMIN{images/viadeo.gif})]', u:'[(#CONFIG{socialtags/url_viadeo})]' },
+		n: 'Viadeo', i:'[(#CHEMIN{images/viadeo.png})]', u:'[(#CONFIG{socialtags/url_viadeo})]' },
 	][(#CONFIG{socialtags/stumbleupon}|oui)	{
 		n: 'StumbleUpon', i:'[(#CHEMIN{images/stumbleupon.png})]', u:'[(#CONFIG{socialtags/url_stumbleupon})]' },
 	][(#CONFIG{socialtags/slashdot}|oui)	{
@@ -64,9 +64,3 @@ $('[(#CONFIG{socialtags/jsselector})]').after(ul.wrap('<div class="socialtags"><
 
 
 }); })(jQuery);
-
-
-/*
-	[(#CONFIG{socialtags/propeller}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_propeller}|parametre_url{'url',[(#URL_ARTICLE|url_absolue)]})]" title="Propeller"><img src="[(#CHEMIN{images/propeller.png})]" title="Propeller" alt="Propeller" class="socialtags-hovers" /></a></li>,''})]
-
-*/
