@@ -49,35 +49,33 @@
 
 /* Habillage des forums en liste pour moderation
 ---------------------------------------------- */
-ul.forums li.item {padding:0.8em 0;margin-bottom:15px;}
-ul.forums li.item .texte p {padding:0.8em 30px;margin:0px}
+ul.forums li.item { margin: 0; padding: 0 0 .8em 0; background: #F8F7F3 url(#CHEMIN{images/forum-bg-item.png}); border: 0; border-top: 5px solid #ccc; }
 
-ul.forums li .cartouche {padding:5px;padding-#GET{left}:30px;min-height:30px;border-bottom:1px solid #eee;}
+ul.forums li.statut_publie { background-image: none; border-color: #B2BF6B; }
+ul.forums li.statut_off,
+ul.forums li.statut_privoff,
+ul.forums li.statut_off.odd,
+ul.forums li.statut_privoff.odd { background-color: #edd3d3; border-color: #FF5F5F; }
+ul.forums li.statut_spam,
+ul.forums li.statut_spam.odd { background-color: #ddd; border-color: #666; }
+ul.forums li.statut_prop,
+ul.forums li.statut_prop.odd { background-color: #FFFBEF; border-color: #EFCA68; }
 
-ul.forums li.item {border-top:5px solid #ccc;padding-top:0;padding-bottom:0;}
-ul.forums li.item .cartouche {border-top:3px solid #ddd;}
-
-
-
-ul.forums li.statut_publie {border-top:5px solid #aedf7d;}
-ul.forums li.statut_publie .cartouche {border-top:3px solid #d1efb3;}
-
-ul.forums li.statut_off,ul.forums li.statut_privoff {border-top:5px solid red;}
-ul.forums li.statut_off .cartouche,ul.forums li.statut_privoff .cartouche {border-top:3px solid #FF8F8F;}
-ul.forums li.statut_spam {border-top:5px solid #666;}
-ul.forums li.statut_spam .cartouche {border-top:3px solid #8f8f8f;}
-ul.forums li.statut_prop {border-top:5px solid #EDEF00;}
-ul.forums li.statut_prop .cartouche {border-top:3px solid #EEEF86;}
-
+ul.forums li .cartouche { min-height: 30px; padding: 5px; padding-#GET{left}: 30px; border-bottom: 1px solid #eee; }
+ul.forums li.statut_off .cartouche,
+ul.forums li.statut_privoff .cartouche { border-color: #edd3d3; }
+ul.forums li.statut_spam .cartouche { border-color: #ddd; }
+ul.forums li.statut_prop .cartouche { border-color: #FFFBEF; }
 ul.forums li .cartouche h3 {font-size:1.1em;margin-bottom:0.25em;}
 ul.forums li .cartouche .date,ul.forums li .cartouche .par {display:inline;}
-
 ul.forums li .cartouche .info_statut {display:block;float:#GET{left};margin-#GET{left}:-30px;position:relative;display:inline;}
 ul.forums li .cartouche .reponse_a {font-weight:bold;}
 ul.forums li .cartouche .reponse_a a {font-weight:normal;}
 ul.forums li .cartouche .lien_admin {display:block;}
 
-ul.forums >li.item .actions.moderer {padding-top:5px;padding-bottom:5px;margin-#GET{right}:5px;background:url([(#CHEMIN{images/actions-24.png}|image_alpha{100}|extraire_attribut{src})]) no-repeat bottom right;padding-#GET{right}:30px;}
+ul.forums li.item .texte p { margin: 0; padding: .8em 30px; }
+
+ul.forums >li.item .actions.moderer {padding-top:5px;padding-bottom:5px;margin-#GET{right}:5px;background:url(#CHEMIN{images/actions-filigrane-24.png}) no-repeat bottom right;padding-#GET{right}:30px;}
 ul.forums >li.item:hover .actions.moderer {/*background-image:none;*/}
 ul.forums >li.item .actions.moderer > span {visibility:hidden;}
 ul.forums >li.item:hover .actions.moderer > span  {visibility:visible;}
