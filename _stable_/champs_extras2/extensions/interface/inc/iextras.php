@@ -11,6 +11,18 @@ function iextras_get_extras(){
 	return $extras;
 }
 
+
+/* retourne l'extra ayant l'id demande */
+function iextra_get_extra($id_extra){
+		$extras = iextras_get_extras();
+		foreach($extras as $extra) {
+			if ($extra->get_id() == $id_extra) {
+				return $extra;
+			}
+		}
+		return false;
+}
+
 function iextras_set_extras($extras){
 	ecrire_meta('iextras',serialize($extras));
 	return $extras;

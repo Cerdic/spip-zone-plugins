@@ -22,13 +22,8 @@ function formulaires_editer_champ_extra_charger_dist($id_extra='new', $redirect=
 	// si un extra est demande (pour edition)
 	// remplir les valeurs avec infos de celui-ci
 	if (!$new) {
-		$extras = iextras_get_extras();
-		foreach($extras as $extra) {
-			if ($extra->get_id() == $id_extra) {
-				$valeurs = array_merge($valeurs, $extra->toArray());
-				break;
-			}
-		}
+		$extra = iextra_get_extra($id_extra);
+		$valeurs = array_merge($valeurs, $extra->toArray());
 	}
 	return $valeurs;
 }
@@ -60,17 +55,21 @@ function formulaires_editer_champ_extra_verifier_dist($id_extra='new', $redirect
 	// si nouveau champ, ou modification du nom du champ
 	// verifier qu'un champ homonyme 
 	// n'existe pas deja sur la meme table
-	$extras = iextras_get_extras();
-	foreach ($extras as $e) {
-		if ($new OR ($e->get_id() !== $id_extra)) {
-			if (($e->champ == $champ) and ($e->table == $extra['table'])) {
-				$erreurs['champ'] = _T('iextras:champ_deja_existant');
-				break;
-			}
+	$verifier = false;
+	if (!$new) {
+		$ancien = cextra_get_extra($id_extra);
+		if (($e->champ != $champ) or ($e->table != $extra['table'])) {
+			$verifier = true;
 		}
 	}
-
-
+	if ($new or $verifier) {	
+		$table = table_objet_sql($extra['table']);
+		$desc = sql_showtable($table);
+		if (isset($desc['field'][$champ])) {
+			$erreurs['champ'] = _T('iextras:champ_deja_existant');
+		}
+	}
+	
 	return $erreurs;
 }
 
