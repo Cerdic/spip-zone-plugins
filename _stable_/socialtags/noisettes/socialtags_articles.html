@@ -38,7 +38,9 @@
 	[(#CONFIG{socialtags/blogmemes}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_blogmemes}|parametre_url{'url',[(#URL_ARTICLE|url_absolue)]}|parametre_url{'title',[(#TITRE|texte_script)]})]" title="BlogMemes"><img src="[(#CHEMIN{images/blogmemes.png})]" title="BlogMemes" alt="blogmemes" class="socialtags-hovers" /></a></li>,''})]
 
 	[(#CONFIG{socialtags/blogmemes}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_buzzyahoo}|parametre_url{'submitUrl',[(#URL_ARTICLE|url_absolue)]}|parametre_url{'submitHeadline',[(#TITRE|texte_script)]})]" title="Yahoo! Buzz"><img src="[(#CHEMIN{images/buzz.yahoo.png})]" title="Yahoo! Buzz" alt="Yahoo! Buzz" class="socialtags-hovers" /></a></li>,''})]
-			
+
+	[(#CONFIG{socialtags/propeller}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_propeller}|parametre_url{'url',[(#URL_ARTICLE|url_absolue)]})]" title="Propeller"><img src="[(#CHEMIN{images/propeller.png})]" title="Propeller" alt="Propeller" class="socialtags-hovers" /></a></li>,''})]
+		
 </BOUCLE_article>
 </ul>
 </div>
