@@ -1,0 +1,72 @@
+#HTTP_HEADER{Content-Type: text/javascript}
+// socialtags.js
+
+;(function($) { $(function(){
+
+var socialtags = [
+	[(#CONFIG{socialtags/digg}|oui)	{
+		n: 'Digg', i:'[(#CHEMIN{images/digg.png})]', u:'[(#CONFIG{socialtags/url_digg})]' },
+	][(#CONFIG{socialtags/delicious}|oui)	{
+		n: 'Del.icio.us', i:'[(#CHEMIN{images/delicious.png})]', u:'[(#CONFIG{socialtags/url_delicious})]' },
+	][(#CONFIG{socialtags/facebook}|oui)	{
+		n: 'Facebook', i:'[(#CHEMIN{images/facebook.png})]', u:'[(#CONFIG{socialtags/url_facebook})]' },
+	][(#CONFIG{socialtags/google}|oui)	{
+		n: 'Google', i:'[(#CHEMIN{images/googlebookmark.png})]', u:'[(#CONFIG{socialtags/url_google})]' },
+	][(#CONFIG{socialtags/technorati}|oui)	{
+		n: 'Technorati', i:'[(#CHEMIN{images/technorati.png})]', u:'[(#CONFIG{socialtags/url_technorati})]' },
+	][(#CONFIG{socialtags/live}|oui)	{
+		n: 'Live', i:'[(#CHEMIN{images/live.png})]', u:'[(#CONFIG{socialtags/url_live})]' },
+	][(#CONFIG{socialtags/myspace}|oui)	{
+		n: 'Myspace', i:'[(#CHEMIN{images/myspace.png})]', u:'[(#CONFIG{socialtags/url_myspace})]' },
+	][(#CONFIG{socialtags/scoopeo}|oui)	{
+		n: 'Scoopeo', i:'[(#CHEMIN{images/scoopeo.png})]', u:'[(#CONFIG{socialtags/url_scoopeo})]' },
+	][(#CONFIG{socialtags/wikio}|oui)	{
+		n: 'Wikio', i:'[(#CHEMIN{images/wikio.gif})]', u:'[(#CONFIG{socialtags/url_wikio})]' },
+	][(#CONFIG{socialtags/furl}|oui)	{
+		n: 'Furl', i:'[(#CHEMIN{images/furl.png})]', u:'[(#CONFIG{socialtags/url_furl})]' },
+	][(#CONFIG{socialtags/blogmarks}|oui)	{
+		n: 'Blogmarks', i:'[(#CHEMIN{images/blogmarks.png})]', u:'[(#CONFIG{socialtags/url_blogmarks})]' },
+	][(#CONFIG{socialtags/reddit}|oui)	{
+		n: 'Reddit', i:'[(#CHEMIN{images/reddit.png})]', u:'[(#CONFIG{socialtags/url_reddit})]' },
+	][(#CONFIG{socialtags/misterwong}|oui)	{
+		n: 'Mister wong', i:'[(#CHEMIN{images/misterwong.gif})]', u:'[(#CONFIG{socialtags/url_misterwong})]' },
+	][(#CONFIG{socialtags/viadeo}|oui)	{
+		n: 'Viadeo', i:'[(#CHEMIN{images/viadeo.gif})]', u:'[(#CONFIG{socialtags/url_viadeo})]' },
+	][(#CONFIG{socialtags/stumbleupon}|oui)	{
+		n: 'StumbleUpon', i:'[(#CHEMIN{images/stumbleupon.png})]', u:'[(#CONFIG{socialtags/url_stumbleupon})]' },
+	][(#CONFIG{socialtags/slashdot}|oui)	{
+		n: 'Slashdot', i:'[(#CHEMIN{images/slashdot.png})]', u:'[(#CONFIG{socialtags/url_slashdot})]' },
+	][(#CONFIG{socialtags/blogmemes}|oui)	{
+		n: 'Blogmemes', i:'[(#CHEMIN{images/blogmemes.png})]', u:'[(#CONFIG{socialtags/url_blogmemes})]' },
+	][(#CONFIG{socialtags/buzzyahoo}|oui)	{
+		n: 'Yahoo! Buzz', i:'[(#CHEMIN{images/buzzyahoo.png})]', u:'[(#CONFIG{socialtags/url_buzzyahoo})]' },
+	][(#CONFIG{socialtags/propeller}|oui)	{
+		n: 'Propeller', i:'[(#CHEMIN{images/propeller.png})]', u:'[(#CONFIG{socialtags/url_propeller})]' },
+	]	{}
+];
+
+var title = $('title').text() ||'';
+var description = ($('meta[name=description]').attr('content') || '').substr(0,250);
+var ul = $('<ul><\/ul>');
+$.each(socialtags, function(){if (this.u) {
+	$('<a rel="nofollow"><img class="socialtags-hovers" src="'+ this.i +'"\/></a>')
+	.attr('href', this.u
+		.replace('%u', window.location)
+		.replace('%t', title)
+		.replace('%d',description)
+		)
+	.attr('title', this.n)
+	.wrap('<li><\/li>')
+	.parent().appendTo(ul);
+}});
+
+$('[(#CONFIG{socialtags/jsselector})]').after(ul.wrap('<div class="socialtags"><\/div>').parent());
+
+
+}); })(jQuery);
+
+
+/*
+	[(#CONFIG{socialtags/propeller}|=={on}|?{<li><a rel="nofollow" href="[(#CONFIG{socialtags/url_propeller}|parametre_url{'url',[(#URL_ARTICLE|url_absolue)]})]" title="Propeller"><img src="[(#CHEMIN{images/propeller.png})]" title="Propeller" alt="Propeller" class="socialtags-hovers" /></a></li>,''})]
+
+*/
