@@ -8,8 +8,9 @@
 
 <item>
 <title>Ajouter aux favoris</title>
-<link>javascript:if(jQuery.browser.ie)window.external.AddFavorite(document.location,document.title);else%20window.sidebar.addPanel(document.title,document.location,'');</link>
+<link>javascript:socialtags_addfavorite('%u','%t');</link>
 <author>bookmark</author>
+<description>(ne fonctionne et ne s'affiche que sur Internet Explorer)
 </item>
 
 	<item>
@@ -113,7 +114,9 @@
 <item>
 <title>BlogMemes</title>
 <author>blogmemes</author>
-<link>http://www.blogmemes.fr/post.php?url=%u&amp;title=%t" />
+<link>http://www.blogmemes.fr/post.php?url=%u&amp;title=%t</link>
+</item>
+
 <item>
 <title>Yahoo! Buzz</title>
 <author>buzzyahoo</author>

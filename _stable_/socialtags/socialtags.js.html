@@ -1,27 +1,37 @@
 #HTTP_HEADER{Content-Type: text/javascript}
 // socialtags.js
 
-;(function($) { $(function(){
-
-var socialtags =
-	[(#CONFIG{socialtags/tags}|socialtags_json)];
-
+// 'ajouter un bookmark' ne marche que sous IE
+// les tuyaux trouves pour FF ou Opera sont creves
+;var socialtags_addfavorite = function(u,t){
+	if(document.all)window.external.AddFavorite(u,t);
+};
+(function($) { $(function(){
+var selector = $('[(#CONFIG{socialtags/jsselector})]');
+if (!selector.length) return;
+var socialtags = [(#CONFIG{socialtags/tags}|socialtags_json)];
 var title = $('title').text() ||'';
 var description = ($('meta[name=description]').attr('content') || '').substr(0,250);
+var cano = $('link[rel=canonical]')[0];
+var url = cano ? cano.href : document.location.href;
 var ul = $('<ul><\/ul>');
-$.each(socialtags, function(){if (this.u) {
-	$('<a rel="nofollow"><img class="socialtags-hovers" src="'+ this.i +'"\/></a>')
-	.attr('href', this.u
-		.replace('%u', window.location)
-		.replace('%t', title)
-		.replace('%d',description)
-		)
+var esc = function(x){return encodeURIComponent(x).replace(/\s/g,' ');};
+
+$.each(socialtags, function(){ if (this.u) {
+	if (this.a == 'bookmark' && !document.all) return;
+
+	$('<a rel="nofollow"><img class="socialtags-hovers" src="'+ this.i +'"\/><\/a>')
+	.attr('href',
+		this.u
+		.replace(/%u/g, esc(url))
+		.replace(/%t/g, esc(title))
+		.replace(/%d/g, esc(description))
+	)
 	.attr('title', this.n)
 	.wrap('<li><\/li>')
 	.parent().appendTo(ul);
 }});
 
-$('[(#CONFIG{socialtags/jsselector})]').after(ul.wrap('<div class="socialtags"><\/div>').parent());
-
+selector.after(ul.wrap('<div class="socialtags"><\/div>').parent());
 
 }); })(jQuery);
