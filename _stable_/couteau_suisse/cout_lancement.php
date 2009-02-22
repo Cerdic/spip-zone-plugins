@@ -170,7 +170,11 @@ function cs_echappe_balises($balises, $fonction, $texte, $arg=NULL){
 	// retour du texte simplement protege
 	if ($fonction===false) return $texte;
 	// retour du texte transforme par $fonction puis deprotege
-	return echappe_retour($arg==NULL?$fonction($texte):$fonction($texte, $arg), 'CS');
+	$texte = echappe_retour($arg==NULL?$fonction($texte):$fonction($texte, $arg), 'CS');
+	// deprotection en abime, notamment des modeles...
+	if(strpos($texte, 'base64CS')!==false)
+		return echappe_retour($texte, 'CS');
+	return $texte;
 }
 
 // retourne un chemin canonique a partir d'un chemin contenant des ../
