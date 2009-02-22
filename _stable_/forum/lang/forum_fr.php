@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_valider_messages' => 'Valider ces messages',
 'icone_bruler_messages' => "Signaler comme Spam",
 'icone_legitimer_message' => "Signaler comme licite",
-'icone_supprimer_messages' => 'Supprimer ces messages',
+'icone_supprimer_messages' => 'Refuser ces messages',
 
 'messages_meme_auteur' => 'Tous les messages de cet auteur',
 'messages_meme_email' => 'Tous les messages de cet email',
@@ -25,10 +25,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'messages_publie' => 'Publi&eacute;s',
 'messages_prop' => 'Propos&eacute;s',
 'messages_spam' => 'Spam',
-'messages_off' => 'Supprim&eacute;s',
+'messages_off' => 'Refus&eacute;s',
 
 'messages_prive' => 'Priv&eacute;s',
-'messages_privoff' => 'Supprim&eacute;s',
+'messages_privoff' => 'Refus&eacute;s',
 'messages_privrac' => 'G&eacute;n&eacute;raux',
 'messages_privadm' => 'Administrateurs',
 
@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'statut_prop' => 'Propos&eacute;',
 'statut_publie' => 'Publi&eacute;',
 'statut_spam' => 'Spam',
-'statut_off' => 'Supprim&eacute;',
+'statut_off' => 'Refus&eacute;',
 
 'tout_voir' => 'Voir tous les messages',
 );
