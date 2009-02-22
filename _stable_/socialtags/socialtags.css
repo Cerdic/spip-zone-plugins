@@ -13,10 +13,9 @@ div.socialtags {
 	background: none;
 	display: inline;
 	list-style-type: none;
-	margin: 0;
+	margin: 1px;
 	padding: 1px;
 }
-.socialtags ul li:before { content: ""; }
 .socialtags img {
 	float: none;
 	width: 16px;
