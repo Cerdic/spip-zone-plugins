@@ -1,0 +1,89 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+<h3 class='titrem'><:bando:titre_configurer_preferences:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <ul>
+	  	#SET{name,spip_ecran}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label><:taille_ecran:></label>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]<div class="choix">
+				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_etroit'[(#ENV{#GET{name}}|=={large}|non)checked="checked" ]value="etroit" />
+				<label for="[(#GET{name})]_etroit"><:info_petit_ecran:></label>
+			</div>
+			<div class="choix">
+				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_large'[(#ENV{#GET{name}}|=={large}|oui)checked="checked" ]value="large" />
+				<label for="[(#GET{name})]_large"><:info_grand_ecran:></label>
+			</div>
+		</li>
+	  	#SET{name,display_navigation}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label><:texte_et_icones_navigation:></label>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]<div class="choix">
+				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_1'[(#ENV{#GET{name}}|=={1}|oui)checked="checked" ]value="1" />
+				<label for="[(#GET{name})]_1"><:lien_afficher_texte_seul:></label>
+			</div>
+			<div class="choix">
+				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_2'[(#ENV{#GET{name}}|=={2}|oui)checked="checked" ]value="2" />
+				<label for="[(#GET{name})]_2"><:lien_afficher_texte_icones:></label>
+			</div>
+		</li>
+	  	#SET{name,display}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label><:texte_et_icones_page:></label>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]<div class="choix">
+				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_1'[(#ENV{#GET{name}}|=={1}|oui)checked="checked" ]value="1" />
+				<label for="[(#GET{name})]_1"><:lien_afficher_texte_seul:></label>
+			</div>
+			<div class="choix">
+				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_2'[(#ENV{#GET{name}}|=={2}|oui)checked="checked" ]value="2" />
+				<label for="[(#GET{name})]_2"><:lien_afficher_texte_icones:></label>
+			</div>
+			<div class="choix">
+				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_3'[(#ENV{#GET{name}}|=={3}|oui)checked="checked" ]value="3" />
+				<label for="[(#GET{name})]_3"><:lien_afficher_icones_seuls:></label>
+			</div>
+		</li>
+	  	#SET{name,couleur}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label><:titre_changer_couleur_interface:></label>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]<div class="choix">
+				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_1'[(#ENV{#GET{name}}|=={1}|oui)checked="checked" ]value="1" />
+				<label for="[(#GET{name})]_1"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 1" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{1})];" /></label>
+			</div>
+			<div class="choix">
+				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_2'[(#ENV{#GET{name}}|=={2}|oui)checked="checked" ]value="2" />
+				<label for="[(#GET{name})]_2"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 2" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{2})];" /></label>
+			</div>
+			<div class="choix">
+				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_3'[(#ENV{#GET{name}}|=={3}|oui)checked="checked" ]value="3" />
+				<label for="[(#GET{name})]_3"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 3" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{3})];" /></label>
+			</div>
+			<div class="choix">
+				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_4'[(#ENV{#GET{name}}|=={4}|oui)checked="checked" ]value="4" />
+				<label for="[(#GET{name})]_4"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 4" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{4})];" /></label>
+			</div>
+			<div class="choix">
+				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_5'[(#ENV{#GET{name}}|=={5}|oui)checked="checked" ]value="5" />
+				<label for="[(#GET{name})]_5"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 5" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{5})];" /></label>
+			</div>
+			<div class="choix">
+				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_6'[(#ENV{#GET{name}}|=={6}|oui)checked="checked" ]value="6" />
+				<label for="[(#GET{name})]_6"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 6" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{6})];" /></label>
+			</div>
+		</li>
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

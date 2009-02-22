@@ -12,27 +12,21 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function exec_config_identite(){
-	if (!autoriser('configurer','identite',0)) {
+function exec_config_preferences(){
+	if (!autoriser('configurer','preferences')) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}
 	$commencer_page = charger_fonction('commencer_page','inc');
-	echo $commencer_page(_T('bando:titre_identite_site'));
+	echo $commencer_page(_T('bando:titre_configurer_preferences'));
 
-	echo debut_gauche("configurer_identite",true);
+	echo debut_gauche("configurer_preferences",true);
 
-	//
-	// Le logo de notre site, c'est site{on,off}0.{gif,png,jpg}
-	//
-	$iconifier = charger_fonction('iconifier', 'inc');
-	echo $iconifier('id_syndic', 0, 'configuration');
-
-	echo debut_droite("configurer_identite",true);
+	echo debut_droite("configurer_preferences",true);
 
 
-	echo recuperer_fond('prive/configurer/identite',$_GET);
+	echo recuperer_fond('prive/configurer/preferences',$_GET);
 	echo fin_gauche(),fin_page();
 }
 
