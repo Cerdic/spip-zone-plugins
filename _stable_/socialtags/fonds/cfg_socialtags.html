@@ -124,6 +124,12 @@ Ici vous pouvez choisir les sites de partages de vos articles.<br /><br />
 <input type="checkbox" name="blogmemes" [checked="(#ENV{blogmemes}|?{checked})"] id="blogmemes" />[(#ENV{blogmemes}|?{<strong>})]BlogMemes[(#ENV{blogmemes}|?{</strong>})]</label>
 <input type="hidden" name="url_blogmemes" value="http://www.blogmemes.fr/post.php" />
 
+<br />
+<label>
+<img src="[(#CHEMIN{images/buzz.yahoo.png})]" title="Yahoo! Buzz" alt="Yahoo! Buzz" />
+<input type="checkbox" name="buzzyahoo" [checked="(#ENV{buzzyahoo}|?{checked})"] id="buzzyahoo" />[(#ENV{buzzyahoo}|?{<strong>})]Yahoo! Buzz[(#ENV{buzzyahoo}|?{</strong>})]</label>
+<input type="hidden" name="url_buzzyahoo" value="http://buzz.yahoo.com/submit" />
+
 </fieldset>
 </div>
 
