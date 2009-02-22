@@ -1,8 +1,4 @@
 <?php
-if (!defined('_DIR_PLUGIN_SOCIALTAGS')){ // defini automatiquement par SPIP 1.9.2
-	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-	define('_DIR_PLUGIN_SOCIALTAGS',(_DIR_PLUGINS.end($p)."/"));
-}
  
 //
 // ajout feuille de stylle
@@ -10,13 +6,18 @@ if (!defined('_DIR_PLUGIN_SOCIALTAGS')){ // defini automatiquement par SPIP 1.9.
 function socialtags_insert_head($flux){
   $flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('socialtags.css').'" media="all" />';
 
-  if (lire_config('socialtags/jshead')) {
-  	$jsFile = generer_url_public('socialtags.js');
-  	$flux .= "<script src='$jsFile' type='text/javascript'></script>";
-  }
+  $jsFile = generer_url_public('socialtags.js');
+  $flux .= "<script src='$jsFile' type='text/javascript'></script>";
 
   return $flux;
 }
 
+
+// La liste est stockee en format RSS
+function socialtags_liste() {
+	include_spip('inc/syndic');
+	lire_fichier(find_in_path('socialtags.xml'), $rss);
+	return analyser_backend($rss);
+}
 
 ?>

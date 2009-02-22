@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+<channel>
+<title>Social Tags</title>
+<link>http://www.spip-contrib.net/Social-tags</link>
+<description>Liste des services du plugin Social tags</description>
+<items>
+
+	<item>
+	<title>Digg</title>
+	<link>http://digg.com/submit?phase=2&amp;url=%u&amp;title=%t</link>
+	<description>Digg, agrégateur à la mode.</description>
+	<author>digg</author>
+	</item>
+
+	<item>
+	<title>Del.icio.us</title>
+	<link>http://delicious.com/save?url=%u&amp;title=%t&amp;notes=%d</link>
+	<description>Del.icio.us, agrégateur à la mode.</description>
+	<author>delicious</author>
+	</item>
+
+<item>
+<title>Facebook</title>
+<author>facebook</author>
+<link>http://www.facebook.com/sharer.php?u=%u&amp;t=%t</link>
+</item>
+
+<item>
+<title>Google</title>
+<author>google</author>
+<link>http://www.google.com/bookmarks/mark?op=edit&amp;bkmk=%u&amp;title=%t</link>
+</item>
+
+<item>
+<title>Technorati</title>
+<author>technorati</author>
+<link>http://technorati.com/faves?add=%u</link>
+</item>
+
+<item>
+<title>Live</title>
+<author>live</author>
+<link>https://favorites.live.com/quickadd.aspx?marklet=1&amp;add=%u&amp;title=%t</link>
+</item>
+
+<item>
+<title>MySpace</title>
+<author>myspace</author>
+<link>http://www.myspace.com/Modules/PostTo/Pages/?u=%u&amp;t=%t</link>
+</item>
+
+<item>
+<title>Scoopeo</title>
+<author>scoopeo</author>
+<link>http://www.scoopeo.com/scoop/new?newurl=%u&amp;title=%t</link>
+</item>
+
+<item>
+<title>Wikio</title>
+<author>wikio</author>
+<link>http://www.wikio.com/vote?newurl=%u</link>
+</item>
+
+<item>
+<title>Furl</title>
+<author>furl</author>
+<link>http://www.furl.net/storeIt.jsp?add=%u&amp;t=%t</link>
+</item>
+
+<item>
+<title>Blogmarks</title>
+<author>blogmarks</author>
+<link>http://blogmarks.net/my/new.php?mini=1&amp;url=%u&amp;title=%t</link>
+</item>
+
+<item>
+<title>Reddit</title>
+<author>reddit</author>
+<link>http://reddit.com/submit?url=%u&amp;title=%t</link>
+</item>
+
+<item>
+<title>Mister wong</title>
+<author>misterwong</author>
+<link>http://www.mister-wong.com/addurl/?bm_url=%u&amp;bm_description=%t</link>
+</item>
+
+<item>
+<title>Viadeo</title>
+<author>viadeo</author>
+<link>http://www.viadeo.com/shareit/share/?url=%u&amp;title=%t</link>
+</item>
+
+<item>
+<title>StumbleUpon</title>
+<author>stumbleupon</author>
+<link>http://www.stumbleupon.com/submit?url=%u&amp;title=%t"</link>
+</item>
+
+<item>
+<title>Slashdot</title>
+<author>slashdot</author>
+<link>http://slashdot.org/bookmark.pl?url=%u&amp;title=%t</link>
+</item>
+
+<item>
+<title>BlogMemes</title>
+<author>blogmemes</author>
+<link>http://www.blogmemes.fr/post.php?url=%u&amp;title=%t" />
+<item>
+<title>Yahoo! Buzz</title>
+<author>buzzyahoo</author>
+<link>http://buzz.yahoo.com/submit?submitUrl=%u&amp;submitHeadline=%t&amp;submitSummary=%d</link>
+</item>
+
+<item>
+<title>Propeller</title>
+<author>propeller</author>
+<link>http://www.propeller.com/submit/?url=%u</link>
+</item>
+
+
+
+</items>
+</channel>
+</rss>
+
