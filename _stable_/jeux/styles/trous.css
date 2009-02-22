@@ -1,12 +1,16 @@
 
-input.trous {
+.jeux_trous input.trous {
 	display:inline;
 }	
 
-input.juste {
+.jeux_trous input.juste, .jeux_trous span.juste {
 	color:#006600;
 }
 
-input.faux {
+.jeux_trous input.faux, .jeux_trous span.faux {
 	color:#FF0000;
+}
+
+.jeux_trous input.barre, .jeux_trous span.barre {
+	text-decoration:line-through;
 }
