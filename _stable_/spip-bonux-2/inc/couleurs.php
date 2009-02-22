@@ -19,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // par celui donne en argument
 
 // http://doc.spip.org/@inc_couleurs_dist
-function inc_couleurs_dist($choix=NULL)
+function inc_couleurs_dist($choix=NULL,$ajouter = false)
 {
 	static $couleurs_spip = array(
 // Vert de gris
