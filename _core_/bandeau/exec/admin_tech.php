@@ -27,22 +27,12 @@ function exec_admin_tech_dist()
 
 		echo gros_titre(_T('titre_admin_tech'),'',false);
 
-		echo barre_onglets("administration", "sauver") . "<br />";
 		echo debut_gauche('',true);
 		echo debut_boite_info(true);
 		echo  _T('info_gauche_admin_tech');
 		echo fin_boite_info(true);
 
 		echo debut_droite('',true);
-
-		//
-		// Restauration de la base
-		//
-
-	
-		echo debut_cadre_trait_couleur('',true,'', _T('texte_restaurer_base'),'restaurer');
-		echo admin_sauvegardes($dir_dump, _request('tri'));
-		echo fin_cadre_trait_couleur(true);
 
 		//
 		// Lien vers la reparation
@@ -58,106 +48,78 @@ function exec_admin_tech_dist()
 				generer_form_ecrire('admin_repair', $res, '', _T('bouton_tenter_recuperation')),
 				fin_cadre_trait_couleur(true);
 		}
+		
+		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'admin_recuperer'),'data'=>''));	  
 		echo "<br />";
+
+		echo autres_bases();
+
+		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'admin_declarer'),'data'=>''));
+		echo "<br />";
+
+		echo debut_cadre_trait_couleur('',true,'',"<label for='reinstall'>"._T('texte_effacer_base')."</label>");
+
+		$res = "\n<input type='hidden' name='reinstall' id='reinstall' value='non' />";
+
+		$res = generer_form_ecrire('delete_all', $res, '', _T('bouton_effacer_tout'));
+
+		echo
+			'<img src="' .  chemin_image('warning.gif') . '" alt="',
+			_T('info_avertissement'),
+			"\" style='width: 48px; height: 48px; float: right;margin: 10px;' />",
+			_T('texte_admin_effacer_01'),
+			"<br class='nettoyeur' />",
+			"\n<div style='text-align: center'>",
+			debut_boite_alerte(),
+			"\n<div class='serif'>",
+			"\n<b>"._T('avis_suppression_base')."&nbsp;!</b>",
+			$res,
+			"\n</div>",
+			fin_boite_alerte(),
+			"</div>";
+
+		echo fin_cadre_relief(true);
+
+		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'admin_effacer'),'data'=>''));
 
 		echo fin_gauche(), fin_page();
 	}
 }
-
-function admin_sauvegardes($dir_dump, $tri)
+// http://doc.spip.org/@autres_bases
+function autres_bases()
 {
-	$liste_dump = preg_files(_DIR_DUMP,'\.xml(\.gz)?$',50,false);
-	$selected = end($liste_dump);
-	$n = strlen(_DIR_DUMP);
-	$tl = $tt = $td = array(); 
-	$f = "";
-	$i = 0;
-	foreach($liste_dump as $fichier){
-		$i++;
-		$d = filemtime($fichier);
-		$t = filesize($fichier);
-		$s = ($fichier==$selected);
-		$class = 'row_'.alterner($i, 'even', 'odd');
-		$fichier = substr($fichier, $n);
-		$tl[]= liste_sauvegardes($i, $fichier, $class, $s, $d, $t);
-		$td[] = $d;
-		$tt[] = $t;
-	}
-	if ($tri == 'taille')
-		array_multisort($tt, SORT_ASC, $tl);
-	elseif ($tri == 'date')
-		array_multisort($td, SORT_ASC, $tl);
-	$fichier_defaut = $f ? basename($f) : str_replace(array("@stamp@","@nom_site@"),array("",""),_SPIP_DUMP);
+	include_spip('inc/install');
 
-	$self = self();
-	$class = 'row_'.alterner($i+1, 'even', 'odd');
-	$head = !$tl ? '' : (
-		"<tr>"
-		. '<th></th><th><a href="'
-		. parametre_url($self, 'tri', 'nom')
-		. '#sauvegardes">'
-		. _T('info_nom')
-	  	. '</a></th><th><a href="'
-		. parametre_url($self, 'tri', 'taille')
-		. '#sauvegardes">'
-		. _T('taille_octets', array('taille' => ''))
-	 	. '</th><th><a href="'
-		. parametre_url($self, 'tri', 'date')
-		. '#sauvegardes">'
-		. _T('public:date')
-		. '</a></th></tr>');
-	  
-	$texte = _T('texte_compresse_ou_non')."&nbsp;";
+	$tables =  bases_referencees(_FILE_CONNECT_TMP);
 
-	$h = _T('texte_restaurer_sauvegarde', array('dossier' => '<i>'.$dir_dump.'</i>'));
+	if ($tables)
+		$tables = "<br /><br /><fieldset style='margin-bottom: 10px;'>"
+		  .  "<legend>"._T('config_info_base_sup_disponibles')."</legend>"
+		  . "<ul>\n<li>"
+		  . join("</li>\n<li>",  $tables)
+		  . "</li>\n</ul></fieldset>";
+	else $tables ='';
 
-	$res = "\n<p style='text-align: justify;'> "
-		. $h
-		.  '</p>'
-		. _T('entree_nom_fichier', array('texte_compresse' => $texte))
+	list($adresse, $login, $pass, $sel, $server)
+	= analyse_fichier_connection(_FILE_CONNECT);
 
-		. "<br /><br /><table class='spip' id='sauvegardes'>"
-		. $head
-		.  join('',$tl)
-		. "\n<tr class='$class'><td><input type='radio' name='archive' id='archive' value='' /></td><td  colspan='3'>"
-		. "\n<span class='spip_x-small'><input type='text' name='archive_perso' id='archive_perso' value='$fichier_defaut' size='55' /></span></td></tr>"
-		. '</table>';
+	$adresse_db = defined('_INSTALL_HOST_DB') ? '' : $adresse;
 
+	$login_db = defined('_INSTALL_USER_DB') ? '' : $login;
 
-	// restauration partielle / fusion
-	$res .= debut_cadre_enfonce('',true) .
-		"\n<div>" .
-		 "<input name='insertion' id='insertion' type='checkbox' />&nbsp; <label for='insertion'>". 
-		  _T('sauvegarde_fusionner') .
-		  "</label><br />\n" .
-		 "<input name='statut' id='statut' type='checkbox' />&nbsp; <label for='statut'>\n". 
-		  _T('sauvegarde_fusionner_depublier') .
-		  "</label><br />\n" .
-		  "<label for='url_site'>" .
-		  _T('sauvegarde_url_origine') .
-		  "</label>" .
-		  " &nbsp;\n<input name='url_site' id='url_site' type='text' size='25' />" .
-		  '</div>' .
-		  fin_cadre_enfonce(true);
+	$pass_db = defined('_INSTALL_PASS_DB') ? '' : $pass;
 
-	return generer_form_ecrire('import_all', $res, '', _T('bouton_restaurer_base'));
-}
+	$server_db = defined('_INSTALL_SERVER_DB') ? '' : $server;
 
+	$hidden = defined('_INSTALL_NAME_DB')
+		? ''
+	: ("\n<input type='hidden' name='sel_db' value='" . $sel . "' />\n");
 
-// http://doc.spip.org/@liste_sauvegardes
-function liste_sauvegardes($key, $fichier, $class, $selected, $date, $taille)
-{
-	return "\n<tr class='$class'><td><input type='radio' name='archive' value='"
-		. $fichier
-		. "' id='dump_$key' "
-		. ($selected?"checked='checked' ":"")
-		. "/></td><td>\n<label for='dump_$key'>"
-		. str_replace('/', ' / ', $fichier)
-		. "</label></td><td style='text-align: right'>"
-		. taille_en_octets($taille)
-		. '</td><td>'
-		. affdate_heure(date('Y-m-d H:i:s',$date))
-		. '</td></tr>';
+	return debut_cadre_trait_couleur('',true,'',_T('onglet_declarer_une_autre_base'))
+	  .  _T('config_info_base_sup')
+	  . $tables
+	  .  install_connexion_form(array($adresse_db), array($login_db), array($pass_db), array($server_db), $hidden, 'sup1')
+	  . fin_cadre_trait_couleur(true);
 }
 
 ?>
