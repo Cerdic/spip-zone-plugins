@@ -166,7 +166,7 @@ function exec_statistiques_visites_args($id_article, $duree, $interval, $type, $
 		. " ($n " 
 		. ($n == 1 ?  _T('info_site') :  _T('info_sites'))
 		  . ")";
-		echo '<br />', gros_titre($titre,'', false);
+		echo gros_titre($titre,'', false);
 		echo "<div style='overflow:hidden;' class='verdana1 spip_small'><br />";
 		echo "<ul class='referers'><li>";
 		echo join("</li><li>\n",$res);

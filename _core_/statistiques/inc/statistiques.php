@@ -477,8 +477,7 @@ function statistiques_forums_dist($duree, $interval, $type, $id_article, $serveu
 	$back = 10*ceil((time()-$date) / 3600);
 	$jour = statistiques_tous($log, $id_article, "spip_forum", $where, "date_heure", $serveur, $back, $interval, $total, 0, '', array(), $script);
 
-	return "<br />"
-	. gros_titre(_T('titre_page_statistiques_messages_forum'),'', false)
+	return gros_titre(_T('titre_page_statistiques_messages_forum'),'', false)
 	  . cadre_stat($jour, 'spip_forum', $id_article);
 }
 

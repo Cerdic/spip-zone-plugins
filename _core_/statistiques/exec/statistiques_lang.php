@@ -38,7 +38,6 @@ function statistiques_lang_ok()
 	}
 	$taille = $largeur_table - 200;	
 	echo "<table class='centered' width='$largeur_table'><tr><td style='width: $largeur_table" . "px; text-align:center;' class='verdana2'>";
-	echo "<br /><br />";
 
 	echo gros_titre(_T('onglet_repartition_lang'),'', false);
 

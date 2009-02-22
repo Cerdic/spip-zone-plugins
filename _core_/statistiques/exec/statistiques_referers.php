@@ -51,7 +51,6 @@ function exec_statistiques_referers_dist()
 
 	echo $commencer_page(_T('titre_page_statistiques_referers'), "statistiques_visites", "referers");
 
-	echo "<br /><br /><br />";
 	echo gros_titre($titre,'', false);
 	echo debut_gauche('', true);
 	echo debut_boite_info(true);

@@ -28,7 +28,6 @@ function exec_config_forum_dist()
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_config_contenu'), "configuration", "configuration");
 
-	echo "<br /><br /><br />\n";
 	echo gros_titre(_T('titre_page_config_contenu'),'', false);
 	echo barre_onglets("configuration", "config_forum");
 
