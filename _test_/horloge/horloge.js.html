@@ -1,0 +1,12 @@
+#HTTP_HEADER{'Content-Type: text/javascript'}
+$(document).ready(function(){ showTime(); });	
+function showTime() {
+$.get("#URL_SITE_SPIP/plugins/horloge/horloge.php", function(curTime) {
+var refresh = [(60 - $("sec", curTime).text()) * 1000 ];
+$(".horloge-h24").html([ $("h24", curTime).text() ].join(''));
+$(".horloge-h12").html([ $("h12", curTime).text() ].join(''));
+$(".horloge-enlong").html([ $("enlong", curTime).text() ].join(''));
+var refreshfunc = 'showTime()';
+setTimeout(refreshfunc, refresh);
+});
+}
