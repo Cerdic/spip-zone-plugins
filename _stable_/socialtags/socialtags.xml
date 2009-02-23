@@ -77,6 +77,12 @@
 </item>
 
 <item>
+<title>Bebo</title>
+<author>bebo</author>
+<link>http://www.bebo.com/c/share?Url=%u&amp;Title=%t</link>
+</item>
+
+<item>
 <title>Blogmarks</title>
 <author>blogmarks</author>
 <link>http://blogmarks.net/my/new.php?mini=1&amp;url=%u&amp;title=%t</link>
