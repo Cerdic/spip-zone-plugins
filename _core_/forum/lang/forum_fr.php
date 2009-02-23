@@ -15,7 +15,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_bruler_messages' => "Signaler comme Spam",
 'icone_legitimer_message' => "Signaler comme licite",
 'icone_supprimer_messages' => 'Supprimer ces messages',
-'icone_repondre' =>  'R&eacute;pondre &agrave; ce message',
 
 'messages_meme_auteur' => 'Tous les messages de cet auteur',
 'messages_meme_email' => 'Tous les messages de cet email',
