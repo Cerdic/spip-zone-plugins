@@ -18,7 +18,7 @@ $metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['
 // constantes de compatibilite
 if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) {	
 	@define('_SPIP19300', 1); @define('_SPIP19200', 1);
-	if (version_compare(substr($GLOBALS['spip_version_branche'],0,5),'2.1.0','>=')) @define('_SPIP20100', 1);
+	if (version_compare(substr($GLOBALS['spip_version_branche'],0,5),'2.0.4','>=')) @define('_SPIP20100', 1);
 }
 elseif (version_compare($GLOBALS['spip_version_code'],'1.9200','>=')) @define('_SPIP19200', 1);
 else @define('_SPIP19100', 1);
