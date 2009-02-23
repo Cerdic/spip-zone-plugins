@@ -10,7 +10,7 @@
 <title>Ajouter aux favoris</title>
 <link>javascript:socialtags_addfavorite('%u','%t');</link>
 <author>bookmark</author>
-<description>(ne fonctionne et ne s'affiche que sur Internet Explorer)
+<description>(ne fonctionne et ne s'affiche que sur Internet Explorer)</description>
 </item>
 
 	<item>
@@ -67,6 +67,7 @@
 <title>Wikio</title>
 <author>wikio</author>
 <link>http://www.wikio.com/vote?newurl=%u</link>
+<description>Digg-like, news, en-us fr</description>
 </item>
 
 <item>
@@ -80,6 +81,21 @@
 <author>blogmarks</author>
 <link>http://blogmarks.net/my/new.php?mini=1&amp;url=%u&amp;title=%t</link>
 </item>
+
+<item>
+<title>CiteULike</title>
+<author>citeulike</author>
+<link>http://www.citeulike.org/posturl?url=%u</link>
+<description>Digg-like, littérature, en-us</description>
+</item>
+
+<item>
+<title>JoOok</title>
+<author>joook</author>
+<link>http://www.joook.net/submit.php?url=%u</link>
+<description>Digg-like, humour, fr</description>
+</item>
+
 
 <item>
 <title>Reddit</title>
@@ -100,16 +116,17 @@
 </item>
 
 <item>
+<title>Slashdot</title>
+<author>slashdot</author>
+<link>http://slashdot.org/bookmark.pl?url=%u&amp;title=%t</link>
+</item>
+
+<item>
 <title>StumbleUpon</title>
 <author>stumbleupon</author>
 <link>http://www.stumbleupon.com/submit?url=%u&amp;title=%t"</link>
 </item>
 
-<item>
-<title>Slashdot</title>
-<author>slashdot</author>
-<link>http://slashdot.org/bookmark.pl?url=%u&amp;title=%t</link>
-</item>
 
 <item>
 <title>BlogMemes</title>
@@ -118,18 +135,53 @@
 </item>
 
 <item>
+<title>Xanga</title>
+<author>xanga</author>
+<link>http://www.xanga.com/private/editorx.aspx?t=%t&amp;u=%u&amp;s=</link>
+<description>Bookmarks, en-us</description>
+</item>
+
+
+<item>
+<title>Yahoo! Bookmarks</title>
+<author>yahoobookmarks</author>
+<link>http://bookmarks.yahoo.com/toolbar/savebm?opener=tb&u=%u&t=%t</link>
+</item>
+
+
+<item>
 <title>Yahoo! Buzz</title>
 <author>buzzyahoo</author>
 <link>http://buzz.yahoo.com/submit?submitUrl=%u&amp;submitHeadline=%t&amp;submitSummary=%d</link>
 </item>
 
 <item>
+<title>Mixx</title>
+<author>mixx</author>
+<link>http://www.mixx.com/submit?page_url=%u</link>
+<description>Digg-like, news, en-us</description>
+</item>
+
+<item>
 <title>Propeller</title>
 <author>propeller</author>
 <link>http://www.propeller.com/submit/?url=%u</link>
+<description>Bookmarks</description>
 </item>
 
+<item>
+<title>Newsvine</title>
+<author>newsvine</author>
+<link>http://www.newsvine.com/_tools/seed&save?popoff=0&amp;u=%u&amp;h=%t</link>
+<description>Digg-like, news, en-us</description>
+</item>
 
+<item>
+<title>Nuouz</title>
+<author>nuouz</author>
+<link>http://www.nuouz.com/addNews.aspx?url=%u</link>
+<description>Digg-like, news, fr</description>
+</item>
 
 </items>
 </channel>

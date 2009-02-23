@@ -8,7 +8,7 @@ Ici vous pouvez choisir les sites de partages de vos articles.<br /><br />
 #CACHE{0}
 
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]
-<fieldset><legend>Social tags</legend>
+<fieldset id="sc_list"><legend>Social tags</legend>
 
 <input type="hidden" name="tags[]" value="" />
 
@@ -39,6 +39,9 @@ Ici vous pouvez choisir les sites de partages de vos articles.<br /><br />
 
 	}
 ?>
+<p style="font-size:90%">
+	<a href="#sc_list" onclick="$('#sc_list input[@type=checkbox]').attr('checked', true);">Tout cocher</a> / 
+	<a  href="#sc_list" onclick="$('#sc_list input[@type=checkbox]').attr('checked', false);">Tout décocher</a></p>
 </fieldset>
 
 <fieldset><legend>Insertion dans les pages :</legend>
@@ -59,10 +62,8 @@ Ici vous pouvez choisir les sites de partages de vos articles.<br /><br />
 
 </div>
 
-
-<div style="float:#LANG_RIGHT;">
-<input type="submit" name="_cfg_ok" value="<:ok:>" class="fondo" />
-<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+<div style="text-align:#LANG_RIGHT;">
+<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="fondo" />
 </div>
 </form>
 
