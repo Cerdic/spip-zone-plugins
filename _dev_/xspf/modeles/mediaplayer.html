@@ -122,7 +122,7 @@ Plusieurs methodes d'insertion :
 [(#SET{backcolor,#CONFIG{xspf/mplbackcolor}|replace{#,0x}|sinon{0x000000}})]
 [(#SET{frontcolor,#CONFIG{xspf/mplfrontcolor}|replace{#,0x}|sinon{0xCCCCCC}})]
 [(#SET{lightcolor,#CONFIG{xspf/mpllightcolor}|replace{#,0x}|sinon{0x996600}})]
-[(#SET{screencolor,#CONFIG{xspf/mpllightcolor}|replace{#,0x}|sinon{0x000000}})]
+[(#SET{screencolor,#CONFIG{xspf/mplscreencolor}|replace{#,0x}|sinon{0x000000}})]
 
 [(#SET{autostart,#ENV{autostart,#CONFIG{xspf/mplautostart}|sinon{false}}})]
 [(#SET{bufferlength,#ENV{bufferlength,#CONFIG{xspf/mplbufferlength}|sinon{1}}})]
@@ -174,7 +174,7 @@ Plusieurs methodes d'insertion :
 	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("backcolor","#GET{backcolor}");
 	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("frontcolor","#GET{frontcolor}");
 	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("lightcolor","#GET{lightcolor}");
-	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("lightcolor","#GET{screencolor}");
+	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("screencolor","#GET{screencolor}");
 
 	//Behaviour
 	s[_(#ENV{id})][_(#GET{objet_val})].addVariable("autostart","#GET{autostart}");
