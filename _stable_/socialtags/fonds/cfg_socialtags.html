@@ -15,6 +15,7 @@ Ici vous pouvez choisir les sites de partages de vos articles.<br /><br />
 <?php
 
 	include_spip('socialtags_fonctions');
+	global $couleur_fonce;
 	$cfg = is_array($cfg = lire_config('socialtags/tags'))
 		? $cfg : array();
 
@@ -32,13 +33,15 @@ Ici vous pouvez choisir les sites de partages de vos articles.<br /><br />
 <label>
 <img src='{$image}' title='{$t}' alt='' />
 <input type='checkbox' name='tags[]' value='{$a}'{$checked} />
-" . ($checked ? "<strong>$t</strong>" : $t) ." &nbsp; {$d}
+" . ($checked ? "<strong>$t</strong>" : $t) 
+	. ($d ? "&nbsp;<span style='color:$couleur_fonce;font-size:90%'>$d</span>" : "") . "
 </label>
 <br />
 ";
 
 	}
 ?>
+
 <p style="font-size:90%">
 	<a href="#sc_list" onclick="$('#sc_list input[@type=checkbox]').attr('checked', true);">Tout cocher</a> / 
 	<a  href="#sc_list" onclick="$('#sc_list input[@type=checkbox]').attr('checked', false);">Tout décocher</a></p>

@@ -16,14 +16,14 @@
 	<item>
 	<title>Digg</title>
 	<link>http://digg.com/submit?phase=2&amp;url=%u&amp;title=%t</link>
-	<description>Digg, agrégateur à la mode.</description>
+	<description>Agrégateur à la mode.</description>
 	<author>digg</author>
 	</item>
 
 	<item>
 	<title>Del.icio.us</title>
 	<link>http://delicious.com/save?url=%u&amp;title=%t&amp;notes=%d</link>
-	<description>Del.icio.us, agrégateur à la mode.</description>
+	<description>Agrégateur à la mode.</description>
 	<author>delicious</author>
 	</item>
 
@@ -83,11 +83,61 @@
 </item>
 
 <item>
+<title>Bluegger</title>
+<author>bluegger</author>
+<link>http://www.bluegger.com/submit.php?url=%u</link>
+<description>Digg-like, fr</description>
+</item>
+
+<item>
 <title>CiteULike</title>
 <author>citeulike</author>
 <link>http://www.citeulike.org/posturl?url=%u</link>
 <description>Digg-like, littérature, en-us</description>
 </item>
+
+<item>
+<title>Connotea</title>
+<author>connotea</author>
+<link>http://www.connotea.org/add?continue=return&amp;uri=%u</link>
+<description>Bookmarks, en-us</description>
+</item>
+
+<item>
+<title>Diigo</title>
+<author>diigo</author>
+<link>http://secure.diigo.com/post?url=%u&amp;title=%t</link>
+<description>Bookmarks</description>
+</item>
+
+<item>
+<title>DZone</title>
+<author>blogmarks</author>
+<link>http://blogmarks.net/my/new.php?mini=1&amp;url=%u&amp;title=%t</link>
+<description>Bookmarks, dev, en-us</description>
+</item>
+
+<item>
+<title>Les Humains Associés</title>
+<author>humainsassocies</author>
+<link>http://www.humains-associes.org/humanews/submit.php?url=%u</link>
+<description>Digg-like, fr</description>
+</item>
+
+<item>
+<title>linkaGoGo</title>
+<author>linkagogo</author>
+<link>http://linkagogo.com/go/AddNoPopup?url=%u&amp;title=%t</link>
+<description>Bookmarks</description>
+</item>
+
+<item>
+<title>LinkARENA</title>
+<author>linkarena</author>
+<link>http://linkarena.com/bookmarks/addlink/?url=%u</link>
+<description>Bookmarks</description>
+</item>
+
 
 <item>
 <title>JoOok</title>
@@ -97,11 +147,6 @@
 </item>
 
 
-<item>
-<title>Reddit</title>
-<author>reddit</author>
-<link>http://reddit.com/submit?url=%u&amp;title=%t</link>
-</item>
 
 <item>
 <title>Mister wong</title>
@@ -110,9 +155,16 @@
 </item>
 
 <item>
-<title>Viadeo</title>
-<author>viadeo</author>
-<link>http://www.viadeo.com/shareit/share/?url=%u&amp;title=%t</link>
+<title>Pioche</title>
+<author>pioche</author>
+<link>http://www.pioche.fr/soumettre_nouvelle.php?url=%u</link>
+<description>Digg-like, fr</description>
+</item>
+
+<item>
+<title>Reddit</title>
+<author>reddit</author>
+<link>http://reddit.com/submit?url=%u&amp;title=%t</link>
 </item>
 
 <item>
@@ -122,9 +174,56 @@
 </item>
 
 <item>
+<title>Startaid</title>
+<author>startaid</author>
+<link>http://startaid.com/index.php?st=AddBrowserLink&amp;type=Detail&amp;v=3&amp;urlname=%u&amp;urltitle=%t</link>
+</item>
+
+<item>
 <title>StumbleUpon</title>
 <author>stumbleupon</author>
-<link>http://www.stumbleupon.com/submit?url=%u&amp;title=%t"</link>
+<link>http://www.stumbleupon.com/submit?url=%u&amp;title=%t</link>
+</item>
+
+<item>
+<title>simpy</title>
+<author>simpy</author>
+<link>http://simpy.com/simpy/LinkAdd.do?href=%u&amp;title=%t</link>
+<description>Bookmarks</description>
+</item>
+
+<item>
+<title>Spurl</title>
+<author>spurl</author>
+<link>http://spurl.net/spurl.php?url=%u&title=%t</link>
+<description>Bookmarks</description>
+</item>
+
+<item>
+<title>Tapemoi !</title>
+<author>tapemoi</author>
+<link>http://www.tapemoi.com/submit.php?url=%u</link>
+<description>Digg-like, fr</description>
+</item>
+
+<item>
+<title>TagTooga</title>
+<author>tagtooga</author>
+<link>http://www.tagtooga.com/tapp/db.exe?c=jsEntryForm&amp;b=fx&amp;url=%u</link>
+<description>Bookmarks</description>
+</item>
+
+<item>
+<title>ThisNext</title>
+<author>thisnext</author>
+<link>http://www.thisnext.com/pick/new/submit/sociable/?url=%u&amp;name=%t</link>
+<description>Digg-like, en-us</description>
+</item>
+
+<item>
+<title>Viadeo</title>
+<author>viadeo</author>
+<link>http://www.viadeo.com/shareit/share/?url=%u&amp;title=%t</link>
 </item>
 
 
@@ -135,10 +234,10 @@
 </item>
 
 <item>
-<title>Xanga</title>
-<author>xanga</author>
-<link>http://www.xanga.com/private/editorx.aspx?t=%t&amp;u=%u&amp;s=</link>
-<description>Bookmarks, en-us</description>
+<title>Netvouz</title>
+<author>netvouz</author>
+<link>http://www.netvouz.com/action/submitBookmark?url=%u</link>
+<description>Bookmarks</description>
 </item>
 
 
@@ -153,6 +252,13 @@
 <title>Yahoo! Buzz</title>
 <author>buzzyahoo</author>
 <link>http://buzz.yahoo.com/submit?submitUrl=%u&amp;submitHeadline=%t&amp;submitSummary=%d</link>
+</item>
+
+<item>
+<title>Yahoo! MyWeb</title>
+<author>yahoomyweb</author>
+<link>http://myweb2.search.yahoo.com/myresults/bookmarklet?u=%u&t=%t</link>
+<description>Bookmarks</description>
 </item>
 
 <item>
