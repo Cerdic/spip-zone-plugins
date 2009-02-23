@@ -6,9 +6,9 @@
     <description>
     <multi>Insert the current time in your texts (updated by AJAX) with the tag "horloge"
     [fr]Horloge en AJAX, &agrave; ins&eacute;rer dans les textes avec la balise «~horloge~»</multi>
-	<br />&lt;horloge|h24&gt; : 19:13
-	<br />&lt;horloge|h12&gt; : 7:13 pm
-	<br />&lt;horloge|enlong&gt; : 19:13 (7:13pm) Monday, 23 February
+	<br />&lt;horloge|fmt=h24&gt; : 19:13
+	<br />&lt;horloge|fmt=h12&gt; : 7:13 pm
+	<br />&lt;horloge|fmt=enlong&gt; : 19:13 (7:13pm) Monday, 23 February
     </description>
 	<lien>http://www.spip-contrib.net/ecrire/?exec=articles&id_article=2995</lien>
     <prefix>horloge</prefix>
