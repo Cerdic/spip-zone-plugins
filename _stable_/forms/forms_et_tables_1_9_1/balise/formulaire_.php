@@ -86,6 +86,7 @@ function balise_FORMULAIRE__dyn($form)
 			if (($v = _request($champ))!==NULL)
 				$valeurs[$champ] = $v;
 			$action = parametre_url($action,$champ,''); // nettoyer l'url des champs qui vont etre saisis
+			$action = parametre_url($action,$champ."[]",''); // nettoyer l'url des champs qui vont etre saisis
 			$valeurs[$champ] = protege_valeurs($valeurs[$champ]); // proteger les ' et les " dans les champs que l'on va injecter dans les input
 		}
 	}
