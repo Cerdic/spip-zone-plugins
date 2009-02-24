@@ -207,7 +207,10 @@ function bando_identite(){
 	$res .= "<p class='session'>"
 	  . "<strong class='nom'>$moi</strong>"
 	  . " |"
-	  . "<a title='Mes informations personnelles' href='".generer_url_ecrire("auteur_infos","id_auteur=".$GLOBALS['visiteur_session']['id_auteur'])."'><img alt='"._T('icone_informations_personnelles')."' src='$img_info'/></a>"
+	  . "<a title='Mes informations personnelles' href='".
+	  //generer_url_ecrire("auteur_infos","id_auteur=".$GLOBALS['visiteur_session']['id_auteur'])
+	  generer_url_ecrire("config_preferences")
+	  ."'><img alt='"._T('icone_informations_personnelles')."' src='$img_info'/></a>"
 	  . "| "
 	  . "<a class='menu_lang' href='$url_lang' title='"._T('bando:titre_config_langage')."'><img alt='"._T('bando:titre_config_langage')."' src='$img_langue'/>".traduire_nom_langue($GLOBALS['spip_lang'])."</a>"
 	  . " | "
@@ -273,7 +276,7 @@ function inc_bandeau_dist($rubrique, $sous_rubrique, $largeur)
 {
 	$contexte = definir_barre_contexte();
 	$boutons = definir_barre_boutons($contexte, false);
-	return "<div class='avec_icones' id='bando_haut'>"
+	return "<div id='bando_haut'>"
 		. bando_liens_acces_rapide()
 		. bando_identite()
 		. bando_navigation($boutons,$contexte)

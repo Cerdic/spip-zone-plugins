@@ -67,9 +67,17 @@ function init_entete($titre='', $id_rubrique=0, $minipres=false) {
 // http://doc.spip.org/@init_body
 function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='',$menu=true) {
 	global $connect_id_auteur, $auth_can_disconnect;
-	global $spip_display, $spip_ecran;
 
-	$res = pipeline('body_prive',"<body class='$spip_ecran $rubrique $sous_rubrique "._request('exec')."'"
+	$GLOBALS['spip_display'] = isset($GLOBALS['visiteur_session']['prefs']['display'])
+		? $GLOBALS['visiteur_session']['prefs']['display']
+		: 0;
+	$spip_display_navigation = isset($GLOBALS['visiteur_session']['prefs']['display_navigation'])
+		? $GLOBALS['visiteur_session']['prefs']['display_navigation']
+		: 'navigation_avec_icones';
+	$GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? $_COOKIE['spip_ecran'] : "etroit";
+
+	$res = pipeline('body_prive',"<body class='"
+			. $GLOBALS['spip_ecran'] . " $spip_display_navigation $rubrique $sous_rubrique "._request('exec')."'"
 			. ($GLOBALS['spip_lang_rtl'] ? " dir='rtl'" : "")
 			.'>');
 
