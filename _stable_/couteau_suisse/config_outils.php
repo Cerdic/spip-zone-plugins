@@ -7,8 +7,8 @@
 #  Infos : http://www.spip-contrib.net/?article2166   #
 #-----------------------------------------------------#
 if (!defined("_ECRIRE_INC_VERSION")) return;
-// selecteur "[@" exclu par jQuery 1.3.1
-@define('_SEL_JQUERY', defined('_SPIP20100')?'':'@');
+// selecteur "[@" inutile depuis jQuery 1.2.x (intégré depuis SPIP 2)
+@define('_SEL_JQUERY', defined('_SPIP19300')?'':'@');
 
 // Noter :
 // outils/mon_outil.php : inclus par les pipelines de l'outil
