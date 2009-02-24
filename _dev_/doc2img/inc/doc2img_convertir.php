@@ -65,12 +65,12 @@ function doc2img_ratio(&$handle) {
 
     //si une largeur seuil a été définie 
     if ($largeur = lire_config('doc2img/largeur')) {
-        $ratio['largeur'] = $largeur / $documents['largeur'];
+        $ratio['largeur'] = $largeur / $dimensions['largeur'];
     }
     
     //si une hauteur seuil a été définie
     if ($hauteur = lire_config('doc2img/hauteur')) {
-        $ratio['hauteur'] = $hauteur / $documents['hauteur'];
+        $ratio['hauteur'] = $hauteur / $dimensions['hauteur'];
     }
     
 
@@ -222,10 +222,10 @@ function convertir_document($id_document) {
         }
     
         //calcule des dimensions
-        //$dimensions = doc2img_ratio($handle_frame);
+        $dimensions = doc2img_ratio($handle_frame);
                 
         //on redimensionne l'image
-        //imagick_zoom($handle_frame, $dimensions['largeur'], $dimensions['hauteur']);
+        imagick_zoom($handle_frame, $dimensions['largeur'], $dimensions['hauteur']);
         
         //nom du fichier cible, c'est à dire la frame (image) indexée
         $document['frame'] = $document['name'].'-'.$frame.'.'.$extension;
