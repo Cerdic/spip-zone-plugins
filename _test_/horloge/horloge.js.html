@@ -1,5 +1,10 @@
 #HTTP_HEADER{'Content-Type: text/javascript'}
-$(document).ready(function(){ showTime(); });	
+jQuery().ready(function(){
+if ( $("span.horloge-h24").length || $("span.horloge-h12").length || $("span.horloge-enlong").length ) 
+	{	showTime();	
+} 
+});
+
 function showTime() {
 $.get("#URL_SITE_SPIP/plugins/horloge/horloge.php", function(curTime) {
 var refresh = [(60 - $("sec", curTime).text()) * 1000 ];

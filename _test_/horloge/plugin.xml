@@ -1,6 +1,6 @@
 <plugin>
     <nom>Horloge</nom>
-    <version>0.1</version>
+    <version>0.2</version>
     <etat>test</etat>
 	<auteur>Paolo - licence GNU/GPL</auteur>
     <description>
@@ -10,7 +10,7 @@
 	<br />&lt;horloge|fmt=h12&gt; : 7:13 pm
 	<br />&lt;horloge|fmt=enlong&gt; : 19:13 (7:13pm) Monday, 23 February
     </description>
-	<lien>http://www.spip-contrib.net/ecrire/?exec=articles&id_article=2995</lien>
+	<lien>http://www.spip-contrib.net/ecrire/?exec=articles&amp;id_article=2995</lien>
     <prefix>horloge</prefix>
     <pipeline>
         <nom>insert_head</nom>
