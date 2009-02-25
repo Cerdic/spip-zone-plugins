@@ -1,0 +1,29 @@
+<plugin>
+    <nom>Comptabilite : fonctionnalites de CFG 1.10</nom>
+    <auteur>bertrand Gugger [->http://toggg.com/], Matthieu Marcillaud
+_ &#169; 2008 - <multi>[fr]Distribu&#233; sous licence[en]License[de]Vertrieb unter Lizenz</multi> GNU/LGPL
+    </auteur>
+    <version>1.0.0</version>
+    <etat>stable</etat>
+    <description>
+	Assure une comptabilit&eacute; avec les fonds CFG 1.10.x
+	ainsi qu'une comptabilit&eacute; pour SPIP 1.9.2.
+	C'est un pansement &agrave; &eacute;viter autant que possible.
+    </description>
+    <lien></lien>
+    <prefix>cfg_compat</prefix>
+    <chemin dir='' />
+    <options>cfg_compat_options.php</options>
+	
+    <pipeline>
+        <nom>ajouter_boutons</nom>
+        <inclure>cfg_pipeline.php</inclure>
+    </pipeline>
+	
+    <pipeline>
+        <nom>header_prive</nom>
+        <inclure>cfg_compat_pipelines.php</inclure>
+    </pipeline>
+	
+	<necessite id="SPIP" version="[1.9.0;]" />
+</plugin>
