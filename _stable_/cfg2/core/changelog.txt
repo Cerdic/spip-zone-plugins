@@ -1,7 +1,12 @@
 
 v2.0.0
   * Suppression de la compatibilite 1.9.2 (cf. extension compat)
-  * Suppression du parametre <!-- head=... --> (cf. extension compat)
+  * Suppression du parametre 'head' (cf. extension compat)
+  * Suppression des depots "php, table, tablepack" (cf. extension depots)
+  * Suppression du parametre 'inline' (cf. extension compat)
+  
+  * Suppresison du parametre 'afficher_messages' (aucune occurence)
+  
 
 
 // ---------------------------------------

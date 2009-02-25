@@ -10,7 +10,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
+/*
+ * Ce depot accepte des parametres supplementaires dans les formulaires CFG :
+ * - table : nom de la table sql
+ * 
+ */
 
 // cfg_tablepack retrouve et met a jour les donnees serialisees dans une colonne d'une table
 // par défaut : colonne 'cfg' et table 'spip_auteurs'

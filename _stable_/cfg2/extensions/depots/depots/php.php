@@ -2,13 +2,17 @@
 
 /*
  * Plugin CFG pour SPIP
- * (c) toggg 2007, distribue sous licence GNU/GPL
- * Documentation et contact: http://www.spip-contrib.net/
+ * (c) toggg, marcimat 2009, distribue sous licence GNU/GPL
  *
  * classe cfg_php: storage dans un fichier php
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
+/* 
+ * Ce depot accepte un parametre supplementaire dans les formulaires CFG :
+ * - fichier : c'est l'adresse du fichier (depuis la racine de spip), sinon ca prend /local/cfg/nom.php
+ */
 
 // cfg_php retrouve et met a jour les donnees d'un fichier php
 class cfg_depot_php

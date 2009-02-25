@@ -2,15 +2,21 @@
 
 /*
  * Plugin CFG pour SPIP
- * (c) toggg 2007, distribue sous licence GNU/GPL
- * Documentation et contact: http://www.spip-contrib.net/
+ * (c) toggg, marcimat 2009, distribue sous licence GNU/GPL
  *
  * classe cfg_table: storage naturel dans une table
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
+/*
+ * 
+ * Ce depot accepte des parametres supplementaires dans les formulaires CFG :
+ * - autoriser_absence_id : si 'oui', on autorisee l'insertion de nouveau 
+ *   contenu dans une table sans donner d'identifiant
+ * - table : nom de la table sql
+ * 
+ */
 
 // cfg_table retrouve et met a jour les colonnes d'une table
 // ici, cfg_id est obligatoire ... 
