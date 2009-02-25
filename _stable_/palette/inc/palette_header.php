@@ -9,7 +9,7 @@ function inc_palette_header_dist($type='') {
 	
 	$ret =  '<link rel="stylesheet" href="'.$css.'" type="text/css" media="all" />'."\n";
 	$ret .= '<script type="text/javascript" src="'.$js.'"></script>'."\n";
-	spip_log("type = $type");
+
 	if($type=='public'){
 		// insertion de la feuille de style uniquement pour le public
 		$css_publique = generer_url_public('palette.css');
