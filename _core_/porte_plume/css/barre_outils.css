@@ -50,7 +50,7 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 .markItUp .markItUpTabs a {
 	display:block; float:right; border:1px solid #888; margin:0px 1px; border-bottom:none;
 	padding:3px 4px 2px 4px; background:#f0f0f0;
-	-moz-border-radius:5px 5px 0 0;}
+	-moz-border-radius:5px 5px 0 0;-webkit-border-top-left-radius:5px;-webkit-border-top-right-radius:5px;}
 .markItUp .markItUpTabs a.on {background:#fff; }
 .markItUp .markItUpTabs a:hover {background:#fff;}
 
