@@ -16,7 +16,6 @@ function jflipbook_insert_head($flux){
 	$scale = lire_config('jflipbook/scale');
 	$flux .= '<link rel="stylesheet" TYPE="text/css" href="'._DIR_PLUGIN_JFLIPBOOK.'css/jflip_style.css"></link>';
 	$flux .= '<!--[if IE]><script type="text/javascript" src="'._DIR_PLUGIN_JFLIPBOOK.'javascript/excanvasX.js"></script><![endif]-->';
-	$flux .= '<script type="text/javascript" src="prive/javascript/jquery.js"></script>';
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_JFLIPBOOK.'javascript/jquery.jflip-0.3.min.js"></script>';
 	$flux .= '<script type="text/javascript">
   					(function($){    
