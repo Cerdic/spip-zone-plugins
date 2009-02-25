@@ -14,6 +14,7 @@
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('guestbook:lelivre'), "", "");
 	echo '<div style="margin:auto; width :70%;">';
+		debut_boite_info();
 	echo gros_titre(_T('guestbook:lelivre'),"","");
 	//Légende
 	echo '<table width="20%" style="margin:auto;" border="" cellspacing="0" cellpadding="2"><tr><td style="background:#cce7b9">Message publi&eacute;</td><td style="background:#e7a1a1">Message Hors Ligne</td><td style="background:#f1dec0">Message en attente de validation</td></tr></table><br /> ';
@@ -39,6 +40,8 @@
 	while ($row =spip_fetch_array($res)){
 	$id_message= $row['id_message'];
 	$post_ip = $row['ip'];
+	if($post_ip)  $post_ip= "(".$post_ip.")";
+	else $post_ip="";
 	$texte= $row['message'];
 	$nom= $row['nom'];
 	$email= $row['email'];
@@ -47,23 +50,23 @@
 	sscanf($row['date'], "%4s-%2s-%2s", $annee, $mois, $jour);
 	if ($statut == 'publie')
 	{
-		$faire= "<a href='?exec=livre&id_message=".$id_message."&statut=HL'>Mettre Hors-ligne</a>";
+		$faire= "<a href='?exec=livre&id_message=".$id_message."&statut=HL#message".$id_message."''>Mettre Hors-ligne</a>";
 		$font= "#cce7b9";
 		}
 	elseif ($statut == 'HL')
 	{
-		$faire= "<a href='?exec=livre&id_message=".$id_message."&statut=publie'>Publier</a><br />($post_ip)";
+		$faire= "<a href='?exec=livre&id_message=".$id_message."&statut=publie#message".$id_message."'>Publier</a><br />$post_ip";
 		$font="#e7a1a1";
 		}
 	else{
-		$faire= "<a href='?exec=livre&id_message=".$id_message."&statut=publie'>Publier</a><br />";
-		$faire .= "<a href='?exec=livre&id_message=".$id_message."&statut=HL'>Mettre Hors-ligne</a>";
+		$faire= "<a href='?exec=livre&id_message=".$id_message."&statut=publie#message".$id_message."''>Publier</a><br />";
+		$faire .= "<a href='?exec=livre&id_message=".$id_message."&statut=HL#message".$id_message."''>Mettre Hors-ligne</a>";
 		$font="#f1dec0";
 		}
 	echo '<tr style="background-color: '.$font.';">';
 	echo '<td>'.$id_message.'</td>';
 	echo '<td>'.$note.'</td>';
-	echo '<td style="width: 100px;">'.$texte.'</td>';
+	echo '<td style="width: 100px;" id=message'.$id_message.'>'.$texte.'</td>';
 	echo "<td><a href='mailto:".$email."'>".$nom."</a></td>";
 	echo '<td>'.$jour.'/'.$mois.'/'.$annee.'</td>';
 	echo "<td>";
@@ -73,7 +76,7 @@
 		$name= $ask2['auteur'];
 		$repons=$ask2['message'];
 		
-	echo $name.' a répondu  : <i>"'.$repons.'"</i><br />';
+	echo $name.' a r&eacute;pondu  : <i>"'.$repons.'"</i><br />';
 	}
 	echo " <a href='?exec=repondre&id_message=".$id_message."'>R&eacute;pondre</a></td>";
 	echo "<td>";
@@ -82,6 +85,7 @@
 	}
 	//fin
 	echo '</table>';
+	fin_boite_info();
 	echo '</div>';
 	fin_page();
 	}

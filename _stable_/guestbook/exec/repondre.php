@@ -16,15 +16,13 @@
 	if (isset($_GET['id_message'])) {
 		echo "<br /><br />";
 	echo '<div style="margin:auto; width :50%;">';
-  
+	$date = date('Y-m-d H:i:s');
 	echo"<br />";
-	icone_horizontale(_T('guestbook:retour'), generer_url_ecrire("livre"), '../'._DIR_PLUGIN_LIVRE.'/img_pack/livredor.png');
 		$rep=$_GET['id_message'];
 		
 		
-		$sqlask ="SELECT nom, message FROM spip_guestbook WHERE id_message=".$rep."";
-		$spask=spip_query($sqlask);
-		$ask= spip_fetch_array($spask);
+		$sqlask = sql_select('nom, message', 'spip_guestbook', 'id_message='.$rep);
+		$ask= spip_fetch_array($sqlask);
 		$asp= $ask['nom'];
 		$tex=$ask['message'];
 
@@ -61,8 +59,7 @@ $nom='';
 	else {
 
 $text=$_POST['reponses'];
-		$sql="INSERT INTO spip_guestbook_reponses(id_message, date, message, auteur)  VALUES ('$rep', '$date', '$text', '$nom')";     
-		$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+		sql_insertq('spip_guestbook_reponses', array('id_message' => $rep, 'date' => $date, 'message' => $text, 'auteur' => $nom));     
 		echo $asp.' a &eacute;crit : <i>"'.$tex.'"</i><br />';
 		echo $nom.' a r&eacute;pondu : <i>"'.$text.'"</i><br />';
 		

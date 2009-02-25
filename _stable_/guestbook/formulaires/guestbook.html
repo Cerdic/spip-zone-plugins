@@ -1,31 +1,30 @@
 #CACHE{200} 
 <div class="formulaire_guestbook ajax">
+[<p style="font-size: 20px;text-align: center;" class="formulaire_message">(#ENV*{message_ok})</p>]
 <form action='#SELF' method='post'>
 	#ACTION_FORMULAIRE{#SELF}
 	<fieldset class="spip_encadrer"> 
-<legend><:guestbook:livre_dor:></legend>
+<legend>Signer le livre d'or</legend>
   <table width="76%" border="0" cellspacing="0" cellpadding="2">
+        <p style="color: red;">Champ en rouge = Champ obligatoire !</p>
     <tr> 
-      <td colspan="2">Ajouter un message dans le livre d'or</td>
-    </tr>
-    <tr> 
-      <td width="20%">Votre nom :</td>
+      <td width="20%" style="color: red;">Votre nom</td>
       <td width="80%"><input type="text" name="nom"></td>
     </tr>
     <tr> 
-      <td>Votre email :</td>
+      <td>Votre email</td>
       <td><input type="text" name="email"></td>
     </tr>
     <tr> 
-      <td>Votre ville :</td>
+      <td>Votre ville</td>
       <td><input type="text" name="ville"> </td>
     </tr>
     <tr> 
-      <td>Notez le site de 1 &agrave; 10</td>
+      <td style="color: red;">Notez le site de 1 &agrave; 10</td>
       <td><input type="text" name="note" size="2"></td>
     </tr>
     <tr> 
-      <td>Votre texte</td>
+      <td style="color: red;">Votre texte (minimum 10 caractères)</td>
       <td><textarea name="texte" cols="60" rows="5" ></textarea></td>
     </tr>
     <tr> 
@@ -35,7 +34,7 @@
   </table></fieldset>
 </form>
 
-[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+[<p style="font-size: 20px;text-align: center;" class="formulaire_message">(#ENV*{message_ok})</p>]
 [<span class='erreur'>(#ENV**{erreurs}|table_valeur{annee})</span>]
 [<p class="formulaire_message">(#ENV*{message_erreur})</p>]
 

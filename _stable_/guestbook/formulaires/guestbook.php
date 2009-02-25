@@ -33,12 +33,18 @@ function formulaires_guestbook_traiter_dist() {
 	$email	= _request('email');
 	$nom	= _request('nom');
 	$ville	= _request('ville');
-	$post_stat = 'publie';
+	$post_stat = 'prop';
 	$note	= _request('note');
 	$date = date('Y-m-d H:i:s');
+	if(strlen($texte) > 9 AND strlen($nom) > 1 AND intval($note) >= 0) {
 	sql_insertq("spip_guestbook", array('id_message' => "", 'message' => $texte, 'email' => $email, 'nom' => $nom, 'ville' => $ville, 'statut' => $post_stat, 'ip' => $ip, 'note' => $note, 'date' => $date));
-	$message = 'Merci pour le message !';
+	$message = 'Message post&eacute;, Merci !';
 	return $message;
+	}
+	else {
+	$error = "Les champs obligatoires n'ont pas &eacute;t&eacute; remplis...";
+	return $error;
+	}
 	}
 
 
