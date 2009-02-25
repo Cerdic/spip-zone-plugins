@@ -1,11 +1,11 @@
 #CACHE{0}
 <script language="JavaScript" type="text/javascript">
 var ar_type_urls = "#ENV*{type_urls}";
-var ar_var_vide = "[(#REM|sinon{<:couteauprive:variable_vide:>}|html2unicode|addslashes)]";
-var ar_url_calculee = "[(#REM|sinon{<:couteauprive:urls_url_calculee:>}|html2unicode|addslashes)]";
-var ar_edit_erreur = "[(#REM|sinon{<:couteauprive:urls_edit_erreur:>}|html2unicode|addslashes)]";
-var ar_attente = "[(#REM|sinon{<:couteauprive:attente:>}|html2unicode|addslashes)]";
-var ar_valeur_vide = "[(#REM|sinon{<:couteauprive:urls_valeur_vide:>}|html2unicode|addslashes)]";
+var ar_var_vide = "<:couteauprive:variable_vide|html2unicode|addslashes:>";
+var ar_url_calculee = "<:couteauprive:urls_url_calculee|html2unicode|addslashes:>";
+var ar_edit_erreur = "<:couteauprive:urls_edit_erreur|html2unicode|addslashes:>";
+var ar_attente = "<:couteauprive:attente|html2unicode|addslashes:>";
+var ar_valeur_vide = "<:couteauprive:urls_valeur_vide|html2unicode|addslashes:>";
 
 function html_type_urls(selecteur, chaine, rempl) {
 	jQuery(selecteur).html(chaine.replace(/@type@/, rempl));
@@ -58,10 +58,10 @@ function ar_load() {
 }
 
 </script>
-[(#SET{cpt, #REM|sinon{couteauprive:urls_base_vide}|_T})]
+[(#SET{cpt, #VAL{couteauprive:urls_base_vide}|_T})]
 <BOUCLE_compte(URLS) />
 [(#TOTAL_BOUCLE|>{0}|oui)
- [(#SET{cpt, #REM|sinon{couteauprive:urls_base_total}|_T|replace{@nb@,#TOTAL_BOUCLE}})]
+ [(#SET{cpt, #VAL{couteauprive:urls_base_total}|_T|replace{@nb@,#TOTAL_BOUCLE}})]
 ]
 <//B_compte>
 
@@ -92,7 +92,7 @@ function ar_load() {
 	 <div style="text-align:left;">
 	  <b><:couteauprive:urls_titre_objet:></b>&nbsp;<span id="ar_titre"> </span><br />
 	  <b><:couteauprive:urls_url_objet:></b>&nbsp;<span id="ar_url_propre"> </span><br />
-	  <span id="label_url_calculee" style="font-weight:bold;">[(#REM|sinon{<:couteauprive:urls_url_calculee:>}|replace{@type@,#ENV*{type_urls}})]</span>  <span id="ar_url_calculee">&nbsp;</span><br />
+	  <span id="label_url_calculee" style="font-weight:bold;">[(#VAL{<:couteauprive:urls_url_calculee:>}|replace{@type@,#ENV*{type_urls}})]</span>  <span id="ar_url_calculee">&nbsp;</span><br />
 	  <label><b><:couteauprive:urls_nouvelle:></b><input style="width:100%;" id="ar_url_objet" name="ar_url_objet" value="" disabled="disabled"/></label>
 	  <div class="ar_edit_info cs_hidden" id="ar_edit_info">&nbsp;</div>
 	 </div>

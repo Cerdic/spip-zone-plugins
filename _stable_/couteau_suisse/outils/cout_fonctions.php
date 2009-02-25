@@ -32,6 +32,20 @@ if(defined('_SPIP19100')) {
 	}
 }
 
+// compatibilite SPIP < 2.00
+if(!defined('_SPIP19300')) {
+	// #VAL{x} renvoie 'x' (permet d'appliquer un filtre a une chaine)
+	// Attention #VAL{1,2} renvoie '1', indiquer #VAL{'1,2'}
+	function balise_VAL($p){
+		$p->code = interprete_argument_balise(1,$p);
+		if (!strlen($p->code)) $p->code = "''";
+		$p->interdire_scripts = false;
+		return $p;
+	}
+	if(!function_exists('oui')) { function oui($code) { return $code?' ':''; } }
+	if(!function_exists('non')) { function non($code) { return $code?'':' '; } }
+}
+
 // fonction appelant une liste de fonctions qui permettent de nettoyer un texte original de ses raccourcis indesirables
 function cs_introduire($texte) {
 	// liste de filtres qui sert a la balise #INTRODUCTION

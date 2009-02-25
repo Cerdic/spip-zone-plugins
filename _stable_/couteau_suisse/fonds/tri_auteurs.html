@@ -12,9 +12,9 @@
 	<BOUCLE_aut2(AUTEURS){id_article}>
 	<tr bgcolor="[(#COMPTEUR_BOUCLE|alterner{'#FFFFEE','#E5EFF8'})]" >
 	<td>#COMPTEUR_BOUCLE. #NOM</td><td style="text-align:center">
-	[(#COMPTEUR_BOUCLE|!={#GET{nb}}|?{' ',''})<input type="image" src="#EVAL{_DIR_IMG_PACK}descendre-16.png" onclick="#GET{val}=-#ID_AUTEUR;" alt="v" title="<:couteau:tri_descendre:>" />
+	[(#COMPTEUR_BOUCLE|!={#GET{nb}}|oui)<input type="image" src="#EVAL{_DIR_IMG_PACK}descendre-16.png" onclick="#GET{val}=-#ID_AUTEUR;" alt="v" title="<:couteau:tri_descendre:>" />
 	]
-	[(#COMPTEUR_BOUCLE|!={1}|?{' ',''})<input type="image" src="#EVAL{_DIR_IMG_PACK}monter-16.png" onclick="#GET{val}=#ID_AUTEUR;" alt="^" title="<:couteau:tri_monter:>" />
+	[(#COMPTEUR_BOUCLE|!={1}|oui)<input type="image" src="#EVAL{_DIR_IMG_PACK}monter-16.png" onclick="#GET{val}=#ID_AUTEUR;" alt="^" title="<:couteau:tri_monter:>" />
 	]</td></tr>
 	</BOUCLE_aut2>
 </table>

@@ -62,37 +62,37 @@ function ar_load() {
 	<fieldset><legend><:couteauprive:urls_purger_tout:> </legend>
 #SET{nb, 0}<BOUCLE_nb_articles(ARTICLES){tout}{url_propre!=''}> </BOUCLE_nb_articles>#SET{nb, #TOTAL_BOUCLE}</B_nb_articles>
 #SET{val, #REM|sinon{couteauprive:urls_base_vide}|_T}
-[(#GET{nb}|>{0}|?{' '})
+[(#GET{nb}|>{0}|oui)
  #SET{val, #REM|sinon{couteauprive:urls_base_total}|_T|replace{@nb@,#GET{nb}}}
 ]<label><input name="purger_articles"[ checked="(#GET{nb}|>{0}|?{checked})"] type="checkbox" value="articles" /><:couteau:objet_articles:>.
 <span class="ar_edit_info">#GET{val}.</span></label>
 #SET{nb, 0}<BOUCLE_nb_rubriques(RUBRIQUES){tout}{url_propre!=''}> </BOUCLE_nb_rubriques>#SET{nb, #TOTAL_BOUCLE}</B_nb_rubriques>
 #SET{val, #REM|sinon{couteauprive:urls_base_vide}|_T}
-[(#GET{nb}|>{0}|?{' '})
+[(#GET{nb}|>{0}|oui)
  #SET{val, #REM|sinon{couteauprive:urls_base_total}|_T|replace{@nb@,#GET{nb}}}
 ]<br /><label><input name="purger_rubriques"[ checked="(#GET{nb}|>{0}|?{checked})"] type="checkbox" value="rubriques" /><:couteau:objet_rubriques:>.
 <span class="ar_edit_info">#GET{val}.</span></label>
 #SET{nb, 0}<BOUCLE_nb_breves(BREVES){tout}{url_propre!=''}> </BOUCLE_nb_breves>#SET{nb, #TOTAL_BOUCLE}</B_nb_breves>
 #SET{val, #REM|sinon{couteauprive:urls_base_vide}|_T}
-[(#GET{nb}|>{0}|?{' '})
+[(#GET{nb}|>{0}|oui)
  #SET{val, #REM|sinon{couteauprive:urls_base_total}|_T|replace{@nb@,#GET{nb}}}
 ]<br /><label><input name="purger_breves"[ checked="(#GET{nb}|>{0}|?{checked})"] type="checkbox" value="breves" /><:couteau:objet_breves:>.
 <span class="ar_edit_info">#GET{val}.</span></label>
 #SET{nb, 0}<BOUCLE_nb_auteurs(AUTEURS){tout}{url_propre!=''}> </BOUCLE_nb_auteurs>#SET{nb, #TOTAL_BOUCLE}</B_nb_auteurs>
 #SET{val, #REM|sinon{couteauprive:urls_base_vide}|_T}
-[(#GET{nb}|>{0}|?{' '})
+[(#GET{nb}|>{0}|oui)
  #SET{val, #REM|sinon{couteauprive:urls_base_total}|_T|replace{@nb@,#GET{nb}}}
 ]<br /><label><input name="purger_auteurs"[ checked="(#GET{nb}|>{0}|?{checked})"] type="checkbox" value="auteurs" /><:couteau:objet_auteurs:>.
 <span class="ar_edit_info">#GET{val}.</span></label>
 #SET{nb, 0}<BOUCLE_nb_mots(MOTS){tout}{url_propre!=''}> </BOUCLE_nb_mots>#SET{nb, #TOTAL_BOUCLE}</B_nb_mots>
 #SET{val, #REM|sinon{couteauprive:urls_base_vide}|_T}
-[(#GET{nb}|>{0}|?{' '})
+[(#GET{nb}|>{0}|oui)
  #SET{val, #REM|sinon{couteauprive:urls_base_total}|_T|replace{@nb@,#GET{nb}}}
 ]<br /><label><input name="purger_mots"[ checked="(#GET{nb}|>{0}|?{checked})"] type="checkbox" value="mots" /><:couteau:objet_mots:>.
 <span class="ar_edit_info">#GET{val}.</span></label>
 #SET{nb, 0}<BOUCLE_nb_sites(SITES){tout}{url_propre!=''}> </BOUCLE_nb_sites>#SET{nb, #TOTAL_BOUCLE}</B_nb_sites>
 #SET{val, #REM|sinon{couteauprive:urls_base_vide}|_T}
-[(#GET{nb}|>{0}|?{' '})
+[(#GET{nb}|>{0}|oui)
  #SET{val, #REM|sinon{couteauprive:urls_base_total}|_T|replace{@nb@,#GET{nb}}}
 ]<br /><label><input name="purger_syndic"[ checked="(#GET{nb}|>{0}|?{checked})"] type="checkbox" value="syndic" /><:couteau:objet_syndics:>.
 <span class="ar_edit_info">#GET{val}.</span></label>

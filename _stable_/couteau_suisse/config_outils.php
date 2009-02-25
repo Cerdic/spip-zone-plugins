@@ -1050,6 +1050,7 @@ add_outil( array(
 	'id' => 'jcorner',
 	'categorie'	=> 'public',
 	'jquery'	=> 'oui',
+	'contrib'	=> 2987,
 	'code:options' => "%%jcorner_classes%%",
 	'pipelinecode:insert_head' => 'if(%%jcorner_plugin%%) {$flux.=\'<script src="'.url_absolue(find_in_path("outils/jquery.corner.js")).'" type="text/javascript"></script>\'."\n";}',
 	'pipeline:insert_head' => 'jcorner_insert_head',
@@ -1145,6 +1146,18 @@ if(!function_exists('genie_optimiser')) {
 	function genie_optimiser(\$t='foo'){ include_spip('optimiser','genie'); optimiser_base_une_table(); return -(mktime(2,0,0) + rand(0, 3600*4)); }\n}",
 ));
 
+add_outil( array(
+	'id' => 'trousse_balises',
+	'categorie' => 'spip',
+));
+
+add_outil( array(
+	'id' => 'horloge',
+	'categorie' => 'spip',
+	'pipelinecode:insert_head' => '$flux.=\'<script type="text/javascript" src="\'.generer_url_public(\'cout_dates.js\',\'lang=\'.$GLOBALS[\'spip_lang\']).\'"></script>\'."\n";
+$flux.=\'<script type="text/javascript" src="'.url_absolue(find_in_path("outils/jquery.jclock.js")).'"></script>\'."\n";',
+));
+
 // Ajout des outils personnalises
 if(isset($GLOBALS['mes_outils'])) {
 	foreach($GLOBALS['mes_outils'] as $id=>$outil) {
@@ -1161,8 +1174,6 @@ if(isset($GLOBALS['mes_outils'])) {
 // http://www.spip-contrib.net/la-balise-LESMOTS et d'autres balises #MAINTENANT #LESADMINISTRATEURS #LESREDACTEURS #LESVISITEURS
 // http://www.spip-contrib.net/Ajouter-une-lettrine-aux-articles
 // http://www.spip-contrib.net/Generation-automatique-de
-// Les sessions
-// colorations du code
 // boutonstexte
 
 //global $cs_variables; cs_log($cs_variables, 'cs_variables :');
