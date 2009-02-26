@@ -13,6 +13,7 @@ function inscription2_declarer_tables_interfaces($interface){
 function inscription2_declarer_tables_principales($tables_principales){
 	$spip_auteurs_elargis['id_auteur'] = "bigint(21) NOT NULL";
 		
+	if(function_exists('lire_config')){
 		foreach(lire_config('inscription2',array()) as $cle => $val) {
 			$cle = ereg_replace("_(obligatoire|fiche|table).*", "", $cle);
 			if($val!='' and $clef != 'login' and $cle != 'nom' and $cle != 'statut_nouveau' and $cle != 'email' and $cle != 'username' and $cle != 'statut_int'  and $cle != 'accesrestreint' and !ereg("^(categories|zone|newsletter).*$", $cle) ){
@@ -24,11 +25,11 @@ function inscription2_declarer_tables_principales($tables_principales){
 					$spip_auteurs_elargis[$cle] = "int NOT NULL";
 				elseif($cle == 'pays_pro')
 					$spip_auteurs_elargis[$cle] = "int NOT NULL";
-				else	
+				else
 					$spip_auteurs_elargis[$cle] = "text NOT NULL";
 			}
 		}
-	
+	}
 	$spip_auteurs_elargis_key = array(
 		"PRIMARY KEY" => "id_auteur");
 	
