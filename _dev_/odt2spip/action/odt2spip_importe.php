@@ -1,7 +1,7 @@
 <?
 
 function action_odt2spip_importe() {
-    global $auteur_session;
+    global $auteur_session, $spip_version_code;;
     $id_auteur = $auteur_session['id_auteur'];
     $arg = _request('arg');
     $args = explode(":",$arg);
@@ -100,8 +100,10 @@ function action_odt2spip_importe() {
                                array('<articles>', '$1 $2 $3', ''), 
                                $xml_sortie);
     
-    // traiter les images
-    $id_article_tmp = 100000;    
+    // traiter les images: dans tous les cas il faut les intégrer dans la table documents
+    // en 1.9.2 c'est mode vignette + il faut les intégrer dans la table de liaison 
+    // en 2.0 c'est mode image + les fonctions de snippets font la liaison => on bloque la liaison en filant un id_article vide
+    $id_article_tmp = ($spip_version_code > 2 ? '' : 10000);    
     preg_match_all('/<img([;a-zA-Z0-9\.]*)/', $xml_sortie, $match, PREG_PATTERN_ORDER);
     if (@count($match) > 0) {
         include_spip('inc/ajouter_document');
@@ -116,7 +118,8 @@ function action_odt2spip_importe() {
                 odt2spip_retailler_img($rep_pictures.$img, $largeur, $hauteur);
               // intégrer l'image comme document spip
                 $ajouter_documents = charger_fonction('ajouter_documents','inc');
-                if ($id_document = $ajouter_documents($rep_pictures.$img, $img, "article", $id_article_tmp, 'vignette', 0, $toto='')) { 
+                $type = ($spip_version_code > 2 ? 'image' : 'vignette');
+                if ($id_document = $ajouter_documents($rep_pictures.$img, $img, "article", $id_article_tmp, $type, 0, $toto='')) { 
                   // uniformiser la sortie: si on est en 1.9.2 inc_ajouter_documents_dist() retourne le type de fichier (extension) alors qu'en 2.0 c'est l'id_document
                     if (!is_numeric($id_document)) {
                         $Ttmp = explode('.', $img);
@@ -139,7 +142,7 @@ function action_odt2spip_importe() {
         fclose($fic);
     }
     
-  // générer l'article à partir du fichier de sortie (code pompé sur plugins/snippets/action/snippet_importe.php)
+  // générer l'article à partir du fichier xml de sortie (code pompé sur plugins/snippets/action/snippet_importe.php)
     include_spip('inc/snippets');
 		$table = $id = 'articles';
 		$contexte = $args[0];
@@ -149,11 +152,10 @@ function action_odt2spip_importe() {
     $arbre = spip_xml_load($source, false);
     $translations = $f($id,$arbre,$contexte);
     snippets_translate_raccourcis_modeles($translations);
-    
-  // mettre à jour l'id_article auquel sont liees les images
     $id_article = $translations[0][2]; 
-    if (function_exists('sql_update')) sql_update('spip_documents_articles', array('id_article' => $id_article), 'id_document IN ('.implode(',',$T_images).')');
-    else spip_query("UPDATE spip_documents_articles SET id_article = $id_article WHERE id_document IN (".implode(',',$T_images).")");
+    
+  // si on est en 1.9.2 mettre à jour l'id_article auquel sont liees les images
+    if ($spip_version_code < 2) spip_query("UPDATE spip_documents_articles SET id_article = $id_article WHERE id_document IN (".implode(',',$T_images).")");
 
   // si necessaire attacher le fichier odt original à l'article et lui mettre un titre signifiant
     if (_request('attacher_odt') == '1') {
@@ -165,19 +167,21 @@ function action_odt2spip_importe() {
             $data = spip_fetch_array(spip_query("SELECT id_document FROM spip_documents WHERE fichier LIKE '%$fichier_zip_av_extension%' ORDER BY maj DESC LIMIT 1"));
             $id_doc_odt = $data['id_document'];
         }
-        if (function_exists('sql_update')) sql_update('spip_documents', array('titre' => _T('odtspip:cet_article_version_odt')), 'id_document='.$id_doc_odt);
+        if (function_exists('sql_updateq')) sql_updateq('spip_documents', array('titre' => _T('odtspip:cet_article_version_odt')), 'id_document='.$id_doc_odt);
         else spip_query("UPDATE spip_documents SET titre = '"._T('odtspip:cet_article_version_odt')."' WHERE id_document=".$id_doc_odt." LIMIT 1");
     }
     
   // vider le contenu du rep de dezippage
-    odt2spip_effacer_repzip($rep_dezip);
+    if ($spip_version_code >= 12691) effacer_repertoire_temporaire($rep_dezip);
+    else odt2spip_effacer_repzip($rep_dezip);
     
   // aller sur la page de l'article qui vient d'être créé
     redirige_par_entete(str_replace("&amp;","&",urldecode($redirect.$id_article)));
 }    
 
-// Efface le repertoire de maniere recursive !
+// Efface le repertoire de dezippage de maniere recursive !
 // reprise de http://doc.spip.org/@effacer_repertoire_temporaire + correctif closedir() 
+// cette fonction n'est plus utile à partir de spip 2.0.5 [12691] puisque le correctif à été intégré
 function odt2spip_effacer_repzip($nom) {
 	$d = opendir($nom);
 	while (($f = readdir($d)) !== false) {

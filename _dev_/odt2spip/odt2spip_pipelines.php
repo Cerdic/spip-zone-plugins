@@ -3,14 +3,14 @@
 		 define('_DIR_PLUGIN_ODT2SPIP',(_DIR_PLUGINS.end($p)));
 
 function odt2spip_affiche_droite($flux){
-	$args = $flux['args'];
+	global $spip_version_code;
+  $args = $flux['args'];
 	$out = "";
   $id_rubrique = $args['id_rubrique'];
 	if ($args['exec']=='naviguer' AND $args['id_rubrique'] AND $args['id_rubrique'] != 0) {
-    $retour_final = './?exec=articles&id_article=';
+    $retour_final = ($spip_version_code > 2 ? './' : _DIR_RESTREINT_ABS).'?exec=articles&id_article=';
 //    $retour = generer_action_auteur('snippet_importe',"articles:articles:id_rubrique=$id_rubrique:$fichier_odt2spip",$retour_final);
     $action = generer_action_auteur('odt2spip_importe',"id_rubrique=$id_rubrique",$retour_final);
-
     $out .= icone_horizontale(_T("odtspip:importer_fichier"), "#", "", _DIR_PLUGIN_ODT2SPIP."images/odt-24.png", false, "onclick='$(\"#boite_odt2spip\").slideToggle(\"fast\");'");
     $out .= "<div id='boite_odt2spip' style='display:none;' >\n";
     $out .= debut_cadre_relief('',true);
@@ -30,7 +30,6 @@ function odt2spip_affiche_droite($flux){
     $out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
     $out .= "</div>";
     $out .= "</form>\n";
-    $out .= "</div>";
 	  $out .= fin_cadre_relief(true)."</div>";
 	}
 	$flux['data'].= $out;
