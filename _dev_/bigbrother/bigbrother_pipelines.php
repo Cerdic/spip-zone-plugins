@@ -50,7 +50,7 @@ function bigbrother_insert_head($flux){
 
 function bigbrother_header_prive($flux){
 
-	$flux .= '<link rel="stylesheet" madia="all" type="text/css" href="'.find_in_path('bigbrother.css', 'css/', false).'" />';
+	$flux .= '<link rel="stylesheet" media="all" type="text/css" href="'.find_in_path('bigbrother.css', 'css/', false).'" />';
 	return $flux;
 
 }
