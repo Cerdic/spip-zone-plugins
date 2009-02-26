@@ -53,7 +53,7 @@
  * 		(caretOffset n'est plus necessaire)
  * 		
  */
-(function($) {
+;(function($) {
 	$.fn.markItUp = function(settings, extraSettings) {
 		var options, ctrlKey, shiftKey, altKey, enterKey;
 		ctrlKey = shiftKey = altKey = enterKey = false;

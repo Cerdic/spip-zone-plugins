@@ -1,4 +1,4 @@
-(function($) {
+;(function($) {
 	$.fn.previsu_spip = function(settings) {
 		var options;
 
