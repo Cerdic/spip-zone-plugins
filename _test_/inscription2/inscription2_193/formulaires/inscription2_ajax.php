@@ -36,6 +36,7 @@ function formulaires_inscription2_ajax_charger_dist($id_auteur = NULL){
 			'spip_auteurs LEFT JOIN spip_auteurs_elargis USING(id_auteur)',
 			'id_auteur ='.$id_auteur
 		);
+		$auteur['id_auteur'] = $id_auteur;
 		$champs = $auteur;
 	} else {	
 	    //si on est en mode création et que l'utilisateur a saisi ses valeurs on les prends en compte
@@ -70,21 +71,30 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 	foreach ($valeurs  as $champs => $valeur) {
 		if ((lire_config('inscription2/'.$champs.'_obligatoire') == 'on') && empty($valeur)) {
 			$erreurs[$champs] = _T('inscription2:champ_obligatoire');
+			if(is_numeric($id_auteur) && (lire_config('inscription2/password_fiche_mod') == 'on') && (strlen(_request('password')) == 0)){
+				// Si le password est vide et que l'on est dans le cas de la modification d'un auteur
+	// 			On garde le pass original
+				spip_log("pass= $pass");
+				unset($erreurs['password']);
+				$pass == 'ok';
+			}
 		}
 	}
 	
 	//messages d'erreur au cas par cas (PASSWORD)
 	//vérification des champs
-	//récupéré depuis le code de SPIP
-	if(lire_config('inscription2/password') == 'on') {
+
+	// Sinon on le verifie
+	if(($pass != 'ok') && (lire_config('inscription2/password') == 'on')) {
+		
 		if($p = _request('password')) {
 			if(strlen($p)){
 				if (strlen($p) < 6) {
 					$erreurs['password'] = _T('info_passe_trop_court');
-					$erreurs['message_erreur'] .= _T('info_passe_trop_court');
+					$erreurs['message_erreur'] .= _T('info_passe_trop_court')."<br />";
 				} elseif ($p != _request('password1')) {
 					$erreurs['password'] = _T('info_passes_identiques');
-					$erreurs['message_erreur'] .= _T('info_passes_identiques');
+					$erreurs['message_erreur'] .= _T('info_passes_identiques')."<br />";
 				}
 			}else{
 				if(!is_numeric($id_auteur)){
@@ -167,7 +177,14 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 	spip_log('traiter','inscription2');
 	global $tables_principales;
 	
-	if((lire_config('inscription2/password') == 'on') && (strlen(_request('password')))){
+	if((is_numeric($id_auteur) && (lire_config('inscription2/password_fiche_mod') != 'on'))
+		OR (is_numeric($id_auteur) && (lire_config('inscription2/password_fiche_mod') == 'on')) && (strlen(_request('password')) == 0)){
+		$mode = 'modification_auteur_simple';
+	}
+	else if((is_numeric($id_auteur) && (lire_config('inscription2/password_fiche_mod') == 'on'))){
+		$mode = 'modification_auteur_pass';
+	}
+	else if((lire_config('inscription2/password') == 'on') && (strlen(_request('password')))){
 		$mode = 'inscription_pass';
 	}
 	else{
@@ -191,7 +208,7 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 			$valeurs['nom'] = strtolower(translitteration(preg_replace('/@.*/', '', $valeurs['email'])));
 		}
 	}
-	if (!_request('login')) {
+	if (!$valeurs['login']) {
 		$valeurs['login'] = test_login($valeurs['nom'], $valeurs['email']);
 	}
     
@@ -207,7 +224,7 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 	$val = array_intersect_key($valeurs,$clefs);
 	
 	//Vérification du password
-	if($mode == 'inscription_pass') {
+	if($mode == ('inscription_pass' || 'modification_auteur_pass')){
 		$new_pass = _request('password');
 		if (strlen($new_pass)) {
 			include_spip('inc/acces');
@@ -230,7 +247,7 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 		}
 	}
 	
-	//inserer les données dans spip_auteurs -- si $id_auteur mise à jour autrement nouvelle entrée
+	//inserer les données dans spip_auteurs -- si $id_auteur : mise à jour - autrement : nouvelle entrée
 	if (is_numeric($id_auteur)) {
 		$where = 'id_auteur = '.$id_auteur;
 		sql_updateq(
@@ -253,11 +270,10 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 	//genere le tableau des valeurs à mettre à jour pour spip_auteurs
 	//toutes les clefs qu'inscription2 peut mettre à jour
 	//s'appuie sur les tables definies par le plugin
-	$clefs = $tables_principales['spip_auteurs_elargis']['field'];
-	
+	$clefs = $tables_principales[$table]['field'];
 	//extrait uniquement les données qui ont été proposées à la modification
 	$val = array_intersect_key($valeurs,$clefs);
-	
+	unset($val['login']);
 	//recherche la presence d'un complément sur l'auteur
 	$id_elargi = sql_getfetsel('id_auteur','spip_auteurs_elargis','id_auteur='.$id_auteur);
 	
@@ -282,10 +298,15 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
     
     if (!$new){
         $message = _T('inscription2:profil_modifie_ok');
+        if($mode = 'modification_auteur_simple'){
+        	$message .= '<br />'._T('inscription2:mot_passe_reste_identique');
+        }
+        $editable = true;
     } else {
 		$envoyer_inscription = charger_fonction('envoyer_inscription2','inc');
 		$envoyer_inscription($id_auteur,$mode);
 		$message = _T('inscription2:formulaire_inscription_ok');
+		$editable = false;
     }
 	
 	$traiter_plugin = pipeline('i2_traiter_formulaire',
@@ -298,7 +319,7 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 		)
 	);
 	
-    return array('editable'=>false,'message' => $message);
+    return array('editable'=>$editable,'message' => $message);
 }
 
 // http://doc.spip.org/@test_login
