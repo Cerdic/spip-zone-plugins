@@ -36,6 +36,7 @@ foreach(array(
 	#pre remplissage du formulaire
 	'forms_pre_remplit_formulaire',
 	#modification des donnees apres saisie du formulaire
+	'forms_identifier_donnee_existante',
 	'forms_pre_edition_donnee',
 	'forms_post_edition_donnee',
 	'forms_valide_conformite_champ',
