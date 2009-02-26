@@ -114,7 +114,8 @@ function cs_rempl_glossaire($texte) {
 		$limit = defined('_GLOSSAIRE_LIMITE')?_GLOSSAIRE_LIMITE:-1;
 		$glossaire_generer_mot = function_exists('glossaire_generer_mot')
 //			?'glossaire_generer_mot(\'\\2\', \'\\1\')':'glossaire_generer_mot_dist(\'\\2\', \'\\1\')';
-			?'glossaire_generer_mot(\'\\2\', \'\\1\')':\'\\1\';
+			?'glossaire_generer_mot(\'\\2\', \'\\1\')':'\'\\1\'';
+		$glossaire_generer_mot = '"<a $table1[\\2]_".$GLOBALS["gl_i"]++."\' class=\'cs_glossaire\'><span class=\'gl_mot\'>".'.$glossaire_generer_mot.'."</span>$table2[\\2]</a>"';
 	}
 	$unicode = false;
 	$mem = $GLOBALS['toujours_paragrapher'];
@@ -184,9 +185,7 @@ function cs_rempl_glossaire($texte) {
 	$GLOBALS['toujours_paragrapher'] = $mem;
 	// remplacement final des balises posees ci-dessus
 	$GLOBALS['gl_i']=0;
-	return preg_replace(",@@GLOSS(.*?)#([0-9]+)@@,e", 
-		'"<a $table1[\\2]_".$GLOBALS["gl_i"]++."\' class=\'cs_glossaire\'><span class=\'gl_mot\'>".'.$glossaire_generer_mot.'."</span>$table2[\\2]</a>"', 
-		echappe_retour($texte, 'GLOSS'));
+	return preg_replace(",@@GLOSS(.*?)#([0-9]+)@@,e", $glossaire_generer_mot, echappe_retour($texte, 'GLOSS'));
 }
 
 function cs_glossaire($texte) {
