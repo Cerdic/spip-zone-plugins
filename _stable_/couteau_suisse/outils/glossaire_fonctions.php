@@ -41,10 +41,6 @@ function glossaire_generer_url_dist($id_mot, $titre) {
 function glossaire_generer_mot_dist($id_mot, $mot) {
 	return $mot;
 }
-function glossaire_generer_mot($id_mot, $mot) {
-	return $mot.'-'.$id_mot;
-}
-
 
 // compatibilite pour SPIP 1.91
 include_spip('inc/texte');
@@ -117,7 +113,8 @@ function cs_rempl_glossaire($texte) {
 		$glossaire_generer_url = function_exists('glossaire_generer_url')?'glossaire_generer_url':'glossaire_generer_url_dist';
 		$limit = defined('_GLOSSAIRE_LIMITE')?_GLOSSAIRE_LIMITE:-1;
 		$glossaire_generer_mot = function_exists('glossaire_generer_mot')
-			?'glossaire_generer_mot(\'\\2\', \'\\1\')':'glossaire_generer_mot_dist(\'\\2\', \'\\1\')';
+//			?'glossaire_generer_mot(\'\\2\', \'\\1\')':'glossaire_generer_mot_dist(\'\\2\', \'\\1\')';
+			?'glossaire_generer_mot(\'\\2\', \'\\1\')':\'\\1\';
 	}
 	$unicode = false;
 	$mem = $GLOBALS['toujours_paragrapher'];
