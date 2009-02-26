@@ -24,7 +24,7 @@ function glossaire_groupes() {
 // TODO : QUERY pour SPIP 2.0
 
 // surcharge possible de cette fonction glossaire_generer_url_dist par : glossaire_generer_url($id_mot, $titre) 
-// si elle existe, elle sera utilisee pour generee l'url cliquable des mots trouves
+// si elle existe, elle sera utilisee pour generer l'url cliquable des mots trouves
 //   exemple pour annuler le clic : function glossaire_generer_url($id_mot, $titre) { return 'javascript:;'; }
 function glossaire_generer_url_dist($id_mot, $titre) {
 	if(defined('_SPIP19300')) 
@@ -32,13 +32,25 @@ function glossaire_generer_url_dist($id_mot, $titre) {
 		else { charger_generer_url(); return generer_url_mot($id_mot); } // avant SPIP 2.0
 }
 
+// surcharge possible de cette fonction glossaire_generer_mot_dist par : glossaire_generer_mot($id_mot, $mot) 
+// si elle existe, elle sera utilisee pour remplacer le mot detecte dans la phrase
+/* exemple pour utiliser un fond personnalise, inserer un logo par exemple :
+	function glossaire_generer_mot($id_mot, $mot) { 
+		return recuperer_fond('/fonds/mon_glossaire', array('id_mot'=>$id_mot, 'mot'=>$mot));
+	}*/
+function glossaire_generer_mot_dist($id_mot, $mot) {
+	return $mot;
+}
+function glossaire_generer_mot($id_mot, $mot) {
+	return $mot.'-'.$id_mot;
+}
+
+
 // compatibilite pour SPIP 1.91
 include_spip('inc/texte');
 if(!function_exists('nettoyer_chapo')) {
 	// Ne pas renvoyer le chapo si article virtuel
-	function nettoyer_chapo($chapo){
-		return (substr($chapo,0,1) == "=") ? '' : $chapo;
-	}
+	function nettoyer_chapo($chapo){ return (substr($chapo,0,1) == "=") ? '' : $chapo; }
 }
 
 // traitement pour #TITRE/mots : retrait des expressions regulieres
@@ -95,7 +107,7 @@ function cs_rempl_glossaire($texte) {
 		return str_replace(_CS_SANS_GLOSSAIRE, '', $texte);
 	// mise en static de la table des mots pour eviter d'interrroger la base a chaque fois
 	// attention aux besoins de memoire...
-	static $limit, $glossaire_generer_url, $glossaire_array = null;
+	static $limit, $glossaire_generer_url, $glossaire_generer_mot, $glossaire_array = null;
 	if(!isset($glossaire_array)) {
 		$glossaire_array = array();
 		// compatibilite SPIP 1.92
@@ -104,6 +116,8 @@ function cs_rempl_glossaire($texte) {
 		while($r = $fetch($query)) $glossaire_array[] = $r;
 		$glossaire_generer_url = function_exists('glossaire_generer_url')?'glossaire_generer_url':'glossaire_generer_url_dist';
 		$limit = defined('_GLOSSAIRE_LIMITE')?_GLOSSAIRE_LIMITE:-1;
+		$glossaire_generer_mot = function_exists('glossaire_generer_mot')
+			?'glossaire_generer_mot(\'\\2\', \'\\1\')':'glossaire_generer_mot_dist(\'\\2\', \'\\1\')';
 	}
 	$unicode = false;
 	$mem = $GLOBALS['toujours_paragrapher'];
@@ -172,9 +186,10 @@ function cs_rempl_glossaire($texte) {
 	}
 	$GLOBALS['toujours_paragrapher'] = $mem;
 	// remplacement final des balises posees ci-dessus
-	$GLOBALS['i']=0;
+	$GLOBALS['gl_i']=0;
 	return preg_replace(",@@GLOSS(.*?)#([0-9]+)@@,e", 
-		'"<a $table1[\\2]_".$GLOBALS["i"]++."\' class=\'cs_glossaire\'><span class=\'gl_mot\'>\\1</span>$table2[\\2]</a>"', echappe_retour($texte, 'GLOSS'));
+		'"<a $table1[\\2]_".$GLOBALS["gl_i"]++."\' class=\'cs_glossaire\'><span class=\'gl_mot\'>".'.$glossaire_generer_mot.'."</span>$table2[\\2]</a>"', 
+		echappe_retour($texte, 'GLOSS'));
 }
 
 function cs_glossaire($texte) {
