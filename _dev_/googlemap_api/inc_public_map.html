@@ -14,10 +14,14 @@
 	var markerManager[(#GET{id_carte_gis})];
 	[(#REM) Centrer sur l'article, sinon sur la rubrique, sinon sur la conf du plugin ]
 	<BOUCLE_centrer_article(GIS){id_article?}{0,1}>
-		#SET{latitude,#LAT}#SET{lonxitude,#LONX}#SET{zoommapa, #ZOOM}
+		#SET{latitude,#LAT}
+		#SET{lonxitude,#LONX}
+		#SET{zoommapa,#ZOOM}
 	</BOUCLE_centrer_article>
 		<BOUCLE_centrer_rubrique(GIS){id_rubrique?}{0,1}>
-			#SET{latitude,#LAT}#SET{lonxitude,#LONX}#SET{zoommapa, #ZOOM}
+			#SET{latitude,#LAT}
+			#SET{lonxitude,#LONX}
+			#SET{zoommapa,#ZOOM}
 		</BOUCLE_centrer_rubrique>
 		#SET{latitude,#ENV{latit,#CONFIG**{geomap/latitude,0}}}
 		#SET{lonxitude,#ENV{lonxit,#CONFIG**{geomap/longitude,0}}}
