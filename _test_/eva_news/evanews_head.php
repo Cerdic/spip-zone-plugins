@@ -48,9 +48,6 @@
 			effectspeed:"'.$effectspeed.'"';
 	$flux .= '}
 		$.init_news(newsoption1);
-		var myoffset=$("#news_button").offset();
-		var mytop=myoffset.top-1;
-		$("#news_button").css({top:mytop});
 		});
 		</script>
 		';
