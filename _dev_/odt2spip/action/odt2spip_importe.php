@@ -52,7 +52,7 @@ function action_odt2spip_importe() {
     
   // variables en dur pour xml en entrée et xslt utilisée
     $xml_entre = $rep_dezip.'content.xml';  // chemin du fichier xml à lire
-    $xslt_texte = _DIR_PLUGIN_ODT2SPIP.'inc/odt2spip_texte.xsl';  // chemin de la xslt à utiliser pour le texte
+    $xslt_texte = _DIR_PLUGIN_ODT2SPIP.'inc/odt2spip.xsl'; //'inc/odt2spip_texte.xsl';  // chemin de la xslt à utiliser pour le texte
     
   // fichier de sortie
     $fichier_sortie = $rep_dezip.'snippet_odt2spip.xml';
