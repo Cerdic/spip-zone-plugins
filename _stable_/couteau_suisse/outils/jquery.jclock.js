@@ -34,8 +34,7 @@ function each_jclock(diff) {
 		var opt = this.title.split('|');
 		for (i=0; i<opt.length; i++) {
 			j = opt[i].indexOf('=');
-//			if(j>0) options[opt[i].substr(0,j).trim()] = opt[i].substring(j+1).trim();
-			if(j>0) options[opt[i].substr(0,j)] = opt[i].substring(j+1);
+			if(j>0) options[opt[i].substr(0,j).trim()] = opt[i].substring(j+1).trim();
 		}
 		if(typeof options.id != "undefined") $(this).addClass('jclock'+options.id)
 		this.title = "";
@@ -43,7 +42,7 @@ function each_jclock(diff) {
 	});
 }
 
-//String.prototype.trim = function() { return this.replace(/(?:^\s+|\s+$)/g, ''); };
+String.prototype.trim = function() { return this.replace(/(?:^\s+|\s+$)/g, ''); };
 
 /*
 	jQuery jclock - Base sur les travaux de :
@@ -197,7 +196,7 @@ function each_jclock(diff) {
     format: 'H:i:s',
 	utc: '',
 	utc_offset: 0,
-	serveur_offset:0,
+	serveur_offset:0
   };
  
 })(jQuery);
