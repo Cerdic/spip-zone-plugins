@@ -9,10 +9,10 @@ if(!isset($GLOBALS['cs_fonctions']) && isset($_GET['cs_dateserveur'])) {
 
 // La balise #HORLOGE{format,utc,id}
 function balise_HORLOGE_dist($p) {
-	$format = sinon(interprete_argument_balise(1,$p), "'H:i:s'");
-	$utc = sinon(interprete_argument_balise(2,$p), "''");
-	$id = sinon(interprete_argument_balise(3,$p), "'0'");
-	$p->code = "'<div class=\"jclock'.(intval($id)?' jclock'.$id:'').'\" title=\"'.$utc.'|'.$format.'\"></div>'";
+	$i = 1; $ar = array();
+	while(($a = interprete_argument_balise($i++,$p)) != null) $ar[] = $a;
+	$ar = count($ar)?join(".'|'.", $ar):"''";
+	$p->code = "'<span class=\"jclock\" title=\"'.$ar.'\"></span> '";
 	$p->type = 'php';  
 	return $p;
 }

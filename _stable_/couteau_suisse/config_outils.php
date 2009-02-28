@@ -1154,8 +1154,9 @@ add_outil( array(
 add_outil( array(
 	'id' => 'horloge',
 	'categorie' => 'spip',
-	'pipelinecode:insert_head' => '$flux.=\'<script type="text/javascript" src="\'.generer_url_public(\'cout_dates.js\',\'lang=\'.$GLOBALS[\'spip_lang\']).\'"></script>\'."\n";
-$flux.=\'<script type="text/javascript" src="'.url_absolue(find_in_path("outils/jquery.jclock.js")).'"></script>\'."\n";',
+	'pipelinecode:insert_head' => '$flux.=\'<script type="text/javascript" src="\'.generer_url_public(\'cout_dates.js\',\'lang=\'.$GLOBALS[\'spip_lang\']).\'"></script>
+<script type="text/javascript" src="'.url_absolue(find_in_path("outils/jquery.jclock.js")).'"></script>\'."\n";',
+	'code:jq_init' => 'jclock_init.apply(this);',
 ));
 
 // Ajout des outils personnalises
