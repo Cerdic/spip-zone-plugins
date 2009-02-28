@@ -1,6 +1,6 @@
 #CACHE{0}
+<B_listes>
 <div class='liste'>
-	<B_listes>
 	#ANCRE_PAGINATION
 	<:abomailmans:les_listes_mailmans|bandeau_titre_boite2{#CHEMIN{img_pack/mailman.gif},"#D3D3D3","black"}:>
 	<table width='100%' cellpadding='4' cellspacing='0' border='0'>
@@ -22,11 +22,11 @@
 		</tr>
 		</BOUCLE_listes>
 	</table>
-		[<div class="pagination">
-			(#PAGINATION)
-		</div>]
-	</B_listes>
+	[<div class="pagination">
+		(#PAGINATION)
+	</div>]
 </div>
+</B_listes>
 [(#SESSION{statut}|=={0minirezo}|oui)
 	<div style="text-align:right">
 		#ENV*{icone}
