@@ -14,6 +14,7 @@ $spip_abomailmans = array(
 	"email"			=> "varchar(255)",
 	"maj" 			=> "TIMESTAMP",
 	"email_sympa"   => "varchar(255)",
+	"lang"			=> "VARCHAR(10) DEFAULT '' NOT NULL",
 	"desactive"     => "tinyint(4) NOT NULL default '0'"
 );
 

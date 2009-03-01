@@ -16,12 +16,17 @@ function formulaires_abomailman_creation_liste_charger_dist($id_abomailman = "")
 		// On verifie que la liste existe
 		if ($id_abomailman){
 			$valeurs = sql_fetsel('*','spip_abomailmans',"id_abomailman =$id_abomailman");
+			$valeurs['langue'] = $valeurs['lang'];
 			spip_log("La liste existe, on peut charger le formulaire avec ses infos préremplies","abomailman");
 			if(!$valeurs['id_abomailman']){
 				$valeurs['editable'] = false;
-				$valeurs['message_erreur'] = _T('abomailmans:liste_non_existante');				
+				$valeurs['message_erreur'] = _T('abomailmans:liste_non_existante');
 			}
 		}
+		if(!$valeurs['langue']){
+			$valeurs['langue'] = lang_select();
+		}
+		unset($valeurs['lang']);
 	}else{
 		$valeurs['editable'] = false;
 		$valeurs['message_erreur'] = _T('abomailman:creation_droits_insuffisants');
@@ -45,6 +50,7 @@ function formulaires_abomailman_creation_liste_verifier_dist($id_abomailman = ""
 	$email = _request('email');
 	$email_sympa = _request('email_sympa');
 	$desactive = _request('desactive');
+	$lang = _request('lang');
 	
 	// Si on fait une suppression, on ne vérifie pas le reste
 	if($desactive != '2'){
@@ -86,6 +92,7 @@ function formulaires_abomailman_creation_liste_traiter_dist($id_abomailman = "")
 	$datas['email'] = _request('email');
 	$datas['email_sympa'] = _request('email_sympa');
 	$datas['desactive'] = _request('desactive');
+	$datas['lang'] = _request('langue');
 	
     // on récupère les données de la liste
     if($id_abomailman){
@@ -97,6 +104,7 @@ function formulaires_abomailman_creation_liste_traiter_dist($id_abomailman = "")
     		sql_updateq("spip_abomailmans",$datas,"id_abomailman = $id_abomailman");
     		$message['message_ok'] = _T('abomailmans:liste_updatee',array("id"=>$id_abomailman,"titre"=> $datas['titre']));
     	}
+    	$message['redirect'] = parametre_url(self(),'id_abomailman',$id_abomailman);
     }
 	else{
 		$id_abomailman = sql_insertq("spip_abomailmans",$datas);

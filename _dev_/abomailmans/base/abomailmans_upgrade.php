@@ -7,22 +7,27 @@
  * $Id$
 */
 	
-	$GLOBALS['abomailmans_base_version'] = 0.30;
+	$GLOBALS['abomailmans_base_version'] = 0.31;
 	function abomailmans_upgrade(){
 		$version_base = $GLOBALS['abomailmans_base_version'];
 		$current_version = 0.0;
-		if ((isset($GLOBALS['meta']['abomailmans_base_version']))
-				&& (($current_version = $GLOBALS['meta']['abomailmans_base_version'])==$version_base))
-			return;
+		if ((!isset($GLOBALS['meta']['abomailmans_base_version']))
+			|| (($current_version = $GLOBALS['meta']['abomailmans_base_version'])!=$version_base)){
 
-		include_spip('base/abomailmans');
-		if ($current_version==0.0){
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
-			creer_base();
-			ecrire_meta('abomailmans_base_version',$current_version=$version_base);
+			include_spip('base/abomailmans');
+			if ($current_version==0.0){
+				include_spip('base/create');
+				include_spip('base/abstract_sql');
+				creer_base();
+				ecrire_meta('abomailmans_base_version',$current_version=$version_base);
+			}
+			else if ($current_version==0.30){
+				sql_alter("TABLE spip_abomailmans ADD `lang` varchar(10) DEFAULT ' ' NOT NULL AFTER `email_sympa`");
+				ecrire_meta('abomailmans_base_version',$current_version=0.31,'non');
+				echo 'Upgrade de la base abomailmans';
+			}
+			ecrire_metas();
 		}
-		ecrire_metas();
 	}
 	
 	function abomailmans_vider_tables() {
