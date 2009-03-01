@@ -27,8 +27,8 @@
         	<INCLURE{fond=formulaires/inscription2_infos_perso}{env}>
         	<INCLURE{fond=formulaires/inscription2_infos_pro}{env}>
         ]
-        
-		[(#PIPELINE{i2_form_fin})]
+
+		[(#PIPELINE{i2_form_fin,#ARRAY{args,#ENV*,data,''}})]
 
         [(#CONFIG{inscription2/publication}|=={on}|oui)
         <fieldset class="info_publication">
