@@ -20,11 +20,12 @@ function bando_images_background(){
 	$res = "";
 	foreach($boutons as $page => $detail){
 		if ($detail->icone AND strlen(trim($detail->icone)))
-		$res .="\n.navigation_avec_icones #bando1_$page {background-image:url(".$detail->icone.");}";
+			$res .="\n.navigation_avec_icones #bando1_$page {background-image:url(".$detail->icone.");}";
+		$selecteur = $page=='outils_rapides'?"":".navigation_avec_icones";
 		if (is_array($detail->sousmenu))
-		foreach($detail->sousmenu as $souspage=>$sousdetail)
-		if ($sousdetail->icone AND strlen(trim($sousdetail->icone)))
-		$res .="\n.navigation_avec_icones #bando2_$souspage {background-image:url(".$sousdetail->icone.");}";
+			foreach($detail->sousmenu as $souspage=>$sousdetail)
+				if ($sousdetail->icone AND strlen(trim($sousdetail->icone)))
+					$res .="\n$selecteur#bando2_$souspage {background-image:url(".$sousdetail->icone.");}";
 	}
 	return $res;
 }
