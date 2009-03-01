@@ -130,9 +130,9 @@
 				<label for="stable_version"><:geomap:stable_version:></label>
 			</div>
 			<div class="choix">
-				<input type="radio" name="api_version" class="radio" value="2." id="other_version"[ (#ENV{api_version}|match{'^2\.'}|?{'checked="checked"'})] />
+				<input type="radio" name="api_version" class="radio" value="2." id="other_version"[ (#ENV{api_version}|match{'^2\.\d+'}|?{'checked="checked"'})] />
 				<label for="other_version"><:geomap:other_version:></label>
-				<div style="display:[(#ENV{api_version}|match{'^2\.'}|?{'block','none'})]" class="num_other_version_container">
+				<div style="display:[(#ENV{api_version}|match{'^2\.\d+'}|?{'block','none'})]" class="num_other_version_container">
 					<input type="text" name="num_other_version" class="text" value="#ENV*{num_other_version}" id="num_other_version" />
 				</div>
 			</div>
