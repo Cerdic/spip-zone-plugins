@@ -16,7 +16,7 @@
         [(#REM) pour inserer des champs au debut du formulaire
 		Utilise pour Abonnement et association auparavant]
 
-		[(#PIPELINE{i2_form_debut})]
+		[(#PIPELINE{i2_form_debut,#ARRAY{args,#ENV*,data,''}})]
 		
         [(#ENV*{id_auteur}|oui)
         	<INCLURE{fond=formulaires/inscription2_modif_infos_pro}{env}>
