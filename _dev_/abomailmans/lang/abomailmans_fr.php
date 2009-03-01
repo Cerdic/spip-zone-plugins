@@ -42,15 +42,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		'email_envoye'					=> 'L\'e-mail a &eacute;t&eacute; envoy&eacute; &agrave; la liste de diffusion : @liste@.',
 		
 		'creation_droits_insuffisants'	=>	'Vos droits sont insuffisants...',
-		'emailliste_abosympa'           => 'L\'adresse e-mail de l\'administrateur Sympa',
-		'info_sisympa'                  => '[Obligatoire si liste Sympa]',
-		'btn_abonnement'                => 'S\'abonner',
-		'btn_desabonnement'             => 'Se d&eacute;sabon.',
-		'liste_oublie'                  => 'Vous avez oubli&eacute; de cocher une liste !',
-		'active'                        => 'Activ&eacute;',
-		'desactive'                     => 'D&eacute;sactiv&eacute;',
+		'emailliste_abosympa'           =>	'L\'adresse e-mail de l\'administrateur Sympa',
+		'info_sisympa'                  =>	'[Obligatoire si liste Sympa]',
+		'btn_abonnement'                =>	'S\'abonner',
+		'btn_desabonnement'             =>	'Se d&eacute;sabon.',
+		'liste_oublie'                  =>	'Vous avez oubli&eacute; de cocher une liste !',
+		'active'                        =>	'Activ&eacute;',
+		'desactive'                     =>	'D&eacute;sactiv&eacute;',
 		'supprimer'						=>	'Supprimer',
-		'sympa_message_confirmation'	=> 'Un email de validation a &eacute;t&eacute; envoy&eacute; &agrave l\'adresse : ',
+		'langue_liste'					=>	'Langue de la liste',
+		'aucune_langue'					=>	'Aucune sp&eacute;cifique',
+		'sympa_message_confirmation'	=>	'Un email de validation a &eacute;t&eacute; envoy&eacute; &agrave l\'adresse : ',
 		'verifier_formulaire'			=>	'V&eacute;rifiez le remplissage du formulaire.',
 		'liste_updatee'					=>	'La liste num&eacute;ro @id@ (@titre@) a &eacute;t&eacute; mise &agrave; jour.',
 		'liste_creee'					=>	'La liste num&eacute;ro @id@ (@titre@) a &eacute;t&eacute; cr&eacute;&eacute;e.',
@@ -65,6 +67,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		'insciption_listes_legende'		=> 'Abonnement aux listes de <br />diffusion et de discussions',
 		'choisir_liste'					=> 'Vous devez choisir une liste.',
 );
-
 
 ?>
