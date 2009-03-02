@@ -25,7 +25,7 @@ function bando_images_background(){
 		if (is_array($detail->sousmenu))
 			foreach($detail->sousmenu as $souspage=>$sousdetail)
 				if ($sousdetail->icone AND strlen(trim($sousdetail->icone)))
-					$res .="\n$selecteur#bando2_$souspage {background-image:url(".$sousdetail->icone.");}";
+					$res .="\n$selecteur#bando2_$souspage {background-image:url(".$sousdetail->icone.");\n background-repeat:no-repeat;}";
 	}
 	return $res;
 }
