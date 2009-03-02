@@ -39,7 +39,7 @@
 
 		else {
 			// nouveau format de .svn/entries
-			$info = _SVN_COMMAND." $user info --xml $dest/";
+			$info = _SVN_COMMAND." info --xml $dest/";
 			exec($info, $out);
 			if (preg_match(',<url>(.*?)</url>,', join('',$out), $r)) {
 				$old_src = $r[1];
@@ -65,22 +65,23 @@
 			}
 		}
 
-        //execute les commandes svn
+        	//execute les commandes svn
 		if ($command) {
-		    //tableaux de résultat
-            $out = array();   
-            $out_local = array();
-		    //parcours les commandes demandées
-    		foreach ($command as $cmd ) {
-    		    //redéfini la commande complétement    		 
-    			$cmd = _SVN_COMMAND." $user ".$cmd." 2>&1";
-    			//execute la commande et sauve le resultat dans local_out
-			    exec($cmd,$local_out);
-			    //rappelle la commande executée
-			    array_unshift($local_out, $cmd);			    
-			    //empile le resultat local à la sortie finale
-			    $out = $out + $local_out;
-            }
+			//tableaux de résultat
+        		$out = array();   
+        		$out_local = array();
+			//parcours les commandes demandées
+    			foreach ($command as $cmd ) {
+    				//redéfini la commande complétement    		 
+    				$cmd_exec = _SVN_COMMAND." $user ".$cmd." 2>&1";
+    				//execute la commande et sauve le resultat dans local_out
+				exec($cmd_exec,$local_out);
+				//rappelle la commande executée
+    				$cmd_aff = _SVN_COMMAND.$cmd." 2>&1";
+				array_unshift($local_out, $cmd_aff);
+				//empile le resultat local à la sortie finale
+				$out = $out + $local_out;
+        		}
 			return $out;
 		}
 
@@ -90,12 +91,18 @@
 		foreach($config as $l) {
 			echo "<hr /><b>", htmlspecialchars($l), "</b>";
 			$res = update_svn($l);
-			if (is_string($res))
+			if (is_string($res)){
+				include_spip('inc/charsets');
+				$res = importer_charset($res);
 				echo "<br /><b>Erreur: ",
 					htmlspecialchars($res),
 					"</b>";
-			if (is_array($res))
-				echo "<br />".nl2br(htmlspecialchars(join("\n", $res)));
+			}
+			if (is_array($res)){
+				include_spip('inc/charsets');
+				$res = importer_charset(join("\n", $res),'iso-8859-1');
+				echo "<br />".nl2br(htmlspecialchars($res));
+			}
 			echo "<br />\n";
 		}
 	}
