@@ -3,7 +3,7 @@
   <auteur>Cedric Morin [->www.yterium.net]</auteur>
   <icon>img_pack/nospam.png</icon>
   <licence>(c) 2008 GPL</licence>
-  <version>0.2</version>
+  <version>0.3</version>
   <etat>test</etat>
   <description>Filtrez vos messages de forums</description>
   <prefix>nospam</prefix>

@@ -89,7 +89,7 @@ function nospam_pre_edition($flux){
 	  // verifier que cette ip n'en est pas a son N-ieme post en peu de temps
 	  // plus de 5 messages en 5 minutes c'est suspect ...
 	  if ($flux['data']['statut'] == 'publie'){
-	  	if (sql_countsel('spip_forum','ip='.sql_quote($GLOBALS['ip']).' AND maj>DATE_SUB(NOW,INTERVAL 5 minute)')>5)
+	  	if (sql_countsel('spip_forum','ip='.sql_quote($GLOBALS['ip']).' AND maj>DATE_SUB(NOW(),INTERVAL 5 minute)')>5)
 	  		$flux['data']['statut']='spam';
 	  }
 	}
