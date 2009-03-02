@@ -71,9 +71,30 @@ function inscription2_post_edition($flux){
 					'data' => $auteur
 				)
 			);
-		
 			$echec = $echec ? '&echec=' . join('@@@', $echec) : '';
 	}
 	return $flux;
-}	
+}
+
+function inscription2_I2_exceptions_des_champs_auteurs_elargis($array){
+	// liste des champs pour lesquels on ne doit pas créer de champs dans la table spip_auteurs_elargis
+	
+	// Principalement les champs déjà présents dans spip_auteurs
+	$array[] = 'id_auteur';
+	$array[] = 'bio';
+	$array[] = 'nom';
+	$array[] = 'pass';
+	$array[] = 'login';
+	$array[] = 'email';
+	$array[] = 'statut';
+	$array[] = 'gpg';
+	
+	// Des choses spécifiques à inscription2
+	$array[] = 'username';
+	$array[] = 'statut_nouveau';
+	$array[] = 'statut_int';
+	$array[] = 'accesrestreint';
+	$array[] = 'password';
+	return $array;
+}
 ?>

@@ -35,6 +35,10 @@
 		<inclure>base/inscription2.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>I2_exceptions_des_champs_auteurs_elargis</nom>
+		<inclure>inscription2_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouter_boutons</action>
 		<inclure>inscription2_pipelines.php</inclure>
