@@ -45,7 +45,7 @@ function exec_navigation_dist()
 
 	$sous = bando_lister_sous_menu($boutons[$menu]->sousmenu,$contexte,"item");
 	
-	$res = $sous ? "<ul class='liste_items'>$sous</ul>":"";
+	$res = $sous ? "<ul class='liste_items sous_navigation'>$sous</ul>":"";
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'navigation', 'menu'=>$menu),'data'=>$res));
 
