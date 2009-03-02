@@ -273,7 +273,7 @@ function spiplistes_upgrade_base (
 			include_spip('base/abstract_sql');
 			if (($res = sql_select('id_auteur', 'spip_auteurs_mod_listes'))
 				&& (!sql_fetch($res))
-				&& ($desc = sql_showtable("spip_abonnes_listes"))
+				&& ($desc = sql_showtable("spip_abonnes_listes",true))
 				&& isset($desc['field']['id_auteur'])
 			) {
 				sql_drop_table("spip_auteurs_mod_listes"); // elle vient d'etre cree par un creer_base inopportun
@@ -378,7 +378,7 @@ function spiplistes_upgrade_base (
 			echo "regulariser l'index";
 			$table_nom = "spip_auteurs_elargis";
 			//ajout des index
-			$desc = sql_showtable($table_nom);
+			$desc = sql_showtable($table_nom,true);
 			if($desc['key']['PRIMARY KEY']!='id'){
 				sql_alter("TABLE ".$table_nom." DROP PRIMARY KEY");
 				if(!isset($desc['fields']['id'])) {
