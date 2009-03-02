@@ -15,8 +15,10 @@
 		// une revision est numerique ou parmi quelques valeurs connues
 		// sinon c'est une clause user
 		$rev = array_shift($l);
-		if (!is_numeric($rev) AND !in_array($rev,array('HEAD','BASE','COMMITED','PREV')))
+		if (!is_numeric($rev) AND !in_array($rev,array('HEAD','BASE','COMMITED','PREV'))){
 			array_unshift($l,$rev);
+			$rev="";
+		}
 
 		// la clause user est le reste
 		$user = join(' ',$l);
@@ -89,7 +91,11 @@
 
 	function traiter_config_svn($config = array()) {
 		foreach($config as $l) {
-			echo "<hr /><b>", htmlspecialchars($l), "</b>";
+			// ne pas afficher l'identification eventuelle
+			$aff = explode(' ',htmlspecialchars($l));
+			while (count($aff)>3) array_pop($aff);
+			$aff = implode(' ',$aff);
+			echo "<hr /><b>", $aff, "</b>";
 			$res = update_svn($l);
 			if (is_string($res)){
 				include_spip('inc/charsets');
