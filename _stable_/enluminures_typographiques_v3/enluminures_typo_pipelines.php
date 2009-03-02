@@ -62,6 +62,59 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 		"display"     => true,
 		"lang"    => array('fr','eo','cpf'),
 	));
+	// e dans le a
+	$barre->ajouterApres('E_grave', array(
+		"id"          => 'aelig',
+		"name"        => _T('enlumtypo:barre_ea'),
+		"className"   => "outil_aelig",
+		"replaceWith"   => "&aelig;",
+		"display"     => true,
+		"lang"    => array('fr','eo','cpf'),
+	));
+	// e dans le a majuscule
+	$barre->ajouterApres('aelig', array(
+		"id"          => 'AElig',
+		"name"        => _T('enlumtypo:barre_ea_maj'),
+		"className"   => "outil_aelig_maj",
+		"replaceWith"   => "&AElig;",
+		"display"     => true,
+		"lang"    => array('fr','eo','cpf'),
+	));
+	// c cedille majuscule
+	$barre->ajouterApres('OE', array(
+		"id"          => 'Ccedil',
+		"name"        => _T('enlumtypo:barre_c_cedille_maj'),
+		"className"   => "outil_ccedil_maj",
+		"replaceWith"   => "&Ccedil;",
+		"display"     => true,
+		"lang"    => array('fr','eo','cpf'),
+	));
+	// c cedille majuscule
+	$barre->ajouterApres('Ccedil', array(
+		"id"          => 'euro',
+		"name"        => _T('enlumtypo:barre_euro'),
+		"className"   => "outil_euro",
+		"replaceWith"   => "&euro;",
+		"display"     => true,
+		"lang"    => array('fr','eo','cpf'),
+	));
+	
+	// Transformation en majuscule
+	$barre->ajouterApres('euro', array(
+		"id"          => 'uppercase',
+		"name"        => _T('barre_outils:barre_gestion_cr_changercassemajuscules'),
+		"className"   => "outil_uppercase",
+		"replaceWith" => 'function(markitup) { return markitup.selection.toUpperCase() }',
+		"display"     => true,
+	));
+	// Transformation en minuscule
+	$barre->ajouterApres('uppercase', array(
+		"id"          => 'lowercase',
+		"name"        => _T('barre_outils:barre_gestion_cr_changercasseminuscules'),
+		"className"   => "outil_lowercase",
+		"replaceWith" => 'function(markitup) { return markitup.selection.toLowerCase() }',
+		"display"     => true,
+	));
 	
 	return $barres;
 }
@@ -69,6 +122,12 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 function typoenluminee_porte_plume_lien_classe_vers_icone($flux){
 	return array_merge($flux, array(
 		'outil_e_maj_grave' => 'eagrave-maj.png',
+		'outil_aelig' => 'aelig.png',
+		'outil_aelig_maj' => 'aelig-maj.png',
+		'outil_ccedil_maj' => 'ccedil-maj.png',
+		'outil_euro' => 'euro.png',
+		'outil_uppercase' => 'text_uppercase.png',
+		'outil_lowercase' => 'text_lowercase.png',
 	));
 }
 
