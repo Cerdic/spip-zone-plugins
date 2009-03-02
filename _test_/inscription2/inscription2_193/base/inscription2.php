@@ -11,12 +11,13 @@ function inscription2_declarer_tables_interfaces($interface){
 }
 
 function inscription2_declarer_tables_principales($tables_principales){
+	global $exceptions_des_champs_auteurs_elargis;
 	$spip_auteurs_elargis['id_auteur'] = "bigint(21) NOT NULL";
 		
 	if(function_exists('lire_config')){
 		foreach(lire_config('inscription2',array()) as $cle => $val) {
 			$cle = ereg_replace("_(obligatoire|fiche|table).*", "", $cle);
-			if($val!='' and $clef != 'login' and $cle != 'nom' and $cle != 'statut_nouveau' and $cle != 'email' and $cle != 'username' and $cle != 'statut_int'  and $cle != 'accesrestreint' and !ereg("^(categories|zone|newsletter).*$", $cle) ){
+			if($val!='' and !in_array($cle,$exceptions_des_champs_auteurs_elargis) and !ereg("^(categories|zone|newsletter).*$", $cle) ){
 				if($cle == 'naissance' )
 					$spip_auteurs_elargis[$cle] = "DATE DEFAULT '0000-00-00' NOT NULL";
 				elseif($cle == 'validite' )

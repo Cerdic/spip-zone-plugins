@@ -2,6 +2,24 @@
 
 include_spip('base/abstract_sql');
 
+// liste des champs pour lesquels on ne doit pas créer de champs dans la table spip_auteurs_elargis
+
+// Principalement les champs déjà présents dans spip_auteurs
+$exceptions_des_champs_auteurs_elargis[] = 'bio';
+$exceptions_des_champs_auteurs_elargis[] = 'nom';
+$exceptions_des_champs_auteurs_elargis[] = 'pass';
+$exceptions_des_champs_auteurs_elargis[] = 'login';
+$exceptions_des_champs_auteurs_elargis[] = 'email';
+$exceptions_des_champs_auteurs_elargis[] = 'statut';
+$exceptions_des_champs_auteurs_elargis[] = 'gpg';
+
+// Des choses spécifiques à inscription2
+$exceptions_des_champs_auteurs_elargis[] = 'username';
+$exceptions_des_champs_auteurs_elargis[] = 'statut_nouveau';
+$exceptions_des_champs_auteurs_elargis[] = 'statut_int';
+$exceptions_des_champs_auteurs_elargis[] = 'accesrestreint';
+$exceptions_des_champs_auteurs_elargis[] = 'password';
+
 //
 // <BOUCLE(AUTEURS)>
 //

@@ -3,7 +3,7 @@
 $GLOBALS['inscription2_version'] = 0.65;
 
 function inscription2_upgrade(){
-	
+	global $exceptions_des_champs_auteurs_elargis;
     include_spip('cfg_options');
 	
 	//On force le fait d accepter les visiteurs
@@ -241,7 +241,7 @@ function inscription2_upgrade(){
 				}elseif($val!='' and !isset($desc['field'][$cle]) and $cle == 'pays'){
 					spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." int NOT NULL");
 					$desc['field'][$cle] = " int NOT NULL";
-				}elseif($val!='' and !isset($desc['field'][$cle]) and $cle != 'statut_nouveau' and $cle != 'nom' and $cle != 'login' and $cle != 'email' and $cle != 'username' and $cle != 'statut_relances'  and $cle != 'accesrestreint'){
+				}elseif($val!='' and !isset($desc['field'][$cle]) and !in_array($cle,$exceptions_des_champs_auteurs_elargis)){
 					spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." text NOT NULL");
 					$desc['field'][$cle] = " text NOT NULL ";
 				}
