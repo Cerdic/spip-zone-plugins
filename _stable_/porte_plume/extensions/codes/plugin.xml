@@ -8,7 +8,7 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 	<etat>stable</etat>
     <description>
 Gestion de boutons pour ins&#233;rer du code informatique via la barre d'&#233;dition Porte Plume.
-Ajoute aussi un raccourci [?#trac].
+Ajoute aussi un raccourci &#91;&#63;ecrire/inc_versions.php#trac].
 	</description>
 	<prefix>pp_codes</prefix>
 	<fonctions>pp_codes_fonctions.php</fonctions>
