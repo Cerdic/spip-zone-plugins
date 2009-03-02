@@ -50,4 +50,26 @@ function TypoEnluminee_bt_paragraphes($params) {
     return $params;
 }
 
+function typoenluminee_porte_plume_barre_pre_charger($barres){
+	$barre = &$barres['edition'];
+	
+	// E majsucule accent grave
+	$barre->ajouterApres('E_aigu', array(
+		"id"          => 'E_grave',
+		"name"        => _T('enlumtypo:barre_e_accent_grave'),
+		"className"   => "outil_e_maj_grave",
+		"replaceWith"   => "&Egrave;",
+		"display"     => true,
+		"lang"    => array('fr','eo','cpf'),
+	));
+	
+	return $barres;
+}
+
+function typoenluminee_porte_plume_lien_classe_vers_icone($flux){
+	return array_merge($flux, array(
+		'outil_e_maj_grave' => 'eagrave-maj.png',
+	));
+}
+
 ?>

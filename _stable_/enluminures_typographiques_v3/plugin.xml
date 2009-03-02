@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Enluminures typographiques pour SPIP 2
+	Enluminures typographiques pour SPIP 2 &amp; Porte plume
 	</nom>
 	<auteur><!-- Auteur du plugin -->
 [Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_] &#224; partir des raccourcis mis en place par [Fran&#231;ois->http://www.spip-contrib.net/_Francois-Schreuer_]
@@ -65,7 +65,7 @@ Vous pouvez aussi installer le plugin cfg et utiliser [ecrire/?exec=cfg&amp;cfg=
 	ce parametre est obligatoire et doit etre non vide
 	-->
 	<prefix> 
-	TypoEnluminee
+	typoenluminee
 	</prefix>
 	<icon>
 	img_pack/moinecopiste.gif
@@ -100,19 +100,13 @@ Vous pouvez aussi installer le plugin cfg et utiliser [ecrire/?exec=cfg&amp;cfg=
 		<inclure>typoenluminee_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>bt_toolbox</nom>
+		<nom>porte_plume_barre_pre_charger</nom>
 		<inclure>enluminures_typo_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>bt_caracteres</nom>
+		<nom>porte_plume_lien_classe_vers_icone</nom>
 		<inclure>enluminures_typo_pipelines.php</inclure>
 	</pipeline>
-	<pipeline>
-		<nom>bt_paragraphes</nom>
-		<inclure>enluminures_typo_pipelines.php</inclure>
-	</pipeline>
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
-
 	<necessite id="SPIP" version="[2.0.3;]" />
 	<necessite id="porte_plume" version="[1.2.2;]" />
 </plugin>
