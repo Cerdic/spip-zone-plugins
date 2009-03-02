@@ -123,7 +123,7 @@ function spiplistes_upgrade_base (
 		
 		// si etait deja installe mais dans une vieille version, on reprend a zero
 		include_spip('base/abstract_sql');
-		$desc = sql_showtable("spip_listes");
+		$desc = sql_showtable("spip_listes",true);
 		if (!isset($desc['field']['id_liste']))
 			$current_version = 0.0;
 		if(
