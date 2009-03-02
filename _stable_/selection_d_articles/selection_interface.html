@@ -15,9 +15,8 @@
 <BOUCLE_selection(ARTICLES pb_selection){statut==prop|prepa|publie|refuse|poubelle}{par ordre}{spip_pb_selection.id_rubrique=#ENV{id_rubrique}}>
 
 
-
 	<tr class='tr_liste'>
-		[<td><img src="(#EVAL{puce_statut_article([(#ID_ARTICLE)], "[(#STATUT)]", "[(#STATUT)]", 'article') }|extraire_attribut{src}|url_absolue)" /></td>]
+		[<td><img src="(#EVAL{puce_statut_article_dist([(#ID_ARTICLE)], "[(#STATUT)]", "[(#ID_RUBRIQUE)]", 'article', 0) }|extraire_attribut{src}|url_absolue)" /></td>]
 
 		[(#EVAL{autoriser('modifier','rubrique', [(#ENV{id_rubrique})])==1}|?{" ",""})
 		<td>
