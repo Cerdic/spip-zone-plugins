@@ -8,7 +8,18 @@
 
 		if (!$l OR substr($l,0,1) == '#') return NULL; // commentaires
 
-		@list($src, $dest, $rev, $user) = explode(' ',$l);
+		$l = explode(' ',$l);
+		$src = array_shift($l);
+		$dest = array_shift($l);
+
+		// une revision est numerique ou parmi quelques valeurs connues
+		// sinon c'est une clause user
+		$rev = array_shift($l);
+		if (!is_numeric($rev) AND !in_array($rev,array('HEAD','BASE','COMMITED','PREV')))
+			array_unshift($l,$rev);
+
+		// la clause user est le reste
+		$user = join(' ',$l);
 
 		if (!preg_match(',^(https?|svn)://,', $src))
 			return $src; // erreur
