@@ -174,9 +174,11 @@ class Barre_outils{
 				
 		// recursivons sinon !
 		foreach ($tableau as $i=>$v){
-			foreach ($v as $m=>$n) {
-				if (is_array($n) AND ($r = $this->affecter($tableau[$i][$m], $identifiant, $params, $lieu))) 
-					return $r;
+			if (is_array($v)) {
+				foreach ($v as $m=>$n) {
+					if (is_array($n) AND ($r = $this->affecter($tableau[$i][$m], $identifiant, $params, $lieu))) 
+						return $r;
+				}
 			}
 		}
 		return false;
