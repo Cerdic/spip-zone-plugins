@@ -559,7 +559,7 @@ function spiplistes_format_abo_demande ($id_auteur) {
 	$result = false;
 	$sql_where = "id_auteur=".sql_quote($id_auteur);
 	if($id_auteur > 0) {
-		if(spiplistes_spip_est_inferieur_193()) {
+		if(!spiplistes_spip_est_inferieur_193()) {
 			$result = sql_getfetsel("`spip_listes_format`", "spip_auteurs_elargis", $sql_where, '', '', 1);
 		} else {
 			/*
