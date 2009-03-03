@@ -1,18 +1,4 @@
 <?php
-// toolbox pour les paragraphes
-function afficher_boutonsavances($champ, $champhelp, $num_barre) {
-	$reta = '';
-	$reta .= '&nbsp;'.bouton_barre_racc("barre_raccourci('[(',')]',$champ, $num_barre)", _DIR_BTE_IMG.'cadretexte.png', _T('enlumtypo:barre_encadrer'), $champhelp);
-	$reta .= '&nbsp;'.bouton_barre_racc("barre_raccourci('<del>','</del>',$champ, $num_barre)", _DIR_BTE_IMG.'text_strikethrough.png', _T('enlumtypo:barre_barre'), $champhelp);
-}
-
-// bouton qui controle la toolbox 'tableau_boutonsavances'
-function TypoEnluminee_bt_paragraphes($params) {
-	if(!$params['forum']) $params['flux'] .= 
-		bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_boutonsavances']."','');", _DIR_BTE_IMG.'avances.png', _T('enlumtypo:barre_boutonsavances'), $params['help']);
-    return $params;
-}
-
 function typoenluminee_porte_plume_barre_pre_charger($barres){
 	$barre = &$barres['edition'];
 	
