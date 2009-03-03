@@ -3,25 +3,19 @@
 [(#SET{logo, <img src='[(#CHEMIN{images/inscription2.png})]' width='64' height='64' alt='Hand writing' style="float:#LANG_RIGHT;" /> })]
 <!-- descriptif= [(#GET{logo})] Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site,vous pouvez choisir ici les champs suppl&eacute;mentaires
 
-<a href="?exec=inscription2_adherents"><:inscription2:liste_adherents:></a> 
+<a href="#URL_ECRIRE{inscription2_adherents}"><:inscription2:liste_adherents:></a> 
 
 	<ul>
 		<li><a href="#perso"><span>Perso</span></a></li>
 		<li><a href="#pro"><span>Pro</span></a></li>
-		[(#CONFIG{plugin/GEOMAP/version}|?{' '})
+		[(#CONFIG{plugin/GEOMAP/version}|oui)
 		<li><a href="#geo"><span>Geo</span></a></li>
 		]
-		[(#CONFIG{plugin/ECHOPPE/version}|?{' '})
+		[(#CONFIG{plugin/ECHOPPE/version}|oui)
 		<li><a href="#echoppe"><span>Echoppe</span></a></li>
 		]
 		<li><a href="#option"><span>Options</span></a></li>
 	</ul>
-	
-[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
-</div>
-#INCLURE{fond=inc/menu_abonnement_config}	
-<div>
-]
 -->
 
 #CACHE{0}

@@ -11,9 +11,6 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_spip('inc/presentation');
-include_spip('inc/acces');
-include_spip('inc/action');
 
 // http://doc.spip.org/@exec_legender_auteur_dist
 function exec_legender_auteur_supp_dist($id_auteur)
@@ -24,8 +21,7 @@ function exec_legender_auteur_supp_dist($id_auteur)
 	$echec = _request('echec');
 	$new = _request('new');
 
-	$s = sql_select("*","".$nom_table."","id_auteur=$id_auteur");
-	$auteur = sql_fetch($s);
+	$auteur = sql_getfetsel("id_auteur","".$nom_table."","id_auteur=$id_auteur");
 
 	if (!$auteur AND !$new) {
 		include_spip('inc/headers');

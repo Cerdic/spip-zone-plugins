@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function inc_legender_auteur_supp_dist($auteur){
-	if (!$auteur['id_auteur']) {
+function inc_legender_auteur_supp_dist($id_auteur){
+	if (!$id_auteur) {
 		if (_request('new') == 'oui') {
 			$new = true;
 		} else {
@@ -23,39 +23,33 @@ function inc_legender_auteur_supp_dist($auteur){
 	}
    
 	if (!$new) {
-		if (autoriser('modifier', 'auteur', $auteur['id_auteur'])) {
-			$auteur_infos_voir_supp = legender_auteur_supp_voir($auteur['id_auteur'], $redirect);
+		if (autoriser('modifier', 'auteur', $id_auteur)) {
+			$auteur_infos_voir_supp = legender_auteur_supp_voir($id_auteur, $redirect);
 		}
 	}
 	return $auteur_infos_voir_supp;
 }
 // La partie affichage du formulaire...
-function legender_auteur_supp_saisir($auteur){
+function legender_auteur_supp_saisir($id_auteur){
 	$exceptions_des_champs_auteurs_elargis = pipeline('I2_exceptions_des_champs_auteurs_elargis',array());
 
-	spip_log('INSCRIPTION 2 : saisir les infos de l auteur='.$auteur);
+	spip_log('INSCRIPTION 2 : saisir les infos de l auteur='.$id_auteur);
 	
-	$id_auteur = $auteur;
 	$corps_supp = '<li class="editer_inscription2 fieldset">';
 	$corps_supp .= '<fieldset><h3 class="legend">Inscription 2</h3>';
 	$corps_supp .= '<ul>';
 	
 	// Elaborer le formulaire
-	$var_user['b.id_auteur'] = $auteur;
+	$var_user[] = 'b.id_auteur';
 	foreach(lire_config('inscription2',array()) as $cle => $val){
 		$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
 		if($val=='on' AND !in_array($cle,$exceptions_des_champs_auteurs_elargis) and !ereg("^(categories|zone|newsletter).*$", $cle) ){
-			$var_user['b.'.$cle] = '1';
-			$champs[$cle] = '';
+			$var_user[] = 'b.'.$cle;
+			$champs[$cle];
 		}
 	}
-	
-	$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b USING(id_auteur)","a.id_auteur='$id_auteur'");
 
-	$query = sql_fetch($query);
-	if($query == NULL){
-		$query = $champs;
-	}
+	$query = sql_fetsel($var_user,"spip_auteurs a left join spip_auteurs_elargis b USING(id_auteur)","a.id_auteur='$id_auteur'");
 
 	foreach ($query as $cle => $val){
 		if(($cle!= 'id_auteur') AND !in_array($cle,$exceptions_des_champs_auteurs_elargis)){
@@ -73,7 +67,7 @@ function legender_auteur_supp_saisir($auteur){
 }
 
 // L'affichage des infos supplémentaires...
-function legender_auteur_supp_voir($auteur){
+function legender_auteur_supp_voir($id_auteur){
 	$exceptions_des_champs_auteurs_elargis = pipeline('I2_exceptions_des_champs_auteurs_elargis',array());
 	
 	$res = "<h2 class='titrem'>Inscription2</h2>";
@@ -83,26 +77,23 @@ function legender_auteur_supp_voir($auteur){
 
 	$id_auteur = _request('id_auteur');
 	
-	$var_user['a.id_auteur'] = '0';
+	$var_user[] = 'a.id_auteur';
 	foreach(lire_config('inscription2',array()) as $cle => $val){
 		$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
 		if($val == 'on' AND !in_array($cle,$exceptions_des_champs_auteurs_elargis) and !ereg("^(categories|zone|newsletter).*$", $cle) ){
-			$var_user['b.'.$cle] = '1';
+			$var_user[] = 'b.'.$cle;
 		}
 	}
-	$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b USING(id_auteur)","a.id_auteur= $id_auteur");
-
-	$query = sql_fetch($query);
+	$query = sql_fetsel($var_user,"spip_auteurs a left join spip_auteurs_elargis b USING(id_auteur)","a.id_auteur= $id_auteur");
 	
 	if($query['id_auteur'] == NULL){
 		$id_elargi = sql_insertq("spip_auteurs_elargis",array('id_auteur'=>$id_auteur));
 	}
+	
 	if(is_array($query)){
 		//Debut de l'affichage des données...
 		foreach ($query as $cle => $val){
-			if(($cle == 'id_auteur') || ($cle == 'login') || ($cle == 'nom') || ($cle == 'password') || ($cle == 'email') || ($cle == 'id_pays') || ($cle == 'id_pays_pro'))
-				continue;
-			elseif (strlen($val) >= 1){
+			if (!in_array($cle,$exceptions_des_champs_auteurs_elargis) AND (strlen($val) >= 1)){
 				if(find_in_path('prive/inscription2_vue_'.$cle.'.html')){
 					$res .= recuperer_fond('prive/inscription2_vue_'.$cle,array('cle'=>$cle,'val'=>$val,'id_auteur' => $id_auteur));
 				}else{

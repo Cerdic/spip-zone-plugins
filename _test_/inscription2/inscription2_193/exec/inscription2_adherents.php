@@ -8,6 +8,7 @@
 * Pour plus de details voir le fichier COPYING.txt.
 *  
 **/
+
 include_spip('public/assembler');
 function exec_inscription2_adherents() {
 
