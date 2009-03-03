@@ -99,12 +99,12 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 }
 /* next rows of buttons */
 .markItUp .markItUpHeader ul ul {
+	background-color: #eee;
 	display:none;
 	position:absolute;
 	top:24px; left:0px;	
 	padding-top:2px;
-	/*width:130px;*/
-	width:110px;
+	width:150px;
 }
 .markItUp .markItUpHeader ul ul li {
 	float:left;
