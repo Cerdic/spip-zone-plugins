@@ -79,22 +79,22 @@
 										</td>
 									</tr>
 									<tr>
-										<td class="label"><label><:inscription2:password:></label></td>
+										<td class="label"><label><:inscription2:pass:></label></td>
 										<td>
-											<input type="checkbox" name="password"[(#ENV{password}|=={on}|oui) checked="checked"] id="password" onclick="showoblig(this)" />
-											<div style="[(#CONFIG{inscription2/password}|=={on}|?{display: block;, display:none;})]">
-												<input type="checkbox" name="password_obligatoire" [checked="(#CONFIG{inscription2/password_obligatoire}?{checked})"] id="password_obligatoire" />
+											<input type="checkbox" name="pass"[(#ENV{pass}|=={on}|oui) checked="checked"] id="pass" onclick="showoblig(this)" />
+											<div style="[(#CONFIG{inscription2/pass}|=={on}|?{display: block;, display:none;})]">
+												<input type="checkbox" name="pass_obligatoire" [checked="(#CONFIG{inscription2/pass_obligatoire}?{checked})"] id="pass_obligatoire" />
 												<span style="color:red">*</span>
 											</div>
 										</td>
 										<td>
-											<input type="checkbox" name="password_fiche_mod" onclick="enadis(this,password_fiche)" [checked="(#ENV{password_fiche_mod}?{checked})"] id="password_fiche_mod" />
+											<input type="checkbox" name="pass_fiche_mod" onclick="enadis(this,pass_fiche)" [checked="(#ENV{pass_fiche_mod}?{checked})"] id="pass_fiche_mod" />
 										</td>
 										<td>
-											<input type="checkbox" name="password_fiche" disabled="disabled" id="password_fiche" />
+											<input type="checkbox" name="pass_fiche" disabled="disabled" id="pass_fiche" />
 										</td>
 										<td>
-											<input type="checkbox" name="password_table" disabled="disabled" id="password_table" />
+											<input type="checkbox" name="pass_table" disabled="disabled" id="pass_table" />
 										</td>
 									</tr>
 								</table>

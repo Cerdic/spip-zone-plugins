@@ -19,8 +19,6 @@ include_spip('inc/inscription2_form_fonctions');
 
 // chargement des valeurs par defaut des champs du formulaire
 function formulaires_inscription2_ajax_charger_dist($id_auteur = NULL){
-
-	global $tables_principales;
    
 	//initialise les variables d'environnement pas défaut
 	$valeurs = array();
@@ -31,6 +29,7 @@ function formulaires_inscription2_ajax_charger_dist($id_auteur = NULL){
 	//si on a bien un auteur alors on préremplit le formulaire avec ses informations
 	//les nom des champs sont les memes que ceux de la base de données
 	if (is_numeric($id_auteur)) {
+		
 		$auteur = sql_fetsel(
 			$champs,
 			'spip_auteurs LEFT JOIN spip_auteurs_elargis USING(id_auteur)',
@@ -56,6 +55,7 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 	
 	//initialise le tableau des erreurs
 	$erreurs = array();
+	
     //initilise le tableau de valeurs $champs => $valeur
     $valeurs = array();	
     
@@ -64,18 +64,18 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 
     //gere la correspondance champs -> _request(champs)
 	foreach(inscription2_champs_formulaire() as $clef => $valeur) {
-		$valeurs[$valeur] = _request($valeur);  
+		$valeurs[$valeur] = _request($valeur);
 	}		
 		
 	//verifier les champs obligatoires
 	foreach ($valeurs  as $champs => $valeur) {
-		if ((lire_config('inscription2/'.$champs.'_obligatoire') == 'on') && empty($valeur)) {
+		if ((lire_config('inscription2/'.$champs.'_obligatoire') == 'on') && (empty($valeur) OR (strlen(_request($champ)) == 0))) {
 			$erreurs[$champs] = _T('inscription2:champ_obligatoire');
-			if(is_numeric($id_auteur) && (lire_config('inscription2/password_fiche_mod') == 'on') && (strlen(_request('password')) == 0)){
+			if(is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') == 'on') && (strlen(_request('pass')) == 0)){
 				// Si le password est vide et que l'on est dans le cas de la modification d'un auteur
 	// 			On garde le pass original
 				spip_log("pass= $pass");
-				unset($erreurs['password']);
+				unset($erreurs['pass']);
 				$pass == 'ok';
 			}
 		}
@@ -85,15 +85,15 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 	//vérification des champs
 
 	// Sinon on le verifie
-	if(($pass != 'ok') && (lire_config('inscription2/password') == 'on')) {
+	if(($pass != 'ok') && (lire_config('inscription2/pass') == 'on')) {
 		
-		if($p = _request('password')) {
+		if($p = _request('pass')) {
 			if(strlen($p)){
 				if (strlen($p) < 6) {
-					$erreurs['password'] = _T('info_passe_trop_court');
+					$erreurs['pass'] = _T('info_passe_trop_court');
 					$erreurs['message_erreur'] .= _T('info_passe_trop_court')."<br />";
 				} elseif ($p != _request('password1')) {
-					$erreurs['password'] = _T('info_passes_identiques');
+					$erreurs['pass'] = _T('info_passes_identiques');
 					$erreurs['message_erreur'] .= _T('info_passes_identiques')."<br />";
 				}
 			}else{
@@ -101,7 +101,7 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 					// Si on est dans la modif d'id_auteur on garde l'ancien pass si rien n'est rentré
 					// donc on accepte la valeur vide
 					// dans le cas de la création d'un auteur ... le password sera nécessaire
-					$erreurs['password'] = _T('inscription2:password_obligatoire');
+					$erreurs['pass'] = _T('inscription2:password_obligatoire');
 				}
 			}
 		}
@@ -177,14 +177,14 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 	spip_log('traiter','inscription2');
 	global $tables_principales;
 	
-	if((is_numeric($id_auteur) && (lire_config('inscription2/password_fiche_mod') != 'on'))
-		OR (is_numeric($id_auteur) && (lire_config('inscription2/password_fiche_mod') == 'on')) && (strlen(_request('password')) == 0)){
+	if((is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') != 'on'))
+		OR (is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') == 'on')) && (strlen(_request('pass')) == 0)){
 		$mode = 'modification_auteur_simple';
 	}
-	else if((is_numeric($id_auteur) && (lire_config('inscription2/password_fiche_mod') == 'on'))){
+	else if((is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') == 'on'))){
 		$mode = 'modification_auteur_pass';
 	}
-	else if((lire_config('inscription2/password') == 'on') && (strlen(_request('password')))){
+	else if((lire_config('inscription2/pass') == 'on') && (strlen(_request('pass')))){
 		$mode = 'inscription_pass';
 	}
 	else{
@@ -225,7 +225,7 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 	
 	//Vérification du password
 	if($mode == ('inscription_pass' || 'modification_auteur_pass')){
-		$new_pass = _request('password');
+		$new_pass = _request('pass');
 		if (strlen($new_pass)) {
 			include_spip('inc/acces');
 			$htpass = generer_htpass($new_pass);
