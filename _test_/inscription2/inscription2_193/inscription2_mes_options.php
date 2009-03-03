@@ -3,6 +3,7 @@
 include_spip('base/abstract_sql');
 
 $GLOBALS['spip_pipeline']['I2_exceptions_des_champs_auteurs_elargis'] = '';
+$GLOBALS['spip_pipeline']['i2_validation_formulaire'] = '';
 
 //
 // <BOUCLE(AUTEURS)>

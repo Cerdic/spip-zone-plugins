@@ -73,7 +73,7 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 			$erreurs[$champs] = _T('inscription2:champ_obligatoire');
 			if(is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') == 'on') && (strlen(_request('pass')) == 0)){
 				// Si le password est vide et que l'on est dans le cas de la modification d'un auteur
-	// 			On garde le pass original
+				// On garde le pass original
 				spip_log("pass= $pass");
 				unset($erreurs['pass']);
 				$pass == 'ok';
@@ -106,6 +106,7 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 			}
 		}
 	}
+	
 	//messages d'erreur au cas par cas (CODE POSTAL)
     //liste des champs de type code postal
 	$champs_code_postal = array('code_postal','code_postal_pro');
@@ -133,17 +134,17 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 	        }		
 	    }
 	}
-	
-	   
-	//Offrir aux autres plugins de vérifier les données
-	$erreurs_plugin = pipeline('i2_validation_formulaire',
+
+	//Offrir aux autres plugins la possibilité de vérifier les données
+	$erreurs = pipeline('i2_validation_formulaire',
 		array(
 			'args' => array(
 			    'champs' => $valeurs
 			),
-		'data' => null
+		'data' => $erreurs
 		)
 	);
+	
 	
 	//verifier que l'auteur a bien des droits d'edition
 	if (is_numeric($id_auteur)) {
@@ -162,11 +163,10 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 			$erreurs['login'] = _T('inscription2:formulaire_login_deja_utilise');
 		}
 	}
-	spip_log($erreurs,'inscription2');
 	
 	//message d'erreur generalise
 	if (count($erreurs)) {
-		spip_log("$erreurs","inscription2");
+		spip_log($erreurs,"inscription2");
 		$erreurs['message_erreur'] .= _T('inscription2:formulaire_remplir_obligatoires');
 	}
 	
