@@ -1,4 +1,4 @@
-<?
+<?php
 
 //ajout d'un critére branchemot basé sur critére branche
 // {branchemot ?}
