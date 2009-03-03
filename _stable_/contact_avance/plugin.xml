@@ -1,0 +1,14 @@
+<plugin>
+  <nom>Formulaire de contact avanc&eacute;</nom>
+  <auteur>RastaPopoulos</auteur>
+  <icon>images/contact-128.png</icon>
+  <licence>GPL v3</licence>
+  <version>0.1</version>
+  <etat>dev</etat>
+  <description>Cette extension propose un formulaire de contact avec de multiples options.</description>
+  <lien>http://www.spip-contrib.net/Formulaire-de-contact-avance</lien>
+  <fonctions>contactavance_fonctions.php</fonctions>
+  <prefix>contactavance</prefix>
+  <necessite id='SPIP' version='[2.0.0;]' />
+  <necessite id="spip_bonux" version="[1.2;]" />
+</plugin>

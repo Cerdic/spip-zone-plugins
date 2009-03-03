@@ -1,0 +1,37 @@
+<!-- titre=<:contactavance:titre:> -->
+<!-- icone=images/contact-24.png -->
+
+<div class="formulaire_spip formulaire_editer">
+<form method="post" action="#SELF">
+		[(#ENV{_cfg_}|form_hidden)]
+	
+	<ul>
+		<li class="editer_texte">
+			<label for="choix_destinataires"><:contactavance:configuration_destinataires:></label>
+			<p class="explication"><:contactavance:configuration_destinataires_explication:></p>
+			<B_auteurs>
+			<select name="choix_destinataires[]" id="choix_destinataires" multiple="multiple" size="5">
+			<BOUCLE_auteurs(AUTEURS){tous}>
+			<option value="#ID_AUTEUR" [(#ID_AUTEUR|in_array{#ENV{choix_destinataires,#ARRAY}}|oui)selected="selected"]>
+				#NOM
+			</option>
+			</BOUCLE_auteurs>
+			</select>
+			</B_auteurs>
+		</li>
+		<li class="choix">
+			<input type="checkbox" name="plusieurs_destinataires" id="plusieurs_destinataires" value="oui"[ checked="checked"(#ENV{plusieurs_destinataires}|=={oui}|oui)] />
+			<label for="plusieurs_destinataires"><:contactavance:configuration_plusieurs_destinataires:></label>
+		</li>
+		<li class="editer_texte">
+			<label for="texte"><:contactavance:configuration_intro:></label>
+			<p class="explication"><:contactavance:configuration_intro_explication:></p>
+			<textarea name="texte" id="texte" rows="10">#ENV{texte}</textarea>
+		</li>
+		<li class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:oK:>" />
+			<input type="submit" name="_cfg_delete" value="<:supprimer:>" />
+		</li>
+	</ul>
+</form>
+</div>
