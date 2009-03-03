@@ -141,18 +141,20 @@
         </xsl:choose>
 </xsl:variable>
 
+
+<!-- traitement de l'ensemble du doc -->
 <xsl:template match="/office:document-content">
-<!--  -->
+<!--  test niveaux de titres
 t1= <xsl:value-of select="$NivoTitre1" />
 t2= <xsl:value-of select="$NivoTitre2" />
 t3= <xsl:value-of select="$NivoTitre3" />
 tG= <xsl:value-of select="$StyleTitreGeneral" />
-
+-->
 <articles>
 	<article>
 		<id_article></id_article>
 		<surtitre></surtitre>
-    <titre>:::<xsl:value-of select="$ContenuTitreDoc"/>:::</titre>
+    <titre><xsl:value-of select="$ContenuTitreDoc"/></titre>
 		<soustitre></soustitre>
 		<id_rubrique></id_rubrique>
 		<descriptif></descriptif>
@@ -180,8 +182,8 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
 </xsl:template>
 
 
-<!-- virer une eventuelle table des matieres -->
-<xsl:template match="//text:table-of-content"/>
+<!-- virer les eventuels table des matieres et index -->
+<xsl:template match="//text:table-of-content | //text:alphabetical-index"/>
 
 
 <!-- les paragraphes y compris les vides utilises pour saut de ligne -->
@@ -191,14 +193,14 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
 </xsl:template>
 
 
-<!-- bidouiller pour ne pas afficher le titre du document dans le texte -->
+<!-- bidouiller pour ne pas afficher le titre du document dans le texte (part 1) -->
 <xsl:template match="//*[@text:style-name='Heading']"/>
 
 <!-- les titres de façon dynamique en fonction des niveaux presents dans le fichier  -->
 <xsl:template match="//*[node()][@text:outline-level] 
                      | //*[node()][starts-with(@text:style-name,'Heading_20_')]">
-<!-- bidouiller pour ne pas afficher le titre du document dans le texte -->
     <xsl:choose>
+<!-- suite de la bidouille pour ne pas afficher le titre du document dans le texte -->
         <xsl:when test="not($StyleTitreGeneral='Heading') and text()=$ContenuTitreDoc"/>
         <xsl:otherwise>
             <xsl:call-template name="titres"/>
@@ -210,7 +212,7 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
 <!-- si $NivoTitre3 existe, décaler les niveaux puisqu'il n'existe pas de $StyleTitreGeneral et qu'il n'y a qu'un $NivoTitre1 -->
     <xsl:variable name="NivoTitre1_ec">
       <xsl:choose>
-          <xsl:when test="$NivoTitre3 = ''">
+          <xsl:when test="$NivoTitre3=''">
             <xsl:value-of select="$NivoTitre1"/>
           </xsl:when>
           <xsl:otherwise>
@@ -220,7 +222,7 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
     </xsl:variable>
     <xsl:variable name="NivoTitre2_ec">
       <xsl:choose>
-          <xsl:when test="$NivoTitre3 = ''">
+          <xsl:when test="$NivoTitre3=''">
             <xsl:value-of select="$NivoTitre2"/>
           </xsl:when>
           <xsl:otherwise>
@@ -231,10 +233,10 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
 <!-- appliquer les formatage des titres -->
 <xsl:text >&#xA;</xsl:text>
 		<xsl:choose>
-			<xsl:when test="@text:outline-level='$NivoTitre1_ec' or @text:style-name=concat('Heading_20_',$NivoTitre1_ec)">
+			<xsl:when test="@text:outline-level=$NivoTitre1_ec or @text:style-name=concat('Heading_20_',$NivoTitre1_ec)">
 {{{<xsl:apply-templates/>}}}
         </xsl:when>
-			<xsl:when test="@text:outline-level='$NivoTitre2_ec' or @text:style-name=concat('Heading_20_',$NivoTitre2_ec)">
+			<xsl:when test="@text:outline-level=$NivoTitre2_ec or @text:style-name=concat('Heading_20_',$NivoTitre2_ec)">
 {{<xsl:apply-templates/>}}
         </xsl:when>
 			<xsl:otherwise>
@@ -260,7 +262,7 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
-	
+
 	<!-- choisir le bon type de liste en fonction du <text:list-level-style-XXX> du  <text:list-style> dans les styles pre-definis
 	<xsl:variable name="node" select="key('listTypes', $listClass)/*[@text:level='$level']"/>  -->
   <xsl:variable name="node" select="/office:document-content/office:automatic-styles/text:list-style[@style:name=$listClass]/*[1]"/>  
@@ -271,7 +273,7 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
    		<xsl:otherwise>*</xsl:otherwise>
     </xsl:choose>
   </xsl:variable>
-  
+<!-- -->
   <xsl:call-template name="process-list">
     <xsl:with-param name="s" select="$s"/>
 	</xsl:call-template>
@@ -281,7 +283,7 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
 
 <xsl:template name="process-list"> 
   <xsl:param name="s"/>
-  <xsl:for-each select="descendant::text:list-item/text:p">
+  <xsl:for-each select="descendant::text:list-item/text:p[node()]">
 -<xsl:for-each select="ancestor::*"><!-- gestion des listes imbriquées -->
         <xsl:if test="name()='text:list-item'"><xsl:value-of select="$s"/></xsl:if>
 </xsl:for-each> 
@@ -293,13 +295,14 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
 <!-- traitement des tableaux -->
 <xsl:template match="table:table">
 <xsl:text >&#xA;</xsl:text>
-		<xsl:apply-templates select="table:table-row"/>
+		<xsl:apply-templates select="table:table-row | */table:table-row"/>
 <xsl:text >&#xA;</xsl:text>        
 </xsl:template>
 
-<xsl:template match="table:table-row">
+<xsl:template match="table:table-row | */table:table-row">
 <xsl:text >&#xA;</xsl:text>|<xsl:choose>
-   <xsl:when test="position() = 1">
+<!-- si c'est la premiere ligne *et* qu'il n'y a as de cellules fusionnees verticalement utiliser {{ }} pour faire un thead -->
+   <xsl:when test="position()=1 and count(table:table-cell[@table:number-rows-spanned])=0">
        <xsl:apply-templates select="table:table-cell | table:covered-table-cell" mode="thead"/>
    </xsl:when>
    <xsl:otherwise>
@@ -308,8 +311,8 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
 </xsl:choose>
 </xsl:template>
 
-<xsl:template match="table:table-cell" mode="thead">{{<xsl:apply-templates/>}}|</xsl:template>
-<xsl:template match="table:table-cell" mode="tbody"><xsl:apply-templates/>|</xsl:template>
+<xsl:template match="table:table-cell" mode="thead">{{<xsl:apply-templates select="*[node()]"/>}}|</xsl:template>
+<xsl:template match="table:table-cell" mode="tbody"><xsl:apply-templates select="*[node()]"/>|</xsl:template>
 
 <!-- ca c'est la mauvaise bidouille pour avoir le meme traitement pour les cellules de fusion alors qu'elles ont un mode different -->
 <xsl:template match="table:covered-table-cell" mode="thead"><xsl:call-template name="cells_fusionnees"/></xsl:template>
@@ -367,7 +370,10 @@ _ <xsl:apply-templates />
 <!-- nettement plus bricolage : les images... 
      on met le nom de fichier de l'image qu'il faudra echanger en php par son id document spip une fois qu'il sera reference dans la table document -->	
 <xsl:template match="draw:image">
-   <xsl:call-template name="img2texte" />
+<!-- on filtre les elements draw:image qui ont un frere draw:object cad qui ne sont pas des images -->   
+   <xsl:if test="count(parent::draw:frame/draw:object)=0">
+      <xsl:call-template name="img2texte" />
+   </xsl:if>
 </xsl:template>
 
 <xsl:template name="img2texte">&#60;img<xsl:value-of select="substring(@xlink:href,10)"/>;;;<xsl:value-of select="substring-before(parent::draw:frame/@svg:width,'cm')" />;;;<xsl:value-of select="substring-before(parent::draw:frame/@svg:height,'cm')" />;;;|<xsl:choose>
