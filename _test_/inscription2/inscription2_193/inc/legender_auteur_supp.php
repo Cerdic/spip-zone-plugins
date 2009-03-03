@@ -31,8 +31,10 @@ function inc_legender_auteur_supp_dist($auteur){
 }
 // La partie affichage du formulaire...
 function legender_auteur_supp_saisir($auteur){
+	$exceptions_des_champs_auteurs_elargis = pipeline('I2_exceptions_des_champs_auteurs_elargis',array());
+
+	spip_log('INSCRIPTION 2 : saisir les infos de l auteur='.$auteur);
 	
-	spip_log('saisir les infos de l auteur='.$auteur);
 	$id_auteur = $auteur;
 	$corps_supp = '<li class="editer_inscription2 fieldset">';
 	$corps_supp .= '<fieldset><h3 class="legend">Inscription 2</h3>';
@@ -40,17 +42,11 @@ function legender_auteur_supp_saisir($auteur){
 	
 	// Elaborer le formulaire
 	$var_user['b.id_auteur'] = $auteur;
-	$var_user['a.login'] = '0';
 	foreach(lire_config('inscription2',array()) as $cle => $val){
-		if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut_nouveau'){
-			$cle = ereg_replace("^username.*$", "login", $cle);
-			$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
-			if($cle == 'nom' or $cle == 'email' or $cle == 'login' or $cle == 'password'){
-			}
-			else{
-				$var_user['b.'.$cle] = '1';
-				$champs[$cle] = '';
-			}
+		$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
+		if($val=='on' AND !in_array($cle,$exceptions_des_champs_auteurs_elargis) and !ereg("^(categories|zone|newsletter).*$", $cle) ){
+			$var_user['b.'.$cle] = '1';
+			$champs[$cle] = '';
 		}
 	}
 	
@@ -62,9 +58,7 @@ function legender_auteur_supp_saisir($auteur){
 	}
 
 	foreach ($query as $cle => $val){
-		if(($cle == 'login') || ($cle == 'nom') || ($cle == 'email') || ($cle == 'password')){
-		}
-		elseif($cle!= 'id_auteur' and $cle != 'statut_nouveau'){
+		if(($cle!= 'id_auteur') AND !in_array($cle,$exceptions_des_champs_auteurs_elargis)){
 			if(find_in_path('prive/inscription2_champs_'.$cle.'.html')){
 				$corps_supp .= recuperer_fond('prive/inscription2_champs_'.$cle,array('cle'=>$cle,'val'=>$val,'id_auteur' => $id_auteur));
 			}else{
@@ -80,6 +74,8 @@ function legender_auteur_supp_saisir($auteur){
 
 // L'affichage des infos supplémentaires...
 function legender_auteur_supp_voir($auteur){
+	$exceptions_des_champs_auteurs_elargis = pipeline('I2_exceptions_des_champs_auteurs_elargis',array());
+	
 	$res = "<h2 class='titrem'>Inscription2</h2>";
 
 	$res .= "<div class='nettoyeur'></div>";
@@ -89,34 +85,29 @@ function legender_auteur_supp_voir($auteur){
 	
 	$var_user['a.id_auteur'] = '0';
 	foreach(lire_config('inscription2',array()) as $cle => $val){
-		if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut_nouveau'){
-			$cle = ereg_replace("^username.*$", "login", $cle);
-			$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
-			if($cle == 'nom' or $cle == 'email' or $cle == 'login' or $cle == 'password' or $cle == 'id_auteur'){
-				
-			}
-			elseif(ereg("^statut_rel.*$", $cle))
-				$var_user['b.statut_relances'] = '1';
-			else 
-				$var_user['b.'.$cle] = '1';
+		$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
+		if($val == 'on' AND !in_array($cle,$exceptions_des_champs_auteurs_elargis) and !ereg("^(categories|zone|newsletter).*$", $cle) ){
+			$var_user['b.'.$cle] = '1';
 		}
 	}
-	$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur","a.id_auteur= $id_auteur");
+	$query = sql_select(join(', ', array_keys($var_user)),"spip_auteurs a left join spip_auteurs_elargis b USING(id_auteur)","a.id_auteur= $id_auteur");
 
 	$query = sql_fetch($query);
 	
 	if($query['id_auteur'] == NULL){
 		$id_elargi = sql_insertq("spip_auteurs_elargis",array('id_auteur'=>$id_auteur));
 	}
-	//Debut de l'affichage des données...
-	foreach ($query as $cle => $val){
-		if(($cle == 'id_auteur') || ($cle == 'login') || ($cle == 'nom') || ($cle == 'password') || ($cle == 'email') || ($cle == 'id_pays') || ($cle == 'id_pays_pro'))
-			continue;
-		elseif (strlen($val) >= 1){
-			if(find_in_path('prive/inscription2_vue_'.$cle.'.html')){
-				$res .= recuperer_fond('prive/inscription2_vue_'.$cle,array('cle'=>$cle,'val'=>$val,'id_auteur' => $id_auteur));
-			}else{
-				$res .= "<p><strong>"._T('inscription2:'.$cle)." : </strong>" . typo($val) . "</p>";	
+	if(is_array($query)){
+		//Debut de l'affichage des données...
+		foreach ($query as $cle => $val){
+			if(($cle == 'id_auteur') || ($cle == 'login') || ($cle == 'nom') || ($cle == 'password') || ($cle == 'email') || ($cle == 'id_pays') || ($cle == 'id_pays_pro'))
+				continue;
+			elseif (strlen($val) >= 1){
+				if(find_in_path('prive/inscription2_vue_'.$cle.'.html')){
+					$res .= recuperer_fond('prive/inscription2_vue_'.$cle,array('cle'=>$cle,'val'=>$val,'id_auteur' => $id_auteur));
+				}else{
+					$res .= "<p><strong>"._T('inscription2:'.$cle)." : </strong>" . typo($val) . "</p>";	
+				}
 			}
 		}
 	}
