@@ -159,7 +159,7 @@ function agenda_memo_evt_full($date_deb=0, $date_fin=0 , $titre='', $descriptif=
 	$ts_startday1=strtotime($startday1);
 	$ts_date_fin=strtotime($date_fin);
 	$maxdays=365;
-	while (($ts_startday1<$ts_date_fin)&&($maxdays-->0))
+	while (($ts_startday1<=$ts_date_fin)&&($maxdays-->0))
 	{
 		$day=date('Y-m-d H:i:s',$ts_startday1);
 		$evenements[$cal][(date_anneemoisjour($day))][] =  array(
