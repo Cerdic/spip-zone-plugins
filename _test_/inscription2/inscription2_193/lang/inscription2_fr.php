@@ -164,6 +164,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'page_confirmation' => 'Page de confirmation de votre inscription',
 	'par_defaut' => 'Ce champs est obligatoire',
+	'pass' => 'Mot de passe',
 	'pass_egal' => 'Veuillez entrer le m&ecirc;me mot de passe que pr&eacute;c&eacute;demment.',
 	'pass_indiquez_cidessous' => 'Indiquez ci-dessous l\'adresse email sous laquelle vous
 			vous &ecirc;tes pr&eacute;c&eacute;demment enregistr&eacute;. Vous
@@ -172,7 +173,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pass_minimum' => 'Votre mot de passe doit comporter au moins 5 caract&egrave;res',
 	'pass_oubli_mot' => 'Changement de votre mot de passe',
 	'pass_recevoir_mail' => 'Vous allez recevoir un email vous indiquant comment modifier votre acc&egrave;s au site.',
-	'pass' => 'Mot de passe',
 	'password_obligatoire' => 'Le mot de passe est obligatoire.',
 	'password_retaper' => 'Confirmez le mot de passe',
 	'pays' => 'Pays',
