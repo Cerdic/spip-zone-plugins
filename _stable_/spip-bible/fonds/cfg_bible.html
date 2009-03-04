@@ -228,6 +228,18 @@
 						</select>
 				
 			</li><li>
+					<label for="traduction_bg"><:bible:cfg_traduction_bg:></label>
+					<select name="traduction_bg"  id="traduction_bg"><option value="bb" [selected="(#ENV{traduction_bg}|=={bb})"]>
+				Bulgarian Bible
+						
+						</option>
+						<option value="bb40" [selected="(#ENV{traduction_bg}|=={bb40})"]>
+				1940 Bulgarian Bible
+						
+						</option>
+						</select>
+				
+			</li><li>
 					<label for="numeros"><:bible:cfg_numeros:></label>
 					<input type="checkbox" name="numeros"  id="numeros" [checked="(#ENV{numeros})"]  value="oui" />
 				
@@ -253,5 +265,3 @@
 </fieldset></li>
 </form>
 </div>
-			
-			

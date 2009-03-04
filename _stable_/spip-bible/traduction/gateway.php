@@ -1,5 +1,11 @@
 <?php
-function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapitre_fin='',$verset_fin='',$id_trad,$lang){
+function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapitre_fin='',$verset_fin='',$gateway,$lang){
+	
+	$id_trad = $gateway[0];
+	$nom_trad = $gateway[1];
+	
+	
+	
 	$verset_debut=='' ? $verset_debut = 1 : $verset_debut = $verset_debut;
 	//reperer le numero de livre
 	include_spip('inc/bible_tableau');
@@ -20,6 +26,7 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 	
 	$livre_gateways = bible_tableau('gateway');
 	$livre_gateway =$livre_gateways[$lang];	
+	
 	foreach ($livre_gateway as $li=>$id){	
 		if (strtolower($li)==strtolower($livre)){
 			$livre=$id;
@@ -41,10 +48,10 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 		
 		$url = 'http://www.biblegateway.com/passage/?book_id='.$livre.'&version='.$id_trad.'&chapter='.$i;
 				
-		$i == $chapitre_debut ? $verset_debut = $verset_debut : $verset_debut = 1;
+		$i == $chapitre_debut ? $verset_debut = $verset_debut : $verset_debut = 1;        
+		
 		
 		$code = importer_charset(recuperer_page($url,'utf-8'));
-	
 		$tableau = explode('<div class="result-text-style-normal">',$code);
 		$code=$tableau[1];
 		$tableau = explode('</div',$code);
@@ -82,23 +89,33 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 		$code = str_replace(' class="sup">',"><sup>",$code);
 		$code = str_replace('</span>',' </sup>',$code);
 		$code = strip_tags($code,'<sup><br>');
+		
 		if ($verset_fin!=''){
 		//selection des verset
-		
-			$tableau 	= explode('<sup>'.$verset_debut.' </sup>',$code);
+		    $sup = '<sup id="'.$lang.'-'.$nom_trad.'-'.$verset_debut.'" class="versenum" value=\''.$verset_debut."'>".$verset_debut.'</sup>';
+		   
+           // $code = str_replace ($sup,'|',$code);
+            
+            $tableau 	= explode($sup,$code);
+			
+			
 			$code  		=  '<sup>'.$verset_debut.' </sup>'.$tableau[1];
 			
 			if ($i == $chapitre_fin){
 				$v = $verset_fin+1;
-				$tableau 	= explode('<sup>'.$v.' </sup>',$code);
+				 $sup = '<sup id="'.$lang.'-'.$nom_trad.'-'.$v.'" class="versenum" value=\''.$v."'>".$v.'</sup>';
+				$tableau 	= explode($sup,$code);
+				
 				$code  		= trim($tableau[0]);
+				
 				}
 			
 			
 			
 		}
+		
 		$texte .= '<strong>'.$i.'</strong>'.$code;
-			
+
 		$i++;
 		}
 	
