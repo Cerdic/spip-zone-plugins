@@ -118,8 +118,8 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 
 		$i++;
 		}
-	
-	 return eregi_replace('\[[a-z]*\]','',str_replace(' <br />&nbsp;&nbsp;  <br />','<br />',str_replace('<br /><br /><strong>','<br /><strong>',str_replace('<br />&nbsp;','<br />',str_replace('</strong> <br />&nbsp;','</strong>',$texte)))));
+	$texte = vider_attribut(vider_attribut($texte,'class'),'value');
+	 return eregi_replace('<sup>\[[a-z]*\]</sup>','',str_replace(' <br />&nbsp;&nbsp;  <br />','<br />',str_replace('<br /><br /><strong>','<br /><strong>',str_replace('<br />&nbsp;','<br />',str_replace('</strong> <br />&nbsp;','</strong>',$texte)))));
 	
 }
 
