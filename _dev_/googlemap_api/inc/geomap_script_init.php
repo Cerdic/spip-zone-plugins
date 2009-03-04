@@ -31,7 +31,7 @@ function inc_geomap_script_init_dist(){
 		}
 		$out = '
 		<script type="text/javascript" src="'.$geomap.'"></script>
-		<script type="application/javascript">/*<![CDATA[*/ '.$gmap_script.' /*]]>*/</script>';
+		<script type="text/javascript">/*<![CDATA[*/ '.$gmap_script.' /*]]>*/</script>';
 	}
 	
 	if (function_exists('lire_config') && lire_config("geomap/custom_control") != 'non'){
