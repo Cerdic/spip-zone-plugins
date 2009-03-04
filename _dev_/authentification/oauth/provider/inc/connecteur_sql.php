@@ -1,8 +1,10 @@
 <?php
 
     function connecteur_sql($serveur = 'MySQL') {
-        include_spip('inc/library/OAuthStore');
-    
+
+        if (function_exists(include_spip))
+            include_spip('inc/library/OAuthStore');
+
         #Pamètres de connexion à la base de données
         #$options['conn'] = ;
         $options['server'] = '127.0.0.1';
