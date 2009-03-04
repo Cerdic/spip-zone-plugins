@@ -21,7 +21,7 @@ _ Donnons a spip le moyen de donner des autorisation d'acces
 	</description>
 	<lien>	</lien>
 
-<!-- <install>base/poauth_install.php</install>
+    <install>base/poauth_install.php</install>
 
     <pipeline>
         <nom>declarer_tables_principales</nom>
@@ -31,7 +31,6 @@ _ Donnons a spip le moyen de donner des autorisation d'acces
         <nom>declarer_tables_interfaces</nom>
         <inclure>base/poauth.php</inclure>
     </pipeline>    
--->
 
 	<prefix>
     	poauth

@@ -26,9 +26,9 @@ function poauth_upgrade($nom_meta_base_version,$version_cible){
 }
 
 function poauth_vider_tables($nom_meta_base_version) {
-    sql_drop_table('oauth_server_registry');
-    sql_drop_table('oauth_server_token');
-    sql_drop_table('oauth_server_none');    
+    sql_drop_table('spip_oauth_server_registry');
+    sql_drop_table('spip_oauth_server_token');
+    sql_drop_table('spip_oauth_server_nonce');    
 	effacer_meta($nom_meta_base_version);
 }
 	

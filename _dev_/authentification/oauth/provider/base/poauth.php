@@ -33,7 +33,7 @@ function poauth_declarer_tables_principales($tables_principales){
     $osr_join = array(
     );
 
-    $tables_principales['oauth_server_registry'] =  array(
+    $tables_principales['spip_oauth_server_registry'] =  array(
         'field' => &$osr_field, 
         'key' => &$osr_key, 
         'join'=>&$osr_join
@@ -59,7 +59,7 @@ function poauth_declarer_tables_principales($tables_principales){
     $osn_join = array(
     );
 
-    $tables_principales['oauth_server_nonce'] =  array(
+    $tables_principales['spip_oauth_server_nonce'] =  array(
         'field' => &$osn_field, 
         'key' => &$osn_key, 
         'join'=>&$osn_join
@@ -78,7 +78,7 @@ function poauth_declarer_tables_principales($tables_principales){
         "ost_token_type" => "enum('request','access')",
         "ost_authorized" => "tinyint(1) not null default '0'",
 	    "ost_referrer_host" => "VARCHAR(128) not null",
-        "ost_timetstamp" => "TIMESTAMP not null default CURRENT_TIMESTAMP"
+        "ost_timestamp" => "TIMESTAMP not null default CURRENT_TIMESTAMP"
     );
     
     $ost_key = array(
@@ -91,10 +91,10 @@ function poauth_declarer_tables_principales($tables_principales){
     $ost_join = array(
     );
 
-    $tables_principales['oauth_server_token'] =  array(
-        'field' => &$osn_field, 
-        'key' => &$osn_key, 
-        'join'=>&$osn_join
+    $tables_principales['spip_oauth_server_token'] =  array(
+        'field' => &$ost_field, 
+        'key' => &$ost_key, 
+        'join'=>&$ost_join
     );
 
 
@@ -106,7 +106,8 @@ function poauth_declarer_tables_principales($tables_principales){
 
 function poauth_declarer_tables_interfaces($interface) {
     $interface['table_des_tables']['oauth_server_registry']='oauth_server_registry';
-    $interface['table_des_tables']['oauth_server_none']='oauth_server_none';
+    $interface['table_des_tables']['oauth_server_nonce']='oauth_server_nonce';
     $interface['table_des_tables']['oauth_server_token']='oauth_server_token';        
     return $interface;
 }
+?>

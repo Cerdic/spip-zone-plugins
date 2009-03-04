@@ -118,7 +118,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 						SELECT	osr_id, 
 								osr_consumer_key		as consumer_key,
 								osr_consumer_secret		as consumer_secret
-						FROM oauth_server_registry
+						FROM spip_oauth_server_registry
 						WHERE osr_consumer_key	= \'%s\'
 						  AND osr_enabled		= 1
 						', 
@@ -142,8 +142,8 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 								osr_consumer_secret		as consumer_secret,
 								ost_token				as token,
 								ost_token_secret		as token_secret
-						FROM oauth_server_registry
-								JOIN oauth_server_token
+						FROM spip_oauth_server_registry
+								JOIN spip_oauth_server_token
 								ON ost_osr_id_ref = osr_id
 						WHERE ost_token_type	= \'%s\'
 						  AND osr_consumer_key	= \'%s\'
@@ -200,8 +200,8 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 							oct_token				as token,
 							oct_token_secret		as token_secret,
 							ocr_signature_methods	as signature_methods
-					FROM oauth_consumer_registry
-						JOIN oauth_consumer_token ON oct_ocr_id_ref = ocr_id
+					FROM spip_oauth_consumer_registry
+						JOIN spip_oauth_consumer_token ON oct_ocr_id_ref = ocr_id
 					WHERE ocr_server_uri_host = \'%s\'
 					  AND ocr_server_uri_path = LEFT(\'%s\', LENGTH(ocr_server_uri_path))
 					  AND (ocr_usa_id_ref = %s OR ocr_usa_id_ref IS NULL)
@@ -249,8 +249,8 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 							ocr_request_token_uri	as request_token_uri,
 							ocr_authorize_uri		as authorize_uri,
 							ocr_access_token_uri	as access_token_uri
-					FROM oauth_consumer_registry
-							JOIN oauth_consumer_token
+					FROM spip_oauth_consumer_registry
+							JOIN spip_oauth_consumer_token
 							ON oct_ocr_id_ref = ocr_id
 					WHERE ocr_consumer_key = \'%s\'
 					  AND oct_token_type   = \'%s\'
@@ -296,7 +296,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 
 		$ocr_id = $this->query_one('
 					SELECT ocr_id
-					FROM oauth_consumer_registry
+					FROM spip_oauth_consumer_registry
 					WHERE ocr_consumer_key = \'%s\'
 					', $consumer_key);
 					
@@ -307,7 +307,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 		
 		// Delete any old tokens with the same type for this user/server combination
 		$this->query('
-					DELETE FROM oauth_consumer_token
+					DELETE FROM spip_oauth_consumer_token
 					WHERE oct_ocr_id_ref	= %d
 					  AND oct_usa_id_ref	= %d
 					  AND oct_token_type	= LOWER(\'%s\')
@@ -318,7 +318,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 
 		// Insert the new token
 		$this->query('
-					INSERT IGNORE INTO oauth_consumer_token
+					INSERT IGNORE INTO spip_oauth_consumer_token
 					SET oct_ocr_id_ref	= %d,
 						oct_usa_id_ref  = %d,
 						oct_token		= \'%s\',
@@ -351,7 +351,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 		if ($user_is_admin)
 		{
 			$this->query('
-					DELETE FROM oauth_consumer_registry
+					DELETE FROM spip_oauth_consumer_registry
 					WHERE ocr_consumer_key = \'%s\'
 					  AND (ocr_usa_id_ref = %d OR ocr_usa_id_ref IS NULL)
 					', $consumer_key, $user_id);
@@ -359,7 +359,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 		else
 		{
 			$this->query('
-					DELETE FROM oauth_consumer_registry
+					DELETE FROM spip_oauth_consumer_registry
 					WHERE ocr_consumer_key = \'%s\'
 					  AND ocr_usa_id_ref   = %d
 					', $consumer_key, $user_id);
@@ -388,7 +388,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 						ocr_request_token_uri	as request_token_uri,
 						ocr_authorize_uri		as authorize_uri,
 						ocr_access_token_uri	as access_token_uri
-				FROM oauth_consumer_registry
+				FROM spip_oauth_consumer_registry
 				WHERE ocr_consumer_key = \'%s\'
 				  AND (ocr_usa_id_ref = %d OR ocr_usa_id_ref IS NULL)
 				',	$consumer_key, $user_id);
@@ -444,7 +444,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 							ocr_request_token_uri	as request_token_uri,
 							ocr_authorize_uri		as authorize_uri,
 							ocr_access_token_uri	as access_token_uri
-					FROM oauth_consumer_registry
+					FROM spip_oauth_consumer_registry
 					WHERE ocr_server_uri_host = \'%s\'
 					  AND ocr_server_uri_path = LEFT(\'%s\', LENGTH(ocr_server_uri_path))
 					  AND (ocr_usa_id_ref = %s OR ocr_usa_id_ref IS NULL)
@@ -485,8 +485,8 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 							ocr_authorize_uri		as authorize_uri,
 							ocr_access_token_uri	as access_token_uri,
 							oct_timestamp			as timestamp
-					FROM oauth_consumer_registry
-							JOIN oauth_consumer_token
+					FROM spip_oauth_consumer_registry
+							JOIN spip_oauth_consumer_token
 							ON oct_ocr_id_ref = ocr_id
 					WHERE oct_usa_id_ref = %d
 					  AND oct_token_type = \'access\'
@@ -506,8 +506,8 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 	{
 		$count = $this->query_one('
 					SELECT COUNT(oct_id)
-					FROM oauth_consumer_token
-							JOIN oauth_consumer_registry
+					FROM spip_oauth_consumer_token
+							JOIN spip_oauth_consumer_registry
 							ON oct_ocr_id_ref = ocr_id
 					WHERE oct_token_type   = \'access\'
 					  AND ocr_consumer_key = \'%s\'
@@ -542,8 +542,8 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 							ocr_authorize_uri		as authorize_uri,
 							ocr_access_token_uri	as access_token_uri,
 							oct_timestamp			as timestamp
-					FROM oauth_consumer_registry
-							JOIN oauth_consumer_token
+					FROM spip_oauth_consumer_registry
+							JOIN spip_oauth_consumer_token
 							ON oct_ocr_id_ref = ocr_id
 					WHERE ocr_consumer_key = \'%s\'
 					  AND oct_usa_id_ref   = %d
@@ -573,8 +573,8 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 		{
 			$this->query('
 				DELETE oauth_consumer_token 
-				FROM oauth_consumer_token
-						JOIN oauth_consumer_registry
+				FROM spip_oauth_consumer_token
+						JOIN spip_oauth_consumer_registry
 						ON oct_ocr_id_ref = ocr_id
 				WHERE ocr_consumer_key	= \'%s\'
 				  AND oct_token			= \'%s\'
@@ -584,8 +584,8 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 		{
 			$this->query('
 				DELETE oauth_consumer_token 
-				FROM oauth_consumer_token
-						JOIN oauth_consumer_registry
+				FROM spip_oauth_consumer_token
+						JOIN spip_oauth_consumer_registry
 						ON oct_ocr_id_ref = ocr_id
 				WHERE ocr_consumer_key	= \'%s\'
 				  AND oct_token			= \'%s\'
@@ -641,7 +641,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 							ocr_request_token_uri	as request_token_uri,
 							ocr_authorize_uri		as authorize_uri,
 							ocr_access_token_uri	as access_token_uri
-					FROM oauth_consumer_registry
+					FROM spip_oauth_consumer_registry
 					'.$where.'
 					ORDER BY ocr_server_uri_host, ocr_server_uri_path
 					', $args);
@@ -674,7 +674,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 		{
 			$exists = $this->query_one('
 						SELECT ocr_id
-						FROM oauth_consumer_registry
+						FROM spip_oauth_consumer_registry
 						WHERE ocr_consumer_key = \'%s\'
 						  AND ocr_id <> %d
 						  AND (ocr_usa_id_ref = %d OR ocr_usa_id_ref IS NULL)
@@ -684,7 +684,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 		{
 			$exists = $this->query_one('
 						SELECT ocr_id
-						FROM oauth_consumer_registry
+						FROM spip_oauth_consumer_registry
 						WHERE ocr_consumer_key = \'%s\'
 						  AND (ocr_usa_id_ref = %d OR ocr_usa_id_ref IS NULL)
 						', $server['consumer_key'], $user_id);
@@ -735,7 +735,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 			{
 				$ocr_usa_id_ref = $this->query_one('
 									SELECT ocr_usa_id_ref
-									FROM oauth_consumer_registry
+									FROM spip_oauth_consumer_registry
 									WHERE ocr_id = %d
 									', $server['id']);
 				
@@ -747,7 +747,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 			
 			// Update the consumer registration	
 			$this->query('
-					UPDATE oauth_consumer_registry
+					UPDATE spip_oauth_consumer_registry
 					SET ocr_consumer_key    	= \'%s\',
 						ocr_consumer_secret 	= \'%s\',
 						ocr_server_uri	    	= \'%s\',
@@ -782,7 +782,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 			}
 
 			$this->query('
-					INSERT INTO oauth_consumer_registry
+					INSERT INTO spip_oauth_consumer_registry
 					SET ocr_consumer_key    	= \'%s\',
 						ocr_consumer_secret 	= \'%s\',
 						ocr_server_uri	    	= \'%s\',
@@ -854,7 +854,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 			{
 				$osr_usa_id_ref = $this->query_one('
 									SELECT osr_usa_id_ref
-									FROM oauth_server_registry
+									FROM spip_oauth_server_registry
 									WHERE osr_id = %d
 									', $consumer['id']);
 				
@@ -871,7 +871,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 					if (is_null($consumer['user_id']))
 					{
 						$this->query('
-							UPDATE oauth_server_registry
+							UPDATE spip_oauth_server_registry
 							SET osr_usa_id_ref = NULL
 							WHERE osr_id = %d
 							', $consumer['id']);
@@ -888,7 +888,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 			}
 			
 			$this->query('
-				UPDATE oauth_server_registry
+				UPDATE spip_oauth_server_registry
 				SET osr_requester_name		= \'%s\',
 					osr_requester_email		= \'%s\',
 					osr_callback_uri		= \'%s\',
@@ -944,7 +944,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 			}
 
 			$this->query('
-				INSERT INTO oauth_server_registry
+				INSERT INTO spip_oauth_server_registry
 				SET osr_enabled				= 1,
 					osr_status				= \'active\',
 					osr_usa_id_ref			= %s,
@@ -994,7 +994,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 		if ($user_is_admin)
 		{
 			$this->query('
-					DELETE FROM oauth_server_registry
+					DELETE FROM spip_oauth_server_registry
 					WHERE osr_consumer_key = \'%s\'
 					  AND (osr_usa_id_ref = %d OR osr_usa_id_ref IS NULL)
 					', $consumer_key, $user_id);
@@ -1002,7 +1002,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 		else
 		{
 			$this->query('
-					DELETE FROM oauth_server_registry
+					DELETE FROM spip_oauth_server_registry
 					WHERE osr_consumer_key = \'%s\'
 					  AND osr_usa_id_ref   = %d
 					', $consumer_key, $user_id);
@@ -1024,7 +1024,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 	{
 		$consumer = $this->query_row_assoc('
 						SELECT	*
-						FROM oauth_server_registry
+						FROM spip_oauth_server_registry
 						WHERE osr_consumer_key = \'%s\'
 						', $consumer_key);
 		
@@ -1058,7 +1058,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 	{
 		$consumer = $this->query_one('
 						SELECT osr_consumer_key
-						FROM oauth_server_registry
+						FROM spip_oauth_server_registry
 						WHERE osr_consumer_key LIKE \'sc-%%\'
 						  AND osr_usa_id_ref IS NULL
 						');
@@ -1067,7 +1067,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 		{
 			$consumer_key = 'sc-'.$this->generateKey(true);
 			$this->query('
-				INSERT INTO oauth_server_registry
+				INSERT INTO spip_oauth_server_registry
 				SET osr_enabled				= 1,
 					osr_status				= \'active\',
 					osr_usa_id_ref			= NULL,
@@ -1107,7 +1107,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 		$secret = $this->generateKey();
 		$osr_id	= $this->query_one('
 						SELECT osr_id
-						FROM oauth_server_registry
+						FROM spip_oauth_server_registry
 						WHERE osr_consumer_key = \'%s\'
 						  AND osr_enabled      = 1
 						', $consumer_key);
@@ -1118,7 +1118,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 		}	
 
 		$this->query('
-				INSERT INTO oauth_server_token
+				INSERT INTO spip_oauth_server_token
 				SET ost_osr_id_ref		= %d,
 					ost_usa_id_ref		= 1,
 					ost_token			= \'%s\',
@@ -1151,8 +1151,8 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 						osr_consumer_key	as consumer_key,
 						osr_consumer_secret	as consumer_secret,
 						ost_token_type		as token_type
-				FROM oauth_server_token
-						JOIN oauth_server_registry
+				FROM spip_oauth_server_token
+						JOIN spip_oauth_server_registry
 						ON ost_osr_id_ref = osr_id
 				WHERE ost_token_type = \'request\'
 				  AND ost_token      = \'%s\'
@@ -1170,7 +1170,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 	public function deleteConsumerRequestToken ( $token )
 	{
 		$this->query('
-					DELETE FROM oauth_server_token
+					DELETE FROM spip_oauth_server_token
 					WHERE ost_token 	 = \'%s\'
 					  AND ost_token_type = \'request\'
 					', $token);
@@ -1187,7 +1187,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 	public function authorizeConsumerRequestToken ( $token, $user_id, $referrer_host = '' )
 	{
 		$this->query('
-					UPDATE oauth_server_token
+					UPDATE spip_oauth_server_token
 					SET ost_authorized    = 1,
 						ost_usa_id_ref    = %d,
 						ost_timestamp     = NOW(),
@@ -1208,8 +1208,8 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 	{
 		$count = $this->query_one('
 					SELECT COUNT(ost_id)
-					FROM oauth_server_token
-							JOIN oauth_server_registry
+					FROM spip_oauth_server_token
+							JOIN spip_oauth_server_registry
 							ON ost_osr_id_ref = osr_id
 					WHERE ost_token_type   = \'access\'
 					  AND osr_consumer_key = \'%s\'
@@ -1233,7 +1233,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 		$new_secret = $this->generateKey();
 
 		$this->query('
-					UPDATE oauth_server_token
+					UPDATE spip_oauth_server_token
 					SET ost_token			= \'%s\',
 						ost_token_secret	= \'%s\',
 						ost_token_type		= \'access\',
@@ -1270,8 +1270,8 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 						osr_application_uri		as application_uri,
 						osr_application_title	as application_title,
 						osr_application_descr	as application_descr
-				FROM oauth_server_token
-						JOIN oauth_server_registry
+				FROM spip_oauth_server_token
+						JOIN spip_oauth_server_registry
 						ON ost_osr_id_ref = osr_id
 				WHERE ost_token_type = \'access\'
 				  AND ost_token      = \'%s\'
@@ -1298,7 +1298,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 		if ($user_is_admin)
 		{
 			$this->query('
-						DELETE FROM oauth_server_token
+						DELETE FROM spip_oauth_server_token
 						WHERE ost_token 	 = \'%s\'
 						  AND ost_token_type = \'access\'
 						', $token);
@@ -1306,7 +1306,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 		else
 		{
 			$this->query('
-						DELETE FROM oauth_server_token
+						DELETE FROM spip_oauth_server_token
 						WHERE ost_token 	 = \'%s\'
 						  AND ost_token_type = \'access\'
 						  AND ost_usa_id_ref = %d
@@ -1337,7 +1337,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 						osr_application_descr	as application_descr,
 						osr_requester_name		as requester_name,
 						osr_requester_email		as requester_email
-				FROM oauth_server_registry
+				FROM spip_oauth_server_registry
 				WHERE (osr_usa_id_ref = %d OR osr_usa_id_ref IS NULL)
 				ORDER BY osr_application_title
 				', $user_id);
@@ -1365,8 +1365,8 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 						ost_token				as token,
 						ost_token_secret		as token_secret,
 						ost_referrer_host		as token_referrer_host
-				FROM oauth_server_registry
-					JOIN oauth_server_token
+				FROM spip_oauth_server_registry
+					JOIN spip_oauth_server_token
 					ON ost_osr_id_ref = osr_id
 				WHERE ost_usa_id_ref = %d
 				  AND ost_token_type = \'access\'
@@ -1390,7 +1390,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 	{
 		$r = $this->query_row('
 							SELECT MAX(osn_timestamp), MAX(osn_timestamp) > %d + %d
-							FROM oauth_server_nonce
+							FROM spip_oauth_server_nonce
 							WHERE osn_consumer_key = \'%s\'
 							  AND osn_token        = \'%s\'
 							', $timestamp, $this->max_timestamp_skew, $consumer_key, $token);
@@ -1402,7 +1402,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 		
 		// Insert the new combination
 		$this->query('
-				INSERT IGNORE INTO oauth_server_nonce
+				INSERT IGNORE INTO spip_oauth_server_nonce
 				SET osn_consumer_key	= \'%s\',
 					osn_token			= \'%s\',
 					osn_timestamp		= %d,
@@ -1416,7 +1416,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 
 		// Clean up all timestamps older than the one we just received
 		$this->query('
-				DELETE FROM oauth_server_nonce
+				DELETE FROM spip_oauth_server_nonce
 				WHERE osn_consumer_key	= \'%s\'
 				  AND osn_token			= \'%s\'
 				  AND osn_timestamp     < %d - %d
@@ -1465,7 +1465,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 		$ps[] = "olg_usa_id_ref = NULLIF(%d,0)";				$args[] = $user_id;
 		$ps[] = "olg_remote_ip  = IFNULL(INET_ATON('%s'),0)";	$args[] = $remote_ip;
 
-		$this->query('INSERT INTO oauth_log SET '.implode(',', $ps), $args);
+		$this->query('INSERT INTO spip_oauth_log SET '.implode(',', $ps), $args);
 	}
 	
 	
@@ -1522,7 +1522,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 							olg_notes				AS notes,
 							olg_timestamp			AS timestamp,
 							INET_NTOA(olg_remote_ip) AS remote_ip
-					FROM oauth_log
+					FROM spip_oauth_log
 					WHERE '.implode(' AND ', $where).'
 					ORDER BY olg_id DESC
 					LIMIT 0,100', $args);
