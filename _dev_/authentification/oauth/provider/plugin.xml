@@ -35,4 +35,6 @@ _ Donnons a spip le moyen de donner des autorisation d'acces
 	<prefix>
     	poauth
 	</prefix>
+	
+	<necessite id="cfg" version="[;]" />
 </plugin>

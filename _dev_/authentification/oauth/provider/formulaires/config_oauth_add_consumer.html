@@ -1,0 +1,79 @@
+#CACHE{0}
+<div class="formulaire_spip formulaire_oauth_add_consumer">
+
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</li>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</li>]
+	
+    <form method="post" action="#ENV{action}">
+        <div>
+        #ACTION_FORMULAIRE{#ENV{action}}
+        <ul>
+            <li class="fieldset">
+                <fieldset>
+                    <h3 class="legend">Champs obligatoire</h3>
+                    <ul>
+                        <li class="editer_user_id">
+                            <label for="user_id">Auteur SPIP référent :</label>
+                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{user_id})</span>]
+                            <B_auteur>
+                                <select id="user_id" name="user_id">
+                                <BOUCLE_auteur(AUTEURS) {par nom} {statut=0minirezo}>
+                                    <option value="#ID_AUTEUR"> #NOM </option>
+                                </BOUCLE_auteur>
+                                </select>
+                            </B_auteur>
+                        </li>
+		                <li class="editer_">
+			                <label for="requester_name">Nom : </label>
+			                <input type="text" name="requester_name" id="requester_name" value="#ENV{requester_name}"/>
+		                </li>
+		                <li class="editer_">
+			                <label>Courriel du référent : </label>
+			                <input type="text" name="requester_email" id="requester_email" value="#ENV{requester_email}"/>
+		                </li>
+                    </ul>
+                </fieldset>
+            </li>
+            <li class="fieldset">
+                <fieldset>
+                    <h3 class="legend">Champs optionnels</h3>
+                    <ul>
+		                <li class="editer_">
+			                <label for="callback_uri">URI de retour : </label>
+			                <input type="text" name="callback_uri" id="callback_uri" value="#ENV{callback_uri,http://www.myconsumersite.com/oauth_callback}"/>
+		                </li>
+		                <li class="editer_">
+			                <label for="application_uri">URI de l'application : </label>
+			                <input type="text" name="application_uri" id="application_uri" value="#ENV{application_uri, http://www.consumersite.com/}"/>
+		                </li>
+		                <li class="editer_">
+			                <label for="application_title">Nom de l'application : </label>
+			                <input type="text" name="application_title" id="application_title" value="#ENV{application_title, John Doe's consumer site'}"/>
+		                </li>
+		                <li class="editer_">
+			                <label for="application_descr">Description de l'application : </label>
+			                <input type="text" name="application_descr" id="application_descr" value="#ENV{application_descr,Make nice graphs of all your data}"/>
+		                </li>
+		                <li class="editer_">
+			                <label for="application_notes">Notes concernant l'application : </label>
+			                <input type="text" name="application_notes" id="application_notes" value="#ENV{application_notes,Bladibadou}"/>
+		                </li>
+		                <li class="editer_">
+			                <label for="application_type">Type de l'application : </label>
+			                <input type="text" name="application_type" id="application_type" value="#ENV{application_type,website}"/>
+		                </li>
+		                <li class="editer_">
+			                <label for="application_commercial">Application commerciale : </label>
+			                <input type="checkbox" name="application_type" id="application_type" [(#ENV{application_commercial}|oui)checked = "checked"]/>
+		                </li>		
+                    </ul>
+                </fieldset>
+            </li>
+        </ul>        <p class="boutons">
+            <input type="submit" name="_cfg_ok" value="<:oK:>" class="submit" />
+            <input type="reset" value="<:reset:>" class="reset" />
+            <input type="submit" name="_cfg_delete" value="<:supprimer:>" class="submit" />
+        </p>
+        </div>
+    </form>
+</div>
