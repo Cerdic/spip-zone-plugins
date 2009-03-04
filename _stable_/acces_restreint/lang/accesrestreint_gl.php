@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'colonne_id' => 'N&uacute;m.',
 	'confirmer_retirer_auteur_zone' => 'Est&aacute; vostede seguro de querer retirar este autor da zona?',
 	'confirmer_retirer_auteurs' => 'Est&aacute; vostede seguro de querer retirar a todos os autores desta zona?',
+	'confirmer_supprimer_zone' => 'Est&aacute; seguro de querer suprimir esta zona?',
 	'creer_zone' => 'Crear unha nova zona',
 
 	// D
