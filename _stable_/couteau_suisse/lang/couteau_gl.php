@@ -13,6 +13,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'attente_confirmation' => 'En espera de confirmaci&oacute;n',
 
+	// C
+	'configurer' => 'Configurar A Navalla Su&iacute;za',
+	'connections' => 'Conexi&oacute;ns',
+
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',
 	'derniers_connectes' => '&Uacute;ltimos conectados :',
@@ -86,7 +90,10 @@ Compatibilidade : SPIP todas as versi&oacute;ns 1.9x e v2.0',
 
 	// V
 	'variable_vide' => '(Baleiro)',
-	'visiteurs_connectes' => 'Visitantes conectados: @nb@'
+	'visiteurs_connectes' => 'Visitantes conectados: @nb@',
+
+	// W
+	'webmestres' => 'Webmasters SPIP'
 );
 
 ?>

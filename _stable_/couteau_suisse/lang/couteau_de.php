@@ -8,17 +8,21 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// 2
-	'2pts' => '@objet@&nbsp;:',
+	'2pts' => '@objet@:',
 
 	// A
 	'attente_confirmation' => 'Auf Best&auml;tigung warten',
+
+	// C
+	'configurer' => 'Schweizer Taschenmesser konfigurieren',
+	'connections' => 'Verbindungen',
 
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',
 	'derniers_connectes' => 'Letzte Verbindungen:',
 
 	// E
-	'explique_spam' => 'Achtung: Sie haben reservierte Tag, Zeichen oder Worte verwendet.<br /><br />Bitte kehren Sie zum letzten Schritt zur&uuml;ck!',
+	'explique_spam' => 'Achtung: Sie haben reservierte Tags, Zeichen oder Worte verwendet.<br /><br />Bitte kehren Sie zum letzten Schritt zur&uuml;ck!',
 
 	// L
 	'lutte_spam' => 'SPAM-Bek&auml;mpfung',
@@ -73,6 +77,9 @@ Kompatibel mit: SPIP 1.9x und v2.0',
 	'texte_formatspip' => 'ORIGINALTEXT IM SPIP-FORMAT',
 	'textes_formatspip' => 'ORIGINALTEXTE IM SPIP-FORMAT',
 	'titre' => 'Schweizer Taschenmesser',
+	'tri_auteurs' => 'REIHENFOLGE DER AUTOREN',
+	'tri_descendre' => 'Autor nach unten',
+	'tri_monter' => 'Autor nach oben',
 
 	// U
 	'urls_propres_erreur' => 'Dieses Format ber&uuml;cksichtigt die angepassten URLs weiter unten nicht.',
@@ -83,7 +90,10 @@ Kompatibel mit: SPIP 1.9x und v2.0',
 
 	// V
 	'variable_vide' => '(Leer)',
-	'visiteurs_connectes' => 'Angemeldete Besucher: @nb@'
+	'visiteurs_connectes' => 'Angemeldete Besucher: @nb@',
+
+	// W
+	'webmestres' => 'SPIP Webmaster'
 );
 
 ?>

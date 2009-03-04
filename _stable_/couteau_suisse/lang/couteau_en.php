@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attente_confirmation' => 'Waiting for confirmation',
 
 	// C
-	'configurer' => 'Configure the Swiss Knife',
+	'configurer' => 'Configure the Penknife',
 	'connections' => 'Connections',
 
 	// D
@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_suivante' => 'Next page',
 	'plugin_xml' => 'Gathers together in one plugin a list of small, useful tools to improve the management of your SPIP site.
 
-Each tool can be ativated individually by the the user from the [plugin\'s admin page->./?exec=admin_couteau_suisse]. To set some options, click on {{Configuration}}, then choose the {{Swiss Knife}} tab.
+Each tool can be ativated individually by the the user from the [plugin\'s admin page->./?exec=admin_couteau_suisse]. To set some options, click on {{Configuration}}, then choose the {{Penknife}} tab.
 
 Available categories are: Administration, Typographical improvements, Typographical shortcuts, Display on the public site, Tags, Filters, Criteria.
 
@@ -76,7 +76,7 @@ Compatibility: SPIP 1.9x and v2.0',
 	// T
 	'texte_formatspip' => 'ORIGINAL TEXT IN SPIP FORMAT',
 	'textes_formatspip' => 'ORIGINAL TEXTS IN SPIP FORMAT',
-	'titre' => 'Swiss Knife',
+	'titre' => 'Penknife',
 	'tri_auteurs' => 'ORDER OF AUTHORS',
 	'tri_descendre' => 'Move this author down',
 	'tri_monter' => 'Move this author up',
