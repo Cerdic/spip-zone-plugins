@@ -8,17 +8,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// 2
 	'2pts_non' => '&nbsp;:&nbsp;non',
 	'2pts_oui' => '&nbsp;:&nbsp;oui',
-	'trousse_balises:description' => 'Outil en cours de d&eacute;veloppement. Vous offre quelques balises tr&egrave;s simples et bien pratiques pour vos squelettes.
-
-@puce@ {{#BOLO}} : g&eacute;n&egrave;re un faux texte d\'environ 3000 caract&egrave;res ("bolo" ou "lorem ipsum") dans les squelettes pendant leur mise au point. L\'argument optionnel de cette fonction sp&eacute;cifie la longueur du texte voulu. Exemple : <code>#BOLO{300}</code>. Cette balise accepte tous les filtres de SPIP. Exemple : <code>[(#BOLO|majuscules)]</code>.
-_ Un mod&egrave;le est &eacute;galement disponible pour vos contenus : placez <code><bolo300></code> dans n\'importe quelle zone de texte (chapo, descriptif, texte, etc.) pour obtenir 300 caract&egrave;res de faux texte.
-
-@puce@ {{#MAINTENANT}} (ou {{#NOW}}) : renvoie simplement la date du moment, tout comme : <code>#EVAL{date(\'Y-m-d H:i:s\')}</code>. L\'argument optionnel de cette fonction sp&eacute;cifie le format. Exemple : <code>#MAINTENANT{Y-m-d}</code>. Tout comme avec #DATE, personnalisez l\'affichage gr&acirc;ce aux filtres de SPIP. Exemple : <code>[(#MAINTENANT|affdate)]</code>.
-
-@puce@ {{#LESMOTS}} : ',
-	'trousse_balises:nom' => 'Trousse &agrave; balises',
-	'horloge:nom' => 'Horloge',
-	'horloge:description' => 'Outil en cours de d&eacute;veloppement. Vous offre une horloge JavaScript . Balise : <code>#HORLOGE{format,utc,id}</code>. Mod&egrave;le : <code><horloge></code>',
 
 	// S
 	'SPIP_liens:description' => '@puce@ Tous les liens du site s\'ouvrent par d&eacute;faut dans la fen&ecirc;tre de navigation en cours. Mais il peut &ecirc;tre utile d\'ouvrir les liens externes au site dans une nouvelle fen&ecirc;tre ext&eacute;rieure -- cela revient &agrave; ajouter {target=&quot;_blank&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'&eacute;tendre au maximum cette fonctionnalit&eacute;.[[%radio_target_blank3%]]
@@ -273,6 +262,8 @@ Les blocs multi s\'affichent alors toujours dans la langue demand&eacute;e par l
 _ &bull; [Des outils cach&eacute;s|Revenir &agrave; l\'apparence initiale de cette page->@hide@]
 _ &bull; [De tout le plugin|Revenir &agrave; l\'&eacute;tat initial du plugin->@reset@]@install@
 </p>',
+	'horloge:description' => 'Outil en cours de d&eacute;veloppement. Vous offre une horloge JavaScript . Balise : <code>#HORLOGE{format,utc,id}</code>. Mod&egrave;le : <code><horloge></code>',
+	'horloge:nom' => 'Horloge',
 
 	// I
 	'icone_visiter:description' => 'Remplace l\'image du bouton standard &laquo;&nbsp;Visiter&nbsp;&raquo; (en haut &agrave; droite sur cette page)  par le logo du site, s\'il existe.
@@ -602,6 +593,15 @@ Les propositions ci-dessous sont bas&eacute;es sur la fonctionnalit&eacute; SQL 
 	'tri_perso' => 'Tri SQL personnalis&eacute;, ORDER BY suivi de :',
 	'tri_publi' => 'Tri sur la date de publication (ORDER BY date DESC)',
 	'tri_titre' => 'Tri sur le titre (ORDER BY 0+titre,titre)',
+	'trousse_balises:description' => 'Outil en cours de d&eacute;veloppement. Vous offre quelques balises tr&egrave;s simples et bien pratiques pour vos squelettes.
+
+@puce@ {{#BOLO}} : g&eacute;n&egrave;re un faux texte d\'environ 3000 caract&egrave;res ("bolo" ou "lorem ipsum") dans les squelettes pendant leur mise au point. L\'argument optionnel de cette fonction sp&eacute;cifie la longueur du texte voulu. Exemple : <code>#BOLO{300}</code>. Cette balise accepte tous les filtres de SPIP. Exemple : <code>[(#BOLO|majuscules)]</code>.
+_ Un mod&egrave;le est &eacute;galement disponible pour vos contenus : placez <code><bolo300></code> dans n\'importe quelle zone de texte (chapo, descriptif, texte, etc.) pour obtenir 300 caract&egrave;res de faux texte.
+
+@puce@ {{#MAINTENANT}} (ou {{#NOW}}) : renvoie simplement la date du moment, tout comme : <code>#EVAL{date(\'Y-m-d H:i:s\')}</code>. L\'argument optionnel de cette fonction sp&eacute;cifie le format. Exemple : <code>#MAINTENANT{Y-m-d}</code>. Tout comme avec #DATE, personnalisez l\'affichage gr&acirc;ce aux filtres de SPIP. Exemple : <code>[(#MAINTENANT|affdate)]</code>.
+
+@puce@ {{#LESMOTS}} : ',
+	'trousse_balises:nom' => 'Trousse &agrave; balises',
 	'type_urls:description' => '@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'acc&egrave;s aux pages de votre site.
 
 Plus d\'infos : [->http://www.spip.net/fr_article765.html]. L\'outil &laquo;&nbsp;[.->boites_privees]&nbsp;&raquo; vous permet de voir sur la page de chaque objet SPIP l\'URL propre associ&eacute;e.

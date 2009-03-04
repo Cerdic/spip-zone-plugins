@@ -38,9 +38,9 @@ _ Ligaz&oacute;n de test : [->test@test.com] (vexa a p&aacute;xina completamente
 	// B
 	'basique' => 'B&aacute;sica',
 	'blocs:aide' => 'Bloques despregables : <b>&lt;bloque&gt;&lt;/bloque&gt;</b> (alias : <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) e <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => '<MODIF>Perm&iacute;telle crear bloques nos que o t&iacute;tulo &eacute; activo e pode facelos visibles ou invisibles.
+	'blocs:description' => 'Perm&iacute;telle crear bloques nos que o t&iacute;tulo &eacute; activo e pode facelos visibles ou invisibles.
 
-@puce@ {{Nos textos SPIP}} : os redactores te&ntilde;en a disposici&oacute;n as novas balizas &lt;bloque&gt; (ou &lt;invisible&gt;) e &lt;visible&gt; para utilizar nos seus textos, coma no caso : 
+@puce@ {{Dentro dos textos SPIP}} : os redactores te&ntilde;en a disposici&oacute;n as novas balizas &lt;bloque&gt; (ou &lt;invisible&gt;) e &lt;visible&gt; para utilizar nos seus textos, coma no caso : 
 
 <quote><code>
 <bloc>
@@ -50,7 +50,7 @@ _ Ligaz&oacute;n de test : [->test@test.com] (vexa a p&aacute;xina completamente
  </bloc>
 </code></quote>
 
-@puce@ {{Nos esqueletos}} : ten &aacute; s&uacute;a disposici&oacute;n as novas balizas #BLOC_TITRE, #BLOC_DEBUT e #BLOC_FIN para utilizar coma no caso : 
+@puce@ {{Dentros dos esqueletos}} : ten &aacute; s&uacute;a disposici&oacute;n as novas balizas #BLOC_TITRE, #BLOC_DEBUT e #BLOC_FIN para utilizar coma no caso : 
 <quote><code> #BLOC_TITRE ou #BLOC_TITRE{mon_URL}
  O meu t&iacute;tulo
  #BLOC_RESUME    (facultativo)
@@ -60,14 +60,16 @@ _ Ligaz&oacute;n de test : [->test@test.com] (vexa a p&aacute;xina completamente
  #BLOC_FIN</code></quote>
  
 @puce@ Marcando &laquo;si&raquo;, a apertura dun bloque provocar&aacute; o cerre de todos os outros bloques da p&aacute;xina, co fin de non ter m&aacute;is ca un aberto &aacute; vez.[[%bloc_unique%]]
-',
+
+@puce@ A Navalla Su&iacute;za utiliza de modo predeterminado a baliza HTML &lt;h4&gt; para o t&iacute;tulo dos bloques despregables. Escolla aqu&iacute; outra baliza &lt;hN&gt;&nbsp;:[[%bloc_h4%]]',
 	'blocs:nom' => 'Bloques despregables',
-	'boites_privees:description' => '<MODIF>Todas as funcionalidades abaixo descritas aparecen aqu&iacute; ou na parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]]
+	'boites_privees:description' => 'Todas as funcionalidades abaixo descritas aparecen aqu&iacute; ou na parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]]
 [[->%bp_tri_auteurs%]]
 - {{As revisi&oacute;ns da Navalla Su&iacute;za}} : un cadro sobre a presente p&aacute;xina de configuraci&oacute;n que indica as &uacute;ltimas modificaci&oacute;ns achegadas ao c&oacute;digo do m&oacute;dulo ([Source->@_CS_RSS_SOURCE@]).
-- {{Os artigos en formato SPIP}} : un cadro repregable suplementario para os seus artigos co fin co fin de co&ntilde;ecer o  c&oacute;digo fonte usado polos seus autores.
+- {{Os artigos en formato SPIP}} : un cadro despregable suplementario para os seus artigos co fin de co&ntilde;ecer o  c&oacute;digo fonte usado polos seus autores.
 - {{Estado de autores}} : un cadro suplementario en [p&aacute;xina de autores->./?exec=auteurs] que indica os &uacute;ltimos 10 conectados e as inscrici&oacute;ns non confirmadas. S&oacute; os administradores ven esta informaci&oacute;n.
-- {{Ver os URL propios}} : un cadro despregable para cada obxecto de contido (artigo, secci&oacute;n, autor, ...) que indica o URL propio asociado as&iacute; como os seus alias eventuais. A ferramenta &laquo;&nbsp;[.->type_urls]&nbsp;&raquo; permite a configuraci&oacute;n fina dos URL do web.
+- {{Os webm&aacute;ster SPIP}} : un cadro despregable sobre [a p&aacute;xina dos autores->./?exec=auteurs] uqe indica os administradores elevados ao rango de webmaster SPIP. S&oacute; os administradores ven esta informaci&oacute;n. Se vostede &eacute; webm&aacute;ster, vexa tam&eacute;n a ferramenta &laquo;&nbsp;[.->webmestres]&nbsp;&raquo;.
+- {{Os URL propios}} : un cadro despregable para cada obxecto de contido (artigo, secci&oacute;n, autor, ...) que indica o URL propio asociado as&iacute; como os seus alias eventuais. A ferramenta &laquo;&nbsp;[.->type_urls]&nbsp;&raquo; permite a configuraci&oacute;n fina dos URL do web.
 - {{As ordenaci&oacute;ns de autores}} : un cadro despregable para os artigos que cont&eacute;n m&aacute;is dun autor e permite simplemente axustar a orde de presentaci&oacute;n.',
 	'boites_privees:nom' => 'Funcionalidades privadas',
 	'bp_tri_auteurs' => 'As ordenaci&oacute;ns de autores',
@@ -305,6 +307,7 @@ Atenci&oacute;n, esta ferramenta, precisa para funcionar do m&oacute;dulo {jQuer
 	'label:auto_sommaire' => 'Creaci&oacute;n sistem&aacute;tica de sumario :',
 	'label:balise_decoupe' => 'Activar a baliza #CS_DECOUPE :',
 	'label:balise_sommaire' => 'Activar a baliza #CS_SOMMAIRE :',
+	'label:bloc_h4' => 'Baliza para os t&iacute;tulos&nbsp;:',
 	'label:bloc_unique' => 'Un s&oacute; bloque aberto na p&aacute;xina:',
 	'label:couleurs_fonds' => 'Permitir os fondos :',
 	'label:cs_rss' => 'Activar :',
@@ -467,6 +470,9 @@ De reiniciar o m&oacute;dulo premendo sobre un paquete, a Navalla Su&iacute;za r
 	'pucesli:description' => 'Substit&uacute;a as vi&ntilde;etas &laquo;-&raquo; (gui&oacute;n simple) dos artigos por listas les par des listes nominadas &laquo;-*&raquo; (traducidas en  HTML por : &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) e nas que o estilo pode ser personalizado por css.',
 	'pucesli:nom' => 'Vi&ntilde;etas fermosas',
 
+	// Q
+	'qui_webmestres' => 'Os webm&aacute;ster de SPIP',
+
 	// R
 	'raccourcis' => 'Atallos tipogr&aacute;ficos activos da Navalla Su&iacute;za&nbsp;:',
 	'raccourcis_barre' => 'Os atallo tipogr&aacute;ficos da Navalla Su&iacute;za',
@@ -514,11 +520,12 @@ Este sumario pode ser aparellado con : &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
 	'sommaire:nom' => 'Un sumario autom&aacute;tico',
 	'sommaire_avec' => 'Un artigo con sumario&nbsp;: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un artigo sen sumario&nbsp;: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'spam:description' => '<MODIF>Tenta loitar contra os env&iacute;os de mensaxes autom&aacute;ticas e impertinentes na parte p&uacute;blica. Algunhas palabras e as balizas &lt;a>&lt;/a> est&aacute;n prohibidas.Anime os seus redactores a empregar os atallos de SPIP
+	'spam:description' => 'Tenta loitar contra os env&iacute;os de mensaxes autom&aacute;ticas e impertinentes na parte p&uacute;blica. Algunhas palabras e as balizas en claro &lt;a>&lt;/a> est&aacute;n prohibidas.Anime os seus redactores a empregar os atallos de SPIP
 
 Liste aqu&iacute;, separ&aacute;ndoas por espazos, as secuencias prohibidas [[%spam_mots%]]
 • Para unha expresi&oacute;n con espazos, sit&uacute;ea entre par&eacute;nteses. Exemplo:~{(asses)}.
-• Para unha expresi&oacute;n regular, comprobe ben a sintaxe e sit&uacute;ea entre barras e comas. Exemplos:~{"/@test\\.(com|fr)/"}.',
+_ • Para especificar unha palabra enteira, situ&eacute;a ente par&eacute;nteses. Exemplo~:~{(asses)}.
+_ • Para unha expresi&oacute;n regular, comprobe ben a sintaxe e sit&uacute;ea entre barras e comas. Exemplos:~{<html>"/@test\\.(com|fr)/"</html>}.',
 	'spam:nom' => 'Loita contra o SPAM',
 	'spam_test_ko' => 'Esta mensaxe ser&aacute; bloqueada polo filtro antispam!',
 	'spam_test_ok' => 'Esta mensaxe ser&aacute; aceptada polo filtro antispam.',
