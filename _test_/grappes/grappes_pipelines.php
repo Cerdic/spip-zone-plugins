@@ -10,7 +10,7 @@ function grappes_inserer_js_recherche_objet(){
 		
 		function rechercher_objet(id_selecteur, page_selection) {
 			// chercher l'input de saisie
-			var me = jQuery(id_selecteur+' input[@name=nom_objet]');
+			var me = jQuery(id_selecteur+' input[name=nom_objet]');
 			me.autocomplete(page_selection,
 					{
 						delay: 200,
