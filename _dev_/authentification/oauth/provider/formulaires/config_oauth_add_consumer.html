@@ -13,7 +13,6 @@
                     <h3 class="legend">Champs obligatoire</h3>
                     <ul>
                         <li class="editer_user_id">
-                            <label for="user_id">Auteur SPIP référent :</label>
                             [<span class="erreur_message">(#ENV{erreurs}|table_valeur{user_id})</span>]
                             <B_auteur>
                                 <select id="user_id" name="user_id">
@@ -22,16 +21,17 @@
                                 </BOUCLE_auteur>
                                 </select>
                             </B_auteur>
+                            <label for="user_id">Auteur SPIP référent :</label>                            
                         </li>
 		                <li class="editer_osr_request_name">
-                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{osr_request_name})</span>]		                
 			                <label for="osr_requester_name">Nom : </label>
 			                <input type="text" name="osr_requester_name" id="osr_requester_name" value="#ENV{osr_requester_name}"/>
+                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{osr_requester_name})</span>]		            			                
 		                </li>
 		                <li class="editer_requester_email">
-                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{osr_requester_email})</span>]		                
 			                <label for="osr_requester_name">Courriel du référent : </label>
 			                <input type="text" name="osr_requester_email" id="osr_requester_email" value="#ENV{osr_requester_email}"/>
+                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{osr_requester_email})</span>]		               			                
 		                </li>
                     </ul>
                 </fieldset>
@@ -41,39 +41,39 @@
                     <h3 class="legend">Champs optionnels</h3>
                     <ul>
 		                <li class="editer_osr_callback_uri">
-                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{osr_callback_uri})</span>]		                
 			                <label for="osr_callback_uri">URI de retour : </label>
 			                <input type="text" name="osr_callback_uri" id="osr_callback_uri" value="#ENV{osr_callback_uri,http://www.myconsumersite.com/oauth_callback}"/>
+                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{osr_callback_uri})</span>]		              			                
 		                </li>
 		                <li class="editer_osr_application_uri">
-                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{osr_application_uri})</span>]		                
 			                <label for="osr_application_uri">URI de l'application : </label>
 			                <input type="text" name="osr_application_uri" id="osr_application_uri" value="#ENV{osr_application_uri, http://www.consumersite.com/}"/>
+                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{osr_application_uri})</span>]		                
 		                </li>
-		                <li class="editer_osr_application_title">
-                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{osr_application_title})</span>]		                
+		                <li class="editer_osr_application_title">		                
 			                <label for="osr_application_title">Nom de l'application : </label>
 			                <input type="text" name="osr_application_title" id="osr_application_title" value="#ENV{osr_application_title, John Doe's consumer site'}"/>
+                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{osr_application_title})</span>]
 		                </li>
-		                <li class="editer_osr_application_descr">
-                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{osr_application_descr})</span>]		                
+		                <li class="editer_osr_application_descr">		                
 			                <label for="osr_application_descr">Description de l'application : </label>
 			                <input type="text" name="osr_application_descr" id="osr_application_descr" value="#ENV{osr_application_descr,Make nice graphs of all your data}"/>
+                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{osr_application_descr})</span>]
 		                </li>
-		                <li class="editer_osr_application_notes">
-                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{osr_application_notes})</span>]		                
+		                <li class="editer_osr_application_notes">		                
 			                <label for="osr_application_notes">Notes concernant l'application : </label>
 			                <input type="text" name="osr_application_notes" id="osr_application_notes" value="#ENV{osr_application_notes,Bladibadou}"/>
+                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{osr_application_notes})</span>]
 		                </li>
-		                <li class="editer_osr_application_type">
-                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{osr_application_type})</span>]		                
+		                <li class="editer_osr_application_type">		                
 			                <label for="osr_application_type">Type de l'application : </label>
 			                <input type="text" name="osr_application_type" id="osr_application_type" value="#ENV{osr_application_type,website}"/>
+                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{osr_application_type})</span>]			         
 		                </li>
-		                <li class="editer_osr_application_commercial">
-                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{osr_application_commercial})</span>]		                
+		                <li class="editer_osr_application_commercial">		                
 			                <label for="osr_application_commercial">Application commerciale : </label>
 			                <input type="checkbox" name="osr_application_type" id="osr_application_type" [(#ENV{osr_application_commercial}|oui)checked = "checked"]/>
+                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{osr_application_commercial})</span>]
 		                </li>		
                     </ul>
                 </fieldset>
