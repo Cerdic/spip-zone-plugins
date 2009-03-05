@@ -40,14 +40,14 @@ background:#ccc;
 }
 </style>
 
-<INCLURE{fond=joomla2spip-entete}>
+<INCLURE{fond=inclure/joomla2spip-entete}>
 
 <div id="contenu">
 [(#ENV{id_article}|oui)
-<INCLURE{fond=joomla2spip-afficher-article}{env}>
+<INCLURE{fond=inclure/joomla2spip-afficher-article}{env}>
 ]
 [(#ENV{id_article}|non)
-<INCLURE{fond=joomla2spip-afficher-liste-articles}{env}>
+<INCLURE{fond=inclure/joomla2spip-afficher-liste-articles}{env}>
 ]
 
 
