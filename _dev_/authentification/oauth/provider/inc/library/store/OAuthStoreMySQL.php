@@ -137,7 +137,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 			$rs = $this->query_row_assoc('
 						SELECT	osr_id, 
 								ost_id,
-								ost_usa_id_ref			as user_id,
+								spip_oauth_server_registry.id_auteur			as user_id,
 								osr_consumer_key		as consumer_key,
 								osr_consumer_secret		as consumer_secret,
 								ost_token				as token,
@@ -852,13 +852,13 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 			// Check if the current user can update this server definition
 			if (!$user_is_admin)
 			{
-				$osr_usa_id_ref = $this->query_one('
-									SELECT osr_usa_id_ref
+				$id_auteur = $this->query_one('
+									SELECT id_auteur
 									FROM spip_oauth_server_registry
 									WHERE osr_id = %d
 									', $consumer['id']);
 				
-				if ($osr_usa_id_ref != $user_id)
+				if ($id_auteur != $user_id)
 				{
 					throw new OAuthException('The user "'.$user_id.'" is not allowed to update this consumer');
 				}
@@ -872,7 +872,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 					{
 						$this->query('
 							UPDATE spip_oauth_server_registry
-							SET osr_usa_id_ref = NULL
+							SET id_auteur = NULL
 							WHERE osr_id = %d
 							', $consumer['id']);
 					}
@@ -880,7 +880,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 					{
 						$this->query('
 							UPDATE oauth_server_registry
-							SET osr_usa_id_ref = %d
+							SET id_auteur = %d
 							WHERE osr_id = %d
 							', $consumer['user_id'], $consumer['id']);	
 					}
@@ -947,7 +947,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 				INSERT INTO spip_oauth_server_registry
 				SET osr_enabled				= 1,
 					osr_status				= \'active\',
-					osr_usa_id_ref			= %s,
+					id_auteur			= %s,
 					osr_consumer_key		= \'%s\',
 					osr_consumer_secret		= \'%s\',
 					osr_requester_name		= \'%s\',
@@ -996,7 +996,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 			$this->query('
 					DELETE FROM spip_oauth_server_registry
 					WHERE osr_consumer_key = \'%s\'
-					  AND (osr_usa_id_ref = %d OR osr_usa_id_ref IS NULL)
+					  AND (id_auteur = %d OR id_auteur IS NULL)
 					', $consumer_key, $user_id);
 		}
 		else
@@ -1004,7 +1004,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 			$this->query('
 					DELETE FROM spip_oauth_server_registry
 					WHERE osr_consumer_key = \'%s\'
-					  AND osr_usa_id_ref   = %d
+					  AND id_auteur   = %d
 					', $consumer_key, $user_id);
 		}
 	}	
@@ -1060,7 +1060,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 						SELECT osr_consumer_key
 						FROM spip_oauth_server_registry
 						WHERE osr_consumer_key LIKE \'sc-%%\'
-						  AND osr_usa_id_ref IS NULL
+						  AND id_auteur IS NULL
 						');
 
 		if (empty($consumer))
@@ -1070,7 +1070,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 				INSERT INTO spip_oauth_server_registry
 				SET osr_enabled				= 1,
 					osr_status				= \'active\',
-					osr_usa_id_ref			= NULL,
+					id_auteur			= NULL,
 					osr_consumer_key		= \'%s\',
 					osr_consumer_secret		= \'\',
 					osr_requester_name		= \'\',
@@ -1120,13 +1120,13 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 		$this->query('
 				INSERT INTO spip_oauth_server_token
 				SET ost_osr_id_ref		= %d,
-					ost_usa_id_ref		= 1,
+					id_auteur		= 1,
 					ost_token			= \'%s\',
 					ost_token_secret	= \'%s\',
 					ost_token_type		= \'request\'
 				ON DUPLICATE KEY UPDATE
 					ost_osr_id_ref		= VALUES(ost_osr_id_ref),
-					ost_usa_id_ref		= VALUES(ost_usa_id_ref),
+					id_auteur		= VALUES(id_auteur),
 					ost_token			= VALUES(ost_token),
 					ost_token_secret	= VALUES(ost_token_secret),
 					ost_token_type		= VALUES(ost_token_type),
@@ -1189,7 +1189,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 		$this->query('
 					UPDATE spip_oauth_server_token
 					SET ost_authorized    = 1,
-						ost_usa_id_ref    = %d,
+						id_auteur    = %d,
 						ost_timestamp     = NOW(),
 						ost_referrer_host = \'%s\'
 					WHERE ost_token      = \'%s\'
@@ -1275,7 +1275,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 						ON ost_osr_id_ref = osr_id
 				WHERE ost_token_type = \'access\'
 				  AND ost_token      = \'%s\'
-				  AND ost_usa_id_ref = %d
+				  AND id_auteur = %d
 				', $token, $user_id);
 		
 		if (empty($rs))
@@ -1309,7 +1309,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 						DELETE FROM spip_oauth_server_token
 						WHERE ost_token 	 = \'%s\'
 						  AND ost_token_type = \'access\'
-						  AND ost_usa_id_ref = %d
+						  AND id_auteur = %d
 						', $token, $user_id);
 		}
 	}
@@ -1326,7 +1326,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 	{
 		$rs = $this->query_all_assoc('
 				SELECT	osr_id					as id,
-						osr_usa_id_ref			as user_id,
+						id_auteur			as user_id,
 						osr_consumer_key 		as consumer_key,
 						osr_consumer_secret		as consumer_secret,
 						osr_enabled				as enabled,
@@ -1338,7 +1338,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 						osr_requester_name		as requester_name,
 						osr_requester_email		as requester_email
 				FROM spip_oauth_server_registry
-				WHERE (osr_usa_id_ref = %d OR osr_usa_id_ref IS NULL)
+				WHERE (id_auteur = %d OR id_auteur IS NULL)
 				ORDER BY osr_application_title
 				', $user_id);
 		return $rs;
@@ -1368,7 +1368,7 @@ class OAuthStoreMySQL extends OAuthStoreAbstract
 				FROM spip_oauth_server_registry
 					JOIN spip_oauth_server_token
 					ON ost_osr_id_ref = osr_id
-				WHERE ost_usa_id_ref = %d
+				WHERE id_auteur = %d
 				  AND ost_token_type = \'access\'
 				ORDER BY osr_application_title
 				', $user_id);

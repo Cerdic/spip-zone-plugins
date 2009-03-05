@@ -6,7 +6,7 @@ function poauth_declarer_tables_principales($tables_principales){
     # Table holding consumer key/secret combos an user issued to consumers. 
     $osr_field = array(
 	    'osr_id' => "INT(11) NOT NULL AUTO_INCREMENT",
-	    'osr_usa_id_ref' => "INT(11)",
+	    'id_auteur' => "BIGINT(21)",
 	    'osr_consumer_key' => "VARCHAR(255) binary not null",
 	    'osr_consumer_secret' => "VARCHAR(255) binary not null",
 	    'osr_enabled' => "tinyint(1) not null default '1'",
@@ -27,7 +27,7 @@ function poauth_declarer_tables_principales($tables_principales){
     $osr_key = array(
         'PRIMARY KEY osr_id' => "osr_id",
         'UNIQUE KEY osr_consummer_key' =>"osr_consumer_key",
-        'KEY osr_usa_id_ref' => "osr_usa_id_ref"    
+        'KEY id_auteur' => "id_auteur"    
     );
     
     $osr_join = array(
@@ -72,7 +72,7 @@ function poauth_declarer_tables_principales($tables_principales){
     $ost_field = array(
         "ost_id" => "int(11) not null auto_increment",
         "ost_osr_id_ref" =>"int(11) not null",
-        "ost_usa_id_ref" =>"int(11) not null",
+        "id_auteur" =>"BIGINT(11) not null",
         "ost_token" => "VARCHAR(64) binary not null",
         "ost_token_secret" => "VARCHAR(64) binary not null",
         "ost_token_type" => "enum('request','access')",
@@ -105,9 +105,13 @@ function poauth_declarer_tables_principales($tables_principales){
 
 
 function poauth_declarer_tables_interfaces($interface) {
+    #Nommer correctement le noms des tables pour les boucles
     $interface['table_des_tables']['oauth_server_registry']='oauth_server_registry';
     $interface['table_des_tables']['oauth_server_nonce']='oauth_server_nonce';
-    $interface['table_des_tables']['oauth_server_token']='oauth_server_token';        
+    $interface['table_des_tables']['oauth_server_token']='oauth_server_token';
+    #lier les tables
+    $interface['tables_jointures']['auteurs'][] = 'oauth_server_registry';
+    $interface['tables_jointures']['auteurs'][] = 'oauth_server_token';
     return $interface;
 }
 ?>
