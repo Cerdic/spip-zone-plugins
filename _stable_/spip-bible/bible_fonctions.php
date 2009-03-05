@@ -453,7 +453,7 @@ function bible_generer_doc($lang){
 			$lire = $traduction['lire'];
 			
 			if ($gateway){
-				$url = "http://www.biblegateway.com/versions/index.php?action=getVersionInfo&vid=".$gateway;
+				$url = "http://www.biblegateway.com/versions/index.php?action=getVersionInfo&vid=".$gateway[0];
 				
 			}
 			else if ($wissen){
