@@ -15,7 +15,7 @@ include_spip('cout_define');
 cout_define('distant');
 
 // TODO : revoir tout ca avec la syntaxe de <necessite>
-function cs_version_erreur($outil) {
+function cs_version_erreur(&$outil) {
 	return (isset($outil['version-min']) && version_compare($GLOBALS['spip_version_code'], $outil['version-min'], '<'))
 		|| (isset($outil['version-max']) && version_compare($GLOBALS['spip_version_code'], $outil['version-max'], '>'));
 }
@@ -29,7 +29,7 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 	if (isset($outil['code:jq'])) $outil['jquery']='oui';
 	$outil['actif'] = isset($metas_outils[$outil['id']])?$metas_outils[$outil['id']]['actif']:0;
 	// Si Spip est trop ancien ou trop recent...
-	if (cs_version_erreur($outil)) $outil['actif'] = 0;
+	if (cs_version_erreur($outil)) { $metas_outils[$outil['id']]['actif'] = $outil['actif'] = 0; }
 	// au cas ou des variables sont presentes dans le code
 	$outil['variables'] = array(); $outil['nb_variables'] = 0;
 	// ces 2 lignes peuvent initialiser des variables dans $metas_vars ou $metas_vars_code

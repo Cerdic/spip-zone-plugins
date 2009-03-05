@@ -117,12 +117,12 @@ add_outil( array(
 add_outil( array(
 	'id' => 'supprimer_numero',
 	// inserer : $table_des_traitements['TITRE'][]= 'typo(supprimer_numero(%s))';
-	'traitement:TITRE:pre_typo' => 'supprimer_numero',
-	'traitement:TITRE/mots:pre_typo' => 'supprimer_numero',
-	// inserer : $table_des_traitements['NOM'][]= 'typo(supprimer_numero(%s))';
-	'traitement:NOM:pre_typo' => 'supprimer_numero',
 	// inserer : $table_des_traitements['TYPE']['mots']= 'typo(supprimer_numero(%s))';
-	'traitement:TYPE/mots:pre_typo' => 'supprimer_numero',
+	// inserer : $table_des_traitements['NOM'][]= 'typo(supprimer_numero(%s))';
+	'traitement:TITRE:pre_typo,
+	 traitement:TITRE/mots:pre_typo,
+	 traitement:NOM:pre_typo,
+	 traitement:TYPE/mots:pre_typo' => 'supprimer_numero',
 	'categorie' => 'public',
 ));
 
@@ -614,13 +614,13 @@ span.cs_pagination_off {color: lightgrey; font-weight: bold; text-decoration: un
 	// construction des onglets
 	'code:jq_init' => "onglets_init.apply(this);",
 	// pour les balises #TEXTE : $table_des_traitements['TEXTE'] = 'cs_decoupe(propre(%s))';
-	'traitement:TEXTE:post_propre' => 'cs_decoupe',
-	'traitement:TEXTE:pre_propre' => 'cs_onglets',
 	// pour les articles et rubriques : $table_des_traitements['TEXTE']['articles'] = 'cs_decoupe(propre(%s))';
-	'traitement:TEXTE/articles:post_propre' => 'cs_decoupe',
-	'traitement:TEXTE/articles:pre_propre' => 'cs_onglets',
-	'traitement:TEXTE/rubriques:post_propre' => 'cs_decoupe',
-	'traitement:TEXTE/rubriques:pre_propre' => 'cs_onglets',
+	'traitement:TEXTE:post_propre,
+	 traitement:TEXTE/articles:post_propre,
+	 traitement:TEXTE/rubriques:post_propre' => 'cs_decoupe',
+	'traitement:TEXTE:pre_propre,
+	 traitement:TEXTE/articles:pre_propre,
+	 traitement:TEXTE/rubriques:pre_propre' => 'cs_onglets',
 	'categorie' => 'typo-racc',
 	'pipeline:bt_toolbox' => 'decoupe_BarreTypo',
 	'pipeline:nettoyer_raccourcis_typo' => 'decoupe_nettoyer_raccourcis',
@@ -662,8 +662,8 @@ add_outil( array(
 	}',
 	'code:jq_init' => 'cs_sommaire_init.apply(this);',
 	// inserer : $table_des_traitements['TEXTE']['article']= 'sommaire_d_article(propre(%s))';
-	'traitement:TEXTE/articles:post_propre' => 'sommaire_d_article',
-	'traitement:TEXTE/rubriques:post_propre' => 'sommaire_d_article',
+	'traitement:TEXTE/articles:post_propre,
+	 traitement:TEXTE/rubriques:post_propre' => 'sommaire_d_article',
 	'traitement:CS_SOMMAIRE:post_propre' => 'sommaire_d_article_balise',
 	'categorie' => 'typo-corr',
 	'pipeline:nettoyer_raccourcis_typo' => 'sommaire_nettoyer_raccourcis',
@@ -918,13 +918,13 @@ add_outil( array(
 	'contrib'	=> 2206,
 	'code:options' => "@define('_CS_SANS_GLOSSAIRE', '[!glossaire]');\n%%glossaire_limite%%%%glossaire_groupes%%%%glossaire_js%%",
 //	'traitement:LIEU:post_propre' => 'cs_glossaire',
-	'traitement:TEXTE:post_propre' => 'cs_glossaire',
 	// sans oublier les articles et les rubriques :
 	// SPIP ne considere pas que la definition precedente est un tronc commun...
-	'traitement:TEXTE/articles:post_propre' => 'cs_glossaire',
-	'traitement:TEXTE/rubriques:post_propre' => 'cs_glossaire',
 	// et le chapo des articles...
-	'traitement:CHAPO:post_propre' => 'cs_glossaire',
+	'traitement:TEXTE:post_propre,
+	 traitement:TEXTE/articles:post_propre,
+	 traitement:TEXTE/rubriques:post_propre,
+	 traitement:CHAPO:post_propre' => 'cs_glossaire',
 	// Precaution pour les articles virtuels
 	'traitement:CHAPO:pre_propre' => 'nettoyer_chapo',
 	// Mise en forme des titres
@@ -1080,8 +1080,8 @@ add_outil( array(
 	'traitement:TEXTE:pre_propre' => 'insertions_pre_propre',
 	// sans oublier les articles et les rubriques :
 	// SPIP ne considere pas que la definition precedente est un tronc commun...
-	'traitement:TEXTE/articles:pre_propre' => 'insertions_pre_propre',
-	'traitement:TEXTE/rubriques:pre_propre' => 'insertions_pre_propre',
+	'traitement:TEXTE/articles:pre_propre,
+	 traitement:TEXTE/rubriques:pre_propre' => 'insertions_pre_propre',
 ));
 
 // le plugin moderation moderee dans le couteau suisse
@@ -1154,11 +1154,14 @@ add_outil( array(
 add_outil( array(
 	'id' => 'horloge',
 	'categorie' => 'spip',
-	'pipelinecode:insert_head' => '$flux.=\'<script type="text/javascript" src="\'.generer_url_public(\'cout_dates.js\',\'lang=\'.$GLOBALS[\'spip_lang\']).\'"></script>
+	'pipelinecode:insert_head,
+	 pipelinecode:header_prive' => '$flux.=\'<script type="text/javascript" src="\'.generer_url_public(\'cout_dates.js\',\'lang=\'.$GLOBALS[\'spip_lang\']).\'"></script>
 <script type="text/javascript" src="'.url_absolue(find_in_path("outils/jquery.jclock.js")).'"></script>\'."\n";',
 	'code:jq_init' => 'jclock_init.apply(this);',
 ));
 
+// Nettoyage
+unset($cs_temp);
 // Ajout des outils personnalises
 if(isset($GLOBALS['mes_outils'])) {
 	foreach($GLOBALS['mes_outils'] as $id=>$outil) {
