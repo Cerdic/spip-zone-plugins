@@ -1,0 +1,27 @@
+<form class="standard" name="formulaire_lettres" method="post">
+
+<fieldset>
+
+<legend><:lettres:lettre_information:></legend>
+
+[(#ENV{message}|=={'validation_abonnements_succes'}|?{' '})<p><:lettres:validation_abonnements_succes:></p>[<ul class="spip">(#ENV{themes}|filtre_themes{'<li>','</li>'})</ul>]]
+[(#ENV{message}|=={'validation_abonnements_erreur'}|?{' '})<p><:lettres:validation_abonnements_erreur:></p>]
+[(#ENV{message}|=={'validation_desabonnements_succes'}|?{' '})<p><:lettres:validation_desabonnements_succes:></p>[<ul class="spip">(#ENV{themes}|filtre_themes{'<li>','</li>'})</ul>]]
+[(#ENV{message}|=={'validation_desabonnements_erreur'}|?{' '})<p><:lettres:validation_desabonnements_erreur:></p>]
+[(#ENV{message}|=={'validation_changement_format_succes'}|?{' '})<p><:lettres:validation_changement_format_succes:></p>]
+[(#ENV{message}|=={'validation_changement_format_erreur'}|?{' '})<p><:lettres:validation_changement_format_erreur:></p>]
+
+[(#ENV{message}|=={'envoi_abonnements_succes'}|?{' '})<p><:lettres:envoi_abonnements_succes:></p>[<ul class="spip">(#ENV{themes}|filtre_themes{'<li>','</li>'})</ul>]]
+[(#ENV{message}|=={'envoi_abonnements_erreur'}|?{' '})<p><:lettres:envoi_abonnements_erreur:></p>]
+[(#ENV{message}|=={'envoi_desabonnements_succes'}|?{' '})<p><:lettres:envoi_desabonnements_succes:></p>[<ul class="spip">(#ENV{themes}|filtre_themes{'<li>','</li>'})</ul>]]
+[(#ENV{message}|=={'envoi_desabonnements_erreur'}|?{' '})<p><:lettres:envoi_desabonnements_erreur:></p>]
+[(#ENV{message}|=={'envoi_changement_format_succes'}|?{' '})<p><:lettres:envoi_changement_format_succes:></p>]
+[(#ENV{message}|=={'envoi_changement_format_erreur'}|?{' '})<p><:lettres:envoi_changement_format_erreur:></p>]
+
+<ul class="boutons">
+<li><a class="bouton_retour" href="#URL_FORMULAIRE_LETTRES"><:lettres:retour:></a></li>
+</ul>
+
+</fieldset>
+
+</form>

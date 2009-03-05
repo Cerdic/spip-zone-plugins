@@ -1,0 +1,59 @@
+<form class="standard" name="formulaire_lettres" method="post">
+
+<fieldset>
+
+<legend><:lettres:lettre_information:></legend>
+
+[<p class="erreur"><:lettres:champs_obligatoires_erreur:></p>(#ENV*{erreur}|?{' '})
+
+]<dl>
+<dt><:lettres:themes:> * :</dt>
+<BOUCLE_themes(THEMES) {par num titre}><dd><input class="case_a_cocher" type="checkbox" name="rubriques[]" id="theme_#ID_THEME" value="#ID_RUBRIQUE" /> <label for="theme_#ID_THEME">#TITRE</label></dd>
+</BOUCLE_themes><dd><:lettres:aucun_theme_disponible:></dd>
+<//B_themes></dl>
+
+<dl>
+<dt><label for="email"><:lettres:email:> * :</label></dt>
+<dd><input class="champ_texte" type="text" name="email" id="email" value="#ENV{email}" /></dd>
+</dl>
+
+<dl>
+<dt><label for="nom"><:lettres:nom:> :</label></dt>
+<dd><input class="champ_texte" type="text" name="nom" id="nom" value="" /></dd>
+</dl>
+
+<dl>
+<dt><label for="format"><:lettres:format:> :</label></dt>
+<dd>
+<select class="liste" name="format" id="format">
+<option value="mixte"><:lettres:format_mixte:></option>
+<option value="html"><:lettres:format_html:></option>
+<option value="texte"><:lettres:format_texte:></option>
+</select>
+</dd>
+</dl>
+
+<dl>
+<dt><label for="action"><:lettres:action:> * :</label></dt>
+<dd>
+<select class="liste" name="action" id="action">
+<option value="abonnements"><:lettres:abonnement:></option>
+<option value="desabonnements"><:lettres:desabonnement:></option>
+<option value="changement_format"><:lettres:changement_format:></option>
+</select>
+</dd>
+</dl>
+
+<p class="note">(*) <:lettres:champs_obligatoires:></p>
+
+</fieldset>
+
+<ul class="boutons">
+<li><input class="bouton_valider" type="submit" value="<:lettres:valider:>" /></li>
+</ul>
+
+<div class="champs_caches">
+<input type="hidden" name="lang" value="#LANG" />
+</div>
+
+</form>
