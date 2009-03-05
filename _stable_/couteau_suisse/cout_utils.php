@@ -74,10 +74,18 @@ function cs_compatibilite_ascendante() {
 // ajoute un outil a $outils;
 function add_outil($tableau) {
 	global $outils;
-	static $id; $id = isset($id)?$id + 10:0;
-	if (!isset($tableau['id'])) { $tableau['id']='erreur'.count($outils); $tableau['nom'] = _T('couteauprive:erreur_id');	}
-	$tableau['index'] = $id;
-	$outils[$tableau['id']] = $tableau;
+	static $index; $index = isset($index)?$index + 10:0;
+	foreach($tableau as $i=>$v) if(strpos($i,',')!==false) {
+		$a = explode(',', $i);
+		foreach($a as $b) $tableau[trim($b)] = $v;
+		unset($tableau[$i]);
+	}
+	if (!isset($tableau['id'])) { $tableau['id']='erreur'.count($outils); $tableau['nom'] = _T('couteauprive:erreur_id'); }
+	$tableau['index'] = $index;
+	$perso = $tableau['id'] . '_perso';
+	$outils[$tableau['id']] = is_array($GLOBALS['mes_outils'][$perso])
+		?array_merge($tableau, $GLOBALS['mes_outils'][$perso])
+		:$tableau;
 }
 
 // ajoute une variable a $cs_variables et fabrique une liste des chaines et des nombres
@@ -204,7 +212,7 @@ function cs_aide_raccourcis() {
 }
 
 // retourne une aide concernant les pipelines utilises par l'outil
-function cs_aide_pipelines() {
+function cs_aide_pipelines($outils_affiches_actifs) {
 	global $cs_metas_pipelines, $outils, $metas_outils;
 	$aide = array();
 	foreach (array_keys($cs_metas_pipelines) as $pipe) {
@@ -214,11 +222,14 @@ function cs_aide_pipelines() {
 	}
 	// nombre d'outils actifs
 	$nb=0; foreach($metas_outils as $o) if($o['actif']) $nb++;
-	// nombre d'outils caches
-	$ca = isset($GLOBALS['meta']['tweaks_caches'])?count(unserialize($GLOBALS['meta']['tweaks_caches'])):0;
+	// nombre d'outils caches de la configuration par l'utilisateur
+	$ca1 = isset($GLOBALS['meta']['tweaks_caches'])?count(unserialize($GLOBALS['meta']['tweaks_caches'])):0;
+	// nombre d'outils caches par les autorisations
+	$ca2 = $nb - $ca1 - $outils_affiches_actifs;
 	return '<p><b>' . _T('couteauprive:pipelines') . '</b> '.count($aide).'</p><p style="margin-left:1em;">' . join("<br/>", $aide) . '</p>'
 		. '<p><b>' . _T('couteauprive:outils_actifs') . "</b> $nb</p>"
-		. '<p><b>' . _T('couteauprive:outils_caches') . "</b> $ca</p>";
+		. '<p><b>' . _T('couteauprive:outils_caches') . "</b> $ca1</p>"
+		. (!$ca2?'':('<p><b>' . _T('couteauprive:outils_non_parametrables') . "</b> $ca2</p>"));
 }
 
 // met en forme le fichier $f en vue d'un insertion en head
