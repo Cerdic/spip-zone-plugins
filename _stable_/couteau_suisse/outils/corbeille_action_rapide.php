@@ -29,7 +29,7 @@ function corbeille_action_rapide() {
 	"tableliee"  => tableau des tables spip à vider en meme temps    ) 
 */
 function cs_corbeille_table_infos($table=false) {
-	static $params = null;
+	static $params = NULL;
 	if(is_null($params)) {
 		global $corbeille_params;
 		$params = array (

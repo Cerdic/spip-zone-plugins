@@ -1,7 +1,7 @@
 <?php
 
 function mailcrypt($texte) {
-	static $ok = null;
+	static $ok = NULL;
 	if (strpos($texte, '@')===false) return $texte;
 
 	if(is_null($ok)) {

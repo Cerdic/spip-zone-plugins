@@ -28,7 +28,7 @@ function typo_exposants_en($texte){
 // cette fonction ne fonctionne que pour le francais
 // elle n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
 function typo_exposants_fr($texte){
-	static $typo = null;
+	static $typo = NULL;
 	static $egrave; static $eaigu1; static $eaigu2; static $accents;
 	if (is_null($typo)) {
 		// en principe, pas besoin de : caractere_utf_8(232)

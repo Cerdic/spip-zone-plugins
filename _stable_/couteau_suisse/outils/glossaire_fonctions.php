@@ -103,7 +103,7 @@ function cs_rempl_glossaire($texte) {
 		return str_replace(_CS_SANS_GLOSSAIRE, '', $texte);
 	// mise en static de la table des mots pour eviter d'interrroger la base a chaque fois
 	// attention aux besoins de memoire...
-	static $limit, $glossaire_generer_url, $glossaire_generer_mot, $glossaire_array = null;
+	static $limit, $glossaire_generer_url, $glossaire_generer_mot, $glossaire_array = NULL;
 	if(!isset($glossaire_array)) {
 		$glossaire_array = array();
 		// compatibilite SPIP 1.92
