@@ -3,7 +3,9 @@
 <h2>#GRAND_TOTAL articles</h2>
 <ul>
 <BOUCLE_articles(jos_content){catid ?}{!par publish_up}{pagination 50}>
-<li><a href="./?page=joomla2spip&id_article=#ID">#TITLE</a></li>
+<li><a href="./?page=joomla2spip&id_article=#ID">#TITLE</a> 
+([(#STATE|=={0}|oui)prop][(#STATE|=={-2}|oui)publie][(#STATE|=={1}|oui)publie])
+</li>
 <B_urls>
 <ul>
 <BOUCLE_urls(jos_jv_page_url){url LIKE %(#TITLE|sef_url)%}>

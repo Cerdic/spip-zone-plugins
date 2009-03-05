@@ -45,6 +45,14 @@ Url(s)
 </B_urls></div>
 
 <div class="label">
+Statut
+</div>
+[(#REM) -2 = publie + en une]
+<div class="champ">
+[(#STATE|=={0}|oui)prop][(#STATE|=={-2}|oui)publie][(#STATE|=={1}|oui)publie]
+</div>
+
+<div class="label">
 Descriptif
 </div>
 <div id="descriptif" class="champ">

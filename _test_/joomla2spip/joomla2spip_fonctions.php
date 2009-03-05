@@ -200,9 +200,12 @@ function article_import($mon_article) {
 }
 
 function sef_url($titre){
-$pattern = "/[^a-zA-Z1-9,_-]/";
 $titre = str_replace("&#8217;","'",$titre);
-$url = preg_replace($pattern,"-",removeaccents(trim($titre)));	
+$titre = preg_replace("/'/","",trim($titre));
+$titre = str_replace("°","-",$titre);
+$pattern = "/[^a-zA-Z0-9,_-]/";
+include_spip('inc/charsets');
+$url = preg_replace($pattern,"-",translitteration(trim($titre)));	
 $url = strtolower($url);	
 $url = preg_replace("/-+/","-",$url);	
 
@@ -215,11 +218,5 @@ function joomla2spip_nettoyer_url($url){
 	}	
 	return $url ;
 }
-
-function removeaccents($string){ 
-  $string = str_replace(array("é","è","ë","ï","ç","ô","ó"),array("e","e","e","i","c","o","o"),$string); 
-  $string = preg_replace("/\s+/"," ",$string);
-   return $string; 
-   } 
 
 ?>
