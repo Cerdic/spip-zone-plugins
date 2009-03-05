@@ -359,6 +359,7 @@ function bible_tableau($i,$lang=''){
 	'jerusalem' => array(
 		'traduction'=> 'Bible de J&eacute;rusalem',
 		'gateway'	=> false,
+		'unbound'   => 'french_jerusalem_ucs2',
 		'lang'		=> 'fr',
 		'nt'=> true,
 		'at'=> true,

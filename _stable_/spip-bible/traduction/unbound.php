@@ -75,12 +75,21 @@ function recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$v
 	
 	
 	//ajout des numerso de chapitre
+	$j = 1;
+	if (($chapitre_fin != $chapitre_debut) and ($verset_fin!=9999)){
+	   $j = 0;
+	}
+	
+
 	$tableau = explode ("<sup>1</sup>",trim($code));
 	
 	
 	$i = $chapitre_debut;
-	$j = 1;
-	$code ='';
+	
+	
+	
+	
+	$code='';
 	while ($i<=$chapitre_fin){
 		$code .= '<br /><strong>'.$i.'</strong>';
 		if (($verset_debut==1) or ($i!=$chapitre_debut)){
@@ -88,10 +97,12 @@ function recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$v
 		}
 		
 		$code .= $tableau[$j];
+		
 		$i++;
 		$j++;
 		
 		}
+    
 	$code = str_replace('</strong><br /><sup>','</strong><sup>',$code);
 	return str_replace('<br /><br />','<br />',$code);
 	}
