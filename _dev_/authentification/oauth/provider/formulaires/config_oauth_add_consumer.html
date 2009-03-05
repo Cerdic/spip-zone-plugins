@@ -1,7 +1,15 @@
 #CACHE{0}
 <div class="formulaire_spip formulaire_oauth_add_consumer">
 
-    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</li>]
+    [<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok}|oui)
+        <p>
+        Le consumer [(#ENV{message_ok}|table_valeur{id})] a été créé.
+        </p>
+        <ul>
+            <li>Sa clef est [(#ENV{message_ok}|table_valeur{consumer_key})]</li>
+            <li>Son secret est [(#ENV{message_ok}|table_valeur{consumer_secret})]</li>
+        </ul>
+    </div>]
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</li>]
 	
     <form method="post" action="#ENV{action}">
@@ -16,6 +24,7 @@
                             [<span class="erreur_message">(#ENV{erreurs}|table_valeur{user_id})</span>]
                             <B_auteur>
                                 <select id="user_id" name="user_id">
+                                <option></option>
                                 <BOUCLE_auteur(AUTEURS) {par nom} {statut=0minirezo}>
                                     <option value="#ID_AUTEUR"  [(#ID_AUTEUR|=={#ENV{user_id}}) selected="selected" ]> #NOM </option>
                                 </BOUCLE_auteur>
