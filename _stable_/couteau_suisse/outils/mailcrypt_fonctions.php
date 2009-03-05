@@ -15,7 +15,7 @@ function mailcrypt($texte) {
 		// span ayant l'arobase en background
 		@define('_mailcrypt_AROBASE', '<span class=\'spancrypt\'>&nbsp;</span>');
 //		@define('_mailcrypt_REGEXPR1', ',\b['._cs_liens_AUTORISE.']*@[a-zA-Z][a-zA-Z0-9-.]*\.[a-zA-Z]+(\?['._cs_liens_AUTORISE.']*)?,');
-		@define('_mailcrypt_REGEXPR2', ',\b(['._cs_liens_AUTORISE.']*)@([a-zA-Z][a-zA-Z0-9-.]*\.[a-zA-Z]+(\?['._cs_liens_AUTORISE.']*)?),');
+		@define('_mailcrypt_REGEXPR2', ',\b(['._cs_liens_AUTORISE.']+)@([a-zA-Z][a-zA-Z0-9-.]*\.[a-zA-Z]+(\?['._cs_liens_AUTORISE.']*)?),');
 	}
 
 	// echappement des 'input' au cas ou le serveur y injecte des mails persos
@@ -24,6 +24,9 @@ function mailcrypt($texte) {
 	// echappement des 'protoc://login:mdp@site.ici' afin ne pas les confondre avec un mail
 	if (strpos($texte, '://')!==false) 
 		$texte = preg_replace_callback(',[a-z0-9]+://['._cs_liens_AUTORISE.']+:['._cs_liens_AUTORISE.']+@,Umsi', 'cs_liens_echappe_callback', $texte);
+	// echappement des domaines .htm/.html : ce ne sont pas des mails
+	if (strpos($texte, '.htm')!==false)
+		$texte = preg_replace_callback(',href=(["\'])[^>]*@[^>]*\.html?\\1,', 'cs_liens_echappe_callback', $texte);
 
 	// protection des liens HTML
 	$texte = preg_replace(",[\"\']mailto:([^@\"']+)@([^\"']+)[\"\'],", 

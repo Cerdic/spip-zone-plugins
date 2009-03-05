@@ -179,7 +179,8 @@ function cs_les_tests() {
 		"__degrade.png__\n__ornement.png__",
 		"\n__6__\n__5__\n__4__\n__3__\n__2__\n__1__\n__0__\n",
 	);
-	test_outil(cs_test_fun($textes, create_function('$t','return propre(filets_sep($t));')), 'Test sur : filets_sep()');
+	if(function_exists('filets_sep'))
+		test_outil(cs_test_fun($textes, create_function('$t','return propre(filets_sep($t));')), 'Test sur : filets_sep()');
 
 	// test des liens orphelins
 	$GLOBALS["liens_orphelins_etendu"]=true;
@@ -213,8 +214,9 @@ function cs_les_tests() {
 		"pat@moi.com.tm.fr [->pat@moi.com.tm.fr] [pat->pat@moi.com.tm.fr]",
 		"<a href='mailto:moi@toto.com'>Moi</a> et : <a href='mailto:moi@toto.com'>moi@toto.com</a>",
 		"<a href='mailto:moi@kekpar.tm.fr'>Moi</a> et : <a href='mailto:moi@kekpar.tm.fr'>moi@kekpar.tm.fr</a>",
+		'[Navigation->/@mot.html] <a class="spip_out" href="/@mot.html">Navigation</a>',
 	);
-	test_outil(cs_test_fun($textes, 'mailcrypt_post_propre'), 'Test sur : mailcrypt_post_propre()');
+	test_outil(cs_test_fun($textes, 'mailcrypt'), 'Test sur : mailcrypt()');
 
 /*
 define('_COULEURS_FONDS', 1); define('_COULEURS_SET', 1);
