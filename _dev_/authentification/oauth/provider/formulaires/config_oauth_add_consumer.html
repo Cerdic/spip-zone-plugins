@@ -14,22 +14,21 @@
                     <ul>
                         <li class="editer_user_id">
                             <label for="user_id">Auteur SPIP référent :</label>
-                            [<span class="erreur_message">(#ENV{erreurs}|table_valeur{user_id})</span>]
                             <B_auteur>
                                 <select id="user_id" name="user_id">
                                 <BOUCLE_auteur(AUTEURS) {par nom} {statut=0minirezo}>
-                                    <option value="#ID_AUTEUR"> #NOM </option>
+                                    <option value="#ID_AUTEUR"  [(#ID_AUTEUR|=={#ENV{user_id}}) selected="selected" ]> #NOM </option>
                                 </BOUCLE_auteur>
                                 </select>
                             </B_auteur>
                         </li>
-		                <li class="editer_">
-			                <label for="requester_name">Nom : </label>
-			                <input type="text" name="requester_name" id="requester_name" value="#ENV{requester_name}"/>
+		                <li class="editer_osr_request_name">
+			                <label for="osr_requester_name">Nom : </label>
+			                <input type="text" name="osr_requester_name" id="osr_requester_name" value="#ENV{osr_requester_name}"/>
 		                </li>
-		                <li class="editer_">
-			                <label>Courriel du référent : </label>
-			                <input type="text" name="requester_email" id="requester_email" value="#ENV{requester_email}"/>
+		                <li class="editer_requester_email">
+			                <label for="osr_requester_name">Courriel du référent : </label>
+			                <input type="text" name="osr_requester_email" id="osr_requester_email" value="#ENV{osr_requester_email}"/>
 		                </li>
                     </ul>
                 </fieldset>
@@ -38,33 +37,33 @@
                 <fieldset>
                     <h3 class="legend">Champs optionnels</h3>
                     <ul>
-		                <li class="editer_">
-			                <label for="callback_uri">URI de retour : </label>
-			                <input type="text" name="callback_uri" id="callback_uri" value="#ENV{callback_uri,http://www.myconsumersite.com/oauth_callback}"/>
+		                <li class="editer_osr_callback_uri">
+			                <label for="osr_callback_uri">URI de retour : </label>
+			                <input type="text" name="osr_callback_uri" id="osr_callback_uri" value="#ENV{osr_callback_uri,http://www.myconsumersite.com/oauth_callback}"/>
 		                </li>
-		                <li class="editer_">
-			                <label for="application_uri">URI de l'application : </label>
-			                <input type="text" name="application_uri" id="application_uri" value="#ENV{application_uri, http://www.consumersite.com/}"/>
+		                <li class="editer_osr_application_uri">
+			                <label for="osr_application_uri">URI de l'application : </label>
+			                <input type="text" name="osr_application_uri" id="osr_application_uri" value="#ENV{osr_application_uri, http://www.consumersite.com/}"/>
 		                </li>
-		                <li class="editer_">
-			                <label for="application_title">Nom de l'application : </label>
-			                <input type="text" name="application_title" id="application_title" value="#ENV{application_title, John Doe's consumer site'}"/>
+		                <li class="editer_osr_application_title">
+			                <label for="osr_application_title">Nom de l'application : </label>
+			                <input type="text" name="osr_application_title" id="osr_application_title" value="#ENV{osr_application_title, John Doe's consumer site'}"/>
 		                </li>
-		                <li class="editer_">
-			                <label for="application_descr">Description de l'application : </label>
-			                <input type="text" name="application_descr" id="application_descr" value="#ENV{application_descr,Make nice graphs of all your data}"/>
+		                <li class="editer_osr_application_descr">
+			                <label for="osr_application_descr">Description de l'application : </label>
+			                <input type="text" name="osr_application_descr" id="osr_application_descr" value="#ENV{osr_application_descr,Make nice graphs of all your data}"/>
 		                </li>
-		                <li class="editer_">
-			                <label for="application_notes">Notes concernant l'application : </label>
-			                <input type="text" name="application_notes" id="application_notes" value="#ENV{application_notes,Bladibadou}"/>
+		                <li class="editer_osr_application_notes">
+			                <label for="osr_application_notes">Notes concernant l'application : </label>
+			                <input type="text" name="osr_application_notes" id="osr_application_notes" value="#ENV{osr_application_notes,Bladibadou}"/>
 		                </li>
-		                <li class="editer_">
-			                <label for="application_type">Type de l'application : </label>
-			                <input type="text" name="application_type" id="application_type" value="#ENV{application_type,website}"/>
+		                <li class="editer_osr_application_type">
+			                <label for="osr_application_type">Type de l'application : </label>
+			                <input type="text" name="osr_application_type" id="osr_application_type" value="#ENV{osr_application_type,website}"/>
 		                </li>
-		                <li class="editer_">
-			                <label for="application_commercial">Application commerciale : </label>
-			                <input type="checkbox" name="application_type" id="application_type" [(#ENV{application_commercial}|oui)checked = "checked"]/>
+		                <li class="editer_osr_application_commercial">
+			                <label for="osr_application_commercial">Application commerciale : </label>
+			                <input type="checkbox" name="osr_application_type" id="osr_application_type" [(#ENV{osr_application_commercial}|oui)checked = "checked"]/>
 		                </li>		
                     </ul>
                 </fieldset>
