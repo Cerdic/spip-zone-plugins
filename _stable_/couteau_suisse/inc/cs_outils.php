@@ -106,7 +106,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 // renvoie simplement deux liste des outils actifs/inactifs
 function liste_outils() {
 	global $outils;
-	$id = 0;
+	$id = $nb_actifs = 0;
 	$metas_caches = isset($GLOBALS['meta']['tweaks_caches'])?unserialize($GLOBALS['meta']['tweaks_caches']):array();
 	foreach($outils as $outil) $categ[_T('couteauprive:categ:'.$outil['categorie'])] = $outil['categorie']; ksort($categ);
 	$result_actifs = $result_inactifs = '';
@@ -118,6 +118,7 @@ function liste_outils() {
 			if (!$hide)
 				${$test}[] .= $outil['nom'] . '|' . $outil['index'] . '|' . $outil['id'];
 		}
+		$nb_actifs += count($s_actifs);
 		foreach(array('s_actifs', 's_inactifs') as $temp) {
 			sort(${$temp});
 			$reset=_request('cmd')=='resetjs'?"\ncs_EffaceCookie('sous_liste_$id');":'';
@@ -135,7 +136,7 @@ function liste_outils() {
 	}
 
 	$fieldset = '<fieldset style="width:92%; margin:0; padding:0.6em;" class="cadre-trait-couleur liste_outils"><legend style="font-weight:bold; color:';
-	return '<div id="cs_outils" class="cs_outils">'
+	return array($nb_actifs, '<div id="cs_outils" class="cs_outils">'
 	. '<div class="cs_liste cs_inactifs">' . $fieldset . 'red;">' . _T('couteauprive:outils_inactifs') . '</legend>'
 	. $results_inactifs . '</fieldset></div>'
 	. '<form id="csform" name="csform" method="post" action="'.generer_url_ecrire(_request('exec'),"cmd=toggle").'">'
@@ -150,7 +151,7 @@ function liste_outils() {
 	. '<div class="cs_liste cs_actifs">' . $fieldset . '#22BB22;">' . _T('couteauprive:outils_actifs') . '</legend>'
 	. $results_actifs . '</fieldset>'
 	. '<div style="text-align: right;"><a id="cs_tous_a" title="'._T('couteauprive:outils_selectionactifs').'" href="#">'._T('couteauprive:outils_selectiontous').'</a></div>'
-	. '</div></div>';
+	. '</div></div>');
 }
 
 // renvoie les details techniques d'un outil

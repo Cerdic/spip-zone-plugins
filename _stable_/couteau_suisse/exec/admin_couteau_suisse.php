@@ -513,7 +513,7 @@ if (!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p
 
 	// chargement des outils
 	include_spip('inc/cs_outils'); 
-	$lite_outils = liste_outils();
+	list($outils_affiches_actifs, $liste_outils) = liste_outils();
 	// cadre de gauche
 	cs_compat_boite('debut_gauche');
 	// pour la liste des docs sur spip-contrib
@@ -551,7 +551,7 @@ if (!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p
 	$aide = cs_aide_raccourcis();
 	if(strlen($aide))
 		echo debut_boite_info(true), $aide, fin_boite_info(true);
-	$aide = cs_aide_pipelines();
+	$aide = cs_aide_pipelines($outils_affiches_actifs);
 	if(strlen($aide))
 		echo debut_boite_info(true), $aide, fin_boite_info(true);
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>$exec),'data'=>''));
@@ -567,7 +567,7 @@ if (!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p
 		"\n<table border='0' cellspacing='0' cellpadding='5' style='width:100%;'><tr><td class='sansserif'>";
 
 	$_GET['source'] = $exec;
-	echo '<div class="conteneur">', $lite_outils,
+	echo '<div class="conteneur">', $liste_outils,
 		'</div><br class="conteneur" /><div class="conteneur"><div id="cs_infos" class="cs_infos">',
 		$cmd=='pack'?cs_description_pack():description_outil2($afficher_outil),
 		'</div><script type="text/javascript"><!--
