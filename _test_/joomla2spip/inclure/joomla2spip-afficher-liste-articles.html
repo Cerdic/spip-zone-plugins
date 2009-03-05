@@ -1,8 +1,16 @@
+#CACHE{0}
 <B_articles>
 <h2>#GRAND_TOTAL articles</h2>
 <ul>
 <BOUCLE_articles(jos_content){catid ?}{!par publish_up}{pagination 50}>
 <li><a href="./?page=joomla2spip&id_article=#ID">#TITLE</a></li>
+<B_urls>
+<ul>
+<BOUCLE_urls(jos_jv_page_url){url LIKE %(#TITLE|sef_url)%}>
+[<li>(#URL|joomla2spip_nettoyer_url)</li>]
+</BOUCLE_urls>
+</ul>
+</B_urls>
 </BOUCLE_articles>
 </ul>
 <p>#PAGINATION</p>

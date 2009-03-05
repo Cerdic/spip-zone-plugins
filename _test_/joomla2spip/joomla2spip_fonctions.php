@@ -199,6 +199,27 @@ function article_import($mon_article) {
 	return $err; 
 }
 
+function sef_url($titre){
+$pattern = "/[^a-zA-Z1-9,_-]/";
+$titre = str_replace("&#8217;","'",$titre);
+$url = preg_replace($pattern,"-",removeaccents(trim($titre)));	
+$url = strtolower($url);	
+$url = preg_replace("/-+/","-",$url);	
 
+	return $url ;
+}
+
+function joomla2spip_nettoyer_url($url){
+	if(preg_match('/search|file:\/\/\/|#n[1-9]|anonymouse\.org|webwarper.net/',$url)){
+	return '' ;
+	}	
+	return $url ;
+}
+
+function removeaccents($string){ 
+  $string = str_replace(array("é","è","ë","ï","ç","ô","ó"),array("e","e","e","i","c","o","o"),$string); 
+  $string = preg_replace("/\s+/"," ",$string);
+   return $string; 
+   } 
 
 ?>

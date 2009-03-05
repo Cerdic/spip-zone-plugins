@@ -17,7 +17,9 @@ $("#texte_brut, .brut").hide();
 </script>
 <style>
 .flip{
-margin:10px;
+display:block;	
+padding:20px;
+float:left;
 }
 </style>
 
@@ -31,19 +33,33 @@ Titre
 </div>
 
 <div class="label">
+Url(s)
+</div>
+<div id="urls" class="champ">
+<B_urls>
+<ul>
+<BOUCLE_urls(jos_jv_page_url){url LIKE %(#TITLE|sef_url)%}>
+[<li>(#URL|joomla2spip_nettoyer_url)</li>]
+</BOUCLE_urls>
+</ul>
+</B_urls></div>
+
+<div class="label">
 Descriptif
 </div>
 <div id="descriptif" class="champ">
 [(#INTROTEXT|joomla2spip_nettoyer_texte|propre)]
 </div>
 
-<a href="#flip_brut" id="flip_brut" class="flip">Texte brut bdd</a>
+<div>
 <a href="#flip_brut" id="flip_traite" class="flip">Texte traité</a>
+<a href="#flip_brut" id="flip_brut" class="flip">Texte brut bdd</a>
+</div>
 
-<div class="label traite">
+<div class="label traite" style="clear:both">
 Texte traité
 </div>
-[<div>
+[<div style="clear:both">
 titre original</div>
 <div id="titre_original" class="champ">
 (#FULLTEXT*|joomla2spip_nettoyer_texte{titre}|propre)
