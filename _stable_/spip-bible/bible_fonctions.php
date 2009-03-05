@@ -162,7 +162,13 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	$debut = eregi_replace($livre,'',$debut);
 	
 	
-	$livre=='Es' and $traduction=='jerusalem' ? $livre = 'Is' : $livre = 'Es'; // gestion Isaïe/Esaïe
+	//problème Isaïe / Esaïe => on converti dans la bonne confession
+	if ($lang=='fr' and ($livre == 'Is' or $livre =='Es' )){
+	   $livre = $tableau_traduction[$traduction]['isaie'];
+	   
+	
+	
+	}
 	
 	//chercher chapitre et verset du début
 	

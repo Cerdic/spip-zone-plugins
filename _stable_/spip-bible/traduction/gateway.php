@@ -47,7 +47,7 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 		// recuperer le fichier
 		
 		$url = 'http://www.biblegateway.com/passage/?book_id='.$livre.'&version='.$id_trad.'&chapter='.$i;
-				
+        	
 		$i == $chapitre_debut ? $verset_debut = $verset_debut : $verset_debut = 1;        
 		
 		
@@ -64,46 +64,39 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 			$tableau = explode('<strong>Footnotes:</strong>',$code);
 			$code = $tableau[0];
 		}
+		
 		//suppression des intertitres
-		if(eregi('<h5>',$code)){
-			$tableau = explode('<h5>',$code);
-			
-			$d = 0;
-			$tableau2 = array();
-			foreach ($tableau as $j){
-				if (eregi('</h5>&nbsp;',$j)){
-					
-					$tableau3 = explode('</h5>&nbsp;',$j);
-					$tableau2[$d]=$tableau3[1];
-					
-				
-				}
-				$d++;
-			
-			}
-			
-			$code = implode('',$tableau2);
-		}
+		$code = supprimer_intertitre($code);
+		
 		//supprerssion des balises
 		$code = str_replace('<p />','<br />',$code);
 		$code = str_replace(' class="sup">',"><sup>",$code);
 		$code = str_replace('</span>',' </sup>',$code);
 		$code = strip_tags($code,'<sup><br>');
 		
+		
 		if ($verset_fin!=''){
 		//selection des verset
-		    $sup = '<sup id="'.$lang.'-'.$nom_trad.'-'.$verset_debut.'" class="versenum" value=\''.$verset_debut."'>".$verset_debut.'</sup>';
+		    $sup = '<sup>'.$verset_debut.'</sup>';
 		   
-           // $code = str_replace ($sup,'|',$code);
+           
+            //suprresion des attributs html dans les sup
+           
+           $code = eregi_replace('class="versenum"','',$code);
+           $code = eregi_replace("value='[0-9]*'",'',$code);
+           $code = eregi_replace(' id="'.$lang.'-'.$nom_trad.'-[0-9]*"  ','',$code);
+           
             
+           
+             
             $tableau 	= explode($sup,$code);
 			
 			
-			$code  		=  '<sup>'.$verset_debut.' </sup>'.$tableau[1];
+			$code  		=  '<sup>'.$verset_debut.'</sup>'.$tableau[1];
 			
 			if ($i == $chapitre_fin){
 				$v = $verset_fin+1;
-				 $sup = '<sup id="'.$lang.'-'.$nom_trad.'-'.$v.'" class="versenum" value=\''.$v."'>".$v.'</sup>';
+				 $sup = '<sup>'.$v.'</sup>';
 				$tableau 	= explode($sup,$code);
 				
 				$code  		= trim($tableau[0]);
@@ -118,9 +111,66 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
 
 		$i++;
 		}
-	$texte = vider_attribut(vider_attribut($texte,'class'),'value');
-	 return eregi_replace('<sup>\[[a-z]*\]</sup>','',str_replace(' <br />&nbsp;&nbsp;  <br />','<br />',str_replace('<br /><br /><strong>','<br /><strong>',str_replace('<br />&nbsp;','<br />',str_replace('</strong> <br />&nbsp;','</strong>',$texte)))));
+    
+    /*dernier fignolage cosmétique*/
+    
+    $texte = str_replace('&nbsp;','',$texte);      //suppresion des espaces insécables, spip les remettra
+    
+    $texte = supprimer_note($texte);
+    $texte = str_replace("  <br />",'',$texte);
+    
+    while(ereg("<br /><br />",$texte)){
+        $texte = str_replace("<br /><br />","<br />",$texte);
+    
+        }
+    
+    return $texte;
 	
 }
 
+function supprimer_note($texte){
+   
+    //on boucle tant qu'on trouve des value
+    while(eregi("value='",$texte)){
+        
+        $texte = vider_attribut($texte,'value');
+   }
+  
+    $texte = str_replace(" class='footnote'",'',$texte);
+    $texte = eregi_replace("\[[a-z]*\]",'',$texte);
+  
+    $texte = str_replace("<sup></sup>",'',$texte);
+    
+    return $texte;
+
+}
+
+function supprimer_intertitre($code){
+    
+    $tableau = explode('<h5>',$code); // on fait un tableau
+    $i = 0;
+    
+    foreach($tableau as $chaine){   // on parcour le tableau, et on supprimer ce qu'il y a avant le </h5>
+        $tableau2 = explode('</h5>',$chaine);
+        
+        if (count ($tableau2)==2){  //important de tester que le tableau contient bien deux entrées, pour le cas où on est avant l'intertitre
+            $tableau[$i]=$tableau2[1];
+        
+        
+        
+        }
+        else{
+            $tableau[$i]=$tableau2[0];
+        
+        
+        }
+        
+        $i++;
+    
+    }
+    
+    $code = implode('',$tableau);
+    
+    return $code;
+}
 ?>

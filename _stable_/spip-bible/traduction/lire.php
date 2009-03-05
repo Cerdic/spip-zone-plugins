@@ -61,8 +61,7 @@ function lire_traiter_code($code){
 	$tableau = explode('</div>',$tableau[1]);
 	
 	$code = $tableau[0];
-	//$tableau = explode('<span class="verset ',$code);
-	//$code=$tableau[1];
+	
 	$code = eregi_replace('<span class="reference">[0-9]*</span>','*spip*',$code);
 	$code = strip_tags($code);
 	$tableau = explode("*spip*",$code);
@@ -85,7 +84,7 @@ function recuperer_versets($code,$vd,$vf){
 	
 	
 	$tableau = explode('<sup>'.$vd.'</sup>',$code);
-	//$tableau = explode('<sup>'.$vf.'</sup>',$tableau[1]);
+	
 	$code = '<sup>'.$vd.'</sup>'.$tableau[1];
 	
 	$tableau = explode('<sup>'.$vf.'</sup>',$code);
