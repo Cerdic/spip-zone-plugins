@@ -86,7 +86,7 @@
 		echo '</li>';
 		echo '</ul>';
 		if ($statut == "publie")
-			echo '<table class="cellule-h-table" cellpadding="0" style="vertical-align: middle"><tr><td><a href="'.generer_url_public('meteo', 'id_meteo='.$id_meteo).'" class="cellule-h"><span class="cell-i"><img src="../prive/images/rien.gif" alt="'._T('meteoprive:voir_en_ligne').'"  style="background: url(../prive/images/racine-24.gif) center center no-repeat;" /></span></a></td><td class="cellule-h-lien"><a href="'.generer_url_public('meteo', 'id_meteo='.$id_meteo).'" class="cellule-h">'._T('meteoprive:voir_en_ligne').'</a></td></tr></table>';
+			echo '<table class="cellule-h-table" cellpadding="0" style="vertical-align: middle"><tr><td><a href="'.generer_url_meteo($id_meteo).'" class="cellule-h"><span class="cell-i"><img src="../prive/images/rien.gif" alt="'._T('meteoprive:voir_en_ligne').'"  style="background: url(../prive/images/racine-24.gif) center center no-repeat;" /></span></a></td><td class="cellule-h-lien"><a href="'.generer_url_meteo($id_meteo).'" class="cellule-h">'._T('meteoprive:voir_en_ligne').'</a></td></tr></table>';
 		echo '</div>';
 		echo '</div>';
 		echo '</div>';

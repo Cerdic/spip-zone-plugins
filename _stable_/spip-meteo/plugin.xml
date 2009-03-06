@@ -29,6 +29,14 @@
 		<nom>autoriser</nom>
 		<inclure>inc/meteo_autorisations.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_objets_surnoms</nom>
+		<inclure>inc/meteo_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>rechercher_liste_des_champs</nom>
+		<inclure>inc/meteo_pipelines.php</inclure>
+	</pipeline>
 	<bouton id="meteo_tous" parent="naviguer">
 		<icone>prive/images/meteo-24.png</icone>
 		<titre>meteo:meteo</titre>       

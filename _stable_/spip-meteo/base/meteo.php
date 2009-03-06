@@ -54,22 +54,6 @@
 	}
 
 
-	function boucle_METEO_dist($id_boucle, &$boucles) {
-		$boucle = &$boucles[$id_boucle];
-		$id_table = $boucle->id_table;
-		$boucle->from[$id_table] =  "spip_meteo";
-		$mstatut = $id_table .'.statut';
-
-		if (!isset($boucle->modificateur['criteres']['statut'])) {
-			if (!$GLOBALS['var_preview'])
-				if (!isset($boucle->modificateur['tout']))
-					array_unshift($boucle->where, array("'='", "'$mstatut'", "'\\'publie\\''"));
-		}
-
-		return calculer_boucle($id_boucle, $boucles); 
-	}
-
-
 	function meteo_install($action){
 		include_spip('inc/plugin');
 		$info_plugin_boutique = plugin_get_infos(_NOM_PLUGIN_METEO);
