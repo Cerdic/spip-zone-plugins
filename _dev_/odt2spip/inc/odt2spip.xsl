@@ -164,7 +164,7 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
     </texte>
 		<ps></ps>
 		<date></date>
-		<statut></statut>
+		<statut>prop</statut>
 		<id_secteur></id_secteur>
 		<date_redac></date_redac>
 		<accepter_forum></accepter_forum>
@@ -188,7 +188,7 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
 
 <!-- les paragraphes y compris les vides utilises pour saut de ligne -->
 <xsl:template match="text:p">
-		<xsl:apply-templates/>
+		<xsl:apply-templates/><xsl:text > </xsl:text>
     <xsl:if test="count(node())=0"><xsl:text >&#xA;&#xA;</xsl:text></xsl:if>
 </xsl:template>
 
@@ -235,15 +235,15 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
 		<xsl:choose>
 			<xsl:when test="@text:outline-level=$NivoTitre1_ec or @text:style-name=concat('Heading_20_',$NivoTitre1_ec)">
 {{{<xsl:apply-templates/>}}}
-        </xsl:when>
+</xsl:when>
 			<xsl:when test="@text:outline-level=$NivoTitre2_ec or @text:style-name=concat('Heading_20_',$NivoTitre2_ec)">
 {{<xsl:apply-templates/>}}
-        </xsl:when>
+</xsl:when>
 			<xsl:otherwise>
 {<xsl:apply-templates/>}
-			</xsl:otherwise>
+</xsl:otherwise>
 		</xsl:choose>
-<xsl:text >&#xA;</xsl:text>    
+<xsl:text >&#xA;</xsl:text>
 </xsl:template>
 
 

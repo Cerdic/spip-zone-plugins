@@ -22,7 +22,7 @@ function odt2spip_affiche_droite($flux){
     $out .= "<br /><small>";
     $out .= "<strong>"._T("odtspip:attacher_fichier_odt")."</strong> ";
     $out .= "<label for='attacher_oui'>"._T("odtspip:oui")."</label>";
-    $out .= "<input type='radio' name='attacher_odt' value='1' id='attacher_oui'/>";
+    $out .= "<input type='radio' name='attacher_odt' value='1' id='attacher_oui' checked='checked'/>";
     $out .= "<input type='radio' name='attacher_odt' value='0' id='attacher_non'/>";
     $out .= "<label for='attacher_non'>"._T("odtspip:non")."</label>";
     $out .= "</small><br />";

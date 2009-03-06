@@ -90,15 +90,20 @@ function action_odt2spip_importe() {
 
   // traitements complémentaires du flux de sortie
     // remplacer les &gt; et &lt;
-    $a_remplacer = array('&#60;','&#62;','&lt;','&gt;', '"');
-    $remplace = array('<','>','<','>', "'");
+    $a_remplacer = array('&#60;','&#62;','&lt;','&gt;', '"', "<date/>");
+    $remplace = array('<','>','<','>', "'", '<date>'.(date("Y-m-d H:i:s")).'</date>');
     $xml_sortie = str_replace($a_remplacer, $remplace, $xml_sortie);
     
+    // virer les sauts de ligne multiples
+    $xml_sortie = preg_replace('/([ \r\n]{2})[ \r\n]*/m', '$1', $xml_sortie);
+    
+/* 
     // virer les xmlns dans la balise <articles> racine
     // gérer la bidouille de :::titre::: => conserver celui dans la balise <titre>, virer celui dans <texte> 
     $xml_sortie = preg_replace(array('/<articles.*?>/', '/(<titre>.*?):::(.*?):::(.*?<\/titre>)/s', '/:::.*?:::/'), 
                                array('<articles>', '$1 $2 $3', ''), 
                                $xml_sortie);
+*/
     
     // traiter les images: dans tous les cas il faut les intégrer dans la table documents
     // en 1.9.2 c'est mode vignette + il faut les intégrer dans la table de liaison 
@@ -141,7 +146,7 @@ function action_odt2spip_importe() {
         if (!fwrite($fic, $xml_sortie)) die(_T('odtspip:err_enregistrement_fichier_sortie').$fichier_sortie);
         fclose($fic);
     }
-    
+/*    */
   // générer l'article à partir du fichier xml de sortie (code pompé sur plugins/snippets/action/snippet_importe.php)
     include_spip('inc/snippets');
 		$table = $id = 'articles';
@@ -159,6 +164,9 @@ function action_odt2spip_importe() {
 
   // si necessaire attacher le fichier odt original à l'article et lui mettre un titre signifiant
     if (_request('attacher_odt') == '1') {
+      // recuperer le titre
+        preg_match('/<titre>(.*?)<\/titre>/', $xml_sortie, $match);
+        $titre = $match[1];
         if (!isset($ajouter_documents)) $ajouter_documents = charger_fonction('ajouter_documents','inc');
         $id_doc_odt = $ajouter_documents($rep_dezip.$fichier_zip, $fichier_zip, "article", $id_article, 'document', 0, $toto='');
         if (!is_numeric($id_doc_odt)) {
@@ -167,8 +175,8 @@ function action_odt2spip_importe() {
             $data = spip_fetch_array(spip_query("SELECT id_document FROM spip_documents WHERE fichier LIKE '%$fichier_zip_av_extension%' ORDER BY maj DESC LIMIT 1"));
             $id_doc_odt = $data['id_document'];
         }
-        if (function_exists('sql_updateq')) sql_updateq('spip_documents', array('titre' => _T('odtspip:cet_article_version_odt')), 'id_document='.$id_doc_odt);
-        else spip_query("UPDATE spip_documents SET titre = '"._T('odtspip:cet_article_version_odt')."' WHERE id_document=".$id_doc_odt." LIMIT 1");
+        if (function_exists('sql_updateq')) sql_updateq('spip_documents', array('titre' => $titre, 'descriptif' => _T('odtspip:cet_article_version_odt')), 'id_document='.$id_doc_odt);
+        else spip_query("UPDATE spip_documents SET titre = '".$titre."', descriptif = '"._T('odtspip:cet_article_version_odt')."' WHERE id_document=".$id_doc_odt." LIMIT 1");
     }
     
   // vider le contenu du rep de dezippage

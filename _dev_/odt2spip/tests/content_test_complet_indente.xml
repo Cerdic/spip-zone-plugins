@@ -430,7 +430,7 @@
             <text:p text:style-name="P4">format automatique</text:p>
           </table:table-cell>
           <table:table-cell table:style-name="Tableau1.C1" office:value-type="string">
-            <text:p text:style-name="P4"> À  Standard    </text:p>
+            <text:p text:style-name="P4">    Standard    </text:p>
           </table:table-cell>
         </table:table-row>
         <table:table-row>
@@ -727,9 +727,37 @@
         </text:list-item>
       </text:list>
       <text:p text:style-name="Standard"/>
-      <text:h text:style-name="Heading_20_2" text:outline-level="2">El ©ments g ©n ©r ©s    ne pas importer</text:h>
+      <text:p text:style-name="Standard">encore un saut de page</text:p>
+      <text:h text:style-name="P13" text:outline-level="2">El ©ments non g ©r ©s</text:h>
+      <text:h text:style-name="Heading_20_3" text:outline-level="3">Elements ignor ©s:</text:h>
       <text:p text:style-name="Standard">
-        Une table des mati ¨res automatique qui ne sera <text:span text:style-name="T1">pas</text:span> reproduite dans la version SPIP
+        Tous les  ©l ©ments suivant ne sont pas g ©r ©s par le plugin puisque le code SPIP ne permet pas de le g ©n ©rer: ils restent sous la forme de texte  À  standard    .
+      </text:p>
+      <text:p text:style-name="P12">
+        Du texte <text:span text:style-name="T3">en couleur</text:span> ou sur fond color ©.
+      </text:p>
+      <text:p text:style-name="Standard">
+        Des variations de police: ici <text:span text:style-name="T4">de l&apos;arial</text:span> et l   <text:span text:style-name="T5">du comic</text:span> 
+      </text:p>
+      <text:p text:style-name="Standard">
+        Des <text:span text:style-name="T6">variation</text:span> de <text:span text:style-name="T7">taille</text:span> de <text:span text:style-name="T8">caract ¨res</text:span> 
+      </text:p>
+      <text:p text:style-name="Standard">
+        Du texte <text:span text:style-name="T9">soulign ©</text:span> ou <text:span text:style-name="T10">barr ©</text:span> 
+      </text:p>
+      <text:h text:style-name="Heading_20_3" text:outline-level="3">Les niveaux de titres suppl ©mentaires:</text:h>
+      <text:p text:style-name="Standard">
+        Tous les titres de niveau inf ©rieur au titres de niveau 2 sont format ©s    l&apos;identique: en italique
+      </text:p>
+      <text:h text:style-name="Heading_20_4" text:outline-level="4">Titre niveau 4</text:h>
+      <text:h text:style-name="Heading_20_5" text:outline-level="5">Titre niveau 5</text:h>
+      <text:h text:style-name="Heading_20_3" text:outline-level="3">El ©ments supprim ©s: </text:h>
+      <text:p text:style-name="Standard">
+        Les en-t ªtes et pieds de page ne seront pas repris dans la version SPIP
+      </text:p>
+      <text:p text:style-name="Standard"/>
+      <text:p text:style-name="Standard">
+        Une table des mati ¨res automatique ne sera <text:span text:style-name="T1">pas</text:span> reproduite dans la version SPIP (idem pour un <text:s/>index automatique) 
       </text:p>
       <text:table-of-content text:style-name="Sect1" text:protected="true" text:name="Table des mati ¨res1">
         <text:table-of-content-source text:outline-level="10">
