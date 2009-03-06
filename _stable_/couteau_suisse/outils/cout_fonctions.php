@@ -108,5 +108,20 @@ function cs_supprime_notes($texte) {
 	return preg_replace(', *\[\[(.*?)\]\],msS', '', $texte);
 }
 
+// filtre appliquant les traitements SPIP d'un champ (et eventuellement d'un type d'objet) sur un texte
+// (voir la fonction champs_traitements($p) dans : public/refereces.php)
+// => permet d'utiliser les balises etoilees : #TEXTE*|mon_filtre|cs_traitements{TEXTE,articles}
+// ce mecanisme est a preferer au traditionnel #TEXTE*|mon_filtre|propre
+// cs_traitements() consulte simplement la globale $table_des_traitements et applique le traitement adequat
+function cs_traitements($texte, $nom_champ='NULL', $type_objet='NULL') {
+	global $table_des_traitements;
+	if(!isset($table_des_traitements[$nom_champ])) return $texte;
+	$ps = $table_des_traitements[$nom_champ];
+	if(is_array($ps)) $ps = $ps[isset($ps[$type_objet]) ? $type : 0];
+	if(!$ps) return $texte;
+	// remplacer le placeholder %s par le texte fourni
+	eval('$texte=' . str_replace('%s', '$texte', $ps) . ';');
+	return $texte;
+}
 
 ?>
