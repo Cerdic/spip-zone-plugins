@@ -30,13 +30,11 @@ BoOz@rezo.net
 
 TODO
 Chopper les urls des rubriques, des articles des documents.
-
-table : 
 jos_jv_page_url (url propres ?)
-jos_jv_a_page 
-jos_redirection (anciennes url)
+jos_jv_a_page ?
+jos_redirection ?
 
-Chopper les abonnés
-
-table : 
-jos_acajoom_subscribers
+Chopper : 
+les auteurs : jos_users
+les contacts : jos_contact_details
+les abonnés : jos_acajoom_subscribers
