@@ -19,8 +19,8 @@
     <install>base/doc2img_install.php</install>
 
    <!-- précise les dependances vis-a-vis de d'autres plugins -->
-	<necessite id="SPIP" version="[1.9.0;]" />
-   <necessite id="cfg" version="[1.0.4;]" />
+    <necessite id="SPIP" version="[1.9.0;]" />
+    <necessite id="cfg" version="[1.9;]" />
 
     <!-- mes options -->
     <options>doc2img_options.php</options>
@@ -46,7 +46,7 @@
        <!-- chemin du fichier contenant la fonction -->
        <inclure>pipeline.php</inclure>
    </pipeline>   
-   
-   <chemin dir='' />
-
+    
+   <chemin dir='.' type="prive"/>    
+   <chemin dir='./prive' type="prive"/>
 </plugin>
