@@ -57,7 +57,7 @@ function formulaires_editer_champ_extra_verifier_dist($id_extra='new', $redirect
 	// n'existe pas deja sur la meme table
 	$verifier = false;
 	if (!$new) {
-		$ancien = cextra_get_extra($id_extra);
+		$ancien = iextra_get_extra($id_extra);
 		if (($e->champ != $champ) or ($e->table != $extra['table'])) {
 			$verifier = true;
 		}
