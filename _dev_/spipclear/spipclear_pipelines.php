@@ -11,11 +11,6 @@ function spipclear_styliser($flux){
 	AND in_array($fond, array('article','rubrique','sommaire'))) {
 		
 		$ext = $flux['args']['ext'];
-		spip_log($fond,'clear');
-
-spip_log('sommaire','clear');
-spip_log(lire_config('spipclear/sommaire_spipclear'),'clear');
-spip_log(lire_config('spipclear/secteurs'),'clear');
 
 		// cas du sommaire
 		if ($fond == 'sommaire') {
