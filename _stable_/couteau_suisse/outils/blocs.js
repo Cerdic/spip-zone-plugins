@@ -30,6 +30,7 @@ jQuery.fn.blocs_replie_tout = function() {
 // compatibilite Ajax : ajouter "this" a "jQuery" pour mieux localiser les actions 
 // et tagger avec cs_done pour eviter de binder plrs fois le meme bloc
 function blocs_init() {
+	// clic sur un titre de bloc
 	jQuery('.blocs_titre', this).not('.cs_done').addClass('cs_done')
 	  .click( function(){
 		jQuery(this).blocs_replie_tout().blocs_toggle();
@@ -51,11 +52,35 @@ var blocs_pagination = blocs_get_pagination(window.location.hash);
 
 /*
 // Si un bloc contient une pagination inseree dans un bloc,
-// code JS a inserer dans le header de votre squelette APRES les appels du Couteau Suisse
+// code JS a inserer dans le header de votre squelette APRES les appels du Couteau Suisse :
 jQuery(document).ready(function() {
 	if(blocs_pagination!==false) {
 		jQuery('div.cs_bloc' + blocs_pagination + ' .blocs_titre').eq(0).click();
 		window.location.hash = '#pagination' + blocs_pagination;
 	}
+});
+*/
+
+/*
+//	Pour un bloc dépliable du genre :
+//	<BOUCLE_art(ARTICLES)>
+//		#BLOC_TITRE
+//		#TITRE
+//		#BLOC_RESUME
+//		#INTRODUCTION
+//		#BLOC_DEBUT
+//		#TEXTE
+//		#BLOC_FIN
+//	</BOUCLE_art>
+//	le clic sur un point de suite cliquable de la balise #INTRODUCTION produit l'ouverture du bloc.
+//	code JS a inserer dans le header de votre squelette APRES les appels du Couteau Suisse :
+jQuery(document).ready(function(){
+	jQuery('.blocs_resume>a.pts_suite')
+	  .click( function(){
+		jQuery(this).parents('.cs_blocs:first').children('.blocs_titre')
+			.blocs_replie_tout().blocs_toggle();
+		// annulation du clic
+		return false;
+		});
 });
 */
