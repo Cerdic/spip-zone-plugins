@@ -38,6 +38,10 @@ padding:10px;
 padding:20px 10px;
 background:#ccc;	
 }
+div#contenu > ul > li{
+margin: 5px ;
+list-style-type:none;
+}
 </style>
 
 <INCLURE{fond=inclure/joomla2spip-entete}>
@@ -76,22 +80,12 @@ background:#ccc;
 <h2>Auteurs</h2>
 <ul>
 <BOUCLE_auteurs(jos_users){pagination 50}>
-<li>#NAME - #EMAIL</li>
+<li>#NAME - #USERTYPE - #EMAIL</li>
 </BOUCLE_auteurs>
 </ul>
 <p>#PAGINATION</p>
 </B_auteurs>
 
-<B_contacts>
-#ANCRE_PAGINATION
-<h2>Contacts</h2>
-<ul>
-<BOUCLE_contacts(jos_contact_details){pagination 50}>
-<li>#NAME - #EMAIL - #ADDRESS</li>
-</BOUCLE_contacts>
-</ul>
-<p>#PAGINATION</p>
-</B_contacts>
 
 <B_visiteurs>
 #ANCRE_PAGINATION
@@ -104,6 +98,16 @@ background:#ccc;
 <p>#PAGINATION</p>
 </B_visiteurs>
 
+<B_contacts>
+#ANCRE_PAGINATION
+<h2>Contacts</h2>
+<ul>
+<BOUCLE_contacts(jos_contact_details){pagination 50}>
+<li>#NAME - #EMAIL_TO - #ADDRESS [- (#MISC)]</li>
+</BOUCLE_contacts>
+</ul>
+<p>#PAGINATION</p>
+</B_contacts>
 
 </div>
 

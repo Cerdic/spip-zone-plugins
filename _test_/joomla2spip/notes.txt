@@ -34,7 +34,10 @@ jos_jv_page_url (url propres ?)
 jos_jv_a_page ?
 jos_redirection ?
 
-Chopper : 
+Chopper les utilisateurs : 
 les auteurs : jos_users
 les contacts : jos_contact_details
 les abonnés : jos_acajoom_subscribers
+
+Types d'utilisateurs : jos_usertypes
+ 	 1 	administrator 	 2 	editor 	 3 	user 	 4 	author 	 5 	publisher 	 6 	manager
