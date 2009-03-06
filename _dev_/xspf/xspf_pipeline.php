@@ -4,26 +4,30 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // ajoute les css et js necessaires dans les pages adequates
 function xspf_header_prive($texte) {
-	$bgiframejs = find_in_path('lib/jquery-tooltip/lib/jquery.bgiframe.js');
-	$tooltipjs = find_in_path('lib/jquery-tooltip/jquery.tooltip.js');
-	$swfobject = find_in_path('javascript/swfobject.js');
-			
-	$texte.= "
-		<script type='text/javascript' src='$swfobject'></script>\n
-		<script type='text/javascript' src='$bgiframejs'></script>\n
-		<script type='text/javascript' src='$tooltipjs'></script>\n";
+	// seulement sur les fonds CFG de XSPF !
+	if ((_request('exec')=='cfg')
+	AND (substr(_request('cfg'),0,4) == 'xspf')) {
+		$bgiframejs = find_in_path('lib/jquery-tooltip/lib/jquery.bgiframe.js');
+		$tooltipjs = find_in_path('lib/jquery-tooltip/jquery.tooltip.js');
+		$swfobject = find_in_path('javascript/swfobject.js');
+				
+		$texte.= "
+			<script type='text/javascript' src='$swfobject'></script>\n
+			<script type='text/javascript' src='$bgiframejs'></script>\n
+			<script type='text/javascript' src='$tooltipjs'></script>\n";
 
-	$texte.= "
-		<script type='text/javascript'>
-			$(document).ready(function() {
-				$('a').tooltip({
-					track: true,
-					delay: 0,
-					showURL: false,
-					showBody: ' - '
+		$texte.= "
+			<script type='text/javascript'>
+				$(document).ready(function() {
+					$('a').tooltip({
+						track: true,
+						delay: 0,
+						showURL: false,
+						showBody: ' - '
+					});
 				});
-			});
-		</script>\n";
+			</script>\n";
+	}
 	return $texte;
 }
 
