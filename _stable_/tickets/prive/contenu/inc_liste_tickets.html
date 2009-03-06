@@ -6,7 +6,7 @@
 [<div class="arial1 tranches">(#PAGINATION)</div>]
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
 <tbody>
-<BOUCLE_principale(TICKETS){par date}{inverse}{pagination 10}{id_auteur?=#ENV{id_auteur}}{id_assigne?=#ENV{id_assigne}}{statut?=#ENV{statut}}>
+<BOUCLE_principale(TICKETS){par date}{inverse}{pagination #ENV{pagination,10}}{id_auteur?}{id_assigne?}{statut?}>
 <tr class="tr_liste">
 	
 	<td style="width: 10px;">[(#STATUT|tickets_bouton_statut)]</td>

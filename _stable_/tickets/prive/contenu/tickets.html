@@ -3,14 +3,27 @@
 <br />
 <br />
 
-<h1><:tickets:titre_liste:></h1>
+<h1>[(#VAL{tickets:classement_#ENV{classement}}|_T)]</h1>
 
 [(#VAL|debut_gauche{true})]
 
+[(#VAL|debut_cadre_enfonce{true})]
+<ul style="list-style:none; padding:0;">
+	<li class="[(#ENV{classement}|=={asuivre}|?{fondgrison,fondgris})]">
+		<a href="[(#SELF|parametre_url{classement,asuivre})]" class="cellule-h">[(#CHEMIN{imgs/bugs.png}|image_reduire{24}|vider_attribut{style}|inserer_attribut{style,vertical-align:middle;})] <:tickets:classement_asuivre:></a>
+	</li>
+	<li class="[(#ENV{classement}|=={type}|?{fondgrison,fondgris})]">
+		<a href="[(#SELF|parametre_url{classement,type})]" class="cellule-h">[(#CHEMIN{imgs/bugs.png}|image_reduire{24}|vider_attribut{style}|inserer_attribut{style,vertical-align:middle;})] <:tickets:classement_type:></a>
+	</li>
+	<li class="[(#ENV{classement}|=={termine}|?{fondgrison,fondgris})]">
+		<a href="[(#SELF|parametre_url{classement,termine})]" class="cellule-h">[(#CHEMIN{imgs/bugs.png}|image_reduire{24}|vider_attribut{style}|inserer_attribut{style,vertical-align:middle;})] <:tickets:classement_termine:></a>
+	</li>
+</ul>
+[(#VAL{true}|fin_cadre_enfonce)]
+
 [(#VAL|debut_droite{true})]
-<INCLURE{fond=prive/contenu/inc_liste_tickets}{titre=<:tickets:vos_tickets_en_cours:>}{id_auteur=#SESSION{id_auteur}}{statut=redac}>
-<INCLURE{fond=prive/contenu/inc_liste_tickets}{titre=<:tickets:vos_tickets_assignes:>}{id_auteur=#SESSION{id_auteur}}{statut=ouvert}>
-<INCLURE{fond=prive/contenu/inc_liste_tickets}{titre=<:tickets:tous_tickets_ouverts:>}{statut=ouvert}{visible=false}>
+
+<INCLURE{fond=prive/contenu/tickets_classement_#ENV{classement}}{env}>
 
 [(#VAL{<:tickets:creer_ticket:>}|icone_inline{
 	#VAL{ticket_editer}|generer_url_ecrire{id_ticket=new},

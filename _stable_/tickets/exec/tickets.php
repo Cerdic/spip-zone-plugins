@@ -67,7 +67,14 @@ function exec_tickets () {
 		$sous_rubrique
 	);
 	
-	echo recuperer_fond('prive/contenu/tickets');
+	// Valeur par défaut du contexte
+	$contexte = array(
+		'classement' => 'asuivre'
+	);
+	// On écrase par l'environnement
+	$contexte = array_merge($contexte, $_GET, $_POST);
+	
+	echo recuperer_fond('prive/contenu/tickets', $contexte);
 	
 	echo fin_page();
 }
