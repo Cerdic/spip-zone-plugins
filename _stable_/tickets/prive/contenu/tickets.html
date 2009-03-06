@@ -1,0 +1,22 @@
+#CACHE{0}
+<br />
+<br />
+<br />
+
+<h1><:tickets:titre_liste:></h1>
+
+[(#VAL|debut_gauche{true})]
+
+[(#VAL|debut_droite{true})]
+<INCLURE{fond=prive/contenu/inc_liste_tickets}{titre=<:tickets:vos_tickets_en_cours:>}{id_auteur=#SESSION{id_auteur}}{statut=redac}>
+<INCLURE{fond=prive/contenu/inc_liste_tickets}{titre=<:tickets:vos_tickets_assignes:>}{id_auteur=#SESSION{id_auteur}}{statut=ouvert}>
+<INCLURE{fond=prive/contenu/inc_liste_tickets}{titre=<:tickets:tous_tickets_ouverts:>}{statut=ouvert}{visible=false}>
+
+[(#VAL{<:tickets:creer_ticket:>}|icone_inline{
+	#VAL{ticket_editer}|generer_url_ecrire{id_ticket=new},
+	#CHEMIN{imgs/bugs.png},
+	creer.gif,
+	right
+})]
+
+[(#VAL|fin_gauche)]

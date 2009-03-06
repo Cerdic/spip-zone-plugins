@@ -54,32 +54,22 @@ function exec_tickets () {
 
 	include_spip('inc/presentation');
 	include_spip('inc/mots');
-	include_spip('inc/spiplistes_api');
-	include_spip('inc/spiplistes_api_presentation');
 
-	global $connect_statut
-		, $connect_toutes_rubriques
-		, $connect_id_auteur
-		;
-
-	$titre_page = _L('Tickets, syst&egrave;me de suivi de bugs');
+	$titre_page = _T('tickets:titre_liste');
 	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = "forum";
 	$sous_rubrique = "tickets";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page(_L('Tickets, suivi de bugs') . " - " . $titre_page, $rubrique, $sous_rubrique));
-
-	echo "<br /><br />";
-	echo gros_titre($titre_page, '', false);
+	echo $commencer_page(
+		_T('tickets:titre_liste').' - '._T('tickets:titre'),
+		$rubrique,
+		$sous_rubrique
+	);
 	
-
-	echo debut_gauche("",true);
-	echo debut_droite("",true);
+	echo recuperer_fond('prive/contenu/tickets');
 	
-	echo liste_tickets();
-	
-	echo fin_gauche(), fin_page();
+	echo fin_page();
 }
 
 ?>

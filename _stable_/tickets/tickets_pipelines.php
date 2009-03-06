@@ -5,9 +5,9 @@ function tickets_ajouterBoutons($boutons_admin) {
 	if($GLOBALS['connect_statut'] == "0minirezo") {
 	// affiche le bouton dans "Edition"
 		$boutons_admin['forum']->sousmenu['tickets'] = new Bouton(
-			_DIR_PLUGIN_TICKETS."imgs/bugs.png"  // icone
-			, _L('Tickets, suivi de bugs')	// titre
-			, "?exec=tickets"
+			find_in_path('bugs.png', 'imgs/', false),
+			_T('tickets:titre'),
+			generer_url_ecrire('tickets')
 		);
 	}
 	return ($boutons_admin);
