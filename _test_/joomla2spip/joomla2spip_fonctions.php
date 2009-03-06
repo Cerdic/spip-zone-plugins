@@ -27,7 +27,7 @@ $html = ereg_replace("\n","",supprimer_tags($val));
 $name = extraire_attribut($val,"name");
 $lename = ($name)? $name : "" ;
 $href = extraire_attribut($val,"href");
-$href = preg_replace("/index\.php\?option=com_content&task=view&id=/","spip.php?page=article&id_article=",$href);
+$href = preg_replace("/index\.php\?option=com_content&task=view&id=([0-9]+)&Itemid=[0-9]+/","spip.php?page=article&id_article=\\1",$href);
 
 if($lename){
 // notes	
