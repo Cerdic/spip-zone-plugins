@@ -3,7 +3,7 @@
 	<nom>Plugin SPIP-Lettres</nom>
 	<auteur>[Artégo->http://www.artego.fr]</auteur>
 	<version>3.8</version>
-	<etat>stable</etat>
+	<etat>dev</etat>
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
 	<description>Gestion de lettres d'information</description>
 	<necessite id="SPIP" version="[2.0.3;]" />
@@ -39,6 +39,30 @@
 		<nom>autoriser</nom>
 		<inclure>inc/lettres_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>tester_rubrique_vide</nom>
+		<inclure>inc/lettres_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>calculer_rubriques</nom>
+		<inclure>inc/lettres_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>trig_propager_les_secteurs</nom>
+		<inclure>inc/lettres_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>calculer_langues_rubriques</nom>
+		<inclure>inc/lettres_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>inc/lettres_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>contenu_naviguer</nom>
+		<inclure>inc/lettres_pipelines.php</inclure>
+	</pipeline>
 	<bouton id="lettres_tous" parent="naviguer">
 		<icone>prive/images/lettre-24.png</icone>
 		<titre>lettresprive:lettres_information</titre>       
@@ -60,25 +84,4 @@
 		<icone>prive/images/config_squelettes.png</icone>
 		<titre>lettresprive:config_squelettes</titre>
 	</onglet>
-	<pipeline>
-		<nom>tester_rubrique_vide</nom>
-		<inclure>inc/lettres_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>affiche_milieu</nom>
-		<inclure>inc/lettres_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>calculer_rubriques</nom>
-		<inclure>inc/lettres_pipelines.php</inclure>
-	</pipeline>
-
-	<pipeline>
-		<nom>trig_propager_les_secteurs</nom>
-		<inclure>inc/lettres_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>calculer_langues_rubriques</nom>
-		<inclure>inc/lettres_pipelines.php</inclure>
-	</pipeline>
 </plugin>

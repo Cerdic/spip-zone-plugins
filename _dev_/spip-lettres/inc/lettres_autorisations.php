@@ -26,6 +26,7 @@
 			case 'exporter':
 			case 'importer':
 			case 'purger':
+			case 'joindre':
 				return ($qui['statut'] == '0minirezo');
 				break;
 			default:

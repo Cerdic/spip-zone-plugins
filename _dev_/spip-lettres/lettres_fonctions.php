@@ -14,9 +14,10 @@
 
 
 	include_spip('base/lettres');
-	include_spip('inc/lettres_balises');
 	include_spip('inc/lettres_filtres');
 	include_spip('inc/lettres_classes');
+	include_spip('public/lettres_balises');
+	include_spip('public/lettres_boucles');
 	include_spip('inc/notifications_classes');
 
 
@@ -98,9 +99,8 @@
 
 
 	function lettres_recuperer_la_rubrique_parente($id_rubrique) {
-		if ($id_rubrique) {
-			list($id_parent) = spip_fetch_array(spip_query('SELECT id_parent FROM spip_rubriques WHERE id_rubrique="'.$id_rubrique.'"'), SPIP_NUM);
-		}
+		if ($id_rubrique)
+			$id_parent = sql_getfetsel('id_parent', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique));
 		return intval($id_parent);
 	}
 

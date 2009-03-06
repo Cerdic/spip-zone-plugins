@@ -30,7 +30,7 @@
 
 			$lettre = new lettre($id_lettre);
 
-			if (!empty($_REQUEST['changer_statut'])) {
+			if (!empty($_REQUEST['statut'])) {
 				$statut = $_REQUEST['statut'];
 				$redirection = $lettre->enregistrer_statut($statut);
 			}

@@ -76,7 +76,7 @@
 		'squelette_titre_lettre' => "Titre des lettres",
 		'squelette_version_html_lettre' => "Version HTML des lettres",
 		'squelette_version_texte_lettre' => "Version texte des lettres",
-		'numero_lettre' => "LETTRE NUMERO",
+		'lettre_numero' => "LETTRE NUMERO",
 		'previsualiser_html' => "Prévisualiser la version HTML",
 		'previsualiser_texte' => "Prévisualiser la version texte",
 		'voir_en_ligne' => "Voir en ligne",

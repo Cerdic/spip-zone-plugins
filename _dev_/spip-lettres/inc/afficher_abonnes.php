@@ -87,9 +87,7 @@
 
 		$vals[] = $abonne->format;
 
-		if ($options == "avancees") {
-			$vals[] = "<b>"._T('info_numero_abbreviation').$abonne->id_abonne.'</b>';
-		}
+		$vals[] = "<b>N°".$abonne->id_abonne."</b>";
 	
 		return $vals;
 	}

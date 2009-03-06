@@ -357,20 +357,6 @@
 										);
 
 
-	function boucle_LETTRES_dist($id_boucle, &$boucles) {
-	        $boucle = &$boucles[$id_boucle];
-	        $id_table = $boucle->id_table;
-	        $boucle->from[$id_table] =  "spip_lettres";  
-
-			if (!$GLOBALS['var_preview']) {
-				if (!$boucle->statut) {
-					$boucle->where[]= array("'IN'", "'$id_table.statut'", "'(\"envoyee\",\"envoi_en_cours\")'");
-				}
-			}
-	        return calculer_boucle($id_boucle, $boucles); 
-	}
-
-
 /*
 		if ($tables_installees = unserialize($GLOBALS['meta']['MotsPartout:tables_installees'])) {
 			if (!$tables_installees['lettres']) {

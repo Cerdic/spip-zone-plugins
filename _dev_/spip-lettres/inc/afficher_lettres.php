@@ -89,7 +89,7 @@
 				break;
 		}
 		$vals[] = $d;
-		$vals[] = "<b>"._T('info_numero_abbreviation').$lettre->id_lettre."</b>";
+		$vals[] = "<b>N°".$lettre->id_lettre."</b>";
 
 		return $vals;
 	}

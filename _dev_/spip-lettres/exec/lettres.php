@@ -93,30 +93,100 @@
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page($lettre->titre, "naviguer", "lettres");
 
-
-		debut_grand_cadre();
+		echo debut_grand_cadre(true);
 		echo afficher_hierarchie($lettre->id_rubrique);
-		fin_grand_cadre();
+		echo fin_grand_cadre(true);
 
+		echo debut_gauche('', true);
+		echo '<div class="cadre cadre-info verdana1">';
+		echo '<div class="cadre_padding">';
+		echo '<div class="infos">';
+		echo '<div class="numero">';
+		echo _T('lettresprive:lettre_numero').' :';
+		echo '<p>'.$lettre->id_lettre.'</p>';
+		echo '</div>';
 
-		debut_gauche();
-
+/*
+		echo "<p id='note_envoi' style='color: red; display: none;' class='verdana1 spip_small'><b>"._T('lettresprive:aide_lettres_envoi_en_cours')."</b></p>";
+		if ($lettre->statut == 'envoyee' and isset($_GET['envoi_termine']))
+			echo "<p style='color: red' class='verdana1 spip_small'><b>"._T('lettresprive:envoi_termine')."</b></p>";
+		if ($lettre->statut == 'envoi_en_cours')
+			echo "<p style='color: red' class='verdana1 spip_small'><b>"._T('lettresprive:lettre_en_cours_d_envoi')."</b></p>";
+		if (isset($_GET['renvoi']))
+			echo "<p style='color: red' class='verdana1 spip_small'><b>"._T('lettresprive:renvoi_'.$_GET['renvoi'])."</b></p>";
+		if (isset($_GET['test']))
+			echo "<p style='color: red' class='verdana1 spip_small'><b>"._T('lettresprive:test_'.$_GET['test'])."</b></p>";
 		echo "<br />";
-		debut_boite_info();
-		echo "<div align='center'>\n";
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('lettresprive:numero_lettre')."</b></font>\n";
-		echo "<br><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>".$lettre->id_lettre."</b></font>\n";
-		if ($lettre->statut == 'brouillon') {
-			lettres_icone_horizontale_nouvelle_fenetre(_T('lettresprive:previsualiser_html'), generer_url_public($GLOBALS['meta']['spip_lettres_fond_lettre_html'], 'id_lettre='.$lettre->id_lettre.'&var_mode=preview'), '', "racine-24.gif", true, 'target="_blank"');
-			lettres_icone_horizontale_nouvelle_fenetre(_T('lettresprive:previsualiser_texte'), generer_url_public($GLOBALS['meta']['spip_lettres_fond_lettre_texte'], 'id_lettre='.$lettre->id_lettre.'&var_mode=preview'), '', "racine-24.gif", true, 'target="_blank"');
-		} else {
-			lettres_icone_horizontale_nouvelle_fenetre(_T('lettresprive:voir_en_ligne'), generer_url_lettre($lettre->id_lettre), $image, "racine-24.gif", true, 'target="_blank"');
-		}
-		echo "</div>\n";
-		fin_boite_info();
+*/
 
-		global $logo_libelles;
-		$logo_libelles['id_lettre'] = _T('lettresprive:logo_lettre');
+		echo '<ul class="instituer instituer_article">';
+		echo '<li>';
+		echo _T('lettresprive:cette_lettre');
+		echo '<ul>';
+		if ($lettre->statut == 'brouillon') {
+			echo '<li class="prepa selected">'._T('lettresprive:en_cours_de_redaction').'</li>';
+			echo '<li class="prop"><a href="'.generer_url_action('statut_lettre', 'id_lettre='.$lettre->id_lettre.'&statut=test', false, true).'">'._T('lettresprive:tester').'</a></li>';
+			echo '<li class="publie"><a href="'.generer_url_action('statut_lettre', 'id_lettre='.$lettre->id_lettre.'&statut=envoi_en_cours', false, true).'">'._T('lettresprive:envoyer').'</a></li>';
+			echo '<li class="poubelle"><a href="'.generer_url_action('statut_lettre', 'id_lettre='.$lettre->id_lettre.'&statut=poubelle', false, true).'">'._T('lettresprive:a_la_poubelle').'</a></li>';
+		}
+		if ($lettre->statut == 'envoi_en_cours') {
+			echo '<li class="prop selected">'._T('lettresprive:envoi_en_cours').'</li>';
+			echo '<li class="refuse"><a href="'.generer_url_action('statut_lettre', 'id_lettre='.$lettre->id_lettre.'&statut=envoyee', false, true).'">'._T('lettresprive:arreter_envoi').'</a></li>';
+		}
+		if ($lettre->statut == 'envoyee') {
+			echo '<li class="publie selected">'._T('lettresprive:envoyee').'</li>';
+			echo '<li class="poubelle"><a href="'.generer_url_action('statut_lettre', 'id_lettre='.$lettre->id_lettre.'&statut=poubelle', false, true).'">'._T('lettresprive:a_la_poubelle').'</a></li>';
+		}
+		echo '</ul>';
+		echo '</li>';
+		echo '</ul>';
+
+		if ($lettre->statut == 'envoyee') {
+			echo '<ul class="instituer instituer_article">';
+			echo '<li>';
+			echo '<strong>'._T('lettresprive:envoi').'</strong>';
+			echo '<ul>';
+			echo '<li>'._T('lettresprive:debut').' : '.affdate($lettre->date_debut_envoi, 'h\hi d').' '.nom_mois($lettre->date_debut_envoi).'</li>';
+			echo '<li>'._T('lettresprive:fin').' : '.affdate($lettre->date_fin_envoi, 'h\hi d').' '.nom_mois($lettre->date_fin_envoi).'</li>';
+			if ($lettre->calculer_nb_envois('envoye'))
+				echo '<li>'._T('lettresprive:nb_envois').' : '.$lettre->calculer_nb_envois('envoye').'/'.$lettre->calculer_nb_envois().'</li>';
+			if ($lettre->calculer_nb_envois('annule'))
+				echo '<li>'._T('lettresprive:nb_annules').' : '.$lettre->calculer_nb_envois('annule').'/'.$lettre->calculer_nb_envois().'</li>';
+			if ($lettre->calculer_nb_envois('echec'))
+				echo '<li>'._T('lettresprive:nb_echecs').' : '.$lettre->calculer_nb_envois('echec').'/'.$lettre->calculer_nb_envois().'</li>';
+			echo '</ul>';
+			echo '</li>';
+			echo '<li>';
+			echo '<strong>'._T('lettresprive:format').'</strong>';
+			echo '<ul>';
+			if ($lettre->calculer_pourcentage_format('mixte'))
+				echo '<li>'._T('lettresprive:mixte').' : '.$lettre->calculer_pourcentage_format('mixte').'%</li>';
+			if ($lettre->calculer_pourcentage_format('html'))
+				echo '<li>'._T('lettresprive:html').' : '.$lettre->calculer_pourcentage_format('html').'%</li>';
+			if ($lettre->calculer_pourcentage_format('texte'))
+				echo '<li>'._T('lettresprive:texte').' : '.$lettre->calculer_pourcentage_format('texte').'%</li>';
+			echo '</ul>';
+			echo '</li>';
+			if ($lettre->calculer_taux_ouverture()) {
+				echo '<li>';
+				echo '<strong>'._T('lettresprive:audience').'</strong>';
+				echo '<ul>';
+				echo '<li>'._T('lettresprive:taux_ouverture').' : '.$lettre->calculer_taux_ouverture().'%</li>';
+				echo '</ul>';
+				echo '</li>';
+			}
+			echo '</ul>';
+		}
+		if ($lettre->statut == 'brouillon') {
+			echo '<table class="cellule-h-table" cellpadding="0" style="vertical-align: middle"><tr><td><a href="'.generer_url_public($GLOBALS['meta']['spip_lettres_fond_lettre_html'], 'id_lettre='.$lettre->id_lettre.'&var_mode=preview').'" class="cellule-h" target="_blank"><span class="cell-i"><img src="../prive/images/rien.gif" alt="'._T('lettresprive:previsualiser_html').'"  style="background: url(../prive/images/racine-24.gif) center center no-repeat;" /></span></a></td><td class="cellule-h-lien"><a href="'.generer_url_public($GLOBALS['meta']['spip_lettres_fond_lettre_html'], 'id_lettre='.$lettre->id_lettre.'&var_mode=preview').'" class="cellule-h" target="_blank">'._T('lettresprive:previsualiser_html').'</a></td></tr></table>';
+			echo '<table class="cellule-h-table" cellpadding="0" style="vertical-align: middle"><tr><td><a href="'.generer_url_public($GLOBALS['meta']['spip_lettres_fond_lettre_texte'], 'id_lettre='.$lettre->id_lettre.'&var_mode=preview').'" class="cellule-h" target="_blank"><span class="cell-i"><img src="../prive/images/rien.gif" alt="'._T('lettresprive:previsualiser_texte').'"  style="background: url(../prive/images/racine-24.gif) center center no-repeat;" /></span></a></td><td class="cellule-h-lien"><a href="'.generer_url_public($GLOBALS['meta']['spip_lettres_fond_lettre_texte'], 'id_lettre='.$lettre->id_lettre.'&var_mode=preview').'" class="cellule-h" target="_blank">'._T('lettresprive:previsualiser_texte').'</a></td></tr></table>';
+		} else {
+			echo '<table class="cellule-h-table" cellpadding="0" style="vertical-align: middle"><tr><td><a href="'.generer_url_lettre($lettre->id_lettre).'" class="cellule-h" target="_blank"><span class="cell-i"><img src="../prive/images/rien.gif" alt="'._T('lettresprive:voir_en_ligne').'"  style="background: url(../prive/images/racine-24.gif) center center no-repeat;" /></span></a></td><td class="cellule-h-lien"><a href="'.generer_url_lettre($lettre->id_lettre).'" class="cellule-h" target="_blank">'._T('lettresprive:voir_en_ligne').'</a></td></tr></table>';
+		}
+		echo '</div>';
+		echo '</div>';
+		echo '</div>';
+
 		if ($lettre->statut == 'brouillon') {
 			$iconifier = charger_fonction('iconifier', 'inc');
 			echo $iconifier('id_lettre', $lettre->id_lettre, 'lettres');
@@ -154,10 +224,10 @@
 				echo fin_cadre_relief(true);
 			}
 		}
-
+/*
 		if ($lettre->statut == 'envoi_en_cours') {
 			echo '<br />';
-			echo debut_cadre_relief('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/statistiques.png', true, "", _T('lettresprive:statistiques'));
+			echo debut_cadre_relief(_DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/statistiques.png', true, "", _T('lettresprive:statistiques'));
 			echo "<div class='verdana1'>";
 			echo "<b>"._T('lettresprive:envoi')."</b><br />";
 			echo "<ul style='margin: 0px; padding-$spip_lang_left: 0px; margin-bottom: 5px;'>";
@@ -177,163 +247,68 @@
 			echo "</div>";
 			echo fin_cadre_relief();
 		}
-		if ($lettre->statut == 'envoyee') {
-			echo '<br />';
-			echo debut_cadre_relief('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/statistiques.png', true, "", _T('lettresprive:statistiques'));
-			echo "<div class='verdana1'>";
-			echo "<b>"._T('lettresprive:envoi')."</b><br />";
-			echo "<ul style='margin: 0px; padding-$spip_lang_left: 0px; margin-bottom: 5px;'>";
-			echo '<li>'._T('lettresprive:debut')." : ".affdate($lettre->date_debut_envoi, 'h\hi d').' '.nom_mois($lettre->date_debut_envoi).'</li>';
-			echo "<li>"._T('lettresprive:fin')." : ".affdate($lettre->date_fin_envoi, 'h\hi d').' '.nom_mois($lettre->date_fin_envoi).'</li>';
-			if ($lettre->calculer_nb_envois('envoye'))
-				echo "<li>"._T('lettresprive:nb_envois').' : '.$lettre->calculer_nb_envois('envoye').'/'.$lettre->calculer_nb_envois().'</li>';
-			if ($lettre->calculer_nb_envois('annule'))
-				echo "<li>"._T('lettresprive:nb_annules').' : '.$lettre->calculer_nb_envois('annule').'/'.$lettre->calculer_nb_envois().'</li>';
-			if ($lettre->calculer_nb_envois('echec'))
-				echo "<li>"._T('lettresprive:nb_echecs').' : '.$lettre->calculer_nb_envois('echec').'/'.$lettre->calculer_nb_envois().'</li>';
-			echo "</ul>";
-			echo "<b>"._T('lettresprive:format')."</b><br />";
-			echo "<ul style='margin: 0px; padding-$spip_lang_left: 0px; margin-bottom: 5px;'>";
-			if ($lettre->calculer_pourcentage_format('mixte'))
-				echo "<li>"._T('lettresprive:mixte').' : '.$lettre->calculer_pourcentage_format('mixte').'%</li>';
-			if ($lettre->calculer_pourcentage_format('html'))
-				echo "<li>"._T('lettresprive:html').' : '.$lettre->calculer_pourcentage_format('html').'%</li>';
-			if ($lettre->calculer_pourcentage_format('texte'))
-				echo "<li>"._T('lettresprive:texte').' : '.$lettre->calculer_pourcentage_format('texte').'%</li>';
-			echo "</ul>";
-			if ($lettre->calculer_taux_ouverture()) {
-				echo "<b>"._T('lettresprive:audience')."</b><br />";
-				echo "<ul style='margin: 0px; padding-$spip_lang_left: 0px; margin-bottom: 5px;'>";
-				echo "<li>"._T('lettresprive:taux_ouverture').' : '.$lettre->calculer_taux_ouverture().'%<br />';
-				echo http_img_pack("jauge-vert.gif", ' ', 'height="10" width="'.intval($lettre->calculer_taux_ouverture()).'"');
-				echo http_img_pack("jauge-rouge.gif", ' ', 'height="10" width="'.intval(100 - $lettre->calculer_taux_ouverture()).'"');
-				echo '</li>';
-				echo "</ul>";
-			}
-			echo "</div>";
-			// 2 </div> suppélementaires
-			echo "</div>";
-			echo "</div>";
-			echo fin_cadre_relief();
-		}
+*/
+		echo bloc_des_raccourcis(
+				icone_horizontale(_T('lettresprive:aller_liste_lettres'), generer_url_ecrire("lettres_tous"), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/lettre-24.png', 'rien.gif', false).
+				icone_horizontale(_T('lettresprive:creer_nouvelle_lettre'), generer_url_ecrire("lettres_edit", 'id_rubrique='.$lettre->id_rubrique), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/lettre-24.png', 'creer.gif', false).
+				icone_horizontale(_T('lettresprive:copier_cetter_lettre'), generer_url_action("copie_lettre", 'copie_lettre='.$lettre->id_lettre), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/copie.png', 'rien.gif', false)
+			);
 
-		if ($lettre->statut == 'envoyee') {
-			$clics = spip_query('SELECT COUNT(AC.id_clic) AS total,
-										C.url AS url
-			 					FROM spip_clics AS C
-								LEFT JOIN spip_abonnes_clics AS AC ON AC.id_clic=C.id_clic
-								WHERE C.id_lettre="'.$lettre->id_lettre.'"
-								GROUP BY C.url
-								ORDER BY total DESC, C.id_clic ASC');
-			if (spip_num_rows($clics) > 0) {
-				echo "<div>&nbsp;</div>";
-				echo "<div class='bandeau_rubriques' style='z-index: 1;'>";
-				bandeau_titre_boite2('<b>'._T('lettresprive:clics').'</b>', '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/clic.png');
-				echo "<div class='plan-articles'>";
-				while($row = spip_fetch_array($clics)) {
-					$url = $row['url'];
-					if (ereg('^spip\.php',$url)) {
-						$url = $GLOBALS['meta']['adresse_site'] . '/' . $url;
-					}
+		if ($lettre->statut == 'envoyee')
+			echo afficher_objets('clic', _T('lettresprive:clics'), array('SELECT' => 'COUNT(AC.id_clic) AS total, C.url AS url', 'FROM' => 'spip_clics AS C LEFT JOIN spip_abonnes_clics AS AC ON AC.id_clic=C.id_clic', 'WHERE' => 'C.id_lettre='.intval($lettre->id_lettre), 'GROUP BY' => 'C.url', 'ORDER BY' => 'total DESC, C.id_clic ASC'));
 
-					$total = $row['total'];
-					if ($total == 0) {
-						$ze_statut = 'prepa';
-						$numero = '';
-					} else {
-						$ze_statut = 'publie';
-						$numero = "<div class='arial1' style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;'><b>".$total."x</b></div>";
-					}
-					$url_coupee = str_split($url, 27);
-					echo "<a class='$ze_statut' style='font-size: 10px;' href='".$url."' target='_blank'>$numero".implode(' ', $url_coupee)."</a>";
-				}
-				echo "</div>";
-				echo "</div>";
-			}
-		}
+		echo afficher_objets('lettres_mini', _T('info_meme_rubrique'), array('FROM' => 'spip_lettres', 'WHERE' => 'id_rubrique='.intval($lettre->id_rubrique).' AND id_lettre!='.intval($lettre->id_lettre), 'ORDER BY' => 'date DESC'));
 
-		debut_raccourcis();
-		icone_horizontale(_T('lettresprive:aller_liste_lettres'), generer_url_ecrire("lettres_tous"), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/lettre-24.png');
-		icone_horizontale(_T('lettresprive:creer_nouvelle_lettre'), generer_url_ecrire("lettres_edit", 'id_rubrique='.$lettre->id_rubrique), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/lettre-24.png', 'creer.gif');
-		icone_horizontale(_T('lettresprive:copier_cetter_lettre'), generer_url_action("copie_lettre", 'copie_lettre='.$lettre->id_lettre), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/copie.png');
-		fin_raccourcis();
+  		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'lettres_tous'),'data'=>''));
 
-		$lettres_mm_rubrique = spip_query("SELECT * FROM spip_lettres WHERE id_rubrique=".$lettre->id_rubrique." AND id_lettre!=".$lettre->id_lettre." ORDER BY date DESC");
-		if (spip_num_rows($lettres_mm_rubrique) > 0) {
-			echo "<div>&nbsp;</div>";
-			echo "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			bandeau_titre_boite2(_T('info_meme_rubrique'), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/rubrique-24.png');
-			echo "<div class='plan-articles'>";
-			while($row = spip_fetch_array($lettres_mm_rubrique)) {
-				$ze_lettre = $row['id_lettre'];
-				$ze_titre = $row['titre'];
-				$ze_statut = $row['statut'];
-				switch ($ze_statut) {
-					case 'envoyee':
-						$ze_statut = 'publie';
-						break;
-					case 'envoi_en_cours':
-						$ze_statut = 'prop';
-						break;
-					case 'brouillon':
-						$ze_statut = 'prepa';
-						break;
-				}
+		echo creer_colonne_droite('', true);
+		echo pipeline('affiche_droite',array('args'=>array('exec'=>'lettres_tous'),'data'=>''));
 
-				if ($options == "avancees") {
-					$numero = "<div class='arial1' style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;'><b>"._T('info_numero_abbreviation')."$ze_lettre</b></div>";
-				}
-				echo "<a class='$ze_statut' style='font-size: 10px;' href='" . generer_url_ecrire("lettres","id_lettre=$ze_lettre") . "'>$numero$ze_titre</a>";
-			}
-			echo "</div>";
-			echo "</div>";
-			echo "<br />";
-		}
+   		echo debut_droite('', true);
 
- 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'lettres','id_lettre'=>$lettre->id_lettre),'data'=>''));
 
-		creer_colonne_droite();
-		echo pipeline('affiche_droite',array('args'=>array('exec'=>'lettres','id_lettre'=>$lettre->id_lettre),'data'=>''));
 
-   		debut_droite();
-		debut_cadre_relief('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/lettre-24.png');
+		$contexte = array('id' => $lettre->id_lettre);
+		$fond = recuperer_fond("prive/contenu/lettre", $contexte);
+		$fond = pipeline('afficher_contenu_objet', array('args' => array('type' => 'lettre', 'id_objet' => $lettre->id_lettre, 'contexte' => $contexte), 'data' => $fond));
+		$onglet_contenu = "<div id='wysiwyg'>$fond</div>";
 
-		echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
-		switch ($lettre->statut) {
-			case 'brouillon':
-				if ($lettre->programmer_envoi)
-					$logo_statut = "puce-poubelle.gif";
-				else
-					$logo_statut = "puce-blanche.gif";
-				break;
-			case 'envoi_en_cours':
-				$logo_statut = "puce-orange.gif";
-				break;
-			case 'envoyee':
-				$logo_statut = "puce-verte.gif";
-				break;
-		}
-		echo "<tr width='100%'><td width='100%' valign='top'>";
-		gros_titre($lettre->titre, $logo_statut);
-		echo "<p id='note_envoi' style='color: red; display: none;' class='verdana1 spip_small'><b>"._T('lettresprive:aide_lettres_envoi_en_cours')."</b></p>";
-		if ($lettre->statut == 'envoyee' and isset($_GET['envoi_termine']))
-			echo "<p style='color: red' class='verdana1 spip_small'><b>"._T('lettresprive:envoi_termine')."</b></p>";
-		if ($lettre->statut == 'envoi_en_cours')
-			echo "<p style='color: red' class='verdana1 spip_small'><b>"._T('lettresprive:lettre_en_cours_d_envoi')."</b></p>";
-		if (isset($_GET['renvoi']))
-			echo "<p style='color: red' class='verdana1 spip_small'><b>"._T('lettresprive:renvoi_'.$_GET['renvoi'])."</b></p>";
-		if (isset($_GET['test']))
-			echo "<p style='color: red' class='verdana1 spip_small'><b>"._T('lettresprive:test_'.$_GET['test'])."</b></p>";
-		echo "<br />";
-		echo "</td>";
+		$editer_mots = charger_fonction('editer_mots', 'inc');
+		$onglet_proprietes = $editer_mots('lettre', $lettre->id_lettre, $cherche_mot, $select_groupe, true, false, 'lettres');
+#	  . $dater($id_article, $flag_editable, $statut_article, 'article', 'articles', $date, $date_redac)
+#	  . $editer_auteurs('article', $id_article, $flag_editable, $cherche_auteur, $ids)
+
+		$onglet_documents = lettres_documents('lettre', $lettre->id_lettre);
+
+		echo '<div class="fiche_objet">';
+
 		if ($lettre->statut == 'brouillon') {
-			echo "<td>", http_img_pack("rien.gif", ' ', "width='5'") ."</td>\n";
-			echo "<td  align='$spip_lang_right' valign='top'>";
-			icone(_T('lettresprive:modifier_lettre'), generer_url_ecrire("lettres_edit","id_lettre=".$lettre->id_lettre), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/lettre-24.png', "edit.gif");
-			echo "</td>";
+			echo '<div class="bandeau_actions">';
+			echo '<div style="float: right;">';
+			echo icone_inline(_T('lettresprive:modifier_lettre'), generer_url_ecrire("lettres_edit", "id_lettre=".$lettre->id_lettre), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/lettre-24.png', "edit.gif", $GLOBALS['spip_lang_left']);
+			echo '</div>';
+			echo '</div>';
 		}
-		echo "</tr>\n";
-		echo "<tr><td>\n";
+		echo '<h1>'.$lettre->titre.'</h1>';
+
+	  	echo afficher_onglets_pages(
+			  	array(
+				  	'props' => _T('onglet_proprietes'),
+				  	'voir' => _T('onglet_contenu'),
+				  	'docs' => _T('onglet_documents'),
+				),
+			  	array(
+				    'props' => $onglet_proprietes,
+				    'voir' => $onglet_contenu,
+				    'docs' => $onglet_documents
+				)
+			);
+
+		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'lettres','id_lettre'=>$lettre->id_lettre),'data'=>''));
+
+		echo '</div><!-- fin fiche_objet -->';
+
+/*
 		if (strlen($lettre->descriptif) > 1) {
 			echo "<div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa;'>";
 			echo "<font size=2 face='Verdana,Arial,Sans,sans-serif'>";
@@ -341,8 +316,6 @@
 			echo "</font>";
 			echo "</div>";
 		}
-		echo "</td></tr>\n";
-		echo "</table>\n";
 
 		if ($lettre->statut == 'brouillon') {
 			$editer_mot = charger_fonction('editer_mot', 'inc');
@@ -557,36 +530,8 @@
 		
 		echo '</form>';
 
-		if ($options == 'avancees') {
-			echo pipeline('affiche_milieu',array('args'=>array('exec'=>'lettres','id_lettre'=>$lettre->id_lettre),'data'=>''));
-		}
-
 		echo '<form action="'.generer_url_action('statut_lettre','id_lettre='.$lettre->id_lettre).'" method="post">';
 
-		debut_cadre_relief();
-		echo "<center>";
-		echo "<B>"._T('lettresprive:action')." :</B>&nbsp;";
-		echo '<select id="statut" name="statut" size="1" class="fondl">';
-		switch ($lettre->statut) {
-			case 'brouillon':
-				echo '	<option value="brouillon" selected="selected">'._T('lettresprive:aucune_action').'</option>'."\n";
-				echo '	<option value="test">'._T('lettresprive:tester').'</option>'."\n";
-				echo '	<option value="envoi_en_cours">'._T('lettresprive:envoyer').'</option>'."\n";
-				break;
-			case 'envoi_en_cours':
-				echo '	<option value="envoi_en_cours" selected="selected">'._T('lettresprive:aucune_action').'</option>'."\n";
-				echo '	<option value="envoyee">'._T('lettresprive:arreter_envoi').'</option>'."\n";
-				break;
-			case 'envoyee':
-				echo '	<option value="envoyee" selected="selected">'._T('lettresprive:aucune_action').'</option>'."\n";
-				echo '	<option value="envoi_en_cours">'._T('lettresprive:renvoyer').'</option>'."\n";
-				break;
-		}
-		echo '	<option value="poubelle">'._T('lettresprive:supprimer').'</option>'."\n";
-		echo "</select>";
-		echo "&nbsp;&nbsp;<INPUT TYPE='submit' NAME='changer_statut' CLASS='fondo' VALUE='"._T('lettresprive:changer')."' STYLE='font-size:10px'>";
-		echo '</center>';
-		fin_cadre_relief();
 
 		echo "<div $dir_lang style='padding: 10px;'>";
 		echo image_reduire(propre($lettre->texte), 475, 0);
@@ -609,7 +554,6 @@
 
 		echo '</form>';
 
-		echo surcharges_upload_documents($lettre->id_lettre, "lettre", 'lettres', ($lettre->statut == 'brouillon'));
 
 		fin_cadre_relief();
 
@@ -629,11 +573,58 @@
 			echo 'document.location.href="'.generer_url_action('statut_lettre','id_lettre='.$lettre->id_lettre.'&changer_statut=1&statut=envoi_en_cours', true).'";'."\n"; 
 			echo '</script>'."\n"; 
 		}
+*/
 
 		echo fin_gauche();
 
 		echo fin_page();
 
+	}
+
+
+	function lettres_documents($type, $id) {
+		global $spip_lang_left, $spip_lang_right;
+
+		// Joindre ?
+		if  ($GLOBALS['meta']["documents_$type"]=='non'
+		OR !autoriser('joindre', $type, $id))
+			$res = '';
+		else {
+			$joindre = charger_fonction('joindre', 'inc');
+
+			$res = $joindre(array(
+				'cadre' => 'relief',
+				'icone' => 'image-24.gif',
+				'fonction' => 'creer.gif',
+				'titre' => _T('titre_joindre_document'),
+				'script' => 'lettres',
+				'args' => "id_lettre=$id",
+				'id' => $id,
+				'intitule' => _T('info_telecharger_ordinateur'),
+				'mode' => 'document',
+				'type' => 'lettre',
+				'ancre' => '',
+				'id_document' => 0,
+				'iframe_script' => generer_url_ecrire("documenter","id_lettre=$id&type=$type",true)
+			));
+
+			// eviter le formulaire upload qui se promene sur la page
+			// a cause des position:relative incompris de MSIE
+			if ($GLOBALS['browser_name']!='MSIE') {
+				$res = "\n<table style='float: $spip_lang_right' width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n$res</td></tr></table>";
+			}
+
+			$res .= http_script('',"async_upload.js")
+			  . http_script('$("form.form_upload").async_upload(async_upload_portfolio_documents);');
+		}
+
+		$documenter = charger_fonction('documenter', 'inc');
+
+		$flag_editable = autoriser('modifier', 'lettres', $id);
+
+		return "<div id='portfolio'>" . $documenter($id, $type, 'portfolio') . "</div><br />"
+		. "<div id='documents'>" . $documenter($id, $type, 'documents') . "</div>"
+		. $res;
 	}
 
 
