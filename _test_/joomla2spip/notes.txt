@@ -25,6 +25,14 @@ Joomla propose des features non gérées par SPIP ; ignoré.
 - menus
 
 
+les liens de jos_content
+index.php?option=com_content&task=view&id=43&Itemid=81
+
+sont transformés dans spip_articles en 
+spip.php?page=article&id_article=43
+
+Les id_article doivent êtres forcés pour correspondre à id.
+
 BoOz@rezo.net
 
 

@@ -12,7 +12,6 @@ $texte = ereg_replace("(\n|\r|\r\n)+","",$texte);
 
 //var_dump($texte);
 
-
 foreach(extraire_balises($texte,"strong") as $val){
 $inter = supprimer_tags($val);	
 $texte = str_replace($val,"\n\n{{{".$inter."}}}\n\n",$texte);
@@ -28,7 +27,7 @@ $html = ereg_replace("\n","",supprimer_tags($val));
 $name = extraire_attribut($val,"name");
 $lename = ($name)? $name : "" ;
 $href = extraire_attribut($val,"href");
-$href = preg_replace("/index.php?option=com_content&task=view&id=/","spip.php?page",$href);
+$href = preg_replace("/index\.php\?option=com_content&task=view&id=/","spip.php?page=article&id_article=",$href);
 
 if($lename){
 // notes	
