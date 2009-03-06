@@ -49,6 +49,7 @@ function remplace_points_de_suite($texte, $id, $racc) {
 		if (substr($intro_suite, 0, 6) == '<br />') 
 			$intro_suite = propre("<br />[".substr($intro_suite, 6)."->$racc$id]");
 			else $intro_suite = propre("&nbsp;[{$intro_suite}->$racc$id]");
+		$intro_suite = inserer_attribut($intro_suite, 'class', extraire_attribut($intro_suite,'class') . ' pts_suite');
 	}
 	$GLOBALS['toujours_paragrapher'] = $mem; 
 	return str_replace(_INTRODUCTION_CODE, $intro_suite, $texte);
