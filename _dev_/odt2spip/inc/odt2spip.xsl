@@ -38,7 +38,7 @@
 <xsl:output method = "xml"
             encoding="ISO-8859-1"
             indent="yes" />
-<xsl:strip-space elements="*" />
+<xsl:preserve-space elements="*" />
 
 <!-- gestion des titres de façon la plus generique possible -->
 <!-- si @text:style-name='Heading' est utilise, recuperer 'Heading' dans $STyleTitreGeneral -->
@@ -188,7 +188,7 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
 
 <!-- les paragraphes y compris les vides utilises pour saut de ligne -->
 <xsl:template match="text:p">
-		<xsl:apply-templates/><xsl:text > </xsl:text>
+		<xsl:apply-templates/>
     <xsl:if test="count(node())=0"><xsl:text >&#xA;&#xA;</xsl:text></xsl:if>
 </xsl:template>
 

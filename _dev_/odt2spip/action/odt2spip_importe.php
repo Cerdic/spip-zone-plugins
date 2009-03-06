@@ -95,16 +95,8 @@ function action_odt2spip_importe() {
     $xml_sortie = str_replace($a_remplacer, $remplace, $xml_sortie);
     
     // virer les sauts de ligne multiples
-    $xml_sortie = preg_replace('/([ \r\n]{2})[ \r\n]*/m', '$1', $xml_sortie);
-    
-/* 
-    // virer les xmlns dans la balise <articles> racine
-    // gérer la bidouille de :::titre::: => conserver celui dans la balise <titre>, virer celui dans <texte> 
-    $xml_sortie = preg_replace(array('/<articles.*?>/', '/(<titre>.*?):::(.*?):::(.*?<\/titre>)/s', '/:::.*?:::/'), 
-                               array('<articles>', '$1 $2 $3', ''), 
-                               $xml_sortie);
-*/
-    
+    $xml_sortie = preg_replace('/([\r\n]{2})[ \r\n]*/m', "$1", $xml_sortie);
+        
     // traiter les images: dans tous les cas il faut les intégrer dans la table documents
     // en 1.9.2 c'est mode vignette + il faut les intégrer dans la table de liaison 
     // en 2.0 c'est mode image + les fonctions de snippets font la liaison => on bloque la liaison en filant un id_article vide
