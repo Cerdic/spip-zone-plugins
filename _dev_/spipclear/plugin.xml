@@ -1,8 +1,8 @@
 <plugin>
 	<nom>SpipClear</nom>
 	<auteur>La SpipClear Team : James, Ben, SarkASmeL et Bruno
-_ &#169; 2007 - Licence GNU/GPL</auteur>
-	<version>0.1</version>
+_ &#169; 2009 - Licence GNU/GPL</auteur>
+	<version>0.2</version>
 	<etat>dev</etat>
 	<prefix>SpipClear</prefix>
 	<description>SpipClear est concu pour transformer un secteur en blog ou carnet web.
@@ -12,7 +12,12 @@ Il est n&eacute;cessaire de cr&eacute;er, a minima, les pages sommaire, article-
 	</description>
 	<lien>http://www.spip-contrib.net/Spip-Clear</lien>
 	<fonctions>spipclear_fonctions.php</fonctions>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<options>spipclear_fonctions.php</options>
+	<pipeline>
+		<nom>styliser</nom>
+		<inclure>spipclear_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;]" />
 	<necessite id="cfg" version="[1.10.4;]" />
 	<necessite id="CalendrierMini" version="[0.3;]" />
 </plugin>
