@@ -200,15 +200,23 @@ function article_import($mon_article) {
 }
 
 function sef_url($titre){
-$titre = str_replace("&#8217;","'",$titre);
-$titre = preg_replace("/'/","",trim($titre));
-$titre = str_replace("°","-",$titre);
-$pattern = "/[^a-zA-Z0-9,_-]/";
-include_spip('inc/charsets');
-$url = preg_replace($pattern,"-",translitteration(trim($titre)));	
-$url = strtolower($url);	
-$url = preg_replace("/-+/","-",$url);	
-
+	$titre = str_replace("&#8217;","'",$titre);
+	$titre = preg_replace("/« | »|\?|\./","",$titre);
+	$titre = preg_replace("/'/","",trim($titre));
+	$titre = str_replace("°","-",$titre);
+	$pattern = "/[^a-zA-Z0-9,_-]/";
+	include_spip('inc/charsets');
+	$url = preg_replace($pattern,"-",translitteration($titre));	
+	$url = strtolower($url);	
+	$url = preg_replace("/-+/","-",$url);	
+		
+	$vilains = array("points-de-vente","le-planbnet");	
+	if(in_array($url,$vilains)) return 'DEGAGE_VILAIN';
+		
+	if(strlen($url) > 15){
+		$pattern = substr($url, -8) ;
+		$url = preg_replace("+".$pattern."$+","",$url);
+		}
 	return $url ;
 }
 
