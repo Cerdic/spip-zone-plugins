@@ -154,6 +154,9 @@ function action_odt2spip_importe() {
   // si on est en 1.9.2 mettre à jour l'id_article auquel sont liees les images
     if ($spip_version_code < 2) spip_query("UPDATE spip_documents_articles SET id_article = $id_article WHERE id_document IN (".implode(',',$T_images).")");
 
+  // si on est en 2.0 passer le statut de l'article en prepa
+    if ($spip_version_code > 2) sql_updateq('spip_articles', array('statut' => 'prepa'), 'id_article='.$id_article);
+    
   // si necessaire attacher le fichier odt original à l'article et lui mettre un titre signifiant
     if (_request('attacher_odt') == '1') {
       // recuperer le titre

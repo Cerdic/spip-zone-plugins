@@ -164,7 +164,7 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
     </texte>
 		<ps></ps>
 		<date></date>
-		<statut>prop</statut>
+		<statut>prepa</statut>
 		<id_secteur></id_secteur>
 		<date_redac></date_redac>
 		<accepter_forum></accepter_forum>
