@@ -20,12 +20,12 @@
 
 [(#LOGO_ARTICLE|#URL_ARTICLE|liens_absolus|image_reduire{150}|inserer_attribut{class,logo})]
 
-[(#CONFIG{spipclear/articles_entiers}|=={on}?{' ',''})
+[(#CONFIG{spipclear/articles_entiers}|=={on}|oui)
 [<div class="post-content #EDIT{texte}" lang="#LANG">
 	(#TEXTE)
 </div>]]
 
-[(#CONFIG{spipclear/articles_entiers}|=={on}?{'',' '})
+[(#CONFIG{spipclear/articles_entiers}|=={on}|non)
 [<div class="post-content #EDIT{intro}" lang="#LANG">
 	(#INTRODUCTION)
 </div>]
