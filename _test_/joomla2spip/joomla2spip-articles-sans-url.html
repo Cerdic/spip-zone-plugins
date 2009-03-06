@@ -1,0 +1,17 @@
+#CACHE{0}
+#SET{nb,0}
+<B_articles_sans_url>
+<h2>Articles sans url (#GET{cmp})</h2>
+<ul>
+<BOUCLE_articles_sans_url(jos_content){catid ?}{state != 0}>
+<BOUCLE_url(jos_jv_page_url){url LIKE %(#TITLE|sef_url)%}> </BOUCLE_url></B_url>
+<li>
+<BOUCLE_rubrique(jos_categories){id=#CATID}>
+#NAME > 
+</BOUCLE_rubrique>
+<a href="./?page=joomla2spip&id_article=#_articles_sans_url:ID">#_articles_sans_url:TITLE</a> | [(#TITLE|sef_url)]</li>
+[(#SET{cmp,[(#GET{cmp}|plus{1})]})]
+<//B_url>
+</BOUCLE_articles_sans_url>
+</ul>
+</B_articles_sans_url>
