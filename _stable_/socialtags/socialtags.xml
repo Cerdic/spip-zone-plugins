@@ -300,6 +300,13 @@
 </item>
 
 <item>
+<title>TUTMarks</title>
+<author>tutmarks</author>
+<link>http://tutmarks.com/story.php?title=%t</link>
+<description>Digg-like</description>
+</item>
+
+<item>
 <title>Twine</title>
 <author>twine</author>
 <link>http://www.twine.com/bookmark/basic?u=%u&amp;t=%t</link>
