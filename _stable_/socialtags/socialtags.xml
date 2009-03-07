@@ -91,6 +91,12 @@
 </item>
 
 <item>
+<title>Faves</title>
+<author>faves</author>
+<link>http://faves.com/Authoring.aspx?u=%u&t=%t</link>
+</item>
+
+<item>
 <title>Furl</title>
 <author>furl</author>
 <link>http://www.furl.net/storeIt.jsp?add=%u&amp;t=%t</link>
@@ -311,6 +317,13 @@
 <author>twine</author>
 <link>http://www.twine.com/bookmark/basic?u=%u&amp;t=%t</link>
 <description>Bookmarks</description>
+</item>
+
+<item>
+<title>Twitter</title>
+<author>twitter</author>
+<link>http://twitter.com/home?status=%u</link>
+<description>Microblogging</description>
 </item>
 
 <!-- V -->
