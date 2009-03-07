@@ -1,0 +1,27 @@
+<plugin>
+	<nom>Contact pour spip 2</nom>
+	<auteur>Pierre Fiches gr&acirc;ce aux r&eacute;alisations de C&eacute;dric, Fil, Mathieu, Romy, Toggg...</auteur>
+    <licence>GPL 3 - &#169; 2006-2008</licence>	
+	<lien></lien>
+	<version>1.0</version>
+	<etat>test</etat>
+    <description>
+Ce plugin propose un formulaire de contact param&eacute;trable.
+
+Vous pouvez coller ceci dans l'article 10 : &lt;contact|id_article=10&gt; et voir le r&eacute;sultat.
+
+Plus d'information sur [spip-contrib->http://www.spip-contrib.net/spip.php?page=article&id_article=3002]
+
+[Configuration->.?exec=cfg&amp;cfg=contact]
+	</description>
+	<prefix>contact</prefix>
+    <options>contact_options.php</options>
+    <fonctions>contact_fonctions.php</fonctions>
+    <pipeline>
+  	<nom>insert_head</nom>
+  	<inclure>contact_pipelines.php</inclure>
+  	</pipeline>
+    <necessite id='SPIP' version='[2.0.3;]' />
+	<necessite id='spip_bonux' version='[1.3;]' />
+    <necessite id="cfg" version="[1.10.4;]" />		
+</plugin>

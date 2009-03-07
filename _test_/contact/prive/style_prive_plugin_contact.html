@@ -1,0 +1,61 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+[(#REM) <!-- 
+.formulaire_editer .saisie_civilite .choix {display:inline;}
+.formulaire_editer .saisie_qui .choix {display:inline;}
+--> ]
+
+.formulaire_editer_contact fieldset .none {display:none;}
+.saisie_civilite .explication, .saisie_qui .explication {font-weight:bold;}
+.choix {display:inline;}
+.choix label {padding-right:1em;}
+
+[(#REM) <!-- ==========================  CLASSES SPECIALES =================================== --> ]
+[(#REM) <!-- explication : pour un message d’explication (ensemble des champs ou une etape). balise p --> ]
+p.explication {}
+[(#REM) <!-- attention : pour un champ d’edition critique. balise em --> ]
+em.attention {}
+[(#REM) <!-- obligatoire : pour signaler un champ obligatoire, a appliquer a l’element de liste parent. balise li.
+				obligatoile : pour signaler par une etoile les champs obligatoires
+--> ]
+li.obligatoire {}
+.obligatoile {color:red;}
+[(#REM) <!-- erreur : signaler une etape en erreur, a appliquer a l’element de liste parent. balise li --> ]
+[(#REM) <!-- erreur_message : chaque erreur bénéficie d’un message explicatif. balise span --> ]
+.formulaire_editer_contact li.erreur span.erreur_message {display: block; color: #C30; font-weight: bold;}
+.formulaire_editer_contact li.erreur input.text,
+.formulaire_editer_contact li.erreur textarea
+ { background-color: #FCC; border-style: solid; border-color: #C30; }
+.formulaire_editer_contact li.erreur .choix { background-color: #FCC;}
+.formulaire_editer_contact fieldset li.editer_prenom,
+.formulaire_editer_contact fieldset li.editer_email
+ {float:left;clear:left;width:42%;}
+.formulaire_editer_contact fieldset li.editer_nom,
+.formulaire_editer_contact fieldset li.editer_telephone
+ {float:right;clear:right;width:42%;padding-right:10%;}
+.formulaire_editer_contact fieldset li.saisie_qui {float:left;clear:left;width:50%;} 
+.formulaire_editer_contact fieldset li.editer_raison_sociale {display:none;float:right;clear:right;width:40%;padding-top:1.3em;padding-right:10%;}
+.formulaire_editer_contact fieldset li.editer_adresse
+ {float:left;clear:left;width:70%;}
+#adresse {width:100%;} 
+.formulaire_editer_contact fieldset li.editer_cp
+ {float:left;clear:left;width:42%;}
+.formulaire_editer_contact fieldset li.editer_ville
+ {float:right;clear:right;width:42%;padding-right:10%;}
+#message {width:75%;}
+.formulaire_editer_contact .boutons {width:75%;padding-top:1em;}
+p.formulaire_ok {font-size:1.5em;}

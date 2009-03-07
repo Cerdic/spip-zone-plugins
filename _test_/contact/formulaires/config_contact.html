@@ -1,0 +1,75 @@
+<!-- autoriser=webmestre -->
+<!-- refus=Seuls les webmestres du site sont autoris&#233;s &#224; modifier ces param&#232;tres. -->
+<!-- nom=contact -->
+
+<div class="formulaire_spip formulaire_editer formulaire_cfg">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#SELF">
+<div>
+#ACTION_FORMULAIRE{SELF}
+<fieldset>
+
+<ul>
+<li class="fieldset">
+<fieldset>
+<h3 class="legend">Paramétrer le formulaire de contact</h3>
+<ul>#SET{selected,#CONFIG{contact/to,#ARRAY}}
+<li class="editer_to[ (#ENV**{erreurs}|table_valeur{to}|oui)erreur]">
+<label for="to">À qui envoyer le message</label>
+[<span class='erreur'>(#ENV**{erreurs}|table_valeur{to})</span>]
+<p class="explication">Fixer la liste des personnes devant recevoir le message</p>
+<select name="to[]" multiple="multiple" size="5" id="to" class="select">
+<BOUCLE_destinataire(AUTEURS){tout}{par nom}>
+<option value="#ID_AUTEUR"[(#ID_AUTEUR|in_array{#GET{selected}}|?{' selected="selected"'})]>[(#NOM)][ id=(#ID_AUTEUR)]</option>
+</BOUCLE_destinataire>
+</select>
+<br /><small>(pour s&#233;lectionner plusieurs secteurs, utiliser la touche shift ou pomme.)</small>
+<br /><small><a onclick="$('#to').find('option').attr('selected', false).end().trigger('change');">x</a> tout d&#233;selectionner</small>
+</li>
+
+#SET{Z,#ARRAY{0,civilite,1,prenom,2,nom,3,email,4,telephone,5,qui,6,raison_sociale,7,adresse,8,cp,9,ville,10,message,11,infolettre,12,nobot}}
+
+#SET{selectpresent,#CONFIG{contact/present,#ARRAY}}
+<li class="editer_present[ (#ENV**{erreurs}|table_valeur{present}|oui)erreur]">
+<label for="present">Champs présents</label>
+[<span class='erreur'>(#ENV**{erreurs}|table_valeur{present})</span>]
+<p class="explication">Fixer la liste des champs qui doivent composer le formulaire</p>
+<select name="present[]" multiple="multiple" size="5" id="present" class="select">
+<BOUCLE_present(POUR){tableau #GET{Z}}>
+<option value="#VALEUR"[(#VALEUR|in_array{#GET{selectpresent}}|?{' selected="selected"'})]>#CLE=>#VALEUR</option>
+</BOUCLE_present>
+</select>
+<br /><small>(pour s&#233;lectionner plusieurs secteurs, utiliser la touche shift ou pomme.)</small>
+<br /><small><a onclick="$('#present').find('option').attr('selected', false).end().trigger('change');">x</a> tout d&#233;selectionner</small>
+</li>
+
+#SET{selectoblig,#CONFIG{contact/oblig,#ARRAY}}
+<li class="editer_oblig[ (#ENV**{erreurs}|table_valeur{oblig}|oui)erreur]">
+<label for="oblig">Champs obligatoires</label>
+[<span class='erreur'>(#ENV**{erreurs}|table_valeur{oblig})</span>]
+<p class="explication">Fixer la liste des informations obligatoirement collectées</p>
+<select name="oblig[]" multiple="multiple" size="5" id="oblig" class="select">
+<BOUCLE_oblig(POUR){tableau #GET{Z}}>
+<option value="#VALEUR"[(#VALEUR|in_array{#GET{selectoblig}}|?{' selected="selected"'})]>#CLE=>#VALEUR</option>
+</BOUCLE_oblig>
+</select>
+<br /><small>(pour s&#233;lectionner plusieurs secteurs, utiliser la touche shift ou pomme.)</small>
+<br /><small><a onclick="$('#oblig').find('option').attr('selected', false).end().trigger('change');">x</a> tout d&#233;selectionner</small>
+</li>
+
+</ul>
+</fieldset>
+</li>
+</ul>
+
+<p class="boutons">
+<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
+<input type="submit" name="_cfg_delete" class="reset" value="<:effacer:>" />
+</p>
+
+</fieldset>
+</div>
+</form>
+</div>
