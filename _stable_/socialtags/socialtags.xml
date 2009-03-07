@@ -302,7 +302,7 @@
 <item>
 <title>TUTMarks</title>
 <author>tutmarks</author>
-<link>http://tutmarks.com/story.php?title=%t</link>
+<link>http://tutmarks.com/submit.php?url=%u</link>
 <description>Digg-like</description>
 </item>
 
