@@ -5,8 +5,8 @@
 	<version>1.0</version>
 	<description>
 	Vertebres propose un moyen de lire une table SQL en indiquant
-	comme argument de page la table à lire, précédé de "table:",
-	par exemple : spip.php?page=table:articles
+	comme argument de page la table &agrave; lire, pr&eacute;c&eacute;d&eacute;
+	de &quot;table:&quot;, par exemple : spip.php?page=table:articles
 	</description>	
 	<etat>stable</etat>
 	<prefix>vertebres</prefix>
