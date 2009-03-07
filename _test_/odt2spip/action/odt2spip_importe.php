@@ -51,7 +51,8 @@ function action_odt2spip_importe() {
 	  }
     
   // variables en dur pour xml en entrée et xslt utilisée
-    $xml_entre = $rep_dezip.'content.xml';  // chemin du fichier xml à lire
+//    $xml_entre = $rep_dezip.'content.xml';  // chemin du fichier xml à lire  !!! ce chemin absolu ne fonctionne pas pour PHP4 !!!
+    $xml_entre = _DIR_TMP.'odt2spip/'.$id_auteur.'/content.xml';  // chemin du fichier xml à lire
     $xslt_texte = _DIR_PLUGIN_ODT2SPIP.'inc/odt2spip.xsl'; //'inc/odt2spip_texte.xsl';  // chemin de la xslt à utiliser pour le texte
     
   // fichier de sortie
@@ -66,10 +67,9 @@ function action_odt2spip_importe() {
       // Crée le processeur XSLT
         $xh = xslt_create();
       // si on est sur un serveur Windows utiliser le préfixe file://
-        if (strpos($_SERVER['SERVER_SOFTWARE'], 'Win') !== false) xslt_set_base ($xh, 'file://' . getcwd () . '/');
-        else xslt_set_base ($xh, getcwd () . '/');
-        
-        $xml_sortie = xslt_process($xh, $xml_entre, $xslt_utiliser);
+        if (strpos($_SERVER['SERVER_SOFTWARE'], 'Win') !== false) xslt_set_base($xh, 'file://' . getcwd () . '/');
+        else xslt_set_base($xh, getcwd () . '/');
+        $xml_sortie = xslt_process($xh, $xml_entre, $xslt_texte);
         if (!$xml_sortie) die(_T('odtspip:err_transformation_xslt'));
       // Détruit le processeur XSLT
         xslt_free($xh);
@@ -132,7 +132,9 @@ function action_odt2spip_importe() {
     }
     
   // finalement enregistrer le contenu dans /tmp/odt2spip/id_auteur/snippet_odt2spip.xml
-    if (function_exists('file_put_contents')) if (!file_put_contents($fichier_sortie, $xml_sortie)) die(_T('odtspip:err_enregistrement_fichier_sortie').$fichier_sortie);
+    if (function_exists('file_put_contents')) {
+        if (!file_put_contents($fichier_sortie, $xml_sortie)) die(_T('odtspip:err_enregistrement_fichier_sortie').$fichier_sortie);
+    }
     else {  // php4
         $fic = fopen($fichier_sortie, 'wb');
         if (!fwrite($fic, $xml_sortie)) die(_T('odtspip:err_enregistrement_fichier_sortie').$fichier_sortie);
