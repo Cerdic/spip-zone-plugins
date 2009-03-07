@@ -70,6 +70,6 @@ Texte traité
 
 <hr />
 [(#REM) importer l'article]
-[(#SET{mon_article,#ARRAY{rubrique,#GET{rubrique},date,#PUBLISH_UP,maj,#MODIFIED,statut,#GET{statut},visites,#HITS,titre,#TITLE*,descriptif,#GET{descriptif},ps,#GET{titre_original},chapo,#GET{chapo},texte,#GET{texte}}})]
+[(#SET{mon_article,#ARRAY{rubrique,#GET{rubrique},date,#PUBLISH_UP,maj,#MODIFIED,statut,#GET{statut},visites,#HITS,titre,#TITLE*,descriptif,#GET{descriptif},ps,#GET{titre_original},chapo,#GET{chapo},texte,#GET{texte},id_article,#ID}})]
 [(#GET{mon_article}|article_import)]
 </BOUCLE_articles>

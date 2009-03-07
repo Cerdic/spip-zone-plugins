@@ -166,7 +166,9 @@ function article_import($mon_article) {
 	// creer article vide
 	include_spip('action/editer_article');
 	$id_article = insert_article($id_rubrique);
-
+	$ancien_id = $mon_article['id_article'];
+	$sql = "UPDATE spip_articles SET id_article = '$ancien_id' WHERE id_article = '$id_article'";	spip_query($sql);
+	$id_article = $ancien_id ;
 	// le remplir
 	$c = array();
 	foreach (array(
