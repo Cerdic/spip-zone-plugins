@@ -17,9 +17,9 @@
 
 	<pipeline>
 		<!-- voir la page sur doc.spip.org, pour connaitre l'ensemble des pipeline -->
-		<nom>post_ecrire_fichier</nom>
+		<nom>post_image_filtrer</nom>
 		<!-- nom de la fonction a appelé sans son prefixe -->
-		<action>post_ecrire_fichier</action>
+		<action>post_image_filtrer</action>
 		<!-- chemin du fichier contenant la fonction -->
 		<inclure>smush_pipelines.php</inclure>
 	</pipeline>
