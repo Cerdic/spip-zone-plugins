@@ -72,9 +72,9 @@ function action_odt2spip_importe() {
       
       // Crée le processeur XSLT
         $xh = xslt_create();
-      // si on est sur un serveur Windows utiliser le préfixe file://
+      // si on est sur un serveur Windows utiliser xslt_set_base avec le préfixe file://
         if (strpos($_SERVER['SERVER_SOFTWARE'], 'Win') !== false) xslt_set_base($xh, 'file://' . getcwd () . '/');
-        else xslt_set_base($xh, getcwd () . '/');
+//        else xslt_set_base($xh, getcwd () . '/');
       
       // definition de l'array des parametres a passer a la xslt
         $params = array('IntertitresRiches' => $intertitres_riches);
