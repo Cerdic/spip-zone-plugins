@@ -57,6 +57,11 @@ function action_odt2spip_importe() {
     
   // fichier de sortie
     $fichier_sortie = $rep_dezip.'snippet_odt2spip.xml';
+
+  // determiner si le plugin enluminure_typo ou intertitres_enrichis est present & actif
+    include_spip('inc/plugin');
+    $Tplugins = liste_plugin_actifs();
+    $intertitres_riches = ((array_key_exists('TYPOENLUMINEE', $Tplugins) OR array_key_exists('INTERTITRESTDM', $Tplugins)) ? 'oui' : 'non'); 
     
   // appliquer la transformation XSLT sur le fichier content.xml
     // déterminer si on est en php 4 ou php 5 pour choisir les fonctions xslt à utiliser
@@ -64,13 +69,20 @@ function action_odt2spip_importe() {
       // on est en php4 : utiliser l'extension et les fonction xslt de Sablotron
       // vérifier que l'extension xslt est active
         if (!function_exists('xslt_create')) die(_T('odtspip:err_extension_xslt'));
+      
       // Crée le processeur XSLT
         $xh = xslt_create();
       // si on est sur un serveur Windows utiliser le préfixe file://
         if (strpos($_SERVER['SERVER_SOFTWARE'], 'Win') !== false) xslt_set_base($xh, 'file://' . getcwd () . '/');
         else xslt_set_base($xh, getcwd () . '/');
-        $xml_sortie = xslt_process($xh, $xml_entre, $xslt_texte);
+      
+      // definition de l'array des parametres a passer a la xslt
+        $params = array('IntertitresRiches' => $intertitres_riches);
+        
+      // lancer le parseur
+        $xml_sortie = xslt_process($xh, $xml_entre, $xslt_texte, NULL, array(), $params);
         if (!$xml_sortie) die(_T('odtspip:err_transformation_xslt'));
+      
       // Détruit le processeur XSLT
         xslt_free($xh);
     }
@@ -79,12 +91,17 @@ function action_odt2spip_importe() {
       // vérifier que l'extension xslt est active
         if (!class_exists('XSLTProcessor')) die(_T('odtspip:err_extension_xslt'));
         $proc = new XSLTProcessor();
+
+      // passage d'un parametre a la xslt
+        $proc->setParameter(null, 'IntertitresRiches', $intertitres_riches);   
+        
         $xml = new DOMDocument();
         $xml->load($xml_entre);
         $xsl = new DOMDocument();
         $xsl->load($xslt_texte);
         $proc->importStylesheet($xsl); // attachement des règles xsl
         
+      // lancer le parseur
         if (!$xml_sortie = $proc->transformToXml($xml)) die(_T('odtspip:err_transformation_xslt'));
     }
 
@@ -140,7 +157,7 @@ function action_odt2spip_importe() {
         if (!fwrite($fic, $xml_sortie)) die(_T('odtspip:err_enregistrement_fichier_sortie').$fichier_sortie);
         fclose($fic);
     }
-/*    */
+/* die;   */
   // générer l'article à partir du fichier xml de sortie (code pompé sur plugins/snippets/action/snippet_importe.php)
     include_spip('inc/snippets');
 		$table = $id = 'articles';
@@ -157,7 +174,7 @@ function action_odt2spip_importe() {
     if ($spip_version_code < 2) spip_query("UPDATE spip_documents_articles SET id_article = $id_article WHERE id_document IN (".implode(',',$T_images).")");
 
   // si on est en 2.0 passer le statut de l'article en prepa
-    if ($spip_version_code > 2) sql_updateq('spip_articles', array('statut' => 'prepa'), 'id_article='.$id_article);
+    if ($spip_version_code > 2) sql_updateq('spip_articles', array('statut' => 'prop'), 'id_article='.$id_article);
     
   // si necessaire attacher le fichier odt original à l'article et lui mettre un titre signifiant
     if (_request('attacher_odt') == '1') {

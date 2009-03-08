@@ -40,6 +40,10 @@
             indent="yes" />
 <xsl:preserve-space elements="*" />
 
+<!-- Récuperation du parametre venant de PHP: IntertitresRiches = oui|non 
+  en fct de la presence d'un des plugins enluminure_typo ou intertitres_enrichis -->
+<xsl:param name="IntertitresRiches"/>
+
 <!-- gestion des titres de façon la plus generique possible -->
 <!-- si @text:style-name='Heading' est utilise, recuperer 'Heading' dans $STyleTitreGeneral -->
 <xsl:variable name="StyleTitreGeneral">
@@ -94,11 +98,19 @@
                               | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre1 + 9)]) > 0"><xsl:value-of select="$NivoTitre1 + 9"/></xsl:when>
     </xsl:choose>
 </xsl:variable>
+
 <!-- si il n'existe pas de $StyleTitreGeneral et si il n'y a qu'un seul element de $NivoTitre1 dans le doc 
-     utiliser $NivoTitre1 comme $StyleTitreGeneral => du fait du decalage on va avoir besoin d'un $NivoTitre3  -->
-<xsl:variable name="NivoTitre3">
+     utiliser $NivoTitre1 comme $StyleTitreGeneral => $DecalerTitres = oui -->
+<xsl:variable name="DecalerTitres">
     <xsl:if test="not($StyleTitreGeneral = 'Heading')
-                  and count(//*[@text:outline-level='$NivoTitre1'] | //*[@text:style-name=concat('Heading_20_',$NivoTitre1)]) = 1">
+                  and count(//*[@text:outline-level='$NivoTitre1'] 
+                            | //*[@text:style-name=concat('Heading_20_',$NivoTitre1)]) = 1">oui</xsl:if>
+</xsl:variable>
+        
+<!--  si $DecalerTitres == oui => du fait du decalage on va avoir besoin d'un $NivoTitre3 
+      idem si enluminure-typo ou intertitres_enrichis  -->
+<xsl:variable name="NivoTitre3">
+    <xsl:if test="$DecalerTitres = 'oui' or $IntertitresRiches = 'oui'">
         <xsl:choose>
             <xsl:when test="count(//*[node()][@text:outline-level='$NivoTitre2 + 1'] 
                               | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre2 + 1)]) > 0"><xsl:value-of select="$NivoTitre2 + 1"/></xsl:when>
@@ -119,6 +131,65 @@
         </xsl:choose>
     </xsl:if>
 </xsl:variable>
+
+<!-- super-reloud! si enluminure-typo ou intertitres_enrichis on a besoin de titre4 et titre5
+     si en plus on a $DecalerTitres == oui il faut en plus titre6 
+     ca sent le besoin de pouvoir faire des boucles et/ou des fonctions en xsl...  -->
+<xsl:variable name="NivoTitre4">
+    <xsl:if test="$IntertitresRiches = 'oui'">
+        <xsl:choose>
+            <xsl:when test="count(//*[node()][@text:outline-level='$NivoTitre3 + 1'] 
+                              | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre3 + 1)]) > 0"><xsl:value-of select="$NivoTitre3 + 1"/></xsl:when>
+            <xsl:when test="count(//*[node()][@text:outline-level='$NivoTitre3 + 2'] 
+                              | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre3 + 2)]) > 0"><xsl:value-of select="$NivoTitre3 + 2"/></xsl:when>
+            <xsl:when test="count(//*[node()][@text:outline-level='$NivoTitre3 + 3'] 
+                              | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre3 + 3)]) > 0"><xsl:value-of select="$NivoTitre3 + 3"/></xsl:when>    
+            <xsl:when test="count(//*[node()][@text:outline-level='$NivoTitre3 + 4'] 
+                              | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre3 + 4)]) > 0"><xsl:value-of select="$NivoTitre3 + 4"/></xsl:when>
+            <xsl:when test="count(//*[node()][@text:outline-level='$NivoTitre3 + 5'] 
+                              | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre3 + 5)]) > 0"><xsl:value-of select="$NivoTitre3 + 5"/></xsl:when>
+            <xsl:when test="count(//*[node()][@text:outline-level='$NivoTitre3 + 6'] 
+                              | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre3 + 6)]) > 0"><xsl:value-of select="$NivoTitre3 + 6"/></xsl:when>
+            <xsl:when test="count(//*[node()][@text:outline-level='$NivoTitre3 + 7'] 
+                              | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre3 + 7)]) > 0"><xsl:value-of select="$NivoTitre3 + 7"/></xsl:when>
+        </xsl:choose>
+    </xsl:if>
+</xsl:variable>
+<xsl:variable name="NivoTitre5">
+    <xsl:if test="$IntertitresRiches = 'oui'">
+        <xsl:choose>
+            <xsl:when test="count(//*[node()][@text:outline-level='$NivoTitre4 + 1'] 
+                              | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre4 + 1)]) > 0"><xsl:value-of select="$NivoTitre4 + 1"/></xsl:when>
+            <xsl:when test="count(//*[node()][@text:outline-level='$NivoTitre4 + 2'] 
+                              | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre4 + 2)]) > 0"><xsl:value-of select="$NivoTitre4 + 2"/></xsl:when>
+            <xsl:when test="count(//*[node()][@text:outline-level='$NivoTitre4 + 3'] 
+                              | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre4 + 3)]) > 0"><xsl:value-of select="$NivoTitre4 + 3"/></xsl:when>    
+            <xsl:when test="count(//*[node()][@text:outline-level='$NivoTitre4 + 4'] 
+                              | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre4 + 4)]) > 0"><xsl:value-of select="$NivoTitre4 + 4"/></xsl:when>
+            <xsl:when test="count(//*[node()][@text:outline-level='$NivoTitre4 + 5'] 
+                              | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre4 + 5)]) > 0"><xsl:value-of select="$NivoTitre4 + 5"/></xsl:when>
+            <xsl:when test="count(//*[node()][@text:outline-level='$NivoTitre4 + 6'] 
+                              | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre4 + 6)]) > 0"><xsl:value-of select="$NivoTitre4 + 6"/></xsl:when>
+        </xsl:choose>
+    </xsl:if>
+</xsl:variable>
+<xsl:variable name="NivoTitre6">
+    <xsl:if test="$DecalerTitres = 'oui' and $IntertitresRiches = 'oui'">
+        <xsl:choose>
+            <xsl:when test="count(//*[node()][@text:outline-level='$NivoTitre5 + 1'] 
+                              | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre5 + 1)]) > 0"><xsl:value-of select="$NivoTitre5 + 1"/></xsl:when>
+            <xsl:when test="count(//*[node()][@text:outline-level='$NivoTitre5 + 2'] 
+                              | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre5 + 2)]) > 0"><xsl:value-of select="$NivoTitre5 + 2"/></xsl:when>
+            <xsl:when test="count(//*[node()][@text:outline-level='$NivoTitre5 + 3'] 
+                              | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre5 + 3)]) > 0"><xsl:value-of select="$NivoTitre5 + 3"/></xsl:when>    
+            <xsl:when test="count(//*[node()][@text:outline-level='$NivoTitre5 + 4'] 
+                              | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre5 + 4)]) > 0"><xsl:value-of select="$NivoTitre5 + 4"/></xsl:when>
+            <xsl:when test="count(//*[node()][@text:outline-level='$NivoTitre5 + 5'] 
+                              | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre5 + 5)]) > 0"><xsl:value-of select="$NivoTitre5 + 5"/></xsl:when>
+        </xsl:choose>
+    </xsl:if>
+</xsl:variable>
+
 
 <!-- trouver un titre general au document: 
      si $StyleTitreGeneral existe, concatener tous les elements avec ce style
@@ -150,6 +221,9 @@ t2= <xsl:value-of select="$NivoTitre2" />
 t3= <xsl:value-of select="$NivoTitre3" />
 tG= <xsl:value-of select="$StyleTitreGeneral" />
 -->
+<!-- test recuperation du parametre passe par PHP 
+intertitres_riches= <xsl:value-of select="$IntertitresRiches" />
+-->
 <articles>
 	<article>
 		<id_article></id_article>
@@ -164,7 +238,7 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
     </texte>
 		<ps></ps>
 		<date></date>
-		<statut>prepa</statut>
+		<statut>prop</statut>
 		<id_secteur></id_secteur>
 		<date_redac></date_redac>
 		<accepter_forum></accepter_forum>
@@ -209,10 +283,10 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
 </xsl:template>
 
 <xsl:template name="titres">
-<!-- si $NivoTitre3 existe, décaler les niveaux puisqu'il n'existe pas de $StyleTitreGeneral et qu'il n'y a qu'un $NivoTitre1 -->
+<!-- si $DecalerTitres == oui, décaler les niveaux puisqu'il n'existe pas de $StyleTitreGeneral et qu'il n'y a qu'un $NivoTitre1 -->
     <xsl:variable name="NivoTitre1_ec">
       <xsl:choose>
-          <xsl:when test="$NivoTitre3=''">
+          <xsl:when test="not($DecalerTitres='oui')">
             <xsl:value-of select="$NivoTitre1"/>
           </xsl:when>
           <xsl:otherwise>
@@ -222,7 +296,7 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
     </xsl:variable>
     <xsl:variable name="NivoTitre2_ec">
       <xsl:choose>
-          <xsl:when test="$NivoTitre3=''">
+          <xsl:when test="not($DecalerTitres='oui')">
             <xsl:value-of select="$NivoTitre2"/>
           </xsl:when>
           <xsl:otherwise>
@@ -230,19 +304,77 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
           </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-<!-- appliquer les formatage des titres -->
+<!-- appliquer les formatages des titres -->
 <xsl:text >&#xA;</xsl:text>
 		<xsl:choose>
-			<xsl:when test="@text:outline-level=$NivoTitre1_ec or @text:style-name=concat('Heading_20_',$NivoTitre1_ec)">
+<!-- formatages avec enluminure_typo ou intertitres_enrichis  -->
+        <xsl:when test="$IntertitresRiches = 'oui'">
+          <!-- definir les niveaux de titre 3, 4 et 5 en fonction de $DecalerTitres  -->
+            <xsl:variable name="NivoTitre3_ec">
+              <xsl:choose>
+                  <xsl:when test="not($DecalerTitres='oui')">
+                    <xsl:value-of select="$NivoTitre3"/>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <xsl:value-of select="$NivoTitre4"/>
+                  </xsl:otherwise>
+              </xsl:choose>
+            </xsl:variable>
+            <xsl:variable name="NivoTitre4_ec">
+              <xsl:choose>
+                  <xsl:when test="not($DecalerTitres='oui')">
+                    <xsl:value-of select="$NivoTitre4"/>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <xsl:value-of select="$NivoTitre5"/>
+                  </xsl:otherwise>
+              </xsl:choose>
+            </xsl:variable>
+            <xsl:variable name="NivoTitre5_ec">
+              <xsl:choose>
+                  <xsl:when test="not($DecalerTitres='oui')">
+                    <xsl:value-of select="$NivoTitre5"/>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <xsl:value-of select="$NivoTitre6"/>
+                  </xsl:otherwise>
+              </xsl:choose>
+            </xsl:variable>
+          <!-- appliquer le formatage proprement dit -->
+            <xsl:choose>
+			        <xsl:when test="@text:outline-level=$NivoTitre1_ec or @text:style-name=concat('Heading_20_',$NivoTitre1_ec)">
 {{{<xsl:apply-templates/>}}}
 </xsl:when>
-			<xsl:when test="@text:outline-level=$NivoTitre2_ec or @text:style-name=concat('Heading_20_',$NivoTitre2_ec)">
+			        <xsl:otherwise>
+                    <!-- recuperer le niveau de titre en cours a la bourrin 
+                    (a coup sur y'a moyen de faire mieux mais on va pas se decarcasser pour ces p*** de plugins qui forkent definitivement le code spip !  -->
+                    <xsl:variable name="NivoTitre_ec">
+                        <xsl:choose>
+                            <xsl:when test="@text:outline-level=$NivoTitre2_ec or @text:style-name=concat('Heading_20_',$NivoTitre2_ec)">2</xsl:when>
+                            <xsl:when test="@text:outline-level=$NivoTitre3_ec or @text:style-name=concat('Heading_20_',$NivoTitre3_ec)">3</xsl:when>
+                            <xsl:when test="@text:outline-level=$NivoTitre4_ec or @text:style-name=concat('Heading_20_',$NivoTitre4_ec)">4</xsl:when>
+                            <xsl:when test="@text:outline-level=$NivoTitre5_ec or @text:style-name=concat('Heading_20_',$NivoTitre5_ec)">5</xsl:when>
+                        </xsl:choose>
+                    </xsl:variable>
+{<xsl:value-of select="$NivoTitre_ec"/>{<xsl:apply-templates/>}<xsl:value-of select="$NivoTitre_ec"/>}
+</xsl:otherwise>
+		        </xsl:choose>
+        </xsl:when>
+<!-- formatages sans enluminure_typo ou intertitres_enrichis  -->
+        <xsl:otherwise>
+            <xsl:choose>
+			        <xsl:when test="@text:outline-level=$NivoTitre1_ec or @text:style-name=concat('Heading_20_',$NivoTitre1_ec)">
+{{{<xsl:apply-templates/>}}}
+</xsl:when>
+			        <xsl:when test="@text:outline-level=$NivoTitre2_ec or @text:style-name=concat('Heading_20_',$NivoTitre2_ec)">
 {{<xsl:apply-templates/>}}
 </xsl:when>
-			<xsl:otherwise>
+			        <xsl:otherwise>
 {<xsl:apply-templates/>}
 </xsl:otherwise>
-		</xsl:choose>
+		        </xsl:choose>
+        </xsl:otherwise>
+    </xsl:choose>
 <xsl:text >&#xA;</xsl:text>
 </xsl:template>
 
