@@ -17,7 +17,7 @@
  */
 
 // librairie de base du core
-include_spip('inc/filtres_images_lib_mini');
+include_spip('inc/filtres_images_mini');
 
 // 1/ Aplatir une image semi-transparente (supprimer couche alpha)
 // en remplissant la transparence avec couleur choisir $coul.
@@ -1376,7 +1376,7 @@ function image_renforcement($im, $k=0.5)
 // alpha = 127: completement transparent
 /**
  * Transforme la couleur de fond de l'image en transparence
- * Le filtre ne gère pas la notion de contiguite aux bords, et affectera tous les pixels de l'image dans la couleur visee
+ * Le filtre ne gÔøΩre pas la notion de contiguite aux bords, et affectera tous les pixels de l'image dans la couleur visee
  * $background_color : couleur cible
  * $tolerance : distance L1 dans l'espace RGB des couleur autour de la couleur $background_color pour lequel la transparence sera appliquee
  * $alpha : transparence a appliquer pour les pixels de la couleur cibles avec la tolerance ci-dessus
