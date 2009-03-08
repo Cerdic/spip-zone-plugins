@@ -618,6 +618,17 @@ function produire_image_typo() {
 	$dimensions = getimagesize($image);
 	$largeur = $dimensions[0];
 	$hauteur = $dimensions[1];
+	
+	pipeline('post_ecrire_image',
+		array(
+			'args' => array(
+        		'action' => 'image_typo',
+        		'chemin' => $image
+        	),
+        	'data' => null
+        )
+	);
+	
 	return inserer_attribut("<img src='$image' width='$largeur' height='$hauteur' style='width:".$largeur."px;height:".$hauteur."px;' />", 'alt', $alt);
 }
 
