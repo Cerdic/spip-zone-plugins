@@ -10,7 +10,7 @@ Ce plugin propose un formulaire de contact param&eacute;trable.
 
 Vous pouvez coller ceci dans l'article 10 : &lt;contact|id_article=10&gt; et voir le r&eacute;sultat.
 
-Plus d'information sur [spip-contrib->http://www.spip-contrib.net/spip.php?page=article&id_article=3002]
+Plus d'information sur [spip-contrib->http://www.spip-contrib.net/spip.php?page=article&amp;id_article=3002]
 
 [Configuration->.?exec=cfg&amp;cfg=contact]
 	</description>
