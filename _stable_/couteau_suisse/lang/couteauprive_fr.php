@@ -73,6 +73,8 @@ _ Lien de test : [->test@test.com] (rechargez la page enti&egrave;rement).[[%env
 	'boites_privees:nom' => 'Bo&icirc;tes priv&eacute;es',
 	'bp_tri_auteurs' => 'Les tris d\'auteurs',
 	'bp_urls_propres' => 'Les URLs propres',
+	'brouteur:nom'        => 'R&eacute;glage du s&eacute;lecteur de rubrique',
+	'brouteur:description' => 'Utiliser le selecteur de rubrique en AJAX &aacute; partir de %rubrique_brouteur% rubrique(s)',
 
 	// C
 	'cache_controle' => 'Contr&ocirc;le du cache',

@@ -1161,6 +1161,22 @@ add_outil( array(
 	'code:jq_init' => 'jclock_init.apply(this);',
 ));
 
+//reglage du nombre de case pour le brouteur
+add_outil( array(
+	'id' => 'brouteur',
+	'categorie' => 'interface',
+	
+	'code:options' => "%%rubrique_brouteur%%"
+));
+
+add_variable( array(
+	'nom' => 'rubrique_brouteur',
+	'format' => _format_NOMBRE,
+	'defaut' => 20,
+	'code:%s' => "define('_SPIP_SELECT_RUBRIQUES', %s);
+"
+));
+
 // Nettoyage
 unset($cs_temp);
 // Ajout des outils personnalises
@@ -1172,6 +1188,7 @@ if(isset($GLOBALS['mes_outils'])) {
 	}
 	unset($GLOBALS['mes_outils']);
 }
+
 
 // Idees d'ajouts :
 // http://archives.rezo.net/spip-core.mbox/
