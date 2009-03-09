@@ -2,7 +2,7 @@
 /*
  *  ! brief Determine les champs de formulaire à traiter
  */
-function inscription2_champs_formulaire($id_auteur) {
+function inscription2_champs_formulaire($id_auteur = NULL) {
 	if(is_numeric($id_auteur)){
 		$suffixe = '_fiche_mod';
 	}
