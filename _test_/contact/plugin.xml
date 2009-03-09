@@ -8,12 +8,15 @@
     <description>
 Ce plugin propose un formulaire de contact param&eacute;trable.
 
-Vous pouvez coller ceci dans l'article 10 : &lt;contact|id_article=10&gt; et voir le r&eacute;sultat.
+Vous pouvez coller ceci dans l'article 10 : &lt;contact|id_article=10&gt; ou utiliser la balise &lt;div class="ajax"&gt;&#35;FORMULAIRE_CONTACT&lt;/div&gt;
+et voir le r&eacute;sultat.
 
-Plus d'information sur [spip-contrib->http://www.spip-contrib.net/spip.php?page=article&amp;id_article=3002]
+N&eacute;cessite les plugins cfg et spip-bonux.
 
 [Configuration->.?exec=cfg&amp;cfg=contact]
 	</description>
+	<lien>http://www.spip-contrib.net/article3002</lien>
+	<icon>images/contact-48.png</icon>
 	<prefix>contact</prefix>
     <options>contact_options.php</options>
     <fonctions>contact_fonctions.php</fonctions>

@@ -1,9 +1,13 @@
-<!-- titre=Configuration le formulaire de contact -->
+<!-- titre=Contact -->
+<!-- icone=images/contact-24.png-->
 <!-- autoriser=webmestre -->
 <!-- refus=Seuls les webmestres du site sont autoris&#233;s &#224; modifier ces param&#232;tres.-->
-
-<!-- descriptif=<h4>Configuration du formulaire de contact</h4> -->
-<!-- onglet=contact -->
+[(#SET{logo,
+<img src='[(#CHEMIN{images/contact.png})]' width='47' height='48' alt='Logo contact' style="float:#LANG_RIGHT;" />
+})]
+<!-- descriptif=
+#GET{logo}
+<h4>Configuration du formulaire de contact</h4> -->
 
  
 #CACHE{0}
