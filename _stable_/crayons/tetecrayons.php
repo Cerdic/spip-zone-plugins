@@ -127,6 +127,31 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode='page'
 </script>
 EOH;
 
+	// Est-ce que PortePlume est la ?
+	$meta_crayon = unserialize($GLOBALS['meta']['crayons']);
+	if ($meta_crayon['barretypo']) {
+		$f = chercher_filtre('info_plugin');
+		if ($f('PORTE_PLUME','est_actif')) {
+			$lang = $GLOBALS['spip_lang'];
+			$incHead .= <<<EOF
+<script type="text/javascript">
+<!--
+(function($){
+$(document).ready(function(){
+	/* Ajouter une barre porte plume sur les crayons */	
+	function barrebouilles_crayons(){
+		$('.formulaire_crayon textarea.crayon-active:not(.markItUpEditor)').markItUp(barre_outils_edition,{lang:'$lang'});
+	}
+	barrebouilles_crayons();
+	onAjaxLoad(barrebouilles_crayons);
+});
+})(jQuery);
+-->		
+</script>
+EOF;
+		}
+	}
+
 	if ($mode == 'head')
 		return $page . $incHead;
 
