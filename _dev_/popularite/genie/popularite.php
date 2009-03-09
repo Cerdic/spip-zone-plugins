@@ -39,6 +39,19 @@ function genie_popularite_dist($t) {
 				);
 			}
 		}
+
+		// pour les rubriques on ajoute la popularite totale de ses filles
+		// c'est pas recursif mais ca finira bien par converger
+		if ($s = spip_squery('SELECT
+			a.id_rubrique AS id_rubrique,
+			SUM(b.popularite) AS popularite
+			FROM spip_rubriques AS a, spip_rubriques AS b
+			WHERE a.id_rubrique = b.id_parent')
+		) {
+			while($t = sql_fetch($s)) {
+				sql_update('spip_rubriques', 'popularite=popularite+'.$t['popularite'], 'id_rubrique='.$t['id_rubrique']);
+			}
+		}
 	}
 
 	return true;
