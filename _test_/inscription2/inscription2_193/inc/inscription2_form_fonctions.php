@@ -2,7 +2,10 @@
 /*
  *  ! brief Determine les champs de formulaire à traiter
  */
-function inscription2_champs_formulaire() {
+function inscription2_champs_formulaire($id_auteur) {
+	if(is_numeric($id_auteur)){
+		$suffixe = '_fiche_mod';
+	}
 	//charge les valeurs de chaque champs proposés dans le formulaire   
 	foreach (lire_config('inscription2/') as $clef => $valeur) {
 		/* Il faut retrouver les noms des champ, 
@@ -15,7 +18,7 @@ function inscription2_champs_formulaire() {
 		//?: permet de rechercher la chaine sans etre retournée dans les résultats
 		preg_match('/^(.*)(?:_obligatoire)/i', $clef, $resultat);
 	
-		if ((!empty($resultat[1])) && (lire_config('inscription2/'.$resultat[1]) == 'on') && ($resultat[1] != 'password')) {
+		if ((!empty($resultat[1])) && (lire_config('inscription2/'.$resultat[1].$suffixe) == 'on') && ($resultat[1] != 'password')) {
 			$valeurs[] = $resultat[1];
 		}
 	}

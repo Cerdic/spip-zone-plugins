@@ -144,6 +144,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mobile' => 'Mobile',
 	'mobile_pro' => 'Mobile professionnel',
 	'modif_pass_titre' => 'Modifier votre mot de passe',
+	'mot_passe_reste_identique' => 'Votre mot de passe n\'a pas &eacute;t&eacute; modifi&eacute;.',
 
 	// N
 	'naissance' => 'Date de naissance',

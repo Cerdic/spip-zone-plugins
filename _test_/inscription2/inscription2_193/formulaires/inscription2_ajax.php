@@ -24,7 +24,7 @@ function formulaires_inscription2_ajax_charger_dist($id_auteur = NULL){
 	$valeurs = array();
 
 	//récupere la liste des champs possible
-	$champs = inscription2_champs_formulaire();
+	$champs = inscription2_champs_formulaire($id_auteur);
 
 	//si on a bien un auteur alors on préremplit le formulaire avec ses informations
 	//les nom des champs sont les memes que ceux de la base de données
@@ -60,10 +60,10 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
     $valeurs = array();	
     
 	//récupere la liste des champs possible
-	$champs = inscription2_champs_formulaire();	
+	$champs = inscription2_champs_formulaire($id_auteur);	
 
     //gere la correspondance champs -> _request(champs)
-	foreach(inscription2_champs_formulaire() as $clef => $valeur) {
+	foreach(inscription2_champs_formulaire($id_auteur) as $clef => $valeur) {
 		$valeurs[$valeur] = _request($valeur);
 	}		
 		
@@ -195,7 +195,7 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 	* champ => valeur formulaire
 	*/
 	
-	foreach(inscription2_champs_formulaire() as $clef => $valeur) {
+	foreach(inscription2_champs_formulaire($id_auteur) as $clef => $valeur) {
 		$valeurs[$valeur] = _request($valeur);
 	}
 	
