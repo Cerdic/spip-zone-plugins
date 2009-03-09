@@ -31,7 +31,7 @@
 	
 </BOUCLE_jeu>
 
-<BOUCLE_auteur(AUTEURS){id_auteur}{0,1}>
+<BOUCLE_auteur(AUTEURS){tous}{id_auteur}{0,1}>
 	<strong>#NOM</strong><br />
 	[(#REM|sinon{<:jeux:infos_auteur:>}|icone_horizontale{#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR},#CHEMIN{images/auteur-24.gif},'',0})]
 	[(#ENV{exec}|=={jeux_gerer_resultats}|?{' '})
