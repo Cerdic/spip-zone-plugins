@@ -30,10 +30,10 @@ jQuery(document).ready(function(){
 	flvArray = new Array();
 	flvTitles = new Array();
 	
-	var aff= jQuery("a[@rel='enclosure'][@href$=mp3]").size(); 
+	var aff= jQuery("a[rel='enclosure'][href$=mp3]").size(); 
 
 	// lister les mp3 de la page 
-	jQuery("a[@rel='enclosure'][@href$=mp3]").each(
+	jQuery("a[rel='enclosure'][href$=mp3]").each(
 		function(i) {	 
 			// we store mp3 links in an array
 			mp3Array.push(this.href);
@@ -65,7 +65,7 @@ jQuery(document).ready(function(){
 		}
 	);
 	
-	jQuery("a[@rel='video']").each(
+	jQuery("a[rel='video']").each(
 		function(i) { 
 			// we store flv links in an array
 			flvArray.push(this.href);
