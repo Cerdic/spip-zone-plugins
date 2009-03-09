@@ -121,7 +121,7 @@ function demarrer_site($site = '', $options = array()) {
 			define('_INSTALL_PASS_DB',
 				substr(md5(
 					_INSTALL_PASS_DB_ROOT   # secret du site
-					. $_SERVER['REMOTE_ADDR'] # un truc variable
+					. $_SERVER['HTTP_HOST'] # un truc variable, mais reutilisable site par site
 					. _INSTALL_USER_DB # un autre truc variable
 				), 0, 8)
 			);

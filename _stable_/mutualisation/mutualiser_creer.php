@@ -66,10 +66,10 @@ function mutu_etape_code_activation($e, $options){
 				_L('Veuillez entrer le code d\'activation du site :').
 				'</h3>'.
 
-				"<form method='post' action='".self()."'>
-				<input type='text' name='code_activation' size='10' />
+				"<form method='post' action='".self()."'><div>
+				<input type='password' name='code_activation' size='10' />
 				<input type='submit' value='ok' />
-				</form>
+				</div></form>
 				"
 			);
 			exit;
