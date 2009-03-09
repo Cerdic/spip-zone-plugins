@@ -33,7 +33,7 @@ function inc_smush_image_dist($im){
 			spip_log("SMUSH : recuperation du fichier $new_url","smush");
 			$contenu = recuperer_page($new_url,false,false,_COPIE_LOCALE_MAX_SIZE);
 			if (!$contenu) return false;
-			ecrire_fichier($dest, $contenu);
+			ecrire_fichier($im, $contenu);
 		}
 	}
 	
