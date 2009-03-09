@@ -305,7 +305,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'gestion_dune_liste' => "Gestion d'une liste"
 , 'message_sujet' => 'Sujet '
 , 'mods_cette_liste' => "Les mod&eacute;rateurs de cette liste"
-, 'nbre_abonnes' => "Nombre d\'abonn&eacute;s : "
+, 'nbre_abonnes' => "Nombre d'abonn&eacute;s : "
 , 'nbre_mods' => "Nombre de mod&eacute;rateurs : "
 , 'patron_manquant_message' => "Vous devez appliquer un grand patron avant de param&eacute;trer l'envoi de cette 
 	liste."
