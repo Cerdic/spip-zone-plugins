@@ -284,11 +284,15 @@ class Crayon {
 			$meta_crayon = unserialize($GLOBALS['meta']['crayons']);
 			if ($meta_crayon['barretypo']
 			AND $type == 'texte') {
-				include_spip('inc/barre');
-				$input = "<div style='width:".$this->largeur."px;height:23px;'>"
-					. afficher_barre("document.getElementById('$id')")
-					. '</div>'
-					. $input;
+				// Pas la peine de mettre cette barre si PortePlume est la
+				$f = chercher_filtre('info_plugin');
+				if (!$f('PORTE_PLUME','est_actif')) {
+					include_spip('inc/barre');
+					$input = "<div style='width:".$this->largeur."px;height:23px;'>"
+						. afficher_barre("document.getElementById('$id')")
+						. '</div>'
+						. $input;
+				}
 			}
 
 			$return .= $input;
