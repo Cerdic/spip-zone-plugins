@@ -168,6 +168,7 @@ function article_import($mon_article) {
 	$id_article = insert_article($id_rubrique);
 	$ancien_id = $mon_article['id_article'];
 	$sql = "UPDATE spip_articles SET id_article = '$ancien_id' WHERE id_article = '$id_article'";	spip_query($sql);
+	$sql = "UPDATE spip_auteurs_articles SET id_article = '$ancien_id' WHERE id_article = '$id_article'";	spip_query($sql);
 	$id_article = $ancien_id ;
 	// le remplir
 	$c = array();
@@ -222,10 +223,45 @@ function sef_url($titre){
 }
 
 function joomla2spip_nettoyer_url($url){
-	if(preg_match('/search|file:\/\/\/|#n[1-9]|anonymouse\.org|webwarper.net/',$url)){
+	if(preg_match('/search|file:\/\/\/|#n[1-9]|anonymouse\.org|webwarper.net|:80/',$url)){
 	return '' ;
 	}	
 	return $url ;
 }
+
+function joomla2spip_url_relative($url){
+$url = preg_replace("+http://www.leplanb.org/|\.html$+","",$url);
+return $url ;
+}
+
+function joomla2spip_url_import($mon_url){
+$url = $mon_url['url'];
+$type = $mon_url['type'];
+$id_objet = $mon_url['id_objet'];
+$date = $mon_url['date'];
+
+sql_insertq('spip_urls', array('url' => $url,'type' => $type,'id_objet' => $id_objet,'date' => $date));
+
+return  ;
+}
+
+function joomla2spip_auteur_import($mon_auteur){
+
+if($mon_auteur['statut'] == "Super Administrator") $statut = "0minirezo" ;
+else $statut = "1commite" ;
+
+if($mon_auteur['statut'] == "visiteur") $statut = "6forum" ;
+
+$email = $mon_auteur['email'];
+
+$login = $mon_auteur['login'];
+$nom = $mon_auteur['nom'];
+
+sql_insertq('spip_auteurs', array('email' => $email,'login' => $login,'statut' => $statut,'nom' => $nom));
+
+return ;
+	
+}
+
 
 ?>

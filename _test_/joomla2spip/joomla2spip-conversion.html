@@ -30,25 +30,67 @@ border:1px dotted black;
 
 <div id="contenu">
 
-<B_articles>
-<h2>#TOTAL_BOUCLE articles</h2>
-<BOUCLE_articles(jos_content){catid ?}{!par publish_up}>
-</BOUCLE_articles>
-
 <B_secteurs>
 <h2>Secteurs</h2>
-<BOUCLE_secteurs(jos_sections){pagination 50}>
-#NAME<br />
-<B_sous_rubriques>
-<ul>
-<BOUCLE_sous_rubriques(jos_categories){section=#ID}>
-<li><a href="./?page=joomla2spip&catid=#ID">#NAME</a></li>
-</BOUCLE_sous_rubriques>
-</ul>
-<B_sous_rubriques>
-</BOUCLE_secteurs>
+<BOUCLE_secteurs(jos_sections)>
+ </BOUCLE_secteurs>
+<p>#TOTAL secteurs</p>
+</B_secteurs>
+
+<BOUCLE_sous_rubriques(jos_categories)>
+ </BOUCLE_sous_rubriques>
+<p>#TOTAL rubriques</p>
+<a href="./?page=joomla2spip-convertir&conversion=navigation">Transferer les rubriques de joomla vers spip</a>
+</B_sous_rubriques>
 
 
+
+<B_articles>
+<h2>articles</h2>
+<BOUCLE_articles(jos_content){catid ?}{!par publish_up}>
+</BOUCLE_articles>
+joomla : #TOTAL_BOUCLE
+</B_articles>
+
+<BOUCLE_articlesspip(ARTICLES){statut IN prepa,prop,publie}>
+</BOUCLE_articlesspip>
+<p>spip : #TOTAL_BOUCLE</p>
+</B_articlesspip>
+
+<a href="./?page=joomla2spip-convertir&conversion=articles">Transferer les articles de joomla vers spip</a>
+
+
+<B_urls>
+<h2>urls</h2>
+<BOUCLE_urls(jos_jv_page_url){!par idpage_url}>
+ </BOUCLE_urls>
+joomla : #TOTAL_BOUCLE
+</B_urls>
+
+<BOUCLE_urlsspip(URLS)>
+ </BOUCLE_urlsspip>
+<p>spip : #TOTAL_BOUCLE</p>
+</B_urlsspip>
+
+<a href="./?page=joomla2spip-convertir&conversion=urls">Transferer les urls de joomla vers spip</a>
+
+
+<B_auteurs>
+<h2>Auteurs</h2>
+<BOUCLE_auteurs(jos_users)>
+ </BOUCLE_auteurs>
+<p>joomla : #TOTAL_BOUCLE</p>
+</B_auteurs>
+
+
+<B_visiteurs>
+<h2>Visiteurs</h2>
+<BOUCLE_visiteurs(jos_acajoom_subscribers)>
+</BOUCLE_visiteurs>
+<p>joomla : #TOTAL_BOUCLE</p>
+</B_visiteurs>
+
+<a href="./?page=joomla2spip-convertir&conversion=utilisateurs">Transferer les auteurs et visiteurs de joomla vers spip</a>
 
 </div>
 

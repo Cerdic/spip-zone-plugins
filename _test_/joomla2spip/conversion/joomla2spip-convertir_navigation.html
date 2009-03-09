@@ -1,0 +1,23 @@
+#CACHE{0}
+
+<B_secteurs>
+<h2>Secteurs</h2>
+<BOUCLE_secteurs(jos_sections)>
+<div>-> #NAME</div>
+<div>-->[(#DESCRIPTION*|joomla2spip_nettoyer_texte|pas_d_inter|propre)]</div>
+[(#SET{desc,[(#DESCRIPTION*|joomla2spip_nettoyer_texte|pas_d_inter)]})]
+[(#SET{ma_rubrique,#ARRAY{descriptif,#GET{desc},titre,#NAME}})]
+[(#SET{id_secteur,[(#GET{ma_rubrique}|rubrique_import)]})]
+<B_sous_rubriques>
+<dl>
+<BOUCLE_sous_rubriques(jos_categories){section=#ID}>
+<dt>#NAME</dt>
+<dd>[(#DESCRIPTION*|joomla2spip_nettoyer_texte|pas_d_inter|propre)]</dd>
+[(#SET{desc,[(#DESCRIPTION*|joomla2spip_nettoyer_texte|pas_d_inter)]})]
+[(#SET{ma_rubrique,#ARRAY{descriptif,#GET{desc},titre,#NAME}})]
+[(#GET{ma_rubrique}|rubrique_import{#GET{id_secteur},#GET{id_secteur}})]
+</BOUCLE_sous_rubriques>
+</dl>
+<B_sous_rubriques>
+
+</BOUCLE_secteurs>
