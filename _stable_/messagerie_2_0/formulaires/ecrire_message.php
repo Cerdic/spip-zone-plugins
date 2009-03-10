@@ -7,7 +7,7 @@
  */
 
 /**
- * Chargement des valeirs par defaut de #FORMULAIRE_ECRIRE_MESSAGE{url_redirection_apres_envoi}
+ * Chargement des valeurs par defaut de #FORMULAIRE_ECRIRE_MESSAGE{url_redirection_apres_envoi}
  * la fonction recoit en entree les arguments de la balise dans le squelette
  * renvoyer la liste des champs en cle, et les valeurs par defaut a la saisie
  * les valeurs seront automatiquement surchargees par _request() en cas de second tour de saisie
@@ -18,7 +18,7 @@
  *  
  * @return unknown
  */
-function formulaires_ecrire_message_charger_dist($redirect=""){
+function formulaires_ecrire_message_charger_dist($redirect="",$destinataire){
 	include_spip('base/abstract_sql');
 	include_spip('inc/filtres');
 	$valeurs = array('objet'=>'','texte'=>'');
@@ -36,6 +36,11 @@ function formulaires_ecrire_message_charger_dist($redirect=""){
 		. sql_getfetsel('nom','spip_auteurs','id_auteur='.intval($row['id_auteur']))
 		. " - " . affdate($row['date_heure']) . "\n\n "
 		. $row['texte'] . "</quote>\n";
+	}
+	if (is_numeric($destinataire)){
+		$dest = sql_getfetsel('id_auteur','spip_auteurs','id_auteur='.intval($destinataire));
+		if (isset($valeurs['destinataires']) && $dest)
+			$valeurs['destinataires'] = array($dest);
 	}
 
 	return $valeurs;
