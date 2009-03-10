@@ -7,8 +7,9 @@
     <description>
 Ce plugin propose un formulaire de contact param&eacute;trable.
 
-Vous pouvez coller ceci dans l'article 10 : &lt;contact|id_article=10&gt; ou utiliser la balise &lt;div class="ajax"&gt;&#35;FORMULAIRE_CONTACT&lt;/div&gt;
-et voir le r&eacute;sultat.
+Vous pouvez coller ceci dans l'article 10 : &lt;contact|id_article=10&gt; et voir le r&eacute;sultat une fois l'article publi&eacute;.
+
+Sinon, ins&eacute;rez cette balise dans votre squelette : &lt;div class="ajax"&gt;&#35;FORMULAIRE_CONTACT&lt;/div&gt;.
 
 N&eacute;cessite les plugins cfg et spip-bonux.
 
