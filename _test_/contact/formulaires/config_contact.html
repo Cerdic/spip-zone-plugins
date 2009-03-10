@@ -52,7 +52,9 @@
 <p class="explication">Fixer la liste des informations obligatoirement collectées</p>
 <select name="oblig[]" multiple="multiple" size="5" id="oblig" class="select">
 <BOUCLE_oblig(POUR){tableau #GET{Z}}>
+[(#VALEUR|=={nobot}|non)
 <option value="#VALEUR"[(#VALEUR|in_array{#GET{selectoblig}}|?{' selected="selected"'})]>#CLE=>#VALEUR</option>
+]
 </BOUCLE_oblig>
 </select>
 <br /><small>(pour s&#233;lectionner plusieurs secteurs, utiliser la touche shift ou pomme.)</small>
