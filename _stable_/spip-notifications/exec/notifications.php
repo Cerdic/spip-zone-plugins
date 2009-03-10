@@ -4,7 +4,7 @@
 	/**
 	 * SPIP-Notifications : Notifications au format HTML, mixte ou texte et envoi via mail (PHP) ou SMTP
 	 *
-	 * Copyright (c) 2006
+	 * Copyright (c) 2006-2009
 	 * Agence Artégo http://www.artego.fr
 	 *  
 	 * Ce programme est un logiciel libre distribue sous licence GNU/GPLv3.
@@ -131,7 +131,7 @@
 
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'notifications'),'data'=>''));
 
-		echo bloc_des_raccourcis(icone_horizontale(_T('notifications:purger'), generer_url_ecrire("notifications", "purger=oui"), _DIR_PLUGIN_NOTIFICATIONS."prive/images/purger.png", 'rien.gif', false));
+#		echo bloc_des_raccourcis(icone_horizontale(_T('notifications:purger'), generer_url_ecrire("notifications", "purger=oui"), _DIR_PLUGIN_NOTIFICATIONS."prive/images/purger.png", 'rien.gif', false));
 
 		echo debut_droite('', true);
 

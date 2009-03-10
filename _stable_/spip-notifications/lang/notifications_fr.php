@@ -4,7 +4,7 @@
 	/**
 	 * SPIP-Notifications : Notifications au format HTML, mixte ou texte et envoi via mail (PHP) ou SMTP
 	 *
-	 * Copyright (c) 2006
+	 * Copyright (c) 2006-2009
 	 * Agence Artégo http://www.artego.fr
 	 *  
 	 * Ce programme est un logiciel libre distribue sous licence GNU/GPLv3.
