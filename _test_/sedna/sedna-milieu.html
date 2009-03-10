@@ -10,7 +10,6 @@
 	$GLOBALS['url_site_#ID_SYNDIC'] = '[(#URL_SITE|url_absolue|texte_script)]';
 ?>
 </BOUCLE_sites>
-[(#SET{sites,[(#EVAL{"'-'"}|explode{#GET{sites}}|array_filter)]})]
 <B_syndic>
 
 
@@ -22,7 +21,7 @@
 	Voir la definition des criteres {contenu} et {tri_sedna} dans sedna.php
 ]
 <?php
-<BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic?}{id_syndic IN #GET{sites}} {contenu} {tri_sedna} {age<=#ENV{age,1}} {0,500}>
+<BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic?}{id_syndic IN #GET{sites}|explode{-}|array_filter} {contenu} {tri_sedna} {age<=#ENV{age,1}} {0,500}>
 	afficher_lien(
 	#ID_SYNDIC_ARTICLE,
 	'[(#URL_ARTICLE|creer_identifiant{#DATE})]',
