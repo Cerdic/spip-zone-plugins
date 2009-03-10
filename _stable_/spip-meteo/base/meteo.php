@@ -58,7 +58,7 @@
 		include_spip('inc/plugin');
 		$info_plugin_boutique = plugin_get_infos(_NOM_PLUGIN_METEO);
 		$version_plugin = $info_plugin_boutique['version'];
-		switch ($action){
+		switch ($action) {
 			case 'test':
 				return (isset($GLOBALS['meta']['spip_meteo_version']) AND ($GLOBALS['meta']['spip_meteo_version'] >= $version_plugin));
 				break;
