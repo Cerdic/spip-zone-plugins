@@ -1,9 +1,8 @@
 <plugin>
 	<nom>Contact pour spip 2</nom>
 	<auteur>Pierre Fiches gr&acirc;ce aux r&eacute;alisations de C&eacute;dric, Fil, Mathieu, Romy, Toggg...</auteur>
-    <licence>GPL 3 - &#169; 2006-2008</licence>	
-	<lien></lien>
-	<version>1.0</version>
+    <licence>GPL 3 - &#169; 2006-2008</licence>
+	<version>1.0.1</version>
 	<etat>test</etat>
     <description>
 Ce plugin propose un formulaire de contact param&eacute;trable.

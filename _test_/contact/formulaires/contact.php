@@ -22,13 +22,13 @@ function formulaires_contact_verifier_dist(){
 		// verifier que si un email a ete saisi, il est bien valide :
 		include_spip('inc/filtres');
 		if (_request('email') AND !email_valide(_request('email')))
-			$erreurs['email'] = 'Cet email n\'est pas valide';
+			$erreurs['email'] = _T("form_email_non_valide");
 		
 		if(!(strlen(_request('message'))>10))
 		$erreurs['message'] = _T('forum_attention_dix_caracteres');
 		
 		if (count($erreurs))
-			$erreurs['message_erreur'] = 'Votre saisie contient des erreurs !';
+			$erreurs['message_erreur'] = _T('contact:erreur_saisie');
 		return $erreurs;
 	}else{
 		return false;
@@ -61,7 +61,7 @@ function formulaires_contact_traiter_dist(){
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	$email_from = ($GLOBALS['meta']['email_envoi']) ? $GLOBALS['meta']['email_envoi'] : $GLOBALS['meta']['email_webmaster'];
 	$nom_site = $GLOBALS['meta']['nom_site'];
-	$sujet = 'Formulaire de contact du site '.$nom_site.'';
+	$sujet = _T('contact:form_contact_site', array("site" => $nom_site));
 	$infolettre = (_request('infolettre')) ? _T('contact:informez_moi') : _T('contact:pas_infolettre');
 	$raison_sociale = _request('raison_sociale');
 	$civilite = _request('civilite');
@@ -72,24 +72,30 @@ function formulaires_contact_traiter_dist(){
 	$message .= "\n\n\n";
 	$message .= str_pad($motif, 60 , "====");
 	$message .= "\n\n";
-	$message .= "Nature du contact : ";
+	$message .= _T('contact:nature_contact');
 	$message .= _request('qui');
 	$message .= "\n";
-	if ($raison_sociale){$message .= "Raison sociale : {$raison_sociale}\n";}
-	if ($civilite){$message .= "Civilité : {$civilite}\n";}
-	$message .= "Prénom : ";
+	if ($raison_sociale){
+		$message .= _T('contact:raison_sociale').$raison_sociale;
+		$message .= "\n";}
+	if ($civilite){
+		$message .= _T('contact:civilite').$civilite;
+		$message .= "\n";}
+	$message .= _T('contact:prenom_posteur');
 	$message .= _request('prenom');
 	$message .= "\n";
-	$message .= "Nom : ";
+	$message .= _T('contact:nom_posteur');
 	$message .= _request('nom');
 	$message .= "\n";
-	$message .= "Email : ";
+	$message .= _T('contact:email');
 	$message .= "{$email_posteur}\n";
-	$message .= "Téléphone : ";
+	$message .= _T('contact:telephone_posteur');
 	$message .= _request('telephone');
 	$message .= "\n";
-	if ($adresse){$message .= "Adresse : {$adresse}\n";}
-	$message .= "CP et ville : ";
+	if ($adresse){
+		$message .= _T('contact:adresse_posteur').$adresse;
+		$message .= "\n";}
+	$message .= _T('contact:cp_ville');
 	$message .= _request('cp');
 	$message .= " ";
 	$message .= _request('ville');
