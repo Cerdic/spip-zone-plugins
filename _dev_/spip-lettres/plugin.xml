@@ -36,8 +36,12 @@
 		<inclure>inc/lettres_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>autoriser</nom>
+		<nom>rechercher_liste_des_jointures</nom>
 		<inclure>inc/lettres_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/lettres_autorisations.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>tester_rubrique_vide</nom>
@@ -56,11 +60,15 @@
 		<inclure>inc/lettres_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>affiche_milieu</nom>
+		<nom>contenu_naviguer</nom>
 		<inclure>inc/lettres_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>contenu_naviguer</nom>
+		<nom>editer_contenu_objet</nom>
+		<inclure>inc/lettres_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>libelle_association_mots</nom>
 		<inclure>inc/lettres_pipelines.php</inclure>
 	</pipeline>
 	<bouton id="lettres_tous" parent="naviguer">

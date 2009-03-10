@@ -16,11 +16,9 @@
 	if (!defined("_ECRIRE_INC_VERSION")) return;
 	include_spip('lettres_fonctions');
  	include_spip('inc/presentation');
-	include_spip('inc/extra');
 
 
 	function exec_abonnes_edit() {
-		global $id_abonne, $email, $nom, $champs_extra;
 
 		if (!autoriser('editer', 'lettres')) {
 			include_spip('inc/minipres');
@@ -28,13 +26,16 @@
 			exit;
 		}
 		
-		pipeline('exec_init',array('args'=>array('exec'=>'abonnes_edit','id_abonne'=>$id_abonne),'data'=>''));
+		$id_abonne = $_GET['id_abonne'];
+		
+		pipeline('exec_init', array('args' => array('exec' => 'abonnes_edit', 'id_abonne' => $id_abonne), 'data' => ''));
 
 		if (!empty($_POST['enregistrer'])) {
-			if (lettres_verifier_validite_email($email)) {
-				$abonne = new abonne($id_abonne, $email);
-				$abonne->email	= $email;
-				$abonne->nom	= $nom;
+			if (lettres_verifier_validite_email($_POST['email'])) {
+				$abonne = new abonne($id_abonne);
+				$abonne->email	= $_POST['email'];
+				$abonne->nom	= $_POST['nom'];
+				$abonne->format	= $_POST['format'];
 
 				$abonne->enregistrer();
 
@@ -56,71 +57,82 @@
 		if (!$abonne->existe) {
 			$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 		} else if ($abonne->objet != 'abonnes') {
-			echo _T('avis_non_acces_page');
-			echo fin_page();
+			include_spip('inc/minipres');
+			echo minipres();
 			exit;
 		}
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('lettresprive:abonnes'), "naviguer", "abonnes_tous");
 
-	 	debut_gauche();
+		echo debut_gauche("",true);
+		echo pipeline('affiche_gauche', array('args' => array('exec' => 'abonnes_edit', 'id_abonne' => $abonne->id_abonne), 'data' => ''));
+		echo creer_colonne_droite("",true);
+		echo pipeline('affiche_droite', array('args' => array('exec' => 'abonnes_edit', 'id_abonne' => $abonne->id_abonne), 'data' => ''));
+		echo debut_droite("",true);
 
-		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'abonnes_edit','id_abonne'=>$abonne->id_abonne),'data'=>''));
-
-		creer_colonne_droite();
-		echo pipeline('affiche_droite',array('args'=>array('exec'=>'abonnes_edit','id_abonne'=>$abonne->id_abonne),'data'=>''));
-
-	 	debut_droite();
-		echo "<br />";
-		debut_cadre_formulaire();
-		echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
-		echo "<tr width='100%'>";
-		echo "<td>";
-		if (!$abonne->existe)
-			icone(_T('icone_retour'), generer_url_ecrire("abonnes_tous"), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/abonne.png');
-		else
-			icone(_T('icone_retour'), generer_url_ecrire("abonnes", 'id_abonne='.$abonne->id_abonne), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/abonne.png');
-
-		echo "</td>";
-		echo "<td>". http_img_pack('rien.gif', " ", "width='10'") . "</td>\n";
-		echo "<td width='100%'>";
-		echo _T('lettresprive:modifier_abonne');
+		echo '<div class="cadre-formulaire-editer">';
+		echo '<div class="entete-formulaire">';
 		if ($abonne->existe)
-			gros_titre($abonne->email);
+			echo icone_inline(_T('icone_retour'), generer_url_ecrire('abonnes', 'id_abonne='.$abonne->id_abonne), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/abonne.png', "rien.gif", $GLOBALS['spip_lang_left']);
 		else
-			gros_titre(_T('lettresprive:nouvel_abonne'));
-		echo "</td></tr></table>";
+			echo icone_inline(_T('icone_retour'), generer_url_ecrire('abonnes_tous'), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/abonne.png', "rien.gif", $GLOBALS['spip_lang_left']);
+		echo _T('lettresprive:modifier_abonne');
+		echo '<h1>'.sinon($abonne->email, _T('lettresprive:nouvel_abonne')).'</h1>';
+		echo '</div>';
 
-		echo "<P><HR></P>";
+		echo '<div class="formulaire_spip formulaire_editer">';
 
-		echo generer_url_post_ecrire("abonnes_edit", 'id_abonne='.$abonne->id_abonne, 'formulaire');
+		if ($erreur)
+			echo '<p class="reponse_formulaire reponse_formulaire_erreur">'._T('lettresprive:email_non_valide').'</p>';
+
+		echo '<form method="post" action="'.generer_url_ecrire('abonnes_edit', ($abonne->id_abonne ? 'id_abonne='.$abonne->id_abonne : '')).'">';
+		echo '<div>';
+
+	  	echo '<ul>';
+
+	    echo '<li class="obligatoire">';
+		echo '<label for="email">'._T('lettresprive:email').'</label>';
+		echo '<input type="text" class="text" name="email" id="email" value="'.$abonne->email.'" '.($abonne->id_abonne ? '' : 'onfocus="if(!antifocus){this.value=\'\';antifocus=true;}" ').'/>';
+		echo '</li>';
+
+	    echo '<li>';
+		echo '<label for="nom">'._T('lettresprive:nom').'</label>';
+		echo '<input type="text" class="text" name="nom" id="nom" value="'.$abonne->nom.'" />';
+		echo '</li>';
+
+	    echo '<li>';
+		echo '<label for="format">'._T('lettresprive:format').'</label>';
+		echo '<select name="format" id="format">';		
+		echo '<option value="mixte"'.(($abonne->format == 'mixte') ? ' selected="selected"' : '' ).'>'._T('lettresprive:mixte').'</option>';
+		echo '<option value="html"'.(($abonne->format == 'html') ? ' selected="selected"' : '' ).'>'._T('lettresprive:html').'</option>';
+		echo '<option value="texte"'.(($abonne->format == 'texte') ? ' selected="selected"' : '' ).'>'._T('lettresprive:texte').'</option>';
+		echo '</select>';
+		echo '</li>';
+
+		echo '</ul>';
+
+	  	echo '<p class="boutons"><input type="submit" class="submit" name="enregistrer" value="'._T('lettresprive:enregistrer').'" /></p>';
 
 		if (isset($_GET['id_rubrique']))
 			echo '<input type="hidden" name="id_rubrique" value="'.$_GET['id_rubrique'].'" />';
 
-		echo '<b>'._T('lettresprive:email').'</b>';
-		if ($erreur)
-			echo ' <b>'._T('lettresprive:email_non_valide').'</b>';
-		echo '<br /><input type="text" name="email" style="font-weight: bold; font-size: 13px;" class="formo" value="'.$abonne->email.'" size="40" '.$onfocus.' />';
-
-		echo '<b>'._T('lettresprive:nom').'</b>';
-		echo '<br /><input type="text" name="nom" class="formo" value="'.$abonne->nom.'" size="40" '.$onfocus.' />';
-
+/*
+TODO
 		if ($champs_extra) {
 			echo extra_saisie($abonne->extra, 'abonnes');
 		}
+*/
+		echo '</div>';
+		echo '</form>';
 
-		echo "<DIV ALIGN='right'>";
-		echo "<INPUT CLASS='fondo' TYPE='submit' NAME='enregistrer' VALUE='"._T('lettresprive:enregistrer')."'>";
-		echo "</DIV></FORM>";	 	
-	 		 	
-	 	fin_cadre_formulaire();
+		echo '</div>';
+		echo '</div>';
 	 	
 		echo fin_gauche();
 
 		echo fin_page();
-	 	
+
 	}
 	
 	

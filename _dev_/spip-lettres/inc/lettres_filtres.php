@@ -25,10 +25,10 @@
 				$affichage.= $avant._T('lettres:tout_le_site').$apres."\n";
 				continue;
 			}
-			$res = spip_query('SELECT titre FROM spip_themes WHERE id_rubrique="'.$id_rubrique.'" LIMIT 1');
-			if (spip_num_rows($res) == 1) {
-				list($titre) = spip_fetch_array($res, SPIP_NUM);
-				$affichage.= $avant.typo($titre).$apres."\n";
+			$res = sql_select('titre', 'spip_themes', 'id_rubrique='.intval($id_rubrique), '', '1');
+			if (sql_count($res) == 1) {
+				$arr = sql_fetch($res);
+				$affichage.= $avant.typo($arr['titre']).$apres."\n";
 			}
 		}
 		return $affichage;

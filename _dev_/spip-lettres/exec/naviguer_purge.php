@@ -31,9 +31,9 @@
 		pipeline('exec_init',array('args'=>array('exec'=>'naviguer_purge'),'data'=>''));
 
 		if (!empty($purger)) {
-			$abonnes = spip_query('SELECT id_abonne FROM spip_abonnes_rubriques WHERE id_rubrique='.intval($id_parent));
+			$abonnes = sql_select('id_abonne', 'spip_abonnes_rubriques', 'id_rubrique='.intval($id_parent));
 			$nb_abonnements_supprimes = 0;
-			while ($arr = spip_fetch_array($abonnes)) {
+			while ($arr = sql_fetch($abonnes)) {
 				$abonne = new abonne($arr['id_abonne']);
 				$abonne->valider_desabonnement($id_parent);
 				$abonne->supprimer_si_zero_abonnement();

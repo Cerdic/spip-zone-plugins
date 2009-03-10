@@ -13,9 +13,6 @@
 	 **/
 
 
-	include_spip('base/lettres');
-
-	
 	$p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	define('_DIR_PLUGIN_LETTRE_INFORMATION', (_DIR_PLUGINS.end($p)));
 	define('_NOM_PLUGIN_LETTRE_INFORMATION', (end($p)));

@@ -29,16 +29,15 @@
 
 
 	function afficher_lettre_boucle($row, $own) {
+		global $spip_lang_right;
+		
 		$vals = '';
 
 		$lettre = new lettre($row['id_lettre']);
 
 		switch ($lettre->statut) {
 			case 'brouillon':
-				if ($lettre->programmer_envoi)
-					$vals[] = http_img_pack('puce-poubelle.gif', 'puce-poubelle', ' border="0" style="margin: 1px;"');
-				else
-					$vals[] = http_img_pack('puce-blanche.gif', 'puce-blanche', ' border="0" style="margin: 1px;"');
+				$vals[] = http_img_pack('puce-blanche.gif', 'puce-blanche', ' border="0" style="margin: 1px;"');
 				break;
 			case 'envoi_en_cours':
 				$vals[] = http_img_pack('puce-orange.gif', 'puce-orange', ' border="0" style="margin: 1px;"');
@@ -52,15 +51,13 @@
 		$s = "<div>";
 		$s.= "<a href='" . generer_url_ecrire("lettres","id_lettre=".$lettre->id_lettre) .
 			"'$dir_lang style=\"display:block;\">";
-		if ($voir_logo) {
-			$chercher_logo = charger_fonction('chercher_logo', 'inc');
-			if ($logo = $chercher_logo($lettre->id_lettre, 'id_lettre', 'on')) {
-				list($fid, $dir, $nom, $format) = $logo;
-				include_spip('inc/filtres_images');
-				$logo = image_reduire("<img src='$fid' alt='' />", 26, 20);
-				if ($logo)
-					$s.= "\n<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</span>";
-			}
+		$chercher_logo = charger_fonction('chercher_logo', 'inc');
+		if ($logo = $chercher_logo($lettre->id_lettre, 'id_lettre', 'on')) {
+			list($fid, $dir, $nom, $format) = $logo;
+			include_spip('inc/filtres_images');
+			$logo = image_reduire("<img src='$fid' alt='' />", 26, 20);
+			if ($logo)
+				$s.= "\n<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</span>";
 		}
 		$s.= typo($lettre->titre);
 		if (($GLOBALS['meta']['multi_rubriques'] == 'oui') OR ($GLOBALS['meta']['multi_articles'] == 'oui'))

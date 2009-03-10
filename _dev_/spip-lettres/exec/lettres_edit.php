@@ -15,16 +15,11 @@
 
 	if (!defined("_ECRIRE_INC_VERSION")) return;
  	include_spip('inc/presentation');
-	include_spip('inc/barre');
 	include_spip('inc/documents');
-	include_spip('inc/headers');
-	include_spip('inc/extra');
 	include_spip('lettres_fonctions');
 
 
 	function exec_lettres_edit() {
-		global $dir_lang, $spip_lang_right, $champs_extra, $options, $spip_display;
-		global $cherche_mot, $select_groupe;
 
 		if (!autoriser('editer', 'lettres')) {
 			include_spip('inc/minipres');
@@ -32,17 +27,21 @@
 			exit;
 		}
 
-		pipeline('exec_init',array('args'=>array('exec'=>'lettres_edit','id_lettre'=>$_GET['id_lettre']),'data'=>''));
+		pipeline('exec_init', array('args' => array('exec' => 'lettres_edit', 'id_lettre' => $_GET['id_lettre']), 'data' => ''));
 
 		if (!empty($_POST['enregistrer'])) {
 			$lettre = new lettre($_GET['id_lettre']);
 			$lettre->titre			= $_POST['titre'];
 			$lettre->id_rubrique	= $_POST['id_parent'];
 			$lettre->descriptif		= $_POST['descriptif'];
+			$lettre->chapo			= $_POST['chapo'];
 			$lettre->texte			= $_POST['texte'];
 			$lettre->ps				= $_POST['ps'];
+/*
+TODO
 			if ($champs_extra)
 				$lettre->extra		= extra_recup_saisie("lettres");
+*/
 
 			$lettre->enregistrer();
 			$lettre->enregistrer_auteur($GLOBALS['auteur_session']['id_auteur']);
@@ -55,38 +54,43 @@
 		if (!empty($_GET['id_lettre'])) {
 			$lettre = new lettre($_GET['id_lettre']);
 			if ($lettre->statut == 'envoi_en_cours' or $lettre->statut == 'envoyee') {
-				echo _T('avis_non_acces_page');
-				echo fin_page();
+				include_spip('inc/minipres');
+				echo minipres();
 				exit;
 			}
 		} else {
 			$id_rubrique	= intval($_GET['id_rubrique']);
-			if (!$id_rubrique) list($id_rubrique) = spip_fetch_array(spip_query('SELECT id_rubrique FROM spip_rubriques WHERE statut="publie" ORDER BY id_rubrique LIMIT 1'), SPIP_NUM);
-			$onfocus		= " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+			if (!$id_rubrique) $id_rubrique = sql_getfetsel('id_rubrique', 'spip_rubriques', 'statut="publie"', 'id_rubrique', '1');
+			if (!$id_rubrique) $id_rubrique = sql_getfetsel('id_rubrique', 'spip_rubriques', '', 'id_rubrique', '1');
 			$lettre = new lettre();
 			$lettre->titre			= _T('lettresprive:nouvelle_lettre');
 			$lettre->id_rubrique	= $id_rubrique;
 		}
 		
-
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page($lettre->titre, "naviguer", "lettres_tous");
 
+		echo debut_grand_cadre(true);
+		echo afficher_hierarchie($id_rubrique);
+		echo fin_grand_cadre(true);
 
-		debut_grand_cadre();
-		echo afficher_hierarchie($lettre->id_rubrique);
-		fin_grand_cadre();
+		echo debut_gauche("",true);
 
-
-		debut_gauche();
-		if ($lettre->existe)
-			echo afficher_documents_colonne($lettre->id_lettre, "lettre");
+		if ($lettre->existe){
+			echo afficher_documents_colonne($lettre->id_lettre, 'lettre');
+		} else {
+			# ICI GROS HACK
+			# -------------
+			echo afficher_documents_colonne(0-$GLOBALS['visiteur_session']['id_auteur'], 'lettre');
+		}
 
 		echo pipeline('affiche_gauche', array('args' => array('exec' => 'lettres_edit', 'id_lettre' => $lettre->id_lettre), 'data' => ''));
+		echo creer_colonne_droite("",true);
+		echo pipeline('affiche_droite', array('args' => array('exec' => 'lettres_edit', 'id_lettre' => $lettre->id_lettre), 'data' => ''));
+		echo debut_droite("",true);
 
-		creer_colonne_droite();
-		echo pipeline('affiche_droite',array('args'=>array('exec'=>'lettres_edit','id_lettre'=>$lettre->id_lettre),'data'=>''));
-
+/*
+TODO
 		$s = "";
 		$s.= debut_cadre_relief("../"._DIR_PLUGIN_LETTRE_INFORMATION."/img_pack/preferences.png", true);
 		$s.= "<div style='padding: 2px; background-color: $couleur_claire; text-align: center; color: black;'>";
@@ -132,72 +136,73 @@
 		$s.= "<br />";
 		$s.= fin_cadre_relief(true);
 		echo $s;
+*/
 
-    	debut_droite();
-		echo "<br />";
-		debut_cadre_formulaire();
-		echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
-		echo "<tr width='100%'>";
-		echo "<td>";
+		echo '<div class="cadre-formulaire-editer">';
+		echo '<div class="entete-formulaire">';
 		if ($lettre->existe) {
-			icone(_T('icone_retour'), generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/lettre-24.png', "rien.gif");
+			echo icone_inline(_T('icone_retour'), generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/lettre-24.png', "rien.gif", $GLOBALS['spip_lang_left']);
 		} else {
 			if ($lettre->id_rubrique)
-				icone(_T('icone_retour'), generer_url_ecrire('naviguer', 'id_rubrique='.$lettre->id_rubrique), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/rubrique-24.png', "rien.gif");
+				echo icone_inline(_T('icone_retour'), generer_url_ecrire('naviguer', 'id_rubrique='.$lettre->id_rubrique), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/rubrique-24.png', "rien.gif", $GLOBALS['spip_lang_left']);
 			else
-				icone(_T('icone_retour'), generer_url_ecrire('lettres_tous'), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/lettre-24.png', "rien.gif");
+				echo icone_inline(_T('icone_retour'), generer_url_ecrire('lettres_tous'), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/lettre-24.png', "rien.gif", $GLOBALS['spip_lang_left']);
 		}
-
-		echo "</td>";
-		echo "<td>". http_img_pack('rien.gif', " ", "width='10'") . "</td>\n";
-		echo "<td width='100%'>";
 		echo _T('lettresprive:modifier_lettre');
-		gros_titre($lettre->titre);
-		echo "</td></tr></table>";
+		echo '<h1>'.$lettre->titre.'</h1>';
+		echo '</div>';
 
-		echo "<P><HR></P>";
+		echo '<div class="formulaire_spip formulaire_editer">';
+		echo '<form method="post" action="'.generer_url_ecrire('lettres_edit', ($lettre->id_lettre ? 'id_lettre='.$lettre->id_lettre : '')).'">';
+		echo '<div>';
 
-		echo generer_url_post_ecrire("lettres_edit", ($lettre->id_lettre ? 'id_lettre='.$lettre->id_lettre : ''), 'formulaire');
+	  	echo '<ul>';
 
-		echo _T('lettresprive:titre');
-		echo '<br /><input type="text" name="titre" style="font-weight: bold; font-size: 13px;" class="formo" value="'.$lettre->titre.'" size="40" '.$onfocus.'/><br/>';
+	    echo '<li class="obligatoire">';
+		echo '<label for="titre">'._T('lettresprive:titre').'</label>';
+		echo '<input type="text" class="text" name="titre" id="titre" value="'.$lettre->titre.'" '.($lettre->id_lettre == -1 ? 'onfocus="if(!antifocus){this.value=\'\';antifocus=true;}" ' : '').'/>';
+		echo '</li>';
 
+	    echo '<li class="editer_parent">';
+		echo '<label for="id_parent">'._T('titre_cadre_interieur_rubrique').'</label>';
 		$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
-		debut_cadre_couleur("rubrique-24.gif", false, "", _T('titre_cadre_interieur_rubrique'));
 		echo $selecteur_rubrique($lettre->id_rubrique, 'lettre', false);
-		fin_cadre_couleur();
+		echo '</li>';
+	
+	    echo '<li class="editer_descriptif">';
+		echo '<label for="descriptif">'._T('lettresprive:descriptif').'</label>';
+		echo '<textarea name="descriptif" id="descriptif" rows="2" cols="40">'.$lettre->descriptif.'</textarea>';
+		echo '</li>';
 
-		echo "<P><B>"._T('lettresprive:descriptif')."</B>";
-		echo "<TEXTAREA NAME='descriptif' CLASS='forml' ROWS='2' COLS='40' wrap=soft>";
-		echo $lettre->descriptif;
-		echo "</TEXTAREA></P>\n";
+	    echo '<li class="editer_chapo">';
+		echo '<label for="chapo">'._T('lettresprive:chapo').'</label>';
+		echo '<textarea name="chapo" id="chapo" rows="8" cols="40">'.$lettre->chapo.'</textarea>';
+		echo '</li>';
 
-		echo "<p><B>"._T('lettresprive:texte')."</B>";
-		echo "<br>"._T('texte_enrichir_mise_a_jour');
-		echo aide("raccourcis");
-		echo afficher_barre('document.formulaire.texte');
-		echo "<TEXTAREA id='text_area' NAME='texte' ".$GLOBALS['browser_caret']." CLASS='formo' ROWS='20' COLS='40' wrap=soft>";
-		echo $lettre->texte;
-		echo "</TEXTAREA></p>\n";
+	    echo '<li class="editer_texte">';
+		echo '<label for="text_area">'._T('lettresprive:texte').'</label>';
+		echo '<div class="explication">'._T('texte_enrichir_mise_a_jour').'<em>'.aide('raccourcis').'</em></div>';
+		echo '<textarea name="texte" id="text_area" rows="20" cols="40" class="barre_inserer" '.$GLOBALS['browser_caret'].'>'.$lettre->texte.'</textarea>';
+		echo '</li>';
 
 		if ($GLOBALS['meta']['spip_lettres_utiliser_ps'] == 'oui') {
-			echo "<p><B>"._T('lettresprive:ps')."</B>";
-			echo "<TEXTAREA NAME='ps' CLASS='forml' ROWS='3' COLS='40' wrap=soft>";
-			echo $lettre->ps;
-			echo "</TEXTAREA></p>\n";
+		    echo '<li class="editer_ps">';
+			echo '<label for="ps">'._T('lettresprive:ps').'</label>';
+			echo '<textarea name="ps" id="ps" rows="3" cols="40">'.$lettre->ps.'</textarea>';
+			echo '</li>';
 		}
 
-		if ($champs_extra) {
-			include_spip('inc/extra');
-			echo extra_saisie($lettre->extra, 'lettres');
-		}
+		echo '</ul>';
 
-		echo "<DIV ALIGN='right'>";
-		echo "<INPUT CLASS='fondo' TYPE='submit' NAME='enregistrer' VALUE='"._T('lettresprive:enregistrer')."'>";
-		echo "</DIV></FORM>";
+	  	echo '<p class="boutons"><input type="submit" class="submit" name="enregistrer" value="'._T('lettresprive:enregistrer').'" /></p>';
 
-		fin_cadre_formulaire();
+		echo '</div>';
 
+		echo '</form>';
+
+		echo '</div>';
+		echo '</div>';
+	 	
 		echo fin_gauche();
 
 		echo fin_page();

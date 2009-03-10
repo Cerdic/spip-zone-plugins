@@ -34,6 +34,7 @@
 		$interface['tables_jointures']['spip_lettres'][] = 'mots';
 		$interface['tables_jointures']['spip_lettres'][] = 'rubriques';
 		$interface['tables_jointures']['spip_lettres'][] = 'abonnes_lettres';
+		$interface['tables_jointures']['spip_lettres']['id_auteur'] = 'auteurs_lettres';
 		$interface['tables_jointures']['spip_lettres'][] = 'auteurs_lettres';
 		$interface['tables_jointures']['spip_lettres'][] = 'documents_liens';
 		$interface['tables_jointures']['spip_auteurs'][] = 'auteurs_lettres';
@@ -86,10 +87,10 @@
 							"id_secteur"			=> "BIGINT(21) NOT NULL",
 							"titre"					=> "TEXT NOT NULL",
 							"descriptif"			=> "TEXT NOT NULL",
+							"chapo"					=> "MEDIUMTEXT NOT NULL",
 							"texte"					=> "LONGBLOB NOT NULL",
 							"ps"					=> "TEXT NOT NULL",
 							"date"					=> "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL",
-							"programmer_envoi"		=> "TINYINT NOT NULL DEFAULT '0'",
 							"lang"					=> "VARCHAR(10) NOT NULL",
 							"langue_choisie"		=> "VARCHAR(3) DEFAULT 'non'",
 							"maj"					=> "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL",
@@ -223,7 +224,7 @@
 	}
 
 
-	function lettres_install($action){
+	function lettres_install($action) {
 		include_spip('inc/plugin');
 		$info_plugin_lettres = plugin_get_infos(_NOM_PLUGIN_LETTRE_INFORMATION);
 		$version_plugin = $info_plugin_lettres['version'];
@@ -236,7 +237,6 @@
 				include_spip('base/abstract_sql');
 				if (!isset($GLOBALS['meta']['spip_lettres_version'])) {
 					creer_base();
-#TODO					spip_query("ALTER TABLE spip_groupes_mots ADD lettres VARCHAR(3) NOT NULL DEFAULT 'non';");
 					ecrire_meta('spip_lettres_version', $version_plugin);
 					ecrire_meta('spip_lettres_fond_formulaire_lettres', 'lettres');
 					ecrire_meta('spip_lettres_fond_lettre_titre', 'lettre_titre');
@@ -299,7 +299,7 @@
 						ecrire_metas();
 					}
 					if ($version_base < 3.8) {
-						maj_tables('spip_lettres'); // bye bye idx
+						creer_base();
 						ecrire_meta('spip_lettres_fond_lettre_titre', 'lettre_titre');
 						ecrire_meta('spip_lettres_version', $version_base = 3.8);
 						ecrire_metas();
@@ -307,6 +307,11 @@
 				}
 				break;
 			case 'uninstall':
+				$res = sql_select('id_lettre', 'spip_lettres');
+				while ($arr = sql_fetch($res)) {
+					$lettre = new lettre($arr['id_lettre']);
+					$lettre->supprimer();
+				}
 				include_spip('base/abstract_sql');
 				sql_drop_table('spip_abonnes', true);
 				sql_drop_table('spip_clics', true);
@@ -333,6 +338,7 @@
 				effacer_meta('spip_lettres_cron');
 				include_spip('inc/getdocument');
 				effacer_repertoire_temporaire(_DIR_LETTRES);
+#TODO effacer documents et logos
 				break;
 		}
 	}
@@ -356,35 +362,5 @@
 										'champ_nom'			=> 'nom'
 										);
 
-
-/*
-		if ($tables_installees = unserialize($GLOBALS['meta']['MotsPartout:tables_installees'])) {
-			if (!$tables_installees['lettres']) {
-				$tables_installees['lettres'] = true;
-				ecrire_meta('MotsPartout:tables_installees',serialize($tables_installees));
-	  			ecrire_metas();
-			}
-		}
-	$choses_possibles['lettres'] = array(
-										  'titre_chose' => 'lettres',
-										  'id_chose' => 'id_lettre',
-										  'table_principale' => 'spip_lettres',
-									  	  'url_base' => 'lettres',
-										  'tables_limite' => array(
-																   'lettres' => array(
-																					   'table' => 'spip_lettres',
-																					   'nom_id' => 'id_lettre'),
-																   'rubriques' => array(
-																						'table' => 'spip_lettres',
-																						'nom_id' =>  'id_rubrique'),
-																   'documents' => array(
-																						'table' => 'spip_documents_lettres',
-																						'nom_id' =>  'id_document'),
-																   'auteurs' => array(
-																					  'table' => 'spip_auteurs_lettres',
-																					  'nom_id' => 'id_auteur')
-																   )
-										  );
-*/
 
 ?>

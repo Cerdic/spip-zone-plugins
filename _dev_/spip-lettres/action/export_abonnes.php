@@ -24,8 +24,8 @@
 
 			$abonnes = array();
 			$i = 0;
-			$res = spip_query('SELECT id_abonne FROM spip_abonnes_rubriques WHERE statut="valide" AND id_rubrique='.intval($id_parent));
-			while ($arr = spip_fetch_array($res)) {
+			$res = sql_select('id_abonne', 'spip_abonnes_rubriques', 'statut="valide" AND id_rubrique='.intval($id_parent));
+			while ($arr = sql_fetch($res)) {
 				$abonne = new abonne($arr['id_abonne']);
 				$abonnes[$i][] = $abonne->email;
 				$abonnes[$i][] = $abonne->nom;

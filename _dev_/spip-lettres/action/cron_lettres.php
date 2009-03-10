@@ -29,13 +29,8 @@
 		global $envois_recurrents, $code;
 		
 		if ($envois_recurrents and (strcmp($GLOBALS['meta']['spip_lettres_cron'], $code) == 0)) {
-			$res = spip_query('SELECT RC.id_rubrique,
-									R.titre,
-				 					R.descriptif,
-									R.texte
-								FROM spip_rubriques_crontabs AS RC
-								INNER JOIN spip_rubriques AS R ON R.id_rubrique=RC.id_rubrique');
-			while ($arr = spip_fetch_array($res)) {
+			$res = sql_select('RC.id_rubrique, R.titre, R.descriptif, R.texte', 'spip_rubriques_crontabs AS RC INNER JOIN spip_rubriques AS R ON R.id_rubrique=RC.id_rubrique');
+			while ($arr = sql_fetch($res)) {
 				$lettre = new lettre();
 				$lettre->id_rubrique	= $arr['id_rubrique'];
 				$lettre->titre			= $arr['titre'];

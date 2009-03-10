@@ -33,7 +33,6 @@
 
 		$id_abonne = $row['id_abonne'];
 		$id_lettre = $row['id_lettre'];
-		$id_rubrique = $own['id_rubrique'];
 		$abonne = new abonne($id_abonne);
 		$email	= $abonne->email;
 		$nom	= $abonne->nom;
@@ -74,15 +73,7 @@
 			else
 				$vals[] = '&nbsp;';
 		} else {
-			if ($id_rubrique != -1) {
-				$abonnement_direct = sql_countsel('*', 'spip_abonnes_rubriques', 'id_rubrique='.intval($id_rubrique).' AND id_abonne='.intval($abonne->id_abonne));
-				if ($abonnement_direct)
-					$vals[] = _T('lettresprive:direct');
-				else
-					$vals[] = _T('lettresprive:indirect');
-			} else {
-				$vals[] = '&nbsp;';
-			}
+			$vals[] = '&nbsp;';
 		}
 
 		$vals[] = $abonne->format;

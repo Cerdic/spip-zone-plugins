@@ -23,8 +23,8 @@
 
 			$desabonnes = array();
 			$i = 0;
-			$res = spip_query('SELECT email FROM spip_desabonnes');
-			while ($arr = spip_fetch_array($res)) {
+			$res = sql_select('email', 'spip_desabonnes');
+			while ($arr = sql_fetch($res)) {
 				$desabonnes[$i][] = $arr['email'];
 				$i++;
 			}

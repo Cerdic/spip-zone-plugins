@@ -32,7 +32,7 @@
 
 		if (!empty($_POST['titre'])) {
 			sql_replace('spip_themes', array('id_rubrique' => intval($_POST['id_parent']), 'titre' => $_POST['titre']));
-#TODO			lettres_calculer_langues_rubriques($dummy);
+			lettres_calculer_langues_rubriques($dummy);
 			$url = generer_url_ecrire('config_lettres_formulaire');
 			header('Location: '.$url);
 			exit();

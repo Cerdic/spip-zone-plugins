@@ -16,18 +16,18 @@
 	include_spip('lettres_fonctions');
 
 
-	function action_statut_lettre() {
+	function action_statut_abonne() {
 
-		$id_lettre = $_GET['id_lettre'];
-		$redirection = generer_url_ecrire('lettres', "id_lettre=$id_lettre", true);
+		$id_abonne = $_GET['id_abonne'];
+		$redirection = generer_url_ecrire('abonnes', "id_abonne=$id_abonne", true);
 
 		if (autoriser('editer', 'lettres')) {
 
-			$lettre = new lettre($id_lettre);
+			$abonne = new abonne($id_abonne);
 
 			if (!empty($_REQUEST['statut'])) {
 				$statut = $_REQUEST['statut'];
-				$redirection = $lettre->enregistrer_statut($statut);
+				$redirection = $abonne->enregistrer_statut($statut);
 			}
 		
 		}

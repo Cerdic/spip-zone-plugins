@@ -33,10 +33,7 @@
 
 		switch ($lettre->statut) {
 			case 'brouillon':
-				if ($lettre->programmer_envoi)
-					$vals[] = http_img_pack('puce-poubelle.gif', 'puce-poubelle', ' border="0" style="margin: 1px;"');
-				else
-					$vals[] = http_img_pack('puce-blanche.gif', 'puce-blanche', ' border="0" style="margin: 1px;"');
+				$vals[] = http_img_pack('puce-blanche.gif', 'puce-blanche', ' border="0" style="margin: 1px;"');
 				break;
 			case 'envoi_en_cours':
 				$vals[] = http_img_pack('puce-orange.gif', 'puce-orange', ' border="0" style="margin: 1px;"');

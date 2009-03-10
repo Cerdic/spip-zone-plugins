@@ -16,6 +16,7 @@
 	include_spip('base/lettres');
 	include_spip('inc/lettres_filtres');
 	include_spip('inc/lettres_classes');
+	include_spip('inc/lettres_pipelines');
 	include_spip('public/lettres_balises');
 	include_spip('public/lettres_boucles');
 	include_spip('inc/notifications_classes');
@@ -28,11 +29,15 @@
 		if ($envois_recurrents and $id_rubrique) {
 			$cron.= '<form action="'.generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique).'" method="post">';
 			if ($_POST['cron_hidden']) {
-				@spip_query('DELETE FROM spip_rubriques_crontabs WHERE id_rubrique='.intval($id_rubrique).' LIMIT 1');
+				@sql_delete('spip_rubriques_crontabs', 'id_rubrique='.intval($id_rubrique));
 				if ($_POST['cron'] == 1)
-					@spip_query('REPLACE INTO spip_rubriques_crontabs (id_rubrique) VALUES ('.intval($id_rubrique).')');
+					@sql_replace('spip_rubriques_crontabs', 
+								array(
+									'id_rubrique' => intval($id_rubrique)
+									)
+								);
 			}
-			$test = spip_num_rows(spip_query('SELECT * FROM spip_rubriques_crontabs WHERE id_rubrique='.$id_rubrique));
+			$test = sql_countsel('spip_rubriques_crontabs', 'id_rubrique='.intval($id_rubrique));
 			if (!$test)
 				$cron.= debut_cadre_enfonce('../'._DIR_PLUGIN_LETTRES.'/img_pack/cron.png', true, "", bouton_block_invisible('cron')._T('lettresprive:envois_recurrents'));
 			else
@@ -50,7 +55,7 @@
 		}
 		return $cron;
 	}
-	
+
 
 	function lettres_verifier_validite_email($email) {
 		if (preg_match("/(%0A|%0D|\n+|\r+)(content-type:|to:|cc:|bcc:)/i", $email))
@@ -66,10 +71,9 @@
 
 
 	function calculer_url_lettre($id_lettre, $texte, $ancre) {
-		$lien = generer_url_lettre($id_lettre) . $ancre;
+		$lien = generer_url_lettre($id_lettre).$ancre;
 		if (!$texte) {
-			$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_lettres WHERE id_lettre=$id_lettre"));
-			$texte = $row['titre'];
+			$texte = sql_getfetsel('titre', 'spip_lettres', 'id_lettre='.intval($id_lettre));
 		}
 		return array($lien, 'spip_in', $texte);
 	}
@@ -133,14 +137,14 @@
 
 
 	function lettres_rubrique_autorisee($id_rubrique) {
-		return spip_num_rows(spip_query('SELECT id_theme FROM spip_themes WHERE id_rubrique='.intval($id_rubrique)));
+		return sql_countsel('spip_themes', 'id_rubrique='.intval($id_rubrique));
 	}
 
 
 	function redirection_clic($id_clic) {
-		$verification_clic = spip_query('SELECT url FROM spip_clics WHERE id_clic="'.intval($id_clic).'"');
-		if (spip_num_rows($verification_clic) == 1) {
-			$url = spip_fetch_array($verification_clic);
+		$verification_clic = sql_select('url', 'spip_clics', 'id_clic='.intval($id_clic));
+		if (sql_count($verification_clic) == 1) {
+			$url = sql_fetch($verification_clic);
 			$redirection = $url['url'];
 		} else {
 			$redirection = $GLOBALS['meta']['adresse_site'];

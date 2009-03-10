@@ -13,6 +13,9 @@
 	 **/
 
 
+	include_spip('lettres_fonctions');
+
+
 	function lettres_autoriser() {}
 	
 	
@@ -21,12 +24,12 @@
 			case 'bouton':
 			case 'onglet':
 			case 'configurer':
-			case 'editer':
 			case 'voir':
 			case 'exporter':
 			case 'importer':
 			case 'purger':
 			case 'joindre':
+			case 'editer':
 				return ($qui['statut'] == '0minirezo');
 				break;
 			default:

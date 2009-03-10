@@ -22,7 +22,10 @@
 	 * @author Pierre BASSON
 	 **/
 	function action_clic() {
-		global $code, $email, $id_clic;
+		
+		$id_clic	= $_GET['id_clic'];
+		$email		= $_GET['email'];
+		$code		= $_GET['code'];
 
 		$redirection = redirection_clic($id_clic);
 		

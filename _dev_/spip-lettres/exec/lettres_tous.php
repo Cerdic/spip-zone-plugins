@@ -45,8 +45,7 @@
 
    		echo debut_droite('', true);
 		echo afficher_objets('lettre', _T('lettresprive:lettres_envoi_en_cours'), array('FROM' => 'spip_lettres', 'WHERE' => 'statut="envoi_en_cours"', 'ORDER BY' => 'maj DESC'));
-		echo afficher_objets('lettre', _T('lettresprive:lettres_programmees'), array('FROM' => 'spip_lettres', 'WHERE' => 'statut="brouillon" AND programmer_envoi=1"', 'ORDER BY' => 'maj DESC'));
-		echo afficher_objets('lettre', _T('lettresprive:lettres_brouillon'), array('FROM' => 'spip_lettres', 'WHERE' => 'statut="brouillon" AND programmer_envoi=0', 'ORDER BY' => 'maj DESC'));
+		echo afficher_objets('lettre', _T('lettresprive:lettres_brouillon'), array('FROM' => 'spip_lettres', 'WHERE' => 'statut="brouillon"', 'ORDER BY' => 'maj DESC'));
 		echo afficher_objets('lettre', _T('lettresprive:lettres_envoyees'), array('FROM' => 'spip_lettres', 'WHERE' => 'statut="envoyee"', 'ORDER BY' => 'maj DESC'));
 		echo afficher_objets('abonnement', _T('lettresprive:abonnements'), array('SELECT' => 'id_rubrique, COUNT(id_abonne) AS total', 'FROM' => 'spip_abonnes_rubriques', 'WHERE' => 'statut="valide"', 'ORDER BY' => 'total DESC', 'GROUP BY' => 'id_rubrique'));
 
