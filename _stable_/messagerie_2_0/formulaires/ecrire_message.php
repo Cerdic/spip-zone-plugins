@@ -18,7 +18,7 @@
  *  
  * @return unknown
  */
-function formulaires_ecrire_message_charger_dist($redirect="",$destinataire){
+function formulaires_ecrire_message_charger_dist($redirect="",$destinataire=""){
 	include_spip('base/abstract_sql');
 	include_spip('inc/filtres');
 	$valeurs = array('objet'=>'','texte'=>'');
