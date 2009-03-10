@@ -24,7 +24,7 @@ function inc_legender_auteur_supp_dist($id_auteur){
    
 	if (!$new) {
 		if (autoriser('modifier', 'auteur', $id_auteur)) {
-			$auteur_infos_voir_supp = legender_auteur_supp_voir($id_auteur, $redirect);
+			$auteur_infos_voir_supp = legender_auteur_supp_voir($id_auteur);
 		}
 	}
 	return $auteur_infos_voir_supp;
@@ -39,18 +39,23 @@ function legender_auteur_supp_saisir($id_auteur){
 	$corps_supp .= '<fieldset><h3 class="legend">Inscription 2</h3>';
 	$corps_supp .= '<ul>';
 	
+	$champs = array();
 	// Elaborer le formulaire
 	$var_user[] = 'b.id_auteur';
 	foreach(lire_config('inscription2',array()) as $cle => $val){
 		$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
 		if($val=='on' AND !in_array($cle,$exceptions_des_champs_auteurs_elargis) and !ereg("^(categories|zone|newsletter).*$", $cle) ){
 			$var_user[] = 'b.'.$cle;
-			$champs[$cle];
+			$champs[$cle] = '';
 		}
 	}
-
-	$query = sql_fetsel($var_user,"spip_auteurs a left join spip_auteurs_elargis b USING(id_auteur)","a.id_auteur='$id_auteur'");
-
+	
+	if(is_numeric($id_auteur)){
+		$query = sql_fetsel($var_user,"spip_auteurs a left join spip_auteurs_elargis b USING(id_auteur)","a.id_auteur='$id_auteur'");
+	}else{
+		$query = $champs;
+	}
+	
 	foreach ($query as $cle => $val){
 		if(($cle!= 'id_auteur') AND !in_array($cle,$exceptions_des_champs_auteurs_elargis)){
 			if(find_in_path('prive/inscription2_champs_'.$cle.'.html')){
