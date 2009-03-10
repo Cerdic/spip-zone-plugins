@@ -575,7 +575,7 @@ function produire_image_typo() {
 		&& function_exists('imageCreateTrueColor');
 
 	
-	if (file_exists($fichier))
+	if (@file_exists($fichier))
 		$image = $fichier;
 	else if (!$flag_gd_typo)
 		return $texte;
