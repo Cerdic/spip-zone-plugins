@@ -33,7 +33,7 @@ if(typeof TB_chemin_animation == 'undefined') { TB_chemin_animation = 'circle_an
 
 function TB_image() {
 	var t = this.title || this.name ;
-	var longdesc = jQuery('img[@longdesc]', this).attr('longdesc');
+	var longdesc = jQuery('img[longdesc]', this).attr('longdesc');
 
 	if (longdesc)
 		TB_show(t,longdesc);
