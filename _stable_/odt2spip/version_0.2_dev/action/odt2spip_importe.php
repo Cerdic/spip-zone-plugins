@@ -21,9 +21,9 @@ function action_odt2spip_importe() {
 
 	// ss-rep temporaire specifique de l'auteur en cours: tmp/odt2spip/id_auteur/ => le creer si il n'existe pas
     $base_dezip = _DIR_TMP."odt2spip/";   // avec / final
-    if (!is_dir($base_dezip)) if (!mkdir($base_dezip,0777)) die (_T('odtspip:err_repertoire_tmp'));  
+    if (!is_dir($base_dezip)) if (!sous_repertoire(_DIR_TMP,'odt2spip')) die (_T('odtspip:err_repertoire_tmp'));  
     $rep_dezip = $base_dezip.$id_auteur.'/';
-    if (!is_dir($rep_dezip)) if (!mkdir($rep_dezip,0777)) die (_T('odtspip:err_repertoire_tmp'));
+    if (!is_dir($rep_dezip)) if (!sous_repertoire($base_dezip,$id_auteur)) die (_T('odtspip:err_repertoire_tmp'));
     
 	// traitement d'un fichier odt envoye par $_POST 
     $fichier_zip = addslashes($_FILES['fichier_odt']['name']);
@@ -72,7 +72,7 @@ function action_odt2spip_importe() {
         $xml->load($xml_entre);
         $xsl = new DOMDocument();
         $xsl->load($xslt_texte);
-        $proc->importStylesheet($xsl); // attachement des r�gles xsl
+        $proc->importStylesheet($xsl); // attachement des regles xsl
         
       // lancer le parseur
         if (!$xml_sortie = $proc->transformToXml($xml)) die(_T('odtspip:err_transformation_xslt'));
@@ -110,22 +110,16 @@ function action_odt2spip_importe() {
                 $hauteur = round($Tdims[2]*$conversion_image);
                 $odt2spip_retailler_img($rep_pictures.$img, $largeur, $hauteur);
                 $type = 'image';
-                if ($id_document = $ajouter_documents($rep_pictures.$img, $img, "article", "", $type, 0, $toto='')) { 
-				// uniformiser la sortie: si on est en 1.9.2 inc_ajouter_documents_dist() retourne le type de fichier (extension) alors qu'en 2.0 c'est l'id_document
-					if (!is_numeric($id_document)) {
-						$Ttmp = explode('.', $img);
-                        $nom_fic = $Ttmp[0];
-                        $id_document = sql_getfetsel("id_document","spip_documents","fichier LIKE '%$nom_fic%' ORDER BY maj DESC LIMIT 1");
-                    }
+                if ($id_document = $ajouter_documents($rep_pictures.$img, $img, "article", "", $type, 0,"")) { 
                     $xml_sortie = str_replace($ch, $id_document, $xml_sortie);
                     $T_images[] = $id_document;
-                };
+                }
             }
         }
     }
     
 	//finalement enregistrer le contenu dans /tmp/odt2spip/id_auteur/snippet_odt2spip.xml
-    if (!file_put_contents($fichier_sortie, $xml_sortie)) die(_T('odtspip:err_enregistrement_fichier_sortie').$fichier_sortie);
+    if (!ecrire_fichier($fichier_sortie,$xml_sortie)) die(_T('odtspip:err_enregistrement_fichier_sortie').$fichier_sortie);
 
 	// generer l'article a partir du fichier xml de sortie (code pompe sur plugins/snippets/action/snippet_importe.php)
     include_spip('inc/snippets');
@@ -155,7 +149,7 @@ function action_odt2spip_importe() {
         if (!is_numeric($id_doc_odt)) {
             $Tfic = explode('.', $fichier_zip);
             $fichier_zip_av_extension = $Tfic[0];
-            $id_doc_odt = sql_getfetsel("id_document","spip_documents","fichier LIKE '%$fichier_zip_av_extension%' ORDER BY maj DESC LIMIT 1");
+            $id_doc_odt = sql_getfetsel("id_document","spip_documents","fichier LIKE '%$fichier_zip_av_extension%'","","maj DESC");
         }
         
         $c = array(
@@ -165,7 +159,7 @@ function action_odt2spip_importe() {
         include_spip('inc/modifier');
         revision_document($id_doc_odt,$c);
     }
-    
+    include_spip('inc/getdocument');
 	// vider le contenu du rep de dezippage
     effacer_repertoire_temporaire($rep_dezip);
     
