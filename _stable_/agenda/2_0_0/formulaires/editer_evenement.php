@@ -7,6 +7,7 @@
  */
 include_spip('inc/actions');
 include_spip('inc/editer');
+include_spip('inc/autoriser');
 
 function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_article=0, $retour='', $lier_trad = 0, $config_fonc='evenements_edit_config', $row=array(), $hidden=''){
 	
