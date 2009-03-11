@@ -64,7 +64,7 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 
     //gere la correspondance champs -> _request(champs)
 	foreach(inscription2_champs_formulaire($id_auteur) as $clef => $valeur) {
-		$valeurs[$valeur] = _request($valeur);
+		$valeurs[$clef] = _request($valeur);
 	}		
 		
 	//verifier les champs obligatoires
@@ -219,6 +219,7 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
     
 	//genere le tableau des valeurs à mettre à jour pour spip_auteurs
 	//toutes les clefs qu'inscription2 peut mettre à jour
+	include_spip('inc/inscription2_compat_php4');
 	$clefs = array_fill_keys(array('login','nom','email','bio'),'');
 	//extrait uniquement les données qui ont été proposées à la modification
 	$val = array_intersect_key($valeurs,$clefs);
