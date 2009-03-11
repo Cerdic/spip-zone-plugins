@@ -163,7 +163,7 @@ function action_odt2spip_importe() {
     effacer_repertoire_temporaire($rep_dezip);
     
 	// aller sur la page de l'article qui vient d'etre cree
-    redirige_par_entete(str_replace("&amp;","&",urldecode($redirect.$id_article)));
+    redirige_par_entete(parametre_url(str_replace("&amp;","&",urldecode($redirect)),'id_article',$id_article,'&'));
 }
 
 // retailler une image : (ne gere que les images GIF, JPG et PNG)
@@ -198,7 +198,7 @@ function odt2spip_retailler_img($img_ini, $l = '', $h = 400) {
     $img_nv = imagecreatetruecolor($l_ini*$ratio, $h_ini*$ratio); 
     $img_acopier = $fct_creation_ext($img_ini);
 	
-    // gerer la transparence pour les images PNG (le mec qui a trouv� ce code est g�nial! :-)
+    // gerer la transparence pour les images PNG (le mec qui a trouve ce code est genial! :-)
     if ($type_img == 3) {
         imagecolortransparent($img_nv, imagecolorallocate($img_nv, 0, 0, 0));
         imagealphablending($img_nv, false);
