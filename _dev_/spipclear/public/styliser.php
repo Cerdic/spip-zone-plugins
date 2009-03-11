@@ -1,7 +1,7 @@
 <?php
 
 /*
- * surcharge de SPIP 2.0.5
+ * surcharge de SPIP 2.0.6
  * pour tester un pipeline
  * permettant de selectionner d'autres fond
  * que celui par defaut dans SPIP
@@ -47,10 +47,10 @@ function public_styliser_dist($fond, $id_rubrique, $lang='', $connect='', $ext='
 		} else { // on est gentil, mais la ...
 			include_spip('public/debug');
 			erreur_squelette(_T('info_erreur_squelette2',
-				array('fichier'=>"'$fond'")),
+				array('fichier'=>"'$fond.$ext'")),
 				$GLOBALS['dossier_squelettes']);
-			$f = find_in_path(".$ext"); // on ne renvoie rien ici, c'est le resultat vide qui provoquere un 404 si necessaire
-			return array(substr($f, 0, -strlen(".$ext")), $ext, $ext, $f);
+			// provoquer 404
+			return array(null, $ext, $ext, null); 
 		}
 	}
 
