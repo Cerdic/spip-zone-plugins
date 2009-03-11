@@ -19,19 +19,11 @@ function action_odt2spip_importe() {
     
     if (!autoriser('creerarticledans', 'rubrique', $id_rubrique)) die(_T('avis_non_acces_page'));
 
-	// les chemins a utiliser
-	$rep_IMG = _DIR_RACINE._NOM_PERMANENTS_ACCESSIBLES;
-    
 	// ss-rep temporaire specifique de l'auteur en cours: tmp/odt2spip/id_auteur/ => le creer si il n'existe pas
     $base_dezip = _DIR_TMP."odt2spip/";   // avec / final
     if (!is_dir($base_dezip)) if (!mkdir($base_dezip,0777)) die (_T('odtspip:err_repertoire_tmp'));  
     $rep_dezip = $base_dezip.$id_auteur.'/';
-    if (!is_dir($rep_dezip)) if (!mkdir($rep_dezip,0777)) die (_T('odtspip:err_repertoire_tmp'));  
-    
-    $rep_pictures = $rep_dezip."Pictures/";
-    
-	// parametres de conversion de taille des images : cm -> px (en 96 dpi puisque c'est ce que semble utiliser Writer)
-    $conversion_image = 96/2.54;
+    if (!is_dir($rep_dezip)) if (!mkdir($rep_dezip,0777)) die (_T('odtspip:err_repertoire_tmp'));
     
 	// traitement d'un fichier odt envoye par $_POST 
     $fichier_zip = addslashes($_FILES['fichier_odt']['name']);
@@ -96,7 +88,11 @@ function action_odt2spip_importe() {
         
 	// traiter les images: dans tous les cas il faut les integrer dans la table documents 
 	// en 2.0 c'est mode image + les fonctions de snippets font la liaison => on bloque la liaison en filant un id_article vide
-
+	$rep_pictures = $rep_dezip."Pictures/";
+    
+	// parametres de conversion de taille des images : cm -> px (en 96 dpi puisque c'est ce que semble utiliser Writer)
+    $conversion_image = 96/2.54;
+    
 	preg_match_all('/<img([;a-zA-Z0-9\.]*)/', $xml_sortie, $match, PREG_PATTERN_ORDER);
 
 	if (@count($match) > 0) {
@@ -151,14 +147,23 @@ function action_odt2spip_importe() {
 		// recuperer le titre
         preg_match('/<titre>(.*?)<\/titre>/', $xml_sortie, $match);
         $titre = $match[1];
-        if (!isset($ajouter_documents)) $ajouter_documents = charger_fonction('ajouter_documents','inc');
+        if (!isset($ajouter_documents)) 
+        	$ajouter_documents = charger_fonction('ajouter_documents','inc');
+        
         $id_doc_odt = $ajouter_documents($rep_dezip.$fichier_zip, $fichier_zip, "article", $id_article, 'document', 0, $toto='');
+        
         if (!is_numeric($id_doc_odt)) {
             $Tfic = explode('.', $fichier_zip);
             $fichier_zip_av_extension = $Tfic[0];
             $id_doc_odt = sql_getfetsel("id_document","spip_documents","fichier LIKE '%$fichier_zip_av_extension%' ORDER BY maj DESC LIMIT 1");
         }
-		sql_updateq('spip_documents', array('titre' => $titre, 'descriptif' => _T('odtspip:cet_article_version_odt')), 'id_document='.$id_doc_odt);
+        
+        $c = array(
+        	'titre' => $titre,
+        	'descriptif' => _T('odtspip:cet_article_version_odt')
+        );
+        include_spip('inc/modifier');
+        revision_document($id_doc_odt,$c);
     }
     
 	// vider le contenu du rep de dezippage
