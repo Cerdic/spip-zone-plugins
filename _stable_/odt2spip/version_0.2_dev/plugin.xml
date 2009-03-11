@@ -22,5 +22,6 @@ _ La transformation des fichiers ODT impose que l'extension XSL de PHP soit acti
     	<nom>affiche_droite</nom>
         <inclure>odt2spip_pipelines.php</inclure>
     </pipeline>
-    <necessite id="snippets" version="[0.1;]" />  
+	<necessite id="SPIP" version="[2.0.5;]" />
+    <necessite id="snippets" version="[0.1;]" />
 </plugin>
