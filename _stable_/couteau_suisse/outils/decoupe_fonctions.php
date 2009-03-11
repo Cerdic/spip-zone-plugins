@@ -145,7 +145,7 @@ function decoupe_notes_orphelines(&$texte) {
 /*	if(function_exists('tester_variable')) tester_variable('ouvre_note', '['); // tester_variable() depreciee sous SPIP 2.0
 	else*/ if (!isset($GLOBALS['ouvre_note'])) $GLOBALS['ouvre_note'] = '[';
 	$ouvre = preg_quote($GLOBALS['ouvre_note'],',');
-	$appel = ",<p[^>]*>.*?$ouvre<a [^>]*(?:name|id)=[\"']nb([0-9]+)[\"'] class=[\"']spip_note[\"'] [^>]+>[^<]+</a>.*?</p>,";
+	$appel = ",<p[^>]*>.*?$ouvre<a [^>]*(?:name|id)=[\"']nb([0-9]+)[\"'] class=[\"']spip_note[\"'] [^>]+>[^<]+</a>.*?</p>,s";
 	preg_match_all($appel, $GLOBALS['les_notes'], $tableau);
 	for($i=0;$i<count($tableau[0]);$i++) {
 		if (!preg_match(",<a href=[\"']#nb{$tableau[1][$i]}[\"'],",$texte)) 
