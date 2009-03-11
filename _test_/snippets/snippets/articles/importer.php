@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * Cedric Morin
- * © 2006 - Distribue sous licence GNU/GPL
+ * Â© 2006 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -42,7 +42,8 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
 				// mettre a jour des articles deja en bdd avec le xml fournit
 				if($forcer_maj){
 				$id_target = '';
-				$id_article_trouve = sql_fetsel("id_article","spip_articles","titre=".sql_quote($objet['titre'][0])); // ajouter la rub courrante
+				$id_article_trouve = spip_fetch_array(spip_query("SELECT id_article FROM $table WHERE titre="._q($objet['titre'][0])));
+				//$id_article_trouve = sql_fetsel("id_article","spip_articles","titre=".sql_quote($objet['titre'][0])); // ajouter la rub courrante
 				$id_target = $id_article_trouve['id_article'] ;
 				if(!intval($id_target))
 					spip_log($objet['titre'][0].$id_target,"snippets_titres_erreur");
@@ -89,7 +90,9 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
 				
 				if ( $objet['auteur'] AND ($creation OR $forcer_maj)){
 					$auteur_connu = true ;
-					sql_delete("spip_auteurs_articles","id_article=".sql_quote($id_article));
+					$sql = "DELETE FROM spip_auteurs_articles WHERE id_article= '$id_article'";
+					spip_query($sql);
+					//sql_delete("spip_auteurs_articles","id_article=".sql_quote($id_article));
 					foreach($objet['auteur'] as $nom){
 					// ajouter l'auteur
 						spip_log($nom,"snippets");
@@ -117,8 +120,9 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
         		
         		
         		if ( $objet['mot'] AND ($creation OR $forcer_maj)){
-			
-					sql_delete("spip_mots_articles","id_article=".sql_quote($id_article));
+					$sql = "DELETE FROM spip_mots_articles WHERE id_article= '$id_article'";
+					spip_query($sql);
+					//sql_delete("spip_mots_articles","id_article=".sql_quote($id_article));
 					foreach($objet['mot'] as $mot){
 					spip_log($mot,"snippets");
 					// ajouter le mot cle
@@ -130,11 +134,8 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
         				 spip_query($sql);                              				              	
         				}                   							
 					}
-				}	
-        		
-        	
-        		
-        		
+				}
+				
 			}
 		}
 	return $translations;
