@@ -19,3 +19,5 @@ function noie_affichage_final(&$page) {
 
 	return $page;
 }
+
+?>
