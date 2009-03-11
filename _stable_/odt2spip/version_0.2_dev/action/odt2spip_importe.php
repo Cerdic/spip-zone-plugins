@@ -145,13 +145,7 @@ function action_odt2spip_importe() {
         	$ajouter_documents = charger_fonction('ajouter_documents','inc');
         
         $id_doc_odt = $ajouter_documents($rep_dezip.$fichier_zip, $fichier_zip, "article", $id_article, 'document', 0, $toto='');
-        
-        if (!is_numeric($id_doc_odt)) {
-            $Tfic = explode('.', $fichier_zip);
-            $fichier_zip_av_extension = $Tfic[0];
-            $id_doc_odt = sql_getfetsel("id_document","spip_documents","fichier LIKE '%$fichier_zip_av_extension%'","","maj DESC");
-        }
-        
+
         $c = array(
         	'titre' => $titre,
         	'descriptif' => _T('odtspip:cet_article_version_odt')
@@ -159,6 +153,7 @@ function action_odt2spip_importe() {
         include_spip('inc/modifier');
         revision_document($id_doc_odt,$c);
     }
+    
     include_spip('inc/getdocument');
 	// vider le contenu du rep de dezippage
     effacer_repertoire_temporaire($rep_dezip);
