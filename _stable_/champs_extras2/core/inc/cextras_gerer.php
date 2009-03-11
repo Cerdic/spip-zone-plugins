@@ -10,6 +10,7 @@ function cextras_objets_valides(){
 	foreach (array('article','auteur','breve','groupes_mot','mot','rubrique','site') as $objet) {
 		$objets[$objet] = array(
 			'table' => table_objet_sql($objet), 
+			'type' => objet_type($objet), 
 			'nom' => _T('cextras:table_'.$objet),
 		);
 	}

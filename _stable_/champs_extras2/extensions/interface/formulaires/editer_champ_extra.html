@@ -32,7 +32,7 @@
 				[<p class="explication">(#GET{explications})</p>]
 				<select name='#GET{name}' id='#GET{name}'[ (#GET{disabled})disabled='disabled']>
 					<BOUCLE_liste_objet(POUR){tableau (#VAL|cextras_objets_valides)}>
-					<option value='#CLE'[ (#ENV{#GET{name}}|=={#CLE}|oui)selected='selected']>[(#VALEUR|table_valeur{nom})]</option>
+					<option value='[(#VALEUR|table_valeur{type})]'[ (#ENV{#GET{name}}|=={[(#VALEUR|table_valeur{type})]}|oui)selected='selected']>[(#VALEUR|table_valeur{nom})]</option>
 					</BOUCLE_liste_objet>
 				</select>
 				[(#GET{disabled}|oui)<input type='hidden' name='#GET{name}' value="#ENV{#GET{name}}" />]
