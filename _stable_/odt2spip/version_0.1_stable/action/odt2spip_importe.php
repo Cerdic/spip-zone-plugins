@@ -64,8 +64,8 @@ function action_odt2spip_importe() {
     $intertitres_riches = ((array_key_exists('TYPOENLUMINEE', $Tplugins) OR array_key_exists('INTERTITRESTDM', $Tplugins)) ? 'oui' : 'non'); 
     
   // appliquer la transformation XSLT sur le fichier content.xml
-    // déterminer si on est en php 4 ou php 5 pour choisir les fonctions xslt à utiliser
-    if (strpos($_SERVER['SERVER_SOFTWARE'], 'PHP/5') === false) {
+    // déterminer les fonctions xslt à utiliser (php 4 ou php 5)
+    if (!class_exists('XSLTProcessor')) {
       // on est en php4 : utiliser l'extension et les fonction xslt de Sablotron
       // vérifier que l'extension xslt est active
         if (!function_exists('xslt_create')) die(_T('odtspip:err_extension_xslt'));
@@ -88,8 +88,6 @@ function action_odt2spip_importe() {
     }
     else {
       // on est php5: utiliser les fonctions de la classe XSLTProcessor
-      // vérifier que l'extension xslt est active
-        if (!class_exists('XSLTProcessor')) die(_T('odtspip:err_extension_xslt'));
         $proc = new XSLTProcessor();
 
       // passage d'un parametre a la xslt
