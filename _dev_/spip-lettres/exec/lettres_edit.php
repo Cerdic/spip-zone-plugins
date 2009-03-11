@@ -71,7 +71,7 @@ TODO
 		echo $commencer_page($lettre->titre, "naviguer", "lettres_tous");
 
 		echo debut_grand_cadre(true);
-		echo afficher_hierarchie($id_rubrique);
+		echo afficher_hierarchie($lettre->id_rubrique);
 		echo fin_grand_cadre(true);
 
 		echo debut_gauche("",true);

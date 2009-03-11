@@ -13,63 +13,18 @@
 	 **/
 
 
-	include_spip('lettres_fonctions');
-
-
-	/**
-	 * balise_FORMULAIRE_LETTRES
-	 *
-	 * @param p est un objet SPIP
-	 * @return string url de validation de l'inscription
-	 * @author Pierre Basson
-	 **/
-	function balise_FORMULAIRE_LETTRES ($p) {
-		return calculer_balise_dynamique($p,'FORMULAIRE_LETTRES', array());
+	function balise_FORMULAIRE_LETTRES($p) {
+		return calculer_balise_dynamique($p, 'FORMULAIRE_LETTRES', array());
 	}
 
 
-	/**
-	 * balise_FORMULAIRE_LETTRES_dyn
-	 *
-	 * Calcule la balise #FORMULAIRE_LETTRES
-	 *
-	 * @return array
-	 * @author Pierre Basson
-	 **/
-	function balise_FORMULAIRE_LETTRES_dyn() {
-		global $lang;
-		global $message, $themes;
-		global $email, $erreur;
-
-		if (isset($message)) {
-			return	inclure_balise_dynamique(
-						array(
-							'formulaires/formulaire_lettres_messages',
-							0,
-							array(
-								'message'	=> $message,
-								'themes'	=> $themes,
-								'lang'		=> $lang
-							)
-						),
-						false
-					);
-		} else {
-			return	inclure_balise_dynamique(
-						array(
-							'formulaires/formulaire_lettres',
-							0,
-							array(
-								'erreur'	=> $erreur ? ' ' : '',
-								'email'		=> $email,
-								'lang'		=> $lang
-							)
-						),
-						false
-					);
-		}
+	function balise_FORMULAIRE_LETTRES_stat($args, $filtres) {
+		$test = sql_countsel('spip_themes');
+		if ($test)
+			return $args;
+		else
+			return '';
 	}
-
 
 
 ?>

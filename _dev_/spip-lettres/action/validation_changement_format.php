@@ -14,6 +14,7 @@
 
 
 	include_spip('lettres_fonctions');
+	include_spip('inc/filtres');
 
 
 	/**
@@ -22,9 +23,12 @@
 	 * @author  Pierre Basson
 	 */
 	function action_validation_changement_format() {
-		global $code, $email, $format, $lang;
+		$email	= $_REQUEST['email'];
+		$code	= $_REQUEST['code'];
+		$format	= $_REQUEST['format'];
+		$lang	= $_REQUEST['lang'];
 
-		if (lettres_verifier_validite_email($email)) {
+		if (email_valide($email)) {
 			$abonne = new abonne(0, $email);
 			if ($abonne->existe and $abonne->verifier_code($code) and isset($format)) {
 				$abonne->format = $format;

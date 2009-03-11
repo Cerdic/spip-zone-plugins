@@ -14,6 +14,7 @@
 
 
 	include_spip('lettres_fonctions');
+	include_spip('inc/filtres');
 
 
 	/**
@@ -22,15 +23,17 @@
 	 * @author  Pierre Basson
 	 */
 	function action_validation_abonnements() {
-		global $code, $email, $rubriques, $lang;
+		$email		= $_REQUEST['email'];
+		$code		= $_REQUEST['code'];
+		$rubriques	= $_REQUEST['rubriques'];
+		$lang		= $_REQUEST['lang'];
 
-		if (lettres_verifier_validite_email($email)) {
+		if (email_valide($email)) {
 			$abonne = new abonne(0, $email);
 			if ($abonne->existe and $abonne->verifier_code($code) and isset($rubriques)) {
-				$themes = implode(',', $rubriques);
 				foreach ($rubriques as $id_rubrique)
 					$abonne->valider_abonnement($id_rubrique, true);
-				$redirection = generer_url_public($GLOBALS['meta']['spip_lettres_fond_formulaire_lettres'], "lang=$lang&message=validation_abonnements_succes&themes=$themes", true);
+				$redirection = generer_url_public($GLOBALS['meta']['spip_lettres_fond_formulaire_lettres'], "lang=$lang&message=validation_abonnements_succes", true);
 			} else {
 				$redirection = generer_url_public($GLOBALS['meta']['spip_lettres_fond_formulaire_lettres'], "lang=$lang&message=validation_abonnements_erreur", true);
 			}

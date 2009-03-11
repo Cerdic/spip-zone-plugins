@@ -14,6 +14,7 @@
 
 
 	include_spip('lettres_fonctions');
+	include_spip('inc/filtres');
 
 
 	/**
@@ -29,7 +30,7 @@
 
 		$redirection = redirection_clic($id_clic);
 		
-		if (lettres_verifier_validite_email($email)) {
+		if (email_valide($email)) {
 			$abonne = new abonne(0, $email);
 			if ($abonne->existe and $abonne->verifier_code($code) and !empty($id_clic)) {
 				$redirection = $abonne->enregistrer_clic($id_clic);

@@ -14,6 +14,7 @@
 
 
 	include_spip('base/lettres');
+	include_spip('inc/filtres');
 	include_spip('inc/lettres_filtres');
 	include_spip('inc/lettres_classes');
 	include_spip('inc/lettres_pipelines');
@@ -54,13 +55,6 @@
 			$cron.= '</form>';
 		}
 		return $cron;
-	}
-
-
-	function lettres_verifier_validite_email($email) {
-		if (preg_match("/(%0A|%0D|\n+|\r+)(content-type:|to:|cc:|bcc:)/i", $email))
-			return false;
-		return ereg("^[[:alnum:]]([-_.]?[[:alnum:]])*@[[:alnum:]]([-.]?[[:alnum:]])*\.([a-z]{2,4})$", $email);
 	}
 
 

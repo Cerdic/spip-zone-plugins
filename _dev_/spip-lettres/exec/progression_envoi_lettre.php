@@ -35,7 +35,8 @@
 			echo '<br />';
 			echo http_img_pack("jauge-vert.gif", ' ', 'height="10" width="'.($pourcentage * 2).'"');
 			echo http_img_pack("jauge-rouge.gif", ' ', 'height="10" width="'.((100 - $pourcentage) * 2).'"');
-			echo '&nbsp;'.$pourcentage.'%';
+			echo '&nbsp;'.$pourcentage.'%&nbsp;';
+			echo http_img_pack("searching.gif", ' ', '');
 		}
 		echo '</div>';
 		

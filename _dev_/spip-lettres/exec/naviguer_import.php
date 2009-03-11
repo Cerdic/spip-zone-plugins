@@ -44,7 +44,7 @@
 				foreach ($tableau as $ligne) {
 					$email	= $ligne[0];
 					$nom	= $ligne[1];
-					if (lettres_verifier_validite_email($email)) {
+					if (email_valide($email)) {
 						if (!lettres_tester_parmi_desabonnes($email)) {
 							$abonne = new abonne(0, $email);
 							$abonne->nom	= $nom;

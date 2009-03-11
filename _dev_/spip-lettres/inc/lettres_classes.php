@@ -22,7 +22,7 @@
 	/**
 	 * abonne - classe pour la gestion des abonnes
 	 *
-	 * @copyright 2006-2008 Artégo
+	 * @copyright 2006-2009 Artégo
 	 */
 
 	class abonne {
@@ -71,7 +71,7 @@
 						$this->maj			= $abo['maj'];
 					}
 				}
-			} else if (lettres_verifier_validite_email($email)) {
+			} else if (email_valide($email)) {
 				$this->email = $email;
 				foreach ($table_des_abonnes as $valeur) {
 					$spip_objets = @sql_select('*', 'spip_'.$valeur['table'], $valeur['champ_email'].'='.sql_quote($this->email));
@@ -506,7 +506,7 @@
 	/**
 	 * lettre - classe pour la gestion des lettres
 	 *
-	 * @copyright 2006-2008 Artégo
+	 * @copyright 2006-2009 Artégo
 	 */
 
 	class lettre {
@@ -575,6 +575,7 @@
 					$champs['extra'] = $this->extra;
 				$this->id_lettre = sql_insertq('spip_lettres', $champs);
 				sql_updateq("spip_documents_liens", array("id_objet" => $this->id_lettre), 'id_objet='.(0 - $GLOBALS['visiteur_session']['id_auteur']).' AND objet="lettre"');
+				calculer_rubriques();
 				lettres_trig_propager_les_secteurs($dummy);
 				lettres_calculer_langues_rubriques($dummy);
 			} else if ($this->statut == 'brouillon') {
@@ -591,13 +592,14 @@
 				if ($this->extra)
 					$champs['extra'] = $this->extra;
 				sql_updateq('spip_lettres', $champs, 'id_lettre='.intval($this->id_lettre));
+				calculer_rubriques();
 				lettres_trig_propager_les_secteurs($dummy);
 				lettres_calculer_langues_rubriques($dummy);
 			}
 		}
 
 
-		function enregistrer_statut($statut, $par_cent=true, $xml=false) {
+		function enregistrer_statut($statut, $par_tranches=true, $xml=false) {
 			$ancien_statut = $this->statut;
 			switch ($statut) {
 				case 'brouillon':
@@ -640,35 +642,39 @@
 																	'maj' => 'NOW()'
 																	));
 						}
+						$redirection = generer_url_ecrire('lettres', 'id_lettre='.$this->id_lettre, true);
 					}
 					if ($ancien_statut == 'envoyee') {
 						$this->statut = 'envoi_en_cours';
 						sql_updateq('spip_lettres', array('statut' => $this->statut, 'date_debut_envoi' => 'NOW()', 'maj' => 'NOW()'), 'id_lettre='.intval($this->id_lettre));
 						sql_updateq('spip_abonnes_lettres', array('verrou' => 0, 'statut' => 'a_envoyer'), 'id_lettre='.intval($this->id_lettre));
+						$redirection = generer_url_ecrire('lettres', 'id_lettre='.$this->id_lettre, true);
 					}
-					if ($par_cent) // lancer 100 envois
-						$envois = sql_select('*', 'spip_abonnes_lettres', 'id_lettre='.intval($this->id_lettre).' AND verrou=0 AND statut="a_envoyer"', '', '', '100');
-					else
-						$envois = sql_select('*', 'spip_abonnes_lettres', 'id_lettre='.intval($this->id_lettre).' AND verrou=0 AND statut="a_envoyer"');
-					if (sql_count($envois) > 0) {
-						while ($arr = sql_fetch($envois)) {
-							$abonne = new abonne($arr['id_abonne']);
-							$resultat = $abonne->envoyer_lettre($this->id_lettre);
-							$abonne->enregistrer_envoi($this->id_lettre, $resultat);
+					if ($ancien_statut == 'envoi_en_cours') {
+						if ($par_tranches)
+							$envois = sql_select('*', 'spip_abonnes_lettres', 'id_lettre='.intval($this->id_lettre).' AND verrou=0 AND statut="a_envoyer"', '', '', '10');
+						else
+							$envois = sql_select('*', 'spip_abonnes_lettres', 'id_lettre='.intval($this->id_lettre).' AND verrou=0 AND statut="a_envoyer"');
+						if (sql_count($envois) > 0) {
+							while ($arr = sql_fetch($envois)) {
+								$abonne = new abonne($arr['id_abonne']);
+								$resultat = $abonne->envoyer_lettre($this->id_lettre);
+								$abonne->enregistrer_envoi($this->id_lettre, $resultat);
+							}
+							if ($xml)
+								$redirection = 0;
+							else
+								$redirection = generer_url_ecrire('lettres', 'id_lettre='.$this->id_lettre, true);
+						} else {
+							$this->statut = 'envoyee';
+							$this->date_fin_envoi = date('Y-m-d h:i:s');
+							sql_updateq('spip_lettres', array('statut' => $this->statut, 'date_fin_envoi' => 'NOW()', 'maj' => 'NOW()'), 'id_lettre='.intval($this->id_lettre));
+							sql_updateq('spip_abonnes_lettres', array('statut' => 'annule'), 'id_lettre='.intval($this->id_lettre).' AND statut="a_envoyer"');
+							if ($xml)
+								$redirection = 1;
+							else
+								$redirection = generer_url_ecrire('lettres', 'id_lettre='.$this->id_lettre.'&message=envoi_termine', true);
 						}
-						if ($xml)
-							$redirection = 0;
-						else
-							$redirection = generer_url_ecrire('lettres', 'id_lettre='.$this->id_lettre, true);
-					} else {
-						$this->statut = 'envoyee';
-						$this->date_fin_envoi = date('Y-m-d h:i:s');
-						sql_updateq('spip_lettres', array('statut' => $this->statut, 'date_fin_envoi' => 'NOW()', 'maj' => 'NOW()'), 'id_lettre='.intval($this->id_lettre));
-						sql_updateq('spip_abonnes_lettres', array('statut' => 'annule'), 'id_lettre='.intval($this->id_lettre).' AND statut="a_envoyer"');
-						if ($xml)
-							$redirection = 1;
-						else
-							$redirection = generer_url_ecrire('lettres', 'id_lettre='.$this->id_lettre.'&message=envoi_termine', true);
 					}
 					break;
 				case 'envoyee':

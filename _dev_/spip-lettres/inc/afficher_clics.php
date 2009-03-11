@@ -18,7 +18,7 @@
 
 	function inc_afficher_clics($titre, $requete, $formater) {
 		$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
-		$styles = array(array('', 12), array('arial2'), array('arial1', 30));
+		$styles = array(array('', 12), array('arial1'), array('arial1', 30));
 		$tableau = array();
 		$args = array();
 		$presenter_liste = charger_fonction('presenter_liste', 'inc');
@@ -41,7 +41,7 @@
 			$vals[] = http_img_pack('puce-verte.gif', 'puce-verte', ' border="0" style="margin: 1px;"');
 		}
 
-		$url_coupee = str_split($url, 27);
+		$url_coupee = str_split($url, 25);
 
 		$vals[] = '<a href="'.$url.'" target="_blank">'.implode(' ', $url_coupee).'</a>';
 

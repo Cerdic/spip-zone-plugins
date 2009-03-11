@@ -195,7 +195,7 @@ TODO
 		if ($lettre->statut == 'envoyee')
 			echo afficher_objets('clic', _T('lettresprive:clics'), array('SELECT' => 'COUNT(AC.id_clic) AS total, C.url AS url', 'FROM' => 'spip_clics AS C LEFT JOIN spip_abonnes_clics AS AC ON AC.id_clic=C.id_clic', 'WHERE' => 'C.id_lettre='.intval($lettre->id_lettre), 'GROUP BY' => 'C.url', 'ORDER BY' => 'total DESC, C.id_clic ASC'));
 
-		echo afficher_objets('lettres_mini', _T('info_meme_rubrique'), array('FROM' => 'spip_lettres', 'WHERE' => 'id_rubrique='.intval($lettre->id_rubrique).' AND id_lettre!='.intval($lettre->id_lettre), 'ORDER BY' => 'date DESC'));
+		echo afficher_objets('lettres_mini', _T('info_meme_rubrique'), array('FROM' => 'spip_lettres', 'WHERE' => 'id_rubrique='.intval($lettre->id_rubrique).' AND id_lettre!='.intval($lettre->id_lettre), 'ORDER BY' => 'maj DESC'));
 
 		echo bloc_des_raccourcis(
 				icone_horizontale(_T('lettresprive:creer_nouvelle_lettre'), generer_url_ecrire("lettres_edit"), _DIR_PLUGIN_LETTRE_INFORMATION."/prive/images/lettre-24.png", 'creer.gif', false).
@@ -241,6 +241,7 @@ TODO
 			echo '    }'."\n";
 			echo '	});'."\n";
 			echo '}'."\n";
+			echo '$("#progression_envoi_lettre").load("'.generer_url_ecrire('progression_envoi_lettre', 'id_lettre='.$lettre->id_lettre, true).'");'."\n";
 			echo 'progression();'."\n";
 			echo '</script>'."\n";
 		}
@@ -291,15 +292,15 @@ TODO
 				$abonnes[] = $arr['id_abonne'];
 			$abonnes_virgules = implode(',', $abonnes);
 			if (count($abonnes))
-				echo afficher_objets('abonne', _T('lettresprive:tous_abonnes_rubrique'), array('FROM' => 'spip_abonnes', 'WHERE' => 'id_abonne IN ('.$abonnes_virgules.')', 'ORDER BY' => 'maj DESC', 'LIMIT' => '100'));
+				echo afficher_objets('abonne', _T('lettresprive:tous_abonnes_rubrique'), array('FROM' => 'spip_abonnes', 'WHERE' => 'id_abonne IN ('.$abonnes_virgules.')', 'ORDER BY' => 'maj DESC'));
 		} else {
 			$abonnes = array();
-			$res = sql_select('id_abonne', 'spip_abonnes_lettres', 'id_lettre='.$lettre->id_rubrique);
+			$res = sql_select('id_abonne', 'spip_abonnes_lettres', 'id_lettre='.$lettre->id_lettre);
 			while ($arr = sql_fetch($res))
 				$abonnes[] = $arr['id_abonne'];
 			$abonnes_virgules = implode(',', $abonnes);
 			if (count($abonnes))
-				echo afficher_objets('abonne', _T('lettresprive:les_abonnes_suivants_ont_recu_cette_lettre'), array('FROM' => 'spip_abonnes', 'WHERE' => 'id_abonne IN ('.$abonnes_virgules.')', 'ORDER BY' => 'maj DESC', 'LIMIT' => '100'));
+				echo afficher_objets('abonne', _T('lettresprive:les_abonnes_suivants_ont_recu_cette_lettre'), array('FROM' => 'spip_abonnes', 'WHERE' => 'id_abonne IN ('.$abonnes_virgules.')', 'ORDER BY' => 'maj DESC'));
 		}
 
 /*

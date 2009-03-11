@@ -112,7 +112,7 @@
 		
 		echo '<br class="nettoyeur" />';
 
-		$abonnements = sql_select('*', 'spip_abonnes_rubriques', 'id_abonne='.intval($abonne->id_abonne), 'date_abonnement DESC');
+		$abonnements = sql_select('*', 'spip_abonnes_rubriques', 'id_abonne='.intval($abonne->id_abonne), '', 'date_abonnement DESC');
 		if (sql_count($abonnements) > 0) {
 			echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/rubrique-24.png', true, "", _T('lettresprive:boite_abonnements'));
 			echo '<table cellpadding="2" cellspacing="0" width="100%" class="arial2" style="border: 1px solid #aaaaaa;">';
