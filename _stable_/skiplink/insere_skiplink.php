@@ -12,8 +12,9 @@ function skiplink_affichage_final(&$page) {
   $recherche_existe = (preg_match(',<input.*?name[ ]*=[ ]*"recherche".*?>,i', $page) == 1 ? 'oui' : 'non');
 	$raccourcis = recuperer_fond('raccourcis', array('lang'=>$GLOBALS['spip_lang'], 'recherche'=>$recherche_existe));
 	preg_match(',<body\b.*?>,i', $page, $regs);
+  
 	if ($regs)
-		$page = substr_replace($page, $raccourcis, strpos($page, $regs[0]), 0);
+		$page = substr_replace($page, $raccourcis, (strpos($page, $regs[0]) + strlen($regs[0])), 0);
 	$remonter = recuperer_fond('remonter', array('lang'=>$GLOBALS['spip_lang']));
 	preg_match(',<\/body\b.*?>,i', $page, $regs);
 	if ($regs)
