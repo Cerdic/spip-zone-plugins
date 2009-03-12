@@ -169,15 +169,19 @@ TODO
 		echo $selecteur_rubrique($lettre->id_rubrique, 'lettre', false);
 		echo '</li>';
 	
-	    echo '<li class="editer_descriptif">';
-		echo '<label for="descriptif">'._T('lettresprive:descriptif').'</label>';
-		echo '<textarea name="descriptif" id="descriptif" rows="2" cols="40">'.$lettre->descriptif.'</textarea>';
-		echo '</li>';
+		if ($GLOBALS['meta']['spip_lettres_utiliser_descriptif'] == 'oui') {
+		    echo '<li class="editer_descriptif">';
+			echo '<label for="descriptif">'._T('lettresprive:descriptif').'</label>';
+			echo '<textarea name="descriptif" id="descriptif" rows="2" cols="40">'.$lettre->descriptif.'</textarea>';
+			echo '</li>';
+		}
 
-	    echo '<li class="editer_chapo">';
-		echo '<label for="chapo">'._T('lettresprive:chapo').'</label>';
-		echo '<textarea name="chapo" id="chapo" rows="8" cols="40">'.$lettre->chapo.'</textarea>';
-		echo '</li>';
+		if ($GLOBALS['meta']['spip_lettres_utiliser_chapo'] == 'oui') {
+		    echo '<li class="editer_chapo">';
+			echo '<label for="chapo">'._T('lettresprive:chapo').'</label>';
+			echo '<textarea name="chapo" id="chapo" rows="8" cols="40">'.$lettre->chapo.'</textarea>';
+			echo '</li>';
+		}
 
 	    echo '<li class="editer_texte">';
 		echo '<label for="text_area">'._T('lettresprive:texte').'</label>';

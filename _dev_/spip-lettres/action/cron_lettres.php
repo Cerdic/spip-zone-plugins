@@ -26,9 +26,9 @@
 	 **/
 	function action_cron_lettres() {
 
-		global $envois_recurrents, $code;
+		$code = $_GET['code'];
 		
-		if ($envois_recurrents and (strcmp($GLOBALS['meta']['spip_lettres_cron'], $code) == 0)) {
+		if (($GLOBALS['meta']['spip_lettres_envois_recurrents'] == 'oui') and (strcmp($GLOBALS['meta']['spip_lettres_cron'], $code) == 0)) {
 			$res = sql_select('RC.id_rubrique, R.titre, R.descriptif, R.texte', 'spip_rubriques_crontabs AS RC INNER JOIN spip_rubriques AS R ON R.id_rubrique=RC.id_rubrique');
 			while ($arr = sql_fetch($res)) {
 				$lettre = new lettre();
@@ -38,9 +38,8 @@
 				$lettre->texte			= $arr['texte'];
 				$lettre->statut			= 'brouillon';
 				$lettre->enregistrer();
-				$lettre->enregistrer_statut('envoi_en_cours', false);
+				$lettre->enregistrer_statut('envoi_en_cours', true);
 			}
-			
 		}
 
 	}

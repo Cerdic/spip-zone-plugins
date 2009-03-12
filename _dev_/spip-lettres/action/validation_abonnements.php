@@ -14,7 +14,6 @@
 
 
 	include_spip('lettres_fonctions');
-	include_spip('inc/filtres');
 
 
 	/**
@@ -28,7 +27,7 @@
 		$rubriques	= $_REQUEST['rubriques'];
 		$lang		= $_REQUEST['lang'];
 
-		if (email_valide($email)) {
+		if (lettres_verifier_validite_email($email)) {
 			$abonne = new abonne(0, $email);
 			if ($abonne->existe and $abonne->verifier_code($code) and isset($rubriques)) {
 				foreach ($rubriques as $id_rubrique)

@@ -19,8 +19,6 @@
 
 
 	function exec_lettres() {
-		global $dir_lang, $spip_lang_right, $champs_extra, $options, $spip_display;
-		global $cherche_mot, $select_groupe;
 
 		if (!autoriser('voir', 'lettres')) {
 			include_spip('inc/minipres');
@@ -47,7 +45,7 @@ TODO
 			header('Location: '.$url);
 			exit();
 		}
-
+*/
 		if (!empty($_POST['renvoyer_lettre'])) {
 			if ($_POST['tous'] == 1) {
 				$url = generer_url_action('statut_lettre','id_lettre='.$lettre->id_lettre.'&changer_statut=1&statut=envoi_en_cours', true);
@@ -57,15 +55,16 @@ TODO
 				$abonne = new abonne(0, $_POST['email_abonne']);
 				if ($abonne->existe) {
 					$resultat = $abonne->renvoyer_lettre($lettre->id_lettre);
-					$url = generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre.'&renvoi='.($resultat ? 'ok' : 'ko'), true);
+					$url = generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre.'&message=renvoi_'.($resultat ? 'ok' : 'ko'), true);
 					header('Location: '.$url);
 					exit();
 				} else {
-					$abonne_inexistant = true;
+					$url = generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre.'&message=abonne_inexistant', true);
+					header('Location: '.$url);
+					exit();
 				}
 			}
 		}
-*/
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page($lettre->titre, "naviguer", "lettres");
@@ -214,7 +213,19 @@ TODO
 		$editer_auteurs = charger_fonction('editer_auteurs', 'inc');
 		$dater = charger_fonction('dater', 'inc');
 
+		if ($lettre->statut == 'envoyee') {
+			$renvoi = '<form method="post" action="'.generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre).'">';
+			$renvoi.= debut_cadre_enfonce(_DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/renvoi.png', true, "", _T('lettresprive:renvoyer_lettre'));
+			$renvoi.= '<p><label><input type="checkbox" name="tous" value="1" /> '._T('lettresprive:renvoyer_a_tous').'</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label>'._T('lettresprive:ou_abonne').' <input type="text" name="email_abonne" value="" /></label></p>';
+			$renvoi.= '<div align="right">';
+			$renvoi.= '<input type="submit" name="renvoyer_lettre" class="fondo" value="'._T('lettresprive:renvoyer').'" />';
+			$renvoi.= '</div>';
+			$renvoi.= fin_cadre_enfonce(true);
+			$renvoi.= '</form>';
+		}
+
 		$onglet_proprietes = $dater($lettre->id_lettre, true, $lettre->statut, 'lettre', 'lettres', $lettre->date);
+		$onglet_proprietes.= $renvoi;
 		$onglet_proprietes.= $editer_mots('lettre', $lettre->id_lettre, $cherche_mot, $select_groupe, ($lettre->statut == 'brouillon'), '', 'lettres');
 		$onglet_proprietes.= $editer_auteurs('lettre', $lettre->id_lettre, ($lettre->statut == 'brouillon'), '', 'lettres');
 
@@ -249,6 +260,7 @@ TODO
 		if (isset($_GET['message'])) {
 			echo '<div style="padding: 10px; border: 1px solid red; margin-bottom: 15px; background: #fff; color: red; font-weight: bold; text-align: center;">';
 			echo _T('lettresprive:'.$_GET['message']);
+			echo '<div style="float: right;"><a href="'.generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre).'">'.http_img_pack('croix-rouge.gif', "x", "").'</a></div>';
 			echo '</div>';
 		}
 
@@ -388,24 +400,6 @@ TODO
 			if ($affiche)
 				fin_cadre_enfonce();
 		}
-
-		if ($lettre->statut == 'envoyee') {
-			debut_cadre_enfonce('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/renvoi.png', false, "", _T('lettresprive:renvoyer_lettre'));
-			echo "<table border='0' width='100%'>";
-			echo "<tr>";
-			echo "	<td><span class='verdana1'><B>"._T('lettresprive:choix_abonne')."</B></span> &nbsp;</td>";
-			echo "	<td>";
-			echo "<input type='checkbox' name='tous' value='1' /> "._T('lettresprive:renvoyer_a_tous')."<br />";
-			echo _T('lettresprive:ou_son_email')."<input type='text' name='email_abonne' value='".$_POST['email_abonne']."' />";
-			if ($abonne_inexistant)
-			 	echo '<br /><strong>'._T('lettresprive:abonne_inexistant').'</strong>';
-			echo "	</td>";
-			echo "	<td> &nbsp; <INPUT TYPE='submit' NAME='renvoyer_lettre' VALUE='"._T('lettresprive:renvoyer')."' CLASS='fondo' STYLE='font-size:10px'></td>";
-			echo "</tr>";
-			echo "</table>";
-			fin_cadre_enfonce();
-		}
-		
 */
 
 		echo fin_gauche();

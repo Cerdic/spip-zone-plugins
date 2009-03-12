@@ -71,7 +71,7 @@
 						$this->maj			= $abo['maj'];
 					}
 				}
-			} else if (email_valide($email)) {
+			} else if (lettres_verifier_validite_email($email)) {
 				$this->email = $email;
 				foreach ($table_des_abonnes as $valeur) {
 					$spip_objets = @sql_select('*', 'spip_'.$valeur['table'], $valeur['champ_email'].'='.sql_quote($this->email));
@@ -599,7 +599,7 @@
 		}
 
 
-		function enregistrer_statut($statut, $par_tranches=true, $xml=false) {
+		function enregistrer_statut($statut, $cron=false, $xml=false) {
 			$ancien_statut = $this->statut;
 			switch ($statut) {
 				case 'brouillon':
@@ -642,6 +642,20 @@
 																	'maj' => 'NOW()'
 																	));
 						}
+						if ($cron) {
+							$envois = sql_select('*', 'spip_abonnes_lettres', 'id_lettre='.intval($this->id_lettre).' AND verrou=0 AND statut="a_envoyer"');
+							if (sql_count($envois) > 0) {
+								while ($arr = sql_fetch($envois)) {
+									$abonne = new abonne($arr['id_abonne']);
+									$resultat = $abonne->envoyer_lettre($this->id_lettre);
+									$abonne->enregistrer_envoi($this->id_lettre, $resultat);
+								}
+							}
+							$this->statut = 'envoyee';
+							$this->date_fin_envoi = date('Y-m-d h:i:s');
+							sql_updateq('spip_lettres', array('statut' => $this->statut, 'date_fin_envoi' => 'NOW()', 'maj' => 'NOW()'), 'id_lettre='.intval($this->id_lettre));
+							sql_updateq('spip_abonnes_lettres', array('statut' => 'annule'), 'id_lettre='.intval($this->id_lettre).' AND statut="a_envoyer"');
+						}
 						$redirection = generer_url_ecrire('lettres', 'id_lettre='.$this->id_lettre, true);
 					}
 					if ($ancien_statut == 'envoyee') {
@@ -651,10 +665,7 @@
 						$redirection = generer_url_ecrire('lettres', 'id_lettre='.$this->id_lettre, true);
 					}
 					if ($ancien_statut == 'envoi_en_cours') {
-						if ($par_tranches)
-							$envois = sql_select('*', 'spip_abonnes_lettres', 'id_lettre='.intval($this->id_lettre).' AND verrou=0 AND statut="a_envoyer"', '', '', '10');
-						else
-							$envois = sql_select('*', 'spip_abonnes_lettres', 'id_lettre='.intval($this->id_lettre).' AND verrou=0 AND statut="a_envoyer"');
+						$envois = sql_select('*', 'spip_abonnes_lettres', 'id_lettre='.intval($this->id_lettre).' AND verrou=0 AND statut="a_envoyer"', '', '', '10');
 						if (sql_count($envois) > 0) {
 							while ($arr = sql_fetch($envois)) {
 								$abonne = new abonne($arr['id_abonne']);

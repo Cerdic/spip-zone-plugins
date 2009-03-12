@@ -83,10 +83,6 @@
 		echo '</div>';
 		echo '</div>';
 
-		echo debut_boite_info(true);
-		echo _T('lettresprive:aide_abonnes');
-		echo fin_boite_info(true);
-
 		echo bloc_des_raccourcis(
 				icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire("abonnes_tous"), _DIR_PLUGIN_LETTRE_INFORMATION."/prive/images/abonne.png", 'rien.gif', false).
 				icone_horizontale(_T('lettresprive:ajouter_abonne'), generer_url_ecrire('abonnes_edit'), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/abonne.png', 'creer.gif', false)
@@ -168,6 +164,10 @@
 		echo pipeline('affiche_milieu', array('args' => array('exec' => 'abonnes', 'id_abonne' => $abonne->id_abonne), 'data' => ''));
 
 		echo '</div><!-- fin fiche_objet -->';
+
+		echo debut_boite_info(true);
+		echo _T('lettresprive:aide_abonnes');
+		echo fin_boite_info(true);
 
 		$lettres = array();
 		$res = sql_select('id_lettre', 'spip_abonnes_lettres', 'id_abonne='.intval($abonne->id_abonne));

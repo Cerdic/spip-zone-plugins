@@ -169,8 +169,10 @@
 		'ajouter_article' => "Ajouter un article",
 		'retirer_article' => "retirer cet article",
 		'options' => "Options",
-		'spip_lettres_utiliser_articles' => "Autoriser l'association d'articles aux lettre d'information ?",
+		'spip_lettres_utiliser_articles' => "Autoriser l'association d'articles aux lettres d'information ?",
 		'spip_lettres_notifier_suppression_abonne' => "Notifier le webmaster lors de la suppression d'un abonné de la base de données ?",
+		'spip_lettres_utiliser_descriptif' => "Utiliser le descriptif ?",
+		'spip_lettres_utiliser_chapo' => "Utiliser le chapeau ?",
 		'spip_lettres_utiliser_ps' => "Utiliser le PS ?",
 		'ps' => "P.S.",
 		'exporter_tous_desabonnes' => "Exporter tous les désabonnés",
@@ -182,10 +184,18 @@
 		'envoyee' => "envoyée",
 		
 		'email_abonne' => "Email de l'abonné",
-		'ou_son_email' => "ou son email : ",
-		'abonne_inexistant' => "abonné inexistant",
-		'envois_recurrents' => "ENVOIS RECURRENTS",
-		'activer_les_envois_recurrents_sur_cette_rubrique' => "Activer les envois récurrents sur cette rubrique",
+		'ou_abonne' => "ou à un abonné : ",
+		'abonne_inexistant' => "Abonné inexistant",
+
+		'config_cron' => "Configuration des envois récurrents",
+		'spip_lettres_envois_recurrents' => "Activer les envois récurrents",
+		'note_code_cron' => "Votre crontab devra exécuter le script :",
+		'cet_intitule_sera_titre_lettres_envoyees_par_cron' => "Cet intitulé sera le titre des lettres envoyées par votre tâche cron.",
+		'envois_recurrents' => "Envois récurrents",
+		'supprimer_cron' => "retirer des envois récurrents",
+		'ajouter_rubrique' => "Ajouter une rubrique",
+		'aucun_envoi_programme' => "Aucun envoi programmé.",
+		
 		
 		'Z' => 'ZZzZZzzz'
 

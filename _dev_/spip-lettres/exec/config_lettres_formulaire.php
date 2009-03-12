@@ -39,7 +39,7 @@
 		}
 
 		if (!empty($_GET['supprimer_theme'])) {
-			sql_delete('spip_themes', array('id_theme' => intval($_GET['supprimer_theme'])));
+			sql_delete('spip_themes', 'id_theme='.intval($_GET['supprimer_theme']));
 			$url = generer_url_ecrire('config_lettres_formulaire');
 			header('Location: '.$url);
 			exit();
@@ -77,27 +77,20 @@
 			echo fin_boite_info(true);
 		}
 
-		echo '<div class="cadre-formulaire-editer">';
-		echo '<div class="entete-formulaire">';
-		echo '<h1>'._T('lettresprive:ajouter_theme').'</h1>';
-		echo '</div>';
-		echo '<div class="formulaire_spip formulaire_editer">';
 		echo '<form method="post" action="'.generer_url_ecrire('config_lettres_formulaire').'">';
-	  	echo '<ul>';
-	    echo '<li class="obligatoire">';
-		echo '<label for="titre">'._T('lettresprive:titre').'</label>';
+		echo debut_cadre_trait_couleur("", true, "", _T('lettresprive:ajouter_theme'));
+	    echo '<p>';
+		echo '<label for="titre">'._T('lettresprive:titre').'</label>&nbsp;&nbsp;&nbsp;';
 		echo '<input type="text" class="text" name="titre" id="titre" value="" />';
-		echo '</li>';
-	    echo '<li class="editer_parent">';
+		echo '</p>';
+	    echo '<p>';
 		echo '<label for="id_parent">'._T('lettresprive:choix_rubrique').'</label>';
 		$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
 		echo $selecteur_rubrique(0, 'rubrique', false);
-		echo '</li>';
-		echo '</ul>';
-	  	echo '<p class="boutons"><input type="submit" class="submit" name="ajouter" value="'._T('lettresprive:ajouter').'" /></p>';
+		echo '</p>';
+		echo '<p style="text-align: right;"><input class="fondo" name="ajouter" type="submit" value="'._T('lettresprive:ajouter').'" /></p>';
+		echo fin_cadre_trait_couleur(true);
 		echo '</form>';
-		echo '</div>';
-		echo '</div>';
 
 		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'config_lettres_formulaire'),'data'=>''));
 

@@ -29,6 +29,8 @@
 				$abonne = new abonne($arr['id_abonne']);
 				$abonnes[$i][] = $abonne->email;
 				$abonnes[$i][] = $abonne->nom;
+/*
+TODO
 				if ($champs_extra['abonnes']) {
 					$tableau_extras = array();
 					$tableau_extras = unserialize($abonne->extra);
@@ -36,6 +38,7 @@
 						$abonnes[$i][] = $tableau_extras[$cle];
 					}
 				}
+*/
 				$i++;
 			}
 

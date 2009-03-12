@@ -14,13 +14,12 @@
 
 
 	if (!defined("_ECRIRE_INC_VERSION")) return;
-	include_spip('lettres_fonctions');
 	include_spip('inc/presentation');
+	include_spip('lettres_fonctions');
 
 
 	function exec_naviguer_export() {
-		global $spip_lang_right, $spip_lang_left;
-		global $champs_extra, $id_rubrique;
+		$id_rubrique = $_REQUEST['id_rubrique'];
 
 		if (!autoriser('exporter', 'lettres')) {
 			include_spip('inc/minipres');
@@ -30,66 +29,60 @@
 
 		pipeline('exec_init',array('args'=>array('exec'=>'naviguer_export'),'data'=>''));
 
-
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('lettresprive:export_abonnes'), "naviguer", "abonnes_tous");
 
-	
-		debut_gauche();
+		echo '<br /><br /><br />';
+		echo gros_titre(_T('lettresprive:export_abonnes'),'',false);
 
-		debut_boite_info();
+		echo debut_gauche('', true);
+
+		echo debut_boite_info(true);
 		echo _T('lettresprive:aide_naviguer_export');
 		echo '<ol>';
 		echo '<li>'._T('lettresprive:email').'</li>';
 		echo '<li>'._T('lettresprive:nom').'</li>';
+/*
+TODO
 		if ($champs_extra['abonnes']) {
 			foreach ($champs_extra['abonnes'] as $cle => $valeur) {
 				list($style, $filtre, $prettyname, $choix, $valeurs) = explode("|", $valeur);
 				echo '<li>'.$prettyname.'</li>';
 			}
 		}
+*/
 		echo '</ol>';
-		fin_boite_info();
+		echo fin_boite_info(true);
 
-		debut_raccourcis();	
-		icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire('abonnes_tous'), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/abonne.png');
-		icone_horizontale(_T('lettresprive:exporter_tous_desabonnes'), generer_url_action('export_desabonnes'), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/desabonne.png');
+		$raccourcis = icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire('abonnes_tous'), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/abonne.png', 'rien.gif', false);
+		$raccourcis.= icone_horizontale(_T('lettresprive:exporter_tous_desabonnes'), generer_url_action('export_desabonnes', '', false, true), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/desabonne.png', 'rien.gif', false);
 		if ($id_rubrique)
-			icone_horizontale(_T('lettresprive:retour_rubrique'), generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/rubrique-24.png');
-		fin_raccourcis();	
-	
-		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'naviguer_export'),'data'=>''));
+			$raccourcis.= icone_horizontale(_T('lettresprive:retour_rubrique'), generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/rubrique-24.png', 'rien.gif', false);
+		echo bloc_des_raccourcis($raccourcis);
+  		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'naviguer_export'),'data'=>''));
 
-		creer_colonne_droite();
+		echo creer_colonne_droite('', true);
 		echo pipeline('affiche_droite',array('args'=>array('exec'=>'naviguer_export'),'data'=>''));
 
-		debut_droite();
+   		echo debut_droite('', true);
 
-		debut_cadre_relief('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/export.png');
-
-		echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
-		echo "<tr width='100%'><td width='100%' valign='top'>";
-		gros_titre(_T('lettresprive:export_abonnes'));
-		echo "</td></tr>\n";
-		echo "</table>\n";
-
-		echo "<div>&nbsp;</div>";
-
-		echo '<form action="'.generer_url_action('export_abonnes').'" method="post">';
-		debut_cadre_enfonce('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/export.png', false, "", _T('lettresprive:depuis_rubrique'));
+		echo '<form action="'.generer_url_action('export_abonnes', '', false, true).'" method="post">';
+		echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/export.png', true, "", _T('lettresprive:depuis_rubrique'));
 		$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
 		echo $selecteur_rubrique($id_rubrique, 'rubrique', false);
-		fin_cadre_enfonce();	
 		echo '<div align="right">';
-		echo "<INPUT TYPE='submit' NAME='telecharger' CLASS='fondo' VALUE='"._T('lettresprive:telecharger')."' STYLE='font-size:10px'>";
-		echo "</div>";
+		echo '<input type="submit" name="telecharger" class="fondo" value="'._T('lettresprive:telecharger').'" />';
+		echo '</div>';
+		echo fin_cadre_enfonce(true);	
 		echo '</form>';
 
-		fin_cadre_relief();
-
+		echo pipeline('affiche_milieu', array('args'=>array('exec'=>'naviguer_export'),'data'=>''));
+		
 		echo fin_gauche();
 
 		echo fin_page();
+
 	}
+
 
 ?>

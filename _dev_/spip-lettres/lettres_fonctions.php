@@ -14,7 +14,6 @@
 
 
 	include_spip('base/lettres');
-	include_spip('inc/filtres');
 	include_spip('inc/lettres_filtres');
 	include_spip('inc/lettres_classes');
 	include_spip('inc/lettres_pipelines');
@@ -23,38 +22,10 @@
 	include_spip('inc/notifications_classes');
 
 
-	function lettres_afficher_cron($id_rubrique) {
-		global $spip_lang_right;
-		global $envois_recurrents;
-		$cron = '';
-		if ($envois_recurrents and $id_rubrique) {
-			$cron.= '<form action="'.generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique).'" method="post">';
-			if ($_POST['cron_hidden']) {
-				@sql_delete('spip_rubriques_crontabs', 'id_rubrique='.intval($id_rubrique));
-				if ($_POST['cron'] == 1)
-					@sql_replace('spip_rubriques_crontabs', 
-								array(
-									'id_rubrique' => intval($id_rubrique)
-									)
-								);
-			}
-			$test = sql_countsel('spip_rubriques_crontabs', 'id_rubrique='.intval($id_rubrique));
-			if (!$test)
-				$cron.= debut_cadre_enfonce('../'._DIR_PLUGIN_LETTRES.'/img_pack/cron.png', true, "", bouton_block_invisible('cron')._T('lettresprive:envois_recurrents'));
-			else
-				$cron.= debut_cadre_enfonce('../'._DIR_PLUGIN_LETTRES.'/img_pack/cron.png', true, "", _T('lettresprive:envois_recurrents'));
-			if (!$test)
-				$cron.= debut_block_invisible('cron');
-			$cron.= '<input type="checkbox" name="cron" id="cron_lettres" value="1"'.($test ? ' checked="checked"' : '').' /> ';
-			$cron.= '<input type="hidden" name="cron_hidden" value="1" /> ';
-			$cron.= '<label for="cron_lettres">'._T('lettresprive:activer_les_envois_recurrents_sur_cette_rubrique'). '</label>';
-			$cron.= '<div align="'.$spip_lang_right.'"><input type="submit" class="fondl" value="'._T('lettresprive:valider').'" /></div>';
-			if (!$test)
-				$cron.= fin_block();
-			$cron.= fin_cadre_enfonce(true);
-			$cron.= '</form>';
-		}
-		return $cron;
+	function lettres_verifier_validite_email($email) {
+		if (preg_match("/(%0A|%0D|\n+|\r+)(content-type:|to:|cc:|bcc:)/i", $email))
+			return false;
+		return ereg("^[[:alnum:]]([-_.]?[[:alnum:]])*@[[:alnum:]]([-.]?[[:alnum:]])*\.([a-z]{2,4})$", $email);
 	}
 
 

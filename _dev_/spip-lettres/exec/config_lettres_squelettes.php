@@ -51,11 +51,17 @@
 				ecrire_meta('spip_lettres_fond_lettre_texte', $spip_lettres_fond_lettre_texte);
 			}
 
-			$spip_lettres_utiliser_articles = $_POST['spip_lettres_utiliser_articles'];
-			ecrire_meta('spip_lettres_utiliser_articles', $spip_lettres_utiliser_articles);
+			$spip_lettres_utiliser_descriptif = $_POST['spip_lettres_utiliser_descriptif'];
+			ecrire_meta('spip_lettres_utiliser_descriptif', $spip_lettres_utiliser_descriptif);
+
+			$spip_lettres_utiliser_chapo = $_POST['spip_lettres_utiliser_chapo'];
+			ecrire_meta('spip_lettres_utiliser_chapo', $spip_lettres_utiliser_chapo);
 
 			$spip_lettres_utiliser_ps = $_POST['spip_lettres_utiliser_ps'];
 			ecrire_meta('spip_lettres_utiliser_ps', $spip_lettres_utiliser_ps);
+
+#			$spip_lettres_utiliser_articles = $_POST['spip_lettres_utiliser_articles'];
+#			ecrire_meta('spip_lettres_utiliser_articles', $spip_lettres_utiliser_articles);
 
 			$spip_lettres_notifier_suppression_abonne = $_POST['spip_lettres_notifier_suppression_abonne'];
 			ecrire_meta('spip_lettres_notifier_suppression_abonne', $spip_lettres_notifier_suppression_abonne);
@@ -72,6 +78,8 @@
 		$spip_lettres_fond_lettre_html				= $GLOBALS['meta']['spip_lettres_fond_lettre_html'];
 		$spip_lettres_fond_lettre_texte				= $GLOBALS['meta']['spip_lettres_fond_lettre_texte'];
 		$spip_lettres_utiliser_articles				= $GLOBALS['meta']['spip_lettres_utiliser_articles'];
+		$spip_lettres_utiliser_descriptif			= $GLOBALS['meta']['spip_lettres_utiliser_descriptif'];
+		$spip_lettres_utiliser_chapo				= $GLOBALS['meta']['spip_lettres_utiliser_chapo'];
 		$spip_lettres_utiliser_ps					= $GLOBALS['meta']['spip_lettres_utiliser_ps'];
 		$spip_lettres_notifier_suppression_abonne	= $GLOBALS['meta']['spip_lettres_notifier_suppression_abonne'];
 
@@ -85,9 +93,6 @@
 		echo barre_onglets("lettres", "config_lettres_squelettes");
 
 		echo debut_gauche('', true);
-		echo debut_boite_info(true);
-		echo _T('lettresprive:aide_config_lettres_squelettes');
-		echo fin_boite_info(true);
 		echo bloc_des_raccourcis(icone_horizontale(_T('lettresprive:aller_au_formulaire_abonnement'), generer_url_public($GLOBALS['meta']['spip_lettres_fond_formulaire_lettres']), _DIR_PLUGIN_LETTRE_INFORMATION."/prive/images/formulaire.png", 'rien.gif', false));
   		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'config_lettres_squelettes'),'data'=>''));
 
@@ -96,90 +101,93 @@
 
    		echo debut_droite('', true);
 
-		echo '<div class="cadre-formulaire-editer">';
-		echo '<div class="entete-formulaire">';
-		echo '<h1>'._T('lettresprive:configuration_squelettes').'</h1>';
-		echo '</div>';
-		echo '<div class="formulaire_spip formulaire_editer">';
 		echo '<form method="post" action="'.generer_url_ecrire('config_lettres_squelettes').'">';
+		echo debut_cadre_trait_couleur("", true, "", _T('lettresprive:configuration_squelettes'));
 
-	  	echo '<ul>';
+		echo '<p>'._T('lettresprive:aide_config_lettres_squelettes').'</p>';
 
-	    echo '<li>';
-		echo '<label for="spip_lettres_fond_formulaire_lettres">'._T('lettresprive:squelette_formulaire_abonnement').'</label>';
-		echo '<input type="text" class="text" name="spip_lettres_fond_formulaire_lettres" id="spip_lettres_fond_formulaire_lettres" value="'.$spip_lettres_fond_formulaire_lettres.'" />';
-		echo '</li>';
+		echo '<table>';
 
-	    echo '<li>';
-		echo '<label for="spip_lettres_fond_lettre_titre">'._T('lettresprive:squelette_titre_lettre').'</label>';
-		echo '<input type="text" class="text" name="spip_lettres_fond_lettre_titre" id="spip_lettres_fond_lettre_titre" value="'.$spip_lettres_fond_lettre_titre.'" />';
-		echo '</li>';
+	    echo '<tr>';
+		echo '<td width="250"><label for="spip_lettres_fond_formulaire_lettres">'._T('lettresprive:squelette_formulaire_abonnement').'</label></td>';
+		echo '<td><input type="text" class="text" name="spip_lettres_fond_formulaire_lettres" id="spip_lettres_fond_formulaire_lettres" value="'.$spip_lettres_fond_formulaire_lettres.'" /></td>';
+		echo '</tr>';
 
-	    echo '<li>';
-		echo '<label for="spip_lettres_fond_lettre_html">'._T('lettresprive:squelette_version_html_lettre').'</label>';
-		echo '<input type="text" class="text" name="spip_lettres_fond_lettre_html" id="spip_lettres_fond_lettre_html" value="'.$spip_lettres_fond_lettre_html.'" />';
-		echo '</li>';
+	    echo '<tr>';
+		echo '<td><label for="spip_lettres_fond_lettre_titre">'._T('lettresprive:squelette_titre_lettre').'</label></td>';
+		echo '<td><input type="text" class="text" name="spip_lettres_fond_lettre_titre" id="spip_lettres_fond_lettre_titre" value="'.$spip_lettres_fond_lettre_titre.'" /></td>';
+		echo '</tr>';
 
-	    echo '<li>';
-		echo '<label for="spip_lettres_fond_lettre_texte">'._T('lettresprive:squelette_version_texte_lettre').'</label>';
-		echo '<input type="text" class="text" name="spip_lettres_fond_lettre_texte" id="spip_lettres_fond_lettre_texte" value="'.$spip_lettres_fond_lettre_texte.'" />';
-		echo '</li>';
+	    echo '<tr>';
+		echo '<td><label for="spip_lettres_fond_lettre_html">'._T('lettresprive:squelette_version_html_lettre').'</label></td>';
+		echo '<td><input type="text" class="text" name="spip_lettres_fond_lettre_html" id="spip_lettres_fond_lettre_html" value="'.$spip_lettres_fond_lettre_html.'" /></td>';
+		echo '</tr>';
 
-	    echo '<li class="fieldset">';
-		echo '<fieldset>';
-		echo '<h3 class="legend">'._T('lettresprive:spip_lettres_utiliser_articles').'</h3>';
-		echo '<ul>';
-		echo '<li>';
-		echo '<input type="radio" class="radio" name="spip_lettres_utiliser_articles" value="oui" id="spip_lettres_utiliser_articles_oui" '.($spip_lettres_utiliser_articles == 'oui' ? 'checked="checked" ' : '').'/><label for="spip_lettres_utiliser_articles_oui">'._T('lettresprive:oui').'</label>';
-		echo '</li>';
-		echo '<li>';
-		echo '<input type="radio" class="radio" name="spip_lettres_utiliser_articles" value="non" id="spip_lettres_utiliser_articles_non" '.($spip_lettres_utiliser_articles == 'non' ? 'checked="checked" ' : '').'/><label for="spip_lettres_utiliser_articles_non">'._T('lettresprive:non').'</label>';
-		echo '</li>';
-		echo '</ul>';
-		echo '</fieldset>';
-		echo '</li>';
+	    echo '<tr>';
+		echo '<td><label for="spip_lettres_fond_lettre_texte">'._T('lettresprive:squelette_version_texte_lettre').'</label></td>';
+		echo '<td><input type="text" class="text" name="spip_lettres_fond_lettre_texte" id="spip_lettres_fond_lettre_texte" value="'.$spip_lettres_fond_lettre_texte.'" /></td>';
+		echo '</tr>';
 
-	    echo '<li class="fieldset">';
-		echo '<fieldset>';
-		echo '<h3 class="legend">'._T('lettresprive:spip_lettres_utiliser_ps').'</h3>';
-		echo '<ul>';
-		echo '<li>';
-		echo '<input type="radio" class="radio" name="spip_lettres_utiliser_ps" value="oui" id="spip_lettres_utiliser_ps_oui" '.($spip_lettres_utiliser_ps == 'oui' ? 'checked="checked" ' : '').'/><label for="spip_lettres_utiliser_ps_oui">'._T('lettresprive:oui').'</label>';
-		echo '</li>';
-		echo '<li>';
-		echo '<input type="radio" class="radio" name="spip_lettres_utiliser_ps" value="non" id="spip_lettres_utiliser_ps_non" '.($spip_lettres_utiliser_ps == 'non' ? 'checked="checked" ' : '').'/><label for="spip_lettres_utiliser_ps_non">'._T('lettresprive:non').'</label>';
-		echo '</li>';
-		echo '</ul>';
-		echo '</fieldset>';
-		echo '</li>';
-
-	    echo '<li class="fieldset">';
-		echo '<fieldset>';
-		echo '<h3 class="legend">'._T('lettresprive:spip_lettres_notifier_suppression_abonne').'</h3>';
-		echo '<ul>';
-		echo '<li>';
-		echo '<input type="radio" class="radio" name="spip_lettres_notifier_suppression_abonne" value="oui" id="spip_lettres_notifier_suppression_abonne_oui" '.($spip_lettres_notifier_suppression_abonne == 'oui' ? 'checked="checked" ' : '').'/><label for="spip_lettres_notifier_suppression_abonne_oui">'._T('lettresprive:oui').'</label>';
-		echo '</li>';
-		echo '<li>';
-		echo '<input type="radio" class="radio" name="spip_lettres_notifier_suppression_abonne" value="non" id="spip_lettres_notifier_suppression_abonne_non" '.($spip_lettres_notifier_suppression_abonne == 'non' ? 'checked="checked" ' : '').'/><label for="spip_lettres_notifier_suppression_abonne_non">'._T('lettresprive:non').'</label>';
-		echo '</li>';
-		echo '</ul>';
-		echo '</fieldset>';
-		echo '</li>';
-
-		echo '</ul>';
-
-/*
+		echo '</table>';
 		
-		echo '<br /><b>'._T('lettresprive:spip_lettres_notifier_suppression_abonne').'</b><br />';
-		echo afficher_choix('spip_lettres_notifier_suppression_abonne', $spip_lettres_notifier_suppression_abonne,
-			array('oui' => _T('lettresprive:oui'), 'non' => _T('lettresprive:non')), " &nbsp; ");
-*/
+		echo '<p style="text-align: right;"><input class="fondo" name="valider" type="submit" value="'._T('lettresprive:valider').'" /></p>';
+		echo fin_cadre_trait_couleur(true);
 
-	  	echo '<p class="boutons"><input type="submit" class="submit" name="valider" value="'._T('lettresprive:valider').'" /></p>';
+		echo debut_cadre_trait_couleur("", true, "", _T('lettresprive:options'));
+
+		echo '<table>';
+
+	    echo '<tr>';
+		echo '<td><label>'._T('lettresprive:spip_lettres_utiliser_descriptif').'</label></td>';
+		echo '<td>';
+		echo '<input type="radio" class="radio" name="spip_lettres_utiliser_descriptif" value="oui" id="spip_lettres_utiliser_descriptif_oui" '.($spip_lettres_utiliser_descriptif == 'oui' ? 'checked="checked" ' : '').'/><label for="spip_lettres_utiliser_descriptif_oui">'._T('lettresprive:oui').'</label>';
+		echo '&nbsp;';
+		echo '<input type="radio" class="radio" name="spip_lettres_utiliser_descriptif" value="non" id="spip_lettres_utiliser_descriptif_non" '.($spip_lettres_utiliser_descriptif == 'non' ? 'checked="checked" ' : '').'/><label for="spip_lettres_utiliser_descriptif_non">'._T('lettresprive:non').'</label>';
+		echo '</td>';
+		echo '</tr>';
+
+	    echo '<tr>';
+		echo '<td><label>'._T('lettresprive:spip_lettres_utiliser_chapo').'</label></td>';
+		echo '<td>';
+		echo '<input type="radio" class="radio" name="spip_lettres_utiliser_chapo" value="oui" id="spip_lettres_utiliser_chapo_oui" '.($spip_lettres_utiliser_chapo == 'oui' ? 'checked="checked" ' : '').'/><label for="spip_lettres_utiliser_chapo_oui">'._T('lettresprive:oui').'</label>';
+		echo '&nbsp;';
+		echo '<input type="radio" class="radio" name="spip_lettres_utiliser_chapo" value="non" id="spip_lettres_utiliser_chapo_non" '.($spip_lettres_utiliser_chapo == 'non' ? 'checked="checked" ' : '').'/><label for="spip_lettres_utiliser_chapo_non">'._T('lettresprive:non').'</label>';
+		echo '</td>';
+		echo '</tr>';
+
+	    echo '<tr>';
+		echo '<td><label>'._T('lettresprive:spip_lettres_utiliser_ps').'</label></td>';
+		echo '<td>';
+		echo '<input type="radio" class="radio" name="spip_lettres_utiliser_ps" value="oui" id="spip_lettres_utiliser_ps_oui" '.($spip_lettres_utiliser_ps == 'oui' ? 'checked="checked" ' : '').'/><label for="spip_lettres_utiliser_ps_oui">'._T('lettresprive:oui').'</label>';
+		echo '&nbsp;';
+		echo '<input type="radio" class="radio" name="spip_lettres_utiliser_ps" value="non" id="spip_lettres_utiliser_ps_non" '.($spip_lettres_utiliser_ps == 'non' ? 'checked="checked" ' : '').'/><label for="spip_lettres_utiliser_ps_non">'._T('lettresprive:non').'</label>';
+		echo '</td>';
+		echo '</tr>';
+/*
+	    echo '<tr>';
+		echo '<td><label>'._T('lettresprive:spip_lettres_utiliser_articles').'</label></td>';
+		echo '<td width="100">';
+		echo '<input type="radio" class="radio" name="spip_lettres_utiliser_articles" value="oui" id="spip_lettres_utiliser_articles_oui" '.($spip_lettres_utiliser_articles == 'oui' ? 'checked="checked" ' : '').'/><label for="spip_lettres_utiliser_articles_oui">'._T('lettresprive:oui').'</label>';
+		echo '&nbsp;';
+		echo '<input type="radio" class="radio" name="spip_lettres_utiliser_articles" value="non" id="spip_lettres_utiliser_articles_non" '.($spip_lettres_utiliser_articles == 'non' ? 'checked="checked" ' : '').'/><label for="spip_lettres_utiliser_articles_non">'._T('lettresprive:non').'</label>';
+		echo '</td>';
+		echo '</tr>';
+*/
+	    echo '<tr>';
+		echo '<td><label>'._T('lettresprive:spip_lettres_notifier_suppression_abonne').'</label></td>';
+		echo '<td>';
+		echo '<input type="radio" class="radio" name="spip_lettres_notifier_suppression_abonne" value="oui" id="spip_lettres_notifier_suppression_abonne_oui" '.($spip_lettres_notifier_suppression_abonne == 'oui' ? 'checked="checked" ' : '').'/><label for="spip_lettres_notifier_suppression_abonne_oui">'._T('lettresprive:oui').'</label>';
+		echo '&nbsp;';
+		echo '<input type="radio" class="radio" name="spip_lettres_notifier_suppression_abonne" value="non" id="spip_lettres_notifier_suppression_abonne_non" '.($spip_lettres_notifier_suppression_abonne == 'non' ? 'checked="checked" ' : '').'/><label for="spip_lettres_notifier_suppression_abonne_non">'._T('lettresprive:non').'</label>';
+		echo '</td>';
+		echo '</tr>';
+
+		echo '</table>';
+		
+		echo '<p style="text-align: right;"><input class="fondo" name="valider" type="submit" value="'._T('lettresprive:valider').'" /></p>';
+		echo fin_cadre_trait_couleur(true);
+
 		echo '</form>';
-		echo '</div>';
-		echo '</div>';
 
 		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'config_lettres_squelettes'),'data'=>''));
 

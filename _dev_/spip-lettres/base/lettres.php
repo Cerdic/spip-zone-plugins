@@ -105,7 +105,8 @@
 							"PRIMARY KEY"	=> "id_lettre"
 						);
 		$spip_rubriques_crontabs = array(
-							"id_rubrique"			=> "BIGINT (21) DEFAULT '0' NOT NULL"
+							"id_rubrique"			=> "BIGINT (21) DEFAULT '0' NOT NULL",
+							"titre"					=> "TEXT NOT NULL"
 						);
 		$spip_rubriques_crontabs_key = array(
 							"UNIQUE id_rubrique"	=> "id_rubrique"
@@ -244,7 +245,10 @@
 					ecrire_meta('spip_lettres_fond_lettre_texte', 'lettre_texte');
 					ecrire_meta('spip_lettres_notifier_suppression_abonne', 'non');
 					ecrire_meta('spip_lettres_utiliser_articles', 'non');
+					ecrire_meta('spip_lettres_utiliser_descriptif', 'non');
+					ecrire_meta('spip_lettres_utiliser_chapo', 'non');
 					ecrire_meta('spip_lettres_utiliser_ps', 'non');
+					ecrire_meta('spip_lettres_envois_recurrents', 'non');
 					ecrire_meta('spip_lettres_cron', md5(uniqid(rand())));
 					ecrire_metas();
 					include_spip('inc/getdocument');
@@ -300,7 +304,10 @@
 					}
 					if ($version_base < 3.8) {
 						creer_base();
+						ecrire_meta('spip_lettres_utiliser_descriptif', 'non');
+						ecrire_meta('spip_lettres_utiliser_chapo', 'non');
 						ecrire_meta('spip_lettres_fond_lettre_titre', 'lettre_titre');
+						ecrire_meta('spip_lettres_envois_recurrents', 'non');
 						ecrire_meta('spip_lettres_version', $version_base = 3.8);
 						ecrire_metas();
 					}
@@ -334,11 +341,13 @@
 				effacer_meta('spip_lettres_fond_lettre_texte');
 				effacer_meta('spip_lettres_notifier_suppression_abonne');
 				effacer_meta('spip_lettres_utiliser_articles');
+				effacer_meta('spip_lettres_utiliser_descriptif');
+				effacer_meta('spip_lettres_utiliser_chapo');
 				effacer_meta('spip_lettres_utiliser_ps');
+				effacer_meta('spip_lettres_envois_recurrents');
 				effacer_meta('spip_lettres_cron');
 				include_spip('inc/getdocument');
 				effacer_repertoire_temporaire(_DIR_LETTRES);
-#TODO effacer documents et logos
 				break;
 		}
 	}

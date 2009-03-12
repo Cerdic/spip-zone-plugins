@@ -16,7 +16,6 @@
 	if (!defined("_ECRIRE_INC_VERSION")) return;
 	include_spip('lettres_fonctions');
  	include_spip('inc/presentation');
- 	include_spip('inc/filtres');
 
 
 	function exec_abonnes_edit() {
@@ -32,7 +31,7 @@
 		pipeline('exec_init', array('args' => array('exec' => 'abonnes_edit', 'id_abonne' => $id_abonne), 'data' => ''));
 
 		if (!empty($_POST['enregistrer'])) {
-			if (email_valide($_POST['email'])) {
+			if (lettres_verifier_validite_email($_POST['email'])) {
 				$abonne = new abonne($id_abonne);
 				$abonne->email	= $_POST['email'];
 				$abonne->nom	= $_POST['nom'];

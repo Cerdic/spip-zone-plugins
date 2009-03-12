@@ -19,8 +19,9 @@
 	define('_DIR_LETTRES', _DIR_IMG.'lettres/');
 
 
-	global $page;
-	if ($page == $GLOBALS['meta']['spip_lettres_fond_lettre_html'] 
+	global $page, $flag_preserver;
+	if ($page == $GLOBALS['meta']['spip_lettres_fond_lettre_titre'] 
+		OR $page == $GLOBALS['meta']['spip_lettres_fond_lettre_html']
 		OR $page == $GLOBALS['meta']['spip_lettres_fond_lettre_texte'])
 		$flag_preserver = true;
 

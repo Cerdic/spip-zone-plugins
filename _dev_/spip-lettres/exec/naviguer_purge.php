@@ -14,13 +14,14 @@
 
 
 	if (!defined("_ECRIRE_INC_VERSION")) return;
-	include_spip('lettres_fonctions');
 	include_spip('inc/presentation');
+	include_spip('lettres_fonctions');
 
 
 	function exec_naviguer_purge() {
-		global $spip_lang_right, $spip_lang_left;
-		global $id_rubrique, $purger, $id_parent;
+		$id_rubrique	= $_REQUEST['id_rubrique'];
+		$purger			= $_REQUEST['purger'];
+		$id_parent		= $_REQUEST['id_parent'];
 
 		if (!autoriser('purger', 'lettres')) {
 			include_spip('inc/minipres');
@@ -40,70 +41,59 @@
 				$nb_abonnements_supprimes++;
 			}
 		}
-			
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('lettresprive:purge_abonnes'), "naviguer", "abonnes_tous");
-	
-		debut_gauche();
-		
-		debut_boite_info();
+
+		echo '<br /><br /><br />';
+		echo gros_titre(_T('lettresprive:purge_abonnes'),'',false);
+
+		echo debut_gauche('', true);
+
+		echo debut_boite_info(true);
 		echo _T('lettresprive:aide_naviguer_purge');
-		fin_boite_info();
+		echo fin_boite_info(true);
 
-		debut_raccourcis();	
-		icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire('abonnes_tous'), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/abonne.png');
-		if (isset($id_rubrique))
-			icone_horizontale(_T('lettresprive:retour_rubrique'), generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/rubrique-24.png');
-		fin_raccourcis();	
-	
-		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'naviguer_purge'),'data'=>''));
+		$raccourcis = icone_horizontale(_T('lettresprive:aller_liste_abonnes'), generer_url_ecrire('abonnes_tous'), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/abonne.png', 'rien.gif', false);
+		if ($id_rubrique)
+			$raccourcis.= icone_horizontale(_T('lettresprive:retour_rubrique'), generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/rubrique-24.png', 'rien.gif', false);
+		echo bloc_des_raccourcis($raccourcis);
+  		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'naviguer_purge'),'data'=>''));
 
-		creer_colonne_droite();
+		echo creer_colonne_droite('', true);
 		echo pipeline('affiche_droite',array('args'=>array('exec'=>'naviguer_purge'),'data'=>''));
 
-		debut_droite();
-
-		debut_cadre_relief('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/purge.png');
-
-		echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
-		echo "<tr width='100%'><td width='100%' valign='top'>";
-		gros_titre(_T('lettresprive:purge_abonnes'));
-		echo "</td>";
-		echo "</tr>\n";
-		echo "</table>\n";
-
-		echo "<div>&nbsp;</div>";
+   		echo debut_droite('', true);
 
 		echo "<form method='post' action='".generer_url_ecrire('naviguer_purge')."' method='get'>";
 
 		if (!empty($purger)) {
-			debut_cadre_enfonce('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/purge.png', false, "", _T('lettresprive:resultat'));
-			echo "<br />";
-			echo "<span class='verdana1'><B>"._T('lettresprive:nb_abonnements_supprimes')."</B> ".$nb_abonnements_supprimes."</span><br />";
-			echo "<br />";
+			echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/purge.png', true, "", _T('lettresprive:resultat'));
+			echo "<p><strong>"._T('lettresprive:nb_abonnements_supprimes')."</strong> ".$nb_abonnements_supprimes."</p>";
 			echo '<div align="right">';
-			echo "<INPUT TYPE='submit' NAME='retour' CLASS='fondo' VALUE='"._T('lettresprive:retour')."' STYLE='font-size:10px'>";
-			echo "</div>";
-			fin_cadre_enfonce();
+			echo '<input type="submit" name="retour" class="fondo" value="'._T('lettresprive:retour').'" />';
+			echo '</div>';
+			echo fin_cadre_enfonce(true);
 		} else {
-			debut_cadre_enfonce('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/purge.png', false, "", _T('lettresprive:selectionnez_rubrique'));
+			echo debut_cadre_enfonce(_DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/purge.png', true, "", _T('lettresprive:selectionnez_rubrique'));
 			$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
 			echo $selecteur_rubrique($id_rubrique, 'rubrique', false);
-			fin_cadre_enfonce();	
 			echo '<input type="hidden" name="id_rubrique" value="'.$id_rubrique.'" />';
 			echo '<div align="right">';
-			echo "<INPUT TYPE='submit' NAME='purger' CLASS='fondo' VALUE='"._T('lettresprive:purger')."' STYLE='font-size:10px'>";
-			echo "</div>";
+			echo '<input type="submit" name="purger" class="fondo" value="'._T('lettresprive:purger').'" />';
+			echo '</div>';
+			echo fin_cadre_enfonce(true);
 		}
 
 		echo '</form>';
 
-		fin_cadre_relief();
-
+		echo pipeline('affiche_milieu', array('args'=>array('exec'=>'naviguer_purge'),'data'=>''));
+		
 		echo fin_gauche();
 
 		echo fin_page();
+
 	}
+
 
 ?>

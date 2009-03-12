@@ -25,8 +25,7 @@
 		if (autoriser('editer', 'lettres')) {
 			$lettre = new lettre($id_lettre);
 			if ($lettre->statut == 'envoi_en_cours')
-				$fin = $lettre->enregistrer_statut('envoi_en_cours', true, true);
-#				$fin = 0;
+				$fin = $lettre->enregistrer_statut('envoi_en_cours', false, true);
 		}
 
 		echo "<?xml version=\"1.0\"?>\n"; 

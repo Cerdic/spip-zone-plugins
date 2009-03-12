@@ -14,7 +14,6 @@
 
 
 	include_spip('lettres_fonctions');
-	include_spip('inc/filtres');
 
 
 	function formulaires_lettres_charger_dist() {
@@ -62,7 +61,7 @@
 
 		$erreurs = array();
 
-		if (!email_valide($email))
+		if (!lettres_verifier_validite_email($email))
 			$erreurs['email'] = _T('lettres:email_ko');
 
 		if (!$choix) {
@@ -76,14 +75,14 @@
 				case 'desabonnements':
 					if (empty($rubriques))
 						$erreurs['rubriques'] = _T('lettres:vous_devez_choisir_un_theme');
-					if (email_valide($email)) {
+					if (lettres_verifier_validite_email($email)) {
 						$abonne = new abonne(0, $email);
 						if (!$abonne->existe)
 							$erreurs['choix'] = _T('lettres:vous_n_etes_pas_abonnes');
 					}
 					break;
 				case 'changement_format':
-					if (email_valide($email)) {
+					if (lettres_verifier_validite_email($email)) {
 						$abonne = new abonne(0, $email);
 						if (!$abonne->existe)
 							$erreurs['choix'] = _T('lettres:vous_n_etes_pas_abonnes');
