@@ -15,6 +15,9 @@
 	Affiche les mots cle du site sous la forme d'un nuage 3D 
 	</description>
 	<lien>http://bidouilleur.com/nuage-de-tags-mots-cles-3d-dynamique-en-jquery/</lien>
+	<icon>
+	tagsphere.png
+	</icon>
 	<prefix>
 	tagsphere
 	</prefix>
