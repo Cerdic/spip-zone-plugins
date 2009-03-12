@@ -109,6 +109,21 @@ function action_odt2spip_importe() {
     $remplace = array('<','>','<','>', "'", '<date>'.(date("Y-m-d H:i:s")).'</date>');
     $xml_sortie = str_replace($a_remplacer, $remplace, $xml_sortie);
     
+    // gerer la conversion des <math>Object X</math> => on delegue a /inc/odt2spip_traiter_mathml.php
+    if (preg_match_all('/<math>(.*?)<\/math>/', $xml_sortie, $match, PREG_PATTERN_ORDER) > 0) {
+        include_spip('inc/odt2spip_traiter_mathml');
+        foreach ($match[1] as $balise) {
+            $fic_content = $rep_dezip.$balise.'/content.xml';
+          // si le fichier /Object X/content.xml ne contient pas du mathML, virer la balise <math>
+            if (substr_count(file_get_contents($fic_content), '<!DOCTYPE math:math') < 1) {
+                $xml_sortie = str_replace('<math>'.$balise.'</math>', '', $xml_sortie);
+                continue;
+            }
+          // sinon faire la transfo xsl du contenu du fichier pour obtenir le LateX qu'on place dans la balise
+            $xml_sortie = str_replace($balise, odt2spip_traiter_mathml($fic_content), $xml_sortie);
+        }
+    }
+    
     // virer les sauts de ligne multiples
     $xml_sortie = preg_replace('/([\r\n]{2})[ \r\n]*/m', "$1", $xml_sortie);
         

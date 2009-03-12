@@ -515,6 +515,13 @@ _ <xsl:apply-templates />
 <xsl:otherwise>center</xsl:otherwise>
 </xsl:choose>&#62;</xsl:template>
 
+<!-- pour continuer dans les bidouillages, les objets integres 
+     i.e. les formules de math sous forme d'un fichier MathML externe stocke dans un ss-rep: /Object X/content.xml 
+     ici on cree une balise <math>Object X</math> qui sera ensuite post-traitee pour recuperer la formule   -->
+<xsl:template match="draw:object[@xlink:href]">
+&#60;math&#62;<xsl:value-of select="substring(@xlink:href,3)"/>&#60;/math&#62;
+</xsl:template>
+
 <!--
 	This template is too dangerous to leave active...
 <xsl:template match="text()">
