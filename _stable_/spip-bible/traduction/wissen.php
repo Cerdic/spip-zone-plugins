@@ -91,6 +91,7 @@ function recuperer_passage($livre,$ref,$wissen,$lang){
 	$code = strip_tags($code,'<br><sup><strong>');
 	$code = str_replace('</strong><br />','</strong>',$code);
 	$code = eregi_replace('^<br />','',$code);
+	$code = eregi_replace("</sup>"," </sup>",$code);
 	return $code;
 	}
 ?>
