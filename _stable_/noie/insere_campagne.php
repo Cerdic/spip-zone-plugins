@@ -15,7 +15,7 @@ function noie_affichage_final(&$page) {
 	preg_match(',<div id=[\'"]noie[\'"].*?>,', $page, $regs)
 	|| preg_match(',<body\b.*?>,i', $page, $regs);
 	if ($regs)
-		$page = substr_replace($page, $campagne, strpos($page, $regs[0]), 0);
+		$page = substr_replace($page, $campagne, (strpos($page, $regs[0]) + strlen($regs[0])), 0);
 
 	return $page;
 }
