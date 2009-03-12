@@ -1,0 +1,7 @@
+<BOUCLE_lettre(LETTRES) {id_lettre}>
+[[(#HTTP_HEADER{Content-type: text/plain})]
+#MESSAGE_TEXTE
+(#ENV{format}|=={'texte'}|?{' '})]
+[#MESSAGE_HTML
+(#ENV{format}|=={'texte'}|?{'',' '})]
+</BOUCLE_lettre>
