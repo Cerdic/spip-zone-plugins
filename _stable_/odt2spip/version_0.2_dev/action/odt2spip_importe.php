@@ -13,7 +13,7 @@ function action_odt2spip_importe() {
     $hash = _request('hash');
     
     $redirect = _request('redirect');
-	if ($redirect==NULL) $redirect="";
+	  if ($redirect==NULL) $redirect="";
     
     include_spip("inc/securiser_action");
     
@@ -35,19 +35,19 @@ function action_odt2spip_importe() {
   // dezipper le fichier odt a la mode SPIP
     include_spip("inc/pclzip");
     $zip = new PclZip($rep_dezip.$fichier_zip);
-	$ok = $zip->extract(
-		PCLZIP_OPT_PATH, $rep_dezip,
-		PCLZIP_OPT_SET_CHMOD, _SPIP_CHMOD,
-		PCLZIP_OPT_REPLACE_NEWER
-	);
-	if ($zip->error_code < 0) {
-		spip_log('charger_decompresser erreur zip ' . $zip->error_code .' pour fichier ' . $rep_dezip.$fichier_zip);
-		die($zip->errorName(true));  //$zip->error_code
-	}
+	  $ok = $zip->extract(
+		    PCLZIP_OPT_PATH, $rep_dezip,
+		    PCLZIP_OPT_SET_CHMOD, _SPIP_CHMOD,
+		    PCLZIP_OPT_REPLACE_NEWER
+	  );
+	  if ($zip->error_code < 0) {
+		    spip_log('charger_decompresser erreur zip ' . $zip->error_code .' pour fichier ' . $rep_dezip.$fichier_zip);
+		    die($zip->errorName(true));  //$zip->error_code
+	  }
     
 	// Creation du fichier necessaire a snippets
-	$odt2spip_generer_sortie = charger_fonction('odt2spip_generer_sortie','inc');
-	list($fichier_sortie,$xml_sortie) = $odt2spip_generer_sortie($id_auteur,$rep_dezip);
+	  $odt2spip_generer_sortie = charger_fonction('odt2spip_generer_sortie','inc');
+	  list($fichier_sortie,$xml_sortie) = $odt2spip_generer_sortie($id_auteur,$rep_dezip);
 
 	// generer l'article a partir du fichier xml de sortie (code pompe sur plugins/snippets/action/snippet_importe.php)
     include_spip('inc/snippets');

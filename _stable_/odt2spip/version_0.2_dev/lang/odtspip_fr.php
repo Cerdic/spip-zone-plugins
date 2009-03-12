@@ -1,6 +1,6 @@
 <?php
 /* 
-* odt2spip est un plugin pour creer des articles SPIP a partir de fichiers OOo Writer (format .odt)
+* odt2spip est un plugin pour créer des articles SPIP à partir de fichiers OOo Writer (format .odt)
 *
 * Auteur : cy_altern (cy_altern@yahoo.fr)
 *  
@@ -22,6 +22,7 @@
         'err_repertoire_tmp' => 'Erreur: le dossier tmp/odt2spip ou son sous-dossier /id_auteur n\'a pu &ecirc;tre cr&eacute;&eacute;',
         'err_telechargement_fichier' => 'Erreur: le fichier t&eacute;l&eacute;charg&eacute; n\'a pu &ecirc;tre r&eacute;cup&eacute;r&eacute;',
         'err_transformation_xslt' => 'Erreur lors de la transformation XSLT du fichier ODT',
+        'err_transformation_xslt_mathml' => 'Erreur XSLT lors de la conversion du MathML',
 
     // I
         'importer_fichier' => 'Cr&eacute;er un article &agrave; partir d\'un fichier OOo Writer',

@@ -409,15 +409,34 @@
           <draw:image xlink:href="Pictures/1000000000000320000001FC9D74D342.jpg" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/>
         </draw:frame>
       </text:p>
-      <text:h text:style-name="Heading_20_3" text:outline-level="3">Une formule de math:</text:h>
+      <text:h text:style-name="Heading_20_3" text:outline-level="3">Formules de math:</text:h>
       <text:p text:style-name="Standard">
-        <draw:frame draw:style-name="fr4" draw:name="Objet1" text:anchor-type="as-char" svg:width="2.304cm" svg:height="0.998cm" draw:z-index="3">
+        <text:span text:style-name="T11">une formule de maths:</text:span>
+      </text:p>
+      <text:p text:style-name="P13">
+        <draw:frame draw:style-name="fr4" draw:name="Objet2" text:anchor-type="as-char" svg:width="2.775cm" svg:height="1.046cm" draw:z-index="4">
           <draw:object xlink:href="./Object 1" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/>
           <draw:image xlink:href="./ObjectReplacements/Object 1" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/>
         </draw:frame>
       </text:p>
-      <text:p text:style-name="Standard"/>
-      <text:p text:style-name="Standard">un saut de page</text:p>
+      <text:p text:style-name="P14"/>
+      <text:p text:style-name="P14">une formule de chimie:</text:p>
+      <text:p text:style-name="P15">
+        <draw:frame draw:style-name="fr4" draw:name="Objet5" text:anchor-type="as-char" svg:width="5.669cm" svg:height="0.473cm" draw:z-index="5">
+          <draw:object xlink:href="./Object 2" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/>
+          <draw:image xlink:href="./ObjectReplacements/Object 2" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/>
+        </draw:frame>
+      </text:p>
+      <text:p text:style-name="P16"/>
+      <text:p text:style-name="P17">une autre formule de maths:</text:p>
+      <text:p text:style-name="Standard">
+        <text:span text:style-name="T12">
+          <draw:frame draw:style-name="fr4" draw:name="Objet4" text:anchor-type="as-char" svg:width="2.701cm" svg:height="1.009cm" draw:z-index="6">
+            <draw:object xlink:href="./Object 3" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/>
+            <draw:image xlink:href="./ObjectReplacements/Object 3" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/>
+          </draw:frame>
+        </text:span>
+      </text:p>
       <text:h text:style-name="P12" text:outline-level="2">Les tableaux (Titre niveau 2)</text:h>
       <text:h text:style-name="Heading_20_3" text:outline-level="3">Tableaux simples (titre 3)</text:h>
       <table:table table:name="Tableau1" table:style-name="Tableau1">
@@ -731,7 +750,7 @@
       <text:h text:style-name="P13" text:outline-level="2">El ©ments non g ©r ©s</text:h>
       <text:h text:style-name="Heading_20_3" text:outline-level="3">Elements ignor ©s:</text:h>
       <text:p text:style-name="Standard">
-        Tous les  ©l ©ments suivant ne sont pas g ©r ©s par le plugin puisque le code SPIP ne permet pas de le g ©n ©rer: ils restent sous la forme de texte  À  standard    .
+        Tous les  ©l ©ments suivant ne sont pas g ©r ©s par le plugin puisque le code SPIP ne permet pas de le g ©n ©rer: ils restent sous la forme de texte     standard    .
       </text:p>
       <text:p text:style-name="P12">
         Du texte <text:span text:style-name="T3">en couleur</text:span> ou sur fond color ©.

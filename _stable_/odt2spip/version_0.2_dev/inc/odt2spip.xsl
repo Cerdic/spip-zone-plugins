@@ -40,9 +40,12 @@
             indent="yes" />
 <xsl:preserve-space elements="*" />
 
-<!-- Récuperation du parametre venant de PHP: IntertitresRiches = oui|non 
+<!-- Récuperation des parametre venant de PHP: 
+  IntertitresRiches = oui|non 
   en fct de la presence d'un des plugins enluminure_typo ou intertitres_enrichis -->
 <xsl:param name="IntertitresRiches"/>
+<!-- nombre de caracteres pour la longueur du titre si pas de titre:h -->
+<xsl:param name="NombreCaracteresTitre"/>
 
 <!-- gestion des titres de façon la plus generique possible -->
 <!-- si @text:style-name='Heading' est utilise, recuperer 'Heading' dans $STyleTitreGeneral -->
@@ -207,7 +210,7 @@
                                       | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre1)][1]"/>
             </xsl:when>
            <xsl:otherwise>
-                <xsl:value-of select="//text:h[node()][1] | //text:p[node()][1]"/>
+                <xsl:value-of select="substring(//text:h[node()][1] | //text:p[node()][1], 1, $NombreCaracteresTitre)"/>
             </xsl:otherwise>
         </xsl:choose>
 </xsl:variable>
@@ -514,6 +517,13 @@ _ <xsl:apply-templates />
 <xsl:when test="substring-before(parent::draw:frame/@svg:x, 'cm') &gt;= 5">right</xsl:when>
 <xsl:otherwise>center</xsl:otherwise>
 </xsl:choose>&#62;</xsl:template>
+
+<!-- pour continuer dans les bidouillages, les objets integres 
+     i.e. les formules de math sous forme d'un fichier MathML externe stocke dans un ss-rep: /Object X/content.xml 
+     ici on cree une balise <math>Object X</math> qui sera ensuite post-traitee pour recuperer la formule   -->
+<xsl:template match="draw:object[@xlink:href]">
+&#60;math&#62;<xsl:value-of select="substring(@xlink:href,3)"/>&#60;/math&#62;
+</xsl:template>
 
 <!--
 	This template is too dangerous to leave active...

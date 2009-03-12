@@ -12,7 +12,10 @@ function inc_odt2spip_generer_sortie($id_auteur,$rep_dezip){
 	include_spip('inc/plugin');
 	$Tplugins = liste_plugin_actifs();
 	$intertitres_riches = ((array_key_exists('TYPOENLUMINEE', $Tplugins) OR array_key_exists('INTERTITRESTDM', $Tplugins)) ? 'oui' : 'non'); 
-    
+   
+  // si il n'existe pas de titre:h dans le doc, on parametre ici la longueur max du paragraphe utilise pour remplacer
+  $nb_carateres_titre = 50;
+  
 	// appliquer la transformation XSLT sur le fichier content.xml
 	// daterminer si on est en php 4 ou php 5 pour choisir les fonctions xslt a utiliser
 	// on est php5: utiliser les fonctions de la classe XSLTProcessor
@@ -20,8 +23,9 @@ function inc_odt2spip_generer_sortie($id_auteur,$rep_dezip){
 	if (!class_exists('XSLTProcessor')) die(_T('odtspip:err_extension_xslt'));
         $proc = new XSLTProcessor();
 
-		// passage d'un parametre a la xslt
-		$proc->setParameter(null, 'IntertitresRiches', $intertitres_riches);   
+		// passage des parametres a la xslt
+		$proc->setParameter(null, 'IntertitresRiches', $intertitres_riches);  
+    $proc->setParameter(null, 'NombreCaracteresTitre', $nb_carateres_titre);
         
         $xml = new DOMDocument();
         $xml->load($xml_entre);
@@ -37,6 +41,21 @@ function inc_odt2spip_generer_sortie($id_auteur,$rep_dezip){
     $a_remplacer = array('&#60;','&#62;','&lt;','&gt;', '"', "<date/>");
     $remplace = array('<','>','<','>', "'", '<date>'.(date("Y-m-d H:i:s")).'</date>');
     $xml_sortie = str_replace($a_remplacer, $remplace, $xml_sortie);
+    
+    // gerer la conversion des <math>Object X</math> => on delegue a /inc/odt2spip_traiter_mathml.php
+    if (preg_match_all('/<math>(.*?)<\/math>/', $xml_sortie, $match, PREG_PATTERN_ORDER) > 0) {
+        include_spip('inc/odt2spip_traiter_mathml');
+        foreach ($match[1] as $balise) {
+            $fic_content = $rep_dezip.$balise.'/content.xml';
+          // si le fichier /Object X/content.xml ne contient pas du mathML, virer la balise <math>
+            if (substr_count(file_get_contents($fic_content), '<!DOCTYPE math:math') < 1) {
+                $xml_sortie = str_replace('<math>'.$balise.'</math>', '', $xml_sortie);
+                continue;
+            }
+          // sinon faire la transfo xsl du contenu du fichier pour obtenir le LateX qu'on place dans la balise
+            $xml_sortie = str_replace($balise, odt2spip_traiter_mathml($fic_content), $xml_sortie);
+        }
+    }
     
     // virer les sauts de ligne multiples
     $xml_sortie = preg_replace('/([\r\n]{2})[ \r\n]*/m', "$1", $xml_sortie);
