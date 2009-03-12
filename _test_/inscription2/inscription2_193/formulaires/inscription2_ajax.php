@@ -33,7 +33,7 @@ function formulaires_inscription2_ajax_charger_dist($id_auteur = NULL){
 		$auteur = sql_fetsel(
 			$champs,
 			'spip_auteurs LEFT JOIN spip_auteurs_elargis USING(id_auteur)',
-			'id_auteur ='.$id_auteur
+			'spip_auteurs_elargis.id_auteur ='.$id_auteur
 		);
 		$auteur['id_auteur'] = $id_auteur;
 		$champs = $auteur;
