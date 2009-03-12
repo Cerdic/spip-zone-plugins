@@ -52,6 +52,7 @@ function recuperer_passage($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$v
 		$i++;
 	}
 	
+	$texte = str_replace("</sup>"," </sup>",$texte); //important pour l'option de suppression de numero
 	return $texte;
 }
 
@@ -76,6 +77,7 @@ function lire_traiter_code($code){
 		
 		$i++;
 	} 
+	
 	return $code;
 	
 }

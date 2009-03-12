@@ -119,6 +119,7 @@ function recuperer_passage($livre='',$chapitre_debut='',$verset_debut='',$chapit
     $texte = supprimer_note($texte);
     $texte = str_replace("  <br />",'',$texte);
     
+    $texte = traiter_sup($texte,$nom_trad,$lang);
     while(ereg("<br /><br />",$texte)){
         $texte = str_replace("<br /><br />","<br />",$texte);
     
@@ -170,6 +171,14 @@ function supprimer_intertitre($code){
     }
     
     $code = implode('',$tableau);
+    
+    return $code;
+}
+function traiter_sup($code,$abreviation,$lang){
+    
+    $code = eregi_replace(" class=\"versenum\"","",$code);
+    $code = eregi_replace(' id="'.$lang.'-'.$abreviation.'-[0-9]*"',"",$code);
+    $code = str_replace("</sup>"," </sup>",$code);
     
     return $code;
 }
