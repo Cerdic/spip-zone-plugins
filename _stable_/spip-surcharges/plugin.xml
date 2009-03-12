@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+	<nom>Plugin SPIP-Surcharges</nom>
+	<auteur>[Artégo->http://www.artego.fr]</auteur>
+	<version>1.4</version>
+	<etat>stable</etat>
+	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
+	<description>Points d'entrée supplémentaires dans l'espace privé de SPIP</description>
+ 	<necessite id="SPIP" version="[2.0.3;]" />
+	<lien>http://www.artego.fr/Integration-dans-SPIP</lien>
+	<icon>prive/images/surcharges.png</icon>
+	<options>surcharges_options.php</options>
+	<fonctions>surcharges_fonctions.php</fonctions>
+	<prefix>surcharges</prefix>
+</plugin>
