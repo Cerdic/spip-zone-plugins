@@ -69,7 +69,7 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 		
 	//verifier les champs obligatoires
 	foreach ($valeurs  as $champs => $valeur) {
-		if ((lire_config('inscription2/'.$champs.'_obligatoire') == 'on') && (empty($valeur) OR (strlen(_request($champ)) == 0))) {
+		if ((lire_config('inscription2/'.$champs.'_obligatoire') == 'on') && (empty($valeur) OR (strlen(_request($champs)) == 0))) {
 			$erreurs[$champs] = _T('inscription2:champ_obligatoire');
 			if(is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') == 'on') && (strlen(_request('pass')) == 0)){
 				// Si le password est vide et que l'on est dans le cas de la modification d'un auteur
