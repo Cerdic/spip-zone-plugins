@@ -87,6 +87,7 @@ function exec_fulltext()
 
 	// on va chercher les tables avec liste_des_champs()
 	include_spip('inc/rechercher');
+	include_spip('base/abstract_sql');
 
 	$tables = liste_des_champs();
 
@@ -100,33 +101,47 @@ function exec_fulltext()
 	foreach($tables as $table => $vals) {
 		$keys = fulltext_keys($table);
 		
-		echo "<h3>$table</h3>\n";
+		$count = sql_countsel('spip_'.table_objet($table));
+		echo "<h3>$table ($count)</h3>\n";
 
 		if (!$engine = Fulltext_trouver_engine_table($table)
 		OR strtolower($engine) != 'myisam') {
-			echo "<p>Cette table est au format '".$engine."'; il faut MyISAM.</p>\n";
-		}
+			if (_request('myisam') == $table
+			OR _request('myisam') == 'tous') {
+				$s = spip_query("ALTER TABLE ".table_objet($table)." ENGINE=MyISAM");
+				if (!$s)
+					echo "<p><strong>".mysql_errno().' '.mysql_error()."</strong></p>\n";
+				else
+					echo "<p><strong>table convertie en MyISAM</strong></p>\n";
+			} else {
+				echo "<p>Cette table est au format '".$engine."'; il faut MyISAM.</p>\n";
+				echo "<p><a href='" . generer_url_ecrire(_request('exec'), 'myisam='.$table)."'>Convertir en MyISAM</a></p>\n";
+				$myisam++;
+			}
+		} else {
 
-		if ($keys) {
-			foreach($keys as $key=>$def)
-				echo "<dt>$key</dt><dd>$def</dd>\n";
-		} else
-			if (!(_request('creer') == 'tous'))
-				echo "<p>Pas d'index FULLTEXT</p>\n";
+			if ($keys) {
+				foreach($keys as $key=>$def)
+					echo "<dt>$key</dt><dd>$def</dd>\n";
+			} else
+				if (!(_request('creer') == 'tous'))
+					echo "<p>Pas d'index FULLTEXT</p>\n";
 
-		$champs = array_keys($vals);
+			$champs = array_keys($vals);
 
-		// le champ de titre est celui qui a le poids le plus eleve
-		asort($vals);
-		$champs2 = array_keys($vals);
-		$champ_titre = array_pop($champs2);
-		if (!isset($keys[$champ_titre])) {
-			echo Fulltext_lien_creer_index($table, array($champ_titre), $champ_titre);
-			$n ++;
-		}
-		if (!isset($keys['tout'])) {
-			echo Fulltext_lien_creer_index($table, $champs, 'tout');
-			$n ++;
+			// le champ de titre est celui qui a le poids le plus eleve
+			asort($vals);
+			$champs2 = array_keys($vals);
+			$champ_titre = array_pop($champs2);
+			if (!isset($keys[$champ_titre])) {
+				echo Fulltext_lien_creer_index($table, array($champ_titre), $champ_titre);
+				$n ++;
+			}
+			if (!isset($keys['tout'])) {
+				echo Fulltext_lien_creer_index($table, $champs, 'tout');
+				$n ++;
+			}
+
 		}
 
 	}
@@ -139,6 +154,10 @@ function exec_fulltext()
 		echo "<p><b><a href='$url'>Cr&#233;er tous les index FULLTEXT sugg&#233;r&#233;s</a></b></p>\n";
 	}
 
+	if ($myisam) {
+		$url = generer_url_ecrire(_request('exec'), 'myisam=tous');
+		echo "<p><b><a href='$url'>Convertir toutes les tables en MyISAM</a></b></p>\n";
+	}
 
 	echo fin_gauche(), fin_page();
 
