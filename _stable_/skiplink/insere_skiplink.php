@@ -9,7 +9,7 @@ function skiplink_affichage_final(&$page) {
 		return $page;
   
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
-  $recherche_existe = (preg_match(',<input.*?name[ ]*=[ ]*"recherche".*?>,i', $page) == 1 ? 'oui' : 'non');
+	$recherche_existe = (preg_match(',<input.*?name[ ]*=[ ]*"recherche".*?>,i', $page) == 1 ? 'oui' : 'non');
 	$raccourcis = recuperer_fond('raccourcis', array('lang'=>$GLOBALS['spip_lang'], 'recherche'=>$recherche_existe));
 	preg_match(',<body\b.*?>,i', $page, $regs);
   

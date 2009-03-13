@@ -4,6 +4,8 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+'ancre_haute' => 'topo',
+
 'haut' => 'Topo',
 'remonter' => 'Voltar ao topo',
 

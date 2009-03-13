@@ -8,8 +8,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'go_sidebar' => 'Aller au menu',
 'go_search' => 'Aller &agrave; la recherche',
 
+'ancre_haute' => 'haut',
+'ancre_basse' => 'bas',
+
 'haut' => 'Haut',
 'remonter' => 'Remonter en haut de la page',
+'bas' => 'Bas',
+'descendre' => 'Bas de page',
 
 );
 
