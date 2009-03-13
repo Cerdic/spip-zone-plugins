@@ -1,3 +1,5 @@
+#CACHE{0}
+
 <div class="formulaire_spip formulaire_contact_avance" id="formulaire_contact_avance">
 
 <br class='bugajaxie' />
@@ -13,16 +15,20 @@
 	#ACTION_FORMULAIRE{#ENV{action}}
 	
 	[(#REM) Previsualisation... ]
-	[(#ENV*{erreurs}|table_valeur{previsu}|oui)
+	<BOUCLE_previsu(CONDITION){si #ENV*{erreurs}|table_valeur{previsu}|oui}>
 	<fieldset class="previsu">
 		<legend><:previsualisation:></legend>
 		<ul>
-			<li><strong>#ENV{sujet_contact}</strong> - <em>#ENV{email_contact}</em></li>
-			<li>[(#ENV{texte_contact}|nl2br)]</li>
+			[<li><strong><:contactavance:courriel_de:></strong> : (#ENV{email_contact})</li>]
+			<BOUCLE_previsu_infos(POUR){tableau #ENV{champs}}>
+			[<li><strong>#VALEUR</strong> : (#ENV{#CLE})</li>]
+			</BOUCLE_previsu_infos>
+			[<li><strong><:form_prop_sujet:></strong> : (#ENV{sujet_contact})</li>]
+			[<li><div><strong><:info_texte_message:></strong></div>(#ENV{texte_contact}|nl2br)</li>]
 		</ul>
 		<p class="boutons"><input type="submit" class="submit" name="confirmer" value="<:form_prop_confirmer_envoi:>" /></p>
 	</fieldset>
-	]
+	</BOUCLE_previsu>
 	
 	[(#REM) Sinon, formulaire normal ]
 	<fieldset>
@@ -30,48 +36,63 @@
 		<ul>
 			<BOUCLE_choix(CONDITION){si #ENV{choix_destinataires}|non}>
 				[(#REM) Si pas de choix, le destinataire est défini automatiquement ]
-				<input type="text" name="destinataire" value="#ENV{destinataire}" />
+				<BOUCLE_tous(POUR){tableau #ENV{destinataire}}>
+				<input type="hidden" name="destinataire[]" value="#VALEUR" />
+				</BOUCLE_tous>
 			</BOUCLE_choix>
-				[(#REM) Sinon on propose le choix, en select ou en checkbox suivant l'option "plusieurs" ]
+				[(#REM) Sinon on propose le choix, en select ou en checkbox suivant l'option "type_choix" ]
 				<B_destinataires>
 				<li class="obligatoire[ (#ENV*{erreurs}|table_valeur{destinataire}|oui)erreur]">
-					[(#ENV{plusieurs_destinataires}|oui)
-						<label for="destinataire"><:contactavance:configuration_destinataires:></label>
+					[(#ENV{type_choix}|=={plusieurs}|oui)
+						<label for="destinataire"><:contactavance:form_destinataires:></label>
+						[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{destinataire})</span>]
 						<ul class="choix_mots">
 					]
-					[(#ENV{plusieurs_destinataires}|non)
+					[(#ENV{type_choix}|=={un}|oui)
 						<label for="destinataire"><:contactavance:form_destinataire:></label>
-						<select name="destinataire" id="destinataire">
+						[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{destinataire})</span>]
+						<select name="destinataire&#91;&#93;" id="destinataire">
 					]
-					<BOUCLE_destinataires(AUTEURS){id_auteur IN #ENV{choix_destinataires}}{par nom}>
-						[(#ENV{plusieurs_destinataires}|oui)
+					<BOUCLE_destinataires(AUTEURS){tous}{id_auteur IN #ENV**{choix_destinataires}}{par num nom,nom}>
+						[(#ENV{type_choix}|=={plusieurs}|oui)
 							<li class="choix">
 								<input
 									type="checkbox" class="checkbox"
 									name="destinataire&#91;&#93;" id="destinataire#ID_AUTEUR"
-									value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV**{destinataire}}|oui)checked="checked"]
+									value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV*{destinataire}}|oui)checked="checked"]
 								/>
 								<label for="destinataire#ID_AUTEUR">#NOM</label>
 							</li>
 						]
-						[(#ENV{plusieurs_destinataires}|non)
-							<option value="#ID_AUTEUR"[ (#ID_AUTEUR|=={#ENV{destinataire}}|oui)selected="selected"]>#NOM</option>
+						[(#ENV{type_choix}|=={un}|oui)
+							<option value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV*{destinataire}}|oui)selected="selected"]>#NOM</option>
 						]
 					</BOUCLE_destinataires>
-					[(#ENV{plusieurs_destinataires}|oui)
+					[(#ENV{type_choix}|=={plusieurs}|oui)
 						</ul>
 					]
-					[(#ENV{plusieurs_destinataires}|non)
+					[(#ENV{type_choix}|=={un}|oui)
 						</select>
 					]
 				</li>
 				</B_destinataires>
+				BUG
+				<//B_destinataires>
 			<//B_choix>
 			<li class='saisie_email_contact obligatoire[ (#ENV*{erreurs}|table_valeur{email_contact}|oui)erreur]'>
 				<label for="email_contact"><:form_pet_votre_email:></label>
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{email_contact})</span>]
 				<input type="text" class="text" name="email_contact" id="email_contact" value="#ENV{email_contact}" size="30" />
 			</li>
+			
+			<BOUCLE_infos(POUR){tableau #ENV{champs}}>
+			<li class="saisie_#CLE[ (#CLE|in_array{#ENV{obligatoires}}|oui)obligatoire][ (#ENV*{erreurs}|table_valeur{#CLE}|oui)erreur]">
+				<label for="info_#CLE">#VALEUR</label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{#CLE})</span>]
+				<input type="text" class="text" name="#CLE" id="info_#CLE" value="#ENV{#CLE}" size="30" />
+			</li>
+			</BOUCLE_infos>
+			
 			<li class='saisie_sujet_contact obligatoire[ (#ENV*{erreurs}|table_valeur{sujet_contact}|oui)erreur]'>
 				<label for="sujet_contact"><:form_prop_sujet:></label>
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{sujet_contact})</span>]

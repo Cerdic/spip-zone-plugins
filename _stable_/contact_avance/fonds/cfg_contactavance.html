@@ -5,33 +5,91 @@
 <form method="post" action="#SELF">
 		[(#ENV{_cfg_}|form_hidden)]
 	
-	<ul>
-		<li class="editer_texte">
-			<label for="choix_destinataires"><:contactavance:configuration_destinataires:></label>
-			<p class="explication"><:contactavance:configuration_destinataires_explication:></p>
-			<B_auteurs>
-			<select name="choix_destinataires[]" id="choix_destinataires" multiple="multiple" size="5">
-			<BOUCLE_auteurs(AUTEURS){tous}>
-			<option value="#ID_AUTEUR" [(#ID_AUTEUR|in_array{#ENV{choix_destinataires,#ARRAY}}|oui)selected="selected"]>
-				#NOM
-			</option>
-			</BOUCLE_auteurs>
-			</select>
-			</B_auteurs>
-		</li>
-		<li class="choix">
-			<input type="checkbox" name="plusieurs_destinataires" id="plusieurs_destinataires" value="oui"[ checked="checked"(#ENV{plusieurs_destinataires}|=={oui}|oui)] />
-			<label for="plusieurs_destinataires"><:contactavance:configuration_plusieurs_destinataires:></label>
-		</li>
-		<li class="editer_texte">
-			<label for="texte"><:contactavance:configuration_intro:></label>
-			<p class="explication"><:contactavance:configuration_intro_explication:></p>
-			<textarea name="texte" id="texte" rows="10">#ENV{texte}</textarea>
-		</li>
-		<li class="boutons">
-			<input type="submit" name="_cfg_ok" value="<:oK:>" />
-			<input type="submit" name="_cfg_delete" value="<:supprimer:>" />
-		</li>
-	</ul>
+	<fieldset>
+		<legend><:contactavance:configuration_destinataires:></legend>
+		<ul>
+			<li class="editer_texte">
+				<p class="explication"><:contactavance:configuration_destinataires_explication:></p>
+					<B_auteurs>
+					<select name="choix_destinataires[]" id="choix_destinataires" multiple="multiple" size="5">
+					<BOUCLE_auteurs(AUTEURS){tous}>
+					<option value="#ID_AUTEUR" [(#ID_AUTEUR|in_array{#ENV{choix_destinataires,#ARRAY}}|oui)selected="selected"]>
+						#NOM (##ID_AUTEUR)
+					</option>
+					</BOUCLE_auteurs>
+				</select>
+				</B_auteurs>
+			</li>
+			<li class="choix">
+				type = #ENV{type_choix}
+				<div>
+					<input type="radio" name="type_choix" id="tous" class="radio" value="tous"[ checked="checked"(#ENV{type_choix}|=={tous}|ou{#ENV{type_choix}|non}|oui)] />
+					<label for="tous"><:contactavance:configuration_destinataires_tous:></label>
+				</div>
+				<div>
+					<input type="radio" name="type_choix" id="un" class="radio" value="un"[ checked="checked"(#ENV{type_choix}|=={un}|oui)] />
+					<label for="un"><:contactavance:configuration_destinataires_un:></label>
+				</div>
+				<div>
+					<input type="radio" name="type_choix" id="plusieurs" class="radio" value="plusieurs"[ checked="checked"(#ENV{type_choix}|=={plusieurs}|oui)] />
+					<label for="plusieurs"><:contactavance:configuration_destinataires_plusieurs:></label>
+				</div>
+			</li>
+		</ul>
+	</fieldset>
+	
+	[(#REM) On récupère les champs possibles ]
+	#SET{champs, #VAL{rien}|contactavance_infos_supplementaires}
+	<fieldset>
+		<legend><:contactavance:infos_supplementaires:></legend>
+		<B_champs>
+		<ul>
+			<BOUCLE_champs(POUR){tableau #GET{champs}}>
+			<li class="choix editer_champ">
+				<input type="checkbox" name="champs[]" id="champ_#CLE" class="checkbox" value="#CLE"[ (#CLE|in_array{#ENV{champs,#ARRAY}}|oui)checked="checked"] />
+				<label for="champ_#CLE">#VALEUR</label>
+				<div>
+					<input type="checkbox" name="obligatoires[]" id="obli_#CLE" class="checkbox" value="#CLE"[ (#CLE|in_array{#ENV{obligatoires,#ARRAY}}|oui)checked="checked"] />
+					<label for="obli_#CLE"><:contactavance:champ_obligatoire:></label>
+				</div>
+			</li>
+			</BOUCLE_champs>
+		</ul>
+		</B_champs>
+	</fieldset>
+	
+	<fieldset>
+		<legend><:contactavance:configuration_intro:></legend>
+		<ul>
+			<li class="editer_texte">
+				<p class="explication"><:contactavance:configuration_intro_explication:></p>
+				<textarea name="texte" id="texte" rows="10">#ENV{texte}</textarea>
+			</li>
+		</ul>
+	</fieldset>
+	
+	<div class="boutons">
+		<input type="submit" name="_cfg_ok" value="<:oK:>" />
+		<input type="submit" name="_cfg_delete" value="<:supprimer:>" />
+	</div>
 </form>
 </div>
+
+<script type="text/javascript">
+	$(function(){
+		$('li.editer_champ div').each(function(){
+			if (!$(this).siblings('input').is(':checked'))
+				$(this).hide();
+		});
+		
+		$('li.editer_champ input.checkbox')
+			.click(function(){
+				if ($(this).is(':checked'))
+					$(this).siblings('div')
+						.slideDown();
+				else
+					$(this).siblings('div')
+						.slideUp();
+			});
+	});
+</script>
