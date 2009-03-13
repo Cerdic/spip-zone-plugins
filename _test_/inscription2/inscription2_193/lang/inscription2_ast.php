@@ -219,7 +219,8 @@ y vienes d\'escoyer la to clave.
 
 Gracies pola confianza
 
-L\'equipu de @nom_site@',
+L\'equipu de @nom_site@
+@url_site@',
 	'texte_email_inscription' => 'Vienes de pidir participar nel nuestru sitiu @nom_site@. 
 Agora tas a puntu de finar la to inscripci&oacute;n. Val que calques nel enllaz d\'embaxo p\'activar la to cuenta y escoyer to clave.
 

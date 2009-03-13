@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_domaine' => 'Elija su dominio',
 	'code_postal' => 'C&oacute;digo Postal',
 	'code_postal_pro' => 'C&oacute;digo Postal',
-	'compte_active' => 'Cuenta activada',
+	'compte_active' => 'Cuenta activada @nom_site@',
 	'conf_plugin' => 'Configuraci&oacute;n Inscripci&oacute;on2',
 	'conf_plugin_page' => 'Configuraci&oacute;n del plugin Inscripci&oacute;n2',
 	'configs' => 'Configuraciones',
@@ -171,7 +171,8 @@ y sa contrase&ntilde;a es la que acaba de ingresar.
 
 Muchas gracias.
 
-El equipo de @nom_site@',
+El equipo de @nom_site@
+@url_site@',
 	'texte_email_inscription' => 'Usted acaba de solicitar vuestra inscripci&oacute;n en nuestro sitio @nom_site@. 
 Actualmente esta a punto de terminar el ciclo de inscripc&oacute;n. Lo &uacute;nico que le queda por hacer es hacer click en el link siguiente para activar su cuenta e ingresar su contrase&ntilde;a. Una vez finalizado usted podr&aacute; conectarse a nuestra pagina con su nombre de usuario y contrase&ntilde;a.
 @link_activation@

@@ -64,7 +64,7 @@ function inc_envoyer_inscription2_dist($id_auteur,$mode) {
 	}else if($mode=="inscription_pass"){
 		$message = _T('inscription2:message_auto')."\n\n"
 				. _T('inscription2:email_bonjour', array('nom'=> $nom_final))."\n\n"
-				. _T('inscription2:texte_email_confirmation', array('login' => $var_user['login'], 'nom_site' => $nom_site_spip ));
+				. _T('inscription2:texte_email_confirmation', array('login' => $var_user['login'], 'nom_site' => $nom_site_spip, 'url_site' => $adresse_site));
 		$sujet = "[$nom_site_spip] "._T('inscription2:compte_active',array('nom_site'=>$nom_site_spip));
 	}
 	else if($mode=="rappel_mdp"){

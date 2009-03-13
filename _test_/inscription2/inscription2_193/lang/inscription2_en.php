@@ -217,7 +217,8 @@ and you have just chosen your password.
 
 Thank you for your trust
 
-The @nom_site@ Team',
+The @nom_site@ Team
+@url_site@',
 	'texte_email_inscription' => 'You have asked to participate on @nom_site@. 
 You are about to finish your registration. You just need to click the link below to activate your account and choose your password.
 

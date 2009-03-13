@@ -219,7 +219,8 @@ e acaba de escoller o contrasinal.
 
 Agradec&eacute;moslle a s&uacute;a confianza
 
-O equipo de @nom_site@',
+O equipo de @nom_site@
+@url_site@',
 	'texte_email_inscription' => 'Solicitou participar no noso web @nom_site@. 
 Neste momento, est&aacute; a piques de rematar a inscrici&oacute;n. S&oacute; lle falta premer sobre a ligaz&oacute;n seguinte para activar a s&uacute;a conta e escoller o seu contrasinal.
 

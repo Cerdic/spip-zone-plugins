@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'code_postal' => 'Postcode',
 	'code_postal_pro' => 'Postcode',
 	'commentaire' => 'Kommentar',
-	'compte_active' => 'Votre compte a &eacute;t&eacute; activ&eacute;',
+	'compte_active' => 'Votre compte a &eacute;t&eacute; activ&eacute; @nom_site@',
 	'conf_plugin' => 'Inscription2 Konfiguration',
 	'conf_plugin_page' => 'Registrierte Konfiguration des plugin Inscription2',
 	'configs' => 'Konfigurationen',
@@ -204,7 +204,8 @@ Si vous n\'avez pas demand&eacute; cette inscription ou ne voulez plus faire par
 
 Merci de votre confiance.
 
-L\'6eacute;quipe de @nom_site@',
+L\'6eacute;quipe de @nom_site@
+@url_site@',
 	'titre_confirmation' => 'Confirmation',
 
 	// U
