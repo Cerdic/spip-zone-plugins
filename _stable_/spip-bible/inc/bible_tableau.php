@@ -345,6 +345,24 @@ function bible_tableau($i,$lang=''){
 		'at'=> true,
 		'deutero'=> true
 			),
+    'nvulg'		=> array(
+		'unbound' 	=> 'latin_nova_vulgata_ucs2',
+		'gateway'	=> false,
+		'traduction'=> 'Nova Vulgata',
+		'lang'		=>'la',
+		'nt'=> true,
+		'at'=> true,
+		'deutero'=> true
+			),
+    'vulgc'		=> array(
+		'unbound' 	=> 'latin_vulgata_clementina_ucs2',
+		'gateway'	=> false,
+		'traduction'=> 'Vulgata Clementina',
+		'lang'		=>'la',
+		'nt'=> true,
+		'at'=> true,
+		'deutero'=> true
+			),
 		
 	'bhs'		=> array(
 		'wissen' 	=> 'biblia-hebraica-stuttgartensia-bhs',
