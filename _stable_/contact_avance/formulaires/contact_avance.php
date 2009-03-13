@@ -1,6 +1,6 @@
 <?php
 
-function formulaires_contact_avance_charger_dist(){	
+function formulaires_contact_avance_charger_dist($id_auteur){	
 	$valeurs = array();
 	
 	$valeurs['email_contact'] = '';
@@ -25,6 +25,8 @@ function formulaires_contact_avance_charger_dist(){
 	// S'il y a plusieurs choix, on s'assure que ce sont tous des entiers
 	else{
 		$valeurs['choix_destinataires'] = array_map('intval', $choix_destinataires);
+		// Et on met le paramètre éventuel en choix par défaut
+		$valeurs['destinataire'] = array($id_auteur);
 	}
 	
 	// Les infos supplémentaires
@@ -57,7 +59,7 @@ function formulaires_contact_avance_charger_dist(){
 	return $valeurs;
 }
 
-function formulaires_contact_avance_verifier_dist(){
+function formulaires_contact_avance_verifier_dist($id_auteur){
 	$erreurs = array();
 	include_spip('inc/filtres');
 	
@@ -96,7 +98,7 @@ function formulaires_contact_avance_verifier_dist(){
 	return $erreurs;
 }
 
-function formulaires_contact_avance_traiter_dist(){
+function formulaires_contact_avance_traiter_dist($id_auteur){
 	
 	include_spip('base/abstract_sql');
 	
