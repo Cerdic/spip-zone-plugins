@@ -39,6 +39,14 @@
         </li>
         ]
         
+        [(#CONFIG{inscription2/surnom}|=={on}|oui)	
+        <li class="editer_surnom[ (#CONFIG{inscription2/surnom_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{surnom}|oui)erreur]">
+            <label for="surnom"><:inscription2:surnom:></label>
+            <input type="text" class="text" name="surnom" id="surnom" value="#ENV{surnom}" />       
+            [<p class='erreur'>(#ENV**{erreurs}|table_valeur{surnom})</p>]
+        </li>
+        ]
+        
         [(#CONFIG{inscription2/naissance}|=={on}|oui)
         <li class="editer_naissance[ (#CONFIG{inscription2/naissance_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{naissance}|oui)erreur]">
             <label><:inscription2:naissance:></label>
