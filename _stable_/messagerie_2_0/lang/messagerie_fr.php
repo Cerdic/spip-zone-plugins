@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mail_sujet_envoyermessage'=>'[@nom_site@] Vous avez un nouveau message',
 'mail_texte_envoyermessage'=>'@nom@ vous a envoy&eacute; un nouveau message (@url_site@) !',
 
+'replier' => 'Replier ce message',
 'repondre_message' => 'R&eacute;pondre &agrave; ce message',
 );
 ?>

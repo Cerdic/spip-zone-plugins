@@ -19,7 +19,11 @@ parametre : url d'action ]
 <label for='#GET{name}' class='nocmx'>[(#VAL{messagerie}|concat{':label_',#GET{name}}|_T)]
 [(#GET{obli}|?{' '})<em><:formulaires:info_obligatoire:></em>]
 </label>[<span
- class='erreur_message'>(#GET{erreur})</span>]
+ class='erreur_message'>(#GET{erreur})</span>]<select name='#GET{name}' id='#GET{name}' class='select'>
+<option value='sel'><:ecrire_message:selection_selectionner:></option>
+<option value='none'><:ecrire_message:selection_aucun:></option>
+<option value='all'><:ecrire_message:selection_tous:></option>
+</select>
 <input type="submit" name='effacer' value="<:ecrire_message:label_effacer:>" />
 </li></ul></fieldset>
 
@@ -27,6 +31,16 @@ parametre : url d'action ]
 </form>
 ]
 </div>
+<script type='text/javascript'>(function($){
+	$(function(){
+		$('select#selection').change(function(){
+			var val = $(this).attr('value');
+			if (val=='none') $('ul.envoyes div.message input[type=checkbox]').attr('checked','');
+			if (val=='all') $('ul.envoyes div.message input[type=checkbox]').attr('checked','checked');
+		});
+	});
+}(jQuery));
+</script>
 </BOUCLE_envoyes>
 <:messagerie:aucun_message_envoye:>
 <//B_envoyes>
