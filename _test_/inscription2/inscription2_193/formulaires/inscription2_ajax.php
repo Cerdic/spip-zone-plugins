@@ -195,23 +195,28 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 	* champ => valeur formulaire
 	*/
 	
-	foreach(inscription2_champs_formulaire($id_auteur) as $clef => $valeur) {
+	$champs = inscription2_champs_formulaire($id_auteur);
+	foreach($champs as $clef => $valeur) {
 		$valeurs[$valeur] = _request($valeur);
 	}
 	
-	//Définir le login
-	if(!$valeurs['nom']){
-		if($valeurs['nom_famille']||$valeurs['prenom']){
-			$valeurs['nom'] = $valeurs['prenom'].' '.$valeurs['nom_famille'];
+	// Définir le login s'il a besoin de l'être
+	// NOM et LOGIN sont des champs obligatoires donc à la création il ne doivent pas être vide
+	// Après on s'en fiche s'il n'est pas dans le formulaire
+	if($new){
+		if(!$valeurs['nom']){
+			if($valeurs['nom_famille']||$valeurs['prenom']){
+				$valeurs['nom'] = $valeurs['prenom'].' '.$valeurs['nom_famille'];
+			}
+			else{
+				$valeurs['nom'] = strtolower(translitteration(preg_replace('/@.*/', '', $valeurs['email'])));
+			}
 		}
-		else{
-			$valeurs['nom'] = strtolower(translitteration(preg_replace('/@.*/', '', $valeurs['email'])));
+		if(!$valeurs['login']){
+			$valeurs['login'] = test_login($valeurs['nom'], $valeurs['email']);
 		}
 	}
-	if (!$valeurs['login']) {
-		$valeurs['login'] = test_login($valeurs['nom'], $valeurs['email']);
-	}
-    
+	
 	//$valeurs contient donc tous les champs remplit ou non 
 	
 	//definir les champs pour spip_auteurs
