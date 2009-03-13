@@ -194,6 +194,9 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 	/* Génerer la liste des champs à traiter
 	* champ => valeur formulaire
 	*/
+	if(!is_numeric($id_auteur)){
+		$new = true;
+	}
 	
 	$champs = inscription2_champs_formulaire($id_auteur);
 	foreach($champs as $clef => $valeur) {
@@ -254,20 +257,18 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 	}
 	
 	//inserer les données dans spip_auteurs -- si $id_auteur : mise à jour - autrement : nouvelle entrée
-	if (is_numeric($id_auteur)) {
+	if (!$new) {
 		$where = 'id_auteur = '.$id_auteur;
 		sql_updateq(
 			$table,
 			$val,
 			$where
 		);
-		$new = false;
 	} else {
 		$id_auteur = sql_insertq(
 			$table,
 			$val
 		);
-		$new = true;
 	}
 	
 	$table = 'spip_auteurs_elargis';
