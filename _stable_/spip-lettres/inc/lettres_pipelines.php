@@ -40,6 +40,7 @@
 
 	function lettres_tester_rubrique_vide($flux) {
 		$flux['data']+= sql_countsel('spip_lettres', 'id_rubrique='.$flux['args']['id_rubrique']);
+		$flux['data']+= sql_countsel('spip_abonnes_rubriques', 'id_rubrique='.$flux['args']['id_rubrique']);
 		return $flux;
 	}
 
@@ -95,7 +96,7 @@
 			while ($arr = sql_fetch($res))
 				$abonnes[] = $arr['id_abonne'];
 			$abonnes_virgules = implode(',', $abonnes);
-			$flux['data'].= afficher_objets('abonne', _T('lettresprive:tous_abonnes_rubrique'), array('FROM' => 'spip_abonnes', 'WHERE' => 'id_abonne IN ('.$abonnes_virgules.')', 'ORDER BY' => 'maj DESC'));
+			$flux['data'].= afficher_objets('abonne', _T('lettresprive:tous_abonnes_rubrique'), array('FROM' => 'spip_abonnes', 'WHERE' => 'id_abonne IN ('.$abonnes_virgules.')', 'ORDER BY' => 'maj DESC'), array('id_rubrique' => $id_rubrique));
 			$flux['data'].= icone_inline(_T('lettresprive:ajouter_abonne'), generer_url_ecrire("abonnes_edit", "id_rubrique=$id_rubrique"), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/abonne.png',"creer.gif", $spip_lang_right);
 			$flux['data'].= icone_inline(_T('lettresprive:import_abonnes'), generer_url_ecrire("naviguer_import","id_rubrique=$id_rubrique"), _DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/import.png', "rien.gif", $spip_lang_right);
 			if (sql_count($res)) {

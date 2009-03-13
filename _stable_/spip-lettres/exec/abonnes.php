@@ -64,7 +64,7 @@
 		echo '<ul>';
 		switch ($abonne->calculer_statut()) {
 			case 'a_valider':
-				echo '<li class="prepa selected">'.http_img_pack('puce-blanche.gif', 'puce-blanche', '')._T('lettresprive:abonnements_en_attente').'</li>';
+				echo '<li class="prepa selected">'.http_img_pack('puce-blanche.gif', 'puce-blanche', '')._T('lettresprive:a_valider').'</li>';
 				echo '<li class="publie"><a href="'.generer_url_action('statut_abonne', 'id_abonne='.$abonne->id_abonne.'&statut=valider', false, true).'">'.http_img_pack('puce-verte.gif', 'puce-verte', '')._T('lettresprive:valider_abonnements').'</a></li>';
 				break;
 			case 'valide':

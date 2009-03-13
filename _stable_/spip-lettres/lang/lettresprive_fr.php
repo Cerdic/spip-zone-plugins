@@ -41,7 +41,7 @@
 		'abonner' => "ABONNER",
 		'action' => "Action",
 		'aucune_action' => "Aucune action",
-		'valider_abonnements_en_attente' => "Valider les abonnements en attente",
+		'valider_abonnements' => "valider",
 		'supprimer' => "Supprimer",
 		'changer' => "Changer",
 		'lettres_recues' => "Lettres reçues par cet abonné",

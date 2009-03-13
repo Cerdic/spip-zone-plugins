@@ -60,8 +60,8 @@
 			$spip_lettres_utiliser_ps = $_POST['spip_lettres_utiliser_ps'];
 			ecrire_meta('spip_lettres_utiliser_ps', $spip_lettres_utiliser_ps);
 
-#			$spip_lettres_utiliser_articles = $_POST['spip_lettres_utiliser_articles'];
-#			ecrire_meta('spip_lettres_utiliser_articles', $spip_lettres_utiliser_articles);
+			$spip_lettres_utiliser_articles = $_POST['spip_lettres_utiliser_articles'];
+			ecrire_meta('spip_lettres_utiliser_articles', $spip_lettres_utiliser_articles);
 
 			$spip_lettres_notifier_suppression_abonne = $_POST['spip_lettres_notifier_suppression_abonne'];
 			ecrire_meta('spip_lettres_notifier_suppression_abonne', $spip_lettres_notifier_suppression_abonne);
@@ -163,7 +163,7 @@
 		echo '<input type="radio" class="radio" name="spip_lettres_utiliser_ps" value="non" id="spip_lettres_utiliser_ps_non" '.($spip_lettres_utiliser_ps == 'non' ? 'checked="checked" ' : '').'/><label for="spip_lettres_utiliser_ps_non">'._T('lettresprive:non').'</label>';
 		echo '</td>';
 		echo '</tr>';
-/*
+
 	    echo '<tr>';
 		echo '<td><label>'._T('lettresprive:spip_lettres_utiliser_articles').'</label></td>';
 		echo '<td width="100">';
@@ -172,7 +172,7 @@
 		echo '<input type="radio" class="radio" name="spip_lettres_utiliser_articles" value="non" id="spip_lettres_utiliser_articles_non" '.($spip_lettres_utiliser_articles == 'non' ? 'checked="checked" ' : '').'/><label for="spip_lettres_utiliser_articles_non">'._T('lettresprive:non').'</label>';
 		echo '</td>';
 		echo '</tr>';
-*/
+
 	    echo '<tr>';
 		echo '<td><label>'._T('lettresprive:spip_lettres_notifier_suppression_abonne').'</label></td>';
 		echo '<td>';

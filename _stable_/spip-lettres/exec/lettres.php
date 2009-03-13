@@ -32,8 +32,6 @@
 
 		$url = generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre, true);
 
-/*
-TODO
 		if (!empty($_GET['supprimer_article'])) {
 			$lettre->supprimer_article($_GET['supprimer_article']);
 			header('Location: '.$url);
@@ -45,7 +43,7 @@ TODO
 			header('Location: '.$url);
 			exit();
 		}
-*/
+
 		if (!empty($_POST['renvoyer_lettre'])) {
 			if ($_POST['tous'] == 1) {
 				$url = generer_url_action('statut_lettre','id_lettre='.$lettre->id_lettre.'&changer_statut=1&statut=envoi_en_cours', true);
@@ -209,6 +207,62 @@ TODO
 
    		echo debut_droite('', true);
 
+		$articles = '';
+		if ($GLOBALS['meta']['spip_lettres_utiliser_articles'] == 'oui') {
+			if ($lettre->statut == 'brouillon') {
+				$articles.= '<form method="post" action="'.generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre).'">';
+				$articles.= debut_cadre_enfonce(_DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/articles.gif', true, "", _T('lettresprive:articles'));
+				$affiche = true;
+			} else {
+				if (sql_countsel('spip_articles_lettres', 'id_lettre='.intval($lettre->id_lettre)))
+					$affiche = true;
+				else
+					$affiche = false;
+				if ($affiche) {
+					$articles.= '<form method="post" action="'.generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre).'">';
+					$articles.= debut_cadre_enfonce(_DIR_PLUGIN_LETTRE_INFORMATION.'/prive/images/articles.gif', true, "", _T('lettresprive:articles'));
+				}
+			}
+			if ($affiche) {
+				$tableau_articles_interdits = array();
+				$resultat_articles_associes = sql_select('A.id_article, A.titre, A.statut, A.id_rubrique', 'spip_articles AS A INNER JOIN spip_articles_lettres AS AL ON AL.id_article=A.id_article', 'AL.id_lettre='.intval($lettre->id_lettre), '', 'A.titre');
+				if (@sql_count($resultat_articles_associes) > 0) {
+					$articles.= "<div class='liste'>\n";
+					$articles.= "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>\n";
+					while ($arr = sql_fetch($resultat_articles_associes)) {
+						$articles.= "<tr class='tr_liste'>\n";
+						$articles.= "<td class='arial1' width='30'>\n";
+						$articles.= _T('info_numero_abbreviation').$arr['id_article'];
+						$articles.= "</td>\n";
+						$articles.= "<td class='arial2'>\n";
+						$articles.= "<a href='".generer_url_ecrire("articles","id_article=".$arr['id_article'])."'>\n";
+						$articles.= typo($arr['titre']);
+						$articles.= "</a>\n";
+						$articles.= "</td>\n";
+						if ($lettre->statut == 'brouillon') {
+							$articles.= "<td class='arial1' width='100'>\n";
+							$articles.= "<a href='".generer_url_ecrire("lettres","id_lettre=".$lettre->id_lettre."&supprimer_article=".$arr['id_article'], true)."'>\n";
+							$articles.= _T('lettresprive:retirer_article').' '.http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'")."\n";
+							$articles.= "</a>\n";
+							$articles.= "</td>\n";
+						}
+						$articles.= "</tr>\n";
+					}
+					$articles.= "</table>\n";
+					$articles.= "</div>\n";
+				}
+				if ($lettre->statut == 'brouillon') {
+					$articles.= _T('lettresprive:ajouter_article');
+					$articles.= '&nbsp;<input type="text" name="id_article" size="5" />&nbsp;';
+					$articles.= '<input type="submit" name="enregistrer_article" value="'._T('lettresprive:ajouter').'" class="fondo">';
+				}
+			}
+			if ($affiche) {
+				$articles.= fin_cadre_enfonce(true);
+				$articles.= '</form>';
+			}
+		}
+
 		$editer_mots = charger_fonction('editer_mots', 'inc');
 		$editer_auteurs = charger_fonction('editer_auteurs', 'inc');
 		$dater = charger_fonction('dater', 'inc');
@@ -228,6 +282,7 @@ TODO
 		$onglet_proprietes.= $renvoi;
 		$onglet_proprietes.= $editer_mots('lettre', $lettre->id_lettre, $cherche_mot, $select_groupe, ($lettre->statut == 'brouillon'), '', 'lettres');
 		$onglet_proprietes.= $editer_auteurs('lettre', $lettre->id_lettre, ($lettre->statut == 'brouillon'), '', 'lettres');
+		$onglet_proprietes.= $articles;
 
 		$contexte = array('id' => $lettre->id_lettre);
 		$fond = recuperer_fond("prive/contenu/lettre", $contexte);
@@ -304,7 +359,7 @@ TODO
 				$abonnes[] = $arr['id_abonne'];
 			$abonnes_virgules = implode(',', $abonnes);
 			if (count($abonnes))
-				echo afficher_objets('abonne', _T('lettresprive:tous_abonnes_rubrique'), array('FROM' => 'spip_abonnes', 'WHERE' => 'id_abonne IN ('.$abonnes_virgules.')', 'ORDER BY' => 'maj DESC'));
+				echo afficher_objets('abonne', _T('lettresprive:tous_abonnes_rubrique'), array('FROM' => 'spip_abonnes', 'WHERE' => 'id_abonne IN ('.$abonnes_virgules.')', 'ORDER BY' => 'maj DESC'), array('id_rubrique' => $lettre->id_rubrique));
 		} else {
 			$abonnes = array();
 			$res = sql_select('id_abonne', 'spip_abonnes_lettres', 'id_lettre='.$lettre->id_lettre);
@@ -312,95 +367,8 @@ TODO
 				$abonnes[] = $arr['id_abonne'];
 			$abonnes_virgules = implode(',', $abonnes);
 			if (count($abonnes))
-				echo afficher_objets('abonne', _T('lettresprive:les_abonnes_suivants_ont_recu_cette_lettre'), array('FROM' => 'spip_abonnes', 'WHERE' => 'id_abonne IN ('.$abonnes_virgules.')', 'ORDER BY' => 'maj DESC'));
+				echo afficher_objets('abonne', _T('lettresprive:les_abonnes_suivants_ont_recu_cette_lettre'), array('FROM' => 'spip_abonnes', 'WHERE' => 'id_abonne IN ('.$abonnes_virgules.')', 'ORDER BY' => 'maj DESC'), array('id_lettre' => $lettre->id_lettre));
 		}
-
-/*
-		if ($GLOBALS['meta']['spip_lettres_utiliser_articles'] == 'oui') {
-			$titre_barre = _T('lettresprive:articles');
-			if ($lettre->statut == 'brouillon') {
-				debut_cadre_enfonce('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/articles.gif', false, "", bouton_block_invisible('arts').$titre_barre);
-				$affiche = true;
-			} else {
-				if (spip_num_rows(spip_query('SELECT * FROM spip_articles_lettres WHERE id_lettre='.$lettre->id_lettre)) > 0)
-					$affiche = true;
-				else
-					$affiche = false;
-				if ($affiche)
-					debut_cadre_enfonce('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/articles.gif', false, "", $titre_barre);
-			}
-			if ($affiche) {
-				$tableau_articles_interdits = array();
-				$articles_associes = 'SELECT A.id_article,
-										A.titre,
-										A.statut,
-										A.id_rubrique
-									FROM spip_articles AS A
-									INNER JOIN spip_articles_lettres AS AL ON AL.id_article=A.id_article
-									WHERE AL.id_lettre="'.$lettre->id_lettre.'"
-									ORDER BY A.titre';
-				$resultat_articles_associes = spip_query($articles_associes);
-				if (@spip_num_rows($resultat_articles_associes) > 0) {
-					echo "<div class='liste'>\n";
-					echo "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>\n";
-					while ($arr = spip_fetch_array($resultat_articles_associes)) {
-						$tableau_articles_interdits[] = $arr['id_article'];
-						echo "<tr class='tr_liste'>\n";
-						echo "<td width='25' class='arial11'>\n";
-						echo puce_statut_article($arr['id_article'], $arr['statut'], $arr['id_rubrique'], 'article');
-						echo "</td>\n";
-						echo "<td class='arial2'>\n";
-						echo "<A HREF='".generer_url_ecrire("articles","id_article=".$arr['id_article'])."'>\n";
-						echo typo($arr['titre']);
-						echo "</A>\n";
-						echo "</td>\n";
-						echo "<td class='arial1' width='50'>\n";
-						echo _T('info_numero_abbreviation').$arr['id_article'];
-						echo "</td>\n";
-						if ($lettre->statut == 'brouillon') {
-							echo "<td class='arial1' width='100'>\n";
-							echo "<A HREF='".generer_url_ecrire("lettres","id_lettre=".$lettre->id_lettre."&supprimer_article=".$arr['id_article'], true)."'>\n";
-							echo _T('lettresprive:retirer_article').' '.http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'")."\n";
-							echo "</A>\n";
-							echo "</td>\n";
-						}
-						echo "</tr>\n";
-					}
-					echo "</table>\n";
-					echo "</div>\n";
-				}
-				if ($lettre->statut == 'brouillon') {
-					$articles_interdits = implode(",", $tableau_articles_interdits);
-					if (!empty($articles_interdits))
-						$where_articles_interdits = ' WHERE A.id_article NOT IN ('.$articles_interdits.')';
-					else
-						$where_articles_interdits = '';
-					$requete = 'SELECT A.id_article, 
-									A.titre AS titre,
-									A.id_rubrique,
-									R.titre AS titre_rub 
-								FROM spip_articles AS A
-								INNER JOIN spip_rubriques AS R ON R.id_rubrique=A.id_rubrique
-								'.$where_articles_interdits.'
-								ORDER BY R.titre, A.titre';
-					$resultat_requete = spip_query($requete);
-					if (@spip_num_rows($resultat_requete) > 0) {
-						echo debut_block_invisible('arts');
-						echo "<table border='0' width='100%'>";
-						echo "<tr>";
-						echo "	<td width='120'><span class='verdana1'><B>"._T('lettresprive:ajouter_article')."</B></span> &nbsp;</td>";
-						echo '	<td width="100"><input type="text" name="id_article" class="fondo" size="5" /></td>';
-						echo "	<td> &nbsp; <INPUT TYPE='submit' NAME='enregistrer_article' VALUE='"._T('lettresprive:choisir')."' CLASS='fondo' STYLE='font-size:10px'></td>";
-						echo "</tr>";
-						echo "</table>";
-						echo fin_block();
-					}
-				}
-			}
-			if ($affiche)
-				fin_cadre_enfonce();
-		}
-*/
 
 		echo fin_gauche();
 

@@ -175,14 +175,10 @@
 		function enregistrer_abonnement($id_rubrique=0) {
 			global $connect_statut;
 			if ($connect_statut == '0minirezo' or lettres_rubrique_autorisee($id_rubrique)) {
-				sql_replace('spip_abonnes_rubriques', 
-							array(
-								'id_abonne' => $this->id_abonne, 
-								'id_rubrique' => intval($id_rubrique), 
-								'date_abonnement' => 'NOW()',
-								'statut' => 'a_valider'
-								)
-							);
+				if (sql_countsel('spip_abonnes_rubriques', 'id_abonne='.intval($this->id_abonne).' AND id_rubrique='.intval($id_rubrique)))
+					sql_updateq('spip_abonnes_rubriques', array('statut' => 'a_valider', 'date_abonnement' => 'NOW()'), 'id_abonne='.intval($this->id_abonne).' AND id_rubrique='.intval($id_rubrique));
+				else
+					sql_insertq('spip_abonnes_rubriques', array('id_abonne' => intval($this->id_abonne), 'id_rubrique' => intval($id_rubrique), 'statut' => 'a_valider', 'date_abonnement' => 'NOW()'));
 				$this->enregistrer_maj();
 			}
 		}
@@ -200,17 +196,11 @@
 				$statut = 'envoye';
 			else
 				$statut = 'echec';
-			sql_replace('spip_abonnes_lettres', 
-						array(
-							'id_abonne' => $this->id_abonne, 
-							'id_lettre' => intval($id_lettre), 
-							'statut' => $statut,
-							'format' => $this->format, 
-							'maj' => 'NOW()'
-							)
-						);
-			$req = sql_select('*', 'spip_lettres_statistiques', 'periode="'.date('Y-m').'"');
-			if (sql_count($req) == 0)
+			if (sql_countsel('spip_abonnes_lettres', 'id_abonne='.intval($this->id_abonne).' AND id_lettre='.intval($id_lettre)))
+				sql_updateq('spip_abonnes_lettres', array('statut' => $statut, 'format' => $this->format, 'maj' => 'NOW()'), 'id_abonne='.intval($this->id_abonne).' AND id_lettre='.intval($id_lettre));
+			else
+				sql_insertq('spip_abonnes_lettres', array('id_abonne' => intval($this->id_abonne), 'id_lettre' => intval($id_lettre), 'statut' => $statut, 'format' => $this->format, 'maj' => 'NOW()'));
+			if (sql_countsel('spip_lettres_statistiques', 'periode="'.date('Y-m').'"') == 0)
 				sql_insertq('spip_lettres_statistiques', array('periode' => date('Y-m')));
 			sql_update('spip_lettres_statistiques', array('nb_envois' => 'nb_envois+1'), 'periode="'.date('Y-m').'"');
 		}
