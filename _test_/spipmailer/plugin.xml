@@ -1,0 +1,19 @@
+<plugin>
+	<version>0.2</version>
+	<nom>SpipMailer</nom>
+	<prefix>spipmailer</prefix>
+	<auteur>(c)2007-2008 kent1. Licence GNU/GPL
+_ suite &agrave; la version de Cedric et BoOz</auteur>
+	<etat>dev</etat>
+	<icon>phpmailer.png</icon>
+	<options>phpmailer_options.php</options>
+	<description>
+Importation de la librairie phpMailer dans spip.
+_ Utilisation de ladite librairie pour remplacer la methode par defaut de spip pour l'envoi de mails.
+_ Envoie du meme mail a plusieurs destinataires separes par une virgule
+	</description>
+	<prefix>spipmailer</prefix>
+	<necessite id="cfg" version="[1.10.1;]" />
+	<necessite id="SPIP" version='[2.0.0]' />
+	<necessite id="lib:phpMailer_v2.2.1_" src="http://kent.dl.sourceforge.net/sourceforge/phpmailer/phpMailer_v2.2.1_.zip" /> 
+</plugin>

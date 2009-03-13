@@ -1,0 +1,96 @@
+<!-- autoriser=webmestre -->
+<!-- refus=Seuls les webmestres du site sont autoris&#233;s &#224; modifier ces param&#232;tres. -->
+
+<script type="text/javascript"><!--
+function showhide(boxName, boxNom) {
+if(boxName.checked){
+	$(boxNom).slideDown('slow');
+}
+else 
+	$(boxNom).slideUp('slow');
+}
+// --></script>
+
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+
+[(#ENV{editable}|oui)
+<form method="post" action="#SELF">
+	<div>
+	#ACTION_FORMULAIRE{SELF}
+	<fieldset>
+		<div class="entete-formulaire">
+			<h1><:phpmailer:methode_envoi:></h1>
+		</div>
+		<div class="formulaire_spip">
+		<ul>
+			<li>
+				<:phpmailer:methode_envoi_texte:>
+				<p>
+					<input type="radio" name="methode" value="mail"[ checked="(#ENV{methode}|=={'mail'}|oui)checked)"] onchange="jQuery('#smtp_conf').fadeOut('slow')" /> Mail
+					<input type="radio" name="methode" value="smtp"[ checked="(#ENV{methode}|=={'smtp'}|oui)checked"] onchange="jQuery('#smtp_conf').fadeIn('slow')" /> SMTP
+				</p>
+			</li>
+		</ul>
+		</div>
+	</fieldset>
+	
+	<fieldset id="smtp_conf"[ style="(#CONFIG{phpmailer/methode}|=={'smtp'}|?{'display:block','display:none'})"]>
+		<div class="entete-formulaire">
+			<h1><:phpmailer:serveur_smtp:></h1>
+		</div>
+		<div class="formulaire_spip">
+		<ul>
+			<li>
+				<label for="smtp_adresse"><:phpmailer:smtp_adresse:></label>
+				<input type="text" name="smtp_adresse" id="smtp_adresse" value="[(#ENV{smtp_adresse}|sinon{'localhost'})]" class="forml" />
+			</li>
+			<li>
+				<label for="smtp_auth"><:phpmailer:smtp_auth:></label>
+					<input type="radio" name="smtp_auth" value="no"[ checked="(#ENV{smtp_auth}|=={'no'}|oui)checked)"] onchange="jQuery('#smtp_auth_conf').fadeOut('slow')" /> <:phpmailer:smtp_auth_non:>
+					<input type="radio" name="smtp_auth" value="yes"[ checked="(#ENV{smtp_auth}|=={'yes'}|oui)checked)"] onchange="jQuery('#smtp_auth_conf').fadeIn('slow')" /> <:phpmailer:smtp_auth_yes:>
+			</li>
+			<li id="smtp_auth_conf"[ style="(#ENV{smtp_auth}|=={'yes'}|?{'display:block;clear:both','display:none'})"]>
+				<label for="smtp_username"><:phpmailer:username:></label>
+				<input type="text" name="smtp_username" id="smtp_username" value="[(#ENV{smtp_username})]" class="forml" />
+				<label for="smtp_password"><:phpmailer:password:></label>
+				<input type="password" name="smtp_password" id="smtp_password" value="[(#ENV{smtp_password})]" class="forml" />
+			</li>
+		</div>
+	</fieldset>
+	
+	<fieldset>
+		<div class="entete-formulaire">
+			<h1><:phpmailer:default_mail_options:></h1>
+		</div>
+		<div class="formulaire_spip">
+		<ul>
+			<li>
+				<label for="to"><:phpmailer:default_to:></label>
+				<input type="text" name="to" id="to" value="[(#ENV{to}|sinon{#EMAIL_WEBMASTER})]" class="forml" />
+			</li>
+			<li>
+				<label for="reply_to"><:phpmailer:default_reply_to:></label>
+				<input type="text" name="reply_to" id="reply_to" value="[(#ENV{reply_to})]" class="forml" />
+			</li>
+			<li>
+				<label for="errors_to"><:phpmailer:default_errors_to:></label>
+				<input type="text" name="errors_to" id="errors_to" value="[(#ENV{errors_to})]" class="forml" />
+			</li>
+			<li>
+				<label for="return_path"><:phpmailer:default_return_path:></label>
+				<input type="text" name="return_path" id="return_path" value="[(#ENV{return_path})]" class="forml" />
+			</li>
+			<li>
+				<label for="timeout"><:phpmailer:default_timeout:></label>
+				<input type="text" name="timeout" id="timeout" value="[(#ENV{timeout})]" class="forml" />	
+			</li>
+		</ul>
+		</div>
+	</fieldset>
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
+		<input type="submit" name="_cfg_delete" class="submit" value="<:effacer:>" />
+	</p>
+	</div>
+</form>]
