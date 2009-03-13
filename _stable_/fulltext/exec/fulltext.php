@@ -1,0 +1,145 @@
+<?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+include_spip('inc/headers');
+
+
+function Fulltext_trouver_engine_table($table) {
+	if ($s = spip_query("SHOW CREATE TABLE ".table_objet_sql($table), $serveur)
+	AND $t = sql_fetch($s)
+	AND $create = array_pop($t)
+	AND preg_match('/\bENGINE=([^\s]+)/', $create, $engine))
+		return $engine[1];
+
+
+}
+
+function Fulltext_index($table, $champs, $nom=null) {
+	if (!$nom)
+		list(,$nom) = each($champs);
+
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$desc = $trouver_table(table_objet($table));
+
+	foreach ($champs as $i=>$f) {
+		if (preg_match(',^(tiny|long)?text\s,i', $desc['field'][$f]))
+			$champs[$i] = "`$f`";
+		else
+			unset($champs[$i]);
+	}
+
+	return "`$nom` (".join(',', $champs).')';
+}
+
+function Fulltext_lien_creer_index($table, $champs, $nom=null) {
+	if (_request('creer') == 'tous') {
+		return Fulltext_creer_index($table, $nom, $champs);
+	}
+
+	$url = generer_url_ecrire(_request('exec'),
+		'table='.$table.'&#38;nom='.$nom
+	);
+	return "<p><a href='$url'>Cr&#233;er l'index ".Fulltext_index($table,$champs,$nom)."</a></p>\n";
+}
+
+function Fulltext_creer_index($table, $nom, $vals) {
+	$keys = fulltext_keys($table);
+	if ($nom == 'tout')
+		$index = Fulltext_index($table, $vals , 'tout');
+	else
+		$index = Fulltext_index($table,array($nom), $nom);
+
+	if (!$s = spip_query($query = "ALTER TABLE ".table_objet_sql($table)
+	." ADD FULLTEXT ".$index))
+		return "<strong>Erreur ".mysql_errno()." ".mysql_error()."</strong>
+		<pre>$query</pre><p />\n";
+
+	$keys = fulltext_keys($table);
+	if (isset($keys[$nom]))
+		return "<p><strong>FULLTEXT cr&#233;&#233; : $keys[$nom]</strong></p>";
+	else
+		return "<p><strong>Erreur.</strong></p>\n";
+
+}
+
+function exec_fulltext()
+{
+	pipeline('exec_init',array('args'=>array('exec'=>'fulltext'),'data'=>''));
+
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page("Fulltext", "accueil", "accueil");
+
+	echo debut_gauche("",true);
+
+	echo creer_colonne_droite("", true);
+
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'fulltext'),'data'=>''));
+
+	echo propre("Voici la liste des tables connues de la recherche. Vous pouvez y ajouter des &#233;l&#233;ments FULLTEXT, cf. documentation &#224; l'adresse [->http://www.spip-contrib.net/Fulltext].");
+
+	echo debut_droite("", true);
+
+
+	include_spip('inc/autoriser');
+	if(!autoriser('webmestre'))
+		die("Page r&#233;serv&#233;e aux webmestres");
+
+	// on va chercher les tables avec liste_des_champs()
+	include_spip('inc/rechercher');
+
+	$tables = liste_des_champs();
+
+	// Creer un index ?
+	if ($table = _request('table')
+	AND $nom = _request('nom')
+	AND preg_match(',^[a-z_0-9]+$,', "$nom$table")) {
+		echo Fulltext_creer_index($table, $nom, array_keys($tables[$table]));
+	}
+
+	foreach($tables as $table => $vals) {
+		$keys = fulltext_keys($table);
+		
+		echo "<h3>$table</h3>\n";
+
+		if (!$engine = Fulltext_trouver_engine_table($table)
+		OR strtolower($engine) != 'myisam') {
+			echo "<p>Cette table est au format '".$engine."'; il faut MyISAM.</p>\n";
+		}
+
+		if ($keys) {
+			foreach($keys as $key=>$def)
+				echo "<dt>$key</dt><dd>$def</dd>\n";
+		} else
+			if (!(_request('creer') == 'tous'))
+				echo "<p>Pas d'index FULLTEXT</p>\n";
+
+		$champs = array_keys($vals);
+
+		// le champ de titre est celui qui a le poids le plus eleve
+		asort($vals);
+		$champs2 = array_keys($vals);
+		$champ_titre = array_pop($champs2);
+		if (!isset($keys[$champ_titre])) {
+			echo Fulltext_lien_creer_index($table, array($champ_titre), $champ_titre);
+			$n ++;
+		}
+		if (!isset($keys['tout'])) {
+			echo Fulltext_lien_creer_index($table, $champs, 'tout');
+			$n ++;
+		}
+
+	}
+
+
+	// S'il y a des index a creer les proposer
+	if ($n
+	AND !(_request('creer') == 'tous')) {
+		$url = generer_url_ecrire(_request('exec'), 'creer=tous');
+		echo "<p><b><a href='$url'>Cr&#233;er tous les index FULLTEXT sugg&#233;r&#233;s</a></b></p>\n";
+	}
+
+
+	echo fin_gauche(), fin_page();
+
+}
