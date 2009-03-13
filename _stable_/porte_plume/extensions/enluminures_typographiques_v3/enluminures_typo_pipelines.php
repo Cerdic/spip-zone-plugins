@@ -114,6 +114,15 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 		),
 	));
 	
+	// Appel Tableau
+	$barre->ajouterApres('notes', array(
+		"id"          => 'barre_tableau',
+		"name"        => _T('enlumtypo:barre_tableau'),
+		"className"   => "outil_barre_tableau",
+		"replaceWith" => 'function(markitup) { zone_selection = markitup.textarea; window.open("?exec=tableau_edit", "","scrollbars=yes,resizable=yes,width=700,height=600") }',
+		"display"     => true,
+		"selectionType" => "line",
+	));
 	
 	
 	
@@ -215,6 +224,7 @@ function typoenluminee_porte_plume_lien_classe_vers_icone($flux){
 		'outil_euro' => 'euro.png',
 		'outil_uppercase' => 'text_uppercase.png',
 		'outil_lowercase' => 'text_lowercase.png',
+		'outil_barre_tableau' => 'barre-tableau.png',
 	));
 }
 

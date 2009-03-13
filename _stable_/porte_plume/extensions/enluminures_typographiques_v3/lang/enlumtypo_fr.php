@@ -31,6 +31,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'barre_avances' => 'Du sens, du sens&nbsp;!',
 'barre_boutonsavances' => 'Mises en sens suppl&eacute;mentaires, &agrave; utiliser avec mod&eacute;ration et discernement&nbsp;!',
+'barre_tableau' => 'Ins&eacute;rer/modifier (le s&eacute;lectionner avant) un tableau',
+
 
 'cfg_puces' => 'Traitement des puces',
 'cfg_titraille' => 'Titraille',
