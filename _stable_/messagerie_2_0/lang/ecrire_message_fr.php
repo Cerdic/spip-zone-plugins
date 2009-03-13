@@ -5,7 +5,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'a_un_ami' => 'Ecrire un message',
 'label_destinataire' => 'Destinataire',
 'label_objet' => 'Sujet',
-'label_texte' => 'Message',
+'label_texte_message' => 'Message',
 'label_envoyer' => 'Envoyer',
 'envoyer_un_message' => 'envoyer un message',
 

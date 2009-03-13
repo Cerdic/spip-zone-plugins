@@ -33,7 +33,7 @@ parametre : url d'action ]
  type="text" name='#GET{name}' id='#GET{name}' value="#ENV*{#GET{name}}" class='text' size='40' />
 </li>
 
-#SET{name,texte}#SET{obli,obligatoire} #SET{erreur,#ENV**{erreurs}|table_valeur{#GET{name}}} #SET{valeur,#ENV*{#GET{name}}}
+#SET{name,texte_message}#SET{obli,obligatoire} #SET{erreur,#ENV**{erreurs}|table_valeur{#GET{name}}} #SET{valeur,#ENV*{#GET{name}}}
 <li class="[saisie_(#GET{name})][ (#GET{obli}|sinon{facultatif})][ (#GET{erreur}|oui)erreur]">
 <label for='#GET{name}'>[(#ENV{form}|concat{':label_',#GET{name}}|_T)]
 [(#GET{obli}|?{' '})<em><:formulaires:info_obligatoire:></em>]

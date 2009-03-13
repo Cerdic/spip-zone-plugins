@@ -21,7 +21,7 @@
 function formulaires_ecrire_message_charger_dist($redirect="",$destinataire=""){
 	include_spip('base/abstract_sql');
 	include_spip('inc/filtres');
-	$valeurs = array('objet'=>'','texte'=>'');
+	$valeurs = array('objet'=>'','texte_message'=>'');
 	include_spip('inc/autoriser');
 	if (autoriser('destiner','message',0)){
 		$valeurs['destinataire'] = '';
@@ -32,7 +32,7 @@ function formulaires_ecrire_message_charger_dist($redirect="",$destinataire=""){
 		if (isset($valeurs['destinataires']))
 			$valeurs['destinataires'] = array($row['id_auteur']);
 		$valeurs['objet'] = "Re : ".textebrut($row['titre']);
-		$valeurs['texte'] = "\n\n\n<quote>\n"
+		$valeurs['texte_message'] = "\n\n\n<quote>\n"
 		. sql_getfetsel('nom','spip_auteurs','id_auteur='.intval($row['id_auteur']))
 		. " - " . affdate($row['date_heure']) . "\n\n "
 		. $row['texte'] . "</quote>\n";
@@ -53,7 +53,7 @@ function formulaires_ecrire_message_charger_dist($redirect="",$destinataire=""){
  */
 function formulaires_ecrire_message_verifier_dist($redirect=""){
 	include_spip('inc/messages');
-	return messagerie_verifier(array('objet','texte'));
+	return messagerie_verifier(array('objet','texte_message'));
 }
 
 
@@ -67,7 +67,7 @@ function formulaires_ecrire_message_traiter_dist($redirect=""){
 	include_spip('inc/messages');
 
 	$objet = typo(_request('objet'));
-	$texte = _request('texte');
+	$texte = _request('texte_message');
 	$out = _T("ecrire_message:message_envoye_erreur");
 	$ok = false;
 
