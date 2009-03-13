@@ -21,7 +21,6 @@
 				</B_auteurs>
 			</li>
 			<li class="choix">
-				type = #ENV{type_choix}
 				<div>
 					<input type="radio" name="type_choix" id="tous" class="radio" value="tous"[ checked="checked"(#ENV{type_choix}|=={tous}|ou{#ENV{type_choix}|non}|oui)] />
 					<label for="tous"><:contactavance:configuration_destinataires_tous:></label>
