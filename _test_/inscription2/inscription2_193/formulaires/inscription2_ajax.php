@@ -64,7 +64,7 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 
     //gere la correspondance champs -> _request(champs)
 	foreach(inscription2_champs_formulaire($id_auteur) as $clef => $valeur) {
-		$valeurs[$clef] = _request($valeur);
+		$valeurs[$valeur] = _request($valeur);
 	}		
 		
 	//verifier les champs obligatoires
@@ -113,7 +113,7 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 	
 	// vérification des champs saisis
 	foreach($champs_code_postal as $champs) {
-	    if(lire_config('inscription2/'.$champs)== 'on') {
+	    if(lire_config('inscription2/'.$champs) == 'on') {
 	        $erreur = inscription2_valide_cp($valeurs[$champs]);
 	        if($erreur){
 		        $erreurs[$champs] = $erreur;
@@ -127,10 +127,10 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 	
 	// vérification des champs saisis
 	foreach($champs_telephone as $champs) {
-	    if(lire_config('inscription2/'.$champs)== 'on') {
+	    if(lire_config('inscription2/'.$champs) == 'on') {
 	        $erreur = inscription2_valide_numero($valeurs[$champs]);
 	        if($erreur){
-		        $erreurs[$champs] .= $erreur;
+		        $erreurs[$champs] = $erreur;
 	        }		
 	    }
 	}
