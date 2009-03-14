@@ -118,8 +118,17 @@ function exec_fulltext()
 		echo Fulltext_creer_index($table, $nom, array_keys($tables[$table]));
 	}
 
+  // charset site
+  $charset = strtolower(str_replace('-','',$GLOBALS['meta']['charset']));
+  $necessite_conversion = false;
+  
 	foreach($tables as $table => $vals) {
-		$keys = fulltext_keys($table);
+    // charset table
+    $data =  sql_fetch(sql_query("SHOW CREATE TABLE ".'spip_'.table_objet($table)));
+    preg_match(',DEFAULT CHARSET=([a-zA-Z0-9-]*),', $data["Create Table"], $match);
+    $charset_table = strtolower(str_replace('-','',$match[1]));
+    if ($charset != $charset_table) $necessite_conversion = true;
+    $keys = fulltext_keys($table);
 
 		$count = sql_countsel('spip_'.table_objet($table));
 		echo "<h3>$table ($count)</h3>\n";
@@ -192,6 +201,17 @@ function exec_fulltext()
   
   $url = generer_url_ecrire(_request('exec'), 'regenerer=tous');
   echo "<p><b><a href='$url'>R&#233;g&#233;n&#233;rer tous les index FULLTEXT</a></b></p>\n";
+  
+  // signaler les incoherences de charset site/tables qui plantent les requetes avec accents...
+  // ?exec=convert_sql_utf8 => conversion base | ?exec=convert_utf8 => conversion site    
+  if ($necessite_conversion) {
+    $modif = (substr($charset, 0, 3) == 'iso' ? 'convert_utf8' : 'convert_sql_utf8');
+    $url = generer_url_ecrire(_request($modif));
+    echo "<p>Une incoh&#233;rence entre le charset de votre site et celui des 
+             tables de votre base de donn&#233;es risque de fausser les recherches 
+             avec caract&#232;res accentu&#233;s:
+            <b><a href='$url'>convertir en UTF-8 pour restaurer la coh&#233;rence</a></b></p>\n";
+  }
 
 	echo fin_gauche(), fin_page();
 
