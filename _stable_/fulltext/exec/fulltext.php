@@ -130,13 +130,12 @@ function exec_fulltext()
 
 			if ($keys) {
 				foreach($keys as $key=>$def)
-					echo "<dt>$key";
-                if ($key == 'tout')
-                    if (_request('supprimer') == $table) {
-                        echo Fulltext_supprimer_index($table);
-                        continue;
-                    } else 
-                        echo ' <a href="'.generer_url_ecrire(_request('exec'), 'supprimer='.$table).'">[Supprimer]</a>';
+					echo "<dt>$key".'<a href="'.generer_url_ecrire(_request('exec'), 'supprimer='.$table.'&index='.$key).'" title="Supprimer">
+                            <img src="'.(find_in_path('images/croix-rouge.gif')).'" alt="Supprimer"></a>';
+                if (_request('supprimer') == $table AND _request('index') == $key) {
+                    echo Fulltext_supprimer_index($table, $key).'</dt>';
+                    continue;
+                } 
                 echo "</dt><dd>$def</dd>\n";
 			} else
 				if (!(_request('creer') == 'tous'))
