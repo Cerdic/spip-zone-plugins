@@ -264,7 +264,7 @@ spip_timer('rech');
 
 					if ($jtable == 'document')
 						$join[] = "
-						LEFT JOIN spip_documents_liens AS lien$i ON (lien$i.id_objet=t.$_id_table AND lien$i.objet='$table'
+						LEFT JOIN spip_documents_liens AS lien$i ON (lien$i.id_objet=t.$_id_table AND lien$i.objet='$table')
 						LEFT JOIN spip_${table_join} AS obj$i ON lien$i.$_id_join=obj$i.$_id_join
 						";
 					else
@@ -281,7 +281,7 @@ spip_timer('rech');
 			$s = spip_query(
 				$query =
 				"SELECT t.$_id_table, $score
-				FROM spip_".table_objet($table)." AS t
+				FROM ".table_objet_sql($table)." AS t
 				"
 				. join("\n",$join)
 				."
@@ -290,7 +290,7 @@ spip_timer('rech');
 				LIMIT 0,500"
 			);
 #			var_dump($query);
-#			if (!$s) die(mysql_error());
+			if (!$s) die(mysql_error());
 #			exit;
 		}
 
