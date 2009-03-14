@@ -94,6 +94,8 @@ function exec_fulltext()
 
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'fulltext'),'data'=>''));
 
+	echo "<img src='".find_in_path('fulltext.png')."' />\n";
+
 	echo propre("Voici la liste des tables connues de la recherche. Vous pouvez y ajouter des &#233;l&#233;ments FULLTEXT, cf. documentation &#224; l'adresse [->http://www.spip-contrib.net/Fulltext].");
 
 	echo debut_droite("", true);
