@@ -278,19 +278,26 @@ spip_timer('rech');
 			$score = join(' + ', $score).' AS score';
 			spip_log($score, 'recherche');
 
+			// si on define(_FULLTEXT_WHERE_$table,'date>"2000")
+			// cette contrainte est ajoutee ici:)
+			$where = (defined('_FULLTEXT_WHERE_'.$table) AND strlen(constant('_FULLTEXT_WHERE_'.$table)))
+				? "\n\t\t\t\tWHERE ".constant('_FULLTEXT_WHERE_'.$table)
+				:'';
+
 			$s = spip_query(
 				$query =
 				"SELECT t.$_id_table, $score
 				FROM ".table_objet_sql($table)." AS t
 				"
 				. join("\n",$join)
-				."
+				."$where
 				GROUP BY t.$_id_table
 				ORDER BY score DESC
 				LIMIT 0,500"
 			);
 #			var_dump($query);
-			if (!$s) die(mysql_error());
+#			spip_log($query,'recherche');
+			if (!$s) spip_log(mysql_errno().' '.mysql_error()."\n".$query, 'recherche');
 #			exit;
 		}
 
