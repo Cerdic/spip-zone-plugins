@@ -10,10 +10,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	'icone_accueil' => 'Accueil',
 	'icone_edition' => '&Eacute;dition',
-	'icone_suivi_edito' => 'Suivi &Eacute;ditorial',
-	'icone_reactions' => 'R&eacute;actions',
+	'icone_suivi_edito' => 'Publication',
+	'icone_reactions' => 'Activit&eacute;',
 	'icone_configuration' => 'Configuration',
 	'icone_administration' => 'Administration',
+	'icone_suivi_publication' => 'Suivi de la publication',
 
 	// L
 	'label_slogan_site' => 'Slogan du site',

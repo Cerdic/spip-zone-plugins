@@ -24,7 +24,7 @@
 /*  ------------------------------------------
 /*  Habillage des elements du contenu
 /*  ------------------------------------------ */
-body { font-size:0.625em; margin-bottom:5em;}
+body { font-size:0.625em; margin-bottom:1em;}
 /* redefinir la largeur de l'ecran etroit*/
 #conteneur,.table_page,div.messages { width: 780px; margin-top:0.5em;}
 #navigation {}
@@ -64,8 +64,8 @@ body { font-size:0.625em; margin-bottom:5em;}
 #bando_identite { line-height:2em; background: #333; color: #eee; overflow:hidden; border-bottom:1px solid #222; z-index:10;position:relative;}
 #bando_identite p { width: 50%; padding: 1px 0; margin:0;}
 #bando_identite p img { vertical-align: middle; }
-#bando_identite p.nom_site_spip { width: 40%; float:#GET{left}; }
-#bando_identite p.session { width: 60%; float:#GET{right}; text-align:#GET{right}; }
+#bando_identite p.nom_site_spip { width: 40%; float:#GET{right};text-align:#GET{right}; }
+#bando_identite p.session { width: 60%; float:#GET{left}; text-align:#GET{left}; }
 #bando_identite p.session .menu_lang { vertical-align: middle; }
 #bando_identite strong, #identite a { color: #eee; }
 #bando_identite a:hover { text-decoration: underline; }
@@ -115,11 +115,18 @@ body { font-size:0.625em; margin-bottom:5em;}
 .large #bando_outils ul.deroulant li ul.cols_8 > li {float:#GET{left};width:123px;}
 
 #bando_outils ul.creer {float:#GET{left};}
-#bando_outils ul.creer li.bouton{ float:#GET{left}; }
-#bando_outils ul.creer li.bouton a{ display:block; padding:2px;background-position:center;background-repeat:no-repeat; }
-#bando_outils ul.creer li.bouton a span { visibility:hidden;display:block;height:24px;width:24px;overflow:hidden; }
-#bando_outils ul.creer li.bouton a:hover, #bando_outils ul.creer li.bouton a:focus{background-color:white;}
-#bando_outils ul.creer li.bouton{ margin-top:0px;}
+#bando_outils ul.collaborer {float:#GET{left};margin-#GET{right}:20px;}
+#bando_outils ul.rapides li.bouton{ float:#GET{left}; }
+#bando_outils ul.rapides li.bouton a{ display:block; padding:2px;background-position:center;background-repeat:no-repeat; }
+#bando_outils ul.rapides li.bouton a span { visibility:hidden;display:block;height:24px;width:24px;overflow:hidden; }
+#bando_outils ul.rapides li.bouton a:hover, #bando_outils ul.rapides li.bouton a:focus{background-color:white;}
+#bando_outils ul.rapides li.bouton{ margin-top:0px;}
+
+#bando_outils #rapides {float:#GET{right};}
+#bando_outils #rapides .spip_recherche {padding:3px 0;}
+#bando_outils #rapides .spip_recherche form {display:inline;}
+#bando_outils #rapides .spip_recherche .recherche {margin-bottom:0;margin-top:1px;}
+#bando_outils #rapides .spip_recherche .submit {vertical-align:bottom;}
 
 #bando_navigation ul li {min-width:80px; text-align: center; border-#GET{right}: 1px solid #eee; }
 #bando_navigation ul li ul li {float:none;text-align:#GET{left};position:static;}

@@ -53,13 +53,19 @@ function definir_barre_boutons($contexte=array(),$icones = true, $autorise = tru
 		foreach($liste_boutons_plugins as $id => $infos){
 			// les boutons principaux ne sont pas soumis a autorisation
 			if (!($parent = $infos['parent']) OR !$autorise OR autoriser('bouton',$id,0,NULL,array('contexte'=>$contexte))){
-				if ($parent AND isset($boutons_admin[$parent]))
-					$boutons_admin[$parent]->sousmenu[$id]= new Bouton(
+				if ($parent AND isset($boutons_admin[$parent])){
+					if (!is_array($boutons_admin[$parent]->sousmenu))
+						$boutons_admin[$parent]->sousmenu = array();
+					$position = $infos['position']?$infos['position']:count($boutons_admin[$parent]->sousmenu);
+					$boutons_admin[$parent]->sousmenu = array_slice($boutons_admin[$parent]->sousmenu,0,$position)
+					+ array($id=> new Bouton(
 					  ($icones AND $infos['icone'])?find_in_path($infos['icone']):'',  // icone
 					  $infos['titre'],	// titre
 					  $infos['url']?$infos['url']:null,
 					  $infos['args']?$infos['args']:null
-					  );
+					  ))
+					+ array_slice($boutons_admin[$parent]->sousmenu,$position,100);
+				}
 				if (!$parent
 				// provisoire, eviter les vieux boutons
 				AND (!in_array($id,array('forum','statistiques_visites')))
@@ -154,7 +160,7 @@ function bando_navigation($boutons, $contexte = array())
 	$first = " class = 'first'";
 	foreach($boutons as $page => $detail){
         // les outils rapides sont traites a part, dans une barre dediee
-        if ($page!='outils_rapides'){
+        if (!in_array($page,array('outils_rapides','outils_collaboratifs'))){
 		
             // les icones de premier niveau sont ignoree si leur sous menu est vide
             // et si elles pointent vers exec=navigation
@@ -246,12 +252,20 @@ function bando_outils_rapides($boutons, $contexte = array()){
 
     // la barre de raccourcis rapides
     if (isset($boutons['outils_rapides']))
-        $res .= "<ul class='creer'>"
+        $res .= "<ul class='rapides creer'>"
           . bando_lister_sous_menu($boutons['outils_rapides']->sousmenu,$contexte,'bouton',true)
           . "</ul>";
 
+    $res .= "<div id='rapides'>";
 
-    $res .= "<div id='recherche'>".formulaire_recherche("recherche")."</div>";
+	// la barre de raccourcis collaboratifs
+    if (isset($boutons['outils_collaboratifs']))
+        $res .= "<ul class='rapides collaborer'>"
+          . bando_lister_sous_menu($boutons['outils_collaboratifs']->sousmenu,$contexte,'bouton',true)
+          . "</ul>";
+
+	$res .= formulaire_recherche("recherche")."</div>";
+
 	return "<div id='bando_outils'><div class='largeur'>\n$res<div class='nettoyeur'></div></div></div>";
 }
 

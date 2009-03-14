@@ -64,29 +64,11 @@
 	</bouton>
 	<bouton id='suivi_edito' parent="bando_suivi">
 		<icone>images/v1/suivi-16.png</icone>
-		<titre>info_suivi_activite</titre>		
+		<titre>bando:icone_suivi_publication</titre>
 	</bouton>
-	<bouton id="forum_interne_suivi" parent="bando_suivi">
-		<icone>images/v1/forum-16.png</icone>
-		<titre>titre_cadre_forum_interne</titre>
-		<url>forum</url>
-	</bouton>
-	<bouton id='forum_admin_suivi' parent='bando_suivi'>
-		<icone>images/v1/forum-16.png</icone>
-		<titre>icone_forum_administrateur</titre>
-		<url>forum_admin</url>
-	</bouton>	
 	<bouton id='suivi_revisions' parent="bando_suivi">
 		<icone>images/v1/revisions-16.png</icone>
 		<titre>info_historique_titre</titre>
-	</bouton>
-	<bouton id='messagerie' parent="bando_suivi">
-		<icone>images/v1/message-16.png</icone>
-		<titre>info_messagerie_interne</titre>
-	</bouton>
-	<bouton id='calendrier' parent="bando_suivi">
-		<icone>images/v1/calendrier-16.png</icone>
-		<titre>Agenda interne</titre>
 	</bouton>
 	<bouton id='synchro' parent="bando_suivi">
 		<icone></icone>
@@ -191,41 +173,58 @@
 		<titre>icone_admin_plugin</titre>		
 	</bouton>
 
+	<bouton id="outils_collaboratifs">
+		<titre></titre>
+	</bouton>
+	<bouton id='calendrier' parent="outils_collaboratifs">
+		<icone>images/v1/calendrier-16.png</icone>
+		<titre>Agenda interne</titre>
+	</bouton>
+	<bouton id='messagerie' parent="outils_collaboratifs">
+		<icone>images/v1/message-16.png</icone>
+		<titre>info_messagerie_interne</titre>
+	</bouton>
+	<bouton id="forum_interne_suivi" parent="outils_collaboratifs">
+		<icone>images/v1/forum-16.png</icone>
+		<titre>titre_cadre_forum_interne</titre>
+		<url>forum</url>
+	</bouton>
+
 	<bouton id="outils_rapides">
 		<titre></titre>
 	</bouton>
 	<bouton id='rubrique_creer' parent="outils_rapides">
-		<icone>images/v1/rubrique-new-24.png</icone>
+		<icone>images/v1/rubrique-new-16.png</icone>
 		<titre>icone_creer_rubrique_2</titre>
 		<url>rubriques_edit</url>
 		<args>new=oui&amp;id_parent=@id_rubrique@</args>
 	</bouton>
 	<bouton id='article_creer' parent="outils_rapides">
-		<icone>images/v1/article-new-24.png</icone>
+		<icone>images/v1/article-new-16.png</icone>
 		<titre>icone_ecrire_article</titre>
 		<url>articles_edit</url>
 		<args>new=oui&amp;id_rubrique=@id_rubrique@</args>
 	</bouton>
 	<bouton id='auteur_creer' parent="outils_rapides">
-		<icone>images/v1/auteur-new-24.png</icone>
+		<icone>images/v1/auteur-new-16.png</icone>
 		<titre>icone_creer_nouvel_auteur</titre>
 		<url>auteur_infos</url>
 		<args>new=oui</args>
 	</bouton>
 	<bouton id='mot_creer' parent="outils_rapides">
-		<icone>images/v1/mot-new-24.png</icone>
+		<icone>images/v1/mot-new-16.png</icone>
 		<titre>icone_creation_mots_cles</titre>
 		<url>mots_edit</url>
 		<args>new=oui</args>
 	</bouton>
 	<bouton id='site_creer' parent="outils_rapides">
-		<icone>images/v1/site-new-24.png</icone>
+		<icone>images/v1/site-new-16.png</icone>
 		<titre>icone_referencer_nouveau_site</titre>
 		<url>sites_edit</url>
 		<args>new=oui&amp;id_rubrique=@id_rubrique@</args>
 	</bouton>
 	<bouton id='breve_creer' parent="outils_rapides">
-		<icone>images/v1/breve-new-24.png</icone>
+		<icone>images/v1/breve-new-16.png</icone>
 		<titre>icone_nouvelle_breve</titre>
 		<url>breves_edit</url>
 		<args>new=oui&amp;id_rubrique=@id_rubrique@</args>
