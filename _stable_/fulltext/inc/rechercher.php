@@ -219,7 +219,7 @@ spip_timer('rech');
 		if ($keys = fulltext_keys($table, 't', $serveur)) {
 			$fulltext = true;
 
-			$r = trim(preg_replace(',\s+,', ' ', strtolower($recherche_brute)));
+			$r = trim(preg_replace(',\s+,', ' ', $recherche_brute));
 
 			// si espace, ajouter la meme chaine avec des guillemets pour ameliorer la pertinence
 			$pe = (strpos($r, ' ') AND strpos($r,'"')===false)
@@ -283,9 +283,7 @@ spip_timer('rech');
 			$where = (defined('_FULLTEXT_WHERE_'.$table) AND strlen(constant('_FULLTEXT_WHERE_'.$table)))
 				? "\n\t\t\t\tWHERE ".constant('_FULLTEXT_WHERE_'.$table)
 				:'';
-
-			$s = spip_query(
-				$query =
+			$query =
 				"SELECT t.$_id_table, $score
 				FROM ".table_objet_sql($table)." AS t
 				"
@@ -293,8 +291,8 @@ spip_timer('rech');
 				."$where
 				GROUP BY t.$_id_table
 				ORDER BY score DESC
-				LIMIT 0,500"
-			);
+				LIMIT 0,500";
+			$s = spip_query($query);
 #			var_dump($query);
 #			spip_log($query,'recherche');
 			if (!$s) spip_log(mysql_errno().' '.mysql_error()."\n".$query, 'recherche');
