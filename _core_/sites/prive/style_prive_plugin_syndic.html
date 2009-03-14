@@ -1,0 +1,71 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.filtres { margin:1em 0;clear:#GET{left};border-bottom:1px solid #GET{foncee};padding-#GET{left}:5px;}
+.filtres ul {list-style:none;margin-left:1px;padding:0;}
+.filtres ul li {float:left;padding:0;margin:0;margin-bottom:-1px;}
+
+.filtres ul li.publie strong,.filtres ul li.publie a {background-image:url(#CHEMIN{images/syndic-statut-publie-24.png});padding-#GET{right}:27px;}
+.filtres ul li.off strong,.filtres ul li.off a {background-image:url(#CHEMIN{images/syndic-statut-off-24.png});padding-#GET{right}:27px;}
+.filtres ul li.dispo strong,.filtres ul li.dispo a {background-image:url(#CHEMIN{images/syndic-statut-prop-24.png});padding-#GET{right}:27px;}
+
+.filtres ul li strong,.filtres ul li a {display:block;float:#GET{left};padding:4px 7px;border:1px solid #GET{foncee};margin-#GET{left}:5px;background-color:#eee;background-position:center right;background-repeat:no-repeat;}
+.filtres ul li strong,.filtres ul li a:hover {background-color:#f8f7f3;}
+.filtres ul li strong {border-bottom:1px solid #f8f7f3;color:#555;}
+
+.filtres.second {font-size:0.9em;border:0;padding-#GET{left}:0;}
+.filtres.second ul li strong,.filtres.second ul li a {margin-#GET{left}:0px;margin-#GET{right}:5px;margin-bottom:5px;}
+.filtres.second ul li strong {border:1px solid #GET{foncee};}
+.filtres.second ul li strong,.filtres.second ul li a:hover {background-color:#fff;}
+
+.source {font-size:12px;font-weight:bold;background:#fff;padding:5px;border:1px solid #GET{foncee};}
+.source .actions {font-weight:normal;}
+.annule_filtre {float:#GET{right};}
+
+
+/* Habillage des articles syndic en liste pour moderation
+---------------------------------------------- */
+ul.syndic_articles li.item { margin: 0; padding: 0 0 .8em 0; background: #F8F7F3 url(#CHEMIN{images/syndic-bg-item.png}); border: 0; border-top: 5px solid #ccc; }
+
+ul.syndic_articles li.statut_publie { background-image: none; border-color: #B2BF6B; }
+ul.syndic_articles li.statut_off,
+ul.syndic_articles li.statut_off.odd { background-color: #edd3d3; border-color: #FF5F5F; }
+ul.syndic_articles li.statut_dispo,
+ul.syndic_articles li.statut_dispo.odd { background-color: #FFFBEF; border-color: #EFCA68; }
+
+ul.syndic_articles li .cartouche { min-height: 30px; padding: 5px; padding-#GET{left}: 30px; border-bottom: 1px solid #eee; }
+ul.syndic_articles li.statut_off .cartouche { border-color: #edd3d3; }
+ul.syndic_articles li.statut_dispo .cartouche { border-color: #FFFBEF; }
+ul.syndic_articles li .cartouche h3 {font-size:1.1em;margin-bottom:0.25em;}
+ul.syndic_articles li .cartouche .date,ul.syndic_articles li .cartouche .par {display:inline;}
+ul.syndic_articles li .cartouche .info_statut {display:block;float:#GET{left};margin-#GET{left}:-30px;position:relative;display:inline;}
+ul.syndic_articles li .cartouche .reponse_a {font-weight:bold;}
+ul.syndic_articles li .cartouche .reponse_a a {font-weight:normal;}
+ul.syndic_articles li .cartouche .lien_admin {display:block;}
+
+ul.syndic_articles li.item .texte p { margin: 0; padding: .8em 30px; }
+
+ul.syndic_articles >li.item .actions.moderer {padding-top:5px;padding-bottom:5px;margin-#GET{right}:5px;background:url(#CHEMIN{images/actions-filigrane-24.png}) no-repeat bottom right;padding-#GET{right}:30px;}
+ul.syndic_articles >li.item:hover .actions.moderer {/*background-image:none;*/}
+ul.syndic_articles >li.item .actions.moderer > span {visibility:hidden;}
+ul.syndic_articles >li.item:hover .actions.moderer > span  {visibility:visible;}
+
+ul.syndic_articles li .actions .supprimer input.submit {color:#cf4d4d;}
