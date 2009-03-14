@@ -69,6 +69,18 @@ function Fulltext_supprimer_index($table, $nom='tout') {
     return " <strong>=> index supprim&eacute;</strong>\n";
 }
 
+function Fulltext_regenerer_index($table) {
+  if (count($keys = fulltext_keys($table)) > 0) {
+      foreach ($keys as $key=>$vals) {
+        if (!$s = spip_query($query = "ALTER TABLE ".table_objet_sql($table)." DROP INDEX ".$key))
+    	    return "<p><strong>Erreur suppression index ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre></p>\n";
+    	if (!$s = spip_query($query = "ALTER TABLE ".table_objet_sql($table)." ADD FULLTEXT ".$key." (".$vals.")"))
+    	    return "<strong>Erreur ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre><p />\n";
+      }
+      return "<p><strong>index de la table $table r&#233;g&#233;n&#233;r&#233;s</strong></p>";
+  }
+}
+
 function exec_fulltext()
 {
 	pipeline('exec_init',array('args'=>array('exec'=>'fulltext'),'data'=>''));
@@ -106,9 +118,12 @@ function exec_fulltext()
 
 	foreach($tables as $table => $vals) {
 		$keys = fulltext_keys($table);
-		
+
 		$count = sql_countsel('spip_'.table_objet($table));
 		echo "<h3>$table ($count)</h3>\n";
+		
+    if (_request('regenerer') == $table OR _request('regenerer') == 'tous')
+        echo Fulltext_regenerer_index($table);
 
 		if (!$engine = Fulltext_trouver_engine_table($table)
 		OR strtolower($engine) != 'myisam') {
@@ -172,6 +187,9 @@ function exec_fulltext()
 		$url = generer_url_ecrire(_request('exec'), 'myisam=tous');
 		echo "<p><b><a href='$url'>Convertir toutes les tables en MyISAM</a></b></p>\n";
 	}
+  
+  $url = generer_url_ecrire(_request('exec'), 'regenerer=tous');
+  echo "<p><b><a href='$url'>R&#233;g&#233;n&#233;rer tous les index FULLTEXT</a></b></p>\n";
 
 	echo fin_gauche(), fin_page();
 
