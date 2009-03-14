@@ -38,7 +38,7 @@ function Fulltext_lien_creer_index($table, $champs, $nom=null) {
 	}
 
 	$url = generer_url_ecrire(_request('exec'),
-		'table='.$table.'&#38;nom='.$nom
+		'table='.$table.'&nom='.$nom
 	);
 	return "<p><a href='$url'>Cr&#233;er l'index ".Fulltext_index($table,$champs,$nom)."</a></p>\n";
 }
@@ -108,15 +108,17 @@ function exec_fulltext()
 		OR strtolower($engine) != 'myisam') {
 			if (_request('myisam') == $table
 			OR _request('myisam') == 'tous') {
-				$s = spip_query("ALTER TABLE ".table_objet($table)." ENGINE=MyISAM");
+				$s = spip_query("ALTER TABLE ".table_objet_sql($table)." ENGINE=MyISAM");
 				if (!$s)
 					echo "<p><strong>".mysql_errno().' '.mysql_error()."</strong></p>\n";
 				else
 					echo "<p><strong>table convertie en MyISAM</strong></p>\n";
-			} else {
+			} else if ($engine) {
 				echo "<p>Cette table est au format '".$engine."'; il faut MyISAM.</p>\n";
 				echo "<p><a href='" . generer_url_ecrire(_request('exec'), 'myisam='.$table)."'>Convertir en MyISAM</a></p>\n";
 				$myisam++;
+			} else {
+				echo "<p>table non reconnue.</p>";
 			}
 		} else {
 
