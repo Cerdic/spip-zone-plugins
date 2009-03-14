@@ -52,8 +52,7 @@ function Fulltext_creer_index($table, $nom, $vals) {
 
 	if (!$s = spip_query($query = "ALTER TABLE ".table_objet_sql($table)
 	." ADD FULLTEXT ".$index))
-		return "<strong>Erreur ".mysql_errno()." ".mysql_error()."</strong>
-		<pre>$query</pre><p />\n";
+		return "<strong>Erreur ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre><p />\n";
 
 	$keys = fulltext_keys($table);
 	if (isset($keys[$nom]))
@@ -61,6 +60,13 @@ function Fulltext_creer_index($table, $nom, $vals) {
 	else
 		return "<p><strong>Erreur.</strong></p>\n";
 
+}
+
+function Fulltext_supprimer_index($table, $nom='tout') {
+	if (!$s = spip_query($query = "ALTER TABLE ".table_objet_sql($table)." DROP INDEX ".$nom))
+		return "<p><strong>Erreur suppression index ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre></p>\n";
+  else
+    return " <strong>=> index supprim&eacute;</strong>\n";
 }
 
 function exec_fulltext()
@@ -89,8 +95,8 @@ function exec_fulltext()
 	include_spip('inc/rechercher');
 	include_spip('base/abstract_sql');
 
-	$tables = liste_des_champs();
-
+  $tables = liste_des_champs();
+  
 	// Creer un index ?
 	if ($table = _request('table')
 	AND $nom = _request('nom')
@@ -124,7 +130,14 @@ function exec_fulltext()
 
 			if ($keys) {
 				foreach($keys as $key=>$def)
-					echo "<dt>$key</dt><dd>$def</dd>\n";
+					echo "<dt>$key";
+                if ($key == 'tout')
+                    if (_request('supprimer') == $table) {
+                        echo Fulltext_supprimer_index($table);
+                        continue;
+                    } else 
+                        echo ' <a href="'.generer_url_ecrire(_request('exec'), 'supprimer='.$table).'">[Supprimer]</a>';
+                echo "</dt><dd>$def</dd>\n";
 			} else
 				if (!(_request('creer') == 'tous'))
 					echo "<p>Pas d'index FULLTEXT</p>\n";
