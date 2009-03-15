@@ -36,12 +36,28 @@ function formulaires_inscription2_ajax_charger_dist($id_auteur = NULL){
 			'spip_auteurs_elargis.id_auteur ='.$id_auteur
 		);
 		$auteur['id_auteur'] = $id_auteur;
+		if(in_array('naissance',$champs)){
+			if(preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2})/",$auteur['naissance'],$date_naissance)){
+				include_spip('inc/date');
+				$auteur['annee'] = $date_naissance[1];
+				$auteur['mois'] = $date_naissance[2];
+				$auteur['jour'] = $date_naissance[3];
+			}
+		}
 		$champs = $auteur;
 	} else {	
 	    //si on est en mode création et que l'utilisateur a saisi ses valeurs on les prends en compte
 	    foreach($champs as $clef =>$valeurs) {
             if (_request($valeurs)) {
                 $champs[$valeurs] = _request($valeurs);
+            }
+            if($valeurs == 'naissance'){
+	            if(preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2})/",_request($valeurs),$date_naissance)){
+					include_spip('inc/date');
+					$champs['annee'] = $date_naissance[1];
+					$champs['mois'] = $date_naissance[2];
+					$champs['jour'] = $date_naissance[3];
+				}
             }
 	    }		
 	}
@@ -201,8 +217,15 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 	$champs = inscription2_champs_formulaire($id_auteur);
 	foreach($champs as $clef => $valeur) {
 		$valeurs[$valeur] = _request($valeur);
+		if($valeur == 'naissance'){
+			include_spip('inc/date');
+			$annee = _request('annee');
+			$mois = _request('mois');
+			$jour = _request('jour');
+			$valeurs[$valeur] = format_mysql_date($annee,$mois,$jour);
+			spip_log("on récupère la valeur du champs naissance : ".$valeurs[$valeur]);
+		}
 	}
-	
 	// Définir le login s'il a besoin de l'être
 	// NOM et LOGIN sont des champs obligatoires donc à la création il ne doivent pas être vide
 	// Après on s'en fiche s'il n'est pas dans le formulaire

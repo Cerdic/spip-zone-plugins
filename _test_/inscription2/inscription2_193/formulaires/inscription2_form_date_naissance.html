@@ -1,29 +1,3 @@
-<select name="jour" id="jour" class="forml" style="width:auto;display:inline;">
-	<?php
-	for ($i=1;$i<=31;$i++)
-		echo "<option value='$i'>$i</option>\n";
-	?>
-</select>
-	
-<select name="mois" id="mois" class="forml" style="width:auto;display:inline;">
-	<option value='01'><:inscription2:janvier:></option>
-	<option value='02'><:inscription2:fevrier:></option>
-	<option value='03'><:inscription2:mars:></option>
-	<option value='04'><:inscription2:avril:></option>
-	<option value='05'><:inscription2:mai:></option>
-	<option value='06'><:inscription2:juin:></option>
-	<option value='07'><:inscription2:juillet:></option>
-	<option value='08'><:inscription2:aout:></option>
-	<option value='09'><:inscription2:septembre:></option>
-	<option value='10'><:inscription2:octobre:></option>
-	<option value='11'><:inscription2:novembre:></option>
-	<option value='12'><:inscription2:decembre:></option>
-</select>
-	
-<select name="annee" id="annee" class="forml" style="width:auto;display:inline;">
-	<?php
-	$today_year=date('Y');
-	for ($i=$today_year;$today_year-100<=$i;$i--)
-		echo "<option value='$i'>$i</option>\n";
-	?>
-</select>
+[(#ENV{jour,01}|afficher_jour{'name="jour" id="jour" style="width:auto;display:inline;"'})]
+[(#ENV{mois,01}|afficher_mois{'name="mois" id="mois" style="width:auto;display:inline;"'})]
+[(#ENV{annee,2009}|afficher_annee{'name="annee" id="annee" style="width:auto;display:inline;"','1909','2009'})]

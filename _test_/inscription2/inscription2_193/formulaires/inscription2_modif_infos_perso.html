@@ -50,7 +50,7 @@
         [(#CONFIG{inscription2/naissance_fiche_mod}|=={on}|oui)
         <li class="editer_naissance[ (#CONFIG{inscription2/naissance_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{naissance}|oui)erreur]">
             <label><:inscription2:naissance:></label>
-            <INCLURE{fond=formulaires/inscription2_form_date_naissance}>
+            <INCLURE{fond=formulaires/inscription2_form_date_naissance}{annee}{mois}{jour}>
             [<p class='erreur'>(#ENV**{erreurs}|table_valeur{naissance})</p>]
         </li>]
 
