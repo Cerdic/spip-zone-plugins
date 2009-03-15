@@ -121,16 +121,15 @@ function exec_fulltext()
   // charset site
   $charset = strtolower(str_replace('-','',$GLOBALS['meta']['charset']));
   $necessite_conversion = false;
-  
 	foreach($tables as $table => $vals) {
     // charset table
-    $data =  sql_fetch(sql_query("SHOW CREATE TABLE ".'spip_'.table_objet($table)));
+    $data =  sql_fetch(sql_query("SHOW CREATE TABLE ".table_objet_sql($table)));
     preg_match(',DEFAULT CHARSET=([a-zA-Z0-9-]*),', $data["Create Table"], $match);
     $charset_table = strtolower(str_replace('-','',$match[1]));
-    if ($charset != $charset_table) $necessite_conversion = true;
+    if ($charset_table != '' AND $charset != $charset_table) $necessite_conversion = true;
     $keys = fulltext_keys($table);
 
-		$count = sql_countsel('spip_'.table_objet($table));
+		$count = sql_countsel($table_s);
 		echo "<h3>$table ($count)</h3>\n";
 		
     if (_request('regenerer') == $table OR _request('regenerer') == 'tous')
