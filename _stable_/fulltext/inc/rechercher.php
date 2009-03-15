@@ -280,9 +280,20 @@ spip_timer('rech');
 
 			// si on define(_FULLTEXT_WHERE_$table,'date>"2000")
 			// cette contrainte est ajoutee ici:)
-			$where = (defined('_FULLTEXT_WHERE_'.$table) AND strlen(constant('_FULLTEXT_WHERE_'.$table)))
-				? "\n\t\t\t\tWHERE ".constant('_FULLTEXT_WHERE_'.$table)
-				:'';
+			if (defined('_FULLTEXT_WHERE_'.$table))
+				$where = constant('_FULLTEXT_WHERE_'.$table);
+			else
+				$where = (!test_espace_prive()
+				AND in_array($table, array('article', 'rubrique', 'breve', 'forum', 'syndic_article')))
+					? "t.statut='publie'"
+					: "";
+			if (strlen($where))
+				$where = "\n\t\t\t\tWHERE $where";
+
+			// nombre max de resultats renvoyes par l'API
+			define('_FULLTEXT_MAX_RESULTS', 500);
+
+			// preparer la requete
 			$query =
 				"SELECT t.$_id_table, $score
 				FROM ".table_objet_sql($table)." AS t
@@ -291,7 +302,7 @@ spip_timer('rech');
 				."$where
 				GROUP BY t.$_id_table
 				ORDER BY score DESC
-				LIMIT 0,500";
+				LIMIT 0,"._FULLTEXT_MAX_RESULTS;
 			$s = sql_query($query);
 #			var_dump($query);
 #			spip_log($query,'recherche');
