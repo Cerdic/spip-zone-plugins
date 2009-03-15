@@ -294,7 +294,7 @@ spip_timer('rech');
 				LIMIT 0,500";
 			$s = sql_query($query);
 #			var_dump($query);
-			spip_log($query,'recherche');
+#			spip_log($query,'recherche');
 			if (!$s) spip_log(mysql_errno().' '.mysql_error()."\n".$query, 'recherche');
 #			exit;
 		}
