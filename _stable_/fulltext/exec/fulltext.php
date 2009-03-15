@@ -11,8 +11,6 @@ function Fulltext_trouver_engine_table($table) {
 	AND $create = array_pop($t)
 	AND preg_match('/\bENGINE=([^\s]+)/', $create, $engine))
 		return $engine[1];
-
-
 }
 
 function Fulltext_index($table, $champs, $nom=null) {
@@ -53,6 +51,7 @@ function Fulltext_creer_index($table, $nom, $vals) {
 	if (!$s = spip_query($query = "ALTER TABLE ".table_objet_sql($table)
 	." ADD FULLTEXT ".$index))
 		return "<strong>Erreur ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre><p />\n";
+  sql_optimize(table_objet_sql($table));
 
 	$keys = fulltext_keys($table);
 	if (isset($keys[$nom]))
@@ -76,6 +75,7 @@ function Fulltext_regenerer_index($table) {
     	    return "<p><strong>Erreur suppression index ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre></p>\n";
     	if (!$s = spip_query($query = "ALTER TABLE ".table_objet_sql($table)." ADD FULLTEXT ".$key." (".$vals.")"))
     	    return "<strong>Erreur ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre><p />\n";
+        sql_optimize(table_objet_sql($table));
       }
       return "<p><strong>index de la table $table r&#233;g&#233;n&#233;r&#233;s</strong></p>";
   }
@@ -121,6 +121,7 @@ function exec_fulltext()
   // charset site
   $charset = strtolower(str_replace('-','',$GLOBALS['meta']['charset']));
   $necessite_conversion = false;
+  
 	foreach($tables as $table => $vals) {
     // charset table
     $data =  sql_fetch(sql_query("SHOW CREATE TABLE ".table_objet_sql($table)));
