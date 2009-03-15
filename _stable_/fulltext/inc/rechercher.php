@@ -253,7 +253,7 @@ spip_timer('rech');
 			}
 
 			// On ajoute la premiere cle FULLTEXT de chaque jointure
-			$join = array();
+			$requete['FROM'] = array();
 			if (is_array($jointures[$table]))
 			foreach(array_keys($jointures[$table]) as $jtable) {
 				$i++;
@@ -263,12 +263,12 @@ spip_timer('rech');
 					$table_join = table_objet($jtable);
 
 					if ($jtable == 'document')
-						$join[] = "
+						$requete['FROM'][] = "
 						LEFT JOIN spip_documents_liens AS lien$i ON (lien$i.id_objet=t.$_id_table AND lien$i.objet='$table')
 						LEFT JOIN spip_${table_join} AS obj$i ON lien$i.$_id_join=obj$i.$_id_join
 						";
 					else
-						$join[] = "
+						$requete['FROM'][] = "
 						LEFT JOIN spip_${jtable}s_${table}s as lien$i ON lien$i.$_id_table=t.$_id_table
 						LEFT JOIN spip_${table_join} AS obj$i ON lien$i.$_id_join=obj$i.$_id_join
 						";
@@ -280,10 +280,11 @@ spip_timer('rech');
 
 			// si on define(_FULLTEXT_WHERE_$table,'date>"2000")
 			// cette contrainte est ajoutee ici:)
+			$requete['WHERE'] = array();
 			if (defined('_FULLTEXT_WHERE_'.$table))
-				$where = constant('_FULLTEXT_WHERE_'.$table);
+				$requete['WHERE'][] = constant('_FULLTEXT_WHERE_'.$table);
 			else
-				$where = (!test_espace_prive()
+				$requete['WHERE'][] = (!test_espace_prive()
 				AND in_array($table, array('article', 'rubrique', 'breve', 'forum', 'syndic_article')))
 					? "t.statut='publie'"
 					: "";
@@ -294,23 +295,31 @@ spip_timer('rech');
 			define('_FULLTEXT_MAX_RESULTS', 500);
 
 			// preparer la requete
-			$query =
-				"SELECT t.$_id_table, $score
-				FROM ".table_objet_sql($table)." AS t
-				"
-				. join("\n",$join)
-				."$where
-				GROUP BY t.$_id_table
-				ORDER BY score DESC
-				LIMIT 0,"._FULLTEXT_MAX_RESULTS;
-			$s = sql_query($query);
-#			var_dump($query);
-#			spip_log($query,'recherche');
+			$requete['SELECT'] = array(
+				"t.$_id_table"
+				,$score
+			);
+
+			// popularite ?
+			if (true # config : "prendre en compte la popularite
+			AND $table == 'article')
+				$requete['SELECT'][] = "t.popularite";
+
+			# "t.date"
+			# "t.note"
+
+			array_unshift($requete['FROM'], table_objet_sql($table)." AS t");
+			$requete['GROUPBY'] = array("t.$_id_table");
+			$requete['ORDERBY'] = "score DESC";
+			$requete['LIMIT'] = "0,"._FULLTEXT_MAX_RESULTS;
+			$requete['HAVING'] = '';
+
+#			var_dump($requete);
+#			spip_log($requete,'recherche');
 			if (!$s) spip_log(mysql_errno().' '.mysql_error()."\n".$query, 'recherche');
 #			exit;
 		}
 
-		else
 		$s = sql_select(
 			$requete['SELECT'], $requete['FROM'], $requete['WHERE'],
 			implode(" ",$requete['GROUPBY']),
@@ -323,9 +332,16 @@ spip_timer('rech');
 			$id = intval($t[$_id_table]);
 
 			// FULLTEXT
-			if ($fulltext)
-				$results[$table][$id]['score'] = $t['score'];
-			ELSE
+			if ($fulltext) {
+				$pts = $t['score'];
+
+				if (isset($t['popularite'])
+				AND $mpop = $GLOBALS['meta']['popularite_max'])
+					$pts *= (1+$t['popularite']/$mpop);
+
+				$results[$table][$id]['score'] = $pts;
+
+			} ELSE
 			// fin FULLTEXT
 
 			if ($options['toutvoir']
