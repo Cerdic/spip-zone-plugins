@@ -23,8 +23,11 @@ function formulaires_etiquettes_charger_dist($groupe, $id_groupe, $name, $aide_n
 	include_spip('inc/autoriser');
 	if(!$uniquement_champ
 		and (
-			!autoriser('modifier', 'groupemots', $id_groupe, $GLOBALS['visiteur_session'])
-			or !autoriser('modifier', preg_replace(',s$,','',$type_objet), $id_objet, $GLOBALS['visiteur_session'])
+			!autoriser('modifier', preg_replace(',s$,','',$type_objet), $id_objet, $GLOBALS['visiteur_session'])
+			or (
+				!$aide_liste
+				and !autoriser('modifier', 'groupemots', $id_groupe, $GLOBALS['visiteur_session'])
+			)
 		)
 	){
 		$valeurs['erreur_autorisation'] = true;
