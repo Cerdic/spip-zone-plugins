@@ -6,7 +6,7 @@ include_spip('inc/headers');
 
 
 function Fulltext_trouver_engine_table($table) {
-	if ($s = spip_query("SHOW CREATE TABLE ".table_objet_sql($table), $serveur)
+	if ($s = sql_query("SHOW CREATE TABLE ".table_objet_sql($table), $serveur)
 	AND $t = sql_fetch($s)
 	AND $create = array_pop($t)
 	AND preg_match('/\bENGINE=([^\s]+)/', $create, $engine))
@@ -48,7 +48,7 @@ function Fulltext_creer_index($table, $nom, $vals) {
 	else
 		$index = Fulltext_index($table,array($nom), $nom);
 
-	if (!$s = spip_query($query = "ALTER TABLE ".table_objet_sql($table)
+	if (!$s = sql_alter("TABLE ".table_objet_sql($table)
 	." ADD FULLTEXT ".$index))
 		return "<strong>Erreur ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre><p />\n";
   sql_optimize(table_objet_sql($table));
@@ -62,7 +62,7 @@ function Fulltext_creer_index($table, $nom, $vals) {
 }
 
 function Fulltext_supprimer_index($table, $nom='tout') {
-	if (!$s = spip_query($query = "ALTER TABLE ".table_objet_sql($table)." DROP INDEX ".$nom))
+	if (!$s = sql_alter("TABLE ".table_objet_sql($table)." DROP INDEX ".$nom))
 		return "<p><strong>Erreur suppression index ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre></p>\n";
   else
     return " <strong>=> index supprim&eacute;</strong>\n";
@@ -71,9 +71,9 @@ function Fulltext_supprimer_index($table, $nom='tout') {
 function Fulltext_regenerer_index($table) {
   if (count($keys = fulltext_keys($table)) > 0) {
       foreach ($keys as $key=>$vals) {
-        if (!$s = spip_query($query = "ALTER TABLE ".table_objet_sql($table)." DROP INDEX ".$key))
+        if (!$s = sql_alter("TABLE ".table_objet_sql($table)." DROP INDEX ".$key))
     	    return "<p><strong>Erreur suppression index ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre></p>\n";
-    	if (!$s = spip_query($query = "ALTER TABLE ".table_objet_sql($table)." ADD FULLTEXT ".$key." (".$vals.")"))
+    	if (!$s = sql_alter("TABLE ".table_objet_sql($table)." ADD FULLTEXT ".$key." (".$vals.")"))
     	    return "<strong>Erreur ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre><p />\n";
         sql_optimize(table_objet_sql($table));
       }
@@ -125,7 +125,7 @@ function exec_fulltext()
 	foreach($tables as $table => $vals) {
     // charset table
     $data =  sql_fetch(sql_query("SHOW CREATE TABLE ".table_objet_sql($table)));
-    preg_match(',DEFAULT CHARSET=([a-zA-Z0-9-]*),', $data["Create Table"], $match);
+    preg_match(',DEFAULT CHARSET=([^\s]+),', $data["Create Table"], $match);
     $charset_table = strtolower(str_replace('-','',$match[1]));
     if ($charset_table != '' AND $charset != $charset_table) $necessite_conversion = true;
     $keys = fulltext_keys($table);
@@ -140,7 +140,7 @@ function exec_fulltext()
 		OR strtolower($engine) != 'myisam') {
 			if (_request('myisam') == $table
 			OR _request('myisam') == 'tous') {
-				$s = spip_query("ALTER TABLE ".table_objet_sql($table)." ENGINE=MyISAM");
+				$s = sql_alter("TABLE ".table_objet_sql($table)." ENGINE=MyISAM");
 				if (!$s)
 					echo "<p><strong>".mysql_errno().' '.mysql_error()."</strong></p>\n";
 				else

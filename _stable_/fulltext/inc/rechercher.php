@@ -89,7 +89,7 @@ function liste_des_jointures() {
 
 
 function fulltext_keys($table, $prefix=null, $serveur=null) {
-	if ($s = spip_query("SHOW CREATE TABLE ".table_objet_sql($table), $serveur)
+	if ($s = sql_query("SHOW CREATE TABLE ".table_objet_sql($table), $serveur)
 	AND $t = sql_fetch($s)
 	AND $create = array_pop($t)
 	AND preg_match_all('/,\s*FULLTEXT\sKEY.*`(.*)`\s+[(](.*)[)]/i', $create, $keys, PREG_SET_ORDER)) {
@@ -292,9 +292,9 @@ spip_timer('rech');
 				GROUP BY t.$_id_table
 				ORDER BY score DESC
 				LIMIT 0,500";
-			$s = spip_query($query);
+			$s = sql_query($query);
 #			var_dump($query);
-#			spip_log($query,'recherche');
+			spip_log($query,'recherche');
 			if (!$s) spip_log(mysql_errno().' '.mysql_error()."\n".$query, 'recherche');
 #			exit;
 		}
