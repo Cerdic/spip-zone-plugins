@@ -130,7 +130,7 @@ function exec_fulltext()
     if ($charset_table != '' AND $charset != $charset_table) $necessite_conversion = true;
     $keys = fulltext_keys($table);
 
-		$count = sql_countsel($table_s);
+		$count = sql_countsel(table_objet_sql($table));
 		echo "<h3>$table ($count)</h3>\n";
 		
     if (_request('regenerer') == $table OR _request('regenerer') == 'tous')
