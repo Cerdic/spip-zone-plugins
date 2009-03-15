@@ -206,7 +206,7 @@ function exec_fulltext()
   // ?exec=convert_sql_utf8 => conversion base | ?exec=convert_utf8 => conversion site    
   if ($necessite_conversion) {
     $modif = (substr($charset, 0, 3) == 'iso' ? 'convert_utf8' : 'convert_sql_utf8');
-    $url = generer_url_ecrire(_request($modif));
+    $url = generer_url_ecrire($modif);
     echo "<p>Une incoh&#233;rence entre le charset de votre site et celui des 
              tables de votre base de donn&#233;es risque de fausser les recherches 
              avec caract&#232;res accentu&#233;s:
