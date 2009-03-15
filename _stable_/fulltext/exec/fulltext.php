@@ -50,34 +50,34 @@ function Fulltext_creer_index($table, $nom, $vals) {
 
 	if (!$s = sql_alter("TABLE ".table_objet_sql($table)
 	." ADD FULLTEXT ".$index))
-		return "<strong>Erreur ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre><p />\n";
+		return "<strong>"._T('spip:erreur')." ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre><p />\n";
   sql_optimize(table_objet_sql($table));
 
 	$keys = fulltext_keys($table);
 	if (isset($keys[$nom]))
-		return "<p><strong>FULLTEXT cr&#233;&#233; : $keys[$nom]</strong></p>";
+		return "<p><strong>"._T('fulltext:fulltext_cree')." : $keys[$nom]</strong></p>";
 	else
-		return "<p><strong>Erreur.</strong></p>\n";
+		return "<p><strong>"._T('spip:erreur').".</strong></p>\n";
 
 }
 
 function Fulltext_supprimer_index($table, $nom='tout') {
 	if (!$s = sql_alter("TABLE ".table_objet_sql($table)." DROP INDEX ".$nom))
-		return "<p><strong>Erreur suppression index ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre></p>\n";
+		return "<p><strong>"._T('spip:erreur')." ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre></p>\n";
   else
-    return " <strong>=> index supprim&eacute;</strong>\n";
+    return " <strong>=> "._T('fulltext:index_supprime')."</strong>\n";
 }
 
 function Fulltext_regenerer_index($table) {
   if (count($keys = fulltext_keys($table)) > 0) {
       foreach ($keys as $key=>$vals) {
         if (!$s = sql_alter("TABLE ".table_objet_sql($table)." DROP INDEX ".$key))
-    	    return "<p><strong>Erreur suppression index ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre></p>\n";
+    	    return "<p><strong>"._T('spip:erreur')." ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre></p>\n";
     	if (!$s = sql_alter("TABLE ".table_objet_sql($table)." ADD FULLTEXT ".$key." (".$vals.")"))
-    	    return "<strong>Erreur ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre><p />\n";
+    	    return "<strong>"._T('spip:erreur')." ".mysql_errno()." ".mysql_error()."</strong><pre>$query</pre><p />\n";
         sql_optimize(table_objet_sql($table));
       }
-      return "<p><strong>index de la table $table r&#233;g&#233;n&#233;r&#233;s</strong></p>";
+      return "<p><strong>"._T('fulltext:index_regenere')."</strong></p>";
   }
 }
 
@@ -96,14 +96,14 @@ function exec_fulltext()
 
 	echo "<img src='".find_in_path('fulltext.png')."' />\n";
 
-	echo propre("Voici la liste des tables connues de la recherche. Vous pouvez y ajouter des &#233;l&#233;ments FULLTEXT, cf. documentation &#224; l'adresse [->http://www.spip-contrib.net/Fulltext].");
+	echo propre(_T('fulltext:liste_tables_connues')." [->http://www.spip-contrib.net/Fulltext].");
 
 	echo debut_droite("", true);
 
 
 	include_spip('inc/autoriser');
 	if(!autoriser('webmestre'))
-		die("Page r&#233;serv&#233;e aux webmestres");
+		die(_T('fulltext:reserve_webmestres'));
 
 	// on va chercher les tables avec liste_des_champs()
 	include_spip('inc/rechercher');
@@ -142,22 +142,22 @@ function exec_fulltext()
 			OR _request('myisam') == 'tous') {
 				$s = sql_alter("TABLE ".table_objet_sql($table)." ENGINE=MyISAM");
 				if (!$s)
-					echo "<p><strong>".mysql_errno().' '.mysql_error()."</strong></p>\n";
+					echo "<p><strong>"._T('spip:erreur')." ".mysql_errno().' '.mysql_error()."</strong></p>\n";
 				else
-					echo "<p><strong>table convertie en MyISAM</strong></p>\n";
+					echo "<p><strong>"._T('fulltext:table_convertie')."</strong></p>\n";
 			} else if ($engine) {
-				echo "<p>Cette table est au format '".$engine."'; il faut MyISAM.</p>\n";
-				echo "<p><a href='" . generer_url_ecrire(_request('exec'), 'myisam='.$table)."'>Convertir en MyISAM</a></p>\n";
+				echo "<p>"._T('fulltext:table_format')." '".$engine."'; "._T('fulltext:il_faut_myisam').".</p>\n";
+				echo "<p><a href='" . generer_url_ecrire(_request('exec'), 'myisam='.$table)."'>"._T('fulltext:convertir_myisam')."</a></p>\n";
 				$myisam++;
 			} else {
-				echo "<p>table non reconnue.</p>";
+				echo "<p>"._T('fulltext:table_non_reconnue').".</p>";
 			}
 		} else {
 
 			if ($keys) {
 				foreach($keys as $key=>$def)
-					echo "<dt>$key".'<a href="'.generer_url_ecrire(_request('exec'), 'supprimer='.$table.'&index='.$key).'" title="Supprimer">
-                            <img src="'.(find_in_path('images/croix-rouge.gif')).'" alt="Supprimer"></a>';
+					echo "<dt>$key".'<a href="'.generer_url_ecrire(_request('exec'), 'supprimer='.$table.'&index='.$key).'" title="'._T('fulltext:supprimer').'">
+                            <img src="'.(find_in_path('images/croix-rouge.gif')).'" alt="'._T('fulltext:supprimer').'"></a>';
                 if (_request('supprimer') == $table AND _request('index') == $key) {
                     echo Fulltext_supprimer_index($table, $key).'</dt>';
                     continue;
@@ -165,7 +165,7 @@ function exec_fulltext()
                 echo "</dt><dd>$def</dd>\n";
 			} else
 				if (!(_request('creer') == 'tous'))
-					echo "<p>Pas d'index FULLTEXT</p>\n";
+					echo "<p>"._T('fulltext:pas_index')."</p>\n";
 
 			$champs = array_keys($vals);
 
@@ -181,36 +181,30 @@ function exec_fulltext()
 				echo Fulltext_lien_creer_index($table, $champs, 'tout');
 				$n ++;
 			}
-
 		}
-
 	}
-
 
 	// S'il y a des index a creer les proposer
 	if ($n
 	AND !(_request('creer') == 'tous')) {
 		$url = generer_url_ecrire(_request('exec'), 'creer=tous');
-		echo "<p><b><a href='$url'>Cr&#233;er tous les index FULLTEXT sugg&#233;r&#233;s</a></b></p>\n";
+		echo "<p><b><a href='$url'>"._T('fulltext:creer_tous')."</a></b></p>\n";
 	}
 
 	if ($myisam) {
 		$url = generer_url_ecrire(_request('exec'), 'myisam=tous');
-		echo "<p><b><a href='$url'>Convertir toutes les tables en MyISAM</a></b></p>\n";
+		echo "<p><b><a href='$url'>"._T('fulltext:convertir_toutes')."</a></b></p>\n";
 	}
   
   $url = generer_url_ecrire(_request('exec'), 'regenerer=tous');
-  echo "<p><b><a href='$url'>R&#233;g&#233;n&#233;rer tous les index FULLTEXT</a></b></p>\n";
+  echo "<p><b><a href='$url'>"._T('fulltext:regenerer_tous')."</a></b></p>\n";
   
   // signaler les incoherences de charset site/tables qui plantent les requetes avec accents...
   // ?exec=convert_sql_utf8 => conversion base | ?exec=convert_utf8 => conversion site    
   if ($necessite_conversion) {
     $modif = (substr($charset, 0, 3) == 'iso' ? 'convert_utf8' : 'convert_sql_utf8');
     $url = generer_url_ecrire($modif);
-    echo "<p>Une incoh&#233;rence entre le charset de votre site et celui des 
-             tables de votre base de donn&#233;es risque de fausser les recherches 
-             avec caract&#232;res accentu&#233;s:
-            <b><a href='$url'>convertir en UTF-8 pour restaurer la coh&#233;rence</a></b></p>\n";
+    echo "<p>"._T('fulltext:incoherence_charset')."<b><a href='$url'>"._T('fulltext:convertir_utf8')."</a></b></p>\n";
   }
 
 	echo fin_gauche(), fin_page();

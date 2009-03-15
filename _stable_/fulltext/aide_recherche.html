@@ -1,0 +1,83 @@
+<div id="aide_recherche">
+  <style type="text/css">
+    #aide_recherche .txt {
+      width:200px;
+      height:1.5em;
+      font-size:.9em;
+      border:1px solid #cdcdcd; 
+      background-color:#dedede;
+      padding-left:10px;
+    }
+    #aide_recherche table {
+      background-color:#ffffff;
+      font-family:Arial,Verdana,Helvetica,sans-serif;
+      color:#555555;
+      border-collapse:collapse;
+      border:1px solid #555555;
+      empty-cells:show;
+      margin:5px;
+    }
+    #aide_recherche thead {
+      /*text-align:center;*/
+      font-weight:bold;
+    }
+    #aide_recherche thead .soustitre{
+      text-align:center;
+    }
+    #aide_recherche th, #aide_recherche td {
+      border-collapse:collapse;
+      padding:5px;
+      width:300px;
+    }
+    #aide_recherche td {
+      width:450px;
+    }
+  </style>
+    <p class="soustitre"><:fulltext:fonctionnement_recherche:></p>
+    
+    <table>
+        <thead>
+            <tr>
+            <td colspan="2"><:fulltext:casse_indifferente:>
+            <br/>
+            <:fulltext:accents_pas_pris:>
+            <br/>
+            <:fulltext:utiliser_operateurs_logiques:>
+            </td>
+            </tr>
+            <tr>
+            <td colspan="2" class="soustitre"><:fulltext:exemples:></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <th><input type="text" class="txt" value="enfant étranger">&nbsp;&nbsp;&rarr;</th>
+            <td> <:fulltext:retourne:> <:fulltext:soit:> «&nbsp;enfant&nbsp;», <:fulltext:soit:> «&nbsp;étranger&nbsp;», <:fulltext:soit:> «&nbsp;enfant&nbsp;» <:fulltext:et:> «&nbsp;étranger&nbsp;».</td>
+            </tr>
+            <tr>
+            <th><input type="text" class="txt" value="+enfant +étranger">&nbsp;&nbsp;&rarr;</th>
+            <td> <:fulltext:retourne:>t «&nbsp;enfant&nbsp;» <:fulltext:et:> «&nbsp;étranger&nbsp;».</td>
+            </tr>
+            <tr>
+            <th><input type="text" class="txt" value="+enfant étranger">&nbsp;&nbsp;&rarr;</th>
+            <td> <:fulltext:retourne:> «&nbsp;enfant&nbsp;» <:fulltext:textes_premier:> <:fulltext:aussi:> «&nbsp;étranger&nbsp;».</td>
+            </tr>
+            <tr>
+            <th><input type="text" class="txt" value="+enfant -étranger">&nbsp;&nbsp;&rarr;</th>
+            <td> <:fulltext:retourne:> «&nbsp;enfant&nbsp;» <:fulltext:mais_pas:> «&nbsp;étranger&nbsp;».</td>
+            </tr>
+            <tr>
+            <th><input type="text" class="txt" value="+enfant +(>étranger <asie)">&nbsp;&nbsp;&rarr;</th>
+            <td> <:fulltext:retourne:> «&nbsp;enfant&nbsp;» <:fulltext:et:> «&nbsp;étranger&nbsp;» <:fulltext:ou_bien:> «&nbsp;enfant&nbsp;» <:fulltext:et:> «&nbsp;Asie&nbsp;» <:fulltext:textes_premier:> «&nbsp;enfant&nbsp;» <:fulltext:et:> «&nbsp;étranger&nbsp;».</td>
+            </tr>
+            <tr>
+            <th><input type="text" class="txt" value="enfan*">&nbsp;&nbsp;&rarr;</th>
+            <td> <:fulltext:retourne:> «&nbsp;enfant&nbsp;», «&nbsp;enfants&nbsp;», «&nbsp;enfance&nbsp;», «&nbsp;enfanter&nbsp;», «&nbsp;enfantillage&nbsp;».... («&nbsp;*fant&nbsp;» <:fulltext:asterisque_terminale:>.)</td>
+            </tr>
+            <tr>
+            <th><input type="text" class="txt" value="&quot;enfant étranger&quot;">&nbsp;&nbsp;&rarr;</th>
+            <td> <:fulltext:retourne:> <:fulltext:sequence_exacte:> «&nbsp;enfant étranger&nbsp;».</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

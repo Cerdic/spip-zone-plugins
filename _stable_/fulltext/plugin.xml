@@ -21,7 +21,7 @@
 	<prefix>
 	Fulltext
 	</prefix>
-
+  <fonctions>fulltext_fonctions.php</fonctions>
 	<icon>fulltext.png</icon>
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0.0;]" />
