@@ -438,6 +438,30 @@ add_variable( array(
 	'code:!strlen(%s)' => "\$GLOBALS['fin_gras']='</strong>';\n",
 ));
 add_variable( array(
+	'nom'	=>	'ouvre_ref',
+	'format'=>	_format_CHAINE,
+	'code:!strlen(%s)'=>"\$GLOBALS['ouvre_ref']='&nbsp;[';\n",
+	'code:strlen(%s)'=>"\$GLOBALS['ouvre_ref']=%s;\n"
+));
+add_variable( array(
+	'nom'	=>	'ferme_ref',
+	'format'=>	_format_CHAINE,
+	'code:!strlen(%s)'=>"\$GLOBALS['ferme_ref']=']';\n",
+	'code:strlen(%s)'=>"\$GLOBALS['ferme_ref']=%s;\n"
+));
+add_variable( array(
+	'nom'	=>	'ouvre_note',
+	'format'=>	_format_CHAINE,
+	'code:!strlen(%s)'=>"\$GLOBALS['ouvre_note']='[';\n",
+	'code:strlen(%s)'=>"\$GLOBALS['ouvre_note']=%s;\n"
+));
+add_variable( array(
+	'nom'	=>	'ferme_note',
+	'format'=>	_format_CHAINE,
+	'code:!strlen(%s)'=>	"\$GLOBALS['ferme_note']=']';\n",
+	'code:strlen(%s)'=> "\$GLOBALS['ferme_note']=%s;\n"
+));
+add_variable( array(
 	'nom' => 'puce',
 	'format' => _format_CHAINE,
 	'defaut' => defined('_SPIP19300')?"''":'"AUTO"',
@@ -446,6 +470,7 @@ add_variable( array(
 add_outil( array(
 	'id' => 'class_spip',
 	'code:spip_options' => "\$GLOBALS['class_spip']='%%style_p%%';\n\$GLOBALS['class_spip_plus']='%%style_h%%';\n%%racc_hr%%%%racc_h1%%%%racc_h2%%%%racc_i1%%%%racc_i2%%%%racc_g1%%%%racc_g2%%%%puce%%",
+	'code:fonctions'=>"%%ouvre_ref%%%%ferme_ref%%%%ouvre_note%%%%ferme_note%%",
 	'categorie' => 'public',
 	'description' => 
 	// avant SPIP 1.93 : <hr/> seulement

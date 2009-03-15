@@ -108,6 +108,10 @@ SPIP a choisi d\'utiliser la balise &lt;strong> pour transcrire les gras. Mais &
 
 SPIP a choisi d\'utiliser la balise &lt;i> pour transcrire les italiques. Mais &lt;em> aurait pu &eacute;galement convenir, avec ou sans style. &Agrave; vous de voir :[[%racc_i1%]][[->%racc_i2%]]
 
+	Vous pouvez aussi d&eacute;finir le code ouvrant et fermant pour les appels de notes de bas de pages (Attention ! Les modifications ne seront visibles que sur l\'espace public.) : [[%ouvre_ref%]][[->%ferme_ref%]]
+	
+	Vous pouvez d&eacute;finir le code ouvrant et fermant pour les notes de bas de pages : [[%ouvre_note%]][[->%ferme_note%]]
+
 @puce@ {{Les styles de SPIP par d&eacute;faut}}. Jusqu\'&agrave; la version 1.92 de SPIP, les raccourcis typographiques produisaient des balises syst&eacute;matiquement affubl&eacute;s du style &quot;spip&quot;. Par exemple : <code><p class="spip"></code>. Vous pouvez ici d&eacute;finir le style de ces balises en fonction de vos feuilles de style. Une case vide signifie qu\'aucun style particulier ne sera appliqu&eacute;.
 
 {Attention : si certains raccourcis (ligne horizontale, intertitre, italique, gras) ont &eacute;t&eacute; modifi&eacute;s ci-dessus, alors les styles ci-dessous ne seront pas appliqu&eacute;s.}
@@ -345,6 +349,8 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:max_auteurs_page' => 'Auteurs par page :',
 	'label:message_travaux' => 'Votre message de maintenance :',
 	'label:moderation_admin' => 'Valider automatiquement les messages des : ',
+	'label:ouvre_ref'		=>'Ouverture et fermeture des appels de notes de bas de page',
+	'label:ouvre_note'		=>'Ouverture et fermeture des notes de bas de page',
 	'label:paragrapher' => 'Toujours paragrapher :',
 	'label:prive_travaux' => 'Accessibilit&eacute; de l\'espace priv&eacute; pour :',
 	'label:puce' => 'Puce publique &laquo;<html>-</html>&raquo; :',
