@@ -56,22 +56,22 @@
 		<url>sites_tous</url>
 	</bouton>
 
-	<bouton id="bando_suivi">
-		<icone>images/spip/suivi-48.png</icone>
+	<bouton id="bando_publication">
+		<icone>images/spip/publication-48.png</icone>
 		<titre>bando:icone_suivi_edito</titre>
 		<url>navigation</url>
-		<args>menu=bando_suivi</args>
+		<args>menu=bando_publication</args>
 	</bouton>
-	<bouton id='suivi_edito' parent="bando_suivi">
+	<bouton id='suivi_edito' parent="bando_publication">
 		<icone>images/v1/suivi-16.png</icone>
 		<titre>bando:icone_suivi_publication</titre>
 	</bouton>
-	<bouton id='suivi_revisions' parent="bando_suivi">
+	<bouton id='suivi_revisions' parent="bando_publication">
 		<icone>images/v1/revisions-16.png</icone>
 		<titre>info_historique_titre</titre>
 	</bouton>
-	<bouton id='synchro' parent="bando_suivi">
-		<icone></icone>
+	<bouton id='synchro' parent="bando_publication">
+		<icone>images/v1/rss-16.png</icone>
 		<titre>icone_suivi_activite</titre>
 	</bouton>
 	

@@ -12,8 +12,8 @@
 		<inclure>syndic_autoriser.php</inclure>
 	</pipeline>
 
-	<bouton id='controler_syndication' parent='bando_suivi' position="-1">
-		<icone></icone>
+	<bouton id='controler_syndication' parent='bando_publication' position="-1">
+		<icone>images/v1/site-16.png</icone>
 		<titre>syndic:icone_controler_syndication</titre>
 	</bouton>
 </plugin>
