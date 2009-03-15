@@ -11,8 +11,14 @@ function genie_popularite_dist($t) {
 		array('id' => 'id_rubrique', 'lien' => 'spip_rubriques', 'table' => 'spip_rubriques')
 	);
 
-
 	foreach($tables as $desc) {
+		if (defined('_POPULARITE_TABLES')
+		AND !in_array($desc['table'], explode(',', _POPULARITE_TABLES))) {
+			spip_log('popularite: ignore '.$desc['table']);
+			next;
+		} else
+			spip_log('popularite: traiter '.$desc['table']);
+
 		$f = "select
 			sum(articles.popularite) as popularite,
 			lien.$desc[id] AS id
@@ -51,13 +57,10 @@ function genie_popularite_dist($t) {
 		GROUP BY id_rubrique')
 	) {
 		while($t = sql_fetch($s)) {
-			spip_log($t);
 			sql_update('spip_rubriques',
 			array('popularite' => 'popularite+'.$t['popularite']), 'id_rubrique='.$t['id_rubrique']);
 		}
 	}
-
-spip_log('OK2');
 
 	return true;
 }
