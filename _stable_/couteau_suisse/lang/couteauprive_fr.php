@@ -726,7 +726,7 @@ Ajoutez simplement <code><INCLURE{fond=fonds/visiteurs_connectes}></code> dans v
 	'votre_choix' => 'Votre choix :',
 
 	// W
-	'webmestres:description' => 'Un {{webmestre}} au sens SPIP est un {{administrateur}} ayant acc&egrave;s &agrave; l\'espace FTP. Par d&eacute;faut et &agrave; partir de SPIP 2.0, il est l’administrateur <code>id_auteur=1</code> du site. Les webmestres ici d&eacute;finis ont le privil&egrave;ge de ne plus &ecirc;tre oblig&eacute;s de passer par FTP pour valider les op&eacute;rations sensibles du site, comme la mise &agrave; jour de la base de donn&eacute;es ou la restauration d&rsquo;un dump.
+	'webmestres:description' => 'Un {{webmestre}} au sens SPIP est un {{administrateur}} ayant acc&egrave;s &agrave; l\'espace FTP. Par d&eacute;faut et &agrave; partir de SPIP 2.0, il est l\'administrateur <code>id_auteur=1</code> du site. Les webmestres ici d&eacute;finis ont le privil&egrave;ge de ne plus &ecirc;tre oblig&eacute;s de passer par FTP pour valider les op&eacute;rations sensibles du site, comme la mise &agrave; jour de la base de donn&eacute;es ou la restauration d&rsquo;un dump.
 
 Webmestre(s) actuel(s) : {@_CS_LISTE_WEBMESTRES@}.
 _ Administrateur(s) &eacute;ligible(s) : {@_CS_LISTE_ADMINS@}.
