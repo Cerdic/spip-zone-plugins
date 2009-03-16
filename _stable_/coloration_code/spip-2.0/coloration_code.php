@@ -27,6 +27,10 @@ if (!defined('PLUGIN_COLORATION_CODE_STYLES_INLINE')) {
 	define('PLUGIN_COLORATION_CODE_STYLES_INLINE', true);
 }
 
+// pouvoir definir la taille des tablations (defaut de geshi : 8)
+// define('PLUGIN_COLORATION_CODE_TAB_WIDTH', 4);
+
+	
 // pour utiliser le colorieur 'spip' ou 'spip2' si on
 // passe une class "spip" simplement.
 // note: le colorieur "spip" est celui present originellement dans le plugin
@@ -63,7 +67,12 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 		$geshi->enable_classes();
 		$stylecss = "<style>".$geshi->get_stylesheet()."</style>";
 	}
-	
+
+
+	if (defined('PLUGIN_COLORATION_CODE_TAB_WIDTH') and PLUGIN_COLORATION_CODE_TAB_WIDTH) {
+		$geshi->set_tab_width(PLUGIN_COLORATION_CODE_TAB_WIDTH);
+	}
+		
 	$code = echappe_retour($code);
 
 	$telecharge = 
