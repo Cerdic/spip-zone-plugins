@@ -72,6 +72,6 @@ function revision_forum($id_forum, $c=false) {
 	if ($r) {
 		sql_updateq('spip_forum', array('ip'=>($GLOBALS['ip']), 'id_auteur'=>($GLOBALS['visiteur_session']['id_auteur'])),"id_forum=".sql_quote($id_forum));
 
-		sql_update("spip_forum", array("date_thread" => "NOW()"), "id_thread=".$t);
+		sql_updateq("spip_forum", array("date_thread" => date('Y-m-d H:i:s')), "id_thread=".$t);
 	}
 }
