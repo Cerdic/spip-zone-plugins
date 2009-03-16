@@ -91,10 +91,10 @@ spip_log("action 'action_rapide' du Couteau suisse : $arg");
 		} else {
 			$row = sql_fetsel("id_objet", "spip_urls", $where);
 			if($row) {
-				sql_updateq('spip_urls', array('date'=>'NOW()', 'url'=>$url), $where);
+				sql_updateq('spip_urls', array('date'=>date('Y-m-d H:i:s'), 'url'=>$url), $where);
 				spip_log("L'URL $type#$id est remplacee par : $url");
 			} else {
-				sql_insertq('spip_urls', array('date'=>'NOW()', 'url'=>$url, 'id_objet'=>$id, 'type'=>$type));
+				sql_insertq('spip_urls', array('date'=>date('Y-m-d H:i:s'), 'url'=>$url, 'id_objet'=>$id, 'type'=>$type));
 				spip_log("L'URL $type#$id a ete cree : $url");
 			}
 		}
