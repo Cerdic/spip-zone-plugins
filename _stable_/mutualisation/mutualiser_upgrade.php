@@ -10,13 +10,15 @@ function mutualiser_upgrade() {
 	!= md5(
 	$GLOBALS['meta']['version_installee'].'-'.$GLOBALS['meta']['alea_ephemere']
 	)) {
-		echo minipres();
+		include_spip('inc/headers');
+		redirige_par_entete($GLOBALS['meta']['adresse_site'].'/ecrire/');
 		exit;
 	}
 
 	if ($GLOBALS['spip_version_base']
 	== str_replace(',','.',$GLOBALS['meta']['version_installee'])) {
-		echo minipres('Rien &#224; faire');
+		include_spip('inc/headers');
+		redirige_par_entete($GLOBALS['meta']['adresse_site'].'/ecrire/');
 		exit;
 	}
 
