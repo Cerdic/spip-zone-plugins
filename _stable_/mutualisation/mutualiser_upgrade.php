@@ -11,14 +11,14 @@ function mutualiser_upgrade() {
 	$GLOBALS['meta']['version_installee'].'-'.$GLOBALS['meta']['alea_ephemere']
 	)) {
 		include_spip('inc/headers');
-		redirige_par_entete($GLOBALS['meta']['adresse_site'].'/ecrire/');
+		redirige_par_entete($GLOBALS['meta']['adresse_site'].'/'._DIR_RESTREINT_ABS);
 		exit;
 	}
 
 	if ($GLOBALS['spip_version_base']
 	== str_replace(',','.',$GLOBALS['meta']['version_installee'])) {
 		include_spip('inc/headers');
-		redirige_par_entete($GLOBALS['meta']['adresse_site'].'/ecrire/');
+		redirige_par_entete($GLOBALS['meta']['adresse_site'].'/'._DIR_RESTREINT_ABS);
 		exit;
 	}
 
