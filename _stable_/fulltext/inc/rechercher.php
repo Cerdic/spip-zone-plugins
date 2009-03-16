@@ -235,7 +235,7 @@ spip_timer('rech');
 			// On va additionner toutes les cles FULLTEXT
 			// de la table
 			$score = array();
-			foreach ($keys as $key) {
+			foreach ($keys as $name => $key) {
 				$val = "MATCH($key) AGAINST ($p)";
 				// Une chaine exacte rapporte plein de points
 				if ($pe)
@@ -250,13 +250,15 @@ spip_timer('rech');
 				$mult = intval(sqrt(1000/$compteur))/10;
 
 				// (Compat ascendante) si un FULLTEXT porte sur un seul champ,
+				// ET est nomme de la meme facon : `titre` (`titre`)
 				// sa ponderation est eventuellement donnee par la table $liste
-				if (preg_match_all(',`(.*)`,US', $key, $regs, PREG_SET_ORDER) == 1) {
-					$cle = $regs[0][1];
-					if ($ponderation = $liste[$table][$cle])
-						$mult = $ponderation;
-				}
-				$val = "($val) * $mult";
+				if ($key == "t.`${name}`"
+				AND $ponderation = $liste[$table][$name])
+					$mult = $ponderation;
+
+				// Appliquer le coefficient multiplicatif
+				if ($mult != 1)
+					$val = "($val) * $mult";
 
 				// si symboles booleens les prendre en compte
 				if ($boolean = preg_match(', [+-><~]|\* |".*?",', " $r "))
