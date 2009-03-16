@@ -97,12 +97,12 @@ function exec_spipbb_sujet() {
 				ORDER BY date_heure LIMIT $dl,$fixlimit";
 	$res_post = spip_query($req_post);
 */
-	$res_post = sql_select("*,DATE_FORMAT(date_heure, '%d/%m/%Y %H:%i') AS dateur_post",
-							"spip_forum",
-							"id_thread=$id_sujet AND statut IN ('publie', 'off', 'prop')",
-							"",
-							"date_heure",
-							"$dl,$fixlimit");
+	$res_post = sql_select("*,DATE_FORMAT(date_heure, '%d/%m/%Y %H:%i') AS dateur_post", // select
+							"spip_forum", // from
+							"id_thread=$id_sujet AND statut IN ('publie', 'off', 'prop')", // where
+							"", //groupby
+							"date_heure", //orderby
+							"$dl,$fixlimit"); // limit
 
 	#
 	# Prepa Tranches

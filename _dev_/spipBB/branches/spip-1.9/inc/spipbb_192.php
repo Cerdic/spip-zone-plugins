@@ -378,7 +378,7 @@ function sql_select (
 	$groupby = '', $orderby = array(), $limit = '', $having = array(),
 	$serveur='')
 {
-	if ($order_by AND !$is_array($order_by)) $order_by = array($order_by);
+	if ($orderby AND !$is_array($orderby)) $orderby = array($orderby);
 
 	return spip_mysql_select($select, $from, $where, $groupby, $orderby, $limit, '', $having, '', '', $serveur);
 } } // sql_select
