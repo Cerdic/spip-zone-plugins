@@ -240,11 +240,23 @@ spip_timer('rech');
 				// Une chaine exacte rapporte plein de points
 				if ($pe)
 					$val .= "+ 2 * MATCH($key) AGAINST ($pe)";
-				// le poids d'une cle est fonction decroissante de son nombre d'elements
+
+				// Appliquer les ponderations donnees
+				// quels sont les champs presents ?
+				// par defaut le poids d'une cle est fonction decroissante
+				// de son nombre d'elements
 				// ainsi un FULLTEXT sur `titre` vaudra plus que `titre`,`chapo`
 				$compteur = preg_match_all(',`.*`,U', $key, $ignore);
 				$mult = intval(sqrt(1000/$compteur))/10;
-					$val = "($val) * $mult";
+
+				// (Compat ascendante) si un FULLTEXT porte sur un seul champ,
+				// sa ponderation est eventuellement donnee par la table $liste
+				if (preg_match_all(',`(.*)`,US', $key, $regs, PREG_SET_ORDER) == 1) {
+					$cle = $regs[0][1];
+					if ($ponderation = $liste[$table][$cle])
+						$mult = $ponderation;
+				}
+				$val = "($val) * $mult";
 
 				// si symboles booleens les prendre en compte
 				if ($boolean = preg_match(', [+-><~]|\* |".*?",', " $r "))
