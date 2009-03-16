@@ -250,10 +250,25 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
     
 	//genere le tableau des valeurs à mettre à jour pour spip_auteurs
 	//toutes les clefs qu'inscription2 peut mettre à jour
-	include_spip('inc/inscription2_compat_php4');
+	if (!function_exists('array_fill_keys')) {
+	$clefs = array('login' => '','nom' => '','email' => '','bio' => '');
+	}else{
 	$clefs = array_fill_keys(array('login','nom','email','bio'),'');
+	}
+	
 	//extrait uniquement les données qui ont été proposées à la modification
-	$val = array_intersect_key($valeurs,$clefs);
+	if (!function_exists('array_intersect_key')) {
+		$traiter_clefs = array_keys($clefs);
+		$traiter_valeurs = array_keys($valeurs);
+		$calculer_intersection = array_intersect($traiter_valeurs,$traiter_clefs);
+		$val = array();
+		foreach($calculer_intersection as $c => $v){
+			$vali = array($v => $valeurs[$v]); 	
+			$val = array_merge($val,$vali);
+			}
+	}else{
+		$val = array_intersect_key($valeurs,$clefs);
+		}
 	
 	//Vérification du password
 	if($mode == ('inscription_pass' || 'modification_auteur_pass')){
@@ -302,7 +317,18 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 	//s'appuie sur les tables definies par le plugin
 	$clefs = $tables_principales[$table]['field'];
 	//extrait uniquement les données qui ont été proposées à la modification
-	$val = array_intersect_key($valeurs,$clefs);
+	if (!function_exists('array_intersect_key')) {
+		$traiter_clefs = array_keys($clefs);
+		$traiter_valeurs = array_keys($valeurs);
+		$calculer_intersection = array_intersect($traiter_valeurs,$traiter_clefs);
+		$val = array();
+		foreach($calculer_intersection as $c => $v){
+			$vali = array($v => $valeurs[$v]); 	
+			$val = array_merge($val,$vali);
+			}
+	}else{
+		$val = array_intersect_key($valeurs,$clefs);
+		}
 	unset($val['login']);
 	//recherche la presence d'un complément sur l'auteur
 	$id_elargi = sql_getfetsel('id_auteur','spip_auteurs_elargis','id_auteur='.$id_auteur);
