@@ -95,6 +95,7 @@ function charger_lectures($langue, $jour){
 		$tableau['evangile']['texte'] = $textes[2];
 		$tableau['evangile'] = preg_replace(',</?font\b.*>,UimsS', '', $tableau['evangile']);
 		$tableau['evangile'] = preg_replace(',</?br\b.*>,UimsS', '<br />', $tableau['evangile']);
+		$tableau['evangile'] = str_replace('©', '&copy;', $tableau['evangile']);
 		// Traitement de la premiere lecture
 		$url = "http://www.levangileauquotidien.org/ind-gospel-d.php?language=".$code_langue."&typeRead=FR".$url_date;
 		$textes = extraire_balises(recuperer_page($url), 'font');
@@ -103,6 +104,7 @@ function charger_lectures($langue, $jour){
 		$tableau['premiere']['texte'] = $textes[2];
 		$tableau['premiere'] = preg_replace(',</?font\b.*>,UimsS', '', $tableau['premiere']);
 		$tableau['premiere'] = preg_replace(',</?br\b.*>,UimsS', '<br />', $tableau['premiere']);
+		$tableau['premiere'] = str_replace('©', '&copy;', $tableau['premiere']);
 		// Traitement de la seconde lecture - uniquement le dimanche
 		if (date2jour_semaine($date) == 0) {
 			$url = "http://www.levangileauquotidien.org/ind-gospel-d.php?language=".$code_langue."&typeRead=SR".$url_date;
@@ -112,6 +114,7 @@ function charger_lectures($langue, $jour){
 			$tableau['seconde']['texte'] = $textes[2];
 			$tableau['seconde'] = preg_replace(',</?font\b.*>,UimsS', '', $tableau['seconde']);
 			$tableau['seconde'] = preg_replace(',</?br\b.*>,UimsS', '<br />', $tableau['seconde']);
+			$tableau['seconde'] = str_replace('©', '&copy;', $tableau['seconde']);
 		}
 		// Traitement du psaume
 		$url = "http://www.levangileauquotidien.org/ind-gospel-d.php?language=".$code_langue."&typeRead=PS".$url_date;
@@ -124,6 +127,7 @@ function charger_lectures($langue, $jour){
 		$tableau['psaume']['texte'] = $textes[2];
 		$tableau['psaume'] = preg_replace(',</?font\b.*>,UimsS', '', $tableau['psaume']);
 		$tableau['psaume'] = preg_replace(',</?br\b.*>,UimsS', '<br />', $tableau['psaume']);
+		$tableau['psaume'] = str_replace('©', '&copy;', $tableau['psaume']);
 
  		ecrire_fichier($f, serialize($tableau));
 	}
