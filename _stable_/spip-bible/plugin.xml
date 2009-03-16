@@ -3,7 +3,7 @@
     <auteur>
     Auteur originel : Ma&iuml;eul Rouquette 
     Auteur associ&eacute; : Teddy Payet
-    Id&eacute; du presse-papier : Cerdic
+    Id&eacute;e du presse-papier : Cerdic
     Licence : GPL3
     </auteur>
     <version>
@@ -31,6 +31,7 @@ Ces options sont :
 -* "traduction"	=> Pour choisir la traduction.
 	La liste des traductions disponibles est sur [Spip-Contrib->http://www.spip-contrib.net/Spip-Bible-traductions-disponibles]
 	
+	La documentation de la fonction "presse-papier" [est sur contrib-http://www.spip-contrib.net/Spip-Bible-le-presse-papier].
 	En l'absence des ces param&eacute;tres, les valeurs seront celle d&eacute;finies [sur la page de configuration->?exec=cfg&amp;cfg=bible].
 	
 	
