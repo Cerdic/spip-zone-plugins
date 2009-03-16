@@ -34,7 +34,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_numeros'		=>	"Afficher les n° de chapitres et de versets dans le corps du texte",
 	'pas_livre'			=>"L'abr&eacute;viation du livre demandé n'existe pas dans cette traduction",
 	'police_hbo'		=>"Faut-il imposer une police spécial pour l'hébreu ?",
-	'traduction_pas_dispo'	=> "La traduction de la Bible demand&eacute;e n'existe pas"
+	'traduction_pas_dispo'	=> "La traduction de la Bible demand&eacute;e n'existe pas",
+	
+	/* le presse papier biblique */
+	'presse_papier_titre'    => 'Presse Papier Biblique',
+	'presse_papier'          => 'Taper ici le code d\'appel &agrave; un passage biblique',
+	'presse_papier_resultat' => 'Texte correspondant'
 );
 
 

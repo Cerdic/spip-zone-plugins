@@ -6,4 +6,17 @@ function bible_insert_head($flux){
 
 }
 
+function bible_affiche_droite($flux){
+    global $spip_version_branche;
+    
+    /* on n'affiche le presse-papier bible que si on est sur une page d'édition*/
+    if (ereg('edit',$flux['args']['exec'])==false or ereg('^1',$spip_version_branchee) == true){
+            return $flux;
+    }
+    
+    $fond = recuperer_fond('fonds/bible_presse_papier');
+    $flux['data'] .= $fond;
+    return $flux;
+}
+
 ?>

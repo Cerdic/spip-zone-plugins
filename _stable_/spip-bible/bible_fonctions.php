@@ -4,6 +4,30 @@ Maïeul Rouquette Licence GPL 3
 Spip-Bible
 */
 include_spip('inc/bible_tableau');
+function bible_supprimer_retour($texte){
+   
+    $texte = ereg_replace("\t",'',$texte);
+    $texte = ereg_replace("[\s]*<br />",'<br />',$texte);
+    $texte = ereg_replace("[\s]*<sup>",'<sup>',$texte);
+    $texte = ereg_replace("</sup>[\s]*",'</sup>',$texte);
+    $texte = ereg_replace("[\t]*",'',$texte);
+    $texte = ereg_replace("[\t]*",'',$texte);
+    
+  while(eregi('  ',$texte)){
+    $texte = ereg_replace("  ",'',$texte);
+  }
+  
+  while (eregi("[\r|\n][\r|\n]",$texte)){
+    $texte = eregi_replace("[\r|\n][\r|\n]",'',$texte);
+  
+  }
+    $texte = eregi_replace("\n<br />","<br />",$texte);
+    $texte = eregi_replace("<quote>","<quote>\n",$texte);
+    $texte = eregi_replace("<br />","<br />\n",$texte);
+    $texte = eregi_replace("</quote>","\n\n</quote>",$texte);
+    $texte = eregi_replace("<p>","\n\n",$texte);
+ return $texte;
+}
 function traduire_abreviation($abrev,$lang_original,$lang_traduction){
 	$tableau_gateway = bible_tableau("gateway");
 	$livre = eregi_replace('[0-9|,|-]+$','',$abrev);

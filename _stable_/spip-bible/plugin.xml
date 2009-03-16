@@ -3,10 +3,11 @@
     <auteur>
     Auteur originel : Ma&iuml;eul Rouquette 
     Auteur associ&eacute; : Teddy Payet
+    Id&eacute; du presse-papier : Cerdic
     Licence : GPL3
     </auteur>
     <version>
-    1.5.5
+    1.6
     </version>
     <etat>
     stable
@@ -39,10 +40,15 @@ Ces options sont :
     bible
     </prefix>
     <pipeline>
-   <nom>insert_head</nom>
-   <action>insert_head</action>
-   <inclure>bible_pipelines.php</inclure>
-	</pipeline>
+        <nom>insert_head</nom>
+        <action>insert_head</action>
+        <inclure>bible_pipelines.php</inclure>
+    </pipeline>
+    <pipeline>
+        <nom>affiche_droite</nom>
+        <action>affiche_droite</action>
+        <inclure>bible_pipelines.php</inclure>
+    </pipeline>
 	<options>bibles_options.php</options>
 	<fonctions>bible_fonctions.php</fonctions>
    
