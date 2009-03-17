@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_indenter' => 'Indenter une liste',
 'barre_desindenter' => 'D&eacute;sindenter une liste',
 'barre_inserer_caracteres' => 'Insérer des caractères spécifiques',
+'barre_barre' => 'Barrer le texte',
 
 'editer'=>'&Eacute;diter',
 'voir'=>'Voir',
