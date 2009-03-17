@@ -327,8 +327,7 @@
 				}
 			}
 
-			if (isset($GLOBALS['meta']['spip_formulaires_version'])) {
-				include_spip('formulaires_fonctions');
+			if (function_exists('formulaires_remplacer_raccourci')) {
 				$message_html	= formulaires_remplacer_raccourci($message_html, $this->email);
 				$message_texte	= formulaires_remplacer_raccourci($message_texte, $this->email);
 			}

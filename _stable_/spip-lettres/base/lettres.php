@@ -303,7 +303,9 @@
 						ecrire_metas();
 					}
 					if ($version_base < 3.8) {
-						creer_base();
+						maj_tables('spip_lettres');
+						sql_alter("TABLE spip_lettres DROP idx");
+						sql_drop_table('spip_documents_lettres', true);
 						ecrire_meta('spip_lettres_utiliser_descriptif', 'non');
 						ecrire_meta('spip_lettres_utiliser_chapo', 'non');
 						ecrire_meta('spip_lettres_fond_lettre_titre', 'lettre_titre');
