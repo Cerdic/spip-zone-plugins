@@ -101,7 +101,7 @@ function exec_spipbb_sujet() {
 							"spip_forum", // from
 							"id_thread=$id_sujet AND statut IN ('publie', 'off', 'prop')", // where
 							"", //groupby
-							"date_heure", //orderby
+							array("date_heure"), //orderby
 							"$dl,$fixlimit"); // limit
 
 	#
