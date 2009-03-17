@@ -18,56 +18,80 @@ define('_TAG_OOO_BREAK_P',
 	.'text:h|'
 	.'text:list|text:list-item|'
 	.'table:table|table:table-column|table:table-row|table:table-cell|'
-	.'text:table-of-content|text:index-title|text:index-body'
+	.'text:table-of-content|text:index-title|text:index-body|'
+	// styles
+	.'style:header|style:master-page'
 );
 
 // retablir les boucles et autres tags du squelette
 function inc_spip2odt_styliser($odf_dir, $contexte){
 	// pas de fond dans le contexte
 	unset($contexte['fond']);
-	
+
+	compiler_xml_oasis($odf_dir . "content.xml", $contexte);
+	compiler_xml_oasis($odf_dir . "styles.xml", $contexte);
+
+	spip2odt_ajouter_styles_perso("templates/styles.xml", $odf_dir . "styles.xml");
+
+	spipoasis_ecrire_meta($odf_dir, $contexte);
+}
+
+/*
+ * Compile le fichier indique, sauve le resultat sous le meme nom de fichier
+ * et retourne le resultat de la compilation.
+ * 
+ * Il faut retablir la syntaxe correcte des boucles SPIP au prealable
+ */
+function compiler_xml_oasis($fichier, $contexte) {
+
+	// separer nom, extension...
+	$infos = pathinfo($fichier);
+	$dir = $infos['dirname'] . '/';
+	$ext = $infos['extension'];
+	$nom = substr($infos['basename'], 0, -(strlen($ext)+1));
+
 	// lire le content
-	lire_fichier($odf_dir."content.xml",$texte);
+	lire_fichier($fichier, $texte);
 
 	// retablir les boucles
-	$texte = preg_replace(",&lt;([/]?B(.*))&gt;,U","<\\1>",$texte);
+	$texte = preg_replace(",&lt;([/]?B(.*))&gt;,U","<\\1>", $texte);
 	
 	// retablir les includes
-	$texte = preg_replace(",&lt;([/]?INCLU[RD]E(.*))&gt;,U","<\\1>",$texte);
+	$texte = preg_replace(",&lt;([/]?INCLU[RD]E(.*))&gt;,U","<\\1>", $texte);
 	
 	// falsifier l'en tete xml
-	$texte = preg_replace(",^<"."[?]xml,","<@XML",$texte);
+	$texte = preg_replace(",^<"."[?]xml,","<@XML", $texte);
 
 	// ajouter les directives de cache/charset et mime-type
 	$texte = "#"."CACHE{0}
 	#"."HTTP_HEADER{Content-type: text/xml; charset=UTF-8}
 	$texte";
 
+
 	// ecrire le squelette et le fichier fonctions associe
-	ecrire_fichier(_DIR_TMP."content.html",$texte);
-	lire_fichier(_DIR_PLUGIN_SPIPODF."content_fonctions.php",$fonctions);
-	ecrire_fichier(_DIR_TMP."content_fonctions.php",$fonctions);
-	
+	ecrire_fichier(_DIR_TMP . $nom . ".html", $texte);
+	lire_fichier(_DIR_PLUGIN_SPIPODF . $nom . "_fonctions.php", $fonctions);
+	ecrire_fichier(_DIR_TMP . $nom . "_fonctions.php", $fonctions);
+
 	// calculer le fond
 	include_spip('inc/assembler');
-	$texte = recuperer_fond(_DIR_TMP."content",$contexte);
-
+	$texte = recuperer_fond(_DIR_TMP . $nom, $contexte);
+	
 	// nettoyer
 	@unlink(_DIR_TMP."content_fonctions.php");
 	@unlink(_DIR_TMP."content.html");
 
-	$texte = preg_replace(",^<@XML,","<"."?xml",$texte);
+	$texte = preg_replace(",^<@XML,","<"."?xml", $texte);
 
 	// convertir les balises html ajoutees par propre en tags xml
-	$texte = spip2odt_convertir($texte,$odf_dir);
+	$texte = spip2odt_convertir($texte, $dir);
 
-	ecrire_fichier($odf_dir."content.xml",$texte);
-	
-	spipoasis_ecrire_meta($odf_dir,$contexte);
+	ecrire_fichier($fichier, $texte);
+
 }
 
 
-function spip2odt_convertir($texte,$dossier){
+function spip2odt_convertir($texte, $dossier){
 	#include_spip('inc/xml');
 	#$xml = spip_xml_parse($texte);
 	#var_dump($xml);
@@ -79,13 +103,13 @@ function spip2odt_convertir($texte,$dossier){
 	//$texte = str_replace($puce,"<p />* ",$texte);
 	
 	// remplacer les br par des p
-	$texte = preg_replace(",<br(\s*/)?>,ims","<p />",$texte);
+	$texte = preg_replace(",<br(\s*/)?>,ims","<p />", $texte);
 	
 	// supprimer les styles enligne (comme geshi)
-	$texte = preg_replace(",<style(\s[^>]*)?>.*</style>,Uims","",$texte);
+	$texte = preg_replace(",<style(\s[^>]*)?>.*</style>,Uims","", $texte);
 	
 	// faire un heritage des <p>
-	$texte = spip2odt_heriter_p($texte,$dossier);
+	$texte = spip2odt_heriter_p($texte, $dossier);
 	
 	
 	// on ajoute ici des paragraphe, donc a faire avant reparagraphage
@@ -94,14 +118,11 @@ function spip2odt_convertir($texte,$dossier){
 	// transmettre les paragraphes aux enfants
 	$texte = spip2odt_reparagrapher($texte);
 	
-	// ajouter les styles
-	$texte = spip2odt_ajouter_styles($texte,$dossier);
-
-	$texte = unicode2charset(html2unicode($texte,true),'utf-8');
-	$texte = str_replace("&nbsp;"," ",$texte);
+	$texte = unicode2charset(html2unicode($texte, true), 'utf-8');
+	$texte = str_replace("&nbsp;", " ", $texte);
 	
 	//securisons tout ce qui n'est pas un tag xml odt
-	$splits = preg_split(",(</?[a-z]+[:][a-z]+[^<>]*>),Ui",$texte,null,PREG_SPLIT_DELIM_CAPTURE);
+	$splits = preg_split(",(</?[a-z]+[:][a-z]+[^<>]*>),Ui", $texte, null, PREG_SPLIT_DELIM_CAPTURE);
 	$texte = array_shift($splits);
 	while (count($splits))
 		$texte .= array_shift($splits).str_replace(array('<','>'),array('&lt;','&gt;'),array_shift($splits));
@@ -170,7 +191,7 @@ function spip2odt_convertir_tags_blocs($texte){
 	$texte = preg_replace(",</(div|"._TAGS_BLOCS_TO_P.")>,is","</text:p>",$texte);
 	return $texte;
 }
-function spip2odt_analyser_tables($texte,$no_table_spip){
+function spip2odt_analyser_tables($texte, $no_table_spip){
 	$avant = "";
 	$tag = "";
 	$content = "";
@@ -403,13 +424,16 @@ function spip2odt_reparagrapher($texte){
 	return $texte;
 }
 
-function spip2odt_ajouter_styles($texte,$dossier){
+/*
+ * Ajoute des styles de presentation personnalises
+ * a un fichier de presentation de oasis (styles.xml)
+ */
+function spip2odt_ajouter_styles_perso($fichier_perso, $fichier_oasis){
 
+	lire_fichier($fichier_oasis, $styles);
 	
-	lire_fichier($dossier . "styles.xml",$styles);
-	
-	$f = find_in_path('templates/styles.xml');
-	lire_fichier($f,$styles_defaut);
+	$f = find_in_path($fichier_perso);
+	lire_fichier($f, $styles_defaut);
 	$ajout_styles = "";
 	if (preg_match_all(",<((style:style|text:list-style|text:outline-style)\s[^/>]*)(/>|>.*</(\\2)>),Uims",$styles_defaut,$matches,PREG_SET_ORDER)){
 		foreach($matches as $match){
@@ -421,8 +445,8 @@ function spip2odt_ajouter_styles($texte,$dossier){
 		}
 	}
 	$styles = str_replace('</office:styles>',$ajout_styles.'</office:styles>',$styles);	
-	ecrire_fichier($dossier . "styles.xml",$styles);
-	return $texte;
+	ecrire_fichier($fichier_oasis, $styles);
+
 }
 
 ?>
