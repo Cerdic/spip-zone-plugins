@@ -91,7 +91,7 @@ $logo_libelles = array(
 		       'id_sondage' => _T('sondages:logo_sondage'),
 		       'id_plan' => _T('plans:logo_plan'),
 		       'id_point' => _T('plans:logo_point'),
-		       'id_notification' => _T('notifications:logo_notifications')
+		       'id_notification' => _T('facteur:logo_notifications')
 		       );
 
 // http://doc.spip.org/@indiquer_logo
