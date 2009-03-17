@@ -5,7 +5,7 @@
 
 
 		'logo_notifications' => "LOGO DES NOTIFICATIONS",
-		'configuration_notifications' => 'Notifications',
+		'configuration_facteur' => 'Facteur',
 		'configuration_adresse_envoi' => "Configuration de l'adresse d'envoi",
 		'utiliser_reglages_site' => "Utiliser les réglages du site SPIP : le nom affiché sera le nom du site SPIP et l'adresse email sera celle du webmaster",
 		'personnaliser' => "Personnaliser ces réglages",
