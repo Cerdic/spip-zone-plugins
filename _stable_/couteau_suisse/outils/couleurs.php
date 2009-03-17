@@ -107,7 +107,7 @@ function couleurs_rempl($texte) {
 		if(_COULEURS_FONDS===1)
 			$texte = preg_replace(",\[(bg|fond)\s+($outil_couleurs[1])\],", '<span style="background-color:$2;">', $texte);
 		// et toutes les balises de fin...
-		$texte = preg_replace(",\[/(couleur|$outil_couleurs[0]|color|$outil_couleurs[1])\],", '</span>', $texte);
+		$texte = preg_replace(",\[/(bg|fond)?\s*(couleur|$outil_couleurs[0]|color|$outil_couleurs[1])\],", '</span>', $texte);
 	} 
 	// cas des couleurs personnalisees
 	elseif(_COULEURS_SET===1) {
