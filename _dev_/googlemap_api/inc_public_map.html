@@ -24,7 +24,7 @@
 			#SET{latitude,#LAT}]
 		[(#ENV{lonxitude}|non)
 			#SET{lonxitude,#LONX}]
-		[(#ENV{zoommapa}|non)
+		[(#ENV{zoom}|non)
 			#SET{zoommapa,#ZOOM}]
 	</BOUCLE_centrer_article>
 		<BOUCLE_centrer_rubrique(GIS){id_rubrique?}{0,1}>
@@ -32,7 +32,7 @@
 				#SET{latitude,#LAT}]
 			[(#ENV{lonxitude}|non)
 				#SET{lonxitude,#LONX}]
-			[(#ENV{zoommapa}|non)
+			[(#ENV{zoom}|non)
 				#SET{zoommapa,#ZOOM}]
 		</BOUCLE_centrer_rubrique>
 	<//B_centrer_article>
