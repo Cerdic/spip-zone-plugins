@@ -271,18 +271,19 @@
 
 			switch ($this->format) {
 				case 'html':
-					$notification = new Notification($this->email, $objet, $message_html, '');
+					$corps = array('html' => $message_html, 'texte' => '');
 					break;
 				case 'texte':
-					$notification = new Notification($this->email, $objet, '', $message_texte);
+					$corps = array('html' => '', 'texte' => $message_texte);
 					break;
 				case 'mixte':
 				default:
-					$notification = new Notification($this->email, $objet, $message_html, $message_texte);
+					$corps = array('html' => $message_html, 'texte' => $message_texte);
 					break;
 			}
 
-			return $notification->Send();
+			$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
+			return $envoyer_mail($this->email, $objet, $corps);
 		}
 
 
@@ -339,18 +340,19 @@
 			
 			switch ($this->format) {
 				case 'html':
-					$notification = new Notification($this->email, $objet, $message_html, '');
+					$corps = array('html' => $message_html, 'texte' => '');
 					break;
 				case 'texte':
-					$notification = new Notification($this->email, $objet, '', $message_texte);
+					$corps = array('html' => '', 'texte' => $message_texte);
 					break;
 				case 'mixte':
 				default:
-					$notification = new Notification($this->email, $objet, $message_html, $message_texte);
+					$corps = array('html' => $message_html, 'texte' => $message_texte);
 					break;
 			}
 
-			return $notification->Send();
+			$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
+			return $envoyer_mail($this->email, $objet, $corps);
 		}
 		
 		
@@ -460,8 +462,9 @@
 				$objet			= recuperer_fond('notifications/notification_suppression_abonne_titre', array('email' => $this->email));
 				$message_html	= recuperer_fond('notifications/notification_suppression_abonne_html', array('email' => $this->email));
 				$message_texte	= recuperer_fond('notifications/notification_suppression_abonne_texte', array('email' => $this->email));
-				$notification = new Notification($GLOBALS['meta']['email_webmaster'], $objet, $message_html, $message_texte);
-				$notification->Send();
+				$corps = array('html' => $message_html, 'texte' => $message_texte);
+				$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
+				$envoyer_mail($GLOBALS['meta']['email_webmaster'], $objet, $corps);
 			}
 			$req = sql_select('*', 'spip_abonnes_statistiques', 'periode="'.date('Y-m').'"');
 			if (sql_count($req) == 0)

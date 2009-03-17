@@ -7,7 +7,7 @@
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
 	<description>Gestion de lettres d'information</description>
 	<necessite id="SPIP" version="[2.0.3;]" />
-	<necessite id="notifications" version="[2.2;]" />
+	<necessite id="facteur" version="[1;]" />
 	<necessite id="surcharges" version="[1.4;]" />
 	<install>base/lettres.php</install>
 	<lien>[Site officiel du plugin->http://www.artego.fr/-Lettre-d-information-]</lien>

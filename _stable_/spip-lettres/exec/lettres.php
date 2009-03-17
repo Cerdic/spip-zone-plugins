@@ -314,8 +314,8 @@
 
 		if (isset($_GET['message'])) {
 			echo '<div style="padding: 10px; border: 1px solid red; margin-bottom: 15px; background: #fff; color: red; font-weight: bold; text-align: center;">';
-			echo _T('lettresprive:'.$_GET['message']);
 			echo '<div style="float: right;"><a href="'.generer_url_ecrire('lettres', 'id_lettre='.$lettre->id_lettre).'">'.http_img_pack('croix-rouge.gif', "x", "").'</a></div>';
+			echo _T('lettresprive:'.$_GET['message']);
 			echo '</div>';
 		}
 

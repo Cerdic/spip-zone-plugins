@@ -19,7 +19,7 @@
 	include_spip('inc/lettres_pipelines');
 	include_spip('public/lettres_balises');
 	include_spip('public/lettres_boucles');
-	include_spip('inc/notifications_classes');
+	include_spip('facteur_fonctions');
 
 
 	function lettres_verifier_validite_email($email) {
