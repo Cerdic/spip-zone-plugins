@@ -94,7 +94,6 @@
 		$facteur_smtp_sender			= $GLOBALS['meta']['facteur_smtp_sender'];
 		$facteur_filtre_images			= $GLOBALS['meta']['facteur_filtre_images'];
 		$facteur_filtre_css				= $GLOBALS['meta']['facteur_filtre_css'];
-		$facteur_filtre_accents			= $GLOBALS['meta']['facteur_filtre_accents'];
 		$facteur_filtre_iso_8859		= $GLOBALS['meta']['facteur_filtre_iso_8859'];
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
