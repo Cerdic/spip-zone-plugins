@@ -1175,11 +1175,13 @@ if(!function_exists('genie_optimiser')) {
 add_outil( array(
 	'id' => 'trousse_balises',
 	'categorie' => 'spip',
+	'contrib' => 3005,
 ));
 
 add_outil( array(
 	'id' => 'horloge',
 	'categorie' => 'spip',
+	'contrib' => 2998,
 	'pipelinecode:insert_head,
 	 pipelinecode:header_prive' => '$flux.=\'<script type="text/javascript" src="\'.generer_url_public(\'cout_dates.js\',\'lang=\'.$GLOBALS[\'spip_lang\']).\'"></script>
 <script type="text/javascript" src="'.url_absolue(find_in_path("outils/jquery.jclock.js")).'"></script>\'."\n";',
