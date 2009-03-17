@@ -212,7 +212,8 @@
 				$destinataire = $GLOBALS['meta']['email_webmaster'];
 			$message_html	= recuperer_fond('notifications/notification_test_html', array());
 			$message_texte	= recuperer_fond('notifications/notification_test_texte', array());
-			$test = new Notification($destinataire, _T('facteur:notification_de_test'), $message_html, $message_texte);
+
+			$test = new Facteur($destinataire, _T('facteur:notification_de_test'), $message_html, $message_texte);
 			if (!$test->Send()) {
   			  echo '<p>'._T('facteur:erreur').' : '.$test->ErrorInfo.'</p>';
 			} else {

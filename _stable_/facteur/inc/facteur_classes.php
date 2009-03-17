@@ -5,9 +5,9 @@
 	include_spip('phpmailer/class.smtp');
 	include_spip('facteur_fonctions');
 
-	class Notification extends PHPMailer {
+	class Facteur extends PHPMailer {
 
-		public function Notification($email, $objet, $message_html, $message_texte) {
+		public function Facteur($email, $objet, $message_html, $message_texte) {
 
 			if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui') {
 				$this->From		= $GLOBALS['meta']['facteur_adresse_envoi_email'];

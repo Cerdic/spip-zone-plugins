@@ -5,7 +5,7 @@
 
 
 		'logo_notifications' => "LOGO OF NOTIFICATIONS",
-		'configuration_notifications' => 'Notifications',
+		'configuration_notifications' => 'Postman',
 		'configuration_adresse_envoi' => "Sender's address",
 		'utiliser_reglages_site' => "Use the site's settings : the email address is the webmaster's one and the name of the website is the name of the sender",
 		'personnaliser' => "Customize",

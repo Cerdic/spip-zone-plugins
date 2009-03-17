@@ -14,7 +14,7 @@
 		} else {
 			$message_texte	= $corps;
 		}
-		$notification = new Notification($destinataire, $sujet, $message_html, $message_texte);
+		$notification = new Facteur($destinataire, $sujet, $message_html, $message_texte);
 		if (!empty($from))
 			$notification->From = $from;
 		if (count($pieces_jointes)) {
