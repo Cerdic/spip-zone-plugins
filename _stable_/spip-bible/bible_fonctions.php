@@ -26,6 +26,7 @@ function bible_supprimer_retour($texte){
     $texte = eregi_replace("<br />","<br />\n",$texte);
     $texte = eregi_replace("</quote>","\n\n</quote>",$texte);
     $texte = eregi_replace("<p>","\n\n",$texte);
+    $texte = eregi_replace("</p>","\n\n",$texte);
  return $texte;
 }
 function traduire_abreviation($abrev,$lang_original,$lang_traduction){
