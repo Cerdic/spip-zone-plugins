@@ -1,6 +1,6 @@
 <?php
 
-function formulaires_contact_avance_charger_dist($id_auteur){	
+function formulaires_contact_avance_charger_dist($id_auteur=''){	
 	$valeurs = array();
 	
 	$valeurs['email_contact'] = '';
@@ -59,7 +59,7 @@ function formulaires_contact_avance_charger_dist($id_auteur){
 	return $valeurs;
 }
 
-function formulaires_contact_avance_verifier_dist($id_auteur){
+function formulaires_contact_avance_verifier_dist($id_auteur=''){
 	$erreurs = array();
 	include_spip('inc/filtres');
 	
@@ -98,7 +98,7 @@ function formulaires_contact_avance_verifier_dist($id_auteur){
 	return $erreurs;
 }
 
-function formulaires_contact_avance_traiter_dist($id_auteur){
+function formulaires_contact_avance_traiter_dist($id_auteur=''){
 	
 	include_spip('base/abstract_sql');
 	
