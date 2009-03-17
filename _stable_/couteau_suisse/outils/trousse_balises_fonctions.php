@@ -1,5 +1,13 @@
 <?php
 
+// La balise #CHR, equivalent a #EVAL{"chr(XX)"}
+function balise_CHR_dist($p) {
+	if (($v = interprete_argument_balise(1,$p))!==NULL){
+		$p->code = "chr(intval($v))";
+		$p->type = 'php';
+	}
+	return $p;   
+}
 // La balise #BOLO
 // inspiree des travaux de Cyril Marion : http://www.spip-contrib.net/Balise-BOLO
 function balise_BOLO_dist($p) {
