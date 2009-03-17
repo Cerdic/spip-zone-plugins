@@ -52,7 +52,7 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 	
 	if ($language=='spip') $language = PLUGIN_COLORATION_CODE_COLORIEUR_SPIP;
 	
-	include_once _DIR_PLUGIN_COLORATION_CODE . '/geshi/geshi.php';
+	include_spip('geshi/geshi');
 	//
 	// Create a GeSHi object
 	//
@@ -76,8 +76,8 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 	$code = echappe_retour($code);
 
 	$telecharge = 
-		(PLUGIN_COLORATION_CODE_TELECHARGE || in_array('telecharge', $params))
-	 && (strpos($code, "\n") !== false) && !in_array('sans_telecharge', $params);
+		(PLUGIN_COLORATION_CODE_TELECHARGE || in_array('telechargement', $params))
+	 && (strpos($code, "\n") !== false) && !in_array('sans_telechargement', $params);
 	if ($telecharge) {
 		// Gerer le fichier contenant le code au format texte
 		$nom_fichier = md5($code);
