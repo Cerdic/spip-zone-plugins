@@ -158,6 +158,7 @@ Idem pour changer le fond, si l\'option ci-dessous le permet :@_CS_EXEMPLE_COULE
 	'cs_distant_off' => 'Les v&eacute;rifications de versions distantes',
 	'cs_log_couteau_suisse' => 'Les logs d&eacute;taill&eacute;s du Couteau Suisse',
 	'cs_reset' => '&Ecirc;tes-vous s&ucirc;r de vouloir r&eacute;initialiser totalement le Couteau Suisse ?',
+	'cs_reset2' => 'Tous les outils actuellement actifs seront d&eacute;sactiv&eacute;s et leurs param&egrave;tres r&eacute;initialis&eacute;s.',
 	'cs_spip_options_on' => 'Les options SPIP dans &laquo;@_CS_FILE_OPTIONS@&raquo;',
 
 	// D

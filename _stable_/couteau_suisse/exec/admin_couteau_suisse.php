@@ -138,6 +138,7 @@ EOF;
 		if (ar.length==2)
 			jQuery(this).attr('title', ar[1]).html(ar[0]);
 	});";
+	$cs_reset2 = cs_javascript('couteauprive:cs_reset2');
 	echo "<script type=\"text/javascript\"><!--
 
 var cs_selected, cs_descripted;
@@ -158,10 +159,10 @@ function set_categ(id) {
 }
 function outils_toggle() {
 	if(cs_selected.length>1) {
-		msg=\"".unicode_to_javascript(addslashes(html2unicode(_T('couteauprive:outils_permuter_gras2'))))."\";
+		msg=\"".cs_javascript('couteauprive:outils_permuter_gras2')."\";
 		msg=msg.replace(/@nb@/, cs_selected.length);
 	} else {
-		msg=\"".unicode_to_javascript(addslashes(html2unicode(_T('couteauprive:outil_permuter'))))."\";
+		msg=\"".cs_javascript('couteauprive:outil_permuter')."\";
 		msg=msg.replace(/@text@/, jQuery('a.outil_on').text());
 	}
 	if (!confirm(msg)) return false;
@@ -194,11 +195,11 @@ if (window.jQuery) jQuery(function(){
 		jQuery(\"div.cs_aide a["._SEL_JQUERY."href*='cmd=pack']\")
 			.click( function() { window.location.reload(true); return false; });
 	jQuery(\"div.cs_aide a["._SEL_JQUERY."href*='cmd=install']\").click( function() { 
-		msg=\"".unicode_to_javascript(addslashes(html2unicode(_T('couteauprive:pack_installer'))))."\";
+		msg=\"".cs_javascript('couteauprive:pack_installer').'\n\n'.$cs_reset2."\";
 		return window.confirm(msg.replace(/@pack@/,jQuery(this).text())); 
 	});
 	jQuery(\"div.cs_aide a["._SEL_JQUERY."href*='cmd=resetall']\").click( function() { 
-		msg=\"".unicode_to_javascript(addslashes(html2unicode(_T('couteauprive:cs_reset'))))."\";
+		msg=\"".cs_javascript('couteauprive:cs_reset').'\n\n'.$cs_reset2."\";
 		return window.confirm(msg); 
 	});
 $spip191
@@ -586,9 +587,9 @@ cs_log(" FIN : exec_admin_couteau_suisse()");
 }
 
 // callback pour les contribs
-function cs_couper_25($matches) {
-	return couper(_T($matches[1]), 25);
-}
+function cs_couper_25($matches) { return couper(_T($matches[1]), 25); }
+// raccourci pour le JavaScript
+function cs_javascript($chaine) { return unicode_to_javascript(addslashes(html2unicode(_T($chaine)))); }
 
 function cs_boite_rss() {
 	echo debut_boite_info(true), '<p><b>'._T('couteauprive:rss_titre').'</b></p><div class="cs_boite_rss"><p>'._T('couteauprive:rss_attente').'</p><noscript>'._T('couteauprive:outil_inactif').' !</noscript></div>'

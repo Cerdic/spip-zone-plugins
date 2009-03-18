@@ -1223,6 +1223,7 @@ if(isset($GLOBALS['mes_outils'])) {
 // http://www.spip-contrib.net/la-balise-LESMOTS et d'autres balises #MAINTENANT #LESADMINISTRATEURS #LESREDACTEURS #LESVISITEURS
 // http://www.spip-contrib.net/Ajouter-une-lettrine-aux-articles
 // http://www.spip-contrib.net/Generation-automatique-de
+// http://www.spip-contrib.net/Balise-LOGO-ARTICLE-ORITRAD
 // boutonstexte
 
 //global $cs_variables; cs_log($cs_variables, 'cs_variables :');
