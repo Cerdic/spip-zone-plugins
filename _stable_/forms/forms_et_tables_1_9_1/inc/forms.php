@@ -646,13 +646,20 @@
 			}
 			// D'abord creer la reponse dans la base de donnees
 			if ($ok) {
-				if (!$id_donnee){
-					$id_donnee = intval(pipeline('forms_identifier_donnee_existante',array('args'=>array('id_form'=>$id_form,'champs'=>$c),'data'=>0)));
-				}
+				// c'est une modif
 				if ($id_donnee>0 AND autoriser('modifier', 'donnee', $id_donnee, NULL, array('id_form'=>$id_form))){
 					spip_query("UPDATE spip_forms_donnees SET ip="._q($GLOBALS['ip']).", url="._q($url).", confirmation="._q($confirmation).", cookie="._q($cookie)." ".
 						"WHERE id_donnee="._q($id_donnee));
-				} elseif (autoriser('creer', 'donnee', 0, NULL, array('id_form'=>$id_form))){
+				}
+				// ca semblait etre une creation,
+				// mais un plugin nous dit que cela correspond a une donnee deja en base
+				elseif (!$id_donnee
+					  AND $id_donnee = intval(pipeline('forms_identifier_donnee_existante',array('args'=>array('id_form'=>$id_form,'champs'=>$c),'data'=>0)))){
+					spip_query("UPDATE spip_forms_donnees SET ip="._q($GLOBALS['ip']).", url="._q($url).", confirmation="._q($confirmation).", cookie="._q($cookie)." ".
+						"WHERE id_donnee="._q($id_donnee));
+				}
+				// finalement c'est bien une creation
+				elseif (autoriser('creer', 'donnee', 0, NULL, array('id_form'=>$id_form))){
 					if ($rang==NULL) $rang = array('rang'=>Forms_rang_prochain($id_form));
 					elseif(!is_array($rang)) $rang=array('rang'=>$rang);
 					spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie, "
