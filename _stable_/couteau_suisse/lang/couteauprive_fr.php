@@ -91,7 +91,7 @@ _ Lien de test : [->test@test.com] (rechargez la page enti&egrave;rement).[[%env
 	'certaines_couleurs' => 'Seules les balises d&eacute;finies ci-dessous@_CS_ASTER@ :',
 	'chatons:aide' => 'Chatons : @liste@',
 	'chatons:description' => 'Ins&egrave;re des images (ou chatons pour les {tchats}) dans tous les textes o&ugrave; appara&icirc;t une cha&icirc;ne du genre {{<code>:nom</code>}}.
-_ Cet outil remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouve dans votre dossier <code>mon_squelette_toto/img/chatons</code>, ou par d&eacute;faut, le dossier <code>couteau_suisse/img/chatons</code>.',
+_ Cet outil remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouve dans votre dossier <code>mon_squelette_toto/img/chatons/</code>, ou par d&eacute;faut, le dossier <code>couteau_suisse/img/chatons/</code>.',
 	'chatons:nom' => 'Chatons',
 	'class_spip:description1' => 'Vous pouvez ici d&eacute;finir certains raccourcis de SPIP. Une valeur vide &eacute;quivaut &agrave; utiliser la valeur par d&eacute;faut.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{Les raccourcis de SPIP}}.
