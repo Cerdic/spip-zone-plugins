@@ -647,7 +647,7 @@
 			// D'abord creer la reponse dans la base de donnees
 			if ($ok) {
 				if (!$id_donnee){
-					$id_donnee = pipeline('forms_identifier_donnee_existante',array('args'=>$c,'data'=>0));
+					$id_donnee = intval(pipeline('forms_identifier_donnee_existante',array('args'=>array('id_form'=>$id_form,'champs'=>$c),'data'=>0)));
 				}
 				if ($id_donnee>0 AND autoriser('modifier', 'donnee', $id_donnee, NULL, array('id_form'=>$id_form))){
 					spip_query("UPDATE spip_forms_donnees SET ip="._q($GLOBALS['ip']).", url="._q($url).", confirmation="._q($confirmation).", cookie="._q($cookie)." ".
