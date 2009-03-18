@@ -178,6 +178,9 @@ function formulaires_inscription2_ajax_verifier_dist($id_auteur = NULL){
 		if (sql_getfetsel('id_auteur','spip_auteurs','id_auteur !='.intval($id_auteur).' AND login LIKE \''._request('login').'\'')) {
 			$erreurs['login'] = _T('inscription2:formulaire_login_deja_utilise');
 		}
+		if (strlen(_request('login')) < _LOGIN_TROP_COURT){
+			$erreurs['login'] = _T('info_login_trop_court');	
+		}
 	}
 	
 	//message d'erreur generalise
