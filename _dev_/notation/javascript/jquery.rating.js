@@ -1,5 +1,5 @@
 /*
- ### jQuery Star Rating Plugin v2.5 - 2008-09-10 ###
+ ### jQuery Star Rating Plugin v2.61 - 2009-01-23 ###
  * http://www.fyneworks.com/ - diego@fyneworks.com
  * Dual licensed under the MIT and GPL licenses:
  *   http://www.opensource.org/licenses/mit-license.php
@@ -19,6 +19,10 @@
 /*# AVOID COLLISIONS #*/
 ;if(window.jQuery) (function($){
 /*# AVOID COLLISIONS #*/
+	
+	// IE6 Background Image Fix
+	if ($.browser.msie) try { document.execCommand("BackgroundImageCache", false, true)} catch(e) { }
+	// Thanks to http://www.visualjquery.com/rating/rating_redux.html
 	
 	// default settings
 	$.rating = {
@@ -96,7 +100,7 @@
 			
 			// Generate internal control ID
 			// - ignore square brackets in element names
-			var n = (this.name || 'unnamed-rating').replace(/\[|\]/, "_");
+			var n = (this.name || 'unnamed-rating').replace(/\[|\]+/g, "_");
    
 			// Grouping
 			if(!$.rating.groups[n]) $.rating.groups[n] = {count: 0};
@@ -193,7 +197,7 @@
 		The plugin will attach itself to file inputs
 		with the class 'multi' when the page loads
 	*/
-	$(function(){ $('input[@type=radio].star').rating(); });
+	$(function(){ $('input[type=radio].star').rating(); });
 	
 	
 	
