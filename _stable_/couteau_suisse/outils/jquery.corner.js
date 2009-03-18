@@ -26,28 +26,28 @@
  */
 ;(function($) { 
 
-var expr = (function() {
+var jc_expr = (function() {
     var div = document.createElement('div');
     try { div.style.setExpression('width','0+0'); }
     catch(e) { return false; }
     return true;
 })();
     
-function sz(el, p) { 
+function jc_sz(el, p) { 
     return parseInt($.css(el,p))||0; 
 };
-function hex2(s) {
+function jc_hex2(s) {
     var s = parseInt(s).toString(16);
     return ( s.length < 2 ) ? '0'+s : s;
 };
-function gpc(node) {
+function jc_gpc(node) {
     for ( ; node && node.nodeName.toLowerCase() != 'html'; node = node.parentNode ) {
         var v = $.css(node,'backgroundColor');
         if ( v.indexOf('rgb') >= 0 ) { 
             if ($.browser.safari && v == 'rgba(0, 0, 0, 0)')
                 continue;
             var rgb = v.match(/\d+/g); 
-            return '#'+ hex2(rgb[0]) + hex2(rgb[1]) + hex2(rgb[2]);
+            return '#'+ jc_hex2(rgb[0]) + jc_hex2(rgb[1]) + jc_hex2(rgb[2]);
         }
         if ( v && v != 'transparent' )
             return v;
@@ -55,7 +55,7 @@ function gpc(node) {
     return '#ffffff';
 };
 
-function getWidth(fx, i, width) {
+function jc_getWidth(fx, i, width) {
     switch(fx) {
     case 'round':  return Math.round(width*(1-Math.cos(Math.asin(i/width))));
     case 'cool':   return Math.round(width*(1+Math.cos(Math.asin(i/width))));
@@ -116,7 +116,7 @@ $.fn.corner = function(o) {
 
         if (typeof this.style.zoom != undefined) this.style.zoom = 1; // force 'hasLayout' in IE
         if (!keep) this.style.border = 'none';
-        strip.style.borderColor = cc || gpc(this.parentNode);
+        strip.style.borderColor = cc || jc_gpc(this.parentNode);
         var cssHeight = $.curCSS(this, 'height');
 
         for (var j in edges) {
@@ -135,7 +135,7 @@ $.fn.corner = function(o) {
                         this.style.position = 'relative';
                     ds.position = 'absolute';
                     ds.bottom = ds.left = ds.padding = ds.margin = '0';
-                    if (expr)
+                    if (jc_expr)
                         ds.setExpression('width', 'this.parentNode.offsetWidth');
                     else
                         ds.width = '100%';
@@ -147,8 +147,8 @@ $.fn.corner = function(o) {
                     ds.top = ds.left = ds.right = ds.padding = ds.margin = '0';
                     
                     // fix ie6 problem when blocked element has a border width
-                    if (expr) {
-                        var bw = sz(this,'borderLeftWidth') + sz(this,'borderRightWidth');
+                    if (jc_expr) {
+                        var bw = jc_sz(this,'borderLeftWidth') + jc_sz(this,'borderRightWidth');
                         ds.setExpression('width', 'this.parentNode.offsetWidth - '+bw+'+ "px"');
                     }
                     else
@@ -160,7 +160,7 @@ $.fn.corner = function(o) {
                 }
 
                 for (var i=0; i < width; i++) {
-                    var w = Math.max(0,getWidth(fx,i, width));
+                    var w = Math.max(0,jc_getWidth(fx,i, width));
                     var e = strip.cloneNode(false);
                     e.style.borderWidth = '0 '+(opts[j+'R']?w:0)+'px 0 '+(opts[j+'L']?w:0)+'px';
                     bot ? d.appendChild(e) : d.insertBefore(e, d.firstChild);
