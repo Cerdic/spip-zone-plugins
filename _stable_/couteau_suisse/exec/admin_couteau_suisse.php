@@ -114,6 +114,7 @@ div.cs_sobre, input.cs_sobre {
 	border:medium none;
 	color:#000099;
 	display:inline;
+	font-size:100%;
 	font-weight:normal;
 	margin:0pt;
 	padding:0pt;
