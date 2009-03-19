@@ -23,18 +23,18 @@ if ($connect_statut != '0minirezo' ) {
 $commencer_page = charger_fonction('commencer_page', 'inc');
 echo $commencer_page(_T('swfupload:titre_swfupload'));
 echo "<br />";
-echo debut_gauche();
-debut_boite_info();
+echo debut_gauche('',true);
+debut_boite_info(true);
 echo "Le plugin SWFupload permet de t&eacute;l&eacute;charger des fichiers dans votre dossier ".determine_upload()." m&ecirc;me si vous n'avez pas d'acc&egrave;s ftp.<br/><br/>Vous pourrez alors acc&egrave;der &agrave; ces fichiers lors de l'ajout de documents ou images &agrave; un article.";
-fin_boite_info();
+fin_boite_info(true);
 echo "<br/>";
-debut_boite_info();
+debut_boite_info(true);
 echo "<a href='?exec=swfupload_vider' onclick='return confirm(\"Etes vous sûr ?\");'>Vider le dossier</a> ".determine_upload();
 echo "<br/><strong>Attention en cliquant sur ce lien vous supprimerez tous les fichiers et dossiers.</strong>";
-fin_boite_info();
+fin_boite_info(true);
 
-echo debut_droite();
-echo gros_titre(_T('swfupload:titre_swfupload'));
+echo debut_droite('',true);
+echo gros_titre(_T('swfupload:titre_swfupload'),'',false);
 echo '
 <form id="form1" action="index.php" method="post" enctype="multipart/form-data">
 		<div>'._T('swfupload:texte_swfupload').'</div>

@@ -22,18 +22,17 @@ $upload_dir = _DIR_TRANSFERT;
 $commencer_page = charger_fonction('commencer_page', 'inc');
 echo $commencer_page(_T('swfupload:titre_swfupload'));
 echo "<br />";
-echo debut_gauche();
-debut_boite_info();
+echo debut_gauche('',true);
+debut_boite_info(true);
 echo "Le plugin SWFupload permet de t&eacute;l&eacute;charger des fichiers dans votre dossier ".determine_upload()." m&ecirc;me si vous n'avez pas d'acc&egrave;s ftp.<br/><br/>Vous pourrez alors acc&egrave;der &agrave; ces fichiers lors de l'ajout de documents ou images &agrave; un article.";
-fin_boite_info();
+fin_boite_info(true);
 
-echo debut_droite();
-echo gros_titre('SWFupload - Suppression des fichiers');
+echo debut_droite('',true);
+echo gros_titre('SWFupload - Suppression des fichiers','',false);
 echo debut_cadre_relief('image-24.gif',true);
 swfupload_vider_upload($upload_dir);
 echo fin_cadre_relief(true);
-echo fin_gauche();
-echo fin_page();
+echo fin_gauche().fin_page();
 }
 
 function swfupload_vider_upload($dirname)
@@ -44,7 +43,7 @@ function swfupload_vider_upload($dirname)
  
     // Supprime fichier
     if (is_file($dirname) || is_link($dirname)) {
-		echo "<strong>$dirname</strong> : Fichier supprim&eacute;<br/>"; 
+		echo "<strong>".stripslashes($dirname)."</strong> : Fichier supprim&eacute;<br/>"; 
 		return @unlink($dirname);
     }
  
