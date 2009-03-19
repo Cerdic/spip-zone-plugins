@@ -251,11 +251,13 @@ function cs_recuperer_code(&$code) {//, $contexte=array(), $options = array(), $
 	$base = $fond . '.html';
 	if (!file_exists($base) OR $GLOBALS['var_mode']=='recalcul')
 		ecrire_fichier($base, $code);
-	//return recuperer_fond($fond, $contexte, $options, $connect);
 	include_spip('public/assembler');
+	$fond = str_replace('../', '', $fond);
+//	return recuperer_fond($fond, array('fond'=>$fond));
 	$f = inclure_page($fond, array('fond'=>$fond));
 	return $f['texte'];
 }
+
 
 /*
 cs_log("INIT : cout_pipelines, lgr=" . strlen($cs_metas_pipelines['pipelines']));
