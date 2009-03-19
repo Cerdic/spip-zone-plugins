@@ -281,6 +281,8 @@ class SpipTest extends UnitTestCase {
 			// une inclusion unique de ces fichiers
 			$this->ecrire_fichier($fond.'_fonctions.php', $this->php("include_once('$func');"));
 		}
+		
+		$fond = str_replace('../', '', $fond); // pas de ../ si dans ecrire !
 		return recuperer_fond($fond, $contexte, $options, $connect);
 	}
 	
