@@ -267,7 +267,8 @@ spip_timer('rech');
 			}
 
 			// On ajoute la premiere cle FULLTEXT de chaque jointure
-			$requete['FROM'] = array();
+			$from = array_pop($requete['FROM']);
+
 			if (is_array($jointures[$table]))
 			foreach(array_keys($jointures[$table]) as $jtable) {
 				$i++;
@@ -277,18 +278,18 @@ spip_timer('rech');
 					$table_join = table_objet($jtable);
 
 					if ($jtable == 'document')
-						$requete['FROM'][] = "
+						$from .= "
 						LEFT JOIN spip_documents_liens AS lien$i ON (lien$i.id_objet=t.$_id_table AND lien$i.objet='$table')
 						LEFT JOIN spip_${table_join} AS obj$i ON lien$i.$_id_join=obj$i.$_id_join
 						";
 					else
-						$requete['FROM'][] = "
+						$from .= "
 						LEFT JOIN spip_${jtable}s_${table}s as lien$i ON lien$i.$_id_table=t.$_id_table
 						LEFT JOIN spip_${table_join} AS obj$i ON lien$i.$_id_join=obj$i.$_id_join
 						";
 				}
 			}
-
+			$requete['FROM'][] = $from;
 			$score = join(' + ', $score).' AS score';
 			spip_log($score, 'recherche');
 
@@ -298,12 +299,9 @@ spip_timer('rech');
 			if (defined('_FULLTEXT_WHERE_'.$table))
 				$requete['WHERE'][] = constant('_FULLTEXT_WHERE_'.$table);
 			else
-				$requete['WHERE'][] = (!test_espace_prive()
+				if (!test_espace_prive()
 				AND in_array($table, array('article', 'rubrique', 'breve', 'forum', 'syndic_article')))
-					? "t.statut='publie'"
-					: "";
-			if (strlen($where))
-				$where = "\n\t\t\t\tWHERE $where";
+					$requete['WHERE'][] = "t.statut='publie'";
 
 			// nombre max de resultats renvoyes par l'API
 			define('_FULLTEXT_MAX_RESULTS', 500);
@@ -322,7 +320,7 @@ spip_timer('rech');
 			# "t.date"
 			# "t.note"
 
-			array_unshift($requete['FROM'], table_objet_sql($table)." AS t");
+			#array_unshift($requete['FROM'], table_objet_sql($table)." AS t");
 			$requete['GROUPBY'] = array("t.$_id_table");
 			$requete['ORDERBY'] = "score DESC";
 			$requete['LIMIT'] = "0,"._FULLTEXT_MAX_RESULTS;
