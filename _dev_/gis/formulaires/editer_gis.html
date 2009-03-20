@@ -19,28 +19,63 @@ var letraUUacute = String.fromCharCode(218);
 
 fecha = new Date();
 if (GBrowserIsCompatible()) {
-    // create the map
+    // creer la carte
     var map = new GMap2(document.getElementById("formMap"));
     map.addControl(new GLargeMapControl());
     map.addControl(new GMapTypeControl());
-    map.setCenter(new GLatLng([(#ENV**{lat,#CONFIG{gis_default_lat}})],[(#ENV**{lonx,#CONFIG{gis_default_lonx}})]), [(#CONFIG**{gis_default_zoom,0})], G_NORMAL_MAP);
+    map.setCenter(new GLatLng([(#ENV**{lat,#CONFIG{gis_default_lat}})],[(#ENV**{lonx,#CONFIG{gis_default_lonx}})]), [(#ENV**{zoom,#CONFIG{gis_default_zoom}})], G_NORMAL_MAP);
 
-    // creamos el evento para crear nuevos marcadores
+    // mettre a jour les coordonnees quand on clique la carte
     GEvent.addListener(map, "click", function(overlay, point){
-	map.clearOverlays();
-	if (point) {
-		map.addOverlay(new GMarker(point));
-		map.panTo(point);
-		document.forms.formulaire_editer_gis.lat.value = point.y;
-		document.forms.formulaire_editer_gis.lonx.value = point.x;
-	}
+		map.clearOverlays();
+		if (point) {
+			map.addOverlay(new GMarker(point));
+			map.panTo(point);
+			jQuery("#formulaire_editer_gis #lat").val(point.y);
+			jQuery("#formulaire_editer_gis #lonx").val(point.x);
+		}
     });
-	
+	// mettre à jour le zoom quand on le modifie
+	GEvent.addListener(map, "zoomend", function(oldlevel, newlevel){
+		jQuery("#formulaire_editer_gis #zoom").val(newlevel);
+	});
 	[(#ENV**{lat}|oui)
 	map.addOverlay(new GMarker(new GLatLng([(#ENV**{lat})],[(#ENV**{lonx})])));
 	map.setCenter(new GLatLng([(#ENV**{lat})],[(#ENV**{lonx})]));
 	]
-	
+	[(#ENV**{recherche}|oui)
+	jQuery(document).ready(function(){
+		$("#formulaire_adresse #rechercher").css("cursor","pointer");
+		$("#formulaire_adresse #rechercher").click(function(){
+			var adresse = $("#map_adresse").attr("value");
+			var geocoder = new GClientGeocoder();
+			if (geocoder) {
+				geocoder.getLatLng(adresse, function(point) {
+					if (!point) {
+						alert(adresse + " not found");
+					} else {
+						map.setCenter(point);
+						map.clearOverlays();
+						marker = new GMarker(point,{draggable:true});
+						map.addOverlay(marker);
+						marker.openInfoWindowHtml(adresse);
+						jQuery("#formulaire_editer_gis #lat").val(point.lat());
+						jQuery("#formulaire_editer_gis #long").val(point.lng());
+						jQuery("#formulaire_editer_gis #zoom").val(map.getZoom());
+						GEvent.addListener(marker, 'dragend', function(){
+							var center = marker.getPoint();
+							jQuery("#formulaire_editer_gis #lat").val(center.lat());
+							jQuery("#formulaire_editer_gis #long").val(center.lng());
+						});
+					}
+				});
+			}
+			return false;
+		});
+	});
+	]
+
+
 } else {
     alert("Sorry, the Google Maps API is not compatible with this browser");
 }
@@ -55,6 +90,15 @@ if (GBrowserIsCompatible()) {
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
+	[(#ENV{recherche}|oui)
+	<form id="formulaire_adresse">
+	<ul>
+		<li>
+			<input type="text" class="text" name="map_adresse" id="map_adresse" value="<:gis:address:>" onfocus="this.value='';" style="width: 85%;" />
+			<a id="rechercher"><:gis:label_address:></a>
+		</li>
+	</ul>
+	</form>]
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data' name='formulaire_editer_gis' id='formulaire_editer_gis'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
@@ -67,6 +111,10 @@ if (GBrowserIsCompatible()) {
 			<li class="editer_lonx obligatoire[ (#ENV**{erreurs}|table_valeur{lonx}|oui)erreur]">
 				<label for="lonx">Longitude</label>
 				<input type="text" name="lonx" id="lonx" class="text" value="[(#ENV**{lonx})]" />
+			</li>	
+			<li class="editer_zoom obligatoire[ (#ENV**{erreurs}|table_valeur{zoom}|oui)erreur]">
+				<label for="zoom">Zoom</label>
+				<input type="text" name="zoom" id="zoom" class="text" value="[(#ENV**{zoom})]" />
 			</li>	
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
