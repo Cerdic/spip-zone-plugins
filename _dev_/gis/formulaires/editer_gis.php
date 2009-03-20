@@ -1,6 +1,6 @@
 <?php
 
-function formulaires_editer_gis_charger_dist($id_article, $recherche=''){
+function formulaires_editer_gis_charger_dist($id_article, $recherche='', $retour=''){
 
 	$valeurs = array(
 		'lat'=> '',
@@ -21,7 +21,7 @@ function formulaires_editer_gis_charger_dist($id_article, $recherche=''){
 }
 
 
-function formulaires_editer_gis_verifier_dist($id_article, $recherche=''){
+function formulaires_editer_gis_verifier_dist($id_article, $recherche='', $retour=''){
 
 	$erreurs = array();
 
@@ -29,7 +29,7 @@ function formulaires_editer_gis_verifier_dist($id_article, $recherche=''){
 }
 
 
-function formulaires_editer_gis_traiter_dist($id_article, $recherche=''){
+function formulaires_editer_gis_traiter_dist($id_article, $recherche='', $retour=''){
 	$res = array('editable'=>' ');
 	
 	// recuperation des donnees
@@ -49,6 +49,11 @@ function formulaires_editer_gis_traiter_dist($id_article, $recherche=''){
 		sql_insertq("spip_gis",  array("id_article" => $id_article , "lat" => $lat, "lonx" => $lonx, "zoom" => $zoom));
 		$res['message_ok'] = _T('gis:coord_enregistre');
 	}
+	if ($retour){
+		include_spip('inc/headers');
+		$res['redirect'] = $retour;
+	}
+	
 	return $res;
 }
 
