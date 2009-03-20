@@ -23,13 +23,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	//elements de formulaire pour editer les coordonnees
 	
-	"boton_actualizar" => "actualiser",
-	"bouton_supprimer" => "supprimer",
+	"boton_actualizar" => "Actualiser",
+	"bouton_supprimer" => "Supprimer",
 	"cambiar" => "changer les coordonn&eacute;es",
 	"clic_mapa" => "Cliquer sur la carte pour changer les coordonn&eacute;es",
 	"clic_desplegar" => "d&eacute;plier",
 	"coord_enregistre" => "Coordonn&eacute;es enregistr&eacute;es",
 	"coord_maj" => "Coordonn&eacute;es mises &agrave; jour",
+	"label_address" => "Rechercher",
 	
 	//elements du formulaire public
 	
