@@ -100,7 +100,6 @@ $.fn.opencrayon = function(evt, percent) {
 			var me=this;
 			var offset = $(this).offset();
 			var params = {
-				'type': me.type,
 				'top': offset.top,
 				'left': offset.left,
 				'w': $(this).width(),
@@ -117,6 +116,7 @@ $.fn.opencrayon = function(evt, percent) {
 				'background-color': $(this).css('backgroundColor'),
 				'self': configCrayons.self
 			};
+			if (me.type) params.type = me.type;
 			if (params['background-color'] == 'transparent'
 			|| params['background-color'] == 'rgba(0, 0, 0, 0)') {
 				$(me).parents()
@@ -381,7 +381,7 @@ $.fn.iconecrayon = function(){
 	return this.each(function() {
 		var ctype = this.className.match(/\btype_(\w+)\b/);
 		type = (ctype) ? ctype[1] : 'crayon';
-		this.type = type; // Affecte son type a l'objet crayon
+		if (ctype) this.type = type; // Affecte son type a l'objet crayon
 		$(this).prepend(configCrayons.iconclick(this.className, type))
 		.find('.crayon-' + type + ', .crayon-img-changed') // le crayon a clicker lui-meme et sa memoire
 			.click(function(e){

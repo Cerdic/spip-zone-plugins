@@ -373,7 +373,7 @@ function action_crayons_html_dist() {
 	include_spip('inc/crayons');
 	lang_select($GLOBALS['auteur_session']['lang']);
 	$return = affiche_controleur(_request('class'));
-	if (_request('type') == 'crayon')
+	if (!_request('type') OR _request('type') == 'crayon')
 	  $return['$html'] = crayons_formulaire($return['$html']);
 	
 	echo var2js($return);
