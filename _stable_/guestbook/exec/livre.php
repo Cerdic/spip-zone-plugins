@@ -14,7 +14,6 @@
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('guestbook:lelivre'), "", "");
 	echo '<div style="margin:auto; width :70%;">';
-		debut_boite_info();
 	echo gros_titre(_T('guestbook:lelivre'),"","");
 	//Légende
 	echo '<table width="20%" style="margin:auto;" border="" cellspacing="0" cellpadding="2"><tr><td style="background:#cce7b9">Message publi&eacute;</td><td style="background:#e7a1a1">Message Hors Ligne</td><td style="background:#f1dec0">Message en attente de validation</td></tr></table><br /> ';
@@ -85,8 +84,6 @@
 	}
 	//fin
 	echo '</table>';
-	fin_boite_info();
 	echo '</div>';
-	fin_page();
 	}
 ?>
