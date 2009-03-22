@@ -45,15 +45,15 @@
    <necessite id="lib:nom" src="http://url-complete-du/fichier.zip" />
 
    <!-- Indique si le plugin concerne tout le site ou seulement l'espace privé. -->
-       <chemin dir="./repertoire_public" type="public">
-       <chemin dir="./repertoire_prive type="prive"> 
-       <chemin dir="./repertoire_ouvert" > 
+       <chemin dir="./repertoire_public" type="public" />
+       <chemin dir="./repertoire_prive" type="prive" /> 
+       <chemin dir="./repertoire_ouvert" /> 
 
    <bouton id='mon_bouton_1' parent=''>
        <icone>images/xml-valid-24.png</icone>
        <titre>Valider le site</titre>
        <url>w3c_go_home</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
-       <args>type=resume&id=1</args>
+       <args>type=resume&amp;id=1</args>
    </bouton>
 
    <onglet id='mon_onglet_1' parent='configuration'>
