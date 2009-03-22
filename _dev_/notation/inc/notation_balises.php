@@ -18,10 +18,10 @@ function notation_en_etoile($nb, $id, $clicable=false){
 
 	if ($clicable OR !_NOTATION_AFFICHAGE_RAPIDE){
 		$class = $clicable ? 'auto-submit-star' : 'star';
-		$disabled = $clicable ? '' : "disabled='disabled'";
+		$disabled = $clicable ? '' : " disabled='disabled'";
 		for ($i=1; $i<=notation_get_nb_notes(); $i++){
-			$checked = ($i==$nb) ? "checked='checked' " : "";
-			$ret .= "<input name='notation-$id' type='radio' class='$class' value='$i' $checked $disabled/>\n";
+			$checked = ($i==$nb) ? " checked='checked'" : "";
+			$ret .= "<input name='notation-$id' type='radio' class='$class' value='$i'$checked$disabled />\n";
 		}
 	}
 	else 

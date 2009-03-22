@@ -20,7 +20,7 @@ function notation_affichage_final($flux){
 	$incHead .= "\n<script type='text/javascript'>\n";
 	$incHead .= "function notation_init(){jQuery(function(){\n";
 	$incHead .= "jQuery('.formulaire_notation .access').hide();\n";
-	$incHead .= "jQuery(function(){ jQuery('input[@type=radio].star').rating(); });\n";
+	$incHead .= "jQuery(function(){ jQuery('input[type=radio].star').rating(); });\n";
 	$incHead .= "jQuery('.auto-submit-star').rating({\n";
 	$incHead .= "required: true,\n";
 	$incHead .= "callback: function(value, link){\n";
