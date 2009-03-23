@@ -12,5 +12,4 @@
  *
  */
  
-    define('_FUNCTION_ENVOYER_MAIL', charger_fonction('envoyer_phpmail', 'inc'));
 ?>
