@@ -14,37 +14,33 @@
 	|sinon{[(#ID_RUBRIQUE|?{#LOGO_RUBRIQUE_NORMAL})]}
 	|sinon{[(#ID_SYNDIC|?{#LOGO_SITE_NORMAL})]}
 	|sinon{[(#ID_MOT|?{#LOGO_MOT_NORMAL})]})]})]
-
-
-<fieldset[ style="(#ENV{style});"]>
-<legend>[(#GET{image}|?{
-
-	[(#SET{logo,[(#GET{image}|reduire_image{0,40})]})]
-
+[(#GET{image}|?{
+	[(#SET{logo,[(#GET{image}|reduire_image{64})]})]
 	[(#REM) hacke l'url pour eviter le cache du navigateur ]
 	[(#SET{url,[(#GET{logo}|extraire_attribut{src}
 		|parametre_url{s,#EVAL{time()}})]})]
-
-	<small>[(#GET{logo}|inserer_attribut{src,#GET{url}}
-		|inserer_attribut{style,vertical-align:middle;})]
-	&nbsp; remplacer ce logo
-	[((#GET{image}
+	[(#SET{legend,
+		remplacer ce logo
+		[((#GET{image}
 		|extraire_attribut{width})&times;[(#GET{image}
-		|extraire_attribut{height})]px)]&nbsp;:</small>
-
-	[(#SET{supprimer,
-		[<label><br />
-			<input type="checkbox" name="(#ENV{name_logo})_supprimer" id="#ENV{name_logo}_supprimer" />
-			supprimer ce logo
-			</label>]
+		|extraire_attribut{height})]px)]&nbsp;:
 	})]
-}|sinon{
-	Choisir un logo&nbsp;:
+	[(#SET{supprimer,
+		[<br /><label>
+			<input type="checkbox" name="(#ENV{name_logo})_supprimer" id="#ENV{name_logo}_supprimer" /> supprimer</label>]
+	})]
 })]
+
+
+<fieldset[ style="(#ENV{style}); border:none;"]>
+[<div style="float:#LANG_RIGHT">(#GET{logo}|inserer_attribut{src,#GET{url}}
+	|inserer_attribut{style,vertical-align:middle;})</div>]
+<legend>
+	<small>[(#GET{legend}|sinon{Choisir un logo&nbsp;:})]</small>
 </legend>
 
 <input class="crayon-active" name="#ENV{name_logo}" type="file"
-onchange="if (this.value && !this.value.match(/\.(png|jpeg|jpg|gif)$/i)) { alert('Il faut choisir une image :-)'); this.value=''; }; var q=cQuery('##ENV{name_logo}_supprimer').parent(); this.value ? q.hide() : q.show();" />
+onchange="if (this.value && !this.value.match(/\.(png|jpeg|jpg|gif)$/i)) { alert('Il faut choisir une image :-)'); this.value=''; }; var q=cQuery('##ENV{name_logo}_supprimer').parent(); this.value ? q.hide() : q.show();" size="1" />
 
 #GET{supprimer}
 
