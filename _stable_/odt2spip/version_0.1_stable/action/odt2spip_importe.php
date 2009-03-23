@@ -1,4 +1,4 @@
-<?
+<?php
 
 function action_odt2spip_importe() {
     global $auteur_session, $spip_version_code;;
@@ -207,7 +207,10 @@ function action_odt2spip_importe() {
     }
     
   // vider le contenu du rep de dezippage
-    if ($spip_version_code >= 12691) effacer_repertoire_temporaire($rep_dezip);
+    if ($spip_version_code >= 12691) {
+        if (!function_exists('effacer_repertoire_temporaire')) include_spip('inc/getdocument');
+        effacer_repertoire_temporaire($rep_dezip);
+    }
     else odt2spip_effacer_repzip($rep_dezip);
     
   // aller sur la page de l'article qui vient d'être créé
