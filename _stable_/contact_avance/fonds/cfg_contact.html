@@ -1,15 +1,15 @@
-<!-- titre=<:contactavance:titre:> -->
+<!-- titre=<:contact:titre:> -->
 <!-- icone=images/contact-24.png -->
-
+#CFG_ARBO{contact}
 <div class="formulaire_spip formulaire_editer">
 <form method="post" action="#SELF">
 		[(#ENV{_cfg_}|form_hidden)]
 	
 	<fieldset>
-		<legend><:contactavance:configuration_destinataires:></legend>
+		<legend><:contact:configuration_destinataires:></legend>
 		<ul>
 			<li class="editer_texte">
-				<p class="explication"><:contactavance:configuration_destinataires_explication:></p>
+				<p class="explication"><:contact:configuration_destinataires_explication:></p>
 					<B_auteurs>
 					<select name="choix_destinataires[]" id="choix_destinataires" multiple="multiple" size="5">
 					<BOUCLE_auteurs(AUTEURS){tous}>
@@ -23,24 +23,24 @@
 			<li class="choix">
 				<div>
 					<input type="radio" name="type_choix" id="tous" class="radio" value="tous"[ checked="checked"(#ENV{type_choix}|=={tous}|ou{#ENV{type_choix}|non}|oui)] />
-					<label for="tous"><:contactavance:configuration_destinataires_tous:></label>
+					<label for="tous"><:contact:configuration_destinataires_tous:></label>
 				</div>
 				<div>
 					<input type="radio" name="type_choix" id="un" class="radio" value="un"[ checked="checked"(#ENV{type_choix}|=={un}|oui)] />
-					<label for="un"><:contactavance:configuration_destinataires_un:></label>
+					<label for="un"><:contact:configuration_destinataires_un:></label>
 				</div>
 				<div>
 					<input type="radio" name="type_choix" id="plusieurs" class="radio" value="plusieurs"[ checked="checked"(#ENV{type_choix}|=={plusieurs}|oui)] />
-					<label for="plusieurs"><:contactavance:configuration_destinataires_plusieurs:></label>
+					<label for="plusieurs"><:contact:configuration_destinataires_plusieurs:></label>
 				</div>
 			</li>
 		</ul>
 	</fieldset>
 	
 	[(#REM) On récupère les champs possibles ]
-	#SET{champs, #VAL{rien}|contactavance_infos_supplementaires}
+	#SET{champs, #VAL{rien}|contact_infos_supplementaires}
 	<fieldset>
-		<legend><:contactavance:infos_supplementaires:></legend>
+		<legend><:contact:infos_supplementaires:></legend>
 		<B_champs>
 		<ul>
 			<BOUCLE_champs(POUR){tableau #GET{champs}}>
@@ -49,7 +49,7 @@
 				<label for="champ_#CLE">#VALEUR</label>
 				<div>
 					<input type="checkbox" name="obligatoires[]" id="obli_#CLE" class="checkbox" value="#CLE"[ (#CLE|in_array{#ENV{obligatoires,#ARRAY}}|oui)checked="checked"] />
-					<label for="obli_#CLE"><:contactavance:champ_obligatoire:></label>
+					<label for="obli_#CLE"><:contact:champ_obligatoire:></label>
 				</div>
 			</li>
 			</BOUCLE_champs>
@@ -58,10 +58,10 @@
 	</fieldset>
 	
 	<fieldset>
-		<legend><:contactavance:configuration_intro:></legend>
+		<legend><:contact:configuration_intro:></legend>
 		<ul>
 			<li class="editer_texte">
-				<p class="explication"><:contactavance:configuration_intro_explication:></p>
+				<p class="explication"><:contact:configuration_intro_explication:></p>
 				<textarea name="texte" id="texte" rows="10">#ENV{texte}</textarea>
 			</li>
 		</ul>

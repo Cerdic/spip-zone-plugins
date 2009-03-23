@@ -1,6 +1,6 @@
 <?php
 
-function formulaires_contact_avance_charger_dist($id_auteur=''){	
+function formulaires_contact_charger_dist($id_auteur=''){	
 	$valeurs = array();
 	
 	$valeurs['email_contact'] = '';
@@ -10,9 +10,9 @@ function formulaires_contact_avance_charger_dist($id_auteur=''){
 	$valeurs['choix_destinataires'] = '';
 	
 	// La liste dans laquelle on pourra éventuellement choisir
-	$choix_destinataires = lire_config('contactavance/choix_destinataires');
+	$choix_destinataires = lire_config('contact/choix_destinataires');
 	// Le type de choix
-	$valeurs['type_choix'] = $type_choix = lire_config('contactavance/type_choix');
+	$valeurs['type_choix'] = $type_choix = lire_config('contact/type_choix');
 	
 	// Rien n'a été défini, on utilise l'auteur 1
 	if (count($choix_destinataires) == 0){
@@ -30,8 +30,8 @@ function formulaires_contact_avance_charger_dist($id_auteur=''){
 	}
 	
 	// Les infos supplémentaires
-	$champs_possibles = contactavance_infos_supplementaires();
-	if (!is_array($champs_choisis = lire_config('contactavance/champs')))
+	$champs_possibles = contact_infos_supplementaires();
+	if (!is_array($champs_choisis = lire_config('contact/champs')))
 		$valeurs['champs'] = false;
 	else{
 		// On envoie un talbeau contenant tous les champs choisis et leur titre
@@ -51,7 +51,7 @@ function formulaires_contact_avance_charger_dist($id_auteur=''){
 		);
 	}
 	
-	if (!is_array($champs_obligatoires = lire_config('contactavance/obligatoires')))
+	if (!is_array($champs_obligatoires = lire_config('contact/obligatoires')))
 		$valeurs['obligatoires'] = false;
 	else
 		$valeurs['obligatoires'] = $champs_obligatoires;
@@ -59,7 +59,7 @@ function formulaires_contact_avance_charger_dist($id_auteur=''){
 	return $valeurs;
 }
 
-function formulaires_contact_avance_verifier_dist($id_auteur=''){
+function formulaires_contact_verifier_dist($id_auteur=''){
 	$erreurs = array();
 	include_spip('inc/filtres');
 	
@@ -70,8 +70,8 @@ function formulaires_contact_avance_verifier_dist($id_auteur=''){
 	elseif(!email_valide($adres))
 		$erreurs['email_contact'] = _T('form_prop_indiquer_email');
 	
-	$champs_choisis = lire_config('contactavance/champs');
-	$champs_obligatoires = lire_config('contactavance/obligatoires');
+	$champs_choisis = lire_config('contact/champs');
+	$champs_obligatoires = lire_config('contact/obligatoires');
 	if (is_array($champs_choisis) and is_array($champs_obligatoires)){
 		foreach($champs_choisis as $champ){
 			if (!_request($champ) and in_array($champ, $champs_obligatoires))
@@ -98,7 +98,7 @@ function formulaires_contact_avance_verifier_dist($id_auteur=''){
 	return $erreurs;
 }
 
-function formulaires_contact_avance_traiter_dist($id_auteur=''){
+function formulaires_contact_traiter_dist($id_auteur=''){
 	
 	include_spip('base/abstract_sql');
 	
@@ -121,8 +121,8 @@ function formulaires_contact_avance_traiter_dist($id_auteur=''){
 	$mail = join(', ', $mail);
 	
 	// Les infos supplémentaires
-	$champs_possibles = contactavance_infos_supplementaires();
-	$champs_choisis = lire_config('contactavance/champs');
+	$champs_possibles = contact_infos_supplementaires();
+	$champs_choisis = lire_config('contact/champs');
 	if (is_array($champs_choisis)){
 		foreach($champs_choisis as $champ){
 			$infos .= "\n".$champs_possibles[$champ]." : "._request($champ);
