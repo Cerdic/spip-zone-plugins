@@ -4,7 +4,7 @@
 // ajout feuille de stylle
 //
 function sparkstats_insert_head($flux){
-  $flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('sparkstats.css').'" media="all" />';
+  #$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('sparkstats.css').'" media="all" />';
 
   $jsFile = find_in_path('js/jquery.sparkline.js');
   $flux .= "<script src='$jsFile' type='text/javascript'></script>";
