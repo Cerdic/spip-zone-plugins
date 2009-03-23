@@ -1,4 +1,4 @@
-<?
+<?php
 
 function action_odt2spip_importe() {
     global $visiteur_session;
@@ -82,7 +82,7 @@ function action_odt2spip_importe() {
         revision_document($id_doc_odt,$c);
     }
     
-    include_spip('inc/getdocument');
+    if (!function_exists('effacer_repertoire_temporaire')) include_spip('inc/getdocument');
 	// vider le contenu du rep de dezippage
     effacer_repertoire_temporaire($rep_dezip);
     

@@ -62,7 +62,7 @@ function inc_odt2spip_generer_sortie($id_auteur,$rep_dezip){
         
 	// traiter les images: dans tous les cas il faut les integrer dans la table documents 
 	// en 2.0 c'est mode image + les fonctions de snippets font la liaison => on bloque la liaison en filant un id_article vide
-	$rep_pictures = $rep_dezip."Pictures/";
+	  $rep_pictures = $rep_dezip."Pictures/";
     
 	// parametres de conversion de taille des images : cm -> px (en 96 dpi puisque c'est ce que semble utiliser Writer)
     $conversion_image = 96/2.54;
