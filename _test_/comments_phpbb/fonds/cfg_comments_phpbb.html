@@ -1,0 +1,89 @@
+<!-- titre=Commentaires PhpBB -->
+<!-- descriptif=Configuration du plugin qui g&egrave;re les commentaires sur votre forum PunBB.-->
+
+<form method="post" class="formulaire_spip">
+[(#ENV{_cfg_}|form_hidden)]
+<fieldset>
+<legend>Configuration g&eacute;n&eacute;rale</legend>
+
+<ul>
+  <li>
+      <label>Base PhpBB :</label> 
+      <input type="text" name="phpbb_base" value="#CONFIG{comments_phpbb/phpbb_base}" />
+  </li>
+  <li>
+      <label>Pr&eacute;fixe des tables PhpBB :</label>
+      <input type="text" name="phpbb_prefix" value="#CONFIG{comments_phpbb/phpbb_prefix, 'phpbb_'}" />
+  </li>
+  
+</ul>
+</fieldset>
+
+
+<?php
+$phpbb_base = lire_config('comments_phpbb/phpbb_base');
+$phpbb_prefix = lire_config('comments_phpbb/phpbb_prefix');
+
+if(sql_showtable($phpbb_prefix."posts",$phpbb_base))
+{
+?>
+<BOUCLE_general_test(PHPBB_USERS){0,1}>
+	<fieldset>
+	  <legend>PhpBB</legend>
+<ul>
+  <li>
+	<label>Utilisateur-robot (cet utilisateur sera le posteur du topic) :</label>
+	<select name="phpbb_poster">
+		<BOUCLE_phpbb_users(PHPBB_USERS){par username}{group_id IN 1,2,5}>
+			<option value="#USER_ID"[(#USER_ID|=={#CONFIG{comments_phpbb/phpbb_poster}}|?{' selected="selected"',''})]>[(#USERNAME|utf8_encode)]</option>
+		</BOUCLE_phpbb_users>
+	</select>
+</li>
+<li>
+
+	<label>Forum des commentaires :</label>
+	<select name="phpbb_forum">
+		<BOUCLE_phpbb_categories1(PHPBB_FORUMS){parent_id=0 }>
+			<option value="0" disabled="disabled">[(#FORUM_NAME)]</option>
+		
+			<BOUCLE_phpbb_forums1(PHPBB_FORUMS){parent_id=#FORUM_ID}>
+				<option value="#FORUM_ID"[(#FORUM_ID|=={#CONFIG{comments_phpbb/phpbb_forum}}|?{' selected="selected"',''})]>|- [(#FORUM_NAME)]</option>
+			</BOUCLE_phpbb_forums1>
+		</BOUCLE_phpbb_categories1>
+	</select>
+</li>
+<li>
+	
+
+	<label>Forum temporaire (o&ugrave; les topics sont d&eacute;plac&eacute;s si le statut de l'article n'est plus "publi&eacute;") </label> 
+	<select name="phpbb_tmpforum">
+			<BOUCLE_phpbb_categories2(PHPBB_FORUMS){parent_id=0 }>
+			<option value="0" disabled="disabled">[(#FORUM_NAME)]</option>
+		
+			<BOUCLE_phpbb_forums2(PHPBB_FORUMS){parent_id=#FORUM_ID}>
+				<option value="#FORUM_ID"[(#FORUM_ID|=={#CONFIG{comments_phpbb/phpbb_tmpforum}}|?{' selected="selected"',''})]>|- [(#FORUM_NAME)]</option>
+			</BOUCLE_phpbb_forums2>
+		</BOUCLE_phpbb_categories2>	
+	</select>
+</li>
+</ul>
+	</fieldset>
+
+</BOUCLE_general_test>
+<p style="text-align:center; font-weight:bold;"><a href="#SELF" style="color:red;">Cliquez ici pour continuer la configuration du plugin...</a></p>
+<//B_general_test>
+<?php
+}
+else
+{
+?>
+<p style="text-align:center; font-weight:bold; color:red;">Indiquez les paramètres de la base de données avant de continuer...</p>
+<?php
+}
+?>
+<div style="text-align:center">
+<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
+<input type="reset" value="<:reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</div>
+</form>
