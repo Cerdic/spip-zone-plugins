@@ -44,7 +44,7 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 /***************************/
 /* tabs */
 .markItUp .markItUpTabs {
-	text-align:right; margin-bottom:3px; padding:1px 1px 0;margin-top:-2em;
+	text-align:right; margin-bottom:3px; padding:1px 1px 0;
 	border-bottom:1px solid #888; overflow:hidden; 
 	width:auto; float:right; clear:both;}
 .markItUp .markItUpTabs a {
@@ -75,7 +75,7 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 
 /***************************************************************************************/
 /* first row of buttons */
-.markItUp .markItUpHeader {clear:both; margin:0px; padding:0px;}
+.markItUp .markItUpHeader { margin:0px; padding:0px;}
 .markItUp .markItUpHeader ul li {
 	list-style:none;
 	float:left;
