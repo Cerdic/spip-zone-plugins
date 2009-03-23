@@ -792,11 +792,9 @@ function spiplistes_listes_boite_elligibles ($id_liste, $statut_liste, $tri, $de
 
 //CP-20080610
 // boite des moderateurs
-function spiplistes_listes_boite_moderateurs ($id_liste, $script_retour, $id_conteneur) {
-	$boite_moderateurs = ""
-		. "<div id='grosse_boite_moderateurs' class='verdana1' style='width:100%;height:auto'>\n"
-		. "<ul class='liste-moderateurs'>\n"
-		;
+function spiplistes_listes_boite_moderateurs ($id_liste, $script_retour, $id_conteneur) 
+{
+	$boite_moderateurs = "";
 	$sql_result = sql_select(
 		"a.id_auteur,a.statut,a.nom"
 		, array(
@@ -813,7 +811,7 @@ function spiplistes_listes_boite_moderateurs ($id_liste, $script_retour, $id_con
 	while($row = sql_fetch($sql_result)) {
 		$id_auteur = $row['id_auteur'];
 		$exec_url = generer_url_ecrire($script_retour, "id_liste=$id_liste&id_auteur=$id_auteur&faire=$faire");
-		$action_url = generer_action_auteur(_SPIPLISTES_ACTION_MOD_GERER, $id_liste." ".$id_auteur." ".$faire);
+		$action_url = generer_action_auteur(_SPIPLISTES_ACTION_MOD_GERER, "$id_liste $id_auteur $faire");
 		$couleur_ligne = (($ii++) % 2) ? '#eee' : '#fff';
 		$boite_moderateurs .= ""
 			. "<li style='background-color: $couleur_ligne'>\n"
@@ -828,9 +826,15 @@ function spiplistes_listes_boite_moderateurs ($id_liste, $script_retour, $id_con
 			. "</li>\n"
 			;
 	}
-	$boite_moderateurs .= ""
-		. "</ul>\n"
-		;
+	if(strlen($boite_moderateurs))
+	{
+		$boite_moderateurs = ""
+			. "<ul class='liste-moderateurs'>\n"
+			. $boite_moderateurs
+			. "</ul>\n"
+			;
+	
+	}
 	// demande la liste des elligibles
 	list($elligibles, $nb_elligibles) = spiplistes_listes_auteurs_elligibles($id_liste, $statut_liste, "moderer");
 	if($nb_elligibles > 0) {
@@ -842,10 +846,12 @@ function spiplistes_listes_boite_moderateurs ($id_liste, $script_retour, $id_con
 			, _SPIPLISTES_ACTION_MOD_GERER
 			, $script_retour
 			, 'grosse_boite_moderateurs'
-			, "$id_liste $id_auteur ajouter"
+			, "$id_liste 0 ajouter"
 			);
 	}
-	$boite_moderateurs .= ""
+	$boite_moderateurs = ""
+		. "<div id='grosse_boite_moderateurs' class='verdana1' style='width:100%;height:auto'>\n"
+		. $boite_moderateurs
 		. "</div>\n"
 		;
 	return($boite_moderateurs);

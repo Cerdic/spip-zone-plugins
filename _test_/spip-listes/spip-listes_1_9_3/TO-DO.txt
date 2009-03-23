@@ -5,7 +5,6 @@
 
 
 TO-DO:
-. l'ajout d'un moderateur a une liste en fonctionne pas. Ajax a corriger
 . ajouter formulaire pour confirmation abonnement par mail (actuellement en 'dur' dans balise/formulaire_abonnement.php)
 . revoir inventaire des abonnements. Donne parfois un chiffre negatif pour le nombre d'abonnes (probablement ancienne version. SL 1.98 ?)
 . ajouter outil de nettoyage de tables ?

@@ -642,7 +642,7 @@ function spiplistes_mod_listes_supprimer ($id_auteur, $id_liste) {
 		$sql_where = array("id_auteur>0");
 		$msg = "ALL";
 	}
-	if($sql_where && (($id_liste = intval($id_liste) > 0))) {
+	if($sql_where && (($id_liste = intval($id_liste)) > 0)) {
 		$sql_where[] = "id_liste=$id_liste";
 		if(($result = sql_delete('spip_auteurs_mod_listes', $sql_where)) !== false) {
 			spiplistes_log_api("delete moderator #$id_auteur from id_liste #$id_liste");
@@ -656,7 +656,7 @@ function spiplistes_mod_listes_supprimer ($id_auteur, $id_liste) {
 
 //CP-20080512
 function spiplistes_mod_listes_ajouter ($id_auteur, $id_liste) {
-	if(($id_liste = intval($id_liste) > 0)) {
+	if(($id_liste = intval($id_liste)) > 0) {
 		$result =
 			sql_insertq('spip_auteurs_mod_listes'
 				, array(
