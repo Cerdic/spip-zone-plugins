@@ -14,8 +14,6 @@ include_spip("inc/presentation");
 // compatibilite spip 1.9
 if(defined('_SPIP19100') && !function_exists('fin_gauche')) { function fin_gauche(){return '';} }
 function cs_compat_boite($b) {if(defined('_SPIP19200')) echo $b('', true); else $b(); }
-// selecteur "[@" exclu par jQuery 1.3.1
-@define('_SEL_JQUERY', defined('_SPIP20100')?'':'@');
 
 function cs_admin_styles_et_js($cs_version) {
 	global $afficher_outil;
