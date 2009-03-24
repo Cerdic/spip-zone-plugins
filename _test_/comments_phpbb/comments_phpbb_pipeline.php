@@ -63,13 +63,13 @@ function comments_phpbb_new($flux)
 					$res = sql_fetch($query);
 					$insert = array(
 					      'topic_poster' => $res['user_id'],
-					      'topic_title' => $titre_post,
+					      'topic_title' => mysql_real_escape_string($titre_post),
 					      'topic_first_poster_name' => $res['username'],
 					      'topic_time' => $date,
 					      'topic_poster' => $poster_id,
 					      'topic_last_post_time' => $date,
 					      'topic_last_poster_id' => $poster_id,
-					      'topic_last_post_subject' => $titre_post,
+					      'topic_last_post_subject' => mysql_escape_string($titre_post),
 					      'topic_last_poster_name' => $res['username'],
 					      'forum_id' => $forum_id,
 					      );
