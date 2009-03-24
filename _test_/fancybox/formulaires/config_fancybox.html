@@ -1,0 +1,91 @@
+
+<!-- autoriser=webmestre -->
+<!-- refus=Seuls les webmestres du site sont autoris&#233;s &#224; modifier ces param&#232;tres. -->
+<!-- nom=fancybox -->
+
+<div class="formulaire_spip formulaire_editer formulaire_cfg">
+
+	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+	
+<form method="post" action="#SELF"><div>
+	#ACTION_FORMULAIRE{SELF}
+
+	<ul>
+		<li class="editer_fancybox_selecteur_commun[ (#ENV**{erreurs}|table_valeur{selecteur_commun}|oui)erreur]">
+			<label for="fancy_selecteur_commun"><:fancybox:cfg_lbl_selecteur_commun:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{selecteur_commun})</span>]
+			<p class="explication"><:fancybox:cfg_inf_selecteur_commun:></p>
+			<input type="text" name="selecteur_commun" class="text" id="fancy_selecteur_commun" size="60"
+				value="#ENV{selecteur_commun, .fancybox}" />
+		</li>
+		
+		<li class="editer_fancybox_selecteur_galerie[ (#ENV**{erreurs}|table_valeur{selecteur_galerie}|oui)erreur]">
+			<label for="fancy_selecteur_galerie"><:fancybox:cfg_lbl_selecteur_galerie:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{selecteur_galerie})</span>]
+			<p class="explication"><:fancybox:cfg_inf_selecteur_galerie:></p>
+			<input type="text" name="selecteur_galerie" class="text" id="fancy_selecteur_galerie" size="60"
+				value="#ENV{selecteur_galerie, #documents_portfolio .fancybox}" />	
+		</li>
+
+		<li class="editer_fancybox_padding[ (#ENV**{erreurs}|table_valeur{padding}|oui)erreur]">
+			<label for="fancy_padding"><:fancybox:cfg_lbl_padding:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{padding})</span>]
+			<p class="explication"><:fancybox:cfg_inf_padding:></p>
+			<input type="text" name="padding" class="text" id="fancy_padding" size="8" value="#ENV{padding, 10}" />	
+		</li>
+
+		<li class="editer_fancybox_imagescale[ (#ENV**{erreurs}|table_valeur{imagescale}|oui)erreur]">
+			<label><:fancybox:cfg_lbl_imagescale:></label>
+			<p class="explication"><:fancybox:cfg_inf_imagescale:></p>
+			<div class="choix">
+				<input type="radio" name="imagescale" class="radio" id="fancy_imagescale_on" value="true" [(#ENV{imagescale,true}|=={true}|oui) checked="checked"] />
+				<label for='fancy_imagescale_on'><:oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="imagescale" class="radio" id="fancy_imagescale_off" value="false" [(#ENV{imagescale,true}|=={false}|oui) checked="checked"] />
+				<label for='fancy_imagescale_off'><:non:></label>
+			</div>
+		</li>
+		
+		<li class="editer_fancybox_overlayshow[ (#ENV**{erreurs}|table_valeur{overlayshow}|oui)erreur]">
+			<label><:fancybox:cfg_lbl_overlayshow:></label>
+			<p class="explication"><:fancybox:cfg_inf_overlayshow:></p>
+			<div class="choix">
+				<input type="radio" name="overlayshow" class="radio" id="fancy_overlayshow_on" value="true" [(#ENV{overlayshow,true}|=={true}|oui) checked="checked"] />
+				<label for='fancy_overlayshow_on'><:oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="overlayshow" class="radio" id="fancy_overlayshow_off" value="false" [(#ENV{overlayshow,true}|=={false}|oui) checked="checked"] />
+				<label for='fancy_overlayshow_off'><:non:></label>
+			</div>
+		</li>
+		
+		<li class="editer_fancybox_overlayopacity[ (#ENV**{erreurs}|table_valeur{overlayopacity}|oui)erreur]">
+			<label for="fancy_overlayopacity"><:fancybox:cfg_lbl_overlayopacity:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{overlayopacity})</span>]
+			<p class="explication"><:fancybox:cfg_inf_overlayopacity:></p>
+			<input type="text" name="overlayopacity" class="text" id="fancy_overlayopacity" size="8" value="#ENV{overlayopacity, 0.3}" />	
+		</li>
+
+		<li class="editer_fancybox_hideoncontentclick[ (#ENV**{erreurs}|table_valeur{hideoncontentclick}|oui)erreur]">
+			<label><:fancybox:cfg_lbl_hideoncontentclick:></label>
+			<p class="explication"><:fancybox:cfg_inf_hideoncontentclick:></p>
+			<div class="choix">
+				<input type="radio" name="hideoncontentclick" class="radio" id="fancy_hideoncontentclick_on" value="true" [(#ENV{hideoncontentclick,true}|=={true}|oui) checked="checked"] />
+				<label for='fancy_hideoncontentclick_on'><:oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="hideoncontentclick" class="radio" id="fancy_hideoncontentclick_off" value="false" [(#ENV{hideoncontentclick,true}|=={false}|oui) checked="checked"] />
+				<label for='fancy_hideoncontentclick_off'><:non:></label>
+			</div>
+		</li>
+	</ul>
+
+
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
+		<input type="submit" name="_cfg_delete" class="submit" value="<:effacer:>" />
+	</p>
+</div></form>
+</div>
