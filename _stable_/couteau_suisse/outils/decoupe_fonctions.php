@@ -247,4 +247,25 @@ if (defined('_decoupe_BALISE')) {
 	}
 }
 
+/*
+ filtre |decoupe_type_pagination qui renvoie :
+		1 si le nombre doit etre affiche
+		2 si le nombre ne doit pas etre affiche
+		3 s'il faut afficher '...'
+ voir le modele : modeles/decoupe_item.html
+*/
+function decoupe_type_pagination($page, $artpage, $page_fin, $rayon=4, $extremes=2) {
+	$diametre=$rayon*2;
+	if($page_fin<=$diametre+$extremes+1 || $page<=$extremes || $page>$page_fin-$extremes) return 1;
+	$depart = max(1, $artpage - $rayon);
+	$arrivee = $artpage + $rayon;
+	if($arrivee-$depart<$diametre) $arrivee=$depart+$diametre;
+	if($arrivee>$page_fin) $arrivee = $page_fin;
+	if($arrivee-$depart<$diametre) $depart=$arrivee-$diametre;
+	if($depart<=$extremes+1) $depart = 1;
+	if($arrivee>=$page_fin-$extremes) $arrivee = $page_fin;
+	if ($page<$depart-1 || $page>$arrivee+1) return 2;
+	if ($page==$depart-1 || $page==$arrivee+1) return 3;
+	return 1;
+}
 ?>
