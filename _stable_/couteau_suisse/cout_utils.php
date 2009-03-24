@@ -352,7 +352,7 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 		unset($temp_jq_init);
 	}
 	if (count($temp_jq)) {
-		$temp_js[] = "if (window.jQuery) jQuery(document).ready(function(){\n\t".join("\n\t", $temp_jq)."\n});";
+		$temp_js[] = "if (window.jQuery) {\nvar cs_sel_jQuery=typeof jQuery(document).selector=='undefined'?'@':'';\njQuery(document).ready(function(){\n\t".join("\n\t", $temp_jq)."\n});\n}";
 		unset($temp_jq);
 	}
 	if (count($temp_js)) {

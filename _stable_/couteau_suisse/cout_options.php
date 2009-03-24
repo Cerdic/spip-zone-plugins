@@ -22,8 +22,6 @@ if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) {
 }
 elseif (version_compare($GLOBALS['spip_version_code'],'1.9200','>=')) @define('_SPIP19200', 1);
 else @define('_SPIP19100', 1);
-// selecteur "[@" inutile depuis jQuery 1.2.x (inutile depuis SPIP 2.0)
-@define('_SEL_JQUERY', defined('_SPIP19300')?'':'@');
 // chemin du fichier de fonctions
 define('_COUT_FONCTIONS_PHP', find_in_path('cout_fonctions.php'));
 // globales de controles de passes

@@ -191,13 +191,13 @@ if (window.jQuery) jQuery(function(){
 	
 	jQuery('div.sous_liste').each(cs_Categorie2);
 	if (window.location.search.match(/cmd=pack/)!=null) 
-		jQuery(\"div.cs_aide a["._SEL_JQUERY."href*='cmd=pack']\")
+		jQuery(\"div.cs_aide a[\"+cs_sel_jQuery+\"href*='cmd=pack']\")
 			.click( function() { window.location.reload(true); return false; });
-	jQuery(\"div.cs_aide a["._SEL_JQUERY."href*='cmd=install']\").click( function() { 
+	jQuery(\"div.cs_aide a[\"+cs_sel_jQuery+\"href*='cmd=install']\").click( function() { 
 		msg=\"".cs_javascript('couteauprive:pack_installer').'\n\n'.$cs_reset2."\";
 		return window.confirm(msg.replace(/@pack@/,jQuery(this).text())); 
 	});
-	jQuery(\"div.cs_aide a["._SEL_JQUERY."href*='cmd=resetall']\").click( function() { 
+	jQuery(\"div.cs_aide a[\"+cs_sel_jQuery+\"href*='cmd=resetall']\").click( function() { 
 		msg=\"".cs_javascript('couteauprive:cs_reset').'\n\n'.$cs_reset2."\";
 		return window.confirm(msg); 
 	});

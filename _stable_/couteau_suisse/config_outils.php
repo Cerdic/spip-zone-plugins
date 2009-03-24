@@ -971,7 +971,7 @@ add_outil( array(
 	// jQuery pour remplacer l'arobase image par l'arobase texte
 	// ... puis arranger un peu le title qui a ete protege
 	'code:jq_init' => "jQuery('span.spancrypt', this).attr('class','cryptOK').html('&#6'+'4;');
-	jQuery(\"a["._SEL_JQUERY."title*='..']\", this).each(function () {
+	jQuery(\"a[\"+cs_sel_jQuery+\"title*='..']\", this).each(function () {
 		this.title = this.title.replace(/\.\..t\.\./,'[@]');
 	});",
 	'code:css' => 'span.spancrypt {background:transparent url(' . url_absolue(find_in_path('img/mailcrypt/leure.gif'))
