@@ -406,13 +406,13 @@ $.fn.initcrayon = function(){
 			$(this)
 			.addClass('crayon-hover')
 			.find('>span.crayon-icones')
-				.find('>span>em.crayon-' + this.type + ',>span>em.crayon-edit')
+				.find('>span>em.crayon-' + (this.type||'crayon') + ',>span>em.crayon-edit')
 					.show();//'visibility','visible');
 		},function(){
 			$(this)
 			.removeClass('crayon-hover')
 			.find('>span.crayon-icones')
-				.find('>span>em.crayon-' + this.type + ',>span>em.crayon-edit')
+				.find('>span>em.crayon-' + (this.type||'crayon') + ',>span>em.crayon-edit')
 					.hide();//('visibility','hidden');
 		}
 	);
