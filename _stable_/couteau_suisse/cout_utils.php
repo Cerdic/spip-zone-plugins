@@ -351,10 +351,9 @@ span.cs_BTg {font-size:140%; padding:0 0.3em;}';
 		$temp_jq[] = "cs_init.apply(document);";
 		unset($temp_jq_init);
 	}
-	if (count($temp_jq)) {
-		$temp_js[] = "if (window.jQuery) {\nvar cs_sel_jQuery=typeof jQuery(document).selector=='undefined'?'@':'';\njQuery(document).ready(function(){\n\t".join("\n\t", $temp_jq)."\n});\n}";
-		unset($temp_jq);
-	}
+	$temp_jq = count($temp_jq)?"\njQuery(document).ready(function(){\n\t".join("\n\t", $temp_jq)."\n});":'';
+	$temp_js[] = "if (window.jQuery) {\nvar cs_sel_jQuery=typeof jQuery(document).selector=='undefined'?'@':'';\nvar cs_CookiePlugin=\"".url_absolue(find_in_path('javascript/jquery.cookie.js'))."\";$temp_jq\n}";
+	unset($temp_jq);
 	if (count($temp_js)) {
 		$temp_js = join("\n", $temp_js);
 		if(function_exists('compacte_js')) $temp_js = compacte_js($temp_js);

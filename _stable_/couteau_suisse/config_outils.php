@@ -681,8 +681,7 @@ add_outil( array(
 		// s\'il y a un sommaire, on cache la navigation haute sur les pages
 		jQuery("div.decoupe_haut").css("display", "none");
 		// utilisation des cookies pour conserver l\'etat du sommaire si on quitte la page
-		if(jcookie="'.url_absolue(find_in_path('javascript/jquery.cookie.js')).'")
-			jQuery.getScript(jcookie, cs_sommaire_cookie);
+		jQuery.getScript(cs_CookiePlugin, cs_sommaire_cookie);
 	}',
 	'code:jq_init' => 'cs_sommaire_init.apply(this);',
 	// inserer : $table_des_traitements['TEXTE']['article']= 'sommaire_d_article(propre(%s))';
@@ -1000,7 +999,12 @@ add_variable( array(
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
 	'defaut' => 0,
-	'code:%s' => "define('_decoupe_BALISE', %s);\n",
+));
+add_variable( array(
+	'nom' => 'blocs_cookie',
+	'format' => _format_NOMBRE,
+	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
+	'defaut' => 0,
 ));
 add_outil( array(
 	'id' => 'blocs',
@@ -1010,6 +1014,9 @@ add_outil( array(
 	// fonction blocs_init() codee dans blocs.js : executee lors du chargement de la page et a chaque hit ajax
 	'code:js' => "var blocs_replier_tout = %%bloc_unique%%;",
 	'code:jq_init' => 'blocs_init.apply(this);',
+	// utilisation des cookies pour conserver l\'etat des blocs numerotes si on quitte la page
+	'code:jq' => 'if(%%blocs_cookie%%) { if(jQuery("div.cs_blocs").length)
+		jQuery.getScript(cs_CookiePlugin, cs_blocs_cookie); }',
 	'jquery' => 'oui',
 	'pipeline:pre_typo' => 'blocs_pre_typo',
 	'pipeline:bt_toolbox' => 'blocs_BarreTypo',

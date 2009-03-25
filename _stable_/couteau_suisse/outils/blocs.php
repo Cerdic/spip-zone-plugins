@@ -35,7 +35,7 @@ function blocs_callback($matches) {
 	$b = strlen($matches[2])?" cs_bloc$matches[2]":''; 
 	return "<div class='cs_blocs$b'><"._BLOC_TITRE_H." class='blocs_titre$h blocs_click'><a href='javascript:;'>$titre</a></"._BLOC_TITRE_H.">"
 		.(strlen($res)?"<div class='blocs_resume$r'>\n$res\n</div>":"")
-		."<div class='blocs_destination$d'>\n$t[1]\n</div></div>";
+		."<div class='blocs_destination$d'>\n".blocs_rempl($t[1])."\n</div></div>";
 }
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script

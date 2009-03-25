@@ -255,7 +255,7 @@ if (defined('_decoupe_BALISE')) {
  voir le modele : modeles/decoupe_item.html
 */
 function decoupe_type_pagination($page, $artpage, $page_fin, $rayon=4, $extremes=2) {
-	$diametre=$rayon*2;
+	$diametre = $rayon*2;
 	if($page_fin<=$diametre+$extremes+1 || $page<=$extremes || $page>$page_fin-$extremes) return 1;
 	$depart = max(1, $artpage - $rayon);
 	$arrivee = $artpage + $rayon;

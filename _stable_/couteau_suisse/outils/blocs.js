@@ -42,6 +42,32 @@ function blocs_init() {
 // un JS actif replie les blocs invisibles
 document.write('<style type="text/css">div.blocs_invisible{display:none;}</style>');
 
+// Sauve l'etat des blocs numerotes dans un cookie si on quitte la page
+function cs_blocs_cookie() {
+	if(typeof jQuery.cookie!='function') return;
+	var blocs_cookie_name = 'blocs' + window.location.pathname + window.location.search
+	blocs_cookie_name = blocs_cookie_name.replace(/[ ;,=]/,'_');
+	var deplies = jQuery.cookie(blocs_cookie_name);
+	jQuery.cookie(blocs_cookie_name, null);
+	if(deplies)
+		jQuery(deplies).children('.blocs_titre').blocs_replie_tout().blocs_toggle();
+	jQuery(window).bind('unload', function() {
+		jQuery.cookie(blocs_cookie_name, blocs_deplies());
+	});
+}
+
+// renvoie la liste des selecteurs de blocs ouverts
+function blocs_deplies() {
+	var deplies = '';
+	jQuery('.cs_blocs').each(function() {
+		var numero = /cs_bloc\d+/.exec(this.className);
+		if(numero==null) return;
+		replie = jQuery(this).children('.blocs_titre').eq(0).hasClass('blocs_replie');
+		if(!replie) deplies += (deplies.length?', ':'') + 'div.' + numero[0];
+	});
+	return deplies.length?deplies:null;
+}
+
 // une fonction et une variable pour reperer une pagination
 function blocs_get_pagination(url) {
 	tab=url.match(/#pagination([0-9]+)/);
