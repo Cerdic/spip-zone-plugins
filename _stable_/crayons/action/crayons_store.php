@@ -29,7 +29,8 @@ function post_crayons() {
             	$content[$field] = $_POST['content_'.$crayon.'_'.$field];
             	// Compatibilite charset autre que utf8 ; en effet on recoit
             	// obligatoirement les donnees en utf-8, par la magie d'ajax
-            	if ($GLOBALS['meta']['charset']!='utf-8') {
+            	// ... sauf dans le cas d'un envoi de fichier !
+            	if ($GLOBALS['meta']['charset']!='utf-8' AND !count($_FILES)) {
             	    include_spip('inc/charsets');
             	    $content[$field] = importer_charset($content[$field], 'utf-8');
             	}
