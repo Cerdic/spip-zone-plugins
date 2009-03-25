@@ -28,8 +28,8 @@ function notation_en_etoile($nb, $id, $clicable=false){
 	// eviter de generer X boutons radio inactifs remplaces par le javascript au chargement
 	{
 		for ($i=1; $i<=notation_get_nb_notes(); $i++){
-			$checked = ($i<=$nb) ? " star_on" : "";
-			$ret .= "<div class='star star_group_notation-$id star_readonly$checked'><a title='$nb'>$nb</a></div>";
+			$checked = ($i<=$nb) ? " star-rating-on" : "";
+			$ret .= "<div class='star-rating star_group_notation-$id star-rating-readonly$checked'><a title='$nb'>$nb</a></div>";
 		}
 	}
 	return "<div class='notation_note'>$ret</div>";
