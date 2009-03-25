@@ -164,6 +164,13 @@ $.fn.opencrayon = function(evt, percent) {
 					.html(c.$html);
 					$(me)
 					.activatecrayon(percent);
+					// Si le crayon a une taille mini qui le fait deborder
+					// a droite de l'ecran, recadrer vers la gauche
+					var diff = $('#crayon_'+id_crayon).offset().left + $('#crayon_'+id_crayon).width() - $(window).width();
+					if (diff>0) {
+						 $('#crayon_'+id_crayon)
+						 .css({'left': parseInt(pos['left'])-diff});
+					}
 				}
 			);
 		}
