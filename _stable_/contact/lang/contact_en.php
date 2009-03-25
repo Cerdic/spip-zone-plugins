@@ -12,7 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_adresse' => 'Adress',
 	'champ_code_postal' => 'Zip Code',
 	'champ_ville' => 'City',
-	'champ_pays' => 'State',
+	'champ_etat' => 'State',
+	'champ_pays' => 'Country',
 	
 	'configuration_description' => 'Customize your contact form.',
 	'configuration_destinataires' => 'Recipients',

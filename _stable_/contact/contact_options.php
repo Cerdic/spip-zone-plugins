@@ -13,6 +13,7 @@ function contact_infos_supplementaires(){
 		'adresse' => _T('contact:champ_adresse'),
 		'code_postal' => _T('contact:champ_code_postal'),
 		'ville' => _T('contact:champ_ville'),
+		'etat' => _T('contact:champ_etat'),
 		'pays' => _T('contact:champ_pays')
 	);
 	
