@@ -752,8 +752,8 @@
 		function enregistrer_squelettes($vidange = true) {
 			$spip_lettres_fond_lettre_html	= $GLOBALS['meta']['spip_lettres_fond_lettre_html'];
 			$spip_lettres_fond_lettre_texte	= $GLOBALS['meta']['spip_lettres_fond_lettre_texte'];
-			$url_message_html = generer_url_public($spip_lettres_fond_lettre_html, 'id_lettre='.$this->id_lettre, true);
-			$url_message_texte = generer_url_public($spip_lettres_fond_lettre_texte, 'id_lettre='.$this->id_lettre, true);
+			$url_message_html = generer_url_public($spip_lettres_fond_lettre_html, 'id_lettre='.$this->id_lettre.'&lang='.$this->lang, true);
+			$url_message_texte = generer_url_public($spip_lettres_fond_lettre_texte, 'id_lettre='.$this->id_lettre.'&lang='.$this->lang, true);
 			$this->message_html	= recuperer_page($url_message_html);
 			$this->message_texte = recuperer_page($url_message_texte);
 			
