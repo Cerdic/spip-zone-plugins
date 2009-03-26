@@ -37,12 +37,18 @@
 		</ul>
 	</fieldset>
 	
-	[(#REM) On récupère les champs possibles ]
-	#SET{champs, #VAL{rien}|contact_infos_supplementaires}
+	[(#REM)
+		On récupère les champs possibles
+		Mais on divise en deux :
+			- d'abord les champs choisis
+			- puis les champs qui restent
+	]
+	#SET{champs_possibles, #VAL{rien}|contact_infos_supplementaires}
+	#SET{champs_choisis, #CONFIG{contact/champs}|array_flip}
+	#SET_MERGE{champs, #GET{champs_choisis}, #GET{champs_possibles}}
 	<fieldset>
 		<legend><:contact:infos_supplementaires:></legend>
-		<B_champs>
-		<ul>
+		<ul id="editer_champs">
 			<BOUCLE_champs(POUR){tableau #GET{champs}}>
 			<li class="choix editer_champ">
 				<input type="checkbox" name="champs[]" id="champ_#CLE" class="checkbox" value="#CLE"[ (#CLE|in_array{#ENV{champs,#ARRAY}}|oui)checked="checked"] />
@@ -54,7 +60,6 @@
 			</li>
 			</BOUCLE_champs>
 		</ul>
-		</B_champs>
 	</fieldset>
 	
 	<fieldset>
@@ -89,6 +94,19 @@
 				else
 					$(this).siblings('div')
 						.slideUp();
+			});
+		
+		$('ul#editer_champs')
+			.sortable({
+				cursor : 'move',
+				axis : 'y',
+				cancel : 'input, label',
+				forceHelperSize : true,
+				forcePlaceholderSize : true,
+				placeholder : 'cadre-couleur',
+				start : function(event, ui){
+					alert('coucou');
+				}
 			});
 	});
 </script>
