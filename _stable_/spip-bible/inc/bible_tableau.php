@@ -334,6 +334,7 @@ function bible_tableau($i,$lang=''){
 		'traduction'=> 'Septante',
 		'lang'		=>'grc',
 		'at'=> true,
+		'isaie'=>'Is',
 		'deutero'=> true
 			),
 	'vulg'		=> array(
@@ -343,6 +344,7 @@ function bible_tableau($i,$lang=''){
 		'lang'		=>'la',
 		'nt'=> true,
 		'at'=> true,
+		'isaie'=>'Is',
 		'deutero'=> true
 			),
     'nvulg'		=> array(
@@ -369,7 +371,7 @@ function bible_tableau($i,$lang=''){
 		'gateway'	=> false,
 		'traduction'=> 'Biblia Hebra&iuml;ca Stuttgartensia',
 		'lang'		=>'hbo',
-		
+		'isaie'=>'Is',
 		'at'=> true
 				),
 	'na'		=> array(

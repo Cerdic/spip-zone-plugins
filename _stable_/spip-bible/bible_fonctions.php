@@ -190,7 +190,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 	//problème Isaïe / Esaïe => on converti dans la bonne confession
 	if ($lang=='fr' and ($livre == 'Is' or $livre =='Es' )){
 	   $livre = $tableau_traduction[$traduction]['isaie'];
-	   
+	   $isaie=true;
 	
 	
 	}
@@ -231,7 +231,7 @@ function bible($passage,$traduction='jerusalem',$retour='non',$numeros='non',$re
 		
 		
 	else if ($wissen){
-		
+		$isaie == true ? $passage = eregi_replace('Es','Is',$passage) : $passage = $passage;
 		include_spip('traduction/wissen');
 		$texte = '<quote>'.recuperer_passage($livre,$passage,$wissen,$lang);
 		
