@@ -195,28 +195,21 @@ function bando_identite(){
 	$nom_site = typo($GLOBALS['meta']['nom_site']);
 	$img_info = find_in_path('images/information.png');
 	$url_config_identite = generer_url_ecrire('config_identite');
-	
-	$res = "<p class='nom_site_spip'>"
-	  . "<strong class='nom'> $nom_site </strong>"
-	  . " |"
-	  . "<a class='info' title='Informations sur $nom_site' href='$url_config_identite'><img alt='Informations sur $nom_site' src='$img_info' /></a>"
-	  . "| "
-	  . "<a class='voir' href='"._DIR_RACINE."'>"._T('bando:icone_visiter_site')."</a>"
-	  . "</p>";
-	 
-	
+
+	$res = "";
+
 	$moi = typo($GLOBALS['visiteur_session']['nom']);
 	$img_langue = find_in_path('images/langues.png');
 	$url_aide = generer_url_ecrire('aide_index',"var_lang=".$GLOBALS['spip_lang']);
 	$url_lang = generer_url_ecrire('config_langage');
 
 	$res .= "<p class='session'>"
-	  . "<strong class='nom'>$moi</strong>"
-	  . " |"
 	  . "<a title='Mes informations personnelles' href='".
 	  //generer_url_ecrire("auteur_infos","id_auteur=".$GLOBALS['visiteur_session']['id_auteur'])
 	  generer_url_ecrire("config_preferences")
-	  ."'><img alt='"._T('icone_informations_personnelles')."' src='$img_info'/></a>"
+	  ."'>"
+	  . "<strong class='nom'>$moi</strong>"
+	  . "<img alt='"._T('icone_informations_personnelles')."' src='$img_info'/></a>"
 	  . "| "
 	  . "<a class='menu_lang' href='$url_lang' title='"._T('bando:titre_config_langage')."'><img alt='"._T('bando:titre_config_langage')."' src='$img_langue'/>".traduire_nom_langue($GLOBALS['spip_lang'])."</a>"
 	  . " | "
@@ -225,6 +218,16 @@ function bando_identite(){
 	  // $auth_can_disconnect?
 	  . "<a href='".generer_url_action("logout","logout=prive")."'>"._T('icone_deconnecter')."</a>"
 	  . "</p>";
+
+	// informations sur le site
+	$res .= "<p class='nom_site_spip'>"
+	  . "<a class='info' title='Informations sur $nom_site' href='$url_config_identite'>"
+	  . "<strong class='nom'> $nom_site </strong>"
+	  . "<img alt='Informations sur $nom_site' src='$img_info' /></a>"
+	  . "| "
+	  . "<a class='voir' href='"._DIR_RACINE."'>"._T('bando:icone_visiter_site')."</a>"
+	  . "</p>";
+
 	
 	return "<div id='bando_identite'><div class='largeur'>\n$res<div class='nettoyeur'></div></div></div>";
 
