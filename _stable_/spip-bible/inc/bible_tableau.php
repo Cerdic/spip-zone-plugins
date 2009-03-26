@@ -354,6 +354,7 @@ function bible_tableau($i,$lang=''){
 		'lang'		=>'la',
 		'nt'=> true,
 		'at'=> true,
+		'isaie'=>'Is',
 		'deutero'=> true
 			),
     'vulgc'		=> array(
@@ -363,6 +364,7 @@ function bible_tableau($i,$lang=''){
 		'lang'		=>'la',
 		'nt'=> true,
 		'at'=> true,
+		'isaie'=>'Is',
 		'deutero'=> true
 			),
 		
