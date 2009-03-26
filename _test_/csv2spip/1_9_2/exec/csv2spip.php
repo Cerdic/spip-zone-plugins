@@ -1,4 +1,4 @@
-<?  
+<?php
 /* csv2spip est un plugin pour créer/modifier les visiteurs, rédacteurs et administrateurs restreints d'un SPIP à partir de fichiers CSV
 *	 					VERSION : 3.0 => plugin pour spip 1.9
 *
