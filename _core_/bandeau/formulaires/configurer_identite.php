@@ -27,7 +27,8 @@ function formulaires_configurer_identite_charger_dist(){
 function formulaires_configurer_identite_verifier_dist(){
 	$erreurs = array();
 
-	foreach(array('nom_site','adresse_site') as $obli)
+	// adresse_site est obligatoire mais rempli automatiquement si absent !
+	foreach(array('nom_site'/*,'adresse_site'*/) as $obli)
 		if (!_request($obli))
 			$erreurs[$obli] = _T('info_obligatoire');
 
