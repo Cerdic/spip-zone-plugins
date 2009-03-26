@@ -72,6 +72,8 @@ function action_odt2spip_importe() {
         if (!isset($ajouter_documents)) 
         	$ajouter_documents = charger_fonction('ajouter_documents','inc');
         
+        // la y'a un bogue super-bizarre avec la fonction spip_abstract_insert() qui est donnee comme absente lors de l'appel de ajouter_document()
+        if (!function_exists('spip_abstract_insert')) include_spip('base/abstract_sql');
         $id_doc_odt = $ajouter_documents($rep_dezip.$fichier_zip, $fichier_zip, "article", $id_article, 'document', 0, $toto='');
 
         $c = array(
