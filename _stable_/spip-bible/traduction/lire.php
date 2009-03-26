@@ -107,7 +107,6 @@ function supprimer_interitre($texte){
     $tableau = explode('<p class="titre4">',$texte);
    
     $texte = array_shift($tableau);
-    print_r($tableau);
     foreach ($tableau as $chaine){
         $tableau2 = explode("</p>",$chaine);
         $i = array_shift($tableau2); // on peut avoir des paragraphes pour la poesie, et pas seulement pour les intertitres
