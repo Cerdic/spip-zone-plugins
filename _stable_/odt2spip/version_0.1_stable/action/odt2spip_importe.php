@@ -144,6 +144,8 @@ function action_odt2spip_importe() {
                 $hauteur = round($Tdims[2]*$conversion_image);
                 odt2spip_retailler_img($rep_pictures.$img, $largeur, $hauteur);
               // intégrer l'image comme document spip
+                // la y'a un bogue super-bizarre avec la fonction spip_abstract_insert() qui est donnee comme absente lors de l'appel de ajouter_document()
+                if (!function_exists('spip_abstract_insert')) include_spip('base/abstract_sql');
                 $ajouter_documents = charger_fonction('ajouter_documents','inc');
                 $type = ($spip_version_code > 2 ? 'image' : 'vignette');
                 if ($id_document = $ajouter_documents($rep_pictures.$img, $img, "article", $id_article_tmp, $type, 0, $toto='')) { 
