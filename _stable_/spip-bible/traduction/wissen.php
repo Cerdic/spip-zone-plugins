@@ -42,67 +42,12 @@ function recuperer_passage($livre,$ref,$wissen,$lang){
 	$tableau = explode('<div id="popupcontent">',$code);
 	$code = $tableau[0];
 	//suppression des intertitres
-		if(eregi('<h3>',$code)){
-			$tableau = explode('<h3>',$code);
+	$n = 1;
+	while (eregi('<h[1-7]>',$code)){
+	   $code = supprimer_intertitre($n,$code);
+	   $n++;
+	}
 			
-			$d = 0;
-			$tableau2 = array();
-			foreach ($tableau as $j){
-				if (eregi('</h3>',$j)){
-					
-					$tableau3 = explode('</h3>',$j);
-					$tableau2[$d]=$tableau3[1];
-					
-				
-				}
-				$d++;
-			
-			}
-			
-			$code = implode('',$tableau2);
-			
-		}
-		
-		if(eregi('<h1>',$code)){
-			$tableau = explode('<h1>',$code);
-			
-			$d = 0;
-			$tableau2 = array();
-			foreach ($tableau as $j){
-				if (eregi('</h1>',$j)){
-					
-					$tableau3 = explode('</h1>',$j);
-					$tableau2[$d]=$tableau3[1];
-					
-				
-				}
-				$d++;
-			
-			}
-			
-			$code = implode('',$tableau2);
-		}
-		
-		if(eregi('<h5>',$code)){
-			$tableau = explode('<h5>',$code);
-			
-			$d = 0;
-			$tableau2 = array();
-			foreach ($tableau as $j){
-				if (eregi('</h5>',$j)){
-					
-					$tableau3 = explode('</h5>',$j);
-					$tableau2[$d]=$tableau3[1];
-					
-				
-				}
-				$d++;
-			
-			}
-			
-			$code = implode('',$tableau2);
-        }
-	
 	$code = strip_tags($code,'<span>');
 	
 	$code = str_replace('<span class="chapter">','<br /><strong>',$code);
@@ -115,4 +60,26 @@ function recuperer_passage($livre,$ref,$wissen,$lang){
 	$code = eregi_replace("</sup>"," </sup>",$code);
 	return $code;
 	}
+function supprimer_intertitre($n, $code){
+    if(eregi('<h'.$n.'>',$code)){
+			$tableau = explode('<h'.$n.'>',$code);
+			
+			$d = 0;
+			$tableau2 = array();
+			foreach ($tableau as $j){
+				if (eregi('</h'.$n.'>',$j)){
+					
+					$tableau3 = explode('</h'.$n.'>',$j);
+					$tableau2[$d]=$tableau3[1];
+					
+				
+				}
+				$d++;
+			
+			}
+			
+			$code = implode('',$tableau2);
+        }
+    return $code;
+}
 ?>
