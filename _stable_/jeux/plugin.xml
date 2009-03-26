@@ -92,7 +92,18 @@ Afin d'&#233;viter les mauvaises surprises de pr&#233;sentation (comme l'afficha
 		<inclure>jeux_pipelines.php</inclure>
 		<nom>declarer_tables_objets_surnoms</nom>
 	</pipeline>
-
+    <bouton id='jeux' parent='bando_edition'>
+       <icone>img/jeu-16.png</icone>
+       <titre>jeux:jeux</titre>
+       <url>jeux_tous</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
+       <args></args>
+   </bouton>
+	<bouton id='jeu_creer' parent="outils_rapides">
+		<icone>img/jeu-16.png</icone>
+		<titre>jeux:nouveau_jeu</titre>
+		<url>jeux_edit</url>
+		<args>nouveau=oui</args>
+	</bouton>
 	<install>base/jeux_upgrade.php</install>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>
