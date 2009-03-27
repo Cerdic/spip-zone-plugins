@@ -242,7 +242,7 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 			}
 		}
 		if(!$valeurs['login']){
-			$valeurs['login'] = test_login($valeurs['nom'], $valeurs['email']);
+			$valeurs['login'] = inscription2_test_login($valeurs['nom'], $valeurs['email']);
 		}
 	}
 	
@@ -357,7 +357,7 @@ function formulaires_inscription2_ajax_traiter_dist($id_auteur = NULL){
 }
 
 // http://doc.spip.org/@test_login
-function test_login($nom, $mail) {
+function inscription2_test_login($nom, $mail) {
 	include_spip('inc/charsets');
 	$nom = strtolower(translitteration($nom));
 	$login_base = preg_replace("/[^\w\d_]/", "_", $nom);
