@@ -44,7 +44,7 @@ function comments_phpbb_declarer_tables_principales($tables_principales){
     // table des forums
     $phpbb_forums = array(
 	    'forum_id' => 'mediumint(8) NOT NULL',
-	    'forum_name' => 'VARCHAR(255) NOT NULL'
+	    'forum_name' => 'VARCHAR(255) NOT NULL',
 	    'parent_id' => 'mediumint(8) NOT NULL');
 	    
     $phpbb_forums_key = array(
