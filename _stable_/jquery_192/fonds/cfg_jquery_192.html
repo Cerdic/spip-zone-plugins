@@ -1,0 +1,15 @@
+<!-- titre=jQuery / SPIP 1.92 -->
+<!-- descriptif= -->
+
+[(#REM) icone=jquery_24.png]
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+<label><p>[(#REM|sinon{<:bouton_choisir:>:}|typo)]</p>
+<p style="text-align:center"><select name="choix_version"> 
+	<option value="-1.1"[ selected="(#CONFIG{jquery_192/choix_version,_126}|=={-1.1}|?{selected})"]>jQuery v1.1.1 (SPIP v1.9.2 dist)</option>
+	<option value="_126"[ selected="(#CONFIG{jquery_192/choix_version,_126}|=={_126}|?{selected})"]>jQuery v1.2.6 (SPIP v2.0.x dist)</option>
+	<option value="_132"[ selected="(#CONFIG{jquery_192/choix_version,_126}|=={_132}|?{selected})"]>jQuery v1.3.2 (SPIP v2.1.x dist)</option>
+</select></p>
+</label>
+<p align="right"><input class="fondo"  type="submit" name="_cfg_ok" value="<:valider:>" /></p>
+</form>
