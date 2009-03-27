@@ -3,7 +3,7 @@
 	jQuery pour SPIP 1.92x
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-Mise en plugin pour SPIP 1.92x : Patrice Vanneufvile
+Patrice Vanneufville
 _ Librairie javascript : John Resig pour [jquery.js->http://jquery.com]
 	</auteur>
 	<version>
@@ -13,9 +13,9 @@ _ Librairie javascript : John Resig pour [jquery.js->http://jquery.com]
 	stable
 	</etat>
 	<description>
-D&eacute;sactive l'ancienne librairie {jQuery} distribu&eacute;e avec SPIP 1.92x ({{jquery.js v1.1.1}}) et ajoute un appel &#224; {{jquery.js v1.2.6}} utilis&eacute; par SPIP 2.0.x dans l'ent&#234;te publique (fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>)
+D&eacute;sactive l'ancienne librairie {jQuery} distribu&eacute;e avec SPIP 1.92x ({{jquery.js v1.1.1}}) et ajoute un appel &#224; {{jquery.js v1.2.6}} utilis&eacute; par SPIP 2.0.x dans l'ent&#234;te publique (fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>).
 
-Ce plugin vous permet donc de b&eacute;n&eacute;ficier d'une version r&eacute;cente de {jQuery} pour vos squelettes, tout en gardant en partie priv&eacute;e la version originale. Si vous avez installé le plugin {{CFG}}, choisissez la version de {jQuery} &#224; utiliser : {{v1.1.1}}, {{v1.2.6}} ou {{v1.3.2}}.
+Ce plugin vous permet donc de b&eacute;n&eacute;ficier d'une version r&eacute;cente de {jQuery} pour vos squelettes, tout en gardant en partie priv&eacute;e la version originale. Si vous avez install&eacute; le plugin {{CFG}}, choisissez la version de {jQuery} &#224; utiliser : {{v1.1.1}}, {{v1.2.6}} ou {{v1.3.2}}.
 
 Ajout au passage du pipeline {jquery_plugins} et des plugins {jquery.form}, {jquery.cookie} et {ajaxCallback}.
 
