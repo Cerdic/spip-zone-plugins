@@ -28,7 +28,7 @@ function comments_phpbb_new($flux)
 				$texte_post = textebrut($article['chapo']);
 				/* TODO : problème avec les quotes qui sont convertis dans le post phpbb */
 				$texte_post .= "<br /><a href=/spip.php?article".$flux['args']['id_objet'].">Lire la news</a>";
-				$titre_post = $article['titre'];
+				$titre_post =  textebrut($article['titre']);
 				
 				$date = time();
 				$forum_id = intval(lire_config('comments_phpbb/phpbb_forum'));
@@ -38,13 +38,13 @@ function comments_phpbb_new($flux)
 				{
 					$article_phpbb['topic_id'] = intval($article_phpbb['topic_id']);
 					 sql_updateq(PHPBB_PREFIX.'topics',array(
-					    "topic_title" => mysql_real_escape_string($titre_post),
+					    "topic_title" => $titre_post,
 					    "forum_id" => $forum_id
 					 ),
 					 "topic_id='".$article_phpbb['topic_id']."'");
 					
 					 sql_updateq(PHPBB_PREFIX.'posts',array(
-					     "post_text" => mysql_escape_string($texte_post),
+					     "post_text" => $texte_post,
 					     "post_edit_user" => $GLOBALS['auteur_session']['nom']),
 					     "post_id=".intval($article_phpbb['topic_first_post_id'])
 					     
@@ -63,13 +63,13 @@ function comments_phpbb_new($flux)
 					$res = sql_fetch($query);
 					$insert = array(
 					      'topic_poster' => $res['user_id'],
-					      'topic_title' => mysql_real_escape_string($titre_post),
+					      'topic_title' => $titre_post,
 					      'topic_first_poster_name' => $res['username'],
 					      'topic_time' => $date,
 					      'topic_poster' => $poster_id,
 					      'topic_last_post_time' => $date,
 					      'topic_last_poster_id' => $poster_id,
-					      'topic_last_post_subject' => mysql_escape_string($titre_post),
+					      'topic_last_post_subject' => $titre_post,
 					      'topic_last_poster_name' => $res['username'],
 					      'forum_id' => $forum_id,
 					      );
