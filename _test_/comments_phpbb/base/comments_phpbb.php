@@ -31,9 +31,12 @@ function comments_phpbb_declarer_tables_principales($tables_principales){
     // table des utilisateurs
     $phpbb_users = array(
 	    'user_id' => 'mediumint(8) NOT NULL',
-	    'username' => 'VARCHAR(255) NOT NULL');
+	    'username' => 'VARCHAR(255) NOT NULL',
+	    'group_id' => 'mediumint(8) NOT NULL');
+
     $phpbb_users_key = array(
 	    'PRIMARY KEY' => 'user_id');
+
     $tables_principales['phpbb_users'] = array(
 	    'field' => &$phpbb_users,
 	    'key' => &$phpbb_users_key);
@@ -41,7 +44,8 @@ function comments_phpbb_declarer_tables_principales($tables_principales){
     // table des forums
     $phpbb_forums = array(
 	    'forum_id' => 'mediumint(8) NOT NULL',
-	    'forum_name' => 'VARCHAR(255) NOT NULL');
+	    'forum_name' => 'VARCHAR(255) NOT NULL'
+	    'parent_id' => 'mediumint(8) NOT NULL');
 	    
     $phpbb_forums_key = array(
 	    'PRIMARY KEY' => 'forum_id');
@@ -88,7 +92,6 @@ function comments_phpbb_declarer_tables_principales($tables_principales){
         return $tables_principales;
 }
 
-#
 function comments_phpbb_declarer_tables_interfaces($interface){
         // definir les jointures possibles
         $interface['tables_jointures']['phpbb_topic'][] = 'spip_articles_phpbb';
