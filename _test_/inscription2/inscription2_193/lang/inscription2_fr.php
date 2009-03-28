@@ -130,7 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'latitude' => 'Latitude',
 	'legende' => 'L&eacute;gende',
 	'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; &agrave; l\'adresse fournie. Pour activer votre compte veuillez suivre les instructions.',
-	'liste_adherents' => 'Liste d\'adh&eacute;rents',
+	'liste_adherents' => 'Afficher les visiteurs',
 	'login' => 'Nom d\'utilisateur (login)',
 	'longitude' => 'Longitude',
 
