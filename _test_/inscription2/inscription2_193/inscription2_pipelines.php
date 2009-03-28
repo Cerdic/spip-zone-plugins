@@ -1,14 +1,12 @@
 <?php
 
-// Ajoute le bouton d'amin aux webmestres
+// Modifie le bouton afficher les visiteurs aux webmestres
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 function inscription2_ajouter_boutons($boutons_admin){
 	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
-		$boutons_admin['auteurs']->sousmenu['inscription2_adherents']= new Bouton(
-		"../"._DIR_PLUGIN_INSCRIPTION2."images/inscription2_icone.png", // icone
-		_T("inscription2:adherents") //titre
-		);
+		//$boutons_admin['auteurs']->sousmenu['auteurs']= '';
+		unset($boutons_admin['auteurs']->sousmenu['auteurs']);
 	}
 	return $boutons_admin;
 }

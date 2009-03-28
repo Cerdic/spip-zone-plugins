@@ -1,10 +1,11 @@
 [(#EVAL{true}|debut_boite_info)]
+
 	<div class='raccourcis'>
 		<h3><:inscription2:raccourcis:></h3>
 		<ul>
 			<li><a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{new,'oui'})]"><:inscription2:ajouter_adherent:></a></li>
 			<li><a href="[(#URL_ECRIRE{cfg}|parametre_url{cfg,'inscription2'})]"><:inscription2:configuration:></a></li>
-			<li><a class ="confirm" href="[(#SELF|parametre_url{act,'net'})]"><:inscription2:nettoyer_tables:></a></li>
+			<li style="margin-top:10px"><a class ="confirm" href="[(#SELF|parametre_url{act,'net'})]"><:inscription2:nettoyer_tables:></a></li>
 		</ul>
 	</div>
 	<div class="legend">
@@ -17,7 +18,7 @@
 				<img src="#CHEMIN{'images/redac-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:auteur:><br />
 			</li>
 			<li>
-				<img src="#CHEMIN{'images/adherent-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:adherent:><br />
+				<img src="#CHEMIN{'images/adherent-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:visiteur:><br />
 			</li>
 			<li>
 				<img src="#CHEMIN{'images/aconf-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:a_confirmer:><br />

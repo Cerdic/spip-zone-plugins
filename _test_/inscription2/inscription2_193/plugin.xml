@@ -38,11 +38,14 @@
 		<nom>I2_exceptions_des_champs_auteurs_elargis</nom>
 		<inclure>inscription2_pipelines.php</inclure>
 	</pipeline>
+	<bouton id='inscription2_adherents' parent='auteurs'>	    <icone>images/fiche-perso.png</icone>	    <titre>icone_afficher_visiteurs</titre>	</bouton>
+	
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouter_boutons</action>
 		<inclure>inscription2_pipelines.php</inclure>
 	</pipeline>
+	
 	 <pipeline>
 		<nom>editer_contenu_objet</nom>
 		<inclure>inscription2_pipelines.php</inclure>
