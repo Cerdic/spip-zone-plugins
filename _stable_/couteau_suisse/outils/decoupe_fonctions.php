@@ -264,8 +264,8 @@ function decoupe_type_pagination($page, $artpage, $page_fin, $rayon=4, $extremes
 	if($arrivee-$depart<$diametre) $depart=$arrivee-$diametre;
 	if($depart<=$extremes+1) $depart = 1;
 	if($arrivee>=$page_fin-$extremes) $arrivee = $page_fin;
-	if ($page<$depart-1 || $page>$arrivee+1) return 2;
-	if ($page==$depart-1 || $page==$arrivee+1) return 3;
+	if($page<$depart-1 || $page>$arrivee+1) return 2;
+	if($page==$depart-1 || $page==$arrivee+1) return 3;
 	return 1;
 }
 ?>

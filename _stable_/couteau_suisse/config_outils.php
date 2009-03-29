@@ -288,8 +288,7 @@ add_outil( array(
 	'id' => 'auteur_forum',
 	'categorie'	 => 'admin',
 	'jquery'	=> 'oui',
-	'code:options' => "@define('_FORUM_OBLIGE_AUTEUR', 'oui');",
-	'pipeline:affichage_final' => 'Auteur_forum_affichage_final',
+	'code:jq_init' => 'cs_auteur_forum.apply(this);',
 ));
 
 	// ici on a besoin de trois boutons radio : _T('couteauprive:par_defaut'), _T('couteauprive:sf_amont') et _T('couteauprive:sf_tous')

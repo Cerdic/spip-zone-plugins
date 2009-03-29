@@ -281,7 +281,7 @@ function cs_initialise_includes($count_metas_outils) {
 	// liste des traitements utilises
 	$traitements_utilises =
 	// variables temporaires
-	$temp_html = $temp_css = $temp_js = $temp_jq = $temp_jq_init = $temp_filtre_imprimer = array();
+	$temp_js_html = $temp_css_html = $temp_css = $temp_js = $temp_jq = $temp_jq_init = $temp_filtre_imprimer = array();
 	// inclure d'office outils/cout_fonctions.php
 	if ($temp=cs_lire_fichier_php("outils/cout_fonctions.php"))
 		$infos_fichiers['code_fonctions'][] = $temp;
@@ -308,12 +308,10 @@ function cs_initialise_includes($count_metas_outils) {
 			// recherche d'un fichier .css, .css.html et/ou .js eventuellement present dans outils/
 			if ($f=find_in_path($_css = "outils/$inc.css")) $cs_metas_pipelines['header'][] = cs_insert_header($f, 'css');
 			if ($f=find_in_path("outils/$inc.js")) $cs_metas_pipelines['header'][] = cs_insert_header($f, 'js');
-			 // en fait on peut pas compiler ici car les balises vont devoir etre traitees et les traitements ne sont pas encore dispo !
-			if ($f=find_in_path("outils/$inc.css.html")) {
-				// le code est mis de cote. il sera compile plus tard au moment du pipeline grace a cs_compile_header()
-				lire_fichier($f, $ff);
-				$temp_html[] = $ff;
-			}
+			// en fait on peut pas compiler ici car les balises vont devoir etre traitees et les traitements ne sont pas encore dispo !
+			// le code est mis de cote. il sera compile plus tard au moment du pipeline grace a cs_compile_header()
+			if ($f=find_in_path("outils/$inc.css.html")) { lire_fichier($f, $ff); $temp_css_html[] = $ff; }
+			if ($f=find_in_path("outils/$inc.js.html")) { lire_fichier($f, $ff); $temp_js_html[] = $ff; }
 			// recherche d'un code inline eventuellement propose
 			if (isset($outil['code:spip_options'])) $infos_fichiers['code_spip_options'][] = $outil['code:spip_options'];
 			if (isset($outil['code:options'])) $infos_fichiers['code_options'][] = $outil['code:options'];
@@ -333,10 +331,14 @@ function cs_initialise_includes($count_metas_outils) {
 	if(isset($infos_pipelines['bt_toolbox']))
 		$temp_css[] = 'span.cs_BT {background-color:#FFDDAA; font-weight:bold; border:1px outset #CCCC99; padding:0.2em 0.3em;}
 span.cs_BTg {font-size:140%; padding:0 0.3em;}';
-	// prise en compte des css.html qu'il faudra compiler plus tard
-	if (count($temp_html)) {
-		$temp_css[] = '<cs_html>'.join("\n", $temp_html).'</cs_html>';
-		unset($temp_html);
+	// prise en compte des css.html et js.html qu'il faudra compiler plus tard
+	if(count($temp_css_html)){
+		$temp_css[] = '<cs_html>'.join("\n", $temp_css_html).'</cs_html>';
+		unset($temp_css_html);
+	}
+	if(count($temp_js_html)){
+		$temp_js[] = '<cs_html>'.join("\n", $temp_js_html).'</cs_html>';
+		unset($temp_js_html);
 	}
 	// concatenation des css inline, js inline et filtres trouves
 	if (count($temp_css)) {
