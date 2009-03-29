@@ -42,7 +42,7 @@ function agenda_mini($i) {
   $sinon = array_shift($args);
   if (!$une_date) return $sinon;
   $type = 'mini';
-  $agenda = Agenda_memo_full(0);
+  $agenda = agenda_memo_full(0);
   $evt = array();
   foreach (($args ? $args : array_keys($agenda)) as $k) {  
       if (is_array($agenda[$k]))
