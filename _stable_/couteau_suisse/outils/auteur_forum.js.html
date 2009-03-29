@@ -2,9 +2,10 @@
 // et tagger avec cs_done pour eviter de binder plrs fois le meme bloc
 function cs_auteur_forum() {
 	// selecteur du bloc de previsualisation
-	var sel = 'fieldset.previsu';
-	if(!jQuery(sel, this).length) return;
-	var form = jQuery(sel, this).parents('form').eq(0);
+	var sel = jQuery('fieldset.previsu', this);
+	if(!sel.length) return;
+//	alert('previsu OK');
+	var form = sel.parents('form').eq(0);
 	// SPIP 2.0 remplace 'auteur' par 'session_nom'
 	var auteur = jQuery('#session_nom', this);
 	if(!auteur.length) auteur = jQuery('#auteur', this);
@@ -14,7 +15,7 @@ function cs_auteur_forum() {
 		if(!auteur.val().length) {
 			alert("<:couteau:nom_forum|html2unicode|addslashes|unicode_to_javascript:>");
 			auteur.focus();
-			auteur.css('background-color','#FFFFE0').auteur.css('border','solid 2px #E86519');
+			auteur.css('background-color','#FCC').css('border-style','solid').css('border-color','#C30');
 			return false;
 		}
 	});
