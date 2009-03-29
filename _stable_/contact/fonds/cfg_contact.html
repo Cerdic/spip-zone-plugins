@@ -44,7 +44,7 @@
 			- puis les champs qui restent
 	]
 	#SET{champs_possibles, #VAL{rien}|contact_infos_supplementaires}
-	#SET{champs_choisis, #CONFIG{contact/champs}|array_flip}
+	#SET{champs_choisis, #CONFIG{contact/champs,#ARRAY}|array_flip}
 	#SET_MERGE{champs, #GET{champs_choisis}, #GET{champs_possibles}}
 	<fieldset>
 		<legend><:contact:infos_supplementaires:></legend>
