@@ -29,7 +29,7 @@
 				#SET{label,#GET{label}|concat{'<span class="label_obligatoire"> ',#VAL{forms:info_obligatoire_02}|_T{},'</span>'}}
 				]
 				[(#GET{ischeck}|non)[<label for="input-#ID_FORM-#CHAMP">(#GET{label})</label>]]
-				[(#GET{ischeck}|oui)[<span class='label'>(#GET{label})</span>]]
+				[(#GET{ischeck}|oui)[<label class='label'>(#GET{label})</label>]]
 				[<span class='erreur_message'>(#ENV*{erreurs}|table_valeur{#CHAMP})</span>]
 				[<span class="formInfo"><a href="#URL_PAGE{forms_tip,id_form=#ID_FORM&champ=#CHAMP&width=200}" class="jTip" id='aide-#ID_FORM-#CHAMP'>(#AIDE|?{'?'})</a></span>]
 				[<div class='explication'>(#TYPE|forms_label_details)</div>]

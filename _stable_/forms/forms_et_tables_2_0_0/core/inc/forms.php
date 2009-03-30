@@ -70,7 +70,7 @@ function forms_valeurs($id_donnee,$id_form = NULL,$champ=NULL){
 
 	$selchamp = "";
 	if ($champ!==NULL) $selchamp = "d.champ=".sql_quote($champ)." AND";
-	$rows = sql_allfetsel("*","spip_forms_donnees_champs AS d JOIN spip_forms_champs AS c ON (c.champ=d.champ AND c.id_form=".intval($id_form),"$selchamp d.id_donnee=".intval($id_donnee));
+	$rows = sql_allfetsel("*","spip_forms_donnees_champs AS d JOIN spip_forms_champs AS c ON (c.champ=d.champ AND c.id_form=".intval($id_form).")","$selchamp d.id_donnee=".intval($id_donnee));
 	foreach($rows as $row){
 		if ($row['type']=='multiple')
 			$valeurs[$row['champ']][]= $row['valeur'];

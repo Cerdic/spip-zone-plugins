@@ -303,7 +303,10 @@ function forms_enregistrer_reponse_formulaire($id_form, &$id_donnee, &$erreur, &
 			if ($champconfirm
 			  AND $row=sql_fetsel("valeur","spip_forms_donnees_champs","id_donnee=".intval($id_donnee)." AND champ=".sql_quote($champconfirm)))
 					$mailconfirm = $row['valeur'];
-			if (($email) || ($mailconfirm)) {
+			if (
+				  (is_array($email) AND strlen(reset($email)))
+				  OR ($mailconfirm)
+				) {
 				include_spip("inc/session");
 				$hash = md5("forms confirme reponse $id_donnee $cookie ".hash_env());
 				$url = generer_url_public($script_validation,"mel_confirm=oui&id_donnee=$id_donnee&hash=$hash".($script_args?"&$script_args":""));

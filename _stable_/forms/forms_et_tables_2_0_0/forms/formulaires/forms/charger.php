@@ -11,8 +11,9 @@
  *
  */
 
-function formulaires_forms_charger_dist($id_form = 0, $id_article = 0, $id_donnee = 0, $id_donnee_liee = 0, $class='', $script_validation = 'valide_form', $message_confirm='forms:avis_message_confirmation',$reponse_enregistree="forms:reponse_enregistree",$forms_obligatoires=""){
+function formulaires_forms_charger_dist($id_form = 0, $id_article = 0, $id_donnee = 0, $id_donnee_liee = 0, $class='', $script_validation = 'valide_form', $message_confirm='forms:avis_message_confirmation',$reponse_enregistree="forms:reponse_enregistree",$forms_obligatoires="",$retour=""){
 	$valeurs = array();
+
 	include_spip('inc/autoriser');
 	include_spip('base/abstract_sql');
 	
@@ -34,8 +35,9 @@ function formulaires_forms_charger_dist($id_form = 0, $id_article = 0, $id_donne
 	$structure = forms_structure($id_form,false);
 	foreach(array_keys($structure) as $champ)
 		$valeurs[$champ] = '';
-	
+
 	$id_donnee = $id_donnee?$id_donnee:intval(_request('id_donnee'));
+
 	
 	/* doublonne maintenant avec le pipeline formulaires_charger */
 	$valeurs = pipeline('forms_pre_remplit_formulaire',array('args'=>array('id_form'=>$id_form,'id_donne'=>$id_donnee),'data'=>$valeurs));
@@ -68,7 +70,7 @@ function formulaires_forms_charger_dist($id_form = 0, $id_article = 0, $id_donne
 		// pour la compat, ne sert plus !
 	  . "<input type='hidden' name='ajout_reponse' value='$id_form' />";
 
-	if (!_DIR_RESTREINT && $id_donnee)
+	if (test_espace_prive() AND $id_donnee)
 		$valeurs = array_merge($valeurs,forms_valeurs($id_donnee,$id_form));
 	elseif (_DIR_RESTREINT!="" 
 	&& ( ($row['modifiable']=='oui') || ($row['multiple']=='non') )
@@ -110,9 +112,9 @@ function formulaires_forms_charger_dist($id_form = 0, $id_article = 0, $id_donne
 
 
 function forms_obligatoire($row,$forms_obligatoires){
+	include_spip('inc/forms');
 	$returned=$row;
-	global $auteur_session;
-	$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
+	$id_auteur = isset($GLOBALS['visiteur_session']['id_auteur']) ? intval($GLOBALS['visiteur_session']['id_auteur']) : 0;
 	$form_tab=explode(',',$forms_obligatoires);
 	$chercher=true;
 	$i=0;

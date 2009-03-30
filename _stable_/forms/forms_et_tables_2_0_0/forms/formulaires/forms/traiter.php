@@ -11,7 +11,7 @@
  *
  */
 
-function formulaires_forms_traiter_dist($id_form = 0, $id_article = 0, $id_donnee = 0, $id_donnee_liee = 0, $class='', $script_validation = 'valide_form', $message_confirm='forms:avis_message_confirmation',$reponse_enregistree="forms:reponse_enregistree",$forms_obligatoires=""){
+function formulaires_forms_traiter_dist($id_form = 0, $id_article = 0, $id_donnee = 0, $id_donnee_liee = 0, $class='', $script_validation = 'valide_form', $message_confirm='forms:avis_message_confirmation',$reponse_enregistree="forms:reponse_enregistree",$forms_obligatoires="",$retour=""){
 	include_spip('inc/autoriser');
 	$resultat = array();
 	
@@ -54,6 +54,9 @@ function formulaires_forms_traiter_dist($id_form = 0, $id_article = 0, $id_donne
 		if ($url_validation)
 			$formok .= "<img src='$url_validation' width='1' height='1' alt='validation de la saisie' />";
 		$resultat['message_ok'] = $formok;
+
+		if (!$url_validation AND $retour)
+			$resultat['redirect'] = $retour;
 	}
 	else {
 		$resultat['message_erreur'] = join(' ',$erreur);
