@@ -5,7 +5,7 @@
   		}else{
 		str = document.pass.pass1.value;		document.pass.pass.value = MD5(str);		document.pass.pass2.value = '';		document.pass.pass1.value = '';
   		}	}else{		document.pass.pass1.value = '';		document.pass.pass2.value = '';	}  }// --></script>
-
+<div class="ajax">
 [<p class='formulaire_ok'>(#ENV*{message_ok})</p>]
 [<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 [(#EDITABLE|oui)
@@ -22,3 +22,4 @@
 	</p>
 </form>
 ]
+</div>
