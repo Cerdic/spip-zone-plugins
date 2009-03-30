@@ -124,7 +124,48 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 		"selectionType" => "line",
 	));
 	
-	
+	$barre->ajouterApres('desindenter', array(
+		// groupe code et bouton <code>
+		"id"          => 'speciaux',
+		"name"        => _T('enlumtypo:barre_formatages_speciaux'),
+		"className"   => 'outil_speciaux',
+		"openWith" => "",
+		"closeWith" => "",
+		"display"     => true,
+		"selectionType" => "",
+		"dropMenu"    => array(
+			// code spip
+			array(
+				"id"          => 'barre_cadre',
+				"name"        => _T('barre_outils:barre_cadre'),
+				"className"   => "outil_barre_cadre", 
+				"openWith"    => "\n&lt;cadre&gt;", 
+				"closeWith"   => "&lt;/cadre&gt;\n",
+				"display"     => true,
+				"selectionType" => "line",
+			),
+			// cadre spip
+			array(
+				"id"          => 'barre_code',
+				"name"        => _T('barre_outils:barre_code'),
+				"className"   => "outil_barre_code", 
+				"openWith"    => "&lt;code&gt;", 
+				"closeWith"   => "&lt;/code&gt;",
+				"display"     => true,
+				"selectionType" => "word",
+			),
+			// poesie spip
+			array(
+				"id"          => 'barre_poesie',
+				"name"        => _T('barre_outils:barre_poesie'),
+				"className"   => "outil_barre_poesie", 
+				"openWith"    => "\n&lt;poesie&gt;", 
+				"closeWith"   => "&lt;/poesie&gt;\n",
+				"display"     => true,
+				"selectionType" => "line",
+			),
+		),
+	));	
 	
 	// Petites capitales
 	$barre->ajouterApres('italic', array(
@@ -210,6 +251,10 @@ function typoenluminee_porte_plume_lien_classe_vers_icone($flux){
 		'outil_alignerdroite' => 'right.png',
 		'outil_stroke_through_et' => 'text_strikethrough.png',
 		'outil_cadretexte' => 'cadretexte.png',
+		'outil_speciaux' => 'tag.png',
+		'outil_barre_code' => 'page_white_code_red.png',
+		'outil_barre_cadre' => 'page_white_code.png',
+		'outil_barre_poesie' => 'poesie.png',
 
 		'outil_miseenevidence' => 'miseenevidence.png',
 		'outil_miseenevidence2' => 'miseenevidence2.png',

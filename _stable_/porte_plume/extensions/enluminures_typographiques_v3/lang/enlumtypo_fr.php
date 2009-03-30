@@ -33,6 +33,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_boutonsavances' => 'Mises en sens suppl&eacute;mentaires, &agrave; utiliser avec mod&eacute;ration et discernement&nbsp;!',
 'barre_tableau' => 'Ins&eacute;rer/modifier (le s&eacute;lectionner avant) un tableau',
 
+'barre_formatages_speciaux' => 'Formatage sp&eacute;ciaux',
+'barre_code' => 'Mettre en forme un &lt;code&gt;code informatique&lt;/code&gt;',
+'barre_cadre' => 'Placer dans une &lt;cadre&gt;zone de saisie de texte&lt;/cadre&gt;',
+'barre_poesie' => 'Mettre en forme comme une &lt;poesie&gt;po&eacute;sie&lt;/poesie&gt;',
 
 'cfg_puces' => 'Traitement des puces',
 'cfg_titraille' => 'Titraille',
