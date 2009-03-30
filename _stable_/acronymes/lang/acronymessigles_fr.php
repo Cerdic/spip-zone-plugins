@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_statut_publie' => "Publi&eacute;",
 'texte_statut_poubelle' => "Supprim&eacute;",
 'texte_statut_refuse' => "Refus&eacute;",
+'texte_supprimer' => 'Supprimer ce sigle',
 
 // page forms_edit
 'champs_formulaire'=>"Champs de la table des sigles",
