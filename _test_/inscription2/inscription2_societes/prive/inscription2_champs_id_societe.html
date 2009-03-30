@@ -1,0 +1,9 @@
+<li>
+	<label><:societe:societe:></label>
+	<select name='id_societe' id='id_societe' class='text' style='width:auto'>
+		<option value=''><:societe:societe_choisir:></option>
+		<BOUCLE_societe(SOCIETES){par nom}>
+			<option value='#ID_SOCIETE'[(#ID_SOCIETE|=={#ENV{val}}|oui) selected='selected']>#NOM</option>
+		</BOUCLE_societe>
+	</select>
+</li>
