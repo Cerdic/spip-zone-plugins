@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_liste_ol' => 'Mettre en liste num&eacute;rot&eacute;e',
 'barre_indenter' => 'Indenter une liste',
 'barre_desindenter' => 'D&eacute;sindenter une liste',
-'barre_inserer_caracteres' => 'Insérer des caractères spécifiques',
+'barre_inserer_caracteres' => 'Ins&eacute;rer des caract&egrave;res sp&eacute;cifiques',
 'barre_barre' => 'Barrer le texte',
 
 'editer'=>'&Eacute;diter',
@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_lien' => 'Transformer en [lien hypertexte->http://...]',
 'barre_lien_input' => 'Veuillez indiquer l\'adresse de votre lien (vous pouvez indiquer une adresse Web sous la forme http://www.monsite/com ou simplement indiquer le num&eacute;ro d\'un article de ce site.',
 'barre_note' => 'Transformer en [[Note de bas de page]]',
-'barre_paragraphe' => 'Cr&#233;er un paragraphe',
+'barre_paragraphe' => 'Cr&eacute;er un paragraphe',
 'barre_quote' => '<quote>Citer un message</quote>',
 
 // B (depuis BTv2)
@@ -83,7 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_gestion_anc_nom' => 'Nom de l\'ancre',
 'barre_gestion_anc_pointer' => 'Pointer vers une ancre',
 'barre_gestion_anc_cible' => 'Ancre cible',
-'barre_gestion_anc_bulle' => 'Bulle d\'aide ancre',
+'barre_gestion_anc_bulle' => 'Bulle d\'aide ancre'
 
 
 );
