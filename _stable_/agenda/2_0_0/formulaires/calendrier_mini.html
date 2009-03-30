@@ -22,7 +22,9 @@
 			</tr>
 		</thead>
 		<tbody>
-			[(#REM) On commence par calculer les evenements qui commencent ou finissent dans le mois courant]
+			[(#REM) On commence par calculer les evenements qui commencent ou finissent dans le mois courant
+				Ainsi que ceux qui sont a cheval (commencent avant, et finissent apres le mois courant)
+			]
 			<BOUCLE_calendrier_debut(EVENEMENTS)
 			{id_article}{id_mot?}
 			{agenda date_debut, mois, (#ENV{date}|annee), (#ENV{date}|mois)}>[
@@ -36,6 +38,16 @@
 				#DESCRIPTIF,#LIEU,
 				[(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE_DEBUT|affdate{'Y-m-d'})]})]})
 			]</BOUCLE_calendrier_fin>
+			#SET{'borne_debut_mois', (#ENV{date}|Agenda_moisdecal{0,'Y-m-d'})}
+			#SET{'borne_fin_mois', (#ENV{date}|Agenda_moisdecal{1,'Y-m-d'})}
+			<BOUCLE_calendrier(EVENEMENTS)
+			{id_article}{id_mot?}
+			{date_debut < #GET{'borne_debut_mois'}} 
+			{date_fin >= #GET{'borne_fin_mois'}}>[
+			(#DATE_DEBUT|Agenda_memo_full{#DATE_FIN,[(#TITRE|addslashes)],
+				#DESCRIPTIF,#LIEU,
+				[(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE_DEBUT|affdate{'Y-m-d'})]})]})
+			]</BOUCLE_calendrier>
 			
 			[(#REM) Puis on les affiche dans un agenda]
 			[(#ENV{date}|agenda_mini)]

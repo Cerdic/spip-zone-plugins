@@ -73,10 +73,11 @@ function http_calendrier_mini($annee, $mois, $jour, $echelle, $partie_cal, $scri
 	// affichage du debut de semaine hors periode
 	$ligne = '';
 	$debut = date("w",mktime(1,1,1,$mois,$premier_jour,$annee));
+	
 	for ($i=$debut ? $debut : 7;$i>1;$i--) {
 		$mois_precedent = mktime(1,1,1,$mois-1,1,$annee);
 		$jour_mois_precedent = date('t', $mois_precedent)+2-$i;
-		$ligne .= "\n\t<td class=\"horsperiode\">$jour_mois_precedent</td>";
+		$ligne .= "\n\t<td class=\"horsperiode\"><a href='".parametre_url($GLOBALS['contexte_inclus']['self'],$GLOBALS['contexte_inclus']['var_date'],agenda_moisdecal($GLOBALS['contexte_inclus']['date'],-1,'Y-m'))."'>$jour_mois_precedent</a></td>";
 	}
 
 	$total = '';
@@ -109,7 +110,7 @@ function http_calendrier_mini($annee, $mois, $jour, $echelle, $partie_cal, $scri
 	$jour_mois_suivant=1;
 	// affichage de la fin de semaine hors periode
 	for($j=$jour_semaine ? $jour_semaine : 7; $j<7; $j++) {
-		$ligne .= "\n\t<td class=\"horsperiode\">".$jour_mois_suivant++."</td>";			
+		$ligne .= "\n\t<td class=\"horsperiode\"><a href='".parametre_url($GLOBALS['contexte_inclus']['self'],$GLOBALS['contexte_inclus']['var_date'],agenda_moisdecal($GLOBALS['contexte_inclus']['date'],1,'Y-m'))."'>".$jour_mois_suivant++."</a></td>";			
 	}
 
 	return $total . ($ligne ? "\n<tr>$ligne\n</tr>" : '');
