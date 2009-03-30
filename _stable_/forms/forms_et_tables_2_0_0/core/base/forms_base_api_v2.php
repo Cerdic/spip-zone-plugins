@@ -23,7 +23,7 @@ include_spip('base/abstract_sql');
  * La convention de nomabe est
  * forms_verbe_objet(s)
  * 
- * les verbes sont parmis : inserer, lister, copier, vider, supprimer, modifier, instituer, ordonner
+ * les verbes sont parmis : inserer, lister, copier, purger, supprimer, modifier, instituer, ordonner
  */
 
 
@@ -132,7 +132,7 @@ function forms_copier_tables($type_ou_id){
  *
  * @param int/string $type_ou_id
  */
-function forms_vider_tables($type_ou_id){
+function forms_purger_tables($type_ou_id){
 	if (!$id_form = intval($type_ou_id) OR !is_numeric($type_ou_id)){
 		$liste = forms_lister_tables($type_ou_id);
 		foreach($liste as $id)
@@ -437,8 +437,8 @@ function forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$
 		}
 		else {
 			// Insertion d'un collateral : il faut preciser le 'parent' !
-			spip_log("Insertion impossible dans un arbre pour un collatŽral sans precision du parent dans table $id_form");
-			return array(0,_L("Insertion impossible dans un arbre pour un collatŽral sans precision du parent dans table $id_form"));
+			spip_log("Insertion impossible dans un arbre pour un collatï¿½ral sans precision du parent dans table $id_form");
+			return array(0,_L("Insertion impossible dans un arbre pour un collatï¿½ral sans precision du parent dans table $id_form"));
 		}
 	}
 	// Le parent existe toujours ?
