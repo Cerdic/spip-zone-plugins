@@ -1,52 +1,15 @@
-<script type="text/javascript" src="#CHEMIN{javascript/md5_inscription2.js}"></script>
-<script type="text/javascript" src="#CHEMIN{lib/jquery-validate/jquery.validate.js}"></script>
-<script type="text/javascript">
-jQuery().ready(function() {
-	// validate signup form on keyup and submit
-	jQuery("#validation").validate({
-		event: "keyup",
-		errorPlacement: function(error, element) {
-			error.appendTo( element.parent("div") ).after("");
-		},
-		rules: {
-			pass1: {
-				required: true,
-				minLength: 5
-			},
-			pass2: {
-				required: true,
-				minlength: 5,
-				equalTo: "#pass1"
-			}
-		},
-		messages: {
-			pass1: {
-				required: "<:inscription2:champ_obligatoire:>",
-				minlength: "<:inscription2:pass_minimum:>"
-			},
-			pass2: {
-				required: "<:inscription2:champ_obligatoire:>",
-				minlength: "<:inscription2:pass_minimum:>",
-				equalTo: "<:inscription2:pass_egal:>"
-			}
-		}
-	});
-});
+<script type="text/javascript" src="#CHEMIN{javascript/md5_inscription2.js}"></script><script type="text/javascript"><!--  function cryptage() {
+  	if(document.pass.pass1.value.length != document.pass.pass2.value.length){  	document.pass.pass2.value = '1';	document.pass.pass1.value = '2';
+  	}
+  	    if(document.pass.pass1.value == document.pass.pass2.value){		if(document.pass.pass1.value.length < 5){  		document.pass.pass.value = '1';		document.pass.pass2.value = '';		document.pass.pass1.value = '';
+  		}else{
+		str = document.pass.pass1.value;		document.pass.pass.value = MD5(str);		document.pass.pass2.value = '';		document.pass.pass1.value = '';
+  		}	}else{		document.pass.pass1.value = '';		document.pass.pass2.value = '';	}  }// --></script>
 
-</script>
-
-
-<script type="text/javascript">
-<!--
-  function cryptage() {
-		str = jQuery('#pass1').val();
-		valfinale = MD5(str);
-		jQuery('#pass').val(valfinale);
-}
-// -->
-</script>
-
-<form id="validation" method="post" action="#SELF" class="formulaire_spip">
+[<p class='formulaire_ok'>(#ENV*{message_ok})</p>]
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[(#EDITABLE|oui)
+<form name="pass" class="formulaire_spip formulaire_inscription2" action='#ENV{action}' method='post'>	#ACTION_FORMULAIRE{#ENV{action}}
 	<div><label for="pass1"><:pass_choix_pass:></label>
 	<input type='password' class="forml" name='pass1' id='pass1' /></div>
 	
@@ -58,3 +21,4 @@ jQuery().ready(function() {
 		<input type="submit" onclick="cryptage()" value="<:bouton_valider:>" />
 	</p>
 </form>
+]

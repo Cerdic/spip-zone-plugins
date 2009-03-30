@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // charger cfg
 include_spip('cfg_options');
-// charger les fonctions de formilaires
+// charger les fonctions de formulaires
 include_spip('inc/inscription2_form_fonctions');
 
 // chargement des valeurs par defaut des champs du formulaire
