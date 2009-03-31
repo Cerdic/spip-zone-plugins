@@ -190,8 +190,6 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 		include_spip('inc/autoriser');
 		if (!autoriser('modifier','auteur',$id_auteur)) {
 			$erreurs['message_erreur'] .= _T('inscription2:profil_droits_insuffisants');
-			return array('editable'=>'false','message' => $message);
-
 		}
 	}
 	
