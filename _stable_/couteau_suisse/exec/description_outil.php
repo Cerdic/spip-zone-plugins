@@ -36,8 +36,9 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	include_spip('inc/cs_outils');
 	$description_outil = charger_fonction('description_outil', 'inc');
 	$descrip = cs_initialisation_d_un_outil($outil, $description_outil, true);
-cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour() pour afficher la ligne de configuration de l'outil");	
+	cs_init_plugins();
 
+cs_log(" FIN : exec_description_outil_dist() - Appel maintenant de ajax_retour() pour afficher la ligne de configuration de l'outil");	
 	include_spip('inc/texte');
 	ajax_retour(propre($descrip));
 }

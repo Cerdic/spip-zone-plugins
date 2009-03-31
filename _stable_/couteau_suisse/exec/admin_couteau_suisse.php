@@ -401,9 +401,8 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	$cmd = _request('cmd');
 	$exec = _request('exec');
 
-@unlink(_DIR_TMP."couteau-suisse.plat");
-include_spip('inc/plugin');
-verif_plugin();
+	include_spip('inc/cs_outils');
+	cs_init_plugins();
 
 	// id de l'auteur en session
 	if(defined('_SPIP19300')) $connect_id_auteur = $GLOBALS['auteur_session']['id_auteur'];

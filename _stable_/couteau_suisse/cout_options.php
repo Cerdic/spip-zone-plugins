@@ -104,6 +104,7 @@ if($zap) cs_log(' FIN : cout_options sans initialisation du plugin'); else {
 		} else
 			cs_log(" -- fichier '$f_mo' toujours introuvable !!");
 	} else cs_log(" -- pas d'inclusion de '$f_mo' ; on est deja passe par ici !?");
+cs_log('???????????????????????????'.\$GLOBALS['spip_pipeline']['pre_liens']);
 
 	// si une recompilation a eu lieu...
 	if ($GLOBALS['cs_utils']) {

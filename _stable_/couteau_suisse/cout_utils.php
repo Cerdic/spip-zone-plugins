@@ -475,8 +475,9 @@ function cs_get_code_variable($variable, $valeur) {
 		$eval = '$test = ' . (isset($regs[2])?str_replace('%s', $valeur, $regs[2]):'true') . ';';
 		$test = false;
 		eval($eval);
-		if($test) return str_replace('%s', $valeur, $param);
+		if($test) $code .= str_replace('%s', $valeur, $param);
 	}
+	return $code;
 }
 
 // remplace les valeurs marquees comme %%toto%% par le code reel prevu par $cs_variables['toto']['code:condition']

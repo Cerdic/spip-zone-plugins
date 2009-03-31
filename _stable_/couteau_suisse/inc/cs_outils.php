@@ -20,6 +20,13 @@ function cs_version_erreur(&$outil) {
 		|| (isset($outil['version-max']) && version_compare($GLOBALS['spip_version_code'], $outil['version-max'], '>'));
 }
 
+// initialiser les plugins, les pipelines, etc.
+function cs_init_plugins() {
+	@unlink(_DIR_TMP."couteau-suisse.plat");
+	include_spip('inc/plugin'); verif_plugin();
+	cs_log(" -- verif_plugin() effectue");
+}
+
 // initialise un outil, ses variables, et en renvoie la description compilee
 function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 	global $outils, $metas_outils;

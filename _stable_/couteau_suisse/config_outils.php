@@ -872,9 +872,11 @@ add_variable( array(
 add_variable( array(
 	'nom' => 'liens_orphelins',
 	'format' => _format_NOMBRE,
-	'radio' => array(-1 => 'item_non', 0 => 'couteauprive:basique', 1 => 'couteauprive:etendu'),
+	'radio' => array(-1 => 'item_non', 0 => 'couteauprive:basique', 1 => 'couteauprive:etendu', -2 => 'couteauprive:par_defaut'),
 	'defaut' => 0,
 	'code' => '$GLOBALS["liens_orphelins"]=%s;',
+		// empeche SPIP de convertir les URLs orphelines (URLs brutes)
+	'code:%s<>-2' => defined('_SPIP19300')?"\$GLOBALS['spip_pipeline']['pre_liens']=str_replace('|traiter_raccourci_liens','',\$GLOBALS['spip_pipeline']['pre_liens']);":'',
 ));
 // attention : liens_orphelins doit etre place avant mailcrypt
 add_outil( array(

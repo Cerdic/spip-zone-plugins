@@ -38,7 +38,7 @@ function cs_liens_echappe_callback($matches)
 
 function cs_liens_raccourcis_callback($matches) {
 	if($GLOBALS["liens_interrogation"]) {
-		if (strlen($texte = $matches[0])>40) $texte = substr($texte,0,35).'...';
+		if(strlen($texte = retour_interro_amp($matches[0]))>40) $texte = substr($texte,0,35).'...';
 		$texte = expanser_liens('['.echappe_interro_amp($texte).'->'.echappe_interro_amp($matches[0]).']');
 	} else
 		$texte = expanser_liens('[->'.$matches[0].']');
@@ -52,12 +52,13 @@ function cs_liens_email_callback($matches) {
 // les echappements...
  
 function echappe_interro_amp(&$texte) {
-	return str_replace(array('?', '!', '&amp;', '&', '--'), 
-		array('++cs_INTERRO++', '++cs_EXCLAM++', '++cs_AMP++', '++cs_AMP++', '++cs_TIR++'), $texte);
+	return !$GLOBALS["liens_interrogation"]?$texte
+		:str_replace(array('?', '!', '&amp;', '&', '--'), 
+			array('++cs_INTERRO++', '++cs_EXCLAM++', '++cs_AMP++', '++cs_AMP++', '++cs_TIR++'), $texte);
 }
 
 function retour_interro_amp(&$texte) {
-	return strpos($texte, '++')===false?$texte
+	return !$GLOBALS["liens_interrogation"] || strpos($texte, '++')===false?$texte
 		:str_replace(array('++cs_INTERRO++', '++cs_EXCLAM++', '++cs_AMP++', '++cs_TIR++'), 
 			array('?', '!', '&amp;', '--'), $texte);
 }

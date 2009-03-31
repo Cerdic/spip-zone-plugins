@@ -409,6 +409,7 @@ Remplace syst&eacute;matiquement toutes les URLs laiss&eacute;es en texte par le
 Vous pouvez choisir le type de remplacement :
 _ &bull; {Basique} : sont remplac&eacute;s les liens du type {<html>http://spip.net</html>} (tout protocole) ou {<html>www.spip.net</html>}.
 _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} ou {<html>news:mesnews</html>}.
+_ &bull; {Par d&eacute;faut} : remplacement automatique d\'origine (&agrave; partir de la version 2.0 de SPIP).
 [[%liens_orphelins%]]',
 	'liens_orphelins:nom' => 'Belles URLs',
 
