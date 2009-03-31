@@ -97,9 +97,32 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 		}
 	}
 	
+	
+	//Verifier certains champs specifiquement
+	
+	// Verifier si le mail est connu
+	if (_request('email') AND !is_numeric($id_auteur)) {
+		if (sql_getfetsel('id_auteur','spip_auteurs','id_auteur !='.intval($id_auteur).' AND email = \''._request('email').'\'')) {
+			$erreurs['email'] = _T('form_forum_email_deja_enregistre');
+			// envoyer un mail etc
+			// verifier si c un spip listes a maj en pipeline
+			// message_inscription2 
+		}
+	}
+	
+	//Verifier le login
+	// c'est a dire regarder dans la base si un autre utilisateur que celui en cours possede le login saisi
+	if (_request('login')) {
+		if (sql_getfetsel('id_auteur','spip_auteurs','id_auteur !='.intval($id_auteur).' AND login LIKE \''._request('login').'\'')) {
+			$erreurs['login'] = _T('inscription2:formulaire_login_deja_utilise');
+		}
+		if (strlen(_request('login')) < _LOGIN_TROP_COURT){
+			$erreurs['login'] = _T('info_login_trop_court');	
+		}
+	}
+	
 	//messages d'erreur au cas par cas (PASSWORD)
 	//vérification des champs
-
 	// Sinon on le verifie
 	if(($pass != 'ok') && (lire_config('inscription2/pass') == 'on')) {
 		
@@ -167,19 +190,8 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 		include_spip('inc/autoriser');
 		if (!autoriser('modifier','auteur',$id_auteur)) {
 			$erreurs['message_erreur'] .= _T('inscription2:profil_droits_insuffisants');
-		}
-	}
-    
-	//Verifier certains champs specifiquement
-	
-	//Verifier le login
-	// c'est a dire regarder dans la base si un autre utilisateur que celui en cours possede le login saisi
-	if (_request('login')) {
-		if (sql_getfetsel('id_auteur','spip_auteurs','id_auteur !='.intval($id_auteur).' AND login LIKE \''._request('login').'\'')) {
-			$erreurs['login'] = _T('inscription2:formulaire_login_deja_utilise');
-		}
-		if (strlen(_request('login')) < _LOGIN_TROP_COURT){
-			$erreurs['login'] = _T('info_login_trop_court');	
+			return array('editable'=>'false','message' => $message);
+
 		}
 	}
 	
