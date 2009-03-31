@@ -25,15 +25,11 @@ function liens_orphelins($texte){
 	$texte = preg_replace_callback(_cs_liens_HTTP, 'cs_liens_raccourcis_callback', $texte);
 	// trouve et protege : www.lieu.qqchose ou ftp.lieu.qqchose
 	$texte = preg_replace_callback(_cs_liens_WWW, 'cs_liens_raccourcis_callback', $texte);
-
-	$autorises = _cs_liens_AUTORISE;
-	$autorisesfin = _cs_liens_AUTORISE_FIN;
 	// trouve : mailto:qqchose ou news:qqchose
-	if($GLOBALS["liens_orphelins"]>0) {
+	if($GLOBALS['liens_orphelins']>0) {
 	   $texte = preg_replace_callback(_cs_liens_NEWS, 'cs_liens_raccourcis_callback', $texte);
 	   $texte = preg_replace_callback(_cs_liens_MAILS, 'cs_liens_email_callback', $texte);
 	}
-
 	return echappe_retour($texte, 'LIENS');
 }
 

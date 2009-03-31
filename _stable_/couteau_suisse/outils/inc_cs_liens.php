@@ -31,16 +31,35 @@ if (!defined('_SPIP19300')) {
 @define('_cs_liens_NEWS', ",\bnews:[{$autorises}]*[{$autorisesfin}],");
 @define('_cs_liens_MAILS', ",\b(mailto:)?([{$autorises}]*@[a-zA-Z][a-zA-Z0-9-.]*\.[a-zA-Z]+(\?[{$autorises}]*)?),");
 
-// les callback et echappements...
+// les callbacks...
+
 function cs_liens_echappe_callback($matches)
 	{return cs_code_echappement($matches[0], 'LIENS');}
-function cs_liens_raccourcis_callback($matches)
-	{return cs_code_echappement(expanser_liens('[->'.retour_interro_amp($matches[0]).']'), 'LIENS');}
-function cs_liens_email_callback($matches)
-	{return cs_code_echappement(expanser_liens("[$matches[2]->mailto:$matches[2]]"), 'LIENS');}
-function echappe_interro_amp($texte)
-	{return str_replace(array('?', '!', '&'), array('++cs_INTERRO++', '++cs_EXCLAM++', '++cs_AMP++'), $texte);}
-function retour_interro_amp($texte)
-	{return str_replace(array('++cs_INTERRO++', '++cs_EXCLAM++', '++cs_AMP++'), array('?', '!', '&'), $texte);}
+
+function cs_liens_raccourcis_callback($matches) {
+	if($GLOBALS["liens_interrogation"]) {
+		if (strlen($texte = $matches[0])>40) $texte = substr($texte,0,35).'...';
+		$texte = expanser_liens('['.echappe_interro_amp($texte).'->'.echappe_interro_amp($matches[0]).']');
+	} else
+		$texte = expanser_liens('[->'.$matches[0].']');
+	return cs_code_echappement($texte, 'LIENS');
+}
+
+function cs_liens_email_callback($matches) {
+	return cs_code_echappement(expanser_liens("[$matches[2]->mailto:$matches[2]]"), 'LIENS');
+}
+
+// les echappements...
+ 
+function echappe_interro_amp(&$texte) {
+	return str_replace(array('?', '!', '&amp;', '&', '--'), 
+		array('++cs_INTERRO++', '++cs_EXCLAM++', '++cs_AMP++', '++cs_AMP++', '++cs_TIR++'), $texte);
+}
+
+function retour_interro_amp(&$texte) {
+	return strpos($texte, '++')===false?$texte
+		:str_replace(array('++cs_INTERRO++', '++cs_EXCLAM++', '++cs_AMP++', '++cs_TIR++'), 
+			array('?', '!', '&amp;', '--'), $texte);
+}
 
 ?>

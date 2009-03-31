@@ -14,7 +14,7 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 	// trouver quel <hx> est utilise
 	$hierarchie = preg_match(',<h(\d),',$GLOBALS['debut_intertitre'],$regs)?$regs[1]:'3';
 	@define('_sommaire_NB_CARACTERES', 30);
-	$self = nettoyer_uri();//self();//$GLOBALS['REQUEST_URI'];
+	$self = str_replace('&', '&amp;', nettoyer_uri());//self();//$GLOBALS['REQUEST_URI'];
 	// si on n'est pas en mode impression, on calcule l'image de retour au sommaire
 	if(!defined('_CS_PRINT')) {
 		$titre = _T('couteau:sommaire_titre');
@@ -30,7 +30,7 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 		$ancre = " id=\"outil_sommaire_$index\">";
 		if (($pos2 = strpos($texte, $regs[0][$i], $pos))!==false) {
 			$titre = preg_replace(',^<p[^>]*>(.*)</p>$,Umsi', '\\1', trim($regs[2][$i]));
-			// ancre 'haut', sauf si les blocs depliables utilisent h3...
+			// ancre 'haut', sauf si les blocs depliables utilisent h{$hierarchie}...
 			$texte = substr($texte, 0, $pos2) . $regs[1][$i]
 				. $ancre . (strpos($regs[0][$i], 'blocs_titre')===false?$haut:'') . $titre
 				. substr($texte, $pos2 + strlen($regs[1][$i])+1 + strlen($regs[2][$i]));

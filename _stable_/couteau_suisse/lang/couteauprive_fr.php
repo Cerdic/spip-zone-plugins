@@ -339,7 +339,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:glossaire_js' => 'Technique utilis&eacute;e :',
 	'label:glossaire_limite' => 'Nombre maximal de liens cr&#233;&#233;s :',
 	'label:insertions' => 'Corrections automatiques :',
-	'label:jcorner_classes' => 'Am&eacute;liorer les coins des s&eacute;lecteurs suivantes :',
+	'label:jcorner_classes' => 'Am&eacute;liorer les coins des s&eacute;lecteurs suivants :',
 	'label:jcorner_plugin' => 'Installer le plugin {jQuery} suivant :',
 	'label:lgr_introduction' => 'Longueur du r&eacute;sum&eacute; :',
 	'label:lgr_sommaire' => 'Largeur du sommaire (9 &agrave; 99) :',
@@ -400,7 +400,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 
 @puce@ {{Liens corrects}}.
 
-SPIP a pour habitude d\'ins&eacute;rer un espace avant les points d\'interrogation ou d\'exclamation, typo fran&ccedil;aise oblige. Voici un outil qui prot&egrave;ge le point d\'interrogation dans les URLs de vos textes.[[%liens_interrogation%]]
+SPIP a pour habitude d\'ins&eacute;rer un espace avant les points d\'interrogation ou d\'exclamation et de transformer le double tiret en tiret cadratin, typo fran&ccedil;aise oblige. Hors, les URLs de vos textes ne sont pas &eacute;pargn&eacute;es. Cet outil vous permet de les prot&eacute;ger.[[%liens_interrogation%]]
 
 @puce@ {{Liens orphelins}}.
 
