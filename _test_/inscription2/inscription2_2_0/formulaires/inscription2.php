@@ -103,10 +103,10 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 	// Verifier si le mail est connu
 	if (_request('email') AND !is_numeric($id_auteur)) {
 		if (sql_getfetsel('id_auteur','spip_auteurs','id_auteur !='.intval($id_auteur).' AND email = \''._request('email').'\'')) {
-			$erreurs['email'] = _T('form_forum_email_deja_enregistre');
-			// envoyer un mail etc
 			// verifier si c un spip listes a maj en pipeline
-			// message_inscription2 
+			// sinon renvoyer le form de login
+			// attention le type sans pass ne passera pas le mdp perdu
+			$erreurs['email'] = _T('form_forum_email_deja_enregistre');
 		}
 	}
 	
@@ -270,7 +270,7 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 	$val = array_intersect_key($valeurs,$clefs);
 	
 	//Vérification du password
-	if($mode == ('inscription_pass' || 'modification_auteur_pass')){
+	if(($mode == 'inscription_pass') || ($mode == 'modification_auteur_pass')){
 		$new_pass = _request('pass');
 		if (strlen($new_pass)) {
 			include_spip('inc/acces');
@@ -290,6 +290,7 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 	}else{
 		if(!is_numeric($id_auteur)){
 			$val['statut'] = 'aconfirmer';
+		  	// mettre un pass ici pour permettre la recup
 		}
 	}
 	
