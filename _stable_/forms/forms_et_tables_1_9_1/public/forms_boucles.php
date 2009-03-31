@@ -8,7 +8,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * ï¿½ 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -280,7 +280,7 @@ code;
 		$boucle->from[$id_table] =  "spip_forms_champs";
 	
 		if (!isset($boucle->modificateur['tout']) && !$boucle->tout){
-			$boucle->where[]= array("'='", "'$id_table.public'", "'\"oui\"'");
+			$boucle->where[]= "_DIR_RESTREINT?array('=', '$id_table.public', '\"oui\"'):''";
 		}
 		return calculer_boucle($id_boucle, $boucles); 
 	}
