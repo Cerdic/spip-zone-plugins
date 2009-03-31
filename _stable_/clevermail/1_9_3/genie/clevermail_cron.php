@@ -47,10 +47,14 @@ function genie_clevermail_cron($verbose = 'no') {
 
 			$html = $post['pst_html'];
 			$html = str_replace("(\r\n|\n|\n)", CM_NEWLINE, $html);
+			
+			include_spip('inc/texte');
 
 			$template = array();
+			$template['@@SUJET_LETTRE@@'] = $post['pst_subject'];
+			$template['@@ID_LETTRE@@'] = $message['pst_id'];
 			$template['@@NOM_LETTRE@@'] = $list['lst_name'];
-			$template['@@DESCRIPTION@@'] = $list['lst_comment'];
+			$template['@@DESCRIPTION@@'] = propre($list['lst_comment']);
 			$template['@@FORMAT_INSCRIPTION@@'] = $mode;
 			$template['@@EMAIL@@'] = $to;
 
