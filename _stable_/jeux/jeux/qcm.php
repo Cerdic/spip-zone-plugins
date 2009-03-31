@@ -145,7 +145,7 @@ function qcm_un_trou($nomVarSelect, $indexQCM) {
 	foreach($qcms[$indexQCM]['propositions'] as $mot) $sizeInput = max($sizeInput, strlen($mot));
   $temp = $_POST[$nomVarSelect] = trim($_POST[$nomVarSelect]);
   $prop = jeux_minuscules($temp);
-  return " &nbsp; &nbsp; &nbsp;<input name=\"$nomVarSelect\" class=\"jeux_input qcm_input\" size=\"$sizeInput\" type=\"text\"> ";
+  return " &nbsp; &nbsp; &nbsp;<input name=\"$nomVarSelect\" class=\"jeux_input qcm_input\" size=\"$sizeInput\" type=\"text\" /> ";
 }
 
 function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoints) {
@@ -177,7 +177,7 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 	} elseif ($qrm) {
 		foreach($qcms[$indexQCM]['propositions'] as $i=>$valeur) 
 			$codeHTML.='<input type="checkbox" class="jeux_cocher qcm_cocher" name="'.$nomVarSelect
-				. '[]" value="'.$i.'" id="'.$nomVarSelect.$i.'"><label for="'.$nomVarSelect.$i.'">&nbsp;'
+				. '[]" value="'.$i.'" id="'.$nomVarSelect.$i.'" /><label for="'.$nomVarSelect.$i.'">&nbsp;'
 				. $valeur.'</label>'
 				. ($i % $nbcol?' &nbsp; ':'<br />');
 	// S'il y a trop de choix, on utilise une liste a la place des boutons radio
@@ -188,7 +188,7 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 	} else {
 		foreach($qcms[$indexQCM]['propositions'] as $i=>$valeur) 
 			$codeHTML.='<input type="radio" class="jeux_radio qcm_radio" name="'.$nomVarSelect
-				. '" value="'.$i.'" id="'.$nomVarSelect.$i.'"><label for="'.$nomVarSelect.$i.'">&nbsp;'
+				. '" value="'.$i.'" id="'.$nomVarSelect.$i.'" /><label for="'.$nomVarSelect.$i.'">&nbsp;'
 				. $valeur.'</label>'
 				. ($i % $nbcol?' &nbsp; ':'<br />');
 	}
@@ -359,7 +359,7 @@ function jeux_qcm($texte, $indexJeux) {
   $tete = '<div class="jeux_cadre qcm">'.($titre?'<div class="jeux_titre qcm_titre">'.$titre.'<hr /></div>':'');
   if (!isset($_POST["var_correction_".$indexJeux])) {
 	$tete .= jeux_form_debut('qcm', $indexJeux);
-	$pied = '<br /><div style="text-align:center;"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton"></div>'.jeux_form_fin();
+	$pied = '<br /><div style="text-align:center;"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton" /></div>'.jeux_form_fin();
   } else {
       $pied = jeux_afficher_score($qcm_score, $qcms['totalscore'], $_POST['id_jeu'], join(', ', $qcm_score_detaille), $categ_score)
 			. jeux_bouton_reinitialiser();
