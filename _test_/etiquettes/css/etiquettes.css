@@ -38,15 +38,6 @@
 .popular_tags span.auto { background-color: #ccffcc; }
 
 /* Partie pour le crayon */
-
-ul.etiquettes{
-	list-style:none;
-	margin:0;
-	padding:0;
-}
-ul.etiquettes label{
-	display:block;
-}
-.formulaire_crayon ul.etiquettes input{
-	width:100%;
+.formulaire_crayon input.etiquettes{
+	width:95%;
 }

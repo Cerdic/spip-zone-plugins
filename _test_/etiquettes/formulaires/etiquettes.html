@@ -32,19 +32,21 @@
 			
 			<legend>[(#ENV*{remplacer}|?{<:etiquettes:modifier_etiquettes:>,<:etiquettes:ajouter_etiquettes:>})]</legend>
 			
-]
-			
-			[(#REM) S'il y a la liste on masque le input ]
-			<ul class="etiquettes"[ (#ENV{aide_liste}|?{style="display:none;"})]>
+			<ul[ (#ENV{aide_liste}|?{style="display:none;"})]>
 			<li>
-				[<div class="explication">(#ENV{explication}|htmlspecialchars_decode)</div>]
-				<input type="text" class="text"
+]
+				[<div class="explication"[ (#ENV{aide_liste}|?{style="display:none;"})]>(#ENV{explication}|htmlspecialchars_decode)</div>]
+				<input type="text" class="text etiquettes"
 					id="#ENV{name}"
 					name="#ENV{name}"
 					value="#ENV*{#ENV{name}}"
+					[(#ENV{aide_liste}|?{style="display:none;"})]
 				/>
+[(#REM) Si on ne veut pas que le champ ]
+[(#ENV*{uniquement_champ}|?{'', ' '})
 			</li>
 			</ul>
+]
 			
 			[(#REM) Si on est dans un crayon on ajoute la bonne classe ]
 			<script type="text/javascript">
