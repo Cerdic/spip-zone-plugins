@@ -37,14 +37,12 @@
 			[(#REM) S'il y a la liste on masque le input ]
 			<ul class="etiquettes"[ (#ENV{aide_liste}|?{style="display:none;"})]>
 			<li>
+				[<div class="explication">(#ENV{explication}|htmlspecialchars_decode)</div>]
 				<input type="text" class="text"
 					id="#ENV{name}"
 					name="#ENV{name}"
 					value="#ENV*{#ENV{name}}"
 				/>
-				<label for="#ENV{name}">
-					<:etiquettes:explication:>
-				</label>
 			</li>
 			</ul>
 			
