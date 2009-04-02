@@ -128,7 +128,7 @@ $().ready(function() {
 	}
 
 	//nettoyer la table
-	if($act=='net'){
+	if($act=='net' AND false){
 		$desc = sql_showtable('spip_auteurs_elargis', '', true);
 		foreach($desc['field'] as $cle =>$val){
 			if(!(lire_config('inscription2/'.$cle) or lire_config('inscription2/'.$cle.'_fiche') 
