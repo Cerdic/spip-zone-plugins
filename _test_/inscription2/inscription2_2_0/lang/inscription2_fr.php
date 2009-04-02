@@ -221,20 +221,23 @@ Merci de votre confiance
 
 L\'&eacute;quipe de @nom_site@ 
 @url_site@',
-	'texte_email_inscription' => 'Vous avez demand&eacute; &agrave; participer &agrave; notre site @nom_site@. 
-Vous &ecirc;tes actuellement sur le point de finir votre inscription. Il vous suffit de cliquer le lien ci-dessous pour activer votre compte et choisir votre mot de passe.
+	'texte_email_inscription' => 'vous &ecirc; sur le point de confirmer votre inscription au site @nom_site@. 
+
+Cliquer le lien ci-dessous pour activer votre compte et choisir votre mot de passe.
 
 @link_activation@
 
-Votre login est&nbsp;: @login@
-
-Si vous n\'avez pas demand&eacute; cette inscription ou ne voulez plus faire partie de notre site, cliquez le lien ci-dessous.
-
-@link_suppresion@
 
 Merci de votre confiance.
 
-L\'&eacute;quipe de @nom_site@',
+L\'&eacute;quipe de @nom_site@.
+@url_site@
+
+Si vous n\'avez pas demand&eacute; cette inscription ou si vous ne voulez plus faire partie de notre site, cliquez le lien ci-dessous.
+@link_suppresion@
+
+
+',
 	'titre_confirmation' => 'Confirmation',
 
 	// U

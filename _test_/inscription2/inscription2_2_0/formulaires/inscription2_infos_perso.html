@@ -23,6 +23,14 @@
 		    </fieldset>
 		    [<p class='erreur'>(#ENV**{erreurs}|table_valeur{sexe})</p>]
         </li>]
+		
+		[(#CONFIG{inscription2/prenom}|=={on}|oui)	
+        <li class="editer_prenom[ (#CONFIG{inscription2/prenom_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{prenom}|oui)erreur]">
+            <label for="prenom"><:inscription2:prenom:></label>
+            <input type="text" class="text" name="prenom" id="prenom" value="#ENV{prenom}" />       
+            [<p class='erreur'>(#ENV**{erreurs}|table_valeur{prenom})</p>]
+        </li>
+        ]
 
         [(#CONFIG{inscription2/nom_famille}|=={on}|oui)	
         <li class="editer_nom_famille[(#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|oui) obligatoire][ (#ENV**{erreurs}|table_valeur{nom_famille}|oui)erreur]">
@@ -30,14 +38,6 @@
             <input type="text" class="text" name="nom_famille" id="nom_famille" value="#ENV{nom_famille}" />
             [<p class='erreur'>(#ENV**{erreurs}|table_valeur{nom_famille})</p>]
         </li>]
-        
-        [(#CONFIG{inscription2/prenom}|=={on}|oui)	
-        <li class="editer_prenom[ (#CONFIG{inscription2/prenom_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{prenom}|oui)erreur]">
-            <label for="prenom"><:inscription2:prenom:></label>
-            <input type="text" class="text" name="prenom" id="prenom" value="#ENV{prenom}" />       
-            [<p class='erreur'>(#ENV**{erreurs}|table_valeur{prenom})</p>]
-        </li>
-        ]
         
         [(#CONFIG{inscription2/surnom}|=={on}|oui)	
         <li class="editer_surnom[ (#CONFIG{inscription2/surnom_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{surnom}|oui)erreur]">

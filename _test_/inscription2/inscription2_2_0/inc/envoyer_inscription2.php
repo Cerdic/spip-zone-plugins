@@ -22,14 +22,8 @@ function inc_envoyer_inscription2_dist($id_auteur,$mode) {
     );
 	
 	// On défini le nom qui sera utilisé dans le mail
-	// 1- Prénom Nom_de_famille si dispo
-	// 2- Nom si dispo
-	// 3- Vraiment en dernier recours l'email
 	
-	if($var_user['nom_famille']){
-		$nom_final = $var_user['prenom']." ".$var_user['nom_famille'];
-	}
-	else if($var_user['nom']){
+	if($var_user['nom']){
 		$nom_final = $var_user['nom'];
 	}
 	else{
@@ -41,44 +35,29 @@ function inc_envoyer_inscription2_dist($id_auteur,$mode) {
 
 	// Dans le cas ou on ne demande pas de mot de passe dans le formulaire de création de compte
 	if($var_user['alea_actuel']==''){ 
- 		$var_user['alea_actuel'] = rand(1,99999); 
- 		sql_updateq(
-			"spip_auteurs",
-			array(
-				"alea_actuel" => $var_user['alea_actuel']
-			),
-			"id_auteur = $id_auteur"
- 		);
+ 		include_spip('inc/acces'); # pour creer_uniqid
+		$cookie = creer_uniqid();
+		sql_updateq("spip_auteurs", array("cookie_oubli" => $cookie), "id_auteur=" . $id_auteur);
+	
 	}
  	if($mode=="inscription"){
+ 		// nettoyer le mode sup
 		$message = _T('inscription2:message_auto')."\n\n"
-				. _T('inscription2:email_bonjour', array('nom'=> $var_user['prenom']." ".$var_user['nom']))."\n\n"
+				. _T('inscription2:email_bonjour', array('nom'=> $nom_final))."\n\n"
 				. _T('inscription2:texte_email_inscription', array(
-				'link_activation' => $adresse_site.'/spip.php?page=inscription2_confirmation&id='
-				   .$var_user['id_auteur'].'&cle='.$var_user['alea_actuel'].'&mode=conf', 
-				'link_suppresion' => $adresse_site.'/spip.php?page=inscription2_confirmation&id='
-				   .$var_user['id_auteur'].'&cle='.$var_user['alea_actuel'].'&mode=sup',
-				'login' => $var_user['login'], 'nom_site' => $nom_site_spip)
+				'nom_site' => $nom_site_spip, 'url_site' => $adresse_site,
+				'link_activation' => generer_url_public('spip_pass','p='.$cookie, true), 
+				'link_suppresion' => generer_url_public('spip_pass','s='.$cookie, true),
+				)
 				);			
-		$sujet = "[$nom_site_spip] "._T('inscription2:activation_compte');
+	$sujet = "[$nom_site_spip] "._T('inscription2:activation_compte');
 	}else if($mode=="inscription_pass"){
+		// a nettoyer
 		$message = _T('inscription2:message_auto')."\n\n"
 				. _T('inscription2:email_bonjour', array('nom'=> $nom_final))."\n\n"
 				. _T('inscription2:texte_email_confirmation', array('login' => $var_user['login'], 'nom_site' => $nom_site_spip, 'url_site' => $adresse_site));
 		$sujet = "[$nom_site_spip] "._T('inscription2:compte_active',array('nom_site'=>$nom_site_spip));
 	}
-	else if($mode=="rappel_mdp"){
-		$args = "id=". $var_user['id_auteur']."&cle=".$var_user['alea_actuel']."&mode=conf";
-		$page_confirmation = generer_url_public('inscription2_confirmation',$args,'false','false');
-		
-	 	$message = _T('inscription2:message_auto')."\n\n" 
-	 	. _T('inscription2:email_bonjour', array('nom'=>sinon($var_user['prenom'],$var_user['nom'])))."\n\n" 
-	 	. _T('inscription2:rappel_password')."\n\n"
-	 	. _T('inscription2:choisir_nouveau_password')."\n\n"
-	 	. $page_confirmation."\n\n"
-	 	. _T('inscription2:rappel_login') . $var_user['login'] ;
-	 	$sujet = "[$nom_site_spip] "._T('inscription2:rappel_password');
- 	}
 
     spip_log($message,'inscription2');
 
