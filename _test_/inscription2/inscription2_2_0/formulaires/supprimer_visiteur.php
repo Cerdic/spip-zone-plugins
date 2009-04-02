@@ -65,7 +65,7 @@ function formulaires_supprimer_visiteur_traiter_dist(){
 	$erreurs['inconnu'] = "Le compte ne peut $ecirc;tre effac&eacute; automatiquement, contactez nous." ;
 	}
 	
-	//supprimer un auteur		$row = sql_getfetsel("statut","spip_auteurs","id_auteur='$id_auteur'");				if($row['statut'] !='0minirezo' and $row['statut'] !='1comite')			sql_delete("spip_auteurs","id_auteur='$id'");		sql_delete("spip_auteurs_elargis","id_auteur='$id_auteur'");                        if(defined('_DIR_PLUGIN_ACCESRESTREINT'))            sql_delete("spip_zones_auteurs","id_auteur='$id_auteur'");        if(defined('_DIR_PLUGIN_SPIPLISTES'))            sql_delete("spip_auteurs_listes","id_auteur='$id_auteur'");	
+	//supprimer un auteur		$row = sql_getfetsel("statut","spip_auteurs","id_auteur='$id_auteur'");				if($row['statut'] !='0minirezo' and $row['statut'] !='1comite')			sql_delete("spip_auteurs","id_auteur='$id_auteur'");		sql_delete("spip_auteurs_elargis","id_auteur='$id_auteur'");                        if(defined('_DIR_PLUGIN_ACCESRESTREINT'))            sql_delete("spip_zones_auteurs","id_auteur='$id_auteur'");        if(defined('_DIR_PLUGIN_SPIPLISTES'))            sql_delete("spip_auteurs_listes","id_auteur='$id_auteur'");	
 	
 	$message = "Votre compte a été effacé." ;
     return array('message_ok' => $message);
