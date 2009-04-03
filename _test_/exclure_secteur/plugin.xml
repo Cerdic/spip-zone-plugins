@@ -1,0 +1,32 @@
+<plugin>
+    <nom>Secteurs Exclus</nom>
+    <auteur>
+    Auteur originel : Ma&iuml;eul Rouquette 
+    Licence : GPL3
+    </auteur>
+    <version>
+    1.0
+    </version>
+    <etat>
+    test
+    </etat>
+    <necessite id='CFG' />
+
+    <description>
+Exclut automatiquement les secteurs s&eacute;l&eacutes;ctionn&eacute;s des boucles ARTICLES / SITES / RUBRIQUES
+
+    Attention, pour le moment, ne le fait pas sur les jointures (par exemple, n'exclura pas les forums qui appartiennent à un article du secteur).
+    
+    On peut faire une exception avec le crit&eacute; <code>{tout}</code>
+	
+	
+		 
+	</description>
+    <prefix>
+    exclure_sect
+    </prefix>
+
+	<fonctions>exclure_sect_fonctions.php</fonctions>
+   
+ 
+</plugin>

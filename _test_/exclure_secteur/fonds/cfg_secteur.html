@@ -1,0 +1,30 @@
+<div class="formulaire_spip">
+<!-- titre=Configurer le plugin exclure secteur -->
+<!-- icone=bible_cfg.jpg -->
+
+			<form action="#SELF" method="post">
+[<div>(#ENV{_cfg_}|form_hidden)</div>]
+    <fieldset>
+	<ul>
+	<legend id="explication">Choisissez les secteurs &agrave; exclure</legend>
+	<BOUCLE_racine(RUBRIQUES){racine}{tout}>
+	<li>
+
+	<label for="rub_#ID_RUBRIQUE">#TITRE</label>	
+	<input type="checkbox" name="exclure_sect[]" value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#ENV{exclure_sect}}|oui) checked="checked"] />
+	
+	</li>
+	
+	</BOUCLE_racine>
+
+    </ul>
+	</fieldset>
+	<p class="boutons">
+	<input type="submit" name="_cfg_ok" value="<:OK:>" />
+	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" /></p>
+	
+    
+</form>
+</div>
+			
+			
