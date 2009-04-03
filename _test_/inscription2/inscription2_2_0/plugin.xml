@@ -12,8 +12,7 @@
 		test
 	</etat>
 	<description>
-		Inscription personnalis&eacute;e au site par l&rsquo;ajout de champs compl&eacute;mentaires.<br />
-		cette version n&eacute;cessite provisoirement que votre serveur dispose de <b>php 5.2</b> au minimum.
+		Inscription personnalis&eacute;e au site par l&rsquo;ajout de champs compl&eacute;mentaires.
 	</description>
 	<icon>images/inscription2.png</icon>
 	<prefix>
@@ -38,7 +37,11 @@
 		<nom>I2_exceptions_des_champs_auteurs_elargis</nom>
 		<inclure>inscription2_pipelines.php</inclure>
 	</pipeline>
-	<bouton id='inscription2_adherents' parent='auteurs'>	    <icone>images/fiche-perso.png</icone>	    <titre>icone_afficher_visiteurs</titre>	</bouton>
+
+	<bouton id='inscription2_adherents' parent='auteurs'>
+	    <icone>images/fiche-perso.png</icone>
+	    <titre>icone_afficher_visiteurs</titre>
+	</bouton>
 	
 	<pipeline>
 		<nom>ajouter_boutons</nom>
