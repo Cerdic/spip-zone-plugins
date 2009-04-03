@@ -27,12 +27,12 @@
 	    </li>]
 		
 		[(#CONFIG{inscription2/pass_fiche_mod}|=={on}|oui)	
-		<li class="editer_password[ (#CONFIG{inscription2/password_obligatoire}|=={on}|?{obligatoire})][ (#ENV**{erreurs}|table_valeur{password}|oui)erreur]">
+		<li class="editer_password[ (#CONFIG{inscription2/pass_obligatoire}|=={on}|?{obligatoire})][ (#ENV**{erreurs}|table_valeur{pass}|oui)erreur]">
 		    <label for="password"><:inscription2:pass:></label>
 		    <input type="password" class="text" autocomplete="off" name="password" id="password" value="#ENV{password}" />
 			<label for="password1"><:inscription2:password_retaper:></label>
 		    <input type="password" class="text" autocomplete="off" name="password1" id="password1" value="#ENV{password1}" />
-		    [<p class='erreur'>(#ENV**{erreurs}|table_valeur{password})</p>]
+		    [<p class='erreur'>(#ENV**{erreurs}|table_valeur{pass})</p>]
 		</li>]
 	</ul>
 </fieldset>

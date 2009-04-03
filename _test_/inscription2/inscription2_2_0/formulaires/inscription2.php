@@ -142,6 +142,23 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 					$erreurs['pass'] = _T('inscription2:password_obligatoire');
 				}
 			}
+		}else if($p = _request('password')) {
+			if(strlen($p)){
+				if (strlen($p) < 6) {
+					$erreurs['pass'] = _T('info_passe_trop_court');
+					$erreurs['message_erreur'] .= _T('info_passe_trop_court')."<br />";
+				} elseif ($p != _request('password1')) {
+					$erreurs['pass'] = _T('info_passes_identiques');
+					$erreurs['message_erreur'] .= _T('info_passes_identiques')."<br />";
+				}
+			}else{
+				if(!is_numeric($id_auteur)){
+					// Si on est dans la modif d'id_auteur on garde l'ancien pass si rien n'est rentré
+					// donc on accepte la valeur vide
+					// dans le cas de la création d'un auteur ... le password sera nécessaire
+					$erreurs['pass'] = _T('inscription2:password_obligatoire');
+				}
+			}
 		}
 	}
 	
@@ -206,10 +223,10 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 	global $tables_principales;
 	
 	if((is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') != 'on'))
-		OR (is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') == 'on')) && (strlen(_request('pass')) == 0)){
+		OR (is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') == 'on')) && (strlen(_request('password')) == 0)){
 		$mode = 'modification_auteur_simple';
 	}
-	else if((is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') == 'on'))){
+	else if((is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') == 'on')) and (strlen(_request('password')) != 0)){
 		$mode = 'modification_auteur_pass';
 	}
 	else if((lire_config('inscription2/pass') == 'on') && (strlen(_request('pass')))){
@@ -270,7 +287,8 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 	
 	//Vérification du password
 	if(($mode == 'inscription_pass') || ($mode == 'modification_auteur_pass')){
-		$new_pass = _request('pass');
+		if (strlen(_request('password')) != 0){$new_pass = _request('password');}
+		else{$new_pass = _request('pass');}
 		if (strlen($new_pass)) {
 			include_spip('inc/acces');
 			$htpass = generer_htpass($new_pass);
@@ -341,7 +359,7 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
     
     if (!$new){
         $message = _T('inscription2:profil_modifie_ok');
-        if($mode = 'modification_auteur_simple'){
+        if($mode == 'modification_auteur_simple'){
         	$message .= '<br />'._T('inscription2:mot_passe_reste_identique');
         }
         $editable = true;
