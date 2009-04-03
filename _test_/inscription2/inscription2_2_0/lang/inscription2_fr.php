@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'code_postal_pro' => 'Code Postal (Pro.)',
 	'commentaire' => 'Commentaire',
 	'compte_active' => 'Votre compte sur @nom_site@',
+	'compte_efface' => 'Votre compte a été effacé.',
 	'conf_plugin' => 'Configuration Inscription2',
 	'conf_plugin_page' => 'Configuration stock&eacute;e du plugin Inscription2',
 	'configs' => 'Configurations',
@@ -61,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'editer_adherent' => '&Eacute;diter adh&eacute;rent',
+	'effacement_auto_impossible' => 'Le compte ne peut &ecirc;tre effac&eacute; automatiquement, contactez-nous.',
 	'email' => 'E-Mail',
 	'email_bonjour' => 'Bonjour @nom@,',
 	'email_obligatoire' => 'Le champ email est obligatoire',
