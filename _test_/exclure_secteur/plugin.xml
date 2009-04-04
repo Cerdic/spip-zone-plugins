@@ -17,8 +17,8 @@ Exclut automatiquement les secteurs s&eacute;l&eacutes;ctionn&eacute;s des boucl
 
     Attention, pour le moment, ne le fait pas sur les jointures (par exemple, n'exclura pas les forums qui appartiennent à un article du secteur).
     
-    On peut faire une exception avec le crit&eacute; <code>{tout}</code>
-	
+    On peut faire une exception avec le crit&eacute; <code>{tout_secteur}</code>. 
+    Attention ! Pour le moment, le fait de préciser explicitement le secteur n'enl&eacute;ve pas l'exclusion.
 	
 		 
 	</description>
