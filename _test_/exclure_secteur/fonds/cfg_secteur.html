@@ -7,7 +7,7 @@
     <fieldset>
 	<ul>
 	<legend id="explication">Choisissez les secteurs &agrave; exclure</legend>
-	<BOUCLE_racine(RUBRIQUES){racine}{tout}>
+	<BOUCLE_racine(RUBRIQUES){racine}{tout_secteur}>
 	<li>
 
 	<label for="rub_#ID_RUBRIQUE">#TITRE</label>	
@@ -16,9 +16,19 @@
 	</li>
 	
 	</BOUCLE_racine>
-
-    </ul>
+	
+	</ul>
 	</fieldset>
+	<fieldset>
+	<ul>
+	<legend id="explication">R&eacute;glage avanc&eacute; du plugin</legend>
+
+	<li>
+	<label for="tout">Est-ce que le crit&eacute;re <code>{tout}</code> est &eacute;quivalent au crit&eacute;re <code>{tout_secteur}</code> ?</label>
+	<input type="checkbox" name="tout" value="oui"[(#ENV{tout}|=={oui}|oui) checked="checked"] />
+	</li>
+    </li>
+    </fieldset>
 	<p class="boutons">
 	<input type="submit" name="_cfg_ok" value="<:OK:>" />
 	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" /></p>
