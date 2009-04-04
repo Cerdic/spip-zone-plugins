@@ -14,14 +14,24 @@ include_spip('jeux_utils');
 // tableau de parametres exploitables par les plugins
 global $jeux_config;
 
-// fonction pre-traitement
-function jeux_pre($chaine, $indexJeux){ 
+// fonction pre-traitement, pipeline pre_propre
+function jeux_pre_propre($chaine) { 
+	// s'il n'est pas present dans un formulaire envoye,
+	// l'identifiant du jeu est choisi au hasard...
+	// ca peut servir en cas d'affichage de plusieurs articles par page.
+	// en passant tous les jeux en ajax, ce ne sera plus la peine.
+	static $indexJeux = null;
+	if(!isset($GLOBALS['debut_index_jeux']))
+		$GLOBALS['debut_index_jeux'] = isset($_POST['debut_index_jeux'])?$_POST['debut_index_jeux']:rand(10000, 99999);
+
 	if (strpos($chaine, _JEUX_DEBUT)===false || strpos($chaine, _JEUX_FIN)===false) return $chaine;
-	
+	if(isset($indexJeux)) ++$indexJeux;
+		else $indexJeux = $GLOBALS['debut_index_jeux'];
+
 	// isoler le jeu...
 	list($texteAvant, $suite) = explode(_JEUX_DEBUT, $chaine, 2); 
 	list($chaine, $texteApres) = explode(_JEUX_FIN, $suite, 2); 
-	
+
 	// ...decoder le texte obtenu en fonction des signatures et inclure le jeu
 	$liste = jeux_liste_des_jeux($chaine, $indexJeux);
 	// calcul des fichiers necessaires pour le header
@@ -34,17 +44,17 @@ function jeux_pre($chaine, $indexJeux){
 		$header = htmlentities(preg_replace(",\n+,", "||", trim($header)));
 		$header = jeux_rem('JEUX-HEAD', count($liste), base64_encode($header));
 	} else $header = '';
-//
+
 	return $texteAvant . $header
 		.jeux_rem('PLUGIN-DEBUT', $indexJeux, join('/', $liste))
 		."<div id=\"JEU$indexJeux\" class=\"jeux_global\">$chaine</div>"
 #		."<div id=\"JEU$indexJeux\" class=\"jeux_global ajax\">$chaine</div>"
-		.jeux_rem('PLUGIN-FIN', $indexJeux).jeux_pre($texteApres, ++$indexJeux);
+		.jeux_rem('PLUGIN-FIN', $indexJeux).jeux_pre_propre($texteApres);
 }
 
-// fonction post-traitement
-function jeux_post($chaine){
-	$chaine=echappe_retour($chaine, 'JEUX');
+// fonction post-traitement, pipeline post_propre
+function jeux_post_propre($chaine) { 
+	$chaine = echappe_retour($chaine, 'JEUX');
 
 	$sep1 = '['._JEUX_POST.'|'; $sep2 = '@@]';
 	if (strpos($chaine, $sep1)===false || strpos($chaine, $sep2)===false) return $chaine;
@@ -59,32 +69,6 @@ function jeux_post($chaine){
 	return $texteAvant.$chaine.jeux_post($texteApres);
 }
 
-// a la place de jeux(), pour le deboguage...
-function jeux2($chaine, $indexJeux){
- if (strpos($chaine, _JEUX_DEBUT)!==false && strpos($chaine, _JEUX_FIN)!==false) {
-	ob_start();
-	$chaine = jeux_pre($chaine, $indexJeux);
-	$data = ob_get_contents();
-	ob_end_clean();
-	$chaine = nl2br(str_replace("\t",'&nbsp;&nbsp;&nbsp;&nbsp;',$data)).$chaine;
- }
- return $chaine;
-}
-
-// pipeline pre_propre
-function jeux_pre_propre($texte) { 
-	// s'il n'est pas present dans un formulaire envoye,
-	// l'identifiant du jeu est choisi au hasard...
-	// ca peut servir en cas d'affichage de plusieurs articles par page.
-	// en passant tous les jeux en ajax, ce ne sera plus la peine.
-	$GLOBALS['debut_index_jeux'] = isset($_POST['debut_index_jeux'])?$_POST['debut_index_jeux']:rand(1, 65000);
-	return jeux_pre($texte, $GLOBALS['debut_index_jeux']);
-}
-
-// pipeline pre_propre
-function jeux_post_propre($texte) { 
-	return jeux_post($texte);
-}
 
 // pipeline header_prive
 function jeux_header_prive($flux){

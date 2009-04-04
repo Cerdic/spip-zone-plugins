@@ -124,7 +124,7 @@ function jeux_in_liste($texte, $liste=array()) {
 // retourne la boite de score
 function jeux_afficher_score($score, $total, $id_jeu=false, $resultat_long='', $categories='') {
 	if ($id_jeu){
-		// ici, #CONTENU est passe par le filtre |ajoute_id_jeu{#ID_JEU}
+		// ici, #CONTENU* est passe par le filtre |traite_contenu_jeu{#ID_JEU}
 		include_spip('base/jeux_ajouter_resultat');
 		jeux_ajouter_resultat($id_jeu, $score, $total, $resultat_long);
 	}
@@ -164,10 +164,10 @@ function jeux_bouton_recommencer() {
 
 // ajoute un module jeu a la bibliotheque
 function jeux_include_jeu($jeu, &$texte, $indexJeux) {
-	$fonc = 'jeux_'.$jeu;
-	if (!function_exists($fonc)) include_spip('jeux/'.$jeu);
-	// on est jamais trop prudent !!
-	if (function_exists($fonc)) $texte = $fonc($texte, $indexJeux);
+	if (!function_exists($fonc = 'jeux_'.$jeu))
+		include_spip('jeux/'.$jeu);
+	if (function_exists($fonc))
+		$texte = $fonc($texte, $indexJeux);
 }	
 
 // decode les jeux, si le module jeux/lejeu.php est present
@@ -259,14 +259,16 @@ function jeux_block_depliable($texte, $block) {
 
 // deux fonctions qui encadrent un jeu dans un formulaire
 function jeux_form_debut($name, $indexJeux, $class="", $method="post", $action="") {
-	if (strlen($name)) $name=" name=\"$name$indexJeux\"";
-	if (strlen($class)) $class=" class=\"$class\"";
-	if (strlen($method)) $method=" method=\"$method\"";
-	/*if (strlen($action))*/ $action=" action=\"$action#JEU$indexJeux\"";
+	if (strlen($name)) $name=" name='$name$indexJeux'";
+	if (strlen($class)) $class=" class='$class'";
+	if (strlen($method)) $method=" method='$method'";
+	/*if (strlen($action))*/ $action=" action='$action#JEU$indexJeux'";
+	$id_jeu = intval(jeux_config('id_jeu'));
 	return "\n<form".$name.$class.$method.$action." >\n"
-		."<input type=\"hidden\" name=\"debut_index_jeux\" value=\"{$GLOBALS['debut_index_jeux']}\" />\n"
-		."<input type=\"hidden\" name=\"index_jeux\" value='$indexJeux' />\n"
-		."<input type=\"hidden\" name=\"var_correction_$indexJeux\" value='1' />\n";
+		."<input type='hidden' name='id_jeu' value='$id_jeu' />\n"
+		."<input type='hidden' name='debut_index_jeux' value='{$GLOBALS['debut_index_jeux']}' />\n"
+		."<input type='hidden' name='index_jeux' value='$indexJeux' />\n"
+		."<input type='hidden' name='var_correction_$indexJeux' value='1' />\n";
 }
 function jeux_form_fin() {
 	return "\n</form>\n";

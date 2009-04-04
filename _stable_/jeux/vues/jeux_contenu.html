@@ -14,8 +14,8 @@
 
 <BOUCLE_j(JEUX){id_jeu=#ENV{id_jeux}}{statut==.}>
 [(#GET{r}|?{
-	[(#CONTENU|ajoute_id_jeu{#ID_JEU}|image_reduire{#GET{r},0})]
+	[(#CONTENU*|traite_contenu_jeu{#ID_JEU}|image_reduire{#GET{r},0})]
 ,
-	[(#CONTENU|ajoute_id_jeu{#ID_JEU})]
+	[(#CONTENU*|traite_contenu_jeu{#ID_JEU})]
 })]
 </BOUCLE_j>

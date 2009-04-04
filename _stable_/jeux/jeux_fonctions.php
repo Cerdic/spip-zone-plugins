@@ -66,11 +66,10 @@ function pas_de_balise_jeux($texte) {
 // aide le Couteau Suisse a calculer la balise #INTRODUCTION
 $GLOBALS['cs_introduire'][] = 'pas_de_balise_jeux';
 
-// ajoute un identifiant dans le formulaire, correspondant au jeu
-// ce filtre doit agir sur #CONTENU
-function ajoute_id_jeu($texte, $id_jeu) {
-	$texte = str_replace('</form>', "<input type='hidden' name='id_jeu' value='".$id_jeu."' />\n</form>", $texte);
-	return $texte;
+// ajoute l'id_jeu du jeu a sa config interne et traite le jeu grace a propre()
+// ce filtre doit agir sur #CONTENU*
+function traite_contenu_jeu($texte, $id_jeu) {
+	return propre(str_replace('</jeux>', "[config]id_jeu=$id_jeu</jeux>", $texte));
 }
 
 // renvoie le titre du jeu que l'on peut trouver grace au separateur [titre]
@@ -85,14 +84,13 @@ function balise_TITRE_PUBLIC_dist($p) {
 	return $p;
 }
 /*
-function balise_CONTENU_dist($p) {
+function balise_CONTENU_PROPRE_dist($p) {
 	$id = champ_sql('id_jeu', $p);
 	$texte = champ_sql('contenu', $p);
-	$p->code = "ajoute_id_jeu($texte, $id)";
+	$p->code = "traite_contenu_jeu($texte, $id)";
 	return $p;
 }
 */
-
 include_spip('public/interfaces');
 global $table_des_traitements;
 // TITRE_PUBLIC est un TITRE :

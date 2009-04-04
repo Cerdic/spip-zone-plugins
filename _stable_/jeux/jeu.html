@@ -14,7 +14,7 @@
 
 	<h1 class="entry-title">[(#REM|sinon{<:jeux:jeu_court:>}|replace{@id@,#ID_JEU}|replace{@nom@,#TYPE_JEU})]</h1>
 	<p class="soustitre">[(#TITRE_PUBLIC|sinon{<:info_sans_titre:>})]</p>
-	[<div id="jeu-#ID_JEU" class="#EDIT{contenu} imagereduire_500 ajax">(#CONTENU|ajoute_id_jeu{#ID_JEU}|image_reduire{500,0})</div>]
+	[<div id="jeu-#ID_JEU" class="#EDIT{contenu} imagereduire_500 ajax">(#CONTENU*|traite_contenu_jeu{#ID_JEU}|image_reduire{500,0})</div>]
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
