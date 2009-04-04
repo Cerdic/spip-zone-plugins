@@ -82,7 +82,7 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 	position:relative;
 	clear:none;
 	border:0;
-	margin:0 0 2px 0;
+	margin:0;
 	padding:0;
 	overflow:visible;
 }
@@ -96,14 +96,14 @@ width:96%; /* reduire la taille par defaut des formulaires spip */
 }
 .markItUp .markItUpHeader ul .markItUpDropMenu li {
 	margin-right:0px;
+	background-color: #eee;
+	padding:2px 0 0;
 }
 /* next rows of buttons */
 .markItUp .markItUpHeader ul ul {
-	background-color: #eee;
 	display:none;
 	position:absolute;
 	top:24px; left:0px;	
-	padding-top:2px;
 	width:150px;
 }
 .markItUp .markItUpHeader ul ul li {
