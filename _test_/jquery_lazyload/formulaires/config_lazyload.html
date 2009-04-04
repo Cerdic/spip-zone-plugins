@@ -1,0 +1,52 @@
+
+<!-- autoriser=webmestre -->
+<!-- refus=Seuls les webmestres du site sont autoris&#233;s &#224; modifier ces param&#232;tres. -->
+<!-- nom=lazyload -->
+
+<div class="formulaire_spip formulaire_editer formulaire_cfg">
+
+	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+	
+<form method="post" action="#SELF"><div>
+	#ACTION_FORMULAIRE{SELF}
+
+	<ul>
+		<li class="editer_lazyload_selecteur[ (#ENV**{erreurs}|table_valeur{selecteur}|oui)erreur]">
+			<label for="lazyload_selecteur"><:lazyload:cfg_lbl_selecteur:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{selecteur})</span>]
+			<p class="explication"><:lazyload:cfg_inf_selecteur:></p>
+			<input type="text" name="selecteur" class="text" id="lazyload_selecteur" size="60"
+				value="#ENV{selecteur, #contenu img}" />
+		</li>
+
+		<li class="editer_lazyload_distance[ (#ENV**{erreurs}|table_valeur{distance}|oui)erreur]">
+			<label for="lazyload_distance"><:lazyload:cfg_lbl_distance:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{distance})</span>]
+			<p class="explication"><:lazyload:cfg_inf_distance:></p>
+			<input type="text" name="distance" class="text" id="lazyload_distance" size="8" value="#ENV{distance, 0}" />	
+		</li>
+		
+		<li class="editer_lazyload_event[ (#ENV**{erreurs}|table_valeur{event}|oui)erreur]">
+			<label for="lazyload_event"><:lazyload:cfg_lbl_event:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{event})</span>]
+			<p class="explication"><:lazyload:cfg_inf_event:></p>
+			<input type="text" name="event" class="text" id="lazyload_event" size="60" value="#ENV{event}" />	
+		</li>
+		
+		<li class="editer_lazyload_effect[ (#ENV**{erreurs}|table_valeur{effect}|oui)erreur]">
+			<label for="lazyload_effect"><:lazyload:cfg_lbl_effect:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{effect})</span>]
+			<p class="explication"><:lazyload:cfg_inf_effect:></p>
+			<input type="text" name="effect" class="text" id="lazyload_effect" size="60" value="#ENV{effect}" />	
+		</li>
+
+	</ul>
+
+
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
+		<input type="submit" name="_cfg_delete" class="submit" value="<:effacer:>" />
+	</p>
+</div></form>
+</div>
