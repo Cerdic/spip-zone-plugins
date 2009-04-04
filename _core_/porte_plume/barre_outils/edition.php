@@ -59,7 +59,6 @@ function barre_outils_edition(){
 			array(
 				"id"        => 'stroke_through',
 				"name"      => _T('barre_outils:barre_barre'), // :-)
-				"key"       => "S", 
 				"className" => "outil_stroke_through", 
 				"openWith" => "<del>", 
 				"closeWith" => "</del>",
@@ -76,37 +75,40 @@ function barre_outils_edition(){
 				"display"   => true,
 				"selectionType" => "line",
 				"forceMultiline" => true,
+				"dropMenu"    => array(
+					// liste -#		
+					array(
+						"id"        => 'liste_ol',
+						"name"      => _T('barre_outils:barre_liste_ol'), 
+						"className" => "outil_liste_ol", 
+						"replaceWith" => "function(h){ return outil_liste(h, '#');}", 
+						"display"   => true,
+						"selectionType" => "line",
+						"forceMultiline" => true,
+					),
+					// indenter		
+					array(
+						"id"        => 'indenter',
+						"name"      => _T('barre_outils:barre_indenter'), 
+						"className" => "outil_indenter", 
+						"replaceWith" => "function(h){return outil_indenter(h);}",  
+						"display"   => true,
+						"selectionType" => "line",
+						"forceMultiline" => true,
+					),
+					// desindenter	
+					array(
+						"id"        => 'desindenter',
+						"name"      => _T('barre_outils:barre_desindenter'), 
+						"className" => "outil_desindenter", 
+						"replaceWith" => "function(h){return outil_desindenter(h);}", 
+						"display"   => true,
+						"selectionType" => "line",
+						"forceMultiline" => true,
+					),
+				),
 			),	
-			// liste -#		
-			array(
-				"id"        => 'liste_ol',
-				"name"      => _T('barre_outils:barre_liste_ol'), 
-				"className" => "outil_liste_ol", 
-				"replaceWith" => "function(h){ return outil_liste(h, '#');}", 
-				"display"   => true,
-				"selectionType" => "line",
-				"forceMultiline" => true,
-			),
-			// indenter		
-			array(
-				"id"        => 'indenter',
-				"name"      => _T('barre_outils:barre_indenter'), 
-				"className" => "outil_indenter", 
-				"replaceWith" => "function(h){return outil_indenter(h);}",  
-				"display"   => true,
-				"selectionType" => "line",
-				"forceMultiline" => true,
-			),
-			// desindenter	
-			array(
-				"id"        => 'desindenter',
-				"name"      => _T('barre_outils:barre_desindenter'), 
-				"className" => "outil_desindenter", 
-				"replaceWith" => "function(h){return outil_desindenter(h);}", 
-				"display"   => true,
-				"selectionType" => "line",
-				"forceMultiline" => true,
-			),
+
 						
 			
 			// separation
