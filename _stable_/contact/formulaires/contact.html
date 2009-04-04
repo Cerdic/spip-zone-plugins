@@ -44,7 +44,7 @@
 				<B_destinataires>
 				<li class="obligatoire[ (#ENV*{erreurs}|table_valeur{destinataire}|oui)erreur]">
 					[(#ENV{type_choix}|=={plusieurs}|oui)
-						<label for="destinataire"><:contact:form_destinataires:></label>
+						<label><:contact:form_destinataires:></label>
 						[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{destinataire})</span>]
 						<ul class="choix_mots">
 					]
