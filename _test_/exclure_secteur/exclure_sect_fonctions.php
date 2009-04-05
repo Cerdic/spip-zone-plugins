@@ -44,6 +44,7 @@ function boucle_BREVES($id_boucle, &$boucles) {
     
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
+	$crit = $boucle->criteres;
 	
     if(!$boucle->modificateur['tout_secteur'] and !($boucle->modificateur['tout'] and lire_config('secteur/tout') == 'oui')){
         $exclut = exclure_sect_choisir($crit);       
@@ -73,6 +74,7 @@ function boucle_RUBRIQUES($id_boucle, &$boucles) {
     
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
+	$crit = $boucle->criteres;
 	
     if(!$boucle->modificateur['tout_secteur'] and !($boucle->modificateur['tout'] and lire_config('secteur/tout') == 'oui')){
         $exclut = exclure_sect_choisir($crit);       
@@ -87,6 +89,7 @@ function boucle_SYNDICATION($id_boucle, &$boucles) {
     
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
+	$crit = $boucle->criteres;
 	
     if(!$boucle->modificateur['tout_secteur'] and !($boucle->modificateur['tout'] and lire_config('secteur/tout') == 'oui')){
         $exclut = exclure_sect_choisir($crit);       
