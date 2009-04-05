@@ -1,6 +1,6 @@
 <?php
 
-function titre_logo_install($nom_meta_base_version,$version_cible){
+function titre_logo_install($nom_meta_base_version, $version_cible=0){
 	include_spip('inc/meta');
 
 
