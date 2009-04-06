@@ -13,33 +13,22 @@
     <form action='#ENV{action}' method='post'>
 		#ACTION_FORMULAIRE{#SELF}
 		
-		[(#CONFIG{inscription2/nom_fiche_mod}|=={on}|ou{
-			[(#CONFIG{inscription2/login_fiche_mod}|=={on})]}|ou{
-				[(#CONFIG{inscription2/email_fiche_mod}|=={on})]}|ou{
-					[(#CONFIG{inscription2/pass_fiche_mod}|=={on})]}|oui)
-		
-		
         [(#REM) pour inserer des champs au debut du formulaire
 		Utilise pour Abonnement et association auparavant]
 
 		[(#PIPELINE{i2_form_debut,#ARRAY{args,#ENV*,data,''}})]
 		
         [(#ENV*{id_auteur}|oui)
+			<INCLURE{fond=formulaires/inscription2_modif_infos_connection}{env}>
         	<INCLURE{fond=formulaires/inscription2_modif_infos_pro}{env}>
         	<INCLURE{fond=formulaires/inscription2_modif_infos_perso}{env}>
         ]
         	
         [(#ENV*{id_auteur}|non)
+			<INCLURE{fond=formulaires/inscription2_infos_connection}{env}>
         	<INCLURE{fond=formulaires/inscription2_infos_perso}{env}>
         	<INCLURE{fond=formulaires/inscription2_infos_pro}{env}>
         ]
-        
-        [(#ENV*{id_auteur}|oui)
-		<INCLURE{fond=formulaires/inscription2_modif_infos_connection}{env}>]
-        ]
-        
-        [(#ENV*{id_auteur}|non)
-		<INCLURE{fond=formulaires/inscription2_infos_connection}{env}>]
 
 		[(#PIPELINE{i2_form_fin,#ARRAY{args,#ENV*,data,''}})]
 
