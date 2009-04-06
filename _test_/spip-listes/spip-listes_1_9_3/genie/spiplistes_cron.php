@@ -182,7 +182,7 @@ spiplistes_log($prefix_log."nb listes depart: ".$nb_listes_ok, _SPIPLISTES_LOG_D
 	
 			/////////////////////////////
 			// preparation du courrier a placer dans le panier (spip_courriers)
-			// en cas de periode, la date est dans le passe pour avoir les elements publies depuis cette date
+			// en cas de periode, la date est dans le passe' pour avoir les elements publies depuis cette date
 			$titre = ($titre_message =="") ? $titre._T('spiplistes:_de_').$GLOBALS['meta']['nom_site'] : $titre_message;
 
 			list($courrier_html, $courrier_texte) = spiplistes_courriers_assembler_patron (

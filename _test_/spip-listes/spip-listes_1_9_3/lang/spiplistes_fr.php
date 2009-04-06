@@ -24,7 +24,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 // balise/formulaire_abonnement.php
 , 'inscription_liste_f' => 'Vous avez choisi de recevoir les courriers adress&eacute;s &agrave; la liste suivante en format @f@ : '
 , 'inscription_listes_f' => 'Vous avez choisi de recevoir les courriers adress&eacute;s aux listes suivantes en format @f@ : '
-, 'inscription_reponse_s' => 'Vous &ecirc;tes abonn&eacute; &agrave; la liste d\'information du site @s@'
+, 'inscription_reponse_s' => "Vous &#234;tes abonn&#233; &#224; la liste d'information du site @s@"
 , 'inscription_reponses_s' => 'Vous &ecirc;tes abonn&eacute; aux listes d\'informations du site @s@'
 , 'vous_abonne_aucune_liste' => "Vous n'&ecirc;tes pas abonn&eacute; &agrave; une liste de diffusion"
 , 'abonnement_mail_passcookie' => "(ceci est un message automatique)

@@ -86,9 +86,16 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn()", _SPIPLISTES_LOG_DEBUG);
 	
 	$affiche_formulaire = $inscription_redac = $inscription_visiteur = "";
 	
-	// envoyer le cookie de relance mot de passe si pass oublie
-	if($email_oubli) {
+	$nom_site_spip = $GLOBALS['meta']['nom_site'];
+	$adresse_site = $GLOBALS['meta']['adresse_site'];
+	if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
+		include_spip('inc/charsets');
+		$nom_site_spip = unicode2charset(charset2unicode($nom_site_spip),$GLOBALS['meta']['spiplistes_charset_envoi']);
+	}
 
+	// envoyer le cookie de relance mot de passe si pass oublie
+	if($email_oubli)
+	{
 		if(email_valide($email_oubli)) {
 
 			$sql_result = spiplistes_auteurs_auteur_select('statut', "email=".sql_quote($email_oubli));
@@ -100,13 +107,6 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn()", _SPIPLISTES_LOG_DEBUG);
 					$cookie = creer_uniqid();
 					spiplistes_auteurs_cookie_oubli_updateq($cookie, $email_oubli);
 					
-					$nom_site_spip = $GLOBALS['meta']['nom_site'];
-					$adresse_site = $GLOBALS['meta']['adresse_site'];
-					if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
-						include_spip('inc/charsets');
-						$nom_site_spip = unicode2charset(charset2unicode($nom_site_spip),$GLOBALS['meta']['spiplistes_charset_envoi']);
-					}
-				
 					$message = _T('spiplistes:abonnement_mail_passcookie'
 						, array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site, 'cookie' => $cookie));
 				
@@ -123,7 +123,9 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn()", _SPIPLISTES_LOG_DEBUG);
 				$erreur = _T('pass_erreur_non_enregistre', array('email_oubli' => htmlspecialchars($email_oubli)));
 		}
 		else
+		{
 			$erreur = _T('pass_erreur_non_valide', array('email_oubli' => htmlspecialchars($email_oubli)));
+		}
 	} // end if $email_oubli
 	
 	// afficher le formulaire d'oubli du pass
@@ -164,7 +166,9 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn()", _SPIPLISTES_LOG_DEBUG);
 			spiplistes_formulaire_inscription(
 				$mail_inscription_
 				, (($type=="redac") ? 'redac' : 'forum')
-				, $acces_membres, $formulaire
+				, $acces_membres
+				, $formulaire
+				, $nom_site_spip
 			);
 	}
 	else {
@@ -193,7 +197,7 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn()", _SPIPLISTES_LOG_DEBUG);
 // Si adresse_mail deja dans la base, rajoute l'abonnement
 // sinon, cree un login a partir de l'email et l'abonne
 // Dans ces deux cas, renvoie un mail de confirmation.
-function spiplistes_formulaire_inscription ($mail_inscription_, $type, $acces_membres, $formulaire) {
+function spiplistes_formulaire_inscription ($mail_inscription_, $type, $acces_membres, $formulaire, $nom_site_spip) {
 	
 	$nom_inscription_ = _request('nom_inscription_');
 	$listes_demande = _request('list');
@@ -204,13 +208,8 @@ function spiplistes_formulaire_inscription ($mail_inscription_, $type, $acces_me
 		$listes_demande = array_map('intval', $listes_demande);
 	}
 
-	$nom_site_spip = $GLOBALS['meta']['nom_site'];
 	$adresse_site = $GLOBALS['meta']['adresse_site'];
-	if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
-		include_spip('inc/charsets');
-		$nom_site_spip = unicode2charset(charset2unicode($nom_site_spip),$GLOBALS['meta']['spiplistes_charset_envoi']);
-	}
-	
+
 	if($type == 'redac') {
 		if($GLOBALS['meta']['accepter_inscriptions'] != "oui") return;
 		$statut = "nouveau";
@@ -384,7 +383,7 @@ spiplistes_log("inscription id : ->".$row['id_auteur'], _SPIPLISTES_LOG_DEBUG);
 					$m2 = _T('spiplistes:vous_abonne_aucune_liste');
 				}
 				$message .= ""
-					. "\n"._T('spiplistes:'.$m1, array('s' => $nom_site_spip))
+					. "\n"._T('spiplistes:'.$m1, array('s' => htmlentities($nom_site_spip)))
 					. ".\n"
 					. $m2.$message_list
 					;
@@ -418,6 +417,11 @@ spiplistes_log("inscription id : ->".$row['id_auteur'], _SPIPLISTES_LOG_DEBUG);
 			. $tt
 			;
 			
+		if ($GLOBALS['meta']['spiplistes_charset_envoi'] != $GLOBALS['meta']['charset']){
+			include_spip('inc/charsets');
+			$message = unicode2charset(charset2unicode($message), $GLOBALS['meta']['spiplistes_charset_envoi']);
+		}
+
 		if($abonne_existant != 'oui') {
 		
 			if(
@@ -427,7 +431,7 @@ spiplistes_log("inscription id : ->".$row['id_auteur'], _SPIPLISTES_LOG_DEBUG);
 					, $message
 				)
 			) {
-spiplistes_log("inscription : ->".$mail_inscription_, _SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("inscription : ->".$mail_inscription_, _SPIPLISTES_LOG_DEBUG);
 				$reponse_formulaire =
 					($acces_membres == 'oui')
 					? _T('form_forum_identifiant_mail')
