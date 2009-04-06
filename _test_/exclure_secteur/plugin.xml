@@ -20,7 +20,7 @@ Exclut automatiquement les secteurs s&eacute;l&eacutes;ctionn&eacute;s des boucl
     On peut faire une exception avec le crit&eacute; <code>{tout_secteur}</code>. 
     Si on pr&eacute;cise le secteur explicitement, par <code>{id_secteur=x}</code>, <code>{id_secteur==x}</code> ou <code>{id_secteur IN X}</code>, le r&eacute;glage ne sera pas pris en compte.
     
-    Possibilit&eacute; aussi de configurer le plugin pour que <code>{tout}</code> soit &eacute;quivalent à <code>{tout_secteur}</code>.
+    Possibilit&eacute; aussi de configurer le plugin pour que <code>{tout}</code> soit &eacute;quivalent à <code>{tout_voir}</code>.
 
 
 	

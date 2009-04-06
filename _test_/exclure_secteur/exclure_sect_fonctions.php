@@ -1,10 +1,10 @@
 <?php
 global $spip_version_branche;
 if (eregi("^1",$spip_version_branche)){
-        if (!function_exists('critere_tout_secteur_dist')){
-        function critere_tout_secteur_dist($idb, &$boucles, $crit) {   
+        if (!function_exists('critere_tout_voir_dist')){
+        function critere_tout_voir_dist($idb, &$boucles, $crit) {   
             $boucle = &$boucles[$idb];
-            $boucle->modificateur['tout_secteur'] = true;
+            $boucle->modificateur['tout_voir'] = true;
         }
         }
         function secteur_explicite($crit){
@@ -45,7 +45,7 @@ if (eregi("^1",$spip_version_branche)){
             $id_table = $boucle->id_table;
             $crit = $boucle->criteres;
             
-            if(!$boucle->modificateur['tout_secteur'] and !($boucle->modificateur['tout'] and lire_config('secteur/tout') == 'oui')){
+            if(!$boucle->modificateur['tout_voir'] and !($boucle->modificateur['tout'] and lire_config('secteur/tout') == 'oui')){
                 $exclut = exclure_sect_choisir($crit);       
                 $boucle->where[] = array("'NOT IN'", "'$id_table.id_secteur'",sql_quote($exclut));        
             }
@@ -61,7 +61,7 @@ if (eregi("^1",$spip_version_branche)){
             $id_table = $boucle->id_table;
             $crit = $boucle->criteres;
            
-            if(!$boucle->modificateur['tout_secteur'] and !($boucle->modificateur['tout'] and lire_config('secteur/tout') == 'oui')){
+            if(!$boucle->modificateur['tout_voir'] and !($boucle->modificateur['tout'] and lire_config('secteur/tout') == 'oui')){
                 $exclut = exclure_sect_choisir($crit);       
                 $boucle->where[] = array("'NOT IN'", "'$id_table.id_secteur'",sql_quote($exclut));    
             }
@@ -75,7 +75,7 @@ if (eregi("^1",$spip_version_branche)){
             $id_table = $boucle->id_table;
             $crit = $boucle->criteres;
             
-            if(!$boucle->modificateur['tout_secteur'] and !($boucle->modificateur['tout'] and lire_config('secteur/tout') == 'oui')){
+            if(!$boucle->modificateur['tout_voir'] and !($boucle->modificateur['tout'] and lire_config('secteur/tout') == 'oui')){
                 $exclut = exclure_sect_choisir($crit);       
                 $boucle->where[] = array("'NOT IN'", "'$id_table.id_secteur'",sql_quote($exclut));    
             
@@ -90,7 +90,7 @@ if (eregi("^1",$spip_version_branche)){
             $id_table = $boucle->id_table;
             $crit = $boucle->criteres;
             
-            if(!$boucle->modificateur['tout_secteur'] and !($boucle->modificateur['tout'] and lire_config('secteur/tout') == 'oui')){
+            if(!$boucle->modificateur['tout_voir'] and !($boucle->modificateur['tout'] and lire_config('secteur/tout') == 'oui')){
                 $exclut = exclure_sect_choisir($crit);       
                 $boucle->where[] = array("'NOT IN'", "'$id_table.id_secteur'",sql_quote($exclut));    
             
