@@ -51,7 +51,7 @@
         [(#CONFIG{inscription2/adresse_pro_fiche_mod}|=={on}|oui)
         <li class="editer_adresse_pro textarea[ (#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{adresse_pro}|oui)erreur]">
             <label for="adresse_pro"><:inscription2:adresse_pro:></label>
-            <textarea name="adresse_pro" class="text" id="adresse_pro" rows="5" cols="20">#ENV{adresse_pro}</textarea>
+            <textarea name="adresse_pro" class="text" id="adresse_pro" rows="2" cols="20">#ENV{adresse_pro}</textarea>
             [<p class='erreur'>(#ENV**{erreurs}|table_valeur{adress_pro})</p>]
         </li>]
         [(#CONFIG{inscription2/code_postal_pro_fiche_mod}|=={on}|oui)

@@ -57,7 +57,7 @@
         [(#CONFIG{inscription2/adresse_fiche_mod}|=={on}|oui)	
         <li class="editer_adresse[ (#CONFIG{inscription2/adresse_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{adresse}|oui)erreur]">
             <label for="adresse"><:inscription2:adresse:></label>
-            <textarea name="adresse" class="textarea" id="adresse" rows="5" cols="20">#ENV{adresse}</textarea>
+            <textarea name="adresse" class="textarea" id="adresse" rows="2" cols="20">#ENV{adresse}</textarea>
             [<p class='erreur'>(#ENV**{erreurs}|table_valeur{adresse})</p>]
         </li>]
 

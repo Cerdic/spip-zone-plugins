@@ -23,10 +23,10 @@ function formulaires_inscription2_charger_dist($id_auteur = NULL){
 	//initialise les variables d'environnement pas défaut
 	$valeurs = array();
 
-	//récupere la liste des champs possible
+	//recupere la liste des champs possible
 	$champs = inscription2_champs_formulaire($id_auteur);
 
-	//si on a bien un auteur alors on préremplit le formulaire avec ses informations
+	//si on a bien un auteur alors on preremplit le formulaire avec ses informations
 	//les nom des champs sont les memes que ceux de la base de données
 	if (is_numeric($id_auteur)) {
 		
@@ -46,7 +46,7 @@ function formulaires_inscription2_charger_dist($id_auteur = NULL){
 		}
 		$champs = $auteur;
 	} else {	
-	    //si on est en mode création et que l'utilisateur a saisi ses valeurs on les prends en compte
+	    //si on est en mode creation et que l'utilisateur a saisi ses valeurs on les prends en compte
 	    foreach($champs as $clef =>$valeurs) {
             if (_request($valeurs)) {
                 $champs[$valeurs] = _request($valeurs);
@@ -75,7 +75,7 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
     //initilise le tableau de valeurs $champs => $valeur
     $valeurs = array();	
     
-	//récupere la liste des champs possible
+	//recupere la liste des champs possible
 	$champs = inscription2_champs_formulaire($id_auteur);	
 
     //gere la correspondance champs -> _request(champs)
@@ -121,11 +121,11 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 	}
 	
 	//messages d'erreur au cas par cas (PASSWORD)
-	//vérification des champs
+	//verification des champs
 	// Sinon on le verifie
 	if(($pass != 'ok') && (lire_config('inscription2/pass') == 'on')) {
-		
-		if($p = _request('pass')) {
+		if (strlen(_request('password')) != 0){$p = _request('password');}else{$p = _request('pass');}
+		if($p) {
 			if(strlen($p)){
 				if (strlen($p) < 6) {
 					$erreurs['pass'] = _T('info_passe_trop_court');
@@ -136,26 +136,9 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 				}
 			}else{
 				if(!is_numeric($id_auteur)){
-					// Si on est dans la modif d'id_auteur on garde l'ancien pass si rien n'est rentré
+					// (1) Si on est dans la modif d'id_auteur on garde l'ancien pass si rien n'est rentre
 					// donc on accepte la valeur vide
-					// dans le cas de la création d'un auteur ... le password sera nécessaire
-					$erreurs['pass'] = _T('inscription2:password_obligatoire');
-				}
-			}
-		}else if($p = _request('password')) {
-			if(strlen($p)){
-				if (strlen($p) < 6) {
-					$erreurs['pass'] = _T('info_passe_trop_court');
-					$erreurs['message_erreur'] .= _T('info_passe_trop_court')."<br />";
-				} elseif ($p != _request('password1')) {
-					$erreurs['pass'] = _T('info_passes_identiques');
-					$erreurs['message_erreur'] .= _T('info_passes_identiques')."<br />";
-				}
-			}else{
-				if(!is_numeric($id_auteur)){
-					// Si on est dans la modif d'id_auteur on garde l'ancien pass si rien n'est rentré
-					// donc on accepte la valeur vide
-					// dans le cas de la création d'un auteur ... le password sera nécessaire
+					// dans le cas de la création d'un auteur ... le password sera necessaire
 					$erreurs['pass'] = _T('inscription2:password_obligatoire');
 				}
 			}
@@ -166,7 +149,7 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
     //liste des champs de type code postal
 	$champs_code_postal = array('code_postal','code_postal_pro');
 	
-	// vérification des champs saisis
+	// verification des champs saisis
 	foreach($champs_code_postal as $champs) {
 	    if(lire_config('inscription2/'.$champs) == 'on') {
 	        $erreur = inscription2_valide_cp($valeurs[$champs]);
@@ -177,10 +160,10 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 	}	
 
 	//messages d'erreur au cas par cas (TELEPHONE)
-	//liste des champs de type téléphone
+	//liste des champs de type telephone
 	$champs_telephone = array('telephone','fax','mobile','telephone_pro','fax_pro','mobile_pro');
 	
-	// vérification des champs saisis
+	// verification des champs saisis
 	foreach($champs_telephone as $champs) {
 	    if(lire_config('inscription2/'.$champs) == 'on') {
 	        $erreur = inscription2_valide_numero($valeurs[$champs]);
@@ -190,7 +173,7 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 	    }
 	}
 
-	//Offrir aux autres plugins la possibilité de vérifier les données
+	//Offrir aux autres plugins la possibilite de verifier les donnees
 	$erreurs = pipeline('i2_validation_formulaire',
 		array(
 			'args' => array(
@@ -236,7 +219,7 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 		$mode = 'inscription';
 	}
 	
-	/* Génerer la liste des champs à traiter
+	/* Generer la liste des champs a traiter
 	* champ => valeur formulaire
 	*/
 	if(!is_numeric($id_auteur)){
@@ -255,9 +238,9 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 			spip_log("on récupère la valeur du champs naissance : ".$valeurs[$valeur]);
 		}
 	}
-	// Définir le login s'il a besoin de l'être
-	// NOM et LOGIN sont des champs obligatoires donc à la création il ne doivent pas être vide
-	// Après on s'en fiche s'il n'est pas dans le formulaire
+	// Definir le login s'il a besoin de l'etre
+	// NOM et LOGIN sont des champs obligatoires donc a la creation il ne doivent pas etre vide
+	// Apres on s'en fiche s'il n'est pas dans le formulaire
 	if($new){
 		if(!$valeurs['nom']){
 			if($valeurs['nom_famille']||$valeurs['prenom']){
@@ -277,15 +260,15 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 	//definir les champs pour spip_auteurs
 	$table = "spip_auteurs";
     
-	//genere le tableau des valeurs à mettre à jour pour spip_auteurs
-	//toutes les clefs qu'inscription2 peut mettre à jour
+	//genere le tableau des valeurs a mettre a jour pour spip_auteurs
+	//toutes les clefs qu'inscription2 peut mettre a jour
 
 	$clefs = array_fill_keys(array('login','nom','email','bio'),'');
 	
-	//extrait uniquement les données qui ont été proposées à la modification
+	//extrait uniquement les donnees qui ont ete proposees a la modification
 	$val = array_intersect_key($valeurs,$clefs);
 	
-	//Vérification du password
+	//Verification du password
 	if(($mode == 'inscription_pass') || ($mode == 'modification_auteur_pass')){
 		if (strlen(_request('password')) != 0){$new_pass = _request('password');}
 		else{$new_pass = _request('pass');}
@@ -310,7 +293,7 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 		}
 	}
 	
-	//inserer les données dans spip_auteurs -- si $id_auteur : mise à jour - autrement : nouvelle entrée
+	//inserer les donnees dans spip_auteurs -- si $id_auteur : mise a jour - autrement : nouvelle entree
 	if (!$new) {
 		$where = 'id_auteur = '.$id_auteur;
 		sql_updateq(
@@ -326,16 +309,16 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 	}
 	
 	$table = 'spip_auteurs_elargis';
-	//extrait les valeurs propres à spip_auteurs_elargis
+	//extrait les valeurs propres a spip_auteurs_elargis
 	
-	//genere le tableau des valeurs à mettre à jour pour spip_auteurs
-	//toutes les clefs qu'inscription2 peut mettre à jour
+	//genere le tableau des valeurs a mettre a jour pour spip_auteurs
+	//toutes les clefs qu'inscription2 peut mettre a jour
 	//s'appuie sur les tables definies par le plugin
 	$clefs = $tables_principales[$table]['field'];
-	//extrait uniquement les données qui ont été proposées à la modification
+	//extrait uniquement les donnees qui ont ete proposees a la modification
 	$val = array_intersect_key($valeurs,$clefs);
 	unset($val['login']);
-	//recherche la presence d'un complément sur l'auteur
+	//recherche la presence d'un complement sur l'auteur
 	$id_elargi = sql_getfetsel('id_auteur','spip_auteurs_elargis','id_auteur='.$id_auteur);
 	
 	if ($id_elargi) {
