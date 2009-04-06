@@ -13,7 +13,7 @@
     <necessite id='CFG' />
 
     <description>
-Exclut automatiquement les secteurs s&eacute;l&eacutes;ctionn&eacute;s des boucles ARTICLES / SITES / RUBRIQUES
+Exclut automatiquement les secteurs s&eacute;l&eacutes;ctionn&eacute;s des boucles ARTICLES / SITES / RUBRIQUES / BREVES
 
     Attention, pour le moment, ne le fait pas sur les jointures (par exemple, n'exclura pas les forums qui appartiennent à un article du secteur).
     
@@ -29,8 +29,13 @@ Exclut automatiquement les secteurs s&eacute;l&eacutes;ctionn&eacute;s des boucl
     <prefix>
     exclure_sect
     </prefix>
+        <pipeline>
+        <nom>pre_boucle</nom>
+        <fonction>pre_boucle</fonction>
+        <fichier>exclure_sect_pipelines.php</fichier>
+    </pipeline>
 
-	<fonctions>exclure_sect_fonctions.php</fonctions>
-   
  
+	<fonctions>exclurepip.php</fonctions>
+
 </plugin>
