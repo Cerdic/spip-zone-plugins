@@ -1,6 +1,6 @@
 <?php
 include_spip('inc/exclure_utils');
-global $spip_version_code;
+global $spip_version_branche;
 
 
 if (eregi("^1",$spip_version_branche)){
@@ -13,7 +13,7 @@ if (eregi("^1",$spip_version_branche)){
 
         
         /* surcharges de boucles*/
-        function boucle_BREVESS($id_boucle, &$boucles) {
+        function boucle_BREVES($id_boucle, &$boucles) {
             
             $boucle = &$boucles[$id_boucle];
             $id_table = $boucle->id_table;
