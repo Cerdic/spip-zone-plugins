@@ -15,7 +15,7 @@ window.addEvent('domready', startGallery);
 <div id="myGallery">
 <BOUCLE_doc (DOCUMENTS) {id_article} {mode=document} {extension IN png,jpg,gif} {par titre} {doublons}>
 		<div class="imageElement">
-		[<h3>Image (#COMPTEUR_BOUCLE) sur #TOTAL_BOUCLE[ - (#TITRE)]</h3>]
+		[<h3>Image (#COMPTEUR_BOUCLE) sur #TOTAL_BOUCLE[ &#8211; (#TITRE|propre)]</h3>]
 		[<p>(#DESCRIPTIF|?{#DESCRIPTIF,' '})</p>]
 		<a href="#URL_DOCUMENT" title="Afficher l'image en taille r&eacute;elle" class="open"></a>
 		<img alt="" src="[(#FICHIER|image_reduire{[(#CONFIG{smoothgallery/largeur})],[(#CONFIG{smoothgallery/hauteur})]}|extraire_attribut{src})]" class="full" />
@@ -42,7 +42,7 @@ window.addEvent('domready', startGallery);
 <div id="myGallery">
 <BOUCLE_doc_rub (DOCUMENTS) {id_rubrique} {mode=document} {extension IN png,jpg,gif} {par titre} {doublons}>
 		<div class="imageElement">
-		[<h3>Image (#COMPTEUR_BOUCLE) sur #TOTAL_BOUCLE[ - (#TITRE)]</h3>]
+		[<h3>Image (#COMPTEUR_BOUCLE) sur #TOTAL_BOUCLE[ &#8211; (#TITRE|propre)]</h3>]
 		[<p>(#DESCRIPTIF|?{#DESCRIPTIF,' '})</p>]
 		<a href="#URL_DOCUMENT" title="Afficher l'image en taille r&eacute;elle" class="open"></a>
 		<img alt="" src="[(#FICHIER|image_reduire{[(#CONFIG{smoothgallery/largeur})],[(#CONFIG{smoothgallery/hauteur})]}|extraire_attribut{src})]" class="full" />
