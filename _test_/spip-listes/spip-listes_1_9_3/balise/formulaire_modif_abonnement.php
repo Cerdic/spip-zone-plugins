@@ -133,7 +133,8 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn ()", _SPIPLISTES_LOG_DEBU
 		}
 	} // end if($d)
 	
-	else if ($email_desabo) {
+	else if ($email_desabo)
+	{
 		// adresse email seule recue
 		// envoyer le cookie de relance modif abonnement par email
 		if (email_valide($email_desabo)) {
@@ -177,8 +178,9 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn ()", _SPIPLISTES_LOG_DEBU
 		$formulaire_cookie_affiche = '1';
 		$id_auteur = false;
 	} // end else if ($email_desabo)
-	else {
-		$message_formulaire = _T('pass_erreur_code_inconnu');
+	else
+	{
+		// $message_formulaire = _T('pass_erreur_code_inconnu');
 	}
 	
 	if(!empty($message_formulaire)) $message_formulaire = "<span class='msg_formulaire'>$message_formulaire</span>";

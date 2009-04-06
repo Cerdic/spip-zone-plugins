@@ -1,4 +1,4 @@
-[(#REM)
+[<!--(#REM)
 
 // formulaire_modif_abonnement.html
 
@@ -6,11 +6,11 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
-][(#REM)
+-->][<!--(#REM)
 	________________________
 	Message de confirmation (si present)
 	
-][(#ENV*{message_formulaire})]
+-->][(#ENV*{message_formulaire})]
 
 [(#REM)
 	________________________
@@ -58,11 +58,11 @@
 	[(#ENV{formulaire_affiche}|?{' ',''})<fieldset>
 	<legend><:spiplistes:abo_1_lettre:></legend>]
 <//B_listes>
-[(#REM)
-	________________________
+[<!--(#REM)
+	
 	Modification abonnement
 	
-][(#ENV{formulaire_affiche}|?{' ',''})
+-->][(#ENV{formulaire_affiche}|?{' ',''})
 			<div style="text-align: left;"> 
 				<strong><:spiplistes:format_de_reception:> :</strong><br /> 
 				<input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{'checked="checked"',''})]  type="radio" id='fslhtml' />
