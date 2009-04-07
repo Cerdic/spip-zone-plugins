@@ -121,7 +121,7 @@ Elle peut etre appellée comme cela depuis article.html
 			[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
 			<p>Vous pouvez vous abonner, ou bien acheter cet article &agrave; l'unit&eacute;</p>
 			<div style="padding:5px;background-color:#F4F1D0">
-				<form action="./?page=commander" method="post">
+				<form action="[(#URL_PAGE{commander})]" method="post">
 				[(#INCLURE{fond=formulaires/abonnement_liste})]	
 				<input type="hidden" value="reabo" name="reabo">
 				<input type="hidden" value="#SESSION{id_auteur}" name="id_auteur">
@@ -129,7 +129,7 @@ Elle peut etre appellée comme cela depuis article.html
 				</form>
 			</div>
 			<div style="padding:5px;background-color:#F4F1D0;margin-top:10px">
-			<form action="./?page=commander" method="post">	
+			<form action="[(#URL_PAGE{commander})]" method="post">	
 			<fieldset class="reabonnement">
 		    <legend>Acheter &agrave; l'unit&eacute;</legend>
 		    <input type="radio" checked="checked" id="unite"><label for="unite">#TITRE - #CONFIG{abonnement/prix_article} &nbsp;euros</label>
@@ -173,7 +173,7 @@ Elle peut etre appellée comme cela depuis article.html
 				</form>
 			</div>
 			<div style="padding:5px;background-color:#F4F1D0;margin-top:10px">
-			<form action="./?page=commander" method="post">	
+			<form action="[(#URL_PAGE{commander})]" method="post">	
 			<fieldset class="abonnement_liste">
 		    <legend>Acheter &agrave; l'unit&eacute;</legend>
 		    <input type="radio" checked="checked" id="unite"><label for="unite">#TITRE - #CONFIG{abonnement/prix_article} &nbsp;euros</label>

@@ -7,7 +7,7 @@
 <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
 <BOUCLE_auteur_elargi(AUTEURS_ELARGIS auteurs){id_auteur}{tout}>
 
-<form action="./?page=commander" method="post">
+<form action="[(#URL_PAGE{commander})]" method="post">
 [(#INCLURE{fond=formulaires/abonnement_validation}
 {nom_famille=#NOM_FAMILLE}
 {prenom=#PRENOM}
