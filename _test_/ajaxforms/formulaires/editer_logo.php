@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formulaires_editer_logo_charger_dist($objet, $id_objet){
+function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour=''){
 	$res = array(
 		'editable'=>($GLOBALS['meta']['activer_logos'] == 'oui' ? ' ' : ''),
 		'logo_survol'=>($GLOBALS['meta']['activer_logos_survol'] == 'oui' ? ' ' : ''),
@@ -35,7 +35,7 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet){
 	return $res;
 }
 
-function formulaires_editer_logo_verifier_dist($objet, $id_objet){
+function formulaires_editer_logo_verifier_dist($objet, $id_objet, $retour=''){
 	$erreurs = array();
 	// verifier les extensions
 	foreach(formulaire_editer_logo_get_sources() as $etat=>$file) {
@@ -48,7 +48,7 @@ function formulaires_editer_logo_verifier_dist($objet, $id_objet){
 	return $erreurs;
 }
 
-function formulaires_editer_logo_traiter_dist($objet, $id_objet){
+function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour=''){
 	$res = array('editable'=>' ');
 	
 	// pas dans une boucle ? formulaire pour le logo du site
@@ -83,6 +83,11 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet){
 				$res['message_ok'] = _T('ajaxform:logo_maj');
 			}
 		}
+	}
+	
+	if ($retour){
+		include_spip('inc/headers');
+		$res['redirect'] = parametre_url($retour,'var_mode','calcul');
 	}
 
 	return $res;
