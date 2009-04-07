@@ -5,7 +5,7 @@
     Licence : GPL3
     </auteur>
     <version>
-    1.0
+    1.1
     </version>
     <etat>
     test
@@ -13,7 +13,7 @@
     <necessite id='CFG' />
 
     <description>
-Exclut automatiquement les secteurs s&eacute;l&eacute;ctionn&eacute;s des boucles ARTICLES / SITES / RUBRIQUES / BREVES
+Exclut automatiquement les secteurs s&eacute;l&eacute;ctionn&eacute;s des boucles ARTICLES / SITES / RUBRIQUES / BREVES / FORUMS (suivant la r&eacute;gle de SPIP, qui ne prend en compte que les forums li&eacute;s &agrave; des articles.
 
     Attention, pour le moment, ne le fait pas sur les jointures (par exemple, n'exclura pas les forums qui appartiennent à un article du secteur).
     

@@ -23,8 +23,16 @@ function exclure_sect_pre_boucle(&$boucle){
         $boucle->where[] = array("'NOT IN'", "'$type.id_rubrique'",sql_quote($exclut));    
          
     }
-
     
+    if ($type == 'forum'){
+        $crit = $boucle->criteres;
+        $exclut = exclure_sect_choisir($crit);        
+        global $table_prefix;
+        $boucle->from['L1']=$table_prefix.'_articles';
+        $boucle->where[] = array("'NOT IN'", "'L1.id_secteur'",sql_quote($exclut));  
+        $boucle->join['L1'] = array('forum','id_article');
+    }
+
     return $boucle;
 }
 ?>

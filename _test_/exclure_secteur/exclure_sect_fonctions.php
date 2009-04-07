@@ -27,7 +27,24 @@ if (eregi("^1",$spip_version_branche)){
             return boucle_BREVES_dist($id_boucle, $boucles);
         }
 
-        
+        function boucle_FORUMS($id_boucle, &$boucles) {
+            
+            $boucle = &$boucles[$id_boucle];
+            $id_table = $boucle->id_table;
+            $crit = $boucle->criteres;
+           
+            if(!$boucle->modificateur['tout_voir'] and !($boucle->modificateur['tout'] and lire_config('secteur/tout') == 'oui')){
+                $exclut = exclure_sect_choisir($crit);        
+                global $table_prefix;
+                $boucle->from['L1']=$table_prefix.'_articles';
+                $boucle->where[] = array("'NOT IN'", "'L1.id_secteur'",sql_quote($exclut));  
+                $boucle->join['L1'] = array('forum','id_article');
+
+  
+            }
+          
+            return boucle_FORUMS_dist($id_boucle, $boucles);
+        }
         
         function boucle_ARTICLES($id_boucle, &$boucles) {
             
