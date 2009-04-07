@@ -11,7 +11,7 @@
 
 [(#ENV{editable}|oui)
     <form action='#ENV{action}' method='post'>
-		#ACTION_FORMULAIRE{#SELF}
+		#ACTION_FORMULAIRE{#ENV{action}}
 		
         [(#REM) pour inserer des champs au debut du formulaire
 		Utilise pour Abonnement et association auparavant]
