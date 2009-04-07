@@ -14,7 +14,7 @@ function inscription2_declarer_tables_principales($tables_principales){
 	$spip_auteurs_elargis['id_auteur'] = "bigint(21) NOT NULL";
 		
 	if(function_exists('lire_config')){
-		if((lire_config('inscription2') == '') OR !is_array(!is_array(unserialize($GLOBALS['meta']['inscription2'])))){
+		if((lire_config('inscription2') == '') OR !is_array(unserialize($GLOBALS['meta']['inscription2']))){
 			spip_log('INSCRIPTION 2 : Reverifier les plugins');
 			include_spip('inc/plugin');
 			installe_plugins();
