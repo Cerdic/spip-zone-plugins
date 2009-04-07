@@ -21,6 +21,7 @@ include_spip('inc/spiplistes_api');
 
 function spiplistes_install ($action) {
 
+include_spip('inc/spipliste_api_globales');
 spiplistes_log("spiplistes_install()", _SPIPLISTES_LOG_DEBUG);
 
 	switch($action) {
