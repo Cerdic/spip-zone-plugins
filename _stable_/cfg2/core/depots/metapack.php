@@ -2,8 +2,7 @@
 
 /*
  * Plugin CFG pour SPIP
- * (c) toggg 2007, distribue sous licence GNU/GPL
- * Documentation et contact: http://www.spip-contrib.net/
+ * (c) toggg, marcimat 2009, distribue sous licence GNU/GPL
  *
  * classe cfg_metapack: storage serialise dans spip_meta
  */
@@ -82,7 +81,6 @@ class cfg_depot_metapack
   		// si pas de champs : on ecrit directement (ecrire_meta(metapack::nom,$val))...
   		if (!$this->champs){
   			ecrire_meta($this->param['nom'], serialize($this->val));
-  			if (defined('_COMPAT_CFG_192')) ecrire_metas();
   			return array(true, $this->val);
   		}
   		
@@ -97,7 +95,6 @@ class cfg_depot_metapack
 		}
 
 		ecrire_meta($this->param['nom'], serialize($this->_base));
-		if (defined('_COMPAT_CFG_192')) ecrire_metas();
 		return array(true, $ici);
 	}
 	

@@ -2,7 +2,7 @@
 
 /*
  * Plugin CFG pour SPIP
- * (c) toggg 2007, distribue sous licence GNU/GPL
+ * (c) toggg, marcimat 2009, distribue sous licence GNU/GPL
  * Documentation et contact: http://www.spip-contrib.net/
  *
  * classe cfg_classic: storage a plat (classique) dans spip_meta
@@ -58,7 +58,6 @@ class cfg_depot_meta
 		foreach ($this->champs as $name => $def) {
 			ecrire_meta($name, $this->val[$name]);
 	    }
-	    if (defined('_COMPAT_CFG_192')) ecrire_metas();
 	    return array(true, $this->val);
 	}
 	
@@ -70,7 +69,6 @@ class cfg_depot_meta
 			    effacer_meta($name);
 			}
 	    }
-	    if (defined('_COMPAT_CFG_192')) ecrire_metas();
 	    return array(true, $this->val);			
 	}
 	
