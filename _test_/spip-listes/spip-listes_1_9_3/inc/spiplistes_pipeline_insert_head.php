@@ -20,14 +20,22 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/spiplistes_api_globales');
 
 function spiplistes_insert_head ($flux) {
+	
+	$sig =
+		(isset($GLOBALS['spip_header_silencieux']) && $GLOBALS['spip_header_silencieux'])
+		? ""
+		: "\n\n<!-- SPIP-Listes v.: ".spiplistes_real_version_get(_SPIPLISTES_PREFIX)." -->\n"
+		;
 
+	// pour le formulaire en général
 	$flux .= ""
-		. "\n\n<!-- PLUGIN SPIPLISTES v.: ".spiplistes_real_version_get(_SPIPLISTES_PREFIX)." -->\n"
+		. $sig
 		. "<link rel='stylesheet' href='".find_in_path('spiplistes_formulaire.css')."' type='text/css' media='all' />\n"
 		;
 
+	// pour la page abonnement.html
 	if(in_array(_request('page'), array(
-		'abonnement'	// formulaire 
+		'abonnement'	// qui contient aussi le formulaire 
 		)
 		)
 	) {
@@ -36,9 +44,11 @@ function spiplistes_insert_head ($flux) {
 			;
 	}
 
-	$flux .= ""
-		. "<!-- / PLUGIN SPIPLISTES -->\n"
-	;
+	if(!empty($sig))
+	{
+		$flux .= "<!-- SPIP-Listes / -->\n";
+	}
+	
 	return($flux);
 }
 
