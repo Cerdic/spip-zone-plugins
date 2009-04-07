@@ -27,8 +27,8 @@
 			echo "creation des tables spip_abonnements";
 
 			ecrire_meta('abonnement_base_version',$current_version=$version_base);
+			ecrire_metas();
 		}
-		ecrire_metas();
 		
 		if ($current_version < 0.2){
 			include_spip('base/create');
@@ -37,8 +37,8 @@
 			echo "Maj 0.2 des tables spip_abonnements";
 			
 			ecrire_meta('abonnement_base_version',$current_version=$version_base);
+			ecrire_metas();
 		}
-		ecrire_metas();
 		
 		if ($current_version < 0.3){
 			include_spip('base/create');
@@ -47,8 +47,8 @@
 			echo "Maj 0.3 des tables spip_auteurs_elargis_articles";
 			
 			ecrire_meta('abonnement_base_version',$current_version=$version_base);
+			ecrire_metas();
 		}
-		ecrire_metas();
 		
 		if ($current_version < 0.4){
 			include_spip('base/create');
@@ -58,8 +58,8 @@
 			spip_query("ALTER TABLE `spip_auteurs_elargis_articles` DROP PRIMARY KEY");
 			echo "Maj 0.4 des index `spip_auteurs_elargis_articles`";
 			ecrire_meta('abonnement_base_version',$current_version=$version_base);
+			ecrire_metas();
 		}
-		ecrire_metas();
 		
 		if ($current_version < 0.5){
 			include_spip('base/create');
@@ -67,8 +67,8 @@
 			spip_query("ALTER TABLE `spip_abonnements` ADD periode text NOT NULL default '';");
 			echo "Maj 0.5 de `spip_abonnements` (periode)";
 			ecrire_meta('abonnement_base_version',$current_version=$version_base);
+			ecrire_metas();
 		}
-		ecrire_metas();
 		
 		if ($current_version < 0.6){
 			include_spip('base/create');
@@ -77,8 +77,8 @@
 			spip_query("ALTER TABLE `spip_auteurs_elargis_abonnements` ADD montant int(10) unsigned NOT NULL");
 			echo "Maj 0.6 de `spip_auteurs_elargis_abonnements` (validite, montant)";
 			ecrire_meta('abonnement_base_version',$current_version=$version_base);
+			ecrire_metas();
 		}
-		ecrire_metas();
 		
 		if ($current_version < 0.61){
 			include_spip('base/create');
@@ -86,8 +86,8 @@
 			spip_query("ALTER TABLE `spip_auteurs_elargis_abonnements` ADD stade_relance int(10) unsigned NOT NULL");
 			echo "Maj 0.61 de `spip_auteurs_elargis_abonnements` (stade_relance)";
 			ecrire_meta('abonnement_base_version',$current_version=$version_base);
+			ecrire_metas();
 		}
-		ecrire_metas();
 		
 		if ($current_version < 0.62){
 			include_spip('base/create');
@@ -95,8 +95,8 @@
 			spip_query("ALTER TABLE `spip_auteurs_elargis_articles` ADD montant int(10) unsigned NOT NULL");
 			echo "Maj 0.62 de `spip_auteurs_elargis_articles` (montant)";
 			ecrire_meta('abonnement_base_version',$current_version=$version_base);
+			ecrire_metas();
 		}
-		ecrire_metas();
 
 
 	}
