@@ -27,7 +27,7 @@
 	<pipeline>
 		<nom>I2_cfg_form</nom>
 		<action>I2_cfg_form</action>
-		<inclure>abonnement_pipeline.php</inclure>
+		<inclure>abonnement_pipelines.php</inclure>
 	</pipeline>
 	
 	<pipeline>

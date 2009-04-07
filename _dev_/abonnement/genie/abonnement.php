@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function cron_abonnement_cron($t){
+function genie_abonnement_dist($t){
 
 // ---------------------------------------------------------------------------------------------
 // Taches de fond
@@ -21,11 +21,11 @@ function cron_abonnement_cron($t){
 	and c.validite < NOW()
 	");
 		
-		while($row = spip_fetch_array($result)){
+	while ($row = spip_fetch_array($result)){
 		$id_auteur = $row['id_auteur'] ;
 		spip_log("$id_auteur est echu (salo), il perd sa (ses) zone(s)", "abonnement");		
 		spip_query("DELETE FROM `spip_zones_auteurs` WHERE id_auteur='$id_auteur'");
-		}
+	}
 		
 	
 	// relancer les abonnes
@@ -36,25 +36,23 @@ function cron_abonnement_cron($t){
 	
 
 	
-	$result = spip_query("
-	SELECT libelle, id_abonnement, periode FROM spip_abonnements 
-	");
+	$result = spip_query("SELECT libelle, id_abonnement, periode FROM spip_abonnements");
 		
-		while($row = spip_fetch_array($result)){
+	while ($row = spip_fetch_array($result)){
 		$libelle = $row['libelle'] ;
 		$id_abonnement = $row['id_abonnement'] ;
 		$periode = $row['periode'] ;
 		
 		// a décliner sur les 4 phases de relance
 		
-		if($periode == "jours"){
-	 	$validite = "DATE_ADD(CURRENT_DATE, INTERVAL 0 DAY)" ;
-	 	}elseif($periode == "mois"){
-	 	$validite = "DATE_ADD(CURRENT_DATE, INTERVAL 0 DAY)" ;
-	 	}
-	 	
-	 	$sujet_relance = lire_config("abonnement_relances/sujet_relance4") ;
-	 	$texte_relance = lire_config("abonnement_relances/texte_relance4") ;
+		if ($periode == "jours"){
+			$validite = "DATE_ADD(CURRENT_DATE, INTERVAL 0 DAY)" ;
+		} elseif ($periode == "mois") {
+			$validite = "DATE_ADD(CURRENT_DATE, INTERVAL 0 DAY)" ;
+		}
+	
+		$sujet_relance = lire_config("abonnement_relances/sujet_relance4") ;
+		$texte_relance = lire_config("abonnement_relances/texte_relance4") ;
 		$adresse_expediteur = lire_config("abonnement_relances/email_envoi") ;
 
 		$result_abo = spip_query("
@@ -69,7 +67,7 @@ function cron_abonnement_cron($t){
 		");
 		
 
-			while($row_abo = spip_fetch_array($result_abo)){
+		while($row_abo = spip_fetch_array($result_abo)){
 			$id_auteur = $row_abo['id_auteur'] ;
 			$email_abonne = $row_abo['email'] ;
 			$id_auteur_elargi = $row_abo['id'] ;
@@ -82,16 +80,11 @@ function cron_abonnement_cron($t){
 						
 			if(envoyer_mail($email_abonne, $sujet_relance, $texte_relance, $adresse_expediteur)){
 				spip_query("UPDATE `spip_auteurs_elargis_abonnements` SET stade_relance = 4 WHERE id_auteur_elargi = '$id_auteur_elargi'");
-			spip_log("relance faite","abonnement") ;
+				spip_log("relance faite","abonnement") ;
 			}
-
-			}
-
-
 		}
-
+	}
 	
-		
 	return 1; 
 }
 ?>
