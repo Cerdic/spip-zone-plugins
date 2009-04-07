@@ -11,7 +11,7 @@ function abonnement_I2_cfg_form($flux) {
 
 //utiliser le cron pour gerer les dates de validite des abonnements et envoyer les messages de relance
 function abonnement_taches_generales_cron($taches_generales){
-	$taches_generales['abonnement_cron'] = 10 ;
+	$taches_generales['abonnement'] = 10 ;
 	return $taches_generales;
 }
 
