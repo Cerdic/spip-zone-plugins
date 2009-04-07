@@ -161,7 +161,7 @@ function spiplistes_abonnements_auteurs_supprimer ($auteur_statut) {
 	$auteur_statut = "statut=".sql_quote($auteur_statut);
 	if(spiplistes_spip_est_inferieur_193()) { 
 		$result = sql_delete("spip_auteurs_listes", 
-					"WHERE id_auteur IN (SELECT id_auteur FROM spip_auteurs WHERE $auteur_statut)");
+					"id_auteur IN (SELECT id_auteur FROM spip_auteurs WHERE $auteur_statut)");
 	} else {
 		// Sur les precieux conseils de MM :
 		// passer la requete en 2 etapes pour assurer portabilite sql
