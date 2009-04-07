@@ -29,13 +29,14 @@ Exclut automatiquement les secteurs s&eacute;l&eacute;ctionn&eacute;s des boucle
     <prefix>
     exclure_sect
     </prefix>
-        <pipeline>
+    <pipeline>
         <nom>pre_boucle</nom>
         <fonction>pre_boucle</fonction>
-        <fichier>exclure_sect_pipelines.php</fichier>
+        <inclure>exclurepip.php</inclure>
     </pipeline>
 
+
  
-	<fonctions>exclurepip.php</fonctions>
+	<fonctions>exclure_sect_fonctions.php</fonctions>
 
 </plugin>
