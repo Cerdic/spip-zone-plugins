@@ -87,6 +87,7 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 				$type_objet = strtolower($type_objet);
 				$type_objet = preg_replace(',^spip_|s$,', '', $type_objet);
 				$type_objet = table_objet($type_objet);
+				if ($type_objet == 'forums') $type_objet = 'forum'; // Gros cas particulier pourri
 				$cle_objet = id_table_objet($type_objet);
 			
 				// il faut vérifier s'il existe bien cet objet
