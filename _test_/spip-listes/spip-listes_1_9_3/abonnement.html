@@ -1,5 +1,5 @@
 #CACHE{1}
-[(#REM)
+[<!--(#REM)
 
 // abonnement.html
 
@@ -8,42 +8,49 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
-]<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+-->]<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
 	<title>#NOM_SITE_SPIP</title>
 	<meta http-equiv='Content-Type' content='text/html; charset=#CHARSET' />
 	<INCLURE{fond=inc-head}>
 </head>
-<body dir="#LANG_DIR" style='color:#000;background-color:#fff;font-family:sans-serif;'>
+<body id="spiplistes-pageabo" dir="#LANG_DIR">
 		
 	<div class='bloc'>
-		<h1>#NOM_SITE_SPIP</h1>
 		
+		<h1>#NOM_SITE_SPIP</h1>	
 
-	<a name="spiplistes_formabo_a" id="spiplistes_formabo_a"></a>
-[(#REM) 	####################################
-			SPIP-Listes : bloc formulaire abonnement
-			#################################### ]
-		<div id='spiplistes-formabo' class='cadre'>
-[(#REM)
+	
+[<!--(#REM)
+
+	####################################
+	SPIP-Listes : bloc formulaire abonnement
+	####################################
+
+-->]<div id='spiplistes-formabo' class='formulaire_spip cadre'>
+[<!--(#REM)
+
 	Si (d) absent dans l'url, propose l'abonnement			
-][(#ENV{d}|?{'',' '})
-			#FORMULAIRE_ABONNEMENT
-			]
-[(#REM)
+
+-->][(#ENV{d}|?{'',' '})
+		#FORMULAIRE_ABONNEMENT
+][<!--(#REM)
+
 	Si (d) present dans l'url, propose la modification de l'abonnement			
-][(#ENV{d}|?{' ',''})
-			[(#SPIP_VERSION|>={2}|?{#FORMULAIRE_MODIF_ABONNEMENT2,#FORMULAIRE_MODIF_ABONNEMENT})]
-			]
+
+-->][(#ENV{d}|?{' ',''})
+		[(#SPIP_VERSION|>={2}|?{#FORMULAIRE_MODIF_ABONNEMENT2,#FORMULAIRE_MODIF_ABONNEMENT})]
+		]
 		</div>
-[(#REM) 	####################################
-			SPIP-Listes : fin de bloc formulaire abonnement
-			#################################### ]
-		
-		
-		
-		<p style="text-align:center"><a href='#URL_SITE_SPIP'><:pass_retour_public:></a></p>
+[<!--(#REM)
+
+	####################################
+	SPIP-Listes : fin de bloc formulaire abonnement
+	####################################
+
+-->]
+		<p class="center"><a href='#URL_SITE_SPIP'><:pass_retour_public:></a></p>
 		<div class='spiplistes-cdt'><:spiplistes:abonnement_cdt:></div>
 	</div>
 </body>

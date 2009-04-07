@@ -1,5 +1,8 @@
-/* spiplistes (public part) CSS Document */
+/* spiplistes (public part) CSS Document (pour page abonnement) */
 
+#spiplistes-pageabo {
+	color:#000;background-color:#fff;font-family:sans-serif;font-size:90%
+}
 #spiplistes-formabo {
 	background-color:#fff;
 	text-align: justify;
@@ -8,8 +11,11 @@
 	margin: 2em auto;
 }
 #spiplistes-formabo.cadre {
+	padding:1em;
+	border:1px solid #ccc;
 	-moz-border-radius: 6px;
 	border-radius: 6px;
+	padding:0; 
 }
 
 #spiplistes-formabo form {
@@ -22,8 +28,7 @@
 }
 
 #spiplistes-formabo form fieldset legend {
-	border:1px solid black;
-	margin:1em auto;
+	margin:0 auto 1em;
 	width:auto;
 	display:block;
 	text-align: center;
@@ -38,10 +43,11 @@
 	text-align: center;
 	font-size:100%;
 }
-
+.center {
+	text-align:center;
+}
 .spiplistes-cdt {
-  font-size:10px;
+  font-size:70%;
   text-align:center;
   margin-top:10px
 }
-

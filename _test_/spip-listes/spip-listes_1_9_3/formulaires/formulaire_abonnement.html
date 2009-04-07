@@ -1,16 +1,23 @@
-[(#REM)
+[<!--(#REM)
 
-// formulaire_abonnement.html
+// formulaires/formulaire_abonnement.html
 
 // $LastChangedRevision$
 // $LastChangedBy$
 // $LastChangedDate$
 
-][(#REM) 
-	================================
-	mot de passe oublie
+-->]
+<a name="spiplistes_formabo_a" id="spiplistes_formabo_a"></a>
+[<!--(#REM) 
 
-][(#ENV{oubli_pass}|=={oui}|?{' ',''})
+	===============
+	mot de passe oublie
+	===============
+	Affiche formulaire pour adresse email. Rien d'autre.
+	Pour l'activer, appeler via URL avec oubli_pass=oui
+	ex.: /spip.php?page=abonnement&oubli_pass=oui
+
+-->][(#ENV{oubli_pass}|=={oui}|?{' ',''})
 	<h2><:pass_mot_oublie:></h2>
 
 	[(#ENV*{erreur})]
@@ -18,137 +25,173 @@
 	[(#ENV{erreur}|?{'',' '})
 	<:pass_indiquez_cidessous:>
 	
-	<form action="#SELF#spip-listes" method="post">
+	<form action="#SELF#spiplistes_formabo_a" method="post">
 		<div style="text-align:right">
 				<input type="text" class="spip_formulaires" name="email_oubli" value="" />
 				<input type="hidden" name="oubli_pass" value="oui" />
 				<div class="spip_bouton" style="text-align:right">
 				<input type="submit" class="spip_bouton" name="oubli" value="<:pass_ok:>" /></div>
 		</div>
-	</form>	
+	</form>
 
 	]
-]
+][<!--(#REM) 
+
+	===============
+	FIN mot de passe oublie
+	===============
+
+-->]
+
 
 <div class="formulaire_spip formulaire_inscription">
-[(#REM) 
-	================================
-	texte d'inscription en tant que redacteur
-
-][(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
-<fieldset>
-<legend><:spiplistes:devenir_abonne:></legend>
-<strong><:spiplistes:devenir_redac:></strong>
-<div><:spiplistes:inscription_redacteurs:></div>
-<div style="margin-top:5px"><:form_forum_indiquer_nom_email:></div>
-</fieldset>
-]
-
-[(#REM) 
-	================================
-	texte d'inscription en tant que visiteur
-
-][(#ENV{inscription_visiteur}|=={oui}|?{' ',''})
-<fieldset>
-<legend><:spiplistes:devenir_abonne:></legend>
-<div><:spiplistes:inscription_visiteurs:></div>
-<div style="margin-top:5px"><:form_forum_indiquer_nom_email:></div>
-	[(#CONFIG{accepter_inscriptions}|=={oui}|?{' ',''})
-	<div style="margin-top:5px">(<:spiplistes:vous_pouvez_egalement:> <a href="[(#SELF|parametre_url{'type','redac'})]"><:spiplistes:vous_inscrire_auteur:></a>)
-	</div>
-	]
-</fieldset>
-]
-
-[<span style="color:red; font-size: 12px;">(#ENV*{reponse_formulaire})</span>]
-
 [(#ENV{mode_login}|?{' ',''})
-	<form class="formulaire-spiplistes-abo" action="#SELF#spip-listes" method="post" id="spip-listes">
-][(#REM) 
-	================================
-	liste des listes
-
+	<form class="formulaire-spiplistes-abo" action="#SELF#spiplistes_formabo_a" method="post" id="spip-listes">
 ]
-		[(#REM) 
-			================================
-			Si une seule liste en parametre de la balise, ne liste que celle-ci
-		]
-		<BOUCLE_liste(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'} {id_liste=#ENV{liste}} {0,(#ENV{mode_login}|?{1,0})}>
-			[<fieldset>
-			[<legend>(#TITRE)</legend>]
-			(#TEXTE)
-			</fieldset>]
-		</BOUCLE_liste>
+[<!--(#REM) 
+
+	===============
+	texte d'inscription en tant que redacteur
+	===============
+	Si la maison accepte l'inscription en tant que redacteur,
+	le proposer !
+
+-->][(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
+<fieldset>
+<legend><:spiplistes:devenir_abonne:></legend>
+<p><strong><:spiplistes:devenir_redac:></strong></p>
+<p><:spiplistes:inscription_redacteurs:></p>
+<p><:form_forum_indiquer_nom_email:></p>
+	<div class="coord">
+	[<!--(#REM)
+	
+		===============
+		acces_membres
+		===============
+		config SPIP-Listes: si mode d'acces 'membre' au lieu de 'simple'
+		demande le pseudo pour completer la fiche.
+
+	-->][(#ENV{acces_membres}|=={oui}|?{' ',''})
+		<label for="nom_inscription_"><:form_pet_votre_nom:> :</label>
+		<input type="text" class="forml" name="nom_inscription_" id="nom_inscription_" value="" size="40" style="width:12em;clear:both;" />
+	]
+	<label for="mail_inscription_"><:form_pet_votre_email:> :</label>
+	<input type="text" class="forml" id="mail_inscription_" name="mail_inscription_" value="" size="40" />
+	</div>
+</fieldset>
+][<!--(#REM) 
+
+	===============
+	FIN texte d'inscription en tant que redacteur
+	===============
+
+
+	===============
+	texte d'inscription en tant que visiteur
+	===============
+
+-->][(#ENV{inscription_visiteur}|=={oui}|?{' ',''})
+<fieldset>
+<legend><:spiplistes:devenir_abonne:></legend>
+<p><strong><:spiplistes:devenir_membre:></strong></p>
+<p><:spiplistes:inscription_visiteurs:></p>
+<p><:spiplistes:abonnement_presentation:></p>
+	[(#CONFIG{accepter_inscriptions}|=={oui}|?{' ',''})
+	<p style="margin-top:5px">
+		<:spiplistes:vous_pouvez_egalement:> <a href="[(#SELF|parametre_url{'type','redac'})]"><:spiplistes:vous_inscrire_auteur:>.</a>
+	</p>
+	]
+	<div class="coord">
+	<label for="mail_inscription_"><:form_pet_votre_email:> :</label>
+	<input type="text" class="forml" id="mail_inscription_" name="mail_inscription_" value="" size="40" />
+	</div>
+</fieldset>
+][<!--(#REM) 
+
+	===============
+	FIN texte d'inscription en tant que visiteur
+	===============
+
+-->]
+
+[<p class="message-formulaire">(#ENV*{reponse_formulaire})</p>]
+
+[<!--(#REM)
+
+	===============
+	liste des listes publiques 
+	===============
+
+-->][<!--(#REM)
+	
+		===============
+		Si une seule liste en parametre de la balise, ne lister que celle-ci
+		Sinon liste complete des listes publiques
+		Sauf si pas mode_login (pass_mot_oublie=oui, ...)
+		===============
 		
-		[(#REM) 
-			================================
-			Sinon liste complete des publiques
-		]
-		<B_listes>
-			<fieldset>
-			<legend>[(#TOTAL_BOUCLE|=={1}|?{
-				<:spiplistes:abo_1_lettre:></legend>
-				,<:spiplistes:abo_listes:></legend>})]
-		<ul>
-		<BOUCLE_listes(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'} {0,(#ENV{mode_login}|?{100,0})}>
-				[(#TOTAL_BOUCLE|=={1}|?{' ',''})
-				<li>
-				<label><input type="hidden" name="list&#91;&#93;"  checked="checked" value="#ID_LISTE" />
-				<:spiplistes:abonnement_seule_liste_dispo:>: <strong>#TITRE</strong> [- <em>(#TEXTE|textebrut)</em>]
-				</label></li>
-				]
-				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
-				<li>
-				<label><input type="checkbox" name="list&#91;&#93;" value="#ID_LISTE" />
-				[<strong>(#TITRE)</strong>][ - <em>(#TEXTE|textebrut|couper{80})</em>]</label></li>]
-		</BOUCLE_listes>
-		</ul>
-		</fieldset>
-		[(#COMPTEUR_BOUCLE|!={1}|?{'<!-- fin de liste -->',''})]
-		</B_listes>
-			[(#ENV{reponse_formulaire}|non)
-				<fieldset><:spiplistes:aucune_liste_publique:></fieldset>]
-			[(#ENV{reponse_formulaire}|oui)
-			[(#ENV{mode_login}|oui)
-			</fieldset>
-			<fieldset style="color:#000">
-			<legend><:spiplistes:abo_1_lettre:></legend>]
+	-->]
+	<B_listes>
+		<fieldset>
+		<legend>[(#TOTAL_BOUCLE|=={1}|?{
+			<:spiplistes:abo_1_lettre:></legend>
+			,<:spiplistes:abo_listes:></legend>})]
+	<ul>
+	<BOUCLE_listes(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}{0,(#ENV{mode_login}|?{100,0})}>
+			[(#TOTAL_BOUCLE|=={1}|?{' ',''})
+			<li>
+			<label><input type="hidden" name="list&#91;&#93;" checked="checked" value="#ID_LISTE" />
+			<span><:spiplistes:abonnement_seule_liste_dispo:>:<br /><strong>#TITRE</strong> [- <em>(#TEXTE|textebrut)</em>]</span></label></li>
 			]
-		<//B_listes>
-		
-[(#REM) 
-	================================
+			[(#TOTAL_BOUCLE|!={1}|?{' ',''})
+			<li>
+			<label class="block"><input type="checkbox" name="list&#91;&#93;" value="#ID_LISTE" />
+			<span>[<strong>(#TITRE)</strong>][ - <em>(#TEXTE|textebrut|couper{80})</em>]</span></label></li>]
+	</BOUCLE_listes>
+	</ul>
+	</fieldset>
+	[(#COMPTEUR_BOUCLE|!={1}|?{'<!-- fin de liste -->',''})]
+	</B_listes>
+		[(#ENV{reponse_formulaire}|non)
+			[(#ENV{mode_login}|oui)<fieldset><:spiplistes:aucune_liste_publique:></fieldset>]
+		]
+		[(#ENV{reponse_formulaire}|oui)
+			[(#ENV{mode_login}|oui)<fieldset style="color:#000"><legend><:spiplistes:abo_1_lettre:></legend></fieldset>]
+		]
+	<//B_listes>
+[<!--(#REM)
+
+	===============
+	FIN liste des listes publiques 
+	===============
+
+-->]
+[<!--(#REM)
+
+	===============
 	mode_login
+	===============
 
-][(#ENV{mode_login}|?{' ',''})
+-->][(#ENV{mode_login}|?{' ',''})
 				
-[(#REM) 
-	================================
-	acces_membres
-
-][(#ENV{acces_membres}|=={oui}|?{' ',''})
-				<div style="margin-top:0.5em;"><label for="nom_inscription_" style="font-weight:bold;"><:form_pet_votre_nom:></label></div>
-				<input type="text" class="forml" name="nom_inscription_" id="nom_inscription_" value="" size="40" style="width:12em;clear:both;" />
-][(#REM) 
-	================================
-	fin du formulaire
-]
-			<fieldset>
-				<legend><:form_pet_votre_email:></legend>
-				<label style="display:none;" for="mail_inscription_"><:form_indiquer_email:> :</label>
-				<input type="text" class="forml" id="mail_inscription_" name="mail_inscription_" value="" size="40" />
-			</fieldset>
-			<fieldset>
-				<legend><:spiplistes:format_reception:></legend>
-				<label><input name="suppl_abo" value="html" checked="checked" type="radio" /><:spiplistes:html:><:spiplistes:html_description:></label>
-				<label><input name="suppl_abo" value="texte" type="radio" /><:spiplistes:texte:></label>
-			[(#ENV{d}|?{' ',''})
-			<div>
-				<label><input name="desabo" id="suppl_abo_non" value="oui" type="radio" /><:spiplistes:desabonnement:></label>
-			</div>
-			]</fieldset>
-			<div class="spip_bouton">
-				<input type="submit" name="Valider" value="<:bouton_valider:>" />
-			</div>
-		</form>]
+	<fieldset>
+		<legend><:spiplistes:format_reception:></legend>
+		<label class="block"><input name="suppl_abo" value="html" checked="checked" type="radio" /><span><:spiplistes:html:><:spiplistes:html_description:></span></label>
+		<label class="block"><input name="suppl_abo" value="texte" type="radio" /><span><:spiplistes:texte:></span></label>
+		[<!--(#REM)
+		
+			===============
+			si identifie' via le cookie d, proposer de se desabonner
+			===============
+			
+		-->][(#ENV{d}|?{' ',''})
+		<div>
+			<label><input name="desabo" id="suppl_abo_non" value="oui" type="radio" /><:spiplistes:desabonnement:></label>
+		</div>
+		]
+	</fieldset>
+	<p class="spip_bouton">
+		<input type="submit" name="Valider" value="<:bouton_valider:>" />
+	</p>
+	</form>][<!--(#REM) fin mode_login -->]
 </div>

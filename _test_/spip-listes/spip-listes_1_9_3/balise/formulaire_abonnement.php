@@ -74,13 +74,15 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn()", _SPIPLISTES_LOG_DEBUG);
 	$mail_inscription_ = trim(strtolower(_request('mail_inscription_')));
 	$desabo = _request('desabo');
 	
-	// recuperation de la config
+	// recuperation de la config SPIP-Listes
+	// 'simple' = ne renvoie que la confirmation d'abonnement
+	// 'membre' = complete le mail par un mot de passe pour se loger
 	$acces_membres = ($GLOBALS['meta']['abonnement_config'] == 'membre') ? 'oui' : 'non';
 		
 	// aller chercher le formulaire html qui va bien				
 	$formulaire = "formulaires/".$formulaire ;		
 			
-	// code inscription au site ou/et  a la lettre d'info	
+	// code inscription au site ou/et a la lettre d'info	
 	$inscriptions_ecrire = ($GLOBALS['meta']['accepter_inscriptions'] == "oui");
 	$inscriptions_publiques = ($GLOBALS['meta']['accepter_visiteurs'] == "oui");
 	
@@ -137,7 +139,7 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn()", _SPIPLISTES_LOG_DEBUG);
 				, 'inscription_redac' => ''
 				, 'inscription_visiteur' => ''
 				, 'mode_login' => false
-				, 'reponse_formulaire' => ''
+				, 'reponse_formulaire' => false
 				, 'liste' => ''
 			)
 		);
@@ -155,12 +157,14 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn()", _SPIPLISTES_LOG_DEBUG);
 		$inscription_redac = 
 			($inscriptions_ecrire && ($type=="redac")) 
 			? "oui" 
-			: "non";
+			: "non"
+			;
 		
 		$inscription_visiteur = 
 			(($type!="redac") && $inscriptions_publiques && ($acces_membres=='oui')) 
 			? "oui" 
-			: "non";
+			: "non"
+			;
 				
 		list($affiche_formulaire, $reponse_formulaire) = 
 			spiplistes_formulaire_inscription(
@@ -350,7 +354,7 @@ function spiplistes_formulaire_inscription ($mail_inscription_, $type, $acces_me
 					)
 			) {
 				$id_auteur = $row['id_auteur'];
-spiplistes_log("inscription id : ->".$row['id_auteur'], _SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("inscription id : ->".$row['id_auteur'], _SPIPLISTES_LOG_DEBUG);
 				spiplistes_abonnements_ajouter(intval($row['id_auteur']), $listes_demande);
 			}
 		
@@ -400,10 +404,12 @@ spiplistes_log("inscription id : ->".$row['id_auteur'], _SPIPLISTES_LOG_DEBUG);
 					;
 			}
 			
-			if(($type == 'redac') || ($inscriptions_ecrire && $acces_membres == 'non')) {
+			if(($type == 'redac') || ($inscriptions_ecrire && ($acces_membres == 'non'))) {
 				$message .= ""
-					. "\n\n"._T('spiplistes:inscription_mail_redac'
-						, array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site))."\n\n"
+					. "\n\n"
+						. _T('spiplistes:inscription_mail_redac'
+						, array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site))
+					. "\n\n"
 					. "- "._T('form_forum_login')." $login_\n"
 					. "- "._T('form_forum_pass')." $pass\n\n"
 					;
@@ -442,7 +448,6 @@ spiplistes_log("inscription id : ->".$row['id_auteur'], _SPIPLISTES_LOG_DEBUG);
 				$reponse_formulaire =_T('form_forum_probleme_mail');
 			}
 		} // end if abonne_existant
-	
 	} // end if($mail_valide && $nom_inscription_)
 	else {
 		//Non c'� email o non � valida

@@ -37,7 +37,11 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 	@adresse_site@/spip.php?page=abonnement&d=@cookie@
 	
 	Vous pourrez alors confirmer la modification de votre abonnement." // et balise suivante
-
+, 'abonnement_presentation' => "
+	Entrez votre adresse email dans le champ ci-dessous.
+	Vous recevrez &#224; cette adresse un courrier de confirmation d&#39;inscription et un lien.
+	Ce lien vous permettra de confirmer votre abonnement aux listes de diffusion publi&#233;es ici.
+	"
 // balise/formulaire_modif_abonnement.php
 , 'abonnement_modifie' => 'Vos modifications sont prises en compte'
 , 'abonnement_nouveau_format' => 'Votre format de r&eacute;ception est d&eacute;sormais : '
@@ -479,7 +483,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'jour' => 'jour'
 , 'jours' => 'jours'
 , 'abonnement_bouton'=>'Modifier votre abonnement'
-, 'abonnement_cdt' => "<a href='http://bloog.net/spip-listes/'>SPIP-Listes</a>"
+, 'abonnement_cdt' => "<a href='http://bloog.net/?page=spip-listes'>SPIP-Listes</a>"
 , 'abonnement_change_format' => "Vous pouvez changer de format de r&eacute;ception ou vous d&eacute;sabonner : "
 , 'abonnement_texte_mail' => 'Indiquez ci-dessous l\'adresse email sous laquelle vous vous &ecirc;tes 
 	pr&eacute;c&eacute;demment enregistr&eacute;. 
@@ -493,10 +497,10 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'inscription_visiteurs' => 'L&acute;abonnement vous permet d&acute;acc&eacute;der aux parties du site en acc&egrave;s restreint,
 	d&acute;intervenir sur les forums r&eacute;serv&eacute;s aux visiteurs enregistr&eacute;s et de recevoir 
 	les lettres d&acute;informations.'
-, 'inscription_redacteurs' =>'L\'espace de r&eacute;daction de ce site est ouvert aux visiteurs apr&egrave;s inscription.
-	Une fois enregistr&eacute;, vous pourrez consulter les articles en cours de r&eacute;daction, proposer des articles
-	et participer &agrave; tous les forums.  L\'inscription permet &eacute;galement d\'acc&eacute;der aux parties du 
-	site en acc&egrave;s restreint et de recevoir les lettres d\'informations.'
+, 'inscription_redacteurs' => "L&#39;espace de r&#233;daction de ce site est ouvert aux visiteurs apr&#232;s inscription.
+	Une fois enregistr&#233;, vous pourrez consulter les articles en cours de r&#233;daction, proposer des articles
+	et participer &#224; tous les forums.  L&#39;inscription permet &#233;galement d&#39;acc&#233;der aux parties du 
+	site en acc&#233;s restreint et de recevoir les lettres d&#39;informations."
 , 'mail_non' => 'Vous n\'&ecirc;tes pas abonn&eacute; &agrave; la lettre d\'information du site @nom_site_spip@'
 , 'messages_auto' => 'Courriers automatiques'
 , 'nouveaute_intro' => 'Bonjour, <br />Voici les nouveaut&eacute;s publi&eacute;es sur le site'
@@ -544,7 +548,8 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'Courriers_vides' => "Courriers annul&eacute;s (vides)"
 , 'Courriers_sans_destinataire' => "Courriers sans destinataire (liste vide)"
 , 'Courriers_sans_liste' => "Courriers sans abonn&eacute;s (liste manquante)"
-, 'devenir_redac'=>'devenir r&eacute;dacteur pour ce site'
+, 'devenir_redac'=>'Devenir r&eacute;dacteur pour ce site'
+, 'devenir_membre'=>'Devenir membre du site'
 , 'devenir_abonne' => "Vous inscrire sur ce site"
 , 'desabonnement_valid'=>'L\'adresse suivante n\'est plus abonn&eacute;e &agrave; la lettre d\'information' 
 , 'pass_recevoir_mail'=>'Vous allez recevoir un email vous indiquant comment modifier votre abonnement. '

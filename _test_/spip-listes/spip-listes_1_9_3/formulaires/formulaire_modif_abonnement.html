@@ -7,16 +7,20 @@
 // $LastChangedDate$
 
 -->][<!--(#REM)
-	________________________
+
+	===============
 	Message de confirmation (si present)
+	===============
 	
 -->][(#ENV*{message_formulaire})]
 
-[(#REM)
-	________________________
+[<!--(#REM)
+
+	===============
 	Liste des listes publiques et mensuelles
+	===============
 	
-]<B_liste>
+-->]<B_liste>
 	<:spiplistes:listes_de_diffusion_:>:
 	<ul>
 	<BOUCLE_liste(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'} {id_liste=#ENV{liste}}>
@@ -25,11 +29,12 @@
 	</ul>
 </B_liste>
 
-[(#REM)
-	________________________
-	--
+[<!--(#REM)
+
+	===============
+	===============
 	
-][(#ENV*{confirm_formulaire})]
+-->][(#ENV*{confirm_formulaire})]
 <BOUCLE_auteur(AUTEURS){tous} {id_auteur=(#ENV{id_auteur})}>
 [(#ENV{formulaire_affiche}|?{' ',''})
 #NOM
@@ -60,7 +65,9 @@
 <//B_listes>
 [<!--(#REM)
 	
+	===============
 	Modification abonnement
+	===============
 	
 -->][(#ENV{formulaire_affiche}|?{' ',''})
 			<div style="text-align: left;"> 
@@ -79,11 +86,13 @@
 		</div>
 	</form>
 ]
-[(#REM)
-	________________________
+[<!--(#REM)
+
+	===============
 	formulaire_cookie_affiche
+	===============
 	
-][(#ENV{formulaire_cookie_affiche}|?{' ',''})
+-->][(#ENV{formulaire_cookie_affiche}|?{' ',''})
 <fieldset> 
 	<legend><:spiplistes:abonnement_bouton:></legend>
 	<h4><:spiplistes:abonnement_change_format:></h4>

@@ -1,22 +1,56 @@
 /* spiplistes_formulaire.css */
 
-.formulaire-spiplistes-abo {
+form.formulaire-spiplistes-abo {
 	margin:0;
-	padding:0;
+	padding:1em !important;
 }
-form.formulaire-spiplistes-abo fieldset { 
-}
-.formulaire-spiplistes-abo legend { 
+form.formulaire-spiplistes-abo legend { 
 	font-weight:700; 
 }
-.formulaire-spiplistes-abo ul, .formulaire-spiplistes-abo li {
+form.formulaire-spiplistes-abo div.coord {
+}
+form.formulaire-spiplistes-abo div.coord label {
+	display:block;
+	font-size:90%;
+	font-weight:500;
+}
+form.formulaire-spiplistes-abo div.coord input {
+	margin:0 1em;
+}
+form.formulaire-spiplistes-abo ul, .formulaire-spiplistes-abo li {
 	margin:0;
 	padding:0;
 	border:0;
-}
-.formulaire-spiplistes-abo ul, .formulaire-spiplistes-abo li {
 	list-style: none;
 }
-.formulaire-spiplistes-abo li {
+form.formulaire-spiplistes-abo li {
 	line-height:1.2em;
+}
+form.formulaire-spiplistes-abo fieldset {
+	margin:0 0 0.75em !important;
+	padding-top:0 !important;
+}
+form.formulaire-spiplistes-abo fieldset p {
+	margin:0.75em 0;
+}
+form.formulaire-spiplistes-abo fieldset label.block {
+	display:block;
+	margin-bottom:0.25em;
+	clear:left;
+}
+form.formulaire-spiplistes-abo fieldset label.block input {
+	display:block;
+	margin-right:0.5ex;
+	float:left;
+}
+form.formulaire-spiplistes-abo fieldset label.block span {
+	float:none;
+}
+form.formulaire-spiplistes-abo p.message-formulaire {
+	color:red; font-size: 110%
+}
+form.formulaire-spiplistes-abo p.spip_bouton {
+	background-color:transparent !important;
+	text-align:right !important;
+	margin:0;
 }
