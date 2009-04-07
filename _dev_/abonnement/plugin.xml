@@ -22,7 +22,7 @@
 	<install>base/abonnement_upgrade.php</install>
 	<pipeline>
 		<nom>taches_generales_cron</nom>
-		<inclure></inclure>
+		<inclure>abonnement_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>I2_cfg_form</nom>
