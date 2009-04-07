@@ -1,13 +1,13 @@
 <!-- autoriser=webmestre -->
-<!-- refus=Seuls les webmestres du site sont autoris&#233;s &#224; modifier ces param&#232;tres. -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
 <!-- nom=inscription2 -->
 
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-<form method="post" action="#SELF">
+<form method="post" action="#ENV{action}">
 	<div>
-		#ACTION_FORMULAIRE{SELF}
+		#ACTION_FORMULAIRE{#ENV{action}}
 	
 		[(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
 		<fieldset>
