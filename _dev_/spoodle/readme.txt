@@ -64,3 +64,55 @@ ne pas committer svp
 rdv 2 doodle : 4/6/15/17
 http://www.doodle.com/f7k5dr97ypmgq39a
 
+
+
+////////////     6 AVRIL 2009 ///////////////
+
+http://doc.spip.org/@Les-points-d-entree-pipelines
+
+
+ http://trac.rezo.net/trac/spip/browser/spip/ecrire/inc_version.php -->
+
+
+ici    <necessite id="nomplugin" version="[versionminimale;versionmax]" />
+apl le prefixe déclaré au dessus
+
+pour le contenu du fichier
+http://doc.spip.org/@plugin-xml
+
+
+DECLARER UNE NOUVELLE TABLE
+------------------------------------------------
+dans 
+
+* function spoodle_declarer_tables_principales($tables_principales){
+tableau qui inclut les tables principales déjà déclarées.
+
+puis on déclare les champs de la table											"id_sondage"=>"BIGINT NOT NULL",
+etc...
+
+* requetes en maj
+
+ex : "PRIMARY KEY"=>"id_sondage",
+
+* surcharge de $tables_principales 
+
+
+$tables_principales["spip_spoodle_sondage"]=array(
+"field"=>$spoodle_sondage,
+key"=>$spoodle_sondage_key,
+"join"=>$spoodle_sondage_join
+)
+
+
+* important car sinon incrémentation dans les tables mais pas de retour dans le flux de spip. = récupérer le pipe
+
+
+return $tables_principales;
+
+}
+
+(....) Notes d'agnes ici :D
+
+* on finit sur Formulaires cvt - début de formulaire. Crowfoot comite le tout
+après. Exos: déclarer toutes les tables
