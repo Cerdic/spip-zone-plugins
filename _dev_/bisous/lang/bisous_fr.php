@@ -6,7 +6,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'aucun_bisou_donne'   =>'Aucun bisou donnes. :(',
     'aucun_bisou_recu'   =>'Aucun bisou reçu. :(',
     'bisous_donnes'     =>'Bisous donnés',
-    'bisous_recus'      =>'Bisous reçus',    
+    'bisous_recus'      =>'Bisous reçus',
+    'cfg_bisous'        =>'Configurer le plugin bisous',  
     'donnez_bisou'    =>'Donnez un bisou !'
     
 );
