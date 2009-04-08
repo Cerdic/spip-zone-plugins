@@ -1,12 +1,12 @@
 <B_receveur>
-<h5><:bisous:bisous_recus:></h5>
-<BOUCLE_receveur(BISOUS){id_receveur=#ENV{id_auteur}}>
+
+<BOUCLE_receveur(BISOUS){id_receveur=#ENV{id_auteur}}{"<br />"}>
 	<B_donneurs>
-	<ul>
+
 	<BOUCLE_donneurs(AUTEURS){id_auteur=#ID_DONNEUR}{tout}>
-		<li><a href="#URL_AUTEUR">#NOM</a></li>
+		<a href="./?exec=auteur_infos&id_auteur=#ID_AUTEUR">#NOM</a>
 	</BOUCLE_donneurs>
-	</ul>
+
 	</B_donneurs>
 	
 	

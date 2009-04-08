@@ -41,5 +41,9 @@ Vous &ecirc;tes content ? Il vous faut des bisous !
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/bisous_tables.php</inclure>
 	</pipeline>
+	<pipeline>
+	   <nom>affiche_gauche</nom>
+	   <inclure>bisous_pipelines.php</inclure>
+    </pipeline>
 	<necessite id="SPIP" version="[2.0;]" />
 </plugin>
