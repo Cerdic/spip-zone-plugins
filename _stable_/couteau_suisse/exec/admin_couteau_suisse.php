@@ -372,7 +372,7 @@ cs_log("INIT : enregistre_modif_outils()");
 		else global $connect_id_auteur;
 	spip_log("Changement de statut ($i) des outils par l'auteur id=$connect_id_auteur : ".implode(', ',array_keys(${$i})));
 	ecrire_meta("tweaks_{$i}s", serialize(${$i}));
-	if($cmd=='toggle') $metas_outils = ${$i};
+	if($cmd=='switch') $metas_outils = ${$i};
 
 	include_spip('inc/plugin');
 	verif_plugin();	
@@ -454,7 +454,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	}
 
 	// afficher la description d'un outil ?
-	$afficher_outil = ($cmd=='descrip' OR $cmd=='toggle')?$_GET['outil']:'';
+	$afficher_outil = ($cmd=='descrip' OR $cmd=='switch')?$_GET['outil']:'';
 
 	// initialisation generale forcee : recuperation de $outils;
 	cs_initialisation(true, $cmd!='noinclude');
@@ -462,7 +462,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 
 	// mise a jour des donnees si envoi via formulaire
 	// sinon fait une passe de verif sur les outils
-	if ($cmd=='toggle' OR $cmd=='hide'){
+	if ($cmd=='switch' OR $cmd=='hide'){
 		enregistre_modif_outils($cmd);
 		cout_exec_redirige(strlen($_GET['outil'])?"cmd=descrip&outil={$_GET[outil]}#cs_infos":'');
 	}
@@ -592,7 +592,7 @@ function cs_javascript($chaine) { return unicode_to_javascript(addslashes(html2u
 function cs_boite_rss() {
 	echo debut_boite_info(true), '<p><b>'._T('couteauprive:rss_titre').'</b></p><div class="cs_boite_rss"><p>'._T('couteauprive:rss_attente').'</p><noscript>'._T('couteauprive:outil_inactif').' !</noscript></div>'
 		/*.'<div style="text-align: right; font-size: 87%;"><a title="'._T('couteauprive:rss_desactiver').'" href="'
-		.generer_url_ecrire(_request('exec'),'cmd=toggle&outil=rss_couteau_suisse').'">'._T('couteauprive:supprimer_cadre').'</a></div>'*/
+		.generer_url_ecrire(_request('exec'),'cmd=switch&outil=rss_couteau_suisse').'">'._T('couteauprive:supprimer_cadre').'</a></div>'*/
 		, fin_boite_info(true);
 }
 

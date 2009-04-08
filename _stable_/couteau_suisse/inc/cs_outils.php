@@ -93,7 +93,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	if (!$actif)
 		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=hide&outil='.$outil_id).'" title="' . _T('couteauprive:outil_cacher') . '">' . _T('couteauprive:outil_cacher') . '</a>&nbsp;|&nbsp;';
 	$act = $actif?'des':'';
-	$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=toggle&outil='.$outil_id).'" title="'._T("couteauprive:outil_{$act}activer_le").'">'._T("couteauprive:outil_{$act}activer")."</a></div>";
+	$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=switch&outil='.$outil_id).'" title="'._T("couteauprive:outil_{$act}activer_le").'">'._T("couteauprive:outil_{$act}activer")."</a></div>";
 	if(strlen($temp = cs_action_rapide($outil_id, $actif))) $s .= "<div class='cs_action_rapide' id='cs_action_rapide'>$temp</div>";
 	include_spip('inc/texte');
 	$s .= propre($descrip);
@@ -146,10 +146,10 @@ function liste_outils() {
 	return array($nb_actifs, '<div id="cs_outils" class="cs_outils">'
 	. '<div class="cs_liste cs_inactifs">' . $fieldset . 'red;">' . _T('couteauprive:outils_inactifs') . '</legend>'
 	. $results_inactifs . '</fieldset></div>'
-	. '<form id="csform" name="csform" method="post" action="'.generer_url_ecrire(_request('exec'),"cmd=toggle").'">'
+	. '<form id="csform" name="csform" method="post" action="'.generer_url_ecrire(_request('exec'),"cmd=switch").'">'
 	. '<input type="hidden" value="test" name="cs_selection" id="cs_selection" />'
 	. '<div class="cs_toggle"><div style="display:none;">'
-	. '<a id="cs_toggle_a" title="'._T('couteauprive:outils_permuter_gras1').'" href="'.generer_url_ecrire(_request('exec'),"cmd=toggle").'">'
+	. '<a id="cs_toggle_a" title="'._T('couteauprive:outils_permuter_gras1').'" href="'.generer_url_ecrire(_request('exec'),"cmd=switch").'">'
 	. '<img alt="<->" src="'.find_in_path('img/permute.gif').'"/></a>'
 	. '<p id="cs_toggle_p">(0)</p>'
 	. '<a id="cs_reset_a" title="'._T('couteauprive:outils_resetselection').'" href="#">'
