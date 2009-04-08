@@ -19,6 +19,15 @@
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
+[(#REM) 
+	En attendant que tous les formulaires soient ecrits avec la syntaxe reecommandee
+	ce style permet d eviter d avoir une police surdimensionnee dans les textarea de cfg
+]
+textarea {
+	width: 97%;
+	font-size:1em;
+	margin:0;
+}
 .entete-formulaire{
 	background:white;
 	border:1px solid #GET{foncee};
