@@ -71,8 +71,7 @@ Si le plugin notation est présent, il est intégré.
 
          [(#REM) Fil d'Ariane ]
          <span id="hierarchie" style="float: left"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|supprimer_numero|couper{80})]</span>
-
-			  <span class="texte_nav" style="float: right">[(#DATE_REDAC|?{[(#DATE_REDAC|nom_jour) ][(#DATE_REDAC|affdate)], [(#DATE|nom_jour) ][(#DATE|affdate)]})][, <:par_auteur:> (#LESAUTEURS)] </span>
+        <span class="texte_nav" style="float: right">[(#CONFIG{acsArticlesDates}|=={oui}|?{[(#DATE_REDAC|?{[(#DATE_REDAC|nom_jour) ][(#DATE_REDAC|affdate)], [(#DATE|nom_jour) ][(#DATE|affdate)]})]})][(#CONFIG{acsArticlesAut}=={oui}?{[, <:par_auteur:> (#LESAUTEURS)]})]</span>
         <br class="nettoyeur" />
 
 				<div class="contre-encart">
@@ -134,7 +133,7 @@ Si le plugin notation est présent, il est intégré.
 
          [<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
 
-         [(#CONFIG{activer_statistiques}|=={oui}|?{' '}) <div style="font-size:75%; padding-right: 5px;" align="right">[Lu par (#VISITES) personnes depuis le ] [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</div>]
+         [(#CONFIG{acsArticlesStats}|=={oui}|?{[(#CONFIG{activer_statistiques}|=={oui}|?{' '}) <div style="font-size:75%; padding-right: 5px;" align="right">[Lu par (#VISITES) personnes depuis le ] [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</div>]})]
 
          [(#REM) Petition :
          La petition ayant une PAGINATION il faut absolument lui passer SELF]
@@ -147,7 +146,7 @@ Si le plugin notation est présent, il est intégré.
          [(#REM) Forum de l'article ]
 					[(#STATUT|=={refuse}|?{'<a href="" class="refus">Article refusé</a>', ''})]
 					[(#STATUT|=={publie}|?{' ', ''})
-						[<a href="#forum" name="forum" id="forum"></a><h2 class="forum-repondre"><span class="texte_nav" style="float: right"><a href="#URL_ARTICLE&ouvrir=oui"><small><:lire_tous_les_messages:></small></a></span><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:><small><i>(<:repondre_article_notice:>)</i></small></a><INCLURE{fond=composants/forums/forum}{id_article}{ouvrir=#OUVRIR}{debut_forums}>]
+						[<a href="#forum" name="forum" id="forum"></a><h2 class="forum-repondre"><span class="texte_nav" style="float: right"><a href="#URL_ARTICLE&ouvrir=oui"><small><:lire_tous_les_messages:></small></a></span><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:><small><i>(<:repondre_article_notice:>)</i></small></a><INCLURE{fond=inc-forum}{id_article}{ouvrir=#OUVRIR}{debut_forums}>]
 					]
 					</div>[(#REM) fin onglet]
 				</div>[(#REM) fin colonne2]
