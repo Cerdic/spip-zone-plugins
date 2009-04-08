@@ -36,4 +36,13 @@
     <option>oui</option>
     <option>non</option>
   </variable>
+  <variable>
+    <nom>TextColor</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>FontFamily</nom>
+    <type>fontFamily</type>
+		<valeur>sans-serif</valeur>
+  </variable>
 </composant>

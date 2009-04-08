@@ -10,6 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'Image' => 'Banni&egrave;re',
 'ImageFond' => 'Arri&egrave;re-plan',
 'Hauteur' => 'Hauteur',
-'UseLogo' => 'Afficher le logo du site'
+'UseLogo' => 'Afficher le logo du site',
+'FontFamily' => 'Famille de fonte de caractères',
+'TextColor'=>'Couleur texte'
 );
 ?>

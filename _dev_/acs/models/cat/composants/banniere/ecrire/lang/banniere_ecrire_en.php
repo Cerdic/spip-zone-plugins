@@ -10,6 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'Image' => 'Banner',
 'ImageFond' => 'Background',
 'Hauteur' => 'Height',
-'UseLogo' => 'Display website logo'
+'UseLogo' => 'Display website logo',
+'FontFamily' => 'Font family',
+'TextColor'=>'Text color'
 );
 ?>
