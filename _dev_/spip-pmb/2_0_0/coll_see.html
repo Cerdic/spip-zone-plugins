@@ -23,7 +23,7 @@
 	<div class="cartouche">
 	       	<div class="surlignable">
 			<h1 class="entry-title[ (#GET{tab_resultat}|pmb_tableau2_valeur{0,titre_collection}|strlen|>{30}|?{'titre-long',''})][ (#GET{tab_resultat}|pmb_tableau2_valeur{0,infos_collection}|?{'','pas-de-texte'})]">
-				[(#GET{tab_resultat}|pmb_tableau2_valeur{0,titre_collection})]
+				[(#GET{tab_resultat}|pmb_tableau2_valeur{0,titre_collection}|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})]
 			</h1>
 			
           	  </div>
@@ -39,7 +39,7 @@
 			<BOUCLE_tab_resultat(POUR){tableau #GET{tab_resultat}}>
 
 				[(#COMPTEUR_BOUCLE|=={2}|?{' ',''})
-					<h2><:pmb:ouvrages:></h2><ul>
+					<h2><:ouvrages:></h2><ul>
 				]				
 				[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})
 			 		<li>
@@ -49,7 +49,7 @@
                 				[<small><:par_auteur:> (#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, lesauteurs})</small>]
 					
 						[<div class="introduction entry-content">(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, resume}|couper{300,'...'})</div>]
-						<a class="lire-la-suite" title="[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, titre})]" href="index.php?page=notice_display&id=[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, id})]&seule=1"><:pmb:lire_la_suite:> +</a>
+						<a class="lire-la-suite" title="[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, titre})]" href="index.php?page=notice_display&id=[(#GET{tab_resultat}|pmb_tableau2_valeur{#CLE, id})]&seule=1"><:lire_la_suite:> +</a>
 
 					</li>
 				]
@@ -74,7 +74,7 @@
     <div id="navigation">
 
         [(#REM) Menu de navigation par rubriques ]
-        <INCLURE{fond=inc-rubriques}{id_rubrique}>
+        <INCLURE{fond=inc-rubriques}{id_rubrique}{env}>
 
 
         [(#REM) Articles dans la meme rubrique ]

@@ -22,7 +22,7 @@
 	<div class="cartouche">
 	        	<div class="surlignable">
 				<h1 class="entry-title[ (#GET{tab_resultat}|pmb_tableau2_valeur{0,titre_auteur}|pmb_remplacer{"Auteur ",""}|strlen|>{30}|?{'titre-long',''})][ (#GET{tab_resultat}|pmb_tableau2_valeur{0,infos_auteur}|?{'','pas-de-texte'})]">
-					[(#GET{tab_resultat}|pmb_tableau2_valeur{0,titre_auteur}|pmb_remplacer{"Auteur ",""})]
+					[(#GET{tab_resultat}|pmb_tableau2_valeur{0,titre_auteur}|pmb_remplacer{"Auteur ",""}|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})]
 				</h1>
           	  	</div>
         </div>
@@ -68,7 +68,7 @@
     <div id="navigation">
 
         [(#REM) Menu de navigation par rubriques ]
-        <INCLURE{fond=inc-rubriques}{id_rubrique}>
+        <INCLURE{fond=inc-rubriques}{id_rubrique}{env}>
 
 
         [(#REM) Articles dans la meme rubrique ]

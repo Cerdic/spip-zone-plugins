@@ -11,7 +11,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveautes' => 'Nouveaut&eacute;s',
 'toutes_nouveautes' => 'toutes les nouveaut&eacute;s',
 'auteur' => 'Auteur',
-'tous_coupsdecoeur' => 'tous les coups de c&oelig;urs',
 'serie' => 'S&eacute;rie',
 'type' => 'Type',
 'editeur' => 'Editeur',

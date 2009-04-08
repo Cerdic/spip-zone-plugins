@@ -22,7 +22,7 @@
         <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:derniers_articles:></div>
 
         <div class="cartouche">
-            <h1 class="#EDIT{titre}"><:derniers_articles:></h1>
+            <h1 class="#EDIT{titre}">[(#REM|?{'',<:derniers_articles:>}|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})]</h1>
         </div>
 
        <INCLURE{fond=inc-actualites}{ajax}>
@@ -35,7 +35,7 @@
     <div id="navigation">
 
         [(#REM) Menu de navigation par rubriques ]
-        <INCLURE{fond=inc-rubriques}{id_rubrique}>
+        <INCLURE{fond=inc-rubriques}{id_rubrique}{env}>
 
     </div><!--#navigation-->
 

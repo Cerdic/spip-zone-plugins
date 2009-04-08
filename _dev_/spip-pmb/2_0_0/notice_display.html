@@ -30,7 +30,7 @@
 	
 	<div class="cartouche">
             	<div class="surlignable">
-			<h1 class="#EDIT{titre} entry-title[ (#GET{notice}|pmb_notice_champ{'titre'}|strlen|>{30}|?{'titre-long',''})]">[(#GET{notice}|pmb_notice_champ{'titre'})]</h1>
+			<h1 class="#EDIT{titre} entry-title[ (#GET{notice}|pmb_notice_champ{'titre'}|strlen|>{30}|?{'titre-long',''})]">[(#GET{notice}|pmb_notice_champ{'titre'}|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})]</h1>
 	 		<div class="socialtags">
 			<ul>
 	
@@ -119,7 +119,7 @@
     <div id="navigation">
 
         [(#REM) Menu de navigation par rubriques ]
-        <INCLURE{fond=inc-rubriques}{id_rubrique}>
+        <INCLURE{fond=inc-rubriques}{id_rubrique}{env}>
 
 
         [(#REM) Articles dans la meme rubrique ]

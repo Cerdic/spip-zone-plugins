@@ -21,7 +21,7 @@
         <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:nouveautes:></div>
 
         <div class="cartouche">
-            <h1><:nouveautes:></h1>
+            <h1>[(#REM|?{'',<:nouveautes:>}|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})]</h1>
         </div>
 
         [(#REM) Nouveaux ouvrages ]
@@ -39,7 +39,7 @@
     <div id="navigation">
 
         [(#REM) Menu de navigation par rubriques ]
-        <INCLURE{fond=inc-rubriques}{id_rubrique}>
+        <INCLURE{fond=inc-rubriques}{id_rubrique}{env}>
 
     </div><!--#navigation-->
 

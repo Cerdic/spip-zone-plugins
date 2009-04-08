@@ -19,7 +19,7 @@
 		[(#REM) Fil d'Ariane ]
 		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_rechercher:>[ &gt; <strong class="on">(#RECHERCHE)</strong>]</div>
 		[<div class="cartouche">
-			<h1><:resultats_recherche:></h1>
+			<h1>[(#REM|?{'',<:resultats_recherche:>}|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})]</h1>
 			<p class="soustitre">&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</p>
 		</div>]
 		[(#ENV{recherche_avancee}|=={1}|?{' ',''})
@@ -39,7 +39,7 @@
 	<div id="navigation">
 	
 		[(#REM) Menu de navigation par rubriques ]
-		<INCLURE{fond=inc-rubriques}{id_rubrique}>
+		<INCLURE{fond=inc-rubriques}{id_rubrique}{env}>
 	
 	</div><!--#navigation-->
 	

@@ -83,12 +83,12 @@ function pmb_serie_extraire($id_serie, $url_base, $pmb_page=1, $mode='auto') {
 			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
 			$tableau_resultat[0]['titre_serie'] = $htmldom->find('#aut_see h3',0)->innertext;
 			
-			$resultats_recherche = $htmldom->find('.child');
+			$resultats_recherche = $htmldom->find('.notice-child');
 			$tableau_resultat[0]['nb_resultats'] = count($resultats_recherche);
 			$i = 1;
 			foreach($resultats_recherche as $res) {
 				$tableau_resultat[$i] = Array();				
-				pmb_parser_notice($res, $tableau_resultat[$i]);
+				pmb_parser_notice_apercu($res, $tableau_resultat[$i]);
 				$i++;
 			}	
 	}
@@ -106,12 +106,12 @@ function pmb_collection_extraire($id_collection, $url_base, $pmb_page=1, $mode='
 			$tableau_resultat[0]['titre_collection'] = $htmldom->find('#aut_see h3',0)->innertext;
 			$tableau_resultat[0]['collections_infos'] = $htmldom->find('#aut_see ul',0)->outertext;
 			
-			$resultats_recherche = $htmldom->find('.child');
+			$resultats_recherche = $htmldom->find('.notice-child');
 			$tableau_resultat[0]['nb_resultats'] = count($resultats_recherche);
 			$i = 1;
 			foreach($resultats_recherche as $res) {
 				$tableau_resultat[$i] = Array();				
-				pmb_parser_notice($res, $tableau_resultat[$i]);
+				pmb_parser_notice_apercu($res, $tableau_resultat[$i]);
 				$i++;
 			}	
 	}
@@ -134,12 +134,12 @@ function pmb_editeur_extraire($id_editeur, $url_base, $pmb_page=1, $mode='auto')
 				$tableau_resultat[0]['infos_editeur'] .= $p_editeur->outertext;
 			}
 			
-			$resultats_recherche = $htmldom->find('.child');
+			$resultats_recherche = $htmldom->find('.notice-child');
 			$tableau_resultat[0]['nb_resultats'] = count($resultats_recherche);
 			$i = 1;
 			foreach($resultats_recherche as $res) {
 				$tableau_resultat[$i] = Array();				
-				pmb_parser_notice($res, $tableau_resultat[$i]);
+				pmb_parser_notice_apercu($res, $tableau_resultat[$i]);
 				$i++;
 			}	
 	}
@@ -156,12 +156,12 @@ function pmb_auteur_extraire($id_auteur, $url_base, $pmb_page=1, $mode='auto') {
 			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
 			$tableau_resultat[0]['titre_auteur'] = $htmldom->find('#aut_see h3',0)->innertext;
 			
-			$resultats_recherche = $htmldom->find('.child');
+			$resultats_recherche = $htmldom->find('.notice-child');
 			$tableau_resultat[0]['nb_resultats'] = count($resultats_recherche);
 			$i = 1;
 			foreach($resultats_recherche as $res) {
 				$tableau_resultat[$i] = Array();				
-				pmb_parser_notice($res, $tableau_resultat[$i]);
+				pmb_parser_notice_apercu($res, $tableau_resultat[$i]);
 				$i++;
 			}	
 	}
@@ -189,31 +189,24 @@ function pmb_recherche_extraire($recherche, $url_base, $look_FIRSTACCESS='', $lo
 
 	if ($htmldom = pmb_charger_page($url_base, $url_page,$mode)) {
 			$tableau_resultat[0] = Array();
-			$tableau_resultatt[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
+			$tableau_resultat[0]['nav_bar'] = $htmldom->find('.navbar',0)->outertext;
 			$tableau_resultat[0]['nav_bar'] = pmb_transformer_nav_bar($tableau_resultat[0]['nav_bar']);
 
-			$resultats_recherche = $htmldom->find('.child');
+			$resultats_recherche = $htmldom->find('.notice-child');
 			$tableau_resultat[0]['nb_resultats'] = count($resultats_recherche);
 			$i = 1;
 			foreach($resultats_recherche as $res) {
 				$tableau_resultat[$i] = Array();				
-				pmb_parser_notice($res, $tableau_resultat[$i]);
+				if ($i>1) pmb_parser_notice_apercu($res, $tableau_resultat[$i]);
 				$i++;
 			}	
 	}
 	return $tableau_resultat;
 }
-
-//découpage d'une notice au départ dans un div de class .child
-function pmb_parser_notice ($localdom, &$tresultat) {
-	$id_notice = intval(substr($localdom->id,2));
-	$tresultat['id'] = $id_notice;	
-	$tresultat['logo_src'] = $localdom->find('table img',0)->src; 
-	$tresultat['exemplaires'] = $localdom->find('.exemplaires',0)->outertext;
-	if ($tmp = $localdom->find('.autres_lectures',0)) {
-			$tresultat['autres_lecteurs'] = $tmp->next_sibling()->outertext;
-	}				
-	$tablechamps = $localdom->find('table table tr');
+function pmb_parser_notice_apercu ($localdom, &$tresultat) {
+	$tresultat['id'] = intval(substr($localdom->id,2));	
+	$tresultat['logo_src'] = $localdom->find('table td img',2)->src; 
+	$tablechamps = $localdom->find('table tr tr');
 	foreach($tablechamps as $tr) {
 		$libelle = htmlentities($tr->find('td',0)->innertext);
 		$valeur = $tr->find('td',1)->innertext;
@@ -225,7 +218,40 @@ function pmb_parser_notice ($localdom, &$tresultat) {
 		else if (strpos($libelle, 'de publication')) $tresultat['annee_publication'] = $valeur; 
 		else if (strpos($libelle, 'Collection')) $tresultat['collection'] = $valeur; 
 		else if (strpos($libelle, 'Importance')) $tresultat['importance'] = $valeur; 
-		else if (strpos($libelle, 'Présentation')) $tresultat['presentation'] = $valeur; 
+		else if (strpos($libelle, 'PrÃ©sentation')) $tresultat['presentation'] = $valeur; 
+		else if (strpos($libelle, 'Format')) $tresultat['format'] = $valeur; 
+		else if (strpos($libelle, 'Importance')) $tresultat['importance'] = $valeur; 
+		else if (strpos($libelle, 'ISBN')) $tresultat['isbn'] = $valeur; 
+		else if (strpos($libelle, 'Prix')) $tresultat['prix'] = $valeur; 
+		else if (strpos($libelle, 'Langues')) $tresultat['langues'] = $valeur; 
+		else if (strpos($libelle, 'sum')) $tresultat['resume'] = $valeur; 
+	}
+
+}
+
+
+
+//dï¿½coupage d'une notice au dï¿½part dans un div de class .parent
+function pmb_parser_notice ($id_notice, $localdom, &$tresultat) {
+	$tresultat['id'] = $id_notice;	
+	$tresultat['logo_src'] = $localdom->find('table td img',2)->src; 
+	$tresultat['exemplaires'] = $localdom->find('.exemplaires',0)->outertext;
+	if ($tmp = $localdom->find('.autres_lectures',0)) {
+			$tresultat['autres_lecteurs'] = $tmp->next_sibling()->outertext;
+	}				
+	$tablechamps = $localdom->find('#div_public'.$id_notice.' tr');
+	foreach($tablechamps as $tr) {
+		$libelle = htmlentities($tr->find('td',0)->innertext);
+		$valeur = $tr->find('td',1)->innertext;
+		if (strpos($libelle, 'Titre de s')) $tresultat['serie'] = $valeur; 
+		if (strpos($libelle, 'Titre')) $tresultat['titre'] = $valeur; 
+		else if (strpos($libelle, 'Type de document')) $tresultat['type'] = $valeur; 
+		else if (strpos($libelle, 'Editeur')) $tresultat['editeur'] = $valeur; 
+		else if (strpos($libelle, 'Auteurs')) $tresultat['lesauteurs'] = $valeur; 
+		else if (strpos($libelle, 'de publication')) $tresultat['annee_publication'] = $valeur; 
+		else if (strpos($libelle, 'Collection')) $tresultat['collection'] = $valeur; 
+		else if (strpos($libelle, 'Importance')) $tresultat['importance'] = $valeur; 
+		else if (strpos($libelle, 'PrÃ©sentation')) $tresultat['presentation'] = $valeur; 
 		else if (strpos($libelle, 'Format')) $tresultat['format'] = $valeur; 
 		else if (strpos($libelle, 'Importance')) $tresultat['importance'] = $valeur; 
 		else if (strpos($libelle, 'ISBN')) $tresultat['isbn'] = $valeur; 
@@ -240,7 +266,7 @@ function pmb_parser_notice ($localdom, &$tresultat) {
 function pmb_notice_extraire ($id_notice, $url_base, $mode='auto') {
 	$tableau_resultat = Array();
 	if ($htmldom = pmb_charger_page($url_base, "index.php?lvl=notice_display&seule=1&id=".$id_notice, $mode)) {
-		 pmb_parser_notice($htmldom->find('.child',0), $tableau_resultat);	
+		 pmb_parser_notice($id_notice, $htmldom->find('#notice',0), $tableau_resultat);	
 	}
 	return $tableau_resultat;
 			

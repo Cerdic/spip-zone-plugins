@@ -5,7 +5,7 @@
             [<p class="pagination">(#PAGINATION)</p>]
 	    <h2 class="invisible"><:articles_rubrique:></h2>
             <ul>
-                <BOUCLE_articles(ARTICLES) {par date}{inverse} {pagination}>
+                <BOUCLE_articles(ARTICLES) {titre_mot=actualite} {par date}{inverse} {pagination}>
                 <li>
                     	[(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{120,140})]
                     	<h3><a href="#URL_ARTICLE">#TITRE</a></h3>

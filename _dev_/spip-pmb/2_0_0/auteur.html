@@ -25,7 +25,7 @@
 		<div class="vcard">[(#REM) microformat vcard]
         <div class="cartouche">
 		
-		<h1 class="#EDIT{qui} fn">#NOM</h1>
+		[<h1 class="#EDIT{qui} fn">(#NOM|image_typo{police=togase.ttf,taille=30,couleur=333300,largeur=600})</h1>]
         </div>
 
         [(#LOGO_AUTEUR)]
@@ -70,7 +70,7 @@
     <div id="navigation">
 
         [(#REM) Menu de navigation par rubriques ]
-        <INCLURE{fond=inc-rubriques}>
+        <INCLURE{fond=inc-rubriques}{env}>
 
 	[(#REM) Autres auteurs ]
         <B_auteurs>
