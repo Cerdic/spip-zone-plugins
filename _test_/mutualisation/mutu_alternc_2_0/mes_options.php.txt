@@ -53,10 +53,20 @@
 	# define ('_INSTALL_PASS_DB_ROOT', '********');
  
 	/*
-	 * Creer les bases de donnees via un ping sur une URL (methode AlternC)
+	 * Creer les bases de donnees via un une requête HTTP sur une URL (methode AlternC)
 	 *
-	 * Il suffit de renseigner l'option url_creer_base, en lui passant les bons parametres :
-	 * 'url_creer_base' => 'https://bureau.tld/admin/sql_doadd.php?username=USER&password=PASS&dbn='.prefixe_mutualisation($site)
+	 * Il y a deuxc possibilités: 
+	 *
+	 *  1- Renseigner l'option url_creer_base, en lui passant les bons parametres :
+	 *    'url_creer_base' => 'https://bureau.tld/admin/sql_doadd.php?username=USER&password=PASS&dbn='.prefixe_mutualisation($site)
+	 *
+	 *  2- Activer la création d'un utilisateur AlternC par site: 
+	 *     'creer_user_panel' => true
+	 *     Il faut aussi définir l'URL du panel AlternC ('url_panel') et les identifiants d'un
+	 *     utilisateur AlternC avec les drotis d'adminitrateurs AlternC (admin_panel et pwd_panel)
+	 *     pour chaque site mutualisé créé : toto.mon_domaine.tld
+	 *     sera alors créé un utilisateur AlternC 'toto', sa base activé, et le site 
+	 *     utilisera un user mysql et une base denommés toto_spip 
 	 */
 	 
 	 
@@ -78,7 +88,7 @@
 	 * grace a ?var_mode=creer_htaccess_img
 	 * 
 	 */
-	
+
 	/*
 	 * Inscrire ici le nom du site d'administration du tableau de bord
 	 * de la mutualisation (ou plusieurs, separes par des virgules)
@@ -102,7 +112,13 @@
 			'repertoire' => 'sites',     // Nom du repertoire contenant les sites mutualises ('sites')
 			'url_img_courtes' => true,   // Utiliser la redirection des URL d'images courtes dans la partie publique (false)
 			# 'utiliser_panel' => false, // Utiliser une table externe pour recuperer des identifiants ... (code, user, pass) permettant a un utilisateur d'installer le site (false) 
-			'url_creer_base' => ''       // Creer la base de donnees via une URL (methode AlternC)
+			'url_creer_base' => '',       // Creer la base de donnees via une URL (methode AlternC)
+			'creer_user_panel' => true, 
+                        'url_panel' => 'https://panel.mon_alternc.tld/admin/', 
+                        'admin_panel' => 'admin_alternc',
+                        'pwd_panel' => '***********',
+                        'url_creer_base' => false   // Creer la base de donnees via une URL (methode AlternC)
+
 		)
 	);
 

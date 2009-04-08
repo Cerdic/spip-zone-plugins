@@ -1,0 +1,36 @@
+/* 
+ *  SPIP - Plugin Mutualisation - couplage AlternC
+ * (c) Daniel Viñar Ulriksen, dani@rezo.net, GPL
+ *
+ *  Ce commit est une branche issue du plugin mutualisation: 
+ *  http://zone.spip.org/trac/spip-zone/browser/_plugins_/_stable_/mutualisation
+ *
+ *  Il ajoute au plugin "mutualisation" un couplage avec un panel AlternC: 
+ *  On donne au plugin (cf. constantes dans mes_options.php.txt) l'url d'une install
+ *  AlternC (0.9.10) et un user/password alternc qui doit avoir les droits d'admin AlternC
+ *  Pour chaque site toto.mutu.org crée en mutualisation, le plugin procède alors à:
+ *   - créer un user alternc  denommé 'toto', 
+ *   - activer ses bases de donnés, avec un mot de passe aléatoire, 
+ *   - créer un user mysql toto_spip avec un mot de passe aléatoire, 
+ *   - créer une base de données toto_spip sur laquelle le précédent user a les droits,
+ *   - activer le site spip mutualisé avec la base et le user toto_spip
+ * 
+ *  Cependant, le site SPIP est encorte mutualisé de manière classique, dans un sous répertoire 
+ *  'sites' d'une même installation. L'idée est d'avoir une mutualisation du code SPIP et chaque site
+ *  mutualisé dans les répertoires d'un user alternc, de manière `pouvoir créer le site initial 
+ *  très simplement, mais ensuite pouvoir accéder au besoin via AlternC
+ *
+ *  Il est à noter que ce couplage avec ALternC n'est pas le même que celui qui était initié avec un panel
+ *
+ *  Cette version du plugin est pour l'instant une branche du plugin stable mutualisation, 
+ *  car je n'ai pas vérifié que le code est bien préservé pour tous les autres cas, mais l'idée est
+ *  de les re-fusionner. 
+ * 
+ *  Le code du plugin commence à être un peu lourd, avec des tas de "if... else...". Le "mode" de géneration 
+ *  de la base de chaque site mutualisé (préfixe dans une même base, une base par site, utilisation  d'un panel AlternC, ...
+ *  reste défini de manière implicite, selon les constantes qui sont ou non définies. 
+ *  Il serait utile de définir une variable ou une constante, à utiliser dans un "switch() ... case..." qui 
+ *  définirait explicitement ce mode d'activation de site, et qui impliquerait tel ou tel jeu de constantes. 
+ *  ou alors de séparer en plusieurs plugins. Le commit séparé de cette variante va aussi dans ce sens. 
+ *
+ */

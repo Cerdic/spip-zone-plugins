@@ -15,6 +15,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define('_PRIVILEGES_MYSQL_USER_BASE','Alter, Select, Insert, Update, Delete, Create, Drop');
 
 
+// include_spip('inc/utils');
+
 include_spip('inc/minipres');
 include_spip('inc/texte');
 
@@ -61,7 +63,7 @@ function mutu_etape_code_activation($e, $options){
 		AND $_COOKIE['mutu_code_activation'] != $secret) {
 			echo mutu_minipres(
 				_T('mutu:install_site'),
-				"<div>" .$menu_langues ."<br /></div>\n" .
+				"<div>" .$menu_langues ."</div>\n" .
 				"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
 			
 				(isset($_REQUEST['code_activation'])
@@ -122,15 +124,15 @@ function mutu_etape_creer_base($e, $options){
 						curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 						curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 						curl_setopt($ch, CURLOPT_POST, 1);
-						// $page = curl_exec($ch);
-						// var_dump($page);
+						$page = curl_exec($ch);
+						#var_dump($page);
 						curl_close($ch);
 						if (!sql_selectdb(_INSTALL_NAME_DB, _INSTALL_SERVER_DB)) {
 							echo mutu_minipres(
-								_T('mutu:install_db_echec',array('nombase' => '<tt>'._INSTALL_NAME_DB.'</tt>')),
+								_T('mutu:install_bd_echec',array('nombase' => '<tt>'._INSTALL_NAME_DB.'</tt>')),
 								"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
 								'<h3>'
-								.'<a href="'.parametre_url(self(), 'creerbase', 'oui').'">'._T('mutu:install_db_reessayer').'</a>'
+								.'<a href="'.parametre_url(self(), 'creerbase', 'oui').'">'._T('mutu:install_dd_reessayer').'</a>'
 								.'</h3>'
 							);
 							exit;
