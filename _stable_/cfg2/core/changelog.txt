@@ -5,8 +5,29 @@ v2.0.0
   * Suppression des depots "php, table, tablepack" (cf. extension depots)
   * Suppression du parametre 'inline' (cf. extension compat)
   
-  * Suppresison du parametre 'afficher_messages' (aucune occurence)
+  * Suppression du parametre 'afficher_messages' (aucune occurence)
   
+  * Suppression du parametre 'rediriger' (cf. extension compat)
+  * Suppression du type 'cfg_fichier' (cf. extension compat) (il faut trouver une meilleure solution que celle la)
+
+  * Suppression de la gestion des fonds non CVT (cf. extension compat)
+
+  * Utilisation du l'ecriture simplifiee prive/exec/cfg.html (SPIP 2.0.6+)
+  
+  Consequences:
+  * les CFG doivent maintenant respecter la syntaxe d'ecriture
+  des formulaires CVT et etre places dans le dossier formulaires/
+  en les nommant formulaires/config_$nom.html
+
+  * exec=cfg&cfg=nom cherche une page fonds/cfg_nom.html et la charge
+  sinon appelle directement #FORMULAIRE_CONFIG_$NOM
+
+  * Les sous éléments de configuration peuvent s'appeler par
+  exec=cfg&cfg=nom&onglet=element et cherchera une page fonds/cfg_config_nom_element.html,
+  sinon fonds/cfg_config_nom.html, sinon appelle directement #FORMULAIRE_CONFIG_$NOM_$ELEMENT
+
+  * chaque formulaire de configuration peut être appelé en ajax et depuis l'espace public
+  <div class="ajax">#FORMULAIRE_CONFIG_NOM</div>
 
 
 // ---------------------------------------

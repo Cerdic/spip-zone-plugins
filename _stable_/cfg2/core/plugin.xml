@@ -8,7 +8,7 @@
     <auteur>bertrand Gugger [->http://toggg.com/], Matthieu Marcillaud
 _ &#169; 2008 - <multi>[fr]Distribu&#233; sous licence[en]License[de]Vertrieb unter Lizenz</multi> GNU/LGPL
     </auteur>
-    <version>1.99.0</version>
+    <version>1.99.1</version>
     <etat>dev</etat>
     <description>
     <multi>
@@ -56,5 +56,5 @@ Es wird von vielen Plugins verwendet, kann aber auch anderen Nutzen finden wie d
         <nom>autoriser</nom>
         <inclure>cfg_autorisations.php</inclure>
     </pipeline>    
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[2.0.6;]" />
 </plugin>

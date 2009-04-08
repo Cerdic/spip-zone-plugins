@@ -1,19 +1,37 @@
 Todo ou idées :
 
-- rupture de compatibilité pour simplifier l'API de CFG et 
-  réduire son domaine d'action (essayer en même temps de faire un plugin 
-  'cfg_etendu' afin de limiter la casse)
-  
-- Supprimer (?) tout ce qui permet de créer/actionner des paramètres, 
-  ainsi que les actions en fonction de css particulières sur les champs.
-  Mettre cela (?) dans un plugin CFG_etendu.
-  Ca concerne :
-  * les paramètres 'rediriger' et 'selecteur_couleur' (ce dernier 
-  est réglé avec le plugin palette)
-  * les classes 'cfg_couleur' (réglé), 'cfg_fichier' (upload de fichier)
-  et 'cfg_id'
-  * les types pour mettre des erreurs standard 
-  
-  - 'redigiriger' n'est employé que par autorité...
-  - 'cfg_fichier' et 'cfg_id' sont problématiques.
-  
+- Ne plus gérer la page ?exec=cfg mais proposer uniquement de passer par des fonds CVT
+en mettant des #FORMULAIRE_CONFIG_LENOM et utiliser la nouvelle api simplifiée des pages exec
+de SPIP 2.0.6+ qui permet de mettre des contenus dans prive/exec/nom.html
+Chaque plugin gèrerait alors ses propres affichages.
+
+. Il faudrait alors proposer un moyen de creer facilement des menus
+dans la colonne de gauche, mais une inclusion peut suffire.
+
+
+Fonctionnement souhaite
+-----------------------
+
+* ?exec=cfg
+
+lecture de prive/exec/cfg qui charge un menu des différentes configurations trouvees
+- mais trouvées où ?
+- via pipeline onglets (ça serait le plus simple...) ?
+
+
+* ?exec=cfg&cfg=sarka
+
+lecture de prive/exec/cfg qui charge la page
+- sinon fonds/cfg_sarka (si presente) (qui n'est qu'une inclusion - pas de calculs par CFG)
+- sinon
+	+ titre : <:$cfg:config_titre_$cfg:> sinon $cfg
+	+ description : <:$cfg:config_description_$cfg:> sinon rien.
+	+ formulaires/config_sarka.html directement
+	+ navigation : fonds/nav-config_sarka.html (si present)
+
+
+* ?exec=cfg&cfg=sarka&onglet=layout
+
+lecture de prive/exec/cfg qui charge la page
+- sinon fonds/cfg_sarka_layout (si presente)
+- sinon formulaires/config_sarka_layout.html directement

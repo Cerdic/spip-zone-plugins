@@ -10,6 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg' => 'CFG',
+	'configuration_cfg' => 'Configuration des extensions',
+	'description_cfg' => 'CFG facilite la cr&eacute;ation d\'interface de configuration pour les extensions de SPIP.',
+	
 	'choisir_module_a_configurer' => 'Choisissez le module &agrave; configurer.',
 	'config_enregistree' => 'Enregistrement de <b>@nom@</b> effectu&eacute;',
 	'config_supprimee' => 'Suppression de <b>@nom@</b> effectu&eacute;',

@@ -176,7 +176,6 @@ class cfg_depot{
 // memes arguments que la balise (forcement)
 // $cfg: la config, lire_config('montruc') est un tableau
 // lire_config('montruc/sub') est l'element "sub" de cette config
-// comme la balise pour ~, ~id_auteur ou table:id
 // $def: un defaut optionnel
 
 // $unserialize est mis par l'histoire, et affecte le depot 'meta' 
