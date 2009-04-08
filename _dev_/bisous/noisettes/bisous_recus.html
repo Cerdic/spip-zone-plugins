@@ -1,10 +1,13 @@
 <B_receveur>
 <h5><:bisous:bisous_recus:></h5>
-<BOUCLE_receveur(BISOUS){id_receveur=#ENV{id_auteur}}>
+
+<BOUCLE_receveur(BISOUS){id_receveur=#ENV{id_auteur}}{par id_donneur}>
 	<B_donneurs>
 	<ul>
 	<BOUCLE_donneurs(AUTEURS){id_auteur=#ID_DONNEUR}{tout}>
-		<li><a href="#URL_AUTEUR">#NOM</a></li>
+		[<li><a href="#URL_AUTEUR">(#NOM|unique)</a>
+		[((#INCLURE{fond=noisettes/total_bisous}{id_donneur=#ID_DONNEUR}{id_receveur=#ENV{id_auteur}}))]
+		</li>]
 	</BOUCLE_donneurs>
 	</ul>
 	</B_donneurs>

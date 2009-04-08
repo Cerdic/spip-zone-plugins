@@ -4,7 +4,9 @@
 	<B_receveurs>
 	<ul>
 	<BOUCLE_receveurs(AUTEURS){id_auteur=#ID_RECEVEUR}{tout}>
-		<li><a href="#URL_AUTEUR">#NOM</a></li>
+		[<li><a href="#URL_AUTEUR">(#NOM|unique)</a>
+		[((#INCLURE{fond=noisettes/total_bisous}{id_donneur=#ENV{id_auteur}}{id_receveur=#ID_RECEVEUR}))]
+        </li>]
 	</BOUCLE_receveurs>
 	</ul>
 	</B_receveurs>
