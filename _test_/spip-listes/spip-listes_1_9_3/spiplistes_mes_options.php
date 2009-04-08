@@ -36,6 +36,9 @@ define("_SPIPLISTES_LOG_DEBUG", LOG_DEBUG);
 
 define("_DIR_PLUGIN_SPIPLISTES_IMG_PACK", _DIR_PLUGIN_SPIPLISTES."img_pack/");
 
+// nombre max de chiffres ajoutes au login (creation abo)
+define("_SPIPLISTES_MAX_LOGIN_NN", 32766);
+
 define("_SPIPLISTES_PATRONS_DIR", "patrons/");
 define("_SPIPLISTES_PATRONS_TETE_DIR", _SPIPLISTES_PATRONS_DIR."lien_en_tete_courriers/");
 define("_SPIPLISTES_PATRONS_PIED_DIR", _SPIPLISTES_PATRONS_DIR."pieds_courriers/");
@@ -43,6 +46,7 @@ define("_SPIPLISTES_PATRON_PIED_DEFAUT", "piedmail");
 define("_SPIPLISTES_PATRON_PIED_IGNORE", "aucun");
 define("_SPIPLISTES_PATRONS_PIED_DEFAUT", _SPIPLISTES_PATRONS_PIED_DIR._SPIPLISTES_PATRON_PIED_DEFAUT);
 define("_SPIPLISTES_PATRONS_TAMPON_DIR", _SPIPLISTES_PATRONS_DIR."tampons_courriers/");
+define("_SPIPLISTES_PATRONS_MESSAGES_DIR", _SPIPLISTES_PATRONS_DIR."messages_abo/");
 
 // au dela de cette taille, le contenu du champ est considéré
 // comme le contenu du patron
