@@ -494,7 +494,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'inscription_mail_forum' => 'Voici vos identifiants pour vous connecter au site @nom_site_spip@ (@adresse_site@)'
 , 'inscription_mail_redac' => 'Voici vos identifiants pour vous connecter au site @nom_site_spip@ (@adresse_site@) 
 	et &agrave; l\'interface de r&eacute;daction (@adresse_site@/ecrire)'
-, 'inscription_visiteurs' => 'L&acute;abonnement vous permet d&acute;acc&eacute;der aux parties du site en acc&egrave;s restreint,
+, 'inscription_visiteurs' => 'L&acute;abonnement vous permet 
 	d&acute;intervenir sur les forums r&eacute;serv&eacute;s aux visiteurs enregistr&eacute;s et de recevoir 
 	les lettres d&acute;informations.'
 , 'inscription_redacteurs' => "L&#39;espace de r&#233;daction de ce site est ouvert aux visiteurs apr&#232;s inscription.

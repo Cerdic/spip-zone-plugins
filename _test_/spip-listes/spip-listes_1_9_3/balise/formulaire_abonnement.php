@@ -23,7 +23,7 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT()", _SPIPLISTES_LOG_DEBUG);
 	return(calculer_balise_dynamique($p, 'FORMULAIRE_ABONNEMENT', array('id_liste')));
 }
 
-// args[0] indique une liste, mais ne sert pas encore
+// args[0] indique une liste
 // args[1] indique un eventuel squelette alternatif
 // [(#FORMULAIRE_ABONNEMENT{mon_squelette})]
 // un cas particulier est :
@@ -34,16 +34,17 @@ function balise_FORMULAIRE_ABONNEMENT_stat($args, $filtres) {
 
 spiplistes_log("balise_FORMULAIRE_ABONNEMENT_stat()", _SPIPLISTES_LOG_DEBUG);
 
-	if(!$args[1]) {
-		$args[1]='formulaire_abonnement';
-	}
+	//if(!$args[1]) {
+		//$args[1]='formulaire_abonnement';
+	//}
 	// cherche appel de liste en arguments
 	preg_match_all("/liste([0-9]+)/x", $args[1], $matches);
 	if($id_liste = intval($matches[1][0])) {
 spiplistes_log("balise_FORMULAIRE_ABONNEMENT_stat() UNE SEULE LISTE DEMANDEE ", _SPIPLISTES_LOG_DEBUG);
-		$args[1]='formulaire_abonnement_une_liste';
+		//$args[1]='formulaire_abonnement_une_liste';
 		$args[0]=$id_liste;
 	}
+	$args[1]='formulaire_abonnement';
 	
 	return(array($args[0],$args[1]));
 }
@@ -57,7 +58,7 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_stat() UNE SEULE LISTE DEMANDEE ", 
 
 function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 
-spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn()", _SPIPLISTES_LOG_DEBUG);
+spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn() -$id_liste-", _SPIPLISTES_LOG_DEBUG);
 
 	include_spip ("inc/meta");
 	include_spip ("inc/session");
@@ -76,17 +77,20 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn()", _SPIPLISTES_LOG_DEBUG);
 	
 	// recuperation de la config SPIP-Listes
 	// 'simple' = ne renvoie que la confirmation d'abonnement
-	// 'membre' = complete le mail par un mot de passe pour se loger
+	// 'membre' = complete le mail par un mot de passe pour s'identifier sur le site
 	$acces_membres = ($GLOBALS['meta']['abonnement_config'] == 'membre') ? 'oui' : 'non';
 		
 	// aller chercher le formulaire html qui va bien				
 	$formulaire = "formulaires/".$formulaire ;		
 			
-	// code inscription au site ou/et a la lettre d'info	
+	// Accepter l'inscription en tant qu'auteur ?
+	// pour memo: l'auteur a acces a l'espace prive'
 	$inscriptions_ecrire = ($GLOBALS['meta']['accepter_inscriptions'] == "oui");
+	// Accepter l'inscription en tant que visiteur ?
+	// pour memo: le visiteur n'a pas acces a l'espace prive'
 	$inscriptions_publiques = ($GLOBALS['meta']['accepter_visiteurs'] == "oui");
 	
-	$affiche_formulaire = $inscription_redac = $inscription_visiteur = "";
+	$affiche_formulaire = $inscription_redacteur = $inscription_visiteur = "";
 	
 	$nom_site_spip = $GLOBALS['meta']['nom_site'];
 	$adresse_site = $GLOBALS['meta']['adresse_site'];
@@ -104,7 +108,9 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn()", _SPIPLISTES_LOG_DEBUG);
 			
 			if($row = sql_fetch($sql_result)) {
 				if($row['statut'] == '5poubelle')
+				{
 					$erreur = _T('pass_erreur_acces_refuse');
+				}
 				else {
 					$cookie = creer_uniqid();
 					spiplistes_auteurs_cookie_oubli_updateq($cookie, $email_oubli);
@@ -146,15 +152,16 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn()", _SPIPLISTES_LOG_DEBUG);
 	}
 	
 	//code pour s inscrire
-	
 	else if(
 		$inscriptions_ecrire 
 		|| $inscriptions_publiques 
 		|| ($GLOBALS['meta']['forums_publics'] == 'abo') 
 	) {
+		$accepter_nouveau = "oui";
+		
 		// debut presentation
 	
-		$inscription_redac = 
+		$inscription_redacteur = 
 			($inscriptions_ecrire && ($type=="redac")) 
 			? "oui" 
 			: "non"
@@ -183,13 +190,14 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn()", _SPIPLISTES_LOG_DEBUG);
 				array(
 					'oubli_pass' => $oubli_pass
 					, 'erreur' => $erreur
-					, 'inscription_redacteur' => $inscription_redac
+					, 'inscription_redacteur' => $inscription_redacteur
 					, 'acces_membres' => $acces_membres
 					, 'inscription_visiteur' => $inscription_visiteur
 					, 'mode_login' => $affiche_formulaire
 					, 'reponse_formulaire' => $reponse_formulaire
 					, 'accepter_auteur' => $GLOBALS['meta']['accepter_inscriptions']
 					, 'id_liste' => $id_liste
+					, 'accepter_nouveau' => $accepter_nouveau
 					)
 				);
 				
@@ -197,10 +205,15 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn()", _SPIPLISTES_LOG_DEBUG);
 } // end balise_FORMULAIRE_ABONNEMENT_dyn()
 
 
-// Abonnement d'un visiteur.
-// Si adresse_mail deja dans la base, rajoute l'abonnement
-// sinon, cree un login a partir de l'email et l'abonne
-// Dans ces deux cas, renvoie un mail de confirmation.
+/* Abonnement d'un visiteur ou d'un auteur
+ * Si authentifie', modifie l'abonnement, sinon envoie mail avec cookie_oubli pour confirmer.
+ * Si adresse_mail absent de la base, cree un login a partir de l'email et renvoie un mail de confirmation.
+ *
+ * @return array()
+ * @param $mail_inscription_ string
+ * @param $type string
+ * @param $acces_membres string
+ */
 function spiplistes_formulaire_inscription ($mail_inscription_, $type, $acces_membres, $formulaire, $nom_site_spip) {
 	
 	$nom_inscription_ = _request('nom_inscription_');

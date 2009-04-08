@@ -51,68 +51,60 @@
 [<!--(#REM) 
 
 	===============
-	texte d'inscription en tant que redacteur
+	si pas identifie', accepter inscription nouvel abonne'
 	===============
+
+-->][(#ENV{accepter_nouveau}|=={oui}|?{' ',''})
+<fieldset>
+[<!--(#REM) ===============	texte d'inscription	===============
+
 	Si la maison accepte l'inscription en tant que redacteur,
 	le proposer !
 
 -->][(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
-<fieldset>
-<legend><:spiplistes:devenir_abonne:></legend>
-<p><strong><:spiplistes:devenir_redac:></strong></p>
-<p><:spiplistes:inscription_redacteurs:></p>
-<p><:form_forum_indiquer_nom_email:></p>
-	<div class="coord">
-	[<!--(#REM)
-	
-		===============
-		acces_membres
-		===============
-		config SPIP-Listes: si mode d'acces 'membre' au lieu de 'simple'
-		demande le pseudo pour completer la fiche.
-
-	-->][(#ENV{acces_membres}|=={oui}|?{' ',''})
+	<legend><:spiplistes:devenir_redac:></legend>
+	<p><strong><:spiplistes:devenir_redac:></strong></p>
+	<p><:spiplistes:inscription_redacteurs:></p>
+		<p><:form_forum_indiquer_nom_email:></p>
+		<div class="coord">
 		<label for="nom_inscription_"><:form_pet_votre_nom:> :</label>
 		<input type="text" class="forml" name="nom_inscription_" id="nom_inscription_" value="" size="40" style="width:12em;clear:both;" />
+		</div>]
+[<!--(#REM)
+	
+	Sinon, proposer en tant que visiteur
+
+-->][(#ENV{inscription_redacteur}|=={oui}|?{'',' '})
+	<legend><:spiplistes:devenir_membre:></legend>
+	<p><strong><:spiplistes:devenir_abonne:></strong></p>
+	[<!--(#REM)
+	
+		si mode d'acces 'membre' au lieu de 'simple' demande le pseudo pour completer la fiche.
+
+	-->][(#CONFIG{abonnement_config}|=={membre}|?{' ',''})
+		<p><:spiplistes:inscription_visiteurs:></p>
+		<p><:form_forum_indiquer_nom_email:></p>
+		<div class="coord">
+		<label for="nom_inscription_"><:form_pet_votre_nom:> :</label>
+		<input type="text" class="forml" name="nom_inscription_" id="nom_inscription_" value="" size="40" style="width:12em;clear:both;" />
+		</div>
+	][(#CONFIG{abonnement_config}|=={membre}|?{'',' '})
+		<p><:spiplistes:abonnement_presentation:></p>
 	]
-	<label for="mail_inscription_"><:form_pet_votre_email:> :</label>
-	<input type="text" class="forml" id="mail_inscription_" name="mail_inscription_" value="" size="40" />
-	</div>
-</fieldset>
-][<!--(#REM) 
-
-	===============
-	FIN texte d'inscription en tant que redacteur
-	===============
-
-
-	===============
-	texte d'inscription en tant que visiteur
-	===============
-
--->][(#ENV{inscription_visiteur}|=={oui}|?{' ',''})
-<fieldset>
-<legend><:spiplistes:devenir_abonne:></legend>
-<p><strong><:spiplistes:devenir_membre:></strong></p>
-<p><:spiplistes:inscription_visiteurs:></p>
-<p><:spiplistes:abonnement_presentation:></p>
-	[(#CONFIG{accepter_inscriptions}|=={oui}|?{' ',''})
-	<p style="margin-top:5px">
-		<:spiplistes:vous_pouvez_egalement:> <a href="[(#SELF|parametre_url{'type','redac'})]"><:spiplistes:vous_inscrire_auteur:>.</a>
-	</p>
-	]
+]
 	<div class="coord">
 	<label for="mail_inscription_"><:form_pet_votre_email:> :</label>
 	<input type="text" class="forml" id="mail_inscription_" name="mail_inscription_" value="" size="40" />
 	</div>
+[(#ENV{inscription_redacteur}|=={oui}|?{'',' '})
+	[(#CONFIG{accepter_inscriptions}|=={oui}|?{' ',''})
+	<p style="margin-top:5px">
+	<:spiplistes:vous_pouvez_egalement:> <a href="[(#SELF|parametre_url{'type','redac'})]"><:spiplistes:vous_inscrire_auteur:>.</a>
+	</p>
+	]
+]
 </fieldset>
-][<!--(#REM) 
-
-	===============
-	FIN texte d'inscription en tant que visiteur
-	===============
-
--->]
+][<!--(#REM) =============== FIN texte d'inscription =============== -->]
 
 [<p class="message-formulaire">(#ENV*{reponse_formulaire})</p>]
 
@@ -122,15 +114,22 @@
 	liste des listes publiques 
 	===============
 
--->][<!--(#REM)
-	
 		===============
-		Si une seule liste en parametre de la balise, ne lister que celle-ci
+		Si une liste en parametre de la balise, ne lister que celle-ci
 		Sinon liste complete des listes publiques
 		Sauf si pas mode_login (pass_mot_oublie=oui, ...)
 		===============
 		
 	-->]
+	<B_id_liste>
+	<BOUCLE_id_liste(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}{id_liste=#ENV{id_liste}} {0,(#ENV{mode_login}|?{1,0})}>
+		[<fieldset>
+		[<legend>(#TITRE)</legend>]
+		(#TEXTE)
+		</fieldset>]
+	</BOUCLE_id_liste>
+	</B_id_liste>
+		
 	<B_listes>
 		<fieldset>
 		<legend>[(#TOTAL_BOUCLE|=={1}|?{
@@ -159,6 +158,9 @@
 			[(#ENV{mode_login}|oui)<fieldset style="color:#000"><legend><:spiplistes:abo_1_lettre:></legend></fieldset>]
 		]
 	<//B_listes>
+	
+	<//B_id_liste>
+	
 [<!--(#REM)
 
 	===============
