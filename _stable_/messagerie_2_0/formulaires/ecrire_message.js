@@ -4,7 +4,7 @@ function set_auteur(li){
 	if (li!=undefined && li.extra[0]) {
 		id_auteur = li.extra[0];
 		var nom = $(li).html();
-		if (box.find('input[@value='+id_auteur+']').length==0){
+		if (box.find('input[value='+id_auteur+']').length==0){
 			box.append(" <span class='dest'>"
 			+nom
 			+"<input type='hidden' name='destinataires[]' value='"+id_auteur+"' /> "
