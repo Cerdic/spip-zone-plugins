@@ -14,7 +14,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_PRIVILEGES_MYSQL_USER_BASE','Alter, Select, Insert, Update, Delete, Create, Drop');
 
+
 include_spip('inc/minipres');
+include_spip('inc/texte');
+
+utiliser_langue_visiteur();
+$menu_langues = menu_langues('var_lang_ecrire');
+
 
 /* centrage...  */
 function mutu_minipres($titre="",$contenu=""){
@@ -54,16 +60,17 @@ function mutu_etape_code_activation($e, $options){
 		if ($options['code'] != $_REQUEST['code_activation']
 		AND $_COOKIE['mutu_code_activation'] != $secret) {
 			echo mutu_minipres(
-				_L('Installation de votre site SPIP'),
+				_T('mutu:install_site'),
+				"<div>" .$menu_langues ."<br /></div>\n" .
 				"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
 			
 				(isset($_REQUEST['code_activation'])
-					? _L('Erreur...')
+					? _T('mutu:install_err')
 					: ''
 				) .
 
 				'<h3>'.
-				_L('Veuillez entrer le code d\'activation du site :').
+				_T('mutu:install_code').
 				'</h3>'.
 
 				"<form method='post' action='".self()."'><div>
@@ -115,15 +122,15 @@ function mutu_etape_creer_base($e, $options){
 						curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 						curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 						curl_setopt($ch, CURLOPT_POST, 1);
-						$page = curl_exec($ch);
-						#var_dump($page);
+						// $page = curl_exec($ch);
+						// var_dump($page);
 						curl_close($ch);
 						if (!sql_selectdb(_INSTALL_NAME_DB, _INSTALL_SERVER_DB)) {
 							echo mutu_minipres(
-								_L('La cr&#233;ation de la base de donn&#233;es <tt>'._INSTALL_NAME_DB.'</tt> a &#233;chou&#233;.'),
+								_T('mutu:install_db_echec',array('nombase' => '<tt>'._INSTALL_NAME_DB.'</tt>')),
 								"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
 								'<h3>'
-								._L('<a href="'.parametre_url(self(), 'creerbase', 'oui').'">R&#233;essayer...</a>')
+								.'<a href="'.parametre_url(self(), 'creerbase', 'oui').'">'._T('mutu:install_db_reessayer').'</a>'
 								.'</h3>'
 							);
 							exit;
@@ -189,28 +196,30 @@ function mutu_etape_creer_base($e, $options){
 						@supprimer_fichier($e . _NOM_TEMPORAIRES_INACCESSIBLES . _MUTU_INSTALLATION_FILE);
 						
 						echo mutu_minipres(
-							_L('La base de donn&#233;es <tt>'._INSTALL_NAME_DB.'</tt> a &#233;t&#233; cr&#233;&#233;e'),
-							"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
-							'<h3>'
-							._L('Vous pouvez <a href="'.generer_url_ecrire('install').'">poursuivre l\'installation de SPIP</a>.')
-							.'</h3>'
+							_T('mutu:install_bd_cree', array( 'nombase' => '<tt>'._INSTALL_NAME_DB.'</tt>')),
+							"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
+							.'<h3>'
+							._T('mutu:install_spip_1')
+							.'<a href="'.generer_url_ecrire('install').'">'
+							._T('mutu:install_spip_2')
+							.'</a>.</h3>'
 						);
 
 						if ($options['mail']) {
 							$mail = charger_fonction('envoyer_mail', 'inc');
 							$mail($options['mail'],
-								_L('Creation de la base de donn&#233;es '._INSTALL_NAME_DB),
-								_L('La base de donn&#233;es '._INSTALL_NAME_DB.'@'._INSTALL_HOST_DB.' ('._INSTALL_USER_DB.':'._INSTALL_PASS_DB.') a &#233;t&#233; cr&#233;&#233;e pour le site '.$e),
+								_T('mutu:install_creation_bd', array('nombase' => _INSTALL_NAME_DB)),
+								_T('mutu:install_creation_bd_site_2', array('base' => _INSTALL_NAME_DB.'@'._INSTALL_HOST_DB.' ('._INSTALL_USER_DB.':'._INSTALL_PASS_DB.')', 'site' => $e)),
 								$options['mail']
 							);
 						}
 						exit;
 					} else {
 						echo mutu_minipres(
-							_L('Cr&#233;ation de la base de donn&#233;es <tt>'._INSTALL_NAME_DB.'</tt>'),
+							_T('mutu:install_creation_bd', array('nombase' => '<tt>'._INSTALL_NAME_DB.'</tt>')),
 							"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
 							'<h3>'
-							._L('erreur')
+							._T('mutu:install_err')
 							.'</h3>'
 						);
 						exit;
@@ -219,11 +228,13 @@ function mutu_etape_creer_base($e, $options){
 				}
 				else {
 					echo mutu_minipres(
-						_L('Cr&#233;ation de la base de donn&#233;es <tt>'._INSTALL_NAME_DB.'</tt>'),
+						_T('mutu:install_creation_bd', array('nombase' => '<tt>'._INSTALL_NAME_DB.'</tt>')),
 						"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
 						'<h3>'
-						._L('Voulez-vous <a href="'.parametre_url(self(), 'creerbase', 'oui').'">cr&#233;er cette base ?</a>')
-						.'</h3>'
+						._T('mutu:install_creer_bd_1')
+						.'<a href="'.parametre_url(self(), 'creerbase', 'oui').'">'
+						._T('mutu:install_creer_bd_2')
+						.'</a></h3>'
 					);
 					exit;
 				}
@@ -234,11 +245,10 @@ function mutu_etape_creer_base($e, $options){
 		
 		else {
 			echo mutu_minipres(
-				_L('Creation de la base de donn&#233;es du site (<tt>'.joli_repertoire($e).'</tt>)'),
-
+				_T('mutu:install_creation_bd_site'). '(<tt>'.joli_repertoire($e).'</tt>)',
 				"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
-				.'<h3>'. _L('erreur') .'</h3>'
-				. _L('Les donn&#233;es de connexion ' . strtoupper(_INSTALL_SERVER_DB) . ' ne sont pas d&#233;finies, impossible de cr&#233;er automatiquement la base.')
+				.'<h3>'. _T('mutu:install_err') .'</h3>'
+				. _T('mutu:install_no_data_connexion', array( 'connexion' => strtoupper(_INSTALL_SERVER_DB)))
 			);
 			exit;
 		}
@@ -257,11 +267,10 @@ function mutu_etape_creer_repertoires($e, $options){
 
 		if (!$ok_dir) {
 			echo mutu_minipres(
-				_L('Creation du r&eacute;pertoire du site (<tt>'.joli_repertoire($e).'</tt>)'),
-
+				_T('mutu:install_creation_repertoire', array ('repertoire' => '<tt>'.joli_repertoire($e).'</tt>')),
 				"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
-				.'<h3>'. _L('erreur') .'</h3>'
-				. _L('Le r&#233;pertoire <tt>'.$options['repertoire'].'/</tt> n\'est pas accessible en &#233;criture')
+				.'<h3>'. _T('mutu:install_err') .'</h3>'
+				. _T('mutu:install_repertoire_inaccessible', array( 'repertoire' => '<tt>'.$options['repertoire'].'/</tt>'))
 			);
 			exit;
 		}
@@ -287,21 +296,20 @@ function mutu_etape_creer_repertoires($e, $options){
 			}
 			
 			echo mutu_minipres(
-				_L('Creation du r&eacute;pertoire du site (<tt>'.joli_repertoire($e).'</tt>)'),
-
-				"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
+				_T('mutu:install_creation_repertoire', array ('repertoire' => '<tt>'.joli_repertoire($e).'</tt>'))
+				."<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
 				.'<h3>'
 				. ($ok
-					? _L('Cr&#233;ation des r&#233;pertoires OK. Vous pouvez <a href="'.parametre_url(self(), 'creerrepertoire', '').'">Continuer...</a>.')
-					: _L('erreur')
+					? _T('mutu:install_creation_rep_ok_1').'<a href="'.parametre_url(self(), 'creerrepertoire', '').'">'._T('mutu:install_creation_rep_ok_2').'</a>.'
+					: _T('mutu:install_err')
 				).'</h3>'
 			);
 
 			if ($options['mail']) {
 				$mail = charger_fonction('envoyer_mail', 'inc');
 				$mail($options['mail'],
-					_L('Creation du site '.joli_repertoire($e)),
-					_L('Les r&#233;pertoires du site '.$e.' ont &#233;t&#233; cr&#233;&#233;s.'),
+					_T('mutu:install_creation_site', array('site' => joli_repertoire($e))),
+					_T('mutu:install_creation_site', array('site' => $e)),
 					$options['mail']
 				);
 			}
@@ -314,24 +322,25 @@ function mutu_etape_creer_repertoires($e, $options){
 			|| !is_dir($e._NOM_TEMPORAIRES_ACCESSIBLES)
 		) {
 			echo mutu_minipres(
-				_L('Creation du r&eacute;pertoire du site (<tt>'.joli_repertoire($e).'</tt>)'),
-
+				_T('mutu:install_creation_repertoire', array('repertoire' => '<tt>'.joli_repertoire($e).'</tt>')),
 				"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
 				.'<h3>'.
-					_L('Voulez-vous <a href="'.parametre_url(self(), 'creerrepertoire', 'oui').'">cr&#233;er les r&#233;pertoires de ce site ?</a>')
-				.'</h3>'
-				. (!$ok_dir ? _L('Le r&#233;pertoire <tt>'.$options['repertoire'].'/</tt> n\'est pas accessible en &#233;criture') : '')
+				_T('mutu:install_creer_rep_1')
+				.'<a href="'.parametre_url(self(), 'creerrepertoire', 'oui').'">'
+				._T('mutu:install_creer_rep_2')
+				.'</a></h3>'
+				. (!$ok_dir ? _T('mutu:install_repertoire_inaccessible', array('repertoire' => '<tt>'.$options['repertoire'].'/</tt>' )) : '')
 			);
 			exit;
 
 		}
 
-	} else {
-		echo mutu_minipres(
-			_L('Le r&eacute;pertoire du site (<tt>'.joli_repertoire($e).'</tt>) n\'existe pas'),
+		} else {
+			echo mutu_minipres(
+			_T('mutu:install_repertoire_noexist', array('repertoire' => '<tt>'.joli_repertoire($e).'</tt>')), 
 			"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
 			'<h3>'
-			._L('Veuillez cr&#233;er le r&#233;pertoire '.joli_repertoire($e).' et ses sous r&#233;pertoires:')
+			._T('mutu:install_repertoire_noexist', array( 'repertoire' => joli_repertoire($e)))
 			.'</h3>'
 			.'<ul>'
 			.'<li>'.joli_repertoire($e)._NOM_PERMANENTS_INACCESSIBLES.'</li>'
@@ -355,11 +364,7 @@ function mutu_etape_fin($e, $options){
 	@supprimer_fichier($e . _NOM_TEMPORAIRES_INACCESSIBLES . _MUTU_INSTALLATION_FILE);
 	
 	echo mutu_minipres(
-		_L('Les r&#233;pertoires et la base de donn&#233;e du site sont maintenant cr&#233;&#233;s.'),
-
-		"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
-		.'<h3>'.
-			_L('Vous pouvez <a href="'.generer_url_ecrire('install').'">poursuivre l\'installation de SPIP</a>.')
+		_T('mutu:install_rep_bd_ok')
 		.'</h3>'
 	);
 	exit;		

@@ -1,6 +1,10 @@
 <plugin>
 	<nom>
-		Mutualisation facile
+		<multi>
+			Mutualisation facile
+			[es]Mutualizaci&oacute;n f&aacute;cil
+			[en]Easy mutualisation
+		</multi>
 	</nom>
 	<auteur>
 		&#169; Fil 2007 - Distribu&#233; sous licence GNU/LGPL
@@ -12,9 +16,13 @@
 		stable
 	</etat>
 	<description>
+		<multi>
 		Ce plugin contient quelques fonctions facilitant la mutualisation de sites : notamment <code>demarrer_site()</code>, <code>prefixe_mutualisation()</code> et <code>mutualiser_creer()</code>.
+		[es]Este plugin contiene algunas funciones que facilitan la mutualizaci&oacute;n de sitios, en particular: <code>demarrer_site()</code>, <code>prefixe_mutualisation()</code> y <code>mutualiser_creer()</code>.
+		[en]This plugin provides some function that facilitate site's mutualisation, particularly: <code>demarrer_site()</code>, <code>prefixe_mutualisation()</code> and <code>mutualiser_creer()</code>.
 
 		Attention ce plugin ne s'installe pas comme les autres (cf. documentation).
+		</multi>
 	</description>
 	<lien>
 		[Documentation sur SPIP Contrib'->http://www.spip-contrib.net/La-mutualisation-facile],
