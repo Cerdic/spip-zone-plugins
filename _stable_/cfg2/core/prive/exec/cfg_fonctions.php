@@ -1,5 +1,11 @@
 <?php
 
+// function pour compatibilite avec les anciens fonds/cfg_xx.html
+function balise_CFG_EXEC_dist($p) {
+	$p->code = '((($exec = charger_fonction("cfg","exec")) and $exec) ? $exec() . \' \' : \'\')';
+	return $p;
+}
+
 // retourne la liste des onglets trouves pour un groupe donnee
 // #ENV{cfg}|lister_config_onglets
 function lister_config_onglets($nom) {

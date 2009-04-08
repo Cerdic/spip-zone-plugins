@@ -19,6 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_modules' => 'Configuration des modules',
 
 	// E
+	'erreur_compatibilite' => 'Installez le plugin de compatibilite pour lire cet ancien fond.',
+	
 	'erreur_copie_fichier' => 'Impossible de copier le fichier @fichier@ &agrave; son emplacement d&eacute;finitif',
 	'erreur_enregistrement' => 'Une erreur est survenue lors de l\'enregistrement de <b>@nom@</b>',
 	'erreur_lecture' => 'Impossible de lire @nom@',

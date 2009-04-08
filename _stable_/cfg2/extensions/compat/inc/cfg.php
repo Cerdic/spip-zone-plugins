@@ -263,8 +263,8 @@ class cfg
 			$n = -1;
 			foreach ($onglets as $titre=>$args){
 				if ($args['afficher']){
-					// Faire des lignes s'il y en a effectivement plus de 6
-					if (!(++$n%6) && ($n>0))
+					// Faire des lignes s'il y en a effectivement plus de 3
+					if (!(++$n%3) && ($n>0))
 						$res .= fin_onglet().debut_onglet();
 						
 					$res .= onglet(

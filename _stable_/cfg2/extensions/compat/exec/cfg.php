@@ -2,16 +2,15 @@
 
 /*
  * Plugin CFG pour SPIP
- * (c) toggg 2007, distribue sous licence GNU/GPL
- * Documentation et contact: http://www.spip-contrib.net/
- *
- * la fonction appelee par le core, une simple "factory" de la classe cfg
+ * (c) toggg, marcimat 2009, distribue sous licence GNU/GPL
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function exec_cfg_dist($class = null)
+function exec_cfg_dist()
 {
+	$out = "";
+	
 	include_spip('inc/filtres');
 	include_spip('inc/cfg');
 	$config = &new cfg(
@@ -35,45 +34,38 @@ function exec_cfg_dist($class = null)
 		exit;
 	}
 
-	pipeline('exec_init',array('args'=>array('exec'=>'cfg'),'data'=>''));
-
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page($config->get_boite(), 'cfg', $config->get_nom());
-	echo "<br /><br /><br />\n";
-
-	echo gros_titre(sinon($config->get_titre(), _T('cfg:configuration_modules')), '', false);	
-	echo $config->barre_onglets();
+	$out .= "<h1>".$config->get_titre()."</h1>";
+	$out .=  $config->barre_onglets();
+	$out .=  "<br /><br />\n";
 	
 	// colonne gauche
-	echo debut_gauche('', true);
-
+	$out .= "\n<!--#navigation-->";
 	// si un formulaire cfg est demande
-	if ($s = $config->descriptif()) echo debut_boite_info(true) . $s . fin_boite_info(true);
+	if ($s = $config->descriptif()) $out .= debut_boite_info(true) . $s . fin_boite_info(true);
+	$out .= "\n<!--/#navigation-->";
+
 	
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'cfg'),'data'=>''));
-	echo creer_colonne_droite('', true);
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>'cfg'),'data'=>''));
-		
+	// colonne droite
+	$out .= "\n<!--#extra-->";
 	// affichage des messages envoyes par cfg
-	if ($s = $config->messages()) echo debut_boite_info(true) . $s . fin_boite_info(true);
+	if ($s = $config->messages()) $out .= debut_boite_info(true) . $s . fin_boite_info(true);
 
 	// affichage des liens
-	if ($s = $config->liens()) echo debut_boite_info(true) . $s . fin_boite_info(true);
-	if ($s = $config->liens_multi()) echo debut_boite_info(true) . $s . fin_boite_info(true);
-	
-	echo debut_droite("", true);
-	
+	if ($s = $config->liens()) $out .= debut_boite_info(true) . $s . fin_boite_info(true);
+	if ($s = $config->liens_multi()) $out .= debut_boite_info(true) . $s . fin_boite_info(true);
+	$out .= "\n<!--/#extra-->";
+
+
 	// centre de la page	
 	if ($config->get_presentation() == 'auto') {
-		echo debut_cadre_trait_couleur('', true, '', $config->get_boite());
-		echo $config->formulaire();
-		echo fin_cadre_trait_couleur(true);
+		$out .= debut_cadre_trait_couleur('', true, '', $config->get_boite());
+		$out .= $config->formulaire();
+		$out .= fin_cadre_trait_couleur(true);
 	} else {
-		echo $config->formulaire();
+		$out .=  $config->formulaire();
 	}
 
-	// pied
-	echo fin_gauche() . fin_page();
+	return $out;
 }
 
 ?>

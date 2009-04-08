@@ -18,8 +18,8 @@ class cfg_formulaire extends cfg_formulaire_dist {
 // y a t-il des extensions (classes css 'type_{nom}' ou 'cfg_{nom}' sur champs) a traiter ?
 	var $extensions = array();
 	
-	function cfg_formulaire(){
-		$this->cfg_formulaire_dist();
+	function cfg_formulaire($nom, $cfg_id = '', $opt = array()){
+		$this->cfg_formulaire_dist($nom, $cfg_id, $opt);
 		$this->param = array_merge($this->param, array(
 			'head' => '', // partie du fond cfg a inserer dans le head par le pipeline header_prive
 			'inline' => '', // code qui sera insere apres le contenu du fond (peut servir pour inserer du js)
