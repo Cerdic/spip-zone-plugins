@@ -27,21 +27,19 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'inscription_reponse_s' => "Vous &#234;tes abonn&#233; &#224; la liste d'information du site @s@"
 , 'inscription_reponses_s' => 'Vous &ecirc;tes abonn&eacute; aux listes d\'informations du site @s@'
 , 'vous_abonne_aucune_liste' => "Vous n'&ecirc;tes pas abonn&eacute; &agrave; une liste de diffusion"
-, 'abonnement_mail_passcookie' => "(ceci est un message automatique)
-
-	Pour modifier votre abonnement &agrave; la lettre d'information de ce site :
-	@nom_site_spip@ (@adresse_site@)
-	
-	Veuillez vous rendre &agrave; l'adresse suivante :
-	
-	@adresse_site@/spip.php?page=abonnement&d=@cookie@
-	
-	Vous pourrez alors confirmer la modification de votre abonnement." // et balise suivante
+, 'abonnement_mail_passcookie' => "
+	<br />
+	Pour modifier votre abonnement aux lettres d'information du site <strong>@nom_site_spip@</strong> (@adresse_site@), 	
+	veuillez vous rendre &agrave; l'adresse suivante :<br /><br />
+	<a href='@adresse_site@/spip.php?page=abonnement&d=@cookie@'>@adresse_site@/spip.php?page=abonnement&d=@cookie@</a><br /><br />
+	Vous pourrez alors confirmer la modification de votre abonnement.
+	<br/>" 
 , 'abonnement_presentation' => "
 	Entrez votre adresse email dans le champ ci-dessous.
 	Vous recevrez &#224; cette adresse un courrier de confirmation d&#39;inscription et un lien.
-	Ce lien vous permettra de confirmer votre abonnement aux listes de diffusion publi&#233;es ici.
+	Ce lien vous permettra de s&#233;lectionner les listes de diffusion publi&#233;es ici.
 	"
+, 'confirmation_inscription' => "Confirmation de votre inscription"
 // balise/formulaire_modif_abonnement.php
 , 'abonnement_modifie' => 'Vos modifications sont prises en compte'
 , 'abonnement_nouveau_format' => 'Votre format de r&eacute;ception est d&eacute;sormais : '
@@ -473,7 +471,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 // inc/spiplistes_pipeline_insert_head.php
 
 // formulaires, patrons, etc.
-, 'abo_1_lettre' => 'Lettre d\'information'
+, 'abo_1_lettre' => 'Liste de diffusion '
 , 'abonnement_seule_liste_dispo' => "Abonnement &agrave; la seule liste disponible "
 , 'abo_listes' => 'Abonnement'
 , 'abonnement_0' => 'Abonnement'
@@ -490,7 +488,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 	Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modification de votre abonnement.'
 , 'article_entier' => 'Lire l\'article entier'
 , 'form_forum_identifiants' => 'Confirmation'
-, 'form_forum_identifiant_confirm'=>'Votre abonnement est enregistr&eacute;, vous allez recevoir un mail de confirmation.'
+, 'form_forum_identifiant_confirm'=>'Votre inscription est enregistr&#233;e. Vous allez recevoir un mail de confirmation.'
 , 'inscription_mail_forum' => 'Voici vos identifiants pour vous connecter au site @nom_site_spip@ (@adresse_site@)'
 , 'inscription_mail_redac' => 'Voici vos identifiants pour vous connecter au site @nom_site_spip@ (@adresse_site@) 
 	et &agrave; l\'interface de r&eacute;daction (@adresse_site@/ecrire)'

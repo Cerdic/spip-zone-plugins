@@ -133,19 +133,20 @@
 	<B_listes>
 		<fieldset>
 		<legend>[(#TOTAL_BOUCLE|=={1}|?{
-			<:spiplistes:abo_1_lettre:></legend>
-			,<:spiplistes:abo_listes:></legend>})]
+			<:spiplistes:abo_1_lettre:>
+			,<:spiplistes:listes_de_diffusion_:>})] : </legend>
 	<ul>
 	<BOUCLE_listes(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}{0,(#ENV{mode_login}|?{100,0})}>
 			[(#TOTAL_BOUCLE|=={1}|?{' ',''})
 			<li>
-			<label><input type="hidden" name="list&#91;&#93;" checked="checked" value="#ID_LISTE" />
-			<span><:spiplistes:abonnement_seule_liste_dispo:>:<br /><strong>#TITRE</strong> [- <em>(#TEXTE|textebrut)</em>]</span></label></li>
+			[(#ENV{mode_modifier}|?{' ',''})
+			<label><input type="hidden" name="list&#91;&#93;" checked="checked" value="#ID_LISTE" />]
+			<span><:spiplistes:abonnement_seule_liste_dispo:>:<br /><strong>#TITRE</strong> [- <em>(#TEXTE|textebrut)</em>]</span>[(#ENV{mode_modifier}|?{' ',''})</label>]</li>
 			]
 			[(#TOTAL_BOUCLE|!={1}|?{' ',''})
 			<li>
-			<label class="block"><input type="checkbox" name="list&#91;&#93;" value="#ID_LISTE" />
-			<span>[<strong>(#TITRE)</strong>][ - <em>(#TEXTE|textebrut|couper{80})</em>]</span></label></li>]
+			[(#ENV{mode_modifier}|?{' ',''})<label class="block"><input type="checkbox" name="list&#91;&#93;" value="#ID_LISTE" />]
+			<span>[<strong>(#TITRE)</strong>][ - <em>(#TEXTE|textebrut|couper{80})</em>]</span>[(#ENV{mode_modifier}|?{' ',''})</label>]</li>]
 	</BOUCLE_listes>
 	</ul>
 	</fieldset>
@@ -164,7 +165,7 @@
 [<!--(#REM)
 
 	===============
-	FIN liste des listes publiques 
+	FIN liste des listes  
 	===============
 
 -->]
@@ -176,6 +177,7 @@
 
 -->][(#ENV{mode_login}|?{' ',''})
 				
+	[(#ENV{mode_modifier}|?{' ',''})
 	<fieldset>
 		<legend><:spiplistes:format_reception:></legend>
 		<label class="block"><input name="suppl_abo" value="html" checked="checked" type="radio" /><span><:spiplistes:html:><:spiplistes:html_description:></span></label>
@@ -191,7 +193,7 @@
 			<label><input name="desabo" id="suppl_abo_non" value="oui" type="radio" /><:spiplistes:desabonnement:></label>
 		</div>
 		]
-	</fieldset>
+	</fieldset>]
 	<p class="spip_bouton">
 		<input type="submit" name="Valider" value="<:bouton_valider:>" />
 	</p>

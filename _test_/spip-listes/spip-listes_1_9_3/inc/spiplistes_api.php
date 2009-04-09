@@ -848,10 +848,33 @@ function spiplistes_auteurs_auteur_insertq ($champs_array) {
 	return(sql_insertq('spip_auteurs', $champs_array));
 }
 
+//CP-20090409
+function spiplistes_auteurs_auteur_valider ($id_auteur, $as_redact = false) {
+	if($id_auteur = intval($id_auteur)) {
+		if(($result = sql_update(
+						"spip_auteurs_listes"
+						, array('statut' => sql_quote('valide'))
+						, "id_auteur=$id_auteur LIMIT 1"
+					)) === false) {
+			spiplistes_sqlerror_log("auteurs_auteur_valider");
+		}
+		else {
+			
+		}
+	}
+	return($result);
+}
+
+
 //CP-20080511
 // CP-20090111: utiliser l'api pour pouvoir envoyer par smtp si besoin
-function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $headers = "") {
+function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $headers = "", $format = 'texte') {
+	
 	static $opt_simuler_envoi;
+	
+	
+	
+	$charset = $GLOBALS['meta']['spiplistes_charset_envoi'];
 	if(!$opt_simuler_envoi) {
 		$opt_simuler_envoi = spiplistes_pref_lire('opt_simuler_envoi');
 	}
@@ -860,9 +883,9 @@ function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $heade
 	}
 	if(strpos($from, "<") === false) {
 		$fromname = extraire_multi($GLOBALS['meta']['nom_site']);
-		if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
+		if ($charset!=$GLOBALS['meta']['charset']){
 			include_spip('inc/charsets');
-			$fromname = unicode2charset(charset2unicode($fromname),$GLOBALS['meta']['spiplistes_charset_envoi']);
+			$fromname = unicode2charset(charset2unicode($fromname),$charset);
 		}
 	}
 	$reply_to = "no-reply".preg_replace("|.*(@[a-z.]+)|i", "$1", email_valide($from));
@@ -873,17 +896,34 @@ function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $heade
 	}
 	else {
 		include_once(_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
-		$email_a_envoyer['texte'] = new phpMail($to, $subject, ''
-			, html_entity_decode($message)
-			, $GLOBALS['meta']['spiplistes_charset_envoi']
-			);
+		
+		$email_a_envoyer = array();
+		
+		if(is_array($message))
+		{
+			if($format=='html' && isset($message[$format])) {
+				$email_a_envoyer['html'] = new phpMail($to, $subject, $message['html'], $message['texte'], $charset);
+				$email_a_envoyer['html']->From = $from ; 
+				if($fromname) $email_a_envoyer['html']->FromName = $fromname ; 
+				$email_a_envoyer['html']->AddCustomHeader("Errors-To: ".$from); 
+				$email_a_envoyer['html']->AddCustomHeader("Reply-To: ".$from); 
+				$email_a_envoyer['html']->AddCustomHeader("Return-Path: ".$from); 	
+				$email_a_envoyer['html']->SMTPKeepAlive = true;
+				$email_a_envoyer['html']->Body = $message['html']->Body;
+				$email_a_envoyer['html']->AltBody = $message['html']->AltBody;
+			}
+			$message = $message['texte']->Body;
+		}
+		$email_a_envoyer['texte'] = new phpMail($to, $subject, '', html_entity_decode($message), $charset);
 		$email_a_envoyer['texte']->From = $from ;
-		$email_a_envoyer['texte']->FromName = $fromname ;
+		if($fromname) $email_a_envoyer['html']->FromName = $fromname ; 
 		$email_a_envoyer['texte']->AddCustomHeader("Errors-To: ".$from); 
 		$email_a_envoyer['texte']->AddCustomHeader("Reply-To: ".$reply_to); 
 		$email_a_envoyer['texte']->AddCustomHeader("Return-Path: ".$from); 
 		$email_a_envoyer['texte']->SMTPKeepAlive = true;
-		$result = $email_a_envoyer['texte']->send();
+		
+		$result = $email_a_envoyer[$format]->send();
+		
 		$msg = "email from $from to $to";
 		spiplistes_log(!$result ? "error: $msg not sent" : "$msg sent");
 	}

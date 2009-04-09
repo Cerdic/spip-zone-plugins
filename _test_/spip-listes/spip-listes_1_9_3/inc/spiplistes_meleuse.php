@@ -354,8 +354,8 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 				spiplistes_log($prefix_log."nb etiquettes a traiter: $nb_destinataires", _SPIPLISTES_LOG_DEBUG);
 				if($nb_destinataires > 0) {
 
-				spiplistes_log($prefix_log."total_abos: $total_abonnes, en_cour: $nb_destinataires, limit: $limit"
-				, _SPIPLISTES_LOG_DEBUG);
+					spiplistes_log($prefix_log."total_abos: $total_abonnes, en_cour: $nb_destinataires, limit: $limit"
+						, _SPIPLISTES_LOG_DEBUG);
 
 
 					// replacer les compteurs
