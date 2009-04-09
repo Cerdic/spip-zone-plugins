@@ -12,6 +12,8 @@ function getNodeText(node){
 //GL recoller a id da URL do artigo
 //ENG get id from the article'URL
 //FR recuperer l'id de l'article dans l'URL
+// cette fonction n'est plus utilisee depuis qu'on colle l'id dans le guid du RSS
+// on la garde en reserve au cas ou...
 function extraerID(url){
 	var posicion = url.indexOf("article");
 	if (posicion != -1) {
@@ -61,12 +63,13 @@ function agregarMarcador (xmlItem, idmap, minZoom, maxZoom) {
 	var xmlLat = $("geo_lat",xmlItem);
 	var xmlLng = $("geo_long",xmlItem);
 	var xmlSon = $("enclosure",xmlItem);
+	var id = $("guid",xmlItem);
 	var marker = eval('markerManager'+idmap);
 	if ((xmlLat.length == 0) || (xmlLng.length == 0)) return;
 	else {
 		var lat = parseFloat(xmlLat.text());
 		var lng = parseFloat(xmlLng.text());
-		var id = extraerID($("link",xmlItem).text());
+		var id = parseInt(id.text());
 		var html = "<div id='window_" + id +"' class='window_content'><div id='player'></div><h3><a href='" + $("guid",xmlItem).text() + "'>" + $("title",xmlItem).text() + "</a></h3>" + $("description",xmlItem).text() + "</div>";
 		var icon = $("geo_icon",xmlItem).text();
 		var son;
