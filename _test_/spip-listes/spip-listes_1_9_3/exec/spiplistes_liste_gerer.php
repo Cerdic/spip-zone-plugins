@@ -563,7 +563,8 @@ function exec_spiplistes_liste_gerer () {
 	
 	//////////////////////////////////////////////////////
 	// Modifier le statut de la liste
-	$email_defaut = entites_html($meta['email_webmaster']);
+	//$email_defaut = entites_html($meta['email_webmaster']);
+	$email_defaut = ($m = email_valide($GLOBALS['meta']['email_defaut'])) ? $m : $GLOBALS['meta']['email_webmaster'];
 	$email_envoi = (email_valide($email_envoi)) ? $email_envoi : $email_defaut ;
 
 	$page_result .= ""
