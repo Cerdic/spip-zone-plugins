@@ -26,6 +26,7 @@ Exclut automatiquement les secteurs s&eacute;l&eacute;ctionn&eacute;s des boucle
 	
 		 
 	</description>
+    <install>exclure_sect_install.php</install>
     <prefix>
     exclure_sect
     </prefix>
