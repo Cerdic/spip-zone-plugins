@@ -11,7 +11,7 @@
 
   <param>
     <nom>preview</nom>
-    <valeur>250</valeur>
+    <valeur>280</valeur>
   </param>
   <param>
     <nom>optionnel</nom>
@@ -53,6 +53,20 @@
     <nom>BordColor</nom>
     <type>color</type>
   </variable>
+  
+  <variable>
+    <nom>TabFirst</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TabOdd</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TabEven</nom>
+    <type>color</type>
+  </variable>
+  
   <variable>
     <nom>BordLargeur</nom>
     <type>largeurbord</type>

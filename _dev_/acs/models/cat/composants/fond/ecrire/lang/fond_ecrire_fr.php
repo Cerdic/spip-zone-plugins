@@ -18,5 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'DeplierHaut' => 'Déplier haut',
 'DeplierHaut_rtl' => 'Déplier haut droite &agrave; gauche',
 'DeplierBas' => 'Déplier bas',
+'TabFirst' => 'Premi&egrave;re ligne',
+'TabOdd' => 'Ligne paire',
+'TabEven' => 'Ligne impaire',
 );
 ?>

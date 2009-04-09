@@ -18,5 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'DeplierHaut' => 'Wrap',
 'DeplierHaut_rtl' => 'Wrap, right to left',
 'DeplierBas' => 'Unwrap',
+'TabFirst' => 'First line',
+'TabOdd' => 'Odd',
+'TabEven' => 'Even',
 );
 ?>

@@ -35,3 +35,23 @@ a.refus:hover {
 div.spip_poesie {
   font-size: 140%;
 }
+
+/*************
+ * tableaux
+ *************/
+
+table.spip {
+  margin: auto;
+  margin-bottom: 1em;
+  border: 1px solid #CONFIG{acsFondBordColor};
+  border-collapse: collapse; }
+table.spip caption {
+  caption-side: top; /* bottom pas pris en compte par IE */
+  text-align: center;
+  margin: auto;
+  padding: 3px;
+  font-weight: bold; }
+table.spip tr.row_first { background: #CONFIG{acsFondTabFirst}; }
+table.spip tr.row_odd { background: #CONFIG{acsFondTabOdd}; }
+table.spip tr.row_even { background: #CONFIG{acsFondTabEven}; }
+table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: middle; }
