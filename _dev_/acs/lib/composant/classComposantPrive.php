@@ -257,7 +257,7 @@ class AdminComposant {
     $r .= '<div id="'.$varconf.'" '.(isset($this->display) ? 'style="'.$this->display.'"' : '').'>';
     if (!$preview && isset($this->preview) && ($this->preview != 'non')  && ($this->preview != 'no') && ($this->preview != 'false')) {
       $url = '../?page=wrap&c=composants/'.$this->type.'/'.$this->type.'&v='.$GLOBALS['meta']['acsDerniereModif'].'&var_mode=recalcul';
-      $r .= '<fieldset class="apercu"><legend><a href="javascript:void(0)" onclick=" findObj(\''.$this->fullname.'\').src=\''.$url.'\';" title="'._T('admin_recalculer').'">'._T('previsualisation').'</a></legend><iframe id="'.$this->fullname.'" width="100%" height="'.(is_numeric($this->preview) ? $this->preview : 80).'px" frameborder="0" style="border:0" src="'.$url.'"></iframe></fieldset>';
+      $r .= '<fieldset class="apercu"><legend><a href="javascript:void(0)" onclick=" findObj(\''.$this->fullname.'\').src=\''.$url.'\';" title="'._T('admin_recalculer').'">'._T('previsualisation').'</a></legend><iframe id="'.$this->fullname.'" width="100%" height="'.(is_numeric($this->preview) ? $this->preview : 80).'px" frameborder="0" style="border:0; background:'.$GLOBALS['meta']['acsFondColor'].'" src="'.$url.'"></iframe></fieldset>';
     }
     // Affiche les variables paramétrables du composant:
     $controls = array();
@@ -370,7 +370,22 @@ class AdminComposant {
       '</select></td></tr></table></div>';
     return $r;
   }
-
+  
+  // Choix d'une famille de fonte
+  function ctlFontFamily($nom, $style='sans-serif', $param) {
+    $var = $this->fullname.$this->nic.$nom;
+    $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
+    if ($param['label'] != 'non') $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'" class="label">'.$this->T($nom).'</label></td>';
+    $r .= '<td><select name="'.$var.'" title="'._T('acs:bordstyle').'" class="forml" style="width: auto">'.
+      '<option value="serif"'.($style=="serif" ? ' selected' : '').' title="'._T('acs:serif').'">serif</option>'.
+      '<option value="sans-serif"'.($style=="sans-serif" ? ' selected' : '').' title="'._T('acs:sans-serif').'">sans-serif</option>'.
+      '<option value="cursive"'.($style=="cursive" ? ' selected' : '').' title="'._T('acs:cursive').'">cursive</option>'.
+      '<option value="fantasy"'.($style=="fantasy" ? ' selected' : '').' title="'._T('acs:fantasy').'">fantasy</option>'.
+      '<option value="monotype"'.($style=="monotype" ? ' selected' : '').' title="'._T('acs:monotype').'">monotype</option>'.
+      '</select></td></tr></table></div>';
+    return $r;
+  }
+  
   // Choix de valeur, avec + / - (todo)
   function ctlNombre($nom, $nombre=0, $param) {
     $var = $this->fullname.$this->nic.$nom;
