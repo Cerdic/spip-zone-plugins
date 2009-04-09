@@ -16,6 +16,7 @@
 #15:28 <kent1> if strstr(0,6,'GIFGIF')
 #15:29 <kent1> gifsicle -o2 source.gif > dest.gif
 
+## doc fr: http://zzz.rezo.net/smushit-pour-reduire-le-poids-des.html
 
 $source = $argv[1];
 define('_DIR_TMP', '/tmp/');
