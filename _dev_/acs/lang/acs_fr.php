@@ -98,6 +98,7 @@ Pour configurer le site, cliquez sur l\'onglet "Composants" et personnalisez les
   'model' => 'Mod&egrave;le',
   'squelette' => 'Squelette(s)',
   'voir_pages_composants' => 'Afficher les pages des composants',
+  'voir_onglet_vars' => 'Afficher l\'onglet Variables',
 
   'acsDerniereModif' => 'Mis &agrave; jour le',
 
@@ -111,26 +112,7 @@ Pour configurer le site, cliquez sur l\'onglet "Composants" et personnalisez les
   'echec_afterUpdate' => 'Echec afterUpdate',
   'err_aucun_composant' => 'Aucun composant actif pour ',
   'spip_trop_ancien' => 'Ne fonctionne pas correctement avec spip < @min@',
-  'spip_non_supporte' => 'Non testé avec spip > @max@',
-
-/* Page publications */
-  'publications' => 'Publications',
-  'pub_description' => 'Derni&egrave;res actions des administrateurs du site.',
-  'pub_help' => 'En cas de difficulté avec l\'une de vos publications, envoyez un message à un administrateur.',
-  'publie' => 'publie',
-  'prop' => 'propose',
-  'prepa' => 'met en r&eacute;daction',
-  'refuse' => 'refuse',
-  'poubelle' => 'met  à la poubelle',
-  'modif' => 'modifie',
-
-  'spip_articles' => 'l\'article',
-  'spip_rubriques' => 'la rubrique',
-  'spip_mots' => 'le mot-cl&eacute;',
-  'spip_auteurs' => 'l\'auteur',
-  'spip_forum' => 'le message'
-// '' => '',
-
+  'spip_non_supporte' => 'Non valid&eacute; avec spip > @max@',
 
   );
   $GLOBALS[$GLOBALS['idx_lang']] = array_merge($traductions_acs, $GLOBALS[$GLOBALS['idx_lang']]);

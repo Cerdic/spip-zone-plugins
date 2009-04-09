@@ -92,6 +92,8 @@ To setup your website, click on "Components" pane and customize components, begi
   'locked_pages' => 'Protected pages',
   'model' => 'Model',
   'squelette' => 'Skeleton(s)',
+  'voir_pages_composants' => 'Display components pages',
+  'voir_onglet_vars' => 'Show Variables pane.',
 
   'acsDerniereModif' => 'Updated',
 
@@ -105,7 +107,7 @@ To setup your website, click on "Components" pane and customize components, begi
   'echec_afterUpdate' => 'afterUpdate failure',
   'err_aucun_composant' => 'No active component for ',
   'spip_trop_ancien' => 'Do not fit with spip < @min@',
-  'spip_non_supporte' => 'Not tested with spip > @max@',
+  'spip_non_supporte' => 'Not approved yet with spip > @max@',
   );
   $GLOBALS[$GLOBALS['idx_lang']] = array_merge($traductions_acs, $GLOBALS[$GLOBALS['idx_lang']]);  
   composants_ajouter_langue('ecrire');
