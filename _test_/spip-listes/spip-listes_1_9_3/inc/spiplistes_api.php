@@ -397,7 +397,7 @@ function spiplistes_listes_email_emetteur ($id_liste = 0) {
 		}
 	}
 	// si pas d'adresse moderateur, va chercher adresse par defaut
-	if($result !== false) {
+	if(!$result || empty($result)) {
 		$result = spiplistes_email_from_default();
 	}
 	return($result);

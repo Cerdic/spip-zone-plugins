@@ -212,7 +212,7 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 			//////////////////////////////
 			// email emetteur
 			$email_envoi = spiplistes_listes_email_emetteur($id_liste);
-			if(!$is_a_test && !($email_envoi)) {
+			if(!$is_a_test && !($email_envoi)) { 
 				$str_log .= " [ERROR] ID_LISTE #id_liste or from email MISSING"; 
 				spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_COURRIER_STATUT_ERREUR);
 				// quitte while() principal
