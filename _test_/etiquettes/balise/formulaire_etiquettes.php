@@ -85,7 +85,6 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 			
 				$id_objet = intval($id_objet);
 				$type_objet = strtolower($type_objet);
-				$type_objet = preg_replace(',^spip_|s$,', '', $type_objet);
 				$cle_objet = id_table_objet($type_objet);
 			
 				// il faut vérifier s'il existe bien cet objet
@@ -121,7 +120,7 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 	
 		// on ne peut pas continuer si le type choisi n'est pas relié à des mots-clés
 		// autrement dit, s'il n'y a pas de table mots_machin
-		if($type_objet and !in_array("mots_$type_objet", $tables_jointures['spip_mots']))
+		if($type_objet and !in_array('mots_'.preg_replace('/^spip_/i', '', table_objet_sql($type_objet)), $tables_jointures['spip_mots']))
 			return erreur_squelette(
 				_T('etiquettes:zbug_pas_de_table_mots',
 					array (

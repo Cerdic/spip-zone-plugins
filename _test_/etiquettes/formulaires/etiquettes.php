@@ -47,7 +47,7 @@ function formulaires_etiquettes_charger_dist($groupe, $id_groupe, $name, $aide_n
 		
 			$reponse = sql_select(
 				'mots.titre',
-				array('mots' => 'spip_mots', 'liaison' => 'spip_mots_'.$type_objet),
+				array('mots' => 'spip_mots', 'liaison' => 'spip_mots_'.preg_replace('/^spip_/i', '', table_objet_sql($type_objet))),
 				array(
 					array('=', 'mots.type', sql_quote($groupe)),
 					array('=', 'liaison.'.$cle_objet, $id_objet),
@@ -104,7 +104,14 @@ function formulaires_etiquettes_traiter_dist($groupe, $id_groupe, $name, $aide_n
 		$etiquettes = trim(_request($name));
 		// On utilise la tag-machine avec les millions de paramètres
 		include_spip('inc/tag-machine');
-		ajouter_liste_mots($etiquettes,$id_objet,$groupe,$type_objet,$cle_objet,$remplacer);
+		ajouter_liste_mots(
+			$etiquettes,
+			$id_objet,
+			$groupe,
+			preg_replace('/^spip_/i', '', table_objet_sql($type_objet)),
+			$cle_objet,
+			$remplacer
+		);
 		
 		// Si on a modifié, on renvoie la liste telle quelle, ça évite une requête pour rien
 		if ($remplacer)
