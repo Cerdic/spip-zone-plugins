@@ -40,12 +40,6 @@ function exec_acs() {
   echo "<br />";
   echo acs_gros_titre(_T('acs:assistant_configuration_squelettes'));
 
-	echo debut_onglet();
-	echo onglet(_T('acs:pages'), generer_url_ecrire('acs', 'onglet=pages&detail=2'), $onglet, 'pages', _DIR_PLUGIN_ACS."/img_pack/pages-24.gif");
-	echo onglet(_T('acs:composants'), generer_url_ecrire('acs', 'onglet=composants'), $onglet, 'composants', _DIR_PLUGIN_ACS."/img_pack/composant-24.gif");
-	echo onglet(_T('acs:adm'), generer_url_ecrire('acs', 'onglet=adm'), $onglet, 'adm', 'cadenas-24.gif');
-	echo fin_onglet();
-
   switch($onglet) {
     case 'pages':
       include_spip('inc/acs_pages');
@@ -58,13 +52,20 @@ function exec_acs() {
       $col3 = acs_pages_droite($pg);
       break;
 
+    case 'vars':
+      include_spip('inc/acs_vars');
+      $col1 = acs_vars_gauche();
+      $col2 = acs_vars();
+      $col3 = acs_vars_droite();
+      break;
+      
     case 'adm':
       include_spip('inc/acs_adm');
       $col1 = acs_adm_gauche();
       $col2 = acs_adm();
       $col3 = acs_adm_droite();
       break;
-
+      
     case 'composants':
       include_spip('inc/acs_composants');
       include_spip('lib/composant/classComposantPrive');
@@ -88,6 +89,13 @@ function exec_acs() {
       break;
   }
   $si_premiere_fois = isset($GLOBALS['meta']['ACS_ADMINS']) ? '' : avertissement_config();
+	echo debut_onglet();
+	echo onglet(_T('acs:pages'), generer_url_ecrire('acs', 'onglet=pages&detail=2'), $onglet, 'pages', _DIR_PLUGIN_ACS."/img_pack/pages-24.gif");
+	echo onglet(_T('acs:composants'), generer_url_ecrire('acs', 'onglet=composants'), $onglet, 'composants', _DIR_PLUGIN_ACS."/img_pack/composant-24.gif");
+	if (isset($GLOBALS['meta']['acsVoirOngletVars']) && ($GLOBALS['meta']['acsVoirOngletVars'] == 'on')) 
+	  echo onglet(_T('acs:variables'), generer_url_ecrire('acs', 'onglet=vars'), $onglet, 'vars', _DIR_PLUGIN_ACS."/img_pack/vars-24.gif");	
+	echo onglet(_T('acs:adm'), generer_url_ecrire('acs', 'onglet=adm'), $onglet, 'adm', 'cadenas-24.gif');
+	echo fin_onglet();
   echo acs_3colonnes($col1, $si_premiere_fois.$col2, $col3);
   echo fin_page();
 }
