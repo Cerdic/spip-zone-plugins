@@ -11,19 +11,19 @@
 				[(#REM) Liste des produits de la rubrique ]
 
 				<ul class = "ListeProduitsPetits">
-				<THELIA_PROD type="PRODUIT" rubrique="#ENV{id_rubrique}" classement="inverse" num="12">
+				<THELIA_PROD type="PRODUIT" rubrique="#ENV{id_rubrique_thelia}" classement="inverse" num="12">
 					<li class="produitPetit">
 					<form action="#URL_PAGE{panier,lang=#LANG}" method="post" id="formAjouterTHELIA-ID" class="formulaire-produit">
 					<fieldset>
 						<input type="hidden" name="thelia_action" value="ajouter" />
                 				<input type="hidden" name="ref" value="THELIA-REF" />
-                			<a href="#URL_PAGE{produit,ref=THELIA-REF&amp;id_rubrique=#ENV{id_rubrique}}">
+                			<a href="#URL_PAGE{produit,ref=THELIA-REF&amp;id_rubrique_thelia=#ENV{id_rubrique_thelia}}">
 					<THELIA_IMAGE type="IMAGE" num="1" produit="THELIA-ID" largeur="159">
  						<img src="THELIA-IMAGE"  alt="THELIA-PRODTITRE  " title="THELIA-PRODTITRE" class="contourImage" />
 					</THELIA_IMAGE>
                    			</a>
 						<div class="titreProduit">					
-							<h3><a href="#URL_PAGE{produit,ref=THELIA-REF&amp;id_rubrique=#ENV{id_rubrique}}">THELIA-TITRE</a></h3>
+							<h3><a href="#URL_PAGE{produit,ref=THELIA-REF&amp;id_rubrique_thelia=#ENV{id_rubrique_thelia}}">THELIA-TITRE</a></h3>
 						</div>
 						<T_produitreappro>
 						<THELIA_produitreappro type="PRODUIT" ref="THELIA-REF" reappro="1">
@@ -82,25 +82,25 @@
 				
 				[(#REM) Page suivante / Nombre de page / Page pr�cd�dente ]
 	
-			<THELIA_RUBRIQUE type="RUBRIQUE" id="#ENV{id_rubrique}">
+			<THELIA_RUBRIQUE type="RUBRIQUE" id="#ENV{id_rubrique_thelia}">
 				<div id="pages">
-					<THELIA_PAGEPREC type="PAGE" rubrique="#ENV{id_rubrique}" num="12" typeaff="0" avance="precedente">
-					<a href="#URL_PAGE{rubrique_thelia,page_thelia=THELIA-PAGE_PREC&amp;id_rubrique=#ENV{id_rubrique}}" class="LIEN_pages"><:spipthelia:page_precedente:></a>
+					<THELIA_PAGEPREC type="PAGE" rubrique="#ENV{id_rubrique_thelia}" num="12" typeaff="0" avance="precedente">
+					<a href="#URL_PAGE{rubrique_thelia,page_thelia=THELIA-PAGE_PREC&amp;id_rubrique_thelia=#ENV{id_rubrique_thelia}}" class="LIEN_pages"><:spipthelia:page_precedente:></a>
 					</THELIA_PAGEPREC>
 					
-					<THELIA_CPAGE type="PAGE" rubrique="#ENV{id_rubrique}"  num="12" max="10" typeaff="1">
+					<THELIA_CPAGE type="PAGE" rubrique="#ENV{id_rubrique_thelia}"  num="12" max="10" typeaff="1">
 					|
-                			<THELIA_PAGECONT_PASCOUR type="PAGE" rubrique="#ENV{id_rubrique}"  num="12" courante="0" pagecourante="THELIA-PAGE_NUM" max="10" typeaff="1"> 
-					 <a href="#URL_PAGE{rubrique_thelia,page_thelia=THELIA-PAGE_NUM}&amp;id_rubrique=#ENV{id_rubrique}" class="LIEN_pages">THELIA-PAGE_NUM</a>
+                			<THELIA_PAGECONT_PASCOUR type="PAGE" rubrique="#ENV{id_rubrique_thelia}"  num="12" courante="0" pagecourante="THELIA-PAGE_NUM" max="10" typeaff="1"> 
+					 <a href="#URL_PAGE{rubrique_thelia,page_thelia=THELIA-PAGE_NUM}&amp;id_rubrique_thelia=#ENV{id_rubrique_thelia}" class="LIEN_pages">THELIA-PAGE_NUM</a>
 					</THELIA_PAGECONT_PASCOUR> 
-				    	<THELIA_PAGECONT_COUR type="PAGE" rubrique="#ENV{id_rubrique}" num="12" courante="1" pagecourante="THELIA-PAGE_NUM" max="10" typeaff="1"> 
+				    	<THELIA_PAGECONT_COUR type="PAGE" rubrique="#ENV{id_rubrique_thelia}" num="12" courante="1" pagecourante="THELIA-PAGE_NUM" max="10" typeaff="1"> 
 					THELIA-PAGE_NUM
 					</THELIA_PAGECONT_COUR>  
 					</THELIA_CPAGE>	
 					
 					 
-					<THELIA_PAGE_SUIVANTE type="PAGE" rubrique="#ENV{id_rubrique}" num="12" max="10" typeaff="0" avance="suivante"> 
-					| <a href="#URL_PAGE{rubrique_thelia,page_thelia=THELIA-PAGE_SUIV&amp;id_rubrique=#ENV{id_rubrique}}" class="LIEN_pages"><:spipthelia:page_suivante:></a>
+					<THELIA_PAGE_SUIVANTE type="PAGE" rubrique="#ENV{id_rubrique_thelia}" num="12" max="10" typeaff="0" avance="suivante"> 
+					| <a href="#URL_PAGE{rubrique_thelia,page_thelia=THELIA-PAGE_SUIV&amp;id_rubrique_thelia=#ENV{id_rubrique_thelia}}" class="LIEN_pages"><:spipthelia:page_suivante:></a>
 					</THELIA_PAGE_SUIVANTE>
 				</div>	
 			</THELIA_RUBRIQUE>

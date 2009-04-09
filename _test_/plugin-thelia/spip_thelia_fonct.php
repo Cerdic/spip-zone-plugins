@@ -1,6 +1,6 @@
 <?php
 function spip_thelia_supprimer_balises_thelia($texte) {
-	//suppression des boucles thélia
+	//suppression des boucles thï¿½lia
 	$texte = str_replace("THELIA_", "DUMMY_", $texte);
 	//suppression des balises thelia
 	$texte = str_replace("THELIA-", "DUMMY-", $texte);
@@ -10,7 +10,7 @@ function spip_thelia_supprimer_balises_thelia($texte) {
 function spip_thelia_demarrer_session_thelia () {
 	global $page;
 	
-	//sauvegarde des variables qui vont être modifiées pour thélia
+	//sauvegarde des variables qui vont ï¿½tre modifiï¿½es pour thï¿½lia
 	$sav_page = $page;
 	$sav_session_navig_lang = $_SESSION['navig']->lang;
 	
@@ -26,7 +26,7 @@ function spip_thelia_demarrer_session_thelia () {
 }
 
 function spip_thelia_header_prive($flux) {	
-	//si une boite de sélection spip/thélia sera affichée sur la page, il faut démarrer préalablement une session thélia
+	//si une boite de sï¿½lection spip/thï¿½lia sera affichï¿½e sur la page, il faut dï¿½marrer prï¿½alablement une session thï¿½lia
 	$exec =  $_REQUEST['exec'];
 	$id_article= $_REQUEST['id_article'];
 	$id_rubrique= $_REQUEST['id_rubrique'];
@@ -41,7 +41,7 @@ function spip_thelia_header_prive($flux) {
 		}
 	}
 
-	//on restaure les variables session et request modifiées pour les plugins suivants sur affichage final
+	//on restaure les variables session et request modifiï¿½es pour les plugins suivants sur affichage final
 	$page = $sav_page;
 	$_SESSION['navig']->lang = $sav_session_navig_lang;
 	
@@ -61,7 +61,7 @@ function spip_thelia_insert_head($flux) {
 function spip_thelia_appeler_moteur_thelia($texte) {
 	include_spip('inc/charsets');
 	
-	//si pas de boucle ou de balise thélia dans la page on sort	
+	//si pas de boucle ou de balise thï¿½lia dans la page on sort	
 	if ((strpos($texte, "THELIA-") === FALSE) && (strpos($texte, "<THELIA") == FALSE))
 		return $texte;
 	
@@ -72,7 +72,7 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 		$_REQUEST[$clef]=unicode2charset(charset2unicode($valeur, 'utf-8'),'iso-8859-1');
             }
 
-	//parsonnalisation des variables thélia
+	//parsonnalisation des variables thï¿½lia
 	switch($_REQUEST['page']){
 		case 'merci' : $securise=0; $pageret=0; $reset=1; break;
 		case 'panier' : $securise=0; $pageret=1; break;
@@ -92,29 +92,31 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 		case 'virement' : $securise=1; $pageret=1; $reset=1; break;
 	}
 
-	global $page, $res;
+	global $page, $res, $id_rubrique;
 
-	//sauvegarde des variables qui vont être modifiées pour thélia
+	//sauvegarde des variables qui vont ï¿½tre modifiï¿½es pour thï¿½lia
 	$sav_page = $page;
 	$sav_session_navig_lang = $_SESSION['navig']->lang;
-
+	
 	//conflit sur la variable $page. 
+  
 	$page = new stdclass;
 	$page = "";
 
+	
 	include_once("classes/Navigation.class.php");
 	
 	ini_set('arg_separator.output', '&amp;');
 	ini_set("url_rewriter.tags","a=href,area=href,frame=src,iframe=src,input=src");
 	session_start();
 
-	//conflit entre spip et thélia sur la langue en session.
+	//conflit entre spip et thï¿½lia sur la langue en session.
 	if ($_SESSION['navig']->lang != '') {
 		$_SESSION['navig']->lang=0;
 	}
 
-	//concordance des langues entre spip et thélia 
-	//modifiez éventuellement la liste si vous avez ajouté de nouvelles langues dans Thélia
+	//concordance des langues entre spip et thï¿½lia 
+	//modifiez ï¿½ventuellement la liste si vous avez ajoutï¿½ de nouvelles langues dans Thï¿½lia
 	
 	switch($_REQUEST['lang']) {
 		case 'fr' : $_REQUEST['lang'] = 1; break;
@@ -123,33 +125,34 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 		default: $_REQUEST['lang'] = 1; break;
 	}
 	
-	//réaffectation des variables de thélia qui ont étées renommées dans les squelettes pour éviter les conflits avec spip
+	//rï¿½affectation des variables de thï¿½lia qui ont ï¿½tï¿½es renommï¿½es dans les squelettes pour ï¿½viter les conflits avec spip
 	$_REQUEST['action'] = $_REQUEST['thelia_action'];
 	$_REQUEST['page'] = $_REQUEST['page_thelia'];
+
 	if (isset($_REQUEST['thelia_article']))
 		$_REQUEST['article'] = $_REQUEST['thelia_article'];
 	
-	//on prépare le flux à envoyer au moteur thélia
+	//on prï¿½pare le flux ï¿½ envoyer au moteur thï¿½lia
 	$res = $texte;
 	$res = str_replace("THELIA-", "#", $res);
 
-	//avant d'envoyer à thélia, on convertie en iso pour thélia
+	//avant d'envoyer ï¿½ thï¿½lia, on convertie en iso pour thï¿½lia
 	$res = unicode2charset(charset2unicode($res, 'utf-8'),'iso-8859-1');
 
 	//on bloque la sortie vers le navigateur le temps d'y faire quelques substitutions	
 	ob_start();
 	
-	//si version >= 1.3.4 : plus de surcharge dans le plugin, on appelle directement le moteur de Thélia
+	//si version >= 1.3.4 : plus de surcharge dans le plugin, on appelle directement le moteur de Thï¿½lia
 	include_once("fonctions/moteur.php");
 	
 	$texte = ob_get_contents();
 	ob_end_clean();
 	$texte = remplacement_sortie_thelia($texte);
 
-	//au retour de thélia, on convertie en utf8 pour SPIP
+	//au retour de thï¿½lia, on convertie en utf8 pour SPIP
 	$texte = unicode2charset(charset2unicode($texte, 'iso-8859-1'),'utf-8');
 	
-	//on restaure les variables session et request modifiées pour les plugins suivants sur affichage final
+	//on restaure les variables session et request modifiï¿½es pour les plugins suivants sur affichage final
 	$page = $sav_page;
 	$_SESSION['navig']->lang = $sav_session_navig_lang;
 	
@@ -162,7 +165,7 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 }
 
 function remplacement_sortie_thelia($in_thelia) {
-	//renommage action en thelia_action. méthode provisoire à revoir.
+	//renommage action en thelia_action. mï¿½thode provisoire ï¿½ revoir.
 	$in_thelia = str_replace("adresse.php?action", "adresse.php?thelia_action", $in_thelia);
 	$in_thelia = str_replace("cheque.php?action", "cheque.php?thelia_action", $in_thelia);
 	$in_thelia = str_replace("commande.php?action", "commande.php?thelia_action", $in_thelia);
@@ -273,15 +276,15 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script) {
 	$out .= "<form method='POST' action='$link'>\n";
 	$out .= form_hidden($link);
 	
-	//masquer provisoirement les warning de session de Thélia en attendant une correction
-	//Thélia retourne des warning de session (headers already sent) car elle démarre trop tard, mais on ne l'utilise pas, on se contente de lister les produits
+	//masquer provisoirement les warning de session de Thï¿½lia en attendant une correction
+	//Thï¿½lia retourne des warning de session (headers already sent) car elle dï¿½marre trop tard, mais on ne l'utilise pas, on se contente de lister les produits
 	$sav_error_reporting = error_reporting(E_ERROR);
 	
 	//on bloque la sortie vers le navigateur le temps d'y faire quelques substitutions	
 	$res = recuperer_fond("fonds/produits_associes_article",array("id_article" => $id_article));
 	$res = str_replace("THELIA-", "#", $res);
 	
-	//avant d'envoyer à thélia, on convertie en iso pour thélia
+	//avant d'envoyer ï¿½ thï¿½lia, on convertie en iso pour thï¿½lia
 	$res = unicode2charset(charset2unicode($res, 'utf-8'),'iso-8859-1');
 	ob_start();
 	chdir('..');
@@ -291,11 +294,11 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script) {
 	ob_end_clean();
 	$texte = remplacement_sortie_thelia($texte);
 
-	//au retour de thélia, on convertit en utf8 pour SPIP
+	//au retour de thï¿½lia, on convertit en utf8 pour SPIP
 	if (!is_utf8($texte)) $texte = unicode2charset(charset2unicode($texte, 'iso-8859-1'),'utf-8');
 	$out .= $texte;
 	
-	//remettre le niveau d'erreur précédent
+	//remettre le niveau d'erreur prï¿½cï¿½dent
 	error_reporting($sav_error_reporting);
 	
 	$out .= "</form>\n";	
@@ -357,15 +360,15 @@ function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script) 
 	$out .= "<form method='POST' action='$link'>\n";
 	$out .= form_hidden($link);
 	
-	//masquer provisoirement les warning de session de Thélia en attendant une correction
-	//Thélia retourne des warning de session (headers already sent) car elle démarre trop tard, mais on ne l'utilise pas, on se contente de lister les produits
+	//masquer provisoirement les warning de session de Thï¿½lia en attendant une correction
+	//Thï¿½lia retourne des warning de session (headers already sent) car elle dï¿½marre trop tard, mais on ne l'utilise pas, on se contente de lister les produits
 	$sav_error_reporting = error_reporting(E_ERROR);
 	
 	//on bloque la sortie vers le navigateur le temps d'y faire quelques substitutions	
 	$res = recuperer_fond("fonds/produits_associes_rubrique",array("id_rubrique" => $id_rubrique));
 	$res = str_replace("THELIA-", "#", $res);
 	
-	//avant d'envoyer à thélia, on convertie en iso pour thélia
+	//avant d'envoyer ï¿½ thï¿½lia, on convertie en iso pour thï¿½lia
 	$res = unicode2charset(charset2unicode($res, 'utf-8'),'iso-8859-1');
 	ob_start();
 	chdir('..');
@@ -375,11 +378,11 @@ function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script) 
 	ob_end_clean();
 	$texte = remplacement_sortie_thelia($texte);
 
-	//au retour de thélia, on convertit en utf8 pour SPIP
+	//au retour de thï¿½lia, on convertit en utf8 pour SPIP
 	if (!is_utf8($texte)) $texte = unicode2charset(charset2unicode($texte, 'iso-8859-1'),'utf-8');
 	$out .= $texte;
 
-	//remettre le niveau d'erreur précédent
+	//remettre le niveau d'erreur prï¿½cï¿½dent
 	error_reporting($sav_error_reporting);
 	
 	$out .= "</form>\n";	
