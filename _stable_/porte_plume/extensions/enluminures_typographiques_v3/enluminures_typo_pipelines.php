@@ -39,7 +39,7 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 				"name"        => _T('enlumtypo:barre_intertitre3'),
 				"className"   => 'outil_intertitre3', 
 				"openWith" => "\n{3{",
-				"closeWith" => "}4}\n",
+				"closeWith" => "}3}\n",
 				"display"     => true,
 				"selectionType" => "line",
 			),

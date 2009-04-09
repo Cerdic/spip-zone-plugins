@@ -41,7 +41,7 @@ if(!function_exists('tester_variable')) {
 	}
 }
 
-function TypoEnluminee_pre_propre($texte) {
+function typoenluminee_pre_propre($texte) {
 	static $chercher_raccourcis=NULL;
 	static $remplacer_raccourcis=NULL;
 	
@@ -152,7 +152,7 @@ function TypoEnluminee_pre_propre($texte) {
 	return $texte;
 }
 
-function TypoEnluminee_post_propre($texte) {
+function typoenluminee_post_propre($texte) {
 	static $cherche1 = NULL;
 	static $remplace1 = NULL;
 
@@ -194,7 +194,7 @@ function TypoEnluminee_post_propre($texte) {
 }
 
 
-function TypoEnluminee_pre_typo($texte) {
+function typoenluminee_pre_typo($texte) {
 	static $local_barre_typo_pas_de_fausses_puces = null;
 	static $chercher_raccourcis;
 	static $remplacer_raccourcis;
@@ -214,15 +214,6 @@ function TypoEnluminee_pre_typo($texte) {
 		tester_variable('debut_italique', "<i$class_spip>");
 		tester_variable('fin_italique', '</i>');
 		
-		// Compatibilite avec les versions de SPIP < 1.9.3
-		// tester_variable('debut_italique', "<i$class_spip>") ne renvoit rien en 1.9.2 ! 
-		// Il en fixe la valeur s'il n'y en a pas deja une
-		// ==> contournement
-		if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) {
-			tester_variable('class_spip', ' class="spip"');
-			global $class_spip;
-		}
-
 		$chercher_raccourcis = array(
 			/* 9 */ 	"/(?<![{\d])[{](?![{\d])/S", // Expressions complexes car on n'a pas encore traite les titres ici
 			/* 10 */	"/(?<![}\d])[}](?![}\d])/S", // puisque italique utilisent les memes caracteres en nombre inferieur
@@ -278,7 +269,7 @@ function TypoEnluminee_pre_typo($texte) {
 	return $texte;
 }
 
-function TypoEnluminee_post_typo($texte) {
+function typoenluminee_post_typo($texte) {
 	static $cherche1;
 	static $remplace1;
 	if (!isset($GLOBALS['barre_typo_pas_de_fork_typo']) OR $GLOBALS['barre_typo_pas_de_fork_typo'] === true)
@@ -314,7 +305,7 @@ function TypoEnluminee_post_typo($texte) {
 	return $texte;
 }
 
-function TypoEnluminee_nettoyer_raccourcis_typo($texte){
+function typoenluminee_nettoyer_raccourcis_typo($texte){
 	$texte = preg_replace(',{[1-5]{,','',$texte);
 	$texte = preg_replace(',}[1-5]},','',$texte);
 	$texte = str_replace('&hellip;','...',$texte);
