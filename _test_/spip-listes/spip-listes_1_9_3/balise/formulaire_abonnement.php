@@ -129,10 +129,14 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 								);
 				
 					$objet = "[$nom_site_spip] " . _T('pass_oubli_mot');
-					$patron = 'confirmation';
+					$patron = spiplistes_patron_message();
 					$format = spiplistes_format_abo_demande($id_abo);
 					$contexte = array();
-					$email_a_envoyer = spiplistes_preparer_message ($objet, 'confirmation', $format, $contexte
+					$email_a_envoyer = spiplistes_preparer_message (
+						$objet
+						, $patron
+						, $format
+						, $contexte
 						, $abonne['email']
 						, $abonne['nom']);
 					
@@ -432,7 +436,7 @@ function spiplistes_formulaire_inscription (
 					// creation .htpasswd & LDAP si besoin systeme
 					ecrire_acces();
 					// format de reception par defaut
-					spiplistes_format_abo_modifier($id_abonne, $type_abo);
+					spiplistes_format_abo_modifier($id_abonne, $abonne['format']);
 				}
 				
 				// permettre de modifier l'abonnement. cookie de relance par mail
@@ -485,7 +489,7 @@ function spiplistes_formulaire_inscription (
 				
 				$email_a_envoyer = spiplistes_preparer_message(
 							($objet_email = "[$nom_site_spip] " . $objet_email)
-							, 'confirmation'
+							, spiplistes_patron_message()
 							, $format
 							, $contexte
 							, $abonne['email']
@@ -580,5 +584,12 @@ function spiplistes_login_from_email ($mail) {
 	return($result);
 }
 
-
+/*
+ * renvoie le nom du patron pour la composition des messages de gestion
+ * (confirmation d'abonnement, modification, etc.)
+ * @return string
+ * */
+function spiplistes_patron_message () {
+	return('standard');
+}
 ?>
