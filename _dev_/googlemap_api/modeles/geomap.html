@@ -6,9 +6,9 @@
 	var map;
 	var markerManager;
 	var url_rss = '[(#ENV{georss,''}|parametre_url{zzzzz,'',&})]';
-	#SET{latitude,#ENV{view_lat,#CONFIG{geomap_default_lat,42.94}}}
-	#SET{lonxitude,#ENV{view_long,#CONFIG{geomap_default_lonx,-8.228}}}
-	#SET{zoom,#ENV{view_zoom,#CONFIG{geomap_default_zoom,7}}}
+	#SET{latitude,#ENV{view_lat,#CONFIG{geomap/latitude,0}}}
+	#SET{lonxitude,#ENV{view_long,#CONFIG{geomap/longitude,0}}}
+	#SET{zoom,#ENV{view_zoom,#CONFIG{geomap/zoom,0}}}
 	$(document).ready(
 		function() {
     		if (GBrowserIsCompatible()) {
