@@ -4,7 +4,7 @@
 <BOUCLE_rub(ARTICLES){id_article=#ENV{id_article}}>
 [(#SET{rub2,#ID_RUBRIQUE})]
 </BOUCLE_rub>
-[(#ENV{id_secteur}|?{'',' '})
+[(#ENV{id_secteur}|non)
 	[(#SET{id_rubrique,#ENV{id_rubrique,#GET{rub2}}})]
 ]
 [(#INCLURE{fond=inc_public_map}{id_rubrique=#GET{id_rubrique}}{id_secteur}{id_mot}{id_groupe}{id_article}{id_auteur}{recherche}

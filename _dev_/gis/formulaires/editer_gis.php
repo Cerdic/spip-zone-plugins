@@ -15,6 +15,12 @@ function formulaires_editer_gis_charger_dist($id_article, $recherche='', $retour
 		$valeurs['lat'] = $row['lat'];
 		$valeurs['lonx'] = $row['lonx'];
 		$valeurs['zoom'] = $row['zoom'];
+	}else{
+		$api_carte = lire_config('gis/api_carte');
+		$valeurs['lat'] = lire_config($api_carte.'/latitude');
+		$valeurs['lonx'] = lire_config($api_carte.'/longitude');
+		$valeurs['zoom'] = lire_config($api_carte.'/zoom');
+
 	}
 	
 	return $valeurs;

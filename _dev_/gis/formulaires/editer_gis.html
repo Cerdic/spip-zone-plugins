@@ -23,7 +23,7 @@ if (GBrowserIsCompatible()) {
     var map = new GMap2(document.getElementById("formMap"));
     map.addControl(new GLargeMapControl());
     map.addControl(new GMapTypeControl());
-    map.setCenter(new GLatLng([(#ENV**{lat,#CONFIG{gis_default_lat}})],[(#ENV**{lonx,#CONFIG{gis_default_lonx}})]), [(#ENV**{zoom,#CONFIG{gis_default_zoom}})], G_NORMAL_MAP);
+    map.setCenter(new GLatLng([(#ENV**{lat})],[(#ENV**{lonx})]), [(#ENV**{zoom})], G_NORMAL_MAP);
 
     // mettre a jour les coordonnees quand on clique la carte
     GEvent.addListener(map, "click", function(overlay, point){
