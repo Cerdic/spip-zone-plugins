@@ -133,7 +133,7 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 					$format = spiplistes_format_abo_demande($id_abo);
 					$contexte = array();
 					$email_a_envoyer = spiplistes_preparer_message ($objet, 'confirmation', $format, $contexte
-						, $abonne['mail']
+						, $abonne['email']
 						, $abonne['nom']);
 					
 					if(spiplistes_envoyer_mail($email_oubli, $objet, $email_a_envoyer))
@@ -310,33 +310,26 @@ function spiplistes_formulaire_inscription (
 		// supprimer le cookie si besoin
 		if($abonne['cookie_oubli'] == $d)
 		{
-			spiplistes_auteurs_cookie_oubli_updateq($abonne['cookie_oubli'] = '', $abonne['mail']);
+			spiplistes_auteurs_cookie_oubli_updateq($abonne['cookie_oubli'] = '', $abonne['email']);
 		}
 	}
 	else // non identifie' ? gestion par cookie_oubli.
 	{
-		$texte_intro = _T('form_forum_message_auto') . "\n\n"._T('spiplistes:bonjour') . "\n";
+		$texte_intro = _T('form_forum_message_auto') . "<br /><br />"._T('spiplistes:bonjour') . "<br />\n";
 		
-		$abonne = array('mail' => email_valide($mail_inscription_));
+		$abonne = array('email' => email_valide($mail_inscription_));
 		
-		if($abonne['mail'])
+		if($abonne['email'])
 		{
-			$abonne['login'] = spiplistes_login_from_email($abonne['mail']);
-			$abonne['nom'] =
-				(($acces_membres == 'non') || empty($nom_inscription_))
-				? $abonne['login']
-				: $nom_inscription_
-				;
-				
 			// si l'abonne existe deja :
 			if($row = sql_fetch(
-				spiplistes_auteurs_auteur_select('id_auteur,mail,nom,statut', "email=".sql_quote($abonne['mail']))
+				spiplistes_auteurs_auteur_select('id_auteur,login,nom,statut', "email=".sql_quote($abonne['email']))
 				)
 			) {
 				
 				$abonne['id_auteur'] = intval($row['id_auteur']);
 				$abonne['statut'] = $row['statut'];
-				$abonne['mail'] = $row['mail'];
+				$abonne['login'] = $row['login'];
 				$abonne['nom'] = $row['nom'];
 				$abonne['format'] =
 					($f = spiplistes_format_abo_demande($abonne['id_auteur']))
@@ -360,7 +353,7 @@ function spiplistes_formulaire_inscription (
 				else {
 					// demande de modifier l'abonnement ? envoie le cookie de relance par mail
 					$cookie = creer_uniqid();
-					spiplistes_auteurs_cookie_oubli_updateq($cookie, $abonne['mail']);
+					spiplistes_auteurs_cookie_oubli_updateq($cookie, $abonne['email']);
 					
 					$objet_email = _T('spiplistes:abonnement_titre_mail');
 					
@@ -406,8 +399,15 @@ function spiplistes_formulaire_inscription (
 			// l'adresse mail n'existe pas dans la base.
 			else 
 			{
+				$abonne['login'] = spiplistes_login_from_email($abonne['email']);
+				$abonne['nom'] =
+					(($acces_membres == 'non') || empty($nom_inscription_))
+					? $abonne['login']
+					: $nom_inscription_
+					;
+				
 				// ajouter l'abonne
-				$pass = creer_pass_aleatoire(8, $abonne['mail']);
+				$pass = creer_pass_aleatoire(8, $abonne['email']);
 				$abonne['mdpass'] = md5($pass);
 				$abonne['htpass'] = generer_htpass($pass);
 				
@@ -421,7 +421,7 @@ function spiplistes_formulaire_inscription (
 				if($id_abonne = spiplistes_auteurs_auteur_insertq(
 						array(
 							'nom' => $abonne['nom']
-							, 'email' => $abonne['mail']
+							, 'email' => $abonne['email']
 							, 'login' => $abonne['login']
 							, 'pass' => $abonne['mdpass']
 							, 'statut' => $abonne['statut']
@@ -437,7 +437,7 @@ function spiplistes_formulaire_inscription (
 				
 				// permettre de modifier l'abonnement. cookie de relance par mail
 				$cookie = creer_uniqid();
-				spiplistes_auteurs_cookie_oubli_updateq($cookie, $abonne['mail']);
+				spiplistes_auteurs_cookie_oubli_updateq($cookie, $abonne['email']);
 				
 				$ml = false;
 				
@@ -488,12 +488,12 @@ function spiplistes_formulaire_inscription (
 							, 'confirmation'
 							, $format
 							, $contexte
-							, $abonne['mail']
+							, $abonne['email']
 							, $abonne['nom']
 							);
 				if(
 					spiplistes_envoyer_mail(
-						$abonne['mail']
+						$abonne['email']
 						, $objet_email
 						, $email_a_envoyer
 						, false, "", $format
@@ -555,7 +555,7 @@ function spiplistes_preparer_message ($objet, $patron, $format, $contexte, $emai
 function spiplistes_login_from_email ($mail) {
 	
 	$result = false;
-spiplistes_log("test $mail");
+
 	if($mail = email_valide($mail)) {
 		
 		// partie gauche du mail
