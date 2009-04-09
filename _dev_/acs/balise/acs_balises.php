@@ -69,8 +69,8 @@ function composants_head($type) {
       $file = find_in_path($filepath.'.html');
       if (!$file) {
         $file = find_in_path($filepath);
-        /*if (!$file)
-          continue;*/
+        if (!$file)
+          continue;
         $r .= file_get_contents($file);
       }
       else
