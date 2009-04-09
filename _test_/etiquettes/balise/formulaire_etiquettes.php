@@ -119,8 +119,7 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 		}
 	
 		// on ne peut pas continuer si le type choisi n'est pas relié à des mots-clés
-		// autrement dit, s'il n'y a pas de table mots_machin
-		if($type_objet and !in_array('mots_'.preg_replace('/^spip_/i', '', table_objet_sql($type_objet)), $tables_jointures['spip_mots']))
+		if ($type_objet and !in_array('mots', $tables_jointures[table_objet_sql($type_objet)]))
 			return erreur_squelette(
 				_T('etiquettes:zbug_pas_de_table_mots',
 					array (
