@@ -1,0 +1,45 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Banniere</nom>
+
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008-2009 - licence GPL</auteur>
+  <version>0.4</version>
+  <necessite id='acs' version='[0.4;]' />
+
+  <param>
+    <nom>preview</nom>
+    <valeur>80</valeur>
+  </param>
+
+  <variable>
+    <nom>ImageFond</nom>
+    <type>img</type>
+    <chemin>img/fond</chemin>
+  </variable>
+  <variable>
+    <nom>Image</nom>
+    <type>img</type>
+    <chemin>img/banniere</chemin>
+  </variable>
+  <variable>
+    <nom>Hauteur</nom>
+    <type>nombre</type>
+    <valeur>60</valeur>
+  </variable>
+  <variable>
+    <nom>UseLogo</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+  </variable>
+  <variable>
+    <nom>TextColor</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>FontFamily</nom>
+    <type>fontFamily</type>
+		<valeur>sans-serif</valeur>
+  </variable>
+</composant>

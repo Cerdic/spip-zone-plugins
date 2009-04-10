@@ -1,0 +1,19 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Custom</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008-2009 - licence GPL</auteur>
+  <version>0.4</version>
+  <necessite id='acs' version='[0.4;]' />
+
+  <param>
+    <nom>preview</nom>
+    <valeur>150</valeur>
+  </param>
+
+  <variable>
+    <nom>Contenu</nom>
+    <type>textarea</type>
+    <lines>5</lines>
+  </variable>
+</composant>

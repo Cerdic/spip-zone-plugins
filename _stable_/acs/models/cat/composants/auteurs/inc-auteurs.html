@@ -1,0 +1,17 @@
+#CACHE{86400}[(#REM)
+Bloc auteurs, avec pagination.
+Variables: id_auteur (EXPOSE), debut_auteurs (PAGINATION)
+]
+<B_auteurs>#SET{debut_auteurs,#EVAL{$_GET['debut_auteurs']}}
+<div class="divers auteurs">
+  <img id="img_ajax_auteurs" src="#CHEMIN{images/searching.gif}" style="visibility: hidden;" align="#LANG_RIGHT" />
+  <h2 class="menu-titre"><a href="?page=auteurs"><:info_auteurs:></a></h2>
+  #ANCRE_PAGINATION
+  <div class="menu-titre">[<p class="pagination">(#PAGINATION)</p>]</div>
+    <ul>
+    <BOUCLE_auteurs(AUTEURS) {par nom} {pagination #CONFIG{acsAuteursNb,20}}>
+      <li class="menu-item"><a href="#URL_AUTEUR[&debut_auteurs=(#GET{debut_auteurs})]"[ class="(#EXPOSE)"]>[(#NOM|couper{80})]</a></li>
+    </BOUCLE_auteurs>
+    </ul>
+</div>
+</B_auteurs>

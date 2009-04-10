@@ -1,0 +1,75 @@
+#CACHE{0}
+
+.rubriques, .divers, .breves {
+  [border-width: (#CONFIG{acsRubnavBordLargeur,#CONFIG{acsFondBordLargeur}});]
+  [border-style: (#CONFIG{acsRubnavBordStyle,#CONFIG{acsFondBordStyle}});]
+  [border-color: (#CONFIG{acsRubnavBord,#CONFIG{acsFondBordColor}});]
+  [background: (#CONFIG{acsRubnavFond});]
+}
+
+.rubriques .menu-titre, .divers .menu-titre, .breves .menu-titre {
+  [background: (#CONFIG{acsRubnavTitreFond})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsRubnavTitreFondImage})) repeat top left];]
+}
+
+.rubriques .menu-item, .divers .menu-item, .breves .menu-item {
+  [background: (#CONFIG{acsRubnavFond});]
+  border-top: 1px solid [(#CONFIG{acsRubnavSep})];
+}
+
+/* Rubriques dépliables: icônes plus */
+.deplierub {
+  width: 10px;
+  height: 10px;
+  vertical-align: middle;
+}
+
+/*
+ * Menus de navigation
+ */
+
+.mg, .breves {
+  margin: 0;
+  font-size: 0.82em;
+}
+
+.mg {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.mg .menu-titre, .breves .menu-titre {
+  text-align: center;
+  font-size: 1.03em;
+  font-weight: bold;
+}
+
+.rubriques .menu-item , .mg .menu-item {
+  [text-align: (#CONFIG{acsRubnavAlign});]
+  [background: (#CONFIG{acsRubnavFond});]
+  padding-left: 5px;
+}
+
+.rubriques .menu-item a {
+  [text-align: (#CONFIG{acsRubnavAlign});]
+  padding-left: 2px;
+}
+
+.rubriques li .menu-item {
+  [background: (#CONFIG{acsRubnavFond2});]
+  border: 1px solid [#(#CONFIG{acsRubnavSep})];
+  border-right:0;
+  padding-bottom: 2px;
+}
+
+.rubriques li li .menu-item {
+  [background: (#CONFIG{acsRubnavFond3});]
+  border: 1px solid [#(#CONFIG{acsRubnavSep})];
+  border-right:0;
+}
+
+.rubriques .menu-item .on {
+  font-weight: bold;
+  width: 100%;
+}
+
+[.rubriques .menu-item:hover { background: (#CONFIG{acsRubnavFondHover});}]

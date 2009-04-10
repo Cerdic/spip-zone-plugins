@@ -1,0 +1,61 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	ACS
+	</nom>
+	<description>
+		<multi>
+			[fr]
+ - <a href="?exec=acs&amp;detail=2">Assistant de Configuration du Site</a>
+			<br />
+			Plugins recommand&eacute;s :	<br />
+			 - crayons 1.0 (&gt;21907): &eacute;dition du contenu et du design depuis le site public.<br />
+			 - palette 1.0: choix visuel des couleurs.<br />
+			 - en option, notation 0.3: publication par notation pour le mod&egrave;le Cat.
+			 <br />
+		 [en]
+ - <a href="?exec=acs&amp;detail=2">ACS Site Configuration Wizard</a>
+		</multi>
+	</description>
+	<lien>[Documentation->http://acs.geomaticien.org]</lien>
+	<auteur>	<!-- Auteur du plugin -->
+ 	Daniel FAIVRE &copy; 2008 - <multi>[fr]licence GPL[en]GPL license</multi>
+	</auteur>
+  <version>0.4 (20090409)</version>
+	<etat>
+	dev
+	</etat>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix>
+	acs
+	</prefix>
+  <icon>
+    img_pack/acs_32x32.gif
+  </icon>
+	<fonctions>
+		acs_fonctions.php
+	</fonctions>
+	<options>
+		acs_options.php
+	</options>
+
+  <install>base/acs_install.php</install>
+
+  <pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBouton</action>
+		<inclure>inc/acs_pipeline_ecrire.php</inclure>
+	</pipeline>
+  <pipeline>
+    <nom>header_prive</nom>
+    <inclure>inc/acs_pipeline_ecrire.php</inclure>
+  </pipeline>
+  <pipeline>
+		<nom>insert_head</nom>
+		<inclure>inc/acs_pipeline_public.php</inclure>
+	</pipeline>
+	
+	<necessite id='spip' version='[1.9.2;]' />
+</plugin>
