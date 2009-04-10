@@ -33,14 +33,7 @@ function acs_pages_gauche($page) {
      	''
     ).
     _T('acs:model_actif2').
-    '<br /><br />'.
-    '<div class="onlinehelp">'.
-    acs_plieur('plieur_acs_vars_box', 'acs_vars_box', '?exec=acs&onglet=pages&show_vars=oui#acs_vars',
-    false,
-    'if (typeof pavb == \'undefined\') {AjaxSqueeze(\'?exec=acs_page_get_all_variables\',\'acs_vars\'); pavb = true;}',
-    _T('acs:toutes_les_variables').'</div>'.
-    '<br />'
-    )
+    '<br /><br />'
   );
 }
 

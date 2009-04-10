@@ -51,6 +51,6 @@ function composant_variable($v, $c, $nic=false) {
     $after = '';
   }
   $bgcolor = alterner($i++, '#eeeeee','white');
-  return '<tr style="background: '.$bgcolor.'; vertical-align: top;"><td class="verdana2"><a href="?exec=acs&onglet=composants&composant='.$c['composant'].($nic ? '&nic='.$nic : '').'" class="nompage" style="font-size: 1.2em">'.$before.$v.$after.'</a></td><td class="arial2">'.(isset($GLOBALS['meta']['acs'.$v]) ? couper(htmlspecialchars($GLOBALS['meta']['acs'.$v]), 150) : '<span style="color:darkviolet">'._T('acs:undefined').'</span>').'</td></tr>';
+  return '<tr style="background: '.$bgcolor.'; vertical-align: top;"><td class="verdana2"><a href="?exec=acs&onglet=composants&composant='.$c['composant'].($nic ? '&nic='.$nic : '').'" class="nompage" style="font-size: 1.2em">'.$before.'<span style="color:#8d8d8f">acs</span>'.$v.$after.'</a></td><td class="arial2">'.(isset($GLOBALS['meta']['acs'.$v]) ? couper(htmlspecialchars($GLOBALS['meta']['acs'.$v]), 150) : '<span style="color:darkviolet">'._T('acs:undefined').'</span>').'</td></tr>';
 }
 ?>

@@ -11,14 +11,6 @@
  * les fonctions définies ici sont disponibles dans tout l'espace ecrire
  */
 
-
-// Pour convertir les $spip_version_code en texte
-// et/ou pour afficher la liste des versions de spip testées compatibles ACS
-$GLOBALS['acs_table_versions_spip'] = array(
-  '1.9207' => '1.9.2c',
-  '1.9208' => '1.9.2d'
-);
-
 // Contrôle l'accès aux pages de configuration, dont celles déclarées dans $GLOBALS['ACS_ACCES'] (acs_options)
 // et celles déclarées dans $GLOBALS['meta']['acsCadenasse'] (inc/acs_adm)
 if (_request('exec'))

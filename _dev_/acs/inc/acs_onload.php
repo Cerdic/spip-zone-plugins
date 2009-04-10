@@ -20,8 +20,6 @@ define('_DIR_ACS', _DIR_PLUGINS.acs_get_from_active_plugin('ACS', 'dir').'/'); /
 // Versions - Lues dans la variable meta que spip a écrit
 define('ACS_VERSION', preg_replace('/([^\s]+).*/', '\1', acs_get_from_active_plugin('ACS', 'version')));
 define('ACS_RELEASE', preg_replace('/.*\s\((.*)\)/', '\1', acs_get_from_active_plugin('ACS', 'version')));
-define('ACS_SPIP_CODE_MIN', 1.9207); // Le $spip_version_code de ecrire/inc_versions.php
-define('ACS_SPIP_CODE_MAX', 1.9208); // Le $spip_version_code de ecrire/inc_versions.php
 
 // Définition du dossier global des squelettes actifs d'ACS (avec override)
 // Global active ACS skeletons directory definition (with override)
