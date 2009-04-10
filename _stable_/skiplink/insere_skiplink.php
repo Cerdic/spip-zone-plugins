@@ -16,9 +16,10 @@ function skiplink_affichage_final(&$page) {
 	if ($regs)
 		$page = substr_replace($page, $raccourcis, (strpos($page, $regs[0]) + strlen($regs[0])), 0);
 	$remonter = recuperer_fond('remonter', array('lang'=>$GLOBALS['spip_lang']));
+	$ancre_basse = recuperer_fond('ancre_basse', array('lang'=>$GLOBALS['spip_lang']));
 	preg_match(',<\/body\b.*?>,i', $page, $regs);
 	if ($regs)
-		$page = substr_replace($page, $remonter, strpos($page, $regs[0]), 0);
+		$page = substr_replace($page, $ancre_basse, strpos($page, $regs[0]), 0);
 
 	return $page;
 }
