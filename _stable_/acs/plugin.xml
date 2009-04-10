@@ -21,9 +21,7 @@
  	Daniel FAIVRE &copy; 2008 - <multi>[fr]licence GPL[en]GPL license</multi>
 	</auteur>
   <version>0.4 (20090409)</version>
-	<etat>
-	dev
-	</etat>
+	<etat>stable</etat>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
 	ce parametre est obligatoire et doit etre non vide
