@@ -551,38 +551,7 @@ function spiplistes_preparer_message ($objet, $patron, $format, $contexte, $emai
 	return($email_a_envoyer);
 }
 
-/*
- * Creation du login a partir de l email donne'
- * @return string or false if error
- * @param $mail string
- */
-function spiplistes_login_from_email ($mail) {
-	
-	$result = false;
 
-	if($mail = email_valide($mail)) {
-		
-		// partie gauche du mail
-		$left = substr($mail, 0, strpos($mail, "@"));
-		
-		// demande la liste des logins pour assurer unicite
-		$sql_result = sql_select('login', 'spip_auteurs');
-		$logins_base = array();
-		while($row = sql_fetch($sql_result)) {
-			$logins_base[] = $row['login'];
-		}
-		// creation du login
-		for ($ii = 0; $ii < _SPIPLISTES_MAX_LOGIN_NN; $ii++) {
-			$login = $left . (($ii > 0) ? $ii : "");
-			if(!in_array($login, $logins_base))
-			{
-				$result = $login;
-				break;
-			}
-		}	
-	}
-	return($result);
-}
 
 /*
  * renvoie le nom du patron pour la composition des messages de gestion

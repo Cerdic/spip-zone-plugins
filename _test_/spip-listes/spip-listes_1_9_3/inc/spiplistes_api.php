@@ -938,6 +938,39 @@ function spiplistes_listes_statuts_periodiques () {
 	return($s);
 }
 
+/*
+ * Creation du login a partir de l email donne'
+ * @return string or false if error
+ * @param $mail string
+ */
+function spiplistes_login_from_email ($mail) {
+	
+	$result = false;
+
+	if($mail = email_valide($mail)) {
+		
+		// partie gauche du mail
+		$left = substr($mail, 0, strpos($mail, "@"));
+		
+		// demande la liste des logins pour assurer unicite
+		$sql_result = sql_select('login', 'spip_auteurs');
+		$logins_base = array();
+		while($row = sql_fetch($sql_result)) {
+			$logins_base[] = $row['login'];
+		}
+		// creation du login
+		for ($ii = 0; $ii < _SPIPLISTES_MAX_LOGIN_NN; $ii++) {
+			$login = $left . (($ii > 0) ? $ii : "");
+			if(!in_array($login, $logins_base))
+			{
+				$result = $login;
+				break;
+			}
+		}	
+	}
+	return($result);
+}
+
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email pour SPIP. http://bloog.net/spip-listes                                      */

@@ -40,7 +40,7 @@ function exec_spiplistes_import_export(){
 
 	// initialise les variables postées par le formulaire
 	foreach(array(
-		'btn_valider_import', 'abos_liste', 'format_abo'	// retour import
+		'btn_valider_import', 'abos_liste', 'format_abo', 'forcer_abo'	// retour import
 		, 'btn_valider_export', 'export_id' // retour export
 		, 'separateur', 'exporter_statut_auteur'
 		) as $key) {
@@ -194,8 +194,10 @@ function exec_spiplistes_import_export(){
 					, $fichier_import['name'], $abos_liste, $format_abo, $separateur
 					, $flag_admin
 					, $listes_moderees
+					, $forcer_abo
 					)
 				. fin_boite_info(true)
+				. "<br />"
 				;
 		}
 	}
@@ -287,6 +289,15 @@ function exec_spiplistes_import_export(){
 			//
 			. spiplistes_fieldset_separateur($separateur)
 			//
+			// forcer les abonnements
+			. spiplistes_fieldset_option(
+				_T('spiplistes:option_import_')
+				, 'forcer_abo'
+				, 'oui'
+				, _T('spiplistes:forcer_abos_'), ($forcer_abo == 'oui')
+				
+				)
+			//
 			. fin_cadre_relief(true)
 			. spiplistes_form_bouton_valider('btn_valider_import')
 			. spiplistes_form_fin(true)
@@ -368,6 +379,16 @@ function spiplistes_fieldset_separateur ($sep)  {
 			, _T('spiplistes:separateur_semicolon'), !$checked, true, false)
 		. "</fieldset>\n"
 		);
-	}
+}
 
+function spiplistes_fieldset_option ($legend, $name, $value, $label, $checked = false)  {
+	
+	$result = "<fieldset class='verdana2'>"
+		. "<legend>" . $legend . " : </legend>"
+		. spiplistes_form_input_checkbox ($name, $value, $label, $checked, true, false)
+		. "</fieldset>\n"
+		;
+	
+	return($result);
+}
 ?>

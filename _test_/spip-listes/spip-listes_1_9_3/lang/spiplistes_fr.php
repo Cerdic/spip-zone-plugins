@@ -71,7 +71,9 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'mettre_a_jour' => '<h3>SPIP-listes va mettre &agrave; jour</h3>'
 , 'regulariser' => 'regulariser les desabonnes avec listes...<br />'
 , 'Supprimer_ce_contact' => "Supprimer ce contact"
-, 'abonne_listes' => 'Ce contact est abonn&eacute; aux listes suivantes'
+, 'abonne_listes' => "Ce contact est abonn&eacute; aux listes suivantes"
+, 'n_duplicata_mail' => "@n@ duplicata(s)"
+, 'n_incorrect_mail' => "@n@ incorrect(s)"
 
 // exec/spiplistes_abonnes_tous.php
 , 'repartition_abonnes' => "R&eacute;partition des abonn&eacute;s"
@@ -253,6 +255,11 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 	qui ne comporte qu\'une adresse e-mail par ligne</strong></p>'
 , 'importer_preciser' => '<p>Pr&eacute;cisez les listes et le format correspondant &agrave; votre import d\'abonn&eacute;s</p>'
 , 'prochain_envoi_prevu' => 'Prochain envoi pr&eacute;vu' // + gerer
+, 'option_import_' => "Option d'importation "
+, 'forcer_abos_' => "Forcer les abonnements (si l&#39;adresse mail existe dans la base, forcer l&#39;abonnement
+	pour la s&#233;lection, pour cet abonn&#233;)."
+, 'erreur_import_base' => "Erreur importation. Data incorrect ou erreur base SQL."
+, 'erreur_n_fois' => "(erreur rencontree @n@ fois)"
 
 // exec/spiplistes_liste_edit.php
 , 'texte_dinsctription_' => "Texte d'inscription : "
@@ -582,10 +589,12 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'trieuse_suspendue_info' => "Le traitement des listes de diffusion programm&eacute;es est suspendu."
 , 'Trieuse_reactivee' => "Trieuse r&eacute;activ&eacute;e"
 
-// mots 
+// mots
+, 'ajout' => "Ajout"
 , 'aucun' => "aucun"
 , 'Configuration' => 'Configuration'
 , 'courriers' => 'Courriers'
+, 'creation' => "Cr&#233;ation"
 , '_de_' => " de "
 , 'email' => 'E-mail'
 , 'format' => 'Format'
