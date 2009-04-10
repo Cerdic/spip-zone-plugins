@@ -56,4 +56,6 @@
 		<nom>insert_head</nom>
 		<inclure>inc/acs_pipeline_public.php</inclure>
 	</pipeline>
+	
+	<necessite id='spip' version='[1.9.2;]' />
 </plugin>

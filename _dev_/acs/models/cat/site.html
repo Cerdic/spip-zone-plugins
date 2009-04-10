@@ -20,11 +20,12 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 <div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
   <INCLURE{fond=composants/onglets/onglets}{current=sites}{env=#ENV}>
   <div id="onglet">
+    <span id="hierarchie" style="float: left"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[ &gt; <a href="#URL_SITE" title="[(#DESCRIPTIF|textebrut)]" class="spip_out" target="_new">(#NOM_SITE)</a>]</span>
 	  <div class="cartouche">
       [(#LOGO_SITE|left)]
-      <h1 class="#EDIT{nom_site} titre" style="clear:both;"><a href="#URL_SITE" title="[(#DESCRIPTIF)]" class="spip_out" target="_new">#NOM_SITE</a></h1>
-      [<p class="#EDIT{url_site} soustitre"><a href="#URL_SITE" title="[(#DESCRIPTIF)]" class="spip_out" target="_new">(#URL_SITE)</a></p>]
-      [(#DESCRIPTIF|justifier)]
+      <h1 class="#EDIT{nom_site} titre" style="clear:both;"><a href="#URL_SITE" title="[(#DESCRIPTIF|textebrut)]" class="spip_out" target="_new">#NOM_SITE</a></h1>
+      [<p class="#EDIT{url_site} soustitre"><a href="#URL_SITE" title="[(#DESCRIPTIF|textebrut)]" class="spip_out" target="_new">(#URL_SITE)</a></p>]
+      [<div class="texte #EDIT{descriptif}">(#DESCRIPTIF|justifier)</a>]
       
             [(#REM) Articles issus de la syndication ]
       <B_articles>
@@ -32,7 +33,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
         #ANCRE_PAGINATION
         <h2 class="invisible"><:articles:></h2>
         <ul>
-          <BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {pagination 5} {lang=#LANG}>
+          <BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {pagination 5}>
           <li>
             <h3 class="titre"><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></h3>
             [<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
