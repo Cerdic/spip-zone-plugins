@@ -21,7 +21,7 @@ function Fulltext_index($table, $champs, $nom=null) {
 	$desc = $trouver_table(table_objet($table));
 
 	foreach ($champs as $i=>$f) {
-		if (preg_match(',^(tiny|long)?text\s,i', $desc['field'][$f]))
+		if (preg_match(',^(tiny|long|medium)?text\s,i', $desc['field'][$f]))
 			$champs[$i] = "`$f`";
 		else
 			unset($champs[$i]);
