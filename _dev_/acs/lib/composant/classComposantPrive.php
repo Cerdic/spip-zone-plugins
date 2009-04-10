@@ -54,15 +54,19 @@ class AdminComposant {
 
     // Lit les paramètres de configuration du composant
     $config = spip_xml_load($this->rootDir.'/ecrire/composant.xml');
-
     // Affecte ses paramètres de configuration à l'objet Composant
     $c = $config['composant'][0];
     $this->nom = $c['nom'][0];
     $this->version = $c['version'][0];
-    $this->version_acs_min = $c['version_acs_min'][0];
-    $this->version_acs_max = $c['version_acs_max'][0];
-    $this->version_spip_min = $c['version_spip_min'][0];
-    $this->version_spip_max = $c['version_spip_max'][0];
+    
+    // Lit les dépendances (necessite)
+    $this->necessite = array();
+    if (spip_xml_match_nodes(',^necessite,',$c,$needs)){
+    foreach(array_keys($c) as $tag){
+      list($tag,$att) = spip_xml_decompose_tag($tag);
+      if ($att) $this->necessite[] = $att;
+      }
+    }
 
     if (is_array($c['param'])) {
       //print_r($c['param']);
@@ -216,11 +220,13 @@ class AdminComposant {
             '<div class="onlinehelplayer">'.$this->get_cvars_html().'</div><br />';
     $r .= '<div id="puAjax'.$n.'" class="puAjax'.$n.'"></div>';
     $r .= '<div>'._T('version').' '.$this->type.' <b>'.(($this->version != ACS_VERSION) ? '<span class="alert">'.$this->version.'</span>' : $this->version).'</b></div>';
+    /*
     if ($spip_version_code < $this->version_spip_min)
       $r .= '<div class="alert">'._T('acs:spip_trop_ancien', array('min' => spip_version_texte($this->version_spip_min))).'</div>';
     elseif ($spip_version_code > $this->version_spip_max)
       $r .= '<div class="alert">'._T('acs:spip_non_supporte', array('max' => spip_version_texte($this->version_spip_max))).'</div>';
-      $r .= '</div>';
+*/
+    $r .= '</div>';
     return $r;
   }
 
@@ -500,14 +506,4 @@ function mkdir_recursive($pathname)
     return is_dir($pathname) || @mkdir($pathname);
 }
 
-// Convertit la version code de spip en version texte
-// Le tableau ne contient que les versions de spip compatibles ET testées avec cette version d'ACS
-function spip_version_texte($version_code) {
-  $v = $GLOBALS['acs_table_versions_spip'];
-
-  if (isset($v[$version_code]))
-    return $v[$version_code];
-  else
-    return $version_code;
-}
 ?>
