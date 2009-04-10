@@ -16,10 +16,10 @@ define('_PRIVILEGES_MYSQL_USER_BASE','Alter, Select, Insert, Update, Delete, Cre
 
 
 include_spip('inc/minipres');
-include_spip('inc/texte');
+include_spip('inc/lang');
 
 utiliser_langue_visiteur();
-$menu_langues = menu_langues('var_lang_ecrire');
+#$menu_langues = menu_langues('var_lang_ecrire');
 
 
 /* centrage...  */
