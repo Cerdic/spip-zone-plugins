@@ -211,29 +211,37 @@ function spiplistes_abonnements_listes_auteur ($id_auteur, $avec_titre = false) 
 // CP-20080324 : desabonner un id_auteur d'une id_liste
 // CP-20080508 : ou de toutes les listes si $id_liste = 'toutes'
 // CP-20090111: ou tous les abonnes si id_auteur == 'tous'
-function spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste) {
+// CP-20090410: ou une serie si array
+function spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste = false) {
 	$result = false;
-	if(($id_auteur == tous) > 0) {
-		$sql_where = array("id_auteur>0");
-		$msg1 = "ALL";
+	$msg1 = $msg2 = "";
+	$sql_where = array();
+	if($id_auteur == 'tous') {
+		$sql_where[] = "id_auteur>0";
+		$msg1 = $id_auteur;
 	}
-	else if (($id_auteur = intval($id_auteur)) > 0) {
-		$sql_where = array("id_auteur=$id_auteur");
+	else if(is_array($id_auteur)) {
+		$ii = implode(",", $id_auteur);
+		$sql_where[] = "id_auteur IN ($ii)";
+		$msg1 = "id_auteur #$ii";
+	}
+	else if(($id_auteur = intval($id_auteur)) > 0) {
+		$sql_where[] = "id_auteur=$id_auteur";
 		$msg1 = "id_auteur #$id_auteur";
 	}
-	if($sql_where) {
+	if(count($sql_where)) {
 		$sql_table = "spip_auteurs_listes";
 		if($id_liste == "toutes") {
-			$msg2 = "ALL";
+			$msg2 = " des listes";
 		} else if(($id_liste = intval($id_liste)) > 0) {
 			$sql_where[] = "id_liste=$id_liste";
-			$msg2 = "id_liste #$id_liste";
+			$msg2 = " de la liste #$id_liste";
 		}
 		if(($result = sql_delete($sql_table, $sql_where)) === false) {
 			spiplistes_sqlerror_log("abonnements_auteur_desabonner()");
 		}
 		else {
-			spiplistes_log_api("unsubscribe id_auteur #$id_auteur to $msg2");
+			spiplistes_log_api("desabonne $msg1 $msg2");
 		}
 	}
 	return($result);
@@ -248,6 +256,38 @@ function spiplistes_abonnements_supprimer ($sql_whereq) {
 //CP-20080508 : dans la table des abonnements
 function spiplistes_abonnements_compter ($sql_whereq = "") {
 	return(spiplistes_sql_compter("spip_auteurs_listes", $sql_whereq));
+}
+
+/*
+ * Compter les abonnements qui n'ont plus d'abonnes
+ * @return array id_auteur
+ */
+function spiplistes_abonnements_zombies () {
+	// SELECT id_auteur FROM spip_auteurs_listes WHERE id_auteur
+	//	IN (SELECT id_auteur FROM spip_auteurs WHERE statut='5poubelle')
+	$sql_select = "id_auteur";
+	$sql_from = "spip_auteurs";
+	$sql_where = "statut=".sql_quote('5poubelle');
+	$selection = 
+		(spiplistes_spip_est_inferieur_193())
+		? "SELECT $sql_select FROM $sql_from WHERE $sql_where"
+		: sql_select($sql_select, $sql_from, $sql_where,'','','','','',false)
+		;
+	$sql_from = "spip_auteurs_listes";
+	$sql_result = sql_select(
+		$sql_select
+		, $sql_from
+		, "$sql_select IN (".$selection.")"
+		);
+	if($sql_result === false) {
+		spiplistes_sqlerror_log("spiplistes_abonnements_zombies");
+	}
+	$result = array();
+	while($row = sql_fetch($sql_result)) {
+		$result[] = $row[$sql_select];
+	}
+	return($result);
+
 }
 
 //CP-20080520

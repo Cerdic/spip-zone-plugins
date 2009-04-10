@@ -36,6 +36,7 @@ function exec_spiplistes_maintenance () {
 		array(
 			'btn_supprimer_courriers', 'btn_reset_listes', 'btn_supprimer_listes'
 			, 'btn_supprimer_formats', 'confirmer_supprimer_formats'
+			, 'btn_nettoyer_abos', 'confirmer_nettoyer_abos'
 		)) as $key) {
 		$$key = _request($key);
 	}
@@ -143,7 +144,22 @@ function exec_spiplistes_maintenance () {
 			$msg_maintenance[] = _T('spiplistes:suppression_', $objet)." : ".$msg.$msg_end;
 			spiplistes_log("DELETE formats "._SPIPLISTES_FORMATS_ALLOWED." by ID_AUTEUR #$connect_id_auteur");
 		}
-	
+		
+		// les abonnements
+		if($btn_nettoyer_abos && $confirmer_nettoyer_abos) {
+			if($ii = spiplistes_abonnements_zombies()) {
+				sort($ii);
+				$ii = array_unique($ii);
+				$msg =
+					(spiplistes_abonnements_auteur_desabonner($ii))
+					?	$msg_ok
+					:	$msg_bad
+					;
+				$objet = array('objet' => _T('spiplistes:des_abonnements'));
+				$msg_maintenance[] = _T('spiplistes:nettoyage_', $objet)." : ".$msg.$msg_end;
+			}
+		}
+
 		// compter les listes
 		$nb_listes = spiplistes_listes_compter();
 		$nb_listes_desc = spiplistes_nb_listes_str_get ($nb_listes);
@@ -315,7 +331,8 @@ function exec_spiplistes_maintenance () {
 			. spiplistes_form_debut ($maintenance_url_action, true)
 			. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)
 			. spiplistes_form_fieldset_debut (
-				_T('spiplistes:suppression_', $objet).spiplistes_fieldset_legend_detail(_T('spiplistes:total').": $nb_abonnes_formats_desc", true)
+				_T('spiplistes:suppression_', $objet)
+					. spiplistes_fieldset_legend_detail(_T('spiplistes:total').": $nb_abonnes_formats_desc", true)
 				, true) 
 			. spiplistes_form_input_checkbox ('confirmer_supprimer_formats', 'oui', _T('spiplistes:confirmer_supprimer_formats'), false, true)
 			. spiplistes_form_fieldset_fin(true)
@@ -328,7 +345,42 @@ function exec_spiplistes_maintenance () {
 	$page_result .= ""
 		. fin_cadre_trait_couleur(true)
 		;
+
+	//////////////////////////////////////////////////////
+	// Boite maintenance des abonnements
+	$objet = array('objet' => _T('spiplistes:des_abonnements'));
+	$page_result .= ""
+		. debut_cadre_trait_couleur("administration-24.gif", true, "", _T('spiplistes:maintenance_objet', $objet))
+		;
+	$ii = spiplistes_abonnements_zombies();
+	if(($nb_abos = count($ii)) > 0) {
+		$nb_auteurs = $ii;
+		sort($nb_auteurs);
+		$nb_auteurs = count(array_unique($nb_auteurs));
+		$nb_abos = _T('spiplistes:' . (($nb_abos > 1) ? '_n_abos_' : '_1_abo_'), array('n' => $nb_abos));
+		$nb_auteurs = _T('spiplistes:' . (($nb_auteurs > 1) ? '_n_auteurs_' : '_1_auteur_'), array('n' => $nb_auteurs));
+		$page_result .= ""
+			. spiplistes_form_debut ($maintenance_url_action, true)
+			. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)
+			. spiplistes_form_fieldset_debut(
+								_T('spiplistes:nettoyage_', $objet)
+								 . spiplistes_fieldset_legend_detail(_T('spiplistes:total').": $nb_abos, $nb_auteurs", true)
+							   , true)
+			. spiplistes_form_input_checkbox ('confirmer_nettoyer_abos', 'oui'
+											  , _T('spiplistes:confirmer_nettoyer_abos'), false, true)
+			. spiplistes_form_fieldset_fin(true)
+			. spiplistes_form_bouton_valider('btn_nettoyer_abos')
+			. spiplistes_form_fin(true)
+			;
+	} else {
+		$page_result .= spiplistes_form_message(_T('spiplistes:pas_de_pb_abonnements'), true);
+	}
+	$page_result .= ""
+		. fin_cadre_trait_couleur(true)
+		;
 	
+	
+
 	// Fin de la page
 	echo($page_result);
 

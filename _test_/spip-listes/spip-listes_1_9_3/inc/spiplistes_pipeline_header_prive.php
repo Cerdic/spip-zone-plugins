@@ -76,11 +76,14 @@ function spiplistes_header_prive ($flux) {
 			case _SPIPLISTES_EXEC_LISTE_GERER:
 				$js_alert = spiplistes_texte_html_2_iso(_T('spiplistes:Attention_action_retire_invites'), $GLOBALS['meta']['charset'], true);
 				$flux .= ""
-					. "<meta id='x-spiplistes-alert' content='" . $js_alert . "' />"
-					. "<meta id='x-spiplistes-pri' name='" . _SPIPLISTES_PRIVATE_LIST . "' content='" . spiplistes_items_get_item("puce", _SPIPLISTES_PRIVATE_LIST) . "' />"
-					. "<meta id='x-spiplistes-pub' name='" . _SPIPLISTES_PUBLIC_LIST . "' content='" . spiplistes_items_get_item("puce", _SPIPLISTES_PUBLIC_LIST) . "' />"
-					. "<meta id='x-spiplistes-tra' name='" . _SPIPLISTES_TRASH_LIST . "' content='" . spiplistes_items_get_item("puce", _SPIPLISTES_TRASH_LIST) . "' />"
+					. "<meta id='x-spiplistes-alert' content='" . $js_alert . "' />\n"
+					. "<meta id='x-spiplistes-pri' name='" . _SPIPLISTES_PRIVATE_LIST . "' content='" . spiplistes_items_get_item("puce", _SPIPLISTES_PRIVATE_LIST) . "' />\n"
+					. "<meta id='x-spiplistes-pub' name='" . _SPIPLISTES_PUBLIC_LIST . "' content='" . spiplistes_items_get_item("puce", _SPIPLISTES_PUBLIC_LIST) . "' />\n"
+					. "<meta id='x-spiplistes-tra' name='" . _SPIPLISTES_TRASH_LIST . "' content='" . spiplistes_items_get_item("puce", _SPIPLISTES_TRASH_LIST) . "' />\n"
 					. "<script type=\"text/javascript\" src=\"" . $js_dir . "spiplistes_liste_gerer.js\"></script>\n"
+					. "<style type='text/css'>
+.spiplistes .supprimer_cet_abo {background-image:url(".find_in_path("images/croix-rouge.gif").")}
+</style>"
 					;
 				break;
 			case _SPIPLISTES_EXEC_ABONNES_LISTE:

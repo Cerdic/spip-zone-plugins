@@ -111,7 +111,7 @@ function spiplistes_boite_agenda_contenu ($periode, $retour, $img_pack) {
 
 	if($inventaire) {
 		$max_jour = spiplistes_boitelistes_calculer_max($inventaire);
-		$coef_graph = _SPIPLISTES_AGENDA_TABLE_HEIGHT / $max_jour;
+		$coef_graph = ($max_jour ? (_SPIPLISTES_AGENDA_TABLE_HEIGHT / $max_jour) : 0);
 		$larg_col = ceil(_SPIPLISTES_AGENDA_CADRE_WIDTH / $periode);
 		function spiplistes_redate($matches) {
 			$matches[1]++;

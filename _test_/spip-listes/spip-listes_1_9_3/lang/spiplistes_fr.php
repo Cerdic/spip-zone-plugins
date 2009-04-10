@@ -348,6 +348,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
    @objet@. L'annulation est impossible ici."
 , 'des_formats' => "des formats"
 , 'des_listes' => "des listes"
+, 'des_abonnements' => "des abonnements"
 , 'confirmer_supprimer_formats' => "Supprimer les formats de r&eacute;ception des abonn&eacute;s."
 , 'maintenance_objet' => "Maintenance @objet@"
 , 'nb_abos' => "qt."
@@ -366,6 +367,13 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'separateur_de_champ_' => "S&eacute;parateur de champ "
 , 'separateur_tabulation' => "tabulation (<code>\\t</code>)"
 , 'separateur_semicolon' => "point-virgule (<code>;</code>)"
+, 'nettoyage_' => "Nettoyage "
+, 'confirmer_nettoyer_abos' => "Confirmer le nettoyage de  la table des abonn&#233;s."
+, 'pas_de_pb_abonnements' => "Pas d&#39;erreur rencontr&#233;e sur la table des abonnements."
+, '_n_abos_' => " @n@ abonnements "
+, '_1_abo_' => " 1 abonnement "
+, '_n_auteurs_' => " @n@ auteurs "
+, '_1_auteur_' => " 1 auteur "
 
 // exec/spiplistes_menu_navigation.php
 // exec/spiplistes_voir_journal.php
