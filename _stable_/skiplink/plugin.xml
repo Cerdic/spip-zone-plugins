@@ -1,13 +1,16 @@
 <plugin>
-<nom><multi>[fr]Liens d'evitement[en]Skip Navigation Links</multi></nom>
-<icon>skiplink.png</icon>
+<nom>SkipLink</nom>
+<icon>skiplink-64.png</icon>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2009</auteur>
 <licence>GPL</licence>
 <version>1.0</version>
 <etat>stable</etat>
 <description>
-Liens facilitant la navigation dans la page : liens d'accès rapide, retour en haut de page, et leurs ancres. 
+<multi>
+[fr]Liens facilitant la navigation dans la page : liens d'accès rapide, retour en haut de page, et leurs ancres. 
 Ces liens sont indispensables pour les utilisateurs navigant au clavier ou surfant sur telephone portable.
+[en]Skip Navigation Links
+</multi>
 </description>
 <prefix>skiplink</prefix>
 <pipeline>
