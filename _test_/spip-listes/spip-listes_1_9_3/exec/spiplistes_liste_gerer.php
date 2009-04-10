@@ -407,6 +407,9 @@ function exec_spiplistes_liste_gerer () {
 //<![CDATA[
 	jQuery(document).ready(function() {
 		var alerter_modif_statut = false;
+		// [@attr] style selectors removed in jQuery 1.3 (voir http://docs.jquery.com/Selectors)
+		// rendre compatible avec anciennes versions de jQuery
+		var jqss = (jQuery.fn.jquery < '1.3') ? '@' : '';
 		$('#change_statut').change(function() {
 			switch($(this).val()) {
 				case '"._SPIPLISTES_PRIVATE_LIST."':
@@ -431,29 +434,29 @@ function exec_spiplistes_liste_gerer () {
 		$('#auto_non').change(function(){
 			$('#auto_oui_detail').toggle();
 		});
-		$('input[@name=auto_chrono]').change(function(){
+		$('input['+jqss+'name=auto_chrono]').change(function(){
 			$('#auto_weekly').attr('checked',false);
 			$('#auto_mois').attr('checked',false);
 		});
-		$('input[@name=periode]').focus(function(){
+		$('input['+jqss+'name=periode]').focus(function(){
 			$('#auto_weekly').attr('checked',false);
 			$('#auto_mois').attr('checked',false);
-			$('input[@name=auto_chrono][@value=auto_jour]').attr('checked','checked');
+			$('input['+jqss+'name=auto_chrono]['+jqss+'value=auto_jour]').attr('checked','checked');
 		});
 		$('#auto_weekly').change(function(){
-			$('input[@name=periode]').val('0');
+			$('input['+jqss+'name=periode]').val('0');
 			$('#auto_mois').attr('checked',false);
-			$('input[@name=auto_chrono][@value=auto_hebdo]').attr('checked','checked');
+			$('input['+jqss+'name=auto_chrono]['+jqss+'value=auto_hebdo]').attr('checked','checked');
 		});
 		$('#auto_mois').change(function(){
-			$('input[@name=periode]').val('0');
+			$('input['+jqss+'name=periode]').val('0');
 			$('#auto_weekly').attr('checked',false);
-			$('input[@name=auto_chrono][@value=auto_mensuel]').attr('checked','checked');
+			$('input['+jqss+'name=auto_chrono]['+jqss+'value=auto_mensuel]').attr('checked','checked');
 		});
 		/*
 		* forcer le format de reception ? 
 		*/
-		$('input[@name=forcer_abo]').click( function() { 
+		$('input['+jqss+'name=forcer_abo]').click( function() { 
 			if($(this).val() == 'aucun') {
 				$('#forcer_format').hide();
 			}
@@ -461,7 +464,7 @@ function exec_spiplistes_liste_gerer () {
 				$('#forcer_format').show();
 			}
 		});
-		$('input[@name=forcer_format_reception]').click( function() { 
+		$('input['+jqss+'name=forcer_format_reception]').click( function() { 
 			$('#forcer_format_abo').attr('checked','checked');
 		});
 		// sparadra !
