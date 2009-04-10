@@ -46,7 +46,9 @@ function spiplistes_header_prive ($flux) {
 		)
 	) {
 		
-		$flux .= "\n\n<!-- PLUGIN SPIPLISTES v.: ".spiplistes_real_version_get(_SPIPLISTES_PREFIX)." -->\n" 
+		$js_dir = _DIR_PLUGIN_SPIPLISTES . "javascript/";
+		
+		$flux .= "\n\n<!-- SPIP-Listes -->\n" 
 			. "<link rel='stylesheet' href='"._DIR_PLUGIN_SPIPLISTES."spiplistes_style_prive.css' type='text/css' media='all' />\n"
 			;
 
@@ -54,7 +56,7 @@ function spiplistes_header_prive ($flux) {
 			case _SPIPLISTES_EXEC_COURRIER_EDIT:
 			case _SPIPLISTES_EXEC_COURRIER_GERER:
 				$flux .= ""
-					. "<script type=\"text/javascript\" src=\"" ._DIR_PLUGIN_SPIPLISTES . "javascript/spiplistes_courrier_edit.js\"></script>\n"
+					. "<script type=\"text/javascript\" src=\"$js_dir/spiplistes_courrier_edit.js\"></script>\n"
 /*
  le datepicker ne sert plus dans cette version.					
 					. "<link rel='stylesheet' href='".url_absolue(find_in_path('img_pack/date_picker.css'))."' type='text/css' media='all' />\n"
@@ -70,27 +72,11 @@ function spiplistes_header_prive ($flux) {
 			case _SPIPLISTES_EXEC_COURRIERS_LISTE:
 				break;
 			case _SPIPLISTES_EXEC_CONFIGURE:
-				$flux .= "
-<!-- SpipListes JS -->
-<script type='text/JavaScript'>
-<!--
-	jQuery.fn.toggle_options = function(div_options) {
-			if($(this).attr('checked')) {
-				$(div_options).show();
-			}
-			else {
-				$(div_options).hide();
-			}
-	};
-	$(document).ready(function(){
-		$('#opt-lien-en-tete-courrier').click( function() { $(this).toggle_options('#div-lien-en-tete-courrier') } );
-		$('#opt-ajout-tampon-editeur').click( function() { $(this).toggle_options('#div-ajout-tampon-editeur') } );
-	});
-//-->
-</script>
-";
+				$flux .= "<script type=\"text/javascript\" src=\"$js_dir/spiplistes_config.js\"></script>\n";
 				break;
 			case _SPIPLISTES_EXEC_LISTE_GERER:
+				$flux .= "<script type=\"text/javascript\" src=\"$js_dir/spiplistes_liste_gerer.js\"></script>\n";
+				break;
 			case _SPIPLISTES_EXEC_ABONNES_LISTE:
 				$flux .= "
 <!-- SpipListes JS -->
@@ -118,9 +104,8 @@ function spiplistes_header_prive ($flux) {
 ";			
 				break;
 		}
-
+		$flux .= "<!-- SPIP-Listes /-->\n\n";
 	}
-	$flux .= "<!-- / SPIPLISTES -->\n\n";
 
 	return ($flux);
 }
