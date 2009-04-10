@@ -1,0 +1,68 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>NavKey</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008 - licence GPL</auteur>
+  <version>0.4</version>
+  <version_acs_min>0.4</version_acs_min>
+  <version_acs_max>0.4</version_acs_max>
+  <version_spip_min>1.9207</version_spip_min>
+  <version_spip_max>1.9208</version_spip_max>
+
+  <param>
+    <nom>optionnel</nom>
+    <valeur>no</valeur>
+  </param>
+  <param>
+    <nom>preview</nom>
+    <valeur>200</valeur>
+  </param>
+
+  <variable>
+    <nom>Fond</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Titre</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>TitreFond</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TitreFondImage</nom>
+    <type>img</type>
+    <chemin>img/trame</chemin>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>Bord</nom>
+    <type>color</type>
+    <valeur>acsFondBordColor</valeur>
+  </variable>
+  <variable>
+    <nom>Sep</nom>
+    <type>color</type>
+  </variable>  
+  <variable>
+    <nom>BordLargeur</nom>
+    <type>largeurbord</type>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>BordStyle</nom>
+    <type>stylebord</type>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>Align</nom>
+    <type>choix</type>
+    <option>center</option>
+    <option>justify</option>
+    <valeur>center</valeur>
+  </variable>
+</composant>

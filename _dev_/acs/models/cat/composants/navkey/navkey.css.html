@@ -1,0 +1,25 @@
+#CACHE{0}
+
+.navkey {
+  [border-width: (#CONFIG{acsNavkeyBordLargeur,#CONFIG{acsFondBordLargeur}});]
+  [border-style: (#CONFIG{acsNavkeyBordStyle,#CONFIG{acsFondBordStyle}});]
+  [border-color: (#CONFIG{acsNavkeyBord,#CONFIG{acsFondBordColor}});]
+  [background: (#CONFIG{acsNavkeyFond});]
+  -moz-border-radius: 5px;
+}
+
+.navkey .text {
+  text-align : #CONFIG{acsNavkeyAlign,center};
+  padding : 5px;
+  overflow: hidden;
+}
+
+.navkey .titre {
+  text-align: center;
+  font-weight: bold;[
+  background: (#CONFIG{acsNavkeyTitreFond})[ url([(#ACS_CHEMIN)]img/trame/(#CONFIG{acsNavkeyTitreFondImage})) repeat top left];][
+  border-bottom: (#CONFIG{acsNavkeySep}) [(#CONFIG{acsNavkeyBordLargeur,#CONFIG{acsFondBordLargeur}})] [(#CONFIG{acsNavkeyBordStyle,#CONFIG{acsFondBordStyle}})];]
+  -moz-border-radius: 5px;
+  -moz-border-radius-bottomleft: 0;
+  -moz-border-radius-bottomright: 0;
+}
