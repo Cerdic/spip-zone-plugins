@@ -45,7 +45,6 @@ function spiplistes_header_prive ($flux) {
 		)
 		)
 	) {
-		
 		$js_dir = _DIR_PLUGIN_SPIPLISTES . "javascript/";
 		
 		$flux .= "\n\n<!-- SPIP-Listes -->\n" 
@@ -56,7 +55,7 @@ function spiplistes_header_prive ($flux) {
 			case _SPIPLISTES_EXEC_COURRIER_EDIT:
 			case _SPIPLISTES_EXEC_COURRIER_GERER:
 				$flux .= ""
-					. "<script type=\"text/javascript\" src=\"$js_dir/spiplistes_courrier_edit.js\"></script>\n"
+					. "<script type=\"text/javascript\" src=\"" . $js_dir . "spiplistes_courrier_edit.js\"></script>\n"
 /*
  le datepicker ne sert plus dans cette version.					
 					. "<link rel='stylesheet' href='".url_absolue(find_in_path('img_pack/date_picker.css'))."' type='text/css' media='all' />\n"
@@ -72,32 +71,20 @@ function spiplistes_header_prive ($flux) {
 			case _SPIPLISTES_EXEC_COURRIERS_LISTE:
 				break;
 			case _SPIPLISTES_EXEC_CONFIGURE:
-				$flux .= "<script type=\"text/javascript\" src=\"$js_dir/spiplistes_config.js\"></script>\n";
+				$flux .= "<script type=\"text/javascript\" src=\"" . $js_dir . "spiplistes_config.js\"></script>\n";
 				break;
 			case _SPIPLISTES_EXEC_LISTE_GERER:
-				$flux .= "<script type=\"text/javascript\" src=\"$js_dir/spiplistes_liste_gerer.js\"></script>\n";
+				$js_alert = spiplistes_texte_html_2_iso(_T('spiplistes:Attention_action_retire_invites'), $GLOBALS['meta']['charset'], true);
+				$flux .= ""
+					. "<meta id='x-spiplistes-alert' content='" . $js_alert . "' />"
+					. "<meta id='x-spiplistes-pri' name='" . _SPIPLISTES_PRIVATE_LIST . "' content='" . spiplistes_items_get_item("puce", _SPIPLISTES_PRIVATE_LIST) . "' />"
+					. "<meta id='x-spiplistes-pub' name='" . _SPIPLISTES_PUBLIC_LIST . "' content='" . spiplistes_items_get_item("puce", _SPIPLISTES_PUBLIC_LIST) . "' />"
+					. "<meta id='x-spiplistes-tra' name='" . _SPIPLISTES_TRASH_LIST . "' content='" . spiplistes_items_get_item("puce", _SPIPLISTES_TRASH_LIST) . "' />"
+					. "<script type=\"text/javascript\" src=\"" . $js_dir . "spiplistes_liste_gerer.js\"></script>\n"
+					;
 				break;
 			case _SPIPLISTES_EXEC_ABONNES_LISTE:
-				$flux .= "
-<!-- SpipListes JS -->
-<script type='text/JavaScript'>
-<!--
-	$(document).ready(function(){
-		$('#btn_chercher_id').hide();
-		$('#btn_ajouter_id_abo').hide();
-		$('#btn_ajouter_id_mod').hide();
-		$('#in_cherche_auteur').click( function() {
-			$('#btn_chercher_id').show();
-		});
-		$('#sel_ajouter_id_abo').click( function() {
-			$('#btn_ajouter_id_abo').show();
-		});
-		$('#sel_ajouter_id_mod').click( function() {
-			$('#btn_ajouter_id_mod').show();
-		});
-	});
-//-->
-</script>
+				$flux .= "<script type=\"text/javascript\" src=\"" . $js_dir . "spiplistes_abonnes_tous.js\"></script>\n
 <style type='text/css'>
 .spiplistes .supprimer_cet_abo {background-image:url(".find_in_path("images/croix-rouge.gif").")}
 </style>

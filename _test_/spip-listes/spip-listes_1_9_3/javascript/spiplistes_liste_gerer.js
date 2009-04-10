@@ -12,18 +12,18 @@ jQuery(document).ready(function() {
 	var jqss = (jQuery.fn.jquery < '1.3') ? '@' : '';
 	$('#change_statut').change(function() {
 		switch($(this).val()) {
-			case '"._SPIPLISTES_PRIVATE_LIST."':
+			case jQuery('#x-spiplistes-pri').attr('name'):
 				if(!alerter_modif_statut) { 
-					alert('".spiplistes_texte_html_2_iso(_T('spiplistes:Attention_action_retire_invites'), $GLOBALS['meta']['charset'], true)."'); 
+					alert(jQuery('#x-spiplistes-alert').attr('content')); 
 					alerter_modif_statut=true; 
 				}
-				$('#img_statut').attr('src','".spiplistes_items_get_item("puce", _SPIPLISTES_PRIVATE_LIST)."');
+				$('#img_statut').attr('src',jQuery('#x-spiplistes-pri').attr('content'));
 				break;
-			case '"._SPIPLISTES_PUBLIC_LIST."':
-				$('#img_statut').attr('src','".spiplistes_items_get_item("puce", _SPIPLISTES_PUBLIC_LIST)."');
+			case jQuery('#x-spiplistes-pub').attr('name'):
+				$('#img_statut').attr('src',jQuery('#x-spiplistes-pub').attr('content'));
 				break;
-			case '"._SPIPLISTES_TRASH_LIST."':
-				$('#img_statut').attr('src','".spiplistes_items_get_item("puce", _SPIPLISTES_TRASH_LIST)."');
+			case jQuery('#x-spiplistes-tra').attr('name'):
+				$('#img_statut').attr('src',jQuery('#x-spiplistes-tra').attr('content'));
 				break;
 		}
 	});
