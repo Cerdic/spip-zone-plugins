@@ -109,7 +109,7 @@ function exec_spiplistes_import_export(){
 			$exporter_statut_auteur = ($exporter_statut_auteur == 'oui');
 			
 			$str_export = ""
-				. "# " . spiplistes_html_signature(_SPIPLISTES_PREFIX, true, false)."\n"
+				. "# " . spiplistes_html_signature(_SPIPLISTES_PREFIX, false)."\n"
 				. "# "._T('spiplistes:membres_liste')."\n"
 				. "# liste id: $export_id\n"
 				. "# ".$GLOBALS['meta']['nom_site']."\n"

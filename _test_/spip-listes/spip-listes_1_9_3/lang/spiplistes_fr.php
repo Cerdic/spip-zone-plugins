@@ -631,6 +631,8 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'texte' => 'Texte'
 , 'version' => 'version'
 
+, 'jquery_inactif' => "jQuery non d&#233;tect&#233;. Merci de l&#39;activer."
+
 ///////
 // a priori, pas|plus utilise'
 , 'supprime_contact_base' => 'Supprimer d&eacute;finitivement de la base'

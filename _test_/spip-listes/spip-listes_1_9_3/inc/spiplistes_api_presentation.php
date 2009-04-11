@@ -862,13 +862,12 @@ function spiplistes_compacter_script ($source, $format) {
 } // end spiplistes_compacter_script()
 
 /*
- * @return petite signature de plugin, du style "Dossier plugin [version]"
- * @param $prefix prefix du plugin
- * @param
- * @param $html si true, renvoyer le resultat au format html
+ * @return petite signature de plugin (version plugin, version base, version jquery)
+ * @param $prefix string prefix du plugin
+ * @param $html bool si true, renvoyer le resultat au format html
  * @param $verifier_svn si true
  */
-function spiplistes_html_signature ($prefix, $return = false, $html = true, $verifier_svn = false) {
+function spiplistes_html_signature ($prefix, $html = true, $verifier_svn = false) {
 	$info = plugin_get_infos(spiplistes_get_meta_dir($prefix));
 	$nom = typo($info['nom']);
 	$version = typo($info['version']);
@@ -889,10 +888,18 @@ function spiplistes_html_signature ($prefix, $return = false, $html = true, $ver
 		. " " . $base_version
 		;
 	if($html) {
-		$result = "<p class='verdana1 spip_xx-small' style='font-weight:bold;'>$result</p>\n";
+		$result = "<p class='verdana1 spip_xx-small' style='font-weight:bold;'>$result\n"
+		. "<script type='text/javascript'>\n"
+		. "//<![CDATA[\n"
+		. "document.write(' <span style=\'color:green\'>jQuery ' + jQuery.fn.jquery + '</span>')"
+		. "//]]>\n"
+		. "</script>\n"
+		. "<noscript>\n"
+		. "<span style='color:red'>" . _T('spiplistes:jquery_inactif') . "</span>"
+		. "</noscript>\n"
+		. "</p>\n";
 	}
-	if($return) return($result);
-	else echo($result);
+	return($result);
 } // end spiplistes_html_signature()
 
 /*
