@@ -25,6 +25,8 @@ cs_log("INIT : action_action_rapide_dist() - Une action rapide a ete demandee !"
 		$arg = _request('arg');
 	}
 
+// pour redirige_par_entete()
+include_spip('inc/headers');
 spip_log("action 'action_rapide' du Couteau suisse : $arg");
 //	cs_log($_POST, 'action POST='); cs_log($_GET, 'action GET=');
 

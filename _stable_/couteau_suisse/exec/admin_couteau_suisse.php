@@ -386,7 +386,7 @@ function cout_exec_redirige($p = '') {
 	include_spip('inc/invalideur');
 	purger_repertoire(_DIR_SKELS);
 	purger_repertoire(_DIR_CACHE);
-	if (defined('_SPIP19200')) include_spip('inc/headers');
+	include_spip('inc/headers');
 	redirige_par_entete(generer_url_ecrire(_request('exec'), $p, true));
 }
 
