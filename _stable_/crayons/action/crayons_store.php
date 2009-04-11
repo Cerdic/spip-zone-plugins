@@ -96,7 +96,7 @@ function crayons_store() {
 						// a la nouvelle valeur ? dans ce cas on procede
 						// comme si "pas de modification", sinon erreur
 						if ($md5 != md5(serialize($content))) {
-							$return['$erreur'] = "$type $id $champtable: " .
+							$return['$erreur'] = "$type $id $modele: " .
 								_U('crayons:modifie_par_ailleurs');
 						}
 					}
