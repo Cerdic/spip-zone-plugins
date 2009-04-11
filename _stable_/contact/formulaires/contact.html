@@ -29,7 +29,7 @@
 		<p class="boutons"><input type="submit" class="submit" name="confirmer" value="<:form_prop_confirmer_envoi:>" /></p>
 	</fieldset>
 	</BOUCLE_previsu>
-	#ENV{bugdemerde}
+	
 	[(#REM) Sinon, formulaire normal ]
 	<fieldset>
 		<legend><:envoyer_message:></legend>
@@ -37,7 +37,7 @@
 			<BOUCLE_choix(CONDITION){si #ENV{choix_destinataires}|non}>
 				[(#REM) Si pas de choix, le destinataire est défini automatiquement ]
 				<BOUCLE_tous(POUR){tableau #ENV{destinataire}}>
-				<input type="hidden" name="destinataire[]" value="#VALEUR" />
+				<li style="display:none;"><input type="hidden" name="destinataire[]" value="#VALEUR" /></li>
 				</BOUCLE_tous>
 			</BOUCLE_choix>
 				[(#REM) Sinon on propose le choix, en select ou en checkbox suivant l'option "type_choix" ]
