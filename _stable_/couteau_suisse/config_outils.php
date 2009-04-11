@@ -627,7 +627,7 @@ add_outil( array(
 	'id' => 'decoupe',
 	'contrib'	=> 2135,
 	'code:options' => "%%balise_decoupe%%define('_onglets_FIN', '<span class=\'_fooonglets\'></span>');\n@define('_decoupe_SEPARATEUR', '++++');
-if (isset(\$_GET['var_recherche'])) {
+if(!defined('_SPIP19300') && isset(\$_GET['var_recherche'])) {
 	include_spip('inc/headers');
 	redirige_par_entete(str_replace('var_recherche=', 'decoupe_recherche=', \$GLOBALS['REQUEST_URI']));
 }",
