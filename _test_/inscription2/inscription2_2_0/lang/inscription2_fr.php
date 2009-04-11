@@ -253,6 +253,7 @@ Si vous n\'avez pas demand&eacute; cette inscription ou si vous ne voulez plus f
 	'vos_contacts_personnels' => 'Vos contacts personnels',
 	'votre_adresse' => 'Votre adresse personnelle',
 	'votre_adresse_pro' => 'Votre adresse (professionnelle)',
+	'votre_mail' => 'Votre email :',
 	'votre_nom_complet' => 'Votre nom complet',
 	'votre_profil' => 'Votre profil',
 

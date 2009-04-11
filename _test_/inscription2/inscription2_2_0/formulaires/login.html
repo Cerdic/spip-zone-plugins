@@ -22,7 +22,7 @@
 		<span id="spip_logo_auteur">#ENV*{_logo,''}</span>
 		<ul>
 			<li class="editer_login obligatoire">
-				<label for="var_login">Votre email</label>
+				<label for="var_login"><:inscription2:votre_mail:></label>
 				<input type='text' class='text' name='var_login' id='var_login' value="[(#ENV**{var_login})]" size='40' />
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{var_login})</span>]
 			</li>
