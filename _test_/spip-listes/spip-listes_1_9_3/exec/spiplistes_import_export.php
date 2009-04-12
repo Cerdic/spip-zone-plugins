@@ -370,7 +370,7 @@ function exec_spiplistes_import_export(){
 }
 
 function spiplistes_fieldset_separateur ($sep)  {
-	$checked = ($sep==";");
+	$checked = ($sep=="\t");
 	return(""
 		. "<fieldset class='verdana2'><legend>"._T('spiplistes:separateur_de_champ_').":</legend>"
 		. spiplistes_form_input_radio('separateur', 'tab'

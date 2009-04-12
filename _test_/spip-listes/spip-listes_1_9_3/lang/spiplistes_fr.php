@@ -263,6 +263,9 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 	pour la s&#233;lection, pour cet abonn&#233;)."
 , 'erreur_import_base' => "Erreur importation. Data incorrect ou erreur base SQL."
 , 'erreur_n_fois' => "(erreur rencontree @n@ fois)"
+, 'Liste_de_destination_s' => "Liste de destination : @s@"
+, 'Listes_de_destination_s' => "Listes de destination : @s@"
+, 'pas_dimport' => "Pas d&#39;import. Soit le fichier est vide, soit toutes les adresses sont d&#233;j&#224; abonn&#233;es."
 
 // exec/spiplistes_liste_edit.php
 , 'texte_dinsctription_' => "Texte d'inscription : "
@@ -633,6 +636,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'retour_link' => 'Retour'
 , 'texte' => 'Texte'
 , 'version' => 'version'
+, 'fichier_' => "Fichier "
 
 , 'jquery_inactif' => "jQuery non d&#233;tect&#233;. Merci de l&#39;activer."
 
