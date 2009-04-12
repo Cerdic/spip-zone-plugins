@@ -1,5 +1,11 @@
 <?php
 
+// formulaires/modif_abonnement2.php
+
+// $LastChangedRevision: 27807 $
+// $LastChangedBy: paladin@quesaco.org $
+// $LastChangedDate: 2009-04-12 08:24:13 +0200 (dim., 12 avr. 2009) $
+
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('inc/spiplistes_api');
@@ -50,7 +56,7 @@ function formulaires_modif_abonnement2_charger_dist(){
 
 function formulaires_modif_abonnement2_verifier(){
 	$erreurs = array();
-	spip_log('yeenenejddddddddddddddddddddddddddddddddddddd dddddddd verifier','listes');
+	spiplistes_log('yeenenejddddddddddddddddddddddddddddddddddddd dddddddd verifier','listes');
 	return $erreurs;
 }
 

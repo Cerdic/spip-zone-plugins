@@ -13,14 +13,14 @@
 	===============
 
 -->][(#ENV*{message_formulaire})]
+
 [<!--(#REM)
 
 	===============
-	Liste des listes publiques et mensuelles
+	Liste des listes publiques
 	===============
 	
--->]
-<B_liste>
+-->]<B_liste>
 	<:spiplistes:listes_de_diffusion_:>:
 	<ul>
 	<BOUCLE_liste(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'} {id_liste=#ENV{liste}}>
@@ -29,7 +29,12 @@
 	</ul>
 </B_liste>
 
-[(#ENV*{confirm_formulaire})]
+[<!--(#REM)
+
+	===============
+	===============
+	
+-->][(#ENV*{confirm_formulaire})]
 <BOUCLE_auteur(AUTEURS){tous} {id_auteur=(#ENV{id_auteur})}>
 <p>#NOM</p>
 <p><:spiplistes:souhait_modifier_abo:></p>

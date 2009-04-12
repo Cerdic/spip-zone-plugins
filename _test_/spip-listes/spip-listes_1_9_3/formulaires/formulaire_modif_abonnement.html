@@ -17,7 +17,7 @@
 [<!--(#REM)
 
 	===============
-	Liste des listes publiques et mensuelles
+	Liste des listes publiques
 	===============
 	
 -->]<B_liste>
@@ -37,7 +37,7 @@
 -->][(#ENV*{confirm_formulaire})]
 <BOUCLE_auteur(AUTEURS){tous} {id_auteur=(#ENV{id_auteur})}>
 [(#ENV{formulaire_affiche}|?{' ',''})
-#NOM
+<p>#NOM</p>
 <p><:spiplistes:souhait_modifier_abo:></p>
 <form action="#SELF#spiplistes_formabo_a" method="post">
 	<div style="text-align:left">]
