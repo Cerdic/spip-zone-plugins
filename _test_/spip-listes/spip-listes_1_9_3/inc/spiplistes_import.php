@@ -17,6 +17,7 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 	, $forcer_abo = false
 ) {
 	$result = "";
+	$ajouter_format = false;
 	
 	if(is_readable($filename)) {
 		
@@ -42,6 +43,20 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 		
 		$flag_ajout = _T('spiplistes:ajout');
 		$flag_creation = _T('spiplistes:creation');
+		
+		if($forcer_abo) {
+			$formats = array();
+			$ajouter_format = array();
+			// charger la table des formats afin d'eviter les petites requettes
+			if(($sql_result = sql_select("id_auteur,`spip_listes_format` AS format"
+										, "spip_auteurs_elargis")) !== false) {
+				$row = sql_fetch($sql_result);
+				$formats[$row['id_auteur']] = $row['format'];
+			}
+			else {
+				spiplistes_sqlerror_log("module import (format)");
+			}
+		}
 		
 		for($jj = 0; $jj < $nb_entries; $jj++) {
 			
@@ -120,6 +135,11 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 						$id_auteur = $current_entries[$email]['id_auteur'];
 						$login = $current_entries[$email]['login'];
 						$nom = $current_entries[$email]['nom'];
+						
+						// forcer le format dans la foulee
+						if(!isset($formats[$id_auteur])) {
+							$ajouter_format[] = "(" . sql_quote($id_auteur) . "," . sql_quote($format_abo) . ")";
+						}
 					}
 					
 					$acte = ($mail_exist ? $flag_ajout : $flag_creation);
@@ -138,7 +158,7 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 						if(!empty($sql_values)) {
 							$sql_query = "INSERT IGNORE INTO spip_auteurs_listes (id_auteur,id_liste,date_inscription) 
 								VALUES ".$sql_values;
-							spiplistes_log($sql_query);
+							//spiplistes_log($sql_query);
 							if(!sql_query($sql_query)) {
 								spiplistes_sqlerror_log("module import");
 							}
@@ -155,7 +175,36 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 					}
 				}
 			}
+		} // end for
+		
+		/*
+		 // CP-20090412
+		// bout de code pour optimisation (à compléter). Ne faire qu'une requete pour l'ensemble des abos
+		// idem (à écrire) pour l'ensemble des auteurs.
+		if($ajouter_abonnements) {
+			$sql_values = "";
+			$sql_values = implode(",", $ajouter_abonnements);
+			if(!empty($sql_values))
+			{
+				if(sql_insert('spip_auteurs_listes', "(id_auteur,id_liste,date_inscription)", $sql_values) === false) {
+					spiplistes_sqlerror_log("module import ajout abos");
+				}
+			}			
 		}
+		
+		*/
+		
+		// inserer les formats des abos manquants
+		if($ajouter_format) {
+			$sql_values = implode(",", $ajouter_format);
+			if(!empty($sql_values))
+			{
+				if(sql_insert('spip_auteurs_elargis', "(id_auteur,`spip_listes_format`)", $sql_values) === false) {
+					spiplistes_sqlerror_log("module import ajout formats");
+				}
+			}
+		}
+		
 		if(!empty($result)) {
 			$result = "<ul>\n".$result."</ul>\n";
 		}
