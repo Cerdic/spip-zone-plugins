@@ -3,7 +3,7 @@
 // ACS component specific - spécifique au composant ACS
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-'breves' => 'Br&egrave;ves',
-'breves_description' => 'Activable si les br&egrave;ves de Spip sont actives.',
+'nom' => 'Br&egrave;ves',
+'description' => 'Activable si les br&egrave;ves de Spip sont actives.',
 );
 ?>
