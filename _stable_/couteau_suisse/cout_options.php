@@ -15,6 +15,8 @@ cs_log("  -- lecture metas");
 $metas_outils = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
 $metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
 
+// pour les serveurs qui aiment les virgules...
+$GLOBALS['spip_version_code'] = str_replace(',','.',$GLOBALS['spip_version_code']);
 // constantes de compatibilite
 if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) {	
 	@define('_SPIP19300', 1); @define('_SPIP19200', 1);
