@@ -33,7 +33,7 @@ spiplistes_log("balise_FORMULAIRE_ABONNEMENT()", _SPIPLISTES_LOG_DEBUG);
 
 function balise_FORMULAIRE_ABONNEMENT_stat($args, $filtres) {
 
-//spiplistes_log("balise_FORMULAIRE_ABONNEMENT_stat()", _SPIPLISTES_LOG_DEBUG);
+	//spiplistes_log("balise_FORMULAIRE_ABONNEMENT_stat()", _SPIPLISTES_LOG_DEBUG);
 
 	//if(!$args[1]) {
 		//$args[1]='formulaire_abonnement';

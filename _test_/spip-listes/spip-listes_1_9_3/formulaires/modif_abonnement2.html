@@ -1,13 +1,25 @@
-[(#REM)
-	________________________
+[<!--(#REM)
+
+// modif_abonnement2.html
+
+// $LastChangedRevision: 27704 $
+// $LastChangedBy: paladin@quesaco.org $
+// $LastChangedDate: 2009-04-07 17:12:31 +0200 (mar., 07 avr. 2009) $
+
+-->][<!--(#REM)
+
+	===============
 	Message de confirmation (si present)
-	
-][(#ENV*{message_formulaire})]
-[(#REM)
-	________________________
+	===============
+
+-->][(#ENV*{message_formulaire})]
+[<!--(#REM)
+
+	===============
 	Liste des listes publiques et mensuelles
+	===============
 	
-]
+-->]
 <B_liste>
 	<:spiplistes:listes_de_diffusion_:>:
 	<ul>
@@ -20,7 +32,7 @@
 [(#ENV*{confirm_formulaire})]
 <BOUCLE_auteur(AUTEURS){tous} {id_auteur=(#ENV{id_auteur})}>
 <p>#NOM</p>
-<p><:spiplistes:abonnement:></p>
+<p><:spiplistes:souhait_modifier_abo:></p>
 <div class="formulaire_spip formulaire_modif_abonnement2 ajax">
 	<!-- br class='spacer' / -->
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -55,11 +67,13 @@
 	[(#ENV{editable}|oui)<li class="fieldset">
 	<h3><:spiplistes:abo_1_lettre:></h3>]
 <//B_listes>
-[(#REM)
-	________________________
+[<!--(#REM)
+
+	===============
 	Modification abonnement
+	===============
 	
-][(#ENV{editable}|oui)
+-->][(#ENV{editable}|oui)
 
 			<li>
 				<p class="explications"><:spiplistes:format_de_reception:> :</p>
@@ -85,11 +99,13 @@
 	</form>
 ]
 	</div>
-[(#REM)
-	________________________
+[<!--(#REM)
+
+	===============
 	formulaire_cookie_affiche
-	
-][(#ENV{formulaire_cookie_affiche}|oui)
+	===============
+
+-->][(#ENV{formulaire_cookie_affiche}|oui)
 <fieldset> 
 	<legend><:spiplistes:abonnement_bouton:></legend>
 	<h4><:spiplistes:abonnement_change_format:></h4>

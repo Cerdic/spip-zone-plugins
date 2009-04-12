@@ -40,6 +40,9 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 	Ce lien vous permettra de s&#233;lectionner les listes de diffusion publi&#233;es ici.
 	"
 , 'confirmation_inscription' => "Confirmation de votre inscription"
+, 'souhait_modifier_abo'=>'Vous souhaitez modifier votre abonnement &agrave; la lettre d\'information'
+
+
 // balise/formulaire_modif_abonnement.php
 , 'abonnement_modifie' => 'Vos modifications sont prises en compte'
 , 'abonnement_nouveau_format' => 'Votre format de r&eacute;ception est d&eacute;sormais : '
@@ -660,7 +663,6 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'lettre_d_information' => 'Lettre d\'information'
 , 'desole' => 'D&eacute;sol&eacute;'
 , 'Historique_des_envois' => 'Historique des envois'
-, 'abonnement'=>'Vous souhaitez modifier votre abonnement &agrave; la lettre d\'information'
 , 'patron_disponibles' => 'Patrons disponibles'
 , 'liste_diff_publiques' => 'Listes de diffusion publiques<br /><i>La page du site public propose l\'inscription &agrave; ces listes.</i>'
 , 'messages_non_lus_grand' => 'Pas de nouveaux messages'

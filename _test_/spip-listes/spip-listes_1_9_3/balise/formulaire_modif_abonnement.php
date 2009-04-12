@@ -60,7 +60,7 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn ()", _SPIPLISTES_LOG_DEBU
 	
 	// 3 Cas :
 	// 1) La personne valide le formulaire de modif, traitement des donnees
-	// 2) Recuperer le cookie de relance desabonnement / afficher le forumlaire de modif
+	// 2) Recuperer le cookie de relance desabonnement / afficher le formulaire de modif
 	// 3) Envoyer par mail le cookie de relance modif abonnement
 	//presentation
 	
