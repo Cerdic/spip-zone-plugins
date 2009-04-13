@@ -9,10 +9,6 @@
 	</description>
 	<prefix>prang</prefix>
 	<pipeline>
-		<nom>declarer_tables_interfaces</nom>
-		<inclure>base/prang.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/prang.php</inclure>
 	</pipeline>
