@@ -3,7 +3,9 @@
 function prang_formulaire_charger($flux) {
 
     if ($flux['args']['form'] == 'editer_rubrique') {
-        $flux['data']['titre'] = $flux['data']['rang'].'. '.$flux['data']['titre']; 
+        if ($flux['data']['rang']) {
+            $flux['data']['titre'] = $flux['data']['rang'].'. '.$flux['data']['titre'];         
+        }
     }
     
     return $flux;
