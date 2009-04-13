@@ -70,7 +70,7 @@ function agregarMarcador (xmlItem, idmap, minZoom, maxZoom) {
 		var lat = parseFloat(xmlLat.text());
 		var lng = parseFloat(xmlLng.text());
 		var id = parseInt(id.text());
-		var html = "<div id='window_" + id +"' class='window_content'><div id='player'></div><h3><a href='" + $("guid",xmlItem).text() + "'>" + $("title",xmlItem).text() + "</a></h3>" + $("description",xmlItem).text() + "</div>";
+		var html = "<div id='window_" + id +"' class='window_content'><div id='player'></div><h3><a href='" + $("link",xmlItem).text() + "'>" + $("title",xmlItem).text() + "</a></h3>" + $("description",xmlItem).text() + "</div>";
 		var icon = $("geo_icon",xmlItem).text();
 		var son;
 		if (xmlSon.length != 0) son = xmlSon.attr("url");
