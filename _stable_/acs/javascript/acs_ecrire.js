@@ -39,11 +39,11 @@ $(document).ready(
     // Donne leur fonction onclick aux plieurs (générique)
     $(".acs_plieur").each(
       function(i, plieur) {
+        var cap = plieur.name.substr(7); //classe à plier
         if (plieur.onclick != "undefined") {
-          $(".imgon_" + plieur.name.substr(7)).attr("onclick", plieur.onclick);
+        	plieur.clic = plieur.onclick;
         }
         plieur.onclick = function(e) {
-          var cap = plieur.name.substr(7); //classe à plier
           imgp = $(".imgp_" + cap).attr("src");
           ploff = $(".imgoff_" + cap).attr("src");
           plon = $(".imgon_" + cap).attr("src");
@@ -57,8 +57,8 @@ $(document).ready(
               $(this).slideToggle("slow");
             }
           );
-          if ($(".imgon_" + cap).attr("onclick") != "undefined") {
-            $(".imgon_" + cap).trigger("onclick");
+          if (plieur.clic != "undefined") {
+            eval("{" + plieur.clic + ";onclick(e);}");
           }
           return false;
         }
