@@ -244,7 +244,12 @@ function spiplistes_sqlerror_log ($trace = "") {
 
 // CP-20090111. log pour les apis
 function spiplistes_log_api ($msg) {
-	spiplistes_log("API: $msg by id_auteur #".$GLOBALS['auteur_session']['id_auteur']);
+	static $ii;
+	if($ii === null) {
+		$ii = $GLOBALS['auteur_session']['id_auteur'];
+		$ii = $ii ? "id_auteur #".$ii : "himself";
+	};
+	spiplistes_log("API: $msg by $ii");
 	return(true);
 }
 

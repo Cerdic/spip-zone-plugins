@@ -2,6 +2,11 @@
 
 // balise/formulaire_modif_abonnement.php
 
+
+// CP-20090413: ce script ne sert plus. En SPIP 192, tout est dans formulaire_abonnement.php
+// A conserver tant que la doc n'est pas a jour
+// (supprimer la balise FORMULAIRE_MODIF_ABONNEMENT et adapter pour SPIP 2.nn)
+
 // $LastChangedRevision$
 // $LastChangedBy$
 // $LastChangedDate$
@@ -44,6 +49,7 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn ()", _SPIPLISTES_LOG_DEBU
 	$d = _request('d');
 	$list = _request('list');
 	$email_desabo = _request('email_desabo');
+	$suppl_abo = _request('suppl_abo');
 
 	$formulaire_cookie_affiche = $formulaire_affiche = $message_formulaire = $modif_affiche = $erreur = '';
 	
@@ -133,11 +139,11 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn ()", _SPIPLISTES_LOG_DEBU
 		}
 	} // end if($d)
 	
-	else if ($email_desabo)
+	else if($email_desabo)
 	{
 		// adresse email seule recue
 		// envoyer le cookie de relance modif abonnement par email
-		if (email_valide($email_desabo)) {
+		if($email_desabo = email_valide($email_desabo)) {
 			$res = sql_select(
 				"*"
 				, "spip_auteurs"
@@ -159,6 +165,7 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn ()", _SPIPLISTES_LOG_DEBU
 							$email_desabo
 							, "[$nomsite] "._T('spiplistes:abonnement_titre_mail')
 							, $message
+							, false, "", $format
 							)
 					) {
 						$erreur = _T('spiplistes:pass_recevoir_mail');
@@ -183,8 +190,9 @@ spiplistes_log("balise_FORMULAIRE_MODIF_ABONNEMENT_dyn ()", _SPIPLISTES_LOG_DEBU
 		// $message_formulaire = _T('pass_erreur_code_inconnu');
 	}
 	
-	if(!empty($message_formulaire)) $message_formulaire = "<span class='msg_formulaire'>$message_formulaire</span>";
-	
+	if(!empty($message_formulaire)) {
+		$message_formulaire = "<span class='msg_formulaire'>$message_formulaire</span>";
+	}
 	return array($formulaire, $GLOBALS['delais'],
 			array(
 				'message_formulaire' => $message_formulaire

@@ -37,6 +37,10 @@
 	font-size:90%;
 	color:#fff;
 }
+#spiplistes-formabo .message-formulaire {
+	color:black;
+	font-size:90%;
+}
 #spiplistes-formabo form .spip_bouton {
 	background-color:#cfcfcf;
 	color:red;

@@ -20,10 +20,27 @@
 -->
 ]<div style="background:#fff;color:#ccc;font-family:Tahoma,Arial,Verdana,sans-serif;font-size:100%;text-align:center;">
 <div style="width: 500px;background:#fff;color:#000;text-align:left;margin:0 auto;padding:15px;">
-	
+<div><:form_forum_message_auto:></div><br />
+
 [<h1 style="font-size:80%;border-bottom:1px solid #666;">(#ENV*{titre})</h1>]
 
+<:bonjour:>[ (#ENV{nom})],
+
+<p>[(#ENV{nouvel_inscription}|=={oui}|?{' ',''})<:spiplistes:bienvenue_sur_la_liste_:>][(#ENV{nouvel_inscription}|=={oui}|?{'',' '})<:spiplistes:vos_abos_sur_le_site_:>]<strong>#NOM_SITE_SPIP</strong></p>
+
+<p>
+[(#ENV{format}|=={non}|?{' ',''})
+<:spiplistes:vous_abonne_aucune_liste:>
+]
+[(#ENV{format}|=={non}|?{'',' '})
+<:spiplistes:votre_format_de_reception_:> : [(#ENV{format}|=={html}|?{' ',''})<:spiplistes:html_description:>][(#ENV{format}|=={texte}|?{' ',''})<:spiplistes:texte_brut:>]
+]
+</p>
+
 [<p>(#ENV*{texte})</p>]
-	
+
+[<p><:spiplistes:pour_modifier_votre_abo_:>
+<a href="#URL_SITE_SPIP/spip.php?page=abonnement&d=(#ENV{cookie_oubli})"><:spiplistes:_cliquez_lien_formulaire:></a></p>]
+
 </div>
 </div>
