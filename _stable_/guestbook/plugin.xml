@@ -6,7 +6,7 @@
 	<etat>stable</etat>
 	<description>Un Livre d'or pour votre site Spip. Ce livre d'or fonctionne avec une table &#13;
 		diff&eacute;rente des tables de SPIP, ce qui en fais un syst&egrave;me &agrave; part.</description>
-	<lien>[Documentation->http://www.spip-contrib.net/Plugin-Guestbook]</lien>
+	<lien>[Documentation->http://www.spip-contrib.net/Guestbook]</lien>
 	<prefix>guestbook</prefix>
 	<install>base/guestbook.php</install>
 	<pipeline>
