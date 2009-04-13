@@ -1,0 +1,61 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Tags</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008-2009 - licence GPL</auteur>
+  <version>0.4</version>
+	<necessite id='acs' version='[0.4;]' />
+
+  <param>
+    <nom>preview</nom>
+    <valeur>200</valeur>
+  </param>
+
+  <variable>
+    <nom>Fond</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Titre</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>TitreFond</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TitreFondImage</nom>
+    <type>img</type>
+    <chemin>img/trame</chemin>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>Bord</nom>
+    <type>color</type>
+    <valeur>acsFondBordColor</valeur>
+  </variable>
+  <variable>
+    <nom>Sep</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>BordLargeur</nom>
+    <type>largeurbord</type>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>BordStyle</nom>
+    <type>stylebord</type>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>Align</nom>
+    <type>choix</type>
+    <option>center</option>
+    <option>justify</option>
+    <valeur>center</valeur>
+  </variable>
+</composant>
