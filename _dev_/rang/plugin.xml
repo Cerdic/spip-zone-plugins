@@ -17,4 +17,16 @@
 		<inclure>base/prang.php</inclure>
 	</pipeline>
 	<install>base/prang_installer.php</install>
+ 	<pipeline>
+	    <nom>formulaire_charger</nom>
+	    <inclure>rang_pipelines.php</inclure>
+    </pipeline>	
+ 	<pipeline>
+	    <nom>formulaire_traiter</nom>
+	    <inclure>rang_pipelines.php</inclure>
+    </pipeline>	
+ 	<pipeline>
+	    <nom>formulaire_verifier</nom>
+	    <inclure>rang_pipelines.php</inclure>
+    </pipeline>	
 </plugin>
