@@ -20,6 +20,12 @@ function prang_upgrade(){
 		maj_tables('spip_articles');
 		ecrire_meta('prang_version',$current_version=$version_base,'non');
 	}
+	
+	//conversion des titres existants 
+	if ($current_version==0.01) {
+	    sql_query("UPDATE spip_articles SET rang = SUBSTRING_INDEX(titre,'.',1), titre= TRIM(SUBSTRING(titre, LOCATE('.', titre)+1)) WHERE titre REGEXP '^[0-9]+\..*$';");
+	    sql_query("UPDATE spip_rubriques SET rang = SUBSTRING_INDEX(titre,'.',1), titre= TRIM(SUBSTRING(titre, LOCATE('.', titre)+1)) WHERE titre REGEXP '^[0-9]+\..*$';");
+	}
 }
 
 function prang_vider_tables() {
