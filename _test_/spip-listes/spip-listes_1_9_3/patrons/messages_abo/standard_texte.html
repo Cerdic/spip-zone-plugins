@@ -1,0 +1,39 @@
+#CACHE{1}
+[<!--(#REM)
+
+	Squelette pour spip-listes    
+	patrons/messages/confirmation.html
+	
+	$LastChangedRevision$
+	$LastChangedBy$
+	$LastChangedDate$
+	
+*
+* Precautions:                             
+* - ne pas envoyer des gabarits de plus de 10Ko
+* - ne pas placer de balises html <html><body> ni de fermeture </body></html>
+* ils seront ajoutes automatiquement a l'envoi du mail 
+* - mettre les style  CSS directement dans les balises pour etre sur qu'ils seront interpretes (meme par les webmails)
+* - les urls et liens images seront automatiquement converties en absolues
+*  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
+*
+-->
+]<:form_forum_message_auto:>
+
+[(#ENV*{titre})
+=======================================]
+
+<:bonjour:>[ (#ENV{nom})],
+
+[(#ENV{nouvel_inscription}|=={oui}|?{' ',''})<:spiplistes:bienvenue_sur_la_liste_:>][(#ENV{nouvel_inscription}|=={oui}|?{'',' '})<:spiplistes:vos_abos_sur_le_site_:>]#NOM_SITE_SPIP
+
+[(#ENV{format}|=={non}|?{' ',''})
+<:spiplistes:vous_abonne_aucune_liste:>
+]
+[(#ENV{format}|=={non}|?{'',' '})
+<:spiplistes:votre_format_de_reception_:> : [(#ENV{format}|=={html}|?{' ',''})<:spiplistes:html_description:>][(#ENV{format}|=={texte}|?{' ',''})<:spiplistes:texte_brut:>]
+]
+[(#ENV*{texte})]
+
+[<:spiplistes:pour_modifier_votre_abo_:>, <:spiplistes:_cliquez_lien_formulaire:> :
+#URL_SITE_SPIP/spip.php?page=abonnement&d=(#ENV{cookie_oubli})]
