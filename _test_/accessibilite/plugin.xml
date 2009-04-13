@@ -20,7 +20,6 @@
 	</prefix>
 	<icon>img_pack/wcag1AAA.png
 	</icon>
-	<fonctions></fonctions>
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0.3;]" />
 </plugin>
