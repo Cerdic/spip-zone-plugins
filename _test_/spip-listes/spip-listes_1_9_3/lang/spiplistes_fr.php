@@ -27,6 +27,10 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'inscription_reponse_s' => "Vous &#234;tes abonn&#233; &#224; la liste d'information du site @s@"
 , 'inscription_reponses_s' => 'Vous &ecirc;tes abonn&eacute; aux listes d\'informations du site @s@'
 , 'vous_abonne_aucune_liste' => "Vous n'&ecirc;tes pas abonn&eacute; &agrave; une liste de diffusion"
+, 'liste_dispo_site' => "Liste de diffusion disponible sur ce site"
+, 'listes_dispos_site' => "Listes de diffusion disponibles sur ce site"
+, 'desole_pas_de_liste' => "D&#233;sol&#233;, il n&#39;y a pas de liste de diffusion disponible pour le moment."
+, 'pour_vous_abonner' => "Pour vous abonner aux listes de diffusion"
 // obsolete
 , 'abonnement_mail_passcookie' => "
 	<br />
@@ -38,7 +42,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'bienvenue_sur_la_liste_' => "Bienvenue sur les listes de diffusion du site "
 , 'vos_abos_sur_le_site_' => "Vos abonnements sur le site "
 , 'votre_format_de_reception_' => "Votre format de r&#233;ception "
-, '_cliquez_lien_formulaire' => "cliquez sur ce lien pour acc&#233;der au formulaire pr&#233;sent sur le site."
+, '_cliquez_lien_formulaire' => "cliquez sur ce lien pour acc&#233;der au formulaire pr&#233;sent sur le site"
 , 'pour_modifier_votre_abo_' => "Pour modifier votre abonnement "
 , 'abonnement_presentation' => "
 	Entrez votre adresse email dans le champ ci-dessous.

@@ -2,7 +2,7 @@
 [<!--(#REM)
 
 	Squelette pour spip-listes    
-	patrons/messages/confirmation.html
+	patrons/messages/standard.html
 	
 	$LastChangedRevision$
 	$LastChangedBy$
@@ -26,7 +26,7 @@
 
 <:bonjour:>[ (#ENV{nom})],
 
-<p>[(#ENV{nouvel_inscription}|=={oui}|?{' ',''})<:spiplistes:bienvenue_sur_la_liste_:>][(#ENV{nouvel_inscription}|=={oui}|?{'',' '})<:spiplistes:vos_abos_sur_le_site_:>]<strong>#NOM_SITE_SPIP</strong></p>
+<p>[(#ENV{nouvel_inscription}|=={oui}|?{' ',''})<:spiplistes:bienvenue_sur_la_liste_:>][(#ENV{nouvel_inscription}|=={oui}|?{'',' '})<:spiplistes:vos_abos_sur_le_site_:>]<strong><a href="#URL_SITE_SPIP/>#NOM_SITE_SPIP</a></strong></p>
 
 <p>
 [(#ENV{format}|=={non}|?{' ',''})
@@ -37,10 +37,41 @@
 ]
 </p>
 
+<B_listes>
+	<p>[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:vous_etes_abonne_a_la_liste_:>,<:spiplistes:vous_etes_abonne_aux_listes_:>})]
+	<ul>
+	<BOUCLE_listes(LISTES){statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}{id_liste IN #ENV**{ids_abos}}>
+	<li style="margin-bottom:3px">
+		<strong>#TITRE</strong>[ - <em>(#TEXTE)</em>]
+	</li>
+	</BOUCLE_listes>
+	</ul></p>
+
+	[<p><:spiplistes:pour_modifier_votre_abo_:>
+	<a href="#URL_SITE_SPIP/spip.php?page=abonnement&d=(#ENV{cookie_oubli})"><:spiplistes:_cliquez_lien_formulaire:></a>.</p>]
+
+</B_listes>
+<p><:spiplistes:vous_abonne_aucune_liste:>.</p>
+	<B_dispos>
+	<p>[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:liste_dispo_site:>,<:spiplistes:listes_dispos_site:>})]
+	<ul>
+	<BOUCLE_dispos(LISTES){statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}>
+	<li style="margin-bottom:3px">
+		<strong>#TITRE</strong>[ - <em>(#TEXTE)</em>]
+	</li>
+	</BOUCLE_dispos>
+	</ul></p>
+	
+	[<p><:spiplistes:pour_vous_abonner:>, 
+	<a href="#URL_SITE_SPIP/spip.php?page=abonnement&d=(#ENV{cookie_oubli})"><:spiplistes:_cliquez_lien_formulaire:></a>.</p>]
+	
+	</B_dispos>
+	<p><:spiplistes:desole_pas_de_liste:></p>
+	<//B_dispos>
+<//B_listes>
+
 [<p>(#ENV*{texte})</p>]
 
-[<p><:spiplistes:pour_modifier_votre_abo_:>
-<a href="#URL_SITE_SPIP/spip.php?page=abonnement&d=(#ENV{cookie_oubli})"><:spiplistes:_cliquez_lien_formulaire:></a></p>]
 
 </div>
 </div>
