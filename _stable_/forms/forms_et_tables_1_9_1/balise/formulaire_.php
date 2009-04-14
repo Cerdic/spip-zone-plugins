@@ -26,7 +26,7 @@ function balise_FORMULAIRE__dist($p) {
 
 // http://doc.spip.org/@protege_valeurs
 function protege_valeurs($valeur){
-	return is_string($valeur)?entites_html($valeur):$valeur;
+	return is_string($valeur)?entites_html($valeur):is_array($valeur)?serialize($valeur):$valeur;
 }
 /* prendre en charge par defaut les balises dynamiques formulaires simples */
 // http://doc.spip.org/@balise_FORMULAIRE__dyn
