@@ -1,4 +1,11 @@
-<div id="aide_recherche">
+[(#REM)
+	Eviter les boutons d'admin sur la page d'oubli
+]#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#ENV{lang,fr}" lang="#ENV{lang,fr}" dir="#ENV{dir_lang,ltr">
+<head>
+<title><:fulltext:fonctionnement_recherche:></title>
+<meta name="robots" content="none" />
   <style type="text/css">
     #aide_recherche .txt {
       width:200px;
@@ -33,6 +40,10 @@
       width:450px;
     }
   </style>
+</head>
+<body>
+<div id="aide_recherche">
+
     <p class="soustitre"><:fulltext:fonctionnement_recherche:></p>
     
     <table>
@@ -51,33 +62,35 @@
         </thead>
         <tbody>
             <tr>
-            <th><input type="text" class="txt" value="enfant étranger">&nbsp;&nbsp;&rarr;</th>
+            <th><input type="text" class="txt" value="enfant étranger" />&nbsp;&nbsp;&rarr;</th>
             <td> <:fulltext:retourne:> <:fulltext:soit:> «&nbsp;enfant&nbsp;», <:fulltext:soit:> «&nbsp;étranger&nbsp;», <:fulltext:soit:> «&nbsp;enfant&nbsp;» <:fulltext:et:> «&nbsp;étranger&nbsp;».</td>
             </tr>
             <tr>
-            <th><input type="text" class="txt" value="+enfant +étranger">&nbsp;&nbsp;&rarr;</th>
+            <th><input type="text" class="txt" value="+enfant +étranger" />&nbsp;&nbsp;&rarr;</th>
             <td> <:fulltext:retourne:>t «&nbsp;enfant&nbsp;» <:fulltext:et:> «&nbsp;étranger&nbsp;».</td>
             </tr>
             <tr>
-            <th><input type="text" class="txt" value="+enfant étranger">&nbsp;&nbsp;&rarr;</th>
+            <th><input type="text" class="txt" value="+enfant étranger" />&nbsp;&nbsp;&rarr;</th>
             <td> <:fulltext:retourne:> «&nbsp;enfant&nbsp;» <:fulltext:textes_premier:> <:fulltext:aussi:> «&nbsp;étranger&nbsp;».</td>
             </tr>
             <tr>
-            <th><input type="text" class="txt" value="+enfant -étranger">&nbsp;&nbsp;&rarr;</th>
+            <th><input type="text" class="txt" value="+enfant -étranger" />&nbsp;&nbsp;&rarr;</th>
             <td> <:fulltext:retourne:> «&nbsp;enfant&nbsp;» <:fulltext:mais_pas:> «&nbsp;étranger&nbsp;».</td>
             </tr>
             <tr>
-            <th><input type="text" class="txt" value="+enfant +(>étranger <asie)">&nbsp;&nbsp;&rarr;</th>
+            <th><input type="text" class="txt" value="+enfant +(>étranger <asie)" />&nbsp;&nbsp;&rarr;</th>
             <td> <:fulltext:retourne:> «&nbsp;enfant&nbsp;» <:fulltext:et:> «&nbsp;étranger&nbsp;» <:fulltext:ou_bien:> «&nbsp;enfant&nbsp;» <:fulltext:et:> «&nbsp;Asie&nbsp;» <:fulltext:textes_premier:> «&nbsp;enfant&nbsp;» <:fulltext:et:> «&nbsp;étranger&nbsp;».</td>
             </tr>
             <tr>
-            <th><input type="text" class="txt" value="enfan*">&nbsp;&nbsp;&rarr;</th>
+            <th><input type="text" class="txt" value="enfan*" />&nbsp;&nbsp;&rarr;</th>
             <td> <:fulltext:retourne:> «&nbsp;enfant&nbsp;», «&nbsp;enfants&nbsp;», «&nbsp;enfance&nbsp;», «&nbsp;enfanter&nbsp;», «&nbsp;enfantillage&nbsp;».... («&nbsp;*fant&nbsp;» <:fulltext:asterisque_terminale:>.)</td>
             </tr>
             <tr>
-            <th><input type="text" class="txt" value="&quot;enfant étranger&quot;">&nbsp;&nbsp;&rarr;</th>
+            <th><input type="text" class="txt" value="&quot;enfant étranger&quot;" />&nbsp;&nbsp;&rarr;</th>
             <td> <:fulltext:retourne:> <:fulltext:sequence_exacte:> «&nbsp;enfant étranger&nbsp;».</td>
             </tr>
         </tbody>
     </table>
 </div>
+</body>
+</html>
