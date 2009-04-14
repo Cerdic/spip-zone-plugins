@@ -38,14 +38,14 @@
 </p>
 
 <B_listes>
-	<p>[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:vous_etes_abonne_a_la_liste_:>,<:spiplistes:vous_etes_abonne_aux_listes_:>})]
+	<p>[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:vous_etes_abonne_a_la_liste_:>,<:spiplistes:vous_etes_abonne_aux_listes_:>})]</p>
 	<ul>
 	<BOUCLE_listes(LISTES){statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}{id_liste IN #ENV**{ids_abos}}>
 	<li style="margin-bottom:3px">
 		<strong>#TITRE</strong>[ - <em>(#TEXTE)</em>]
 	</li>
 	</BOUCLE_listes>
-	</ul></p>
+	</ul>
 
 	[<p><:spiplistes:pour_modifier_votre_abo_:>
 	<a href="#URL_SITE_SPIP/spip.php?page=abonnement&d=(#ENV{cookie_oubli})"><:spiplistes:_cliquez_lien_formulaire:></a>.</p>]
@@ -53,14 +53,14 @@
 </B_listes>
 <p><:spiplistes:vous_abonne_aucune_liste:>.</p>
 	<B_dispos>
-	<p>[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:liste_dispo_site:>,<:spiplistes:listes_dispos_site:>})]
+	<p>[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:liste_dispo_site:>,<:spiplistes:listes_dispos_site:>})]</p>
 	<ul>
 	<BOUCLE_dispos(LISTES){statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}>
 	<li style="margin-bottom:3px">
 		<strong>#TITRE</strong>[ - <em>(#TEXTE)</em>]
 	</li>
 	</BOUCLE_dispos>
-	</ul></p>
+	</ul>
 	
 	[<p><:spiplistes:pour_vous_abonner:>, 
 	<a href="#URL_SITE_SPIP/spip.php?page=abonnement&d=(#ENV{cookie_oubli})"><:spiplistes:_cliquez_lien_formulaire:></a>.</p>]
