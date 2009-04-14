@@ -45,9 +45,9 @@ function jeux_question_ouverte($texte, $indexJeux){
 	// Avant envoi du formulaire
 	if (!isset($_POST["var_correction_".$indexJeux])) {
 	
-		$form = '<div class="formulaire_spip">'.jeux_form_debut('question_ouverte', $indexJeux, 'noajax');
+		$form = jeux_form_debut('question_ouverte', $indexJeux, 'noajax');
 		$form .= '<textarea name="reponse" class="forml" rows="20">'._T('question_ouverte:veuillez_repondre').'</textarea>';
-		$form .= '<p class="spip_bouton"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton"></p>'.jeux_form_fin().'</div>';
+		$form .= '<p class="spip_bouton"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton"></p>'.jeux_form_fin();
 		
 		return $tete.$html.$form.$pied;
 	
@@ -57,7 +57,16 @@ function jeux_question_ouverte($texte, $indexJeux){
 		find_in_path('jeux_ajouter_resultat.php', 'base/', true);
 		$reponse = _request('reponse');
 		jeux_ajouter_resultat(_request('id_jeu'), 0, 0, $reponse);
-		return $tete.'<p>{{'._T('question_ouverte:merci').'}}</p>'.$html.'<p>{{'._T('question_ouverte:reponse').'}}</p>'.$correction.$pied;
+		return
+			$tete
+			.'<p>{{'._T('question_ouverte:merci').'}}</p>'
+			.$html
+			.'<h5>'._T('question_ouverte:votre_reponse').'</h5>'
+			.propre(_request('reponse'))
+			.'<h5>'._T('question_ouverte:correction').'</h5>'
+			.$correction
+			.jeux_bouton_reinitialiser()
+			.$pied;
 	
 	}
 	

@@ -18,7 +18,10 @@
 				}
 			}
 		}
-		#SET{jeux,#GET{jeux}|push{#ID_JEU}}
+		[(#REM) On ajoute le jeu à afficher seulement si l'auteur l'a déjà fait ]
+		[(#ID_AUTEUR|=={#ENV{id_auteur}}|oui)
+			#SET{jeux,#GET{jeux}|push{#ID_JEU}}
+		]
 	]
 </BOUCLE_scores>
 #SET{jeux,#GET{jeux}|array_unique}
@@ -39,7 +42,7 @@
 	<tr class="tr_liste">
 		<td>N°#ID_JEU</td>
 		<td>#TITRE_PRIVE</td>
-		[<td class="temps">(#GET{scores}|table_valeur{jeu#ID_JEU}|table_valeur{aut#ID_AUTEUR})%</td>]
+		[<td class="temps">(#GET{scores}|table_valeur{jeu#ID_JEU}|table_valeur{aut#ENV{id_auteur}})%</td>]
 		[<td class="temps">(#GET{scores}|table_valeur{jeu#ID_JEU}|array_sum|div{#GET{scores}|table_valeur{jeu#ID_JEU}|count})%</td>]
 	</tr>
 </BOUCLE_affichage>
