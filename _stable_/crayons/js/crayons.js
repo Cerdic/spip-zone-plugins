@@ -5,7 +5,7 @@
 
 // le prototype configuration de Crayons
 $.prototype.cfgCrayons = function (options) {
-	this.url_crayons_html = options['dir_racine']+'spip.php?action=crayons_html';
+	this.url_crayons_html = '?action=crayons_html';
 	this.img = {
 		'searching':{'txt':'En attente du serveur ...'},
 		'edit':{'txt':'Editer'},
