@@ -8,6 +8,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_boite_fancybox' => 'Configuration du plugin FancyBox',
 	'cfg_descr_fancybox' => 'FancyBox : Plugin jQuery FancyBox pour SPIP',
 	'cfg_inf_selecteur_commun' => 'Indiquez la cible des &eacute;l&eacute;ments qui d&eacute;clencheront FancyBox (expression CSS ou &eacute;tendue jQuery).',
+	'cfg_inf_selecteur_frame' => 'Indiquez la cible des &eacute;l&eacute;ments qui d&eacute;clencheront une Iframe FancyBox (expression CSS ou &eacute;tendue jQuery).',
+	'cfg_inf_frameheight' => 'Hauteur de la fen&ecirc;tre iframe (en pixels).',
+	'cfg_inf_framewidth' => 'Largeur de la fen&ecirc;tre iframe (en pixels).',
 	'cfg_inf_selecteur_galerie' => 'Indiquez la cible des &eacute;l&eacute;ments qui d&eacute;clencheront une galerie avec FancyBox  (expression CSS ou &eacute;tendue jQuery).',
 	'cfg_inf_padding' => 'Padding autour du contenu de la fen&ecirc;tre (en pixels).',
 	'cfg_inf_imagescale' => 'Redimensionner automatiquement les images &agrave; la taille de la fen&ecirc;tre ?',
@@ -17,6 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	
 	'cfg_lbl_selecteur_commun' => 'En g&eacute;n&eacute;ral',
+	'cfg_lbl_selecteur_frame' => 'En frame',
+	'cfg_lbl_selecteur_frame' => 'En frame',
+	'cfg_lbl_frameheight' => 'Hauteur de la iframe',
+	'cfg_lbl_framewidth' => 'Largeur de la iframe',
 	'cfg_lbl_selecteur_galerie' => 'En galerie',
 	'cfg_lbl_padding' => 'Padding',
 	'cfg_lbl_imagescale' => '&Eacute;chelle',

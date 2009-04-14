@@ -12,7 +12,10 @@ function fancybox_insert_head($flux){
 		'imagescale' => 'true',
 		'overlayshow' => 'true',
 		'overlayopacity' => '0.3',
-		'hideoncontentclick' => 'true'
+		'hideoncontentclick' => 'true',
+		'selecteur_frame' => '.iframe',
+		'framewidth' => '600',
+		'frameheight' => '700'		
 	), $config);
 
 	$flux .='<script src="'.url_absolue(find_in_path('javascript/jquery.fancybox-1.2.1.js')).'" type="text/javascript"></script>';
@@ -28,6 +31,16 @@ function fancybox_insert_head($flux){
 		$("'.$config['selecteur_galerie'].'").attr("rel","galerie-portfolio");
 		$("'.$config['selecteur_commun'].'")
 			.fancybox({
+				"padding": '.$config['padding'].',
+				"imageScale": '.$config['imagescale'].',
+				"overlayShow": '.$config['overlayshow'].',
+				"overlayOpacity": '.$config['overlayopacity'].',
+				"hideOnContentClick": '.$config['hideoncontentclick'].'
+			});
+		$("'.$config['selecteur_frame'].'")
+			.fancybox({
+				"frameWidth": '.$config['framewidth'].',
+				"frameHeight": '.$config['frameheight'].',
 				"padding": '.$config['padding'].',
 				"imageScale": '.$config['imagescale'].',
 				"overlayShow": '.$config['overlayshow'].',

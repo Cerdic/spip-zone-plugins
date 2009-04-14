@@ -8,8 +8,8 @@
 	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
 	
-<form method="post" action="#SELF"><div>
-	#ACTION_FORMULAIRE{SELF}
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
 
 	<ul>
 		<li class="editer_fancybox_selecteur_commun[ (#ENV**{erreurs}|table_valeur{selecteur_commun}|oui)erreur]">
@@ -80,6 +80,29 @@
 				<label for='fancy_hideoncontentclick_off'><:non:></label>
 			</div>
 		</li>
+		
+		<li class="editer_fancybox_selecteur_frame[ (#ENV**{erreurs}|table_valeur{selecteur_frame}|oui)erreur]">
+			<label for="fancy_selecteur_frame"><:fancybox:cfg_lbl_selecteur_frame:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{selecteur_frame})</span>]
+			<p class="explication"><:fancybox:cfg_inf_selecteur_frame:></p>
+			<input type="text" name="selecteur_frame" class="text" id="fancy_selecteur_frame" size="60"
+				value="#ENV{selecteur_frame, .iframe}" />
+		</li>
+		
+		<li class="editer_fancybox_framewidth[ (#ENV**{erreurs}|table_valeur{framewidth}|oui)erreur]">
+			<label for="fancy_framewidth"><:fancybox:cfg_lbl_framewidth:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{framewidth})</span>]
+			<p class="explication"><:fancybox:cfg_inf_framewidth:></p>
+			<input type="text" name="framewidth" class="text" id="fancy_framewidth" size="8" value="#ENV{framewidth, 600}" />	
+		</li>
+		
+		<li class="editer_fancybox_frameheight[ (#ENV**{erreurs}|table_valeur{frameheight}|oui)erreur]">
+			<label for="fancy_frameheight"><:fancybox:cfg_lbl_frameheight:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{frameheight})</span>]
+			<p class="explication"><:fancybox:cfg_inf_frameheight:></p>
+			<input type="text" name="frameheight" class="text" id="fancy_frameheight" size="8" value="#ENV{frameheight, 700}" />	
+		</li>
+		
 	</ul>
 
 
