@@ -1,0 +1,34 @@
+[(#REM) 
+
+  Parametres :
+  ** : obligatoire
+  * : fortement conseille
+  
+  - ** nom : nom du parametre
+  - * label : nom joli
+  - * erreurs : tableau des erreurs
+  - * valeur : valeur actuelle du parametre
+  - defaut : valeur par defaut du parametre
+  - obligatoire : est-ce un parametre obligatoire ? (defaut: non, valeurs : null/"non"/autre=oui ) 
+  - explication : texte d'explication suppplementaire
+  - class : classe(s) css ajoutes au select
+  
+  Exemple d'appel :
+	[(#INCLURE{fond=saisies/select-secteur}{erreurs}
+		{nom=secteur_region}
+		{label=<:plugin:secteur_region:>}
+		{valeur=#ENV{secteur_region}})] 
+]
+
+#SET{erreurs,#ENV**{erreurs}|table_valeur{#ENV{nom}}}
+<li class="editer_[(#ENV{nom})][ (#ENV{obligatoire}|et{#ENV{obligatoire}|!={non}}|oui) obligatoire][ (#GET{erreurs}|oui)erreur]">
+	<label for="champ_#ENV{nom}">[(#ENV{label}|sinon{#ENV{nom}})]</label>
+		[<span class='erreur_message'>(#GET{erreurs})</span>]
+		[<p class='explication'>(#ENV{explication})</p>]
+		<select name="#ENV{nom}" id="champ_#ENV{nom}"[ value="(#ENV{valeur})"]>
+		<option value="O"></option>
+		<BOUCLE_secteurs(RUBRIQUES){racine}{par num titre, titre}>
+			<option value="#ID_RUBRIQUE" [(#ID_RUBRIQUE|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]>#TITRE</option>
+		</BOUCLE_secteurs>
+		</select>
+</li>
