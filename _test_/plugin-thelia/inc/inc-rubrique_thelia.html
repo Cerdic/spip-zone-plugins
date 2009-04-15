@@ -25,25 +25,18 @@
 						<div class="titreProduit">					
 							<h3><a href="#URL_PAGE{produit,ref=THELIA-REF&amp;id_rubrique_thelia=#ENV{id_rubrique_thelia}}">THELIA-TITRE</a></h3>
 						</div>
-						<T_produitreappro>
-						<THELIA_produitreappro type="PRODUIT" ref="THELIA-REF" reappro="1">
-							<span class="thelia_reappro"><:spipthelia:en_cours_de_reapprovisionnement:></span>
-						</THELIA_produitreappro>
-						</T_produitreappro>
-							<input type="image" class="LIEN_commander" value="<:spipthelia:ajouter_panier:>" src="#CHEMIN{img_pack/cart_add.png}" />
-						<//T_produitreappro>
-
+						<input type="image" class="LIEN_commander" value="<:spipthelia:ajouter_panier:>" src="#CHEMIN{img_pack/cart_add.png}" />
+						
 						<div class="chapoProduit">
 							THELIA-CHAPO
 						</div>
 				    		<div class="prixProduit">
-						<T_produitpromo>
 						<THELIA_produitpromo type="PRODUIT" ref="THELIA-REF" promo="1">
 							<span class="thelia_promo">THELIA-PRIX2 &euro;</span> <:spipthelia:au_lieu_de:> THELIA-PRIX &euro;
 						</THELIA_produitpromo>
-						</T_produitpromo>
+						<THELIA_produitpaspromo type="PRODUIT" ref="THELIA-REF" promo="0">
 							THELIA-PRIX &euro;
-						<//T_produitpromo>
+						</THELIA_produitpaspromo>
 						</div>
 						
 						<div class="declinaisonProduit">

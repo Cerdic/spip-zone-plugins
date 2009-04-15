@@ -59,7 +59,6 @@ function spip_thelia_insert_head($flux) {
 }
 
 function spip_thelia_appeler_moteur_thelia($texte) {
-	include_spip('inc/charsets');
 	
 	//si pas de boucle ou de balise th�lia dans la page on sort	
 	if ((strpos($texte, "THELIA-") === FALSE) && (strpos($texte, "<THELIA") == FALSE))
