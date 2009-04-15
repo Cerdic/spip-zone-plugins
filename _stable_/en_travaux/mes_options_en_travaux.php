@@ -1,4 +1,7 @@
 <?php
+	
+	include_spip('inc/vieilles_defs');
+	
 	// fichier mes options
 	// force une action en travaux si on n'est pas en zone ecrire ni admin
 if ($GLOBALS['meta']['en_travaux']=='true')
