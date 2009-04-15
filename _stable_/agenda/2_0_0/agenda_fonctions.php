@@ -42,7 +42,7 @@ function agenda_mini($i) {
   $sinon = array_shift($args);
   if (!$une_date) return $sinon;
   $type = 'mini';
-  $agenda = agenda_memo_full(0);
+  $agenda = Agenda_memo_full(0);
   $evt = array();
   foreach (($args ? $args : array_keys($agenda)) as $k) {  
       if (is_array($agenda[$k]))
@@ -73,11 +73,10 @@ function http_calendrier_mini($annee, $mois, $jour, $echelle, $partie_cal, $scri
 	// affichage du debut de semaine hors periode
 	$ligne = '';
 	$debut = date("w",mktime(1,1,1,$mois,$premier_jour,$annee));
-	
 	for ($i=$debut ? $debut : 7;$i>1;$i--) {
 		$mois_precedent = mktime(1,1,1,$mois-1,1,$annee);
 		$jour_mois_precedent = date('t', $mois_precedent)+2-$i;
-		$ligne .= "\n\t<td class=\"horsperiode\"><a href='".parametre_url($GLOBALS['contexte_inclus']['self'],$GLOBALS['contexte_inclus']['var_date'],agenda_moisdecal($GLOBALS['contexte_inclus']['date'],-1,'Y-m'))."'>$jour_mois_precedent</a></td>";
+		$ligne .= "\n\t<td class=\"horsperiode\">$jour_mois_precedent</td>";
 	}
 
 	$total = '';
@@ -97,9 +96,16 @@ function http_calendrier_mini($annee, $mois, $jour, $echelle, $partie_cal, $scri
 		$evts = $evenements[$amj];
 		$class="";
 		if ($evts) {
-			$evts = "<a href='".parametre_url($evts[0]['URL'],'date',"$annee_en_cours-$mois_en_cours-$jour")."' title='".$evts[0]['SUMMARY'].
+			$nb_elmts= @count($evts);
+			if ($nb_elmts>1){
+				$evts = "<a href='".parametre_url($evts[0]['URL'],'date',"$annee_en_cours-$mois_en_cours-$jour")."' title='".$nb_elmts." ".utf8_encode("événements")."'>".intval($jour)."</a>";
+			}
+			else{
+				$evts = "<a href='".parametre_url($evts[0]['URL'],'date',"$annee_en_cours-$mois_en_cours-$jour")."' title='".$evts[0]['SUMMARY'].
 			"'>".intval($jour)."</a>";
+			}
 			$class='occupe';
+			
 		}
 		else {
 			$evts = intval($jour);
@@ -110,7 +116,7 @@ function http_calendrier_mini($annee, $mois, $jour, $echelle, $partie_cal, $scri
 	$jour_mois_suivant=1;
 	// affichage de la fin de semaine hors periode
 	for($j=$jour_semaine ? $jour_semaine : 7; $j<7; $j++) {
-		$ligne .= "\n\t<td class=\"horsperiode\"><a href='".parametre_url($GLOBALS['contexte_inclus']['self'],$GLOBALS['contexte_inclus']['var_date'],agenda_moisdecal($GLOBALS['contexte_inclus']['date'],1,'Y-m'))."'>".$jour_mois_suivant++."</a></td>";			
+		$ligne .= "\n\t<td class=\"horsperiode\">".$jour_mois_suivant++."</td>";			
 	}
 
 	return $total . ($ligne ? "\n<tr>$ligne\n</tr>" : '');
