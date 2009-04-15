@@ -1,8 +1,11 @@
 <?php
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// CFG
-	"config_description_abonnement" => "Cette page permet de d&eacute;finir les options d'abonnement de votre site.",
-	"config_description_abonnement_relances" => "Cette page permet de d&eacute;finir les options de relances d'abonnement de votre site.",
+	"configuration_abonnement" => "Abonnement",
+	"configuration_abonnement_relances" => "Relance des abonnements",
+	
+	"configuration_description_abonnement" => "Cette page permet de d&eacute;finir les options d'abonnement de votre site.",
+	"configuration_description_abonnement_relances" => "Cette page permet de d&eacute;finir les options de relances d'abonnement de votre site.",
 
 	// Formulaires CFG
 	"fieldset_expediteur" => "Expediteur des mails automatiques",
