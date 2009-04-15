@@ -1,3 +1,20 @@
+
+v1.11 (15 04 2009)
+  * (en test) Ajout d'un dossier saisies/ pour faciliter l'ajout de champ
+  facon SPIP 2.0 dans CFG. Les inclusions disposent de parametres pour les utiliser
+  qui sont expliques dans leurs fichiers respectifs.
+
+  Note d'avenir :
+  * La future version majeure de CFG (CFG 2.0) ne fonctionnera par defaut qu'avec l'ecriture
+  de formulaires facon SPIP 2.0, c'est a dire utilisant l'ecriture HTML des formulaires CVT/SPIP
+  et s'appuyant sur les points d'entrees de CVT pour fonctionner. Il est donc fortement conseille
+  d'ecrire ou de migrer ses formulaires CFG en respectant cela. 
+
+  Cela correspond avec cette version de CFG à ecrire ses formulaires dans formulaires/config_xxx.html
+  et de ne mettre dans fonds/cfg_xxx.html qu'un appel à ce formulaire par <div class="ajax">#FORMULAIRE_CONFIG_XXX</div>
+  
+
+
 v1.10.5 (09 12 2008)
   * ajout des filtres et, ou, xou, non, oui pour compat 1.9.2
   * ajout du filtre push pour compat 1.9.2
