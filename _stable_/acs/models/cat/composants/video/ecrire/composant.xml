@@ -9,7 +9,7 @@
 
   <param>
     <nom>preview</nom>
-    <valeur>200</valeur>
+    <valeur>300</valeur>
   </param>
 
   <variable>
@@ -41,4 +41,10 @@
     <option>non</option>
     <valeur>oui</valeur>
   </variable>
+  <variable>
+    <nom>NbImg</nom>
+    <type>nombre</type>
+    <valeur>5</valeur>
+  </variable>
+  
 </composant>

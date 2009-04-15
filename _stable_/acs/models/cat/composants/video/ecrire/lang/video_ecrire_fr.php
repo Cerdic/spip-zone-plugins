@@ -18,5 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'Download' => 'Lien de t&eacute;l&eacute;chargement',
 
+'NbImg' => 'Nombre de vid&eacute;os'
 );
 ?>
