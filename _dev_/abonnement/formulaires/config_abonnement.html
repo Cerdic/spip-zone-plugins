@@ -1,0 +1,87 @@
+<!-- autoriser=configurer -->
+<!-- refus=<:cfg:refus_configuration_configurer:> -->
+<!-- nom=abonnement -->
+
+<div class="formulaire_spip formulaire_configurer_abonnement">
+	
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+<ul>
+
+	<li class="fieldset">
+		<fieldset>
+			<h3 class="legend"><:abo:fieldset_expediteur:></h3>
+			<ul>
+				[(#INCLURE{fond=saisies/input}{erreurs}
+					{nom=nom_envoi}
+					{label=<:abo:label_nom:>}
+					{valeur=#ENV{nom_envoi}})]
+					
+				[(#INCLURE{fond=saisies/input}{erreurs}
+					{nom=email_envoi}
+					{label=<:abo:label_email:>}
+					{valeur=#ENV{email_envoi}})]
+			</ul>
+		</fieldset>
+	</li>
+	
+	<li class="fieldset">
+		<fieldset>
+			<h3 class="legend"><:abo:fieldset_confirmation:></h3>
+			<ul>
+				[(#INCLURE{fond=saisies/input}{erreurs}
+					{nom=sujet_ok}
+					{label=<:abo:label_sujet:>}
+					{valeur=#ENV{sujet_ok}})]
+					
+				[(#INCLURE{fond=saisies/textarea}{erreurs}
+					{nom=texte_ok}
+					{label=<:abo:label_texte:>}
+					{valeur=#ENV{texte_ok}}
+					{rows=10})]
+			</ul>
+		</fieldset>
+	</li>
+	
+	<li class="fieldset">
+		<fieldset>
+			<h3 class="legend"><:abo:fieldset_echec:></h3>
+			<ul>
+				[(#INCLURE{fond=saisies/input}{erreurs}
+					{nom=sujet_ko}
+					{label=<:abo:label_sujet:>}
+					{valeur=#ENV{sujet_ko}})]
+					
+				[(#INCLURE{fond=saisies/textarea}{erreurs}
+					{nom=texte_ko}
+					{label=<:abo:label_texte:>}
+					{valeur=#ENV{texte_ko}}
+					{rows=10})]
+			</ul>
+		</fieldset>
+	</li>
+	
+	<li class="fieldset">
+		<fieldset>
+			<h3 class="legend"><:abo:fieldset_articles_payants:></h3>
+			<ul>
+				[(#INCLURE{fond=saisies/input}{erreurs}
+					{nom=prix_article}
+					{label=<:abo:label_tarif:>}
+					{explication=<:abo:explication_tarif:>}
+					{valeur=#ENV{prix_article}})]
+			</ul>
+		</fieldset>
+	</li>
+</ul>
+<p class="boutons">
+	<input type="submit" name="_cfg_ok" value="<:cfg:ok:>" class="submit" />
+	<input type="reset" value="<:reset:>" class="reset" />
+</p>
+</div>
+</form>
+</div>
