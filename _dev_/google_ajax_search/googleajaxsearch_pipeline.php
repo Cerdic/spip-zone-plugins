@@ -33,4 +33,4 @@ function googleajaxsearch_insert_head($flux){
 	return $flux;
 }
 	
-?>  
+?>
