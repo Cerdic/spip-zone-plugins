@@ -1,5 +1,7 @@
 [(#REM) 
 
+  ### /!\ table GEO_PAYS (geographie) ###
+	
   Parametres :
   ** : obligatoire
   * : fortement conseille
@@ -14,10 +16,10 @@
   - class : classe(s) css ajoutes au select
   
   Exemple d'appel :
-	[(#INCLURE{fond=saisies/select-secteur}{erreurs}
-		{nom=secteur_region}
-		{label=<:plugin:secteur_region:>}
-		{valeur=#ENV{secteur_region}})] 
+	[(#INCLURE{fond=saisies/pays}{erreurs}
+		{nom=pays}
+		{label=<:plugin:info_pays:>}
+		{valeur=#ENV{pays}})] 
 ]
 
 #SET{erreurs,#ENV**{erreurs}|table_valeur{#ENV{nom}}}
@@ -26,9 +28,9 @@
 		[<span class='erreur_message'>(#GET{erreurs})</span>]
 		[<p class='explication'>(#ENV{explication})</p>]
 		<select name="#ENV{nom}" id="champ_#ENV{nom}"[ value="(#ENV{valeur})"]>
-		<option value="O"></option>
-		<BOUCLE_secteurs(RUBRIQUES){racine}{par num titre, titre}>
-			<option value="#ID_RUBRIQUE" [(#ID_RUBRIQUE|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]>#TITRE</option>
-		</BOUCLE_secteurs>
+		<option></option>
+		<BOUCLE_pays(GEO_PAYS)>
+			<option value="#ID_PAYS" [(#ID_PAYS|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]>#NOM</option>
+		</BOUCLE_pays>
 		</select>
 </li>

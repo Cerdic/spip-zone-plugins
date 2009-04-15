@@ -14,10 +14,10 @@
   - class : classe(s) css ajoutes au select
   
   Exemple d'appel :
-	[(#INCLURE{fond=saisies/select-mot}{erreurs}
-		{nom=en_region}
-		{label=<:plugin:en_region:>}
-		{valeur=#ENV{en_region}})]
+	[(#INCLURE{fond=saisies/secteur}{erreurs}
+		{nom=secteur_region}
+		{label=<:plugin:secteur_region:>}
+		{valeur=#ENV{secteur_region}})] 
 ]
 
 #SET{erreurs,#ENV**{erreurs}|table_valeur{#ENV{nom}}}
@@ -26,9 +26,9 @@
 		[<span class='erreur_message'>(#GET{erreurs})</span>]
 		[<p class='explication'>(#ENV{explication})</p>]
 		<select name="#ENV{nom}" id="champ_#ENV{nom}"[ value="(#ENV{valeur})"]>
-		<option value="0"></option>
-		<BOUCLE_mots(MOTS){par num titre, titre}>
-			<option value="#ID_MOT" [(#ID_MOT|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]>#TITRE</option>
-		</BOUCLE_mots>
+		<option value="O"></option>
+		<BOUCLE_secteurs(RUBRIQUES){racine}{par num titre, titre}>
+			<option value="#ID_RUBRIQUE" [(#ID_RUBRIQUE|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]>#TITRE</option>
+		</BOUCLE_secteurs>
 		</select>
 </li>
