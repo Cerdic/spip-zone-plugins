@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'svp_copier_coller' => 'D&eacute;sol&eacute;, copiez/collez vos changements et recommencez',
 
 	// V
-	'veuillez_patienter' => 'Gelieve geduld te oefenen…'
+	'veuillez_patienter' => 'Gelieve geduld te oefenenâ€¦'
 );
 
 ?>
