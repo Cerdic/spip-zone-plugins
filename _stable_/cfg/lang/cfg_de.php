@@ -47,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_changement' => 'Keine &Auml;nderung in <b>@nom@</b>',
 
 	// R
+	'refus_configuration_administrateur' => 'Nur die Administratoren der Site d&uuml;rfen diese Einstellungen &auml;ndern.',
 	'refus_configuration_webmestre' => 'Nur ein Webmaster darf diese EInstellungen bearbeiten.',
 	'reset' => 'Reset',
 

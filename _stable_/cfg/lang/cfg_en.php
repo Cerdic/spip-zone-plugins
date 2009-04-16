@@ -47,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_changement' => 'No change found in <b>@nom@</b>',
 
 	// R
+	'refus_configuration_administrateur' => 'Only the site administrators are authorised to change these parameters.',
 	'refus_configuration_webmestre' => 'Only the site webmasters are authorised to modify these parameters.',
 	'reset' => 'Delete',
 
