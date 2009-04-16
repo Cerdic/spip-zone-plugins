@@ -227,7 +227,7 @@ Consulta la [documentaci&oacute;n de Spip-Contrib->http://www.spip-contrib.net/S
 	'forum_ouvrir' => 'Abrir esti Foru',
 	'forums_categories' => 'Varios',
 	'forums_spipbb' => 'Foros SpipBB',
-	'forums_titre' => 'El primer foru que fice',
+	'forums_titre' => '<MODIF>El primer foru que fice',
 	'fromphpbb_erreur_db_phpbb_config' => 'Ye imposible lleer la configuraci&oacute;n na base phpBB',
 	'fromphpbb_migre_categories' => 'Importaci&oacute;n de les categor&iacute;es',
 	'fromphpbb_migre_categories_dans_rub_dpt' => 'Amestamientu de los foros na estaya:',
@@ -329,7 +329,7 @@ _ Un anunciu ponse en cabeza del foru en toes les p&aacute;xines.',
 -* Si un art&iacute;culu-foru tien esta pallabra-clave, s&oacute;lo los llendadores pueden amesta-y mensaxes.
 -* Cuando l\'asuntu del foru ta pesllau, s&oacute;lo los llendadores pueden amesta-y respuestes.',
 	'mot_groupe_moderation' => 'Grupu de pallabres-clave utiliz&aacute;es pa llendar SpipBB',
-	'mot_postit' => 'Apegadizu
+	'mot_postit' => '<MODIF>Apegadizu
 _ Un mensaxe apegadizu ta embaxo de los anuncios, enantes de los mensaxes ordinarios. Nun apaez m&aacute;s que una sola vegada na llista.',
 
 	// N

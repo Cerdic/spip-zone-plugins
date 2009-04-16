@@ -227,7 +227,7 @@ Consulte a [documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/Sp
 	'forum_ouvrir' => 'Abrir este foro',
 	'forums_categories' => 'Diversos',
 	'forums_spipbb' => 'Foros de SpipBB',
-	'forums_titre' => 'O meu primeiro foro creado',
+	'forums_titre' => '<MODIF>O meu primeiro foro creado',
 	'fromphpbb_erreur_db_phpbb_config' => 'Resulta imposible ler a configuraci&oacute;n na base de datos de phpBB',
 	'fromphpbb_migre_categories' => 'Importaci&oacute;n de categor&iacute;as',
 	'fromphpbb_migre_categories_dans_rub_dpt' => 'Implantaci&oacute;n de foros na secci&oacute;n&nbsp;:',
@@ -329,7 +329,7 @@ _ Un anuncio sit&uacute;ase en cabeceira do foro por riba de todas as p&aacute;x
 -* Cando un artigo-foro ten esta palabra-clave, s&oacute; os moderadores lle poden engadir mensaxes.
 -* Cando un asunto de foro est&aacute; pechado, s&oacute; os moderadores lle poden engadir respostas.',
 	'mot_groupe_moderation' => 'Grupo de palabras-clave usado para a moderaci&oacute;n de SpipBB',
-	'mot_postit' => 'Destacado (Postit)
+	'mot_postit' => '<MODIF>Destacado (Postit)
 _ Un destacado sit&uacute;ase por baixo dos anuncios, antes das mensaxes ordinarias. Aparece s&oacute; unha vez na lista.',
 
 	// N

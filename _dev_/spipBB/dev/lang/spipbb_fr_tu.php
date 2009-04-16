@@ -227,7 +227,7 @@ Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'forum_ouvrir' => 'Ouvrir ce Forum',
 	'forums_categories' => 'Divers',
 	'forums_spipbb' => 'Forums SpipBB',
-	'forums_titre' => 'Mon premier forum cr&eacute;&eacute;',
+	'forums_titre' => '<MODIF>Mon premier forum cr&eacute;&eacute;',
 	'fromphpbb_erreur_db_phpbb_config' => 'Impossible de lire la configuration dans la base phpBB',
 	'fromphpbb_migre_categories' => 'Import des cat&eacute;gories',
 	'fromphpbb_migre_categories_dans_rub_dpt' => 'Implantation des forums dans la rubrique&nbsp;:',
@@ -329,7 +329,7 @@ _ Une annonce est situ&eacute;e en t&ecirc;te de forum sur toutes les pages.',
 -* Lorsqu\'un article-forum a ce mot-clef, seul les mod&eacute;rateurs peuvent y ajouter des messages.
 -* Lorsqu\'un sujet de forum est ferm&amp;ecute;, seuls les mod&eacute;rateurs peuvent y ajouter des r&eacute;ponses.',
 	'mot_groupe_moderation' => 'Goupe de mot-clefs utilis&eacute; pour la mod&eacute;ration de SpipBB',
-	'mot_postit' => 'Postit
+	'mot_postit' => '<MODIF>Postit
  _ Un postit est situ&eacute; en dessous des annonces, avant les messages ordinaires. Il n\'appara&icirc;t qu\'une seule fois dans la liste.',
 
 	// N
