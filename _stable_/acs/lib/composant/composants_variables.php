@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2008
+# Copyright Daniel FAIVRE, 2007-2009
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
@@ -26,7 +26,6 @@ function composants_variables() {
 
 // On profite de la lecture du fichier composant.xml pour récupérer en une seule fois toutes les informations utiles:
 // lien variable<->composant, type de variable, actif/inactif
-//TODO: ajouter aussi les composants instanciables !!!
 function lecture_composants_variables() {
   require_once _DIR_ACS.'lib/composant/composants_liste.php';
 
@@ -40,13 +39,17 @@ function lecture_composants_variables() {
 
     if (is_array($c['variable'])) {
       foreach($c['variable'] as $k=>$var) {
+      	$option = array();
+      	$chemin = false;
         foreach($var as $xmltag=>$value) {
           if ($xmltag == 'nom')
             $nom = ucfirst($composant).$value[0];
-          if ($xmltag == 'type')
-            $type = $value[0];
+          elseif ($xmltag == 'option')
+            $r[$tag.$nom]['option'] = $value;
+          else
+            $r[$tag.$nom][$xmltag] = $value[0];
         }
-        $r[$tag.$nom] = array('composant' => $composant, 'type' => $type);
+      	$r[$tag.$nom]['composant'] = $composant;
       }
     }
   }

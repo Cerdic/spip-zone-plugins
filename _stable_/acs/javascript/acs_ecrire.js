@@ -58,7 +58,8 @@ $(document).ready(
             }
           );
           if (plieur.clic != "undefined") {
-            eval("{" + plieur.clic + ";onclick(e);}");
+          	var clic = plieur.clic;
+          	eval('clic(e)');
           }
           return false;
         }
@@ -91,11 +92,13 @@ $(document).ready(
     // Mask select controls on start (they works even without javascript !)
     $(".ctlWidget").each(
       function(i,cw) {
-        selectid = "#select_" + cw.id;
+        var selectid = "#select_" + cw.id;
         $(selectid).attr("style", "visibility: hidden;");
         if ($(selectid).get(0)) $(selectid).get(0).style.visibility = "hidden"; /* IE */
-        var dragid = "#" + $(selectid).val();
-        $(this).append($(dragid));
+        if ($(selectid).val() != '') { 
+	        var dragid = "#" + $(selectid).val();
+	        $(this).append($(dragid));
+        }
       }
     );
 

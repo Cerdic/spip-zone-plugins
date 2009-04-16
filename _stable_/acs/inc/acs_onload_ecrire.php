@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2008
+# Copyright Daniel FAIVRE, 2007-2009
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
@@ -25,12 +25,24 @@ if (_request('exec'))
    */
 function acs_acces($page) {
   // les fichiers exec de configuration de spip sont administrés par les mêmes admins qu'ACS
-  $enfer = array('acs', 'configuration', 'config_lang', 'admin_tech', 'admin_vider', 'admin_plugin');
-
+  $enfer = array('acs',
+  	'acs_editer_admins',
+  	'acs_selectionner_admin',
+  	'acs_rechercher_admin',
+    'acs_page_get_infos',
+  	'acs_page_source',
+    'composant_get_infos',
+    'composant_get_trad',
+    'configuration',
+    'config_lang',
+    'admin_tech',
+    'admin_vider',
+    'admin_plugin');
+  
   // Les pages définies dans options, administrés par les mêmes admins qu'ACS
   if (isset($GLOBALS['ACS_ACCES']) && is_array($GLOBALS['ACS_ACCES']) && count($GLOBALS['ACS_ACCES']))
     $enfer = array_merge($GLOBALS['ACS_ACCES'], $enfer);
-
+spip_log('acs_acces '.implode(' ', $enfer));
   $GLOBALS['ACS_ENFER'] = $enfer; // On garde cette définition pour affichage
 
   if (isset($GLOBALS['meta']['ACS_ADMINS'])) { // Pas d'action avant initialisation d'ACS !
@@ -42,18 +54,9 @@ function acs_acces($page) {
           acs_exit();
       }
     }
-    if (in_array($page, $enfer) && (!acs_autorise($GLOBALS['auteur_session']['id_auteur'])))
+    if (in_array($page, $enfer) && (!acs_autorise()))
       acs_exit();
   }
-}
-
-// Vérifie que l'admin connecté est autorisé à accéder à ACS
-function acs_autorise($id_admin) {
-  if (isset($id_admin) && $id_admin)
-    return in_array($id_admin, explode(',', $GLOBALS['meta']['ACS_ADMINS']) );
-  else  // A défaut, le créateur ET administrateur du site (auteur n°1) est autorisé à configurer ACS
-    return ($id_admin == 1);
-  return false;
 }
 
 // (ressemble vaguement à exec_configuration_dist() de spip 1.9.2 - http://doc.spip.org/@exec_configuration_dist)

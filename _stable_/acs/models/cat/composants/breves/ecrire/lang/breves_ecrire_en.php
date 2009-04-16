@@ -4,6 +4,8 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nom' => 'News',
-'description' => 'Usable only if Spip news are activated.',
+'description' => 'Block of last news.',
+'help' => 'Usable only if Spip news are activated.',
+
 );
 ?>

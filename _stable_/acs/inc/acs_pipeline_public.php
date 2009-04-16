@@ -18,6 +18,11 @@ function acs_insert_head($flux) {
   $js_model = find_in_path($GLOBALS[acsModel].'.js.html');
   if ($js_model)
     $r .= '<script type="text/javascript" src="spip.php?page='.$GLOBALS[acsModel].'.js"></script>';
+  // On ajoute des javascripts rien que pour les adminstrateurs ACS
+  if (acs_autorise()) {
+  	$js_dragdrop = find_in_path('javascript/dragdrop_interface.js');
+  	$r .= '<script type="text/javascript" src="'.$js_dragdrop.'"></script>';
+  }
   return $flux.$r;
 }
 ?>

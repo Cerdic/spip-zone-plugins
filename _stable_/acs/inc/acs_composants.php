@@ -26,11 +26,11 @@ function composants($c) {
 	$nom = $c->T('nom');
 	if ($nom == $c->type.' nom') $nom = ucfirst($c->type);
 	$r .= acs_box(
-		'<table width="100%"><tr><td width="99%">'.$nom.' '.$c->nic.'</td><td>'.$over.'</td>'.composant_instances_select($c->type, $c->nic).'</tr></table>',
-			'<form id="acs" name="acs" action="?exec=acs&onglet=composants" method="post">'.
+				'<table width="100%"><tr><td width="99%">'.$nom.' '.$c->nic.'</td><td>'.$over.'</td>'.composant_instances_select($c->type, $c->nic).'</tr></table>',
+				'<form id="acs" name="acs" action="?exec=acs&onglet=composants" method="post">'.
 				$c->edit().
 				'<table width="100%"><td valign="bottom"><div style="text-align:'.$GLOBALS['spip_lang_right'].';">'.
-				'<input type="submit" class="crayon-submit fondo" name="'._T('bouton_valider').'" value="'._T('bouton_valider').'">'.
+				'<input type="submit" class="fondo" name="'._T('bouton_valider').'" value="'._T('bouton_valider').'">'.
 				'</div></td></tr></table>'.
 				'</form>',
 				$c->icon

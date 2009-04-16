@@ -6,7 +6,7 @@
 $traductions_acs = array(
   'use' => 'Use',
 
-  'bordlargeur' => 'border width (pixels)',
+  'bordlargeur' => 'border width',
   'bordstyle' => 'border style',
   'parent' => 'default value',
   'none' => 'no border. Equivalent to border-width: 0',

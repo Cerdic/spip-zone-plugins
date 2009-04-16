@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2008
+# Copyright Daniel FAIVRE, 2007-2009
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
@@ -41,7 +41,7 @@ class AdminComposant {
     $this->debug = $debug;
     $this->type = $type; // Classe de composant (nom)
     $this->nic = $nic != 0 ? $nic : '';  // Numéro d'instance du composant
-    $this->fullname = "acs".ucfirst($type);
+    $this->fullname = "acs".ucfirst($type).$this->nic;
     $this->errors = array();
     $this->vars = array();
     $this->cvars = array(); // Variables issues d'un autre composant
@@ -69,18 +69,17 @@ class AdminComposant {
     }
 
     if (is_array($c['param'])) {
-      //print_r($c['param']);
       foreach($c['param'] as $param) {
         if (is_array($param) && is_array($param['nom']) && is_array($param['valeur']))
           $this->$param['nom'][0] = $param['valeur'][0];
         else
-          $this->$param = true;
+          $this->$param['nom'][0] = true;
       }
     }
     
     // Active le composant non optionnel
     if (($this->optionnel=='non') || ($this->optionnel =='no') || ($this->optionnel =='false')) {
-      ecrire_meta($this->fullname.$this->nic.'Use','oui');
+      ecrire_meta($this->fullname.'Use','oui');
       $this->enable = true;
       $updated = true;
     }
@@ -103,14 +102,14 @@ class AdminComposant {
                ($this->optionnel != 'true') && 
                ($GLOBALS['meta'][$this->optionnel] != 'oui') 
              ) {
-        ecrire_meta($this->fullname.$this->nic.'Use','non');
+        ecrire_meta($this->fullname.'Use','non');
         $this->enable = false;
         $updated = true;
       }
     }
     
     $this->vars[0] = array('nom' => 'Use',
-                           'valeur' => $GLOBALS['meta'][$this->fullname.$this->nic.'Use']
+                           'valeur' => $GLOBALS['meta'][$this->fullname.'Use']
                           );
     if (is_array($c['variable'])) {
       foreach($c['variable'] as $k=>$var) {
@@ -141,28 +140,29 @@ class AdminComposant {
     }
     if (_request('maj_composant')=='oui') {
       foreach ($this->vars as $var) {
-        $v = $this->fullname.$this->nic.$var['nom'];
-        if ($_POST[$v] != $GLOBALS['meta'][$v]) {
-          if (($_POST[$v]=='') && (isset($var['valeur']))) {
+        $v = $this->fullname.$var['nom'];
+        $posted = $v.'_'.md5($this->fullname);
+        if ($_POST[$posted] != $GLOBALS['meta'][$v]) {
+          if (($_POST[$posted]=='') && (isset($var['valeur']))) {
             if (substr($var['valeur'], 0, 3) == 'acs')
               $nv = $GLOBALS['meta'][$var['valeur']];
             else $nv = $var['valeur'];
           }
-          else $nv = $_POST[$v];
+          else $nv = $_POST[$posted];
           ecrire_meta($v, $nv);
           $updated = true;
         }
       }
-      
+
       if (isset($updated)) {
-        if ($this->afterUpdate) {
+        if (isset($this->afterUpdate)) {
           @include_once($this->rootDir.'/ecrire/'.$type.'.php');
           $cObj = 'acs'.ucfirst($type);
           if(class_exists($cObj)) {
             $$cObj = @new $cObj();
             if (($$cObj instanceof Composant) && is_callable(array($$cObj, 'afterUpdate'))) {
               if (!$$cObj->afterUpdate())
-                $this->errors[] = $cObj.'->afterUpdate '._T('acs:failed');
+                $this->errors[] = $cObj.'->afterUpdate '._T('acs:failed').' '.implode(' ', $$cObj->errors);
             }
             else
               $this->errors[] = $cObj.'->afterUpdate '._T('acs:not_callable');
@@ -236,14 +236,15 @@ class AdminComposant {
  * @return html code
  */
   function edit($preview=false) {
+  	include_spip('lib/composant/controles');
     $r = '<script type="text/javascript" src="'._DIR_PLUGIN_ACS.'lib/picker/picker.js"></script>';
     $r .= "<input type='hidden' name='maj_composant' value='oui' />".
 					'<input type="hidden" name="composant" value="'.$this->type.'" />'.
 					'<input type="hidden" name="nic" value="'.$this->nic.'" />';
 
-    $varconf = $this->fullname.$this->nic.'Config';
+    $varconf = $this->fullname.'Config';
     if (($this->optionnel!='non') && ($this->optionnel!='no') && ($this->optionnel!='false')) {
-      $varname = $this->fullname.$this->nic.'Use';
+      $varname = $this->fullname.'Use';
       if (isset($GLOBALS['meta'][$varname]) && $GLOBALS['meta'][$varname])
         $var = $GLOBALS['meta'][$varname];
       else
@@ -252,7 +253,7 @@ class AdminComposant {
         $this->display = "display: block;";
       else
         $this->display = "display: none;";
-
+			$varname .= '_'.md5($this->fullname);
       $r .= '<div align="'.$GLOBALS['spip_lang_right'].'" style ="font-weight: normal"><label>'._T('acs:use').' '.$this->T('nom').' '.$this->nic.' : </label>';
       // acs_bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="", $enable=true)
       $r .= acs_bouton_radio($varname, "oui", _T('item_oui'), $var == "oui", "changeVisible(this.checked, '$varconf', 'block', 'none');",$this->enable);
@@ -271,8 +272,8 @@ class AdminComposant {
       if ($var['nom'] === 'Use')
         continue;
       $v = $var['nom'];
-      if (isset($GLOBALS['meta'][$this->fullname.$this->nic.$v]))
-        $$v = $GLOBALS['meta'][$this->fullname.$this->nic.$v];
+      if (isset($GLOBALS['meta'][$this->fullname.$v]))
+        $$v = $GLOBALS['meta'][$this->fullname.$v];
       elseif (isset($var['valeur'])) {
         $default = $var['valeur'];
         if ((substr($default,0,3) =='acs') && isset($GLOBALS['meta'][$default]))
@@ -281,8 +282,9 @@ class AdminComposant {
           $$v = $default;
       }
       $draw = 'ctl'.ucfirst($var['type']);
-      if (is_callable(array($this,$draw)))
-        $controls[$var['nom']] = $this->$draw($v, $$v, $var);
+      if (is_callable($draw)) {
+        $controls[$var['nom']] = $draw($this->type, $this->nic, $v, $$v, $var, md5($this->fullname));
+      }
       else $controls[$var['nom']] = $draw."() undefined.<br />" ;
     }
 
@@ -318,181 +320,8 @@ class AdminComposant {
     include_once(_DIR_PLUGIN_ACS.'lib/cGetPages.php');
     return cGetPages($this->type);
   }
-
-  // Choix de couleur
-  function ctlColor($nom, $couleur, $param) {
-    $var = $this->fullname.$this->nic.$nom;
-    return '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'" class="label">'.$this->T($nom).'</label></td><td><input type="text" class="palette" id="'.$var.'" name="'.$var.'" size="8" maxlength="8" value="'.$couleur.'"></td></tr></table></div>';
-  }
-
-  // Choix d'image
-  function ctlImg($nom, $image, $param) {
-    $var = $this->fullname.$this->nic.$nom;
-    $c = $GLOBALS['ACS_CHEMIN'].'/'.$param['chemin'];
-    acs_creer_chemin($c);
-    $s = @getimagesize('../'.$c.'/'.$image);
-    $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
-    if ($param['label'] != 'non')
-      $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'"  class="label">'._T($nom).'</label></td>';
-    $r .= '<td><input type="text" name="'.$var.'"'.(is_array($s) ? ' title="'.$s[0].'x'.$s[1].'"' : '').' value="'.$image.'" size="40" class="forml"></td>';
-    $r .= '<td><a href="javascript:TFP.popup(document.forms[\'acs\'].elements[\''.$var.'\'], document.forms[\'acs\'].elements[\''.$var.'\'].value, \''.$c.'\', \''._DIR_RACINE.'\');" title="'._T('acs:choix_image').'"><img src="'._DIR_ACS.'img_pack/folder_image.png" class="icon" alt="'._T('acs:choix_image').'" /></a></td></tr></table></div>';
-    return $r;
-  }
-
-  // Choix d'une largeur de bordure
-  function ctlLargeurBord($nom, $largeur='0', $param) {
-    $var = $this->fullname.$this->nic.$nom;
-    $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
-    if ($param['label'] != 'non') $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'" class="label">'.$this->T($nom).'</label></td>';
-    $r .= '<td><select name="'.$var.'" title="'._T('acs:bordlargeur').'" class="forml" style="width: auto">'.
-      '<option value=""'.($largeur=="" ? ' selected' : '').'></option>'.
-      '<option value="0"'.($largeur=="0" ? ' selected' : '').'>0</option>'.
-      '<option value="thin"'.($largeur=="thin" ? ' selected' : '').'>thin</option>'.
-      '<option value="1px"'.($largeur=="1px" ? ' selected' : '').'>1px</option>'.
-      '<option value="2px"'.($largeur=="2px" ? ' selected' : '').'>2px</option>'.
-      '<option value="3px"'.($largeur=="3px" ? ' selected' : '').'>3px</option>'.
-      '<option value="4px"'.($largeur=="4px" ? ' selected' : '').'>4px</option>'.
-      '<option value="5px"'.($largeur=="5px" ? ' selected' : '').'>5px</option>'.
-      '</select></td></tr></table></div>';
-    return $r;
-  }
-
-  // Choix d'un style  de bordure
-  function ctlStyleBord($nom, $style='solid', $param) {
-    $var = $this->fullname.$this->nic.$nom;
-    $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
-    if ($param['label'] != 'non') $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'" class="label">'.$this->T($nom).'</label></td>';
-    $r .= '<td><select name="'.$var.'" title="'._T('acs:bordstyle').'" class="forml" style="width: auto">'.
-      '<option value=""'.($style=="" ? ' selected' : '').' title="'._T('acs:parent').'"></option>'.
-      '<option value="none"'.($style=="none" ? ' selected' : '').' title="'._T('acs:none').'">none</option>'.
-      '<option value="solid"'.($style=="solid" ? ' selected' : '').' title="'._T('acs:solid').'">solid</option>'.
-      '<option value="dashed"'.($style=="dashed" ? ' selected' : '').' title="'._T('acs:dashed').'">dashed</option>'.
-      '<option value="dotted"'.($style=="dotted" ? ' selected' : '').' title="'._T('acs:dotted').'">dotted</option>'.
-      '<option value="double"'.($style=="double" ? ' selected' : '').' title="'._T('acs:double').'">double</option>'.
-      '<option value="groove"'.($style=="groove" ? ' selected' : '').' title="'._T('acs:groove').'">groove</option>'.
-      '<option value="ridge"'.($style=="ridge" ? ' selected' : '').' title="'._T('acs:ridge').'">ridge</option>'.
-      '<option value="inset"'.($style=="inset" ? ' selected' : '').' title="'._T('acs:inset').'">inset</option>'.
-      '<option value="outset"'.($style=="outset" ? ' selected' : '').' title="'._T('acs:outset').'">outset</option>'.
-      '</select></td></tr></table></div>';
-    return $r;
-  }
-  
-  // Choix d'une famille de fonte
-  function ctlFontFamily($nom, $style='sans-serif', $param) {
-    $var = $this->fullname.$this->nic.$nom;
-    $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
-    if ($param['label'] != 'non') $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'" class="label">'.$this->T($nom).'</label></td>';
-    $r .= '<td><select name="'.$var.'" title="'._T('acs:bordstyle').'" class="forml" style="width: auto">'.
-      '<option value="serif"'.($style=="serif" ? ' selected' : '').' title="'._T('acs:serif').'">serif</option>'.
-      '<option value="sans-serif"'.($style=="sans-serif" ? ' selected' : '').' title="'._T('acs:sans-serif').'">sans-serif</option>'.
-      '<option value="cursive"'.($style=="cursive" ? ' selected' : '').' title="'._T('acs:cursive').'">cursive</option>'.
-      '<option value="fantasy"'.($style=="fantasy" ? ' selected' : '').' title="'._T('acs:fantasy').'">fantasy</option>'.
-      '<option value="monotype"'.($style=="monotype" ? ' selected' : '').' title="'._T('acs:monotype').'">monotype</option>'.
-      '</select></td></tr></table></div>';
-    return $r;
-  }
-  
-  // Choix de valeur, avec + / - (todo)
-  function ctlNombre($nom, $nombre=0, $param) {
-    $var = $this->fullname.$this->nic.$nom;
-    return '<table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'"  class="label">'.$this->T($nom).'</label></td><td><input type="text" name="'.$var.'" size="8" maxlength="6" class="forml" value="'.$nombre.'" style="text-align:'.$GLOBALS['spip_lang_right'].'" /></td></tr></table>';
-  }
-
-  // Saisie d'un texte
-  function ctlText($nom, $txt, $param = array('taille' => 30)) {
-    $var = $this->fullname.$this->nic.$nom;
-    return '<table width="100%"><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'"  class="label">'.$this->T($nom).'</label></td><td><input type="text" name="'.$var.'" size="'.$param['taille'].'" maxlength="'.$param['taille'].'" class="forml" value="'.$txt.'" /></td></tr></table>';
-  }
-
-  // Saisie d'un texte long
-  function ctlTextarea($nom, $txt, $param) {
-    $var = $this->fullname.$this->nic.$nom;
-    return '<div align="'.$GLOBALS['spip_lang_left'].'"><label for "'.$var.'" title="'.$var.'">'.$this->T($nom).'</label><textarea name="'.$var.'" class="forml" rows="'.(isset($param['lines']) ? $param['lines']-1 : 2).'">'.$txt.'</textarea></div>';
-  }
-
-  // Choix oui / non
-  function ctlChoix($nom, $value, $param) {
-    if (!is_array($param['option'])) return 'Pas d\'options pour '.$nom;
-    $var = $this->fullname.$this->nic.$nom;
-    $r = '<table><tr valign="bottom"><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'" title="'.$var.'" class="label">'.$this->T($nom).'</label></td><td>';
-    foreach($param['option'] as $option) {
-      switch($option) {
-        case 'oui';
-          $label = _T('item_oui');
-          break;
-        case 'non';
-          $label = _T('item_non');
-          break;
-        default:
-          $label = $this->T($nom.ucfirst($option));
-      }
-      $r .= acs_bouton_radio(
-        $var,
-        $option,
-        '<label for "'.$var.'" title="'.$var.ucfirst($option).'" class="label">'.$label.'</label>',
-        $value == $option
-      );
-    }
-    $r .= '</td></tr></table>';
-    return $r;
-  }
-
-  // Choix d'un composant
-  function ctlWidget($nom, $value, $param ) {
-    require_once(_DIR_PLUGIN_ACS.'lib/composant/composants_variables.php');
-    $vars = composants_variables();
-    $var = $this->fullname.$this->nic.$nom;
-
-    $r = '<table><tr><td><label for "'.$var.'" title="'.$var.'"  class="label">'.$this->T($nom).'</label></td><td><div id="'.$var.'" class="ctlWidget">';
-    $r .= '<select id="select_'.$var.'" name="'.$var.'" class="forml select_widget">';
-    $r .= '<option value=""'.($value=='' ? ' selected' : '').'> </option>';
-
-    foreach(array_keys(composants_liste()) as $c) {
-      $cuse = 'acs'.ucfirst($c).'Use';
-      if (isset($GLOBALS['meta'][$cuse]) && (($GLOBALS['meta'][$cuse] == 'oui') || ($GLOBALS['meta'][$cuse] == 'yes')))
-        $r .= '<option value="'.$c.'"'.($value==$c ? ' selected' : '').'>'.ucfirst($c).'</option>';
-      elseif (!isset($GLOBALS['meta'][$cuse]) && (!in_array(ucfirst($c).'Use', composants_variables()))) {
-        if (isset($value)) {
-          if ($value==$c)
-            $r .= '<option value="'.$c.'" selected>'.ucfirst($c).'</option>';
-          else
-            $r .= '<option value="'.$c.'">'.ucfirst($c).'</option>';
-        }
-      }
-    }
-    $r .= '</select></div></td></tr></table>';
-    return $r;
-  }
-
-  function ctlHidden($nom, $value, $param) {
-    $var = $this->fullname.$nom.$this->nic;
-    return '<input type="hidden" name="'.$var.'" value="'.$value.'" />';
-  }
 }
 
-// http://doc.spip.org/@bouton_radio
-function acs_bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="", $enable=true) {
-  static $id_label = 0;
-
-  if (strlen($onClick) > 0) $onClick = " onclick=\"$onClick\"";
-  $texte = "<input type='radio' name='$nom' value='$valeur' id='radio_$id_label'$onClick";
-  if ($actif) {
-    $texte .= ' checked="checked"';
-    $titre = '<b>'.$titre.'</b>';
-  }
-  $texte .= ($enable ? '' : ' disabled')." />&nbsp;<label for='radio_$id_label'>$titre</label>\n";
-  $id_label++;
-  return $texte;
-}
-
-function acs_creer_chemin($c) {
-  $dir = _DIR_RACINE.$c;
-
-  if (is_readable($dir))
-    return true;
-  else
-    return mkdir_recursive($dir);
-}
 /**
  * Makes directory, returns TRUE if exists or made
  *

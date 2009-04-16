@@ -7,10 +7,6 @@
   <necessite id='acs' version='[0.4;]' />
 
   <param>
-    <nom>optionnel</nom>
-    <valeur>no</valeur>
-  </param>
-  <param>
     <nom>preview</nom>
     <valeur>70</valeur>
   </param>

@@ -29,7 +29,6 @@ function controleurs_composant_dist($regs) {
     'nic' => $id,
     'lang' => $GLOBALS['spip_lang']
   );
-  spip_log("-- composants/$c $id", 'acs') ;
   $html = '<style>'.recuperer_fond('acs_style_prive.css').'</style>';
   $html .= '<div  style="width:'.$crayon->w.'px; height:'.$crayon->h.'px">'.
     '<div id="'."composant-$ctype-$id".'" style="position: absolute; border: 2px outset #fddf00; opacity: 0.99; width:'.$crayon->w.'px; height:'.$crayon->h.'px; font-size:'._request('em').'">'.

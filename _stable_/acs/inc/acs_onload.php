@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2008
+# Copyright Daniel FAIVRE, 2007-2009
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
@@ -56,6 +56,22 @@ function acs_get_from_active_plugin($plugin, $variable = false) {
   if (isset($plugin[$variable]))
     return $plugin[$variable];
 
+  return false;
+}
+
+// Vérifie que l'utilisateur connecté est un admin ACS autorisé, ou le(s) webmestre(s) si ACS n'est pas encore configuré 
+function acs_autorise() {
+spip_log('$GLOBALS[\'connect_statut\']='.$GLOBALS['connect_statut']);
+	// Si l'utilisateur n'est pas admin, pas la peine d'aller plus loin
+	if ($GLOBALS['auteur_session']['statut'] != "0minirezo")
+		return false;
+	$id_admin = $GLOBALS['auteur_session']['id_auteur'];
+  if (isset($GLOBALS['meta']['ACS_ADMINS']) && $GLOBALS['meta']['ACS_ADMINS'] != '')
+    return in_array($id_admin, explode(',', $GLOBALS['meta']['ACS_ADMINS']) );
+  elseif (defined(_ID_WEBMESTRES)) // Si le plugin Autorité est installé, les webmestres sont autorisés à configurer ACS
+    return in_array($id_admin, explode(':', _ID_WEBMESTRES) );
+  else  // A défaut, le créateur ET administrateur du site (auteur n°1) est toujours autorisé à configurer ACS
+    return ($id_admin == 1);
   return false;
 }
 ?>

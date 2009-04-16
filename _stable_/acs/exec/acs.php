@@ -15,7 +15,7 @@ include_spip('inc/meta');
 function exec_acs() {
   global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_left, $spip_lang_right,$changer_config, $spip_display;
 
-  if (isset($GLOBALS['meta']['ACS_ADMINS']) && (!acs_autorise($GLOBALS['auteur_session']['id_auteur'])))
+  if (isset($GLOBALS['meta']['ACS_ADMINS']) && (!acs_autorise()))
     acs_exit();
 
   //pipeline('exec_init',array('args'=>array('exec'=>'acs'),'data'=>'')); // non utilisé
@@ -90,7 +90,7 @@ function exec_acs() {
   }
   $si_premiere_fois = isset($GLOBALS['meta']['ACS_ADMINS']) ? '' : avertissement_config();
 	echo debut_onglet();
-	echo onglet(_T('acs:pages'), generer_url_ecrire('acs', 'onglet=pages&detail=2'), $onglet, 'pages', _DIR_PLUGIN_ACS."/img_pack/pages-24.gif");
+	echo onglet(_T('acs:pages'), generer_url_ecrire('acs', 'onglet=pages'), $onglet, 'pages', _DIR_PLUGIN_ACS."/img_pack/pages-24.gif");
 	echo onglet(_T('acs:composants'), generer_url_ecrire('acs', 'onglet=composants'), $onglet, 'composants', _DIR_PLUGIN_ACS."/img_pack/composant-24.gif");
 	if (isset($GLOBALS['meta']['acsVoirOngletVars']) && ($GLOBALS['meta']['acsVoirOngletVars'] == 'on')) 
 	  echo onglet(_T('acs:variables'), generer_url_ecrire('acs', 'onglet=vars'), $onglet, 'vars', _DIR_PLUGIN_ACS."/img_pack/vars-24.gif");	

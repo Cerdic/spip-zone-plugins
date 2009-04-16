@@ -10,13 +10,7 @@ include_spip('inc/acs_page_get_infos');
 include_spip('inc/acs_widgets');
 
 function acs_pages($page) {
-  $allvars.= '<a name="acs_vars"></a><div class="acs_vars_box pliable"><div id="acs_vars">';
-  if (_request('show_vars') == 'oui') { // mode sans JQuery
-    include_spip('inc/acs_page_get_all_variables');
-    $allvars .= acs_page_get_all_variables();
-  }
-  $allvars.= '</div></div>';
-  return $allvars.'<div id="page_infos"><a name="page_infos"></a>'.acs_page_get_infos($page, _request('mode'), _request('detail')).'</div>';
+  return '<div id="page_infos"><a name="page_infos"></a>'.acs_page_get_infos($page, _request('mode'), _request('detail')).'</div>';
 }
 
 function acs_pages_gauche($page) {

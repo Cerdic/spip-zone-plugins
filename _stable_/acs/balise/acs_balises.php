@@ -51,13 +51,13 @@ function balise_HEADER_COMPOSANTS($p) {
   return $p; 
 }
 
-// Retourne les css ou javascripts des composants, concaténées. Cache.
+// Cache de la fonction composants_head.
 function composants_head_cache($type) {
   $r = cache('composants_head', 'head_'.$GLOBALS['meta']['acsModel'].'_'.$type, array("$type"));
   return $r[0];
 }
 
-// Retourne les css ou javascripts des composants, concaténées. Fonction.
+// Retourne les css ou javascripts des composants, concaténés
 function composants_head($type) {
   require_once _DIR_ACS.'lib/composant/composants_liste.php';
   if (is_array(composants_liste())) {

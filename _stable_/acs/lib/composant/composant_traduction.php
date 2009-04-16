@@ -29,9 +29,12 @@ function lecture_composant_traduction($c='fond', $l='fr', $module='') {
   ksort($tableau);
   $nb = count($tableau);
   $r = '<div class="acs_box">';
-  if ($module != 'ecrire') $r .= "<div class='arial2 onlinehelp' style='padding-left: 2px'>"._T('acs:si_composant_actif').' : '._T('module_texte_explicatif')."</div>";
+  if ($module != 'ecrire')
+  	$r .= "<div class='arial2 onlinehelp' style='padding-left: 2px'>"._T('acs:si_composant_actif').' : '._T('module_texte_explicatif')."</div>";
   $r .= "\n<table cellpadding='3' cellspacing='1' border='0' width=\"100%\">";
-  $r .= "\n<tr style='background: ".$GLOBALS['couleur_foncee']."'><td class='verdana1'><b>"._T('module_raccourci')."</b></td>\n<td class='verdana2'><b>"._T('module_texte_affiche')."</b> ($nb)</td>\n<td>".'<img src="'._DIR_PLUGIN_ACS.'lang/flags/'.$l.'.gif" alt="'.$l.'" align="right" />'."</td></tr>\n";
+  $r .= "\n<tr style='background: ".$GLOBALS['couleur_foncee']."'>".
+  	"<td class='verdana1'><b>"._T('module_raccourci')."</b></td>\n<td class='verdana2'><b>"._T('module_texte_affiche')."</b> ($nb)</td>\n".
+  	"<td>".'<img src="'._DIR_PLUGIN_ACS.'lang/flags/'.$l.'.gif" alt="'.$l.'" align="right" />'."</td></tr>\n";
 
   $aff_nom_module = 'acs:'.$c.'_';
   foreach ($tableau as $raccourci => $val) {
@@ -39,10 +42,12 @@ function lecture_composant_traduction($c='fond', $l='fr', $module='') {
     if (substr($raccourci, strlen($raccourci)-4, 4) == '_off') continue;
     $bgcolor = ($i = ($i==0)) ? '#eeeeee' : 'white';
     $r .= "\n<tr style='background-color: $bgcolor; vertical-align: top;'><td class='verdana2'><b>";
-    if ($module != 'ecrire') $r .= "&lt;:$aff_nom_module";
+    if ($module != 'ecrire')
+    	$r .= "&lt;:$aff_nom_module";
     $r .= $raccourci;
     if ($module != 'ecrire') $r .= ":&gt;";
-    $r .= "</b></td>\n<td class='arial2' colspan='2'>".$val."</td></tr>";
+    // la classe crayon_$c_$raccourci  sert à donner un id unique, et type_traduction donne l'image du crayon.
+    $r .= '</b></td><td  class="crayon crayon_'.$c.'_'.$raccourci.' type_traduction traduction-'.$c.'_'.$raccourci.'-0 arial2" colspan="2">'.$val."</td></tr>";
   }
 
   $r .= "</table><br /></div>";

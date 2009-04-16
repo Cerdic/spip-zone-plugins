@@ -19,7 +19,10 @@ class acsOnglets extends Composant {
     $imr = @ImageCreateFromGif(find_in_path('composants/onglets/img_pack/right.gif'));
     $iml = @ImageCreateFromGif(find_in_path('composants/onglets/img_pack/left.gif'));
 
-    if (!$imr || !$iml) return false;
+    if (!$imr || !$iml) {
+    	$this->errors[] = 'ImageCreateFromGif_fail';
+    	return false;
+    }
 
     // bord
     $br = hexdec(substr($bc,0,2));
@@ -53,16 +56,18 @@ class acsOnglets extends Composant {
 
     $dir_img = '../'.$GLOBALS['ACS_CHEMIN'].'/img/onglets';
     if (!is_readable($dir_img)) mkdir_recursive($dir_img);
-    if (!@imagegif($imr,'../'.$GLOBALS['ACS_CHEMIN'].'/img/onglets/right.gif')) return false;
-    if (!@imagegif($iml,'../'.$GLOBALS['ACS_CHEMIN'].'/img/onglets/left.gif')) return false;
-
+    if ( (!@imagegif($imr,$dir_img.'/right.gif')) ||
+    	(!@imagegif($iml,$dir_img.'/left.gif')) ) {
+  			$this->errors[] = 'unable_to_create_imagegif in '.$dir_img;
+      	return false;
+    	}
     return true;
   }
 }
 
 function metacol($var) {
   $r = substr($GLOBALS['meta'][$var],1);
-  spip_log( $r . ' ');
+  //spip_log( $r . ' ');
   return $r;
 }
 ?>

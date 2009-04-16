@@ -3,7 +3,7 @@
          (Plugin Spip)
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2008
+Copyright Daniel FAIVRE, 2007-2009
 Copyleft: licence GPL - Cf. LICENCES.txt
 
   Ce squelette definit les styles de l'espace prive pour ACS
@@ -349,7 +349,7 @@ fieldset.apercu {
   color: #005d00;
 }
 
-/* Styles des pinceaux ACS */
+[(#REM) Styles des pinceaux ACS. Les types autres que crayon permettent d'utiliser des controleurs spécifiques ]
 .crayon-icones em.crayon-pinceau {
   background: url(#CHEMIN{images/pinceau.png}) no-repeat;
   height: 20px;
@@ -358,6 +358,18 @@ fieldset.apercu {
   display: none;
 }
 .crayon-changed em.crayon-pinceau {
+  display: none;
+}
+[(#REM) Hack : le type de crayon pour une traduction reprend l'icône normale des crayons, mais son existence permet d'éviter 
+l'utilisation du contrôleur par défaut qui pointe vers crayons_store standard et non vers la bonne action.]
+.crayon-icones em.crayon-traduction {
+  background: url(#CHEMIN{images/crayon20.png}) no-repeat;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  display: none;
+}
+.crayon-changed em.crayon-traduction {
   display: none;
 }
 
@@ -371,4 +383,14 @@ img.bouton_edit_composant {
 }
 img.bouton_edit_composant:hover {
   background: #ffefaf;
+}
+
+.controle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  z-index: 99999999;
+  border : #GET{foncee} 1px solid;
+  -moz-border-radius: 0;
 }

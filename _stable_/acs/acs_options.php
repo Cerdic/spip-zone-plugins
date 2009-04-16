@@ -9,15 +9,20 @@
 // Pages de l'espace ecrire à accès contrôlé comme ACS - ACS access rules controlled pages
 // Les administrateurs sont ceux d'ACS
 $GLOBALS['ACS_ACCES'] = array('mots_type');
-
 // Contrôle d'accès ACS aux pages d'administration de certains plugins, s'ils sont installés
-if(in_array('notation', $GLOBALS['plugins'])) $GLOBALS['ACS_ACCES'][] = 'notation_param';
-if(in_array('w3c_go_home', $GLOBALS['plugins'])) $GLOBALS['ACS_ACCES'][] = 'w3c_go_home';
-if(in_array('openPublishing', $GLOBALS['plugins'])) {
-  $GLOBALS['ACS_ACCES'][] = 'op';
-  $GLOBALS['ACS_ACCES'][] = 'op_effacer';
+// Deux tests, en raison de changements dans SPIP : à suivre
+if (isset($GLOBALS['meta']['plugin']) || is_array($GLOBALS['plugins'])) {
+	if(isset($GLOBALS['meta']['plugin']['notation']) || in_array('notation', $GLOBALS['plugins']) )
+		$GLOBALS['ACS_ACCES'][] = 'notation_param';
+	if(isset($GLOBALS['meta']['plugin']['w3c_go_home']) ||in_array('w3c_go_home', $GLOBALS['plugins']) )
+		$GLOBALS['ACS_ACCES'][] = 'w3c_go_home';
+	if(isset($GLOBALS['meta']['plugin']['openPublishing']) || in_array('openPublishing', $GLOBALS['plugins'])) {
+		$GLOBALS['ACS_ACCES'][] = 'op';
+		$GLOBALS['ACS_ACCES'][] = 'op_effacer';
+	}
+	if(in_array('cfg', $GLOBALS['plugins']) || isset($GLOBALS['meta']['plugin']['cfg'])) 
+		$GLOBALS['ACS_ACCES'][] = 'cfg';
 }
-
 //define('_DEBUG_CRAYONS', true);
 /*__________________________________________________________________
 
@@ -28,10 +33,10 @@ if(in_array('openPublishing', $GLOBALS['plugins'])) {
 // User images and parameters
 // compatible mutualisation (_DIR_SITE defini)
 if (_DIR_SITE == '_DIR_SITE') {
-  $dir_site ='';
+	$dir_site ='';
 }
 else {
-  $dir_site = _DIR_RACINE ? substr(_DIR_SITE, 3) : _DIR_SITE ;
+	$dir_site = _DIR_RACINE ? substr(_DIR_SITE, 3) : _DIR_SITE ;
 }
 $GLOBALS['ACS_CHEMIN'] = $dir_site._NOM_PERMANENTS_ACCESSIBLES.'_acs';
 
