@@ -22,7 +22,10 @@ $javascript_centrar_imprimir = "<script type=\"text/javascript\">
 
 // prepara logo
 		$logo = find_in_path('impresora.gif');
+		
 		$url = generer_url_public('',$arg);
+
+// "'page=imprimir_articulo&amp;id_article='.".
 		
 // prepara el enlace completo
 		$enlace = $javascript_centrar_imprimir."<a href=\"javascript:;\" onclick=\"centrarVentana('$url','Imprimir_documento','scrollbars=yes,resizable=yes','700','470','true')\" title=\""._T('imprimirdocumento:version_doc_imprimir')."\" style=\"border:none\"><img src=\"$logo\" style=\"border:none\" alt=\""._T('imprimirdocumento:version_doc_imprimir')."\" /> "._T('imprimirdocumento:version_imprimir')."</a>";
@@ -30,21 +33,18 @@ $javascript_centrar_imprimir = "<script type=\"text/javascript\">
 
 }
 
-// la baliza a llamar como #ENVIAR_EMAIL** (importante los dos asteriscos para que funcione el javascript anterior de centrar la ventan por-up)
-
 function balise_IMPRIMIR_DOCUMENTO($p) {
 
-// numero y enlace al art�ulo o breve
-  	$_id_article = champ_sql('id_article', $p);
-	$arg = "'page=imprimir_articulo&amp;id_article='.".$_id_article;
-	$url = generer_url_public('',$arg);
-	if (!$_POST["id_article"]){
-		$_id_breve = champ_sql('id_breve', $p);
-		$arg = "'page=imprimir_breve&amp;id_breve='.".$_id_breve;
-		$url = generer_url_public('',$arg);
+	if ($GLOBALS['contexte']['id_breve'] == "") { 
+	$arg="'page=imprimir_articulo&amp;id_article='.".champ_sql('id_article', $p);
 	}
+	else {
+	$arg="'page=imprimir_breve&amp;id_breve='.".champ_sql('id_breve', $p);
+	}
+
    $p->code ="preparar_enlace_imprimir($arg)";
    $p->statut = 'html';
+
    return $p;
 }
 
