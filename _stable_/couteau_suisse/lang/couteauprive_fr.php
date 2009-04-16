@@ -8,8 +8,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// 2
 	'2pts_non' => '&nbsp;:&nbsp;non',
 	'2pts_oui' => '&nbsp;:&nbsp;oui',
-	'outils_non_parametrables' => 'Non param&eacute;trables&nbsp;:',
-
 
 	// S
 	'SPIP_liens:description' => '@puce@ Tous les liens du site s\'ouvrent par d&eacute;faut dans la fen&ecirc;tre de navigation en cours. Mais il peut &ecirc;tre utile d\'ouvrir les liens externes au site dans une nouvelle fen&ecirc;tre ext&eacute;rieure -- cela revient &agrave; ajouter {target=&quot;_blank&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'&eacute;tendre au maximum cette fonctionnalit&eacute;.[[%radio_target_blank3%]]
@@ -64,7 +62,6 @@ _ Lien de test : [->test@test.com] (rechargez la page enti&egrave;rement).[[%env
 @puce@ En cochant &laquo;oui&raquo; ci-dessous, l\'&eacute;tat des blocs num&eacute;rot&eacute;s sera stock&eacute; dans un cookie le temps de la session, afin de conserver l\'aspect de la page en cas de retour.[[%blocs_cookie%]]
 
 @puce@ Le Couteau Suisse utilise par d&eacute;faut la balise HTML &lt;h4&gt; pour le titre des blocs d&eacute;pliables. Choisissez ici une autre balise &lt;hN&gt;&nbsp;:[[%bloc_h4%]]',
-	'label:blocs_cookie' => 'Utilisation des cookies :',
 	'blocs:nom' => 'Blocs D&eacute;pliables',
 	'boites_privees:description' => 'Toutes les bo&icirc;tes d&eacute;crites ci-dessous apparaissent ici ou l&agrave; dans la partie priv&eacute;e.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Les r&eacute;visions du Couteau Suisse}} : un cadre sur la pr&eacute;sente page de configuration, indiquant les derni&egrave;res modifications apport&eacute;es au code du plugin ([Source->@_CS_RSS_SOURCE@]).
@@ -76,8 +73,8 @@ _ Lien de test : [->test@test.com] (rechargez la page enti&egrave;rement).[[%env
 	'boites_privees:nom' => 'Bo&icirc;tes priv&eacute;es',
 	'bp_tri_auteurs' => 'Les tris d\'auteurs',
 	'bp_urls_propres' => 'Les URLs propres',
-	'brouteur:nom'        => 'R&eacute;glage du s&eacute;lecteur de rubrique',
 	'brouteur:description' => 'Utiliser le selecteur de rubrique en AJAX &aacute; partir de %rubrique_brouteur% rubrique(s)',
+	'brouteur:nom' => 'R&eacute;glage du s&eacute;lecteur de rubrique',
 
 	// C
 	'cache_controle' => 'Contr&ocirc;le du cache',
@@ -321,6 +318,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:balise_sommaire' => 'Activer la balise #CS_SOMMAIRE :',
 	'label:bloc_h4' => 'Balise pour les titres&nbsp;:',
 	'label:bloc_unique' => 'Un seul bloc ouvert sur la page :',
+	'label:blocs_cookie' => 'Utilisation des cookies :',
 	'label:couleurs_fonds' => 'Permettre les fonds :',
 	'label:cs_rss' => 'Activer :',
 	'label:debut_urls_libres' => '<:label:debut_urls_propres:>',
@@ -353,8 +351,8 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:max_auteurs_page' => 'Auteurs par page :',
 	'label:message_travaux' => 'Votre message de maintenance :',
 	'label:moderation_admin' => 'Valider automatiquement les messages des : ',
-	'label:ouvre_ref'		=>'Ouverture et fermeture des appels de notes de bas de page',
-	'label:ouvre_note'		=>'Ouverture et fermeture des notes de bas de page',
+	'label:ouvre_note' => 'Ouverture et fermeture des notes de bas de page',
+	'label:ouvre_ref' => 'Ouverture et fermeture des appels de notes de bas de page',
 	'label:paragrapher' => 'Toujours paragrapher :',
 	'label:prive_travaux' => 'Accessibilit&eacute; de l\'espace priv&eacute; pour :',
 	'label:puce' => 'Puce publique &laquo;<html>-</html>&raquo; :',
@@ -451,6 +449,7 @@ _ &bull; {Par d&eacute;faut} : remplacement automatique d\'origine (&agrave; par
 	'outils_cliquez' => 'Cliquez sur le nom des outils ci-dessus pour afficher ici leur description.',
 	'outils_inactifs' => 'Outil inactifs :',
 	'outils_liste' => 'Liste des outils du Couteau Suisse',
+	'outils_non_parametrables' => 'Non param&eacute;trables&nbsp;:',
 	'outils_permuter_gras1' => 'Permuter les outils en gras',
 	'outils_permuter_gras2' => 'Permuter les @nb@ outils en gras ?',
 	'outils_resetselection' => 'R&eacute;initialiser la s&eacute;lection',

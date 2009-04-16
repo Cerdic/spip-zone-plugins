@@ -46,7 +46,7 @@ _ Enlla&ccedil; de test: [->test@test.com] (recarregueu la p&agrave;gina complet
 <bloc>
  Un t&iacute;tol que esdevindr&agrave; clicable
  
- El text a amagar/mostrar, despr&eacute;s dos salts de l&iacute;nia...
+ El text a amagar/mostrar, despr&eacute;s de dos salts de l&iacute;nia...
  </bloc>
 </code></quote>
 
@@ -59,7 +59,9 @@ _ Enlla&ccedil; de test: [->test@test.com] (recarregueu la p&agrave;gina complet
  El meu bloc desplegable (que contindr&agrave; el URL al que apunta si &eacute;s necessari)
  #BLOC_FIN</code></quote>
  
-@puce@ Marcant amb una creu &laquo;si&raquo; m&eacute;s avall, l\'obertura d\'un bloc provocar&agrave; el tancament de tots els altres blocs de la p&agrave;gina, per tal de tenir-ne nom&eacute;s un d\'obert a la vegada.[[%bloc_unique%]]',
+@puce@ Marcant amb una creu &laquo;si&raquo; m&eacute;s avall, l\'obertura d\'un bloc provocar&agrave; el tancament de tots els altres blocs de la p&agrave;gina, per tal de tenir-ne nom&eacute;s un d\'obert a la vegada.[[%bloc_unique%]]
+
+@puce@ El Ganivet Su&iacute;s utilitza, per defecte, l\'etiqueta HTML &lt;h4&gt; pel t&iacute;tol dels blocs desplegables. Escolliu aqu&iacute; una altra etiqueta &lt;hN&gt;&nbsp;:[[%bloc_h4%]]',
 	'blocs:nom' => 'Blocs Desplegables',
 	'boites_privees:description' => 'Tots els quadres descrits m&eacute;s avall apareixen aqu&iacute; o a la part privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Les revisions del Ganivet Su&iacute;s}}: un quadre a la p&agrave;gina actual de configuraci&oacute;, indicant les &uacute;ltimes modificacions aportades al codi del plugin ([Source->@_CS_RSS_SOURCE@]).
@@ -85,7 +87,7 @@ _ Enlla&ccedil; de test: [->test@test.com] (recarregueu la p&agrave;gina complet
 	'categ:typo-racc' => '30. Dreceres tipogr&agrave;fiques',
 	'certaines_couleurs' => 'Nom&eacute;s les etiquetes definides m&eacute;s avall@_CS_ASTER@ :',
 	'chatons:aide' => 'Emoticones: @liste@',
-	'chatons:description' => 'Insereix imatges (o emoticones pels {xats}) en tots els textos on apareix una cadena del tipus <code>:nom</code>.
+	'chatons:description' => '<MODIF>Insereix imatges (o emoticones pels {xats}) en tots els textos on apareix una cadena del tipus <code>:nom</code>.
 _ Aquesta eina substitueix aquestes dreceres per les imatges del mateix nom que troba a dins del directori  plugins/couteau_suisse/img/emoticones.',
 	'chatons:nom' => 'Emoticones',
 	'class_spip:description1' => 'Aqu&iacute; podeu definir algunes dreceres d\'SPIP. Un valor buit equival a utilitzar el valor per defecte.[[%racc_hr%]]',
@@ -97,7 +99,7 @@ Aqu&iacute; podeu definir algunes dreceres d\'SPIP. Un valor buit equival a fer 
 {Atenci&oacute;: si l\'eina &laquo;&nbsp;[.->pucesli]&nbsp;&raquo; est&agrave; activada, la substituci&oacute; del guionet &laquo;&nbsp;-&nbsp;&raquo; no es far&agrave;; al seu lloc s\'utilitzar&agrave; una llista del tipus &lt;ul>&lt;li>.}
 
 SPIP utilitza habitualment l\'etiqueta &lt;h3&gt; pels subt&iacute;tols. Escolliu aqu&iacute; un altre empla&ccedil;ament:[[%racc_h1%]][[->%racc_h2%]]',
-	'class_spip:description4' => '
+	'class_spip:description4' => '<MODIF>
 
 SPIP ha escollit utilitzar l\'etiqueta &lt;strong> per transcriure les negretes. Per&ograve; &lt;b> tamb&eacute; hauria pogut anar b&eacute;, amb o sense estil. Vosaltres decidiu:[[%racc_g1%]][[->%racc_g2%]]
 
@@ -112,7 +114,7 @@ _ {{1.}} Etiquetes &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; :[[%style_p%]]
 _ {{2.}} Etiquetes &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt;, &lt;blockquote&gt; i les llistes (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[%style_h%]]
 
 Anoteu: modificant aquest segon estil, tamb&eacute; perdeu els estils est&agrave;ndards d\'SPIP associats a aquestes etiquetes.</q1>',
-	'class_spip:nom' => 'SPIP i les seves dreceres…',
+	'class_spip:nom' => 'SPIP i les seves dreceresâ€¦',
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Funcions',
 	'code_jq' => 'jQuery',
@@ -128,7 +130,7 @@ Anoteu: modificant aquest segon estil, tamb&eacute; perdeu els estils est&agrave
 	'corbeille_objets_vider' => 'Suprimir els objectes seleccionats',
 	'corbeille_vider' => 'Buidar la paperera:',
 	'couleurs:aide' => 'Acolorir el text: <b>[coul]text[/coul]</b>@fond@ amb <b>coul</b> = @liste@',
-	'couleurs:description' => 'Permet aplicar f&agrave;cilment colors a tots els textos del lloc (articles, breus, t&iacute;tols, f&ograve;rum, …) utilitzant etiquetes en dreceres.
+	'couleurs:description' => 'Permet aplicar f&agrave;cilment colors a tots els textos del lloc (articles, breus, t&iacute;tols, f&ograve;rum, â€¦) utilitzant etiquetes en dreceres.
 
 Dos exemples id&egrave;ntics per canviar el color del text:@_CS_EXEMPLE_COULEURS2@
 
@@ -257,10 +259,12 @@ Aleshores, els blocs multi es mostren sempre en la llengua demanada pel visitant
 	// H
 	'help' => '{{Aquesta p&agrave;gina nom&eacute;s &eacute;s accessible pels responsables del lloc.}}<p>Permet la configuraci&oacute; de les diferents funcions suplement&agrave;ries aportades pel plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.',
 	'help2' => 'Versi&oacute; local: @version@',
-	'help3' => '<p>Enlla&ccedil;os de documentaci&oacute;:<br/>•[Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reiniciacions:
-_ • [Eines amagades|Tornar a l\'aparen&ccedil;a inicial d\'aquesta p&agrave;gina->@hide@]
-_ • [De tot el plugin|Tornar a l\'estat inicial del plugin->@reset@]@install@
+	'help3' => '<p>Enlla&ccedil;os de documentaci&oacute;:<br/>â€¢[Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reiniciacions:
+_ â€¢ [Eines amagades|Tornar a l\'aparen&ccedil;a inicial d\'aquesta p&agrave;gina->@hide@]
+_ â€¢ [De tot el plugin|Tornar a l\'estat inicial del plugin->@reset@]@install@
 </p></p>',
+	'horloge:description' => 'Eina en curs de desenvolupament. Us ofereix un rellotge JavaScript. Etiqueta: <code>#HORLOGE{format,utc,id}</code>. Model: <code><horloge></code>',
+	'horloge:nom' => 'Rellotge',
 
 	// I
 	'icone_visiter:description' => 'Substitueix la imatge del bot&oacute; est&agrave;ndard &laquo;&nbsp;Visitar&nbsp;&raquo; (a dalt a la dreta d\'aquesta p&agrave;gina) pel logotip del lloc, si existeix.
@@ -275,9 +279,9 @@ Per definir aquest logotip, dirigiu-vos a la p&agrave;gina &laquo;&nbsp;Configur
 <p>{{Atenci&oacute;}}: Abans d\'activar aquesta funcionalitat, verifiqueu b&eacute; que no existeix ja cap funci&oacute; {balise_INTRODUCTION()} al vostre esquelet o als vostres plugins. La sobrec&agrave;rrega produ&iuml;ra un error de compilaci&oacute;.</p>
 @puce@ Podeu precisar (en percentatge per relaci&oacute; al valor utilitzat per defecte) la llargada del text a retornar per l\'etiqueta #INTRODUCTION. Cap valor o igual a 100 no modifica l\'aspecte de la introducci&oacute; i utilitza, per tant, els valors per defecte seg&uuml;ents: 500 car&agrave;cters pels articles, 300 per les notes breus i 600 pels f&ograve;rums i les seccions.
 [[%lgr_introduction%&nbsp;%]]
-@puce@ Per defecte, els punts de continuaci&oacute; afegits al resultat de l\'etiqueta #INTRODUCTION si el text &eacute;s massa llarg s&oacute;n: <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Aqu&iacute; podeu precisar la vostra pr&ograve;pia cadena de car&agrave;cters que indiqui al lector que el text tallat t&eacute; una continuaci&oacute;.
+@puce@ Per defecte, els punts de continuaci&oacute; afegits al resultat de l\'etiqueta #INTRODUCTION si el text &eacute;s massa llarg s&oacute;n: <html>&laquo;&amp;nbsp;(â€¦)&raquo;</html>. Aqu&iacute; podeu precisar la vostra pr&ograve;pia cadena de car&agrave;cters que indiqui al lector que el text tallat t&eacute; una continuaci&oacute;.
 [[%suite_introduction%]]
-@puce@ Si l\'etiqueta #INTRODUCTION es fa servir per resumir un article, llavors el Ganivet Su&iacute;s pot fabricar un hipervincle al damunt dels punts de continuaci&oacute; definits m&eacute;s amunt per tal portar al lector cap al text original. Per exemple: &laquo;Llegir la continuaci&oacute; de l\'article…&raquo;
+@puce@ Si l\'etiqueta #INTRODUCTION es fa servir per resumir un article, llavors el Ganivet Su&iacute;s pot fabricar un hipervincle al damunt dels punts de continuaci&oacute; definits m&eacute;s amunt per tal portar al lector cap al text original. Per exemple: &laquo;Llegir la continuaci&oacute; de l\'articleâ€¦&raquo;
 [[%lien_introduction%]]
 ',
 	'introduction:nom' => 'Etiqueta #INTRODUCTION',
@@ -304,6 +308,7 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'label:auto_sommaire' => 'Creaci&oacute; sistem&agrave;tica del sumari:',
 	'label:balise_decoupe' => 'Activar l\'etiqueta #CS_DECOUPE :',
 	'label:balise_sommaire' => 'Activar l\'etiqueta #CS_SOMMAIRE :',
+	'label:bloc_h4' => 'Etiqueta pels t&iacute;tols:',
 	'label:bloc_unique' => 'Nom&eacute;s un bloc obert a la p&agrave;gina:',
 	'label:couleurs_fonds' => 'Permetre els fons:',
 	'label:cs_rss' => 'Activar:',
@@ -323,7 +328,7 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'label:glossaire_js' => 'T&egrave;cnica utilitzada:',
 	'label:glossaire_limite' => 'N&uacute;mero m&agrave;xim d\'enlla&ccedil;os creats:',
 	'label:insertions' => 'Correccions autom&agrave;tiques:',
-	'label:jcorner_classes' => 'Millorar les cantonades dels seg&uuml;ents selectors:',
+	'label:jcorner_classes' => '<MODIF>Millorar les cantonades dels seg&uuml;ents selectors:',
 	'label:jcorner_plugin' => 'Instal&middot;lar el plugin {jQuery} seg&uuml;ent:',
 	'label:lgr_introduction' => 'Llargada del resum:',
 	'label:lgr_sommaire' => 'Llargada del sumari (9 a 99):',
@@ -378,7 +383,7 @@ Atenci&oacute;, aquesta eina necessita per funcionar el plugin {jQuery}: {Round 
 	'label:webmestres' => 'Llista dels webmestres del lloc:',
 	'liens_en_clair:description' => 'Posa a la vostra disposici&oacute; el filtre: \'liens_en_clair\'. El vostre text cont&eacute; probablement enlla&ccedil;os que no s&oacute;n visibles durant la impressi&oacute;. Aquest filtre afegeix entre claud&agrave;tors el dest&iacute; de cada enlla&ccedil; clicable (enlla&ccedil;os externs o correus electr&ograve;nics). Atenci&oacute;: en mode impressi&oacute; (par&agrave;metre \'cs=print\' o \'page=print\' al url de la p&agrave;gina), aquesta funcionalitat s\'aplica autom&agrave;ticament.',
 	'liens_en_clair:nom' => 'Enlla&ccedil;os visibles',
-	'liens_orphelins:description' => 'Aquesta eina t&eacute; dues funcions:
+	'liens_orphelins:description' => '<MODIF>Aquesta eina t&eacute; dues funcions:
 
 @puce@ {{Enlla&ccedil;os correctes}}.
 
@@ -389,8 +394,8 @@ SPIP t&eacute; per costum inserir un espai abans dels interrogants o dels signes
 Substitueix sistem&agrave;ticament tots els URLs deixats en text pels usuaris (sobretot als f&ograve;rums), i que no s&oacute;n clicables, `per enlla&ccedil;os en format SPIP. Per exemple: {<html>www.spip.net</html>} queda substitu&iuml;t per [->www.spip.net].
 
 Podeu escollir el tipus de substituci&oacute;:
-_ • {B&agrave;sic}: s&oacute;n substitu&iuml;ts els enlla&ccedil;os del tipus {<html>http://spip.net</html>} (tot protocol) o {<html>www.spip.net</html>}.
-_ • {Extens}: s&oacute;n substitu&iuml;ts a m&eacute;s els enlla&ccedil;os del tipus {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} o {<html>news:mesnews</html>}.
+_ â€¢ {B&agrave;sic}: s&oacute;n substitu&iuml;ts els enlla&ccedil;os del tipus {<html>http://spip.net</html>} (tot protocol) o {<html>www.spip.net</html>}.
+_ â€¢ {Extens}: s&oacute;n substitu&iuml;ts a m&eacute;s els enlla&ccedil;os del tipus {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} o {<html>news:mesnews</html>}.
 [[%liens_orphelins%]]',
 	'liens_orphelins:nom' => 'URLs bonics',
 
@@ -448,7 +453,7 @@ _ • {Extens}: s&oacute;n substitu&iuml;ts a m&eacute;s els enlla&ccedil;os del t
 Si els drets d\'escriptura ho permeten, el codi PHP que hi ha m&eacute;s avall es podr&agrave; situar a dins del fitxer {{/config/mes_options.php}} i afegir&agrave; un enlla&ccedil; de tornar a carregar en aquesta p&agrave;gina del pack &laquo;&nbsp;{@pack@}&nbsp;&raquo;. Evidentment, podreu canviar el seu nom.
 
 Si torneu a carregar el plugin fent un clic sobre un pack, el Ganivet Su&iacute;s es tornar&agrave; a configurar autom&agrave;ticament en funci&oacute; dels par&agrave;metres definits pr&egrave;viament en aquest pack.',
-	'pack_du' => '• del pack @pack@',
+	'pack_du' => 'â€¢ del pack @pack@',
 	'pack_installe' => 'Instal&middot;laci&oacute; d\'un pack de configuraci&oacute;',
 	'pack_installer' => 'Est&agrave; segur de voler reinicialitzar el Gavinet Su&iacute;s i d\'instal&middot;lar el pack &laquo;&nbsp;@pack@&nbsp;&raquo; ?',
 	'pack_nb_plrs' => 'Actualment hi ha @nb@ &laquo;paquets de configuraci&oacute;&raquo; disponibles.',
@@ -463,7 +468,7 @@ Si torneu a carregar el plugin fent un clic sobre un pack, el Ganivet Su&iacute;
 	'paragrapher2:description' => 'La funci&oacute; SPIP <code>paragrapher()</code> insereix etiquetes &lt;p&gt; i &lt;/p&gt; a tots els textos que estan desprove&iuml;ts de par&agrave;grafs. Per tal de gestionar m&eacute;s finament els vostres estils i les vostres compaginacions, teniu la possibilitat d\'uniformitzar l\'aspecte dels textos del vostre lloc.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Par&agrave;graf',
 	'pipelines' => 'Pipelines utilitzades:',
-	'pucesli:description' => 'Substitueix els car&agrave;cters &laquo;-&raquo; (guionet simple) dels articles per llistes numerades &laquo;-*&raquo; (tradu&iuml;des en HTML per: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) dels que l\'estil es pot personalitzar amb CSS.',
+	'pucesli:description' => 'Substitueix els car&agrave;cters &laquo;-&raquo; (guionet simple) dels articles per llistes numerades &laquo;-*&raquo; (tradu&iuml;des en HTML per: &lt;ul>&lt;li>â€¦&lt;/li>&lt;/ul>) dels que l\'estil es pot personalitzar amb CSS.',
 	'pucesli:nom' => 'Car&agrave;cters bonics',
 
 	// Q
@@ -504,8 +509,8 @@ Alerta, aquesta eina necessita per funcionar p&agrave;gines al &laquo;DOCTYPE XH
 @puce@ Podeu definir aqu&iacute; el nombre m&agrave;xim de car&agrave;cters que es retindran dels subt&iacute;tols a l\'hora de construir el sumari:[[%lgr_sommaire% car&agrave;cters]]
 
 @puce@ Tamb&eacute; podeu fixar el comportament del plugin en refer&egrave;ncia a la creaci&oacute; del sumari: 
-_ • Sistem&agrave;ticament per cada article (una etiqueta <code>@_CS_SANS_SOMMAIRE@</code> situada a qualsevol lloc o a l\'interior del text de l\'article crear&agrave; una excepci&oacute;).
-_ • Nom&eacute;s pels articles que continguin l\'etiqueta <code>@_CS_AVEC_SOMMAIRE@</code>.
+_ â€¢ Sistem&agrave;ticament per cada article (una etiqueta <code>@_CS_SANS_SOMMAIRE@</code> situada a qualsevol lloc o a l\'interior del text de l\'article crear&agrave; una excepci&oacute;).
+_ â€¢ Nom&eacute;s pels articles que continguin l\'etiqueta <code>@_CS_AVEC_SOMMAIRE@</code>.
 
 [[%auto_sommaire%]]
 
@@ -519,9 +524,9 @@ Aquest sumari pot ser acoblat amb: &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
 	'spam:description' => 'Intenta lluitar contra els enviaments de missatges autom&agrave;tics i mal&egrave;vols a la part p&uacute;blica. Algunes paraules, com les etiquetes en clar &lt;a>&lt;/a>, estan prohibides: animeu als vostres redactors a fer servir les dreceres d\'enlla&ccedil;os SPIP.
 
 Llisteu aqu&iacute; les seq&uuml;&egrave;ncies prohibides separant-les per espais. [[%spam_mots%]]
-• Per una expressi&oacute; amb espais, poseu-la entre cometes.
-_ • Per especificar una paraula sencera, poseu-la entre par&egrave;ntesi. Exemple~:~{(asses)}.
-_ • Per una expressi&oacute; regular, verifiqueu b&eacute; la sintaxi i poseu-la entre barres inclinades i entre cometes. Exemple~:~{<html>"/@test\\.(com|fr)/"</html>}.',
+â€¢ Per una expressi&oacute; amb espais, poseu-la entre cometes.
+_ â€¢ Per especificar una paraula sencera, poseu-la entre par&egrave;ntesi. Exemple~:~{(asses)}.
+_ â€¢ Per una expressi&oacute; regular, verifiqueu b&eacute; la sintaxi i poseu-la entre barres inclinades i entre cometes. Exemple~:~{<html>"/@test\\.(com|fr)/"</html>}.',
 	'spam:nom' => 'Lluita contra l\'SPAM',
 	'spam_test_ko' => 'Aquest missatge ser&agrave; bloquejat pel filtre anti-SPAM!',
 	'spam_test_ok' => 'Aquest missatge ser&agrave; acceptat pel filtre anti-SPAM.',
@@ -536,11 +541,11 @@ _ • Per una expressi&oacute; regular, verifiqueu b&eacute; la sintaxi i poseu-la
 @puce@ Si teniu diversos llocs mutualitzats, podeu especificar aqu&iacute; el valor per defecte que es tindr&agrave; en compte per tots els llocs locals (SPIP 2.0 mini).[[%duree_cache_mutu% heures]]',
 	'spip_cache:description1' => '@puce@ Per defecte, SPIP calcula totes les p&agrave;gines p&uacute;bliques i les col&middot;loca a la mem&ograve;ria cau per tal d\'accelerar-ne la consulta. Desactivar temporalment la mem&ograve;ria cau pot ajudar al desenvolupament del lloc Web. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]',
 	'spip_cache:description2' => '@puce@ Quatre opcions per orientar el funcionament de la mem&ograve;ria cau d\'SPIP : <q1>
-_ • {&Uacute;s normal}: SPIP calcula totes les p&agrave;gines publiques i les posa a la mem&ograve;ria cau per tal d\'accelerar-ne la consulta. Despr&eacute;s d\'un cert termini, la mem&ograve;ria cau es calcula de nou i s\'emmagatzema.
-_ • {Mem&ograve;ria cau permanent}: els terminis d\'invalidaci&oacute; de la mem&ograve;ria cau s\'ignoren.
-_ • {Sense mem&ograve;ria cau}: desactivar temporalment la mem&ograve;ria cau pot ajudar al desenvolupament del lloc Web. Aqu&iacute;, no s\'emmagatzema res al disc.
-_ • {Control de la mem&ograve;ria cau}: opci&oacute; id&egrave;ntica a l\'anterior, amb una escriptura al disc de tots els resultats per tal de poder, eventualment, controlar-los.</q1>[[%radio_desactive_cache4%]]',
-	'spip_cache:nom' => 'SPIP i la mem&ograve;ria cau…',
+_ â€¢ {&Uacute;s normal}: SPIP calcula totes les p&agrave;gines publiques i les posa a la mem&ograve;ria cau per tal d\'accelerar-ne la consulta. Despr&eacute;s d\'un cert termini, la mem&ograve;ria cau es calcula de nou i s\'emmagatzema.
+_ â€¢ {Mem&ograve;ria cau permanent}: els terminis d\'invalidaci&oacute; de la mem&ograve;ria cau s\'ignoren.
+_ â€¢ {Sense mem&ograve;ria cau}: desactivar temporalment la mem&ograve;ria cau pot ajudar al desenvolupament del lloc Web. Aqu&iacute;, no s\'emmagatzema res al disc.
+_ â€¢ {Control de la mem&ograve;ria cau}: opci&oacute; id&egrave;ntica a l\'anterior, amb una escriptura al disc de tots els resultats per tal de poder, eventualment, controlar-los.</q1>[[%radio_desactive_cache4%]]',
+	'spip_cache:nom' => 'SPIP i la mem&ograve;ria cauâ€¦',
 	'stat_auteurs' => 'Els autors en stat',
 	'statuts_spip' => 'Nom&eacute;s els statuts SPIP seg&uuml;ents:',
 	'statuts_tous' => 'Tots els statuts',
@@ -562,7 +567,7 @@ Per exemple, en un bucle sobre (ARTICLES), #TITRE_SECTEUR donar&agrave; el t&iac
 
 La sintaxi <html>#TITRE_XXX{yy}</html> se suporta igualment. Exemple: <html>#TITRE_ARTICLE{10}</html> retornar&agrave; el t&iacute;tol de l\'article #10.[[%titres_etendus%]]',
 	'titre_parent:nom' => 'Etiqueta #TITRE_PARENT/OBJET',
-	'titre_tests' => 'El Ganivet Su&iacute;s - P&agrave;gina de proves…',
+	'titre_tests' => 'El Ganivet Su&iacute;s - P&agrave;gina de provesâ€¦',
 	'tous' => 'Tots',
 	'toutes_couleurs' => 'Els 36 colors dels estils CSS :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Blocs multiling&uuml;es&nbsp;: <b><:trad:></b>',
@@ -589,6 +594,15 @@ Les propostes que hi han m&eacute;s avall estan basades en la funcionalitat SQL 
 	'tri_perso' => 'Tria SQL personalitzada, ORDER BY seguit de:',
 	'tri_publi' => 'Tria sobre la data de publicaci&oacute; (ORDER BY date DESC)',
 	'tri_titre' => 'Tria sobre el t&iacute;tol (ORDER BY 0+titre,titre)',
+	'trousse_balises:description' => '<MODIF>Eina en curs de desenvolupament. Us ofereix algunes etiquetes molt simples i pr&agrave;ctiques pels vostres esquelets.
+
+@puce@ {{#BOLO}}: genere un text fals d\'uns 3000 car&agrave;cters ("bolo" ou "lorem ipsum") a l\'esquelet mentre el posem a punt. L\'argument opcional d\'aquesta funci&oacute; especifica la llargada que volem del text. Exemple: <code>#BOLO{300}</code>. Aquesta etiqueta accepta tots els filtres d\'SPIP. Exemple : <code>[(#BOLO|majuscules)]</code>.
+_ Tamb&eacute; teniu un model disponible pels vostres continguts: situeu <code><bolo300></code> a qualsevol zona del text (cap&ccedil;alera, descripci&oacute;, text, etc.) per obtenir 300 car&agrave;cters de text fals.
+
+@puce@ {{#MAINTENANT}} (o {{#NOW}}): torna simplement la data del moment, com: <code>#EVAL{date(\'Y-m-d H:i:s\')}</code>. L\'argument opcional d\'aquesta funci&oacute; especifica el format. Exemple : <code>#MAINTENANT{Y-m-d}</code>. Tal i com amb #DATE, personalitzeu la publicaci&oacute; gr&agrave;cies als filtres d\'SPIP. Exemple: <code>[(#MAINTENANT|affdate)]</code>.
+
+@puce@ {{#LESMOTS}}: ',
+	'trousse_balises:nom' => 'Joc d\'etiquetes',
 	'type_urls:description' => '@puce@ SPIP ofereix la possibilitat d\'escollir entre diversos jocs d\'URLs per fabricar els enlla&ccedil;os d\'acc&eacute;s a les p&agrave;gines del vostre lloc:
 
 M&eacute;s informacions a: [->http://www.spip.net/ca_article2237.html]. L\'eina &laquo;&nbsp;[.->boites_privees]&raquo; us permet veure a la p&agrave;gina de cada objecte SPIP el URL propi associat.
@@ -631,8 +645,8 @@ _ Exemple : <code>article.php3?id_article=123</code>
 @puce@ Si utilitzeu el format {page} que hi ha m&eacute;s amunt o si l\'objecte demanat no &eacute;s reconegut, &eacute;s possible llavors escollir {{l\'script de crida}} a SPIP. Per defecte, SPIP escull {spip.php}, per&ograve; {index.php} (exemple de format : <code>/index.php?article123</code>) o un valor buit (format: <code>/?article123</code>) tamb&eacute; funcionen. Per qualsevol altre valor, heu de crear for&ccedil;osament el fitxer corresponent a l\'arrel d\'SPIP, semblant al que ja existeix: {index.php}.
 [[%spip_script%]]',
 	'type_urls:description1' => '@puce@ Si voleu fer servir un format a base d\'URLs &laquo;pr&ograve;pies&raquo; ({propres}, {propres2}, {libres}, {arborescentes} o {propres_qs}), el Ganivet Su&iacute;s pot:
- <q1>• Assegurar-se que l\'URL produ&iuml;da estigui totalment {{en min&uacute;scules}}.</q1>[[%urls_minuscules%]]
-<q1>• Provocar l\'afegit sistem&agrave;tic de {{l\'id de l\'objecte}} al seu URL (en sufix, en prefix, etc.).
+ <q1>â€¢ Assegurar-se que l\'URL produ&iuml;da estigui totalment {{en min&uacute;scules}}.</q1>[[%urls_minuscules%]]
+<q1>â€¢ Provocar l\'afegit sistem&agrave;tic de {{l\'id de l\'objecte}} al seu URL (en sufix, en prefix, etc.).
 _ (exemples: <code>/El-meu-t&iacute;tol-d-article,457</code> o <code>/457-El-meu-t&iacute;tol-d-article</code>)</q1>',
 	'type_urls:nom' => 'Format dels URLs',
 	'typo_exposants:description' => '((Textos francesos)): millora el retorn tipogr&agrave;fic de les abreviacions corrents, exposant els elements necessaris (aix&iacute;, {<acronym>Mme</acronym>} esdev&eacute; {M<sup>me</sup>}) i corregint-ne els errors normals ({<acronym>2&egrave;me</acronym>} o  {<acronym>2me</acronym>}, per exemple, esdevenen {2<sup>e</sup>}, &uacute;nica abreviaci&oacute; correcta).
@@ -703,7 +717,7 @@ Afegiu simplement <code><INCLURE{fond=fonds/visiteurs_connectes}></code> a les v
 	'votre_choix' => 'La vostre elecci&oacute;:',
 
 	// W
-	'webmestres:description' => 'Un {{webmestre}} en el sentit d\'SPIP &eacute;s un {{administrador}} que t&eacute; acc&eacute;s a l\'espai FTP. Per defecte i a partir d\'SPIP 2.0, &eacute;s l\'administrador <code>id_auteur=1</code> del lloc. Els webmestres definitis aqu&iacute; tenen el privilegi de no estar obligats a passar pel FTP per validar les operacions sensibles del lloc, com l\'actualitzaci&oacute; de la base de dades o la restauraci&oacute; d\'un dump.
+	'webmestres:description' => '<MODIF>Un {{webmestre}} en el sentit d\'SPIP &eacute;s un {{administrador}} que t&eacute; acc&eacute;s a l\'espai FTP. Per defecte i a partir d\'SPIP 2.0, &eacute;s l\'administrador <code>id_auteur=1</code> del lloc. Els webmestres definitis aqu&iacute; tenen el privilegi de no estar obligats a passar pel FTP per validar les operacions sensibles del lloc, com l\'actualitzaci&oacute; de la base de dades o la restauraci&oacute; d\'un dump.
 
 Webmestre(s) actual(s): {@_CS_LISTE_WEBMESTRES@}.
 _ Administrador(s) elegible(s): {@_CS_LISTE_ADMINS@}.

@@ -38,7 +38,7 @@ _ Ligaz&oacute;n de test : [->test@test.com] (vexa a p&aacute;xina completamente
 	// B
 	'basique' => 'B&aacute;sica',
 	'blocs:aide' => 'Bloques despregables : <b>&lt;bloque&gt;&lt;/bloque&gt;</b> (alias : <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) e <b>&lt;visible&gt;&lt;/visible&gt;</b>',
-	'blocs:description' => 'Perm&iacute;telle crear bloques nos que o t&iacute;tulo &eacute; activo e pode facelos visibles ou invisibles.
+	'blocs:description' => '<MODIF>Perm&iacute;telle crear bloques nos que o t&iacute;tulo &eacute; activo e pode facelos visibles ou invisibles.
 
 @puce@ {{Dentro dos textos SPIP}} : os redactores te&ntilde;en a disposici&oacute;n as novas balizas &lt;bloque&gt; (ou &lt;invisible&gt;) e &lt;visible&gt; para utilizar nos seus textos, coma no caso : 
 
@@ -89,7 +89,7 @@ _ Ligaz&oacute;n de test : [->test@test.com] (vexa a p&aacute;xina completamente
 	'categ:typo-racc' => '30. Atallos tipogr&aacute;ficos',
 	'certaines_couleurs' => 'S&oacute; as balizas definidas aqu&iacute; abaixo ci-dessous@_CS_ASTER@ :',
 	'chatons:aide' => 'Chatons : @liste@',
-	'chatons:description' => 'Introduce imaxes(ou chatons para que moito andan cos {tchats}) en todos os textos ou aparece unha cadea do tipo <code>:nom</code>.
+	'chatons:description' => '<MODIF>Introduce imaxes(ou chatons para que moito andan cos {tchats}) en todos os textos ou aparece unha cadea do tipo <code>:nom</code>.
 _ Esta utilidade troca os atallos polas imaxes que co mesmo nome encontre no cartafol plugins/couteau_suisse/img/chatons.',
 	'chatons:nom' => 'Chat&oacute;ns',
 	'class_spip:description1' => 'Pode definir aqu&iacute; certos recursos de SPIP. Un valor baleiro equivale a usar o valor predeterminado.[[%racc_hr%]]',
@@ -101,7 +101,7 @@ Pode definir aqu&iacute; certos atallos de SPIP. Un valor baleiro equivale a usa
 {Aviso : se a utilidade &laquo;&nbsp;[.->pucesli]&nbsp;&raquo; est&aacute; activada, o reemprazamento da &laquo;&nbsp;-&nbsp;&raquo; xa non ser&aacute; efectuado&nbsp;; unha lista &lt;ul>&lt;li> sera utilizada no seu lugar.}
 
 SPIP adoita usar a baliza &lt;h3&gt; para os intert&iacute;tulos. Escolla aqu&iacute; se quixer, outra cadea de substituci&oacute;n :[[%racc_h1%]][[->%racc_h2%]]',
-	'class_spip:description4' => '
+	'class_spip:description4' => '<MODIF>
 
 SPIP escolleu usar a baliza &lt;strong> para transcribir as grosas. Pero &lt;b> poder&iacute;a tam&eacute;n convir con ou sen estilo. Vexa e valore :[[%racc_g1%]][[->%racc_g2%]]
 
@@ -132,7 +132,7 @@ Ollo : modificando este segundo par&aacute;metro, p&eacute;rdense os estilos est
 	'corbeille_objets_vider' => 'Suprimir os obxectos seleccionados',
 	'corbeille_vider' => 'Baleirar a papeleira&nbsp;:',
 	'couleurs:aide' => 'Colorear : <b>[coul]texte[/coul]</b>@fond@ con <b>coul</b> = @liste@',
-	'couleurs:description' => 'Permite aplicar doadamente cores a todos os textos do web (artigos, breves, t&iacute;tulos, foro, …) usando balizas en atallos.
+	'couleurs:description' => 'Permite aplicar doadamente cores a todos os textos do web (artigos, breves, t&iacute;tulos, foro, â€¦) usando balizas en atallos.
 
 Dou exemplos id&eacute;nticos para trocar a cor do texto :@_CS_EXEMPLE_COULEURS2@
 
@@ -260,9 +260,9 @@ Os bloques multi m&oacute;stranse ent&oacute;n sempre na lingua demandada polo v
 	// H
 	'help' => '{{Esta p&aacute;xina s&oacute; &eacute; accesible para o responsable do web.}}<p>D&aacute; acceso &aacute;s diferentes funci&oacute;ns suplementarias achegadas polo m&oacute;dulo &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.',
 	'help2' => 'Versi&oacute;n local: @version@',
-	'help3' => '<p>Ligaz&oacute;ns de documentaci&oacute;n:<br/>• [A&nbsp;Navalla&nbsp;Suiza->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reinicios:
-_ • [Ferramentas cacheadas|Volver &aacute; apariencia inicial desta p&aacute;xina->@hide@]
-_ • [De todo o m&oacute;dulo|Volver ao estado inicial do m&oacute;dulo->@reset@]@install@
+	'help3' => '<p>Ligaz&oacute;ns de documentaci&oacute;n:<br/>â€¢ [A&nbsp;Navalla&nbsp;Suiza->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reinicios:
+_ â€¢ [Ferramentas cacheadas|Volver &aacute; apariencia inicial desta p&aacute;xina->@hide@]
+_ â€¢ [De todo o m&oacute;dulo|Volver ao estado inicial do m&oacute;dulo->@reset@]@install@
 </p>',
 
 	// I
@@ -278,9 +278,9 @@ Para definir o logo, vaia &aacute; p&aacute;xina &laquo;&nbsp;Configuraci&oacute
 <p>{{Aviso}} : Antes de activar esta funcionalidade, comprobe ben que ningunha funci&oacute;n {balise_INTRODUCTION()} exista xa no seu esqueleto ou nos m&oacute;dulos, a sobrecarga producir&iacute;a un erro de compilaci&oacute;n.</p>
 @puce@ Pode precisar (porcentualmente en relaci&oacute;n co valor usado de modo predeterminado) a lonxitude do texto reeenviado pola baliza #INTRODUCTION. Un valor nulo ou igual a 100 non modifica o aspecto da introduci&oacute;n e usa daquela os valores predeterminados seguintes : 500 caracteres para os artigos, 300 para as breves e 600 para os foros ou as secci&oacute;ns.
 [[%lgr_introduction%&nbsp;%]]
-@puce@ De modo predeterminado, os puntos suspensivos engadidos ao resultado da baliza #INTRODUCTION se o texto &eacute; demasiado longo son : <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Pode precisar aqu&iacute; a s&uacute;a propia cadea de caracteres que indiquen ao lector que o texto truncado ten unha continuidade.
+@puce@ De modo predeterminado, os puntos suspensivos engadidos ao resultado da baliza #INTRODUCTION se o texto &eacute; demasiado longo son : <html>&laquo;&amp;nbsp;(â€¦)&raquo;</html>. Pode precisar aqu&iacute; a s&uacute;a propia cadea de caracteres que indiquen ao lector que o texto truncado ten unha continuidade.
 [[%suite_introduction%]]
-@puce@ Se a baliza #INTRODUCTION se emprega para resumir un artigo, ent&oacute;n A Navalla Su&iacute;za pode crear unha ligaz&oacute;n sobre eses puntos suspensivos definidos co fin de levar o lector ao texto orixinal. Por exemplo : &laquo;Ler a continuidade deste artigo…&raquo;
+@puce@ Se a baliza #INTRODUCTION se emprega para resumir un artigo, ent&oacute;n A Navalla Su&iacute;za pode crear unha ligaz&oacute;n sobre eses puntos suspensivos definidos co fin de levar o lector ao texto orixinal. Por exemplo : &laquo;Ler a continuidade deste artigoâ€¦&raquo;
 [[%lien_introduction%]]
 ',
 	'introduction:nom' => 'Baliza #INTRODUCTION',
@@ -327,7 +327,7 @@ Atenci&oacute;n, esta ferramenta, precisa para funcionar do m&oacute;dulo {jQuer
 	'label:glossaire_js' => 'T&eacute;cnica usada :',
 	'label:glossaire_limite' => 'N&uacute;mero m&aacute;ximo de ligaz&oacute;ns creadas :',
 	'label:insertions' => 'Correcci&oacute;ns autom&aacute;ticas :',
-	'label:jcorner_classes' => 'Mellorar as esquinas dos selectores seguintes:',
+	'label:jcorner_classes' => '<MODIF>Mellorar as esquinas dos selectores seguintes:',
 	'label:jcorner_plugin' => 'Instalar o m&oacute;dulo {jQuery} seguinte:',
 	'label:lgr_introduction' => 'Lonxitude do resumo :',
 	'label:lgr_sommaire' => 'Lonxitude do sumario (9 a 99) :',
@@ -382,7 +382,7 @@ Atenci&oacute;n, esta ferramenta, precisa para funcionar do m&oacute;dulo {jQuer
 	'label:webmestres' => 'Lista de webm&aacute;sters do web:',
 	'liens_en_clair:description' => 'Pon &aacute; s&uacute;a disposici&oacute;n o filtro : \'liens_en_clair\'. O seu texto cont&eacute;n probablemente ligaz&oacute;ns de hipertexto que non son visibles tras unha impresi&oacute;n. Este filtro engade entre corchetes o destino de cada ligaz&oacute;n activa (ligaz&oacute;ns externas ou correos). Atenci&oacute;n : en modo de impresi&oacute;n (par&aacute;metro \'cs=print\' ou \'page=print\' no url da p&aacute;xina), esta funcionalidade apl&iacute;case automaticamente.',
 	'liens_en_clair:nom' => 'Ligaz&oacute;ns en claro',
-	'liens_orphelins:description' => 'Esta ferramenta ten d&uacute;as funci&oacute;ns :
+	'liens_orphelins:description' => '<MODIF>Esta ferramenta ten d&uacute;as funci&oacute;ns :
 
 @puce@ {{Ligaz&oacute;ns correctas}}.
 
@@ -393,8 +393,8 @@ SPIP ten por h&aacute;bito inserir un espazo diante dos puntos de interrogaci&oa
 Substit&uacute;e sistematicamente todos os url deixados en texto polos usuarios (nomeadamente nos foros) e que non son clicables, polas ligaz&oacute;ns de hipertexto en formato  SPIP. Por exemplo : {<html>www.spip.net</html>} substit&uacute;ese por [->www.spip.net].
 
 Podedes escoller o tipo de substituci&oacute;n :
-_ • {B&aacute;sica} : son substitu&iacute;das as ligaz&oacute;ns do tipo {<html>http://spip.net</html>} (inclu&iacute;do o protocolo) ou {<html>www.spip.net</html>}.
-_ • {Estendido} : son substitu&iacute;das ademais as ligaz&oacute;ns do tipo {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} ou {<html>news:mesnews</html>}.
+_ â€¢ {B&aacute;sica} : son substitu&iacute;das as ligaz&oacute;ns do tipo {<html>http://spip.net</html>} (inclu&iacute;do o protocolo) ou {<html>www.spip.net</html>}.
+_ â€¢ {Estendido} : son substitu&iacute;das ademais as ligaz&oacute;ns do tipo {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} ou {<html>news:mesnews</html>}.
 [[%liens_orphelins%]]',
 	'liens_orphelins:nom' => 'URL fermosas',
 
@@ -452,7 +452,7 @@ _ • {Estendido} : son substitu&iacute;das ademais as ligaz&oacute;ns do tipo {<h
 Se os permisos de escritura o permiten, oc&oacute;digo PHP seguinte poder&aacute; po&ntilde;erse no ficheiro {{/config/mes_options.php}} e engadir&aacute; unha ligaz&oacute;n de reiniciaci&oacute;n sobre esta p&aacute;xina "do paquete &laquo;&nbsp;{@pack@}&nbsp;&raquo;. Desde logo p&oacute;delle cambiar ese nome.
 
 De reiniciar o m&oacute;dulo premendo sobre un paquete, a Navalla Su&iacute;za reconfigurarase automaticamente en funci&oacute;n dos par&aacute;metros predeterminados no paquete.',
-	'pack_du' => '• do paquete @pack@',
+	'pack_du' => 'â€¢ do paquete @pack@',
 	'pack_installe' => 'Actualizaci&oacute;n dun paquete de configuraci&oacute;n',
 	'pack_installer' => 'Est&aacute; seguro de querer reiniciar a Navalla Su&iacute;za e instalar o paquete &laquo;&nbsp;@pack@&nbsp;&raquo; ?',
 	'pack_nb_plrs' => 'Hai actualmente @nb@ &laquo;&nbsp;paquetes de configuraci&oacute;n&nbsp;&raquo; dispo&ntilde;&iacute;beis.',
@@ -467,7 +467,7 @@ De reiniciar o m&oacute;dulo premendo sobre un paquete, a Navalla Su&iacute;za r
 	'paragrapher2:description' => 'A funci&oacute;n SPIP <code>paragrapher()</code> insere balizas &lt;p&gt; e &lt;/p&gt; en todos os textos que son que est&aacute;n desprovistos de par&aacute;grafos. Co fin de xerar m&aacute;is finamente os seus estilos e os dese&ntilde;os, ten a posibilidade de uniformizar o aspecto dos textos do seu  web.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Paragrafar',
 	'pipelines' => 'Tubar&iacute;as (pipelines usadas)&nbsp;:',
-	'pucesli:description' => 'Substit&uacute;a as vi&ntilde;etas &laquo;-&raquo; (gui&oacute;n simple) dos artigos por listas les par des listes nominadas &laquo;-*&raquo; (traducidas en  HTML por : &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) e nas que o estilo pode ser personalizado por css.',
+	'pucesli:description' => 'Substit&uacute;a as vi&ntilde;etas &laquo;-&raquo; (gui&oacute;n simple) dos artigos por listas les par des listes nominadas &laquo;-*&raquo; (traducidas en  HTML por : &lt;ul>&lt;li>â€¦&lt;/li>&lt;/ul>) e nas que o estilo pode ser personalizado por css.',
 	'pucesli:nom' => 'Vi&ntilde;etas fermosas',
 
 	// Q
@@ -508,8 +508,8 @@ Aviso, esta utilidade precisa para funcionar p&aacute;xinas con &laquo;DOCTYPE X
 @puce@ Pode definir aqu&iacute; o n&uacute;mero m&aacute;ximo de caracteres retidos dos intert&iacute;tulos para constru&iacute;r o sumario:[[%lgr_sommaire% caract&egrave;res]]
 
 @puce@ Pode fixar tam&eacute;n o comportamento do m&oacute;dulo concerninte &aacute; creaci&oacute;n do sumario: 
-_ • Sistematicamente para cada artigo (unha baliza <code>@_CS_SANS_SOMMAIRE@</code> situada en calquera lugar ou no interior do texto do artigo crear&aacute; unha excepci&oacute;n).
-_ • Unicamente para os artigos que conte&ntilde;an a baliza <code>@_CS_AVEC_SOMMAIRE@</code>.
+_ â€¢ Sistematicamente para cada artigo (unha baliza <code>@_CS_SANS_SOMMAIRE@</code> situada en calquera lugar ou no interior do texto do artigo crear&aacute; unha excepci&oacute;n).
+_ â€¢ Unicamente para os artigos que conte&ntilde;an a baliza <code>@_CS_AVEC_SOMMAIRE@</code>.
 
 [[%auto_sommaire%]]
 
@@ -523,9 +523,9 @@ Este sumario pode ser aparellado con : &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.',
 	'spam:description' => 'Tenta loitar contra os env&iacute;os de mensaxes autom&aacute;ticas e impertinentes na parte p&uacute;blica. Algunhas palabras e as balizas en claro &lt;a>&lt;/a> est&aacute;n prohibidas.Anime os seus redactores a empregar os atallos de SPIP
 
 Liste aqu&iacute;, separ&aacute;ndoas por espazos, as secuencias prohibidas [[%spam_mots%]]
-• Para unha expresi&oacute;n con espazos, sit&uacute;ea entre par&eacute;nteses. Exemplo:~{(asses)}.
-_ • Para especificar unha palabra enteira, situ&eacute;a ente par&eacute;nteses. Exemplo~:~{(asses)}.
-_ • Para unha expresi&oacute;n regular, comprobe ben a sintaxe e sit&uacute;ea entre barras e comas. Exemplos:~{<html>"/@test\\.(com|fr)/"</html>}.',
+â€¢ Para unha expresi&oacute;n con espazos, sit&uacute;ea entre par&eacute;nteses. Exemplo:~{(asses)}.
+_ â€¢ Para especificar unha palabra enteira, situ&eacute;a ente par&eacute;nteses. Exemplo~:~{(asses)}.
+_ â€¢ Para unha expresi&oacute;n regular, comprobe ben a sintaxe e sit&uacute;ea entre barras e comas. Exemplos:~{<html>"/@test\\.(com|fr)/"</html>}.',
 	'spam:nom' => 'Loita contra o SPAM',
 	'spam_test_ko' => 'Esta mensaxe ser&aacute; bloqueada polo filtro antispam!',
 	'spam_test_ok' => 'Esta mensaxe ser&aacute; aceptada polo filtro antispam.',
@@ -540,11 +540,11 @@ _ • Para unha expresi&oacute;n regular, comprobe ben a sintaxe e sit&uacute;ea e
 @puce@ Se vostede ten varios webs en mutualizaci&oacute;n, pode especificar aqu&iacute; o valor predeterminado tomado en conta por todos os web locais (SPIP 2.0 m&iacute;nimo).[[%duree_cache_mutu% heures]]',
 	'spip_cache:description1' => '@puce@ De modo predeterminado, SPIP calcula todas as p&aacute;xinas p&uacute;blicas e col&oacute;caas na cach&eacute; co fin de acelerar a consulta. Desactivar temporariamente a cach&eacute; pode axudar ao desenvolvemento do web. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]',
 	'spip_cache:description2' => '@puce@ Catro opci&oacute;ns para orientar o funcionamento da cach&eacute; de SPIP : <q1>
-_ • {Uso normal} : SPIP calcula todas as p&aacute;xinas p&uacute;blicas e col&oacute;caas na cach&eacute; co fin de acelerar con iso a consulta. Tras un certo per&iacute;odo, a cach&eacute; recalc&uacute;lasae e almac&eacute;nase.
-_ • {Cach&eacute; permanente} : os per&iacute;odos de invalidaci&oacute;n da cach&eacute; son ignorados.
-_ • {Sen cach&eacute;} : desactivar temporariamente a cach&eacute; pode axudar ao desenvolvemento do web. Aqu&iacute;, nada &eacute; gardado no disco.
-_ • {Control da cach&eacute;} : opci&oacute;n id&eacute;ntica &aacute; precedente, con unha escritura sobre o disco de todos os resultados co fin de poder controlalos eventualmente.</q1>[[%radio_desactive_cache4%]]',
-	'spip_cache:nom' => 'SPIP e a memoria cach&eacute;…',
+_ â€¢ {Uso normal} : SPIP calcula todas as p&aacute;xinas p&uacute;blicas e col&oacute;caas na cach&eacute; co fin de acelerar con iso a consulta. Tras un certo per&iacute;odo, a cach&eacute; recalc&uacute;lasae e almac&eacute;nase.
+_ â€¢ {Cach&eacute; permanente} : os per&iacute;odos de invalidaci&oacute;n da cach&eacute; son ignorados.
+_ â€¢ {Sen cach&eacute;} : desactivar temporariamente a cach&eacute; pode axudar ao desenvolvemento do web. Aqu&iacute;, nada &eacute; gardado no disco.
+_ â€¢ {Control da cach&eacute;} : opci&oacute;n id&eacute;ntica &aacute; precedente, con unha escritura sobre o disco de todos os resultados co fin de poder controlalos eventualmente.</q1>[[%radio_desactive_cache4%]]',
+	'spip_cache:nom' => 'SPIP e a memoria cach&eacute;â€¦',
 	'stat_auteurs' => 'Os estado dos autores',
 	'statuts_spip' => 'Unicamente os estados SPIP seguintes :',
 	'statuts_tous' => 'Todos os estados',
@@ -565,7 +565,7 @@ Note que : para as palabras clave, un alias de #TITRE_PARENT &eacute;  #TITRE_GR
 Por exemplo, nun bucle sobre  (ARTICLES), #TITRE_SECTEUR devolver&aacute; o t&iacute;tulo da secci&oacute;n na que estea situado o artigo en curso, xa que o identificador #ID_SECTEUR (de a&iacute; o campo \'id_secteur\') est&aacute; dispo&ntilde;ible neste caso.[[%titres_etendus%]]
 A sintaxe <html>#TITRE_XXX{yy}</html> &eacute; igualmente aceptada. Exemplo : <html>#TITRE_ARTICLE{10}</html> reenviar&aacute; ao t&iacute;tulo do artigo #10.[[%titres_etendus%]]',
 	'titre_parent:nom' => 'Baliza #TITRE_PARENT',
-	'titre_tests' => 'A Navalla Su&iacute;za - P&aacute;xina de tests…',
+	'titre_tests' => 'A Navalla Su&iacute;za - P&aacute;xina de testsâ€¦',
 	'tous' => 'Todos',
 	'toutes_couleurs' => 'As 36 cores dos estilos css :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Bloques multiling&uuml;es&nbsp;: <b><:trad:></b>',
@@ -633,7 +633,7 @@ _ Exemplo : <code>article.php3?id_article=123</code></radio_type_urls3>
 @puce@ Se vostede emprega o formato {p&aacute;xina} seguinte ou se o obxecto demandado non &eacute; reco&ntilde;ecido, &eacute; posible escoller {{o script de chamada }} a SPIP. De modo predeterminado, SPIP escolle {spip.php}, mais {index.php} (exemplo de formato: <code>/index.php?article123</code>) ou un valor baleiro (formato : <code>/?article123</code>) funcionan tam&eacute;n. Para calquera outro valor, c&oacute;mpre crear necesariamente o ficheiro correspondente na raiz de SPIP, a imaxe daquel que xa existe: {index.php}.
 [[%spip_script%]]',
 	'type_urls:description1' => '@puce@ De utilizar un formato con base en URL &laquo;propres&raquo;  ({propres}, {propres2}, {libres}, {arborescentes} ou {propres_qs}), a Navalla Su&iacute;za pode :
-<q1>• Asegurarse que o URL producido sexa totalmente en {{en min&uacute;sculas}}.
+<q1>â€¢ Asegurarse que o URL producido sexa totalmente en {{en min&uacute;sculas}}.
 </ql>[[%urls_minuscules%]]
  <ql> Provocar o engadido sistem&aacute;tico do{{id do obxecto}} ao seu URL (en sufixo ou en prefixo, etc.).
 _(exemplos : <code>/Meu-titulo-de-artigo,457</code> ou <code>/457-Meu-titulo-de-artigo</code>)</q1>[[%urls_minuscules%]][[->%urls_avec_id%]][[->%urls_avec_id2%]]</ql>',
@@ -705,7 +705,7 @@ Engada simplemente<code><INCLURE{fond=fonds/visiteurs_connectes}></code> nas s&u
 	'votre_choix' => 'A s&uacute;a elecci&oacute;n :',
 
 	// W
-	'webmestres:description' => 'Un/unha {{webmaster}} no senso de SPIP &eacute; un {{administrador}} que ten acceso ao espazo FTP. De modo predeterminado e a partir de SPIP 2.0, &eacute; o administrador <code>id_auteur=1</code> do web. Os webm&aacute;steres aqu&iacute; definidos te&ntilde;en o privilexio de non estaren obrigados a pasar polo FTP para validar as operaci&oacute;ns sensibles do web, como a actualizaci&oacute;n da base de datos ou a restauraci&oacute;n dun dump.
+	'webmestres:description' => '<MODIF>Un/unha {{webmaster}} no senso de SPIP &eacute; un {{administrador}} que ten acceso ao espazo FTP. De modo predeterminado e a partir de SPIP 2.0, &eacute; o administrador <code>id_auteur=1</code> do web. Os webm&aacute;steres aqu&iacute; definidos te&ntilde;en o privilexio de non estaren obrigados a pasar polo FTP para validar as operaci&oacute;ns sensibles do web, como a actualizaci&oacute;n da base de datos ou a restauraci&oacute;n dun dump.
 
 Webm&aacute;ster(es) actual(is) : {@_CS_LISTE_WEBMESTRES@}.
 _ Administrador(es) elixible(s) : {@_CS_LISTE_ADMINS@}.

@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'SPIP_liens:description' => '@puce@ begint Alle band van de plaats bij verstek in het lopende venster van scheepvaart. Maar het kan nuttig zijn om de externe band te openen aan de plaats in een nieuw buitenlands venster  dat komt terug om {target toe te voegen ="_blank"} aan alle bakens &lt;a&gt; voorzien door SPIP van klasse {spip_out}, {spip_url} of {spip_glossaire}. Het is soms noodzakelijk om &eacute;&eacute;n van deze klassen toe te voegen aan de band van het skelet van de plaats (bestanden HTML) teneinde deze functionaliteit zoveel mogelijk uit te breiden. [[%radio_target_blank3%]]
 @puce@ SPIP maakt het mogelijk om woorden te verbinden met hun definitie dank zij de typografische kortere weg <code> [? woord] </code>. Per gebrek (of als u leegte het hokje hieronder laat), stuurt het externe glossarium naar de vrije encyclopedie wikipedia.org terug. Om het te gebruiken adres te kiezen. <br/>Band van test: [? SPIP] [[%url_glossaire_externe2%]]',
-	'SPIP_liens:nom' => 'SPIP en de externe band…',
+	'SPIP_liens:nom' => 'SPIP en de externe bandâ€¦',
 
 	// A
 	'acces_admin' => 'Toegang beheerders :',
@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 - {{De revisies van het Zwitserse Mes}} : een kader op deze bladzijde van configuratie, laatste wijzigingen aangebracht aan de code van plugin  ([Source->@_CS_RSS_SOURCE@]).
 - {{De artikelen aan het SPIP formaat}} : een aanvullend opvouwbaar kader voor uw artikelen ten einde de code bron te kennen die door hun auteurs wordt gebruikt.
 - {{De auteurs in stat}} : een kader aanvullend op [de bladzijde van de auteurs->./?exec=auteurs] wijst op de  10 laatst aangeslotenen en de niet bevestigde inschrijvingen. Enkel de beheerders zien deze informatie.
-- {{URLs eigen}}: een kader d&eacute;pliable voor elk onderwerp van inhoud (artikel, rubriek, auteur,…) aangevend URL eigen verenigd alsmede van hen alias eventueel. Het werktuig &#132;&nbsp; [. - >type_urls] &nbsp;&#147; laat u een fijne configuratie van URLs van uw plaats toe.',
+- {{URLs eigen}}: een kader d&eacute;pliable voor elk onderwerp van inhoud (artikel, rubriek, auteur,â€¦) aangevend URL eigen verenigd alsmede van hen alias eventueel. Het werktuig &#132;&nbsp; [. - >type_urls] &nbsp;&#147; laat u een fijne configuratie van URLs van uw plaats toe.',
 	'boites_privees:nom' => 'Particuliere dozen',
 	'bp_urls_propres' => 'Eigen URLs ',
 
@@ -79,7 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'categ:typo-racc' => '30. Typografische kortere wegen',
 	'certaines_couleurs' => 'Enkel de hieronder bepaalde bakens@_CS_ASTER@ :',
 	'chatons:aide' => 'Katjes : @liste@',
-	'chatons:description' => 'Neemt beelden (of katjes voor {tchats}) op in alle teksten waar een keten van het soort blijkt <code>:nom</code>.
+	'chatons:description' => '<MODIF>Neemt beelden (of katjes voor {tchats}) op in alle teksten waar een keten van het soort blijkt <code>:nom</code>.
 _ Dit werktuig vervangt deze link door de beelden van dezelfde naam die hij in de lijst vindtplugins/couteau_suisse/img/chatons.',
 	'chatons:nom' => 'Katjes',
 	'class_spip:description1' => 'U kunt hier bepaalde kortere wegen van SPIP bepalen. Een lege waarde staat gelijk om de waarde per gebrek te gebruiken.[[%racc_hr%]]',
@@ -89,7 +89,7 @@ U kunt hier bepaalde kortere wegen van SPIP bepalen. Een lege waarde staat gelij
 	'class_spip:description3' => '<MODIF>
 
 SPIP gebruikt gewoonlijk het baken &lt;h3&gt; voor intertitres. Kies hier een andere vervanging :[[%racc_h1%]][[->%racc_h2%]]',
-	'class_spip:description4' => '<MODIF>
+	'class_spip:description4' => '<MODIF><MODIF>
 
 SPIP heeft verkozen om het baken &lt;strong> te gebruiken om vette letters te schrijven. Maar &lt;b> had eveneens kunnen passen. Aan u om te beslissen :[[%racc_g1%]][[->%racc_g2%]]
 
@@ -100,7 +100,7 @@ _ {{1.}} Bakens &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; en de lijsten (&lt;ol&gt;, 
 _ {{2.}} Bakens &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; et &lt;blockquote&gt; :[[%style_h%]]
 
 Opgelet: door deze tweede parameter te wijzigen, verliest u dan de standaardstijlen die met deze bakens worden verenigd.</blockquote>',
-	'class_spip:nom' => 'SPIP en zijn kortere wegen…',
+	'class_spip:nom' => 'SPIP en zijn kortere wegenâ€¦',
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Functies',
 	'code_jq' => 'jQuery',
@@ -116,7 +116,7 @@ Opgelet: door deze tweede parameter te wijzigen, verliest u dan de standaardstij
 	'corbeille_objets_vider' => 'De geselecteerde onderwerpen afschaffen',
 	'corbeille_vider' => 'Het mandje legen&nbsp;:',
 	'couleurs:aide' => 'Inzet in kleuren: <b>[coul]tekst[/coul] </b>@fond@ met <b>coul</b> = @liste@',
-	'couleurs:description' => 'Maakt het mogelijk om kleuren gemakkelijk toe te passen op alle teksten van de plaats (artikelen, kort, titels, forum,…) door bakens in kortere wegen te gebruiken.
+	'couleurs:description' => 'Maakt het mogelijk om kleuren gemakkelijk toe te passen op alle teksten van de plaats (artikelen, kort, titels, forum,â€¦) door bakens in kortere wegen te gebruiken.
 
 Twee identieke voorbeelden om de kleur van de tekst te veranderen:@_CS_EXEMPLE_COULEURS2@
 
@@ -233,9 +233,9 @@ Opgelet: in de forums, petities, georganiseerde stromen, enz., het beleid van ja
 	'guillemets:nom' => 'Typografische aanhalingstekens',
 
 	// H
-	'help' => '<MODIF>{{Deze bladzijde is alleen toegankelijk voor de verantwoordelijken voor de site.}}<p>Zij geeft toegang tot de verschillende aanvullende functies die door plugin worden gebracht&laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p><p>Plaatselijke versie : @version@@distant@<br/>@pack@</p><p>Band van documentatie :<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
-_ • [Verborgen werktuigen|Aan de eerste schijn van deze bladzijde terugkomen->@hide@]
-_ • [Van hele plugin|Aan de eerste stand van plugin terugkomen->@reset@]@install@
+	'help' => '<MODIF>{{Deze bladzijde is alleen toegankelijk voor de verantwoordelijken voor de site.}}<p>Zij geeft toegang tot de verschillende aanvullende functies die door plugin worden gebracht&laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p><p>Plaatselijke versie : @version@@distant@<br/>@pack@</p><p>Band van documentatie :<br/>â€¢ [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
+_ â€¢ [Verborgen werktuigen|Aan de eerste schijn van deze bladzijde terugkomen->@hide@]
+_ â€¢ [Van hele plugin|Aan de eerste stand van plugin terugkomen->@reset@]@install@
 </p>',
 	'help2' => '<NEW>Version locale : @version@',
 	'help3' => '<NEW><p>Liens de documentation :<br/>&bull; [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
@@ -256,9 +256,9 @@ Pour d&eacute;finir ce logo, rendez-vous sur la page &laquo;&nbsp;Configuration 
 <p>{{Opgelet}} : Alvorens deze functionaliteit te activeren, controleert goed dat geen enkele functie {balise_INTRODUCTION ()} bestaat niet reeds in uw plugins skelet , overbelasting zouden dan een fout van compilatie produceren.</p>
 @puce@ U kunt (in percent ten opzichte van de waarde die per gebrek wordt gebruikt) de lengte van de tekst aangeven die per baken #INTRODUCTION wordt teruggestuurd. Een nul of gelijke waarde aan 100 wijzigt het aspect van de inleiding niet en gebruikt dus de waarden per gebrek volgend: 500 karakters voor de artikelen, 300 voor kort en 600 voor de forums of de rubrieken.
 [[%lgr_introduction%&nbsp;%]]
-@puce@ Per gebrek, zijn de punten van vervolg die aan het resultaat van het baken #INTRODUCTION worden toegevoegd, als de tekst te lang is : <html>&laquo;&amp;nbsp;(…)&raquo;</html>. U kunt hier uw eigen keten van carat&egrave;re aangeven die de lezer mededeelt, dat de verminkte tekst goed een vervolg heeft.
+@puce@ Per gebrek, zijn de punten van vervolg die aan het resultaat van het baken #INTRODUCTION worden toegevoegd, als de tekst te lang is : <html>&laquo;&amp;nbsp;(â€¦)&raquo;</html>. U kunt hier uw eigen keten van carat&egrave;re aangeven die de lezer mededeelt, dat de verminkte tekst goed een vervolg heeft.
 [[%suite_introduction%]]
-@puce@ Als het baken #INTRODUCTION wordt gebruikt om een artikel kort samen te vatten, dan kan het Mes Zwitserland een band hypertexte op de hierboven bepaalde punten van vervolg vervaardigen teneinde de lezer naar de originele tekst te leiden. Bijvoorbeeld: &laquo;Het vervolg van het artikel lezen…&raquo;
+@puce@ Als het baken #INTRODUCTION wordt gebruikt om een artikel kort samen te vatten, dan kan het Mes Zwitserland een band hypertexte op de hierboven bepaalde punten van vervolg vervaardigen teneinde de lezer naar de originele tekst te leiden. Bijvoorbeeld: &laquo;Het vervolg van het artikel lezenâ€¦&raquo;
 [[%lien_introduction%]]
 ',
 	'introduction:nom' => 'Baken #INTRODUCTION',
@@ -303,7 +303,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:glossaire_js' => 'Gebruikte techniek :',
 	'label:glossaire_limite' => 'Maximumaantal gecre&euml;erde band :',
 	'label:insertions' => 'Automatische correcties :',
-	'label:jcorner_classes' => '<NEW>Am&eacute;liorer les coins des s&eacute;lecteurs suivantes :',
+	'label:jcorner_classes' => '<MODIF>Am&eacute;liorer les coins des s&eacute;lecteurs suivantes :',
 	'label:jcorner_plugin' => '<NEW>Installer le plugin {jQuery} suivant :',
 	'label:lgr_introduction' => 'Lengte van de samenvatting :',
 	'label:lgr_sommaire' => 'Breedte van het overzicht (9 &agrave; 99) :',
@@ -355,7 +355,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:webmestres' => '<NEW>Liste des webmestres du site :',
 	'liens_en_clair:description' => 'Ter beschikking uw stelt de filter: \'liens_en_clair\'. Uw tekst bevat waarschijnlijk een band hypertexte die niet zichtbaar bij een indruk is. Deze filter voegt tussen haken de bestemming van elke band cliquable (externe band of mails) toe. Opgelet: in manier indruk (parameter \'cs=print\' of \'page=print\' in url van de bladzijde), is deze functionaliteit automatisch toegepast.',
 	'liens_en_clair:nom' => 'Band in klaarheid',
-	'liens_orphelins:description' => '<NEW>Cet outil a deux fonctions :
+	'liens_orphelins:description' => '<MODIF>Cet outil a deux fonctions :
 
 @puce@ {{Liens corrects}}.
 
@@ -425,7 +425,7 @@ _ &bull; {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<htm
 Deze PHP code kan plaats in het bestand /config/mes_options.php nemen en zal een band van r&eacute;initialisatie op deze bladzijde &#132;van het pakijs {Pakijs Huidige}&#147; toevoegen. Natuurlijk is het u mogelijk om zijn naam hieronder te veranderen.
 
 Als u plugin r&eacute;initialiserd door op een pakijs te klikken, reconfiguratie van het Zwitserland mes  automatisch in functie van het pakijs voor bepaald parameters.',
-	'pack_du' => '• van het pakijs @pack@',
+	'pack_du' => 'â€¢ van het pakijs @pack@',
 	'pack_installe' => 'Het invoeren van een configuratie pakijs',
 	'pack_nb_plrs' => '<NEW>Il y a actuellement @nb@ &laquo;&nbsp;packs de configuration&nbsp;&raquo; disponibles.',
 	'pack_nb_un' => 'Er is een &laquo;&nbsp;configuration pack&nbsp;&raquo; momenteel beschikbaar',
@@ -439,7 +439,7 @@ Als u plugin r&eacute;initialiserd door op een pakijs te klikken, reconfiguratie
 	'paragrapher2:description' => 'De <code>paragrapher()</code> SPIP functie neemt bakens &lt;p&gt; en &lt;/p&gt; in alle teksten die zonder paragrafen zijn. Teneinde fijner uw stijlen en uw opmaak te beheren, hebt u de mogelijkheid om het aspect van de teksten van uw site uniform te maken.',
 	'paragrapher2:nom' => 'Paragraaf',
 	'pipelines' => 'Gebruikte pijpleidingen&nbsp;:',
-	'pucesli:description' => 'Vervangt de chips &laquo;-&raquo; (eenvoudig koppelteken) van de artikelen door genoteerde lijsten &laquo;-*&raquo; (in HTML door worden vertaald: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) en waarvan de stijl per css verpersoonlijkt kan worden.',
+	'pucesli:description' => 'Vervangt de chips &laquo;-&raquo; (eenvoudig koppelteken) van de artikelen door genoteerde lijsten &laquo;-*&raquo; (in HTML door worden vertaald: &lt;ul>&lt;li>â€¦&lt;/li>&lt;/ul>) en waarvan de stijl per css verpersoonlijkt kan worden.',
 	'pucesli:nom' => 'Mooie chips',
 
 	// R
@@ -472,13 +472,13 @@ _ Dessins : [Sylvain Michel->http://www.guaph.net/]',
 Attention, cet outil a besoin pour fonctionner de pages au &laquo;DOCTYPE XHTML&raquo; (non HTML !) et de deux plugins {jQuery} : {ScrollTo} et {LocalScroll}. Le Couteau Suisse peut les installer directement si vous cochez les cases suivantes. [[%scrollTo%]][[-->%LocalScroll%]]
 @_CS_PLUGIN_JQUERY192@',
 	'soft_scroller:nom' => 'Zachte ankers',
-	'sommaire:description' => '<MODIF>Construit un sommaire pour le texte de vos articles et de vos rubriques afin d’acc&eacute;der rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
+	'sommaire:description' => '<MODIF>Construit un sommaire pour le texte de vos articles et de vos rubriques afin dâ€™acc&eacute;der rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
 
 @puce@ Vous pouvez d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire :[[%lgr_sommaire% caract&egrave;res]]
 
 @puce@ Vous pouvez aussi fixer le comportement du plugin concernant la cr&eacute;ation du sommaire: 
-_ • Syst&eacute;matique pour chaque article (une balise <code>@_CS_SANS_SOMMAIRE@</code> plac&eacute;e n’importe o&ugrave; &agrave; l’int&eacute;rieur du texte de l’article cr&eacute;era une exception).
-_ • Uniquement pour les articles contenant la balise <code>@_CS_AVEC_SOMMAIRE@</code>.
+_ â€¢ Syst&eacute;matique pour chaque article (une balise <code>@_CS_SANS_SOMMAIRE@</code> plac&eacute;e nâ€™importe o&ugrave; &agrave; lâ€™int&eacute;rieur du texte de lâ€™article cr&eacute;era une exception).
+_ â€¢ Uniquement pour les articles contenant la balise <code>@_CS_AVEC_SOMMAIRE@</code>.
 
 [[%auto_sommaire%]]
 
@@ -501,7 +501,7 @@ _ &bull; {Usage normal} : SPIP calcule toutes les pages publiques et les place d
 _ &bull; {Cache permanent} : les d&eacute;lais d\'invalidation du cache sont ignor&eacute;s.
 _ &bull; {Pas de cache} : d&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. Ici, rien n\'est stock&eacute; sur le disque.
 _ &bull; {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&eacute;dente, avec une &eacute;criture sur le disque de tous les r&eacute;sultats afin de pouvoir &eacute;ventuellement les contr&ocirc;ler.</q1>[[%radio_desactive_cache4%]]',
-	'spip_cache:nom' => 'SPIP en het dekblad…',
+	'spip_cache:nom' => 'SPIP en het dekbladâ€¦',
 	'stat_auteurs' => 'De auteurs in stat',
 	'statuts_spip' => 'Alleen de volgende SPIP statuten :',
 	'statuts_tous' => 'Alle statuten',
@@ -521,7 +521,7 @@ Notez : Pour les mots-cl&eacute;s, un alias de #TITRE_PARENT est #TITRE_GROUPE. 
 
 Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du secteur dans lequel est plac&eacute; l\'article en cours, puisque l\'identifiant #ID_SECTEUR (ou le champ \'id_secteur\') est disponible dans ce cas.[[%titres_etendus%]]',
 	'titre_parent:nom' => '<MODIF>Balise #TITRE_PARENT',
-	'titre_tests' => 'Het Zwitserland Mes - Tests Bladzijde…',
+	'titre_tests' => 'Het Zwitserland Mes - Tests Bladzijdeâ€¦',
 	'tous' => 'Iedereen',
 	'toutes_couleurs' => 'De 36 kleuren van de css stijlen :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Meertalige blokken&nbsp;: <b><:trad:></b>',
@@ -653,7 +653,7 @@ Ajoutez simplement <code><INCLURE{fond=fonds/visiteurs_connectes}></code> dans v
 	'votre_choix' => 'Uw keus :',
 
 	// W
-	'webmestres:description' => 'Een SPIP {{webmestre}} is een {{beheerder}} hebben toegang aan ruimte FTP. Bij verstek en vanaf SPIP 2.0, is hij de beheerder <code>id_auteur=1</code> van de site. Hier bepaalde webmestres hebben het voorrecht om niet meer om door FTP verplicht te worden voorbij te gaan om de belangrijke verrichtingen van de plaats te valideren, zoals de update van de database of de restauratie van een dump.
+	'webmestres:description' => '<MODIF>Een SPIP {{webmestre}} is een {{beheerder}} hebben toegang aan ruimte FTP. Bij verstek en vanaf SPIP 2.0, is hij de beheerder <code>id_auteur=1</code> van de site. Hier bepaalde webmestres hebben het voorrecht om niet meer om door FTP verplicht te worden voorbij te gaan om de belangrijke verrichtingen van de plaats te valideren, zoals de update van de database of de restauratie van een dump.
 
 Huidige Webmestre : {@_CS_LISTE_WEBMESTRES@}.
 _ In aanmerking komende beheerder : {@_CS_LISTE_ADMINS@}.

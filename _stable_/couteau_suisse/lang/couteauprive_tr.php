@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'SPIP_liens:description' => '@puce@ Sitedeki t&uuml;m ba&#287;lar akt&uuml;el sayfada a&ccedil;&#305;l&#305;r. Ama d&#305;&#351; ba&#287;lar&#305; yeni pencerede a&ccedil;mak kullan&#305;&#351;l&#305; olabilir -- cela revient &agrave; ajouter {target="_blank"} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'&eacute;tendre au maximum cette fonctionnalit&eacute;.[[%radio_target_blank3%]]
 
-@puce@ SPIP permet de relier des mots &agrave; leur d&eacute;finition gr&acirc;ce au raccourci typographique <code>[?mot]</code>. Par d&eacute;faut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l’encyclop&eacute;die libre wikipedia.org. &Agrave; vous de choisir l\'adresse &agrave; utiliser. <br />Lien de test : [?SPIP][[%url_glossaire_externe2%]]',
+@puce@ SPIP permet de relier des mots &agrave; leur d&eacute;finition gr&acirc;ce au raccourci typographique <code>[?mot]</code>. Par d&eacute;faut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers lâ€™encyclop&eacute;die libre wikipedia.org. &Agrave; vous de choisir l\'adresse &agrave; utiliser. <br />Lien de test : [?SPIP][[%url_glossaire_externe2%]]',
 	'SPIP_liens:nom' => 'SPIP ve d&#305;&#351; ba&#287;lant&#305;lar',
 
 	// A
@@ -79,7 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'categ:typo-racc' => '3. Tipografik K&#305;saltmalar',
 	'certaines_couleurs' => 'Sadece a&#351;a&#287;&#305;da tan&#305;mlanan komutlar @_CS_ASTER@ :',
 	'chatons:aide' => '<NEW>Chatons : @liste@',
-	'chatons:description' => '<NEW>Ins&egrave;re des images (ou chatons pour les {tchats}) dans tous les textes o&ugrave; appara&icirc;t une cha&icirc;ne du genre <code>:nom</code>.
+	'chatons:description' => '<MODIF><NEW>Ins&egrave;re des images (ou chatons pour les {tchats}) dans tous les textes o&ugrave; appara&icirc;t une cha&icirc;ne du genre <code>:nom</code>.
 _ Cet outil remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouve dans le r&eacute;pertoire plugins/couteau_suisse/img/chatons.',
 	'chatons:nom' => '<NEW>Chatons',
 	'class_spip:description1' => 'Burada baz&#305; SPIP k&#305;sayollar&#305;n&#305; tan&#305;mlayabilirsiniz. Bo&#351; bir de&#287;er "Varsay&#305;lan&#305; kullan" anlam&#305;ndad&#305;r.[[%racc_hr%]]',
@@ -89,7 +89,7 @@ Burada baz&#305; SPIP k&#305;sayollar&#305;n&#305; tan&#305;mlayabilirsiniz. Bo&
 	'class_spip:description3' => '
 
 SPIP normalde ara ba&#351;l&#305;klar i&ccedil;in &lt;h3&gt; komutunu kullan&#305;r. Burada ba&#351;ka bir komut se&ccedil;iniz :[[%racc_h1%]][[->%racc_h2%]]',
-	'class_spip:description4' => '<MODIF>
+	'class_spip:description4' => '<MODIF><MODIF>
 
 SPIP a choisi d\'utiliser la balise &lt;i> pour transcrire les italiques. Mais &lt;em> aurait pu &eacute;galement convenir. &Agrave; vous de voir :[[%racc_i1%]][[->%racc_i2%]]
 Notez : en modifiant le remplacement des raccourcis d\'italiques, le style {{2.}} sp&eacute;cifi&eacute; plus haut ne sera pas appliqu&eacute;.
@@ -99,7 +99,7 @@ _ {{1.}} Balises &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; et les listes (&lt;ol&gt;,
 _ {{2.}} Balises &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; et &lt;blockquote&gt; :[[%style_h%]]
 
 Notez : en modifiant ce deuxi&egrave;me param&egrave;tre, vous perdez alors les styles standards associ&eacute;s &agrave; ces balises.</blockquote>',
-	'class_spip:nom' => 'SPIP ve k&#305;sayollar&#305;…',
+	'class_spip:nom' => 'SPIP ve k&#305;sayollar&#305;â€¦',
 	'code_css' => 'CSS',
 	'code_fonctions' => '&#304;&#351;levler',
 	'code_jq' => 'jQuery',
@@ -198,7 +198,7 @@ Dikkat : baz&#305; &#304;svi&ccedil;re &Ccedil;ak&#305;s&#305; gere&ccedil;leri 
 	'f_jQuery:nom' => 'jQuery\'yi deaktive eder',
 	'filets_sep:aide' => 'Ay&#305;rma Fileleri (Filet)&nbsp;: <b>__i__</b>  <b>i</b> burada bir say&#305;y&#305; temsil eder.<br />Di&#287;er fileler : @liste@',
 	'filets_sep:description' => '<NEW>Ins&egrave;re des filets de s&eacute;paration, personnalisables par des feuilles de style, dans tous les textes de SPIP.
-_ La syntaxe est : "__code__", o&ugrave; "code" repr&eacute;sente soit le num&eacute;ro d’identification (de 0 &agrave; 7) du filet &agrave; ins&eacute;rer en relation directe avec les styles correspondants, soit le nom d\'une image plac&eacute;e dans le dossier plugins/couteau_suisse/img/filets.',
+_ La syntaxe est : "__code__", o&ugrave; "code" repr&eacute;sente soit le num&eacute;ro dâ€™identification (de 0 &agrave; 7) du filet &agrave; ins&eacute;rer en relation directe avec les styles correspondants, soit le nom d\'une image plac&eacute;e dans le dossier plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'Ay&#305;rma Filesi (Filet)',
 	'filtrer_javascript:description' => 'Makalelerde javascript kullan&#305;m&#305; i&ccedil;in 3 metod vard&#305;r :
 - <i>jamais</i> : javascript her yerde reddedilir
@@ -218,7 +218,7 @@ Dikkat : forumlarda, dilek&ccedil;elerde, payla&#351;&#305;lan ak&#305;larda ve 
 
 	// G
 	'glossaire:aide' => '&Ouml;zetsiz metin : <b>@_CS_SANS_GLOSSAIRE@</b>',
-	'glossaire:description' => '<MODIF>@puce@ Gestion d’un glossaire interne li&eacute; &agrave; un ou plusieurs groupes de mots-cl&eacute;s. Inscrivez ici le nom des groupes en  les s&eacute;parant par les deux points &laquo;&nbsp;:&nbsp;&raquo;. En laissant vide la case qui  suit (ou en tapant "Glossaire"), c’est le groupe "Glossaire" qui sera utilis&eacute;.[[%glossaire_groupes%]]@puce@ Pour chaque mot, vous avez la possibilit&eacute; de choisir le nombre maximal de liens cr&eacute;&eacute;s dans vos textes. Toute valeur nulle ou n&eacute;gative implique que tous les mots reconnus seront trait&eacute;s. [[%glossaire_limite% par mot-cl&eacute;]]@puce@ Deux solutions vous sont offertes pour g&eacute;n&eacute;rer la petite fen&ecirc;tre automatique qui apparait lors du survol de la souris. [[%glossaire_js%]]',
+	'glossaire:description' => '<MODIF>@puce@ Gestion dâ€™un glossaire interne li&eacute; &agrave; un ou plusieurs groupes de mots-cl&eacute;s. Inscrivez ici le nom des groupes en  les s&eacute;parant par les deux points &laquo;&nbsp;:&nbsp;&raquo;. En laissant vide la case qui  suit (ou en tapant "Glossaire"), câ€™est le groupe "Glossaire" qui sera utilis&eacute;.[[%glossaire_groupes%]]@puce@ Pour chaque mot, vous avez la possibilit&eacute; de choisir le nombre maximal de liens cr&eacute;&eacute;s dans vos textes. Toute valeur nulle ou n&eacute;gative implique que tous les mots reconnus seront trait&eacute;s. [[%glossaire_limite% par mot-cl&eacute;]]@puce@ Deux solutions vous sont offertes pour g&eacute;n&eacute;rer la petite fen&ecirc;tre automatique qui apparait lors du survol de la souris. [[%glossaire_js%]]',
 	'glossaire:nom' => '&#304;&ccedil; endeks',
 	'glossaire_css' => 'CSS &ccedil;&ouml;z&uuml;m&uuml;',
 	'glossaire_js' => 'Javascript &ccedil;&ouml;z&uuml;m&uuml;',
@@ -228,9 +228,9 @@ Dikkat : forumlarda, dilek&ccedil;elerde, payla&#351;&#305;lan ak&#305;larda ve 
 	// H
 	'help' => '{{Bu sayfa yaln&#305;z site sorumlular&#305;n&#305;n eri&#351;imine a&ccedil;&#305;kt&#305;r.}} &laquo;{{&#304;svi&ccedil;re&nbsp;&Ccedil;ak&#305;s&#305;}}&raquo; eklentisinin getirdi&#287;i farkl&#305; bir &ccedil;ok ek i&#351;levin d&uuml;zenlenmesine izin verir .',
 	'help2' => 'Yerel s&uuml;r&uuml;m : @version@',
-	'help3' => 'Belgelendirme ba&#287;lant&#305;lar&#305; :<br/>• [&#304;svi&ccedil;re&nbsp;&Ccedil;ak&#305;s&#305;->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Yeniden ba&#351;lat&#305;lmas&#305; :
-_ • [Gizli gere&ccedil;lerin|Bu sayfan&#305;n ilk g&ouml;r&uuml;n&uuml;m&uuml;ne d&ouml;n&uuml;lmesi->@hide@]
-_ • [T&uuml;m eklentinin|Eklentini ilk durumuna d&ouml;n&uuml;lmesi->@reset@]@install@
+	'help3' => 'Belgelendirme ba&#287;lant&#305;lar&#305; :<br/>â€¢ [&#304;svi&ccedil;re&nbsp;&Ccedil;ak&#305;s&#305;->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Yeniden ba&#351;lat&#305;lmas&#305; :
+_ â€¢ [Gizli gere&ccedil;lerin|Bu sayfan&#305;n ilk g&ouml;r&uuml;n&uuml;m&uuml;ne d&ouml;n&uuml;lmesi->@hide@]
+_ â€¢ [T&uuml;m eklentinin|Eklentini ilk durumuna d&ouml;n&uuml;lmesi->@reset@]@install@
 </p>',
 
 	// I
@@ -246,9 +246,9 @@ Bu logoyu tan&#305;mlamak i&ccedil;in &laquo;&nbsp;Konfig&uuml;rasyon&nbsp;&raqu
 <p>{{Dikkat}} : Bu i&#351;levi aktive etmeden &ouml;nce iskeletinizde veya eklentilerinizde hi&ccedil;bir {balise_INTRODUCTION()} fonksiyonunun  olmad&#305;&#287;&#305;ndan emin olun, aksi halde derleme hatas&#305; olu&#351;acakt&#305;r.</p>
 @puce@ #INTRODUCTION komutu taraf&#305;ndan g&ouml;nderilen metnin uzunlu&#287;unu (varsay&#305;lan de&#287;ere g&ouml;re y&uuml;zde olarak) belirtebilirsiniz. Bo&#351; bir de&#287;er veya 100 de&#287;eri metni de&#287;i&#351;tirmeyecektir ve &#351;u varsay&#305;lan de&#287;erleri kullanacakt&#305;r : makaleler i&ccedil;in 500 karakter, k&#305;sa haberler i&ccedil;in 300karakter, forumlar veya ba&#351;l&#305;klar i&ccedil;in 600 karakter.
 [[%lgr_introduction%&nbsp;%]]
-@puce@ E&#287;er metin &ccedil;ok uzunsa, #INTRODUCTION komutuna eklenen varsay&#305;lan &uuml;&ccedil; nokta &#351;&ouml;yledir : <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Burada, metnin kesildi&#287;ini ve devam&#305; oldu&#287;unu siz kendi &ouml;zel karakter zincirinizi kullanarak okuyucular&#305;n&#305;za belirtebilirsiniz.
+@puce@ E&#287;er metin &ccedil;ok uzunsa, #INTRODUCTION komutuna eklenen varsay&#305;lan &uuml;&ccedil; nokta &#351;&ouml;yledir : <html>&laquo;&amp;nbsp;(â€¦)&raquo;</html>. Burada, metnin kesildi&#287;ini ve devam&#305; oldu&#287;unu siz kendi &ouml;zel karakter zincirinizi kullanarak okuyucular&#305;n&#305;za belirtebilirsiniz.
 [[%suite_introduction%]]
-@puce@ #INTRODUCTION komutu bir makaleyi &ouml;zetlemek i&ccedil;in kulan&#305;lm&#305;&#351;sa &#304;svi&ccedil;re &Ccedil;ak&#305;s&#305; &uuml;&ccedil; noktalar&#305;n &uuml;zerine bir hipermetin olu&#351;turarak okuru orijinal metne y&ouml;nlendirir. &Ouml;rne&#287;in : &laquo;Makalenin devam&#305; i&ccedil;in…&raquo;
+@puce@ #INTRODUCTION komutu bir makaleyi &ouml;zetlemek i&ccedil;in kulan&#305;lm&#305;&#351;sa &#304;svi&ccedil;re &Ccedil;ak&#305;s&#305; &uuml;&ccedil; noktalar&#305;n &uuml;zerine bir hipermetin olu&#351;turarak okuru orijinal metne y&ouml;nlendirir. &Ouml;rne&#287;in : &laquo;Makalenin devam&#305; i&ccedil;inâ€¦&raquo;
 [[%lien_introduction%]]
 ',
 	'introduction:nom' => '#INTRODUCTION komutu',
@@ -293,7 +293,7 @@ Dikkat, bu gere&ccedil; &ccedil;al&#305;&#351;mak i&ccedil;in {Round Corners} {j
 	'label:glossaire_js' => 'Kullan&#305;lan teknik :',
 	'label:glossaire_limite' => 'Olu&#351;turulan maksimum ba&#287; :',
 	'label:insertions' => 'Otomatik d&uuml;zeltmeler :',
-	'label:jcorner_classes' => '&#350;u se&ccedil;icilerin k&ouml;&#351;elerini g&uuml;zelle&#351;tirir :',
+	'label:jcorner_classes' => '<MODIF>&#350;u se&ccedil;icilerin k&ouml;&#351;elerini g&uuml;zelle&#351;tirir :',
 	'label:jcorner_plugin' => '&#350;u {jQuery} eklentisini y&uuml;kle :',
 	'label:lgr_introduction' => '&Ouml;zet\'in uzunlu&#287;u :',
 	'label:lgr_sommaire' => '&Ouml;zet\'in b&uuml;y&uuml;kl&uuml;&#287;&uuml; (9 &agrave; 99) :',
@@ -346,7 +346,7 @@ Dikkat, bu gere&ccedil; &ccedil;al&#305;&#351;mak i&ccedil;in {Round Corners} {j
 	'label:webmestres' => 'Site y&ouml;neticilerinin listesi :',
 	'liens_en_clair:description' => '<NEW>Met &agrave; votre disposition le filtre : \'liens_en_clair\'. Votre texte contient probablement des liens hypertexte qui ne sont pas visibles lors d\'une impression. Ce filtre ajoute entre crochets la destination de chaque lien cliquable (liens externes ou mails). Attention : en mode impression (parametre \'cs=print\' ou \'page=print\' dans l\'url de la page), cette fonctionnalit&eacute; est appliqu&eacute;e automatiquement.',
 	'liens_en_clair:nom' => 'A&ccedil;&#305;kta b&#305;rak&#305;lm&#305;&#351; ba&#287;lar',
-	'liens_orphelins:description' => 'Bu gerecin 2 i&#351;levi vard&#305;r:
+	'liens_orphelins:description' => '<MODIF>Bu gerecin 2 i&#351;levi vard&#305;r:
 
 @puce@ {{Do&#287;ru ba&#287;lar}}.
 
@@ -357,8 +357,8 @@ SPIP, frans&#305;z gramerine ba&#287;l&#305; olarak soru ve &uuml;nlem i&#351;ar
 Kullan&#305;c&#305;lar taraf&#305;ndan metin olarak b&#305;rak&#305;lm&#305;&#351; \'t&#305;klanamayan\' t&uuml;m URL\'leri sistemli bi&ccedil;imde SPIP format&#305;nda hipermetin ba&#287;lar&#305;yla de&#287;i&#351;tirir (&ouml;zellikle forumlarda). &Ouml;rne&#287;in : {<html>www.spip.net</html>} [->www.spip.net] ile de&#287;i&#351;tirilir.
 
 De&#287;i&#351;tirme tipini siz se&ccedil;ebilirsiniz :
-_ • {Temel} : {<html>http://spip.net</html>} (t&uuml;m  protokoller) veya  {<html>www.spip.net</html>} de&#287;i&#351;tirilir.
-_ • {Yayg&#305;n} : &#351;u tipteki ba&#287;lar da de&#287;i&#351;tirilir {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} veya {<html>news:mesnews</html>}.
+_ â€¢ {Temel} : {<html>http://spip.net</html>} (t&uuml;m  protokoller) veya  {<html>www.spip.net</html>} de&#287;i&#351;tirilir.
+_ â€¢ {Yayg&#305;n} : &#351;u tipteki ba&#287;lar da de&#287;i&#351;tirilir {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} veya {<html>news:mesnews</html>}.
 [[%liens_orphelins%]]',
 	'liens_orphelins:nom' => 'G&uuml;zel URL\'ler',
 
@@ -416,7 +416,7 @@ _ • {Yayg&#305;n} : &#351;u tipteki ba&#287;lar da de&#287;i&#351;tirilir {<html
 Ce code PHP peut prendre place dans le fichier /config/mes_options.php et ajoutera un lien de r&eacute;initialisation sur cette page "du pack {Pack Actuel}". Bien s&ucirc;r il vous est possible de changer son nom ci-dessous.
 
 Si vous r&eacute;initialisez le plugin en cliquant sur un pack, le Couteau Suisse se reconfigurera automatiquement en fonction des param&egrave;tres pr&eacute;d&eacute;finis dans le pack.',
-	'pack_du' => '• @pack@ paketinin',
+	'pack_du' => 'â€¢ @pack@ paketinin',
 	'pack_installe' => 'Bir konfig&uuml;rasyon paketini y&uuml;kle',
 	'pack_installer' => '&#304;svi&ccedil;re &Ccedil;ak&#305;s&#305;\'n&#305; yeniden ba&#351;latmak ve &laquo;&nbsp;@pack@&nbsp;&raquo; paketini kurmak istedi&#287;inizden emin misiniz ?',
 	'pack_nb_plrs' => '&#350;u anda g&uuml;ncel @nb@ &laquo;&nbsp;konfig&uuml;rasyon paketi&nbsp;&raquo; var.',
@@ -431,7 +431,7 @@ Si vous r&eacute;initialisez le plugin en cliquant sur un pack, le Couteau Suiss
 	'paragrapher2:description' => '<NEW>La fonction SPIP <code>paragrapher()</code> ins&egrave;re des balises &lt;p&gt; et &lt;/p&gt; dans tous les textes qui sont d&eacute;pourvus de paragraphes. Afin de g&eacute;rer plus finement vos styles et vos mises en page, vous avez la possibilit&eacute; d\'uniformiser l\'aspect des textes de votre site.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Paragrafla',
 	'pipelines' => 'Kullan&#305;lan boru hatlar&#305;&nbsp;:',
-	'pucesli:description' => 'Makalelerdeki &laquo;-&raquo; (basit tire) i&#351;aretlerini &laquo;-*&raquo; ile de&#287;i&#351;tirir (HTML\'e : &lt;ul>&lt;li>…&lt;/li>&lt;/ul> olarak &ccedil;evrilir). Bunlar&#305;n bi&ccedil;imi css ile ki&#351;iselle&#351;tirilebilir.',
+	'pucesli:description' => 'Makalelerdeki &laquo;-&raquo; (basit tire) i&#351;aretlerini &laquo;-*&raquo; ile de&#287;i&#351;tirir (HTML\'e : &lt;ul>&lt;li>â€¦&lt;/li>&lt;/ul> olarak &ccedil;evrilir). Bunlar&#305;n bi&ccedil;imi css ile ki&#351;iselle&#351;tirilebilir.',
 	'pucesli:nom' => 'G&uuml;zel simgeler',
 
 	// R
@@ -448,7 +448,7 @@ Si vous r&eacute;initialisez le plugin en cliquant sur un pack, le Couteau Suiss
 
 	// S
 	'sauf_admin' => 'Y&ouml;neticiler d&#305;&#351;&#305;nda herkes',
-	'set_options:description' => '<NEW>S&eacute;lectionne d\'office le type d’interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes.[[%radio_set_options4%]]',
+	'set_options:description' => '<NEW>S&eacute;lectionne d\'office le type dâ€™interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes.[[%radio_set_options4%]]',
 	'set_options:nom' => '&Ouml;zel aray&uuml;z tipi',
 	'sf_amont' => '<NEW>En amont',
 	'sf_tous' => 'Hepsi',
@@ -463,13 +463,13 @@ _ Dessins : [Sylvain Michel->http://www.guaph.net/]',
 
 Attention, cet outil a besoin pour fonctionner de deux plugins {jQuery} : {ScrollTo} et {LocalScroll}. Le Couteau Suisse peut les installer directement si vous cochez les cases suivantes. [[%scrollTo%]][[->%LocalScroll%]]',
 	'soft_scroller:nom' => 'Yumu&#351;ak &ccedil;apalar',
-	'sommaire:description' => '<MODIF><NEW>Construit un sommaire pour vos articles afin d’acc&eacute;der rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
+	'sommaire:description' => '<MODIF><NEW>Construit un sommaire pour vos articles afin dâ€™acc&eacute;der rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
 
 @puce@ Vous pouvez d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire :[[%lgr_sommaire% caract&egrave;res]]
 
 @puce@ Vous pouvez aussi fixer le comportement du plugin concernant la cr&eacute;ation du sommaire: 
-_ • Syst&eacute;matique pour chaque article (une balise <code>[!sommaire]</code> plac&eacute;e n’importe o&ugrave; &agrave; l’int&eacute;rieur du texte de l’article cr&eacute;era une exception).
-_ • Uniquement pour les articles contenant la balise <code>[sommaire]</code>.
+_ â€¢ Syst&eacute;matique pour chaque article (une balise <code>[!sommaire]</code> plac&eacute;e nâ€™importe o&ugrave; &agrave; lâ€™int&eacute;rieur du texte de lâ€™article cr&eacute;era une exception).
+_ â€¢ Uniquement pour les articles contenant la balise <code>[sommaire]</code>.
 
 [[%auto_sommaire%]]
 
@@ -488,11 +488,11 @@ Burada yasaklanacak serileri @_CS_ASTER@ aralar&#305;nda bir bo&#351;luk b&#305;
 	'spip_cache:description' => '<MODIF>@puce@ Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.[[%radio_desactive_cache3%]]@puce@ Le cache occupe un certain espace disque et SPIP peut en limiter l\'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu\'aucun quota ne s\'applique.[[%quota_cache% Mo]]@puce@ Si la balise #CACHE n\'est pas trouv&eacute;e dans vos squelettes locaux, SPIP consid&egrave;re par d&eacute;faut que le cache d\'une page a une dur&eacute;e de vie de 24 heures avant de la recalculer. Afin de mieux g&eacute;rer la charge de votre serveur, vous pouvez ici modifier cette valeur.[[%duree_cache% heures]]@puce@ Si vous avez plusieurs sites en mutualisation, vous pouvez sp&eacute;cifier ici la valeur par d&eacute;faut prise en compte par tous les sites locaux (SPIP 1.93).[[%duree_cache_mutu% heures]]',
 	'spip_cache:description1' => '<NEW>@puce@ Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]',
 	'spip_cache:description2' => '<NEW>@puce@ Quatre options pour orienter le fonctionnement du cache de SPIP : <q1>
-_ • {Usage normal} : SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. Apr&egrave;s un certain d&eacute;lai, le cache est recalcul&eacute; et stock&eacute;.
-_ • {Cache permanent} : les d&eacute;lais d\'invalidation du cache sont ignor&eacute;s.
-_ • {Pas de cache} : d&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. Ici, rien n\'est stock&eacute; sur le disque.
-_ • {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&eacute;dente, avec une &eacute;criture sur le disque de tous les r&eacute;sultats afin de pouvoir &eacute;ventuellement les contr&ocirc;ler.</q1>[[%radio_desactive_cache4%]]',
-	'spip_cache:nom' => 'SPIP ve &ouml;nbellek…',
+_ â€¢ {Usage normal} : SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en acc&eacute;l&eacute;rer la consultation. Apr&egrave;s un certain d&eacute;lai, le cache est recalcul&eacute; et stock&eacute;.
+_ â€¢ {Cache permanent} : les d&eacute;lais d\'invalidation du cache sont ignor&eacute;s.
+_ â€¢ {Pas de cache} : d&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site. Ici, rien n\'est stock&eacute; sur le disque.
+_ â€¢ {Contr&ocirc;le du cache} : option identique &agrave; la pr&eacute;c&eacute;dente, avec une &eacute;criture sur le disque de tous les r&eacute;sultats afin de pouvoir &eacute;ventuellement les contr&ocirc;ler.</q1>[[%radio_desactive_cache4%]]',
+	'spip_cache:nom' => 'SPIP ve &ouml;nbellekâ€¦',
 	'stat_auteurs' => 'Stat durumundaki yazarlar',
 	'statuts_spip' => 'Sadece &#351;u SPIP stat&uuml;s&uuml; :',
 	'statuts_tous' => 'T&uuml;m stat&uuml;ler',
@@ -637,7 +637,7 @@ Sayfalar&#305;n&#305;za yaln&#305;zca &#351;unu ekleyin  <code><INCLURE{fond=fon
 	'votre_choix' => 'Se&ccedil;iminiz :',
 
 	// W
-	'webmestres:description' => '<NEW>Un {{webmestre}} au sens SPIP est un {{administrateur}} ayant acc&egrave;s &agrave; l\'espace FTP. Par d&eacute;faut et &agrave; partir de SPIP 2.0, il est l’administrateur <code>id_auteur=1</code> du site. Les webmestres ici d&eacute;finis ont le privil&egrave;ge de ne plus &ecirc;tre oblig&eacute;s de passer par FTP pour valider les op&eacute;rations sensibles du site, comme la mise &agrave; jour de la base de donn&eacute;es ou la restauration d’un dump.
+	'webmestres:description' => '<MODIF><NEW>Un {{webmestre}} au sens SPIP est un {{administrateur}} ayant acc&egrave;s &agrave; l\'espace FTP. Par d&eacute;faut et &agrave; partir de SPIP 2.0, il est lâ€™administrateur <code>id_auteur=1</code> du site. Les webmestres ici d&eacute;finis ont le privil&egrave;ge de ne plus &ecirc;tre oblig&eacute;s de passer par FTP pour valider les op&eacute;rations sensibles du site, comme la mise &agrave; jour de la base de donn&eacute;es ou la restauration dâ€™un dump.
 
 Webmestre(s) actuel(s) : {@_CS_LISTE_WEBMESTRES@}.
 _ Administrateur(s) &eacute;ligible(s) : {@_CS_LISTE_ADMINS@}.
