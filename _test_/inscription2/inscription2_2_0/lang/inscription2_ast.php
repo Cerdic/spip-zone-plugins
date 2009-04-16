@@ -11,15 +11,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'a_confirmer' => 'Por confirmar',
 	'accesrestreint' => 'Accesu Torg&aacute;u',
 	'aconfirmer' => 'Por confirmar',
-	'action_adherent' => 'Aici&oacute;n d\'asoci&aacute;u',
+	'action_adherent' => '<MODIF>Aici&oacute;n d\'asoci&aacute;u',
 	'activation_compte' => 'Activa la to cuenta',
-	'adherent' => 'Asoci&aacute;u',
 	'adherents' => 'Asociaos',
 	'admin' => 'Almin',
 	'admin_modifier_auteur_supp' => 'Informaci&oacute;n suplementaria',
 	'adresse' => 'Se&ntilde;es',
 	'adresse_pro' => 'Se&ntilde;es profesionales (Pro.)',
-	'ajouter_adherent' => 'Amestar asoci&aacute;u',
+	'ajouter_adherent' => '<MODIF>Amestar asoci&aacute;u',
 	'aout' => 'agostu',
 	'auteur' => 'Autor',
 	'autre' => 'Otru',
@@ -132,7 +131,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'latitude' => 'Llatit&uacute;',
 	'legende' => 'Lleenda',
 	'lisez_mail' => 'Vi&eacute;n d\'unviase un email a les se&ntilde;es qu\'apurriste. Pa activar la to cuenta has de siguir les instrucciones.',
-	'liste_adherents' => 'Llista d\'asociaos',
+	'liste_adherents' => '<MODIF>Llista d\'asociaos',
 	'login' => 'Nome d\'usuariu (login)',
 	'longitude' => 'Llonxit&uacute;',
 
@@ -166,6 +165,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'page_confirmation' => 'P&aacute;xina de confirmaci&oacute;n de la inscripci&oacute;n',
 	'par_defaut' => 'Esti campu ye obligatoriu',
+	'pass' => 'Clave',
 	'pass_egal' => 'Has d\'escribir la mesma clave que l\'anterior.',
 	'pass_indiquez_cidessous' => 'Indica embaxo les se&ntilde;es d\'email coles que tas
    rexistr&aacute;u. Vas recibir un email que
@@ -212,16 +212,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'telephone' => 'Tel&eacute;fonu',
 	'telephone_pro' => 'Tel&eacute;fonu profesional',
 	'texte' => 'Testu',
-	'texte_email_confirmation' => 'La to ccuenta ta activa, darr&eacute;u pues coneutate al sitiu usando la to identificaci&oacute;n personal.
+	'texte_email_confirmation' => '<MODIF>La to ccuenta ta activa, darr&eacute;u pues coneutate al sitiu usando la to identificaci&oacute;n personal.
 
 El nome d\'usuariu ye: @login@
 y vienes d\'escoyer la to clave.
 
 Gracies pola confianza
 
-L\'equipu de @nom_site@
-@url_site@',
-	'texte_email_inscription' => 'Vienes de pidir participar nel nuestru sitiu @nom_site@. 
+L\'equipu de @nom_site@',
+	'texte_email_inscription' => '<MODIF>Vienes de pidir participar nel nuestru sitiu @nom_site@. 
 Agora tas a puntu de finar la to inscripci&oacute;n. Val que calques nel enllaz d\'embaxo p\'activar la to cuenta y escoyer to clave.
 
 @link_activation@

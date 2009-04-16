@@ -11,15 +11,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'a_confirmer' => 'To be confirmed',
 	'accesrestreint' => 'Restricted access',
 	'aconfirmer' => 'To be confirmed',
-	'action_adherent' => 'Member action',
+	'action_adherent' => '<MODIF>Member action',
 	'activation_compte' => 'Activate your account',
-	'adherent' => 'Member',
 	'adherents' => 'Members',
 	'admin' => 'Admin',
 	'admin_modifier_auteur_supp' => 'Extra information',
 	'adresse' => 'Address',
 	'adresse_pro' => 'Professionnal address',
-	'ajouter_adherent' => 'Add a member',
+	'ajouter_adherent' => '<MODIF>Add a member',
 	'aout' => 'August',
 	'auteur' => 'Author',
 	'autre' => 'Other',
@@ -132,7 +131,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'latitude' => 'Latitude',
 	'legende' => 'Caption',
 	'lisez_mail' => 'An email has been just sent to the address provided. To activate your account please follow the instructions.',
-	'liste_adherents' => 'List of members',
+	'liste_adherents' => '<MODIF>List of members',
 	'login' => 'Username (login)',
 	'longitude' => 'Longitude',
 
@@ -166,6 +165,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'page_confirmation' => 'Confirmation of your registration',
 	'par_defaut' => 'This field is required',
+	'pass' => 'Password',
 	'pass_egal' => 'Please enter the same password as earlier.',
 	'pass_indiquez_cidessous' => 'Give the email address with which you were previously registered.
 You will receive and email telling you how to change your login.',
@@ -210,16 +210,15 @@ You will receive and email telling you how to change your login.',
 	'telephone' => 'Phone',
 	'telephone_pro' => 'Work phone',
 	'texte' => 'Text',
-	'texte_email_confirmation' => 'Your account has been activated. From now on you can access the site using your login.\\n
+	'texte_email_confirmation' => '<MODIF>Your account has been activated. From now on you can access the site using your login.\\n
 
 Your login is&nbsp;: @login@
 and you have just chosen your password.
 
 Thank you for your trust
 
-The @nom_site@ Team
-@url_site@',
-	'texte_email_inscription' => 'You have asked to participate on @nom_site@. 
+The @nom_site@ Team',
+	'texte_email_inscription' => '<MODIF>You have asked to participate on @nom_site@. 
 You are about to finish your registration. You just need to click the link below to activate your account and choose your password.
 
 @link_activation@

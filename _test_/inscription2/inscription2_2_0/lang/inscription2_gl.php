@@ -11,15 +11,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'a_confirmer' => 'Para confirmar',
 	'accesrestreint' => 'Acceso restrinxido',
 	'aconfirmer' => 'Para confirmar',
-	'action_adherent' => 'Acci&oacute;n adherente',
+	'action_adherent' => '<MODIF>Acci&oacute;n adherente',
 	'activation_compte' => 'Active a s&uacute;a conta',
-	'adherent' => 'Adherente',
 	'adherents' => 'Adherentes',
 	'admin' => 'Admin',
 	'admin_modifier_auteur_supp' => 'Informaci&oacute;n complementaria',
 	'adresse' => 'Enderezo',
 	'adresse_pro' => 'Enderezo profesional (Pro.)',
-	'ajouter_adherent' => 'Engadir adherente',
+	'ajouter_adherent' => '<MODIF>Engadir adherente',
 	'aout' => 'agosto',
 	'auteur' => 'Autor',
 	'autre' => 'Outro',
@@ -132,7 +131,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'latitude' => 'Latitude',
 	'legende' => 'Lenda',
 	'lisez_mail' => 'Ac&aacute;base de enviar un correo ao enderezo proporcionado. Para activar a s&uacute;a conta, siga as instruci&oacute;ns.',
-	'liste_adherents' => 'Lista de adherentes',
+	'liste_adherents' => '<MODIF>Lista de adherentes',
 	'login' => 'Nome de usuario (login)',
 	'longitude' => 'Lonxitude',
 
@@ -212,16 +211,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'telephone' => 'Tel&eacute;fono',
 	'telephone_pro' => 'Tel&eacute;fono profesional',
 	'texte' => 'Texto',
-	'texte_email_confirmation' => 'A s&uacute;a conta est&aacute; activa, desde agora pode conectarse ao web e usar os seus identificadores persoais.
+	'texte_email_confirmation' => '<MODIF>A s&uacute;a conta est&aacute; activa, desde agora pode conectarse ao web e usar os seus identificadores persoais.
 
 O seu login &eacute;&nbsp;: @login@
 e acaba de escoller o contrasinal.
 
 Agradec&eacute;moslle a s&uacute;a confianza
 
-O equipo de @nom_site@
-@url_site@',
-	'texte_email_inscription' => 'Solicitou participar no noso web @nom_site@. 
+O equipo de @nom_site@',
+	'texte_email_inscription' => '<MODIF>Solicitou participar no noso web @nom_site@. 
 Neste momento, est&aacute; a piques de rematar a inscrici&oacute;n. S&oacute; lle falta premer sobre a ligaz&oacute;n seguinte para activar a s&uacute;a conta e escoller o seu contrasinal.
 
 @link_activation@

@@ -8,113 +8,119 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'a_confirmer' => 'Zu best&auml;tigen',
-	'accesrestreint' => 'Eingeschr�nkter Zugang',
-	'aconfirmer' => 'A confirmer',
-	'action_adherent' => 'Action adh&eacute;rent',
+	'a_confirmer' => 'Zu best&amp;auml;tigen',
+	'accesrestreint' => 'Eingeschr&amp;auml;nkter Zugang',
+	'aconfirmer' => 'Zu best&amp;auml;tigen',
+	'action_adherent' => '<MODIF>Aktion Mitglied',
 	'activation_compte' => 'Aktivieren Sie Ihr Konto',
-	'adherent' => 'Mitglied',
-	'adherents' => 'Adh&eacute;rents',
+	'adherents' => 'Mitglieder',
 	'admin' => 'Admin',
-	'admin_modifier_auteur_supp' => '<NEW>Informations suppl&eacute;mentaires',
+	'admin_modifier_auteur_supp' => 'Weiterf&uuml;hrende Informationen',
 	'adresse' => 'Adresse',
-	'adresse_pro' => 'Adresse professionnelle',
-	'ajouter_adherent' => 'Ajouter adh&eacute;rent',
+	'adresse_pro' => 'Adresse (beruflich)',
+	'ajouter_adherent' => '<MODIF>Mitglied hinzuf&uuml;gen',
 	'aout' => 'August',
 	'auteur' => 'Autor',
-	'autre' => 'Anderes',
+	'autre' => 'Andere',
 	'avril' => 'April',
 
 	// C
-	'caracteres' => '<NEW>caract&egrave;res',
-	'categorie' => 'Cat&eacute;gorie de cotisation',
-	'chaine_valide' => '<NEW>Veuillez ins&eacute;rer une chaine de caract&egrave;re',
-	'chainelettre' => '<NEW>(compos&eacute;e uniquement de lettres)',
-	'chainenombre' => '<NEW>(compos&eacute;e de lettres et/ou de chiffres)',
-	'champ_obligatoire' => '<NEW>Ce champ est obligatoire',
-	'choisir_categories' => 'Choisissez-les ci-dessous&nbsp;:',
-	'choisir_listes' => 'Unten w&auml;hlen Sie die den neuen Mitgliedern vorzuschlagenden Verbreitungslisten:',
-	'choisir_zones' => 'Veuillez choisir les zones auxquelles vous voulez que les nouveaux adh&eacute;rents soient affect&eacute;s',
-	'choix_domaine' => 'Veuillez choisir votre domaine',
-	'code_postal' => 'Postcode',
-	'code_postal_pro' => 'Postcode',
+	'caracteres' => 'Zeichen',
+	'categorie' => 'Beitragsart',
+	'chaine_valide' => 'Bitte f&uuml;gen Sie eine Zeichenkette ein',
+	'chainelettre' => '(besteht nur aus Buchstaben)',
+	'chainenombre' => '(besteht aus Buchstaben und/oder Zahlen)',
+	'champ_obligatoire' => 'Pflichtfeld',
+	'choisir_categories' => 'Bitte hier ausw&auml;hlen:',
+	'choisir_listes' => 'Unten w&auml;hlen Sie die den neuen Mitgliedern vorzuschlagenden Mailinglisten:',
+	'choisir_nouveau_password' => 'Klicken Sie auf den folgenden Link, um ein neues Passwort zu w&auml;hlen.',
+	'choisir_zones' => 'Bitte w&auml;hlen Sie die Bereiche, zu denen neue Mitglieder geh&ouml;ren sollen.',
+	'choix_domaine' => 'Bitte w&auml;hlen Sie ihre Domain',
+	'civilite' => 'Anrede',
+	'code_postal' => 'Postleitzahl',
+	'code_postal_pro' => 'Postleitzahl (beruflich)',
 	'commentaire' => 'Kommentar',
-	'compte_active' => 'Votre compte a &eacute;t&eacute; activ&eacute; @nom_site@',
-	'conf_plugin' => 'Inscription2 Konfiguration',
-	'conf_plugin_page' => 'Registrierte Konfiguration des plugin Inscription2',
+	'compte_active' => 'Ihr Konto wurde aktiviert',
+	'conf_plugin' => 'Konfiguration Inscription2',
+	'conf_plugin_page' => 'Gespeicherte Konfiguration des Plugin Inscription2',
 	'configs' => 'Konfigurationen',
 	'configuration' => 'Konfiguration',
-	'confirmation' => '<p>&Ecirc;tes vous s&ucirc;r(e) de vouloir continuer?</p><p>Toutes les modifications seront irreversibles!!!</p>',
-	'contacts_personnels' => 'Pers�nliche Kontakte',
-	'contacts_pros' => 'Professionelle Kontakte',
-	'cp_valide' => '<NEW>Veuillez ins&eacute;rer un code postal valide',
-	'creation' => 'Datum Schaffung der Karte',
+	'confirmation' => '<p>Wollen Sie wirklich fortfahren?</p><p>Alle &Auml;nderungen sind unwiederrufbar!!!</p>',
+	'contacts_personnels' => 'Pers&ouml;nliche Kontakte',
+	'contacts_pros' => 'Berufliche Kontakte',
+	'cp_valide' => 'Bitte geben Sie eine g&uuml;ltige Postleitzahl ein',
+	'creation' => 'Eintrag angelegt am',
 
 	// D
 	'decembre' => 'Dezember',
-	'description_page' => 'Hier k&ouml;nnen Sie Ihre Konfigurationswahl pr&uuml;fen, wie sie gelagert werden',
-	'deselect_listes' => '> alles unauszuw&auml;hlen',
-	'divers' => 'Divers',
+	'demande_password' => 'Ihr Passwort:',
+	'description_page' => 'Hier k&ouml;nnen Sie Ihre gespeicherten Einstellungen &uuml;berpr&uuml;fen.',
+	'deselect_listes' => '> alles abw&auml;hlen',
+	'divers' => 'Verschiedenes',
 	'domaine' => 'Domaine',
-	'domaines' => 'Domaine',
+	'domaines' => 'Domain',
 
 	// E
-	'editer_adherent' => 'Editer adh&eacute;rent',
-	'email' => 'EMail',
-	'email_bonjour' => 'Bonjour @nom@,',
-	'email_valide' => '<NEW>Veuillez ins&eacute;rer un email valide',
-	'exp_categorie' => 'Liste d&eacute;roulante des cat&eacute;gories de la table \'spip_asso_categories\' &agrave; proposer aux nouveaux adherents.',
-	'exp_divers' => 'Champ qui sera propos&eacute; aux visiteurs avec le nom de commentaire',
-	'exp_domaines' => 'Restreindre l\'acc&egrave;s &agrave; une liste predefinie des domaines',
-	'exp_domaines2' => 'Veuillez definir vos domaines dans le fichier inc/domaines.php en suivant le mod&egrave;le.',
-	'exp_newsletter' => 'Choisissez ci-dessous les listes de diffusion auxquelles vous voulez vous abonner',
+	'editer_adherent' => 'Mitglied bearbeiten',
+	'email' => 'Email',
+	'email_bonjour' => 'Hallo @nom@,',
+	'email_obligatoire' => 'Email ist Pflichtfeld',
+	'email_valide' => 'Bitte geben Sie eine g&uuml;ltige Mailadresse ein',
+	'exp_categorie' => 'Kategorien der Tabelle \'spip_asso_categories\' die neuen Mitgliedern angeboten werden.',
+	'exp_divers' => 'Dieses Feld steht den Besuchern f&uuml;r Kommentare zur Verf&uuml;gung.',
+	'exp_domaines' => 'Zugang nur f&uuml;r bestimmte Domains gestatten',
+	'exp_domaines2' => 'Bitte folgen Sie beim Eintragen der Domains in die Datei inc/domaines.php dem Beispieleintrag.',
+	'exp_newsletter' => 'Bitte w&auml;hlen Sie hier die Mailing-Listen, die Sie beziehen m&ouml;chten.',
 	'exp_publication' => 'Genehmigung der Ver&ouml;ffentlichung der pers&ouml;nlichen Daten',
-	'exp_statut' => 'Choisissez le statut que vous voulez attribuer aux nouveaux adh&eacute;rents',
-	'exp_statut_rel' => 'Champ diff&eacute;rent du statut de SPIP, celui-ci sert pour le controle interne d\'une institution',
-	'exp_validite' => 'Champ utile avec le plugin <strong>ABONNEMENT</strong>, &agrave; cocher s\'il est install&eacute;',
-	'expl_format' => 'Veuillez choisir le format que vous pr&eacute;f&eacute;rez pour recevoir les emails des listes de diffusion',
+	'exp_statut' => 'W&auml;hlen Sie den Status f&uuml;r neue Mitglieder',
+	'exp_statut_rel' => 'Das Feld enth&auml;lt einen anderen Status als den von SPIP, damit eine Institution eigene Berechtigungen vergeben kann.',
+	'exp_validite' => 'Dieses Feld unterst&uuml;tzt das Plugin <strong>ABONNEMENT</strong>. Bitte markieren, falls dieses Plugin installiert ist.',
+	'expl_format' => 'Bitte w&auml;h&ouml;len Sie das Format, in dem Sie die Beitr&auml;ge der Mailinglisten erhalten m&ouml;chten.',
 
 	// F
 	'fax' => 'Fax',
-	'fax_pro' => 'Fax professionnel',
+	'fax_pro' => 'Fax (beruflich)',
 	'feminin' => 'Frau',
 	'fevrier' => 'Februar',
-	'fiche' => 'Karte',
-	'fiche_adherent' => 'Fiche adh&eacute;rent',
-	'fiche_expl' => ' : Le champ sera visible sur la fiche d\'adh&eacute;rent',
-	'fiche_mod' => 'Ab�nderungsf�hig',
-	'fiche_mod_expl' => ' : Le champ sera modifiable depuis l\'interface publique par l\'adh&eacute;rent &agrave; condition d\'utiliser le plugin CRAYONS',
+	'fiche' => 'Eintrag',
+	'fiche_adherent' => 'Mitgliedseintrag',
+	'fiche_expl' => ' : Das Feld wird im Mitgliedseintrag angezeigt',
+	'fiche_mod' => '&Auml;nderung m&ouml;glich',
+	'fiche_mod_expl' => ' : Das Feld kann vom Mitglied im &ouml;ffentlichen Bereich ge&auml;ndert werden, wenn das Plugin CRAYONS installiert ist.',
 	'fonction' => 'Funktion',
 	'form' => 'Formular',
-	'form_expl' => ' : Le champ sera affich&eacute; sur le formulaire INSCRIPTION2',
-	'form_oblig_expl' => ' : Rendre la saisie obligatoire dans le formulaire',
+	'form_expl' => ' : Das Feld wird im Formular INSCRIPTION2 angezeigt',
+	'form_oblig_expl' => ' : Pflichtfeld des Formulars',
 	'format' => 'Format',
-	'formulaire_inscription' => 'Einschreibungsformular',
+	'formulaire_inscription' => 'Anmeldeformular',
+	'formulaire_inscription_ok' => 'Ihre Anmeldung wurde gespeichert. Sie erhalten nun eine Mail mit Ihren Verbindungsdaten.',
+	'formulaire_login_deja_utilise' => 'Diese Bezeichnung wird bereits verwendet. Bitte w&auml;hlen Sie eine andere.',
+	'formulaire_remplir_obligatoires' => 'Bitte f&uuml;llen Sie die Pflichtfelder aus.',
 
 	// G
 	'general_infos' => 'Allgemeine Informationen',
-	'geoloc' => 'G&eacute;olocalisation',
-	'geomap_obligatoire' => '<NEW>Pour utiliser les donn&eacute;es de g&eacute;olocalisation des personnes, il est n&eacute;cessaire d\'installer le plugin GoogleMapApi...',
-	'gestion_adherent' => 'Genstion d\'adh&eacute;rents',
+	'geoloc' => 'Geografische Lokalisierung',
+	'geomap_obligatoire' => 'Um Daten zur Lokalisierung von Personen zu verwenden, wird das Plugin GoogleMapApi ben&ouml;tigt.',
+	'gestion_adherent' => 'Mitgliederverwaltung',
 
 	// H
 	'html' => 'HTML',
 
 	// I
 	'icone_menu_config' => 'Inscription2',
-	'info_connection' => '<NEW>Informations de connexion',
-	'info_defaut' => 'Informations par d&eacute;faut',
-	'info_defaut_desc' => 'Informations obligatoires par d&eacute;faut',
+	'info_connection' => 'Verbindungsinformationen',
+	'info_defaut' => 'Standardinformationen',
+	'info_defaut_desc' => 'Obligatorische Standardinformationen',
 	'info_gener' => 'Allgemeine Informationen',
 	'info_gener_desc' => 'Optionen, die von den neuen Mitgliedern des web site verlangt werden',
 	'info_internes' => 'Interne Informationen',
 	'info_internes_desc' => 'Options qui seront stock&eacute;es dans la base de donn&eacute;es mais ne seront pas affich&eacute;es dans le formulaire des nouveaux adh&eacute;rents',
 	'info_perso' => 'Pers&ouml;nliche Informationen',
-	'info_perso_desc' => 'Pers&ouml;nliche Informationen, die von den neuen Mitgliedern des web site verlangt werden',
-	'info_pro' => 'Berufsaufkl&auml;rungen',
-	'infos_adherent' => 'Informations suppl&eacute;mentaires',
-	'infos_personnelles' => '<NEW>Informations personnelles',
-	'inserez_infos' => 'Erfassen Sie bitte die verlangten Informationen',
+	'info_perso_desc' => 'Pers&ouml;nliche Informationen, die von bei neuen Teilnehmern der Website abgefragt werden',
+	'info_pro' => 'Berufliche Angaben',
+	'infos_adherent' => 'Zusatzinformationen',
+	'infos_personnelles' => 'Neue pers&ouml;nliche Angaben',
+	'inserez_infos' => 'Tragen Sie bitte die Angaben ein',
 
 	// J
 	'janvier' => 'Januar',
@@ -122,11 +128,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'juin' => 'Juni',
 
 	// L
-	'latitude' => '<NEW>Latitude',
-	'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; &agrave; l\'adresse fournie. Pour activer votre compte veuillez suivre les instructions.',
-	'liste_adherents' => 'Liste d\'adh&eacute;rents',
+	'latitude' => 'Geographische Breite',
+	'legende' => 'Legende',
+	'lisez_mail' => 'An die eingetragene Adresse wurde eine Email geschickt. Sie enth&auml;lt die zur Aktivierung Ihres Kontos erforderlichen Informationen.',
+	'liste_adherents' => '<MODIF>Mitgliederliste',
 	'login' => 'Benutzername (login)',
-	'longitude' => '<NEW>Longitude',
+	'longitude' => 'Geographische L&auml;nge',
 
 	// M
 	'mai' => 'Mai',
@@ -135,95 +142,117 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mars' => 'M&auml;rz',
 	'masculin' => 'Herr',
 	'message_auto' => '(Dies ist eine automatische Mitteilung)',
-	'mobile' => 'Handy',
-	'mobile_pro' => 'Mobile professionnel',
+	'mobile' => 'Funktelefon',
+	'mobile_pro' => 'Funktelefon (beruflich)',
+	'modif_pass_titre' => 'Passwort &auml;ndern',
 
 	// N
 	'naissance' => 'Geburtstag',
-	'nettoyer_tables' => 'Tische zu reinigen',
-	'newsletter' => 'Listes de diffusion',
-	'nom' => '<MODIF>Pseudo',
+	'nettoyer_tables' => 'Tabellen aufr&auml;umen',
+	'newsletter' => 'Mailinglisten',
+	'nom' => 'Pseudonym',
+	'nom_explication' => 'Ihr Name oder Pseudonym',
 	'nom_famille' => 'Name',
-	'non_renseigne' => '<NEW>non renseign&eacute;.',
-	'non_renseignee' => '<NEW>non renseign&eacute;e.',
+	'non_renseigne' => 'Keine Angabe',
+	'non_renseignee' => 'Keine Angabe',
 	'novembre' => 'November',
-	'numero_valide' => '<NEW>Veuillez ins&eacute;rer un num&eacute;ro valide',
+	'numero_valide' => 'Bitte geben Sie eine g&uuml;ltige Zahl ein',
 
 	// O
 	'octobre' => 'Oktober',
-	'optout' => 'Cases &agrave; coch&#233;es non pr&#233;coch&#233;es (optout)',
+	'optout' => 'Voreinstellung: K&auml;stchen nicht abgehakt  (Opt-Out)',
 
 	// P
-	'page_confirmation' => 'Seite der Best�tigung Ihrer Einschreibung',
-	'par_defaut' => 'par d&eacute;faut',
+	'page_confirmation' => 'Seite zur Best&auml;tigung Ihrer Anmeldung',
+	'par_defaut' => 'Standard',
+	'pass' => 'Passwort',
+	'pass_egal' => 'Bitte wiederholen Sie das Passwort.',
+	'pass_indiquez_cidessous' => 'Bitte geben Sie die Mailadresse an,
+mit der Sie sich eingetragen haben.
+Sie erhalten dann eine Nachricht, die Ihnen
+sagt, wie Sie vorgehen m&uuml;ssen,
+um Ihre Zugangsdaten zu &auml;ndern.',
+	'pass_minimum' => 'Ihr Passwort muss mindestens 5 Zeichen lang sein.',
+	'pass_oubli_mot' => 'Passwort &auml;ndern',
+	'pass_recevoir_mail' => 'Sie erhalten nun eine Mail mit Informationen zum &Auml;ndern Ihrer Zugangsdaten.',
+	'password_obligatoire' => 'Das Passwort ist erforderlich.',
+	'password_retaper' => 'Passwort best&auml;tigen',
 	'pays' => 'Land',
-	'pays_pro' => 'Land',
+	'pays_pro' => 'Land (beruflich)',
 	'prenom' => 'Vorname',
-	'probleme_email' => 'Probl&egrave;me de mail&nbsp;: l\'email d\'activation ne peut pas &ecirc;tre envoy&eacute;.',
+	'probleme_email' => 'Mailproblem: Die Mail zum Aktivieren des Kontos konnte nicht verschickt werden.',
 	'profession' => 'Beruf',
+	'profil_droits_insuffisants' => 'Sie d&uuml;rfen diesen Autor nicht &auml;ndern<br/>',
+	'profil_modifie_ok' => 'Die &Auml;nderung Ihres Profils wurden gespeichert.',
 	'publication' => 'Ver&ouml;ffentlichung',
 
 	// R
-	'raccourcis' => 'Raccourcis',
-	'redemande_password' => 'R&eacute;inserez votre mot de passe&nbsp;:',
+	'raccourcis' => 'Schnellzugang',
+	'rappel_login' => 'Erinnerung - Ihr Login lautet: ',
+	'rappel_password' => 'Ihr Passwort',
+	'redemande_password' => 'Geben Sie Ihr Passwort erneut ein:',
+	'rien_a_faire' => 'Keien Aktion erforderlich',
 
 	// S
-	'secteur' => 'Secteur',
-	'select_listes' => '(Sie k&ouml;nnen mehrere Bereiche mit dem Anschlag ausw�hlen shift)',
+	'secteur' => 'Sektor',
+	'select_listes' => '(Sie k&ouml;nnen mehrere Bereiche ausw&auml;hlen, indem Sie die Umschalttaste festhalten.)',
 	'septembre' => 'September',
-	'sexe' => 'Ziviliststand',
-	'societe' => 'Soci&eacute;t&eacute; / Association ...',
-	'statut' => 'Statut',
-	'statut_rel' => 'Internes Statut',
-	'suppression_faite' => 'la suppression de vos donn&eacute;es a &eacute;t&eacute; effectu&eacute;',
-	'supprimer_adherent' => 'Supprimer adh&eacute;rent',
-	'supprimer_adherent_red' => 'Sup',
+	'sexe' => 'Anrede/Geschlecht',
+	'societe' => 'Firma / Verein ...',
+	'statut' => 'Status',
+	'statut_rel' => 'Interner Status',
+	'suppression_faite' => 'Ihr Daten wurden gel&ouml;scht.',
+	'supprimer_adherent' => 'Mitglied l&ouml;schen',
+	'supprimer_adherent_red' => 'l&ouml;schen',
+	'surnom' => 'Spitzname',
 
 	// T
-	'table' => 'Tisch',
-	'table_expl' => ' : Le champ sera affich&eacute; sur la liste des adh&eacute;rents (espace priv&eacute;)',
-	'telephone' => 'Telephon',
-	'telephone_pro' => 'T&eacute;l&eacute;phone professionnel',
+	'table' => 'Liste',
+	'table_expl' => ' : Das Feld wird in der Mitgliedsliste angezeigt (Redaktionssystem)',
+	'tel' => 'Tel.',
+	'telephone' => 'Telefon',
+	'telephone_pro' => 'Telefon (beruflich)',
 	'texte' => 'Text',
-	'texte_email_confirmation' => 'Votre compte vient d\'&ecirc;tre activ&eacute;, vous pouvez d&egrave;s maintenant vous connecter &agrave; notre site en utilisant vos identifiants personnels.\\n
+	'texte_email_confirmation' => '<MODIF>Ihr KOnto wurde aktiviert. Sie k&ouml;nnen sich jetzt mit Ihren pers&ouml;nlichen Zugangsdaten einloggen.\\n
 
-Votre login est&nbsp;: @login@
-et votre mot de passe vous venez de le saisir.
+Ihr Login ist&nbsp;: @login@
+Ihr Passwort haben Sie soeben enigegeben.
 
-Merci de Votre Confiance
+Vielen Dank f&uuml;r Ihr Vertrauen
 
-L\'&eacute;quipe de @nom_site@',
-	'texte_email_inscription' => 'Vous avez demand&eacute; &agrave; participer &agrave; notre site @nom_site@. 
-Vous &ecirc;tes actuellement sur le point de finir votre inscription. Il vous suffit de cliquer le lien ci-dessous pour activer votre compte et choisir votre mot de passe.
+Das @nom_site@-Team',
+	'texte_email_inscription' => '<MODIF>Sie m&ouml;chten bei der Website @nom_site@ mitmachen.
+Bitte schlie&szlig;en Sie Ihre Anmeldung ab, indem Sie auf den Link weiter unten klicken und Ihr Passwort festlegen.
+
 @link_activation@
 
-Votre login est&nbsp;: @login@
+Ihr Login ist: @login@
 
-Si vous n\'avez pas demand&eacute; cette inscription ou ne voulez plus faire partie de notre site, cliquez le lien ci-dessous.\\n
+Wenn Sie sich nicht angemeldet haben, klicken Sie bitte auf den Link weiter unten.\\n
+
 @link_suppresion@
 
-Merci de votre confiance.
+Vielen Dank f&uuml;r Ihr Vertrauen.
 
-L\'6eacute;quipe de @nom_site@
-@url_site@',
-	'titre_confirmation' => 'Confirmation',
+Das @nom_site@-Team',
+	'titre_confirmation' => 'Best&auml;tigung',
 
 	// U
-	'url_societe' => 'Site soci&eacute;t&eacute;',
+	'url_societe' => 'Website (der Firma/Verein)',
 
 	// V
-	'validite' => 'Date de validit&eacute;',
+	'validite' => 'G&uuml;ltigkeitsdatum',
 	'ville' => 'Stadt',
-	'ville_pro' => 'Stadt',
+	'ville_pro' => 'Stadt (beruflich)',
 	'visiteur' => 'Besucher',
-	'vos_contacts_personnels' => '<NEW>Vos contacts personnels',
-	'votre_adresse' => 'Ihre pers�nliche Adresse',
-	'votre_adresse_pro' => 'Ihre professionelle Adresse',
-	'votre_nom_complet' => '<NEW>Votre nom complet',
+	'vos_contacts_personnels' => 'Ihre pers&ouml;nlichen Kontakte',
+	'votre_adresse' => 'Ihre pers&ouml;nliche Adresse',
+	'votre_adresse_pro' => 'Ihre berufliche Adresse',
+	'votre_nom_complet' => 'Ihr vollst&auml;ndiger Name',
 	'votre_profil' => 'Ihr Profil',
 
 	// W
-	'website' => '<NEW>Site Internet'
+	'website' => 'Website'
 );
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/_test_/inscription2/inscription2_193/lang
+// Fichier source, a modifier dans svn://trac.rezo.net/spip-zone/_plugins_/_test_/inscription2/inscription2_2_0/lang
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -11,7 +11,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aconfirmer' => '&Agrave; confirmer',
 	'action_adherent' => '<- Opérations ->',
 	'activation_compte' => 'Activez votre compte',
-	'gerent' => 'Adh&eacute;rent',
 	'adherents' => 'Adh&eacute;rents',
 	'admin' => 'Admin',
 	'admin_modifier_auteur_supp' => 'Informations suppl&eacute;mentaires',
@@ -102,6 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'general_infos' => 'Informations G&eacute;n&eacute;rales',
 	'geoloc' => 'G&eacute;olocalisation',
 	'geomap_obligatoire' => 'Pour utiliser les donn&eacute;es de g&eacute;olocalisation des personnes, il est n&eacute;cessaire d\'installer le plugin GoogleMapApi...',
+	'gerent' => 'Adh&eacute;rent',
 	'gestion_adherent' => 'Gestion d\'adh&eacute;rents',
 
 	// H
