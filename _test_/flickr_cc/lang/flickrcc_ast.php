@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <li>respeta rigurosamente la llicencia Creative Commons asociada con cada imaxe (en particular, nun utilizar una imaxe nun proyeutu comercial si la llicencia nun lo permite;</li>
 <li>si l\'autor de la imaxe te lo pidiere, debes desaniciar la imaxe del to sitiu nun plazu de 24 hores.</li>
 </ul>
-<p>Esti productu utiliza l’API Flickr pero nun ta nin sofit&aacute;u, nin certific&aacute;u por Flickr.</p>',
+<p>Esti productu utiliza lâ€™API Flickr pero nun ta nin sofit&aacute;u, nin certific&aacute;u por Flickr.</p>',
 
 	// R
 	'rechercher_flickr' => 'Restolar en Flickr',

@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <li>respecte rigoureusement la licence Creative Commons associ&eacute;e &agrave; chaque image (en particulier, n\'utilise pas une image dans un cadre commercial si la licence de l\'autorise pas&nbsp;;</li>
 <li>si l\'auteur de l\'image te le demande, tu dois retirer l\'image de ton site dans un d&eacute;lai de 24 heures.</li>
 </ul>
-<p>Ce produit utilise l’API Flickr mais n’est ni soutenu, ni certifi&eacute; par Flickr.</p>',
+<p>Ce produit utilise lâ€™API Flickr mais nâ€™est ni soutenu, ni certifi&eacute; par Flickr.</p>',
 
 	// R
 	'rechercher_flickr' => 'Rechercher sur Flickr',
