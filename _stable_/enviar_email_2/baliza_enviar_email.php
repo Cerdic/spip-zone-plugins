@@ -34,19 +34,19 @@ onclick=\"centrarVentana('$url','Enviar_documento','scrollbars=yes,resizable=yes
 
 // la baliza a llamar como #ENVIAR_EMAIL** (importante los dos asteriscos para que funcione el javascript anterior de centrar la ventan por-up)
 
+
 function balise_ENVIAR_EMAIL($p) {
 
-// numero y enlace al artículo o breve
-  	$_id_article = champ_sql('id_article', $p);
-	$arg = "'page=enviar_email_articulo&amp;id_article='.".$_id_article;
-	$url = generer_url_public('',$arg);
-	if (!$_id_article){
-		$_id_breve = champ_sql('id_breve', $p);
-		$arg = "'page=enviar_email_breve&amp;id_breve='.".$_id_breve;
-		$url = generer_url_public('',$arg);
+	if ($GLOBALS['contexte']['id_breve'] == "") { 
+	$arg = "'page=enviar_email_articulo&amp;id_article='.".champ_sql('id_article', $p);
 	}
-   $p->code ="preparar_enlace_enviar($arg)";
+	else {
+	$arg = "'page=enviar_email_breve&amp;id_breve='.".champ_sql('id_breve', $p);
+	}
+
+   $p->code ="preparar_enlace_imprimir($arg)";
    $p->statut = 'html';
+
    return $p;
 }
 

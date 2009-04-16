@@ -75,11 +75,14 @@ if (!$_POST){
       <:enviarmail:nom:><br /><input name="nombre" class="campos" size="40" value=""><br/>
      <:enviarmail:adresse:><br /><input name="email" class="campos" size="40" value=""><br />
      <:enviarmail:texte:><br /><textarea name="coment" class="campos" style="font-size:100%; font-family:verdana, arial, helvetica, sans-serif;" cols="40" rows="3"></textarea>
+
+      </fieldset>
+
      <div style="text-align:center">
       <input type="submit" name="Enviar" class="spip_bouton" style="margin-top:.3em" value="<:enviarmail:envoyer:>">&nbsp;&nbsp;&nbsp;<input type="button"  class="spip_bouton" style="margin-top:.3em" value="<:enviarmail:annuler:>" onclick="window.close();"> 
       </div>
       <input type="hidden" name="message" value="1">
-      </fieldset>
+
   </form> 
 </div>
 
@@ -102,15 +105,14 @@ if (!$_POST["destino"]) { echo "<p style='color:red; font-size:90%'>Lo sentimos 
       <:enviarmail:nom:><br /><input name="nombre" class="campos" size="40" value=""><br/>
      <:enviarmail:adresse:><br /><input name="email" class="campos" size="40" value=""><br />
      <enviarmail:texte:><br /><textarea name="coment" class="campos" style="font-size:100%; font-family:verdana, arial, helvetica, sans-serif;" cols="40" rows="3"></textarea>
-     <div style="text-align:center">      
+ 
       </fieldset>
-      <input type="submit" name="enviar" class="spip_bouton" style="margin-top:.3em" value="<:enviarmail:Enviar:>">&nbsp;&nbsp;&nbsp;<input type="button"  class="spip_bouton" style="margin-top:.3em" value="<:enviarmail:annuler:>" onclick="window.close();"> 
-      </div> 
+
+     <div style="text-align:center">
+      <input type="submit" name="Enviar" class="spip_bouton" style="margin-top:.3em" value="<:enviarmail:envoyer:>">&nbsp;&nbsp;&nbsp;<input type="button"  class="spip_bouton" style="margin-top:.3em" value="<:enviarmail:annuler:>" onclick="window.close();"> 
+      </div>
       <input type="hidden" name="message" value="1">
-  </form> 
-</div>
-      <input type="hidden" name="message" value="1">
-      </fieldset>
+
   </form> 
 </div>
 
@@ -138,14 +140,11 @@ $mail->WordWrap = "75";                                 // set word wrap to 50 c
 
 // VARIABLES
 
-$un_salto="\r\n";
-$dos_saltos="\r\n\r\n";
-
 // PARTE COMÚN
 
     //Estoy recibiendo los campos, compongo el cuerpo
     
-    if (!$_POST["nombre"]) { $remite= _L('enviarmail:no_escrito_nombre'); } else { $remite= $_POST["nombre"]; }
+    if (!$_POST["nombre"]) { $remite= _T('enviarmail:no_escrito_nombre'); } else { $remite= $_POST["nombre"]; }
     $mail->FromName = $remite; // de nombre
     $mail->From = $_POST["nombre"]; // de email
     
@@ -160,48 +159,6 @@ $dos_saltos="\r\n\r\n";
     if (!$_POST["asunto"]) { $asunto='[(#TITRE|texte_script)]'; } else { $asunto=$_POST["asunto"]; }
     $mail->Subject = $asunto; // Asunto
 
-// COMIENZO PARTE TEXTO PLANO
-
-//Referencia al artículo para el texto plano
-?>
-
-<B_autores>
-<BOUCLE_autores(AUTEURS){id_breve}{", "}>
-<?php $autores='#NOM'; ?>
-</BOUCLE_autores>
-<?php $autores="|de ".$autores; ?>
-</B_autores>
-
-<?php
-	$articulo= "::: [(#TITRE|attribut_html)] :::".$un_salto;
-	$articulo.= "[(#SURTITRE|attribut_html)|][(#SOUSTITRE|attribut_html)|][(#DATE|affdate)]".$autores.$dos_saltos;
-	$articulo.= "[(#INTRODUCTION|attribut_html|textebrut|couper{360})]".$dos_saltos;
-
-	if (!$_POST["coment"]) { $comentario=""._T('enviarmail:documento')." #NOM_SITE_SPIP (#URL_SITE_SPIP) "._T('enviarmail:interesar').""; } else { $comentario=$_POST["coment"]; }
-    $texto_plano .= $dos_saltos.$comentario.$dos_saltos."-------------------------------".$dos_saltos;
-    $texto_plano .= $articulo;
-    ?>
-<B_documents_plano>
-<?php 
-$texto_plano .=""._T('enviarmail:descargarte')."".$un_salto;
-?>
-<BOUCLE_documents_plano(DOCUMENTS) {id_breve} {mode=document} {doublons}>
-<?php
-$texto_plano .="[- #TITRE, (#TYPE_DOCUMENT - (#TAILLE|taille_en_octets))]".$dos_saltos;
-?>
-</BOUCLE_documents_plano>
-</B_documents_plano>
-
-<?php
-	$texto_plano.= "*"._T('enviarmail:leer')." #URL_SITE_SPIP/#URL_BREVE".$un_salto;
-    $texto_plano .= $un_salto."-------------------------------".$un_salto.""._T('enviarmail:enviado_por')."".$remite." <".$replica.">".$un_salto;
-    $texto_plano .= ""._T('enviarmail:source').": #NOM_SITE_SPIP (#URL_SITE_SPIP)";
-    $texto_plano .= $un_salto."-------------------------------".$un_salto;
-    
-    $mail->AltBody = $texto_plano; //Cuerpo en TEXTO PLANO
-    
-// FIN PARTE TEXTO PLANO
-
 // COMIENZO PARTE HTML
 
 $texto_html .="<div style='margin:1.2em;background: #fff;font-family:\'Trebuchet MS\', Tahoma, Arial, Verdana,sans-serif;font-size: 0.9em;text-align: left;'>";
@@ -209,34 +166,9 @@ $texto_html .="<div style='margin:1.2em;background: #fff;font-family:\'Trebuchet
 $texto_html .="<p>".$comentario."</p>";
 $texto_html .="<div style='border: 1px solid #ccc;padding: .5em;'>";
 $texto_html .="[<div style='font-size:1.1em;'><a href='#URL_SITE_SPIP/#URL_BREVE' style='text-decoration: none'>(#TITRE|supprimer_numero)</a></div>]";
-?>
-
-<B_autores_html>
-<BOUCLE_autores_html(AUTEURS){id_breve}{", "}>
-<?php $autores='[<a href="#URL_SITE_SPIP/#URL_AUTEUR" style="text-decoration:none">(#NOM)</a>]'; ?>
-</BOUCLE_autores_html>
-<?php $autores=" / de ".$autores; ?>
-</B_autores_html>
-
-<?php
-$texto_html .="<div style='color:#666666; font-size:90%;padding-bottom:.3em'>[(#SURTITRE|attribut_html) / ][(#SOUSTITRE|attribut_html) / ][(#DATE|affdate)]".$autores."</div>";
+$texto_html .="<div style='color:#666666; font-size:90%;padding-bottom:.3em'>[(#SURTITRE|attribut_html) / ][(#SOUSTITRE|attribut_html) / ][(#DATE|affdate)]</div>";
 $texto_html .="<div style='font-size:96%'>[(#INTRODUCTION|attribut_html|textebrut)]</div>";
 $texto_html .=" <div style='color:#999999; font-size:90%;'>[<a href='#URL_SITE_SPIP/#URL_BREVE' style='text-decoration: none'>"._T('enviarmail:leer')."</a>]</div>";
-?>
-<B_documents>
-<?php 
-$texto_html .="<div style='margin-top:.6em;padding:.3em; padding-bottom:0px;border-top:1px solid #cccccc;color:#666666; font-size:85%;'>Si visitas la web podrás descargarte los siguientes documentos:<br />";
-?>
-<BOUCLE_documents(DOCUMENTS) {id_breve} {mode=document} {doublons}>
-<?php
-$texto_html .="[&bull; #TITRE, (#TYPE_DOCUMENT - (#TAILLE|taille_en_octets))]";
-?>
-</BOUCLE_documents>
-<?php 
-$texto_html .="</div>"; 
-?>
-</B_documents>
-<?php
 $texto_html .="</div>";
 $texto_html .= "<div style='margin-top:.2em;margin-bottom:.9em;color:#666666; font-size:80%;text-align:right'>"._T('enviarmail:enviado_por')." ".$remite." <".$replica.">";
 $texto_html .= " /// "._T('enviarmail:source').": <a href='#URL_SITE_SPIP' style='text-decoration: none'>#NOM_SITE_SPIP</a><br /></div>";
@@ -245,6 +177,23 @@ $texto_html .="</div>";
 $mail->Body    = $texto_html; //Cuerpo en HTML
 
 // FIN PARTE HTML
+
+// COMIENZO PARTE TEXTO PLANO 
+
+if (!$_POST["coment"]) { $comentario=""._T('enviarmail:enviado').""; } else { $comentario=$_POST["coment"]; }
+$texto_plano=$comentario."\n\n";
+$texto_plano.="-------------------------- \n";
+$texto_plano.='[(#NOM_SITE_SPIP)]'."\n".'[(#URL_SITE_SPIP)]'."\n\n";
+$texto_plano.='[(#TITRE)]'."\n\n";
+$texto_plano.='[(#TEXTE|couper{1200})]'."\n\n";
+$texto_plano.=""._T('enviarmail:leer')."".$url_sitio."/".$url_art."\n\n";
+$texto_plano.="-------------------------- \n";
+$texto_plano.=""._T('enviarmail:enviado_por')." ".$remite.$email_aut;
+
+
+$mail->AltBody = $texto_plano;
+    
+// FIN PARTE TEXTO PLANO
 
 // Envío (5 intentos)
 $enviado = $mail->Send();

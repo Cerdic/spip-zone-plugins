@@ -18,7 +18,7 @@ _ CopyLeft - 2006
 	</etat>
 	<description>
 		<multi>	
-[es]Enviar la referencia al artículo o a la breve por email
+[es]Enviar la referencia de un artículo o una breve por email
 - Para utilizarla coloca la baliza #ENVIAR_EMAIL** donde quieras que aparezca el enlace (artículos o breves)
 - Los dos ** asteriscos son importantes, no los olvides.
 [fr]Envoyer la r&eacute;f&eacute;rence de l'article par mail

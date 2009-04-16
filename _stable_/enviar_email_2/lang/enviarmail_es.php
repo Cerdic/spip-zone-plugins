@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'documento'			=>	 'Hola. Quiz&aacute;s este documento de',
 'interesar'			=>	 'te pueda interesar.',
 'descargarte'		=>	 'Si visitas la web podr&aacute;s descargarte los siguientes documentos:',
-'source'			=>	 'fuente','no_escrito_nombre' =>  'Sin nombre'
+'source'			=>	 'fuente','no_escrito_nombre' =>  'no hay nombre'
 
 );
 
