@@ -105,7 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'fichier_trop_gros' => 'File troppo grande.',
-	'fichier_type_interdit' => 'Questo tipo di file non è permesso.',
+	'fichier_type_interdit' => 'Questo tipo di file non Ã¨ permesso.',
 	'form_erreur' => 'Errore&nbsp;:',
 	'format_fichier' => 'Formato del file&nbsp;:',
 	'format_liste' => 'menu a tendina',

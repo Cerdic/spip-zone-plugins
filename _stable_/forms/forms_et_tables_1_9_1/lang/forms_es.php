@@ -111,7 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'format_liste' => 'lista desplegable',
 	'format_liste_ou_radio' => 'Formato de la lista',
 	'format_radio' => 'botones tipo radio',
-	'forms_obligatoires' => 'Formularios obligatorios para la introducción de &eacute;ste :',
+	'forms_obligatoires' => 'Formularios obligatorios para la introducciÃ³n de &eacute;ste :',
 	'formulaire' => 'Formulario',
 	'formulaire_aller' => 'Ir al formulario ',
 	'formulaires_copie' => 'Copia de @nom@',
@@ -131,8 +131,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_obligatoire_02' => '[Obligatorio]',
 	'info_rubriques_liees_donnee' => 'Las secciones enlazadas',
 	'info_sondage' => 'Si su formulario  es una encuesta, les resultados de los campos de tipo &laquo; selecci&oacute;n &raquo; ser&aacute;n totalizados y mostrados.',
-	'info_supprimer_formulaire' => '¿Realmente desea eliminar este formulario?',
-	'info_supprimer_formulaire_reponses' => 'Hay respuestas a este formulario. ¿Desea realmente eliminarlo?',
+	'info_supprimer_formulaire' => 'Â¿Realmente desea eliminar este formulario?',
+	'info_supprimer_formulaire_reponses' => 'Hay respuestas a este formulario. Â¿Desea realmente eliminarlo?',
 
 	// L
 	'lien_apercu' => 'Resumen',
