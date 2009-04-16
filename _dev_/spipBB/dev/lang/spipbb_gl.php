@@ -356,8 +356,8 @@ _ Un destacado sit&uacute;ase por baixo dos anuncios, antes das mensaxes ordinar
 -* Usar un sector como base dun grupo de de foros de tipo &laquo;Bulletin Board&raquo; como phpBB. Neste sector, as subsecci&oacute;ns son grupos de foros, os artigos son os foros, cada mensaxe dentro do foro dun artigo comeza un f&iacute;o.
 
 {{Consulte :}}
--* •[a axuda en spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
--* •[a documentaci&oacute;n en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+-* â€¢[a axuda en spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
+-* â€¢[a documentaci&oacute;n en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
 _ {{M&oacute;dulo spipbb en curso de desenvolvemento. &Uacute;seo a seu risco e ventura}}
 
@@ -425,12 +425,12 @@ _ [Acceso ao panel de administraci&oacute;n-> .?exec=spipbb_configuration]',
 	'selection_efface' => 'Borrar a selecci&oacute;n ...',
 	'selection_tri_dpt' => 'Seleccionar o m&eacute;todo de sa&iacute;da&nbsp;:',
 	'sign_admin' => '{{Esta p&aacute;xina &eacute; unicamente accesible para os responsables do web.}}<p>Proporciona acceso &aacute; configuraci&oacute;n do m&oacute;dulo &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; as&iacute; como &aacute; xesti&oacute;n dos foros do web.</p><p>Versi&oacute;n : @version@ @distant@</p><p>Consulte&nbsp;:
-_ • [A documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/?article2460]
-_ • [A axuda en spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
+_ â€¢ [A documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/?article2460]
+_ â€¢ [A axuda en spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Versi&oacute;n m&aacute;is recente dispo&ntilde;&iacute;bel&nbsp;: @version@',
 	'sign_ok' => 'actualizar.',
 	'sign_reinit' => '<p>Re-inicializaci&oacute;n&nbsp;:
-_ • [de todo o m&oacute;dulo->@plugin@]</p>',
+_ â€¢ [de todo o m&oacute;dulo->@plugin@]</p>',
 	'sign_tempo' => 'Realizado con <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'signature' => 'Sinatura',
 	'sinscrire' => 'Rexistrarse',

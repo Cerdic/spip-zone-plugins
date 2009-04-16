@@ -225,7 +225,7 @@ Consultez la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB
 	'forum_ouvrir' => 'Ouvrir ce Forum',
 	'forums_categories' => 'Divers',
 	'forums_spipbb' => 'Forums SpipBB',
-	'forums_titre' => 'Mon premier forum créé',
+	'forums_titre' => 'Mon premier forum crÃ©Ã©',
 	'fromphpbb_erreur_db_phpbb_config' => 'Impossible de lire la configuration dans la base phpBB',
 	'fromphpbb_migre_categories' => 'Import des cat&eacute;gories',
 	'fromphpbb_migre_categories_dans_rub_dpt' => 'Implantation des forums dans la rubrique&nbsp;:',
@@ -328,7 +328,7 @@ _ Une annonce est situ&eacute;e en t&ecirc;te de forum sur toutes les pages.',
 -* Lorsqu\'un sujet de forum est ferm&ecute;, seuls les mod&eacute;rateurs peuvent y ajouter des r&eacute;ponses.',
 	'mot_groupe_moderation' => 'Goupe de mot-clefs utilis&eacute; pour la mod&eacute;ration de SpipBB',
 	'mot_postit' => 'Postit
-_ Un postit est situé en dessous des annonces, avant les messages ordinaires. Il n\'appara&icirc;t qu\'une seule fois dans la liste.',
+_ Un postit est situÃ© en dessous des annonces, avant les messages ordinaires. Il n\'appara&icirc;t qu\'une seule fois dans la liste.',
 
 	// N
 	'no_message' => 'Aucun sujet ou message ne correspond &agrave; vos crit&egrave;res de recherche',
@@ -363,7 +363,7 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribu&eacute; sous licence GPL',
 	'plugin_lien' => '[Consulter la documentation du plugin sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => 'Cette version du plugin n\'est pas compatible avec votre version de SPIP !',
-	'plugin_nom' => 'SpipBB : Gestion des forums de SPIP', #  Pour faciliter les traductions de plugin.xml
+	'plugin_nom' => 'SpipBB : Gestion des forums de SPIP', # Â Pour faciliter les traductions de plugin.xml
 	'post_aucun_pt' => 'aucun&nbsp;!',
 	'post_efface_lui' => 'Ce sujet comprend @nbr_post@ message(s). Effac&eacute;s avec lui&nbsp;!\\n',
 	'post_ip' => 'Messages post&eacute; &agrave; partie de l\'adresse IP',

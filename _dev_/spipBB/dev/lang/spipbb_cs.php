@@ -71,7 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'retour_forum' => 'Zp&#283;t na hlavn&iacute; str&aacute;nku diskusn&iacute; skupiny',
 
 	// S
-	'secteur_forum' => '<MODIF>OBLASTI – DISKUSN&Iacute; SKUPINY',
+	'secteur_forum' => '<MODIF>OBLASTI â€“ DISKUSN&Iacute; SKUPINY',
 	'selection_efface' => '<MODIF>Odstranit v&yacute;b&#283;r ...',
 	'sinscrire' => '<MODIF>p&#345;ihl&aacute;sit se',
 	'statut' => 'Status',

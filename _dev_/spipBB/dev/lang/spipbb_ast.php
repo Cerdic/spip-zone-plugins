@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_ban_ip_info' => 'Pa especificar delles IP o nomes de sirvidores diferentes, sep&aacute;rtales con comes. Pa indicar un intervalu de se&ntilde;es IP, separta el primeru y l\'ultimu con un gui&oacute;n (-); pa especificar un comod&iacute;n, utilza un asteriscu (*)',
 	'admin_ban_ip_none' => 'Nun hai se&ntilde;es torg&aacute;es',
 	'admin_ban_user' => 'Xesti&oacute;n de los usuarios torg&aacute;os',
-	'admin_ban_user_info' => 'Puedes torgar dellos usuarios d’una vez utilizando la combinaci&oacute;n CTRL o MAY col mur o col tecl&aacute;u',
+	'admin_ban_user_info' => 'Puedes torgar dellos usuarios dâ€™una vez utilizando la combinaci&oacute;n CTRL o MAY col mur o col tecl&aacute;u',
 	'admin_ban_user_none' => 'Nun hai usuarios torg&aacute;os',
 	'admin_cat_01_general' => 'Alministraci&oacute;n',
 	'admin_cat_outils' => 'Ferramientes',
@@ -356,8 +356,8 @@ _ Un mensaxe apegadizu ta embaxo de los anuncios, enantes de los mensaxes ordina
 -*Utilizar una estaya como base d\'un grupu de foros como los &laquo;Bulletin Board&raquo; asemey&aacute;os a phpBB. Nesa estaya, les so-estayes son grupos de foros, los art&iacute;culos son foros, y cada mensaxe nel foru d\'un art&iacute;culu entama un filu de discutiniu.
 
 {{Consulta:}}
--* •[l\'aida y sofitu en spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
--* •[La documentaci&oacute;n en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+-* â€¢[l\'aida y sofitu en spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
+-* â€¢[La documentaci&oacute;n en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
 _ {{El plugin spipbb ta en procesu de desendolcu. Util&iacute;ceslu pola to cuenta y riesgu}}
 
@@ -430,12 +430,12 @@ _ [Accesu al tableru d\'alministraci&oacute;n-> .?exec=spipbb_configuration]',
 	'selection_efface' => 'Desaniciar la seleici&oacute;n... ',
 	'selection_tri_dpt' => 'Seleicionar la m&eacute;todu d\'ordenaci&oacute;n:',
 	'sign_admin' => '{{Esta p&aacute;xina &uacute;nicamente ye accesible pa los responsables del sitiu.}}<p>Da accesu a la configuraci&oacute;n del plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; igual que a la xesti&oacute;n de los foros del sitiu.</p><p>Versi&oacute;n: @version@ @distant@</p><p>Consulta:
-_ • [La documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/?article2460]
-_ • [L\'aida y sofitu en spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
+_ â€¢ [La documentaci&oacute;n en Spip-Contrib->http://www.spip-contrib.net/?article2460]
+_ â€¢ [L\'aida y sofitu en spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Versi&oacute;n m&aacute;s reciente disponible: @version@',
 	'sign_ok' => 'actualizao.',
 	'sign_reinit' => '<p>Reinicializaci&oacute;n:
-_ • [de tou el plugin->@plugin@]</p>',
+_ â€¢ [de tou el plugin->@plugin@]</p>',
 	'sign_tempo' => 'Fecho con <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'signature' => 'Robla',
 	'sinscrire' => 'Apuntase',

@@ -356,8 +356,8 @@ _ Duyurular&#305;n alt&#305;nda, basit mesajlardan &ouml;nce bir postit vard&#30
 -* Bir sekt&ouml;r&uuml; forumlar grubu veritaban&#305; olarak phpBB benzeri &laquo;Bulletin Board&raquo; gibi kullanmak. Bu sekt&ouml;rde; alt ba&#351;l&#305;klar forum gruplar&#305; ve forum makaleleridir. Bir makalenin forumuna yaz&#305;lan her yeni mesaj orada bir "thread" ba&#351;lat&#305;r.
 
 {{&#304;nceleyiniz :}}
--* •[spipbb\'de yard&#305;m ve destek.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
--* •[Belgeler Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+-* â€¢[spipbb\'de yard&#305;m ve destek.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
+-* â€¢[Belgeler Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
 _ {{spipbb eklentisi geli&#351;tirilme a&#351;amas&#305;ndad&#305;r. Kullan&#305;m esnas&#305;nda olu&#351;abilecek sorunlar tamamen size aittir.}}
 
@@ -402,12 +402,12 @@ nbr_post@ mesaj i&ccedil;erir. Bu mesajlar da konuyla birlikte silinecektir&nbsp
 	'selection_efface' => 'Se&ccedil;imi sil ...',
 	'selection_tri_dpt' => 'S&#305;ralama y&ouml;ntemini se&ccedil;&nbsp;:',
 	'sign_admin' => '{{Bu sayfa sadece site sorumlular&#305;n&#305;n eri&#351;imine a&ccedil;&#305;kt&#305;r.}}<p>Eklentinin konfig&uuml;rasyonuna eri&#351;im hakk&#305; verir &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; ayr&#305;ca sitenin forumlar&#305;n&#305;n y&ouml;netimine olanak tan&#305;r. </p><p>S&uuml;r&uuml;m : @version@ @distant@</p><p>Bkz&nbsp;:
-_ • [Spip-Contrib\'deki belgeler->http://www.spip-contrib.net/?article2460]
-_ • [spipbb.spip-zone.info yard&#305;m dosyalar&#305;->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
+_ â€¢ [Spip-Contrib\'deki belgeler->http://www.spip-contrib.net/?article2460]
+_ â€¢ [spipbb.spip-zone.info yard&#305;m dosyalar&#305;->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Daha yeni bir s&uuml;r&uuml;m mevcut&nbsp;: @version@',
 	'sign_ok' => 'g&uuml;ncel.',
 	'sign_reinit' => '<p>Yeniden ba&#351;lat&#305;lmas&#305;&nbsp;:
-_ • [eklenti->@plugin@]</p>',
+_ â€¢ [eklenti->@plugin@]</p>',
 	'sign_tempo' => '<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a> ile ger&ccedil;ekle&#351;tirilmi&#351;tir',
 	'signature' => '&#304;mza',
 	'sinscrire' => 'Kay&#305;t ol',

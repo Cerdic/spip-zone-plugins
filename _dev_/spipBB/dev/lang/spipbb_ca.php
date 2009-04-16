@@ -356,8 +356,8 @@ _ Un post-it est&agrave; situat a sota dels anuncis, abans dels missatges ordina
 -* Utilitzar un sector com a base d\'un grup de f&ograve;rums com els &laquo;Bulletin Board&raquo; tals com phpBB. En aquest sector, les subseccions s&oacute;n grups de f&ograve;rums, els articles f&ograve;rums, cada missatge al f&ograve;rum d\'un article hi inicia un fil.
 
 {{Consulteu:}}
--* •[l\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
--* •[La documentaci&oacute; a Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+-* â€¢[l\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
+-* â€¢[La documentaci&oacute; a Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
 _ {{Plugin spipbb en curs de desenvolupament. Utilitzeu-lo assumint-ne els riscs i els perills}}
 
@@ -405,12 +405,12 @@ _ [Acc&eacute;s al panell d\'administraci&oacute;-> .?exec=spipbb_configuration]
 	'selection_efface' => 'Esborrar la selecci&oacute;...',
 	'selection_tri_dpt' => 'Seleccionar el m&egrave;tode d\'ordenaci&oacute;:',
 	'sign_admin' => '{{Aquesta p&agrave;gina nom&eacute;s est&agrave; disponible pels responsables del lloc.}}<p>D&oacute;na acc&eacute;s a la configuraci&oacute; del plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; i tamb&eacute; a la gesti&oacute; dels f&ograve;rums del lloc Web.</p><p>Versi&oacute;: @version@ @distant@</p><p>Consulteu:
-_ • [La documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/?article2460]
-_ • [L\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
+_ â€¢ [La documentaci&oacute; a Spip-Contrib->http://www.spip-contrib.net/?article2460]
+_ â€¢ [L\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />La versi&oacute; m&eacute;s recent disponible: @version@',
 	'sign_ok' => 'actualitzat.',
 	'sign_reinit' => '<p>Arrencar de nou:
- _ • [tot el plugin->@plugin@]</p>',
+ _ â€¢ [tot el plugin->@plugin@]</p>',
 	'sign_tempo' => 'Realitzat amb <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'signature' => 'Signatura',
 	'sinscrire' => 'Registrar-se',

@@ -429,12 +429,12 @@ nbr_post@ message(s). Deleted along with it!\\n',
 	'selection_efface' => 'Deleted the selection... ',
 	'selection_tri_dpt' => 'Choose the sorting method:',
 	'sign_admin' => '{{This page can only be seen by the site owner.}}<p>It provides access to the plugin configuration of &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; as well as to the forum management of your site.</p><p>Version : @version@ @distant@</p><p>See&nbsp;:
-_ • [The documentation of Spip-Contrib->http://www.spip-contrib.net/?article2460]
-_ • [Help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
+_ â€¢ [The documentation of Spip-Contrib->http://www.spip-contrib.net/?article2460]
+_ â€¢ [Help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />update available: @version@',
 	'sign_ok' => 'up to date',
 	'sign_reinit' => '<p>Reset:
- _ • [the whole plugin->@plugin@]</p>',
+ _ â€¢ [the whole plugin->@plugin@]</p>',
 	'sign_tempo' => 'Build with <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'signature' => 'Signature',
 	'sinscrire' => 'Register',

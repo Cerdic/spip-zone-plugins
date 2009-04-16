@@ -356,8 +356,8 @@ _ Une annonce est situ&eacute;e en t&ecirc;te de forum sur toutes les pages.',
 -* D\'utiliser un secteur comme base d\'un groupe de forums comme les &laquo;Bulletin Board&raquo; tels que phpBB. Dans ce secteur, les sous-rubriques sont des groupes de forums, les articles des forums, chaque message dans le forum d\'un article y d&eacute;marre un thread.
 
 {{Consulte :}}
--* •[l\'aide et support sur spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
--* •[La documentation sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+-* â€¢[l\'aide et support sur spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
+-* â€¢[La documentation sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
 _ {{Plugin spipbb en cours de d&eacute;veloppement. Tu l\'utilises &agrave; tes risques et p&eacute;rils}}
 
@@ -428,12 +428,12 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]',
 	'selection_efface' => 'Effacer la s&eacute;lection ..',
 	'selection_tri_dpt' => 'S&eacute;lectionner la m&eacute;thode de tri&nbsp;:',
 	'sign_admin' => '{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s &agrave; la configuration du plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; ainsi qu\'&agrave; la gestion des forums du site.</p><p>Version : @version@ @distant@</p><p>Consulte&nbsp;:
-_ • [La documentation sur Spip-Contrib->http://www.spip-contrib.net/?article2460]
-_ • [L\'aide et support sur spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
+_ â€¢ [La documentation sur Spip-Contrib->http://www.spip-contrib.net/?article2460]
+_ â€¢ [L\'aide et support sur spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Version plus r&eacute;cente disponible&nbsp;: @version@',
 	'sign_ok' => '&agrave; jour.',
 	'sign_reinit' => '<p>R&eacute;-initialisation&nbsp;:
-_ • [de tout le plugin->@plugin@]</p>',
+_ â€¢ [de tout le plugin->@plugin@]</p>',
 	'sign_tempo' => 'R&eacute;alis&eacute; avec <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'signature' => 'Signature',
 	'sinscrire' => 'S\'inscrire',
