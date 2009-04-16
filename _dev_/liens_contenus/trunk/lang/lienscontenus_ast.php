@@ -8,14 +8,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'alerte_publie_contenant' => '&iexcl;Atenci&oacute;n, esti conten&iacute;u ta espubliz&aacute;u, pero contien enllaces a conten&iacute;os que nun tan!',
+	'alerte_publie_contenant' => '<MODIF>&iexcl;Atenci&oacute;n, esti conten&iacute;u ta espubliz&aacute;u, pero contien enllaces a conten&iacute;os que nun tan!',
 	'aucun_objets_avec_lien_depuis_courant' => 'Esti conten&iacute;u nun conti&eacute;n deng&uacute;n enllaz a otru conten&iacute;u.',
 	'aucun_objets_avec_lien_vers_courant' => 'Deng&uacute;n otru conten&iacute;u conti&eacute;n un enllaz a esti.',
 
 	// C
-	'confirmation_depublication' => '&iexcl;Atenci&oacute;n, un conten&iacute;u espubliz&aacute;u apunta pa esti, y verase afect&aacute;u si lu desespublces!\\n\\n&iquest;Seguro que quies camuda-y l\'estau?',
-	'confirmation_publication' => '&iexcl;Atenci&oacute;n, un conten&iacute;u al que apunta esti nun ta espubliz&aacute;u!\\n\\n&iquest;Seguro que quies camuda-y l\'estau?',
-	'confirmation_suppression' => '&iexcl;Atenci&oacute;n, un conten&iacute;u espubliz&aacute;u apunta a esti, y verase afect&aacute;u si lu desanicies!\\n\\n&iquest;Realmente quies suprimilu?',
+	'confirmation_depublication' => '<MODIF>&iexcl;Atenci&oacute;n, un conten&iacute;u espubliz&aacute;u apunta pa esti, y verase afect&aacute;u si lu desespublces!\\n\\n&iquest;Seguro que quies camuda-y l\'estau?',
+	'confirmation_publication' => '<MODIF>&iexcl;Atenci&oacute;n, un conten&iacute;u al que apunta esti nun ta espubliz&aacute;u!\\n\\n&iquest;Seguro que quies camuda-y l\'estau?',
+	'confirmation_suppression' => '<MODIF>&iexcl;Atenci&oacute;n, un conten&iacute;u espubliz&aacute;u apunta a esti, y verase afect&aacute;u si lu desanicies!\\n\\n&iquest;Realmente quies suprimilu?',
 
 	// I
 	'information_element_contenu' => '&iexcl;Atenci&oacute;n, otru conten&iacute;u apunta a esti!',
