@@ -91,7 +91,7 @@ $().ready(function() {
 	and b.statut_paiement = 'ok'
 	" );
 	
-	$n = spip_num_rows($query);
+	$n = sql_count($query);
 
 	echo "<p><strong>Nombre d'acheteurs diff&eacute;rents : $n </strong></p>";
 		
@@ -166,7 +166,7 @@ text-align:center;
 	and b.validite > CURRENT_DATE
 	" );
 	
-	$n = spip_num_rows($query);
+	$n = sql_count($query);
 
 	echo "<span>Nombre d'abonn&eacute;s &agrave; jour : <strong> $n </strong></span>";
 	
@@ -182,7 +182,7 @@ text-align:center;
 	and b.validite > CURRENT_DATE
 	" );
 	
-	$n = spip_num_rows($query);
+	$n = sql_count($query);
 
 	echo "<span>Nombre d'abonn&eacute;s PAPIER &agrave; jour : <strong> $n </strong></span>";
 
@@ -196,7 +196,7 @@ text-align:center;
 	and c.validite < NOW()
 	" );
 	
-	$n = spip_num_rows($query);
+	$n = sql_count($query);
 
 	echo "<span>Nombre d'abonn&eacute;s &eacute;chus : <strong> $n </strong></span>";
 	
@@ -216,7 +216,7 @@ text-align:center;
 		and b.validite < $validite
 		");
 	
-	$n = spip_num_rows($query);
+	$n = sql_count($query);
 	
 	echo "<span>Nombre d'abonn&eacute;s relance : <strong>".$n." </strong></span>";	
  */
@@ -282,7 +282,7 @@ $query = spip_query ( "SELECT COUNT(a.id) as n FROM `spip_auteurs_elargis` a WHE
 		and b.date > DATE_ADD(CURRENT_DATE, INTERVAL -7 DAY)
 		" );
 		
-		$n = spip_num_rows($query_n);
+		$n = sql_count($query_n);
 	
 		echo "<th colspan='2'>Nouveaux abonn&eacute;s depuis 7 jours : <strong> $n </strong></th>";	
 

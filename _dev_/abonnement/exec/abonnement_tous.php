@@ -44,7 +44,7 @@ if(_request('supprimer_abo')){
 include_spip('inc/headers');
 redirige_par_entete(generer_url_ecrire("abonnement_tous"));
 }
-	debut_page("abonnements", "", "");
+	$commencer_page = charger_fonction('commencer_page', 'inc');	echo $commencer_page(_T('abonnement:Gérer les abonnements'), "", "", "");
 
 	echo recuperer_fond('inc/abonnement_tous',array("id_abonnement"=>"$id_abonnement"));
 	

@@ -10,7 +10,7 @@ padding:3px;
 
 	.form_abo{}
 	.form_abo table{margin-top:20px}
-	#ajouter{width:300px;margin:10px 0px}
+	#ajouter{width:300px;margin:10px 0px 10px 200px}
 	#ajouter div {height:30px;padding:5px;clear:right}
 	#ajouter label {float:left;width:100px}
 	#ajouter input, textarea {float:right;width:180px}

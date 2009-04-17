@@ -15,10 +15,10 @@ function exec_abonnement_stats() {
 	}
 	
 
-	debut_page("abonnements", "", "");
-
+	$commencer_page = charger_fonction('commencer_page', 'inc');	echo $commencer_page(_T('abonnement:statistiques des abonnements'), "", "", "");
+	
 	echo recuperer_fond('inc/abonnement_stats');
 	
-	fin_page();
+	echo fin_page();  
 }
 ?>
