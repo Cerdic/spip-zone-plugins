@@ -42,6 +42,5 @@
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0;]" />
 	<necessite id="inscription2" version="[0.2;]" />
-	<necessite id="spiplistes" version="[1.9;]" /> 
 	<necessite id="cfg" version="[1.11;]" /> 
 </plugin>
