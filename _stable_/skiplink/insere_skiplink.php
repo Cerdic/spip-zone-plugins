@@ -3,12 +3,11 @@
 # inserer les liens dans la page
 function skiplink_affichage_final(&$page) {
 	// ne pas se fatiguer si pas HTML
-	if (!($GLOBALS['html']
-	AND strpos($page, 'id="raccourcis">') # pas deux fois, au cas ou !
-//    AND preg_match(',<p[^>]*id=[\'\"]raccourcis,im', $page) != 1)
-	))
+	if (!$GLOBALS['html']
+	  OR strpos($page, 'id="raccourcis"') # pas deux fois, au cas ou !
+	)
 		return $page;
-  
+
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
 	$recherche_existe = (preg_match(',<input.*?name[ ]*=[ ]*"recherche".*?>,i', $page) == 1 ? 'oui' : 'non');
 	$raccourcis = recuperer_fond('raccourcis', array('lang'=>$GLOBALS['spip_lang'], 'recherche'=>$recherche_existe));
