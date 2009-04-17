@@ -1,7 +1,7 @@
 <plugin>
   <nom>Geographie</nom>
   <auteur>Cedric Morin [yterium.net->http://www.yterium.net]</auteur>
-  <version>0.1</version>
+  <version>0.2</version>
   <version_base>0.1</version_base>
   <etat>test</etat>
   <description>Bases geographiques Pays, et pour la France : Region, departement, communes geolocalis&eacute;es</description>
@@ -17,5 +17,13 @@
   	<nom>rechercher_liste_des_champs</nom>
   	<inclure>geographie_pipelines.php</inclure>
   </pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/geographie.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/geographie.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0;]" />
 </plugin>
