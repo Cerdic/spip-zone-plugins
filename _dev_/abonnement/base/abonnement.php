@@ -39,16 +39,16 @@ function abonnement_declarer_tables_principales($tables_principales){
 
 	//table auteurs_elargis_abonnements
 	$spip_auteurs_elargis_abonnements = array(
-							"id_auteur_elargi" 	=> "int(10) unsigned NOT NULL",
+							"id_auteur" 	=> "int(10) unsigned NOT NULL",
 							"id_abonnement" 			=> "int(10) unsigned NOT NULL",
-							"date" 				=> "timestamp(14) NOT NULL",
+							"date" 	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 							"validite" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 							"montant" => "int(10) unsigned NOT NULL",
 							"stade_relance" => "int(10) unsigned NOT NULL"
 							);
 
 	$spip_auteurs_elargis_abonnements_key = array(
-							"KEY" => "id_auteur_elargi"
+							"KEY" => "id_auteur"
 							);	
 
 	$tables_principales['`spip_auteurs_elargis_abonnements`'] = array(

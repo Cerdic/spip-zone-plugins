@@ -10,7 +10,7 @@
 **/
 
 //version actuelle du plugin à changer en cas de maj
-	$GLOBALS['abonnement_base_version'] = 0.62;
+	$GLOBALS['abonnement_base_version'] = 0.71;
 	
 	function abonnement_upgrade(){
 		$version_base = $GLOBALS['abonnement_base_version'];
@@ -24,7 +24,7 @@
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			creer_base();
-			echo "creation des tables spip_abonnements";
+			//echo "creation des tables spip_abonnements";
 
 			ecrire_meta('abonnement_base_version',$current_version=$version_base);
 			ecrire_metas();
@@ -94,6 +94,16 @@
 			include_spip('base/abstract_sql');
 			spip_query("ALTER TABLE `spip_auteurs_elargis_articles` ADD montant int(10) unsigned NOT NULL");
 			echo "Maj 0.62 de `spip_auteurs_elargis_articles` (montant)";
+			ecrire_meta('abonnement_base_version',$current_version=$version_base);
+			ecrire_metas();
+		}
+		
+		if ($current_version < 0.7){
+			include_spip('base/create');
+			include_spip('base/abstract_sql');
+			spip_query("ALTER TABLE `spip_auteurs_elargis_abonnements` CHANGE `date` `date` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'");
+			spip_query("ALTER TABLE `spip_auteurs_elargis_abonnements` CHANGE `id_auteur_elargi` `id_auteur` INT( 10 ) UNSIGNED NOT NULL"); 
+			echo "Maj 0.7 de `spip_auteurs_elargis_abonnements` (date)";
 			ecrire_meta('abonnement_base_version',$current_version=$version_base);
 			ecrire_metas();
 		}
