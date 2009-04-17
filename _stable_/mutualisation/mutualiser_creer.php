@@ -13,11 +13,14 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_PRIVILEGES_MYSQL_USER_BASE','Alter, Select, Insert, Update, Delete, Create, Drop');
+define('_DIRMUT','mutualisation/');
+_chemin(_DIRMUT);
 
 include_spip('inc/minipres');
 include_spip('inc/lang');
 
 utiliser_langue_visiteur();
+
 #$menu_langues = menu_langues('var_lang_ecrire');
 
 /* centrage...  */
