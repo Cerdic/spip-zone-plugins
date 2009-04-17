@@ -120,7 +120,7 @@ function test_upgrade_site($meta) {
 		$secret = $meta['version_installee'].'-'.$meta['alea_ephemere'];
 		$secret = md5($secret);
 		return <<<EOF
-<form action='$meta[adresse_site]/ecrire/index.php?exec=mutualisation' method='post' class='upgrade'>
+<form action='$meta[adresse_site]/ecrire/index.php?exec=mutualisation' method='post' class='upgrade' target='_blank'>
 <div>
 <input type='hidden' name='secret' value='$secret' />
 <input type='hidden' name='exec' value='mutualisation' />
