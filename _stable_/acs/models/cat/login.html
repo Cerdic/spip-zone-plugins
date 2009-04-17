@@ -23,8 +23,9 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 	</div><!-- fin colonne1 (navigation) -->
 [(#REM) Colonne 2 ]
 <div id="colonne2"><div class="spacer"></div>
-  <INCLURE{fond=composants/onglets/onglets}{current=login}>
-  <div id="onglet">
+  [(#CONFIG{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=login}{env=#ENV}>
+   <div id="onglet">]
+   
     <div style="text-align: center; width: 400px; margin: 0 auto; padding: 3em 0;">
       <small><:login_acces_prive:></small>
       #MENU_LANG_ECRIRE
@@ -46,7 +47,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 	</div>
     </div>
     <br />
-  </div><!-- fin onglet -->
-</div><!-- fin colonne2 -->
+	[(#CONFIG{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
+</div>[(#REM) fin colonne2]
 <INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
 

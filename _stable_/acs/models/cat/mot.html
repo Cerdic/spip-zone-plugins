@@ -5,7 +5,7 @@
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2008
+Copyright Daniel FAIVRE, 2007-2009
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 ][(#SET{title,<:acs:fond_meta_page_mot:>[ (#TITRE|textebrut|texte_backend)]})][(#SET{mdescription,[(#DESCRIPTIF|couper{150}|textebrut)]})][(#SET{mkeywords,[(#TITRE|textebrut|texte_backend),]<:acs:fond_meta_keywords:>})][(#SET{mrsstitle,[(#TITRE|textebrut|texte_backend)]})][(#SET{mrssurl,[(#URL_PAGE{backend}|parametre_url{id_mot,#ID_MOT})]})]
@@ -48,9 +48,9 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 [(#REM) Colonne 2 ]
 <div id="colonne2"><div class="spacer"></div>
-    <INCLURE{fond=composants/onglets/onglets}{env=#ENV}>
-
-    <div id="onglet">
+  [(#CONFIG{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=mot}{env=#ENV}>
+   <div id="onglet">]
+   
     <div class="cartouche">
       [(#LOGO_MOT||image_reduire{200,200})]
       <h1 class="titre">#TITRE</h1>
@@ -129,7 +129,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
     </div><!-- fin encart -->
 
     [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
-	</div><!-- fin onglet -->
-</div><!-- fin colonne2 -->
+	[(#CONFIG{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
+</div>[(#REM) fin colonne2]
 <INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]
 </BOUCLE_mot_principal>

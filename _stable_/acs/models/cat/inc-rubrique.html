@@ -1,4 +1,15 @@
-#CACHE{7200}
+#CACHE{7200}[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2009
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Page d'une rubrique
+
+]
 <BOUCLE_rubrique_principal(RUBRIQUES) {id_rubrique}{tout}>
 <INCLURE{fond=composants/fond/entete}{env=#ENV}{page=rubrique}{title=#TITRE|textebrut}>
 
@@ -10,9 +21,8 @@
 
 [(#REM) Colonne 2 ]
 <div id="colonne2"><div class="spacer"></div>
-	<INCLURE{fond=composants/onglets/onglets}{current=rubrique}{env=#ENV}>
-	<div id="onglet">
-
+  [(#CONFIG{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{current=rubrique}{env=#ENV}>
+   <div id="onglet">]
     [(#REM) Fil d'Ariane ]
     <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|supprimer_numero|couper{80})]</div>
 
@@ -24,13 +34,11 @@
     </div>
       [<div class="#EDIT{texte} chapo" style="z-order:2">(#TEXTE)</div>]
 
-    <div class="contre-encart">
-      [(#REM) Articles de la rubrique ]
+    <div class="contre-encart">[(#REM) Articles de la rubrique ]
 [(#MODE|=={Video}|?{' '}) <INCLURE{fond=composants/articles/boucle-articles-rubrique_video}{env=#ENV}{id_rubrique}{classement}{debut_articles=#ENV{'debut_articles'}}{rubrique=#TITRE}>]
 [(#MODE|!={Video}|?{' '}) <INCLURE{fond=composants/articles/boucle-articles-rubrique_texte}{env=#ENV}{id_rubrique}{classement}{debut_articles=#ENV{'debut_articles'}}{rubrique=#TITRE}>]
 
-		  [(#REM) Documents joints a la rubrique ]
-      <B_documents_joints>
+      <B_documents_joints>[(#REM) Documents joints a la rubrique ]
       <div id="documents_joints">
           <h2><:titre_documents_joints:></h2>
         <ul>
@@ -46,8 +54,8 @@
       [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
   </div><!-- fin contre-encart -->
   <br />
-</div>[(#REM) fin onglet ]
-</div>[(#REM) fin colonne2 ]
+	[(#CONFIG{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
+</div>[(#REM) fin colonne2]
 <div id="colonne3"><div class="spacer"></div>
   <div class="encart">
     [(#REM) mini calendrier (composant Agenda ]

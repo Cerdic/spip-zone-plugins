@@ -1,5 +1,15 @@
 #CACHE{2*86400}
-<BOUCLE_auteur_principal(AUTEURS) {id_auteur}>[(#SET{mkeywords,<:acs:entete_meta_page_auteur:>[,(#NOM|askeywords)][,(#NOM_SITE_SPIP|askeywords)]})][(#SET{title,[(#NOM|textebrut)][ - (#NOM_SITE_SPIP|textebrut)]})][(#SET{mabstract,<:acs:entete_meta_page_auteur:>[ (#NOM|textebrut)]})]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2009
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+]<BOUCLE_auteur_principal(AUTEURS) {id_auteur}>[(#SET{mkeywords,<:acs:entete_meta_page_auteur:>[,(#NOM|askeywords)][,(#NOM_SITE_SPIP|askeywords)]})][(#SET{title,[(#NOM|textebrut)][ - (#NOM_SITE_SPIP|textebrut)]})][(#SET{mabstract,<:acs:entete_meta_page_auteur:>[ (#NOM|textebrut)]})]
 <INCLURE{fond=composants/fond/entete}{self=#SELF}{env=#ENV}{page=auteur}{title=#GET{title}}{mdescription=#BIO|couper{150}|textebrut}{mkeywords=#GET{mkeywords}}{mauthor=#NOM|textebrut}{mexpires=86400}{mabstract=#GET{mabstract}}{mpublisher=#NOM|textebrut}{mcontributor=#NOM|textebrut}{msubject=#NOM|textebrut}>
 <div id="colonne1"><div class="spacer"></div>[(#REM) Menu de navigation lateral (colonne 1)]
   <div class="mg">[(#REM) Colonne 1 - Menu de navigation par rubriques ]
@@ -9,8 +19,8 @@
 </div>[(#REM) fin colonne1 (navigation)]
 <div id="colonne2"><div class="spacer"></div>[(#REM) Colonne 2 ]
   [(#REM) Contenu principal : derniers articles publies ]
-  <INCLURE{fond=composants/onglets/onglets}{env=#ENV}>
-  <div id="onglet">
+  [(#CONFIG{acsOngletsUse}|!={non}|?{' '}) <INCLURE{fond=composants/onglets/onglets}{env=#ENV}>
+  <div id="onglet">]
     [(#REM) Fil d'Ariane ]
     <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="?page=auteurs"><:info_auteurs:></a>[ &gt; (#NOM|couper{80})]</div>
     <div class="cartouche">
@@ -33,8 +43,8 @@
     </div><!-- fin contre-encart -->
     </B_articles>
     [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
-	</div><!-- fin onglet -->
-</div><!-- fin colonne2 -->
+	[(#CONFIG{acsOngletsUse}|!={non}|?{' '}) </div>][(#REM) fin onglet]
+</div>[(#REM) fin colonne2]
 <div id="colonne3"><div class="spacer"></div>
     [<div class="encart"><div class="divers">(#FORMULAIRE_ECRIRE_AUTEUR)</div></div><!-- fin encart -->]
 </div>
