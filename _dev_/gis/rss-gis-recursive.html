@@ -44,8 +44,8 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 		[<dc:creator>(#LESAUTEURS|supprimer_tags|texte_backend)</dc:creator>]
 	</item>
 	</BOUCLE_un_article>
-	<BOUCLE_parents(RUBRIQUES){id_parent=#ID_PARENT}>
-	<BOUCLE_un2_article(ARTICLES){id_rubrique}{par date}{inverse}{0, #ENV{limit}}>
+	<BOUCLE_parents(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}>
+	<BOUCLE_un2_article(ARTICLES){branche}{par date}{inverse}{0, #ENV{limit}}>
 	<item>
 	<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
 	[<guid isPermaLink="true">(#URL_ARTICLE|url_absolue)</guid>]
