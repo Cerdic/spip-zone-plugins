@@ -14,13 +14,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_PRIVILEGES_MYSQL_USER_BASE','Alter, Select, Insert, Update, Delete, Create, Drop');
 
-
 include_spip('inc/minipres');
 include_spip('inc/lang');
 
 utiliser_langue_visiteur();
 #$menu_langues = menu_langues('var_lang_ecrire');
-
 
 /* centrage...  */
 function mutu_minipres($titre="",$contenu=""){
@@ -122,8 +120,7 @@ function mutu_etape_creer_base($e, $options){
 						curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 						curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 						curl_setopt($ch, CURLOPT_POST, 1);
-						// $page = curl_exec($ch);
-						// var_dump($page);
+						$page = curl_exec($ch);
 						curl_close($ch);
 						if (!sql_selectdb(_INSTALL_NAME_DB, _INSTALL_SERVER_DB)) {
 							echo mutu_minipres(
@@ -197,8 +194,8 @@ function mutu_etape_creer_base($e, $options){
 						
 						echo mutu_minipres(
 							_T('mutu:install_bd_cree', array( 'nombase' => '<tt>'._INSTALL_NAME_DB.'</tt>')),
-							"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
-							.'<h3>'
+							"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
+							'<h3>'
 							._T('mutu:install_spip_1')
 							.'<a href="'.generer_url_ecrire('install').'">'
 							._T('mutu:install_spip_2')
@@ -364,7 +361,11 @@ function mutu_etape_fin($e, $options){
 	@supprimer_fichier($e . _NOM_TEMPORAIRES_INACCESSIBLES . _MUTU_INSTALLATION_FILE);
 	
 	echo mutu_minipres(
-		_T('mutu:install_rep_bd_ok')
+		_T('mutu:install_rep_bd_ok'),
+
+		"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
+		.'<h3>'.
+			_L('Vous pouvez <a href="'.generer_url_ecrire('install').'">poursuivre l\'installation de SPIP</a>.')
 		.'</h3>'
 	);
 	exit;		
