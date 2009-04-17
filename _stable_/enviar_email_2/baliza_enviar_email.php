@@ -44,7 +44,7 @@ function balise_ENVIAR_EMAIL($p) {
 	$arg = "'page=enviar_email_breve&amp;id_breve='.".champ_sql('id_breve', $p);
 	}
 
-   $p->code ="preparar_enlace_imprimir($arg)";
+   $p->code ="preparar_enlace_enviar($arg)";
    $p->statut = 'html';
 
    return $p;
