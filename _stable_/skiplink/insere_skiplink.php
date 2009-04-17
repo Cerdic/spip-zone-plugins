@@ -4,7 +4,8 @@
 function skiplink_affichage_final(&$page) {
 	// ne pas se fatiguer si pas HTML
 	if (!($GLOBALS['html']
-	AND !strpos($page, '<p id="raccourcis">') # pas deux fois, au cas ou !
+	AND strpos($page, 'id="raccourcis">') # pas deux fois, au cas ou !
+//    AND preg_match(',<p[^>]*id=[\'\"]raccourcis,im', $page) != 1)
 	))
 		return $page;
   
