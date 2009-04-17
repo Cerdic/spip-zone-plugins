@@ -93,6 +93,9 @@ function spiplistes_header_prive ($flux) {
 </style>
 ";			
 				break;
+			case _SPIPLISTES_EXEC_MAINTENANCE:
+				$flux .= "<script type=\"text/javascript\" src=\"" . $js_dir . "spiplistes_maintenance.js\"></script>\n";
+				break;
 		}
 		$flux .= "<!-- SPIP-Listes /-->\n\n";
 	}

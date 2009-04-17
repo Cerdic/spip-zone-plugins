@@ -54,7 +54,7 @@ jQuery(document).ready(function() {
 		$('input['+jqss+'name=auto_chrono]['+jqss+'value=auto_mensuel]').attr('checked','checked');
 	});
 	/*
-	* forcer le format de reception ? 
+	* forcer l'abonnement a cette liste ? 
 	*/
 	$('input['+jqss+'name=forcer_abo]').click( function() { 
 		if($(this).val() == 'aucun') {

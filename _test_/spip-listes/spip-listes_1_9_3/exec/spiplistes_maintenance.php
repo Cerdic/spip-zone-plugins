@@ -35,6 +35,7 @@ function exec_spiplistes_maintenance () {
 	foreach(array_merge(
 		array(
 			'btn_supprimer_courriers', 'btn_reset_listes', 'btn_supprimer_listes'
+			, 'btn_modifier_formats', 'confirmer_modifier_formats'
 			, 'btn_supprimer_formats', 'confirmer_supprimer_formats'
 			, 'btn_nettoyer_abos', 'confirmer_nettoyer_abos'
 		)) as $key) {
@@ -131,18 +132,35 @@ function exec_spiplistes_maintenance () {
 		}
 		
 		// les formats
-		if($btn_supprimer_formats && $confirmer_supprimer_formats) {
-			$msg =
-				(
-					// vider la table des formats connus de spiplistes
-					sql_delete("spip_auteurs_elargis", $sql_formats_where)
-				)
-				?	$msg_ok
-				:	$msg_bad
-				;
+		if($btn_modifier_formats || $btn_supprimer_formats) {
+			
 			$objet = array('objet' => _T('spiplistes:des_formats'));
-			$msg_maintenance[] = _T('spiplistes:suppression_', $objet)." : ".$msg.$msg_end;
-			spiplistes_log("DELETE formats "._SPIPLISTES_FORMATS_ALLOWED." by ID_AUTEUR #$connect_id_auteur");
+			
+			if($confirmer_modifier_formats && ($format = spiplistes_format_valide(_request('sl-le-format')))) {
+				
+				$msg =
+					(
+						spiplistes_format_abo_modifier('tous', $format)
+					)
+					?	$msg_ok
+					:	$msg_bad
+					;
+				$msg_maintenance[] = _T('spiplistesmodification_objet', $objet)." : ".$msg.$msg_end;
+				spiplistes_log("UPDATE ALL format $format by ID_AUTEUR #$connect_id_auteur");
+				
+			}
+			if($confirmer_supprimer_formats) {
+				$msg =
+					(
+						// vider la table des formats connus de spiplistes
+						sql_delete("spip_auteurs_elargis", $sql_formats_where)
+					)
+					?	$msg_ok
+					:	$msg_bad
+					;
+				$msg_maintenance[] = _T('spiplistes:suppression_', $objet)." : ".$msg.$msg_end;
+				spiplistes_log("DELETE formats "._SPIPLISTES_FORMATS_ALLOWED." by ID_AUTEUR #$connect_id_auteur");
+			}
 		}
 		
 		// les abonnements
@@ -328,6 +346,26 @@ function exec_spiplistes_maintenance () {
 		;
 	if($nb_abonnes_formats > 0) {
 		$page_result .= ""
+			// forcer les formats de reception
+			. spiplistes_form_debut ($maintenance_url_action, true)
+			. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)
+			. spiplistes_form_fieldset_debut (
+				_T('spiplistes:forcer_formats_', $objet)
+					. spiplistes_fieldset_legend_detail(_T('spiplistes:total').": $nb_abonnes_formats_desc", true)
+				, true) 
+			. spiplistes_form_input_checkbox ('confirmer_modifier_formats', 'oui'
+											  , _T('spiplistes:forcer_formats_desc'), false, true)
+			. "<div id='sl-modif-fmt'>\n"
+				. spiplistes_form_input_radio ($name = "sl-le-format", "html", _T('spiplistes:html'), true, true)
+				. spiplistes_form_input_radio ($name, "texte", _T('spiplistes:texte'), false, true)
+				. spiplistes_form_input_radio ($name, "non", _T('spiplistes:aucun'), false, true)
+			. "</div>\n"
+			. spiplistes_form_fieldset_fin(true)
+			. spiplistes_form_bouton_valider('btn_modifier_formats')
+			. spiplistes_form_fin(true)
+			
+			. "<hr />\n"
+			// supprimer les formats
 			. spiplistes_form_debut ($maintenance_url_action, true)
 			. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)
 			. spiplistes_form_fieldset_debut (

@@ -65,3 +65,7 @@ ul.liste-format, ul.liste-format-desabo { padding-left:0;margin:0;list-style:non
 ul.liste-format li, ul.liste-format-desabo li { display:block }
 /* supprimes les <p> ajout�s aux infos par 193 */
 ul.meta-info-liste p { display:inline }
+/* maintenance */
+#sl-modif-fmt {
+	padding-left:2ex;
+}

@@ -574,12 +574,13 @@ function spiplistes_format_abo_supprimer ($id_auteur) {
 // si id_auteur, celui-ci uniquement
 // sinon, 'tous' pour modifier globalement (uniquement ceux ayant deja un format)
 function spiplistes_format_abo_modifier ($id_auteur, $format = 'non') {
+
 	if($format = spiplistes_format_valide($format)) {
 		$sql_table = "spip_auteurs_elargis";
 		$sql_champs = array('`spip_listes_format`' => sql_quote($format));
-		if($id_auteur=='tous') {
+		if($id_auteur == 'tous') {
 			// appliquer le meme format a tous les abos
-			$sql_result = sql_update($sql_table, $sql_champs);
+			$sql_result = sql_update($sql_table, $sql_champs, 1);
 			$action = "update";
 		}
 		else if(($id_auteur = intval($id_auteur)) > 0) {
