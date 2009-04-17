@@ -16,6 +16,7 @@
 
 	[Configuration par CFG->./index.php?exec=cfg&amp;cfg=socialtags]
 	</description>
+	<lien>http://www.spip-contrib.net/Social-tags</lien>
 	<prefix>
 	socialtags
 	</prefix>
