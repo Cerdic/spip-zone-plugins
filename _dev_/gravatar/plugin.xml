@@ -17,18 +17,13 @@ _ Exemple : <code>#GRAVATAR{#EMAIL,80,#URL_SITE_SPIP/defaut-gravatar.gif}</code>
 Fournit le filtre <code>|gravatar</code>, &agrave; utiliser par exemple comme 
 <code>[(#EMAIL|gravatar|image_reduire{80})]</code>.
 	</description>
-	
-	<fonctions>inc/gravatar.php</fonctions>
-
-	<lien>[Gravatar->http://www.gravatar.com]</lien>
+	<lien>[Gravatar->http://www.spip-contrib.net/Gravatar]</lien>
 	<prefix>gravatar</prefix>
-
-
+	<fonctions>inc/gravatar.php</fonctions>
 	<pipeline>
 		<nom>affiche_gauche</nom>
 		<action>affiche_gauche</action>
 		<inclure>GravatarPrive.php</inclure>
 	</pipeline>
-
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>
