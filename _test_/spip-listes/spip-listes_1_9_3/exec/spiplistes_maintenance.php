@@ -145,7 +145,7 @@ function exec_spiplistes_maintenance () {
 					?	$msg_ok
 					:	$msg_bad
 					;
-				$msg_maintenance[] = _T('spiplistesmodification_objet', $objet)." : ".$msg.$msg_end;
+				$msg_maintenance[] = _T('spiplistes:modification_objet', $objet)." : ".$msg.$msg_end;
 				spiplistes_log("UPDATE ALL format $format by ID_AUTEUR #$connect_id_auteur");
 				
 			}
