@@ -1,0 +1,95 @@
+<!-- titre=<multi>[fr]Plugin refbase</multi>-->
+<!-- icone=img_pack/refbase-24.png-->
+[(#SET{logo,
+<img src='#DOSSIER_SQUELETTE/../img_pack/refbase-48.png' width='48' height='48' alt='Logo refbase' style="float:#LANG_RIGHT;" />
+})]
+<!-- descriptif=
+#GET{logo}
+<h4><:refbase:config_refbase:></h4>
+-->
+#CACHE{0}
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<fieldset><legend><:refbase:comportement_defaut:></legend>
+
+	<p><label for="url_refbase"><b><:refbase:cfg_url_refbase:></b></label><br />
+	<input type="text" name="url_refbase" value="[(#ENV{url_refbase}|sinon{'http://'})]" size="60" /></p>
+	
+	<p><label for="vue"><b><:refbase:cfg_vue:></b></label>
+	<select name="vue">
+		<option value="citations" [(#CONFIG{refbase/vue}|=={'citations'}|?{selected="selected",''})] ><:refbase:cfg_vue_citations:></option>
+		<option value="liste" [(#CONFIG{refbase/vue}|=={'liste'}|?{selected="selected",''})] ><:refbase:cfg_vue_liste:></option>
+		<option value="details" [(#CONFIG{refbase/vue}|=={'details'}|?{selected="selected",''})] ><:refbase:cfg_vue_details:></option>
+	</select></p>
+	
+	<p><label for="liens"><b><:refbase:cfg_liens:></b></label>
+	<select name="liens">
+		<option value="oui" [(#CONFIG{refbase/liens}|=={'oui'}|?{selected="selected",''})] ><:refbase:oui:></option>
+		<option value="non" [(#CONFIG{refbase/liens}|=={'non'}|?{selected="selected",''})] ><:refbase:non:></option>
+	</select></p>
+	</p>
+	
+	<p><label for="max"><b><:refbase:cfg_max:></b></label>
+	<input type="text" name="max" value="[(#ENV{max}|sinon{'100'})]" size="4" style="text-align:right;" /></p>	
+	
+	<p><label for="doublons"><b><:refbase:cfg_doublons:></b></label>
+	<select name="doublons">
+		<option value="non" [(#CONFIG{refbase/doublons}|=={'non'}|?{selected="selected",''})] ><:refbase:non:></option>
+		<option value="oui" [(#CONFIG{refbase/doublons}|=={'oui'}|?{selected="selected",''})] ><:refbase:oui:></option>
+	</select></p>
+	</p>
+	
+	<p><label for="tri"><b><:refbase:cfg_tri:></b></label>
+	<select name="tri">
+		<option value="annee" [(#CONFIG{refbase/tri}|=={'annee'}|?{selected="selected",''})] ><:refbase:cfg_tri_annee:></option>
+		<option value="auteur" [(#CONFIG{refbase/tri}|=={'auteur'}|?{selected="selected",''})] ><:refbase:cfg_tri_auteur:></option>
+		<option value="type" [(#CONFIG{refbase/tri}|=={'type'}|?{selected="selected",''})] ><:refbase:cfg_tri_type:></option>
+		<option value="typeannee" [(#CONFIG{refbase/tri}|=={'typeannee'}|?{selected="selected",''})] ><:refbase:cfg_tri_typeannee:></option>
+		<option value="datecreation" [(#CONFIG{refbase/tri}|=={'datecreation'}|?{selected="selected",''})] ><:refbase:cfg_tri_datecreation:></option>
+	</select></p>
+	
+	
+</fieldset>
+
+<br />
+
+<fieldset><legend><:refbase:comportement_citations:></legend>
+
+	<p><label for="style"><b><:refbase:cfg_style:></b></label>
+	<select name="style">
+		<option value="APA" [(#CONFIG{refbase/style}|=={'APA'}|?{selected="selected",''})] >APA</option>
+		<option value="AMA" [(#CONFIG{refbase/style}|=={'AMA'}|?{selected="selected",''})] >AMA</option>
+		<option value="MLA" [(#CONFIG{refbase/style}|=={'MLA'}|?{selected="selected",''})] >MLA</option>
+		<option value="Chicago" [(#CONFIG{refbase/style}|=={'Chicago'}|?{selected="selected",''})] >Chicago</option>
+		<option value="Harvard 1" [(#CONFIG{refbase/style}|=={'Harvard 1'}|?{selected="selected",''})] >Harvard 1</option>
+		<option value="Harvard 2" [(#CONFIG{refbase/style}|=={'Harvard 2'}|?{selected="selected",''})] >Harvard 2</option>
+		<option value="Harvard 3" [(#CONFIG{refbase/style}|=={'Harvard 3'}|?{selected="selected",''})] >Harvard 3</option>
+		<option value="Vancouver" [(#CONFIG{refbase/style}|=={'Vancouver'}|?{selected="selected",''})] >Vancouver</option>
+		<option value="Deep Sea Res" [(#CONFIG{refbase/style}|=={'Deep Sea Res'}|?{selected="selected",''})] >Deep Sea Res</option>
+		<option value="J Glaciol" [(#CONFIG{refbase/style}|=={'J Glaciol'}|?{selected="selected",''})] >J Glaciol</option>
+		<option value="Mar Biol" [(#CONFIG{refbase/style}|=={'Mar Biol'}|?{selected="selected",''})] >Mar Biol</option>
+	</select></p>
+
+	<p><label for="liens_exports"><b><:refbase:cfg_liens_exports:></b></label>
+	<select name="liens_exports">
+		<option value="oui" [(#CONFIG{refbase/liens_exports}|=={'oui'}|?{selected="selected",''})] ><:refbase:oui:></option>
+		<option value="non" [(#CONFIG{refbase/liens_exports}|=={'non'}|?{selected="selected",''})] ><:refbase:non:></option>
+	</select></p>
+	</p>
+
+</fieldset>
+
+<br />
+
+<fieldset><legend><:refbase:option_style:></legend>
+	<p><label for="css"><:refbase:cfg_css:></label><br />
+	<input type="text" name="css" value="[(#ENV{css})]" size="60" /></p>
+</fieldset>
+
+<div><p>
+<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
+<input type="reset" value="<:reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</p></div>
+</form>

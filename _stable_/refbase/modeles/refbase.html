@@ -1,0 +1,137 @@
+<?php
+	// On determine l url a utiliser
+	$requete = '[(#ENV{url_refbase}|sinon{#CONFIG{refbase/url_refbase}})]';
+	// Elements constants de la requete
+	$requete .= 'show.php?client=inc-refbase-1.0&wrapResults=0&records=all';
+		$id = '#ENV{id}';
+	if ($id!='') $requete .= '&record='.$id;
+	// On determine la vue (citations par defaut)
+	$vue = '[(#ENV{vue}|sinon{#CONFIG{refbase/vue}})]';
+	if ($vue=='') $vue = 'citations';
+	if ($id!='')  $vue = 'citations'; // Si un id, on force en citations
+	switch ($vue) {
+		case "citations":
+		$requete .= '&submit=Cite';
+		break;
+		case "liste":
+		$requete .= '&submit=List';
+		break;
+		case "details":
+		$requete .= '&submit=Display';
+		break;
+	}
+	// Doit on afficher les liens externes ?
+	if ('[(#ENV{liens}|sinon{#CONFIG{refbase/liens}})]'=='non' AND $id=='') // Si id, on force en oui
+		$requete .= '&showLinks=0';
+	else
+		$requete .= '&showLinks=1';
+	// Nombre maximum de liens affiches
+	$max = '[(#ENV{max}|sinon{#CONFIG{refbase/max}})]';
+	if ($max=='') $maxi = '100';
+	$requete .= '&showRows='.$max;
+	// Doit on afficher doublons ?
+	if ('[(#ENV{doublons}|sinon{#CONFIG{refbase/doublons}})]'=='non')
+		$requete .= '&without=dups';
+	// On determine le tri (annee par defaut)
+	$tri = '[(#ENV{tri}|sinon{#CONFIG{refbase/tri}})]';
+	if ($tri=='') $tri = 'annee';
+	if ($id=='')  { // Si un id, pas de tri
+		switch ($tri) {
+			case "annee":
+			$requete .= '&citeOrder=year';
+			break;
+			case "auteur":
+			$requete .= '&citeOrder=author';
+			break;
+			case "type":
+			$requete .= '&citeOrder=type';
+			break;
+			case "typeannee":
+			$requete .= '&citeOrder=type-year';
+			break;
+			case "datecreation":
+			$requete .= '&citeOrder=creation-date';
+			break;
+		}
+	}
+		
+	// Style des citations
+	$style = '[(#ENV{style}|sinon{#CONFIG{refbase/style}})]';
+	if ($style=='') $style = 'APA';
+	$requete .= '&citeStyle='.urlencode($style);
+	// Doit on masquer abstracts et options export ?
+	if ($vue=='citations') {
+		if ('[(#ENV{liens_exports}|sinon{#CONFIG{refbase/liens_exports}})]'=='non' OR $id!='') // Si id on n'affiche pas les liens
+			$requete .= '&viewType=Mobile';
+		else
+			$requete .= '&viewType=Web';
+	}
+	
+	// Parametres de la recherche
+	$where = '[(#ENV**{where}|urlencode)]';
+	if ($where!='') $requete .= '&where='.$where;
+	
+	$type = '[(#ENV**{type}|urlencode)]';
+	if ($type!='') $requete .= '&type='.$type;
+	
+	$auteur = '[(#ENV**{auteur}|urlencode)]';
+	if ($auteur!='') $requete .= '&author='.$auteur;
+	
+	$voir = '[(#ENV{voir})]';
+	if ($voir=='tout') $requete .= '&records=all';
+	
+	$institution = '[(#ENV**{institution}|urlencode)]';
+	if ($institution!='') $requete .= '&contribution_id='.$institution;
+	
+	$motcle = '[(#ENV**{motcle}|urlencode)]';
+	if ($motcle!='') $requete .= '&keywords='.$motcle;
+	
+	$journal = '[(#ENV**{journal}|urlencode)]';
+	if ($journal!='') $requete .= '&publication='.$journal;
+	
+	$identifiants = '[(#ENV**{identifiants}|urlencode)]';
+	if ($identifiants!='') $requete .= '&records='.$identifiants;
+	
+	$depuis = '[(#ENV{depuis})]';
+	// Si c est une annee
+	if (preg_match('#^[0-9]{4}$#',$depuis))
+		$requete .= '&where=year+>+'.($depuis-1);
+	// Si c est une duree en annee 
+	if (preg_match('#^[0-9]{1,3}ans$#',$depuis))
+		$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-3);
+	if (preg_match('#^[0-9]{1,3}an$#',$depuis))
+		$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-2);
+	
+	// On recupere le flux
+	$texte = spip_file_get_contents($requete);
+	
+	// Cas de plusieurs références
+	if ($id=='') {
+		// Renommage pour eviter toute interference
+		$texte = str_replace('toggleVisibilitySlide','refbase_toggleVisibilitySlide',$texte);
+		
+		// On affiche
+		echo '<div class="refbasecss" [style="(#ENV{css}|sinon{#CONFIG{refbase/css}})"]>';
+		echo $texte;
+		echo '</div>';
+	}
+	else { // Cas d une reference unique
+		
+		preg_match("#<div class=\"citation\">.*</div>#",$texte,$reference);
+		preg_match("#<span class=\"Z3988\".*</span>#",$texte,$coins);
+		$reference = substr($reference[0],22,-6);
+		
+		// rendre url clicable
+		$in=array(
+			'#((?:https?|ftp)://\S+)(\s|\z)#',
+			'#((?<!//)(www\.)\S+)(\s|\z)#'
+		);
+		$out=array(
+			'<a href="$1">$1</a>',
+			'<a href="http://$1">$1</a>'
+		);
+		$reference = preg_replace($in,$out,$reference);
+		
+		echo $reference.' '.$coins[0];
+	}
+?>
