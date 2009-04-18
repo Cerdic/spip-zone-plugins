@@ -28,7 +28,7 @@ class Test_SpipTestRecupererCode extends SpipTest{
 		$this->assertEqualCode('Hello Kitty','Hello Kitty');
 		
 		// pas de fichier de fonctions
-		$this->assertOkCode("[(#SQUELETTE|replace{'.html','_fonctions.php'}|chemin|non)ok]");
+		$this->assertOkCode("[(#SQUELETTE|replace{'.html','_fonctions.php'}|find_in_path|non)ok]");
 		
 		// fichier de fonction
 		$this->options_recuperer_code(array(
@@ -37,11 +37,11 @@ class Test_SpipTestRecupererCode extends SpipTest{
 							return ' So Smile';
 						}",
 		));
-		$this->assertNotOkCode("[(#SQUELETTE|replace{'.html','_fonctions.php'}|chemin|non)ok]");
+		$this->assertNotOkCode("[(#SQUELETTE|replace{'.html','_fonctions.php'}|find_in_path|non)ok]");
 		
 		// pas de fichier de fonctions
 		$this->options_recuperer_code();
-		$this->assertOkCode("[(#SQUELETTE|replace{'.html','_fonctions.php'}|chemin|non)ok]");		
+		$this->assertOkCode("[(#SQUELETTE|replace{'.html','_fonctions.php'}|find_in_path|non)ok]");		
 	}
 	
 	function testRecupererCodeAvantApres(){
