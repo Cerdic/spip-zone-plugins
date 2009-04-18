@@ -24,7 +24,7 @@ function abonnement_i2_traiter_formulaire($flux) {
 	$value = _request('abonnement') ;	
 	$n = $flux['args']['id_auteur'] ;
 	spip_log("$value,$n","logabo");
-	sql_insertq('spip_auteurs_elargis_abonnements', array('id_auteur' => $n,'id_abonnement' => $value));
+	sql_insertq('spip_auteurs_elargis_abonnements', array('id_auteur' => $n,'id_abonnement' => $value, 'date' => date("Y-m-d H:i:s") ));
 	}
 	
 	/*
