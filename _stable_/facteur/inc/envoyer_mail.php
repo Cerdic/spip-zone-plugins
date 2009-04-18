@@ -26,4 +26,14 @@
 	}
 
 
+
+/** Conserver les fonctions de SPIP car il en utilise certaines ! **/
+
+// utilisee par inc/notifications.php
+// http://doc.spip.org/@nettoyer_titre_email
+function nettoyer_titre_email($titre) {
+	return str_replace("\n", ' ', supprimer_tags(extraire_multi($titre)));
+}
+
+
 ?>
