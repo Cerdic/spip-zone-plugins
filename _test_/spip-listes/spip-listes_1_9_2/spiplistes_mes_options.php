@@ -52,9 +52,13 @@ function balise_DATE_MODIF_FORUM($p) {
    return $p;
 }
 
-//utiliser le cron pour envoyer les messages en attente
 function spiplistes_taches_generales_cron($taches_generales){
+	// utiliser le cron pour envoyer les messages en attente
 	$taches_generales['spiplistes_cron'] = 10 ;
+	/* 
+	// utiliser le cron pour mettre a jour les abonnés d'une liste dynamiquement (voir inc/spiplistes_maj_listes_cron.php)
+	$taches_generales['spiplistes_maj_listes_cron'] = 60*60*24 ;
+	*/
 	return $taches_generales;
 }
 
