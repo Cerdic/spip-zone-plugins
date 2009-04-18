@@ -315,8 +315,15 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 	//toutes les clefs qu'inscription2 peut mettre a jour
 	//s'appuie sur les tables definies par le plugin
 	$clefs = $tables_principales[$table]['field'];
+	if(is_array($clefs)){
 	//extrait uniquement les donnees qui ont ete proposees a la modification
 	$val = array_intersect_key($valeurs,$clefs);
+	}else{
+	$where = 'id_auteur='.sql_quote($id_auteur);	
+	$res = sql_select('*',$table,$where);
+	$clefs = sql_fetch($res);
+	$val = array_intersect_key($valeurs,$clefs);	
+	}
 	unset($val['login']);
 	//recherche la presence d'un complement sur l'auteur
 	$id_elargi = sql_getfetsel('id_auteur','spip_auteurs_elargis','id_auteur='.$id_auteur);
