@@ -104,7 +104,10 @@
 		$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-3);
 	if (preg_match('#^[0-9]{1,3}an$#',$depuis))
 		$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-2);
-	
+
+	$doi = '[(#ENV**{doi}|urlencode)]';
+	if ($doi!='') $requete .= '&where=doi%20RLIKE%20%22'.$doi.'%22';
+		
 	// On recupere le flux
 	$texte = spip_file_get_contents($requete);
 	
