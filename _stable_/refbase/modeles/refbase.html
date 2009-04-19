@@ -89,8 +89,11 @@
 	$journal = '[(#ENV**{journal}|urlencode)]';
 	if ($journal!='') $requete .= '&publication='.$journal;
 	
-	$identifiants = '[(#ENV**{identifiants}|urlencode)]';
+	$identifiants = '[(#ENV{identifiants})]';
 	if ($identifiants!='') $requete .= '&records='.$identifiants;
+	
+	$annee = '[(#ENV{annee})]';
+	if ($annee!='') $requete .= '&year='.$annee;
 	
 	$depuis = '[(#ENV{depuis})]';
 	// Si c est une annee
