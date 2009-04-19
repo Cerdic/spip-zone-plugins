@@ -39,4 +39,17 @@ function select_champ($bidon, $champ='', $en_cours){
 
 	return $options;
 }
+
+function classer_par_jalon($bidon) {
+	$page = NULL;
+	if (defined('_TICKETS_LISTE_JALONS')) {
+		$liste = explode(":", _TICKETS_LISTE_JALONS);
+		foreach($liste as $_jalon) {
+			$page .= recuperer_fond('prive/contenu/tickets_liste_long', 
+				array_merge($_GET, array('ajax'=>true, 'visible'=>'false', 'titre' => _T('tickets:champ_jalon').$_jalon, 'statut' => 'ouvert', 'jalon' => $_jalon)));
+		}
+	}
+	return $page;
+}
+
 ?>

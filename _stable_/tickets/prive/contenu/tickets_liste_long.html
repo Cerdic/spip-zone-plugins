@@ -23,7 +23,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<BOUCLE_principale(TICKETS){par severite}{par type}{!par date}{pagination #ENV{pagination,10}}{id_auteur?}{id_assigne?}{statut?}{type?}>
+		<BOUCLE_principale(TICKETS){par severite}{par type}{!par date}{pagination #ENV{pagination,10}}{id_auteur?}{id_assigne?}{statut?}{type?}{jalon?}>
 		<tr class="tr_liste">
 			<td style="width: 10px;">[(#STATUT|tickets_bouton_statut)]</td>
 			<td class="arial1"><b>##ID_TICKET</b></td>

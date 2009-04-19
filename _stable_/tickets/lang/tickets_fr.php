@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'classement_asuivre' => 'Vos tickets &agrave; suivre',
 	'classement_termine' => 'Tickets termin&eacute;s',
 	'classement_type' => 'Tickets par type',
+	'classement_jalon' => 'Tickets par jalon',
 	
 	'creer_ticket' => 'Cr&eacute;er un ticket',
 	
