@@ -35,7 +35,11 @@
 		<inclure>abonnement_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>i2_validation_formulaire</nom>
+		<nom>i2_charger_formulaire</nom>
+		<inclure>abonnement_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>i2_verifier_formulaire</nom>
 		<inclure>abonnement_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>

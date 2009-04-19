@@ -10,11 +10,18 @@ function abonnement_I2_cfg_form($flux) {
 }
 
 function abonnement_i2_form_debut($flux) {
-    $flux['data'] .= recuperer_fond('formulaires/abonnement_liste');
+   	$env = unserialize($flux['args']);
+   	$contexte = array("abonnement" => $env['abonnement']);
+    $flux['data'] .= recuperer_fond('formulaires/abonnement_liste',$contexte);
 	return ($flux);
 }
 
-function abonnement_i2_validation_formulaire($flux) {
+function abonnement_i2_charger_formulaire($flux) {
+	$flux['data']['abonnement'] = '1' ;
+	return ($flux);
+}
+
+function abonnement_i2_verifier_formulaire($flux) {
 	return ($flux);
 }
 
