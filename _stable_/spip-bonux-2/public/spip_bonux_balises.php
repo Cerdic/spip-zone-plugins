@@ -257,7 +257,7 @@ function balise_BOUTON_ACTION($p){
 	$_class = interprete_argument_balise(3,$p);
 	if (!$_class) $_class="''";
 
-	$p->code = "'<form class=\'bouton_action_post '.$_class.'\' method=\'post\' action=\''.$_url.'\'><span>'.form_hidden($_url).'<input type=\'submit\' class=\'submit\' value=\''.$_label.'\' /></span></form>'";
+	$p->code = "'<form class=\'bouton_action_post '.$_class.'\' method=\'post\' action=\''.$_url.'\'><span>'.form_hidden($_url).'<input type=\'submit\' class=\'submit\' value=\''.attribut_html($_label).'\' /></span></form>'";
 	$p->interdire_scripts = false;
 	return $p;
 }
