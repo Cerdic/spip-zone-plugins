@@ -36,4 +36,15 @@ function article_visible_par_abonne($id_auteur,$id_article){
 		return false ;	
 }
 
+function pecho_breve($string){
+$id_breve = str_replace('breve','',$string) ;
+return $id_breve ;
+}
+
+function ajouter_des_jours($date,$nb){
+if(!intval($nb)) return ;
+$date = spip_fetch_array(spip_query("select DATE_ADD('$date', INTERVAL $nb DAY) as ladate"));
+return $date['ladate'] ;
+}
+
 ?>

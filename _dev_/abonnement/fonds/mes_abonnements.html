@@ -1,9 +1,11 @@
 #CACHE{0}
 
+[(#SET{date_future,[(#ENV{date}|ajouter_des_jours{7})]})]
+
 <BOUCLE_auteur(AUTEURS){id_auteur = #SESSION{id_auteur}}{tout}>
 <BOUCLE_auteur_elargi(AUTEURS_ELARGIS auteurs){id_auteur}>
 
-<BOUCLE_abo_valide(spip_auteurs_elargis_abonnements){id_auteur_elargi = #ID}{validite > #ENV{date}}>
+<BOUCLE_abo_valide(spip_auteurs_elargis_abonnements){id_auteur_elargi = #ID}{validite > #GET{date_future}}>
 <h2 style="margin:20px 0px">Votre abonnement</h2>
 <BOUCLE_abo(spip_abonnements){id_abonnement}>
 #LIBELLE - &eacute;ch&eacute;ance le [(#VALIDITE|affdate)]
@@ -16,10 +18,10 @@
 	<div style="margin:20px 0px;padding:10px;background-color:#FFE2E2">
 	<p>
 	Votre abonnement
-	<i>#LIBELLE</i>  est arriv&eacute; &agrave; &eacute;ch&eacute;ance le [(#VALIDITE|affdate)]
+	<i>#LIBELLE</i>  [(#VALIDITE|<={#ENV{date}}|?{'est arriv&eacute;','arrive'})] &agrave; &eacute;ch&eacute;ance le [(#VALIDITE|affdate)]
 	</p>
 	<p>
-	Vous pouvez le renouveller ou bien choisir une autre formule ci-dessous.
+	Vous pouvez le renouveller [(#VALIDITE|<={#ENV{date}}|?{"","d&egrave;s aujourd'hui"})] ou bien choisir une autre formule ci-dessous.
 	</p>
 	</div>
 
