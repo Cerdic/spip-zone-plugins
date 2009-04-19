@@ -68,7 +68,9 @@
 	}
 	
 	// Parametres de la recherche
-	$where = '[(#ENV**{where}|urlencode)]';
+	$where = '[(#ENV**{where})]';
+	// On verifie la necissite d encode l url
+	if (!preg_match('#%20#',$where)) $where = urlencode($where);
 	if ($where!='') $requete .= '&where='.$where;
 	
 	$type = '[(#ENV**{type}|urlencode)]';
