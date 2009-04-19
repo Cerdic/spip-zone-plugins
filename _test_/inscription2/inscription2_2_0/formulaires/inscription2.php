@@ -95,7 +95,7 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 		
 	//verifier les champs obligatoires
 	foreach ($valeurs  as $champs => $valeur) {
-		if ((lire_config('inscription2/'.$champs.'_obligatoire') == 'on') && (empty($valeur) OR (strlen(_request($champs)) == 0))) {
+		if ((lire_config('inscription2/'.$champs.'_obligatoire') == 'on' ) && (empty($valeur) OR (strlen(_request($champs)) == 0))) {
 			$erreurs[$champs] = _T('inscription2:champ_obligatoire');
 			if(is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') == 'on') && (strlen(_request('pass')) == 0)){
 				// Si le password est vide et que l'on est dans le cas de la modification d'un auteur
@@ -111,11 +111,11 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 	//Verifier certains champs specifiquement
 	
 	// Verifier si le mail est connu
-	if (_request('email') AND !is_numeric($id_auteur)) {
+	if (strlen(_request('email')) > 0 AND email_valide(_request('email')) AND !is_numeric($id_auteur)) {
 		if (sql_getfetsel('id_auteur','spip_auteurs','id_auteur !='.intval($id_auteur).' AND email = \''._request('email').'\'')) {
 			// verifier si c un spip listes a maj en pipeline (a faire)
 			// sinon renvoyer le form de login
-			$erreurs['email'] = _T('form_forum_email_deja_enregistre');
+			$erreurs['email_connu'] = _T('form_forum_email_deja_enregistre');
 		}
 	}
 	
@@ -130,6 +130,10 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 		}
 	}
 	
+	// verifier que le mail est valide
+	if(!email_valide(_request('email')))
+	  $erreurs['email_invalide'] = "Veuillez saisir une adresse email valide" ;
+
 	//messages d'erreur au cas par cas (PASSWORD)
 	//verification des champs
 	// Sinon on le verifie
