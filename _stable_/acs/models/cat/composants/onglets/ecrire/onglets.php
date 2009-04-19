@@ -16,8 +16,8 @@ class acsOnglets extends Composant {
   $ic = metacol('acsOngletsCouleurInactif');
   $hc = metacol('acsOngletsCouleurSurvol');
 
-    $imr = @ImageCreateFromGif(find_in_path('composants/onglets/img_pack/right.gif'));
-    $iml = @ImageCreateFromGif(find_in_path('composants/onglets/img_pack/left.gif'));
+    $imr = @ImageCreateFromGif(find_in_path('composants/onglets/images/right.gif'));
+    $iml = @ImageCreateFromGif(find_in_path('composants/onglets/images/left.gif'));
 
     if (!$imr || !$iml) {
     	$this->errors[] = 'ImageCreateFromGif_fail';
