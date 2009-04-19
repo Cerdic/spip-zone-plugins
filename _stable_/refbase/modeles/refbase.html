@@ -7,33 +7,89 @@
 	if ($id!='') $requete .= '&records='.$id;
 	// On determine la vue (citations par defaut)
 	$vue = '[(#ENV{vue}|sinon{#CONFIG{refbase/vue}})]';
+	$submit = '[(#ENV{submit})]';
+	switch ($submit) {
+		case 'Cite':
+		$vue = 'citations';
+		break;
+		case 'List':
+		$vue = 'liste';
+		break;
+		case 'Display':
+		$vue = 'details';
+		break;
+	}
 	if ($vue=='') $vue = 'citations';
 	if ($id!='')  $vue = 'citations'; // Si un id, on force en citations
 	switch ($vue) {
-		case "citations":
+		case 'citations':
 		$requete .= '&submit=Cite';
 		break;
-		case "liste":
+		case 'liste':
 		$requete .= '&submit=List';
 		break;
-		case "details":
+		case 'details':
 		$requete .= '&submit=Display';
 		break;
 	}
 	// Doit on afficher les liens externes ?
-	if ('[(#ENV{liens}|sinon{#CONFIG{refbase/liens}})]'=='non' AND $id=='') // Si id, on force en oui
+	$liens = '[(#ENV{liens}|sinon{#CONFIG{refbase/liens}})]';
+	$showLinks = '[(#ENV{showLinks})]';
+	switch ($showLinks) {
+		case '1':
+		case 'yes':
+		$liens = 'oui';
+		break;
+		case '0':
+		case 'no':
+		$liens = 'non';
+		break;
+	}
+	if ($liens =='non' AND $id=='') // Si id, on force en oui
 		$requete .= '&showLinks=0';
 	else
 		$requete .= '&showLinks=1';
 	// Nombre maximum de liens affiches
 	$max = '[(#ENV{max}|sinon{#CONFIG{refbase/max}})]';
-	if ($max=='') $maxi = '100';
+	$showRows = '[(#ENV{showRows})]';
+	if ($showRows != '') $max = $showRows;
+	if ($max=='') $max = '100';
 	$requete .= '&showRows='.$max;
 	// Doit on afficher doublons ?
-	if ('[(#ENV{doublons}|sinon{#CONFIG{refbase/doublons}})]'=='non')
-		$requete .= '&without=dups';
+	$doublons = '[(#ENV{doublons}|sinon{#CONFIG{refbase/doublons}})]';
+	$showDups = '[(#ENV{showDups})]';
+	switch ($showDups) {
+		case '1':
+		case 'yes':
+		$doublons = 'oui';
+		break;
+		case '0':
+		case 'no':
+		$doublons = 'non';
+		break;
+	}
+	if ('[(#ENV{without})]'=='dups') $doublons = 'non';
+	if ($doublons=='non') $requete .= '&without=dups';
 	// On determine le tri (annee par defaut)
 	$tri = '[(#ENV{tri}|sinon{#CONFIG{refbase/tri}})]';
+	$citeOrder = '[(#ENV{citeOrder})]';
+	switch ($citeOrder) {
+		case 'year':
+		$tri = 'annee';
+		break;
+		case 'author':
+		$tri = 'auteur';
+		break;
+		case 'type':
+		$tri = 'type';
+		break;
+		case 'type-year':
+		$tri = 'type-annee';
+		break;
+		case 'creation-date':
+		$tri = 'date-creation';
+		break;
+	}	
 	if ($tri=='') $tri = 'annee';
 	if ($id=='')  { // Si un id, pas de tri
 		switch ($tri) {
@@ -46,10 +102,10 @@
 			case "type":
 			$requete .= '&citeOrder=type';
 			break;
-			case "typeannee":
+			case "type-annee":
 			$requete .= '&citeOrder=type-year';
 			break;
-			case "datecreation":
+			case "date-creation":
 			$requete .= '&citeOrder=creation-date';
 			break;
 		}
@@ -57,56 +113,86 @@
 		
 	// Style des citations
 	$style = '[(#ENV{style}|sinon{#CONFIG{refbase/style}})]';
+	$citeStyle = '[(#ENV{citeStyle})]';
+	if ($citeStyle != '') $style = $citeStyle;
 	if ($style=='') $style = 'APA';
 	$requete .= '&citeStyle='.urlencode($style);
 	// Doit on masquer abstracts et options export ?
-	if ($vue=='citations') {
-		if ('[(#ENV{liens_exports}|sinon{#CONFIG{refbase/liens_exports}})]'=='non' OR $id!='') // Si id on n'affiche pas les liens
-			$requete .= '&viewType=Mobile';
-		else
-			$requete .= '&viewType=Web';
+	$liens_exports = '[(#ENV{liens_exports}|sinon{#CONFIG{refbase/liens_exports}})]';
+	$showAbstract = '[(#ENV{showAbstract})]';
+	switch ($showAbstract) {
+		case '1':
+		case 'yes':
+		$liens_exports = 'oui';
+		break;
+		case '0':
+		case 'no':
+		$liens_exports = 'non';
+		break;
 	}
+	$viewType = '[(#ENV{viewType})]';
+		switch ($viewType) {
+		case 'Mobile':
+		$liens_exports = 'non';
+		break;
+		case 'Web':
+		$liens_exports = 'oui';
+		break;
+	}
+	if ($liens_exports=='non' OR $id!='') // Si id on n'affiche pas les liens
+		$requete .= '&viewType=Mobile';
+	else
+		$requete .= '&viewType=Web';
 	
 	// Parametres de la recherche
 	$where = '[(#ENV**{where})]';
-	// On verifie la necissite d encode l url
-	if (!preg_match('#%20#',$where)) $where = urlencode($where);
+	if (!preg_match('#%20#',$where)) $where = urlencode($where); // On verifie la necissite d encode l url
 	if ($where!='') $requete .= '&where='.$where;
 	
 	$type = '[(#ENV**{type}|urlencode)]';
 	if ($type!='') $requete .= '&type='.$type;
 	
-	$auteur = '[(#ENV**{auteur}|urlencode)]';
+	$auteur = '[(#ENV**{author}|sinon{#ENV**{auteur}}|urlencode)]';
 	if ($auteur!='') $requete .= '&author='.$auteur;
 	
 	$voir = '[(#ENV{voir})]';
-	if ($voir=='tout') $requete .= '&records=all';
+	$records = '[(#ENV{records})]';
+	if ($voir=='tout' OR $records=='all') $requete .= '&records=all';
 	
-	$institution = '[(#ENV**{institution}|urlencode)]';
+	$institution = '[(#ENV**{contribution_id}|sinon{#ENV**{institution}}|urlencode)]';
 	if ($institution!='') $requete .= '&contribution_id='.$institution;
 	
-	$motcle = '[(#ENV**{motcle}|urlencode)]';
+	$motcle = '[(#ENV**{keywords}|sinon{#ENV**{motcle}}|urlencode)]';
 	if ($motcle!='') $requete .= '&keywords='.$motcle;
 	
-	$journal = '[(#ENV**{journal}|urlencode)]';
+	$journal = '[(#ENV**{publication}|sinon{#ENV**{journal}}|urlencode)]';
 	if ($journal!='') $requete .= '&publication='.$journal;
 	
 	$identifiants = '[(#ENV{identifiants})]';
+	if ($records!='' AND $records !='all') $identifiants=$records;
 	if ($identifiants!='') $requete .= '&records='.$identifiants;
 	
-	$annee = '[(#ENV{annee})]';
+	$annee = '[(#ENV**{year}|sinon{#ENV**{annee}}|urlencode)]';
 	if ($annee!='') $requete .= '&year='.$annee;
 	
-	$depuis = '[(#ENV{depuis})]';
-	// Si c est une annee
-	if (preg_match('#^[0-9]{4}$#',$depuis))
-		$requete .= '&where=year+>+'.($depuis-1);
-	// Si c est une duree en annee 
-	if (preg_match('#^[0-9]{1,3}ans$#',$depuis))
-		$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-3);
-	if (preg_match('#^[0-9]{1,3}an$#',$depuis))
-		$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-2);
-
+	$depuis = '[(#ENV**{since}|sinon{#ENV**{depuis}})]';
+	if ($depuis!='') {
+		// Si c est une annee
+		if (preg_match('#^[0-9]{4}$#',$depuis))
+			$requete .= '&where=year+>+'.($depuis-1);
+		// Si c est une duree en annee 
+		elseif (preg_match('#^[0-9]{1,3}ans$#',$depuis))
+			$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-3);
+		elseif (preg_match('#^[0-9]{1,3}an$#',$depuis))
+			$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-2);
+		elseif (preg_match('#^[0-9]{1,3}y$#',$depuis))
+			$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-1);
+		elseif (preg_match('#^[0-9]{1,3}year$#',$depuis))
+			$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-4);
+		elseif (preg_match('#^[0-9]{1,3}years$#',$depuis))
+			$requete .= '&where=year+>+YEAR(NOW())-'.substr($depuis,0,-5);
+	}
+	
 	$doi = '[(#ENV**{doi}|urlencode)]';
 	if ($doi!='') $requete .= '&where=doi%20RLIKE%20%22'.$doi.'%22';
 		
