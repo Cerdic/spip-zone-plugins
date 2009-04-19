@@ -38,7 +38,7 @@ function acs_adm() {
   $r = acs_box(_T('acs:model').' '._T('acs:acs'),
     acs_model()
     ,
-    _DIR_PLUGIN_ACS.'img_pack/composant-24.gif'
+    _DIR_PLUGIN_ACS.'images/composant-24.gif'
   );
 /*
 echo "<br>_______________________________________________\$_POST<br>\n";
@@ -58,7 +58,7 @@ print_r(unserialize($GLOBALS['meta']['acsCadenasse']));
     $blocs_cadenas .= $editer_acs_admins('acsadmins', $grid + 1, true, false, $ids, _T('acs:admins').' '.$gr, 'acs&onglet=adm','auteur-24.gif');
   }
 
-  $r .= $editer_acs_admins('acsadmins', 0, true, false, 1, _T('acs:admins').' '._T('acs:acs'), 'acs&onglet=adm',_DIR_PLUGIN_ACS.'img_pack/cadenas-24.gif').
+  $r .= $editer_acs_admins('acsadmins', 0, true, false, 1, _T('acs:admins').' '._T('acs:acs'), 'acs&onglet=adm',_DIR_PLUGIN_ACS.'images/cadenas-24.gif').
       '<br />'.
       acs_box(_T('acs:adm').' '._T('acs:acs'),
       '<form name="acs_config" action="?exec=acs" method="post">'.
@@ -73,7 +73,7 @@ print_r(unserialize($GLOBALS['meta']['acsCadenasse']));
       '</form>'.
       $blocs_cadenas
       ,
-      _DIR_PLUGIN_ACS.'img_pack/cadenas_gris-24.gif'
+      _DIR_PLUGIN_ACS.'images/cadenas_gris-24.gif'
   );
   return $r;
 }
@@ -84,7 +84,7 @@ function acs_adm_gauche() {
     _T('acs:onglet_adm_description').'<br /><br />',
     _T('acs:onglet_adm_help'),
     _T('acs:onglet_adm_info').'<br /><br />',
-    _DIR_PLUGIN_ACS."img_pack/cadenas-24.gif",
+    _DIR_PLUGIN_ACS."images/cadenas-24.gif",
     false
   );
 }
@@ -99,8 +99,8 @@ function acs_adm_droite() {
     '<hr /><br />'.
     _T('version').' <a style="color: black">ACS '.ACS_VERSION.' ('.ACS_RELEASE.')</a>'.
     '<br /><br />'.
-    _T('acs:documentation').': <a href="http://acs.geomaticien.org" target="_new"><img src="'._DIR_PLUGIN_ACS.'img_pack/acs_32x32_help.gif" alt="?" style="vertical-align: middle"/></a>',
-    _DIR_PLUGIN_ACS."img_pack/acs_32x32.gif",
+    _T('acs:documentation').': <a href="http://acs.geomaticien.org" target="_new"><img src="'._DIR_PLUGIN_ACS.'images/acs_32x32_help.gif" alt="?" style="vertical-align: middle"/></a>',
+    _DIR_PLUGIN_ACS."images/acs_32x32.gif",
     '<br />'
     );
 }

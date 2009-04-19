@@ -19,7 +19,7 @@ function acs_pages_gauche($page) {
     _T('acs:assistant_configuration_squelettes').'<br /><br />',
     _T('acs:onglet_pages_help'),
     _T('acs:onglet_pages_info').'<br /><br />',
-    _DIR_PLUGIN_ACS."img_pack/acs_32x32.gif",
+    _DIR_PLUGIN_ACS."images/acs_32x32.gif",
     _T('acs:model_actif', array('model' => $GLOBALS['meta']['acsModel'])).
     (($GLOBALS['meta']['acsSqueletteOverACS']) ? 
       _T('acs:overriden_by', array('over' => str_replace(':', ' ', $GLOBALS['meta']['acsSqueletteOverACS'])))
@@ -32,7 +32,7 @@ function acs_pages_gauche($page) {
 }
 
 function acs_pages_droite($page) {
-  return acs_box(_T('acs:pages'), liste_pages_du_site('pages'),_DIR_PLUGIN_ACS."/img_pack/pages-24.gif" );
+  return acs_box(_T('acs:pages'), liste_pages_du_site('pages'),_DIR_PLUGIN_ACS."/images/pages-24.gif" );
 }
 
 

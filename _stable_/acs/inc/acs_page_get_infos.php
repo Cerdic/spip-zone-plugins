@@ -183,7 +183,7 @@ $("#mode_schema").each(
 
 </script>';
 
-  $r = acs_box(_T('acs:page').' '.$page, $r, _DIR_PLUGIN_ACS."img_pack/page-24.gif", false, page_modes($page, $mode_source, $detail));
+  $r = acs_box(_T('acs:page').' '.$page, $r, _DIR_PLUGIN_ACS."images/page-24.gif", false, page_modes($page, $mode_source, $detail));
   return $r;
 }
 

@@ -18,9 +18,10 @@ include_spip('lib/composant/composant_infos');
 
 function exec_composant_get_infos() {
   $c = _request('c');
+  $nic = _request('nic');
   $err = '<span class="alert" title="err_read_cache">*</span>';
 
-  $r = cache('composant_infos', 'c_'.$GLOBALS['meta']['acsModel'].'_'.$c.'_infos',array('c' => _request('c'),'nic'=>_request('nic')));
+  $r = cache('composant_infos', 'c_'.$GLOBALS['meta']['acsModel'].'_'.$c.$nic.'_infos',array('c' => $c,'nic'=>$nic));
   if(!is_array($r) || count($r) < 2)
     ajax_retour($err);
   if ($r[1] != 'err')

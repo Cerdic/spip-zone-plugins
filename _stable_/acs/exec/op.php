@@ -265,7 +265,7 @@ function op_cadre_traitement() {
 	debut_cadre_relief(null, false, "",_T('opconfig:post_traitement'));
 
 	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
-	echo "<tr><td background='img_pack/rien.gif' class='verdana2'>";
+	echo "<tr><td background='images/rien.gif' class='verdana2'>";
 	echo "<h3>"._T('opconfig:titre_minuscule')."</h3>";
 
 	$r = op_get_titre_minus();
@@ -280,7 +280,7 @@ function op_cadre_traitement() {
 	echo "<label for='statut_non'>"._T('opconfig:titre_non_minuscule')."</label></b> ";
 	echo "</td></tr>";
 
-	echo "<tr><td background='img_pack/rien.gif' class='verdana2'>";
+	echo "<tr><td background='images/rien.gif' class='verdana2'>";
 	echo "<h3>"._T('opconfig:anti_spam')."</h3>";
 
 	$r = op_get_antispam();
@@ -313,7 +313,7 @@ function op_cadre_autre() {
 
 	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
 
-	echo "<tr><td background='img_pack/rien.gif' class='verdana2'>";
+	echo "<tr><td background='images/rien.gif' class='verdana2'>";
 	echo "<h3>"._T('opconfig:upload_active')."</h3>";
 
 	$r = op_get_document();
@@ -328,7 +328,7 @@ function op_cadre_autre() {
 	echo "<label for='statut_non'>"._T('opconfig:upload_non')."</label></b> ";
 	echo "</td></tr>";
 
-	echo "<tr><td background='img_pack/rien.gif' class='verdana2'>";
+	echo "<tr><td background='images/rien.gif' class='verdana2'>";
 	echo "<h3>"._T('opconfig:tagmachine_active')."</h3>";
 
 	$r = op_get_tagmachine();
@@ -343,7 +343,7 @@ function op_cadre_autre() {
 	echo "<label for='statut_non'>"._T('opconfig:tagmachine_non')."</label></b> ";
 	echo "</td></tr>";
 
-	echo "<tr><td background='img_pack/rien.gif' class='verdana2'>";
+	echo "<tr><td background='images/rien.gif' class='verdana2'>";
 	echo "<h3>"._T('opconfig:motclefs_active')."</h3>";
 
 	$r = op_get_motclefs();
@@ -358,7 +358,7 @@ function op_cadre_autre() {
 	echo "<label for='statut_non'>"._T('opconfig:motclefs_non')."</label></b> ";
 	echo "</td></tr>";
 
-	echo "<tr><td background='img_pack/rien.gif' class='verdana2'>";
+	echo "<tr><td background='images/rien.gif' class='verdana2'>";
 	echo "<h3>"._T('opconfig:statut_select')."</h3>";
 
 	$r = op_get_statut();

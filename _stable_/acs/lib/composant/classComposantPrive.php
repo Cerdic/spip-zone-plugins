@@ -46,9 +46,9 @@ class AdminComposant {
     $this->vars = array();
     $this->cvars = array(); // Variables issues d'un autre composant
     $this->rootDir = find_in_path('composants/'.$type);// Dossier racine du composant
-    $this->icon = $this->rootDir.'/img_pack/'.$type.'_icon.gif';
+    $this->icon = $this->rootDir.'/images/'.$type.'_icon.gif';
     if (!is_readable($this->icon))
-      $this->icon = _DIR_PLUGIN_ACS."/img_pack/composant-24.gif";
+      $this->icon = _DIR_PLUGIN_ACS."/images/composant-24.gif";
     $this->optionnel = 'oui';
     $this->enable = true;
 
@@ -211,7 +211,7 @@ class AdminComposant {
       $r .= '<div class="onlinehelp" style="text-align: justify">'.$this->T('info').'</div><br />';
       
     if ($this->T('help') != $this->type.' help')
-      $r .= '<div class="onlinehelp" onclick=\'$("#help_context").slideToggle("slow");\' style="cursor:pointer;"><img src="'._DIR_PLUGIN_ACS.'img_pack/aide.gif" onmouseover=\'$("#help_context").slideToggle("slow");\' /> '._T('icone_aide_ligne').'</div><div id="help_context" class="onlinehelp pliable" style="text-align: justify">'.$this->T('help').'</div><br />';
+      $r .= '<div class="onlinehelp" onclick=\'$("#help_context").slideToggle("slow");\' style="cursor:pointer;"><img src="'._DIR_PLUGIN_ACS.'images/aide.gif" onmouseover=\'$("#help_context").slideToggle("slow");\' /> '._T('icone_aide_ligne').'</div><div id="help_context" class="onlinehelp pliable" style="text-align: justify">'.$this->T('help').'</div><br />';
 
     $n = 999;
     $r .= '<div class="onlinehelp">'.acs_plieur('plieur_pu'.$n, 'pu'.$n, '#', false, 'if (typeof done'.$n.' == \'undefined\') {AjaxSqueeze(\'?exec=composant_get_infos&c='.$this->type.($this->nic ? '&nic='.$this->nic: '').'\',\'puAjax'.$n.'\'); done'.$n.' = true;}', _T('acs:dev_infos') ).'</div><div class="pu'.$n.' pliable">';

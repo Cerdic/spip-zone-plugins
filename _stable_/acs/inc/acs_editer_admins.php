@@ -206,7 +206,7 @@ function afficher_admins_objet($type, $id, $flag_editable, $cond_les_auteurs, $s
 
     $gr = ($id == 0) ? _T('acs:acs') : acs_grid($id);
 		if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo')) {
-			$vals[] =  ajax_action_auteur('acs_editer_admins', "$id,$type,-$id_auteur", $script_edit, "id_{$type}=$id", ((($id_auteur != 1) || ($id > 0)) ? array(_T('acs:lien_retirer_admin')."&nbsp;".$gr."&nbsp;". http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'")): array() ),$arg_ajax);
+			$vals[] =  ajax_action_auteur('acs_editer_admins', "$id,$type,-$id_auteur", $script_edit, "id_{$type}=$id", ((($id_auteur != 1) || ($id > 0)) ? array(_T('acs:lien_retirer_admin')."&nbsp;".$gr."&nbsp;". http_images('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'")): array() ),$arg_ajax);
 		} else  $vals[] = "";
 		$table[] = $vals;
 	}

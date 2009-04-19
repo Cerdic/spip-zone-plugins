@@ -12,7 +12,7 @@
 include_spip('lib/composant/classComposantPrive');
 
 function composants_gauche($c) {
-	return acs_box(_T('acs:composant'), $c->gauche(), $c->icon, false, '<img src="'._DIR_PLUGIN_ACS.'/img_pack/info.png" />');
+	return acs_box(_T('acs:composant'), $c->gauche(), $c->icon, false, '<img src="'._DIR_PLUGIN_ACS.'/images/info.png" />');
 }
 
 function composants($c) {
@@ -21,7 +21,7 @@ function composants($c) {
 	if(isset($GLOBALS['meta']['acsSqueletteOverACS']) && $GLOBALS['meta']['acsSqueletteOverACS']) {
 		$in_path = find_in_path('composants/'.$c->type);
 		if (!(strpos($in_path, $GLOBALS['meta']['acsSqueletteOverACS']) === false) && (strpos($in_path, _DIR_PLUGIN_ACS.'models/') === false))
-			$over = '<img src="'._DIR_PLUGIN_ACS.'img_pack/over.gif" alt="over" title="'._T('acs:squelette').' '.$GLOBALS['meta']['acsSqueletteOverACS'].'" />';
+			$over = '<img src="'._DIR_PLUGIN_ACS.'images/over.gif" alt="over" title="'._T('acs:squelette').' '.$GLOBALS['meta']['acsSqueletteOverACS'].'" />';
 	}
 	$nom = $c->T('nom');
 	if ($nom == $c->type.' nom') $nom = ucfirst($c->type);

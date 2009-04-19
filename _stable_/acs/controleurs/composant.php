@@ -19,7 +19,7 @@ function controleurs_composant_dist($regs) {
   $crayon = new SecureCrayon("composant-$ctype-$id");
 
   $composant = new AdminComposant($ctype, $id);  
-  $icon = find_in_path('composants/'.$ctype.'/img_pack/'.$ctype.'_icon.gif');
+  $icon = find_in_path('composants/'.$ctype.'/images/'.$ctype.'_icon.gif');
   if (($crayon->left + $crayon->largeur) > ($crayon->ww / 2))
     $left = ($crayon->left < 300) ? 0 : - 300;
   else

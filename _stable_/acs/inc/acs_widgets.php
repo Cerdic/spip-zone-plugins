@@ -20,9 +20,9 @@ function liste_widgets($composants, $islink=false) {
       $r .= '<hr style="margin-bottom: 2px"/>';
     }
     else {
-      $widget_icon = find_in_path('composants/'.$widget.'/img_pack/'.$widget.'_icon.gif');
+      $widget_icon = find_in_path('composants/'.$widget.'/images/'.$widget.'_icon.gif');
       if (!file_exists($widget_icon))
-        $widget_icon = _DIR_PLUGIN_ACS.'img_pack/composant-24.gif';
+        $widget_icon = _DIR_PLUGIN_ACS.'images/composant-24.gif';
       $link = '<a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$widget.'" title="'._T('composant').'">';
       $r .= '<div id="'.$widget.'" class="'.get_widget_class($widget, 'widget').'">'.
         ($islink ? $link : '').
