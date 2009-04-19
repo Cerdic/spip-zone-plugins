@@ -175,6 +175,9 @@
 	$annee = '[(#ENV**{year}|sinon{#ENV**{annee}}|urlencode)]';
 	if ($annee!='') $requete .= '&year='.$annee;
 	
+	$titre = '[(#ENV**{title}|sinon{#ENV**{titre}}|urlencode)]';
+	if ($titre!='') $requete .= '&title='.$titre;
+	
 	$depuis = '[(#ENV**{since}|sinon{#ENV**{depuis}})]';
 	if ($depuis!='') {
 		// Si c est une annee
