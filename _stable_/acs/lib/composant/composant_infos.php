@@ -25,7 +25,7 @@ function composant_infos($c, $nic) {
       if (in_array($v, $choixComposants)) array_push($ca, substr($k, 3));
     }
   }
-  print_r($ca);
+
   if (count($ca)) {
     include_spip('lib/composant/composants_variables');
     $lc = composants_variables();
@@ -33,7 +33,6 @@ function composant_infos($c, $nic) {
     if (is_array($lc) && count($ca)) {
       foreach ($ca as $var) {
         $ci = $lc[$var]['composant']; // a debugger ($var ne marche pas si c'est une var d'instance d'un composant)
-        $r.=' ci='.$ci;
         if ($ci)
           $r .= '<a class="nompage" href="?exec=acs&onglet=composants&composant='.$ci.($nic ? '&nic='.$nic : '').'" title="'._T('acs:variable').' '.$var.'">'.ucfirst($ci).'</a>';
       }
