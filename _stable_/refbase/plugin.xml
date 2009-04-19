@@ -28,5 +28,6 @@ _ (L'installation de [cfg->http://www.spip-contrib.net/Config-cfg] n'est pas obl
 		<nom>header_prive</nom>
 		<inclure>refbase_pipeline.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version='[1.9.1;]' />
+	<necessite id="SPIP" version='[1.9.2;]' />
+	<utilise id="cfg" />
 </plugin>
