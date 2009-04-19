@@ -115,12 +115,14 @@
     					agregarMarcador(xmlItem[(#GET{id_carte_gis})],'[(#GET{id_carte_gis})]',0,17,markerManager[(#GET{id_carte_gis})]);
 					});
 					markerManager[(#GET{id_carte_gis})].refresh();
+					[(#ENV{attente}|=={1}|oui) $('#attente[(#GET{id_carte_gis})]').hide('normal'); ]
    				});
    			}
 		}
 		[(#ENV{load_map}|!={'non'}|?{' '})
 		jQuery(document).ready(function(){
 			load[(#GET{id_carte_gis})]();
+			[(#ENV{attente}|=={1}|oui) $("#map[(#GET{id_carte_gis})]").append('<div id="attente[(#GET{id_carte_gis})]" style="position: absolute; z-index: 1000; top: 0; left: 0; background-color: #FFFFFF; filter:alpha(opacity=70); -moz-opacity: 0.7; opacity: 0.7;[ width: (#ENV{largeur});][ height: (#ENV{hauteur});]"><span style="display: block; width: 100%; height: 100%; background: transparent url([(#CHEMIN{img_pack/attente.gif})]) center center no-repeat;"></span></div>'); ]
 		});]
 	//]]>
 </script>
