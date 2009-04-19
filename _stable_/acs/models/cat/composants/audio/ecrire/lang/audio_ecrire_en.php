@@ -4,7 +4,8 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Audio player',
-'description' => 'Mp3 audio player',
+'description' => 'Mp3 audio player and playlist',
+'help' => 'Playlist display list of last published mp3 documents.<br /><br />To insert mp3 player to an article, just add <b>player</b> to the usual SPIP tag for documents : &lt;docxxx|<b>player</b>&gt;.',
 
 'Btn' => 'Buttons',
 'BtnOn' => 'active',
@@ -13,5 +14,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ProgressBar' => 'Playing',
 'TrackStatus' => 'Track infos',
 
+'FondColor' => 'Background',
+'TitreColor' => 'Title background',
+'BordColor' => 'Border',
+'ArticleColor' => 'Link to article',
+'ArticleColorHover' => 'over',
+'PodcastColor' => 'Podcast link',
+'PodcastColorHover' => 'over',
+'NbMp3' => 'Nb of mp3 files',
+'SepColor' => 'Separator',
+'Mp3on' => 'Active track background',
+'Mp3hover' => 'over',
 );
 ?>

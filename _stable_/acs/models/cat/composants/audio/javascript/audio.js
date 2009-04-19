@@ -220,9 +220,9 @@ function spGUI(player,sp) {
   ctl.find(".b_next").get(0).onclick = function() { sp.next(); };
   ctl.find("li img").each(function(i) {
     jQuery(this).hover(function(){
-      jQuery(this).attr("src",acsAudio_img_pack + jQuery(this).attr("id") + '_over.png');
+      jQuery(this).attr("src",acsAudio_images + jQuery(this).attr("id") + '_over.png');
     },function(){
-      jQuery(this).attr("src",acsAudio_img_pack + jQuery(this).attr("id") + '.png');
+      jQuery(this).attr("src",acsAudio_images + jQuery(this).attr("id") + '.png');
     });
   });
   this.bw = jQuery(player).find(".progressBarBorder").width();
@@ -242,7 +242,7 @@ function spGUI(player,sp) {
 
   this.play = function(i) {
     jQuery(player).find(".track_index").html(i);
-    jQuery(player).find("..").find(".pl_l" + i).addClass("play_on");
+    jQuery(player).parent(".playlist").find(".pl_l" + i).addClass("play_on");
     jQuery(player).find(".b_play").addClass("play_on");
     if (sp.isLoaded(i))
       jQuery(player).find(".loadBar").width(self.bw);
@@ -254,10 +254,10 @@ function spGUI(player,sp) {
   this.stop = function(i) {
     jQuery(player).find(".loadBar").width(0);
     jQuery(player).find(".progressBar").width(0);
-    jQuery(player).find("..").find(".pl_l" + i).removeClass("play_on");
+    jQuery(player).parent(".playlist").find(".pl_l" + i).removeClass("play_on");
     jQuery(player).find(".b_play").removeClass("play_on");
     jQuery(player).find(".btn").find("li img").each(function(i) {
-        jQuery(this).attr("src",acsAudio_img_pack + jQuery(this).attr("id") + '.png');
+        jQuery(this).attr("src",acsAudio_images + jQuery(this).attr("id") + '.png');
     });
     jQuery(player).find(".slider").get(0).style.left = "-" + parseInt(jQuery(player).find(".slider").width() / 2) + "px";
     jQuery(player).find(".position").html('000:000');
@@ -347,3 +347,30 @@ function spGUI(player,sp) {
   };
 
 }
+
+function init_playlist() {
+  jQuery(".playlist .playliste li").each(function(i) {
+    jQuery(this).hover(function(){
+      jQuery(this).addClass("over");
+    },function(){
+      jQuery(this).removeClass("over");
+    });
+  });
+/*
+  jQuery(".playlist a.lien_pagination").each(
+    function(i, obj) {
+      obj.onclick = function(e) {
+        e.preventDefault();
+        charger_id_url(wrapUrl(obj.href, "composants/audio/inc-playlist"), "ajax_playlist", init_playlist);
+        return true;
+      }
+    }
+  );
+*/
+}
+
+jQuery(document).ready(
+  function() {
+    init_playlist();
+  }
+);
