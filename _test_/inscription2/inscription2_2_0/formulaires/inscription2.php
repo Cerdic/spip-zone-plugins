@@ -61,6 +61,16 @@ function formulaires_inscription2_charger_dist($id_auteur = NULL){
             }
 	    }		
 	}
+	
+	//Offrir aux autres plugins la possibilite de charger les donnees
+	$champs = pipeline('i2_charger_formulaire',
+		array(
+			'args' => '',
+		'data' => $champs
+		)
+	);
+	
+	
 	return $champs;
 }
 
@@ -174,7 +184,7 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 	}
 
 	//Offrir aux autres plugins la possibilite de verifier les donnees
-	$erreurs = pipeline('i2_validation_formulaire',
+	$erreurs = pipeline('i2_verifier_formulaire',
 		array(
 			'args' => array(
 			    'champs' => $valeurs
