@@ -4,7 +4,7 @@
 	// Elements constants de la requete
 	$requete .= 'show.php?client=inc-refbase-1.0&wrapResults=0&records=all';
 		$id = '#ENV{id}';
-	if ($id!='') $requete .= '&record='.$id;
+	if ($id!='') $requete .= '&records='.$id;
 	// On determine la vue (citations par defaut)
 	$vue = '[(#ENV{vue}|sinon{#CONFIG{refbase/vue}})]';
 	if ($vue=='') $vue = 'citations';
