@@ -29,6 +29,10 @@ function exec_ticket_editer () {
 		$contexte["id_auteur"] = $row["id_auteur"];
 		$contexte["id_assigne"] = $row["id_assigne"];
 		$contexte["exemple"] = htmlspecialchars($row["exemple"]);
+		$contexte["composant"] = htmlspecialchars($row["composant"]);
+		$contexte["jalon"] = htmlspecialchars($row["jalon"]);
+		$contexte["version"] = htmlspecialchars($row["version"]);
+		$contexte["projet"] = htmlspecialchars($row["projet"]);
 	}
 		
 

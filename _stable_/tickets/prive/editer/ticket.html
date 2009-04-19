@@ -40,6 +40,26 @@
 		</select>
 	</li>
 
+	[<li>
+		<label for="projet">Projet</label>
+		<select name="projet" id="projet">(#VAL{1}|select_champ{projet,#ENV**{projet}})</select>
+	</li>]
+
+	[<li>
+		<label for="composant">Composant</label>
+		<select name="composant" id=composant>(#VAL{1}|select_champ{composant,#ENV**{composant}})</select>
+	</li>]
+
+	[<li>
+		<label for="version">Version</label>
+		<select name="version" id="version">(#VAL{1}|select_champ{version,#ENV**{version}})</select>
+	</li>]
+
+	[<li>
+		<label for="jalon">Jalon</label>
+		<select name="jalon" id="jalon">(#VAL{1}|select_champ{jalon,#ENV**{jalon}})</select>
+	</li>]
+
 	<li class="editer_texte editer_parent">
 		 <label for="text_area">Description du ticket</label>
 		 <div class="explication">

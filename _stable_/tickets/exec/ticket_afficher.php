@@ -23,6 +23,10 @@ function exec_ticket_afficher () {
 		$severite = _request("severite");
 		$type = _request("type");
 		$exemple = _request("exemple");
+		$jalon = _request("jalon");
+		$composant = _request("composant");
+		$projet = _request("projet");
+		$version = _request("version");
 		
 
 		include_spip("base/abstract_sql");
@@ -31,7 +35,8 @@ function exec_ticket_afficher () {
 		
 		if ($id_ticket == "new") {
 			$id_ticket = sql_insertq("spip_tickets", 
-				array("titre" => $titre, "texte" => $texte, "severite" => $severite, "type" => $type, "exemple" => $exemple, "id_auteur" => $connect_id_auteur, "statut" => "redac", "date" => "NOW()") 
+				array("titre" => $titre, "texte" => $texte, "severite" => $severite, "type" => $type, "exemple" => $exemple, "id_auteur" => $connect_id_auteur, "statut" => "redac", "date" => "NOW()",
+				"projet" => $projet, "composant" => $composant, "version" => $version, "jalon" => $jalon) 
 				);
 		
 		} else {
@@ -44,7 +49,7 @@ function exec_ticket_afficher () {
 			if ($connect_statut == "0minirezo" OR $id_auteur == $connect_id_auteur OR $id_assigne == $connect_id_auteur) {
 		
 				sql_updateq("spip_tickets", 
-					array("titre" => $titre, "texte" => $texte, "severite" => $severite, "type" => $type, "exemple" => $exemple), 
+					array("titre" => $titre, "texte" => $texte, "severite" => $severite, "type" => $type, "exemple" => $exemple, "projet" => $projet, "composant" => $composant, "version" => $version, "jalon" => $jalon), 
 					"id_ticket = '$id_ticket'");
 			}
 		}

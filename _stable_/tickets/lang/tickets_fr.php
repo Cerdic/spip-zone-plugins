@@ -4,10 +4,15 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	'champ_composant' => 'Composant',
 	'champ_date' => 'Date',
+	'champ_exemple' => 'Exemple',
 	'champ_importance' => 'Importance',
+	'champ_jalon' => 'Jalon',
+	'champ_projet' => 'Projet',
 	'champ_titre' => 'R&eacute;sum&eacute;',
 	'champ_type' => 'Type',
+	'champ_version' => 'Version',
 	
 	'classement_asuivre' => 'Vos tickets &agrave; suivre',
 	'classement_termine' => 'Tickets termin&eacute;s',
