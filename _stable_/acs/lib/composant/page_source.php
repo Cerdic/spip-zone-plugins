@@ -130,7 +130,7 @@ function page_includes(
 function pi_REM($args) {
   if ($args[1]['mode_source']) return $args[0][0];
 
-  return '<div class="spip_params onlinehelp">'.nl2br($args[0][1]).'</div>';
+  return '<div class="spip_params onlinehelp pliable">'.nl2br($args[0][1]).'</div>';
 }
 
 function pi_MODELE($args) {
@@ -141,7 +141,7 @@ function pi_MODELE($args) {
 
   $r = indent($args[1]['indentation']).'<span class="col_MODELE" title="'._T('acs:modele').' '.strtolower(substr($m, 1)).($p ? ' '.htmlspecialchars($p) : '').'" style="color:#4f00af">'.$m;
   if ($p)
-    $r .= ' <span class="spip_params">'.indent($args[1]['indentation']).str_replace('}{', '} {', htmlspecialchars($p)).'</span>';
+    $r .= ' <span class="spip_params pliable">'.indent($args[1]['indentation']).str_replace('}{', '} {', htmlspecialchars($p)).'</span>';
   $r .= '</span>';
   return $r;
 }
@@ -168,7 +168,7 @@ function pi_INCLURE($args) {
   }
   $r = $r;
   if ($param)
-    $r .= '<div class="spip_params">'.indent($args[1]['indentation']).str_replace('}{', '} {', $param).'</div>';
+    $r .= '<div class="spip_params pliable">'.indent($args[1]['indentation']).str_replace('}{', '} {', $param).'</div>';
   return $r;
 }
 
@@ -181,7 +181,7 @@ function pi_BOUCLE($args) {
 
   $r = '<div class="col_BOUCLE" title="'._T('acs:boucle').' '.strtolower($type).' '.$param.'">'.indent($args[1]['indentation']).$boucle.' ('.$type.')';
   if ($param)
-    $r .= indent($args[1]['indentation']).' <span class="spip_params">'.indent($args[1]['indentation']).str_replace('}{', '} {', $param).'</span>';
+    $r .= indent($args[1]['indentation']).' <span class="spip_params pliable">'.indent($args[1]['indentation']).str_replace('}{', '} {', $param).'</span>';
   $r .= '</div>';
   $args[1]['indentation']++;
   return $r;

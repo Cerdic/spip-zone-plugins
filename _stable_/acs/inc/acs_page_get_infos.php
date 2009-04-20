@@ -59,7 +59,7 @@ function page_modes($page, $mode_source, $detail) {
   return $r;
 }
 
-function page_get_infos($page, $mode_source=false, $detail=false) {
+function page_get_infos($page, $mode_source=false, $detail='') {
   include_spip('inc/acs_widgets');
 
   $pg = find_in_path($page.'.html');
@@ -128,62 +128,9 @@ function page_get_infos($page, $mode_source=false, $detail=false) {
   $r .= '<td style="text-align:'.$GLOBALS['spip_lang_right'].'">'._T('acs:acsDerniereModif').' '.date('Y-m-d H:i:s', $pg_derniere_modif).'</td>';
   $r .= '</tr></table>';
 
-  $r .= '<script type="text/javascript">';// Script inséré ici AUSSI pour cas appel Ajax
-
-  if (_request('detail') <= 1) // Cache les détails au chargement en mode Ajax, sauf si detail > 1
-    $r .= '
-$(".spip_params").each(
-  function(i) {
-    $(this).hide();
-  }
-);'; // Hide pliables on load
-
-  $r .= '
-$("#plieur_spip_params").each(
-  function(i, plieur) {
-    plieur.onclick = function(e) {
-      var cap = plieur.name.substr(7); //classe à plier
-      imgp = $(".imgp_" + cap).attr("src");
-      ploff = $(".imgoff_" + cap).attr("src");
-      plon = $(".imgon_" + cap).attr("src");
-      if (imgp == ploff)
-        $(".imgp_" + cap).attr("src", plon)
-      else
-        $(".imgp_" + cap).attr("src", ploff)
-
-      $("." + cap).each(
-        function(i) {
-          $(this).slideToggle("slow");
-        }
-      );
-      return false;
-    }
-  }
-);
-
-$("#mode_source").each(
-  function(i, link) {
-    link.onclick = function(e) {
-      AjaxSqueeze("?exec=acs_page_get_infos&pg=" + link.title + detail() + "&mode=source", "page_infos");
-      document.location.href = "#page_infos";
-      return false;
-    }
-  }
-);
-
-$("#mode_schema").each(
-  function(i, link) {
-    link.onclick = function(e) {
-      AjaxSqueeze("?exec=acs_page_get_infos&pg=" + link.title + detail() + "&mode=schema", "page_infos");
-      document.location.href = "#page_infos";
-      return false;
-    }
-  }
-);
-
-</script>';
-
   $r = acs_box(_T('acs:page').' '.$page, $r, _DIR_PLUGIN_ACS."images/page-24.gif", false, page_modes($page, $mode_source, $detail));
+  if (_AJAX) // Script inséré ici AUSSI si et seulement si appel Ajax (sinon c'est déjà fait) 
+  	$r .= '<script type="text/javascript" src="'._DIR_ACS.'javascript/acs_ecrire.js"></script>';
   return $r;
 }
 

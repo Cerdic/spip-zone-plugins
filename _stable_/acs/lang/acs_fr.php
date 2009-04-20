@@ -49,14 +49,14 @@ else {
   'overriden_by' => ', surcharg&eacute; par les squelettes de <u>@over@</u>',
   'model_actif2' => '.',
 
-  'onglet_pages_info' => 'Configure le graphisme et le comportement du site. ACS ajoute à spip des mod&egrave;les de pages personnalisables par assemblage de composants eux-même personnalisables.',
-  'onglet_pages_help' => 'Dans la liste des pages, les pages soulign&eacute;es sont lues dans le dossier de squelettes en <span style="color: darkgreen; font-weight: normal; font-style: normal; text-decoration: underline">surcharge</span> d\'ACS, les pages du <span style="color: darkgreen; font-weight: bold; font-style: normal; text-decoration: none">mod&egrave;le ACS</span> sont en gras, celles des <span style="color: darkgreen; font-weight: normal; font-style: italic; text-decoration: none">plugins</span> en italique, et celles de la <span style="color: darkgreen; font-weight: normal; font-style: normal; text-decoration: none">distribution spip</span> sans d&eacute;coration.
+  'onglet_pages_info' => 'Dans la liste des pages, les pages soulign&eacute;es sont lues dans le dossier de squelettes en <span style="color: darkgreen; font-weight: normal; font-style: normal; text-decoration: underline">surcharge</span> d\'ACS, les pages du <span style="color: darkgreen; font-weight: bold; font-style: normal; text-decoration: none">mod&egrave;le ACS</span> sont en gras, celles des <span style="color: darkgreen; font-weight: normal; font-style: italic; text-decoration: none">plugins</span> en italique, et celles de la <span style="color: darkgreen; font-weight: normal; font-style: normal; text-decoration: none">distribution spip</span> sans d&eacute;coration.',
+  'onglet_pages_help' => 'ACS ajoute à spip des mod&egrave;les de pages personnalisables par assemblage de composants eux-même personnalisables.
  <br /><br />
  Le sch&eacute;ma de la page pr&eacute;sente les boucles spip et les &eacute;l&eacute;ments inclus.
  <br /><br />
- Le petit triangle noir permet d\'afficher un sch&eacute;ma plus d&eacute;taill&eacute;, avec en particulier les param&egrave;tres des inclusions et des boucles et les commentaires spip de la page.
+ Cliquer sur le petit triangle noir permet d\'afficher un sch&eacute;ma plus d&eacute;taill&eacute;, avec en particulier les param&egrave;tres des inclusions et des boucles et les commentaires spip de la page.
 <br /><br />
-Pour configurer le site, cliquez sur l\'onglet "Composants" et personnalisez les composants, en commençant par "Fond", qui d&eacute;finit les valeurs par d&eacute;faut.<br /><br />La liste des variables affiche les param&egrave;tres de tous les composants du mod&egrave;le ACS actif, utilis&eacute;s ou non.
+Pour personnaliser votre site, configurez ses composants.<br />Une nouvelle instance num&eacute;rot&eacute;e d\'un composant est cr&eacute;e la première fois que l\'on clique sur ce composant depuis la page qui le contient.<br /><br />La liste des variables affiche les param&egrave;tres de tous les composants instanciés du mod&egrave;le ACS actif, utilis&eacute;s ou non.
 ',
 
   'page' => 'Page',
