@@ -13,9 +13,9 @@
 	 **/
 
 
+	if (!defined("_ECRIRE_INC_VERSION")) return;
  	include_spip('inc/presentation');
 	include_spip('sondages_fonctions');
-	include_spip('inc/headers');
 
 
 	function exec_choix_edit() {
