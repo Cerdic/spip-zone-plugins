@@ -135,7 +135,7 @@ function spiplistes_abonnements_ajouter ($id_auteur, $id_liste) {
 		}
 		else if(
 			(($id_liste = intval($id_liste)) > 0)
-			&& !in_array($id_liste, $curr_abos)
+			&& (!$curr_abos || !in_array($id_liste, $curr_abos))
 			)
 		{
 			$sql_valeurs = " ($id_auteur,$id_liste,NOW())";
