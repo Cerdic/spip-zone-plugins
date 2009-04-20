@@ -24,16 +24,12 @@
 	function lettres_rechercher_liste_des_champs($tables) {
 		$tables['lettre']['titre']		= 8;
 		$tables['lettre']['descriptif']	= 4;
+		$tables['lettre']['chapo']		= 3;
 		$tables['lettre']['texte']		= 2;
 		$tables['lettre']['ps']			= 1;
 		$tables['abonne']['email']		= 8;
 		$tables['abonne']['nom']		= 4;
 		$tables['theme']['titre']		= 8;
-		return $tables;
-	}
-
-
-	function lettres_rechercher_liste_des_jointures($tables) {
 		return $tables;
 	}
 

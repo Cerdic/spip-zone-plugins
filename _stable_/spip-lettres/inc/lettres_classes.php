@@ -168,7 +168,7 @@
 		
 		
 		function enregistrer_maj() {
-			sql_update('spip_abonnes', array('maj' => 'NOW()'), 'id_abonne='.intval($this->id_abonne));
+			sql_updateq('spip_abonnes', array('maj' => 'NOW()'), 'id_abonne='.intval($this->id_abonne));
 		}
 		
 		
