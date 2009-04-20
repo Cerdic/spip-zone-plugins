@@ -41,6 +41,7 @@
 
 	function formulaires_sondage_traiter_dist($id_sondage) {
 		include_spip('base/abstract_sql');
+		iinclude_spip('inc/cookie');
 		$id_choix = _request('choix_'.$id_sondage);
 		sql_insertq('spip_avis', array('id_sondage' => $id_sondage, 'id_choix' => intval($id_choix)));
 		spip_setcookie('sondage_'.$id_sondage, $id_sondage, time() + 60 * 60 * 24 * 365); // un an
