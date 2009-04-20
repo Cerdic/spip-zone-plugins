@@ -48,5 +48,6 @@
    </pipeline>   
     
    <chemin dir='.' type="prive"/>    
+   <chemin dir='.' type="public"/>   
    <chemin dir='./prive' type="prive"/>
 </plugin>
