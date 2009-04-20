@@ -42,7 +42,7 @@
 		'sondages_publies' => "Sondages publiés",
 		'sondages_termines' => "Sondages terminés",
 		'tous_sondages_rubrique' => "Tous les sondages de cette rubrique",
-		'item_mots_cles_association_sondages' => "Sondages",
+		'item_mots_cles_association_sondages' => "aux sondages",
 		'logo_sondage' => "LOGO DU SONDAGE",
 
 		'Z' => 'ZZzZZzzz'
