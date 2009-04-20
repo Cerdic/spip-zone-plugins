@@ -11,15 +11,15 @@
 	<multi>
 	[fr] Ce plugin permet d'importer des r&eacute;f&eacute;rences bibliographiques contenues dans une ou 
 plusieurs bases de donn&eacute;es [refbase->http://www.refbase.net] et des les afficher simplement dans SPIP 
-&agrave; l'aide du mod&egrave;le <code><refbase></code>.
+&agrave; l'aide du mod&egrave;le &lt;refbase&gt;.
 _ Voir la [documentation->http://www.spip-contrib.net/spip.php?article3036] du plugin pour les diff&eacute;rents param&egrave;tres d'appel
 du mod&egrave;le <code>refbase</code>.
-_ Les param&egrave;tres par d&eacute;faut du plugin peut-être configur&eacute; &agrave; l'aide de [cfg->http://www.spip-contrib.net/Config-cfg] : [./?exec=cfg&cfg=refbase->./?exec=cfg&cfg=refbase]. 
+_ Les param&egrave;tres par d&eacute;faut du plugin peut-&ecirc;tre configur&eacute; &agrave; l'aide de [cfg->http://www.spip-contrib.net/Config-cfg] : [./?exec=cfg&amp;cfg=refbase->./?exec=cfg&amp;cfg=refbase]. 
 _ (L'installation de [cfg->http://www.spip-contrib.net/Config-cfg] n'est pas obligatoire mais est fortement conseill&eacute;e.)
 	[en] This plugin allows to import bibliographic references from a [refbase->http://www.refbase.net] database and to display them 
-in SPIP with a model called <code><refbase></code>.
+in SPIP with a model called &lt;refbase&gt;.
 _ Show plugin [documentation->http://www.spip-contrib.net/spip.php?article3036] for the parameters of the model.
-_ Default parameters can be configured with [cfg->http://www.spip-contrib.net/Config-cfg] : [./?exec=cfg&cfg=refbase->./?exec=cfg&cfg=refbase]. 
+_ Default parameters can be configured with [cfg->http://www.spip-contrib.net/Config-cfg] : [./?exec=cfg&amp;cfg=refbase->./?exec=cfg&amp;cfg=refbase]. 
 _ (Use of [cfg->http://www.spip-contrib.net/Config-cfg] is facultative but highly recommended.)
 	</multi>
 	</description>
