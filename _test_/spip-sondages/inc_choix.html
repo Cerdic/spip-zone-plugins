@@ -1,0 +1,12 @@
+<BOUCLE_sondage(SONDAGES) {id_sondage=#ENV{id_sondage}}>
+<ul>
+<li>
+<BOUCLE_choix(CHOIX) {id_sondage}>
+<div class="choix">
+<input type="radio" class="radio" name="choix_#ENV{id_sondage}" id="choix_#ID_CHOIX" value="#ID_CHOIX" />
+<label for="choix_#ID_CHOIX">#TITRE</label>
+</div>
+</BOUCLE_choix>
+</li>
+</ul>
+</BOUCLE_sondage>

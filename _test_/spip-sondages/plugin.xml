@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+	<nom>Plugin SPIP-Sondages</nom>
+	<auteur>[Artégo->http://www.artego.fr]</auteur>
+	<version>1.8</version>
+	<etat>test</etat>
+	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
+	<description>Gestion de sondages</description>
+	<necessite id="SPIP" version="[2.0.3;]" />
+	<necessite id="surcharges" version="[1.4;]" />
+	<install>base/sondages.php</install>
+	<lien>[Site officiel du plugin->http://www.artego.fr/-Sondages-]</lien>
+	<icon>prive/images/sondage-24.png</icon>
+	<options>sondages_options.php</options>
+	<fonctions>sondages_fonctions.php</fonctions>
+	<prefix>sondages</prefix>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/sondages.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/sondages.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/sondages.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_objets_surnoms</nom>
+		<inclure>inc/sondages_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>rechercher_liste_des_champs</nom>
+		<inclure>inc/sondages_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>rechercher_liste_des_jointures</nom>
+		<inclure>inc/sondages_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/sondages_autorisations.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>tester_rubrique_vide</nom>
+		<inclure>inc/sondages_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>calculer_rubriques</nom>
+		<inclure>inc/sondages_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>trig_propager_les_secteurs</nom>
+		<inclure>inc/sondages_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>calculer_langues_rubriques</nom>
+		<inclure>inc/sondages_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>contenu_naviguer</nom>
+		<inclure>inc/sondages_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>inc/sondages_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>libelle_association_mots</nom>
+		<inclure>inc/sondages_pipelines.php</inclure>
+	</pipeline>
+	<bouton id="sondages_tous" parent="naviguer">
+		<icone>prive/images/sondage-24.png</icone>
+		<titre>sondagesprive:sondages</titre>       
+	</bouton>
+</plugin>
