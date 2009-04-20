@@ -179,7 +179,7 @@
 						sql_alter("TABLE spip_sondages CHANGE date_debut date DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL");
 						sql_alter("TABLE spip_sondages CHANGE statut statut ENUM('en_attente','prepa','publie','termine') NOT NULL DEFAULT 'en_attente'");
 						sql_updateq('spip_sondages', array('statut' => 'prepa'), 'en_ligne="non"');
-						sql_updateq('spip_sondages', array('statut' => 'publie'), 'en_ligne="oui" AND statut=!"termine"');
+						sql_updateq('spip_sondages', array('statut' => 'publie'), 'en_ligne="oui" AND statut<>"termine"');
 						sql_alter("TABLE spip_avis DROP id_sonde");
 						sql_alter("TABLE spip_sondages DROP type");
 						sql_alter("TABLE spip_sondages DROP en_ligne");
