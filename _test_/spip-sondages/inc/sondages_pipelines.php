@@ -15,6 +15,7 @@
 
 	function sondages_declarer_tables_objets_surnoms($surnoms) {
 		$surnoms['sondage'] = 'sondages';
+		$surnoms['choix'] = 'choix';
 		return $surnoms;
 	}
 	
@@ -27,9 +28,9 @@
 
 
 	function sondages_rechercher_liste_des_jointures($tables) {
+		$tables['sondage']['choix']['titre'] = 1;
 		return $tables;
 	}
-
 
 	function sondages_tester_rubrique_vide($flux) {
 		$flux['data']+= sql_countsel('spip_sondages', 'id_rubrique='.$flux['args']['id_rubrique']);

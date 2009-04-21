@@ -55,6 +55,9 @@
 				$s.= "\n<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</span>";
 		}
 		$s.= typo($sondage->titre);
+		if (($GLOBALS['meta']['multi_rubriques'] == 'oui') OR ($GLOBALS['meta']['multi_articles'] == 'oui'))
+			if ($GLOBALS['auteur_session']['lang'] != $lang)
+				$s.= " <font size='1' color='#666666'>(".traduire_nom_langue($sondage->lang).")</font>";
 		$s.= "</a>";
 		$s.= "</div>";
 	
