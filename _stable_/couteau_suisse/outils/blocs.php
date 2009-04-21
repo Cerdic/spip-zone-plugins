@@ -15,12 +15,18 @@ function blocs_raccourcis() {
 }
 
 function blocs_callback($matches) {
-	$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $matches[3], 2);
+	list($titre, $corps) = preg_split(',(\n\n|\r\n\r\n|\r\r),', trim($matches[3]), 2);
+	// pas de corps !
+	if(!strlen($corps=trim($corps))) {
+		$corps = $titre;
+		$titre = preg_replace(',[\n\r]+,s', ' ', couper(propre($titre), 30));
+	}
 	// pas d'intertitre !
-	$titre = preg_replace(',^{{{(.*)}}}$,', '$1', trim($t[0]));
+	$titre = preg_replace(',^{{{(.*)}}}$,', '$1', trim($titre));
+	if(!strlen($titre)) $titre = '???';
 	// un resume facultatif
-	if(preg_match(',<resume>(.*)</resume>\s?(.*)$,ms', $t[1], $res))
-		{ $t[1] = $res[2]; $res = $res[1]; } else $res = '';
+	if(preg_match(',<resume>(.*)</resume>\s?(.*)$,ms', $corps, $res))
+		{ $corps = $res[2]; $res = $res[1]; } else $res = '';
 	// types de blocs : bloc|invisible|visible
 	if ($matches[1]=='visible') {
 		$h = $d = '';
@@ -35,7 +41,7 @@ function blocs_callback($matches) {
 	$b = strlen($matches[2])?" cs_bloc$matches[2]":''; 
 	return "<div class='cs_blocs$b'><"._BLOC_TITRE_H." class='blocs_titre$h blocs_click'><a href='javascript:;'>$titre</a></"._BLOC_TITRE_H.">"
 		.(strlen($res)?"<div class='blocs_resume$r'>\n$res\n</div>":"")
-		."<div class='blocs_destination$d'>\n".blocs_rempl($t[1])."\n</div></div>";
+		."<div class='blocs_destination$d'>\n".blocs_rempl($corps)."\n</div></div>";
 }
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script
