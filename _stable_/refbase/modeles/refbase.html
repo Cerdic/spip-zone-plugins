@@ -1,10 +1,14 @@
 <?php
 	// On determine l url a utiliser
-	$requete = '[(#ENV{url_refbase}|sinon{#CONFIG{refbase/url_refbase}})]';
+	$url_refbase = '[(#ENV{url_refbase}|sinon{#CONFIG{refbase/url_refbase}})]';
+	$requete = $url_refbase;
 	// Elements constants de la requete
 	$requete .= 'show.php?client=inc-refbase-1.0&wrapResults=0&records=all';
 		$id = '#ENV{id}';
 	if ($id!='') $requete .= '&records='.$id;
+	// On recupere le parametre par
+	$par = '[(#ENV**{by}|sinon{#ENV**{par}})]';
+	
 	// On determine la vue (citations par defaut)
 	$vue = '[(#ENV{vue}|sinon{#CONFIG{refbase/vue}})]';
 	$submit = '[(#ENV{submit})]';
@@ -17,6 +21,9 @@
 		break;
 		case 'Display':
 		$vue = 'details';
+		break;
+		case 'Browse':
+		$vue = 'recap';
 		break;
 	}
 	if ($vue=='') $vue = 'citations';
@@ -31,7 +38,11 @@
 		case 'details':
 		$requete .= '&submit=Display';
 		break;
+		case 'recap':
+		$requete .= '&submit=Browse';
+		break;
 	}
+	if ($vue=='recap' and $par=='') $par = 'year'; // Si vue recap, un par est obligatoire, year par defaut
 	// Doit on afficher les liens externes ?
 	$liens = '[(#ENV{liens}|sinon{#CONFIG{refbase/liens}})]';
 	$showLinks = '[(#ENV{showLinks})]';
@@ -91,7 +102,7 @@
 		break;
 	}	
 	if ($tri=='') $tri = 'annee';
-	if ($id=='')  { // Si un id, pas de tri
+	if ($id=='' AND $par=='')  { // Si un id ou si un par est passe, pas de tri via CiteOrder
 		switch ($tri) {
 			case "annee":
 			$requete .= '&citeOrder=year';
@@ -110,7 +121,7 @@
 			break;
 		}
 	}
-		
+	if ($par!='') $requete .= '&by='.urlencode($par); //si on a un par, on transmet
 	// Style des citations
 	$style = '[(#ENV{style}|sinon{#CONFIG{refbase/style}})]';
 	$citeStyle = '[(#ENV{citeStyle})]';
@@ -206,7 +217,11 @@
 	if ($id=='') {
 		// Renommage pour eviter toute interference
 		$texte = str_replace('toggleVisibilitySlide','refbase_toggleVisibilitySlide',$texte);
-		
+		// Si vue=recap, il faut rendre les liens absolus
+		if ($vue=='recap') {
+			$texte = str_replace('<a href="search.php','<a href="'.$url_refbase.'search.php',$texte);
+			$texte = str_replace('src="img/details','src="'.$url_refbase.'img/details',$texte);
+		}
 		// On affiche
 		echo '<div class="refbasecss" [style="(#ENV{css}|sinon{#CONFIG{refbase/css}})"]>';
 		echo $texte;
