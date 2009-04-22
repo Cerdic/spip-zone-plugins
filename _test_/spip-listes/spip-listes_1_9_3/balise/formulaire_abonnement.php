@@ -186,7 +186,7 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 			? "oui" 
 			: "non"
 			;
-		
+
 		$inscription_visiteur = 
 			(($type!="redac") && $inscriptions_publiques && ($acces_membres=='oui')) 
 			? "oui" 

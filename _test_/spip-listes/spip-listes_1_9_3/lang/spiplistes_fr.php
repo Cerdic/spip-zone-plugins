@@ -547,7 +547,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'inscription_redacteurs' => "L&#39;espace de r&#233;daction de ce site est ouvert aux visiteurs apr&#232;s inscription.
 	Une fois enregistr&#233;, vous pourrez consulter les articles en cours de r&#233;daction, proposer des articles
 	et participer &#224; tous les forums.  L&#39;inscription permet &#233;galement d&#39;acc&#233;der aux parties du 
-	site en acc&#233;s restreint et de recevoir les lettres d&#39;informations."
+	site en acc&#232;s restreint et de recevoir les lettres d&#39;informations."
 , 'mail_non' => 'Vous n\'&ecirc;tes pas abonn&eacute; &agrave; la lettre d\'information du site @nom_site_spip@'
 , 'messages_auto' => 'Courriers automatiques'
 , 'nouveaute_intro' => 'Bonjour, <br />Voici les nouveaut&eacute;s publi&eacute;es sur le site'
