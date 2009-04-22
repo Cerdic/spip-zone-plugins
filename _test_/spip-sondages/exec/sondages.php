@@ -110,20 +110,9 @@
 
 		if ($sondage->statut != 'termine') {
 			$onglet_proprietes.= '<div style="float: right;">';
-			$onglet_proprietes.= icone_inline(_T('sondagesprive:ajouter_choix'), generer_url_ecrire('choix_edit', 'id_sondage='.$sondage->id_sondage.'&id_choix=-1'), _DIR_PLUGIN_SONDAGES.'/prive/images/choix.png', "creer.gif", $GLOBALS['spip_lang_left']);
+			$onglet_proprietes.= icone_inline(_T('sondagesprive:ajouter_choix'), generer_url_ecrire('choix_edit', 'id_sondage='.$sondage->id_sondage.'&id_choix=-1'), _DIR_PLUGIN_SONDAGES.'/prive/images/radio.png', "creer.gif", $GLOBALS['spip_lang_left']);
 			$onglet_proprietes.= '</div>'."\n";
 		}
-
-		$onglet_proprietes.= '<script type="text/javascript">'."\n";
-		$onglet_proprietes.= 'function editer_position_choix(id, pos) {'."\n";
-		$onglet_proprietes.= '	$("#searching-choix").css("visibility","visible");'."\n";
-		$onglet_proprietes.= '	$.post("'.generer_url_action('editer_position_choix', '', true, true).'", { id_choix: id, position: pos }, function(data) { $("#choix_tous").load("'.generer_url_ecrire('choix_tous', 'id_sondage='.$sondage->id_sondage, true).'"); });';
-		$onglet_proprietes.= '}'."\n";
-		$onglet_proprietes.= 'function supprimer_choix(id) {'."\n";
-		$onglet_proprietes.= '	$("#searching-choix").css("visibility","visible");'."\n";
-		$onglet_proprietes.= '	$.post("'.generer_url_action('supprimer_choix', '', true, true).'", { id_choix: id }, function(data) { $("#choix_tous").load("'.generer_url_ecrire('choix_tous', 'id_sondage='.$sondage->id_sondage, true).'"); });';
-		$onglet_proprietes.= '}'."\n";
-		$onglet_proprietes.= '</script>'."\n";
 
 		$contexte = array('id' => $sondage->id_sondage);
 		$fond = recuperer_fond("prive/contenu/sondage", $contexte);

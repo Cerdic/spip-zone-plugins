@@ -13,6 +13,37 @@
 	 **/
 
 
+	function sondages_header_prive($texte) {
+		$texte.= '<script type="text/javascript">'."\n";
+		$texte.= '$(document).ready(function() {'."\n";
+		$texte.= '  $("a.editer_position_choix").click(function(){'."\n";
+		$texte.= '    var chaine;'."\n";
+		$texte.= '    chaine = this.href.match(/id_choix=\d*/);'."\n";
+		$texte.= '    chaine = chaine.toString();'."\n";
+		$texte.= '    var tableau = chaine.split(/=/);'."\n";
+		$texte.= '    var id = tableau[1];'."\n";
+		$texte.= '    chaine = this.href.match(/position=\d*/);'."\n";
+		$texte.= '    chaine = chaine.toString();'."\n";
+		$texte.= '    var tableau = chaine.split(/=/);'."\n";
+		$texte.= '    var pos = tableau[1];'."\n";
+		$texte.= '    $("#searching-choix").css("visibility","visible");'."\n";
+		$texte.= '    $.post("'.generer_url_action('editer_position_choix', '', true, true).'", { id_choix: id, position: pos, ajax: 1 }, function(data) { $("#choix_tous").load("'.generer_url_ecrire('choix_tous', 'id_sondage='.$sondage->id_sondage, true).'"); });';
+		$texte.= '  });'."\n";
+		$texte.= '  $("a.supprimer_choix").click(function(){'."\n";
+		$texte.= '    var chaine;'."\n";
+		$texte.= '    chaine = this.href.match(/id_choix=\d*/);'."\n";
+		$texte.= '    chaine = chaine.toString();'."\n";
+		$texte.= '    var tableau = chaine.split(/=/);'."\n";
+		$texte.= '    var id = tableau[1];'."\n";
+		$texte.= '    $("#searching-choix").css("visibility","visible");'."\n";
+		$texte.= '    $.post("'.generer_url_action('supprimer_choix', '', true, true).'", { id_choix: id, ajax: 1 }, function(data) { $("#choix_tous").load("'.generer_url_ecrire('choix_tous', 'id_sondage='.$sondage->id_sondage, true).'"); });';
+		$texte.= '  });'."\n";
+		$texte.= '});'."\n";
+		$texte.= '</script>'."\n";
+		return $texte;
+	}
+
+
 	function sondages_declarer_tables_objets_surnoms($surnoms) {
 		$surnoms['sondage'] = 'sondages';
 		$surnoms['choix'] = 'choix';

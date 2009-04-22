@@ -43,6 +43,10 @@
 		<inclure>inc/sondages_autorisations.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>inc/sondages_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>tester_rubrique_vide</nom>
 		<inclure>inc/sondages_pipelines.php</inclure>
 	</pipeline>

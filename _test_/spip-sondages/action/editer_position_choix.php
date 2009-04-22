@@ -18,22 +18,22 @@
 
 	function action_editer_position_choix() {
 
-		$id_choix	= $_POST['id_choix'];
-		$position	= $_POST['position'];
-		$retour		= $_POST['retour'];
+		$id_choix	= $_REQUEST['id_choix'];
+		$position	= $_REQUEST['position'];
+		$ajax		= $_REQUEST['ajax'];
 
 		if (autoriser('editer', 'sondages')) {
 
 			$choix = new choix($id_choix);
 			$choix->enregistrer_position($position);
-		
+
 		}
-		
-		if ($retour) {
+
+		if ($ajax != 1) {
 			header('Location: '.generer_url_ecrire('sondages', 'id_sondage='.intval($choix->id_sondage), true));
 			exit();
 		}
-		
+
 	}
 	
 

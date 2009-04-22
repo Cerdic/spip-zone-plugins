@@ -18,8 +18,8 @@
 
 	function action_supprimer_choix() {
 
-		$id_choix	= $_POST['id_choix'];
-		$retour		= $_POST['retour'];
+		$id_choix	= $_REQUEST['id_choix'];
+		$ajax		= $_REQUEST['ajax'];
 
 		if (autoriser('editer', 'sondages')) {
 
@@ -28,7 +28,7 @@
 		
 		}
 		
-		if ($retour) {
+		if (!$ajax) {
 			header('Location: '.generer_url_ecrire('sondages', 'id_sondage='.intval($choix->id_sondage), true));
 			exit();
 		}
