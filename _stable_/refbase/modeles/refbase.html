@@ -3,7 +3,7 @@
 	$url_refbase = '[(#ENV{url_refbase}|sinon{#CONFIG{refbase/url_refbase}})]';
 	$requete = $url_refbase;
 	// Elements constants de la requete
-	$requete .= 'show.php?client=inc-refbase-1.0&wrapResults=0&records=all';
+	$requete .= 'show.php?client=inc-refbase-1.0&wrapResults=0';
 		$id = '#ENV{id}';
 	if ($id!='') $requete .= '&records='.$id;
 	// On recupere le parametre par
