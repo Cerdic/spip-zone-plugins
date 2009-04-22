@@ -204,6 +204,7 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 				, $formulaire
 				, $nom_site_spip
 				, $inscription_redacteur
+				, $inscription_visiteur
 			);
 	}
 	else {
@@ -243,6 +244,7 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
  * @param $formulaire string
  * @param $nom_site_spip string
  * @param $inscription_redacteur string
+ * @param $inscription_visiteur string
  */
 function spiplistes_formulaire_abonnement (
 											$type
@@ -250,6 +252,7 @@ function spiplistes_formulaire_abonnement (
 											, $formulaire
 											, $nom_site_spip
 											, $inscription_redacteur
+											, $inscription_visiteur
 											) {
 	
 	$mail_inscription_ = trim(strtolower(_request('mail_inscription_')));
@@ -261,10 +264,8 @@ function spiplistes_formulaire_abonnement (
 	$adresse_site = $GLOBALS['meta']['adresse_site'];
 
 	$reponse_formulaire = "";
-	$email_a_envoyer = false;
-	$mode_modifier = false;
+	$email_a_envoyer = $mode_modifier = $sql_where = false;
 	$abonne = array();
-	$sql_where = false;
 	
 	// traiter d'abord si retour de mail lien cookie
 	$d = _request('d');
@@ -411,6 +412,7 @@ function spiplistes_formulaire_abonnement (
 				
 				// ajouter l'abonne
 				$pass = creer_pass_aleatoire(8, $abonne['email']);
+				$abonne['zepass'] = $pass;
 				$abonne['mdpass'] = md5($pass);
 				$abonne['htpass'] = generer_htpass($pass);
 				
@@ -418,7 +420,8 @@ function spiplistes_formulaire_abonnement (
 				
 				$abonne['statut'] = ($inscription_redacteur == "oui") ? "nouveau" : "6forum";
 	
-				$abonne['format'] = 'texte';
+				// format d'envoi par defaut pour le premier envoi de confirmation
+				$abonne['format'] = 'texte'; 
 				
 				// creation du compte ...
 				if($id_abonne = spiplistes_auteurs_auteur_insertq(
@@ -444,6 +447,8 @@ function spiplistes_formulaire_abonnement (
 				$contexte = array(
 								'titre' => $objet_email
 								, 'nouvel_inscription' => "oui"
+								, 'inscription_redacteur' => $inscription_redacteur
+								, 'inscription_visiteur' => $inscription_visiteur
 							);
 			}
 			

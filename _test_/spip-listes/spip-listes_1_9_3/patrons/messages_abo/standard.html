@@ -70,6 +70,23 @@
 	<//B_dispos>
 <//B_listes>
 
+[(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
+[(#ENV{statut}|=={nouveau}|?{' ',''})
+<p><:spiplistes:vous_etes_redact:></p>
+]
+]
+[(#ENV{inscription_redacteur}|=={oui}|?{'',' '})
+[(#ENV{inscription_visiteur}|=={oui}|?{' ',''})
+<p><:spiplistes:vous_etes_membre:></p>
+]
+]
+[(#ENV{zepass}|?{' ',''})
+<p><:login_login:>#ENV{login}<br />
+<:login_pass2:>#ENV{zepass}
+</p>
+]
+
+
 [<p>(#ENV*{texte})</p>]
 
 

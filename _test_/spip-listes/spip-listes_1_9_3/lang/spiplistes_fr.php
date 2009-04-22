@@ -52,6 +52,9 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'confirmation_inscription' => "Confirmation de votre inscription"
 , 'souhait_modifier_abo'=>'Vous souhaitez modifier votre abonnement &agrave; la lettre d\'information'
 , 'suspendre_abonnement_' => "Suspendre mon abonnement "
+, 'vous_etes_redact' => "Vous &#234;tes inscrit en tant que r&#233;dacteur."
+, 'vous_etes_membre' => "Vous &#234;tes membre abonn&#233; aux listes de diffusion de ce site.
+	Il est parfois n&#233;cessaire de s&#39;authentifier pour avoir acc&#232;s &#224; ces listes."
 
 // balise/formulaire_modif_abonnement.php
 , 'abonnement_modifie' => 'Vos modifications sont prises en compte'

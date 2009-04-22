@@ -5,11 +5,6 @@
 
 
 TO-DO:
-
-Revoir formulaire abonnement: A l'inscription, l'abonné doit recevoir ses identifiants sur mode "accepter auteur" ou/et si mode "Abonnement avec code d'accès"
-
-
-
 . revoir inventaire des abonnements. Donne parfois un chiffre negatif pour le nombre d'abonnes (probablement ancienne version. SL 1.98 ?)
 . ajouter outil de nettoyage de tables ?
 . personnaliser les abonnement (s’abonner en « html » a la liste x, « texte » a la liste y, ou « non » a la liste z). Utiliser la table spip_auteurs_liste (completer le format qui est pour l'instant toujours html).

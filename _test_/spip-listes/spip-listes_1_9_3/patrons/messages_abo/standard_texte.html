@@ -45,5 +45,22 @@
 <:spiplistes:desole_pas_de_liste:>
 <//B_dispos>
 <//B_listes>
-	
+
+[(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
+[(#ENV{statut}|=={nouveau}|?{' ',''})
+<:spiplistes:vous_etes_redact:>
+]
+]
+[(#ENV{inscription_redacteur}|=={oui}|?{'',' '})
+[(#ENV{inscription_visiteur}|=={oui}|?{' ',''})
+<:spiplistes:vous_etes_membre:>
+]
+]
+[(#ENV{zepass}|?{' ',''})
+[<:login_login:> (#ENV{login})
+]
+<:login_pass2:> #ENV{zepass}
+]
+
+
 [(#ENV*{texte})]
