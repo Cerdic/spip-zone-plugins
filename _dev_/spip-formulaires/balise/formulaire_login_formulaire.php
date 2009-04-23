@@ -4,38 +4,28 @@
 	/**
 	 * SPIP-Formulaires
 	 *
-	 * @copyright 2006-2007 Artégo
+	 * Copyright (c) 2006-2009
+	 * Agence Artégo http://www.artego.fr
+	 *  
+	 * Ce programme est un logiciel libre distribue sous licence GNU/GPLv3.
+	 * Pour plus de details voir http://www.gnu.org/licenses/gpl-3.0.html
+	 *  
 	 **/
 
 
 	include_spip('formulaires_fonctions');
-	include_spip('inc/formulaires_classes');
 
 
-	/**
-	 * balise_FORMULAIRE_LOGIN_FORMULAIRE
-	 *
-	 * @param p est un objet SPIP
-	 * @return string formulaire
-	 * @author Pierre Basson
-	 **/
 	function balise_FORMULAIRE_LOGIN_FORMULAIRE($p) {
-		return calculer_balise_dynamique($p,'FORMULAIRE_LOGIN_FORMULAIRE', array());
+		return calculer_balise_dynamique($p, 'FORMULAIRE_LOGIN_FORMULAIRE', array());
 	}
 
 
-	/**
-	 * balise_FORMULAIRE_LOGIN_FORMULAIRE_dyn
-	 *
-	 * Calcule la balise #FORMULAIRE_LOGIN_FORMULAIRE
-	 *
-	 * @return formulaire
-	 * @author Pierre Basson
-	 **/
 	function balise_FORMULAIRE_LOGIN_FORMULAIRE_dyn() {
 		global $lang;
-		$bad_pass = intval($_GET['bad_pass']);
-		$id_formulaire = intval($_GET['id_formulaire']);
+		$bad_pass		= intval($_GET['bad_pass']);
+		$cookies		= intval($_GET['cookies']);
+		$id_formulaire	= intval($_GET['id_formulaire']);
 
 		if (isset($_COOKIE['spip_formulaires_test_cookie'])) {
 			$cookie_ko = false;
@@ -52,7 +42,7 @@
 											0,
 											array(
 												'id_applicant'	=> $applicant->id_applicant,
-												'bad_pass'		=> $bad_pass,
+												'bad_pass'		=> $bad_pass ? ' ' : '',
 												'logout'		=> ' ',
 												'lang'			=> $lang
 											)
@@ -67,7 +57,7 @@
 											0,
 											array(
 												'id_applicant'	=> $applicant->id_applicant,
-												'bad_pass'		=> $bad_pass,
+												'bad_pass'		=> $bad_pass ? ' ' : '',
 												'logout'		=> ' ',
 												'lang'			=> $lang
 											)
@@ -84,7 +74,7 @@
 							array(
 								'login'			=> ' ',
 								'id_formulaire'	=> $id_formulaire,
-								'bad_pass'		=> $bad_pass,
+								'bad_pass'		=> $bad_pass ? ' ' : '',
 								'lang'			=> $lang
 							)
 						),
@@ -96,7 +86,8 @@
 							'formulaires/formulaire_login_formulaire',
 							0,
 							array(
-								'cookie_ko'	=> ' ',
+								'cookies'	=> $cookies ? ' ' : '',
+								'login'		=> ' ',
 								'lang'		=> $lang
 							)
 						),

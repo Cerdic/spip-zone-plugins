@@ -4,7 +4,12 @@
 	/**
 	 * SPIP-Formulaires
 	 *
-	 * @copyright 2006-2007 Artégo
+	 * Copyright (c) 2006-2009
+	 * Agence Artégo http://www.artego.fr
+	 *  
+	 * Ce programme est un logiciel libre distribue sous licence GNU/GPLv3.
+	 * Pour plus de details voir http://www.gnu.org/licenses/gpl-3.0.html
+	 *  
 	 **/
 
 
@@ -23,13 +28,29 @@
 	 * @author  Pierre Basson
 	 */
 	function action_login_formulaire() {
-		global $lang, $email, $mdp, $retour;
-		$id_formulaire = intval($_POST['id_formulaire']);
+
+		$lang			= $_REQUEST['lang'];
+		$email			= $_REQUEST['email'];
+		$mdp			= $_REQUEST['mdp'];
+		$id_formulaire	= $_REQUEST['id_formulaire'];
+
 		$identifier = false;
+
+		if ($id_formulaire) {
+			$redirection = generer_url_public('formulaire', 'id_formulaire='.$id_formulaire, true);
+		} else {
+			$redirection = generer_url_public($GLOBALS['meta']['spip_formulaires_fond_formulaire_espace_applicant'], ($_lang ? 'lang='.$_lang : ''), true);
+		}
+		
+		if ($email == '' or $mdp == '') {
+			$redirection.= '&bad_pass=1';
+			header('Location: ' . $redirection);
+			exit();
+		}
 
 		if (isset($_COOKIE['spip_formulaires_test_cookie'])) {
 
-			if (!empty($_COOKIE['spip_formulaires_mcrypt_iv']) AND !empty($_COOKIE['spip_formulaires_id_applicant'])) {
+			if (!empty($_COOKIE['spip_formulaires_mcrypt_iv']) and !empty($_COOKIE['spip_formulaires_id_applicant'])) {
 				$id_applicant = formulaires_identifier_applicant();
 				$applicant = new applicant($id_applicant);
 				if ($applicant->existe) {
@@ -53,22 +74,20 @@
 					$applicant = new applicant($id_applicant);
 					$applicant->poser_cookies();
 				} else { // incorrect
-					$retour = parametre_url($retour, 'bad_pass', '1');
+					$redirection.= '&bad_pass=1';
 				}
 			}
 
-			$redirection = html_entity_decode($retour);
-
 		} else {
 
-			$redirection = generer_url_public('aide', "lang=$lang", true);
+			$redirection.= '&cookies=1';
 
 		}
-
 
 		header('Location: ' . $redirection);
 		exit();
 
 	}
+
 
 ?>

@@ -4,7 +4,12 @@
 	/**
 	 * SPIP-Formulaires
 	 *
-	 * @copyright 2006-2007 Artégo
+	 * Copyright (c) 2006-2009
+	 * Agence Artégo http://www.artego.fr
+	 *  
+	 * Ce programme est un logiciel libre distribue sous licence GNU/GPLv3.
+	 * Pour plus de details voir http://www.gnu.org/licenses/gpl-3.0.html
+	 *  
 	 **/
 
 
@@ -78,6 +83,24 @@
 		 	$_lang = $GLOBALS['spip_lang'];
 		}
 		$p->code = "generer_url_action('logout_formulaire', 'lang='.$_lang, true)";
+		$p->interdire_scripts = false;
+		return $p;
+	}
+
+
+	/**
+	 * balise_URL_FORMULAIRE_ESPACE_APPLICANT
+	 *
+	 * @param  objet p contexte spip
+	 * @return  string url du formulaire espace applicant
+	 * @author  Pierre Basson
+	 */
+	function balise_URL_FORMULAIRE_ESPACE_APPLICANT($p) {
+		$_lang = champ_sql('lang', $p);
+		if (!$_lang) {
+		 	$_lang = $GLOBALS['spip_lang'];
+		}
+		$p->code = "generer_url_public(\$GLOBALS['meta']['spip_formulaires_fond_formulaire_espace_applicant'], ($_lang ? 'lang='.$_lang : ''), true)";
 		$p->interdire_scripts = false;
 		return $p;
 	}

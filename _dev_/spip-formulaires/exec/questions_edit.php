@@ -26,6 +26,11 @@
 			exit;
 		}
 
+		if (function_exists('calculer_url_lettre'))
+			$spip_lettres_actif = true;
+		else
+			$spip_lettres_actif = false;
+
 		$id_formulaire	= intval($_GET['id_formulaire']);
 		$id_bloc		= intval($_REQUEST['id_bloc']);
 		$id_question	= intval($_GET['id_question']);
@@ -153,8 +158,11 @@
 			echo '<option value="liste"'.($question->type == 'liste' ? ' selected="selected"' : '').'>'._T('formulairesprive:liste').'</option>';
 			echo '<option value="liste_multiple"'.($question->type == 'liste_multiple' ? ' selected="selected"' : '').'>'._T('formulairesprive:liste_multiple').'</option>';
 			echo '<option value="fichier"'.($question->type == 'fichier' ? ' selected="selected"' : '').'>'._T('formulairesprive:fichier').'</option>';
-			if ($question->bloc->formulaire->limiter_applicant == 'oui' or $question->bloc->formulaire->notifier_applicant == 'oui') {
-				echo '<option value="abonnements"'.($question->type == 'abonnements' ? ' selected="selected"' : '').'>'._T('formulairesprive:abonnements').'</option>';
+			if ($question->bloc->formulaire->limiter_invitation == 'oui') {
+				if ($spip_lettres_actif) {
+					if (sql_countsel('spip_themes'))
+						echo '<option value="abonnements"'.($question->type == 'abonnements' ? ' selected="selected"' : '').'>'._T('formulairesprive:abonnements').'</option>';
+				}
 				echo '<option value="nom_applicant"'.($question->type == 'nom_applicant' ? ' selected="selected"' : '').'>'._T('formulairesprive:nom_applicant').'</option>';
 			}
 			if ($question->bloc->formulaire->notifier_auteurs == 'oui') {

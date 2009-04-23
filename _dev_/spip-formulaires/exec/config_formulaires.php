@@ -2,7 +2,7 @@
 
 
 	/**
-	 * SPIP-Lettres
+	 * SPIP-Formulaires
 	 *
 	 * Copyright (c) 2006-2009
 	 * Agence Artégo http://www.artego.fr

@@ -4,7 +4,12 @@
 	/**
 	 * SPIP-Formulaires
 	 *
-	 * @copyright 2006-2007 Artégo
+	 * Copyright (c) 2006-2009
+	 * Agence Artégo http://www.artego.fr
+	 *  
+	 * Ce programme est un logiciel libre distribue sous licence GNU/GPLv3.
+	 * Pour plus de details voir http://www.gnu.org/licenses/gpl-3.0.html
+	 *  
 	 **/
 
 
@@ -488,7 +493,7 @@
 	     */
 		function recuperer_blocs() {
 			$blocs = array();
-			$res = sql_select('id_bloc', 'spip_blocs', 'id_formulaire='.intval($this->id_formulaire), 'ordre');
+			$res = sql_select('id_bloc', 'spip_blocs', 'id_formulaire='.intval($this->id_formulaire), '', 'ordre');
 			while ($arr = sql_fetch($res))
 				$blocs[] = $arr['id_bloc'];
 			return $blocs;
@@ -783,7 +788,7 @@
 		 * @return boolean resultat
 		 **/
 		function controler_reponses($question) {
-			$res = sql_select('valeur', 'spip_reponses', 'id_question='.intval($question->id_question).' AND id_application='.intval($this->id_application).' AND valeur!=""', '', '1');
+			$res = sql_select('valeur', 'spip_reponses', 'id_question='.intval($question->id_question).' AND id_application='.intval($this->id_application).' AND valeur!=""', '', '', '1');
 			if (sql_count($res) > 0) {
 				$t = sql_fetch($res);
 				$valeur = $t['valeur'];
@@ -873,7 +878,7 @@
 							$chemin_fichier	= $_FILES['q_'.$id_question]['tmp_name'];
 							$mime			= $_FILES['q_'.$id_question]['type'];
 							$taille			= $_FILES['q_'.$id_question]['size'];
-							$res = sql_select('*', 'spip_types_documents', 'mime_type="'.addslashes($mime).'" AND upload="oui" AND inclus="image"', '', '1');
+							$res = sql_select('*', 'spip_types_documents', 'mime_type="'.addslashes($mime).'" AND upload="oui" AND inclus="image"', '', '', '1');
 							if (sql_count($res) > 0) {
 								$type_document = sql_fetch($res);
 								$extension = $type_document['extension'];
@@ -1040,6 +1045,7 @@
 		 * @return void 
 		 **/
 		function synchroniser_abonnements() {
+			include_spip('lettres_fonctions');
 
 			$rubriques = array();
 
@@ -1237,7 +1243,7 @@
 			else
 				$plus = '';
 			$questions = array();
-			$res = sql_select('id_question', 'spip_questions', 'id_bloc='.intval($this->id_bloc).' '.$plus, 'ordre');
+			$res = sql_select('id_question', 'spip_questions', 'id_bloc='.intval($this->id_bloc).' '.$plus, '', 'ordre');
 			while ($arr = sql_fetch($res))
 				$questions[] = $arr['id_question'];
 			return $questions;
@@ -1252,9 +1258,9 @@
 		function recuperer_questions_de_type_abonnements($inverse = false) {
 			$questions = array();
 			if (!$inverse)
-				$res = sql_select('id_question', 'spip_questions', 'id_bloc='.intval($this->id_bloc).' AND type="abonnements"', 'ordre');
+				$res = sql_select('id_question', 'spip_questions', 'id_bloc='.intval($this->id_bloc).' AND type="abonnements"', '', 'ordre');
 			else
-				$res = sql_select('id_question', 'spip_questions', 'id_bloc='.intval($this->id_bloc).' AND type IN ("boutons_radio","cases_a_cocher","liste","liste_multiple","auteurs")', 'ordre');
+				$res = sql_select('id_question', 'spip_questions', 'id_bloc='.intval($this->id_bloc).' AND type IN ("boutons_radio","cases_a_cocher","liste","liste_multiple","auteurs")', '', 'ordre');
 			while ($arr = sql_fetch($res))
 				$questions[] = $arr['id_question'];
 			return $questions;
@@ -1269,9 +1275,9 @@
 		function recuperer_questions_de_type_auteurs($inverse = false) {
 			$questions = array();
 			if (!$inverse)
-				$res = sql_select('id_question', 'spip_questions', 'id_bloc='.intval($this->id_bloc).' AND type="auteurs"', 'ordre');
+				$res = sql_select('id_question', 'spip_questions', 'id_bloc='.intval($this->id_bloc).' AND type="auteurs"', '', 'ordre');
 			else
-				$res = sql_select('id_question', 'spip_questions', 'id_bloc='.intval($this->id_bloc).' AND type IN ("boutons_radio","cases_a_cocher","liste","liste_multiple","abonnements")', 'ordre');
+				$res = sql_select('id_question', 'spip_questions', 'id_bloc='.intval($this->id_bloc).' AND type IN ("boutons_radio","cases_a_cocher","liste","liste_multiple","abonnements")', '', 'ordre');
 			while ($arr = sql_fetch($res))
 				$questions[] = $arr['id_question'];
 			return $questions;
@@ -1290,7 +1296,7 @@
 			else
 				$plus = '';
 			$questions = array();
-			$res = sql_select('id_question', 'spip_questions', 'id_bloc='.intval($this->id_bloc).' AND obligatoire="1" '.$plus, 'ordre');
+			$res = sql_select('id_question', 'spip_questions', 'id_bloc='.intval($this->id_bloc).' AND obligatoire="1" '.$plus, '', 'ordre');
 			while ($arr = sql_fetch($res))
 				$questions[] = $arr['id_question'];
 			return $questions;
@@ -1608,7 +1614,7 @@
 	     */
 		function recuperer_choix_question() {
 			$choix_question = array();
-			$res = sql_select('id_choix_question', 'spip_choix_question', 'id_question='.intval($this->id_question), 'ordre');
+			$res = sql_select('id_choix_question', 'spip_choix_question', 'id_question='.intval($this->id_question), '', 'ordre');
 			while ($arr = sql_fetch($res))
 				$choix_question[] = $arr['id_choix_question'];
 			return $choix_question;
@@ -1640,7 +1646,7 @@
 	     */
 		function recuperer_reponses() {
 			$reponses = array();
-			$res = sql_select('id_reponse', 'spip_reponses', 'id_question='.intval($this->id_question), 'ordre');
+			$res = sql_select('id_reponse', 'spip_reponses', 'id_question='.intval($this->id_question), '', 'ordre');
 			while ($arr = sql_fetch($res))
 				$reponses[] = $arr['id_reponse'];
 			return $reponses;

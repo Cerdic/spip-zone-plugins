@@ -26,6 +26,11 @@
 			exit;
 		}
 
+		if (function_exists('calculer_url_lettre'))
+			$spip_lettres_actif = true;
+		else
+			$spip_lettres_actif = false;
+
 		$id_formulaire		= intval($_REQUEST['id_formulaire']);
 		$id_bloc			= intval($_REQUEST['id_bloc']);
 		$id_question		= intval($_REQUEST['id_question']);
@@ -138,25 +143,31 @@
 		echo '</select>';
 		echo '</li>';
 
-		if ($choix_question->question->type == 'abonnements')
+		if ($spip_lettres_actif) {
+			if ($choix_question->question->type == 'abonnements')
+				$style = "display: block;";
+			else
+				$style = "display: none;";
+			$themes = sql_select('*', 'spip_themes');
+			if (sql_count($themes) > 0) {
+			    echo '<li id="abonnements" class="obligatoire" style="'.$style.'">';
+				echo '<label for="id_rubrique">'._T('formulairesprive:choisissez_un_abonnement').'</label>';
+				echo '<select name="id_rubrique" id="id_rubrique" class="fondl">';		
+				while ($arr = sql_fetch($themes)) {
+					echo '<option value="'.$arr['id_rubrique'].'"';
+					if ($choix_question->id_rubrique == $arr['id_rubrique']) echo ' selected="selected"';
+					echo '>'.$arr['titre'].'</option>';
+				}
+				echo '</select>';
+				echo '</li>';
+			}
+		}
+
+		if ($choix_question->question->type == 'auteurs')
 			$style = "display: block;";
 		else
 			$style = "display: none;";
-		$themes = sql_select('*', 'spip_themes');
-		if (sql_count($themes) > 0) {
-		    echo '<li id="abonnements" class="obligatoire" style="'.$style.'">';
-			echo '<label for="id_rubrique">'._T('formulairesprive:choisissez_un_abonnement').'</label>';
-			echo '<select name="id_rubrique" id="id_rubrique" class="fondl">';		
-			while ($arr = sql_fetch($themes)) {
-				echo '<option value="'.$arr['id_rubrique'].'"';
-				if ($choix_question->id_rubrique == $arr['id_rubrique']) echo ' selected="selected"';
-				echo '>'.$arr['titre'].'</option>';
-			}
-			echo '</select>';
-			echo '</li>';
-		}
-
-		$auteurs = sql_select('A.*', 'spip_auteurs AS A INNER JOIN spip_auteurs_formulaires AS AF ON AF.id_auteur=A.id_auteur', 'A.email!="" AND AF.id_formulaire='.intval($choix_question->question->bloc->formulaire->id_formulaire), 'A.nom');
+		$auteurs = sql_select('A.*', 'spip_auteurs AS A INNER JOIN spip_auteurs_formulaires AS AF ON AF.id_auteur=A.id_auteur', 'A.email!="" AND AF.id_formulaire='.intval($choix_question->question->bloc->formulaire->id_formulaire), '', 'A.email');
 		if (sql_count($auteurs) > 0) {
 		    echo '<li id="auteurs" class="obligatoire" style="'.$style.'">';
 			echo '<label for="id_auteur">'._T('formulairesprive:choisissez_un_auteur').'</label>';
@@ -164,7 +175,7 @@
 			while ($arr = sql_fetch($auteurs)) {
 				echo '<option value="'.$arr['id_auteur'].'"';
 				if ($choix_question->id_auteur == $arr['id_auteur']) echo ' selected="selected"';
-				echo '>'.$arr['nom'].' - '.$arr['email'].'</option>';
+				echo '>'.$arr['email'].'</option>';
 			}
 			echo '</select>';
 			echo '</li>';
@@ -190,7 +201,8 @@
 		echo '		// Onchange of the main select box: call a generic function to display the related options in the dynamic select box'."\n";
 		echo '		sel1.onchange = function() {'."\n";
 		echo '			refreshDynamicSelectOptions(sel1, sel2, clonedOptions);'."\n";
-		echo '			toggle_abonnements(sel1.value);'."\n";
+		if ($spip_lettres_actif)
+			echo '			toggle_abonnements(sel1.value);'."\n";
 		echo '			toggle_auteurs(sel1.value);'."\n";
 		echo '		};'."\n";
 		echo '	}'."\n";
@@ -215,18 +227,20 @@
 		echo 'dynamicSelect("select-1", "select-2");'."\n";
 		echo '</script>'."\n";
 
-		echo '<script language="javascript">'."\n";
-		echo 'function toggle_abonnements(valeur) {'."\n";
-		$questions_de_type_abonnements = $choix_question->question->bloc->recuperer_questions_de_type_abonnements();
-		foreach ($questions_de_type_abonnements as $id_question) {
-			echo '	if (valeur == '.$id_question.') $("#abonnements").css("display","block");'."\n";
+		if ($spip_lettres_actif) {
+			echo '<script language="javascript">'."\n";
+			echo 'function toggle_abonnements(valeur) {'."\n";
+			$questions_de_type_abonnements = $choix_question->question->bloc->recuperer_questions_de_type_abonnements();
+			foreach ($questions_de_type_abonnements as $id_question) {
+				echo '	if (valeur == '.$id_question.') $("#abonnements").css("display","block");'."\n";
+			}
+			$questions_de_type_autres = $choix_question->question->bloc->recuperer_questions_de_type_abonnements(true);
+			foreach ($questions_de_type_autres as $id_question) {
+				echo '	if (valeur == '.$id_question.') $("#abonnements").css("display","none");'."\n";
+			}
+			echo '}'."\n";
+			echo '</script>'."\n";
 		}
-		$questions_de_type_autres = $choix_question->question->bloc->recuperer_questions_de_type_abonnements(true);
-		foreach ($questions_de_type_autres as $id_question) {
-			echo '	if (valeur == '.$id_question.') $("#abonnements").css("display","none");'."\n";
-		}
-		echo '}'."\n";
-		echo '</script>'."\n";
 
 		echo '<script language="javascript">'."\n";
 		echo 'function toggle_auteurs(valeur) {'."\n";

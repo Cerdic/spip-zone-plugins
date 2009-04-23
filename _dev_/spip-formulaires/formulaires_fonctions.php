@@ -4,7 +4,12 @@
 	/**
 	 * SPIP-Formulaires
 	 *
-	 * @copyright 2006-2007 Artégo
+	 * Copyright (c) 2006-2009
+	 * Agence Artégo http://www.artego.fr
+	 *  
+	 * Ce programme est un logiciel libre distribue sous licence GNU/GPLv3.
+	 * Pour plus de details voir http://www.gnu.org/licenses/gpl-3.0.html
+	 *  
 	 **/
 
 
@@ -72,10 +77,8 @@
 	}
 
 
-	function generer_url_formulaire($id_formulaire, $preview=false) {
-		if ($preview)
-			$var_mode = '&var_mode=preview';
-		return generer_url_public('formulaire', 'id_formulaire='.$id_formulaire.$var_mode);
+	function generer_url_formulaire($id_formulaire) {
+		return generer_url_public('formulaire', 'id_formulaire='.$id_formulaire);
 	}
 
 

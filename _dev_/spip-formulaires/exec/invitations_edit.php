@@ -4,77 +4,73 @@
 	/**
 	 * SPIP-Formulaires
 	 *
-	 * @copyright 2006-2007 Artégo
+	 * Copyright (c) 2006-2009
+	 * Agence Artégo http://www.artego.fr
+	 *  
+	 * Ce programme est un logiciel libre distribue sous licence GNU/GPLv3.
+	 * Pour plus de details voir http://www.gnu.org/licenses/gpl-3.0.html
+	 *  
 	 **/
 
 
+	if (!defined("_ECRIRE_INC_VERSION")) return;
  	include_spip('inc/presentation');
-	include_spip('inc/barre');
-	include_spip('inc/headers');
 	include_spip('formulaires_fonctions');
 
 
-	/**
-	 * exec_invitations_edit
-	 *
-	 * @author Pierre Basson
-	 **/
 	function exec_invitations_edit() {
 	 	
-		if ($GLOBALS['connect_statut'] != "0minirezo") {
-			echo _T('avis_non_acces_page');
-			echo fin_page();
+		if (!autoriser('editer', 'formulaires')) {
+			include_spip('inc/minipres');
+			echo minipres();
 			exit;
 		}
+
+		if (function_exists('calculer_url_lettre'))
+			$spip_lettres_actif = true;
+		else
+			$spip_lettres_actif = false;
 
 		$id_formulaire	= intval($_GET['id_formulaire']);
 		$formulaire		= new formulaire($id_formulaire);
 		
 		if (!empty($_POST['enregistrer'])) {
 			$email = addslashes($_POST['email']);
-			
 			if (ereg(_REGEXP_EMAIL, $email)) {
 				$invitation = new invitation($id_formulaire, $email);
-
-				$rubriques = _request('rubriques');
-				if (empty($rubriques)) $rubriques = array();
-
-				$abonne = new abonne(0, $email);
-
-				if ($abonne->existe) {
-
-					$abonnements = $abonne->recuperer_abonnements();
-					$abonnements_disponibles = $formulaire->recuperer_abonnements_disponibles();
-					$abonnements = array_intersect($abonnements_disponibles, $abonnements);
-
-					$desabonnements = array_diff($abonnements, $rubriques);
-					if (!empty($desabonnements)) { // on désinscrit s'il y a des différences
-						foreach ($desabonnements as $id_rubrique) {
-							$abonne->valider_desabonnement($id_rubrique);
+				if ($spip_lettres_actif) { // si SPIP-Lettres
+					include_spip('lettres_fonctions');
+					$rubriques = $_POST['rubriques'];
+					if (empty($rubriques)) $rubriques = array();
+					$abonne = new abonne(0, $email);
+					if ($abonne->existe) {
+						$abonnements = $abonne->recuperer_abonnements();
+						$abonnements_disponibles = $formulaire->recuperer_abonnements_disponibles();
+						$abonnements = array_intersect($abonnements_disponibles, $abonnements);
+						$desabonnements = array_diff($abonnements, $rubriques);
+						if (!empty($desabonnements)) { // on désinscrit s'il y a des différences
+							foreach ($desabonnements as $id_rubrique) {
+								$abonne->valider_desabonnement($id_rubrique);
+							}
+						}
+						$abonnements = array_diff($rubriques, $abonnements);
+						if (!empty($abonnements)) {
+							foreach ($abonnements as $id_rubrique) {
+								$abonne->enregistrer_abonnement($id_rubrique);
+								$abonne->valider_abonnement($id_rubrique);
+							}
+						}
+						$abonne->supprimer_si_zero_abonnement();
+					} else {
+						if (!empty($rubriques)) {
+							$abonne->enregistrer();
+							foreach ($rubriques as $id_rubrique) {
+								$abonne->enregistrer_abonnement($id_rubrique);
+								$abonne->valider_abonnement($id_rubrique);
+							}
 						}
 					}
-					$abonnements = array_diff($rubriques, $abonnements);
-					if (!empty($abonnements)) {
-						foreach ($abonnements as $id_rubrique) {
-							$abonne->enregistrer_abonnement($id_rubrique);
-							$abonne->valider_abonnement($id_rubrique);
-						}
-					}
-
-					$abonne->supprimer_si_zero_abonnement();
-
-				} else {
-
-					if (!empty($rubriques)) {
-						$abonne->enregistrer();
-						foreach ($rubriques as $id_rubrique) {
-							$abonne->enregistrer_abonnement($id_rubrique);
-							$abonne->valider_abonnement($id_rubrique);
-						}
-					}
-
 				}
-
 				$url = generer_url_ecrire('formulaires', 'id_formulaire='.$id_formulaire, true);
 				header('Location: ' . $url);
 				exit();
@@ -83,60 +79,68 @@
 			}
 		}
 
-		$new		= true;
-		$email		= '';
-		$onfocus	= " onfocus=\"if(!antifocus){formulaire.value='';antifocus=true;}\"";
-
 		pipeline('exec_init',array('args'=>array('exec'=>'invitations_edit','id_formulaire'=>$id_formulaire),'data'=>''));
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('formulairesprive:formulaires'), "naviguer", "formulaires_tous");
 
-	 	debut_gauche();
+		echo debut_gauche("",true);
 
-	 	debut_droite();
-		echo "<br />";
-		debut_cadre_formulaire();
-		echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
-		echo "<tr width='100%'>";
-		echo "<td>";
-		icone(_T('icone_retour'), generer_url_ecrire("formulaires", "id_formulaire=".$id_formulaire), '../'._DIR_PLUGIN_FORMULAIRES.'/img_pack/invitation.png', "rien.gif");
+		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'invitations_edit','id_formulaire'=>$id_formulaire),'data'=>''));
 
-		$formulaire = new formulaire($id_formulaire);
-		
-		echo "</td>";
-		echo "<td>". http_img_pack('rien.gif', " ", "width='10'") . "</td>\n";
-		echo "<td width='100%'>";
-		gros_titre(_T('formulairesprive:creer_invitation').' "'.propre($formulaire->titre).'"');
-		echo "</td></tr></table>";
+		echo creer_colonne_droite("",true);
+		echo debut_droite("",true);
+		echo pipeline('affiche_droite',array('args'=>array('exec'=>'invitations_edit','id_formulaire'=>$id_formulaire),'data'=>''));
 
-		echo "<P><HR></P>";
+		echo '<div class="cadre-formulaire-editer">';
+		echo '<div class="entete-formulaire">';
+		echo icone_inline(_T('icone_retour'), generer_url_ecrire('formulaires', 'id_formulaire='.$id_formulaire), _DIR_PLUGIN_FORMULAIRES.'/prive/images/formulaire-24.png', "rien.gif", $GLOBALS['spip_lang_left']);
+		echo _T('formulairesprive:creer_invitation');
+		echo '<h1>'.$formulaire->titre.'</h1>';
+		echo '</div>';
 
-		echo generer_url_post_ecrire("invitations_edit", "id_formulaire=".$id_formulaire, 'formulaire');
+		echo '<div class="formulaire_spip formulaire_editer">';
+		echo '<form method="post" action="'.generer_url_ecrire('invitations_edit', "id_formulaire=".$id_formulaire).'">';
+		echo '<div>';
 
-		echo "<P><B>"._T('formulairesprive:email_de_l_invite')."</B>";
-		echo "<BR><INPUT TYPE='text' NAME='email' style='font-weight: bold; font-size: 13px;' CLASS='formo' VALUE='' SIZE='40'>";
+	  	echo '<ul>';
 
-		$abonnements_disponibles = $formulaire->recuperer_abonnements_disponibles();
-		$themes = spip_query('SELECT * FROM spip_themes WHERE id_rubrique IN ('.implode(',', $abonnements_disponibles).') ORDER BY titre');
-		if (spip_num_rows($themes) > 0) {
-			echo "<P><B>"._T('formulairesprive:abonner_a')."</B><br />";
-			while ($arr = spip_fetch_array($themes)) {
-				echo '<input type="checkbox" name="rubriques[]" value="'.$arr['id_rubrique'].'" /> '.$arr['titre'].'<br/>';
+	    echo '<li class="obligatoire">';
+		echo '<label for="email">'._T('formulairesprive:email_de_l_invite').'</label>';
+		echo '<input type="text" class="text" name="email" id="email" value="" />';
+		echo '</li>';
+
+		if ($spip_lettres_actif) {
+			$abonnements_disponibles = $formulaire->recuperer_abonnements_disponibles();
+			if (count($abonnements_disponibles)) {
+				$themes = sql_select('*', 'spip_themes', 'id_rubrique IN ('.implode(',', $abonnements_disponibles).')', '', 'titre');
+				if (sql_count($themes) > 0) {
+				    echo '<li class="obligatoire">';
+					echo '<label>'._T('formulairesprive:abonner_a').'</label>';
+					echo '<div class="choix">';
+					echo '<input id="rub-'.$arr['id_rubrique'].'" type="checkbox" class="checkbox" value="'.$arr['id_rubrique'].'" name="rubriques[]" />';
+					echo '<label for="rub-'.$arr['id_rubrique'].'">'.$arr['titre'].'</label>';
+					echo '</div>';
+					echo '</li>';
+				}
 			}
-			echo "</P>\n";
 		}
 
-		echo "<DIV ALIGN='right'>";
-		echo "<INPUT CLASS='fondo' TYPE='submit' NAME='enregistrer' VALUE='"._T('formulairesprive:enregistrer')."'>";
-		echo "</DIV></FORM>";	 	
-	 		 	
-	 	fin_cadre_formulaire();
+		echo '</ul>';
+
+	  	echo '<p class="boutons"><input type="submit" class="submit" name="enregistrer" value="'._T('formulairesprive:enregistrer').'" /></p>';
+
+		echo '</div>';
+
+		echo '</form>';
+
+		echo '</div>';
+		echo '</div>';
 	 	
 		echo fin_gauche();
 
 		echo fin_page();
-	 	
+
 	}
 	
 	

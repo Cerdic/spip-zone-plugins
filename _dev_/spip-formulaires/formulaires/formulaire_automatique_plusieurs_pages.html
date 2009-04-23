@@ -101,6 +101,7 @@
  ---------------------------
 ]
 <BOUCLE_q_boutons_radio(QUESTIONS) {id_question} {type=boutons_radio}>
+<B_c_boutons_radio>
 <li class="[(#OBLIGATOIRE|?{'obligatoire'})][ (#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|?{'erreur'})]">
 <label>#TITRE</label>
 [<span class="explication">(#DESCRIPTIF)</span>]
@@ -112,6 +113,7 @@
 </BOUCLE_c_boutons_radio>
 [<span class="erreur_message">(#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|formulaires_afficher_erreur{#CONTROLE})</span>]
 </li>
+</B_c_boutons_radio>
 </BOUCLE_q_boutons_radio>
 
 [
@@ -120,6 +122,7 @@
  ---------------------------
 ]
 <BOUCLE_q_cases_a_cocher(QUESTIONS) {id_question} {type=cases_a_cocher}>
+<B_c_cases_a_cocher>
 <li class="[(#OBLIGATOIRE|?{'obligatoire'})][ (#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|?{'erreur'})]">
 <label>#TITRE</label>
 [<span class="explication">(#DESCRIPTIF)</span>]
@@ -131,6 +134,7 @@
 </BOUCLE_c_cases_a_cocher>
 [<span class="erreur_message">(#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|formulaires_afficher_erreur{#CONTROLE})</span>]
 </li>
+</B_c_cases_a_cocher>
 </BOUCLE_q_cases_a_cocher>
 
 [
@@ -139,6 +143,7 @@
  ---------------------------
 ]
 <BOUCLE_q_liste(QUESTIONS) {id_question} {type=liste}>
+<B_c_liste>
 <li class="[(#OBLIGATOIRE|?{'obligatoire'})][ (#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|?{'erreur'})]">
 <label for="q_#ID_QUESTION">#TITRE</label>
 [<span class="explication">(#DESCRIPTIF)</span>]
@@ -149,6 +154,7 @@
 </select>
 [<span class="erreur_message">(#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|formulaires_afficher_erreur{#CONTROLE})</span>]
 </li>
+</B_c_liste>
 </BOUCLE_q_liste>
 
 [
@@ -157,6 +163,7 @@
  ---------------------------
 ]
 <BOUCLE_q_liste_multiple(QUESTIONS) {id_question} {type=liste_multiple}>
+<B_c_liste_multiple>
 <li class="[(#OBLIGATOIRE|?{'obligatoire'})][ (#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|?{'erreur'})]">
 <label for="q_#ID_QUESTION">#TITRE</label>
 [<span class="explication">(#DESCRIPTIF)</span>]
@@ -167,6 +174,7 @@
 </select>
 [<span class="erreur_message">(#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|formulaires_afficher_erreur{#CONTROLE})</span>]
 </li>
+</B_c_liste_multiple>
 </BOUCLE_q_liste_multiple>
 
 [
@@ -175,6 +183,7 @@
  ---------------------------
 ]
 <BOUCLE_q_abonnements(QUESTIONS) {id_question} {type=abonnements}>
+<B_c_abonnements>
 <li class="[(#OBLIGATOIRE|?{'obligatoire'})][ (#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|?{'erreur'})]">
 <label>#TITRE</label>
 [<span class="explication">(#DESCRIPTIF)</span>]
@@ -186,6 +195,7 @@
 </BOUCLE_c_abonnements>
 [<span class="erreur_message">(#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|formulaires_afficher_erreur{#CONTROLE})</span>]
 </li>
+</B_c_abonnements>
 </BOUCLE_q_abonnements>
 
 [
@@ -209,6 +219,7 @@
  ---------------------------
 ]
 <BOUCLE_q_auteurs(QUESTIONS) {id_question} {type=auteurs}>
+<B_c_auteurs>
 <li class="[(#OBLIGATOIRE|?{'obligatoire'})][ (#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|?{'erreur'})]">
 <label>#TITRE</label>
 [<span class="explication">(#DESCRIPTIF)</span>]
@@ -219,6 +230,7 @@
 </select>
 [<span class="erreur_message">(#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|formulaires_afficher_erreur{#CONTROLE})</span>]
 </li>
+</B_c_auteurs>
 </BOUCLE_q_auteurs>
 
 </BOUCLE_questions>
@@ -232,6 +244,10 @@
 </ul>
 
 <p class="boutons"><input type="submit" class="submit" name="bouton_valider" value="<:formulairespublic:valider:>" /></p>
+
+<BOUCLE_deconnexion(FORMULAIRES) {id_formulaire} {limiter_invitation=oui}>
+[<p class="boutons"><a href="(#URL_ACTION_LOGOUT_FORMULAIRE)"><:formulairespublic:deconnexion:></a></p>]
+</BOUCLE_deconnexion>
 
 <input type="hidden" name="action" value="valider_formulaire" />
 <input type="hidden" name="id_formulaire" value="#ID_FORMULAIRE" />

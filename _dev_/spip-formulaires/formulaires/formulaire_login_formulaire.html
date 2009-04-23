@@ -1,34 +1,44 @@
 [(#ENV*{login}|?{' ',''})
-<form action="#URL_ACTION_LOGIN_FORMULAIRE" method="post">
+
+[<p class="reponse_formulaire reponse_formulaire_erreur"><:formulairespublic:session_ou_cookies:></p>(#ENV*{cookies})]
+[<p class="reponse_formulaire reponse_formulaire_erreur"><:formulairespublic:bad_pass:></p>(#ENV*{bad_pass})]
+
+<div class="formulaire_spip formulaire_automatique formulaire_login_formulaire">
+<form name="formulaire_login_formulaire" action="#URL_ACTION_LOGIN_FORMULAIRE" method="post">
+<div>
+
+<ul>
+
+<li class="fieldset">
 
 <fieldset>
+<h3 class="legend"><:formulairespublic:login_formulaire:></h3>
+<ul>
 
-<legend><:formulairespublic:login_formulaire:></legend>
+<li class="obligatoire">
+<label for="email"><:formulairespublic:email:></label>
+<input type="text" class="text" name="email" id="email" value="" size="30" />
+</li>
 
-[<p><:formulairespublic:vous_devez_etre_identifies:></p>(#ENV*{bad_pass}|=={1}|?{'',' '})]
-[<p class="erreur"><:formulairespublic:bad_pass:></p>(#ENV*{bad_pass}|=={1}|?{' ',''})]
+<li class="obligatoire">
+<label for="mdp"><:formulairespublic:mdp:></label>
+<input type="password" class="text" name="mdp" id="mdp" value="" size="30" />
+</li>
 
-<dl class="obligatoire">
-<dt><label for="email"><:formulairespublic:email:>&nbsp;:</label></dt>
-<dd><input id="email" type="text" name="email" value="" /></dd>
-</dl>
-
-<dl class="obligatoire">
-<dt><label for="mdp"><:formulairespublic:mdp:>&nbsp;:</label></dt>
-<dd><input id="mdp" type="password" name="mdp" value="" /></dd>
-</dl>
-
+</ul>
 </fieldset>
 
-<ul class="boutons">
-<li><input type="submit" name="bouton_valider" value="<:formulairespublic:bouton_valider:>" /></li>
-<li><a href="#URL_FORMULAIRE_OUBLI_FORMULAIRE"><:formulairespublic:oubli_mdp:></a></li>
+</li>
+
 </ul>
 
-<p class="champs_caches">
-<input type="hidden" name="id_formulaire" value="#ENV{id_formulaire}" />
-<input type="hidden" name="retour" value="#SELF" />
-</p>
+</div>
+
+<p class="boutons"><input type="submit" class="submit" name="bouton_valider" value="<:formulairespublic:valider:>" /></p>
+<p class="boutons"><a href="#URL_FORMULAIRE_OUBLI_FORMULAIRE"><:formulairespublic:oubli_mdp:></a></p>
+
+[<input type="hidden" name="id_formulaire" value="(#ENV{id_formulaire})" />]
 
 </form>
-][<p class="erreur"><:formulairespublic:cookie_ko:>(#ENV*{cookie_ko}|?{' ',''})</p>]
+</div>
+]
