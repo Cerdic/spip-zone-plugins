@@ -76,7 +76,7 @@
 		echo '<option value="'.$i++.'" ';
 		if ($choix->ordre == 0) echo 'selected';
 		echo '>'._T('sondagesprive:en_premier').'</option>';
-		$resultat_autres_choix = sql_select('*', 'spip_choix', 'id_sondage='.intval($choix->id_sondage).' AND id_choix!='.intval($choix->id_choix), 'ordre');
+		$resultat_autres_choix = sql_select('*', 'spip_choix', 'id_sondage='.intval($choix->id_sondage).' AND id_choix!='.intval($choix->id_choix), '', 'ordre');
 		while ($arr = sql_fetch($resultat_autres_choix)) {
 			echo '<option value="'.$i.'" ';
 			if ($choix->ordre == $i) echo 'selected';
