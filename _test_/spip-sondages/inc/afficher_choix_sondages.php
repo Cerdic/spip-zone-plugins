@@ -51,7 +51,7 @@
 			if ($choix->ordre == 0) {
 				$s = '&nbsp;';
 			} else {
-				$s = '<a class="editer_position_choix" href="'.generer_url_action('editer_position_choix', 'id_choix='.intval($choix->id_choix).'&position='.intval($choix->ordre-1), true, true).'">';
+				$s = '<a class="editer_position_choix" href="'.generer_url_action('editer_position_choix', 'id_sondage='.intval($choix->id_sondage).'&id_choix='.intval($choix->id_choix).'&position='.intval($choix->ordre-1), true, true).'">';
 				$s.= http_img_pack(_DIR_PLUGIN_SONDAGES.'/prive/images/monter-16.png', 'monter', '');
 				$s.= '</a>';
 			}
@@ -60,15 +60,13 @@
 			if ($choix->ordre == $sondage->calculer_nb_choix()-1) {
 				$s = '&nbsp;';
 			} else {
-#				$s = '<a href="javascript:editer_position_choix('.intval($choix->id_choix).','.intval($choix->ordre+1).');">';
-				$s = '<a class="editer_position_choix" href="'.generer_url_action('editer_position_choix', 'id_choix='.intval($choix->id_choix).'&position='.intval($choix->ordre+1), true, true).'">';
+				$s = '<a class="editer_position_choix" href="'.generer_url_action('editer_position_choix', 'id_sondage='.intval($choix->id_sondage).'&id_choix='.intval($choix->id_choix).'&position='.intval($choix->ordre+1), true, true).'">';
 				$s.= http_img_pack(_DIR_PLUGIN_SONDAGES.'/prive/images/descendre-16.png', 'descendre', '');
 				$s.= '</a>';
 			}
 			$vals[] = $s;
 
-#			$s = '<a href="javascript:supprimer_choix('.intval($choix->id_choix).');">';
-			$s = '<a class="supprimer_choix" href="'.generer_url_action('supprimer_choix', 'id_choix='.intval($choix->id_choix), true, true).'">';
+			$s = '<a class="supprimer_choix" href="'.generer_url_action('supprimer_choix', 'id_sondage='.intval($choix->id_sondage).'&id_choix='.intval($choix->id_choix), true, true).'">';
 			$s.= http_img_pack(_DIR_PLUGIN_SONDAGES.'/prive/images/poubelle.png', 'poubelle', '');
 			$s.= '</a>';
 			$vals[] = $s;
