@@ -1,0 +1,35 @@
+#CACHE{0}
+[(#ENV*{login}|?{' ',''})
+<form action="#URL_ACTION_LOGIN_FORMULAIRE" method="post">
+
+<fieldset>
+
+<legend><:formulairespublic:login_formulaire:></legend>
+
+[<p><:formulairespublic:vous_devez_etre_identifies:></p>(#ENV*{bad_pass}|=={1}|?{'',' '})]
+[<p class="erreur"><:formulairespublic:bad_pass:></p>(#ENV*{bad_pass}|=={1}|?{' ',''})]
+
+<dl class="obligatoire">
+<dt><label for="email"><:formulairespublic:email:>&nbsp;:</label></dt>
+<dd><input id="email" type="text" name="email" value="" /></dd>
+</dl>
+
+<dl class="obligatoire">
+<dt><label for="mdp"><:formulairespublic:mdp:>&nbsp;:</label></dt>
+<dd><input id="mdp" type="password" name="mdp" value="" /></dd>
+</dl>
+
+</fieldset>
+
+<ul class="boutons">
+<li><input type="submit" name="bouton_valider" value="<:formulairespublic:bouton_valider:>" /></li>
+<li><a href="#URL_FORMULAIRE_OUBLI_FORMULAIRE"><:formulairespublic:oubli_mdp:></a></li>
+</ul>
+
+<p class="champs_caches">
+<input type="hidden" name="id_formulaire" value="#ENV{id_formulaire}" />
+<input type="hidden" name="retour" value="#SELF" />
+</p>
+
+</form>
+][<p class="erreur"><:formulairespublic:cookie_ko:>(#ENV*{cookie_ko}|?{' ',''})</p>]

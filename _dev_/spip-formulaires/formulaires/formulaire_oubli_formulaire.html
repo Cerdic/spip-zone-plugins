@@ -1,0 +1,21 @@
+#CACHE{0}
+<form name="formulaire_oubli_formulaire" action="#SELF" method="post">
+
+[<p class="succes">(#ENV*{succes}|?{<:formulairespublic:mdp_envoye:>,''})</p>
+
+]<fieldset>
+
+<legend><:formulairespublic:oubli_mdp:></legend>
+
+<dl[(#ENV*{email_inexistant}|?{' class="erreur"',' class="obligatoire"'})]>
+<dt><label for="email">[(#ENV*{email_inexistant}|?{<:formulairespublic:email_inexistant:>,<:formulairespublic:email:>})] :</label></dt>
+<dd><input id="email" type="text" name="email" value="[(#ENV{email})]" /></dd>
+</dl>
+
+</fieldset>
+
+<ul class="boutons">
+<li><input type="submit" name="bouton_valider" value="<:formulairespublic:valider:>" /></li>
+</ul>
+
+</form>

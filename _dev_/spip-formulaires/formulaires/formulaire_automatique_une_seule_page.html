@@ -1,0 +1,231 @@
+<BOUCLE_formulaire(FORMULAIRES) {id_formulaire=#ENV{id_formulaire}}>
+<a class="spacer" name="formulaire">&nbsp;</a>
+
+<div class="formulaire_spip formulaire_automatique formulaire_automatique_une_seule_page">
+<form name="formulaire_automatique_une_seule_page" action="#SELF" method="post" enctype="multipart/form-data">
+<div>
+
+<ul>
+
+[
+ +++++++++++++++++++++++++++++++++++++++++++
+	(#REM)		Blocs = fieldsets
+ +++++++++++++++++++++++++++++++++++++++++++
+]
+<BOUCLE_blocs(BLOCS) {id_formulaire}>
+<li class="fieldset">
+<fieldset>
+<h3 class="legend">#TITRE</h3>
+[<p class="explication">(#TEXTE)</p>]
+<ul>
+
+[
+ +++++++++++++++++++++++++++++++++++++++++++
+	(#REM)		Questions
+ +++++++++++++++++++++++++++++++++++++++++++
+]
+<BOUCLE_questions(QUESTIONS) {id_bloc}>
+
+[
+ ---------------------------
+	(#REM)	champ texte
+ ---------------------------
+]
+<BOUCLE_q_champ_texte(QUESTIONS) {id_question} {type=champ_texte}>
+<li class="[(#OBLIGATOIRE|?{'obligatoire'})][ (#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|?{'erreur'})]">
+<label for="q_#ID_QUESTION">#TITRE</label>
+[<p class="explication">(#DESCRIPTIF)</p>]
+<input type="text" class="text" name="q_#ID_QUESTION" id="q_#ID_QUESTION" value="#REPONSE" size="30" />
+[<span class="erreur_message">(#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|formulaires_afficher_erreur{#CONTROLE})</span>]
+</li>
+</BOUCLE_q_champ_texte>
+
+[
+ ---------------------------
+	(#REM)	email applicant
+ ---------------------------
+]
+<BOUCLE_q_email_applicant(QUESTIONS) {id_question} {type=email_applicant}>
+<li class="[(#OBLIGATOIRE|?{'obligatoire'})][ (#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|?{'erreur'})]">
+<label for="q_#ID_QUESTION">#TITRE</label>
+[<p class="explication">(#DESCRIPTIF)</p>]
+<input type="text" class="text" name="q_#ID_QUESTION" id="q_#ID_QUESTION" value="[(#REPONSE|sinon{#EMAIL_APPLICANT})]" size="30" />
+[<span class="erreur_message">(#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|formulaires_afficher_erreur{#CONTROLE})</span>]
+</li>
+</BOUCLE_q_email_applicant>
+
+[
+ ---------------------------
+	(#REM)	nom applicant
+ ---------------------------
+]
+<BOUCLE_q_nom_applicant(QUESTIONS) {id_question} {type=nom_applicant}>
+<li class="[(#OBLIGATOIRE|?{'obligatoire'})][ (#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|?{'erreur'})]">
+<label for="q_#ID_QUESTION">#TITRE</label>
+[<p class="explication">(#DESCRIPTIF)</p>]
+<input type="text" class="text" name="q_#ID_QUESTION" id="q_#ID_QUESTION" value="[(#REPONSE|sinon{#NOM_APPLICANT})]" size="30" />
+[<span class="erreur_message">(#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|formulaires_afficher_erreur{#CONTROLE})</span>]
+</li>
+</BOUCLE_q_nom_applicant>
+
+[
+ ---------------------------
+	(#REM)	zone texte
+ ---------------------------
+]
+<BOUCLE_q_zone_texte(QUESTIONS) {id_question} {type=zone_texte}>
+<li class="[(#OBLIGATOIRE|?{'obligatoire'})][ (#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|?{'erreur'})]">
+<label for="q_#ID_QUESTION">#TITRE</label>
+[<p class="explication">(#DESCRIPTIF)</p>]
+<textarea name="q_#ID_QUESTION" id="q_#ID_QUESTION" rows="12" cols="60">#REPONSE</textarea>
+[<span class="erreur_message">(#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|formulaires_afficher_erreur{#CONTROLE})</span>]
+</li>
+</BOUCLE_q_zone_texte>
+
+[
+ ---------------------------
+	(#REM)	boutons radio
+ ---------------------------
+]
+<BOUCLE_q_boutons_radio(QUESTIONS) {id_question} {type=boutons_radio}>
+<li class="[(#OBLIGATOIRE|?{'obligatoire'})][ (#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|?{'erreur'})]">
+<label>#TITRE</label>
+[<p class="explication">(#DESCRIPTIF)</p>]
+<BOUCLE_c_boutons_radio(CHOIX_QUESTION) {id_question}>
+<div class="choix">
+<input id="c_q_#ID_CHOIX_QUESTION" type="radio" class="radio" value="#ID_CHOIX_QUESTION" name="q_#ID_QUESTION" [(#ID_CHOIX_QUESTION|in_any{#REPONSES**, ''}|?{'checked="checked" '})]/>
+<label for="c_q_#ID_CHOIX_QUESTION">#TITRE</label>
+</div>
+</BOUCLE_c_boutons_radio>
+[<span class="erreur_message">(#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|formulaires_afficher_erreur{#CONTROLE})</span>]
+</li>
+</BOUCLE_q_boutons_radio>
+
+[
+ ---------------------------
+	(#REM)	cases à cocher
+ ---------------------------
+]
+<BOUCLE_q_cases_a_cocher(QUESTIONS) {id_question} {type=cases_a_cocher}>
+<li class="[(#OBLIGATOIRE|?{'obligatoire'})][ (#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|?{'erreur'})]">
+<label>#TITRE</label>
+[<p class="explication">(#DESCRIPTIF)</p>]
+<BOUCLE_c_cases_a_cocher(CHOIX_QUESTION) {id_question}>
+<div class="choix">
+<input id="c_q_#ID_CHOIX_QUESTION" type="checkbox" class="checkbox" value="#ID_CHOIX_QUESTION" name="q_[(#ID_QUESTION)][]" [(#ID_CHOIX_QUESTION|in_any{#REPONSES**, ''}|?{'checked="checked" '})]/>
+<label for="c_q_#ID_CHOIX_QUESTION">#TITRE</label>
+</div>
+</BOUCLE_c_cases_a_cocher>
+[<span class="erreur_message">(#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|formulaires_afficher_erreur{#CONTROLE})</span>]
+</li>
+</BOUCLE_q_cases_a_cocher>
+
+[
+ ---------------------------
+	(#REM)	liste à choix
+ ---------------------------
+]
+<BOUCLE_q_liste(QUESTIONS) {id_question} {type=liste}>
+<li class="[(#OBLIGATOIRE|?{'obligatoire'})][ (#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|?{'erreur'})]">
+<label for="q_#ID_QUESTION">#TITRE</label>
+[<p class="explication">(#DESCRIPTIF)</p>]
+<select class="select" id="q_#ID_QUESTION" name="q_#ID_QUESTION">
+<BOUCLE_c_liste(CHOIX_QUESTION) {id_question}>
+<option value="#ID_CHOIX_QUESTION"[(#REPONSE|=={#ID_CHOIX_QUESTION}|?{' selected="selected"',''})]>#TITRE</option>
+</BOUCLE_c_liste>
+</select>
+[<span class="erreur_message">(#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|formulaires_afficher_erreur{#CONTROLE})</span>]
+</li>
+</BOUCLE_q_liste>
+
+[
+ ---------------------------
+	(#REM)	liste à choix multiples
+ ---------------------------
+]
+<BOUCLE_q_liste_multiple(QUESTIONS) {id_question} {type=liste_multiple}>
+<li class="[(#OBLIGATOIRE|?{'obligatoire'})][ (#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|?{'erreur'})]">
+<label for="q_#ID_QUESTION">#TITRE</label>
+[<p class="explication">(#DESCRIPTIF)</p>]
+<select class="select" id="q_#ID_QUESTION" name="q_[(#ID_QUESTION)][]" size="4" multiple="multiple">
+<BOUCLE_c_liste_multiple(CHOIX_QUESTION) {id_question}>
+<option value="#ID_CHOIX_QUESTION"[(#REPONSE|=={#ID_CHOIX_QUESTION}|?{' selected="selected"',''})]>#TITRE</option>
+</BOUCLE_c_liste_multiple>
+</select>
+[<span class="erreur_message">(#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|formulaires_afficher_erreur{#CONTROLE})</span>]
+</li>
+</BOUCLE_q_liste_multiple>
+
+[
+ ---------------------------
+	(#REM)	abonnements
+ ---------------------------
+]
+<BOUCLE_q_abonnements(QUESTIONS) {id_question} {type=abonnements}>
+<li class="[(#OBLIGATOIRE|?{'obligatoire'})][ (#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|?{'erreur'})]">
+<label>#TITRE</label>
+[<p class="explication">(#DESCRIPTIF)</p>]
+<BOUCLE_c_abonnements(CHOIX_QUESTION) {id_question}>
+<div class="choix">
+<input id="c_q_#ID_CHOIX_QUESTION" type="checkbox" class="checkbox" value="#ID_CHOIX_QUESTION" name="q_[(#ID_QUESTION)][]" [(#ID_CHOIX_QUESTION|in_any{#REPONSES**, ''}|?{'checked="checked" ',[(#ID_RUBRIQUE|in_any{#ABONNEMENTS**, ''}|?{'checked="checked" ',''})]})]/>
+<label for="c_q_#ID_CHOIX_QUESTION">#TITRE</label>
+</div>
+</BOUCLE_c_abonnements>
+[<span class="erreur_message">(#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|formulaires_afficher_erreur{#CONTROLE})</span>]
+</li>
+</BOUCLE_q_abonnements>
+
+[
+ ---------------------------
+	(#REM)	fichier
+ ---------------------------
+]
+<BOUCLE_q_fichier(QUESTIONS) {id_question} {type=fichier}>
+<li class="[(#OBLIGATOIRE|?{'obligatoire'})][ (#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|?{'erreur'})]">
+<label for="q_#ID_QUESTION">#TITRE</label>
+[<p class="explication">(#DESCRIPTIF)</p>]
+<input type="file" class="file" name="q_#ID_QUESTION" id="q_#ID_QUESTION" />
+[<span class="erreur_message">(#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|formulaires_afficher_erreur{'fichier'})</span>]
+<BOUCLE_r_fichier(REPONSES) {id_question} {id_application=#ENV{id_application}}><BOUCLE_documents(DOCUMENTS) {id_document=#VALEUR}><p><a href="#URL_DOCUMENT">#TITRE</a> (<:formulairespublic:supprimer:> <input type="checkbox" class="case_a_cocher" name="s_#ID_REPONSE" value="#ID_DOCUMENT" />)</p></BOUCLE_documents></BOUCLE_r_fichier>
+</li>
+</BOUCLE_q_fichier>
+
+[
+ ---------------------------
+	(#REM)	auteurs
+ ---------------------------
+]
+<BOUCLE_q_auteurs(QUESTIONS) {id_question} {type=auteurs}>
+<li class="[(#OBLIGATOIRE|?{'obligatoire'})][ (#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|?{'erreur'})]">
+<label>#TITRE</label>
+[<p class="explication">(#DESCRIPTIF)</p>]
+<select class="select" id="q_#ID_QUESTION" name="q_#ID_QUESTION">
+<BOUCLE_c_auteurs(CHOIX_QUESTION) {id_question}>
+<option value="#ID_CHOIX_QUESTION"[(#REPONSE|=={#ID_CHOIX_QUESTION}|?{' selected="selected"',''})]>#TITRE</option>
+</BOUCLE_c_auteurs>
+</select>
+[<span class="erreur_message">(#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|formulaires_afficher_erreur{#CONTROLE})</span>]
+</li>
+</BOUCLE_q_auteurs>
+
+</BOUCLE_questions>
+
+</ul>
+</fieldset>
+</li>
+
+</BOUCLE_blocs>
+
+</ul>
+
+<p class="boutons"><input type="submit" class="submit" name="bouton_valider" value="<:formulairespublic:valider:>" /></p>
+
+<input type="hidden" name="action" value="valider_formulaire" />
+<input type="hidden" name="id_formulaire" value="#ID_FORMULAIRE" />
+<input type="hidden" name="lang" value="#LANG" />
+
+</div>
+</form>
+</div>
+
+</BOUCLE_formulaire>

@@ -1,0 +1,159 @@
+<BOUCLE_nouvelle_application(NOTIFICATIONS) {notification=nouvelle_application}>
+#INCLURE{fond=inc_haut_notification}
+
+<BOUCLE_formulaire(FORMULAIRES) {id_formulaire=#ENV{id_formulaire}}>
+
+<h2>#TITRE</h2>
+
+[<p>(#_nouvelle_application:DESCRIPTIF) : #TITRE</p>
+]
+
+<form>
+
+<BOUCLE_blocs(BLOCS) {id_formulaire}>
+<fieldset>
+<legend>#TITRE</legend>
+[<p>(#DESCRIPTIF)</p>]
+[
+ +++++++++++++++++++++++++++++++++++++++++++
+	(#REM)		Questions
+ +++++++++++++++++++++++++++++++++++++++++++
+]
+<BOUCLE_questions(QUESTIONS) {id_bloc}>
+
+[
+ ---------------------------
+	(#REM)	champ texte
+ ---------------------------
+]
+<BOUCLE_q_champ_texte(QUESTIONS) {id_question} {type==champ_texte|email_applicant|nom_applicant}>
+<p>#TITRE : [<a href="mailto:#REPONSE">#REPONSE</a>(#CONTROLE|=={'email'}|?{' '})][#REPONSE(#CONTROLE|=={'email'}|?{'',' '})]</p>
+</BOUCLE_q_champ_texte>
+
+[
+ ---------------------------
+	(#REM)	zone texte
+ ---------------------------
+]
+<BOUCLE_q_zone_texte(QUESTIONS) {id_question} {type=zone_texte}>
+<p>#TITRE : [(#REPONSE|propre)]</p>
+</BOUCLE_q_zone_texte>
+
+[
+ ---------------------------
+	(#REM)	boutons radio
+ ---------------------------
+]
+<BOUCLE_q_boutons_radio(QUESTIONS) {id_question} {type=boutons_radio}>
+<fieldset>
+<legend>#TITRE</legend>
+[<p>(#DESCRIPTIF)</p>]
+<ul>
+<BOUCLE_c_boutons_radio(CHOIX_QUESTION) {id_question}>
+[<li>(#ID_CHOIX_QUESTION|in_any{#REPONSES**, ''}|?{#TITRE,''})]</li>
+</BOUCLE_c_boutons_radio>
+</ul>
+</fieldset>
+</BOUCLE_q_boutons_radio>
+
+[
+ ---------------------------
+	(#REM)	cases à cocher
+ ---------------------------
+]
+<BOUCLE_q_cases_a_cocher(QUESTIONS) {id_question} {type=cases_a_cocher}>
+<fieldset>
+<legend>#TITRE</legend>
+[<p>(#DESCRIPTIF)</p>]
+<ul>
+<BOUCLE_c_cases_a_cocher(CHOIX_QUESTION) {id_question}>
+[<li>(#ID_CHOIX_QUESTION|in_any{#REPONSES**, ''}|?{#TITRE,''})]</li>
+</BOUCLE_c_cases_a_cocher>
+</ul>
+</fieldset>
+</BOUCLE_q_cases_a_cocher>
+
+[
+ ---------------------------
+	(#REM)	liste à choix
+ ---------------------------
+]
+<BOUCLE_q_liste(QUESTIONS) {id_question} {type=liste}>
+<p>#TITRE : 
+<BOUCLE_c_liste(CHOIX_QUESTION) {id_question}>
+[(#REPONSE|=={#ID_CHOIX_QUESTION}|?{#TITRE,''})<br />]
+</BOUCLE_c_liste>
+</p>
+</BOUCLE_q_liste>
+
+[
+ ---------------------------
+	(#REM)	liste à choix multiples
+ ---------------------------
+]
+<BOUCLE_q_liste_multiple(QUESTIONS) {id_question} {type=liste_multiple}>
+<fieldset>
+<legend>#TITRE</legend>
+[<p>(#DESCRIPTIF)</p>]
+<ul>
+<BOUCLE_c_liste_multiple(CHOIX_QUESTION) {id_question}>
+[<li>#TITRE</li>(#ID_CHOIX_QUESTION|in_any{#REPONSES**, ''}|?{' ',''})]
+</BOUCLE_c_liste_multiple>
+</ul>
+</fieldset>
+</BOUCLE_q_liste_multiple>
+
+[
+ ---------------------------
+	(#REM)	abonnements
+ ---------------------------
+]
+<BOUCLE_q_abonnements(QUESTIONS) {id_question} {type=abonnements}>
+<fieldset>
+<legend>#TITRE</legend>
+[<p>(#DESCRIPTIF)</p>]
+<ul>
+<BOUCLE_c_abonnements(CHOIX_QUESTION) {id_question}>
+[<li>#TITRE</li>(#ID_CHOIX_QUESTION|in_any{#REPONSES**, ''}|?{' ',''})]
+</BOUCLE_c_abonnements>
+</ul>
+</fieldset>
+</BOUCLE_q_abonnements>
+
+[
+ ---------------------------
+	(#REM)	fichier
+ ---------------------------
+]
+<BOUCLE_q_fichier(QUESTIONS) {id_question} {type=fichier}><B_r_fichier>
+<fieldset>
+<legend>#_q_fichier:TITRE</legend>
+[<p>(#_q_fichier:DESCRIPTIF)</p>]
+<ul>
+<BOUCLE_r_fichier(REPONSES) {id_question} {id_application=#ENV{id_application}}><BOUCLE_documents(DOCUMENTS) {id_document=#VALEUR}><li><a href="[(#URL_DOCUMENT|url_absolue)]">#TITRE</a></li></BOUCLE_documents></BOUCLE_r_fichier>
+</ul>
+</fieldset>
+</B_r_fichier></BOUCLE_q_fichier>
+
+[
+ ---------------------------
+	(#REM)	auteurs
+ ---------------------------
+]
+<BOUCLE_q_auteurs(QUESTIONS) {id_question} {type=auteurs}>
+<p>#TITRE : 
+<BOUCLE_c_auteurs(CHOIX_QUESTION) {id_question}>
+[(#REPONSE|=={#ID_CHOIX_QUESTION}|?{#TITRE,''})<br />]
+</BOUCLE_c_auteurs>
+</p>
+</BOUCLE_q_auteurs>
+
+</BOUCLE_questions>
+</fieldset>
+</BOUCLE_blocs>
+</form>
+
+</BOUCLE_formulaire>
+
+#INCLURE{fond=inc_bas_notification}
+</BOUCLE_nouvelle_application>
