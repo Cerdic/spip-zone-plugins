@@ -1,0 +1,35 @@
+<fieldset class="info_newsletters">
+    <legend>
+        <:i2_spiplistes:newsletter:>
+    </legend>
+	<ul>
+	<li>
+    <p class="explications"><:i2_spiplistes:exp_newsletter:></p>
+
+    [(#REM) Tableau des listes en selection par défaut]
+    #SET{selected,#CONFIG{inscription2/newsletters,#ARRAY}}
+	
+    <B_listes>
+    <ul>
+	<BOUCLE_listes(LISTES){statut IN '.*pub.*','liste'}>
+	    <li class="editer_newsletters">
+			<label for="newsletters-#ID_LISTE">
+            #TITRE
+            </label>
+            <input type="checkbox" class="checkbox" name="newsletters[]" id="newsletters-#ID_LISTE" value="#ID_LISTE" 
+            [(#CONFIG{inscription2/optout}|=={on}|?{
+				[(#ID_LISTE|in_any{#ENV{listes}}|?{' ',''}) checked="checked"]
+				,
+				[(#ID_LISTE|in_array{#GET{selected}}|?{' ',''}) checked="checked"]
+            })] 
+			/>
+            [<p class='erreur'>(#ENV**{erreurs}|table_valeur{newsletters-#ID_LISTE})</p>]
+        </li>
+    </BOUCLE_listes>
+    </ul>     
+    </B_listes>rien <//B_listes>     
+     
+    [<p class='formulaire_erreur'>(#ENV**{erreurs}|table_valeur{newsletters})</p>]
+	</li>
+	</ul>
+</fieldset> 
