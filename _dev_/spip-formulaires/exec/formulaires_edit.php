@@ -40,6 +40,7 @@
 			}
 			$formulaire->notifier_auteurs = $_POST['notifier_auteurs'];
 			$formulaire->texte = $_POST['texte'];
+			$formulaire->merci = $_POST['merci'];
 			if ($GLOBALS['meta']['spip_formulaires_utiliser_ps'] == 'oui')
 				$formulaire->ps = $_POST['ps'];
 
@@ -180,6 +181,11 @@
 		echo '<label for="text_area">'._T('formulairesprive:texte').'</label>';
 		echo '<div class="explication">'._T('texte_enrichir_mise_a_jour').'<em>'.aide('raccourcis').'</em></div>';
 		echo '<textarea name="texte" id="text_area" rows="20" cols="40" class="barre_inserer" '.$GLOBALS['browser_caret'].'>'.$formulaire->texte.'</textarea>';
+		echo '</li>';
+
+	    echo '<li class="editer_texte">';
+		echo '<label for="merci">'._T('formulairesprive:message_apres_validation').'</label>';
+		echo '<textarea name="merci" id="text_area" rows="10" cols="40">'.$formulaire->merci.'</textarea>';
 		echo '</li>';
 
 		if ($GLOBALS['meta']['spip_formulaires_utiliser_ps'] == 'oui') {

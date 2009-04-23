@@ -45,6 +45,7 @@
 		$interface['tables_jointures']['spip_questions'][] = 'reponses';
 		$interface['tables_jointures']['spip_reponses'][] = 'questions';
 		$interface['tables_jointures']['spip_reponses'][] = 'applications';
+		$interface['table_des_traitements']['MERCI'][] = 'propre(%s)';
 		$interface['table_des_traitements']['URL_FORMULAIRE'][] = 'quote_amp(%s)';
 		$interface['table_des_traitements']['URL_BLOC'][] = 'quote_amp(%s)';
 		$interface['table_des_traitements']['URL_ACTION_LOGIN_FORMULAIRE'][] = 'quote_amp(%s)';
@@ -112,6 +113,7 @@
 							"descriptif"			=> "TEXT NOT NULL",
 							"chapo"					=> "TEXT NOT NULL",
 							"texte"					=> "TEXT NOT NULL",
+							"merci"					=> "TEXT NOT NULL",
 							"ps"					=> "MEDIUMTEXT NOT NULL",
 							"lang"					=> "VARCHAR(10) NOT NULL",
 							"langue_choisie"		=> "VARCHAR(3) DEFAULT 'non'",
@@ -215,6 +217,9 @@
 					ecrire_meta('spip_formulaires_version', $version_plugin);
 					ecrire_meta('spip_formulaires_fond_formulaire_espace_applicant', 'espace_applicant');
 					ecrire_meta('spip_formulaires_fond_formulaire_oubli_formulaire', 'oubli_formulaire');
+					ecrire_meta('spip_formulaires_utiliser_descriptif', 'oui');
+					ecrire_meta('spip_formulaires_utiliser_chapo', 'oui');
+					ecrire_meta('spip_formulaires_utiliser_ps', 'oui');
 					ecrire_metas();
 				} else {
 					$version_base = $GLOBALS['meta']['spip_formulaires_version'];
@@ -344,6 +349,7 @@
 						ecrire_metas();		
 					}
 					if ($version_base < 2.0) {
+						maj_tables('spip_formulaires');
 						sql_alter("TABLE spip_applicants ADD INDEX email (email)");
 						sql_alter("TABLE spip_applicants DROP idx");
 						sql_alter("TABLE spip_choix_question DROP idx");
@@ -357,6 +363,9 @@
 						sql_updateq('spip_formulaires', array('statut' => 'en_ligne'), 'en_ligne="oui"');
 						sql_alter("TABLE spip_formulaires CHANGE statut statut ENUM('hors_ligne','en_ligne') NOT NULL DEFAULT 'hors_ligne'");
 						sql_alter("TABLE spip_formulaires DROP en_ligne");
+						ecrire_meta('spip_formulaires_utiliser_descriptif', 'oui');
+						ecrire_meta('spip_formulaires_utiliser_chapo', 'oui');
+						ecrire_meta('spip_formulaires_utiliser_ps', 'oui');
 						ecrire_meta('spip_formulaires_version', $version_base = 2.0);
 						ecrire_metas();		
 					}
@@ -364,6 +373,9 @@
 				break;
 			case 'uninstall':
 				include_spip('base/abstract_sql');
+				include_spip('inc/cookie');
+				spip_setcookie('spip_formulaires_mcrypt_iv');
+				spip_setcookie('spip_formulaires_id_applicant');
 				sql_drop_table('spip_applicants', true);
 				sql_drop_table('spip_applications', true);
 				sql_drop_table('spip_blocs', true);
@@ -377,6 +389,9 @@
 				effacer_meta('spip_formulaires_version');
 				effacer_meta('spip_formulaires_fond_formulaire_espace_applicant');
 				effacer_meta('spip_formulaires_fond_formulaire_oubli_formulaire');
+				effacer_meta('spip_formulaires_utiliser_descriptif');
+				effacer_meta('spip_formulaires_utiliser_chapo');
+				effacer_meta('spip_formulaires_utiliser_ps');
 				$res = sql_select('id_formulaire', 'spip_formulaires');
 				while ($arr = sql_fetch($res)) {
 					$formulaire = new formulaire($arr['id_formulaire']);

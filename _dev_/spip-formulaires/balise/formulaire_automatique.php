@@ -140,31 +140,17 @@
 			}
 			if ($id_bloc == -1) {
 				$application->changer_statut('valide'); // envoi les notifications etc...
-				if ($application->formulaire->notifier_auteurs == 'oui') {
-					return	inclure_balise_dynamique(
+				return	inclure_balise_dynamique(
+							array(
+								'formulaires/formulaire_automatique_merci',
+								0,
 								array(
-									'formulaires/formulaire_automatique_message_envoye',
-									0,
-									array(
-										'id_application'	=> $application->id_application,
-										'lang'				=> $lang
-									)
-								),
-								false
-							);
-				} else {
-					return	inclure_balise_dynamique(
-								array(
-									'formulaires/formulaire_automatique_resultats',
-									0,
-									array(
-										'id_application'	=> $application->id_application,
-										'lang'				=> $lang
-									)
-								),
-								false
-							);
-				}
+									'id_application'	=> $application->id_application,
+									'lang'				=> $lang
+								)
+							),
+							false
+						);
 			} else {
 				return	inclure_balise_dynamique(
 							array(
@@ -241,7 +227,7 @@
 				$application->changer_statut('valide'); // envoi les notifications etc...
 				return	inclure_balise_dynamique(
 							array(
-								'formulaires/formulaire_automatique_resultats',
+								'formulaires/formulaire_automatique_merci',
 								0,
 								array(
 									'id_application'	=> $application->id_application,

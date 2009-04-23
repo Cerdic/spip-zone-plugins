@@ -144,7 +144,9 @@
 		var $id_rubrique;
 		var $titre;
 		var $descriptif;
+		var $chapo;
 		var $texte;
+		var $merci;
 		var $ps;
 		var $lang;
 		var $date;
@@ -186,6 +188,7 @@
 				$this->descriptif			= $formulaire['descriptif'];
 				$this->chapo				= $formulaire['chapo'];
 				$this->texte				= $formulaire['texte'];
+				$this->merci				= $formulaire['merci'];
 				$this->ps					= $formulaire['ps'];
 				$this->lang					= $formulaire['lang'];
 				$this->date					= $formulaire['date'];
@@ -219,6 +222,7 @@
 																			'notifier_applicant' => $this->notifier_applicant,
 																			'notifier_auteurs' => $this->notifier_auteurs,
 																			'texte' => $this->texte,
+																			'merci' => $this->merci,
 																			'ps' => $this->ps,
 																			'date' => "NOW()",
 																			'maj' => "NOW()"
@@ -239,6 +243,7 @@
 													'notifier_applicant' => $this->notifier_applicant,
 													'notifier_auteurs' => $this->notifier_auteurs,
 													'texte' => $this->texte,
+													'merci' => $this->merci,
 													'ps' => $this->ps,
 													'maj' => 'NOW()'
 													), 'id_formulaire='.intval($this->id_formulaire));
@@ -297,6 +302,7 @@
 					$copie->descriptif			= $this->descriptif;
 					$copie->chapo				= $this->chapo;
 					$copie->texte				= $this->texte;
+					$copie->merci				= $this->merci;
 					$copie->ps					= $this->ps;
 					$copie->lang				= $this->lang;
 					$copie->date				= $this->date;
@@ -1363,7 +1369,7 @@
 			$titre = '<a href="'.generer_url_ecrire("blocs_edit","id_formulaire=".$this->formulaire->id_formulaire."&id_bloc=".$this->id_bloc).'" style="color: #000;">'.typo($this->titre).'</a>';
 			$titre.= '<div style="position: absolute; top: 4px; right: 3px;">'.$monter.$descendre.$espace.$editer.$espace.$supprimer.$bord.'</div>';
 
-			echo debut_cadre_relief(_DIR_PLUGIN_FORMULAIRES.'/prive/images/bloc.png', true, '', $titre);
+			echo debut_cadre_trait_couleur(_DIR_PLUGIN_FORMULAIRES.'/prive/images/bloc.png', true, '', $titre);
 
 			if (strlen($this->descriptif) > 0) {
 				echo '<div style="padding: 10px;">';
@@ -1394,7 +1400,7 @@
 			echo icone_inline(_T('formulairesprive:creer_nouvelle_question'), generer_url_ecrire("questions_edit","id_formulaire=".$this->formulaire->id_formulaire."&id_bloc=".$this->id_bloc."&new=oui"), _DIR_PLUGIN_FORMULAIRES.'/prive/images/question.png', "creer.gif", $spip_lang_right);
 			echo "</div>";
 
-			echo fin_cadre_relief(true);
+			echo fin_cadre_trait_couleur(true);
 		}
 
 

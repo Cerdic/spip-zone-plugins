@@ -1,24 +1,16 @@
-#CACHE{0}
 <BOUCLE_espace_applicant(APPLICANTS) {id_applicant=#ENV{id_applicant}}>
-<form>
+<a class="spacer" name="formulaire">&nbsp;</a>
 
-<fieldset>
-
-<legend><:formulairespublic:bienvenue:> <span>[(#NOM) ]#EMAIL</span></legend>
+<h3 class="legend"><:formulairespublic:bienvenue:> <span>[(#NOM) ]#EMAIL</span></h3>
 
 <B_applications>
-<ul>
+<ul class="spip">
 <BOUCLE_applications(APPLICATIONS) {id_applicant}>
 <BOUCLE_formulaire(FORMULAIRES) {id_formulaire}><li><a href="#URL_FORMULAIRE">#TITRE</a></li></BOUCLE_formulaire>
 </BOUCLE_applications>
 </ul>
 </B_applications>
 
-</fieldset>
+[<p><a href="(#URL_ACTION_LOGOUT_FORMULAIRE)"><:formulairespublic:deconnexion:></a></p>]
 
-<ul>
-[<li><a href="(#URL_ACTION_LOGOUT_FORMULAIRE)"><:formulairespublic:deconnexion:></a></li>]
-</ul>
-
-</form>
 </BOUCLE_espace_applicant>

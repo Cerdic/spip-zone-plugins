@@ -8,9 +8,6 @@
 	 **/
 
 
-	include_spip('inc/cookie');
-
-
 	$p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	
 	
@@ -23,6 +20,7 @@
 
 
 	// pose du cookie de test pour savoir si l'internaute accepte les cookies
+	include_spip('inc/cookie');
 	spip_setcookie('spip_formulaires_test_cookie', 'test', time() + 60 * 60 * 24 * 90); // 90 jours
 
 	

@@ -13,7 +13,8 @@
 			case 'onglet':
 			case 'voir':
 			case 'editer':
-			case 'joindre':
+			case 'modifier':
+			case 'joindredocument':
 				return ($qui['statut'] == '0minirezo');
 				break;
 			default:

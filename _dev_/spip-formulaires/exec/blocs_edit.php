@@ -112,7 +112,7 @@
 	    echo '<li class="editer_texte">';
 		echo '<label for="text_area">'._T('formulairesprive:texte').'</label>';
 		echo '<div class="explication">'._T('texte_enrichir_mise_a_jour').'<em>'.aide('raccourcis').'</em></div>';
-		echo '<textarea name="texte" id="text_area" rows="20" cols="40" class="barre_inserer" '.$GLOBALS['browser_caret'].'>'.$bloc->texte.'</textarea>';
+		echo '<textarea name="texte" id="text_area" rows="10" cols="40" class="barre_inserer" '.$GLOBALS['browser_caret'].'>'.$bloc->texte.'</textarea>';
 		echo '</li>';
 
 		echo '</ul>';

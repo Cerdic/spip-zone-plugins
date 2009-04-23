@@ -70,13 +70,11 @@
 		echo '<ul>';
 		if ($formulaire->statut == 'hors_ligne') {
 			echo '<li class="prepa selected">'.http_img_pack('puce-blanche.gif', 'puce-blanche', '')._T('formulairesprive:hors_ligne').'</li>';
-			echo '<li class="prop"><a href="'.generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=copie', false, true).'">'.http_img_pack('puce-orange.gif', 'puce-orange', '')._T('formulairesprive:a_duppliquer').'</a></li>';
 			echo '<li class="publie"><a href="'.generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=en_ligne', false, true).'">'.http_img_pack('puce-verte.gif', 'puce-verte', '')._T('formulairesprive:a_mettre_en_ligne').'</a></li>';
 			echo '<li class="poubelle"><a href="'.generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=poubelle', false, true).'">'.http_img_pack('puce-poubelle.gif', 'puce-poubelle', '')._T('formulairesprive:a_la_poubelle').'</a></li>';
 		}
 		if ($formulaire->statut == 'en_ligne') {
 			echo '<li class="publie"><a href="'.generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=hors_ligne', false, true).'">'.http_img_pack('puce-blanche.gif', 'puce-blanche', '')._T('formulairesprive:a_mettre_hors_ligne').'</a></li>';
-			echo '<li class="prop"><a href="'.generer_url_action('copie_formulaire', 'copie_formulaire='.$formulaire->id_formulaire, false, true).'">'.http_img_pack('puce-orange.gif', 'puce-orange', '')._T('formulairesprive:a_duppliquer').'</a></li>';
 			echo '<li class="publie selected">'.http_img_pack('puce-verte.gif', 'puce-verte', '')._T('formulairesprive:a_mettre_en_ligne').'</li>';
 			echo '<li class="poubelle"><a href="'.generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=poubelle', false, true).'">'.http_img_pack('puce-poubelle.gif', 'puce-poubelle', '')._T('formulairesprive:a_la_poubelle').'</a></li>';
 		}
@@ -97,9 +95,10 @@
 		echo afficher_objets('formulaires_mini', _T('info_meme_rubrique'), array('FROM' => 'spip_formulaires', 'WHERE' => 'id_rubrique='.intval($formulaire->id_rubrique).' AND id_formulaire!='.intval($formulaire->id_formulaire), 'ORDER BY' => 'maj DESC'));
 
 		$raccourcis = icone_horizontale(_T('formulairesprive:creer_nouveau_formulaire'), generer_url_ecrire("formulaires_edit"), _DIR_PLUGIN_FORMULAIRES."/prive/images/formulaire-24.png", 'creer.gif', false);
-		$raccourcis = icone_horizontale(_T('formulairesprive:aller_liste_formulaires'), generer_url_ecrire("formulaires_tous"), _DIR_PLUGIN_FORMULAIRES.'/prive/images/formulaire-24.png', 'rien.gif', false);
+		$raccourcis.= icone_horizontale(_T('formulairesprive:aller_liste_formulaires'), generer_url_ecrire("formulaires_tous"), _DIR_PLUGIN_FORMULAIRES.'/prive/images/formulaire-24.png', 'rien.gif', false);
 		if ($formulaire->limiter_invitation == 'oui')
-			$raccourcis = icone_horizontale(_T('formulairesprive:creer_invitation'), generer_url_ecrire("invitations_edit", "id_formulaire=".$formulaire->id_formulaire), _DIR_PLUGIN_FORMULAIRES."/prive/images/invitation.png", 'creer.gif', false);
+			$raccourcis.= icone_horizontale(_T('formulairesprive:creer_invitation'), generer_url_ecrire("invitations_edit", "id_formulaire=".$formulaire->id_formulaire), _DIR_PLUGIN_FORMULAIRES."/prive/images/invitation.png", 'creer.gif', false);
+		$raccourcis.= icone_horizontale(_T('formulairesprive:copier_ce_formulaire'), generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=copie', false, true), _DIR_PLUGIN_FORMULAIRES.'/prive/images/formulaire-24.png', 'creer.gif', false);
 		echo bloc_des_raccourcis($raccourcis);
 
 		if ($formulaire->limiter_invitation == 'oui') {
@@ -179,12 +178,13 @@
 	}
 
 
-	function formulaires_documents($type, $id) {
+	function formulaires_documents($type, $id)
+	{
 		global $spip_lang_left, $spip_lang_right;
 
 		// Joindre ?
 		if  ($GLOBALS['meta']["documents_$type"]=='non'
-		OR !autoriser('joindre', $type, $id))
+		OR !autoriser('joindredocument', $type, $id))
 			$res = '';
 		else {
 			$joindre = charger_fonction('joindre', 'inc');
@@ -217,10 +217,11 @@
 
 		$documenter = charger_fonction('documenter', 'inc');
 
+		$flag_editable = autoriser('modifier', $type, $id);
+
 		return "<div id='portfolio'>" . $documenter($id, $type, 'portfolio') . "</div><br />"
 		. "<div id='documents'>" . $documenter($id, $type, 'documents') . "</div>"
 		. $res;
 	}
-
 
 ?>

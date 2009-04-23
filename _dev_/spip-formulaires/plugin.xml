@@ -75,4 +75,8 @@
 		<icone>prive/images/formulaire-24.png</icone>
 		<titre>formulairesprive:formulaires</titre>       
 	</bouton>
+	<onglet id="config_formulaires" parent="configuration">
+		<icone>prive/images/formulaire-24.png</icone>
+		<titre>formulairesprive:formulaires</titre>
+	</onglet>
 </plugin>

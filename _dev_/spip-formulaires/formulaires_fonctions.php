@@ -17,8 +17,6 @@
 	include_spip('public/formulaires_boucles');
 	include_spip('public/formulaires_balises');
 
-# TODO	include_spip('lettres_fonctions');
-
 
 	function formulaires_generer_nouveau_mdp($longueur=8) {
 		$chaine = "abBDEFcdefghijkmnPQRSTUVWXYpqrst23456789";
@@ -79,36 +77,6 @@
 			$var_mode = '&var_mode=preview';
 		return generer_url_public('formulaire', 'id_formulaire='.$id_formulaire.$var_mode);
 	}
-
-
-	function formulaires_afficher_dates($date_debut, $date_fin, $modif=false) {
-/* TODO
-		$titre_barre = _T('formulairesprive:periode_de_validite').'<br>'._T('formulairesprive:du').'&nbsp;'.majuscules(affdate($date_debut)).'&nbsp;'._T('formulairesprive:au').'&nbsp;'.majuscules(affdate($date_fin));
-		debut_cadre_enfonce('../'._DIR_PLUGIN_FORMULAIRES.'/img_pack/periode.png', false, "", bouton_block_invisible('dates').$titre_barre);
-		echo debut_block_invisible('dates');
-		echo "<table border='0' width='100%' style='text-align: right'>";
-		echo "<tr>";
-		echo "	<td><span class='verdana1'><B>"._T('formulairesprive:changer_date_debut')."</B></span> &nbsp;</td>";
-		echo "	<td>";
-		echo afficher_jour(affdate($date_debut, 'jour'), "name='jour_debut' size='1' class='fondl'", true);
-		echo afficher_mois(affdate($date_debut, 'mois'), "name='mois_debut' size='1' class='fondl'", true);
-		echo afficher_annee(affdate($date_debut, 'annee'), "name='annee_debut' size='1' class='fondl'");
-		echo "	</td>";
-		echo "	<td>&nbsp;</td>";
-		echo "</tr>";
-		echo "<tr>";
-		echo "	<td><span class='verdana1'><B>"._T('formulairesprive:changer_date_fin')."</B></span> &nbsp;</td>";
-		echo "	<td>";
-		echo afficher_jour(affdate($date_fin, 'jour'), "name='jour_fin' size='1' class='fondl'", true);
-		echo afficher_mois(affdate($date_fin, 'mois'), "name='mois_fin' size='1' class='fondl'", true);
-		echo afficher_annee(affdate($date_fin, 'annee'), "name='annee_fin' size='1' class='fondl'");
-		echo "	</td>";
-		echo "	<td> &nbsp; <INPUT TYPE='submit' NAME='changer_dates' VALUE='"._T('formulairesprive:changer')."' CLASS='fondo' STYLE='font-size:10px'></td>";
-		echo "</tr>";
-		echo "</table>";
-		echo fin_block();
-		fin_cadre_enfonce();
-*/	}
 
 
 	function formulaires_afficher_auteurs($id_formulaire) {
