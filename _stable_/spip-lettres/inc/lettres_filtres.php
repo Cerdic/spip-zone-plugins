@@ -25,7 +25,7 @@
 				$affichage.= $avant._T('lettres:tout_le_site').$apres."\n";
 				continue;
 			}
-			$res = sql_select('titre', 'spip_themes', 'id_rubrique='.intval($id_rubrique), '', '1');
+			$res = sql_select('titre', 'spip_themes', 'id_rubrique='.intval($id_rubrique), '', '', '1');
 			if (sql_count($res) == 1) {
 				$arr = sql_fetch($res);
 				$affichage.= $avant.typo($arr['titre']).$apres."\n";
