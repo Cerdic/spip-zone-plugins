@@ -13,6 +13,8 @@ function inscription2_ajouter_boutons($boutons_admin){
 
 function inscription2_affiche_milieu($flux){
 	if($flux['args']['exec'] == 'auteur_infos') {	
+		include_spip('public/assembler');
+		include_spip('inc/legender_auteur_supp');
 		$legender_auteur_supp = charger_fonction('legender_auteur_supp','exec');
 		$id_auteur = $flux['args']['id_auteur'];
 		$flux['data'] .= $legender_auteur_supp($id_auteur);
@@ -42,19 +44,24 @@ function inscription2_editer_contenu_objet($flux){
 function inscription2_post_edition($flux){
 	if ($flux['args']['table']=='spip_auteurs') {
 		spip_log('INSCRIPTION 2 : inscription2_post_edition','inscription2');
-		$exceptions_des_champs_auteurs_elargis = pipeline('I2_exceptions_des_champs_auteurs_elargis',array());
+		$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',array());
 		$id_auteur = $flux['args']['id_objet'];
 		foreach(lire_config('inscription2',array()) as $cle => $val){
 			$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
 			if($val=='on' AND !in_array($cle,$exceptions_des_champs_auteurs_elargis) and !ereg("^(categories|zone|newsletter).*$", $cle)){
-				$var_user[$cle] = sql_quote(_request($cle));
+				$var_user[$cle] = _request($cle);
+				if(is_array(_request($cle))){
+					spip_log($var_user[$cle]);
+					$var_user[$cle] = serialize(_request($cle));
+				}
+				spip_log("$cle = ".$var_user[$cle]);
 			}
 		}
 		if (!sql_getfetsel('id_auteur','spip_auteurs_elargis','id_auteur='.$id_auteur)){
 			//insertion de l'id_auteur dans spip_auteurs_elargis sinon on peut pas proceder a l'update
 			$id_elargi = sql_insertq("spip_auteurs_elargis",array('id_auteur'=> $id_auteur));
 		}
-		sql_update("spip_auteurs_elargis",$var_user,"id_auteur=$id_auteur");
+		sql_updateq("spip_auteurs_elargis",$var_user,"id_auteur=$id_auteur");
 			
 		// Notifications, gestion des revisions, reindexation...
 		pipeline('post_edition',
