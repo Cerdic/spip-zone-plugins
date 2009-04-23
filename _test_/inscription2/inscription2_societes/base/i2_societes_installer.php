@@ -16,7 +16,7 @@ function i2_societes_upgrade(){
 	if ($current_version==0.0){
 		$config_inscription2 = $GLOBALS['meta']['inscription2'];
 		
-		if (!is_array($config_inscription2)) {
+		if (!is_array(unserialize($config_inscription2))) {
 	    	unset($config_inscription2);
 		}
 		
@@ -28,13 +28,13 @@ function i2_societes_upgrade(){
 				'id_societe_table' => NULL
 			);
 
-		$config_finale = array_merge($config_inscription2,$config_societes);
+		$config_finale = array_merge(unserialize($config_inscription2),$config_societes);
 		
 		ecrire_config('inscription2',$config_finale);
 		
 		include_spip('base/create');
 		include_spip('base/abstract_sql');
-		creer_base(); 
+		creer_base();
 		ecrire_meta('i2_societes_version',$current_version=$version_base,'non');
 	}
 	if ($current_version==0.01){

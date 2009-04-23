@@ -19,7 +19,7 @@ function formulaires_editer_societe_verifier_dist($id_societe='new', $retour='',
 	$erreurs = formulaires_editer_objet_verifier('societe',$id_societe,array('nom'));
 	return $erreurs;
 }
-
+	
 function formulaires_editer_societe_traiter_dist($id_societe='new', $retour='', $config_fonc='societe_edit_config', $row=array(), $hidden=''){
 	
 	$message = "";

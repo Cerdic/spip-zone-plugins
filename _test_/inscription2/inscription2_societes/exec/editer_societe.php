@@ -12,7 +12,11 @@ function exec_editer_societe() {
 	}
 	
 	$new = _request('new');
-	$id_societe = intval(_request('id_societe'));
+	if(!isset($new)){
+		$id_societe = intval(_request('id_societe'));
+		if(!$id_societe = sql_getfetsel("id_societe","spip_societes","id_societe=$id_societe"))
+			$id_societe = 'new';
+	}
 	pipeline('exec_init',array('args'=>array('exec'=>'editer_societe','id_societe'=>$id_societe),'data'=>''));
 	
 	$commencer_page = charger_fonction('commencer_page', 'inc');

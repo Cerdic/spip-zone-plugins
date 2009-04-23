@@ -12,7 +12,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_societe' => 'Ajouter une soci&eacute;t&eacute;',
 	'code_postal' => 'Code Postal',
 	'confirmer_supprimer_societe' => '&Ecirc;tes vous s&ucirc;r de vouloir supprimer cette soci&eacute;t&eacute; ?',
+	'cfg_forme_affichage' => 'Mani&egrave;re d\'afficher les soci&eacute;t&eacute;s',
+	'cfg_forme_unique' => 'Champs &agrave; s&eacute;lection unique',
+	'cfg_forme_multiple' => 'Champs &agrave; s&eacute;lection multiple',
 
+	// D
+	'description_cfg' => 'Ce plugin permet d\'ajouter une liste de soci&eacute;t&eacute; s&eacute;lectionnable dans le profil des membres du site',
+	
 	// F
 	'fax' => 'Fax',
 
@@ -44,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// V
 	'ville' => 'Ville',
+	'voir_societes' => 'Visualiser les soci&eacute;t&eacute;s',
 
 	// Z
 	'zzzz' => 'ZZZZ'
