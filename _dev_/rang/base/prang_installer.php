@@ -31,7 +31,7 @@ function prang_upgrade(){
 function prang_vider_tables() {
 	include_spip('base/abstract_sql');
 	sql_alter("TABLE spip_rubriques DROP COLUMN rang"); 
-	sql_alter("TABLE spip_articlesDROP COLUMN rang"); 
+	sql_alter("TABLE spip_articles DROP COLUMN rang"); 
 	effacer_meta('prang_version');
 }
 
