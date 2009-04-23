@@ -43,7 +43,7 @@ function inc_dater($id, $flag, $statut, $type, $script, $date, $date_redac='')
 
   if ($flag) {
 
-	if ($statut == 'publie' OR $statut == 'brouillon') {
+	if ($statut == 'publie' OR $statut == 'brouillon' OR $statut == 'en_ligne' OR $statut == 'hors_ligne') {
 
 		$js = "class='fondl'
 onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
