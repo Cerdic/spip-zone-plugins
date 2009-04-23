@@ -9,7 +9,7 @@ function inscription2_declarer_tables_interfaces($interface){
 }
 
 function inscription2_declarer_tables_principales($tables_principales){
-	$exceptions_des_champs_auteurs_elargis = pipeline('I2_exceptions_des_champs_auteurs_elargis',array());
+	$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',array());
 	
 	$spip_auteurs_elargis['id_auteur'] = "bigint(21) NOT NULL";
 		

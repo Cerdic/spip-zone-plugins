@@ -31,9 +31,7 @@ function inc_legender_auteur_supp_dist($id_auteur){
 }
 // La partie affichage du formulaire...
 function legender_auteur_supp_saisir($id_auteur){
-	$exceptions_des_champs_auteurs_elargis = pipeline('I2_exceptions_des_champs_auteurs_elargis',array());
-
-	spip_log('INSCRIPTION 2 : saisir les infos de l auteur='.$id_auteur);
+	$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',array());
 	
 	$corps_supp = '<li class="editer_inscription2 fieldset">';
 	$corps_supp .= '<fieldset><h3 class="legend">Inscription 2</h3>';
@@ -51,8 +49,10 @@ function legender_auteur_supp_saisir($id_auteur){
 	}
 	
 	if(is_numeric($id_auteur)){
+		spip_log("INSCRIPTION 2 : saisir les infos de l auteur= $id_auteur");
 		$query = sql_fetsel($var_user,"spip_auteurs a left join spip_auteurs_elargis b USING(id_auteur)","a.id_auteur='$id_auteur'");
 	}else{
+		spip_log("INSCRIPTION 2 : creation d'un auteur");
 		$query = $champs;
 	}
 	
@@ -73,7 +73,7 @@ function legender_auteur_supp_saisir($id_auteur){
 
 // L'affichage des infos supplémentaires...
 function legender_auteur_supp_voir($id_auteur){
-	$exceptions_des_champs_auteurs_elargis = pipeline('I2_exceptions_des_champs_auteurs_elargis',array());
+	$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',array());
 	
 	$res = "<h2 class='titrem'>Inscription2</h2>";
 
@@ -89,10 +89,12 @@ function legender_auteur_supp_voir($id_auteur){
 			$var_user[] = 'b.'.$cle;
 		}
 	}
+
 	$query = sql_fetsel($var_user,"spip_auteurs a left join spip_auteurs_elargis b USING(id_auteur)","a.id_auteur= $id_auteur");
 	
 	if($query['id_auteur'] == NULL){
 		$id_elargi = sql_insertq("spip_auteurs_elargis",array('id_auteur'=>$id_auteur));
+		$query = sql_fetsel($var_user,"spip_auteurs a left join spip_auteurs_elargis b USING(id_auteur)","a.id_auteur= $id_auteur");
 	}
 	
 	if(is_array($query)){

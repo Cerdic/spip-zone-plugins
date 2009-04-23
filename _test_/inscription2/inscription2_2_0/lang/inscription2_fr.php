@@ -30,7 +30,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chainenombre' => '(compos&eacute;e de lettres et/ou de chiffres)',
 	'champ_obligatoire' => 'Ce champ est obligatoire',
 	'choisir_categories' => 'Choisissez-les ci-dessous&nbsp;:',
-	'choisir_listes' => 'Choisissez ci-dessous les listes de diffusion &#224; proposer aux nouveaux adh&eacute;rents&nbsp;: ',
 	'choisir_nouveau_password' => 'Vous pourrez choisir un nouveau mot de passe en cliquant le lien suivant',
 	'choisir_zones' => 'Veuillez choisir les zones auxquelles vous voulez que les nouveaux adh&eacute;rents soient affect&eacute;s',
 	'choix_domaine' => 'Veuillez choisir votre domaine',
@@ -54,10 +53,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'decembre' => 'd&eacute;cembre',
 	'demande_password' => 'Votre mot de passe&nbsp;:',
 	'description_page' => 'Ici vous pouvez v&eacute;rifier vos choix de configuration tels qu\'ils sont stock&eacute;s',
-	'deselect_listes' => '> tout d&#233;s&eacute;lectionner',
 	'divers' => 'Divers',
 	'domaine' => 'Domaine',
 	'domaines' => 'Domaine',
+	'description_cfg' => 'Ce plugin permet d\'&eacute;tendre les informations sur les auteurs sur votre site, vous pouvez choisir ici les champs suppl&eacute;mentaires',
 
 	// E
 	'editer_adherent' => '&Eacute;diter adh&eacute;rent',
@@ -70,7 +69,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'exp_divers' => 'Champ qui sera propos&eacute; aux visiteurs avec le nom de commentaire',
 	'exp_domaines' => 'Restreindre l\'acc&egrave;s &agrave; une liste pr&eacute;d&eacute;finie de domaines',
 	'exp_domaines2' => 'Veuillez d&eacute;finir vos domaines dans le fichier inc/domaines.php en suivant le mod&egrave;le.',
-	'exp_newsletter' => 'Choisissez ci-dessous les listes de diffusion auxquelles vous voulez vous abonner',
 	'exp_publication' => 'Autorisation de publication des donn&eacute;es personnelles',
 	'exp_statut' => 'Choisissez le statut que vous voulez attribuer aux nouveaux adh&eacute;rents',
 	'exp_statut_rel' => 'Champ diff&eacute;rent du statut de SPIP, celui-ci sert pour le controle interne d\'une institution',
@@ -151,7 +149,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'naissance' => 'Date de naissance',
 	'nettoyer_tables' => 'Nettoyer tables',
-	'newsletter' => 'Listes de diffusion',
 	'nom' => 'Signature',
 	'nom_explication' => 'votre nom ou votre&nbsp;pseudo',
 	'nom_famille' => 'Nom de famille',
@@ -162,7 +159,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'octobre' => 'octobre',
-	'optout' => 'Cases &agrave; coch&#233;es non pr&#233;coch&#233;es (optout)',
 
 	// P
 	'page_confirmation' => 'Page de confirmation de votre inscription',
@@ -196,7 +192,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'secteur' => 'Secteur',
-	'select_listes' => '(vous pouvez s&#233;lectionner plusieurs secteurs avec la touche shift)',
 	'septembre' => 'septembre',
 	'sexe' => 'Civilit&eacute;',
 	'societe' => 'Soci&eacute;t&eacute; / Association ...',

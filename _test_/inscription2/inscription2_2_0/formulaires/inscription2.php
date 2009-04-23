@@ -66,10 +66,9 @@ function formulaires_inscription2_charger_dist($id_auteur = NULL){
 	$champs = pipeline('i2_charger_formulaire',
 		array(
 			'args' => '',
-		'data' => $champs
+			'data' => $champs
 		)
 	);
-	
 	
 	return $champs;
 }
@@ -331,14 +330,16 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 	$clefs = $tables_principales[$table]['field'];
 	if(is_array($clefs)){
 	//extrait uniquement les donnees qui ont ete proposees a la modification
-	$val = array_intersect_key($valeurs,$clefs);
+		$val = array_intersect_key($valeurs,$clefs);
 	}else{
-	$where = 'id_auteur='.sql_quote($id_auteur);	
-	$res = sql_select('*',$table,$where);
-	$clefs = sql_fetch($res);
-	$val = array_intersect_key($valeurs,$clefs);	
+		$where = 'id_auteur='.sql_quote($id_auteur);	
+		$res = sql_select('*',$table,$where);
+		$clefs = sql_fetch($res);
+		$val = array_intersect_key($valeurs,$clefs);	
 	}
+	
 	unset($val['login']);
+	
 	//recherche la presence d'un complement sur l'auteur
 	$id_elargi = sql_getfetsel('id_auteur','spip_auteurs_elargis','id_auteur='.$id_auteur);
 	
@@ -361,6 +362,16 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 		);
 	}
     
+	$traiter_plugin = pipeline('i2_traiter_formulaire',
+		array(
+			'args' => array(
+				'id_auteur' => $id_auteur,
+				'champs' => $val
+			),
+		'data' => null
+		)
+	);
+	
     if (!$new){
         $message = _T('inscription2:profil_modifie_ok');
         if($mode == 'modification_auteur_simple'){
@@ -373,16 +384,6 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 		$message = _T('inscription2:formulaire_inscription_ok');
 		$editable = false;
     }
-	
-	$traiter_plugin = pipeline('i2_traiter_formulaire',
-		array(
-			'args' => array(
-				'id_auteur' => $id_auteur,
-				'champs' => $val
-			),
-		'data' => null
-		)
-	);
 	
     return array('editable'=>$editable,'message' => $message);
 }

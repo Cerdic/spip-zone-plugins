@@ -4,7 +4,7 @@ $GLOBALS['inscription2_version'] = 0.65;
 
 	function inscription2_upgrade(){
 		spip_log('INSCRIPTION 2 : installation','inscription2');
-		$exceptions_des_champs_auteurs_elargis = pipeline('I2_exceptions_des_champs_auteurs_elargis',array());
+		$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',array());
 	    include_spip('cfg_options');
 	    
 		//On force le fait d accepter les visiteurs
@@ -143,7 +143,7 @@ $GLOBALS['inscription2_version'] = 0.65;
 
 	//supprime les donnees depuis la table spip_auteurs_elargis
 	function inscription2_vider_tables() {
-		$exceptions_des_champs_auteurs_elargis = pipeline('I2_exceptions_des_champs_auteurs_elargis',array());
+		$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',array());
     	include_spip('cfg_options');
 		include_spip('base/abstract_sql');
 		

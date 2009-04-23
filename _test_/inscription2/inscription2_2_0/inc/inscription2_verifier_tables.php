@@ -1,6 +1,6 @@
 <?php
 function inc_inscription2_verifier_tables_dist(){
-	$exceptions_des_champs_auteurs_elargis = pipeline('I2_exceptions_des_champs_auteurs_elargis',array());
+	$exceptions_des_champs_auteurs_elargis = pipeline('i2_exceptions_des_champs_auteurs_elargis',array());
 	spip_log('INCRIPTION 2 : verification des tables','inscription2');
 	
 	//definition de la table cible

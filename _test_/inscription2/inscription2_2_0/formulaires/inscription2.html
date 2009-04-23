@@ -43,14 +43,10 @@
 			</ul>	        
         </fieldset>]
 
-        [(#CONFIG{inscription2/newsletter}|=={on}|oui)
-	        [(#CONFIG{plugin/SPIPLISTES}|oui)<INCLURE{fond=formulaires/inscription2_form_listes}{env}>]
-        ]
-
         [(#CONFIG{inscription2/domaines}|=={on}|oui)
 	        [(#INCLURE{fond=formulaires/inscription2_form_domaines}{env})]
         ]
-		
+
 	    <p class="boutons">
 		    <input type="submit" class="submit" value="<:bouton_valider:>" />
 	    </p>
