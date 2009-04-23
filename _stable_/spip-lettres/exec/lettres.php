@@ -65,7 +65,7 @@
 		}
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page($lettre->titre, "naviguer", "lettres");
+		echo $commencer_page($lettre->titre, "naviguer", "lettres_tous");
 
 		echo debut_grand_cadre(true);
 		echo afficher_hierarchie($lettre->id_rubrique);

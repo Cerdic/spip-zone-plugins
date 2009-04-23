@@ -29,7 +29,7 @@
 		pipeline('exec_init',array('args'=>array('exec'=>'lettres_tous'),'data'=>''));
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('lettresprive:lettres_information'), "naviguer", "lettres");
+		echo $commencer_page(_T('lettresprive:lettres_information'), "naviguer", "lettres_tous");
 
 		echo debut_gauche('', true);
 		echo afficher_objets('nb_envoi', _T('lettresprive:evolution_nb_envois'), array('FROM' => 'spip_lettres_statistiques', 'ORDER BY' => 'periode DESC'));
