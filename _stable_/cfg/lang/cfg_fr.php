@@ -33,6 +33,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'installer_dossier_lib' => 'Vous devez creer un dossier @dir@ &agrave; la racine de votre SPIP ayant des permissions d\'ecriture.',
 	'installer_lib_192' => 'Pour installer une librairie, d&eacute;compressez manuellement le zip et copiez son contenu dans le dossier @dir@.',
 
+	// L
+	'label_activer' => 'Activer',
+	'label_obligatoire' => 'Saisie obligatoire',
+	
 	// N
 	'nom_table_manquant' => 'Nom de la table SQL manquant',
 	'nouveau' => 'Nouveau',

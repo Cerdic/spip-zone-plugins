@@ -9,7 +9,8 @@
   - * erreurs : tableau des erreurs
   - * valeur : valeur actuelle du parametre
   - defaut : valeur par defaut du parametre
-  - obligatoire : est-ce un parametre obligatoire ? (defaut: non, valeurs : null/"non"/autre=oui ) 
+  - obligatoire : est-ce un parametre obligatoire ? (defaut: non, valeurs : null/"non"/autre=oui )
+  - info_ogligatoire : si obligatoire, ajoute ce contenu apres le label (defaut : "")
   - explication : texte d'explication suppplementaire
   - class : classe(s) css ajoutes au textarea
   - rows : nombre de ligne
@@ -25,9 +26,13 @@
 ]
 
 [(#ENV{nom}|oui)
+#SET{obligatoire,#ENV{obligatoire}|et{#ENV{obligatoire}|!={non}}|?{obligatoire,''}}
 #SET{erreurs,#ENV**{erreurs}|table_valeur{#ENV{nom}}}
-<li class="editer_[(#ENV{nom})][ (#ENV{obligatoire}|et{#ENV{obligatoire}|=={non}}|oui) obligatoire][ (#GET{erreurs}|oui)erreur]">
-	<label for="champ_#ENV{nom}">[(#ENV{label}|sinon{#ENV{nom}})]</label>
+<li class="editer_[(#ENV{nom})][ (#GET{obligatoire})][ (#GET{erreurs}|oui)erreur]">
+	<label for="champ_#ENV{nom}">
+		[(#ENV{label}|sinon{#ENV{nom}})]
+		[<span class='obligatoire'>(#GET{obligatoire}|et{#ENV{info_obligatoire}})#ENV{info_obligatoire}</span>]
+	</label>
 		[<span class='erreur_message'>(#GET{erreurs})</span>]
 		[<p class='explication'>(#ENV{explication})</p>]
 		<textarea name="#ENV{nom}"[ class=" (#ENV{class})"] id="champ_#ENV{nom}" [ rows="(#ENV{rows})"][ cols="(#ENV{cols})"]>[(#ENV{valeur}|sinon{#ENV{defaut}})]</textarea>
