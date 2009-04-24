@@ -11,7 +11,6 @@ _ Nécessite PHP 5</description>
 	<install>base/facteur.php</install>
 	<icon>prive/images/facteur-48.png</icon>
 	<options>facteur_options.php</options>
-
 	<prefix>facteur</prefix>
 	<pipeline>
 		<nom>autoriser</nom>

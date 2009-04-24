@@ -34,6 +34,7 @@
 						effacer_meta('spip_notifications_adresse_envoi');
 						effacer_meta('spip_notifications_adresse_envoi_nom');
 						effacer_meta('spip_notifications_adresse_envoi_email');
+						effacer_meta('spip_notifications_version');
 						sql_drop_table('spip_notifications', true);
 						ecrire_metas();
 					} else {
