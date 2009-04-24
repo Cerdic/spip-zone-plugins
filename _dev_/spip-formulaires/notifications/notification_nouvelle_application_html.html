@@ -1,19 +1,15 @@
-<BOUCLE_nouvelle_application(NOTIFICATIONS) {notification=nouvelle_application}>
 #INCLURE{fond=inc_haut_notification}
 
 <BOUCLE_formulaire(FORMULAIRES) {id_formulaire=#ENV{id_formulaire}}>
 
 <h2>#TITRE</h2>
 
-[<p>(#_nouvelle_application:DESCRIPTIF) : #TITRE</p>
-]
+<p><:formulairespublic:un_internaute_a_valide_le_formulaire:> <a href="#URL_FORMULAIRE">#TITRE</a>.</p>
 
-<form>
+<hr />
 
 <BOUCLE_blocs(BLOCS) {id_formulaire}>
-<fieldset>
-<legend>#TITRE</legend>
-[<p>(#DESCRIPTIF)</p>]
+<h3>#TITRE</h3>
 [
  +++++++++++++++++++++++++++++++++++++++++++
 	(#REM)		Questions
@@ -27,7 +23,7 @@
  ---------------------------
 ]
 <BOUCLE_q_champ_texte(QUESTIONS) {id_question} {type==champ_texte|email_applicant|nom_applicant}>
-<p>#TITRE : [<a href="mailto:#REPONSE">#REPONSE</a>(#CONTROLE|=={'email'}|?{' '})][#REPONSE(#CONTROLE|=={'email'}|?{'',' '})]</p>
+[<p><strong>#TITRE :</strong> [<a href="mailto:#REPONSE">#REPONSE</a>(#CONTROLE|=={'email'}|?{' '})][#REPONSE(#CONTROLE|=={'email'}|?{'',' '})]</p>(#REPONSE|?{' '})]
 </BOUCLE_q_champ_texte>
 
 [
@@ -36,7 +32,7 @@
  ---------------------------
 ]
 <BOUCLE_q_zone_texte(QUESTIONS) {id_question} {type=zone_texte}>
-<p>#TITRE : [(#REPONSE|propre)]</p>
+[<p><strong>#TITRE :</strong> (#REPONSE)</p>]
 </BOUCLE_q_zone_texte>
 
 [
@@ -45,15 +41,7 @@
  ---------------------------
 ]
 <BOUCLE_q_boutons_radio(QUESTIONS) {id_question} {type=boutons_radio}>
-<fieldset>
-<legend>#TITRE</legend>
-[<p>(#DESCRIPTIF)</p>]
-<ul>
-<BOUCLE_c_boutons_radio(CHOIX_QUESTION) {id_question}>
-[<li>(#ID_CHOIX_QUESTION|in_any{#REPONSES**, ''}|?{#TITRE,''})]</li>
-</BOUCLE_c_boutons_radio>
-</ul>
-</fieldset>
+<B_c_boutons_radio><p><strong>#TITRE :</strong> <BOUCLE_c_boutons_radio(CHOIX_QUESTION) {id_question} {"&nbsp;; "}>[(#ID_CHOIX_QUESTION|in_any{#REPONSES**, ''}|?{#TITRE})]</BOUCLE_c_boutons_radio></p></B_c_boutons_radio>
 </BOUCLE_q_boutons_radio>
 
 [
@@ -62,15 +50,7 @@
  ---------------------------
 ]
 <BOUCLE_q_cases_a_cocher(QUESTIONS) {id_question} {type=cases_a_cocher}>
-<fieldset>
-<legend>#TITRE</legend>
-[<p>(#DESCRIPTIF)</p>]
-<ul>
-<BOUCLE_c_cases_a_cocher(CHOIX_QUESTION) {id_question}>
-[<li>(#ID_CHOIX_QUESTION|in_any{#REPONSES**, ''}|?{#TITRE,''})]</li>
-</BOUCLE_c_cases_a_cocher>
-</ul>
-</fieldset>
+<B_c_cases_a_cocher><p><strong>#TITRE :</strong> <BOUCLE_c_cases_a_cocher(CHOIX_QUESTION) {id_question} {"&nbsp;; "}>[(#ID_CHOIX_QUESTION|in_any{#REPONSES**, ''}|?{#TITRE})]</BOUCLE_c_cases_a_cocher></p></B_c_cases_a_cocher>
 </BOUCLE_q_cases_a_cocher>
 
 [
@@ -79,11 +59,7 @@
  ---------------------------
 ]
 <BOUCLE_q_liste(QUESTIONS) {id_question} {type=liste}>
-<p>#TITRE : 
-<BOUCLE_c_liste(CHOIX_QUESTION) {id_question}>
-[(#REPONSE|=={#ID_CHOIX_QUESTION}|?{#TITRE,''})<br />]
-</BOUCLE_c_liste>
-</p>
+<B_c_liste><p><strong>#TITRE :</strong> <BOUCLE_c_liste(CHOIX_QUESTION) {id_question}>[(#REPONSE|=={#ID_CHOIX_QUESTION}|?{#TITRE})]</BOUCLE_c_liste></p></B_c_liste>
 </BOUCLE_q_liste>
 
 [
@@ -92,15 +68,7 @@
  ---------------------------
 ]
 <BOUCLE_q_liste_multiple(QUESTIONS) {id_question} {type=liste_multiple}>
-<fieldset>
-<legend>#TITRE</legend>
-[<p>(#DESCRIPTIF)</p>]
-<ul>
-<BOUCLE_c_liste_multiple(CHOIX_QUESTION) {id_question}>
-[<li>#TITRE</li>(#ID_CHOIX_QUESTION|in_any{#REPONSES**, ''}|?{' ',''})]
-</BOUCLE_c_liste_multiple>
-</ul>
-</fieldset>
+<B_c_liste_multiple><p><strong>#TITRE :</strong> <BOUCLE_c_liste_multiple(CHOIX_QUESTION) {id_question} {"&nbsp;; "}>[(#REPONSE|=={#ID_CHOIX_QUESTION}|?{#TITRE})]</BOUCLE_c_liste_multiple></p></B_c_liste_multiple>
 </BOUCLE_q_liste_multiple>
 
 [
@@ -109,15 +77,7 @@
  ---------------------------
 ]
 <BOUCLE_q_abonnements(QUESTIONS) {id_question} {type=abonnements}>
-<fieldset>
-<legend>#TITRE</legend>
-[<p>(#DESCRIPTIF)</p>]
-<ul>
-<BOUCLE_c_abonnements(CHOIX_QUESTION) {id_question}>
-[<li>#TITRE</li>(#ID_CHOIX_QUESTION|in_any{#REPONSES**, ''}|?{' ',''})]
-</BOUCLE_c_abonnements>
-</ul>
-</fieldset>
+<B_c_abonnements><p><strong>#TITRE :</strong> <BOUCLE_c_abonnements(CHOIX_QUESTION) {id_question} {"&nbsp;; "}>[(#ID_CHOIX_QUESTION|in_any{#REPONSES**, ''}|?{#TITRE})]</BOUCLE_c_abonnements></p></B_c_abonnements>
 </BOUCLE_q_abonnements>
 
 [
@@ -125,15 +85,9 @@
 	(#REM)	fichier
  ---------------------------
 ]
-<BOUCLE_q_fichier(QUESTIONS) {id_question} {type=fichier}><B_r_fichier>
-<fieldset>
-<legend>#_q_fichier:TITRE</legend>
-[<p>(#_q_fichier:DESCRIPTIF)</p>]
-<ul>
-<BOUCLE_r_fichier(REPONSES) {id_question} {id_application=#ENV{id_application}}><BOUCLE_documents(DOCUMENTS) {id_document=#VALEUR}><li><a href="[(#URL_DOCUMENT|url_absolue)]">#TITRE</a></li></BOUCLE_documents></BOUCLE_r_fichier>
-</ul>
-</fieldset>
-</B_r_fichier></BOUCLE_q_fichier>
+<BOUCLE_q_fichier(QUESTIONS) {id_question} {type=fichier}>
+<B_r_fichier><p><strong>#TITRE :</strong><BOUCLE_r_fichier(REPONSES) {id_question} {id_application=#ENV{id_application}}><BOUCLE_documents(DOCUMENTS) {id_document=#VALEUR}><br /><a href="[(#URL_DOCUMENT|url_absolue)]">#TITRE</a></BOUCLE_documents></BOUCLE_r_fichier></p></B_r_fichier>
+</BOUCLE_q_fichier>
 
 [
  ---------------------------
@@ -141,19 +95,15 @@
  ---------------------------
 ]
 <BOUCLE_q_auteurs(QUESTIONS) {id_question} {type=auteurs}>
-<p>#TITRE : 
-<BOUCLE_c_auteurs(CHOIX_QUESTION) {id_question}>
-[(#REPONSE|=={#ID_CHOIX_QUESTION}|?{#TITRE,''})<br />]
-</BOUCLE_c_auteurs>
-</p>
+<B_c_auteurs><p><strong>#TITRE :</strong> <BOUCLE_c_auteurs(CHOIX_QUESTION) {id_question} {"&nbsp;; "}>[(#ID_CHOIX_QUESTION|in_any{#REPONSES**, ''}|?{#TITRE})]</BOUCLE_c_auteurs></p></B_c_auteurs>
 </BOUCLE_q_auteurs>
 
 </BOUCLE_questions>
-</fieldset>
+
+<hr />
+
 </BOUCLE_blocs>
-</form>
 
 </BOUCLE_formulaire>
 
 #INCLURE{fond=inc_bas_notification}
-</BOUCLE_nouvelle_application>

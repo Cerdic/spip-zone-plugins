@@ -157,7 +157,7 @@
 			echo '<option value="cases_a_cocher"'.($question->type == 'cases_a_cocher' ? ' selected="selected"' : '').'>'._T('formulairesprive:cases_a_cocher').'</option>';
 			echo '<option value="liste"'.($question->type == 'liste' ? ' selected="selected"' : '').'>'._T('formulairesprive:liste').'</option>';
 			echo '<option value="liste_multiple"'.($question->type == 'liste_multiple' ? ' selected="selected"' : '').'>'._T('formulairesprive:liste_multiple').'</option>';
-			echo '<option value="fichier"'.($question->type == 'fichier' ? ' selected="selected"' : '').'>'._T('formulairesprive:fichier').'</option>';
+#			echo '<option value="fichier"'.($question->type == 'fichier' ? ' selected="selected"' : '').'>'._T('formulairesprive:fichier').'</option>';
 			if ($question->bloc->formulaire->limiter_invitation == 'oui') {
 				if ($spip_lettres_actif) {
 					if (sql_countsel('spip_themes'))

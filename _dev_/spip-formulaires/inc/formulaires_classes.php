@@ -15,7 +15,6 @@
 
 	include_spip('inc/cookie');
 	include_spip('formulaires_fonctions');
-	include_spip('inc/spip-notifications');
 	include_spip('inc/rubriques');
 	include_spip('inc/presentation');
 
@@ -801,7 +800,7 @@
 					case 'email_applicant':
 						if (!ereg(_REGEXP_EMAIL, $valeur))
 							return false;
-						$verification = sql_select('id_applicant', 'spip_applicants', 'email='.$valeur);
+						$verification = sql_select('id_applicant', 'spip_applicants', 'email="'.addslashes($valeur).'"');
 						if (sql_count($verification) == 0) {
 							return true;
 						} else {
@@ -952,6 +951,7 @@
 			}
 
 			if ($this->formulaire->notifier_auteurs == 'oui') {
+				include_spip('inc/facteur_classes');
 				$objet			= recuperer_fond('notifications/notification_nouvelle_application_titre', array('id_formulaire' => $this->formulaire->id_formulaire, 'id_application' => $this->id_application, 'lang' => $lang));
 				$message_html	= recuperer_fond('notifications/notification_nouvelle_application_html', array('id_formulaire' => $this->formulaire->id_formulaire, 'id_application' => $this->id_application, 'lang' => $lang));
 				$message_texte	= recuperer_fond('notifications/notification_nouvelle_application_texte', array('id_formulaire' => $this->formulaire->id_formulaire, 'id_application' => $this->id_application, 'lang' => $lang));
@@ -981,7 +981,7 @@
 							$tableau_emails[] = $arr['email'];
 					}
 					$email_premier_auteur = $tableau_emails[0];
-					$notification = new Notification($email_premier_auteur, $objet, $message_html, $message_texte);
+					$notification = new Facteur($email_premier_auteur, $objet, $message_html, $message_texte);
 					$tableau_emails_sans_premier = array_slice($tableau_emails, 1);
 					foreach ($tableau_emails_sans_premier as $email_auteur)
 						$notification->AddAddress($email_auteur);
@@ -1402,9 +1402,7 @@
 				echo "</div>";
 			}
 
-			echo "<div align='$spip_lang_right'>";
 			echo icone_inline(_T('formulairesprive:creer_nouvelle_question'), generer_url_ecrire("questions_edit","id_formulaire=".$this->formulaire->id_formulaire."&id_bloc=".$this->id_bloc."&new=oui"), _DIR_PLUGIN_FORMULAIRES.'/prive/images/question.png', "creer.gif", $spip_lang_right);
-			echo "</div>";
 
 			echo fin_cadre_trait_couleur(true);
 		}
@@ -2064,7 +2062,7 @@
 		 * @return void
 		 **/
 		function invitation($id_formulaire, $email) {
-			$recherche = sql_select('id_applicant', 'spip_applicants', 'email='.$email);
+			$recherche = sql_select('id_applicant', 'spip_applicants', 'email="'.$email.'"');
 			if (sql_count($recherche) == 0) { // pas d'email comme ça : on crée un applicant
 				$applicant = new applicant();
 				$id_applicant = $applicant->id_applicant;

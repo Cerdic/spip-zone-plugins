@@ -10,10 +10,7 @@
 
 	$GLOBALS[$GLOBALS['idx_lang']] = array(
 
-		'notification_nouvelle_application_titre' => "Novo resultado de formulário",
-		'notification_nouvelle_application_descriptif' => "Sobre o ".$GLOBALS['meta']['nom_site'].", um internauta validou o formulário seguinte",
-		'notification_nouvelle_application_texte' => "Eis aqui os resultados",
-		'notification_nouvelle_application_ps' => " ",
+		'un_internaute_a_valide_le_formulaire' => "Um internauta validou o formulário",
 
 		'nouveau_mot_de_passe' => "Nova palavra-chave",
 		'voici_votre_nouveau_mot_de_passe' => "Eis aqui a sua palavra-chave",

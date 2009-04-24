@@ -16,26 +16,11 @@
 	include_spip('formulaires_fonctions');
 
 
-	/**
-	 * balise_FORMULAIRE_ESPACE_APPLICANT
-	 *
-	 * @param p est un objet SPIP
-	 * @return string formulaire
-	 * @author Pierre Basson
-	 **/
 	function balise_FORMULAIRE_ESPACE_APPLICANT($p) {
 		return calculer_balise_dynamique($p,'FORMULAIRE_ESPACE_APPLICANT', array());
 	}
 
 
-	/**
-	 * balise_FORMULAIRE_ESPACE_APPLICANT_dyn
-	 *
-	 * Calcule la balise #FORMULAIRE_ESPACE_APPLICANT
-	 *
-	 * @return formulaire
-	 * @author Pierre Basson
-	 **/
 	function balise_FORMULAIRE_ESPACE_APPLICANT_dyn() {
 
 		if (isset($_COOKIE['spip_formulaires_test_cookie'])) {

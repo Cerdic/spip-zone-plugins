@@ -16,26 +16,11 @@
 	include_spip('formulaires_fonctions');
 
 
-	/**
-	 * balise_FORMULAIRE_AUTOMATIQUE
-	 *
-	 * @param p est un objet SPIP
-	 * @return string formulaire
-	 * @author Pierre Basson
-	 **/
 	function balise_FORMULAIRE_AUTOMATIQUE($p) {
 		return calculer_balise_dynamique($p,'FORMULAIRE_AUTOMATIQUE', array('id_formulaire'));
 	}
 
 
-	/**
-	 * balise_FORMULAIRE_AUTOMATIQUE_stat
-	 *
-	 * @param array args
-	 * @param array filtres
-	 * @return array args 
-	 * @author Pierre Basson
-	 **/
 	function balise_FORMULAIRE_AUTOMATIQUE_stat($args, $filtres) {
 
 		// Pas d'id_formulaire ? Erreur de squelette
@@ -51,14 +36,6 @@
 	}
 
 
-	/**
-	 * balise_FORMULAIRE_AUTOMATIQUE_dyn
-	 *
-	 * Calcule la balise #FORMULAIRE_AUTOMATIQUE
-	 *
-	 * @return array
-	 * @author Pierre Basson
-	 **/
 	function balise_FORMULAIRE_AUTOMATIQUE_dyn($id_formulaire) {
 		$premiere_fois = false;
 
@@ -100,16 +77,6 @@
 	}
 
 
-	/**
-	 * balise_FORMULAIRE_AUTOMATIQUE_UNE_SEULE_PAGE_dyn
-	 *
-	 * @param objet formulaire
-	 * @param objet application
-	 * @param string lang
-	 * @param boolean premiere_fois
-	 * @return array
-	 * @author Pierre Basson
-	 **/
 	function balise_FORMULAIRE_AUTOMATIQUE_UNE_SEULE_PAGE_dyn($formulaire, $application, $lang, $premiere_fois) {
 		if ($premiere_fois) { // formulaire vide
 			return	inclure_balise_dynamique(
@@ -175,16 +142,6 @@
 	}
 	
 
-	/**
-	 * balise_FORMULAIRE_AUTOMATIQUE_PLUSIEURS_PAGES_dyn
-	 *
-	 * @param objet formulaire
-	 * @param objet application
-	 * @param string lang
-	 * @param boolean premiere_fois
-	 * @return array
-	 * @author Pierre Basson
-	 **/
 	function balise_FORMULAIRE_AUTOMATIQUE_PLUSIEURS_PAGES_dyn($formulaire, $application, $lang, $premiere_fois) {
 		if ($premiere_fois) { // formulaire vide
 			$erreurs = array();

@@ -20,7 +20,7 @@
 		if ($titre == _T("autres"))
 			$titre = _T('formulairesprive:applications');
 		$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
-		$styles = array(array('', 12), array('arial2'), array('arial1', 50));
+		$styles = array(array('', 12), array('arial2'), array('arial1', 100), array('arial1', 50));
 		$tableau = array();
 		$args = array();
 		$presenter_liste = charger_fonction('presenter_liste', 'inc');
@@ -42,7 +42,9 @@
 		else
 			$vals[] = http_img_pack('puce-verte.gif', 'puce-verte', ' border="0" style="margin: 1px;"');
 
-		$vals[] = '<a href="'.generer_url_ecrire('applications','id_application='.$id_application).'">'.couper($application->applicant->email, 22, '...').'</a>';
+		$vals[] = '<a href="'.generer_url_ecrire('applications','id_application='.$id_application).'">'.$application->applicant->email.'</a>';
+
+		$vals[] = affdate_jourcourt($maj);
 
 		$vals[] = "<b>N°".$id_application."</b>";
 	

@@ -16,26 +16,11 @@
 	include_spip('formulaires_fonctions');
 
 
-	/**
-	 * balise_FORMULAIRE_OUBLI_FORMULAIRE
-	 *
-	 * @param p est un objet SPIP
-	 * @return string formulaire
-	 * @author Pierre Basson
-	 **/
 	function balise_FORMULAIRE_OUBLI_FORMULAIRE($p) {
 		return calculer_balise_dynamique($p,'FORMULAIRE_OUBLI_FORMULAIRE', array());
 	}
 
 
-	/**
-	 * balise_FORMULAIRE_OUBLI_FORMULAIRE_dyn
-	 *
-	 * Calcule la balise #FORMULAIRE_OUBLI_FORMULAIRE
-	 *
-	 * @return formulaire
-	 * @author Pierre Basson
-	 **/
 	function balise_FORMULAIRE_OUBLI_FORMULAIRE_dyn() {
 
 		$bouton_valider = _request('bouton_valider');
@@ -47,9 +32,10 @@
 				if (!ereg(_REGEXP_EMAIL, $email)) {
 					$email_inexistant = true;
 				} else {
-					$verification = spip_query('SELECT id_applicant FROM spip_applicants WHERE email="'.addslashes($email).'" AND mdp!=""');
-					if (spip_num_rows($verification) == 1) {
-						list($id_applicant) = spip_fetch_array($verification, SPIP_NUM);
+					$verification = sql_select('id_applicant', 'spip_applicants', 'email="'.addslashes($email).'" AND mdp!=""');
+					if (sql_count($verification) == 1) {
+						$t = sql_fetch($verification);
+						$id_applicant = $t['id_applicant'];
 						$email_inexistant = false;
 					} else {
 						$email_inexistant = true;
@@ -57,18 +43,17 @@
 				}
 			}
 			if (!$email_inexistant and $id_applicant) {
-				if (isset($GLOBALS['meta']['spip_notifications_version'])) {
-					$nouveau_mdp = strtolower(formulaires_generer_nouveau_mdp());
-					include_spip('inc/spip-notifications');
-					$objet = $GLOBALS['meta']['nom_site'].' - '._T('formulairespublic:nouveau_mot_de_passe');
-					$message_html	= inclure_balise_dynamique(array('notifications/notification_oubli_formulaire_html', 0, array('nouveau_mdp' => $nouveau_mdp)), false);
-					$message_texte	= inclure_balise_dynamique(array('notifications/notification_oubli_formulaire_texte', 0, array('nouveau_mdp' => $nouveau_mdp)), false);
-					$notification	= new Notification($email, $objet, $message_html, $message_texte);
-					if ($notification->Send()) {
-						spip_query('UPDATE spip_applicants SET mdp="'.$nouveau_mdp.'" WHERE id_applicant="'.$id_applicant.'"');
-						$succes = true;
-					}
-				}							
+				include_spip('public/assembler');
+				$nouveau_mdp = strtolower(formulaires_generer_nouveau_mdp());
+				$objet			= recuperer_fond('notifications/notification_oubli_formulaire_titre', array('nouveau_mdp' => $nouveau_mdp, 'lang' => $lang));
+				$message_html	= recuperer_fond('notifications/notification_oubli_formulaire_html', array('nouveau_mdp' => $nouveau_mdp, 'lang' => $lang));
+				$message_texte	= recuperer_fond('notifications/notification_oubli_formulaire_texte', array('nouveau_mdp' => $nouveau_mdp, 'lang' => $lang));
+				$corps = array('html' => $message_html, 'texte' => $message_texte);
+				$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
+				if ($envoyer_mail($email, $objet, $corps)) {
+					sql_updateq('spip_applicants', array('mdp' => $nouveau_mdp), 'id_applicant='.intval($id_applicant));
+					$succes = true;
+				}
 			}
 		} else {
 			$email_inexistant = false;

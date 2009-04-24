@@ -41,7 +41,7 @@
 			exit();
 		}
 
-		if (!empty($_POST['changer_auteur'])) {
+		if (!empty($_POST['ajouter_auteur'])) {
 			$formulaire->ajouter_auteur(intval($_POST['id_auteur']));
 			header('Location: ' . $url);
 			exit();
@@ -96,14 +96,8 @@
 
 		$raccourcis = icone_horizontale(_T('formulairesprive:creer_nouveau_formulaire'), generer_url_ecrire("formulaires_edit"), _DIR_PLUGIN_FORMULAIRES."/prive/images/formulaire-24.png", 'creer.gif', false);
 		$raccourcis.= icone_horizontale(_T('formulairesprive:aller_liste_formulaires'), generer_url_ecrire("formulaires_tous"), _DIR_PLUGIN_FORMULAIRES.'/prive/images/formulaire-24.png', 'rien.gif', false);
-		if ($formulaire->limiter_invitation == 'oui')
-			$raccourcis.= icone_horizontale(_T('formulairesprive:creer_invitation'), generer_url_ecrire("invitations_edit", "id_formulaire=".$formulaire->id_formulaire), _DIR_PLUGIN_FORMULAIRES."/prive/images/invitation.png", 'creer.gif', false);
 		$raccourcis.= icone_horizontale(_T('formulairesprive:copier_ce_formulaire'), generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=copie', false, true), _DIR_PLUGIN_FORMULAIRES.'/prive/images/formulaire-24.png', 'creer.gif', false);
 		echo bloc_des_raccourcis($raccourcis);
-
-		if ($formulaire->limiter_invitation == 'oui') {
-			echo afficher_objets('application', _T('formulairesprive:liste_applications'), array('FROM' => 'spip_applications', 'WHERE' => 'id_formulaire='.intval($formulaire->id_formulaire), 'ORDER BY' => 'maj DESC'));
-		}
 
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'formulaires','id_formulaire'=>$id_formulaire),'data'=>''));
 
@@ -166,9 +160,13 @@
 		echo http_img_pack("searching.gif", ' ', ' id="searching-formulaire" style="position: absolute; top: 3px; right: 3px; visibility: hidden;"');
 		echo '</div>';
 
-		echo "<div align='$spip_lang_right'>";
 		echo icone_inline(_T('formulairesprive:creer_nouveau_bloc'), generer_url_ecrire("blocs_edit","id_formulaire=".$formulaire->id_formulaire."&new=oui"), _DIR_PLUGIN_FORMULAIRES.'/prive/images/bloc.png', "creer.gif", $spip_lang_right);
-		echo "</div><p>";
+
+		if ($formulaire->limiter_invitation == 'oui') {
+			echo '<br class="nettoyeur" />';
+			echo afficher_objets('application', _T('formulairesprive:liste_applications'), array('FROM' => 'spip_applications', 'WHERE' => 'id_formulaire='.intval($formulaire->id_formulaire), 'ORDER BY' => 'maj DESC'));
+			echo icone_inline(_T('formulairesprive:creer_invitation'), generer_url_ecrire("invitations_edit","id_formulaire=".$formulaire->id_formulaire), _DIR_PLUGIN_FORMULAIRES.'/prive/images/invitation.png', "creer.gif", $spip_lang_right);
+		}
 
 		echo fin_gauche();
 

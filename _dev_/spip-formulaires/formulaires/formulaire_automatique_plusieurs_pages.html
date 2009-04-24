@@ -90,7 +90,7 @@
 <li class="[(#OBLIGATOIRE|?{'obligatoire'})][ (#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|?{'erreur'})]">
 <label for="q_#ID_QUESTION">#TITRE</label>
 [<span class="explication">(#DESCRIPTIF)</span>]
-<textarea name="q_#ID_QUESTION" id="q_#ID_QUESTION" rows="5" cols="40">#REPONSE</textarea>
+<textarea class="textarea" name="q_#ID_QUESTION" id="q_#ID_QUESTION" rows="5" cols="40">#REPONSE</textarea>
 [<span class="erreur_message">(#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|formulaires_afficher_erreur{#CONTROLE})</span>]
 </li>
 </BOUCLE_q_zone_texte>

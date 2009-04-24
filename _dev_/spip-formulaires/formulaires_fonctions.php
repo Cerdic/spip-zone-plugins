@@ -83,84 +83,61 @@
 
 
 	function formulaires_afficher_auteurs($id_formulaire) {
-/* TODO
-		$titre_barre = _T('formulairesprive:auteurs');
-
-		if ($modif)
-			debut_cadre_enfonce('../'._DIR_PLUGIN_FORMULAIRES.'/img_pack/auteurs.png', false, "", bouton_block_invisible('auteurs').$titre_barre);
-		else
-			debut_cadre_enfonce('../'._DIR_PLUGIN_FORMULAIRES.'/img_pack/auteurs.png', false, "", $titre_barre);
-
+		$auteurs = '<form method="post" action="'.generer_url_ecrire('formulaires', 'id_formulaire='.$id_formulaire).'">';
+		$bouton = bouton_block_depliable(_T('formulairesprive:auteurs'), false, 'auteurs');
+		$auteurs.= debut_cadre_enfonce(_DIR_PLUGIN_FORMULAIRES.'/prive/images/auteurs.png', true, "", $bouton);
 		$tableau_auteurs_interdits = array();
-
-		$auteurs_associes = 'SELECT A.id_auteur,
-								A.email,
-								A.nom
-							FROM spip_auteurs AS A
-							INNER JOIN spip_auteurs_formulaires AS AF ON AF.id_auteur=A.id_auteur
-							WHERE AF.id_formulaire="'.$id_formulaire.'"
-							ORDER BY A.nom';
-		$resultat_auteurs_associes = spip_query($auteurs_associes);
-		if (@spip_num_rows($resultat_auteurs_associes) > 0) {
-			echo "<div class='liste'>\n";
-			echo "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>\n";
-			while ($arr = spip_fetch_array($resultat_auteurs_associes)) {
+		$resultat_auteurs_associes = sql_select('A.id_auteur, A.email, A.nom', 'spip_auteurs AS A INNER JOIN spip_auteurs_formulaires AS AF ON AF.id_auteur=A.id_auteur', 'AF.id_formulaire='.intval($id_formulaire), '', 'A.nom');
+		if (sql_count($resultat_auteurs_associes) > 0) {
+			$auteurs.= "<div class='liste'>\n";
+			$auteurs.= "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>\n";
+			while ($arr = sql_fetch($resultat_auteurs_associes)) {
 				$tableau_auteurs_interdits[] = $arr['id_auteur'];
-				echo "<tr class='tr_liste'>\n";
-				echo "<td width='25' class='arial11'>\n";
-				echo "</td>\n";
-				echo "<td class='arial2'>\n";
-				echo "<A HREF='".generer_url_ecrire("auteur_infos","id_auteur=".$arr['id_auteur'], true)."'>\n";
-				echo propre($arr['nom']);
-				echo "</A>\n";
-				echo "</td>\n";
-				echo "<td class='arial2'>\n";
-				echo $arr['email'];
-				echo "</td>\n";
-				if ($modif) {
-					echo "<td class='arial1'>\n";
-					echo "<A HREF='".generer_url_ecrire("formulaires","id_formulaire=$id_formulaire&supprimer_auteur=".$arr['id_auteur'], true)."'>\n";
-					echo _T('formulairesprive:retirer_auteur')."\n";
-					echo "</A>\n";
-					echo "</td>\n";
-				}
-				echo "</tr>\n";
+				$auteurs.= "<tr class='tr_liste'>\n";
+				$auteurs.= "<td width='12' class='arial11'>\n";
+				$auteurs.= "</td>\n";
+				$auteurs.= "<td class='arial2'>\n";
+				$auteurs.= "<a href='".generer_url_ecrire("auteur_infos","id_auteur=".$arr['id_auteur'], true)."'>\n";
+				$auteurs.= typo($arr['nom']);
+				$auteurs.= "</a>\n";
+				$auteurs.= "</td>\n";
+				$auteurs.= "<td class='arial2'>\n";
+				$auteurs.= $arr['email'];
+				$auteurs.= "</td>\n";
+				$auteurs.= "<td class='arial1'>\n";
+				$auteurs.= "<a href='".generer_url_ecrire("formulaires","id_formulaire=$id_formulaire&supprimer_auteur=".$arr['id_auteur'], true)."'>\n";
+				$auteurs.= _T('formulairesprive:retirer_auteur')."\n";
+				$auteurs.= "</a>\n";
+				$auteurs.= "</td>\n";
+				$auteurs.= "</tr>\n";
 			}
-			echo "</table>\n";
-			echo "</div>\n";
+			$auteurs.= "</table>\n";
+			$auteurs.= "</div>\n";
 		}
-		if ($modif) {
-			$auteurs_interdits = implode(",", $tableau_auteurs_interdits);
-			if (!empty($auteurs_interdits))
-				$where_auteurs_interdits = ' WHERE A.id_auteur NOT IN ('.$auteurs_interdits.')';
-			else
-				$where_auteurs_interdits = '';
-			$requete = 'SELECT A.id_auteur, 
-							A.nom
-						FROM spip_auteurs AS A
-						'.$where_auteurs_interdits.'
-						ORDER BY A.nom';
-			$resultat_requete = spip_query($requete);
-			if (@spip_num_rows($resultat_requete) > 0) {
-				echo debut_block_invisible('auteurs');
-				echo "<table border='0' width='100%' style='text-align: right'>";
-				echo "<tr>";
-				echo "	<td><span class='verdana1'><B>"._T('formulairesprive:ajouter_auteur')."</B></span> &nbsp;</td>";
-				echo "	<td>";
-				echo "		<select name='id_auteur' SIZE='1' STYLE='width: 180px;' CLASS='fondl'>";
-				while ($arr = spip_fetch_array($resultat_requete)) {
-					echo "				<option value='".$arr['id_auteur']."'>".propre($arr['nom'])."</option>";
-				}
-				echo "		</select><br/>";
-				echo "	</td>";
-				echo "	<td> &nbsp; <INPUT TYPE='submit' NAME='changer_auteur' VALUE='"._T('formulairesprive:choisir')."' CLASS='fondo' STYLE='font-size:10px'></td>";
-				echo "</tr>";
-				echo "</table>";
-				echo fin_block();
+		$auteurs.= debut_block_depliable(false, 'auteurs');
+		$auteurs_interdits = implode(",", $tableau_auteurs_interdits);
+		if (!empty($auteurs_interdits))
+			$where_auteurs_interdits = 'id_auteur NOT IN ('.$auteurs_interdits.')';
+		else
+			$where_auteurs_interdits = '';
+		$resultat_requete = sql_select('id_auteur, email', 'spip_auteurs', $where_auteurs_interdits, '', 'nom');
+		if (sql_count($resultat_requete) > 0) {
+			$auteurs.= _T('formulairesprive:ajouter_auteur');
+			$auteurs.= "&nbsp;&nbsp;&nbsp;&nbsp;";
+			$auteurs.= '<select name="id_auteur" class="fondl">';
+			while ($arr = sql_fetch($resultat_requete)) {
+				$auteurs.= "<option value='".$arr['id_auteur']."'>".typo($arr['email'])."</option>";
 			}
+			$auteurs.= "</select>";
+			$auteurs.= '<div align="right">';
+			$auteurs.= '<input type="submit" name="ajouter_auteur" class="fondo" value="'._T('formulairesprive:choisir').'" />';
+			$auteurs.= '</div>';
 		}
-		fin_cadre_enfonce();
-*/	}
+		$auteurs.= fin_block();
+		$auteurs.= fin_cadre_enfonce(true);
+		$auteurs.= '</form>';
+		return $auteurs;
+	}
 	
 
 
