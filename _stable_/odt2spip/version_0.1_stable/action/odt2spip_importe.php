@@ -63,6 +63,10 @@ function action_odt2spip_importe() {
     $Tplugins = liste_plugin_actifs();
     $intertitres_riches = ((array_key_exists('TYPOENLUMINEE', $Tplugins) OR array_key_exists('INTERTITRESTDM', $Tplugins)) ? 'oui' : 'non'); 
     
+  // faut il mettre les images en mode document?
+    $type = (_request('mode_image') AND _request('mode_image') == 'document') ? 'document' : ($spip_version_code > 2 ? 'image' : 'vignette');
+    $ModeImages = ($type == 'document' ? 'doc' : 'img');
+    
   // appliquer la transformation XSLT sur le fichier content.xml
     // déterminer les fonctions xslt à utiliser (php 4 ou php 5)
     if (!class_exists('XSLTProcessor')) {
@@ -77,7 +81,7 @@ function action_odt2spip_importe() {
 //        else xslt_set_base($xh, getcwd () . '/');
       
       // definition de l'array des parametres a passer a la xslt
-        $params = array('IntertitresRiches' => $intertitres_riches);
+        $params = array('IntertitresRiches' => $intertitres_riches, 'ModeImages' => $ModeImages);
         
       // lancer le parseur
         $xml_sortie = xslt_process($xh, $xml_entre, $xslt_texte, NULL, array(), $params);
@@ -91,7 +95,8 @@ function action_odt2spip_importe() {
         $proc = new XSLTProcessor();
 
       // passage d'un parametre a la xslt
-        $proc->setParameter(null, 'IntertitresRiches', $intertitres_riches);   
+        $proc->setParameter(null, 'IntertitresRiches', $intertitres_riches);
+        $proc->setParameter(null, 'ModeImages', $ModeImages);
         
         $xml = new DOMDocument();
         $xml->load($xml_entre);
@@ -126,12 +131,18 @@ function action_odt2spip_importe() {
     
     // virer les sauts de ligne multiples
     $xml_sortie = preg_replace('/([\r\n]{2})[ \r\n]*/m', "$1", $xml_sortie);
-        
+    
+    // si malgré toutes les magouille xslt la balise  <titre> est vide, mettre le nom du fichier odt
+    if(preg_match('/<titre>([ ]*?)<\/titre>/', $xml_sortie, $match) == 1)
+        $xml_sortie = preg_replace('/<titre>[ ]*?<\/titre>/', 
+                                   '<titre>'.str_replace(array('_','-','.odt'), array(' ',' ',''), $fichier_zip).'</titre>', 
+                                   $xml_sortie);    
+
     // traiter les images: dans tous les cas il faut les intégrer dans la table documents
     // en 1.9.2 c'est mode vignette + il faut les intégrer dans la table de liaison 
     // en 2.0 c'est mode image + les fonctions de snippets font la liaison => on bloque la liaison en filant un id_article vide
-    $id_article_tmp = ($spip_version_code > 2 ? '' : 10000);    
-    preg_match_all('/<img([;a-zA-Z0-9\.]*)/', $xml_sortie, $match, PREG_PATTERN_ORDER);
+    $id_article_tmp = ($spip_version_code > 2 ? '' : 100000);    
+    preg_match_all('/<'.$ModeImages.'([;a-zA-Z0-9\.]*)/', $xml_sortie, $match, PREG_PATTERN_ORDER);
     if (@count($match) > 0) {
         include_spip('inc/ajouter_document');
         $T_images = array();
@@ -147,7 +158,7 @@ function action_odt2spip_importe() {
                 // la y'a un bogue super-bizarre avec la fonction spip_abstract_insert() qui est donnee comme absente lors de l'appel de ajouter_document()
                 if (!function_exists('spip_abstract_insert')) include_spip('base/abstract_sql');
                 $ajouter_documents = charger_fonction('ajouter_documents','inc');
-                $type = ($spip_version_code > 2 ? 'image' : 'vignette');
+//                $type = ($spip_version_code > 2 ? 'image' : 'vignette');
                 if ($id_document = $ajouter_documents($rep_pictures.$img, $img, "article", $id_article_tmp, $type, 0, $toto='')) { 
                   // uniformiser la sortie: si on est en 1.9.2 inc_ajouter_documents_dist() retourne le type de fichier (extension) alors qu'en 2.0 c'est l'id_document
                     if (!is_numeric($id_document)) {
@@ -172,7 +183,7 @@ function action_odt2spip_importe() {
         if (!fwrite($fic, $xml_sortie)) die(_T('odtspip:err_enregistrement_fichier_sortie').$fichier_sortie);
         fclose($fic);
     }
-/* die;   */
+/* die;  */ 
   // générer l'article à partir du fichier xml de sortie (code pompé sur plugins/snippets/action/snippet_importe.php)
     include_spip('inc/snippets');
 		$table = $id = 'articles';
@@ -184,7 +195,6 @@ function action_odt2spip_importe() {
     $translations = $f($id,$arbre,$contexte);
     snippets_translate_raccourcis_modeles($translations);
     $id_article = $translations[0][2]; 
-    
   // si on est en 1.9.2 mettre à jour l'id_article auquel sont liees les images
     if ($spip_version_code < 2) spip_query("UPDATE spip_documents_articles SET id_article = $id_article WHERE id_document IN (".implode(',',$T_images).")");
 

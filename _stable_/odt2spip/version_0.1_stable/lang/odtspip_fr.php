@@ -14,6 +14,9 @@
   
     // C
 			'choix_fichier' => 'Fichier ODT &agrave; utiliser : ',
+        
+    // D
+        'mode_document' => 'documents',
 
     // E
         'err_enregistrement_fichier_sortie' => 'Erreur lors de l\'enregistrement du fichier de snippet ',
@@ -25,6 +28,8 @@
         'err_transformation_xslt_mathml' => 'Erreur XSLT lors de la conversion du MathML',
 
     // I
+        'images_mode_document' => 'Images attach&eacute;es en mode:',
+        'mode_image' => 'images',
         'importer_fichier' => 'Cr&eacute;er un article &agrave; partir d\'un fichier OOo Writer',
         
     // N

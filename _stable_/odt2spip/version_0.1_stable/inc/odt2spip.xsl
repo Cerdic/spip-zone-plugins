@@ -40,9 +40,12 @@
             indent="yes" />
 <xsl:preserve-space elements="*" />
 
-<!-- Récuperation du parametre venant de PHP: IntertitresRiches = oui|non 
+<!-- Récuperation des parametres venant de PHP: 
+  IntertitresRiches = oui|non 
   en fct de la presence d'un des plugins enluminure_typo ou intertitres_enrichis -->
 <xsl:param name="IntertitresRiches"/>
+<!-- ModeImages = img|doc pour la balise a utiliser pour integrer les images -->
+<xsl:param name="ModeImages"/>
 
 <!-- gestion des titres de façon la plus generique possible -->
 <!-- si @text:style-name='Heading' est utilise, recuperer 'Heading' dans $STyleTitreGeneral -->
@@ -223,6 +226,7 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
 -->
 <!-- test recuperation du parametre passe par PHP 
 intertitres_riches= <xsl:value-of select="$IntertitresRiches" />
+ModeImages= <xsl:value-of select="$ModeImages" />
 -->
 <articles>
 	<article>
@@ -508,7 +512,7 @@ _ <xsl:apply-templates />
    </xsl:if>
 </xsl:template>
 
-<xsl:template name="img2texte">&#60;img<xsl:value-of select="substring(@xlink:href,10)"/>;;;<xsl:value-of select="substring-before(parent::draw:frame/@svg:width,'cm')" />;;;<xsl:value-of select="substring-before(parent::draw:frame/@svg:height,'cm')" />;;;|<xsl:choose>
+<xsl:template name="img2texte">&#60;<xsl:value-of select="$ModeImages" /><xsl:value-of select="substring(@xlink:href,10)"/>;;;<xsl:value-of select="substring-before(parent::draw:frame/@svg:width,'cm')" />;;;<xsl:value-of select="substring-before(parent::draw:frame/@svg:height,'cm')" />;;;|<xsl:choose>
 <!-- sale bidouille pour approximer la position de l'image (|left |center |right) -->
 <xsl:when test="substring-before(parent::draw:frame/@svg:x, 'cm') &lt;= 2">left</xsl:when>
 <xsl:when test="substring-before(parent::draw:frame/@svg:x, 'cm') &gt;= 5">right</xsl:when>

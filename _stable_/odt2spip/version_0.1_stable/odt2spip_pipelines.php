@@ -25,6 +25,11 @@ function odt2spip_affiche_droite($flux){
     $out .= "<input type='radio' name='attacher_odt' value='1' id='attacher_oui' checked='checked'/>";
     $out .= "<input type='radio' name='attacher_odt' value='0' id='attacher_non'/>";
     $out .= "<label for='attacher_non'>"._T("odtspip:non")."</label>";
+    $out .= "<br /><br /><strong>"._T("odtspip:images_mode_document")."</strong><br />";
+    $out .= "<label for='mode_image'>"._T("odtspip:mode_image")."</label>";
+    $out .= "<input type='radio' name='mode_image' value='image' id='mode_image' checked='checked'/>";
+    $out .= "<input type='radio' name='mode_image' value='document' id='mode_document'/>";
+    $out .= "<label for='mode_document'>"._T("odtspip:mode_document")."</label>";    
     $out .= "</small><br />";
     $out .= "<div style='text-align:$spip_lang_right'>";
     $out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
