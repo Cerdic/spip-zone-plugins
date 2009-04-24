@@ -36,7 +36,7 @@ function MiroirSyndic_creer_article($t) {
 
 #spip_log('insert', 'syndic');
 
-	$id_article = sql_insert('spip_articles',
+	$id_article = spip_abstract_insert('spip_articles',
 		'(id_rubrique, id_secteur, statut, url_site, lang)',
 		"(".$t['id_rubrique'].", ".$t['id_secteur'].",
 		'publie', '".addslashes($t['url'])."', '$lang')"
