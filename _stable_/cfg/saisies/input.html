@@ -1,23 +1,13 @@
 [(#REM) 
 
-  Parametres :
-  ** : obligatoire
-  * : fortement conseille
-  
-  - ** nom : nom du parametre
-  - * label : nom joli
-  - * erreurs : tableau des erreurs
-  - * valeur : valeur actuelle du parametre
+  Parametres supplementaire :
   - defaut : valeur par defaut du parametre
-  - obligatoire : est-ce un parametre obligatoire ? (defaut: non, valeurs : null/"non"/autre=oui )
-  - info_ogligatoire : si obligatoire, ajoute ce contenu apres le label (defaut : "")
   - type : type de l'input (defaut: text)
-  - explication : texte d'explication suppplementaire
   - class : classe(s) css ajoutes a l'input
   - size : taille du champ
   
   Exemple d'appel :
-	[(#INCLURE{fond=saisies/input}
+	[(#INCLURE{fond=saisies/_base}{type_saisie=input}
 		{nom=couleur_foncee}
 		{valeur=#ENV{couleur_foncee}}
 		{label=<:spa:couleur_foncee:>}
@@ -26,17 +16,6 @@
 		{erreurs})] 
 ]
 
-[(#ENV{nom}|oui)
-#SET{erreurs,#ENV**{erreurs}|table_valeur{#ENV{nom}}}
-#SET{obligatoire,#ENV{obligatoire}|et{#ENV{obligatoire}|!={non}}|?{obligatoire,''}}
+
 #SET{type,#ENV{type,text}}
-<li class="editer_[(#ENV{nom})][ (#GET{obligatoire})][ (#GET{erreurs}|oui)erreur]">
-	<label for="champ_#ENV{nom}">
-		[(#ENV{label}|sinon{#ENV{nom}})]
-		[<span class='obligatoire'>(#GET{obligatoire}|et{#ENV{info_obligatoire}})#ENV{info_obligatoire}</span>]
-	</label>
-		[<span class='erreur_message'>(#GET{erreurs})</span>]
-		[<p class='explication'>(#ENV{explication})</p>]
-		<input type="#GET{type}" name="#ENV{nom}" class="#GET{type}[ (#ENV{class})]" id="champ_#ENV{nom}"[ value="(#ENV{valeur}|sinon{#ENV{defaut}})"][ size="(#ENV{size})"] />
-</li>
-]
+<input type="#GET{type}" name="#ENV{nom}" class="#GET{type}[ (#ENV{class})]" id="champ_#ENV{nom}"[ value="(#ENV{valeur}|sinon{#ENV{defaut}})"][ size="(#ENV{size})"] />

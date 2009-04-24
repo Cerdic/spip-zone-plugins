@@ -27,7 +27,76 @@ function balise_CONFIG($p) {
 	return $p;
 }
 
+// #SAISIE{input}{nom=toto}
+// =
+// #INCLURE{fond=saisies/_base}
+//	{type_saisie=input}
+//	{nom=toto}{valeur=#ENV{toto}}
+//	{erreurs}
+//
+function balise_SAISIE_dist($p) {
 
+	include_spip('inc/interfaces');
+	$param = array();
+	
+	$type_saisie = array_shift($p->param);
+	// retrouver le nom {nom=xx} pour le passer a valeur {valeur=#ENV{xx}}
+	foreach ($p->param as $c=>$q) {
+		if ((strpos($q[1][0]->texte, 'nom') === 0)
+		and preg_match("/^nom\s*=/" , $q[1][0]->texte)) {
+			$me = $q[1];
+			// {nom=toto}
+			if (count($me) == 1) {
+				list(,$nom) = explode('=', $me[0]->texte, 2); // supprimer nom=
+				$nom = balise_saisie_param(trim($nom));
+			}
+			// {nom=#BALISE...}
+			else {
+				$nom = array(0=>'', 1=>array($me[1]));
+			}
+			// ajouter la trouvaille
+			$valeur = new Champ;
+			$valeur->type = 'champ';
+			$valeur->nom_champ='ENV';
+			$valeur->param = array($nom);
+			array_unshift($p->param, balise_saisie_param('valeur', '', $valeur));
+			break;
+		}
+	}
+
+	// ajouter {erreurs} {fond=saisies/_base} et {type_saisie=xxx}
+	array_unshift($p->param, balise_saisie_param('erreurs'));
+	array_unshift($p->param, balise_saisie_param('fond', 'saisies/_base'));
+	array_unshift($p->param, balise_saisie_param('type_saisie', $type_saisie[1][0]->texte));
+	
+	
+	
+	//print_r($p); die();
+	
+	if(function_exists('balise_INCLURE'))
+		return balise_INCLURE($p);
+	else
+		return balise_INCLURE_dist($p);	
+}
+
+// balise_saisie_param(nom) = {nom}
+// balise_saisie_param(nom, 'coucou') = {nom=coucou}
+// balise_saisie_param(nom, '', $params) = {nom=#BALISE}
+function balise_saisie_param($nom, $valeur=null, $balise=null) {
+	$s = new Texte;
+	$s->type="texte";
+	if (is_null($valeur)) {
+		$s->texte = $nom;
+	} else {
+		$s->texte = "$nom=$valeur";
+	}
+	$s->ligne=0;
+	if (!$balise) {
+		return array(0=>'', 1=>array(0=>$s));
+	} else {
+		return array(0=>'', 1=>array(0=>$s, 1=>$balise));
+	}
+}
 
 # CFG_CHEMIN
 
@@ -49,7 +118,6 @@ function balise_CFG_CHEMIN_dist($p) {
 	
 	return $p;
 }
-
 
 
 # CFG_ARBO

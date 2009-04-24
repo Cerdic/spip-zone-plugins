@@ -1,3 +1,9 @@
+v1.12 (25 04 2009)
+  * (en test) les saisies/ sont modifies, elles passent toutes par le fichier saisies/_base
+  et sont appelees par #SAISIE{input}{nom=ville} qui passe automatiquement les
+  parametre : {erreurs}, {valeur=#ENV{ville}}, {fond=saisies/_base} et {type_saisie=input}
+  puis charge la balise #INCLURE
+
 v1.11 (15 04 2009)
   * (en test) Ajout d'un dossier saisies/ pour faciliter l'ajout de champ
   facon SPIP 2.0 dans CFG. Les inclusions disposent de parametres pour les utiliser
