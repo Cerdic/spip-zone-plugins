@@ -84,7 +84,7 @@
 
 	function formulaires_afficher_auteurs($id_formulaire) {
 		$auteurs = '<form method="post" action="'.generer_url_ecrire('formulaires', 'id_formulaire='.$id_formulaire).'">';
-		$bouton = bouton_block_depliable(_T('formulairesprive:auteurs'), false, 'auteurs');
+		$bouton = bouton_block_depliable(_T('formulairesprive:bloc_auteurs'), false, 'auteurs');
 		$auteurs.= debut_cadre_enfonce(_DIR_PLUGIN_FORMULAIRES.'/prive/images/auteurs.png', true, "", $bouton);
 		$tableau_auteurs_interdits = array();
 		$resultat_auteurs_associes = sql_select('A.id_auteur, A.email, A.nom', 'spip_auteurs AS A INNER JOIN spip_auteurs_formulaires AS AF ON AF.id_auteur=A.id_auteur', 'AF.id_formulaire='.intval($id_formulaire), '', 'A.nom');
@@ -130,7 +130,7 @@
 			}
 			$auteurs.= "</select>";
 			$auteurs.= '<div align="right">';
-			$auteurs.= '<input type="submit" name="ajouter_auteur" class="fondo" value="'._T('formulairesprive:choisir').'" />';
+			$auteurs.= '<input type="submit" name="ajouter_auteur" class="fondo" value="'._T('formulairesprive:valider').'" />';
 			$auteurs.= '</div>';
 		}
 		$auteurs.= fin_block();

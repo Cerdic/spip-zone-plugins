@@ -106,7 +106,7 @@
 			else
 				echo icone_inline(_T('icone_retour'), generer_url_ecrire('formulaires_tous'), _DIR_PLUGIN_FORMULAIRES.'/prive/images/formulaire-24.png', "rien.gif", $GLOBALS['spip_lang_left']);
 		}
-		echo _T('formulairesprive:editer_formulaire');
+		echo _T('formulairesprive:edition');
 		echo '<h1>'.$formulaire->titre.'</h1>';
 		echo '</div>';
 
@@ -170,9 +170,6 @@
 		echo '<option value="non"'.(($formulaire->limiter_applicant == 'non') ? ' selected="selected"' : '' ).'>'._T('formulairesprive:non').'</option>';
 		echo '<option value="oui"'.(($formulaire->limiter_applicant == 'oui') ? ' selected="selected"' : '' ).'>'._T('formulairesprive:oui').'</option>';
 		echo '</select>';
-		echo '</li>';
-	    echo '<li class="obligatoire limiter_applicant" style="'.$style.'">';
-		echo "<em>"._T('formulairesprive:limiter_applicant_note')."</em>";
 		echo '</li>';
 
 		if ($GLOBALS['meta']['spip_formulaires_utiliser_descriptif'] == 'oui') {

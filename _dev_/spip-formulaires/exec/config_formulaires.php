@@ -78,7 +78,7 @@
 		echo '<table>';
 
 	    echo '<tr>';
-		echo '<td><label>'._T('formulairesprive:spip_formulaires_utiliser_descriptif').'</label></td>';
+		echo '<td><label>'._T('formulairesprive:utiliser_descriptif').'</label></td>';
 		echo '<td>';
 		echo '<input type="radio" class="radio" name="spip_formulaires_utiliser_descriptif" value="oui" id="spip_formulaires_utiliser_descriptif_oui" '.($spip_formulaires_utiliser_descriptif == 'oui' ? 'checked="checked" ' : '').'/><label for="spip_formulaires_utiliser_descriptif_oui">'._T('formulairesprive:oui').'</label>';
 		echo '&nbsp;';
@@ -87,7 +87,7 @@
 		echo '</tr>';
 
 	    echo '<tr>';
-		echo '<td><label>'._T('formulairesprive:spip_formulaires_utiliser_chapo').'</label></td>';
+		echo '<td><label>'._T('formulairesprive:utiliser_chapo').'</label></td>';
 		echo '<td>';
 		echo '<input type="radio" class="radio" name="spip_formulaires_utiliser_chapo" value="oui" id="spip_formulaires_utiliser_chapo_oui" '.($spip_formulaires_utiliser_chapo == 'oui' ? 'checked="checked" ' : '').'/><label for="spip_formulaires_utiliser_chapo_oui">'._T('formulairesprive:oui').'</label>';
 		echo '&nbsp;';
@@ -96,7 +96,7 @@
 		echo '</tr>';
 
 	    echo '<tr>';
-		echo '<td><label>'._T('formulairesprive:spip_formulaires_utiliser_ps').'</label></td>';
+		echo '<td><label>'._T('formulairesprive:utiliser_ps').'</label></td>';
 		echo '<td>';
 		echo '<input type="radio" class="radio" name="spip_formulaires_utiliser_ps" value="oui" id="spip_formulaires_utiliser_ps_oui" '.($spip_formulaires_utiliser_ps == 'oui' ? 'checked="checked" ' : '').'/><label for="spip_formulaires_utiliser_ps_oui">'._T('formulairesprive:oui').'</label>';
 		echo '&nbsp;';

@@ -84,7 +84,7 @@
 		echo '<div class="cadre-formulaire-editer">';
 		echo '<div class="entete-formulaire">';
 		echo icone_inline(_T('icone_retour'), generer_url_ecrire('formulaires', 'id_formulaire='.$choix_question->question->bloc->formulaire->id_formulaire), _DIR_PLUGIN_FORMULAIRES.'/prive/images/formulaire-24.png', "rien.gif", $GLOBALS['spip_lang_left']);
-		echo _T('formulairesprive:editer_choix_question');
+		echo _T('formulairesprive:edition');
 		echo '<h1>'.$choix_question->titre.'</h1>';
 		echo '</div>';
 

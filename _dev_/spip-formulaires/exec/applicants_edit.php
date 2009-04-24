@@ -61,7 +61,7 @@
 		echo '<div class="cadre-formulaire-editer">';
 		echo '<div class="entete-formulaire">';
 		echo icone_inline(_T('icone_retour'), generer_url_ecrire('applicants', 'id_applicant='.$applicant->id_applicant), _DIR_PLUGIN_FORMULAIRES.'/prive/images/applications.png', "rien.gif", $GLOBALS['spip_lang_left']);
-		echo _T('formulairesprive:editer_applicant');
+		echo _T('formulairesprive:edition');
 		echo '<h1>'.$applicant->email.'</h1>';
 		echo '</div>';
 

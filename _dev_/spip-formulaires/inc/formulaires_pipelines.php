@@ -204,7 +204,7 @@
 		if (autoriser('voir', 'formulaires')) {
 			$boutons_admin['naviguer']->sousmenu['formulaires_tous'] = new Bouton(_DIR_PLUGIN_FORMULAIRES.'/prive/images/formulaire-24.png', _T('formulairesprive:formulaires'));
 			if (sql_countsel('APP.id_application', 'spip_applications AS APP INNER JOIN spip_applicants AS A ON A.id_applicant=APP.id_applicant', 'A.email!=""') > 0)
-				$boutons_admin['naviguer']->sousmenu['applications_tous'] = new Bouton(_DIR_PLUGIN_FORMULAIRES.'/prive/images/applications.png', _T('formulairesprive:applicants_applications'));
+				$boutons_admin['naviguer']->sousmenu['applications_tous'] = new Bouton(_DIR_PLUGIN_FORMULAIRES.'/prive/images/applications.png', _T('formulairesprive:applications'));
 		}
 		return $boutons_admin;
 	}

@@ -47,22 +47,24 @@
 		echo _T('formulairesprive:application_numero').' :';
 		echo '<p>'.$application->id_application.'</p>';
 		echo '</div>';
+/*
 		echo '<ul class="instituer instituer_article">';
 		echo '<li>';
 		echo '<strong>'._T('formulairesprive:action').'</strong>';
 		echo '<ul>';
-		echo '<li class="prepa selected">'.http_img_pack('puce-blanche.gif', 'puce-blanche', '')._T('formulairesprive:hors_ligne').'</li>';
-		echo '<li class="publie"><a href="'.generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=en_ligne', false, true).'">'.http_img_pack('puce-verte.gif', 'puce-verte', '')._T('formulairesprive:a_mettre_en_ligne').'</a></li>';
+		echo '<li class="prepa selected">'.http_img_pack('puce-blanche.gif', 'puce-blanche', '')._T('formulairesprive:aucune').'</li>';
+		echo '<li class="publie"><a href="'.generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=en_ligne', false, true).'">'.http_img_pack('puce-verte.gif', 'puce-verte', '')._T('formulairesprive:supprimer').'</a></li>';
 		echo '</ul>';
 		echo '</li>';
 		echo '</ul>';
+*/
 		echo '</div>';
 		echo '</div>';
 		echo '</div>';
 
 
 		$raccourcis.= icone_horizontale(_T('formulairesprive:retour_formulaire'), generer_url_ecrire("formulaires", "id_formulaire=".$application->formulaire->id_formulaire), _DIR_PLUGIN_FORMULAIRES.'/prive/images/formulaire-24.png', 'rien.gif', false);
-		$raccourcis.= icone_horizontale(_T('formulairesprive:exporter_ce_resultat'), generer_url_action("applications_export", "id_application=".$application->id_application."&id_formulaire=".$application->formulaire->id_formulaire), _DIR_PLUGIN_FORMULAIRES.'/prive/images/export.png', 'rien.gif', false);
+#		$raccourcis.= icone_horizontale(_T('formulairesprive:exporter_ce_resultat'), generer_url_action("applications_export", "id_application=".$application->id_application."&id_formulaire=".$application->formulaire->id_formulaire), _DIR_PLUGIN_FORMULAIRES.'/prive/images/export.png', 'rien.gif', false);
 		echo bloc_des_raccourcis($raccourcis);
 
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'applications','id_application'=>$application->id_application),'data'=>''));

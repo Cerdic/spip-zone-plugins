@@ -80,7 +80,7 @@
 		echo '<div class="cadre-formulaire-editer">';
 		echo '<div class="entete-formulaire">';
 		echo icone_inline(_T('icone_retour'), generer_url_ecrire('formulaires', 'id_formulaire='.$question->bloc->formulaire->id_formulaire), _DIR_PLUGIN_FORMULAIRES.'/prive/images/formulaire-24.png', "rien.gif", $GLOBALS['spip_lang_left']);
-		echo _T('formulairesprive:editer_question');
+		echo _T('formulairesprive:edition');
 		echo '<h1>'.$question->titre.'</h1>';
 		echo '</div>';
 
@@ -95,7 +95,7 @@
 		echo '<input type="text" class="text" name="titre" id="titre" value="'.$question->titre.'" '.($question->id_question == -1 ? 'onfocus="if(!antifocus){this.value=\'\';antifocus=true;}" ' : '').'/>';
 		echo '</li>';
 
-	    echo '<li class="obligatoire">';
+	    echo '<li>';
 		echo '<label for="select-1">'._T('formulairesprive:bloc_parent').'</label>';
 		echo '<select name="id_bloc" id="select-1" class="fondl">';		
 		$blocs = $question->bloc->formulaire->recuperer_blocs();
@@ -108,7 +108,7 @@
 		echo '</select>';
 		echo '</li>';
 
-	    echo '<li class="obligatoire">';
+	    echo '<li>';
 		echo '<label for="select-2">'._T('formulairesprive:position').'</label>';
 		echo '<select name="position" id="select-2" class="fondl">';		
 		$i = 0;
@@ -139,7 +139,7 @@
 		echo '</li>';
 
 		if ($question->type == 'email_applicant') {
-		    echo '<li class="obligatoire">';
+		    echo '<li>';
 			echo '<label for="type">'._T('formulairesprive:type_question').'</label>';
 			echo '<select name="type" id="type" class="fondl">';		
 			echo '<option value="email_applicant">'._T('formulairesprive:email_applicant').'</option>';
@@ -175,7 +175,7 @@
 				$style = "display: none;";
 			else
 				$style = "display: block;";
-		    echo '<li id="obli" class="obligatoire" style="'.$style.'">';
+		    echo '<li id="obli" style="'.$style.'">';
 			echo '<label for="obligatoire">'._T('formulairesprive:obligatoire').'</label>';
 			echo '<select name="obligatoire" id="obligatoire" class="fondl" onchange="toggle_controle_obligatoire()">';		
 			echo '<option value="0"'.(!$question->obligatoire ? ' selected="selected"' : '').'>'._T('formulairesprive:non').'</option>';
@@ -191,7 +191,7 @@
 				$style = "display: block;";
 			else
 				$style = "display: none;";
-		    echo '<li id="crtl" class="obligatoire" style="'.$style.'">';
+		    echo '<li id="crtl" style="'.$style.'">';
 			echo '<div id="crtl_texte" style="'.$style_texte.'">';
 			echo '<label for="controle">'._T('formulairesprive:controle').'</label>';
 			echo '<select name="controle" id="controle" class="fondl">';		
