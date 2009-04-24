@@ -421,6 +421,9 @@
 	     * @return void
 	     */
 	    function supprimer() {
+			$this->limiter_invitation = 'non';
+			$this->limiter_applicant = 'non';
+			$this->enregistrer();
 			$this->supprimer_blocs();
 			$this->supprimer_auteurs();
 			$this->supprimer_documents();
@@ -1644,7 +1647,7 @@
 	     */
 		function recuperer_reponses() {
 			$reponses = array();
-			$res = sql_select('id_reponse', 'spip_reponses', 'id_question='.intval($this->id_question), '', 'ordre');
+			$res = sql_select('id_reponse', 'spip_reponses', 'id_question='.intval($this->id_question));
 			while ($arr = sql_fetch($res))
 				$reponses[] = $arr['id_reponse'];
 			return $reponses;
