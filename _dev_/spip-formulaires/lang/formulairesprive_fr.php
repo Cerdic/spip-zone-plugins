@@ -100,10 +100,11 @@
 		'nouveau_formulaire' => "Nouveau formulaire",
 		'copie' => "Copie",
 		'nouveau_bloc' => "Nouveau bloc",
-		'creer_une_nouvelle_question' => "Créer une nouvelle question",
+		'creer_nouvelle_question' => "Créer une nouvelle question",
 		'nouvelle_question' => "Nouvelle question",
 		'nouveau_choix_question' => "Nouveau choix",
 		'item_mots_cles_association_formulaires' => "aux formulaires",
+		'logo_formulaire' => "LOGO DU FORMULAIRE",
 
 		'Z' => 'ZZzZZzzz'
 
