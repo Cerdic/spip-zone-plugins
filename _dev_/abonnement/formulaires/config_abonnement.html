@@ -16,15 +16,11 @@
 		<fieldset>
 			<h3 class="legend"><:abo:fieldset_expediteur:></h3>
 			<ul>
-				[(#INCLURE{fond=saisies/input}{erreurs}
-					{nom=nom_envoi}
-					{label=<:abo:label_nom:>}
-					{valeur=#ENV{nom_envoi}})]
+				[(#SAISIE{input}{nom=nom_envoi}
+					{label=<:abo:label_nom:>})]
 					
-				[(#INCLURE{fond=saisies/input}{erreurs}
-					{nom=email_envoi}
-					{label=<:abo:label_email:>}
-					{valeur=#ENV{email_envoi}})]
+				[(#SAISIE{input}{nom=email_envoi}
+					{label=<:abo:label_email:>})]
 			</ul>
 		</fieldset>
 	</li>
@@ -33,15 +29,11 @@
 		<fieldset>
 			<h3 class="legend"><:abo:fieldset_confirmation:></h3>
 			<ul>
-				[(#INCLURE{fond=saisies/input}{erreurs}
-					{nom=sujet_ok}
-					{label=<:abo:label_sujet:>}
-					{valeur=#ENV{sujet_ok}})]
+				[(#SAISIE{input}{nom=sujet_ok}
+					{label=<:abo:label_sujet:>})]
 					
-				[(#INCLURE{fond=saisies/textarea}{erreurs}
-					{nom=texte_ok}
+				[(#SAISIE{textarea}{nom=texte_ok}
 					{label=<:abo:label_texte:>}
-					{valeur=#ENV{texte_ok}}
 					{rows=10})]
 			</ul>
 		</fieldset>
@@ -51,15 +43,11 @@
 		<fieldset>
 			<h3 class="legend"><:abo:fieldset_echec:></h3>
 			<ul>
-				[(#INCLURE{fond=saisies/input}{erreurs}
-					{nom=sujet_ko}
-					{label=<:abo:label_sujet:>}
-					{valeur=#ENV{sujet_ko}})]
+				[(#SAISIE{input}{nom=sujet_ko}
+					{label=<:abo:label_sujet:>})]
 					
-				[(#INCLURE{fond=saisies/textarea}{erreurs}
-					{nom=texte_ko}
+				[(#SAISIE{textarea}{nom=texte_ko}
 					{label=<:abo:label_texte:>}
-					{valeur=#ENV{texte_ko}}
 					{rows=10})]
 			</ul>
 		</fieldset>
@@ -69,11 +57,9 @@
 		<fieldset>
 			<h3 class="legend"><:abo:fieldset_articles_payants:></h3>
 			<ul>
-				[(#INCLURE{fond=saisies/input}{erreurs}
-					{nom=prix_article}
+				[(#SAISIE{input}{nom=prix_article}
 					{label=<:abo:label_tarif:>}
-					{explication=<:abo:explication_tarif:>}
-					{valeur=#ENV{prix_article}})]
+					{explication=<:abo:explication_tarif:>})]
 			</ul>
 		</fieldset>
 	</li>

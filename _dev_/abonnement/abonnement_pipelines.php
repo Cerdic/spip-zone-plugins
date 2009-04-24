@@ -4,7 +4,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 function abonnement_I2_cfg_form($flux) {
-	include_spip('inc/spiplistes_api_globales');
     $flux .= recuperer_fond('fonds/inscription2_abonnement');
 	return ($flux);
 }
