@@ -105,6 +105,7 @@
 		'nouveau_choix_question' => "Nouveau choix",
 		'item_mots_cles_association_formulaires' => "aux formulaires",
 		'logo_formulaire' => "LOGO DU FORMULAIRE",
+		'tous_formulaires_rubrique' => "Tous les formulaires de cette rubrique",
 
 		'Z' => 'ZZzZZzzz'
 

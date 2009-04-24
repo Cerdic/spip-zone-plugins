@@ -247,8 +247,8 @@
 		$id_rubrique = $flux['args']['id_rubrique'];
 		if (autoriser('voir', 'formulaires')) {
 			if ($id_rubrique) {
-				$flux['data'].= afficher_objets('formulaire', _T('lettresprive:tous_formulaires_rubrique'), array('FROM' => 'spip_formulaires', 'WHERE' => 'id_rubrique='.intval($id_rubrique), 'ORDER BY' => 'maj DESC'));
-				$flux['data'].= icone_inline(_T('lettresprive:creer_nouveau_formulaire'), generer_url_ecrire("formulaires_edit", "id_rubrique=$id_rubrique"), _DIR_PLUGIN_FORMULAIRES.'/prive/images/formulaire-24.png',"creer.gif", $spip_lang_right);
+				$flux['data'].= afficher_objets('formulaire', _T('formulairesprive:tous_formulaires_rubrique'), array('FROM' => 'spip_formulaires', 'WHERE' => 'id_rubrique='.intval($id_rubrique), 'ORDER BY' => 'maj DESC'));
+				$flux['data'].= icone_inline(_T('formulairesprive:creer_nouveau_formulaire'), generer_url_ecrire("formulaires_edit", "id_rubrique=$id_rubrique"), _DIR_PLUGIN_FORMULAIRES.'/prive/images/formulaire-24.png',"creer.gif", $spip_lang_right);
 				$flux['data'].= '<br class="nettoyeur" />';
 			}
 		}
