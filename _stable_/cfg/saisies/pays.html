@@ -32,7 +32,7 @@
 		[<p class='explication'>(#ENV{explication})</p>]
 		<select name="#ENV{nom}" id="champ_#ENV{nom}"[ value="(#ENV{valeur})"]>
 		<option></option>
-		<BOUCLE_pays(GEO_PAYS)>
+		<BOUCLE_pays(GEO_PAYS){par multi nom}>
 			<option value="#ID_PAYS" [(#ID_PAYS|=={#ENV{valeur}|sinon{#ENV{defaut}}}|oui) selected="selected"]>#NOM</option>
 		</BOUCLE_pays>
 		</select>
