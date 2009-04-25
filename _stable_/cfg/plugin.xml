@@ -9,7 +9,7 @@
 _ &#169; 2008 - <multi>[fr]Distribu&#233; sous licence[en]License[de]Vertrieb unter Lizenz</multi> GNU/LGPL
     </auteur>
     <version>
-    1.12.0
+    1.12.1
     </version>
     <etat>
     stable
@@ -25,9 +25,7 @@ Il est utilis&#233; par de nombreux plugins, mais il peut aussi avoir d'autres u
 Es wird von vielen Plugins verwendet, kann aber auch anderen Nutzen finden wie die Parametereinstellung von Skeletten.
     </multi>
     </description>
-    <lien>
-    [<multi>[fr]Documentation[de]Dokumentation</multi>->http://www.spip-contrib.net/?rubrique575]
-    </lien>
+    <lien>http://www.spip-contrib.net/?rubrique575</lien>
     <prefix>
     cfg
     </prefix>

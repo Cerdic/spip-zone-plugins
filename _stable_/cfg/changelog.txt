@@ -1,3 +1,11 @@
+v1.12.1 (26 04 2009)
+  * (en test) introduction d'une syntaxe raccourcie pour #SAISIE :
+  #SAISIE{type,name,obligatoire} ce qui donne :
+  #SAISIE{input,ville} ou
+  #SAISIE{input,ville,oui}. Ce dernier est equivalent a :
+  #SAISIE{input}{nom=ville}{obligatoire=oui}, lui meme equivalent a
+  #INCLURE{fond=saisies/_base}{type_saisie=input}{erreurs}{nom=ville}{valeur=#ENV{ville}}
+  
 v1.12 (25 04 2009)
   * (en test) les saisies/ sont modifies, elles passent toutes par le fichier saisies/_base
   et sont appelees par #SAISIE{input}{nom=ville} qui passe automatiquement les

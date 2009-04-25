@@ -26,8 +26,9 @@ function balise_CONFIG($p) {
 
 	return $p;
 }
-
-// #SAISIE{input}{nom=toto}
+// #SAISIE{input,toto,oui}
+// = 
+// #SAISIE{input}{nom=toto}{obligatoire=oui}
 // =
 // #INCLURE{fond=saisies/_base}
 //	{type_saisie=input}
@@ -40,6 +41,20 @@ function balise_SAISIE_dist($p) {
 	$param = array();
 	
 	$type_saisie = array_shift($p->param);
+	// ajouter {erreurs} {fond=saisies/_base} et {type_saisie=xxx}
+	array_unshift($p->param, balise_saisie_param('erreurs'));
+	array_unshift($p->param, balise_saisie_param('fond', 'saisies/_base'));
+	array_unshift($p->param, balise_saisie_param('type_saisie', '', $type_saisie[1]));
+	
+	// cas #SAISIE{input,toto,oui}
+	if (isset($type_saisie[2])) {
+		array_unshift($p->param, balise_saisie_param('nom', '', $type_saisie[2]));
+	}
+	if (isset($type_saisie[3])) {
+		array_unshift($p->param, balise_saisie_param('obligatoire', '', $type_saisie[3]));
+	}
+	
+	// cas #SAISIE{input}{nom=toto}{obligatoire=oui}
 	// retrouver le nom {nom=xx} pour le passer a valeur {valeur=#ENV{xx}}
 	foreach ($p->param as $c=>$q) {
 		if ((strpos($q[1][0]->texte, 'nom') === 0)
@@ -59,19 +74,12 @@ function balise_SAISIE_dist($p) {
 			$valeur->type = 'champ';
 			$valeur->nom_champ='ENV';
 			$valeur->param = array($nom);
-			array_unshift($p->param, balise_saisie_param('valeur', '', $valeur));
+			array_unshift($p->param, balise_saisie_param('valeur', '', array($valeur)));
 			break;
 		}
 	}
 
-	// ajouter {erreurs} {fond=saisies/_base} et {type_saisie=xxx}
-	array_unshift($p->param, balise_saisie_param('erreurs'));
-	array_unshift($p->param, balise_saisie_param('fond', 'saisies/_base'));
-	array_unshift($p->param, balise_saisie_param('type_saisie', $type_saisie[1][0]->texte));
-	
-	
-	
-	//print_r($p); die();
+//	print_r($p); die();
 	
 	if(function_exists('balise_INCLURE'))
 		return balise_INCLURE($p);
@@ -94,7 +102,8 @@ function balise_saisie_param($nom, $valeur=null, $balise=null) {
 	if (!$balise) {
 		return array(0=>'', 1=>array(0=>$s));
 	} else {
-		return array(0=>'', 1=>array(0=>$s, 1=>$balise));
+		$res = array_merge(array(0=>$s), $balise);
+		return array(0=>'', 1=>$res);
 	}
 }
 
