@@ -417,10 +417,10 @@ function return_log($var) {
 	die(json_export(array('$erreur'=> var_export($var,true))));
 }
 
-function _U($texte)
+function _U($texte, $params=array())
 {
     include_spip('inc/charsets');
-    return unicode2charset(html2unicode(_T($texte)));
+    return unicode2charset(html2unicode(_T($texte, $params)));
 }
 
 // wdgcfg = widget config :-)
