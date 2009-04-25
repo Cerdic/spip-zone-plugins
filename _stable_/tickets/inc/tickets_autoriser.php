@@ -40,19 +40,40 @@ function tickets_autoriser(){}
 
 // Autorisation de creation ou modification des tickets
 function autoriser_ticket_ecrire($faire, $type, $id, $qui, $opt){
+	$aut = FALSE;
+
 	$liste = definir_autorisations_tickets('ecrire');
-	return in_array($qui['statut'], $liste['statut']) || in_array($qui['id_auteur'], $liste['auteur']);
+	if ($liste['statut'])
+		$aut = in_array($qui['statut'], $liste['statut']);
+	else if ($liste['auteur'])
+		$aut = in_array($qui['id_auteur'], $liste['auteur']);
+	
+	return $aut;
 }
 
 // Autorisation de notification des tickets
 function autoriser_ticket_assigner($faire, $type, $id, $qui, $opt){
+	$aut = FALSE;
+
 	$liste = definir_autorisations_tickets('assigner');
-	return in_array($qui['statut'], $liste['statut']) || in_array($qui['id_auteur'], $liste['auteur']);
+	if ($liste['statut'])
+		$aut = in_array($qui['statut'], $liste['statut']);
+	else if ($liste['auteur'])
+		$aut = in_array($qui['id_auteur'], $liste['auteur']);
+	
+	return $aut;
 }
 
 // Autorisation de notification des tickets
 function autoriser_ticket_commenter($faire, $type, $id, $qui, $opt){
+	$aut = FALSE;
+
 	$liste = definir_autorisations_tickets('commenter');
-	return in_array($qui['statut'], $liste['statut']) || in_array($qui['id_auteur'], $liste['auteur']);
+	if ($liste['statut'])
+		$aut = in_array($qui['statut'], $liste['statut']);
+	else if ($liste['auteur'])
+		$aut = in_array($qui['id_auteur'], $liste['auteur']);
+	
+	return $aut;
 }
 ?>
