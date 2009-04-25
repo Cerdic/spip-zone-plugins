@@ -1,3 +1,5 @@
+[(#REM) Squelette du contenu de la page (exec=tickets)
+	- recapitulatif des tickets presente suivant un classement donne]
 #CACHE{0}
 <br />
 <br />
@@ -28,13 +30,14 @@
 
 [(#VAL|debut_droite{true})]
 
-<INCLURE{fond=prive/contenu/tickets_classement_#ENV{classement}}{env}>
+<INCLURE{fond=prive/contenu/inc_classement_#ENV{classement}}{env}>
 
-[(#VAL{<:tickets:creer_ticket:>}|icone_inline{
-	#VAL{ticket_editer}|generer_url_ecrire{id_ticket=new},
-	#CHEMIN{imgs/bugs.png},
-	creer.gif,
-	right
-})]
-
+[(#AUTORISER{ecrire, ticket}|oui)
+	[(#VAL{<:tickets:creer_ticket:>}|icone_inline{
+		#VAL{ticket_editer}|generer_url_ecrire{id_ticket=new},
+		#CHEMIN{imgs/bugs.png},
+		creer.gif,
+		right
+	})]
+]
 [(#VAL|fin_gauche)]

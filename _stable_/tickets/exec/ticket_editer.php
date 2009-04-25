@@ -1,19 +1,13 @@
 <?php
-
-
-
+// Traitement de la page d'edition d'un ticket
 function exec_ticket_editer () {
 
 	$id_ticket = $_GET["id_ticket"];
-	
 
 	include_spip('inc/presentation');
 	include_spip('inc/texte');
 
-	global $connect_statut
-		, $connect_toutes_rubriques
-		, $connect_id_auteur
-		;
+	global $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
 		
 	$contexte = array("id_ticket"=>$id_ticket);
 	$contexte["titre"] = "Nouveau ticket";
@@ -34,7 +28,6 @@ function exec_ticket_editer () {
 		$contexte["version"] = htmlspecialchars($row["version"]);
 		$contexte["projet"] = htmlspecialchars($row["projet"]);
 	}
-		
 
 	$titre_page = _L('Tickets, syst&egrave;me de suivi de bugs');
 	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
@@ -53,7 +46,6 @@ function exec_ticket_editer () {
 	$page = recuperer_fond("prive/editer/ticket", $contexte);
 	echo $page;
 
-	
 	echo fin_gauche(), fin_page();
 }
 
