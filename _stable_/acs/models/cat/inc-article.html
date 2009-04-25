@@ -137,7 +137,7 @@ Si le plugin notation est présent, il est intégré.
 				 [(#REM) Petition : la petition ayant une PAGINATION il faut absolument lui passer SELF]
 				 [(#PETITION|?{' '}) <INCLURE{fond=inc-petition}{env=#ENV}{id_article}{self=#SELF}>]
 					<br class="nettoyeur" />
-					[(#EVAL{defined('_DIR_PLUGIN_NOTATION')}|?{' '}) #NOTATION]
+				  [(#EVAL{defined('_DIR_PLUGIN_NOTATION')}|?{' '}) #FORMULAIRE_NOTATION]
 
 				 [(#REM) Forum de l'article ]
 					[(#STATUT|=={refuse}|?{'<a href="" class="refus">Article refusé</a>', ''})]

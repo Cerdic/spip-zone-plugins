@@ -11,17 +11,18 @@
 $GLOBALS['ACS_ACCES'] = array('mots_type');
 // Contrôle d'accès ACS aux pages d'administration de certains plugins, s'ils sont installés
 // Deux tests, en raison de changements dans SPIP : à suivre
-if (isset($GLOBALS['meta']['plugin']) || is_array($GLOBALS['plugins'])) {
-	if(isset($GLOBALS['meta']['plugin']['notation']) || in_array('notation', $GLOBALS['plugins']) )
+$plugs = isset($GLOBALS['meta']['plugin']) ? $GLOBALS['meta']['plugin'] : $GLOBALS['plugins'];
+if (is_array($plugs)) {
+	if(isset($plugs['cfg']))
+		$GLOBALS['ACS_ACCES'][] = 'cfg';
+	if(isset($plugs['notation']))
 		$GLOBALS['ACS_ACCES'][] = 'notation_param';
-	if(isset($GLOBALS['meta']['plugin']['w3c_go_home']) ||in_array('w3c_go_home', $GLOBALS['plugins']) )
+	if(isset($plugs['w3c_go_home']))
 		$GLOBALS['ACS_ACCES'][] = 'w3c_go_home';
-	if(isset($GLOBALS['meta']['plugin']['openPublishing']) || in_array('openPublishing', $GLOBALS['plugins'])) {
+	if(isset($plugs['openPublishing'])) {
 		$GLOBALS['ACS_ACCES'][] = 'op';
 		$GLOBALS['ACS_ACCES'][] = 'op_effacer';
 	}
-	if(in_array('cfg', $GLOBALS['plugins']) || isset($GLOBALS['meta']['plugin']['cfg'])) 
-		$GLOBALS['ACS_ACCES'][] = 'cfg';
 }
 //define('_DEBUG_CRAYONS', true);
 /*__________________________________________________________________

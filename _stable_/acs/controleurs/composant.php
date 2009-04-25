@@ -45,7 +45,7 @@ function controleurs_composant_dist($regs) {
         '<input type="hidden" name="name_'.$crayon->key.'" value="'.$crayon->name.'" />'."\n".
         '<input type="hidden" name="md5_'.$crayon->key.'" value="'.$crayon->md5.'" />'."\n".
       	'<input type="hidden" name="var_mode" value="recalcul" />'.
-        $composant->edit('false').
+        $composant->edit('controleur').
         crayons_boutons().
       '</form>',
       $composant->icon,

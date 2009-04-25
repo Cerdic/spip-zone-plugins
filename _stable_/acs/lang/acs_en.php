@@ -80,7 +80,7 @@ To setup your website, customize components.<br/>A new instance of a component i
   'includes' => 'Inclut',
   'structure_page' => 'page structure',
   'err_fichier_absent' => 'File @file@ not found',
-
+  'err_fichier_ecrire' => 'Unable to write file &quot;@file@&quot;',
 
   'onglet_adm_description' => 'Configuration',
   'onglet_adm_info' => 'ACS model choice and administration.',

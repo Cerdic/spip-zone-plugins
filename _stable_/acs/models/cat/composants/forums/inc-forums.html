@@ -9,7 +9,7 @@
   </div>
     [<p class="pagination">(#PAGINATION)</p>]
   <ul>#ID_RUBRIQUE
-  <BOUCLE_forums_liens(FORUMS?) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat} {par date}{inverse} {pagination 20}>
+  <BOUCLE_forums_liens(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat} {par date}{inverse} {pagination 20}>
     <li class="menu-item">[<small>(#DATE|affdate_court)</small> ] <a href="[(#URL_FORUM|replace{#,&ouvrir=oui#})]" [title="(#TEXTE|supprimer_tags|attribut_html|couper{500})"]>#TITRE</a></li>
   </BOUCLE_forums_liens>
   </ul>

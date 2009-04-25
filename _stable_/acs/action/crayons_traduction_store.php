@@ -31,12 +31,38 @@ function action_crayons_traduction_store_dist() {
 		spip_log('ACS action/crayons_traduction_store : verif_secu('.$_POST['name_'.$wid].', '.$_POST['secu_'.$wid].') returned false');	
     return false;
     exit;
-  }
-	$var = $_POST['fields_'.$wid];
-	$newval = $_POST[$var.'_'.$wid];
-	spip_log('ACS action/crayons_traduction_store '.$var."=>".$newval);
+  }  
+	$champ = $_POST['fields_'.$wid];
+	// On lit le composant et le nom de variable dans le champ, qui est de forme <composant>_<variable>
+	if (preg_match('/\b([^_|^\W]+)_(\w+)\b/', $champ, $matches)) {
+		$c = $matches[1];
+		$var = $matches[2];
+	}
+	else {
+		echo var2js(array('$erreur' => _U('crayons:donnees_mal_formatees').' (champ <> composant_variable)'));
+		exit;
+	}
+	$oldval = $_POST['oldval_'.$wid];	
+	$newval = $_POST[$champ.'_'.$wid];
+	$module = $_POST['module_'.$wid];
+	$lang = $_POST['lang_'.$wid];
+	
+	// On récupère le fichier de langue que trouve SPIP par find_in_path()
+	$langfile = 'composants/'.$c.(($module != '') ? '/'.$module : '').'/lang/'.$c.(($module != '') ? '_'.$module : '').'_'.$lang.'.php';
+  $f = find_in_path($langfile);
+  if (!is_file($f)){
+		echo var2js(array('$erreur' => _U('acs:err_fichier_absent', array('file' => $langfile))));
+		exit;
+	}
+	$file = file_get_contents($f);
+	$file = str_replace("'$var' => '$oldval'" , "'$var' => '$newval'", $file);
+	if (!@file_put_contents($f, $file)) {
+		echo var2js(array('$erreur' => _U('acs:err_fichier_ecrire', array('file' => $langfile))));
+		exit;		
+	}
+	spip_log('ACS action/crayons_traduction_store '.$champ."=>".$newval. ' ('.$langfile.')');
 	// Retourne la vue - Return vue 
-	$return['$erreur'] = 'Code pour faire ça pas encore écrit ... ;-)';
+	//$return['$erreur'] = 'Code pour faire ça pas encore écrit ... ;-)';
   $return[$wid] = $newval;
 	echo var2js($return);
 	exit;

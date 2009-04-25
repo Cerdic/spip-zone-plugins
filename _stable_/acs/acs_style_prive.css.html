@@ -1,3 +1,5 @@
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
 [(#REM)
              ACS
          (Plugin Spip)
@@ -17,9 +19,6 @@ Copyleft: licence GPL - Cf. LICENCES.txt
   c'est du text/html !
 ]
 #CACHE{3600*100,cache-client}
-
-#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
-#HTTP_HEADER{Vary: Accept-Encoding}
 #SET{claire,##ENV{couleur_claire,edf3fe}}
 #SET{foncee,##ENV{couleur_foncee,3874b0}}
 
@@ -76,8 +75,8 @@ hr {height: 1px; margin:2px; border:0; border-top: 1px solid #GET{claire};}
   padding-#LANG_RIGHT: 4px;
   padding-top: 2px;
   padding-bottom: 2px;
-  -moz-border-radius-topleft: 9px;
-  -moz-border-radius-topright: 9px;
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-topright: 10px;
   color: #ffffff;
   font-family: verdana,arial,helvetica,sans;
   font-size: 12px;
@@ -124,7 +123,7 @@ fieldset.apercu {
 }
 
 .label {
-  font-color: #dfdfdf;
+  color: #GET{foncee};
 }
 
 .forml {
@@ -174,7 +173,6 @@ fieldset.apercu {
 }
 
 .onlinehelp {
-  font-size: -1;
   font-style: italic;
   color: #GET{foncee};
 }
@@ -259,7 +257,7 @@ fieldset.apercu {
   width: 180px;
   margin: 0;
   background: url(#CHEMIN{images/composant.png}) no-repeat;
-  z-order: 3;
+  z-index: 3;
 }
 .widget:hover {
   color: black;
@@ -391,6 +389,6 @@ img.bouton_edit_composant:hover {
   left: 0;
   display: block;
   z-index: 99999999;
-  border : #GET{foncee} 1px solid;
+  border : [(#GET{foncee})] 1px solid;
   -moz-border-radius: 0;
 }

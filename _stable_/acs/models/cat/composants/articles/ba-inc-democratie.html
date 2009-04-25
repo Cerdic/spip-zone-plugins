@@ -11,7 +11,7 @@ et dont la note dépasse la note seuil de publication si le composant democratie
     [(#ENV{debut_articles}|?{'',' '})]
     <ul>
     #SET{stat,#DEMOCRATIE_STATUT}
-    <BOUCLE_articles(ARTICLES spip_notations_articles) {par (#CLASSEMENT|=={note_ponderee}|?{note_ponderee,popularite})}{inverse} {doublons} {pagination #CONFIG{acsArticlesPagination,10}}{note_ponderee>=#CONFIG{acsDemocratieSeuilPublic,0}} {statut==#GET{stat,publie}} {lang=#LANG}>
+    <BOUCLE_articles(ARTICLES spip_notations_objets) {par (#CLASSEMENT|=={note_ponderee}|?{note_ponderee,popularite})}{inverse} {doublons} {pagination #CONFIG{acsArticlesPagination,10}}{note_ponderee>=#CONFIG{acsDemocratieSeuilPublic,0}} {statut==#GET{stat,publie}} {lang=#LANG}>
       <INCLURE{fond=composants/articles/articles}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{note=#NOTE_PONDEREE}>
     </BOUCLE_articles>
     </ul>

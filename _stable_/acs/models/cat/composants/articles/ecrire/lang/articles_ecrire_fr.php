@@ -3,8 +3,8 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'nom' => 'Listes d\'articles',
-'description' => 'Listes d\'articles, pour rubriques, une, r&eacute;sum&eacute;, plan ...',
+'nom' => 'Articles',
+'description' => 'Articles et listes d\'articles, pour rubriques, une, r&eacute;sum&eacute;, plan ...',
 'info' => 'Les couleurs 2 &agrave; 6 concernent les rubriques de niveau 2 &agrave; 6 dans le plan du site:
  elles d&eacute;finissent l\'&eacute;claircissement ou l\'assombrissement du fond selon la profondeur.
  <br /><br />

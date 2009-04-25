@@ -6,15 +6,39 @@
 # Copyright Daniel FAIVRE, 2007-2009
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
-
+/**
+ * Controleur pour les traductions de composants ACS
+ */
 function controleurs_traduction_dist($regs) {
 	global $spip_lang;
 	include_spip('inc/filtres');
+	include_spip('lib/composant/composant_traduction');
 	
-	list(,$crayon,$type,$champ,$id) = $regs;
+	list(,$crayon,$type,$champ,$id,$class) = $regs;
+	
+	// On lit la langue du crayon et le module dans sa classe, qui comprend la classe lang_xx 
+	if (preg_match('/\blang_([^_|^\W]+)(?:_(\w+)){0,1}\b/', $class, $matches)) {
+		$lang = $matches[1];
+		$module = $matches[2];
+	}
+	else
+		return array(_U('crayons:donnees_mal_formatees').' (lang)', 'err');
+
+	// On lit le composant et le nom de variable dans le champ, qui est de forme <composant>_<variable>
+	if (preg_match('/\b([^_|^\W]+)_(\w+)\b/', $champ, $matches)) {
+		$c = $matches[1];
+		$var = $matches[2];
+	}
+	else
+		return array(_U('crayons:donnees_mal_formatees').' (champ)', 'err');
+
+	$tr = lecture_composant_traduction($c, $lang, $module);
+	$val = $tr[$var];
 	$crayon = new SecureCrayon("traduction-".$champ."-".$id);
-	$val = _T('acs:'.$champ);
 	$html = $crayon->code();
+	$html .= '<input type="hidden" name="module_'.$crayon->key.'" value="'.$module.'" />';
+	$html .= '<input type="hidden" name="lang_'.$crayon->key.'" value="'.$lang.'" />';
+	$html .= '<input type="hidden" name="oldval_'.$crayon->key.'" value="'.entites_html($val).'" />';
 	$html .= '<input class="crayon-active" type="text"'
 					. ' style="width:'.$crayon->w.'px; height:'.$crayon->h.'px; font-size: '._request('font-size').';"'
 					. ' name="'.$champ.'_'.$crayon->key.'"'

@@ -16,24 +16,19 @@ function liste_widgets($composants, $islink=false) {
   $r .= '<div id="widgets" class="widgets">';
   sort($composants);
   foreach($composants as $widget) {
-    if ($widget == '') {
-      $r .= '<hr style="margin-bottom: 2px"/>';
-    }
-    else {
-      $widget_icon = find_in_path('composants/'.$widget.'/images/'.$widget.'_icon.gif');
-      if (!file_exists($widget_icon))
-        $widget_icon = _DIR_PLUGIN_ACS.'images/composant-24.gif';
-      $link = '<a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$widget.'" title="'._T('composant').'">';
-      $r .= '<div id="'.$widget.'" class="'.get_widget_class($widget, 'widget').'">'.
-        ($islink ? $link : '').
-        '<table><tr><td>'.
-        ($islink ? '' : $link).
-        '<img src="'.$widget_icon.'" style="width:20px;height:20px;vertical-align:middle" />'.
-        ($islink ? '' : '</a>').
-        '</td><td title="'.ucfirst($widget).'" style="padding-left: 5px; padding-right: 5px; width: 95%;"><div style="overflow:hidden; text-align:center">'.ucfirst(str_replace('_', ' ', $widget)).'</div></td></tr></table>'.
-        ($islink ? '</a>' : '').
-      '</div>';
-    }
+    $widget_icon = find_in_path('composants/'.$widget.'/images/'.$widget.'_icon.gif');
+    if (!file_exists($widget_icon))
+      $widget_icon = _DIR_PLUGIN_ACS.'images/composant-24.gif';
+    $link = '<a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$widget.'" title="'._T('composant').'">';
+    $r .= '<div id="'.$widget.'" class="'.get_widget_class($widget, 'widget').'">'.
+      ($islink ? $link : '').
+      '<table><tr><td>'.
+      ($islink ? '' : $link).
+      '<img src="'.$widget_icon.'" style="width:20px;height:20px;vertical-align:middle" />'.
+      ($islink ? '' : '</a>').
+      '</td><td title="'.ucfirst($widget).'" style="padding-left: 5px; padding-right: 5px; width: 95%;"><div style="overflow:hidden; text-align:center">'.ucfirst(str_replace('_', ' ', $widget)).'</div></td></tr></table>'.
+      ($islink ? '</a>' : '').
+    '</div>';
   }
   $r .= '</div>';
   return $r;

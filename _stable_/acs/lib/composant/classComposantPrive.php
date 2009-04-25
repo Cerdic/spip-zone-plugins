@@ -59,6 +59,10 @@ class AdminComposant {
     $this->nom = $c['nom'][0];
     $this->version = $c['version'][0];
     
+    // Les versions 1.9.2 de SPIP ne définissaient pas cette fonction introduite en 1.9.3dev puis en 2.0.0
+    if (!is_callable('spip_xml_match_nodes'))
+    	include_spip('inc/backport_1.9.2');
+
     // Lit les dépendances (necessite)
     $this->necessite = array();
     if (spip_xml_match_nodes(',^necessite,',$c,$needs)){
@@ -232,10 +236,11 @@ class AdminComposant {
 
 /**
  * Méthode edit: affiche un editeur pour les variables du composant
- * @param preview : afficher la previsualisation - display preview
+ * @param mode : mode d'affichage (espace prive ou controleur) 
  * @return html code
  */
-  function edit($preview=false) {
+  function edit($mode=false) {
+    include_spip('public/assembler');
   	include_spip('lib/composant/controles');
     $r = '<script type="text/javascript" src="'._DIR_PLUGIN_ACS.'lib/picker/picker.js"></script>';
     $r .= "<input type='hidden' name='maj_composant' value='oui' />".
@@ -243,7 +248,7 @@ class AdminComposant {
 					'<input type="hidden" name="nic" value="'.$this->nic.'" />';
 
     $varconf = $this->fullname.'Config';
-    if (($this->optionnel!='non') && ($this->optionnel!='no') && ($this->optionnel!='false')) {
+    if (($mode != 'controleur') && ($this->optionnel!='non') && ($this->optionnel!='no') && ($this->optionnel!='false')) {
       $varname = $this->fullname.'Use';
       if (isset($GLOBALS['meta'][$varname]) && $GLOBALS['meta'][$varname])
         $var = $GLOBALS['meta'][$varname];
@@ -262,7 +267,7 @@ class AdminComposant {
     }
 
     $r .= '<div id="'.$varconf.'" '.(isset($this->display) ? 'style="'.$this->display.'"' : '').'>';
-    if (!$preview && isset($this->preview) && ($this->preview != 'non')  && ($this->preview != 'no') && ($this->preview != 'false')) {
+    if (($mode != 'controleur') && isset($this->preview) && ($this->preview != 'non')  && ($this->preview != 'no') && ($this->preview != 'false')) {
       $url = '../?page=wrap&c=composants/'.$this->type.'/'.$this->type.'&v='.$GLOBALS['meta']['acsDerniereModif'].'&var_mode=recalcul';
       $r .= '<fieldset class="apercu"><legend><a href="javascript:void(0)" onclick=" findObj(\''.$this->fullname.'\').src=\''.$url.'\';" title="'._T('admin_recalculer').'">'._T('previsualisation').'</a></legend><iframe id="'.$this->fullname.'" width="100%" height="'.(is_numeric($this->preview) ? $this->preview : 80).'px" frameborder="0" style="border:0; background:'.$GLOBALS['meta']['acsFondColor'].'" src="'.$url.'"></iframe></fieldset>';
     }
@@ -291,9 +296,11 @@ class AdminComposant {
     // Recherche une mise en page et y remplace les variables par des contrôles
     $mis_en_page = array();
     if (is_readable($this->rootDir.'/ecrire/'.$this->type.'_mep.html')) {
-      $mep = file_get_contents($this->rootDir.'/ecrire/'.$this->type.'_mep.html');
+      //$mep = file_get_contents($this->rootDir.'/ecrire/'.$this->type.'_mep.html');
+      //$r.= $mep.'<hr/><hr/><hr/>'; 
+      $mep .= recuperer_fond($this->rootDir.'/ecrire/'.$this->type.'_mep', array('lang' => $GLOBALS['spip_lang']));
       foreach ($controls as $nom=>$html) {
-        $tag = '#'.$nom.'#';
+        $tag = '&'.$nom.'&';
         if (strpos($mep, $tag) !== false) $mis_en_page[] = $nom;
         $mep = str_replace($tag, $html, $mep);
       }

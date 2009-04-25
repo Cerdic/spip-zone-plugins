@@ -3,8 +3,8 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'nom' => 'Articles lists',
-'description' => 'Articles lists for rubrics, Une, abstract, sitemap, ...',
+'nom' => 'Articles',
+'description' => 'Articles and lists for rubrics, Une, abstract, sitemap, ...',
 'info' => 'Colors 2 to 6 are for rubrics level 2 to 6 in sitemap
  <br /><br />
 Access control limit access to articles tagged with keyword _ide, _aut, or _adm to registered members, authors, and administrors.

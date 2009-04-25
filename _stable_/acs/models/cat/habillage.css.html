@@ -44,25 +44,25 @@ html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-d
 [(#EVAL{defined('_DIR_PLUGIN_NOTATION')}|?{'', ' '})
 .notation {}
 .notation .topten {
-  border: thin dotted ##CONFIG{acsFondBordColor,AAE};
-  [background: ##CONFIG{acsFondColor};]
+  border: thin dotted #CONFIG{acsFondBordColor,#AAE};
+  [background: #CONFIG{acsFondColor};]
   padding: 2px;
   margin: 5px;
 }
 .notation thead tr {
-  background-color: ##CONFIG{acsRubnavTitreFondColor, #CONFIG{acsFondColor,AAE}};
+  background-color: #CONFIG{acsRubnavTitreFondColor, #CONFIG{acsFondColor,#AAE}};
   text-align:center;
-  color: ##CONFIG{acsFondText, 004f8f};
+  color: #CONFIG{acsFondText, #004f8f};
 }
 .notation .ligne_paire {
-  background-color: ##CONFIG{acsRubnavFondColorHover,EEF};
+  background-color: ##CONFIG{acsRubnavFondColorHover,#EEF};
 }
 .notation small {
-  color: ##CONFIG{acsFondText, 004f8f};
+  color: #CONFIG{acsFondText, #004f8f};
   font-weight:normal;
 }
 .formulaire_notation small {
-  color: ##CONFIG{acsFondText, 004f8f};
+  color: #CONFIG{acsFondText, #004f8f};
 }
 ]
 
@@ -317,7 +317,7 @@ table.petition {
 .formulaire_spip legend {
   font-weight: bold;
   padding: 3px;
-  background-color: ##CONFIG{acsFondColor, #FFF}; /* Sinon, superposition dans MSIE */
+  background-color: #CONFIG{acsFondColor, #FFF}; /* Sinon, superposition dans MSIE */
 }
 
 .formulaire_spip label {}

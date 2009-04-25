@@ -31,7 +31,7 @@ Les articles dotés d'une date de publication future ne sont donc pas affichés.
   <div class="liste-articles">
       [(#ENV{debut_articles}|?{'',' '})]
       <ul>
-        <BOUCLE_articles(ARTICLES) {par date}{inverse} {doublons} {pagination} {age_relatif>=0} {lang=#LANG}>
+        <BOUCLE_articles(ARTICLES) {par date}{inverse} {doublons} {pagination #CONFIG{acsArticlesPagination,10}} {age_relatif>=0} {lang=#LANG}>
           <INCLURE{fond=composants/articles/articles}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{coupe=#CONFIG{acsArticlesNbLettres,200}}>
         </BOUCLE_articles>
       </ul>

@@ -16,11 +16,11 @@ Wrap (encapsulate) widgets for preview or Ajax call
 <html>
 <head>
 <meta name="robots" content="none">
-<script src="#CHEMIN{javascript/jquery.js}" type="text/javascript"></script>
+[(#SPIP_VERSION|match{^1\.9\.}|?{' ',''})<script src="spip.php?page=jquery.js" type="text/javascript"></script>]
+[(#SPIP_VERSION|match{^1\.9\.}|?{'', ' '})<script src="#CHEMIN{javascript/jquery.js}" type="text/javascript"></script>
 <script src="#CHEMIN{javascript/jquery.form.js}" type="text/javascript"></script>
 <script src="#CHEMIN{javascript/ajaxCallback.js}" type="text/javascript"></script>
-<script src="#CHEMIN{javascript/layer.js}" type="text/javascript"></script>
-
+<script src="#CHEMIN{javascript/layer.js}" type="text/javascript"></script>]
 <script src="spip.php?page=acs.js&var_mode=recalcul" type="text/javascript"></script>
 
 <?php // Widget's style is not included yet in above css if just activated
