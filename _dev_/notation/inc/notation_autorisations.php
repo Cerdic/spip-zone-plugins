@@ -7,6 +7,10 @@
  * 
  * @return bool true/false
  */
+
+// fonction pour le pipeline, n'a rien a effectuer
+function notation_autoriser(){}
+
 function autoriser_notation_modifier_dist($faire, $type, $id, $qui, $opt){
 	// la config interdit de modifier la note ?
 	if ($id AND !lire_config('notation/change_note'))
