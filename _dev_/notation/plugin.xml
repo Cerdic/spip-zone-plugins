@@ -1,9 +1,9 @@
 <plugin>
 	<nom>Notation</nom>
 	<auteur>JEM - b_b - Matthieu Marcillaud</auteur>
-	<version>0.6.3</version>
-	<version_base>0.6.2</version_base>
-	<etat>dev</etat>
+	<version>0.6.4</version>
+	<version_base>0.6.1</version_base>
+	<etat>stable</etat>
 	<prefix>notation</prefix>
 	<description>
 		<b>Attribuer une note aux &eacute;l&eacute;ments de Spip</b><hr />
