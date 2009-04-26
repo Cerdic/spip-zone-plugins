@@ -17,7 +17,7 @@
 
 function traiter_message_banque($produit,$id_abonne,$validation_paiement,$hash_article){
 
-	$abonne_res = spip_query("SELECT a.nom_famille, a.prenom, a.adresse, a.code_postal, a.ville, a.pays, a.telephone, a.commentaire, a.validite, b.email, b.id_auteur, b.alea_actuel, b.login , b.pass FROM `spip_auteurs_elargis` a, `spip_auteurs` b WHERE a.id='$id_abonne' AND a.id_auteur = b.id_auteur") ;
+	$abonne_res = spip_query("SELECT a.nom_famille, a.prenom, a.adresse, a.code_postal, a.ville, a.pays, a.telephone, a.commentaire, b.email, b.id_auteur, b.alea_actuel, b.login , b.pass FROM `spip_auteurs_elargis` a, `spip_auteurs` b WHERE a.id_auteur='$id_abonne' AND a.id_auteur = b.id_auteur") ;
 
 	while($row = spip_fetch_array($abonne_res)){
 		$abonne = $row ;
@@ -25,7 +25,7 @@ function traiter_message_banque($produit,$id_abonne,$validation_paiement,$hash_a
 
 
 	if($produit == "abonnement"){
-		$abonnement_res = spip_query("SELECT a.duree, a.periode, a.montant, a.libelle FROM `spip_abonnements` a, `spip_auteurs_elargis_abonnements` b WHERE b.id_auteur_elargi = '$id_abonne' AND a.id_abonnement = b.id_abonnement") ;
+		$abonnement_res = spip_query("SELECT a.duree, a.periode, a.montant, a.libelle FROM `spip_abonnements` a, `spip_auteurs_elargis_abonnements` b WHERE b.id_auteur = '$id_abonne' AND a.id_abonnement = b.id_abonnement") ;
 
 		while($abonnement = spip_fetch_array($abonnement_res)){
 			$libelle = $abonnement['libelle'];
@@ -37,14 +37,14 @@ function traiter_message_banque($produit,$id_abonne,$validation_paiement,$hash_a
 		$statut_abonnement = ($validation_paiement == "ok")? 'abonne' : 'prospect' ;
 
 		if($periode == "jours"){
-			$validite = ($validation_paiement == "ok") ? "DATE_ADD(CURRENT_DATE, INTERVAL ".$duree." DAY)" : "'".$abonne['validite']."'" ;
+			$validite = ($validation_paiement == "ok") ? "DATE_ADD(CURRENT_DATE, INTERVAL ".$duree." DAY)" : "" ;
 		}elseif($periode == "mois"){
-			$validite = ($validation_paiement == "ok") ? "DATE_ADD(CURRENT_DATE, INTERVAL ".$duree." MONTH)" : "'".$abonne['validite']."'" ;
+			$validite = ($validation_paiement == "ok") ? "DATE_ADD(CURRENT_DATE, INTERVAL ".$duree." MONTH)" : "" ;
 		}
 
 		// fixer la date de validite et le statut de paiement, (et des zones acces restreint selon l'abonnement a l'occasion)
-		spip_query("UPDATE `spip_auteurs_elargis` SET statut_abonnement='$statut_abonnement', statut_paiement='$validation_paiement'  WHERE id='$id_abonne'") ;
-		spip_query("UPDATE `spip_auteurs_elargis_abonnements` SET validite = $validite, montant = '$montant' WHERE id_auteur_elargi='$id_abonne'") ;
+		spip_query("UPDATE `spip_auteurs_elargis` SET statut_abonnement='$statut_abonnement', statut_paiement='$validation_paiement'  WHERE id_auteur='$id_abonne'") ;
+		spip_query("UPDATE `spip_auteurs_elargis_abonnements` SET validite = $validite, montant = '$montant' WHERE id_auteur='$id_abonne'") ;
 	}
 
 	if($produit == "article"){
@@ -173,8 +173,5 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$lib
 		envoyer_mail ('booz@rezo.net', $sujet, $message, $from = $expediteur, $headers = $entetes );
 	}
 }
-
-
-
 
 ?>

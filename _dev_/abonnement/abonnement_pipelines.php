@@ -20,12 +20,6 @@ function abonnement_i2_charger_formulaire($flux) {
 	return ($flux);
 }
 
-function abonnement_i2_confirmation($flux) {
-	$env = unserialize($flux['args']);
-    $flux['data'] .= recuperer_fond('formulaires/abonnement_paiement',$env);
-	return ($flux);
-}
-
 function abonnement_i2_verifier_formulaire($flux) {
 	return ($flux);
 }
@@ -36,6 +30,7 @@ function abonnement_i2_traiter_formulaire($flux) {
 	$value = _request('abonnement') ;	
 	$n = $flux['args']['id_auteur'] ;
 	spip_log("$value,$n","logabo");
+	// verfifier que ca emplile pas en mode edition
 	sql_insertq('spip_auteurs_elargis_abonnements', array('id_auteur' => $n,'id_abonnement' => $value, 'date' => date("Y-m-d H:i:s") ));
 	}
 	$flux['data']['ne_pas_confirmer_par_mail'] = true ;
@@ -56,6 +51,14 @@ function abonnement_i2_traiter_formulaire($flux) {
 	
 	return ($flux);
 }
+
+function abonnement_i2_confirmation($flux) {
+	$env = unserialize($flux['args']);
+	$row = sql_fetsel(array('id_auteur'), 'spip_auteurs', 'email='.sql_quote($env['email']));	$env['id_auteur'] = $row['id_auteur'] ;
+    $flux['data'] .= recuperer_fond('formulaires/abonnement_paiement',$env);
+	return ($flux);
+}
+
 
 
 //utiliser le cron pour gerer les dates de validite des abonnements et envoyer les messages de relance

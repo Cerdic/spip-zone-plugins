@@ -8,9 +8,9 @@ $id_transaction = "#ENV{reference}"; // devrait etre la cle pour chercher les au
 $texte_libre = "#ENV{texteLibre}";
 $reponse_banque = "#ENV{reponse_banque}";
 
-list($produit,$id_auteur_elargi,$hash_article) = split("-",$texte_libre) ;
+list($produit,$id_auteur,$hash_article) = split("-",$texte_libre) ;
 
-if(traiter_message_banque($produit,$id_auteur_elargi, $reponse_banque, $hash_article)){
+if(traiter_message_banque($produit,$id_auteur, $reponse_banque, $hash_article)){
 echo "Merci, votre paiement &agrave &eacute;t&eacute; valid&eacute; <br /> Vous allez recevoir un email de confirmation";
 }
 else{
