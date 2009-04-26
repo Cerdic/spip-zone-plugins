@@ -97,7 +97,7 @@ Gli iscritti saranno automaticamente cancellati da questa lista",
 '_aide' => "La funzionalit&agrave; Newsletter permette di inviare una email agli abbonati. &Egrave; possibile utilizzare un modello preimpostato, scrivere un testo non formattato o
 comporre il messaggio in HTML. 
 <br /><br /> Gli iscritti definiscono on line il proprio status di abbonamento, le liste alle quali vogliono far parte e il formato 
-col quale desiderano ricevere le comunicazioni (HTML/testo). <br /><br />Ogni messaggio verr&agrave; tradotto automaticamente in formato testo per quegli iscritti che ne hanno fatto richiesta.<br /><br /><b>Nota:</b><br />L'invio delle e-mail puòograve; durare alcuni minuti: i flussi partono a poco a poco mentre gli utenti visitano il sito pubblico. &Egrave; anche possibile provocare manualmente l'invio dei flussi cliccando sul link 'controlla gli invii' durante un invio.",
+col quale desiderano ricevere le comunicazioni (HTML/testo). <br /><br />Ogni messaggio verr&agrave; tradotto automaticamente in formato testo per quegli iscritti che ne hanno fatto richiesta.<br /><br /><b>Nota:</b><br />L'invio delle e-mail pu\&ograve; durare alcuni minuti: i flussi partono a poco a poco mentre gli utenti visitano il sito pubblico. &Egrave; anche possibile provocare manualmente l'invio dei flussi cliccando sul link 'controlla gli invii' durante un invio.",
 '_aide_import' => "Puoi importare una lista di iscritti dal tuo computer<br />
 	La lista deve essere in formato testo (.txt), una riga per iscritto. Ogni linea deve essere composta cos&igrave;: <br />
 	<tt style='display:block;margin:0.75em 0;background-color:#ccc;border:1px solid #999;padding:1ex;'>indirizzo@email<span style='color:#f66'>[separatore]</span>nome_utente<span style='color:#f66'>[separatore]</span>nome</tt>
@@ -152,7 +152,7 @@ Riceverete una email che vi permetter&agrave; di accedere alla pagina di modific
 'adresses_importees' => "Indirizzi importati",
 'aff_envoye' => "Messaggi inviati",
 'aff_lettre_auto' => "Newsletter inviate",
-'alerte_edit' => "Attenzione: questo messaggio puòograve; essere modificato da tutti gli amministratori del sito e viene spedito a tutti gli iscritti. Non utilizzare la newsletter se non per informare via email di avvenimenti importanti della vita del sito.",
+'alerte_edit' => "Attenzione: questo messaggio pu\&ograve; essere modificato da tutti gli amministratori del sito e viene spedito a tutti gli iscritti. Non utilizzare la newsletter se non per informare via email di avvenimenti importanti della vita del sito.",
 'alerte_modif' => "<b>Dopo aver visualizzato il messaggio &egrave; possibile modificarne il contenuto</b>",
 'annuler_envoi' => "Annulla l'invio",
 'article_entier' => "Leggi l'articolo intero",
@@ -184,7 +184,7 @@ Riceverete una email che vi permetter&agrave; di accedere alla pagina di modific
 'date_ref' => "Data di riferimento",
 'definir_squel' => "Scegli il modello di messaggio per l'anteprima",
 'definir_squel_choix' => "Durante la stesura di un nuovo messaggio, SPIP-Listes permette di caricare un modello preimpostato. Cliccando su un pulsante, nel corpo del messaggio verr&agrave; caricato il contenuto di uno dei modelli di layout della cartella <b>/patrons</b> (situata alla radice del proprio sito SPIP). <p><b>&Egrave; possibile creare e modificare questi modelli a piacimento.</b></p> <ul><li>Questi modelli possono contenere codice HTML classico</li>
-<li>Questo modello puòograve; contenere cicli di SPIP</li>
+<li>Questo modello pu\&ograve; contenere cicli di SPIP</li>
 <li>Dopo aver caricato il modello, &egrave; possibile riscrivere il messaggio prima dell'invio (per aggiungere del testo)</li>
 </ul><p>La funzione 'carica un modello preimpostato' permette di utilizzare delle maschere in HTML personalizzate per i propri messaggi oppure di creare delle newsletter tematiche il cui contenuto viene definito usando i cicli di SPIP.</p><p>Attenzione: questo modello non deve contenere tag BODY, HEAD o HTML ma solo codice HTML o cicli SPIP.</p>",
 'definir_squel_texte' => "Se si dispone dei codici di accesso FTP &egrave; possibile aggiungere modelli SPIP nella cartella /patrons (alla radice del proprio sito SPIP).",
@@ -261,7 +261,7 @@ Riceverete una email che vi permetter&agrave; di accedere alla pagina di modific
 'importer_fichier_txt' => "<p><b>L'elenco di abbonati deve essere un file di solo testo in cui vi &egrave; un solo indirizzo email per riga</b></p>",
 'importer_preciser' => "<p>Specificare le Mailing-List e il formato corrispondente all'importazione degli abbonati</p>",
 'inconnu' => "non sei pi&ugrave; abbonato alla newsletter",
-'info_auto' => "SPIP-Listes per SPIP puòograve; inviare periodicamente agli iscritti, l'annuncio delle ultime novit&agrave; del sito (articoli e brevi pubblicati di recente).",
+'info_auto' => "SPIP-Listes per SPIP pu\&ograve; inviare periodicamente agli iscritti, l'annuncio delle ultime novit&agrave; del sito (articoli e brevi pubblicati di recente).",
 'info_heberg' => "Alcuni hoster disattivano l'invio automatico di email dai propri server. In tal caso, le seguenti funzionalit&agrave; di SPIP-Listes per SPIP non potranno funzionare",
 'info_nouv' => "L'invio delle novit&agrave; &egrave; stato attivato",
 'info_nouv_texte' => "Prossimo invio delle novit&agrave; tra @proch@ giorni",
