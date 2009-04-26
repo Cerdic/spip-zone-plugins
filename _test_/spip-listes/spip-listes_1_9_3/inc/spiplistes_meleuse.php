@@ -567,6 +567,26 @@ function spiplistes_listes_langue ($id_liste) {
 	return(false);
 }
 
+/*
+ * CP-20090426
+ * Petite fonction pour remplacer les url_site
+ * Ex., pour url_site = "foo.bar" :
+ * _HREF_AUTEUR_URL_SITE_ = "href='http://foo.bar'
+ * _AUTEUR_URL_SITE_ = "foo.bar"
+ */
+function spiplistes_personnaliser_courrier_urls ($txt, $url) {
+
+	// commencer par href (voir patron details_auteurs pour exemple)
+	if(!empty($url)) {
+		$txt = preg_replace("@(_HREF_AUTEUR_URL_SITE_)@"
+							, " href='" . ((!preg_match(',^https?://.+$,', $url)) ? "http://" : "") . $url . "'"
+							, $txt);
+	}
+	// et url_site seul
+	$txt = preg_replace("@(_AUTEUR_URL_SITE_)@", $url, $txt);
+	return($txt);
+}
+
 //CP-20080608 :: personnalisation du courrier
 // recherche/remplace les tags _AUTEUR_CLE_ en masse dans le corps du message.
 // (toutes les cles presentes dans la table *_auteur sont utilisables)
@@ -580,14 +600,23 @@ function spiplistes_personnaliser_courrier ($page_html, $page_texte, $id_auteur,
 		$replace = array();
 		krsort($auteur);
 		foreach($auteur as $key => $val) {
+			if($key == "url_site") continue;
 			$pattern[$ii] = ",(_AUTEUR_" . strtoupper($key) .")_,";
 			$replace[$ii] = $auteur[$key];
 			$ii++;
 		}
+		$url = trim($auteur['url_site']);
+		
 		if($format_abo == 'html') {
 			$result_html = preg_replace($pattern, $replace, $page_html);
+			
+			// traiter url_site a part (href et corrige' par l'assembleur ou un filtre en amont)
+			$result_html = spiplistes_personnaliser_courrier_urls ($result_html, $url);
 		}
+		
 		$result_texte = preg_replace($pattern, $replace, $page_texte);
+		$result_texte = spiplistes_personnaliser_courrier_urls($result_texte, $url);
+		
 		spiplistes_log($prefix_log."personnalisation du courrier pour id_auteur #$id_auteur", _SPIPLISTES_LOG_DEBUG);
 	} 
 	return(array($result_html, $result_texte));
