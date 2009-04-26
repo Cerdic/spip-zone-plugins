@@ -25,6 +25,13 @@ function tickets_upgrade($nom_meta_base_version,$version_cible){
 		
 		ecrire_meta($nom_meta_base_version,$current_version="0.2");
 	}
+	if (version_compare($current_version,"0.6","<")){
+		//modifications de la table spip_tickets
+		sql_alter("TABLE spip_tickets MODIFY jalon varchar(30) DEFAULT '' NOT NULL");
+		sql_alter("TABLE spip_tickets MODIFY version varchar(30) DEFAULT '' NOT NULL");
+		
+		ecrire_meta($nom_meta_base_version,$current_version="0.6");
+	}
 		
 		ecrire_metas();
 }

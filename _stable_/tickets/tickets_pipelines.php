@@ -16,11 +16,13 @@ function menu_colonne () {
 	$ret .= icone_horizontale(_L('Afficher les tickets'), generer_url_ecrire("tickets"), _DIR_PLUGIN_TICKETS."imgs/bugs.png", "", false);
 
 	$contexte = array("titre"=>"Vos tickets en cours de r&eacute;daction", "id_auteur"=>$connect_id_auteur, "statut"=>"redac");
-	$page = recuperer_fond("prive/contenu/inc_liste_simple", $contexte);
+	$options = array("ajax"=>true);
+	$page = recuperer_fond("prive/contenu/inc_liste_simple", $contexte, $options);
 	$ret .= $page;
 	
 	$contexte = array("titre"=>"Tous les tickets ouverts", "statut"=>"ouvert");
-	$page = recuperer_fond("prive/contenu/inc_liste_simple", $contexte);
+	$options = array("ajax"=>true);
+	$page = recuperer_fond("prive/contenu/inc_liste_simple", $contexte, $options);
 	$ret .= $page;
 
 	include_spip('inc/tickets_autoriser');

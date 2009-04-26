@@ -19,8 +19,8 @@ function tickets_declarer_tables_principales($tables_principales){
 			"exemple"	=> "varchar(255) DEFAULT '' NOT NULL",
 			"projet"	=> "varchar(60) DEFAULT '' NOT NULL",
 			"composant"	=> "varchar(40) DEFAULT '' NOT NULL",
-			"version"	=> "varchar(10) DEFAULT '' NOT NULL",
-			"jalon"	=> "varchar(10) DEFAULT '' NOT NULL",
+			"version"	=> "varchar(30) DEFAULT '' NOT NULL",
+			"jalon"	=> "varchar(30) DEFAULT '' NOT NULL",
 			"maj"	=> "TIMESTAMP"
 			);
 	

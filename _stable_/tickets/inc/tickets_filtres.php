@@ -70,7 +70,8 @@ function tickets_classer_par_jalon($bidon) {
 		$liste = explode(":", _TICKETS_LISTE_JALONS);
 		foreach($liste as $_jalon) {
 			$page .= recuperer_fond('prive/contenu/inc_liste_detaillee', 
-				array_merge($_GET, array('ajax'=>true, 'visible'=>'false', 'titre' => _T('tickets:champ_jalon').$_jalon, 'statut' => 'ouvert', 'jalon' => $_jalon)));
+				array_merge($_GET, array('visible'=>'true', 'titre' => _T('tickets:champ_jalon').' '.$_jalon, 'statut' => 'ouvert', 'jalon' => $_jalon)),
+				array('ajax'=>true));
 		}
 	}
 	return $page;
@@ -78,10 +79,24 @@ function tickets_classer_par_jalon($bidon) {
 
 // Affichage des boutons modifier ou retour
 function tickets_bouton_modifier ($id_ticket, $logo, $align) {
-			return icone_inline(_L('Modifier ce ticket'), generer_url_ecrire("ticket_editer","id_ticket=$id_ticket"), $logo, "edit.gif", $align);
+	return icone_inline(_L('Modifier ce ticket'), generer_url_ecrire("ticket_editer","id_ticket=$id_ticket"), $logo, "edit.gif", $align);
 }
 function tickets_bouton_retour ($id_ticket, $logo, $align) {
-			return icone_inline(_L('Retour'), generer_url_ecrire("ticket_afficher","id_ticket=$id_ticket"), $logo, "", $align);
+	return icone_inline(_L('Retour'), generer_url_ecrire("ticket_afficher","id_ticket=$id_ticket"), $logo, "", $align);
+}
+
+// Affichage des blocs de liste depliables et ajaxes
+function tickets_debut_block_depliable($deplie,$id=""){
+	include_spip('inc/layer');
+	return debut_block_depliable($deplie,$id);	
+}
+function tickets_fin_block() {
+	include_spip('inc/layer');
+	return fin_block();	
+}
+function tickets_bouton_block_depliable($texte,$deplie,$ids=""){
+	include_spip('inc/layer');
+	return bouton_block_depliable($texte,$deplie,$ids);	
 }
 
 // Interpretation des valeurs de certains champs de la table ticket
