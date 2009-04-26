@@ -6,15 +6,18 @@
 #LOGIN_PUBLIC
 ]
 [(#ENV**{erreurs}|table_valeur{email_connu}|non)
-[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>
+		[(#REM) pour reprendre la main apres la validation]
+		[(#PIPELINE{i2_validation,#ARRAY{args,#ENV*,data,''}})]
+	]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
 
 [(#ENV{editable}|oui)
     <form action='#ENV{action}' method='post'>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		
-        [(#REM) pour inserer des champs au debut du formulaire
-		Utilise pour Abonnement et association auparavant]
+        [(#REM) pour inserer des champs au debut du formulaire]
 
 		[(#PIPELINE{i2_form_debut,#ARRAY{args,#ENV*,data,''}})]
 		

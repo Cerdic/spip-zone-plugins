@@ -6,6 +6,8 @@ $GLOBALS['spip_pipeline']['i2_exceptions_des_champs_auteurs_elargis'] = '';
 $GLOBALS['spip_pipeline']['i2_charger_formulaire'] = '';
 $GLOBALS['spip_pipeline']['i2_verifier_formulaire'] = '';
 $GLOBALS['spip_pipeline']['i2_traiter_formulaire'] = '';
+$GLOBALS['spip_pipeline']['i2_validation'] = '';
+
 
 //
 // <BOUCLE(AUTEURS)>

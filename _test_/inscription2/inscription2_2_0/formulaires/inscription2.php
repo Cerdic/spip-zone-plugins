@@ -379,9 +379,13 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
         }
         $editable = true;
     } else {
-		$envoyer_inscription = charger_fonction('envoyer_inscription2','inc');
-		$envoyer_inscription($id_auteur,$mode);
-		$message = _T('inscription2:formulaire_inscription_ok');
+		if(!$traiter_plugin['ne_pas_confirmer_par_mail']){
+			$envoyer_inscription = charger_fonction('envoyer_inscription2','inc');
+			$envoyer_inscription($id_auteur,$mode);
+			$message = _T('inscription2:formulaire_inscription_ok');
+		}
+		if($traiter_plugin['message_ok'])
+			$message = $traiter_plugin['message_ok'] ;
 		$editable = false;
     }
 	
