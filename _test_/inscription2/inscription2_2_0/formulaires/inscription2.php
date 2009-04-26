@@ -283,8 +283,10 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 	
 	//Verification du password
 	if(($mode == 'inscription_pass') || ($mode == 'modification_auteur_pass')){
-		if (strlen(_request('password')) != 0){$new_pass = _request('password');}
-		else{$new_pass = _request('pass');}
+		if (strlen(_request('password')) != 0)
+			$new_pass = _request('password');
+		else
+			$new_pass = _request('pass');
 		if (strlen($new_pass)) {
 			include_spip('inc/acces');
 			$htpass = generer_htpass($new_pass);
@@ -303,6 +305,11 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 	}else{
 		if(!is_numeric($id_auteur)){
 			$val['statut'] = 'aconfirmer';
+			include_spip('inc/acces');
+			$alea_actuel = creer_uniqid();
+			$alea_futur = creer_uniqid();
+			$val['alea_actuel'] = $alea_actuel;
+			$val['alea_futur'] = $alea_futur;		
 		}
 	}
 	
