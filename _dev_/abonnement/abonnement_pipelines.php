@@ -20,6 +20,12 @@ function abonnement_i2_charger_formulaire($flux) {
 	return ($flux);
 }
 
+function abonnement_i2_validation($flux) {
+	$env = unserialize($flux['args']);
+    $flux['data'] .= recuperer_fond('formulaires/abonnement_paiement',$env);
+	return ($flux);
+}
+
 function abonnement_i2_verifier_formulaire($flux) {
 	return ($flux);
 }
@@ -32,7 +38,9 @@ function abonnement_i2_traiter_formulaire($flux) {
 	spip_log("$value,$n","logabo");
 	sql_insertq('spip_auteurs_elargis_abonnements', array('id_auteur' => $n,'id_abonnement' => $value, 'date' => date("Y-m-d H:i:s") ));
 	}
-	
+	$flux['data']['ne_pas_confirmer_par_mail'] = true ;
+	$flux['data']['message_ok'] = " " ;
+
 	/*
 	if(isset($declaration['article']) AND ($declaration['article'] > 0 OR ereg('breve',$declaration['article']) )){
 		$value = $declaration['article'] ;	

@@ -1,6 +1,5 @@
 #CACHE{0}
 
-
 [(#ENV**{hash_article}|?{' ',''})
 [(#SET{texteLibre,[article-(#ENV**{id_auteur_elargi})][-(#ENV**{hash_article})]})]
 ]
@@ -8,9 +7,6 @@
 [(#SET{texteLibre,[abonnement-(#ENV**{id_auteur_elargi})]})]
 ]
 
-[<div>(#ENV*{message})</div>]
-
-[<div style="color:red; font-style:bold;">(#ENV*{commentaires}|=={1}|?{'',' '}) #ENV*{commentaires} </div>]
 
 
 <div>
@@ -90,8 +86,6 @@ $Formulaire_Paiement = CreerFormulaireHmac($CMCIC_Tpe,
 */
 ?>
 
-
-[(#ENV*{commentaires}|=={1}|?{' ',''})
 <div style= "padding-bottom:10px">
 <h2>Paiement</h2>
 </div>
@@ -130,5 +124,4 @@ $Formulaire_Paiement = CreerFormulaireHmac($CMCIC_Tpe,
 			<input type="submit" name="reponse_banque" class="spip_bouton" value="erreur_bank" />	
 			</form>	
 
-]
 </div>

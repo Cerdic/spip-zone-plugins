@@ -47,6 +47,10 @@
 		<inclure>abonnement_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>i2_validation</nom>
+		<inclure>abonnement_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/abonnement.php</inclure>
 	</pipeline>
