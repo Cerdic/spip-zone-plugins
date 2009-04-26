@@ -20,7 +20,7 @@ function abonnement_i2_charger_formulaire($flux) {
 	return ($flux);
 }
 
-function abonnement_i2_validation($flux) {
+function abonnement_i2_confirmation($flux) {
 	$env = unserialize($flux['args']);
     $flux['data'] .= recuperer_fond('formulaires/abonnement_paiement',$env);
 	return ($flux);

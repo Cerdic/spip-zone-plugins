@@ -47,7 +47,7 @@
 		<inclure>abonnement_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>i2_validation</nom>
+		<nom>i2_confirmation</nom>
 		<inclure>abonnement_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
