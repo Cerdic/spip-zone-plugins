@@ -46,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nbobjets_note' => 'Nombre d\'objets ayant une note : ',
 
   // Parametrage
+	'configuration_notation' => 'Configurer les notations',
 	'param' => 'Param&eacute;trage',
 	'ponderation' => 'Pond&eacute;ration de la note',
 	'info_ponderation' => 'Le facteur de pond&eacute;ration permet d\'accorder plus de valeur aux articles ayant re&ccedil;u suffisament de votes. <br /> Entrez ci-dessous la nombre de votes au del&agrave; duquel vous pensez que la note est fiable.',
