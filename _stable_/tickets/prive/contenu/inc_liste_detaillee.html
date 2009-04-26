@@ -1,11 +1,6 @@
 [(#REM) Noisette d'affichage d'une liste detaillee des tickets suivant des criteres passes en arguments]
 #CACHE{0}
-
-[(#REM) Si on vient par une pagination, c'est obligatoirement déplié ! ]
-#SET{visible,#ENV{visible,true}}
-[(#ENV{debut_principale}|oui)
-	#SET{visible,true}
-]
+#SET{visible,true}
 
 <B_detaillee>
 <div class="cadre cadre-liste">

@@ -70,7 +70,7 @@ function tickets_classer_par_jalon($bidon) {
 		$liste = explode(":", _TICKETS_LISTE_JALONS);
 		foreach($liste as $_jalon) {
 			$page .= recuperer_fond('prive/contenu/inc_liste_detaillee', 
-				array_merge($_GET, array('visible'=>'true', 'titre' => _T('tickets:champ_jalon').' '.$_jalon, 'statut' => 'ouvert', 'jalon' => $_jalon)),
+				array_merge($_GET, array('titre' => _T('tickets:champ_jalon').' '.$_jalon, 'statut' => 'ouvert', 'jalon' => $_jalon)),
 				array('ajax'=>true));
 		}
 	}

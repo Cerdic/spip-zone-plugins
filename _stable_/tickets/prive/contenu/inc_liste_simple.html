@@ -1,5 +1,7 @@
 [(#REM) Noisette servant a l'affichage du menu des tickets presente en colonne droite ou gauche]
 #CACHE{0}
+#SET{visible,true}
+
 <B_simple>
 <div class="cadre cadre-liste">
 	[(#ENV{titre}|tickets_bouton_block_depliable{#ENV{visible,true}|=={true}})]
