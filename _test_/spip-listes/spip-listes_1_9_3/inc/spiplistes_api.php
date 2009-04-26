@@ -812,30 +812,6 @@ function spiplistes_tampon_html_get ($tampon_patron) {
 	return(recuperer_fond(_SPIPLISTES_PATRONS_TAMPON_DIR.$tampon_patron, $contexte_patron));
 }
 
-// donne contenu lien_courrier au format html (CP-20071014)
-// lien_patron: nom du tampon (fichier, sans extension)
-function spiplistes_lien_courrier_html_get ($lien_patron, $url_courrier) {
-	$contexte_patron = array('url_courrier'=>$url_courrier);
-	include_spip('public/assembler');
-	return(recuperer_fond(_SPIPLISTES_PATRONS_TETE_DIR.$lien_patron, $contexte_patron));
-}
-
-// donne contenu lien_courrier au format texte (CP-20071014)
-// lien_patron: nom du lien_courrier (fichier, sans extension)
-// lien_html: contenu html converti en texte si pas de contenu
-function spiplistes_lien_courrier_texte_get ($lien_patron, $lien_html, $url_courrier) {
-	$contexte_patron = array('url_courrier'=>$url_courrier);
-	$result = false;
-	$f = _SPIPLISTES_PATRONS_TETE_DIR.$tampon_patron;
-	if (find_in_path($f."_texte.html")){
-		$result = recuperer_fond($f, $contexte_patron);
-	}
-	if(!$result) {
-		$result = spiplistes_courrier_version_texte($lien_html);
-	}
-	return($result);
-}
-
 function spiplistes_pied_de_page_liste ($id_liste = 0, $lang = false) {
 	$result = false;
 	if(!$lang) {
