@@ -251,17 +251,11 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 				($opt_lien_en_tete_courrier == 'oui') 
 				&& !empty($lien_patron)
 			) {
-				/*
-				$url_courrier = generer_url_public('courrier', "id_courrier=$id_courrier");
-				$lien_courrier_html = spiplistes_lien_courrier_html_get($lien_patron, $url_courrier);
-				$lien_courrier_texte = spiplistes_lien_courrier_texte_get($lien_patron, $lien_courrier_html, $url_courrier);
-				*/
-				$_url = generer_url_public('courrier', "id_courrier=$id_courrier");
-				// le &amp; semble poser probleme sur certains MUA. A suivre...
-				$_url = preg_replace(',(&amp;),','&', $_url);
 				list($lien_html, $lien_texte) = spiplistes_courriers_assembler_patron (
 					_SPIPLISTES_PATRONS_TETE_DIR . $lien_patron
-					, array('url_courrier' => $_url, 'lang'=>$lang));
+					, array('id_courrier' => $id_courrier
+							, 'lang' => $lang)
+					);
 				$page_html = $lien_html . $page_html;
 				$page_texte = $lien_texte . $page_texte;
 			}

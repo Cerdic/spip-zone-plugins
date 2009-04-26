@@ -492,7 +492,7 @@ function spiplistes_courriers_pieds ($lang, $defaut = 'piedmail') {
 /*
  * CP-20081124
  * Assembler/calculer un patron
- * @return le resultat html et texte seul dans un tableau
+ * @return array le resultat html et texte seul dans un tableau
  * @param $patron string nom du patron
  * @param $contexte array
  * @param $ignorer bool

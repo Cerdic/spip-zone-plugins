@@ -84,7 +84,6 @@ function exec_spiplistes_courrier_previsu () {
 	);
 	foreach(array_merge($str_values, $int_values) as $key) {
 		$$key = _request($key);
-//spiplistes_log("$key :-: ".$$key);
 	}
 	foreach($int_values as $key) {
 		$$key = intval($$key);
@@ -95,16 +94,16 @@ function exec_spiplistes_courrier_previsu () {
 	$charset = $meta['charset'];
 
 	$contexte = array(
-			'url_courrier' => generer_url_public('courrier', "id_courrier=$id_courrier")
+			'id_courrier' => $id_courrier
 			, 'lang' => $lang
 			);
-
+	
 	list($lien_html, $lien_texte) = spiplistes_courriers_assembler_patron (
 		_SPIPLISTES_PATRONS_TETE_DIR . spiplistes_pref_lire('lien_patron')
 		, $contexte
-		, (spiplistes_pref_lire('opt_lien_en_tete_courrier') != 'oui' || !$id_courrier)
+		, !((spiplistes_pref_lire('opt_lien_en_tete_courrier') == 'oui') && $id_courrier)
 		);
-
+	
 	// si envoi a une liste, reprendre le patron de pied de la liste
 	$pied_patron = 
 		($id_liste) 
@@ -195,7 +194,7 @@ function exec_spiplistes_courrier_previsu () {
 	}
 	
 	//////////////////////////////////////////////////
-	// si nouveau courrier (pas dans la base), generer un appercu
+	// si nouveau courrier (pas dans la base), generer un apercu
 	else {
 		
 		$intro_html = $intro_texte = 

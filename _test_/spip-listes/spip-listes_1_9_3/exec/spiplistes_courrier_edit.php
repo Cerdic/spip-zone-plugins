@@ -159,9 +159,14 @@ function exec_spiplistes_courrier_edit(){
 		. "</td>\n"
 		. "</tr></table>\n"
 		. "<hr />\n"
+		;
 		//
 		// debut formulaire
-		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,"id_courrier=$id_courrier")
+	
+	$page_result .= ""
+		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER
+											  , ($id_courrier ? "id_courrier=$id_courrier" : "")
+											  )
 			."' method='post' name='formulaire_courrier_edit' id='formulaire_courrier_edit'>\n"
 		. "<input type='hidden' name='modifier_message' value=\"oui\" />\n"
 		. "<input type='hidden' name='id_courrier' value='$id_courrier' />\n"
