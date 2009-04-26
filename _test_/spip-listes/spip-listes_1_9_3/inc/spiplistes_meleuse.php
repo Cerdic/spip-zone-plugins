@@ -402,8 +402,16 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 								$_url = generer_url_public('abonnement','d='.$cookie);
 								
 								if($opt_personnaliser_courrier == 'oui') {
-									$page_html = spiplistes_personnaliser_courrier($page_html, $id_auteur);
-									$page_texte = spiplistes_personnaliser_courrier($page_texte, $id_auteur);
+									list($ventre_html, $ventre_texte) = spiplistes_personnaliser_courrier(
+																			$page_html
+																			, $page_texte
+																			, $id_auteur
+																			, $format_abo
+																		);
+								}
+								else {
+									$ventre_html = $page_html;
+									$ventre_texte = $page_texte;
 								}
 								
 								// le &amp; semble poser probleme sur certains MUA. A suivre...
@@ -412,14 +420,14 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 									case 'html':
 										$email_a_envoyer[$format_abo]->Body =
 											"<html>\n\n<body>\n\n"
-											. $page_html
+											. $ventre_html
 											. $pied_html
 											. "<a href=\"$_url\">".$pied_rappel_html."</a>\n\n</body></html>"
 											. $tampon_html
 											;
 										/* la version alternative texte */
 										$email_a_envoyer[$format_abo]->AltBody = 
-											$page_texte ."\n\n"
+											$ventre_texte ."\n\n"
 											. $pied_texte
 											. str_replace("&amp;", "&", $pied_rappel_texte). " " . $_url."\n\n"
 											. $tampon_texte
@@ -427,7 +435,7 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 										break;
 									case 'texte':
 										$email_a_envoyer[$format_abo]->Body =
-											$page_texte ."\n\n"
+											$ventre_texte ."\n\n"
 											. $pied_texte
 											. str_replace("&amp;", "&", $pied_rappel_texte). " " . $_url."\n\n"
 											. $tampon_texte
@@ -562,8 +570,10 @@ function spiplistes_listes_langue ($id_liste) {
 //CP-20080608 :: personnalisation du courrier
 // recherche/remplace les tags _AUTEUR_CLE_ en masse dans le corps du message.
 // (toutes les cles presentes dans la table *_auteur sont utilisables)
-function spiplistes_personnaliser_courrier ($corps, $id_auteur) {
+function spiplistes_personnaliser_courrier ($page_html, $page_texte, $id_auteur, $format_abo) {
 
+	$result_html = $result_texte = "";
+	
 	if($auteur = sql_fetsel("*", 'spip_auteurs', "id_auteur=".sql_quote($id_auteur), '','', 1)) {
 		$ii = 0;
 		$pattern = array();
@@ -574,10 +584,13 @@ function spiplistes_personnaliser_courrier ($corps, $id_auteur) {
 			$replace[$ii] = $auteur[$key];
 			$ii++;
 		}
-		$corps = preg_replace($pattern, $replace, $corps);
-		spiplistes_log($prefix_log."personnalisation du courrier pour $id_auteur", _SPIPLISTES_LOG_DEBUG);
+		if($format_abo == 'html') {
+			$result_html = preg_replace($pattern, $replace, $page_html);
+		}
+		$result_texte = preg_replace($pattern, $replace, $page_texte);
+		spiplistes_log($prefix_log."personnalisation du courrier pour id_auteur #$id_auteur", _SPIPLISTES_LOG_DEBUG);
 	} 
-	return($corps);
+	return(array($result_html, $result_texte));
 }
 
 
