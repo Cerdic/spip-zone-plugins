@@ -181,22 +181,7 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 				
 				$contexte = array('lang' => $lang);
 				
-				$pied_patron = spiplistes_listes_pied_patron($id_liste);
-				if(!$pied_patron) {
-					$pied_patron = _SPIPLISTES_PATRON_PIED_DEFAUT;
-				}
-				if(strlen($pied_patron) > _SPIPLISTES_PATRON_FILENAMEMAX) {
-					// rester compatible avec les anciennes version de SPIP-Listes
-					// qui stoquaient le patron assemble' en base
-					$pied_texte = spiplistes_courrier_version_texte($pied_html = $pied_patron);
-				}
-				else {
-					list($pied_html, $pied_texte) = spiplistes_courriers_assembler_patron (
-						_SPIPLISTES_PATRONS_PIED_DIR . $pied_patron
-						, $contexte
-						, ($pied_patron == _SPIPLISTES_PATRON_PIED_IGNORE)
-						);
-				}
+				list($pied_html, $pied_texte) = spiplistes_pied_page_assembler_patron($id_liste, $lang);
 			}
 			else {
 				// erreur dans un script d'appel ? Ou url ? Ou base erreur ?
@@ -549,20 +534,7 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 	return($last_time);
 } // end spiplistes_meleuse()
 
-/*
-*/
-function spiplistes_listes_langue ($id_liste) {
-	if(($id_liste = intval($id_liste)) > 0) {
-		return(
-			sql_getfetsel(
-				'lang'
-				, "spip_listes"
-				, "id_liste=".sql_quote($id_liste)." LIMIT 1"
-			)
-		);
-	}
-	return(false);
-}
+
 
 /*
  * CP-20090426

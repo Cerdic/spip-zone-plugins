@@ -95,11 +95,6 @@ function exec_spiplistes_liste_edit(){
 		$flag_editable = ($connect_statut == "0minirezo");
 	}
 
-	// construit le pied
-	// a partir de 2.0049, le patron de pied est construit par la meleuse
-	// afin de permettre _texte et multilingue
-	//$pied_page = spiplistes_pied_de_page_liste($id_liste, $lang);
-
 	$gros_bouton_retour = icone(
 		_T('spiplistes:retour_link')
 		, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=" . ($lier_trad ? $lier_trad : $id_liste) )

@@ -105,24 +105,8 @@ function exec_spiplistes_courrier_previsu () {
 		);
 	
 	// si envoi a une liste, reprendre le patron de pied de la liste
-	$pied_patron = 
-		($id_liste) 
-		? spiplistes_listes_pied_patron($id_liste) 
-		: ($pied_patron ? $pied_patron : _SPIPLISTES_PATRON_PIED_DEFAUT)
-		;
-	if(strlen($pied_patron) > _SPIPLISTES_PATRON_FILENAMEMAX) {
-		// rester compatible avec les anciennes version de SIP-Listes
-		// qui stoquaient le patron assemble' en base
-		$pied_texte = spiplistes_courrier_version_texte($pied_html = $pied_patron);
-	}
-	else {
-		list($pied_html, $pied_texte) = spiplistes_courriers_assembler_patron (
-			_SPIPLISTES_PATRONS_PIED_DIR . $pied_patron
-			, $contexte
-			, ($pied_patron == _SPIPLISTES_PATRON_PIED_IGNORE)
-			);
-	}
-				
+	list($pied_html, $pied_texte) = spiplistes_pied_page_assembler_patron($id_liste, $lang);
+		
 	$texte_intro = $texte_patron =
 		$tampon_html = $tampon_texte =
 		$sommaire_html = "";

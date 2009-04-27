@@ -492,18 +492,6 @@ function spiplistes_courriers_en_queue_compter ($sql_whereq = "") {
 	return(spiplistes_sql_compter("spip_auteurs_courriers", $sql_whereq));
 }
 
-/*
- * @return le nom du patron de pied
- * @param $id_liste int
- */
-function spiplistes_listes_pied_patron ($id_liste) {
-	$result = sql_getfetsel('pied_page', 'spip_listes', "id_liste=".sql_quote($id_liste), '','',1);
-	if ($result === false) {
-		spiplistes_sqlerror_log("listes_pied_patron");
-	}
-	return($result);
-}
-
 // CP-20080510
 function spiplistes_courriers_en_queue_modifier ($array_set, $sql_whereq) {
 	return(
@@ -891,18 +879,39 @@ function spiplistes_tampon_assembler_patron () {
 	return($result);
 }
 
-function spiplistes_pied_de_page_liste ($id_liste = 0, $lang = false) {
-	$result = false;
-	if(!$lang) {
-		$lang = $GLOBALS['spip_lang'];
-	}
-	if(($id_liste = intval($id_liste)) > 0){
+function spiplistes_pied_page_assembler_patron ($id_liste, $lang = false) {
+	
+	$result = array("", "");
+	
+	if(($id_liste = intval($id_liste)) > 0)
+	{
 		$result = sql_getfetsel('pied_page', 'spip_listes', "id_liste=".sql_quote($id_liste), '','',1);
-	}
-	if(!$result) {
-		include_spip('public/assembler');
-		$contexte_pied = array('lang'=>$lang);
-		$result = recuperer_fond(_SPIPLISTES_PATRONS_PIED_DEFAUT, $contexte_pied);
+		
+		$pied_patron =
+			(!$result)
+			// si patron vide (ancienne version de SPIP-Listes ?), appliquer le patron par defaut
+			? _SPIPLISTES_PATRONS_PIED_DEFAUT
+			: $result
+			;
+		if(strlen($pied_patron) > _SPIPLISTES_PATRON_FILENAMEMAX)
+		{
+			// probablement le contenu du pied (SPIP-Listes <= 1.9.2 ?)
+			// rester compatible avec les anciennes version de SPIP-Listes
+			// qui stoquaient le patron assemble' en base
+			$pied_texte = spiplistes_courrier_version_texte($pied_html = $pied_patron);
+			$result = array($pied_html, $pied_texte);
+		}
+		else if(strlen($pied_patron) && ($pied_patron != _SPIPLISTES_PATRON_PIED_IGNORE)) {
+			
+			if(!$lang) {
+				$lang = spiplistes_listes_langue($id_liste) || $GLOBALS['spip_lang'];
+			}
+			$contexte = array('lang' => $lang);
+			$result = spiplistes_assembler_patron (
+				_SPIPLISTES_PATRONS_PIED_DIR . $pied_patron
+				, $contexte
+			);
+		}
 	}
 	return ($result);
 }
@@ -1085,6 +1094,21 @@ function spiplistes_login_from_email ($mail) {
 		}	
 	}
 	return($result);
+}
+
+/*
+*/
+function spiplistes_listes_langue ($id_liste) {
+	if(($id_liste = intval($id_liste)) > 0) {
+		return(
+			sql_getfetsel(
+				'lang'
+				, "spip_listes"
+				, "id_liste=".sql_quote($id_liste)." LIMIT 1"
+			)
+		);
+	}
+	return(false);
 }
 
 /******************************************************************************************/
