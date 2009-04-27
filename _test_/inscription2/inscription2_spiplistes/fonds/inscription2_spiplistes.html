@@ -11,7 +11,7 @@
 				<p class="explications"><:i2_spiplistes:choisir_listes:></p>
 				<B_listes>
 				<select name="newsletters[]" multiple="multiple" size="[(#TOTAL_BOUCLE|<{6}|?{ [(#TOTAL_BOUCLE|plus{1})] , 5 })]" id="newsletters">
-				<BOUCLE_listes(LISTES){statut=liste}>
+				<BOUCLE_listes(LISTES){statut=liste}{statut = 'liste'}>
 					<option value="#ID_LISTE"[(#ID_LISTE|in_array{#GET{selected,#ARRAY}}|?{ selected="selected"})]>
 					#TITRE
 					</option>
