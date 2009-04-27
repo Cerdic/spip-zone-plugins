@@ -15,12 +15,12 @@ function menu_colonne () {
 	$ret .= "<div class='cadre cadre-e'><div class='cadre_padding'>";
 	$ret .= icone_horizontale(_L('Afficher les tickets'), generer_url_ecrire("tickets"), _DIR_PLUGIN_TICKETS."imgs/bugs.png", "", false);
 
-	$contexte = array("titre"=>"Vos tickets en cours de r&eacute;daction", "id_auteur"=>$connect_id_auteur, "statut"=>"redac");
+	$contexte = array("titre"=>"Vos tickets en cours de r&eacute;daction", "id_auteur"=>$connect_id_auteur, "statut"=>"redac", "bloc"=>"_bloc1");
 	$options = array("ajax"=>true);
 	$page = recuperer_fond("prive/contenu/inc_liste_simple", $contexte, $options);
 	$ret .= $page;
 	
-	$contexte = array("titre"=>"Tous les tickets ouverts", "statut"=>"ouvert");
+	$contexte = array("titre"=>"Tous les tickets ouverts", "statut"=>"ouvert", "bloc"=>"_bloc2");
 	$options = array("ajax"=>true);
 	$page = recuperer_fond("prive/contenu/inc_liste_simple", $contexte, $options);
 	$ret .= $page;

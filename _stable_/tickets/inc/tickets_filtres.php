@@ -68,9 +68,11 @@ function tickets_classer_par_jalon($bidon) {
 	$page = NULL;
 	if (defined('_TICKETS_LISTE_JALONS')) {
 		$liste = explode(":", _TICKETS_LISTE_JALONS);
+		$i = 0;
 		foreach($liste as $_jalon) {
+			$i += 1;
 			$page .= recuperer_fond('prive/contenu/inc_liste_detaillee', 
-				array_merge($_GET, array('titre' => _T('tickets:champ_jalon').' '.$_jalon, 'statut' => 'ouvert', 'jalon' => $_jalon)),
+				array_merge($_GET, array('titre' => _T('tickets:champ_jalon').' '.$_jalon, 'statut' => 'ouvert', 'jalon' => $_jalon, 'bloc' => "_bloc$i")),
 				array('ajax'=>true));
 		}
 	}

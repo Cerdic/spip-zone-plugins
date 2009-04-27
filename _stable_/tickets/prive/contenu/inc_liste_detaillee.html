@@ -19,7 +19,7 @@
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_detaillee(TICKETS){par severite}{par type}{!par date}{pagination #ENV{pagination,10}}{id_auteur?}{id_assigne?}{statut?}{type?}{jalon?}>
+<BOUCLE_detaillee(TICKETS){par severite}{par type}{!par date}{pagination 10 #ENV{bloc}}{id_auteur?}{id_assigne?}{statut?}{type?}{jalon?}>
 		<tr class="tr_liste">
 			<td style="width: 10px;">[(#STATUT|tickets_bouton_statut)]</td>
 			<td class="arial1"><b>##ID_TICKET</b></td>
