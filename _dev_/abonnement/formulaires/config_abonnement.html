@@ -11,15 +11,26 @@
 <div>
 #ACTION_FORMULAIRE{#ENV{action}}
 <ul>
-
+	
+	<li class="fieldset">
+		<fieldset>
+			<h3 class="legend"><:abo:fieldset_inscription:></h3>
+			<ul>
+				[(#SAISIE{oui_non,proposer_paiement}
+					{label=<:abo:label_proposer_paiement:>}
+					{explication=<:abo:explication_proposer_paiement:>})]
+			</ul>
+		</fieldset>
+	</li>
+	
 	<li class="fieldset">
 		<fieldset>
 			<h3 class="legend"><:abo:fieldset_expediteur:></h3>
 			<ul>
-				[(#SAISIE{input}{nom=nom_envoi}
+				[(#SAISIE{input,nom_envoi}
 					{label=<:abo:label_nom:>})]
 					
-				[(#SAISIE{input}{nom=email_envoi}
+				[(#SAISIE{input,email_envoi}
 					{label=<:abo:label_email:>})]
 			</ul>
 		</fieldset>
@@ -29,10 +40,10 @@
 		<fieldset>
 			<h3 class="legend"><:abo:fieldset_confirmation:></h3>
 			<ul>
-				[(#SAISIE{input}{nom=sujet_ok}
+				[(#SAISIE{input,sujet_ok}
 					{label=<:abo:label_sujet:>})]
 					
-				[(#SAISIE{textarea}{nom=texte_ok}
+				[(#SAISIE{textarea,texte_ok}
 					{label=<:abo:label_texte:>}
 					{rows=10})]
 			</ul>
@@ -43,10 +54,10 @@
 		<fieldset>
 			<h3 class="legend"><:abo:fieldset_echec:></h3>
 			<ul>
-				[(#SAISIE{input}{nom=sujet_ko}
+				[(#SAISIE{input,sujet_ko}
 					{label=<:abo:label_sujet:>})]
 					
-				[(#SAISIE{textarea}{nom=texte_ko}
+				[(#SAISIE{textarea,texte_ko}
 					{label=<:abo:label_texte:>}
 					{rows=10})]
 			</ul>
@@ -57,7 +68,7 @@
 		<fieldset>
 			<h3 class="legend"><:abo:fieldset_articles_payants:></h3>
 			<ul>
-				[(#SAISIE{input}{nom=prix_article}
+				[(#SAISIE{input,prix_article}
 					{label=<:abo:label_tarif:>}
 					{explication=<:abo:explication_tarif:>})]
 			</ul>

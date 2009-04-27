@@ -42,9 +42,11 @@ return $id_breve ;
 }
 
 function ajouter_des_jours($date,$nb){
-if(!intval($nb)) return ;
-$date = spip_fetch_array(spip_query("select DATE_ADD('$date', INTERVAL $nb DAY) as ladate"));
-return $date['ladate'] ;
+	if(!intval($nb))
+		return;
+		
+	$date = sql_fetch(sql_query("select DATE_ADD('$date', INTERVAL $nb DAY) as ladate"));
+	return $date['ladate'];
 }
 
 ?>

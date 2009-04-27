@@ -5,36 +5,37 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function abonnement_I2_cfg_form($flux) {
     $flux .= recuperer_fond('fonds/inscription2_abonnement');
-	return ($flux);
+	return $flux;
 }
 
 function abonnement_i2_form_debut($flux) {
    	$contexte = array("abonnement" => $flux['args']['abonnement']);
     $flux['data'] .= recuperer_fond('formulaires/abonnement_liste',$contexte);
-	return ($flux);
+	return $flux;
 }
 
 function abonnement_i2_charger_formulaire($flux) {
 	$flux['data']['abonnement'] = '1' ;
-	return ($flux);
+	return $flux;
 }
 
 function abonnement_i2_verifier_formulaire($flux) {
-	return ($flux);
+	return $flux;
 }
 
 function abonnement_i2_traiter_formulaire($flux) {
-
-	if(intval(_request('abonnement'))){
-	$value = _request('abonnement') ;	
-	$n = $flux['args']['id_auteur'] ;
-	spip_log("$value,$n","logabo");
-	// verfifier que ca emplile pas en mode edition
-	sql_insertq('spip_auteurs_elargis_abonnements', array('id_auteur' => $n,'id_abonnement' => $value, 'date' => date("Y-m-d H:i:s") ));
+	// afficher un formulaire de paiement uniquement si la config le permet
+	if (lire_config('abonnement/proposer_paiement')) {
+		if(intval(_request('abonnement'))){
+			$value = _request('abonnement') ;	
+			$n = $flux['args']['id_auteur'] ;
+			spip_log("$value,$n","logabo");
+			// verfifier que ca emplile pas en mode edition
+			sql_insertq('spip_auteurs_elargis_abonnements', array('id_auteur' => $n,'id_abonnement' => $value, 'date' => date("Y-m-d H:i:s") ));
+		}
+		$flux['data']['ne_pas_confirmer_par_mail'] = true ;
+		$flux['data']['message_ok'] = " " ;
 	}
-	$flux['data']['ne_pas_confirmer_par_mail'] = true ;
-	$flux['data']['message_ok'] = " " ;
-
 	/*
 	if(isset($declaration['article']) AND ($declaration['article'] > 0 OR ereg('breve',$declaration['article']) )){
 		$value = $declaration['article'] ;	
@@ -52,10 +53,13 @@ function abonnement_i2_traiter_formulaire($flux) {
 }
 
 function abonnement_i2_confirmation($flux) {
-	$env = $flux['args'];
-	$row = sql_fetsel(array('id_auteur'), 'spip_auteurs', 'email='.sql_quote($env['email']));	$env['id_auteur'] = $row['id_auteur'] ;
-    $flux['data'] .= recuperer_fond('formulaires/abonnement_paiement',$env);
-	return ($flux);
+	// afficher un formulaire de paiement uniquement si la config le permet
+	if (lire_config('abonnement/proposer_paiement')) {
+		$env = $flux['args'];
+		$row = sql_fetsel(array('id_auteur'), 'spip_auteurs', 'email='.sql_quote($env['email']));		$env['id_auteur'] = $row['id_auteur'] ;
+		$flux['data'] .= recuperer_fond('formulaires/abonnement_paiement',$env);
+	}
+	return $flux;
 }
 
 

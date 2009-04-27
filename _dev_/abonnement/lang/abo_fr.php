@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"configuration_description_abonnement_relances" => "Cette page permet de d&eacute;finir les options de relances d'abonnement de votre site.",
 
 	// Formulaires CFG
+	"fieldset_inscription" => "Relations avec Inscription 2",
 	"fieldset_expediteur" => "Expediteur des mails automatiques",
 	"fieldset_confirmation" => "Mail de confirmation d'abonnement",
 	"fieldset_echec" => "Mail d'&eacute;chec de l'abonnement",
@@ -22,7 +23,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"label_sujet" => "Sujet",
 	"label_texte" => "Texte",
 	"label_tarif" => "Tarif",
-	
 	"explication_tarif" => "Indiquer le prix en euros.",
+	"label_proposer_paiement" => "Proposer le paiment à l'inscription",
+	"explication_proposer_paiement" => "Proposer un formulaire de paiement
+		d&egrave;s la validation du formulaire d'inscription ?",
+	
 );
 ?>
