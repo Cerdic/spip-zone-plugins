@@ -1,0 +1,26 @@
+<plugin>
+  <nom>No Cache - Désactiver le cache SPIP</nom>
+  <prefix>nocache</prefix>
+
+  <version>1.0rc1</version>
+  <etat>stable</etat>
+
+  <description>
+    Quand ce plugin est activé, le cache de squelettes de SPIP n'est
+    plus utilisé. SPIP est alors plus lent, mais pendant les tests ou
+    le développement d'un site, c'est très utile pour être sûr qu'un
+    problème ne vient pas d'une vieille version du squelette qui
+    serait en cache. Les caches de pages ainsi que de balises sont
+    gérés. Pour utiliser le cache à nouveau (pour la mise en ligne
+    officielle par exemple), il suffit de désactiver ce plugin.
+  </description>
+  <auteur>
+    [Sylvain Beucler->beuc@beuc.net]
+    - [Cliss XXI->http://www.cliss21.com/]
+    - distribué sous licence
+    [GPL v3->http://www.april.org/files/groupes/trad-gpl/doc/GPLv3/www.rodage.org/gpl-3.0.fr.html]
+  </auteur>
+  <lien>TODO</lien>
+
+  <options>nocache_options.php</options>
+</plugin>
