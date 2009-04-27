@@ -77,7 +77,7 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 		, 'opt_suspendre_meleuse'
 		, 'opt_lien_en_tete_courrier', 'lien_patron'
 		, 'opt_ajout_pied_courrier', 'pied_patron'
-		, 'opt_ajout_tampon_editeur', 'tampon_patron'
+		, 'opt_ajout_tampon_editeur'
 		, 'opt_personnaliser_courrier'
 		, 'opt_log_voir_destinataire'
 		) as $key) {
@@ -110,12 +110,9 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 		$urlsite = $GLOBALS['meta']['adresse_site'];
 
 		// prepare le tampon editeur
-		if(
-			($opt_ajout_tampon_editeur == 'oui')
-			&& !empty($tampon_patron)
-		) {
-			$tampon_html = spiplistes_tampon_html_get($tampon_patron);
-			$tampon_texte = spiplistes_courrier_tampon_texte($tampon_patron, $tampon_html);
+		if($opt_ajout_tampon_editeur == 'oui')
+		{
+			list($tampon_html, $tampon_texte) = spiplistes_tampon_assembler_patron();
 		}
 		else {
 			$tampon_html = $tampon_texte = "";

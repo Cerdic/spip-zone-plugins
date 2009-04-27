@@ -123,13 +123,13 @@ function exec_spiplistes_courrier_previsu () {
 			);
 	}
 				
-	$texte_editeur =
-		(spiplistes_pref_lire('opt_ajout_tampon_editeur') == 'oui')
-		? spiplistes_tampon_html_get(spiplistes_pref_lire('tampon_patron'))
-		: ""
-		;
+	$texte_intro = $texte_patron =
+		$tampon_html = $tampon_texte =
+		$sommaire_html = "";
 	
-	$texte_intro = $texte_patron = $sommaire_html = "";
+	if(spiplistes_pref_lire('opt_ajout_tampon_editeur') == 'oui') {
+		list($tampon_html, $tampon_texte) = spiplistes_tampon_assembler_patron();
+	}
 	
 	if($lire_base) { 
 		// prendre le courrier enregistre dans la base
@@ -148,7 +148,7 @@ function exec_spiplistes_courrier_previsu () {
 					. $lien_html
 					. $texte
 					. $pied_html
-					. $texte_editeur
+					. $tampon_html
 					;
 					
 				if($format=="texte") {
@@ -164,7 +164,7 @@ function exec_spiplistes_courrier_previsu () {
 						: spiplistes_courrier_version_texte($lien_texte)
 							. spiplistes_courrier_version_texte($message_texte)
 							. $pied_texte
-							. spiplistes_courrier_version_texte($texte_editeur)
+							. spiplistes_courrier_version_texte($tampon_texte)
 						;
 					echo($message_texte);
 					exit(0);
@@ -321,7 +321,7 @@ function exec_spiplistes_courrier_previsu () {
 			. $message_html
 			. $message_erreur
 			. $pied_html
-			. $texte_editeur
+			. $tampon_html
 			. "</div>\n"
 			. "</div>\n" // fin id='previsu-html
 			. "<div id='previsu-texte' class='switch-previsu' style='display:none;'>\n"
@@ -333,7 +333,7 @@ function exec_spiplistes_courrier_previsu () {
 			. $message_texte
 			. $message_erreur
 			. $pied_texte
-			. $texte_editeur
+			. $tampon_texte
 			. "</pre>"
 			. "</div>\n"
 			. "</div>\n" // fin id='previsu-texte

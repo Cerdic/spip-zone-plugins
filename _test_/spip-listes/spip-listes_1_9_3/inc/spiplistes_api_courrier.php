@@ -278,27 +278,6 @@ function spiplistes_courrier_version_texte($in) {
 } // end spiplistes_courrier_version_texte()
 
 /*
-	donne contenu tampon au format texte (CP-20071013)
-	tampon_patron: nom du tampon (fichier, sans extension)
-	tampon_html: contenu html converti en texte si pas de contenu
-*/
-function spiplistes_courrier_tampon_texte ($tampon_patron, $tampon_html) {
-	$contexte_patron = array();
-	$result = false;
-	foreach(explode(",", _SPIPLISTES_TAMPON_CLES) as $key) {
-		$contexte_patron[$key] = spiplistes_pref_lire($key);
-	}
-	$f = _SPIPLISTES_PATRONS_TAMPON_DIR.$tampon_patron;
-	if (find_in_path($f."_texte.html")){
-		$result = recuperer_fond($f, $contexte_patron);
-	}
-	if(!$result) {
-		$result = spiplistes_courrier_version_texte($tampon_html);
-	}
-	return($result);
-}
-
-/*
  * Ajouter les abonnes d'une liste a un envoi
  * @param : $id_courrier : reference d'un envoi
  * @param $id_liste : reference d'une liste

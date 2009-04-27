@@ -801,15 +801,22 @@ function spiplistes_titre_propre($titre){
 	return($titre);
 }
 
-// donne contenu tampon au format html (CP-20071013)
-// tampon_patron: nom du tampon (fichier, sans extension)
-function spiplistes_tampon_html_get ($tampon_patron) {
-	$contexte_patron = array();
-	foreach(explode(",", _SPIPLISTES_TAMPON_CLES) as $key) {
-		$contexte_patron[$key] = spiplistes_pref_lire($key);
+/* donne contenu tampon au format html (CP-20071013) et texte
+ * @return array (string $html, string $texte)
+ */
+function spiplistes_tampon_assembler_patron () {
+	$contexte = array();
+	$p = spiplistes_pref_lire('tampon_patron');
+	if(!empty($p)) {
+		foreach(explode(",", _SPIPLISTES_TAMPON_CLES) as $key) {
+			$contexte_patron[$key] = spiplistes_pref_lire($key);
+		}
+		$r = spiplistes_courriers_assembler_patron($path_patron, $contexte);
 	}
-	include_spip('public/assembler');
-	return(recuperer_fond(_SPIPLISTES_PATRONS_TAMPON_DIR.$tampon_patron, $contexte_patron));
+	else {
+		$r = array("", "");
+	}
+	return($r);
 }
 
 function spiplistes_pied_de_page_liste ($id_liste = 0, $lang = false) {
