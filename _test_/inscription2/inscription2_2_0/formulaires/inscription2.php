@@ -305,11 +305,6 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 	}else{
 		if(!is_numeric($id_auteur)){
 			$val['statut'] = 'aconfirmer';
-			include_spip('inc/acces');
-			$alea_actuel = creer_uniqid();
-			$alea_futur = creer_uniqid();
-			$val['alea_actuel'] = $alea_actuel;
-			$val['alea_futur'] = $alea_futur;		
 		}
 	}
 	
