@@ -244,4 +244,17 @@ function agenda_moisdecal($date,$decalage,$format){
 	return date($format, $date2);
 }
 
+
+// decale les jours de la date.
+function agenda_jourdecal($date,$decalage,$format){
+	include_spip('inc/filtres');
+	$date_array = recup_date($date);
+	if ($date_array) list($annee, $mois, $jour) = $date_array;
+	if (!$jour) $jour=1;
+	if (!$mois) $mois=1;
+	$jour2 = $jour + $decalage;
+	$date2 = mktime(1, 1, 1, $mois, $jour2, $annee);
+	return date($format, $date2);
+}
+
 ?>
