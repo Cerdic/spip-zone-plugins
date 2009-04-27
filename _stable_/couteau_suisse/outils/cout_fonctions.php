@@ -117,7 +117,7 @@ function cs_traitements($texte, $nom_champ='NULL', $type_objet='NULL') {
 	global $table_des_traitements;
 	if(!isset($table_des_traitements[$nom_champ])) return $texte;
 	$ps = $table_des_traitements[$nom_champ];
-	if(is_array($ps)) $ps = $ps[isset($ps[$type_objet]) ? $type : 0];
+	if(is_array($ps)) $ps = $ps[isset($ps[$type_objet]) ? $type_objet : 0];
 	if(!$ps) return $texte;
 	// remplacer le placeholder %s par le texte fourni
 	eval('$texte=' . str_replace('%s', '$texte', $ps) . ';');
