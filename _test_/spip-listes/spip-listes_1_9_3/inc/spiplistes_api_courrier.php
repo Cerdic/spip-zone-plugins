@@ -441,34 +441,6 @@ function spiplistes_courriers_total_abonnes ($id_courrier = 0) {
 	);
 }
 
-//CP-20081124
-/*
- * @return les pieds pour les courriers
- * @param $lang Object
- */
-function spiplistes_courriers_pieds ($lang, $defaut = 'piedmail') {
-	static $pieds;
-	if($pieds === null)
-	{
-		$contexte_pied = array('lang'=>$lang);
-		// chercher dans l'ancien repertoire (SPIP-Listes 192)
-		if(find_in_path("modeles/$defaut.html")) {
-			$pied_html = recuperer_fond("modeles/$defaut", $contexte_pied);
-		}
-		// les pieds sont maintenant rangés dans patrons/pieds_courriers/
-		else {
-			$pied_html = recuperer_fond(_SPIPLISTES_PATRONS_PIED_DIR.$defaut, $contexte_pied);
-		}
-		$pied_texte = 
-			(find_in_path(_SPIPLISTES_PATRONS_PIED_DIR.$defaut.'_texte.html'))
-			? recuperer_fond(_SPIPLISTES_PATRONS_PIED_DIR.$defaut.'_texte', $contexte_pied)
-			: spiplistes_courrier_version_texte($pied_html)
-			;
-		$pieds = array($pied_html, $pied_texte);
-	}
-	return($pieds);
-}
-
 /*
  * CP-20081124
  * Assembler/calculer un patron
