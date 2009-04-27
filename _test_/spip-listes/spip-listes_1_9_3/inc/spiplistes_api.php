@@ -874,16 +874,16 @@ function spiplistes_assembler_patron ($path_patron, $contexte) {
  * @return array (string $html, string $texte)
  */
 function spiplistes_tampon_assembler_patron () {
-	
+	spiplistes_log_api("calculer tampon");
 	$contexte = array();
 	$path_patron = spiplistes_pref_lire('tampon_patron');
-	
+	spiplistes_log_api($path_patron);
 	if(!empty($path_patron))
 	{
 		foreach(explode(",", _SPIPLISTES_TAMPON_CLES) as $key) {
 			$contexte[$key] = spiplistes_pref_lire($key);
 		}
-		$result = spiplistes_assembler_patron($path_patron, $contexte);
+		$result = spiplistes_assembler_patron(_SPIPLISTES_PATRONS_TAMPON_DIR . $path_patron, $contexte);
 	}
 	else {
 		$result = array("", "");
