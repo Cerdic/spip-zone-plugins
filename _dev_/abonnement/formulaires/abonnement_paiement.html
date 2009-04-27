@@ -1,9 +1,9 @@
 #CACHE{0}
 
-[(#ENV**{hash_article}|?{' ',''})
+[(#ENV**{hash_article}|oui)
 [(#SET{texteLibre,[article-(#ENV**{id_auteur})][-(#ENV**{hash_article})]})]
 ]
-[(#ENV{abonnement}|?{' ',''})
+[(#ENV{abonnement}|oui)
 [(#SET{texteLibre,[abonnement-(#ENV**{id_auteur})]})]
 ]
 
@@ -91,7 +91,7 @@ $Formulaire_Paiement = CreerFormulaireHmac($CMCIC_Tpe,
 </div>
 		<dl>
 			<dt>Mes donn&eacute;es de correspondance</dt>
-			<dd style="margin-top:5px">[(#ENV{sexe}|=={M}|?{'Monsieur','Madame'} )][ (#ENV{prenom})][ (#ENV{nom_famille})]<dd>
+			<dd style="margin-top:5px">[(#ENV{sexe}|oui)[(#ENV{sexe}|=={M}|?{'Monsieur','Madame'} )]][ (#ENV{prenom})][ (#ENV{nom_famille})]<dd>
 			<dd>[ (#ENV{adresse})]</dd>
 			<dd>[ (#ENV{code_postal})][ (#ENV{ville})]</dd>
 			<dd>[ (#ENV{pays}|id_pays_to_pays)]</dd>

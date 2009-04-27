@@ -9,8 +9,7 @@ function abonnement_I2_cfg_form($flux) {
 }
 
 function abonnement_i2_form_debut($flux) {
-   	$env = unserialize($flux['args']);
-   	$contexte = array("abonnement" => $env['abonnement']);
+   	$contexte = array("abonnement" => $flux['args']['abonnement']);
     $flux['data'] .= recuperer_fond('formulaires/abonnement_liste',$contexte);
 	return ($flux);
 }
@@ -53,7 +52,7 @@ function abonnement_i2_traiter_formulaire($flux) {
 }
 
 function abonnement_i2_confirmation($flux) {
-	$env = unserialize($flux['args']);
+	$env = $flux['args'];
 	$row = sql_fetsel(array('id_auteur'), 'spip_auteurs', 'email='.sql_quote($env['email']));	$env['id_auteur'] = $row['id_auteur'] ;
     $flux['data'] .= recuperer_fond('formulaires/abonnement_paiement',$env);
 	return ($flux);
