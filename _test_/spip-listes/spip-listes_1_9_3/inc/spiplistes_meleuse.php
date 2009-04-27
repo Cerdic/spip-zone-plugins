@@ -83,7 +83,7 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 		) as $key) {
 		$$key = spiplistes_pref_lire($key);
 	}
-
+	
 	$nb_etiquettes = spiplistes_courriers_en_queue_compter("etat=".sql_quote(''));
 	
 	$log_voir_destinataire = ($opt_log_voir_destinataire == "oui");
@@ -219,9 +219,8 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 				// break; // garder pour incrementer les erreurs des listes
 			}
 			
-			//spiplistes_log("email_envoi : " . $email_envoi, _SPIPLISTES_LOG_DEBUG);	
-			//spiplistes_log("From : " . $from, _SPIPLISTES_LOG_DEBUG);	
-		
+			$return_path = spiplistes_return_path($from);
+			
 			////////////////////////////////////
 			// Prepare la version texte
 			$objet_texte = spiplistes_courrier_version_texte($objet_html);
@@ -270,24 +269,25 @@ spiplistes_log("spiplistes_meleuse()", _SPIPLISTES_LOG_DEBUG);
 				}
 			}
 			
-			
+			$email_a_envoyer = array();
 			$email_a_envoyer['texte'] = new phpMail('', $objet_texte, '', $page_texte, $GLOBALS['meta']['spiplistes_charset_envoi']);
 			$email_a_envoyer['texte']->From = $from ; 
-			if($fromname) $email_a_envoyer['texte']->FromName = $fromname ; 
-			$email_a_envoyer['texte']->AddCustomHeader("Errors-To: ".$from); 
+			if($fromname) $email_a_envoyer['texte']->FromName = $fromname ;
+			// Errors-To:,    Non-standard @see: http://www.ietf.org/rfc/rfc2076.txt
+			//$email_a_envoyer['texte']->AddCustomHeader("Errors-To: ".$return_path); 
 			$email_a_envoyer['texte']->AddCustomHeader("Reply-To: ".$from); 
-			$email_a_envoyer['texte']->AddCustomHeader("Return-Path: ".$from); 
+			$email_a_envoyer['texte']->AddCustomHeader("Return-Path: ".$return_path); 
 			$email_a_envoyer['texte']->SMTPKeepAlive = true;
 
 			$email_a_envoyer['html'] = new phpMail('', $objet_html, $page_html, $page_texte, $GLOBALS['meta']['spiplistes_charset_envoi']);
 			$email_a_envoyer['html']->From = $from ; 
 			if($fromname) $email_a_envoyer['html']->FromName = $fromname ; 
-			$email_a_envoyer['html']->AddCustomHeader("Errors-To: ".$from); 
+			//$email_a_envoyer['html']->AddCustomHeader("Errors-To: ".$return_path); 
 			$email_a_envoyer['html']->AddCustomHeader("Reply-To: ".$from); 
-			$email_a_envoyer['html']->AddCustomHeader("Return-Path: ".$from); 	
+			$email_a_envoyer['html']->AddCustomHeader("Return-Path: ".$return_path); 	
 			$email_a_envoyer['html']->SMTPKeepAlive = true;
 		
-			$str_log .= " REPLY-TO: ".$from;
+			$str_log .= " REPLY-TO: ".$from." RETURN-PATH: ".$return_path;
 			
 			if($total_abonnes) {
 		

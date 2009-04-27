@@ -763,11 +763,12 @@ class PHPMailer
         $this->boundary[2] = "b2_" . $uniq_id;
 
         $result .= $this->HeaderLine("Date", $this->RFCDate());
-        if($this->Sender == "")
+ /*       if($this->Sender == "")
             $result .= $this->HeaderLine("Return-Path", trim($this->From));
         else
             $result .= $this->HeaderLine("Return-Path", trim($this->Sender));
-        
+ */
+ 
         // To be created automatically by mail()
         if($this->Mailer != "mail")
         {

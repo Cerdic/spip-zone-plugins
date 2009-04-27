@@ -1024,15 +1024,17 @@ function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $heade
 		
 		$email_a_envoyer = array();
 		
+		$return_path = spiplistes_return_path($from);
+		
 		if(is_array($message))
 		{
 			if($format=='html' && isset($message[$format])) {
 				$email_a_envoyer['html'] = new phpMail($to, $subject, $message['html'], $message['texte'], $charset);
 				$email_a_envoyer['html']->From = $from ; 
 				if($fromname) $email_a_envoyer['html']->FromName = $fromname ; 
-				$email_a_envoyer['html']->AddCustomHeader("Errors-To: ".$from); 
+				$email_a_envoyer['html']->AddCustomHeader("Errors-To: ".$return_path); 
 				$email_a_envoyer['html']->AddCustomHeader("Reply-To: ".$from); 
-				$email_a_envoyer['html']->AddCustomHeader("Return-Path: ".$from); 	
+				$email_a_envoyer['html']->AddCustomHeader("Return-Path: ".$return_path); 	
 				$email_a_envoyer['html']->SMTPKeepAlive = true;
 				$email_a_envoyer['html']->Body = $message['html']->Body;
 				$email_a_envoyer['html']->AltBody = $message['html']->AltBody;
@@ -1042,9 +1044,9 @@ function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $heade
 		$email_a_envoyer['texte'] = new phpMail($to, $subject, '', html_entity_decode($message), $charset);
 		$email_a_envoyer['texte']->From = $from ;
 		if($fromname) $email_a_envoyer['html']->FromName = $fromname ; 
-		$email_a_envoyer['texte']->AddCustomHeader("Errors-To: ".$from); 
+		$email_a_envoyer['texte']->AddCustomHeader("Errors-To: ".$return_path); 
 		$email_a_envoyer['texte']->AddCustomHeader("Reply-To: ".$reply_to); 
-		$email_a_envoyer['texte']->AddCustomHeader("Return-Path: ".$from); 
+		$email_a_envoyer['texte']->AddCustomHeader("Return-Path: ".$return_path); 
 		$email_a_envoyer['texte']->SMTPKeepAlive = true;
 		
 		$result = $email_a_envoyer[$format]->send();
@@ -1109,6 +1111,16 @@ function spiplistes_listes_langue ($id_liste) {
 		);
 	}
 	return(false);
+}
+
+/*
+ */
+function spiplistes_return_path ($from) {
+	$return_path = spiplistes_pref_lire('email_return_path_defaut');
+	if(!$return_path) {
+		$return_path = $from;
+	}
+	return($return_path);
 }
 
 /******************************************************************************************/

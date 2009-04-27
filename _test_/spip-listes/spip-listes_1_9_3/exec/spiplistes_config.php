@@ -70,7 +70,9 @@ function exec_spiplistes_config () {
 			, 'spiplistes_lots'
 			, 'spiplistes_charset_envoi'
 			);
-		
+		$keys_str_param_valider = array(
+			'email_return_path_defaut' // adresse mail de retour pour les erreurs
+		);
 		$keys_opts_param_valider = array(
 			'opt_simuler_envoi' // demande à la méleuse de simuler l'envoi du courrier
 			, 'opt_suspendre_trieuse' // suspendre la trieuse. Les listes restent en attente
@@ -93,6 +95,7 @@ function exec_spiplistes_config () {
 			)
 			, $keys_complement_courrier
 			, $keys_param_valider
+			, $keys_str_param_valider
 			, $keys_opts_param_valider
 			, $keys_console_syslog
 			) as $key) {
@@ -131,6 +134,11 @@ function exec_spiplistes_config () {
 						. ", ";
 					ecrire_meta($key, trim($$key));
 				}
+			}
+			foreach($keys_str_param_valider as $key) {
+				$$key = (!empty($$key)) ? $$key : '';
+				spiplistes_ecrire_key_in_serialized_meta ($key, $$key, _SPIPLISTES_META_PREFERENCES);
+				$str_log .= $key." = ".$$key.", ";
 			}
 			foreach($keys_opts_param_valider as $key) {
 				$$key = (!empty($$key)) ? $$key : 'non';
@@ -174,7 +182,18 @@ function exec_spiplistes_config () {
 		}
 	
 		// Paramétrages des envois
-		$adresse_defaut = (email_valide($GLOBALS['meta']['email_defaut'])) ? $GLOBALS['meta']['email_defaut'] : $GLOBALS['meta']['email_webmaster'];
+		$adresse_defaut =
+			(email_valide($GLOBALS['meta']['email_defaut']))
+			? $GLOBALS['meta']['email_defaut']
+			: $GLOBALS['meta']['email_webmaster']
+			;
+		// Adresse mail pour les retours en erreur (Return-path:)
+		// @see: http://www.w3.org/Protocols/rfc822/
+		$email_return_path_defaut =
+			($ii = email_valide($email_return_path_defaut))
+			? $ii
+			: $adresse_defaut
+			;
 		$smtp_identification = (isset($GLOBALS['meta']['smtp_identification']) && ($GLOBALS['meta']['smtp_identification']=='oui')) ? "oui" : "non";
 		$mailer_smtp = (isset($GLOBALS['meta']['mailer_smtp']) && ($GLOBALS['meta']['mailer_smtp']=='oui')) ? "oui" : "non";
 		$smtp_port = (isset($GLOBALS['meta']['smtp_port']) && (!empty($GLOBALS['meta']['smtp_port']))) ? $GLOBALS['meta']['smtp_port'] : "25";
@@ -318,6 +337,11 @@ function exec_spiplistes_config () {
 		// adresse email de retour (reply-to)
 		. debut_cadre_relief("", true, "", _T('spiplistes:adresse_envoi_defaut'))
 		. "<input type='text' name='email_defaut' value='".$adresse_defaut."' size='30' class='forml' />\n"
+		. fin_cadre_relief(true)
+		//
+		// adresse return-path de retour (on-error reply-to)
+		. debut_cadre_relief("", true, "", _T('spiplistes:adresse_on_error_defaut'))
+		. "<input type='text' name='email_return_path_defaut' value='".$email_return_path_defaut."' size='30' class='forml' />\n"
 		. fin_cadre_relief(true)
 		//
 		// Méthode d'envoi 
