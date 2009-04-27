@@ -19,7 +19,12 @@ function glossaire_groupes() {
 			return join(" OR type=", $groupes);
 		}
 }
-@define('_GLOSSAIRE_TITRE_SEP', '/');
+
+// Separateur des titres de mots stockes en base
+@define('_GLOSSAIRE_TITRE_BASE_SEP', '/');
+// Separateur utilise pour fabriquer le titre de la fenetre de glossaire (fichiers fonds/glossaire_xx.html).
+@define('_GLOSSAIRE_TITRE_SEP', '<br />');
+// chaine pour interroger la base
 @define('_GLOSSAIRE_QUERY', 'SELECT id_mot, titre, texte, descriptif FROM spip_mots WHERE type=' . glossaire_groupes() . ' ORDER BY id_mot ASC');
 // TODO : QUERY pour SPIP 2.0
 
@@ -53,15 +58,17 @@ if(!function_exists('nettoyer_chapo')) {
 function cs_glossaire_titres($titre) {
 	if(strpos($titre, ',')===false) return $titre;
 	$mots = array();
-	foreach (explode('/', $titre) as $m)
+	foreach (explode(_GLOSSAIRE_TITRE_BASE_SEP, $titre) as $m)
 		// interpretation des expressions regulieres grace aux virgules : ,un +mot,i
 		if(strpos($m = trim($m), ',')===false) $mots[] = $m;
 	return count($mots)?join(_GLOSSAIRE_TITRE_SEP, $mots):'??';
 }
 
-// Cette fonction retire du texte les boites de definition
+// Cette fonction retire du texte les boites de definition et les liens du glossaire
 function cs_retire_glossaire($texte) {
-	return preg_replace(',<span class="gl_d[td]">.*?</span>,', '', $texte);
+	$texte = preg_replace(',<span class="gl_(jst?|d[td])".*?</span>,s', '', $texte);
+	if(!defined('_GLOSSAIRE_JS')) $texte = preg_replace(',<span class="gl_dl">.*?</span>,s', '', $texte);
+	return preg_replace(',<a [^>]+class=\'cs_glossaire\'><span class=\'gl_mot\'>(.*?)</span></a>,s', '$1', $texte);
 }
 $GLOBALS['cs_introduire'][] = 'cs_retire_glossaire';
 
@@ -129,7 +136,7 @@ function cs_rempl_glossaire($texte) {
 		// prendre en compte les formes du mot : architrave/architraves
 		// contexte de langue a prendre en compte ici
 		$les_mots = $les_regexp = $les_titres = array();
-		foreach (explode('/', $titre = extraire_multi($mot['titre'])) as $m) {
+		foreach (explode(_GLOSSAIRE_TITRE_BASE_SEP, $titre = extraire_multi($mot['titre'])) as $m) {
 			// interpretation des expressions regulieres grace aux virgules : ,un +mot,i
 			if(strpos($m = trim($m), ',')===0) $les_regexp[] = $m;
 			else {
