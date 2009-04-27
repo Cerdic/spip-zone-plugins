@@ -88,7 +88,9 @@ function inscription2_I2_exceptions_des_champs_auteurs_elargis($array){
 	$array[] = 'login';
 	$array[] = 'email';
 	$array[] = 'statut';
-	$array[] = 'gpg';
+	$array[] = 'pgp';
+	$array[] = 'url_site';
+	$array[] = 'nom_site';
 	
 	// Des choses spécifiques à inscription2
 	$array[] = 'username';
