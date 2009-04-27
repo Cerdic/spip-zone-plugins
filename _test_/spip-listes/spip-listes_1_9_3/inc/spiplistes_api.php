@@ -801,22 +801,94 @@ function spiplistes_titre_propre($titre){
 	return($titre);
 }
 
+/*
+ * CP-20081128
+ * Recherche les différentes versions de patron possibles
+ * <patron>._texte.en patron texte anglais
+ * <patron>._texte patron texte generique
+ * <patron>.en patron anglais
+ * <patron> patron generique
+ * @return string le chemin du patron si patron trouve' ou FALSE si non trouve'
+ * @param $path_patron string
+ * @param $lang string
+ * @param $chercher_texte bool si TRUE, chercher la version texte du patron
+ * @todo verifier presence de lang dans les appels a cette fonction
+ */
+function spiplistes_patron_find_in_path ($path_patron, $lang, $chercher_texte = false) {
+	static $t = "_texte", $h = ".html";
+	
+	if(!$lang) {
+		$lang = $GLOBALS['spip_lang'];
+	}
+	
+	if(
+		$chercher_texte 
+		&& (find_in_path($path_patron . $t . "." . $lang . $h) || find_in_path($path_patron . $t . $h))
+	) {
+		return($path_patron . $t);
+	}
+	else if(find_in_path($path_patron . "." . $lang . $h) || find_in_path($path_patron . $h)) {
+		return($path_patron);
+	}
+	return(false);
+}
+
+
+/*
+ * CP-20090427
+ * Assembler/calculer un patron
+ * @return array le resultat html et texte seul dans un tableau
+ * @param $patron string nom du patron
+ * @param $contexte array
+ */
+function spiplistes_assembler_patron ($path_patron, $contexte) {
+	
+	include_spip('public/assembler');
+	
+	$patron_html = spiplistes_patron_find_in_path($path_patron, $contexte['lang'], false);
+
+	// le resultat assemble' au format html
+	$result_html = 
+		$patron_html
+		? recuperer_fond($patron_html, $contexte)
+		: ""
+		;
+	
+	// chercher si un patron version texte existe
+	$patron_texte = spiplistes_patron_find_in_path($path_patron, $contexte['lang'], true);
+	
+	// si oui, assembler a partir du patron version tete
+	// si non, traduire la version texte a partir de la version html
+	$result_texte = 
+		($patron_texte && ($patron_html != $patron_texte))
+		? recuperer_fond($patron_texte, $contexte) . "\n"
+		: spiplistes_courrier_version_texte($result_html) . "\n"
+		;
+
+	$result = array($result_html, $result_texte);
+	
+	return($result);
+}
+
 /* donne contenu tampon au format html (CP-20071013) et texte
  * @return array (string $html, string $texte)
  */
 function spiplistes_tampon_assembler_patron () {
+	
 	$contexte = array();
-	$p = spiplistes_pref_lire('tampon_patron');
-	if(!empty($p)) {
+	$path_patron = spiplistes_pref_lire('tampon_patron');
+	
+	if(!empty($path_patron))
+	{
 		foreach(explode(",", _SPIPLISTES_TAMPON_CLES) as $key) {
-			$contexte_patron[$key] = spiplistes_pref_lire($key);
+			$contexte[$key] = spiplistes_pref_lire($key);
 		}
-		$r = spiplistes_courriers_assembler_patron($path_patron, $contexte);
+		$result = spiplistes_assembler_patron($path_patron, $contexte);
 	}
 	else {
-		$r = array("", "");
+		$result = array("", "");
 	}
-	return($r);
+	return($result);
 }
 
 function spiplistes_pied_de_page_liste ($id_liste = 0, $lang = false) {

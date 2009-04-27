@@ -504,32 +504,6 @@ function spiplistes_courriers_assembler_patron ($path_patron, $contexte, $ignore
 	return($result);
 }
 
-/*
- * CP-20081128
- * Recherche les différentes versions de patron possibles
- * <patron>._texte.en patron texte anglais
- * <patron>._texte patron texte generique
- * <patron>.en patron anglais
- * <patron> patron generique
- * @return string le chemin du patron si patron trouve' ou FALSE si non trouve'
- * @param $path_patron string
- * @param $lang string
- * @param $chercher_texte bool si TRUE, chercher la version texte du patron
- */
-function spiplistes_patron_find_in_path ($path_patron, $lang, $chercher_texte = false) {
-	static $t = "_texte", $h = ".html";
-	
-	if(
-		$chercher_texte 
-		&& (find_in_path($path_patron . $t . "." . $lang . $h) || find_in_path($path_patron . $t . $h))
-	) {
-		return($path_patron . $t);
-	}
-	else if(find_in_path($path_patron . "." . $lang . $h) || find_in_path($path_patron . $h)) {
-		return($path_patron);
-	}
-	return(false);
-}
 
 /*
  * CP-20081130
