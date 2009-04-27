@@ -108,14 +108,22 @@ else if (version_compare($spip_version_branche, "2.0.0"))
  * aller dans la page 'exec=admin_plugin' qui appelle aussi
  * verif_plugin()). Ne recharge que les plugins actifs.
  */
-/* Le fichier est déjà chargé par PHP, donc on peut le supprimer sans
- risque. L'absence du fichier force la revérification des plugins à
- chaque page affichée. */
-supprimer_fichier(_DIR_TMP."charger_plugins_options.php");
-/* Autre solution: demander le rechargement. Mais comme ce
- rechargement n'est effectué qu'après que les plugins sont chargés
- (puisque nous sommes dans un plugin..), les changements ne seront
- effectifs qu'au prochain chargement. La solution avec 'spip_unlink'
- fonctionne donc mieux car le rechargement est différé. */
-//include_spip('inc/plugin');
-//verif_plugin();
+if ($spip_version_code >= 1.92 && $spip_version_code < 2)
+  {
+    /* Demande le rechargement. Comme ce rechargement n'est effectué
+       qu'après que les plugins sont chargés (puisque nous sommes dans
+       un plugin..), les changements ne seront effectifs qu'au
+       prochain chargement. La solution avec 'supprimer_fichier'
+       fonctionne donc mieux car le rechargement est différé, mais
+       dans SPIP 1.9.2 elle occasionne des problèmes quand on demande
+       des infos sur un plugin dans exec=admin_plugin. */
+    include_spip('inc/plugin');
+    verif_plugin();
+  }
+else if (version_compare($spip_version_branche, "2.0.0"))
+  {
+    /* Le fichier est déjà chargé par PHP, donc on peut le supprimer
+       sans risque. L'absence du fichier force la revérification des
+       plugins à chaque page affichée. */
+    supprimer_fichier(_DIR_TMP."charger_plugins_options.php");
+  }
