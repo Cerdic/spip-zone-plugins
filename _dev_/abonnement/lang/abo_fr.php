@@ -1,5 +1,22 @@
 <?php
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	// Exec abonnements
+	"abonnements" => "Abonnements",
+	"liste_des_abonnements" => "Liste des abonnements",
+	
+	"editer_abonnement" => "Editer un abonnement",
+	"creer_abonnement" => "Creer un abonnement",
+	
+	// actions
+	"action_editer" => "&Eacute;diter",
+	"action_supprimer" => "Supprimer",
+	"action_ajouter" => "Ajouter",
+	"action_creer_nouvel_abonnement" => "Cr&eacute;er un nouvel abonnement",
+
+	// formulaire
+	"enregistrement_effectue" => "Enregistrement effectu&eacute;",
+	"erreurs_formulaire" => "Des erreurs sont pr&eacute;sentes dans votre saisie.",
+	
 	// CFG
 	"configuration_abonnement" => "Abonnement",
 	"configuration_abonnement_relances" => "Relance des abonnements",
@@ -18,10 +35,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"fieldset_relance_avant_2" => "Email de relance avant &eacute;ch&eacute;ance 2",
 	"fieldset_relance_apres" => "Email de relance apr&egrave;s &eacute;ch&eacute;ance",
 	
+	"label_action" => "Action",
+	"label_libelle" => "Libell&eacute;",
+	"label_duree" => "Dur&eacute;e",
+	"label_periode" => "P&eacute;riode",
 	"label_nom" => "Nom",
 	"label_email" => "Email",
 	"label_sujet" => "Sujet",
 	"label_texte" => "Texte",
+	"label_jour" => "jours",
+	"label_mois" => "mois",
+	"label_commentaire" => "Commentaires",
 	"label_tarif" => "Tarif",
 	"explication_tarif" => "Indiquer le prix en euros.",
 	"label_proposer_paiement" => "Proposer le paiment à l'inscription",

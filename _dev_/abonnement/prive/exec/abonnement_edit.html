@@ -1,0 +1,5 @@
+<h1>[(#ENV{id_abonnement}|intval|?{<:abo:editer_abonnement:>,<:abo:creer_abonnement:>})]</h1>
+
+<div class="ajax">
+[(#FORMULAIRE_EDITER_ABONNEMENT{#ENV{id_abonnement,new},#ENV{redirect}})]
+</div>

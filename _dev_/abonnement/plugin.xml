@@ -11,7 +11,7 @@
 	<etat>
 	test
 	</etat>
-	<icon></icon>
+	<icon>img/abonnement_48.png</icon>
 	<description>
 	Un plugin pour gerer des abonnements. Necessite le plugin inscription2
 	</description>
@@ -58,9 +58,20 @@
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/abonnement.php</inclure>
 	</pipeline>
+
+	<bouton id='abonnements' parent='configuration'>
+		<icone>img/abonnement_22.png</icone>
+		<titre>abo:abonnements</titre>
+	</bouton>
 	
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>abonnement_autorisations.php</inclure>
+	</pipeline>
+		
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0;]" />
 	<necessite id="inscription2" version="[0.68;]" />
-	<necessite id="cfg" version="[1.12;]" /> 
+	<necessite id="cfg" version="[1.12.2;]" /> 
+	<necessite id="spip_bonux" version="[1.0;]" /> 
 </plugin>
