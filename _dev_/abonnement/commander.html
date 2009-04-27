@@ -44,30 +44,28 @@
 
 			<h1 class="invisible">#NOM_SITE_SPIP</h1>
 			
-			[(#ENV{reachat_valide_hash}|?{' ',''})
-				[(#INCLURE{fond=fonds/reachat_valide}{hash=#ENV{reachat_valide_hash}}{id_auteur}{article=#ENV{article}})]
+			[(#ENV{reachat_valide_hash}|oui)
+				[(#INCLURE{fond=fonds/reachat_valide}{hash=#ENV{reachat_valide_hash}}{id_auteur}{article})]
 			]
 			
-			[(#ENV{reabo_valide_hash}|?{' ',''})
-				[(#INCLURE{fond=fonds/reabo_valide}{hash=#ENV{reabo_valide_hash}}{id_auteur}{abonnement=#ENV{abonnement}})]
+			[(#ENV{reabo_valide_hash}|oui)
+				[(#INCLURE{fond=fonds/reabo_valide}{hash=#ENV{reabo_valide_hash}}{id_auteur}{abonnement})]
 			]
 			
-			[(#ENV{reabo_valide_hash}|?{'',' '})
-			[(#ENV{reachat_valide_hash}|?{'',' '})
+			[(#ENV{reabo_valide_hash}|non|et{#ENV{reachat_valide_hash}|non})
 
-				[(#ENV{reachat}|?{' ',''})
-					[(#INCLURE{fond=fonds/reachat}{id_auteur}{article=#ENV{article}})]
+				[(#ENV{reachat}|oui)
+					[(#INCLURE{fond=fonds/reachat}{id_auteur}{article})]
 				]
 
-				[(#ENV{reabo}|?{' ',''})
-					[(#INCLURE{fond=fonds/reabo}{id_auteur}{abonnement=#ENV{abonnement}})]
+				[(#ENV{reabo}|oui)
+					[(#INCLURE{fond=fonds/reabo}{id_auteur}{abonnement})]
 				]
 								
-				[(#ENV{reabo}|?{'',' '})
-				[(#ENV{reachat}|?{'',' '})
-					[(#INCLURE{fond=fonds/achat_unite}{article=#ENV{article}})]
-				]]
-			]]
+				[(#ENV{reabo}|non|et{#ENV{reachat}|non})
+					[(#INCLURE{fond=fonds/achat_unite}{article})]
+				]
+			]
 		
 		
 		</div><!-- fin contenu -->
@@ -79,7 +77,8 @@
 			[(#REM) Menu de navigation par rubriques ]
 			<INCLURE{fond=inc-rubriques}{lang}>
 			
-		<INCLURE(session.php){fond=inc-connexion}>
+		<INCLURE{fond=inc-connexion}>
+		
 		<div style="background-color:red;color:#ffffff;font-weight:bold;text-align:center;margin:10px 0px 10px 0px">
 		<a href="spip.php?page=abonnement_complet">Je m'abonne</a>
 		</div>

@@ -15,7 +15,7 @@ x) ajouter dans inc-entete en dessous de #FORMULAIRE_RECHERCHE
 
 x) Ajouter dans une page _abonnement_.html avec un #CACHE{0}
 
-			[(#SESSION{id_auteur}|?{' ',''})			
+			[(#SESSION{id_auteur}|oui)			
 				<fieldset style="margin:10px 0px">
 				<legend>Informations personnelles</legend>
 				<INCLURE(inc/profil_adherent.php){id_auteur = #SESSION{id_auteur}}> 
@@ -23,7 +23,7 @@ x) Ajouter dans une page _abonnement_.html avec un #CACHE{0}
 				<INCLURE{fond=fonds/mes_abonnements}>
 				]			
 
-			[(#SESSION{id_auteur}|?{'',' '})			
+			[(#SESSION{id_auteur}|non)			
 				#FORMULAIRE_INSCRIPTION2
 			]
 
@@ -36,8 +36,8 @@ x) Mettre pour la page article d'une rubrique en acces restreint
 HTML ici
 
 </BOUCLE_article_principal>
-		[(#ID_ARTICLE|AccesRestreint_article_restreint|?{' ',''}) <INCLURE{fond=article_restreint}{id_article}> ] 
-		[(#ID_ARTICLE|AccesRestreint_article_restreint|?{'',' '}) Cette page n'existe pas ] 
+		[(#ID_ARTICLE|AccesRestreint_article_restreint|oui) <INCLURE{fond=article_restreint}{id_article}> ] 
+		[(#ID_ARTICLE|AccesRestreint_article_restreint|non) Cette page n'existe pas ] 
 <//B_article_principal>
 
 
