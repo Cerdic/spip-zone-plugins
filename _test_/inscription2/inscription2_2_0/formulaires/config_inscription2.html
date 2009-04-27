@@ -2,6 +2,7 @@
 <!-- refus=<:cfg:refus_configuration_webmestre:> -->
 <!-- nom=inscription2 -->
 
+<div class="formulaire_spip formulaire_config formulaire_config_inscription2">
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
@@ -130,13 +131,11 @@
 						<:inscription2:info_gener_desc:>
 					</p>
 				</li>
-				<li>
-					<label>
-						<:inscription2:publication:>
-					</label>
-					<p class="explication"><:inscription2:exp_publication:></p>
-					<input type="checkbox" name="publication" [checked="(#ENV{publication}?{checked})"] id="publication" />
-				</li>
+
+				[(#SAISIE{case,divers}
+					{label=<:inscription2:publication:>}
+					{explication=<:inscription2:exp_publication:>})]
+
 				<li>
 					<label>
 						<:inscription2:exp_domaines:>
@@ -157,11 +156,11 @@
 						<:inscription2:info_internes_desc:>
 					</p>
 				</li>
-				<li>
-					<p class="explication"><:inscription2:exp_divers:></p>
-					<label><:inscription2:divers:></label>
-					<input type="checkbox" name="divers" [checked="(#ENV{divers}?{checked})"] id="divers" />
-				</li>
+
+				[(#SAISIE{case,divers}
+					{label=<:inscription2:divers:>}
+					{explication=<:inscription2:exp_divers:>})]
+
 				<li>
 					<label><:inscription2:statut:></label>
 					<p class="explication"><:inscription2:exp_statut:></p>
@@ -170,10 +169,10 @@
 						<option value='1comite' [selected="(#ENV{statut_nouveau}|=={1comite}|oui)selected"]><:inscription2:auteur:></option>
 					</select>
 				</li>
-				<li>
-					<label><:inscription2:creation:></label>
-					<input type="checkbox" name="creation" [checked="(#ENV{creation}|oui)checked"] id="creation" />
-				</li>
+
+				[(#SAISIE{case,creation}
+					{label=<:inscription2:creation:>})]
+
 				<li>
 					<label><:inscription2:statut_rel:></label>
 					<p class="explication"><:inscription2:exp_statut_rel:></p>
@@ -222,3 +221,5 @@ function enadis(boxName, boxNom) {
 		boxNom.disabled = false;
 }
 // --></script>
+
+</div>

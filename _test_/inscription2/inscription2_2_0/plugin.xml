@@ -61,7 +61,7 @@
 		<nom>affiche_milieu</nom>
 		<inclure>inscription2_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="cfg" version="[1.10.1;]" />
+	<necessite id="cfg" version="[1.12.2;]" />
 	<necessite id="SPIP" version='[2.0.0;]' />
 	<necessite id='spip_bonux' version='[1.6;]' />
 	<necessite id="lib:jquery-validate" src="http://plugins.jquery.com/files/jquery.validate_13.zip" />
