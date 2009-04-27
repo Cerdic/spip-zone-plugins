@@ -17,7 +17,7 @@
 
 function traiter_message_banque($produit,$id_abonne,$validation_paiement,$hash_article){
 
-	$abonne_res = spip_query("SELECT a.nom_famille, a.prenom, a.adresse, a.code_postal, a.ville, a.pays, a.telephone, a.commentaire, b.email, b.id_auteur, b.alea_actuel, b.login , b.pass FROM `spip_auteurs_elargis` a, `spip_auteurs` b WHERE a.id_auteur='$id_abonne' AND a.id_auteur = b.id_auteur") ;
+	$abonne_res = spip_query("SELECT a.nom_famille, a.prenom, a.adresse, a.code_postal, a.ville, a.pays, a.telephone, a.commentaire, b.email, b.id_auteur, b.login , b.pass FROM `spip_auteurs_elargis` a, `spip_auteurs` b WHERE a.id_auteur='$id_abonne' AND a.id_auteur = b.id_auteur") ;
 
 	while($row = spip_fetch_array($abonne_res)){
 		$abonne = $row ;
@@ -123,12 +123,14 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$lib
 		$sujet = $sujet_message_ok ;
 		$message= $message_ok."\n\n";
 		
-		// envoyer un lien pour choisir son mdp le ca echeant
+		// envoyer un lien pour choisir son mdp le cas echeant
 		if($abonne['pass'] == ""){
+	 	include_spip('inc/acces'); # pour creer_uniqid
+		$cookie = creer_uniqid();
+		sql_updateq("spip_auteurs", array("cookie_oubli" => $cookie), "id_auteur=" . $abonne['id_auteur']);
 		$message .=  "Votre identifiant de connexion au site est : ".$abonne['login']
 		."\n\nCliquez le lien suivant pour choisir votre mot de passe"
-		."\n".$adresse_site."/?page=inscription2_confirmation&id="
-		.$abonne['id_auteur']."&cle=".$abonne['alea_actuel']."&mode=conf";
+		."\n".generer_url_public('spip_pass','p='.$cookie, true);
 		}
 		
 		if($article['titre'] && $abonne['pass'] == "")
