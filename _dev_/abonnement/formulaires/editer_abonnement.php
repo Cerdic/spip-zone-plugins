@@ -9,10 +9,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
 include_spip('inc/editer');
+include_spip('inc/autoriser');
 
 function formulaires_editer_abonnement_charger_dist($id_abonnement='new',$retour='', $config_fonc='abonnements_edit_config', $row=array(), $hidden=''){
+	if (!autoriser('modifier','abonnement', $id_abonnement)) {
+		return false;
+	}
 	$valeurs = formulaires_editer_objet_charger('abonnement',$id_abonnement,0,'',$retour,$config_fonc,$row,$hidden);
-
 	return $valeurs;
 }
 
