@@ -24,21 +24,37 @@ if (!defined('_ECRIRE_INC_VERSION')) return; // sécurité
 
 /**
  * Désactivation du cache de pages
- * 
- * Surcharge de public_cacher_dist(...) dans
- * 'ecrire/public/cacher.php' - plus précisément copier/coller de la
- * partie "// Cas ignorant le cache car completement dynamique"
- * 
- * Merci à 'Committo, Ergo Sum' pour l'idée
- * http://forum.spip.org/fr_3874.html
  */
-function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmodified) {
-  $use_cache = -1;
-  $lastmodified = 0;
-  $chemin_cache = "";
-  $page = array();
-  return;
-}
+if ($spip_version_code >= 1.92 && $spip_version_code < 2)
+  {
+
+    /** 
+     * Surcharge de public_cacher_dist(...) dans
+     * 'ecrire/public/cacher.php' - plus précisément copier/coller de
+     * la partie "// Cas ignorant le cache car completement dynamique"
+     * 
+     * Merci à 'Committo, Ergo Sum' pour l'idée
+     * http://forum.spip.org/fr_3874.html
+     */
+    function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmodified)
+    {
+      $use_cache = -1;
+      $lastmodified = 0;
+      $chemin_cache = "";
+      $page = array();
+      return;
+    }
+    /* Il existe une autre solution implémentée dans le plugin
+       'desactiver_cache_1_9', qui consiste à forcer
+       $_SERVER['REQUEST_METHOD']='POST', sauf pour quelques fichiers
+       - mais ce n'est pas très propre AMHA. */
+  }
+else if (version_compare($spip_version_branche, "2.0.0"))
+  {
+    // Inspiré du plugin 'couteau_suisse':
+    define('_NO_CACHE', -1); // toujours recalculer sans stocker
+  }
+
 
 /**
  * Désactivation du cache de squelettes. Normalement les squelettes
@@ -53,18 +69,36 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
  * 'ecrire/public/composer.php'
  */
 include_spip('public/composer');
-function public_composer($squelette, $mime_type, $gram, $source, $connect='')
-{
-  // Si le fichier a déjà été compilé dans cette requête, on le garde
-  $nom = calculer_nom_fonction_squel($squelette, $mime_type, $connect);
-  if (function_exists($nom))
-    return array($nom);
+if ($spip_version_code >= 1.92 && $spip_version_code < 2)
+  {
+    function public_composer($squelette, $mime_type, $gram, $sourcefile)
+    {
+      // Si le fichier a déjà été compilé dans cette requête, on le garde
+      $nom = $mime_type . '_' . md5($squelette);
+      if (function_exists($nom))
+	return $nom;
 
-  // sinon on le supprime et on repasse la main à la fonction d'origine
-  $phpfile = sous_repertoire(_DIR_SKELS,'',false,true) . $nom . '.php';
-  spip_unlink($phpfile);
-  return public_composer_dist($squelette, $mime_type, $gram, $source, $connect);
-}
+      // sinon on le supprime et on repasse la main à la fonction d'origine
+      $phpfile = sous_repertoire(_DIR_SKELS) . $nom . '.php';
+      supprimer_fichier($phpfile);
+      return public_composer_dist($squelette, $mime_type, $gram, $sourcefile);
+    }
+  }
+else if (version_compare($spip_version_branche, "2.0.0"))
+  {
+    function public_composer($squelette, $mime_type, $gram, $source, $connect='')
+    {
+      // Si le fichier a déjà été compilé dans cette requête, on le garde
+      $nom = calculer_nom_fonction_squel($squelette, $mime_type, $connect);
+      if (function_exists($nom))
+	return array($nom);
+      
+      // sinon on le supprime et on repasse la main à la fonction d'origine
+      $phpfile = sous_repertoire(_DIR_SKELS,'',false,true) . $nom . '.php';
+      supprimer_fichier($phpfile);
+      return public_composer_dist($squelette, $mime_type, $gram, $source, $connect);
+    }
+  }
 
 
 /**
@@ -77,7 +111,7 @@ function public_composer($squelette, $mime_type, $gram, $source, $connect='')
 /* Le fichier est déjà chargé par PHP, donc on peut le supprimer sans
  risque. L'absence du fichier force la revérification des plugins à
  chaque page affichée. */
-spip_unlink(_DIR_TMP."charger_plugins_options.php");
+supprimer_fichier(_DIR_TMP."charger_plugins_options.php");
 /* Autre solution: demander le rechargement. Mais comme ce
  rechargement n'est effectué qu'après que les plugins sont chargés
  (puisque nous sommes dans un plugin..), les changements ne seront

@@ -1,9 +1,10 @@
 <plugin>
-  <nom>No Cache - Désactiver le cache SPIP</nom>
+  <nom>No Cache - Désactiver les caches de SPIP</nom>
   <prefix>nocache</prefix>
 
-  <version>1.0rc1</version>
+  <version>1.0rc2</version>
   <etat>stable</etat>
+  <necessite id="SPIP" version='[1.9.2;]' />
 
   <description>
     Quand ce plugin est activé, le cache de squelettes de SPIP n'est
@@ -13,7 +14,9 @@
     serait en cache. Les caches de pages, de balises et de plugin.xml
     sont gérés. Pour utiliser le cache à nouveau, pour la mise en
     ligne officielle par exemple, il suffit de désactiver ce plugin
-    (simplicité = tranquilité d'esprit).
+    (simplicité = tranquillité d'esprit).
+
+    Fonctionne avec SPIP 1.9.2 et SPIP 2.
   </description>
   <auteur>
     [Sylvain Beucler->beuc@beuc.net]
