@@ -8,7 +8,7 @@
 </div>
 
 <div class="formulaire_spip formulaire_editer formulaire_editer_ticket formulaire_editer_ticket-#ENV{id_ticket,nouveau}">
-	<form method="post" action="?exec=ticket_afficher&id_ticket=#ENV**{id_ticket}">
+	<form method="post" action="?exec=ticket_afficher&amp;id_ticket=#ENV**{id_ticket}"><div>
 		<input type='hidden' name='modifier_ticket' value='#ENV**{id_ticket}' />
 		<ul>
 			<li class="editer_titre obligatoire " >
@@ -36,7 +36,7 @@
 			</li>]
 			[<li>
 				<label for="composant">Composant</label>
-				<select name="composant" id=composant>(#VAL{composant}|tickets_select_champ_optionnel{#ENV**{composant}})</select>
+				<select name="composant" id="composant">(#VAL{composant}|tickets_select_champ_optionnel{#ENV**{composant}})</select>
 			</li>]
 			[<li>
 				<label for="version">Version</label>
@@ -64,5 +64,5 @@
 			</li>
 		</ul>
 		<p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
-	</form>
+	</div></form>
 </div>
