@@ -17,17 +17,17 @@
 
 function traiter_message_banque($produit,$id_abonne,$validation_paiement,$hash_article){
 
-	$abonne_res = spip_query("SELECT a.nom_famille, a.prenom, a.adresse, a.code_postal, a.ville, a.pays, a.telephone, a.commentaire, b.email, b.id_auteur, b.login , b.pass FROM `spip_auteurs_elargis` a, `spip_auteurs` b WHERE a.id_auteur='$id_abonne' AND a.id_auteur = b.id_auteur") ;
+	$abonne_res = sql_query("SELECT a.nom_famille, a.prenom, a.adresse, a.code_postal, a.ville, a.pays, a.telephone, a.commentaire, b.email, b.id_auteur, b.login , b.pass FROM `spip_auteurs_elargis` a, `spip_auteurs` b WHERE a.id_auteur='$id_abonne' AND a.id_auteur = b.id_auteur") ;
 
-	while($row = spip_fetch_array($abonne_res)){
+	while($row = sql_fetch($abonne_res)){
 		$abonne = $row ;
 	}
 
 
 	if($produit == "abonnement"){
-		$abonnement_res = spip_query("SELECT a.duree, a.periode, a.montant, a.libelle FROM `spip_abonnements` a, `spip_auteurs_elargis_abonnements` b WHERE b.id_auteur = '$id_abonne' AND a.id_abonnement = b.id_abonnement") ;
+		$abonnement_res = sql_query("SELECT a.duree, a.periode, a.montant, a.libelle FROM `spip_abonnements` a, `spip_auteurs_elargis_abonnements` b WHERE b.id_auteur = '$id_abonne' AND a.id_abonnement = b.id_abonnement") ;
 
-		while($abonnement = spip_fetch_array($abonnement_res)){
+		while($abonnement = sql_fetch($abonnement_res)){
 			$libelle = $abonnement['libelle'];
 			$duree = $abonnement['duree'] ;
 			$periode = $abonnement['periode'] ;
@@ -43,14 +43,14 @@ function traiter_message_banque($produit,$id_abonne,$validation_paiement,$hash_a
 		}
 
 		// fixer la date de validite et le statut de paiement, (et des zones acces restreint selon l'abonnement a l'occasion)
-		spip_query("UPDATE `spip_auteurs_elargis` SET statut_abonnement='$statut_abonnement', statut_paiement='$validation_paiement'  WHERE id_auteur='$id_abonne'") ;
-		spip_query("UPDATE `spip_auteurs_elargis_abonnements` SET validite = $validite, montant = '$montant' WHERE id_auteur='$id_abonne'") ;
+		sql_query("UPDATE `spip_auteurs_elargis` SET statut_abonnement='$statut_abonnement', statut_paiement='$validation_paiement'  WHERE id_auteur='$id_abonne'") ;
+		sql_query("UPDATE `spip_auteurs_elargis_abonnements` SET validite = $validite, montant = '$montant' WHERE id_auteur='$id_abonne'") ;
 	}
 
 	if($produit == "article"){
-		$article = spip_fetch_array(spip_query("SELECT a.titre, a.id_article FROM `spip_articles` a, `spip_auteurs_elargis_articles` b WHERE b.hash = '$hash_article' AND a.id_article = b.id_article") );
+		$article = sql_fetch(sql_query("SELECT a.titre, a.id_article FROM `spip_articles` a, `spip_auteurs_elargis_articles` b WHERE b.hash = '$hash_article' AND a.id_article = b.id_article") );
 		$libelle = $article['titre'];
-		spip_query("UPDATE `spip_auteurs_elargis_articles` SET statut_paiement='$validation_paiement' WHERE hash='$hash_article'") ;
+		sql_query("UPDATE `spip_auteurs_elargis_articles` SET statut_paiement='$validation_paiement' WHERE hash='$hash_article'") ;
 	}
 
 	//envoyer un mail a l'admin et a l'abonne
