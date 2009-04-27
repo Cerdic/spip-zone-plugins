@@ -31,6 +31,6 @@ _ &#169; 2009 - Distribu&#233; sous licence GPL
 		<inclure>i2_spiplistes_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version='[2.0.0;]' />
-	<necessite id='inscription2' version='[0.6;]' />
+	<necessite id='inscription2' version='[0.68;]' />
 	<chemin dir='' />
 </plugin>

@@ -8,10 +8,10 @@
 	function i2_spiplistes_i2_form_fin($flux){
 		// Le pavé dédié aux listes dans le formulaire d'inscription 
 		// ou de changement de profil
-		spip_log('i2_spiplistes_i2_form_fin');
-		spip_log($flux['args']);
+		//spip_log('i2_spiplistes_i2_form_fin');
+		//spip_log($flux['args']);
 		if (lire_config('inscription2/newsletter') == 'on'){
-			$flux['data'] .= recuperer_fond('formulaires/inscription2_form_listes',unserialize($flux['args']));
+			$flux['data'] .= recuperer_fond('formulaires/inscription2_form_listes',$flux['args']);
 		}
 		return $flux;
 	}
