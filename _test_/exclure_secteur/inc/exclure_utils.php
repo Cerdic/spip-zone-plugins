@@ -36,3 +36,4 @@ function exclure_sect_choisir($crit){
     return '('.$cfg.')';
 
 }
+?>

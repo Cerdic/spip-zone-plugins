@@ -7,11 +7,12 @@
     <fieldset>
 	<ul>
 	<legend id="explication">Choisissez les secteurs &agrave; exclure</legend>
-	<BOUCLE_racine(RUBRIQUES){racine}{tout_voir}>
+	<BOUCLE_racine(RUBRIQUES){racine}>
 	<li>
 
+    #SET{checked, #CONFIG{secteur/exclure_sect, #ARRAY}}
 	<label for="rub_#ID_RUBRIQUE">#TITRE</label>	
-	<input type="checkbox" name="exclure_sect[]" value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#ENV{exclure_sect}}|oui) checked="checked"] />
+	<input type="checkbox" name="exclure_sect[]" value="#ID_RUBRIQUE" [(#ID_RUBRIQUE|in_array{#GET{checked}}|?{'checked="checked"'})] />
 	
 	</li>
 	

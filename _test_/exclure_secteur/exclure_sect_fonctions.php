@@ -4,7 +4,7 @@ global $spip_version_branche;
 
 
 if (eregi("^1",$spip_version_branche)){
-        include_spip('inc/exclure_utils');
+        
             function oui($i){
                 if ($i == true){
                     return ' ';}
