@@ -482,23 +482,7 @@ function spiplistes_courriers_assembler_patron ($path_patron, $contexte, $ignore
 		$result = array("", "");
 	}
 	else {
-		include_spip('public/assembler');
-		
-		$patron_html = spiplistes_patron_find_in_path ($path_patron, $contexte['lang'], false);
-	
-		$message_html = 
-			$patron_html
-			? recuperer_fond($patron_html, $contexte)
-			: ""
-			;
-		$patron_texte = spiplistes_patron_find_in_path ($path_patron, $contexte['lang'], true);
-		$message_texte = 
-			($patron_texte && ($patron_html != $patron_texte))
-			? recuperer_fond($patron_texte, $contexte) . "\n"
-			: spiplistes_courrier_version_texte($message_html) . "\n"
-			;
-	
-		$result = array($message_html, $message_texte);
+		$result = spiplistes_assembler_patron($path_patron, $contexte);
 	}
 	
 	return($result);
