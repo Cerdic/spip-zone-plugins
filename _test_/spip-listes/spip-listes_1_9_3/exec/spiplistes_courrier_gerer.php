@@ -341,8 +341,14 @@ function exec_spiplistes_courrier_gerer () {
 				;
 		}
 		
-		if($statut != _SPIPLISTES_COURRIER_STATUT_PUBLIE) {
-		// Le courrier peut-etre supprime s'il n'a pas ete publie
+		// Le courrier peut-etre supprime si obsolete
+		if(in_array($statut, array(_SPIPLISTES_COURRIER_STATUT_PUBLIE
+								   , _SPIPLISTES_COURRIER_STATUT_AUTO
+								   , _SPIPLISTES_COURRIER_STATUT_VIDE
+								   , _SPIPLISTES_COURRIER_STATUT_IGNORE
+								   , _SPIPLISTES_COURRIER_STATUT_STOPE
+								   , _SPIPLISTES_COURRIER_STATUT_ERREUR))
+					) {
 			$gros_bouton_supprimer = 
 				"<div style='margin-top:1ex;'>"
 				. icone (
@@ -356,12 +362,12 @@ function exec_spiplistes_courrier_gerer () {
 				. "</div>\n"
 				;
 		}
-		if(
-			($statut == _SPIPLISTES_COURRIER_STATUT_PUBLIE)
-			|| ($statut == _SPIPLISTES_COURRIER_STATUT_STOPE)
-		) {
-			// Un courrier publie ou stoppe peut-etre duplique pour edition
-			// on revient sur cette page avec le contenu recupere
+		// Un courrier publie ou stoppe peut-etre duplique pour edition
+		// on revient sur cette page avec le contenu recupere
+		if(in_array($statut, array(_SPIPLISTES_COURRIER_STATUT_PUBLIE
+								   , _SPIPLISTES_COURRIER_STATUT_AUTO
+								   , _SPIPLISTES_COURRIER_STATUT_STOPE))
+					) {
 			$gros_bouton_dupliquer = 
 				"<div style='margin-top:1ex;'>"
 				. icone (
