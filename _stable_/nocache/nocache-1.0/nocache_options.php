@@ -20,7 +20,7 @@
 
 // Chargé à chaque appel de page
 if (!defined('_ECRIRE_INC_VERSION')) return; // sécurité
-include_spip('public/composer');
+
 
 /**
  * Désactivation du cache de pages
@@ -52,6 +52,7 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
  * Surcharge de public_composer_dist(...) dans
  * 'ecrire/public/composer.php'
  */
+include_spip('public/composer');
 function public_composer($squelette, $mime_type, $gram, $source, $connect='')
 {
   // Si le fichier a déjà été compilé dans cette requête, on le garde
@@ -64,3 +65,23 @@ function public_composer($squelette, $mime_type, $gram, $source, $connect='')
   spip_unlink($phpfile);
   return public_composer_dist($squelette, $mime_type, $gram, $source, $connect);
 }
+
+
+/**
+ * Recharge les fichiers plugin.xml.
+ * 
+ * Utile quand on est en train de développer un plugin (sinon il faut
+ * aller dans la page 'exec=admin_plugin' qui appelle aussi
+ * verif_plugin()). Ne recharge que les plugins actifs.
+ */
+/* Le fichier est déjà chargé par PHP, donc on peut le supprimer sans
+ risque. L'absence du fichier force la revérification des plugins à
+ chaque page affichée. */
+spip_unlink(_DIR_TMP."charger_plugins_options.php");
+/* Autre solution: demander le rechargement. Mais comme ce
+ rechargement n'est effectué qu'après que les plugins sont chargés
+ (puisque nous sommes dans un plugin..), les changements ne seront
+ effectifs qu'au prochain chargement. La solution avec 'spip_unlink'
+ fonctionne donc mieux car le rechargement est différé. */
+//include_spip('inc/plugin');
+//verif_plugin();
