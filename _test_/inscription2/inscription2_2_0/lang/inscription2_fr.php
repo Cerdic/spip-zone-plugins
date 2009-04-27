@@ -21,6 +21,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur' => 'Auteur',
 	'autre' => 'Autre',
 	'avril' => 'avril',
+	
+	// B
+	'bio' => 'Biographie',
 
 	// C
 	'caracteres' => 'caract&egrave;res',
@@ -152,6 +155,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom' => 'Signature',
 	'nom_explication' => 'votre nom ou votre&nbsp;pseudo',
 	'nom_famille' => 'Nom de famille',
+	'nom_site' => 'Nom du site',
 	'non_renseigne' => 'non renseign&eacute;.',
 	'non_renseignee' => 'non renseign&eacute;e.',
 	'novembre' => 'novembre',
@@ -177,6 +181,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pays' => 'Pays',
 	'pays_pro' => 'Pays (Pro.)',
 	'prenom' => 'Pr&eacute;nom',
+	'pgp' => 'Cl&eacute; PGP',
 	'probleme_email' => 'Probl&egrave;me de mail&nbsp;: l\'email d\'activation ne peut pas &ecirc;tre envoy&eacute;.',
 	'profession' => 'Profession',
 	'profil_droits_insuffisants' => 'Desol&eacute; vous n\'avez pas le droit de modifier cet auteur<br/>',
@@ -238,6 +243,7 @@ Si vous n\'avez pas demand&eacute; cette inscription ou si vous ne voulez plus f
 	'titre_confirmation' => 'Confirmation',
 
 	// U
+	'url_site' => 'Url du site',
 	'url_societe' => 'Site soci&eacute;t&eacute;',
 
 	// V

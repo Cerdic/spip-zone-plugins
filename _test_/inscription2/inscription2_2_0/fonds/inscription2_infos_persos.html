@@ -144,6 +144,90 @@
 					</tr>
 					<tr>
 						<td class="label">
+							<label for="bio"><:inscription2:bio:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="bio" [checked="(#CONFIG{inscription2/bio}?{checked})"] onclick="showoblig(this)" id="bio" />
+							<div style="[(#CONFIG{inscription2/bio}|=={on}|?{display: block;, display:none;})]">
+								<input type="checkbox" name="bio_obligatoire" [checked="(#CONFIG{inscription2/bio_obligatoire}?{checked})"] id="bio_obligatoire" />
+								<span style="color:red">*</span>
+							</div>
+						</td>
+						<td>
+							<input type="checkbox" name="bio_fiche_mod" onclick = "enadis(this,bio_fiche)" [checked="(#CONFIG{inscription2/bio_fiche_mod}?{checked})"] id="bio_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="bio_fiche" [checked="(#CONFIG{inscription2/bio_fiche}?{checked})"] id="bio_fiche" [disabled ="(#CONFIG{inscription2/bio_fiche_mod}?{disabled})"] />
+						</td>
+						<td>
+							<input type="checkbox" name="bio_table" [checked="(#CONFIG{inscription2/bio_table}?{checked})"] id="bio_table" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="nom_site"><:inscription2:nom_site:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="nom_site" [checked="(#CONFIG{inscription2/nom_site}?{checked})"] onclick="showoblig(this)" id="nom_site" />
+							<div style="[(#CONFIG{inscription2/nom_site}|=={on}|?{display: block;, display:none;})]">
+								<input type="checkbox" name="nom_site_obligatoire" [checked="(#CONFIG{inscription2/nom_site_obligatoire}?{checked})"] id="nom_site_obligatoire" />
+								<span style="color:red">*</span>
+							</div>
+						</td>
+						<td>
+							<input type="checkbox" name="nom_site_fiche_mod" onclick = "enadis(this,nom_site_fiche)" [checked="(#CONFIG{inscription2/nom_site_fiche_mod}?{checked})"] id="nom_site_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="nom_site_fiche" [checked="(#CONFIG{inscription2/nom_site_fiche}?{checked})"] id="nom_site_fiche" [disabled ="(#CONFIG{inscription2/nom_site_fiche_mod}?{disabled})"] />
+						</td>
+						<td>
+							<input type="checkbox" name="nom_site_table" [checked="(#CONFIG{inscription2/nom_site_table}?{checked})"] id="nom_site_table" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="url_site"><:inscription2:url_site:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="url_site" [checked="(#CONFIG{inscription2/url_site}?{checked})"] onclick="showoblig(this)" id="url_site" />
+							<div style="[(#CONFIG{inscription2/url_site}|=={on}|?{display: block;, display:none;})]">
+								<input type="checkbox" name="url_site_obligatoire" [checked="(#CONFIG{inscription2/url_site_obligatoire}?{checked})"] id="url_site_obligatoire" />
+								<span style="color:red">*</span>
+							</div>
+						</td>
+						<td>
+							<input type="checkbox" name="url_site_fiche_mod" onclick = "enadis(this,url_site_fiche)" [checked="(#CONFIG{inscription2/url_site_fiche_mod}?{checked})"] id="url_site_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="url_site_fiche" [checked="(#CONFIG{inscription2/url_site_fiche}?{checked})"] id="url_site_fiche" [disabled ="(#CONFIG{inscription2/url_site_fiche_mod}?{disabled})"] />
+						</td>
+						<td>
+							<input type="checkbox" name="url_site_table" [checked="(#CONFIG{inscription2/url_site_table}?{checked})"] id="url_site_table" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
+							<label for="pgp"><:inscription2:pgp:></label>
+						</td>
+						<td>
+							<input type="checkbox" name="pgp" [checked="(#CONFIG{inscription2/pgp}?{checked})"] onclick="showoblig(this)" id="pgp" />
+							<div style="[(#CONFIG{inscription2/pgp}|=={on}|?{display: block;, display:none;})]">
+								<input type="checkbox" name="pgp_obligatoire" [checked="(#CONFIG{inscription2/pgp_obligatoire}?{checked})"] id="pgp_obligatoire" />
+								<span style="color:red">*</span>
+							</div>
+						</td>
+						<td>
+							<input type="checkbox" name="pgp_fiche_mod" onclick = "enadis(this,pgp_fiche)" [checked="(#CONFIG{inscription2/pgp_fiche_mod}?{checked})"] id="pgp_fiche_mod" />
+						</td>
+						<td>
+							<input type="checkbox" name="pgp_fiche" [checked="(#CONFIG{inscription2/pgp_fiche}?{checked})"] id="pgp_fiche" [disabled ="(#CONFIG{inscription2/pgp_fiche_mod}?{disabled})"] />
+						</td>
+						<td>
+							<input type="checkbox" name="pgp_table" [checked="(#CONFIG{inscription2/pgp_table}?{checked})"] id="pgp_table" />
+						</td>
+					</tr>
+					<tr>
+						<td class="label">
 							<label for="adresse"><:inscription2:adresse:></label>
 						</td>
 						<td>

@@ -54,6 +54,34 @@
             [<p class='erreur'>(#ENV**{erreurs}|table_valeur{naissance})</p>]
         </li>]
 
+        [(#CONFIG{inscription2/bio_fiche_mod}|=={on}|oui)	
+        <li class="editer_bio[ (#CONFIG{inscription2/bio_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{bio}|oui)erreur]">
+            <label for="bio"><:inscription2:bio:></label>
+            <textarea name="bio" class="textarea" id="bio" rows="2" cols="20">#ENV{bio}</textarea>
+            [<p class='erreur'>(#ENV**{erreurs}|table_valeur{bio})</p>]
+        </li>]
+        
+		[(#CONFIG{inscription2/nom_site_fiche_mod}|=={on}|oui)	
+        <li class="editer_nom_site[ (#CONFIG{inscription2/nom_site_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{nom_site}|oui)erreur]">
+            <label for="nom_site"><:inscription2:nom_site:></label>
+            <input type="text" class="text" name="nom_site" id="nom_site" value="#ENV{nom_site}" />
+            [<p class='erreur'>(#ENV**{erreurs}|table_valeur{nom_site})</p>]
+        </li>]
+
+        [(#CONFIG{inscription2/url_site_fiche_mod}|=={on}|oui)	
+        <li class="editer_url_site[ (#CONFIG{inscription2/url_site_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]">
+            <label for="url_site"><:inscription2:url_site:></label>
+            <input type="text" class="text" name="url_site" id="url_site" value="#ENV{url_site}" />
+            [<p class='erreur'>(#ENV**{erreurs}|table_valeur{url_site})</p>]
+        </li>]
+		
+		[(#CONFIG{inscription2/pgp_fiche_mod}|=={on}|oui)	
+        <li class="editer_pgp[ (#CONFIG{inscription2/pgp_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{pgp}|oui)erreur]">
+            <label for="pgp"><:inscription2:pgp:></label>
+            <textarea name="pgp" class="textarea" id="pgp" rows="2" cols="20">#ENV{pgp}</textarea>
+            [<p class='erreur'>(#ENV**{erreurs}|table_valeur{pgp})</p>]
+        </li>]
+		
         [(#CONFIG{inscription2/adresse_fiche_mod}|=={on}|oui)	
         <li class="editer_adresse[ (#CONFIG{inscription2/adresse_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{adresse}|oui)erreur]">
             <label for="adresse"><:inscription2:adresse:></label>
