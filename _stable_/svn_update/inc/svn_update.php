@@ -55,7 +55,10 @@
 
 			// Switch ?
 			if ($old_src != $src) {
-				$command[] = "switch --relocate $old_src/ $src/ $dest/";
+				if (parse_url($old_src,PHP_URL_HOST)!=parse_url($src,PHP_URL_HOST))
+					$command[] = "switch --relocate $old_src/ $src/ $dest/";
+				else
+					$command[] = "switch $src/ $dest/";
 			}
 			
 			// Update
@@ -79,7 +82,7 @@
     				//execute la commande et sauve le resultat dans local_out
 				exec($cmd_exec,$local_out);
 				//rappelle la commande executée
-    				$cmd_aff = _SVN_COMMAND.$cmd." 2>&1";
+    				$cmd_aff = _SVN_COMMAND." ".$cmd." 2>&1";
 				array_unshift($local_out, $cmd_aff);
 				//empile le resultat local à la sortie finale
 				$out = $out + $local_out;
