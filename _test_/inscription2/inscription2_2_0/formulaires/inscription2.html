@@ -8,7 +8,7 @@
 [(#ENV**{erreurs}|table_valeur{email_connu}|non)
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>
 		[(#REM) pour reprendre la main apres la validation]
-		[(#PIPELINE{i2_confirmation,#ARRAY{args,#ENV*,data,''}})]
+		[(#PIPELINE{i2_confirmation,[(#ARRAY{args,[(#ENV*|unserialize)],data,''})]})]
 	]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
@@ -19,7 +19,7 @@
 		
         [(#REM) pour inserer des champs au debut du formulaire]
 
-		[(#PIPELINE{i2_form_debut,#ARRAY{args,#ENV*,data,''}})]
+		[(#PIPELINE{i2_form_debut,[(#ARRAY{args,[(#ENV*|unserialize)],data,''})]})]
 		
         [(#ENV*{id_auteur}|oui)
 			<INCLURE{fond=formulaires/inscription2_modif_infos_connection}{env}>
@@ -33,7 +33,7 @@
         	<INCLURE{fond=formulaires/inscription2_infos_pro}{env}>
         ]
 
-		[(#PIPELINE{i2_form_fin,#ARRAY{args,#ENV*,data,''}})]
+		[(#PIPELINE{i2_form_fin,[(#ARRAY{args,[(#ENV*|unserialize)],data,''})]})]
 
         [(#CONFIG{inscription2/publication}|=={on}|oui)
         <fieldset class="info_publication">
