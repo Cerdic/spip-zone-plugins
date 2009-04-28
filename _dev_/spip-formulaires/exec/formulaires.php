@@ -115,6 +115,7 @@
 		$onglet_proprietes.= $editer_mots('formulaire', $formulaire->id_formulaire, $cherche_mot, $select_groupe, true, '', 'formulaires');
 		$onglet_proprietes.= formulaires_afficher_auteurs($formulaire->id_formulaire);
 
+		$config.= debut_cadre_enfonce($icone='', true);
 		$config.= '<table>';
 		$config.= '<tr><td>'._T('formulairesprive:type_formulaire').'</td><td><strong>'._T('formulairesprive:'.$formulaire->type).'</strong></td></tr>';
 		$config.= '<tr><td>'._T('formulairesprive:limiter_invitation').'</td><td><strong>'._T('formulairesprive:'.$formulaire->limiter_invitation).'</strong></td></tr>';
@@ -122,11 +123,14 @@
 			$config.= '<tr><td>'._T('formulairesprive:limiter_applicant').'</td><td><strong>'._T('formulairesprive:'.$formulaire->limiter_applicant).'</strong></td></tr>';
 		$config.= '<tr><td>'._T('formulairesprive:notifier_auteurs').'</td><td><strong>'._T('formulairesprive:'.$formulaire->notifier_auteurs).'</strong></td></tr>';
 		$config.= '</table>';
+		$config.= fin_cadre_enfonce(true);
 
+		$onglet_proprietes.= $config;
+		
 		$contexte = array('id' => $formulaire->id_formulaire);
 		$fond = recuperer_fond("prive/contenu/formulaire", $contexte);
 		$fond = pipeline('afficher_contenu_objet', array('args' => array('type' => 'formulaire', 'id_objet' => $formulaire->id_formulaire, 'contexte' => $contexte), 'data' => $fond));
-		$onglet_contenu = $config.'<div id="wysiwyg">'.$fond.'</div>';
+		$onglet_contenu = '<div id="wysiwyg">'.$fond.'</div>';
 
 		$onglet_documents = formulaires_documents('formulaire', intval($formulaire->id_formulaire));
 	
