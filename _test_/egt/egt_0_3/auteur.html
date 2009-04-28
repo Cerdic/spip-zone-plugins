@@ -1,0 +1,54 @@
+<!-- squelette egt v0.3 -->
+<!-- auteurs: damazone, sBa - licence GPL -->
+<!-- http://www.spip-contrib.net/EGT-squelette-plugin-pour-SPIP-2 -->
+#CACHE{86400}
+<BOUCLE_auteur_principal(AUTEURS) {id_auteur}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<INCLURE{fond=inc/inc-header}{id_auteur}>
+</head>
+ 
+<body>
+
+	<div id="conteneur1">  
+	
+[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+		<INCLURE{fond=inc/inc-bandeau}>         
+	 
+[(#REM) <!-- =========================== ZONE CHEMIN DE NAVIGATION ============================= --> ]
+		<div id="haut">
+			<ul>         
+			<li><a href="#URL_SITE_SPIP/?&amp;lang=#LANG;"><:accueil_site:></a> <img src="#CHEMIN{images/puce.png}" alt=">"/></li>	 
+			<li><:spip:icone_auteurs:>&nbsp;<img src="#CHEMIN{images/puce.png}" alt=">"/></li>                                     
+			<li><:spip:form_prop_envoyer:> : #NOM</li>
+			<li>#TITRE</li>
+			</ul>
+		</div><!--fin du div haut -->
+	      
+[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+		<INCLURE{fond=inc/inc-gauche}>
+	            
+
+[(#REM) <!-- =================================== ZONE CORPS  ====================================== --> ]			
+		<div id="centre-article">
+	      
+			<!-- accessibilite -->
+			<div id="noprint">
+			<a name="contenu"></a>
+			</div>  
+			<div style='text-align: left;'>
+			[(#FORMULAIRE_ECRIRE_AUTEUR)]
+			</div>
+		</div><!-- fin du div centre-article -->
+
+[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+		<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}{self=#SELF}>
+  
+	</div><!-- fin conteneur1 -->
+	
+  [(#FORMULAIRE_ADMIN{'spip-admin-float'})]
+  
+</body>
+</BOUCLE_auteur_principal>
+</html>
