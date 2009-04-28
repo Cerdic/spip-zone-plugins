@@ -48,10 +48,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"label_mois" => "mois",
 	"label_commentaire" => "Commentaires",
 	"label_tarif" => "Tarif",
+	"label_montant" => "Montant",
 	"explication_tarif" => "Indiquer le prix en euros.",
 	"label_proposer_paiement" => "Proposer le paiment à l'inscription",
 	"explication_proposer_paiement" => "Proposer un formulaire de paiement
 		d&egrave;s la validation du formulaire d'inscription ?",
-	
+
+	// stats
+	'nombre_abonnements' => "Nombre d'abonnements",
+	'total' => "Total",
+	"numeros_payants" => "Num&eacute;ros payants",
+	"nombre_acheteurs_differents" => "Nombre d'acheteurs diff&eacute;rents : ",
+	"diffusion_payee" => "Diffusion pay&eacute;e",
 );
 ?>

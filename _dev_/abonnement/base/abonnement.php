@@ -12,7 +12,9 @@
 function abonnement_declarer_tables_interfaces($interfaces){
 	$interfaces['table_des_tables']['abonnements'] = 'abonnements';
 	$interfaces['table_des_tables']['auteurs_elargis_abonnements'] = 'auteurs_elargis_abonnements';
-	$interfaces['table_des_tables']['auteurs_elargis_articles'] = 'auteurs_elargis_articles';	
+	$interfaces['table_des_tables']['auteurs_elargis_articles'] = 'auteurs_elargis_articles';
+
+		
 	return $interfaces;
 }
 
@@ -51,7 +53,7 @@ function abonnement_declarer_tables_principales($tables_principales){
 							"KEY" => "id_auteur"
 							);	
 
-	$tables_principales['`spip_auteurs_elargis_abonnements`'] = array(
+	$tables_principales['spip_auteurs_elargis_abonnements'] = array(
 			'field' => &$spip_auteurs_elargis_abonnements, 
 			'key' => &$spip_auteurs_elargis_abonnements_key);
 			
@@ -69,7 +71,7 @@ function abonnement_declarer_tables_principales($tables_principales){
 							"KEY" => "id_auteur_elargi"
 							);	
 
-	$tables_principales['`spip_auteurs_elargis_articles`'] = array(
+	$tables_principales['spip_auteurs_elargis_articles'] = array(
 			'field' => &$spip_auteurs_elargis_articles, 
 			'key' => &$spip_auteurs_elargis_articles_key);
 

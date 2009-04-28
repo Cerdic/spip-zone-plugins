@@ -1,0 +1,82 @@
+[(#REM) remettre l'autorisation d'admin ]
+
+<h1><:abo:statistiques:></h1>
+
+<!--#navigation-->
+<INCLURE{fond=inc/menu_abonnement} />
+
+<B_types>
+<table class="liste">
+<thead>
+	<th><:abo:label_libelle:></th>
+	<th><:abo:nombre_abonnements:></th>
+	<th><:abo:label_montant:></th>
+</thead>
+<tbody>
+<BOUCLE_types(ABONNEMENTS){par id_abonnement}>
+<tr class="tr_liste">
+	<td>#LIBELLE</td>
+	<BOUCLE_nombre(AUTEURS_ELARGIS_ABONNEMENTS){id_abonnement}{somme montant}{compte montant}{fusion id_abonnement}>
+		<td>#COMPTE{montant}</td>
+		<td>#SOMME{montant}</td>
+	</BOUCLE_nombre>
+		<td>0</td>
+		<td>0</td>
+	<//B_nombre>
+</tr>
+</BOUCLE_types>
+</tbody>
+<tfoot>
+<tr>
+	<th><:abo:total:></th>
+	<BOUCLE_nombre_total(AUTEURS_ELARGIS_ABONNEMENTS){somme montant}{compte montant}{fusion 1=1}>
+		<td>#COMPTE{montant}</td>
+		<td>#SOMME{montant}</td>
+	</BOUCLE_nombre_total>
+		<td>0</td>
+		<td>0</td>
+	<//B_nombre_total>
+</tr>
+</tfoot>
+</table>
+</B_types>
+
+<h2><:abo:numeros_payants:></h2>
+<:abo:nombre_acheteurs_differents:>
+<BOUCLE_acheteurs(AUTEURS_ELARGIS_ARTICLES){fusion 1=1}{statut_paiement=ok}{compte DISTINCT(id_auteur_elargi)}>
+#COMPTE{id_auteur_elargi}
+</BOUCLE_acheteurs>
+
+<B_types_art>
+<table class="liste">
+<thead>
+	<th><:abo:label_nom:></th>
+	<th><:abo:diffusion_payee:></th>
+	<th><:abo:label_montant:></th>
+</thead>
+<tbody>
+<BOUCLE_types_art(AUTEURS_ELARGIS_ARTICLES){!par id_article}{statut_paiement=ok}{fusion id_article}{compte montant}{somme montant}{pagination 20}>
+<tr class="tr_liste">
+	<td><BOUCLE_titre_art(ARTICLES){id_article}>#TITRE</BOUCLE_titre_art></td>
+	<td>#COMPTE{montant}</td>
+	<td>#SOMME{montant}</td>
+</tr>
+</BOUCLE_types_art>
+</tbody>
+<tfoot>
+<tr>
+	<th><:abo:total:></th>
+	<BOUCLE_nombre_art_total(AUTEURS_ELARGIS_ARTICLES){somme montant}{compte montant}{fusion 1=1}>
+		<td>#COMPTE{montant}</td>
+		<td>#SOMME{montant}</td>
+	</BOUCLE_nombre_art_total>
+		<td>0</td>
+		<td>0</td>
+	<//B_nombre_art_total>
+</tr>
+</tfoot>
+</table>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_types_art>
+<!--/#navigation-->
+
