@@ -1,0 +1,60 @@
+<!-- squelette egt v0.3 -->
+<!-- auteur: damazone, sBa - licence GPL -->
+<!-- http://www.spip-contrib.net/EGT-squelette-plugin-pour-SPIP-2 -->
+#CACHE{86400}
+<BOUCLE_courrier_principal(COURRIERS){id_courrier}>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<INCLURE{fond=inc/inc-header}{titreheader=- #TITRE}>
+</head>
+<body>
+
+<div id="conteneur1">  
+
+[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+	<INCLURE{fond=inc/inc-bandeau}>         
+
+[(#REM) <!-- =========================== ZONE CHEMIN DE NAVIGATION ============================= --> ]
+	<div id="haut">
+		<ul>         
+		<li><a href="#URL_SITE_SPIP"><:accueil_site:></a> <img src="#CHEMIN{images/puce.png}" alt=">"/> </li>
+		<li><a href="#URL_PAGE{archive_courriers}"><:egt:archive:> <:egt:lettres_information:></a> <img src="#CHEMIN{images/puce.png}" alt=">"/> </li>
+		<li>#TITRE</li>
+		</ul>
+	</div><!-- fin de haut -->   
+ 
+[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ] 
+	<INCLURE{fond=inc/inc-gauche}{id_courrier}>
+
+[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]	
+    <div id="droite"> 	
+		<INCLURE{fond=inc/inc-aide}>
+	</div><!-- fin du div droite -->
+	
+[(#REM) <!-- =================================== ZONE CORPS  ====================================== --> ]
+    <div id="centre-article">
+     
+		<!-- accessibilite -->
+		<div id="noprint">
+		<a name="contenu"></a>
+		</div>
+		
+		<h1 class="titre-texte">#TITRE</h1>
+		<div id="texte" class="texte">#TEXTE</div>
+       
+    </div><!-- fin du div centre-article -->
+      
+[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}{self=#SELF}> 
+      
+</div><!--fin du div conteneur1 -->
+  
+[(#FORMULAIRE_ADMIN{'spip-admin-float'})]
+
+
+</body>
+
+</BOUCLE_courrier_principal>
+</html>
