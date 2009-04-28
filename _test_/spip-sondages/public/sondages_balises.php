@@ -13,6 +13,9 @@
 	 **/
 
 
+	include_spip('sondages_fonctions');
+	
+
 	function balise_URL_SONDAGE($p) {
 		$_id_sondage = '';
 		if ($p->param && !$p->param[0][0]){
