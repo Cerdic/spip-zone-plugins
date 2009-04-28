@@ -7,8 +7,8 @@
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
 	<description>Gestion de lettres d'information</description>
 	<necessite id="SPIP" version="[2.0.3;]" />
-	<necessite id="facteur" version="[1;]" />
-	<necessite id="surcharges" version="[1.4;]" />
+	<necessite id="facteur" version="[1.0;]" />
+	<necessite id="surcharges" version="[2.0;]" />
 	<install>base/lettres.php</install>
 	<lien>[Site officiel du plugin->http://www.artego.fr/-Lettre-d-information-]</lien>
 	<icon>prive/images/lettre-48.png</icon>
