@@ -13,7 +13,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_titre' => 'R&eacute;sum&eacute;',
 	'champ_type' => 'Type',
 	'champ_version' => 'Version',
-	'champ_assignation' => 'Assign&eacute; &agrave;',
+
+	'assignes_a' => 'Assign&eacute;s &agrave;',
+	'non_assignes' => 'Non assign&eacute;s',
 	
 	'classement_assigne' => 'Tickets par assignation',
 	'classement_asuivre' => 'Vos tickets &agrave; suivre',
