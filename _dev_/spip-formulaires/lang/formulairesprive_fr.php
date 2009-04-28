@@ -107,6 +107,9 @@
 		'logo_formulaire' => "LOGO DU FORMULAIRE",
 		'tous_formulaires_rubrique' => "Tous les formulaires de cette rubrique",
 		'types_fichier_autorises' => "Types de fichier autorisés",
+		'exporter_resultats' => "exporter les résultats",
+		'envoyer_invitation' => "envoyer une invitation",
+		'envoyer_invitation_label' => "Envoyer une invitation",
 
 		'Z' => 'ZZzZZzzz'
 

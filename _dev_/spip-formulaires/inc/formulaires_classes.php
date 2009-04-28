@@ -186,7 +186,7 @@
 			} else {
 				$requete = sql_select('*', 'spip_formulaires', 'id_formulaire='.intval($id_formulaire));
 				$formulaire = sql_fetch($requete);
-				$this->id_formulaire		= $formulaire['id_formulaire'];
+				$this->id_formulaire		= intval($id_formulaire);
 				$this->id_rubrique			= $formulaire['id_rubrique'];
 				$this->titre				= $formulaire['titre'];
 				$this->descriptif			= $formulaire['descriptif'];
@@ -299,6 +299,10 @@
 					sql_updateq('spip_formulaires', array('statut' => $statut, 'maj' => 'NOW()'), 'id_formulaire='.intval($this->id_formulaire));
 					$redirection = generer_url_ecrire('formulaires', 'id_formulaire='.$this->id_formulaire, true);
 					break;
+				case 'export':
+					$this->exporter();
+					$redirection = false;
+					break;
 				case 'copie':
 					$copie = new formulaire(-1);
 					$copie->id_rubrique			= $this->id_rubrique;
@@ -408,7 +412,7 @@
 		 * @return boolean possede_applications
 		 **/
 		function possede_applications() {
-			if (sql_countsel('id_application', 'spip_applications', 'id_formulaire='.intval($this->id_formulaire)) > 0)
+			if (sql_countsel('spip_applications', 'id_formulaire='.intval($this->id_formulaire)) > 0)
 				return true;
 			else
 				return false;
@@ -627,6 +631,52 @@
 		}
 		
 		
+		function exporter() {
+			$resultats = array();
+			$i = 0;
+			$questions = sql_select('Q.*', 'spip_questions AS Q INNER JOIN spip_blocs AS B ON B.id_bloc=Q.id_bloc', 'B.id_formulaire='.intval($this->id_formulaire), '', 'B.ordre, Q.ordre');
+			while ($question = spip_fetch_array($questions))
+				$resultats[$i][] = typo($question['titre']);
+			$i++;
+			$applications = sql_select('*', 'spip_applications', 'id_formulaire='.intval($this->id_formulaire));
+			while ($application = sql_fetch($applications)) {
+				$questions = sql_select('Q.*', 'spip_questions AS Q INNER JOIN spip_blocs AS B ON B.id_bloc=Q.id_bloc', 'B.id_formulaire='.intval($this->id_formulaire), '', 'B.ordre, Q.ordre');
+				while ($question = sql_fetch($questions)) {
+					$reponses = sql_select('*', 'spip_reponses', 'id_question='.intval($question['id_question']).' AND id_application='.intval($application['id_application']));
+					$tableau_reponses = array();
+					$tableau_choix = array();
+					while ($reponse = sql_fetch($reponses)) {
+						$tableau_reponses[] = $reponse['valeur'];
+					}
+					switch ($question['type']) {
+						case 'champ_texte':
+						case 'zone_texte':
+						case 'email_applicant':
+						case 'nom_applicant':
+						case 'fichier':
+							$resultats[$i][] = implode(', ', $tableau_reponses);
+							break;
+						case 'boutons_radio':
+						case 'cases_a_cocher':
+						case 'liste':
+						case 'liste_multiple':
+						case 'abonnements':
+						case 'auteurs':
+							foreach ($tableau_reponses as $id_choix) {
+								$choix = sql_getfetsel('titre', 'spip_choix_question', 'id_choix_question='.intval($id_choix));
+								$tableau_choix[] = typo($choix);
+							}
+							$resultats[$i][] = implode(', ', $tableau_choix);
+							break;
+					}
+				}
+				$i++;
+			}
+			include_spip('surcharges_fonctions');
+			surcharges_exporter_csv('resultats', $resultats);
+		}
+
+
 	}
 
 
@@ -1142,7 +1192,6 @@
 
 
 		function exporter() {
-			include_spip('surcharges_fonctions');
 			$resultats = array();
 			$i = 0;
 			$questions = sql_select('Q.*', 'spip_questions AS Q INNER JOIN spip_blocs AS B ON B.id_bloc=Q.id_bloc', 'B.id_formulaire='.intval($this->formulaire->id_formulaire), '', 'B.ordre, Q.ordre');
@@ -1183,6 +1232,7 @@
 				}
 				$i++;
 			}
+			include_spip('surcharges_fonctions');
 			surcharges_exporter_csv('resultats', $resultats);
 		}
 

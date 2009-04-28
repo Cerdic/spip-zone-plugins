@@ -130,7 +130,7 @@
 		}
 
 	    echo '<li>';
-		echo '<label>'._T('formulairesprive:envoyer_invitation').'</label>';
+		echo '<label>'._T('formulairesprive:envoyer_invitation_label').'</label>';
 		echo '<div class="choix">';
 		echo '<input id="notification" type="checkbox" class="checkbox" value="oui" name="notification" />';
 		echo '<label for="notification">'._T('formulairesprive:oui').'</label>';

@@ -76,6 +76,8 @@
 		if ($formulaire->statut == 'en_ligne') {
 			echo '<li class="publie"><a href="'.generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=hors_ligne', false, true).'">'.http_img_pack('puce-blanche.gif', 'puce-blanche', '')._T('formulairesprive:a_mettre_hors_ligne').'</a></li>';
 			echo '<li class="publie selected">'.http_img_pack('puce-verte.gif', 'puce-verte', '')._T('formulairesprive:a_mettre_en_ligne').'</li>';
+			if ($formulaire->limiter_invitation == 'oui' and $formulaire->possede_applications())
+				echo '<li class="publie"><a href="'.generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=export', false, true).'">'.http_img_pack('puce-verte.gif', 'puce-verte', '')._T('formulairesprive:exporter_resultats').'</a></li>';
 			echo '<li class="poubelle"><a href="'.generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=poubelle', false, true).'">'.http_img_pack('puce-poubelle.gif', 'puce-poubelle', '')._T('formulairesprive:a_supprimer').'</a></li>';
 		}
 		echo '</ul>';

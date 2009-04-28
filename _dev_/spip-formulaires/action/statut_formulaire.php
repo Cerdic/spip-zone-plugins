@@ -32,8 +32,10 @@
 		
 		}
 		
-		header('Location: ' . $redirection);
-		exit();
+		if ($redirection) {
+			header('Location: ' . $redirection);
+			exit();
+		}
 
 	}
 	
