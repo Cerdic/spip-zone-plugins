@@ -120,7 +120,7 @@
 		$onglet_contenu = "<div id='wysiwyg'>$fond</div>";
 
 		if ($sondage->statut != 'termine')
-			$onglet_documents = sondages_documents('sondage', $sondage->id_sondage);
+			$onglet_documents = sondages_documents('sondage', intval($sondage->id_sondage));
 	
 		echo '<div class="fiche_objet">';
 
