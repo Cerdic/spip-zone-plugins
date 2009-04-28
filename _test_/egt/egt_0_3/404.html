@@ -1,0 +1,43 @@
+<!-- squelette egt v0.3 -->
+<!-- auteurs: damazone, sBa - licence GPL -->
+<!-- http://www.spip-contrib.net/EGT-squelette-plugin-pour-SPIP-2 -->
+#HTTP_HEADER{"HTTP/1.0 404 Not Found"}
+#HTTP_HEADER{"Cache-Control: no-store, no-cache, must-revalidate"}
+#HTTP_HEADER{Pragma: no-cache}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<INCLURE{fond=inc/inc-header}>
+</head>
+
+<body>
+
+<div id="conteneur1">  
+  
+[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+	 <INCLURE{fond=inc/inc-bandeau}>  
+
+[(#REM) <!-- =========================== ZONE CHEMIN DE NAVIGATION ============================= --> ]
+	<INCLURE{fond=inc/inc-chemin}> 
+	  
+[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+	<INCLURE{fond=inc/inc-gauche}>
+
+[(#REM) <!-- =================================== ZONE CORPS  ====================================== --> ]
+    <div id="centre">	
+		<h1 class="titre-texte"><:pass_erreur:> 404</h1>
+		[<div class="chapo">(#ENV*{erreur}|propre)</div>]
+		<a href="#URL_SITE_SPIP"><:accueil_site:></a>
+	</div> <!-- fin div centre -->
+	
+[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}{self=#SELF}>
+	
+</div><!-- fin du div conteneur1-->
+  
+[(#FORMULAIRE_ADMIN{'spip-admin-float'})]
+
+</body>
+</html>
+
+
