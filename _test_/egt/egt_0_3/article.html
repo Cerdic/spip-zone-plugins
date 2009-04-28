@@ -1,0 +1,106 @@
+<!-- squelette egt v0.3 -->
+<!-- auteurs: damazone, sBa - licence GPL -->
+<!-- http://www.spip-contrib.net/EGT-squelette-plugin-pour-SPIP-2 -->
+#CACHE{86400}
+<BOUCLE_article_principal (ARTICLES) {id_article}>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<INCLURE{fond=inc/inc-header}{id_article}>
+</head>
+<body>
+
+<div id="conteneur1">  
+
+[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+	<INCLURE{fond=inc/inc-bandeau}>         
+
+[(#REM) <!-- =========================== ZONE CHEMIN DE NAVIGATION ============================= --> ]
+		<INCLURE{fond=inc/inc-chemin}{id_article}{lang}>
+ 
+[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ] 
+	<INCLURE{fond=inc/inc-gauche}{id_article}>
+
+[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]	
+    <div id="droite"> 	
+		<INCLURE{fond=inc/inc-aide}>
+	</div><!-- fin du div droite -->
+	
+[(#REM) <!-- =================================== ZONE CORPS  ====================================== --> ]
+    <div id="centre-article">
+     
+		<!-- accessibilite -->
+		<div id="noprint">
+		<a name="contenu"></a>
+		</div>
+		
+		[(#LOGO_ARTICLE|right||reduire_image{130,0})]
+		[<div id="sur-titre" class="#EDIT{surtitre} surtitre">(#SURTITRE)</div>]
+		<h1 class="#EDIT{titre} titre-texte">[(#TITRE|supprimer_numero)]</h1>
+		[<div id="sous-titre" class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</div>]
+		
+		<div id="outils_article">
+			<!-- Texte agrandi ou pleine page -->
+			[(#REM) <!-- 
+			<span class="boutonstexte"></span>
+			<img src="#CHEMIN{habillage/fontsizeup.png}" alt="fontsizeup" class="textsizeup" />
+			<img src="#CHEMIN{habillage/fontsizedown.png}" alt="fontsizedown" class="textsizedown" />
+			--> ]
+			<!-- Article pdf -->
+		
+		</div> <!-- Fin div outils_article -->
+		
+		<div id="publie">
+			<!-- affichage date modif si differente de la date de publication -->
+			[(#DATE|affdate)][(#DATE_MODIF|affdate|!=={[(#DATE|affdate)]}|?{[ - <:dernier_ajout:> (#DATE_MODIF|affdate)] ,''})]
+			<br />
+			<B_auteurs_recents><:par_auteur:> <BOUCLE_auteurs_recents(AUTEURS) {id_article} {", "}{0,1}>[(#LESAUTEURS)]</BOUCLE_auteurs_recents>
+			<br />
+			[(#REM) Inclure le modele des liens de traductions ]
+            #MODELE{article_traductions}
+		</div><!-- fin div publie -->
+
+		[<div id="chapeau" class="#EDIT{chapo} chapeau">(#CHAPO)</div>]
+		<br/>
+		[<div id="texte" class="#EDIT{texte} texte">(#TEXTE|justifier||reduire_image{570,0})</div>]<br />
+		[<div id="ps">(#PS)</div>]
+		[<div id="notes">(#NOTES)</div>]
+		<img src="#CHEMIN{images/calle.png}" width='500' alt='calle'/>
+		
+		[(#REM) Gestion du portfolio et des documents
+		Le critere {env} permet de passer d'autres arguments de la page
+		par exemple l'id_document choisi pour un affichage complet
+		]
+		[(#INCLURE{fond=inc/inc-documents}{id_article}{env})]
+		
+		
+		<!-- Signatures petition -->
+		[(#REM) Petition :
+		La petition ayant une PAGINATION il faut absolument lui passer SELF en argument. ]
+		[ #REM Conserver cet invalideur : (#PETITION|?{'',''}) ]
+		<INCLURE{fond=inc/inc-petition}{id_article}{self=#SELF}>
+
+		<!-- Forums -->
+		<br />
+		<img src="#CHEMIN{images/calle.png}" alt='calle'/>
+		[<div class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></div>]
+		<br /><br />
+		<INCLURE{fond=inc/inc-forum}{id_article}>
+			
+		#FORMULAIRE_EDITION_EVENEMENT
+       
+    </div><!-- fin du div centre-article -->
+      
+[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}{self=#SELF}> 
+      
+</div><!--fin du div conteneur1 -->
+  
+[(#FORMULAIRE_ADMIN{'spip-admin-float'})]
+
+
+</body>
+
+</BOUCLE_article_principal>
+</html>
