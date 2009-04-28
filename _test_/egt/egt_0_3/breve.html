@@ -1,0 +1,85 @@
+<!-- squelette egt v0.3 -->
+<!-- auteurs: damazone, sBa - licence GPL -->
+<!-- http://www.spip-contrib.net/EGT-squelette-plugin-pour-SPIP-2 -->
+#CACHE{86400}
+<BOUCLE_breve_principal(BREVES){id_breve}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<INCLURE{fond=inc/inc-header}{id_breve}>
+</head>
+<body>
+  
+	<div id="conteneur1">  
+
+[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+		<INCLURE{fond=inc/inc-bandeau}>         
+
+[(#REM) <!-- =========================== ZONE CHEMIN DE NAVIGATION ============================= --> ]
+		<INCLURE{fond=inc/inc-chemin}{id_breve}>
+ 
+[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ] 
+		<INCLURE{fond=inc/inc-gauche}{id_rubrique}>
+
+[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]	
+	    <div id="droite">
+			<!-- a retenir -->
+			<INCLURE{fond=inc/inc-aretenir}>           
+	    </div><!-- fin du div droite--> 
+
+[(#REM) <!-- =================================== ZONE CORPS  ====================================== --> ]
+		<div id="centre-rubrique">  
+			<!-- accessibilite -->
+			<a name="contenu"></a>
+			
+			<BOUCLE_secteurs(BREVES) {id_breve} >
+				<h2>[(#TITRE|supprimer_numero)]</h2> 
+				[<div id="logorub">(#LOGO_BREVE|right||reduire_image{130,0})</div>]       
+				[<div id="textebreve">(#TEXTE)</div>]
+
+				<!-- Forums -->
+				[<div class="forum-repondre"><b><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_breve:></a></b></div>]
+				<br/><br/>
+				<INCLURE{fond=inc/inc-forum}{id_breve}>
+
+				<!-- Breves -->
+				<B_breves>
+					<!-- Autres breves publiees dans cette rubrique -->
+					<:autres_breves:> <:meme_rubrique:>
+					<ul>
+						<BOUCLE_breves(BREVES) {id_secteur} {par date} {inverse} {0,15} {exclus}>
+						<li>
+						[<i>(#DATE|affdate_court)</i>]:
+						<a href="#URL_BREVE">#TITRE</a>
+						</li>
+						</BOUCLE_breves>
+					</ul>
+				</B_breves>
+
+				<!-- Sur le Web -->
+				<B_sites>
+					<h3><:sur_web:></h3>
+					<!-- Sites references dans cette rubrique -->
+					<:ecrire:titre_sites_references_rubrique:>
+					<ul>
+						<BOUCLE_sites(SITES) {id_secteur} {par nom_site}>
+						<li>
+						<a href="#URL_SITE">#NOM_SITE</a>
+						</li>
+						</BOUCLE_sites>
+					</ul>
+				</B_sites>
+			</BOUCLE_secteurs> 
+      
+		</div><!-- fin du div centre-rubrique -->  
+      
+[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+		<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}{self=#SELF}>
+		
+	</div> <!-- fin div conteneur1 -->
+
+[(#FORMULAIRE_ADMIN{'spip-admin-float'})]
+	
+</body>
+</BOUCLE_breve_principal>
+</html>
