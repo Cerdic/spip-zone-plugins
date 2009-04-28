@@ -1,0 +1,122 @@
+<!-- squelette egt v0.3 -->
+<!-- auteurs: damazone, sBa - licence GPL -->
+<!-- http://www.spip-contrib.net/EGT-squelette-plugin-pour-SPIP-2 -->
+#CACHE{86400}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<INCLURE{fond=inc/inc-header}>
+</head>
+<body>
+  
+  <div id="conteneur1">  
+  
+[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+ <INCLURE{fond=inc/inc-bandeau}>         
+
+[(#REM) <!-- =========================== ZONE CHEMIN DE NAVIGATION ============================= --> ]
+	<INCLURE{fond=inc/inc-chemin}{id_rubrique}> 
+      
+[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+	<INCLURE{fond=inc/inc-gauche}>
+
+[(#REM) <!-- =================================== ZONE CORPS  ====================================== --> ]
+	<div id="centre-article">
+      
+		<!-- accessibilite -->
+		<a name="contenu"></a>
+      
+		<!-- Contenu : poster un message dans le forum -->
+		<div id="principal" class="contenu">
+
+		<BOUCLE_article(ARTICLES){id_article}>
+			<:en_reponse:>
+			[(#LOGO_ARTICLE|right||reduire_image{130,0})]
+			[<div class="surtitre">(#SURTITRE)</div>]
+			<h2 class="titre-extrait"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h2>
+			[<div class="surtitre">(#SOUSTITRE)</div>]
+			<div class="detail">
+			<:ecrire:info_statut_site_2:> [(#DATE|nom_jour)] [(#DATE|affdate)]
+			<B_auteurs_un><:par_auteur:> <BOUCLE_auteurs_un(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs_un>
+			</div>
+			<div class="texte">(le texte de l'article se trouve sous le formulaire)</div>
+			<br />
+		</BOUCLE_article>
+
+		<BOUCLE_breve(BREVES) {id_breve}>
+			<:en_reponse:>
+			[(#LOGO_BREVE|right)]
+			<h2 class="titre-extrait"><a href="#URL_BREVE">#TITRE</a></h2>
+			<div class="detail">
+			[(#DATE|nom_jour)] [(#DATE|affdate)]
+			</div>
+			<div class="texte">
+				<div class="extrait">#TEXTE</div>
+		    </div>
+			<br />
+		</BOUCLE_breve>
+
+		<BOUCLE_forum_parent(FORUMS) {id_forum}>
+			<:en_reponse:>
+			<h2 class="titre-extrait"><a href="#URL_FORUM">#TITRE</a></h2>
+			<div class="detail">
+			[(#DATE|nom_jour)] [(#DATE|affdate)]
+			</div>
+			[<div class="texte"><div class="extrait">(#TEXTE)</div></div>]
+			<br />
+		</BOUCLE_forum_parent>
+		#FORMULAIRE_FORUM
+		</div>
+		<!-- rappel article --> 
+		<BOUCLE_article_txt(ARTICLES){id_article}>    
+		<br />ci-dessous le texte de l'article
+		      
+		[(#LOGO_ARTICLE|right||reduire_image{130,0})]
+		[<div id="sur-titre">(#SURTITRE)</div>]
+		<div id="titre-texte">[(#TITRE|supprimer_numero)]</div>
+		[<div id="sous-titre">(#SOUSTITRE)</div>]
+		<div id="publie"><:ecrire:info_statut_site_2:> [(#DATE|affdate)]<BOUCLE_datemodif(ARTICLES){id_article}{age>1}>[&nbsp;&nbsp;(<:dernier_ajout:> (#DATE_MODIF|affdate))]</BOUCLE_datemodif></div>
+
+		[<div id="chapeau">(#CHAPO)</div>]
+		<br/>
+
+		[<div id="texte">(#TEXTE|justifier|reduire_image{570,x})</div>]<br />
+		[<div id="ps">(#PS)</div>]
+		[<div id="notes">(#NOTES)</div>]
+
+		<div id="porfolio-article">
+
+		<BOUCLE_portfolio(DOCUMENTS){id_article}{mode=document}{doublons}>
+		<div class="porfolio">
+		[(#LOGO_DOCUMENT|#URL_DOCUMENT)]<br />
+		[(#TITRE)]<br /> 
+		[<div class="porfolio-descriptif">(#DESCRIPTIF)</div>]   
+		<div class="porfolio-type">#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]</div> 
+		   </div> 
+		</BOUCLE_portfolio>
+		<img src="#CHEMIN{images/calle.png}" alt='calle'/>
+
+		<br />
+		</div>
+		<!-- fin rappel article -->
+		</BOUCLE_article_txt>
+
+		<img src="#CHEMIN{images/calle.png}" alt='calle'/>
+		<BOUCLE_article_signature(ARTICLES){id_article}>
+		 [<div class='reponse_formulaire'>
+			<a name='sp#ID_ARTICLE' id='sp#ID_ARTICLE'></a>
+		    (#FORMULAIRE_SIGNATURE)
+		  </div>]
+		</BOUCLE_article_signature>
+
+	</div><!-- fin du div centre-article --> 
+
+[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}{self=#SELF}>
+
+  </div><!-- fin du div conteneur1-->
+  
+[(#FORMULAIRE_ADMIN{'spip-admin-float'})]
+
+</body>
+</html>
