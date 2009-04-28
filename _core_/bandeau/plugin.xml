@@ -230,4 +230,12 @@
 		<args>new=oui&amp;id_rubrique=@id_rubrique@</args>
 	</bouton>
 
+
+	<onglet id='infos_perso' parent="infos_perso">
+		<titre>info_informations_personnelles</titre>
+	</onglet>
+	<onglet id='config_preferences' parent="infos_perso">
+		<titre>bando:icone_preferences</titre>
+	</onglet>
+
 </plugin>

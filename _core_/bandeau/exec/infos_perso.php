@@ -12,22 +12,32 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function exec_config_preferences(){
-	if (!autoriser('configurer','preferences')) {
+function exec_infos_perso_dist(){
+	$auteur = sql_fetsel("*", "spip_auteurs", "id_auteur=".intval($GLOBALS['visiteur_session']['id_auteur']));
+	if (!$auteur) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}
+
+	pipeline('exec_init',
+		array('args' => array(
+			'exec'=> 'auteur_infos',
+			'id_auteur'=>$auteur['id_auteur']),
+			'data'=>''
+		)
+	);
+
 	$commencer_page = charger_fonction('commencer_page','inc');
-	echo $commencer_page(_T('bando:titre_configurer_preferences'));
+	echo $commencer_page(_T('info_informations_personnelles'));
 
-	echo barre_onglets('infos_perso', 'config_preferences');
+	echo barre_onglets('infos_perso', 'infos_perso');
+	echo debut_gauche('', true);
 
-	echo debut_gauche("configurer_preferences",true);
+	charger_fonction('auteur_infos','exec');
 
-	echo debut_droite("configurer_preferences",true);
-
-	echo recuperer_fond('prive/configurer/preferences',$_GET);
+	auteur_infos_ok($auteur, $auteur['id_auteur'], _request('echec'), '', self());
+	echo auteurs_interventions($auteur);
 	echo fin_gauche(),fin_page();
 }
 

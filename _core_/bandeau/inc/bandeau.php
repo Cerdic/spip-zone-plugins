@@ -206,7 +206,7 @@ function bando_identite(){
 	$res .= "<p class='session'>"
 	  . "<a title='Mes informations personnelles' href='".
 	  //generer_url_ecrire("auteur_infos","id_auteur=".$GLOBALS['visiteur_session']['id_auteur'])
-	  generer_url_ecrire("config_preferences")
+	  generer_url_ecrire("infos_perso")
 	  ."'>"
 	  . "<strong class='nom'>$moi</strong>"
 	  . "<img alt='"._T('icone_informations_personnelles')."' src='$img_info'/></a>"

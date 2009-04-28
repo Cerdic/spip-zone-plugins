@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_configuration' => 'Configuration',
 	'icone_administration' => 'Administration',
 	'icone_suivi_publication' => 'Suivi de la publication',
+	'icone_preferences' => 'Pr&eacute;f&eacute;rences',
 
 	// L
 	'label_slogan_site' => 'Slogan du site',
