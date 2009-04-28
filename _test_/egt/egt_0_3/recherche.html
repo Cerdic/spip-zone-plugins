@@ -1,0 +1,128 @@
+<!-- squelette egt v0.3 -->
+<!-- auteurs: damazone, sBa - licence GPL -->
+<!-- http://www.spip-contrib.net/EGT-squelette-plugin-pour-SPIP-2 -->
+#CACHE{86400}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+  <head>
+	<INCLURE{fond=inc/inc-header} {titreheader=- <:resultats_recherche:>}>
+  </head>
+
+<body>
+
+  <div id="conteneur1">  
+  
+[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+ <INCLURE{fond=inc/inc-bandeau}>         
+ 
+[(#REM) <!-- =========================== ZONE CHEMIN DE NAVIGATION ============================= --> ]
+	<INCLURE{fond=inc/inc-chemin}>{#TITRE=<:spip:info_rechercher:>}
+
+[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+	<INCLURE{fond=inc/inc-gauche}>
+
+[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]	
+    <div id="droite">
+ 
+		<!-- a retenir -->
+		<INCLURE{fond=inc/inc-aretenir}>         
+		     
+
+		<!-- sites syndiques et logo site -->
+		<INCLURE{fond=inc/inc-sites-syndiques}>                
+                 
+    </div><!-- fin du div droite--> 
+
+[(#REM) <!-- =================================== ZONE CORPS  ====================================== --> ]
+	<div id="centre-rubrique">   
+
+		<!-- accessibilite -->
+		<a name="contenu"></a>
+   
+		<!-- resultats recherche -->
+		<h3><:resultats_recherche:> &laquo;&nbsp;#RECHERCHE&nbsp;&raquo;</h3>
+
+		<B_rubriques>
+		<:rubriques:>
+		<ul>
+		<!-- Rubriques trouvees -->
+
+		<BOUCLE_rubriques(RUBRIQUES) {recherche} {par points} {inverse} {0,8}>
+		<li><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a></li>
+		</BOUCLE_rubriques>
+		</ul>
+
+		</B_rubriques>
+
+		<//B_rubriques>
+
+		<!-- Breves trouvees -->
+
+			<B_breves>
+
+				<:breves:>
+
+				<ul>
+			<BOUCLE_breves(BREVES) {recherche} {par points} {inverse} {0,8}>
+				<li>
+				[(#DATE|affdate_court)]:
+				<a href="#URL_BREVE">#TITRE</a>
+				</li>
+			</BOUCLE_breves>
+				</ul>
+
+			</B_breves>
+
+			<!-- Sites Web trouves -->
+
+			<B_sites>
+				<:sites_web:>
+
+				<ul>
+			<BOUCLE_sites(SITES) {recherche} {par points} {inverse} {0,8}>
+				<li>
+				<a href="#URL_SITE" title="[(#DESCRIPTIF|textebrut|entites_html)]">#NOM_SITE</a>
+				</li>
+			</BOUCLE_sites>
+				</ul>
+			</B_sites>
+
+			<!-- Messages trouves -->
+			<B_messages>
+
+				<:messages_forum:>
+			
+				<ul>
+			<BOUCLE_messages(FORUMS) {recherche} {par points} {inverse} {0,8}>
+				<li>
+				<a href="#URL_FORUM">#TITRE</a>
+				</li>
+			</BOUCLE_messages>
+				</ul>
+
+			</B_messages>
+
+			<!-- articles trouves -->
+		<B_articles>
+		<:articles:>
+		<ul>
+		<BOUCLE_articles(ARTICLES) {recherche} {par points} {inverse} {0,10}>
+			<li><h3><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a></h3><div class="publierech"><:spip:info_mise_en_ligne:> [(#DATE|nom_jour)] [(#DATE|affdate)]
+			<B_auteurs_articles><:par_auteur:> <BOUCLE_auteurs_articles(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs_articles></div></li>
+		</BOUCLE_articles>
+		</ul>
+		</B_articles>   
+
+		<//B_articles>      
+   
+    </div><!-- fin du div centre-rubrique -->  
+        
+[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}{self=#SELF}>
+     
+</div> <!-- fin du div conteneur1-->
+
+[(#FORMULAIRE_ADMIN{'spip-admin-float'})]
+
+</body>
+</html>
