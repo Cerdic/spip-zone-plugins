@@ -7,7 +7,7 @@
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
 	<description>Gestion de sondages</description>
 	<necessite id="SPIP" version="[2.0.3;]" />
-	<necessite id="surcharges" version="[1.4;]" />
+	<necessite id="surcharges" version="[2.0;]" />
 	<install>base/sondages.php</install>
 	<lien>[Site officiel du plugin->http://www.artego.fr/-Sondages-]</lien>
 	<icon>prive/images/sondage-24.png</icon>
