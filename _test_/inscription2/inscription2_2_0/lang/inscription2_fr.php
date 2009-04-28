@@ -122,6 +122,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_pro' => 'Informations professionnelles',
 	'infos_adherent' => 'Informations suppl&eacute;mentaires',
 	'infos_personnelles' => 'Informations personnelles',
+	'inscriptions' => 'Inscriptions',
 	'inserez_infos' => 'Veuillez saisir les informations demand&eacute;es',
 
 	// J
