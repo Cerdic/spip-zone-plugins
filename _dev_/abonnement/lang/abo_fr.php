@@ -14,6 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"action_ajouter" => "Ajouter",
 	"action_creer_nouvel_abonnement" => "Cr&eacute;er un nouvel abonnement",
 
+	"mabonner" => "M'abonner !",
+	
 	// formulaire
 	"enregistrement_effectue" => "Enregistrement effectu&eacute;",
 	"erreurs_formulaire" => "Des erreurs sont pr&eacute;sentes dans votre saisie.",
@@ -63,11 +65,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		d&egrave;s la validation du formulaire d'inscription ?",
 
 	// stats
-	'nombre_abonnements' => "Nombre d'abonnements",
+	'nombre_abonnements' => "Nb.",
+	"stats_montant" => "&yen;&euro;$",
 	'total' => "Total",
 	"numeros_payants" => "Num&eacute;ros payants",
 	"nombre_acheteurs_differents" => "Nombre d'acheteurs diff&eacute;rents : ",
-	"diffusion_payee" => "Diffusion pay&eacute;e",
+	"diffusion_payee" => "Nb.",
 	"nombre_abonnes_a_jour" => "Nombre d'abonn&eacute;s &agrave; jour :",
 	"nombre_abonnes_dechus" => "Nombre d'abonn&eacute;s &eacute;chus :",
 	"nombre_abonnes_relances" => "Nombre d'abonn&eacute;s relanc&eacute;s :",

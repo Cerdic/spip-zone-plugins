@@ -11,7 +11,7 @@
 <thead>
 	<th><:abo:label_libelle:></th>
 	<th><:abo:nombre_abonnements:></th>
-	<th><:abo:label_montant:></th>
+	<th><:abo:stats_montant:></th>
 </thead>
 <tbody>
 <BOUCLE_types(ABONNEMENTS){par id_abonnement}>
@@ -53,7 +53,7 @@
 <thead>
 	<th><:abo:label_nom:></th>
 	<th><:abo:diffusion_payee:></th>
-	<th><:abo:label_montant:></th>
+	<th><:abo:stats_montant:></th>
 </thead>
 <tbody>
 <BOUCLE_types_art(AUTEURS_ELARGIS_ARTICLES){!par id_article}{statut_paiement=ok}{fusion id_article}{compte montant}{somme montant}{pagination 20}>
@@ -131,7 +131,7 @@
 <tr>
 	<th colspan="6">[(#DATE|annee) ][(#DATE|nom_mois)]</th>
 	<th colspan="2"><:abo:nouveaux_abonnes_depuis_7_jours:>
-		<BOUCLE_abonnes_nouveaux_7_jours(AUTEURS_ELARGIS_ABONNEMENTS){date>#GET{seven}}{validite<(#ENV{date})}{fusion 1=1}{compte DISTINCT(id_auteur)}>
+		<BOUCLE_abonnes_nouveaux_7_jours(AUTEURS_ELARGIS_ABONNEMENTS){date>#GET{seven}}{validite>(#ENV{date})}{fusion 1=1}{compte DISTINCT(id_auteur)}>
 			<strong>#COMPTE{id_auteur}</strong>
 		</BOUCLE_abonnes_nouveaux_7_jours>
 			<strong>0</strong>
@@ -143,7 +143,7 @@
 <BOUCLE_ce_mois_ci(AUTEURS_ELARGIS_ABONNEMENTS) {agenda date, mois, (#ENV{annee}|sinon{#DATE|annee}), (#ENV{mois}|sinon{#DATE|mois})} {fusion id_abonnement}{par id_abonnement}{!par date}>
 <BOUCLE_labonnement(ABONNEMENTS){id_abonnement}>
 <tr class="tr_liste">
-	<th colspan="7">#LIBELLE</th><th>#ID_ABONNEMENT</th>
+	<th colspan="7">#LIBELLE</th><th>##ID_ABONNEMENT</th>
 </tr>
 <tr>
 	<th><:abo:label_prenom:></th>
