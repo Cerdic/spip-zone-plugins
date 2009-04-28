@@ -10,11 +10,16 @@
 **/
 
 function abonnement_declarer_tables_interfaces($interfaces){
+	// alias
 	$interfaces['table_des_tables']['abonnements'] = 'abonnements';
 	$interfaces['table_des_tables']['auteurs_elargis_abonnements'] = 'auteurs_elargis_abonnements';
 	$interfaces['table_des_tables']['auteurs_elargis_articles'] = 'auteurs_elargis_articles';
+	// champs date
+	$interfaces['table_date']['auteurs_elargis_abonnements']='date';
+	$interfaces['table_date']['auteurs_elargis_articles']='date';
+	// jointures
+	$interfaces['exception_des_jointures']['id_auteur_elargi']=array('spip_auteurs_elargis','id_auteur');
 
-		
 	return $interfaces;
 }
 

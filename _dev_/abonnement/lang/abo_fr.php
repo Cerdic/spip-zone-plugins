@@ -35,12 +35,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"fieldset_relance_avant_1" => "Email de relance avant &eacute;ch&eacute;ance 1",
 	"fieldset_relance_avant_2" => "Email de relance avant &eacute;ch&eacute;ance 2",
 	"fieldset_relance_apres" => "Email de relance apr&egrave;s &eacute;ch&eacute;ance",
+
 	
 	"label_action" => "Action",
 	"label_libelle" => "Libell&eacute;",
 	"label_duree" => "Dur&eacute;e",
 	"label_periode" => "P&eacute;riode",
 	"label_nom" => "Nom",
+	"label_prenom" => "Prenom",
+	"label_ville" => "Ville",
+	"label_adresse" => "Adresse",
+	"label_cp" => "Code postal",
+	"label_date_creation" => "Date de cr&eacute;ation",
+	"label_date_expiration" => "Date d'expiration",
+	"label_pays" => "Pays",
 	"label_email" => "Email",
 	"label_sujet" => "Sujet",
 	"label_texte" => "Texte",
@@ -60,5 +68,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"numeros_payants" => "Num&eacute;ros payants",
 	"nombre_acheteurs_differents" => "Nombre d'acheteurs diff&eacute;rents : ",
 	"diffusion_payee" => "Diffusion pay&eacute;e",
+	"nombre_abonnes_a_jour" => "Nombre d'abonn&eacute;s &agrave; jour :",
+	"nombre_abonnes_dechus" => "Nombre d'abonn&eacute;s &eacute;chus :",
+	"nombre_abonnes_relances" => "Nombre d'abonn&eacute;s relanc&eacute;s :",
+	"nombre_abonnes_inscrits" => "Nombre d'abonn&eacute;s inscrits :",
+	"nouveaux_abonnes_depuis_7_jours" => "Nouveaux abonn&eacute;s depuis 7 jours :",
 );
 ?>
