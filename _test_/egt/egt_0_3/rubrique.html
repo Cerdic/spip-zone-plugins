@@ -1,0 +1,120 @@
+<!-- squelette egt v0.3 -->
+<!-- auteurs: damazone, sBa - licence GPL -->
+<!-- http://www.spip-contrib.net/EGT-squelette-plugin-pour-SPIP-2 -->
+#CACHE{86400}
+<BOUCLE_rubrique_principal (RUBRIQUES) {id_rubrique}> 
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<INCLURE{fond=inc/inc-header}{id_rubrique}> 
+</head>
+
+<body>
+
+<div id="conteneur1">  
+      
+[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+	<INCLURE{fond=inc/inc-bandeau}>         
+
+[(#REM) <!-- =========================== ZONE CHEMIN DE NAVIGATION ============================= --> ]
+	<INCLURE{fond=inc/inc-chemin}{id_rubrique}{lang}>
+
+[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+	<INCLURE{fond=inc/inc-gauche}{id_rubrique}{lang}>
+
+[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]		
+    <div id="droite">
+		<!-- a retenir -->
+		<INCLURE{fond=inc/inc-aretenir}>          
+    </div><!-- fin du div droite-->
+
+[(#REM) <!-- =================================== ZONE CORPS  ====================================== --> ]
+	<div id="centre-rubrique">  
+		<!-- accessibilite -->
+		<div id="noprint">
+			<a name="contenu"></a>
+		</div> 
+    
+		<BOUCLE_secteurs(RUBRIQUES) {id_rubrique} >
+			<h2 class="#EDIT{titre} titrerub">[(#TITRE|supprimer_numero)]</h2>
+			[<div id="logorub">(#LOGO_RUBRIQUE|right||reduire_image{130,0})</div>]
+			[<div id="texterub" class="#EDIT{texte} texterub">(#TEXTE)</div>]
+			<h3 class="invisible"><:articles_rubrique:></h3>
+			<!-- Articles et sous-rubriques -->
+			<div class="engras"><:ecrire:entree_interieur_rubrique:></div>
+			<B_articles_racine>
+				<ul>
+				<BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par date}{inverse}>
+					<li><h4 class="tit-art-rub"><a href="#URL_ARTICLE" title="<:spip:info_mise_en_ligne:> [(#DATE|affdate)][(#DATE_MODIF|affdate|!=={[(#DATE|affdate)]}|?{[, <:dernier_ajout:> (#DATE_MODIF|affdate)] ,''})]">[(#TITRE|supprimer_numero)]</a></h4></li>
+				</BOUCLE_articles_racine>
+				</ul>
+			</B_articles_racine>
+			<img src="#CHEMIN{images/calle.png}" alt='calle'/>
+			<//B_articles_racine>
+			<h2 class="invisible"><:sous_rubriques:></h2>
+			
+			<B_rubriques>
+				<ul>
+
+				<BOUCLE_rubriques(RUBRIQUES) {id_parent} >
+				<li class="centrerubli">
+				<h3 ><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></h3>
+				<B_articles>
+				<ul>
+				<BOUCLE_articles(ARTICLES) {id_rubrique} {par date}{inverse}>
+				<li><h4><a href="#URL_ARTICLE" title="<:spip:info_mise_en_ligne:> [(#DATE|affdate)][(#DATE_MODIF|affdate|!=={[(#DATE|affdate)]}|?{[, <:dernier_ajout:> (#DATE_MODIF|affdate)] ,''})]">[(#TITRE|supprimer_numero)]</a></h4></li>
+				</BOUCLE_articles>
+				</ul>
+				</B_articles>
+				<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+				</li>
+				</BOUCLE_rubriques>
+				</ul>
+			</B_rubriques>
+
+			<!-- breves -->
+			<B_breves>
+				<div class="engras"><:breves:></div>
+				<ul>
+				<BOUCLE_breves(BREVES) {id_secteur} {par date} {inverse} {0,15}>
+				<li>
+				<a href="#URL_BREVE">#TITRE</a>
+				<div class="datepub">[(#DATE|affdate)]</div>
+				</li>
+				</BOUCLE_breves>
+				</ul>
+			</B_breves>
+
+			<!-- ne pas afficher le formulaire de site si rubrique liee au mot cle ne pas afficher formulaire site -->
+			<B_afficher_annuaire_site>
+				<BOUCLE_afficher_annuaire_site (RUBRIQUES) {titre_mot=ne pas afficher formulaire site}>
+				</BOUCLE_afficher_annuaire_site>
+			</B_afficher_annuaire_site>	
+			#FORMULAIRE_SITE
+			<//B_afficher_annuaire_site>
+
+			<!-- sur le Web -->
+			<B_sites>
+			<div class="engras"><:sur_web:><br /></div>
+			<ul>
+			<BOUCLE_sites(SITES) {id_secteur} {par nom_site}>
+			<li>[(#LOGO_SITE|right||reduire_image{130})]<div class="engras"><a href="#URL_SITE">#NOM_SITE</a></div>
+			[(#DESCRIPTIF)]<br /><br />
+			</li>
+			</BOUCLE_sites>
+			</ul>
+			</B_sites>
+			
+		</BOUCLE_secteurs>
+	
+    </div><!-- fin du div centre-rubrique -->  
+      
+[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}{self=#SELF}>
+
+</div><!-- fin du div conteneur1-->
+</body>
+
+</BOUCLE_rubrique_principal>
+</html>
