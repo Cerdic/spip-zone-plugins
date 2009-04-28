@@ -1,0 +1,109 @@
+<!-- squelette egt v0.3 - auteur: sBa - licence GPL -->
+<!-- entièrement refondu par damazone -->
+<!-- http://egt.bardourel.com -->
+#CACHE{86400}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+  <head>
+	<INCLURE{fond=inc/inc-header}>
+	<meta name="robots" content="none" />
+  </head>
+  <body>
+
+  <div id="conteneur1">  
+    
+[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+ <INCLURE{fond=inc/inc-bandeau}>         
+
+[(#REM) <!-- =========================== ZONE CHEMIN DE NAVIGATION ============================= --> ]
+    <div id="haut">
+		<ul>         
+		<li><a href="#URL_SITE_SPIP"><:accueil_site:></a> <img src="#CHEMIN{images/puce.png}" alt=">"/>&nbsp;<:plan_site:></li>
+		</ul>
+	</div><!-- fin du div haut --> 
+  
+[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+	<INCLURE{fond=inc/inc-gauche}>
+
+[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]	
+    <div id="droite"> 
+		<!-- a retenir -->
+		<INCLURE{fond=inc/inc-aretenir}>         
+    </div><!-- fin du div droite-->
+	  
+[(#REM) <!-- =================================== ZONE CORPS  ====================================== --> ]
+  		<div id="centre-plan">
+<!-- accessibilite -->
+<a name="contenu"></a>
+			<h1 class="invisible"><:plan_site:></h1>
+
+			<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre} {lang}>
+				<h2><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></h2>
+				[(#REM) Articles et sous-rubriques ]
+				<div class="contre-encart">
+					<B_articles_racine>
+					<ul>
+						<BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre}>
+						<li><a href="#URL_ARTICLE" title="<:spip:info_mise_en_ligne:> : [(#DATE|affdate_court)]">[(#TITRE|supprimer_numero)]</a></li>
+						</BOUCLE_articles_racine>
+					</ul>
+					</B_articles_racine>
+					<B_rubriques>
+					<ul>
+						<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
+						<li><h3><a href="#URL_RUBRIQUE">#TITRE</a></h3>
+							<B_articles>
+							<ul>
+								<BOUCLE_articles(ARTICLES) {id_rubrique} {par titre}>
+								<li><a href="#URL_ARTICLE" title="<:spip:info_mise_en_ligne:> : [(#DATE|affdate_court)]">[(#TITRE|supprimer_numero)]</a></li>
+								</BOUCLE_articles>
+							</ul>
+							</B_articles>
+							<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+						</li>
+						</BOUCLE_rubriques>
+					</ul>
+					</B_rubriques>
+
+				</div><!-- fin contre-encart -->
+
+				<div class="encart">
+				
+				[(#REM) Breves ]
+				<B_breves>
+				<div class="<:breves:>">
+					<h3 class="menu-titre"><:breves:></h3>
+					<ul>
+						<BOUCLE_breves(BREVES) {id_secteur} {par date}{inverse}>
+						<li><a href="#URL_BREVE">#TITRE</a></li>
+						</BOUCLE_breves>
+					</ul>
+				</div>				
+				</B_breves>
+				
+				
+        [(#REM) Sur le Web ]
+				<B_sites>
+				<div class="syndic">
+					<h3 class="menu-titre"><:sites_web:></h3>
+					<ul>
+						<BOUCLE_sites(SITES) {id_secteur} {par nom_site}>
+						<li><a href="[(#ID_SYNDIC|generer_url_entite{'site'})]">#NOM_SITE</a></li>
+						</BOUCLE_sites>
+					</ul>
+				</div><!-- fin div syndic -->
+				</B_sites>
+				</div><!-- fin encart -->
+				</BOUCLE_secteurs>
+
+		</div><!-- fin centre-plan --> 
+    
+[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}{self=#SELF}>    
+
+</div><!-- fin du div conteneur1-->
+
+[(#FORMULAIRE_ADMIN{'spip-admin-float'})]
+
+</body>
+</html>
