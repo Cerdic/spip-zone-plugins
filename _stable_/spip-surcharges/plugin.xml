@@ -2,7 +2,7 @@
 <plugin>
 	<nom>Plugin SPIP-Surcharges</nom>
 	<auteur>[Artégo->http://www.artego.fr]</auteur>
-	<version>1.4</version>
+	<version>2.0</version>
 	<etat>stable</etat>
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
 	<description>Points d'entrée supplémentaires dans l'espace privé de SPIP</description>
