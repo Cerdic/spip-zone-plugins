@@ -1,79 +1,32 @@
 <?php
-/*
- *  ! brief Determine les champs de formulaire à traiter
- */
-function inscription2_champs_formulaire($id_auteur = NULL) {
-	if(is_numeric($id_auteur)){
-		$suffixe = '_fiche_mod';
-	}
-	//charge les valeurs de chaque champs proposés dans le formulaire   
-	foreach (lire_config('inscription2/') as $clef => $valeur) {
-		/* Il faut retrouver les noms des champ, 
-		 * par défaut inscription2 propose pour chaque champ le cas champ_obligatoire
-		 *  On retrouve donc les chaines de type champ_obligatoire
-		 *  Ensuite on verifie que le champ est proposé dans le formulaire
-		 *  Remplissage de $valeurs[]
-		 */
-		//decoupe la clef sous le forme $resultat[0] = $resultat[1] ."_obligatoire"
-		//?: permet de rechercher la chaine sans etre retournée dans les résultats
-		preg_match('/^(.*)(?:_obligatoire)/i', $clef, $resultat);
-	
-		if ((!empty($resultat[1])) && (lire_config('inscription2/'.$resultat[1].$suffixe) == 'on') && ($resultat[1] != 'password')) {
-			$valeurs[] = $resultat[1];
-		}
-	}
-	return $valeurs;
-}
-/*
-// http://doc.spip.org/@test_inscription_dist
-function test_inscription_dist($mode, $mail, $nom, $id=0) {
 
-    include_spip('inc/filtres');
-    $nom = trim(corriger_caracteres($nom));
-    if (!$nom || strlen($nom) > 64)
-        return _T('ecrire:info_login_trop_court');
-    if (!$r = email_valide($mail)) return _T('info_email_invalide');
-    return array('email' => $r, 'nom' => $nom, 'bio' => $mode);
-}
-*/
+// http://doc.spip.org/@test_login
+function inscription2_test_login($nom, $mail) {
+	include_spip('inc/charsets');
+	$nom = strtolower(translitteration($nom));
+	$login_base = preg_replace("/[^\w\d_]/", "_", $nom);
 
-function inscription2_valide_cp($cp){
-	if(!$cp){
-		return;
+	// il faut eviter que le login soit vraiment trop court
+	if (strlen($login_base) < 3) {
+		$mail = strtolower(translitteration(preg_replace('/@.*/', '', $mail)));
+		$login_base = preg_replace("/[^\w\d]/", "_", $nom);
 	}
-	else{
-		if(preg_match('/^[A-Z]{1,2}[-|\s][0-9]{3,6}$|^[0-9]{3,6}$|^[0-9|A-Z]{2,5}[-|\s][0-9|A-Z]{2,4}$|^[A-Z]{1,2} [0-9|A-Z]{2,5}[-|\s][0-9|A-Z]{2,4}/i',$cp)){
-			return;
-		}
-		else{
-			return _T('inscription2:cp_valide');
-		}
-	}
-}
+	if (strlen($login_base) < 3)
+		$login_base = 'user';
 
-function inscription2_valide_numero($numero){
-	if(!$numero){
-		return;
+	// eviter aussi qu'il soit trop long (essayer d'attraper le prenom)
+	if (strlen($login_base) > 10) {
+		$login_base = preg_replace("/^(.{4,}(_.{1,7})?)_.*/",
+			'\1', $login_base);
+		$login_base = substr($login_base, 0,13);
 	}
-	else{
-		if(preg_match('/^[0-9\+\. \-]+$/',$numero)){
-			return;
-		}
-		else{
-			return _T('inscription2:numero_valide');
-		}
-	}
-}
 
-function inscription2_valid_login($login,$nom) {
-	if(!isset($login))
-		$login=$nom;
-		
-	$n = sql_countsel("spip_auteurs","login='$login'");
-	if ($n==0){
-		return $login;
+	$login = $login_base;
+
+	for ($i = 1; ; $i++) {
+		if (!sql_countsel('spip_auteurs', "login='$login'"))
+			return $login;
+		$login = $login_base.$i;
 	}
-	$login = $login.($n+1);
-	return $login;
 }
 ?>

@@ -1,15 +1,5 @@
 <?php
 
-/***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
- *                                                                         *
- *  Copyright (c) 2001-2008                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
-\***************************************************************************/
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // charger cfg
@@ -17,14 +7,22 @@ include_spip('cfg_options');
 // charger les fonctions de formulaires
 include_spip('inc/inscription2_form_fonctions');
 
-// chargement des valeurs par defaut des champs du formulaire
+/**
+ * 
+ * Chargement des valeurs par defaut des champs du formulaire
+ * 
+ * @return array L'ensemble des champs et de leur valeurs
+ * @param int $id_auteur[optional] Si cette valeur est utilisée, on entre dans le cadre de
+ * la modification d'un auteur, et plus dans la création
+ */
 function formulaires_inscription2_charger_dist($id_auteur = NULL){
    
 	//initialise les variables d'environnement pas défaut
 	$valeurs = array();
 
 	//recupere la liste des champs possible
-	$champs = inscription2_champs_formulaire($id_auteur);
+	$chercher_champs = charger_fonction('inscription2_champs_formulaire','inc');
+	$champs = $chercher_champs($id_auteur);
 
 	//si on a bien un auteur alors on preremplit le formulaire avec ses informations
 	//les nom des champs sont les memes que ceux de la base de données
@@ -85,10 +83,11 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
     $valeurs = array();	
     
 	//recupere la liste des champs possible
-	$champs = inscription2_champs_formulaire($id_auteur);	
+	$chercher_champs = charger_fonction('inscription2_champs_formulaire','inc');
+	$champs = $chercher_champs($id_auteur);	
 
     //gere la correspondance champs -> _request(champs)
-	foreach(inscription2_champs_formulaire($id_auteur) as $clef => $valeur) {
+	foreach($champs as $clef => $valeur) {
 		$valeurs[$valeur] = _request($valeur);
 	}		
 		
@@ -130,7 +129,7 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 	
 	// verifier que le mail est valide
 	if(!email_valide(_request('email')))
-	  $erreurs['email_invalide'] = _T('inscription2:saisir_email_valide');
+		$erreurs['email_invalide'] = _T('inscription2:saisir_email_valide');
 
 	//messages d'erreur au cas par cas (PASSWORD)
 	//verification des champs
@@ -164,7 +163,8 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 	// verification des champs saisis
 	foreach($champs_code_postal as $champs) {
 	    if(lire_config('inscription2/'.$champs) == 'on') {
-	        $erreur = inscription2_valide_cp($valeurs[$champs]);
+	    	$valide_cp = charger_fonction('inscription2_valide_cp','inc');
+	        $erreur = $valide_cp($valeurs[$champs]);
 	        if($erreur){
 		        $erreurs[$champs] = $erreur;
 	        }		
@@ -178,7 +178,8 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 	// verification des champs saisis
 	foreach($champs_telephone as $champs) {
 	    if(lire_config('inscription2/'.$champs) == 'on') {
-	        $erreur = inscription2_valide_numero($valeurs[$champs]);
+	    	$valide_numero = charger_fonction('inscription2_valide_numero','inc');
+	        $erreur = $valide_numero($valeurs[$champs]);
 	        if($erreur){
 		        $erreurs[$champs] = $erreur;
 	        }		
@@ -238,7 +239,9 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 		$new = true;
 	}
 	
-	$champs = inscription2_champs_formulaire($id_auteur);
+	$chercher_champs = charger_fonction('inscription2_champs_formulaire','inc');
+	$champs = $chercher_champs($id_auteur);
+	
 	foreach($champs as $clef => $valeur) {
 		$valeurs[$valeur] = _request($valeur);
 		if($valeur == 'naissance'){
@@ -275,7 +278,7 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 	//genere le tableau des valeurs a mettre a jour pour spip_auteurs
 	//toutes les clefs qu'inscription2 peut mettre a jour
 
-	$clefs = array_fill_keys(array('login','nom','email','bio'),'');
+	$clefs = array_fill_keys(array('login','nom','email','bio','nom_site','url_site','pgp'),'');
 	
 	//extrait uniquement les donnees qui ont ete proposees a la modification
 	$val = array_intersect_key($valeurs,$clefs);
@@ -328,9 +331,10 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
 	//genere le tableau des valeurs a mettre a jour pour spip_auteurs
 	//toutes les clefs qu'inscription2 peut mettre a jour
 	//s'appuie sur les tables definies par le plugin
+	
 	$clefs = $tables_principales[$table]['field'];
 	if(is_array($clefs)){
-	//extrait uniquement les donnees qui ont ete proposees a la modification
+		//extrait uniquement les donnees qui ont ete proposees a la modification
 		$val = array_intersect_key($valeurs,$clefs);
 	}else{
 		$where = 'id_auteur='.sql_quote($id_auteur);	
@@ -391,35 +395,5 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL){
     }
 	
     return array('editable'=>$editable,'message' => $message);
-}
-
-// http://doc.spip.org/@test_login
-function inscription2_test_login($nom, $mail) {
-	include_spip('inc/charsets');
-	$nom = strtolower(translitteration($nom));
-	$login_base = preg_replace("/[^\w\d_]/", "_", $nom);
-
-	// il faut eviter que le login soit vraiment trop court
-	if (strlen($login_base) < 3) {
-		$mail = strtolower(translitteration(preg_replace('/@.*/', '', $mail)));
-		$login_base = preg_replace("/[^\w\d]/", "_", $nom);
-	}
-	if (strlen($login_base) < 3)
-		$login_base = 'user';
-
-	// eviter aussi qu'il soit trop long (essayer d'attraper le prenom)
-	if (strlen($login_base) > 10) {
-		$login_base = preg_replace("/^(.{4,}(_.{1,7})?)_.*/",
-			'\1', $login_base);
-		$login_base = substr($login_base, 0,13);
-	}
-
-	$login = $login_base;
-
-	for ($i = 1; ; $i++) {
-		if (!sql_countsel('spip_auteurs', "login='$login'"))
-			return $login;
-		$login = $login_base.$i;
-	}
 }
 ?>
