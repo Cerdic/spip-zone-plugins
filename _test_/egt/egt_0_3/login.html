@@ -1,0 +1,80 @@
+<!-- squelette egt v0.3 -->
+<!-- auteurs: damazone, sBa - licence GPL -->
+<!-- http://www.spip-contrib.net/EGT-squelette-plugin-pour-SPIP-2 -->
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<INCLURE{fond=inc/inc-header}>
+</head>
+<body>
+	<div id="conteneur1">  
+ 
+[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+	<INCLURE{fond=inc/inc-bandeau}>          
+
+[(#REM) <!-- =========================== ZONE CHEMIN DE NAVIGATION ============================= --> ]
+	<INCLURE{fond=inc/inc-chemin}> 
+
+[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+	<div id="gauche">
+		<!-- boucle B4 teste et affiche le texte d'un article lie au mot cle affiche aide site dans colonne droite -->
+		<B4>
+			<!-- affiche le logo si resultat positif-->
+			<BOUCLE_logo_aide(MOTS){titre=afficher aide site}>
+			[(#LOGO_MOT||inserer_attribut{'title',#TEXTE})]
+			</BOUCLE_logo_aide>
+			<!-- affiche le texte de l'article -->
+			<BOUCLE4(ARTICLES){titre_mot=afficher aide site}>
+			[(#TEXTE|reduire_image{120,0})]
+			</BOUCLE4>
+		</B4>
+		<!-- n'affiche rien si resultat negatif-->
+		<//B4>
+	</div><!-- fin du div gauche -->
+
+[(#REM) <!-- =================================== ZONE CORPS  ====================================== --> ]
+	<div id="centre-article">
+		<div id="login">
+			<div style='text-align: center; margin: auto; width: 400px'>
+				<br /><br /><br />
+				<table width="100%"><tr><td>
+				<div style="float: center">
+					<h3 class="spip">#NOM_SITE_SPIP<br />
+					  <small><:login_acces_prive:></small>
+					</h3>		
+				</div>
+				<!-- accessibilite -->
+				<a name="contenu"></a>
+				
+				#MENU_LANG_ECRIRE
+				
+        #LOGIN_PRIVE
+				
+				<div style='text-align: center;font-family: Verdana,arial,helvetica,sans-serif; font-size: 12px;'>
+
+		    [&#91;<a style='color: #e86519' href="#URL_PAGE{identifiants,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config{1comite})" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=400'); return false;"><:login_sinscrire:></a>&#93;]
+
+				&#91;<a style='color: #e86519'
+					href="#URL_PAGE{spip_pass}&amp;lang=#LANG;"
+					target="spip_pass" 
+					onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
+
+				&#91;<a style='color: #e86519' href="#URL_SITE_SPIP/"><:login_retoursitepublic:></a>&#93;
+
+				</div>
+
+				</td></tr></table>
+			</div> <!-- fin du div style -->
+		</div><!-- fin du div login -->    
+       
+	</div><!-- fin du div centre-article -->
+      
+[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}{self=#SELF}>   
+     
+</div><!-- fin du div conteneur1 -->
+[(#FORMULAIRE_ADMIN{'spip-admin-float'})]
+
+</body>
+</html>
