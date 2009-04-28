@@ -1,0 +1,99 @@
+<!-- squelette egt v0.3 -->
+<!-- auteurs: damazone, sBa - licence GPL -->
+<!-- http://www.spip-contrib.net/EGT-squelette-plugin-pour-SPIP-2 -->
+<!-- squelette présentant les événements -->
+#CACHE{86400}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<INCLURE{fond=inc/inc-header} {titreheader=- <:agenda:agenda:>}>
+</head>
+
+<body>
+
+<div id="conteneur1">  
+ 
+[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+	<INCLURE{fond=inc/inc-bandeau}>          
+
+[(#REM) <!-- =========================== ZONE CHEMIN DE NAVIGATION ============================= --> ]
+	<div id="haut">
+		<ul>         
+		<li><a href="#URL_SITE_SPIP"><:accueil_site:></a> <img src="#CHEMIN{images/puce.png}" alt=">"/> </li>
+		<li><:agenda:agenda:> <:agenda:evenements:></li>
+		</ul>
+	</div><!-- fin de haut -->    
+
+[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+	<INCLURE{fond=inc/inc-gauche}>
+
+[(#REM) <!-- =================================== ZONE CORPS  ====================================== --> ]    
+    <div id="centre-rubrique">	
+		<!-- accessibilite -->
+		<div id="noprint">
+			<a name="contenu"></a>
+		</div> 	
+
+	[(#REM) <!-- ============================ RUBRIQUES AGENDA  ================================ --> ]   
+	
+		#SET{self,#SELF|parametre_url{debut_rubriques,#EVAL{_request('debut_rubriques')}}}
+		<B_rubriques>
+			<div class="engras"><:agenda:rubriques:></div>
+			[(#REM) navigation par rubriques agenda]
+			[<p class='pagination'>(#PAGINATION{page})</p>]
+			<ul class='liste_items'>
+				<li class='item[ (#ENV{id_rubrique}|non)on]'>[(#GET{self}|parametre_url{id_rubrique,''}|aoustrong{<:agenda:toutes_rubriques:>,#ENV{id_rubrique,0}|=={0}})]</li>
+				<BOUCLE_rubriques(RUBRIQUES){par titre}{pagination 10}{agenda=1}>
+				<li class='item[ (#EXPOSE)]'>[(#GET{self}|parametre_url{id_rubrique,#ID_RUBRIQUE}|aoustrong{#TITRE|supprimer_numero{},#ENV{id_rubrique}|=={#ID_RUBRIQUE}})]</li>
+				</BOUCLE_rubriques>
+			</ul>
+		</B_rubriques>
+		
+	[(#REM) <!-- ========================= AGENDA  DES EVENEMENTS ============================== --> ]
+	
+		<!-- #SET{self,#SELF|parametre_url{id_evenement|date_debut,''}|parametre_url{debut_mois,#EVAL{_request('debut_mois')}}} -->
+
+		<h2 class='titrerub'><:agenda:agenda:> :
+		<BOUCLE_compte(EVENEMENTS){id_rubrique?}{id_article?}{id_mot?}{id_evenement_source?} {statut=publie} />
+			[(#TOTAL_BOUCLE|agenda_affiche_un_ou_plusieurs{agenda:info_un_evenement,agenda:info_nombre_evenements}|sinon{	<:agenda:aucun_evenement:>})]#SET{yena,#TOTAL_BOUCLE|oui}<//B_compte>
+		</h2>	
+		
+			[(#GET{self}|parametre_url{date_debut,#ENV{date}|affdate{Y-m-d}}|aoustrong{<:agenda:evenements_a_venir:>,#ENV{date_debut,''}|non}) | ]
+			<BOUCLE_debut(EVENEMENTS){par date_debut}{0,1}{id_article?}{id_rubrique?}{id_evenement_source?}{statut=publie}>
+			[(#GET{self}|parametre_url{date_debut,#DATE_DEBUT|affdate{Y-01-01}}|aoustrong{<:agenda:evenements_depuis_debut:>,#ENV{date_debut,''}|=={#DATE_DEBUT|affdate{Y-01-01}}})]
+			</BOUCLE_debut>
+		
+		<B_agenda>
+			
+			<ul>
+		        <BOUCLE_agenda(EVENEMENTS){par date_debut}{pagination #ENV{pagine,20}}{age_relatif_debut<=0}{id_evenement?}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{statut=publie}>
+		        <li><h4 class="tit-art-rub">
+					<div class="jour">[(#DATE_DEBUT|affdate_jourcourt|unique)]</div>
+					[(#MODELE{evenement_vevent}|trim|sinon{'?'})]
+					
+					<p class="actions">
+							<span class="lien_article">[<a href='[(#URL_PAGE{article,id_article=#ID_ARTICLE})]'><:article:></a>]</span>
+							[<span class="lien_source">&#91;<a class='ajax' (#ID_EVENEMENT_SOURCE|oui) href='[(#GET{self}|parametre_url{id_evenement,#ID_EVENEMENT_SOURCE}|parametre_url{date_debut,1900-01-01})]'>source</a>&#93;</span>]
+					</p>
+		        </li>
+		        </BOUCLE_agenda>
+				[<p class="pagination">(#PAGINATION{page})</p>]
+			</ul>
+		</B_agenda>
+			<!-- [(#GET{yena})
+			[(#GET{self}|parametre_url{date_debut,1900-01-01}|aoustrong{<:agenda:evenements_depuis_debut:>,#ENV{date_debut}|=={1900-01-01},noajax}) |]
+			[(#GET{self}|aoustrong{<:agenda:evenements_a_venir:>,#ENV{date_debut}|=={#ENV{date}|affdate{Y-m-d}},noajax}) ]
+			] -->
+		<//B_agenda>
+		
+    </div><!-- fin du div centre-article -->
+      
+[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}{self=#SELF}>     
+     
+</div><!-- fin du div conteneur1 -->
+
+[(#FORMULAIRE_ADMIN{'spip-admin-float'})]
+
+</body>
+</html>
