@@ -106,7 +106,6 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 		}
 	}
 	
-	
 	//Verifier certains champs specifiquement
 	
 	// Verifier si le mail est connu
@@ -131,7 +130,7 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 	
 	// verifier que le mail est valide
 	if(!email_valide(_request('email')))
-	  $erreurs['email_invalide'] = "Veuillez saisir une adresse email valide" ;
+	  $erreurs['email_invalide'] = _T('inscription2:saisir_email_valide');
 
 	//messages d'erreur au cas par cas (PASSWORD)
 	//verification des champs

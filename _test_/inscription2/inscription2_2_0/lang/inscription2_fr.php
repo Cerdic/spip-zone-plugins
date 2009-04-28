@@ -197,6 +197,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rien_a_faire' => 'Rien &agrave; faire',
 
 	// S
+	'saisir_email_valide' => 'Veuillez saisir une adresse email valide',
 	'secteur' => 'Secteur',
 	'septembre' => 'septembre',
 	'sexe' => 'Civilit&eacute;',
