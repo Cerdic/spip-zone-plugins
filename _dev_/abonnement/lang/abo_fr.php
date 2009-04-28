@@ -3,6 +3,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// Exec abonnements
 	"abonnements" => "Abonnements",
 	"liste_des_abonnements" => "Liste des abonnements",
+	"statistiques" => "Statistiques des abonnements",
 	
 	"editer_abonnement" => "Editer un abonnement",
 	"creer_abonnement" => "Creer un abonnement",
@@ -18,8 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"erreurs_formulaire" => "Des erreurs sont pr&eacute;sentes dans votre saisie.",
 	
 	// CFG
-	"configuration_abonnement" => "Abonnement",
-	"configuration_abonnement_relances" => "Relance des abonnements",
+	"abonnement" => "Abonnements",
+	"abonnement_relances" => "Relance des abonnements",
 	
 	"configuration_description_abonnement" => "Cette page permet de d&eacute;finir les options d'abonnement de votre site.",
 	"configuration_description_abonnement_relances" => "Cette page permet de d&eacute;finir les options de relances d'abonnement de votre site.",
