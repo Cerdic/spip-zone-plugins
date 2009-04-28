@@ -2,8 +2,8 @@
 <plugin>
 	<nom>Plugin SPIP-Sondages</nom>
 	<auteur>[Artégo->http://www.artego.fr]</auteur>
-	<version>1.8</version>
-	<etat>test</etat>
+	<version>2.0</version>
+	<etat>stable</etat>
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
 	<description>Gestion de sondages</description>
 	<necessite id="SPIP" version="[2.0.3;]" />
