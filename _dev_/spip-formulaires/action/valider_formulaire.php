@@ -16,11 +16,6 @@
 	include_spip('formulaires_fonctions');
 
 
-	/**
-	 * action_valider_formulaire
-	 *
-	 * @author  Pierre Basson
-	 */
 	function action_valider_formulaire() {
 
 		$id_formulaire		= intval($_POST['id_formulaire']);

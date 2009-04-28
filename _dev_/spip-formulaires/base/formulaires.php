@@ -136,6 +136,7 @@
 							"titre"			=> "TEXT NOT NULL",
 							"descriptif"	=> "TEXT NOT NULL",
 							"type"			=> "ENUM('champ_texte','zone_texte','boutons_radio','cases_a_cocher','liste','liste_multiple','email_applicant','nom_applicant','abonnements','fichier','auteurs') NOT NULL DEFAULT 'champ_texte'",
+							"mime"			=> "TEXT NOT NULL",
 							"obligatoire"	=> "TINYINT(1) NOT NULL DEFAULT '0'",
 							"controle"		=> "ENUM('non_vide','email','email_applicant','url','nombre','date') NOT NULL DEFAULT 'non_vide'"
 						);
@@ -350,6 +351,8 @@
 					}
 					if ($version_base < 2.0) {
 						maj_tables('spip_formulaires');
+						sql_alter("TABLE spip_questions ADD mime TEXT NOT NULL AFTER type");
+						sql_updateq('spip_questions', array('mime' => serialize(array('image/jpeg', 'image/png', 'image/gif'))), 'type="fichier"');
 						sql_alter("TABLE spip_applicants ADD INDEX email (email)");
 						sql_alter("TABLE spip_applicants DROP idx");
 						sql_alter("TABLE spip_choix_question DROP idx");

@@ -22,7 +22,7 @@
 
 		global $spip_lang_right;
 
-		if (!autoriser('voir', 'formulaires')) {
+		if (!autoriser('editer', 'formulaires')) {
 			include_spip('inc/minipres');
 			echo minipres();
 			exit;
@@ -33,22 +33,6 @@
 		$id_formulaire = $t['id_formulaire'];
 		$id_applicant = $t['id_applicant'];
 		$application = new application($id_applicant, $id_formulaire, $id_application);
-
-		if (!empty($_POST['enregistrer'])) {
-			$blocs = $application->formulaire->recuperer_blocs();
-			foreach ($blocs as $valeur) {
-				$application->enregistrer_bloc($valeur);
-			}
-			$id_dernier_bloc = $application->formulaire->recuperer_dernier_bloc();
-			// on regarde si on a toutes les réponses aux questions obligatoires jusqu'au dernier bloc
-			$tableau = $application->valider_bloc_par_bloc_jusquau_bloc($id_dernier_bloc, true);
-			$resultat_bon = $tableau['resultat_bon'];
-			if ($resultat_bon) {
-				$url = generer_url_ecrire('applications', 'id_application='.$application->id_application, true);
-				header('Location: ' . $url);
-				exit();
-			}
-		}
 
 		pipeline('exec_init',array('args'=>array('exec'=>'applications_edit','id_application'=>$application->id_application),'data'=>''));
 
@@ -80,7 +64,7 @@
 		}
 
 		echo '<div class="formulaire_spip formulaire_editer">';
-		echo '<form method="post" action="'.generer_url_ecrire('applications_edit', "id_application=".$application->id_application).'">';
+		echo '<form method="post" action="'.generer_url_action('valider_application', 'id_application='.$application->id_application, true, true).'" enctype="multipart/form-data">';
 		echo '<div>';
 
 	  	echo '<ul>';
@@ -174,7 +158,7 @@
 							echo '</div>';
 						}
 						break;
-/*
+
 					case 'fichier':
 						$reponses = sql_select('*', 'spip_reponses', 'id_question='.intval($question['id_question']).' AND id_application='.intval($application->id_application));
 						while ($reponse = sql_fetch($reponses)) {
@@ -183,9 +167,11 @@
 							$titre = $tab['titre'];
 							echo '<a href="../'.$fichier.'" target="_blank">'.$titre.'</a> ('._T('formulairesprive:supprimer').' <input type="checkbox" class="case_a_cocher" name="s_'.$reponse['id_reponse'].'" value="'.$reponse['valeur'].'" />)<br />';
 						}
-						echo '<input type="file" id="q_'.$question['id_question'].'" name="q_'.$question['id_question'].'" /><br />';
+						echo '<input type="file" class="file" id="q_'.$question['id_question'].'" name="q_'.$question['id_question'].'" />';
+						$q = new question($application->formulaire->id_formulaire, $bloc['id_bloc'], $question['id_question']);
+						echo '<span class="explication">'.implode(', ', $q->fichiers).'</span>';
 						break;
-*/
+
 					case 'auteurs':
 						echo '<select class="select" name="q_'.$question['id_question'].'" id="q_'.$question['id_question'].'">';
 						while ($choix_question = sql_fetch($choix)) {
@@ -210,6 +196,9 @@
 		echo '</ul>';
 
 	  	echo '<p class="boutons"><input type="submit" class="submit" name="enregistrer" value="'._T('formulairesprive:enregistrer').'" /></p>';
+
+		echo '<input type="hidden" name="id_formulaire" value="'.$application->formulaire->id_formulaire.'" />';
+		echo '<input type="hidden" name="lang" value="'.$application->formulaire->lang.'" />';
 
 		echo '</div>';
 		echo '</form>';

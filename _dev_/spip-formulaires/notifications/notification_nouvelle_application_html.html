@@ -86,7 +86,7 @@
  ---------------------------
 ]
 <BOUCLE_q_fichier(QUESTIONS) {id_question} {type=fichier}>
-<B_r_fichier><p><strong>#TITRE :</strong><BOUCLE_r_fichier(REPONSES) {id_question} {id_application=#ENV{id_application}}><BOUCLE_documents(DOCUMENTS) {id_document=#VALEUR}><br /><a href="[(#URL_DOCUMENT|url_absolue)]">#TITRE</a></BOUCLE_documents></BOUCLE_r_fichier></p></B_r_fichier>
+<B_r_fichier><p><strong>#TITRE :</strong><BOUCLE_r_fichier(REPONSES) {id_question} {id_application=#ENV{id_application}}><BOUCLE_documents(DOCUMENTS) {id_document=#VALEUR} {tout}><br /><a href="[(#URL_DOCUMENT|url_absolue)]">#TITRE</a></BOUCLE_documents></BOUCLE_r_fichier></p></B_r_fichier>
 </BOUCLE_q_fichier>
 
 [

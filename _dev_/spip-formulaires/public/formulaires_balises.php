@@ -284,4 +284,43 @@
 	}
 
 
+	function balise_MIMES_TYPE($p) {
+		$_id_formulaire	= champ_sql('id_formulaire', $p);
+		$_id_bloc		= champ_sql('id_bloc', $p);
+		$_id_question	= champ_sql('id_question', $p);
+		$p->code = "calculer_MIMES_TYPE($_id_formulaire,$_id_bloc,$_id_question)";
+		$p->interdire_scripts = false;
+		return $p;
+	}
+
+
+	function calculer_MIMES_TYPE($id_formulaire, $id_bloc, $id_question) {
+		$question = new question($id_formulaire, $id_bloc, $id_question);
+		return implode(', ', $question->mimes_type);
+	}
+
+
+	function balise_TYPES_FICHIER_AUTORISES($p) {
+		$_id_formulaire	= champ_sql('id_formulaire', $p);
+		$_id_bloc		= champ_sql('id_bloc', $p);
+		$_id_question	= champ_sql('id_question', $p);
+		$p->code = "calculer_TYPES_FICHIER_AUTORISES($_id_formulaire,$_id_bloc,$_id_question)";
+		$p->interdire_scripts = false;
+		return $p;
+	}
+
+
+	function calculer_TYPES_FICHIER_AUTORISES($id_formulaire, $id_bloc, $id_question) {
+		$question = new question($id_formulaire, $id_bloc, $id_question);
+		return implode(', ', $question->fichiers);
+	}
+
+
+	function balise_UPLOAD_MAX_SIZE($p) {
+		$p->code = "ini_get('upload_max_filesize')";
+		$p->interdire_scripts = false;
+		return $p;
+	}
+
+
 ?>

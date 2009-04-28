@@ -96,7 +96,7 @@
 
 		$raccourcis = icone_horizontale(_T('formulairesprive:creer_nouveau_formulaire'), generer_url_ecrire("formulaires_edit"), _DIR_PLUGIN_FORMULAIRES."/prive/images/formulaire-24.png", 'creer.gif', false);
 		$raccourcis.= icone_horizontale(_T('formulairesprive:aller_liste_formulaires'), generer_url_ecrire("formulaires_tous"), _DIR_PLUGIN_FORMULAIRES.'/prive/images/formulaire-24.png', 'rien.gif', false);
-		$raccourcis.= icone_horizontale(_T('formulairesprive:copier_ce_formulaire'), generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=copie', false, true), _DIR_PLUGIN_FORMULAIRES.'/prive/images/formulaire-24.png', 'creer.gif', false);
+		$raccourcis.= icone_horizontale(_T('formulairesprive:copier_ce_formulaire'), generer_url_action('statut_formulaire', 'id_formulaire='.$formulaire->id_formulaire.'&statut=copie', false, true), _DIR_PLUGIN_FORMULAIRES.'/prive/images/copie.png', 'rien.gif', false);
 		echo bloc_des_raccourcis($raccourcis);
 
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'formulaires','id_formulaire'=>$id_formulaire),'data'=>''));
@@ -113,18 +113,20 @@
 		$onglet_proprietes.= $editer_mots('formulaire', $formulaire->id_formulaire, $cherche_mot, $select_groupe, true, '', 'formulaires');
 		$onglet_proprietes.= formulaires_afficher_auteurs($formulaire->id_formulaire);
 
-		$config.= _T('formulairesprive:type_formulaire').' : <strong>'._T('formulairesprive:'.$formulaire->type).'</strong><br />';
-		$config.= _T('formulairesprive:limiter_invitation').' : <strong>'._T('formulairesprive:'.$formulaire->limiter_invitation).'</strong><br />';
+		$config.= '<table>';
+		$config.= '<tr><td>'._T('formulairesprive:type_formulaire').'</td><td><strong>'._T('formulairesprive:'.$formulaire->type).'</strong></td></tr>';
+		$config.= '<tr><td>'._T('formulairesprive:limiter_invitation').'</td><td><strong>'._T('formulairesprive:'.$formulaire->limiter_invitation).'</strong></td></tr>';
 		if ($formulaire->limiter_invitation == 'non')
-			$config.= _T('formulairesprive:limiter_applicant').' : <strong>'._T('formulairesprive:'.$formulaire->limiter_applicant).'</strong><br />';
-		$config.= _T('formulairesprive:notifier_auteurs').' : <strong>'._T('formulairesprive:'.$formulaire->notifier_auteurs).'</strong><br />';
+			$config.= '<tr><td>'._T('formulairesprive:limiter_applicant').'</td><td><strong>'._T('formulairesprive:'.$formulaire->limiter_applicant).'</strong></td></tr>';
+		$config.= '<tr><td>'._T('formulairesprive:notifier_auteurs').'</td><td><strong>'._T('formulairesprive:'.$formulaire->notifier_auteurs).'</strong></td></tr>';
+		$config.= '</table>';
 
 		$contexte = array('id' => $formulaire->id_formulaire);
 		$fond = recuperer_fond("prive/contenu/formulaire", $contexte);
 		$fond = pipeline('afficher_contenu_objet', array('args' => array('type' => 'formulaire', 'id_objet' => $formulaire->id_formulaire, 'contexte' => $contexte), 'data' => $fond));
 		$onglet_contenu = $config.'<div id="wysiwyg">'.$fond.'</div>';
 
-#		$onglet_documents = formulaires_documents('formulaire', $formulaire->id_formulaire);
+		$onglet_documents = formulaires_documents('formulaire', intval($formulaire->id_formulaire));
 	
 		echo '<div class="fiche_objet">';
 

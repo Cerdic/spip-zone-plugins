@@ -35,7 +35,7 @@
 		$formulaire		= new formulaire($id_formulaire);
 		
 		if (!empty($_POST['enregistrer'])) {
-			$email = addslashes($_POST['email']);
+			$email = $_POST['email'];
 			if (ereg(_REGEXP_EMAIL, $email)) {
 				$invitation = new invitation($id_formulaire, $email);
 				if ($spip_lettres_actif) { // si SPIP-Lettres
@@ -70,6 +70,9 @@
 							}
 						}
 					}
+				}
+				if ($_POST['notification'] == 'oui') {
+					$invitation->application->envoyer_invitation();
 				}
 				$url = generer_url_ecrire('formulaires', 'id_formulaire='.$id_formulaire, true);
 				header('Location: ' . $url);
@@ -125,6 +128,14 @@
 				}
 			}
 		}
+
+	    echo '<li>';
+		echo '<label>'._T('formulairesprive:envoyer_invitation').'</label>';
+		echo '<div class="choix">';
+		echo '<input id="notification" type="checkbox" class="checkbox" value="oui" name="notification" />';
+		echo '<label for="notification">'._T('formulairesprive:oui').'</label>';
+		echo '</div>';
+		echo '</li>';
 
 		echo '</ul>';
 

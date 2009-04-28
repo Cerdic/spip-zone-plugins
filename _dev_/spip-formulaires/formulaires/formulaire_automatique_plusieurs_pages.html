@@ -207,9 +207,16 @@
 <li class="[(#OBLIGATOIRE|?{'obligatoire'})][ (#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|?{'erreur'})]">
 <label for="q_#ID_QUESTION">#TITRE</label>
 [<span class="explication">(#DESCRIPTIF)</span>]
-<input type="file" class="file" name="q_#ID_QUESTION" id="q_#ID_QUESTION" />
+<span class="explication"><:formulairespublic:types_fichier_autorises:> #TYPES_FICHIER_AUTORISES (<:formulairespublic:max:> [(#UPLOAD_MAX_SIZE)])</span>
+<input type="file" class="file" name="q_#ID_QUESTION" id="q_#ID_QUESTION" accept="#MIMES_TYPE" />
 [<span class="erreur_message">(#ID_QUESTION|in_any{#ENV**{erreurs}, ''}|formulaires_afficher_erreur{'fichier'})</span>]
-<BOUCLE_r_fichier(REPONSES) {id_question} {id_application=#ENV{id_application}}><BOUCLE_documents(DOCUMENTS) {id_document=#VALEUR}><p><a href="#URL_DOCUMENT">#TITRE</a> (<:formulairespublic:supprimer:> <input type="checkbox" class="case_a_cocher" name="s_#ID_REPONSE" value="#ID_DOCUMENT" />)</p></BOUCLE_documents></BOUCLE_r_fichier>
+<BOUCLE_r_fichier(REPONSES) {id_question} {id_application=#ENV{id_application}}><BOUCLE_documents(DOCUMENTS) {id_document=#VALEUR} {tout}>
+<div class="choix">
+<a href="#URL_DOCUMENT">#TITRE</a>
+<input id="s_#ID_REPONSE" type="checkbox" class="checkbox" value="#ID_DOCUMENT" name="s_#ID_REPONSE" />
+<label for="s_#ID_REPONSE"><:formulairespublic:supprimer:></label>
+</div>
+</BOUCLE_documents></BOUCLE_r_fichier>
 </li>
 </BOUCLE_q_fichier>
 

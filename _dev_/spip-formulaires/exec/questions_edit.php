@@ -41,6 +41,7 @@
 			$question->titre 		= $_POST['titre'];
 			$question->descriptif	= $_POST['descriptif'];
 			$question->type			= $_POST['type'];
+			$question->mime			= serialize($_POST['mime']);
 			if ($question->type == 'email_applicant' or $question->type == 'auteurs')
 				$question->obligatoire = 1;
 			else
@@ -150,14 +151,14 @@
 		} else {
 		    echo '<li class="obligatoire">';
 			echo '<label for="type">'._T('formulairesprive:type_question').'</label>';
-			echo '<select name="type" id="type" class="fondl" onchange="toggle_controle_type()">';		
+			echo '<select name="type" id="type" class="fondl" onchange="toggle_type()">';		
 			echo '<option value="champ_texte"'.($question->type == 'champ_texte' ? ' selected="selected"' : '').'>'._T('formulairesprive:champ_texte').'</option>';
 			echo '<option value="zone_texte"'.($question->type == 'zone_texte' ? ' selected="selected"' : '').'>'._T('formulairesprive:zone_texte').'</option>';
 			echo '<option value="boutons_radio"'.($question->type == 'boutons_radio' ? ' selected="selected"' : '').'>'._T('formulairesprive:boutons_radio').'</option>';
 			echo '<option value="cases_a_cocher"'.($question->type == 'cases_a_cocher' ? ' selected="selected"' : '').'>'._T('formulairesprive:cases_a_cocher').'</option>';
 			echo '<option value="liste"'.($question->type == 'liste' ? ' selected="selected"' : '').'>'._T('formulairesprive:liste').'</option>';
 			echo '<option value="liste_multiple"'.($question->type == 'liste_multiple' ? ' selected="selected"' : '').'>'._T('formulairesprive:liste_multiple').'</option>';
-#			echo '<option value="fichier"'.($question->type == 'fichier' ? ' selected="selected"' : '').'>'._T('formulairesprive:fichier').'</option>';
+			echo '<option value="fichier"'.($question->type == 'fichier' ? ' selected="selected"' : '').'>'._T('formulairesprive:fichier').'</option>';
 			if ($question->bloc->formulaire->limiter_invitation == 'oui') {
 				if ($spip_lettres_actif) {
 					if (sql_countsel('spip_themes'))
@@ -180,6 +181,20 @@
 			echo '<select name="obligatoire" id="obligatoire" class="fondl" onchange="toggle_controle_obligatoire()">';		
 			echo '<option value="0"'.(!$question->obligatoire ? ' selected="selected"' : '').'>'._T('formulairesprive:non').'</option>';
 			echo '<option value="1"'.($question->obligatoire ? ' selected="selected"' : '').'>'._T('formulairesprive:oui').'</option>';
+			echo '</select>';
+			echo '</li>';
+
+			if ($question->type == 'fichier')
+				$style = "display: block;";
+			else
+				$style = "display: none;";
+		    echo '<li id="mimes" style="'.$style.'">';
+			echo '<label for="mime">'._T('formulairesprive:types_fichier_autorises').'</label>';
+			echo '<select name="mime[]" id="mime" class="fondl" size="20" multiple="multiple">';
+			$res = sql_select('*', 'spip_types_documents');
+			while ($arr = sql_fetch($res)) {
+				echo '<option value="'.$arr['mime_type'].'"'.(in_array($arr['mime_type'], $question->mimes_type) ? ' selected="selected"' : '').'>'.$arr['titre'].' (.'.$arr['extension'].')</option>';
+			}
 			echo '</select>';
 			echo '</li>';
 
@@ -261,7 +276,11 @@
 		echo '	else'."\n";
 		echo '		$("#crtl").css("display","none");'."\n";
 		echo '}'."\n";
-		echo 'function toggle_controle_type() {'."\n";
+		echo 'function toggle_type() {'."\n";
+		echo '	if ($("#type").val() == "fichier")'."\n";
+		echo '		$("#mimes").css("display","block");'."\n";
+		echo '	else'."\n";
+		echo '		$("#mimes").css("display","none");'."\n";
 		echo '	if ($("#type").val() == "champ_texte")'."\n";
 		echo '		$("#crtl_texte").css("display","block");'."\n";
 		echo '	else if ($("#type").val() == "zone_texte")'."\n";

@@ -61,7 +61,7 @@
 		'une_seule_page' => "Formulaire sur une seule page",
 		'limiter_invitation' => "Sur invitation",
 		'limiter_applicant' => "Un seul résultat par usager",
-		'notifier_auteurs' => "Envoyer les résultats aux auteurs du formulaire",
+		'notifier_auteurs' => "Envoyer les résultats aux auteurs",
 		'modifier_formulaire' => "Modifier ce formulaire",
 		'creer_nouveau_bloc' => "Créer un nouveau bloc",
 		'liste_applications' => "Liste des résultats",
@@ -106,6 +106,7 @@
 		'item_mots_cles_association_formulaires' => "aux formulaires",
 		'logo_formulaire' => "LOGO DU FORMULAIRE",
 		'tous_formulaires_rubrique' => "Tous les formulaires de cette rubrique",
+		'types_fichier_autorises' => "Types de fichier autorisés",
 
 		'Z' => 'ZZzZZzzz'
 

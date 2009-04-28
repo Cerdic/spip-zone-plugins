@@ -16,6 +16,7 @@
 	$GLOBALS[$GLOBALS['idx_lang']] = array(
 
 		'un_internaute_a_valide_le_formulaire' => 'Un internaute a validé le formulaire ',
+		'types_fichier_autorises' => "Types de fichier autorisés",
 
 		'nouveau_mot_de_passe' => "Nouveau mot de passe",
 		'voici_votre_nouveau_mot_de_passe' => "Voici votre nouveau mot de passe",
@@ -33,7 +34,7 @@
 		'controle_url' => "Le format de ce lien n'est pas valide, il doit être de la forme http://...",
 		'controle_nombre' => "Votre réponse doit être un nombre",
 		'controle_date' => "Votre réponse doit être de la forme jj/mm/aaaa",
-		'controle_fichier' => "Vous devez uploader un fichier",
+		'controle_fichier' => "Upload obligatoire. Vérifiez le type et la taille de votre fichier.",
 		
 		// formulaire login
 		'login_formulaire' => "Identification",

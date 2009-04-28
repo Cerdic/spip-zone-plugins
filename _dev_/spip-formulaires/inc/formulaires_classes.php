@@ -880,19 +880,17 @@
 							$chemin_fichier	= $_FILES['q_'.$id_question]['tmp_name'];
 							$mime			= $_FILES['q_'.$id_question]['type'];
 							$taille			= $_FILES['q_'.$id_question]['size'];
-							$res = sql_select('*', 'spip_types_documents', 'mime_type="'.addslashes($mime).'" AND upload="oui" AND inclus="image"', '', '', '1');
-							if (sql_count($res) > 0) {
-								$type_document = sql_fetch($res);
-								$extension = $type_document['extension'];
-								$id_type = $type_document['id_type'];
+							if ($_FILES['q_'.$id_question]['error'] == 0 and in_array($mime, $question->mimes_type)) {
+								$envers = array_flip($question->mimes_type);
+								$extension = $question->extensions[$envers[$mime]];
 								$nom_fichier = $this->id_application.'-'.mktime().'.'.$extension;
 								$fichier = _DIR_FORMULAIRES.$nom_fichier;
 								$taille_image = @getimagesize($chemin_fichier);
 								$largeur = intval($taille_image[0]);
 								$hauteur = intval($taille_image[1]);
 								move_uploaded_file($chemin_fichier, $fichier);
-								$id_document = sql_insertq('spip_documents', array('id_type' => $id_type, 'titre' => $titre, 'date' => 'NOW()', 'fichier' => $fichier, 'taille' => $taille, 'largeur' => $largeur, 'hauteur' => $hauteur, 'mode' => 'document', 'distant' => 'non', 'maj' => 'NOW()'));
-								sql_insertq('spip_documents_applications', array('id_document' => $id_document, 'id_application' => $this->id_application));
+								$id_document = sql_insertq('spip_documents', array('titre' => $titre, 'date' => 'NOW()', 'fichier' => $fichier, 'taille' => $taille, 'largeur' => $largeur, 'hauteur' => $hauteur, 'mode' => 'document', 'distant' => 'non', 'maj' => 'NOW()', 'extension' => $extension));
+								sql_insertq('spip_documents_liens', array('id_document' => $id_document, 'id_objet' => $this->id_application, 'objet' => 'application'));
 								sql_insertq('spip_reponses', array('id_question' => $id_question, 'id_application' => $this->id_application, 'valeur' => $id_document));
 							}
 						}
@@ -900,12 +898,12 @@
 						foreach ($reponses as $id_reponse) {
 							$supprimer_document = _request('s_'.$id_reponse);
 							if (!empty($supprimer_document)) {
-								$verif = sql_select('D.*', 'spip_documents AS D INNER JOIN spip_documents_applications AS DA ON DA.id_document=D.id_document', 'DA.id_application='.intval($this->id_application).' AND D.id_document='.intval($supprimer_document));
+								$verif = sql_select('D.*', 'spip_documents AS D INNER JOIN spip_documents_liens AS DL ON DL.id_document=D.id_document', 'DL.id_objet='.intval($this->id_application).' AND objet="application" AND D.id_document='.intval($supprimer_document));
 								if (sql_count($verif) > 0) {
 									$arr = sql_fetch($verif);
-									unlink($arr['fichier']);
+									@unlink($arr['fichier']);
 									sql_delete('spip_documents', 'id_document='.intval($supprimer_document));
-									sql_delete('spip_documents_applications', 'id_document='.intval($supprimer_document));
+									sql_delete('spip_documents_liens', 'id_document='.intval($supprimer_document));
 									sql_delete('spip_reponses', 'id_application='.intval($this->id_application).' AND id_reponse='.intval($id_reponse));
 								}
 							}
@@ -939,6 +937,16 @@
 		}
 
 		
+		function envoyer_invitation() {
+			include_spip('inc/facteur_classes');
+			$objet			= recuperer_fond('notifications/notification_invitation_titre', array('mdp' => $this->applicant->mdp, 'email' => $this->applicant->email, 'id_formulaire' => $this->formulaire->id_formulaire, 'lang' => $lang));
+			$message_html	= recuperer_fond('notifications/notification_invitation_html', array('mdp' => $this->applicant->mdp, 'email' => $this->applicant->email, 'id_formulaire' => $this->formulaire->id_formulaire, 'lang' => $lang));
+			$message_texte	= recuperer_fond('notifications/notification_invitation_texte', array('mdp' => $this->applicant->mdp, 'email' => $this->applicant->email, 'id_formulaire' => $this->formulaire->id_formulaire, 'lang' => $lang));
+			$notification	= new Facteur($this->applicant->email, $objet, $message_html, $message_texte);
+			$notification->Send();
+		}
+
+
 		/**
 		 * changer_statut
 		 *
@@ -1130,6 +1138,52 @@
 				$reponse = new reponse($reponses['id_reponse']);
 				$reponse->supprimer();
 			}
+		}
+
+
+		function exporter() {
+			include_spip('surcharges_fonctions');
+			$resultats = array();
+			$i = 0;
+			$questions = sql_select('Q.*', 'spip_questions AS Q INNER JOIN spip_blocs AS B ON B.id_bloc=Q.id_bloc', 'B.id_formulaire='.intval($this->formulaire->id_formulaire), '', 'B.ordre, Q.ordre');
+			while ($question = spip_fetch_array($questions))
+				$resultats[$i][] = typo($question['titre']);
+			$i++;
+			$applications = sql_select('*', 'spip_applications', 'id_application='.intval($this->id_application));
+			while ($application = sql_fetch($applications)) {
+				$questions = sql_select('Q.*', 'spip_questions AS Q INNER JOIN spip_blocs AS B ON B.id_bloc=Q.id_bloc', 'B.id_formulaire='.intval($this->formulaire->id_formulaire), '', 'B.ordre, Q.ordre');
+				while ($question = sql_fetch($questions)) {
+					$reponses = sql_select('*', 'spip_reponses', 'id_question='.intval($question['id_question']).' AND id_application='.intval($application['id_application']));
+					$tableau_reponses = array();
+					$tableau_choix = array();
+					while ($reponse = sql_fetch($reponses)) {
+						$tableau_reponses[] = $reponse['valeur'];
+					}
+					switch ($question['type']) {
+						case 'champ_texte':
+						case 'zone_texte':
+						case 'email_applicant':
+						case 'nom_applicant':
+						case 'fichier':
+							$resultats[$i][] = implode(', ', $tableau_reponses);
+							break;
+						case 'boutons_radio':
+						case 'cases_a_cocher':
+						case 'liste':
+						case 'liste_multiple':
+						case 'abonnements':
+						case 'auteurs':
+							foreach ($tableau_reponses as $id_choix) {
+								$choix = sql_getfetsel('titre', 'spip_choix_question', 'id_choix_question='.intval($id_choix));
+								$tableau_choix[] = typo($choix);
+							}
+							$resultats[$i][] = implode(', ', $tableau_choix);
+							break;
+					}
+				}
+				$i++;
+			}
+			surcharges_exporter_csv('resultats', $resultats);
 		}
 
 
@@ -1429,6 +1483,10 @@
 		var $descriptif;
 		var $id_ancien_bloc;
 
+		var $mimes_type = array();
+		var $extensions = array();
+		var $fichiers = array();
+
 
 		/**
 		 * question : constructeur
@@ -1455,6 +1513,20 @@
 				$this->type			= $arr['type'];
 				$this->obligatoire	= $arr['obligatoire'];
 				$this->controle		= $arr['controle'];
+				$this->mime			= $arr['mime'];
+				if ($this->mime) {
+					$i = 0;
+					$mimes = unserialize($this->mime);
+					if (is_array($mimes)) {
+						foreach ($mimes as $mime) {
+							$t = sql_fetsel('*', 'spip_types_documents', 'mime_type="'.$mime.'"');
+							$this->mimes_type[$i]	= $t['mime_type'];
+							$this->extensions[$i]	= $t['extension'];
+							$this->fichiers[$i]		= $t['titre'];
+							$i++;
+						}
+					}
+				}
 			}
 		}
 
@@ -1482,6 +1554,7 @@
 																		'id_bloc' => $this->bloc->id_bloc,
 																		'ordre' => $this->ordre,
 																		'type' => $this->type,
+																		'mime' => $this->mime,
 																		'obligatoire' => $this->obligatoire,
 																		'controle' => $this->controle,
 																		'titre' => $this->titre,
@@ -1527,6 +1600,7 @@
 													'titre' => $this->titre,
 													'descriptif' => $this->descriptif,
 													'type' => $this->type,
+													'mime' => $this->mime,
 													'obligatoire' => $this->obligatoire,
 													'controle' => $this->controle
 													),
@@ -1776,9 +1850,9 @@
 			echo $image_type;
 			echo "</td>\n";
 			echo "<td class='arial2' width='160'>\n";
-			echo "<A HREF='".generer_url_ecrire("questions_edit","id_formulaire=".$this->bloc->formulaire->id_formulaire."&id_bloc=".$this->bloc->id_bloc."&id_question=".$this->id_question)."'>\n";
+			echo "<a href='".generer_url_ecrire("questions_edit","id_formulaire=".$this->bloc->formulaire->id_formulaire."&id_bloc=".$this->bloc->id_bloc."&id_question=".$this->id_question)."'>\n";
 			echo typo($this->titre);
-			echo "</A>\n";
+			echo "</a>\n";
 			echo "</td>\n";
 			echo "<td class='arial2'>\n";
 			echo typo($this->descriptif);
@@ -1787,6 +1861,16 @@
 			echo $ajouter.$espace.$monter.$descendre.$espace.$editer.$espace.$supprimer;
 			echo "</td>\n";
 			echo "</tr>\n";
+
+			if ($this->type == 'fichier' and count($this->fichiers)) {
+				echo "<tr class='tr_liste' valign='top'>\n";
+				echo "<td colspan='2' class='arial11'>&nbsp;</td>\n";
+				echo "<td colspan='2' class='arial2'>\n";
+				echo implode(', ', $this->fichiers);
+				echo "</td>\n";
+				echo "<td class='arial1' width='128'>&nbsp;</td>\n";
+				echo "</tr>\n";
+			}
 
 			$choix_question = $this->recuperer_choix_question();
 			foreach ($choix_question as $id_choix_question) {
