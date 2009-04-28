@@ -12,33 +12,34 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-global $tables_principales;
-global $tables_auxiliaires;
-global $tables_jointures;
-global $table_des_tables;
+function spipmotion_declarer_tables_principales($tables_principales){
+	$spip_spipmotion_attentes = array(
+		"id_spipmotion_attente" => "BIGINT(21) NOT NULL auto_increment",
+		"id_document" => "BIGINT(21) NOT NULL DEFAULT '0'",
+		"id_objet" => "BIGINT(21) NOT NULL DEFAULT '0'",
+		"objet" => "VARCHAR(25)",
+		"id_auteur" => "BIGINT(21) NOT NULL DEFAULT '0'",
+		"encode"	=> "VARCHAR(21)",
+		"maj" => "TIMESTAMP"
+	);
+	$spip_spipmotion_attentes_key = array(
+		"PRIMARY KEY" => "id_spipmotion_attente",
+		"KEY id_document" => "id_document",
+		"KEY id_objet" => "id_objet",
+		"KEY encode" => "encode"
+	);
 
-$spip_spipmotion_attentes = array(
-	"id_spipmotion_attente" => "BIGINT(21) NOT NULL auto_increment",
-	"id_document" => "BIGINT(21) NOT NULL DEFAULT '0'",
-	"id_objet" => "BIGINT(21) NOT NULL DEFAULT '0'",
-	"objet" => "VARCHAR(25)",
-	"id_auteur" => "BIGINT(21) NOT NULL DEFAULT '0'",
-	"encode"	=> "VARCHAR(21)",
-	"maj" => "TIMESTAMP"
-);
-$spip_spipmotion_attentes_key = array(
-	"PRIMARY KEY" => "id_spipmotion_attente",
-	"KEY id_document" => "id_document",
-	"KEY id_objet" => "id_objet",
-	"KEY encode" => "encode"
-);
-
-$tables_principales['spip_spipmotion_attentes'] = array(
-	'field' => &$spip_spipmotion_attentes,
-	'key' => &$spip_spipmotion_attentes_key
-);
+	$tables_principales['spip_spipmotion_attentes'] = array(
+		'field' => &$spip_spipmotion_attentes,
+		'key' => &$spip_spipmotion_attentes_key
+	);
+	return $tables_principales;
+}
 
 // Declarer dans la table des tables pour sauvegarde
-$table_des_tables['spipmotion_attentes'] = 'spipmotion_attentes';
+function spipmotion_declarer_tables_interfaces($interfaces){
+	$interfaces['table_des_tables']['spipmotion_attentes'] = 'spipmotion_attentes';
+	return $interfaces;
+}
 
 ?>

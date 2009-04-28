@@ -3,7 +3,7 @@
 include_spip("inc/spipmotion");
 
 function spipmotion_editer_contenu_objet($flux){
-	if(extension_loaded('ffmpeg')){
+	if(charger_php_extension('ffmpeg')){
 		$id_document = $flux['args']['id'];
 		if($flux['args']['type']=='case_document'){
 			$document = sql_fetsel("docs.id_document, docs.extension, L.vu,L.objet,L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
