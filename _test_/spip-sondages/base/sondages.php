@@ -192,6 +192,11 @@
 						effacer_meta('fond_sondage');
 						ecrire_metas();
 					}
+					if ($version_base < 2.0) {
+						// pour faire coïncider avec spip 2
+						ecrire_meta('spip_sondages_version', $version_base = 2.0);
+						ecrire_metas();
+					}
 				}
 				break;
 			case 'uninstall':
