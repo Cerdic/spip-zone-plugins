@@ -1,96 +1,57 @@
-#CACHE{0}
+#HTTP_HEADER{"HTTP/1.0 404 Not Found"}
+#HTTP_HEADER{"Cache-Control: no-store, no-cache, must-revalidate"}
+#HTTP_HEADER{Pragma: no-cache}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="#LANG_DIR" lang="#LANG">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
-	<title>[(#NOM_SITE_SPIP|textebrut)]</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
-	[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|attribut_html)" />]
-	<meta name="generator" content="SPIP" />
-	[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
-
-	<!-- Lien vers le backend pour navigateurs eclaires -->
-	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}" />
-
-	<!-- Feuille de styles CSS pour l'affichage du site sur ecran -->
-	<link rel="stylesheet" href="[(#CHEMIN{habillage.css}|direction_css)]" type="text/css" media="projection, screen, tv" />
-	<!-- Ceci est la feuille de style par defaut pour le code genere par SPIP -->
-	<link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" media="projection, screen, tv" />
-	<!-- Feuille de styles CSS pour l'impression -->
-	<link rel="stylesheet" href="[(#CHEMIN{impression.css}|direction_css)]" type="text/css" media="print" />
-
-[(#REM) Balise permettant aux plugins d'inserer des appels javascript ou css ]
-#INSERT_HEAD
-
-
-
+<title>Abonnement - [(#NOM_SITE_SPIP|textebrut)]</title>
+<INCLURE{fond=inc-head}>
+<meta name="robots" content="none" />
 </head>
-
-<body id="page_sommaire">
-
-<div id="page">
-
+<body>
+	<div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
-	<INCLURE{fond=inc-entete}{lang}>
-
-	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><:accueil_site:></div>
+	<INCLURE{fond=inc-entete}>
 
 	<div id="conteneur">
+    <div id="contenu">
 
-		[(#REM) Contenu principal : derniers articles publies ]
-
-		<div id="contenu">
-
-			<h1 class="invisible">#NOM_SITE_SPIP</h1>
-			[<div class="chapo">(#DESCRIPTIF_SITE_SPIP)</div>]
-
-			[(#SESSION{id_auteur}|?{' ',''})			
+        [(#SESSION{id_auteur}|oui)			
 				<fieldset style="margin:10px 0px">
 				<legend>Informations personnelles</legend>
-				<INCLURE(inc/profil_adherent.php){id_auteur = #SESSION{id_auteur}}> 
+				<INCLURE{fond=prive/profil}{id_auteur=#SESSION{id_auteur}}>
 				</fieldset>
+
 				<INCLURE{fond=fonds/mes_abonnements}>
 				]			
 
-			[(#SESSION{id_auteur}|?{'',' '})			
+			[(#SESSION{id_auteur}|non)			
 				#FORMULAIRE_INSCRIPTION2
 			]
 
 
-		</div><!-- fin contenu -->
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
 
-		[(#REM) Menu de navigation laterale ]
-		<div id="navigation">
-			<h1 class="invisible"><:navigation:></h1>
+    [(#REM) Menu de navigation laterale ]
+    <div id="navigation">
 
-			[(#REM) Menu de navigation par rubriques ]
-			<INCLURE{fond=inc-rubriques}{lang}>
-			
-		<INCLURE(session.php){fond=inc-connexion}>
+        [(#REM) Menu de navigation par rubriques ]
+        <INCLURE{fond=inc-rubriques}>
 		
-		[(#SESSION{nom}?{'',' '})
-		<div style="background-color:red;color:#ffffff;font-weight:bold;text-align:center;margin:10px 0x 10px 0px">
-		<a href="spip.php?page=_abonnement_">Je m'abonne</a>
-		</div>
-		]	
-			
+		#FORMULAIRE_RECHERCHE
 
-
-		</div><!-- fin navigation -->
-
-
-
-	</div><!-- fin conteneur -->
+    </div><!--#navigation-->
+	
+	[(#REM) Menu de navigation laterale ]
+	<div id="extra">
+	&nbsp;
+	</div><!--#extra-->
 
 	[(#REM) Pied de page ]
-	
-	<div style="text-align:center">
-	<INCLURE{fond=inc-pied}{lang}>
-	</div>
-	
-	
-</div><!-- fin page -->
-#SPIP_CRON
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+	</div><!--#page-->
 </body>
 </html>

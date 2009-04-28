@@ -5,14 +5,14 @@
 <BOUCLE_auteur(AUTEURS){id_auteur = #SESSION{id_auteur}}{tout}>
 <BOUCLE_auteur_elargi(AUTEURS_ELARGIS auteurs){id_auteur}>
 
-<BOUCLE_abo_valide(spip_auteurs_elargis_abonnements){id_auteur_elargi = #ID}{validite > #GET{date_future}}>
+<BOUCLE_abo_valide(spip_auteurs_elargis_abonnements){id_auteur = #ID_AUTEUR}{validite > #GET{date_future}}>
 <h2 style="margin:20px 0px">Votre abonnement</h2>
 <BOUCLE_abo(spip_abonnements){id_abonnement}>
 #LIBELLE - &eacute;ch&eacute;ance le [(#VALIDITE|affdate)]
 </BOUCLE_abo>
 </BOUCLE_abo_valide>		
 	
-	<BOUCLE_abo_echu(spip_auteurs_elargis_abonnements){id_auteur_elargi = #ID}>
+	<BOUCLE_abo_echu(spip_auteurs_elargis_abonnements){id_auteur}>
 	<BOUCLE_abo_2(spip_abonnements){id_abonnement}>
 
 	<div style="margin:20px 0px;padding:10px;background-color:#FFE2E2">
@@ -42,7 +42,7 @@
 	<B_articles>
 	<h2 style="margin:20px 0px">Vos articles</h2>
 	<ul>
-	<BOUCLE_articles(spip_auteurs_elargis_articles){id_auteur_elargi = #ID}>
+	<BOUCLE_articles(spip_auteurs_elargis_articles){id_auteur_elargi = #ID_AUTEUR}>
 	<li><a href="[(#URL_PAGE{article,id_article=#ID_ARTICLE})]">[(#ID_ARTICLE|id_article_to_titre)]</a></li>
 	</BOUCLE_articles>
 	</ul>
