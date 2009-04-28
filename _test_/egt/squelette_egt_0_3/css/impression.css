@@ -1,0 +1,889 @@
+
+/*
+ * Feuille de style specifique a l'impression
+ */
+ 
+/* Pour les liens, on desactive les couleurs
+   et on affiche l'URL cible a la suite du lien (!) */
+
+a { color: black; text-decoration: underline; }
+a:visited { color: black; text-decoration: underline; }
+a.spip_in { color: black; text-decoration: underline; }
+a.spip_out { color: black; text-decoration: underline; }
+a:after {
+	display: inline;
+	border: 1px solid dotted;
+	content: " [" attr(href) "]";
+}
+
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	}
+
+.invisible {display:none}
+/*  ------------------------------------------
+/*  bordure superieure cadre principal
+/*  ------------------------------------------*/
+
+#top {
+
+	
+}
+/*  ------------------------------------------
+/*  accesibilite
+/*  ------------------------------------------*/
+
+#ac-key {
+
+display:none;
+}
+
+#noprint {
+
+display:none;
+}
+
+
+/*  ------------------------------------------
+/*  header
+/*  ------------------------------------------*/
+#header {
+
+	padding: 10px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+}
+#header h1 {
+	margin-top: -20px;
+	text-align: center;
+}
+#header h4 {
+	font-size: 0.8em;
+	text-align: center;
+	color: #CFCFCF;
+}
+#header img {
+width:95%;
+	padding: 0px 0px 0px 0px;
+	margin: -10px 10px 0px 7px;
+	border: 0px;
+}
+#header-logo-mot img {
+display:none;
+	position: absolute;
+	padding: 0px 0px 0px 0px;
+	margin: -110px 10px 0px 520px;
+	border: 0px;
+}
+#header-texte {
+
+	position: absolute;
+	margin: -120px 0px 0px 120px;
+	color: #4E5383;
+}
+#header-mel {
+display:none;
+	position: absolute;
+	margin: -60px 10px 0px 550px;
+}
+
+
+
+
+/*  ------------------------------------------
+/*  menu
+/*  ------------------------------------------*/
+#menu2 {
+display:none;
+}
+
+/*  ------------------------------------------
+/*  navigation
+/*  ------------------------------------------*/
+#haut {
+display:none;
+}
+
+/*  ------------------------------------------
+/*  blocs principaux
+/*  ------------------------------------------*/
+#conteneur {
+
+	
+	
+}
+#conteneur1 {
+	
+	
+}
+/*  ------------------------------------------
+/*  colonne centrale
+/*  ------------------------------------------*/
+.centre-top {
+	margin: 0px 0px -15px 0px;
+	padding: 0px 0px 0px 0px;
+}
+.centre-top p {
+	margin: 0px;
+}
+.centrerubli {
+	list-style-image: none;
+}
+#centre {
+	width: 410px;
+	margin: -2px 0px 0px 180px
+}
+#centre h3 {
+	font-size: 1.2em;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 5px 0px;
+}
+#centre h3 img {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+}
+#centre h5 {
+	color: #BFB5B3;
+	font-weight: 500;
+	margin: 2px 0px 0px 0px;
+}
+#centre h4 {
+	color: #6F6A5A;
+	font-size: 11px;
+	font-weight: 500;
+	font-style: italic;
+	margin: -10px 20px 15px 0px;
+}
+#centre li {
+	font-size: 1.2em;
+	font-weight: bold;
+	padding: 0px 0px 0px 0px;
+}
+#centre li img{
+	
+}
+#centre ul {
+	margin: 0px 20px 0px 40px;
+	list-style-image: url(fleche.gif);
+}
+#centre-rubrique {
+	width: 410px;
+	margin: -2px 0px 0px 180px
+}
+#centre-rubrique ul {
+	margin: 10px 0px 15px 50px;
+	list-style-image: url(fleche.gif);
+}
+#centre-rubrique li {
+	margin: 0px 0px 0px 0px;
+}
+#centre-rubrique h2 {
+	width: 75%;
+	border-color: #006699;
+	border-style: solid;
+	border-width: 0px 0px 1px 0px;
+	padding: 0px 0px 0px 0px;
+	margin: -3px 0px 10px 0px;
+}
+#centre-article {
+	border-color: #000000;
+	border-style: solid;
+	border-width: 0px 0px 0px 0px;
+	
+	margin: 0px 10px 25px 10px;
+width : 95%;
+}
+#centre-article h2{
+	margin-top:-3px;
+        
+
+}
+#centre hr {
+	float: left;
+	color: #EFEFEF;
+	margin: 0px 0px 0px 0px;
+	width: 99%;
+	height: 3px;
+}
+#texterub {
+	margin: 10px 10px 10px 0px;
+	padding: 10px 10px 10px 10px;
+	border: black 1px solid;
+-moz-border-radius: 10px;
+	background-color: #E8DE84;
+
+}
+
+
+
+/*  ------------------------------------------
+/*  pied
+/*  ------------------------------------------*/
+#ombrepied {
+		
+		
+	display:none;
+	padding: 25px 0px 7px 0px;
+	margin: 0px 0px 0px 0px;
+
+}
+#pied {
+display:none;
+	border-color: black;
+	border-style: solid;
+	border-width: 1px 0px 0px 0px;
+	clear: both;
+	text-align: right;
+	width: 760px;
+margin-bottom:-15px;
+
+
+}
+#pied-spip {
+
+	font-size: 0.8em;
+	float: left;
+	padding: 5px 0px 0px 10px;
+
+}
+#pied-ecrire {
+	font-size: 0.9em;
+	margin: 5px 5px 10px 0px;
+
+}
+/*  ------------------------------------------
+/*  colonne gauche
+/*  ------------------------------------------*/
+#gauche {
+display:none;
+	
+}
+
+/*  ------------------------------------------
+/*  colonne droite
+/*  ------------------------------------------*/
+#droite {
+display:none;
+	float: right;
+	width: 150px;
+	padding-right: 18px;
+	font-size: 0.9em;
+}
+#menudroit ul {
+	margin: 0px 5px -10px 10px;
+}
+#menudroit li {
+	list-style-type: square;
+	margin: 0px 5px 0px 10px;
+	padding: 5px 0px 0px 0px;
+	color: #B9D570;
+}
+#menudroit li p {
+	font-size: 0.8em;
+	color: #BFB5B3;
+margin-top:1px;
+}
+.separation {
+	margin-left: 30px;
+	margin-bottom: -10px;
+	padding-top: 5px;
+	height: 1px;
+	width: 70px;
+	border-width: 0px 0px 1px 0px;
+	border-style: dotted;
+	border-color: #BFBFBF;
+}
+#syndic {
+	margin-top: 0px;
+	font-size: 11px;
+}
+#syndic center img {
+	margin-left: 10px;
+}
+#syndic h2 {
+	font-size: 11px;
+	margin-left: 10px;
+	text-align: center;
+	margin: 7px 0px 7px 10px;
+	padding: 0px 0px 0px 0px;
+}
+#syndic li {
+	list-style-type: square;
+	margin: -7px 5px 10px 23px;
+	padding: 0px 0px 0px 0px;
+	color: #B9D570;
+}
+#syndic_gauche {
+	margin-top: 15px;
+	font-size: 0.9em;
+}
+#syndic_gauche img {
+	margin-bottom: 10px;
+}
+#syndic_gauche h2 {
+	font-size: 11px;
+	margin-left: 13px;
+	text-decoration: none;
+}
+#syndic_gauche li {
+	list-style-type: square;
+	margin: -7px 5px 10px 20px;
+	padding: 0px 0px 0px 0px;
+	color: #B9D570;
+}
+.nomsite {
+	margin-top: 3px;
+	font-size: 0.8em;
+	color: #BFB5B3;
+}
+.sitesyndiclogo {
+	margin: 0px 0px 0px 45px;
+}
+.sitesyndicdesc {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 10px 10px 10px;
+	text-align: justify;
+	margin-left: 10px;
+}
+
+/*  ------------------------------------------
+/*  porfolio
+/*  ------------------------------------------*/
+.porfolio {
+	float: left;
+	padding: 5px 0px 0px 0px;
+	margin: 10px 10px 10px 10px;
+	text-align: center;
+	width: 156px;
+	color: black;
+	font-weight: 800;
+	font-size: 13px;
+-moz-border-radius: 10px;
+	border: black 1px solid;
+	
+}
+.porfolio a {
+	padding-bottom: 1px;
+}
+.porfolio h5 {
+	text-align: center;
+	margin-top: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 3px;
+	padding-right: 3px;
+	font-size: 11px;
+	color: black;
+	font-weight: 300;
+}
+.porfolio h6 {
+	text-align: center;
+	margin-top: 7px;
+	margin-bottom: 6px;
+	font-size: 9px;
+	font-weight: 100;
+	color: #CFCFCF;
+}
+.porfolio-sommaire {
+	width: 400px;
+	padding-left: 0px;
+	margin: 10px auto 20px auto;
+}
+#porfolio-article {
+	width: 545px;
+	border-color: red;
+	border-style: solid;
+	border-width: 0px 0px 0px 0px;
+}
+/*  ------------------------------------------
+/*  dans l'article
+/*  ------------------------------------------*/
+#sur-titre {
+	font-size: 1.1em;
+	font-weight: bold;
+	font-stretch: wider;
+	margin-left: 3px;
+	margin-top: -5px;
+	padding-bottom: 2px;
+}
+#titre-texte {
+	font-size: 1.2em;
+	font-weight: bolder;
+	border-width: 0px 0px 0px 0px;
+	border-style: solid;
+	border-color: black;
+	
+	padding-left: 5px;
+	padding-bottom: 5px;
+	margin-right: -7px;
+}
+#publie {
+	margin-top: 10px;
+	font-size: 0.85em;
+	margin-left: 3px;
+}
+#datemodif {
+	margin-top: 0px;
+	font-size: 0.8em;
+	margin-left: -6px;
+	color: #9F9F9F;
+}
+#sous-titre {
+	font-size: 1.1em;
+	margin-top: 0px;
+	margin-left: 3px;
+	margin-bottom: 5px;
+	color: gray;
+}
+#chapeau {
+	margin-top: 13px;
+	font-size: 1em;
+	font-weight: bold;
+	color: gray;
+	border-width: 1px;
+	border-style: solid;
+	border-color: black;
+	background-color: #EFEFEF;
+	-moz-border-radius: 10px;
+	padding: 10px;
+}
+#texte {
+	font-size: 1.0em;
+}
+#ps {
+	font-size: 0.9em;
+	border-width: 1px;
+	border-style: solid;
+	border-color: black;
+	background-color: #DFDFDF;
+	-moz-border-radius: 10px;
+	padding: 5px 5px;
+	0px;
+	0px;
+}
+#notes {
+}
+
+
+
+/*  ------------------------------------------
+/*  forums
+/*  ------------------------------------------*/
+.formulaire_forum {
+	
+	
+	border-width: 1px;
+	border-style: solid;
+	border-color: black;
+	background-color: #EFF8FF;
+	-moz-border-radius: 10px;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 10px;
+}
+.formulaire_forum legend{
+	
+	font-weight:bold;
+	
+}
+.formulaire_forum #url_site {
+	
+	margin-left : 7px;
+}
+.formulaire_forum #auteur {
+	width:50%;
+	margin-left : 7px;
+
+}
+.formulaire_forum #email_auteur {
+	width:50%;
+	margin-left : 66px;
+
+}
+
+
+.forum-repondre {
+display:none;
+	float: left;
+	font-size: 0.9em;
+	border-width: 1px;
+	border-style: solid;
+	border-color: black;
+	background-color: #DFDFDF;
+	-moz-border-radius: 10px;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 10px;
+}
+.forum ul {
+	font-size: 0.85em;
+	border-width: 0px;
+	border-style: solid;
+	border-color: black;
+	-moz-border-radius: 10px;
+	padding: 10px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+}
+.forum-fil li {
+	margin-left: 25px;
+	list-style-image: none;
+}
+.forum-total {
+}
+.forum-fil {
+	color: black;
+	margin-left: 50px;
+	list-style-image: none;
+}
+.forum {
+}
+.forum-chapo {
+}
+.forum-titre {
+	font-weight: bold;
+	padding: 5px 5px 5px 5px;
+	margin: 10px 0px 0px -4px;
+}
+.forum-item {
+	border-width: 1px 1px 0px 0px;
+	border-style: solid;
+	border-color: #AFAFAF;
+	background-color: #EFEFEF;
+	-moz-border-radius: 10px;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 0px;
+}
+.forum-repondre-message {
+	border-width: 1px 1px 0px 0px;
+	border-style: none;
+	border-color: black;
+	background-color: #EFEFEF;
+	-moz-border-radius: 10px;
+	padding: 5px 5px 5px 5px;
+	margin: 10px 0px 0px 0px;
+}
+.forum-texte {
+	border-width: 1px 1px 0px 0px;
+	border-style: solid;
+	border-color: black;
+	background-color: #DFDFDF;
+	-moz-border-radius: 10px;
+	padding: 5px 5px 5px 5px;
+	margin: 10px 0px 0px 0px;
+}
+
+/*  ------------------------------------------
+/*  formulaire sites
+/*  ------------------------------------------*/
+.formulaire_site {
+display:none;
+	border-width: 1px;
+	border-style: solid;
+	border-color: black;
+	background-color: #EFF8FF;
+	-moz-border-radius: 10px;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 20px 10px;
+}
+.formulaire_site legend{
+	
+	font-weight:bold;
+	
+}
+.formulaire_site #nom_site {
+	margin-left : 63px;
+        width : 52%;
+}
+.formulaire_site #url_site {
+	
+        width : 52%;
+}
+
+
+/*  ------------------------------------------
+/*  recherche
+/*  ------------------------------------------*/
+#rechercher {
+	text-align: center;
+	border: dashed black;
+	border-width: 1px 1px 1px 1px;
+	padding: 10px 10px 10px 10px;
+	margin: 10px 10px 0px 10px;
+}
+#recherche {
+}
+#recherche h1 {
+	font-size: 1.3em;
+}
+input#recherche {
+	border-top: 1px solid #333;
+	border-left: 1px solid #333;
+	border-bottom: 1px solid #666;
+	border-right: 1px solid #666;
+	background: #FFF3CF url("loupe.gif") no-repeat;
+	padding-left: 17px;
+	width: 85px;
+}
+#recherche:focus {
+	background-image: url("loupe.gif") ;
+}
+.formulaire_recherche label {
+	display: none;
+}
+.formulaire_recherche {
+	margin-left: 25px;
+	padding: 5px 0px 5px 0px;
+	width: 100px;
+}
+
+/*  ------------------------------------------
+/*  page mot
+/*  ------------------------------------------*/
+#descmot {
+	position: relative;
+	float: right;
+	background: #D3D3D3;
+	width: 290px;
+	margin: 10px 10px 0px 10px;
+	padding: 10px 10px 10px 10px;
+	height: 300px;
+	overflow: scroll;
+	border: solid black;
+	border-width: 2px 0px 0px 0px;
+}
+#descmot h1 {
+	font-size: 1.4em;
+	color: #ffd307;
+	text-align: center;
+}
+#descmot h3 {
+	color: #008080;
+	text-align: center;
+}
+#fiches-trouvees h1 {
+	font-size: 1.2em;
+	margin-top: -3px;
+}
+#fiches-trouvees {
+	font-size: 1.1em;
+}
+#fiches-trouvees h4 {
+	color: #C0C0C0;
+	text-align: left;
+	font-size: 0.8em;
+	margin-top: -15px;
+	margin-bottom: -15px;
+}
+#fiches-trouvees h6 {
+}
+/*  ------------------------------------------
+/*  menu de recherche logiciels primtice
+/*  ------------------------------------------*/
+#niveau select {
+	background: #FFBF4F;
+	margin-bottom: 5px;
+}
+#niveau input {
+	margin-bottom: 5px;
+}
+#compc1 select {
+	background: #B9D570;
+	width: 360px;
+}
+#compc2 select {
+	background: #B9D570;
+	width: 360px;
+}
+#compc3 select {
+	background: #B9D570;
+	margin-bottom: 5px;
+	width: 360px;
+}
+#compc3 input {
+	margin-bottom: 5px;
+}
+#logiciel select {
+	background: #006699;
+	color: white;
+}
+/*  ------------------------------------------
+/*  encart logiciels primtice
+/*  ------------------------------------------*/
+#projet5 {
+	height: 165px;
+	width: 110px;
+	margin-left: 16%;
+	text-align: center;
+	overflow: auto;
+	border: 1px dashed black;
+	border-width: 0px 0px 1px 1px;
+	padding: 1px 1px 1px 1px;
+}
+#projet5 h6 {
+	display: block;
+	margin-top: -1px;
+	text-decoration: none;
+}
+#projet5onglet {
+	width: 116px;
+	background: url(./images/fondlog.gif) top #006699;
+	color: #486800;
+	margin-top: 0px;
+	margin-left: 22px;
+	padding: 1px 1px 5px 1px;
+	color: white;
+	text-align: center;
+	border: solid black;
+	border-width: 1px 1px 2px 1px;
+}
+
+/*  ------------------------------------------
+/*  formulaire inscription
+/*  ------------------------------------------*/
+
+.formulaire_inscription {
+	font-size: 0.85em;
+}
+#inscription {
+	margin-left: -7px;
+	margin-bottom: 8px;
+}
+#inscription input {
+	width: 130px;
+}
+#inscription {
+	font-size: 0.95em;
+	padding-left: 10px;
+}
+#inscription form {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+	font-size: 0.8em;
+}
+.formulaire_forum input {
+	background: #F4E089;
+}
+/*  ------------------------------------------
+/*  habillage des petitions
+/*  ------------------------------------------*/
+.formulaire_signature {
+	display:none;
+	
+	border-width: 1px;
+	border-style: solid;
+	border-color: black;
+	background-color: #EFF8FF;
+	-moz-border-radius: 10px;
+	padding: 5px 5px 5px 5px;
+	margin: 0px 0px 0px 10px;
+}
+.formulaire_signature legend{
+	
+	font-weight:bold;
+	
+}
+.formulaire_signature #signature_url_site {
+	
+	margin-left : 11px;
+}
+
+.formulaire_signature #adresse_email {
+	
+	margin-left : 11px;
+
+}
+
+
+#signatures {
+	font-size: 0.77em;
+}
+#signatures h2 {
+	padding: 0.5em;
+	text-align: center;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+#signatures table {
+	width: 100%;
+	margin: 1em 0;
+}
+#signatures thead {
+	display: none;
+}
+/* On n'affiche pas les titres du tableau */
+#signatures td.signature-date {
+	background: #E4F0F0;
+	padding: 0.5em;
+	white-space: nowrap;
+}
+#signatures td.signature-nom {
+	background: #ECF4F4;
+	padding: 0.2em;
+	text-align: center;
+	font-weight: bold;
+}
+#signatures td.signature-message {
+	background: #F4F8F8;
+	padding: 0.4em;
+	font-size: 0.96em;
+}
+/*  pour enlever le clear both de spip.style.css */
+.spip_documents_center {
+	clear: none;
+}
+/*  ------------------------------------------
+/*   a classer
+/*  ------------------------------------------*/
+
+
+textarea {
+	width: 90%;
+	margin: 10px 10px 10px 10px;
+}
+#a-retenir-texte {
+	padding-left: 10px;
+}
+/* * Barre de raccourcis */
+a.spip_barre img {
+	border-left: 1px solid #ffffff;
+	border-top: 1px solid #ffffff;
+	border-right: 1px solid #aa9966;
+	border-bottom: 1px solid #aa9966;
+	padding: 3px;
+	background-color: #FFDDAA;
+}
+a.spip_barre:hover img {
+	border: 1px solid #808080;
+	padding: 3px;
+	background-color: #f8f8f4;
+}
+#principal {
+	margin-left: 20px;
+	padding-left: 5px;
+	width: 85%;
+	margin-bottom: 10px;
+}
+#petition {
+}
+#aretenir-texte {
+	margin-bottom: 15px;
+	margin-left: 20px;
+}
+#login {
+	margin: -15px 0px 20px 0px;
+}
+#textebreve {
+	margin: 10px 10px 10px 10px;
+	padding: 10px 10px 10px 10px;
+	border: black 1px dotted;
+	background-color: #fff;
+}
+#logorub {
+}
+
+
+/*
+ * Boutons admin
+ */
+ 
+.spip-admin-float {
+	display: none;
+}
