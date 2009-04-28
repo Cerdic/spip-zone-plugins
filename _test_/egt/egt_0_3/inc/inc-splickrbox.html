@@ -1,0 +1,23 @@
+[(#REM) <!-- Noisette splickrbox
+On passe au modele les parametres
+- nombre de colonnes
+- nombre de vignettes
+- taille de la grande vignette
+- classement
+- sens inverse ou pas
+-->]
+
+<B_splickrbox>
+<BOUCLE_splickrbox(ARTICLES) {titre_mot="album une"} {par date} {inverse} {0,1}>
+    <div id="splickrbox">
+        <div><a href="#URL_ARTICLE" title="#TITRE"><:egt:album_une:></a></div>
+    
+        <div class="contenu">
+            [(#REM) <!-- Bloc des vignettes du gadget splickrbox -->] 
+            <div class="mois">
+                [(#MODELE{splickrbox}{colonnes=3}{taille=9}{masque=carre-112.png}{tri=hasard}{senstri=0})]
+            </div>
+        </div> <!-- Fin contenu -->
+    </div> <!-- Fin div splickrbox -->
+</BOUCLE_splickrbox>
+</B_splickrbox>

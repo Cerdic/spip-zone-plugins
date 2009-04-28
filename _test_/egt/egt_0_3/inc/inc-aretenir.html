@@ -1,0 +1,24 @@
+<h2 class="invisible">A retenir</h2> 
+<!-- B1 teste si des articles publies ont mot cle afficher titre a retenir ou afficher texte a retenir present si oui affiche un seul logo il vaut mieux mettre le meme logo a ces mots cles-->
+<B1>
+<BOUCLE_logoaretenir3(MOTS){titre IN afficher titre a retenir,afficher texte a retenir}{0,1}>
+[(#LOGO_MOT||inserer_attribut{'title',#TEXTE})]
+</BOUCLE_logoaretenir3>
+<BOUCLE1(ARTICLES){statut=publie}{titre_mot IN afficher titre a retenir,afficher texte a retenir}>
+</BOUCLE1>
+</B1>
+
+<!-- affiche titre articles lie au mot cle afficher titre a retenir-->
+<BOUCLE2(ARTICLES){titre_mot=afficher titre a retenir}><ul>
+<li class="droite"><a href="#URL_ARTICLE" title="[(#CHAPO ) -] <:ecrire:info_statut_site_2:> [(#DATE|affdate_court)]">[(#TITRE|supprimer_numero)]</a></li>
+</ul></BOUCLE2>
+
+<!-- affiche textes articles lie au mot cle afficher texte a retenir-->
+<div id="aretenir-texte">
+<BOUCLE3(ARTICLES){tout}{titre_mot=afficher texte a retenir}>
+<br/>[(#TEXTE|image_reduire{120,0})]
+<br />
+<hr class="separation"></hr>
+</BOUCLE3>
+
+</div> <!-- fin div aretenir-texte -->

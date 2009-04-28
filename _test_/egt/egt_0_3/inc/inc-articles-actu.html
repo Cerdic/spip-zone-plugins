@@ -1,0 +1,44 @@
+<h2 class="invisible">Actualit&eacute; du Web</h2> 
+<!-- debut boucle pour afficher les articles des sites syndiques qui ont le mot clé - afficher article actu -
+source : http://www.spip-contrib.net/Selectionner-les-x-derniers-->
+
+
+<!-- affichage conditionnel du logo si des sites syndiqués existent  avec le mot-clé afficher article actu -->
+<div class="titre_bloc">
+	<BOUCLE_sites_syndiques_test(SITES){syndication=oui}{titre_mot=afficher article actu}{0,1}>
+		<BOUCLE_logo_actu(MOTS){doublons}{titre=afficher article actu}>
+		[(#LOGO_MOT||inserer_attribut{'title',#TEXTE}|sinon{<strong><:voir_en_ligne:></strong><hr />})]
+		</BOUCLE_logo_actu> 
+	</BOUCLE_sites_syndiques_test>
+</div>
+
+<BOUCLE_art_actu(SITES){syndication=oui}{doublons}{titre_mot=afficher article actu}>  
+</BOUCLE_art_actu> 
+<BOUCLE_sites_syndiques_exclus(SITES){doublons}>
+<BOUCLE_articles_syndiques_exclus(SYNDIC_ARTICLES) {id_syndic} {doublons}>
+</BOUCLE_articles_syndiques_exclus> 
+</BOUCLE_sites_syndiques_exclus>
+
+<!-- modifier les criteres ci-dessous pour modifier l'affichage des articles actu -->
+<BOUCLE_articles_syndiques(SYNDIC_ARTICLES) {doublons} {age<45}{par hasard} {0,7}>
+<ul>
+<li><a href="#URL_ARTICLE" title="<:ecrire:info_statut_site_2:> [(#DATE|affdate_court)]">#TITRE</a><div class="nomsite">[#NOM_SITE]</div></li>
+</ul>
+</BOUCLE_articles_syndiques>
+<!-- fin boucle pour afficher articles sites syndiques actu --> 
+
+<!-- affichage conditionnel du logo si des articles existent avec le mot-clé afficher article actu -->
+<div class="titre_bloc">
+	<BOUCLE_logo_articles_actu(ARTICLES) {titre_mot=afficher article actu}{0,1}>
+		<BOUCLE_logo_actu2(MOTS){doublons}{titre=afficher article actu}>
+		[(#LOGO_MOT||inserer_attribut{'title',#TEXTE}|sinon{<strong><:voir_en_ligne:></strong><hr />})]
+		</BOUCLE_logo_actu2> 
+	</BOUCLE_logo_articles_actu>
+</div>
+
+<!--on affiche tous les articles avec le mot-clé afficher article actu  -->
+<BOUCLE_articles_actu(ARTICLES) {doublons} {titre_mot=afficher article actu}>
+<ul>
+<li><a href="#URL_ARTICLE" title="<:ecrire:info_statut_site_2:> [(#DATE|affdate_court)]">#TITRE</a><div class="datearticle">[(#DATE|affdate_court)]</div></li>
+</ul>
+</BOUCLE_articles_actu>

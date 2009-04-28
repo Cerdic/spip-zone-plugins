@@ -1,0 +1,40 @@
+
+<!-- Chemin du site -->
+<div id="haut">  
+
+	<a href="#URL_SITE_SPIP/?lang=#LANG"><:accueil_site:></a>
+
+	<BOUCLE_rubrique_hierarchie_breve(BREVES){id_breve}>
+	    <BOUCLE_chemin_breve(HIERARCHIE){id_article}>
+	        <span>&nbsp;<img src="#CHEMIN{images/puce.png}" alt=">"/>&nbsp;</span>
+			<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
+	    </BOUCLE_chemin_breve>
+		<span>&nbsp;<img src="#CHEMIN{images/puce.png}" alt=">"/>&nbsp;</span>
+		[(#TITRE|supprimer_numero)]
+	</BOUCLE_rubrique_hierarchie_breve>
+		
+	<BOUCLE_rubrique_hierarchie_article(ARTICLES){id_article}>
+	    <BOUCLE_chemin_article(HIERARCHIE){id_article}>
+	        <span>&nbsp;<img src="#CHEMIN{images/puce.png}" alt=">"/>&nbsp;</span>
+			<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
+	    </BOUCLE_chemin_article>
+		<span>&nbsp;<img src="#CHEMIN{images/puce.png}" alt=">"/>&nbsp;</span>
+		[(#TITRE|supprimer_numero)]
+	</BOUCLE_rubrique_hierarchie_article>  	
+			
+	<BOUCLE_rubrique_hierarchie(RUBRIQUES){id_rubrique}>
+	    <BOUCLE_chemin(HIERARCHIE){id_rubrique}>
+	        <span>&nbsp;<img src="#CHEMIN{images/puce.png}" alt=">"/>&nbsp;</span>
+			<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
+	    </BOUCLE_chemin>
+		<span>&nbsp;<img src="#CHEMIN{images/puce.png}" alt=">"/>&nbsp;</span>
+		[(#TITRE|supprimer_numero)]
+	</BOUCLE_rubrique_hierarchie>
+	  
+	<//B_rubrique_hierarchie_article>
+
+	<//B_rubrique_hierarchie_breve>
+
+</div>
+<!-- fin chemin du site -->
+

@@ -1,0 +1,20 @@
+        <!-- breves -->
+		<div id="breves">
+		<h2 class="invisible"><:breves:></h2> 	
+		  <B_breves>
+			
+			<div class="titre_bloc">
+				<BOUCLE_logo_breves(MOTS){titre=afficher logo breves}>
+				[(#LOGO_MOT||inserer_attribut{'title',#TEXTE}|sinon{<:breves:><hr />})]
+				</BOUCLE_logo_breves>
+			</div>
+			<ul>
+				<BOUCLE_breves(BREVES) {par date} {inverse} {0,6}>
+				<li><a href="#URL_BREVE" title="<:ecrire:info_dans_rubrique:> > <BOUCLE_titrebreve(RUBRIQUES){id_rubrique}>#TITRE</BOUCLE_titrebreve>"
+			>#TITRE</a>
+					<div class="datebreve">[(#DATE|affdate_court)]</div>
+					</li>
+				</BOUCLE_breves>
+			</ul>
+			</B_breves>
+		</div> <!--fin du div breves -->

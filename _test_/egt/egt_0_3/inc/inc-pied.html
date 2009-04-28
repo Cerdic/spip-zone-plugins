@@ -1,0 +1,32 @@
+	<div id="pied">
+	      <div id="pied-spip">
+		      <a href="http://www.spip.net/" title="<:site_realise_avec_spip:>"><img src="#CHEMIN{spip.png}" alt="SPIP" width="48" height="16" /></a> - 
+			  <a href="http://egt.bardourel.com" title="<:squelette:> egt"> egt</a> - 
+			  <a href="#ENV{skel}" title="<:voir_squelette:>" rel="nofollow"><:squelette:></a> - 
+			  <a href="[(#URL_PAGE{plan}|parametre_url{'lang',#LANG})]" title="<:plan_site:>"><:plan_site:></a> - 
+			  <a href="[(#CHEMIN{inc/inc-accesskey.html})]" title="<:egt:politique_accessibilite:> <:egt:en_francais:>"><:egt:accessibilite:></a> - 
+			  <!-- Remplacez le chiffre "1" par le numéro du webmestre/webmistress -->
+			  <a href="spip.php?auteur1&amp;lang=#LANG;" title="<:envoyer_message:>">Webmistress</a> - 
+			  <a href="http://validator.w3.org/check?uri=referer">XHTML</a> 1.0 - 
+			  <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> 2.0 
+		</div><!-- fin du div pied-spip -->
+	 
+		<div id="pied-ecrire"> 
+		      <a href="[(#URL_PAGE{backend}|parametre_url{'lang',#LANG})]" title="<:spip:ical_texte_rss_articles:>"><img src="[(#CHEMIN{images/feed.png})]" alt="<:spip:ical_texte_rss_articles:>" /></a>
+		       RSS - 
+		      <a href="ecrire?lang=#LANG;"><:spip:login_acces_prive:></a>
+		</div>
+	       <!-- en dessous fin du div pied-->
+	</div><!-- fin du div pied-ecrire -->   
+	    
+	</div><!-- fin du div conteneur -->
+
+<!-- ce div comprend image cadre ombre du bas -->
+<div id="ombrepied"></div>
+
+
+[(#REM)
+	Cette balise permet de deporter les calculs lourds (indexation etc)
+	dans une image cachee, ce qui evite de ralentir l'affichage des pages.
+]
+#SPIP_CRON

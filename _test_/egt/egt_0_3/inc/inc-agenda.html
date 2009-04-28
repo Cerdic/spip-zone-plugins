@@ -1,0 +1,28 @@
+
+      	<!-- debut calendrier et agenda -->
+        [(#CALENDRIER_MINI{#ENV{date},'date',#SELF})]
+        
+		<BOUCLE_calendrier(EVENEMENTS){agenda date_debut, mois, (#ENV{date}|annee), (#ENV{date}|mois)}>
+        [(#DATE_DEBUT|Agenda_memo_full{#DATE_FIN,[(#TITRE|addslashes)],#DESCRIPTIF,#LIEU,#ADRESSE,
+        [(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE_DEBUT|affdate{'Y-m-d'})]})]})]
+        </BOUCLE_calendrier>
+		
+		<div style="text-align:center;">
+			<a href="[(#URL_PAGE{agenda}|parametre_url{'lang',#LANG})]" title="<:agenda:afficher_calendrier:>"><:egt:plus_action:></a><br \>
+			<a href="[(#URL_PAGE{agenda-rss}|parametre_url{'lang',#LANG})]" title="<:egt:tous_nos_rdv:>">Agenda-rss</a>
+		</div>
+		
+        <div id="agenda">               
+          <B_agenda>
+              <h3><:agenda:></h3>
+              <dl>
+            <BOUCLE_agenda(EVENEMENTS){age<0}{par date}{statut=publie}{pagination 2}>
+              <dt>#TITRE</dt>
+              [<dd>(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})</dd>]
+              <dd class='engras'>#LIEU #ADRESSE</dd>
+              <dd>#DESCRIPTIF</dd> 
+            </BOUCLE_agenda></dl>         
+            [<p class="pagination">(#PAGINATION)</p>]    
+          </B_agenda>
+        </div><!-- fin du div agenda -->
+        <!-- fin calendrier et agenda -->    

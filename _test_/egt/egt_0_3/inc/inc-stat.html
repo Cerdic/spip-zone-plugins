@@ -1,0 +1,23 @@
+<div class="titre_bloc">
+	<strong><:spip:titre_statistiques:></strong>
+	<hr />
+</div>
+
+<div class="stats">
+	<!-- affichage des visites du site -->
+	<strong><:egt:visites:></strong>&nbsp;:<br />
+    [(#VISITEURS_CONNECTES) <:egt:visiteurs_connectes:><br />]
+    [(#POPULARITE_SITE) <:egt:par_jour:><br />]
+    [(#TOTAL_VISITES) <:egt:depuis_debut:><br />]
+</div>
+<div class="stats">
+	<!-- affichage des statistiques editoriales -->
+	<strong><:egt:publication:></strong>&nbsp;:<br />
+	<B_tous_articles><BOUCLE_tous_articles(ARTICLES){tout}></BOUCLE_tous_articles>0</B_tous_articles>#TOTAL_BOUCLE<//B_tous_articles> <:articles:><br /> 
+	<B_tous_breves><BOUCLE_tous_breves(BREVES){tout}></BOUCLE_tous_breves>0</B_tous_breves>#TOTAL_BOUCLE<//B_tous_breves> <:breves:><br /> 
+	<B_tous_sites><BOUCLE_tous_sites(SITES){tout}></BOUCLE_tous_sites>0</B_tous_sites>#TOTAL_BOUCLE<//B_tous_sites> <:spip:icone_sites_references:>
+	
+</div>
+
+<br />
+

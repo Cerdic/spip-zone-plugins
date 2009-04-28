@@ -1,0 +1,65 @@
+		<div id="menu">
+			<!-- ancre accessibilite -->
+			<a name="<:rubriques:>"></a>
+			<h2 class="invisible"><:rubriques:></h2> 
+
+			<!-- exclusion des articles du menu lies au mot cle exclure du menu source: http://www.spip-contrib.net/Comment-exclure-des-articles' -->
+			<BOUCLE_exclure_menu(ARTICLES){titre_mot=exclure du menu}{doublons}{par id_article}>
+			      </BOUCLE_exclure_menu>
+
+			<!-- rubriques racine sauf celles associées au mot clé "exclure du menu"-->
+			<BOUCLE_secteurs(RUBRIQUES) {racine} {lang} {par titre} {!titre_mot=exclure du menu}>
+				<ul class="open">
+				<li id="rub#ID_RUBRIQUE"><a onclick="toggle('#ID_RUBRIQUE', '#CHEMIN{images}')" onkeypress="if (event.keyCode == 13) { toggle('#ID_RUBRIQUE', '#CHEMIN{images}'); }"><img src="#CHEMIN{images/closed.png}" alt="+" title="<:spip:info_deplier:>" id="img_#ID_RUBRIQUE" /></a>&nbsp;<a href="#URL_RUBRIQUE" title="[<:dernier_ajout:> : (#DATE|affdate_court)]" [ class="(#EXPOSE{actif})"]>[(#TITRE|supprimer_numero)]</a>
+					<ul id="ul_#ID_RUBRIQUE" class="closed">
+
+					<B_menu_a>
+						<!-- Articles des rubriques racine -->
+						<BOUCLE_menu_a(ARTICLES) {id_rubrique} {par titre}{doublons}>	
+							<li class="artracine"><a href="#URL_ARTICLE" title="<:ecrire:info_statut_site_2:> : [(#DATE|affdate_court)]" [ class="(#EXPOSE{actif})"]>[(#TITRE|supprimer_numero)]</a>
+							</li>
+						</BOUCLE_menu_a>
+						
+					</B_menu_a>	
+			
+						<!-- BOUCLE_menu_sites_references-->
+						<BOUCLE_menu_sites_references(SITES) {id_rubrique} {par nom_site}{doublons}>
+							<li class="artracine">
+								<a href="#URL_SITE" target="_self" title="[(#DESCRIPTIF|textebrut|entites_html)]">
+								  [(#NOM_SITE)]</a>
+							</li>
+						</BOUCLE_menu_sites_references>
+						<!-- FIN BOUCLE_menu_sites_references-->	
+					
+					
+					<!-- sous-rubriques -->
+
+					<B_rubriques>
+							<li id="srub#ID_RUBRIQUE">
+								<BOUCLE_rubriques(RUBRIQUES){id_parent}>
+
+								<a onclick="toggle('#ID_RUBRIQUE', '#CHEMIN{images}')" onkeypress="if (event.keyCode == 13) { toggle('#ID_RUBRIQUE', '#CHEMIN{images}'); }"><img src="#CHEMIN{images/closed.png}" alt="-" title="<:spip:info_deplier:>" id="img_#ID_RUBRIQUE"  /></a>
+								&nbsp;<a href="#URL_RUBRIQUE" title="[<:dernier_ajout:> : (#DATE|affdate_court)]" [ class="(#EXPOSE{actif})"]>[(#TITRE|supprimer_numero)]</a><br />
+
+								<!-- articles des sous-rubriques -->
+								<ul id="ul_#ID_RUBRIQUE" class="closed">
+									<BOUCLE_menu_ab(ARTICLES) {id_rubrique} {par titre}>	
+									<li class="artracine"><a href="#URL_ARTICLE" title="<:ecrire:info_statut_site_2:> : [(#DATE|affdate_court)]" [ class="(#EXPOSE{actif})"]>[(#TITRE|supprimer_numero)]</a>
+									</li>
+									</BOUCLE_menu_ab>
+
+								<!-- sous-sous-rubriques -->
+								<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+								</ul>
+								</BOUCLE_rubriques>
+							</li>
+					</B_rubriques>
+
+					</ul>
+				</li>
+				</ul>
+			</BOUCLE_secteurs>
+			
+		</div><!-- fin div menu-->
+
+		<br />

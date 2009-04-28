@@ -1,0 +1,12 @@
+		<div class="titre_bloc">
+			<BOUCLE_logo_newslettre(MOTS){titre=afficher logo newslettre}>
+			[(#LOGO_MOT||inserer_attribut{'title',#TEXTE}sinon{<:spiplistes:abonnements_aux_courriers:><hr />})]
+			</BOUCLE_logo_newslettre>
+		</div>
+			
+			#FORMULAIRE_ABONNEMENT{formulaire_abonnement_liste1}
+      <BOUCLE_courrier_envoye(COURRIERS) {0,1}>
+          <div style='text-align: left; margin-top: -20px; margin-left: 5px; margin-bottom: 20px; padding-top: -20px; '>
+          <a href="[(#URL_PAGE{archive_courriers}|parametre_url{'lang',#LANG})]" title="<:egt:voir_messages_envoyes:>"><:egt:courriers_archives:></a>
+          </div>
+      </BOUCLE_courrier_envoye>

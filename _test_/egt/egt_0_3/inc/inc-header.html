@@ -1,0 +1,92 @@
+<!-- rajouté  par Laurence Ngosso alias damazone et appelé sur toutes les pages du squelette egt -->
+
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|attribut_html)" />]
+<meta name="generator" content="SPIP" />
+
+[(#REM) Lien vers l'icone destinee a la barre de bookmarks, au format .ico ]
+[<link rel="shortcut icon" href="(#ENV*{favicon}
+	|sinon{#CHEMIN{favicon.ico}}
+	|sinon{#LOGO_SITE_SPIP}
+		|image_passe_partout{32,32}
+		|image_recadre{32,32,center}
+		|image_format{ico}|extraire_attribut{src}
+	|sinon{#CHEMIN{spip.ico}})" type="image/x-icon" />]
+
+<!-- Lien vers le backend pour navigateurs eclaires -->
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}" />
+
+<!-- Ceci est la feuille de style par defaut pour le code genere par SPIP -->
+<link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" media="all" />
+<!-- Feuille de styles CSS pour l'affichage du site sur ecran -->
+<link rel="stylesheet" href="#CHEMIN{css/egt.css}" type="text/css" media="projection, screen, tv" />
+
+<!-- Javascript menu -->
+<script type="text/javascript" src="#CHEMIN{js/menu.js}"></script>
+<script type="text/javascript" src="#CHEMIN{js/jquery.js}"></script>
+
+<!-- media="print" permet d'utiliser cette feuille de style quand vous imprimez depuis votre navigateur -->
+[(#REM) Feuille de style CSS pour l'impression ]
+<link rel="stylesheet" href="[(#CHEMIN{css/impression.css}|direction_css)]" type="text/css" media="print" />
+
+<B_rub>
+<BOUCLE_rub(RUBRIQUES){id_rubrique}>
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="#URL_PAGE{backend,id_rubrique=#ID_RUBRIQUE}" /><title>[#NOM_SITE_SPIP] [(#TITRE|textebrut|supprimer_numero)]</title>
+[<meta name="description" content="(#INTRODUCTION|supprimer_tags|couper{300})" />]
+<B_mots_rub><meta name="keywords" content="<BOUCLE_mots_rub(MOTS){id_rubrique}{", "}>#TITRE</BOUCLE_mots_rub>" /></B_mots_rub>
+</BOUCLE_rub>
+</B_rub>
+
+<B_art>
+<BOUCLE_art(ARTICLES){id_article}>
+<title>[#NOM_SITE_SPIP] [(#TITRE|textebrut|supprimer_numero)]</title>
+[<meta name="description" content="(#INTRODUCTION|supprimer_tags|couper{300})" />]
+<B_mots_art><meta name="keywords" content="<BOUCLE_mots_art(MOTS){id_article}{", "}>#TITRE</BOUCLE_mots_art>" /></B_mots_art>
+</BOUCLE_art>
+</B_art>
+
+<B_bre>
+<BOUCLE_bre(BREVES){id_breve}>
+<title>[#NOM_SITE_SPIP] [(#TITRE|textebrut|supprimer_numero)]</title>
+[<meta name="description" content="(#INTRODUCTION|supprimer_tags|couper{300})" />]
+<B_mots_bre><meta name="keywords" content="<BOUCLE_mots_bre(MOTS){id_breve}{", "}>#TITRE</BOUCLE_mots_bre>" /></B_mots_bre>
+</BOUCLE_bre>
+</B_bre>
+
+<B_sit>
+<BOUCLE_sit(SITES){id_syndic}>
+<title>[#NOM_SITE_SPIP] <:sur_web:>[ : (#TITRE)]</title>
+[<meta name="description" content="(#DESCRIPTIF|supprimer_tags|couper{300})" />]
+<B_mots_sit><meta name="keywords" content="<BOUCLE_mots_sit(MOTS){id_syndic}{", "}>#TITRE</BOUCLE_mots_sit>" />
+</B_mots_sit>
+</BOUCLE_sit>
+</B_sit>
+
+<B_aut>
+<BOUCLE_aut(AUTEURS){id_auteur}>
+<title>[#NOM_SITE_SPIP] <:ecrire:auteur:>[ : (#NOM)]</title>
+[<meta name="description" content="(#BIO|supprimer_tags|couper{300})" />]
+</BOUCLE_aut>
+</B_aut>
+
+<B_mot>
+<BOUCLE_mot(MOTS){id_mot}>
+<title>[#NOM_SITE_SPIP] <:mots_clefs:>[ : (#TITRE)]</title>
+[<meta name="description" content="(#DESCRIPTIF|supprimer_tags|couper{300})" />]
+</BOUCLE_mot>
+</B_mot>
+
+<title>[(#NOM_SITE_SPIP|textebrut)] [(#ENV{titreheader})]</title>
+<//B_mot>
+<//B_aut>
+<BOUCLE_description-global(GROUPES_MOTS){titre=squelette_header}>
+<meta name="description" content="#DESCRIPTIF" />
+</BOUCLE_description-global>
+<//B_sit>
+<//B_bre>
+<//B_art>
+<//B_rub>
+	
+	
+[(#REM) Balise permettant aux plugins d'inserer des appels javascript ou css ]
+#INSERT_HEAD

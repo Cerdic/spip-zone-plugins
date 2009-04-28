@@ -1,0 +1,36 @@
+    <div id="gauche">
+	
+		<!-- appel menu -->
+		<INCLURE{fond=inc/inc-menu}{id_rubrique}{id_article}>
+
+		<!-- recherche -->
+		<INCLURE{fond=inc/inc-recherche}>
+         
+        <div id="syndic_gauche">
+          
+			<!-- newslettre -->
+			[(#PLUGIN{spiplistes}|oui) <INCLURE{fond=inc/inc-newslettre}>]
+
+			<!--Statistiques des visites et statistiques éditoriales -->
+			<BOUCLE_Afficher_statistiques(MOTS){titre=afficher statistiques}>
+				<INCLURE{fond=inc/inc-stat}>
+			</BOUCLE_Afficher_statistiques>
+
+			<!-- nom sites references avec mot cle -->
+			<INCLURE{fond=inc/inc-nom-site}> 
+			        
+			<!-- articles sites references avec mot cle -->
+			<INCLURE{fond=inc/inc-articles-actu}> 
+			
+		</div> <!-- fin du div syndic_gauche-->      
+
+		<!-- Inscription pour participer aux forums -->
+		<div id="inscription1">
+			<BOUCLE_nom_siteavoir(MOTS){titre=afficher logo participer}>
+	               [(#LOGO_MOT||inserer_attribut{'title',#TEXTE})]
+	        </BOUCLE_nom_siteavoir>
+			<br />
+			[(#FORMULAIRE_INSCRIPTION)]
+		</div> <!-- Fin Inscription pour participer aux forums -->
+		
+	</div><!-- fin du div gauche -->

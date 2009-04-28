@@ -1,0 +1,15 @@
+		<!-- boucle B4 teste et affiche le texte d'un article lie au mot cle affiche aide site dans colonne droite -->
+		<B4>
+			<!-- affiche le logo si resultat positif sinon un texte-->
+			<div class="titre_bloc">
+				<BOUCLE_logo_aide(MOTS){titre=afficher aide site}>
+				[(#LOGO_MOT||inserer_attribut{'title',#TEXTE}|sinon{<:spip:icone_aide_ligne:><hr />})]
+				</BOUCLE_logo_aide>
+			</div>
+			<!-- affiche le texte de l'article -->
+			<BOUCLE4(ARTICLES){titre_mot=afficher aide site}>
+			[(#TEXTE|reduire_image{120,0})]
+			</BOUCLE4>
+		</B4>
+		<!-- n'affiche rien si resultat negatif-->
+		<//B4>

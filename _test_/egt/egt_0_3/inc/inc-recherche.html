@@ -1,0 +1,11 @@
+ <!-- Recherche --> 
+<div class="titre_bloc">
+	<BOUCLE_logo_rechercher(MOTS){titre=afficher logo rechercher}>
+	[(#LOGO_MOT||inserer_attribut{'title',#TEXTE}sinon{<:spip:info_rechercher:><hr />})]
+	</BOUCLE_logo_rechercher> 
+</div>
+
+<!-- accessibilite -->		
+<a name="rechercher"></a>
+
+[(#FORMULAIRE_RECHERCHE)]	

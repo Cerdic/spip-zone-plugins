@@ -1,0 +1,15 @@
+<h2 class="invisible">Sites &agrave; voir</h2> 
+          <!-- boucle B2 teste et affiche sites syndiqués à gauche-->
+          <B2>
+          <!-- affiche le logo si resultat positif-->
+          <BOUCLE_nom_siteavoir(MOTS){titre=afficher nom site}>
+          [(#LOGO_MOT||inserer_attribut{'title',#TEXTE})]	
+          </BOUCLE_nom_siteavoir>
+          <ul>
+          <BOUCLE2(SITES){titre_mot=afficher nom site}>
+          <li><a href="#URL_SITE" title="<:accueil_site:> #NOM_SITE">#NOM_SITE <br /></a><p>[(#LOGO_SITE||reduire_image{60,0})][(#DESCRIPTIF)]</p></li>
+          </BOUCLE2>
+          </ul>
+          </B2>
+          <!-- n'affiche rien si resultat negatif-->
+          <//B2>

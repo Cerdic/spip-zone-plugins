@@ -1,0 +1,26 @@
+<!-- inc/bandeau est appele sur toutes les pages principales -->
+
+<!-- appel accesskey -->      
+	<BOUCLE_Afficher_accesskey(MOTS){titre=afficher accesskey}>
+	    <INCLURE{fond=inc/inc-accessibilite}>
+	</BOUCLE_Afficher_accesskey>
+
+<!-- appel bordure superieure -->
+<div id="top"></div>
+
+    <div id="conteneur"> <!-- ce div se ferme sur les pages principales --> 
+       
+		<div id="header">
+			<h1 class="invisible">#NOM_SITE_SPIP</h1>
+			<div id="header-logo">[(#LOGO_SITE_SPIP)]</div>
+			<BOUCLE_bandeau(MOTS){titre=afficher infos bandeau}>
+				<div id="header-texte">
+					[(#TEXTE|sinon{#NOM_SITE_SPIP})]
+				</div> <!-- fin div header-texte -->
+				<div id="header-descriptif">[(#DESCRIPTIF_SITE_SPIP|PtoBR)]</div>
+				<div id="header-logo-mot">[(#LOGO_MOT|right)]</div>  
+			</BOUCLE_bandeau>
+			
+			<!-- <div id="menu_langues">#MENU_LANG</div> -->
+		</div> <!-- fin div header -->
+

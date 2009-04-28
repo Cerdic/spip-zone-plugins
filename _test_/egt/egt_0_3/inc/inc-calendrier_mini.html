@@ -1,0 +1,83 @@
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}{id_secteur IN 1,30}>
+<BOUCLE_event_test(EVENEMENTS){branche} {statut=publie}{par date_fin}{age<7} {0,1}> </BOUCLE_event_test>
+
+[(#REM)
+	Tout d'abord on cherche dans quelle rubrique l'on est,
+	pour n'afficher que les evenements de celle-ci.
+	Ensuite, on n'affiche le calendrier que s'il y a des
+	evenement a venir dans la branche. ]
+
+<div id="calendar">
+	<h2>Prochains rendez-vous</h2>
+	<table summary="<:icone_calendrier:>">
+		<caption>[<a
+				href="(#URL_PAGE{mois}|parametre_url{#ENV{var_date},[(#ENV{date}|Agenda_dateplus{-27*24*3600,'Y-m'})]})"
+				title="[(#ENV{date}|Agenda_dateplus{-27*24*3600,'Y-m'}|affdate_mois_annee|ucfirst)]">&#171;</a>][&nbsp;<a href="[(#URL_PAGE{mois}|parametre_url{#ENV{var_date},[(#ENV{date}|affdate{'Y-m'})]})]">(#ENV{date}|affdate_mois_annee|majuscules)</a>&nbsp;][<a
+				href="(#URL_PAGE{mois}|parametre_url{#ENV{var_date},[(#ENV{date}|Agenda_dateplus{33*24*3600,'Y-m'})]})"
+				title="[(#ENV{date}|Agenda_dateplus{33*24*3600,'Y-m'}|affdate_mois_annee|ucfirst)]">&#187;</a>]
+		</caption>
+		<thead>
+			<tr>
+				<th scope="col"><abbr title="<:date_jour_2:>"><:date_jour_2|spip_substr{0,1}|strtoupper:></abbr></th>
+				<th scope="col"><abbr title="<:date_jour_3:>"><:date_jour_3|spip_substr{0,1}|strtoupper:></abbr></th>
+				<th scope="col"><abbr title="<:date_jour_4:>"><:date_jour_4|spip_substr{0,1}|strtoupper:></abbr></th>
+				<th scope="col"><abbr title="<:date_jour_5:>"><:date_jour_5|spip_substr{0,1}|strtoupper:></abbr></th>
+				<th scope="col"><abbr title="<:date_jour_6:>"><:date_jour_6|spip_substr{0,1}|strtoupper:></abbr></th>
+				<th scope="col"><abbr title="<:date_jour_7:>"><:date_jour_7|spip_substr{0,1}|strtoupper:></abbr></th>
+				<th scope="col"><abbr title="<:date_jour_1:>"><:date_jour_1|spip_substr{0,1}|strtoupper:></abbr></th>
+			</tr>
+		</thead>
+		<tbody><BOUCLE_calendrier_rubrique(EVENEMENTS) {branche} {agenda date_debut, mois, (#ENV{date}|annee), (#ENV{date}|mois)} {statut=publie}>[(#DATE_DEBUT|Agenda_memo_full{
+			#DATE_FIN,
+			[(#DATE_DEBUT|nom_jour|ucfirst) ][(#DATE_DEBUT|affdate)],
+			#DESCRIPTIF,
+			#LIEU,
+			[(#URL_PAGE{jour}|parametre_url{#ENV{var_date},[(#ENV{date}|affdate{'Y-m-d'})]})]
+		})]</BOUCLE_calendrier_rubrique>[
+		(#ENV{date}|agenda_mini)
+		]</tbody>
+	</table>
+</div>
+<small class="metadata" style="display: block; text-align: center;">Abonnez-vous au<br />calendier [(#TITRE|supprimer_numero)]&nbsp;: <a rel="alternate" href="[(#URL_PAGE{ical}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" title="iCal [(#TITRE|supprimer_numero|textebrut)] [(#NOM_SITE_SPIP|textebrut)]">iCal</a> | <a rel="alternate" type="application/rss+xml" href="[(#URL_PAGE{backend-calendrier}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" title="RSS Calendrier [(#TITRE|supprimer_numero|textebrut)] [(#NOM_SITE_SPIP|textebrut)]">RSS&nbsp;2.0</a></small>
+
+</B_event_test>
+</BOUCLE_rubrique>
+
+[(#REM)
+	Si l'on n'est pas dans une rubrique,
+	on affiche tous les evenements du site. ]
+
+<div id="calendar">
+	<h2>Prochains rendez-vous</h2>
+	<table summary="<:icone_calendrier:>">
+		<caption>[<a
+				href="(#URL_PAGE{mois}|parametre_url{#ENV{var_date},[(#ENV{date}|Agenda_dateplus{-27*24*3600,'Y-m'})]})"
+				title="[(#ENV{date}|Agenda_dateplus{-27*24*3600,'Y-m'}|affdate_mois_annee|ucfirst)]">&#171;</a>][&nbsp;<a href="[(#URL_PAGE{mois}|parametre_url{#ENV{var_date},[(#ENV{date}|affdate{'Y-m'})]})]">(#ENV{date}|affdate_mois_annee|majuscules)</a>&nbsp;][<a
+				href="(#URL_PAGE{mois}|parametre_url{#ENV{var_date},[(#ENV{date}|Agenda_dateplus{33*24*3600,'Y-m'})]})"
+				title="[(#ENV{date}|Agenda_dateplus{33*24*3600,'Y-m'}|affdate_mois_annee|ucfirst)]">&#187;</a>]
+		</caption>
+		<thead>
+			<tr>
+				<th scope="col"><abbr title="<:date_jour_2:>"><:date_jour_2|spip_substr{0,1}|strtoupper:></abbr></th>
+				<th scope="col"><abbr title="<:date_jour_3:>"><:date_jour_3|spip_substr{0,1}|strtoupper:></abbr></th>
+				<th scope="col"><abbr title="<:date_jour_4:>"><:date_jour_4|spip_substr{0,1}|strtoupper:></abbr></th>
+				<th scope="col"><abbr title="<:date_jour_5:>"><:date_jour_5|spip_substr{0,1}|strtoupper:></abbr></th>
+				<th scope="col"><abbr title="<:date_jour_6:>"><:date_jour_6|spip_substr{0,1}|strtoupper:></abbr></th>
+				<th scope="col"><abbr title="<:date_jour_7:>"><:date_jour_7|spip_substr{0,1}|strtoupper:></abbr></th>
+				<th scope="col"><abbr title="<:date_jour_1:>"><:date_jour_1|spip_substr{0,1}|strtoupper:></abbr></th>
+			</tr>
+		</thead>
+		<tbody><BOUCLE_calendrier_general(EVENEMENTS) {agenda date_debut, mois, (#ENV{date}|annee), (#ENV{date}|mois)} {statut=publie}>[(#DATE_DEBUT|Agenda_memo_full{
+			#DATE_FIN,
+			[(#DATE_DEBUT|nom_jour|ucfirst) ][(#DATE_DEBUT|affdate)],
+			#DESCRIPTIF,
+			#LIEU,
+			[(#URL_PAGE{jour}|parametre_url{#ENV{var_date},[(#ENV{date}|affdate{'Y-m-d'})]})]
+		})]</BOUCLE_calendrier_general>[
+		(#ENV{date}|agenda_mini)
+		]</tbody>
+	</table>
+</div>
+<small class="metadata" style="display: block; text-align: center;">Abonnez-vous au<br />calendrier g&eacute;n&eacute;ral&nbsp;: <a rel="alternate" href="[(#URL_PAGE{ical})]" title="iCal [(#NOM_SITE_SPIP|textebrut)]">iCal</a> | <a rel="alternate" type="application/rss+xml" href="[(#URL_PAGE{backend-calendrier})]" title="RSS Calendrier [(#NOM_SITE_SPIP|textebrut)]">RSS&nbsp;2.0</a></small>
+
+<//B_rubrique>

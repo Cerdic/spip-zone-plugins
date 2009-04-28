@@ -1,0 +1,30 @@
+<div id="syndic"> 
+<h2 class="invisible"><:sur_web:></h2> 
+<!-- affiche le ou les sites syndiques, leur logo et leurs 4 derniers articles -->
+<B3> 
+<!-- affiche eventuellement le logo du mot cle site syndique et articles  -->     
+<div class="titre_bloc">
+<BOUCLE_sites_syndiques(MOTS){titre=afficher site syndique et articles}>
+[(#LOGO_MOT||inserer_attribut{'title',#TEXTE}sinon{<:sur_web:><hr />})]
+</BOUCLE_sites_syndiques>
+</div>   
+<BOUCLE3(SITES){titre_mot=afficher site syndique et articles}>
+	<div class="syndicsite">[<a href="#URL_SITE" title="<:accueil_site:> #NOM_SITE" >(#NOM_SITE|majuscules) </a>] </div>
+	[<p>(#LOGO_SITE||reduire_image{111,0})</p>]
+	<div class="sitesyndicdesc">[(#DESCRIPTIF)]</div>
+
+	<B1>
+		<ul>
+		<!-- modifier le critere ci-dessous pour modifier le nombre articles affiches -->
+			<BOUCLE1(SYNDIC_ARTICLES){id_syndic}{par date}{inverse}{0,4}>
+			<li><a href="#URL_ARTICLE" title="<:ecrire:info_statut_site_2:> [(#DATE|affdate_court)]">[(#TITRE|supprimer_numero)]</a>
+			</li></BOUCLE1>
+		</ul>
+	</B1>
+	<//B1>
+	
+</BOUCLE3>
+</B3>
+<!-- pas de sites synidqués logos articles -->
+<//B3>
+</div><!-- fin du div syndic--> 

@@ -1,0 +1,21 @@
+    <div id="droite"> 
+
+		<INCLURE{fond=inc/inc-aide}>
+		
+		[(#REM) <!-- affichage du top album --> ]
+		[(#PLUGIN{Splickr}|oui) <INCLURE{fond=inc/inc-splickrbox}>]
+		
+		[(#REM) <!-- affichage du mini calendrier et des 2 prochains événements --> ]
+		[(#PLUGIN{Agenda}|oui) <INCLURE{fond=inc/inc-agenda}{self=#SELF}>] 
+	
+        <!-- breves -->
+		<INCLURE{fond=inc/inc-breves}>
+     
+		<!-- a retenir -->
+		<INCLURE{fond=inc/inc-aretenir}>         
+
+		<!-- sites syndiques et logo site -->
+		<INCLURE{fond=inc/inc-sites-syndiques}>   
+      
+      
+    </div><!-- fin du div droite -->

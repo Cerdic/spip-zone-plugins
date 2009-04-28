@@ -1,0 +1,22 @@
+<!-- accesskey -->
+
+<div id="ac-key">
+	<a href="[(#URL_SITE_SPIP|parametre_url{'lang',#LANG})]" accesskey="1" title="<:accueil_site:>"><:accueil_site:></a> | 
+	<!-- <a href="oo" title="<:spip:access_mode_texte:>"><:ecrire:affichage:> <:ecrire:info_texte:></a> |  -->
+    <a href="#rechercher" accesskey="4" title="<:egt:info_rechercher:>"><:spip:info_rechercher:></a> | 
+    <a href="#rubriques" title="<:spip:icone_brouteur:>">Menu</a> | 
+    <a href="#contenu" accesskey="s" title="<:egt:contenu_page:>"><:egt:contenu:></a> | 
+    <a href="[(#URL_PAGE{plan}|parametre_url{'lang',#LANG})]" accesskey="3" title="<:plan_site:>"><:plan_site:></a> | 
+    [(#SESSION{id_auteur}|?{' '}) <a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a> | 
+	]
+	[(#SESSION{id_auteur}|?{'',' '}) <a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]" rel="nofollow" class='login_modal'><:lien_connecter:></a> | 
+	]
+	<!-- DEBUT BOUCLE_ackey_espace_membres-->
+    <BOUCLE_ackey_espace_membres(RUBRIQUES){titre_mot=espace membres}> 
+		<a href="#URL_RUBRIQUE{#ID_RUBRIQUE}" accesskey="5" title="<:egt:titre_espace_membres:>"><:egt:espace_membres:></a> | 
+	</BOUCLE_ackey_espace_membres>
+	<!-- FIN BOUCLE_ackey_espace_membres-->
+	<!-- remplacer le "1" par le numéro de l'auteur responsable du site -->
+	<a href="spip.php?auteur1&amp;lang=#LANG;" accesskey="7" title="<:envoyer_message:>">Contact</a>
+	<br />
+</div>
