@@ -290,7 +290,7 @@
 		$onglet_contenu = "<div id='wysiwyg'>$fond</div>";
 
 		if ($lettre->statut == 'brouillon')
-			$onglet_documents = lettres_documents('lettre', $lettre->id_lettre);
+			$onglet_documents = lettres_documents('lettre', intval($lettre->id_lettre));
 	
 		if ($lettre->statut == 'envoi_en_cours') {
 			echo '<div id="progression_envoi_lettre"></div>';
