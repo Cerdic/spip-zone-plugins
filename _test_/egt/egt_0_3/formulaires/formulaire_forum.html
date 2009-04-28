@@ -1,0 +1,44 @@
+<div class="formulaire_spip formulaire_forum">
+<a id="formulaire_forum" name="formulaire_forum"></a>
+<h2><:form_pet_message_commentaire:></h2>
+
+<form action="#ENV{url}#formulaire_forum" method="post">
+[(#ENV{url_post}|form_hidden)]
+[<input type="hidden" name="alea" value="(#ENV{alea})" />]
+[<input type="hidden" name="hash" value="(#ENV{hash})" />]
+[<input type="hidden" name="verif_(#ENV{hash})" value="ok" />]
+[<input type="hidden" name="afficher_texte" value="(#ENV{afficher_texte})" />]
+[<input type="hidden" name="retour_forum" value="(#ENV*{retour_forum}|rawurlencode)" />]
+[<fieldset class="reponse_formulaire">
+<legend><:bouton_radio_modere_priori:></legend>
+<p>(#ENV{modere})<:forum_info_modere:></p>
+</fieldset>]
+
+[(#ENV*{previsu})]
+
+[(#ENV**{afficher_texte}|choixsiegal{'non', ' ',''})
+[<input type="hidden" name="titre" value="(#ENV{titre})" />]
+<p class="spip_bouton"><input type="submit" value="<:forum_valider:>" /></p>]
+
+[(#ENV**{afficher_texte}|choixsiegal{'non', '',' '})
+
+	<fieldset>
+		<legend><:form_pet_message_commentaire:></legend>
+		<p><label for="auteur">* Votre nom</label> <input type="text" class="forml" name="auteur" id="auteur" value="#ENV{auteur}" size="40"[ readonly="(#ENV{readonly})"] /></p>
+		<p><label for="email_auteur">* Votre email (non publi&eacute;)</label> <input type="text" class="forml" name="email_auteur" id="email_auteur" value="#ENV{email_auteur}" size="40"[ readonly="(#ENV{readonly})"] /></p>
+		<p><label for="url_site">Votre site Web</label> <input type="text" class="forml" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" value="#ENV{url_site}" /></p>
+		
+		<p style="display: none;"><label for="titre"><:forum_titre:></label> <input type="text" class="forml" name="titre" id="titre"[ value="(#ENV{titre})"] size="40" /></p>
+		<p>[(#ENV**{texte}|barre_textarea{12,40})]</p>
+	
+		[(#REM) Piege a robots spammeurs ]
+		<p style="display: none;"><label for="nobot"><:antispam_champ_vide:></label>
+		<input type="text" name="nobot" value="#ENV{nobot}" size="10" /></p>
+	
+		<p class="spip_bouton"><input type="submit" value="<:forum_voir_avant:>" /></p>
+	</fieldset>
+]
+
+</form>
+
+</div>

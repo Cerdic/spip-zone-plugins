@@ -1,0 +1,12 @@
+<fieldset class="previsu">
+<legend><:previsualisation:></legend>
+
+	<p class="counter"><strong class="reponse_formulaire"><:previsualisation:> :</strong><br />
+	Le [(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)][, <:par_auteur:> (#ENV*{auteur}|supprimer_numero)][ - <a href="(#ENV{url_site}|attribut_html)" class="spip_out">www</a>]</p>
+	[(#ENV*{texte}|lignes_longues)]
+	
+	[<p class="reponse_formulaire">(#ENV*{erreur})</p>]
+	
+	[<p class="spip_bouton"><input type="submit" name="confirmer_forum" value="(#ENV*{bouton})" /></p>]
+
+</fieldset>

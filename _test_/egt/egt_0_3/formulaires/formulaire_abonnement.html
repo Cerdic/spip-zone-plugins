@@ -1,0 +1,196 @@
+[<!--(#REM)
+
+// formulaires/formulaire_abonnement.html
+
+// $LastChangedRevision: 27827 $
+// $LastChangedBy: paladin@quesaco.org $
+// $LastChangedDate: 2009-04-13 18:28:53 +0200 (lun, 13 avr 2009) $
+
+-->]
+<a name="spiplistes_formabo_a" id="spiplistes_formabo_a"></a>
+[<!--(#REM) 
+
+	===============
+	mot de passe oublie
+	===============
+	Affiche formulaire pour adresse email. Rien d'autre.
+	Pour l'activer, appeler via URL avec oubli_pass=oui
+	ex.: /spip.php?page=abonnement&oubli_pass=oui
+
+-->][(#ENV{oubli_pass}|=={oui}|?{' ',''})
+	<h2><:pass_mot_oublie:></h2>
+
+	[(#ENV*{erreur})]
+
+	[(#ENV{erreur}|?{'',' '})
+	<:pass_indiquez_cidessous:>
+	
+	<form action="#SELF#spiplistes_formabo_a" method="post">
+		<div style="text-align:right">
+				<input type="text" class="spip_formulaires" name="email_oubli" value="" />
+				<input type="hidden" name="oubli_pass" value="oui" />
+				<div class="spip_bouton" style="text-align:right">
+				<input type="submit" class="spip_bouton" name="oubli" value="<:pass_ok:>" /></div>
+		</div>
+	</form>
+
+	]
+][<!--(#REM) 
+
+	===============
+	FIN mot de passe oublie
+	===============
+
+-->]
+
+
+<div class="formulaire_spip formulaire_inscription">
+[(#ENV{mode_login}|?{' ',''})
+	<form class="formulaire-spiplistes-abo" action="#SELF#spiplistes_formabo_a" method="post" id="spip-listes">
+]
+[<!--(#REM) 
+
+	===============
+	si pas identifie', accepter inscription nouvel abonne'
+	===============
+
+-->][(#ENV*{reponse_formulaire}|?{'',' '})[(#ENV{accepter_nouveau}|=={oui}|?{' ',''})
+<fieldset>
+[<!--(#REM) ===============	texte d'inscription	===============
+
+	Si la maison accepte l'inscription en tant que redacteur,
+	le proposer !
+
+-->][(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
+	<legend><:spiplistes:devenir_redac:></legend>
+	<p><strong><:spiplistes:devenir_redac:></strong></p>
+	<p><:spiplistes:inscription_redacteurs:></p>
+		<p><:form_forum_indiquer_nom_email:></p>
+		<div class="coord">
+		<label for="nom_inscription_"><:form_pet_votre_nom:> :</label>
+		<input type="text" class="forml" name="nom_inscription_" id="nom_inscription_" value="" size="40" style="width:12em;clear:both;" />
+		</div>]
+[<!--(#REM)
+	
+	Sinon, proposer en tant que visiteur
+
+-->][(#ENV{inscription_redacteur}|=={oui}|?{'',' '})
+	<legend><:spiplistes:devenir_membre:></legend>
+	<p><strong><:spiplistes:devenir_abonne:></strong></p>
+	[<!--(#REM)
+	
+		si mode d'acces 'membre' au lieu de 'simple' demande le pseudo pour completer la fiche.
+
+	-->][(#CONFIG{abonnement_config}|=={membre}|?{' ',''})
+		<p><:spiplistes:inscription_visiteurs:></p>
+		<p><:form_forum_indiquer_nom_email:></p>
+		<div class="coord">
+		<label for="nom_inscription_"><:form_pet_votre_nom:> :</label>
+		<input type="text" class="forml" name="nom_inscription_" id="nom_inscription_" value="" size="40" style="width:12em;clear:both;" />
+		</div>
+	][(#CONFIG{abonnement_config}|=={membre}|?{'',' '})
+		<p><:spiplistes:abonnement_presentation:></p>
+	]
+]
+	<div class="coord">
+	<label for="mail_inscription_"><:form_pet_votre_email:> :</label>
+	<input type="text" class="forml" id="mail_inscription_" name="mail_inscription_" value="" size="40" />
+	</div>
+[(#ENV{inscription_redacteur}|=={oui}|?{'',' '})
+	[(#CONFIG{accepter_inscriptions}|=={oui}|?{' ',''})
+	<p style="margin-top:5px">
+	<:spiplistes:vous_pouvez_egalement:> <a href="[(#SELF|parametre_url{'type','redac'})]"><:spiplistes:vous_inscrire_auteur:>.</a>
+	</p>
+	]
+]
+</fieldset>
+]][<!--(#REM) =============== FIN texte d'inscription =============== -->]
+
+[<p class="message-formulaire">(#ENV*{reponse_formulaire})</p>]
+
+[<!--(#REM)
+
+	===============
+	liste des listes publiques 
+	===============
+
+		===============
+		Si une liste en parametre de la balise, ne lister que celle-ci
+		Sinon liste complete des listes publiques
+		Sauf si pas mode_login (pass_mot_oublie=oui, ...)
+		===============
+		
+	-->]
+	<B_id_liste>
+	<BOUCLE_id_liste(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}{id_liste=#ENV{id_liste}} {0,(#ENV{mode_login}|?{1,0})}>
+		[<fieldset>
+		[<legend>(#TITRE)</legend>]
+		(#TEXTE)
+		</fieldset>]
+	</BOUCLE_id_liste>
+	</B_id_liste>
+		<br />
+	<B_listes>
+		<fieldset>
+		<legend>[(#TOTAL_BOUCLE|=={1}|?{
+			<:spiplistes:abo_1_lettre:>
+			,<:spiplistes:listes_de_diffusion_:>})] : </legend>
+	<ul>
+	<BOUCLE_listes(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}{0,(#ENV{mode_login}|?{100,0})}>
+			[(#TOTAL_BOUCLE|=={1}|?{' ',''})
+			<li>
+			[(#ENV{mode_modifier}|?{' ',''})
+			<label><input type="hidden" name="list&#91;&#93;" checked="checked" value="#ID_LISTE" />]
+			<span><:spiplistes:abonnement_seule_liste_dispo:>:<br /><strong>#TITRE</strong> [- <em>(#TEXTE|textebrut)</em>]</span>[(#ENV{mode_modifier}|?{' ',''})</label>]</li>
+			]
+			<BOUCLE_inscription(AUTEURS){tous}{id_liste}{id_auteur=#ENV{id_auteur}}></BOUCLE_inscription>
+			[(#TOTAL_BOUCLE|!={1}|?{' ',''})
+			<li>
+			[(#ENV{mode_modifier}|?{' ',''})<label class="block"><input [(#_inscription:TOTAL_BOUCLE|?{' ',''})checked="checked"] type="checkbox" name="list&#91;&#93;" value="#ID_LISTE" />]
+			<span>[<strong>(#TITRE)</strong>][ - <em>(#TEXTE|textebrut|couper{80})</em>]</span>[(#ENV{mode_modifier}|?{' ',''})</label>]</li>]
+	</BOUCLE_listes>
+	</ul>
+	</fieldset>
+	[(#COMPTEUR_BOUCLE|!={1}|?{'<!-- fin de liste -->',''})]
+	</B_listes>
+		[(#ENV{reponse_formulaire}|non)
+			[(#ENV{mode_login}|oui)<fieldset><:spiplistes:aucune_liste_publique:></fieldset>]
+		]
+		[(#ENV{reponse_formulaire}|oui)
+			[(#ENV{mode_login}|oui)<fieldset style="color:#000"><legend><:spiplistes:abo_1_lettre:></legend></fieldset>]
+		]
+	<//B_listes>
+	
+	<//B_id_liste>
+	
+[<!--(#REM)
+
+	===============
+	FIN liste des listes  
+	===============
+
+-->]
+[<!--(#REM)
+
+	===============
+	mode_login
+	===============
+
+-->][(#ENV{mode_login}|?{' ',''})
+				
+	[(#ENV{mode_modifier}|?{' ',''})
+	<fieldset>
+		<legend><:spiplistes:format_reception:></legend>
+		<label class="block"><input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{' ',''})checked="checked"] type="radio" /><span><:spiplistes:html:><:spiplistes:html_description:></span></label>
+		<label class="block"><input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{' ',''})checked="checked"] type="radio" /><span><:spiplistes:texte:></span></label>
+	</fieldset>
+	<fieldset>
+		<legend><:spiplistes:suspendre_abonnement_:> : </legend>
+		<label class="block"><input name="suppl_abo" value="non" [(#ENV{format}|=={non}|?{' ',''})checked="checked"] type="radio" /><span><:spiplistes:suspendre_abonnement_:></span></label>
+	</fieldset>
+	]
+	<p class="spip_bouton">
+		<input type="submit" name="Valider" value="<:bouton_valider:>" />
+	</p>
+	</form>][<!--(#REM) fin mode_login -->]
+</div>

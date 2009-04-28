@@ -1,0 +1,113 @@
+[<!--(#REM)
+
+// formulaire_modif_abonnement.html
+
+
+
+CP-20090413: ce formulaire ne sert plus. En SPIP 192, tout est dans formulaire_abonnement.html
+
+// $LastChangedRevision: 27827 $
+// $LastChangedBy: paladin@quesaco.org $
+// $LastChangedDate: 2009-04-13 18:28:53 +0200 (lun, 13 avr 2009) $
+
+-->][<!--(#REM)
+
+	===============
+	Message de confirmation (si present)
+	===============
+	
+-->][(#ENV*{message_formulaire})]
+
+[<!--(#REM)
+
+	===============
+	Liste des listes publiques
+	===============
+	
+-->]<B_liste>
+	<:spiplistes:listes_de_diffusion_:>:
+	<ul>
+	<BOUCLE_liste(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'} {id_liste=#ENV{liste}}>
+		<li><span style='font-weight:bold;'>#TITRE</span>[ (#TEXTE)]</li>
+		</BOUCLE_liste>
+	</ul>
+</B_liste>
+
+[<!--(#REM)
+
+	===============
+	===============
+	
+-->][(#ENV*{confirm_formulaire})]
+<BOUCLE_auteur(AUTEURS){tous} {id_auteur=(#ENV{id_auteur})}>
+[(#ENV{formulaire_affiche}|?{' ',''})
+<p>#NOM</p>
+<p><:spiplistes:souhait_modifier_abo:></p>
+<form action="#SELF#spiplistes_formabo_a" method="post">
+	<div style="text-align:left">]
+</BOUCLE_auteur>
+<B_listes>
+	<fieldset>
+	<legend>[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:abo_1_lettre:>,<:spiplistes:abo_listes:>})]</legend>
+	<ul style='width:350px;list-style-type:none'>
+<BOUCLE_listes(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'} {0,(#ENV{formulaire_affiche}|?{100,0})}>
+				[(#TOTAL_BOUCLE|=={1}|?{' ',''})
+				<li style="margin-bottom:3px">
+				<input type="checkbox" name="list&#91;&#93;" checked="checked"  value="#ID_LISTE" /><a href='[(#SELF|parametre_url{liste,#ID_LISTE})]' title='<:spiplistes:infos_liste:>'>#TITRE</a>				
+				</li>]
+				<BOUCLE_inscription(AUTEURS){tous} {id_liste} {id_auteur=#ENV{id_auteur}}></BOUCLE_inscription>
+				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
+				<li style="margin-bottom:3px">
+					<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ''''''''''''',''})checked="checked"] value="#ID_LISTE" />
+					<a title='<:spiplistes:infos_liste:>' href='[(#SELF|parametre_url{liste,#ID_LISTE})]' title='<:spiplistes:infos_liste:>'>#TITRE</a>
+				</li>]
+</BOUCLE_listes>
+	</ul>
+</B_listes>
+	[(#ENV{formulaire_affiche}|?{' ',''})<fieldset>
+	<legend><:spiplistes:abo_1_lettre:></legend>]
+<//B_listes>
+[<!--(#REM)
+	
+	===============
+	Modification abonnement
+	===============
+	
+-->][(#ENV{formulaire_affiche}|?{' ',''})
+			<div style="text-align: left;"> 
+				<strong><:spiplistes:format_de_reception:> :</strong><br /> 
+				<input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{'checked="checked"',''})]  type="radio" id='fslhtml' />
+				<label for='fslhtml'><:spiplistes:html:><:spiplistes:html_description:></label><br /> 
+				<input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{'checked="checked"',''})] type="radio" id='fsltexte' />
+				<label for='fsltexte'><:spiplistes:texte_brut:></label><br /> 
+				<input name="suppl_abo" [(#ENV{format}|=={non}|?{'checked="checked"',''})] value="non" type="radio" id='fslnon' />
+				<label for='fslnon'><:spiplistes:desabonnement:></label><br /> 
+			</div> 
+			<input style="margin-top:3px" type='submit' name='Valider' value='<:spiplistes:abonnement_bouton:>' />
+			<input type="hidden" name="d"  value="[(#ENV{d})]"  />
+			<input type="hidden" name="confirm"  value="oui" />
+		</fieldset>
+		</div>
+	</form>
+]
+[<!--(#REM)
+
+	===============
+	formulaire_cookie_affiche
+	===============
+	
+-->][(#ENV{formulaire_cookie_affiche}|?{' ',''})
+<fieldset> 
+	<legend><:spiplistes:abonnement_bouton:></legend>
+	<h4><:spiplistes:abonnement_change_format:></h4>
+	[(#ENV*{erreur}|sinon{
+	<:spiplistes:abonnement_texte_mail:>
+	<form action="#SELF#spiplistes_formabo_a" method="post">
+		<div style="text-align:right">
+			<input type="text" class="fondo" name="email_desabo" value="" />
+			<input type="hidden" name="desabo" value="oui" />
+			<input type="submit" class="fondl" name="oubli" value="<:pass_ok:>" />
+		</div>
+	</form>})]
+</fieldset>
+]
