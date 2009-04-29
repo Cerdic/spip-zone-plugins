@@ -82,7 +82,7 @@ function balise_ABCALENDRIER_dyn($prec_mois,$prec_annee,$moise_annee_curr,$suiv_
       $tmp = '';
       while(date('w', mkdate($M, $TempD, $Y)) != 1) {
          $TempD--;
-         $case = '<td>';
+         $case = '<td class="horsperiode">';
          $case .= date('j', mkdate($M, $TempD, $Y));
          $date = date('Ymd', mkdate($M, $TempD, $Y));
 
@@ -96,7 +96,11 @@ function balise_ABCALENDRIER_dyn($prec_mois,$prec_annee,$moise_annee_curr,$suiv_
       if(date('w', mkdate($M, $TempD, $Y)) == 1) {
          $my_cal_tab .= '</tr><tr>';
       }
-      $my_cal_tab .= '<td '.(date('Ymd', mkdate($M, $TempD, $Y)) == date('Ymd') ? ' class="today"' : '').'>';
+      
+      if ($M != date('n', mkdate($M, $TempD, $Y)))  
+                    $my_cal_tab .= '<td class="horsperiode">';             // not in the good month 
+            else    $my_cal_tab .= '<td '.(date('Ymd', mkdate($M, $TempD, $Y)) == date('Ymd') ? ' class="today"' : '').'>';  // current month: today ?
+            
       $date = date('Ymd', mkdate($M, $TempD, $Y));
       if (isset($events[$date])) {
          if(1==count($events[$date]))
