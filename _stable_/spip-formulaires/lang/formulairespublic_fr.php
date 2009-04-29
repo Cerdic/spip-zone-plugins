@@ -52,10 +52,10 @@
 		'email_inexistant' => "Cet email est mal formaté ou inconnu",
 		'mdp_envoye' => "Mot de passe envoyé",
 		
-		// espace applicant
+		// espace formulaire
 		'bienvenue' => "Bienvenue",
 		'deconnexion' => "Déconnexion",
-		
+		'espace_formulaire' => "Espace formulaire",
 		'supprimer' => "Supprimer",
 		'editer' => "Editer",
 		'erreur_cookie' => "Votre navigateur doit accepter les cookies.",

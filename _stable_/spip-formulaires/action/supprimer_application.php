@@ -33,7 +33,7 @@
 			}
 		}
 
-		$url = generer_url_public('espace_applicant', 'lang='.$lang, true);
+		$url = generer_url_public($GLOBALS['meta']['spip_formulaires_fond_formulaire_espace_formulaire'], 'lang='.$lang, true);
 		header('Location: ' . $url);
 		exit();
 

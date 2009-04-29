@@ -39,7 +39,7 @@
 		if ($id_formulaire) {
 			$redirection = generer_url_public('formulaire', 'id_formulaire='.$id_formulaire, true);
 		} else {
-			$redirection = generer_url_public($GLOBALS['meta']['spip_formulaires_fond_formulaire_espace_applicant'], ($_lang ? 'lang='.$_lang : ''), true);
+			$redirection = generer_url_public($GLOBALS['meta']['spip_formulaires_fond_formulaire_espace_formulaire'], ($_lang ? 'lang='.$_lang : ''), true);
 		}
 		
 		if ($email == '' or $mdp == '') {

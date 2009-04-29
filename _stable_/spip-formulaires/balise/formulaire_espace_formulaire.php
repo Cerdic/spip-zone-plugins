@@ -16,12 +16,12 @@
 	include_spip('formulaires_fonctions');
 
 
-	function balise_FORMULAIRE_ESPACE_APPLICANT($p) {
-		return calculer_balise_dynamique($p,'FORMULAIRE_ESPACE_APPLICANT', array());
+	function balise_FORMULAIRE_ESPACE_FORMULAIRE($p) {
+		return calculer_balise_dynamique($p,'FORMULAIRE_ESPACE_FORMULAIRE', array());
 	}
 
 
-	function balise_FORMULAIRE_ESPACE_APPLICANT_dyn() {
+	function balise_FORMULAIRE_ESPACE_FORMULAIRE_dyn() {
 
 		if (isset($_COOKIE['spip_formulaires_test_cookie'])) {
 			$cookie_ko = false;
@@ -31,7 +31,7 @@
 				if ($applicant->existe) {
 					return	inclure_balise_dynamique(
 								array(
-									'formulaires/formulaire_espace_applicant',
+									'formulaires/formulaire_espace_formulaire',
 									0,
 									array(
 										'id_applicant'	=> $applicant->id_applicant
@@ -43,22 +43,10 @@
 			}
 			return	inclure_balise_dynamique(
 						array(
-							'formulaires/formulaire_espace_applicant',
+							'formulaires/formulaire_espace_formulaire',
 							0,
 							array(
 								'applicant_ko'	=> ' '
-							)
-						),
-						false
-					);
-
-		} else {
-			return	inclure_balise_dynamique(
-						array(
-							'formulaires/formulaire_espace_applicant',
-							0,
-							array(
-								'cookie_ko'	=> ' '
 							)
 						),
 						false

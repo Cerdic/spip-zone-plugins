@@ -55,7 +55,7 @@
 		// espace applicant
 		'bienvenue' => "Welcome",
 		'deconnexion' => "Logout",
-
+		'espace_formulaire' => "Form area",
 		'supprimer' => "Delete",
 		'editer' => "Edit",
 		'erreur_cookie' => "Your browser must have cookies enabled.",

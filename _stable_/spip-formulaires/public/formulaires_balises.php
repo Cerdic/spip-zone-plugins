@@ -111,18 +111,18 @@
 
 
 	/**
-	 * balise_URL_FORMULAIRE_ESPACE_APPLICANT
+	 * balise_URL_FORMULAIRE_ESPACE_FORMULAIRE
 	 *
 	 * @param  objet p contexte spip
-	 * @return  string url du formulaire espace applicant
+	 * @return  string url du formulaire espace formulaire
 	 * @author  Pierre Basson
 	 */
-	function balise_URL_FORMULAIRE_ESPACE_APPLICANT($p) {
+	function balise_URL_FORMULAIRE_ESPACE_FORMULAIRE($p) {
 		$_lang = champ_sql('lang', $p);
 		if (!$_lang) {
 		 	$_lang = $GLOBALS['spip_lang'];
 		}
-		$p->code = "generer_url_public(\$GLOBALS['meta']['spip_formulaires_fond_formulaire_espace_applicant'], ($_lang ? 'lang='.$_lang : ''), true)";
+		$p->code = "generer_url_public(\$GLOBALS['meta']['spip_formulaires_fond_formulaire_espace_formulaire'], ($_lang ? 'lang='.$_lang : ''), true)";
 		$p->interdire_scripts = false;
 		return $p;
 	}

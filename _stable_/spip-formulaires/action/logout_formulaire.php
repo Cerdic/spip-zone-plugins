@@ -38,7 +38,7 @@
 		}
 			
 		if (empty($retour))
-			$redirection = generer_url_public($GLOBALS['meta']['spip_formulaires_fond_formulaire_espace_applicant'], 'lang='.$lang, true);
+			$redirection = generer_url_public($GLOBALS['meta']['spip_formulaires_fond_formulaire_espace_formulaire'], 'lang='.$lang, true);
 		else
 			$redirection = html_entity_decode($retour);
 

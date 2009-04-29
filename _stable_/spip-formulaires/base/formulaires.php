@@ -50,6 +50,7 @@
 		$interface['table_des_traitements']['URL_BLOC'][] = 'quote_amp(%s)';
 		$interface['table_des_traitements']['URL_ACTION_LOGIN_FORMULAIRE'][] = 'quote_amp(%s)';
 		$interface['table_des_traitements']['URL_ACTION_LOGOUT_FORMULAIRE'][] = 'quote_amp(%s)';
+		$interface['table_des_traitements']['URL_FORMULAIRE_ESPACE_FORMULAIRE'][] = 'quote_amp(%s)';
 		$interface['table_des_traitements']['URL_FORMULAIRE_OUBLI_FORMULAIRE'][] = 'quote_amp(%s)';
 		return $interface;
 	}
@@ -216,7 +217,7 @@
 					$secret = formulaires_generer_nouveau_mdp(16);
 					ecrire_meta('spip_formulaires_blowfish', $secret);
 					ecrire_meta('spip_formulaires_version', $version_plugin);
-					ecrire_meta('spip_formulaires_fond_formulaire_espace_applicant', 'espace_applicant');
+					ecrire_meta('spip_formulaires_fond_formulaire_espace_formulaire', 'espace_formulaire');
 					ecrire_meta('spip_formulaires_fond_formulaire_oubli_formulaire', 'oubli_formulaire');
 					ecrire_meta('spip_formulaires_utiliser_descriptif', 'oui');
 					ecrire_meta('spip_formulaires_utiliser_chapo', 'oui');
@@ -366,6 +367,8 @@
 						sql_updateq('spip_formulaires', array('statut' => 'en_ligne'), 'en_ligne="oui"');
 						sql_alter("TABLE spip_formulaires CHANGE statut statut ENUM('hors_ligne','en_ligne') NOT NULL DEFAULT 'hors_ligne'");
 						sql_alter("TABLE spip_formulaires DROP en_ligne");
+						effacer_meta('spip_formulaires_fond_formulaire_espace_applicant');
+						ecrire_meta('spip_formulaires_fond_formulaire_espace_formulaire', 'espace_formulaire');
 						ecrire_meta('spip_formulaires_utiliser_descriptif', 'oui');
 						ecrire_meta('spip_formulaires_utiliser_chapo', 'oui');
 						ecrire_meta('spip_formulaires_utiliser_ps', 'oui');
@@ -390,7 +393,7 @@
 				sql_drop_table('spip_mots_formulaires', true);
 				effacer_meta('spip_formulaires_blowfish');
 				effacer_meta('spip_formulaires_version');
-				effacer_meta('spip_formulaires_fond_formulaire_espace_applicant');
+				effacer_meta('spip_formulaires_fond_formulaire_espace_formulaire');
 				effacer_meta('spip_formulaires_fond_formulaire_oubli_formulaire');
 				effacer_meta('spip_formulaires_utiliser_descriptif');
 				effacer_meta('spip_formulaires_utiliser_chapo');
