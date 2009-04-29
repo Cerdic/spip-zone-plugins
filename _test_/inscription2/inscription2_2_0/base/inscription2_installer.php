@@ -1,6 +1,6 @@
 <?php
 
-$GLOBALS['inscription2_version'] = 0.70;
+$GLOBALS['inscription2_version'] = 0.71;
 
 function inscription2_upgrade(){
 	spip_log('INSCRIPTION 2 : installation','inscription2');
@@ -83,25 +83,11 @@ function inscription2_upgrade(){
 		
 		/** Inscription 2 (0.70)
 		 * Les pays sont maintenant pris dans le plugin Geographie
-		 * On ne les installe plus
+		 * On ne les installe si le plugin n'est pas actif,
+		 * pour ne pas en etre dependant.
 		 */
+		i2_installer_pays();
 
-		/*
-		//les pays
-		include(_DIR_PLUGIN_INSCRIPTION2."/inc/pays.php");
-		$descpays = sql_showtable('spip_pays', '', false);
-		if(isset($descpays['field'])){
-			sql_drop_table("spip_pays");
-		}
-		sql_create("spip_geo_pays",
-			array("id_pays"=> "SMALLINT NOT NULL AUTO_INCREMENT","pays"=>"varchar(255) NOT NULL"),
-			array('PRIMARY KEY' => "id_pays")
-		);
-
-		// Attention cette ligne est incorrecte (a corriger si ca doit revenir !)
-		// insere 2 "Array" dans la bdd au lieu des pays !
-		sql_insertq("spip_geo_pays",array("pays" => $liste_pays));
-		*/
 		
 		echo "Inscription2 installe @ ".$version_base;
 		ecrire_meta('inscription2_version',$current_version=$version_base);
@@ -150,22 +136,16 @@ function inscription2_upgrade(){
 	if ($current_version<0.65){
 		ecrire_meta('inscription2_version',$current_version=0.65);
 	}
-
+	
 	/*
-	 * Utilisation du plugin Geographie pour les pays
+	 * Reinstaller les pays de Geographie
+	 * pour ne pas etre dependant de ce plugin
 	 */
-	if ($current_version<0.70){
-		// on fait un upgrade gentil
-		// on passe le champs "pays" en "nom"
-		// mais le mieux serait de desinstaller la table pour installer celle de geographie
-		// on fait l'inverse de la maj 0.61
-		include_spip('base/abstract_sql');
-		$descpays = sql_showtable("spip_geo_pays", '', false);
-		if((isset($descpays['field']['pays'])) && (!isset($descpays['field']['nom']))){
-			sql_alter("TABLE spip_geo_pays CHANGE pays nom text DEFAULT '' NOT NULL"); // champ text
-		}		
-		ecrire_meta('inscription2_version',$current_version=0.70);
-	}		
+	if ($current_version<0.71){
+		i2_installer_pays();
+		spip_log("Inscription2 update @ 0.71 : installation de la table pays de geographie", "maj");
+		ecrire_meta('inscription2_version',$current_version=0.71);
+	}	
 	ecrire_metas();
 }
 
@@ -195,7 +175,8 @@ function inscription2_vider_tables() {
 	if (!lire_config('plugin/SPIPLISTES')){
 		sql_drop_table('spip_auteurs_elargis');
 	}
-	if(!lire_config('spip_geo_base_version')){
+	if(!lire_config('spip_geo_base_version')
+	and !defined('_DIR_PLUGIN_GEOGRAPHIE')){
 		sql_drop_table('spip_geo_pays');
 		spip_log("INSCRIPTION 2 : suppression de la table spip_geo");
 	}
@@ -204,4 +185,45 @@ function inscription2_vider_tables() {
 	ecrire_metas();
 }
 
+
+// reinstaller la table de pays
+function i2_installer_pays() {
+	if (!defined('_DIR_PLUGIN_GEOGRAPHIE')) {
+		// 1) suppression de la table existante
+		// pour redemarrer les insert a zero
+		sql_drop_table("spip_geo_pays");
+		// 2) recreation de la table
+		include_spip('base/create');
+		creer_base();
+		// 3) installation des entrees
+		// importer les pays
+		include_spip('imports/pays');
+		include_spip('inc/charset');
+		foreach($GLOBALS['liste_pays'] as $k=>$p)
+			sql_insertq('spip_geo_pays',array('id_pays'=>$k,'nom'=>unicode2charset(html2unicode($p))));		
+	}
+}
+
+/*
+ * Surcharge de l'installe de SPIP par defaut
+ * car inscription2 gere une seconde meta pour tester son installation correcte.
+ */
+function inscription2_install($action){
+	$version_base = $GLOBALS['inscription2_version'];
+	switch ($action){
+		case 'test':
+			if (!is_array(unserialize($GLOBALS['meta']['inscription2'])) OR !$GLOBALS['meta']['inscription2'] OR ($GLOBALS['meta']['inscription2']=='')){
+				// Si cette meta n'est pas un array ... vaut mieux relancer l'ensemble du processus d'install
+				return false;
+			}
+			return (isset($GLOBALS['meta']['inscription2_version']) AND ($GLOBALS['meta']['inscription2_version']<$version_base));
+			break;
+		case 'install':
+			inscription2_upgrade();
+			break;
+		case 'uninstall':
+			inscription2_vider_tables();
+			break;
+	}
+}
 ?>
