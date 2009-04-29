@@ -66,12 +66,12 @@
             <input type="text" class="text" name="ville_pro" id="ville_pro" value="#ENV{ville_pro}"/>
             [<p class='erreur'>(#ENV**{erreurs}|table_valeur{ville_pro})</p>]
         </li>]
-        [(#CONFIG{inscription2/pays_pro_fiche_mod}|=={on}|oui)	
-        <li class="editer_pays_pro[ (#CONFIG{inscription2/pays_pro_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{pays_pro}|oui)erreur]">
-            <label for="pays_pro"><:inscription2:pays:></label>
-            <INCLURE{fond=formulaires/inscription2_pays}{name=pays_pro}{id_pays=#ENV{pays_pro}}>
-            [<p class='erreur'>(#ENV**{erreurs}|table_valeur{pays_pro})</p>]
-        </li>]
+
+        [(#CONFIG{inscription2/pays_pro_fiche_mod}|=={on}|oui)
+			[(#SAISIE{pays,pays_pro}{label=<:inscription2:pays:>}
+				{obligatoire=[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{oui,non})]})]
+		]
+		
         [(#CONFIG{inscription2/telephone_pro_fiche_mod}|=={on}|oui)	
         <li class="editer_pays_pro[ (#CONFIG{inscription2/telephone_pro_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{telephone_pro}|oui)erreur]">
             <label for="pays_pro"><:inscription2:telephone_pro:></label>

@@ -5,12 +5,11 @@
 	<auteur>
 		&copy; cmtmt2003 - 2007/2009 - Distribu&eacute; sous licence GNU/LGPL
 	</auteur>
-	<version>
-		0.68
-	</version>
-	<etat>
-		test
-	</etat>
+	
+	<version>0.70</version>
+	<version_base>0.70</version_base>
+	<etat>test</etat>
+	
 	<description>
 		Inscription personnalis&eacute;e au site par l&rsquo;ajout de champs compl&eacute;mentaires.
 	</description>

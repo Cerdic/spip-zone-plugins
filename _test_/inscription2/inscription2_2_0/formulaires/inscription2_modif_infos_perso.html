@@ -103,12 +103,10 @@
             [<p class='erreur'>(#ENV**{erreurs}|table_valeur{ville})</p>]
         </li>]
 
-        [(#CONFIG{inscription2/pays_fiche_mod}|=={on}|oui)	
-        <li class="editer_pays[ (#CONFIG{inscription2/pays_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{pays}|oui)erreur]">
-            <label for="pays"><:inscription2:pays:></label>
-            <INCLURE{fond=formulaires/inscription2_pays}{name=pays}{id_pays=#ENV{pays}}>
-            [<p class='erreur'>(#ENV**{erreurs}|table_valeur{pays})</p>]
-        </li>]
+        [(#CONFIG{inscription2/pays_fiche_mod}|=={on}|oui)
+			[(#SAISIE{pays,pays}{label=<:inscription2:pays:>}
+				{obligatoire=[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{oui,non})]})]
+		]
 
         [(#CONFIG{inscription2/telephone_fiche_mod}|=={on}|oui)	
         <li class="editer_telephone[ (#CONFIG{inscription2/telephone_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{telephone}|oui)erreur]">

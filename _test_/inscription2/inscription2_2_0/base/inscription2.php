@@ -41,7 +41,13 @@ function inscription2_declarer_tables_principales($tables_principales){
 	$tables_principales['spip_auteurs_elargis'] = array(
 		'field' => &$spip_auteurs_elargis,
 		'key' => &$spip_auteurs_elargis_key);
-	 	
+		
+/*
+ * A partir de Inscription 2 (0.7)
+ * on utilise le plugin geographie pour gerer les pays.
+ */
+
+/*
 	$spip_geo_pays['id_pays'] = "SMALLINT NOT NULL";
 	$spip_geo_pays['pays'] = "text NOT NULL";
 	$spip_geo_pays_key = array("PRIMARY KEY" => "id_pays");
@@ -49,7 +55,7 @@ function inscription2_declarer_tables_principales($tables_principales){
 	$tables_principales['spip_geo_pays'] = array(
 		'field' => &$spip_geo_pays, 
 		'key' => &$spip_geo_pays_key);
-	
+*/	
 	return $tables_principales;
 }
 ?>

@@ -41,8 +41,8 @@ function legender_auteur_supp_saisir($id_auteur){
 	// Elaborer le formulaire
 	$var_user[] = 'b.id_auteur';
 	foreach(lire_config('inscription2',array()) as $cle => $val){
-		$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
-		if($val=='on' AND !in_array($cle,$exceptions_des_champs_auteurs_elargis) and !ereg("^(categories|zone|newsletter).*$", $cle) ){
+		$cle = preg_replace("/_(obligatoire|fiche|table).*$/", "", $cle);
+		if($val=='on' AND !in_array($cle,$exceptions_des_champs_auteurs_elargis) and !preg_match("/^(categories|zone|newsletter).*$/", $cle) ){
 			$var_user[] = 'b.'.$cle;
 			$champs[$cle] = '';
 		}
