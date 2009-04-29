@@ -12,10 +12,11 @@ text-align:center;
 	font-size:80%;
 }
 /* classe del numero del giorno odierno*/
-.today{
+.today{   
 	text-decoration:underline;
 	background: #fff;
 }
+.horsperiode {visibility:hidden;}
 table#events{
 	width:90%;
 	}
