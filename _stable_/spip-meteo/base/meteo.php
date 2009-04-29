@@ -80,6 +80,11 @@
 						ecrire_meta('spip_meteo_version', $version_base = 1.2);
 						ecrire_metas();
 					}
+					if ($version_base < 2.0) {
+						// renommage pour spip 2.0
+						ecrire_meta('spip_meteo_version', $version_base = 2.0);
+						ecrire_metas();
+					}
 				}
 				break;
 			case 'uninstall':
