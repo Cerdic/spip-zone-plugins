@@ -1013,9 +1013,9 @@
 
 			if ($this->formulaire->notifier_auteurs == 'oui') {
 				include_spip('inc/facteur_classes');
-				$objet			= recuperer_fond('notifications/notification_nouvelle_application_titre', array('id_formulaire' => $this->formulaire->id_formulaire, 'id_application' => $this->id_application, 'lang' => $lang));
-				$message_html	= recuperer_fond('notifications/notification_nouvelle_application_html', array('id_formulaire' => $this->formulaire->id_formulaire, 'id_application' => $this->id_application, 'lang' => $lang));
-				$message_texte	= recuperer_fond('notifications/notification_nouvelle_application_texte', array('id_formulaire' => $this->formulaire->id_formulaire, 'id_application' => $this->id_application, 'lang' => $lang));
+				$objet			= recuperer_fond('notifications/notification_nouveau_resultat_titre', array('id_formulaire' => $this->formulaire->id_formulaire, 'id_application' => $this->id_application, 'lang' => $lang));
+				$message_html	= recuperer_fond('notifications/notification_nouveau_resultat_html', array('id_formulaire' => $this->formulaire->id_formulaire, 'id_application' => $this->id_application, 'lang' => $lang));
+				$message_texte	= recuperer_fond('notifications/notification_nouveau_resultat_texte', array('id_formulaire' => $this->formulaire->id_formulaire, 'id_application' => $this->id_application, 'lang' => $lang));
 				// réponses aux questions de type "auteurs"
 				$resA = sql_select('A.email',
 									'spip_auteurs AS A
