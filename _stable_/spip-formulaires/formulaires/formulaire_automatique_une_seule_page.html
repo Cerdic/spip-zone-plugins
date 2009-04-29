@@ -242,7 +242,8 @@
 <p class="boutons"><input type="submit" class="submit" name="bouton_valider" value="<:formulairespublic:valider:>" /></p>
 
 <BOUCLE_deconnexion(FORMULAIRES) {id_formulaire} {limiter_invitation=oui}>
-[<p class="boutons"><a href="(#URL_ACTION_LOGOUT_FORMULAIRE)"><:formulairespublic:deconnexion:></a></p>]
+<p class="boutons"><a href="#URL_ACTION_LOGOUT_FORMULAIRE"><:formulairespublic:deconnexion:></a></p>
+<p class="boutons"><a href="#URL_FORMULAIRE_ESPACE_FORMULAIRE"><:formulairespublic:espace_formulaire:></a></p>
 </BOUCLE_deconnexion>
 
 <input type="hidden" name="action" value="valider_formulaire" />
