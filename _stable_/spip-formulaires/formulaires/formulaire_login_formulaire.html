@@ -1,6 +1,6 @@
 [(#ENV*{login}|?{' ',''})
 
-[<p class="reponse_formulaire reponse_formulaire_erreur"><:formulairespublic:session_ou_cookies:></p>(#ENV*{cookies})]
+[<p class="reponse_formulaire reponse_formulaire_erreur"><:formulairespublic:erreur_cookie:></p>(#ERREUR_COOKIE)]
 [<p class="reponse_formulaire reponse_formulaire_erreur"><:formulairespublic:bad_pass:></p>(#ENV*{bad_pass})]
 
 <div class="formulaire_spip formulaire_automatique formulaire_login_formulaire">

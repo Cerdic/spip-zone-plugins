@@ -89,6 +89,28 @@
 
 
 	/**
+	 * balise_URL_ACTION_SUPPRESSION_APPLICATION
+	 *
+	 * affiche l'url de l'action login sur spip-formulaires
+	 *
+	 * @param  objet p contexte spip
+	 * @return  string url vers action login
+	 * @author  Pierre Basson
+	 */
+	function balise_URL_ACTION_SUPPRESSION_APPLICATION($p) {
+		$_id_formulaire = champ_sql('id_formulaire', $p);
+		$_id_application = champ_sql('id_application', $p);
+		$_lang = champ_sql('lang', $p);
+		if (!$_lang) {
+		 	$_lang = $GLOBALS['spip_lang'];
+		}
+		$p->code = "generer_url_action('supprimer_application', 'id_formulaire='.$_id_formulaire.'&id_application='.$_id_application.'&lang='.$_lang, true)";
+		$p->interdire_scripts = false;
+		return $p;
+	}
+
+
+	/**
 	 * balise_URL_FORMULAIRE_ESPACE_APPLICANT
 	 *
 	 * @param  objet p contexte spip
@@ -320,6 +342,22 @@
 		$p->code = "ini_get('upload_max_filesize')";
 		$p->interdire_scripts = false;
 		return $p;
+	}
+
+
+	function balise_ERREUR_COOKIE($p) {
+		$p->code = "calculer_ERREUR_COOKIE()";
+		$p->interdire_scripts = false;
+		return $p;
+	}
+
+
+	function calculer_ERREUR_COOKIE() {
+		if ($_REQUEST['erreur_cookie'] == 'oui') {
+			return ' ';
+		} else {
+			return '';
+		}
 	}
 
 

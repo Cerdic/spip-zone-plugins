@@ -80,7 +80,7 @@
 
 		} else {
 
-			$redirection.= '&cookies=1';
+			$redirection.= '&erreur_cookie=oui';
 
 		}
 

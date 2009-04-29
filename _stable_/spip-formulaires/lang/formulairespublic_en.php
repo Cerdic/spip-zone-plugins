@@ -56,7 +56,9 @@
 		'bienvenue' => "Welcome",
 		'deconnexion' => "Logout",
 
-		'supprimer' => "Remove",
+		'supprimer' => "Delete",
+		'editer' => "Edit",
+		'erreur_cookie' => "Your browser must have cookies enabled.",
 
 		'Z' => 'ZZzZZzzz'
 

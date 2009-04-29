@@ -57,6 +57,8 @@
 		'deconnexion' => "Déconnexion",
 		
 		'supprimer' => "Supprimer",
+		'editer' => "Editer",
+		'erreur_cookie' => "Votre navigateur doit accepter les cookies.",
 
 		'Z' => 'ZZzZZzzz'
 

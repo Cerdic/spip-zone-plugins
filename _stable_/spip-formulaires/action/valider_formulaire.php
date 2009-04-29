@@ -24,6 +24,8 @@
 		$lang				= $_POST['lang'];
 		$nouvel_applicant	= false;
 
+		$url_formulaire	= generer_url_formulaire($id_formulaire);
+
 		if (isset($_COOKIE['spip_formulaires_test_cookie'])) {
 
 			if (!empty($_COOKIE['spip_formulaires_mcrypt_iv']) AND !empty($_COOKIE['spip_formulaires_id_applicant'])) {
@@ -43,8 +45,6 @@
 				$applicant = new applicant();
 				$applicant->poser_cookies();
 			}
-
-			$url_formulaire	= generer_url_formulaire($id_formulaire);
 
 			if ($id_formulaire AND $applicant->existe) {
 				$application = new application($applicant->id_applicant, $id_formulaire); // pas besoin d'id_application pour l'instant, l'applicant ne peut avoir de ttes façons qu'un seul formulaire "temporaire" ouvert à la fois
@@ -75,7 +75,7 @@
 
 		} else {
 
-			$redirection = generer_url_public('aide', "lang=$lang", true);
+			$redirection = parametre_url($url_formulaire, 'erreur_cookie', 'oui');
 
 		}
 
