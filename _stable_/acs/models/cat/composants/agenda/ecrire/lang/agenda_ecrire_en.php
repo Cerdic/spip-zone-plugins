@@ -5,7 +5,8 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Agenda',
-'description' => 'Mini-calendar with dhtml tooltips and links to articles',
+'description' => 'Mini-calendar with dhtml tooltips and links to articles and to news',
+'help' => 'Agenda can also show changes.',
 
 'ThisMonth' => 'This month',
 'NotThisMonth' => 'Not this month',
@@ -13,6 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'TitreFondColor' => 'Title',
 'BordColor' => 'Border',
 'BulleFondColor' => 'Tooltip',
+'BulleVoirArticlesModifies' => 'Display changes',
+'BulleArticleModifieFondColor' => 'Modified text',
+'BulleBreveFondColor' => 'News',
 'BulleSurvol' => 'Over',
 'HeadFondColor' => 'Header'
 );

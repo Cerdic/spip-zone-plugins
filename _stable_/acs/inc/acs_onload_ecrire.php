@@ -42,7 +42,6 @@ function acs_acces($page) {
   // Les pages définies dans options, administrés par les mêmes admins qu'ACS
   if (isset($GLOBALS['ACS_ACCES']) && is_array($GLOBALS['ACS_ACCES']) && count($GLOBALS['ACS_ACCES']))
     $enfer = array_merge($GLOBALS['ACS_ACCES'], $enfer);
-spip_log('acs_acces '.implode(' ', $enfer));
   $GLOBALS['ACS_ENFER'] = $enfer; // On garde cette définition pour affichage
 
   if (isset($GLOBALS['meta']['ACS_ADMINS'])) { // Pas d'action avant initialisation d'ACS !

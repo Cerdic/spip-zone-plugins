@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2008
+# Copyright Daniel FAIVRE, 2007-2009
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
@@ -11,7 +11,7 @@
  * Utilise le cache ACS - Use ACS cache
  * 
  * Retourne un tableau avec les noms de dossiers des composants en index
- * Return Array('component1' => '', 'component2' => '#over#', ...)
+ * Return Array('component1' => '', 'component2' => '<dir>', ...)
  */
 function composants_liste(){
   static $cl=array();
@@ -38,7 +38,7 @@ function lecture_composants_liste() {
     $tas = explode(':', $GLOBALS['meta']['acsSqueletteOverACS']);
     foreach($tas as $dir) {
       $dirc = _DIR_RACINE.$dir.'/composants';
-      $cl = array_merge($cl, lit_liste_composants($dirc, '#over#'));
+      $cl = array_merge($cl, lit_liste_composants($dirc, $dir));
     }
   }
   return $cl;
@@ -56,7 +56,11 @@ function lit_liste_composants($dirc, $tag=''){
     AND $f != 'CVS'
     AND $f != 'remove.txt'
     AND @is_readable($p = $dirc."/$f/ecrire/composant.xml")) {
-      if (is_file($p)) $lc[$f] = $tag;
+      if (is_file($p)) {
+      	$lc[$f]['on'] = $GLOBALS['meta']['acs'.ucfirst($f).'Use'];
+       	if ($tag)
+       		$lc[$f]['over'] = $tag;
+      }
     }
     $nb++;
   }

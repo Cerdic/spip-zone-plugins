@@ -1,8 +1,6 @@
-#CACHE{0}
-
-/**
- * Feuille de style Agenda, par Daniel Faivre, 2007-2008
- */
+#CACHE{0}[(#REM)
+Feuille de style Agenda, par Daniel Faivre, 2007-2009
+]
 
 .small_mini a:link {
   color: #af0000;
@@ -63,17 +61,19 @@
   border: 1px solid #CONFIG{acsFondLink};
   -moz-border-radius: 5px;
   padding: 2px;
-  padding-right: 5px;
   padding-bottom: 0;
 }
 
-/* info-bulle */
+* html div.bulle {
+  width: 250px; [(#REM) Hack IE : IE exige une largeur définie ]
+}
+
+[(#REM) info-bulle ]
 .bulle{
 position: absolute;
 min-width: 200px;
 display: none;
 z-index : 999;
-background: #CONFIG{acsAgendaBulleFondColor,ffffef} [ url('[(#ACS_CHEMIN)]img/trame/(#CONFIG{acsAgendaBulleFondImage})') repeat top left];  /* agenda_bulle_fond.png */
 padding: 0;
 margin: 0;
 border: [(#CONFIG{acsAgendaBordLargeur,1px})][ (#CONFIG{acsAgendaBordStyle,ridge})][ (#CONFIG{acsAgendaBordColor})];
@@ -82,25 +82,32 @@ line-height:normal;
 text-align: #LANG_LEFT;
 }
 
-* html .bulle {
-width: 250px; /* IE exige une largeur définie */
-}
-
-.bulle .ligne{
-  padding-left: 2px;
-  padding-right: 2px;
-}
-.bulle .ligne:hover{
+.bulle .publie:hover, .bulle .modifie:hover{
   [background: (#CONFIG{acsAgendaBulleSurvol});]
 }
 
-.bulle a {
+.bulle .publie a, .bulle .modifie a, .bulle .breve a {
+  color: #CONFIG{acsFondLink, #df0000};
 	font-weight: normal;
 	display: block;
 	width: 100%;
 	border:0;
 	padding:0;
-	text-align: left;
+	text-align: #LANG_LEFT;
 	font-style: normal;
+  -moz-border-radius: 0;
 }
-.bulle a:hover {color: #df0000; [background: (#CONFIG{acsAgendaBulleSurvol});] display: block; width: 100%}
+.bulle .publie a{
+  [background: (#CONFIG{acsAgendaBulleFondColor,#ffffef});]
+}
+.bulle .modifie a {
+  [background: (#CONFIG{acsAgendaBulleArticleModifieFondColor,#dfffef});]
+}
+.bulle .breve a{
+  [background: (#CONFIG{acsAgendaBulleBreveFondColor,#dfefef});]
+}
+.bulle .publie a:hover, .bulle .modifie a:hover, .bulle .breve a:hover {
+  color: #CONFIG{acsFondLinkHover, #df0000};
+  [background: (#CONFIG{acsAgendaBulleSurvol});] display: block; width: 100%;
+}
+

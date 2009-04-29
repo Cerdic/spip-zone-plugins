@@ -35,21 +35,22 @@ function lecture_composants_variables() {
     $config = find_in_path('composants/'.$composant.'/ecrire/composant.xml');
     $config = spip_xml_load($config); // Lit les paramètres de configuration du composant
     $c = $config['composant'][0];
-    $r[$tag.ucfirst($composant).'Use'] = array('composant' => $composant, 'type' => 'use');
-
+    $r[$composant]['vars']['Use'] = array('type' => 'use');
+		if ($tag['over']) 
+			$r[$composant]['over'] = $tag['over'];
+		
     if (is_array($c['variable'])) {
       foreach($c['variable'] as $k=>$var) {
       	$option = array();
       	$chemin = false;
         foreach($var as $xmltag=>$value) {
           if ($xmltag == 'nom')
-            $nom = ucfirst($composant).$value[0];
-          elseif ($xmltag == 'option')
-            $r[$tag.$nom]['option'] = $value;
+            $nom = $value[0];
+          elseif (count($value) > 1)
+            $r[$composant]['vars'][$nom][$xmltag] = $value;
           else
-            $r[$tag.$nom][$xmltag] = $value[0];
+            $r[$composant]['vars'][$nom][$xmltag] = $value[0];
         }
-      	$r[$tag.$nom]['composant'] = $composant;
       }
     }
   }
@@ -57,13 +58,34 @@ function lecture_composants_variables() {
 }
 
 function composant_instances($c) {
-  $r =array();
+  $r = array();
   $metas = $GLOBALS['meta'];
   $reg = '/acs'.ucfirst($c).'(\d+)Use/';
   foreach ($metas as $meta=>$val) {
     if (preg_match($reg, $meta, $matches))
       $r[] = $matches[1];
   }
+  sort($r);
   return $r;
 }
+
+function liste_variables() {
+	static $lv = array();
+  if (count($lv) > 0)
+    return $lv;
+    
+  $cv = composants_variables();
+	foreach($cv as $c=>$p) {
+		foreach($p['vars'] as $var=>$vp) {
+			$lv[ucfirst($c).$var] = array('c' => $c);
+		}
+  	foreach(composant_instances($c) as $nic) {
+  		foreach($p['vars'] as $var=>$vp) {
+				$lv[ucfirst($c).$nic.$var] = array('c' => $c, 'nic' => $nic);
+  		}
+  	}
+  }
+  return $lv;
+}
+
 ?>

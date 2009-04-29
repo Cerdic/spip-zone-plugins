@@ -8,13 +8,19 @@ Copyright Daniel FAIVRE, 2007-2009
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Le forum d'un article, rubrique, site ou brève.
-]
-[(#PARAMETRES_FORUM|?) Cette balise (invisible) provoque le recalcul du forum la premiere fois qu'un message est poste (cf. inc/invalideur). ]
+
+Variables :
+- ouvrir=oui ouvre tous les messages
+- debut_forums=xx : pagination
+- statut : filtrage selon statut par expression rationnelle
+
+][(#PARAMETRES_FORUM|?) Cette balise (invisible) provoque le recalcul du forum la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 [(#SELF|parametre_url{ouvrir,''}|=={#SELF}|?{#SET{ouvrir,oui},#SET{ouvrir,''}})]
+[(#STATUT|?{#SET{statut,#STATUT},#SET{statut,publie}})]
 <B_forums>
 <span class="texte_nav" style="float:right">#PAGINATION</span>
 [(#REM) Nombre total de messages ]
-<BOUCLE_decompte(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat}></BOUCLE_decompte>
+<BOUCLE_decompte(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat}{statut==#GET{statut}}></BOUCLE_decompte>
 [<h2 class="forum-decompte">
 	<a name="forum" href="#forum" onclick="swap_couche('0', '','#ACS_CHEMIN{img/triangles/}'); return false;">
 		<img id='triangle0' src='[(#GET{ouvrir}|?{#ACS_CHEMIN{img/triangles/deplierhaut.gif},#ACS_CHEMIN{img/triangles/deplierbas.gif}})]' alt='' title='[(#ENV{ouvrir}|?{Déplier,Replier})]' width='10' height='10' border='0' />
@@ -26,7 +32,7 @@ Le forum d'un article, rubrique, site ou brève.
 </h2>]<//B_decompte>
 [(#REM) Messages du forum ]
 <ul class="forum" id="Layer0" [(#ENV{ouvrir}!={oui}|?{style="display: none"})]>
-	<BOUCLE_forums(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {par date} {inverse} {pagination 10}>
+	<BOUCLE_forums(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {par date} {inverse} {pagination 10}{statut==#GET{statut}}>
 	<li class="forum-fil">
 		<div class="forum-message">
 			<div class="forum-chapo">
@@ -37,7 +43,7 @@ Le forum d'un article, rubrique, site ou brève.
 				[(#TEXTE|lignes_longues)]
         [<div class="notes surlignable">(#NOTES|safehtml|lignes_longues)</div>]
 				[<p class="forum-lien #EDIT{hyperlien}"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-				[<p class="forum-repondre-message"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_message:>[(#NOM|?{' de '#NOM|couper{80},' 'anonyme})]</a></p>]
+				[(#STATUT|=={publie}|?{' ', ''})[<p class="forum-repondre-message"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_message:>[(#NOM|?{' de '#NOM|couper{80},' 'anonyme})]</a></p>]]
 			</div>
          <B_forums_fils>
          <a href="javascript:swap_couche('#ID_FORUM','','#ACS_CHEMIN{img/triangles/}')"><img id="triangle#ID_FORUM" src='[(#GET{ouvrir}|?{#ACS_CHEMIN{img/triangles/deplierhaut.gif},#ACS_CHEMIN{img/triangles/deplierbas.gif}})]' alt='' title='Déplier' width='10' height='10' border='0' align="left" /></a> <a href="javascript:swap_couche('#ID_FORUM','','#ACS_CHEMIN{img/triangles/}')"> &nbsp; R&eacute;ponses &agrave; ce message</a>
@@ -53,7 +59,7 @@ Le forum d'un article, rubrique, site ou brève.
 						   [(#TEXTE|lignes_longues)]
                [<div class="notes surlignable">(#NOTES|safehtml|lignes_longues)</div>]
 						   [<p class="hyperlien #EDIT{hyperlien}"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-						   [<p class="forum-repondre-message"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_message:>[(#NOM|?{' de '#NOM|couper{80},' 'anonyme})]</a></p>]
+				       [(#STATUT|=={publie}|?{' ', ''})[<p class="forum-repondre-message"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_message:>[(#NOM|?{' de '#NOM|couper{80},' 'anonyme})]</a></p>]]
 					   </div>
 				   </div>
 				<BOUCLE_Forums_Boucle(boucle_forums_fils)></BOUCLE_Forums_Boucle>

@@ -61,7 +61,6 @@ function acs_get_from_active_plugin($plugin, $variable = false) {
 
 // Vérifie que l'utilisateur connecté est un admin ACS autorisé, ou le(s) webmestre(s) si ACS n'est pas encore configuré 
 function acs_autorise() {
-spip_log('$GLOBALS[\'connect_statut\']='.$GLOBALS['connect_statut']);
 	// Si l'utilisateur n'est pas admin, pas la peine d'aller plus loin
 	if ($GLOBALS['auteur_session']['statut'] != "0minirezo")
 		return false;

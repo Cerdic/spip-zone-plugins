@@ -220,8 +220,8 @@ class AdminComposant {
     $n = 999;
     $r .= '<div class="onlinehelp">'.acs_plieur('plieur_pu'.$n, 'pu'.$n, '#', false, 'if (typeof done'.$n.' == \'undefined\') {AjaxSqueeze(\'?exec=composant_get_infos&c='.$this->type.($this->nic ? '&nic='.$this->nic: '').'\',\'puAjax'.$n.'\'); done'.$n.' = true;}', _T('acs:dev_infos') ).'</div><div class="pu'.$n.' pliable">';
     if (count($this->cvars))
-      $r .= '<div class="onlinehelp">'._T('acs:references_autres_composants').'</div>'.
-            '<div class="onlinehelplayer">'.$this->get_cvars_html().'</div><br />';
+      $r .= '<br /><div class="onlinehelp">'._T('acs:references_autres_composants').'</div>'.
+            '<div class="onlinehelplayer">'.$this->get_cvars_html().'</div>';
     $r .= '<div id="puAjax'.$n.'" class="puAjax'.$n.'"></div>';
     $r .= '<div>'._T('version').' '.$this->type.' <b>'.(($this->version != ACS_VERSION) ? '<span class="alert">'.$this->version.'</span>' : $this->version).'</b></div>';
     /*

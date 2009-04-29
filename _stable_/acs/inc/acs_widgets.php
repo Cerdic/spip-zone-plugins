@@ -6,8 +6,6 @@
 # Copyright Daniel FAIVRE, 2007-2008
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
-require_once _DIR_ACS.'lib/composant/composants_actifs.php';
-
 // Affiche une liste contextuelle des composants - Onglet composants
 // Show a contextual widget list - Used by pages AND composants
 function liste_widgets($composants, $islink=false) {
@@ -45,7 +43,7 @@ function get_widget_class($widget, $class) {
       break;
     }
   }
-  if (!in_array($widget, composants_actifs()))
+  if ($GLOBALS['meta']['acs'.ucfirst($widget).'Use'] != 'oui')
       $ov .= ' '.$class.'_unused';
   return $ov;
 }

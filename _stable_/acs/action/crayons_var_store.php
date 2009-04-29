@@ -32,10 +32,17 @@ function action_crayons_var_store_dist() {
     return false;
     exit;
   }
-	$var = 'acs'.$_POST['fields_'.$wid];
+  $name = $_POST['name_'.$wid];
+  $name = explode('-', $name);
+  $nic = $name[2];
+	$var = $_POST['fields_'.$wid];
+	$v = explode('_', $var);
+	$c = $v[0]; // composant
+	$v = $v[1]; // variable
+	$var = 'acs'.ucfirst($c).($nic ? $nic : '').$v;
 	$oldval = $_POST['oldval_'.$wid];
 	// est-ce que la variable a ete modifiée entre-temps ?
-	if (false) {
+	if ($oldval != $GLOBALS['meta'][$var]) {
     echo var2js(array('$erreur' => _U('crayons:modifie_par_ailleurs')));
     exit;
   }	
