@@ -97,6 +97,7 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 		// On vérifie s'il est obligatoire et s'il est bien rempli
 		if ((lire_config('inscription2/'.$valeur.'_obligatoire') == 'on' ) && (empty($valeurs[$valeur]) OR (strlen(_request($valeur)) == 0))) {
 			$erreurs[$valeur] = _T('inscription2:champ_obligatoire');
+			$erreurs_obligatoires = true;
 			if(is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') == 'on') && (strlen(_request('pass')) == 0)){
 				// Si le password est vide et que l'on est dans le cas de la modification d'un auteur
 				// On garde le pass original
@@ -109,7 +110,9 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 		if(!$erreurs[$valeur]){
 			if(array_key_exists($valeur,$champs_a_verifier)){
 				$fonction_verif_{$valeur} = charger_fonction('inscription2_'.$champs_a_verifier[$valeur],'inc');
-				$erreurs[$valeur] = $fonction_verif_{$valeur}($valeurs[$valeur],$id_auteur);
+				if($val = $fonction_verif_{$valeur}($valeurs[$valeur],$id_auteur)){
+					$erreurs[$valeur] = $val;
+				}
 			}
 		}
 	}
@@ -161,8 +164,12 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 	
 	//message d'erreur generalise
 	if (count($erreurs)) {
-		spip_log($erreurs,"inscription2");
-		$erreurs['message_erreur'] .= _T('inscription2:formulaire_remplir_obligatoires');
+		if(isset($erreurs_obligatoires)){
+			$erreurs['message_erreur'] .= _T('inscription2:formulaire_remplir_obligatoires');	
+		}else{
+			$erreurs['message_erreur'] .= _T('inscription2:formulaire_remplir_validation');
+		}
+		
 	}
 	
     return $erreurs; // si c'est vide, traiter sera appele, sinon le formulaire sera resoumis

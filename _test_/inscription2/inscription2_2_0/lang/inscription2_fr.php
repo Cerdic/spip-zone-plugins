@@ -98,6 +98,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_inscription_ok' => 'Votre inscription a bien &eacute;t&eacute; prise en compte. Vous allez recevoir par courrier &eacute;lectronique vos identifiants de connexion.',
 	'formulaire_login_deja_utilise' => 'Le login est d&eacute;ja utilis&eacute;, veuillez en choisir un autre.',
 	'formulaire_remplir_obligatoires' => 'Veuillez remplir les champs obligatoires',
+	'formulaire_remplir_validation' => 'Veuillez v&eacute;rifier les champs qui ne sont pas valid&eacute;s.',
 
 	// G
 	'general_infos' => 'Informations G&eacute;n&eacute;rales',
