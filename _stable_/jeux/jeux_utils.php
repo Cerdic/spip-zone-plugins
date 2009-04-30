@@ -142,7 +142,7 @@ function jeux_commentaire_score($categ, $score, $total) {
 	$score = intval($score);
 	$total = intval($total);
 	$res = false;
-	$categ = preg_split(',(^|\n|\r)\s*([0-9]+[.\,]?[0-9]*)(%|pt|pts)\s*:,', trim($categ), -1, PREG_SPLIT_DELIM_CAPTURE);
+	$categ = preg_split('@(^|\n|\r)\s*(-?[0-9]+[.,]?[0-9]*)\s*(%|pt|pts)(?:\s|&nbsp;)*:@', trim($categ), -1, PREG_SPLIT_DELIM_CAPTURE);
 	for($i=2; $i<count($categ); $i+=4) {
 		$mini = $categ[$i+1]=='%'?$total*$categ[$i]/100:$categ[$i];
 		if($score > $total) $res=false;
