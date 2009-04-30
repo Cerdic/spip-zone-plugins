@@ -10,7 +10,6 @@
 *  
 **/
 
-include_spip('public/assembler');
 function exec_inscription2_adherents() {
 
 	global $connect_statut, $connect_toutes_rubriques;
@@ -23,12 +22,19 @@ function exec_inscription2_adherents() {
 	
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	
+	$contexte['case'] = _request('case');
+	$contexte['valeur'] = _request('valeur');
+
+	$contexte = array_merge($contexte,$_GET);
+	
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	
 	pipeline('exec_init',array('args'=>$_GET,'data'=>''));
 	
 	echo $commencer_page(_T('inscription2:gestion_adherents'), "", "", "");
 	
-	echo recuperer_fond('prive/table_adherents',$_GET);
+	echo recuperer_fond('prive/table_adherents',$contexte);
 	
-	echo fin_page();	
+	echo fin_page();
 }
 ?>
