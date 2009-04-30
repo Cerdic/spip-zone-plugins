@@ -9,12 +9,12 @@ function etiquettes_autoriser(){}
 
 // Teste si on à le droit d'ajouter des mots à un objet. Ajouter = sans toucher aux mots qui sont déjà liés
 function autoriser_ajouteretiquettes_dist($faire, $type, $id, $qui, $opt) {
-	return autoriser('editermots', $type, $id, $qui, $opt);
+	return autoriser('modifier', $type, $id, $qui, $opt);
 }
 
 // Teste si on peut remplacer la liste des mots liés à l'objet par une autre liste de mots
 function autoriser_remplaceretiquettes_dist($faire, $type, $id_groupe, $qui, $opt) {
-	return autoriser('editermots', $type, $id, $qui, $opt);
+	return autoriser('modifier', $type, $id, $qui, $opt);
 }
 
 ?>
