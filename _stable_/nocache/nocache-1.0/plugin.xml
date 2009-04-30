@@ -6,9 +6,10 @@
   <etat>stable</etat>
   <necessite id="SPIP" version='[1.9.2;]' />
 
+  <icon>images/nocache-64.png</icon>
   <description>
-    Quand ce plugin est activé, le cache de squelettes de SPIP n'est
-    plus utilisé. SPIP est alors plus lent, mais pendant les tests ou
+    Quand ce plugin est activé, les différents caches de SPIP ne sont
+    plus utilisés. SPIP est alors plus lent, mais pendant les tests ou
     le développement d'un site, c'est très utile pour être sûr qu'un
     problème ne vient pas d'une vieille version du squelette qui
     serait en cache. Les caches de pages, de balises et de plugin.xml
@@ -24,7 +25,7 @@
     - distribué sous licence
     [GPL v3->http://www.april.org/files/groupes/trad-gpl/doc/GPLv3/www.rodage.org/gpl-3.0.fr.html]
   </auteur>
-  <lien>http://spip.cliss21.com/plugins/</lien>
+  <lien>http://www.spip-contrib.net/NoCache</lien>
 
   <options>nocache_options.php</options>
 </plugin>
