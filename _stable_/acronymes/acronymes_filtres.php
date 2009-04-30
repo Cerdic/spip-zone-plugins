@@ -26,7 +26,7 @@ function acronymes_traiter_raccourcis($letexte){
 
 	$tag_attr=array();
   foreach ($tagMatches as $key => $value) {
-		$tag_attr[]="<acronym title='".texte_backend($value[2])."'>".$value[1]."</acronym>";
+		$tag_attr[]="<acronym title='".texte_backend(textebrut($value[2]))."'>".$value[1]."</acronym>";
   }
   for ($i = 0; $i < count ($textMatches); $i ++) {
    $textMatches [$i] = $textMatches [$i] . $tag_attr [$i];
