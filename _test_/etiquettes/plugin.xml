@@ -6,7 +6,7 @@
  		RastaPopoulos - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version> <!-- Version du plugin -->
-		0.5
+		0.6
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 		test
@@ -35,5 +35,9 @@ _ (si vous avez le plugin S&eacute;lecteur g&eacute;n&eacute;rique)
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>etiquettes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom> 
+		<inclure>inc/etiquettes_autoriser.php</inclure>
 	</pipeline>
 </plugin>
