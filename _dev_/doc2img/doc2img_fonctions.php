@@ -52,4 +52,33 @@ function d2c_can_convert($id_document) {
     return can_doc2img($id_document) ? ' ' : '';
 }
 
+/*
+ * @brief generer l'url absolue d'un doc2img en fonction de son id
+ * @return string
+ *          l'url absolue du fichier
+ */
+ 
+function generer_url_doc2img($id) {
+    $fichier = sql_getfetsel('fichier','spip_doc2img','id_doc2img='.$id);
+    $doc2img = get_spip_doc($fichier);
+    return $GLOBALS['meta']['adresse_site'].'/'.$doc2img;
+}
+
+/*
+ * @brief Fournir un #URL_DOC2IMG adapté au contexte ou bien #URL_DOC2IMG{unid} pour un id_doc2img donné
+ * 
+ */
+function balise_URL_DOC2IMG_dist($p) {
+
+    $type = 'doc2img';
+
+    $_id = interprete_argument_balise(1,$p);
+    if (!$_id) $_id = champ_sql('id_' . $type, $p);
+    
+    $p->code = "generer_url_doc2img($_id)";        
+    $p->interdire_scripts = false;
+
+    return $p;
+}
+
 ?>
