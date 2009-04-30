@@ -9,17 +9,27 @@ function abonnement_I2_cfg_form($flux) {
 }
 
 function abonnement_i2_form_debut($flux) {
-   	$contexte = array("abonnement" => $flux['args']['abonnement']);
-    $flux['data'] .= recuperer_fond('formulaires/abonnement_liste',$contexte);
+	// afficher un formulaire de paiement uniquement si la config le permet
+	if (lire_config('abonnement/proposer_paiement')) {
+		$contexte = array("abonnement" => $flux['args']['abonnement']);
+		$flux['data'] .= recuperer_fond('formulaires/abonnement_liste',$contexte);
+	}
 	return $flux;
 }
 
 function abonnement_i2_charger_formulaire($flux) {
-	$flux['data']['abonnement'] = '1' ;
+	// afficher un formulaire de paiement uniquement si la config le permet
+	if (lire_config('abonnement/proposer_paiement')) {
+		$flux['data']['abonnement'] = '1' ;
+	}
 	return $flux;
 }
 
 function abonnement_i2_verifier_formulaire($flux) {
+	// afficher un formulaire de paiement uniquement si la config le permet
+	//if (lire_config('abonnement/proposer_paiement')) {
+		
+	//}	
 	return $flux;
 }
 
