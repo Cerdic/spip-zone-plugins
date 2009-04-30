@@ -43,7 +43,7 @@ function formulaires_inscription2_charger_dist($id_auteur = NULL){
 			}
 		}
 		$champs = $auteur;
-	} else {	
+	} else {
 	    //si on est en mode creation et que l'utilisateur a saisi ses valeurs on les prends en compte
 	    foreach($champs as $clef =>$valeurs) {
             if (_request($valeurs)) {
@@ -86,50 +86,36 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 	$chercher_champs = charger_fonction('inscription2_champs_formulaire','inc');
 	$champs = $chercher_champs($id_auteur);	
 
-    //gere la correspondance champs -> _request(champs)
+	$champs_a_verifier = pipeline('i2_verifications_specifiques',array());
+    spip_log($champs_a_verifier);
+	//gere la correspondance champs -> _request(champs)
 	foreach($champs as $clef => $valeur) {
-		$valeurs[$valeur] = _request($valeur);
-	}		
 		
-	//verifier les champs obligatoires
-	foreach ($valeurs  as $champs => $valeur) {
-		if ((lire_config('inscription2/'.$champs.'_obligatoire') == 'on' ) && (empty($valeur) OR (strlen(_request($champs)) == 0))) {
-			$erreurs[$champs] = _T('inscription2:champ_obligatoire');
+		// On récupère sa valeur 
+		$valeurs[$valeur] = _request($valeur);
+		
+		// On vérifie s'il est obligatoire et s'il est bien rempli
+		if ((lire_config('inscription2/'.$valeur.'_obligatoire') == 'on' ) && (empty($valeurs[$valeur]) OR (strlen(_request($valeur)) == 0))) {
+			$erreurs[$valeur] = _T('inscription2:champ_obligatoire');
 			if(is_numeric($id_auteur) && (lire_config('inscription2/pass_fiche_mod') == 'on') && (strlen(_request('pass')) == 0)){
 				// Si le password est vide et que l'on est dans le cas de la modification d'un auteur
 				// On garde le pass original
-				spip_log("pass= $pass");
 				unset($erreurs['pass']);
 				$pass == 'ok';
 			}
 		}
+		
+		// Sinon on la vérifie une seconde fois si nécessaire avec les fonctions spécifiques de validations
+		if(!$erreurs[$valeur]){
+			if(array_key_exists($valeur,$champs_a_verifier)){
+				spip_log("verification du champs $valeur");
+				$fonction_verif_{$valeur} = charger_fonction('inscription2_'.$champs_a_verifier[$valeur],'inc');
+				$erreurs[$valeur] = $fonction_verif_{$valeur}($valeurs[$valeur],$id_auteur);
+			}
+		}
 	}
-	
+
 	//Verifier certains champs specifiquement
-	
-	// Verifier si le mail est connu
-	if (strlen(_request('email')) > 0 AND email_valide(_request('email')) AND !is_numeric($id_auteur)) {
-		if (sql_getfetsel('id_auteur','spip_auteurs','id_auteur !='.intval($id_auteur).' AND email = \''._request('email').'\'')) {
-			// verifier si c un spip listes a maj en pipeline (a faire)
-			// sinon renvoyer le form de login
-			$erreurs['email_connu'] = _T('form_forum_email_deja_enregistre');
-		}
-	}
-	
-	//Verifier le login
-	// c'est a dire regarder dans la base si un autre utilisateur que celui en cours possede le login saisi
-	if (_request('login')) {
-		if (sql_getfetsel('id_auteur','spip_auteurs','id_auteur !='.intval($id_auteur).' AND login LIKE \''._request('login').'\'')) {
-			$erreurs['login'] = _T('inscription2:formulaire_login_deja_utilise');
-		}
-		if (strlen(_request('login')) < _LOGIN_TROP_COURT){
-			$erreurs['login'] = _T('info_login_trop_court');	
-		}
-	}
-	
-	// verifier que le mail est valide
-	if(!email_valide(_request('email')))
-		$erreurs['email_invalide'] = _T('inscription2:saisir_email_valide');
 
 	//messages d'erreur au cas par cas (PASSWORD)
 	//verification des champs
@@ -155,36 +141,6 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 			}
 		}
 	}
-	
-	//messages d'erreur au cas par cas (CODE POSTAL)
-    //liste des champs de type code postal
-	$champs_code_postal = array('code_postal','code_postal_pro');
-	
-	// verification des champs saisis
-	foreach($champs_code_postal as $champs) {
-	    if(lire_config('inscription2/'.$champs) == 'on') {
-	    	$valide_cp = charger_fonction('inscription2_valide_cp','inc');
-	        $erreur = $valide_cp($valeurs[$champs]);
-	        if($erreur){
-		        $erreurs[$champs] = $erreur;
-	        }		
-	    }
-	}	
-
-	//messages d'erreur au cas par cas (TELEPHONE)
-	//liste des champs de type telephone
-	$champs_telephone = array('telephone','fax','mobile','telephone_pro','fax_pro','mobile_pro');
-	
-	// verification des champs saisis
-	foreach($champs_telephone as $champs) {
-	    if(lire_config('inscription2/'.$champs) == 'on') {
-	    	$valide_numero = charger_fonction('inscription2_valide_numero','inc');
-	        $erreur = $valide_numero($valeurs[$champs]);
-	        if($erreur){
-		        $erreurs[$champs] = $erreur;
-	        }		
-	    }
-	}
 
 	//Offrir aux autres plugins la possibilite de verifier les donnees
 	$erreurs = pipeline('i2_verifier_formulaire',
@@ -195,8 +151,7 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 		'data' => $erreurs
 		)
 	);
-	
-	
+
 	//verifier que l'auteur a bien des droits d'edition
 	if (is_numeric($id_auteur)) {
 		include_spip('inc/autoriser');

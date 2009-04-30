@@ -33,10 +33,13 @@
 		<inclure>base/inscription2.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>I2_exceptions_des_champs_auteurs_elargis</nom>
+		<nom>i2_exceptions_des_champs_auteurs_elargis</nom>
 		<inclure>inscription2_pipelines.php</inclure>
 	</pipeline>
-
+	<pipeline>
+		<nom>i2_verifications_specifiques</nom>
+		<inclure>inscription2_pipelines.php</inclure>
+	</pipeline>
 	<bouton id='inscription2_adherents' parent='auteurs'>
 	    <icone>images/fiche-perso.png</icone>
 	    <titre>icone_afficher_visiteurs</titre>

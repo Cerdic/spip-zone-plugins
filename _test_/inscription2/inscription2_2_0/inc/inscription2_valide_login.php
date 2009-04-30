@@ -14,7 +14,7 @@ function inc_inscription2_valide_login_dist($login,$id_auteur=NULL) {
 	}
 	else{
 		// Vérifier si le login est déjà utilisé
-		if (sql_getfetsel("id_auteur","spip_auteurs","id_auteur !='".intval($id_auteur)."' AND login == '$login'")) {
+		if (sql_getfetsel("id_auteur","spip_auteurs","id_auteur !='".intval($id_auteur)."' AND login = '$login'")) {
 			return _T('inscription2:formulaire_login_deja_utilise');
 		}
 		// Vérifier si le login est trop court

@@ -77,7 +77,7 @@ function inscription2_post_edition($flux){
 	return $flux;
 }
 
-function inscription2_I2_exceptions_des_champs_auteurs_elargis($array){
+function inscription2_i2_exceptions_des_champs_auteurs_elargis($array){
 	// liste des champs pour lesquels on ne doit pas créer de champs dans la table spip_auteurs_elargis
 	
 	// Principalement les champs déjà présents dans spip_auteurs
@@ -99,6 +99,39 @@ function inscription2_I2_exceptions_des_champs_auteurs_elargis($array){
 	$array[] = 'statut_interne';
 	$array[] = 'accesrestreint';
 	$array[] = 'password';
+	
+	return $array;
+}
+
+/**
+ * 
+ * Insertion dans le pipeline i2_verifications_specifiques du plugin inscription2
+ * 
+ * @return array Tableau contenant plusieurs tableaux en fonction du type de champs 
+ * @param object $array Doit recevoir un tableau du même type
+ */
+
+function inscription2_i2_verifications_specifiques($array){
+	
+	$array = array();
+	
+	// Les emails : fonction inc/inscrition2_valide_email
+	$array['email'] = 'valide_email';
+	
+	// Les logins : fonction inc/inscription2_valide_login
+	$array['login'] = 'valide_login';
+	
+	// Les codes postaux : fonction inc/inscription2_valide_cp
+	$array['code_postal'] = 'valide_cp';
+	$array['code_postal_pro'] = 'valide_cp';
+	
+	// Les numéros de téléphone : fonction inc/inscription2_valide_numero
+	$array['telephone'] = 'valide_numero';
+	$array['fax'] = 'valide_numero';
+	$array['mobile'] = 'valide_numero';
+	$array['telephone_pro'] = 'valide_numero';
+	$array['fax_pro'] = 'valide_numero';
+	$array['mobile_pro'] = 'valide_numero';
 	
 	return $array;
 }
