@@ -145,7 +145,7 @@ function inscription2_upgrade(){
 		i2_installer_pays();
 		spip_log("Inscription2 update @ 0.71 : installation de la table pays de geographie", "maj");
 		ecrire_meta('inscription2_version',$current_version=0.71);
-	}	
+	}
 	ecrire_metas();
 }
 
@@ -210,15 +210,18 @@ function i2_installer_pays() {
  */
 function inscription2_install($action){
 	$version_base = $GLOBALS['inscription2_version'];
+	spip_log(isset($GLOBALS['meta']['inscription2_version']) AND ($GLOBALS['meta']['inscription2_version']<$version_base));
 	switch ($action){
 		case 'test':
 			if (!is_array(unserialize($GLOBALS['meta']['inscription2'])) OR !$GLOBALS['meta']['inscription2'] OR ($GLOBALS['meta']['inscription2']=='')){
 				// Si cette meta n'est pas un array ... vaut mieux relancer l'ensemble du processus d'install
+				spip_log("pb dans test");
 				return false;
 			}
-			return (isset($GLOBALS['meta']['inscription2_version']) AND ($GLOBALS['meta']['inscription2_version']<$version_base));
+			return (isset($GLOBALS['meta']['inscription2_version']) AND ($GLOBALS['meta']['inscription2_version']==$version_base));
 			break;
 		case 'install':
+			
 			inscription2_upgrade();
 			break;
 		case 'uninstall':

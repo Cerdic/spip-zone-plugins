@@ -4,7 +4,7 @@ function inscription2_declarer_tables_interfaces($interface){
 	
 	//-- Table des tables ----------------------------------------------------
 	$interface['table_des_tables']['auteurs_elargis']='auteurs_elargis';
-
+	$interface['table_des_tables']['geo_pays']='geo_pays';
 	return $interface;
 }
 
