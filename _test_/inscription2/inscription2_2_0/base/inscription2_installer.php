@@ -210,18 +210,15 @@ function i2_installer_pays() {
  */
 function inscription2_install($action){
 	$version_base = $GLOBALS['inscription2_version'];
-	spip_log(isset($GLOBALS['meta']['inscription2_version']) AND ($GLOBALS['meta']['inscription2_version']<$version_base));
 	switch ($action){
 		case 'test':
 			if (!is_array(unserialize($GLOBALS['meta']['inscription2'])) OR !$GLOBALS['meta']['inscription2'] OR ($GLOBALS['meta']['inscription2']=='')){
 				// Si cette meta n'est pas un array ... vaut mieux relancer l'ensemble du processus d'install
-				spip_log("pb dans test");
 				return false;
 			}
-			return (isset($GLOBALS['meta']['inscription2_version']) AND ($GLOBALS['meta']['inscription2_version']==$version_base));
+			return (isset($GLOBALS['meta']['inscription2_version']) AND ($GLOBALS['meta']['inscription2_version']>=$version_base));
 			break;
 		case 'install':
-			
 			inscription2_upgrade();
 			break;
 		case 'uninstall':
