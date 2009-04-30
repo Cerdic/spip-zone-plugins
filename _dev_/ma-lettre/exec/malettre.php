@@ -242,6 +242,7 @@ function exec_malettre(){
             }
             fclose($fr);
             $recup = str_replace("{URL_MALETTRE}",$url_lettre_archive,$recup);
+            $recup = str_replace("{TITRE_MALETTRE}",$sujet,$recup);
             
             // recup contenu TXT
             $texte = $path_archive_full."/.malettre_txt.html";
