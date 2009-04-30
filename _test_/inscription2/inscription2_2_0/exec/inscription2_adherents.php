@@ -22,16 +22,12 @@ function exec_inscription2_adherents() {
 	}
 	
 	$commencer_page = charger_fonction('commencer_page', 'inc');
+	
+	pipeline('exec_init',array('args'=>$_GET,'data'=>''));
+	
 	echo $commencer_page(_T('inscription2:gestion_adherents'), "", "", "");
 	
-	echo recuperer_fond('prive/table_adherents',
-		array(
-			"statut_abonnement"=>_request('statut_abonnement'),
-			"desc"=>_request('desc'),
-			"case" =>_request('case'),
-			"valeur"=>_request('valeur')
-		)
-	);
+	echo recuperer_fond('prive/table_adherents',$_GET);
 	
 	echo fin_page();	
 }

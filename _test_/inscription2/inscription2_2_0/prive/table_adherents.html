@@ -36,9 +36,13 @@ $().ready(function() {
 <div id="conteneur">
 
 	<div id="navigation">
-		#INCLURE{fond=prive/menu_inscription2}	
+		#INCLURE{fond=prive/menu_inscription2}
+		[(#PIPELINE{affiche_gauche,[(#ARRAY{args,[(#ARRAY{exec,#ENV{exec}})],data,''})]})]	
 	</div>
-
+	[<div id="extra">
+		(#PIPELINE{affiche_droite,[(#ARRAY{args,[(#ARRAY{exec,#ENV{exec}})],data,''})]})	
+	</div>]
+	
 	<div id="contenu" class="serif">
 		<div class="entete-formulaire">
 			<h1><:inscription2:liste_comptes_titre:></h1>
@@ -125,6 +129,9 @@ $().ready(function() {
 		}
 		?>
 		</div>
+		
+		[(#PIPELINE{affiche_milieu,[(#ARRAY{args,[(#ARRAY{exec,#ENV{exec}})],data,''})]})]
+		
 	</div>
 </div>
 <br class="nettoyeur"/>
