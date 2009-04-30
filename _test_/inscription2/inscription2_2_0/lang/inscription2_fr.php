@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'a_confirmer' => '&Agrave; confirmer',
 	'accesrestreint' => 'Acc&egrave;s Restreint',
 	'aconfirmer' => '&Agrave; confirmer',
-	'action_adherent' => '<- Opérations ->',
+	'action_adherent' => 'Opérations',
 	'activation_compte' => 'Activez votre compte',
 	'adherents' => 'Adh&eacute;rents',
 	'admin' => 'Admin',
@@ -196,7 +196,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rappel_login' => 'Rappel : votre identifiant est : ',
 	'rappel_password' => 'Votre mot de passe',
 	'redemande_password' => 'R&eacute;inserez votre mot de passe&nbsp;:',
+	'recherche_case' => 'Champs de la recherche',
 	'recherche_utilisateurs' => 'Recherche dans les utilisateurs',
+	'recherche_valeur' => 'Contenu recherch&eacute;',
 	'rien_a_faire' => 'Rien &agrave; faire',
 
 	// S

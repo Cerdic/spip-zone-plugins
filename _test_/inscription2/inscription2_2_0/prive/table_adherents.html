@@ -52,9 +52,11 @@ $().ready(function() {
 							<h3 class="legend"><:inscription2:recherche_utilisateurs:></h3>
 							<ul>
 								<li>
+									<label for="case"><:inscription2:recherche_valeur:></label>
 									<input class="text" type="text" name="valeur" onfocus='this.value=""' value="[(#ENV{valeur}|?{#ENV{valeur},<:info_rechercher:>})]" />
 								</li>
 								<li>
+									<label for="case"><:inscription2:recherche_case:></label>
 									<select name="case" id="case">
 										#SET{case,#ENV{case}}
 										<BOUCLE_recherchefields(POUR){tableau #CONFIG{inscription2}}{valeur = 'on'}>
@@ -125,7 +127,7 @@ $().ready(function() {
 		</div>
 	</div>
 </div>
-
+<br class="nettoyeur"/>
 <!-- Confirm Dialog -->
 <div class="jqmConfirm" id="confirm">
 	<div id="ex3b" class="jqmConfirmWindow">
