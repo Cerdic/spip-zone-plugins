@@ -1,5 +1,6 @@
 #CACHE{0}
 [(#ENV{desc}|=={'-1'}|?{[(#SET{desc,1})],[(#SET{desc,-1})]})]
+[(#ENV{desc}|=={'-1'}|?{[(#SET{class_desc,asc})],[(#SET{class_desc,desc})]})]
 <B_auteurs>
 	<div>
 	#ANCRE_PAGINATION
@@ -8,21 +9,21 @@
 	<table class="spip">
 	<thead>
 		<tr>
-			<th>
+			<th class="[(#ENV{ordre}|=={id_auteur}|?{[on (#GET{class_desc})],'both'})]">
 				<a href="[(#SELF|parametre_url{'ordre','id_auteur'}|parametre_url{'desc',#GET{desc}})]">
 					<img src="#CHEMIN{images/admin-12.gif}" alt="admin" />
 				</a>
 			</th>
 			<BOUCLE_champshead(POUR){tableau #CONFIG{inscription2}}{valeur = 'on'}>
 			[(#CLE|match{_table}|oui)
-			<th[(#ENV{ordre}|=={[(#CLE|replace{'_table',''})]}|oui) class="on"]>
+			<th class="[(#ENV{ordre}|=={[(#CLE|replace{'_table',''})]}|?{[on (#GET{class_desc})],'both'})]">
 				<a href="[(#SELF|parametre_url{'ordre',[(#CLE|replace{'_table',''})]}|parametre_url{'desc',#GET{desc}})]">
 					[(#VAL{inscription2:}|concat{[(#CLE|replace{'_table',''})]}|_T)]
 				</a>
 			</th>
 			]
 			</BOUCLE_champshead>
-			<th colspan="3" style="text-align:center;">
+			<th colspan="3" style="text-align:center;" class="[(#ENV{ordre}|=={statut}|?{[on (#GET{class_desc})],'both'})]">
 				<a href="[(#SELF|parametre_url{'ordre','statut'}|parametre_url{'desc',#GET{desc}})]">
 					<:inscription2:action_adherent:>
 				</a>
