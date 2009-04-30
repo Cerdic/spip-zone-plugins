@@ -113,8 +113,6 @@ function inscription2_i2_exceptions_des_champs_auteurs_elargis($array){
 
 function inscription2_i2_verifications_specifiques($array){
 	
-	$array = array();
-	
 	// Les emails : fonction inc/inscrition2_valide_email
 	$array['email'] = 'valide_email';
 	

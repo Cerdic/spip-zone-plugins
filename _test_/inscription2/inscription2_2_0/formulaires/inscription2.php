@@ -87,7 +87,7 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 	$champs = $chercher_champs($id_auteur);	
 
 	$champs_a_verifier = pipeline('i2_verifications_specifiques',array());
-    spip_log($champs_a_verifier);
+
 	//gere la correspondance champs -> _request(champs)
 	foreach($champs as $clef => $valeur) {
 		
@@ -108,7 +108,6 @@ function formulaires_inscription2_verifier_dist($id_auteur = NULL){
 		// Sinon on la vérifie une seconde fois si nécessaire avec les fonctions spécifiques de validations
 		if(!$erreurs[$valeur]){
 			if(array_key_exists($valeur,$champs_a_verifier)){
-				spip_log("verification du champs $valeur");
 				$fonction_verif_{$valeur} = charger_fonction('inscription2_'.$champs_a_verifier[$valeur],'inc');
 				$erreurs[$valeur] = $fonction_verif_{$valeur}($valeurs[$valeur],$id_auteur);
 			}
