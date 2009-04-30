@@ -24,8 +24,8 @@ function formulaires_etiquettes_charger_dist($groupe, $id_groupe, $name, $aide_n
 	if(!$uniquement_champ
 		and (
 			(
-				($remplacer and !autoriser('remplaceretiquettes', $type_objet, $id_objet))
-				or !autoriser('ajouteretiquettes', $type_objet, $id_objet)
+				($remplacer and !autoriser('remplaceretiquettes', $type_objet, $id_objet, $GLOBALS['visiteur_session'], array('id_groupe'=>$id_groupe)))
+				or !autoriser('ajouteretiquettes', $type_objet, $id_objet, $GLOBALS['visiteur_session'], array('id_groupe'=>$id_groupe))
 			)
 			or (
 				!$aide_liste
