@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+	<nom>SPIP-Traductions-Rubriques</nom>
+	<auteur>[Artégo->http://www.artego.fr]</auteur>
+	<version>2.0</version>
+	<etat>stable</etat>
+	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
+	<description>Liens de traduction entre rubriques, voir <code>spip-trad/langues.html</code> pour un exemple.</description>
+	<necessite id="SPIP" version="[2.0.3;]" />
+	<necessite id="surcharges" version="[2.0;]" />
+	<install>base/trad.php</install>
+	<lien>[Site officiel du plugin->http://www.artego.fr/-SPIP-Traductions-Rubriques-]</lien>
+	<icon>prive/images/traductions-48.png</icon>
+	<options>trad_options.php</options>
+	<fonctions>trad_fonctions.php</fonctions>
+	<prefix>trad</prefix>
+	<pipeline>
+		<nom>exec_init</nom>
+		<inclure>trad_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>trad_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>calculer_rubriques</nom>
+		<inclure>trad_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>trad_fonctions.php</inclure>
+	</pipeline>
+</plugin>
