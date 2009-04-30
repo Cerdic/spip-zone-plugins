@@ -1,0 +1,344 @@
+#CACHE{0}
+	<script type="text/javascript">
+	/**
+ * @author Marco Alionso Ramirez, marco@onemarco.com
+ * @version 1.0
+ * The Tooltip class is an addon designed for the Google
+ * Maps GMarker class.
+ */
+
+/**
+ * @constructor
+ * @param {GMarker} marker
+ * @param {String} content
+ * @param {Number} padding
+ */
+function Tooltip(marker, content, padding){
+	this.marker = marker;
+	this.content = content;
+	this.padding = padding;
+	this.div = null;
+	this.map = null;
+}
+
+Tooltip.prototype = new GOverlay();
+
+Tooltip.prototype.initialize = function(map){
+	
+	this.div = document.createElement("div");
+	var innerContainer = this.div.cloneNode(false);
+	this.div.appendChild(innerContainer);
+	this.div.style.position = 'absolute';
+	this.div.style.visibility = 'hidden';
+	
+	this.shadowQuadrants = [{},{},{},{}]
+	this.shadowQuadrants[0].div = document.createElement('div');
+	this.shadowQuadrants[0].div.style.position = 'absolute';	
+	this.shadowQuadrants[0].div.style.overflow = 'hidden';
+	//alert("#CHEMIN{img_pack/tooltip_shadow.png}");
+	this.shadowQuadrants[0].img = createPngElement('#CHEMIN{img_pack/tooltip_shadow.png}');
+	this.shadowQuadrants[0].img.style.position = 'absolute';
+	this.shadowQuadrants[0].div.appendChild(this.shadowQuadrants[0].img);
+	this.shadowQuadrants[1].div = this.shadowQuadrants[0].div.cloneNode(false);
+	this.shadowQuadrants[1].img = this.shadowQuadrants[0].img.cloneNode(true);
+	this.shadowQuadrants[1].div.appendChild(this.shadowQuadrants[1].img);
+	this.shadowQuadrants[2].div = this.shadowQuadrants[0].div.cloneNode(false);
+	this.shadowQuadrants[2].img = this.shadowQuadrants[0].img.cloneNode(true);
+	this.shadowQuadrants[2].div.appendChild(this.shadowQuadrants[2].img);
+	this.shadowQuadrants[3].div = this.shadowQuadrants[0].div.cloneNode(false);
+	this.shadowQuadrants[3].img = this.shadowQuadrants[0].img.cloneNode(true);
+	this.shadowQuadrants[3].div.appendChild(this.shadowQuadrants[3].img);
+	
+	this.shadowQuadrants[0].div.style.right = '0px';	
+	this.shadowQuadrants[0].div.style.top = '0px';
+	this.shadowQuadrants[0].img.style.top = '0px';
+	this.shadowQuadrants[0].img.style.right = '0px';
+	this.shadowQuadrants[1].div.style.left = '0px';
+	this.shadowQuadrants[1].div.style.top = '0px';
+	this.shadowQuadrants[1].img.style.top = '0px';
+	this.shadowQuadrants[2].div.style.left = '0px';
+	this.shadowQuadrants[2].div.style.bottom = '0px';
+	this.shadowQuadrants[2].img.style.bottom = '0px';
+	this.shadowQuadrants[2].img.style.left = '0px';
+	this.shadowQuadrants[3].div.style.right = '0px';
+	this.shadowQuadrants[3].div.style.bottom = '0px';
+	this.shadowQuadrants[3].img.style.bottom = '0px';	
+	
+	this.shadow = this.div.cloneNode(false);
+	this.shadow.appendChild(this.shadowQuadrants[0].div);
+	this.shadow.appendChild(this.shadowQuadrants[1].div);
+	this.shadow.appendChild(this.shadowQuadrants[2].div);
+	this.shadow.appendChild(this.shadowQuadrants[3].div);
+	
+	innerContainer.className = 'tooltip';
+	
+	var child = typeof this.content == 'string' ? 
+		document.createTextNode(this.content) :
+		this.content;
+	innerContainer.appendChild(child);
+	map.getPane(G_MAP_FLOAT_PANE).appendChild(this.div);
+	map.getPane(G_MAP_MARKER_SHADOW_PANE).appendChild(this.shadow);
+	this.map = map;
+}
+
+Tooltip.prototype.remove = function(){
+	this.div.parentNode.removeChild(this.div);
+}
+
+Tooltip.prototype.copy = function(){
+	var content = typeof this.content == 'string' ? this.content : this.content.cloneNode(true);
+	return new Tooltip(this.marker,content,this.padding);
+}
+
+Tooltip.prototype.redraw = function(force){
+	if (!force) return;
+	
+	//draw tooltip
+	var markerPos = this.map.fromLatLngToDivPixel(this.marker.getPoint());
+	var iconAnchor = this.marker.getIcon().iconAnchor;
+	var xPos = Math.round(markerPos.x - this.div.clientWidth / 2);
+	var yPos = markerPos.y - iconAnchor.y - this.div.clientHeight - this.padding;
+	this.div.style.top = yPos + 'px';
+	this.div.style.left = xPos + 'px';
+	
+	//draw shadow
+	//calculate shadow location
+	shadowAnchor = new GPoint(
+		markerPos.x + Math.round((this.marker.getIcon().iconSize.height + this.padding) / 2) ,
+		markerPos.y - Math.round((this.marker.getIcon().iconSize.height + this.padding) / 2) + 4);
+	
+	//calculate shadow dimenstions
+	var shadowSize = new GSize(this.div.clientWidth + Math.round(this.div.clientHeight / 2) + 8,
+		Math.round(this.div.clientHeight / 2) + 10);
+	if(shadowSize.width % 2 == 1) shadowSize.width--;
+	if(shadowSize.height % 2 == 1) shadowSize.height--;
+	
+	this.shadow.style.left = (shadowAnchor.x - (shadowSize.width - shadowSize.height - 10 )/ 2) + 'px';
+	//apply shodaw location and dimensions
+	this.shadow.style.top = (shadowAnchor.y - shadowSize.height) + 'px';
+	this.shadow.style.width = (shadowSize.width) + 'px';
+	this.shadow.style.height =  shadowSize.height + 'px';	
+	
+	//get quadrant dimensions
+	var qHeight = shadowSize.height / 2;
+	var qOddWidth = shadowSize.height > shadowSize.width ?
+		shadowSize.height / 2:
+		(shadowSize.width) / 2;
+	var qEvenWidth = shadowSize.width - qOddWidth;
+	
+	//apply quadrant dimensions, calculate and apply Q2 and Q4 image offsets
+	this.shadowQuadrants[0].div.style.width = qOddWidth + 'px';
+	this.shadowQuadrants[0].div.style.height = qHeight + 'px';
+	
+	this.shadowQuadrants[1].div.style.width = qEvenWidth + 'px';
+	this.shadowQuadrants[1].div.style.height = qHeight + 'px';
+	this.shadowQuadrants[1].img.style.left = -(160 - shadowSize.height) + 'px';
+	
+	this.shadowQuadrants[2].div.style.width = qOddWidth + 'px';
+	this.shadowQuadrants[2].div.style.height = qHeight + 'px';
+	
+	this.shadowQuadrants[3].div.style.width = qEvenWidth + 'px';
+	this.shadowQuadrants[3].div.style.height = qHeight + 'px';
+	this.shadowQuadrants[3].img.style.right = -(160 - shadowSize.height) +'px';	
+}
+
+Tooltip.prototype.show = function(){
+	this.div.style.visibility = 'visible';
+	this.shadow.style.visibility = 'visible';
+}
+
+Tooltip.prototype.hide = function(){
+	this.div.style.visibility = 'hidden';
+	this.shadow.style.visibility = 'hidden';
+}
+
+//utility function for png compatibility in IE6
+var IS_IE = false;
+var IS_LT_IE7;
+//@cc_on IS_IE = true;
+//@cc_on IS_LT_IE7 = @_jscript_version < 5.7;
+
+function createPngElement(src){
+	var img = document.createElement('img');
+	img.setAttribute('src',src);	
+	if(IS_IE && IS_LT_IE7){
+		img.style.visibility = 'hidden';
+		var div = document.createElement('div');
+		div.appendChild(img);
+		div.style.filter = 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'' + src + '\',sizingMethod=\'crop\')';
+		return div;
+	}
+	return img;	
+}	
+	</script>
+	<script type="text/javascript">
+	if (document.namespaces) { // only needed in IE
+     document.namespaces.add("v", "urn:schemas-microsoft-com:vml");
+	}
+	
+	//<![CDATA[
+	URLbase = "#URL_SITE_SPIP/";
+	URLabsolute = "#CONFIG{mymap_chemin}";
+	//alert("#CONFIG{langue_site}");
+	
+	var map#ENV{id_carte_mymap};
+	var markerManager#ENV{id_carte_mymap};
+	var gdir;
+	//UN CALCUL D'ITINERAIRE PAR POINT
+	var latitude;
+	var lonxitude;
+	
+	<BOUCLE_centrado(SPIP_MYMAP){id_article?}{0,1}>
+		<BOUCLE_centre(SPIP_MYMAP_ARTICLES){id_article}{0,1}>
+			#SET{latitude,#ENV{latit,#LAT}}
+			#SET{lonxitude,#ENV{lonxit,#LONX}}
+			#SET{zoom,#ENV{lonxit,#ZOOM}}
+		</BOUCLE_centre>
+	</BOUCLE_centrado>
+	#SET{latitude,#ENV{latit,#CONFIG**{mymap_default_lat,0}}}
+	#SET{lonxitude,#ENV{lonxit,#CONFIG**{mymap_default_lonx,0}}}
+	<//B_centrado>
+	[(#ENV{type}|=={'satellite'}|?{#SET{type,G_SATELLITE_MAP},''})]
+	[(#ENV{type}|=={'carte'}|?{#SET{type,G_NORMAL_MAP},''})]
+	[(#ENV{type}|=={'hybride'}|?{#SET{type,G_HYBRID_MAP},''})]
+	[(#ENV{type}|=={''}|?{#SET{type,G_SATELLITE_MAP},''})]
+	function load#ENV{id_carte_mymap}() {
+		if (GBrowserIsCompatible()) {
+		     
+			 //ITINERAIRES(CA C'ETAIT AVANT LE DRAME....)
+			//createpanel();
+			 
+			// facelo mapa
+			map#ENV{id_carte_mymap} = new GMap2(document.getElementById("map#ENV{id_carte_mymap}"));
+			<?php if(!isset($_GET["exec"])){	?>
+    		map#ENV{id_carte_mymap}.addControl(new mapTypeControl());
+			map#ENV{id_carte_mymap}.addControl(new mapZoomControl());
+			map#ENV{id_carte_mymap}.addControl(new mapMoveControl());
+			<?php	}	?>
+    		map#ENV{id_carte_mymap}.setCenter(new GLatLng(#GET{latitude}, #GET{lonxitude}), #GET{zoom,#CONFIG**{mymap_default_zoom,0}}, #GET{type});
+    		center = map#ENV{id_carte_mymap}.getCenter();
+    		map#ENV{id_carte_mymap}.enableDoubleClickZoom();
+    		map#ENV{id_carte_mymap}.enableContinuousZoom();
+    		markerManager#ENV{id_carte_mymap} = new GMarkerManager(map#ENV{id_carte_mymap});
+			<BOUCLE_kml_art(documents){id_article}{0,1}{extension=kml}>
+			[(#ENV{id_article}|=={''}|?{'',
+			var kml = new GGeoXml("#URL_SITE_SPIP/#URL_DOCUMENT");
+			map[(#ENV{id_carte_mymap})].addOverlay(kml)
+			})]
+			</BOUCLE_kml_art>
+			<BOUCLE_kml_rub(documents){id_rubrique}{0,1}{extension=kml}>
+			[(#ENV{id_rubrique}|=={''}|?{'',
+			var kml = new GGeoXml("#URL_SITE_SPIP/#URL_DOCUMENT");
+			map[(#ENV{id_carte_mymap})].addOverlay(kml)
+			})]
+			</BOUCLE_kml_rub>
+			<//B_kml_art>
+			
+  			//leemo-lo documento dos marcadores
+       			$.get('[(#URL_PAGE{rss-mymap})]', {[id_rubrique:(#ID_RUBRIQUE)][, id_mot:(#ID_MOT)][, id_auteur:(#ID_AUTEUR)][, recherche:(#RECHERCHE)][, id_article:(#ID_ARTICLE)]}, function(xml#ENV{id_carte_mymap}){
+				
+				
+    				//xml almacena en un objeto xml los datos recogidos del documento leido
+    				$("item", xml#ENV{id_carte_mymap}).each(function(item#ENV{id_carte_mymap}){;
+					//alert("ici");		
+    				var xmlItem#ENV{id_carte_mymap} = xml#ENV{id_carte_mymap}.documentElement.getElementsByTagName("item")[item#ENV{id_carte_mymap}];    	
+
+   					agregarMarcador(xmlItem#ENV{id_carte_mymap}, 0, 0, markerManager#ENV{id_carte_mymap});
+
+   						
+					});
+					markerManager#ENV{id_carte_mymap}.refresh();
+					//map#ENV{id_carte_mymap}.openInfoWindow(map#ENV{id_carte_mymap}.getCenter(),contidosHTML[1]);
+					
+   				});
+				gdir = new GDirections(map#ENV{id_carte_mymap},document.getElementById("panel"));
+				GEvent.addListener(gdir, "load", onGDirectionsLoad);
+				GEvent.addListener(gdir, "error", onGDirectionsError); 
+				
+				
+				
+   			}
+		}
+		
+		//IMPLEMENTE LA FONTION QUI CREE UN ITINERAIRE
+function makemyitin(){
+	if(document.getElementById("panel")){
+		setDirections(document.getElementById("panel_from").value,latitude+" , "+ lonxitude);			
+	}
+}
+
+function onGDirectionsLoad(){
+//alert("ca charge");
+}
+
+function onGDirectionsError(){
+alert("erreur :"+gdir.getStatus().code);
+} 
+
+function setDirections(fromAddress, toAddress) {  
+  geocoder = new GClientGeocoder();
+  geocoder.getLatLng(fromAddress, function(point) {
+    if (point) {
+      //alert(point); // Yipeeee!
+      gdir.load("from: " + point.toUrlValue() + " to: " + toAddress ,
+		{ "locale": "fr_FR" });
+    } 
+	else {
+      alert (fromAddress + " est inconnu!! ");
+    }
+  });
+
+} 
+
+//CREATE A PANEL WHERE WE CAN SEE A DIRECTION
+function createpanel()
+{
+/*if(!document.getElementById("rechercheItin")){
+	var map#ENV{id_carte_mymap}=document.getElementById("map#ENV{id_carte_mymap}");
+	var recherche=document.createElement("div");
+	recherche.setAttribute("id","rechercheItin");	
+	recherche.style.visibility = "hidden";
+	map#ENV{id_carte_mymap}.parentNode.insertBefore(recherche,map#ENV{id_carte_mymap});
+	var panel=document.createElement("div");
+	panel.setAttribute("id","panel");
+	panel.style.width = "100%";
+	panel.style.visibility = "hidden";
+	
+	
+	if(map#ENV{id_carte_mymap}.nextSibling!=null){
+		map#ENV{id_carte_mymap}.parentNode.insertBefore(panel,map#ENV{id_carte_mymap}.nextSibling);
+	}
+	else{
+		map#ENV{id_carte_mymap}.appendChild(panel);
+	}
+	document.getElementById("rechercheItin").innerHTML= '<input type="text" id="panel_from" value="votre point de depart" onclick="if(this.value=='votre point de depart'){this.value='';}" /><a href="#" onclick="makemyitin();return false;">Calculer</a>';
+
+	}*/
+	
+}
+function showpanel(lat,lonx)
+{
+	document.getElementById("panel").style.display= "block";
+	//alert("coucou10");
+	document.getElementById("rechercheItin").style.display = "block";	
+	//alert("coucou11");
+	latitude = lat;
+	lonxitude = lonx;
+
+}
+
+$(document).ready(function(){
+	load#ENV{id_carte_mymap}();
+		})
+	//]]>
+	
+	
+	</script>
+
+<style type="text/css">
+.tooltip{
+	background-color:white;
+	border:solid 2px black;
+	padding:4px;
+}
+</style>
