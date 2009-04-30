@@ -6,8 +6,9 @@
  * 
  * @return false|string retourne false si pas de valeurs ou si la valeur est correcte, un message d'erreur dans le cas contraire
  * @param string $numero Numéro à tester
+ * @param int $id_auteur[optional]
  */
-function inc_inscription2_valide_numero_dist($numero){
+function inc_inscription2_valide_numero_dist($numero,$id_auteur=NULL){
 	if(!$numero){
 		return;
 	}

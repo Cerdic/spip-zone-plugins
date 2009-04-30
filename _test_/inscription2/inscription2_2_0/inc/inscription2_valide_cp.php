@@ -5,8 +5,9 @@
  * 
  * @return false|string retourne false si pas de valeurs ou si la valeur est correcte, un message d'erreur dans le cas contraire 
  * @param string $cp Le code postal testé
+ * @param int $id_auteur[optional]
  */
-function inc_inscription2_valide_cp_dist($cp) {
+function inc_inscription2_valide_cp_dist($cp,$id_auteur=NULL) {
 	if(!$cp){
 		return false;
 	}
