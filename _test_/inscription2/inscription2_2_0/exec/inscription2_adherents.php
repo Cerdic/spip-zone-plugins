@@ -1,4 +1,5 @@
 <?php
+
 /**
 * Plugin Inscription2
 *
@@ -12,13 +13,14 @@
 include_spip('public/assembler');
 function exec_inscription2_adherents() {
 
-	global $connect_statut, $connect_toutes_rubriques, $table_prefix;
+	global $connect_statut, $connect_toutes_rubriques;
 
 	if (!($connect_statut == '0minirezo' AND $connect_toutes_rubriques)) {
 		echo _T('avis_non_acces_page');
 		fin_page();
 		exit;
 	}
+	
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('inscription2:gestion_adherents'), "", "", "");
 	

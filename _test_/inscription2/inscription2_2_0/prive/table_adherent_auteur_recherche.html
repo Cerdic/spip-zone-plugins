@@ -4,7 +4,7 @@
 	<div>
 	#ANCRE_PAGINATION
 	<form method="post" action="#">
-	<div style="overflow:auto;margin:10px">
+	<div style="overflow:auto;margin:10px;">
 	<table class="spip">
 	<thead>
 		<tr>
@@ -16,9 +16,9 @@
 			<BOUCLE_champshead(POUR){tableau #CONFIG{inscription2}}{valeur = 'on'}>
 			[(#CLE|match{_table}|oui)
 			<th[(#ENV{ordre}|=={[(#CLE|replace{'_table',''})]}|oui) class="on"]>
-					<a href="[(#SELF|parametre_url{'ordre',[(#CLE|replace{'_table',''})]}|parametre_url{'desc',#GET{desc}})]">
-						[(#VAL{inscription2:}|concat{[(#CLE|replace{'_table',''})]}|_T)]
-					</a>
+				<a href="[(#SELF|parametre_url{'ordre',[(#CLE|replace{'_table',''})]}|parametre_url{'desc',#GET{desc}})]">
+					[(#VAL{inscription2:}|concat{[(#CLE|replace{'_table',''})]}|_T)]
+				</a>
 			</th>
 			]
 			</BOUCLE_champshead>
@@ -26,11 +26,11 @@
 				<a href="[(#SELF|parametre_url{'ordre','statut'}|parametre_url{'desc',#GET{desc}})]">
 					<:inscription2:action_adherent:>
 				</a>
-			</hd>
+			</th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_auteurs(AUTEURS){tri #ENV{ordre,id_auteur},#ENV{desc,-1}}{pagination 20}{tout}>
+	<BOUCLE_auteurs(AUTEURS){tri '#ENV{ordre,id_auteur}',#ENV{desc,-1}}{pagination 20}{i2_recherche}{tout}>
 
 	[(#STATUT|=={0minirezo}|oui)
 		#SET{url_logo,#CHEMIN{images/admin-12.gif}}
@@ -86,3 +86,5 @@
 	</div>]
 	</div>
 </B_auteurs>
+<p><:inscription2:aucun_resultat_recherche:></p>
+<//B_auteurs>

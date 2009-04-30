@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adresse_pro' => 'Adresse professionnelle (Pro.)',
 	'ajouter_adherent' => 'Créer <br />un nouveau visiteur',
 	'aout' => 'ao&ucirc;t',
+	'aucun_resultat_recherche' => 'Il n\'y a aucun r&eacute;sultat pour votre recherche.',
 	'auteur' => 'Auteur',
 	'autre' => 'Autre',
 	'avril' => 'avril',
@@ -135,6 +136,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende' => 'L&eacute;gende',
 	'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; &agrave; l\'adresse fournie. Pour activer votre compte veuillez suivre les instructions.',
 	'liste_adherents' => 'Afficher les visiteurs',
+	'liste_comptes_titre' => 'Liste des comptes utilisateurs',
 	'login' => 'Nom d\'utilisateur (login)',
 	'longitude' => 'Longitude',
 
@@ -194,6 +196,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rappel_login' => 'Rappel : votre identifiant est : ',
 	'rappel_password' => 'Votre mot de passe',
 	'redemande_password' => 'R&eacute;inserez votre mot de passe&nbsp;:',
+	'recherche_utilisateurs' => 'Recherche dans les utilisateurs',
 	'rien_a_faire' => 'Rien &agrave; faire',
 
 	// S
