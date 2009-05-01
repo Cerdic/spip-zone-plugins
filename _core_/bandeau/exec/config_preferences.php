@@ -13,11 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_config_preferences(){
-	if (!autoriser('configurer','preferences')) {
-		include_spip('inc/minipres');
-		echo minipres();
-		exit;
-	}
 	$commencer_page = charger_fonction('commencer_page','inc');
 	echo $commencer_page(_T('bando:titre_configurer_preferences'));
 
