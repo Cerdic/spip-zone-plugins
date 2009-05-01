@@ -51,6 +51,8 @@ function abonnement_declarer_tables_principales($tables_principales){
 							"date" 	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 							"validite" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 							"montant" => "int(10) unsigned NOT NULL",
+							"statut_paiement" 	=> "tinytext NOT NULL",
+							"hash" 				=> "tinytext NOT NULL",
 							"stade_relance" => "int(10) unsigned NOT NULL"
 							);
 

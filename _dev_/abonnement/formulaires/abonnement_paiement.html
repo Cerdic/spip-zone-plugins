@@ -1,10 +1,12 @@
 #CACHE{0}
 
+[(#REM) définir la transaction bancaire ]
+
 [(#ENV**{hash_article}|oui)
-[(#SET{texteLibre,[article-(#ENV**{id_auteur})][-(#ENV**{hash_article})]})]
+[(#SET{texteLibre,[article-(#ENV**{id_auteur})][-(#ENV**{hash})]})]
 ]
 [(#ENV{abonnement}|oui)
-[(#SET{texteLibre,[abonnement-(#ENV**{id_auteur})]})]
+[(#SET{texteLibre,[abonnement-(#ENV**{id_auteur})][-(#ENV**{hash})]})]
 ]
 
 
@@ -12,13 +14,8 @@
 <div>
 
 <?php
-
+// formulaire credit mut
 // on passe les informations sur la transaction dans le texte libre prevu par la banque
-// en attendant une vraie table des transactions
-
-// que vend t'on ?
-// un article ?
-
 
 
 /*
@@ -83,12 +80,15 @@ $Formulaire_Paiement = CreerFormulaireHmac($CMCIC_Tpe,
 //                           ********************
 // Votre page à personnaliser affichant le bouton
 // ----------------------------------------------------------------------------
+
 */
+
 ?>
 
 <div style= "padding-bottom:10px">
 <h2>Paiement</h2>
 </div>
+[(#ENV{reabo}|!={1}|non)
 		<dl>
 			<dt>Mes donn&eacute;es de correspondance</dt>
 			<dd style="margin-top:5px">[(#ENV{sexe}|oui)[(#ENV{sexe}|=={M}|?{'Monsieur','Madame'} )]][ (#ENV{prenom})][ (#ENV{nom_famille})]<dd>
@@ -98,7 +98,7 @@ $Formulaire_Paiement = CreerFormulaireHmac($CMCIC_Tpe,
 			<dd style="margin-top:5px">[<strong>Login :</strong> (#ENV{login})]</dd>
 			<dd>[<strong>Email :</strong> (#ENV{email})]</dd>
 		</dl>
-		
+]		
 		<dl>
 		[(#ENV{option}|!={achat_unite}|?{' ',''})
 			<dt>Mon abonnement</dt>
@@ -111,8 +111,14 @@ $Formulaire_Paiement = CreerFormulaireHmac($CMCIC_Tpe,
 		</dl>
 		
 		
-		    <?php //echo $Formulaire_Paiement;?>
+		    <?php 
 		    
+		    // pour brancher le formulaire sur la banque
+		    /* echo $Formulaire_Paiement; */
+		    
+		    ?>
+		    
+		    [(#REM) boutons de validation de test simulant la banque ]
 		    <form action="./?page=validation_banque" method="post">
 		    Tester une simulation de paiement avec ces boutons<br />
 			<input type="hidden" name="reference" value="[(#ENV{id_auteur})]" />

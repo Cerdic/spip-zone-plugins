@@ -44,7 +44,8 @@ function traiter_message_banque($produit,$id_abonne,$validation_paiement,$hash_a
 
 		// fixer la date de validite et le statut de paiement, (et des zones acces restreint selon l'abonnement a l'occasion)
 		sql_query("UPDATE `spip_auteurs_elargis` SET statut_abonnement='$statut_abonnement', statut_paiement='$validation_paiement'  WHERE id_auteur='$id_abonne'") ;
-		sql_query("UPDATE `spip_auteurs_elargis_abonnements` SET validite = $validite, montant = '$montant' WHERE id_auteur='$id_abonne'") ;
+		sql_query("UPDATE `spip_auteurs_elargis_abonnements` SET validite = $validite, montant = '$montant', statut_paiement = '$validation_paiement'  WHERE id_auteur='$id_abonne' and hash='$hash_article'") ;
+
 	}
 
 	if($produit == "article"){

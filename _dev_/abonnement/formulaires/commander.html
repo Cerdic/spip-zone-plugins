@@ -1,0 +1,27 @@
+
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+
+[(#ENV{editable}|oui)
+<form action='#ENV{action}' method='post'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+<div style="margin:20px 0px;padding:10px;background-color:#FFE2E2">
+	<p>
+	Profitez pleinement de #NOM_SITE_SPIP en vous abonnant.
+	</p>
+</div>
+
+	<div style="padding:5px;background-color:#F4F1D0;margin:10px 0px">
+		[(#INCLURE{fond=formulaires/liste_abonnements}{abonnement=1})]	
+		<input type="hidden" name="hash" value="#ENV{hash}">
+		<input type="hidden" name="reabo" value="1">
+		<input type="hidden" value="#ENV{id_auteur}" name="id_auteur">
+		[<input type="hidden" name="article" value="(#ENV{article})">]
+		<p style="text-align:right"><input type="submit" value="valider"></p>
+	</div>
+</form>
+]
+
+[(#ENV{message_ok})
+<INCLURE{fond=formulaires/abonnement_paiement}{id_auteur=#SESSION{id_auteur}}{abonnement=#ENV{abonnement}}{hash=#ENV{hash}}>
+]
+

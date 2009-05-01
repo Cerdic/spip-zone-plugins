@@ -12,9 +12,9 @@
 </BOUCLE_abo>
 </BOUCLE_abo_valide>		
 	
-	<BOUCLE_abo_echu(spip_auteurs_elargis_abonnements){id_auteur}>
+	<BOUCLE_abo_echu(spip_auteurs_elargis_abonnements){id_auteur}{validite > 0000-00-00 00:00:00}>
 	<BOUCLE_abo_2(spip_abonnements){id_abonnement}>
-
+	[(#ENV{reabo}|non)
 	<div style="margin:20px 0px;padding:10px;background-color:#FFE2E2">
 	<p>
 	Votre abonnement
@@ -24,15 +24,8 @@
 	Vous pouvez le renouveller [(#VALIDITE|<={#ENV{date}}|?{"","d&egrave;s aujourd'hui"})] ou bien choisir une autre formule ci-dessous.
 	</p>
 	</div>
-
-	<div style="padding:5px;background-color:#F4F1D0;margin:10px 0px">
-		<form action="[(#URL_PAGE{commander})]" method="post">
-		[(#INCLURE{fond=formulaires/abonnement_liste}{abonnement=#ID_ABONNEMENT})]	
-		<input type="hidden" value="reabo" name="reabo">
-		<input type="hidden" value="#SESSION{id_auteur}" name="id_auteur">
-		<p style="text-align:right"><input type="submit" value="valider"></p>
-		</form>
-	</div>
+	]
+		#FORMULAIRE_COMMANDER{#SESSION{id_auteur}}
 	
 	</BOUCLE_abo_2>
 	</BOUCLE_abo_echu>
@@ -50,20 +43,7 @@
 
 	[(#GET{pas_abo}|=={oui}|?{' ',''})
 	
-	<div style="margin:20px 0px;padding:10px;background-color:#FFE2E2">
-	<p>
-	Profitez pleinement de #NOM_SITE_SPIP en vous abonnant.
-	</p>
-	</div>
-
-	<div style="padding:5px;background-color:#F4F1D0;margin:10px 0px">
-		<form action="[(#URL_PAGE{commander})]" method="post">
-		[(#INCLURE{fond=formulaires/abonnement_liste}{abonnement=1})]	
-		<input type="hidden" value="reabo" name="reabo">
-		<input type="hidden" value="#SESSION{id_auteur}" name="id_auteur">
-		<p style="text-align:right"><input type="submit" value="valider"></p>
-		</form>
-	</div>
+	#FORMULAIRE_COMMANDER{#SESSION{id_auteur}}
 	
 	]
 
