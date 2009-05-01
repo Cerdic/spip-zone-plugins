@@ -119,6 +119,9 @@ function inscription2_i2_verifications_specifiques($array){
 	// Les logins : fonction inc/inscription2_valide_login
 	$array['login'] = 'valide_login';
 	
+	// Les statuts : fonction inc/inscription2_valide_statut
+	$array['statut'] = 'valide_statut';
+	
 	// Les codes postaux : fonction inc/inscription2_valide_cp
 	$array['code_postal'] = 'valide_cp';
 	$array['code_postal_pro'] = 'valide_cp';
