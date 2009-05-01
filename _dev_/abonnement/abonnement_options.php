@@ -16,7 +16,6 @@
 // prevoir une table transactions, qui permettra d'avoir de bon id_transaction incrementes
 
 function traiter_message_banque($produit,$id_abonne,$validation_paiement,$hash_article){
-
 	$abonne_res = sql_query("SELECT a.nom_famille, a.prenom, a.adresse, a.code_postal, a.ville, a.pays, a.telephone, a.commentaire, b.email, b.id_auteur, b.login , b.pass FROM `spip_auteurs_elargis` a, `spip_auteurs` b WHERE a.id_auteur='$id_abonne' AND a.id_auteur = b.id_auteur") ;
 
 	while($row = sql_fetch($abonne_res)){

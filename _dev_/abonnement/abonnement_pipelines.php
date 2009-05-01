@@ -9,27 +9,21 @@ function abonnement_I2_cfg_form($flux) {
 }
 
 function abonnement_i2_form_debut($flux) {
-	// afficher un formulaire de paiement uniquement si la config le permet
-	if (lire_config('abonnement/proposer_paiement')) {
-		$contexte = array("abonnement" => $flux['args']['abonnement']);
-		$flux['data'] .= recuperer_fond('formulaires/abonnement_liste',$contexte);
-	}
+   	$contexte = array("abonnement" => $flux['args']['abonnement'],"hash" => $flux['args']['hash']);
+    $flux['data'] .= recuperer_fond('formulaires/liste_abonnements',$contexte);
 	return $flux;
 }
 
 function abonnement_i2_charger_formulaire($flux) {
-	// afficher un formulaire de paiement uniquement si la config le permet
-	if (lire_config('abonnement/proposer_paiement')) {
-		$flux['data']['abonnement'] = '1' ;
-	}
+	// valeur par defaut
+	$flux['data']['abonnement'] = '1' ;
+	include_spip('inc/acces');
+	$hash = creer_uniqid();	
+	$flux['data']['hash'] = $hash ;
 	return $flux;
 }
 
 function abonnement_i2_verifier_formulaire($flux) {
-	// afficher un formulaire de paiement uniquement si la config le permet
-	//if (lire_config('abonnement/proposer_paiement')) {
-		
-	//}	
 	return $flux;
 }
 
@@ -39,9 +33,10 @@ function abonnement_i2_traiter_formulaire($flux) {
 		if(intval(_request('abonnement'))){
 			$value = _request('abonnement') ;	
 			$n = $flux['args']['id_auteur'] ;
+			$hash = _request('hash');
 			spip_log("$value,$n","logabo");
 			// verfifier que ca emplile pas en mode edition
-			sql_insertq('spip_auteurs_elargis_abonnements', array('id_auteur' => $n,'id_abonnement' => $value, 'date' => date("Y-m-d H:i:s") ));
+			sql_insertq('spip_auteurs_elargis_abonnements', array('id_auteur' => $n,'id_abonnement' => $value, 'date' => date("Y-m-d H:i:s"), 'hash'=>$hash ));
 		}
 		$flux['data']['ne_pas_confirmer_par_mail'] = true ;
 		$flux['data']['message_ok'] = " " ;

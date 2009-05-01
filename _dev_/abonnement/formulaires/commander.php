@@ -49,7 +49,7 @@ function formulaires_commander_traiter_dist($id_auteur = NULL){
 if($id_abonnement = _request('abonnement') AND $id_auteur = _request('id_auteur') ){	
 	// enregistrer l'abonnement
 	// attention aux doublons...
-	sql_query("INSERT INTO `spip_auteurs_elargis_abonnements` (id_auteur, id_abonnement, hash) VALUES ('$id_auteur', "._q($id_abonnement).","._q($hash).")");
+	sql_query("INSERT INTO `spip_auteurs_elargis_abonnements` (id_auteur, id_abonnement, hash, date) VALUES ('$id_auteur', "._q($id_abonnement).","._q($hash).",".date("Y-m-d H:i:s").")");
 	
 	$var_user['zones'] = lire_config('inscription2/zones');
 	if(is_array($var_user['zones'])){

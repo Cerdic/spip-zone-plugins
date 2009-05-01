@@ -8,5 +8,6 @@
         <br /><input type="radio" name="abonnement"  [(#ENV{abonnement}|=={#ID_ABONNEMENT}|?{'checked="checked"'})] value="#ID_ABONNEMENT"/> #LIBELLE - #MONTANT Euros
         </BOUCLE_abo>
     </div>
+    <input type="hidden" name="hash"  value="#ENV{hash}"/>
     </fieldset>
 </B_abo>
