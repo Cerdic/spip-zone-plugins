@@ -5,6 +5,10 @@
  *
  */
 
+/* Pour que le pipeline de rale pas ! */
+function gestdoc_autoriser(){}
+
+
 function autoriser_document_tailler_dist($faire,$quoi,$id,$qui,$options) {
 
 	if (!$id_document=intval($id))
