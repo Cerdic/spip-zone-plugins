@@ -76,5 +76,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"nombre_abonnes_relances" => "Nombre d'abonn&eacute;s relanc&eacute;s :",
 	"nombre_abonnes_inscrits" => "Nombre d'abonn&eacute;s inscrits :",
 	"nouveaux_abonnes_depuis_7_jours" => "Nouveaux abonn&eacute;s depuis 7 jours :",
+
+
+	// mes_abonnements
+	'votre_abonnement' => 'Votre abonnement',
+	'echeance_le' => '&eacute;ch&eacute;ance le @date@',
+	'vos_articles' => 'Vos articles',
+	'echance_abonnement_proche' => "Votre abonnement <i>@titre@</i> arrive a &eacute;ch&eacute;ance le @date@.",
+	'echance_abonnement_passee' => "Votre abonnement <i>@titre@</i> est arriv&eacute; a &eacute;ch&eacute;ance le @date@.",
+	'renouveler_abonnement_prochee' => "Vous pouvez le renouveller d&egrave;s aujourd'hui ou bien choisir une autre formule ci-dessous.",
+	'renouveler_abonnement_passe' => "Vous pouvez le renouveller ou bien choisir une autre formule ci-dessous.",
 );
 ?>
