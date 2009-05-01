@@ -100,11 +100,11 @@ $Formulaire_Paiement = CreerFormulaireHmac($CMCIC_Tpe,
 		</dl>
 ]		
 		<dl>
-		[(#ENV{option}|!={achat_unite}|?{' ',''})
+		[(#ENV{option}|!={achat_unite}|oui)
 			<dt>Mon abonnement</dt>
 			<dd>[ (#ENV{abonnement}|id_abonnement_to_libelle)][ - (#ENV{abonnement}|id_abonnement_to_montant) E]</dd>
 		]
-		[(#ENV{option}|!={achat_unite}|?{'',' '})
+		[(#ENV{option}|!={achat_unite}|non)
 		<dt>Mon article</dt>
 		<dd>[(#ENV{article}|id_article_to_titre) - #CONFIG{abonnement/prix_article} &nbsp; euros]</dd>
 		]

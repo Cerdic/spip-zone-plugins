@@ -1,13 +1,9 @@
-<B_abo>
+
+<BOUCLE_abo(ABONNEMENTS){0,1}>
     <fieldset class="abonnement_liste">
-    <legend>Choisir son abonnement</legend>
-    
-    <div class="obligatoire">
-        <label><strong>Abonnement</strong></label>
-        <BOUCLE_abo(SPIP_ABONNEMENTS)>
-        <br /><input type="radio" name="abonnement"  [(#ENV{abonnement}|=={#ID_ABONNEMENT}|?{'checked="checked"'})] value="#ID_ABONNEMENT"/> #LIBELLE - #MONTANT Euros
-        </BOUCLE_abo>
-    </div>
-    <input type="hidden" name="hash"  value="#ENV{hash}"/>
+    <h3 class="legend"><:abo:choisir_son_abonnement:></h3>
+    <ul>
+		[(#SAISIE{abonnement,abonnement,oui}{label=<:abo:choisir_son_abonnement:>})]
+	</ul>
     </fieldset>
-</B_abo>
+</BOUCLE_abo>

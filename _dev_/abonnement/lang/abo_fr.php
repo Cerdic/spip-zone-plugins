@@ -86,5 +86,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'echance_abonnement_passee' => "Votre abonnement <i>@titre@</i> est arriv&eacute; a &eacute;ch&eacute;ance le @date@.",
 	'renouveler_abonnement_prochee' => "Vous pouvez le renouveller d&egrave;s aujourd'hui ou bien choisir une autre formule ci-dessous.",
 	'renouveler_abonnement_passe' => "Vous pouvez le renouveller ou bien choisir une autre formule ci-dessous.",
+
+	// formulaire commander
+	'info_profiter_de' => "Profitez pleinement de @titre@ en vous abonnant.",
+	'bouton_commander' => "Commander",
+	'choisir_son_abonnement' => "Choisir son abonnement",
 );
 ?>

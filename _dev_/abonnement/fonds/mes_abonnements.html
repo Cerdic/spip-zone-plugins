@@ -5,7 +5,7 @@
 	[(#REM)
 		Si on a un abonnement valide sur le site, on l'affiche.
 	]
-	<BOUCLE_abo_valide(AUTEURS_ELARGIS_ABONNEMENTS abonnements){id_auteur = #ID_AUTEUR}{validite > #GET{date_future}}>
+	<BOUCLE_abo_valide(AUTEURS_ELARGIS_ABONNEMENTS abonnements){id_auteur}{validite > #GET{date_future}}>
 		<h2><:abo:votre_abonnement:></h2>
 
 		#SET{ladate,#VALIDITE|affdate}
@@ -46,8 +46,8 @@
 		<B_articles>
 			<h2><:abo:vos_articles:></h2>
 			<ul>
-			<BOUCLE_articles(AUTEURS_ELARGIS_ARTICLES){id_auteur_elargi = #ID_AUTEUR}>
-			<li><a href="[(#URL_PAGE{article,id_article=#ID_ARTICLE})]">[(#ID_ARTICLE|id_article_to_titre)]</a></li>
+			<BOUCLE_articles(AUTEURS_ELARGIS_ARTICLES articles){id_auteur_elargi = #ID_AUTEUR}>
+			<li><a href="#URL_ARTICLE">#TITRE</a></li>
 			</BOUCLE_articles>
 			</ul>
 		</B_articles>

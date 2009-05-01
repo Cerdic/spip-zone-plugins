@@ -1,27 +1,34 @@
-
-[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+<div class="formulaire_spip formulaire_commander_abonnement">
+	
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
 [(#ENV{editable}|oui)
-<form action='#ENV{action}' method='post'>
+	<form method="post" action="#ENV{action}">
+	<div>
 	#ACTION_FORMULAIRE{#ENV{action}}
-<div style="margin:20px 0px;padding:10px;background-color:#FFE2E2">
-	<p>
-	Profitez pleinement de #NOM_SITE_SPIP en vous abonnant.
+	<input type="hidden" name="hash" value="#ENV{hash}">
+	<input type="hidden" name="reabo" value="1">
+	<input type="hidden" value="#ENV{id_auteur}" name="id_auteur">
+	[<input type="hidden" name="article" value="(#ENV{article})">]
+
+	<p class="explication">
+	<:abo:info_profiter_de{titre=#NOM_SITE_SPIP}:>
 	</p>
+	
+	<ul>
+		[(#SAISIE{abonnement,abonnement,oui}{label=<:abo:choisir_son_abonnement:>})]
+	</ul>
+	<p class="boutons">
+		<input type="submit" value="<:abo:bouton_commander:>" class="submit" />
+	</p>
+	</div>
+	</form>
+]
 </div>
 
-	<div style="padding:5px;background-color:#F4F1D0;margin:10px 0px">
-		[(#INCLURE{fond=formulaires/liste_abonnements}{abonnement=1})]	
-		<input type="hidden" name="hash" value="#ENV{hash}">
-		<input type="hidden" name="reabo" value="1">
-		<input type="hidden" value="#ENV{id_auteur}" name="id_auteur">
-		[<input type="hidden" name="article" value="(#ENV{article})">]
-		<p style="text-align:right"><input type="submit" value="valider"></p>
-	</div>
-</form>
-]
-
-[(#ENV{message_ok})
+[(#REM) si on est OK, on affiche le formulaire de soumission de la banque ]
+[(#ENV{message_ok}|oui)
 <INCLURE{fond=formulaires/abonnement_paiement}{id_auteur=#SESSION{id_auteur}}{abonnement=#ENV{abonnement}}{hash=#ENV{hash}}>
 ]
 
