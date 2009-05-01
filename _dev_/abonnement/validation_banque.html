@@ -4,6 +4,17 @@ if (lire_config("abonnement/environnement") != "test") {
 	die("Page prot&eacute;g&eacute;e");
 }
 
+/*
+ *
+ * Page desuete, il faut mieux envoyer sur
+ * action/qqc, et retourner ensuite sur une page SPIP
+ * Voir par exemple :
+ * - formulaires/abonnement_paiement (appelee lorsqu'on clique sur commander)
+ * - formulaires/paiement_fictif
+ * - action/valider_paiement_fictif 
+ *
+ */
+
 echo "Cette page simule la reponse de la banque et son traitement<hr />";
 // attention ne gardez pas ca en prod, c pour tester
 
@@ -23,7 +34,8 @@ echo "Ah, pas de chance, votre paiement n'&agrave pas &eacute;t&eacute; valid&ea
 }
 ?>
 <p>
-<a href="#URL_SITE_SPIP">retour</a>
+
+<a href="#ENV{redirect}|sinon{#URL_SITE_SPIP/}">Retour</a>
 
 
 </p>

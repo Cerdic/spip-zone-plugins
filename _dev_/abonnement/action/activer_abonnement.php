@@ -28,9 +28,26 @@ function action_activer_abonnement_dist()
 	
 }
 
+function abo_traiter_activer_abonnement_hash($hash) {
+	return abo_traiter_activer_abonnement(0, 0, $hash);
+}
 
-function abo_traiter_activer_abonnement($id_abonnement, $id_auteur) {
+/* on passe soit
+ * - id_abonnement + id_auteur
+ * - hash
+ */
+function abo_traiter_activer_abonnement($id_abonnement, $id_auteur, $hash = false) {
 
+	// si hash on le retrouve
+	// s'il n'est pas la, on se tue.
+	if ($hash) {
+		if (!$abonnement_auteur = sql_fetsel('*', 'spip_auteurs_elargis_abonnements', 'hash = ' . sql_quote($hash))) {
+			return false;
+		}
+		$id_abonnement = $abonnement_auteur['id_abonnement'];
+		$id_auteur = $abonnement_auteur['id_auteur'];
+	}
+	
 	// abonnement non trouve ?
 	$abonnement = sql_fetsel('*', 'spip_abonnements', 'id_abonnement = ' . $id_abonnement);
 	if (!$abonnement) {
@@ -46,16 +63,29 @@ function abo_traiter_activer_abonnement($id_abonnement, $id_auteur) {
 	else {
 		$validite = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n')+$abonnement['duree'],date('j'),date('Y')));
 	}
+
+	// S'il y a un hash de verification
+	// (on provient alors certainement d'un formulaire de paiement)
+	// et qu'il n'existe pas dans la base, on s'en va !
+
+	$where = array("id_auteur=".$id_auteur, "id_abonnement=".$id_abonnement);
+	if ($hash) $where["hash"] = sql_quote($hash);
 	
 	// lien deja cree
-	if (!$id = sql_getfetsel('id_abonnement',"spip_auteurs_elargis_abonnements",array("id_auteur"=>$id_auteur, "id_abonnement"=>$id_abonnement))) {
-		// on en cree un
+	if (!$id = sql_getfetsel('id_abonnement',"spip_auteurs_elargis_abonnements",$where)) {
+		// si hash, c'est qu'on a pas trouve la valeur : dehors !
+		if ($hash) {
+			return false;
+		}
+		
+		// sinon on en cree un
 		sql_insertq("spip_auteurs_elargis_abonnements", array(
 			"id_auteur"=>$id_auteur,
 			"id_abonnement"=>$id_abonnement,
 			"montant" => $abonnement['montant'],
 			"date" => date('Y-m-d H:i:s'),
 			"validite" => $validite,
+			'statut_paiement'=>'ok',
 			'stade_relance'=>'',
 		));
 	}
@@ -67,9 +97,10 @@ function abo_traiter_activer_abonnement($id_abonnement, $id_auteur) {
 				"montant" => $abonnement['montant'],
 				"date" => date('Y-m-d H:i:s'),
 				"validite" => $validite,
-				'stade_relance'=>'',
+				'statut_paiement' => 'ok',
+				'stade_relance' => '',
 			),
-			array("id_auteur=".$id_auteur, "id_abonnement=".$id_abonnement));
+			$where);
 	}
 	return true;
 }

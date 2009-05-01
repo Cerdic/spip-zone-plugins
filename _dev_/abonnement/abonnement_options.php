@@ -15,6 +15,13 @@
 
 // prevoir une table transactions, qui permettra d'avoir de bon id_transaction incrementes
 
+/**
+ *
+ * Fonction en partie desuete
+ * (voir les fonctions dans actions/)
+ * (reste a envoyer le mail tout de meme !)
+ */
+/*
 function traiter_message_banque($produit,$id_abonne,$validation_paiement,$hash_article){
 	$abonne_res = sql_query("SELECT a.nom_famille, a.prenom, a.adresse, a.code_postal, a.ville, a.pays, a.telephone, a.commentaire, b.email, b.id_auteur, b.login , b.pass FROM `spip_auteurs_elargis` a, `spip_auteurs` b WHERE a.id_auteur='$id_abonne' AND a.id_auteur = b.id_auteur") ;
 
@@ -61,7 +68,7 @@ function traiter_message_banque($produit,$id_abonne,$validation_paiement,$hash_a
 	else
 		return false ;
 }
-
+*/
 
 function abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$libelle,$produit,$article=''){
 

@@ -9,7 +9,7 @@
 	<div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<input type="hidden" name="hash" value="#ENV{hash}">
-	<input type="hidden" name="type_commande" value="article">
+	<input type="hidden" name="type_commande" value="#ENV{type_commande}">
 
 	<BOUCLE_article(ARTICLES){id_article = #ENV{article}}>
 	<h3 class="legend"><:abo:commander_article:></h3>

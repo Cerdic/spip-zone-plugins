@@ -36,6 +36,7 @@ function formulaires_commander_article_charger_dist($id_article = 0){
 		"hash" => $hash,
 		"id_auteur" => $id_auteur,
 		"article" => $id_article,
+		"type_commande" => "article",
 	);
 	
 	$champs = array_merge($champs, $erreurs);
@@ -65,7 +66,7 @@ function formulaires_commander_article_traiter_dist($id_article = 0){
 	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 	 
 	sql_insertq("spip_auteurs_elargis_articles", array(
-		"id_auteur" => $id_auteur,
+		"id_auteur_elargi" => $id_auteur,
 		"id_article" => $id_article,
 		"statut_paiement" => 'a_confirmer',
 		"hash" => $hash,

@@ -18,36 +18,39 @@
 #CACHE{0}
 
 
-<div class="formulaire_spip formulaire_paiement_abonnement">
 <h2><:abo:paiement:></h2>
 
 
-[(#ENV{type_commande}|oui)
+<BOUCLE_ma_correspondance(CONDITION){si #ENV{type_commande}}>
 	<dl>
 		<dt><:abo:donnees_correspondances:></dt>
+		<BOUCLE_correspondance(AUTEURS_ELARGIS auteurs){id_auteur}>
 		<dd class="abo_nom">[(#ENV{prenom})][ (#ENV{nom_famille})]<dd>
 		<dd class="abo_adresse">[(#ENV{adresse})]</dd>
 		<dd class="abo_cp">[(#ENV{code_postal})][ (#ENV{ville})]</dd>
 		[<dd class="abo_pays">(#ENV{pays}|id_pays_to_pays)</dd>]
 		[<dd class="abo_login"><strong><:login:>&nbsp;:</strong> (#ENV{login})</dd>]
 		[<dd class="abo_email"><strong><:email:>&nbsp;:</strong> (#ENV{email})</dd>]
+		</BOUCLE_correspondance>
 	</dl>
-]
+</BOUCLE_ma_correspondance>
 
 	<dl>
 		<BOUCLE_mon_abonnement(CONDITION){si #ENV{type_commande}|!={article}}>
-			[(#SET{texteLibre,[abonnement-(#ENV{id_auteur})][-(#ENV*{hash})]})]
+			[(#SET{texteLibre,[abonnement-(#ENV*{hash})]})]
 			<BOUCLE_abo(ABONNEMENTS){id_abonnement}>
 				<dt><:abo:mon_abonnement:></dt>
 				<dd>#LIBELLE - #MONTANT euros</dd>
 				#SET{montant,#MONTANT}
+				#SET{libelle,#LIBELLE}
 			</BOUCLE_abo>
 		</BOUCLE_mon_abonnement>
 
 		<BOUCLE_mon_article(CONDITION){si #ENV{type_commande}|=={article}}>
-			[(#SET{texteLibre,[article-(#ENV{id_auteur})][-(#ENV*{hash})]})]
+			[(#SET{texteLibre,[article-(#ENV*{hash})]})]
 			<BOUCLE_art(ARTICLES){id_article}>
 				#SET{montant,#CONFIG{abonnement/prix_article}}
+				#SET{libelle,#TITRE}
 				<dt><:abo:mon_article:></dt>
 				<dd>#TITRE - #GET{montant} euros</dd>
 			</BOUCLE_art>
@@ -59,19 +62,10 @@
 	]
 	
 	[(#REM) boutons de validation de test simulant la banque ]
-	<form action="#URL_PAGE{validation_banque}" method="post"><div>
-		<p class="attention"><:abo:simulation_paiement:></p>	
-
-		<input type="hidden" name="reference" value="#ENV{id_auteur}" />
-		<input type="hidden" name="texteLibre" value="#GET{texteLibre}" />
-		<input type="hidden" name="devise" value="EUR" />
-		<input type="hidden" name="montant" value="#GET{montant}" />
-
-		<p class="boutons">
-			<input type="submit" name="reponse_banque" class="spip_bouton" value="ok" />
-			<input type="submit" name="reponse_banque" class="spip_bouton" value="erreur_bank" />
-		</p>
-	</div>
-	</form>	
-
-</div>
+	[(#FORMULAIRE_PAIEMENT_FICTIF{#ARRAY{
+		montant,#GET{montant},
+		libelle,#GET{libelle},
+		reference,#ENV{id_auteur},
+		args,#GET{texteLibre},
+		redirect,#SELF,
+	}})]

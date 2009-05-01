@@ -30,6 +30,7 @@ function formulaires_commander_abonnement_charger_dist(){
 		"hash" => $hash,
 		"id_auteur" => $id_auteur,
 		"abonnement" => "",
+		"type_commande" => "abonnement",
 	);
 
 	$champs = array_merge($champs, $erreurs);

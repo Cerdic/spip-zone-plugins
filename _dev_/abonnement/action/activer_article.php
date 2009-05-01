@@ -27,9 +27,26 @@ function action_activer_article_dist()
 
 }
 
+function abo_traiter_activer_article_hash($hash) {
+	return abo_traiter_activer_article(0, 0, $hash);
+}
 
-function abo_traiter_activer_article($id_article, $id_auteur) {
-	
+/* on passe soit
+ * - id_abonnement + id_auteur
+ * - hash
+ */
+function abo_traiter_activer_article($id_article, $id_auteur, $hash='') {
+
+	// si hash on le retrouve
+	// s'il n'est pas la, on se tue.
+	if ($hash) {
+		if (!$abonnement_auteur_article = sql_fetsel('*', 'spip_auteurs_elargis_articles', 'hash = ' . sql_quote($hash))) {
+			return false;
+		}
+		$id_article = $abonnement_auteur_article['id_article'];
+		$id_auteur = $abonnement_auteur_article['id_auteur_elargi'];
+	}
+		
 	// article non trouve ?
 	$article = sql_getfetsel('id_article', 'spip_articles', 'id_article = ' . $id_article);
 	if (!$article) {
@@ -37,21 +54,38 @@ function abo_traiter_activer_article($id_article, $id_auteur) {
 		die("abonnement article $id_article inexistant");
 	}
 
+	// S'il y a un hash de verification
+	// (on provient alors certainement d'un formulaire de paiement)
+	// et qu'il n'existe pas dans la base, on s'en va !
+	$where = array("id_auteur_elargi=".$id_auteur, "id_article=".$id_article);
+	if ($hash) $where["hash"] = sql_quote($hash);
+	
 	// article deja cree ?
-	if (!$id = sql_getfetsel('id_article',"spip_auteurs_elargis_articles",array("id_auteur"=>$id_auteur, "id_article"=>$id_article))) {
-		// on en cree un
+	if (!$id = sql_getfetsel('id_article', "spip_auteurs_elargis_articles", $where)) {
+		// si hash, c'est qu'on a pas trouve la valeur : dehors !
+		if ($hash) {
+			return false;
+		}
+		
+		// sinon on en cree un
 		sql_insertq("spip_auteurs_elargis_articles", array(
-			"id_auteur"=>$id_auteur,
+			"id_auteur_elargi"=>$id_auteur,
 			"id_article"=>$id_article,
-			'statut_paiement'=>'ok'
+			'date' => date('Y-m-d H:i:s'),
+			'statut_paiement'=>'ok',
+			'montant'=>lire_config('abonnement/prix_article'),
 		));
 	}
 	// sinon on met a jour
 	else {
 		sql_updateq(
 			"spip_auteurs_elargis_articles",
-			array('statut_paiement'=>'ok'),
-			array("id_auteur=".$id_auteur, "id_article=".$id_article));
+			array(
+				'statut_paiement' => 'ok',
+				'date' => date('Y-m-d H:i:s'),
+				'montant'=>lire_config('abonnement/prix_article'),
+			),
+			$where);
 	}
 
 	return true;

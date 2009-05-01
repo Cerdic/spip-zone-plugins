@@ -7,7 +7,10 @@ x) Assurez vous d'avoir prealablement intallé les plugins
 		- balise session
 
 
-x) Customiser la page commander.html
+x) Utilisez les formulaires pour s'inscrire ou s'abonner
+	- #FORMULAIRE_INSCRIPTION2
+	- #FORMULAIRE_COMMANDER_ABONNEMENT
+	- #FORMULAIRE_COMMANDER_ARTICLE{#ID_ARTICLE}
 
 
 x) Ajouter dans une page _abonnement_.html avec un #CACHE{0}
