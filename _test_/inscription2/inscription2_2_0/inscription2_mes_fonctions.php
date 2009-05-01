@@ -10,7 +10,7 @@ function n_to_br($texte){
 function id_pays_to_pays($id_pays){
 	if($id_pays != 0){
 		$pays = sql_getfetsel('nom', 'spip_geo_pays', 'id_pays ='.$id_pays) ;
-		return $pays;
+		return typo($pays);
 	}
 	else return;
 }
