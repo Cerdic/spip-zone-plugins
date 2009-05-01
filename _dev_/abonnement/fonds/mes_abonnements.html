@@ -34,7 +34,7 @@
 				</p>
 				</div>
 			]
-			#FORMULAIRE_COMMANDER{#SESSION{id_auteur}}
+			#FORMULAIRE_COMMANDER_ABONNEMENT
 			
 		</BOUCLE_abo_echu>
 			#SET{pas_abo,oui}
@@ -53,7 +53,7 @@
 		</B_articles>
 
 		[(#GET{pas_abo}|=={oui}|oui)
-			#FORMULAIRE_COMMANDER{#SESSION{id_auteur}}
+			#FORMULAIRE_COMMANDER_ABONNEMENT
 		]
 	<//B_abo_valide>		
 

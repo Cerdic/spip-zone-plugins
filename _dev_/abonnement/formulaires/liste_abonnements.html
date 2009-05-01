@@ -4,6 +4,7 @@
     <h3 class="legend"><:abo:choisir_son_abonnement:></h3>
     <ul>
 		[(#SAISIE{abonnement,abonnement,oui}{label=<:abo:choisir_son_abonnement:>})]
+		[<input type="hidden" name="hash"  value="(#ENV{hash})"/>]
 	</ul>
     </fieldset>
 </BOUCLE_abo>
