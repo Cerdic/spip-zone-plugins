@@ -25,11 +25,11 @@ function exec_portfolio(){
 	echo formulaire_recherche('portfolio');
 	echo recuperer_fond('prive/galerie',$_GET);
 
-	/*if (autoriser('modifier','zone'))
-		echo "<div>".icone_inline(_T('gestdoc:creer_zone'),
-		  generer_url_ecrire("zones_edit","new=oui"),
-		  _DIR_PLUGIN_ACCESRESTREINT."/img_pack/zones-acces-24.gif",
-		  "creer.gif",'right')."</div>";*/
+	// if (autoriser('modifier','zone'))
+	// 	echo "<div>".icone_inline(_T('gestdoc:creer_zone'),
+	// 	  generer_url_ecrire("zones_edit","new=oui"),
+	// 	  _DIR_PLUGIN_ACCESRESTREINT."/img_pack/zones-acces-24.gif",
+	// 	  "creer.gif",'right')."</div>";
 
 	echo fin_grand_cadre(true),fin_page();
 }
