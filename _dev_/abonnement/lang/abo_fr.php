@@ -28,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"configuration_description_abonnement_relances" => "Cette page permet de d&eacute;finir les options de relances d'abonnement de votre site.",
 
 	// Formulaires CFG
+	"fieldset_securite" => "Securit&eacute;s",
 	"fieldset_inscription" => "Relations avec Inscription 2",
 	"fieldset_expediteur" => "Expediteur des mails automatiques",
 	"fieldset_confirmation" => "Mail de confirmation d'abonnement",
@@ -38,6 +39,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"fieldset_relance_avant_2" => "Email de relance avant &eacute;ch&eacute;ance 2",
 	"fieldset_relance_apres" => "Email de relance apr&egrave;s &eacute;ch&eacute;ance",
 
+	"label_environnement" => "Environnement de travail",
+	"label_environnement_test" => "Environnement de test",
+	"label_environnement_prod" => "Environnement de production",
+	"explication_environnement" => "Vous pouvez utiliser des fichiers de tests
+		pour v&eacute;rifier que les abonnements fonctionnent correctement.
+		Une fois en production,	ces fichiers de tests seront inaccessibles
+		pour des raisons &eacute;vidente de s&eacute;curit&eacute;.",
 	
 	"label_action" => "Action",
 	"label_libelle" => "Libell&eacute;",
@@ -82,8 +90,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'votre_abonnement' => 'Votre abonnement',
 	'echeance_le' => '&eacute;ch&eacute;ance le @date@',
 	'vos_articles' => 'Vos articles',
-	'echance_abonnement_proche' => "Votre abonnement <i>@titre@</i> arrive a &eacute;ch&eacute;ance le @date@.",
-	'echance_abonnement_passee' => "Votre abonnement <i>@titre@</i> est arriv&eacute; a &eacute;ch&eacute;ance le @date@.",
+	'echance_abonnement_proche' => "Votre abonnement <i>@titre@</i> arrive &agrave; &eacute;ch&eacute;ance le @date@.",
+	'echance_abonnement_passee' => "Votre abonnement <i>@titre@</i> est arriv&eacute; &agrave; &eacute;ch&eacute;ance le @date@.",
 	'renouveler_abonnement_prochee' => "Vous pouvez le renouveller d&egrave;s aujourd'hui ou bien choisir une autre formule ci-dessous.",
 	'renouveler_abonnement_passe' => "Vous pouvez le renouveller ou bien choisir une autre formule ci-dessous.",
 
@@ -91,5 +99,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_profiter_de' => "Profitez pleinement de @titre@ en vous abonnant.",
 	'bouton_commander' => "Commander",
 	'choisir_son_abonnement' => "Choisir son abonnement",
+
+	'erreur_presente' => "Une erreur est présente dans votre saisie",
+	'erreur_selection_abonnement' => "Vous devez choisir un abonnement !",
+
+	// page de test de commande
+	"paiement" => "Paiement",
+	"donnees_correspondances" => "Mes donn&eacute;es de correspondance",
+	
 );
 ?>

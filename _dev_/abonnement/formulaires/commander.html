@@ -10,7 +10,9 @@
 	<input type="hidden" name="hash" value="#ENV{hash}">
 	<input type="hidden" name="reabo" value="1">
 	<input type="hidden" value="#ENV{id_auteur}" name="id_auteur">
-	[<input type="hidden" name="article" value="(#ENV{article})">]
+	[(#REM) Cachons pour le moment ce qui ne sert pas
+		[<input type="hidden" name="article" value="(#ENV{article})">]
+	]
 
 	<p class="explication">
 	<:abo:info_profiter_de{titre=#NOM_SITE_SPIP}:>

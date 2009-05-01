@@ -13,19 +13,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function formulaires_commander_charger_dist($id_auteur = NULL){
 	$champs = array();
 
-include_spip('inc/acces');
-$hash = creer_uniqid();	
-$champs['hash'] = $hash ;			
-$champs['id_auteur'] = $id_auteur ;			
-$champs['abonnement'] = '' ;
-$champs['reabo'] = '' ;			
-			
+	include_spip('inc/acces');
+	$hash = creer_uniqid();	
+	$champs['hash'] = $hash ;			
+	$champs['id_auteur'] = $id_auteur ;			
+	$champs['abonnement'] = '' ;
+	$champs['reabo'] = '' ;			
 
-if(_request('reachat')){	
-	$champs['id_article'] = _request('id_article') ;				
-}
-
-		
+	/*
+	// on n'y touche pas aux articles pour le moment
+	if(_request('reachat')){	
+		$champs['id_article'] = _request('id_article') ;				
+	}
+	*/
 	return $champs;
 }
 
@@ -34,8 +34,14 @@ function formulaires_commander_verifier_dist($id_auteur = NULL){
 	//initialise le tableau des erreurs
 	$erreurs = array();
 	
-	if(!_request('abonnement') OR !_request('id_auteur') )
-	   	$erreurs['abonnement_pas_content'] = "oui";
+	//if(!_request('abonnement') OR !_request('id_auteur') )
+	//   	$erreurs['abonnement_pas_content'] = "oui";
+
+	// erreurs sur l'abonnement
+	if(!_request('abonnement')) {
+		$erreurs['abonnement'] = _T("abo:erreur_selection_abonnement");
+		$erreurs['message_erreur'] = _T("abo:erreur_presente");
+	}
 
     return $erreurs; // si c'est vide, traiter sera appele, sinon le formulaire sera resoumis
 }

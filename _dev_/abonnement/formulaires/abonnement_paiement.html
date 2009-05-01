@@ -3,100 +3,28 @@
 [(#REM) définir la transaction bancaire ]
 
 [(#ENV**{hash_article}|oui)
-[(#SET{texteLibre,[article-(#ENV**{id_auteur})][-(#ENV**{hash})]})]
+	[(#SET{texteLibre,[article-(#ENV**{id_auteur})][-(#ENV**{hash})]})]
 ]
 [(#ENV{abonnement}|oui)
-[(#SET{texteLibre,[abonnement-(#ENV**{id_auteur})][-(#ENV**{hash})]})]
+	[(#SET{texteLibre,[abonnement-(#ENV**{id_auteur})][-(#ENV**{hash})]})]
 ]
 
 
 
-<div>
 
-<?php
-// formulaire credit mut
-// on passe les informations sur la transaction dans le texte libre prevu par la banque
+<div class="formulaire_spip formulaire_paiement_abonnement">
+<h2><:abo:paiement:></h2>
 
 
-/*
-// ceci est le formaulaire de paiement de credit mut, a adapter
-
-// ----------------------------------------------------------------------------
-// Begin Main : Build payment variables from order context and format
-//              CMCIC-compliant Payment form.
-//                           ********************
-//              Créer les variables du paiement à partir du contexte commande
-//              et créer le formulaire de paiement CMCIC.
-// ----------------------------------------------------------------------------
-
-require_once("./paiement/CheckOut.php");
-
-$CMCIC_Tpe = CMCIC_getMyTpe();               // TPE init variables
-$CtlHmac   = CMCIC_CtlHmac($CMCIC_Tpe);      // TPE ok feedback
-
-
-// Référence: unique, alphaNum (A-Z a-z 0-9), longueur maxi 12 caractères
-@$Reference_12 = "[(#ENV{id_auteur})]";
-$Reference_Cde = urlencode(substr($Reference_12, 0, 12));
-
-// Langue: page de paiement "FR","EN","DE","IT","ES" selon options souscrites
-@$Language_2   = $stub_order['language']."FR";   
-$Code_Langue   = urlencode(substr($Language_2 , 0, 2));
-
-// Code société: fourni par CM-CIC
-$Code_Societe     = $CMCIC_Tpe['soc'];
-
-// Montant: format  "xxxxx.yy" (pas de blancs))
-$Montant          = "[(#ENV{abonnement}|id_abonnement_to_montant)]";
-
-// Devise: norme ISO 4217 
-$Devise           = "EUR";
-
-// texte libre: une référence longue, des contextes de session pour le retour .
-$Texte_Libre      = "#GET{texteLibre}";
-
-// Texte du bouton pour accéder au serveur CM-CIC
-$Texte_Bouton     = "Paiement" ; 
-
-// --------------------------------------------------- End Stub ---------------
-
-
-// ----------------------------------------------------------------------------
-// Calling payment form function
-//                           ********************
-// Appel de la fonction formulaire de paiement
-// ----------------------------------------------------------------------------
-$Formulaire_Paiement = CreerFormulaireHmac($CMCIC_Tpe,
-                                             $Montant,
-                                             $Devise,
-                                             $Reference_Cde,
-                                             $Texte_Libre,
-                                             $Code_Langue,
-                                             $Code_Societe,
-                                             $Texte_Bouton);
-
-// ----------------------------------------------------------------------------
-// Your Page displaying payment button to be customized  
-//                           ********************
-// Votre page à personnaliser affichant le bouton
-// ----------------------------------------------------------------------------
-
-*/
-
-?>
-
-<div style= "padding-bottom:10px">
-<h2>Paiement</h2>
-</div>
 [(#ENV{reabo}|!={1}|non)
 		<dl>
-			<dt>Mes donn&eacute;es de correspondance</dt>
-			<dd style="margin-top:5px">[(#ENV{sexe}|oui)[(#ENV{sexe}|=={M}|?{'Monsieur','Madame'} )]][ (#ENV{prenom})][ (#ENV{nom_famille})]<dd>
-			<dd>[ (#ENV{adresse})]</dd>
-			<dd>[ (#ENV{code_postal})][ (#ENV{ville})]</dd>
-			<dd>[ (#ENV{pays}|id_pays_to_pays)]</dd>
-			<dd style="margin-top:5px">[<strong>Login :</strong> (#ENV{login})]</dd>
-			<dd>[<strong>Email :</strong> (#ENV{email})]</dd>
+			<dt><:abo:donnees_correspondances:></dt>
+			<dd class="abo_nom">[(#ENV{prenom})][ (#ENV{nom_famille})]<dd>
+			<dd class="abo_adresse">[(#ENV{adresse})]</dd>
+			<dd class="abo_cp">[(#ENV{code_postal})][ (#ENV{ville})]</dd>
+			[<dd class="abo_pays">(#ENV{pays}|id_pays_to_pays)</dd>]
+			[<dd class="abo_login"><strong><:login:>&nbsp;:</strong> (#ENV{login})</dd>]
+			[<dd class="abo_email"><strong><:email:>&nbsp;:</strong> (#ENV{email})</dd>]
 		</dl>
 ]		
 		<dl>
@@ -105,8 +33,8 @@ $Formulaire_Paiement = CreerFormulaireHmac($CMCIC_Tpe,
 			<dd>[ (#ENV{abonnement}|id_abonnement_to_libelle)][ - (#ENV{abonnement}|id_abonnement_to_montant) E]</dd>
 		]
 		[(#ENV{option}|!={achat_unite}|non)
-		<dt>Mon article</dt>
-		<dd>[(#ENV{article}|id_article_to_titre) - #CONFIG{abonnement/prix_article} &nbsp; euros]</dd>
+			<dt>Mon article</dt>
+			<dd>[(#ENV{article}|id_article_to_titre) - #CONFIG{abonnement/prix_article} &nbsp; euros]</dd>
 		]
 		</dl>
 		
@@ -119,15 +47,18 @@ $Formulaire_Paiement = CreerFormulaireHmac($CMCIC_Tpe,
 		    ?>
 		    
 		    [(#REM) boutons de validation de test simulant la banque ]
-		    <form action="./?page=validation_banque" method="post">
-		    Tester une simulation de paiement avec ces boutons<br />
-			<input type="hidden" name="reference" value="[(#ENV{id_auteur})]" />
-			<input type="hidden" name="texteLibre" value="#GET{texteLibre}" />
-			<input type="hidden" name="devise" value="EUR" />
-			<input type="hidden" name="montant" value="[(#ENV{abonnement}|id_abonnement_to_montant|sinon{#CONFIG{abonnement/prix_article}})]" />
-			
-			<input type="submit" name="reponse_banque" class="spip_bouton" value="ok" />
-			<input type="submit" name="reponse_banque" class="spip_bouton" value="erreur_bank" />	
+		    <form action="#URL_PAGE{validation_banque}" method="post"><div>		
+				Tester une simulation de paiement avec ces boutons<br />
+				<input type="hidden" name="reference" value="[(#ENV{id_auteur})]" />
+				<input type="hidden" name="texteLibre" value="#GET{texteLibre}" />
+				<input type="hidden" name="devise" value="EUR" />
+				<input type="hidden" name="montant" value="[(#ENV{abonnement}|id_abonnement_to_montant|sinon{#CONFIG{abonnement/prix_article}})]" />
+
+				<p class="boutons">
+					<input type="submit" name="reponse_banque" class="spip_bouton" value="ok" />
+					<input type="submit" name="reponse_banque" class="spip_bouton" value="erreur_bank" />
+				</p>
+			</div>
 			</form>	
 
 </div>

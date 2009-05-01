@@ -11,14 +11,32 @@
 <div>
 #ACTION_FORMULAIRE{#ENV{action}}
 <ul>
-	
+	<li class="fieldset">
+		<fieldset>
+			<h3 class="legend"><:abo:fieldset_securite:></h3>
+			<ul>
+				<li class="editer_environnement obligatoire">
+					<label for='champ_environnement'><:abo:label_environnement:></label>
+					<p class="explication"><:abo:explication_environnement:></p>
+					<div class="choix">
+						<input type="radio" name="environnement" id="champ_environnement_test" value="test"[ (#ENV{environnement}|=={prod}|non)checked="checked"] />
+						<label for="champ_environnement_test"><:abo:label_environnement_test:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="environnement" id="champ_environnement_prod" value="prod"[ (#ENV{environnement}|=={prod}|oui)checked="checked"] />
+						<label for="champ_environnement_prod"><:abo:label_environnement_prod:></label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
+	</li>	
 	<li class="fieldset">
 		<fieldset>
 			<h3 class="legend"><:abo:fieldset_inscription:></h3>
 			<ul>
 				[(#SAISIE{oui_non,proposer_paiement}
 					{label=<:abo:label_proposer_paiement:>}
-					{explication=<:abo:explication_proposer_paiement:>})]
+					{explication=<:abo:explication_proposer_paiement:>})]			
 			</ul>
 		</fieldset>
 	</li>

@@ -1,0 +1,74 @@
+<?php
+
+	// formulaire credit mut
+	// on passe les informations sur la transaction dans le texte libre prevu par la banque
+
+
+	/*
+	// ceci est le formaulaire de paiement de credit mut, a adapter
+
+	// ----------------------------------------------------------------------------
+	// Begin Main : Build payment variables from order context and format
+	//              CMCIC-compliant Payment form.
+	//                           ********************
+	//              Créer les variables du paiement à partir du contexte commande
+	//              et créer le formulaire de paiement CMCIC.
+	// ----------------------------------------------------------------------------
+
+	require_once("./paiement/CheckOut.php");
+
+	$CMCIC_Tpe = CMCIC_getMyTpe();               // TPE init variables
+	$CtlHmac   = CMCIC_CtlHmac($CMCIC_Tpe);      // TPE ok feedback
+
+
+	// Référence: unique, alphaNum (A-Z a-z 0-9), longueur maxi 12 caractères
+	@$Reference_12 = "[(#ENV{id_auteur})]";
+	$Reference_Cde = urlencode(substr($Reference_12, 0, 12));
+
+	// Langue: page de paiement "FR","EN","DE","IT","ES" selon options souscrites
+	@$Language_2   = $stub_order['language']."FR";   
+	$Code_Langue   = urlencode(substr($Language_2 , 0, 2));
+
+	// Code société: fourni par CM-CIC
+	$Code_Societe     = $CMCIC_Tpe['soc'];
+
+	// Montant: format  "xxxxx.yy" (pas de blancs))
+	$Montant          = "[(#ENV{abonnement}|id_abonnement_to_montant)]";
+
+	// Devise: norme ISO 4217 
+	$Devise           = "EUR";
+
+	// texte libre: une référence longue, des contextes de session pour le retour .
+	$Texte_Libre      = "#GET{texteLibre}";
+
+	// Texte du bouton pour accéder au serveur CM-CIC
+	$Texte_Bouton     = "Paiement" ; 
+
+	// --------------------------------------------------- End Stub ---------------
+
+
+	// ----------------------------------------------------------------------------
+	// Calling payment form function
+	//                           ********************
+	// Appel de la fonction formulaire de paiement
+	// ----------------------------------------------------------------------------
+	$Formulaire_Paiement = CreerFormulaireHmac($CMCIC_Tpe,
+												 $Montant,
+												 $Devise,
+												 $Reference_Cde,
+												 $Texte_Libre,
+												 $Code_Langue,
+												 $Code_Societe,
+												 $Texte_Bouton);
+
+	// ----------------------------------------------------------------------------
+	// Your Page displaying payment button to be customized  
+	//                           ********************
+	// Votre page à personnaliser affichant le bouton
+	// ----------------------------------------------------------------------------
+
+	*/
+
+
+
+?>

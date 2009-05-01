@@ -1,4 +1,9 @@
 <?php
+
+if (lire_config("abonnement/environnement") != "test") {
+	die("Page prot&eacute;g&eacute;e");
+}
+
 echo "Cette page simule la reponse de la banque et son traitement<hr />";
 // attention ne gardez pas ca en prod, c pour tester
 
