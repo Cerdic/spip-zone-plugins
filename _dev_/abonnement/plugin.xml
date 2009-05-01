@@ -5,9 +5,8 @@
 	<auteur>	<!-- Auteur du plugin -->
 	  BoOz (booz@rezo.net)
 	</auteur>
-	<version>
-	0.8
-	</version>
+	<version>0.8</version>
+	<version_base>0.75</version_base>
 	<etat>
 	test
 	</etat>
