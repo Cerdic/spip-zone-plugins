@@ -8,11 +8,7 @@
 	<div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<input type="hidden" name="hash" value="#ENV{hash}">
-	<input type="hidden" name="reabo" value="1">
-	<input type="hidden" value="#ENV{id_auteur}" name="id_auteur">
-	[(#REM) Cachons pour le moment ce qui ne sert pas
-		[<input type="hidden" name="article" value="(#ENV{article})">]
-	]
+	<input type="hidden" name="type_commande" value="abonnement">
 
 	<p class="explication">
 	<:abo:info_profiter_de{titre=#NOM_SITE_SPIP}:>
@@ -31,6 +27,6 @@
 
 [(#REM) si on est OK, on affiche le formulaire de soumission de la banque ]
 [(#ENV{message_ok}|oui)
-<INCLURE{fond=formulaires/abonnement_paiement}{id_auteur=#SESSION{id_auteur}}{abonnement=#ENV{abonnement}}{hash=#ENV{hash}}>
+<INCLURE{fond=formulaires/abonnement_paiement}{env}{id_abonnement=#ENV{abonnement}}>
 ]
 

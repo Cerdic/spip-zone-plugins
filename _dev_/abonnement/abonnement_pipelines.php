@@ -37,31 +37,23 @@ function abonnement_i2_verifier_formulaire($flux) {
 function abonnement_i2_traiter_formulaire($flux) {
 	// afficher un formulaire de paiement uniquement si la config le permet
 	if (lire_config('abonnement/proposer_paiement')) {
-		if(intval(_request('abonnement'))){
-			$value = _request('abonnement') ;	
-			$n = $flux['args']['id_auteur'] ;
+		if($id_abonnement = intval(_request('abonnement'))){	
+			$id_auteur = $flux['args']['id_auteur'] ;
 			$hash = _request('hash');
-			spip_log("$value,$n","logabo");
+
 			// verfifier que ca emplile pas en mode edition
-			sql_insertq('spip_auteurs_elargis_abonnements', array('id_auteur' => $n,'id_abonnement' => $value, 'date' => date("Y-m-d H:i:s"), 'hash'=>$hash ));
+			sql_insertq('spip_auteurs_elargis_abonnements', array(
+				'id_auteur' => $id_auteur,
+				'id_abonnement' => $id_abonnement,
+				'date' => date("Y-m-d H:i:s"),
+				'hash'=>$hash )
+			);
 		}
 		$flux['data']['ne_pas_confirmer_par_mail'] = true ;
 		$flux['data']['message_ok'] = " " ;
 	}
-	/*
-	if(isset($declaration['article']) AND ($declaration['article'] > 0 OR ereg('breve',$declaration['article']) )){
-		$value = $declaration['article'] ;	
-		//var_dump($value);
-		include_spip('inc/acces');
-		$montant =  lire_config('abonnement/prix_article');
-		$hash = creer_uniqid();
-			spip_query("INSERT INTO `spip_auteurs_elargis_articles` (`id_auteur_elargi`, `id_article`, `statut_paiement` , `hash`,`montant`) VALUES ('$n', '$value', 'a_confirmer','$hash','$montant')");
-		$declaration['hash_article'] = $hash ;
-
-	}
-	*/
 	
-	return ($flux);
+	return $flux;
 }
 
 function abonnement_i2_confirmation($flux) {
@@ -73,8 +65,6 @@ function abonnement_i2_confirmation($flux) {
 	}
 	return $flux;
 }
-
-
 
 //utiliser le cron pour gerer les dates de validite des abonnements et envoyer les messages de relance
 function abonnement_taches_generales_cron($taches_generales){

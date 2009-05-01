@@ -101,13 +101,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choisir_son_abonnement' => "Choisir son abonnement",
 	'commander_article' => "Commande de l'article :",
 	
-	'erreur_identification' => "Vous devez être identifi&eacute; pour pouvoir vous abonner",
-	'erreur_presente' => "Une erreur est présente dans votre saisie",
+	'erreur_identification' => "Vous devez &ecirc;tre identifi&eacute; pour pouvoir vous abonner",
+	'erreur_presente' => "Une erreur est pr&eacute;sente dans votre saisie",
 	'erreur_selection_abonnement' => "Vous devez choisir un abonnement !",
 
 	// page de test de commande
 	"paiement" => "Paiement",
 	"donnees_correspondances" => "Mes donn&eacute;es de correspondance",
-	
+	"mon_abonnement" => "Mon abonnement",
+	"mon_article" => "Mon article",
+	"simulation_paiement" => "Tester une simulation de paiement avec ces boutons",
+
+	// page article_restreint
+	"acces_refuse" => "Votre abonnement ne vous permet pas d'acc&eacute;der &agrave; cette page",
+	"connexion_deja_abonne" => "Si vous &ecirc;tes d&eacute;j&agrave; abonn&eacute;, vous pouvez vous connecter &agrave; l'aide du formulaire ci-dessous",
+	"abonner_ou_acheter_article" => "Vous pouvez vous abonner, ou bien acheter cet article &agrave; l'unit&eacute;",
 );
 ?>

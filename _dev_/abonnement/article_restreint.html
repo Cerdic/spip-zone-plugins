@@ -2,10 +2,10 @@
 Cette page propose l'introduction de l'article et un formulaire de login.
 Elle peut etre appellée comme cela depuis article.html
 
-		</BOUCLE_article_principal>
-		[(#ID_ARTICLE|AccesRestreint_article_restreint|oui) <INCLURE{fond=article_restreint}{id_article}> ] 
-		[(#ID_ARTICLE|AccesRestreint_article_restreint|non) Cette page n'existe pas ] 
-		<//B_article_principal>
+	</BOUCLE_article_principal>
+	[(#ID_ARTICLE|AccesRestreint_article_restreint|oui) <INCLURE{fond=article_restreint}{id_article}> ] 
+	[(#ID_ARTICLE|AccesRestreint_article_restreint|non) Cette page n'existe pas ] 
+	<//B_article_principal>
 
 ]
 #CACHE{0}
@@ -24,195 +24,136 @@ Elle peut etre appellée comme cela depuis article.html
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
 
-	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
+	[(#REM) Contenu principal : contenu de l'article ]
+    <div class="hfeed" id="conteneur">
+    <div class="hentry" id="contenu">
 
+        [(#REM) Fil d'Ariane ]
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
 
-	<div id="conteneur">
-
-		[(#REM) Contenu principal : contenu de l'article ]
-		<div id="contenu">
-<div class="cartouche">
-				#DEBUT_SURLIGNE
-				[(#LOGO_ARTICLE||image_reduire{200,200})]
+        <div class="cartouche">
+            <div class="surlignable">
+				[(#LOGO_ARTICLE|image_reduire{200,200})]
 				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
-				<h1 class="#EDIT{titre} titre">#TITRE</h1>
+				<h1 class="#EDIT{titre} entry-title">#TITRE</h1>
 				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
-				#FIN_SURLIGNE
+            </div>
 
-				<p><small>[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
+            <p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>[, <:par_auteur:> (#LESAUTEURS)][ (<:texte_date_publication_anterieure:> (#DATE_REDAC|affdate)).]</small></p>
 
-				[(#REM) Inclure le modele des liens de traductions ]
-				#MODELE{article_traductions}
-
-			</div>
-
-
-			<?php if(article_visible_par_abonne($auteur_session['id_auteur'],'#ID_ARTICLE')){
-			// mettre ici ce qui est accessible
-			?>
-			
-			
-			#DEBUT_SURLIGNE
-			[<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
-			<br class="nettoyeur" />
-			[<p class="#EDIT{hyperlien} lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-			[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{520,0})</div>]
-			#FIN_SURLIGNE
-
-			[(#REM) Portfolio : album d'images ]
-			<B_documents_portfolio>
-			<div id="documents_portfolio">
-				<h2><:info_portfolio:></h2>
-				<BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document} {extension IN png,jpg,gif} {par num titre, date} {doublons}>
-				[<a href="#URL_DOCUMENT" type="#MIME_TYPE" onclick="location.href='[(#URL_ARTICLE|parametre_url{id_document,#ID_DOCUMENT})]#documents_portfolio';return false;"[ title="(#TITRE|couper{80}|texte_backend)"]>(#FICHIER|copie_locale|image_reduire{0,60}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]
-				</BOUCLE_documents_portfolio>
-			</div>
-			</B_documents_portfolio>
-			<BOUCLE_afficher_document(DOCUMENTS) {id_document} {id_article} {mode=document}{extension IN png,jpg,gif}>
-			<div class="spip_documents spip_documents_center" id="document_actif">
-				#EMBED_DOCUMENT
-				[<div class="#EDIT{titre} spip_doc_titre">(#TITRE)</div>]
-				[<div class="#EDIT{descriptif} spip_doc_descriptif">(#DESCRIPTIF)</div>]
-			</div>
-			</BOUCLE_afficher_document>
-
-			[<div class="ps"><h2><:info_ps:></h2>#DEBUT_SURLIGNE<div class="#EDIT{ps}">(#PS)</div>#FIN_SURLIGNE</div>]
-
-			[(#REM) Autres documents joints a l'article ]
-			<B_documents_joints>
-			<div id="documents_joints">
-				<h2><:titre_documents_joints:></h2>
-				<ul>
-					<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {par num titre, date} {doublons}>
-					<li>
-						<div class="spip_doc_titre"><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a> <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
-						[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
-					</li>
-					</BOUCLE_documents_joints>
-				</ul>
-			</div>
-			</B_documents_joints>
-			
-			[(#REM) Petition :
-			La petition ayant une PAGINATION il faut absolument lui passer SELF]
-			[(#PETITION|?{' '})
-				<INCLURE{fond=inc-petition}{id_article}{self=#SELF}>
-			]
-
-			[<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
-
-			[(#REM) Forum de l'article ]
-			<a href="#forum" name="forum" id="forum"></a>
-			[<h2 class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></h2>]
-			<INCLURE{fond=inc-forum}{id_article}>
+            [(#REM) Inclure le modele des liens de traductions ]
+            #MODELE{article_traductions}
+        </div>
 
 
+		[(#REM) Test de validite : abonnement, sinon article ]
+		<BOUCLE_abo_valide(AUTEURS_ELARGIS_ABONNEMENTS abonnements){id_auteur=#SESSION{id_auteur}}{validite > #ENV{date}}{statut_paiement=ok}>
+		#SET{valide,oui}
+		</BOUCLE_abo_valide>
+			<BOUCLE_article_abonne(AUTEURS_ELARGIS_ARTICLES articles){id_article}{id_auteur_elargi=#SESSION{id_auteur}}{statut_paiement=ok}>
+			#SET{valide,oui}
+			</BOUCLE_article_abonne>
+			#SET{valide,''}
+			<//B_article_abonne
+		<//B_abo_valide>
 
-			
-			<?php } elseif($auteur_session) { ?>
-			
-			
-			#DEBUT_SURLIGNE
-			[<div class="#EDIT{texte} texte">(#INTRODUCTION)</div>]
-			#FIN_SURLIGNE
-			
-			<h3>Votre abonnement ne vous permet pas d'acc&eacute;der &agrave; cette page</h3>	
-			[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|oui)
-			<p>Vous pouvez vous abonner, ou bien acheter cet article &agrave; l'unit&eacute;</p>
-			<div style="padding:5px;background-color:#F4F1D0">
-				<form action="[(#URL_PAGE{commander})]" method="post">
-				[(#INCLURE{fond=formulaires/liste_abonnement})]	
-				
-				<input type="hidden" value="reabo" name="reabo">
-				<input type="hidden" value="#SESSION{id_auteur}" name="id_auteur">
-				<p style="text-align:right"><input type="submit" value="valider"></p>
-				</form>
-			</div>
-			<div style="padding:5px;background-color:#F4F1D0;margin-top:10px">
-			<form action="[(#URL_PAGE{commander})]" method="post">	
-			<fieldset class="reabonnement">
-		    <legend>Acheter &agrave; l'unit&eacute;</legend>
-		    <input type="radio" checked="checked" id="unite"><label for="unite">#TITRE - #CONFIG{abonnement/prix_article} &nbsp;euros</label>
-   			<input type="hidden" value="reachat" name="reachat">
-   			<input type="hidden" value="#ID_ARTICLE" name="article">
-   			<input type="hidden" value="#SESSION{id_auteur}" name="id_auteur">
-   			</fieldset>
-   			<p style="text-align:right"><input type="submit" value="valider"></p>
-   			 </form>	
-			
-			</div>
-			]
+<BOUCLE_autorise(CONDITION){si #GET{valide}}>
+[(#REM) autorise a voir l'article ]
+	
+        <div class="surlignable">
+			[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{500,0})</div>]
+			[<div class="#EDIT{texte} texte entry-content">(#TEXTE|image_reduire{500,0})</div>]
+		</div>
 
-			
-			
-			
-			
-			<?php } else{ ?>
-			#DEBUT_SURLIGNE
-			[<div class="#EDIT{texte} texte">(#INTRODUCTION)</div>]
-			#FIN_SURLIGNE
-			
-			<h3>Cette page est accessible sur abonnement</h3>
-			<p>Si vous &ecirc;tes d&eacute;j&agrave; abonn&eacute;, vous pouvez vous connecter &agrave; l'aide du formulaire ci-dessous</p>
+		[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+        
+		[<div class="ps surlignable"><h2 class="pas_surlignable"><:info_ps:></h2><div class="#EDIT{ps}">(#PS|image_reduire{500,0})</div></div>]
 
-			#LOGIN_PUBLIC
-			
-			
-			
-			[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|non)
-			<h3>Cette page est accessible sur abonnement</h3>
-			<p>Vous pouvez vous abonner en <a class="spip_in" href="spip.php?page=abonnement_">cliquant ici</a></p>
+
+		[(#REM) Gestion du portfolio et des documents
+			Le critere {env} permet de passer d'autres arguments de la page
+			par exemple l'id_document choisi pour un affichage complet
+		]
+		[(#INCLURE{fond=inc-documents}{id_article}{env})]
+
+
+		[(#REM) Petition :
+		La petition ayant une PAGINATION il faut absolument {env}
+		et pourquoi pas ajax
+		][(#PETITION|?{' '})<INCLURE{fond=inc-petition}{id_article}{env}{ajax}>]
+
+        [<div class="notes surlignable"><h2 class="pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
+
+		[(#REM) Forum de l'article ]
+		<a href="#forum" name="forum" id="forum"></a>
+		<INCLURE{fond=inc-forum}{id_article} />
+		[<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:repondre_article:></a></p>] 
+
+</BOUCLE_autorise>
+	[(#REM) PAS autorise
+		Deux possibilités :
+		- soit le bonhomme est pas identifie
+		- soit il faut qu'il s'abonne ou paie l'article
+
+	]
+
+        <div class="surlignable">
+			[<div class="#EDIT{introduction} introduction">(#INTRODUCTION)</div>]
+		</div>
+
+		<div class="abonnement_refus">
+			<h3><:abo:acces_refuse:></h3>
+
+			[(#SESSION{id_auteur}|non)
+				<p><:abo:connexion_deja_abonne:></p>
+				#FORMULAIRE_LOGIN{#SELF}
 			]
 			
-			[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|oui)
-			<p>Vous pouvez vous abonner, ou bien acheter cet article &agrave; l'unit&eacute;</p>
-			<div style="padding:5px;background-color:#F4F1D0">
-				<form action="./?page=_abonnement_" method="post">
-				[(#INCLURE{fond=formulaires/liste_abonnement})]	
-				<p style="text-align:right"><input type="submit" value="valider"></p>
-				</form>
-			</div>
-			<div style="padding:5px;background-color:#F4F1D0;margin-top:10px">
-			<form action="[(#URL_PAGE{commander})]" method="post">	
-			<fieldset class="abonnement_liste">
-		    <legend>Acheter &agrave; l'unit&eacute;</legend>
-		    <input type="radio" checked="checked" id="unite"><label for="unite">#TITRE - #CONFIG{abonnement/prix_article} &nbsp;euros</label>
-   			<input type="hidden" value="#ID_ARTICLE" name="article">
-   			</fieldset>
-   			<p style="text-align:right"><input type="submit" value="valider"></p>
-   			 </form>	
-			
-			</div>
-			]
-			
-			
-			<?php } ?>
-			</div><!-- fin contenu -->	
-			[(#REM) Menu de navigation laterale ]
-		<div id="navigation">
+			<p><:abo:abonner_ou_acheter_article:></p>
 
-			[(#REM) Menu de navigation par rubriques ]
-			<INCLURE{fond=inc-rubriques}{id_rubrique}>
+			#FORMULAIRE_COMMANDER_ABONNEMENT
 
-			[(#REM) Articles dans la meme rubrique ]
-			<B_articles_rubrique>
-			<div class="breves">
-				<h2 class="menu-titre"><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
-				<ul>
-					<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date}{inverse} {0,10}>
-					<li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>#TITRE</a></li>
-					</BOUCLE_articles_rubrique>
-				</ul>
-			</div>
-			</B_articles_rubrique>
+			#FORMULAIRE_COMMANDER_ARTICLE{#ID_ARTICLE}
+		</div>
+		
+<//B_autorise>
 
-			[(#REM) Menu de navigation mots-cles ]
-			#MODELE{article_mots}
-
-		</div><!-- fin navigation -->
+	</div><!-- fin contenu -->	
 	</div><!-- fin conteneur -->
 
+
+    [(#REM) Menu de navigation laterale ]
+    <div id="navigation">
+
+        [(#REM) Menu de navigation par rubriques ]
+        <INCLURE{fond=inc-rubriques}{id_rubrique}>
+	
+		#FORMULAIRE_RECHERCHE
+
+    </div><!--#navigation-->
+
+    
+    [(#REM) Menu de navigation laterale ]
+    <div id="extra">
+
+        [(#REM) Articles dans la meme rubrique ]
+        <B_articles_rubrique>
+        <div class="menu">
+            <h2><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
+            <ul>
+                <BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date}{inverse} {0,10}>
+                <li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>#TITRE</a></li>
+                </BOUCLE_articles_rubrique>
+            </ul>
+        </div>
+        </B_articles_rubrique>
+
+        [(#REM) Menu de navigation mots-cles ]
+        #MODELE{article_mots}
+        
+    </div><!--#extra-->
+
+		
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 

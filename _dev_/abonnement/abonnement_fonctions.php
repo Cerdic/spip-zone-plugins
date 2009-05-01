@@ -22,7 +22,7 @@ function article_visible_par_abonne($id_auteur,$id_article){
 			"spip_auteurs AS c"
 		),
 		array(
-			"a.id_auteur_elargi = b.id",
+			"a.id_auteur_elargi = b.id_auteur",
 			"b.id_auteur = c.id_auteur",
 			"c.id_auteur = " . sql_quote($id_auteur),
 			"a.id_article = " . sql_quote($id_article),

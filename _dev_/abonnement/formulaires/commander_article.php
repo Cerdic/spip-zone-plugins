@@ -13,7 +13,7 @@ function formulaires_commander_article_charger_dist($id_article = 0){
 
 	// pas d'id_article ? on sort !
 	if (!$id_article) {
-		return false;
+	//	return false;
 	}
 	
 	// si pas d'id_auteur, on prend la personne identifiee si elle existe
@@ -35,8 +35,9 @@ function formulaires_commander_article_charger_dist($id_article = 0){
 	$champs = array(
 		"hash" => $hash,
 		"id_auteur" => $id_auteur,
-		"id_article" => $id_article,
+		"article" => $id_article,
 	);
+	
 	$champs = array_merge($champs, $erreurs);
 
 	return $champs;
@@ -63,17 +64,14 @@ function formulaires_commander_article_traiter_dist($id_article = 0){
 
 	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 	 
-	// on prerempli la bdd avec le hash calcule.
-	if($value = _request('reachat_valide_hash')){		
-		sql_insertq("spip_auteurs_elargis_articles", array(
-			"id_auteur" => $id_auteur,
-			"id_article" => $id_article,
-			"statut_paiement" => 'a_confirmer',
-			"hash" => $hash,
-			"date" => date("Y-m-d H:i:s"),
-		));
-	}
-
+	sql_insertq("spip_auteurs_elargis_articles", array(
+		"id_auteur" => $id_auteur,
+		"id_article" => $id_article,
+		"statut_paiement" => 'a_confirmer',
+		"hash" => $hash,
+		"date" => date("Y-m-d H:i:s"),
+	));
+	
     return array('editable' => false, 'message_ok' => $message);
 }
 ?>

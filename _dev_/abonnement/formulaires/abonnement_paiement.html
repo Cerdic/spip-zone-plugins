@@ -1,64 +1,77 @@
+
+[(#REM)
+	Cette page peut etre appellee de plusieurs endroits :
+	- de #FORMULAIRE_COMMANDER_ARTICLE{#ID_ARTICLE}
+	- de #FORMULAIRE_COMMANDER_ABONNEMENT
+	- de #FORMULAIRE_INSCRIPTION2 (si la config d'abonnement le permet
+		et via les pipelines du formulaire i2 utilises par abonnement)
+
+	Pour les deux premiers, la variable "type_commande"
+	est transmise : ils supposent que l'on connait les informations
+	de l'auteur, puisqu'il est deja inscrit.
+
+	On utilise des #ENV{id_auteur} et non des #SESSION car
+	a l'inscription l'auteur n'est pas encore loge, mais
+	on connait son identifiant.
+
+]
 #CACHE{0}
-
-[(#REM) définir la transaction bancaire ]
-
-[(#ENV**{hash_article}|oui)
-	[(#SET{texteLibre,[article-(#ENV**{id_auteur})][-(#ENV**{hash})]})]
-]
-[(#ENV{abonnement}|oui)
-	[(#SET{texteLibre,[abonnement-(#ENV**{id_auteur})][-(#ENV**{hash})]})]
-]
-
-
 
 
 <div class="formulaire_spip formulaire_paiement_abonnement">
 <h2><:abo:paiement:></h2>
 
 
-[(#ENV{reabo}|!={1}|non)
-		<dl>
-			<dt><:abo:donnees_correspondances:></dt>
-			<dd class="abo_nom">[(#ENV{prenom})][ (#ENV{nom_famille})]<dd>
-			<dd class="abo_adresse">[(#ENV{adresse})]</dd>
-			<dd class="abo_cp">[(#ENV{code_postal})][ (#ENV{ville})]</dd>
-			[<dd class="abo_pays">(#ENV{pays}|id_pays_to_pays)</dd>]
-			[<dd class="abo_login"><strong><:login:>&nbsp;:</strong> (#ENV{login})</dd>]
-			[<dd class="abo_email"><strong><:email:>&nbsp;:</strong> (#ENV{email})</dd>]
-		</dl>
-]		
-		<dl>
-		[(#ENV{option}|!={achat_unite}|oui)
-			<dt>Mon abonnement</dt>
-			<dd>[ (#ENV{abonnement}|id_abonnement_to_libelle)][ - (#ENV{abonnement}|id_abonnement_to_montant) E]</dd>
-		]
-		[(#ENV{option}|!={achat_unite}|non)
-			<dt>Mon article</dt>
-			<dd>[(#ENV{article}|id_article_to_titre) - #CONFIG{abonnement/prix_article} &nbsp; euros]</dd>
-		]
-		</dl>
-		
-		
-		    <?php 
-		    
-		    // pour brancher le formulaire sur la banque
-		    /* echo $Formulaire_Paiement; */
-		    
-		    ?>
-		    
-		    [(#REM) boutons de validation de test simulant la banque ]
-		    <form action="#URL_PAGE{validation_banque}" method="post"><div>		
-				Tester une simulation de paiement avec ces boutons<br />
-				<input type="hidden" name="reference" value="[(#ENV{id_auteur})]" />
-				<input type="hidden" name="texteLibre" value="#GET{texteLibre}" />
-				<input type="hidden" name="devise" value="EUR" />
-				<input type="hidden" name="montant" value="[(#ENV{abonnement}|id_abonnement_to_montant|sinon{#CONFIG{abonnement/prix_article}})]" />
+[(#ENV{type_commande}|oui)
+	<dl>
+		<dt><:abo:donnees_correspondances:></dt>
+		<dd class="abo_nom">[(#ENV{prenom})][ (#ENV{nom_famille})]<dd>
+		<dd class="abo_adresse">[(#ENV{adresse})]</dd>
+		<dd class="abo_cp">[(#ENV{code_postal})][ (#ENV{ville})]</dd>
+		[<dd class="abo_pays">(#ENV{pays}|id_pays_to_pays)</dd>]
+		[<dd class="abo_login"><strong><:login:>&nbsp;:</strong> (#ENV{login})</dd>]
+		[<dd class="abo_email"><strong><:email:>&nbsp;:</strong> (#ENV{email})</dd>]
+	</dl>
+]
 
-				<p class="boutons">
-					<input type="submit" name="reponse_banque" class="spip_bouton" value="ok" />
-					<input type="submit" name="reponse_banque" class="spip_bouton" value="erreur_bank" />
-				</p>
-			</div>
-			</form>	
+	<dl>
+		<BOUCLE_mon_abonnement(CONDITION){si #ENV{type_commande}|!={article}}>
+			[(#SET{texteLibre,[abonnement-(#ENV{id_auteur})][-(#ENV*{hash})]})]
+			<BOUCLE_abo(ABONNEMENTS){id_abonnement}>
+				<dt><:abo:mon_abonnement:></dt>
+				<dd>#LIBELLE - #MONTANT euros</dd>
+				#SET{montant,#MONTANT}
+			</BOUCLE_abo>
+		</BOUCLE_mon_abonnement>
+
+		<BOUCLE_mon_article(CONDITION){si #ENV{type_commande}|=={article}}>
+			[(#SET{texteLibre,[article-(#ENV{id_auteur})][-(#ENV*{hash})]})]
+			<BOUCLE_art(ARTICLES){id_article}>
+				#SET{montant,#CONFIG{abonnement/prix_article}}
+				<dt><:abo:mon_article:></dt>
+				<dd>#TITRE - #GET{montant} euros</dd>
+			</BOUCLE_art>
+		</BOUCLE_mon_article>
+	</dl>
+		
+	[(#REM)
+		Il n'y a plus qu'a mettre le bon formulaire ici...
+	]
+	
+	[(#REM) boutons de validation de test simulant la banque ]
+	<form action="#URL_PAGE{validation_banque}" method="post"><div>
+		<p class="attention"><:abo:simulation_paiement:></p>	
+
+		<input type="hidden" name="reference" value="#ENV{id_auteur}" />
+		<input type="hidden" name="texteLibre" value="#GET{texteLibre}" />
+		<input type="hidden" name="devise" value="EUR" />
+		<input type="hidden" name="montant" value="#GET{montant}" />
+
+		<p class="boutons">
+			<input type="submit" name="reponse_banque" class="spip_bouton" value="ok" />
+			<input type="submit" name="reponse_banque" class="spip_bouton" value="erreur_bank" />
+		</p>
+	</div>
+	</form>	
 
 </div>
