@@ -67,9 +67,10 @@ function accesrestreint_acces_zone($id_zone,$id_auteur=null){
 			$liste_zones[$id_auteur] = explode(',',$GLOBALS['accesrestreint_zones_autorisees']);
 		elseif (!is_null($id_auteur)){
 			include_spip('inc/acces_restreint');
-			$liste_zones[$id_auteur] = accesrestreint_liste_zones_autorisees('',$id_auteur);
+			$liste_zones[$id_auteur] = explode(',',accesrestreint_liste_zones_autorisees('',$id_auteur));
 		}
 	}
+	
 	return in_array($id_zone,$liste_zones[$id_auteur]);
 }
 

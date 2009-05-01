@@ -5,6 +5,9 @@
  *
  */
 
+/* pour que le pipeline ne rale pas ! */
+function accesrestreint_autoriser(){}
+
 /**
  * Autorisation a administrer les zones
  *
