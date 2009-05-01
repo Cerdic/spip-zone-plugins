@@ -9,21 +9,28 @@ function abonnement_I2_cfg_form($flux) {
 }
 
 function abonnement_i2_form_debut($flux) {
-   	$contexte = array("abonnement" => $flux['args']['abonnement'],"hash" => $flux['args']['hash']);
-    $flux['data'] .= recuperer_fond('formulaires/liste_abonnements',$contexte);
+	if (lire_config('abonnement/proposer_paiement')) {
+		$contexte = array("abonnement" => $flux['args']['abonnement'],"hash" => $flux['args']['hash']);
+		$flux['data'] .= recuperer_fond('formulaires/liste_abonnements',$contexte);
+	}
 	return $flux;
 }
 
 function abonnement_i2_charger_formulaire($flux) {
-	// valeur par defaut
-	$flux['data']['abonnement'] = '1' ;
-	include_spip('inc/acces');
-	$hash = creer_uniqid();	
-	$flux['data']['hash'] = $hash ;
+	if (lire_config('abonnement/proposer_paiement')) {
+		// valeur par defaut
+		$flux['data']['abonnement'] = '1' ;
+		include_spip('inc/acces');
+		$hash = creer_uniqid();	
+		$flux['data']['hash'] = $hash ;
+	}
 	return $flux;
 }
 
 function abonnement_i2_verifier_formulaire($flux) {
+	//if (lire_config('abonnement/proposer_paiement')) {
+		// rien a faire, mais sait on jamais ! un jour peut etre !
+	//}
 	return $flux;
 }
 
