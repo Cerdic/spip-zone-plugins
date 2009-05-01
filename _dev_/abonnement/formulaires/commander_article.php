@@ -7,8 +7,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Chargement des valeurs par defaut des champs du formulaire
  * 
  * @return array L'ensemble des champs et de leur valeurs
+ * @param int $id_article : Identifiant de l'article commande
  */
-function formulaires_commander_abonnement_charger_dist(){
+function formulaires_commander_article_charger_dist($id_article = 0){
+
+	// pas d'id_article ? on sort !
+	if (!$id_article) {
+		return false;
+	}
 	
 	// si pas d'id_auteur, on prend la personne identifiee si elle existe
 	// sinon c'est une inscription.
@@ -29,24 +35,20 @@ function formulaires_commander_abonnement_charger_dist(){
 	$champs = array(
 		"hash" => $hash,
 		"id_auteur" => $id_auteur,
-		"abonnement" => "",
+		"id_article" => $id_article,
 	);
-
 	$champs = array_merge($champs, $erreurs);
-	
+
 	return $champs;
 }
 
 
-
-function formulaires_commander_abonnement_verifier_dist(){
-   
+function formulaires_commander_article_verifier_dist($id_article = 0){
 	//initialise le tableau des erreurs
 	$erreurs = array();
-	
+
 	// erreurs sur l'abonnement
-	if(!_request('abonnement')) {
-		$erreurs['abonnement'] = _T("abo:erreur_selection_abonnement");
+	if(!$id_article) {
 		$erreurs['message_erreur'] = _T("abo:erreur_presente");
 	}
 
@@ -54,28 +56,24 @@ function formulaires_commander_abonnement_verifier_dist(){
 }
 
 
+function formulaires_commander_article_traiter_dist($id_article = 0){
 
-function formulaires_commander_abonnement_traiter_dist(){
-	global $tables_principales;
-	
 	$hash = _request('hash');
 	$message = " ";
-	
-	/* c'est un abonnement */
-	$id_abonnement = _request('abonnement');
+
 	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
-	
-	// enregistrer l'abonnement
-	// todo ? [attention aux doublons...]
-	sql_insertq("spip_auteurs_elargis_abonnements", array(
-		"id_auteur" => $id_auteur,
-		"id_abonnement" => $id_abonnement,
-		"hash" => $hash,
-		"date" => date("Y-m-d H:i:s"),
-		"statut_paiement" => 'a_confirmer',
-	));
+	 
+	// on prerempli la bdd avec le hash calcule.
+	if($value = _request('reachat_valide_hash')){		
+		sql_insertq("spip_auteurs_elargis_articles", array(
+			"id_auteur" => $id_auteur,
+			"id_article" => $id_article,
+			"statut_paiement" => 'a_confirmer',
+			"hash" => $hash,
+			"date" => date("Y-m-d H:i:s"),
+		));
+	}
 
-	return array('editable'=>false,'message_ok' => $message);
-
+    return array('editable' => false, 'message_ok' => $message);
 }
 ?>

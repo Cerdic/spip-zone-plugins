@@ -99,7 +99,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_profiter_de' => "Profitez pleinement de @titre@ en vous abonnant.",
 	'bouton_commander' => "Commander",
 	'choisir_son_abonnement' => "Choisir son abonnement",
-
+	'commander_article' => "Commande de l'article :",
+	
+	'erreur_identification' => "Vous devez être identifi&eacute; pour pouvoir vous abonner",
 	'erreur_presente' => "Une erreur est présente dans votre saisie",
 	'erreur_selection_abonnement' => "Vous devez choisir un abonnement !",
 
