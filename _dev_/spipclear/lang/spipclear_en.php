@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'langues' => 'Languages',
 'lien' => 'Link',
 'liens' => 'Links',
-'lire_la_suite' => 'Read more...',
+'lire_la_suite' => 'Read more',
 
 //O
 'oksearch' => 'ok',
