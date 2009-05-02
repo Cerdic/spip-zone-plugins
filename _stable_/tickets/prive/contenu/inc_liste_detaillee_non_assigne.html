@@ -21,14 +21,17 @@
 	<tbody>
 <BOUCLE_detaillee(TICKETS){par severite}{par type}{!par date}{pagination 10 #ENV{bloc}}{id_auteur?}{id_assigne=0}{statut?}{type?}{jalon?}>
 		<tr class="tr_liste">
-			<td style="width: 10px;">[(#STATUT|tickets_bouton_statut)]</td>
+			<td style="width: 10px;"><img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"] /></td>
 			<td class="arial1"><b>##ID_TICKET</b></td>
 			<td class="arial2"><a href="?exec=ticket_afficher&amp;id_ticket=#ID_TICKET">#TITRE</a></td>
 			[(#REM) Si le type est explicite, on ne l'affiche pas ]
 			[(#ENV{type}|non)
 			<td class="arial0">[(#TYPE|tickets_texte_type)]</td>
 			]
-			<td class="arial0">[(#SEVERITE|tickets_bouton_severite)] [(#SEVERITE|tickets_texte_severite)]</td>
+			<td class="arial0">
+				<img[ src="(#CHEMIN{[prive/images/(#SEVERITE|tickets_icone_severite)]})"][ alt="(#SEVERITE|tickets_texte_severite)"] />
+				[&nbsp;(#SEVERITE|tickets_texte_severite)]
+			</td>
 			<td class="arial0">[(#DATE|affdate_court)]</td>
 		</tr>
 </BOUCLE_detaillee>

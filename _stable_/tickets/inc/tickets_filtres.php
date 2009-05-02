@@ -119,21 +119,21 @@ function tickets_texte_statut ($niveau) {
 	else if ($niveau == "resolu") return "r&eacute;solu";
 	else if ($niveau == "ferme") return "ferm&eacute;";
 }
-function tickets_bouton_statut ($niveau) {
+function tickets_icone_statut ($niveau) {
 	if ($niveau == "redac") $img = "puce-blanche.gif";
 	else if ($niveau == "ouvert") $img = "puce-orange.gif";
 	else if ($niveau == "resolu") $img = "puce-verte.gif";
 	else if ($niveau == "ferme")  $img = "puce-poubelle.gif";
 	
-	return "<img src='../prive/images/$img' alt='$niveau' />";
+	return $img;
 }
-function tickets_bouton_severite ($niveau) {
+function tickets_icone_severite ($niveau) {
 	if ($niveau == 1) $img = "puce-rouge-breve.gif";
 	else if ($niveau == 2) $img = "puce-orange-breve.gif";
 	else if ($niveau == 3) $img = "puce-verte-breve.gif";
 	else if ($niveau == 4)  $img = "puce-poubelle-breve.gif";
 	
-	return "<img src='../prive/images/$img' alt='$niveau' />";
+	return $img;
 }
 
 ?>
