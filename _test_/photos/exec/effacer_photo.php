@@ -67,7 +67,7 @@ echo '<span style="color:red"><strong>';echo $i; echo " photo(s) sur le site.</s
 	//include_spip('livredor_fonctions');
  //$mydate= livredor_convertir_date($mydate); 
     echo "<td>".$data['id_photo']."</td> ";
-   echo "<td><img src='../plugins/photos/vignettes/".$data['nom_photo']."' width='24%'></td> ";
+   echo "<td><img src='"._DIR_PLUGIN_PHOTOS.'vignettes/'.$data['nom_photo']."' width='24%'></td> ";
   echo"<td>".$data['alt_photo']."</td>";
   echo"<td>".$mydate."</td>";
    echo"<td>".$data['nom_photo']."</td>";

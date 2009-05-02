@@ -67,7 +67,7 @@ echo '<span style="color:red"><strong>';echo $i; echo " photo(s) sur le site.</s
   echo"<td>".$data['alt_photo']."</td>";
   echo"<td>".$mydate."</td>";
   echo'<td> 
-<a href="../plugins/photos/vignettes/'.$data['nom_photo'].'" onClick="window.open(this.href, \'exemple\', \'height=600, width=600, top=100, left=100, toolbar=no, menubar=no, location=no, resizable=yes, scrollbars=yes, status=no\'); return false;"/><img src="../plugins/photos/vignettes/'.$data['nom_photo'].'" width="24%"></a></td>';
+<a href="'._DIR_PLUGIN_PHOTOS.'vignettes/'.$data['nom_photo'].'" onClick="window.open(this.href, \'exemple\', \'height=600, width=600, top=100, left=100, toolbar=no, menubar=no, location=no, resizable=yes, scrollbars=yes, status=no\'); return false;"/><img src="'._DIR_PLUGIN_PHOTOS.'vignettes/'.$data['nom_photo'].'" width="24%"></a></td>';
  echo "<td><table width='100%' border='0'><tr>"; 
 
    echo' <td><a href="'.$url_effacer_photo.'&id_photo='.$data['id_photo'].'"><img src="'._DIR_PLUGIN_PHOTOS.'img_pack/corbeille.gif" title="'._T('effacer la photo').'"></a></td>';

@@ -57,7 +57,7 @@ echo '<span style="color:red"><strong>';echo $i; echo " photo(s) sur le site.</s
     {
 	$mydate=$data['dateheure'];$titre_image=$data['nom_photo'];
 
-   echo "<strong>".(_T('Titre '))."</strong>".$data['nom_photo']; echo "<p><img src='../plugins/photos/vignettes/".$data['nom_photo']."' width='24%'></p>";
+   echo "<strong>".(_T('Titre '))."</strong>".$data['nom_photo']; echo "<p><img src='"._DIR_PLUGIN_PHOTOS."vignettes/".$data['nom_photo']."' width='24%'></p>";
 	echo "<br /><br />".(_T('Envoy&eacute; par ')).$data['nom']." le: ".$mydate;
 		echo '<br /><br /><form action="" method="post"><input name="alt_image" type="text" size="60" value="'.$data['alt_photo'].'"><input name="submit" type="submit" value="ok"></form>';
 	echo "<br/><br /><strong>".(_T('Correction '))."</strong><br/> ".$_POST['alt_image'];}$reponse=$_POST['alt_image'];
