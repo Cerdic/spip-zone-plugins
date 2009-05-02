@@ -1,0 +1,33 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Upload photos spip 2.0
+	</nom>
+	<auteur>Bernard Blazin </auteur>
+	<version>
+	1.0
+	</version>
+	<etat>
+	stable
+	</etat>
+	<icon>img_pack/clap.png</icon>
+	<description>
+	Un upload et gallerie d'images  pour SPIP 2
+	</description>
+	<prefix> 
+	photos
+	</prefix>
+	<install>base/photos_gestion.php</install>
+	 	 <bouton id='photos' parent='naviguer'>
+      <icone>img_pack/photos.png</icone>
+      <titre>Photos</titre>
+  </bouton>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>photos_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>photos_pipelines.php</inclure>
+	</pipeline>
+		<necessite id="SPIP" version="[2.0.0;]" />
+</plugin>

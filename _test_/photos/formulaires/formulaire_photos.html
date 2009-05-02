@@ -1,0 +1,14 @@
+<BOUCLE_auton(AUTEURS){id_auteur=#SESSION{id_auteur}}{tout}>
+<form enctype="multipart/form-data" action="#SELF&amp;mode=calcul" method="POST">
+  
+      <br />
+      <input type="hidden" name="posted" value="1" /> <input type="hidden" name="id_auteur" value="#ID_AUTEUR" />
+	    <fieldset>
+ <label for="photo">Description de la Photo :</label><input name="alt_photo" type="text" size="60" value="">
+      <legend>Logo en .jpg (taille maxi 500px X 800px)</legend>
+      <p><label for="photo">Photo :</label><input name="fichier" type="file" />
+      <input type="submit" value="Uploader" /></legend>
+      
+    </fieldset>
+  </form> 
+</BOUCLE_auton>
