@@ -1,0 +1,23 @@
+A faire:
+Effet Thicbox dans la partie privée
+Eviter le codage de la pemière image dans le squelette qui est hors boucle
+Et adapter  à vos idées ce qui est adaptable !
+
+Mode d'emploi:
+On crée un squelette avec dedans: 
+#INSERT_HEAD ( obligatoire)
+et dans le body
+
+#FORMULAIRE_PHOTOS 
+      <div class="hidden-container"> <a id="thumb1" class='highslide' href='plugins/photos/vignettes/nature.jpg'
+			onclick="return hs.expand(this, inPageOptions)"> <img src='plugins/photos/vignettes/nature.jpg' alt="Printemps en Seine et Marne"/></a> 
+        <BOUCLE_photo(SPIP_PHOTOS){tout}{par id_photo}{inverse}>
+        <a class='highslide' href='./plugins/photos/vignettes/#NOM_PHOTO'
+			onclick="return hs.expand(this, inPageOptions)"> <img src='./plugins/photos/vignettes/#NOM_VIGNETTE' alt="#ALT_PHOTO envoyé par: <BOUCLE_envoi(AUTEURS){id_auteur=#ID_AUTEUR}>#NOM</BOUCLE_envoi>  [le:(#DATEHEURE|affdate)]"/></a> 
+        </BOUCLE_photo>
+      </div>
+      <div id="gallery-area" style="width: 520px; height: 820px; margin: 0 auto; border: 1px solid silver"></div>
+      <div id="inpage_ad"> </div>
+	  
+	  
+ --------------   
