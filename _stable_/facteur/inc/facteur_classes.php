@@ -12,7 +12,7 @@
 
 	class Facteur extends PHPMailer {
 
-		public function Facteur($email, $objet, $message_html, $message_texte) {
+		function Facteur($email, $objet, $message_html, $message_texte) {
 
 			if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui') {
 				$this->From		= $GLOBALS['meta']['facteur_adresse_envoi_email'];
@@ -74,7 +74,7 @@
 		}
 
 
-		private function JoindreImagesHTML() {
+		function JoindreImagesHTML() {
 			$image_types = array(
 								'gif'	=> 'image/gif',
 								'jpg'	=> 'image/jpeg',
@@ -134,7 +134,7 @@
 		}
 
 
-		private function ConvertirStylesEnligne() {
+		function ConvertirStylesEnligne() {
 			/*
 
 			Written by Eric Dols - edols@auditavenue.com
@@ -298,7 +298,7 @@
 		}
 
 
-		private function ConvertirUtf8VersIso8859() {
+		function ConvertirUtf8VersIso8859() {
 			$this->Body		= str_replace('’',"'",$this->Body);
 			$this->AltBody	= str_replace('’',"'",$this->AltBody);
 			$this->CharSet	= 'iso-8859-1';
@@ -309,7 +309,7 @@
 			$this->FromName	= utf8_decode($this->FromName);
 		}
 
-		private function ConvertirAccents() {
+		function ConvertirAccents() {
 			// tableau à compléter au fur et à mesure
 			$cor = array(
 							'à' => '&agrave;',
