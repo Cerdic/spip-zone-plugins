@@ -51,6 +51,11 @@
 					}
 				} else {
 					$version_base = $GLOBALS['meta']['facteur_version'];
+					if ($version_base < 1.1) {
+						// version compatible php4
+						ecrire_meta('facteur_version', $version_base = 1.1);
+						ecrire_metas();
+					}
 				}
 				break;
 			case 'uninstall':

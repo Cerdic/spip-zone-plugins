@@ -64,9 +64,11 @@
 				ecrire_meta('facteur_smtp_password', $facteur_smtp_password);
 			}
 
-			if (isset($_POST['facteur_smtp_secure'])) {
-				$facteur_smtp_secure = $_POST['facteur_smtp_secure'];
-				ecrire_meta('facteur_smtp_secure', $facteur_smtp_secure);
+			if (intval(phpversion()) == 5) {
+				if (isset($_POST['facteur_smtp_secure'])) {
+					$facteur_smtp_secure = $_POST['facteur_smtp_secure'];
+					ecrire_meta('facteur_smtp_secure', $facteur_smtp_secure);
+				}
 			}
 
 			if (isset($_POST['facteur_smtp_sender'])) {
@@ -90,7 +92,8 @@
 		$facteur_smtp_auth				= $GLOBALS['meta']['facteur_smtp_auth'];
 		$facteur_smtp_username			= $GLOBALS['meta']['facteur_smtp_username'];
 		$facteur_smtp_password			= $GLOBALS['meta']['facteur_smtp_password'];
-		$facteur_smtp_secure			= $GLOBALS['meta']['facteur_smtp_secure'];
+		if (intval(phpversion()) == 5)
+			$facteur_smtp_secure		= $GLOBALS['meta']['facteur_smtp_secure'];
 		$facteur_smtp_sender			= $GLOBALS['meta']['facteur_smtp_sender'];
 		$facteur_filtre_images			= $GLOBALS['meta']['facteur_filtre_images'];
 		$facteur_filtre_css				= $GLOBALS['meta']['facteur_filtre_css'];
@@ -161,14 +164,16 @@
 		echo "</ul>";
 
 		echo '</li>';
-		
-		echo "<li>"._T('facteur:facteur_smtp_secure');
-		echo bouton_radio("facteur_smtp_secure", "non", _T('facteur:facteur_smtp_secure_non'), $facteur_smtp_secure == "non");
-		echo "&nbsp;";
-		echo bouton_radio("facteur_smtp_secure", "ssl", _T('facteur:facteur_smtp_secure_ssl'), $facteur_smtp_secure == "ssl");
-		echo "&nbsp;";
-		echo bouton_radio("facteur_smtp_secure", "tls", _T('facteur:facteur_smtp_secure_tls'), $facteur_smtp_secure == "tls");
-		echo '</li>';
+
+		if (intval(phpversion()) == 5) {
+			echo "<li>"._T('facteur:facteur_smtp_secure');
+			echo bouton_radio("facteur_smtp_secure", "non", _T('facteur:facteur_smtp_secure_non'), $facteur_smtp_secure == "non");
+			echo "&nbsp;";
+			echo bouton_radio("facteur_smtp_secure", "ssl", _T('facteur:facteur_smtp_secure_ssl'), $facteur_smtp_secure == "ssl");
+			echo "&nbsp;";
+			echo bouton_radio("facteur_smtp_secure", "tls", _T('facteur:facteur_smtp_secure_tls'), $facteur_smtp_secure == "tls");
+			echo '</li>';
+		}
 
 		echo "</ul>";
 

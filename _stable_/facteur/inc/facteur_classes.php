@@ -1,8 +1,13 @@
 <?php
 
 
-	include_spip('phpmailer/class.phpmailer');
-	include_spip('phpmailer/class.smtp');
+	if (intval(phpversion()) == 5) {
+		include_spip('phpmailer-php5/class.phpmailer');
+		include_spip('phpmailer-php5/class.smtp');
+	} else {
+		include_spip('phpmailer-php4/class.phpmailer');
+		include_spip('phpmailer-php4/class.smtp');
+	}
 	include_spip('facteur_fonctions');
 
 	class Facteur extends PHPMailer {
@@ -38,10 +43,12 @@
 				} else {
 				    $this->SMTPAuth = false;
 				}
-				if ($GLOBALS['meta']['facteur_smtp_secure'] == 'ssl')
-				    $this->SMTPSecure = 'ssl';
-				if ($GLOBALS['meta']['facteur_smtp_secure'] == 'tls')
-				    $this->SMTPSecure = 'tls';
+				if (intval(phpversion()) == 5) {
+					if ($GLOBALS['meta']['facteur_smtp_secure'] == 'ssl')
+					    $this->SMTPSecure = 'ssl';
+					if ($GLOBALS['meta']['facteur_smtp_secure'] == 'tls')
+					    $this->SMTPSecure = 'tls';
+				}
 			}
 
 			if (!empty($message_html)) {
